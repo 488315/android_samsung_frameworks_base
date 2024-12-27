@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -13,7 +14,8 @@ public interface IApexService extends IInterface {
 
     void abortStagedSession(int i) throws RemoteException;
 
-    long calculateSizeForCompressedApex(CompressedApexInfoList compressedApexInfoList) throws RemoteException;
+    long calculateSizeForCompressedApex(CompressedApexInfoList compressedApexInfoList)
+            throws RemoteException;
 
     void destroyCeSnapshots(int i, int i2) throws RemoteException;
 
@@ -47,7 +49,8 @@ public interface IApexService extends IInterface {
 
     void remountPackages() throws RemoteException;
 
-    void reserveSpaceForCompressedApex(CompressedApexInfoList compressedApexInfoList) throws RemoteException;
+    void reserveSpaceForCompressedApex(CompressedApexInfoList compressedApexInfoList)
+            throws RemoteException;
 
     void restoreCeData(int i, int i2, String str) throws RemoteException;
 
@@ -59,22 +62,21 @@ public interface IApexService extends IInterface {
 
     void stagePackages(List<String> list) throws RemoteException;
 
-    void submitStagedSession(ApexSessionParams apexSessionParams, ApexInfoList apexInfoList) throws RemoteException;
+    void submitStagedSession(ApexSessionParams apexSessionParams, ApexInfoList apexInfoList)
+            throws RemoteException;
 
     void unstagePackages(List<String> list) throws RemoteException;
 
     public static class Default implements IApexService {
         @Override // android.apex.IApexService
-        public void submitStagedSession(ApexSessionParams params, ApexInfoList packages) throws RemoteException {
-        }
+        public void submitStagedSession(ApexSessionParams params, ApexInfoList packages)
+                throws RemoteException {}
 
         @Override // android.apex.IApexService
-        public void markStagedSessionReady(int session_id) throws RemoteException {
-        }
+        public void markStagedSessionReady(int session_id) throws RemoteException {}
 
         @Override // android.apex.IApexService
-        public void markStagedSessionSuccessful(int session_id) throws RemoteException {
-        }
+        public void markStagedSessionSuccessful(int session_id) throws RemoteException {}
 
         @Override // android.apex.IApexService
         public ApexSessionInfo[] getSessions() throws RemoteException {
@@ -102,36 +104,31 @@ public interface IApexService extends IInterface {
         }
 
         @Override // android.apex.IApexService
-        public void abortStagedSession(int session_id) throws RemoteException {
-        }
+        public void abortStagedSession(int session_id) throws RemoteException {}
 
         @Override // android.apex.IApexService
-        public void revertActiveSessions() throws RemoteException {
-        }
+        public void revertActiveSessions() throws RemoteException {}
 
         @Override // android.apex.IApexService
-        public void snapshotCeData(int user_id, int rollback_id, String apex_name) throws RemoteException {
-        }
+        public void snapshotCeData(int user_id, int rollback_id, String apex_name)
+                throws RemoteException {}
 
         @Override // android.apex.IApexService
-        public void restoreCeData(int user_id, int rollback_id, String apex_name) throws RemoteException {
-        }
+        public void restoreCeData(int user_id, int rollback_id, String apex_name)
+                throws RemoteException {}
 
         @Override // android.apex.IApexService
-        public void destroyDeSnapshots(int rollback_id) throws RemoteException {
-        }
+        public void destroyDeSnapshots(int rollback_id) throws RemoteException {}
 
         @Override // android.apex.IApexService
-        public void destroyCeSnapshots(int user_id, int rollback_id) throws RemoteException {
-        }
+        public void destroyCeSnapshots(int user_id, int rollback_id) throws RemoteException {}
 
         @Override // android.apex.IApexService
-        public void destroyCeSnapshotsNotSpecified(int user_id, int[] retain_rollback_ids) throws RemoteException {
-        }
+        public void destroyCeSnapshotsNotSpecified(int user_id, int[] retain_rollback_ids)
+                throws RemoteException {}
 
         @Override // android.apex.IApexService
-        public void unstagePackages(List<String> active_package_paths) throws RemoteException {
-        }
+        public void unstagePackages(List<String> active_package_paths) throws RemoteException {}
 
         @Override // android.apex.IApexService
         public ApexInfo getActivePackage(String package_name) throws RemoteException {
@@ -139,40 +136,37 @@ public interface IApexService extends IInterface {
         }
 
         @Override // android.apex.IApexService
-        public void stagePackages(List<String> package_tmp_paths) throws RemoteException {
-        }
+        public void stagePackages(List<String> package_tmp_paths) throws RemoteException {}
 
         @Override // android.apex.IApexService
-        public void resumeRevertIfNeeded() throws RemoteException {
-        }
+        public void resumeRevertIfNeeded() throws RemoteException {}
 
         @Override // android.apex.IApexService
-        public void remountPackages() throws RemoteException {
-        }
+        public void remountPackages() throws RemoteException {}
 
         @Override // android.apex.IApexService
-        public void recollectPreinstalledData(List<String> paths) throws RemoteException {
-        }
+        public void recollectPreinstalledData(List<String> paths) throws RemoteException {}
 
         @Override // android.apex.IApexService
-        public void recollectDataApex(String path, String decompression_dir) throws RemoteException {
-        }
+        public void recollectDataApex(String path, String decompression_dir)
+                throws RemoteException {}
 
         @Override // android.apex.IApexService
-        public void markBootCompleted() throws RemoteException {
-        }
+        public void markBootCompleted() throws RemoteException {}
 
         @Override // android.apex.IApexService
-        public long calculateSizeForCompressedApex(CompressedApexInfoList compressed_apex_info_list) throws RemoteException {
+        public long calculateSizeForCompressedApex(CompressedApexInfoList compressed_apex_info_list)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.apex.IApexService
-        public void reserveSpaceForCompressedApex(CompressedApexInfoList compressed_apex_info_list) throws RemoteException {
-        }
+        public void reserveSpaceForCompressedApex(CompressedApexInfoList compressed_apex_info_list)
+                throws RemoteException {}
 
         @Override // android.apex.IApexService
-        public ApexInfo installAndActivatePackage(String packagePath, boolean force) throws RemoteException {
+        public ApexInfo installAndActivatePackage(String packagePath, boolean force)
+                throws RemoteException {
             return null;
         }
 
@@ -182,7 +176,7 @@ public interface IApexService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IApexService {
+    public abstract static class Stub extends Binder implements IApexService {
         static final int TRANSACTION_abortStagedSession = 9;
         static final int TRANSACTION_calculateSizeForCompressedApex = 24;
         static final int TRANSACTION_destroyCeSnapshots = 14;
@@ -231,7 +225,8 @@ public interface IApexService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IApexService.DESCRIPTOR);
             }
@@ -241,7 +236,8 @@ public interface IApexService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ApexSessionParams _arg0 = (ApexSessionParams) data.readTypedObject(ApexSessionParams.CREATOR);
+                    ApexSessionParams _arg0 =
+                            (ApexSessionParams) data.readTypedObject(ApexSessionParams.CREATOR);
                     ApexInfoList _arg1 = new ApexInfoList();
                     submitStagedSession(_arg0, _arg1);
                     reply.writeNoException();
@@ -269,7 +265,8 @@ public interface IApexService extends IInterface {
                     reply.writeTypedObject(_result2, 1);
                     return true;
                 case 6:
-                    ApexSessionParams _arg05 = (ApexSessionParams) data.readTypedObject(ApexSessionParams.CREATOR);
+                    ApexSessionParams _arg05 =
+                            (ApexSessionParams) data.readTypedObject(ApexSessionParams.CREATOR);
                     ApexInfo[] _result3 = getStagedApexInfos(_arg05);
                     reply.writeNoException();
                     reply.writeTypedArray(_result3, 1);
@@ -361,13 +358,17 @@ public interface IApexService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 24:
-                    CompressedApexInfoList _arg017 = (CompressedApexInfoList) data.readTypedObject(CompressedApexInfoList.CREATOR);
+                    CompressedApexInfoList _arg017 =
+                            (CompressedApexInfoList)
+                                    data.readTypedObject(CompressedApexInfoList.CREATOR);
                     long _result7 = calculateSizeForCompressedApex(_arg017);
                     reply.writeNoException();
                     reply.writeLong(_result7);
                     return true;
                 case 25:
-                    CompressedApexInfoList _arg018 = (CompressedApexInfoList) data.readTypedObject(CompressedApexInfoList.CREATOR);
+                    CompressedApexInfoList _arg018 =
+                            (CompressedApexInfoList)
+                                    data.readTypedObject(CompressedApexInfoList.CREATOR);
                     reserveSpaceForCompressedApex(_arg018);
                     reply.writeNoException();
                     return true;
@@ -399,7 +400,8 @@ public interface IApexService extends IInterface {
             }
 
             @Override // android.apex.IApexService
-            public void submitStagedSession(ApexSessionParams params, ApexInfoList packages) throws RemoteException {
+            public void submitStagedSession(ApexSessionParams params, ApexInfoList packages)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain();
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -454,7 +456,8 @@ public interface IApexService extends IInterface {
                     _data.writeInterfaceToken(IApexService.DESCRIPTOR);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    ApexSessionInfo[] _result = (ApexSessionInfo[]) _reply.createTypedArray(ApexSessionInfo.CREATOR);
+                    ApexSessionInfo[] _result =
+                            (ApexSessionInfo[]) _reply.createTypedArray(ApexSessionInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -471,7 +474,8 @@ public interface IApexService extends IInterface {
                     _data.writeInt(session_id);
                     this.mRemote.transact(5, _data, _reply, 0);
                     _reply.readException();
-                    ApexSessionInfo _result = (ApexSessionInfo) _reply.readTypedObject(ApexSessionInfo.CREATOR);
+                    ApexSessionInfo _result =
+                            (ApexSessionInfo) _reply.readTypedObject(ApexSessionInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -558,7 +562,8 @@ public interface IApexService extends IInterface {
             }
 
             @Override // android.apex.IApexService
-            public void snapshotCeData(int user_id, int rollback_id, String apex_name) throws RemoteException {
+            public void snapshotCeData(int user_id, int rollback_id, String apex_name)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain();
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -575,7 +580,8 @@ public interface IApexService extends IInterface {
             }
 
             @Override // android.apex.IApexService
-            public void restoreCeData(int user_id, int rollback_id, String apex_name) throws RemoteException {
+            public void restoreCeData(int user_id, int rollback_id, String apex_name)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain();
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -623,7 +629,8 @@ public interface IApexService extends IInterface {
             }
 
             @Override // android.apex.IApexService
-            public void destroyCeSnapshotsNotSpecified(int user_id, int[] retain_rollback_ids) throws RemoteException {
+            public void destroyCeSnapshotsNotSpecified(int user_id, int[] retain_rollback_ids)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain();
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -729,7 +736,8 @@ public interface IApexService extends IInterface {
             }
 
             @Override // android.apex.IApexService
-            public void recollectDataApex(String path, String decompression_dir) throws RemoteException {
+            public void recollectDataApex(String path, String decompression_dir)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain();
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -759,7 +767,8 @@ public interface IApexService extends IInterface {
             }
 
             @Override // android.apex.IApexService
-            public long calculateSizeForCompressedApex(CompressedApexInfoList compressed_apex_info_list) throws RemoteException {
+            public long calculateSizeForCompressedApex(
+                    CompressedApexInfoList compressed_apex_info_list) throws RemoteException {
                 Parcel _data = Parcel.obtain();
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -776,7 +785,8 @@ public interface IApexService extends IInterface {
             }
 
             @Override // android.apex.IApexService
-            public void reserveSpaceForCompressedApex(CompressedApexInfoList compressed_apex_info_list) throws RemoteException {
+            public void reserveSpaceForCompressedApex(
+                    CompressedApexInfoList compressed_apex_info_list) throws RemoteException {
                 Parcel _data = Parcel.obtain();
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -791,7 +801,8 @@ public interface IApexService extends IInterface {
             }
 
             @Override // android.apex.IApexService
-            public ApexInfo installAndActivatePackage(String packagePath, boolean force) throws RemoteException {
+            public ApexInfo installAndActivatePackage(String packagePath, boolean force)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain();
                 Parcel _reply = Parcel.obtain();
                 try {

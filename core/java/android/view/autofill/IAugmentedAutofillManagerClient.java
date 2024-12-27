@@ -8,24 +8,33 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.view.autofill.IAutofillWindowPresenter;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
 public interface IAugmentedAutofillManagerClient extends IInterface {
     public static final String DESCRIPTOR = "android.view.autofill.IAugmentedAutofillManagerClient";
 
-    void autofill(int i, List<AutofillId> list, List<AutofillValue> list2, boolean z) throws RemoteException;
+    void autofill(int i, List<AutofillId> list, List<AutofillValue> list2, boolean z)
+            throws RemoteException;
 
     Rect getViewCoordinates(AutofillId autofillId) throws RemoteException;
 
-    AssistStructure.ViewNodeParcelable getViewNodeParcelable(AutofillId autofillId) throws RemoteException;
+    AssistStructure.ViewNodeParcelable getViewNodeParcelable(AutofillId autofillId)
+            throws RemoteException;
 
     boolean requestAutofill(int i, AutofillId autofillId) throws RemoteException;
 
     void requestHideFillUi(int i, AutofillId autofillId) throws RemoteException;
 
-    void requestShowFillUi(int i, AutofillId autofillId, int i2, int i3, Rect rect, IAutofillWindowPresenter iAutofillWindowPresenter) throws RemoteException;
+    void requestShowFillUi(
+            int i,
+            AutofillId autofillId,
+            int i2,
+            int i3,
+            Rect rect,
+            IAutofillWindowPresenter iAutofillWindowPresenter)
+            throws RemoteException;
 
     public static class Default implements IAugmentedAutofillManagerClient {
         @Override // android.view.autofill.IAugmentedAutofillManagerClient
@@ -34,21 +43,31 @@ public interface IAugmentedAutofillManagerClient extends IInterface {
         }
 
         @Override // android.view.autofill.IAugmentedAutofillManagerClient
-        public AssistStructure.ViewNodeParcelable getViewNodeParcelable(AutofillId id) throws RemoteException {
+        public AssistStructure.ViewNodeParcelable getViewNodeParcelable(AutofillId id)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.view.autofill.IAugmentedAutofillManagerClient
-        public void autofill(int sessionId, List<AutofillId> ids, List<AutofillValue> values, boolean hideHighlight) throws RemoteException {
-        }
+        public void autofill(
+                int sessionId,
+                List<AutofillId> ids,
+                List<AutofillValue> values,
+                boolean hideHighlight)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAugmentedAutofillManagerClient
-        public void requestShowFillUi(int sessionId, AutofillId id, int width, int height, Rect anchorBounds, IAutofillWindowPresenter presenter) throws RemoteException {
-        }
+        public void requestShowFillUi(
+                int sessionId,
+                AutofillId id,
+                int width,
+                int height,
+                Rect anchorBounds,
+                IAutofillWindowPresenter presenter)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAugmentedAutofillManagerClient
-        public void requestHideFillUi(int sessionId, AutofillId id) throws RemoteException {
-        }
+        public void requestHideFillUi(int sessionId, AutofillId id) throws RemoteException {}
 
         @Override // android.view.autofill.IAugmentedAutofillManagerClient
         public boolean requestAutofill(int sessionId, AutofillId id) throws RemoteException {
@@ -61,7 +80,7 @@ public interface IAugmentedAutofillManagerClient extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAugmentedAutofillManagerClient {
+    public abstract static class Stub extends Binder implements IAugmentedAutofillManagerClient {
         static final int TRANSACTION_autofill = 3;
         static final int TRANSACTION_getViewCoordinates = 1;
         static final int TRANSACTION_getViewNodeParcelable = 2;
@@ -114,7 +133,8 @@ public interface IAugmentedAutofillManagerClient extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAugmentedAutofillManagerClient.DESCRIPTOR);
             }
@@ -152,7 +172,8 @@ public interface IAugmentedAutofillManagerClient extends IInterface {
                     int _arg22 = data.readInt();
                     int _arg32 = data.readInt();
                     Rect _arg4 = (Rect) data.readTypedObject(Rect.CREATOR);
-                    IAutofillWindowPresenter _arg5 = IAutofillWindowPresenter.Stub.asInterface(data.readStrongBinder());
+                    IAutofillWindowPresenter _arg5 =
+                            IAutofillWindowPresenter.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestShowFillUi(_arg04, _arg12, _arg22, _arg32, _arg4, _arg5);
                     reply.writeNoException();
@@ -211,7 +232,8 @@ public interface IAugmentedAutofillManagerClient extends IInterface {
             }
 
             @Override // android.view.autofill.IAugmentedAutofillManagerClient
-            public AssistStructure.ViewNodeParcelable getViewNodeParcelable(AutofillId id) throws RemoteException {
+            public AssistStructure.ViewNodeParcelable getViewNodeParcelable(AutofillId id)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -219,7 +241,10 @@ public interface IAugmentedAutofillManagerClient extends IInterface {
                     _data.writeTypedObject(id, 0);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    AssistStructure.ViewNodeParcelable _result = (AssistStructure.ViewNodeParcelable) _reply.readTypedObject(AssistStructure.ViewNodeParcelable.CREATOR);
+                    AssistStructure.ViewNodeParcelable _result =
+                            (AssistStructure.ViewNodeParcelable)
+                                    _reply.readTypedObject(
+                                            AssistStructure.ViewNodeParcelable.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -228,7 +253,12 @@ public interface IAugmentedAutofillManagerClient extends IInterface {
             }
 
             @Override // android.view.autofill.IAugmentedAutofillManagerClient
-            public void autofill(int sessionId, List<AutofillId> ids, List<AutofillValue> values, boolean hideHighlight) throws RemoteException {
+            public void autofill(
+                    int sessionId,
+                    List<AutofillId> ids,
+                    List<AutofillValue> values,
+                    boolean hideHighlight)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -246,7 +276,14 @@ public interface IAugmentedAutofillManagerClient extends IInterface {
             }
 
             @Override // android.view.autofill.IAugmentedAutofillManagerClient
-            public void requestShowFillUi(int sessionId, AutofillId id, int width, int height, Rect anchorBounds, IAutofillWindowPresenter presenter) throws RemoteException {
+            public void requestShowFillUi(
+                    int sessionId,
+                    AutofillId id,
+                    int width,
+                    int height,
+                    Rect anchorBounds,
+                    IAutofillWindowPresenter presenter)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

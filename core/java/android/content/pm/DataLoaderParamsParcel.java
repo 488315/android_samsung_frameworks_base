@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class DataLoaderParamsParcel implements Parcelable {
-    public static final Parcelable.Creator<DataLoaderParamsParcel> CREATOR = new Parcelable.Creator<DataLoaderParamsParcel>() { // from class: android.content.pm.DataLoaderParamsParcel.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DataLoaderParamsParcel createFromParcel(Parcel _aidl_source) {
-            DataLoaderParamsParcel _aidl_out = new DataLoaderParamsParcel();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<DataLoaderParamsParcel> CREATOR =
+            new Parcelable.Creator<DataLoaderParamsParcel>() { // from class:
+                // android.content.pm.DataLoaderParamsParcel.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DataLoaderParamsParcel createFromParcel(Parcel _aidl_source) {
+                    DataLoaderParamsParcel _aidl_out = new DataLoaderParamsParcel();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DataLoaderParamsParcel[] newArray(int _aidl_size) {
-            return new DataLoaderParamsParcel[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DataLoaderParamsParcel[] newArray(int _aidl_size) {
+                    return new DataLoaderParamsParcel[_aidl_size];
+                }
+            };
     public String arguments;
     public String className;
     public String packageName;

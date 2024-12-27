@@ -8,13 +8,16 @@ import com.android.internal.org.bouncycastle.crypto.params.AsymmetricKeyParamete
 import com.android.internal.org.bouncycastle.crypto.params.ParametersWithRandom;
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.Properties;
+
 import java.security.SecureRandom;
 
 /* loaded from: classes5.dex */
 public class PKCS1Encoding implements AsymmetricBlockCipher {
     private static final int HEADER_LENGTH = 10;
-    public static final String NOT_STRICT_LENGTH_ENABLED_PROPERTY = "com.android.internal.org.bouncycastle.pkcs1.not_strict";
-    public static final String STRICT_LENGTH_ENABLED_PROPERTY = "com.android.internal.org.bouncycastle.pkcs1.strict";
+    public static final String NOT_STRICT_LENGTH_ENABLED_PROPERTY =
+            "com.android.internal.org.bouncycastle.pkcs1.not_strict";
+    public static final String STRICT_LENGTH_ENABLED_PROPERTY =
+            "com.android.internal.org.bouncycastle.pkcs1.strict";
     private byte[] blockBuffer;
     private AsymmetricBlockCipher engine;
     private byte[] fallback;
@@ -148,10 +151,12 @@ public class PKCS1Encoding implements AsymmetricBlockCipher {
         return ~(((correct4 | (correct4 >> 4)) & 1) - 1);
     }
 
-    private byte[] decodeBlockOrRandom(byte[] in, int inOff, int inLen) throws InvalidCipherTextException {
+    private byte[] decodeBlockOrRandom(byte[] in, int inOff, int inLen)
+            throws InvalidCipherTextException {
         byte[] random;
         if (!this.forPrivateKey) {
-            throw new InvalidCipherTextException("sorry, this method is only for decryption, not for signing");
+            throw new InvalidCipherTextException(
+                    "sorry, this method is only for decryption, not for signing");
         }
         byte[] block = this.engine.processBlock(in, inOff, inLen);
         if (this.fallback == null) {
@@ -160,11 +165,17 @@ public class PKCS1Encoding implements AsymmetricBlockCipher {
         } else {
             random = this.fallback;
         }
-        byte[] data = this.useStrictLength & (block.length != this.engine.getOutputBlockSize()) ? this.blockBuffer : block;
+        byte[] data =
+                this.useStrictLength & (block.length != this.engine.getOutputBlockSize())
+                        ? this.blockBuffer
+                        : block;
         int correct = checkPkcs1Encoding(data, this.pLen);
         byte[] result = new byte[this.pLen];
         for (int i = 0; i < this.pLen; i++) {
-            result[i] = (byte) ((data[(data.length - this.pLen) + i] & (~correct)) | (random[i] & correct));
+            result[i] =
+                    (byte)
+                            ((data[(data.length - this.pLen) + i] & (~correct))
+                                    | (random[i] & correct));
         }
         Arrays.fill(data, (byte) 0);
         return result;
@@ -177,7 +188,8 @@ public class PKCS1Encoding implements AsymmetricBlockCipher {
             return decodeBlockOrRandom(in, inOff, inLen);
         }
         byte[] block = this.engine.processBlock(in, inOff, inLen);
-        boolean incorrectLength = this.useStrictLength & (block.length != this.engine.getOutputBlockSize());
+        boolean incorrectLength =
+                this.useStrictLength & (block.length != this.engine.getOutputBlockSize());
         if (block.length < getOutputBlockSize()) {
             data = this.blockBuffer;
         } else {

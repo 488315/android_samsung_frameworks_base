@@ -1,7 +1,6 @@
 package android.webkit;
 
 import android.annotation.SystemApi;
-import android.webkit.JsResult;
 
 /* loaded from: classes4.dex */
 public class JsPromptResult extends JsResult {

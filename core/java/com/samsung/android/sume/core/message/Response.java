@@ -4,10 +4,11 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.MediaBuffer;
 import com.samsung.android.sume.core.buffer.MediaBufferGroup$$ExternalSyntheticLambda2;
-import com.samsung.android.sume.core.message.Message;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -34,12 +35,18 @@ public final class Response extends Message {
         Bundle bundle = msg.getData();
         Parcelable[] buffers = bundle.getParcelableArray("buffer-list");
         if (buffers != null) {
-            this.bufferList = (List) Arrays.stream(buffers).map(new Function() { // from class: com.samsung.android.sume.core.message.Response$$ExternalSyntheticLambda2
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    return Response.lambda$new$0((Parcelable) obj);
-                }
-            }).collect(Collectors.toList());
+            this.bufferList =
+                    (List)
+                            Arrays.stream(buffers)
+                                    .map(
+                                            new Function() { // from class:
+                                                             // com.samsung.android.sume.core.message.Response$$ExternalSyntheticLambda2
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    return Response.lambda$new$0((Parcelable) obj);
+                                                }
+                                            })
+                                    .collect(Collectors.toList());
         }
         if (this.extra != 0) {
             this.responseListener = ListenerManager.getInstance().unRegister(this.extra);
@@ -64,7 +71,8 @@ public final class Response extends Message {
         android.os.Message msg = super.toAndroidMessage();
         if (this.bufferList != null) {
             Bundle bundle = msg.getData();
-            bundle.putParcelableArray("buffer-list", (Parcelable[]) this.bufferList.toArray(new MediaBuffer[0]));
+            bundle.putParcelableArray(
+                    "buffer-list", (Parcelable[]) this.bufferList.toArray(new MediaBuffer[0]));
         }
         return msg;
     }
@@ -80,12 +88,17 @@ public final class Response extends Message {
     }
 
     public MediaBuffer getBuffer() {
-        return (MediaBuffer) Optional.ofNullable(this.bufferList).map(new Function() { // from class: com.samsung.android.sume.core.message.Response$$ExternalSyntheticLambda1
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return Response.this.m9195xed6285dd((List) obj);
-            }
-        }).orElse(null);
+        return (MediaBuffer)
+                Optional.ofNullable(this.bufferList)
+                        .map(
+                                new Function() { // from class:
+                                                 // com.samsung.android.sume.core.message.Response$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        return Response.this.m9195xed6285dd((List) obj);
+                                    }
+                                })
+                        .orElse(null);
     }
 
     /* renamed from: lambda$getBuffer$1$com-samsung-android-sume-core-message-Response, reason: not valid java name */
@@ -93,7 +106,9 @@ public final class Response extends Message {
         if (it.isEmpty()) {
             return null;
         }
-        return it.size() == 1 ? this.bufferList.get(0) : MediaBuffer.groupOf((List<MediaBuffer>) it);
+        return it.size() == 1
+                ? this.bufferList.get(0)
+                : MediaBuffer.groupOf((List<MediaBuffer>) it);
     }
 
     List<MediaBuffer> getBufferList() {
@@ -146,12 +161,14 @@ public final class Response extends Message {
                 Log.w(TAG, "fail to send response: " + e.getMessage());
                 if (this.bufferList != null) {
                     list = this.bufferList;
-                    mediaBufferGroup$$ExternalSyntheticLambda2 = new MediaBufferGroup$$ExternalSyntheticLambda2();
+                    mediaBufferGroup$$ExternalSyntheticLambda2 =
+                            new MediaBufferGroup$$ExternalSyntheticLambda2();
                 }
             }
             if (this.bufferList != null) {
                 list = this.bufferList;
-                mediaBufferGroup$$ExternalSyntheticLambda2 = new MediaBufferGroup$$ExternalSyntheticLambda2();
+                mediaBufferGroup$$ExternalSyntheticLambda2 =
+                        new MediaBufferGroup$$ExternalSyntheticLambda2();
                 list.forEach(mediaBufferGroup$$ExternalSyntheticLambda2);
             }
             this.bufferList = null;
@@ -172,12 +189,16 @@ public final class Response extends Message {
 
     @Override // com.samsung.android.sume.core.message.Message
     public String toString() {
-        return contentToString(this, new Supplier() { // from class: com.samsung.android.sume.core.message.Response$$ExternalSyntheticLambda0
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                return Response.this.m9196lambda$toString$3$comsamsungandroidsumecoremessageResponse();
-            }
-        });
+        return contentToString(
+                this,
+                new Supplier() { // from class:
+                                 // com.samsung.android.sume.core.message.Response$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Supplier
+                    public final Object get() {
+                        return Response.this
+                                .m9196lambda$toString$3$comsamsungandroidsumecoremessageResponse();
+                    }
+                });
     }
 
     static /* synthetic */ String lambda$toString$2(List it) {
@@ -186,12 +207,17 @@ public final class Response extends Message {
 
     /* renamed from: lambda$toString$3$com-samsung-android-sume-core-message-Response, reason: not valid java name */
     /* synthetic */ String m9196lambda$toString$3$comsamsungandroidsumecoremessageResponse() {
-        return (String) Optional.ofNullable(this.bufferList).map(new Function() { // from class: com.samsung.android.sume.core.message.Response$$ExternalSyntheticLambda3
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return Response.lambda$toString$2((List) obj);
-            }
-        }).orElse("");
+        return (String)
+                Optional.ofNullable(this.bufferList)
+                        .map(
+                                new Function() { // from class:
+                                                 // com.samsung.android.sume.core.message.Response$$ExternalSyntheticLambda3
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        return Response.lambda$toString$2((List) obj);
+                                    }
+                                })
+                        .orElse("");
     }
 
     public Consumer<Message> getResponseListener() {
@@ -233,8 +259,7 @@ public final class Response extends Message {
             return sInstance;
         }
 
-        private ListenerManager() {
-        }
+        private ListenerManager() {}
 
         int register(Consumer<Message> consumer) {
             int id = consumer.hashCode();

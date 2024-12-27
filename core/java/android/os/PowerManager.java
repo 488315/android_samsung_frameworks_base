@@ -4,10 +4,6 @@ import android.annotation.SystemApi;
 import android.app.PropertyInvalidatedCache;
 import android.app.WallpaperManager;
 import android.content.Context;
-import android.os.IPowerManager;
-import android.os.IThermalStatusListener;
-import android.os.IWakeLockCallback;
-import android.os.PowerManager;
 import android.service.dreams.Sandman;
 import android.telephony.ims.SipDelegateImsConfiguration;
 import android.text.format.DateFormat;
@@ -15,10 +11,13 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.R;
 import com.android.internal.display.BrightnessSynchronizer;
 import com.android.internal.util.Preconditions;
+
 import com.samsung.android.media.AudioParameter;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -38,25 +37,39 @@ import java.util.concurrent.atomic.AtomicLong;
 /* loaded from: classes3.dex */
 public final class PowerManager {
 
-    @Deprecated
-    public static final int ACQUIRE_CAUSES_WAKEUP = 268435456;
-    public static final String ACTION_DEVICE_IDLE_MODE_CHANGED = "android.os.action.DEVICE_IDLE_MODE_CHANGED";
-    public static final String ACTION_DEVICE_LIGHT_IDLE_MODE_CHANGED = "android.os.action.LIGHT_DEVICE_IDLE_MODE_CHANGED";
-    public static final String ACTION_ENHANCED_DISCHARGE_PREDICTION_CHANGED = "android.os.action.ENHANCED_DISCHARGE_PREDICTION_CHANGED";
+    @Deprecated public static final int ACQUIRE_CAUSES_WAKEUP = 268435456;
+    public static final String ACTION_DEVICE_IDLE_MODE_CHANGED =
+            "android.os.action.DEVICE_IDLE_MODE_CHANGED";
+    public static final String ACTION_DEVICE_LIGHT_IDLE_MODE_CHANGED =
+            "android.os.action.LIGHT_DEVICE_IDLE_MODE_CHANGED";
+    public static final String ACTION_ENHANCED_DISCHARGE_PREDICTION_CHANGED =
+            "android.os.action.ENHANCED_DISCHARGE_PREDICTION_CHANGED";
 
     @Deprecated
-    public static final String ACTION_LIGHT_DEVICE_IDLE_MODE_CHANGED = "android.os.action.LIGHT_DEVICE_IDLE_MODE_CHANGED";
-    public static final String ACTION_LOW_POWER_STANDBY_ENABLED_CHANGED = "android.os.action.LOW_POWER_STANDBY_ENABLED_CHANGED";
-    public static final String ACTION_LOW_POWER_STANDBY_POLICY_CHANGED = "android.os.action.LOW_POWER_STANDBY_POLICY_CHANGED";
+    public static final String ACTION_LIGHT_DEVICE_IDLE_MODE_CHANGED =
+            "android.os.action.LIGHT_DEVICE_IDLE_MODE_CHANGED";
+
+    public static final String ACTION_LOW_POWER_STANDBY_ENABLED_CHANGED =
+            "android.os.action.LOW_POWER_STANDBY_ENABLED_CHANGED";
+    public static final String ACTION_LOW_POWER_STANDBY_POLICY_CHANGED =
+            "android.os.action.LOW_POWER_STANDBY_POLICY_CHANGED";
 
     @SystemApi
-    public static final String ACTION_LOW_POWER_STANDBY_PORTS_CHANGED = "android.os.action.LOW_POWER_STANDBY_PORTS_CHANGED";
-    public static final String ACTION_POWER_SAVE_MODE_CHANGED = "android.os.action.POWER_SAVE_MODE_CHANGED";
-    public static final String ACTION_POWER_SAVE_MODE_CHANGED_INTERNAL = "android.os.action.POWER_SAVE_MODE_CHANGED_INTERNAL";
-    public static final String ACTION_POWER_SAVE_TEMP_WHITELIST_CHANGED = "android.os.action.POWER_SAVE_TEMP_WHITELIST_CHANGED";
-    public static final String ACTION_POWER_SAVE_WHITELIST_CHANGED = "android.os.action.POWER_SAVE_WHITELIST_CHANGED";
-    public static final String ACTION_SCREEN_OFF_BY_PROXIMITY = "android.intent.action.ACTION_SCREEN_OFF_BY_PROXIMITY";
-    public static final String ACTION_SCREEN_ON_BY_PROXIMITY = "android.intent.action.ACTION_SCREEN_ON_BY_PROXIMITY";
+    public static final String ACTION_LOW_POWER_STANDBY_PORTS_CHANGED =
+            "android.os.action.LOW_POWER_STANDBY_PORTS_CHANGED";
+
+    public static final String ACTION_POWER_SAVE_MODE_CHANGED =
+            "android.os.action.POWER_SAVE_MODE_CHANGED";
+    public static final String ACTION_POWER_SAVE_MODE_CHANGED_INTERNAL =
+            "android.os.action.POWER_SAVE_MODE_CHANGED_INTERNAL";
+    public static final String ACTION_POWER_SAVE_TEMP_WHITELIST_CHANGED =
+            "android.os.action.POWER_SAVE_TEMP_WHITELIST_CHANGED";
+    public static final String ACTION_POWER_SAVE_WHITELIST_CHANGED =
+            "android.os.action.POWER_SAVE_WHITELIST_CHANGED";
+    public static final String ACTION_SCREEN_OFF_BY_PROXIMITY =
+            "android.intent.action.ACTION_SCREEN_OFF_BY_PROXIMITY";
+    public static final String ACTION_SCREEN_ON_BY_PROXIMITY =
+            "android.intent.action.ACTION_SCREEN_ON_BY_PROXIMITY";
     public static final int BRIGHTNESS_CONSTRAINT_TYPE_DEFAULT = 2;
     public static final int BRIGHTNESS_CONSTRAINT_TYPE_DIM = 3;
     public static final int BRIGHTNESS_CONSTRAINT_TYPE_DOZE = 4;
@@ -71,16 +84,17 @@ public final class PowerManager {
     public static final float BRIGHTNESS_OFF_FLOAT = -1.0f;
     public static final int BRIGHTNESS_ON = 255;
     private static final String CACHE_KEY_IS_INTERACTIVE_PROPERTY = "cache_key.is_interactive";
-    private static final String CACHE_KEY_IS_POWER_SAVE_MODE_PROPERTY = "cache_key.is_power_save_mode";
+    private static final String CACHE_KEY_IS_POWER_SAVE_MODE_PROPERTY =
+            "cache_key.is_power_save_mode";
     public static final int DOZE_WAKE_LOCK = 64;
     public static final int DRAW_WAKE_LOCK = 128;
     public static final int DUAL_SCREEN_STATE_INNER = 0;
     public static final int DUAL_SCREEN_STATE_OUTER = 1;
     public static final int DUAL_SCREEN_STATE_UNKNOWN = -1;
-    public static final String FEATURE_WAKE_ON_LAN_IN_LOW_POWER_STANDBY = "com.android.lowpowerstandby.WAKE_ON_LAN";
+    public static final String FEATURE_WAKE_ON_LAN_IN_LOW_POWER_STANDBY =
+            "com.android.lowpowerstandby.WAKE_ON_LAN";
 
-    @Deprecated
-    public static final int FULL_WAKE_LOCK = 26;
+    @Deprecated public static final int FULL_WAKE_LOCK = 26;
     public static final int GO_TO_SLEEP_FLAG_NO_DOZE = 1;
     public static final int GO_TO_SLEEP_FLAG_SOFT_SLEEP = 2;
     public static final int GO_TO_SLEEP_REASON_ACCESSIBILITY = 7;
@@ -125,11 +139,9 @@ public final class PowerManager {
     public static final int ON_AFTER_RELEASE = 536870912;
     public static final int PARTIAL_WAKE_LOCK = 1;
 
-    @SystemApi
-    public static final int POWER_SAVE_MODE_TRIGGER_DYNAMIC = 1;
+    @SystemApi public static final int POWER_SAVE_MODE_TRIGGER_DYNAMIC = 1;
 
-    @SystemApi
-    public static final int POWER_SAVE_MODE_TRIGGER_PERCENTAGE = 0;
+    @SystemApi public static final int POWER_SAVE_MODE_TRIGGER_PERCENTAGE = 0;
     public static final int PROXIMITY_SCREEN_OFF_WAKE_LOCK = 32;
     public static final float RAMP_SPEED_INVALID_FLOAT = Float.NaN;
     public static final String REBOOT_QUIESCENT = "quiescent";
@@ -138,16 +150,13 @@ public final class PowerManager {
     public static final String REBOOT_REQUESTED_BY_DEVICE_OWNER = "deviceowner";
     public static final String REBOOT_SAFE_MODE = "safemode";
 
-    @SystemApi
-    public static final String REBOOT_USERSPACE = "userspace";
+    @SystemApi public static final String REBOOT_USERSPACE = "userspace";
     public static final int RELEASE_FLAG_TIMEOUT = 65536;
     public static final int RELEASE_FLAG_WAIT_FOR_NO_PROXIMITY = 1;
 
-    @Deprecated
-    public static final int SCREEN_BRIGHT_WAKE_LOCK = 10;
+    @Deprecated public static final int SCREEN_BRIGHT_WAKE_LOCK = 10;
 
-    @Deprecated
-    public static final int SCREEN_DIM_WAKE_LOCK = 6;
+    @Deprecated public static final int SCREEN_DIM_WAKE_LOCK = 6;
     public static final int SCREEN_TIMEOUT_OVERRIDE_WAKE_LOCK = 256;
     public static final int SEM_BRIGHTNESS_INVALID = -1;
     public static final int SEM_BRIGHTNESS_ON = 255;
@@ -164,17 +173,15 @@ public final class PowerManager {
     public static final int SHUTDOWN_REASON_USER_REQUESTED = 3;
     public static final String SHUTDOWN_THERMAL_STATE = "thermal";
     public static final String SHUTDOWN_USER_REQUESTED = "userrequested";
-    public static final String SILENT_RESET_EXCEPTION_MSG = "NPE by silent reset. It's normal operation caused by device care";
+    public static final String SILENT_RESET_EXCEPTION_MSG =
+            "NPE by silent reset. It's normal operation caused by device care";
     public static final String SILENT_RESET_PARAM = "silent.sec";
 
-    @SystemApi
-    public static final int SOUND_TRIGGER_MODE_ALL_DISABLED = 2;
+    @SystemApi public static final int SOUND_TRIGGER_MODE_ALL_DISABLED = 2;
 
-    @SystemApi
-    public static final int SOUND_TRIGGER_MODE_ALL_ENABLED = 0;
+    @SystemApi public static final int SOUND_TRIGGER_MODE_ALL_ENABLED = 0;
 
-    @SystemApi
-    public static final int SOUND_TRIGGER_MODE_CRITICAL_ONLY = 1;
+    @SystemApi public static final int SOUND_TRIGGER_MODE_CRITICAL_ONLY = 1;
     public static final int SYSTEM_WAKELOCK = Integer.MIN_VALUE;
     private static final String TAG = "PowerManager";
     public static final int THERMAL_STATUS_CRITICAL = 4;
@@ -186,30 +193,24 @@ public final class PowerManager {
     public static final int THERMAL_STATUS_SHUTDOWN = 6;
     public static final int UNIMPORTANT_FOR_LOGGING = 1073741824;
 
-    @SystemApi
-    public static final int USER_ACTIVITY_EVENT_ACCESSIBILITY = 3;
+    @SystemApi public static final int USER_ACTIVITY_EVENT_ACCESSIBILITY = 3;
     public static final int USER_ACTIVITY_EVENT_ATTENTION = 4;
 
-    @SystemApi
-    public static final int USER_ACTIVITY_EVENT_BUTTON = 1;
+    @SystemApi public static final int USER_ACTIVITY_EVENT_BUTTON = 1;
     public static final int USER_ACTIVITY_EVENT_DEVICE_STATE = 6;
     public static final int USER_ACTIVITY_EVENT_FACE_DOWN = 5;
 
-    @SystemApi
-    public static final int USER_ACTIVITY_EVENT_OTHER = 0;
+    @SystemApi public static final int USER_ACTIVITY_EVENT_OTHER = 0;
 
-    @SystemApi
-    public static final int USER_ACTIVITY_EVENT_TOUCH = 2;
+    @SystemApi public static final int USER_ACTIVITY_EVENT_TOUCH = 2;
     public static final int USER_ACTIVITY_FLAG_HOVER = 8192;
     public static final int USER_ACTIVITY_FLAG_IME = 4096;
 
-    @SystemApi
-    public static final int USER_ACTIVITY_FLAG_INDIRECT = 2;
+    @SystemApi public static final int USER_ACTIVITY_FLAG_INDIRECT = 2;
     public static final int USER_ACTIVITY_FLAG_INTERNALKEY = 32768;
     public static final int USER_ACTIVITY_FLAG_NAVIBAR = 16384;
 
-    @SystemApi
-    public static final int USER_ACTIVITY_FLAG_NO_CHANGE_LIGHTS = 1;
+    @SystemApi public static final int USER_ACTIVITY_FLAG_NO_CHANGE_LIGHTS = 1;
     public static final int WAKE_LOCK_LEVEL_MASK = 65535;
     public static final int WAKE_REASON_APPLICATION = 2;
     public static final int WAKE_REASON_APPLICATION_WINDOW_MANAGER_TURN_ON_FLAG = 110;
@@ -251,30 +252,26 @@ public final class PowerManager {
     private final PropertyInvalidatedCache<Void, Boolean> mPowerSaveModeCache;
     final IPowerManager mService;
     final IThermalService mThermalService;
-    private final ArrayMap<OnThermalStatusChangedListener, IThermalStatusListener> mListenerMap = new ArrayMap<>();
+    private final ArrayMap<OnThermalStatusChangedListener, IThermalStatusListener> mListenerMap =
+            new ArrayMap<>();
     private final Object mThermalHeadroomThresholdsLock = new Object();
     private float[] mThermalHeadroomThresholds = null;
     private final AtomicLong mLastHeadroomUpdate = new AtomicLong(0);
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AutoPowerSaveModeTriggers {
-    }
+    public @interface AutoPowerSaveModeTriggers {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BrightnessConstraint {
-    }
+    public @interface BrightnessConstraint {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface GoToSleepReason {
-    }
+    public @interface GoToSleepReason {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LocationPowerSaveMode {
-    }
+    public @interface LocationPowerSaveMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LowPowerStandbyAllowedReason {
-    }
+    public @interface LowPowerStandbyAllowedReason {}
 
     public interface OnThermalStatusChangedListener {
         void onThermalStatusChanged(int i);
@@ -302,29 +299,24 @@ public final class PowerManager {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ShutdownReason {
-    }
+    public @interface ShutdownReason {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SoundTriggerPowerSaveMode {
-    }
+    public @interface SoundTriggerPowerSaveMode {}
 
     @Target({ElementType.TYPE_USE})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ThermalStatus {
-    }
+    public @interface ThermalStatus {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface UserActivityEvent {
-    }
+    public @interface UserActivityEvent {}
 
     public interface WakeLockStateListener {
         void onStateChanged(boolean z);
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WakeReason {
-    }
+    public @interface WakeReason {}
 
     public static String userActivityEventToString(int userActivityEvent) {
         switch (userActivityEvent) {
@@ -513,11 +505,16 @@ public final class PowerManager {
                 return false;
             }
             WakeData other = (WakeData) o;
-            return this.wakeTime == other.wakeTime && this.wakeReason == other.wakeReason && this.sleepDurationRealtime == other.sleepDurationRealtime;
+            return this.wakeTime == other.wakeTime
+                    && this.wakeReason == other.wakeReason
+                    && this.sleepDurationRealtime == other.sleepDurationRealtime;
         }
 
         public int hashCode() {
-            return Objects.hash(Long.valueOf(this.wakeTime), Integer.valueOf(this.wakeReason), Long.valueOf(this.sleepDurationRealtime));
+            return Objects.hash(
+                    Long.valueOf(this.wakeTime),
+                    Integer.valueOf(this.wakeReason),
+                    Long.valueOf(this.sleepDurationRealtime));
         }
     }
 
@@ -535,11 +532,14 @@ public final class PowerManager {
                 return false;
             }
             SleepData other = (SleepData) o;
-            return this.goToSleepUptimeMillis == other.goToSleepUptimeMillis && this.goToSleepReason == other.goToSleepReason;
+            return this.goToSleepUptimeMillis == other.goToSleepUptimeMillis
+                    && this.goToSleepReason == other.goToSleepReason;
         }
 
         public int hashCode() {
-            return Objects.hash(Long.valueOf(this.goToSleepUptimeMillis), Integer.valueOf(this.goToSleepReason));
+            return Objects.hash(
+                    Long.valueOf(this.goToSleepUptimeMillis),
+                    Integer.valueOf(this.goToSleepReason));
         }
     }
 
@@ -560,31 +560,45 @@ public final class PowerManager {
         }
     }
 
-    public PowerManager(Context context, IPowerManager service, IThermalService thermalService, Handler handler) {
+    public PowerManager(
+            Context context,
+            IPowerManager service,
+            IThermalService thermalService,
+            Handler handler) {
         int i = 1;
-        this.mPowerSaveModeCache = new PropertyInvalidatedCache<Void, Boolean>(i, CACHE_KEY_IS_POWER_SAVE_MODE_PROPERTY) { // from class: android.os.PowerManager.1
-            @Override // android.app.PropertyInvalidatedCache
-            public Boolean recompute(Void query) {
-                try {
-                    return Boolean.valueOf(PowerManager.this.mService.isPowerSaveMode());
-                } catch (RemoteException e) {
-                    throw e.rethrowFromSystemServer();
-                }
-            }
-        };
-        this.mInteractiveCache = new PropertyInvalidatedCache<Integer, Boolean>(i, CACHE_KEY_IS_INTERACTIVE_PROPERTY) { // from class: android.os.PowerManager.2
-            @Override // android.app.PropertyInvalidatedCache
-            public Boolean recompute(Integer displayId) {
-                try {
-                    if (displayId == null) {
-                        return Boolean.valueOf(PowerManager.this.mService.isInteractive());
+        this.mPowerSaveModeCache =
+                new PropertyInvalidatedCache<Void, Boolean>(
+                        i,
+                        CACHE_KEY_IS_POWER_SAVE_MODE_PROPERTY) { // from class:
+                                                                 // android.os.PowerManager.1
+                    @Override // android.app.PropertyInvalidatedCache
+                    public Boolean recompute(Void query) {
+                        try {
+                            return Boolean.valueOf(PowerManager.this.mService.isPowerSaveMode());
+                        } catch (RemoteException e) {
+                            throw e.rethrowFromSystemServer();
+                        }
                     }
-                    return Boolean.valueOf(PowerManager.this.mService.isDisplayInteractive(displayId.intValue()));
-                } catch (RemoteException e) {
-                    throw e.rethrowFromSystemServer();
-                }
-            }
-        };
+                };
+        this.mInteractiveCache =
+                new PropertyInvalidatedCache<Integer, Boolean>(
+                        i,
+                        CACHE_KEY_IS_INTERACTIVE_PROPERTY) { // from class:
+                                                             // android.os.PowerManager.2
+                    @Override // android.app.PropertyInvalidatedCache
+                    public Boolean recompute(Integer displayId) {
+                        try {
+                            if (displayId == null) {
+                                return Boolean.valueOf(PowerManager.this.mService.isInteractive());
+                            }
+                            return Boolean.valueOf(
+                                    PowerManager.this.mService.isDisplayInteractive(
+                                            displayId.intValue()));
+                        } catch (RemoteException e) {
+                            throw e.rethrowFromSystemServer();
+                        }
+                    }
+                };
         this.mContext = context;
         this.mService = service;
         this.mThermalService = thermalService;
@@ -593,17 +607,23 @@ public final class PowerManager {
 
     private PowerExemptionManager getPowerExemptionManager() {
         if (this.mPowerExemptionManager == null) {
-            this.mPowerExemptionManager = (PowerExemptionManager) this.mContext.getSystemService(PowerExemptionManager.class);
+            this.mPowerExemptionManager =
+                    (PowerExemptionManager)
+                            this.mContext.getSystemService(PowerExemptionManager.class);
         }
         return this.mPowerExemptionManager;
     }
 
     public int getMinimumScreenBrightnessSetting() {
-        return this.mContext.getResources().getInteger(R.integer.config_screenBrightnessSettingMinimum);
+        return this.mContext
+                .getResources()
+                .getInteger(R.integer.config_screenBrightnessSettingMinimum);
     }
 
     public int getMaximumScreenBrightnessSetting() {
-        return this.mContext.getResources().getInteger(R.integer.config_screenBrightnessSettingMaximum);
+        return this.mContext
+                .getResources()
+                .getInteger(R.integer.config_screenBrightnessSettingMaximum);
     }
 
     public int semGetMinimumScreenBrightnessSetting() {
@@ -615,11 +635,15 @@ public final class PowerManager {
     }
 
     public int getDefaultScreenBrightnessSetting() {
-        return this.mContext.getResources().getInteger(R.integer.config_screenBrightnessSettingDefault);
+        return this.mContext
+                .getResources()
+                .getInteger(R.integer.config_screenBrightnessSettingDefault);
     }
 
     public int getMaximumScreenBrightnessExtended() {
-        return this.mContext.getResources().getInteger(R.integer.config_screenBrightnessExtendedMaximum);
+        return this.mContext
+                .getResources()
+                .getInteger(R.integer.config_screenBrightnessExtendedMaximum);
     }
 
     public int semGetMaximumSubScreenBrightnessSetting() {
@@ -627,7 +651,9 @@ public final class PowerManager {
     }
 
     public boolean semIsSubAutoBrightnessSupported() {
-        return this.mContext.getResources().getBoolean(R.bool.config_cover_automatic_brightness_available);
+        return this.mContext
+                .getResources()
+                .getBoolean(R.bool.config_cover_automatic_brightness_available);
     }
 
     public float getBrightnessConstraint(int constraint) {
@@ -788,7 +814,8 @@ public final class PowerManager {
 
     public void reboot(String reason) {
         if (REBOOT_USERSPACE.equals(reason) && !isRebootingUserspaceSupported()) {
-            throw new UnsupportedOperationException("Attempted userspace reboot on a device that doesn't support it");
+            throw new UnsupportedOperationException(
+                    "Attempted userspace reboot on a device that doesn't support it");
         }
         try {
             this.mService.reboot(false, reason, true);
@@ -894,7 +921,8 @@ public final class PowerManager {
             throw new IllegalArgumentException("time remaining must not be null");
         }
         try {
-            this.mService.setBatteryDischargePrediction(new ParcelDuration(timeRemaining), isPersonalized);
+            this.mService.setBatteryDischargePrediction(
+                    new ParcelDuration(timeRemaining), isPersonalized);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1051,7 +1079,8 @@ public final class PowerManager {
     }
 
     @SystemApi
-    public LowPowerStandbyPortsLock newLowPowerStandbyPortsLock(List<LowPowerStandbyPortDescription> ports) {
+    public LowPowerStandbyPortsLock newLowPowerStandbyPortsLock(
+            List<LowPowerStandbyPortDescription> ports) {
         LowPowerStandbyPortsLock standbyPorts = new LowPowerStandbyPortsLock(ports);
         return standbyPorts;
     }
@@ -1059,7 +1088,8 @@ public final class PowerManager {
     @SystemApi
     public List<LowPowerStandbyPortDescription> getActiveLowPowerStandbyPorts() {
         try {
-            return LowPowerStandbyPortDescription.fromParcelable(this.mService.getActiveLowPowerStandbyPorts());
+            return LowPowerStandbyPortDescription.fromParcelable(
+                    this.mService.getActiveLowPowerStandbyPorts());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1078,7 +1108,9 @@ public final class PowerManager {
     }
 
     public boolean isSustainedPerformanceModeSupported() {
-        return this.mContext.getResources().getBoolean(R.bool.config_sustainedPerformanceModeSupported);
+        return this.mContext
+                .getResources()
+                .getBoolean(R.bool.config_sustainedPerformanceModeSupported);
     }
 
     public int getCurrentThermalStatus() {
@@ -1094,10 +1126,14 @@ public final class PowerManager {
         addThermalStatusListener(this.mContext.getMainExecutor(), listener);
     }
 
-    public void addThermalStatusListener(Executor executor, OnThermalStatusChangedListener listener) {
+    public void addThermalStatusListener(
+            Executor executor, OnThermalStatusChangedListener listener) {
         Objects.requireNonNull(listener, "listener cannot be null");
         Objects.requireNonNull(executor, "executor cannot be null");
-        Preconditions.checkArgument(!this.mListenerMap.containsKey(listener), "Listener already registered: %s", listener);
+        Preconditions.checkArgument(
+                !this.mListenerMap.containsKey(listener),
+                "Listener already registered: %s",
+                listener);
         IThermalStatusListener internalListener = new AnonymousClass3(executor, listener);
         try {
             if (this.mThermalService.registerThermalStatusListener(internalListener)) {
@@ -1115,7 +1151,8 @@ public final class PowerManager {
         final /* synthetic */ Executor val$executor;
         final /* synthetic */ OnThermalStatusChangedListener val$listener;
 
-        AnonymousClass3(Executor executor, OnThermalStatusChangedListener onThermalStatusChangedListener) {
+        AnonymousClass3(
+                Executor executor, OnThermalStatusChangedListener onThermalStatusChangedListener) {
             this.val$executor = executor;
             this.val$listener = onThermalStatusChangedListener;
         }
@@ -1125,13 +1162,17 @@ public final class PowerManager {
             long token = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
-                final OnThermalStatusChangedListener onThermalStatusChangedListener = this.val$listener;
-                executor.execute(new Runnable() { // from class: android.os.PowerManager$3$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        PowerManager.OnThermalStatusChangedListener.this.onThermalStatusChanged(status);
-                    }
-                });
+                final OnThermalStatusChangedListener onThermalStatusChangedListener =
+                        this.val$listener;
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.os.PowerManager$3$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                PowerManager.OnThermalStatusChangedListener.this
+                                        .onThermalStatusChanged(status);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
@@ -1173,12 +1214,15 @@ public final class PowerManager {
         try {
             synchronized (this.mThermalHeadroomThresholdsLock) {
                 if (this.mThermalHeadroomThresholds == null) {
-                    this.mThermalHeadroomThresholds = this.mThermalService.getThermalHeadroomThresholds();
+                    this.mThermalHeadroomThresholds =
+                            this.mThermalService.getThermalHeadroomThresholds();
                 }
                 ret = new ArrayMap<>(6);
                 for (int status = 1; status <= 6; status++) {
                     if (!Float.isNaN(this.mThermalHeadroomThresholds[status])) {
-                        ret.put(Integer.valueOf(status), Float.valueOf(this.mThermalHeadroomThresholds[status]));
+                        ret.put(
+                                Integer.valueOf(status),
+                                Float.valueOf(this.mThermalHeadroomThresholds[status]));
                     }
                 }
             }
@@ -1292,7 +1336,11 @@ public final class PowerManager {
         private final Set<String> mExemptPackages;
         private final String mIdentifier;
 
-        public LowPowerStandbyPolicy(String identifier, Set<String> exemptPackages, int allowedReasons, Set<String> allowedFeatures) {
+        public LowPowerStandbyPolicy(
+                String identifier,
+                Set<String> exemptPackages,
+                int allowedReasons,
+                Set<String> allowedFeatures) {
             Objects.requireNonNull(identifier);
             Objects.requireNonNull(exemptPackages);
             Objects.requireNonNull(allowedFeatures);
@@ -1319,7 +1367,16 @@ public final class PowerManager {
         }
 
         public String toString() {
-            return "Policy{mIdentifier='" + this.mIdentifier + DateFormat.QUOTE + ", mExemptPackages=" + String.join(",", this.mExemptPackages) + ", mAllowedReasons=" + PowerManager.lowPowerStandbyAllowedReasonsToString(this.mAllowedReasons) + ", mAllowedFeatures=" + String.join(",", this.mAllowedFeatures) + '}';
+            return "Policy{mIdentifier='"
+                    + this.mIdentifier
+                    + DateFormat.QUOTE
+                    + ", mExemptPackages="
+                    + String.join(",", this.mExemptPackages)
+                    + ", mAllowedReasons="
+                    + PowerManager.lowPowerStandbyAllowedReasonsToString(this.mAllowedReasons)
+                    + ", mAllowedFeatures="
+                    + String.join(",", this.mAllowedFeatures)
+                    + '}';
         }
 
         public boolean equals(Object o) {
@@ -1330,18 +1387,27 @@ public final class PowerManager {
                 return false;
             }
             LowPowerStandbyPolicy that = (LowPowerStandbyPolicy) o;
-            return this.mAllowedReasons == that.mAllowedReasons && Objects.equals(this.mIdentifier, that.mIdentifier) && Objects.equals(this.mExemptPackages, that.mExemptPackages) && Objects.equals(this.mAllowedFeatures, that.mAllowedFeatures);
+            return this.mAllowedReasons == that.mAllowedReasons
+                    && Objects.equals(this.mIdentifier, that.mIdentifier)
+                    && Objects.equals(this.mExemptPackages, that.mExemptPackages)
+                    && Objects.equals(this.mAllowedFeatures, that.mAllowedFeatures);
         }
 
         public int hashCode() {
-            return Objects.hash(this.mIdentifier, this.mExemptPackages, Integer.valueOf(this.mAllowedReasons), this.mAllowedFeatures);
+            return Objects.hash(
+                    this.mIdentifier,
+                    this.mExemptPackages,
+                    Integer.valueOf(this.mAllowedReasons),
+                    this.mAllowedFeatures);
         }
 
-        public static IPowerManager.LowPowerStandbyPolicy toParcelable(LowPowerStandbyPolicy policy) {
+        public static IPowerManager.LowPowerStandbyPolicy toParcelable(
+                LowPowerStandbyPolicy policy) {
             if (policy == null) {
                 return null;
             }
-            IPowerManager.LowPowerStandbyPolicy parcelablePolicy = new IPowerManager.LowPowerStandbyPolicy();
+            IPowerManager.LowPowerStandbyPolicy parcelablePolicy =
+                    new IPowerManager.LowPowerStandbyPolicy();
             parcelablePolicy.identifier = policy.mIdentifier;
             parcelablePolicy.exemptPackages = new ArrayList(policy.mExemptPackages);
             parcelablePolicy.allowedReasons = policy.mAllowedReasons;
@@ -1349,11 +1415,16 @@ public final class PowerManager {
             return parcelablePolicy;
         }
 
-        public static LowPowerStandbyPolicy fromParcelable(IPowerManager.LowPowerStandbyPolicy parcelablePolicy) {
+        public static LowPowerStandbyPolicy fromParcelable(
+                IPowerManager.LowPowerStandbyPolicy parcelablePolicy) {
             if (parcelablePolicy == null) {
                 return null;
             }
-            return new LowPowerStandbyPolicy(parcelablePolicy.identifier, new ArraySet(parcelablePolicy.exemptPackages), parcelablePolicy.allowedReasons, new ArraySet(parcelablePolicy.allowedFeatures));
+            return new LowPowerStandbyPolicy(
+                    parcelablePolicy.identifier,
+                    new ArraySet(parcelablePolicy.exemptPackages),
+                    parcelablePolicy.allowedReasons,
+                    new ArraySet(parcelablePolicy.allowedFeatures));
         }
     }
 
@@ -1369,12 +1440,10 @@ public final class PowerManager {
         private final int mProtocol;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface PortMatcher {
-        }
+        public @interface PortMatcher {}
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface Protocol {
-        }
+        public @interface Protocol {}
 
         public LowPowerStandbyPortDescription(int protocol, int portMatcher, int portNumber) {
             this.mProtocol = protocol;
@@ -1383,7 +1452,8 @@ public final class PowerManager {
             this.mLocalAddress = null;
         }
 
-        public LowPowerStandbyPortDescription(int protocol, int portMatcher, int portNumber, InetAddress localAddress) {
+        public LowPowerStandbyPortDescription(
+                int protocol, int portMatcher, int portNumber, InetAddress localAddress) {
             this.mProtocol = protocol;
             this.mPortMatcher = portMatcher;
             this.mPortNumber = portNumber;
@@ -1429,7 +1499,15 @@ public final class PowerManager {
         }
 
         public String toString() {
-            return "PortDescription{mProtocol=" + protocolToString(this.mProtocol) + ", mPortMatcher=" + portMatcherToString(this.mPortMatcher) + ", mPortNumber=" + this.mPortNumber + ", mLocalAddress=" + this.mLocalAddress + '}';
+            return "PortDescription{mProtocol="
+                    + protocolToString(this.mProtocol)
+                    + ", mPortMatcher="
+                    + portMatcherToString(this.mPortMatcher)
+                    + ", mPortNumber="
+                    + this.mPortNumber
+                    + ", mLocalAddress="
+                    + this.mLocalAddress
+                    + '}';
         }
 
         public boolean equals(Object o) {
@@ -1440,18 +1518,27 @@ public final class PowerManager {
                 return false;
             }
             LowPowerStandbyPortDescription that = (LowPowerStandbyPortDescription) o;
-            return this.mProtocol == that.mProtocol && this.mPortMatcher == that.mPortMatcher && this.mPortNumber == that.mPortNumber && Objects.equals(this.mLocalAddress, that.mLocalAddress);
+            return this.mProtocol == that.mProtocol
+                    && this.mPortMatcher == that.mPortMatcher
+                    && this.mPortNumber == that.mPortNumber
+                    && Objects.equals(this.mLocalAddress, that.mLocalAddress);
         }
 
         public int hashCode() {
-            return Objects.hash(Integer.valueOf(this.mProtocol), Integer.valueOf(this.mPortMatcher), Integer.valueOf(this.mPortNumber), this.mLocalAddress);
+            return Objects.hash(
+                    Integer.valueOf(this.mProtocol),
+                    Integer.valueOf(this.mPortMatcher),
+                    Integer.valueOf(this.mPortNumber),
+                    this.mLocalAddress);
         }
 
-        public static IPowerManager.LowPowerStandbyPortDescription toParcelable(LowPowerStandbyPortDescription portDescription) {
+        public static IPowerManager.LowPowerStandbyPortDescription toParcelable(
+                LowPowerStandbyPortDescription portDescription) {
             if (portDescription == null) {
                 return null;
             }
-            IPowerManager.LowPowerStandbyPortDescription parcelablePortDescription = new IPowerManager.LowPowerStandbyPortDescription();
+            IPowerManager.LowPowerStandbyPortDescription parcelablePortDescription =
+                    new IPowerManager.LowPowerStandbyPortDescription();
             parcelablePortDescription.protocol = portDescription.mProtocol;
             parcelablePortDescription.portMatcher = portDescription.mPortMatcher;
             parcelablePortDescription.portNumber = portDescription.mPortNumber;
@@ -1461,7 +1548,8 @@ public final class PowerManager {
             return parcelablePortDescription;
         }
 
-        public static List<IPowerManager.LowPowerStandbyPortDescription> toParcelable(List<LowPowerStandbyPortDescription> portDescriptions) {
+        public static List<IPowerManager.LowPowerStandbyPortDescription> toParcelable(
+                List<LowPowerStandbyPortDescription> portDescriptions) {
             if (portDescriptions == null) {
                 return null;
             }
@@ -1472,7 +1560,8 @@ public final class PowerManager {
             return result;
         }
 
-        public static LowPowerStandbyPortDescription fromParcelable(IPowerManager.LowPowerStandbyPortDescription parcelablePortDescription) {
+        public static LowPowerStandbyPortDescription fromParcelable(
+                IPowerManager.LowPowerStandbyPortDescription parcelablePortDescription) {
             if (parcelablePortDescription == null) {
                 return null;
             }
@@ -1484,10 +1573,15 @@ public final class PowerManager {
                     Log.w(PowerManager.TAG, "Address has invalid length", e);
                 }
             }
-            return new LowPowerStandbyPortDescription(parcelablePortDescription.protocol, parcelablePortDescription.portMatcher, parcelablePortDescription.portNumber, localAddress);
+            return new LowPowerStandbyPortDescription(
+                    parcelablePortDescription.protocol,
+                    parcelablePortDescription.portMatcher,
+                    parcelablePortDescription.portNumber,
+                    localAddress);
         }
 
-        public static List<LowPowerStandbyPortDescription> fromParcelable(List<IPowerManager.LowPowerStandbyPortDescription> portDescriptions) {
+        public static List<LowPowerStandbyPortDescription> fromParcelable(
+                List<IPowerManager.LowPowerStandbyPortDescription> portDescriptions) {
             if (portDescriptions == null) {
                 return null;
             }
@@ -1513,7 +1607,9 @@ public final class PowerManager {
             synchronized (this.mToken) {
                 try {
                     try {
-                        PowerManager.this.mService.acquireLowPowerStandbyPorts(this.mToken, LowPowerStandbyPortDescription.toParcelable(this.mPorts));
+                        PowerManager.this.mService.acquireLowPowerStandbyPorts(
+                                this.mToken,
+                                LowPowerStandbyPortDescription.toParcelable(this.mPorts));
                         this.mHeld = true;
                     } catch (RemoteException e) {
                         throw e.rethrowFromSystemServer();
@@ -1571,13 +1667,17 @@ public final class PowerManager {
             } else {
                 lowerLimitInt = -1;
             }
-            int upperLimitInt = Float.compare(upperLimit, 0.0f) >= 0 ? BrightnessSynchronizer.brightnessFloatToInt(upperLimit) : -1;
+            int upperLimitInt =
+                    Float.compare(upperLimit, 0.0f) >= 0
+                            ? BrightnessSynchronizer.brightnessFloatToInt(upperLimit)
+                            : -1;
             this.mService.setAutoBrightnessLimit(lowerLimitInt, upperLimitInt, false);
         } catch (RemoteException e) {
         }
     }
 
-    public void setMasterBrightnessLimit(int lowerLimit, int upperLimit, int brightnessLimitPeriod) {
+    public void setMasterBrightnessLimit(
+            int lowerLimit, int upperLimit, int brightnessLimitPeriod) {
         try {
             this.mService.setMasterBrightnessLimit(lowerLimit, upperLimit, brightnessLimitPeriod);
         } catch (RemoteException e) {
@@ -1701,12 +1801,14 @@ public final class PowerManager {
         private int mTagHash;
         private WorkSource mWorkSource;
         private boolean mRefCounted = true;
-        private final Runnable mReleaser = new Runnable() { // from class: android.os.PowerManager$WakeLock$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                PowerManager.WakeLock.this.lambda$new$0();
-            }
-        };
+        private final Runnable mReleaser =
+                new Runnable() { // from class:
+                                 // android.os.PowerManager$WakeLock$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        PowerManager.WakeLock.this.lambda$new$0();
+                    }
+                };
         private final IBinder mToken = new Binder();
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -1746,7 +1848,11 @@ public final class PowerManager {
             synchronized (this.mToken) {
                 boolean changed = false;
                 if ((positive < -1 && positive > 3000) || (negative < -1 && negative > 3000)) {
-                    throw new IllegalArgumentException("setProximityDebounceTime: positive = " + positive + ", negative = " + negative);
+                    throw new IllegalArgumentException(
+                            "setProximityDebounceTime: positive = "
+                                    + positive
+                                    + ", negative = "
+                                    + negative);
                 }
                 if (this.mProximityPositiveDebounce != positive) {
                     this.mProximityPositiveDebounce = positive;
@@ -1758,7 +1864,8 @@ public final class PowerManager {
                 }
                 if (changed) {
                     try {
-                        PowerManager.this.mService.setProximityDebounceTime(this.mToken, positive, negative);
+                        PowerManager.this.mService.setProximityDebounceTime(
+                                this.mToken, positive, negative);
                     } catch (RemoteException e) {
                         throw e.rethrowFromSystemServer();
                     }
@@ -1786,7 +1893,15 @@ public final class PowerManager {
                 PowerManager.this.mHandler.removeCallbacks(this.mReleaser);
                 Trace.asyncTraceForTrackBegin(131072L, "WakeLocks", this.mTag, this.mTagHash);
                 try {
-                    PowerManager.this.mService.acquireWakeLock(this.mToken, this.mFlags, this.mTag, this.mPackageName, this.mWorkSource, this.mHistoryTag, this.mDisplayId, this.mCallback);
+                    PowerManager.this.mService.acquireWakeLock(
+                            this.mToken,
+                            this.mFlags,
+                            this.mTag,
+                            this.mPackageName,
+                            this.mWorkSource,
+                            this.mHistoryTag,
+                            this.mDisplayId,
+                            this.mCallback);
                     this.mHeld = true;
                 } catch (RemoteException e) {
                     throw e.rethrowFromSystemServer();
@@ -1860,7 +1975,8 @@ public final class PowerManager {
                 }
                 if (changed && this.mHeld) {
                     try {
-                        PowerManager.this.mService.updateWakeLockWorkSource(this.mToken, this.mWorkSource, this.mHistoryTag);
+                        PowerManager.this.mService.updateWakeLockWorkSource(
+                                this.mToken, this.mWorkSource, this.mHistoryTag);
                     } catch (RemoteException e) {
                         throw e.rethrowFromSystemServer();
                     }
@@ -1892,7 +2008,14 @@ public final class PowerManager {
         public String toString() {
             String str;
             synchronized (this.mToken) {
-                str = "WakeLock{" + Integer.toHexString(System.identityHashCode(this)) + " held=" + this.mHeld + ", refCount=" + this.mInternalCount + "}";
+                str =
+                        "WakeLock{"
+                                + Integer.toHexString(System.identityHashCode(this))
+                                + " held="
+                                + this.mHeld
+                                + ", refCount="
+                                + this.mInternalCount
+                                + "}";
             }
             return str;
         }
@@ -1913,7 +2036,8 @@ public final class PowerManager {
 
         public Runnable wrap(final Runnable r) {
             acquire();
-            return new Runnable() { // from class: android.os.PowerManager$WakeLock$$ExternalSyntheticLambda1
+            return new Runnable() { // from class:
+                                    // android.os.PowerManager$WakeLock$$ExternalSyntheticLambda1
                 @Override // java.lang.Runnable
                 public final void run() {
                     PowerManager.WakeLock.this.lambda$wrap$1(r);
@@ -1942,7 +2066,8 @@ public final class PowerManager {
                     }
                     if (this.mHeld) {
                         try {
-                            PowerManager.this.mService.updateWakeLockCallback(this.mToken, this.mCallback);
+                            PowerManager.this.mService.updateWakeLockCallback(
+                                    this.mToken, this.mCallback);
                         } catch (RemoteException e) {
                             throw e.rethrowFromSystemServer();
                         }
@@ -1967,12 +2092,14 @@ public final class PowerManager {
                 try {
                     Executor executor = this.val$executor;
                     final WakeLockStateListener wakeLockStateListener = this.val$listener;
-                    executor.execute(new Runnable() { // from class: android.os.PowerManager$WakeLock$1$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            PowerManager.WakeLockStateListener.this.onStateChanged(enabled);
-                        }
-                    });
+                    executor.execute(
+                            new Runnable() { // from class:
+                                             // android.os.PowerManager$WakeLock$1$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    PowerManager.WakeLockStateListener.this.onStateChanged(enabled);
+                                }
+                            });
                 } finally {
                     Binder.restoreCallingIdentity(token);
                 }
@@ -2028,17 +2155,20 @@ public final class PowerManager {
             return this.mScreenOffTimeout;
         }
 
-        public static IPowerManager.AdaptiveScreenOffTimeoutConfig toParcelable(AdaptiveScreenOffTimeoutConfig config) {
+        public static IPowerManager.AdaptiveScreenOffTimeoutConfig toParcelable(
+                AdaptiveScreenOffTimeoutConfig config) {
             if (config == null) {
                 return null;
             }
-            IPowerManager.AdaptiveScreenOffTimeoutConfig parcelableConfig = new IPowerManager.AdaptiveScreenOffTimeoutConfig();
+            IPowerManager.AdaptiveScreenOffTimeoutConfig parcelableConfig =
+                    new IPowerManager.AdaptiveScreenOffTimeoutConfig();
             parcelableConfig.packageName = config.mPackageName;
             parcelableConfig.screenOffTimeout = config.mScreenOffTimeout;
             return parcelableConfig;
         }
 
-        public static List<IPowerManager.AdaptiveScreenOffTimeoutConfig> toParcelable(List<AdaptiveScreenOffTimeoutConfig> config) {
+        public static List<IPowerManager.AdaptiveScreenOffTimeoutConfig> toParcelable(
+                List<AdaptiveScreenOffTimeoutConfig> config) {
             if (config == null) {
                 return null;
             }
@@ -2049,14 +2179,17 @@ public final class PowerManager {
             return result;
         }
 
-        public static AdaptiveScreenOffTimeoutConfig fromParcelable(IPowerManager.AdaptiveScreenOffTimeoutConfig parcelableConfig) {
+        public static AdaptiveScreenOffTimeoutConfig fromParcelable(
+                IPowerManager.AdaptiveScreenOffTimeoutConfig parcelableConfig) {
             if (parcelableConfig == null) {
                 return null;
             }
-            return new AdaptiveScreenOffTimeoutConfig(parcelableConfig.packageName, parcelableConfig.screenOffTimeout);
+            return new AdaptiveScreenOffTimeoutConfig(
+                    parcelableConfig.packageName, parcelableConfig.screenOffTimeout);
         }
 
-        public static List<AdaptiveScreenOffTimeoutConfig> fromParcelable(List<IPowerManager.AdaptiveScreenOffTimeoutConfig> parcelableConfig) {
+        public static List<AdaptiveScreenOffTimeoutConfig> fromParcelable(
+                List<IPowerManager.AdaptiveScreenOffTimeoutConfig> parcelableConfig) {
             if (parcelableConfig == null) {
                 return null;
             }

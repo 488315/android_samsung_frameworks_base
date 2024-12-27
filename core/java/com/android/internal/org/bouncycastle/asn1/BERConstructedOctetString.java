@@ -19,7 +19,9 @@ public class BERConstructedOctetString extends BEROctetString {
             } catch (IOException e) {
                 throw new IllegalArgumentException("exception converting octets " + e.toString());
             } catch (ClassCastException e2) {
-                throw new IllegalArgumentException(octs.elementAt(i).getClass().getName() + " found in input should only contain DEROctetString");
+                throw new IllegalArgumentException(
+                        octs.elementAt(i).getClass().getName()
+                                + " found in input should only contain DEROctetString");
             }
         }
         return bOut.toByteArray();

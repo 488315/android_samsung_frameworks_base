@@ -19,8 +19,7 @@ public interface IBatteryPropertiesRegistrar extends IInterface {
         }
 
         @Override // android.os.IBatteryPropertiesRegistrar
-        public void scheduleUpdate() throws RemoteException {
-        }
+        public void scheduleUpdate() throws RemoteException {}
 
         @Override // android.os.IBatteryPropertiesRegistrar
         public long[] semGetValuesAsLong(int id) throws RemoteException {
@@ -43,7 +42,7 @@ public interface IBatteryPropertiesRegistrar extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBatteryPropertiesRegistrar {
+    public abstract static class Stub extends Binder implements IBatteryPropertiesRegistrar {
         public static final String DESCRIPTOR = "android.os.IBatteryPropertiesRegistrar";
         static final int TRANSACTION_getProperty = 1;
         static final int TRANSACTION_scheduleUpdate = 2;
@@ -94,7 +93,8 @@ public interface IBatteryPropertiesRegistrar extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

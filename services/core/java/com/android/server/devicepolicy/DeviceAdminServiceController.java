@@ -11,10 +11,11 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.util.IndentingPrintWriter;
 import android.util.SparseArray;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.server.am.PersistentConnection;
 import com.android.server.appbinding.AppBindingUtils;
-import com.android.server.devicepolicy.DevicePolicyManagerService;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -42,7 +43,9 @@ public final class DeviceAdminServiceController {
         }
     }
 
-    public DeviceAdminServiceController(DevicePolicyManagerService devicePolicyManagerService, DevicePolicyConstants devicePolicyConstants) {
+    public DeviceAdminServiceController(
+            DevicePolicyManagerService devicePolicyManagerService,
+            DevicePolicyConstants devicePolicyConstants) {
         DevicePolicyManagerService.Injector injector = devicePolicyManagerService.mInjector;
         this.mInjector = injector;
         this.mContext = injector.mContext;
@@ -54,14 +57,19 @@ public final class DeviceAdminServiceController {
         if (this.mConnections.contains(i)) {
             Iterator it = ((Map) this.mConnections.get(i)).keySet().iterator();
             while (it.hasNext()) {
-                ((DevicePolicyServiceConnection) ((Map) this.mConnections.get(i)).get((String) it.next())).unbind();
+                ((DevicePolicyServiceConnection)
+                                ((Map) this.mConnections.get(i)).get((String) it.next()))
+                        .unbind();
             }
             this.mConnections.remove(i);
         }
     }
 
     public final void disconnectServiceOnUserLocked(int i, String str) {
-        DevicePolicyServiceConnection devicePolicyServiceConnection = this.mConnections.contains(i) ? (DevicePolicyServiceConnection) ((Map) this.mConnections.get(i)).get(str) : null;
+        DevicePolicyServiceConnection devicePolicyServiceConnection =
+                this.mConnections.contains(i)
+                        ? (DevicePolicyServiceConnection) ((Map) this.mConnections.get(i)).get(str)
+                        : null;
         if (devicePolicyServiceConnection != null) {
             devicePolicyServiceConnection.unbind();
             ((Map) this.mConnections.get(i)).remove(str);
@@ -87,7 +95,9 @@ public final class DeviceAdminServiceController {
                         indentingPrintWriter.increaseIndent();
                         indentingPrintWriter.print("Package: ");
                         indentingPrintWriter.println(str);
-                        DevicePolicyServiceConnection devicePolicyServiceConnection = (DevicePolicyServiceConnection) ((Map) this.mConnections.valueAt(i)).get(str);
+                        DevicePolicyServiceConnection devicePolicyServiceConnection =
+                                (DevicePolicyServiceConnection)
+                                        ((Map) this.mConnections.valueAt(i)).get(str);
                         indentingPrintWriter.increaseIndent();
                         devicePolicyServiceConnection.dump("", indentingPrintWriter);
                         indentingPrintWriter.decreaseIndent();
@@ -111,9 +121,21 @@ public final class DeviceAdminServiceController {
                 synchronized (obj2) {
                     try {
                         this.mInjector.getClass();
-                        ServiceInfo findService = AppBindingUtils.findService(str, i, "android.app.action.DEVICE_ADMIN_SERVICE", "android.permission.BIND_DEVICE_ADMIN", DeviceAdminService.class, AppGlobals.getPackageManager(), new StringBuilder());
+                        ServiceInfo findService =
+                                AppBindingUtils.findService(
+                                        str,
+                                        i,
+                                        "android.app.action.DEVICE_ADMIN_SERVICE",
+                                        "android.permission.BIND_DEVICE_ADMIN",
+                                        DeviceAdminService.class,
+                                        AppGlobals.getPackageManager(),
+                                        new StringBuilder());
                         if (findService != null) {
-                            if ((this.mConnections.contains(i) ? (PersistentConnection) ((Map) this.mConnections.get(i)).get(str) : null) != null) {
+                            if ((this.mConnections.contains(i)
+                                            ? (PersistentConnection)
+                                                    ((Map) this.mConnections.get(i)).get(str)
+                                            : null)
+                                    != null) {
                                 disconnectServiceOnUserLocked(i, str);
                             }
                             ComponentName componentName = findService.getComponentName();
@@ -121,11 +143,26 @@ public final class DeviceAdminServiceController {
                             Handler handler = this.mHandler;
                             DevicePolicyConstants devicePolicyConstants = this.mConstants;
                             obj = obj2;
-                            DevicePolicyServiceConnection devicePolicyServiceConnection = new DevicePolicyServiceConnection("DevicePolicyManager", context, handler, i, componentName, devicePolicyConstants.DAS_DIED_SERVICE_RECONNECT_BACKOFF_SEC, devicePolicyConstants.DAS_DIED_SERVICE_RECONNECT_BACKOFF_INCREASE, devicePolicyConstants.DAS_DIED_SERVICE_RECONNECT_MAX_BACKOFF_SEC, devicePolicyConstants.DAS_DIED_SERVICE_STABLE_CONNECTION_THRESHOLD_SEC);
+                            DevicePolicyServiceConnection devicePolicyServiceConnection =
+                                    new DevicePolicyServiceConnection(
+                                            "DevicePolicyManager",
+                                            context,
+                                            handler,
+                                            i,
+                                            componentName,
+                                            devicePolicyConstants
+                                                    .DAS_DIED_SERVICE_RECONNECT_BACKOFF_SEC,
+                                            devicePolicyConstants
+                                                    .DAS_DIED_SERVICE_RECONNECT_BACKOFF_INCREASE,
+                                            devicePolicyConstants
+                                                    .DAS_DIED_SERVICE_RECONNECT_MAX_BACKOFF_SEC,
+                                            devicePolicyConstants
+                                                    .DAS_DIED_SERVICE_STABLE_CONNECTION_THRESHOLD_SEC);
                             if (!this.mConnections.contains(i)) {
                                 this.mConnections.put(i, new HashMap());
                             }
-                            ((Map) this.mConnections.get(i)).put(str, devicePolicyServiceConnection);
+                            ((Map) this.mConnections.get(i))
+                                    .put(str, devicePolicyServiceConnection);
                             synchronized (devicePolicyServiceConnection.mLock) {
                                 devicePolicyServiceConnection.mShouldBeBound = true;
                                 devicePolicyServiceConnection.bindInnerLocked(true);

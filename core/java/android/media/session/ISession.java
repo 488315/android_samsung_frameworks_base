@@ -4,7 +4,6 @@ import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.media.AudioAttributes;
 import android.media.MediaMetadata;
-import android.media.session.ISessionController;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -53,8 +52,7 @@ public interface ISession extends IInterface {
 
     public static class Default implements ISession {
         @Override // android.media.session.ISession
-        public void sendEvent(String event, Bundle data) throws RemoteException {
-        }
+        public void sendEvent(String event, Bundle data) throws RemoteException {}
 
         @Override // android.media.session.ISession
         public ISessionController getController() throws RemoteException {
@@ -62,40 +60,33 @@ public interface ISession extends IInterface {
         }
 
         @Override // android.media.session.ISession
-        public void setFlags(int flags) throws RemoteException {
-        }
+        public void setFlags(int flags) throws RemoteException {}
 
         @Override // android.media.session.ISession
-        public void setActive(boolean active) throws RemoteException {
-        }
+        public void setActive(boolean active) throws RemoteException {}
 
         @Override // android.media.session.ISession
-        public void setMediaButtonReceiver(PendingIntent mbr) throws RemoteException {
-        }
+        public void setMediaButtonReceiver(PendingIntent mbr) throws RemoteException {}
 
         @Override // android.media.session.ISession
-        public void setMediaButtonBroadcastReceiver(ComponentName broadcastReceiver) throws RemoteException {
-        }
+        public void setMediaButtonBroadcastReceiver(ComponentName broadcastReceiver)
+                throws RemoteException {}
 
         @Override // android.media.session.ISession
-        public void setLaunchPendingIntent(PendingIntent pi) throws RemoteException {
-        }
+        public void setLaunchPendingIntent(PendingIntent pi) throws RemoteException {}
 
         @Override // android.media.session.ISession
-        public void destroySession() throws RemoteException {
-        }
+        public void destroySession() throws RemoteException {}
 
         @Override // android.media.session.ISession
-        public void setMetadata(MediaMetadata metadata, long duration, String metadataDescription) throws RemoteException {
-        }
+        public void setMetadata(MediaMetadata metadata, long duration, String metadataDescription)
+                throws RemoteException {}
 
         @Override // android.media.session.ISession
-        public void setPlaybackState(PlaybackState state) throws RemoteException {
-        }
+        public void setPlaybackState(PlaybackState state) throws RemoteException {}
 
         @Override // android.media.session.ISession
-        public void resetQueue() throws RemoteException {
-        }
+        public void resetQueue() throws RemoteException {}
 
         @Override // android.media.session.ISession
         public IBinder getBinderForSetQueue() throws RemoteException {
@@ -103,28 +94,23 @@ public interface ISession extends IInterface {
         }
 
         @Override // android.media.session.ISession
-        public void setQueueTitle(CharSequence title) throws RemoteException {
-        }
+        public void setQueueTitle(CharSequence title) throws RemoteException {}
 
         @Override // android.media.session.ISession
-        public void setExtras(Bundle extras) throws RemoteException {
-        }
+        public void setExtras(Bundle extras) throws RemoteException {}
 
         @Override // android.media.session.ISession
-        public void setRatingType(int type) throws RemoteException {
-        }
+        public void setRatingType(int type) throws RemoteException {}
 
         @Override // android.media.session.ISession
-        public void setPlaybackToLocal(AudioAttributes attributes) throws RemoteException {
-        }
+        public void setPlaybackToLocal(AudioAttributes attributes) throws RemoteException {}
 
         @Override // android.media.session.ISession
-        public void setPlaybackToRemote(int control, int max, String controlId) throws RemoteException {
-        }
+        public void setPlaybackToRemote(int control, int max, String controlId)
+                throws RemoteException {}
 
         @Override // android.media.session.ISession
-        public void setCurrentVolume(int currentVolume) throws RemoteException {
-        }
+        public void setCurrentVolume(int currentVolume) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -132,7 +118,7 @@ public interface ISession extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISession {
+    public abstract static class Stub extends Binder implements ISession {
         public static final String DESCRIPTOR = "android.media.session.ISession";
         static final int TRANSACTION_destroySession = 8;
         static final int TRANSACTION_getBinderForSetQueue = 12;
@@ -222,7 +208,8 @@ public interface ISession extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -256,19 +243,22 @@ public interface ISession extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 5:
-                    PendingIntent _arg04 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg04 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     data.enforceNoDataAvail();
                     setMediaButtonReceiver(_arg04);
                     reply.writeNoException();
                     return true;
                 case 6:
-                    ComponentName _arg05 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg05 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     setMediaButtonBroadcastReceiver(_arg05);
                     reply.writeNoException();
                     return true;
                 case 7:
-                    PendingIntent _arg06 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg06 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     data.enforceNoDataAvail();
                     setLaunchPendingIntent(_arg06);
                     reply.writeNoException();
@@ -278,7 +268,8 @@ public interface ISession extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 9:
-                    MediaMetadata _arg07 = (MediaMetadata) data.readTypedObject(MediaMetadata.CREATOR);
+                    MediaMetadata _arg07 =
+                            (MediaMetadata) data.readTypedObject(MediaMetadata.CREATOR);
                     long _arg12 = data.readLong();
                     String _arg2 = data.readString();
                     data.enforceNoDataAvail();
@@ -286,7 +277,8 @@ public interface ISession extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 10:
-                    PlaybackState _arg08 = (PlaybackState) data.readTypedObject(PlaybackState.CREATOR);
+                    PlaybackState _arg08 =
+                            (PlaybackState) data.readTypedObject(PlaybackState.CREATOR);
                     data.enforceNoDataAvail();
                     setPlaybackState(_arg08);
                     reply.writeNoException();
@@ -301,7 +293,8 @@ public interface ISession extends IInterface {
                     reply.writeStrongBinder(_result2);
                     return true;
                 case 13:
-                    CharSequence _arg09 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg09 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     setQueueTitle(_arg09);
                     reply.writeNoException();
@@ -319,7 +312,8 @@ public interface ISession extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 16:
-                    AudioAttributes _arg012 = (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
+                    AudioAttributes _arg012 =
+                            (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     setPlaybackToLocal(_arg012);
                     reply.writeNoException();
@@ -383,7 +377,8 @@ public interface ISession extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    ISessionController _result = ISessionController.Stub.asInterface(_reply.readStrongBinder());
+                    ISessionController _result =
+                            ISessionController.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -437,7 +432,8 @@ public interface ISession extends IInterface {
             }
 
             @Override // android.media.session.ISession
-            public void setMediaButtonBroadcastReceiver(ComponentName broadcastReceiver) throws RemoteException {
+            public void setMediaButtonBroadcastReceiver(ComponentName broadcastReceiver)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -481,7 +477,9 @@ public interface ISession extends IInterface {
             }
 
             @Override // android.media.session.ISession
-            public void setMetadata(MediaMetadata metadata, long duration, String metadataDescription) throws RemoteException {
+            public void setMetadata(
+                    MediaMetadata metadata, long duration, String metadataDescription)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -608,7 +606,8 @@ public interface ISession extends IInterface {
             }
 
             @Override // android.media.session.ISession
-            public void setPlaybackToRemote(int control, int max, String controlId) throws RemoteException {
+            public void setPlaybackToRemote(int control, int max, String controlId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

@@ -5,18 +5,18 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.security.rkp.IGetRegistrationCallback;
 
 /* loaded from: classes3.dex */
 public interface IRemoteProvisioning extends IInterface {
     public static final String DESCRIPTOR = "android.security.rkp.IRemoteProvisioning";
 
-    void getRegistration(String str, IGetRegistrationCallback iGetRegistrationCallback) throws RemoteException;
+    void getRegistration(String str, IGetRegistrationCallback iGetRegistrationCallback)
+            throws RemoteException;
 
     public static class Default implements IRemoteProvisioning {
         @Override // android.security.rkp.IRemoteProvisioning
-        public void getRegistration(String irpcName, IGetRegistrationCallback callback) throws RemoteException {
-        }
+        public void getRegistration(String irpcName, IGetRegistrationCallback callback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +24,7 @@ public interface IRemoteProvisioning extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRemoteProvisioning {
+    public abstract static class Stub extends Binder implements IRemoteProvisioning {
         static final int TRANSACTION_getRegistration = 1;
 
         public Stub() {
@@ -62,7 +62,8 @@ public interface IRemoteProvisioning extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRemoteProvisioning.DESCRIPTOR);
             }
@@ -73,7 +74,8 @@ public interface IRemoteProvisioning extends IInterface {
             switch (code) {
                 case 1:
                     String _arg0 = data.readString();
-                    IGetRegistrationCallback _arg1 = IGetRegistrationCallback.Stub.asInterface(data.readStrongBinder());
+                    IGetRegistrationCallback _arg1 =
+                            IGetRegistrationCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getRegistration(_arg0, _arg1);
                     return true;
@@ -99,7 +101,8 @@ public interface IRemoteProvisioning extends IInterface {
             }
 
             @Override // android.security.rkp.IRemoteProvisioning
-            public void getRegistration(String irpcName, IGetRegistrationCallback callback) throws RemoteException {
+            public void getRegistration(String irpcName, IGetRegistrationCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRemoteProvisioning.DESCRIPTOR);

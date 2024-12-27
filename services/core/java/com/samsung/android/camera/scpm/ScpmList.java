@@ -24,7 +24,7 @@ public abstract class ScpmList {
             CAMERA_3RD_PARTY = policyType;
             PolicyType policyType2 = new PolicyType("HIDDEN_ID_PERMITTED", 1);
             HIDDEN_ID_PERMITTED = policyType2;
-            $VALUES = new PolicyType[]{policyType, policyType2};
+            $VALUES = new PolicyType[] {policyType, policyType2};
         }
 
         public static PolicyType valueOf(String str) {

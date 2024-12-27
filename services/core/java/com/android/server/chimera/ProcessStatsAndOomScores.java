@@ -1,7 +1,7 @@
 package com.android.server.chimera;
 
 import android.util.Pair;
-import com.android.server.chimera.ChimeraAppInfo;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -12,7 +12,8 @@ public final class ProcessStatsAndOomScores {
     public int[] mScores;
     public int[] mStates;
 
-    public static ProcessStatsAndOomScores create(ChimeraAppInfo chimeraAppInfo, SystemRepository systemRepository) {
+    public static ProcessStatsAndOomScores create(
+            ChimeraAppInfo chimeraAppInfo, SystemRepository systemRepository) {
         if (chimeraAppInfo == null || systemRepository == null) {
             return null;
         }
@@ -28,7 +29,9 @@ public final class ProcessStatsAndOomScores {
             processStatsAndOomScores.mPids[i] = ((ChimeraAppInfo.ProcessInfo) it.next()).pid;
             i++;
         }
-        Pair processStatesAndOomScoresForPIDs = systemRepository.getProcessStatesAndOomScoresForPIDs(processStatsAndOomScores.mPids);
+        Pair processStatesAndOomScoresForPIDs =
+                systemRepository.getProcessStatesAndOomScoresForPIDs(
+                        processStatsAndOomScores.mPids);
         if (processStatesAndOomScoresForPIDs != null) {
             processStatsAndOomScores.mStates = (int[]) processStatesAndOomScoresForPIDs.first;
             processStatsAndOomScores.mScores = (int[]) processStatesAndOomScoresForPIDs.second;

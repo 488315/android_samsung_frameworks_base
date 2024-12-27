@@ -6,24 +6,27 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.inputmethod.EditorInfo;
+
 import com.android.internal.inputmethod.IRemoteInputConnection;
 
 /* loaded from: classes5.dex */
 public interface IInputMethodInfoChangeListener extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.content.smartclip.IInputMethodInfoChangeListener";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.content.smartclip.IInputMethodInfoChangeListener";
 
-    void onInputInfoChanged(IRemoteInputConnection iRemoteInputConnection, EditorInfo editorInfo) throws RemoteException;
+    void onInputInfoChanged(IRemoteInputConnection iRemoteInputConnection, EditorInfo editorInfo)
+            throws RemoteException;
 
     void onKeyboardClosed() throws RemoteException;
 
     public static class Default implements IInputMethodInfoChangeListener {
         @Override // com.samsung.android.content.smartclip.IInputMethodInfoChangeListener
-        public void onInputInfoChanged(IRemoteInputConnection inputConnection, EditorInfo editorInfo) throws RemoteException {
-        }
+        public void onInputInfoChanged(
+                IRemoteInputConnection inputConnection, EditorInfo editorInfo)
+                throws RemoteException {}
 
         @Override // com.samsung.android.content.smartclip.IInputMethodInfoChangeListener
-        public void onKeyboardClosed() throws RemoteException {
-        }
+        public void onKeyboardClosed() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -31,7 +34,7 @@ public interface IInputMethodInfoChangeListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInputMethodInfoChangeListener {
+    public abstract static class Stub extends Binder implements IInputMethodInfoChangeListener {
         static final int TRANSACTION_onInputInfoChanged = 1;
         static final int TRANSACTION_onKeyboardClosed = 2;
 
@@ -72,7 +75,8 @@ public interface IInputMethodInfoChangeListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IInputMethodInfoChangeListener.DESCRIPTOR);
             }
@@ -82,7 +86,8 @@ public interface IInputMethodInfoChangeListener extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IRemoteInputConnection _arg0 = IRemoteInputConnection.Stub.asInterface(data.readStrongBinder());
+                    IRemoteInputConnection _arg0 =
+                            IRemoteInputConnection.Stub.asInterface(data.readStrongBinder());
                     EditorInfo _arg1 = (EditorInfo) data.readTypedObject(EditorInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onInputInfoChanged(_arg0, _arg1);
@@ -112,7 +117,9 @@ public interface IInputMethodInfoChangeListener extends IInterface {
             }
 
             @Override // com.samsung.android.content.smartclip.IInputMethodInfoChangeListener
-            public void onInputInfoChanged(IRemoteInputConnection inputConnection, EditorInfo editorInfo) throws RemoteException {
+            public void onInputInfoChanged(
+                    IRemoteInputConnection inputConnection, EditorInfo editorInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputMethodInfoChangeListener.DESCRIPTOR);

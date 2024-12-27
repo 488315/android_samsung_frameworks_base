@@ -3,26 +3,30 @@ package com.android.internal.compat;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes5.dex */
 public final class OverrideAllowedState implements Parcelable {
     public static final int ALLOWED = 0;
-    public static final Parcelable.Creator<OverrideAllowedState> CREATOR = new Parcelable.Creator<OverrideAllowedState>() { // from class: com.android.internal.compat.OverrideAllowedState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OverrideAllowedState createFromParcel(Parcel parcel) {
-            OverrideAllowedState info = new OverrideAllowedState(parcel);
-            return info;
-        }
+    public static final Parcelable.Creator<OverrideAllowedState> CREATOR =
+            new Parcelable.Creator<
+                    OverrideAllowedState>() { // from class:
+                                              // com.android.internal.compat.OverrideAllowedState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OverrideAllowedState createFromParcel(Parcel parcel) {
+                    OverrideAllowedState info = new OverrideAllowedState(parcel);
+                    return info;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OverrideAllowedState[] newArray(int size) {
-            return new OverrideAllowedState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OverrideAllowedState[] newArray(int size) {
+                    return new OverrideAllowedState[size];
+                }
+            };
     public static final int DEFERRED_VERIFICATION = 4;
     public static final int DISABLED_NON_TARGET_SDK = 2;
     public static final int DISABLED_NOT_DEBUGGABLE = 1;
@@ -34,8 +38,7 @@ public final class OverrideAllowedState implements Parcelable {
     public final int state;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface State {
-    }
+    public @interface State {}
 
     private OverrideAllowedState(Parcel parcel) {
         this.state = parcel.readInt();
@@ -67,15 +70,34 @@ public final class OverrideAllowedState implements Parcelable {
             case 4:
                 return;
             case 1:
-                throw new SecurityException("Cannot override a change on a non-debuggable app and user build.");
+                throw new SecurityException(
+                        "Cannot override a change on a non-debuggable app and user build.");
             case 2:
-                throw new SecurityException("Cannot override a default enabled/disabled change on a user build.");
+                throw new SecurityException(
+                        "Cannot override a default enabled/disabled change on a user build.");
             case 3:
-                throw new SecurityException(String.format("Cannot override %1$d for %2$s because the app's targetSdk (%3$d) is above the change's targetSdk threshold (%4$d)", Long.valueOf(changeId), packageName, Integer.valueOf(this.appTargetSdk), Integer.valueOf(this.changeIdTargetSdk)));
+                throw new SecurityException(
+                        String.format(
+                                "Cannot override %1$d for %2$s because the app's targetSdk (%3$d)"
+                                    + " is above the change's targetSdk threshold (%4$d)",
+                                Long.valueOf(changeId),
+                                packageName,
+                                Integer.valueOf(this.appTargetSdk),
+                                Integer.valueOf(this.changeIdTargetSdk)));
             case 5:
-                throw new SecurityException(String.format("Cannot override %1$d because it is marked as a logging-only change.", Long.valueOf(changeId)));
+                throw new SecurityException(
+                        String.format(
+                                "Cannot override %1$d because it is marked as a logging-only"
+                                    + " change.",
+                                Long.valueOf(changeId)));
             case 6:
-                throw new SecurityException(String.format("Cannot override %1$d for %2$s because the change's targetSdk threshold (%3$d) is above the platform sdk.", Long.valueOf(changeId), packageName, Integer.valueOf(this.changeIdTargetSdk)));
+                throw new SecurityException(
+                        String.format(
+                                "Cannot override %1$d for %2$s because the change's targetSdk"
+                                    + " threshold (%3$d) is above the platform sdk.",
+                                Long.valueOf(changeId),
+                                packageName,
+                                Integer.valueOf(this.changeIdTargetSdk)));
             default:
                 return;
         }
@@ -89,7 +111,9 @@ public final class OverrideAllowedState implements Parcelable {
             return false;
         }
         OverrideAllowedState otherState = (OverrideAllowedState) obj;
-        if (this.state == otherState.state && this.appTargetSdk == otherState.appTargetSdk && this.changeIdTargetSdk == otherState.changeIdTargetSdk) {
+        if (this.state == otherState.state
+                && this.appTargetSdk == otherState.appTargetSdk
+                && this.changeIdTargetSdk == otherState.changeIdTargetSdk) {
             return true;
         }
         return false;
@@ -117,6 +141,12 @@ public final class OverrideAllowedState implements Parcelable {
     }
 
     public String toString() {
-        return "OverrideAllowedState(state=" + stateName() + "; appTargetSdk=" + this.appTargetSdk + "; changeIdTargetSdk=" + this.changeIdTargetSdk + NavigationBarInflaterView.KEY_CODE_END;
+        return "OverrideAllowedState(state="
+                + stateName()
+                + "; appTargetSdk="
+                + this.appTargetSdk
+                + "; changeIdTargetSdk="
+                + this.changeIdTargetSdk
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 }

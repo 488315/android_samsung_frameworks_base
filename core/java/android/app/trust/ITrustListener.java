@@ -6,6 +6,7 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.text.TextUtils;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -14,7 +15,8 @@ public interface ITrustListener extends IInterface {
 
     void onIsActiveUnlockRunningChanged(boolean z, int i) throws RemoteException;
 
-    void onTrustChanged(boolean z, boolean z2, int i, int i2, List<String> list) throws RemoteException;
+    void onTrustChanged(boolean z, boolean z2, int i, int i2, List<String> list)
+            throws RemoteException;
 
     void onTrustError(CharSequence charSequence) throws RemoteException;
 
@@ -22,24 +24,26 @@ public interface ITrustListener extends IInterface {
 
     public static class Default implements ITrustListener {
         @Override // android.app.trust.ITrustListener
-        public void onEnabledTrustAgentsChanged(int userId) throws RemoteException {
-        }
+        public void onEnabledTrustAgentsChanged(int userId) throws RemoteException {}
 
         @Override // android.app.trust.ITrustListener
-        public void onTrustChanged(boolean enabled, boolean newlyUnlocked, int userId, int flags, List<String> trustGrantedMessages) throws RemoteException {
-        }
+        public void onTrustChanged(
+                boolean enabled,
+                boolean newlyUnlocked,
+                int userId,
+                int flags,
+                List<String> trustGrantedMessages)
+                throws RemoteException {}
 
         @Override // android.app.trust.ITrustListener
-        public void onTrustManagedChanged(boolean managed, int userId) throws RemoteException {
-        }
+        public void onTrustManagedChanged(boolean managed, int userId) throws RemoteException {}
 
         @Override // android.app.trust.ITrustListener
-        public void onTrustError(CharSequence message) throws RemoteException {
-        }
+        public void onTrustError(CharSequence message) throws RemoteException {}
 
         @Override // android.app.trust.ITrustListener
-        public void onIsActiveUnlockRunningChanged(boolean isRunning, int userId) throws RemoteException {
-        }
+        public void onIsActiveUnlockRunningChanged(boolean isRunning, int userId)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -47,7 +51,7 @@ public interface ITrustListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITrustListener {
+    public abstract static class Stub extends Binder implements ITrustListener {
         public static final String DESCRIPTOR = "android.app.trust.ITrustListener";
         static final int TRANSACTION_onEnabledTrustAgentsChanged = 1;
         static final int TRANSACTION_onIsActiveUnlockRunningChanged = 5;
@@ -98,7 +102,8 @@ public interface ITrustListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -128,7 +133,8 @@ public interface ITrustListener extends IInterface {
                     onTrustManagedChanged(_arg03, _arg12);
                     return true;
                 case 4:
-                    CharSequence _arg04 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg04 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     onTrustError(_arg04);
                     return true;
@@ -172,7 +178,13 @@ public interface ITrustListener extends IInterface {
             }
 
             @Override // android.app.trust.ITrustListener
-            public void onTrustChanged(boolean enabled, boolean newlyUnlocked, int userId, int flags, List<String> trustGrantedMessages) throws RemoteException {
+            public void onTrustChanged(
+                    boolean enabled,
+                    boolean newlyUnlocked,
+                    int userId,
+                    int flags,
+                    List<String> trustGrantedMessages)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -218,7 +230,8 @@ public interface ITrustListener extends IInterface {
             }
 
             @Override // android.app.trust.ITrustListener
-            public void onIsActiveUnlockRunningChanged(boolean isRunning, int userId) throws RemoteException {
+            public void onIsActiveUnlockRunningChanged(boolean isRunning, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

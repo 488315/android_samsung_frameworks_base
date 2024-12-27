@@ -9,20 +9,20 @@ import android.telephony.CallForwardingInfo;
 
 /* loaded from: classes5.dex */
 public interface ICallForwardingInfoCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.telephony.ICallForwardingInfoCallback";
+    public static final String DESCRIPTOR =
+            "com.android.internal.telephony.ICallForwardingInfoCallback";
 
-    void onCallForwardingInfoAvailable(CallForwardingInfo callForwardingInfo) throws RemoteException;
+    void onCallForwardingInfoAvailable(CallForwardingInfo callForwardingInfo)
+            throws RemoteException;
 
     void onError(int i) throws RemoteException;
 
     public static class Default implements ICallForwardingInfoCallback {
         @Override // com.android.internal.telephony.ICallForwardingInfoCallback
-        public void onCallForwardingInfoAvailable(CallForwardingInfo info) throws RemoteException {
-        }
+        public void onCallForwardingInfoAvailable(CallForwardingInfo info) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ICallForwardingInfoCallback
-        public void onError(int error) throws RemoteException {
-        }
+        public void onError(int error) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +30,7 @@ public interface ICallForwardingInfoCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICallForwardingInfoCallback {
+    public abstract static class Stub extends Binder implements ICallForwardingInfoCallback {
         static final int TRANSACTION_onCallForwardingInfoAvailable = 1;
         static final int TRANSACTION_onError = 2;
 
@@ -71,7 +71,8 @@ public interface ICallForwardingInfoCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICallForwardingInfoCallback.DESCRIPTOR);
             }
@@ -81,7 +82,8 @@ public interface ICallForwardingInfoCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    CallForwardingInfo _arg0 = (CallForwardingInfo) data.readTypedObject(CallForwardingInfo.CREATOR);
+                    CallForwardingInfo _arg0 =
+                            (CallForwardingInfo) data.readTypedObject(CallForwardingInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onCallForwardingInfoAvailable(_arg0);
                     return true;
@@ -112,7 +114,8 @@ public interface ICallForwardingInfoCallback extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ICallForwardingInfoCallback
-            public void onCallForwardingInfoAvailable(CallForwardingInfo info) throws RemoteException {
+            public void onCallForwardingInfoAvailable(CallForwardingInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICallForwardingInfoCallback.DESCRIPTOR);

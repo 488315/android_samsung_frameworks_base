@@ -4,19 +4,25 @@ import android.app.admin.DevicePolicyEventLogger;
 import android.app.admin.DevicePolicyManager;
 import android.content.Context;
 import android.os.UserHandle;
-import com.android.internal.app.AbstractMultiProfilePagerAdapter;
-import com.android.internal.app.NoCrossProfileEmptyStateProvider;
+
 import java.util.function.Supplier;
 
 /* loaded from: classes5.dex */
-public class NoCrossProfileEmptyStateProvider implements AbstractMultiProfilePagerAdapter.EmptyStateProvider {
-    private final AbstractMultiProfilePagerAdapter.CrossProfileIntentsChecker mCrossProfileIntentsChecker;
+public class NoCrossProfileEmptyStateProvider
+        implements AbstractMultiProfilePagerAdapter.EmptyStateProvider {
+    private final AbstractMultiProfilePagerAdapter.CrossProfileIntentsChecker
+            mCrossProfileIntentsChecker;
     private final AbstractMultiProfilePagerAdapter.EmptyState mNoPersonalToWorkEmptyState;
     private final AbstractMultiProfilePagerAdapter.EmptyState mNoWorkToPersonalEmptyState;
     private final UserHandle mPersonalProfileUserHandle;
     private final UserHandle mTabOwnerUserHandleForLaunch;
 
-    public NoCrossProfileEmptyStateProvider(UserHandle personalUserHandle, AbstractMultiProfilePagerAdapter.EmptyState noWorkToPersonalEmptyState, AbstractMultiProfilePagerAdapter.EmptyState noPersonalToWorkEmptyState, AbstractMultiProfilePagerAdapter.CrossProfileIntentsChecker crossProfileIntentsChecker, UserHandle preselectedTabOwnerUserHandle) {
+    public NoCrossProfileEmptyStateProvider(
+            UserHandle personalUserHandle,
+            AbstractMultiProfilePagerAdapter.EmptyState noWorkToPersonalEmptyState,
+            AbstractMultiProfilePagerAdapter.EmptyState noPersonalToWorkEmptyState,
+            AbstractMultiProfilePagerAdapter.CrossProfileIntentsChecker crossProfileIntentsChecker,
+            UserHandle preselectedTabOwnerUserHandle) {
         this.mPersonalProfileUserHandle = personalUserHandle;
         this.mNoWorkToPersonalEmptyState = noWorkToPersonalEmptyState;
         this.mNoPersonalToWorkEmptyState = noPersonalToWorkEmptyState;
@@ -25,8 +31,16 @@ public class NoCrossProfileEmptyStateProvider implements AbstractMultiProfilePag
     }
 
     @Override // com.android.internal.app.AbstractMultiProfilePagerAdapter.EmptyStateProvider
-    public AbstractMultiProfilePagerAdapter.EmptyState getEmptyState(ResolverListAdapter resolverListAdapter) {
-        boolean shouldShowBlocker = (this.mTabOwnerUserHandleForLaunch.equals(resolverListAdapter.getUserHandle()) || this.mCrossProfileIntentsChecker.hasCrossProfileIntents(resolverListAdapter.getIntents(), this.mTabOwnerUserHandleForLaunch.getIdentifier(), resolverListAdapter.getUserHandle().getIdentifier())) ? false : true;
+    public AbstractMultiProfilePagerAdapter.EmptyState getEmptyState(
+            ResolverListAdapter resolverListAdapter) {
+        boolean shouldShowBlocker =
+                (this.mTabOwnerUserHandleForLaunch.equals(resolverListAdapter.getUserHandle())
+                                || this.mCrossProfileIntentsChecker.hasCrossProfileIntents(
+                                        resolverListAdapter.getIntents(),
+                                        this.mTabOwnerUserHandleForLaunch.getIdentifier(),
+                                        resolverListAdapter.getUserHandle().getIdentifier()))
+                        ? false
+                        : true;
         if (!shouldShowBlocker) {
             return null;
         }
@@ -36,7 +50,8 @@ public class NoCrossProfileEmptyStateProvider implements AbstractMultiProfilePag
         return this.mNoPersonalToWorkEmptyState;
     }
 
-    public static class DevicePolicyBlockerEmptyState implements AbstractMultiProfilePagerAdapter.EmptyState {
+    public static class DevicePolicyBlockerEmptyState
+            implements AbstractMultiProfilePagerAdapter.EmptyState {
         private final Context mContext;
         private final int mDefaultSubtitleResource;
         private final int mDefaultTitleResource;
@@ -45,7 +60,14 @@ public class NoCrossProfileEmptyStateProvider implements AbstractMultiProfilePag
         private final String mEventCategory;
         private final int mEventId;
 
-        public DevicePolicyBlockerEmptyState(Context context, String devicePolicyStringTitleId, int defaultTitleResource, String devicePolicyStringSubtitleId, int defaultSubtitleResource, int devicePolicyEventId, String devicePolicyEventCategory) {
+        public DevicePolicyBlockerEmptyState(
+                Context context,
+                String devicePolicyStringTitleId,
+                int defaultTitleResource,
+                String devicePolicyStringSubtitleId,
+                int defaultSubtitleResource,
+                int devicePolicyEventId,
+                String devicePolicyEventCategory) {
             this.mContext = context;
             this.mDevicePolicyStringTitleId = devicePolicyStringTitleId;
             this.mDefaultTitleResource = defaultTitleResource;
@@ -57,14 +79,22 @@ public class NoCrossProfileEmptyStateProvider implements AbstractMultiProfilePag
 
         @Override // com.android.internal.app.AbstractMultiProfilePagerAdapter.EmptyState
         public String getTitle() {
-            return ((DevicePolicyManager) this.mContext.getSystemService(DevicePolicyManager.class)).getResources().getString(this.mDevicePolicyStringTitleId, new Supplier() { // from class: com.android.internal.app.NoCrossProfileEmptyStateProvider$DevicePolicyBlockerEmptyState$$ExternalSyntheticLambda0
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    String lambda$getTitle$0;
-                    lambda$getTitle$0 = NoCrossProfileEmptyStateProvider.DevicePolicyBlockerEmptyState.this.lambda$getTitle$0();
-                    return lambda$getTitle$0;
-                }
-            });
+            return ((DevicePolicyManager) this.mContext.getSystemService(DevicePolicyManager.class))
+                    .getResources()
+                    .getString(
+                            this.mDevicePolicyStringTitleId,
+                            new Supplier() { // from class:
+                                             // com.android.internal.app.NoCrossProfileEmptyStateProvider$DevicePolicyBlockerEmptyState$$ExternalSyntheticLambda0
+                                @Override // java.util.function.Supplier
+                                public final Object get() {
+                                    String lambda$getTitle$0;
+                                    lambda$getTitle$0 =
+                                            NoCrossProfileEmptyStateProvider
+                                                    .DevicePolicyBlockerEmptyState.this
+                                                    .lambda$getTitle$0();
+                                    return lambda$getTitle$0;
+                                }
+                            });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -74,14 +104,22 @@ public class NoCrossProfileEmptyStateProvider implements AbstractMultiProfilePag
 
         @Override // com.android.internal.app.AbstractMultiProfilePagerAdapter.EmptyState
         public String getSubtitle() {
-            return ((DevicePolicyManager) this.mContext.getSystemService(DevicePolicyManager.class)).getResources().getString(this.mDevicePolicyStringSubtitleId, new Supplier() { // from class: com.android.internal.app.NoCrossProfileEmptyStateProvider$DevicePolicyBlockerEmptyState$$ExternalSyntheticLambda1
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    String lambda$getSubtitle$1;
-                    lambda$getSubtitle$1 = NoCrossProfileEmptyStateProvider.DevicePolicyBlockerEmptyState.this.lambda$getSubtitle$1();
-                    return lambda$getSubtitle$1;
-                }
-            });
+            return ((DevicePolicyManager) this.mContext.getSystemService(DevicePolicyManager.class))
+                    .getResources()
+                    .getString(
+                            this.mDevicePolicyStringSubtitleId,
+                            new Supplier() { // from class:
+                                             // com.android.internal.app.NoCrossProfileEmptyStateProvider$DevicePolicyBlockerEmptyState$$ExternalSyntheticLambda1
+                                @Override // java.util.function.Supplier
+                                public final Object get() {
+                                    String lambda$getSubtitle$1;
+                                    lambda$getSubtitle$1 =
+                                            NoCrossProfileEmptyStateProvider
+                                                    .DevicePolicyBlockerEmptyState.this
+                                                    .lambda$getSubtitle$1();
+                                    return lambda$getSubtitle$1;
+                                }
+                            });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -91,7 +129,9 @@ public class NoCrossProfileEmptyStateProvider implements AbstractMultiProfilePag
 
         @Override // com.android.internal.app.AbstractMultiProfilePagerAdapter.EmptyState
         public void onEmptyStateShown() {
-            DevicePolicyEventLogger.createEvent(this.mEventId).setStrings(this.mEventCategory).write();
+            DevicePolicyEventLogger.createEvent(this.mEventId)
+                    .setStrings(this.mEventCategory)
+                    .write();
         }
 
         @Override // com.android.internal.app.AbstractMultiProfilePagerAdapter.EmptyState

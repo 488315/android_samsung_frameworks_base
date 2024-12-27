@@ -7,7 +7,9 @@ import android.credentials.GetCredentialRequest;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -16,23 +18,27 @@ import java.util.List;
 @SystemApi
 /* loaded from: classes.dex */
 public final class RequestInfo implements Parcelable {
-    public static final Parcelable.Creator<RequestInfo> CREATOR = new Parcelable.Creator<RequestInfo>() { // from class: android.credentials.selection.RequestInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RequestInfo createFromParcel(Parcel in) {
-            return new RequestInfo(in);
-        }
+    public static final Parcelable.Creator<RequestInfo> CREATOR =
+            new Parcelable.Creator<
+                    RequestInfo>() { // from class: android.credentials.selection.RequestInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RequestInfo createFromParcel(Parcel in) {
+                    return new RequestInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RequestInfo[] newArray(int size) {
-            return new RequestInfo[size];
-        }
-    };
-    public static final String EXTRA_REQUEST_INFO = "android.credentials.selection.extra.REQUEST_INFO";
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RequestInfo[] newArray(int size) {
+                    return new RequestInfo[size];
+                }
+            };
+    public static final String EXTRA_REQUEST_INFO =
+            "android.credentials.selection.extra.REQUEST_INFO";
     public static final String TYPE_CREATE = "android.credentials.selection.TYPE_CREATE";
     public static final String TYPE_GET = "android.credentials.selection.TYPE_GET";
-    public static final String TYPE_GET_VIA_REGISTRY = "android.credentials.selection.TYPE_GET_VIA_REGISTRY";
+    public static final String TYPE_GET_VIA_REGISTRY =
+            "android.credentials.selection.TYPE_GET_VIA_REGISTRY";
     public static final String TYPE_UNDEFINED = "android.credentials.selection.TYPE_UNDEFINED";
     private final CreateCredentialRequest mCreateCredentialRequest;
     private final List<String> mDefaultProviderIds;
@@ -45,19 +51,59 @@ public final class RequestInfo implements Parcelable {
     private final String mType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RequestType {
+    public @interface RequestType {}
+
+    public static RequestInfo newCreateRequestInfo(
+            IBinder token,
+            CreateCredentialRequest createCredentialRequest,
+            String appPackageName,
+            boolean hasPermissionToOverrideDefault,
+            List<String> defaultProviderIds,
+            boolean isShowAllOptionsRequested) {
+        return new RequestInfo(
+                token,
+                TYPE_CREATE,
+                appPackageName,
+                createCredentialRequest,
+                null,
+                hasPermissionToOverrideDefault,
+                defaultProviderIds,
+                isShowAllOptionsRequested);
     }
 
-    public static RequestInfo newCreateRequestInfo(IBinder token, CreateCredentialRequest createCredentialRequest, String appPackageName, boolean hasPermissionToOverrideDefault, List<String> defaultProviderIds, boolean isShowAllOptionsRequested) {
-        return new RequestInfo(token, TYPE_CREATE, appPackageName, createCredentialRequest, null, hasPermissionToOverrideDefault, defaultProviderIds, isShowAllOptionsRequested);
+    public static RequestInfo newGetRequestInfo(
+            IBinder token,
+            GetCredentialRequest getCredentialRequest,
+            String appPackageName,
+            boolean hasPermissionToOverrideDefault,
+            boolean isShowAllOptionsRequested) {
+        return new RequestInfo(
+                token,
+                TYPE_GET,
+                appPackageName,
+                null,
+                getCredentialRequest,
+                hasPermissionToOverrideDefault,
+                new ArrayList(),
+                isShowAllOptionsRequested);
     }
 
-    public static RequestInfo newGetRequestInfo(IBinder token, GetCredentialRequest getCredentialRequest, String appPackageName, boolean hasPermissionToOverrideDefault, boolean isShowAllOptionsRequested) {
-        return new RequestInfo(token, TYPE_GET, appPackageName, null, getCredentialRequest, hasPermissionToOverrideDefault, new ArrayList(), isShowAllOptionsRequested);
-    }
-
-    public static RequestInfo newGetRequestInfo(IBinder token, GetCredentialRequest getCredentialRequest, String appPackageName, boolean hasPermissionToOverrideDefault, List<String> defaultProviderIds, boolean isShowAllOptionsRequested) {
-        return new RequestInfo(token, TYPE_GET, appPackageName, null, getCredentialRequest, hasPermissionToOverrideDefault, defaultProviderIds, isShowAllOptionsRequested);
+    public static RequestInfo newGetRequestInfo(
+            IBinder token,
+            GetCredentialRequest getCredentialRequest,
+            String appPackageName,
+            boolean hasPermissionToOverrideDefault,
+            List<String> defaultProviderIds,
+            boolean isShowAllOptionsRequested) {
+        return new RequestInfo(
+                token,
+                TYPE_GET,
+                appPackageName,
+                null,
+                getCredentialRequest,
+                hasPermissionToOverrideDefault,
+                defaultProviderIds,
+                isShowAllOptionsRequested);
     }
 
     public boolean hasPermissionToOverrideDefault() {
@@ -100,14 +146,23 @@ public final class RequestInfo implements Parcelable {
         return this.mIsShowAllOptionsRequested;
     }
 
-    private RequestInfo(IBinder token, String type, String appPackageName, CreateCredentialRequest createCredentialRequest, GetCredentialRequest getCredentialRequest, boolean hasPermissionToOverrideDefault, List<String> defaultProviderIds, boolean isShowAllOptionsRequested) {
+    private RequestInfo(
+            IBinder token,
+            String type,
+            String appPackageName,
+            CreateCredentialRequest createCredentialRequest,
+            GetCredentialRequest getCredentialRequest,
+            boolean hasPermissionToOverrideDefault,
+            List<String> defaultProviderIds,
+            boolean isShowAllOptionsRequested) {
         this.mToken = token;
         this.mType = type;
         this.mPackageName = appPackageName;
         this.mCreateCredentialRequest = createCredentialRequest;
         this.mGetCredentialRequest = getCredentialRequest;
         this.mHasPermissionToOverrideDefault = hasPermissionToOverrideDefault;
-        this.mDefaultProviderIds = defaultProviderIds == null ? new ArrayList<>() : defaultProviderIds;
+        this.mDefaultProviderIds =
+                defaultProviderIds == null ? new ArrayList<>() : defaultProviderIds;
         this.mRegistryProviderIds = new ArrayList();
         this.mIsShowAllOptionsRequested = isShowAllOptionsRequested;
     }
@@ -116,14 +171,19 @@ public final class RequestInfo implements Parcelable {
         IBinder token = in.readStrongBinder();
         String type = in.readString8();
         String appPackageName = in.readString8();
-        CreateCredentialRequest createCredentialRequest = (CreateCredentialRequest) in.readTypedObject(CreateCredentialRequest.CREATOR);
-        GetCredentialRequest getCredentialRequest = (GetCredentialRequest) in.readTypedObject(GetCredentialRequest.CREATOR);
+        CreateCredentialRequest createCredentialRequest =
+                (CreateCredentialRequest) in.readTypedObject(CreateCredentialRequest.CREATOR);
+        GetCredentialRequest getCredentialRequest =
+                (GetCredentialRequest) in.readTypedObject(GetCredentialRequest.CREATOR);
         this.mToken = token;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mToken);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mToken);
         this.mType = type;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mType);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mType);
         this.mPackageName = appPackageName;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPackageName);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPackageName);
         this.mCreateCredentialRequest = createCredentialRequest;
         this.mGetCredentialRequest = getCredentialRequest;
         this.mHasPermissionToOverrideDefault = in.readBoolean();

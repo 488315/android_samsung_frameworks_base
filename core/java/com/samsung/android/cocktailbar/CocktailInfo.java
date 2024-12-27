@@ -9,21 +9,23 @@ import android.widget.RemoteViews;
 
 /* loaded from: classes5.dex */
 public class CocktailInfo implements Parcelable {
-    public static final Parcelable.Creator<CocktailInfo> CREATOR = new Parcelable.Creator<CocktailInfo>() { // from class: com.samsung.android.cocktailbar.CocktailInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CocktailInfo createFromParcel(Parcel in) {
-            CocktailInfo data = new CocktailInfo();
-            data.readFromParcel(in);
-            return data;
-        }
+    public static final Parcelable.Creator<CocktailInfo> CREATOR =
+            new Parcelable.Creator<
+                    CocktailInfo>() { // from class: com.samsung.android.cocktailbar.CocktailInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CocktailInfo createFromParcel(Parcel in) {
+                    CocktailInfo data = new CocktailInfo();
+                    data.readFromParcel(in);
+                    return data;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CocktailInfo[] newArray(int size) {
-            return new CocktailInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CocktailInfo[] newArray(int size) {
+                    return new CocktailInfo[size];
+                }
+            };
     private int mUserId = 0;
     private int mOrientation = 1;
     private int mDisplayPolicy = 1;
@@ -166,7 +168,15 @@ public class CocktailInfo implements Parcelable {
     }
 
     public String dump() {
-        String dumpResult = "U:" + this.mUserId + " ORI:" + this.mOrientation + " DP:" + this.mDisplayPolicy + " CAT:" + this.mCategory;
+        String dumpResult =
+                "U:"
+                        + this.mUserId
+                        + " ORI:"
+                        + this.mOrientation
+                        + " DP:"
+                        + this.mDisplayPolicy
+                        + " CAT:"
+                        + this.mCategory;
         if (this.mContentView != null) {
             dumpResult = dumpResult + " has RemoteViews";
         }

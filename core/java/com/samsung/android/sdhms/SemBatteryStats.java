@@ -3,25 +3,28 @@ package com.samsung.android.sdhms;
 import android.hardware.scontext.SContextConstants;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 /* loaded from: classes6.dex */
 public class SemBatteryStats implements Parcelable {
-    public static final Parcelable.Creator<SemBatteryStats> CREATOR = new Parcelable.Creator<SemBatteryStats>() { // from class: com.samsung.android.sdhms.SemBatteryStats.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemBatteryStats createFromParcel(Parcel in) {
-            return new SemBatteryStats(in);
-        }
+    public static final Parcelable.Creator<SemBatteryStats> CREATOR =
+            new Parcelable.Creator<
+                    SemBatteryStats>() { // from class: com.samsung.android.sdhms.SemBatteryStats.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemBatteryStats createFromParcel(Parcel in) {
+                    return new SemBatteryStats(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemBatteryStats[] newArray(int size) {
-            return new SemBatteryStats[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemBatteryStats[] newArray(int size) {
+                    return new SemBatteryStats[size];
+                }
+            };
     private List<AppDetailUsage> appDetailList;
     private long beginTime;
     private long endTime;
@@ -36,7 +39,17 @@ public class SemBatteryStats implements Parcelable {
     private List<SysDetailUsage> sysDetailList;
     private double totalPowerUsage;
 
-    public SemBatteryStats(long begin, long end, double totalPowerUsage, double screenPowerUsage, long screenOnTime, long screenOffTime, int screenOnDischarge, int screenOffDischarge, List<AppDetailUsage> appDetailList, List<SysDetailUsage> sysDetailList) {
+    public SemBatteryStats(
+            long begin,
+            long end,
+            double totalPowerUsage,
+            double screenPowerUsage,
+            long screenOnTime,
+            long screenOffTime,
+            int screenOnDischarge,
+            int screenOffDischarge,
+            List<AppDetailUsage> appDetailList,
+            List<SysDetailUsage> sysDetailList) {
         SemBatteryStats semBatteryStats = this;
         semBatteryStats.beginTime = begin;
         semBatteryStats.endTime = end;
@@ -65,8 +78,31 @@ public class SemBatteryStats implements Parcelable {
         }
     }
 
-    public SemBatteryStats(long begin, long end, double totalPowerUsage, double screenPowerUsage, long screenOnTime, long screenOffTime, int screenOnDischarge, int screenOffDischarge, int screenOnCount, long highBrightnessTime, long highRefreshRateTime, List<AppDetailUsage> appDetailList, List<SysDetailUsage> sysDetailList) {
-        this(begin, end, totalPowerUsage, screenPowerUsage, screenOnTime, screenOffTime, screenOnDischarge, screenOffDischarge, appDetailList, sysDetailList);
+    public SemBatteryStats(
+            long begin,
+            long end,
+            double totalPowerUsage,
+            double screenPowerUsage,
+            long screenOnTime,
+            long screenOffTime,
+            int screenOnDischarge,
+            int screenOffDischarge,
+            int screenOnCount,
+            long highBrightnessTime,
+            long highRefreshRateTime,
+            List<AppDetailUsage> appDetailList,
+            List<SysDetailUsage> sysDetailList) {
+        this(
+                begin,
+                end,
+                totalPowerUsage,
+                screenPowerUsage,
+                screenOnTime,
+                screenOffTime,
+                screenOnDischarge,
+                screenOffDischarge,
+                appDetailList,
+                sysDetailList);
         this.screenOnCount = screenOnCount;
         this.highBrightnessTime = highBrightnessTime;
         this.highRefreshRateTime = highRefreshRateTime;
@@ -254,15 +290,23 @@ public class SemBatteryStats implements Parcelable {
     }
 
     public void calculateDeviceUsageDelta(SemBatteryStats prev) {
-        this.totalPowerUsage = Math.max(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN, this.totalPowerUsage - prev.getTotalPowerUsage());
-        this.screenPowerUsage = Math.max(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN, this.screenPowerUsage - prev.getScreenPowerUsage());
+        this.totalPowerUsage =
+                Math.max(
+                        SContextConstants.ENVIRONMENT_VALUE_UNKNOWN,
+                        this.totalPowerUsage - prev.getTotalPowerUsage());
+        this.screenPowerUsage =
+                Math.max(
+                        SContextConstants.ENVIRONMENT_VALUE_UNKNOWN,
+                        this.screenPowerUsage - prev.getScreenPowerUsage());
         this.screenOnTime = Math.max(0L, this.screenOnTime - prev.getScreenOnTime());
         this.screenOffTime = Math.max(0L, this.screenOffTime - prev.getScreenOffTime());
         this.screenOnDischarge = Math.max(0, this.screenOnDischarge - prev.getScreenOnDischarge());
-        this.screenOffDischarge = Math.max(0, this.screenOffDischarge - prev.getScreenOffDischarge());
+        this.screenOffDischarge =
+                Math.max(0, this.screenOffDischarge - prev.getScreenOffDischarge());
         this.screenOnCount = Math.max(0, this.screenOnCount - prev.screenOnCount);
         this.highBrightnessTime = Math.max(0L, this.highBrightnessTime - prev.highBrightnessTime);
-        this.highRefreshRateTime = Math.max(0L, this.highRefreshRateTime - prev.highRefreshRateTime);
+        this.highRefreshRateTime =
+                Math.max(0L, this.highRefreshRateTime - prev.highRefreshRateTime);
     }
 
     public void shiftTimestamp(long time) {
@@ -331,19 +375,22 @@ public class SemBatteryStats implements Parcelable {
     }
 
     public static class AppDetailUsage implements Parcelable {
-        public static final Parcelable.Creator<AppDetailUsage> CREATOR = new Parcelable.Creator<AppDetailUsage>() { // from class: com.samsung.android.sdhms.SemBatteryStats.AppDetailUsage.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AppDetailUsage createFromParcel(Parcel in) {
-                return new AppDetailUsage(in);
-            }
+        public static final Parcelable.Creator<AppDetailUsage> CREATOR =
+                new Parcelable.Creator<
+                        AppDetailUsage>() { // from class:
+                                            // com.samsung.android.sdhms.SemBatteryStats.AppDetailUsage.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AppDetailUsage createFromParcel(Parcel in) {
+                        return new AppDetailUsage(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AppDetailUsage[] newArray(int size) {
-                return new AppDetailUsage[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AppDetailUsage[] newArray(int size) {
+                        return new AppDetailUsage[size];
+                    }
+                };
         private long audioTime;
         private long bgTime;
         private int bluetoothScanCount;
@@ -580,8 +627,14 @@ public class SemBatteryStats implements Parcelable {
             if (this.uid != prev.getUid()) {
                 return;
             }
-            this.power = Math.max(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN, this.power - prev.getPowerUsage());
-            this.screenPower = Math.max(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN, this.screenPower - prev.getScreenPowerUsage());
+            this.power =
+                    Math.max(
+                            SContextConstants.ENVIRONMENT_VALUE_UNKNOWN,
+                            this.power - prev.getPowerUsage());
+            this.screenPower =
+                    Math.max(
+                            SContextConstants.ENVIRONMENT_VALUE_UNKNOWN,
+                            this.screenPower - prev.getScreenPowerUsage());
             this.fgTime = Math.max(0L, this.fgTime - prev.getForegroundTime());
             this.bgTime = Math.max(0L, this.bgTime - prev.getBackgroundTime());
             this.cpuTime = Math.max(0L, this.cpuTime - prev.getCpuTime());
@@ -591,8 +644,10 @@ public class SemBatteryStats implements Parcelable {
             this.walarm = Math.max(0, this.walarm - prev.getWakeAlarmCount());
             this.gpsTime = Math.max(0L, this.gpsTime - prev.getGpsTime());
             this.audioTime = Math.max(0L, this.audioTime - prev.getAudioTime());
-            this.mobileRadioActiveTime = Math.max(0L, this.mobileRadioActiveTime - prev.getMobileRadioActiveTime());
-            this.bluetoothScanCount = Math.max(0, this.bluetoothScanCount - prev.getBluetoothScanCount());
+            this.mobileRadioActiveTime =
+                    Math.max(0L, this.mobileRadioActiveTime - prev.getMobileRadioActiveTime());
+            this.bluetoothScanCount =
+                    Math.max(0, this.bluetoothScanCount - prev.getBluetoothScanCount());
         }
 
         protected AppDetailUsage(Parcel in) {
@@ -637,19 +692,22 @@ public class SemBatteryStats implements Parcelable {
     }
 
     public static class SysDetailUsage implements Parcelable {
-        public static final Parcelable.Creator<SysDetailUsage> CREATOR = new Parcelable.Creator<SysDetailUsage>() { // from class: com.samsung.android.sdhms.SemBatteryStats.SysDetailUsage.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SysDetailUsage createFromParcel(Parcel in) {
-                return new SysDetailUsage(in);
-            }
+        public static final Parcelable.Creator<SysDetailUsage> CREATOR =
+                new Parcelable.Creator<
+                        SysDetailUsage>() { // from class:
+                                            // com.samsung.android.sdhms.SemBatteryStats.SysDetailUsage.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SysDetailUsage createFromParcel(Parcel in) {
+                        return new SysDetailUsage(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SysDetailUsage[] newArray(int size) {
-                return new SysDetailUsage[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SysDetailUsage[] newArray(int size) {
+                        return new SysDetailUsage[size];
+                    }
+                };
         private final int drainType;
         private double power;
         private long usedTime;
@@ -721,7 +779,10 @@ public class SemBatteryStats implements Parcelable {
             if (this.drainType != prev.getDrainType()) {
                 return;
             }
-            this.power = Math.max(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN, this.power - prev.getPowerUsage());
+            this.power =
+                    Math.max(
+                            SContextConstants.ENVIRONMENT_VALUE_UNKNOWN,
+                            this.power - prev.getPowerUsage());
             this.usedTime = Math.max(0L, this.usedTime - prev.getUsedTime());
         }
 

@@ -31,20 +31,16 @@ public final class MagnificationThumbnail {
     /* renamed from: com.android.server.accessibility.magnification.MagnificationThumbnail$1, reason: invalid class name */
     public final class AnonymousClass1 implements Animator.AnimatorListener {
         @Override // android.animation.Animator.AnimatorListener
-        public final void onAnimationCancel(Animator animator) {
-        }
+        public final void onAnimationCancel(Animator animator) {}
 
         @Override // android.animation.Animator.AnimatorListener
-        public final void onAnimationEnd(Animator animator) {
-        }
+        public final void onAnimationEnd(Animator animator) {}
 
         @Override // android.animation.Animator.AnimatorListener
-        public final void onAnimationRepeat(Animator animator) {
-        }
+        public final void onAnimationRepeat(Animator animator) {}
 
         @Override // android.animation.Animator.AnimatorListener
-        public final void onAnimationStart(Animator animator) {
-        }
+        public final void onAnimationStart(Animator animator) {}
     }
 
     public MagnificationThumbnail(Context context, WindowManager windowManager, Handler handler) {
@@ -52,10 +48,12 @@ public final class MagnificationThumbnail {
         this.mWindowManager = windowManager;
         this.mHandler = handler;
         this.mWindowBounds = windowManager.getCurrentWindowMetrics().getBounds();
-        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams(-2, -2, 2027, 24, -2);
+        WindowManager.LayoutParams layoutParams =
+                new WindowManager.LayoutParams(-2, -2, 2027, 24, -2);
         layoutParams.inputFeatures = 1;
         layoutParams.gravity = 83;
-        layoutParams.setFitInsetsTypes(WindowInsets.Type.ime() | WindowInsets.Type.navigationBars());
+        layoutParams.setFitInsetsTypes(
+                WindowInsets.Type.ime() | WindowInsets.Type.navigationBars());
         layoutParams.receiveInsetsIgnoringZOrder = true;
         this.mBackgroundParams = layoutParams;
         this.mThumbnailWidth = 0;
@@ -64,11 +62,14 @@ public final class MagnificationThumbnail {
     }
 
     public final void animateThumbnail(boolean z) {
-        MagnificationThumbnail$$ExternalSyntheticLambda0 magnificationThumbnail$$ExternalSyntheticLambda0 = new MagnificationThumbnail$$ExternalSyntheticLambda0(this, 0);
+        MagnificationThumbnail$$ExternalSyntheticLambda0
+                magnificationThumbnail$$ExternalSyntheticLambda0 =
+                        new MagnificationThumbnail$$ExternalSyntheticLambda0(this, 0);
         Handler handler = this.mHandler;
         handler.removeCallbacks(magnificationThumbnail$$ExternalSyntheticLambda0);
         if (z) {
-            handler.postDelayed(new MagnificationThumbnail$$ExternalSyntheticLambda0(this, 0), 500L);
+            handler.postDelayed(
+                    new MagnificationThumbnail$$ExternalSyntheticLambda0(this, 0), 500L);
         }
         if (z == this.mIsFadingIn) {
             return;
@@ -82,7 +83,11 @@ public final class MagnificationThumbnail {
         if (objectAnimator != null) {
             objectAnimator.cancel();
         }
-        ObjectAnimator ofFloat = ObjectAnimator.ofFloat(this.mThumbnailLayout, "alpha", z ? 1.0f : FullScreenMagnificationGestureHandler.MAX_SCALE);
+        ObjectAnimator ofFloat =
+                ObjectAnimator.ofFloat(
+                        this.mThumbnailLayout,
+                        "alpha",
+                        z ? 1.0f : FullScreenMagnificationGestureHandler.MAX_SCALE);
         this.mThumbnailAnimator = ofFloat;
         ofFloat.setDuration(z ? 200L : 1000L);
         this.mThumbnailAnimator.setInterpolator(new LinearInterpolator());
@@ -97,11 +102,16 @@ public final class MagnificationThumbnail {
             this.mThumbnailView.setScaleX(scaleX);
             this.mThumbnailView.setScaleY(scaleX);
         }
-        if (Float.isNaN(f2) || Float.isNaN(f3) || this.mThumbnailWidth <= 0 || this.mThumbnailHeight <= 0) {
+        if (Float.isNaN(f2)
+                || Float.isNaN(f3)
+                || this.mThumbnailWidth <= 0
+                || this.mThumbnailHeight <= 0) {
             return;
         }
         float paddingTop = this.mThumbnailView.getPaddingTop();
-        this.mThumbnailView.setTranslationX((f2 * 0.14285715f) - ((this.mThumbnailWidth / 2.0f) + paddingTop));
-        this.mThumbnailView.setTranslationY((f3 * 0.14285715f) - ((this.mThumbnailHeight / 2.0f) + paddingTop));
+        this.mThumbnailView.setTranslationX(
+                (f2 * 0.14285715f) - ((this.mThumbnailWidth / 2.0f) + paddingTop));
+        this.mThumbnailView.setTranslationY(
+                (f3 * 0.14285715f) - ((this.mThumbnailHeight / 2.0f) + paddingTop));
     }
 }

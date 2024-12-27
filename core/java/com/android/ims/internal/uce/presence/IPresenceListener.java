@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.android.ims.internal.uce.common.StatusCode;
 
 /* loaded from: classes5.dex */
@@ -15,7 +16,8 @@ public interface IPresenceListener extends IInterface {
 
     void getVersionCb(String str) throws RemoteException;
 
-    void listCapInfoReceived(PresRlmiInfo presRlmiInfo, PresResInfo[] presResInfoArr) throws RemoteException;
+    void listCapInfoReceived(PresRlmiInfo presRlmiInfo, PresResInfo[] presResInfoArr)
+            throws RemoteException;
 
     void publishTriggering(PresPublishTriggerType presPublishTriggerType) throws RemoteException;
 
@@ -29,40 +31,34 @@ public interface IPresenceListener extends IInterface {
 
     public static class Default implements IPresenceListener {
         @Override // com.android.ims.internal.uce.presence.IPresenceListener
-        public void getVersionCb(String version) throws RemoteException {
-        }
+        public void getVersionCb(String version) throws RemoteException {}
 
         @Override // com.android.ims.internal.uce.presence.IPresenceListener
-        public void serviceAvailable(StatusCode statusCode) throws RemoteException {
-        }
+        public void serviceAvailable(StatusCode statusCode) throws RemoteException {}
 
         @Override // com.android.ims.internal.uce.presence.IPresenceListener
-        public void serviceUnAvailable(StatusCode statusCode) throws RemoteException {
-        }
+        public void serviceUnAvailable(StatusCode statusCode) throws RemoteException {}
 
         @Override // com.android.ims.internal.uce.presence.IPresenceListener
-        public void publishTriggering(PresPublishTriggerType publishTrigger) throws RemoteException {
-        }
+        public void publishTriggering(PresPublishTriggerType publishTrigger)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.uce.presence.IPresenceListener
-        public void cmdStatus(PresCmdStatus cmdStatus) throws RemoteException {
-        }
+        public void cmdStatus(PresCmdStatus cmdStatus) throws RemoteException {}
 
         @Override // com.android.ims.internal.uce.presence.IPresenceListener
-        public void sipResponseReceived(PresSipResponse sipResponse) throws RemoteException {
-        }
+        public void sipResponseReceived(PresSipResponse sipResponse) throws RemoteException {}
 
         @Override // com.android.ims.internal.uce.presence.IPresenceListener
-        public void capInfoReceived(String presentityURI, PresTupleInfo[] tupleInfo) throws RemoteException {
-        }
+        public void capInfoReceived(String presentityURI, PresTupleInfo[] tupleInfo)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.uce.presence.IPresenceListener
-        public void listCapInfoReceived(PresRlmiInfo rlmiInfo, PresResInfo[] resInfo) throws RemoteException {
-        }
+        public void listCapInfoReceived(PresRlmiInfo rlmiInfo, PresResInfo[] resInfo)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.uce.presence.IPresenceListener
-        public void unpublishMessageSent() throws RemoteException {
-        }
+        public void unpublishMessageSent() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -70,8 +66,9 @@ public interface IPresenceListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPresenceListener {
-        public static final String DESCRIPTOR = "com.android.ims.internal.uce.presence.IPresenceListener";
+    public abstract static class Stub extends Binder implements IPresenceListener {
+        public static final String DESCRIPTOR =
+                "com.android.ims.internal.uce.presence.IPresenceListener";
         static final int TRANSACTION_capInfoReceived = 7;
         static final int TRANSACTION_cmdStatus = 5;
         static final int TRANSACTION_getVersionCb = 1;
@@ -133,7 +130,8 @@ public interface IPresenceListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -161,33 +159,39 @@ public interface IPresenceListener extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 4:
-                    PresPublishTriggerType _arg04 = (PresPublishTriggerType) data.readTypedObject(PresPublishTriggerType.CREATOR);
+                    PresPublishTriggerType _arg04 =
+                            (PresPublishTriggerType)
+                                    data.readTypedObject(PresPublishTriggerType.CREATOR);
                     data.enforceNoDataAvail();
                     publishTriggering(_arg04);
                     reply.writeNoException();
                     return true;
                 case 5:
-                    PresCmdStatus _arg05 = (PresCmdStatus) data.readTypedObject(PresCmdStatus.CREATOR);
+                    PresCmdStatus _arg05 =
+                            (PresCmdStatus) data.readTypedObject(PresCmdStatus.CREATOR);
                     data.enforceNoDataAvail();
                     cmdStatus(_arg05);
                     reply.writeNoException();
                     return true;
                 case 6:
-                    PresSipResponse _arg06 = (PresSipResponse) data.readTypedObject(PresSipResponse.CREATOR);
+                    PresSipResponse _arg06 =
+                            (PresSipResponse) data.readTypedObject(PresSipResponse.CREATOR);
                     data.enforceNoDataAvail();
                     sipResponseReceived(_arg06);
                     reply.writeNoException();
                     return true;
                 case 7:
                     String _arg07 = data.readString();
-                    PresTupleInfo[] _arg1 = (PresTupleInfo[]) data.createTypedArray(PresTupleInfo.CREATOR);
+                    PresTupleInfo[] _arg1 =
+                            (PresTupleInfo[]) data.createTypedArray(PresTupleInfo.CREATOR);
                     data.enforceNoDataAvail();
                     capInfoReceived(_arg07, _arg1);
                     reply.writeNoException();
                     return true;
                 case 8:
                     PresRlmiInfo _arg08 = (PresRlmiInfo) data.readTypedObject(PresRlmiInfo.CREATOR);
-                    PresResInfo[] _arg12 = (PresResInfo[]) data.createTypedArray(PresResInfo.CREATOR);
+                    PresResInfo[] _arg12 =
+                            (PresResInfo[]) data.createTypedArray(PresResInfo.CREATOR);
                     data.enforceNoDataAvail();
                     listCapInfoReceived(_arg08, _arg12);
                     reply.writeNoException();
@@ -263,7 +267,8 @@ public interface IPresenceListener extends IInterface {
             }
 
             @Override // com.android.ims.internal.uce.presence.IPresenceListener
-            public void publishTriggering(PresPublishTriggerType publishTrigger) throws RemoteException {
+            public void publishTriggering(PresPublishTriggerType publishTrigger)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -308,7 +313,8 @@ public interface IPresenceListener extends IInterface {
             }
 
             @Override // com.android.ims.internal.uce.presence.IPresenceListener
-            public void capInfoReceived(String presentityURI, PresTupleInfo[] tupleInfo) throws RemoteException {
+            public void capInfoReceived(String presentityURI, PresTupleInfo[] tupleInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -324,7 +330,8 @@ public interface IPresenceListener extends IInterface {
             }
 
             @Override // com.android.ims.internal.uce.presence.IPresenceListener
-            public void listCapInfoReceived(PresRlmiInfo rlmiInfo, PresResInfo[] resInfo) throws RemoteException {
+            public void listCapInfoReceived(PresRlmiInfo rlmiInfo, PresResInfo[] resInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

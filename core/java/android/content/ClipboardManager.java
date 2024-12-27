@@ -1,26 +1,29 @@
 package android.content;
 
 import android.annotation.SystemApi;
-import android.content.ClipboardManager;
-import android.content.IClipboard;
-import android.content.IOnPrimaryClipChangedListener;
 import android.os.Handler;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public class ClipboardManager extends android.text.ClipboardManager {
-    public static final String DEVICE_CONFIG_ALLOW_VIRTUALDEVICE_SILOS = "allow_virtualdevice_silos";
+    public static final String DEVICE_CONFIG_ALLOW_VIRTUALDEVICE_SILOS =
+            "allow_virtualdevice_silos";
     public static final boolean DEVICE_CONFIG_DEFAULT_ALLOW_VIRTUALDEVICE_SILOS = true;
     public static final boolean DEVICE_CONFIG_DEFAULT_SHOW_ACCESS_NOTIFICATIONS = true;
-    public static final String DEVICE_CONFIG_SHOW_ACCESS_NOTIFICATIONS = "show_access_notifications";
+    public static final String DEVICE_CONFIG_SHOW_ACCESS_NOTIFICATIONS =
+            "show_access_notifications";
     private final Context mContext;
     private final Handler mHandler;
-    private final ArrayList<OnPrimaryClipChangedListener> mPrimaryClipChangedListeners = new ArrayList<>();
-    private final IOnPrimaryClipChangedListener.Stub mPrimaryClipChangedServiceListener = new AnonymousClass1();
-    private final IClipboard mService = IClipboard.Stub.asInterface(ServiceManager.getServiceOrThrow("clipboard"));
+    private final ArrayList<OnPrimaryClipChangedListener> mPrimaryClipChangedListeners =
+            new ArrayList<>();
+    private final IOnPrimaryClipChangedListener.Stub mPrimaryClipChangedServiceListener =
+            new AnonymousClass1();
+    private final IClipboard mService =
+            IClipboard.Stub.asInterface(ServiceManager.getServiceOrThrow("clipboard"));
 
     public interface OnPrimaryClipChangedListener {
         void onPrimaryClipChanged();
@@ -28,17 +31,19 @@ public class ClipboardManager extends android.text.ClipboardManager {
 
     /* renamed from: android.content.ClipboardManager$1, reason: invalid class name */
     class AnonymousClass1 extends IOnPrimaryClipChangedListener.Stub {
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         @Override // android.content.IOnPrimaryClipChangedListener
         public void dispatchPrimaryClipChanged() {
-            ClipboardManager.this.mHandler.post(new Runnable() { // from class: android.content.ClipboardManager$1$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ClipboardManager.AnonymousClass1.this.lambda$dispatchPrimaryClipChanged$0();
-                }
-            });
+            ClipboardManager.this.mHandler.post(
+                    new Runnable() { // from class:
+                        // android.content.ClipboardManager$1$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ClipboardManager.AnonymousClass1.this
+                                    .lambda$dispatchPrimaryClipChanged$0();
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -47,7 +52,8 @@ public class ClipboardManager extends android.text.ClipboardManager {
         }
     }
 
-    public ClipboardManager(Context context, Handler handler) throws ServiceManager.ServiceNotFoundException {
+    public ClipboardManager(Context context, Handler handler)
+            throws ServiceManager.ServiceNotFoundException {
         this.mContext = context;
         this.mHandler = handler;
     }
@@ -55,7 +61,8 @@ public class ClipboardManager extends android.text.ClipboardManager {
     @SystemApi
     public boolean areClipboardAccessNotificationsEnabled() {
         try {
-            return this.mService.areClipboardAccessNotificationsEnabledForUser(this.mContext.getUserId());
+            return this.mService.areClipboardAccessNotificationsEnabledForUser(
+                    this.mContext.getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -64,7 +71,8 @@ public class ClipboardManager extends android.text.ClipboardManager {
     @SystemApi
     public void setClipboardAccessNotificationsEnabled(boolean enable) {
         try {
-            this.mService.setClipboardAccessNotificationsEnabledForUser(enable, this.mContext.getUserId());
+            this.mService.setClipboardAccessNotificationsEnabledForUser(
+                    enable, this.mContext.getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -74,7 +82,12 @@ public class ClipboardManager extends android.text.ClipboardManager {
         try {
             Objects.requireNonNull(clip);
             clip.prepareToLeaveProcess(true);
-            this.mService.setPrimaryClip(clip, this.mContext.getOpPackageName(), this.mContext.getAttributionTag(), this.mContext.getUserId(), this.mContext.getDeviceId());
+            this.mService.setPrimaryClip(
+                    clip,
+                    this.mContext.getOpPackageName(),
+                    this.mContext.getAttributionTag(),
+                    this.mContext.getUserId(),
+                    this.mContext.getDeviceId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -86,7 +99,13 @@ public class ClipboardManager extends android.text.ClipboardManager {
             Objects.requireNonNull(clip);
             Objects.requireNonNull(sourcePackage);
             clip.prepareToLeaveProcess(true);
-            this.mService.setPrimaryClipAsPackage(clip, this.mContext.getOpPackageName(), this.mContext.getAttributionTag(), this.mContext.getUserId(), this.mContext.getDeviceId(), sourcePackage);
+            this.mService.setPrimaryClipAsPackage(
+                    clip,
+                    this.mContext.getOpPackageName(),
+                    this.mContext.getAttributionTag(),
+                    this.mContext.getUserId(),
+                    this.mContext.getDeviceId(),
+                    sourcePackage);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -94,7 +113,11 @@ public class ClipboardManager extends android.text.ClipboardManager {
 
     public void clearPrimaryClip() {
         try {
-            this.mService.clearPrimaryClip(this.mContext.getOpPackageName(), this.mContext.getAttributionTag(), this.mContext.getUserId(), this.mContext.getDeviceId());
+            this.mService.clearPrimaryClip(
+                    this.mContext.getOpPackageName(),
+                    this.mContext.getAttributionTag(),
+                    this.mContext.getUserId(),
+                    this.mContext.getDeviceId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -102,7 +125,11 @@ public class ClipboardManager extends android.text.ClipboardManager {
 
     public ClipData getPrimaryClip() {
         try {
-            return this.mService.getPrimaryClip(this.mContext.getOpPackageName(), this.mContext.getAttributionTag(), this.mContext.getUserId(), this.mContext.getDeviceId());
+            return this.mService.getPrimaryClip(
+                    this.mContext.getOpPackageName(),
+                    this.mContext.getAttributionTag(),
+                    this.mContext.getUserId(),
+                    this.mContext.getDeviceId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -110,7 +137,11 @@ public class ClipboardManager extends android.text.ClipboardManager {
 
     public ClipDescription getPrimaryClipDescription() {
         try {
-            return this.mService.getPrimaryClipDescription(this.mContext.getOpPackageName(), this.mContext.getAttributionTag(), this.mContext.getUserId(), this.mContext.getDeviceId());
+            return this.mService.getPrimaryClipDescription(
+                    this.mContext.getOpPackageName(),
+                    this.mContext.getAttributionTag(),
+                    this.mContext.getUserId(),
+                    this.mContext.getDeviceId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -118,7 +149,11 @@ public class ClipboardManager extends android.text.ClipboardManager {
 
     public boolean hasPrimaryClip() {
         try {
-            return this.mService.hasPrimaryClip(this.mContext.getOpPackageName(), this.mContext.getAttributionTag(), this.mContext.getUserId(), this.mContext.getDeviceId());
+            return this.mService.hasPrimaryClip(
+                    this.mContext.getOpPackageName(),
+                    this.mContext.getAttributionTag(),
+                    this.mContext.getUserId(),
+                    this.mContext.getDeviceId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -128,7 +163,12 @@ public class ClipboardManager extends android.text.ClipboardManager {
         synchronized (this.mPrimaryClipChangedListeners) {
             if (this.mPrimaryClipChangedListeners.isEmpty()) {
                 try {
-                    this.mService.addPrimaryClipChangedListener(this.mPrimaryClipChangedServiceListener, this.mContext.getOpPackageName(), this.mContext.getAttributionTag(), this.mContext.getUserId(), this.mContext.getDeviceId());
+                    this.mService.addPrimaryClipChangedListener(
+                            this.mPrimaryClipChangedServiceListener,
+                            this.mContext.getOpPackageName(),
+                            this.mContext.getAttributionTag(),
+                            this.mContext.getUserId(),
+                            this.mContext.getDeviceId());
                 } catch (RemoteException e) {
                     throw e.rethrowFromSystemServer();
                 }
@@ -142,7 +182,12 @@ public class ClipboardManager extends android.text.ClipboardManager {
             this.mPrimaryClipChangedListeners.remove(what);
             if (this.mPrimaryClipChangedListeners.isEmpty()) {
                 try {
-                    this.mService.removePrimaryClipChangedListener(this.mPrimaryClipChangedServiceListener, this.mContext.getOpPackageName(), this.mContext.getAttributionTag(), this.mContext.getUserId(), this.mContext.getDeviceId());
+                    this.mService.removePrimaryClipChangedListener(
+                            this.mPrimaryClipChangedServiceListener,
+                            this.mContext.getOpPackageName(),
+                            this.mContext.getAttributionTag(),
+                            this.mContext.getUserId(),
+                            this.mContext.getDeviceId());
                 } catch (RemoteException e) {
                     throw e.rethrowFromSystemServer();
                 }
@@ -170,7 +215,11 @@ public class ClipboardManager extends android.text.ClipboardManager {
     @Deprecated
     public boolean hasText() {
         try {
-            return this.mService.hasClipboardText(this.mContext.getOpPackageName(), this.mContext.getAttributionTag(), this.mContext.getUserId(), this.mContext.getDeviceId());
+            return this.mService.hasClipboardText(
+                    this.mContext.getOpPackageName(),
+                    this.mContext.getAttributionTag(),
+                    this.mContext.getUserId(),
+                    this.mContext.getDeviceId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -178,7 +227,11 @@ public class ClipboardManager extends android.text.ClipboardManager {
 
     public String getPrimaryClipSource() {
         try {
-            return this.mService.getPrimaryClipSource(this.mContext.getOpPackageName(), this.mContext.getAttributionTag(), this.mContext.getUserId(), this.mContext.getDeviceId());
+            return this.mService.getPrimaryClipSource(
+                    this.mContext.getOpPackageName(),
+                    this.mContext.getAttributionTag(),
+                    this.mContext.getUserId(),
+                    this.mContext.getDeviceId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }

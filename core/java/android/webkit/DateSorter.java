@@ -3,9 +3,12 @@ package android.webkit;
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.PluralsMessageFormatter;
+
 import com.android.icu.text.DateSorterBridge;
 import com.android.internal.R;
+
 import com.samsung.android.knox.analytics.database.Contract;
+
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
@@ -32,12 +35,14 @@ public class DateSorter {
         c.add(2, -1);
         this.mBins[3] = c.getTimeInMillis();
         Locale locale = resources.getConfiguration().locale;
-        DateSorterBridge dateSorterBridge = DateSorterBridge.createInstance(locale == null ? Locale.getDefault() : locale);
+        DateSorterBridge dateSorterBridge =
+                DateSorterBridge.createInstance(locale == null ? Locale.getDefault() : locale);
         this.mLabels[0] = dateSorterBridge.getToday();
         this.mLabels[1] = dateSorterBridge.getYesterday();
         Map<String, Object> arguments = new HashMap<>();
         arguments.put(Contract.Events.Projection.COUNT_ONLY, 7);
-        this.mLabels[2] = PluralsMessageFormatter.format(resources, arguments, R.string.last_num_days);
+        this.mLabels[2] =
+                PluralsMessageFormatter.format(resources, arguments, R.string.last_num_days);
         this.mLabels[3] = context.getString(R.string.last_month);
         this.mLabels[4] = context.getString(R.string.older);
     }

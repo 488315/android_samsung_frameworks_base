@@ -5,6 +5,7 @@ import android.content.om.SamsungThemeUtils;
 import android.content.res.loader.ResourcesLoader;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.text.TextUtils;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -23,11 +24,37 @@ public final class ResourcesKey {
     public final String mResDir;
     public final String[] mSplitResDirs;
 
-    public ResourcesKey(String resDir, String[] splitResDirs, String[] overlayPaths, String[] libDirs, int overrideDisplayId, Configuration overrideConfig, CompatibilityInfo compatInfo, ResourcesLoader[] loader) {
-        this(resDir, splitResDirs, overlayPaths, libDirs, overrideDisplayId, overrideConfig, compatInfo, loader, 0);
+    public ResourcesKey(
+            String resDir,
+            String[] splitResDirs,
+            String[] overlayPaths,
+            String[] libDirs,
+            int overrideDisplayId,
+            Configuration overrideConfig,
+            CompatibilityInfo compatInfo,
+            ResourcesLoader[] loader) {
+        this(
+                resDir,
+                splitResDirs,
+                overlayPaths,
+                libDirs,
+                overrideDisplayId,
+                overrideConfig,
+                compatInfo,
+                loader,
+                0);
     }
 
-    public ResourcesKey(String resDir, String[] splitResDirs, String[] overlayPaths, String[] libDirs, int overrideDisplayId, Configuration overrideConfig, CompatibilityInfo compatInfo, ResourcesLoader[] loader, int originDisplayId) {
+    public ResourcesKey(
+            String resDir,
+            String[] splitResDirs,
+            String[] overlayPaths,
+            String[] libDirs,
+            int overrideDisplayId,
+            Configuration overrideConfig,
+            CompatibilityInfo compatInfo,
+            ResourcesLoader[] loader,
+            int originDisplayId) {
         this.mOriginDisplayId = 0;
         this.mInvalidOverlayPaths = null;
         this.mResDir = resDir;
@@ -45,14 +72,58 @@ public final class ResourcesKey {
         this.mLibDirs = libDirs;
         this.mLoaders = (loader == null || loader.length != 0) ? loader : null;
         this.mDisplayId = overrideDisplayId;
-        this.mOverrideConfiguration = new Configuration(overrideConfig != null ? overrideConfig : Configuration.EMPTY);
-        this.mCompatInfo = compatInfo != null ? compatInfo : CompatibilityInfo.DEFAULT_COMPATIBILITY_INFO;
+        this.mOverrideConfiguration =
+                new Configuration(overrideConfig != null ? overrideConfig : Configuration.EMPTY);
+        this.mCompatInfo =
+                compatInfo != null ? compatInfo : CompatibilityInfo.DEFAULT_COMPATIBILITY_INFO;
         int hash = (17 * 31) + Objects.hashCode(this.mResDir);
-        this.mHash = (((((((((((((((hash * 31) + Arrays.hashCode(this.mSplitResDirs)) * 31) + Arrays.hashCode(this.mOverlayPaths)) * 31) + Arrays.hashCode(this.mLibDirs)) * 31) + Objects.hashCode(Integer.valueOf(this.mDisplayId))) * 31) + Objects.hashCode(this.mOverrideConfiguration)) * 31) + Objects.hashCode(this.mCompatInfo)) * 31) + Arrays.hashCode(this.mLoaders)) * 31) + Objects.hashCode(Integer.valueOf(this.mOriginDisplayId));
+        this.mHash =
+                (((((((((((((((hash * 31) + Arrays.hashCode(this.mSplitResDirs)) * 31)
+                                                                                                                        + Arrays
+                                                                                                                                .hashCode(
+                                                                                                                                        this
+                                                                                                                                                .mOverlayPaths))
+                                                                                                                * 31)
+                                                                                                        + Arrays
+                                                                                                                .hashCode(
+                                                                                                                        this
+                                                                                                                                .mLibDirs))
+                                                                                                * 31)
+                                                                                        + Objects
+                                                                                                .hashCode(
+                                                                                                        Integer
+                                                                                                                .valueOf(
+                                                                                                                        this
+                                                                                                                                .mDisplayId)))
+                                                                                * 31)
+                                                                        + Objects.hashCode(
+                                                                                this
+                                                                                        .mOverrideConfiguration))
+                                                                * 31)
+                                                        + Objects.hashCode(this.mCompatInfo))
+                                                * 31)
+                                        + Arrays.hashCode(this.mLoaders))
+                                * 31)
+                        + Objects.hashCode(Integer.valueOf(this.mOriginDisplayId));
     }
 
-    public ResourcesKey(String resDir, String[] splitResDirs, String[] overlayPaths, String[] libDirs, int displayId, Configuration overrideConfig, CompatibilityInfo compatInfo) {
-        this(resDir, splitResDirs, overlayPaths, libDirs, displayId, overrideConfig, compatInfo, null);
+    public ResourcesKey(
+            String resDir,
+            String[] splitResDirs,
+            String[] overlayPaths,
+            String[] libDirs,
+            int displayId,
+            Configuration overrideConfig,
+            CompatibilityInfo compatInfo) {
+        this(
+                resDir,
+                splitResDirs,
+                overlayPaths,
+                libDirs,
+                displayId,
+                overrideConfig,
+                compatInfo,
+                null);
     }
 
     public boolean hasOverrideConfiguration() {
@@ -60,7 +131,10 @@ public final class ResourcesKey {
     }
 
     public boolean isPathReferenced(String path) {
-        return (this.mResDir != null && this.mResDir.startsWith(path)) || anyStartsWith(this.mSplitResDirs, path) || anyStartsWith(this.mOverlayPaths, path) || anyStartsWith(this.mLibDirs, path);
+        return (this.mResDir != null && this.mResDir.startsWith(path))
+                || anyStartsWith(this.mSplitResDirs, path)
+                || anyStartsWith(this.mOverlayPaths, path)
+                || anyStartsWith(this.mLibDirs, path);
     }
 
     private static boolean anyStartsWith(String[] list, String prefix) {
@@ -83,7 +157,15 @@ public final class ResourcesKey {
             return false;
         }
         ResourcesKey peer = (ResourcesKey) obj;
-        return this.mHash == peer.mHash && Objects.equals(this.mResDir, peer.mResDir) && Arrays.equals(this.mSplitResDirs, peer.mSplitResDirs) && Arrays.equals(this.mOverlayPaths, peer.mOverlayPaths) && Arrays.equals(this.mLibDirs, peer.mLibDirs) && this.mDisplayId == peer.mDisplayId && Objects.equals(this.mOverrideConfiguration, peer.mOverrideConfiguration) && Objects.equals(this.mCompatInfo, peer.mCompatInfo) && Arrays.equals(this.mLoaders, peer.mLoaders);
+        return this.mHash == peer.mHash
+                && Objects.equals(this.mResDir, peer.mResDir)
+                && Arrays.equals(this.mSplitResDirs, peer.mSplitResDirs)
+                && Arrays.equals(this.mOverlayPaths, peer.mOverlayPaths)
+                && Arrays.equals(this.mLibDirs, peer.mLibDirs)
+                && this.mDisplayId == peer.mDisplayId
+                && Objects.equals(this.mOverrideConfiguration, peer.mOverrideConfiguration)
+                && Objects.equals(this.mCompatInfo, peer.mCompatInfo)
+                && Arrays.equals(this.mLoaders, peer.mLoaders);
     }
 
     public String toString() {
@@ -106,7 +188,8 @@ public final class ResourcesKey {
         }
         builder.append(NavigationBarInflaterView.SIZE_MOD_END);
         builder.append(" mDisplayId=").append(this.mDisplayId);
-        builder.append(" mOverrideConfig=").append(Configuration.resourceQualifierString(this.mOverrideConfiguration));
+        builder.append(" mOverrideConfig=")
+                .append(Configuration.resourceQualifierString(this.mOverrideConfiguration));
         builder.append(" mCompatInfo=").append(this.mCompatInfo);
         builder.append(" mLoaders=[");
         if (this.mLoaders != null) {

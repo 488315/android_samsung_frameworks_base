@@ -3,7 +3,6 @@ package com.samsung.android.sepunion;
 import android.content.Context;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import com.samsung.android.sepunion.IUnionManager;
 
 /* loaded from: classes6.dex */
 public class SemCustomDumpManager {
@@ -17,7 +16,9 @@ public class SemCustomDumpManager {
 
     private IUnionManager getService() {
         if (this.mService == null) {
-            this.mService = IUnionManager.Stub.asInterface(ServiceManager.getService(Context.SEP_UNION_SERVICE));
+            this.mService =
+                    IUnionManager.Stub.asInterface(
+                            ServiceManager.getService(Context.SEP_UNION_SERVICE));
             if (this.mService == null) {
                 Log.i(TAG, "IUnionManager is NULL");
             }

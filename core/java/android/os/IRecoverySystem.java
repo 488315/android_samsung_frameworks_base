@@ -3,7 +3,6 @@ package android.os;
 import android.Manifest;
 import android.app.ActivityThread;
 import android.content.IntentSender;
-import android.os.IRecoverySystemProgressListener;
 
 /* loaded from: classes3.dex */
 public interface IRecoverySystem extends IInterface {
@@ -25,7 +24,8 @@ public interface IRecoverySystem extends IInterface {
 
     boolean setupBcb(String str) throws RemoteException;
 
-    boolean uncrypt(String str, IRecoverySystemProgressListener iRecoverySystemProgressListener) throws RemoteException;
+    boolean uncrypt(String str, IRecoverySystemProgressListener iRecoverySystemProgressListener)
+            throws RemoteException;
 
     public static class Default implements IRecoverySystem {
         @Override // android.os.IRecoverySystem
@@ -34,7 +34,8 @@ public interface IRecoverySystem extends IInterface {
         }
 
         @Override // android.os.IRecoverySystem
-        public boolean uncrypt(String packageFile, IRecoverySystemProgressListener listener) throws RemoteException {
+        public boolean uncrypt(String packageFile, IRecoverySystemProgressListener listener)
+                throws RemoteException {
             return false;
         }
 
@@ -49,8 +50,7 @@ public interface IRecoverySystem extends IInterface {
         }
 
         @Override // android.os.IRecoverySystem
-        public void rebootRecoveryWithCommand(String command) throws RemoteException {
-        }
+        public void rebootRecoveryWithCommand(String command) throws RemoteException {}
 
         @Override // android.os.IRecoverySystem
         public boolean requestLskf(String packageName, IntentSender sender) throws RemoteException {
@@ -68,12 +68,14 @@ public interface IRecoverySystem extends IInterface {
         }
 
         @Override // android.os.IRecoverySystem
-        public int rebootWithLskfAssumeSlotSwitch(String packageName, String reason) throws RemoteException {
+        public int rebootWithLskfAssumeSlotSwitch(String packageName, String reason)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.os.IRecoverySystem
-        public int rebootWithLskf(String packageName, String reason, boolean slotSwitch) throws RemoteException {
+        public int rebootWithLskf(String packageName, String reason, boolean slotSwitch)
+                throws RemoteException {
             return 0;
         }
 
@@ -83,7 +85,7 @@ public interface IRecoverySystem extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRecoverySystem {
+    public abstract static class Stub extends Binder implements IRecoverySystem {
         public static final String DESCRIPTOR = "android.os.IRecoverySystem";
         static final int TRANSACTION_allocateSpaceForUpdate = 1;
         static final int TRANSACTION_clearBcb = 4;
@@ -107,7 +109,9 @@ public interface IRecoverySystem extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IRecoverySystem asInterface(IBinder obj) {
@@ -159,7 +163,8 @@ public interface IRecoverySystem extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -177,7 +182,9 @@ public interface IRecoverySystem extends IInterface {
                     return true;
                 case 2:
                     String _arg02 = data.readString();
-                    IRecoverySystemProgressListener _arg1 = IRecoverySystemProgressListener.Stub.asInterface(data.readStrongBinder());
+                    IRecoverySystemProgressListener _arg1 =
+                            IRecoverySystemProgressListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result2 = uncrypt(_arg02, _arg1);
                     reply.writeNoException();
@@ -279,7 +286,8 @@ public interface IRecoverySystem extends IInterface {
             }
 
             @Override // android.os.IRecoverySystem
-            public boolean uncrypt(String packageFile, IRecoverySystemProgressListener listener) throws RemoteException {
+            public boolean uncrypt(String packageFile, IRecoverySystemProgressListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -345,7 +353,8 @@ public interface IRecoverySystem extends IInterface {
             }
 
             @Override // android.os.IRecoverySystem
-            public boolean requestLskf(String packageName, IntentSender sender) throws RemoteException {
+            public boolean requestLskf(String packageName, IntentSender sender)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -397,7 +406,8 @@ public interface IRecoverySystem extends IInterface {
             }
 
             @Override // android.os.IRecoverySystem
-            public int rebootWithLskfAssumeSlotSwitch(String packageName, String reason) throws RemoteException {
+            public int rebootWithLskfAssumeSlotSwitch(String packageName, String reason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -415,7 +425,8 @@ public interface IRecoverySystem extends IInterface {
             }
 
             @Override // android.os.IRecoverySystem
-            public int rebootWithLskf(String packageName, String reason, boolean slotSwitch) throws RemoteException {
+            public int rebootWithLskf(String packageName, String reason, boolean slotSwitch)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -435,11 +446,13 @@ public interface IRecoverySystem extends IInterface {
         }
 
         protected void allocateSpaceForUpdate_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.RECOVERY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.RECOVERY, getCallingPid(), getCallingUid());
         }
 
         protected void rebootWithLskfAssumeSlotSwitch_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.RECOVERY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.RECOVERY, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

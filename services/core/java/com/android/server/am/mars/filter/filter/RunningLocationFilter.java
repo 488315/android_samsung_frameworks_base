@@ -1,10 +1,12 @@
 package com.android.server.am.mars.filter.filter;
 
 import android.content.Context;
+
 import com.android.server.am.FreecessController;
 import com.android.server.am.MARsPolicyManager;
 import com.android.server.am.mars.MARsUtils;
 import com.android.server.am.mars.filter.IFilter;
+
 import java.com.android.server.am.mars.database.MARsListManager;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -22,8 +24,7 @@ public final class RunningLocationFilter implements IFilter {
     }
 
     @Override // com.android.server.am.mars.filter.IFilter
-    public final void deInit() {
-    }
+    public final void deInit() {}
 
     @Override // com.android.server.am.mars.filter.IFilter
     public final int filter(int i, int i2, int i3, String str) {
@@ -32,11 +33,14 @@ public final class RunningLocationFilter implements IFilter {
         MARsPolicyManager mARsPolicyManager = MARsPolicyManager.MARsPolicyManagerHolder.INSTANCE;
         boolean z3 = mARsPolicyManager.getForegroundServiceStartTime(i2) != 0;
         boolean z4 = FreecessController.IS_MINIMIZE_OLAF_LOCK;
-        FreecessController freecessController = FreecessController.FreecessControllerHolder.INSTANCE;
+        FreecessController freecessController =
+                FreecessController.FreecessControllerHolder.INSTANCE;
         Integer valueOf = Integer.valueOf(i2);
         List list = freecessController.mGPSAllowList;
         if (list != null && ((ArrayList) list).contains(valueOf)) {
-            if (z3 && (!MARsUtils.isChinaPolicyEnabled() || ((HashSet) this.mapAppPackages).contains(str))) {
+            if (z3
+                    && (!MARsUtils.isChinaPolicyEnabled()
+                            || ((HashSet) this.mapAppPackages).contains(str))) {
                 return 15;
             }
             if (MARsUtils.isChinaPolicyEnabled() && mARsPolicyManager.isAutoRunOn(i, str)) {
@@ -47,6 +51,5 @@ public final class RunningLocationFilter implements IFilter {
     }
 
     @Override // com.android.server.am.mars.filter.IFilter
-    public final void init(Context context) {
-    }
+    public final void init(Context context) {}
 }

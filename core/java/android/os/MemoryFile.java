@@ -1,6 +1,7 @@
 package android.os;
 
 import android.system.ErrnoException;
+
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,7 +17,8 @@ public class MemoryFile {
 
     private static native int native_get_size(FileDescriptor fileDescriptor) throws IOException;
 
-    private static native boolean native_pin(FileDescriptor fileDescriptor, boolean z) throws IOException;
+    private static native boolean native_pin(FileDescriptor fileDescriptor, boolean z)
+            throws IOException;
 
     public MemoryFile(String name, int length) throws IOException {
         try {
@@ -86,7 +88,8 @@ public class MemoryFile {
         return new MemoryOutputStream();
     }
 
-    public int readBytes(byte[] buffer, int srcOffset, int destOffset, int count) throws IOException {
+    public int readBytes(byte[] buffer, int srcOffset, int destOffset, int count)
+            throws IOException {
         beginAccess();
         try {
             this.mMapping.position(srcOffset);
@@ -97,7 +100,8 @@ public class MemoryFile {
         }
     }
 
-    public void writeBytes(byte[] buffer, int srcOffset, int destOffset, int count) throws IOException {
+    public void writeBytes(byte[] buffer, int srcOffset, int destOffset, int count)
+            throws IOException {
         beginAccess();
         try {
             this.mMapping.position(destOffset);

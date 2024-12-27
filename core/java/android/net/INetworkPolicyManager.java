@@ -2,7 +2,6 @@ package android.net;
 
 import android.Manifest;
 import android.app.ActivityThread;
-import android.net.INetworkPolicyListener;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -10,6 +9,7 @@ import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
 import android.telephony.SubscriptionPlan;
+
 import java.util.Map;
 
 /* loaded from: classes3.dex */
@@ -68,9 +68,11 @@ public interface INetworkPolicyManager extends IInterface {
 
     void setRestrictBackground(boolean z) throws RemoteException;
 
-    void setSubscriptionOverride(int i, int i2, int i3, int[] iArr, long j, String str) throws RemoteException;
+    void setSubscriptionOverride(int i, int i2, int i3, int[] iArr, long j, String str)
+            throws RemoteException;
 
-    void setSubscriptionPlans(int i, SubscriptionPlan[] subscriptionPlanArr, long j, String str) throws RemoteException;
+    void setSubscriptionPlans(int i, SubscriptionPlan[] subscriptionPlanArr, long j, String str)
+            throws RemoteException;
 
     void setUidPolicy(int i, int i2) throws RemoteException;
 
@@ -82,16 +84,13 @@ public interface INetworkPolicyManager extends IInterface {
 
     public static class Default implements INetworkPolicyManager {
         @Override // android.net.INetworkPolicyManager
-        public void setUidPolicy(int uid, int policy) throws RemoteException {
-        }
+        public void setUidPolicy(int uid, int policy) throws RemoteException {}
 
         @Override // android.net.INetworkPolicyManager
-        public void addUidPolicy(int uid, int policy) throws RemoteException {
-        }
+        public void addUidPolicy(int uid, int policy) throws RemoteException {}
 
         @Override // android.net.INetworkPolicyManager
-        public void removeUidPolicy(int uid, int policy) throws RemoteException {
-        }
+        public void removeUidPolicy(int uid, int policy) throws RemoteException {}
 
         @Override // android.net.INetworkPolicyManager
         public int getUidPolicy(int uid) throws RemoteException {
@@ -104,16 +103,13 @@ public interface INetworkPolicyManager extends IInterface {
         }
 
         @Override // android.net.INetworkPolicyManager
-        public void registerListener(INetworkPolicyListener listener) throws RemoteException {
-        }
+        public void registerListener(INetworkPolicyListener listener) throws RemoteException {}
 
         @Override // android.net.INetworkPolicyManager
-        public void unregisterListener(INetworkPolicyListener listener) throws RemoteException {
-        }
+        public void unregisterListener(INetworkPolicyListener listener) throws RemoteException {}
 
         @Override // android.net.INetworkPolicyManager
-        public void setNetworkPolicies(NetworkPolicy[] policies) throws RemoteException {
-        }
+        public void setNetworkPolicies(NetworkPolicy[] policies) throws RemoteException {}
 
         @Override // android.net.INetworkPolicyManager
         public NetworkPolicy[] getNetworkPolicies(String callingPackage) throws RemoteException {
@@ -121,12 +117,10 @@ public interface INetworkPolicyManager extends IInterface {
         }
 
         @Override // android.net.INetworkPolicyManager
-        public void snoozeLimit(NetworkTemplate template) throws RemoteException {
-        }
+        public void snoozeLimit(NetworkTemplate template) throws RemoteException {}
 
         @Override // android.net.INetworkPolicyManager
-        public void setRestrictBackground(boolean restrictBackground) throws RemoteException {
-        }
+        public void setRestrictBackground(boolean restrictBackground) throws RemoteException {}
 
         @Override // android.net.INetworkPolicyManager
         public boolean getRestrictBackground() throws RemoteException {
@@ -144,12 +138,11 @@ public interface INetworkPolicyManager extends IInterface {
         }
 
         @Override // android.net.INetworkPolicyManager
-        public void setDeviceIdleMode(boolean enabled) throws RemoteException {
-        }
+        public void setDeviceIdleMode(boolean enabled) throws RemoteException {}
 
         @Override // android.net.INetworkPolicyManager
-        public void setWifiMeteredOverride(String networkId, int meteredOverride) throws RemoteException {
-        }
+        public void setWifiMeteredOverride(String networkId, int meteredOverride)
+                throws RemoteException {}
 
         @Override // android.net.INetworkPolicyManager
         public int getMultipathPreference(Network network) throws RemoteException {
@@ -157,22 +150,27 @@ public interface INetworkPolicyManager extends IInterface {
         }
 
         @Override // android.net.INetworkPolicyManager
-        public SubscriptionPlan getSubscriptionPlan(NetworkTemplate template) throws RemoteException {
+        public SubscriptionPlan getSubscriptionPlan(NetworkTemplate template)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.net.INetworkPolicyManager
-        public void notifyStatsProviderWarningOrLimitReached() throws RemoteException {
-        }
+        public void notifyStatsProviderWarningOrLimitReached() throws RemoteException {}
 
         @Override // android.net.INetworkPolicyManager
-        public SubscriptionPlan[] getSubscriptionPlans(int subId, String callingPackage) throws RemoteException {
+        public SubscriptionPlan[] getSubscriptionPlans(int subId, String callingPackage)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.net.INetworkPolicyManager
-        public void setSubscriptionPlans(int subId, SubscriptionPlan[] plans, long expirationDurationMillis, String callingPackage) throws RemoteException {
-        }
+        public void setSubscriptionPlans(
+                int subId,
+                SubscriptionPlan[] plans,
+                long expirationDurationMillis,
+                String callingPackage)
+                throws RemoteException {}
 
         @Override // android.net.INetworkPolicyManager
         public String getSubscriptionPlansOwner(int subId) throws RemoteException {
@@ -180,15 +178,21 @@ public interface INetworkPolicyManager extends IInterface {
         }
 
         @Override // android.net.INetworkPolicyManager
-        public void setSubscriptionOverride(int subId, int overrideMask, int overrideValue, int[] networkTypes, long expirationDurationMillis, String callingPackage) throws RemoteException {
-        }
+        public void setSubscriptionOverride(
+                int subId,
+                int overrideMask,
+                int overrideValue,
+                int[] networkTypes,
+                long expirationDurationMillis,
+                String callingPackage)
+                throws RemoteException {}
 
         @Override // android.net.INetworkPolicyManager
-        public void factoryReset(String subscriber) throws RemoteException {
-        }
+        public void factoryReset(String subscriber) throws RemoteException {}
 
         @Override // android.net.INetworkPolicyManager
-        public boolean isUidNetworkingBlocked(int uid, boolean meteredNetwork) throws RemoteException {
+        public boolean isUidNetworkingBlocked(int uid, boolean meteredNetwork)
+                throws RemoteException {
             return false;
         }
 
@@ -203,20 +207,16 @@ public interface INetworkPolicyManager extends IInterface {
         }
 
         @Override // android.net.INetworkPolicyManager
-        public void setFirewallRuleMobileData(int uid, boolean allow) throws RemoteException {
-        }
+        public void setFirewallRuleMobileData(int uid, boolean allow) throws RemoteException {}
 
         @Override // android.net.INetworkPolicyManager
-        public void setFirewallRuleWifi(int uid, boolean allow) throws RemoteException {
-        }
+        public void setFirewallRuleWifi(int uid, boolean allow) throws RemoteException {}
 
         @Override // android.net.INetworkPolicyManager
-        public void setFirewallRuleMobileDataMap(Map uidAllowedMap) throws RemoteException {
-        }
+        public void setFirewallRuleMobileDataMap(Map uidAllowedMap) throws RemoteException {}
 
         @Override // android.net.INetworkPolicyManager
-        public void setFirewallRuleWifiMap(Map uidAllowedMap) throws RemoteException {
-        }
+        public void setFirewallRuleWifiMap(Map uidAllowedMap) throws RemoteException {}
 
         @Override // android.net.INetworkPolicyManager
         public boolean getFirewallRuleMobileData(int uid) throws RemoteException {
@@ -234,7 +234,7 @@ public interface INetworkPolicyManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements INetworkPolicyManager {
+    public abstract static class Stub extends Binder implements INetworkPolicyManager {
         public static final String DESCRIPTOR = "android.net.INetworkPolicyManager";
         static final int TRANSACTION_addUidPolicy = 2;
         static final int TRANSACTION_factoryReset = 24;
@@ -281,7 +281,9 @@ public interface INetworkPolicyManager extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static INetworkPolicyManager asInterface(IBinder obj) {
@@ -379,7 +381,8 @@ public interface INetworkPolicyManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -424,19 +427,22 @@ public interface INetworkPolicyManager extends IInterface {
                     reply.writeIntArray(_result2);
                     return true;
                 case 6:
-                    INetworkPolicyListener _arg06 = INetworkPolicyListener.Stub.asInterface(data.readStrongBinder());
+                    INetworkPolicyListener _arg06 =
+                            INetworkPolicyListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerListener(_arg06);
                     reply.writeNoException();
                     return true;
                 case 7:
-                    INetworkPolicyListener _arg07 = INetworkPolicyListener.Stub.asInterface(data.readStrongBinder());
+                    INetworkPolicyListener _arg07 =
+                            INetworkPolicyListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterListener(_arg07);
                     reply.writeNoException();
                     return true;
                 case 8:
-                    NetworkPolicy[] _arg08 = (NetworkPolicy[]) data.createTypedArray(NetworkPolicy.CREATOR);
+                    NetworkPolicy[] _arg08 =
+                            (NetworkPolicy[]) data.createTypedArray(NetworkPolicy.CREATOR);
                     data.enforceNoDataAvail();
                     setNetworkPolicies(_arg08);
                     reply.writeNoException();
@@ -449,7 +455,8 @@ public interface INetworkPolicyManager extends IInterface {
                     reply.writeTypedArray(_result3, 1);
                     return true;
                 case 10:
-                    NetworkTemplate _arg010 = (NetworkTemplate) data.readTypedObject(NetworkTemplate.CREATOR);
+                    NetworkTemplate _arg010 =
+                            (NetworkTemplate) data.readTypedObject(NetworkTemplate.CREATOR);
                     data.enforceNoDataAvail();
                     snoozeLimit(_arg010);
                     reply.writeNoException();
@@ -498,7 +505,8 @@ public interface INetworkPolicyManager extends IInterface {
                     reply.writeInt(_result7);
                     return true;
                 case 18:
-                    NetworkTemplate _arg016 = (NetworkTemplate) data.readTypedObject(NetworkTemplate.CREATOR);
+                    NetworkTemplate _arg016 =
+                            (NetworkTemplate) data.readTypedObject(NetworkTemplate.CREATOR);
                     data.enforceNoDataAvail();
                     SubscriptionPlan _result8 = getSubscriptionPlan(_arg016);
                     reply.writeNoException();
@@ -518,7 +526,8 @@ public interface INetworkPolicyManager extends IInterface {
                     return true;
                 case 21:
                     int _arg018 = data.readInt();
-                    SubscriptionPlan[] _arg16 = (SubscriptionPlan[]) data.createTypedArray(SubscriptionPlan.CREATOR);
+                    SubscriptionPlan[] _arg16 =
+                            (SubscriptionPlan[]) data.createTypedArray(SubscriptionPlan.CREATOR);
                     long _arg2 = data.readLong();
                     String _arg3 = data.readString();
                     data.enforceNoDataAvail();
@@ -760,7 +769,8 @@ public interface INetworkPolicyManager extends IInterface {
             }
 
             @Override // android.net.INetworkPolicyManager
-            public NetworkPolicy[] getNetworkPolicies(String callingPackage) throws RemoteException {
+            public NetworkPolicy[] getNetworkPolicies(String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -768,7 +778,8 @@ public interface INetworkPolicyManager extends IInterface {
                     _data.writeString(callingPackage);
                     this.mRemote.transact(9, _data, _reply, 0);
                     _reply.readException();
-                    NetworkPolicy[] _result = (NetworkPolicy[]) _reply.createTypedArray(NetworkPolicy.CREATOR);
+                    NetworkPolicy[] _result =
+                            (NetworkPolicy[]) _reply.createTypedArray(NetworkPolicy.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -871,7 +882,8 @@ public interface INetworkPolicyManager extends IInterface {
             }
 
             @Override // android.net.INetworkPolicyManager
-            public void setWifiMeteredOverride(String networkId, int meteredOverride) throws RemoteException {
+            public void setWifiMeteredOverride(String networkId, int meteredOverride)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -904,7 +916,8 @@ public interface INetworkPolicyManager extends IInterface {
             }
 
             @Override // android.net.INetworkPolicyManager
-            public SubscriptionPlan getSubscriptionPlan(NetworkTemplate template) throws RemoteException {
+            public SubscriptionPlan getSubscriptionPlan(NetworkTemplate template)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -912,7 +925,8 @@ public interface INetworkPolicyManager extends IInterface {
                     _data.writeTypedObject(template, 0);
                     this.mRemote.transact(18, _data, _reply, 0);
                     _reply.readException();
-                    SubscriptionPlan _result = (SubscriptionPlan) _reply.readTypedObject(SubscriptionPlan.CREATOR);
+                    SubscriptionPlan _result =
+                            (SubscriptionPlan) _reply.readTypedObject(SubscriptionPlan.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -935,7 +949,8 @@ public interface INetworkPolicyManager extends IInterface {
             }
 
             @Override // android.net.INetworkPolicyManager
-            public SubscriptionPlan[] getSubscriptionPlans(int subId, String callingPackage) throws RemoteException {
+            public SubscriptionPlan[] getSubscriptionPlans(int subId, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -944,7 +959,8 @@ public interface INetworkPolicyManager extends IInterface {
                     _data.writeString(callingPackage);
                     this.mRemote.transact(20, _data, _reply, 0);
                     _reply.readException();
-                    SubscriptionPlan[] _result = (SubscriptionPlan[]) _reply.createTypedArray(SubscriptionPlan.CREATOR);
+                    SubscriptionPlan[] _result =
+                            (SubscriptionPlan[]) _reply.createTypedArray(SubscriptionPlan.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -953,7 +969,12 @@ public interface INetworkPolicyManager extends IInterface {
             }
 
             @Override // android.net.INetworkPolicyManager
-            public void setSubscriptionPlans(int subId, SubscriptionPlan[] plans, long expirationDurationMillis, String callingPackage) throws RemoteException {
+            public void setSubscriptionPlans(
+                    int subId,
+                    SubscriptionPlan[] plans,
+                    long expirationDurationMillis,
+                    String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -988,7 +1009,14 @@ public interface INetworkPolicyManager extends IInterface {
             }
 
             @Override // android.net.INetworkPolicyManager
-            public void setSubscriptionOverride(int subId, int overrideMask, int overrideValue, int[] networkTypes, long expirationDurationMillis, String callingPackage) throws RemoteException {
+            public void setSubscriptionOverride(
+                    int subId,
+                    int overrideMask,
+                    int overrideValue,
+                    int[] networkTypes,
+                    long expirationDurationMillis,
+                    String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1023,7 +1051,8 @@ public interface INetworkPolicyManager extends IInterface {
             }
 
             @Override // android.net.INetworkPolicyManager
-            public boolean isUidNetworkingBlocked(int uid, boolean meteredNetwork) throws RemoteException {
+            public boolean isUidNetworkingBlocked(int uid, boolean meteredNetwork)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1171,59 +1200,74 @@ public interface INetworkPolicyManager extends IInterface {
         }
 
         protected void setUidPolicy_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_NETWORK_POLICY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_NETWORK_POLICY, getCallingPid(), getCallingUid());
         }
 
         protected void addUidPolicy_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_NETWORK_POLICY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_NETWORK_POLICY, getCallingPid(), getCallingUid());
         }
 
         protected void removeUidPolicy_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_NETWORK_POLICY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_NETWORK_POLICY, getCallingPid(), getCallingUid());
         }
 
         protected void getUidPolicy_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_NETWORK_POLICY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_NETWORK_POLICY, getCallingPid(), getCallingUid());
         }
 
         protected void getUidsWithPolicy_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_NETWORK_POLICY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_NETWORK_POLICY, getCallingPid(), getCallingUid());
         }
 
         protected void setNetworkPolicies_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_NETWORK_POLICY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_NETWORK_POLICY, getCallingPid(), getCallingUid());
         }
 
         protected void getNetworkPolicies_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_NETWORK_POLICY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_NETWORK_POLICY, getCallingPid(), getCallingUid());
         }
 
         protected void snoozeLimit_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_NETWORK_POLICY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_NETWORK_POLICY, getCallingPid(), getCallingUid());
         }
 
         protected void getRestrictBackground_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_NETWORK_POLICY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_NETWORK_POLICY, getCallingPid(), getCallingUid());
         }
 
         protected void getRestrictBackgroundByCaller_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_NETWORK_STATE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_NETWORK_STATE, getCallingPid(), getCallingUid());
         }
 
         protected void setDeviceIdleMode_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_NETWORK_POLICY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_NETWORK_POLICY, getCallingPid(), getCallingUid());
         }
 
         protected void setWifiMeteredOverride_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_NETWORK_POLICY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_NETWORK_POLICY, getCallingPid(), getCallingUid());
         }
 
         protected void factoryReset_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.NETWORK_SETTINGS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.NETWORK_SETTINGS, getCallingPid(), getCallingUid());
         }
 
-        protected void isUidRestrictedOnMeteredNetworks_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.OBSERVE_NETWORK_POLICY, getCallingPid(), getCallingUid());
+        protected void isUidRestrictedOnMeteredNetworks_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.OBSERVE_NETWORK_POLICY, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

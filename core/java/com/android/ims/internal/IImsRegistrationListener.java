@@ -21,7 +21,8 @@ public interface IImsRegistrationListener extends IInterface {
 
     void registrationDisconnected(ImsReasonInfo imsReasonInfo) throws RemoteException;
 
-    void registrationFeatureCapabilityChanged(int i, int[] iArr, int[] iArr2) throws RemoteException;
+    void registrationFeatureCapabilityChanged(int i, int[] iArr, int[] iArr2)
+            throws RemoteException;
 
     @Deprecated
     void registrationProgressing() throws RemoteException;
@@ -38,52 +39,44 @@ public interface IImsRegistrationListener extends IInterface {
 
     public static class Default implements IImsRegistrationListener {
         @Override // com.android.ims.internal.IImsRegistrationListener
-        public void registrationConnected() throws RemoteException {
-        }
+        public void registrationConnected() throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsRegistrationListener
-        public void registrationProgressing() throws RemoteException {
-        }
+        public void registrationProgressing() throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsRegistrationListener
-        public void registrationConnectedWithRadioTech(int imsRadioTech) throws RemoteException {
-        }
+        public void registrationConnectedWithRadioTech(int imsRadioTech) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsRegistrationListener
-        public void registrationProgressingWithRadioTech(int imsRadioTech) throws RemoteException {
-        }
+        public void registrationProgressingWithRadioTech(int imsRadioTech) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsRegistrationListener
-        public void registrationDisconnected(ImsReasonInfo imsReasonInfo) throws RemoteException {
-        }
+        public void registrationDisconnected(ImsReasonInfo imsReasonInfo) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsRegistrationListener
-        public void registrationResumed() throws RemoteException {
-        }
+        public void registrationResumed() throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsRegistrationListener
-        public void registrationSuspended() throws RemoteException {
-        }
+        public void registrationSuspended() throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsRegistrationListener
-        public void registrationServiceCapabilityChanged(int serviceClass, int event) throws RemoteException {
-        }
+        public void registrationServiceCapabilityChanged(int serviceClass, int event)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsRegistrationListener
-        public void registrationFeatureCapabilityChanged(int serviceClass, int[] enabledFeatures, int[] disabledFeatures) throws RemoteException {
-        }
+        public void registrationFeatureCapabilityChanged(
+                int serviceClass, int[] enabledFeatures, int[] disabledFeatures)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsRegistrationListener
-        public void voiceMessageCountUpdate(int count) throws RemoteException {
-        }
+        public void voiceMessageCountUpdate(int count) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsRegistrationListener
-        public void registrationAssociatedUriChanged(Uri[] uris) throws RemoteException {
-        }
+        public void registrationAssociatedUriChanged(Uri[] uris) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsRegistrationListener
-        public void registrationChangeFailed(int targetAccessTech, ImsReasonInfo imsReasonInfo) throws RemoteException {
-        }
+        public void registrationChangeFailed(int targetAccessTech, ImsReasonInfo imsReasonInfo)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -91,7 +84,7 @@ public interface IImsRegistrationListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImsRegistrationListener {
+    public abstract static class Stub extends Binder implements IImsRegistrationListener {
         public static final String DESCRIPTOR = "com.android.ims.internal.IImsRegistrationListener";
         static final int TRANSACTION_registrationAssociatedUriChanged = 11;
         static final int TRANSACTION_registrationChangeFailed = 12;
@@ -163,7 +156,8 @@ public interface IImsRegistrationListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -189,7 +183,8 @@ public interface IImsRegistrationListener extends IInterface {
                     registrationProgressingWithRadioTech(_arg02);
                     return true;
                 case 5:
-                    ImsReasonInfo _arg03 = (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
+                    ImsReasonInfo _arg03 =
+                            (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
                     data.enforceNoDataAvail();
                     registrationDisconnected(_arg03);
                     return true;
@@ -224,7 +219,8 @@ public interface IImsRegistrationListener extends IInterface {
                     return true;
                 case 12:
                     int _arg08 = data.readInt();
-                    ImsReasonInfo _arg13 = (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
+                    ImsReasonInfo _arg13 =
+                            (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
                     data.enforceNoDataAvail();
                     registrationChangeFailed(_arg08, _arg13);
                     return true;
@@ -272,7 +268,8 @@ public interface IImsRegistrationListener extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsRegistrationListener
-            public void registrationConnectedWithRadioTech(int imsRadioTech) throws RemoteException {
+            public void registrationConnectedWithRadioTech(int imsRadioTech)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -284,7 +281,8 @@ public interface IImsRegistrationListener extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsRegistrationListener
-            public void registrationProgressingWithRadioTech(int imsRadioTech) throws RemoteException {
+            public void registrationProgressingWithRadioTech(int imsRadioTech)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -296,7 +294,8 @@ public interface IImsRegistrationListener extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsRegistrationListener
-            public void registrationDisconnected(ImsReasonInfo imsReasonInfo) throws RemoteException {
+            public void registrationDisconnected(ImsReasonInfo imsReasonInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -330,7 +329,8 @@ public interface IImsRegistrationListener extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsRegistrationListener
-            public void registrationServiceCapabilityChanged(int serviceClass, int event) throws RemoteException {
+            public void registrationServiceCapabilityChanged(int serviceClass, int event)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -343,7 +343,9 @@ public interface IImsRegistrationListener extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsRegistrationListener
-            public void registrationFeatureCapabilityChanged(int serviceClass, int[] enabledFeatures, int[] disabledFeatures) throws RemoteException {
+            public void registrationFeatureCapabilityChanged(
+                    int serviceClass, int[] enabledFeatures, int[] disabledFeatures)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -381,7 +383,8 @@ public interface IImsRegistrationListener extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsRegistrationListener
-            public void registrationChangeFailed(int targetAccessTech, ImsReasonInfo imsReasonInfo) throws RemoteException {
+            public void registrationChangeFailed(int targetAccessTech, ImsReasonInfo imsReasonInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

@@ -3,29 +3,35 @@ package android.app.time;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class TimeZoneCapabilitiesAndConfig implements Parcelable {
-    public static final Parcelable.Creator<TimeZoneCapabilitiesAndConfig> CREATOR = new Parcelable.Creator<TimeZoneCapabilitiesAndConfig>() { // from class: android.app.time.TimeZoneCapabilitiesAndConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TimeZoneCapabilitiesAndConfig createFromParcel(Parcel in) {
-            return TimeZoneCapabilitiesAndConfig.createFromParcel(in);
-        }
+    public static final Parcelable.Creator<TimeZoneCapabilitiesAndConfig> CREATOR =
+            new Parcelable.Creator<TimeZoneCapabilitiesAndConfig>() { // from class:
+                // android.app.time.TimeZoneCapabilitiesAndConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TimeZoneCapabilitiesAndConfig createFromParcel(Parcel in) {
+                    return TimeZoneCapabilitiesAndConfig.createFromParcel(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TimeZoneCapabilitiesAndConfig[] newArray(int size) {
-            return new TimeZoneCapabilitiesAndConfig[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TimeZoneCapabilitiesAndConfig[] newArray(int size) {
+                    return new TimeZoneCapabilitiesAndConfig[size];
+                }
+            };
     private final TimeZoneCapabilities mCapabilities;
     private final TimeZoneConfiguration mConfiguration;
     private final TimeZoneDetectorStatus mDetectorStatus;
 
-    public TimeZoneCapabilitiesAndConfig(TimeZoneDetectorStatus detectorStatus, TimeZoneCapabilities capabilities, TimeZoneConfiguration configuration) {
+    public TimeZoneCapabilitiesAndConfig(
+            TimeZoneDetectorStatus detectorStatus,
+            TimeZoneCapabilities capabilities,
+            TimeZoneConfiguration configuration) {
         this.mDetectorStatus = (TimeZoneDetectorStatus) Objects.requireNonNull(detectorStatus);
         this.mCapabilities = (TimeZoneCapabilities) Objects.requireNonNull(capabilities);
         this.mConfiguration = (TimeZoneConfiguration) Objects.requireNonNull(configuration);
@@ -33,9 +39,12 @@ public final class TimeZoneCapabilitiesAndConfig implements Parcelable {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static TimeZoneCapabilitiesAndConfig createFromParcel(Parcel in) {
-        TimeZoneDetectorStatus detectorStatus = (TimeZoneDetectorStatus) in.readParcelable(null, TimeZoneDetectorStatus.class);
-        TimeZoneCapabilities capabilities = (TimeZoneCapabilities) in.readParcelable(null, TimeZoneCapabilities.class);
-        TimeZoneConfiguration configuration = (TimeZoneConfiguration) in.readParcelable(null, TimeZoneConfiguration.class);
+        TimeZoneDetectorStatus detectorStatus =
+                (TimeZoneDetectorStatus) in.readParcelable(null, TimeZoneDetectorStatus.class);
+        TimeZoneCapabilities capabilities =
+                (TimeZoneCapabilities) in.readParcelable(null, TimeZoneCapabilities.class);
+        TimeZoneConfiguration configuration =
+                (TimeZoneConfiguration) in.readParcelable(null, TimeZoneConfiguration.class);
         return new TimeZoneCapabilitiesAndConfig(detectorStatus, capabilities, configuration);
     }
 
@@ -71,7 +80,9 @@ public final class TimeZoneCapabilitiesAndConfig implements Parcelable {
             return false;
         }
         TimeZoneCapabilitiesAndConfig that = (TimeZoneCapabilitiesAndConfig) o;
-        if (this.mDetectorStatus.equals(that.mDetectorStatus) && this.mCapabilities.equals(that.mCapabilities) && this.mConfiguration.equals(that.mConfiguration)) {
+        if (this.mDetectorStatus.equals(that.mDetectorStatus)
+                && this.mCapabilities.equals(that.mCapabilities)
+                && this.mConfiguration.equals(that.mConfiguration)) {
             return true;
         }
         return false;
@@ -82,6 +93,12 @@ public final class TimeZoneCapabilitiesAndConfig implements Parcelable {
     }
 
     public String toString() {
-        return "TimeZoneCapabilitiesAndConfig{mDetectorStatus=" + this.mDetectorStatus + ", mCapabilities=" + this.mCapabilities + ", mConfiguration=" + this.mConfiguration + '}';
+        return "TimeZoneCapabilitiesAndConfig{mDetectorStatus="
+                + this.mDetectorStatus
+                + ", mCapabilities="
+                + this.mCapabilities
+                + ", mConfiguration="
+                + this.mConfiguration
+                + '}';
     }
 }

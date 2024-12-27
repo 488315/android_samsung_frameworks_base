@@ -19,19 +19,22 @@ public class SemContextStepLevelMonitor extends SemContextEventContext {
     private static final int[] NO_INTS = new int[0];
     private static final double[] NO_DOUBLES = new double[0];
     private static final long[] NO_LONGS = new long[0];
-    public static final Parcelable.Creator<SemContextStepLevelMonitor> CREATOR = new Parcelable.Creator<SemContextStepLevelMonitor>() { // from class: com.samsung.android.hardware.context.SemContextStepLevelMonitor.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextStepLevelMonitor createFromParcel(Parcel in) {
-            return new SemContextStepLevelMonitor(in);
-        }
+    public static final Parcelable.Creator<SemContextStepLevelMonitor> CREATOR =
+            new Parcelable.Creator<
+                    SemContextStepLevelMonitor>() { // from class:
+                                                    // com.samsung.android.hardware.context.SemContextStepLevelMonitor.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextStepLevelMonitor createFromParcel(Parcel in) {
+                    return new SemContextStepLevelMonitor(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextStepLevelMonitor[] newArray(int size) {
-            return new SemContextStepLevelMonitor[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextStepLevelMonitor[] newArray(int size) {
+                    return new SemContextStepLevelMonitor[size];
+                }
+            };
 
     SemContextStepLevelMonitor() {
         this.mContext = new Bundle();

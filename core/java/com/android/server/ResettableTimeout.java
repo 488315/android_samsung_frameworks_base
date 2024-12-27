@@ -14,8 +14,7 @@ abstract class ResettableTimeout {
 
     public abstract void on(boolean z);
 
-    ResettableTimeout() {
-    }
+    ResettableTimeout() {}
 
     public void go(long milliseconds) {
         boolean alreadyOn;
@@ -51,8 +50,7 @@ abstract class ResettableTimeout {
     }
 
     private class T extends Thread {
-        private T() {
-        }
+        private T() {}
 
         @Override // java.lang.Thread, java.lang.Runnable
         public void run() {

@@ -10,9 +10,11 @@ import com.android.internal.org.bouncycastle.crypto.generators.PKCS5S2Parameters
 import com.android.internal.org.bouncycastle.crypto.params.DESParameters;
 import com.android.internal.org.bouncycastle.crypto.params.KeyParameter;
 import com.android.internal.org.bouncycastle.crypto.params.ParametersWithIV;
+
 import java.lang.reflect.Method;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.spec.AlgorithmParameterSpec;
+
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
@@ -38,68 +40,85 @@ public interface PBE {
             if (type == 0 || type == 4) {
                 switch (hash) {
                     case 0:
-                        PBEParametersGenerator generator = new PKCS5S1ParametersGenerator(AndroidDigestFactory.getMD5());
+                        PBEParametersGenerator generator =
+                                new PKCS5S1ParametersGenerator(AndroidDigestFactory.getMD5());
                         return generator;
                     case 1:
-                        PBEParametersGenerator generator2 = new PKCS5S1ParametersGenerator(AndroidDigestFactory.getSHA1());
+                        PBEParametersGenerator generator2 =
+                                new PKCS5S1ParametersGenerator(AndroidDigestFactory.getSHA1());
                         return generator2;
                     default:
-                        throw new IllegalStateException("PKCS5 scheme 1 only supports MD2, MD5 and SHA1.");
+                        throw new IllegalStateException(
+                                "PKCS5 scheme 1 only supports MD2, MD5 and SHA1.");
                 }
             }
             if (type == 1 || type == 5) {
                 switch (hash) {
                     case 0:
-                        PBEParametersGenerator generator3 = new PKCS5S2ParametersGenerator(AndroidDigestFactory.getMD5());
+                        PBEParametersGenerator generator3 =
+                                new PKCS5S2ParametersGenerator(AndroidDigestFactory.getMD5());
                         return generator3;
                     case 1:
-                        PBEParametersGenerator generator4 = new PKCS5S2ParametersGenerator(AndroidDigestFactory.getSHA1());
+                        PBEParametersGenerator generator4 =
+                                new PKCS5S2ParametersGenerator(AndroidDigestFactory.getSHA1());
                         return generator4;
                     case 2:
                     case 3:
                     case 5:
                     case 6:
                     default:
-                        throw new IllegalStateException("unknown digest scheme for PBE PKCS5S2 encryption.");
+                        throw new IllegalStateException(
+                                "unknown digest scheme for PBE PKCS5S2 encryption.");
                     case 4:
-                        PBEParametersGenerator generator5 = new PKCS5S2ParametersGenerator(AndroidDigestFactory.getSHA256());
+                        PBEParametersGenerator generator5 =
+                                new PKCS5S2ParametersGenerator(AndroidDigestFactory.getSHA256());
                         return generator5;
                     case 7:
-                        PBEParametersGenerator generator6 = new PKCS5S2ParametersGenerator(AndroidDigestFactory.getSHA224());
+                        PBEParametersGenerator generator6 =
+                                new PKCS5S2ParametersGenerator(AndroidDigestFactory.getSHA224());
                         return generator6;
                     case 8:
-                        PBEParametersGenerator generator7 = new PKCS5S2ParametersGenerator(AndroidDigestFactory.getSHA384());
+                        PBEParametersGenerator generator7 =
+                                new PKCS5S2ParametersGenerator(AndroidDigestFactory.getSHA384());
                         return generator7;
                     case 9:
-                        PBEParametersGenerator generator8 = new PKCS5S2ParametersGenerator(AndroidDigestFactory.getSHA512());
+                        PBEParametersGenerator generator8 =
+                                new PKCS5S2ParametersGenerator(AndroidDigestFactory.getSHA512());
                         return generator8;
                 }
             }
             if (type == 2) {
                 switch (hash) {
                     case 0:
-                        PBEParametersGenerator generator9 = new PKCS12ParametersGenerator(AndroidDigestFactory.getMD5());
+                        PBEParametersGenerator generator9 =
+                                new PKCS12ParametersGenerator(AndroidDigestFactory.getMD5());
                         return generator9;
                     case 1:
-                        PBEParametersGenerator generator10 = new PKCS12ParametersGenerator(AndroidDigestFactory.getSHA1());
+                        PBEParametersGenerator generator10 =
+                                new PKCS12ParametersGenerator(AndroidDigestFactory.getSHA1());
                         return generator10;
                     case 2:
                     case 3:
                     case 5:
                     case 6:
                     default:
-                        throw new IllegalStateException("unknown digest scheme for PBE encryption.");
+                        throw new IllegalStateException(
+                                "unknown digest scheme for PBE encryption.");
                     case 4:
-                        PBEParametersGenerator generator11 = new PKCS12ParametersGenerator(AndroidDigestFactory.getSHA256());
+                        PBEParametersGenerator generator11 =
+                                new PKCS12ParametersGenerator(AndroidDigestFactory.getSHA256());
                         return generator11;
                     case 7:
-                        PBEParametersGenerator generator12 = new PKCS12ParametersGenerator(AndroidDigestFactory.getSHA224());
+                        PBEParametersGenerator generator12 =
+                                new PKCS12ParametersGenerator(AndroidDigestFactory.getSHA224());
                         return generator12;
                     case 8:
-                        PBEParametersGenerator generator13 = new PKCS12ParametersGenerator(AndroidDigestFactory.getSHA384());
+                        PBEParametersGenerator generator13 =
+                                new PKCS12ParametersGenerator(AndroidDigestFactory.getSHA384());
                         return generator13;
                     case 9:
-                        PBEParametersGenerator generator14 = new PKCS12ParametersGenerator(AndroidDigestFactory.getSHA512());
+                        PBEParametersGenerator generator14 =
+                                new PKCS12ParametersGenerator(AndroidDigestFactory.getSHA512());
                         return generator14;
                 }
             }
@@ -107,21 +126,36 @@ public interface PBE {
             return generator15;
         }
 
-        public static CipherParameters makePBEParameters(byte[] pbeKey, int scheme, int digest, int keySize, int ivSize, AlgorithmParameterSpec spec, String targetAlgorithm) throws InvalidAlgorithmParameterException {
+        public static CipherParameters makePBEParameters(
+                byte[] pbeKey,
+                int scheme,
+                int digest,
+                int keySize,
+                int ivSize,
+                AlgorithmParameterSpec spec,
+                String targetAlgorithm)
+                throws InvalidAlgorithmParameterException {
             CipherParameters param;
             if (spec == null || !(spec instanceof PBEParameterSpec)) {
-                throw new InvalidAlgorithmParameterException("Need a PBEParameter spec with a PBE key.");
+                throw new InvalidAlgorithmParameterException(
+                        "Need a PBEParameter spec with a PBE key.");
             }
             PBEParameterSpec pbeParam = (PBEParameterSpec) spec;
             PBEParametersGenerator generator = makePBEGenerator(scheme, digest);
             generator.init(pbeKey, pbeParam.getSalt(), pbeParam.getIterationCount());
             if (ivSize != 0) {
                 param = generator.generateDerivedParameters(keySize, ivSize);
-                AlgorithmParameterSpec parameterSpecFromPBEParameterSpec = getParameterSpecFromPBEParameterSpec(pbeParam);
-                if ((scheme == 1 || scheme == 5) && (parameterSpecFromPBEParameterSpec instanceof IvParameterSpec)) {
+                AlgorithmParameterSpec parameterSpecFromPBEParameterSpec =
+                        getParameterSpecFromPBEParameterSpec(pbeParam);
+                if ((scheme == 1 || scheme == 5)
+                        && (parameterSpecFromPBEParameterSpec instanceof IvParameterSpec)) {
                     ParametersWithIV parametersWithIV = (ParametersWithIV) param;
-                    IvParameterSpec ivParameterSpec = (IvParameterSpec) parameterSpecFromPBEParameterSpec;
-                    param = new ParametersWithIV((KeyParameter) parametersWithIV.getParameters(), ivParameterSpec.getIV());
+                    IvParameterSpec ivParameterSpec =
+                            (IvParameterSpec) parameterSpecFromPBEParameterSpec;
+                    param =
+                            new ParametersWithIV(
+                                    (KeyParameter) parametersWithIV.getParameters(),
+                                    ivParameterSpec.getIV());
                 }
             } else {
                 param = generator.generateDerivedParameters(keySize);
@@ -138,25 +172,35 @@ public interface PBE {
             return param;
         }
 
-        public static CipherParameters makePBEParameters(BCPBEKey pbeKey, AlgorithmParameterSpec spec, String targetAlgorithm) {
+        public static CipherParameters makePBEParameters(
+                BCPBEKey pbeKey, AlgorithmParameterSpec spec, String targetAlgorithm) {
             CipherParameters param;
             if (spec == null || !(spec instanceof PBEParameterSpec)) {
                 throw new IllegalArgumentException("Need a PBEParameter spec with a PBE key.");
             }
             PBEParameterSpec pbeParam = (PBEParameterSpec) spec;
-            PBEParametersGenerator generator = makePBEGenerator(pbeKey.getType(), pbeKey.getDigest());
+            PBEParametersGenerator generator =
+                    makePBEGenerator(pbeKey.getType(), pbeKey.getDigest());
             byte[] key = pbeKey.getEncoded();
             if (pbeKey.shouldTryWrongPKCS12()) {
                 key = new byte[2];
             }
             generator.init(key, pbeParam.getSalt(), pbeParam.getIterationCount());
             if (pbeKey.getIvSize() != 0) {
-                param = generator.generateDerivedParameters(pbeKey.getKeySize(), pbeKey.getIvSize());
-                AlgorithmParameterSpec parameterSpecFromPBEParameterSpec = getParameterSpecFromPBEParameterSpec(pbeParam);
-                if ((pbeKey.getType() == 1 || pbeKey.getType() == 5) && (parameterSpecFromPBEParameterSpec instanceof IvParameterSpec)) {
+                param =
+                        generator.generateDerivedParameters(
+                                pbeKey.getKeySize(), pbeKey.getIvSize());
+                AlgorithmParameterSpec parameterSpecFromPBEParameterSpec =
+                        getParameterSpecFromPBEParameterSpec(pbeParam);
+                if ((pbeKey.getType() == 1 || pbeKey.getType() == 5)
+                        && (parameterSpecFromPBEParameterSpec instanceof IvParameterSpec)) {
                     ParametersWithIV parametersWithIV = (ParametersWithIV) param;
-                    IvParameterSpec ivParameterSpec = (IvParameterSpec) parameterSpecFromPBEParameterSpec;
-                    param = new ParametersWithIV((KeyParameter) parametersWithIV.getParameters(), ivParameterSpec.getIV());
+                    IvParameterSpec ivParameterSpec =
+                            (IvParameterSpec) parameterSpecFromPBEParameterSpec;
+                    param =
+                            new ParametersWithIV(
+                                    (KeyParameter) parametersWithIV.getParameters(),
+                                    ivParameterSpec.getIV());
                 }
             } else {
                 param = generator.generateDerivedParameters(pbeKey.getKeySize());
@@ -173,19 +217,22 @@ public interface PBE {
             return param;
         }
 
-        public static CipherParameters makePBEMacParameters(BCPBEKey pbeKey, AlgorithmParameterSpec spec) {
+        public static CipherParameters makePBEMacParameters(
+                BCPBEKey pbeKey, AlgorithmParameterSpec spec) {
             if (spec == null || !(spec instanceof PBEParameterSpec)) {
                 throw new IllegalArgumentException("Need a PBEParameter spec with a PBE key.");
             }
             PBEParameterSpec pbeParam = (PBEParameterSpec) spec;
-            PBEParametersGenerator generator = makePBEGenerator(pbeKey.getType(), pbeKey.getDigest());
+            PBEParametersGenerator generator =
+                    makePBEGenerator(pbeKey.getType(), pbeKey.getDigest());
             byte[] key = pbeKey.getEncoded();
             generator.init(key, pbeParam.getSalt(), pbeParam.getIterationCount());
             CipherParameters param = generator.generateDerivedMacParameters(pbeKey.getKeySize());
             return param;
         }
 
-        public static CipherParameters makePBEMacParameters(PBEKeySpec keySpec, int type, int hash, int keySize) {
+        public static CipherParameters makePBEMacParameters(
+                PBEKeySpec keySpec, int type, int hash, int keySize) {
             PBEParametersGenerator generator = makePBEGenerator(type, hash);
             byte[] key = convertPassword(type, keySpec);
             generator.init(key, keySpec.getSalt(), keySpec.getIterationCount());
@@ -196,7 +243,8 @@ public interface PBE {
             return param;
         }
 
-        public static CipherParameters makePBEParameters(PBEKeySpec keySpec, int type, int hash, int keySize, int ivSize) {
+        public static CipherParameters makePBEParameters(
+                PBEKeySpec keySpec, int type, int hash, int keySize, int ivSize) {
             CipherParameters param;
             PBEParametersGenerator generator = makePBEGenerator(type, hash);
             byte[] key = convertPassword(type, keySpec);
@@ -212,7 +260,8 @@ public interface PBE {
             return param;
         }
 
-        public static CipherParameters makePBEMacParameters(SecretKey key, int type, int hash, int keySize, PBEParameterSpec pbeSpec) {
+        public static CipherParameters makePBEMacParameters(
+                SecretKey key, int type, int hash, int keySize, PBEParameterSpec pbeSpec) {
             PBEParametersGenerator generator = makePBEGenerator(type, hash);
             byte[] keyBytes = key.getEncoded();
             generator.init(key.getEncoded(), pbeSpec.getSalt(), pbeSpec.getIterationCount());
@@ -223,10 +272,16 @@ public interface PBE {
             return param;
         }
 
-        public static AlgorithmParameterSpec getParameterSpecFromPBEParameterSpec(PBEParameterSpec pbeParameterSpec) {
+        public static AlgorithmParameterSpec getParameterSpecFromPBEParameterSpec(
+                PBEParameterSpec pbeParameterSpec) {
             try {
-                Method getParameterSpecMethod = PBE.class.getClassLoader().loadClass("javax.crypto.spec.PBEParameterSpec").getMethod("getParameterSpec", new Class[0]);
-                return (AlgorithmParameterSpec) getParameterSpecMethod.invoke(pbeParameterSpec, new Object[0]);
+                Method getParameterSpecMethod =
+                        PBE.class
+                                .getClassLoader()
+                                .loadClass("javax.crypto.spec.PBEParameterSpec")
+                                .getMethod("getParameterSpec", new Class[0]);
+                return (AlgorithmParameterSpec)
+                        getParameterSpecMethod.invoke(pbeParameterSpec, new Object[0]);
             } catch (Exception e) {
                 return null;
             }
@@ -238,7 +293,8 @@ public interface PBE {
                 return key;
             }
             if (type == 5 || type == 4) {
-                byte[] key2 = PBEParametersGenerator.PKCS5PasswordToUTF8Bytes(keySpec.getPassword());
+                byte[] key2 =
+                        PBEParametersGenerator.PKCS5PasswordToUTF8Bytes(keySpec.getPassword());
                 return key2;
             }
             byte[] key3 = PBEParametersGenerator.PKCS5PasswordToBytes(keySpec.getPassword());

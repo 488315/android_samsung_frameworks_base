@@ -2,11 +2,13 @@ package com.android.internal.widget.remotecompose.core.operations;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.MediaMetrics;
+
 import com.android.internal.widget.remotecompose.core.CompanionOperation;
 import com.android.internal.widget.remotecompose.core.Operation;
 import com.android.internal.widget.remotecompose.core.RemoteComposeOperation;
 import com.android.internal.widget.remotecompose.core.RemoteContext;
 import com.android.internal.widget.remotecompose.core.WireBuffer;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -22,7 +24,13 @@ public class Header implements RemoteComposeOperation {
     int mPatchVersion;
     int mWidth;
 
-    public Header(int majorVersion, int minorVersion, int patchVersion, int width, int height, long capabilities) {
+    public Header(
+            int majorVersion,
+            int minorVersion,
+            int patchVersion,
+            int width,
+            int height,
+            long capabilities) {
         this.mMajorVersion = majorVersion;
         this.mMinorVersion = minorVersion;
         this.mPatchVersion = patchVersion;
@@ -37,12 +45,30 @@ public class Header implements RemoteComposeOperation {
     }
 
     public String toString() {
-        return "HEADER v" + this.mMajorVersion + MediaMetrics.SEPARATOR + this.mMinorVersion + MediaMetrics.SEPARATOR + this.mPatchVersion + ", " + this.mWidth + " x " + this.mHeight + " [" + this.mCapabilities + NavigationBarInflaterView.SIZE_MOD_END;
+        return "HEADER v"
+                + this.mMajorVersion
+                + MediaMetrics.SEPARATOR
+                + this.mMinorVersion
+                + MediaMetrics.SEPARATOR
+                + this.mPatchVersion
+                + ", "
+                + this.mWidth
+                + " x "
+                + this.mHeight
+                + " ["
+                + this.mCapabilities
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     @Override // com.android.internal.widget.remotecompose.core.Operation
     public void apply(RemoteContext context) {
-        context.header(this.mMajorVersion, this.mMinorVersion, this.mPatchVersion, this.mWidth, this.mHeight, this.mCapabilities);
+        context.header(
+                this.mMajorVersion,
+                this.mMinorVersion,
+                this.mPatchVersion,
+                this.mWidth,
+                this.mHeight,
+                this.mCapabilities);
     }
 
     @Override // com.android.internal.widget.remotecompose.core.Operation
@@ -51,8 +77,7 @@ public class Header implements RemoteComposeOperation {
     }
 
     public static class Companion implements CompanionOperation {
-        private Companion() {
-        }
+        private Companion() {}
 
         @Override // com.android.internal.widget.remotecompose.core.CompanionOperation
         public String name() {
@@ -82,7 +107,9 @@ public class Header implements RemoteComposeOperation {
             int width = buffer.readInt();
             int height = buffer.readInt();
             long capabilities = buffer.readLong();
-            Header header = new Header(majorVersion, minorVersion, patchVersion, width, height, capabilities);
+            Header header =
+                    new Header(
+                            majorVersion, minorVersion, patchVersion, width, height, capabilities);
             operations.add(header);
         }
     }

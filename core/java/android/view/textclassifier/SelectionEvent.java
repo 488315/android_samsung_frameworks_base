@@ -2,7 +2,9 @@ package android.view.textclassifier;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Locale;
@@ -21,19 +23,21 @@ public final class SelectionEvent implements Parcelable {
     public static final int ACTION_SELECT_ALL = 200;
     public static final int ACTION_SHARE = 104;
     public static final int ACTION_SMART_SHARE = 105;
-    public static final Parcelable.Creator<SelectionEvent> CREATOR = new Parcelable.Creator<SelectionEvent>() { // from class: android.view.textclassifier.SelectionEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SelectionEvent createFromParcel(Parcel in) {
-            return new SelectionEvent(in);
-        }
+    public static final Parcelable.Creator<SelectionEvent> CREATOR =
+            new Parcelable.Creator<
+                    SelectionEvent>() { // from class: android.view.textclassifier.SelectionEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SelectionEvent createFromParcel(Parcel in) {
+                    return new SelectionEvent(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SelectionEvent[] newArray(int size) {
-            return new SelectionEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SelectionEvent[] newArray(int size) {
+                    return new SelectionEvent[size];
+                }
+            };
     public static final int EVENT_AUTO_SELECTION = 5;
     public static final int EVENT_SELECTION_MODIFIED = 2;
     public static final int EVENT_SELECTION_STARTED = 1;
@@ -64,18 +68,21 @@ public final class SelectionEvent implements Parcelable {
     private String mWidgetVersion;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ActionType {
-    }
+    public @interface ActionType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface EventType {
-    }
+    public @interface EventType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface InvocationMethod {
-    }
+    public @interface InvocationMethod {}
 
-    SelectionEvent(int start, int end, int eventType, String entityType, int invocationMethod, String resultId) {
+    SelectionEvent(
+            int start,
+            int end,
+            int eventType,
+            String entityType,
+            int invocationMethod,
+            String resultId) {
         this.mPackageName = "";
         this.mWidgetType = "unknown";
         Preconditions.checkArgument(end >= start, "end cannot be less than start");
@@ -103,12 +110,15 @@ public final class SelectionEvent implements Parcelable {
         this.mDurationSinceSessionStart = in.readLong();
         this.mDurationSincePreviousEvent = in.readLong();
         this.mEventIndex = in.readInt();
-        this.mSessionId = in.readInt() > 0 ? TextClassificationSessionId.CREATOR.createFromParcel(in) : null;
+        this.mSessionId =
+                in.readInt() > 0 ? TextClassificationSessionId.CREATOR.createFromParcel(in) : null;
         this.mStart = in.readInt();
         this.mEnd = in.readInt();
         this.mSmartStart = in.readInt();
         this.mSmartEnd = in.readInt();
-        this.mSystemTcMetadata = (SystemTextClassifierMetadata) in.readParcelable(null, SystemTextClassifierMetadata.class);
+        this.mSystemTcMetadata =
+                (SystemTextClassifierMetadata)
+                        in.readParcelable(null, SystemTextClassifierMetadata.class);
     }
 
     @Override // android.os.Parcelable
@@ -154,7 +164,8 @@ public final class SelectionEvent implements Parcelable {
         return new SelectionEvent(start, end, 2, "", 0, "");
     }
 
-    public static SelectionEvent createSelectionModifiedEvent(int start, int end, TextClassification classification) {
+    public static SelectionEvent createSelectionModifiedEvent(
+            int start, int end, TextClassification classification) {
         String entityType;
         Preconditions.checkArgument(end >= start, "end cannot be less than start");
         Objects.requireNonNull(classification);
@@ -166,7 +177,8 @@ public final class SelectionEvent implements Parcelable {
         return new SelectionEvent(start, end, 2, entityType, 0, classification.getId());
     }
 
-    public static SelectionEvent createSelectionModifiedEvent(int start, int end, TextSelection selection) {
+    public static SelectionEvent createSelectionModifiedEvent(
+            int start, int end, TextSelection selection) {
         String entityType;
         Preconditions.checkArgument(end >= start, "end cannot be less than start");
         Objects.requireNonNull(selection);
@@ -184,7 +196,8 @@ public final class SelectionEvent implements Parcelable {
         return new SelectionEvent(start, end, actionType, "", 0, "");
     }
 
-    public static SelectionEvent createSelectionActionEvent(int start, int end, int actionType, TextClassification classification) {
+    public static SelectionEvent createSelectionActionEvent(
+            int start, int end, int actionType, TextClassification classification) {
         String entityType;
         Preconditions.checkArgument(end >= start, "end cannot be less than start");
         Objects.requireNonNull(classification);
@@ -212,7 +225,9 @@ public final class SelectionEvent implements Parcelable {
             case 201:
                 return;
             default:
-                throw new IllegalArgumentException(String.format(Locale.US, "%d is not an eventType", Integer.valueOf(eventType)));
+                throw new IllegalArgumentException(
+                        String.format(
+                                Locale.US, "%d is not an eventType", Integer.valueOf(eventType)));
         }
     }
 
@@ -387,7 +402,26 @@ public final class SelectionEvent implements Parcelable {
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mAbsoluteStart), Integer.valueOf(this.mAbsoluteEnd), Integer.valueOf(this.mEventType), this.mEntityType, this.mWidgetVersion, this.mPackageName, this.mWidgetType, Integer.valueOf(this.mInvocationMethod), this.mResultId, Long.valueOf(this.mEventTime), Long.valueOf(this.mDurationSinceSessionStart), Long.valueOf(this.mDurationSincePreviousEvent), Integer.valueOf(this.mEventIndex), this.mSessionId, Integer.valueOf(this.mStart), Integer.valueOf(this.mEnd), Integer.valueOf(this.mSmartStart), Integer.valueOf(this.mSmartEnd), this.mSystemTcMetadata);
+        return Objects.hash(
+                Integer.valueOf(this.mAbsoluteStart),
+                Integer.valueOf(this.mAbsoluteEnd),
+                Integer.valueOf(this.mEventType),
+                this.mEntityType,
+                this.mWidgetVersion,
+                this.mPackageName,
+                this.mWidgetType,
+                Integer.valueOf(this.mInvocationMethod),
+                this.mResultId,
+                Long.valueOf(this.mEventTime),
+                Long.valueOf(this.mDurationSinceSessionStart),
+                Long.valueOf(this.mDurationSincePreviousEvent),
+                Integer.valueOf(this.mEventIndex),
+                this.mSessionId,
+                Integer.valueOf(this.mStart),
+                Integer.valueOf(this.mEnd),
+                Integer.valueOf(this.mSmartStart),
+                Integer.valueOf(this.mSmartEnd),
+                this.mSystemTcMetadata);
     }
 
     public boolean equals(Object obj) {
@@ -398,10 +432,53 @@ public final class SelectionEvent implements Parcelable {
             return false;
         }
         SelectionEvent other = (SelectionEvent) obj;
-        return this.mAbsoluteStart == other.mAbsoluteStart && this.mAbsoluteEnd == other.mAbsoluteEnd && this.mEventType == other.mEventType && Objects.equals(this.mEntityType, other.mEntityType) && Objects.equals(this.mWidgetVersion, other.mWidgetVersion) && Objects.equals(this.mPackageName, other.mPackageName) && Objects.equals(this.mWidgetType, other.mWidgetType) && this.mInvocationMethod == other.mInvocationMethod && Objects.equals(this.mResultId, other.mResultId) && this.mEventTime == other.mEventTime && this.mDurationSinceSessionStart == other.mDurationSinceSessionStart && this.mDurationSincePreviousEvent == other.mDurationSincePreviousEvent && this.mEventIndex == other.mEventIndex && Objects.equals(this.mSessionId, other.mSessionId) && this.mStart == other.mStart && this.mEnd == other.mEnd && this.mSmartStart == other.mSmartStart && this.mSmartEnd == other.mSmartEnd && this.mSystemTcMetadata == other.mSystemTcMetadata;
+        return this.mAbsoluteStart == other.mAbsoluteStart
+                && this.mAbsoluteEnd == other.mAbsoluteEnd
+                && this.mEventType == other.mEventType
+                && Objects.equals(this.mEntityType, other.mEntityType)
+                && Objects.equals(this.mWidgetVersion, other.mWidgetVersion)
+                && Objects.equals(this.mPackageName, other.mPackageName)
+                && Objects.equals(this.mWidgetType, other.mWidgetType)
+                && this.mInvocationMethod == other.mInvocationMethod
+                && Objects.equals(this.mResultId, other.mResultId)
+                && this.mEventTime == other.mEventTime
+                && this.mDurationSinceSessionStart == other.mDurationSinceSessionStart
+                && this.mDurationSincePreviousEvent == other.mDurationSincePreviousEvent
+                && this.mEventIndex == other.mEventIndex
+                && Objects.equals(this.mSessionId, other.mSessionId)
+                && this.mStart == other.mStart
+                && this.mEnd == other.mEnd
+                && this.mSmartStart == other.mSmartStart
+                && this.mSmartEnd == other.mSmartEnd
+                && this.mSystemTcMetadata == other.mSystemTcMetadata;
     }
 
     public String toString() {
-        return String.format(Locale.US, "SelectionEvent {absoluteStart=%d, absoluteEnd=%d, eventType=%d, entityType=%s, widgetVersion=%s, packageName=%s, widgetType=%s, invocationMethod=%s, resultId=%s, eventTime=%d, durationSinceSessionStart=%d, durationSincePreviousEvent=%d, eventIndex=%d,sessionId=%s, start=%d, end=%d, smartStart=%d, smartEnd=%d, systemTcMetadata=%s}", Integer.valueOf(this.mAbsoluteStart), Integer.valueOf(this.mAbsoluteEnd), Integer.valueOf(this.mEventType), this.mEntityType, this.mWidgetVersion, this.mPackageName, this.mWidgetType, Integer.valueOf(this.mInvocationMethod), this.mResultId, Long.valueOf(this.mEventTime), Long.valueOf(this.mDurationSinceSessionStart), Long.valueOf(this.mDurationSincePreviousEvent), Integer.valueOf(this.mEventIndex), this.mSessionId, Integer.valueOf(this.mStart), Integer.valueOf(this.mEnd), Integer.valueOf(this.mSmartStart), Integer.valueOf(this.mSmartEnd), this.mSystemTcMetadata);
+        return String.format(
+                Locale.US,
+                "SelectionEvent {absoluteStart=%d, absoluteEnd=%d, eventType=%d, entityType=%s,"
+                    + " widgetVersion=%s, packageName=%s, widgetType=%s, invocationMethod=%s,"
+                    + " resultId=%s, eventTime=%d, durationSinceSessionStart=%d,"
+                    + " durationSincePreviousEvent=%d, eventIndex=%d,sessionId=%s, start=%d,"
+                    + " end=%d, smartStart=%d, smartEnd=%d, systemTcMetadata=%s}",
+                Integer.valueOf(this.mAbsoluteStart),
+                Integer.valueOf(this.mAbsoluteEnd),
+                Integer.valueOf(this.mEventType),
+                this.mEntityType,
+                this.mWidgetVersion,
+                this.mPackageName,
+                this.mWidgetType,
+                Integer.valueOf(this.mInvocationMethod),
+                this.mResultId,
+                Long.valueOf(this.mEventTime),
+                Long.valueOf(this.mDurationSinceSessionStart),
+                Long.valueOf(this.mDurationSincePreviousEvent),
+                Integer.valueOf(this.mEventIndex),
+                this.mSessionId,
+                Integer.valueOf(this.mStart),
+                Integer.valueOf(this.mEnd),
+                Integer.valueOf(this.mSmartStart),
+                Integer.valueOf(this.mSmartEnd),
+                this.mSystemTcMetadata);
     }
 }

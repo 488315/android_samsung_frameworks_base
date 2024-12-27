@@ -23,18 +23,22 @@ public abstract class GestureMatcher {
         public MotionEvent mRawEvent;
         public int mTargetState;
 
-        public DelayedTransition() {
-        }
+        public DelayedTransition() {}
 
         public final void cancel() {
             if (TouchExplorer.DEBUG && GestureMatcher.this.mHandler.hasCallbacks(this)) {
-                Slog.d("GestureMatcher.DelayedTransition", GestureMatcher.this.getGestureName() + ": canceling delayed transition to " + GestureMatcher.getStateSymbolicName(this.mTargetState));
+                Slog.d(
+                        "GestureMatcher.DelayedTransition",
+                        GestureMatcher.this.getGestureName()
+                                + ": canceling delayed transition to "
+                                + GestureMatcher.getStateSymbolicName(this.mTargetState));
             }
             GestureMatcher.this.mHandler.removeCallbacks(this);
             recycleEvent();
         }
 
-        public final void post(int i, long j, MotionEvent motionEvent, MotionEvent motionEvent2, int i2) {
+        public final void post(
+                int i, long j, MotionEvent motionEvent, MotionEvent motionEvent2, int i2) {
             recycleEvent();
             this.mTargetState = i;
             if (Flags.copyEventsForGestureDetection()) {
@@ -47,13 +51,19 @@ public abstract class GestureMatcher {
             this.mPolicyFlags = i2;
             GestureMatcher.this.mHandler.postDelayed(this, j);
             if (TouchExplorer.DEBUG) {
-                Slog.d("GestureMatcher.DelayedTransition", GestureMatcher.this.getGestureName() + ": posting delayed transition to " + GestureMatcher.getStateSymbolicName(this.mTargetState));
+                Slog.d(
+                        "GestureMatcher.DelayedTransition",
+                        GestureMatcher.this.getGestureName()
+                                + ": posting delayed transition to "
+                                + GestureMatcher.getStateSymbolicName(this.mTargetState));
             }
         }
 
         public final void recycleEvent() {
             MotionEvent motionEvent;
-            if (!Flags.copyEventsForGestureDetection() || (motionEvent = this.mEvent) == null || this.mRawEvent == null) {
+            if (!Flags.copyEventsForGestureDetection()
+                    || (motionEvent = this.mEvent) == null
+                    || this.mRawEvent == null) {
                 return;
             }
             motionEvent.recycle();
@@ -65,16 +75,22 @@ public abstract class GestureMatcher {
         @Override // java.lang.Runnable
         public final void run() {
             if (TouchExplorer.DEBUG) {
-                Slog.d("GestureMatcher.DelayedTransition", GestureMatcher.this.getGestureName() + ": executing delayed transition to " + GestureMatcher.getStateSymbolicName(this.mTargetState));
+                Slog.d(
+                        "GestureMatcher.DelayedTransition",
+                        GestureMatcher.this.getGestureName()
+                                + ": executing delayed transition to "
+                                + GestureMatcher.getStateSymbolicName(this.mTargetState));
             }
-            GestureMatcher.this.setState(this.mTargetState, this.mEvent, this.mRawEvent, this.mPolicyFlags);
+            GestureMatcher.this.setState(
+                    this.mTargetState, this.mEvent, this.mRawEvent, this.mPolicyFlags);
             recycleEvent();
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface StateChangeListener {
-        void onStateChanged(int i, int i2, int i3, MotionEvent motionEvent, MotionEvent motionEvent2);
+        void onStateChanged(
+                int i, int i2, int i3, MotionEvent motionEvent, MotionEvent motionEvent2);
     }
 
     public GestureMatcher(int i, Handler handler, StateChangeListener stateChangeListener) {
@@ -84,10 +100,20 @@ public abstract class GestureMatcher {
     }
 
     public static String getStateSymbolicName(int i) {
-        return i != 0 ? i != 1 ? i != 2 ? i != 3 ? VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Unknown state: ") : "STATE_GESTURE_CANCELED" : "STATE_GESTURE_COMPLETED" : "STATE_GESTURE_STARTED" : "STATE_CLEAR";
+        return i != 0
+                ? i != 1
+                        ? i != 2
+                                ? i != 3
+                                        ? VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                                i, "Unknown state: ")
+                                        : "STATE_GESTURE_CANCELED"
+                                : "STATE_GESTURE_COMPLETED"
+                        : "STATE_GESTURE_STARTED"
+                : "STATE_CLEAR";
     }
 
-    public final void cancelAfterDoubleTapTimeout(MotionEvent motionEvent, MotionEvent motionEvent2, int i) {
+    public final void cancelAfterDoubleTapTimeout(
+            MotionEvent motionEvent, MotionEvent motionEvent2, int i) {
         long doubleTapTimeout = ViewConfiguration.getDoubleTapTimeout();
         this.mDelayedTransition.cancel();
         this.mDelayedTransition.post(3, doubleTapTimeout, motionEvent, motionEvent2, i);
@@ -100,8 +126,7 @@ public abstract class GestureMatcher {
 
     public abstract String getGestureName();
 
-    public void onDown(MotionEvent motionEvent, MotionEvent motionEvent2, int i) {
-    }
+    public void onDown(MotionEvent motionEvent, MotionEvent motionEvent2, int i) {}
 
     public final void onMotionEvent(MotionEvent motionEvent, MotionEvent motionEvent2, int i) {
         int i2 = this.mState;
@@ -134,8 +159,7 @@ public abstract class GestureMatcher {
 
     public abstract void onPointerDown(MotionEvent motionEvent, MotionEvent motionEvent2, int i);
 
-    public void onPointerUp(MotionEvent motionEvent, MotionEvent motionEvent2, int i) {
-    }
+    public void onPointerUp(MotionEvent motionEvent, MotionEvent motionEvent2, int i) {}
 
     public abstract void onUp(MotionEvent motionEvent, MotionEvent motionEvent2, int i);
 
@@ -144,7 +168,8 @@ public abstract class GestureMatcher {
         this.mDelayedTransition.cancel();
         StateChangeListener stateChangeListener = this.mListener;
         if (stateChangeListener != null) {
-            stateChangeListener.onStateChanged(this.mGestureId, this.mState, i2, motionEvent, motionEvent2);
+            stateChangeListener.onStateChanged(
+                    this.mGestureId, this.mState, i2, motionEvent, motionEvent2);
         }
     }
 

@@ -2,7 +2,9 @@ package com.samsung.android.wallpaper.colortheme;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.util.Log;
+
 import com.android.internal.graphics.ColorUtils;
+
 import java.lang.reflect.Array;
 import java.util.List;
 
@@ -15,7 +17,9 @@ public class ColorPaletteCreator5 extends ColorPaletteCreator {
     private static final float GRAY_SAT_PRESET2 = 0.05f;
     private static final int MAX_RANGE = 19;
     private static final String TAG = "ColorPaletteCreator5";
-    private static final int[] range = {-8, 23, 34, 44, 52, 61, 79, 134, 168, 184, 194, 201, 222, 264, 289, 314, 329, 345, 352};
+    private static final int[] range = {
+        -8, 23, 34, 44, 52, 61, 79, 134, 168, 184, 194, 201, 222, 264, 289, 314, 329, 345, 352
+    };
     float[][] mColorHsl;
     float[] accent1 = new float[3];
     float[] accent2 = new float[3];
@@ -77,7 +81,16 @@ public class ColorPaletteCreator5 extends ColorPaletteCreator {
         float ratio = (((hue - range[r]) + 360.0f) % 360.0f) / (range[r + 1] - range[r]);
         if (ratio > 1.0f || ratio < 0.0f) {
             Log.e(TAG, "findRatio : ratio is more than 1");
-            Log.v(TAG, "findRatio : hue = " + hue + " range[r] = " + range[r] + " range[r+1] = " + range[r + 1] + " ratio = " + ratio);
+            Log.v(
+                    TAG,
+                    "findRatio : hue = "
+                            + hue
+                            + " range[r] = "
+                            + range[r]
+                            + " range[r+1] = "
+                            + range[r + 1]
+                            + " ratio = "
+                            + ratio);
         }
         return ratio;
     }
@@ -129,10 +142,18 @@ public class ColorPaletteCreator5 extends ColorPaletteCreator {
             return;
         }
         Log.v(TAG, "populateStyles : seedsColor length" + this.mSeedColors.length);
-        this.mColorHsl = (float[][]) Array.newInstance((Class<?>) Float.TYPE, this.mSeedColors.length, 3);
+        this.mColorHsl =
+                (float[][]) Array.newInstance((Class<?>) Float.TYPE, this.mSeedColors.length, 3);
         for (int i = 0; i < this.mSeedColors.length; i++) {
             ColorUtils.colorToHSL(this.mSeedColors[i], this.mColorHsl[i]);
-            Log.v(TAG, "populateStyles : seed = " + this.mSeedColors[i] + " C" + (i + 1) + " = " + this.mColorHsl[i][0]);
+            Log.v(
+                    TAG,
+                    "populateStyles : seed = "
+                            + this.mSeedColors[i]
+                            + " C"
+                            + (i + 1)
+                            + " = "
+                            + this.mColorHsl[i][0]);
         }
         if (isGrayImage(this.mColorHsl)) {
             addGrayStylePalette();
@@ -158,7 +179,14 @@ public class ColorPaletteCreator5 extends ColorPaletteCreator {
         this.neutral1[1] = 0.0f;
         this.neutral2[0] = 0.0f;
         this.neutral2[1] = 0.0f;
-        this.mColorPalettes.add(new ColorPalette(this.accent1, this.accent2, this.accent3, this.neutral1, this.neutral2).getTable());
+        this.mColorPalettes.add(
+                new ColorPalette(
+                                this.accent1,
+                                this.accent2,
+                                this.accent3,
+                                this.neutral1,
+                                this.neutral2)
+                        .getTable());
         this.accent1[0] = 0.0f;
         this.accent1[1] = 0.05f;
         this.accent2[0] = 0.0f;
@@ -169,7 +197,14 @@ public class ColorPaletteCreator5 extends ColorPaletteCreator {
         this.neutral1[1] = 0.05f;
         this.neutral2[0] = 0.0f;
         this.neutral2[1] = 0.05f;
-        this.mColorPalettes.add(new ColorPalette(this.accent1, this.accent2, this.accent3, this.neutral1, this.neutral2).getTable());
+        this.mColorPalettes.add(
+                new ColorPalette(
+                                this.accent1,
+                                this.accent2,
+                                this.accent3,
+                                this.neutral1,
+                                this.neutral2)
+                        .getTable());
         this.accent1[0] = 120.0f;
         this.accent1[1] = 0.05f;
         this.accent2[0] = 120.0f;
@@ -180,7 +215,14 @@ public class ColorPaletteCreator5 extends ColorPaletteCreator {
         this.neutral1[1] = 0.05f;
         this.neutral2[0] = 120.0f;
         this.neutral2[1] = 0.05f;
-        this.mColorPalettes.add(new ColorPalette(this.accent1, this.accent2, this.accent3, this.neutral1, this.neutral2).getTable());
+        this.mColorPalettes.add(
+                new ColorPalette(
+                                this.accent1,
+                                this.accent2,
+                                this.accent3,
+                                this.neutral1,
+                                this.neutral2)
+                        .getTable());
         this.accent1[0] = 240.0f;
         this.accent1[1] = 0.05f;
         this.accent2[0] = 240.0f;
@@ -191,7 +233,14 @@ public class ColorPaletteCreator5 extends ColorPaletteCreator {
         this.neutral1[1] = 0.05f;
         this.neutral2[0] = 240.0f;
         this.neutral2[1] = 0.05f;
-        this.mColorPalettes.add(new ColorPalette(this.accent1, this.accent2, this.accent3, this.neutral1, this.neutral2).getTable());
+        this.mColorPalettes.add(
+                new ColorPalette(
+                                this.accent1,
+                                this.accent2,
+                                this.accent3,
+                                this.neutral1,
+                                this.neutral2)
+                        .getTable());
     }
 
     private ColorPalette addTonalSpot(float[] colorHsl) {
@@ -205,7 +254,9 @@ public class ColorPaletteCreator5 extends ColorPaletteCreator {
         this.neutral1[1] = Math.min(colorHsl[1] + 0.0f, 0.15f);
         this.neutral2[0] = colorHsl[0];
         this.neutral2[1] = Math.min(colorHsl[1] + 0.0f, 0.0f);
-        ColorPalette palette = new ColorPalette(this.accent1, this.accent2, this.accent3, this.neutral1, this.neutral2);
+        ColorPalette palette =
+                new ColorPalette(
+                        this.accent1, this.accent2, this.accent3, this.neutral1, this.neutral2);
         this.mColorPalettes.add(palette.getTable());
         return palette;
     }
@@ -221,7 +272,9 @@ public class ColorPaletteCreator5 extends ColorPaletteCreator {
         this.neutral1[1] = Math.min(colorHsl[1] + 0.0f, GRAY_SAT_PRESET2);
         this.neutral2[0] = colorHsl[0];
         this.neutral2[1] = Math.min(colorHsl[1] + 0.0f, 0.0f);
-        ColorPalette palette = new ColorPalette(this.accent1, this.accent2, this.accent3, this.neutral1, this.neutral2);
+        ColorPalette palette =
+                new ColorPalette(
+                        this.accent1, this.accent2, this.accent3, this.neutral1, this.neutral2);
         this.mColorPalettes.add(palette.getTable());
         return palette;
     }
@@ -237,7 +290,9 @@ public class ColorPaletteCreator5 extends ColorPaletteCreator {
         this.neutral1[1] = Math.min(colorHsl[1] + 0.0f, 0.2f);
         this.neutral2[0] = colorHsl[0];
         this.neutral2[1] = Math.min(colorHsl[1] + 0.0f, 0.2f);
-        ColorPalette palette = new ColorPalette(this.accent1, this.accent2, this.accent3, this.neutral1, this.neutral2);
+        ColorPalette palette =
+                new ColorPalette(
+                        this.accent1, this.accent2, this.accent3, this.neutral1, this.neutral2);
         this.mColorPalettes.add(palette.getTable());
         return palette;
     }
@@ -253,7 +308,9 @@ public class ColorPaletteCreator5 extends ColorPaletteCreator {
         this.neutral1[1] = Math.min(colorHsl[1] + 0.0f, 0.3f);
         this.neutral2[0] = colorHsl[0];
         this.neutral2[1] = Math.min(colorHsl[1] + 0.0f, 0.2f);
-        ColorPalette palette = new ColorPalette(this.accent1, this.accent2, this.accent3, this.neutral1, this.neutral2);
+        ColorPalette palette =
+                new ColorPalette(
+                        this.accent1, this.accent2, this.accent3, this.neutral1, this.neutral2);
         this.mColorPalettes.add(palette.getTable());
         return palette;
     }
@@ -265,9 +322,23 @@ public class ColorPaletteCreator5 extends ColorPaletteCreator {
         float leftHue = getHue(leftRange, ratio);
         int rightRange = (((r + 5) + range.length) - 1) % (range.length - 1);
         float rightHue = getHue(rightRange, ratio);
-        Log.v(TAG, "getExpressiveHue : leftHue = " + leftHue + " rightHue = " + rightHue + " C" + (order + 1) + " case");
+        Log.v(
+                TAG,
+                "getExpressiveHue : leftHue = "
+                        + leftHue
+                        + " rightHue = "
+                        + rightHue
+                        + " C"
+                        + (order + 1)
+                        + " case");
         if (leftHue > rightHue) {
-            Log.v(TAG, "getExpressiveHue : leftHue(" + leftHue + ") > c1, c2, c3, c4 > rightHue(" + rightHue + NavigationBarInflaterView.KEY_CODE_END);
+            Log.v(
+                    TAG,
+                    "getExpressiveHue : leftHue("
+                            + leftHue
+                            + ") > c1, c2, c3, c4 > rightHue("
+                            + rightHue
+                            + NavigationBarInflaterView.KEY_CODE_END);
             for (int i = 0; i < this.mColorHsl.length; i++) {
                 if (i != order) {
                     float targetHue = this.mColorHsl[i][0];
@@ -278,12 +349,21 @@ public class ColorPaletteCreator5 extends ColorPaletteCreator {
                 }
             }
         } else {
-            Log.v(TAG, "getExpressiveHue : 360 > c1,c2,c3,c4 > rightHue(" + rightHue + ") || 0 < c1,c2,c3,c4 < leftHue(" + leftHue + NavigationBarInflaterView.KEY_CODE_END);
+            Log.v(
+                    TAG,
+                    "getExpressiveHue : 360 > c1,c2,c3,c4 > rightHue("
+                            + rightHue
+                            + ") || 0 < c1,c2,c3,c4 < leftHue("
+                            + leftHue
+                            + NavigationBarInflaterView.KEY_CODE_END);
             for (int i2 = 0; i2 < this.mColorHsl.length; i2++) {
                 if (i2 != order) {
                     float targetHue2 = this.mColorHsl[i2][0];
-                    if ((360.0f > targetHue2 && targetHue2 > rightHue) || (leftHue > targetHue2 && targetHue2 > 0.0f)) {
-                        Log.v(TAG, "getExpressiveHue : return seeds C" + (i2 + 1) + " " + targetHue2);
+                    if ((360.0f > targetHue2 && targetHue2 > rightHue)
+                            || (leftHue > targetHue2 && targetHue2 > 0.0f)) {
+                        Log.v(
+                                TAG,
+                                "getExpressiveHue : return seeds C" + (i2 + 1) + " " + targetHue2);
                         return targetHue2;
                     }
                 }

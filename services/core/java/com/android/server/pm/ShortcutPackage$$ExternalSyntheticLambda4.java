@@ -1,6 +1,7 @@
 package com.android.server.pm;
 
 import android.content.pm.ShortcutInfo;
+
 import java.util.Objects;
 import java.util.function.Predicate;
 

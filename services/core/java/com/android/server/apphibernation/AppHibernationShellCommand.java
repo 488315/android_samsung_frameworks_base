@@ -2,7 +2,9 @@ package com.android.server.apphibernation;
 
 import android.os.ShellCommand;
 import android.os.UserHandle;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -42,7 +44,11 @@ public final class AppHibernationShellCommand extends ShellCommand {
                 getErrPrintWriter().println("Error: No package specified");
                 return -1;
             }
-            getOutPrintWriter().println(z ? this.mService.isHibernatingGlobally(nextArgRequired) : this.mService.isHibernatingForUser(nextArgRequired, i));
+            getOutPrintWriter()
+                    .println(
+                            z
+                                    ? this.mService.isHibernatingGlobally(nextArgRequired)
+                                    : this.mService.isHibernatingForUser(nextArgRequired, i));
             return 0;
         }
         boolean z2 = false;
@@ -84,7 +90,17 @@ public final class AppHibernationShellCommand extends ShellCommand {
         outPrintWriter.println("  help");
         outPrintWriter.println("    Print this help text.");
         outPrintWriter.println("");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  set-state [--user USER_ID] [--global] PACKAGE true|false", "    Sets the hibernation state of the package to value specified. Optionally", "    may specify a user id or set global hibernation state.", "");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  get-state [--user USER_ID] [--global] PACKAGE", "    Gets the hibernation state of the package. Optionally may specify a user", "    id or request global hibernation state.", "");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  set-state [--user USER_ID] [--global] PACKAGE true|false",
+                "    Sets the hibernation state of the package to value specified. Optionally",
+                "    may specify a user id or set global hibernation state.",
+                "");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  get-state [--user USER_ID] [--global] PACKAGE",
+                "    Gets the hibernation state of the package. Optionally may specify a user",
+                "    id or request global hibernation state.",
+                "");
     }
 }

@@ -1,7 +1,6 @@
 package android.hardware.hdmi;
 
 import android.annotation.SystemApi;
-import android.hardware.hdmi.IHdmiControlCallback;
 import android.os.RemoteException;
 import android.util.Log;
 
@@ -56,7 +55,8 @@ public final class HdmiPlaybackClient extends HdmiClient {
         if (callback == null) {
             throw new IllegalArgumentException("OneTouchPlayCallback cannot be null.");
         }
-        return new IHdmiControlCallback.Stub() { // from class: android.hardware.hdmi.HdmiPlaybackClient.1
+        return new IHdmiControlCallback
+                .Stub() { // from class: android.hardware.hdmi.HdmiPlaybackClient.1
             @Override // android.hardware.hdmi.IHdmiControlCallback
             public void onComplete(int result) {
                 callback.onComplete(result);
@@ -68,7 +68,8 @@ public final class HdmiPlaybackClient extends HdmiClient {
         if (callback == null) {
             throw new IllegalArgumentException("DisplayStatusCallback cannot be null.");
         }
-        return new IHdmiControlCallback.Stub() { // from class: android.hardware.hdmi.HdmiPlaybackClient.2
+        return new IHdmiControlCallback
+                .Stub() { // from class: android.hardware.hdmi.HdmiPlaybackClient.2
             @Override // android.hardware.hdmi.IHdmiControlCallback
             public void onComplete(int status) {
                 callback.onComplete(status);

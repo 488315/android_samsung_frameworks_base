@@ -16,6 +16,7 @@ public class RotateFilter extends Filter {
 
     @GenerateFieldPort(name = "angle")
     private int mAngle;
+
     private int mHeight;
     private int mOutputHeight;
     private int mOutputWidth;
@@ -24,6 +25,7 @@ public class RotateFilter extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = "tile_size")
     private int mTileSize;
+
     private int mWidth;
 
     public RotateFilter(String name) {
@@ -50,7 +52,8 @@ public class RotateFilter extends Filter {
                 this.mTarget = target;
                 return;
             default:
-                throw new RuntimeException("Filter Sharpen does not support frames of target " + target + "!");
+                throw new RuntimeException(
+                        "Filter Sharpen does not support frames of target " + target + "!");
         }
     }
 
@@ -98,10 +101,22 @@ public class RotateFilter extends Filter {
                 sinTheta = 0.0f;
                 cosTheta = f;
             }
-            Point x0 = new Point(((-sinTheta) + cosTheta + 1.0f) * 0.5f, (((-cosTheta) - sinTheta) + 1.0f) * 0.5f);
-            Point x1 = new Point((sinTheta + cosTheta + 1.0f) * 0.5f, ((cosTheta - sinTheta) + 1.0f) * 0.5f);
-            Point x2 = new Point((((-sinTheta) - cosTheta) + 1.0f) * 0.5f, ((-cosTheta) + sinTheta + 1.0f) * 0.5f);
-            Point x3 = new Point(((sinTheta - cosTheta) + 1.0f) * 0.5f, (cosTheta + sinTheta + 1.0f) * 0.5f);
+            Point x0 =
+                    new Point(
+                            ((-sinTheta) + cosTheta + 1.0f) * 0.5f,
+                            (((-cosTheta) - sinTheta) + 1.0f) * 0.5f);
+            Point x1 =
+                    new Point(
+                            (sinTheta + cosTheta + 1.0f) * 0.5f,
+                            ((cosTheta - sinTheta) + 1.0f) * 0.5f);
+            Point x2 =
+                    new Point(
+                            (((-sinTheta) - cosTheta) + 1.0f) * 0.5f,
+                            ((-cosTheta) + sinTheta + 1.0f) * 0.5f);
+            Point x3 =
+                    new Point(
+                            ((sinTheta - cosTheta) + 1.0f) * 0.5f,
+                            (cosTheta + sinTheta + 1.0f) * 0.5f);
             Quad quad = new Quad(x0, x1, x2, x3);
             ((ShaderProgram) this.mProgram).setTargetRegion(quad);
             return;

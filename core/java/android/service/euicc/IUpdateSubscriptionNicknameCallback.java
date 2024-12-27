@@ -12,8 +12,7 @@ public interface IUpdateSubscriptionNicknameCallback extends IInterface {
 
     public static class Default implements IUpdateSubscriptionNicknameCallback {
         @Override // android.service.euicc.IUpdateSubscriptionNicknameCallback
-        public void onComplete(int result) throws RemoteException {
-        }
+        public void onComplete(int result) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,8 +20,10 @@ public interface IUpdateSubscriptionNicknameCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUpdateSubscriptionNicknameCallback {
-        public static final String DESCRIPTOR = "android.service.euicc.IUpdateSubscriptionNicknameCallback";
+    public abstract static class Stub extends Binder
+            implements IUpdateSubscriptionNicknameCallback {
+        public static final String DESCRIPTOR =
+                "android.service.euicc.IUpdateSubscriptionNicknameCallback";
         static final int TRANSACTION_onComplete = 1;
 
         public Stub() {
@@ -60,7 +61,8 @@ public interface IUpdateSubscriptionNicknameCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

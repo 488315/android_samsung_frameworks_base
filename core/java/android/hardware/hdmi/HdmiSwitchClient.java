@@ -1,12 +1,12 @@
 package android.hardware.hdmi;
 
 import android.annotation.SystemApi;
-import android.hardware.hdmi.HdmiSwitchClient;
-import android.hardware.hdmi.IHdmiControlCallback;
 import android.os.Binder;
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.android.internal.util.FunctionalUtils;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -27,7 +27,8 @@ public class HdmiSwitchClient extends HdmiClient {
     }
 
     private static IHdmiControlCallback getCallbackWrapper(final OnSelectListener listener) {
-        return new IHdmiControlCallback.Stub() { // from class: android.hardware.hdmi.HdmiSwitchClient.1
+        return new IHdmiControlCallback
+                .Stub() { // from class: android.hardware.hdmi.HdmiSwitchClient.1
             @Override // android.hardware.hdmi.IHdmiControlCallback
             public void onComplete(int result) {
                 OnSelectListener.this.onSelect(result);
@@ -86,17 +87,21 @@ public class HdmiSwitchClient extends HdmiClient {
         public void onComplete(final int result) {
             final Executor executor = this.val$executor;
             final OnSelectListener onSelectListener = this.val$listener;
-            Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.hardware.hdmi.HdmiSwitchClient$2$$ExternalSyntheticLambda0
-                @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    executor.execute(new Runnable() { // from class: android.hardware.hdmi.HdmiSwitchClient$2$$ExternalSyntheticLambda1
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            HdmiSwitchClient.OnSelectListener.this.onSelect(r2);
+            Binder.withCleanCallingIdentity(
+                    new FunctionalUtils.ThrowingRunnable() { // from class:
+                        // android.hardware.hdmi.HdmiSwitchClient$2$$ExternalSyntheticLambda0
+                        @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
+                        public final void runOrThrow() {
+                            executor.execute(
+                                    new Runnable() { // from class:
+                                        // android.hardware.hdmi.HdmiSwitchClient$2$$ExternalSyntheticLambda1
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            HdmiSwitchClient.OnSelectListener.this.onSelect(r2);
+                                        }
+                                    });
                         }
                     });
-                }
-            });
         }
     }
 
@@ -125,17 +130,21 @@ public class HdmiSwitchClient extends HdmiClient {
         public void onComplete(final int result) {
             final Executor executor = this.val$executor;
             final OnSelectListener onSelectListener = this.val$listener;
-            Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.hardware.hdmi.HdmiSwitchClient$3$$ExternalSyntheticLambda0
-                @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    executor.execute(new Runnable() { // from class: android.hardware.hdmi.HdmiSwitchClient$3$$ExternalSyntheticLambda1
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            HdmiSwitchClient.OnSelectListener.this.onSelect(r2);
+            Binder.withCleanCallingIdentity(
+                    new FunctionalUtils.ThrowingRunnable() { // from class:
+                        // android.hardware.hdmi.HdmiSwitchClient$3$$ExternalSyntheticLambda0
+                        @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
+                        public final void runOrThrow() {
+                            executor.execute(
+                                    new Runnable() { // from class:
+                                        // android.hardware.hdmi.HdmiSwitchClient$3$$ExternalSyntheticLambda1
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            HdmiSwitchClient.OnSelectListener.this.onSelect(r2);
+                                        }
+                                    });
                         }
                     });
-                }
-            });
         }
     }
 

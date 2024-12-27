@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.SizeF;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RemoteViews;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -16,7 +16,11 @@ public class RemoteViewsListAdapter extends BaseAdapter {
     private int mViewTypeCount;
     private ArrayList<Integer> mViewTypes = new ArrayList<>();
 
-    public RemoteViewsListAdapter(Context context, ArrayList<RemoteViews> remoteViews, int viewTypeCount, RemoteViews.ColorResources colorResources) {
+    public RemoteViewsListAdapter(
+            Context context,
+            ArrayList<RemoteViews> remoteViews,
+            int viewTypeCount,
+            RemoteViews.ColorResources colorResources) {
         this.mContext = context;
         this.mRemoteViewsList = remoteViews;
         this.mViewTypeCount = viewTypeCount;
@@ -43,7 +47,9 @@ public class RemoteViewsListAdapter extends BaseAdapter {
             }
         }
         if (this.mViewTypes.size() > this.mViewTypeCount || this.mViewTypeCount < 1) {
-            throw new RuntimeException("Invalid view type count -- view type count must be >= 1and must be as large as the total number of distinct view types");
+            throw new RuntimeException(
+                    "Invalid view type count -- view type count must be >= 1and must be as large as"
+                        + " the total number of distinct view types");
         }
     }
 
@@ -74,7 +80,13 @@ public class RemoteViewsListAdapter extends BaseAdapter {
                 rv.reapply(this.mContext, convertView, null, null, this.mColorResources);
                 return convertView;
             }
-            View v = rv.apply(this.mContext, parent, (RemoteViews.InteractionHandler) null, (SizeF) null, this.mColorResources);
+            View v =
+                    rv.apply(
+                            this.mContext,
+                            parent,
+                            (RemoteViews.InteractionHandler) null,
+                            (SizeF) null,
+                            this.mColorResources);
             return v;
         }
         return null;

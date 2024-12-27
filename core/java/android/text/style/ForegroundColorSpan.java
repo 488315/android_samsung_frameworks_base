@@ -5,7 +5,8 @@ import android.text.ParcelableSpan;
 import android.text.TextPaint;
 
 /* loaded from: classes4.dex */
-public class ForegroundColorSpan extends CharacterStyle implements UpdateAppearance, ParcelableSpan {
+public class ForegroundColorSpan extends CharacterStyle
+        implements UpdateAppearance, ParcelableSpan {
     private final int mColor;
 
     public ForegroundColorSpan(int color) {
@@ -51,6 +52,8 @@ public class ForegroundColorSpan extends CharacterStyle implements UpdateAppeara
     }
 
     public String toString() {
-        return "ForegroundColorSpan{color=#" + String.format("%08X", Integer.valueOf(getForegroundColor())) + '}';
+        return "ForegroundColorSpan{color=#"
+                + String.format("%08X", Integer.valueOf(getForegroundColor()))
+                + '}';
     }
 }

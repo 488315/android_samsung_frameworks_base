@@ -3,6 +3,7 @@ package com.android.server.display.config;
 import android.R;
 import android.content.res.Resources;
 import android.util.Spline;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -10,7 +11,9 @@ import com.android.server.accessibility.magnification.FullScreenMagnificationGes
 public final class SecHysteresisLevels extends HysteresisLevels {
     public static final float[] DEFAULT_AMBIENT_BRIGHTENING_THRESHOLDS = {100.0f};
     public static final float[] DEFAULT_AMBIENT_DARKENING_THRESHOLDS = {200.0f};
-    public static final float[] DEFAULT_AMBIENT_THRESHOLD_LEVELS = {FullScreenMagnificationGestureHandler.MAX_SCALE};
+    public static final float[] DEFAULT_AMBIENT_THRESHOLD_LEVELS = {
+        FullScreenMagnificationGestureHandler.MAX_SCALE
+    };
     public final Spline mHysteresisBrightSpline;
     public final Spline mHysteresisDarkSpline;
 
@@ -51,7 +54,10 @@ public final class SecHysteresisLevels extends HysteresisLevels {
             r7.<init>(r8)
             throw r7
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.config.SecHysteresisLevels.<init>(int[], int[], int[], int[]):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.config.SecHysteresisLevels.<init>(int[], int[],"
+                    + " int[], int[]):void");
     }
 
     public static float[] convertArrayFromIntToFloat(int[] iArr) {
@@ -64,7 +70,12 @@ public final class SecHysteresisLevels extends HysteresisLevels {
 
     public static SecHysteresisLevels loadAmbientBrightnessConfig(Resources resources) {
         if (resources != null) {
-            return new SecHysteresisLevels(resources.getIntArray(R.array.config_face_acquire_vendor_biometricprompt_ignorelist), resources.getIntArray(R.array.config_face_acquire_vendor_enroll_ignorelist), resources.getIntArray(R.array.config_face_acquire_vendor_keyguard_ignorelist), resources.getIntArray(R.array.config_fillBuiltInDisplayCutoutArray));
+            return new SecHysteresisLevels(
+                    resources.getIntArray(
+                            R.array.config_face_acquire_vendor_biometricprompt_ignorelist),
+                    resources.getIntArray(R.array.config_face_acquire_vendor_enroll_ignorelist),
+                    resources.getIntArray(R.array.config_face_acquire_vendor_keyguard_ignorelist),
+                    resources.getIntArray(R.array.config_fillBuiltInDisplayCutoutArray));
         }
         return null;
     }
@@ -76,7 +87,8 @@ public final class SecHysteresisLevels extends HysteresisLevels {
 
     @Override // com.android.server.display.config.HysteresisLevels
     public final float getDarkeningThreshold(float f) {
-        if (this.mHysteresisDarkSpline.interpolate(f) >= FullScreenMagnificationGestureHandler.MAX_SCALE) {
+        if (this.mHysteresisDarkSpline.interpolate(f)
+                >= FullScreenMagnificationGestureHandler.MAX_SCALE) {
             return Math.round(r0);
         }
         return -1.0f;
@@ -84,6 +96,10 @@ public final class SecHysteresisLevels extends HysteresisLevels {
 
     @Override // com.android.server.display.config.HysteresisLevels
     public final String toString() {
-        return "SecHysteresisLevels {\n    mHysteresisBrightSpline=" + this.mHysteresisBrightSpline + ",\n    mHysteresisDarkSpline=" + this.mHysteresisDarkSpline + "\n}";
+        return "SecHysteresisLevels {\n    mHysteresisBrightSpline="
+                + this.mHysteresisBrightSpline
+                + ",\n    mHysteresisDarkSpline="
+                + this.mHysteresisDarkSpline
+                + "\n}";
     }
 }

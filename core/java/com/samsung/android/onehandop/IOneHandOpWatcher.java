@@ -19,12 +19,10 @@ public interface IOneHandOpWatcher extends IInterface {
 
     public static class Default implements IOneHandOpWatcher {
         @Override // com.samsung.android.onehandop.IOneHandOpWatcher
-        public void onMagnificationSpecChanged() throws RemoteException {
-        }
+        public void onMagnificationSpecChanged() throws RemoteException {}
 
         @Override // com.samsung.android.onehandop.IOneHandOpWatcher
-        public void onInputFilterChanged() throws RemoteException {
-        }
+        public void onInputFilterChanged() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -32,7 +30,7 @@ public interface IOneHandOpWatcher extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IOneHandOpWatcher {
+    public abstract static class Stub extends Binder implements IOneHandOpWatcher {
         static final int TRANSACTION_onInputFilterChanged = 2;
         static final int TRANSACTION_onMagnificationSpecChanged = 1;
         private final PermissionEnforcer mEnforcer;
@@ -47,7 +45,9 @@ public interface IOneHandOpWatcher extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IOneHandOpWatcher asInterface(IBinder obj) {
@@ -83,7 +83,8 @@ public interface IOneHandOpWatcher extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IOneHandOpWatcher.DESCRIPTOR);
             }
@@ -143,11 +144,13 @@ public interface IOneHandOpWatcher extends IInterface {
         }
 
         protected void onMagnificationSpecChanged_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
         }
 
         protected void onInputFilterChanged_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

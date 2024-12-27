@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class FaceEnrollFrame implements Parcelable {
-    public static final Parcelable.Creator<FaceEnrollFrame> CREATOR = new Parcelable.Creator<FaceEnrollFrame>() { // from class: android.hardware.face.FaceEnrollFrame.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FaceEnrollFrame createFromParcel(Parcel source) {
-            return new FaceEnrollFrame(source);
-        }
+    public static final Parcelable.Creator<FaceEnrollFrame> CREATOR =
+            new Parcelable.Creator<
+                    FaceEnrollFrame>() { // from class: android.hardware.face.FaceEnrollFrame.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FaceEnrollFrame createFromParcel(Parcel source) {
+                    return new FaceEnrollFrame(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FaceEnrollFrame[] newArray(int size) {
-            return new FaceEnrollFrame[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FaceEnrollFrame[] newArray(int size) {
+                    return new FaceEnrollFrame[size];
+                }
+            };
     private final FaceEnrollCell mCell;
     private final FaceDataFrame mData;
     private final int mStage;
@@ -41,9 +43,15 @@ public final class FaceEnrollFrame implements Parcelable {
     }
 
     private FaceEnrollFrame(Parcel source) {
-        this.mCell = (FaceEnrollCell) source.readParcelable(FaceEnrollCell.class.getClassLoader(), FaceEnrollCell.class);
+        this.mCell =
+                (FaceEnrollCell)
+                        source.readParcelable(
+                                FaceEnrollCell.class.getClassLoader(), FaceEnrollCell.class);
         this.mStage = source.readInt();
-        this.mData = (FaceDataFrame) source.readParcelable(FaceDataFrame.class.getClassLoader(), FaceDataFrame.class);
+        this.mData =
+                (FaceDataFrame)
+                        source.readParcelable(
+                                FaceDataFrame.class.getClassLoader(), FaceDataFrame.class);
     }
 
     @Override // android.os.Parcelable

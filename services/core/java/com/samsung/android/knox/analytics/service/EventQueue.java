@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
+
 import com.samsung.android.knox.analytics.KnoxAnalyticsData;
 import com.samsung.android.knox.analytics.util.BlacklistedFeature;
 import com.samsung.android.knox.analytics.util.KnoxAnalyticsDataConverter;
@@ -17,6 +18,7 @@ import com.samsung.android.knox.analytics.util.KnoxAnalyticsQueryResolver;
 import com.samsung.android.knox.analytics.util.Log;
 import com.samsung.android.knox.analytics.util.UserManagerHelper;
 import com.samsung.android.knox.analytics.util.WhitelistedFeature;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -49,12 +51,14 @@ public final class EventQueue {
     public final Object mVersioningCompletedLock = new Object();
     public boolean mVersioningCompleted = false;
     public List mEventsCache = new ArrayList();
-    public BroadcastReceiver mShutdownReceiver = new BroadcastReceiver() { // from class: com.samsung.android.knox.analytics.service.EventQueue.1
-        @Override // android.content.BroadcastReceiver
-        public final void onReceive(Context context, Intent intent) {
-            EventQueue.this.saveCachedLogs();
-        }
-    };
+    public BroadcastReceiver mShutdownReceiver =
+            new BroadcastReceiver() { // from class:
+                                      // com.samsung.android.knox.analytics.service.EventQueue.1
+                @Override // android.content.BroadcastReceiver
+                public final void onReceive(Context context, Intent intent) {
+                    EventQueue.this.saveCachedLogs();
+                }
+            };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class EventHandler extends Handler {
@@ -72,11 +76,16 @@ public final class EventQueue {
             int i = message.what;
             if (i == 1) {
                 Log.d(EventQueue.TAG, "EventQueue.handleMessage() - EVENT_QUEUE_MSG_LOG_API");
-                EventQueue.this.enqueueEvent(message.getData().getParcelable(EventQueue.EVENT_QUEUE_ANALYTICS_DATA_KEY));
+                EventQueue.this.enqueueEvent(
+                        message.getData().getParcelable(EventQueue.EVENT_QUEUE_ANALYTICS_DATA_KEY));
             } else {
                 if (i == 2) {
-                    Log.d(EventQueue.TAG, "EventQueue.handleMessage() - EVENT_QUEUE_MSG_KA_DEACTIVATION");
-                    EventQueue.this.enqueueEvent(message.getData().getParcelable(EventQueue.EVENT_QUEUE_ANALYTICS_DATA_KEY));
+                    Log.d(
+                            EventQueue.TAG,
+                            "EventQueue.handleMessage() - EVENT_QUEUE_MSG_KA_DEACTIVATION");
+                    EventQueue.this.enqueueEvent(
+                            message.getData()
+                                    .getParcelable(EventQueue.EVENT_QUEUE_ANALYTICS_DATA_KEY));
                     EventQueue.this.stop();
                     return;
                 }
@@ -84,8 +93,11 @@ public final class EventQueue {
                     Log.e(EventQueue.TAG, "handleMessage(): invalid msg.what");
                     return;
                 }
-                Log.d(EventQueue.TAG, "EventQueue.handleMessage() - EVENT_QUEUE_MSG_CLEANED_LOG_API");
-                KnoxAnalyticsData parcelable = message.getData().getParcelable(EventQueue.EVENT_QUEUE_ANALYTICS_DATA_KEY);
+                Log.d(
+                        EventQueue.TAG,
+                        "EventQueue.handleMessage() - EVENT_QUEUE_MSG_CLEANED_LOG_API");
+                KnoxAnalyticsData parcelable =
+                        message.getData().getParcelable(EventQueue.EVENT_QUEUE_ANALYTICS_DATA_KEY);
                 EventQueue.this.saveCachedLogs();
                 EventQueue.this.addEvent(parcelable, 0, false);
             }
@@ -95,7 +107,8 @@ public final class EventQueue {
     public EventQueue(Context context) {
         Log.d(TAG, "constructor()");
         this.mContext = context;
-        context.registerReceiver(this.mShutdownReceiver, new IntentFilter("android.intent.action.ACTION_SHUTDOWN"));
+        context.registerReceiver(
+                this.mShutdownReceiver, new IntentFilter("android.intent.action.ACTION_SHUTDOWN"));
     }
 
     public final void addBulkEvents() {
@@ -103,7 +116,11 @@ public final class EventQueue {
         Log.d(str, "addBulkEvents()");
         long lastEventId = KnoxAnalyticsQueryResolver.getLastEventId(this.mContext) + 1;
         Bundle bundle = new Bundle();
-        bundle.putStringArrayList("eventsList", (ArrayList) KnoxAnalyticsDataConverter.formatBulkEvents(lastEventId, this.mEventsCache));
+        bundle.putStringArrayList(
+                "eventsList",
+                (ArrayList)
+                        KnoxAnalyticsDataConverter.formatBulkEvents(
+                                lastEventId, this.mEventsCache));
         if (KnoxAnalyticsQueryResolver.addBulkEvents(this.mContext, lastEventId, bundle, 1) == -1) {
             Log.e(str, "addBulkEvents(): error adding events, aborting.");
         } else {
@@ -117,7 +134,8 @@ public final class EventQueue {
 
     public final void addEvent(KnoxAnalyticsData knoxAnalyticsData, int i, boolean z) {
         if (!z) {
-            if (!checkEventFeatureWhitelisted(knoxAnalyticsData) && checkEventFeatureBlacklisted(knoxAnalyticsData)) {
+            if (!checkEventFeatureWhitelisted(knoxAnalyticsData)
+                    && checkEventFeatureBlacklisted(knoxAnalyticsData)) {
                 Log.d(TAG, "addEvent(): feature blacklisted, discarding event.");
                 return;
             } else {
@@ -126,7 +144,12 @@ public final class EventQueue {
             }
         }
         knoxAnalyticsData.eventId = KnoxAnalyticsQueryResolver.getLastEventId(this.mContext) + 1;
-        if (KnoxAnalyticsQueryResolver.addEvent(this.mContext, knoxAnalyticsData.eventId, KnoxAnalyticsDataConverter.toJSONString(knoxAnalyticsData), i) == -1) {
+        if (KnoxAnalyticsQueryResolver.addEvent(
+                        this.mContext,
+                        knoxAnalyticsData.eventId,
+                        KnoxAnalyticsDataConverter.toJSONString(knoxAnalyticsData),
+                        i)
+                == -1) {
             Log.e(TAG, "addEvent(): error adding event, aborting.");
         }
     }
@@ -150,7 +173,8 @@ public final class EventQueue {
         }
         Iterator it = list.iterator();
         while (it.hasNext()) {
-            if (((BlacklistedFeature) it.next()).isBlacklisted(knoxAnalyticsData.getFeature(), knoxAnalyticsData.getEvent())) {
+            if (((BlacklistedFeature) it.next())
+                    .isBlacklisted(knoxAnalyticsData.getFeature(), knoxAnalyticsData.getEvent())) {
                 return true;
             }
         }
@@ -223,7 +247,8 @@ public final class EventQueue {
     }
 
     public final void enqueueEvent(KnoxAnalyticsData knoxAnalyticsData) {
-        if (!checkEventFeatureWhitelisted(knoxAnalyticsData) && checkEventFeatureBlacklisted(knoxAnalyticsData)) {
+        if (!checkEventFeatureWhitelisted(knoxAnalyticsData)
+                && checkEventFeatureBlacklisted(knoxAnalyticsData)) {
             Log.d(TAG, "enqueueEvent(): feature blacklisted, discarding event.");
             return;
         }
@@ -240,7 +265,9 @@ public final class EventQueue {
     public final String getAppNameByPID(int i) {
         String str = TAG;
         Log.d(str, "getAppNameByPID(" + i + ")");
-        List<ActivityManager.RunningAppProcessInfo> runningAppProcesses = ((ActivityManager) this.mContext.getSystemService("activity")).getRunningAppProcesses();
+        List<ActivityManager.RunningAppProcessInfo> runningAppProcesses =
+                ((ActivityManager) this.mContext.getSystemService("activity"))
+                        .getRunningAppProcesses();
         if (runningAppProcesses == null) {
             Log.e(str, "getAppNameByPID(): nill processInfoList");
             return null;
@@ -285,12 +312,15 @@ public final class EventQueue {
 
     public final void restartMessageHandler() {
         cancelMessageHandler();
-        this.mMessageDelayHandler.postDelayed(new Runnable() { // from class: com.samsung.android.knox.analytics.service.EventQueue.2
-            @Override // java.lang.Runnable
-            public final void run() {
-                EventQueue.this.saveCachedLogs();
-            }
-        }, 300000L);
+        this.mMessageDelayHandler.postDelayed(
+                new Runnable() { // from class:
+                                 // com.samsung.android.knox.analytics.service.EventQueue.2
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        EventQueue.this.saveCachedLogs();
+                    }
+                },
+                300000L);
     }
 
     public final synchronized void saveCachedLogs() {
@@ -327,12 +357,14 @@ public final class EventQueue {
                     this.mMessageDelayHandler = new Handler(this.mHandlerThread.getLooper());
                 }
                 if (this.mFeatureBlacklistObserver == null) {
-                    FeatureBlacklistObserver featureBlacklistObserver = new FeatureBlacklistObserver(this.mContext);
+                    FeatureBlacklistObserver featureBlacklistObserver =
+                            new FeatureBlacklistObserver(this.mContext);
                     this.mFeatureBlacklistObserver = featureBlacklistObserver;
                     featureBlacklistObserver.start();
                 }
                 if (this.mFeatureWhitelistObserver == null) {
-                    FeatureWhitelistObserver featureWhitelistObserver = new FeatureWhitelistObserver(this.mContext);
+                    FeatureWhitelistObserver featureWhitelistObserver =
+                            new FeatureWhitelistObserver(this.mContext);
                     this.mFeatureWhitelistObserver = featureWhitelistObserver;
                     featureWhitelistObserver.start();
                 }

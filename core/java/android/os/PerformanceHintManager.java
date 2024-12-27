@@ -1,8 +1,9 @@
 package android.os;
 
 import android.content.Context;
-import android.os.ServiceManager;
+
 import com.android.internal.util.Preconditions;
+
 import java.io.Closeable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -29,7 +30,8 @@ public final class PerformanceHintManager {
     public static native void nativeReportActualWorkDuration(long j, long j2);
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static native void nativeReportActualWorkDuration(long j, long j2, long j3, long j4, long j5);
+    public static native void nativeReportActualWorkDuration(
+            long j, long j2, long j3, long j4, long j5);
 
     /* JADX INFO: Access modifiers changed from: private */
     public static native void nativeSendHint(long j, int i);
@@ -64,8 +66,10 @@ public final class PerformanceHintManager {
         if (tids.length == 0) {
             throw new IllegalArgumentException("thread id list can't be empty.");
         }
-        Preconditions.checkArgumentPositive(initialTargetWorkDurationNanos, "the hint target duration should be positive.");
-        long nativeSessionPtr = nativeCreateSession(this.mNativeManagerPtr, tids, initialTargetWorkDurationNanos);
+        Preconditions.checkArgumentPositive(
+                initialTargetWorkDurationNanos, "the hint target duration should be positive.");
+        long nativeSessionPtr =
+                nativeCreateSession(this.mNativeManagerPtr, tids, initialTargetWorkDurationNanos);
         if (nativeSessionPtr == 0) {
             return null;
         }
@@ -83,8 +87,7 @@ public final class PerformanceHintManager {
         private long mNativeSessionPtr;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface Hint {
-        }
+        public @interface Hint {}
 
         public Session(long nativeSessionPtr) {
             this.mNativeSessionPtr = nativeSessionPtr;
@@ -99,13 +102,17 @@ public final class PerformanceHintManager {
         }
 
         public void updateTargetWorkDuration(long targetDurationNanos) {
-            Preconditions.checkArgumentPositive(targetDurationNanos, "the hint target duration should be positive.");
-            PerformanceHintManager.nativeUpdateTargetWorkDuration(this.mNativeSessionPtr, targetDurationNanos);
+            Preconditions.checkArgumentPositive(
+                    targetDurationNanos, "the hint target duration should be positive.");
+            PerformanceHintManager.nativeUpdateTargetWorkDuration(
+                    this.mNativeSessionPtr, targetDurationNanos);
         }
 
         public void reportActualWorkDuration(long actualDurationNanos) {
-            Preconditions.checkArgumentPositive(actualDurationNanos, "the actual duration should be positive.");
-            PerformanceHintManager.nativeReportActualWorkDuration(this.mNativeSessionPtr, actualDurationNanos);
+            Preconditions.checkArgumentPositive(
+                    actualDurationNanos, "the actual duration should be positive.");
+            PerformanceHintManager.nativeReportActualWorkDuration(
+                    this.mNativeSessionPtr, actualDurationNanos);
         }
 
         @Override // java.io.Closeable, java.lang.AutoCloseable
@@ -146,21 +153,32 @@ public final class PerformanceHintManager {
 
         public void reportActualWorkDuration(WorkDuration workDuration) {
             if (workDuration.mWorkPeriodStartTimestampNanos <= 0) {
-                throw new IllegalArgumentException("the work period start timestamp should be greater than zero.");
+                throw new IllegalArgumentException(
+                        "the work period start timestamp should be greater than zero.");
             }
             if (workDuration.mActualTotalDurationNanos <= 0) {
-                throw new IllegalArgumentException("the actual total duration should be greater than zero.");
+                throw new IllegalArgumentException(
+                        "the actual total duration should be greater than zero.");
             }
             if (workDuration.mActualCpuDurationNanos < 0) {
-                throw new IllegalArgumentException("the actual CPU duration should be greater than or equal to zero.");
+                throw new IllegalArgumentException(
+                        "the actual CPU duration should be greater than or equal to zero.");
             }
             if (workDuration.mActualGpuDurationNanos < 0) {
-                throw new IllegalArgumentException("the actual GPU duration should be greater than or equal to zero.");
+                throw new IllegalArgumentException(
+                        "the actual GPU duration should be greater than or equal to zero.");
             }
             if (workDuration.mActualCpuDurationNanos + workDuration.mActualGpuDurationNanos <= 0) {
-                throw new IllegalArgumentException("either the actual CPU duration or the actual GPU duration should be greaterthan zero.");
+                throw new IllegalArgumentException(
+                        "either the actual CPU duration or the actual GPU duration should be"
+                            + " greaterthan zero.");
             }
-            PerformanceHintManager.nativeReportActualWorkDuration(this.mNativeSessionPtr, workDuration.mWorkPeriodStartTimestampNanos, workDuration.mActualTotalDurationNanos, workDuration.mActualCpuDurationNanos, workDuration.mActualGpuDurationNanos);
+            PerformanceHintManager.nativeReportActualWorkDuration(
+                    this.mNativeSessionPtr,
+                    workDuration.mWorkPeriodStartTimestampNanos,
+                    workDuration.mActualTotalDurationNanos,
+                    workDuration.mActualCpuDurationNanos,
+                    workDuration.mActualGpuDurationNanos);
         }
     }
 }

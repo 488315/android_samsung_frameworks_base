@@ -13,7 +13,11 @@ public final class OneTouchPlayAction extends HdmiCecFeatureAction {
     public HdmiCecLocalDeviceSource mSource;
     public final int mTargetAddress;
 
-    public OneTouchPlayAction(HdmiCecLocalDevice hdmiCecLocalDevice, int i, IHdmiControlCallback iHdmiControlCallback, boolean z) {
+    public OneTouchPlayAction(
+            HdmiCecLocalDevice hdmiCecLocalDevice,
+            int i,
+            IHdmiControlCallback iHdmiControlCallback,
+            boolean z) {
         super(hdmiCecLocalDevice, iHdmiControlCallback);
         this.mPowerStatusCounter = 0;
         this.mTargetAddress = i;
@@ -61,13 +65,16 @@ public final class OneTouchPlayAction extends HdmiCecFeatureAction {
 
     @Override // com.android.server.hdmi.HdmiCecFeatureAction
     public final void start() {
-        HdmiCecLocalDeviceSource hdmiCecLocalDeviceSource = (HdmiCecLocalDeviceSource) super.mSource;
+        HdmiCecLocalDeviceSource hdmiCecLocalDeviceSource =
+                (HdmiCecLocalDeviceSource) super.mSource;
         this.mSource = hdmiCecLocalDeviceSource;
         if (hdmiCecLocalDeviceSource.mService.mPowerManager.mPowerManager.isInteractive()) {
             startAction();
             return;
         }
-        Slog.d("OneTouchPlayAction", "PowerManager is not interactive. Delay the action to check if standby started!");
+        Slog.d(
+                "OneTouchPlayAction",
+                "PowerManager is not interactive. Delay the action to check if standby started!");
         this.mState = 2;
         addTimer(2, 2000);
     }
@@ -195,6 +202,8 @@ public final class OneTouchPlayAction extends HdmiCecFeatureAction {
             r12.addTimer(r6, r0)
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.hdmi.OneTouchPlayAction.startAction():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.hdmi.OneTouchPlayAction.startAction():void");
     }
 }

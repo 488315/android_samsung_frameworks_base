@@ -16,10 +16,13 @@ import android.util.ArrayMap;
 import android.util.DebugUtils;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
+
 import com.android.internal.R;
 import com.android.internal.util.IndentingPrintWriter;
 import com.android.internal.util.Preconditions;
+
 import com.samsung.android.security.SemSdCardEncryption;
+
 import java.io.CharArrayWriter;
 import java.io.File;
 import java.util.Comparator;
@@ -29,7 +32,8 @@ import java.util.UUID;
 
 /* loaded from: classes3.dex */
 public class VolumeInfo implements Parcelable {
-    public static final String ACTION_VOLUME_STATE_CHANGED = "android.os.storage.action.VOLUME_STATE_CHANGED";
+    public static final String ACTION_VOLUME_STATE_CHANGED =
+            "android.os.storage.action.VOLUME_STATE_CHANGED";
     public static final Parcelable.Creator<VolumeInfo> CREATOR;
     private static final String DOCUMENT_AUTHORITY = "com.android.externalstorage.documents";
     private static final String DOCUMENT_ROOT_PRIMARY_EMULATED = "primary";
@@ -72,21 +76,22 @@ public class VolumeInfo implements Parcelable {
     private static SparseArray<String> sStateToEnvironment = new SparseArray<>();
     private static ArrayMap<String, String> sEnvironmentToBroadcast = new ArrayMap<>();
     private static SparseIntArray sStateToDescrip = new SparseIntArray();
-    private static final Comparator<VolumeInfo> sDescriptionComparator = new Comparator<VolumeInfo>() { // from class: android.os.storage.VolumeInfo.1
-        @Override // java.util.Comparator
-        public int compare(VolumeInfo lhs, VolumeInfo rhs) {
-            if (VolumeInfo.ID_PRIVATE_INTERNAL.equals(lhs.getId())) {
-                return -1;
-            }
-            if (lhs.getDescription() == null) {
-                return 1;
-            }
-            if (rhs.getDescription() == null) {
-                return -1;
-            }
-            return lhs.getDescription().compareTo(rhs.getDescription());
-        }
-    };
+    private static final Comparator<VolumeInfo> sDescriptionComparator =
+            new Comparator<VolumeInfo>() { // from class: android.os.storage.VolumeInfo.1
+                @Override // java.util.Comparator
+                public int compare(VolumeInfo lhs, VolumeInfo rhs) {
+                    if (VolumeInfo.ID_PRIVATE_INTERNAL.equals(lhs.getId())) {
+                        return -1;
+                    }
+                    if (lhs.getDescription() == null) {
+                        return 1;
+                    }
+                    if (rhs.getDescription() == null) {
+                        return -1;
+                    }
+                    return lhs.getDescription().compareTo(rhs.getDescription());
+                }
+            };
 
     static {
         sStateToEnvironment.put(0, Environment.MEDIA_UNMOUNTED);
@@ -103,7 +108,8 @@ public class VolumeInfo implements Parcelable {
         sEnvironmentToBroadcast.put(Environment.MEDIA_UNMOUNTED, Intent.ACTION_MEDIA_UNMOUNTED);
         sEnvironmentToBroadcast.put(Environment.MEDIA_CHECKING, Intent.ACTION_MEDIA_CHECKING);
         sEnvironmentToBroadcast.put(Environment.MEDIA_MOUNTED, Intent.ACTION_MEDIA_MOUNTED);
-        sEnvironmentToBroadcast.put(Environment.MEDIA_MOUNTED_READ_ONLY, Intent.ACTION_MEDIA_MOUNTED);
+        sEnvironmentToBroadcast.put(
+                Environment.MEDIA_MOUNTED_READ_ONLY, Intent.ACTION_MEDIA_MOUNTED);
         sEnvironmentToBroadcast.put(Environment.MEDIA_EJECTING, Intent.ACTION_MEDIA_EJECT);
         sEnvironmentToBroadcast.put(Environment.MEDIA_UNMOUNTABLE, Intent.ACTION_MEDIA_UNMOUNTABLE);
         sEnvironmentToBroadcast.put(Environment.MEDIA_REMOVED, Intent.ACTION_MEDIA_REMOVED);
@@ -119,19 +125,21 @@ public class VolumeInfo implements Parcelable {
         sStateToDescrip.put(6, R.string.ext_media_status_unmountable);
         sStateToDescrip.put(7, R.string.ext_media_status_removed);
         sStateToDescrip.put(8, R.string.ext_media_status_bad_removal);
-        CREATOR = new Parcelable.Creator<VolumeInfo>() { // from class: android.os.storage.VolumeInfo.2
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public VolumeInfo createFromParcel(Parcel in) {
-                return new VolumeInfo(in);
-            }
+        CREATOR =
+                new Parcelable.Creator<
+                        VolumeInfo>() { // from class: android.os.storage.VolumeInfo.2
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public VolumeInfo createFromParcel(Parcel in) {
+                        return new VolumeInfo(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public VolumeInfo[] newArray(int size) {
-                return new VolumeInfo[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public VolumeInfo[] newArray(int size) {
+                        return new VolumeInfo[size];
+                    }
+                };
     }
 
     public VolumeInfo(String id, int type, DiskInfo disk, String partGuid) {
@@ -339,7 +347,9 @@ public class VolumeInfo implements Parcelable {
             return null;
         }
         if (this.type == 0 || this.type == 5) {
-            return new File(this.path.replace(FullBackup.MANAGED_EXTERNAL_SPECIFIC_TREE_TOKEN, "/mnt/media_rw/"));
+            return new File(
+                    this.path.replace(
+                            FullBackup.MANAGED_EXTERNAL_SPECIFIC_TREE_TOKEN, "/mnt/media_rw/"));
         }
         return getPathForUser(userId);
     }
@@ -453,7 +463,24 @@ public class VolumeInfo implements Parcelable {
             diskType = "fuse";
             bAsec = false;
         }
-        return new StorageVolume(this.id, userPath, internalPath, description, isPrimary(), removable, emulated, externallyManaged, false, maxFileSize, new UserHandle(userId), uuid, derivedFsUuid, envState, mtpStorageId2, diskType, bAsec);
+        return new StorageVolume(
+                this.id,
+                userPath,
+                internalPath,
+                description,
+                isPrimary(),
+                removable,
+                emulated,
+                externallyManaged,
+                false,
+                maxFileSize,
+                new UserHandle(userId),
+                uuid,
+                derivedFsUuid,
+                envState,
+                mtpStorageId2,
+                diskType,
+                bAsec);
     }
 
     public static int buildStableMtpStorageId(String fsUuid) {
@@ -485,9 +512,13 @@ public class VolumeInfo implements Parcelable {
     public Intent buildBrowseIntentForUser(int userId) {
         Uri uri;
         if ((this.type == 0 || this.type == 5) && this.mountUserId == userId) {
-            uri = DocumentsContract.buildRootUri("com.android.externalstorage.documents", this.fsUuid);
+            uri =
+                    DocumentsContract.buildRootUri(
+                            "com.android.externalstorage.documents", this.fsUuid);
         } else if (this.type == 2 && isPrimary()) {
-            uri = DocumentsContract.buildRootUri("com.android.externalstorage.documents", "primary");
+            uri =
+                    DocumentsContract.buildRootUri(
+                            "com.android.externalstorage.documents", "primary");
         } else {
             return null;
         }
@@ -510,7 +541,8 @@ public class VolumeInfo implements Parcelable {
         pw.printPair("type", DebugUtils.valueToString(getClass(), "TYPE_", this.type));
         pw.printPair("diskId", getDiskId());
         pw.printPair("partGuid", this.partGuid);
-        pw.printPair("mountFlags", DebugUtils.flagsToString(getClass(), "MOUNT_FLAG_", this.mountFlags));
+        pw.printPair(
+                "mountFlags", DebugUtils.flagsToString(getClass(), "MOUNT_FLAG_", this.mountFlags));
         pw.printPair("mountUserId", Integer.valueOf(this.mountUserId));
         pw.printPair("state", DebugUtils.valueToString(getClass(), "STATE_", this.state));
         pw.println();

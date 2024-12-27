@@ -9,13 +9,13 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.telecom.Logging.Session;
 import android.util.Log;
-import com.samsung.android.gesture.IMotionRecognitionCallback;
-import com.samsung.android.gesture.IMotionRecognitionService;
+
 import com.samsung.android.hardware.context.SemContext;
 import com.samsung.android.hardware.context.SemContextEvent;
 import com.samsung.android.hardware.context.SemContextListener;
 import com.samsung.android.hardware.context.SemContextManager;
 import com.samsung.android.hardware.context.SemContextMovement;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -40,8 +40,7 @@ public class SemMotionRecognitionManager {
     public static final int MOTION_ALL = 1180677;
     public static final int MOTION_CALL_POSE = 262144;
 
-    @Deprecated
-    public static final int MOTION_DIRECT_CALLING = 1024;
+    @Deprecated public static final int MOTION_DIRECT_CALLING = 1024;
     public static final int MOTION_FLAT = 8192;
     public static final int MOTION_NUM = 25;
     public static final int MOTION_OVERTURN = 1;
@@ -66,49 +65,71 @@ public class SemMotionRecognitionManager {
     private final SemContextManager mSemContextManager;
     private IMotionRecognitionService motionService;
     private final ArrayList<MRListenerDelegate> sListenerDelegates = new ArrayList<>();
-    private final SemContextListener mySemContextMotionListener = new SemContextListener() { // from class: com.samsung.android.gesture.SemMotionRecognitionManager.1
-        @Override // com.samsung.android.hardware.context.SemContextListener
-        public void onSemContextChanged(SemContextEvent event) {
-            SemContext semContext = event.semContext;
-            SemMotionRecognitionEvent mrevent = new SemMotionRecognitionEvent();
-            boolean isEnabledPickUp = false;
-            switch (semContext.getType()) {
-                case 5:
-                    SemContextMovement semContextMovement = event.getMovementContext();
-                    if (semContextMovement.getAction() == 1) {
-                        try {
-                            isEnabledPickUp = SemMotionRecognitionManager.this.motionService.getPickUpMotionStatus();
-                            Log.d(SemMotionRecognitionManager.TAG, "  >> check setting smart alert enabled : " + isEnabledPickUp);
-                        } catch (RemoteException e) {
-                            Log.e(SemMotionRecognitionManager.TAG, "RemoteException in getPickUpMotionStatus: ", e);
-                        }
-                        if (isEnabledPickUp) {
-                            mrevent.setMotion(67);
-                            Log.d(SemMotionRecognitionManager.TAG, "mySemContextMotionListener : Send Smart alert event");
-                            synchronized (SemMotionRecognitionManager.this.sListenerDelegates) {
-                                int size = SemMotionRecognitionManager.this.sListenerDelegates.size();
-                                for (int i = 0; i < size; i++) {
-                                    MRListenerDelegate l = (MRListenerDelegate) SemMotionRecognitionManager.this.sListenerDelegates.get(i);
-                                    l.motionCallback(mrevent);
+    private final SemContextListener mySemContextMotionListener =
+            new SemContextListener() { // from class:
+                                       // com.samsung.android.gesture.SemMotionRecognitionManager.1
+                @Override // com.samsung.android.hardware.context.SemContextListener
+                public void onSemContextChanged(SemContextEvent event) {
+                    SemContext semContext = event.semContext;
+                    SemMotionRecognitionEvent mrevent = new SemMotionRecognitionEvent();
+                    boolean isEnabledPickUp = false;
+                    switch (semContext.getType()) {
+                        case 5:
+                            SemContextMovement semContextMovement = event.getMovementContext();
+                            if (semContextMovement.getAction() == 1) {
+                                try {
+                                    isEnabledPickUp =
+                                            SemMotionRecognitionManager.this.motionService
+                                                    .getPickUpMotionStatus();
+                                    Log.d(
+                                            SemMotionRecognitionManager.TAG,
+                                            "  >> check setting smart alert enabled : "
+                                                    + isEnabledPickUp);
+                                } catch (RemoteException e) {
+                                    Log.e(
+                                            SemMotionRecognitionManager.TAG,
+                                            "RemoteException in getPickUpMotionStatus: ",
+                                            e);
                                 }
+                                if (isEnabledPickUp) {
+                                    mrevent.setMotion(67);
+                                    Log.d(
+                                            SemMotionRecognitionManager.TAG,
+                                            "mySemContextMotionListener : Send Smart alert event");
+                                    synchronized (
+                                            SemMotionRecognitionManager.this.sListenerDelegates) {
+                                        int size =
+                                                SemMotionRecognitionManager.this.sListenerDelegates
+                                                        .size();
+                                        for (int i = 0; i < size; i++) {
+                                            MRListenerDelegate l =
+                                                    (MRListenerDelegate)
+                                                            SemMotionRecognitionManager.this
+                                                                    .sListenerDelegates.get(i);
+                                            l.motionCallback(mrevent);
+                                        }
+                                    }
+                                    return;
+                                }
+                                return;
                             }
                             return;
-                        }
-                        return;
+                        default:
+                            return;
                     }
-                    return;
-                default:
-                    return;
-            }
-        }
-    };
+                }
+            };
     private int mMovementCnt = 0;
 
     public SemMotionRecognitionManager(Looper mainLooper) {
-        this.motionService = IMotionRecognitionService.Stub.asInterface(ServiceManager.getService(Context.SEM_MOTION_RECOGNITION_SERVICE));
+        this.motionService =
+                IMotionRecognitionService.Stub.asInterface(
+                        ServiceManager.getService(Context.SEM_MOTION_RECOGNITION_SERVICE));
         this.mMainLooper = mainLooper;
         this.mSemContextManager = new SemContextManager(this.mMainLooper);
-        this.motionService = IMotionRecognitionService.Stub.asInterface(ServiceManager.getService(Context.SEM_MOTION_RECOGNITION_SERVICE));
+        this.motionService =
+                IMotionRecognitionService.Stub.asInterface(
+                        ServiceManager.getService(Context.SEM_MOTION_RECOGNITION_SERVICE));
         Log.d(TAG, "motionService = " + this.motionService);
         try {
             if (this.motionService != null) {
@@ -123,7 +144,11 @@ public class SemMotionRecognitionManager {
         registerListener(listener, motion_events, null);
     }
 
-    public void registerListener(SemMotionEventListener listener, int motion_sensors, int motion_events, Handler handler) {
+    public void registerListener(
+            SemMotionEventListener listener,
+            int motion_sensors,
+            int motion_events,
+            Handler handler) {
         if (listener == null || this.motionService == null) {
             return;
         }
@@ -133,11 +158,17 @@ public class SemMotionRecognitionManager {
             while (it.hasNext()) {
                 MRListenerDelegate l = it.next();
                 if (l.getListener() == listener) {
-                    Log.d(TAG, "  .registerListener : fail. already registered / listener count = " + this.sListenerDelegates.size() + ", name :" + listener);
+                    Log.d(
+                            TAG,
+                            "  .registerListener : fail. already registered / listener count = "
+                                    + this.sListenerDelegates.size()
+                                    + ", name :"
+                                    + listener);
                     return;
                 }
             }
-            MRListenerDelegate mrListener = new MRListenerDelegate(listener, motion_events, handler);
+            MRListenerDelegate mrListener =
+                    new MRListenerDelegate(listener, motion_events, handler);
             this.sListenerDelegates.add(mrListener);
             if (motion_events != 0) {
                 try {
@@ -146,11 +177,21 @@ public class SemMotionRecognitionManager {
                     Log.e(TAG, "RemoteException in registerListener : ", e);
                 }
             }
-            Log.v(TAG, "  .registerListener : success. listener count = " + size + Session.SUBSESSION_SEPARATION_CHAR + this.sListenerDelegates.size() + ", motion_events=" + motion_events + ", name :" + listener);
+            Log.v(
+                    TAG,
+                    "  .registerListener : success. listener count = "
+                            + size
+                            + Session.SUBSESSION_SEPARATION_CHAR
+                            + this.sListenerDelegates.size()
+                            + ", motion_events="
+                            + motion_events
+                            + ", name :"
+                            + listener);
         }
     }
 
-    public void registerListener(SemMotionEventListener listener, int motion_events, Handler handler) {
+    public void registerListener(
+            SemMotionEventListener listener, int motion_events, Handler handler) {
         registerListener(listener, 0, motion_events, handler);
     }
 
@@ -171,7 +212,14 @@ public class SemMotionRecognitionManager {
                     i++;
                 } else {
                     motionevents = l.getMotionEvents() & (~motion_events);
-                    Log.d(TAG, "update listener " + i + " = name :" + listener + ",  motionevents = " + motionevents);
+                    Log.d(
+                            TAG,
+                            "update listener "
+                                    + i
+                                    + " = name :"
+                                    + listener
+                                    + ",  motionevents = "
+                                    + motionevents);
                     break;
                 }
             }
@@ -183,25 +231,25 @@ public class SemMotionRecognitionManager {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:18:0x0058, code lost:
-    
-        r8.sListenerDelegates.remove(r2);
-     */
+
+       r8.sListenerDelegates.remove(r2);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:21:0x0061, code lost:
-    
-        if (r3.getMotionEvents() == 0) goto L21;
-     */
+
+       if (r3.getMotionEvents() == 0) goto L21;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:22:0x0063, code lost:
-    
-        r8.motionService.unregisterCallback(r3);
-     */
+
+       r8.motionService.unregisterCallback(r3);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:29:0x0069, code lost:
-    
-        r4 = move-exception;
-     */
+
+       r4 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:30:0x006a, code lost:
-    
-        android.util.Log.e(com.samsung.android.gesture.SemMotionRecognitionManager.TAG, "RemoteException in unregisterListener: ", r4);
-     */
+
+       android.util.Log.e(com.samsung.android.gesture.SemMotionRecognitionManager.TAG, "RemoteException in unregisterListener: ", r4);
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -290,15 +338,15 @@ public class SemMotionRecognitionManager {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> Lad
             throw r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.gesture.SemMotionRecognitionManager.unregisterListener(com.samsung.android.gesture.SemMotionEventListener):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.gesture.SemMotionRecognitionManager.unregisterListener(com.samsung.android.gesture.SemMotionEventListener):void");
     }
 
     @Deprecated
-    public void useMotionAlways(SemMotionEventListener listener, boolean bUseAlways) {
-    }
+    public void useMotionAlways(SemMotionEventListener listener, boolean bUseAlways) {}
 
-    public void setMotionAngle(SemMotionEventListener listener, int status) {
-    }
+    public void setMotionAngle(SemMotionEventListener listener, int status) {}
 
     public void setSmartMotionAngle(SemMotionEventListener listener, int status) {
         if (this.motionService == null) {
@@ -322,12 +370,14 @@ public class SemMotionRecognitionManager {
     }
 
     @Deprecated
-    public void setMotionTiltLevel(int stopUp, int level1Up, int level2Up, int stopDown, int level1Down, int level2Down) {
+    public void setMotionTiltLevel(
+            int stopUp, int level1Up, int level2Up, int stopDown, int level1Down, int level2Down) {
         if (this.motionService == null) {
             return;
         }
         try {
-            this.motionService.setMotionTiltLevel(stopUp, level1Up, level2Up, stopDown, level1Down, level2Down);
+            this.motionService.setMotionTiltLevel(
+                    stopUp, level1Up, level2Up, stopDown, level1Down, level2Down);
         } catch (RemoteException e) {
             Log.e(TAG, "RemoteException in setMotionTiltLevel: ", e);
         }
@@ -348,7 +398,11 @@ public class SemMotionRecognitionManager {
 
     @Deprecated
     public static boolean isValidMotionSensor(int motion_sensor) {
-        return motion_sensor == 1 || motion_sensor == 2 || motion_sensor == 4 || motion_sensor == 8 || motion_sensor == 16;
+        return motion_sensor == 1
+                || motion_sensor == 2
+                || motion_sensor == 4
+                || motion_sensor == 8
+                || motion_sensor == 16;
     }
 
     public static int getMotionVersion() {
@@ -441,24 +495,38 @@ public class SemMotionRecognitionManager {
         MRListenerDelegate(SemMotionEventListener listener, int motion_sensors, Handler handler) {
             this.mListenerPackageName = null;
             this.mListener = listener;
-            Looper looper = handler != null ? handler.getLooper() : SemMotionRecognitionManager.this.mMainLooper;
+            Looper looper =
+                    handler != null
+                            ? handler.getLooper()
+                            : SemMotionRecognitionManager.this.mMainLooper;
             this.mMotionEvents = motion_sensors;
             this.mListenerPackageName = ActivityThread.currentPackageName();
-            this.mHandler = new Handler(looper) { // from class: com.samsung.android.gesture.SemMotionRecognitionManager.MRListenerDelegate.1
-                @Override // android.os.Handler
-                public void handleMessage(Message msg) {
-                    synchronized (SemMotionRecognitionManager.this.sListenerDelegates) {
-                        try {
-                            if (MRListenerDelegate.this.mListener != null && msg != null && msg.what == 53) {
-                                SemMotionRecognitionEvent motionEvent = (SemMotionRecognitionEvent) msg.obj;
-                                MRListenerDelegate.this.mListener.onMotionEvent(motionEvent);
+            this.mHandler =
+                    new Handler(
+                            looper) { // from class:
+                                      // com.samsung.android.gesture.SemMotionRecognitionManager.MRListenerDelegate.1
+                        @Override // android.os.Handler
+                        public void handleMessage(Message msg) {
+                            synchronized (SemMotionRecognitionManager.this.sListenerDelegates) {
+                                try {
+                                    if (MRListenerDelegate.this.mListener != null
+                                            && msg != null
+                                            && msg.what == 53) {
+                                        SemMotionRecognitionEvent motionEvent =
+                                                (SemMotionRecognitionEvent) msg.obj;
+                                        MRListenerDelegate.this.mListener.onMotionEvent(
+                                                motionEvent);
+                                    }
+                                } catch (ClassCastException e) {
+                                    Log.e(
+                                            SemMotionRecognitionManager.TAG,
+                                            "ClassCastException in handleMessage: msg.obj = "
+                                                    + msg.obj,
+                                            e);
+                                }
                             }
-                        } catch (ClassCastException e) {
-                            Log.e(SemMotionRecognitionManager.TAG, "ClassCastException in handleMessage: msg.obj = " + msg.obj, e);
                         }
-                    }
-                }
-            };
+                    };
         }
 
         public SemMotionEventListener getListener() {

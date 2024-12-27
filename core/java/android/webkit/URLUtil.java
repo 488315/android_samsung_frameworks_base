@@ -8,7 +8,9 @@ import android.net.Uri;
 import android.net.WebAddress;
 import android.speech.RecognizerResultsIntent;
 import android.telecom.Logging.Session;
+
 import com.android.internal.midi.MidiConstants;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -21,8 +23,18 @@ import java.util.regex.Pattern;
 public final class URLUtil {
     static final String ASSET_BASE = "file:///android_asset/";
     static final String CONTENT_BASE = "content:";
-    private static final Pattern CONTENT_DISPOSITION_PATTERN = Pattern.compile("attachment;\\s*filename\\s*=\\s*(\"?)([^\"]*)\\1\\s*$", 2);
-    private static final Pattern DISPOSITION_PATTERN = Pattern.compile("\\s*(\\S+?) # Group 1: parameter name\n\\s*=\\s* # Match equals sign\n(?: # non-capturing group of options\n   '( (?: [^'\\\\] | \\\\. )* )' # Group 2: single-quoted\n | \"( (?: [^\"\\\\] | \\\\. )*  )\" # Group 3: double-quoted\n | ( [^'\"][^;\\s]* ) # Group 4: un-quoted parameter\n)\\s*;? # Optional end semicolon", 4);
+    private static final Pattern CONTENT_DISPOSITION_PATTERN =
+            Pattern.compile("attachment;\\s*filename\\s*=\\s*(\"?)([^\"]*)\\1\\s*$", 2);
+    private static final Pattern DISPOSITION_PATTERN =
+            Pattern.compile(
+                    "\\s*(\\S+?) # Group 1: parameter name\n"
+                        + "\\s*=\\s* # Match equals sign\n"
+                        + "(?: # non-capturing group of options\n"
+                        + "   '( (?: [^'\\\\] | \\\\. )* )' # Group 2: single-quoted\n"
+                        + " | \"( (?: [^\"\\\\] | \\\\. )*  )\" # Group 3: double-quoted\n"
+                        + " | ( [^'\"][^;\\s]* ) # Group 4: un-quoted parameter\n"
+                        + ")\\s*;? # Optional end semicolon",
+                    4);
     static final String FILE_BASE = "file:";
     private static final String LOGTAG = "webkit";
     static final long PARSE_CONTENT_DISPOSITION_USING_RFC_6266 = 319400769;
@@ -31,7 +43,11 @@ public final class URLUtil {
     private static final boolean TRACE = false;
 
     public static String guessUrl(String inUrl) {
-        if (inUrl.length() == 0 || inUrl.startsWith("about:") || inUrl.startsWith("data:") || inUrl.startsWith(FILE_BASE) || inUrl.startsWith("javascript:")) {
+        if (inUrl.length() == 0
+                || inUrl.startsWith("about:")
+                || inUrl.startsWith("data:")
+                || inUrl.startsWith(FILE_BASE)
+                || inUrl.startsWith("javascript:")) {
             return inUrl;
         }
         if (inUrl.endsWith(MediaMetrics.SEPARATOR)) {
@@ -48,7 +64,8 @@ public final class URLUtil {
         }
     }
 
-    public static String composeSearchUrl(String inQuery, String template, String queryPlaceHolder) {
+    public static String composeSearchUrl(
+            String inQuery, String template, String queryPlaceHolder) {
         int placeHolderIndex = template.indexOf(queryPlaceHolder);
         if (placeHolderIndex < 0) {
             return null;
@@ -141,7 +158,12 @@ public final class URLUtil {
     }
 
     public static boolean isFileUrl(String url) {
-        return (url == null || !url.startsWith(FILE_BASE) || url.startsWith(ASSET_BASE) || url.startsWith(PROXY_BASE)) ? false : true;
+        return (url == null
+                        || !url.startsWith(FILE_BASE)
+                        || url.startsWith(ASSET_BASE)
+                        || url.startsWith(PROXY_BASE))
+                ? false
+                : true;
     }
 
     public static boolean isAboutUrl(String url) {
@@ -179,7 +201,14 @@ public final class URLUtil {
         if (url == null || url.length() == 0) {
             return false;
         }
-        return isAssetUrl(url) || isResourceUrl(url) || isFileUrl(url) || isAboutUrl(url) || isHttpUrl(url) || isHttpsUrl(url) || isJavaScriptUrl(url) || isContentUrl(url);
+        return isAssetUrl(url)
+                || isResourceUrl(url)
+                || isFileUrl(url)
+                || isAboutUrl(url)
+                || isHttpUrl(url)
+                || isHttpsUrl(url)
+                || isJavaScriptUrl(url)
+                || isContentUrl(url);
     }
 
     public static String stripAnchor(String url) {
@@ -191,19 +220,24 @@ public final class URLUtil {
     }
 
     public static String guessFileName(String url, String contentDisposition, String mimeType) {
-        if (com.android.internal.hidden_from_bootclasspath.android.os.Flags.androidOsBuildVanillaIceCream() && Compatibility.isChangeEnabled(PARSE_CONTENT_DISPOSITION_USING_RFC_6266)) {
+        if (com.android.internal.hidden_from_bootclasspath.android.os.Flags
+                        .androidOsBuildVanillaIceCream()
+                && Compatibility.isChangeEnabled(PARSE_CONTENT_DISPOSITION_USING_RFC_6266)) {
             return guessFileNameRfc6266(url, contentDisposition, mimeType);
         }
         return guessFileNameRfc2616(url, contentDisposition, mimeType);
     }
 
-    private static String guessFileNameRfc2616(String url, String contentDisposition, String mimeType) {
+    private static String guessFileNameRfc2616(
+            String url, String contentDisposition, String mimeType) {
         String decodedUrl;
         int index;
         int index2;
         String filename = null;
         String extension = null;
-        if (contentDisposition != null && (filename = parseContentDispositionRfc2616(contentDisposition)) != null && (index2 = filename.lastIndexOf(47) + 1) > 0) {
+        if (contentDisposition != null
+                && (filename = parseContentDispositionRfc2616(contentDisposition)) != null
+                && (index2 = filename.lastIndexOf(47) + 1) > 0) {
             filename = filename.substring(index2);
         }
         if (filename == null && (decodedUrl = Uri.decode(url)) != null) {
@@ -220,7 +254,9 @@ public final class URLUtil {
         }
         int dotIndex = filename.indexOf(46);
         if (dotIndex < 0) {
-            if (mimeType != null && (extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType)) != null) {
+            if (mimeType != null
+                    && (extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType))
+                            != null) {
                 extension = MediaMetrics.SEPARATOR + extension;
             }
             if (extension == null) {
@@ -237,8 +273,15 @@ public final class URLUtil {
         } else {
             if (mimeType != null) {
                 int lastDotIndex = filename.lastIndexOf(46);
-                String typeFromExt = MimeTypeMap.getSingleton().getMimeTypeFromExtension(filename.substring(lastDotIndex + 1));
-                if (typeFromExt != null && !typeFromExt.equalsIgnoreCase(mimeType) && (extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType)) != null) {
+                String typeFromExt =
+                        MimeTypeMap.getSingleton()
+                                .getMimeTypeFromExtension(filename.substring(lastDotIndex + 1));
+                if (typeFromExt != null
+                        && !typeFromExt.equalsIgnoreCase(mimeType)
+                        && (extension =
+                                        MimeTypeMap.getSingleton()
+                                                .getExtensionFromMimeType(mimeType))
+                                != null) {
                     extension = MediaMetrics.SEPARATOR + extension;
                 }
             }
@@ -250,7 +293,8 @@ public final class URLUtil {
         return filename + extension;
     }
 
-    private static String guessFileNameRfc6266(String url, String contentDisposition, String mimeType) {
+    private static String guessFileNameRfc6266(
+            String url, String contentDisposition, String mimeType) {
         String filename = getFilenameSuggestion(url, contentDisposition);
         String extensionFromMimeType = suggestExtensionFromMimeType(mimeType);
         if (filename.indexOf(46) < 0) {
@@ -264,7 +308,9 @@ public final class URLUtil {
 
     private static String getFilenameSuggestion(String url, String contentDisposition) {
         String filename;
-        if (contentDisposition != null && (filename = getFilenameFromContentDispositionRfc6266(contentDisposition)) != null) {
+        if (contentDisposition != null
+                && (filename = getFilenameFromContentDispositionRfc6266(contentDisposition))
+                        != null) {
             return replacePathSeparators(filename);
         }
         if (url != null) {
@@ -284,7 +330,9 @@ public final class URLUtil {
 
     private static boolean extensionDifferentFromMimeType(String filename, String mimeType) {
         int lastDotIndex = filename.lastIndexOf(46);
-        String typeFromExt = MimeTypeMap.getSingleton().getMimeTypeFromExtension(filename.substring(lastDotIndex + 1));
+        String typeFromExt =
+                MimeTypeMap.getSingleton()
+                        .getMimeTypeFromExtension(filename.substring(lastDotIndex + 1));
         return (typeFromExt == null || typeFromExt.equalsIgnoreCase(mimeType)) ? false : true;
     }
 
@@ -292,7 +340,8 @@ public final class URLUtil {
         if (mimeType == null) {
             return ".bin";
         }
-        String extensionFromMimeType = MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
+        String extensionFromMimeType =
+                MimeTypeMap.getSingleton().getExtensionFromMimeType(mimeType);
         if (extensionFromMimeType != null) {
             return MediaMetrics.SEPARATOR + extensionFromMimeType;
         }
@@ -306,7 +355,9 @@ public final class URLUtil {
     }
 
     static String parseContentDisposition(String contentDisposition) {
-        if (com.android.internal.hidden_from_bootclasspath.android.os.Flags.androidOsBuildVanillaIceCream() && Compatibility.isChangeEnabled(PARSE_CONTENT_DISPOSITION_USING_RFC_6266)) {
+        if (com.android.internal.hidden_from_bootclasspath.android.os.Flags
+                        .androidOsBuildVanillaIceCream()
+                && Compatibility.isChangeEnabled(PARSE_CONTENT_DISPOSITION_USING_RFC_6266)) {
             return getFilenameFromContentDispositionRfc6266(contentDisposition);
         }
         return parseContentDispositionRfc2616(contentDisposition);
@@ -326,7 +377,8 @@ public final class URLUtil {
 
     private static String getFilenameFromContentDispositionRfc6266(String contentDisposition) {
         String value;
-        String[] parts = contentDisposition.trim().split(NavigationBarInflaterView.GRAVITY_SEPARATOR, 2);
+        String[] parts =
+                contentDisposition.trim().split(NavigationBarInflaterView.GRAVITY_SEPARATOR, 2);
         if (parts.length < 2) {
             return null;
         }

@@ -7,8 +7,7 @@ public class Byte3 {
     public byte y;
     public byte z;
 
-    public Byte3() {
-    }
+    public Byte3() {}
 
     public Byte3(byte initX, byte initY, byte initZ) {
         this.x = initX;
@@ -145,11 +144,14 @@ public class Byte3 {
     }
 
     public byte dotProduct(Byte3 a) {
-        return (byte) (((byte) (((byte) (this.x * a.x)) + ((byte) (this.y * a.y)))) + ((byte) (this.z * a.z)));
+        return (byte)
+                (((byte) (((byte) (this.x * a.x)) + ((byte) (this.y * a.y))))
+                        + ((byte) (this.z * a.z)));
     }
 
     public static byte dotProduct(Byte3 a, Byte3 b) {
-        return (byte) (((byte) (((byte) (b.x * a.x)) + ((byte) (b.y * a.y)))) + ((byte) (b.z * a.z)));
+        return (byte)
+                (((byte) (((byte) (b.x * a.x)) + ((byte) (b.y * a.y)))) + ((byte) (b.z * a.z)));
     }
 
     public void addMultiple(Byte3 a, byte factor) {

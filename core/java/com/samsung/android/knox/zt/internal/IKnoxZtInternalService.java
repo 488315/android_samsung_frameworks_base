@@ -9,14 +9,15 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface IKnoxZtInternalService extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.knox.zt.internal.IKnoxZtInternalService";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.knox.zt.internal.IKnoxZtInternalService";
 
     void notifyFrameworkEvent(int i, int i2, Bundle bundle) throws RemoteException;
 
     public static class Default implements IKnoxZtInternalService {
         @Override // com.samsung.android.knox.zt.internal.IKnoxZtInternalService
-        public void notifyFrameworkEvent(int where, int what, Bundle bundle) throws RemoteException {
-        }
+        public void notifyFrameworkEvent(int where, int what, Bundle bundle)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +25,7 @@ public interface IKnoxZtInternalService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IKnoxZtInternalService {
+    public abstract static class Stub extends Binder implements IKnoxZtInternalService {
         static final int TRANSACTION_notifyFrameworkEvent = 1;
 
         public Stub() {
@@ -62,7 +63,8 @@ public interface IKnoxZtInternalService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IKnoxZtInternalService.DESCRIPTOR);
             }
@@ -101,7 +103,8 @@ public interface IKnoxZtInternalService extends IInterface {
             }
 
             @Override // com.samsung.android.knox.zt.internal.IKnoxZtInternalService
-            public void notifyFrameworkEvent(int where, int what, Bundle bundle) throws RemoteException {
+            public void notifyFrameworkEvent(int where, int what, Bundle bundle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

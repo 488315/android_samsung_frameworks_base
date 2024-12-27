@@ -1,6 +1,7 @@
 package com.samsung.android.graphics.spr.document.attribute;
 
 import com.samsung.android.graphics.spr.document.SprInputStream;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -34,7 +35,7 @@ public abstract class SprAttributeBase implements Cloneable {
         return 0;
     }
 
-    @Override // 
+    @Override //
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
     public SprAttributeBase mo8813clone() throws CloneNotSupportedException {
         return (SprAttributeBase) super.clone();

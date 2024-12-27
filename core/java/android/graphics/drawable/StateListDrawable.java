@@ -2,14 +2,16 @@ package android.graphics.drawable;
 
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.graphics.drawable.DrawableContainer;
 import android.util.AttributeSet;
 import android.util.StateSet;
+
 import com.android.ims.ImsConfig;
 import com.android.internal.R;
-import java.io.IOException;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 
 /* loaded from: classes.dex */
 public class StateListDrawable extends DrawableContainer {
@@ -50,7 +52,9 @@ public class StateListDrawable extends DrawableContainer {
     }
 
     @Override // android.graphics.drawable.Drawable
-    public void inflate(Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
+    public void inflate(
+            Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         TypedArray a = obtainAttributes(r, theme, attrs, R.styleable.StateListDrawable);
         super.inflateWithAttributes(r, parser, a, 1);
         updateStateFromTypedArray(a);
@@ -72,7 +76,9 @@ public class StateListDrawable extends DrawableContainer {
         state.mAutoMirrored = a.getBoolean(6, state.mAutoMirrored);
     }
 
-    private void inflateChildElements(Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
+    private void inflateChildElements(
+            Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         int type;
         StateListState state = this.mStateListState;
         int innerDepth = parser.getDepth() + 1;
@@ -81,8 +87,12 @@ public class StateListDrawable extends DrawableContainer {
             if (type2 != 1) {
                 int depth = parser.getDepth();
                 if (depth >= innerDepth || type2 != 3) {
-                    if (type2 == 2 && depth <= innerDepth && parser.getName().equals(ImsConfig.EXTRA_CHANGED_ITEM)) {
-                        TypedArray a = obtainAttributes(r, theme, attrs, R.styleable.StateListDrawableItem);
+                    if (type2 == 2
+                            && depth <= innerDepth
+                            && parser.getName().equals(ImsConfig.EXTRA_CHANGED_ITEM)) {
+                        TypedArray a =
+                                obtainAttributes(
+                                        r, theme, attrs, R.styleable.StateListDrawableItem);
                         Drawable dr = a.getDrawable(0);
                         a.recycle();
                         int[] states = extractStateSet(attrs);
@@ -91,7 +101,10 @@ public class StateListDrawable extends DrawableContainer {
                                 type = parser.next();
                             } while (type == 4);
                             if (type != 2) {
-                                throw new XmlPullParserException(parser.getPositionDescription() + ": <item> tag requires a 'drawable' attribute or child tag defining a drawable");
+                                throw new XmlPullParserException(
+                                        parser.getPositionDescription()
+                                                + ": <item> tag requires a 'drawable' attribute or"
+                                                + " child tag defining a drawable");
                             }
                             dr = Drawable.createFromXmlInner(r, parser, attrs, theme);
                         }
@@ -187,7 +200,8 @@ public class StateListDrawable extends DrawableContainer {
             this.mThemeAttrs = this.mThemeAttrs != null ? (int[]) this.mThemeAttrs.clone() : null;
             int[][] stateSets = new int[this.mStateSets.length][];
             for (int i = this.mStateSets.length - 1; i >= 0; i--) {
-                stateSets[i] = this.mStateSets[i] != null ? (int[]) this.mStateSets[i].clone() : null;
+                stateSets[i] =
+                        this.mStateSets[i] != null ? (int[]) this.mStateSets[i].clone() : null;
             }
             this.mStateSets = stateSets;
         }
@@ -223,7 +237,8 @@ public class StateListDrawable extends DrawableContainer {
             return new StateListDrawable(this, res);
         }
 
-        @Override // android.graphics.drawable.DrawableContainer.DrawableContainerState, android.graphics.drawable.Drawable.ConstantState
+        @Override // android.graphics.drawable.DrawableContainer.DrawableContainerState,
+        // android.graphics.drawable.Drawable.ConstantState
         public boolean canApplyTheme() {
             return this.mThemeAttrs != null || super.canApplyTheme();
         }

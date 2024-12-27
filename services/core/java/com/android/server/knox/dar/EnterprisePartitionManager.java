@@ -5,12 +5,15 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.UserManager;
 import android.util.Log;
+
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.server.ServiceKeeper;
 import com.android.server.audio.AudioDeviceInventory$$ExternalSyntheticOutline0;
 import com.android.server.pm.Installer;
 import com.android.server.pm.PackageManagerTracedLock;
+
 import com.samsung.android.knox.SemPersonaManager;
+
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -40,7 +43,8 @@ public final class EnterprisePartitionManager {
     static {
         Bundle knoxInfo = SemPersonaManager.getKnoxInfo();
         String string = knoxInfo != null ? knoxInfo.getString("version") : null;
-        isKnoxBuildEnabled = (string == null || string.isEmpty() || "v00".equals(string)) ? false : true;
+        isKnoxBuildEnabled =
+                (string == null || string.isEmpty() || "v00".equals(string)) ? false : true;
         sInstance = null;
     }
 
@@ -90,7 +94,9 @@ public final class EnterprisePartitionManager {
 
     public static boolean setDualDARPolicyDir(int i, int i2, String str) {
         boolean dualDARPolicyDir;
-        StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "setDualDARPolicyDir(user:", " flags:", " path:");
+        StringBuilder m =
+                ArrayUtils$$ExternalSyntheticOutline0.m(
+                        i, i2, "setDualDARPolicyDir(user:", " flags:", " path:");
         m.append(str);
         m.append(")");
         Log.i("EnterprisePartitionManager", m.toString());
@@ -113,7 +119,9 @@ public final class EnterprisePartitionManager {
 
     public static boolean setDualDARPolicyDirRecursively(int i, int i2, String str) {
         boolean dualDARPolicyDirRecursively;
-        StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "setDualDARPolicyDirRecursively(user:", " flags:", " path:");
+        StringBuilder m =
+                ArrayUtils$$ExternalSyntheticOutline0.m(
+                        i, i2, "setDualDARPolicyDirRecursively(user:", " flags:", " path:");
         m.append(str);
         m.append(")");
         Log.i("EnterprisePartitionManager", m.toString());
@@ -122,7 +130,8 @@ public final class EnterprisePartitionManager {
                 Installer installer = mPackageTasker;
                 installer.getClass();
                 try {
-                    dualDARPolicyDirRecursively = installer.mInstalld.setDualDARPolicyDirRecursively(i, i2, str);
+                    dualDARPolicyDirRecursively =
+                            installer.mInstalld.setDualDARPolicyDirRecursively(i, i2, str);
                 } catch (Exception e) {
                     Installer.InstallerException.from(e);
                     throw null;
@@ -134,7 +143,8 @@ public final class EnterprisePartitionManager {
         return dualDARPolicyDirRecursively;
     }
 
-    public static void setInstaller(Installer installer, PackageManagerTracedLock packageManagerTracedLock) {
+    public static void setInstaller(
+            Installer installer, PackageManagerTracedLock packageManagerTracedLock) {
         if (!isKnoxBuildEnabled) {
             mPackageTasker = null;
         } else {
@@ -149,10 +159,23 @@ public final class EnterprisePartitionManager {
     }
 
     public final void checkCallerPermissionFor(String str) {
-        if (ServiceKeeper.isAuthorized(Binder.getCallingPid(), Binder.getCallingUid(), this.mContext, "EnterprisePartitionManager", str) == 0) {
+        if (ServiceKeeper.isAuthorized(
+                        Binder.getCallingPid(),
+                        Binder.getCallingUid(),
+                        this.mContext,
+                        "EnterprisePartitionManager",
+                        str)
+                == 0) {
             return;
         }
-        throw new SecurityException("Security Exception Occurred while pid[" + Binder.getCallingPid() + "] with uid[" + Binder.getCallingUid() + "] trying to access methodName [" + str + "] in [EnterprisePartitionManager] service");
+        throw new SecurityException(
+                "Security Exception Occurred while pid["
+                        + Binder.getCallingPid()
+                        + "] with uid["
+                        + Binder.getCallingUid()
+                        + "] trying to access methodName ["
+                        + str
+                        + "] in [EnterprisePartitionManager] service");
     }
 
     public final int copy(int i, int i2, int i3, String str, String str2) {
@@ -162,7 +185,12 @@ public final class EnterprisePartitionManager {
         if (mPackageTasker == null) {
             return -19;
         }
-        if (str == null || str.isEmpty() || str2 == null || str2.isEmpty() || !isUserUnlocked(i) || !isUserUnlocked(i2)) {
+        if (str == null
+                || str.isEmpty()
+                || str2 == null
+                || str2.isEmpty()
+                || !isUserUnlocked(i)
+                || !isUserUnlocked(i2)) {
             return -2;
         }
         synchronized (mInstallLock) {
@@ -190,7 +218,8 @@ public final class EnterprisePartitionManager {
 
     public final boolean hasDualDARPolicyRecursively(String str, List list) {
         boolean hasDualDARPolicyRecursively;
-        AudioDeviceInventory$$ExternalSyntheticOutline0.m("hasDualDARPolicyRecursively(path:", str, ")", "EnterprisePartitionManager");
+        AudioDeviceInventory$$ExternalSyntheticOutline0.m(
+                "hasDualDARPolicyRecursively(path:", str, ")", "EnterprisePartitionManager");
         try {
             List list2 = this.notAppliedPaths;
             if (list2 == null) {
@@ -209,7 +238,8 @@ public final class EnterprisePartitionManager {
                         List list3 = this.notAppliedPaths;
                         installer.getClass();
                         try {
-                            hasDualDARPolicyRecursively = installer.mInstalld.hasDualDARPolicyRecursively(str, list3);
+                            hasDualDARPolicyRecursively =
+                                    installer.mInstalld.hasDualDARPolicyRecursively(str, list3);
                         } catch (Exception e2) {
                             Installer.InstallerException.from(e2);
                             throw null;
@@ -219,7 +249,9 @@ public final class EnterprisePartitionManager {
                             Iterator it = ((ArrayList) this.notAppliedPaths).iterator();
                             while (it.hasNext()) {
                                 String str2 = (String) it.next();
-                                Log.d("EnterprisePartitionManager", "Policy not applied paths : " + str2);
+                                Log.d(
+                                        "EnterprisePartitionManager",
+                                        "Policy not applied paths : " + str2);
                                 ((ArrayList) list).add(str2);
                             }
                         }
@@ -229,7 +261,9 @@ public final class EnterprisePartitionManager {
                         Iterator it2 = ((ArrayList) this.notAppliedPaths).iterator();
                         while (it2.hasNext()) {
                             String str3 = (String) it2.next();
-                            Log.d("EnterprisePartitionManager", "Policy not applied paths : " + str3);
+                            Log.d(
+                                    "EnterprisePartitionManager",
+                                    "Policy not applied paths : " + str3);
                             ((ArrayList) list).add(str3);
                         }
                     }

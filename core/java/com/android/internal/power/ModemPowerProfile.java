@@ -5,15 +5,18 @@ import android.util.Log;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.SparseDoubleArray;
+
 import com.android.internal.telephony.DctConstants;
 import com.android.internal.util.XmlUtils;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes5.dex */
 public class ModemPowerProfile {
@@ -57,20 +60,16 @@ public class ModemPowerProfile {
     private final SparseDoubleArray mPowerConstants = new SparseDoubleArray();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ModemDrainType {
-    }
+    public @interface ModemDrainType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ModemNrFrequencyRange {
-    }
+    public @interface ModemNrFrequencyRange {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ModemRatType {
-    }
+    public @interface ModemRatType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ModemTxLevel {
-    }
+    public @interface ModemTxLevel {}
 
     static {
         MODEM_DRAIN_TYPE_NAMES.put(0, "SLEEP");
@@ -83,7 +82,7 @@ public class ModemPowerProfile {
         MODEM_TX_LEVEL_NAMES.put(33554432, "2");
         MODEM_TX_LEVEL_NAMES.put(50331648, "3");
         MODEM_TX_LEVEL_NAMES.put(67108864, "4");
-        MODEM_TX_LEVEL_MAP = new int[]{0, 16777216, 33554432, 50331648, 67108864};
+        MODEM_TX_LEVEL_MAP = new int[] {0, 16777216, 33554432, 50331648, 67108864};
         MODEM_RAT_TYPE_NAMES = new SparseArray<>(3);
         MODEM_RAT_TYPE_NAMES.put(0, "DEFAULT");
         MODEM_RAT_TYPE_NAMES.put(1048576, DctConstants.RAT_NAME_LTE);
@@ -156,13 +155,16 @@ public class ModemPowerProfile {
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-    private void parseActivePowerConstantsFromXml(XmlPullParser parser) throws IOException, XmlPullParserException {
+    private void parseActivePowerConstantsFromXml(XmlPullParser parser)
+            throws IOException, XmlPullParserException {
         int nrfType;
         boolean z;
         try {
             int ratType = getTypeFromAttribute(parser, ATTR_RAT, MODEM_RAT_TYPE_NAMES);
             if (ratType == 2097152) {
-                nrfType = getTypeFromAttribute(parser, ATTR_NR_FREQUENCY, MODEM_NR_FREQUENCY_RANGE_NAMES);
+                nrfType =
+                        getTypeFromAttribute(
+                                parser, ATTR_NR_FREQUENCY, MODEM_NR_FREQUENCY_RANGE_NAMES);
             } else {
                 nrfType = 0;
             }
@@ -203,7 +205,11 @@ public class ModemPowerProfile {
                         if (parser.next() == 4) {
                             String txDrain = parser.getText();
                             if (level < 0 || level >= 5) {
-                                Slog.e(TAG, "Unexpected tx level: " + level + ". Must be between 0 and 4");
+                                Slog.e(
+                                        TAG,
+                                        "Unexpected tx level: "
+                                                + level
+                                                + ". Must be between 0 and 4");
                                 break;
                             } else {
                                 int modemTxLevel = MODEM_TX_LEVEL_MAP[level];
@@ -225,7 +231,8 @@ public class ModemPowerProfile {
         }
     }
 
-    private static int getTypeFromAttribute(XmlPullParser parser, String attr, SparseArray<String> names) {
+    private static int getTypeFromAttribute(
+            XmlPullParser parser, String attr, SparseArray<String> names) {
         String value = XmlUtils.readStringAttribute(parser, attr);
         if (value == null) {
             return 0;
@@ -242,7 +249,13 @@ public class ModemPowerProfile {
             for (int i2 = 0; i2 < size; i2++) {
                 stringNames[i2] = names.valueAt(i2);
             }
-            throw new IllegalArgumentException("Unexpected " + attr + " value : " + value + ". Acceptable values are " + Arrays.toString(stringNames));
+            throw new IllegalArgumentException(
+                    "Unexpected "
+                            + attr
+                            + " value : "
+                            + value
+                            + ". Acceptable values are "
+                            + Arrays.toString(stringNames));
         }
         return names.keyAt(index);
     }
@@ -251,11 +264,20 @@ public class ModemPowerProfile {
         try {
             this.mPowerConstants.put(key, Double.valueOf(value).doubleValue());
         } catch (Exception e) {
-            Slog.e(TAG, "Failed to set power constant 0x" + Integer.toHexString(key) + NavigationBarInflaterView.KEY_CODE_START + keyToString(key) + ") to " + value, e);
+            Slog.e(
+                    TAG,
+                    "Failed to set power constant 0x"
+                            + Integer.toHexString(key)
+                            + NavigationBarInflaterView.KEY_CODE_START
+                            + keyToString(key)
+                            + ") to "
+                            + value,
+                    e);
         }
     }
 
-    public static long getAverageBatteryDrainKey(int drainType, int rat, int freqRange, int txLevel) {
+    public static long getAverageBatteryDrainKey(
+            int drainType, int rat, int freqRange, int txLevel) {
         long key = drainType != -1 ? 4294967296L | drainType : 4294967296L;
         switch (rat) {
             case -1:
@@ -333,7 +355,12 @@ public class ModemPowerProfile {
                 return value3;
             }
         }
-        Slog.w(TAG, "getAverageBatteryDrainMaH called with unexpected key: 0x" + Integer.toHexString(key) + ", " + keyToString(key));
+        Slog.w(
+                TAG,
+                "getAverageBatteryDrainMaH called with unexpected key: 0x"
+                        + Integer.toHexString(key)
+                        + ", "
+                        + keyToString(key));
         return Double.NaN;
     }
 
@@ -357,7 +384,8 @@ public class ModemPowerProfile {
         return sb.toString();
     }
 
-    private static void appendFieldToString(StringBuilder sb, String fieldName, SparseArray<String> names, int key) {
+    private static void appendFieldToString(
+            StringBuilder sb, String fieldName, SparseArray<String> names, int key) {
         sb.append(fieldName);
         sb.append(":");
         String name = names.get(key, null);

@@ -18,6 +18,7 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Base64;
 import android.util.Slog;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.Preconditions;
 import com.android.internal.widget.LockPatternUtils;
@@ -28,12 +29,13 @@ import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
 import com.android.server.alarm.GmsAlarmManager$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.container.KnoxMUMContainerPolicy$$ExternalSyntheticOutline0;
-import com.android.server.locksettings.LockSettingsService;
 import com.android.server.pdb.PersistentDataBlockManagerInternal;
 import com.android.server.pdb.PersistentDataBlockService;
+
 import com.samsung.android.knox.dar.VirtualLockUtils;
 import com.samsung.android.lock.LsLog;
 import com.samsung.android.lock.SPBnRManager;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
@@ -50,6 +52,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+
 import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
@@ -66,11 +69,31 @@ public final class LockSettingsStorage {
     public static final String[] COLUMNS_FOR_QUERY = {"value"};
     public static final String[] COLUMNS_FOR_PREFETCH = {"name", "value"};
     public static final Object DEFAULT = new Object();
-    public static final String[] SETTINGS_TO_BACKUP = {"lock_screen_owner_info_enabled", "lock_screen_owner_info", "lock_pattern_visible_pattern", "lockscreen.power_button_instantly_locks"};
-    public static final IvParameterSpec ivParamSpec = new IvParameterSpec("i_love_office_tg".getBytes());
-    public static final String[] CACHED_KEY_TO_LOCKSCREEN = {"lockscreen.samsung_biometric", "lockscreen.lockout_biometric_attempt_deadline", "lockscreen.lockoutattemptdeadline", "lock_screen_owner_info_enabled", "lock_screen_owner_info", "lockscreen.device_owner_info", "lockscreen.disabled"};
+    public static final String[] SETTINGS_TO_BACKUP = {
+        "lock_screen_owner_info_enabled",
+        "lock_screen_owner_info",
+        "lock_pattern_visible_pattern",
+        "lockscreen.power_button_instantly_locks"
+    };
+    public static final IvParameterSpec ivParamSpec =
+            new IvParameterSpec("i_love_office_tg".getBytes());
+    public static final String[] CACHED_KEY_TO_LOCKSCREEN = {
+        "lockscreen.samsung_biometric",
+        "lockscreen.lockout_biometric_attempt_deadline",
+        "lockscreen.lockoutattemptdeadline",
+        "lock_screen_owner_info_enabled",
+        "lock_screen_owner_info",
+        "lockscreen.device_owner_info",
+        "lockscreen.disabled"
+    };
     public static final int[] SECURE_STATE = {16, 64, 32, 128, 128, 256, 512};
-    public static final String[] KEY_TO_DB_BACKUP = {"locksettings_db_backup", "lockscreen.password_salt", "lockscreen.samsung_biometric", "migrated_all_users_to_sp_and_bound_ce", "migrated_all_users_to_sp_and_bound_keys"};
+    public static final String[] KEY_TO_DB_BACKUP = {
+        "locksettings_db_backup",
+        "lockscreen.password_salt",
+        "lockscreen.samsung_biometric",
+        "migrated_all_users_to_sp_and_bound_ce",
+        "migrated_all_users_to_sp_and_bound_keys"
+    };
     public static final String[] KEY_TO_DB_RESTORE = {"locksettings_db_restore"};
     public final Cache mCache = new Cache();
     public final Object mFileWriteLock = new Object();
@@ -93,7 +116,9 @@ public final class LockSettingsStorage {
                     return false;
                 }
                 CacheKey cacheKey = (CacheKey) obj;
-                return this.userId == cacheKey.userId && this.type == cacheKey.type && Objects.equals(this.key, cacheKey.key);
+                return this.userId == cacheKey.userId
+                        && this.type == cacheKey.type
+                        && Objects.equals(this.key, cacheKey.key);
             }
 
             public final int hashCode() {
@@ -137,7 +162,8 @@ public final class LockSettingsStorage {
             this.mVersion++;
         }
 
-        public final synchronized void putIfUnchanged(int i, String str, Object obj, int i2, int i3) {
+        public final synchronized void putIfUnchanged(
+                int i, String str, Object obj, int i2, int i3) {
             if (!contains(i, i2, str) && this.mVersion == i3) {
                 ArrayMap arrayMap = this.mCache;
                 CacheKey cacheKey = new CacheKey();
@@ -161,12 +187,15 @@ public final class LockSettingsStorage {
 
         @Override // android.database.sqlite.SQLiteOpenHelper
         public final void onCreate(SQLiteDatabase sQLiteDatabase) {
-            sQLiteDatabase.execSQL("CREATE TABLE locksettings (_id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT,user INTEGER,value TEXT);");
+            sQLiteDatabase.execSQL(
+                    "CREATE TABLE locksettings (_id INTEGER PRIMARY KEY AUTOINCREMENT,name"
+                        + " TEXT,user INTEGER,value TEXT);");
             LockSettingsService.Injector.AnonymousClass1 anonymousClass1 = this.mCallback;
             if (anonymousClass1 != null) {
                 anonymousClass1.getClass();
                 if (SystemProperties.getBoolean("ro.lockscreen.disable.default", false)) {
-                    ((LockSettingsStorage) anonymousClass1.val$storage).writeKeyValue(sQLiteDatabase, "lockscreen.disabled", "1", 0);
+                    ((LockSettingsStorage) anonymousClass1.val$storage)
+                            .writeKeyValue(sQLiteDatabase, "lockscreen.disabled", "1", 0);
                 }
             }
         }
@@ -200,11 +229,14 @@ public final class LockSettingsStorage {
         public static PersistentData fromBytes(byte[] bArr) {
             PersistentData persistentData = NONE;
             if (bArr != null && bArr.length != 0) {
-                DataInputStream dataInputStream = new DataInputStream(new ByteArrayInputStream(bArr));
+                DataInputStream dataInputStream =
+                        new DataInputStream(new ByteArrayInputStream(bArr));
                 try {
                     byte readByte = dataInputStream.readByte();
                     if (readByte != 1) {
-                        Slog.wtf("LockSettingsStorage", "Unknown PersistentData version code: " + ((int) readByte));
+                        Slog.wtf(
+                                "LockSettingsStorage",
+                                "Unknown PersistentData version code: " + ((int) readByte));
                         return persistentData;
                     }
                     int readByte2 = dataInputStream.readByte() & 255;
@@ -230,7 +262,8 @@ public final class LockSettingsStorage {
                 r0 = true;
             }
             Preconditions.checkArgument(r0, "empty payload must only be used with TYPE_NONE");
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(bArr.length + 10);
+            ByteArrayOutputStream byteArrayOutputStream =
+                    new ByteArrayOutputStream(bArr.length + 10);
             DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
             try {
                 dataOutputStream.writeByte(1);
@@ -271,7 +304,9 @@ public final class LockSettingsStorage {
     }
 
     public static File getLockCredentialFileForUser(int i, String str) {
-        return i == 0 ? new File(Environment.getDataSystemDirectory(), str) : new File(Environment.getUserSystemDirectory(i), str);
+        return i == 0
+                ? new File(Environment.getDataSystemDirectory(), str)
+                : new File(Environment.getUserSystemDirectory(i), str);
     }
 
     public void clearCache() {
@@ -292,16 +327,24 @@ public final class LockSettingsStorage {
             cipher.init(2, getCarrierLockKey(), ivParamSpec);
             return new String(cipher.doFinal(Base64.decode(str, 0)));
         } catch (InvalidAlgorithmParameterException e) {
-            Slog.i("LockSettingsStorage", "sec_encrypt.decrypt() InvalidAlgorithmParameterException = " + e.toString());
+            Slog.i(
+                    "LockSettingsStorage",
+                    "sec_encrypt.decrypt() InvalidAlgorithmParameterException = " + e.toString());
             return null;
         } catch (InvalidKeyException e2) {
-            Slog.i("LockSettingsStorage", "sec_encrypt.decrypt() InvalidKeyException = " + e2.toString());
+            Slog.i(
+                    "LockSettingsStorage",
+                    "sec_encrypt.decrypt() InvalidKeyException = " + e2.toString());
             return null;
         } catch (NoSuchAlgorithmException e3) {
-            Slog.i("LockSettingsStorage", "sec_encrypt.decrypt() NoSuchAlgorithmException = " + e3.toString());
+            Slog.i(
+                    "LockSettingsStorage",
+                    "sec_encrypt.decrypt() NoSuchAlgorithmException = " + e3.toString());
             return null;
         } catch (NoSuchPaddingException e4) {
-            Slog.i("LockSettingsStorage", "sec_encrypt.decrypt() NoSuchPaddingException = " + e4.toString());
+            Slog.i(
+                    "LockSettingsStorage",
+                    "sec_encrypt.decrypt() NoSuchPaddingException = " + e4.toString());
             return null;
         } catch (Exception e5) {
             Slog.i("LockSettingsStorage", "sec_encrypt.decrypt() Exception = " + e5.toString());
@@ -339,13 +382,15 @@ public final class LockSettingsStorage {
 
     public final boolean getCarrierLockFromFile() {
         boolean z = true;
-        if (BatteryService$$ExternalSyntheticOutline0.m45m("/efs/sec_efs/sktdm_mem/enclawlock.txt")) {
+        if (BatteryService$$ExternalSyntheticOutline0.m45m(
+                "/efs/sec_efs/sktdm_mem/enclawlock.txt")) {
             File file = new File("/efs/sec_efs/sktdm_mem/enclawlock.txt");
             if (!file.exists()) {
                 return false;
             }
             try {
-                String decryptCarrierLockMsg = decryptCarrierLockMsg(FileUtils.readTextFile(file, 32, null));
+                String decryptCarrierLockMsg =
+                        decryptCarrierLockMsg(FileUtils.readTextFile(file, 32, null));
                 if (decryptCarrierLockMsg == null || !decryptCarrierLockMsg.contains("ON")) {
                     z = false;
                 } else {
@@ -390,7 +435,9 @@ public final class LockSettingsStorage {
 
     public final PersistentDataBlockManagerInternal getPersistentDataBlockManager() {
         if (this.mPersistentDataBlockManagerInternal == null) {
-            this.mPersistentDataBlockManagerInternal = (PersistentDataBlockManagerInternal) LocalServices.getService(PersistentDataBlockManagerInternal.class);
+            this.mPersistentDataBlockManagerInternal =
+                    (PersistentDataBlockManagerInternal)
+                            LocalServices.getService(PersistentDataBlockManagerInternal.class);
         }
         return this.mPersistentDataBlockManagerInternal;
     }
@@ -416,18 +463,24 @@ public final class LockSettingsStorage {
 
     public File getSyntheticPasswordDirectoryForUser(int i) {
         try {
-            UserInfo userInfo = ((UserManager) this.mContext.getSystemService("user")).getUserInfo(i);
+            UserInfo userInfo =
+                    ((UserManager) this.mContext.getSystemService("user")).getUserInfo(i);
             if (userInfo != null && userInfo.isVirtualUser()) {
-                return Environment.buildPath(Environment.getDataSystemDirectory(), new String[]{"users", Integer.toString(i), "spblob/"});
+                return Environment.buildPath(
+                        Environment.getDataSystemDirectory(),
+                        new String[] {"users", Integer.toString(i), "spblob/"});
             }
         } catch (Exception unused) {
-            NandswapManager$$ExternalSyntheticOutline0.m(i, "Unexpected error while get sp path for user ", "LockSettingsStorage");
+            NandswapManager$$ExternalSyntheticOutline0.m(
+                    i, "Unexpected error while get sp path for user ", "LockSettingsStorage");
         }
         return new File(Environment.getDataSystemDeDirectory(i), "spblob/");
     }
 
     public final File getSyntheticPasswordStateFileForUser(int i, String str, long j) {
-        return new File(getSyntheticPasswordDirectoryForUser(i), TextUtils.formatSimple("%016x.%s", new Object[]{Long.valueOf(j), str}));
+        return new File(
+                getSyntheticPasswordDirectoryForUser(i),
+                TextUtils.formatSimple("%016x.%s", new Object[] {Long.valueOf(j), str}));
     }
 
     public final boolean hasFile(File file) {
@@ -440,7 +493,9 @@ public final class LockSettingsStorage {
             Slog.w("LockSettingsStorage", "LockSettingsDB, hasLockSettingsBackup : true");
             return true;
         }
-        Slog.w("LockSettingsStorage", "LockSettingsDB, hasLockSettingsBackup : false, Req Db = " + getBackupDbName());
+        Slog.w(
+                "LockSettingsStorage",
+                "LockSettingsDB, hasLockSettingsBackup : false, Req Db = " + getBackupDbName());
         return false;
     }
 
@@ -459,7 +514,9 @@ public final class LockSettingsStorage {
     public final Map listSyntheticPasswordProtectorsForAllUsers(String str) {
         ArrayMap arrayMap = new ArrayMap();
         for (UserInfo userInfo : UserManager.get(this.mContext).getUsers()) {
-            arrayMap.put(Integer.valueOf(userInfo.id), listSyntheticPasswordProtectorsForUser(userInfo.id, str));
+            arrayMap.put(
+                    Integer.valueOf(userInfo.id),
+                    listSyntheticPasswordProtectorsForUser(userInfo.id, str));
         }
         for (int i : new VirtualLockUtils().getVirtualUsers()) {
             arrayMap.put(Integer.valueOf(i), listSyntheticPasswordProtectorsForUser(i, str));
@@ -480,7 +537,10 @@ public final class LockSettingsStorage {
                 try {
                     arrayList.add(Long.valueOf(Long.parseUnsignedLong(split[0], 16)));
                 } catch (NumberFormatException unused) {
-                    BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(new StringBuilder("Failed to parse protector ID "), split[0], "LockSettingsStorage");
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                            new StringBuilder("Failed to parse protector ID "),
+                            split[0],
+                            "LockSettingsStorage");
                 }
             }
         }
@@ -499,10 +559,21 @@ public final class LockSettingsStorage {
                 synchronized (cache) {
                     i2 = cache.mVersion;
                 }
-                Cursor query = this.mOpenHelper.getReadableDatabase().query("locksettings", COLUMNS_FOR_PREFETCH, "user=?", new String[]{Integer.toString(i)}, null, null, null);
+                Cursor query =
+                        this.mOpenHelper
+                                .getReadableDatabase()
+                                .query(
+                                        "locksettings",
+                                        COLUMNS_FOR_PREFETCH,
+                                        "user=?",
+                                        new String[] {Integer.toString(i)},
+                                        null,
+                                        null,
+                                        null);
                 if (query != null) {
                     while (query.moveToNext()) {
-                        this.mCache.putIfUnchanged(0, query.getString(0), query.getString(1), i, i2);
+                        this.mCache.putIfUnchanged(
+                                0, query.getString(0), query.getString(1), i, i2);
                     }
                     query.close();
                 }
@@ -638,7 +709,9 @@ public final class LockSettingsStorage {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> L39
             throw r9
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.locksettings.LockSettingsStorage.readFile(java.io.File):byte[]");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.locksettings.LockSettingsStorage.readFile(java.io.File):byte[]");
     }
 
     public String readKeyValue(String str, String str2, int i) {
@@ -664,7 +737,17 @@ public final class LockSettingsStorage {
                     i2 = cache2.mVersion;
                 }
                 Object obj3 = DEFAULT;
-                Cursor query = this.mOpenHelper.getReadableDatabase().query("locksettings", COLUMNS_FOR_QUERY, "user=? AND name=?", new String[]{Integer.toString(i), str}, null, null, null);
+                Cursor query =
+                        this.mOpenHelper
+                                .getReadableDatabase()
+                                .query(
+                                        "locksettings",
+                                        COLUMNS_FOR_QUERY,
+                                        "user=? AND name=?",
+                                        new String[] {Integer.toString(i), str},
+                                        null,
+                                        null,
+                                        null);
                 if (query != null) {
                     Object string = query.moveToFirst() ? query.getString(0) : obj3;
                     query.close();
@@ -680,14 +763,18 @@ public final class LockSettingsStorage {
     }
 
     public final PersistentData readPersistentDataBlock() {
-        PersistentDataBlockManagerInternal persistentDataBlockManager = getPersistentDataBlockManager();
+        PersistentDataBlockManagerInternal persistentDataBlockManager =
+                getPersistentDataBlockManager();
         PersistentData persistentData = PersistentData.NONE;
         if (persistentDataBlockManager == null) {
             return persistentData;
         }
         try {
-            PersistentDataBlockService.InternalService internalService = (PersistentDataBlockService.InternalService) persistentDataBlockManager;
-            return PersistentData.fromBytes(internalService.readInternal(996, PersistentDataBlockService.this.getFrpCredentialDataOffset()));
+            PersistentDataBlockService.InternalService internalService =
+                    (PersistentDataBlockService.InternalService) persistentDataBlockManager;
+            return PersistentData.fromBytes(
+                    internalService.readInternal(
+                            996, PersistentDataBlockService.this.getFrpCredentialDataOffset()));
         } catch (IllegalStateException e) {
             Slog.e("LockSettingsStorage", "Error reading persistent data block", e);
             return persistentData;
@@ -700,10 +787,12 @@ public final class LockSettingsStorage {
 
     public void removeKey(String str, int i) {
         SQLiteDatabase writableDatabase = this.mOpenHelper.getWritableDatabase();
-        AccountManagerService$$ExternalSyntheticOutline0.m("name", str).put("user", Integer.valueOf(i));
+        AccountManagerService$$ExternalSyntheticOutline0.m("name", str)
+                .put("user", Integer.valueOf(i));
         writableDatabase.beginTransaction();
         try {
-            writableDatabase.delete("locksettings", "name=? AND user=?", new String[]{str, Integer.toString(i)});
+            writableDatabase.delete(
+                    "locksettings", "name=? AND user=?", new String[] {str, Integer.toString(i)});
             writableDatabase.setTransactionSuccessful();
             Cache cache = this.mCache;
             synchronized (cache) {
@@ -761,30 +850,47 @@ public final class LockSettingsStorage {
             bundle.putInt("secureState", i);
             this.mLockTypeCallback.sendResult(bundle);
         } catch (RemoteException e) {
-            Slog.d("LockSettingsStorage", "sendLockTypeChangedInfo failed!!  mLockTypeCallback = " + this.mLockTypeCallback);
+            Slog.d(
+                    "LockSettingsStorage",
+                    "sendLockTypeChangedInfo failed!!  mLockTypeCallback = "
+                            + this.mLockTypeCallback);
             e.printStackTrace();
         }
     }
 
     public final void setString(String str, String str2, int i) {
         Object obj;
-        Preconditions.checkArgument(!LockPatternUtils.isSpecialUserId(i), "cannot store lock settings for special user: %d", new Object[]{Integer.valueOf(i)});
+        Preconditions.checkArgument(
+                !LockPatternUtils.isSpecialUserId(i),
+                "cannot store lock settings for special user: %d",
+                new Object[] {Integer.valueOf(i)});
         if (ArrayUtils.contains(KEY_TO_DB_RESTORE, str)) {
             LsLog.restore("LockSettingsDB, Restore! User " + i + ", " + str);
             if (!new File(getBackupDbName()).exists()) {
-                LsLog.restore("LockSettingsDB, restore fail : no backuped DB File, " + getBackupDbName(), true);
-            } else if (((ArrayList) listSyntheticPasswordProtectorsForUser(0, "spblob")).size() < 1) {
-                LsLog.restore("LockSettingsDB, restore fail : no protector Id. Can not restore DB!", true);
+                LsLog.restore(
+                        "LockSettingsDB, restore fail : no backuped DB File, " + getBackupDbName(),
+                        true);
+            } else if (((ArrayList) listSyntheticPasswordProtectorsForUser(0, "spblob")).size()
+                    < 1) {
+                LsLog.restore(
+                        "LockSettingsDB, restore fail : no protector Id. Can not restore DB!",
+                        true);
             } else {
-                int semRestoreDatabaseFile = SQLiteDatabase.semRestoreDatabaseFile(getBackupDbName(), getOriginDbName());
+                int semRestoreDatabaseFile =
+                        SQLiteDatabase.semRestoreDatabaseFile(getBackupDbName(), getOriginDbName());
                 if (semRestoreDatabaseFile != 0) {
-                    LsLog.restore("LockSettingsDB, restore fail : semRestoreDatabaseFile ret = " + semRestoreDatabaseFile, true);
+                    LsLog.restore(
+                            "LockSettingsDB, restore fail : semRestoreDatabaseFile ret = "
+                                    + semRestoreDatabaseFile,
+                            true);
                 } else {
                     Slog.e("LockSettingsStorage", "LockSettingsDB, semRestoreDatabaseFile Success");
                     if (this.mOpenHelper.getWritableDatabase().diagnoseError()) {
                         Slog.e("LockSettingsStorage", "LockSettingsDB, diagnoseError() Success");
                     } else {
-                        Slog.e("LockSettingsStorage", "LockSettingsDB, diagnoseError() failed! reopen DB Helper!");
+                        Slog.e(
+                                "LockSettingsStorage",
+                                "LockSettingsDB, diagnoseError() failed! reopen DB Helper!");
                         DatabaseHelper databaseHelper = new DatabaseHelper(this.mContext);
                         this.mOpenHelper = databaseHelper;
                         databaseHelper.mCallback = this.mCallback;
@@ -804,14 +910,25 @@ public final class LockSettingsStorage {
         }
         int indexOf = ArrayUtils.indexOf(CACHED_KEY_TO_LOCKSCREEN, str);
         if (indexOf >= 0) {
-            GmsAlarmManager$$ExternalSyntheticOutline0.m("sendLockTypeChangedInfo : ", str, " = ", str2, "LockSettingsStorage");
+            GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                    "sendLockTypeChangedInfo : ", str, " = ", str2, "LockSettingsStorage");
             sendLockTypeChangedInfo(SECURE_STATE[indexOf]);
         }
         if (ArrayUtils.contains(KEY_TO_DB_BACKUP, str)) {
             LsLog.restore("LockSettingsDB, Backup! User " + i + ", " + str);
             if (new File(getOriginDbName()).exists()) {
                 Object obj2 = DEFAULT;
-                Cursor query = this.mOpenHelper.getReadableDatabase().query("locksettings", COLUMNS_FOR_QUERY, "user=? AND name=?", new String[]{Integer.toString(0), "sp-handle"}, null, null, null);
+                Cursor query =
+                        this.mOpenHelper
+                                .getReadableDatabase()
+                                .query(
+                                        "locksettings",
+                                        COLUMNS_FOR_QUERY,
+                                        "user=? AND name=?",
+                                        new String[] {Integer.toString(0), "sp-handle"},
+                                        null,
+                                        null,
+                                        null);
                 if (query != null) {
                     obj = query.moveToFirst() ? query.getString(0) : obj2;
                     query.close();
@@ -820,19 +937,25 @@ public final class LockSettingsStorage {
                 }
                 String str3 = obj == obj2 ? null : (String) obj;
                 long parseLong = TextUtils.isEmpty(str3) ? 0L : Long.parseLong(str3);
-                if (parseLong == 0 || ArrayUtils.isEmpty(readSyntheticPasswordState(0, "spblob", parseLong))) {
+                if (parseLong == 0
+                        || ArrayUtils.isEmpty(readSyntheticPasswordState(0, "spblob", parseLong))) {
                     LsLog.restore("LockSettingsDB, current protector id is null!");
                 } else {
-                    int semBackupDatabaseFile = SQLiteDatabase.semBackupDatabaseFile(getOriginDbName(), getBackupDbName());
+                    int semBackupDatabaseFile =
+                            SQLiteDatabase.semBackupDatabaseFile(
+                                    getOriginDbName(), getBackupDbName());
                     if (semBackupDatabaseFile == 0) {
                         LsLog.restore("LockSettingsDB, backup success!");
                         return;
                     } else {
-                        LsLog.restore("LockSettingsDB, Failed semBackupDatabaseFile : error code = " + semBackupDatabaseFile);
+                        LsLog.restore(
+                                "LockSettingsDB, Failed semBackupDatabaseFile : error code = "
+                                        + semBackupDatabaseFile);
                     }
                 }
             } else {
-                LsLog.restore("LockSettingsDB, backup failed : no sourceFile, " + getOriginDbName());
+                LsLog.restore(
+                        "LockSettingsDB, backup failed : no sourceFile, " + getOriginDbName());
             }
             LsLog.restore("LockSettingsDB, Backup failed! It will try again on the next reboot.");
             removeKey("locksettings_db_backup", 0);
@@ -930,7 +1053,10 @@ public final class LockSettingsStorage {
             monitor-exit(r3)     // Catch: java.lang.Throwable -> L28
             throw r10
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.locksettings.LockSettingsStorage.writeFile(java.io.File, byte[], boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.locksettings.LockSettingsStorage.writeFile(java.io.File,"
+                    + " byte[], boolean):void");
     }
 
     public void writeKeyValue(SQLiteDatabase sQLiteDatabase, String str, String str2, int i) {
@@ -938,7 +1064,8 @@ public final class LockSettingsStorage {
         KnoxMUMContainerPolicy$$ExternalSyntheticOutline0.m(i, m, "user", "value", str2);
         sQLiteDatabase.beginTransaction();
         try {
-            sQLiteDatabase.delete("locksettings", "name=? AND user=?", new String[]{str, Integer.toString(i)});
+            sQLiteDatabase.delete(
+                    "locksettings", "name=? AND user=?", new String[] {str, Integer.toString(i)});
             sQLiteDatabase.insert("locksettings", null, m);
             sQLiteDatabase.setTransactionSuccessful();
             this.mCache.put(0, str, str2, i);
@@ -952,11 +1079,16 @@ public final class LockSettingsStorage {
     }
 
     public final void writePersistentDataBlock(int i, int i2, int i3, byte[] bArr) {
-        PersistentDataBlockManagerInternal persistentDataBlockManager = getPersistentDataBlockManager();
+        PersistentDataBlockManagerInternal persistentDataBlockManager =
+                getPersistentDataBlockManager();
         if (persistentDataBlockManager == null) {
             return;
         }
-        PersistentDataBlockService.InternalService internalService = (PersistentDataBlockService.InternalService) persistentDataBlockManager;
-        internalService.writeInternal(PersistentDataBlockService.this.getFrpCredentialDataOffset(), PersistentData.toBytes(i, i2, i3, bArr), 996);
+        PersistentDataBlockService.InternalService internalService =
+                (PersistentDataBlockService.InternalService) persistentDataBlockManager;
+        internalService.writeInternal(
+                PersistentDataBlockService.this.getFrpCredentialDataOffset(),
+                PersistentData.toBytes(i, i2, i3, bArr),
+                996);
     }
 }

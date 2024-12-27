@@ -14,8 +14,7 @@ public interface IAudioModeDispatcher extends IInterface {
 
     public static class Default implements IAudioModeDispatcher {
         @Override // android.media.IAudioModeDispatcher
-        public void dispatchAudioModeChanged(int mode) throws RemoteException {
-        }
+        public void dispatchAudioModeChanged(int mode) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IAudioModeDispatcher extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAudioModeDispatcher {
+    public abstract static class Stub extends Binder implements IAudioModeDispatcher {
         static final int TRANSACTION_dispatchAudioModeChanged = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IAudioModeDispatcher extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAudioModeDispatcher.DESCRIPTOR);
             }

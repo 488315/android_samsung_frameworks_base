@@ -17,19 +17,21 @@ public final class PrintServiceInfo implements Parcelable {
     private final ResolveInfo mResolveInfo;
     private final String mSettingsActivityName;
     private static final String LOG_TAG = PrintServiceInfo.class.getSimpleName();
-    public static final Parcelable.Creator<PrintServiceInfo> CREATOR = new Parcelable.Creator<PrintServiceInfo>() { // from class: android.printservice.PrintServiceInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PrintServiceInfo createFromParcel(Parcel parcel) {
-            return new PrintServiceInfo(parcel);
-        }
+    public static final Parcelable.Creator<PrintServiceInfo> CREATOR =
+            new Parcelable.Creator<
+                    PrintServiceInfo>() { // from class: android.printservice.PrintServiceInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PrintServiceInfo createFromParcel(Parcel parcel) {
+                    return new PrintServiceInfo(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PrintServiceInfo[] newArray(int size) {
-            return new PrintServiceInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PrintServiceInfo[] newArray(int size) {
+                    return new PrintServiceInfo[size];
+                }
+            };
 
     public PrintServiceInfo(Parcel parcel) {
         this.mId = parcel.readString();
@@ -40,8 +42,14 @@ public final class PrintServiceInfo implements Parcelable {
         this.mAdvancedPrintOptionsActivityName = parcel.readString();
     }
 
-    public PrintServiceInfo(ResolveInfo resolveInfo, String settingsActivityName, String addPrintersActivityName, String advancedPrintOptionsActivityName) {
-        this.mId = new ComponentName(resolveInfo.serviceInfo.packageName, resolveInfo.serviceInfo.name).flattenToString();
+    public PrintServiceInfo(
+            ResolveInfo resolveInfo,
+            String settingsActivityName,
+            String addPrintersActivityName,
+            String advancedPrintOptionsActivityName) {
+        this.mId =
+                new ComponentName(resolveInfo.serviceInfo.packageName, resolveInfo.serviceInfo.name)
+                        .flattenToString();
         this.mResolveInfo = resolveInfo;
         this.mSettingsActivityName = settingsActivityName;
         this.mAddPrintersActivityName = addPrintersActivityName;
@@ -49,18 +57,20 @@ public final class PrintServiceInfo implements Parcelable {
     }
 
     public ComponentName getComponentName() {
-        return new ComponentName(this.mResolveInfo.serviceInfo.packageName, this.mResolveInfo.serviceInfo.name);
+        return new ComponentName(
+                this.mResolveInfo.serviceInfo.packageName, this.mResolveInfo.serviceInfo.name);
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:22:0x00b8, code lost:
-    
-        if (r3 == null) goto L33;
-     */
+
+       if (r3 == null) goto L33;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.printservice.PrintServiceInfo create(android.content.Context r13, android.content.pm.ResolveInfo r14) {
+    public static android.printservice.PrintServiceInfo create(
+            android.content.Context r13, android.content.pm.ResolveInfo r14) {
         /*
             r0 = 0
             r1 = 0
@@ -160,7 +170,10 @@ public final class PrintServiceInfo implements Parcelable {
             r5.<init>(r14, r0, r1, r2)
             return r5
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.printservice.PrintServiceInfo.create(android.content.Context, android.content.pm.ResolveInfo):android.printservice.PrintServiceInfo");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.printservice.PrintServiceInfo.create(android.content.Context,"
+                    + " android.content.pm.ResolveInfo):android.printservice.PrintServiceInfo");
     }
 
     public String getId() {
@@ -236,7 +249,8 @@ public final class PrintServiceInfo implements Parcelable {
         builder.append(", resolveInfo=").append(this.mResolveInfo);
         builder.append(", settingsActivityName=").append(this.mSettingsActivityName);
         builder.append(", addPrintersActivityName=").append(this.mAddPrintersActivityName);
-        builder.append(", advancedPrintOptionsActivityName=").append(this.mAdvancedPrintOptionsActivityName);
+        builder.append(", advancedPrintOptionsActivityName=")
+                .append(this.mAdvancedPrintOptionsActivityName);
         builder.append("}");
         return builder.toString();
     }

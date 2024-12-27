@@ -36,7 +36,12 @@ public class OpenGlHelper {
         int[] compileStatus = new int[1];
         GLES20.glGetShaderiv(shaderId, GLES20.GL_COMPILE_STATUS, compileStatus, 0);
         if (compileStatus[0] == 0) {
-            LogS.e("TranscodeLib", "Could not compile shader " + shaderType + " " + GLES20.glGetShaderInfoLog(shaderId));
+            LogS.e(
+                    "TranscodeLib",
+                    "Could not compile shader "
+                            + shaderType
+                            + " "
+                            + GLES20.glGetShaderInfoLog(shaderId));
             GLES20.glDeleteShader(shaderId);
             return 0;
         }
@@ -55,7 +60,9 @@ public class OpenGlHelper {
         int[] linkStatus = new int[1];
         GLES20.glGetProgramiv(programId, GLES20.GL_LINK_STATUS, linkStatus, 0);
         if (linkStatus[0] == 0) {
-            LogS.e("TranscodeLib", "Couldn't link program :" + GLES20.glGetProgramInfoLog(programId));
+            LogS.e(
+                    "TranscodeLib",
+                    "Couldn't link program :" + GLES20.glGetProgramInfoLog(programId));
             GLES20.glDeleteProgram(programId);
             return 0;
         }
@@ -86,7 +93,7 @@ public class OpenGlHelper {
     }
 
     public static void deleteTexture(int textureId) {
-        GLES20.glDeleteTextures(1, new int[]{textureId}, 0);
+        GLES20.glDeleteTextures(1, new int[] {textureId}, 0);
     }
 
     public static int checkGLError(String operation) {

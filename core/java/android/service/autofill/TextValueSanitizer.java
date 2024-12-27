@@ -6,25 +6,33 @@ import android.os.Parcelable;
 import android.util.Slog;
 import android.view.autofill.AutofillValue;
 import android.view.autofill.Helper;
+
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /* loaded from: classes3.dex */
 public final class TextValueSanitizer extends InternalSanitizer implements Sanitizer, Parcelable {
-    public static final Parcelable.Creator<TextValueSanitizer> CREATOR = new Parcelable.Creator<TextValueSanitizer>() { // from class: android.service.autofill.TextValueSanitizer.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TextValueSanitizer createFromParcel(Parcel parcel) {
-            return new TextValueSanitizer((Pattern) parcel.readSerializable(Pattern.class.getClassLoader(), Pattern.class), parcel.readString());
-        }
+    public static final Parcelable.Creator<TextValueSanitizer> CREATOR =
+            new Parcelable.Creator<
+                    TextValueSanitizer>() { // from class:
+                                            // android.service.autofill.TextValueSanitizer.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TextValueSanitizer createFromParcel(Parcel parcel) {
+                    return new TextValueSanitizer(
+                            (Pattern)
+                                    parcel.readSerializable(
+                                            Pattern.class.getClassLoader(), Pattern.class),
+                            parcel.readString());
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TextValueSanitizer[] newArray(int size) {
-            return new TextValueSanitizer[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TextValueSanitizer[] newArray(int size) {
+                    return new TextValueSanitizer[size];
+                }
+            };
     private static final String TAG = "TextValueSanitizer";
     private final Pattern mRegex;
     private final String mSubst;
@@ -64,7 +72,13 @@ public final class TextValueSanitizer extends InternalSanitizer implements Sanit
     }
 
     public String toString() {
-        return !Helper.sDebug ? super.toString() : "TextValueSanitizer: [regex=" + this.mRegex + ", subst=" + this.mSubst + NavigationBarInflaterView.SIZE_MOD_END;
+        return !Helper.sDebug
+                ? super.toString()
+                : "TextValueSanitizer: [regex="
+                        + this.mRegex
+                        + ", subst="
+                        + this.mSubst
+                        + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     @Override // android.os.Parcelable

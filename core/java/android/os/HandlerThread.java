@@ -24,15 +24,13 @@ public class HandlerThread extends Thread {
         onCreated();
     }
 
-    protected void onCreated() {
-    }
+    protected void onCreated() {}
 
     protected void onCreated$ravenwood() {
         setDaemon(true);
     }
 
-    protected void onLooperPrepared() {
-    }
+    protected void onLooperPrepared() {}
 
     @Override // java.lang.Thread, java.lang.Runnable
     public void run() {

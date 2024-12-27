@@ -3,27 +3,30 @@ package android.hardware.radio.modem;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class HardwareConfig implements Parcelable {
-    public static final Parcelable.Creator<HardwareConfig> CREATOR = new Parcelable.Creator<HardwareConfig>() { // from class: android.hardware.radio.modem.HardwareConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HardwareConfig createFromParcel(Parcel _aidl_source) {
-            HardwareConfig _aidl_out = new HardwareConfig();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<HardwareConfig> CREATOR =
+            new Parcelable.Creator<
+                    HardwareConfig>() { // from class: android.hardware.radio.modem.HardwareConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HardwareConfig createFromParcel(Parcel _aidl_source) {
+                    HardwareConfig _aidl_out = new HardwareConfig();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HardwareConfig[] newArray(int _aidl_size) {
-            return new HardwareConfig[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HardwareConfig[] newArray(int _aidl_size) {
+                    return new HardwareConfig[_aidl_size];
+                }
+            };
     public static final int STATE_DISABLED = 2;
     public static final int STATE_ENABLED = 0;
     public static final int STATE_STANDBY = 1;
@@ -93,14 +96,18 @@ public class HardwareConfig implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.modem = (HardwareConfigModem[]) _aidl_parcel.createTypedArray(HardwareConfigModem.CREATOR);
+            this.modem =
+                    (HardwareConfigModem[])
+                            _aidl_parcel.createTypedArray(HardwareConfigModem.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.sim = (HardwareConfigSim[]) _aidl_parcel.createTypedArray(HardwareConfigSim.CREATOR);
+                this.sim =
+                        (HardwareConfigSim[])
+                                _aidl_parcel.createTypedArray(HardwareConfigSim.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

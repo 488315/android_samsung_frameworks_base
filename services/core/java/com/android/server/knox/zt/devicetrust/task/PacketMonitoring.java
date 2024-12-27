@@ -1,9 +1,12 @@
 package com.android.server.knox.zt.devicetrust.task;
 
 import android.os.RemoteException;
+
 import com.android.server.knox.zt.devicetrust.EndpointMonitorImpl;
 import com.android.server.knox.zt.devicetrust.data.PktData;
+
 import com.samsung.android.knox.zt.devicetrust.IEndpointMonitorListener;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.function.Predicate;
@@ -11,7 +14,14 @@ import java.util.function.Predicate;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class PacketMonitoring extends ReschedulableMonitoringTask {
-    public PacketMonitoring(int i, int i2, int i3, int i4, IEndpointMonitorListener iEndpointMonitorListener, Predicate predicate, EndpointMonitorImpl.Injector injector) {
+    public PacketMonitoring(
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            IEndpointMonitorListener iEndpointMonitorListener,
+            Predicate predicate,
+            EndpointMonitorImpl.Injector injector) {
         super(5, i, i2, i3, i4, iEndpointMonitorListener, predicate, injector);
     }
 

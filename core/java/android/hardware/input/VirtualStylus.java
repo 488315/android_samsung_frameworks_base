@@ -9,7 +9,8 @@ import android.util.Log;
 @SystemApi
 /* loaded from: classes2.dex */
 public class VirtualStylus extends VirtualInputDevice {
-    @Override // android.hardware.input.VirtualInputDevice, java.io.Closeable, java.lang.AutoCloseable
+    @Override // android.hardware.input.VirtualInputDevice, java.io.Closeable,
+    // java.lang.AutoCloseable
     public /* bridge */ /* synthetic */ void close() {
         super.close();
     }
@@ -31,7 +32,10 @@ public class VirtualStylus extends VirtualInputDevice {
     public void sendMotionEvent(VirtualStylusMotionEvent event) {
         try {
             if (!this.mVirtualDevice.sendStylusMotionEvent(this.mToken, event)) {
-                Log.w("VirtualInputDevice", "Failed to send motion event from virtual stylus " + this.mConfig.getInputDeviceName());
+                Log.w(
+                        "VirtualInputDevice",
+                        "Failed to send motion event from virtual stylus "
+                                + this.mConfig.getInputDeviceName());
             }
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
@@ -41,7 +45,10 @@ public class VirtualStylus extends VirtualInputDevice {
     public void sendButtonEvent(VirtualStylusButtonEvent event) {
         try {
             if (!this.mVirtualDevice.sendStylusButtonEvent(this.mToken, event)) {
-                Log.w("VirtualInputDevice", "Failed to send button event from virtual stylus " + this.mConfig.getInputDeviceName());
+                Log.w(
+                        "VirtualInputDevice",
+                        "Failed to send button event from virtual stylus "
+                                + this.mConfig.getInputDeviceName());
             }
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();

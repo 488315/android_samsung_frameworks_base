@@ -5,7 +5,9 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.samsung.android.chimera.genie.MemRequest;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -22,21 +24,19 @@ public interface IChimera extends IInterface {
 
     public static class Default implements IChimera {
         @Override // com.samsung.android.chimera.IChimera
-        public List<PSIAvailableMem> getAvailableMemInfo(long startTime, long endTime) throws RemoteException {
+        public List<PSIAvailableMem> getAvailableMemInfo(long startTime, long endTime)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.chimera.IChimera
-        public void prepareMemory(MemRequest memRequest) throws RemoteException {
-        }
+        public void prepareMemory(MemRequest memRequest) throws RemoteException {}
 
         @Override // com.samsung.android.chimera.IChimera
-        public void setGenieSessionStart() throws RemoteException {
-        }
+        public void setGenieSessionStart() throws RemoteException {}
 
         @Override // com.samsung.android.chimera.IChimera
-        public void setGenieSessionEnd() throws RemoteException {
-        }
+        public void setGenieSessionEnd() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -44,7 +44,7 @@ public interface IChimera extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IChimera {
+    public abstract static class Stub extends Binder implements IChimera {
         static final int TRANSACTION_getAvailableMemInfo = 1;
         static final int TRANSACTION_prepareMemory = 2;
         static final int TRANSACTION_setGenieSessionEnd = 4;
@@ -91,7 +91,8 @@ public interface IChimera extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IChimera.DESCRIPTOR);
             }
@@ -144,7 +145,8 @@ public interface IChimera extends IInterface {
             }
 
             @Override // com.samsung.android.chimera.IChimera
-            public List<PSIAvailableMem> getAvailableMemInfo(long startTime, long endTime) throws RemoteException {
+            public List<PSIAvailableMem> getAvailableMemInfo(long startTime, long endTime)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -153,7 +155,8 @@ public interface IChimera extends IInterface {
                     _data.writeLong(endTime);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    List<PSIAvailableMem> _result = _reply.createTypedArrayList(PSIAvailableMem.CREATOR);
+                    List<PSIAvailableMem> _result =
+                            _reply.createTypedArrayList(PSIAvailableMem.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

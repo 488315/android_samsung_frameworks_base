@@ -1,6 +1,7 @@
 package com.android.server.wm;
 
 import android.view.WindowManager;
+
 import java.util.function.Predicate;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -20,14 +21,17 @@ public final /* synthetic */ class Task$$ExternalSyntheticLambda0 implements Pre
                 return !((ActivityRecord) obj).finishing;
             case 1:
                 ActivityRecord activityRecord = (ActivityRecord) obj;
-                return !activityRecord.mIsExiting && activityRecord.mClientVisible && activityRecord.mVisible;
+                return !activityRecord.mIsExiting
+                        && activityRecord.mClientVisible
+                        && activityRecord.mVisible;
             case 2:
                 return ((WindowState) obj).mAttrs.isFullscreen();
             case 3:
                 return ((ActivityRecord) obj).mVisible;
             case 4:
                 WindowState windowState = (WindowState) obj;
-                return !windowState.mAnimatingExit && ((i = windowState.mAttrs.type) == 1 || i == 2 || i == 4);
+                return !windowState.mAnimatingExit
+                        && ((i = windowState.mAttrs.type) == 1 || i == 2 || i == 4);
             case 5:
                 ActivityRecord activityRecord2 = (ActivityRecord) obj;
                 return activityRecord2.mPopOverState.mIsActivated && !activityRecord2.finishing;
@@ -45,7 +49,8 @@ public final /* synthetic */ class Task$$ExternalSyntheticLambda0 implements Pre
                 return ((WindowState) obj).mAttrs.type == 1;
             default:
                 ActivityRecord activityRecord4 = (ActivityRecord) obj;
-                return activityRecord4.mHandleExitSplashScreen && activityRecord4.mTransferringSplashScreenState == 1;
+                return activityRecord4.mHandleExitSplashScreen
+                        && activityRecord4.mTransferringSplashScreenState == 1;
         }
     }
 }

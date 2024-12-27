@@ -1,11 +1,11 @@
 package android.graphics;
 
-import android.graphics.ColorSpace;
+import libcore.util.NativeAllocationRegistry;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.nio.Buffer;
 import java.nio.ShortBuffer;
-import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes.dex */
 public class Mesh {
@@ -15,47 +15,110 @@ public class Mesh {
     private long mNativeMeshWrapper;
 
     @Retention(RetentionPolicy.SOURCE)
-    private @interface Mode {
-    }
+    private @interface Mode {}
 
     /* JADX INFO: Access modifiers changed from: private */
     public static native long nativeGetFinalizer();
 
-    private static native long nativeMake(long j, int i, Buffer buffer, boolean z, int i2, int i3, float f, float f2, float f3, float f4);
+    private static native long nativeMake(
+            long j,
+            int i,
+            Buffer buffer,
+            boolean z,
+            int i2,
+            int i3,
+            float f,
+            float f2,
+            float f3,
+            float f4);
 
-    private static native long nativeMakeIndexed(long j, int i, Buffer buffer, boolean z, int i2, int i3, ShortBuffer shortBuffer, boolean z2, int i4, int i5, float f, float f2, float f3, float f4);
+    private static native long nativeMakeIndexed(
+            long j,
+            int i,
+            Buffer buffer,
+            boolean z,
+            int i2,
+            int i3,
+            ShortBuffer shortBuffer,
+            boolean z2,
+            int i4,
+            int i5,
+            float f,
+            float f2,
+            float f3,
+            float f4);
 
-    private static native void nativeUpdateUniforms(long j, String str, float f, float f2, float f3, float f4, int i);
+    private static native void nativeUpdateUniforms(
+            long j, String str, float f, float f2, float f3, float f4, int i);
 
-    private static native void nativeUpdateUniforms(long j, String str, int i, int i2, int i3, int i4, int i5);
+    private static native void nativeUpdateUniforms(
+            long j, String str, int i, int i2, int i3, int i4, int i5);
 
     private static native void nativeUpdateUniforms(long j, String str, float[] fArr, boolean z);
 
     private static native void nativeUpdateUniforms(long j, String str, int[] iArr);
 
     private static class MeshHolder {
-        public static final NativeAllocationRegistry MESH_SPECIFICATION_REGISTRY = NativeAllocationRegistry.createMalloced(MeshSpecification.class.getClassLoader(), Mesh.nativeGetFinalizer());
+        public static final NativeAllocationRegistry MESH_SPECIFICATION_REGISTRY =
+                NativeAllocationRegistry.createMalloced(
+                        MeshSpecification.class.getClassLoader(), Mesh.nativeGetFinalizer());
 
-        private MeshHolder() {
-        }
+        private MeshHolder() {}
     }
 
-    public Mesh(MeshSpecification meshSpec, int mode, Buffer vertexBuffer, int vertexCount, RectF bounds) {
+    public Mesh(
+            MeshSpecification meshSpec,
+            int mode,
+            Buffer vertexBuffer,
+            int vertexCount,
+            RectF bounds) {
         if (mode != 0 && mode != 1) {
             throw new IllegalArgumentException("Invalid value passed in for mode parameter");
         }
-        long nativeMesh = nativeMake(meshSpec.mNativeMeshSpec, mode, vertexBuffer, vertexBuffer.isDirect(), vertexCount, vertexBuffer.position(), bounds.left, bounds.top, bounds.right, bounds.bottom);
+        long nativeMesh =
+                nativeMake(
+                        meshSpec.mNativeMeshSpec,
+                        mode,
+                        vertexBuffer,
+                        vertexBuffer.isDirect(),
+                        vertexCount,
+                        vertexBuffer.position(),
+                        bounds.left,
+                        bounds.top,
+                        bounds.right,
+                        bounds.bottom);
         if (nativeMesh == 0) {
             throw new IllegalArgumentException("Mesh construction failed.");
         }
         meshSetup(nativeMesh, false);
     }
 
-    public Mesh(MeshSpecification meshSpec, int mode, Buffer vertexBuffer, int vertexCount, ShortBuffer indexBuffer, RectF bounds) {
+    public Mesh(
+            MeshSpecification meshSpec,
+            int mode,
+            Buffer vertexBuffer,
+            int vertexCount,
+            ShortBuffer indexBuffer,
+            RectF bounds) {
         if (mode != 0 && mode != 1) {
             throw new IllegalArgumentException("Invalid value passed in for mode parameter");
         }
-        long nativeMesh = nativeMakeIndexed(meshSpec.mNativeMeshSpec, mode, vertexBuffer, vertexBuffer.isDirect(), vertexCount, vertexBuffer.position(), indexBuffer, indexBuffer.isDirect(), indexBuffer.capacity(), indexBuffer.position(), bounds.left, bounds.top, bounds.right, bounds.bottom);
+        long nativeMesh =
+                nativeMakeIndexed(
+                        meshSpec.mNativeMeshSpec,
+                        mode,
+                        vertexBuffer,
+                        vertexBuffer.isDirect(),
+                        vertexCount,
+                        vertexBuffer.position(),
+                        indexBuffer,
+                        indexBuffer.isDirect(),
+                        indexBuffer.capacity(),
+                        indexBuffer.position(),
+                        bounds.left,
+                        bounds.top,
+                        bounds.right,
+                        bounds.bottom);
         if (nativeMesh == 0) {
             throw new IllegalArgumentException("Mesh construction failed.");
         }
@@ -91,7 +154,8 @@ public class Mesh {
         setFloatUniform(uniformName, value1, value2, value3, 0.0f, 3);
     }
 
-    public void setFloatUniform(String uniformName, float value1, float value2, float value3, float value4) {
+    public void setFloatUniform(
+            String uniformName, float value1, float value2, float value3, float value4) {
         setFloatUniform(uniformName, value1, value2, value3, value4, 4);
     }
 
@@ -99,11 +163,13 @@ public class Mesh {
         setUniform(uniformName, values, false);
     }
 
-    private void setFloatUniform(String uniformName, float value1, float value2, float value3, float value4, int count) {
+    private void setFloatUniform(
+            String uniformName, float value1, float value2, float value3, float value4, int count) {
         if (uniformName == null) {
             throw new NullPointerException("The uniformName parameter must not be null");
         }
-        nativeUpdateUniforms(this.mNativeMeshWrapper, uniformName, value1, value2, value3, value4, count);
+        nativeUpdateUniforms(
+                this.mNativeMeshWrapper, uniformName, value1, value2, value3, value4, count);
     }
 
     private void setUniform(String uniformName, float[] values, boolean isColor) {
@@ -146,16 +212,19 @@ public class Mesh {
         return this.mNativeMeshWrapper;
     }
 
-    private void setIntUniform(String uniformName, int value1, int value2, int value3, int value4, int count) {
+    private void setIntUniform(
+            String uniformName, int value1, int value2, int value3, int value4, int count) {
         if (uniformName == null) {
             throw new NullPointerException("The uniformName parameter must not be null");
         }
-        nativeUpdateUniforms(this.mNativeMeshWrapper, uniformName, value1, value2, value3, value4, count);
+        nativeUpdateUniforms(
+                this.mNativeMeshWrapper, uniformName, value1, value2, value3, value4, count);
     }
 
     private void meshSetup(long nativeMeshWrapper, boolean isIndexed) {
         this.mNativeMeshWrapper = nativeMeshWrapper;
         this.mIsIndexed = isIndexed;
-        MeshHolder.MESH_SPECIFICATION_REGISTRY.registerNativeAllocation(this, this.mNativeMeshWrapper);
+        MeshHolder.MESH_SPECIFICATION_REGISTRY.registerNativeAllocation(
+                this, this.mNativeMeshWrapper);
     }
 }

@@ -12,7 +12,8 @@ public final /* synthetic */ class AttestationUtils$$ExternalSyntheticLambda0 {
     public final /* synthetic */ KeyDescriptor f$0;
     public final /* synthetic */ KeyParameter[] f$1;
 
-    public /* synthetic */ AttestationUtils$$ExternalSyntheticLambda0(KeyDescriptor keyDescriptor, KeyParameter[] keyParameterArr) {
+    public /* synthetic */ AttestationUtils$$ExternalSyntheticLambda0(
+            KeyDescriptor keyDescriptor, KeyParameter[] keyParameterArr) {
         this.f$0 = keyDescriptor;
         this.f$1 = keyParameterArr;
     }

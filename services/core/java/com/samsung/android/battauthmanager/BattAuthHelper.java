@@ -15,7 +15,8 @@ public class BattAuthHelper {
 
     public native byte[] readDataFromBattMisc();
 
-    public native boolean verifyChallengeAuth(byte[] bArr, byte[] bArr2, byte[] bArr3, byte[] bArr4);
+    public native boolean verifyChallengeAuth(
+            byte[] bArr, byte[] bArr2, byte[] bArr3, byte[] bArr4);
 
     public native byte[] verifyWpcCertChain(byte[] bArr);
 

@@ -11,11 +11,13 @@ import android.view.InputChannel;
 import android.view.SurfaceControl;
 import android.window.InputTransferToken;
 import android.window.WindowContainerToken;
+
 import com.android.internal.protolog.ProtoLogGroup;
 import com.android.internal.protolog.ProtoLogImpl_54989576;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.input.InputManagerService;
 import com.android.server.pm.PackageManagerShellCommandDataLoader;
+
 import com.samsung.android.rune.CoreRune;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -48,7 +50,20 @@ public final class EmbeddedWindowController {
         public final int mWindowType;
         public final WindowManagerService mWmService;
 
-        public EmbeddedWindow(Session session, WindowManagerService windowManagerService, IBinder iBinder, WindowState windowState, int i, int i2, int i3, int i4, InputTransferToken inputTransferToken, String str, boolean z, SurfaceControl surfaceControl, WindowContainerToken windowContainerToken) {
+        public EmbeddedWindow(
+                Session session,
+                WindowManagerService windowManagerService,
+                IBinder iBinder,
+                WindowState windowState,
+                int i,
+                int i2,
+                int i3,
+                int i4,
+                InputTransferToken inputTransferToken,
+                String str,
+                boolean z,
+                SurfaceControl surfaceControl,
+                WindowContainerToken windowContainerToken) {
             String str2;
             if (CoreRune.MW_CAPTION_SHELL) {
                 this.mSurface = surfaceControl;
@@ -65,7 +80,9 @@ public final class EmbeddedWindowController {
             this.mDisplayId = i4;
             this.mInputTransferToken = inputTransferToken;
             if (windowState != null) {
-                str2 = PackageManagerShellCommandDataLoader.STDIN_PATH + windowState.getWindowTag().toString();
+                str2 =
+                        PackageManagerShellCommandDataLoader.STDIN_PATH
+                                + windowState.getWindowTag().toString();
             } else {
                 str2 = "";
             }
@@ -96,10 +113,12 @@ public final class EmbeddedWindowController {
 
         public final InputApplicationHandle getApplicationHandle() {
             WindowState windowState = this.mHostWindowState;
-            if (windowState == null || windowState.mInputWindowHandle.mHandle.inputApplicationHandle == null) {
+            if (windowState == null
+                    || windowState.mInputWindowHandle.mHandle.inputApplicationHandle == null) {
                 return null;
             }
-            return new InputApplicationHandle(windowState.mInputWindowHandle.mHandle.inputApplicationHandle);
+            return new InputApplicationHandle(
+                    windowState.mInputWindowHandle.mHandle.inputApplicationHandle);
         }
 
         @Override // com.android.server.wm.InputTarget
@@ -115,7 +134,9 @@ public final class EmbeddedWindowController {
         @Override // com.android.server.wm.InputTarget
         public final InsetsControlTarget getImeControlTarget() {
             WindowState windowState = this.mHostWindowState;
-            return windowState != null ? windowState.getImeControlTarget() : this.mWmService.getDefaultDisplayContentLocked().mRemoteInsetsControlTarget;
+            return windowState != null
+                    ? windowState.getImeControlTarget()
+                    : this.mWmService.getDefaultDisplayContentLocked().mRemoteInsetsControlTarget;
         }
 
         @Override // com.android.server.wm.InputTarget
@@ -138,10 +159,12 @@ public final class EmbeddedWindowController {
                 WindowManagerService windowManagerService = this.mWmService;
                 WindowState windowState = this.mHostWindowState;
                 if (windowState == null) {
-                    windowManagerService.grantEmbeddedWindowFocus(this.mSession, this.mInputTransferToken, z);
+                    windowManagerService.grantEmbeddedWindowFocus(
+                            this.mSession, this.mInputTransferToken, z);
                     return;
                 }
-                windowManagerService.grantEmbeddedWindowFocus(null, windowState.mClient, this.mInputTransferToken, z);
+                windowManagerService.grantEmbeddedWindowFocus(
+                        null, windowState.mClient, this.mInputTransferToken, z);
                 if (z) {
                     windowState.handleTapOutsideFocusInsideSelf();
                 }
@@ -168,7 +191,8 @@ public final class EmbeddedWindowController {
             boolean z = this.mFocusGranted;
             WindowManagerService windowManagerService = this.mWmService;
             if (z) {
-                windowManagerService.grantEmbeddedWindowFocus(this.mSession, this.mInputTransferToken, false);
+                windowManagerService.grantEmbeddedWindowFocus(
+                        this.mSession, this.mInputTransferToken, false);
             }
             InputChannel inputChannel = this.mInputChannel;
             if (inputChannel != null) {
@@ -177,7 +201,11 @@ public final class EmbeddedWindowController {
                 this.mInputChannel = null;
             }
             ActivityRecord activityRecord = this.mHostActivityRecord;
-            if (activityRecord != null && (processController = windowManagerService.mAtmService.getProcessController(this.mOwnerPid, this.mOwnerUid)) != null) {
+            if (activityRecord != null
+                    && (processController =
+                                    windowManagerService.mAtmService.getProcessController(
+                                            this.mOwnerPid, this.mOwnerUid))
+                            != null) {
                 processController.removeRemoteActivityFlags(1, activityRecord);
             }
             if (CoreRune.MW_CAPTION_SHELL) {
@@ -207,37 +235,60 @@ public final class EmbeddedWindowController {
         }
     }
 
-    public EmbeddedWindowController(ActivityTaskManagerService activityTaskManagerService, InputManagerService inputManagerService) {
+    public EmbeddedWindowController(
+            ActivityTaskManagerService activityTaskManagerService,
+            InputManagerService inputManagerService) {
         this.mAtmService = activityTaskManagerService;
         this.mGlobalLock = activityTaskManagerService.mGlobalLock;
         this.mInputManagerService = inputManagerService;
     }
 
-    public static boolean isValidTouchGestureParams(WindowState windowState, EmbeddedWindow embeddedWindow) {
+    public static boolean isValidTouchGestureParams(
+            WindowState windowState, EmbeddedWindow embeddedWindow) {
         boolean[] zArr = ProtoLogImpl_54989576.Cache.WM_DEBUG_EMBEDDED_WINDOWS_enabled;
         if (embeddedWindow == null) {
             if (zArr[3]) {
-                ProtoLogImpl_54989576.w(ProtoLogGroup.WM_DEBUG_EMBEDDED_WINDOWS, -1797662102094201628L, 0, null, null);
+                ProtoLogImpl_54989576.w(
+                        ProtoLogGroup.WM_DEBUG_EMBEDDED_WINDOWS,
+                        -1797662102094201628L,
+                        0,
+                        null,
+                        null);
             }
             return false;
         }
         WindowState windowState2 = embeddedWindow.mHostWindowState;
         if (windowState2 == null) {
             if (zArr[3]) {
-                ProtoLogImpl_54989576.w(ProtoLogGroup.WM_DEBUG_EMBEDDED_WINDOWS, 929964979835124721L, 0, null, null);
+                ProtoLogImpl_54989576.w(
+                        ProtoLogGroup.WM_DEBUG_EMBEDDED_WINDOWS,
+                        929964979835124721L,
+                        0,
+                        null,
+                        null);
             }
             return false;
         }
         if (windowState2.mClient.asBinder() != windowState.mClient.asBinder()) {
             if (zArr[3]) {
-                ProtoLogImpl_54989576.w(ProtoLogGroup.WM_DEBUG_EMBEDDED_WINDOWS, 676191989331669410L, 0, null, null);
+                ProtoLogImpl_54989576.w(
+                        ProtoLogGroup.WM_DEBUG_EMBEDDED_WINDOWS,
+                        676191989331669410L,
+                        0,
+                        null,
+                        null);
             }
             return false;
         }
         InputChannel inputChannel = embeddedWindow.mInputChannel;
         if ((inputChannel != null ? inputChannel.getToken() : null) == null) {
             if (zArr[3]) {
-                ProtoLogImpl_54989576.w(ProtoLogGroup.WM_DEBUG_EMBEDDED_WINDOWS, 553249487221306249L, 0, null, null);
+                ProtoLogImpl_54989576.w(
+                        ProtoLogGroup.WM_DEBUG_EMBEDDED_WINDOWS,
+                        553249487221306249L,
+                        0,
+                        null,
+                        null);
             }
             return false;
         }
@@ -245,7 +296,8 @@ public final class EmbeddedWindowController {
             return true;
         }
         if (zArr[3]) {
-            ProtoLogImpl_54989576.w(ProtoLogGroup.WM_DEBUG_EMBEDDED_WINDOWS, -8678904073078032058L, 0, null, null);
+            ProtoLogImpl_54989576.w(
+                    ProtoLogGroup.WM_DEBUG_EMBEDDED_WINDOWS, -8678904073078032058L, 0, null, null);
         }
         return false;
     }
@@ -259,28 +311,37 @@ public final class EmbeddedWindowController {
             this.mWindowsByWindowToken.put(iBinder2, embeddedWindow);
             ActivityRecord activityRecord = embeddedWindow.mHostActivityRecord;
             if (activityRecord != null) {
-                WindowProcessController processController = this.mAtmService.getProcessController(embeddedWindow.mOwnerPid, embeddedWindow.mOwnerUid);
+                WindowProcessController processController =
+                        this.mAtmService.getProcessController(
+                                embeddedWindow.mOwnerPid, embeddedWindow.mOwnerUid);
                 if (processController == null) {
                     Slog.w("WindowManager", "Could not find the embedding process.");
                 } else {
-                    int[] remoteActivityFlags = processController.getRemoteActivityFlags(activityRecord);
+                    int[] remoteActivityFlags =
+                            processController.getRemoteActivityFlags(activityRecord);
                     remoteActivityFlags[0] = remoteActivityFlags[0] | 1;
                 }
             }
-            embeddedWindow.mClient.linkToDeath(new IBinder.DeathRecipient() { // from class: com.android.server.wm.EmbeddedWindowController$$ExternalSyntheticLambda0
-                @Override // android.os.IBinder.DeathRecipient
-                public final void binderDied() {
-                    EmbeddedWindowController embeddedWindowController = EmbeddedWindowController.this;
-                    IBinder iBinder3 = iBinder;
-                    InputTransferToken inputTransferToken2 = inputTransferToken;
-                    IBinder iBinder4 = iBinder2;
-                    synchronized (embeddedWindowController.mGlobalLock) {
-                        embeddedWindowController.mWindows.remove(iBinder3);
-                        embeddedWindowController.mWindowsByInputTransferToken.remove(inputTransferToken2);
-                        embeddedWindowController.mWindowsByWindowToken.remove(iBinder4);
-                    }
-                }
-            }, 0);
+            embeddedWindow.mClient.linkToDeath(
+                    new IBinder
+                            .DeathRecipient() { // from class:
+                                                // com.android.server.wm.EmbeddedWindowController$$ExternalSyntheticLambda0
+                        @Override // android.os.IBinder.DeathRecipient
+                        public final void binderDied() {
+                            EmbeddedWindowController embeddedWindowController =
+                                    EmbeddedWindowController.this;
+                            IBinder iBinder3 = iBinder;
+                            InputTransferToken inputTransferToken2 = inputTransferToken;
+                            IBinder iBinder4 = iBinder2;
+                            synchronized (embeddedWindowController.mGlobalLock) {
+                                embeddedWindowController.mWindows.remove(iBinder3);
+                                embeddedWindowController.mWindowsByInputTransferToken.remove(
+                                        inputTransferToken2);
+                                embeddedWindowController.mWindowsByWindowToken.remove(iBinder4);
+                            }
+                        }
+                    },
+                    0);
         } catch (RemoteException unused) {
             this.mWindows.remove(iBinder);
         }

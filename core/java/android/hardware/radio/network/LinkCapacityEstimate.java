@@ -3,25 +3,28 @@ package android.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class LinkCapacityEstimate implements Parcelable {
-    public static final Parcelable.Creator<LinkCapacityEstimate> CREATOR = new Parcelable.Creator<LinkCapacityEstimate>() { // from class: android.hardware.radio.network.LinkCapacityEstimate.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LinkCapacityEstimate createFromParcel(Parcel _aidl_source) {
-            LinkCapacityEstimate _aidl_out = new LinkCapacityEstimate();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<LinkCapacityEstimate> CREATOR =
+            new Parcelable.Creator<LinkCapacityEstimate>() { // from class:
+                // android.hardware.radio.network.LinkCapacityEstimate.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LinkCapacityEstimate createFromParcel(Parcel _aidl_source) {
+                    LinkCapacityEstimate _aidl_out = new LinkCapacityEstimate();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LinkCapacityEstimate[] newArray(int _aidl_size) {
-            return new LinkCapacityEstimate[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LinkCapacityEstimate[] newArray(int _aidl_size) {
+                    return new LinkCapacityEstimate[_aidl_size];
+                }
+            };
     public int downlinkCapacityKbps = 0;
     public int uplinkCapacityKbps = 0;
     public int secondaryDownlinkCapacityKbps = 0;

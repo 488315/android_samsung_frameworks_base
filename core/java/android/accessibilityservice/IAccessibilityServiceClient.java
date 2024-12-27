@@ -1,6 +1,5 @@
 package android.accessibilityservice;
 
-import android.accessibilityservice.IAccessibilityServiceConnection;
 import android.graphics.Region;
 import android.os.Binder;
 import android.os.IBinder;
@@ -11,6 +10,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.inputmethod.EditorInfo;
+
 import com.android.internal.inputmethod.IAccessibilityInputMethodSession;
 import com.android.internal.inputmethod.IAccessibilityInputMethodSessionCallback;
 import com.android.internal.inputmethod.IRemoteAccessibilityInputConnection;
@@ -21,15 +21,20 @@ public interface IAccessibilityServiceClient extends IInterface {
 
     void clearAccessibilityCache() throws RemoteException;
 
-    void createImeSession(IAccessibilityInputMethodSessionCallback iAccessibilityInputMethodSessionCallback) throws RemoteException;
+    void createImeSession(
+            IAccessibilityInputMethodSessionCallback iAccessibilityInputMethodSessionCallback)
+            throws RemoteException;
 
-    void init(IAccessibilityServiceConnection iAccessibilityServiceConnection, int i, IBinder iBinder) throws RemoteException;
+    void init(
+            IAccessibilityServiceConnection iAccessibilityServiceConnection, int i, IBinder iBinder)
+            throws RemoteException;
 
     void onAccessibilityButtonAvailabilityChanged(boolean z) throws RemoteException;
 
     void onAccessibilityButtonClicked(int i) throws RemoteException;
 
-    void onAccessibilityEvent(AccessibilityEvent accessibilityEvent, boolean z) throws RemoteException;
+    void onAccessibilityEvent(AccessibilityEvent accessibilityEvent, boolean z)
+            throws RemoteException;
 
     void onFingerprintCapturingGesturesChanged(boolean z) throws RemoteException;
 
@@ -41,7 +46,8 @@ public interface IAccessibilityServiceClient extends IInterface {
 
     void onKeyEvent(KeyEvent keyEvent, int i) throws RemoteException;
 
-    void onMagnificationChanged(int i, Region region, MagnificationConfig magnificationConfig) throws RemoteException;
+    void onMagnificationChanged(int i, Region region, MagnificationConfig magnificationConfig)
+            throws RemoteException;
 
     void onMotionEvent(MotionEvent motionEvent) throws RemoteException;
 
@@ -53,96 +59,94 @@ public interface IAccessibilityServiceClient extends IInterface {
 
     void onTouchStateChanged(int i, int i2) throws RemoteException;
 
-    void setImeSessionEnabled(IAccessibilityInputMethodSession iAccessibilityInputMethodSession, boolean z) throws RemoteException;
+    void setImeSessionEnabled(
+            IAccessibilityInputMethodSession iAccessibilityInputMethodSession, boolean z)
+            throws RemoteException;
 
-    void startInput(IRemoteAccessibilityInputConnection iRemoteAccessibilityInputConnection, EditorInfo editorInfo, boolean z) throws RemoteException;
+    void startInput(
+            IRemoteAccessibilityInputConnection iRemoteAccessibilityInputConnection,
+            EditorInfo editorInfo,
+            boolean z)
+            throws RemoteException;
 
     void unbindInput() throws RemoteException;
 
     public static class Default implements IAccessibilityServiceClient {
         @Override // android.accessibilityservice.IAccessibilityServiceClient
-        public void init(IAccessibilityServiceConnection connection, int connectionId, IBinder windowToken) throws RemoteException {
-        }
+        public void init(
+                IAccessibilityServiceConnection connection, int connectionId, IBinder windowToken)
+                throws RemoteException {}
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
-        public void onAccessibilityEvent(AccessibilityEvent event, boolean serviceWantsEvent) throws RemoteException {
-        }
+        public void onAccessibilityEvent(AccessibilityEvent event, boolean serviceWantsEvent)
+                throws RemoteException {}
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
-        public void onInterrupt() throws RemoteException {
-        }
+        public void onInterrupt() throws RemoteException {}
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
-        public void onGesture(AccessibilityGestureEvent gestureEvent) throws RemoteException {
-        }
+        public void onGesture(AccessibilityGestureEvent gestureEvent) throws RemoteException {}
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
-        public void clearAccessibilityCache() throws RemoteException {
-        }
+        public void clearAccessibilityCache() throws RemoteException {}
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
-        public void onKeyEvent(KeyEvent event, int sequence) throws RemoteException {
-        }
+        public void onKeyEvent(KeyEvent event, int sequence) throws RemoteException {}
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
-        public void onMagnificationChanged(int displayId, Region region, MagnificationConfig config) throws RemoteException {
-        }
+        public void onMagnificationChanged(int displayId, Region region, MagnificationConfig config)
+                throws RemoteException {}
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
-        public void onMotionEvent(MotionEvent event) throws RemoteException {
-        }
+        public void onMotionEvent(MotionEvent event) throws RemoteException {}
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
-        public void onTouchStateChanged(int displayId, int state) throws RemoteException {
-        }
+        public void onTouchStateChanged(int displayId, int state) throws RemoteException {}
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
-        public void onSoftKeyboardShowModeChanged(int showMode) throws RemoteException {
-        }
+        public void onSoftKeyboardShowModeChanged(int showMode) throws RemoteException {}
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
-        public void onPerformGestureResult(int sequence, boolean completedSuccessfully) throws RemoteException {
-        }
+        public void onPerformGestureResult(int sequence, boolean completedSuccessfully)
+                throws RemoteException {}
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
-        public void onFingerprintCapturingGesturesChanged(boolean capturing) throws RemoteException {
-        }
+        public void onFingerprintCapturingGesturesChanged(boolean capturing)
+                throws RemoteException {}
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
-        public void onFingerprintGesture(int gesture) throws RemoteException {
-        }
+        public void onFingerprintGesture(int gesture) throws RemoteException {}
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
-        public void onAccessibilityButtonClicked(int displayId) throws RemoteException {
-        }
+        public void onAccessibilityButtonClicked(int displayId) throws RemoteException {}
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
-        public void onAccessibilityButtonAvailabilityChanged(boolean available) throws RemoteException {
-        }
+        public void onAccessibilityButtonAvailabilityChanged(boolean available)
+                throws RemoteException {}
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
-        public void onSystemActionsChanged() throws RemoteException {
-        }
+        public void onSystemActionsChanged() throws RemoteException {}
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
-        public void createImeSession(IAccessibilityInputMethodSessionCallback callback) throws RemoteException {
-        }
+        public void createImeSession(IAccessibilityInputMethodSessionCallback callback)
+                throws RemoteException {}
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
-        public void setImeSessionEnabled(IAccessibilityInputMethodSession session, boolean enabled) throws RemoteException {
-        }
+        public void setImeSessionEnabled(IAccessibilityInputMethodSession session, boolean enabled)
+                throws RemoteException {}
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
-        public void bindInput() throws RemoteException {
-        }
+        public void bindInput() throws RemoteException {}
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
-        public void unbindInput() throws RemoteException {
-        }
+        public void unbindInput() throws RemoteException {}
 
         @Override // android.accessibilityservice.IAccessibilityServiceClient
-        public void startInput(IRemoteAccessibilityInputConnection connection, EditorInfo editorInfo, boolean restarting) throws RemoteException {
-        }
+        public void startInput(
+                IRemoteAccessibilityInputConnection connection,
+                EditorInfo editorInfo,
+                boolean restarting)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -150,8 +154,9 @@ public interface IAccessibilityServiceClient extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAccessibilityServiceClient {
-        public static final String DESCRIPTOR = "android.accessibilityservice.IAccessibilityServiceClient";
+    public abstract static class Stub extends Binder implements IAccessibilityServiceClient {
+        public static final String DESCRIPTOR =
+                "android.accessibilityservice.IAccessibilityServiceClient";
         static final int TRANSACTION_bindInput = 19;
         static final int TRANSACTION_clearAccessibilityCache = 5;
         static final int TRANSACTION_createImeSession = 17;
@@ -249,7 +254,8 @@ public interface IAccessibilityServiceClient extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -259,14 +265,17 @@ public interface IAccessibilityServiceClient extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IAccessibilityServiceConnection _arg0 = IAccessibilityServiceConnection.Stub.asInterface(data.readStrongBinder());
+                    IAccessibilityServiceConnection _arg0 =
+                            IAccessibilityServiceConnection.Stub.asInterface(
+                                    data.readStrongBinder());
                     int _arg1 = data.readInt();
                     IBinder _arg2 = data.readStrongBinder();
                     data.enforceNoDataAvail();
                     init(_arg0, _arg1, _arg2);
                     return true;
                 case 2:
-                    AccessibilityEvent _arg02 = (AccessibilityEvent) data.readTypedObject(AccessibilityEvent.CREATOR);
+                    AccessibilityEvent _arg02 =
+                            (AccessibilityEvent) data.readTypedObject(AccessibilityEvent.CREATOR);
                     boolean _arg12 = data.readBoolean();
                     data.enforceNoDataAvail();
                     onAccessibilityEvent(_arg02, _arg12);
@@ -275,7 +284,9 @@ public interface IAccessibilityServiceClient extends IInterface {
                     onInterrupt();
                     return true;
                 case 4:
-                    AccessibilityGestureEvent _arg03 = (AccessibilityGestureEvent) data.readTypedObject(AccessibilityGestureEvent.CREATOR);
+                    AccessibilityGestureEvent _arg03 =
+                            (AccessibilityGestureEvent)
+                                    data.readTypedObject(AccessibilityGestureEvent.CREATOR);
                     data.enforceNoDataAvail();
                     onGesture(_arg03);
                     return true;
@@ -291,7 +302,8 @@ public interface IAccessibilityServiceClient extends IInterface {
                 case 7:
                     int _arg05 = data.readInt();
                     Region _arg14 = (Region) data.readTypedObject(Region.CREATOR);
-                    MagnificationConfig _arg22 = (MagnificationConfig) data.readTypedObject(MagnificationConfig.CREATOR);
+                    MagnificationConfig _arg22 =
+                            (MagnificationConfig) data.readTypedObject(MagnificationConfig.CREATOR);
                     data.enforceNoDataAvail();
                     onMagnificationChanged(_arg05, _arg14, _arg22);
                     return true;
@@ -341,12 +353,16 @@ public interface IAccessibilityServiceClient extends IInterface {
                     onSystemActionsChanged();
                     return true;
                 case 17:
-                    IAccessibilityInputMethodSessionCallback _arg014 = IAccessibilityInputMethodSessionCallback.Stub.asInterface(data.readStrongBinder());
+                    IAccessibilityInputMethodSessionCallback _arg014 =
+                            IAccessibilityInputMethodSessionCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     createImeSession(_arg014);
                     return true;
                 case 18:
-                    IAccessibilityInputMethodSession _arg015 = IAccessibilityInputMethodSession.Stub.asInterface(data.readStrongBinder());
+                    IAccessibilityInputMethodSession _arg015 =
+                            IAccessibilityInputMethodSession.Stub.asInterface(
+                                    data.readStrongBinder());
                     boolean _arg17 = data.readBoolean();
                     data.enforceNoDataAvail();
                     setImeSessionEnabled(_arg015, _arg17);
@@ -358,7 +374,9 @@ public interface IAccessibilityServiceClient extends IInterface {
                     unbindInput();
                     return true;
                 case 21:
-                    IRemoteAccessibilityInputConnection _arg016 = IRemoteAccessibilityInputConnection.Stub.asInterface(data.readStrongBinder());
+                    IRemoteAccessibilityInputConnection _arg016 =
+                            IRemoteAccessibilityInputConnection.Stub.asInterface(
+                                    data.readStrongBinder());
                     EditorInfo _arg18 = (EditorInfo) data.readTypedObject(EditorInfo.CREATOR);
                     boolean _arg23 = data.readBoolean();
                     data.enforceNoDataAvail();
@@ -386,7 +404,11 @@ public interface IAccessibilityServiceClient extends IInterface {
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceClient
-            public void init(IAccessibilityServiceConnection connection, int connectionId, IBinder windowToken) throws RemoteException {
+            public void init(
+                    IAccessibilityServiceConnection connection,
+                    int connectionId,
+                    IBinder windowToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -400,7 +422,8 @@ public interface IAccessibilityServiceClient extends IInterface {
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceClient
-            public void onAccessibilityEvent(AccessibilityEvent event, boolean serviceWantsEvent) throws RemoteException {
+            public void onAccessibilityEvent(AccessibilityEvent event, boolean serviceWantsEvent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -460,7 +483,9 @@ public interface IAccessibilityServiceClient extends IInterface {
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceClient
-            public void onMagnificationChanged(int displayId, Region region, MagnificationConfig config) throws RemoteException {
+            public void onMagnificationChanged(
+                    int displayId, Region region, MagnificationConfig config)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -511,7 +536,8 @@ public interface IAccessibilityServiceClient extends IInterface {
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceClient
-            public void onPerformGestureResult(int sequence, boolean completedSuccessfully) throws RemoteException {
+            public void onPerformGestureResult(int sequence, boolean completedSuccessfully)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -524,7 +550,8 @@ public interface IAccessibilityServiceClient extends IInterface {
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceClient
-            public void onFingerprintCapturingGesturesChanged(boolean capturing) throws RemoteException {
+            public void onFingerprintCapturingGesturesChanged(boolean capturing)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -560,7 +587,8 @@ public interface IAccessibilityServiceClient extends IInterface {
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceClient
-            public void onAccessibilityButtonAvailabilityChanged(boolean available) throws RemoteException {
+            public void onAccessibilityButtonAvailabilityChanged(boolean available)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -583,7 +611,8 @@ public interface IAccessibilityServiceClient extends IInterface {
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceClient
-            public void createImeSession(IAccessibilityInputMethodSessionCallback callback) throws RemoteException {
+            public void createImeSession(IAccessibilityInputMethodSessionCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -595,7 +624,9 @@ public interface IAccessibilityServiceClient extends IInterface {
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceClient
-            public void setImeSessionEnabled(IAccessibilityInputMethodSession session, boolean enabled) throws RemoteException {
+            public void setImeSessionEnabled(
+                    IAccessibilityInputMethodSession session, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -630,7 +661,11 @@ public interface IAccessibilityServiceClient extends IInterface {
             }
 
             @Override // android.accessibilityservice.IAccessibilityServiceClient
-            public void startInput(IRemoteAccessibilityInputConnection connection, EditorInfo editorInfo, boolean restarting) throws RemoteException {
+            public void startInput(
+                    IRemoteAccessibilityInputConnection connection,
+                    EditorInfo editorInfo,
+                    boolean restarting)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

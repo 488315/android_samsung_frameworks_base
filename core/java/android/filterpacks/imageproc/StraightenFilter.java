@@ -17,15 +17,18 @@ public class StraightenFilter extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = "angle")
     private float mAngle;
+
     private int mHeight;
 
     @GenerateFieldPort(hasDefault = true, name = "maxAngle")
     private float mMaxAngle;
+
     private Program mProgram;
     private int mTarget;
 
     @GenerateFieldPort(hasDefault = true, name = "tile_size")
     private int mTileSize;
+
     private int mWidth;
 
     public StraightenFilter(String name) {
@@ -53,7 +56,8 @@ public class StraightenFilter extends Filter {
                 this.mTarget = target;
                 return;
             default:
-                throw new RuntimeException("Filter Sharpen does not support frames of target " + target + "!");
+                throw new RuntimeException(
+                        "Filter Sharpen does not support frames of target " + target + "!");
         }
     }
 
@@ -89,10 +93,22 @@ public class StraightenFilter extends Filter {
             throw new RuntimeException("Max angle is out of range (0-180).");
         }
         this.mMaxAngle = this.mMaxAngle <= 90.0f ? this.mMaxAngle : 90.0f;
-        Point p0 = new Point(((-cosTheta) * this.mWidth) + (this.mHeight * sinTheta), ((-sinTheta) * this.mWidth) - (this.mHeight * cosTheta));
-        Point p1 = new Point((this.mWidth * cosTheta) + (this.mHeight * sinTheta), (this.mWidth * sinTheta) - (this.mHeight * cosTheta));
-        Point p2 = new Point(((-cosTheta) * this.mWidth) - (this.mHeight * sinTheta), ((-sinTheta) * this.mWidth) + (this.mHeight * cosTheta));
-        Point p3 = new Point((this.mWidth * cosTheta) - (this.mHeight * sinTheta), (this.mWidth * sinTheta) + (this.mHeight * cosTheta));
+        Point p0 =
+                new Point(
+                        ((-cosTheta) * this.mWidth) + (this.mHeight * sinTheta),
+                        ((-sinTheta) * this.mWidth) - (this.mHeight * cosTheta));
+        Point p1 =
+                new Point(
+                        (this.mWidth * cosTheta) + (this.mHeight * sinTheta),
+                        (this.mWidth * sinTheta) - (this.mHeight * cosTheta));
+        Point p2 =
+                new Point(
+                        ((-cosTheta) * this.mWidth) - (this.mHeight * sinTheta),
+                        ((-sinTheta) * this.mWidth) + (this.mHeight * cosTheta));
+        Point p3 =
+                new Point(
+                        (this.mWidth * cosTheta) - (this.mHeight * sinTheta),
+                        (this.mWidth * sinTheta) + (this.mHeight * cosTheta));
         float maxWidth = Math.max(Math.abs(p0.x), Math.abs(p1.x));
         float maxHeight = Math.max(Math.abs(p0.y), Math.abs(p1.y));
         float scale = Math.min(this.mWidth / maxWidth, this.mHeight / maxHeight) * 0.5f;

@@ -8,6 +8,7 @@ import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
 import android.provider.MediaStore;
 import android.sec.enterprise.content.SecContentProviderURI;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -29,7 +30,8 @@ public class FileHelper {
         }
         LogS.d("TranscodeLib", "uriStr :" + uriStr);
         if (uriStr.startsWith(SecContentProviderURI.CONTENT)) {
-            if (uriStr.startsWith(MediaStore.Video.Media.EXTERNAL_CONTENT_URI.toString()) || uriStr.startsWith(MediaStore.Video.Media.INTERNAL_CONTENT_URI.toString())) {
+            if (uriStr.startsWith(MediaStore.Video.Media.EXTERNAL_CONTENT_URI.toString())
+                    || uriStr.startsWith(MediaStore.Video.Media.INTERNAL_CONTENT_URI.toString())) {
                 Cursor cursor = getVideoFileInfoByUri(mediaUri, context);
                 if (cursor != null) {
                     try {
@@ -74,13 +76,21 @@ public class FileHelper {
 
     public static String getExternalSdCardStoragePath(Context context) {
         if (context != null && !isManagedProfile(context)) {
-            StorageManager storageManager = (StorageManager) context.getSystemService(Context.STORAGE_SERVICE);
-            List<StorageVolume> storageVolumes = (List) Optional.ofNullable(storageManager).map(new Function() { // from class: com.samsung.android.transcode.util.FileHelper$$ExternalSyntheticLambda0
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    return ((StorageManager) obj).getStorageVolumes();
-                }
-            }).orElse(null);
+            StorageManager storageManager =
+                    (StorageManager) context.getSystemService(Context.STORAGE_SERVICE);
+            List<StorageVolume> storageVolumes =
+                    (List)
+                            Optional.ofNullable(storageManager)
+                                    .map(
+                                            new Function() { // from class:
+                                                             // com.samsung.android.transcode.util.FileHelper$$ExternalSyntheticLambda0
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    return ((StorageManager) obj)
+                                                            .getStorageVolumes();
+                                                }
+                                            })
+                                    .orElse(null);
             if (storageVolumes != null) {
                 int length = storageVolumes.size();
                 for (int i = 0; i < length; i++) {
@@ -107,12 +117,20 @@ public class FileHelper {
 
     private static boolean isManagedProfile(Context context) {
         try {
-            return ((Boolean) Optional.ofNullable((UserManager) context.getSystemService("user")).map(new Function() { // from class: com.samsung.android.transcode.util.FileHelper$$ExternalSyntheticLambda1
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    return Boolean.valueOf(((UserManager) obj).semIsManagedProfile());
-                }
-            }).orElse(false)).booleanValue();
+            return ((Boolean)
+                            Optional.ofNullable((UserManager) context.getSystemService("user"))
+                                    .map(
+                                            new Function() { // from class:
+                                                             // com.samsung.android.transcode.util.FileHelper$$ExternalSyntheticLambda1
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    return Boolean.valueOf(
+                                                            ((UserManager) obj)
+                                                                    .semIsManagedProfile());
+                                                }
+                                            })
+                                    .orElse(false))
+                    .booleanValue();
         } catch (RuntimeException e) {
             return false;
         }

@@ -3,6 +3,7 @@ package com.samsung.android.chimera.genie;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
+
 import com.samsung.android.chimera.IChimera;
 
 /* loaded from: classes5.dex */
@@ -28,7 +29,8 @@ public class GenieHintManager {
 
     private IChimera getChimeraService() {
         if (sService == null) {
-            sService = IChimera.Stub.asInterface(ServiceManager.getService("ChimeraManagerService"));
+            sService =
+                    IChimera.Stub.asInterface(ServiceManager.getService("ChimeraManagerService"));
         }
         if (sService == null) {
             Log.e(TAG, "ChimeraManagerService not accessible from here!!!!!");

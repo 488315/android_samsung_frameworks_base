@@ -8,8 +8,11 @@ import android.security.attestationverification.AttestationVerificationManager;
 import android.util.IndentingPrintWriter;
 import android.util.Log;
 import android.util.Slog;
-import com.android.server.security.AttestationVerificationManagerService;
+
 import com.samsung.android.knoxguard.service.utils.Constants;
+
+import org.json.JSONObject;
+
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.URL;
@@ -33,7 +36,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -54,8 +56,7 @@ public final class AttestationVerificationPeerDeviceVerifier {
         public JSONObject mJsonStatusMap;
         public String mStatusUrl;
 
-        public AndroidRevocationStatusListChecker() {
-        }
+        public AndroidRevocationStatusListChecker() {}
 
         @Override // java.security.cert.PKIXCertPathChecker
         public final void check(Certificate certificate, Collection collection) {
@@ -67,7 +68,13 @@ public final class AttestationVerificationPeerDeviceVerifier {
                 JSONObject jSONObject = this.mJsonStatusMap.getJSONObject(bigInteger);
                 String string = jSONObject.getString(Constants.JSON_CLIENT_DATA_STATUS);
                 String string2 = jSONObject.getString("reason");
-                StringBuilder m = InitialConfiguration$$ExternalSyntheticOutline0.m("Invalid certificate with serial number ", bigInteger, " has status ", string, " because reason ");
+                StringBuilder m =
+                        InitialConfiguration$$ExternalSyntheticOutline0.m(
+                                "Invalid certificate with serial number ",
+                                bigInteger,
+                                " has status ",
+                                string,
+                                " because reason ");
                 m.append(string2);
                 throw new CertPathValidatorException(m.toString());
             }
@@ -80,25 +87,37 @@ public final class AttestationVerificationPeerDeviceVerifier {
 
         @Override // java.security.cert.PKIXCertPathChecker, java.security.cert.CertPathChecker
         public final void init(boolean z) {
-            String string = AttestationVerificationPeerDeviceVerifier.this.mContext.getResources().getString(17043440);
+            String string =
+                    AttestationVerificationPeerDeviceVerifier.this
+                            .mContext
+                            .getResources()
+                            .getString(17043440);
             this.mStatusUrl = string;
             if (string == null || string.isEmpty()) {
-                throw new CertPathValidatorException("R.string.vendor_required_attestation_revocation_list_url is empty.");
+                throw new CertPathValidatorException(
+                        "R.string.vendor_required_attestation_revocation_list_url is empty.");
             }
             try {
                 try {
                     InputStream openStream = new URL(this.mStatusUrl).openStream();
                     try {
-                        JSONObject jSONObject = new JSONObject(new String(openStream.readAllBytes(), StandardCharsets.UTF_8)).getJSONObject("entries");
+                        JSONObject jSONObject =
+                                new JSONObject(
+                                                new String(
+                                                        openStream.readAllBytes(),
+                                                        StandardCharsets.UTF_8))
+                                        .getJSONObject("entries");
                         openStream.close();
                         this.mJsonStatusMap = jSONObject;
                     } finally {
                     }
                 } catch (Throwable th) {
-                    throw new CertPathValidatorException("Unable to parse revocation status from " + this.mStatusUrl, th);
+                    throw new CertPathValidatorException(
+                            "Unable to parse revocation status from " + this.mStatusUrl, th);
                 }
             } catch (Throwable th2) {
-                throw new CertPathValidatorException("Unable to get revocation status from " + this.mStatusUrl, th2);
+                throw new CertPathValidatorException(
+                        "Unable to get revocation status from " + this.mStatusUrl, th2);
             }
         }
 
@@ -137,7 +156,10 @@ public final class AttestationVerificationPeerDeviceVerifier {
         }
 
         public final void dumpTo(IndentingPrintWriter indentingPrintWriter) {
-            indentingPrintWriter.println("Result: " + AttestationVerificationManager.verificationResultCodeToString(this.mResult));
+            indentingPrintWriter.println(
+                    "Result: "
+                            + AttestationVerificationManager.verificationResultCodeToString(
+                                    this.mResult));
             if (!this.mCertificationFactoryAvailable) {
                 indentingPrintWriter.println("Certificate Factory Unavailable");
                 return;
@@ -150,27 +172,48 @@ public final class AttestationVerificationPeerDeviceVerifier {
                 indentingPrintWriter.println("Attestation parameters set incorrectly.");
                 return;
             }
-            indentingPrintWriter.println("Certificate Chain Valid (inc. Trust Anchor): ".concat(booleanToOkFail(this.mCertChainOk)));
+            indentingPrintWriter.println(
+                    "Certificate Chain Valid (inc. Trust Anchor): "
+                            .concat(booleanToOkFail(this.mCertChainOk)));
             if (this.mCertChainOk) {
-                indentingPrintWriter.println("Local Binding: ".concat(booleanToOkFail(this.mBindingOk)));
+                indentingPrintWriter.println(
+                        "Local Binding: ".concat(booleanToOkFail(this.mBindingOk)));
                 indentingPrintWriter.increaseIndent();
                 indentingPrintWriter.println("Binding Type: " + this.mBindingType);
                 indentingPrintWriter.decreaseIndent();
                 if (this.mSystemOwnershipChecked) {
-                    indentingPrintWriter.println("System Ownership: ".concat(booleanToOkFail(this.mSystemOwned)));
+                    indentingPrintWriter.println(
+                            "System Ownership: ".concat(booleanToOkFail(this.mSystemOwned)));
                 }
                 indentingPrintWriter.println("KeyStore Attestation Parameters");
                 indentingPrintWriter.increaseIndent();
-                indentingPrintWriter.println("OS Version >= 10: ".concat(booleanToOkFail(this.mOsVersionAtLeast10)));
-                indentingPrintWriter.println("OS Patch Level in Range: ".concat(booleanToOkFail(this.mOsPatchLevelInRange)));
-                indentingPrintWriter.println("Attestation Version >= 3: ".concat(booleanToOkFail(this.mAttestationVersionAtLeast3)));
-                indentingPrintWriter.println("Keymaster Version >= 4: ".concat(booleanToOkFail(this.mKeymasterVersionAtLeast4)));
-                indentingPrintWriter.println("Keymaster HW-Backed: ".concat(booleanToOkFail(this.mKeymasterHwBacked)));
-                indentingPrintWriter.println("Key is HW Backed: ".concat(booleanToOkFail(this.mKeyHwBacked)));
-                indentingPrintWriter.println("Boot State is VERIFIED: ".concat(booleanToOkFail(this.mBootStateIsVerified)));
-                indentingPrintWriter.println("Verified Boot is LOCKED: ".concat(booleanToOkFail(this.mVerifiedBootStateLocked)));
-                indentingPrintWriter.println("Key Boot Level in Range: ".concat(booleanToOkFail(this.mKeyBootPatchLevelInRange)));
-                indentingPrintWriter.println("Key Vendor Patch Level in Range: ".concat(booleanToOkFail(this.mKeyVendorPatchLevelInRange)));
+                indentingPrintWriter.println(
+                        "OS Version >= 10: ".concat(booleanToOkFail(this.mOsVersionAtLeast10)));
+                indentingPrintWriter.println(
+                        "OS Patch Level in Range: "
+                                .concat(booleanToOkFail(this.mOsPatchLevelInRange)));
+                indentingPrintWriter.println(
+                        "Attestation Version >= 3: "
+                                .concat(booleanToOkFail(this.mAttestationVersionAtLeast3)));
+                indentingPrintWriter.println(
+                        "Keymaster Version >= 4: "
+                                .concat(booleanToOkFail(this.mKeymasterVersionAtLeast4)));
+                indentingPrintWriter.println(
+                        "Keymaster HW-Backed: ".concat(booleanToOkFail(this.mKeymasterHwBacked)));
+                indentingPrintWriter.println(
+                        "Key is HW Backed: ".concat(booleanToOkFail(this.mKeyHwBacked)));
+                indentingPrintWriter.println(
+                        "Boot State is VERIFIED: "
+                                .concat(booleanToOkFail(this.mBootStateIsVerified)));
+                indentingPrintWriter.println(
+                        "Verified Boot is LOCKED: "
+                                .concat(booleanToOkFail(this.mVerifiedBootStateLocked)));
+                indentingPrintWriter.println(
+                        "Key Boot Level in Range: "
+                                .concat(booleanToOkFail(this.mKeyBootPatchLevelInRange)));
+                indentingPrintWriter.println(
+                        "Key Vendor Patch Level in Range: "
+                                .concat(booleanToOkFail(this.mKeyVendorPatchLevelInRange)));
                 indentingPrintWriter.decreaseIndent();
             }
         }
@@ -181,7 +224,8 @@ public final class AttestationVerificationPeerDeviceVerifier {
         ANDROID_SYSTEM_PACKAGE_NAME_SET = Collections.singleton("AndroidSystem");
     }
 
-    public AttestationVerificationPeerDeviceVerifier(Context context, AttestationVerificationManagerService.DumpLogger dumpLogger) {
+    public AttestationVerificationPeerDeviceVerifier(
+            Context context, AttestationVerificationManagerService.DumpLogger dumpLogger) {
         Objects.requireNonNull(context);
         this.mContext = context;
         this.mDumpLogger = dumpLogger;
@@ -190,7 +234,20 @@ public final class AttestationVerificationPeerDeviceVerifier {
         HashSet hashSet = new HashSet();
         try {
             for (String str : context.getResources().getStringArray(17236487)) {
-                hashSet.add(new TrustAnchor((X509Certificate) this.mCertificateFactory.generateCertificate(new ByteArrayInputStream(str.replaceAll("\\s+", "\n").replaceAll("-BEGIN\\nCERTIFICATE-", "-BEGIN CERTIFICATE-").replaceAll("-END\\nCERTIFICATE-", "-END CERTIFICATE-").getBytes(StandardCharsets.UTF_8))), null));
+                hashSet.add(
+                        new TrustAnchor(
+                                (X509Certificate)
+                                        this.mCertificateFactory.generateCertificate(
+                                                new ByteArrayInputStream(
+                                                        str.replaceAll("\\s+", "\n")
+                                                                .replaceAll(
+                                                                        "-BEGIN\\nCERTIFICATE-",
+                                                                        "-BEGIN CERTIFICATE-")
+                                                                .replaceAll(
+                                                                        "-END\\nCERTIFICATE-",
+                                                                        "-END CERTIFICATE-")
+                                                                .getBytes(StandardCharsets.UTF_8))),
+                                null));
             }
             this.mTrustAnchors = Collections.unmodifiableSet(hashSet);
             this.mRevocationEnabled = true;
@@ -202,7 +259,14 @@ public final class AttestationVerificationPeerDeviceVerifier {
         }
     }
 
-    public AttestationVerificationPeerDeviceVerifier(Context context, AttestationVerificationManagerService.DumpLogger dumpLogger, Set set, boolean z, LocalDate localDate, LocalDate localDate2) throws Exception {
+    public AttestationVerificationPeerDeviceVerifier(
+            Context context,
+            AttestationVerificationManagerService.DumpLogger dumpLogger,
+            Set set,
+            boolean z,
+            LocalDate localDate,
+            LocalDate localDate2)
+            throws Exception {
         Objects.requireNonNull(context);
         this.mContext = context;
         this.mDumpLogger = dumpLogger;
@@ -214,18 +278,31 @@ public final class AttestationVerificationPeerDeviceVerifier {
         this.mTestLocalPatchDate = localDate2;
     }
 
-    public static boolean checkLocalBindingRequirements(X509Certificate x509Certificate, AndroidKeystoreAttestationVerificationAttributes androidKeystoreAttestationVerificationAttributes, int i, Bundle bundle, MyDumpData myDumpData) {
+    public static boolean checkLocalBindingRequirements(
+            X509Certificate x509Certificate,
+            AndroidKeystoreAttestationVerificationAttributes
+                    androidKeystoreAttestationVerificationAttributes,
+            int i,
+            Bundle bundle,
+            MyDumpData myDumpData) {
         myDumpData.mBindingType = i;
         if (i == 2) {
-            if (!Arrays.equals(x509Certificate.getPublicKey().getEncoded(), bundle.getByteArray("localbinding.public_key"))) {
+            if (!Arrays.equals(
+                    x509Certificate.getPublicKey().getEncoded(),
+                    bundle.getByteArray("localbinding.public_key"))) {
                 debugVerboseLog("Provided public key does not match leaf certificate public key.");
                 return false;
             }
         } else {
             if (i != 3) {
-                throw new IllegalArgumentException("Unsupported local binding type " + AttestationVerificationManager.localBindingTypeToString(i));
+                throw new IllegalArgumentException(
+                        "Unsupported local binding type "
+                                + AttestationVerificationManager.localBindingTypeToString(i));
             }
-            if (!Arrays.equals(androidKeystoreAttestationVerificationAttributes.mAttestationChallenge.toByteArray(), bundle.getByteArray("localbinding.challenge"))) {
+            if (!Arrays.equals(
+                    androidKeystoreAttestationVerificationAttributes.mAttestationChallenge
+                            .toByteArray(),
+                    bundle.getByteArray("localbinding.challenge"))) {
                 debugVerboseLog("Provided challenge does not match leaf certificate challenge.");
                 return false;
             }
@@ -234,9 +311,15 @@ public final class AttestationVerificationPeerDeviceVerifier {
         if (bundle.containsKey("android.key_owned_by_system")) {
             myDumpData.mSystemOwnershipChecked = true;
             if (!bundle.getBoolean("android.key_owned_by_system")) {
-                throw new IllegalArgumentException("The value of the requirement key android.key_owned_by_system cannot be false. You can remove the key if you don't want to verify it.");
+                throw new IllegalArgumentException(
+                        "The value of the requirement key android.key_owned_by_system cannot be"
+                            + " false. You can remove the key if you don't want to verify it.");
             }
-            Set keySet = Collections.unmodifiableMap(androidKeystoreAttestationVerificationAttributes.mApplicationPackageNameVersion).keySet();
+            Set keySet =
+                    Collections.unmodifiableMap(
+                                    androidKeystoreAttestationVerificationAttributes
+                                            .mApplicationPackageNameVersion)
+                            .keySet();
             if (!ANDROID_SYSTEM_PACKAGE_NAME_SET.equals(keySet)) {
                 debugVerboseLog("Owner is not system, packages=" + keySet);
                 debugVerboseLog("Certificate public key is not owned by the AndroidSystem.");
@@ -259,39 +342,46 @@ public final class AttestationVerificationPeerDeviceVerifier {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean checkAttestationForPeerDeviceProfile(com.android.server.security.AndroidKeystoreAttestationVerificationAttributes r7, com.android.server.security.AttestationVerificationPeerDeviceVerifier.MyDumpData r8) {
+    public final boolean checkAttestationForPeerDeviceProfile(
+            com.android.server.security.AndroidKeystoreAttestationVerificationAttributes r7,
+            com.android.server.security.AttestationVerificationPeerDeviceVerifier.MyDumpData r8) {
         /*
             Method dump skipped, instructions count: 270
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.security.AttestationVerificationPeerDeviceVerifier.checkAttestationForPeerDeviceProfile(com.android.server.security.AndroidKeystoreAttestationVerificationAttributes, com.android.server.security.AttestationVerificationPeerDeviceVerifier$MyDumpData):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.security.AttestationVerificationPeerDeviceVerifier.checkAttestationForPeerDeviceProfile(com.android.server.security.AndroidKeystoreAttestationVerificationAttributes,"
+                    + " com.android.server.security.AttestationVerificationPeerDeviceVerifier$MyDumpData):boolean");
     }
 
     public final List getCertificates(byte[] bArr) {
         ArrayList arrayList = new ArrayList();
         ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bArr);
         while (byteArrayInputStream.available() > 0) {
-            arrayList.add((X509Certificate) this.mCertificateFactory.generateCertificate(byteArrayInputStream));
+            arrayList.add(
+                    (X509Certificate)
+                            this.mCertificateFactory.generateCertificate(byteArrayInputStream));
         }
         return arrayList;
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:22:0x0061, code lost:
-    
-        if (r2.between(r8, r9) <= 12) goto L24;
-     */
+
+       if (r2.between(r8, r9) <= 12) goto L24;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:23:0x0063, code lost:
-    
-        r1 = true;
-     */
+
+       r1 = true;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:25:0x0075, code lost:
-    
-        return r1;
-     */
+
+       return r1;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:29:0x0072, code lost:
-    
-        if (r2.between(r9, r8) <= 12) goto L24;
-     */
+
+       if (r2.between(r9, r8) <= 12) goto L24;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -370,7 +460,9 @@ public final class AttestationVerificationPeerDeviceVerifier {
             debugVerboseLog(r8)
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.security.AttestationVerificationPeerDeviceVerifier.isValidPatchLevel(int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.security.AttestationVerificationPeerDeviceVerifier.isValidPatchLevel(int):boolean");
     }
 
     public final void validateCertificateChain(List list) {
@@ -378,7 +470,8 @@ public final class AttestationVerificationPeerDeviceVerifier {
             debugVerboseLog("Certificate chain less than 2 in size.");
             throw new CertificateException("Certificate chain less than 2 in size.");
         }
-        CertPath generateCertPath = this.mCertificateFactory.generateCertPath((List<? extends Certificate>) list);
+        CertPath generateCertPath =
+                this.mCertificateFactory.generateCertPath((List<? extends Certificate>) list);
         PKIXParameters pKIXParameters = new PKIXParameters((Set<TrustAnchor>) this.mTrustAnchors);
         if (this.mRevocationEnabled) {
             pKIXParameters.addCertPathChecker(new AndroidRevocationStatusListChecker());

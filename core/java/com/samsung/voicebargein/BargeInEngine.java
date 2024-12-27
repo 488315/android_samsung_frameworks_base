@@ -12,8 +12,7 @@ public class BargeInEngine {
 
     public native String phrasespotPipe(long j, short[] sArr, long j2, long j3, float[] fArr);
 
-    public void asyncPrint(String s) {
-    }
+    public void asyncPrint(String s) {}
 
     public static int init() {
         try {

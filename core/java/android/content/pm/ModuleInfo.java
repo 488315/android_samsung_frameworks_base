@@ -2,6 +2,7 @@ package android.content.pm;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -9,27 +10,27 @@ import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class ModuleInfo implements Parcelable {
-    public static final Parcelable.Creator<ModuleInfo> CREATOR = new Parcelable.Creator<ModuleInfo>() { // from class: android.content.pm.ModuleInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ModuleInfo createFromParcel(Parcel source) {
-            return new ModuleInfo(source);
-        }
+    public static final Parcelable.Creator<ModuleInfo> CREATOR =
+            new Parcelable.Creator<ModuleInfo>() { // from class: android.content.pm.ModuleInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ModuleInfo createFromParcel(Parcel source) {
+                    return new ModuleInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ModuleInfo[] newArray(int size) {
-            return new ModuleInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ModuleInfo[] newArray(int size) {
+                    return new ModuleInfo[size];
+                }
+            };
     private String mApexModuleName;
     private List<String> mApkInApexPackageNames;
     private boolean mHidden;
     private CharSequence mName;
     private String mPackageName;
 
-    public ModuleInfo() {
-    }
+    public ModuleInfo() {}
 
     public ModuleInfo(ModuleInfo orig) {
         this.mName = orig.mName;
@@ -91,7 +92,11 @@ public final class ModuleInfo implements Parcelable {
     }
 
     public String toString() {
-        return "ModuleInfo{" + Integer.toHexString(System.identityHashCode(this)) + " " + ((Object) this.mName) + "}";
+        return "ModuleInfo{"
+                + Integer.toHexString(System.identityHashCode(this))
+                + " "
+                + ((Object) this.mName)
+                + "}";
     }
 
     @Override // android.os.Parcelable
@@ -101,7 +106,12 @@ public final class ModuleInfo implements Parcelable {
 
     public int hashCode() {
         int hashCode = (0 * 31) + Objects.hashCode(this.mName);
-        return (((((((hashCode * 31) + Objects.hashCode(this.mPackageName)) * 31) + Objects.hashCode(this.mApexModuleName)) * 31) + Objects.hashCode(this.mApkInApexPackageNames)) * 31) + Boolean.hashCode(this.mHidden);
+        return (((((((hashCode * 31) + Objects.hashCode(this.mPackageName)) * 31)
+                                                + Objects.hashCode(this.mApexModuleName))
+                                        * 31)
+                                + Objects.hashCode(this.mApkInApexPackageNames))
+                        * 31)
+                + Boolean.hashCode(this.mHidden);
     }
 
     public boolean equals(Object obj) {
@@ -109,7 +119,11 @@ public final class ModuleInfo implements Parcelable {
             return false;
         }
         ModuleInfo other = (ModuleInfo) obj;
-        return Objects.equals(this.mName, other.mName) && Objects.equals(this.mPackageName, other.mPackageName) && Objects.equals(this.mApexModuleName, other.mApexModuleName) && Objects.equals(this.mApkInApexPackageNames, other.mApkInApexPackageNames) && this.mHidden == other.mHidden;
+        return Objects.equals(this.mName, other.mName)
+                && Objects.equals(this.mPackageName, other.mPackageName)
+                && Objects.equals(this.mApexModuleName, other.mApexModuleName)
+                && Objects.equals(this.mApkInApexPackageNames, other.mApkInApexPackageNames)
+                && this.mHidden == other.mHidden;
     }
 
     @Override // android.os.Parcelable

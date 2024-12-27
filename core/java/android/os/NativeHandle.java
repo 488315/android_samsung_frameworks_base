@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.system.ErrnoException;
 import android.system.Os;
 import android.system.OsConstants;
+
 import java.io.Closeable;
 import java.io.FileDescriptor;
 import java.io.IOException;
@@ -20,7 +21,7 @@ public final class NativeHandle implements Closeable {
     }
 
     public NativeHandle(FileDescriptor descriptor, boolean own) {
-        this(new FileDescriptor[]{descriptor}, new int[0], own);
+        this(new FileDescriptor[] {descriptor}, new int[0], own);
     }
 
     private static FileDescriptor[] createFileDescriptorArray(int[] fds) {
@@ -90,7 +91,9 @@ public final class NativeHandle implements Closeable {
     public FileDescriptor getFileDescriptor() {
         checkOpen();
         if (!hasSingleFileDescriptor()) {
-            throw new IllegalStateException("NativeHandle is not single file descriptor. Contents must be retreived through getFileDescriptors and getInts.");
+            throw new IllegalStateException(
+                    "NativeHandle is not single file descriptor. Contents must be retreived through"
+                        + " getFileDescriptors and getInts.");
         }
         return this.mFds[0];
     }

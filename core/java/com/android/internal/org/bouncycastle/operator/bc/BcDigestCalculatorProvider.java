@@ -5,6 +5,7 @@ import com.android.internal.org.bouncycastle.crypto.Digest;
 import com.android.internal.org.bouncycastle.operator.DigestCalculator;
 import com.android.internal.org.bouncycastle.operator.DigestCalculatorProvider;
 import com.android.internal.org.bouncycastle.operator.OperatorCreationException;
+
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -13,10 +14,12 @@ public class BcDigestCalculatorProvider implements DigestCalculatorProvider {
     private BcDigestProvider digestProvider = BcDefaultDigestProvider.INSTANCE;
 
     @Override // com.android.internal.org.bouncycastle.operator.DigestCalculatorProvider
-    public DigestCalculator get(final AlgorithmIdentifier algorithm) throws OperatorCreationException {
+    public DigestCalculator get(final AlgorithmIdentifier algorithm)
+            throws OperatorCreationException {
         Digest dig = this.digestProvider.get(algorithm);
         final DigestOutputStream stream = new DigestOutputStream(dig);
-        return new DigestCalculator() { // from class: com.android.internal.org.bouncycastle.operator.bc.BcDigestCalculatorProvider.1
+        return new DigestCalculator() { // from class:
+                                        // com.android.internal.org.bouncycastle.operator.bc.BcDigestCalculatorProvider.1
             @Override // com.android.internal.org.bouncycastle.operator.DigestCalculator
             public AlgorithmIdentifier getAlgorithmIdentifier() {
                 return algorithm;

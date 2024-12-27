@@ -1,9 +1,5 @@
 package android.hardware.camera2.extension;
 
-import android.hardware.camera2.extension.IAdvancedExtenderImpl;
-import android.hardware.camera2.extension.IImageCaptureExtenderImpl;
-import android.hardware.camera2.extension.IInitializeSessionCallback;
-import android.hardware.camera2.extension.IPreviewExtenderImpl;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -12,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface ICameraExtensionsProxyService extends IInterface {
-    public static final String DESCRIPTOR = "android.hardware.camera2.extension.ICameraExtensionsProxyService";
+    public static final String DESCRIPTOR =
+            "android.hardware.camera2.extension.ICameraExtensionsProxyService";
 
     boolean advancedExtensionsSupported() throws RemoteException;
 
@@ -22,7 +19,8 @@ public interface ICameraExtensionsProxyService extends IInterface {
 
     IPreviewExtenderImpl initializePreviewExtension(int i) throws RemoteException;
 
-    void initializeSession(IInitializeSessionCallback iInitializeSessionCallback) throws RemoteException;
+    void initializeSession(IInitializeSessionCallback iInitializeSessionCallback)
+            throws RemoteException;
 
     boolean registerClient(IBinder iBinder) throws RemoteException;
 
@@ -37,8 +35,7 @@ public interface ICameraExtensionsProxyService extends IInterface {
         }
 
         @Override // android.hardware.camera2.extension.ICameraExtensionsProxyService
-        public void unregisterClient(IBinder token) throws RemoteException {
-        }
+        public void unregisterClient(IBinder token) throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.ICameraExtensionsProxyService
         public boolean advancedExtensionsSupported() throws RemoteException {
@@ -46,25 +43,26 @@ public interface ICameraExtensionsProxyService extends IInterface {
         }
 
         @Override // android.hardware.camera2.extension.ICameraExtensionsProxyService
-        public void initializeSession(IInitializeSessionCallback cb) throws RemoteException {
-        }
+        public void initializeSession(IInitializeSessionCallback cb) throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.ICameraExtensionsProxyService
-        public void releaseSession() throws RemoteException {
-        }
+        public void releaseSession() throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.ICameraExtensionsProxyService
-        public IPreviewExtenderImpl initializePreviewExtension(int extensionType) throws RemoteException {
+        public IPreviewExtenderImpl initializePreviewExtension(int extensionType)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.camera2.extension.ICameraExtensionsProxyService
-        public IImageCaptureExtenderImpl initializeImageExtension(int extensionType) throws RemoteException {
+        public IImageCaptureExtenderImpl initializeImageExtension(int extensionType)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.camera2.extension.ICameraExtensionsProxyService
-        public IAdvancedExtenderImpl initializeAdvancedExtension(int extensionType) throws RemoteException {
+        public IAdvancedExtenderImpl initializeAdvancedExtension(int extensionType)
+                throws RemoteException {
             return null;
         }
 
@@ -74,7 +72,7 @@ public interface ICameraExtensionsProxyService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICameraExtensionsProxyService {
+    public abstract static class Stub extends Binder implements ICameraExtensionsProxyService {
         static final int TRANSACTION_advancedExtensionsSupported = 3;
         static final int TRANSACTION_initializeAdvancedExtension = 8;
         static final int TRANSACTION_initializeImageExtension = 7;
@@ -133,7 +131,8 @@ public interface ICameraExtensionsProxyService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICameraExtensionsProxyService.DESCRIPTOR);
             }
@@ -161,7 +160,8 @@ public interface ICameraExtensionsProxyService extends IInterface {
                     reply.writeBoolean(_result2);
                     return true;
                 case 4:
-                    IInitializeSessionCallback _arg03 = IInitializeSessionCallback.Stub.asInterface(data.readStrongBinder());
+                    IInitializeSessionCallback _arg03 =
+                            IInitializeSessionCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     initializeSession(_arg03);
                     reply.writeNoException();
@@ -290,7 +290,8 @@ public interface ICameraExtensionsProxyService extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.ICameraExtensionsProxyService
-            public IPreviewExtenderImpl initializePreviewExtension(int extensionType) throws RemoteException {
+            public IPreviewExtenderImpl initializePreviewExtension(int extensionType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -298,7 +299,8 @@ public interface ICameraExtensionsProxyService extends IInterface {
                     _data.writeInt(extensionType);
                     this.mRemote.transact(6, _data, _reply, 0);
                     _reply.readException();
-                    IPreviewExtenderImpl _result = IPreviewExtenderImpl.Stub.asInterface(_reply.readStrongBinder());
+                    IPreviewExtenderImpl _result =
+                            IPreviewExtenderImpl.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -307,7 +309,8 @@ public interface ICameraExtensionsProxyService extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.ICameraExtensionsProxyService
-            public IImageCaptureExtenderImpl initializeImageExtension(int extensionType) throws RemoteException {
+            public IImageCaptureExtenderImpl initializeImageExtension(int extensionType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -315,7 +318,8 @@ public interface ICameraExtensionsProxyService extends IInterface {
                     _data.writeInt(extensionType);
                     this.mRemote.transact(7, _data, _reply, 0);
                     _reply.readException();
-                    IImageCaptureExtenderImpl _result = IImageCaptureExtenderImpl.Stub.asInterface(_reply.readStrongBinder());
+                    IImageCaptureExtenderImpl _result =
+                            IImageCaptureExtenderImpl.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -324,7 +328,8 @@ public interface ICameraExtensionsProxyService extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.ICameraExtensionsProxyService
-            public IAdvancedExtenderImpl initializeAdvancedExtension(int extensionType) throws RemoteException {
+            public IAdvancedExtenderImpl initializeAdvancedExtension(int extensionType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -332,7 +337,8 @@ public interface ICameraExtensionsProxyService extends IInterface {
                     _data.writeInt(extensionType);
                     this.mRemote.transact(8, _data, _reply, 0);
                     _reply.readException();
-                    IAdvancedExtenderImpl _result = IAdvancedExtenderImpl.Stub.asInterface(_reply.readStrongBinder());
+                    IAdvancedExtenderImpl _result =
+                            IAdvancedExtenderImpl.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();

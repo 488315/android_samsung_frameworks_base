@@ -2,23 +2,26 @@ package android.telephony;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public class CellConfigLte implements Parcelable {
-    public static final Parcelable.Creator<CellConfigLte> CREATOR = new Parcelable.Creator<CellConfigLte>() { // from class: android.telephony.CellConfigLte.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellConfigLte createFromParcel(Parcel in) {
-            return new CellConfigLte(in);
-        }
+    public static final Parcelable.Creator<CellConfigLte> CREATOR =
+            new Parcelable.Creator<
+                    CellConfigLte>() { // from class: android.telephony.CellConfigLte.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellConfigLte createFromParcel(Parcel in) {
+                    return new CellConfigLte(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellConfigLte[] newArray(int size) {
-            return new CellConfigLte[0];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellConfigLte[] newArray(int size) {
+                    return new CellConfigLte[0];
+                }
+            };
     private final boolean mIsEndcAvailable;
 
     public CellConfigLte() {
@@ -60,7 +63,10 @@ public class CellConfigLte implements Parcelable {
     }
 
     public String toString() {
-        return getClass().getName() + " :{" + (" isEndcAvailable = " + this.mIsEndcAvailable) + " }";
+        return getClass().getName()
+                + " :{"
+                + (" isEndcAvailable = " + this.mIsEndcAvailable)
+                + " }";
     }
 
     private CellConfigLte(Parcel in) {

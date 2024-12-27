@@ -1,7 +1,9 @@
 package com.google.android.mms;
 
 import com.android.internal.widget.MessagingMessage;
+
 import com.samsung.android.wallpaperbackup.BnRConstants;
+
 import java.util.ArrayList;
 
 /* loaded from: classes5.dex */
@@ -297,8 +299,7 @@ public class ContentType {
         sIsVideoTypes.add("video/divx");
     }
 
-    private ContentType() {
-    }
+    private ContentType() {}
 
     public static boolean isSupportedType(String contentType) {
         return contentType != null && sSupportedContentTypes.contains(contentType);
@@ -321,19 +322,27 @@ public class ContentType {
     }
 
     public static boolean isImageType(String contentType) {
-        return contentType != null && (contentType.startsWith(MessagingMessage.IMAGE_MIME_TYPE_PREFIX) || sSupportedImageTypes.contains(contentType));
+        return contentType != null
+                && (contentType.startsWith(MessagingMessage.IMAGE_MIME_TYPE_PREFIX)
+                        || sSupportedImageTypes.contains(contentType));
     }
 
     public static boolean isAudioType(String contentType) {
-        return contentType != null && (contentType.startsWith("audio/") || sSupportedAudioTypes.contains(contentType));
+        return contentType != null
+                && (contentType.startsWith("audio/") || sSupportedAudioTypes.contains(contentType));
     }
 
     public static boolean isVideoType(String contentType) {
-        return contentType != null && (contentType.startsWith(BnRConstants.VIDEO_DIR_PATH) || sSupportedVideoTypes.contains(contentType));
+        return contentType != null
+                && (contentType.startsWith(BnRConstants.VIDEO_DIR_PATH)
+                        || sSupportedVideoTypes.contains(contentType));
     }
 
     public static boolean isDrmType(String contentType) {
-        return contentType != null && (contentType.equals(APP_DRM_CONTENT) || contentType.equals("application/vnd.oma.drm.message") || contentType.equals(APP_DRM_RIGHTS_WBXML));
+        return contentType != null
+                && (contentType.equals(APP_DRM_CONTENT)
+                        || contentType.equals("application/vnd.oma.drm.message")
+                        || contentType.equals(APP_DRM_RIGHTS_WBXML));
     }
 
     public static boolean isUnspecified(String contentType) {

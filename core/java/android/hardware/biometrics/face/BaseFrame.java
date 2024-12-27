@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class BaseFrame implements Parcelable {
-    public static final Parcelable.Creator<BaseFrame> CREATOR = new Parcelable.Creator<BaseFrame>() { // from class: android.hardware.biometrics.face.BaseFrame.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BaseFrame createFromParcel(Parcel _aidl_source) {
-            BaseFrame _aidl_out = new BaseFrame();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<BaseFrame> CREATOR =
+            new Parcelable.Creator<
+                    BaseFrame>() { // from class: android.hardware.biometrics.face.BaseFrame.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BaseFrame createFromParcel(Parcel _aidl_source) {
+                    BaseFrame _aidl_out = new BaseFrame();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BaseFrame[] newArray(int _aidl_size) {
-            return new BaseFrame[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BaseFrame[] newArray(int _aidl_size) {
+                    return new BaseFrame[_aidl_size];
+                }
+            };
     public byte acquiredInfo = 0;
     public int vendorCode = 0;
     public float pan = 0.0f;

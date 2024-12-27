@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.sec.clipboard.util.Log;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -142,22 +143,17 @@ public class SemUriListClipData extends SemClipData {
     }
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData
-    public void toSave() {
-    }
+    public void toSave() {}
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData
-    public void toLoad() {
-    }
+    public void toLoad() {}
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData
-    public void convertForRemote() {
-    }
+    public void convertForRemote() {}
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData
-    public void insertContentUri(Context context, String path) {
-    }
+    public void insertContentUri(Context context, String path) {}
 
     @Override // com.samsung.android.content.clipboard.data.SemClipData
-    public void deleteContentUri(Context context, String path) {
-    }
+    public void deleteContentUri(Context context, String path) {}
 }

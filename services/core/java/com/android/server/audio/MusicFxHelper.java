@@ -14,10 +14,11 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.Log;
 import android.util.SparseArray;
+
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.DirEncryptService$$ExternalSyntheticOutline0;
-import com.android.server.audio.AudioService;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,13 +32,15 @@ public final class MusicFxHelper {
     public final String mPackageName = MusicFxHelper.class.getPackage().getName();
     public IBinder mUidObserverToken = null;
     public final MySparseArray mClientUidSessionMap = new MySparseArray();
-    public final AnonymousClass1 mEffectUidObserver = new UidObserver() { // from class: com.android.server.audio.MusicFxHelper.1
-        public final void onUidGone(int i, boolean z) {
-            Log.w("AS.MusicFxHelper", " send MSG_EFFECT_CLIENT_GONE");
-            AudioService.AudioHandler audioHandler = MusicFxHelper.this.mAudioHandler;
-            audioHandler.sendMessageAtTime(audioHandler.obtainMessage(1101, i, 0, null), 0L);
-        }
-    };
+    public final AnonymousClass1 mEffectUidObserver =
+            new UidObserver() { // from class: com.android.server.audio.MusicFxHelper.1
+                public final void onUidGone(int i, boolean z) {
+                    Log.w("AS.MusicFxHelper", " send MSG_EFFECT_CLIENT_GONE");
+                    AudioService.AudioHandler audioHandler = MusicFxHelper.this.mAudioHandler;
+                    audioHandler.sendMessageAtTime(
+                            audioHandler.obtainMessage(1101, i, 0, null), 0L);
+                }
+            };
     public final AnonymousClass2 mMusicFxBindConnection = new AnonymousClass2();
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -56,43 +59,63 @@ public final class MusicFxHelper {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MySparseArray extends SparseArray {
-        public MySparseArray() {
-        }
+        public MySparseArray() {}
 
         @Override // android.util.SparseArray
         public final void put(int i, PackageSessions packageSessions) {
             int i2;
             if (size() == 0) {
                 try {
-                    i2 = ActivityManager.getService().getPackageProcessState("com.android.musicfx", MusicFxHelper.this.mPackageName);
+                    i2 =
+                            ActivityManager.getService()
+                                    .getPackageProcessState(
+                                            "com.android.musicfx", MusicFxHelper.this.mPackageName);
                 } catch (RemoteException e) {
-                    NetdService$$ExternalSyntheticOutline0.m("RemoteException with getPackageProcessState: ", e, "AS.MusicFxHelper");
+                    NetdService$$ExternalSyntheticOutline0.m(
+                            "RemoteException with getPackageProcessState: ", e, "AS.MusicFxHelper");
                     i2 = 20;
                 }
                 if (i2 > 6) {
-                    Intent className = new Intent().setClassName("com.android.musicfx", "com.android.musicfx.KeepAliveService");
+                    Intent className =
+                            new Intent()
+                                    .setClassName(
+                                            "com.android.musicfx",
+                                            "com.android.musicfx.KeepAliveService");
                     MusicFxHelper musicFxHelper = MusicFxHelper.this;
                     musicFxHelper.mIsBound = true;
-                    musicFxHelper.mContext.bindServiceAsUser(className, musicFxHelper.mMusicFxBindConnection, 1, UserHandle.of(MusicFxHelper.getCurrentUserId()));
+                    musicFxHelper.mContext.bindServiceAsUser(
+                            className,
+                            musicFxHelper.mMusicFxBindConnection,
+                            1,
+                            UserHandle.of(MusicFxHelper.getCurrentUserId()));
                     Log.i("AS.MusicFxHelper", "bindService to com.android.musicfx");
                 }
-                DirEncryptService$$ExternalSyntheticOutline0.m(i2, "com.android.musicfx procState ", "AS.MusicFxHelper");
+                DirEncryptService$$ExternalSyntheticOutline0.m(
+                        i2, "com.android.musicfx procState ", "AS.MusicFxHelper");
             }
             try {
                 MusicFxHelper musicFxHelper2 = MusicFxHelper.this;
                 if (musicFxHelper2.mUidObserverToken == null) {
                     IActivityManager service = ActivityManager.getService();
                     MusicFxHelper musicFxHelper3 = MusicFxHelper.this;
-                    musicFxHelper2.mUidObserverToken = service.registerUidObserverForUids(musicFxHelper3.mEffectUidObserver, 2, -1, musicFxHelper3.mPackageName, new int[]{i});
+                    musicFxHelper2.mUidObserverToken =
+                            service.registerUidObserverForUids(
+                                    musicFxHelper3.mEffectUidObserver,
+                                    2,
+                                    -1,
+                                    musicFxHelper3.mPackageName,
+                                    new int[] {i});
                     Log.i("AS.MusicFxHelper", "registered to observer with UID " + i);
                 } else if (get(i) == null) {
                     IActivityManager service2 = ActivityManager.getService();
                     MusicFxHelper musicFxHelper4 = MusicFxHelper.this;
-                    service2.addUidToObserver(musicFxHelper4.mUidObserverToken, musicFxHelper4.mPackageName, i);
+                    service2.addUidToObserver(
+                            musicFxHelper4.mUidObserverToken, musicFxHelper4.mPackageName, i);
                     Log.i("AS.MusicFxHelper", " UID " + i + " add to observer");
                 }
             } catch (RemoteException e2) {
-                NetdService$$ExternalSyntheticOutline0.m("RemoteException with UID observer add/register: ", e2, "AS.MusicFxHelper");
+                NetdService$$ExternalSyntheticOutline0.m(
+                        "RemoteException with UID observer add/register: ", e2, "AS.MusicFxHelper");
             }
             super.put(i, (int) packageSessions);
         }
@@ -103,24 +126,31 @@ public final class MusicFxHelper {
                 try {
                     IActivityManager service = ActivityManager.getService();
                     MusicFxHelper musicFxHelper = MusicFxHelper.this;
-                    service.removeUidFromObserver(musicFxHelper.mUidObserverToken, musicFxHelper.mPackageName, i);
+                    service.removeUidFromObserver(
+                            musicFxHelper.mUidObserverToken, musicFxHelper.mPackageName, i);
                 } catch (RemoteException e) {
-                    NetdService$$ExternalSyntheticOutline0.m("RemoteException with removeUidFromObserver: ", e, "AS.MusicFxHelper");
+                    NetdService$$ExternalSyntheticOutline0.m(
+                            "RemoteException with removeUidFromObserver: ", e, "AS.MusicFxHelper");
                 }
             }
             super.remove(i);
             if (size() == 0) {
                 try {
-                    ActivityManager.getService().unregisterUidObserver(MusicFxHelper.this.mEffectUidObserver);
+                    ActivityManager.getService()
+                            .unregisterUidObserver(MusicFxHelper.this.mEffectUidObserver);
                 } catch (RemoteException e2) {
-                    NetdService$$ExternalSyntheticOutline0.m("RemoteException with unregisterUidObserver: ", e2, "AS.MusicFxHelper");
+                    NetdService$$ExternalSyntheticOutline0.m(
+                            "RemoteException with unregisterUidObserver: ", e2, "AS.MusicFxHelper");
                 }
                 MusicFxHelper musicFxHelper2 = MusicFxHelper.this;
                 musicFxHelper2.mUidObserverToken = null;
                 if (musicFxHelper2.mIsBound) {
                     musicFxHelper2.mContext.unbindService(musicFxHelper2.mMusicFxBindConnection);
                     MusicFxHelper.this.mIsBound = false;
-                    Log.i("AS.MusicFxHelper", "last session closed, unregister UID observer, and unbind com.android.musicfx");
+                    Log.i(
+                            "AS.MusicFxHelper",
+                            "last session closed, unregister UID observer, and unbind"
+                                + " com.android.musicfx");
                 }
             }
         }
@@ -162,7 +192,9 @@ public final class MusicFxHelper {
             return false;
         }
         if (!packageSessions.mPackageName.equals(str)) {
-            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "Inconsistency package names for UID ", " close, prev: ");
+            StringBuilder m =
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            i, "Inconsistency package names for UID ", " close, prev: ");
             m.append(packageSessions.mPackageName);
             m.append(", now: ");
             m.append(str);
@@ -172,7 +204,9 @@ public final class MusicFxHelper {
         List list = packageSessions.mSessions;
         if (list != null && ((ArrayList) list).size() != 0) {
             if (!((ArrayList) packageSessions.mSessions).contains(Integer.valueOf(i2))) {
-                Log.e("AS.MusicFxHelper", str + " UID " + i + " session " + i2 + " does not exist in map, abort");
+                Log.e(
+                        "AS.MusicFxHelper",
+                        str + " UID " + i + " session " + i2 + " does not exist in map, abort");
                 return false;
             }
             ((ArrayList) packageSessions.mSessions).remove(Integer.valueOf(i2));
@@ -197,14 +231,18 @@ public final class MusicFxHelper {
             packageSessions.mPackageName = str;
         } else {
             if (((ArrayList) list).contains(Integer.valueOf(i2))) {
-                StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(i2, i, "Audio session ", " already open for UID: ", ", package: ");
+                StringBuilder m =
+                        ArrayUtils$$ExternalSyntheticOutline0.m(
+                                i2, i, "Audio session ", " already open for UID: ", ", package: ");
                 m.append(str);
                 m.append(", abort");
                 Log.e("AS.MusicFxHelper", m.toString());
                 return false;
             }
             if (!packageSessions.mPackageName.equals(str)) {
-                StringBuilder m2 = BatteryService$$ExternalSyntheticOutline0.m(i, "Inconsistency package names for UID open: ", " prev: ");
+                StringBuilder m2 =
+                        BatteryService$$ExternalSyntheticOutline0.m(
+                                i, "Inconsistency package names for UID open: ", " prev: ");
                 m2.append(packageSessions.mPackageName);
                 m2.append(", now: ");
                 m2.append(str);
@@ -225,7 +263,8 @@ public final class MusicFxHelper {
         }
         synchronized (this.mClientUidMapLock) {
             try {
-                if (intent.getAction().equals("android.media.action.OPEN_AUDIO_EFFECT_CONTROL_SESSION")) {
+                if (intent.getAction()
+                        .equals("android.media.action.OPEN_AUDIO_EFFECT_CONTROL_SESSION")) {
                     return handleAudioEffectSessionOpen(i, intExtra, str);
                 }
                 return handleAudioEffectSessionClose(i, intExtra, str);

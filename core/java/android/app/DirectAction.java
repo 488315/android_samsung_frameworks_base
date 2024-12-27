@@ -5,24 +5,27 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class DirectAction implements Parcelable {
-    public static final Parcelable.Creator<DirectAction> CREATOR = new Parcelable.Creator<DirectAction>() { // from class: android.app.DirectAction.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DirectAction createFromParcel(Parcel in) {
-            return new DirectAction(in);
-        }
+    public static final Parcelable.Creator<DirectAction> CREATOR =
+            new Parcelable.Creator<DirectAction>() { // from class: android.app.DirectAction.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DirectAction createFromParcel(Parcel in) {
+                    return new DirectAction(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DirectAction[] newArray(int size) {
-            return new DirectAction[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DirectAction[] newArray(int size) {
+                    return new DirectAction[size];
+                }
+            };
     public static final String KEY_ACTIONS_LIST = "actions_list";
     private IBinder mActivityId;
     private final Bundle mExtras;

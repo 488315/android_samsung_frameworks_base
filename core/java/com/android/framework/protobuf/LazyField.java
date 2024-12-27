@@ -7,7 +7,10 @@ import java.util.Map;
 public class LazyField extends LazyFieldLite {
     private final MessageLite defaultInstance;
 
-    public LazyField(MessageLite defaultInstance, ExtensionRegistryLite extensionRegistry, ByteString bytes) {
+    public LazyField(
+            MessageLite defaultInstance,
+            ExtensionRegistryLite extensionRegistry,
+            ByteString bytes) {
         super(extensionRegistry, bytes);
         this.defaultInstance = defaultInstance;
     }
@@ -63,7 +66,9 @@ public class LazyField extends LazyFieldLite {
         @Override // java.util.Map.Entry
         public Object setValue(Object value) {
             if (!(value instanceof MessageLite)) {
-                throw new IllegalArgumentException("LazyField now only used for MessageSet, and the value of MessageSet must be an instance of MessageLite");
+                throw new IllegalArgumentException(
+                        "LazyField now only used for MessageSet, and the value of MessageSet must"
+                            + " be an instance of MessageLite");
             }
             return this.entry.getValue().setValue((MessageLite) value);
         }

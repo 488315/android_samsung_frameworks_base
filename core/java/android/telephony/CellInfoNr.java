@@ -2,24 +2,26 @@ package android.telephony;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class CellInfoNr extends CellInfo {
-    public static final Parcelable.Creator<CellInfoNr> CREATOR = new Parcelable.Creator<CellInfoNr>() { // from class: android.telephony.CellInfoNr.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellInfoNr createFromParcel(Parcel in) {
-            in.readInt();
-            return new CellInfoNr(in);
-        }
+    public static final Parcelable.Creator<CellInfoNr> CREATOR =
+            new Parcelable.Creator<CellInfoNr>() { // from class: android.telephony.CellInfoNr.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellInfoNr createFromParcel(Parcel in) {
+                    in.readInt();
+                    return new CellInfoNr(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellInfoNr[] newArray(int size) {
-            return new CellInfoNr[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellInfoNr[] newArray(int size) {
+                    return new CellInfoNr[size];
+                }
+            };
     private static final String TAG = "CellInfoNr";
     private CellIdentityNr mCellIdentity;
     private final CellSignalStrengthNr mCellSignalStrength;
@@ -47,11 +49,19 @@ public final class CellInfoNr extends CellInfo {
 
     private CellInfoNr(CellInfoNr other, boolean sanitizeLocationInfo) {
         super(other);
-        this.mCellIdentity = sanitizeLocationInfo ? other.mCellIdentity.sanitizeLocationInfo() : other.mCellIdentity;
+        this.mCellIdentity =
+                sanitizeLocationInfo
+                        ? other.mCellIdentity.sanitizeLocationInfo()
+                        : other.mCellIdentity;
         this.mCellSignalStrength = other.mCellSignalStrength;
     }
 
-    public CellInfoNr(int connectionStatus, boolean registered, long timeStamp, CellIdentityNr cellIdentityNr, CellSignalStrengthNr cellSignalStrengthNr) {
+    public CellInfoNr(
+            int connectionStatus,
+            boolean registered,
+            long timeStamp,
+            CellIdentityNr cellIdentityNr,
+            CellSignalStrengthNr cellSignalStrengthNr) {
         super(connectionStatus, registered, timeStamp);
         this.mCellIdentity = cellIdentityNr;
         this.mCellSignalStrength = cellSignalStrengthNr;
@@ -78,7 +88,8 @@ public final class CellInfoNr extends CellInfo {
 
     @Override // android.telephony.CellInfo
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(super.hashCode()), this.mCellIdentity, this.mCellSignalStrength);
+        return Objects.hash(
+                Integer.valueOf(super.hashCode()), this.mCellIdentity, this.mCellSignalStrength);
     }
 
     @Override // android.telephony.CellInfo
@@ -87,12 +98,18 @@ public final class CellInfoNr extends CellInfo {
             return false;
         }
         CellInfoNr o = (CellInfoNr) other;
-        return super.equals(o) && this.mCellIdentity.equals(o.mCellIdentity) && this.mCellSignalStrength.equals(o.mCellSignalStrength);
+        return super.equals(o)
+                && this.mCellIdentity.equals(o.mCellIdentity)
+                && this.mCellSignalStrength.equals(o.mCellSignalStrength);
     }
 
     @Override // android.telephony.CellInfo
     public String toString() {
-        return "CellInfoNr:{" + (" " + super.toString()) + (" " + this.mCellIdentity) + (" " + this.mCellSignalStrength) + " }";
+        return "CellInfoNr:{"
+                + (" " + super.toString())
+                + (" " + this.mCellIdentity)
+                + (" " + this.mCellSignalStrength)
+                + " }";
     }
 
     @Override // android.telephony.CellInfo, android.os.Parcelable

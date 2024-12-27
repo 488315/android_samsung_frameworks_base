@@ -15,12 +15,11 @@ public interface IContentObserver extends IInterface {
 
     public static class Default implements IContentObserver {
         @Override // android.database.IContentObserver
-        public void onChange(boolean selfUpdate, Uri uri, int userId) throws RemoteException {
-        }
+        public void onChange(boolean selfUpdate, Uri uri, int userId) throws RemoteException {}
 
         @Override // android.database.IContentObserver
-        public void onChangeEtc(boolean selfUpdate, Uri[] uri, int flags, int userId) throws RemoteException {
-        }
+        public void onChangeEtc(boolean selfUpdate, Uri[] uri, int flags, int userId)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -28,7 +27,7 @@ public interface IContentObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IContentObserver {
+    public abstract static class Stub extends Binder implements IContentObserver {
         public static final String DESCRIPTOR = "android.database.IContentObserver";
         static final int TRANSACTION_onChange = 1;
         static final int TRANSACTION_onChangeEtc = 2;
@@ -70,7 +69,8 @@ public interface IContentObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -130,7 +130,8 @@ public interface IContentObserver extends IInterface {
             }
 
             @Override // android.database.IContentObserver
-            public void onChangeEtc(boolean selfUpdate, Uri[] uri, int flags, int userId) throws RemoteException {
+            public void onChangeEtc(boolean selfUpdate, Uri[] uri, int flags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

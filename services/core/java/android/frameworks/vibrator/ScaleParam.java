@@ -4,6 +4,7 @@ import android.companion.virtualcamera.SupportedStreamConfiguration$$ExternalSyn
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -74,6 +75,7 @@ public final class ScaleParam implements Parcelable {
         parcel.writeFloat(this.scale);
         int dataPosition2 = parcel.dataPosition();
         parcel.setDataPosition(dataPosition);
-        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(dataPosition2, dataPosition, parcel, dataPosition2);
+        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                dataPosition2, dataPosition, parcel, dataPosition2);
     }
 }

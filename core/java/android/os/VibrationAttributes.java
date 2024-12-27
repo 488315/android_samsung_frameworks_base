@@ -3,8 +3,8 @@ package android.os;
 import android.app.admin.DevicePolicyResources;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.AudioAttributes;
-import android.os.Parcelable;
 import android.text.TextUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Collections;
@@ -16,19 +16,21 @@ import java.util.Set;
 public final class VibrationAttributes implements Parcelable {
     public static final int CATEGORY_KEYBOARD = 1;
     public static final int CATEGORY_UNKNOWN = 0;
-    public static final Parcelable.Creator<VibrationAttributes> CREATOR = new Parcelable.Creator<VibrationAttributes>() { // from class: android.os.VibrationAttributes.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VibrationAttributes createFromParcel(Parcel p) {
-            return new VibrationAttributes(p);
-        }
+    public static final Parcelable.Creator<VibrationAttributes> CREATOR =
+            new Parcelable.Creator<
+                    VibrationAttributes>() { // from class: android.os.VibrationAttributes.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VibrationAttributes createFromParcel(Parcel p) {
+                    return new VibrationAttributes(p);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VibrationAttributes[] newArray(int size) {
-            return new VibrationAttributes[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VibrationAttributes[] newArray(int size) {
+                    return new VibrationAttributes[size];
+                }
+            };
     public static final int FLAG_ALL_SUPPORTED = 31;
     public static final int FLAG_BYPASS_INTERRUPTION_POLICY = 1;
     public static final int FLAG_BYPASS_USER_VIBRATION_INTENSITY_OFF = 2;
@@ -61,20 +63,16 @@ public final class VibrationAttributes implements Parcelable {
     private final int mUsage;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Category {
-    }
+    public @interface Category {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Flag {
-    }
+    public @interface Flag {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Usage {
-    }
+    public @interface Usage {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface UsageClass {
-    }
+    public @interface UsageClass {}
 
     public static VibrationAttributes createForUsage(int usage) {
         return new Builder().setUsage(usage).build();
@@ -172,7 +170,8 @@ public final class VibrationAttributes implements Parcelable {
         for (int i = tagsArray.length - 1; i >= 0; i--) {
             this.mTags.add(tagsArray[i]);
         }
-        this.mFormattedTags = TextUtils.join(NavigationBarInflaterView.GRAVITY_SEPARATOR, this.mTags);
+        this.mFormattedTags =
+                TextUtils.join(NavigationBarInflaterView.GRAVITY_SEPARATOR, this.mTags);
     }
 
     public boolean equals(Object o) {
@@ -183,18 +182,37 @@ public final class VibrationAttributes implements Parcelable {
             return false;
         }
         VibrationAttributes rhs = (VibrationAttributes) o;
-        if (this.mUsage == rhs.mUsage && this.mOriginalAudioUsage == rhs.mOriginalAudioUsage && this.mFlags == rhs.mFlags && this.mCategory == rhs.mCategory && this.mFormattedTags.equals(rhs.mFormattedTags)) {
+        if (this.mUsage == rhs.mUsage
+                && this.mOriginalAudioUsage == rhs.mOriginalAudioUsage
+                && this.mFlags == rhs.mFlags
+                && this.mCategory == rhs.mCategory
+                && this.mFormattedTags.equals(rhs.mFormattedTags)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mUsage), Integer.valueOf(this.mOriginalAudioUsage), Integer.valueOf(this.mFlags), Integer.valueOf(this.mCategory), this.mFormattedTags);
+        return Objects.hash(
+                Integer.valueOf(this.mUsage),
+                Integer.valueOf(this.mOriginalAudioUsage),
+                Integer.valueOf(this.mFlags),
+                Integer.valueOf(this.mCategory),
+                this.mFormattedTags);
     }
 
     public String toString() {
-        return "VibrationAttributes{mUsage=" + usageToString() + ", mAudioUsage= " + AudioAttributes.usageToString(this.mOriginalAudioUsage) + ", mCategory=" + categoryToString() + ", mFlags=" + this.mFlags + ", tags=" + this.mFormattedTags + '}';
+        return "VibrationAttributes{mUsage="
+                + usageToString()
+                + ", mAudioUsage= "
+                + AudioAttributes.usageToString(this.mOriginalAudioUsage)
+                + ", mCategory="
+                + categoryToString()
+                + ", mFlags="
+                + this.mFlags
+                + ", tags="
+                + this.mFormattedTags
+                + '}';
     }
 
     public String usageToString() {
@@ -335,9 +353,12 @@ public final class VibrationAttributes implements Parcelable {
         }
 
         public VibrationAttributes build() {
-            VibrationAttributes ans = new VibrationAttributes(this.mUsage, this.mOriginalAudioUsage, this.mFlags, this.mCategory);
+            VibrationAttributes ans =
+                    new VibrationAttributes(
+                            this.mUsage, this.mOriginalAudioUsage, this.mFlags, this.mCategory);
             ans.mTags = (HashSet) this.mTags.clone();
-            ans.mFormattedTags = TextUtils.join(NavigationBarInflaterView.GRAVITY_SEPARATOR, this.mTags);
+            ans.mFormattedTags =
+                    TextUtils.join(NavigationBarInflaterView.GRAVITY_SEPARATOR, this.mTags);
             return ans;
         }
 

@@ -7,7 +7,9 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.media.MediaMetrics;
 import android.view.View;
+
 import com.samsung.android.wallpaper.legibilitycolors.utils.IUXColorUtils;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -89,12 +91,16 @@ public class BitmapHelper {
         float srcWidthRatio = srcWidth / srcHeight;
         if (dstWidthRatio > srcWidthRatio) {
             int croppedHeight = (int) (srcHeight * (srcWidthRatio / dstWidthRatio));
-            Bitmap croppedBitmap = Bitmap.createBitmap(srcBitmap, 0, (srcHeight - croppedHeight) / 2, srcWidth, croppedHeight);
+            Bitmap croppedBitmap =
+                    Bitmap.createBitmap(
+                            srcBitmap, 0, (srcHeight - croppedHeight) / 2, srcWidth, croppedHeight);
             return croppedBitmap;
         }
         if (dstWidthRatio < srcWidthRatio) {
             int croppedWidth = (int) (srcWidth * (dstWidthRatio / srcWidthRatio));
-            Bitmap croppedBitmap2 = Bitmap.createBitmap(srcBitmap, (srcWidth - croppedWidth) / 2, 0, croppedWidth, srcHeight);
+            Bitmap croppedBitmap2 =
+                    Bitmap.createBitmap(
+                            srcBitmap, (srcWidth - croppedWidth) / 2, 0, croppedWidth, srcHeight);
             return croppedBitmap2;
         }
         Bitmap croppedBitmap3 = Bitmap.createBitmap(srcBitmap);
@@ -107,12 +113,22 @@ public class BitmapHelper {
         float srcWidthRatio = srcBitmapWidth / srcBitmapHeight;
         if (srcWidthRatio > widthRatio) {
             float scaledWidth = srcBitmapHeight * widthRatio;
-            Rect rectResult = new Rect((int) ((srcBitmapWidth * 0.5f) - (scaledWidth * 0.5f)), (int) ((srcBitmapHeight * 0.5f) - (srcBitmapHeight * 0.5f)), (int) ((srcBitmapWidth * 0.5f) + (scaledWidth * 0.5f)), (int) ((srcBitmapHeight * 0.5f) + (0.5f * srcBitmapHeight)));
+            Rect rectResult =
+                    new Rect(
+                            (int) ((srcBitmapWidth * 0.5f) - (scaledWidth * 0.5f)),
+                            (int) ((srcBitmapHeight * 0.5f) - (srcBitmapHeight * 0.5f)),
+                            (int) ((srcBitmapWidth * 0.5f) + (scaledWidth * 0.5f)),
+                            (int) ((srcBitmapHeight * 0.5f) + (0.5f * srcBitmapHeight)));
             return rectResult;
         }
         if (srcWidthRatio < widthRatio) {
             float scaledHeight = srcBitmapWidth / widthRatio;
-            Rect rectResult2 = new Rect((int) ((srcBitmapWidth * 0.5f) - (srcBitmapWidth * 0.5f)), (int) ((srcBitmapHeight * 0.5f) - (scaledHeight * 0.5f)), (int) ((srcBitmapWidth * 0.5f) + (srcBitmapWidth * 0.5f)), (int) ((srcBitmapHeight * 0.5f) + (0.5f * scaledHeight)));
+            Rect rectResult2 =
+                    new Rect(
+                            (int) ((srcBitmapWidth * 0.5f) - (srcBitmapWidth * 0.5f)),
+                            (int) ((srcBitmapHeight * 0.5f) - (scaledHeight * 0.5f)),
+                            (int) ((srcBitmapWidth * 0.5f) + (srcBitmapWidth * 0.5f)),
+                            (int) ((srcBitmapHeight * 0.5f) + (0.5f * scaledHeight)));
             return rectResult2;
         }
         Rect rectResult3 = new Rect(0, 0, (int) srcBitmapWidth, (int) srcBitmapHeight);
@@ -122,7 +138,8 @@ public class BitmapHelper {
     public static Bitmap getBitmapFromView(View view) {
         view.setPressed(false);
         view.invalidate();
-        Bitmap buffer = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        Bitmap buffer =
+                Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(buffer);
         view.draw(canvas);
         return buffer;
@@ -134,7 +151,7 @@ public class BitmapHelper {
         BitmapFactory.decodeFile(imagePath, options);
         int imageHeight = options.outHeight;
         int imageWidth = options.outWidth;
-        return new int[]{imageWidth, imageHeight};
+        return new int[] {imageWidth, imageHeight};
     }
 
     public static int[] getImageSizeFromResource(Resources resources, int id) {
@@ -143,15 +160,17 @@ public class BitmapHelper {
         BitmapFactory.decodeResource(resources, id, options);
         int imageHeight = options.outHeight;
         int imageWidth = options.outWidth;
-        return new int[]{imageWidth, imageHeight};
+        return new int[] {imageWidth, imageHeight};
     }
 
-    public static int fineScaleOptionValueBySquareRootSize(int imageWidth, int imageHeight, int sizeTobe) {
+    public static int fineScaleOptionValueBySquareRootSize(
+            int imageWidth, int imageHeight, int sizeTobe) {
         int imageAreaSize = imageWidth * imageHeight;
         return (int) Math.max(Math.sqrt(imageAreaSize) / sizeTobe, 1.0d);
     }
 
-    public static float fineScaleValueBySquareRootSize(int imageWidth, int imageHeight, int sizeTobe) {
+    public static float fineScaleValueBySquareRootSize(
+            int imageWidth, int imageHeight, int sizeTobe) {
         int imageAreaSize = imageWidth * imageHeight;
         return (float) (sizeTobe / Math.sqrt(imageAreaSize));
     }
@@ -185,7 +204,10 @@ public class BitmapHelper {
         if (height < borderWidth) {
             borderWidth = height;
         }
-        int borderPixelsNum = pixels.length - ((width - (borderWidth + borderWidth)) * (height - (borderWidth + borderWidth)));
+        int borderPixelsNum =
+                pixels.length
+                        - ((width - (borderWidth + borderWidth))
+                                * (height - (borderWidth + borderWidth)));
         int[] boarderPixels = new int[borderPixelsNum];
         int i = 0;
         int size = borderWidth;
@@ -237,7 +259,10 @@ public class BitmapHelper {
         if (height < borderWidth) {
             borderWidth = height;
         }
-        int borderPixelsNum = bufferLength - ((width - (borderWidth + borderWidth)) * (height - (borderWidth + borderWidth)));
+        int borderPixelsNum =
+                bufferLength
+                        - ((width - (borderWidth + borderWidth))
+                                * (height - (borderWidth + borderWidth)));
         int[] boarderPixels = new int[borderPixelsNum];
         int i = 0;
         int size1 = borderWidth;

@@ -6,10 +6,10 @@ import android.os.PersistableBundle;
 import android.os.connectivity.WifiActivityEnergyInfo;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.os.PowerStats;
 import com.android.server.SystemServerInitThreadPool$$ExternalSyntheticLambda0;
-import com.android.server.power.stats.BatteryStatsImpl;
-import com.android.server.power.stats.PowerStatsCollector;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +31,8 @@ public final class WifiPowerStatsCollector extends PowerStatsCollector {
     public long mLastWifiActiveDuration;
     public WifiActivityEnergyInfo mLastWifiActivityInfo;
     public WifiPowerStatsLayout mLayout;
-    public volatile BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda1 mNetworkStatsSupplier;
+    public volatile BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda1
+            mNetworkStatsSupplier;
     public boolean mPowerReportingSupported;
     public PowerStats mPowerStats;
     public final WifiScanTimes mScanTimes;
@@ -50,7 +51,8 @@ public final class WifiPowerStatsCollector extends PowerStatsCollector {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public WifiPowerStatsCollector(com.android.server.power.stats.BatteryStatsImpl.PowerStatsCollectorInjector r14) {
+    public WifiPowerStatsCollector(
+            com.android.server.power.stats.BatteryStatsImpl.PowerStatsCollectorInjector r14) {
         /*
             r13 = this;
             com.android.server.power.stats.BatteryStatsImpl r0 = com.android.server.power.stats.BatteryStatsImpl.this
@@ -85,7 +87,9 @@ public final class WifiPowerStatsCollector extends PowerStatsCollector {
             r13.mInjector = r14
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.power.stats.WifiPowerStatsCollector.<init>(com.android.server.power.stats.BatteryStatsImpl$PowerStatsCollectorInjector):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.power.stats.WifiPowerStatsCollector.<init>(com.android.server.power.stats.BatteryStatsImpl$PowerStatsCollectorInjector):void");
     }
 
     @Override // com.android.server.power.stats.PowerStatsCollector
@@ -96,15 +100,23 @@ public final class WifiPowerStatsCollector extends PowerStatsCollector {
             if (!this.mEnabled) {
                 return null;
             }
-            BatteryStatsImpl.PowerStatsCollectorInjector powerStatsCollectorInjector = this.mInjector;
+            BatteryStatsImpl.PowerStatsCollectorInjector powerStatsCollectorInjector =
+                    this.mInjector;
             this.mConsumedEnergyRetriever = powerStatsCollectorInjector.mConsumedEnergyRetriever;
-            this.mVoltageSupplier = new BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda0(powerStatsCollectorInjector);
+            this.mVoltageSupplier =
+                    new BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda0(
+                            powerStatsCollectorInjector);
             this.mWifiManager = powerStatsCollectorInjector.mWifiManager;
-            BatteryStatsImpl.PowerStatsCollectorInjector powerStatsCollectorInjector2 = this.mInjector;
+            BatteryStatsImpl.PowerStatsCollectorInjector powerStatsCollectorInjector2 =
+                    this.mInjector;
             powerStatsCollectorInjector2.getClass();
-            this.mNetworkStatsSupplier = new BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda1(powerStatsCollectorInjector2, 1);
+            this.mNetworkStatsSupplier =
+                    new BatteryStatsImpl$PowerStatsCollectorInjector$$ExternalSyntheticLambda1(
+                            powerStatsCollectorInjector2, 1);
             this.mWifiStatsRetriever = BatteryStatsImpl.this.mWifiStatsRetriever;
-            this.mPowerReportingSupported = this.mWifiManager != null && this.mWifiManager.isEnhancedPowerReportingSupported();
+            this.mPowerReportingSupported =
+                    this.mWifiManager != null
+                            && this.mWifiManager.isEnhancedPowerReportingSupported();
             int[] energyConsumerIds = this.mConsumedEnergyRetriever.getEnergyConsumerIds(6, null);
             this.mEnergyConsumerIds = energyConsumerIds;
             long[] jArr = new long[energyConsumerIds.length];
@@ -116,73 +128,119 @@ public final class WifiPowerStatsCollector extends PowerStatsCollector {
             wifiPowerStatsLayout.mPowerReportingSupported = z;
             if (z) {
                 wifiPowerStatsLayout.mDeviceActiveTimePosition = -1;
-                wifiPowerStatsLayout.mDeviceRxTimePosition = wifiPowerStatsLayout.addDeviceSection(1, 0, "rx");
-                wifiPowerStatsLayout.mDeviceTxTimePosition = wifiPowerStatsLayout.addDeviceSection(1, 0, "tx");
-                wifiPowerStatsLayout.mDeviceIdleTimePosition = wifiPowerStatsLayout.addDeviceSection(1, 0, "idle");
-                wifiPowerStatsLayout.mDeviceScanTimePosition = wifiPowerStatsLayout.addDeviceSection(1, 0, "scan");
+                wifiPowerStatsLayout.mDeviceRxTimePosition =
+                        wifiPowerStatsLayout.addDeviceSection(1, 0, "rx");
+                wifiPowerStatsLayout.mDeviceTxTimePosition =
+                        wifiPowerStatsLayout.addDeviceSection(1, 0, "tx");
+                wifiPowerStatsLayout.mDeviceIdleTimePosition =
+                        wifiPowerStatsLayout.addDeviceSection(1, 0, "idle");
+                wifiPowerStatsLayout.mDeviceScanTimePosition =
+                        wifiPowerStatsLayout.addDeviceSection(1, 0, "scan");
             } else {
-                wifiPowerStatsLayout.mDeviceActiveTimePosition = wifiPowerStatsLayout.addDeviceSection(1, 0, "rx-tx");
+                wifiPowerStatsLayout.mDeviceActiveTimePosition =
+                        wifiPowerStatsLayout.addDeviceSection(1, 0, "rx-tx");
                 wifiPowerStatsLayout.mDeviceRxTimePosition = -1;
                 wifiPowerStatsLayout.mDeviceTxTimePosition = -1;
                 wifiPowerStatsLayout.mDeviceIdleTimePosition = -1;
                 wifiPowerStatsLayout.mDeviceScanTimePosition = -1;
             }
-            wifiPowerStatsLayout.mDeviceBasicScanTimePosition = wifiPowerStatsLayout.addDeviceSection(1, 1, "basic-scan");
-            wifiPowerStatsLayout.mDeviceBatchedScanTimePosition = wifiPowerStatsLayout.addDeviceSection(1, 1, "batched-scan");
+            wifiPowerStatsLayout.mDeviceBasicScanTimePosition =
+                    wifiPowerStatsLayout.addDeviceSection(1, 1, "basic-scan");
+            wifiPowerStatsLayout.mDeviceBatchedScanTimePosition =
+                    wifiPowerStatsLayout.addDeviceSection(1, 1, "batched-scan");
             this.mLayout.addDeviceSectionEnergyConsumers(this.mEnergyConsumerIds.length);
             WifiPowerStatsLayout wifiPowerStatsLayout2 = this.mLayout;
-            wifiPowerStatsLayout2.mUidRxPacketsPosition = wifiPowerStatsLayout2.addUidSection(1, 0, "rx-pkts");
-            wifiPowerStatsLayout2.mUidRxBytesPosition = wifiPowerStatsLayout2.addUidSection(1, 0, "rx-B");
-            wifiPowerStatsLayout2.mUidTxPacketsPosition = wifiPowerStatsLayout2.addUidSection(1, 0, "tx-pkts");
-            wifiPowerStatsLayout2.mUidTxBytesPosition = wifiPowerStatsLayout2.addUidSection(1, 0, "tx-B");
-            wifiPowerStatsLayout2.mUidScanTimePosition = wifiPowerStatsLayout2.addUidSection(1, 1, "scan");
-            wifiPowerStatsLayout2.mUidBatchScanTimePosition = wifiPowerStatsLayout2.addUidSection(1, 1, "batched-scan");
+            wifiPowerStatsLayout2.mUidRxPacketsPosition =
+                    wifiPowerStatsLayout2.addUidSection(1, 0, "rx-pkts");
+            wifiPowerStatsLayout2.mUidRxBytesPosition =
+                    wifiPowerStatsLayout2.addUidSection(1, 0, "rx-B");
+            wifiPowerStatsLayout2.mUidTxPacketsPosition =
+                    wifiPowerStatsLayout2.addUidSection(1, 0, "tx-pkts");
+            wifiPowerStatsLayout2.mUidTxBytesPosition =
+                    wifiPowerStatsLayout2.addUidSection(1, 0, "tx-B");
+            wifiPowerStatsLayout2.mUidScanTimePosition =
+                    wifiPowerStatsLayout2.addUidSection(1, 1, "scan");
+            wifiPowerStatsLayout2.mUidBatchScanTimePosition =
+                    wifiPowerStatsLayout2.addUidSection(1, 1, "batched-scan");
             WifiPowerStatsLayout wifiPowerStatsLayout3 = this.mLayout;
-            wifiPowerStatsLayout3.mDeviceDurationPosition = wifiPowerStatsLayout3.addDeviceSection(1, 1, "usage");
+            wifiPowerStatsLayout3.mDeviceDurationPosition =
+                    wifiPowerStatsLayout3.addDeviceSection(1, 1, "usage");
             this.mLayout.addDeviceSectionPowerEstimate();
             WifiPowerStatsLayout wifiPowerStatsLayout4 = this.mLayout;
-            wifiPowerStatsLayout4.mUidPowerEstimatePosition = wifiPowerStatsLayout4.addUidSection(1, 5, "power");
+            wifiPowerStatsLayout4.mUidPowerEstimatePosition =
+                    wifiPowerStatsLayout4.addUidSection(1, 5, "power");
             PersistableBundle persistableBundle = new PersistableBundle();
             this.mLayout.toExtras(persistableBundle);
             WifiPowerStatsLayout wifiPowerStatsLayout5 = this.mLayout;
-            PowerStats powerStats = new PowerStats(new PowerStats.Descriptor(11, wifiPowerStatsLayout5.mDeviceStatsArrayLength, (SparseArray) null, 0, wifiPowerStatsLayout5.mUidStatsArrayLength, persistableBundle));
+            PowerStats powerStats =
+                    new PowerStats(
+                            new PowerStats.Descriptor(
+                                    11,
+                                    wifiPowerStatsLayout5.mDeviceStatsArrayLength,
+                                    (SparseArray) null,
+                                    0,
+                                    wifiPowerStatsLayout5.mUidStatsArrayLength,
+                                    persistableBundle));
             this.mPowerStats = powerStats;
             this.mDeviceStats = powerStats.stats;
             this.mIsInitialized = true;
         }
         if (this.mPowerReportingSupported) {
             final CompletableFuture completableFuture = new CompletableFuture();
-            this.mWifiManager.getWifiActivityEnergyInfoAsync(new SystemServerInitThreadPool$$ExternalSyntheticLambda0(), new WifiManager.OnWifiActivityEnergyInfoListener() { // from class: com.android.server.power.stats.WifiPowerStatsCollector$$ExternalSyntheticLambda0
-                public final void onWifiActivityEnergyInfo(WifiActivityEnergyInfo wifiActivityEnergyInfo2) {
-                    completableFuture.complete(wifiActivityEnergyInfo2);
-                }
-            });
+            this.mWifiManager.getWifiActivityEnergyInfoAsync(
+                    new SystemServerInitThreadPool$$ExternalSyntheticLambda0(),
+                    new WifiManager
+                            .OnWifiActivityEnergyInfoListener() { // from class:
+                                                                  // com.android.server.power.stats.WifiPowerStatsCollector$$ExternalSyntheticLambda0
+                        public final void onWifiActivityEnergyInfo(
+                                WifiActivityEnergyInfo wifiActivityEnergyInfo2) {
+                            completableFuture.complete(wifiActivityEnergyInfo2);
+                        }
+                    });
             try {
-                wifiActivityEnergyInfo = (WifiActivityEnergyInfo) completableFuture.get(20000L, TimeUnit.MILLISECONDS);
+                wifiActivityEnergyInfo =
+                        (WifiActivityEnergyInfo)
+                                completableFuture.get(20000L, TimeUnit.MILLISECONDS);
             } catch (Exception e) {
                 Slog.e("WifiPowerStatsCollector", "Cannot acquire WifiActivityEnergyInfo", e);
             }
             if (wifiActivityEnergyInfo != null) {
-                long controllerRxDurationMillis = wifiActivityEnergyInfo.getControllerRxDurationMillis() - this.mLastWifiActivityInfo.getControllerRxDurationMillis();
-                long controllerTxDurationMillis = wifiActivityEnergyInfo.getControllerTxDurationMillis() - this.mLastWifiActivityInfo.getControllerTxDurationMillis();
-                long controllerScanDurationMillis = wifiActivityEnergyInfo.getControllerScanDurationMillis() - this.mLastWifiActivityInfo.getControllerScanDurationMillis();
-                long controllerIdleDurationMillis = wifiActivityEnergyInfo.getControllerIdleDurationMillis() - this.mLastWifiActivityInfo.getControllerIdleDurationMillis();
+                long controllerRxDurationMillis =
+                        wifiActivityEnergyInfo.getControllerRxDurationMillis()
+                                - this.mLastWifiActivityInfo.getControllerRxDurationMillis();
+                long controllerTxDurationMillis =
+                        wifiActivityEnergyInfo.getControllerTxDurationMillis()
+                                - this.mLastWifiActivityInfo.getControllerTxDurationMillis();
+                long controllerScanDurationMillis =
+                        wifiActivityEnergyInfo.getControllerScanDurationMillis()
+                                - this.mLastWifiActivityInfo.getControllerScanDurationMillis();
+                long controllerIdleDurationMillis =
+                        wifiActivityEnergyInfo.getControllerIdleDurationMillis()
+                                - this.mLastWifiActivityInfo.getControllerIdleDurationMillis();
                 WifiPowerStatsLayout wifiPowerStatsLayout6 = this.mLayout;
                 long[] jArr2 = this.mDeviceStats;
                 jArr2[wifiPowerStatsLayout6.mDeviceRxTimePosition] = controllerRxDurationMillis;
                 jArr2[wifiPowerStatsLayout6.mDeviceTxTimePosition] = controllerTxDurationMillis;
                 jArr2[wifiPowerStatsLayout6.mDeviceScanTimePosition] = controllerScanDurationMillis;
                 jArr2[wifiPowerStatsLayout6.mDeviceIdleTimePosition] = controllerIdleDurationMillis;
-                this.mPowerStats.durationMs = controllerRxDurationMillis + controllerTxDurationMillis + controllerScanDurationMillis + controllerIdleDurationMillis;
+                this.mPowerStats.durationMs =
+                        controllerRxDurationMillis
+                                + controllerTxDurationMillis
+                                + controllerScanDurationMillis
+                                + controllerIdleDurationMillis;
                 this.mLastWifiActivityInfo = wifiActivityEnergyInfo;
             }
         } else {
             BatteryStatsImpl.AnonymousClass2 anonymousClass2 = this.mWifiStatsRetriever;
             synchronized (BatteryStatsImpl.this) {
                 BatteryStatsImpl batteryStatsImpl = BatteryStatsImpl.this;
-                totalTimeLocked = batteryStatsImpl.mGlobalWifiRunningTimer.getTotalTimeLocked(batteryStatsImpl.mClock.elapsedRealtime() * 1000, 0) / 1000;
+                totalTimeLocked =
+                        batteryStatsImpl.mGlobalWifiRunningTimer.getTotalTimeLocked(
+                                        batteryStatsImpl.mClock.elapsedRealtime() * 1000, 0)
+                                / 1000;
             }
-            this.mDeviceStats[this.mLayout.mDeviceActiveTimePosition] = Math.max(0L, totalTimeLocked - this.mLastWifiActiveDuration);
+            this.mDeviceStats[this.mLayout.mDeviceActiveTimePosition] =
+                    Math.max(0L, totalTimeLocked - this.mLastWifiActiveDuration);
             this.mLastWifiActiveDuration = totalTimeLocked;
             this.mPowerStats.durationMs = totalTimeLocked;
         }
@@ -193,7 +251,8 @@ public final class WifiPowerStatsCollector extends PowerStatsCollector {
             this.mLastNetworkStats = networkStats;
             ArrayList arrayList = (ArrayList) computeDelta;
             for (int size = arrayList.size() - 1; size >= 0; size--) {
-                BatteryStatsImpl.NetworkStatsDelta networkStatsDelta = (BatteryStatsImpl.NetworkStatsDelta) arrayList.get(size);
+                BatteryStatsImpl.NetworkStatsDelta networkStatsDelta =
+                        (BatteryStatsImpl.NetworkStatsDelta) arrayList.get(size);
                 long j = networkStatsDelta.mRxBytes;
                 long j2 = networkStatsDelta.mTxBytes;
                 long j3 = networkStatsDelta.mRxPackets;
@@ -227,24 +286,33 @@ public final class WifiPowerStatsCollector extends PowerStatsCollector {
         wifiScanTimes.basicScanTimeMs = 0L;
         wifiScanTimes.batchedScanTimeMs = 0L;
         BatteryStatsImpl.AnonymousClass2 anonymousClass22 = this.mWifiStatsRetriever;
-        WifiPowerStatsCollector$$ExternalSyntheticLambda1 wifiPowerStatsCollector$$ExternalSyntheticLambda1 = new WifiPowerStatsCollector$$ExternalSyntheticLambda1(this);
+        WifiPowerStatsCollector$$ExternalSyntheticLambda1
+                wifiPowerStatsCollector$$ExternalSyntheticLambda1 =
+                        new WifiPowerStatsCollector$$ExternalSyntheticLambda1(this);
         synchronized (BatteryStatsImpl.this) {
-            BatteryStatsImpl.m836$$Nest$mretrieveWifiScanTimesLocked(BatteryStatsImpl.this, wifiPowerStatsCollector$$ExternalSyntheticLambda1);
+            BatteryStatsImpl.m836$$Nest$mretrieveWifiScanTimesLocked(
+                    BatteryStatsImpl.this, wifiPowerStatsCollector$$ExternalSyntheticLambda1);
         }
         WifiPowerStatsLayout wifiPowerStatsLayout9 = this.mLayout;
         long[] jArr5 = this.mDeviceStats;
         WifiScanTimes wifiScanTimes2 = this.mScanTimes;
         jArr5[wifiPowerStatsLayout9.mDeviceBasicScanTimePosition] = wifiScanTimes2.basicScanTimeMs;
-        jArr5[wifiPowerStatsLayout9.mDeviceBatchedScanTimePosition] = wifiScanTimes2.batchedScanTimeMs;
+        jArr5[wifiPowerStatsLayout9.mDeviceBatchedScanTimePosition] =
+                wifiScanTimes2.batchedScanTimeMs;
         if (this.mEnergyConsumerIds.length != 0) {
             int asInt = this.mVoltageSupplier.getAsInt();
             if (asInt <= 0) {
-                Slog.wtf("WifiPowerStatsCollector", "Unexpected battery voltage (" + asInt + " mV) when querying energy consumers");
+                Slog.wtf(
+                        "WifiPowerStatsCollector",
+                        "Unexpected battery voltage ("
+                                + asInt
+                                + " mV) when querying energy consumers");
             } else {
                 int i5 = this.mLastVoltageMv;
                 int i6 = i5 != 0 ? (i5 + asInt) / 2 : asInt;
                 this.mLastVoltageMv = asInt;
-                long[] consumedEnergyUws = this.mConsumedEnergyRetriever.getConsumedEnergyUws(this.mEnergyConsumerIds);
+                long[] consumedEnergyUws =
+                        this.mConsumedEnergyRetriever.getConsumedEnergyUws(this.mEnergyConsumerIds);
                 if (consumedEnergyUws != null) {
                     for (int length = consumedEnergyUws.length - 1; length >= 0; length--) {
                         long j5 = this.mLastConsumedEnergyUws[length];
@@ -252,7 +320,8 @@ public final class WifiPowerStatsCollector extends PowerStatsCollector {
                         if (j6 < 0) {
                             j6 = 0;
                         }
-                        this.mLayout.setConsumedEnergy(this.mPowerStats.stats, length, PowerStatsCollector.uJtoUc(i6, j6));
+                        this.mLayout.setConsumedEnergy(
+                                this.mPowerStats.stats, length, PowerStatsCollector.uJtoUc(i6, j6));
                         this.mLastConsumedEnergyUws[length] = consumedEnergyUws[length];
                     }
                 }

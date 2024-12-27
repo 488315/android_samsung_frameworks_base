@@ -14,6 +14,5 @@ final class TwoColors {
     static final int NEUTRAL2_HUE_DELTA = 3;
     static final float NEUTRAL2_SAT = 0.15f;
 
-    TwoColors() {
-    }
+    TwoColors() {}
 }

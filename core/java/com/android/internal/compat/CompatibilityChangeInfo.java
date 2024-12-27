@@ -6,19 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class CompatibilityChangeInfo implements Parcelable {
-    public static final Parcelable.Creator<CompatibilityChangeInfo> CREATOR = new Parcelable.Creator<CompatibilityChangeInfo>() { // from class: com.android.internal.compat.CompatibilityChangeInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CompatibilityChangeInfo createFromParcel(Parcel in) {
-            return new CompatibilityChangeInfo(in);
-        }
+    public static final Parcelable.Creator<CompatibilityChangeInfo> CREATOR =
+            new Parcelable.Creator<
+                    CompatibilityChangeInfo>() { // from class:
+                                                 // com.android.internal.compat.CompatibilityChangeInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CompatibilityChangeInfo createFromParcel(Parcel in) {
+                    return new CompatibilityChangeInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CompatibilityChangeInfo[] newArray(int size) {
-            return new CompatibilityChangeInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CompatibilityChangeInfo[] newArray(int size) {
+                    return new CompatibilityChangeInfo[size];
+                }
+            };
     private final long mChangeId;
     private final String mDescription;
     private final boolean mDisabled;
@@ -55,7 +58,15 @@ public class CompatibilityChangeInfo implements Parcelable {
         return this.mOverridable;
     }
 
-    public CompatibilityChangeInfo(Long changeId, String name, int enableAfterTargetSdk, int enableSinceTargetSdk, boolean disabled, boolean loggingOnly, String description, boolean overridable) {
+    public CompatibilityChangeInfo(
+            Long changeId,
+            String name,
+            int enableAfterTargetSdk,
+            int enableSinceTargetSdk,
+            boolean disabled,
+            boolean loggingOnly,
+            String description,
+            boolean overridable) {
         this.mChangeId = changeId.longValue();
         this.mName = name;
         if (enableAfterTargetSdk > 0) {
@@ -135,7 +146,13 @@ public class CompatibilityChangeInfo implements Parcelable {
             return false;
         }
         CompatibilityChangeInfo that = (CompatibilityChangeInfo) o;
-        if (this.mChangeId == that.mChangeId && this.mName.equals(that.mName) && this.mEnableSinceTargetSdk == that.mEnableSinceTargetSdk && this.mDisabled == that.mDisabled && this.mLoggingOnly == that.mLoggingOnly && this.mDescription.equals(that.mDescription) && this.mOverridable == that.mOverridable) {
+        if (this.mChangeId == that.mChangeId
+                && this.mName.equals(that.mName)
+                && this.mEnableSinceTargetSdk == that.mEnableSinceTargetSdk
+                && this.mDisabled == that.mDisabled
+                && this.mLoggingOnly == that.mLoggingOnly
+                && this.mDescription.equals(that.mDescription)
+                && this.mOverridable == that.mOverridable) {
             return true;
         }
         return false;

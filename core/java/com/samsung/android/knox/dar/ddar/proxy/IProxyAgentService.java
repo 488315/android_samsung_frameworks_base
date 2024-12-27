@@ -2,6 +2,7 @@ package com.samsung.android.knox.dar.ddar.proxy;
 
 import android.os.Bundle;
 import android.util.Log;
+
 import com.samsung.android.knox.dar.ddar.securesession.SecureClient;
 
 /* loaded from: classes6.dex */
@@ -11,7 +12,8 @@ public abstract class IProxyAgentService {
 
     public abstract Bundle onMessage(int i, String str, Bundle bundle);
 
-    public String initializeSecureSession(int callingUid, String svcName, String secureClientId, String secureClientPubKey) {
+    public String initializeSecureSession(
+            int callingUid, String svcName, String secureClientId, String secureClientPubKey) {
         try {
             Log.d(TAG, "initializeSecureSession between: " + svcName + " --- " + secureClientId);
             if (this.mSecureClientForInAPI == null) {

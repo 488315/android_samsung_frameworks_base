@@ -8,10 +8,13 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
+
 import com.android.internal.textservice.ISpellCheckerSession;
 import com.android.internal.textservice.ISpellCheckerSessionListener;
 import com.android.internal.textservice.ITextServicesSessionListener;
+
 import dalvik.system.CloseGuard;
+
 import java.util.ArrayDeque;
 import java.util.Locale;
 import java.util.Queue;
@@ -38,7 +41,11 @@ public class SpellCheckerSession {
         void onGetSuggestions(SuggestionsInfo[] suggestionsInfoArr);
     }
 
-    public SpellCheckerSession(SpellCheckerInfo info, TextServicesManager tsm, SpellCheckerSessionListener listener, Executor executor) {
+    public SpellCheckerSession(
+            SpellCheckerInfo info,
+            TextServicesManager tsm,
+            SpellCheckerSessionListener listener,
+            Executor executor) {
         if (info == null || listener == null || tsm == null) {
             throw new NullPointerException();
         }
@@ -74,54 +81,66 @@ public class SpellCheckerSession {
         if (imm != null && imm.isInputMethodSuppressingSpellChecker()) {
             handleOnGetSentenceSuggestionsMultiple(new SentenceSuggestionsInfo[0]);
         } else {
-            this.mSpellCheckerSessionListenerImpl.getSentenceSuggestionsMultiple(textInfos, suggestionsLimit);
+            this.mSpellCheckerSessionListenerImpl.getSentenceSuggestionsMultiple(
+                    textInfos, suggestionsLimit);
         }
     }
 
     @Deprecated
     public void getSuggestions(TextInfo textInfo, int suggestionsLimit) {
-        getSuggestions(new TextInfo[]{textInfo}, suggestionsLimit, false);
+        getSuggestions(new TextInfo[] {textInfo}, suggestionsLimit, false);
     }
 
     @Deprecated
-    public void getSuggestions(TextInfo[] textInfos, int suggestionsLimit, boolean sequentialWords) {
+    public void getSuggestions(
+            TextInfo[] textInfos, int suggestionsLimit, boolean sequentialWords) {
         InputMethodManager imm = this.mTextServicesManager.getInputMethodManager();
         if (imm != null && imm.isInputMethodSuppressingSpellChecker()) {
             handleOnGetSuggestionsMultiple(new SuggestionsInfo[0]);
         } else {
-            this.mSpellCheckerSessionListenerImpl.getSuggestionsMultiple(textInfos, suggestionsLimit, sequentialWords);
+            this.mSpellCheckerSessionListenerImpl.getSuggestionsMultiple(
+                    textInfos, suggestionsLimit, sequentialWords);
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$handleOnGetSuggestionsMultiple$0(SuggestionsInfo[] suggestionsInfos) {
+    public /* synthetic */ void lambda$handleOnGetSuggestionsMultiple$0(
+            SuggestionsInfo[] suggestionsInfos) {
         this.mSpellCheckerSessionListener.onGetSuggestions(suggestionsInfos);
     }
 
     void handleOnGetSuggestionsMultiple(final SuggestionsInfo[] suggestionsInfos) {
-        this.mExecutor.execute(new Runnable() { // from class: android.view.textservice.SpellCheckerSession$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                SpellCheckerSession.this.lambda$handleOnGetSuggestionsMultiple$0(suggestionsInfos);
-            }
-        });
+        this.mExecutor.execute(
+                new Runnable() { // from class:
+                                 // android.view.textservice.SpellCheckerSession$$ExternalSyntheticLambda1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        SpellCheckerSession.this.lambda$handleOnGetSuggestionsMultiple$0(
+                                suggestionsInfos);
+                    }
+                });
     }
 
     void handleOnGetSentenceSuggestionsMultiple(final SentenceSuggestionsInfo[] suggestionsInfos) {
-        this.mExecutor.execute(new Runnable() { // from class: android.view.textservice.SpellCheckerSession$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                SpellCheckerSession.this.lambda$handleOnGetSentenceSuggestionsMultiple$1(suggestionsInfos);
-            }
-        });
+        this.mExecutor.execute(
+                new Runnable() { // from class:
+                                 // android.view.textservice.SpellCheckerSession$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        SpellCheckerSession.this.lambda$handleOnGetSentenceSuggestionsMultiple$1(
+                                suggestionsInfos);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$handleOnGetSentenceSuggestionsMultiple$1(SentenceSuggestionsInfo[] suggestionsInfos) {
+    public /* synthetic */ void lambda$handleOnGetSentenceSuggestionsMultiple$1(
+            SentenceSuggestionsInfo[] suggestionsInfos) {
         this.mSpellCheckerSessionListener.onGetSentenceSuggestions(suggestionsInfos);
     }
 
-    private static final class SpellCheckerSessionListenerImpl extends ISpellCheckerSessionListener.Stub {
+    private static final class SpellCheckerSessionListenerImpl
+            extends ISpellCheckerSessionListener.Stub {
         private static final int STATE_CLOSED_AFTER_CONNECTION = 2;
         private static final int STATE_CLOSED_BEFORE_CONNECTION = 3;
         private static final int STATE_CONNECTED = 1;
@@ -178,7 +197,8 @@ public class SpellCheckerSession {
             public final TextInfo[] mTextInfos;
             public final int mWhat;
 
-            public SpellCheckerParams(int what, TextInfo[] textInfos, int suggestionsLimit, boolean sequentialWords) {
+            public SpellCheckerParams(
+                    int what, TextInfo[] textInfos, int suggestionsLimit, boolean sequentialWords) {
                 this.mWhat = what;
                 this.mTextInfos = textInfos;
                 this.mSuggestionsLimit = suggestionsLimit;
@@ -187,7 +207,8 @@ public class SpellCheckerSession {
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public void processTask(ISpellCheckerSession session, SpellCheckerParams scp, boolean async) {
+        public void processTask(
+                ISpellCheckerSession session, SpellCheckerParams scp, boolean async) {
             if (async || this.mAsyncHandler == null) {
                 switch (scp.mWhat) {
                     case 1:
@@ -200,7 +221,8 @@ public class SpellCheckerSession {
                         }
                     case 2:
                         try {
-                            session.onGetSuggestionsMultiple(scp.mTextInfos, scp.mSuggestionsLimit, scp.mSequentialWords);
+                            session.onGetSuggestionsMultiple(
+                                    scp.mTextInfos, scp.mSuggestionsLimit, scp.mSequentialWords);
                             break;
                         } catch (RemoteException e2) {
                             Log.e(SpellCheckerSession.TAG, "Failed to get suggestions " + e2);
@@ -216,7 +238,8 @@ public class SpellCheckerSession {
                         }
                     case 4:
                         try {
-                            session.onGetSentenceSuggestionsMultiple(scp.mTextInfos, scp.mSuggestionsLimit);
+                            session.onGetSentenceSuggestionsMultiple(
+                                    scp.mTextInfos, scp.mSuggestionsLimit);
                             break;
                         } catch (RemoteException e4) {
                             Log.e(SpellCheckerSession.TAG, "Failed to get suggestions " + e4);
@@ -251,7 +274,10 @@ public class SpellCheckerSession {
                     this.mState = 2;
                     break;
                 default:
-                    Log.e(SpellCheckerSession.TAG, "processCloseLocked is called unexpectedly. mState=" + stateToString(this.mState));
+                    Log.e(
+                            SpellCheckerSession.TAG,
+                            "processCloseLocked is called unexpectedly. mState="
+                                    + stateToString(this.mState));
                     break;
             }
         }
@@ -261,20 +287,27 @@ public class SpellCheckerSession {
                 switch (this.mState) {
                     case 0:
                         if (session == null) {
-                            Log.e(SpellCheckerSession.TAG, "ignoring onServiceConnected due to session=null");
+                            Log.e(
+                                    SpellCheckerSession.TAG,
+                                    "ignoring onServiceConnected due to session=null");
                             return;
                         }
                         this.mISpellCheckerSession = session;
                         if ((session.asBinder() instanceof Binder) && this.mThread == null) {
                             this.mThread = new HandlerThread("SpellCheckerSession", 10);
                             this.mThread.start();
-                            this.mAsyncHandler = new Handler(this.mThread.getLooper()) { // from class: android.view.textservice.SpellCheckerSession.SpellCheckerSessionListenerImpl.1
-                                @Override // android.os.Handler
-                                public void handleMessage(Message msg) {
-                                    SpellCheckerParams scp = (SpellCheckerParams) msg.obj;
-                                    SpellCheckerSessionListenerImpl.this.processTask(scp.mSession, scp, true);
-                                }
-                            };
+                            this.mAsyncHandler =
+                                    new Handler(
+                                            this.mThread
+                                                    .getLooper()) { // from class:
+                                                                    // android.view.textservice.SpellCheckerSession.SpellCheckerSessionListenerImpl.1
+                                        @Override // android.os.Handler
+                                        public void handleMessage(Message msg) {
+                                            SpellCheckerParams scp = (SpellCheckerParams) msg.obj;
+                                            SpellCheckerSessionListenerImpl.this.processTask(
+                                                    scp.mSession, scp, true);
+                                        }
+                                    };
                         }
                         this.mState = 1;
                         while (!this.mPendingTasks.isEmpty()) {
@@ -284,7 +317,10 @@ public class SpellCheckerSession {
                     case 3:
                         return;
                     default:
-                        Log.e(SpellCheckerSession.TAG, "ignoring onServiceConnected due to unexpected mState=" + stateToString(this.mState));
+                        Log.e(
+                                SpellCheckerSession.TAG,
+                                "ignoring onServiceConnected due to unexpected mState="
+                                        + stateToString(this.mState));
                         return;
                 }
             }
@@ -294,8 +330,10 @@ public class SpellCheckerSession {
             processOrEnqueueTask(new SpellCheckerParams(1, null, 0, false));
         }
 
-        public void getSuggestionsMultiple(TextInfo[] textInfos, int suggestionsLimit, boolean sequentialWords) {
-            processOrEnqueueTask(new SpellCheckerParams(2, textInfos, suggestionsLimit, sequentialWords));
+        public void getSuggestionsMultiple(
+                TextInfo[] textInfos, int suggestionsLimit, boolean sequentialWords) {
+            processOrEnqueueTask(
+                    new SpellCheckerParams(2, textInfos, suggestionsLimit, sequentialWords));
         }
 
         public void getSentenceSuggestionsMultiple(TextInfo[] textInfos, int suggestionsLimit) {
@@ -323,7 +361,12 @@ public class SpellCheckerSession {
                     return;
                 }
                 if (this.mState != 0 && this.mState != 1) {
-                    Log.e(SpellCheckerSession.TAG, "ignoring processOrEnqueueTask due to unexpected mState=" + stateToString(this.mState) + " scp.mWhat=" + taskToString(scp.mWhat));
+                    Log.e(
+                            SpellCheckerSession.TAG,
+                            "ignoring processOrEnqueueTask due to unexpected mState="
+                                    + stateToString(this.mState)
+                                    + " scp.mWhat="
+                                    + taskToString(scp.mWhat));
                     return;
                 }
                 if (this.mState == 0) {
@@ -382,7 +425,11 @@ public class SpellCheckerSession {
         private final boolean mShouldReferToSpellCheckerLanguageSettings;
         private final int mSupportedAttributes;
 
-        private SpellCheckerSessionParams(Locale locale, boolean referToSpellCheckerLanguageSettings, int supportedAttributes, Bundle extras) {
+        private SpellCheckerSessionParams(
+                Locale locale,
+                boolean referToSpellCheckerLanguageSettings,
+                int supportedAttributes,
+                Bundle extras) {
             this.mLocale = locale;
             this.mShouldReferToSpellCheckerLanguageSettings = referToSpellCheckerLanguageSettings;
             this.mSupportedAttributes = supportedAttributes;
@@ -413,9 +460,15 @@ public class SpellCheckerSession {
 
             public SpellCheckerSessionParams build() {
                 if (this.mLocale == null && !this.mShouldReferToSpellCheckerLanguageSettings) {
-                    throw new IllegalArgumentException("mLocale should not be null if  mShouldReferToSpellCheckerLanguageSettings is false.");
+                    throw new IllegalArgumentException(
+                            "mLocale should not be null if "
+                                + " mShouldReferToSpellCheckerLanguageSettings is false.");
                 }
-                return new SpellCheckerSessionParams(this.mLocale, this.mShouldReferToSpellCheckerLanguageSettings, this.mSupportedAttributes, this.mExtras);
+                return new SpellCheckerSessionParams(
+                        this.mLocale,
+                        this.mShouldReferToSpellCheckerLanguageSettings,
+                        this.mSupportedAttributes,
+                        this.mExtras);
             }
 
             public Builder setLocale(Locale locale) {
@@ -423,8 +476,10 @@ public class SpellCheckerSession {
                 return this;
             }
 
-            public Builder setShouldReferToSpellCheckerLanguageSettings(boolean shouldReferToSpellCheckerLanguageSettings) {
-                this.mShouldReferToSpellCheckerLanguageSettings = shouldReferToSpellCheckerLanguageSettings;
+            public Builder setShouldReferToSpellCheckerLanguageSettings(
+                    boolean shouldReferToSpellCheckerLanguageSettings) {
+                this.mShouldReferToSpellCheckerLanguageSettings =
+                        shouldReferToSpellCheckerLanguageSettings;
                 return this;
             }
 

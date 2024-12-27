@@ -8,19 +8,21 @@ import android.os.Parcelable;
 @SystemApi
 /* loaded from: classes4.dex */
 public final class UriPathPair implements Parcelable {
-    public static final Parcelable.Creator<UriPathPair> CREATOR = new Parcelable.Creator<UriPathPair>() { // from class: android.telephony.mbms.UriPathPair.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UriPathPair createFromParcel(Parcel in) {
-            return new UriPathPair(in);
-        }
+    public static final Parcelable.Creator<UriPathPair> CREATOR =
+            new Parcelable.Creator<
+                    UriPathPair>() { // from class: android.telephony.mbms.UriPathPair.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UriPathPair createFromParcel(Parcel in) {
+                    return new UriPathPair(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UriPathPair[] newArray(int size) {
-            return new UriPathPair[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UriPathPair[] newArray(int size) {
+                    return new UriPathPair[size];
+                }
+            };
     private final Uri mContentUri;
     private final Uri mFilePathUri;
 

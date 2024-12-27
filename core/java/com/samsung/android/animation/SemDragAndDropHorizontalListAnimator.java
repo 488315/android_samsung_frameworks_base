@@ -15,9 +15,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.SemHorizontalListView;
+
 import com.android.internal.R;
-import com.samsung.android.animation.SemAbsDragAndDropAnimator;
-import com.samsung.android.animation.SemDragAndDropAnimationCore;
 
 /* loaded from: classes5.dex */
 public class SemDragAndDropHorizontalListAnimator extends SemAbsDragAndDropAnimator {
@@ -40,41 +39,59 @@ public class SemDragAndDropHorizontalListAnimator extends SemAbsDragAndDropAnima
     }
 
     private void initListeners() {
-        this.mItemAnimationListener = new SemDragAndDropAnimationCore.ItemAnimationListener() { // from class: com.samsung.android.animation.SemDragAndDropHorizontalListAnimator.1
-            @Override // com.samsung.android.animation.SemDragAndDropAnimationCore.ItemAnimationListener
-            public void onItemAnimatorEnd() {
-                if (SemDragAndDropHorizontalListAnimator.this.mListItemSelectionAnimating) {
-                    SemDragAndDropHorizontalListAnimator.this.mListItemSelectionAnimating = false;
-                    return;
-                }
-                if (SemDragAndDropHorizontalListAnimator.this.mDropDonePending) {
-                    SemDragAndDropHorizontalListAnimator.this.mDropDonePending = false;
-                    if (SemDragAndDropHorizontalListAnimator.this.mDndController != null) {
-                        SemDragAndDropHorizontalListAnimator.this.mDndController.dropDone(SemDragAndDropHorizontalListAnimator.this.mFirstDragPos, SemDragAndDropHorizontalListAnimator.this.mDragPos);
-                        SemDragAndDropHorizontalListAnimator.this.speakDragReleaseForAccessibility(SemDragAndDropHorizontalListAnimator.this.mDragPos);
+        this.mItemAnimationListener =
+                new SemDragAndDropAnimationCore
+                        .ItemAnimationListener() { // from class:
+                                                   // com.samsung.android.animation.SemDragAndDropHorizontalListAnimator.1
+                    @Override // com.samsung.android.animation.SemDragAndDropAnimationCore.ItemAnimationListener
+                    public void onItemAnimatorEnd() {
+                        if (SemDragAndDropHorizontalListAnimator.this.mListItemSelectionAnimating) {
+                            SemDragAndDropHorizontalListAnimator.this.mListItemSelectionAnimating =
+                                    false;
+                            return;
+                        }
+                        if (SemDragAndDropHorizontalListAnimator.this.mDropDonePending) {
+                            SemDragAndDropHorizontalListAnimator.this.mDropDonePending = false;
+                            if (SemDragAndDropHorizontalListAnimator.this.mDndController != null) {
+                                SemDragAndDropHorizontalListAnimator.this.mDndController.dropDone(
+                                        SemDragAndDropHorizontalListAnimator.this.mFirstDragPos,
+                                        SemDragAndDropHorizontalListAnimator.this.mDragPos);
+                                SemDragAndDropHorizontalListAnimator.this
+                                        .speakDragReleaseForAccessibility(
+                                                SemDragAndDropHorizontalListAnimator.this.mDragPos);
+                            }
+                            SemDragAndDropHorizontalListAnimator.this.mItemAnimator.removeAll();
+                            SemDragAndDropHorizontalListAnimator.this.resetDndPositionValues();
+                            if (SemDragAndDropHorizontalListAnimator.this.mDndListener != null) {
+                                Log.d(
+                                        SemDragAndDropHorizontalListAnimator.TAG,
+                                        "dndListener.onDragAndDropEnd() from onItemAnimatorEnd()");
+                                SemDragAndDropHorizontalListAnimator.this.mDndListener
+                                        .onDragAndDropEnd();
+                            }
+                            SemDragAndDropHorizontalListAnimator.this.mListView.setEnabled(true);
+                        }
                     }
-                    SemDragAndDropHorizontalListAnimator.this.mItemAnimator.removeAll();
-                    SemDragAndDropHorizontalListAnimator.this.resetDndPositionValues();
-                    if (SemDragAndDropHorizontalListAnimator.this.mDndListener != null) {
-                        Log.d(SemDragAndDropHorizontalListAnimator.TAG, "dndListener.onDragAndDropEnd() from onItemAnimatorEnd()");
-                        SemDragAndDropHorizontalListAnimator.this.mDndListener.onDragAndDropEnd();
+                };
+        this.mOnItemLongClickListener =
+                new AdapterView
+                        .OnItemLongClickListener() { // from class:
+                                                     // com.samsung.android.animation.SemDragAndDropHorizontalListAnimator.2
+                    @Override // android.widget.AdapterView.OnItemLongClickListener
+                    public boolean onItemLongClick(
+                            AdapterView<?> parent, View view, int position, long id) {
+                        return SemDragAndDropHorizontalListAnimator.this.initDragIfNecessary(
+                                position);
                     }
-                    SemDragAndDropHorizontalListAnimator.this.mListView.setEnabled(true);
-                }
-            }
-        };
-        this.mOnItemLongClickListener = new AdapterView.OnItemLongClickListener() { // from class: com.samsung.android.animation.SemDragAndDropHorizontalListAnimator.2
-            @Override // android.widget.AdapterView.OnItemLongClickListener
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                return SemDragAndDropHorizontalListAnimator.this.initDragIfNecessary(position);
-            }
-        };
+                };
     }
 
-    public void setDragAndDropController(SemAbsDragAndDropAnimator.DragAndDropController dndController) {
+    public void setDragAndDropController(
+            SemAbsDragAndDropAnimator.DragAndDropController dndController) {
         if (dndController == null) {
             this.mDndController = null;
-        } else if (this.mListView.getHeaderViewsCount() == 0 && this.mListView.getFooterViewsCount() == 0) {
+        } else if (this.mListView.getHeaderViewsCount() == 0
+                && this.mListView.getFooterViewsCount() == 0) {
             this.mDndController = dndController;
         } else {
             this.mDndController = new HeaderFooterDndController(dndController);
@@ -107,7 +124,9 @@ public class SemDragAndDropHorizontalListAnimator extends SemAbsDragAndDropAnima
         if (this.mTempEvent == null) {
             return false;
         }
-        int position = this.mListView.pointToPosition((int) this.mTempEvent.getX(), (int) this.mTempEvent.getY());
+        int position =
+                this.mListView.pointToPosition(
+                        (int) this.mTempEvent.getX(), (int) this.mTempEvent.getY());
         return initDragIfNecessary(position);
     }
 
@@ -214,7 +233,9 @@ public class SemDragAndDropHorizontalListAnimator extends SemAbsDragAndDropAnima
         Lb9:
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.animation.SemDragAndDropHorizontalListAnimator.onInterceptTouchEvent(android.view.MotionEvent):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.animation.SemDragAndDropHorizontalListAnimator.onInterceptTouchEvent(android.view.MotionEvent):boolean");
     }
 
     public AdapterView.OnItemLongClickListener getDragAndDropOnItemLongClickListener() {
@@ -224,7 +245,9 @@ public class SemDragAndDropHorizontalListAnimator extends SemAbsDragAndDropAnima
     /* JADX INFO: Access modifiers changed from: private */
     public boolean initDragIfNecessary(int position) {
         if (isDraggable() && activatedByLongPress() && this.mListView.getCount() > 1) {
-            if (position >= 0 && position < this.mListView.getCount() && checkStartDnd(this.mDndTouchX, this.mDndTouchY, position)) {
+            if (position >= 0
+                    && position < this.mListView.getCount()
+                    && checkStartDnd(this.mDndTouchX, this.mDndTouchY, position)) {
                 return initDrag(position);
             }
             resetDndState();
@@ -234,7 +257,8 @@ public class SemDragAndDropHorizontalListAnimator extends SemAbsDragAndDropAnima
     }
 
     private boolean initDrag(int itemPosition) {
-        this.mDragView = this.mListView.getChildAt(itemPosition - this.mListView.getFirstVisiblePosition());
+        this.mDragView =
+                this.mListView.getChildAt(itemPosition - this.mListView.getFirstVisiblePosition());
         if (this.mDragView == null) {
             Log.d(TAG, "initDrag : #4 return false, mDragView is null.");
             return false;
@@ -251,10 +275,19 @@ public class SemDragAndDropHorizontalListAnimator extends SemAbsDragAndDropAnima
             }
             TypedValue typedValue = new TypedValue();
             int strokecolor = 29406;
-            int strokeWidth = Math.round(this.mListView.getContext().getResources().getDisplayMetrics().density);
-            boolean isValid = this.mDragView.getContext().getTheme().resolveAttribute(16843828, typedValue, true);
+            int strokeWidth =
+                    Math.round(
+                            this.mListView.getContext().getResources().getDisplayMetrics().density);
+            boolean isValid =
+                    this.mDragView
+                            .getContext()
+                            .getTheme()
+                            .resolveAttribute(16843828, typedValue, true);
             if (!isValid) {
-                this.mDragView.getContext().getTheme().resolveAttribute(R.attr.parentIsDeviceDefaultDark, typedValue, true);
+                this.mDragView
+                        .getContext()
+                        .getTheme()
+                        .resolveAttribute(R.attr.parentIsDeviceDefaultDark, typedValue, true);
                 boolean isDeviceDefaultLight = typedValue.data == 0;
                 if (!isDeviceDefaultLight) {
                     strokecolor = 4100607;
@@ -262,13 +295,19 @@ public class SemDragAndDropHorizontalListAnimator extends SemAbsDragAndDropAnima
             } else {
                 strokecolor = typedValue.data;
             }
-            this.mDragViewBitmap = SemAnimatorUtils.getBitmapDrawableFromView(this.mDragView).getBitmap();
+            this.mDragViewBitmap =
+                    SemAnimatorUtils.getBitmapDrawableFromView(this.mDragView).getBitmap();
             Canvas canvas = new Canvas(this.mDragViewBitmap);
             Paint paint = new Paint();
             paint.setStyle(Paint.Style.STROKE);
             paint.setColor(strokecolor);
             paint.setStrokeWidth(strokeWidth);
-            Rect r = new Rect(0, 0, this.mDragViewBitmap.getWidth() - 1, this.mDragViewBitmap.getHeight() - 1);
+            Rect r =
+                    new Rect(
+                            0,
+                            0,
+                            this.mDragViewBitmap.getWidth() - 1,
+                            this.mDragViewBitmap.getHeight() - 1);
             canvas.drawRect(r, paint);
         }
         setDragViewAlpha(this.mDragViewBitmapAlpha);
@@ -290,7 +329,8 @@ public class SemDragAndDropHorizontalListAnimator extends SemAbsDragAndDropAnima
         Rect hitRect = new Rect();
         child.getHitRect(hitRect);
         this.mListItemSelectionAnimating = true;
-        this.mScaleUpAndDownAnimation = new SemDragAndDropAnimationCore.ItemSelectHighlightingAnimation(hitRect);
+        this.mScaleUpAndDownAnimation =
+                new SemDragAndDropAnimationCore.ItemSelectHighlightingAnimation(hitRect);
         this.mScaleUpAndDownAnimation.setStartAndDuration(0);
         this.mItemAnimator.putItemAnimation(this.mFirstDragPos, this.mScaleUpAndDownAnimation);
         this.mItemAnimator.start();
@@ -298,9 +338,9 @@ public class SemDragAndDropHorizontalListAnimator extends SemAbsDragAndDropAnima
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:14:0x0038, code lost:
-    
-        return true;
-     */
+
+       return true;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -355,7 +395,9 @@ public class SemDragAndDropHorizontalListAnimator extends SemAbsDragAndDropAnima
         L39:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.animation.SemDragAndDropHorizontalListAnimator.onTouchEvent(android.view.MotionEvent):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.animation.SemDragAndDropHorizontalListAnimator.onTouchEvent(android.view.MotionEvent):boolean");
     }
 
     private void onTouchMove(MotionEvent event) {
@@ -366,8 +408,12 @@ public class SemDragAndDropHorizontalListAnimator extends SemAbsDragAndDropAnima
         }
         this.mDndTouchX = (int) event.getX(pointerIndex);
         this.mDndTouchY = (int) event.getY(pointerIndex);
-        if (this.mDndTouchX > (this.mListView.getRight() - this.mListView.getPaddingRight()) - this.mListView.getLeft()) {
-            this.mDndTouchX = (this.mListView.getRight() - this.mListView.getPaddingRight()) - this.mListView.getLeft();
+        if (this.mDndTouchX
+                > (this.mListView.getRight() - this.mListView.getPaddingRight())
+                        - this.mListView.getLeft()) {
+            this.mDndTouchX =
+                    (this.mListView.getRight() - this.mListView.getPaddingRight())
+                            - this.mListView.getLeft();
         } else if (this.mDndTouchX < this.mListView.getPaddingLeft()) {
             this.mDndTouchX = this.mListView.getPaddingLeft();
         }
@@ -384,7 +430,9 @@ public class SemDragAndDropHorizontalListAnimator extends SemAbsDragAndDropAnima
         if (temp != null) {
             left += temp.getWidth() / 2;
         }
-        int right = (this.mListView.getRight() - this.mListView.getPaddingRight()) - this.mListView.getLeft();
+        int right =
+                (this.mListView.getRight() - this.mListView.getPaddingRight())
+                        - this.mListView.getLeft();
         View temp2 = this.mListView.getChildAt(this.mListView.getChildCount() - 1);
         if (temp2 != null) {
             right -= temp2.getWidth() / 2;
@@ -413,7 +461,8 @@ public class SemDragAndDropHorizontalListAnimator extends SemAbsDragAndDropAnima
     @Override // com.samsung.android.animation.SemAbsDragAndDropAnimator
     void reorderIfNeeded() {
         int prevDestPosition = this.mDragPos;
-        int adjustedX = (this.mDndTouchX - this.mDndTouchOffsetX) + (this.mDragViewRect.width() / 2);
+        int adjustedX =
+                (this.mDndTouchX - this.mDndTouchOffsetX) + (this.mDragViewRect.width() / 2);
         int dragPos = findDragItemPosition(adjustedX);
         if (dragPos != -1 && this.mDndController.canDrop(this.mFirstDragPos, dragPos)) {
             this.mDragPos = dragPos;
@@ -450,37 +499,56 @@ public class SemDragAndDropHorizontalListAnimator extends SemAbsDragAndDropAnima
             if (dropViewVisible) {
                 distance = dropView.getLeft() - draggedBitmapLeft;
             } else if (this.mDragPos < firstVisiblePosition) {
-                distance = -((draggedBitmapLeft - this.mListView.getChildAt(0).getLeft()) + this.mDragViewRect.width());
+                distance =
+                        -((draggedBitmapLeft - this.mListView.getChildAt(0).getLeft())
+                                + this.mDragViewRect.width());
             } else if (this.mListView.getChildCount() > 0) {
-                distance = this.mListView.getChildAt(this.mListView.getChildCount() - 1).getRight() - draggedBitmapLeft;
+                distance =
+                        this.mListView.getChildAt(this.mListView.getChildCount() - 1).getRight()
+                                - draggedBitmapLeft;
             } else {
                 Log.e(TAG, "mListView.getChildCount() = " + this.mListView.getChildCount());
                 return;
             }
             Log.v(TAG, "dndListener.onTouchUp() dragView == null, distance = " + distance);
             ValueAnimator va = ValueAnimator.ofInt(0, distance);
-            va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.samsung.android.animation.SemDragAndDropHorizontalListAnimator.3
-                @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-                public void onAnimationUpdate(ValueAnimator animator) {
-                    SemDragAndDropHorizontalListAnimator.this.mDragViewBitmapTranslateX = ((Integer) animator.getAnimatedValue()).intValue();
-                    SemDragAndDropHorizontalListAnimator.this.mListView.invalidate();
-                }
-            });
-            va.addListener(new AnimatorListenerAdapter() { // from class: com.samsung.android.animation.SemDragAndDropHorizontalListAnimator.4
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationEnd(Animator anim) {
-                    if (SemDragAndDropHorizontalListAnimator.this.mFirstDragPos != SemDragAndDropHorizontalListAnimator.this.mDragPos) {
-                        SemDragAndDropHorizontalListAnimator.this.mDndController.dropDone(SemDragAndDropHorizontalListAnimator.this.mFirstDragPos, SemDragAndDropHorizontalListAnimator.this.mDragPos);
-                        SemDragAndDropHorizontalListAnimator.this.speakDragReleaseForAccessibility(SemDragAndDropHorizontalListAnimator.this.mDragPos);
-                    }
-                    SemDragAndDropHorizontalListAnimator.this.mItemAnimator.removeAll();
-                    SemDragAndDropHorizontalListAnimator.this.resetDndState();
-                    if (SemDragAndDropHorizontalListAnimator.this.mDndListener != null) {
-                        Log.d(SemDragAndDropHorizontalListAnimator.TAG, "dndListener.onDragAndDropEnd() from onAnimationEnd()");
-                        SemDragAndDropHorizontalListAnimator.this.mDndListener.onDragAndDropEnd();
-                    }
-                }
-            });
+            va.addUpdateListener(
+                    new ValueAnimator
+                            .AnimatorUpdateListener() { // from class:
+                                                        // com.samsung.android.animation.SemDragAndDropHorizontalListAnimator.3
+                        @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                        public void onAnimationUpdate(ValueAnimator animator) {
+                            SemDragAndDropHorizontalListAnimator.this.mDragViewBitmapTranslateX =
+                                    ((Integer) animator.getAnimatedValue()).intValue();
+                            SemDragAndDropHorizontalListAnimator.this.mListView.invalidate();
+                        }
+                    });
+            va.addListener(
+                    new AnimatorListenerAdapter() { // from class:
+                                                    // com.samsung.android.animation.SemDragAndDropHorizontalListAnimator.4
+                        @Override // android.animation.AnimatorListenerAdapter,
+                                  // android.animation.Animator.AnimatorListener
+                        public void onAnimationEnd(Animator anim) {
+                            if (SemDragAndDropHorizontalListAnimator.this.mFirstDragPos
+                                    != SemDragAndDropHorizontalListAnimator.this.mDragPos) {
+                                SemDragAndDropHorizontalListAnimator.this.mDndController.dropDone(
+                                        SemDragAndDropHorizontalListAnimator.this.mFirstDragPos,
+                                        SemDragAndDropHorizontalListAnimator.this.mDragPos);
+                                SemDragAndDropHorizontalListAnimator.this
+                                        .speakDragReleaseForAccessibility(
+                                                SemDragAndDropHorizontalListAnimator.this.mDragPos);
+                            }
+                            SemDragAndDropHorizontalListAnimator.this.mItemAnimator.removeAll();
+                            SemDragAndDropHorizontalListAnimator.this.resetDndState();
+                            if (SemDragAndDropHorizontalListAnimator.this.mDndListener != null) {
+                                Log.d(
+                                        SemDragAndDropHorizontalListAnimator.TAG,
+                                        "dndListener.onDragAndDropEnd() from onAnimationEnd()");
+                                SemDragAndDropHorizontalListAnimator.this.mDndListener
+                                        .onDragAndDropEnd();
+                            }
+                        }
+                    });
             va.setDuration(210L);
             va.setInterpolator(SINE_IN_OUT_70);
             va.start();
@@ -493,7 +561,8 @@ public class SemDragAndDropHorizontalListAnimator extends SemAbsDragAndDropAnima
         } else {
             int offsetX2 = dropView.getLeft() - dragView.getLeft();
             int deltaX = dropView.getLeft() - (this.mDndTouchX - this.mDndTouchOffsetX);
-            SemDragAndDropAnimationCore.TranslateItemAnimation t = new SemDragAndDropAnimationCore.TranslateItemAnimation();
+            SemDragAndDropAnimationCore.TranslateItemAnimation t =
+                    new SemDragAndDropAnimationCore.TranslateItemAnimation();
             t.translate(offsetX2, deltaX, 0, 0);
             t.setStartAndDuration(0.7f);
             this.mItemAnimator.putItemAnimation(this.mFirstDragPos, t);
@@ -545,9 +614,12 @@ public class SemDragAndDropHorizontalListAnimator extends SemAbsDragAndDropAnima
                 if (i != this.mFirstDragPos - firstVisiblePosition) {
                     View v = this.mListView.getChildAt(i);
                     v.getHitRect(this.mTempRect);
-                    SemDragAndDropAnimationCore.ItemAnimation ia = this.mItemAnimator.getItemAnimation(i + firstVisiblePosition);
+                    SemDragAndDropAnimationCore.ItemAnimation ia =
+                            this.mItemAnimator.getItemAnimation(i + firstVisiblePosition);
                     if (ia instanceof SemDragAndDropAnimationCore.TranslateItemAnimation) {
-                        int xPosAdjust = ((SemDragAndDropAnimationCore.TranslateItemAnimation) ia).getDestOffsetX();
+                        int xPosAdjust =
+                                ((SemDragAndDropAnimationCore.TranslateItemAnimation) ia)
+                                        .getDestOffsetX();
                         if (this.mTempRect.contains(x - xPosAdjust, this.mTempRect.centerY())) {
                             return i + firstVisiblePosition;
                         }
@@ -562,11 +634,13 @@ public class SemDragAndDropHorizontalListAnimator extends SemAbsDragAndDropAnima
     }
 
     private void addReturningTranslation(int position) {
-        SemDragAndDropAnimationCore.ItemAnimation ia = this.mItemAnimator.getItemAnimation(position);
+        SemDragAndDropAnimationCore.ItemAnimation ia =
+                this.mItemAnimator.getItemAnimation(position);
         if (!(ia instanceof SemDragAndDropAnimationCore.TranslateItemAnimation)) {
             return;
         }
-        SemDragAndDropAnimationCore.TranslateItemAnimation t = (SemDragAndDropAnimationCore.TranslateItemAnimation) ia;
+        SemDragAndDropAnimationCore.TranslateItemAnimation t =
+                (SemDragAndDropAnimationCore.TranslateItemAnimation) ia;
         int xCurrentOffset = (int) t.getCurrentTranslateX();
         t.translate(0, -xCurrentOffset, 0, 0);
         t.setStartAndDuration(t.getProgress());
@@ -654,7 +728,9 @@ public class SemDragAndDropHorizontalListAnimator extends SemAbsDragAndDropAnima
                     } else {
                         addNewTranslation(i2, totalWidth2);
                     }
-                } else if (this.mNonMovableItems.get(i2, -1) == -1 && (fixedView = this.mListView.getChildAt(i2 - firstVisiblePosition)) != null) {
+                } else if (this.mNonMovableItems.get(i2, -1) == -1
+                        && (fixedView = this.mListView.getChildAt(i2 - firstVisiblePosition))
+                                != null) {
                     this.mNonMovableItems.put(i2, fixedView.getWidth() + dividerWidth);
                 }
             } else {
@@ -680,15 +756,22 @@ public class SemDragAndDropHorizontalListAnimator extends SemAbsDragAndDropAnima
             childRect.bottom += this.mDragGrabHandlePadding.bottom;
             childRect.top -= 10;
             childRect.bottom -= 10;
-            Gravity.apply(this.mDragGrabHandlePosGravity, drawableWidth, drawableHeight, childRect, outGrabHandleRect);
+            Gravity.apply(
+                    this.mDragGrabHandlePosGravity,
+                    drawableWidth,
+                    drawableHeight,
+                    childRect,
+                    outGrabHandleRect);
         }
     }
 
-    private void drawDragHandle(Canvas canvas, Rect childRect, boolean isDraggedItem, boolean isAllowDragItem) {
+    private void drawDragHandle(
+            Canvas canvas, Rect childRect, boolean isDraggedItem, boolean isAllowDragItem) {
         if (this.mDragGrabHandleDrawable != null && isAllowDragItem) {
             getDragGrabHandleHitRect(childRect, this.mTempRect);
             this.mDragGrabHandleDrawable.setBounds(this.mTempRect);
-            this.mDragGrabHandleDrawable.setState(isDraggedItem ? PRESSED_STATE_SET : EMPTY_STATE_SET);
+            this.mDragGrabHandleDrawable.setState(
+                    isDraggedItem ? PRESSED_STATE_SET : EMPTY_STATE_SET);
             this.mDragGrabHandleDrawable.setAlpha(this.mDragHandleAlpha);
             this.mDragGrabHandleDrawable.draw(canvas);
         }
@@ -697,7 +780,10 @@ public class SemDragAndDropHorizontalListAnimator extends SemAbsDragAndDropAnima
     public boolean preDrawChild(Canvas canvas, View child, long drawingTime) {
         int index = this.mListView.indexOfChild(child);
         int pos = this.mListView.getFirstVisiblePosition() + index;
-        if (isDraggable() && pos == this.mFirstDragPos && !this.mDropDonePending && !this.mListItemSelectionAnimating) {
+        if (isDraggable()
+                && pos == this.mFirstDragPos
+                && !this.mDropDonePending
+                && !this.mListItemSelectionAnimating) {
             return false;
         }
         SemDragAndDropAnimationCore.ItemAnimation ia = this.mItemAnimator.getItemAnimation(pos);
@@ -730,7 +816,8 @@ public class SemDragAndDropHorizontalListAnimator extends SemAbsDragAndDropAnima
     }
 
     private boolean isHeaderOrFooterViewPos(int pos) {
-        if (pos < this.mListView.getHeaderViewsCount() || pos >= this.mListView.getCount() - this.mListView.getFooterViewsCount()) {
+        if (pos < this.mListView.getHeaderViewsCount()
+                || pos >= this.mListView.getCount() - this.mListView.getFooterViewsCount()) {
             return true;
         }
         return false;
@@ -743,7 +830,11 @@ public class SemDragAndDropHorizontalListAnimator extends SemAbsDragAndDropAnima
             if (this.mListItemSelectionAnimating || this.mDragViewBitmap.isRecycled()) {
                 return;
             }
-            canvas.drawBitmap(this.mDragViewBitmap, this.mDragViewBitmapTranslateX + draggedItemX, draggedItemY, this.mDragViewBitmapPaint);
+            canvas.drawBitmap(
+                    this.mDragViewBitmap,
+                    this.mDragViewBitmapTranslateX + draggedItemX,
+                    draggedItemY,
+                    this.mDragViewBitmapPaint);
             this.mTempRect.top = -this.mListView.getPaddingTop();
             this.mTempRect.left = this.mDragViewBitmapTranslateX + draggedItemX;
             this.mTempRect.right = this.mTempRect.left + this.mDragViewRect.width();
@@ -752,43 +843,96 @@ public class SemDragAndDropHorizontalListAnimator extends SemAbsDragAndDropAnima
         }
     }
 
-    private class HeaderFooterDndController implements SemAbsDragAndDropAnimator.DragAndDropController {
+    private class HeaderFooterDndController
+            implements SemAbsDragAndDropAnimator.DragAndDropController {
         private final SemAbsDragAndDropAnimator.DragAndDropController mWrappedController;
 
-        HeaderFooterDndController(SemAbsDragAndDropAnimator.DragAndDropController wrappedController) {
+        HeaderFooterDndController(
+                SemAbsDragAndDropAnimator.DragAndDropController wrappedController) {
             this.mWrappedController = wrappedController;
         }
 
         @Override // com.samsung.android.animation.SemAbsDragAndDropAnimator.DragAndDropController
         public boolean canDrag(int startPos) {
-            if (this.mWrappedController == null || startPos < SemDragAndDropHorizontalListAnimator.this.mListView.getHeaderViewsCount() || startPos >= SemDragAndDropHorizontalListAnimator.this.mListView.getCount() - SemDragAndDropHorizontalListAnimator.this.mListView.getFooterViewsCount()) {
+            if (this.mWrappedController == null
+                    || startPos
+                            < SemDragAndDropHorizontalListAnimator.this.mListView
+                                    .getHeaderViewsCount()
+                    || startPos
+                            >= SemDragAndDropHorizontalListAnimator.this.mListView.getCount()
+                                    - SemDragAndDropHorizontalListAnimator.this.mListView
+                                            .getFooterViewsCount()) {
                 return false;
             }
-            return this.mWrappedController.canDrag(startPos - SemDragAndDropHorizontalListAnimator.this.mListView.getHeaderViewsCount());
+            return this.mWrappedController.canDrag(
+                    startPos
+                            - SemDragAndDropHorizontalListAnimator.this.mListView
+                                    .getHeaderViewsCount());
         }
 
         @Override // com.samsung.android.animation.SemAbsDragAndDropAnimator.DragAndDropController
         public boolean canDrop(int startPos, int destPos) {
-            if (this.mWrappedController == null || destPos < SemDragAndDropHorizontalListAnimator.this.mListView.getHeaderViewsCount() || destPos >= SemDragAndDropHorizontalListAnimator.this.mListView.getCount() - SemDragAndDropHorizontalListAnimator.this.mListView.getFooterViewsCount()) {
+            if (this.mWrappedController == null
+                    || destPos
+                            < SemDragAndDropHorizontalListAnimator.this.mListView
+                                    .getHeaderViewsCount()
+                    || destPos
+                            >= SemDragAndDropHorizontalListAnimator.this.mListView.getCount()
+                                    - SemDragAndDropHorizontalListAnimator.this.mListView
+                                            .getFooterViewsCount()) {
                 return false;
             }
-            return this.mWrappedController.canDrop(startPos - SemDragAndDropHorizontalListAnimator.this.mListView.getHeaderViewsCount(), destPos - SemDragAndDropHorizontalListAnimator.this.mListView.getHeaderViewsCount());
+            return this.mWrappedController.canDrop(
+                    startPos
+                            - SemDragAndDropHorizontalListAnimator.this.mListView
+                                    .getHeaderViewsCount(),
+                    destPos
+                            - SemDragAndDropHorizontalListAnimator.this.mListView
+                                    .getHeaderViewsCount());
         }
 
         @Override // com.samsung.android.animation.SemAbsDragAndDropAnimator.DragAndDropController
         public void dropDone(int startPos, int destPos) {
             if (this.mWrappedController != null) {
-                if (startPos < SemDragAndDropHorizontalListAnimator.this.mListView.getHeaderViewsCount()) {
-                    startPos = SemDragAndDropHorizontalListAnimator.this.mListView.getHeaderViewsCount();
-                } else if (startPos > SemDragAndDropHorizontalListAnimator.this.mListView.getCount() - SemDragAndDropHorizontalListAnimator.this.mListView.getFooterViewsCount()) {
-                    startPos = (SemDragAndDropHorizontalListAnimator.this.mListView.getCount() - SemDragAndDropHorizontalListAnimator.this.mListView.getFooterViewsCount()) - 1;
+                if (startPos
+                        < SemDragAndDropHorizontalListAnimator.this.mListView
+                                .getHeaderViewsCount()) {
+                    startPos =
+                            SemDragAndDropHorizontalListAnimator.this.mListView
+                                    .getHeaderViewsCount();
+                } else if (startPos
+                        > SemDragAndDropHorizontalListAnimator.this.mListView.getCount()
+                                - SemDragAndDropHorizontalListAnimator.this.mListView
+                                        .getFooterViewsCount()) {
+                    startPos =
+                            (SemDragAndDropHorizontalListAnimator.this.mListView.getCount()
+                                            - SemDragAndDropHorizontalListAnimator.this.mListView
+                                                    .getFooterViewsCount())
+                                    - 1;
                 }
-                if (destPos < SemDragAndDropHorizontalListAnimator.this.mListView.getHeaderViewsCount()) {
-                    destPos = SemDragAndDropHorizontalListAnimator.this.mListView.getHeaderViewsCount();
-                } else if (destPos >= SemDragAndDropHorizontalListAnimator.this.mListView.getCount() - SemDragAndDropHorizontalListAnimator.this.mListView.getFooterViewsCount()) {
-                    destPos = (SemDragAndDropHorizontalListAnimator.this.mListView.getCount() - SemDragAndDropHorizontalListAnimator.this.mListView.getFooterViewsCount()) - 1;
+                if (destPos
+                        < SemDragAndDropHorizontalListAnimator.this.mListView
+                                .getHeaderViewsCount()) {
+                    destPos =
+                            SemDragAndDropHorizontalListAnimator.this.mListView
+                                    .getHeaderViewsCount();
+                } else if (destPos
+                        >= SemDragAndDropHorizontalListAnimator.this.mListView.getCount()
+                                - SemDragAndDropHorizontalListAnimator.this.mListView
+                                        .getFooterViewsCount()) {
+                    destPos =
+                            (SemDragAndDropHorizontalListAnimator.this.mListView.getCount()
+                                            - SemDragAndDropHorizontalListAnimator.this.mListView
+                                                    .getFooterViewsCount())
+                                    - 1;
                 }
-                this.mWrappedController.dropDone(startPos - SemDragAndDropHorizontalListAnimator.this.mListView.getHeaderViewsCount(), destPos - SemDragAndDropHorizontalListAnimator.this.mListView.getHeaderViewsCount());
+                this.mWrappedController.dropDone(
+                        startPos
+                                - SemDragAndDropHorizontalListAnimator.this.mListView
+                                        .getHeaderViewsCount(),
+                        destPos
+                                - SemDragAndDropHorizontalListAnimator.this.mListView
+                                        .getHeaderViewsCount());
             }
         }
     }

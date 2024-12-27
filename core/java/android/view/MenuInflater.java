@@ -11,13 +11,15 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
-import android.view.MenuItem;
+
 import com.android.internal.R;
 import com.android.internal.view.menu.MenuItemImpl;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes4.dex */
 public class MenuInflater {
@@ -31,18 +33,19 @@ public class MenuInflater {
     private Context mContext;
     private Object mRealOwner;
     private static final Class<?>[] ACTION_VIEW_CONSTRUCTOR_SIGNATURE = {Context.class};
-    private static final Class<?>[] ACTION_PROVIDER_CONSTRUCTOR_SIGNATURE = ACTION_VIEW_CONSTRUCTOR_SIGNATURE;
+    private static final Class<?>[] ACTION_PROVIDER_CONSTRUCTOR_SIGNATURE =
+            ACTION_VIEW_CONSTRUCTOR_SIGNATURE;
 
     public MenuInflater(Context context) {
         this.mContext = context;
-        this.mActionViewConstructorArguments = new Object[]{context};
+        this.mActionViewConstructorArguments = new Object[] {context};
         this.mActionProviderConstructorArguments = this.mActionViewConstructorArguments;
     }
 
     public MenuInflater(Context context, Object realOwner) {
         this.mContext = context;
         this.mRealOwner = realOwner;
-        this.mActionViewConstructorArguments = new Object[]{context};
+        this.mActionViewConstructorArguments = new Object[] {context};
         this.mActionProviderConstructorArguments = this.mActionViewConstructorArguments;
     }
 
@@ -66,135 +69,137 @@ public class MenuInflater {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:10:0x0047, code lost:
-    
-        switch(r1) {
-            case 1: goto L58;
-            case 2: goto L38;
-            case 3: goto L17;
-            default: goto L70;
-        };
-     */
+
+       switch(r1) {
+           case 1: goto L58;
+           case 2: goto L38;
+           case 3: goto L17;
+           default: goto L70;
+       };
+    */
     /* JADX WARN: Code restructure failed: missing block: B:11:0x004c, code lost:
-    
-        r8 = r11.getName();
-     */
+
+       r8 = r11.getName();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:12:0x0050, code lost:
-    
-        if (r2 == false) goto L22;
-     */
+
+       if (r2 == false) goto L22;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:14:0x0056, code lost:
-    
-        if (r8.equals(r3) == false) goto L22;
-     */
+
+       if (r8.equals(r3) == false) goto L22;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:15:0x0058, code lost:
-    
-        r2 = false;
-        r3 = null;
-     */
+
+       r2 = false;
+       r3 = null;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:17:0x00d2, code lost:
-    
-        r1 = r11.next();
-     */
+
+       r1 = r11.next();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:19:0x0060, code lost:
-    
-        if (r8.equals(android.view.MenuInflater.XML_GROUP) == false) goto L25;
-     */
+
+       if (r8.equals(android.view.MenuInflater.XML_GROUP) == false) goto L25;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:20:0x0062, code lost:
-    
-        r0.resetGroup();
-     */
+
+       r0.resetGroup();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:23:0x006b, code lost:
-    
-        if (r8.equals("item") == false) goto L35;
-     */
+
+       if (r8.equals("item") == false) goto L35;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:25:0x0071, code lost:
-    
-        if (r0.hasAddedItem() != false) goto L61;
-     */
+
+       if (r0.hasAddedItem() != false) goto L61;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:27:0x0077, code lost:
-    
-        if (r0.itemActionProvider == null) goto L34;
-     */
+
+       if (r0.itemActionProvider == null) goto L34;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:29:0x0081, code lost:
-    
-        if (r0.itemActionProvider.hasSubMenu() == false) goto L34;
-     */
+
+       if (r0.itemActionProvider.hasSubMenu() == false) goto L34;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:30:0x0083, code lost:
-    
-        registerMenu(r0.addSubMenuItem(), r12);
-     */
+
+       registerMenu(r0.addSubMenuItem(), r12);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:32:0x008b, code lost:
-    
-        registerMenu(r0.addItem(), r12);
-     */
+
+       registerMenu(r0.addItem(), r12);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:36:0x0097, code lost:
-    
-        if (r8.equals(android.view.MenuInflater.XML_MENU) == false) goto L64;
-     */
+
+       if (r8.equals(android.view.MenuInflater.XML_MENU) == false) goto L64;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:37:0x0099, code lost:
-    
-        r4 = true;
-     */
+
+       r4 = true;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:40:0x009b, code lost:
-    
-        if (r2 == false) goto L40;
-     */
+
+       if (r2 == false) goto L40;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:41:0x009e, code lost:
-    
-        r8 = r11.getName();
-     */
+
+       r8 = r11.getName();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:42:0x00a6, code lost:
-    
-        if (r8.equals(android.view.MenuInflater.XML_GROUP) == false) goto L43;
-     */
+
+       if (r8.equals(android.view.MenuInflater.XML_GROUP) == false) goto L43;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:43:0x00a8, code lost:
-    
-        r0.readGroup(r12);
-     */
+
+       r0.readGroup(r12);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:46:0x00b0, code lost:
-    
-        if (r8.equals("item") == false) goto L46;
-     */
+
+       if (r8.equals("item") == false) goto L46;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:47:0x00b2, code lost:
-    
-        r0.readItem(r12);
-     */
+
+       r0.readItem(r12);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:50:0x00ba, code lost:
-    
-        if (r8.equals(android.view.MenuInflater.XML_MENU) == false) goto L49;
-     */
+
+       if (r8.equals(android.view.MenuInflater.XML_MENU) == false) goto L49;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:51:0x00bc, code lost:
-    
-        r6 = r0.addSubMenuItem();
-        registerMenu(r6, r12);
-        parseMenu(r11, r12, r6);
-     */
+
+       r6 = r0.addSubMenuItem();
+       registerMenu(r6, r12);
+       parseMenu(r11, r12, r6);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:53:0x00c7, code lost:
-    
-        r2 = true;
-        r3 = r8;
-     */
+
+       r2 = true;
+       r3 = r8;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:58:0x00d1, code lost:
-    
-        throw new java.lang.RuntimeException("Unexpected end of document");
-     */
+
+       throw new java.lang.RuntimeException("Unexpected end of document");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:62:0x00d8, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:7:0x0040, code lost:
-    
-        r4 = false;
-     */
+
+       r4 = false;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:8:0x0041, code lost:
-    
-        if (r4 != false) goto L57;
-     */
+
+       if (r4 != false) goto L57;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void parseMenu(org.xmlpull.v1.XmlPullParser r11, android.util.AttributeSet r12, android.view.Menu r13) throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
+    private void parseMenu(
+            org.xmlpull.v1.XmlPullParser r11, android.util.AttributeSet r12, android.view.Menu r13)
+            throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
         /*
             r10 = this;
             android.view.MenuInflater$MenuState r0 = new android.view.MenuInflater$MenuState
@@ -310,20 +315,22 @@ public class MenuInflater {
         Ld8:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.MenuInflater.parseMenu(org.xmlpull.v1.XmlPullParser, android.util.AttributeSet, android.view.Menu):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.view.MenuInflater.parseMenu(org.xmlpull.v1.XmlPullParser,"
+                    + " android.util.AttributeSet, android.view.Menu):void");
     }
 
-    private void registerMenu(MenuItem item, AttributeSet set) {
-    }
+    private void registerMenu(MenuItem item, AttributeSet set) {}
 
-    private void registerMenu(SubMenu subMenu, AttributeSet set) {
-    }
+    private void registerMenu(SubMenu subMenu, AttributeSet set) {}
 
     Context getContext() {
         return this.mContext;
     }
 
-    private static class InflatedOnMenuItemClickListener implements MenuItem.OnMenuItemClickListener {
+    private static class InflatedOnMenuItemClickListener
+            implements MenuItem.OnMenuItemClickListener {
         private static final Class<?>[] PARAM_TYPES = {MenuItem.class};
         private Method mMethod;
         private Object mRealOwner;
@@ -334,7 +341,12 @@ public class MenuInflater {
             try {
                 this.mMethod = c.getMethod(methodName, PARAM_TYPES);
             } catch (Exception e) {
-                InflateException ex = new InflateException("Couldn't resolve menu item onClick handler " + methodName + " in class " + c.getName());
+                InflateException ex =
+                        new InflateException(
+                                "Couldn't resolve menu item onClick handler "
+                                        + methodName
+                                        + " in class "
+                                        + c.getName());
                 ex.initCause(e);
                 throw ex;
             }
@@ -428,7 +440,8 @@ public class MenuInflater {
         }
 
         public void readGroup(AttributeSet attrs) {
-            TypedArray a = MenuInflater.this.mContext.obtainStyledAttributes(attrs, R.styleable.MenuGroup);
+            TypedArray a =
+                    MenuInflater.this.mContext.obtainStyledAttributes(attrs, R.styleable.MenuGroup);
             this.groupId = a.getResourceId(1, 0);
             this.groupCategory = a.getInt(3, 0);
             this.groupOrder = a.getInt(4, 0);
@@ -439,14 +452,20 @@ public class MenuInflater {
         }
 
         public void readItem(AttributeSet attributeSet) {
-            TypedArray obtainStyledAttributes = MenuInflater.this.mContext.obtainStyledAttributes(attributeSet, R.styleable.MenuItem);
+            TypedArray obtainStyledAttributes =
+                    MenuInflater.this.mContext.obtainStyledAttributes(
+                            attributeSet, R.styleable.MenuItem);
             this.itemId = obtainStyledAttributes.getResourceId(2, 0);
-            this.itemCategoryOrder = ((-65536) & obtainStyledAttributes.getInt(5, this.groupCategory)) | (65535 & obtainStyledAttributes.getInt(6, this.groupOrder));
+            this.itemCategoryOrder =
+                    ((-65536) & obtainStyledAttributes.getInt(5, this.groupCategory))
+                            | (65535 & obtainStyledAttributes.getInt(6, this.groupOrder));
             this.itemTitle = obtainStyledAttributes.getText(7);
             this.itemTitleCondensed = obtainStyledAttributes.getText(8);
             this.itemIconResId = obtainStyledAttributes.getResourceId(0, 0);
             if (obtainStyledAttributes.hasValue(22)) {
-                this.mItemIconBlendMode = Drawable.parseBlendMode(obtainStyledAttributes.getInt(22, -1), this.mItemIconBlendMode);
+                this.mItemIconBlendMode =
+                        Drawable.parseBlendMode(
+                                obtainStyledAttributes.getInt(22, -1), this.mItemIconBlendMode);
             } else {
                 this.mItemIconBlendMode = null;
             }
@@ -474,10 +493,18 @@ public class MenuInflater {
             this.itemActionProviderClassName = obtainStyledAttributes.getString(17);
             boolean z = this.itemActionProviderClassName != null;
             if (z && this.itemActionViewLayout == 0 && this.itemActionViewClassName == null) {
-                this.itemActionProvider = (ActionProvider) newInstance(this.itemActionProviderClassName, MenuInflater.ACTION_PROVIDER_CONSTRUCTOR_SIGNATURE, MenuInflater.this.mActionProviderConstructorArguments);
+                this.itemActionProvider =
+                        (ActionProvider)
+                                newInstance(
+                                        this.itemActionProviderClassName,
+                                        MenuInflater.ACTION_PROVIDER_CONSTRUCTOR_SIGNATURE,
+                                        MenuInflater.this.mActionProviderConstructorArguments);
             } else {
                 if (z) {
-                    Log.w(MenuInflater.LOG_TAG, "Ignoring attribute 'actionProviderClass'. Action view already specified.");
+                    Log.w(
+                            MenuInflater.LOG_TAG,
+                            "Ignoring attribute 'actionProviderClass'. Action view already"
+                                + " specified.");
                 }
                 this.itemActionProvider = null;
             }
@@ -495,7 +522,15 @@ public class MenuInflater {
         }
 
         private void setItem(MenuItem item) {
-            item.setChecked(this.itemChecked).setVisible(this.itemVisible).setEnabled(this.itemEnabled).setCheckable(this.itemCheckable >= 1).setTitleCondensed(this.itemTitleCondensed).setIcon(this.itemIconResId).setAlphabeticShortcut(this.itemAlphabeticShortcut, this.itemAlphabeticModifiers).setNumericShortcut(this.itemNumericShortcut, this.itemNumericModifiers);
+            item.setChecked(this.itemChecked)
+                    .setVisible(this.itemVisible)
+                    .setEnabled(this.itemEnabled)
+                    .setCheckable(this.itemCheckable >= 1)
+                    .setTitleCondensed(this.itemTitleCondensed)
+                    .setIcon(this.itemIconResId)
+                    .setAlphabeticShortcut(
+                            this.itemAlphabeticShortcut, this.itemAlphabeticModifiers)
+                    .setNumericShortcut(this.itemNumericShortcut, this.itemNumericModifiers);
             if (this.itemShowAsAction >= 0) {
                 item.setShowAsAction(this.itemShowAsAction);
             }
@@ -507,9 +542,13 @@ public class MenuInflater {
             }
             if (this.itemListenerMethodName != null) {
                 if (MenuInflater.this.mContext.isRestricted()) {
-                    throw new IllegalStateException("The android:onClick attribute cannot be used within a restricted context");
+                    throw new IllegalStateException(
+                            "The android:onClick attribute cannot be used within a restricted"
+                                + " context");
                 }
-                item.setOnMenuItemClickListener(new InflatedOnMenuItemClickListener(MenuInflater.this.getRealOwner(), this.itemListenerMethodName));
+                item.setOnMenuItemClickListener(
+                        new InflatedOnMenuItemClickListener(
+                                MenuInflater.this.getRealOwner(), this.itemListenerMethodName));
             }
             if (item instanceof MenuItemImpl) {
                 MenuItemImpl impl = (MenuItemImpl) item;
@@ -519,7 +558,12 @@ public class MenuInflater {
             }
             boolean actionViewSpecified = false;
             if (this.itemActionViewClassName != null) {
-                View actionView = (View) newInstance(this.itemActionViewClassName, MenuInflater.ACTION_VIEW_CONSTRUCTOR_SIGNATURE, MenuInflater.this.mActionViewConstructorArguments);
+                View actionView =
+                        (View)
+                                newInstance(
+                                        this.itemActionViewClassName,
+                                        MenuInflater.ACTION_VIEW_CONSTRUCTOR_SIGNATURE,
+                                        MenuInflater.this.mActionViewConstructorArguments);
                 item.setActionView(actionView);
                 actionViewSpecified = true;
             }
@@ -527,7 +571,10 @@ public class MenuInflater {
                 if (!actionViewSpecified) {
                     item.setActionView(this.itemActionViewLayout);
                 } else {
-                    Log.w(MenuInflater.LOG_TAG, "Ignoring attribute 'itemActionViewLayout'. Action view already specified.");
+                    Log.w(
+                            MenuInflater.LOG_TAG,
+                            "Ignoring attribute 'itemActionViewLayout'. Action view already"
+                                + " specified.");
                 }
             }
             if (this.itemActionProvider != null) {
@@ -539,14 +586,18 @@ public class MenuInflater {
 
         public MenuItem addItem() {
             this.itemAdded = true;
-            MenuItem item = this.menu.add(this.groupId, this.itemId, this.itemCategoryOrder, this.itemTitle);
+            MenuItem item =
+                    this.menu.add(
+                            this.groupId, this.itemId, this.itemCategoryOrder, this.itemTitle);
             setItem(item);
             return item;
         }
 
         public SubMenu addSubMenuItem() {
             this.itemAdded = true;
-            SubMenu subMenu = this.menu.addSubMenu(this.groupId, this.itemId, this.itemCategoryOrder, this.itemTitle);
+            SubMenu subMenu =
+                    this.menu.addSubMenu(
+                            this.groupId, this.itemId, this.itemCategoryOrder, this.itemTitle);
             setItem(subMenu.getItem());
             return subMenu;
         }
@@ -557,7 +608,12 @@ public class MenuInflater {
 
         private <T> T newInstance(String str, Class<?>[] clsArr, Object[] objArr) {
             try {
-                Constructor<?> constructor = MenuInflater.this.mContext.getClassLoader().loadClass(str).getConstructor(clsArr);
+                Constructor<?> constructor =
+                        MenuInflater.this
+                                .mContext
+                                .getClassLoader()
+                                .loadClass(str)
+                                .getConstructor(clsArr);
                 constructor.setAccessible(true);
                 return (T) constructor.newInstance(objArr);
             } catch (Exception e) {

@@ -7,7 +7,9 @@ import android.os.StrictMode;
 import android.os.SystemClock;
 import android.util.Log;
 import android.util.Slog;
+
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,9 +26,11 @@ import java.util.concurrent.TimeUnit;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class ShortcutBitmapSaver {
-    public final Executor mExecutor = new ThreadPoolExecutor(0, 1, 60, TimeUnit.SECONDS, new LinkedBlockingQueue());
+    public final Executor mExecutor =
+            new ThreadPoolExecutor(0, 1, 60, TimeUnit.SECONDS, new LinkedBlockingQueue());
     public final Deque mPendingItems = new LinkedBlockingDeque();
-    public final ShortcutBitmapSaver$$ExternalSyntheticLambda0 mRunnable = new ShortcutBitmapSaver$$ExternalSyntheticLambda0(0, this);
+    public final ShortcutBitmapSaver$$ExternalSyntheticLambda0 mRunnable =
+            new ShortcutBitmapSaver$$ExternalSyntheticLambda0(0, this);
     public final ShortcutService mService;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -41,7 +45,13 @@ public final class ShortcutBitmapSaver {
         }
 
         public final String toString() {
-            return "PendingItem{size=" + this.bytes.length + " age=" + (SystemClock.uptimeMillis() - this.mInstantiatedUptimeMillis) + "ms shortcut=" + this.shortcut.toInsecureString() + "}";
+            return "PendingItem{size="
+                    + this.bytes.length
+                    + " age="
+                    + (SystemClock.uptimeMillis() - this.mInstantiatedUptimeMillis)
+                    + "ms shortcut="
+                    + this.shortcut.toInsecureString()
+                    + "}";
         }
     }
 
@@ -76,7 +86,8 @@ public final class ShortcutBitmapSaver {
         }
     }
 
-    public final void saveBitmapLocked(ShortcutInfo shortcutInfo, int i, Bitmap.CompressFormat compressFormat, int i2) {
+    public final void saveBitmapLocked(
+            ShortcutInfo shortcutInfo, int i, Bitmap.CompressFormat compressFormat, int i2) {
         Icon icon = shortcutInfo.getIcon();
         Objects.requireNonNull(icon);
         Bitmap bitmap = icon.getBitmap();
@@ -87,10 +98,15 @@ public final class ShortcutBitmapSaver {
         StrictMode.ThreadPolicy threadPolicy = StrictMode.getThreadPolicy();
         try {
             try {
-                StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder(threadPolicy).permitCustomSlowCalls().build());
+                StrictMode.setThreadPolicy(
+                        new StrictMode.ThreadPolicy.Builder(threadPolicy)
+                                .permitCustomSlowCalls()
+                                .build());
                 Bitmap shrinkBitmap = ShortcutService.shrinkBitmap(i, bitmap);
                 try {
-                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT);
+                    ByteArrayOutputStream byteArrayOutputStream =
+                            new ByteArrayOutputStream(
+                                    EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT);
                     try {
                         if (!shrinkBitmap.compress(compressFormat, i2, byteArrayOutputStream)) {
                             Slog.wtf("ShortcutService", "Unable to compress bitmap");
@@ -128,7 +144,8 @@ public final class ShortcutBitmapSaver {
 
     public final boolean waitForAllSavesLocked() {
         CountDownLatch countDownLatch = new CountDownLatch(1);
-        ((ThreadPoolExecutor) this.mExecutor).execute(new ShortcutBitmapSaver$$ExternalSyntheticLambda0(1, countDownLatch));
+        ((ThreadPoolExecutor) this.mExecutor)
+                .execute(new ShortcutBitmapSaver$$ExternalSyntheticLambda0(1, countDownLatch));
         try {
             if (countDownLatch.await(5000L, TimeUnit.MILLISECONDS)) {
                 return true;

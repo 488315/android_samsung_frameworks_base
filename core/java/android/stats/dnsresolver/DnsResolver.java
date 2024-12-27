@@ -295,22 +295,19 @@ public final class DnsResolver {
         public static final long RETRY_TIMES = 1120986464262L;
         public static final long TYPE = 1159641169922L;
 
-        public DnsQueryEvent() {
-        }
+        public DnsQueryEvent() {}
     }
 
     public final class DnsQueryEvents {
         public static final long DNS_QUERY_EVENT = 2246267895809L;
 
-        public DnsQueryEvents() {
-        }
+        public DnsQueryEvents() {}
     }
 
     public final class Servers {
         public static final long SERVER = 2246267895809L;
 
-        public Servers() {
-        }
+        public Servers() {}
     }
 
     public final class Server {
@@ -318,7 +315,6 @@ public final class DnsResolver {
         public static final long PROTOCOL = 1159641169921L;
         public static final long VALIDATED = 1133871366147L;
 
-        public Server() {
-        }
+        public Server() {}
     }
 }

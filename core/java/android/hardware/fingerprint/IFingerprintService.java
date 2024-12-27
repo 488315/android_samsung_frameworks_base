@@ -12,10 +12,6 @@ import android.hardware.biometrics.IInvalidationCallback;
 import android.hardware.biometrics.ITestSession;
 import android.hardware.biometrics.ITestSessionCallback;
 import android.hardware.biometrics.fingerprint.PointerContext;
-import android.hardware.fingerprint.IFingerprintAuthenticatorsRegisteredCallback;
-import android.hardware.fingerprint.IFingerprintClientActiveCallback;
-import android.hardware.fingerprint.IFingerprintServiceReceiver;
-import android.hardware.fingerprint.IUdfpsOverlayController;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -23,55 +19,94 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
+
 import com.samsung.android.bio.fingerprint.ISemFingerprintAodController;
 import com.samsung.android.bio.fingerprint.ISemFingerprintRequestCallback;
 import com.samsung.android.biometrics.ISemBiometricSysUiDisplayBrightnessCallback;
 import com.samsung.android.biometrics.ISemBiometricSysUiDisplayStateCallback;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public interface IFingerprintService extends IInterface {
-    void addAuthenticatorsRegisteredCallback(IFingerprintAuthenticatorsRegisteredCallback iFingerprintAuthenticatorsRegisteredCallback) throws RemoteException;
+    void addAuthenticatorsRegisteredCallback(
+            IFingerprintAuthenticatorsRegisteredCallback
+                    iFingerprintAuthenticatorsRegisteredCallback)
+            throws RemoteException;
 
-    void addClientActiveCallback(IFingerprintClientActiveCallback iFingerprintClientActiveCallback) throws RemoteException;
+    void addClientActiveCallback(IFingerprintClientActiveCallback iFingerprintClientActiveCallback)
+            throws RemoteException;
 
-    void addLockoutResetCallback(IBiometricServiceLockoutResetCallback iBiometricServiceLockoutResetCallback, String str) throws RemoteException;
+    void addLockoutResetCallback(
+            IBiometricServiceLockoutResetCallback iBiometricServiceLockoutResetCallback, String str)
+            throws RemoteException;
 
-    long authenticate(IBinder iBinder, long j, IFingerprintServiceReceiver iFingerprintServiceReceiver, FingerprintAuthenticateOptions fingerprintAuthenticateOptions) throws RemoteException;
+    long authenticate(
+            IBinder iBinder,
+            long j,
+            IFingerprintServiceReceiver iFingerprintServiceReceiver,
+            FingerprintAuthenticateOptions fingerprintAuthenticateOptions)
+            throws RemoteException;
 
-    void cancelAuthentication(IBinder iBinder, String str, String str2, long j) throws RemoteException;
+    void cancelAuthentication(IBinder iBinder, String str, String str2, long j)
+            throws RemoteException;
 
-    void cancelAuthenticationFromService(int i, IBinder iBinder, String str, long j) throws RemoteException;
+    void cancelAuthenticationFromService(int i, IBinder iBinder, String str, long j)
+            throws RemoteException;
 
     void cancelEnrollment(IBinder iBinder, long j) throws RemoteException;
 
     void cancelFingerprintDetect(IBinder iBinder, String str, long j) throws RemoteException;
 
-    ITestSession createTestSession(int i, ITestSessionCallback iTestSessionCallback, String str) throws RemoteException;
+    ITestSession createTestSession(int i, ITestSessionCallback iTestSessionCallback, String str)
+            throws RemoteException;
 
-    long detectFingerprint(IBinder iBinder, IFingerprintServiceReceiver iFingerprintServiceReceiver, FingerprintAuthenticateOptions fingerprintAuthenticateOptions) throws RemoteException;
+    long detectFingerprint(
+            IBinder iBinder,
+            IFingerprintServiceReceiver iFingerprintServiceReceiver,
+            FingerprintAuthenticateOptions fingerprintAuthenticateOptions)
+            throws RemoteException;
 
     byte[] dumpSensorServiceStateProto(int i, boolean z) throws RemoteException;
 
-    long enroll(IBinder iBinder, byte[] bArr, int i, IFingerprintServiceReceiver iFingerprintServiceReceiver, String str, int i2, FingerprintEnrollOptions fingerprintEnrollOptions) throws RemoteException;
+    long enroll(
+            IBinder iBinder,
+            byte[] bArr,
+            int i,
+            IFingerprintServiceReceiver iFingerprintServiceReceiver,
+            String str,
+            int i2,
+            FingerprintEnrollOptions fingerprintEnrollOptions)
+            throws RemoteException;
 
-    void generateChallenge(IBinder iBinder, int i, int i2, IFingerprintServiceReceiver iFingerprintServiceReceiver, String str) throws RemoteException;
+    void generateChallenge(
+            IBinder iBinder,
+            int i,
+            int i2,
+            IFingerprintServiceReceiver iFingerprintServiceReceiver,
+            String str)
+            throws RemoteException;
 
     long getAuthenticatorId(int i, int i2) throws RemoteException;
 
-    List<Fingerprint> getEnrolledFingerprints(int i, String str, String str2) throws RemoteException;
+    List<Fingerprint> getEnrolledFingerprints(int i, String str, String str2)
+            throws RemoteException;
 
     int getLockoutModeForUser(int i, int i2) throws RemoteException;
 
-    FingerprintSensorPropertiesInternal getSensorProperties(int i, String str) throws RemoteException;
+    FingerprintSensorPropertiesInternal getSensorProperties(int i, String str)
+            throws RemoteException;
 
-    List<FingerprintSensorPropertiesInternal> getSensorPropertiesInternal(String str) throws RemoteException;
+    List<FingerprintSensorPropertiesInternal> getSensorPropertiesInternal(String str)
+            throws RemoteException;
 
     boolean hasEnrolledFingerprints(int i, int i2, String str) throws RemoteException;
 
-    boolean hasEnrolledFingerprintsDeprecated(int i, String str, String str2) throws RemoteException;
+    boolean hasEnrolledFingerprintsDeprecated(int i, String str, String str2)
+            throws RemoteException;
 
-    void invalidateAuthenticatorId(int i, int i2, IInvalidationCallback iInvalidationCallback) throws RemoteException;
+    void invalidateAuthenticatorId(int i, int i2, IInvalidationCallback iInvalidationCallback)
+            throws RemoteException;
 
     boolean isClientActive() throws RemoteException;
 
@@ -89,23 +124,49 @@ public interface IFingerprintService extends IInterface {
 
     void onUdfpsUiEvent(int i, long j, int i2) throws RemoteException;
 
-    void prepareForAuthentication(IBinder iBinder, long j, IBiometricSensorReceiver iBiometricSensorReceiver, FingerprintAuthenticateOptions fingerprintAuthenticateOptions, long j2, int i, boolean z, boolean z2) throws RemoteException;
+    void prepareForAuthentication(
+            IBinder iBinder,
+            long j,
+            IBiometricSensorReceiver iBiometricSensorReceiver,
+            FingerprintAuthenticateOptions fingerprintAuthenticateOptions,
+            long j2,
+            int i,
+            boolean z,
+            boolean z2)
+            throws RemoteException;
 
-    void registerAuthenticationStateListener(AuthenticationStateListener authenticationStateListener) throws RemoteException;
+    void registerAuthenticationStateListener(
+            AuthenticationStateListener authenticationStateListener) throws RemoteException;
 
-    void registerAuthenticators(FingerprintSensorConfigurations fingerprintSensorConfigurations) throws RemoteException;
+    void registerAuthenticators(FingerprintSensorConfigurations fingerprintSensorConfigurations)
+            throws RemoteException;
 
-    void registerBiometricStateListener(IBiometricStateListener iBiometricStateListener) throws RemoteException;
+    void registerBiometricStateListener(IBiometricStateListener iBiometricStateListener)
+            throws RemoteException;
 
-    void remove(IBinder iBinder, int i, int i2, IFingerprintServiceReceiver iFingerprintServiceReceiver, String str) throws RemoteException;
+    void remove(
+            IBinder iBinder,
+            int i,
+            int i2,
+            IFingerprintServiceReceiver iFingerprintServiceReceiver,
+            String str)
+            throws RemoteException;
 
-    void removeAll(IBinder iBinder, int i, IFingerprintServiceReceiver iFingerprintServiceReceiver, String str) throws RemoteException;
+    void removeAll(
+            IBinder iBinder,
+            int i,
+            IFingerprintServiceReceiver iFingerprintServiceReceiver,
+            String str)
+            throws RemoteException;
 
-    void removeClientActiveCallback(IFingerprintClientActiveCallback iFingerprintClientActiveCallback) throws RemoteException;
+    void removeClientActiveCallback(
+            IFingerprintClientActiveCallback iFingerprintClientActiveCallback)
+            throws RemoteException;
 
     void rename(int i, int i2, String str) throws RemoteException;
 
-    void resetLockout(IBinder iBinder, int i, int i2, byte[] bArr, String str) throws RemoteException;
+    void resetLockout(IBinder iBinder, int i, int i2, byte[] bArr, String str)
+            throws RemoteException;
 
     void revokeChallenge(IBinder iBinder, int i, int i2, String str, long j) throws RemoteException;
 
@@ -113,7 +174,13 @@ public interface IFingerprintService extends IInterface {
 
     IBinder semAddMaskView(IBinder iBinder, String str) throws RemoteException;
 
-    long semAuthenticate(IBinder iBinder, long j, IFingerprintServiceReceiver iFingerprintServiceReceiver, FingerprintAuthenticateOptions fingerprintAuthenticateOptions, Bundle bundle) throws RemoteException;
+    long semAuthenticate(
+            IBinder iBinder,
+            long j,
+            IFingerprintServiceReceiver iFingerprintServiceReceiver,
+            FingerprintAuthenticateOptions fingerprintAuthenticateOptions,
+            Bundle bundle)
+            throws RemoteException;
 
     int semBioSysUiRequest(int i, int i2, long j, String str) throws RemoteException;
 
@@ -159,19 +226,39 @@ public interface IFingerprintService extends IInterface {
 
     int semProcessFido(int i, byte[] bArr, byte[] bArr2, String str) throws RemoteException;
 
-    void semRegisterAodController(IBinder iBinder, ISemFingerprintAodController iSemFingerprintAodController) throws RemoteException;
+    void semRegisterAodController(
+            IBinder iBinder, ISemFingerprintAodController iSemFingerprintAodController)
+            throws RemoteException;
 
-    int semRegisterDisplayBrightnessCallback(ISemBiometricSysUiDisplayBrightnessCallback iSemBiometricSysUiDisplayBrightnessCallback) throws RemoteException;
+    int semRegisterDisplayBrightnessCallback(
+            ISemBiometricSysUiDisplayBrightnessCallback iSemBiometricSysUiDisplayBrightnessCallback)
+            throws RemoteException;
 
-    int semRegisterDisplayStateCallback(ISemBiometricSysUiDisplayStateCallback iSemBiometricSysUiDisplayStateCallback) throws RemoteException;
+    int semRegisterDisplayStateCallback(
+            ISemBiometricSysUiDisplayStateCallback iSemBiometricSysUiDisplayStateCallback)
+            throws RemoteException;
 
     int semRemoveMaskView(IBinder iBinder, String str) throws RemoteException;
 
-    int semRequest(IBinder iBinder, int i, byte[] bArr, byte[] bArr2, int i2, int i3, String str, ISemFingerprintRequestCallback iSemFingerprintRequestCallback) throws RemoteException;
+    int semRequest(
+            IBinder iBinder,
+            int i,
+            byte[] bArr,
+            byte[] bArr2,
+            int i2,
+            int i3,
+            String str,
+            ISemFingerprintRequestCallback iSemFingerprintRequestCallback)
+            throws RemoteException;
 
     boolean semResumeEnroll() throws RemoteException;
 
-    int semRunSensorTest(IBinder iBinder, int i, int i2, ISemFingerprintRequestCallback iSemFingerprintRequestCallback) throws RemoteException;
+    int semRunSensorTest(
+            IBinder iBinder,
+            int i,
+            int i2,
+            ISemFingerprintRequestCallback iSemFingerprintRequestCallback)
+            throws RemoteException;
 
     int semSetCalibrationMode(IBinder iBinder, int i, String str) throws RemoteException;
 
@@ -191,118 +278,171 @@ public interface IFingerprintService extends IInterface {
 
     void semUnregisterDisplayStateCallback() throws RemoteException;
 
-    void semUpdateTrustApp(String str, ISemFingerprintRequestCallback iSemFingerprintRequestCallback, String str2) throws RemoteException;
+    void semUpdateTrustApp(
+            String str, ISemFingerprintRequestCallback iSemFingerprintRequestCallback, String str2)
+            throws RemoteException;
 
     void setIgnoreDisplayTouches(long j, int i, boolean z) throws RemoteException;
 
-    void setUdfpsOverlayController(IUdfpsOverlayController iUdfpsOverlayController) throws RemoteException;
+    void setUdfpsOverlayController(IUdfpsOverlayController iUdfpsOverlayController)
+            throws RemoteException;
 
     void startPreparedClient(int i, int i2) throws RemoteException;
 
-    void unregisterAuthenticationStateListener(AuthenticationStateListener authenticationStateListener) throws RemoteException;
+    void unregisterAuthenticationStateListener(
+            AuthenticationStateListener authenticationStateListener) throws RemoteException;
 
     public static class Default implements IFingerprintService {
         @Override // android.hardware.fingerprint.IFingerprintService
-        public ITestSession createTestSession(int sensorId, ITestSessionCallback callback, String opPackageName) throws RemoteException {
+        public ITestSession createTestSession(
+                int sensorId, ITestSessionCallback callback, String opPackageName)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public byte[] dumpSensorServiceStateProto(int sensorId, boolean clearSchedulerBuffer) throws RemoteException {
+        public byte[] dumpSensorServiceStateProto(int sensorId, boolean clearSchedulerBuffer)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public List<FingerprintSensorPropertiesInternal> getSensorPropertiesInternal(String opPackageName) throws RemoteException {
+        public List<FingerprintSensorPropertiesInternal> getSensorPropertiesInternal(
+                String opPackageName) throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public FingerprintSensorPropertiesInternal getSensorProperties(int sensorId, String opPackageName) throws RemoteException {
+        public FingerprintSensorPropertiesInternal getSensorProperties(
+                int sensorId, String opPackageName) throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public long authenticate(IBinder token, long operationId, IFingerprintServiceReceiver receiver, FingerprintAuthenticateOptions options) throws RemoteException {
+        public long authenticate(
+                IBinder token,
+                long operationId,
+                IFingerprintServiceReceiver receiver,
+                FingerprintAuthenticateOptions options)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public long detectFingerprint(IBinder token, IFingerprintServiceReceiver receiver, FingerprintAuthenticateOptions options) throws RemoteException {
+        public long detectFingerprint(
+                IBinder token,
+                IFingerprintServiceReceiver receiver,
+                FingerprintAuthenticateOptions options)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void prepareForAuthentication(IBinder token, long operationId, IBiometricSensorReceiver sensorReceiver, FingerprintAuthenticateOptions options, long requestId, int cookie, boolean allowBackgroundAuthentication, boolean isForLegacyFingerprintManager) throws RemoteException {
-        }
+        public void prepareForAuthentication(
+                IBinder token,
+                long operationId,
+                IBiometricSensorReceiver sensorReceiver,
+                FingerprintAuthenticateOptions options,
+                long requestId,
+                int cookie,
+                boolean allowBackgroundAuthentication,
+                boolean isForLegacyFingerprintManager)
+                throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void startPreparedClient(int sensorId, int cookie) throws RemoteException {
-        }
+        public void startPreparedClient(int sensorId, int cookie) throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void cancelAuthentication(IBinder token, String opPackageName, String attributionTag, long requestId) throws RemoteException {
-        }
+        public void cancelAuthentication(
+                IBinder token, String opPackageName, String attributionTag, long requestId)
+                throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void cancelFingerprintDetect(IBinder token, String opPackageName, long requestId) throws RemoteException {
-        }
+        public void cancelFingerprintDetect(IBinder token, String opPackageName, long requestId)
+                throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void cancelAuthenticationFromService(int sensorId, IBinder token, String opPackageName, long requestId) throws RemoteException {
-        }
+        public void cancelAuthenticationFromService(
+                int sensorId, IBinder token, String opPackageName, long requestId)
+                throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public long enroll(IBinder token, byte[] hardwareAuthToken, int userId, IFingerprintServiceReceiver receiver, String opPackageName, int enrollReason, FingerprintEnrollOptions options) throws RemoteException {
+        public long enroll(
+                IBinder token,
+                byte[] hardwareAuthToken,
+                int userId,
+                IFingerprintServiceReceiver receiver,
+                String opPackageName,
+                int enrollReason,
+                FingerprintEnrollOptions options)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void cancelEnrollment(IBinder token, long requestId) throws RemoteException {
-        }
+        public void cancelEnrollment(IBinder token, long requestId) throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void remove(IBinder token, int fingerId, int userId, IFingerprintServiceReceiver receiver, String opPackageName) throws RemoteException {
-        }
+        public void remove(
+                IBinder token,
+                int fingerId,
+                int userId,
+                IFingerprintServiceReceiver receiver,
+                String opPackageName)
+                throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void removeAll(IBinder token, int userId, IFingerprintServiceReceiver receiver, String opPackageName) throws RemoteException {
-        }
+        public void removeAll(
+                IBinder token,
+                int userId,
+                IFingerprintServiceReceiver receiver,
+                String opPackageName)
+                throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void rename(int fingerId, int userId, String name) throws RemoteException {
-        }
+        public void rename(int fingerId, int userId, String name) throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public List<Fingerprint> getEnrolledFingerprints(int userId, String opPackageName, String attributionTag) throws RemoteException {
+        public List<Fingerprint> getEnrolledFingerprints(
+                int userId, String opPackageName, String attributionTag) throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public boolean isHardwareDetectedDeprecated(String opPackageName, String attributionTag) throws RemoteException {
+        public boolean isHardwareDetectedDeprecated(String opPackageName, String attributionTag)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public boolean isHardwareDetected(int sensorId, String opPackageName) throws RemoteException {
+        public boolean isHardwareDetected(int sensorId, String opPackageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void generateChallenge(IBinder token, int sensorId, int userId, IFingerprintServiceReceiver receiver, String opPackageName) throws RemoteException {
-        }
+        public void generateChallenge(
+                IBinder token,
+                int sensorId,
+                int userId,
+                IFingerprintServiceReceiver receiver,
+                String opPackageName)
+                throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void revokeChallenge(IBinder token, int sensorId, int userId, String opPackageName, long challenge) throws RemoteException {
-        }
+        public void revokeChallenge(
+                IBinder token, int sensorId, int userId, String opPackageName, long challenge)
+                throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public boolean hasEnrolledFingerprintsDeprecated(int userId, String opPackageName, String attributionTag) throws RemoteException {
+        public boolean hasEnrolledFingerprintsDeprecated(
+                int userId, String opPackageName, String attributionTag) throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public boolean hasEnrolledFingerprints(int sensorId, int userId, String opPackageName) throws RemoteException {
+        public boolean hasEnrolledFingerprints(int sensorId, int userId, String opPackageName)
+                throws RemoteException {
             return false;
         }
 
@@ -312,8 +452,8 @@ public interface IFingerprintService extends IInterface {
         }
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void invalidateAuthenticatorId(int sensorId, int userId, IInvalidationCallback callback) throws RemoteException {
-        }
+        public void invalidateAuthenticatorId(
+                int sensorId, int userId, IInvalidationCallback callback) throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
         public long getAuthenticatorId(int sensorId, int callingUserId) throws RemoteException {
@@ -321,12 +461,18 @@ public interface IFingerprintService extends IInterface {
         }
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void resetLockout(IBinder token, int sensorId, int userId, byte[] hardwareAuthToken, String opPackageNAame) throws RemoteException {
-        }
+        public void resetLockout(
+                IBinder token,
+                int sensorId,
+                int userId,
+                byte[] hardwareAuthToken,
+                String opPackageNAame)
+                throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void addLockoutResetCallback(IBiometricServiceLockoutResetCallback callback, String opPackageName) throws RemoteException {
-        }
+        public void addLockoutResetCallback(
+                IBiometricServiceLockoutResetCallback callback, String opPackageName)
+                throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
         public boolean isClientActive() throws RemoteException {
@@ -334,63 +480,68 @@ public interface IFingerprintService extends IInterface {
         }
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void addClientActiveCallback(IFingerprintClientActiveCallback callback) throws RemoteException {
-        }
+        public void addClientActiveCallback(IFingerprintClientActiveCallback callback)
+                throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void removeClientActiveCallback(IFingerprintClientActiveCallback callback) throws RemoteException {
-        }
+        public void removeClientActiveCallback(IFingerprintClientActiveCallback callback)
+                throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void registerAuthenticators(FingerprintSensorConfigurations fingerprintSensorConfigurations) throws RemoteException {
-        }
+        public void registerAuthenticators(
+                FingerprintSensorConfigurations fingerprintSensorConfigurations)
+                throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void addAuthenticatorsRegisteredCallback(IFingerprintAuthenticatorsRegisteredCallback callback) throws RemoteException {
-        }
+        public void addAuthenticatorsRegisteredCallback(
+                IFingerprintAuthenticatorsRegisteredCallback callback) throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void onPointerDown(long requestId, int sensorId, PointerContext pc) throws RemoteException {
-        }
+        public void onPointerDown(long requestId, int sensorId, PointerContext pc)
+                throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void onPointerUp(long requestId, int sensorId, PointerContext pc) throws RemoteException {
-        }
+        public void onPointerUp(long requestId, int sensorId, PointerContext pc)
+                throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void onUdfpsUiEvent(int event, long requestId, int sensorId) throws RemoteException {
-        }
+        public void onUdfpsUiEvent(int event, long requestId, int sensorId)
+                throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void setIgnoreDisplayTouches(long requestId, int sensorId, boolean ignoreTouches) throws RemoteException {
-        }
+        public void setIgnoreDisplayTouches(long requestId, int sensorId, boolean ignoreTouches)
+                throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void setUdfpsOverlayController(IUdfpsOverlayController controller) throws RemoteException {
-        }
+        public void setUdfpsOverlayController(IUdfpsOverlayController controller)
+                throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void registerAuthenticationStateListener(AuthenticationStateListener listener) throws RemoteException {
-        }
+        public void registerAuthenticationStateListener(AuthenticationStateListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void unregisterAuthenticationStateListener(AuthenticationStateListener listener) throws RemoteException {
-        }
+        public void unregisterAuthenticationStateListener(AuthenticationStateListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void registerBiometricStateListener(IBiometricStateListener listener) throws RemoteException {
-        }
+        public void registerBiometricStateListener(IBiometricStateListener listener)
+                throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void onPowerPressed() throws RemoteException {
-        }
+        public void onPowerPressed() throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void scheduleWatchdog() throws RemoteException {
-        }
+        public void scheduleWatchdog() throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public long semAuthenticate(IBinder token, long operationId, IFingerprintServiceReceiver receiver, FingerprintAuthenticateOptions options, Bundle bundle) throws RemoteException {
+        public long semAuthenticate(
+                IBinder token,
+                long operationId,
+                IFingerprintServiceReceiver receiver,
+                FingerprintAuthenticateOptions options,
+                Bundle bundle)
+                throws RemoteException {
             return 0L;
         }
 
@@ -405,8 +556,7 @@ public interface IFingerprintService extends IInterface {
         }
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void semForceCBGE() throws RemoteException {
-        }
+        public void semForceCBGE() throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
         public boolean semIsEnrollSession() throws RemoteException {
@@ -454,7 +604,9 @@ public interface IFingerprintService extends IInterface {
         }
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public int semRunSensorTest(IBinder token, int cmd, int param, ISemFingerprintRequestCallback callback) throws RemoteException {
+        public int semRunSensorTest(
+                IBinder token, int cmd, int param, ISemFingerprintRequestCallback callback)
+                throws RemoteException {
             return 0;
         }
 
@@ -484,21 +636,20 @@ public interface IFingerprintService extends IInterface {
         }
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void semRegisterAodController(IBinder token, ISemFingerprintAodController aodController) throws RemoteException {
-        }
+        public void semRegisterAodController(
+                IBinder token, ISemFingerprintAodController aodController) throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void semUnregisterAodController(IBinder token) throws RemoteException {
-        }
+        public void semUnregisterAodController(IBinder token) throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public Rect semGetSensorAreaInDisplay(int type, int rotation, Point point) throws RemoteException {
+        public Rect semGetSensorAreaInDisplay(int type, int rotation, Point point)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void semShowUdfpsIcon() throws RemoteException {
-        }
+        public void semShowUdfpsIcon() throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
         public int semGetIconBottomMargin() throws RemoteException {
@@ -506,8 +657,7 @@ public interface IFingerprintService extends IInterface {
         }
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void semMoveSensorIconInDisplay(int x, int y) throws RemoteException {
-        }
+        public void semMoveSensorIconInDisplay(int x, int y) throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
         public int semGetSecurityLevel() throws RemoteException {
@@ -520,47 +670,49 @@ public interface IFingerprintService extends IInterface {
         }
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void semUpdateTrustApp(String path, ISemFingerprintRequestCallback receiver, String opPackageName) throws RemoteException {
-        }
+        public void semUpdateTrustApp(
+                String path, ISemFingerprintRequestCallback receiver, String opPackageName)
+                throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public int semBioSysUiRequest(int cmd, int arg1, long arg2, String arg3) throws RemoteException {
+        public int semBioSysUiRequest(int cmd, int arg1, long arg2, String arg3)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public int semRegisterDisplayStateCallback(ISemBiometricSysUiDisplayStateCallback cb) throws RemoteException {
+        public int semRegisterDisplayStateCallback(ISemBiometricSysUiDisplayStateCallback cb)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void semUnregisterDisplayStateCallback() throws RemoteException {
-        }
+        public void semUnregisterDisplayStateCallback() throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public int semRegisterDisplayBrightnessCallback(ISemBiometricSysUiDisplayBrightnessCallback cb) throws RemoteException {
+        public int semRegisterDisplayBrightnessCallback(
+                ISemBiometricSysUiDisplayBrightnessCallback cb) throws RemoteException {
             return 0;
         }
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void semUnregisterDisplayBrightnessCallback() throws RemoteException {
-        }
+        public void semUnregisterDisplayBrightnessCallback() throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void semGetSensorData(Bundle bundle) throws RemoteException {
-        }
+        public void semGetSensorData(Bundle bundle) throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void semSetFodStrictMode(boolean isStrictMode) throws RemoteException {
-        }
+        public void semSetFodStrictMode(boolean isStrictMode) throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public int semSetCalibrationMode(IBinder token, int param, String opPackageName) throws RemoteException {
+        public int semSetCalibrationMode(IBinder token, int param, String opPackageName)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public int semProcessFido(int userId, byte[] inBuf, byte[] outBuf, String opPackageName) throws RemoteException {
+        public int semProcessFido(int userId, byte[] inBuf, byte[] outBuf, String opPackageName)
+                throws RemoteException {
             return 0;
         }
 
@@ -575,17 +727,25 @@ public interface IFingerprintService extends IInterface {
         }
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void semSetFlagForIFAA(int flag, String targetAppPackageName) throws RemoteException {
-        }
+        public void semSetFlagForIFAA(int flag, String targetAppPackageName)
+                throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public int semRequest(IBinder token, int cmd, byte[] inputBuf, byte[] outputBuf, int inParam, int groupId, String opPackageName, ISemFingerprintRequestCallback receiver) throws RemoteException {
+        public int semRequest(
+                IBinder token,
+                int cmd,
+                byte[] inputBuf,
+                byte[] outputBuf,
+                int inParam,
+                int groupId,
+                String opPackageName,
+                ISemFingerprintRequestCallback receiver)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.hardware.fingerprint.IFingerprintService
-        public void onPowerSinglePressed() throws RemoteException {
-        }
+        public void onPowerSinglePressed() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -593,7 +753,7 @@ public interface IFingerprintService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFingerprintService {
+    public abstract static class Stub extends Binder implements IFingerprintService {
         public static final String DESCRIPTOR = "android.hardware.fingerprint.IFingerprintService";
         static final int TRANSACTION_addAuthenticatorsRegisteredCallback = 33;
         static final int TRANSACTION_addClientActiveCallback = 30;
@@ -692,7 +852,9 @@ public interface IFingerprintService extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IFingerprintService asInterface(IBinder obj) {
@@ -894,7 +1056,8 @@ public interface IFingerprintService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             byte[] _arg0;
             byte[] _arg2;
             byte[] _arg3;
@@ -908,7 +1071,8 @@ public interface IFingerprintService extends IInterface {
             switch (code) {
                 case 1:
                     int _arg02 = data.readInt();
-                    ITestSessionCallback _arg1 = ITestSessionCallback.Stub.asInterface(data.readStrongBinder());
+                    ITestSessionCallback _arg1 =
+                            ITestSessionCallback.Stub.asInterface(data.readStrongBinder());
                     String _arg22 = data.readString();
                     data.enforceNoDataAvail();
                     ITestSession _result = createTestSession(_arg02, _arg1, _arg22);
@@ -926,7 +1090,8 @@ public interface IFingerprintService extends IInterface {
                 case 3:
                     String _arg04 = data.readString();
                     data.enforceNoDataAvail();
-                    List<FingerprintSensorPropertiesInternal> _result3 = getSensorPropertiesInternal(_arg04);
+                    List<FingerprintSensorPropertiesInternal> _result3 =
+                            getSensorPropertiesInternal(_arg04);
                     reply.writeNoException();
                     reply.writeTypedList(_result3, 1);
                     return true;
@@ -934,15 +1099,19 @@ public interface IFingerprintService extends IInterface {
                     int _arg05 = data.readInt();
                     String _arg13 = data.readString();
                     data.enforceNoDataAvail();
-                    FingerprintSensorPropertiesInternal _result4 = getSensorProperties(_arg05, _arg13);
+                    FingerprintSensorPropertiesInternal _result4 =
+                            getSensorProperties(_arg05, _arg13);
                     reply.writeNoException();
                     reply.writeTypedObject(_result4, 1);
                     return true;
                 case 5:
                     IBinder _arg06 = data.readStrongBinder();
                     long _arg14 = data.readLong();
-                    IFingerprintServiceReceiver _arg23 = IFingerprintServiceReceiver.Stub.asInterface(data.readStrongBinder());
-                    FingerprintAuthenticateOptions _arg32 = (FingerprintAuthenticateOptions) data.readTypedObject(FingerprintAuthenticateOptions.CREATOR);
+                    IFingerprintServiceReceiver _arg23 =
+                            IFingerprintServiceReceiver.Stub.asInterface(data.readStrongBinder());
+                    FingerprintAuthenticateOptions _arg32 =
+                            (FingerprintAuthenticateOptions)
+                                    data.readTypedObject(FingerprintAuthenticateOptions.CREATOR);
                     data.enforceNoDataAvail();
                     long _result5 = authenticate(_arg06, _arg14, _arg23, _arg32);
                     reply.writeNoException();
@@ -950,8 +1119,11 @@ public interface IFingerprintService extends IInterface {
                     return true;
                 case 6:
                     IBinder _arg07 = data.readStrongBinder();
-                    IFingerprintServiceReceiver _arg15 = IFingerprintServiceReceiver.Stub.asInterface(data.readStrongBinder());
-                    FingerprintAuthenticateOptions _arg24 = (FingerprintAuthenticateOptions) data.readTypedObject(FingerprintAuthenticateOptions.CREATOR);
+                    IFingerprintServiceReceiver _arg15 =
+                            IFingerprintServiceReceiver.Stub.asInterface(data.readStrongBinder());
+                    FingerprintAuthenticateOptions _arg24 =
+                            (FingerprintAuthenticateOptions)
+                                    data.readTypedObject(FingerprintAuthenticateOptions.CREATOR);
                     data.enforceNoDataAvail();
                     long _result6 = detectFingerprint(_arg07, _arg15, _arg24);
                     reply.writeNoException();
@@ -960,14 +1132,18 @@ public interface IFingerprintService extends IInterface {
                 case 7:
                     IBinder _arg08 = data.readStrongBinder();
                     long _arg16 = data.readLong();
-                    IBiometricSensorReceiver _arg25 = IBiometricSensorReceiver.Stub.asInterface(data.readStrongBinder());
-                    FingerprintAuthenticateOptions _arg33 = (FingerprintAuthenticateOptions) data.readTypedObject(FingerprintAuthenticateOptions.CREATOR);
+                    IBiometricSensorReceiver _arg25 =
+                            IBiometricSensorReceiver.Stub.asInterface(data.readStrongBinder());
+                    FingerprintAuthenticateOptions _arg33 =
+                            (FingerprintAuthenticateOptions)
+                                    data.readTypedObject(FingerprintAuthenticateOptions.CREATOR);
                     long _arg4 = data.readLong();
                     int _arg5 = data.readInt();
                     boolean _arg6 = data.readBoolean();
                     boolean _arg7 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    prepareForAuthentication(_arg08, _arg16, _arg25, _arg33, _arg4, _arg5, _arg6, _arg7);
+                    prepareForAuthentication(
+                            _arg08, _arg16, _arg25, _arg33, _arg4, _arg5, _arg6, _arg7);
                     reply.writeNoException();
                     return true;
                 case 8:
@@ -1007,12 +1183,16 @@ public interface IFingerprintService extends IInterface {
                     IBinder _arg013 = data.readStrongBinder();
                     byte[] _arg111 = data.createByteArray();
                     int _arg29 = data.readInt();
-                    IFingerprintServiceReceiver _arg36 = IFingerprintServiceReceiver.Stub.asInterface(data.readStrongBinder());
+                    IFingerprintServiceReceiver _arg36 =
+                            IFingerprintServiceReceiver.Stub.asInterface(data.readStrongBinder());
                     String _arg42 = data.readString();
                     int _arg52 = data.readInt();
-                    FingerprintEnrollOptions _arg62 = (FingerprintEnrollOptions) data.readTypedObject(FingerprintEnrollOptions.CREATOR);
+                    FingerprintEnrollOptions _arg62 =
+                            (FingerprintEnrollOptions)
+                                    data.readTypedObject(FingerprintEnrollOptions.CREATOR);
                     data.enforceNoDataAvail();
-                    long _result7 = enroll(_arg013, _arg111, _arg29, _arg36, _arg42, _arg52, _arg62);
+                    long _result7 =
+                            enroll(_arg013, _arg111, _arg29, _arg36, _arg42, _arg52, _arg62);
                     reply.writeNoException();
                     reply.writeLong(_result7);
                     return true;
@@ -1027,7 +1207,8 @@ public interface IFingerprintService extends IInterface {
                     IBinder _arg015 = data.readStrongBinder();
                     int _arg113 = data.readInt();
                     int _arg210 = data.readInt();
-                    IFingerprintServiceReceiver _arg37 = IFingerprintServiceReceiver.Stub.asInterface(data.readStrongBinder());
+                    IFingerprintServiceReceiver _arg37 =
+                            IFingerprintServiceReceiver.Stub.asInterface(data.readStrongBinder());
                     String _arg43 = data.readString();
                     data.enforceNoDataAvail();
                     remove(_arg015, _arg113, _arg210, _arg37, _arg43);
@@ -1036,7 +1217,8 @@ public interface IFingerprintService extends IInterface {
                 case 15:
                     IBinder _arg016 = data.readStrongBinder();
                     int _arg114 = data.readInt();
-                    IFingerprintServiceReceiver _arg211 = IFingerprintServiceReceiver.Stub.asInterface(data.readStrongBinder());
+                    IFingerprintServiceReceiver _arg211 =
+                            IFingerprintServiceReceiver.Stub.asInterface(data.readStrongBinder());
                     String _arg38 = data.readString();
                     data.enforceNoDataAvail();
                     removeAll(_arg016, _arg114, _arg211, _arg38);
@@ -1079,7 +1261,8 @@ public interface IFingerprintService extends IInterface {
                     IBinder _arg021 = data.readStrongBinder();
                     int _arg119 = data.readInt();
                     int _arg214 = data.readInt();
-                    IFingerprintServiceReceiver _arg39 = IFingerprintServiceReceiver.Stub.asInterface(data.readStrongBinder());
+                    IFingerprintServiceReceiver _arg39 =
+                            IFingerprintServiceReceiver.Stub.asInterface(data.readStrongBinder());
                     String _arg44 = data.readString();
                     data.enforceNoDataAvail();
                     generateChallenge(_arg021, _arg119, _arg214, _arg39, _arg44);
@@ -1100,7 +1283,8 @@ public interface IFingerprintService extends IInterface {
                     String _arg121 = data.readString();
                     String _arg216 = data.readString();
                     data.enforceNoDataAvail();
-                    boolean _result11 = hasEnrolledFingerprintsDeprecated(_arg023, _arg121, _arg216);
+                    boolean _result11 =
+                            hasEnrolledFingerprintsDeprecated(_arg023, _arg121, _arg216);
                     reply.writeNoException();
                     reply.writeBoolean(_result11);
                     return true;
@@ -1124,7 +1308,8 @@ public interface IFingerprintService extends IInterface {
                 case 25:
                     int _arg026 = data.readInt();
                     int _arg124 = data.readInt();
-                    IInvalidationCallback _arg218 = IInvalidationCallback.Stub.asInterface(data.readStrongBinder());
+                    IInvalidationCallback _arg218 =
+                            IInvalidationCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     invalidateAuthenticatorId(_arg026, _arg124, _arg218);
                     reply.writeNoException();
@@ -1148,7 +1333,9 @@ public interface IFingerprintService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 28:
-                    IBiometricServiceLockoutResetCallback _arg029 = IBiometricServiceLockoutResetCallback.Stub.asInterface(data.readStrongBinder());
+                    IBiometricServiceLockoutResetCallback _arg029 =
+                            IBiometricServiceLockoutResetCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     String _arg127 = data.readString();
                     data.enforceNoDataAvail();
                     addLockoutResetCallback(_arg029, _arg127);
@@ -1160,25 +1347,33 @@ public interface IFingerprintService extends IInterface {
                     reply.writeBoolean(_result15);
                     return true;
                 case 30:
-                    IFingerprintClientActiveCallback _arg030 = IFingerprintClientActiveCallback.Stub.asInterface(data.readStrongBinder());
+                    IFingerprintClientActiveCallback _arg030 =
+                            IFingerprintClientActiveCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addClientActiveCallback(_arg030);
                     reply.writeNoException();
                     return true;
                 case 31:
-                    IFingerprintClientActiveCallback _arg031 = IFingerprintClientActiveCallback.Stub.asInterface(data.readStrongBinder());
+                    IFingerprintClientActiveCallback _arg031 =
+                            IFingerprintClientActiveCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeClientActiveCallback(_arg031);
                     reply.writeNoException();
                     return true;
                 case 32:
-                    FingerprintSensorConfigurations _arg032 = (FingerprintSensorConfigurations) data.readTypedObject(FingerprintSensorConfigurations.CREATOR);
+                    FingerprintSensorConfigurations _arg032 =
+                            (FingerprintSensorConfigurations)
+                                    data.readTypedObject(FingerprintSensorConfigurations.CREATOR);
                     data.enforceNoDataAvail();
                     registerAuthenticators(_arg032);
                     reply.writeNoException();
                     return true;
                 case 33:
-                    IFingerprintAuthenticatorsRegisteredCallback _arg033 = IFingerprintAuthenticatorsRegisteredCallback.Stub.asInterface(data.readStrongBinder());
+                    IFingerprintAuthenticatorsRegisteredCallback _arg033 =
+                            IFingerprintAuthenticatorsRegisteredCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addAuthenticatorsRegisteredCallback(_arg033);
                     reply.writeNoException();
@@ -1186,7 +1381,8 @@ public interface IFingerprintService extends IInterface {
                 case 34:
                     long _arg034 = data.readLong();
                     int _arg128 = data.readInt();
-                    PointerContext _arg220 = (PointerContext) data.readTypedObject(PointerContext.CREATOR);
+                    PointerContext _arg220 =
+                            (PointerContext) data.readTypedObject(PointerContext.CREATOR);
                     data.enforceNoDataAvail();
                     onPointerDown(_arg034, _arg128, _arg220);
                     reply.writeNoException();
@@ -1194,7 +1390,8 @@ public interface IFingerprintService extends IInterface {
                 case 35:
                     long _arg035 = data.readLong();
                     int _arg129 = data.readInt();
-                    PointerContext _arg221 = (PointerContext) data.readTypedObject(PointerContext.CREATOR);
+                    PointerContext _arg221 =
+                            (PointerContext) data.readTypedObject(PointerContext.CREATOR);
                     data.enforceNoDataAvail();
                     onPointerUp(_arg035, _arg129, _arg221);
                     reply.writeNoException();
@@ -1216,25 +1413,29 @@ public interface IFingerprintService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 38:
-                    IUdfpsOverlayController _arg038 = IUdfpsOverlayController.Stub.asInterface(data.readStrongBinder());
+                    IUdfpsOverlayController _arg038 =
+                            IUdfpsOverlayController.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setUdfpsOverlayController(_arg038);
                     reply.writeNoException();
                     return true;
                 case 39:
-                    AuthenticationStateListener _arg039 = AuthenticationStateListener.Stub.asInterface(data.readStrongBinder());
+                    AuthenticationStateListener _arg039 =
+                            AuthenticationStateListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerAuthenticationStateListener(_arg039);
                     reply.writeNoException();
                     return true;
                 case 40:
-                    AuthenticationStateListener _arg040 = AuthenticationStateListener.Stub.asInterface(data.readStrongBinder());
+                    AuthenticationStateListener _arg040 =
+                            AuthenticationStateListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterAuthenticationStateListener(_arg040);
                     reply.writeNoException();
                     return true;
                 case 41:
-                    IBiometricStateListener _arg041 = IBiometricStateListener.Stub.asInterface(data.readStrongBinder());
+                    IBiometricStateListener _arg041 =
+                            IBiometricStateListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerBiometricStateListener(_arg041);
                     reply.writeNoException();
@@ -1248,8 +1449,11 @@ public interface IFingerprintService extends IInterface {
                 case 44:
                     IBinder _arg042 = data.readStrongBinder();
                     long _arg132 = data.readLong();
-                    IFingerprintServiceReceiver _arg224 = IFingerprintServiceReceiver.Stub.asInterface(data.readStrongBinder());
-                    FingerprintAuthenticateOptions _arg312 = (FingerprintAuthenticateOptions) data.readTypedObject(FingerprintAuthenticateOptions.CREATOR);
+                    IFingerprintServiceReceiver _arg224 =
+                            IFingerprintServiceReceiver.Stub.asInterface(data.readStrongBinder());
+                    FingerprintAuthenticateOptions _arg312 =
+                            (FingerprintAuthenticateOptions)
+                                    data.readTypedObject(FingerprintAuthenticateOptions.CREATOR);
                     Bundle _arg47 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
                     long _result16 = semAuthenticate(_arg042, _arg132, _arg224, _arg312, _arg47);
@@ -1321,7 +1525,9 @@ public interface IFingerprintService extends IInterface {
                     IBinder _arg044 = data.readStrongBinder();
                     int _arg133 = data.readInt();
                     int _arg225 = data.readInt();
-                    ISemFingerprintRequestCallback _arg313 = ISemFingerprintRequestCallback.Stub.asInterface(data.readStrongBinder());
+                    ISemFingerprintRequestCallback _arg313 =
+                            ISemFingerprintRequestCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result28 = semRunSensorTest(_arg044, _arg133, _arg225, _arg313);
                     reply.writeNoException();
@@ -1372,7 +1578,8 @@ public interface IFingerprintService extends IInterface {
                     return true;
                 case 63:
                     IBinder _arg049 = data.readStrongBinder();
-                    ISemFingerprintAodController _arg136 = ISemFingerprintAodController.Stub.asInterface(data.readStrongBinder());
+                    ISemFingerprintAodController _arg136 =
+                            ISemFingerprintAodController.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     semRegisterAodController(_arg049, _arg136);
                     reply.writeNoException();
@@ -1420,7 +1627,9 @@ public interface IFingerprintService extends IInterface {
                     return true;
                 case 71:
                     String _arg053 = data.readString();
-                    ISemFingerprintRequestCallback _arg139 = ISemFingerprintRequestCallback.Stub.asInterface(data.readStrongBinder());
+                    ISemFingerprintRequestCallback _arg139 =
+                            ISemFingerprintRequestCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     String _arg227 = data.readString();
                     data.enforceNoDataAvail();
                     semUpdateTrustApp(_arg053, _arg139, _arg227);
@@ -1437,7 +1646,9 @@ public interface IFingerprintService extends IInterface {
                     reply.writeInt(_result38);
                     return true;
                 case 73:
-                    ISemBiometricSysUiDisplayStateCallback _arg055 = ISemBiometricSysUiDisplayStateCallback.Stub.asInterface(data.readStrongBinder());
+                    ISemBiometricSysUiDisplayStateCallback _arg055 =
+                            ISemBiometricSysUiDisplayStateCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result39 = semRegisterDisplayStateCallback(_arg055);
                     reply.writeNoException();
@@ -1448,7 +1659,9 @@ public interface IFingerprintService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 75:
-                    ISemBiometricSysUiDisplayBrightnessCallback _arg056 = ISemBiometricSysUiDisplayBrightnessCallback.Stub.asInterface(data.readStrongBinder());
+                    ISemBiometricSysUiDisplayBrightnessCallback _arg056 =
+                            ISemBiometricSysUiDisplayBrightnessCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result40 = semRegisterDisplayBrightnessCallback(_arg056);
                     reply.writeNoException();
@@ -1529,9 +1742,14 @@ public interface IFingerprintService extends IInterface {
                     int _arg48 = data.readInt();
                     int _arg53 = data.readInt();
                     String _arg63 = data.readString();
-                    ISemFingerprintRequestCallback _arg72 = ISemFingerprintRequestCallback.Stub.asInterface(data.readStrongBinder());
+                    ISemFingerprintRequestCallback _arg72 =
+                            ISemFingerprintRequestCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
-                    int _result45 = semRequest(_arg063, _arg144, _arg230, _arg3, _arg48, _arg53, _arg63, _arg72);
+                    int _result45 =
+                            semRequest(
+                                    _arg063, _arg144, _arg230, _arg3, _arg48, _arg53, _arg63,
+                                    _arg72);
                     reply.writeNoException();
                     reply.writeInt(_result45);
                     reply.writeByteArray(_arg3);
@@ -1561,7 +1779,9 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public ITestSession createTestSession(int sensorId, ITestSessionCallback callback, String opPackageName) throws RemoteException {
+            public ITestSession createTestSession(
+                    int sensorId, ITestSessionCallback callback, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1580,7 +1800,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public byte[] dumpSensorServiceStateProto(int sensorId, boolean clearSchedulerBuffer) throws RemoteException {
+            public byte[] dumpSensorServiceStateProto(int sensorId, boolean clearSchedulerBuffer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1598,7 +1819,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public List<FingerprintSensorPropertiesInternal> getSensorPropertiesInternal(String opPackageName) throws RemoteException {
+            public List<FingerprintSensorPropertiesInternal> getSensorPropertiesInternal(
+                    String opPackageName) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1606,7 +1828,9 @@ public interface IFingerprintService extends IInterface {
                     _data.writeString(opPackageName);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    List<FingerprintSensorPropertiesInternal> _result = _reply.createTypedArrayList(FingerprintSensorPropertiesInternal.CREATOR);
+                    List<FingerprintSensorPropertiesInternal> _result =
+                            _reply.createTypedArrayList(
+                                    FingerprintSensorPropertiesInternal.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1615,7 +1839,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public FingerprintSensorPropertiesInternal getSensorProperties(int sensorId, String opPackageName) throws RemoteException {
+            public FingerprintSensorPropertiesInternal getSensorProperties(
+                    int sensorId, String opPackageName) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1624,7 +1849,10 @@ public interface IFingerprintService extends IInterface {
                     _data.writeString(opPackageName);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    FingerprintSensorPropertiesInternal _result = (FingerprintSensorPropertiesInternal) _reply.readTypedObject(FingerprintSensorPropertiesInternal.CREATOR);
+                    FingerprintSensorPropertiesInternal _result =
+                            (FingerprintSensorPropertiesInternal)
+                                    _reply.readTypedObject(
+                                            FingerprintSensorPropertiesInternal.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1633,7 +1861,12 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public long authenticate(IBinder token, long operationId, IFingerprintServiceReceiver receiver, FingerprintAuthenticateOptions options) throws RemoteException {
+            public long authenticate(
+                    IBinder token,
+                    long operationId,
+                    IFingerprintServiceReceiver receiver,
+                    FingerprintAuthenticateOptions options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1653,7 +1886,11 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public long detectFingerprint(IBinder token, IFingerprintServiceReceiver receiver, FingerprintAuthenticateOptions options) throws RemoteException {
+            public long detectFingerprint(
+                    IBinder token,
+                    IFingerprintServiceReceiver receiver,
+                    FingerprintAuthenticateOptions options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1672,7 +1909,16 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public void prepareForAuthentication(IBinder token, long operationId, IBiometricSensorReceiver sensorReceiver, FingerprintAuthenticateOptions options, long requestId, int cookie, boolean allowBackgroundAuthentication, boolean isForLegacyFingerprintManager) throws RemoteException {
+            public void prepareForAuthentication(
+                    IBinder token,
+                    long operationId,
+                    IBiometricSensorReceiver sensorReceiver,
+                    FingerprintAuthenticateOptions options,
+                    long requestId,
+                    int cookie,
+                    boolean allowBackgroundAuthentication,
+                    boolean isForLegacyFingerprintManager)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1710,7 +1956,9 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public void cancelAuthentication(IBinder token, String opPackageName, String attributionTag, long requestId) throws RemoteException {
+            public void cancelAuthentication(
+                    IBinder token, String opPackageName, String attributionTag, long requestId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1728,7 +1976,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public void cancelFingerprintDetect(IBinder token, String opPackageName, long requestId) throws RemoteException {
+            public void cancelFingerprintDetect(IBinder token, String opPackageName, long requestId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1745,7 +1994,9 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public void cancelAuthenticationFromService(int sensorId, IBinder token, String opPackageName, long requestId) throws RemoteException {
+            public void cancelAuthenticationFromService(
+                    int sensorId, IBinder token, String opPackageName, long requestId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1763,7 +2014,15 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public long enroll(IBinder token, byte[] hardwareAuthToken, int userId, IFingerprintServiceReceiver receiver, String opPackageName, int enrollReason, FingerprintEnrollOptions options) throws RemoteException {
+            public long enroll(
+                    IBinder token,
+                    byte[] hardwareAuthToken,
+                    int userId,
+                    IFingerprintServiceReceiver receiver,
+                    String opPackageName,
+                    int enrollReason,
+                    FingerprintEnrollOptions options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1802,7 +2061,13 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public void remove(IBinder token, int fingerId, int userId, IFingerprintServiceReceiver receiver, String opPackageName) throws RemoteException {
+            public void remove(
+                    IBinder token,
+                    int fingerId,
+                    int userId,
+                    IFingerprintServiceReceiver receiver,
+                    String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1821,7 +2086,12 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public void removeAll(IBinder token, int userId, IFingerprintServiceReceiver receiver, String opPackageName) throws RemoteException {
+            public void removeAll(
+                    IBinder token,
+                    int userId,
+                    IFingerprintServiceReceiver receiver,
+                    String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1856,7 +2126,9 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public List<Fingerprint> getEnrolledFingerprints(int userId, String opPackageName, String attributionTag) throws RemoteException {
+            public List<Fingerprint> getEnrolledFingerprints(
+                    int userId, String opPackageName, String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1875,7 +2147,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public boolean isHardwareDetectedDeprecated(String opPackageName, String attributionTag) throws RemoteException {
+            public boolean isHardwareDetectedDeprecated(String opPackageName, String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1893,7 +2166,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public boolean isHardwareDetected(int sensorId, String opPackageName) throws RemoteException {
+            public boolean isHardwareDetected(int sensorId, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1911,7 +2185,13 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public void generateChallenge(IBinder token, int sensorId, int userId, IFingerprintServiceReceiver receiver, String opPackageName) throws RemoteException {
+            public void generateChallenge(
+                    IBinder token,
+                    int sensorId,
+                    int userId,
+                    IFingerprintServiceReceiver receiver,
+                    String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1930,7 +2210,9 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public void revokeChallenge(IBinder token, int sensorId, int userId, String opPackageName, long challenge) throws RemoteException {
+            public void revokeChallenge(
+                    IBinder token, int sensorId, int userId, String opPackageName, long challenge)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1949,7 +2231,9 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public boolean hasEnrolledFingerprintsDeprecated(int userId, String opPackageName, String attributionTag) throws RemoteException {
+            public boolean hasEnrolledFingerprintsDeprecated(
+                    int userId, String opPackageName, String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1968,7 +2252,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public boolean hasEnrolledFingerprints(int sensorId, int userId, String opPackageName) throws RemoteException {
+            public boolean hasEnrolledFingerprints(int sensorId, int userId, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2005,7 +2290,9 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public void invalidateAuthenticatorId(int sensorId, int userId, IInvalidationCallback callback) throws RemoteException {
+            public void invalidateAuthenticatorId(
+                    int sensorId, int userId, IInvalidationCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2040,7 +2327,13 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public void resetLockout(IBinder token, int sensorId, int userId, byte[] hardwareAuthToken, String opPackageNAame) throws RemoteException {
+            public void resetLockout(
+                    IBinder token,
+                    int sensorId,
+                    int userId,
+                    byte[] hardwareAuthToken,
+                    String opPackageNAame)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2059,7 +2352,9 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public void addLockoutResetCallback(IBiometricServiceLockoutResetCallback callback, String opPackageName) throws RemoteException {
+            public void addLockoutResetCallback(
+                    IBiometricServiceLockoutResetCallback callback, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2091,7 +2386,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public void addClientActiveCallback(IFingerprintClientActiveCallback callback) throws RemoteException {
+            public void addClientActiveCallback(IFingerprintClientActiveCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2106,7 +2402,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public void removeClientActiveCallback(IFingerprintClientActiveCallback callback) throws RemoteException {
+            public void removeClientActiveCallback(IFingerprintClientActiveCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2121,7 +2418,9 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public void registerAuthenticators(FingerprintSensorConfigurations fingerprintSensorConfigurations) throws RemoteException {
+            public void registerAuthenticators(
+                    FingerprintSensorConfigurations fingerprintSensorConfigurations)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2136,7 +2435,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public void addAuthenticatorsRegisteredCallback(IFingerprintAuthenticatorsRegisteredCallback callback) throws RemoteException {
+            public void addAuthenticatorsRegisteredCallback(
+                    IFingerprintAuthenticatorsRegisteredCallback callback) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2151,7 +2451,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public void onPointerDown(long requestId, int sensorId, PointerContext pc) throws RemoteException {
+            public void onPointerDown(long requestId, int sensorId, PointerContext pc)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2168,7 +2469,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public void onPointerUp(long requestId, int sensorId, PointerContext pc) throws RemoteException {
+            public void onPointerUp(long requestId, int sensorId, PointerContext pc)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2185,7 +2487,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public void onUdfpsUiEvent(int event, long requestId, int sensorId) throws RemoteException {
+            public void onUdfpsUiEvent(int event, long requestId, int sensorId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2202,7 +2505,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public void setIgnoreDisplayTouches(long requestId, int sensorId, boolean ignoreTouches) throws RemoteException {
+            public void setIgnoreDisplayTouches(long requestId, int sensorId, boolean ignoreTouches)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2219,7 +2523,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public void setUdfpsOverlayController(IUdfpsOverlayController controller) throws RemoteException {
+            public void setUdfpsOverlayController(IUdfpsOverlayController controller)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2234,7 +2539,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public void registerAuthenticationStateListener(AuthenticationStateListener listener) throws RemoteException {
+            public void registerAuthenticationStateListener(AuthenticationStateListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2249,7 +2555,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public void unregisterAuthenticationStateListener(AuthenticationStateListener listener) throws RemoteException {
+            public void unregisterAuthenticationStateListener(AuthenticationStateListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2264,7 +2571,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public void registerBiometricStateListener(IBiometricStateListener listener) throws RemoteException {
+            public void registerBiometricStateListener(IBiometricStateListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2301,7 +2609,13 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public long semAuthenticate(IBinder token, long operationId, IFingerprintServiceReceiver receiver, FingerprintAuthenticateOptions options, Bundle bundle) throws RemoteException {
+            public long semAuthenticate(
+                    IBinder token,
+                    long operationId,
+                    IFingerprintServiceReceiver receiver,
+                    FingerprintAuthenticateOptions options,
+                    Bundle bundle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2513,7 +2827,9 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public int semRunSensorTest(IBinder token, int cmd, int param, ISemFingerprintRequestCallback callback) throws RemoteException {
+            public int semRunSensorTest(
+                    IBinder token, int cmd, int param, ISemFingerprintRequestCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2585,7 +2901,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public IBinder semAddMaskView(IBinder token, String opPackageName) throws RemoteException {
+            public IBinder semAddMaskView(IBinder token, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2603,7 +2920,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public int semRemoveMaskView(IBinder token, String opPackageName) throws RemoteException {
+            public int semRemoveMaskView(IBinder token, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2621,7 +2939,9 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public void semRegisterAodController(IBinder token, ISemFingerprintAodController aodController) throws RemoteException {
+            public void semRegisterAodController(
+                    IBinder token, ISemFingerprintAodController aodController)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2652,7 +2972,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public Rect semGetSensorAreaInDisplay(int type, int rotation, Point point) throws RemoteException {
+            public Rect semGetSensorAreaInDisplay(int type, int rotation, Point point)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2749,7 +3070,9 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public void semUpdateTrustApp(String path, ISemFingerprintRequestCallback receiver, String opPackageName) throws RemoteException {
+            public void semUpdateTrustApp(
+                    String path, ISemFingerprintRequestCallback receiver, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2766,7 +3089,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public int semBioSysUiRequest(int cmd, int arg1, long arg2, String arg3) throws RemoteException {
+            public int semBioSysUiRequest(int cmd, int arg1, long arg2, String arg3)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2786,7 +3110,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public int semRegisterDisplayStateCallback(ISemBiometricSysUiDisplayStateCallback cb) throws RemoteException {
+            public int semRegisterDisplayStateCallback(ISemBiometricSysUiDisplayStateCallback cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2817,7 +3142,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public int semRegisterDisplayBrightnessCallback(ISemBiometricSysUiDisplayBrightnessCallback cb) throws RemoteException {
+            public int semRegisterDisplayBrightnessCallback(
+                    ISemBiometricSysUiDisplayBrightnessCallback cb) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2880,7 +3206,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public int semSetCalibrationMode(IBinder token, int param, String opPackageName) throws RemoteException {
+            public int semSetCalibrationMode(IBinder token, int param, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2899,7 +3226,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public int semProcessFido(int userId, byte[] inBuf, byte[] outBuf, String opPackageName) throws RemoteException {
+            public int semProcessFido(int userId, byte[] inBuf, byte[] outBuf, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2953,7 +3281,8 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public void semSetFlagForIFAA(int flag, String targetAppPackageName) throws RemoteException {
+            public void semSetFlagForIFAA(int flag, String targetAppPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2969,7 +3298,16 @@ public interface IFingerprintService extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IFingerprintService
-            public int semRequest(IBinder token, int cmd, byte[] inputBuf, byte[] outputBuf, int inParam, int groupId, String opPackageName, ISemFingerprintRequestCallback receiver) throws RemoteException {
+            public int semRequest(
+                    IBinder token,
+                    int cmd,
+                    byte[] inputBuf,
+                    byte[] outputBuf,
+                    int inParam,
+                    int groupId,
+                    String opPackageName,
+                    ISemFingerprintRequestCallback receiver)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3006,283 +3344,363 @@ public interface IFingerprintService extends IInterface {
         }
 
         protected void createTestSession_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.TEST_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void dumpSensorServiceStateProto_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void getSensorProperties_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void detectFingerprint_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void prepareForAuthentication_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void startPreparedClient_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void cancelFingerprintDetect_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
-        protected void cancelAuthenticationFromService_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
+        protected void cancelAuthenticationFromService_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_BIOMETRIC, getCallingPid(), getCallingUid());
         }
 
         protected void enroll_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void cancelEnrollment_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void remove_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void removeAll_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void rename_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void isHardwareDetected_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void generateChallenge_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void revokeChallenge_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void hasEnrolledFingerprints_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void getLockoutModeForUser_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void invalidateAuthenticatorId_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void getAuthenticatorId_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void resetLockout_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.RESET_FINGERPRINT_LOCKOUT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.RESET_FINGERPRINT_LOCKOUT,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void addLockoutResetCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void isClientActive_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void addClientActiveCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void removeClientActiveCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void registerAuthenticators_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
-        protected void addAuthenticatorsRegisteredCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+        protected void addAuthenticatorsRegisteredCallback_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void onPointerDown_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void onPointerUp_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void onUdfpsUiEvent_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void setIgnoreDisplayTouches_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void setUdfpsOverlayController_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
-        protected void registerAuthenticationStateListener_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+        protected void registerAuthenticationStateListener_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
-        protected void unregisterAuthenticationStateListener_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+        protected void unregisterAuthenticationStateListener_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void registerBiometricStateListener_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void onPowerPressed_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void scheduleWatchdog_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         protected void semForceCBGE_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semIsEnrollSession_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semIsTemplateDbCorrupted_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semPauseEnroll_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semResumeEnroll_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semOpenSession_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semGetSensorInfo_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semGetUserIdList_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semGetDaemonVersion_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semRunSensorTest_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semGetSensorTestResult_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semSetScreenStatus_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semShowBouncerScreen_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semAddMaskView_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semRemoveMaskView_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semRegisterAodController_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semUnregisterAodController_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semMoveSensorIconInDisplay_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semGetSecurityLevel_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semGetTrustAppVersion_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semUpdateTrustApp_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semBioSysUiRequest_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
-        protected void semRegisterDisplayStateCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+        protected void semRegisterDisplayStateCallback_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
-        protected void semUnregisterDisplayStateCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+        protected void semUnregisterDisplayStateCallback_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
-        protected void semRegisterDisplayBrightnessCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+        protected void semRegisterDisplayBrightnessCallback_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
-        protected void semUnregisterDisplayBrightnessCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+        protected void semUnregisterDisplayBrightnessCallback_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semGetSensorData_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semSetFodStrictMode_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semSetCalibrationMode_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semGetRemainingLockoutTime_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semCanChangeDeviceColorMode_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void semSetFlagForIFAA_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_FINGERPRINT, getCallingPid(), getCallingUid());
         }
 
         protected void onPowerSinglePressed_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.USE_BIOMETRIC_INTERNAL, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

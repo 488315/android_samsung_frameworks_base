@@ -13,14 +13,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RemoteViews;
+
 import com.android.internal.R;
+
 import java.io.IOException;
 
 @RemoteViews.RemoteView
 /* loaded from: classes5.dex */
 public class MessagingImageMessage extends ImageView implements MessagingMessage {
     private static final String TAG = "MessagingImageMessage";
-    private static final MessagingPool<MessagingImageMessage> sInstancePool = new MessagingPool<>(10);
+    private static final MessagingPool<MessagingImageMessage> sInstancePool =
+            new MessagingPool<>(10);
     private int mActualHeight;
     private int mActualWidth;
     private float mAspectRatio;
@@ -47,14 +50,19 @@ public class MessagingImageMessage extends ImageView implements MessagingMessage
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public MessagingImageMessage(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public MessagingImageMessage(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.mState = new MessagingMessageState(this);
         this.mPath = new Path();
-        this.mMinImageHeight = context.getResources().getDimensionPixelSize(R.dimen.messaging_image_min_size);
-        this.mMaxImageHeight = context.getResources().getDimensionPixelSize(R.dimen.messaging_image_max_height);
-        this.mImageRounding = context.getResources().getDimensionPixelSize(R.dimen.messaging_image_rounding);
-        this.mExtraSpacing = context.getResources().getDimensionPixelSize(R.dimen.messaging_image_extra_spacing);
+        this.mMinImageHeight =
+                context.getResources().getDimensionPixelSize(R.dimen.messaging_image_min_size);
+        this.mMaxImageHeight =
+                context.getResources().getDimensionPixelSize(R.dimen.messaging_image_max_height);
+        this.mImageRounding =
+                context.getResources().getDimensionPixelSize(R.dimen.messaging_image_rounding);
+        this.mExtraSpacing =
+                context.getResources().getDimensionPixelSize(R.dimen.messaging_image_extra_spacing);
         setMaxHeight(this.mMaxImageHeight);
         this.mIsolatedSize = getResources().getDimensionPixelSize(R.dimen.messaging_avatar_size);
     }
@@ -65,11 +73,15 @@ public class MessagingImageMessage extends ImageView implements MessagingMessage
     }
 
     @Override // com.android.internal.widget.MessagingMessage
-    public boolean setMessage(Notification.MessagingStyle.Message message, boolean usePrecomputedText) {
+    public boolean setMessage(
+            Notification.MessagingStyle.Message message, boolean usePrecomputedText) {
         super.setMessage(message, usePrecomputedText);
         try {
             Uri uri = message.getDataUri();
-            Drawable drawable = this.mImageResolver != null ? this.mImageResolver.loadImage(uri) : LocalImageResolver.resolveImage(uri, getContext());
+            Drawable drawable =
+                    this.mImageResolver != null
+                            ? this.mImageResolver.loadImage(uri)
+                            : LocalImageResolver.resolveImage(uri, getContext());
             if (drawable == null) {
                 return false;
             }
@@ -91,11 +103,21 @@ public class MessagingImageMessage extends ImageView implements MessagingMessage
         }
     }
 
-    static MessagingMessage createMessage(IMessagingLayout layout, Notification.MessagingStyle.Message m, ImageResolver resolver, boolean usePrecomputedText) {
+    static MessagingMessage createMessage(
+            IMessagingLayout layout,
+            Notification.MessagingStyle.Message m,
+            ImageResolver resolver,
+            boolean usePrecomputedText) {
         MessagingLinearLayout messagingLinearLayout = layout.getMessagingLinearLayout();
         MessagingImageMessage createdMessage = sInstancePool.acquire();
         if (createdMessage == null) {
-            createdMessage = (MessagingImageMessage) LayoutInflater.from(layout.getContext()).inflate(R.layout.notification_template_messaging_image_message, (ViewGroup) messagingLinearLayout, false);
+            createdMessage =
+                    (MessagingImageMessage)
+                            LayoutInflater.from(layout.getContext())
+                                    .inflate(
+                                            R.layout.notification_template_messaging_image_message,
+                                            (ViewGroup) messagingLinearLayout,
+                                            false);
             createdMessage.addOnLayoutChangeListener(MessagingLayout.MESSAGING_PROPERTY_ANIMATOR);
         }
         createdMessage.setImageResolver(resolver);
@@ -125,8 +147,20 @@ public class MessagingImageMessage extends ImageView implements MessagingMessage
         }
         canvas.save();
         canvas.clipPath(getRoundedRectPath());
-        int width = (int) Math.max(Math.min(getHeight(), getActualHeight()) * this.mAspectRatio, getActualWidth());
-        int height = (int) Math.max((int) Math.max(Math.min(getWidth(), getActualWidth()) / this.mAspectRatio, getActualHeight()), width / this.mAspectRatio);
+        int width =
+                (int)
+                        Math.max(
+                                Math.min(getHeight(), getActualHeight()) * this.mAspectRatio,
+                                getActualWidth());
+        int height =
+                (int)
+                        Math.max(
+                                (int)
+                                        Math.max(
+                                                Math.min(getWidth(), getActualWidth())
+                                                        / this.mAspectRatio,
+                                                getActualHeight()),
+                                width / this.mAspectRatio);
         int left = (int) ((getActualWidth() - width) / 2.0f);
         int top = (int) ((getActualHeight() - height) / 2.0f);
         this.mDrawable.setBounds(left, top, left + width, top + height);
@@ -155,7 +189,8 @@ public class MessagingImageMessage extends ImageView implements MessagingMessage
         return this.mPath;
     }
 
-    @Override // com.android.internal.widget.MessagingMessage, com.android.internal.widget.MessagingLinearLayout.MessagingChild
+    @Override // com.android.internal.widget.MessagingMessage,
+              // com.android.internal.widget.MessagingLinearLayout.MessagingChild
     public void recycle() {
         super.recycle();
         setImageBitmap(null);
@@ -180,7 +215,9 @@ public class MessagingImageMessage extends ImageView implements MessagingMessage
         } else {
             minImageHeight = this.mMinImageHeight;
         }
-        boolean measuredTooSmall = measuredHeight < minImageHeight && measuredHeight != this.mDrawable.getIntrinsicHeight();
+        boolean measuredTooSmall =
+                measuredHeight < minImageHeight
+                        && measuredHeight != this.mDrawable.getIntrinsicHeight();
         if (measuredTooSmall) {
             return 2;
         }
@@ -188,8 +225,7 @@ public class MessagingImageMessage extends ImageView implements MessagingMessage
     }
 
     @Override // com.android.internal.widget.MessagingLinearLayout.MessagingChild
-    public void setMaxDisplayedLines(int lines) {
-    }
+    public void setMaxDisplayedLines(int lines) {}
 
     @Override // android.widget.ImageView, android.view.View
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -199,11 +235,20 @@ public class MessagingImageMessage extends ImageView implements MessagingMessage
             setMeasuredDimension(0, 0);
         } else {
             if (this.mIsIsolated) {
-                setMeasuredDimension(View.MeasureSpec.getSize(widthMeasureSpec), View.MeasureSpec.getSize(heightMeasureSpec));
+                setMeasuredDimension(
+                        View.MeasureSpec.getSize(widthMeasureSpec),
+                        View.MeasureSpec.getSize(heightMeasureSpec));
                 return;
             }
-            int width = Math.min(View.MeasureSpec.getSize(widthMeasureSpec), this.mDrawable.getIntrinsicWidth());
-            int height = (int) Math.min(View.MeasureSpec.getSize(heightMeasureSpec), width / this.mAspectRatio);
+            int width =
+                    Math.min(
+                            View.MeasureSpec.getSize(widthMeasureSpec),
+                            this.mDrawable.getIntrinsicWidth());
+            int height =
+                    (int)
+                            Math.min(
+                                    View.MeasureSpec.getSize(heightMeasureSpec),
+                                    width / this.mAspectRatio);
             setMeasuredDimension(width, height);
         }
     }
@@ -241,7 +286,8 @@ public class MessagingImageMessage extends ImageView implements MessagingMessage
     public void setIsolated(boolean isolated) {
         if (this.mIsIsolated != isolated) {
             this.mIsIsolated = isolated;
-            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) getLayoutParams();
+            ViewGroup.MarginLayoutParams layoutParams =
+                    (ViewGroup.MarginLayoutParams) getLayoutParams();
             layoutParams.topMargin = isolated ? 0 : this.mExtraSpacing;
             setLayoutParams(layoutParams);
         }

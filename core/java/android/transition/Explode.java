@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
@@ -54,7 +55,11 @@ public class Explode extends Visibility {
     }
 
     @Override // android.transition.Visibility
-    public Animator onAppear(ViewGroup sceneRoot, View view, TransitionValues startValues, TransitionValues endValues) {
+    public Animator onAppear(
+            ViewGroup sceneRoot,
+            View view,
+            TransitionValues startValues,
+            TransitionValues endValues) {
         if (endValues == null) {
             return null;
         }
@@ -64,11 +69,25 @@ public class Explode extends Visibility {
         calculateOut(sceneRoot, bounds, this.mTempLoc);
         float startX = endX + this.mTempLoc[0];
         float startY = endY + this.mTempLoc[1];
-        return TranslationAnimationCreator.createAnimation(view, endValues, bounds.left, bounds.top, startX, startY, endX, endY, sDecelerate, this);
+        return TranslationAnimationCreator.createAnimation(
+                view,
+                endValues,
+                bounds.left,
+                bounds.top,
+                startX,
+                startY,
+                endX,
+                endY,
+                sDecelerate,
+                this);
     }
 
     @Override // android.transition.Visibility
-    public Animator onDisappear(ViewGroup sceneRoot, View view, TransitionValues startValues, TransitionValues endValues) {
+    public Animator onDisappear(
+            ViewGroup sceneRoot,
+            View view,
+            TransitionValues startValues,
+            TransitionValues endValues) {
         if (startValues == null) {
             return null;
         }
@@ -86,7 +105,17 @@ public class Explode extends Visibility {
             bounds.offsetTo(interruptedPosition[0], interruptedPosition[1]);
         }
         calculateOut(sceneRoot, bounds, this.mTempLoc);
-        return TranslationAnimationCreator.createAnimation(view, startValues, viewPosX, viewPosY, startX, startY, endX + this.mTempLoc[0], endY + this.mTempLoc[1], sAccelerate, this);
+        return TranslationAnimationCreator.createAnimation(
+                view,
+                startValues,
+                viewPosX,
+                viewPosY,
+                startX,
+                startY,
+                endX + this.mTempLoc[0],
+                endY + this.mTempLoc[1],
+                sAccelerate,
+                this);
     }
 
     private void calculateOut(View sceneRoot, Rect bounds, int[] outVector) {
@@ -97,8 +126,14 @@ public class Explode extends Visibility {
         int sceneRootY = this.mTempLoc[1];
         Rect epicenter = getEpicenter();
         if (epicenter == null) {
-            focalX = (sceneRoot.getWidth() / 2) + sceneRootX + Math.round(sceneRoot.getTranslationX());
-            focalY = (sceneRoot.getHeight() / 2) + sceneRootY + Math.round(sceneRoot.getTranslationY());
+            focalX =
+                    (sceneRoot.getWidth() / 2)
+                            + sceneRootX
+                            + Math.round(sceneRoot.getTranslationX());
+            focalY =
+                    (sceneRoot.getHeight() / 2)
+                            + sceneRootY
+                            + Math.round(sceneRoot.getTranslationY());
         } else {
             focalX = epicenter.centerX();
             focalY = epicenter.centerY();
@@ -107,12 +142,14 @@ public class Explode extends Visibility {
         int centerY = bounds.centerY();
         double xVector = centerX - focalX;
         double yVector = centerY - focalY;
-        if (xVector == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN && yVector == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
+        if (xVector == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN
+                && yVector == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
             xVector = (Math.random() * 2.0d) - 1.0d;
             yVector = (Math.random() * 2.0d) - 1.0d;
         }
         double vectorSize = Math.hypot(xVector, yVector);
-        double maxDistance = calculateMaxDistance(sceneRoot, focalX - sceneRootX, focalY - sceneRootY);
+        double maxDistance =
+                calculateMaxDistance(sceneRoot, focalX - sceneRootX, focalY - sceneRootY);
         outVector[0] = (int) Math.round(maxDistance * (xVector / vectorSize));
         outVector[1] = (int) Math.round(maxDistance * (yVector / vectorSize));
     }

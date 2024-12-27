@@ -12,16 +12,14 @@ public class MbmsErrors {
     public static final int UNKNOWN = -1;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MbmsError {
-    }
+    public @interface MbmsError {}
 
     public static class InitializationErrors {
         public static final int ERROR_APP_PERMISSIONS_NOT_GRANTED = 102;
         public static final int ERROR_DUPLICATE_INITIALIZE = 101;
         public static final int ERROR_UNABLE_TO_INITIALIZE = 103;
 
-        private InitializationErrors() {
-        }
+        private InitializationErrors() {}
     }
 
     public static class GeneralErrors {
@@ -33,8 +31,7 @@ public class MbmsErrors {
         public static final int ERROR_OUT_OF_MEMORY = 202;
         public static final int ERROR_UNABLE_TO_READ_SIM = 206;
 
-        private GeneralErrors() {
-        }
+        private GeneralErrors() {}
     }
 
     public static class StreamingErrors {
@@ -42,8 +39,7 @@ public class MbmsErrors {
         public static final int ERROR_DUPLICATE_START_STREAM = 303;
         public static final int ERROR_UNABLE_TO_START_SERVICE = 302;
 
-        private StreamingErrors() {
-        }
+        private StreamingErrors() {}
     }
 
     public static class DownloadErrors {
@@ -52,18 +48,15 @@ public class MbmsErrors {
         public static final int ERROR_UNKNOWN_DOWNLOAD_REQUEST = 402;
         public static final int ERROR_UNKNOWN_FILE_INFO = 403;
 
-        private DownloadErrors() {
-        }
+        private DownloadErrors() {}
     }
 
     public static class GroupCallErrors {
         public static final int ERROR_DUPLICATE_START_GROUP_CALL = 502;
         public static final int ERROR_UNABLE_TO_START_SERVICE = 501;
 
-        private GroupCallErrors() {
-        }
+        private GroupCallErrors() {}
     }
 
-    private MbmsErrors() {
-    }
+    private MbmsErrors() {}
 }

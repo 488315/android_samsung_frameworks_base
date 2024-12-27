@@ -7,21 +7,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class MicrophoneInfoFw implements Parcelable {
-    public static final Parcelable.Creator<MicrophoneInfoFw> CREATOR = new Parcelable.Creator<MicrophoneInfoFw>() { // from class: android.media.MicrophoneInfoFw.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MicrophoneInfoFw createFromParcel(Parcel _aidl_source) {
-            MicrophoneInfoFw _aidl_out = new MicrophoneInfoFw();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<MicrophoneInfoFw> CREATOR =
+            new Parcelable.Creator<
+                    MicrophoneInfoFw>() { // from class: android.media.MicrophoneInfoFw.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MicrophoneInfoFw createFromParcel(Parcel _aidl_source) {
+                    MicrophoneInfoFw _aidl_out = new MicrophoneInfoFw();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MicrophoneInfoFw[] newArray(int _aidl_size) {
-            return new MicrophoneInfoFw[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MicrophoneInfoFw[] newArray(int _aidl_size) {
+                    return new MicrophoneInfoFw[_aidl_size];
+                }
+            };
     public MicrophoneDynamicInfo dynamic;
     public android.media.audio.common.MicrophoneInfo info;
     public int portId = 0;
@@ -53,7 +55,10 @@ public class MicrophoneInfoFw implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.info = (android.media.audio.common.MicrophoneInfo) _aidl_parcel.readTypedObject(android.media.audio.common.MicrophoneInfo.CREATOR);
+            this.info =
+                    (android.media.audio.common.MicrophoneInfo)
+                            _aidl_parcel.readTypedObject(
+                                    android.media.audio.common.MicrophoneInfo.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -61,7 +66,9 @@ public class MicrophoneInfoFw implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.dynamic = (MicrophoneDynamicInfo) _aidl_parcel.readTypedObject(MicrophoneDynamicInfo.CREATOR);
+            this.dynamic =
+                    (MicrophoneDynamicInfo)
+                            _aidl_parcel.readTypedObject(MicrophoneDynamicInfo.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");

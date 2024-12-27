@@ -4,11 +4,12 @@ import java.util.Comparator;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class CurrentUserServiceSupplier$$ExternalSyntheticLambda0 implements Comparator {
+public final /* synthetic */ class CurrentUserServiceSupplier$$ExternalSyntheticLambda0
+        implements Comparator {
     /* JADX WARN: Code restructure failed: missing block: B:21:0x0036, code lost:
-    
-        if (android.os.UserHandle.getUserId(r5) != 0) goto L10;
-     */
+
+       if (android.os.UserHandle.getUserId(r5) != 0) goto L10;
+    */
     @Override // java.util.Comparator
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -55,6 +56,9 @@ public final /* synthetic */ class CurrentUserServiceSupplier$$ExternalSynthetic
         L3a:
             return r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.servicewatcher.CurrentUserServiceSupplier$$ExternalSyntheticLambda0.compare(java.lang.Object, java.lang.Object):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.servicewatcher.CurrentUserServiceSupplier$$ExternalSyntheticLambda0.compare(java.lang.Object,"
+                    + " java.lang.Object):int");
     }
 }

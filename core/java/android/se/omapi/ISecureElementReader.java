@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.se.omapi.ISecureElementSession;
 
 /* loaded from: classes3.dex */
 public interface ISecureElementReader extends IInterface {
@@ -36,8 +35,7 @@ public interface ISecureElementReader extends IInterface {
         }
 
         @Override // android.se.omapi.ISecureElementReader
-        public void closeSessions() throws RemoteException {
-        }
+        public void closeSessions() throws RemoteException {}
 
         @Override // android.se.omapi.ISecureElementReader
         public boolean reset() throws RemoteException {
@@ -60,8 +58,9 @@ public interface ISecureElementReader extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISecureElementReader {
-        public static final String DESCRIPTOR = "android$se$omapi$ISecureElementReader".replace('$', '.');
+    public abstract static class Stub extends Binder implements ISecureElementReader {
+        public static final String DESCRIPTOR =
+                "android$se$omapi$ISecureElementReader".replace('$', '.');
         static final int TRANSACTION_closeSessions = 3;
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
@@ -91,7 +90,8 @@ public interface ISecureElementReader extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -161,7 +161,8 @@ public interface ISecureElementReader extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     boolean _status = this.mRemote.transact(1, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method isSecureElementPresent is unimplemented.");
+                        throw new RemoteException(
+                                "Method isSecureElementPresent is unimplemented.");
                     }
                     _reply.readException();
                     boolean _result = _reply.readBoolean();
@@ -183,7 +184,8 @@ public interface ISecureElementReader extends IInterface {
                         throw new RemoteException("Method openSession is unimplemented.");
                     }
                     _reply.readException();
-                    ISecureElementSession _result = ISecureElementSession.Stub.asInterface(_reply.readStrongBinder());
+                    ISecureElementSession _result =
+                            ISecureElementSession.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();

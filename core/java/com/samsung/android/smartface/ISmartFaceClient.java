@@ -14,8 +14,7 @@ public interface ISmartFaceClient extends IInterface {
 
     public static class Default implements ISmartFaceClient {
         @Override // com.samsung.android.smartface.ISmartFaceClient
-        public void onInfo(int msg_type, FaceInfo data, int service_type) throws RemoteException {
-        }
+        public void onInfo(int msg_type, FaceInfo data, int service_type) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface ISmartFaceClient extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISmartFaceClient {
+    public abstract static class Stub extends Binder implements ISmartFaceClient {
         static final int TRANSACTION_onInfo = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface ISmartFaceClient extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISmartFaceClient.DESCRIPTOR);
             }
@@ -99,7 +99,8 @@ public interface ISmartFaceClient extends IInterface {
             }
 
             @Override // com.samsung.android.smartface.ISmartFaceClient
-            public void onInfo(int msg_type, FaceInfo data, int service_type) throws RemoteException {
+            public void onInfo(int msg_type, FaceInfo data, int service_type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISmartFaceClient.DESCRIPTOR);

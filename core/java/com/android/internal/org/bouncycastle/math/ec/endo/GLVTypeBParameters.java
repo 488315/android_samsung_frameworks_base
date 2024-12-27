@@ -8,13 +8,21 @@ public class GLVTypeBParameters {
     protected final BigInteger lambda;
     protected final ScalarSplitParameters splitParams;
 
-    public GLVTypeBParameters(BigInteger beta, BigInteger lambda, BigInteger[] v1, BigInteger[] v2, BigInteger g1, BigInteger g2, int bits) {
+    public GLVTypeBParameters(
+            BigInteger beta,
+            BigInteger lambda,
+            BigInteger[] v1,
+            BigInteger[] v2,
+            BigInteger g1,
+            BigInteger g2,
+            int bits) {
         this.beta = beta;
         this.lambda = lambda;
         this.splitParams = new ScalarSplitParameters(v1, v2, g1, g2, bits);
     }
 
-    public GLVTypeBParameters(BigInteger beta, BigInteger lambda, ScalarSplitParameters splitParams) {
+    public GLVTypeBParameters(
+            BigInteger beta, BigInteger lambda, ScalarSplitParameters splitParams) {
         this.beta = beta;
         this.lambda = lambda;
         this.splitParams = splitParams;

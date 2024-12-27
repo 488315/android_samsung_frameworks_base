@@ -1,6 +1,5 @@
 package android.renderscript;
 
-import android.renderscript.Script;
 
 @Deprecated
 /* loaded from: classes3.dex */
@@ -113,10 +112,24 @@ public final class ScriptIntrinsicColorMatrix extends ScriptIntrinsic {
     }
 
     public void forEach(Allocation ain, Allocation aout, Script.LaunchOptions opt) {
-        if (!ain.getElement().isCompatible(Element.U8(this.mRS)) && !ain.getElement().isCompatible(Element.U8_2(this.mRS)) && !ain.getElement().isCompatible(Element.U8_3(this.mRS)) && !ain.getElement().isCompatible(Element.U8_4(this.mRS)) && !ain.getElement().isCompatible(Element.F32(this.mRS)) && !ain.getElement().isCompatible(Element.F32_2(this.mRS)) && !ain.getElement().isCompatible(Element.F32_3(this.mRS)) && !ain.getElement().isCompatible(Element.F32_4(this.mRS))) {
+        if (!ain.getElement().isCompatible(Element.U8(this.mRS))
+                && !ain.getElement().isCompatible(Element.U8_2(this.mRS))
+                && !ain.getElement().isCompatible(Element.U8_3(this.mRS))
+                && !ain.getElement().isCompatible(Element.U8_4(this.mRS))
+                && !ain.getElement().isCompatible(Element.F32(this.mRS))
+                && !ain.getElement().isCompatible(Element.F32_2(this.mRS))
+                && !ain.getElement().isCompatible(Element.F32_3(this.mRS))
+                && !ain.getElement().isCompatible(Element.F32_4(this.mRS))) {
             throw new RSIllegalArgumentException("Unsupported element type.");
         }
-        if (!aout.getElement().isCompatible(Element.U8(this.mRS)) && !aout.getElement().isCompatible(Element.U8_2(this.mRS)) && !aout.getElement().isCompatible(Element.U8_3(this.mRS)) && !aout.getElement().isCompatible(Element.U8_4(this.mRS)) && !aout.getElement().isCompatible(Element.F32(this.mRS)) && !aout.getElement().isCompatible(Element.F32_2(this.mRS)) && !aout.getElement().isCompatible(Element.F32_3(this.mRS)) && !aout.getElement().isCompatible(Element.F32_4(this.mRS))) {
+        if (!aout.getElement().isCompatible(Element.U8(this.mRS))
+                && !aout.getElement().isCompatible(Element.U8_2(this.mRS))
+                && !aout.getElement().isCompatible(Element.U8_3(this.mRS))
+                && !aout.getElement().isCompatible(Element.U8_4(this.mRS))
+                && !aout.getElement().isCompatible(Element.F32(this.mRS))
+                && !aout.getElement().isCompatible(Element.F32_2(this.mRS))
+                && !aout.getElement().isCompatible(Element.F32_3(this.mRS))
+                && !aout.getElement().isCompatible(Element.F32_4(this.mRS))) {
             throw new RSIllegalArgumentException("Unsupported element type.");
         }
         forEach(0, ain, aout, (FieldPacker) null, opt);

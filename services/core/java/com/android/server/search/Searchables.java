@@ -17,8 +17,11 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Log;
+
 import com.android.server.LocalServices;
+
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -74,13 +77,15 @@ public final class Searchables {
             return null;
         }
         ArrayList arrayList = new ArrayList(list.size());
-        PackageManagerInternal packageManagerInternal = (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
+        PackageManagerInternal packageManagerInternal =
+                (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
         int callingUid = Binder.getCallingUid();
         int callingUserId = UserHandle.getCallingUserId();
         Iterator it = list.iterator();
         while (it.hasNext()) {
             ResolveInfo resolveInfo = (ResolveInfo) it.next();
-            if (packageManagerInternal.canAccessComponent(callingUid, callingUserId, resolveInfo.activityInfo.getComponentName())) {
+            if (packageManagerInternal.canAccessComponent(
+                    callingUid, callingUserId, resolveInfo.activityInfo.getComponentName())) {
                 arrayList.add(resolveInfo);
             }
         }
@@ -93,13 +98,15 @@ public final class Searchables {
         }
         ArrayList arrayList = (ArrayList) list;
         ArrayList arrayList2 = new ArrayList(arrayList.size());
-        PackageManagerInternal packageManagerInternal = (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
+        PackageManagerInternal packageManagerInternal =
+                (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
         int callingUid = Binder.getCallingUid();
         int callingUserId = UserHandle.getCallingUserId();
         Iterator it = arrayList.iterator();
         while (it.hasNext()) {
             SearchableInfo searchableInfo = (SearchableInfo) it.next();
-            if (packageManagerInternal.canAccessComponent(callingUid, callingUserId, searchableInfo.getSearchActivity())) {
+            if (packageManagerInternal.canAccessComponent(
+                    callingUid, callingUserId, searchableInfo.getSearchActivity())) {
                 arrayList2.add(searchableInfo);
             }
         }
@@ -129,11 +136,19 @@ public final class Searchables {
     public final ComponentName findGlobalSearchActivity(List list) {
         ComponentName unflattenFromString;
         ContentResolver contentResolver = this.mContext.getContentResolver();
-        String stringForUser = Settings.Secure.getStringForUser(contentResolver, "search_global_search_activity", contentResolver.getUserId());
-        if (!TextUtils.isEmpty(stringForUser) && (unflattenFromString = ComponentName.unflattenFromString(stringForUser)) != null) {
+        String stringForUser =
+                Settings.Secure.getStringForUser(
+                        contentResolver,
+                        "search_global_search_activity",
+                        contentResolver.getUserId());
+        if (!TextUtils.isEmpty(stringForUser)
+                && (unflattenFromString = ComponentName.unflattenFromString(stringForUser))
+                        != null) {
             Intent intent = new Intent("android.search.action.GLOBAL_SEARCH");
             intent.setComponent(unflattenFromString);
-            List queryIntentActivities = queryIntentActivities(EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT, intent);
+            List queryIntentActivities =
+                    queryIntentActivities(
+                            EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT, intent);
             if (queryIntentActivities != null && !queryIntentActivities.isEmpty()) {
                 return unflattenFromString;
             }
@@ -152,7 +167,9 @@ public final class Searchables {
         }
         Intent intent = new Intent("android.intent.action.WEB_SEARCH");
         intent.setPackage(componentName.getPackageName());
-        List queryIntentActivities = queryIntentActivities(EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT, intent);
+        List queryIntentActivities =
+                queryIntentActivities(
+                        EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT, intent);
         if (queryIntentActivities == null || queryIntentActivities.isEmpty()) {
             Log.w("Searchables", "No web search activity found");
             return null;
@@ -163,16 +180,22 @@ public final class Searchables {
 
     public final List queryIntentActivities(int i, Intent intent) {
         try {
-            return this.mPm.queryIntentActivities(intent, intent.resolveTypeIfNeeded(this.mContext.getContentResolver()), i | 8388608, this.mUserId).getList();
+            return this.mPm
+                    .queryIntentActivities(
+                            intent,
+                            intent.resolveTypeIfNeeded(this.mContext.getContentResolver()),
+                            i | 8388608,
+                            this.mUserId)
+                    .getList();
         } catch (RemoteException unused) {
             return null;
         }
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:53:0x0065, code lost:
-    
-        r12 = 0;
-     */
+
+       r12 = 0;
+    */
     /* JADX WARN: Removed duplicated region for block: B:26:0x012a A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -183,6 +206,8 @@ public final class Searchables {
             Method dump skipped, instructions count: 387
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.search.Searchables.updateSearchableListIfNeeded():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.search.Searchables.updateSearchableListIfNeeded():void");
     }
 }

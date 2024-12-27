@@ -1,6 +1,7 @@
 package com.samsung.android.server.corescpm;
 
 import com.samsung.android.server.packagefeature.core.PackageFeatureManagerService;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -23,7 +24,8 @@ public interface ScpmController {
         }
 
         public final int hashCode() {
-            return Objects.hash(this.mPackageName, this.mReceiverPackageName, this.mAppId, this.mVersion);
+            return Objects.hash(
+                    this.mPackageName, this.mReceiverPackageName, this.mAppId, this.mVersion);
         }
     }
 }

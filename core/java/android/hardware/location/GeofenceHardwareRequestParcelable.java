@@ -6,30 +6,34 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class GeofenceHardwareRequestParcelable implements Parcelable {
-    public static final Parcelable.Creator<GeofenceHardwareRequestParcelable> CREATOR = new Parcelable.Creator<GeofenceHardwareRequestParcelable>() { // from class: android.hardware.location.GeofenceHardwareRequestParcelable.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GeofenceHardwareRequestParcelable createFromParcel(Parcel parcel) {
-            int geofenceType = parcel.readInt();
-            if (geofenceType != 0) {
-                throw new BadParcelableException("Invalid Geofence type: " + geofenceType);
-            }
-            GeofenceHardwareRequest request = GeofenceHardwareRequest.createCircularGeofence(parcel.readDouble(), parcel.readDouble(), parcel.readDouble());
-            request.setLastTransition(parcel.readInt());
-            request.setMonitorTransitions(parcel.readInt());
-            request.setUnknownTimer(parcel.readInt());
-            request.setNotificationResponsiveness(parcel.readInt());
-            request.setSourceTechnologies(parcel.readInt());
-            int id = parcel.readInt();
-            return new GeofenceHardwareRequestParcelable(id, request);
-        }
+    public static final Parcelable.Creator<GeofenceHardwareRequestParcelable> CREATOR =
+            new Parcelable.Creator<GeofenceHardwareRequestParcelable>() { // from class:
+                // android.hardware.location.GeofenceHardwareRequestParcelable.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GeofenceHardwareRequestParcelable createFromParcel(Parcel parcel) {
+                    int geofenceType = parcel.readInt();
+                    if (geofenceType != 0) {
+                        throw new BadParcelableException("Invalid Geofence type: " + geofenceType);
+                    }
+                    GeofenceHardwareRequest request =
+                            GeofenceHardwareRequest.createCircularGeofence(
+                                    parcel.readDouble(), parcel.readDouble(), parcel.readDouble());
+                    request.setLastTransition(parcel.readInt());
+                    request.setMonitorTransitions(parcel.readInt());
+                    request.setUnknownTimer(parcel.readInt());
+                    request.setNotificationResponsiveness(parcel.readInt());
+                    request.setSourceTechnologies(parcel.readInt());
+                    int id = parcel.readInt();
+                    return new GeofenceHardwareRequestParcelable(id, request);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GeofenceHardwareRequestParcelable[] newArray(int size) {
-            return new GeofenceHardwareRequestParcelable[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GeofenceHardwareRequestParcelable[] newArray(int size) {
+                    return new GeofenceHardwareRequestParcelable[size];
+                }
+            };
     private int mId;
     private GeofenceHardwareRequest mRequest;
 
@@ -79,7 +83,26 @@ public final class GeofenceHardwareRequestParcelable implements Parcelable {
     }
 
     public String toString() {
-        return "id=" + this.mId + ", type=" + this.mRequest.getType() + ", latitude=" + this.mRequest.getLatitude() + ", longitude=" + this.mRequest.getLongitude() + ", radius=" + this.mRequest.getRadius() + ", lastTransition=" + this.mRequest.getLastTransition() + ", unknownTimer=" + this.mRequest.getUnknownTimer() + ", monitorTransitions=" + this.mRequest.getMonitorTransitions() + ", notificationResponsiveness=" + this.mRequest.getNotificationResponsiveness() + ", sourceTechnologies=" + this.mRequest.getSourceTechnologies();
+        return "id="
+                + this.mId
+                + ", type="
+                + this.mRequest.getType()
+                + ", latitude="
+                + this.mRequest.getLatitude()
+                + ", longitude="
+                + this.mRequest.getLongitude()
+                + ", radius="
+                + this.mRequest.getRadius()
+                + ", lastTransition="
+                + this.mRequest.getLastTransition()
+                + ", unknownTimer="
+                + this.mRequest.getUnknownTimer()
+                + ", monitorTransitions="
+                + this.mRequest.getMonitorTransitions()
+                + ", notificationResponsiveness="
+                + this.mRequest.getNotificationResponsiveness()
+                + ", sourceTechnologies="
+                + this.mRequest.getSourceTechnologies();
     }
 
     @Override // android.os.Parcelable

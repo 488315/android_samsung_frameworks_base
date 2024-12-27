@@ -13,8 +13,7 @@ class DateUtil {
     private static final Map localeCache = new HashMap();
     static Locale EN_Locale = forEN();
 
-    DateUtil() {
-    }
+    DateUtil() {}
 
     private static Locale forEN() {
         if ("en".equalsIgnoreCase(Locale.getDefault().getLanguage())) {

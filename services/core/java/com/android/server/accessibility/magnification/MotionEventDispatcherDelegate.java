@@ -6,6 +6,7 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -17,22 +18,33 @@ public final class MotionEventDispatcherDelegate {
     public long mLastDelegatedDownEventTime;
     public final int mMultiTapMaxDelay;
 
-    public MotionEventDispatcherDelegate(Context context, WindowMagnificationGestureHandler$$ExternalSyntheticLambda1 windowMagnificationGestureHandler$$ExternalSyntheticLambda1) {
+    public MotionEventDispatcherDelegate(
+            Context context,
+            WindowMagnificationGestureHandler$$ExternalSyntheticLambda1
+                    windowMagnificationGestureHandler$$ExternalSyntheticLambda1) {
         this.mEventDispatcher = windowMagnificationGestureHandler$$ExternalSyntheticLambda1;
-        this.mMultiTapMaxDelay = context.getResources().getInteger(R.integer.config_zen_repeat_callers_threshold) + ViewConfiguration.getDoubleTapTimeout();
+        this.mMultiTapMaxDelay =
+                context.getResources().getInteger(R.integer.config_zen_repeat_callers_threshold)
+                        + ViewConfiguration.getDoubleTapTimeout();
     }
 
-    public final void dispatchMotionEvent(MotionEvent motionEvent, MotionEvent motionEvent2, int i) {
+    public final void dispatchMotionEvent(
+            MotionEvent motionEvent, MotionEvent motionEvent2, int i) {
         int actionMasked = motionEvent.getActionMasked();
         boolean z = DBG;
         if (actionMasked == 0) {
             this.mLastDelegatedDownEventTime = motionEvent.getDownTime();
             if (z) {
-                Log.d("MotionEventDispatcherDelegate", "dispatchMotionEvent mLastDelegatedDownEventTime time = " + this.mLastDelegatedDownEventTime);
+                Log.d(
+                        "MotionEventDispatcherDelegate",
+                        "dispatchMotionEvent mLastDelegatedDownEventTime time = "
+                                + this.mLastDelegatedDownEventTime);
             }
         }
         if (z) {
-            Log.d("MotionEventDispatcherDelegate", "dispatchMotionEvent original down time = " + motionEvent.getDownTime());
+            Log.d(
+                    "MotionEventDispatcherDelegate",
+                    "dispatchMotionEvent original down time = " + motionEvent.getDownTime());
         }
         motionEvent.setDownTime(this.mLastDelegatedDownEventTime);
         this.mEventDispatcher.f$0.dispatchTransformedEvent(motionEvent, motionEvent2, i);
@@ -48,7 +60,10 @@ public final class MotionEventDispatcherDelegate {
             MotionEventInfo motionEventInfo = (MotionEventInfo) it.next();
             MotionEvent motionEvent = motionEventInfo.mEvent;
             motionEvent.setDownTime(motionEvent.getDownTime() + min);
-            dispatchMotionEvent(motionEventInfo.mEvent, motionEventInfo.mRawEvent, motionEventInfo.mPolicyFlags);
+            dispatchMotionEvent(
+                    motionEventInfo.mEvent,
+                    motionEventInfo.mRawEvent,
+                    motionEventInfo.mPolicyFlags);
             MotionEvent motionEvent2 = motionEventInfo.mEvent;
             if (motionEvent2 != null) {
                 motionEvent2.recycle();

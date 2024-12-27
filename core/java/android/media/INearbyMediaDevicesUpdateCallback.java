@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
@@ -15,8 +16,7 @@ public interface INearbyMediaDevicesUpdateCallback extends IInterface {
 
     public static class Default implements INearbyMediaDevicesUpdateCallback {
         @Override // android.media.INearbyMediaDevicesUpdateCallback
-        public void onDevicesUpdated(List<NearbyDevice> nearbyDevices) throws RemoteException {
-        }
+        public void onDevicesUpdated(List<NearbyDevice> nearbyDevices) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +24,7 @@ public interface INearbyMediaDevicesUpdateCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements INearbyMediaDevicesUpdateCallback {
+    public abstract static class Stub extends Binder implements INearbyMediaDevicesUpdateCallback {
         static final int TRANSACTION_onDevicesUpdated = 1;
 
         public Stub() {
@@ -62,7 +62,8 @@ public interface INearbyMediaDevicesUpdateCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(INearbyMediaDevicesUpdateCallback.DESCRIPTOR);
             }

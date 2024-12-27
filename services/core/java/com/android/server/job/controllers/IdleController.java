@@ -6,11 +6,13 @@ import android.provider.DeviceConfig;
 import android.util.ArraySet;
 import android.util.IndentingPrintWriter;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.server.job.JobSchedulerService;
 import com.android.server.job.JobSchedulerService$$ExternalSyntheticLambda5;
 import com.android.server.job.controllers.idle.CarIdlenessTracker;
 import com.android.server.job.controllers.idle.DeviceIdlenessTracker;
 import com.android.server.job.controllers.idle.IdlenessTracker;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -20,10 +22,13 @@ public final class IdleController extends RestrictingController {
     public final IdlenessTracker mIdleTracker;
     public final ArraySet mTrackedTasks;
 
-    public IdleController(JobSchedulerService jobSchedulerService, FlexibilityController flexibilityController) {
+    public IdleController(
+            JobSchedulerService jobSchedulerService, FlexibilityController flexibilityController) {
         super(jobSchedulerService);
         this.mTrackedTasks = new ArraySet();
-        if (this.mContext.getPackageManager().hasSystemFeature("android.hardware.type.automotive")) {
+        if (this.mContext
+                .getPackageManager()
+                .hasSystemFeature("android.hardware.type.automotive")) {
             CarIdlenessTracker carIdlenessTracker = new CarIdlenessTracker();
             carIdlenessTracker.mIdle = false;
             carIdlenessTracker.mGarageModeOn = false;
@@ -46,7 +51,10 @@ public final class IdleController extends RestrictingController {
     }
 
     @Override // com.android.server.job.controllers.StateController
-    public final void dumpControllerStateLocked(IndentingPrintWriter indentingPrintWriter, JobSchedulerService$$ExternalSyntheticLambda5 jobSchedulerService$$ExternalSyntheticLambda5) {
+    public final void dumpControllerStateLocked(
+            IndentingPrintWriter indentingPrintWriter,
+            JobSchedulerService$$ExternalSyntheticLambda5
+                    jobSchedulerService$$ExternalSyntheticLambda5) {
         indentingPrintWriter.println("Currently idle: " + this.mIdleTracker.isIdle());
         indentingPrintWriter.println("Idleness tracker:");
         this.mIdleTracker.dump((PrintWriter) indentingPrintWriter);
@@ -64,7 +72,10 @@ public final class IdleController extends RestrictingController {
     }
 
     @Override // com.android.server.job.controllers.StateController
-    public final void dumpControllerStateLocked(ProtoOutputStream protoOutputStream, JobSchedulerService$$ExternalSyntheticLambda5 jobSchedulerService$$ExternalSyntheticLambda5) {
+    public final void dumpControllerStateLocked(
+            ProtoOutputStream protoOutputStream,
+            JobSchedulerService$$ExternalSyntheticLambda5
+                    jobSchedulerService$$ExternalSyntheticLambda5) {
         long start = protoOutputStream.start(2246267895812L);
         long start2 = protoOutputStream.start(1146756268038L);
         protoOutputStream.write(1133871366145L, this.mIdleTracker.isIdle());
@@ -104,7 +115,8 @@ public final class IdleController extends RestrictingController {
     public final void onBatteryStateChangedLocked() {
         IdlenessTracker idlenessTracker = this.mIdleTracker;
         JobSchedulerService jobSchedulerService = this.mService;
-        idlenessTracker.onBatteryStateChanged(jobSchedulerService.isBatteryCharging(), jobSchedulerService.isBatteryNotLow());
+        idlenessTracker.onBatteryStateChanged(
+                jobSchedulerService.isBatteryCharging(), jobSchedulerService.isBatteryNotLow());
     }
 
     @Override // com.android.server.job.controllers.StateController
@@ -120,7 +132,8 @@ public final class IdleController extends RestrictingController {
                 long elapsedRealtime = SystemClock.elapsedRealtime();
                 this.mFlexibilityController.setConstraintSatisfied(4, elapsedRealtime, z);
                 for (int size = this.mTrackedTasks.size() - 1; size >= 0; size--) {
-                    ((JobStatus) this.mTrackedTasks.valueAt(size)).setConstraintSatisfied(4, elapsedRealtime, z);
+                    ((JobStatus) this.mTrackedTasks.valueAt(size))
+                            .setConstraintSatisfied(4, elapsedRealtime, z);
                 }
                 if (!this.mTrackedTasks.isEmpty()) {
                     this.mStateChangedListener.onControllerStateChanged(this.mTrackedTasks);

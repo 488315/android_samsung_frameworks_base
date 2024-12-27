@@ -1,6 +1,5 @@
 package android.app;
 
-import android.app.NotificationHistory;
 import android.graphics.drawable.Icon;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.Uri;
@@ -9,8 +8,11 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.NtpTrustedTime;
+
 import com.android.internal.os.BackgroundThread;
+
 import com.samsung.android.server.notification.NotificationHistoryImageProvider;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,19 +26,21 @@ import java.util.Set;
 
 /* loaded from: classes.dex */
 public final class NotificationHistory implements Parcelable {
-    public static final Parcelable.Creator<NotificationHistory> CREATOR = new Parcelable.Creator<NotificationHistory>() { // from class: android.app.NotificationHistory.2
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NotificationHistory createFromParcel(Parcel source) {
-            return new NotificationHistory(source);
-        }
+    public static final Parcelable.Creator<NotificationHistory> CREATOR =
+            new Parcelable.Creator<
+                    NotificationHistory>() { // from class: android.app.NotificationHistory.2
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NotificationHistory createFromParcel(Parcel source) {
+                    return new NotificationHistory(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NotificationHistory[] newArray(int size) {
-            return new NotificationHistory[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NotificationHistory[] newArray(int size) {
+                    return new NotificationHistory[size];
+                }
+            };
     private int mHistoryCount;
     private int mIndex;
     private List<HistoricalNotification> mNotificationsToWrite;
@@ -62,8 +66,7 @@ public final class NotificationHistory implements Parcelable {
         private int mUserId;
         private long mWhen;
 
-        private HistoricalNotification() {
-        }
+        private HistoricalNotification() {}
 
         public String getPackage() {
             return this.mPackage;
@@ -102,7 +105,11 @@ public final class NotificationHistory implements Parcelable {
         }
 
         public String getKey() {
-            return this.mPackage + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + this.mUid + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + this.mPostedTimeMs;
+            return this.mPackage
+                    + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                    + this.mUid
+                    + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                    + this.mPostedTimeMs;
         }
 
         public String getConversationId() {
@@ -141,7 +148,39 @@ public final class NotificationHistory implements Parcelable {
             SimpleDateFormat dayTime = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss.SSSZ");
             String fixedName = (String) TextUtils.trimToLengthWithEllipsis(this.mChannelName, 6);
             String fixedId = (String) TextUtils.trimToLengthWithEllipsis(this.mChannelId, 6);
-            return "HistoricalNotification{, key =" + this.mSbnKey + ", type =" + this.mType + ", mPostedTimeMs=" + this.mPostedTimeMs + NavigationBarInflaterView.KEY_CODE_START + dayTime.format(new Date(this.mPostedTimeMs)) + "), mIsChecked =" + this.mIsChecked + ", mUri =" + (this.mUri != null ? this.mUri.toString() : null) + ", mWhen=" + this.mWhen + NavigationBarInflaterView.KEY_CODE_START + dayTime.format(new Date(this.mWhen)) + "), mExtraTitle = " + this.mExtraTitle + ", mChannelName='" + fixedName + DateFormat.QUOTE + ", mChannelId='" + fixedId + DateFormat.QUOTE + ", mUserId=" + this.mUserId + ", mUid=" + this.mUid + ", mIcon=" + this.mIcon + ", mConversationId=" + this.mConversationId + '}';
+            return "HistoricalNotification{, key ="
+                    + this.mSbnKey
+                    + ", type ="
+                    + this.mType
+                    + ", mPostedTimeMs="
+                    + this.mPostedTimeMs
+                    + NavigationBarInflaterView.KEY_CODE_START
+                    + dayTime.format(new Date(this.mPostedTimeMs))
+                    + "), mIsChecked ="
+                    + this.mIsChecked
+                    + ", mUri ="
+                    + (this.mUri != null ? this.mUri.toString() : null)
+                    + ", mWhen="
+                    + this.mWhen
+                    + NavigationBarInflaterView.KEY_CODE_START
+                    + dayTime.format(new Date(this.mWhen))
+                    + "), mExtraTitle = "
+                    + this.mExtraTitle
+                    + ", mChannelName='"
+                    + fixedName
+                    + DateFormat.QUOTE
+                    + ", mChannelId='"
+                    + fixedId
+                    + DateFormat.QUOTE
+                    + ", mUserId="
+                    + this.mUserId
+                    + ", mUid="
+                    + this.mUid
+                    + ", mIcon="
+                    + this.mIcon
+                    + ", mConversationId="
+                    + this.mConversationId
+                    + '}';
         }
 
         public boolean equals(Object o) {
@@ -153,19 +192,41 @@ public final class NotificationHistory implements Parcelable {
                 return false;
             }
             HistoricalNotification that = (HistoricalNotification) o;
-            if ((getIcon() == null && that.getIcon() == null) || (getIcon() != null && that.getIcon() != null && getIcon().sameAs(that.getIcon()))) {
+            if ((getIcon() == null && that.getIcon() == null)
+                    || (getIcon() != null
+                            && that.getIcon() != null
+                            && getIcon().sameAs(that.getIcon()))) {
                 iconsAreSame = true;
             } else {
                 iconsAreSame = false;
             }
-            if (getUid() == that.getUid() && getUserId() == that.getUserId() && getPostedTimeMs() == that.getPostedTimeMs() && Objects.equals(getPackage(), that.getPackage()) && Objects.equals(getChannelName(), that.getChannelName()) && Objects.equals(getChannelId(), that.getChannelId()) && Objects.equals(getTitle(), that.getTitle()) && Objects.equals(getText(), that.getText()) && Objects.equals(getConversationId(), that.getConversationId()) && iconsAreSame) {
+            if (getUid() == that.getUid()
+                    && getUserId() == that.getUserId()
+                    && getPostedTimeMs() == that.getPostedTimeMs()
+                    && Objects.equals(getPackage(), that.getPackage())
+                    && Objects.equals(getChannelName(), that.getChannelName())
+                    && Objects.equals(getChannelId(), that.getChannelId())
+                    && Objects.equals(getTitle(), that.getTitle())
+                    && Objects.equals(getText(), that.getText())
+                    && Objects.equals(getConversationId(), that.getConversationId())
+                    && iconsAreSame) {
                 return true;
             }
             return false;
         }
 
         public int hashCode() {
-            return Objects.hash(getPackage(), getChannelName(), getChannelId(), Integer.valueOf(getUid()), Integer.valueOf(getUserId()), Long.valueOf(getPostedTimeMs()), getTitle(), getText(), getIcon(), getConversationId());
+            return Objects.hash(
+                    getPackage(),
+                    getChannelName(),
+                    getChannelId(),
+                    Integer.valueOf(getUid()),
+                    Integer.valueOf(getUserId()),
+                    Long.valueOf(getPostedTimeMs()),
+                    getTitle(),
+                    getText(),
+                    getIcon(),
+                    getConversationId());
         }
 
         public static final class Builder {
@@ -353,41 +414,55 @@ public final class NotificationHistory implements Parcelable {
         return updated;
     }
 
-    public void addNotificationsToWriteForPkgName(NotificationHistory notificationHistory, String pkgName) {
+    public void addNotificationsToWriteForPkgName(
+            NotificationHistory notificationHistory, String pkgName) {
         for (HistoricalNotification hn : notificationHistory.getNotificationsToWrite()) {
             if (pkgName.equals(hn.getPackage())) {
                 addNotificationToWrite(hn);
             }
         }
-        Collections.sort(this.mNotificationsToWrite, new Comparator() { // from class: android.app.NotificationHistory$$ExternalSyntheticLambda3
-            @Override // java.util.Comparator
-            public final int compare(Object obj, Object obj2) {
-                return NotificationHistory.lambda$addNotificationsToWriteForPkgName$0((NotificationHistory.HistoricalNotification) obj, (NotificationHistory.HistoricalNotification) obj2);
-            }
-        });
+        Collections.sort(
+                this.mNotificationsToWrite,
+                new Comparator() { // from class:
+                    // android.app.NotificationHistory$$ExternalSyntheticLambda3
+                    @Override // java.util.Comparator
+                    public final int compare(Object obj, Object obj2) {
+                        return NotificationHistory.lambda$addNotificationsToWriteForPkgName$0(
+                                (NotificationHistory.HistoricalNotification) obj,
+                                (NotificationHistory.HistoricalNotification) obj2);
+                    }
+                });
         poolStringsFromNotifications();
     }
 
-    static /* synthetic */ int lambda$addNotificationsToWriteForPkgName$0(HistoricalNotification o1, HistoricalNotification o2) {
+    static /* synthetic */ int lambda$addNotificationsToWriteForPkgName$0(
+            HistoricalNotification o1, HistoricalNotification o2) {
         return Long.compare(o1.getPostedTimeMs(), o2.getPostedTimeMs()) * (-1);
     }
 
-    public void addNotificationsToWrite(NotificationHistory notificationHistory, String sbnkey, int maxNotifications) {
+    public void addNotificationsToWrite(
+            NotificationHistory notificationHistory, String sbnkey, int maxNotifications) {
         for (HistoricalNotification hn : notificationHistory.getNotificationsToWrite()) {
             if (sbnkey.equals(hn.getSbnKey())) {
                 addNotificationToWrite(hn);
             }
         }
-        Collections.sort(this.mNotificationsToWrite, new Comparator() { // from class: android.app.NotificationHistory$$ExternalSyntheticLambda1
-            @Override // java.util.Comparator
-            public final int compare(Object obj, Object obj2) {
-                return NotificationHistory.lambda$addNotificationsToWrite$1((NotificationHistory.HistoricalNotification) obj, (NotificationHistory.HistoricalNotification) obj2);
-            }
-        });
+        Collections.sort(
+                this.mNotificationsToWrite,
+                new Comparator() { // from class:
+                    // android.app.NotificationHistory$$ExternalSyntheticLambda1
+                    @Override // java.util.Comparator
+                    public final int compare(Object obj, Object obj2) {
+                        return NotificationHistory.lambda$addNotificationsToWrite$1(
+                                (NotificationHistory.HistoricalNotification) obj,
+                                (NotificationHistory.HistoricalNotification) obj2);
+                    }
+                });
         poolStringsFromNotifications();
     }
 
-    static /* synthetic */ int lambda$addNotificationsToWrite$1(HistoricalNotification o1, HistoricalNotification o2) {
+    static /* synthetic */ int lambda$addNotificationsToWrite$1(
+            HistoricalNotification o1, HistoricalNotification o2) {
         return Long.compare(o1.getPostedTimeMs(), o2.getPostedTimeMs()) * (-1);
     }
 
@@ -409,12 +484,17 @@ public final class NotificationHistory implements Parcelable {
                 removed = true;
                 this.mNotificationsToWrite.remove(i);
                 if (hn.getUri() != null) {
-                    BackgroundThread.getHandler().postDelayed(new Runnable() { // from class: android.app.NotificationHistory.1
-                        @Override // java.lang.Runnable
-                        public void run() {
-                            NotificationHistoryImageProvider.getInstance().deleteRows(hn.getUri().toString());
-                        }
-                    }, 500L);
+                    BackgroundThread.getHandler()
+                            .postDelayed(
+                                    new Runnable() { // from class:
+                                        // android.app.NotificationHistory.1
+                                        @Override // java.lang.Runnable
+                                        public void run() {
+                                            NotificationHistoryImageProvider.getInstance()
+                                                    .deleteRows(hn.getUri().toString());
+                                        }
+                                    },
+                                    500L);
                 }
             }
         }
@@ -424,22 +504,29 @@ public final class NotificationHistory implements Parcelable {
         return removed;
     }
 
-    public void addNotificationsForDump(NotificationHistory notificationHistory, String packageName, int maxNotifications) {
+    public void addNotificationsForDump(
+            NotificationHistory notificationHistory, String packageName, int maxNotifications) {
         for (HistoricalNotification hn : notificationHistory.getNotificationsToWrite()) {
             if (packageName.equals(hn.getPackage())) {
                 addNotificationToWrite(hn);
             }
         }
-        Collections.sort(this.mNotificationsToWrite, new Comparator() { // from class: android.app.NotificationHistory$$ExternalSyntheticLambda0
-            @Override // java.util.Comparator
-            public final int compare(Object obj, Object obj2) {
-                return NotificationHistory.lambda$addNotificationsForDump$2((NotificationHistory.HistoricalNotification) obj, (NotificationHistory.HistoricalNotification) obj2);
-            }
-        });
+        Collections.sort(
+                this.mNotificationsToWrite,
+                new Comparator() { // from class:
+                    // android.app.NotificationHistory$$ExternalSyntheticLambda0
+                    @Override // java.util.Comparator
+                    public final int compare(Object obj, Object obj2) {
+                        return NotificationHistory.lambda$addNotificationsForDump$2(
+                                (NotificationHistory.HistoricalNotification) obj,
+                                (NotificationHistory.HistoricalNotification) obj2);
+                    }
+                });
         poolStringsFromNotifications();
     }
 
-    static /* synthetic */ int lambda$addNotificationsForDump$2(HistoricalNotification o1, HistoricalNotification o2) {
+    static /* synthetic */ int lambda$addNotificationsForDump$2(
+            HistoricalNotification o1, HistoricalNotification o2) {
         return Long.compare(o1.getPostedTimeMs(), o2.getPostedTimeMs()) * (-1);
     }
 
@@ -480,16 +567,22 @@ public final class NotificationHistory implements Parcelable {
         for (HistoricalNotification hn : notificationHistory.getNotificationsToWrite()) {
             addNotificationToWrite(hn);
         }
-        Collections.sort(this.mNotificationsToWrite, new Comparator() { // from class: android.app.NotificationHistory$$ExternalSyntheticLambda2
-            @Override // java.util.Comparator
-            public final int compare(Object obj, Object obj2) {
-                return NotificationHistory.lambda$addNotificationsToWrite$3((NotificationHistory.HistoricalNotification) obj, (NotificationHistory.HistoricalNotification) obj2);
-            }
-        });
+        Collections.sort(
+                this.mNotificationsToWrite,
+                new Comparator() { // from class:
+                    // android.app.NotificationHistory$$ExternalSyntheticLambda2
+                    @Override // java.util.Comparator
+                    public final int compare(Object obj, Object obj2) {
+                        return NotificationHistory.lambda$addNotificationsToWrite$3(
+                                (NotificationHistory.HistoricalNotification) obj,
+                                (NotificationHistory.HistoricalNotification) obj2);
+                    }
+                });
         poolStringsFromNotifications();
     }
 
-    static /* synthetic */ int lambda$addNotificationsToWrite$3(HistoricalNotification o1, HistoricalNotification o2) {
+    static /* synthetic */ int lambda$addNotificationsToWrite$3(
+            HistoricalNotification o1, HistoricalNotification o2) {
         return Long.compare(o1.getPostedTimeMs(), o2.getPostedTimeMs()) * (-1);
     }
 
@@ -521,7 +614,9 @@ public final class NotificationHistory implements Parcelable {
         boolean removed = false;
         for (int i = this.mNotificationsToWrite.size() - 1; i >= 0; i--) {
             HistoricalNotification hn = this.mNotificationsToWrite.get(i);
-            if (packageName.equals(hn.getPackage()) && hn.getConversationId() != null && conversationIds.contains(hn.getConversationId())) {
+            if (packageName.equals(hn.getPackage())
+                    && hn.getConversationId() != null
+                    && conversationIds.contains(hn.getConversationId())) {
                 removed = true;
                 this.mNotificationsToWrite.remove(i);
             }
@@ -536,7 +631,8 @@ public final class NotificationHistory implements Parcelable {
         boolean removed = false;
         for (int i = this.mNotificationsToWrite.size() - 1; i >= 0; i--) {
             HistoricalNotification hn = this.mNotificationsToWrite.get(i);
-            if (packageName.equals(hn.getPackage()) && Objects.equals(channelId, hn.getChannelId())) {
+            if (packageName.equals(hn.getPackage())
+                    && Objects.equals(channelId, hn.getChannelId())) {
                 removed = true;
                 this.mNotificationsToWrite.remove(i);
             }
@@ -569,7 +665,8 @@ public final class NotificationHistory implements Parcelable {
         return index;
     }
 
-    private void writeNotificationToParcel(HistoricalNotification notification, Parcel p, int flags) {
+    private void writeNotificationToParcel(
+            HistoricalNotification notification, Parcel p, int flags) {
         int packageIndex;
         int channelNameIndex;
         int channelIdIndex;
@@ -694,7 +791,8 @@ public final class NotificationHistory implements Parcelable {
                 p.writeInt(this.mParcel.dataPosition());
                 p.appendFrom(this.mParcel, 0, this.mParcel.dataSize());
             } else {
-                throw new IllegalStateException("Either mParcel or mNotificationsToWrite must not be null");
+                throw new IllegalStateException(
+                        "Either mParcel or mNotificationsToWrite must not be null");
             }
         }
         dest.writeBlob(p.marshall());

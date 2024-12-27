@@ -16,30 +16,27 @@ public interface IEdgeLightingCallback extends IInterface {
 
     void onScreenChanged(boolean z) throws RemoteException;
 
-    void onStartEdgeLighting(String str, SemEdgeLightingInfo semEdgeLightingInfo, int i) throws RemoteException;
+    void onStartEdgeLighting(String str, SemEdgeLightingInfo semEdgeLightingInfo, int i)
+            throws RemoteException;
 
     void onStopEdgeLighting(String str, int i) throws RemoteException;
 
     public static class Default implements IEdgeLightingCallback {
         @Override // com.samsung.android.edge.IEdgeLightingCallback
-        public void onStartEdgeLighting(String packageName, SemEdgeLightingInfo info, int reason) throws RemoteException {
-        }
+        public void onStartEdgeLighting(String packageName, SemEdgeLightingInfo info, int reason)
+                throws RemoteException {}
 
         @Override // com.samsung.android.edge.IEdgeLightingCallback
-        public void onStopEdgeLighting(String packageName, int reason) throws RemoteException {
-        }
+        public void onStopEdgeLighting(String packageName, int reason) throws RemoteException {}
 
         @Override // com.samsung.android.edge.IEdgeLightingCallback
-        public void onScreenChanged(boolean on) throws RemoteException {
-        }
+        public void onScreenChanged(boolean on) throws RemoteException {}
 
         @Override // com.samsung.android.edge.IEdgeLightingCallback
-        public void onEdgeLightingStarted() throws RemoteException {
-        }
+        public void onEdgeLightingStarted() throws RemoteException {}
 
         @Override // com.samsung.android.edge.IEdgeLightingCallback
-        public void onEdgeLightingStopped() throws RemoteException {
-        }
+        public void onEdgeLightingStopped() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -47,7 +44,7 @@ public interface IEdgeLightingCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IEdgeLightingCallback {
+    public abstract static class Stub extends Binder implements IEdgeLightingCallback {
         static final int TRANSACTION_onEdgeLightingStarted = 4;
         static final int TRANSACTION_onEdgeLightingStopped = 5;
         static final int TRANSACTION_onScreenChanged = 3;
@@ -97,7 +94,8 @@ public interface IEdgeLightingCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IEdgeLightingCallback.DESCRIPTOR);
             }
@@ -108,7 +106,8 @@ public interface IEdgeLightingCallback extends IInterface {
             switch (code) {
                 case 1:
                     String _arg0 = data.readString();
-                    SemEdgeLightingInfo _arg1 = (SemEdgeLightingInfo) data.readTypedObject(SemEdgeLightingInfo.CREATOR);
+                    SemEdgeLightingInfo _arg1 =
+                            (SemEdgeLightingInfo) data.readTypedObject(SemEdgeLightingInfo.CREATOR);
                     int _arg2 = data.readInt();
                     data.enforceNoDataAvail();
                     onStartEdgeLighting(_arg0, _arg1, _arg2);
@@ -152,7 +151,9 @@ public interface IEdgeLightingCallback extends IInterface {
             }
 
             @Override // com.samsung.android.edge.IEdgeLightingCallback
-            public void onStartEdgeLighting(String packageName, SemEdgeLightingInfo info, int reason) throws RemoteException {
+            public void onStartEdgeLighting(
+                    String packageName, SemEdgeLightingInfo info, int reason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IEdgeLightingCallback.DESCRIPTOR);

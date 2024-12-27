@@ -1,6 +1,7 @@
 package com.android.internal.pm.pkg.component;
 
 import android.content.pm.ActivityInfo;
+
 import java.util.Set;
 
 /* loaded from: classes5.dex */

@@ -1,6 +1,10 @@
 package com.android.internal.protolog;
 
 import com.android.internal.protolog.common.ILogger;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,8 +15,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.zip.GZIPInputStream;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* loaded from: classes5.dex */
 public class LegacyProtoLogViewerConfigReader {
@@ -30,18 +32,35 @@ public class LegacyProtoLogViewerConfigReader {
         try {
             try {
                 loadViewerConfig(new GZIPInputStream(new FileInputStream(viewerConfigFilename)));
-                logger.log("Loaded " + this.mLogMessageMap.size() + " log definitions from " + viewerConfigFilename);
+                logger.log(
+                        "Loaded "
+                                + this.mLogMessageMap.size()
+                                + " log definitions from "
+                                + viewerConfigFilename);
             } catch (IOException e) {
-                logger.log("Unable to load log definitions: IOException while reading " + viewerConfigFilename + ". " + e);
+                logger.log(
+                        "Unable to load log definitions: IOException while reading "
+                                + viewerConfigFilename
+                                + ". "
+                                + e);
             } catch (JSONException e2) {
-                logger.log("Unable to load log definitions: JSON parsing exception while reading " + viewerConfigFilename + ". " + e2);
+                logger.log(
+                        "Unable to load log definitions: JSON parsing exception while reading "
+                                + viewerConfigFilename
+                                + ". "
+                                + e2);
             }
         } catch (FileNotFoundException e3) {
-            logger.log("Unable to load log definitions: File " + viewerConfigFilename + " not found." + e3);
+            logger.log(
+                    "Unable to load log definitions: File "
+                            + viewerConfigFilename
+                            + " not found."
+                            + e3);
         }
     }
 
-    public synchronized void loadViewerConfig(InputStream viewerConfigInputStream) throws IOException, JSONException {
+    public synchronized void loadViewerConfig(InputStream viewerConfigInputStream)
+            throws IOException, JSONException {
         if (this.mLogMessageMap != null) {
             return;
         }

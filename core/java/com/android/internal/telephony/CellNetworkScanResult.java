@@ -2,24 +2,28 @@ package com.android.internal.telephony;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes5.dex */
 public class CellNetworkScanResult implements Parcelable {
-    public static final Parcelable.Creator<CellNetworkScanResult> CREATOR = new Parcelable.Creator<CellNetworkScanResult>() { // from class: com.android.internal.telephony.CellNetworkScanResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellNetworkScanResult createFromParcel(Parcel in) {
-            return new CellNetworkScanResult(in);
-        }
+    public static final Parcelable.Creator<CellNetworkScanResult> CREATOR =
+            new Parcelable.Creator<
+                    CellNetworkScanResult>() { // from class:
+                                               // com.android.internal.telephony.CellNetworkScanResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellNetworkScanResult createFromParcel(Parcel in) {
+                    return new CellNetworkScanResult(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellNetworkScanResult[] newArray(int size) {
-            return new CellNetworkScanResult[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellNetworkScanResult[] newArray(int size) {
+                    return new CellNetworkScanResult[size];
+                }
+            };
     public static final int STATUS_RADIO_GENERIC_FAILURE = 3;
     public static final int STATUS_RADIO_NOT_AVAILABLE = 2;
     public static final int STATUS_SUCCESS = 1;

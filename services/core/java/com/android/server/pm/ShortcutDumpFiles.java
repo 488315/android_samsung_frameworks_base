@@ -2,7 +2,9 @@ package com.android.server.pm;
 
 import android.text.format.TimeMigrationUtils;
 import android.util.Slog;
+
 import com.android.internal.util.ArrayUtils;
+
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -31,13 +33,17 @@ public final class ShortcutDumpFiles {
             File file = new File(shortcutService.injectUserDataPath(0), "shortcut_dump");
             File[] listFiles = file.listFiles(new ShortcutDumpFiles$$ExternalSyntheticLambda1());
             if (file.exists() && !ArrayUtils.isEmpty(listFiles)) {
-                Arrays.sort(listFiles, Comparator.comparing(new ShortcutDumpFiles$$ExternalSyntheticLambda2()));
+                Arrays.sort(
+                        listFiles,
+                        Comparator.comparing(new ShortcutDumpFiles$$ExternalSyntheticLambda2()));
                 for (File file2 : listFiles) {
                     printWriter.print("*** Dumping: ");
                     printWriter.println(file2.getName());
                     printWriter.print("mtime: ");
-                    printWriter.println(TimeMigrationUtils.formatMillisWithFixedFormat(file2.lastModified()));
-                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file2)));
+                    printWriter.println(
+                            TimeMigrationUtils.formatMillisWithFixedFormat(file2.lastModified()));
+                    BufferedReader bufferedReader =
+                            new BufferedReader(new InputStreamReader(new FileInputStream(file2)));
                     while (true) {
                         try {
                             String readLine = bufferedReader.readLine();
@@ -75,7 +81,9 @@ public final class ShortcutDumpFiles {
                 Slog.e("ShortcutService", "Failed to create directory: " + file);
                 return false;
             }
-            PrintWriter printWriter = new PrintWriter(new BufferedOutputStream(new FileOutputStream(new File(file, str))));
+            PrintWriter printWriter =
+                    new PrintWriter(
+                            new BufferedOutputStream(new FileOutputStream(new File(file, str))));
             try {
                 consumer.accept(printWriter);
                 printWriter.close();

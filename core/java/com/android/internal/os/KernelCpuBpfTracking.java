@@ -14,8 +14,7 @@ public final class KernelCpuBpfTracking {
 
     private static native boolean startTrackingInternal();
 
-    private KernelCpuBpfTracking() {
-    }
+    private KernelCpuBpfTracking() {}
 
     public static boolean startTracking() {
         if (!sTracking) {

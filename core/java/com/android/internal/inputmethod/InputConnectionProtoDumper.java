@@ -9,8 +9,7 @@ import android.view.inputmethod.SurroundingText;
 public final class InputConnectionProtoDumper {
     static final String TAG = "InputConnectionProtoDumper";
 
-    private InputConnectionProtoDumper() {
-    }
+    private InputConnectionProtoDumper() {}
 
     public static byte[] buildGetTextAfterCursorProto(int length, int flags, CharSequence result) {
         ProtoOutputStream proto = new ProtoOutputStream();
@@ -38,7 +37,8 @@ public final class InputConnectionProtoDumper {
         return proto.getBytes();
     }
 
-    public static byte[] buildGetSurroundingTextProto(int beforeLength, int afterLength, int flags, SurroundingText result) {
+    public static byte[] buildGetSurroundingTextProto(
+            int beforeLength, int afterLength, int flags, SurroundingText result) {
         ProtoOutputStream proto = new ProtoOutputStream();
         long token = proto.start(1146756268036L);
         proto.write(1120986464257L, beforeLength);
@@ -64,7 +64,8 @@ public final class InputConnectionProtoDumper {
         return proto.getBytes();
     }
 
-    public static byte[] buildGetExtractedTextProto(ExtractedTextRequest request, int flags, ExtractedText result) {
+    public static byte[] buildGetExtractedTextProto(
+            ExtractedTextRequest request, int flags, ExtractedText result) {
         ProtoOutputStream proto = new ProtoOutputStream();
         long token = proto.start(1146756268038L);
         long token_request = proto.start(1146756268033L);

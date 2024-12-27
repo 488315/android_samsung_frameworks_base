@@ -53,7 +53,10 @@ public class YesNoPreference extends DialogPreference {
 
     @Override // android.preference.Preference
     protected void onSetInitialValue(boolean restorePersistedValue, Object defaultValue) {
-        setValue(restorePersistedValue ? getPersistedBoolean(this.mWasPositiveResult) : ((Boolean) defaultValue).booleanValue());
+        setValue(
+                restorePersistedValue
+                        ? getPersistedBoolean(this.mWasPositiveResult)
+                        : ((Boolean) defaultValue).booleanValue());
     }
 
     @Override // android.preference.Preference
@@ -84,19 +87,22 @@ public class YesNoPreference extends DialogPreference {
     }
 
     private static class SavedState extends Preference.BaseSavedState {
-        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() { // from class: com.android.internal.preference.YesNoPreference.SavedState.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SavedState createFromParcel(Parcel in) {
-                return new SavedState(in);
-            }
+        public static final Parcelable.Creator<SavedState> CREATOR =
+                new Parcelable.Creator<
+                        SavedState>() { // from class:
+                                        // com.android.internal.preference.YesNoPreference.SavedState.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SavedState createFromParcel(Parcel in) {
+                        return new SavedState(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SavedState[] newArray(int size) {
-                return new SavedState[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SavedState[] newArray(int size) {
+                        return new SavedState[size];
+                    }
+                };
         boolean wasPositiveResult;
 
         public SavedState(Parcel source) {

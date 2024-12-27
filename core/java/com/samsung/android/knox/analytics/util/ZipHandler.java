@@ -1,10 +1,12 @@
 package com.samsung.android.knox.analytics.util;
 
 import com.samsung.android.knox.analytics.model.EventList;
+
+import org.json.JSONException;
+
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
-import org.json.JSONException;
 
 /* loaded from: classes6.dex */
 public class ZipHandler {
@@ -23,7 +25,14 @@ public class ZipHandler {
         byte[] zippedContent = new byte[zippedLength];
         System.arraycopy(tmpBuffer, 0, zippedContent, 0, zippedLength);
         deflater.end();
-        Log.d(TAG, "deflate(): bytes size: " + content.length + ", bytes size after compression: " + zippedLength + ",  bytes saved: " + (content.length - zippedLength));
+        Log.d(
+                TAG,
+                "deflate(): bytes size: "
+                        + content.length
+                        + ", bytes size after compression: "
+                        + zippedLength
+                        + ",  bytes saved: "
+                        + (content.length - zippedLength));
         return new ZipResult(zippedContent, zippedLength, content.length);
     }
 
@@ -32,7 +41,12 @@ public class ZipHandler {
         inflate.setInput(zip.getContent(), 0, zip.getLength());
         byte[] original = new byte[zip.getOriginalLength()];
         int origLength = inflate.inflate(original);
-        Log.d(TAG, "inflate(): actual number of uncompressed bytes: " + origLength + " original number of uncompressed bytes: " + zip.getOriginalLength());
+        Log.d(
+                TAG,
+                "inflate(): actual number of uncompressed bytes: "
+                        + origLength
+                        + " original number of uncompressed bytes: "
+                        + zip.getOriginalLength());
         inflate.end();
         if (origLength <= 0) {
             Log.d(TAG, "inflate(): Could not return to decompress data");

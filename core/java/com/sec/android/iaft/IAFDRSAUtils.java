@@ -1,6 +1,7 @@
 package com.sec.android.iaft;
 
 import android.util.Base64;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -11,6 +12,7 @@ import java.io.OutputStream;
 import java.security.Key;
 import java.security.KeyFactory;
 import java.security.spec.X509EncodedKeySpec;
+
 import javax.crypto.Cipher;
 
 /* loaded from: classes6.dex */
@@ -24,7 +26,8 @@ public class IAFDRSAUtils {
         return decodedData;
     }
 
-    public static void decryptBytesToFile(byte[] encryptedData, String pkey, String filePath) throws Exception {
+    public static void decryptBytesToFile(byte[] encryptedData, String pkey, String filePath)
+            throws Exception {
         byte[] decodedData = decrypt(encryptedData, pkey);
         byteArrayToFile(decodedData, filePath);
     }

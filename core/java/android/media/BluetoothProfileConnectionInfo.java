@@ -7,25 +7,32 @@ import android.os.Parcelable;
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
 /* loaded from: classes2.dex */
 public final class BluetoothProfileConnectionInfo implements Parcelable {
-    public static final Parcelable.Creator<BluetoothProfileConnectionInfo> CREATOR = new Parcelable.Creator<BluetoothProfileConnectionInfo>() { // from class: android.media.BluetoothProfileConnectionInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BluetoothProfileConnectionInfo createFromParcel(Parcel source) {
-            return new BluetoothProfileConnectionInfo(source.readInt(), source.readBoolean(), source.readInt(), source.readBoolean());
-        }
+    public static final Parcelable.Creator<BluetoothProfileConnectionInfo> CREATOR =
+            new Parcelable.Creator<BluetoothProfileConnectionInfo>() { // from class:
+                // android.media.BluetoothProfileConnectionInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BluetoothProfileConnectionInfo createFromParcel(Parcel source) {
+                    return new BluetoothProfileConnectionInfo(
+                            source.readInt(),
+                            source.readBoolean(),
+                            source.readInt(),
+                            source.readBoolean());
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BluetoothProfileConnectionInfo[] newArray(int size) {
-            return new BluetoothProfileConnectionInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BluetoothProfileConnectionInfo[] newArray(int size) {
+                    return new BluetoothProfileConnectionInfo[size];
+                }
+            };
     private final boolean mIsLeOutput;
     private final int mProfile;
     private final boolean mSupprNoisy;
     private final int mVolume;
 
-    private BluetoothProfileConnectionInfo(int profile, boolean suppressNoisyIntent, int volume, boolean isLeOutput) {
+    private BluetoothProfileConnectionInfo(
+            int profile, boolean suppressNoisyIntent, int volume, boolean isLeOutput) {
         this.mProfile = profile;
         this.mSupprNoisy = suppressNoisyIntent;
         this.mVolume = volume;
@@ -49,7 +56,8 @@ public final class BluetoothProfileConnectionInfo implements Parcelable {
         return 0;
     }
 
-    public static BluetoothProfileConnectionInfo createA2dpInfo(boolean suppressNoisyIntent, int volume) {
+    public static BluetoothProfileConnectionInfo createA2dpInfo(
+            boolean suppressNoisyIntent, int volume) {
         return new BluetoothProfileConnectionInfo(2, suppressNoisyIntent, volume, false);
     }
 
@@ -61,11 +69,13 @@ public final class BluetoothProfileConnectionInfo implements Parcelable {
         return new BluetoothProfileConnectionInfo(21, suppressNoisyIntent, -1, false);
     }
 
-    public static BluetoothProfileConnectionInfo createLeAudioInfo(boolean suppressNoisyIntent, boolean isLeOutput) {
+    public static BluetoothProfileConnectionInfo createLeAudioInfo(
+            boolean suppressNoisyIntent, boolean isLeOutput) {
         return new BluetoothProfileConnectionInfo(22, suppressNoisyIntent, -1, isLeOutput);
     }
 
-    public static BluetoothProfileConnectionInfo createLeAudioOutputInfo(boolean suppressNoisyIntent, int volume) {
+    public static BluetoothProfileConnectionInfo createLeAudioOutputInfo(
+            boolean suppressNoisyIntent, int volume) {
         return new BluetoothProfileConnectionInfo(22, suppressNoisyIntent, volume, true);
     }
 

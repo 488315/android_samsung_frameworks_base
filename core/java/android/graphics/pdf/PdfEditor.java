@@ -7,9 +7,12 @@ import android.os.ParcelFileDescriptor;
 import android.system.ErrnoException;
 import android.system.Os;
 import android.system.OsConstants;
+
 import dalvik.system.CloseGuard;
-import java.io.IOException;
+
 import libcore.io.IoUtils;
+
+import java.io.IOException;
 
 /* loaded from: classes.dex */
 public final class PdfEditor {
@@ -39,7 +42,8 @@ public final class PdfEditor {
 
     private static native void nativeSetPageMediaBox(long j, int i, Rect rect);
 
-    private static native void nativeSetTransformAndClip(long j, int i, long j2, int i2, int i3, int i4, int i5);
+    private static native void nativeSetTransformAndClip(
+            long j, int i, long j2, int i2, int i3, int i4, int i5);
 
     private static native void nativeWrite(long j, int i);
 
@@ -91,12 +95,20 @@ public final class PdfEditor {
             Point size = new Point();
             getPageSize(pageIndex, size);
             synchronized (sPdfiumLock) {
-                nativeSetTransformAndClip(this.mNativeDocument, pageIndex, transform.ni(), 0, 0, size.x, size.y);
+                nativeSetTransformAndClip(
+                        this.mNativeDocument, pageIndex, transform.ni(), 0, 0, size.x, size.y);
             }
             return;
         }
         synchronized (sPdfiumLock) {
-            nativeSetTransformAndClip(this.mNativeDocument, pageIndex, transform.ni(), clip.left, clip.top, clip.right, clip.bottom);
+            nativeSetTransformAndClip(
+                    this.mNativeDocument,
+                    pageIndex,
+                    transform.ni(),
+                    clip.left,
+                    clip.top,
+                    clip.right,
+                    clip.bottom);
         }
     }
 
@@ -115,7 +127,8 @@ public final class PdfEditor {
         throwIfOutMediaBoxNull(outMediaBox);
         throwIfPageNotInDocument(pageIndex);
         synchronized (sPdfiumLock) {
-            nativeGetPageMediaBox = nativeGetPageMediaBox(this.mNativeDocument, pageIndex, outMediaBox);
+            nativeGetPageMediaBox =
+                    nativeGetPageMediaBox(this.mNativeDocument, pageIndex, outMediaBox);
         }
         return nativeGetPageMediaBox;
     }
@@ -135,7 +148,8 @@ public final class PdfEditor {
         throwIfOutCropBoxNull(outCropBox);
         throwIfPageNotInDocument(pageIndex);
         synchronized (sPdfiumLock) {
-            nativeGetPageCropBox = nativeGetPageCropBox(this.mNativeDocument, pageIndex, outCropBox);
+            nativeGetPageCropBox =
+                    nativeGetPageCropBox(this.mNativeDocument, pageIndex, outCropBox);
         }
         return nativeGetPageCropBox;
     }

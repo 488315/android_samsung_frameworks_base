@@ -15,10 +15,12 @@ import android.service.notification.StatusBarNotification;
 import android.util.ArraySet;
 import android.util.Log;
 import android.view.ISensitiveContentProtectionManager;
+
 import com.android.internal.hidden_from_bootclasspath.android.permission.flags.Flags;
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.wm.SensitiveContentPackages;
 import com.android.server.wm.WindowManagerInternal;
+
 import java.util.Objects;
 import java.util.Set;
 
@@ -28,7 +30,8 @@ public final class SensitiveContentProtectionManagerService extends SystemServic
     public ArraySet mExemptedPackages;
     public MediaProjectionSession mMediaProjectionSession;
     NotificationListener mNotificationListener;
-    public final SensitiveContentProtectionManagerService$$ExternalSyntheticLambda0 mOnWindowRemovedListener;
+    public final SensitiveContentProtectionManagerService$$ExternalSyntheticLambda0
+            mOnWindowRemovedListener;
     public PackageManagerInternal mPackageManagerInternal;
     public final ArraySet mPackagesShowingSensitiveContent;
     public boolean mProjectionActive;
@@ -54,18 +57,23 @@ public final class SensitiveContentProtectionManagerService extends SystemServic
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class NotificationListener extends NotificationListenerService {
-        public NotificationListener() {
-        }
+        public NotificationListener() {}
 
         @Override // android.service.notification.NotificationListenerService
         public final void onListenerConnected() {
             super.onListenerConnected();
-            Trace.traceBegin(524288L, "SensitiveContentProtectionManagerService.onListenerConnected");
+            Trace.traceBegin(
+                    524288L, "SensitiveContentProtectionManagerService.onListenerConnected");
             try {
-                synchronized (SensitiveContentProtectionManagerService.this.mSensitiveContentProtectionLock) {
-                    SensitiveContentProtectionManagerService sensitiveContentProtectionManagerService = SensitiveContentProtectionManagerService.this;
+                synchronized (
+                        SensitiveContentProtectionManagerService.this
+                                .mSensitiveContentProtectionLock) {
+                    SensitiveContentProtectionManagerService
+                            sensitiveContentProtectionManagerService =
+                                    SensitiveContentProtectionManagerService.this;
                     if (sensitiveContentProtectionManagerService.mProjectionActive) {
-                        sensitiveContentProtectionManagerService.updateAppsThatShouldBlockScreenCapture();
+                        sensitiveContentProtectionManagerService
+                                .updateAppsThatShouldBlockScreenCapture();
                     }
                 }
             } finally {
@@ -74,10 +82,13 @@ public final class SensitiveContentProtectionManagerService extends SystemServic
         }
 
         @Override // android.service.notification.NotificationListenerService
-        public final void onNotificationPosted(StatusBarNotification statusBarNotification, NotificationListenerService.RankingMap rankingMap) {
+        public final void onNotificationPosted(
+                StatusBarNotification statusBarNotification,
+                NotificationListenerService.RankingMap rankingMap) {
             MediaProjectionSession mediaProjectionSession;
             super.onNotificationPosted(statusBarNotification, rankingMap);
-            Trace.traceBegin(524288L, "SensitiveContentProtectionManagerService.onNotificationPosted");
+            Trace.traceBegin(
+                    524288L, "SensitiveContentProtectionManagerService.onNotificationPosted");
             try {
                 if (statusBarNotification == null) {
                     Log.w("SensitiveContentProtect", "Unable to parse null notification");
@@ -87,20 +98,36 @@ public final class SensitiveContentProtectionManagerService extends SystemServic
                     Log.w("SensitiveContentProtect", "Ranking map not initialized.");
                     return;
                 }
-                synchronized (SensitiveContentProtectionManagerService.this.mSensitiveContentProtectionLock) {
+                synchronized (
+                        SensitiveContentProtectionManagerService.this
+                                .mSensitiveContentProtectionLock) {
                     if (SensitiveContentProtectionManagerService.this.mProjectionActive) {
-                        NotificationListenerService.Ranking rawRankingObject = rankingMap.getRawRankingObject(statusBarNotification.getKey());
-                        SensitiveContentPackages.PackageInfo packageInfo = rawRankingObject != null && rawRankingObject.hasSensitiveContent() ? new SensitiveContentPackages.PackageInfo(statusBarNotification.getUid(), null, statusBarNotification.getPackageName()) : null;
+                        NotificationListenerService.Ranking rawRankingObject =
+                                rankingMap.getRawRankingObject(statusBarNotification.getKey());
+                        SensitiveContentPackages.PackageInfo packageInfo =
+                                rawRankingObject != null && rawRankingObject.hasSensitiveContent()
+                                        ? new SensitiveContentPackages.PackageInfo(
+                                                statusBarNotification.getUid(),
+                                                null,
+                                                statusBarNotification.getPackageName())
+                                        : null;
                         if (packageInfo != null) {
-                            SensitiveContentProtectionManagerService.this.mWindowManager.addBlockScreenCaptureForApps(new ArraySet(Set.of(packageInfo)));
+                            SensitiveContentProtectionManagerService.this.mWindowManager
+                                    .addBlockScreenCaptureForApps(
+                                            new ArraySet(Set.of(packageInfo)));
                         }
-                        if (Flags.sensitiveContentImprovements() && (mediaProjectionSession = SensitiveContentProtectionManagerService.this.mMediaProjectionSession) != null) {
+                        if (Flags.sensitiveContentImprovements()
+                                && (mediaProjectionSession =
+                                                SensitiveContentProtectionManagerService.this
+                                                        .mMediaProjectionSession)
+                                        != null) {
                             if (packageInfo != null) {
                                 String key = statusBarNotification.getKey();
                                 mediaProjectionSession.mAllSeenNotificationKeys.add(key);
                                 mediaProjectionSession.mSeenOtpNotificationKeys.add(key);
                             } else {
-                                mediaProjectionSession.mAllSeenNotificationKeys.add(statusBarNotification.getKey());
+                                mediaProjectionSession.mAllSeenNotificationKeys.add(
+                                        statusBarNotification.getKey());
                             }
                         }
                     }
@@ -111,18 +138,26 @@ public final class SensitiveContentProtectionManagerService extends SystemServic
         }
 
         @Override // android.service.notification.NotificationListenerService
-        public final void onNotificationRankingUpdate(NotificationListenerService.RankingMap rankingMap) {
+        public final void onNotificationRankingUpdate(
+                NotificationListenerService.RankingMap rankingMap) {
             super.onNotificationRankingUpdate(rankingMap);
-            Trace.traceBegin(524288L, "SensitiveContentProtectionManagerService.onNotificationRankingUpdate");
+            Trace.traceBegin(
+                    524288L,
+                    "SensitiveContentProtectionManagerService.onNotificationRankingUpdate");
             try {
                 if (rankingMap == null) {
                     Log.w("SensitiveContentProtect", "Ranking map not initialized.");
                     return;
                 }
-                synchronized (SensitiveContentProtectionManagerService.this.mSensitiveContentProtectionLock) {
-                    SensitiveContentProtectionManagerService sensitiveContentProtectionManagerService = SensitiveContentProtectionManagerService.this;
+                synchronized (
+                        SensitiveContentProtectionManagerService.this
+                                .mSensitiveContentProtectionLock) {
+                    SensitiveContentProtectionManagerService
+                            sensitiveContentProtectionManagerService =
+                                    SensitiveContentProtectionManagerService.this;
                     if (sensitiveContentProtectionManagerService.mProjectionActive) {
-                        sensitiveContentProtectionManagerService.updateAppsThatShouldBlockScreenCapture(rankingMap);
+                        sensitiveContentProtectionManagerService
+                                .updateAppsThatShouldBlockScreenCapture(rankingMap);
                     }
                 }
             } finally {
@@ -132,29 +167,48 @@ public final class SensitiveContentProtectionManagerService extends SystemServic
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class SensitiveContentProtectionManagerServiceBinder extends ISensitiveContentProtectionManager.Stub {
-        public SensitiveContentProtectionManagerServiceBinder() {
-        }
+    public final class SensitiveContentProtectionManagerServiceBinder
+            extends ISensitiveContentProtectionManager.Stub {
+        public SensitiveContentProtectionManagerServiceBinder() {}
 
         public final void setSensitiveContentProtection(IBinder iBinder, String str, boolean z) {
-            Trace.traceBegin(524288L, "SensitiveContentProtectionManagerService.setSensitiveContentProtection");
+            Trace.traceBegin(
+                    524288L,
+                    "SensitiveContentProtectionManagerService.setSensitiveContentProtection");
             try {
                 int callingUid = Binder.getCallingUid();
-                if (SensitiveContentProtectionManagerService.this.mPackageManagerInternal.getPackageUid(str, 0L, UserHandle.getUserId(callingUid)) != callingUid) {
-                    throw new SecurityException(SensitiveContentProtectionManagerService$SensitiveContentProtectionManagerServiceBinder$$ExternalSyntheticOutline0.m(callingUid, "Specified calling package [", str, "] does not match the calling uid "));
+                if (SensitiveContentProtectionManagerService.this.mPackageManagerInternal
+                                .getPackageUid(str, 0L, UserHandle.getUserId(callingUid))
+                        != callingUid) {
+                    throw new SecurityException(
+                            SensitiveContentProtectionManagerService$SensitiveContentProtectionManagerServiceBinder$$ExternalSyntheticOutline0
+                                    .m(
+                                            callingUid,
+                                            "Specified calling package [",
+                                            str,
+                                            "] does not match the calling uid "));
                 }
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 if (z) {
                     try {
-                        if (SensitiveContentProtectionManagerService.this.mWindowManager.getWindowName(iBinder) == null) {
-                            Log.e("SensitiveContentProtect", "window token is not know to WMS, can't apply protection, token: " + iBinder + ", package: " + str);
+                        if (SensitiveContentProtectionManagerService.this.mWindowManager
+                                        .getWindowName(iBinder)
+                                == null) {
+                            Log.e(
+                                    "SensitiveContentProtect",
+                                    "window token is not know to WMS, can't apply protection,"
+                                        + " token: "
+                                            + iBinder
+                                            + ", package: "
+                                            + str);
                             return;
                         }
                     } finally {
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                     }
                 }
-                SensitiveContentProtectionManagerService.this.setSensitiveContentProtection(iBinder, str, callingUid, z);
+                SensitiveContentProtectionManagerService.this.setSensitiveContentProtection(
+                        iBinder, str, callingUid, z);
             } finally {
                 Trace.traceEnd(524288L);
             }
@@ -169,12 +223,17 @@ public final class SensitiveContentProtectionManagerService extends SystemServic
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void m85$$Nest$monProjectionStart(com.android.server.SensitiveContentProtectionManagerService r18, android.media.projection.MediaProjectionInfo r19) {
+    public static void m85$$Nest$monProjectionStart(
+            com.android.server.SensitiveContentProtectionManagerService r18,
+            android.media.projection.MediaProjectionInfo r19) {
         /*
             Method dump skipped, instructions count: 263
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.SensitiveContentProtectionManagerService.m85$$Nest$monProjectionStart(com.android.server.SensitiveContentProtectionManagerService, android.media.projection.MediaProjectionInfo):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.SensitiveContentProtectionManagerService.m85$$Nest$monProjectionStart(com.android.server.SensitiveContentProtectionManagerService,"
+                    + " android.media.projection.MediaProjectionInfo):void");
     }
 
     /* JADX WARN: Type inference failed for: r1v5, types: [com.android.server.SensitiveContentProtectionManagerService$1] */
@@ -184,42 +243,60 @@ public final class SensitiveContentProtectionManagerService extends SystemServic
         this.mSensitiveContentProtectionLock = new Object();
         this.mPackagesShowingSensitiveContent = new ArraySet();
         this.mProjectionActive = false;
-        this.mProjectionCallback = new MediaProjectionManager.Callback() { // from class: com.android.server.SensitiveContentProtectionManagerService.1
-            public final void onStart(MediaProjectionInfo mediaProjectionInfo) {
-                Trace.traceBegin(524288L, "SensitiveContentProtectionManagerService.onProjectionStart");
-                try {
-                    SensitiveContentProtectionManagerService.m85$$Nest$monProjectionStart(SensitiveContentProtectionManagerService.this, mediaProjectionInfo);
-                } finally {
-                    Trace.traceEnd(524288L);
-                }
-            }
+        this.mProjectionCallback =
+                new MediaProjectionManager
+                        .Callback() { // from class:
+                                      // com.android.server.SensitiveContentProtectionManagerService.1
+                    public final void onStart(MediaProjectionInfo mediaProjectionInfo) {
+                        Trace.traceBegin(
+                                524288L,
+                                "SensitiveContentProtectionManagerService.onProjectionStart");
+                        try {
+                            SensitiveContentProtectionManagerService.m85$$Nest$monProjectionStart(
+                                    SensitiveContentProtectionManagerService.this,
+                                    mediaProjectionInfo);
+                        } finally {
+                            Trace.traceEnd(524288L);
+                        }
+                    }
 
-            public final void onStop(MediaProjectionInfo mediaProjectionInfo) {
-                Trace.traceBegin(524288L, "SensitiveContentProtectionManagerService.onProjectionStop");
-                try {
-                    SensitiveContentProtectionManagerService.this.onProjectionEnd();
-                } finally {
-                    Trace.traceEnd(524288L);
-                }
-            }
-        };
-        this.mOnWindowRemovedListener = new SensitiveContentProtectionManagerService$$ExternalSyntheticLambda0(this);
+                    public final void onStop(MediaProjectionInfo mediaProjectionInfo) {
+                        Trace.traceBegin(
+                                524288L,
+                                "SensitiveContentProtectionManagerService.onProjectionStop");
+                        try {
+                            SensitiveContentProtectionManagerService.this.onProjectionEnd();
+                        } finally {
+                            Trace.traceEnd(524288L);
+                        }
+                    }
+                };
+        this.mOnWindowRemovedListener =
+                new SensitiveContentProtectionManagerService$$ExternalSyntheticLambda0(this);
         if (Flags.sensitiveNotificationAppProtection()) {
             this.mNotificationListener = new NotificationListener();
         }
     }
 
-    public void init(MediaProjectionManager mediaProjectionManager, WindowManagerInternal windowManagerInternal, PackageManagerInternal packageManagerInternal, ArraySet arraySet) {
+    public void init(
+            MediaProjectionManager mediaProjectionManager,
+            WindowManagerInternal windowManagerInternal,
+            PackageManagerInternal packageManagerInternal,
+            ArraySet arraySet) {
         Objects.requireNonNull(mediaProjectionManager);
         Objects.requireNonNull(windowManagerInternal);
         this.mProjectionManager = mediaProjectionManager;
         this.mWindowManager = windowManagerInternal;
         this.mPackageManagerInternal = packageManagerInternal;
         this.mExemptedPackages = arraySet;
-        mediaProjectionManager.addCallback(this.mProjectionCallback, getContext().getMainThreadHandler());
+        mediaProjectionManager.addCallback(
+                this.mProjectionCallback, getContext().getMainThreadHandler());
         if (Flags.sensitiveNotificationAppProtection()) {
             try {
-                this.mNotificationListener.registerAsSystemService(getContext(), new ComponentName(getContext(), (Class<?>) NotificationListener.class), -1);
+                this.mNotificationListener.registerAsSystemService(
+                        getContext(),
+                        new ComponentName(getContext(), (Class<?>) NotificationListener.class),
+                        -1);
             } catch (RemoteException unused) {
             }
         }
@@ -233,9 +310,16 @@ public final class SensitiveContentProtectionManagerService extends SystemServic
         if (i != 1000) {
             return;
         }
-        init((MediaProjectionManager) getContext().getSystemService(MediaProjectionManager.class), (WindowManagerInternal) LocalServices.getService(WindowManagerInternal.class), (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class), SystemConfig.getInstance().mBugreportWhitelistedPackages);
+        init(
+                (MediaProjectionManager)
+                        getContext().getSystemService(MediaProjectionManager.class),
+                (WindowManagerInternal) LocalServices.getService(WindowManagerInternal.class),
+                (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class),
+                SystemConfig.getInstance().mBugreportWhitelistedPackages);
         if (android.view.flags.Flags.sensitiveContentAppProtection()) {
-            publishBinderService("sensitive_content_protection_service", new SensitiveContentProtectionManagerServiceBinder());
+            publishBinderService(
+                    "sensitive_content_protection_service",
+                    new SensitiveContentProtectionManagerServiceBinder());
         }
     }
 
@@ -261,10 +345,21 @@ public final class SensitiveContentProtectionManagerService extends SystemServic
                 this.mProjectionActive = false;
                 MediaProjectionSession mediaProjectionSession = this.mMediaProjectionSession;
                 if (mediaProjectionSession != null) {
-                    FrameworkStatsLog.write(FrameworkStatsLog.SENSITIVE_CONTENT_MEDIA_PROJECTION_SESSION, mediaProjectionSession.mSessionId, mediaProjectionSession.mUid, mediaProjectionSession.mIsExempted, 2, 2);
+                    FrameworkStatsLog.write(
+                            FrameworkStatsLog.SENSITIVE_CONTENT_MEDIA_PROJECTION_SESSION,
+                            mediaProjectionSession.mSessionId,
+                            mediaProjectionSession.mUid,
+                            mediaProjectionSession.mIsExempted,
+                            2,
+                            2);
                     if (Flags.sensitiveContentImprovements()) {
-                        MediaProjectionSession mediaProjectionSession2 = this.mMediaProjectionSession;
-                        FrameworkStatsLog.write(FrameworkStatsLog.SENSITIVE_NOTIFICATION_APP_PROTECTION_SESSION, mediaProjectionSession2.mSessionId, mediaProjectionSession2.mAllSeenNotificationKeys.size(), mediaProjectionSession2.mSeenOtpNotificationKeys.size());
+                        MediaProjectionSession mediaProjectionSession2 =
+                                this.mMediaProjectionSession;
+                        FrameworkStatsLog.write(
+                                FrameworkStatsLog.SENSITIVE_NOTIFICATION_APP_PROTECTION_SESSION,
+                                mediaProjectionSession2.mSessionId,
+                                mediaProjectionSession2.mAllSeenNotificationKeys.size(),
+                                mediaProjectionSession2.mSeenOtpNotificationKeys.size());
                     }
                     this.mMediaProjectionSession = null;
                 }
@@ -276,17 +371,20 @@ public final class SensitiveContentProtectionManagerService extends SystemServic
     }
 
     @Override // com.android.server.SystemService
-    public final void onStart() {
-    }
+    public final void onStart() {}
 
     public void setSensitiveContentProtection(IBinder iBinder, String str, int i, boolean z) {
         synchronized (this.mSensitiveContentProtectionLock) {
             try {
-                SensitiveContentPackages.PackageInfo packageInfo = new SensitiveContentPackages.PackageInfo(i, iBinder, str);
+                SensitiveContentPackages.PackageInfo packageInfo =
+                        new SensitiveContentPackages.PackageInfo(i, iBinder, str);
                 if (z) {
                     this.mPackagesShowingSensitiveContent.add(packageInfo);
                     if (this.mPackagesShowingSensitiveContent.size() > 100) {
-                        Log.w("SensitiveContentProtect", "Unexpectedly large number of sensitive windows, count: " + this.mPackagesShowingSensitiveContent.size());
+                        Log.w(
+                                "SensitiveContentProtect",
+                                "Unexpectedly large number of sensitive windows, count: "
+                                        + this.mPackagesShowingSensitiveContent.size());
                     }
                 } else {
                     this.mPackagesShowingSensitiveContent.remove(packageInfo);
@@ -296,15 +394,27 @@ public final class SensitiveContentProtectionManagerService extends SystemServic
                     arraySet.add(packageInfo);
                     if (z) {
                         this.mWindowManager.addBlockScreenCaptureForApps(arraySet);
-                        MediaProjectionSession mediaProjectionSession = this.mMediaProjectionSession;
+                        MediaProjectionSession mediaProjectionSession =
+                                this.mMediaProjectionSession;
                         if (mediaProjectionSession != null) {
-                            FrameworkStatsLog.write(FrameworkStatsLog.SENSITIVE_CONTENT_APP_PROTECTION, mediaProjectionSession.mSessionId, i, mediaProjectionSession.mUid, 1);
+                            FrameworkStatsLog.write(
+                                    FrameworkStatsLog.SENSITIVE_CONTENT_APP_PROTECTION,
+                                    mediaProjectionSession.mSessionId,
+                                    i,
+                                    mediaProjectionSession.mUid,
+                                    1);
                         }
                     } else {
                         this.mWindowManager.removeBlockScreenCaptureForApps(arraySet);
-                        MediaProjectionSession mediaProjectionSession2 = this.mMediaProjectionSession;
+                        MediaProjectionSession mediaProjectionSession2 =
+                                this.mMediaProjectionSession;
                         if (mediaProjectionSession2 != null) {
-                            FrameworkStatsLog.write(FrameworkStatsLog.SENSITIVE_CONTENT_APP_PROTECTION, mediaProjectionSession2.mSessionId, i, mediaProjectionSession2.mUid, 2);
+                            FrameworkStatsLog.write(
+                                    FrameworkStatsLog.SENSITIVE_CONTENT_APP_PROTECTION,
+                                    mediaProjectionSession2.mSessionId,
+                                    i,
+                                    mediaProjectionSession2.mUid,
+                                    2);
                         }
                     }
                 }
@@ -319,7 +429,10 @@ public final class SensitiveContentProtectionManagerService extends SystemServic
         try {
             rankingMap = this.mNotificationListener.getCurrentRanking();
         } catch (SecurityException e) {
-            Log.e("SensitiveContentProtect", "SensitiveContentProtectionManagerService doesn't have access.", e);
+            Log.e(
+                    "SensitiveContentProtect",
+                    "SensitiveContentProtectionManagerService doesn't have access.",
+                    e);
             rankingMap = null;
         }
         if (rankingMap == null) {
@@ -329,23 +442,30 @@ public final class SensitiveContentProtectionManagerService extends SystemServic
         }
     }
 
-    public final void updateAppsThatShouldBlockScreenCapture(NotificationListenerService.RankingMap rankingMap) {
+    public final void updateAppsThatShouldBlockScreenCapture(
+            NotificationListenerService.RankingMap rankingMap) {
         StatusBarNotification[] statusBarNotificationArr;
         MediaProjectionSession mediaProjectionSession;
         try {
             statusBarNotificationArr = this.mNotificationListener.getActiveNotifications();
         } catch (SecurityException e) {
-            Log.e("SensitiveContentProtect", "SensitiveContentProtectionManagerService doesn't have access.", e);
+            Log.e(
+                    "SensitiveContentProtect",
+                    "SensitiveContentProtectionManagerService doesn't have access.",
+                    e);
             statusBarNotificationArr = new StatusBarNotification[0];
         }
-        if (Flags.sensitiveContentImprovements() && (mediaProjectionSession = this.mMediaProjectionSession) != null) {
+        if (Flags.sensitiveContentImprovements()
+                && (mediaProjectionSession = this.mMediaProjectionSession) != null) {
             for (StatusBarNotification statusBarNotification : statusBarNotificationArr) {
                 if (statusBarNotification == null) {
                     Log.w("SensitiveContentProtect", "Unable to parse null notification");
                 } else {
-                    NotificationListenerService.Ranking rawRankingObject = rankingMap.getRawRankingObject(statusBarNotification.getKey());
+                    NotificationListenerService.Ranking rawRankingObject =
+                            rankingMap.getRawRankingObject(statusBarNotification.getKey());
                     if (rawRankingObject == null || !rawRankingObject.hasSensitiveContent()) {
-                        mediaProjectionSession.mAllSeenNotificationKeys.add(statusBarNotification.getKey());
+                        mediaProjectionSession.mAllSeenNotificationKeys.add(
+                                statusBarNotification.getKey());
                     } else {
                         String key = statusBarNotification.getKey();
                         mediaProjectionSession.mAllSeenNotificationKeys.add(key);
@@ -359,8 +479,15 @@ public final class SensitiveContentProtectionManagerService extends SystemServic
             if (statusBarNotification2 == null) {
                 Log.w("SensitiveContentProtect", "Unable to parse null notification");
             } else {
-                NotificationListenerService.Ranking rawRankingObject2 = rankingMap.getRawRankingObject(statusBarNotification2.getKey());
-                SensitiveContentPackages.PackageInfo packageInfo = rawRankingObject2 != null && rawRankingObject2.hasSensitiveContent() ? new SensitiveContentPackages.PackageInfo(statusBarNotification2.getUid(), null, statusBarNotification2.getPackageName()) : null;
+                NotificationListenerService.Ranking rawRankingObject2 =
+                        rankingMap.getRawRankingObject(statusBarNotification2.getKey());
+                SensitiveContentPackages.PackageInfo packageInfo =
+                        rawRankingObject2 != null && rawRankingObject2.hasSensitiveContent()
+                                ? new SensitiveContentPackages.PackageInfo(
+                                        statusBarNotification2.getUid(),
+                                        null,
+                                        statusBarNotification2.getPackageName())
+                                : null;
                 if (packageInfo != null) {
                     arraySet.add(packageInfo);
                 }

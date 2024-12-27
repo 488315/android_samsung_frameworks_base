@@ -5,20 +5,26 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public abstract class PolicyUpdateReceiver extends BroadcastReceiver {
-    public static final String ACTION_DEVICE_POLICY_CHANGED = "android.app.admin.action.DEVICE_POLICY_CHANGED";
-    public static final String ACTION_DEVICE_POLICY_SET_RESULT = "android.app.admin.action.DEVICE_POLICY_SET_RESULT";
+    public static final String ACTION_DEVICE_POLICY_CHANGED =
+            "android.app.admin.action.DEVICE_POLICY_CHANGED";
+    public static final String ACTION_DEVICE_POLICY_SET_RESULT =
+            "android.app.admin.action.DEVICE_POLICY_SET_RESULT";
     public static final String EXTRA_ACCOUNT_TYPE = "android.app.admin.extra.ACCOUNT_TYPE";
     public static final String EXTRA_INTENT_FILTER = "android.app.admin.extra.INTENT_FILTER";
     public static final String EXTRA_PACKAGE_NAME = "android.app.admin.extra.PACKAGE_NAME";
     public static final String EXTRA_PERMISSION_NAME = "android.app.admin.extra.PERMISSION_NAME";
-    public static final String EXTRA_POLICY_BUNDLE_KEY = "android.app.admin.extra.POLICY_BUNDLE_KEY";
+    public static final String EXTRA_POLICY_BUNDLE_KEY =
+            "android.app.admin.extra.POLICY_BUNDLE_KEY";
     public static final String EXTRA_POLICY_KEY = "android.app.admin.extra.POLICY_KEY";
-    public static final String EXTRA_POLICY_TARGET_USER_ID = "android.app.admin.extra.POLICY_TARGET_USER_ID";
-    public static final String EXTRA_POLICY_UPDATE_RESULT_KEY = "android.app.admin.extra.POLICY_UPDATE_RESULT_KEY";
+    public static final String EXTRA_POLICY_TARGET_USER_ID =
+            "android.app.admin.extra.POLICY_TARGET_USER_ID";
+    public static final String EXTRA_POLICY_UPDATE_RESULT_KEY =
+            "android.app.admin.extra.POLICY_UPDATE_RESULT_KEY";
     private static String TAG = "PolicyUpdateReceiver";
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
@@ -49,11 +55,21 @@ public abstract class PolicyUpdateReceiver extends BroadcastReceiver {
         switch (c) {
             case 0:
                 Log.i(TAG, "Received ACTION_DEVICE_POLICY_SET_RESULT");
-                onPolicySetResult(context, getPolicyKey(intent), getPolicyExtraBundle(intent), getTargetUser(intent), getPolicyChangedReason(intent));
+                onPolicySetResult(
+                        context,
+                        getPolicyKey(intent),
+                        getPolicyExtraBundle(intent),
+                        getTargetUser(intent),
+                        getPolicyChangedReason(intent));
                 break;
             case 1:
                 Log.i(TAG, "Received ACTION_DEVICE_POLICY_CHANGED");
-                onPolicyChanged(context, getPolicyKey(intent), getPolicyExtraBundle(intent), getTargetUser(intent), getPolicyChangedReason(intent));
+                onPolicyChanged(
+                        context,
+                        getPolicyKey(intent),
+                        getPolicyExtraBundle(intent),
+                        getTargetUser(intent),
+                        getPolicyChangedReason(intent));
                 break;
             default:
                 Log.e(TAG, "Unknown action received: " + intent.getAction());
@@ -89,9 +105,17 @@ public abstract class PolicyUpdateReceiver extends BroadcastReceiver {
         throw new IllegalArgumentException("TargetUser has to be provided.");
     }
 
-    public void onPolicySetResult(Context context, String policyIdentifier, Bundle additionalPolicyParams, TargetUser targetUser, PolicyUpdateResult policyUpdateResult) {
-    }
+    public void onPolicySetResult(
+            Context context,
+            String policyIdentifier,
+            Bundle additionalPolicyParams,
+            TargetUser targetUser,
+            PolicyUpdateResult policyUpdateResult) {}
 
-    public void onPolicyChanged(Context context, String policyIdentifier, Bundle additionalPolicyParams, TargetUser targetUser, PolicyUpdateResult policyUpdateResult) {
-    }
+    public void onPolicyChanged(
+            Context context,
+            String policyIdentifier,
+            Bundle additionalPolicyParams,
+            TargetUser targetUser,
+            PolicyUpdateResult policyUpdateResult) {}
 }

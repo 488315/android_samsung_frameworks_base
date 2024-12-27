@@ -7,6 +7,7 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.SurfaceControl;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -15,19 +16,22 @@ import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class TaskFragmentTransaction implements Parcelable {
-    public static final Parcelable.Creator<TaskFragmentTransaction> CREATOR = new Parcelable.Creator<TaskFragmentTransaction>() { // from class: android.window.TaskFragmentTransaction.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TaskFragmentTransaction createFromParcel(Parcel in) {
-            return new TaskFragmentTransaction(in);
-        }
+    public static final Parcelable.Creator<TaskFragmentTransaction> CREATOR =
+            new Parcelable.Creator<
+                    TaskFragmentTransaction>() { // from class:
+                                                 // android.window.TaskFragmentTransaction.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TaskFragmentTransaction createFromParcel(Parcel in) {
+                    return new TaskFragmentTransaction(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TaskFragmentTransaction[] newArray(int size) {
-            return new TaskFragmentTransaction[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TaskFragmentTransaction[] newArray(int size) {
+                    return new TaskFragmentTransaction[size];
+                }
+            };
     public static final int TYPE_ACTIVITY_REPARENTED_TO_TASK = 6;
     public static final int TYPE_TASK_FRAGMENT_APPEARED = 1;
     public static final int TYPE_TASK_FRAGMENT_ERROR = 5;
@@ -38,8 +42,7 @@ public final class TaskFragmentTransaction implements Parcelable {
     private final IBinder mTransactionToken;
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface ChangeType {
-    }
+    @interface ChangeType {}
 
     public TaskFragmentTransaction() {
         this.mChanges = new ArrayList<>();
@@ -97,19 +100,21 @@ public final class TaskFragmentTransaction implements Parcelable {
     }
 
     public static final class Change implements Parcelable {
-        public static final Parcelable.Creator<Change> CREATOR = new Parcelable.Creator<Change>() { // from class: android.window.TaskFragmentTransaction.Change.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Change createFromParcel(Parcel in) {
-                return new Change(in);
-            }
+        public static final Parcelable.Creator<Change> CREATOR =
+                new Parcelable.Creator<
+                        Change>() { // from class: android.window.TaskFragmentTransaction.Change.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Change createFromParcel(Parcel in) {
+                        return new Change(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Change[] newArray(int size) {
-                return new Change[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Change[] newArray(int size) {
+                        return new Change[size];
+                    }
+                };
         private Intent mActivityIntent;
         private IBinder mActivityToken;
         private Bundle mErrorBundle;
@@ -129,13 +134,15 @@ public final class TaskFragmentTransaction implements Parcelable {
         private Change(Parcel in) {
             this.mType = in.readInt();
             this.mTaskFragmentToken = in.readStrongBinder();
-            this.mTaskFragmentInfo = (TaskFragmentInfo) in.readTypedObject(TaskFragmentInfo.CREATOR);
+            this.mTaskFragmentInfo =
+                    (TaskFragmentInfo) in.readTypedObject(TaskFragmentInfo.CREATOR);
             this.mTaskId = in.readInt();
             this.mErrorCallbackToken = in.readStrongBinder();
             this.mErrorBundle = in.readBundle(TaskFragmentTransaction.class.getClassLoader());
             this.mActivityIntent = (Intent) in.readTypedObject(Intent.CREATOR);
             this.mActivityToken = in.readStrongBinder();
-            this.mTaskFragmentParentInfo = (TaskFragmentParentInfo) in.readTypedObject(TaskFragmentParentInfo.CREATOR);
+            this.mTaskFragmentParentInfo =
+                    (TaskFragmentParentInfo) in.readTypedObject(TaskFragmentParentInfo.CREATOR);
             this.mSurfaceControl = (SurfaceControl) in.readTypedObject(SurfaceControl.CREATOR);
             this.mOtherActivityToken = in.readStrongBinder();
         }

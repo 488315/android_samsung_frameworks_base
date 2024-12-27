@@ -4,6 +4,7 @@ import android.app.blob.XmlTags;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.SystemClock;
 import android.util.SparseIntArray;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes3.dex */
@@ -74,7 +75,8 @@ public class WakeupStats {
 
     public String toString() {
         updateDuration();
-        StringJoiner j = new StringJoiner(", ", "WakeupStats(", NavigationBarInflaterView.KEY_CODE_END);
+        StringJoiner j =
+                new StringJoiner(", ", "WakeupStats(", NavigationBarInflaterView.KEY_CODE_END);
         j.add(this.iface);
         j.add("" + this.durationSec + XmlTags.TAG_SESSION);
         j.add("total: " + this.totalWakeups);
@@ -83,16 +85,25 @@ public class WakeupStats {
         j.add("apps: " + this.applicationWakeups);
         j.add("non-apps: " + this.nonApplicationWakeups);
         j.add("no uid: " + this.noUidWakeups);
-        j.add(String.format("l2 unicast/multicast/broadcast: %d/%d/%d", Long.valueOf(this.l2UnicastCount), Long.valueOf(this.l2MulticastCount), Long.valueOf(this.l2BroadcastCount)));
+        j.add(
+                String.format(
+                        "l2 unicast/multicast/broadcast: %d/%d/%d",
+                        Long.valueOf(this.l2UnicastCount),
+                        Long.valueOf(this.l2MulticastCount),
+                        Long.valueOf(this.l2BroadcastCount)));
         for (int i = 0; i < this.ethertypes.size(); i++) {
             int eth = this.ethertypes.keyAt(i);
             int count = this.ethertypes.valueAt(i);
-            j.add(String.format("ethertype 0x%x: %d", Integer.valueOf(eth), Integer.valueOf(count)));
+            j.add(
+                    String.format(
+                            "ethertype 0x%x: %d", Integer.valueOf(eth), Integer.valueOf(count)));
         }
         for (int i2 = 0; i2 < this.ipNextHeaders.size(); i2++) {
             int proto = this.ipNextHeaders.keyAt(i2);
             int count2 = this.ipNextHeaders.valueAt(i2);
-            j.add(String.format("ipNxtHdr %d: %d", Integer.valueOf(proto), Integer.valueOf(count2)));
+            j.add(
+                    String.format(
+                            "ipNxtHdr %d: %d", Integer.valueOf(proto), Integer.valueOf(count2)));
         }
         return j.toString();
     }

@@ -5,35 +5,39 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
+
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /* loaded from: classes6.dex */
 public class SemWifiP2pDevice implements Parcelable {
-    public static final Parcelable.Creator<SemWifiP2pDevice> CREATOR = new Parcelable.Creator<SemWifiP2pDevice>() { // from class: com.samsung.android.wifi.p2p.SemWifiP2pDevice.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemWifiP2pDevice createFromParcel(Parcel in) {
-            SemWifiP2pDevice device = new SemWifiP2pDevice();
-            device.mDeviceName = in.readString();
-            device.mDeviceAddress = in.readString();
-            device.mScreenSharingInfo = in.readInt();
-            device.mScreenSharingExtendedInfo = in.readInt();
-            device.mScreenSharingDi = in.readString();
-            device.mDeviceIconAttr = in.readInt();
-            device.mServiceData = in.readString();
-            device.mSupportFwInvite = in.readInt() != 0;
-            device.mStatus = in.readInt();
-            return device;
-        }
+    public static final Parcelable.Creator<SemWifiP2pDevice> CREATOR =
+            new Parcelable.Creator<
+                    SemWifiP2pDevice>() { // from class:
+                                          // com.samsung.android.wifi.p2p.SemWifiP2pDevice.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemWifiP2pDevice createFromParcel(Parcel in) {
+                    SemWifiP2pDevice device = new SemWifiP2pDevice();
+                    device.mDeviceName = in.readString();
+                    device.mDeviceAddress = in.readString();
+                    device.mScreenSharingInfo = in.readInt();
+                    device.mScreenSharingExtendedInfo = in.readInt();
+                    device.mScreenSharingDi = in.readString();
+                    device.mDeviceIconAttr = in.readInt();
+                    device.mServiceData = in.readString();
+                    device.mSupportFwInvite = in.readInt() != 0;
+                    device.mStatus = in.readInt();
+                    return device;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemWifiP2pDevice[] newArray(int size) {
-            return new SemWifiP2pDevice[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemWifiP2pDevice[] newArray(int size) {
+                    return new SemWifiP2pDevice[size];
+                }
+            };
     public static final int DEVICE_TYPE_AV = 7;
     public static final int DEVICE_TYPE_MONITOR = 23;
     public static final int DEVICE_TYPE_PC = 4;
@@ -80,7 +84,10 @@ public class SemWifiP2pDevice implements Parcelable {
         this.mDeviceName = deviceName;
     }
 
-    public SemWifiP2pDevice(String deviceAddress, String deviceName, List<ScanResult.InformationElement> vendorElements) {
+    public SemWifiP2pDevice(
+            String deviceAddress,
+            String deviceName,
+            List<ScanResult.InformationElement> vendorElements) {
         this.mScreenSharingInfo = 0;
         this.mScreenSharingExtendedInfo = 0;
         this.mScreenSharingDi = null;
@@ -117,10 +124,12 @@ public class SemWifiP2pDevice implements Parcelable {
     }
 
     private void updateAdditionalInfo(String data) {
-        Matcher matchForScreenSharing = Pattern.compile(" ss_dev_info=0x([0-9a-fA-F]+)").matcher(data);
+        Matcher matchForScreenSharing =
+                Pattern.compile(" ss_dev_info=0x([0-9a-fA-F]+)").matcher(data);
         Matcher matchForIcon = Pattern.compile(" icon=0x([0-9a-fA-F]*)").matcher(data);
         Matcher matchForServiceData = Pattern.compile(" service=0x([0-9a-fA-F]*)").matcher(data);
-        Matcher matchForScreenSharingDi = Pattern.compile(" ss_hashed_di=0x([0-9a-fA-F]*)").matcher(data);
+        Matcher matchForScreenSharingDi =
+                Pattern.compile(" ss_hashed_di=0x([0-9a-fA-F]*)").matcher(data);
         if (matchForScreenSharing.find()) {
             this.mScreenSharingInfo = parseHex(matchForScreenSharing.group(1));
         }
@@ -175,7 +184,24 @@ public class SemWifiP2pDevice implements Parcelable {
     }
 
     public String toString() {
-        StringBuilder builder = new StringBuilder().append("Device: ").append(this.mDeviceName).append("\n deviceAddress: ").append(this.mDeviceAddress).append("\n screenSharingInfo: ").append(this.mScreenSharingInfo).append("\n screenSharingExtendedInfo: ").append(this.mScreenSharingExtendedInfo).append("\n deviceIconAttr: ").append(this.mDeviceIconAttr).append("\n serviceData: ").append(this.mServiceData).append("\n supportFwInvite: ").append(this.mSupportFwInvite).append("\n status: ").append(this.mStatus);
+        StringBuilder builder =
+                new StringBuilder()
+                        .append("Device: ")
+                        .append(this.mDeviceName)
+                        .append("\n deviceAddress: ")
+                        .append(this.mDeviceAddress)
+                        .append("\n screenSharingInfo: ")
+                        .append(this.mScreenSharingInfo)
+                        .append("\n screenSharingExtendedInfo: ")
+                        .append(this.mScreenSharingExtendedInfo)
+                        .append("\n deviceIconAttr: ")
+                        .append(this.mDeviceIconAttr)
+                        .append("\n serviceData: ")
+                        .append(this.mServiceData)
+                        .append("\n supportFwInvite: ")
+                        .append(this.mSupportFwInvite)
+                        .append("\n status: ")
+                        .append(this.mStatus);
         return builder.toString();
     }
 

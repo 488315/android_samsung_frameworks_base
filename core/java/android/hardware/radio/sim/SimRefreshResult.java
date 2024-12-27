@@ -3,26 +3,29 @@ package android.hardware.radio.sim;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class SimRefreshResult implements Parcelable {
-    public static final Parcelable.Creator<SimRefreshResult> CREATOR = new Parcelable.Creator<SimRefreshResult>() { // from class: android.hardware.radio.sim.SimRefreshResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SimRefreshResult createFromParcel(Parcel _aidl_source) {
-            SimRefreshResult _aidl_out = new SimRefreshResult();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SimRefreshResult> CREATOR =
+            new Parcelable.Creator<SimRefreshResult>() { // from class:
+                // android.hardware.radio.sim.SimRefreshResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SimRefreshResult createFromParcel(Parcel _aidl_source) {
+                    SimRefreshResult _aidl_out = new SimRefreshResult();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SimRefreshResult[] newArray(int _aidl_size) {
-            return new SimRefreshResult[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SimRefreshResult[] newArray(int _aidl_size) {
+                    return new SimRefreshResult[_aidl_size];
+                }
+            };
     public static final int TYPE_SIM_FILE_UPDATE = 0;
     public static final int TYPE_SIM_INIT = 1;
     public static final int TYPE_SIM_RESET = 2;

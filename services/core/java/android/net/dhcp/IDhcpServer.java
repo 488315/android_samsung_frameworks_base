@@ -1,7 +1,6 @@
 package android.net.dhcp;
 
 import android.net.INetworkStackStatusCallback;
-import android.net.dhcp.IDhcpEventCallbacks;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -37,20 +36,24 @@ public interface IDhcpServer extends IInterface {
         }
 
         @Override // android.net.dhcp.IDhcpServer
-        public void start(INetworkStackStatusCallback iNetworkStackStatusCallback) throws RemoteException {
-        }
+        public void start(INetworkStackStatusCallback iNetworkStackStatusCallback)
+                throws RemoteException {}
 
         @Override // android.net.dhcp.IDhcpServer
-        public void startWithCallbacks(INetworkStackStatusCallback iNetworkStackStatusCallback, IDhcpEventCallbacks iDhcpEventCallbacks) throws RemoteException {
-        }
+        public void startWithCallbacks(
+                INetworkStackStatusCallback iNetworkStackStatusCallback,
+                IDhcpEventCallbacks iDhcpEventCallbacks)
+                throws RemoteException {}
 
         @Override // android.net.dhcp.IDhcpServer
-        public void stop(INetworkStackStatusCallback iNetworkStackStatusCallback) throws RemoteException {
-        }
+        public void stop(INetworkStackStatusCallback iNetworkStackStatusCallback)
+                throws RemoteException {}
 
         @Override // android.net.dhcp.IDhcpServer
-        public void updateParams(DhcpServingParamsParcel dhcpServingParamsParcel, INetworkStackStatusCallback iNetworkStackStatusCallback) throws RemoteException {
-        }
+        public void updateParams(
+                DhcpServingParamsParcel dhcpServingParamsParcel,
+                INetworkStackStatusCallback iNetworkStackStatusCallback)
+                throws RemoteException {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -81,7 +84,8 @@ public interface IDhcpServer extends IInterface {
                         Parcel obtain2 = Parcel.obtain();
                         try {
                             obtain.writeInterfaceToken(IDhcpServer.DESCRIPTOR);
-                            this.mRemote.transact(Stub.TRANSACTION_getInterfaceHash, obtain, obtain2, 0);
+                            this.mRemote.transact(
+                                    Stub.TRANSACTION_getInterfaceHash, obtain, obtain2, 0);
                             obtain2.readException();
                             this.mCachedHash = obtain2.readString();
                             obtain2.recycle();
@@ -105,7 +109,8 @@ public interface IDhcpServer extends IInterface {
                     Parcel obtain2 = Parcel.obtain();
                     try {
                         obtain.writeInterfaceToken(IDhcpServer.DESCRIPTOR);
-                        this.mRemote.transact(Stub.TRANSACTION_getInterfaceVersion, obtain, obtain2, 0);
+                        this.mRemote.transact(
+                                Stub.TRANSACTION_getInterfaceVersion, obtain, obtain2, 0);
                         obtain2.readException();
                         this.mCachedVersion = obtain2.readInt();
                     } finally {
@@ -132,7 +137,9 @@ public interface IDhcpServer extends IInterface {
             }
 
             @Override // android.net.dhcp.IDhcpServer
-            public final void startWithCallbacks(INetworkStackStatusCallback iNetworkStackStatusCallback, IDhcpEventCallbacks iDhcpEventCallbacks) {
+            public final void startWithCallbacks(
+                    INetworkStackStatusCallback iNetworkStackStatusCallback,
+                    IDhcpEventCallbacks iDhcpEventCallbacks) {
                 Parcel obtain = Parcel.obtain();
                 try {
                     obtain.writeInterfaceToken(IDhcpServer.DESCRIPTOR);
@@ -163,7 +170,9 @@ public interface IDhcpServer extends IInterface {
             }
 
             @Override // android.net.dhcp.IDhcpServer
-            public final void updateParams(DhcpServingParamsParcel dhcpServingParamsParcel, INetworkStackStatusCallback iNetworkStackStatusCallback) {
+            public final void updateParams(
+                    DhcpServingParamsParcel dhcpServingParamsParcel,
+                    INetworkStackStatusCallback iNetworkStackStatusCallback) {
                 Parcel obtain = Parcel.obtain();
                 try {
                     obtain.writeInterfaceToken(IDhcpServer.DESCRIPTOR);
@@ -204,7 +213,8 @@ public interface IDhcpServer extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+                throws RemoteException {
             String str = IDhcpServer.DESCRIPTOR;
             if (i >= 1 && i <= TRANSACTION_getInterfaceVersion) {
                 parcel.enforceInterface(str);
@@ -226,14 +236,19 @@ public interface IDhcpServer extends IInterface {
             if (i == 1) {
                 start(INetworkStackStatusCallback.Stub.asInterface(parcel.readStrongBinder()));
             } else if (i == 2) {
-                updateParams((DhcpServingParamsParcel) parcel.readTypedObject(DhcpServingParamsParcel.CREATOR), INetworkStackStatusCallback.Stub.asInterface(parcel.readStrongBinder()));
+                updateParams(
+                        (DhcpServingParamsParcel)
+                                parcel.readTypedObject(DhcpServingParamsParcel.CREATOR),
+                        INetworkStackStatusCallback.Stub.asInterface(parcel.readStrongBinder()));
             } else if (i == 3) {
                 stop(INetworkStackStatusCallback.Stub.asInterface(parcel.readStrongBinder()));
             } else {
                 if (i != 4) {
                     return super.onTransact(i, parcel, parcel2, i2);
                 }
-                startWithCallbacks(INetworkStackStatusCallback.Stub.asInterface(parcel.readStrongBinder()), IDhcpEventCallbacks.Stub.asInterface(parcel.readStrongBinder()));
+                startWithCallbacks(
+                        INetworkStackStatusCallback.Stub.asInterface(parcel.readStrongBinder()),
+                        IDhcpEventCallbacks.Stub.asInterface(parcel.readStrongBinder()));
             }
             return true;
         }
@@ -245,9 +260,15 @@ public interface IDhcpServer extends IInterface {
 
     void start(INetworkStackStatusCallback iNetworkStackStatusCallback) throws RemoteException;
 
-    void startWithCallbacks(INetworkStackStatusCallback iNetworkStackStatusCallback, IDhcpEventCallbacks iDhcpEventCallbacks) throws RemoteException;
+    void startWithCallbacks(
+            INetworkStackStatusCallback iNetworkStackStatusCallback,
+            IDhcpEventCallbacks iDhcpEventCallbacks)
+            throws RemoteException;
 
     void stop(INetworkStackStatusCallback iNetworkStackStatusCallback) throws RemoteException;
 
-    void updateParams(DhcpServingParamsParcel dhcpServingParamsParcel, INetworkStackStatusCallback iNetworkStackStatusCallback) throws RemoteException;
+    void updateParams(
+            DhcpServingParamsParcel dhcpServingParamsParcel,
+            INetworkStackStatusCallback iNetworkStackStatusCallback)
+            throws RemoteException;
 }

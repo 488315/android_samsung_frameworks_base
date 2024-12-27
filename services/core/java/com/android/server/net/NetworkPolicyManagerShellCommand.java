@@ -6,8 +6,10 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.ShellCommand;
 import android.os.SystemProperties;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -16,7 +18,8 @@ public final class NetworkPolicyManagerShellCommand extends ShellCommand {
     public final NetworkPolicyManagerService mInterface;
     public final WifiManager mWifiManager;
 
-    public NetworkPolicyManagerShellCommand(Context context, NetworkPolicyManagerService networkPolicyManagerService) {
+    public NetworkPolicyManagerShellCommand(
+            Context context, NetworkPolicyManagerService networkPolicyManagerService) {
         this.mInterface = networkPolicyManagerService;
         this.mWifiManager = (WifiManager) context.getSystemService("wifi");
     }
@@ -31,7 +34,8 @@ public final class NetworkPolicyManagerShellCommand extends ShellCommand {
         try {
             return Integer.parseInt(nextArg);
         } catch (NumberFormatException unused) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(outPrintWriter, "Error: UID (", nextArg, ") should be a number");
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    outPrintWriter, "Error: UID (", nextArg, ") should be a number");
             return -2;
         }
     }
@@ -53,9 +57,9 @@ public final class NetworkPolicyManagerShellCommand extends ShellCommand {
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:44:0x00b4, code lost:
-    
-        if (r6.equals("restrict-background-whitelist") == false) goto L50;
-     */
+
+       if (r6.equals("restrict-background-whitelist") == false) goto L50;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -65,7 +69,9 @@ public final class NetworkPolicyManagerShellCommand extends ShellCommand {
             Method dump skipped, instructions count: 346
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.net.NetworkPolicyManagerShellCommand.onCommand(java.lang.String):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.net.NetworkPolicyManagerShellCommand.onCommand(java.lang.String):int");
     }
 
     public final void onHelp() {
@@ -74,13 +80,48 @@ public final class NetworkPolicyManagerShellCommand extends ShellCommand {
         outPrintWriter.println("  help");
         outPrintWriter.println("    Print this help text.");
         outPrintWriter.println("");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  add restrict-background-whitelist UID", "    Adds a UID to the whitelist for restrict background usage.", "  add restrict-background-blacklist UID", "    Adds a UID to the blacklist for restrict background usage.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  add app-idle-whitelist UID", "    Adds a UID to the temporary app idle whitelist.", "  get restrict-background", "    Gets the global restrict background usage status.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  list wifi-networks [true|false]", "    Lists all saved wifi networks and whether they are metered or not.", "    If a boolean argument is passed, filters just the metered (or unmetered)", "    networks.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  list restrict-background-whitelist", "    Lists UIDs that are whitelisted for restrict background usage.", "  list restrict-background-blacklist", "    Lists UIDs that are blacklisted for restrict background usage.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  remove restrict-background-whitelist UID", "    Removes a UID from the whitelist for restrict background usage.", "  remove restrict-background-blacklist UID", "    Removes a UID from the blacklist for restrict background usage.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  remove app-idle-whitelist UID", "    Removes a UID from the temporary app idle whitelist.", "  set metered-network ID [undefined|true|false]", "    Toggles whether the given wi-fi network is metered.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  set restrict-background BOOLEAN", "    Sets the global restrict background usage status.", "  set sub-plan-owner subId [packageName]", "    Sets the data plan owner package for subId.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  add restrict-background-whitelist UID",
+                "    Adds a UID to the whitelist for restrict background usage.",
+                "  add restrict-background-blacklist UID",
+                "    Adds a UID to the blacklist for restrict background usage.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  add app-idle-whitelist UID",
+                "    Adds a UID to the temporary app idle whitelist.",
+                "  get restrict-background",
+                "    Gets the global restrict background usage status.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  list wifi-networks [true|false]",
+                "    Lists all saved wifi networks and whether they are metered or not.",
+                "    If a boolean argument is passed, filters just the metered (or unmetered)",
+                "    networks.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  list restrict-background-whitelist",
+                "    Lists UIDs that are whitelisted for restrict background usage.",
+                "  list restrict-background-blacklist",
+                "    Lists UIDs that are blacklisted for restrict background usage.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  remove restrict-background-whitelist UID",
+                "    Removes a UID from the whitelist for restrict background usage.",
+                "  remove restrict-background-blacklist UID",
+                "    Removes a UID from the blacklist for restrict background usage.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  remove app-idle-whitelist UID",
+                "    Removes a UID from the temporary app idle whitelist.",
+                "  set metered-network ID [undefined|true|false]",
+                "    Toggles whether the given wi-fi network is metered.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  set restrict-background BOOLEAN",
+                "    Sets the global restrict background usage status.",
+                "  set sub-plan-owner subId [packageName]",
+                "    Sets the data plan owner package for subId.");
     }
 
     public final int resetUidPolicy(int i, String str) {
@@ -161,7 +202,8 @@ public final class NetworkPolicyManagerShellCommand extends ShellCommand {
                     break;
                 }
             default:
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(outPrintWriter, "Error: unknown add type '", nextArg, "'");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        outPrintWriter, "Error: unknown add type '", nextArg, "'");
                 break;
         }
         return -1;
@@ -177,11 +219,13 @@ public final class NetworkPolicyManagerShellCommand extends ShellCommand {
         if (nextArg.equals("restrict-background")) {
             PrintWriter outPrintWriter2 = getOutPrintWriter();
             outPrintWriter2.print("Restrict background status: ");
-            outPrintWriter2.println(this.mInterface.getRestrictBackground() ? "enabled" : "disabled");
+            outPrintWriter2.println(
+                    this.mInterface.getRestrictBackground() ? "enabled" : "disabled");
             return 0;
         }
         if (!nextArg.equals("restricted-mode")) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(outPrintWriter, "Error: unknown get type '", nextArg, "'");
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    outPrintWriter, "Error: unknown get type '", nextArg, "'");
             return -1;
         }
         PrintWriter outPrintWriter3 = getOutPrintWriter();
@@ -238,15 +282,19 @@ public final class NetworkPolicyManagerShellCommand extends ShellCommand {
                 listUidList("App Idle whitelisted UIDs", this.mInterface.getAppIdleWhitelist());
                 break;
             case 1:
-                listUidList("Restrict background blacklisted UIDs", this.mInterface.getUidsWithPolicy(1));
+                listUidList(
+                        "Restrict background blacklisted UIDs",
+                        this.mInterface.getUidsWithPolicy(1));
                 break;
             case 2:
                 PrintWriter outPrintWriter2 = getOutPrintWriter();
                 String nextArg2 = getNextArg();
                 int i = nextArg2 == null ? 0 : Boolean.parseBoolean(nextArg2) ? 1 : 2;
-                for (WifiConfiguration wifiConfiguration : this.mWifiManager.getConfiguredNetworks()) {
+                for (WifiConfiguration wifiConfiguration :
+                        this.mWifiManager.getConfiguredNetworks()) {
                     if (nextArg2 == null || wifiConfiguration.meteredOverride == i) {
-                        outPrintWriter2.print(NetworkPolicyManager.resolveNetworkId(wifiConfiguration));
+                        outPrintWriter2.print(
+                                NetworkPolicyManager.resolveNetworkId(wifiConfiguration));
                         outPrintWriter2.print(';');
                         int i2 = wifiConfiguration.meteredOverride;
                         outPrintWriter2.println(i2 != 1 ? i2 != 2 ? "none" : "false" : "true");
@@ -254,10 +302,13 @@ public final class NetworkPolicyManagerShellCommand extends ShellCommand {
                 }
                 break;
             case 3:
-                listUidList("Restrict background whitelisted UIDs", this.mInterface.getUidsWithPolicy(4));
+                listUidList(
+                        "Restrict background whitelisted UIDs",
+                        this.mInterface.getUidsWithPolicy(4));
                 break;
             default:
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(outPrintWriter, "Error: unknown list type '", nextArg, "'");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        outPrintWriter, "Error: unknown list type '", nextArg, "'");
                 break;
         }
         return -1;
@@ -345,11 +396,13 @@ public final class NetworkPolicyManagerShellCommand extends ShellCommand {
             case true:
                 int parseInt = Integer.parseInt(getNextArgRequired());
                 String nextArg5 = getNextArg();
-                this.mInterface.mContext.enforceCallingOrSelfPermission("android.permission.NETWORK_SETTINGS", "NetworkPolicy");
+                this.mInterface.mContext.enforceCallingOrSelfPermission(
+                        "android.permission.NETWORK_SETTINGS", "NetworkPolicy");
                 SystemProperties.set("persist.sys.sub_plan_owner." + parseInt, nextArg5);
                 break;
             default:
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(outPrintWriter, "Error: unknown set type '", nextArg, "'");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        outPrintWriter, "Error: unknown set type '", nextArg, "'");
                 break;
         }
         return -1;

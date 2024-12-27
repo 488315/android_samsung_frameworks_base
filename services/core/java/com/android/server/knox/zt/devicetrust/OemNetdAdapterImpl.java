@@ -12,8 +12,10 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.os.ServiceManager;
+
 import com.android.internal.net.IOemNetd;
 import com.android.server.ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0;
+
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.StringJoiner;
@@ -27,13 +29,17 @@ public final class OemNetdAdapterImpl implements OemNetdAdapter {
     public EndpointMonitorNative mEndpointMonitor;
     public PacketTracingHandler mHandler;
     public HandlerThread mHandlerThread;
-    public ConnectivityManager.NetworkCallback mNetworkCallback = new ConnectivityManager.NetworkCallback() { // from class: com.android.server.knox.zt.devicetrust.OemNetdAdapterImpl.1
-        @Override // android.net.ConnectivityManager.NetworkCallback
-        public final void onAvailable(Network network) {
-            super.onAvailable(network);
-            OemNetdAdapterImpl.this.sendMessageToHandler(1, OemNetdAdapterImpl.this.new NetworkInfo(network));
-        }
-    };
+    public ConnectivityManager.NetworkCallback mNetworkCallback =
+            new ConnectivityManager
+                    .NetworkCallback() { // from class:
+                                         // com.android.server.knox.zt.devicetrust.OemNetdAdapterImpl.1
+                @Override // android.net.ConnectivityManager.NetworkCallback
+                public final void onAvailable(Network network) {
+                    super.onAvailable(network);
+                    OemNetdAdapterImpl.this.sendMessageToHandler(
+                            1, OemNetdAdapterImpl.this.new NetworkInfo(network));
+                }
+            };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NetworkInfo {
@@ -45,9 +51,13 @@ public final class OemNetdAdapterImpl implements OemNetdAdapter {
         public NetworkInfo(Network network) {
             NetworkInterface networkInterface;
             this.mNetwork = network;
-            LinkProperties linkProperties = OemNetdAdapterImpl.this.getConnectivityManager().getLinkProperties(network);
+            LinkProperties linkProperties =
+                    OemNetdAdapterImpl.this.getConnectivityManager().getLinkProperties(network);
             this.mInterfaceName = linkProperties == null ? "" : linkProperties.getInterfaceName();
-            this.mNetworkCapabilities = OemNetdAdapterImpl.this.getConnectivityManager().getNetworkCapabilities(network);
+            this.mNetworkCapabilities =
+                    OemNetdAdapterImpl.this
+                            .getConnectivityManager()
+                            .getNetworkCapabilities(network);
             try {
                 networkInterface = NetworkInterface.getByName(this.mInterfaceName);
             } catch (NullPointerException | SocketException unused) {
@@ -77,7 +87,11 @@ public final class OemNetdAdapterImpl implements OemNetdAdapter {
         }
 
         public final String toString() {
-            return new StringJoiner(", ", "[ ", " ]").add("id: " + this.mNetwork).add("name: " + this.mInterfaceName).add("index: " + this.mNetworkIndex).toString();
+            return new StringJoiner(", ", "[ ", " ]")
+                    .add("id: " + this.mNetwork)
+                    .add("name: " + this.mInterfaceName)
+                    .add("index: " + this.mNetworkIndex)
+                    .toString();
         }
     }
 
@@ -97,7 +111,8 @@ public final class OemNetdAdapterImpl implements OemNetdAdapter {
                 NetworkInfo networkInfo = (NetworkInfo) obj;
                 int i = message.what;
                 if (i == 1) {
-                    OemNetdAdapterImpl.this.updateNetworkInterfaceData(networkInfo.mNetworkIndex, networkInfo.hasEthernetHeader());
+                    OemNetdAdapterImpl.this.updateNetworkInterfaceData(
+                            networkInfo.mNetworkIndex, networkInfo.hasEthernetHeader());
                     OemNetdAdapterImpl.this.enablePacketTracing(networkInfo.mInterfaceName);
                 } else {
                     if (i != 2) {
@@ -109,8 +124,7 @@ public final class OemNetdAdapterImpl implements OemNetdAdapter {
         }
     }
 
-    public OemNetdAdapterImpl() {
-    }
+    public OemNetdAdapterImpl() {}
 
     public OemNetdAdapterImpl(Context context, EndpointMonitorNative endpointMonitorNative) {
         this.mContext = context;
@@ -164,7 +178,9 @@ public final class OemNetdAdapterImpl implements OemNetdAdapter {
         L1b:
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.knox.zt.devicetrust.OemNetdAdapterImpl.disablePacketTracing(java.lang.String):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.knox.zt.devicetrust.OemNetdAdapterImpl.disablePacketTracing(java.lang.String):int");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:5:0x0012  */
@@ -193,20 +209,24 @@ public final class OemNetdAdapterImpl implements OemNetdAdapter {
         L1b:
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.knox.zt.devicetrust.OemNetdAdapterImpl.enablePacketTracing(java.lang.String):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.knox.zt.devicetrust.OemNetdAdapterImpl.enablePacketTracing(java.lang.String):int");
     }
 
     public final ConnectivityManager getConnectivityManager() {
         Context context = this.mContext;
         if (context != null && this.mConnectivityManager == null) {
-            this.mConnectivityManager = (ConnectivityManager) context.getSystemService("connectivity");
+            this.mConnectivityManager =
+                    (ConnectivityManager) context.getSystemService("connectivity");
         }
         return this.mConnectivityManager;
     }
 
     public final IOemNetd getOemNetdService() {
         try {
-            return IOemNetd.Stub.asInterface(INetd.Stub.asInterface(ServiceManager.getService("netd")).getOemNetd());
+            return IOemNetd.Stub.asInterface(
+                    INetd.Stub.asInterface(ServiceManager.getService("netd")).getOemNetd());
         } catch (Throwable th) {
             th.printStackTrace();
             return null;
@@ -224,7 +244,14 @@ public final class OemNetdAdapterImpl implements OemNetdAdapter {
         if (getConnectivityManager() == null) {
             return false;
         }
-        getConnectivityManager().registerNetworkCallback(new NetworkRequest.Builder().addTransportType(1).addTransportType(0).addCapability(12).build(), this.mNetworkCallback);
+        getConnectivityManager()
+                .registerNetworkCallback(
+                        new NetworkRequest.Builder()
+                                .addTransportType(1)
+                                .addTransportType(0)
+                                .addCapability(12)
+                                .build(),
+                        this.mNetworkCallback);
         return true;
     }
 
@@ -253,7 +280,8 @@ public final class OemNetdAdapterImpl implements OemNetdAdapter {
 
     public final void updateNetworkInterfaceData(int i, boolean z) {
         if (this.mEndpointMonitor.updateNetworkInterfaceData(i, z ? 1 : 0) != 0) {
-            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(i, "Failed to set ethernet status for interface index=", TAG);
+            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                    i, "Failed to set ethernet status for interface index=", TAG);
         }
     }
 }

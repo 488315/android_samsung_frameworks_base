@@ -17,12 +17,12 @@ public final class WindowSurfacePlacer {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Traverser implements Runnable {
-        public Traverser() {
-        }
+        public Traverser() {}
 
         @Override // java.lang.Runnable
         public final void run() {
-            WindowManagerGlobalLock windowManagerGlobalLock = WindowSurfacePlacer.this.mService.mGlobalLock;
+            WindowManagerGlobalLock windowManagerGlobalLock =
+                    WindowSurfacePlacer.this.mService.mGlobalLock;
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
@@ -53,18 +53,24 @@ public final class WindowSurfacePlacer {
         do {
             this.mTraversalScheduled = false;
             if (this.mInLayout) {
-                Slog.w("WindowManager", "performLayoutAndPlaceSurfacesLocked called while in layout. Callers=" + Debug.getCallers(3));
+                Slog.w(
+                        "WindowManager",
+                        "performLayoutAndPlaceSurfacesLocked called while in layout. Callers="
+                                + Debug.getCallers(3));
             } else if (!this.mService.getDefaultDisplayContentLocked().mWaitingForConfig) {
                 WindowManagerService windowManagerService = this.mService;
                 if (windowManagerService.mDisplayReady) {
                     this.mInLayout = true;
                     if (!windowManagerService.mForceRemoves.isEmpty()) {
                         while (!this.mService.mForceRemoves.isEmpty()) {
-                            WindowState windowState = (WindowState) this.mService.mForceRemoves.remove(0);
+                            WindowState windowState =
+                                    (WindowState) this.mService.mForceRemoves.remove(0);
                             Slog.i("WindowManager", "Force removing: " + windowState);
                             windowState.removeImmediately();
                         }
-                        Slog.w("WindowManager", "Due to memory failure, waiting a bit for next layout");
+                        Slog.w(
+                                "WindowManager",
+                                "Due to memory failure, waiting a bit for next layout");
                         Object obj = new Object();
                         synchronized (obj) {
                             try {
@@ -90,13 +96,15 @@ public final class WindowSurfacePlacer {
                             this.mLayoutRepeatCount = 0;
                         }
                         WindowManagerService windowManagerService2 = this.mService;
-                        if (windowManagerService2.mWindowsChanged && !windowManagerService2.mWindowChangeListeners.isEmpty()) {
+                        if (windowManagerService2.mWindowsChanged
+                                && !windowManagerService2.mWindowChangeListeners.isEmpty()) {
                             this.mService.mH.removeMessages(19);
                             this.mService.mH.sendEmptyMessage(19);
                         }
                     } catch (RuntimeException e) {
                         this.mInLayout = false;
-                        Slog.wtf("WindowManager", "Unhandled exception while laying out windows", e);
+                        Slog.wtf(
+                                "WindowManager", "Unhandled exception while laying out windows", e);
                     }
                 }
             }

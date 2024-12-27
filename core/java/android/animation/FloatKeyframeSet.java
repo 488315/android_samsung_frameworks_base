@@ -1,7 +1,5 @@
 package android.animation;
 
-import android.animation.Keyframe;
-import android.animation.Keyframes;
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -45,11 +43,18 @@ class FloatKeyframeSet extends KeyframeSet implements Keyframes.FloatKeyframes {
             if (this.mEvaluator == null) {
                 return ((nextValue - prevValue) * intervalFraction) + prevValue;
             }
-            return ((Number) this.mEvaluator.evaluate(intervalFraction, Float.valueOf(prevValue), Float.valueOf(nextValue))).floatValue();
+            return ((Number)
+                            this.mEvaluator.evaluate(
+                                    intervalFraction,
+                                    Float.valueOf(prevValue),
+                                    Float.valueOf(nextValue)))
+                    .floatValue();
         }
         if (fraction >= 1.0f) {
-            Keyframe.FloatKeyframe prevKeyframe2 = (Keyframe.FloatKeyframe) this.mKeyframes.get(this.mNumKeyframes - 2);
-            Keyframe.FloatKeyframe nextKeyframe2 = (Keyframe.FloatKeyframe) this.mKeyframes.get(this.mNumKeyframes - 1);
+            Keyframe.FloatKeyframe prevKeyframe2 =
+                    (Keyframe.FloatKeyframe) this.mKeyframes.get(this.mNumKeyframes - 2);
+            Keyframe.FloatKeyframe nextKeyframe2 =
+                    (Keyframe.FloatKeyframe) this.mKeyframes.get(this.mNumKeyframes - 1);
             float prevValue2 = prevKeyframe2.getFloatValue();
             float nextValue2 = nextKeyframe2.getFloatValue();
             float prevFraction2 = prevKeyframe2.getFraction();
@@ -62,14 +67,21 @@ class FloatKeyframeSet extends KeyframeSet implements Keyframes.FloatKeyframes {
             if (this.mEvaluator == null) {
                 return ((nextValue2 - prevValue2) * intervalFraction2) + prevValue2;
             }
-            return ((Number) this.mEvaluator.evaluate(intervalFraction2, Float.valueOf(prevValue2), Float.valueOf(nextValue2))).floatValue();
+            return ((Number)
+                            this.mEvaluator.evaluate(
+                                    intervalFraction2,
+                                    Float.valueOf(prevValue2),
+                                    Float.valueOf(nextValue2)))
+                    .floatValue();
         }
         Keyframe.FloatKeyframe prevKeyframe3 = (Keyframe.FloatKeyframe) this.mKeyframes.get(0);
         for (int i = 1; i < this.mNumKeyframes; i++) {
             Keyframe.FloatKeyframe nextKeyframe3 = (Keyframe.FloatKeyframe) this.mKeyframes.get(i);
             if (fraction < nextKeyframe3.getFraction()) {
                 TimeInterpolator interpolator3 = nextKeyframe3.getInterpolator();
-                float intervalFraction3 = (fraction - prevKeyframe3.getFraction()) / (nextKeyframe3.getFraction() - prevKeyframe3.getFraction());
+                float intervalFraction3 =
+                        (fraction - prevKeyframe3.getFraction())
+                                / (nextKeyframe3.getFraction() - prevKeyframe3.getFraction());
                 float prevValue3 = prevKeyframe3.getFloatValue();
                 float nextValue3 = nextKeyframe3.getFloatValue();
                 if (interpolator3 != null) {
@@ -78,7 +90,12 @@ class FloatKeyframeSet extends KeyframeSet implements Keyframes.FloatKeyframes {
                 if (this.mEvaluator == null) {
                     return ((nextValue3 - prevValue3) * intervalFraction3) + prevValue3;
                 }
-                return ((Number) this.mEvaluator.evaluate(intervalFraction3, Float.valueOf(prevValue3), Float.valueOf(nextValue3))).floatValue();
+                return ((Number)
+                                this.mEvaluator.evaluate(
+                                        intervalFraction3,
+                                        Float.valueOf(prevValue3),
+                                        Float.valueOf(nextValue3)))
+                        .floatValue();
             }
             prevKeyframe3 = nextKeyframe3;
         }

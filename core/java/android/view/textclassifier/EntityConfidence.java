@@ -3,6 +3,7 @@ package android.view.textclassifier;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArrayMap;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -12,19 +13,22 @@ import java.util.Objects;
 
 /* loaded from: classes4.dex */
 final class EntityConfidence implements Parcelable {
-    public static final Parcelable.Creator<EntityConfidence> CREATOR = new Parcelable.Creator<EntityConfidence>() { // from class: android.view.textclassifier.EntityConfidence.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EntityConfidence createFromParcel(Parcel in) {
-            return new EntityConfidence(in);
-        }
+    public static final Parcelable.Creator<EntityConfidence> CREATOR =
+            new Parcelable.Creator<
+                    EntityConfidence>() { // from class:
+                                          // android.view.textclassifier.EntityConfidence.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EntityConfidence createFromParcel(Parcel in) {
+                    return new EntityConfidence(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EntityConfidence[] newArray(int size) {
-            return new EntityConfidence[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EntityConfidence[] newArray(int size) {
+                    return new EntityConfidence[size];
+                }
+            };
     private final ArrayMap<String, Float> mEntityConfidence;
     private final ArrayList<String> mSortedEntities;
 
@@ -37,7 +41,8 @@ final class EntityConfidence implements Parcelable {
         this.mEntityConfidence = new ArrayMap<>();
         this.mSortedEntities = new ArrayList<>();
         Objects.requireNonNull(source);
-        this.mEntityConfidence.putAll((ArrayMap<? extends String, ? extends Float>) source.mEntityConfidence);
+        this.mEntityConfidence.putAll(
+                (ArrayMap<? extends String, ? extends Float>) source.mEntityConfidence);
         this.mSortedEntities.addAll(source.mSortedEntities);
     }
 
@@ -48,7 +53,8 @@ final class EntityConfidence implements Parcelable {
         this.mEntityConfidence.ensureCapacity(source.size());
         for (Map.Entry<String, Float> it : source.entrySet()) {
             if (it.getValue().floatValue() > 0.0f) {
-                this.mEntityConfidence.put(it.getKey(), Float.valueOf(Math.min(1.0f, it.getValue().floatValue())));
+                this.mEntityConfidence.put(
+                        it.getKey(), Float.valueOf(Math.min(1.0f, it.getValue().floatValue())));
             }
         }
         resetSortedEntitiesFromMap();
@@ -102,14 +108,18 @@ final class EntityConfidence implements Parcelable {
         this.mSortedEntities.clear();
         this.mSortedEntities.ensureCapacity(this.mEntityConfidence.size());
         this.mSortedEntities.addAll(this.mEntityConfidence.keySet());
-        this.mSortedEntities.sort(new Comparator() { // from class: android.view.textclassifier.EntityConfidence$$ExternalSyntheticLambda0
-            @Override // java.util.Comparator
-            public final int compare(Object obj, Object obj2) {
-                int lambda$resetSortedEntitiesFromMap$0;
-                lambda$resetSortedEntitiesFromMap$0 = EntityConfidence.this.lambda$resetSortedEntitiesFromMap$0((String) obj, (String) obj2);
-                return lambda$resetSortedEntitiesFromMap$0;
-            }
-        });
+        this.mSortedEntities.sort(
+                new Comparator() { // from class:
+                                   // android.view.textclassifier.EntityConfidence$$ExternalSyntheticLambda0
+                    @Override // java.util.Comparator
+                    public final int compare(Object obj, Object obj2) {
+                        int lambda$resetSortedEntitiesFromMap$0;
+                        lambda$resetSortedEntitiesFromMap$0 =
+                                EntityConfidence.this.lambda$resetSortedEntitiesFromMap$0(
+                                        (String) obj, (String) obj2);
+                        return lambda$resetSortedEntitiesFromMap$0;
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */

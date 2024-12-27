@@ -5,7 +5,9 @@ import android.content.pm.PackageManager;
 import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenModeDiff;
 import android.util.ArrayMap;
+
 import com.android.internal.logging.UiEventLogger;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -71,7 +73,8 @@ public final class ZenModeEventLogger {
         }
 
         public final int getChangedRuleType() {
-            ZenModeDiff.ConfigDiff configDiff = new ZenModeDiff.ConfigDiff(this.mPrevConfig, this.mNewConfig);
+            ZenModeDiff.ConfigDiff configDiff =
+                    new ZenModeDiff.ConfigDiff(this.mPrevConfig, this.mNewConfig);
             if (!configDiff.hasDiff()) {
                 return 0;
             }
@@ -80,14 +83,17 @@ public final class ZenModeEventLogger {
                 if (manualRuleDiff.wasAdded() || manualRuleDiff.wasRemoved()) {
                     return 1;
                 }
-                if (android.app.Flags.modesUi() && (manualRuleDiff.becameActive() || manualRuleDiff.becameInactive())) {
+                if (android.app.Flags.modesUi()
+                        && (manualRuleDiff.becameActive() || manualRuleDiff.becameInactive())) {
                     return 1;
                 }
             }
             ArrayMap allAutomaticRuleDiffs = configDiff.getAllAutomaticRuleDiffs();
             if (allAutomaticRuleDiffs != null) {
                 for (ZenModeDiff.RuleDiff ruleDiff : allAutomaticRuleDiffs.values()) {
-                    if (ruleDiff != null && ruleDiff.hasDiff() && (ruleDiff.becameActive() || ruleDiff.becameInactive())) {
+                    if (ruleDiff != null
+                            && ruleDiff.hasDiff()
+                            && (ruleDiff.becameActive() || ruleDiff.becameInactive())) {
                         return 2;
                     }
                 }
@@ -107,14 +113,19 @@ public final class ZenModeEventLogger {
                     return false;
                 }
                 ZenModeConfig zenModeConfig = this.mNewConfig;
-                return ((zenModeConfig == null || (zenRule = zenModeConfig.manualRule) == null) ? null : zenRule.enabler) == null;
+                return ((zenModeConfig == null || (zenRule = zenModeConfig.manualRule) == null)
+                                ? null
+                                : zenRule.enabler)
+                        == null;
             }
             if (changedRuleType != 2) {
                 return (hasPolicyDiff() || hasChannelsBypassingDiff()) && this.mCallingUid == 1000;
             }
             ArrayMap arrayMap = new ArrayMap();
-            ZenModeDiff.ConfigDiff configDiff = new ZenModeDiff.ConfigDiff(this.mPrevConfig, this.mNewConfig);
-            if (configDiff.hasDiff() && (allAutomaticRuleDiffs = configDiff.getAllAutomaticRuleDiffs()) != null) {
+            ZenModeDiff.ConfigDiff configDiff =
+                    new ZenModeDiff.ConfigDiff(this.mPrevConfig, this.mNewConfig);
+            if (configDiff.hasDiff()
+                    && (allAutomaticRuleDiffs = configDiff.getAllAutomaticRuleDiffs()) != null) {
                 arrayMap = allAutomaticRuleDiffs;
             }
             for (ZenModeDiff.RuleDiff ruleDiff : arrayMap.values()) {
@@ -126,7 +137,9 @@ public final class ZenModeEventLogger {
                     return true;
                 }
                 ZenModeDiff.FieldDiff diffForField2 = ruleDiff.getDiffForField("snoozing");
-                if (diffForField2 != null && diffForField2.hasDiff() && ((Boolean) diffForField2.to()).booleanValue()) {
+                if (diffForField2 != null
+                        && diffForField2.hasDiff()
+                        && ((Boolean) diffForField2.to()).booleanValue()) {
                     return true;
                 }
             }
@@ -156,13 +169,17 @@ public final class ZenModeEventLogger {
             if (i != i2 && (i == 0 || i2 == 0)) {
                 return true;
             }
-            if (android.app.Flags.modesApi() && ((ArrayList) activeRulesList(this.mPrevConfig)).size() != ((ArrayList) activeRulesList(this.mNewConfig)).size()) {
+            if (android.app.Flags.modesApi()
+                    && ((ArrayList) activeRulesList(this.mPrevConfig)).size()
+                            != ((ArrayList) activeRulesList(this.mNewConfig)).size()) {
                 return true;
             }
             if (this.mNewZenMode == 0) {
                 return false;
             }
-            return hasPolicyDiff() || ((ArrayList) activeRulesList(this.mPrevConfig)).size() != ((ArrayList) activeRulesList(this.mNewConfig)).size();
+            return hasPolicyDiff()
+                    || ((ArrayList) activeRulesList(this.mPrevConfig)).size()
+                            != ((ArrayList) activeRulesList(this.mNewConfig)).size();
         }
     }
 

@@ -2,7 +2,9 @@ package com.android.server.net.watchlist;
 
 import android.util.Log;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.util.HexDump;
+
 import java.io.ByteArrayOutputStream;
 import java.util.Map;
 

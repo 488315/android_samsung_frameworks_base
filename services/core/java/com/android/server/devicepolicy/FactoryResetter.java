@@ -7,9 +7,11 @@ import android.os.RecoverySystem;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
 import android.service.persistentdata.PersistentDataBlockManager;
+
 import com.android.internal.os.IResultReceiver;
 import com.android.internal.util.Preconditions;
 import com.android.server.utils.Slogf;
+
 import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -55,25 +57,36 @@ public final class FactoryResetter {
     }
 
     public final boolean factoryReset() {
-        Preconditions.checkCallAuthorization(this.mContext.checkCallingOrSelfPermission("android.permission.MASTER_CLEAR") == 0);
+        Preconditions.checkCallAuthorization(
+                this.mContext.checkCallingOrSelfPermission("android.permission.MASTER_CLEAR") == 0);
         Context context = this.mContext;
         AtomicBoolean atomicBoolean = com.android.server.FactoryResetter.sFactoryResetting;
-        Preconditions.checkCallAuthorization(context.checkCallingOrSelfPermission("android.permission.MASTER_CLEAR") == 0);
+        Preconditions.checkCallAuthorization(
+                context.checkCallingOrSelfPermission("android.permission.MASTER_CLEAR") == 0);
         com.android.server.FactoryResetter.sFactoryResetting.set(true);
         if (this.mSafetyChecker == null) {
             factoryResetInternalUnchecked();
             return true;
         }
-        IResultReceiver.Stub stub = new IResultReceiver.Stub() { // from class: com.android.server.devicepolicy.FactoryResetter.1
-            public final void send(int i, Bundle bundle) {
-                Slogf.i("FactoryResetter", "Factory reset confirmed by %s, proceeding", FactoryResetter.this.mSafetyChecker);
-                try {
-                    FactoryResetter.this.factoryResetInternalUnchecked();
-                } catch (IOException e) {
-                    Slogf.wtf("FactoryResetter", e, "IOException calling underlying systems", new Object[0]);
-                }
-            }
-        };
+        IResultReceiver.Stub stub =
+                new IResultReceiver
+                        .Stub() { // from class: com.android.server.devicepolicy.FactoryResetter.1
+                    public final void send(int i, Bundle bundle) {
+                        Slogf.i(
+                                "FactoryResetter",
+                                "Factory reset confirmed by %s, proceeding",
+                                FactoryResetter.this.mSafetyChecker);
+                        try {
+                            FactoryResetter.this.factoryResetInternalUnchecked();
+                        } catch (IOException e) {
+                            Slogf.wtf(
+                                    "FactoryResetter",
+                                    e,
+                                    "IOException calling underlying systems",
+                                    new Object[0]);
+                        }
+                    }
+                };
         Slogf.i("FactoryResetter", "Delaying factory reset until %s confirms", this.mSafetyChecker);
         this.mSafetyChecker.onFactoryReset(stub);
         return false;
@@ -89,13 +102,24 @@ public final class FactoryResetter {
         boolean z4 = this.mWipeAdoptableStorage;
         Boolean valueOf4 = Boolean.valueOf(z4);
         boolean z5 = this.mWipeFactoryResetProtection;
-        Slogf.i("FactoryResetter", "factoryReset(): reason=%s, shutdown=%b, force=%b, wipeEuicc=%b, wipeAdoptableStorage=%b, wipeFRP=%b", this.mReason, valueOf, valueOf2, valueOf3, valueOf4, Boolean.valueOf(z5));
+        Slogf.i(
+                "FactoryResetter",
+                "factoryReset(): reason=%s, shutdown=%b, force=%b, wipeEuicc=%b,"
+                    + " wipeAdoptableStorage=%b, wipeFRP=%b",
+                this.mReason,
+                valueOf,
+                valueOf2,
+                valueOf3,
+                valueOf4,
+                Boolean.valueOf(z5));
         UserManager userManager = (UserManager) this.mContext.getSystemService(UserManager.class);
         if (!z2 && userManager.hasUserRestriction("no_factory_reset")) {
             throw new SecurityException("Factory reset is not allowed for this user.");
         }
         if (z5) {
-            PersistentDataBlockManager persistentDataBlockManager = (PersistentDataBlockManager) this.mContext.getSystemService(PersistentDataBlockManager.class);
+            PersistentDataBlockManager persistentDataBlockManager =
+                    (PersistentDataBlockManager)
+                            this.mContext.getSystemService(PersistentDataBlockManager.class);
             if (persistentDataBlockManager != null) {
                 Slogf.w("FactoryResetter", "Wiping factory reset protection");
                 persistentDataBlockManager.wipe();
@@ -105,7 +129,8 @@ public final class FactoryResetter {
         }
         if (z4) {
             Slogf.w("FactoryResetter", "Wiping adoptable storage");
-            ((StorageManager) this.mContext.getSystemService(StorageManager.class)).wipeAdoptableDisks();
+            ((StorageManager) this.mContext.getSystemService(StorageManager.class))
+                    .wipeAdoptableDisks();
         }
         RecoverySystem.rebootWipeUserData(this.mContext, z, this.mReason, z2, z3);
     }

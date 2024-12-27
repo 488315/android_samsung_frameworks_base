@@ -4,15 +4,17 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Environment;
 import android.util.Slog;
+
 import com.android.server.PinnerService$$ExternalSyntheticOutline0;
-import com.android.server.pm.pu.ProfileUtilizationService;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -22,8 +24,22 @@ public final class ProfileUtilizationStorage {
 
     public ProfileUtilizationStorage(Context context) {
         Context createDeviceProtectedStorageContext = context.createDeviceProtectedStorageContext();
-        this.mSharedPrefs = createDeviceProtectedStorageContext.getSharedPreferences(new File(new File(Environment.getDataSystemDirectory(), "profile_utilization"), "apps_weights"), 0);
-        this.mSharedPrefsDumps = createDeviceProtectedStorageContext.getSharedPreferences(new File(new File(Environment.getDataSystemDirectory(), "profile_utilization"), "dumps"), 0);
+        this.mSharedPrefs =
+                createDeviceProtectedStorageContext.getSharedPreferences(
+                        new File(
+                                new File(
+                                        Environment.getDataSystemDirectory(),
+                                        "profile_utilization"),
+                                "apps_weights"),
+                        0);
+        this.mSharedPrefsDumps =
+                createDeviceProtectedStorageContext.getSharedPreferences(
+                        new File(
+                                new File(
+                                        Environment.getDataSystemDirectory(),
+                                        "profile_utilization"),
+                                "dumps"),
+                        0);
     }
 
     public final List loadAppsList() {
@@ -41,7 +57,8 @@ public final class ProfileUtilizationStorage {
                 String next = keys.next();
                 long optLong = jSONObject.optLong(next);
                 if (optLong == 0) {
-                    PinnerService$$ExternalSyntheticOutline0.m("Skip ", next, " having incorrect weight", "PU_Storage");
+                    PinnerService$$ExternalSyntheticOutline0.m(
+                            "Skip ", next, " having incorrect weight", "PU_Storage");
                 } else {
                     arrayList.add(new ProfileUtilizationService.App(optLong, next));
                     Slog.d("PU_Storage", next + " " + optLong);

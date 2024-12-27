@@ -2,7 +2,9 @@ package com.att.iqi.lib.metrics.rp;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.att.iqi.lib.Metric;
+
 import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
 
@@ -17,17 +19,18 @@ public class RP01 extends Metric {
     private short m_wDstPort;
     private short m_wSequenceNum;
     public static final Metric.ID ID = new Metric.ID("RP01");
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() { // from class: com.att.iqi.lib.metrics.rp.RP01.1
-        @Override // android.os.Parcelable.Creator
-        public RP01 createFromParcel(Parcel parcel) {
-            return new RP01(parcel);
-        }
+    public static final Parcelable.Creator CREATOR =
+            new Parcelable.Creator() { // from class: com.att.iqi.lib.metrics.rp.RP01.1
+                @Override // android.os.Parcelable.Creator
+                public RP01 createFromParcel(Parcel parcel) {
+                    return new RP01(parcel);
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public RP01[] newArray(int i) {
-            return new RP01[i];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public RP01[] newArray(int i) {
+                    return new RP01[i];
+                }
+            };
 
     public RP01() {
         reset();

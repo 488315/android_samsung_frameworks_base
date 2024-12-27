@@ -5,7 +5,9 @@ import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.face.Face;
 import android.os.AsyncTask;
 import android.util.SparseArray;
+
 import com.android.server.biometrics.sensors.BiometricUtils;
+
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -42,7 +44,8 @@ public final class FaceUtils implements BiometricUtils {
     }
 
     @Override // com.android.server.biometrics.sensors.BiometricUtils
-    public final void addBiometricForUser(Context context, int i, BiometricAuthenticator.Identifier identifier) {
+    public final void addBiometricForUser(
+            Context context, int i, BiometricAuthenticator.Identifier identifier) {
         Face face = (Face) identifier;
         FaceUserState stateForUser = getStateForUser(context, i);
         synchronized (stateForUser) {

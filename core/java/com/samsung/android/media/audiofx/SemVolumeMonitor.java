@@ -3,13 +3,15 @@ package com.samsung.android.media.audiofx;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.audiofx.AudioEffect;
 import android.util.Log;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.UUID;
 
 /* loaded from: classes6.dex */
 public class SemVolumeMonitor extends AudioEffect {
-    public static final UUID EFFECT_TYPE_VOLUME_MONITOR = UUID.fromString("f15b944b-0202-451e-a6ff-c61f11beda02");
+    public static final UUID EFFECT_TYPE_VOLUME_MONITOR =
+            UUID.fromString("f15b944b-0202-451e-a6ff-c61f11beda02");
     private static final int PARAM_GET_ONE_MIN_SCORE_STATUS = 1;
     private static final int PARAM_RESET_DATA = 5;
     private static final int PARAM_SET_ABS_VOLUME_STATE = 4;
@@ -20,7 +22,9 @@ public class SemVolumeMonitor extends AudioEffect {
     public SemVolumeMonitor(int priority, int audioSession) throws IllegalArgumentException {
         super(EFFECT_TYPE_VOLUME_MONITOR, EFFECT_TYPE_NULL, priority, audioSession);
         if (audioSession == 0) {
-            Log.w(TAG, "WARNING: attaching an SemVolumeMonitor to global output mix is deprecated!");
+            Log.w(
+                    TAG,
+                    "WARNING: attaching an SemVolumeMonitor to global output mix is deprecated!");
         }
     }
 
@@ -29,7 +33,15 @@ public class SemVolumeMonitor extends AudioEffect {
         byte[] paramBytes = integerArrayToByteArray(params);
         int valueSizeInByte = Math.max(energyValueSizeInByte, scoreValueSizeInByte);
         byte[] valueBytes = new byte[valueSizeInByte];
-        Log.i(TAG, "getOneHourRms: call getParameter. bytes:" + valueSizeInByte + "=max(" + energyValueSizeInByte + "," + scoreValueSizeInByte + NavigationBarInflaterView.KEY_CODE_END);
+        Log.i(
+                TAG,
+                "getOneHourRms: call getParameter. bytes:"
+                        + valueSizeInByte
+                        + "=max("
+                        + energyValueSizeInByte
+                        + ","
+                        + scoreValueSizeInByte
+                        + NavigationBarInflaterView.KEY_CODE_END);
         getParameter(paramBytes, valueBytes);
         Log.i(TAG, "getOneHourRms: getParameter done");
         return valueBytes;
@@ -51,7 +63,7 @@ public class SemVolumeMonitor extends AudioEffect {
 
     public void onOff(boolean z) {
         Integer[] numArr = {Integer.valueOf(z ? 1 : 0)};
-        byte[] integerArrayToByteArray = integerArrayToByteArray(new Integer[]{3});
+        byte[] integerArrayToByteArray = integerArrayToByteArray(new Integer[] {3});
         byte[] integerArrayToByteArray2 = integerArrayToByteArray(numArr);
         Log.i(TAG, "onOff: call setParameter");
         setParameter(integerArrayToByteArray, integerArrayToByteArray2);
@@ -59,12 +71,14 @@ public class SemVolumeMonitor extends AudioEffect {
     }
 
     public void setAbsoluteVolumeState(boolean z) {
-        setParameter(integerArrayToByteArray(new Integer[]{4}), integerArrayToByteArray(new Integer[]{Integer.valueOf(z ? 1 : 0)}));
+        setParameter(
+                integerArrayToByteArray(new Integer[] {4}),
+                integerArrayToByteArray(new Integer[] {Integer.valueOf(z ? 1 : 0)}));
     }
 
     public void resetData() {
-        byte[] paramBytes = integerArrayToByteArray(new Integer[]{5});
-        byte[] valueBytes = integerArrayToByteArray(new Integer[]{1});
+        byte[] paramBytes = integerArrayToByteArray(new Integer[] {5});
+        byte[] valueBytes = integerArrayToByteArray(new Integer[] {1});
         setParameter(paramBytes, valueBytes);
     }
 
@@ -87,7 +101,12 @@ public class SemVolumeMonitor extends AudioEffect {
         }
         int outIndex2 = valuesOut.length;
         if (outIndex != outIndex2) {
-            throw new IllegalArgumentException("only converted " + outIndex + " values out of " + valuesOut.length + " expected");
+            throw new IllegalArgumentException(
+                    "only converted "
+                            + outIndex
+                            + " values out of "
+                            + valuesOut.length
+                            + " expected");
         }
     }
 }

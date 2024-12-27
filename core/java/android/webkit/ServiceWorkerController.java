@@ -7,8 +7,7 @@ public abstract class ServiceWorkerController {
     public abstract void setServiceWorkerClient(ServiceWorkerClient serviceWorkerClient);
 
     @Deprecated
-    public ServiceWorkerController() {
-    }
+    public ServiceWorkerController() {}
 
     public static ServiceWorkerController getInstance() {
         return WebViewFactory.getProvider().getServiceWorkerController();

@@ -6,7 +6,7 @@ import android.net.NetworkRequest;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.ArraySet;
-import com.android.server.vcn.Vcn;
+
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
@@ -21,12 +21,10 @@ public final class VcnNetworkProvider extends NetworkProvider {
     public final Set mRequests;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public class Dependencies {
-    }
+    public class Dependencies {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface NetworkRequestListener {
-    }
+    public interface NetworkRequestListener {}
 
     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
     public VcnNetworkProvider(Context context, Looper looper, Dependencies dependencies) {
@@ -50,7 +48,8 @@ public final class VcnNetworkProvider extends NetworkProvider {
         Iterator it = ((ArraySet) this.mRequests).iterator();
         while (it.hasNext()) {
             NetworkRequest networkRequest = (NetworkRequest) it.next();
-            Vcn.VcnNetworkRequestListener vcnNetworkRequestListener = (Vcn.VcnNetworkRequestListener) networkRequestListener;
+            Vcn.VcnNetworkRequestListener vcnNetworkRequestListener =
+                    (Vcn.VcnNetworkRequestListener) networkRequestListener;
             vcnNetworkRequestListener.getClass();
             Objects.requireNonNull(networkRequest, "Missing request");
             Vcn vcn = Vcn.this;

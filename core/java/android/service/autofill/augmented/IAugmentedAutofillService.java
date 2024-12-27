@@ -6,14 +6,14 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.service.autofill.augmented.IFillCallback;
 import android.view.autofill.AutofillId;
 import android.view.autofill.AutofillValue;
 import android.view.inputmethod.InlineSuggestionsRequest;
 
 /* loaded from: classes3.dex */
 public interface IAugmentedAutofillService extends IInterface {
-    public static final String DESCRIPTOR = "android.service.autofill.augmented.IAugmentedAutofillService";
+    public static final String DESCRIPTOR =
+            "android.service.autofill.augmented.IAugmentedAutofillService";
 
     void onConnected(boolean z, boolean z2) throws RemoteException;
 
@@ -21,24 +21,40 @@ public interface IAugmentedAutofillService extends IInterface {
 
     void onDisconnected() throws RemoteException;
 
-    void onFillRequest(int i, IBinder iBinder, int i2, ComponentName componentName, AutofillId autofillId, AutofillValue autofillValue, long j, InlineSuggestionsRequest inlineSuggestionsRequest, IFillCallback iFillCallback) throws RemoteException;
+    void onFillRequest(
+            int i,
+            IBinder iBinder,
+            int i2,
+            ComponentName componentName,
+            AutofillId autofillId,
+            AutofillValue autofillValue,
+            long j,
+            InlineSuggestionsRequest inlineSuggestionsRequest,
+            IFillCallback iFillCallback)
+            throws RemoteException;
 
     public static class Default implements IAugmentedAutofillService {
         @Override // android.service.autofill.augmented.IAugmentedAutofillService
-        public void onConnected(boolean debug, boolean verbose) throws RemoteException {
-        }
+        public void onConnected(boolean debug, boolean verbose) throws RemoteException {}
 
         @Override // android.service.autofill.augmented.IAugmentedAutofillService
-        public void onDisconnected() throws RemoteException {
-        }
+        public void onDisconnected() throws RemoteException {}
 
         @Override // android.service.autofill.augmented.IAugmentedAutofillService
-        public void onFillRequest(int sessionId, IBinder autofillManagerClient, int taskId, ComponentName activityComponent, AutofillId focusedId, AutofillValue focusedValue, long requestTime, InlineSuggestionsRequest inlineSuggestionsRequest, IFillCallback callback) throws RemoteException {
-        }
+        public void onFillRequest(
+                int sessionId,
+                IBinder autofillManagerClient,
+                int taskId,
+                ComponentName activityComponent,
+                AutofillId focusedId,
+                AutofillValue focusedValue,
+                long requestTime,
+                InlineSuggestionsRequest inlineSuggestionsRequest,
+                IFillCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.autofill.augmented.IAugmentedAutofillService
-        public void onDestroyAllFillWindowsRequest() throws RemoteException {
-        }
+        public void onDestroyAllFillWindowsRequest() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -46,7 +62,7 @@ public interface IAugmentedAutofillService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAugmentedAutofillService {
+    public abstract static class Stub extends Binder implements IAugmentedAutofillService {
         static final int TRANSACTION_onConnected = 1;
         static final int TRANSACTION_onDestroyAllFillWindowsRequest = 4;
         static final int TRANSACTION_onDisconnected = 2;
@@ -93,7 +109,8 @@ public interface IAugmentedAutofillService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAugmentedAutofillService.DESCRIPTOR);
             }
@@ -115,11 +132,15 @@ public interface IAugmentedAutofillService extends IInterface {
                     int _arg02 = data.readInt();
                     IBinder _arg12 = data.readStrongBinder();
                     int _arg2 = data.readInt();
-                    ComponentName _arg3 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg3 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     AutofillId _arg4 = (AutofillId) data.readTypedObject(AutofillId.CREATOR);
-                    AutofillValue _arg5 = (AutofillValue) data.readTypedObject(AutofillValue.CREATOR);
+                    AutofillValue _arg5 =
+                            (AutofillValue) data.readTypedObject(AutofillValue.CREATOR);
                     long _arg6 = data.readLong();
-                    InlineSuggestionsRequest _arg7 = (InlineSuggestionsRequest) data.readTypedObject(InlineSuggestionsRequest.CREATOR);
+                    InlineSuggestionsRequest _arg7 =
+                            (InlineSuggestionsRequest)
+                                    data.readTypedObject(InlineSuggestionsRequest.CREATOR);
                     IFillCallback _arg8 = IFillCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onFillRequest(_arg02, _arg12, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8);
@@ -173,7 +194,17 @@ public interface IAugmentedAutofillService extends IInterface {
             }
 
             @Override // android.service.autofill.augmented.IAugmentedAutofillService
-            public void onFillRequest(int sessionId, IBinder autofillManagerClient, int taskId, ComponentName activityComponent, AutofillId focusedId, AutofillValue focusedValue, long requestTime, InlineSuggestionsRequest inlineSuggestionsRequest, IFillCallback callback) throws RemoteException {
+            public void onFillRequest(
+                    int sessionId,
+                    IBinder autofillManagerClient,
+                    int taskId,
+                    ComponentName activityComponent,
+                    AutofillId focusedId,
+                    AutofillValue focusedValue,
+                    long requestTime,
+                    InlineSuggestionsRequest inlineSuggestionsRequest,
+                    IFillCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IAugmentedAutofillService.DESCRIPTOR);

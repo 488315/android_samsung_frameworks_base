@@ -2,6 +2,7 @@ package com.android.server.pm.permission;
 
 import android.content.pm.PermissionInfo;
 import android.util.ArrayMap;
+
 import com.android.internal.util.XmlUtils;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
@@ -9,7 +10,9 @@ import com.android.server.pm.CrossProfileIntentFilter$$ExternalSyntheticOutline0
 import com.android.server.pm.PackageManagerService;
 import com.android.server.pm.PackageManagerServiceUtils;
 import com.android.server.pm.PackageManagerTracedLock;
+
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -33,31 +36,53 @@ public final class LegacyPermissionSettings {
             }
             if (next != 3 && next != 4) {
                 if (typedXmlPullParser.getName().equals("item")) {
-                    String attributeValue = typedXmlPullParser.getAttributeValue((String) null, "name");
-                    String attributeValue2 = typedXmlPullParser.getAttributeValue((String) null, "package");
-                    String attributeValue3 = typedXmlPullParser.getAttributeValue((String) null, "type");
+                    String attributeValue =
+                            typedXmlPullParser.getAttributeValue((String) null, "name");
+                    String attributeValue2 =
+                            typedXmlPullParser.getAttributeValue((String) null, "package");
+                    String attributeValue3 =
+                            typedXmlPullParser.getAttributeValue((String) null, "type");
                     if (attributeValue == null || attributeValue2 == null) {
-                        String m = CrossProfileIntentFilter$$ExternalSyntheticOutline0.m(typedXmlPullParser, new StringBuilder("Error in package manager settings: permissions has no name at "));
+                        String m =
+                                CrossProfileIntentFilter$$ExternalSyntheticOutline0.m(
+                                        typedXmlPullParser,
+                                        new StringBuilder(
+                                                "Error in package manager settings: permissions has"
+                                                    + " no name at "));
                         boolean z = PackageManagerService.DEBUG_COMPRESSION;
                         PackageManagerServiceUtils.logCriticalInfo(5, m);
                     } else {
                         boolean equals = "dynamic".equals(attributeValue3);
-                        LegacyPermission legacyPermission = (LegacyPermission) arrayMap.get(attributeValue);
+                        LegacyPermission legacyPermission =
+                                (LegacyPermission) arrayMap.get(attributeValue);
                         if (legacyPermission == null || legacyPermission.mType != 1) {
-                            legacyPermission = new LegacyPermission(equals ? 2 : 0, attributeValue.intern(), attributeValue2);
+                            legacyPermission =
+                                    new LegacyPermission(
+                                            equals ? 2 : 0,
+                                            attributeValue.intern(),
+                                            attributeValue2);
                         }
-                        legacyPermission.mPermissionInfo.protectionLevel = typedXmlPullParser.getAttributeInt((String) null, "protection", 0);
+                        legacyPermission.mPermissionInfo.protectionLevel =
+                                typedXmlPullParser.getAttributeInt((String) null, "protection", 0);
                         PermissionInfo permissionInfo = legacyPermission.mPermissionInfo;
-                        permissionInfo.protectionLevel = PermissionInfo.fixProtectionLevel(permissionInfo.protectionLevel);
+                        permissionInfo.protectionLevel =
+                                PermissionInfo.fixProtectionLevel(permissionInfo.protectionLevel);
                         if (equals) {
-                            legacyPermission.mPermissionInfo.icon = typedXmlPullParser.getAttributeInt((String) null, KnoxCustomManagerService.ICON, 0);
-                            legacyPermission.mPermissionInfo.nonLocalizedLabel = typedXmlPullParser.getAttributeValue((String) null, "label");
+                            legacyPermission.mPermissionInfo.icon =
+                                    typedXmlPullParser.getAttributeInt(
+                                            (String) null, KnoxCustomManagerService.ICON, 0);
+                            legacyPermission.mPermissionInfo.nonLocalizedLabel =
+                                    typedXmlPullParser.getAttributeValue((String) null, "label");
                         }
                         arrayMap.put(legacyPermission.mPermissionInfo.name, legacyPermission);
                         XmlUtils.skipCurrentTag(typedXmlPullParser);
                     }
                 }
-                String str = "Unknown element reading permissions: " + typedXmlPullParser.getName() + " at " + typedXmlPullParser.getPositionDescription();
+                String str =
+                        "Unknown element reading permissions: "
+                                + typedXmlPullParser.getName()
+                                + " at "
+                                + typedXmlPullParser.getPositionDescription();
                 boolean z2 = PackageManagerService.DEBUG_COMPRESSION;
                 PackageManagerServiceUtils.logCriticalInfo(5, str);
                 XmlUtils.skipCurrentTag(typedXmlPullParser);
@@ -131,7 +156,8 @@ public final class LegacyPermissionSettings {
                 int size = arrayList.size();
                 for (int i = 0; i < size; i++) {
                     LegacyPermission legacyPermission = (LegacyPermission) arrayList.get(i);
-                    this.mPermissionTrees.put(legacyPermission.mPermissionInfo.name, legacyPermission);
+                    this.mPermissionTrees.put(
+                            legacyPermission.mPermissionInfo.name, legacyPermission);
                 }
             } catch (Throwable th) {
                 boolean z2 = PackageManagerService.DEBUG_COMPRESSION;

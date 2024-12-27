@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +50,15 @@ public class ActionMenu implements Menu {
     }
 
     @Override // android.view.Menu
-    public int addIntentOptions(int groupId, int itemId, int order, ComponentName caller, Intent[] specifics, Intent intent, int flags, MenuItem[] outSpecificItems) {
+    public int addIntentOptions(
+            int groupId,
+            int itemId,
+            int order,
+            ComponentName caller,
+            Intent[] specifics,
+            Intent intent,
+            int flags,
+            MenuItem[] outSpecificItems) {
         PackageManager pm = this.mContext.getPackageManager();
         List<ResolveInfo> lri = pm.queryIntentActivityOptions(caller, specifics, intent, 0);
         int N = lri != null ? lri.size() : 0;
@@ -58,9 +67,15 @@ public class ActionMenu implements Menu {
         }
         for (int i = 0; i < N; i++) {
             ResolveInfo ri = lri.get(i);
-            Intent rintent = new Intent(ri.specificIndex < 0 ? intent : specifics[ri.specificIndex]);
-            rintent.setComponent(new ComponentName(ri.activityInfo.applicationInfo.packageName, ri.activityInfo.name));
-            MenuItem item = add(groupId, itemId, order, ri.loadLabel(pm)).setIcon(ri.loadIcon(pm)).setIntent(rintent);
+            Intent rintent =
+                    new Intent(ri.specificIndex < 0 ? intent : specifics[ri.specificIndex]);
+            rintent.setComponent(
+                    new ComponentName(
+                            ri.activityInfo.applicationInfo.packageName, ri.activityInfo.name));
+            MenuItem item =
+                    add(groupId, itemId, order, ri.loadLabel(pm))
+                            .setIcon(ri.loadIcon(pm))
+                            .setIntent(rintent);
             if (outSpecificItems != null && ri.specificIndex >= 0) {
                 outSpecificItems[ri.specificIndex] = item;
             }
@@ -94,8 +109,7 @@ public class ActionMenu implements Menu {
     }
 
     @Override // android.view.Menu
-    public void close() {
-    }
+    public void close() {}
 
     private int findItemIndex(int id) {
         ArrayList<ActionMenuItem> items = this.mItems;
@@ -138,8 +152,10 @@ public class ActionMenu implements Menu {
         for (int i = 0; i < itemCount; i++) {
             ActionMenuItem item = items.get(i);
             char shortcut = qwerty ? item.getAlphabeticShortcut() : item.getNumericShortcut();
-            int shortcutModifiers = qwerty ? item.getAlphabeticModifiers() : item.getNumericModifiers();
-            boolean is_modifiers_exact_match = (modifierState & Menu.SUPPORTED_MODIFIERS_MASK) == (69647 & shortcutModifiers);
+            int shortcutModifiers =
+                    qwerty ? item.getAlphabeticModifiers() : item.getNumericModifiers();
+            boolean is_modifiers_exact_match =
+                    (modifierState & Menu.SUPPORTED_MODIFIERS_MASK) == (69647 & shortcutModifiers);
             if (keyCode == shortcut && is_modifiers_exact_match) {
                 return item;
             }

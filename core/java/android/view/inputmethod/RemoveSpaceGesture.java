@@ -3,23 +3,27 @@ package android.view.inputmethod;
 import android.graphics.PointF;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class RemoveSpaceGesture extends HandwritingGesture implements Parcelable {
-    public static final Parcelable.Creator<RemoveSpaceGesture> CREATOR = new Parcelable.Creator<RemoveSpaceGesture>() { // from class: android.view.inputmethod.RemoveSpaceGesture.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RemoveSpaceGesture createFromParcel(Parcel source) {
-            return new RemoveSpaceGesture(source);
-        }
+    public static final Parcelable.Creator<RemoveSpaceGesture> CREATOR =
+            new Parcelable.Creator<
+                    RemoveSpaceGesture>() { // from class:
+                                            // android.view.inputmethod.RemoveSpaceGesture.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RemoveSpaceGesture createFromParcel(Parcel source) {
+                    return new RemoveSpaceGesture(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RemoveSpaceGesture[] newArray(int size) {
-            return new RemoveSpaceGesture[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RemoveSpaceGesture[] newArray(int size) {
+                    return new RemoveSpaceGesture[size];
+                }
+            };
     private final PointF mEndPoint;
     private final PointF mStartPoint;
 
@@ -78,7 +82,9 @@ public final class RemoveSpaceGesture extends HandwritingGesture implements Parc
             return false;
         }
         RemoveSpaceGesture that = (RemoveSpaceGesture) o;
-        return Objects.equals(this.mStartPoint, that.mStartPoint) && Objects.equals(this.mEndPoint, that.mEndPoint) && Objects.equals(this.mFallbackText, that.mFallbackText);
+        return Objects.equals(this.mStartPoint, that.mStartPoint)
+                && Objects.equals(this.mEndPoint, that.mEndPoint)
+                && Objects.equals(this.mFallbackText, that.mFallbackText);
     }
 
     @Override // android.os.Parcelable

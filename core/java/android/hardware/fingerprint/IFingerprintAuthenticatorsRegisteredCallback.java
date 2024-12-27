@@ -5,18 +5,21 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public interface IFingerprintAuthenticatorsRegisteredCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.hardware.fingerprint.IFingerprintAuthenticatorsRegisteredCallback";
+    public static final String DESCRIPTOR =
+            "android.hardware.fingerprint.IFingerprintAuthenticatorsRegisteredCallback";
 
-    void onAllAuthenticatorsRegistered(List<FingerprintSensorPropertiesInternal> list) throws RemoteException;
+    void onAllAuthenticatorsRegistered(List<FingerprintSensorPropertiesInternal> list)
+            throws RemoteException;
 
     public static class Default implements IFingerprintAuthenticatorsRegisteredCallback {
         @Override // android.hardware.fingerprint.IFingerprintAuthenticatorsRegisteredCallback
-        public void onAllAuthenticatorsRegistered(List<FingerprintSensorPropertiesInternal> sensors) throws RemoteException {
-        }
+        public void onAllAuthenticatorsRegistered(List<FingerprintSensorPropertiesInternal> sensors)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +27,8 @@ public interface IFingerprintAuthenticatorsRegisteredCallback extends IInterface
         }
     }
 
-    public static abstract class Stub extends Binder implements IFingerprintAuthenticatorsRegisteredCallback {
+    public abstract static class Stub extends Binder
+            implements IFingerprintAuthenticatorsRegisteredCallback {
         static final int TRANSACTION_onAllAuthenticatorsRegistered = 1;
 
         public Stub() {
@@ -35,7 +39,9 @@ public interface IFingerprintAuthenticatorsRegisteredCallback extends IInterface
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(IFingerprintAuthenticatorsRegisteredCallback.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(
+                            IFingerprintAuthenticatorsRegisteredCallback.DESCRIPTOR);
             if (iin != null && (iin instanceof IFingerprintAuthenticatorsRegisteredCallback)) {
                 return (IFingerprintAuthenticatorsRegisteredCallback) iin;
             }
@@ -62,7 +68,8 @@ public interface IFingerprintAuthenticatorsRegisteredCallback extends IInterface
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IFingerprintAuthenticatorsRegisteredCallback.DESCRIPTOR);
             }
@@ -72,7 +79,8 @@ public interface IFingerprintAuthenticatorsRegisteredCallback extends IInterface
             }
             switch (code) {
                 case 1:
-                    List<FingerprintSensorPropertiesInternal> _arg0 = data.createTypedArrayList(FingerprintSensorPropertiesInternal.CREATOR);
+                    List<FingerprintSensorPropertiesInternal> _arg0 =
+                            data.createTypedArrayList(FingerprintSensorPropertiesInternal.CREATOR);
                     data.enforceNoDataAvail();
                     onAllAuthenticatorsRegistered(_arg0);
                     return true;
@@ -98,10 +106,12 @@ public interface IFingerprintAuthenticatorsRegisteredCallback extends IInterface
             }
 
             @Override // android.hardware.fingerprint.IFingerprintAuthenticatorsRegisteredCallback
-            public void onAllAuthenticatorsRegistered(List<FingerprintSensorPropertiesInternal> sensors) throws RemoteException {
+            public void onAllAuthenticatorsRegistered(
+                    List<FingerprintSensorPropertiesInternal> sensors) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
-                    _data.writeInterfaceToken(IFingerprintAuthenticatorsRegisteredCallback.DESCRIPTOR);
+                    _data.writeInterfaceToken(
+                            IFingerprintAuthenticatorsRegisteredCallback.DESCRIPTOR);
                     _data.writeTypedList(sensors, 0);
                     this.mRemote.transact(1, _data, null, 1);
                 } finally {

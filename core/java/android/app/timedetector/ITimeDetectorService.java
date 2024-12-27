@@ -34,7 +34,8 @@ public interface ITimeDetectorService extends IInterface {
 
     boolean suggestManualTime(ManualTimeSuggestion manualTimeSuggestion) throws RemoteException;
 
-    void suggestTelephonyTime(TelephonyTimeSuggestion telephonyTimeSuggestion) throws RemoteException;
+    void suggestTelephonyTime(TelephonyTimeSuggestion telephonyTimeSuggestion)
+            throws RemoteException;
 
     boolean updateConfiguration(TimeConfiguration timeConfiguration) throws RemoteException;
 
@@ -45,15 +46,14 @@ public interface ITimeDetectorService extends IInterface {
         }
 
         @Override // android.app.timedetector.ITimeDetectorService
-        public void addListener(ITimeDetectorListener listener) throws RemoteException {
-        }
+        public void addListener(ITimeDetectorListener listener) throws RemoteException {}
 
         @Override // android.app.timedetector.ITimeDetectorService
-        public void removeListener(ITimeDetectorListener listener) throws RemoteException {
-        }
+        public void removeListener(ITimeDetectorListener listener) throws RemoteException {}
 
         @Override // android.app.timedetector.ITimeDetectorService
-        public boolean updateConfiguration(TimeConfiguration timeConfiguration) throws RemoteException {
+        public boolean updateConfiguration(TimeConfiguration timeConfiguration)
+                throws RemoteException {
             return false;
         }
 
@@ -68,22 +68,24 @@ public interface ITimeDetectorService extends IInterface {
         }
 
         @Override // android.app.timedetector.ITimeDetectorService
-        public boolean setManualTime(ManualTimeSuggestion timeZoneSuggestion) throws RemoteException {
+        public boolean setManualTime(ManualTimeSuggestion timeZoneSuggestion)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.timedetector.ITimeDetectorService
-        public void suggestExternalTime(ExternalTimeSuggestion timeSuggestion) throws RemoteException {
-        }
+        public void suggestExternalTime(ExternalTimeSuggestion timeSuggestion)
+                throws RemoteException {}
 
         @Override // android.app.timedetector.ITimeDetectorService
-        public boolean suggestManualTime(ManualTimeSuggestion timeSuggestion) throws RemoteException {
+        public boolean suggestManualTime(ManualTimeSuggestion timeSuggestion)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.timedetector.ITimeDetectorService
-        public void suggestTelephonyTime(TelephonyTimeSuggestion timeSuggestion) throws RemoteException {
-        }
+        public void suggestTelephonyTime(TelephonyTimeSuggestion timeSuggestion)
+                throws RemoteException {}
 
         @Override // android.app.timedetector.ITimeDetectorService
         public UnixEpochTime latestNetworkTime() throws RemoteException {
@@ -96,7 +98,7 @@ public interface ITimeDetectorService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITimeDetectorService {
+    public abstract static class Stub extends Binder implements ITimeDetectorService {
         static final int TRANSACTION_addListener = 2;
         static final int TRANSACTION_confirmTime = 6;
         static final int TRANSACTION_getCapabilitiesAndConfig = 1;
@@ -164,7 +166,8 @@ public interface ITimeDetectorService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITimeDetectorService.DESCRIPTOR);
             }
@@ -179,19 +182,22 @@ public interface ITimeDetectorService extends IInterface {
                     reply.writeTypedObject(_result, 1);
                     return true;
                 case 2:
-                    ITimeDetectorListener _arg0 = ITimeDetectorListener.Stub.asInterface(data.readStrongBinder());
+                    ITimeDetectorListener _arg0 =
+                            ITimeDetectorListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addListener(_arg0);
                     reply.writeNoException();
                     return true;
                 case 3:
-                    ITimeDetectorListener _arg02 = ITimeDetectorListener.Stub.asInterface(data.readStrongBinder());
+                    ITimeDetectorListener _arg02 =
+                            ITimeDetectorListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeListener(_arg02);
                     reply.writeNoException();
                     return true;
                 case 4:
-                    TimeConfiguration _arg03 = (TimeConfiguration) data.readTypedObject(TimeConfiguration.CREATOR);
+                    TimeConfiguration _arg03 =
+                            (TimeConfiguration) data.readTypedObject(TimeConfiguration.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result2 = updateConfiguration(_arg03);
                     reply.writeNoException();
@@ -203,34 +209,43 @@ public interface ITimeDetectorService extends IInterface {
                     reply.writeTypedObject(_result3, 1);
                     return true;
                 case 6:
-                    UnixEpochTime _arg04 = (UnixEpochTime) data.readTypedObject(UnixEpochTime.CREATOR);
+                    UnixEpochTime _arg04 =
+                            (UnixEpochTime) data.readTypedObject(UnixEpochTime.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result4 = confirmTime(_arg04);
                     reply.writeNoException();
                     reply.writeBoolean(_result4);
                     return true;
                 case 7:
-                    ManualTimeSuggestion _arg05 = (ManualTimeSuggestion) data.readTypedObject(ManualTimeSuggestion.CREATOR);
+                    ManualTimeSuggestion _arg05 =
+                            (ManualTimeSuggestion)
+                                    data.readTypedObject(ManualTimeSuggestion.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result5 = setManualTime(_arg05);
                     reply.writeNoException();
                     reply.writeBoolean(_result5);
                     return true;
                 case 8:
-                    ExternalTimeSuggestion _arg06 = (ExternalTimeSuggestion) data.readTypedObject(ExternalTimeSuggestion.CREATOR);
+                    ExternalTimeSuggestion _arg06 =
+                            (ExternalTimeSuggestion)
+                                    data.readTypedObject(ExternalTimeSuggestion.CREATOR);
                     data.enforceNoDataAvail();
                     suggestExternalTime(_arg06);
                     reply.writeNoException();
                     return true;
                 case 9:
-                    ManualTimeSuggestion _arg07 = (ManualTimeSuggestion) data.readTypedObject(ManualTimeSuggestion.CREATOR);
+                    ManualTimeSuggestion _arg07 =
+                            (ManualTimeSuggestion)
+                                    data.readTypedObject(ManualTimeSuggestion.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result6 = suggestManualTime(_arg07);
                     reply.writeNoException();
                     reply.writeBoolean(_result6);
                     return true;
                 case 10:
-                    TelephonyTimeSuggestion _arg08 = (TelephonyTimeSuggestion) data.readTypedObject(TelephonyTimeSuggestion.CREATOR);
+                    TelephonyTimeSuggestion _arg08 =
+                            (TelephonyTimeSuggestion)
+                                    data.readTypedObject(TelephonyTimeSuggestion.CREATOR);
                     data.enforceNoDataAvail();
                     suggestTelephonyTime(_arg08);
                     reply.writeNoException();
@@ -269,7 +284,9 @@ public interface ITimeDetectorService extends IInterface {
                     _data.writeInterfaceToken(ITimeDetectorService.DESCRIPTOR);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    TimeCapabilitiesAndConfig _result = (TimeCapabilitiesAndConfig) _reply.readTypedObject(TimeCapabilitiesAndConfig.CREATOR);
+                    TimeCapabilitiesAndConfig _result =
+                            (TimeCapabilitiesAndConfig)
+                                    _reply.readTypedObject(TimeCapabilitiesAndConfig.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -308,7 +325,8 @@ public interface ITimeDetectorService extends IInterface {
             }
 
             @Override // android.app.timedetector.ITimeDetectorService
-            public boolean updateConfiguration(TimeConfiguration timeConfiguration) throws RemoteException {
+            public boolean updateConfiguration(TimeConfiguration timeConfiguration)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -358,7 +376,8 @@ public interface ITimeDetectorService extends IInterface {
             }
 
             @Override // android.app.timedetector.ITimeDetectorService
-            public boolean setManualTime(ManualTimeSuggestion timeZoneSuggestion) throws RemoteException {
+            public boolean setManualTime(ManualTimeSuggestion timeZoneSuggestion)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -375,7 +394,8 @@ public interface ITimeDetectorService extends IInterface {
             }
 
             @Override // android.app.timedetector.ITimeDetectorService
-            public void suggestExternalTime(ExternalTimeSuggestion timeSuggestion) throws RemoteException {
+            public void suggestExternalTime(ExternalTimeSuggestion timeSuggestion)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -390,7 +410,8 @@ public interface ITimeDetectorService extends IInterface {
             }
 
             @Override // android.app.timedetector.ITimeDetectorService
-            public boolean suggestManualTime(ManualTimeSuggestion timeSuggestion) throws RemoteException {
+            public boolean suggestManualTime(ManualTimeSuggestion timeSuggestion)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -407,7 +428,8 @@ public interface ITimeDetectorService extends IInterface {
             }
 
             @Override // android.app.timedetector.ITimeDetectorService
-            public void suggestTelephonyTime(TelephonyTimeSuggestion timeSuggestion) throws RemoteException {
+            public void suggestTelephonyTime(TelephonyTimeSuggestion timeSuggestion)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -429,7 +451,8 @@ public interface ITimeDetectorService extends IInterface {
                     _data.writeInterfaceToken(ITimeDetectorService.DESCRIPTOR);
                     this.mRemote.transact(11, _data, _reply, 0);
                     _reply.readException();
-                    UnixEpochTime _result = (UnixEpochTime) _reply.readTypedObject(UnixEpochTime.CREATOR);
+                    UnixEpochTime _result =
+                            (UnixEpochTime) _reply.readTypedObject(UnixEpochTime.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

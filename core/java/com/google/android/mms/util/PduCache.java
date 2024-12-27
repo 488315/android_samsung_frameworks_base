@@ -4,6 +4,7 @@ import android.content.ContentUris;
 import android.content.UriMatcher;
 import android.net.Uri;
 import android.provider.Telephony;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -52,8 +53,7 @@ public final class PduCache extends AbstractCache<Uri, PduCacheEntry> {
         MATCH_TO_MSGBOX_ID_MAP.put(8, 4);
     }
 
-    private PduCache() {
-    }
+    private PduCache() {}
 
     public static final synchronized PduCache getInstance() {
         PduCache pduCache;

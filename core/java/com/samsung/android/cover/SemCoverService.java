@@ -8,7 +8,6 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
-import com.samsung.android.cover.ICoverService;
 
 /* loaded from: classes6.dex */
 public class SemCoverService extends Service {
@@ -41,17 +40,13 @@ public class SemCoverService extends Service {
         return super.onUnbind(intent);
     }
 
-    public void onSystemReady() {
-    }
+    public void onSystemReady() {}
 
-    public void onCoverAttached(CoverState coverState) {
-    }
+    public void onCoverAttached(CoverState coverState) {}
 
-    public void onCoverDetached() {
-    }
+    public void onCoverDetached() {}
 
-    public void onCoverStateUpdated(CoverState coverState) {
-    }
+    public void onCoverStateUpdated(CoverState coverState) {}
 
     public Object getCoverHost() {
         return null;
@@ -62,8 +57,7 @@ public class SemCoverService extends Service {
     }
 
     private class CoverServiceWrapper extends ICoverService.Stub {
-        private CoverServiceWrapper() {
-        }
+        private CoverServiceWrapper() {}
 
         @Override // com.samsung.android.cover.ICoverService
         public void onSystemReady() throws RemoteException {

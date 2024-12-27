@@ -9,8 +9,9 @@ import android.os.Binder;
 import android.os.ShellCommand;
 import android.os.SystemClock;
 import android.os.UserHandle;
+
 import com.android.internal.util.Preconditions;
-import com.android.server.devicepolicy.DevicePolicyManagerService;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,7 +26,8 @@ public final class DevicePolicyManagerServiceShellCommand extends ShellCommand {
     public boolean mSetDoOnly;
     public int mUserId = 0;
 
-    public DevicePolicyManagerServiceShellCommand(DevicePolicyManagerService devicePolicyManagerService) {
+    public DevicePolicyManagerServiceShellCommand(
+            DevicePolicyManagerService devicePolicyManagerService) {
         Objects.requireNonNull(devicePolicyManagerService);
         this.mService = devicePolicyManagerService;
     }
@@ -46,29 +48,66 @@ public final class DevicePolicyManagerServiceShellCommand extends ShellCommand {
         printWriter.printf("  %s <OPERATION_ID>\n", "is-operation-safe");
         printWriter.printf("    Checks if the give operation is safe \n\n", new Object[0]);
         printWriter.printf("  %s <REASON_ID>\n", "is-operation-safe-by-reason");
-        printWriter.printf("    Checks if the operations are safe for the given reason\n\n", new Object[0]);
+        printWriter.printf(
+                "    Checks if the operations are safe for the given reason\n\n", new Object[0]);
         printWriter.printf("  %s <OPERATION_ID> <REASON_ID>\n", "set-operation-safe");
-        printWriter.printf("    Emulates the result of the next call to check if the given operation is safe \n\n", new Object[0]);
+        printWriter.printf(
+                "    Emulates the result of the next call to check if the given operation is safe"
+                    + " \n\n",
+                new Object[0]);
         printWriter.printf("  %s\n", "list-owners");
         printWriter.printf("    Lists the device / profile owners per user \n\n", new Object[0]);
         printWriter.printf("  %s\n", "list-policy-exempt-apps");
         printWriter.printf("    Lists the apps that are exempt from policies\n\n", new Object[0]);
-        printWriter.printf("  %s [ %s <USER_ID> | current ] <COMPONENT>\n", "set-active-admin", "--user");
-        printWriter.printf("    Sets the given component as active admin for an existing user.\n\n", new Object[0]);
-        printWriter.printf("  %s [ %s <USER_ID> | current *EXPERIMENTAL* ] [ %s ]<COMPONENT>\n", "set-device-owner", "--user", "--device-owner-only");
-        printWriter.printf("    Sets the given component as active admin, and its package as device owner.\n\n", new Object[0]);
-        printWriter.printf("  %s [ %s <USER_ID> | current ] <COMPONENT>\n", "set-profile-owner", "--user");
-        printWriter.printf("    Sets the given component as active admin and profile owner for an existing user.\n\n", new Object[0]);
-        printWriter.printf("  %s [ %s <USER_ID> | current ] <COMPONENT>\n", "remove-active-admin", "--user");
-        printWriter.printf("    Disables an active admin, the admin must have declared android:testOnly in the application in its manifest. This will also remove device and profile owners.\n\n", new Object[0]);
+        printWriter.printf(
+                "  %s [ %s <USER_ID> | current ] <COMPONENT>\n", "set-active-admin", "--user");
+        printWriter.printf(
+                "    Sets the given component as active admin for an existing user.\n\n",
+                new Object[0]);
+        printWriter.printf(
+                "  %s [ %s <USER_ID> | current *EXPERIMENTAL* ] [ %s ]<COMPONENT>\n",
+                "set-device-owner", "--user", "--device-owner-only");
+        printWriter.printf(
+                "    Sets the given component as active admin, and its package as device"
+                    + " owner.\n\n",
+                new Object[0]);
+        printWriter.printf(
+                "  %s [ %s <USER_ID> | current ] <COMPONENT>\n", "set-profile-owner", "--user");
+        printWriter.printf(
+                "    Sets the given component as active admin and profile owner for an existing"
+                    + " user.\n\n",
+                new Object[0]);
+        printWriter.printf(
+                "  %s [ %s <USER_ID> | current ] <COMPONENT>\n", "remove-active-admin", "--user");
+        printWriter.printf(
+                "    Disables an active admin, the admin must have declared android:testOnly in the"
+                    + " application in its manifest. This will also remove device and profile"
+                    + " owners.\n\n",
+                new Object[0]);
         printWriter.printf("  %s\n", "clear-freeze-period-record");
-        printWriter.printf("    Clears framework-maintained record of past freeze periods that the device went through. For use during feature development to prevent triggering restriction on setting freeze periods.\n\n", new Object[0]);
+        printWriter.printf(
+                "    Clears framework-maintained record of past freeze periods that the device went"
+                    + " through. For use during feature development to prevent triggering"
+                    + " restriction on setting freeze periods.\n\n",
+                new Object[0]);
         printWriter.printf("  %s\n", "force-network-logs");
-        printWriter.printf("    Makes all network logs available to the DPC and triggers DeviceAdminReceiver.onNetworkLogsAvailable() if needed.\n\n", new Object[0]);
+        printWriter.printf(
+                "    Makes all network logs available to the DPC and triggers"
+                    + " DeviceAdminReceiver.onNetworkLogsAvailable() if needed.\n\n",
+                new Object[0]);
         printWriter.printf("  %s\n", "force-security-logs");
-        printWriter.printf("    Makes all security logs available to the DPC and triggers DeviceAdminReceiver.onSecurityLogsAvailable() if needed.\n\n", new Object[0]);
-        printWriter.printf("  %s [ %s <USER_ID> | current ] <COMPONENT>\n", "mark-profile-owner-on-organization-owned-device", "--user");
-        printWriter.printf("    Marks the profile owner of the given user as managing an organization-owneddevice. That will give it access to device identifiers (such as serial number, IMEI and MEID), as well as other privileges.\n\n", new Object[0]);
+        printWriter.printf(
+                "    Makes all security logs available to the DPC and triggers"
+                    + " DeviceAdminReceiver.onSecurityLogsAvailable() if needed.\n\n",
+                new Object[0]);
+        printWriter.printf(
+                "  %s [ %s <USER_ID> | current ] <COMPONENT>\n",
+                "mark-profile-owner-on-organization-owned-device", "--user");
+        printWriter.printf(
+                "    Marks the profile owner of the given user as managing an"
+                    + " organization-owneddevice. That will give it access to device identifiers"
+                    + " (such as serial number, IMEI and MEID), as well as other privileges.\n\n",
+                new Object[0]);
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
@@ -180,24 +219,39 @@ public final class DevicePolicyManagerServiceShellCommand extends ShellCommand {
             switch (c) {
                 case 0:
                     int parseInt = Integer.parseInt(getNextArgRequired());
-                    DevicePolicySafetyChecker devicePolicySafetyChecker = this.mService.mSafetyChecker;
-                    int unsafeOperationReason = devicePolicySafetyChecker == null ? -1 : devicePolicySafetyChecker.getUnsafeOperationReason(parseInt);
+                    DevicePolicySafetyChecker devicePolicySafetyChecker =
+                            this.mService.mSafetyChecker;
+                    int unsafeOperationReason =
+                            devicePolicySafetyChecker == null
+                                    ? -1
+                                    : devicePolicySafetyChecker.getUnsafeOperationReason(parseInt);
                     if (unsafeOperationReason != -1) {
                         z = false;
                     }
-                    outPrintWriter.printf("Operation %s is %s. Reason: %s\n", DevicePolicyManager.operationToString(parseInt), z ? "SAFE" : "UNSAFE", DevicePolicyManager.operationSafetyReasonToString(unsafeOperationReason));
+                    outPrintWriter.printf(
+                            "Operation %s is %s. Reason: %s\n",
+                            DevicePolicyManager.operationToString(parseInt),
+                            z ? "SAFE" : "UNSAFE",
+                            DevicePolicyManager.operationSafetyReasonToString(
+                                    unsafeOperationReason));
                     outPrintWriter.close();
                     return 0;
                 case 1:
                     int parseInt2 = Integer.parseInt(getNextArgRequired());
-                    outPrintWriter.printf("Operations affected by %s are %s\n", DevicePolicyManager.operationSafetyReasonToString(parseInt2), this.mService.isSafeOperation(parseInt2) ? "SAFE" : "UNSAFE");
+                    outPrintWriter.printf(
+                            "Operations affected by %s are %s\n",
+                            DevicePolicyManager.operationSafetyReasonToString(parseInt2),
+                            this.mService.isSafeOperation(parseInt2) ? "SAFE" : "UNSAFE");
                     outPrintWriter.close();
                     return 0;
                 case 2:
                     int parseInt3 = Integer.parseInt(getNextArgRequired());
                     int parseInt4 = Integer.parseInt(getNextArgRequired());
                     this.mService.setNextOperationSafety(parseInt3, parseInt4);
-                    outPrintWriter.printf("Next call to check operation %s will return %s\n", DevicePolicyManager.operationToString(parseInt3), DevicePolicyManager.operationSafetyReasonToString(parseInt4));
+                    outPrintWriter.printf(
+                            "Next call to check operation %s will return %s\n",
+                            DevicePolicyManager.operationToString(parseInt3),
+                            DevicePolicyManager.operationSafetyReasonToString(parseInt4));
                     outPrintWriter.close();
                     return 0;
                 case 3:
@@ -206,10 +260,15 @@ public final class DevicePolicyManagerServiceShellCommand extends ShellCommand {
                     return 0;
                 case 4:
                     List listPolicyExemptApps = this.mService.listPolicyExemptApps();
-                    int printAndGetSize = printAndGetSize(outPrintWriter, listPolicyExemptApps, "policy exempt app");
+                    int printAndGetSize =
+                            printAndGetSize(
+                                    outPrintWriter, listPolicyExemptApps, "policy exempt app");
                     if (printAndGetSize != 0) {
                         for (int i2 = 0; i2 < printAndGetSize; i2++) {
-                            outPrintWriter.printf("  %d: %s\n", Integer.valueOf(i2), (String) ((ArrayList) listPolicyExemptApps).get(i2));
+                            outPrintWriter.printf(
+                                    "  %d: %s\n",
+                                    Integer.valueOf(i2),
+                                    (String) ((ArrayList) listPolicyExemptApps).get(i2));
                         }
                     }
                     outPrintWriter.close();
@@ -217,7 +276,9 @@ public final class DevicePolicyManagerServiceShellCommand extends ShellCommand {
                 case 5:
                     parseArgs();
                     this.mService.setActiveAdmin(this.mComponent, true, this.mUserId);
-                    outPrintWriter.printf("Success: Active admin set to component %s\n", this.mComponent.flattenToShortString());
+                    outPrintWriter.printf(
+                            "Success: Active admin set to component %s\n",
+                            this.mComponent.flattenToShortString());
                     outPrintWriter.close();
                     return 0;
                 case 6:
@@ -247,7 +308,9 @@ public final class DevicePolicyManagerServiceShellCommand extends ShellCommand {
                             outPrintWriter.close();
                             return 0;
                         }
-                        outPrintWriter.printf("We have to wait for %d milliseconds...\n", Long.valueOf(forceNetworkLogs));
+                        outPrintWriter.printf(
+                                "We have to wait for %d milliseconds...\n",
+                                Long.valueOf(forceNetworkLogs));
                         SystemClock.sleep(forceNetworkLogs);
                     }
                 case 11:
@@ -258,12 +321,15 @@ public final class DevicePolicyManagerServiceShellCommand extends ShellCommand {
                             outPrintWriter.close();
                             return 0;
                         }
-                        outPrintWriter.printf("We have to wait for %d milliseconds...\n", Long.valueOf(forceSecurityLogs));
+                        outPrintWriter.printf(
+                                "We have to wait for %d milliseconds...\n",
+                                Long.valueOf(forceSecurityLogs));
                         SystemClock.sleep(forceSecurityLogs);
                     }
                 case '\f':
                     parseArgs();
-                    this.mService.setProfileOwnerOnOrganizationOwnedDevice(this.mComponent, this.mUserId, true);
+                    this.mService.setProfileOwnerOnOrganizationOwnedDevice(
+                            this.mComponent, this.mUserId, true);
                     outPrintWriter.printf("Success\n", new Object[0]);
                     outPrintWriter.close();
                     return 0;
@@ -294,7 +360,8 @@ public final class DevicePolicyManagerServiceShellCommand extends ShellCommand {
     public final void onHelp() {
         PrintWriter outPrintWriter = getOutPrintWriter();
         try {
-            outPrintWriter.printf("DevicePolicyManager Service (device_policy) commands:\n\n", new Object[0]);
+            outPrintWriter.printf(
+                    "DevicePolicyManager Service (device_policy) commands:\n\n", new Object[0]);
             showHelp(outPrintWriter);
             outPrintWriter.close();
         } catch (Throwable th) {
@@ -314,9 +381,12 @@ public final class DevicePolicyManagerServiceShellCommand extends ShellCommand {
             String nextOption = getNextOption();
             if (nextOption == null) {
                 String nextArgRequired = getNextArgRequired();
-                ComponentName unflattenFromString = ComponentName.unflattenFromString(nextArgRequired);
+                ComponentName unflattenFromString =
+                        ComponentName.unflattenFromString(nextArgRequired);
                 if (unflattenFromString == null) {
-                    throw new IllegalArgumentException(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("Invalid component ", nextArgRequired));
+                    throw new IllegalArgumentException(
+                            ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                    "Invalid component ", nextArgRequired));
                 }
                 this.mComponent = unflattenFromString;
                 return;
@@ -338,18 +408,29 @@ public final class DevicePolicyManagerServiceShellCommand extends ShellCommand {
 
     public final void runListOwners(PrintWriter printWriter) {
         DevicePolicyManagerService devicePolicyManagerService = this.mService;
-        Preconditions.checkCallAuthorization(devicePolicyManagerService.hasCallingOrSelfPermission("android.permission.MANAGE_DEVICE_ADMINS"));
+        Preconditions.checkCallAuthorization(
+                devicePolicyManagerService.hasCallingOrSelfPermission(
+                        "android.permission.MANAGE_DEVICE_ADMINS"));
         DevicePolicyManagerService.Injector injector = devicePolicyManagerService.mInjector;
-        DevicePolicyManagerService$$ExternalSyntheticLambda33 devicePolicyManagerService$$ExternalSyntheticLambda33 = new DevicePolicyManagerService$$ExternalSyntheticLambda33(devicePolicyManagerService, 4);
+        DevicePolicyManagerService$$ExternalSyntheticLambda33
+                devicePolicyManagerService$$ExternalSyntheticLambda33 =
+                        new DevicePolicyManagerService$$ExternalSyntheticLambda33(
+                                devicePolicyManagerService, 4);
         injector.getClass();
-        List list = (List) Binder.withCleanCallingIdentity(devicePolicyManagerService$$ExternalSyntheticLambda33);
+        List list =
+                (List)
+                        Binder.withCleanCallingIdentity(
+                                devicePolicyManagerService$$ExternalSyntheticLambda33);
         int printAndGetSize = printAndGetSize(printWriter, list, "owner");
         if (printAndGetSize == 0) {
             return;
         }
         for (int i = 0; i < printAndGetSize; i++) {
             OwnerShellData ownerShellData = (OwnerShellData) list.get(i);
-            printWriter.printf("User %2d: admin=%s", Integer.valueOf(ownerShellData.userId), ownerShellData.admin.flattenToShortString());
+            printWriter.printf(
+                    "User %2d: admin=%s",
+                    Integer.valueOf(ownerShellData.userId),
+                    ownerShellData.admin.flattenToShortString());
             if (ownerShellData.isDeviceOwner) {
                 printWriter.print(",DeviceOwner");
             }
@@ -357,7 +438,9 @@ public final class DevicePolicyManagerServiceShellCommand extends ShellCommand {
                 printWriter.print(",ProfileOwner");
             }
             if (ownerShellData.isManagedProfileOwner) {
-                printWriter.printf(",ManagedProfileOwner(parentUserId=%d)", Integer.valueOf(ownerShellData.parentUserId));
+                printWriter.printf(
+                        ",ManagedProfileOwner(parentUserId=%d)",
+                        Integer.valueOf(ownerShellData.parentUserId));
             }
             if (ownerShellData.isAffiliated) {
                 printWriter.print(",Affiliated");
@@ -373,15 +456,23 @@ public final class DevicePolicyManagerServiceShellCommand extends ShellCommand {
             this.mService.setActiveAdmin(this.mComponent, false, this.mUserId);
             z = true;
         } catch (IllegalArgumentException unused) {
-            printWriter.printf("%s was already an admin for user %d. No need to set it again.\n", this.mComponent.flattenToShortString(), Integer.valueOf(this.mUserId));
+            printWriter.printf(
+                    "%s was already an admin for user %d. No need to set it again.\n",
+                    this.mComponent.flattenToShortString(), Integer.valueOf(this.mUserId));
         }
         try {
-            if (this.mService.setDeviceOwner(this.mComponent, this.mUserId, true ^ this.mSetDoOnly)) {
+            if (this.mService.setDeviceOwner(
+                    this.mComponent, this.mUserId, true ^ this.mSetDoOnly)) {
                 this.mService.setUserProvisioningState(3, this.mUserId);
-                printWriter.printf("Success: Device owner set to package %s\n", this.mComponent.flattenToShortString());
-                printWriter.printf("Active admin set to component %s\n", this.mComponent.flattenToShortString());
+                printWriter.printf(
+                        "Success: Device owner set to package %s\n",
+                        this.mComponent.flattenToShortString());
+                printWriter.printf(
+                        "Active admin set to component %s\n",
+                        this.mComponent.flattenToShortString());
             } else {
-                throw new RuntimeException("Can't set package " + this.mComponent + " as device owner.");
+                throw new RuntimeException(
+                        "Can't set package " + this.mComponent + " as device owner.");
             }
         } catch (Exception e) {
             if (z) {
@@ -397,9 +488,15 @@ public final class DevicePolicyManagerServiceShellCommand extends ShellCommand {
         try {
             if (this.mService.setProfileOwner(this.mComponent, this.mUserId)) {
                 this.mService.setUserProvisioningState(3, this.mUserId);
-                printWriter.printf("Success: Active admin and profile owner set to %s for user %d\n", this.mComponent.flattenToShortString(), Integer.valueOf(this.mUserId));
+                printWriter.printf(
+                        "Success: Active admin and profile owner set to %s for user %d\n",
+                        this.mComponent.flattenToShortString(), Integer.valueOf(this.mUserId));
             } else {
-                throw new RuntimeException("Can't set component " + this.mComponent.flattenToShortString() + " as profile owner for user " + this.mUserId);
+                throw new RuntimeException(
+                        "Can't set component "
+                                + this.mComponent.flattenToShortString()
+                                + " as profile owner for user "
+                                + this.mUserId);
             }
         } catch (Exception e) {
             this.mService.removeActiveAdmin(this.mComponent, this.mUserId);

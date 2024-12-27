@@ -47,7 +47,8 @@ public class BEROctetString extends ASN1OctetString {
 
     public Enumeration getObjects() {
         if (this.octs == null) {
-            return new Enumeration() { // from class: com.android.internal.org.bouncycastle.asn1.BEROctetString.1
+            return new Enumeration() { // from class:
+                                       // com.android.internal.org.bouncycastle.asn1.BEROctetString.1
                 int pos = 0;
 
                 @Override // java.util.Enumeration
@@ -58,7 +59,10 @@ public class BEROctetString extends ASN1OctetString {
                 @Override // java.util.Enumeration
                 public Object nextElement() {
                     if (this.pos < BEROctetString.this.string.length) {
-                        int length = Math.min(BEROctetString.this.string.length - this.pos, BEROctetString.this.chunkSize);
+                        int length =
+                                Math.min(
+                                        BEROctetString.this.string.length - this.pos,
+                                        BEROctetString.this.chunkSize);
                         byte[] chunk = new byte[length];
                         System.arraycopy(BEROctetString.this.string, this.pos, chunk, 0, length);
                         this.pos += length;
@@ -68,7 +72,8 @@ public class BEROctetString extends ASN1OctetString {
                 }
             };
         }
-        return new Enumeration() { // from class: com.android.internal.org.bouncycastle.asn1.BEROctetString.2
+        return new Enumeration() { // from class:
+                                   // com.android.internal.org.bouncycastle.asn1.BEROctetString.2
             int counter = 0;
 
             @Override // java.util.Enumeration
@@ -104,7 +109,8 @@ public class BEROctetString extends ASN1OctetString {
         return length + 2 + 2;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1OctetString, com.android.internal.org.bouncycastle.asn1.ASN1Primitive
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1OctetString,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     void encode(ASN1OutputStream out, boolean withTag) throws IOException {
         out.writeEncodedIndef(withTag, 36, getObjects());
     }

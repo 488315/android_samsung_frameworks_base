@@ -8,6 +8,7 @@ import com.android.internal.org.bouncycastle.math.ec.ECLookupTable;
 import com.android.internal.org.bouncycastle.math.ec.ECPoint;
 import com.android.internal.org.bouncycastle.math.raw.Nat256;
 import com.android.internal.org.bouncycastle.util.encoders.Hex;
+
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
@@ -16,14 +17,20 @@ public class SecP256K1Curve extends ECCurve.AbstractFp {
     private static final int SECP256K1_DEFAULT_COORDS = 2;
     protected SecP256K1Point infinity;
     public static final BigInteger q = SecP256K1FieldElement.Q;
-    private static final ECFieldElement[] SECP256K1_AFFINE_ZS = {new SecP256K1FieldElement(ECConstants.ONE)};
+    private static final ECFieldElement[] SECP256K1_AFFINE_ZS = {
+        new SecP256K1FieldElement(ECConstants.ONE)
+    };
 
     public SecP256K1Curve() {
         super(q);
         this.infinity = new SecP256K1Point(this, null, null);
         this.a = fromBigInteger(ECConstants.ZERO);
         this.b = fromBigInteger(BigInteger.valueOf(7L));
-        this.order = new BigInteger(1, Hex.decodeStrict("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141"));
+        this.order =
+                new BigInteger(
+                        1,
+                        Hex.decodeStrict(
+                                "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141"));
         this.cofactor = BigInteger.valueOf(1L);
         this.coord = 2;
     }
@@ -83,7 +90,8 @@ public class SecP256K1Curve extends ECCurve.AbstractFp {
             Nat256.copy(((SecP256K1FieldElement) p.getRawYCoord()).x, 0, table, pos2);
             pos = pos2 + 8;
         }
-        return new AbstractECLookupTable() { // from class: com.android.internal.org.bouncycastle.math.ec.custom.sec.SecP256K1Curve.1
+        return new AbstractECLookupTable() { // from class:
+                                             // com.android.internal.org.bouncycastle.math.ec.custom.sec.SecP256K1Curve.1
             @Override // com.android.internal.org.bouncycastle.math.ec.ECLookupTable
             public int getSize() {
                 return len;
@@ -105,7 +113,8 @@ public class SecP256K1Curve extends ECCurve.AbstractFp {
                 return createPoint(x, y);
             }
 
-            @Override // com.android.internal.org.bouncycastle.math.ec.AbstractECLookupTable, com.android.internal.org.bouncycastle.math.ec.ECLookupTable
+            @Override // com.android.internal.org.bouncycastle.math.ec.AbstractECLookupTable,
+                      // com.android.internal.org.bouncycastle.math.ec.ECLookupTable
             public ECPoint lookupVar(int index) {
                 int[] x = Nat256.create();
                 int[] y = Nat256.create();
@@ -118,19 +127,24 @@ public class SecP256K1Curve extends ECCurve.AbstractFp {
             }
 
             private ECPoint createPoint(int[] x, int[] y) {
-                return SecP256K1Curve.this.createRawPoint(new SecP256K1FieldElement(x), new SecP256K1FieldElement(y), SecP256K1Curve.SECP256K1_AFFINE_ZS);
+                return SecP256K1Curve.this.createRawPoint(
+                        new SecP256K1FieldElement(x),
+                        new SecP256K1FieldElement(y),
+                        SecP256K1Curve.SECP256K1_AFFINE_ZS);
             }
         };
     }
 
-    @Override // com.android.internal.org.bouncycastle.math.ec.ECCurve.AbstractFp, com.android.internal.org.bouncycastle.math.ec.ECCurve
+    @Override // com.android.internal.org.bouncycastle.math.ec.ECCurve.AbstractFp,
+              // com.android.internal.org.bouncycastle.math.ec.ECCurve
     public ECFieldElement randomFieldElement(SecureRandom r) {
         int[] x = Nat256.create();
         SecP256K1Field.random(r, x);
         return new SecP256K1FieldElement(x);
     }
 
-    @Override // com.android.internal.org.bouncycastle.math.ec.ECCurve.AbstractFp, com.android.internal.org.bouncycastle.math.ec.ECCurve
+    @Override // com.android.internal.org.bouncycastle.math.ec.ECCurve.AbstractFp,
+              // com.android.internal.org.bouncycastle.math.ec.ECCurve
     public ECFieldElement randomFieldElementMult(SecureRandom r) {
         int[] x = Nat256.create();
         SecP256K1Field.randomMult(r, x);

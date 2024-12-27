@@ -4,13 +4,14 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.util.AttributeSet;
+
 import com.android.internal.R;
+
 import org.xmlpull.v1.XmlPullParser;
 
 /* loaded from: classes.dex */
 public class PaintDrawable extends ShapeDrawable {
-    public PaintDrawable() {
-    }
+    public PaintDrawable() {}
 
     public PaintDrawable(int color) {
         getPaint().setColor(color);
@@ -39,7 +40,8 @@ public class PaintDrawable extends ShapeDrawable {
     }
 
     @Override // android.graphics.drawable.ShapeDrawable
-    protected boolean inflateTag(String name, Resources r, XmlPullParser parser, AttributeSet attrs) {
+    protected boolean inflateTag(
+            String name, Resources r, XmlPullParser parser, AttributeSet attrs) {
         if (name.equals("corners")) {
             TypedArray a = r.obtainAttributes(attrs, R.styleable.DrawableCorners);
             int radius = a.getDimensionPixelSize(0, 0);
@@ -48,8 +50,21 @@ public class PaintDrawable extends ShapeDrawable {
             int topRightRadius = a.getDimensionPixelSize(2, radius);
             int bottomLeftRadius = a.getDimensionPixelSize(3, radius);
             int bottomRightRadius = a.getDimensionPixelSize(4, radius);
-            if (topLeftRadius != radius || topRightRadius != radius || bottomLeftRadius != radius || bottomRightRadius != radius) {
-                setCornerRadii(new float[]{topLeftRadius, topLeftRadius, topRightRadius, topRightRadius, bottomLeftRadius, bottomLeftRadius, bottomRightRadius, bottomRightRadius});
+            if (topLeftRadius != radius
+                    || topRightRadius != radius
+                    || bottomLeftRadius != radius
+                    || bottomRightRadius != radius) {
+                setCornerRadii(
+                        new float[] {
+                            topLeftRadius,
+                            topLeftRadius,
+                            topRightRadius,
+                            topRightRadius,
+                            bottomLeftRadius,
+                            bottomLeftRadius,
+                            bottomRightRadius,
+                            bottomRightRadius
+                        });
             }
             a.recycle();
             return true;

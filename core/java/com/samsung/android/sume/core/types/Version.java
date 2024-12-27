@@ -2,6 +2,7 @@ package com.samsung.android.sume.core.types;
 
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.MediaBufferFileReader$$ExternalSyntheticLambda0;
+
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
@@ -30,11 +31,21 @@ public class Version implements Serializable {
     }
 
     public Version(String version) {
-        List<Integer> versions = (List) Arrays.stream(version.replaceAll("^[^0-9]", "").split("\\.")).map(new MediaBufferFileReader$$ExternalSyntheticLambda0()).collect(Collectors.toList());
-        Def.require(!versions.isEmpty() && versions.size() <= 3, "version should be given major.{minor}.{patch} format(ex: 1, 1.0, 1.0.0)", new Object[0]);
+        List<Integer> versions =
+                (List)
+                        Arrays.stream(version.replaceAll("^[^0-9]", "").split("\\."))
+                                .map(new MediaBufferFileReader$$ExternalSyntheticLambda0())
+                                .collect(Collectors.toList());
+        Def.require(
+                !versions.isEmpty() && versions.size() <= 3,
+                "version should be given major.{minor}.{patch} format(ex: 1, 1.0, 1.0.0)",
+                new Object[0]);
         Integer[] additional = new Integer[3 - versions.size()];
         Arrays.fill((Object[]) additional, (Object) 0);
-        List<Integer> versions2 = (List) Stream.concat(versions.stream(), Stream.of((Object[]) additional)).collect(Collectors.toList());
+        List<Integer> versions2 =
+                (List)
+                        Stream.concat(versions.stream(), Stream.of((Object[]) additional))
+                                .collect(Collectors.toList());
         this.major = versions2.get(0).intValue();
         this.minor = versions2.get(1).intValue();
         this.patch = versions2.get(2).intValue();
@@ -53,6 +64,10 @@ public class Version implements Serializable {
     }
 
     public String toString() {
-        return Def.fmtstr("%d.%d.%d", Integer.valueOf(this.major), Integer.valueOf(this.minor), Integer.valueOf(this.patch));
+        return Def.fmtstr(
+                "%d.%d.%d",
+                Integer.valueOf(this.major),
+                Integer.valueOf(this.minor),
+                Integer.valueOf(this.patch));
     }
 }

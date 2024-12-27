@@ -1,8 +1,10 @@
 package com.android.server.backup.utils;
 
 import android.util.Slog;
+
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -12,7 +14,8 @@ import javax.crypto.spec.PBEKeySpec;
 public abstract class PasswordUtils {
     public static SecretKey buildCharArrayKey(String str, char[] cArr, byte[] bArr, int i) {
         try {
-            return SecretKeyFactory.getInstance(str).generateSecret(new PBEKeySpec(cArr, bArr, i, 256));
+            return SecretKeyFactory.getInstance(str)
+                    .generateSecret(new PBEKeySpec(cArr, bArr, i, 256));
         } catch (NoSuchAlgorithmException unused) {
             Slog.e("BackupManagerService", "PBKDF2 unavailable!");
             return null;

@@ -8,8 +8,7 @@ public class Int4 {
     public int y;
     public int z;
 
-    public Int4() {
-    }
+    public Int4() {}
 
     public Int4(int i) {
         this.w = i;

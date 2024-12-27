@@ -5,6 +5,7 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
@@ -15,19 +16,21 @@ import java.util.Date;
 @SystemApi
 /* loaded from: classes4.dex */
 public final class ImsiEncryptionInfo implements Parcelable {
-    public static final Parcelable.Creator<ImsiEncryptionInfo> CREATOR = new Parcelable.Creator<ImsiEncryptionInfo>() { // from class: android.telephony.ImsiEncryptionInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsiEncryptionInfo createFromParcel(Parcel in) {
-            return new ImsiEncryptionInfo(in);
-        }
+    public static final Parcelable.Creator<ImsiEncryptionInfo> CREATOR =
+            new Parcelable.Creator<
+                    ImsiEncryptionInfo>() { // from class: android.telephony.ImsiEncryptionInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsiEncryptionInfo createFromParcel(Parcel in) {
+                    return new ImsiEncryptionInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsiEncryptionInfo[] newArray(int size) {
-            return new ImsiEncryptionInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsiEncryptionInfo[] newArray(int size) {
+                    return new ImsiEncryptionInfo[size];
+                }
+            };
     private static final String LOG_TAG = "ImsiEncryptionInfo";
     private final int carrierId;
     private final Date expirationTime;
@@ -37,11 +40,25 @@ public final class ImsiEncryptionInfo implements Parcelable {
     private final String mnc;
     private final PublicKey publicKey;
 
-    public ImsiEncryptionInfo(String mcc, String mnc, int keyType, String keyIdentifier, byte[] key, Date expirationTime, int carrierId) {
+    public ImsiEncryptionInfo(
+            String mcc,
+            String mnc,
+            int keyType,
+            String keyIdentifier,
+            byte[] key,
+            Date expirationTime,
+            int carrierId) {
         this(mcc, mnc, keyType, keyIdentifier, makeKeyObject(key), expirationTime, carrierId);
     }
 
-    public ImsiEncryptionInfo(String mcc, String mnc, int keyType, String keyIdentifier, PublicKey publicKey, Date expirationTime, int carrierId) {
+    public ImsiEncryptionInfo(
+            String mcc,
+            String mnc,
+            int keyType,
+            String keyIdentifier,
+            PublicKey publicKey,
+            Date expirationTime,
+            int carrierId) {
         this.mcc = mcc;
         this.mnc = mnc;
         this.keyType = keyType;
@@ -121,6 +138,20 @@ public final class ImsiEncryptionInfo implements Parcelable {
     }
 
     public String toString() {
-        return "[ImsiEncryptionInfo mcc=" + this.mcc + " mnc=" + this.mnc + ", publicKey=" + this.publicKey + ", keyIdentifier=" + this.keyIdentifier + ", keyType=" + this.keyType + ", expirationTime=" + this.expirationTime + ", carrier_id=" + this.carrierId + NavigationBarInflaterView.SIZE_MOD_END;
+        return "[ImsiEncryptionInfo mcc="
+                + this.mcc
+                + " mnc="
+                + this.mnc
+                + ", publicKey="
+                + this.publicKey
+                + ", keyIdentifier="
+                + this.keyIdentifier
+                + ", keyType="
+                + this.keyType
+                + ", expirationTime="
+                + this.expirationTime
+                + ", carrier_id="
+                + this.carrierId
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 }

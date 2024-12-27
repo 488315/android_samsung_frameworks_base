@@ -8,6 +8,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.server.biometrics.log.BiometricContext;
 import com.android.server.biometrics.log.BiometricLogger;
 import com.android.server.biometrics.sensors.ClientMonitorCallback;
@@ -18,8 +19,25 @@ import com.android.server.biometrics.sensors.StartUserClient;
 public final class FaceStartUserClient extends StartUserClient {
     public final ISessionCallback mSessionCallback;
 
-    public FaceStartUserClient(Context context, Sensor$$ExternalSyntheticLambda4 sensor$$ExternalSyntheticLambda4, IBinder iBinder, int i, int i2, BiometricLogger biometricLogger, BiometricContext biometricContext, AidlResponseHandler aidlResponseHandler, Sensor$$ExternalSyntheticLambda3 sensor$$ExternalSyntheticLambda3) {
-        super(context, sensor$$ExternalSyntheticLambda4, iBinder, i, i2, biometricLogger, biometricContext, sensor$$ExternalSyntheticLambda3);
+    public FaceStartUserClient(
+            Context context,
+            Sensor$$ExternalSyntheticLambda4 sensor$$ExternalSyntheticLambda4,
+            IBinder iBinder,
+            int i,
+            int i2,
+            BiometricLogger biometricLogger,
+            BiometricContext biometricContext,
+            AidlResponseHandler aidlResponseHandler,
+            Sensor$$ExternalSyntheticLambda3 sensor$$ExternalSyntheticLambda3) {
+        super(
+                context,
+                sensor$$ExternalSyntheticLambda4,
+                iBinder,
+                i,
+                i2,
+                biometricLogger,
+                biometricContext,
+                sensor$$ExternalSyntheticLambda3);
         this.mSessionCallback = aidlResponseHandler;
     }
 
@@ -38,20 +56,26 @@ public final class FaceStartUserClient extends StartUserClient {
                 int interfaceVersion = ((IFace) this.mLazyDaemon.get()).getInterfaceVersion();
                 if (SemFaceServiceExImpl.getInstance().mISession != null) {
                     Binder.allowBlocking(SemFaceServiceExImpl.getInstance().mISession.asBinder());
-                    this.mUserStartedCallback.onUserStarted(this.mTargetUserId, interfaceVersion, SemFaceServiceExImpl.getInstance().mISession);
+                    this.mUserStartedCallback.onUserStarted(
+                            this.mTargetUserId,
+                            interfaceVersion,
+                            SemFaceServiceExImpl.getInstance().mISession);
                 }
                 SemFaceServiceExImpl.getInstance().daemonEnumerateUser();
             } else {
                 IFace iFace = (IFace) this.mLazyDaemon.get();
                 int interfaceVersion2 = iFace.getInterfaceVersion();
-                ISession createSession = iFace.createSession(this.mSensorId, this.mTargetUserId, this.mSessionCallback);
+                ISession createSession =
+                        iFace.createSession(
+                                this.mSensorId, this.mTargetUserId, this.mSessionCallback);
                 if (createSession == null) {
                     Slog.e("FaceStartUserClient", "createSession() is null");
                     getCallback().onClientFinished(this, false);
                     return;
                 } else {
                     Binder.allowBlocking(createSession.asBinder());
-                    this.mUserStartedCallback.onUserStarted(this.mTargetUserId, interfaceVersion2, createSession);
+                    this.mUserStartedCallback.onUserStarted(
+                            this.mTargetUserId, interfaceVersion2, createSession);
                 }
             }
             getCallback().onClientFinished(this, true);
@@ -62,6 +86,5 @@ public final class FaceStartUserClient extends StartUserClient {
     }
 
     @Override // com.android.server.biometrics.sensors.HalClientMonitor
-    public final void unableToStart() {
-    }
+    public final void unableToStart() {}
 }

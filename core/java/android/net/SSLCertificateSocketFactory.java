@@ -2,9 +2,11 @@ package android.net;
 
 import android.os.SystemProperties;
 import android.util.Log;
+
 import com.android.internal.os.RoSystemProperties;
 import com.android.org.conscrypt.OpenSSLSocketImpl;
 import com.android.org.conscrypt.SSLClientSessionCache;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -14,6 +16,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.PrivateKey;
 import java.security.cert.X509Certificate;
+
 import javax.net.SocketFactory;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.KeyManager;
@@ -29,20 +32,20 @@ import javax.net.ssl.X509TrustManager;
 @Deprecated
 /* loaded from: classes3.dex */
 public class SSLCertificateSocketFactory extends SSLSocketFactory {
-    private static final TrustManager[] INSECURE_TRUST_MANAGER = {new X509TrustManager() { // from class: android.net.SSLCertificateSocketFactory.1
-        @Override // javax.net.ssl.X509TrustManager
-        public X509Certificate[] getAcceptedIssuers() {
-            return null;
-        }
+    private static final TrustManager[] INSECURE_TRUST_MANAGER = {
+        new X509TrustManager() { // from class: android.net.SSLCertificateSocketFactory.1
+            @Override // javax.net.ssl.X509TrustManager
+            public X509Certificate[] getAcceptedIssuers() {
+                return null;
+            }
 
-        @Override // javax.net.ssl.X509TrustManager
-        public void checkClientTrusted(X509Certificate[] certs, String authType) {
-        }
+            @Override // javax.net.ssl.X509TrustManager
+            public void checkClientTrusted(X509Certificate[] certs, String authType) {}
 
-        @Override // javax.net.ssl.X509TrustManager
-        public void checkServerTrusted(X509Certificate[] certs, String authType) {
+            @Override // javax.net.ssl.X509TrustManager
+            public void checkServerTrusted(X509Certificate[] certs, String authType) {}
         }
-    }};
+    };
     private static final String TAG = "SSLCertificateSocketFactory";
     private byte[] mAlpnProtocols;
     private PrivateKey mChannelIdPrivateKey;
@@ -60,7 +63,8 @@ public class SSLCertificateSocketFactory extends SSLSocketFactory {
         this(handshakeTimeoutMillis, null, true);
     }
 
-    private SSLCertificateSocketFactory(int handshakeTimeoutMillis, SSLSessionCache cache, boolean secure) {
+    private SSLCertificateSocketFactory(
+            int handshakeTimeoutMillis, SSLSessionCache cache, boolean secure) {
         this.mInsecureFactory = null;
         this.mSecureFactory = null;
         this.mTrustManagers = null;
@@ -86,8 +90,10 @@ public class SSLCertificateSocketFactory extends SSLSocketFactory {
     }
 
     @Deprecated
-    public static org.apache.http.conn.ssl.SSLSocketFactory getHttpSocketFactory(int handshakeTimeoutMillis, SSLSessionCache cache) {
-        return new org.apache.http.conn.ssl.SSLSocketFactory(new SSLCertificateSocketFactory(handshakeTimeoutMillis, cache, true));
+    public static org.apache.http.conn.ssl.SSLSocketFactory getHttpSocketFactory(
+            int handshakeTimeoutMillis, SSLSessionCache cache) {
+        return new org.apache.http.conn.ssl.SSLSocketFactory(
+                new SSLCertificateSocketFactory(handshakeTimeoutMillis, cache, true));
     }
 
     public static void verifyHostname(Socket socket, String hostname) throws IOException {
@@ -107,9 +113,12 @@ public class SSLCertificateSocketFactory extends SSLSocketFactory {
         }
     }
 
-    private SSLSocketFactory makeSocketFactory(KeyManager[] keyManagers, TrustManager[] trustManagers) {
+    private SSLSocketFactory makeSocketFactory(
+            KeyManager[] keyManagers, TrustManager[] trustManagers) {
         try {
-            SSLContext sslContext = SSLContext.getInstance(org.apache.http.conn.ssl.SSLSocketFactory.TLS, "AndroidOpenSSL");
+            SSLContext sslContext =
+                    SSLContext.getInstance(
+                            org.apache.http.conn.ssl.SSLSocketFactory.TLS, "AndroidOpenSSL");
             sslContext.init(keyManagers, trustManagers, null);
             sslContext.getClientSessionContext().setPersistentCache(this.mSessionCache);
             return sslContext.getSocketFactory();
@@ -120,7 +129,8 @@ public class SSLCertificateSocketFactory extends SSLSocketFactory {
     }
 
     private static boolean isSslCheckRelaxed() {
-        return RoSystemProperties.DEBUGGABLE && SystemProperties.getBoolean("socket.relaxsslcheck", false);
+        return RoSystemProperties.DEBUGGABLE
+                && SystemProperties.getBoolean("socket.relaxsslcheck", false);
     }
 
     private synchronized SSLSocketFactory getDelegate() {
@@ -213,7 +223,8 @@ public class SSLCertificateSocketFactory extends SSLSocketFactory {
         castToOpenSSLSocket(socket).setHostname(hostName);
     }
 
-    public void setSoWriteTimeout(Socket socket, int writeTimeoutMilliseconds) throws SocketException {
+    public void setSoWriteTimeout(Socket socket, int writeTimeoutMilliseconds)
+            throws SocketException {
         castToOpenSSLSocket(socket).setSoWriteTimeout(writeTimeoutMilliseconds);
     }
 
@@ -248,7 +259,8 @@ public class SSLCertificateSocketFactory extends SSLSocketFactory {
     }
 
     @Override // javax.net.SocketFactory
-    public Socket createSocket(InetAddress addr, int port, InetAddress localAddr, int localPort) throws IOException {
+    public Socket createSocket(InetAddress addr, int port, InetAddress localAddr, int localPort)
+            throws IOException {
         OpenSSLSocketImpl s = getDelegate().createSocket(addr, port, localAddr, localPort);
         s.setNpnProtocols(this.mNpnProtocols);
         s.setAlpnProtocols(this.mAlpnProtocols);
@@ -268,7 +280,8 @@ public class SSLCertificateSocketFactory extends SSLSocketFactory {
     }
 
     @Override // javax.net.SocketFactory
-    public Socket createSocket(String host, int port, InetAddress localAddr, int localPort) throws IOException {
+    public Socket createSocket(String host, int port, InetAddress localAddr, int localPort)
+            throws IOException {
         OpenSSLSocketImpl s = getDelegate().createSocket(host, port, localAddr, localPort);
         s.setNpnProtocols(this.mNpnProtocols);
         s.setAlpnProtocols(this.mAlpnProtocols);

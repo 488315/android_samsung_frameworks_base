@@ -12,7 +12,6 @@ public final class PackageServiceOperationStatsProto {
         public static final long REALTIME_DURATION_MS = 1112396529668L;
         public static final long SCREEN_STATE = 1159641169921L;
 
-        public StateStats() {
-        }
+        public StateStats() {}
     }
 }

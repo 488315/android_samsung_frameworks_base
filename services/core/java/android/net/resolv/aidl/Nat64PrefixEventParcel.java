@@ -6,6 +6,7 @@ import android.hardware.broadcastradio.DabTableEntry$$ExternalSyntheticOutline0;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -54,7 +55,8 @@ public class Nat64PrefixEventParcel implements Parcelable {
                         if (parcel.dataPosition() - dataPosition < readInt) {
                             this.prefixLength = parcel.readInt();
                             if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                             parcel.setDataPosition(dataPosition + readInt);
                             return;
@@ -83,7 +85,25 @@ public class Nat64PrefixEventParcel implements Parcelable {
 
     public String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, AmFmBandRange$$ExternalSyntheticOutline0.m(DabTableEntry$$ExternalSyntheticOutline0.m(this.prefixAddress, "prefixLength: ", AmFmBandRange$$ExternalSyntheticOutline0.m(AmFmBandRange$$ExternalSyntheticOutline0.m(new StringBuilder("netId: "), this.netId, stringJoiner, "prefixOperation: "), this.prefixOperation, stringJoiner, "prefixAddress: "), stringJoiner), this.prefixLength, stringJoiner, "Nat64PrefixEventParcel"));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner,
+                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                        DabTableEntry$$ExternalSyntheticOutline0.m(
+                                this.prefixAddress,
+                                "prefixLength: ",
+                                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                        AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                                new StringBuilder("netId: "),
+                                                this.netId,
+                                                stringJoiner,
+                                                "prefixOperation: "),
+                                        this.prefixOperation,
+                                        stringJoiner,
+                                        "prefixAddress: "),
+                                stringJoiner),
+                        this.prefixLength,
+                        stringJoiner,
+                        "Nat64PrefixEventParcel"));
     }
 
     @Override // android.os.Parcelable
@@ -93,7 +113,9 @@ public class Nat64PrefixEventParcel implements Parcelable {
         parcel.writeInt(this.netId);
         parcel.writeInt(this.prefixOperation);
         parcel.writeString(this.prefixAddress);
-        int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.prefixLength, dataPosition);
+        int m =
+                SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                        parcel, this.prefixLength, dataPosition);
         SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
     }
 }

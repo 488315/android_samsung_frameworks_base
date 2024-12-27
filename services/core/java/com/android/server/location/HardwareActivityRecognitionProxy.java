@@ -6,6 +6,7 @@ import android.hardware.location.ActivityRecognitionHardware;
 import android.hardware.location.IActivityRecognitionHardwareClient;
 import android.hardware.location.IActivityRecognitionHardwareWatcher;
 import android.os.IBinder;
+
 import com.android.server.FgThread;
 import com.android.server.StorageManagerService$$ExternalSyntheticOutline0;
 import com.android.server.location.injector.Injector;
@@ -28,22 +29,41 @@ public final class HardwareActivityRecognitionProxy implements ServiceWatcher$Se
         } else {
             this.mInstance = null;
         }
-        this.mServiceWatcher = new ServiceWatcherImpl(context, FgThread.getHandler(), "HardwareActivityRecognitionProxy", CurrentUserServiceSupplier.createFromConfig(context, "com.android.location.service.ActivityRecognitionProvider", R.bool.config_enableCarDockHomeLaunch, R.string.config_wwan_data_service_package), this, injector);
+        this.mServiceWatcher =
+                new ServiceWatcherImpl(
+                        context,
+                        FgThread.getHandler(),
+                        "HardwareActivityRecognitionProxy",
+                        CurrentUserServiceSupplier.createFromConfig(
+                                context,
+                                "com.android.location.service.ActivityRecognitionProvider",
+                                R.bool.config_enableCarDockHomeLaunch,
+                                R.string.config_wwan_data_service_package),
+                        this,
+                        injector);
     }
 
     @Override // com.android.server.servicewatcher.ServiceWatcher$ServiceListener
-    public final void onBind(IBinder iBinder, CurrentUserServiceSupplier.BoundServiceInfo boundServiceInfo) {
+    public final void onBind(
+            IBinder iBinder, CurrentUserServiceSupplier.BoundServiceInfo boundServiceInfo) {
         String interfaceDescriptor = iBinder.getInterfaceDescriptor();
-        if (!IActivityRecognitionHardwareWatcher.class.getCanonicalName().equals(interfaceDescriptor)) {
-            if (IActivityRecognitionHardwareClient.class.getCanonicalName().equals(interfaceDescriptor)) {
-                IActivityRecognitionHardwareClient.Stub.asInterface(iBinder).onAvailabilityChanged(this.mIsSupported, this.mInstance);
+        if (!IActivityRecognitionHardwareWatcher.class
+                .getCanonicalName()
+                .equals(interfaceDescriptor)) {
+            if (IActivityRecognitionHardwareClient.class
+                    .getCanonicalName()
+                    .equals(interfaceDescriptor)) {
+                IActivityRecognitionHardwareClient.Stub.asInterface(iBinder)
+                        .onAvailabilityChanged(this.mIsSupported, this.mInstance);
                 return;
             } else {
-                StorageManagerService$$ExternalSyntheticOutline0.m("Unknown descriptor: ", interfaceDescriptor, "ARProxy");
+                StorageManagerService$$ExternalSyntheticOutline0.m(
+                        "Unknown descriptor: ", interfaceDescriptor, "ARProxy");
                 return;
             }
         }
-        IActivityRecognitionHardwareWatcher asInterface = IActivityRecognitionHardwareWatcher.Stub.asInterface(iBinder);
+        IActivityRecognitionHardwareWatcher asInterface =
+                IActivityRecognitionHardwareWatcher.Stub.asInterface(iBinder);
         ActivityRecognitionHardware activityRecognitionHardware = this.mInstance;
         if (activityRecognitionHardware != null) {
             asInterface.onInstanceChanged(activityRecognitionHardware);
@@ -51,6 +71,5 @@ public final class HardwareActivityRecognitionProxy implements ServiceWatcher$Se
     }
 
     @Override // com.android.server.servicewatcher.ServiceWatcher$ServiceListener
-    public final void onUnbind() {
-    }
+    public final void onUnbind() {}
 }

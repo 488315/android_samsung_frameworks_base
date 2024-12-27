@@ -1,6 +1,5 @@
 package android.net;
 
-import android.net.INetdEventCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -9,9 +8,20 @@ import android.os.RemoteException;
 
 /* loaded from: classes3.dex */
 public interface IIpConnectivityMetrics extends IInterface {
-    boolean addNetdEventCallback(int i, INetdEventCallback iNetdEventCallback) throws RemoteException;
+    boolean addNetdEventCallback(int i, INetdEventCallback iNetdEventCallback)
+            throws RemoteException;
 
-    void logDefaultNetworkEvent(Network network, int i, boolean z, LinkProperties linkProperties, NetworkCapabilities networkCapabilities, Network network2, int i2, LinkProperties linkProperties2, NetworkCapabilities networkCapabilities2) throws RemoteException;
+    void logDefaultNetworkEvent(
+            Network network,
+            int i,
+            boolean z,
+            LinkProperties linkProperties,
+            NetworkCapabilities networkCapabilities,
+            Network network2,
+            int i2,
+            LinkProperties linkProperties2,
+            NetworkCapabilities networkCapabilities2)
+            throws RemoteException;
 
     void logDefaultNetworkValidity(boolean z) throws RemoteException;
 
@@ -26,15 +36,24 @@ public interface IIpConnectivityMetrics extends IInterface {
         }
 
         @Override // android.net.IIpConnectivityMetrics
-        public void logDefaultNetworkValidity(boolean valid) throws RemoteException {
-        }
+        public void logDefaultNetworkValidity(boolean valid) throws RemoteException {}
 
         @Override // android.net.IIpConnectivityMetrics
-        public void logDefaultNetworkEvent(Network defaultNetwork, int score, boolean validated, LinkProperties lp, NetworkCapabilities nc, Network previousDefaultNetwork, int previousScore, LinkProperties previousLp, NetworkCapabilities previousNc) throws RemoteException {
-        }
+        public void logDefaultNetworkEvent(
+                Network defaultNetwork,
+                int score,
+                boolean validated,
+                LinkProperties lp,
+                NetworkCapabilities nc,
+                Network previousDefaultNetwork,
+                int previousScore,
+                LinkProperties previousLp,
+                NetworkCapabilities previousNc)
+                throws RemoteException {}
 
         @Override // android.net.IIpConnectivityMetrics
-        public boolean addNetdEventCallback(int callerType, INetdEventCallback callback) throws RemoteException {
+        public boolean addNetdEventCallback(int callerType, INetdEventCallback callback)
+                throws RemoteException {
             return false;
         }
 
@@ -49,7 +68,7 @@ public interface IIpConnectivityMetrics extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IIpConnectivityMetrics {
+    public abstract static class Stub extends Binder implements IIpConnectivityMetrics {
         public static final String DESCRIPTOR = "android.net.IIpConnectivityMetrics";
         static final int TRANSACTION_addNetdEventCallback = 4;
         static final int TRANSACTION_logDefaultNetworkEvent = 3;
@@ -100,7 +119,8 @@ public interface IIpConnectivityMetrics extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -110,7 +130,9 @@ public interface IIpConnectivityMetrics extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ConnectivityMetricsEvent _arg0 = (ConnectivityMetricsEvent) data.readTypedObject(ConnectivityMetricsEvent.CREATOR);
+                    ConnectivityMetricsEvent _arg0 =
+                            (ConnectivityMetricsEvent)
+                                    data.readTypedObject(ConnectivityMetricsEvent.CREATOR);
                     data.enforceNoDataAvail();
                     int _result = logEvent(_arg0);
                     reply.writeNoException();
@@ -126,19 +148,25 @@ public interface IIpConnectivityMetrics extends IInterface {
                     Network _arg03 = (Network) data.readTypedObject(Network.CREATOR);
                     int _arg1 = data.readInt();
                     boolean _arg2 = data.readBoolean();
-                    LinkProperties _arg3 = (LinkProperties) data.readTypedObject(LinkProperties.CREATOR);
-                    NetworkCapabilities _arg4 = (NetworkCapabilities) data.readTypedObject(NetworkCapabilities.CREATOR);
+                    LinkProperties _arg3 =
+                            (LinkProperties) data.readTypedObject(LinkProperties.CREATOR);
+                    NetworkCapabilities _arg4 =
+                            (NetworkCapabilities) data.readTypedObject(NetworkCapabilities.CREATOR);
                     Network _arg5 = (Network) data.readTypedObject(Network.CREATOR);
                     int _arg6 = data.readInt();
-                    LinkProperties _arg7 = (LinkProperties) data.readTypedObject(LinkProperties.CREATOR);
-                    NetworkCapabilities _arg8 = (NetworkCapabilities) data.readTypedObject(NetworkCapabilities.CREATOR);
+                    LinkProperties _arg7 =
+                            (LinkProperties) data.readTypedObject(LinkProperties.CREATOR);
+                    NetworkCapabilities _arg8 =
+                            (NetworkCapabilities) data.readTypedObject(NetworkCapabilities.CREATOR);
                     data.enforceNoDataAvail();
-                    logDefaultNetworkEvent(_arg03, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8);
+                    logDefaultNetworkEvent(
+                            _arg03, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8);
                     reply.writeNoException();
                     return true;
                 case 4:
                     int _arg04 = data.readInt();
-                    INetdEventCallback _arg12 = INetdEventCallback.Stub.asInterface(data.readStrongBinder());
+                    INetdEventCallback _arg12 =
+                            INetdEventCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result2 = addNetdEventCallback(_arg04, _arg12);
                     reply.writeNoException();
@@ -205,7 +233,17 @@ public interface IIpConnectivityMetrics extends IInterface {
             }
 
             @Override // android.net.IIpConnectivityMetrics
-            public void logDefaultNetworkEvent(Network defaultNetwork, int score, boolean validated, LinkProperties lp, NetworkCapabilities nc, Network previousDefaultNetwork, int previousScore, LinkProperties previousLp, NetworkCapabilities previousNc) throws RemoteException {
+            public void logDefaultNetworkEvent(
+                    Network defaultNetwork,
+                    int score,
+                    boolean validated,
+                    LinkProperties lp,
+                    NetworkCapabilities nc,
+                    Network previousDefaultNetwork,
+                    int previousScore,
+                    LinkProperties previousLp,
+                    NetworkCapabilities previousNc)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -228,7 +266,8 @@ public interface IIpConnectivityMetrics extends IInterface {
             }
 
             @Override // android.net.IIpConnectivityMetrics
-            public boolean addNetdEventCallback(int callerType, INetdEventCallback callback) throws RemoteException {
+            public boolean addNetdEventCallback(int callerType, INetdEventCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

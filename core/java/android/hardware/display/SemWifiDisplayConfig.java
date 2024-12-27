@@ -2,31 +2,35 @@ package android.hardware.display;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /* loaded from: classes2.dex */
 public final class SemWifiDisplayConfig implements Parcelable {
     public static final int CONNECTION_TYPE_AP = 2;
     public static final int CONNECTION_TYPE_P2P = 1;
     public static final int CONNECTION_TYPE_USB = 3;
-    public static final Parcelable.Creator<SemWifiDisplayConfig> CREATOR = new Parcelable.Creator<SemWifiDisplayConfig>() { // from class: android.hardware.display.SemWifiDisplayConfig.2
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemWifiDisplayConfig createFromParcel(Parcel in) {
-            return new SemWifiDisplayConfig(in);
-        }
+    public static final Parcelable.Creator<SemWifiDisplayConfig> CREATOR =
+            new Parcelable.Creator<SemWifiDisplayConfig>() { // from class:
+                // android.hardware.display.SemWifiDisplayConfig.2
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemWifiDisplayConfig createFromParcel(Parcel in) {
+                    return new SemWifiDisplayConfig(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemWifiDisplayConfig[] newArray(int size) {
-            return new SemWifiDisplayConfig[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemWifiDisplayConfig[] newArray(int size) {
+                    return new SemWifiDisplayConfig[size];
+                }
+            };
     public static final int FLAG_INITIATE_MIRRORING = 32;
     public static final int FLAG_PIN_CONNECT = 8192;
     public static final int FLAG_SKIP_PIN_NUMBER_CONFIRM = 16384;
@@ -48,44 +52,57 @@ public final class SemWifiDisplayConfig implements Parcelable {
         this.mConnectionType = 1;
         this.mFlags = 0;
         this.mMode = 0;
-        this.mPrameterGroups = new HashMap<String, List<SemWifiDisplayParameter>>() { // from class: android.hardware.display.SemWifiDisplayConfig.1
-            {
-                put(SemWifiDisplayParameter.INIT_PARAMETER, new ArrayList());
-                put(SemWifiDisplayParameter.GET_PARAMETER, new ArrayList());
-                put(SemWifiDisplayParameter.SET_PARAMETER, new ArrayList());
-            }
-        };
+        this.mPrameterGroups =
+                new HashMap<String, List<SemWifiDisplayParameter>>() { // from class:
+                    // android.hardware.display.SemWifiDisplayConfig.1
+                    {
+                        put(SemWifiDisplayParameter.INIT_PARAMETER, new ArrayList());
+                        put(SemWifiDisplayParameter.GET_PARAMETER, new ArrayList());
+                        put(SemWifiDisplayParameter.SET_PARAMETER, new ArrayList());
+                    }
+                };
     }
 
     private SemWifiDisplayConfig(String p2pMacAddress) {
         this.mConnectionType = 1;
         this.mFlags = 0;
         this.mMode = 0;
-        this.mPrameterGroups = new HashMap<String, List<SemWifiDisplayParameter>>() { // from class: android.hardware.display.SemWifiDisplayConfig.1
-            {
-                put(SemWifiDisplayParameter.INIT_PARAMETER, new ArrayList());
-                put(SemWifiDisplayParameter.GET_PARAMETER, new ArrayList());
-                put(SemWifiDisplayParameter.SET_PARAMETER, new ArrayList());
-            }
-        };
+        this.mPrameterGroups =
+                new HashMap<String, List<SemWifiDisplayParameter>>() { // from class:
+                    // android.hardware.display.SemWifiDisplayConfig.1
+                    {
+                        put(SemWifiDisplayParameter.INIT_PARAMETER, new ArrayList());
+                        put(SemWifiDisplayParameter.GET_PARAMETER, new ArrayList());
+                        put(SemWifiDisplayParameter.SET_PARAMETER, new ArrayList());
+                    }
+                };
         this.mP2pMacAddress = p2pMacAddress;
         this.mConnectionType = 1;
         this.mFlags = 0;
         this.mMode = 0;
-        addParameter(SemWifiDisplayParameter.INIT_PARAMETER, new SemWifiDisplayParameter("connection-type", this.mConnectionType));
+        addParameter(
+                SemWifiDisplayParameter.INIT_PARAMETER,
+                new SemWifiDisplayParameter("connection-type", this.mConnectionType));
     }
 
-    private SemWifiDisplayConfig(int connetionType, String ipAddress, String port, String deviceName, String p2pMacAddress) {
+    private SemWifiDisplayConfig(
+            int connetionType,
+            String ipAddress,
+            String port,
+            String deviceName,
+            String p2pMacAddress) {
         this.mConnectionType = 1;
         this.mFlags = 0;
         this.mMode = 0;
-        this.mPrameterGroups = new HashMap<String, List<SemWifiDisplayParameter>>() { // from class: android.hardware.display.SemWifiDisplayConfig.1
-            {
-                put(SemWifiDisplayParameter.INIT_PARAMETER, new ArrayList());
-                put(SemWifiDisplayParameter.GET_PARAMETER, new ArrayList());
-                put(SemWifiDisplayParameter.SET_PARAMETER, new ArrayList());
-            }
-        };
+        this.mPrameterGroups =
+                new HashMap<String, List<SemWifiDisplayParameter>>() { // from class:
+                    // android.hardware.display.SemWifiDisplayConfig.1
+                    {
+                        put(SemWifiDisplayParameter.INIT_PARAMETER, new ArrayList());
+                        put(SemWifiDisplayParameter.GET_PARAMETER, new ArrayList());
+                        put(SemWifiDisplayParameter.SET_PARAMETER, new ArrayList());
+                    }
+                };
         this.mIpAddress = ipAddress;
         this.mPort = port;
         this.mDeviceName = deviceName;
@@ -93,20 +110,24 @@ public final class SemWifiDisplayConfig implements Parcelable {
         this.mConnectionType = connetionType;
         this.mFlags = 0;
         this.mMode = 0;
-        addParameter(SemWifiDisplayParameter.INIT_PARAMETER, new SemWifiDisplayParameter("connection-type", this.mConnectionType));
+        addParameter(
+                SemWifiDisplayParameter.INIT_PARAMETER,
+                new SemWifiDisplayParameter("connection-type", this.mConnectionType));
     }
 
     protected SemWifiDisplayConfig(Parcel in) {
         this.mConnectionType = 1;
         this.mFlags = 0;
         this.mMode = 0;
-        this.mPrameterGroups = new HashMap<String, List<SemWifiDisplayParameter>>() { // from class: android.hardware.display.SemWifiDisplayConfig.1
-            {
-                put(SemWifiDisplayParameter.INIT_PARAMETER, new ArrayList());
-                put(SemWifiDisplayParameter.GET_PARAMETER, new ArrayList());
-                put(SemWifiDisplayParameter.SET_PARAMETER, new ArrayList());
-            }
-        };
+        this.mPrameterGroups =
+                new HashMap<String, List<SemWifiDisplayParameter>>() { // from class:
+                    // android.hardware.display.SemWifiDisplayConfig.1
+                    {
+                        put(SemWifiDisplayParameter.INIT_PARAMETER, new ArrayList());
+                        put(SemWifiDisplayParameter.GET_PARAMETER, new ArrayList());
+                        put(SemWifiDisplayParameter.SET_PARAMETER, new ArrayList());
+                    }
+                };
         this.mP2pMacAddress = in.readString();
         this.mIpAddress = in.readString();
         this.mPort = in.readString();
@@ -131,7 +152,9 @@ public final class SemWifiDisplayConfig implements Parcelable {
 
     public void setMode(int mode) {
         this.mMode = mode;
-        addParameter(SemWifiDisplayParameter.INIT_PARAMETER, new SemWifiDisplayParameter("mode", this.mMode));
+        addParameter(
+                SemWifiDisplayParameter.INIT_PARAMETER,
+                new SemWifiDisplayParameter("mode", this.mMode));
     }
 
     public void addParameter(String groupKey, SemWifiDisplayParameter parameter) {
@@ -156,7 +179,8 @@ public final class SemWifiDisplayConfig implements Parcelable {
 
     public void removeParameter(String groupKey, String key) {
         if (groupKey != null && key != null) {
-            List<SemWifiDisplayParameter> wifiDisplayParameterList = this.mPrameterGroups.get(groupKey);
+            List<SemWifiDisplayParameter> wifiDisplayParameterList =
+                    this.mPrameterGroups.get(groupKey);
             for (SemWifiDisplayParameter parameter : wifiDisplayParameterList) {
                 if (parameter.getKey().equals(key)) {
                     wifiDisplayParameterList.remove(parameter);
@@ -172,7 +196,8 @@ public final class SemWifiDisplayConfig implements Parcelable {
 
     public SemWifiDisplayParameter getParameter(String groupKey, String key) {
         if (groupKey != null && key != null) {
-            List<SemWifiDisplayParameter> wifiDisplayParameterList = this.mPrameterGroups.get(groupKey);
+            List<SemWifiDisplayParameter> wifiDisplayParameterList =
+                    this.mPrameterGroups.get(groupKey);
             for (SemWifiDisplayParameter parameter : wifiDisplayParameterList) {
                 if (parameter.getKey().equals(key)) {
                     return parameter;
@@ -261,9 +286,28 @@ public final class SemWifiDisplayConfig implements Parcelable {
     public String toString() {
         String result = "SemWifiDisplayConfig:: p2pMacAddr = " + this.mP2pMacAddress;
         if (this.mConnectionType != 1) {
-            result = result + ", ipAddr = " + this.mIpAddress + ", port = " + this.mPort + ", name = " + this.mDeviceName;
+            result =
+                    result
+                            + ", ipAddr = "
+                            + this.mIpAddress
+                            + ", port = "
+                            + this.mPort
+                            + ", name = "
+                            + this.mDeviceName;
         }
-        return result + ", connectionType = " + this.mConnectionType + ", flags = " + this.mFlags + ", mode = " + this.mMode + ", initParams = " + this.mPrameterGroups.get(SemWifiDisplayParameter.INIT_PARAMETER).toString() + ", getParams = " + this.mPrameterGroups.get(SemWifiDisplayParameter.GET_PARAMETER).toString() + ", setParams = " + this.mPrameterGroups.get(SemWifiDisplayParameter.SET_PARAMETER).toString();
+        return result
+                + ", connectionType = "
+                + this.mConnectionType
+                + ", flags = "
+                + this.mFlags
+                + ", mode = "
+                + this.mMode
+                + ", initParams = "
+                + this.mPrameterGroups.get(SemWifiDisplayParameter.INIT_PARAMETER).toString()
+                + ", getParams = "
+                + this.mPrameterGroups.get(SemWifiDisplayParameter.GET_PARAMETER).toString()
+                + ", setParams = "
+                + this.mPrameterGroups.get(SemWifiDisplayParameter.SET_PARAMETER).toString();
     }
 
     public static final class Builder {
@@ -274,24 +318,38 @@ public final class SemWifiDisplayConfig implements Parcelable {
         private int mConnectionType = 1;
         private int mFlags = 0;
         private int mMode = 0;
-        private HashMap<String, List<SemWifiDisplayParameter>> mPrameterGroups = new HashMap<String, List<SemWifiDisplayParameter>>() { // from class: android.hardware.display.SemWifiDisplayConfig.Builder.1
-            {
-                put(SemWifiDisplayParameter.INIT_PARAMETER, new ArrayList());
-                put(SemWifiDisplayParameter.GET_PARAMETER, new ArrayList());
-                put(SemWifiDisplayParameter.SET_PARAMETER, new ArrayList());
-            }
-        };
+        private HashMap<String, List<SemWifiDisplayParameter>> mPrameterGroups =
+                new HashMap<String, List<SemWifiDisplayParameter>>() { // from class:
+                    // android.hardware.display.SemWifiDisplayConfig.Builder.1
+                    {
+                        put(SemWifiDisplayParameter.INIT_PARAMETER, new ArrayList());
+                        put(SemWifiDisplayParameter.GET_PARAMETER, new ArrayList());
+                        put(SemWifiDisplayParameter.SET_PARAMETER, new ArrayList());
+                    }
+                };
 
         public SemWifiDisplayConfig build() {
             SemWifiDisplayConfig wifiDisplayConfig;
             if (this.mConnectionType == 1) {
                 wifiDisplayConfig = new SemWifiDisplayConfig(this.mP2pMacAddress);
             } else {
-                wifiDisplayConfig = new SemWifiDisplayConfig(this.mConnectionType, this.mIpAddress, this.mPort, this.mDeviceName, this.mP2pMacAddress);
+                wifiDisplayConfig =
+                        new SemWifiDisplayConfig(
+                                this.mConnectionType,
+                                this.mIpAddress,
+                                this.mPort,
+                                this.mDeviceName,
+                                this.mP2pMacAddress);
             }
-            wifiDisplayConfig.addParameters(SemWifiDisplayParameter.INIT_PARAMETER, this.mPrameterGroups.get(SemWifiDisplayParameter.INIT_PARAMETER));
-            wifiDisplayConfig.addParameters(SemWifiDisplayParameter.GET_PARAMETER, this.mPrameterGroups.get(SemWifiDisplayParameter.GET_PARAMETER));
-            wifiDisplayConfig.addParameters(SemWifiDisplayParameter.SET_PARAMETER, this.mPrameterGroups.get(SemWifiDisplayParameter.SET_PARAMETER));
+            wifiDisplayConfig.addParameters(
+                    SemWifiDisplayParameter.INIT_PARAMETER,
+                    this.mPrameterGroups.get(SemWifiDisplayParameter.INIT_PARAMETER));
+            wifiDisplayConfig.addParameters(
+                    SemWifiDisplayParameter.GET_PARAMETER,
+                    this.mPrameterGroups.get(SemWifiDisplayParameter.GET_PARAMETER));
+            wifiDisplayConfig.addParameters(
+                    SemWifiDisplayParameter.SET_PARAMETER,
+                    this.mPrameterGroups.get(SemWifiDisplayParameter.SET_PARAMETER));
             wifiDisplayConfig.setMode(this.mMode);
             wifiDisplayConfig.addFlags(this.mFlags);
             return wifiDisplayConfig;
@@ -303,7 +361,8 @@ public final class SemWifiDisplayConfig implements Parcelable {
             return this;
         }
 
-        public Builder setApConnection(String ipAddress, String port, String deviceName, String p2pMacAddress) {
+        public Builder setApConnection(
+                String ipAddress, String port, String deviceName, String p2pMacAddress) {
             this.mConnectionType = 2;
             this.mIpAddress = ipAddress;
             this.mPort = port;
@@ -312,7 +371,8 @@ public final class SemWifiDisplayConfig implements Parcelable {
             return this;
         }
 
-        public Builder setUsbConnection(String ipAddress, String port, String deviceName, String p2pMacAddress) {
+        public Builder setUsbConnection(
+                String ipAddress, String port, String deviceName, String p2pMacAddress) {
             this.mConnectionType = 3;
             this.mIpAddress = ipAddress;
             this.mPort = port;

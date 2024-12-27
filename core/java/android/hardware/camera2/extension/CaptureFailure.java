@@ -7,21 +7,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class CaptureFailure implements Parcelable {
-    public static final Parcelable.Creator<CaptureFailure> CREATOR = new Parcelable.Creator<CaptureFailure>() { // from class: android.hardware.camera2.extension.CaptureFailure.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CaptureFailure createFromParcel(Parcel _aidl_source) {
-            CaptureFailure _aidl_out = new CaptureFailure();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CaptureFailure> CREATOR =
+            new Parcelable.Creator<CaptureFailure>() { // from class:
+                // android.hardware.camera2.extension.CaptureFailure.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CaptureFailure createFromParcel(Parcel _aidl_source) {
+                    CaptureFailure _aidl_out = new CaptureFailure();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CaptureFailure[] newArray(int _aidl_size) {
-            return new CaptureFailure[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CaptureFailure[] newArray(int _aidl_size) {
+                    return new CaptureFailure[_aidl_size];
+                }
+            };
     public String errorPhysicalCameraId;
     public CaptureRequest request;
     public int reason = 0;

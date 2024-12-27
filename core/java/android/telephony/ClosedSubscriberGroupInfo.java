@@ -2,23 +2,27 @@ package android.telephony;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class ClosedSubscriberGroupInfo implements Parcelable {
-    public static final Parcelable.Creator<ClosedSubscriberGroupInfo> CREATOR = new Parcelable.Creator<ClosedSubscriberGroupInfo>() { // from class: android.telephony.ClosedSubscriberGroupInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ClosedSubscriberGroupInfo createFromParcel(Parcel in) {
-            return ClosedSubscriberGroupInfo.createFromParcelBody(in);
-        }
+    public static final Parcelable.Creator<ClosedSubscriberGroupInfo> CREATOR =
+            new Parcelable.Creator<
+                    ClosedSubscriberGroupInfo>() { // from class:
+                                                   // android.telephony.ClosedSubscriberGroupInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ClosedSubscriberGroupInfo createFromParcel(Parcel in) {
+                    return ClosedSubscriberGroupInfo.createFromParcelBody(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ClosedSubscriberGroupInfo[] newArray(int size) {
-            return new ClosedSubscriberGroupInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ClosedSubscriberGroupInfo[] newArray(int size) {
+                    return new ClosedSubscriberGroupInfo[size];
+                }
+            };
     private static final String TAG = "ClosedSubscriberGroupInfo";
     private final int mCsgIdentity;
     private final boolean mCsgIndicator;
@@ -43,7 +47,10 @@ public final class ClosedSubscriberGroupInfo implements Parcelable {
     }
 
     public int hashCode() {
-        return Objects.hash(Boolean.valueOf(this.mCsgIndicator), this.mHomeNodebName, Integer.valueOf(this.mCsgIdentity));
+        return Objects.hash(
+                Boolean.valueOf(this.mCsgIndicator),
+                this.mHomeNodebName,
+                Integer.valueOf(this.mCsgIdentity));
     }
 
     public boolean equals(Object other) {
@@ -51,11 +58,18 @@ public final class ClosedSubscriberGroupInfo implements Parcelable {
             return false;
         }
         ClosedSubscriberGroupInfo o = (ClosedSubscriberGroupInfo) other;
-        return this.mCsgIndicator == o.mCsgIndicator && o.mHomeNodebName.equals(this.mHomeNodebName) && this.mCsgIdentity == o.mCsgIdentity;
+        return this.mCsgIndicator == o.mCsgIndicator
+                && o.mHomeNodebName.equals(this.mHomeNodebName)
+                && this.mCsgIdentity == o.mCsgIdentity;
     }
 
     public String toString() {
-        return "ClosedSubscriberGroupInfo:{ mCsgIndicator = " + this.mCsgIndicator + " mHomeNodebName = " + this.mHomeNodebName + " mCsgIdentity = " + this.mCsgIdentity;
+        return "ClosedSubscriberGroupInfo:{ mCsgIndicator = "
+                + this.mCsgIndicator
+                + " mHomeNodebName = "
+                + this.mHomeNodebName
+                + " mCsgIdentity = "
+                + this.mCsgIdentity;
     }
 
     @Override // android.os.Parcelable

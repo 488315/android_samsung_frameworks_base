@@ -14,8 +14,8 @@ public interface IGameStateListener extends IInterface {
 
     public static class Default implements IGameStateListener {
         @Override // android.app.IGameStateListener
-        public void onGameStateChanged(String packageName, GameState state, int userId) throws RemoteException {
-        }
+        public void onGameStateChanged(String packageName, GameState state, int userId)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IGameStateListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGameStateListener {
+    public abstract static class Stub extends Binder implements IGameStateListener {
         static final int TRANSACTION_onGameStateChanged = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface IGameStateListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IGameStateListener.DESCRIPTOR);
             }
@@ -99,7 +100,8 @@ public interface IGameStateListener extends IInterface {
             }
 
             @Override // android.app.IGameStateListener
-            public void onGameStateChanged(String packageName, GameState state, int userId) throws RemoteException {
+            public void onGameStateChanged(String packageName, GameState state, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IGameStateListener.DESCRIPTOR);

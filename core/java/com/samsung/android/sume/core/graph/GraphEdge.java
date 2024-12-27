@@ -1,9 +1,11 @@
 package com.samsung.android.sume.core.graph;
 
 import android.util.Pair;
+
 import com.samsung.android.sume.core.channel.BufferChannel;
 import com.samsung.android.sume.core.evaluate.EvalNone;
 import com.samsung.android.sume.core.evaluate.Evaluator;
+
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -41,12 +43,16 @@ public class GraphEdge {
     }
 
     public Evaluator getEvaluator() {
-        return (Evaluator) Optional.ofNullable(this.evaluator).orElseGet(new Supplier() { // from class: com.samsung.android.sume.core.graph.GraphEdge$$ExternalSyntheticLambda0
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                return new EvalNone();
-            }
-        });
+        return (Evaluator)
+                Optional.ofNullable(this.evaluator)
+                        .orElseGet(
+                                new Supplier() { // from class:
+                                                 // com.samsung.android.sume.core.graph.GraphEdge$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Supplier
+                                    public final Object get() {
+                                        return new EvalNone();
+                                    }
+                                });
     }
 
     public BufferChannel getBufferChannel() {
@@ -63,12 +69,17 @@ public class GraphEdge {
     }
 
     public String getBeginNode() {
-        return (String) Optional.ofNullable(this.node).map(new Function() { // from class: com.samsung.android.sume.core.graph.GraphEdge$$ExternalSyntheticLambda1
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return GraphEdge.lambda$getBeginNode$0((Pair) obj);
-            }
-        }).orElse("n/a");
+        return (String)
+                Optional.ofNullable(this.node)
+                        .map(
+                                new Function() { // from class:
+                                                 // com.samsung.android.sume.core.graph.GraphEdge$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        return GraphEdge.lambda$getBeginNode$0((Pair) obj);
+                                    }
+                                })
+                        .orElse("n/a");
     }
 
     /* JADX WARN: Multi-variable type inference failed */
@@ -77,11 +88,16 @@ public class GraphEdge {
     }
 
     public String getEndNode() {
-        return (String) Optional.ofNullable(this.node).map(new Function() { // from class: com.samsung.android.sume.core.graph.GraphEdge$$ExternalSyntheticLambda2
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return GraphEdge.lambda$getEndNode$1((Pair) obj);
-            }
-        }).orElse("n/a");
+        return (String)
+                Optional.ofNullable(this.node)
+                        .map(
+                                new Function() { // from class:
+                                                 // com.samsung.android.sume.core.graph.GraphEdge$$ExternalSyntheticLambda2
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        return GraphEdge.lambda$getEndNode$1((Pair) obj);
+                                    }
+                                })
+                        .orElse("n/a");
     }
 }

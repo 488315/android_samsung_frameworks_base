@@ -7,13 +7,15 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.android.internal.os.IParcelFileDescriptorFactory;
 
 /* loaded from: classes5.dex */
 public interface IMediaContainerService extends IInterface {
     long calculateInstalledSize(String str, String str2) throws RemoteException;
 
-    int copyPackage(String str, IParcelFileDescriptorFactory iParcelFileDescriptorFactory) throws RemoteException;
+    int copyPackage(String str, IParcelFileDescriptorFactory iParcelFileDescriptorFactory)
+            throws RemoteException;
 
     PackageInfoLite getMinimalPackageInfo(String str, int i, String str2) throws RemoteException;
 
@@ -21,12 +23,14 @@ public interface IMediaContainerService extends IInterface {
 
     public static class Default implements IMediaContainerService {
         @Override // com.android.internal.app.IMediaContainerService
-        public int copyPackage(String packagePath, IParcelFileDescriptorFactory target) throws RemoteException {
+        public int copyPackage(String packagePath, IParcelFileDescriptorFactory target)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.internal.app.IMediaContainerService
-        public PackageInfoLite getMinimalPackageInfo(String packagePath, int flags, String abiOverride) throws RemoteException {
+        public PackageInfoLite getMinimalPackageInfo(
+                String packagePath, int flags, String abiOverride) throws RemoteException {
             return null;
         }
 
@@ -36,7 +40,8 @@ public interface IMediaContainerService extends IInterface {
         }
 
         @Override // com.android.internal.app.IMediaContainerService
-        public long calculateInstalledSize(String packagePath, String abiOverride) throws RemoteException {
+        public long calculateInstalledSize(String packagePath, String abiOverride)
+                throws RemoteException {
             return 0L;
         }
 
@@ -46,7 +51,7 @@ public interface IMediaContainerService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMediaContainerService {
+    public abstract static class Stub extends Binder implements IMediaContainerService {
         public static final String DESCRIPTOR = "com.android.internal.app.IMediaContainerService";
         static final int TRANSACTION_calculateInstalledSize = 4;
         static final int TRANSACTION_copyPackage = 1;
@@ -94,7 +99,8 @@ public interface IMediaContainerService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -105,7 +111,8 @@ public interface IMediaContainerService extends IInterface {
             switch (code) {
                 case 1:
                     String _arg0 = data.readString();
-                    IParcelFileDescriptorFactory _arg1 = IParcelFileDescriptorFactory.Stub.asInterface(data.readStrongBinder());
+                    IParcelFileDescriptorFactory _arg1 =
+                            IParcelFileDescriptorFactory.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result = copyPackage(_arg0, _arg1);
                     reply.writeNoException();
@@ -157,7 +164,8 @@ public interface IMediaContainerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IMediaContainerService
-            public int copyPackage(String packagePath, IParcelFileDescriptorFactory target) throws RemoteException {
+            public int copyPackage(String packagePath, IParcelFileDescriptorFactory target)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -175,7 +183,8 @@ public interface IMediaContainerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IMediaContainerService
-            public PackageInfoLite getMinimalPackageInfo(String packagePath, int flags, String abiOverride) throws RemoteException {
+            public PackageInfoLite getMinimalPackageInfo(
+                    String packagePath, int flags, String abiOverride) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -185,7 +194,8 @@ public interface IMediaContainerService extends IInterface {
                     _data.writeString(abiOverride);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    PackageInfoLite _result = (PackageInfoLite) _reply.readTypedObject(PackageInfoLite.CREATOR);
+                    PackageInfoLite _result =
+                            (PackageInfoLite) _reply.readTypedObject(PackageInfoLite.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -211,7 +221,8 @@ public interface IMediaContainerService extends IInterface {
             }
 
             @Override // com.android.internal.app.IMediaContainerService
-            public long calculateInstalledSize(String packagePath, String abiOverride) throws RemoteException {
+            public long calculateInstalledSize(String packagePath, String abiOverride)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

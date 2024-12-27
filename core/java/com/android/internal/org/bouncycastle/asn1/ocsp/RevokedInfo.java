@@ -24,7 +24,10 @@ public class RevokedInfo extends ASN1Object {
     private RevokedInfo(ASN1Sequence seq) {
         this.revocationTime = ASN1GeneralizedTime.getInstance(seq.getObjectAt(0));
         if (seq.size() > 1) {
-            this.revocationReason = CRLReason.getInstance(ASN1Enumerated.getInstance((ASN1TaggedObject) seq.getObjectAt(1), true));
+            this.revocationReason =
+                    CRLReason.getInstance(
+                            ASN1Enumerated.getInstance(
+                                    (ASN1TaggedObject) seq.getObjectAt(1), true));
         }
     }
 
@@ -50,7 +53,8 @@ public class RevokedInfo extends ASN1Object {
         return this.revocationReason;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(2);
         v.add(this.revocationTime);

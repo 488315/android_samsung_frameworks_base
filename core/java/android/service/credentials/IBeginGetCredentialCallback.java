@@ -10,7 +10,8 @@ import android.text.TextUtils;
 
 /* loaded from: classes3.dex */
 public interface IBeginGetCredentialCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.service.credentials.IBeginGetCredentialCallback";
+    public static final String DESCRIPTOR =
+            "android.service.credentials.IBeginGetCredentialCallback";
 
     void onCancellable(ICancellationSignal iCancellationSignal) throws RemoteException;
 
@@ -20,16 +21,13 @@ public interface IBeginGetCredentialCallback extends IInterface {
 
     public static class Default implements IBeginGetCredentialCallback {
         @Override // android.service.credentials.IBeginGetCredentialCallback
-        public void onSuccess(BeginGetCredentialResponse response) throws RemoteException {
-        }
+        public void onSuccess(BeginGetCredentialResponse response) throws RemoteException {}
 
         @Override // android.service.credentials.IBeginGetCredentialCallback
-        public void onFailure(String errorType, CharSequence message) throws RemoteException {
-        }
+        public void onFailure(String errorType, CharSequence message) throws RemoteException {}
 
         @Override // android.service.credentials.IBeginGetCredentialCallback
-        public void onCancellable(ICancellationSignal cancellation) throws RemoteException {
-        }
+        public void onCancellable(ICancellationSignal cancellation) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -37,7 +35,7 @@ public interface IBeginGetCredentialCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBeginGetCredentialCallback {
+    public abstract static class Stub extends Binder implements IBeginGetCredentialCallback {
         static final int TRANSACTION_onCancellable = 3;
         static final int TRANSACTION_onFailure = 2;
         static final int TRANSACTION_onSuccess = 1;
@@ -81,7 +79,8 @@ public interface IBeginGetCredentialCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IBeginGetCredentialCallback.DESCRIPTOR);
             }
@@ -91,18 +90,22 @@ public interface IBeginGetCredentialCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    BeginGetCredentialResponse _arg0 = (BeginGetCredentialResponse) data.readTypedObject(BeginGetCredentialResponse.CREATOR);
+                    BeginGetCredentialResponse _arg0 =
+                            (BeginGetCredentialResponse)
+                                    data.readTypedObject(BeginGetCredentialResponse.CREATOR);
                     data.enforceNoDataAvail();
                     onSuccess(_arg0);
                     return true;
                 case 2:
                     String _arg02 = data.readString();
-                    CharSequence _arg1 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg1 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     onFailure(_arg02, _arg1);
                     return true;
                 case 3:
-                    ICancellationSignal _arg03 = ICancellationSignal.Stub.asInterface(data.readStrongBinder());
+                    ICancellationSignal _arg03 =
+                            ICancellationSignal.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onCancellable(_arg03);
                     return true;

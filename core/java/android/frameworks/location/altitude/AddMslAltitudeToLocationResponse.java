@@ -7,21 +7,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class AddMslAltitudeToLocationResponse implements Parcelable {
-    public static final Parcelable.Creator<AddMslAltitudeToLocationResponse> CREATOR = new Parcelable.Creator<AddMslAltitudeToLocationResponse>() { // from class: android.frameworks.location.altitude.AddMslAltitudeToLocationResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AddMslAltitudeToLocationResponse createFromParcel(Parcel _aidl_source) {
-            AddMslAltitudeToLocationResponse _aidl_out = new AddMslAltitudeToLocationResponse();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AddMslAltitudeToLocationResponse> CREATOR =
+            new Parcelable.Creator<AddMslAltitudeToLocationResponse>() { // from class:
+                // android.frameworks.location.altitude.AddMslAltitudeToLocationResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AddMslAltitudeToLocationResponse createFromParcel(Parcel _aidl_source) {
+                    AddMslAltitudeToLocationResponse _aidl_out =
+                            new AddMslAltitudeToLocationResponse();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AddMslAltitudeToLocationResponse[] newArray(int _aidl_size) {
-            return new AddMslAltitudeToLocationResponse[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AddMslAltitudeToLocationResponse[] newArray(int _aidl_size) {
+                    return new AddMslAltitudeToLocationResponse[_aidl_size];
+                }
+            };
     public double mslAltitudeMeters = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
     public float mslAltitudeAccuracyMeters = 0.0f;
     public boolean success = false;

@@ -3,7 +3,9 @@ package com.android.server.hdmi;
 import android.hardware.hdmi.HdmiDeviceInfo;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
+
 import java.io.UnsupportedEncodingException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -37,21 +39,42 @@ public final class NewDeviceAction extends HdmiCecFeatureAction {
             z = true;
         }
         if (!z) {
-            Slog.w("NewDeviceAction", String.format("Device not found (%02x, %04x)", Integer.valueOf(i), Integer.valueOf(i2)));
+            Slog.w(
+                    "NewDeviceAction",
+                    String.format(
+                            "Device not found (%02x, %04x)",
+                            Integer.valueOf(i), Integer.valueOf(i2)));
             return;
         }
         if (this.mDisplayName == null) {
             this.mDisplayName = "";
         }
         HdmiCecLocalDeviceTv hdmiCecLocalDeviceTv = (HdmiCecLocalDeviceTv) hdmiCecLocalDevice;
-        HdmiDeviceInfo.Builder portId = HdmiDeviceInfo.cecDeviceBuilder().setLogicalAddress(i).setPhysicalAddress(i2).setPortId(hdmiCecLocalDeviceTv.mService.mHdmiCecNetwork.physicalAddressToPortId(i2));
+        HdmiDeviceInfo.Builder portId =
+                HdmiDeviceInfo.cecDeviceBuilder()
+                        .setLogicalAddress(i)
+                        .setPhysicalAddress(i2)
+                        .setPortId(
+                                hdmiCecLocalDeviceTv.mService.mHdmiCecNetwork
+                                        .physicalAddressToPortId(i2));
         int i3 = this.mDeviceType;
-        HdmiDeviceInfo build = portId.setDeviceType(i3).setVendorId(this.mVendorId).setDisplayName(this.mDisplayName).build();
+        HdmiDeviceInfo build =
+                portId.setDeviceType(i3)
+                        .setVendorId(this.mVendorId)
+                        .setDisplayName(this.mDisplayName)
+                        .build();
         HdmiDeviceInfo hdmiDeviceInfo = this.mOldDeviceInfo;
-        if (hdmiDeviceInfo != null && hdmiDeviceInfo.getLogicalAddress() == i && this.mOldDeviceInfo.getPhysicalAddress() == i2 && this.mOldDeviceInfo.getDeviceType() == i3 && this.mOldDeviceInfo.getVendorId() == this.mVendorId && this.mOldDeviceInfo.getDisplayName().equals(this.mDisplayName)) {
+        if (hdmiDeviceInfo != null
+                && hdmiDeviceInfo.getLogicalAddress() == i
+                && this.mOldDeviceInfo.getPhysicalAddress() == i2
+                && this.mOldDeviceInfo.getDeviceType() == i3
+                && this.mOldDeviceInfo.getVendorId() == this.mVendorId
+                && this.mOldDeviceInfo.getDisplayName().equals(this.mDisplayName)) {
             hdmiCecLocalDeviceTv.processDelayedMessages(i);
             Slog.d("NewDeviceAction", "Ignore NewDevice, deviceInfo is same as current device");
-            Slog.d("NewDeviceAction", "Old:[" + this.mOldDeviceInfo.toString() + "]; New:[" + build.toString() + "]");
+            Slog.d(
+                    "NewDeviceAction",
+                    "Old:[" + this.mOldDeviceInfo.toString() + "]; New:[" + build.toString() + "]");
             return;
         }
         Slog.d("NewDeviceAction", "Add NewDevice:[" + build.toString() + "]");
@@ -95,7 +118,8 @@ public final class NewDeviceAction extends HdmiCecFeatureAction {
         HdmiCecLocalDevice hdmiCecLocalDevice = this.mSource;
         hdmiCecLocalDevice.assertRunOnServiceThread();
         SparseArray sparseArray = (SparseArray) hdmiCecLocalDevice.mCecMessageCache.mCache.get(i);
-        HdmiCecMessage hdmiCecMessage = sparseArray == null ? null : (HdmiCecMessage) sparseArray.get(i2);
+        HdmiCecMessage hdmiCecMessage =
+                sparseArray == null ? null : (HdmiCecMessage) sparseArray.get(i2);
         if (hdmiCecMessage != null) {
             return processCommand(hdmiCecMessage);
         }
@@ -176,16 +200,32 @@ public final class NewDeviceAction extends HdmiCecFeatureAction {
         int i2 = this.mDevicePhysicalAddress;
         if (cecDeviceInfo == null || cecDeviceInfo.getPhysicalAddress() != i2) {
             Slog.d("NewDeviceAction", "Start NewDeviceAction with default deviceInfo");
-            HdmiDeviceInfo build = HdmiDeviceInfo.cecDeviceBuilder().setLogicalAddress(i).setPhysicalAddress(i2).setPortId(((HdmiCecLocalDeviceTv) hdmiCecLocalDevice).mService.mHdmiCecNetwork.physicalAddressToPortId(i2)).setDeviceType(this.mDeviceType).setVendorId(16777215).build();
+            HdmiDeviceInfo build =
+                    HdmiDeviceInfo.cecDeviceBuilder()
+                            .setLogicalAddress(i)
+                            .setPhysicalAddress(i2)
+                            .setPortId(
+                                    ((HdmiCecLocalDeviceTv) hdmiCecLocalDevice)
+                                            .mService.mHdmiCecNetwork.physicalAddressToPortId(i2))
+                            .setDeviceType(this.mDeviceType)
+                            .setVendorId(16777215)
+                            .build();
             HdmiDeviceInfo hdmiDeviceInfo = this.mOldDeviceInfo;
             HdmiControlService hdmiControlService = hdmiCecLocalDevice.mService;
             if (hdmiDeviceInfo != null) {
-                AnyMotionDetector$$ExternalSyntheticOutline0.m(i2, "Remove device by NewDeviceAction, logical address conflicts: ", "NewDeviceAction");
+                AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                        i2,
+                        "Remove device by NewDeviceAction, logical address conflicts: ",
+                        "NewDeviceAction");
                 hdmiControlService.mHdmiCecNetwork.removeCecDevice(hdmiCecLocalDevice, i);
             }
             hdmiControlService.mHdmiCecNetwork.addCecDevice(build);
         } else {
-            Slog.d("NewDeviceAction", "Start NewDeviceAction with old deviceInfo:[" + this.mOldDeviceInfo.toString() + "]");
+            Slog.d(
+                    "NewDeviceAction",
+                    "Start NewDeviceAction with old deviceInfo:["
+                            + this.mOldDeviceInfo.toString()
+                            + "]");
         }
         requestOsdName(true);
     }

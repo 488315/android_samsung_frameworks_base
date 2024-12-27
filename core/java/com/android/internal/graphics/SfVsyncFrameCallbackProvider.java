@@ -4,7 +4,8 @@ import android.animation.AnimationHandler;
 import android.view.Choreographer;
 
 /* loaded from: classes5.dex */
-public final class SfVsyncFrameCallbackProvider implements AnimationHandler.AnimationFrameCallbackProvider {
+public final class SfVsyncFrameCallbackProvider
+        implements AnimationHandler.AnimationFrameCallbackProvider {
     private final Choreographer mChoreographer;
 
     public SfVsyncFrameCallbackProvider() {

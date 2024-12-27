@@ -9,7 +9,9 @@ import android.os.UserHandle;
 import android.sec.enterprise.EnterpriseDeviceManager;
 import android.sec.enterprise.IEDMProxy;
 import android.util.Log;
+
 import com.sec.android.iaft.SmLib_IafdConstant;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,7 +26,8 @@ public class KnoxInfoImpl {
 
     public static synchronized Bundle getCachedKnoxInfo(Context ctx, String name) {
         synchronized (KnoxInfoImpl.class) {
-            if (cachedTime.containsKey(name) && System.nanoTime() - cachedTime.get(name).longValue() < INTERVAL_NANO_SEC) {
+            if (cachedTime.containsKey(name)
+                    && System.nanoTime() - cachedTime.get(name).longValue() < INTERVAL_NANO_SEC) {
                 return cached_knox_info.get(name);
             }
             Log.d(TAG, "put into cache");
@@ -54,7 +57,8 @@ public class KnoxInfoImpl {
     private static String getPersonalModeName(int userId) {
         if (SemPersonaManager.getPersonaService() != null) {
             try {
-                String customName = SemPersonaManager.getPersonaService().getPersonalModeName(userId);
+                String customName =
+                        SemPersonaManager.getPersonaService().getPersonalModeName(userId);
                 return customName;
             } catch (Exception e) {
                 Log.e(TAG, "getPersonalModeName failed", e);
@@ -75,9 +79,11 @@ public class KnoxInfoImpl {
                 if (!m_bIsKnoxInfoInitialized) {
                     if (SemPersonaManager.isKnoxId(userid)) {
                         mKnoxInfo.putString("isKnoxMode", "true");
-                        IEDMProxy lService = EnterpriseDeviceManager.EDMProxyServiceHelper.getService();
+                        IEDMProxy lService =
+                                EnterpriseDeviceManager.EDMProxyServiceHelper.getService();
                         if (lService != null) {
-                            if (lService.isPackageAllowedToAccessExternalSdcard(userid, Binder.getCallingUid())) {
+                            if (lService.isPackageAllowedToAccessExternalSdcard(
+                                    userid, Binder.getCallingUid())) {
                                 mKnoxInfo.putString("isBlockExternalSD", "false");
                             } else {
                                 mKnoxInfo.putString("isBlockExternalSD", "true");
@@ -90,15 +96,20 @@ public class KnoxInfoImpl {
                         mKnoxInfo.putString("isSamsungAccountBlocked", "true");
                     }
                     if (SemPersonaManager.isDoEnabled(userid)) {
-                        IEDMProxy lService2 = EnterpriseDeviceManager.EDMProxyServiceHelper.getService();
+                        IEDMProxy lService2 =
+                                EnterpriseDeviceManager.EDMProxyServiceHelper.getService();
                         if (lService2 != null) {
-                            if (lService2.isPackageAllowedToAccessExternalSdcard(userid, Binder.getCallingUid())) {
+                            if (lService2.isPackageAllowedToAccessExternalSdcard(
+                                    userid, Binder.getCallingUid())) {
                                 mKnoxInfo.putString("isBlockExternalSD", "false");
                             } else {
                                 mKnoxInfo.putString("isBlockExternalSD", "true");
                             }
                         } else {
-                            Log.e(TAG, "getService() returns null, set isBlockExternalSD to false. (DO)");
+                            Log.e(
+                                    TAG,
+                                    "getService() returns null, set isBlockExternalSD to false."
+                                        + " (DO)");
                             mKnoxInfo.putString("isBlockExternalSD", "false");
                         }
                     }
@@ -191,8 +202,10 @@ public class KnoxInfoImpl {
                                 mKnoxInfo.putInt("getContainerCount", ids2.size());
                                 for (int i2 = 0; i2 < ids2.size(); i2++) {
                                     int containerId2 = ids2.get(i2).intValue();
-                                    byte[] containerAppIcon2 = SemPersonaManager.getKnoxIcon(containerId2);
-                                    String containerName2 = SemPersonaManager.getPersonaName(ctx, containerId2);
+                                    byte[] containerAppIcon2 =
+                                            SemPersonaManager.getKnoxIcon(containerId2);
+                                    String containerName2 =
+                                            SemPersonaManager.getPersonaName(ctx, containerId2);
                                     if (SemPersonaManager.isKnoxId(containerId2)) {
                                         mKnoxInfo.putInt("getContainerOrder_" + i2, 1);
                                     } else {
@@ -201,8 +214,11 @@ public class KnoxInfoImpl {
                                     }
                                     mKnoxInfo.putInt("getContainerId_" + i2, containerId2);
                                     mKnoxInfo.putString("getContainerLabel_" + i2, containerName2);
-                                    mKnoxInfo.putByteArray("getContainerAppIcon_" + i2, containerAppIcon2);
-                                    mKnoxInfo.putBoolean("isSecureFolder_" + i2, SemPersonaManager.isSecureFolderId(containerId2));
+                                    mKnoxInfo.putByteArray(
+                                            "getContainerAppIcon_" + i2, containerAppIcon2);
+                                    mKnoxInfo.putBoolean(
+                                            "isSecureFolder_" + i2,
+                                            SemPersonaManager.isSecureFolderId(containerId2));
                                 }
                             }
                         } catch (Exception e3) {

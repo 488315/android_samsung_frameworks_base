@@ -11,15 +11,15 @@ public class BadgeExtractor implements NotificationSignalExtractor {
     public RankingConfig mConfig;
 
     @Override // com.android.server.notification.NotificationSignalExtractor
-    public final void initialize(Context context, NotificationUsageStats notificationUsageStats) {
-    }
+    public final void initialize(Context context, NotificationUsageStats notificationUsageStats) {}
 
     @Override // com.android.server.notification.NotificationSignalExtractor
     public final RankingReconsideration process(NotificationRecord notificationRecord) {
         RankingConfig rankingConfig;
         boolean z;
         boolean z2;
-        if (notificationRecord.sbn.getNotification() == null || (rankingConfig = this.mConfig) == null) {
+        if (notificationRecord.sbn.getNotification() == null
+                || (rankingConfig = this.mConfig) == null) {
             return null;
         }
         PreferencesHelper preferencesHelper = (PreferencesHelper) rankingConfig;
@@ -28,7 +28,14 @@ public class BadgeExtractor implements NotificationSignalExtractor {
             z = false;
         } else {
             if (preferencesHelper.mBadgingEnabled.indexOfKey(identifier) < 0) {
-                preferencesHelper.mBadgingEnabled.put(identifier, Settings.Secure.getIntForUser(preferencesHelper.mContext.getContentResolver(), "notification_badging", 1, identifier) != 0);
+                preferencesHelper.mBadgingEnabled.put(
+                        identifier,
+                        Settings.Secure.getIntForUser(
+                                        preferencesHelper.mContext.getContentResolver(),
+                                        "notification_badging",
+                                        1,
+                                        identifier)
+                                != 0);
             }
             z = preferencesHelper.mBadgingEnabled.get(identifier, true);
         }
@@ -49,14 +56,17 @@ public class BadgeExtractor implements NotificationSignalExtractor {
         } else {
             notificationRecord.mShowBadge = false;
         }
-        if (notificationRecord.mIntercept && (notificationRecord.mSuppressedVisualEffects & 64) != 0) {
+        if (notificationRecord.mIntercept
+                && (notificationRecord.mSuppressedVisualEffects & 64) != 0) {
             notificationRecord.mShowBadge = false;
         }
-        Notification.BubbleMetadata bubbleMetadata = notificationRecord.sbn.getNotification().getBubbleMetadata();
+        Notification.BubbleMetadata bubbleMetadata =
+                notificationRecord.sbn.getNotification().getBubbleMetadata();
         if (bubbleMetadata != null && bubbleMetadata.isNotificationSuppressed()) {
             notificationRecord.mShowBadge = false;
         }
-        if (((PreferencesHelper) this.mConfig).mIsMediaNotificationFilteringEnabled && notificationRecord.sbn.getNotification().isMediaNotification()) {
+        if (((PreferencesHelper) this.mConfig).mIsMediaNotificationFilteringEnabled
+                && notificationRecord.sbn.getNotification().isMediaNotification()) {
             notificationRecord.mShowBadge = false;
         }
         return null;
@@ -68,6 +78,5 @@ public class BadgeExtractor implements NotificationSignalExtractor {
     }
 
     @Override // com.android.server.notification.NotificationSignalExtractor
-    public final void setZenHelper(ZenModeHelper zenModeHelper) {
-    }
+    public final void setZenHelper(ZenModeHelper zenModeHelper) {}
 }

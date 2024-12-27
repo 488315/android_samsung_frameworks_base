@@ -3,7 +3,6 @@ package com.android.internal.dynamicanimation.animation;
 import android.hardware.scontext.SContextConstants;
 import android.util.AndroidRuntimeException;
 import android.util.FloatProperty;
-import com.android.internal.dynamicanimation.animation.DynamicAnimation;
 
 /* loaded from: classes5.dex */
 public final class SpringAnimation extends DynamicAnimation<SpringAnimation> {
@@ -85,10 +84,12 @@ public final class SpringAnimation extends DynamicAnimation<SpringAnimation> {
 
     public void skipToEnd() {
         if (!canSkipToEnd()) {
-            throw new UnsupportedOperationException("Spring animations can only come to an end when there is damping");
+            throw new UnsupportedOperationException(
+                    "Spring animations can only come to an end when there is damping");
         }
         if (!isCurrentThread()) {
-            throw new AndroidRuntimeException("Animations may only be started on the same thread as the animation handler");
+            throw new AndroidRuntimeException(
+                    "Animations may only be started on the same thread as the animation handler");
         }
         if (this.mRunning) {
             this.mEndRequested = true;
@@ -101,14 +102,18 @@ public final class SpringAnimation extends DynamicAnimation<SpringAnimation> {
 
     private void sanityCheck() {
         if (this.mSpring == null) {
-            throw new UnsupportedOperationException("Incomplete SpringAnimation: Either final position or a spring force needs to be set.");
+            throw new UnsupportedOperationException(
+                    "Incomplete SpringAnimation: Either final position or a spring force needs to"
+                        + " be set.");
         }
         double finalPosition = this.mSpring.getFinalPosition();
         if (finalPosition > this.mMaxValue) {
-            throw new UnsupportedOperationException("Final position of the spring cannot be greater than the max value.");
+            throw new UnsupportedOperationException(
+                    "Final position of the spring cannot be greater than the max value.");
         }
         if (finalPosition < this.mMinValue) {
-            throw new UnsupportedOperationException("Final position of the spring cannot be less than the min value.");
+            throw new UnsupportedOperationException(
+                    "Final position of the spring cannot be less than the min value.");
         }
     }
 
@@ -125,14 +130,17 @@ public final class SpringAnimation extends DynamicAnimation<SpringAnimation> {
             return true;
         }
         if (this.mPendingPosition != Float.MAX_VALUE) {
-            DynamicAnimation.MassState massState = this.mSpring.updateValues(this.mValue, this.mVelocity, deltaT / 2);
+            DynamicAnimation.MassState massState =
+                    this.mSpring.updateValues(this.mValue, this.mVelocity, deltaT / 2);
             this.mSpring.setFinalPosition(this.mPendingPosition);
             this.mPendingPosition = Float.MAX_VALUE;
-            DynamicAnimation.MassState massState2 = this.mSpring.updateValues(massState.mValue, massState.mVelocity, deltaT / 2);
+            DynamicAnimation.MassState massState2 =
+                    this.mSpring.updateValues(massState.mValue, massState.mVelocity, deltaT / 2);
             this.mValue = massState2.mValue;
             this.mVelocity = massState2.mVelocity;
         } else {
-            DynamicAnimation.MassState massState3 = this.mSpring.updateValues(this.mValue, this.mVelocity, deltaT);
+            DynamicAnimation.MassState massState3 =
+                    this.mSpring.updateValues(this.mValue, this.mVelocity, deltaT);
             this.mValue = massState3.mValue;
             this.mVelocity = massState3.mVelocity;
         }
@@ -157,6 +165,5 @@ public final class SpringAnimation extends DynamicAnimation<SpringAnimation> {
     }
 
     @Override // com.android.internal.dynamicanimation.animation.DynamicAnimation
-    void setValueThreshold(float threshold) {
-    }
+    void setValueThreshold(float threshold) {}
 }

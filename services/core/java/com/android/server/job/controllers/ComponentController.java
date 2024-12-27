@@ -15,10 +15,12 @@ import android.util.Log;
 import android.util.Slog;
 import android.util.SparseArrayMap;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.job.JobSchedulerService;
 import com.android.server.job.JobSchedulerService$$ExternalSyntheticLambda5;
 import com.android.server.pm.PackageManagerShellCommandDataLoader;
+
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -35,8 +37,7 @@ public final class ComponentController extends StateController {
     public final class ComponentStateUpdateFunctor implements Consumer {
         public final ArraySet mChangedJobs = new ArraySet();
 
-        public ComponentStateUpdateFunctor() {
-        }
+        public ComponentStateUpdateFunctor() {}
 
         @Override // java.util.function.Consumer
         public final void accept(Object obj) {
@@ -48,16 +49,20 @@ public final class ComponentController extends StateController {
     }
 
     /* renamed from: -$$Nest$mupdateComponentStateForPackage, reason: not valid java name */
-    public static void m623$$Nest$mupdateComponentStateForPackage(ComponentController componentController, final int i, final String str) {
+    public static void m623$$Nest$mupdateComponentStateForPackage(
+            ComponentController componentController, final int i, final String str) {
         synchronized (componentController.mLock) {
             componentController.clearComponentsForPackageLocked(i, str);
-            componentController.updateComponentStatesLocked(new Predicate() { // from class: com.android.server.job.controllers.ComponentController$$ExternalSyntheticLambda0
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    JobStatus jobStatus = (JobStatus) obj;
-                    return UserHandle.getUserId(jobStatus.callingUid) == i && jobStatus.job.getService().getPackageName().equals(str);
-                }
-            });
+            componentController.updateComponentStatesLocked(
+                    new Predicate() { // from class:
+                                      // com.android.server.job.controllers.ComponentController$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Predicate
+                        public final boolean test(Object obj) {
+                            JobStatus jobStatus = (JobStatus) obj;
+                            return UserHandle.getUserId(jobStatus.callingUid) == i
+                                    && jobStatus.job.getService().getPackageName().equals(str);
+                        }
+                    });
         }
     }
 
@@ -68,98 +73,126 @@ public final class ComponentController extends StateController {
     /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.job.controllers.ComponentController$1] */
     public ComponentController(JobSchedulerService jobSchedulerService) {
         super(jobSchedulerService);
-        this.mBroadcastReceiver = new BroadcastReceiver() { // from class: com.android.server.job.controllers.ComponentController.1
-            /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context, Intent intent) {
-                char c;
-                String schemeSpecificPart;
-                String action = intent.getAction();
-                if (action == null) {
-                    Slog.wtf("JobScheduler.Component", "Intent action was null");
-                    return;
-                }
-                switch (action.hashCode()) {
-                    case -742246786:
-                        if (action.equals("android.intent.action.USER_STOPPED")) {
-                            c = 0;
-                            break;
+        this.mBroadcastReceiver =
+                new BroadcastReceiver() { // from class:
+                                          // com.android.server.job.controllers.ComponentController.1
+                    /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context, Intent intent) {
+                        char c;
+                        String schemeSpecificPart;
+                        String action = intent.getAction();
+                        if (action == null) {
+                            Slog.wtf("JobScheduler.Component", "Intent action was null");
+                            return;
                         }
-                        c = 65535;
-                        break;
-                    case 172491798:
-                        if (action.equals("android.intent.action.PACKAGE_CHANGED")) {
-                            c = 1;
-                            break;
-                        }
-                        c = 65535;
-                        break;
-                    case 833559602:
-                        if (action.equals("android.intent.action.USER_UNLOCKED")) {
-                            c = 2;
-                            break;
-                        }
-                        c = 65535;
-                        break;
-                    case 1544582882:
-                        if (action.equals("android.intent.action.PACKAGE_ADDED")) {
-                            c = 3;
-                            break;
-                        }
-                        c = 65535;
-                        break;
-                    default:
-                        c = 65535;
-                        break;
-                }
-                switch (c) {
-                    case 0:
-                    case 2:
-                        final int intExtra = intent.getIntExtra("android.intent.extra.user_handle", 0);
-                        ComponentController componentController = ComponentController.this;
-                        synchronized (componentController.mLock) {
-                            componentController.mServiceProcessCache.delete(intExtra);
-                            componentController.updateComponentStatesLocked(new Predicate() { // from class: com.android.server.job.controllers.ComponentController$$ExternalSyntheticLambda1
-                                @Override // java.util.function.Predicate
-                                public final boolean test(Object obj) {
-                                    return UserHandle.getUserId(((JobStatus) obj).callingUid) == intExtra;
+                        switch (action.hashCode()) {
+                            case -742246786:
+                                if (action.equals("android.intent.action.USER_STOPPED")) {
+                                    c = 0;
+                                    break;
                                 }
-                            });
+                                c = 65535;
+                                break;
+                            case 172491798:
+                                if (action.equals("android.intent.action.PACKAGE_CHANGED")) {
+                                    c = 1;
+                                    break;
+                                }
+                                c = 65535;
+                                break;
+                            case 833559602:
+                                if (action.equals("android.intent.action.USER_UNLOCKED")) {
+                                    c = 2;
+                                    break;
+                                }
+                                c = 65535;
+                                break;
+                            case 1544582882:
+                                if (action.equals("android.intent.action.PACKAGE_ADDED")) {
+                                    c = 3;
+                                    break;
+                                }
+                                c = 65535;
+                                break;
+                            default:
+                                c = 65535;
+                                break;
                         }
-                        return;
-                    case 1:
-                        Uri data = intent.getData();
-                        schemeSpecificPart = data != null ? data.getSchemeSpecificPart() : null;
-                        String[] stringArrayExtra = intent.getStringArrayExtra("android.intent.extra.changed_component_name_list");
-                        if (schemeSpecificPart == null || stringArrayExtra == null || stringArrayExtra.length <= 0) {
-                            return;
-                        }
-                        ComponentController.m623$$Nest$mupdateComponentStateForPackage(ComponentController.this, UserHandle.getUserId(intent.getIntExtra("android.intent.extra.UID", -1)), schemeSpecificPart);
-                        return;
-                    case 3:
-                        if (intent.getBooleanExtra("android.intent.extra.REPLACING", false)) {
-                            Uri data2 = intent.getData();
-                            schemeSpecificPart = data2 != null ? data2.getSchemeSpecificPart() : null;
-                            if (schemeSpecificPart != null) {
-                                ComponentController.m623$$Nest$mupdateComponentStateForPackage(ComponentController.this, UserHandle.getUserId(intent.getIntExtra("android.intent.extra.UID", -1)), schemeSpecificPart);
+                        switch (c) {
+                            case 0:
+                            case 2:
+                                final int intExtra =
+                                        intent.getIntExtra("android.intent.extra.user_handle", 0);
+                                ComponentController componentController = ComponentController.this;
+                                synchronized (componentController.mLock) {
+                                    componentController.mServiceProcessCache.delete(intExtra);
+                                    componentController.updateComponentStatesLocked(
+                                            new Predicate() { // from class:
+                                                              // com.android.server.job.controllers.ComponentController$$ExternalSyntheticLambda1
+                                                @Override // java.util.function.Predicate
+                                                public final boolean test(Object obj) {
+                                                    return UserHandle.getUserId(
+                                                                    ((JobStatus) obj).callingUid)
+                                                            == intExtra;
+                                                }
+                                            });
+                                }
                                 return;
-                            }
-                            return;
+                            case 1:
+                                Uri data = intent.getData();
+                                schemeSpecificPart =
+                                        data != null ? data.getSchemeSpecificPart() : null;
+                                String[] stringArrayExtra =
+                                        intent.getStringArrayExtra(
+                                                "android.intent.extra.changed_component_name_list");
+                                if (schemeSpecificPart == null
+                                        || stringArrayExtra == null
+                                        || stringArrayExtra.length <= 0) {
+                                    return;
+                                }
+                                ComponentController.m623$$Nest$mupdateComponentStateForPackage(
+                                        ComponentController.this,
+                                        UserHandle.getUserId(
+                                                intent.getIntExtra("android.intent.extra.UID", -1)),
+                                        schemeSpecificPart);
+                                return;
+                            case 3:
+                                if (intent.getBooleanExtra(
+                                        "android.intent.extra.REPLACING", false)) {
+                                    Uri data2 = intent.getData();
+                                    schemeSpecificPart =
+                                            data2 != null ? data2.getSchemeSpecificPart() : null;
+                                    if (schemeSpecificPart != null) {
+                                        ComponentController
+                                                .m623$$Nest$mupdateComponentStateForPackage(
+                                                        ComponentController.this,
+                                                        UserHandle.getUserId(
+                                                                intent.getIntExtra(
+                                                                        "android.intent.extra.UID",
+                                                                        -1)),
+                                                        schemeSpecificPart);
+                                        return;
+                                    }
+                                    return;
+                                }
+                                return;
+                            default:
+                                return;
                         }
-                        return;
-                    default:
-                        return;
-                }
-            }
-        };
+                    }
+                };
         this.mServiceProcessCache = new SparseArrayMap();
         this.mComponentStateUpdateFunctor = new ComponentStateUpdateFunctor();
     }
 
     public final void clearComponentsForPackageLocked(int i, String str) {
         int indexOfKey = this.mServiceProcessCache.indexOfKey(i);
-        for (int numElementsForKey = this.mServiceProcessCache.numElementsForKey(i) - 1; numElementsForKey >= 0; numElementsForKey--) {
-            ComponentName componentName = (ComponentName) this.mServiceProcessCache.keyAt(indexOfKey, numElementsForKey);
+        for (int numElementsForKey = this.mServiceProcessCache.numElementsForKey(i) - 1;
+                numElementsForKey >= 0;
+                numElementsForKey--) {
+            ComponentName componentName =
+                    (ComponentName) this.mServiceProcessCache.keyAt(indexOfKey, numElementsForKey);
             if (componentName.getPackageName().equals(str)) {
                 this.mServiceProcessCache.delete(i, componentName);
             }
@@ -167,11 +200,15 @@ public final class ComponentController extends StateController {
     }
 
     @Override // com.android.server.job.controllers.StateController
-    public final void dumpControllerStateLocked(IndentingPrintWriter indentingPrintWriter, JobSchedulerService$$ExternalSyntheticLambda5 jobSchedulerService$$ExternalSyntheticLambda5) {
+    public final void dumpControllerStateLocked(
+            IndentingPrintWriter indentingPrintWriter,
+            JobSchedulerService$$ExternalSyntheticLambda5
+                    jobSchedulerService$$ExternalSyntheticLambda5) {
         for (int i = 0; i < this.mServiceProcessCache.numMaps(); i++) {
             int keyAt = this.mServiceProcessCache.keyAt(i);
             for (int i2 = 0; i2 < this.mServiceProcessCache.numElementsForKey(keyAt); i2++) {
-                ComponentName componentName = (ComponentName) this.mServiceProcessCache.keyAt(i, i2);
+                ComponentName componentName =
+                        (ComponentName) this.mServiceProcessCache.keyAt(i, i2);
                 indentingPrintWriter.print(keyAt);
                 indentingPrintWriter.print(PackageManagerShellCommandDataLoader.STDIN_PATH);
                 indentingPrintWriter.print(componentName);
@@ -183,8 +220,10 @@ public final class ComponentController extends StateController {
     }
 
     @Override // com.android.server.job.controllers.StateController
-    public final void dumpControllerStateLocked(ProtoOutputStream protoOutputStream, JobSchedulerService$$ExternalSyntheticLambda5 jobSchedulerService$$ExternalSyntheticLambda5) {
-    }
+    public final void dumpControllerStateLocked(
+            ProtoOutputStream protoOutputStream,
+            JobSchedulerService$$ExternalSyntheticLambda5
+                    jobSchedulerService$$ExternalSyntheticLambda5) {}
 
     @Override // com.android.server.job.controllers.StateController
     public final void maybeStartTrackingJobLocked(JobStatus jobStatus, JobStatus jobStatus2) {
@@ -192,8 +231,7 @@ public final class ComponentController extends StateController {
     }
 
     @Override // com.android.server.job.controllers.StateController
-    public final void maybeStopTrackingJobLocked(JobStatus jobStatus, JobStatus jobStatus2) {
-    }
+    public final void maybeStopTrackingJobLocked(JobStatus jobStatus, JobStatus jobStatus2) {}
 
     @Override // com.android.server.job.controllers.StateController
     public final void onAppRemovedLocked(int i, String str) {
@@ -213,8 +251,16 @@ public final class ComponentController extends StateController {
         intentFilter.addDataScheme("package");
         Context context = this.mContext;
         UserHandle userHandle = UserHandle.ALL;
-        context.registerReceiverAsUser(this.mBroadcastReceiver, userHandle, intentFilter, null, null);
-        this.mContext.registerReceiverAsUser(this.mBroadcastReceiver, userHandle, DirEncryptServiceHelper$$ExternalSyntheticOutline0.m("android.intent.action.USER_UNLOCKED", "android.intent.action.USER_STOPPED"), null, null);
+        context.registerReceiverAsUser(
+                this.mBroadcastReceiver, userHandle, intentFilter, null, null);
+        this.mContext.registerReceiverAsUser(
+                this.mBroadcastReceiver,
+                userHandle,
+                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                        "android.intent.action.USER_UNLOCKED",
+                        "android.intent.action.USER_STOPPED"),
+                null,
+                null);
     }
 
     public final boolean updateComponentEnabledStateLocked(JobStatus jobStatus) {
@@ -226,10 +272,16 @@ public final class ComponentController extends StateController {
             str = (String) this.mServiceProcessCache.get(userId, service);
         } else {
             try {
-                serviceInfo = this.mContext.createContextAsUser(UserHandle.of(userId), 0).getPackageManager().getServiceInfo(service, 268435456);
+                serviceInfo =
+                        this.mContext
+                                .createContextAsUser(UserHandle.of(userId), 0)
+                                .getPackageManager()
+                                .getServiceInfo(service, 268435456);
             } catch (PackageManager.NameNotFoundException unused) {
                 if (this.mService.areUsersStartedLocked(jobStatus)) {
-                    Slog.e("JobScheduler.Component", "Job exists for non-existent package: " + service.getPackageName());
+                    Slog.e(
+                            "JobScheduler.Component",
+                            "Job exists for non-existent package: " + service.getPackageName());
                 }
                 serviceInfo = null;
             }
@@ -250,7 +302,8 @@ public final class ComponentController extends StateController {
         componentStateUpdateFunctor.mChangedJobs.clear();
         this.mService.mJobs.forEachJob(predicate, componentStateUpdateFunctor);
         if (componentStateUpdateFunctor.mChangedJobs.size() > 0) {
-            this.mStateChangedListener.onControllerStateChanged(componentStateUpdateFunctor.mChangedJobs);
+            this.mStateChangedListener.onControllerStateChanged(
+                    componentStateUpdateFunctor.mChangedJobs);
         }
     }
 }

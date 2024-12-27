@@ -6,13 +6,14 @@ import android.app.appsearch.GenericDocument;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.LocusId;
-import android.content.pm.AppSearchShortcutInfo;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
+
 import com.android.internal.util.Preconditions;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -60,7 +61,106 @@ public class AppSearchShortcutInfo extends GenericDocument {
     public static final String KEY_DISABLED_REASON = "disabledReason";
     public static final String KEY_CAPABILITY = "capability";
     public static final String KEY_CAPABILITY_BINDINGS = "capabilityBindings";
-    public static final AppSearchSchema SCHEMA = new AppSearchSchema.Builder(SCHEMA_TYPE).addProperty(new AppSearchSchema.StringPropertyConfig.Builder("activity").setCardinality(2).setTokenizerType(1).setIndexingType(1).build()).addProperty(new AppSearchSchema.StringPropertyConfig.Builder(KEY_SHORT_LABEL).setCardinality(2).setTokenizerType(1).setIndexingType(2).build()).addProperty(new AppSearchSchema.StringPropertyConfig.Builder(KEY_LONG_LABEL).setCardinality(2).setTokenizerType(1).setIndexingType(2).build()).addProperty(new AppSearchSchema.StringPropertyConfig.Builder(KEY_DISABLED_MESSAGE).setCardinality(2).setTokenizerType(0).setIndexingType(0).build()).addProperty(new AppSearchSchema.StringPropertyConfig.Builder(KEY_CATEGORIES).setCardinality(1).setTokenizerType(1).setIndexingType(1).build()).addProperty(new AppSearchSchema.StringPropertyConfig.Builder(KEY_INTENTS).setCardinality(1).setTokenizerType(0).setIndexingType(0).build()).addProperty(new AppSearchSchema.BytesPropertyConfig.Builder(KEY_INTENT_PERSISTABLE_EXTRAS).setCardinality(1).build()).addProperty(new AppSearchSchema.DocumentPropertyConfig.Builder("person", AppSearchShortcutPerson.SCHEMA_TYPE).setCardinality(1).build()).addProperty(new AppSearchSchema.StringPropertyConfig.Builder(KEY_LOCUS_ID).setCardinality(2).setTokenizerType(1).setIndexingType(1).build()).addProperty(new AppSearchSchema.BytesPropertyConfig.Builder(KEY_EXTRAS).setCardinality(2).build()).addProperty(new AppSearchSchema.StringPropertyConfig.Builder("flags").setCardinality(1).setTokenizerType(1).setIndexingType(1).build()).addProperty(new AppSearchSchema.LongPropertyConfig.Builder("iconResId").setCardinality(2).build()).addProperty(new AppSearchSchema.StringPropertyConfig.Builder("iconResName").setCardinality(2).setTokenizerType(0).setIndexingType(0).build()).addProperty(new AppSearchSchema.StringPropertyConfig.Builder(KEY_ICON_URI).setCardinality(2).setTokenizerType(0).setIndexingType(0).build()).addProperty(new AppSearchSchema.StringPropertyConfig.Builder(KEY_DISABLED_REASON).setCardinality(3).setTokenizerType(1).setIndexingType(1).build()).addProperty(new AppSearchSchema.StringPropertyConfig.Builder(KEY_CAPABILITY).setCardinality(1).setTokenizerType(1).setIndexingType(1).build()).addProperty(new AppSearchSchema.StringPropertyConfig.Builder(KEY_CAPABILITY_BINDINGS).setCardinality(1).setTokenizerType(1).setIndexingType(2).build()).build();
+    public static final AppSearchSchema SCHEMA =
+            new AppSearchSchema.Builder(SCHEMA_TYPE)
+                    .addProperty(
+                            new AppSearchSchema.StringPropertyConfig.Builder("activity")
+                                    .setCardinality(2)
+                                    .setTokenizerType(1)
+                                    .setIndexingType(1)
+                                    .build())
+                    .addProperty(
+                            new AppSearchSchema.StringPropertyConfig.Builder(KEY_SHORT_LABEL)
+                                    .setCardinality(2)
+                                    .setTokenizerType(1)
+                                    .setIndexingType(2)
+                                    .build())
+                    .addProperty(
+                            new AppSearchSchema.StringPropertyConfig.Builder(KEY_LONG_LABEL)
+                                    .setCardinality(2)
+                                    .setTokenizerType(1)
+                                    .setIndexingType(2)
+                                    .build())
+                    .addProperty(
+                            new AppSearchSchema.StringPropertyConfig.Builder(KEY_DISABLED_MESSAGE)
+                                    .setCardinality(2)
+                                    .setTokenizerType(0)
+                                    .setIndexingType(0)
+                                    .build())
+                    .addProperty(
+                            new AppSearchSchema.StringPropertyConfig.Builder(KEY_CATEGORIES)
+                                    .setCardinality(1)
+                                    .setTokenizerType(1)
+                                    .setIndexingType(1)
+                                    .build())
+                    .addProperty(
+                            new AppSearchSchema.StringPropertyConfig.Builder(KEY_INTENTS)
+                                    .setCardinality(1)
+                                    .setTokenizerType(0)
+                                    .setIndexingType(0)
+                                    .build())
+                    .addProperty(
+                            new AppSearchSchema.BytesPropertyConfig.Builder(
+                                            KEY_INTENT_PERSISTABLE_EXTRAS)
+                                    .setCardinality(1)
+                                    .build())
+                    .addProperty(
+                            new AppSearchSchema.DocumentPropertyConfig.Builder(
+                                            "person", AppSearchShortcutPerson.SCHEMA_TYPE)
+                                    .setCardinality(1)
+                                    .build())
+                    .addProperty(
+                            new AppSearchSchema.StringPropertyConfig.Builder(KEY_LOCUS_ID)
+                                    .setCardinality(2)
+                                    .setTokenizerType(1)
+                                    .setIndexingType(1)
+                                    .build())
+                    .addProperty(
+                            new AppSearchSchema.BytesPropertyConfig.Builder(KEY_EXTRAS)
+                                    .setCardinality(2)
+                                    .build())
+                    .addProperty(
+                            new AppSearchSchema.StringPropertyConfig.Builder("flags")
+                                    .setCardinality(1)
+                                    .setTokenizerType(1)
+                                    .setIndexingType(1)
+                                    .build())
+                    .addProperty(
+                            new AppSearchSchema.LongPropertyConfig.Builder("iconResId")
+                                    .setCardinality(2)
+                                    .build())
+                    .addProperty(
+                            new AppSearchSchema.StringPropertyConfig.Builder("iconResName")
+                                    .setCardinality(2)
+                                    .setTokenizerType(0)
+                                    .setIndexingType(0)
+                                    .build())
+                    .addProperty(
+                            new AppSearchSchema.StringPropertyConfig.Builder(KEY_ICON_URI)
+                                    .setCardinality(2)
+                                    .setTokenizerType(0)
+                                    .setIndexingType(0)
+                                    .build())
+                    .addProperty(
+                            new AppSearchSchema.StringPropertyConfig.Builder(KEY_DISABLED_REASON)
+                                    .setCardinality(3)
+                                    .setTokenizerType(1)
+                                    .setIndexingType(1)
+                                    .build())
+                    .addProperty(
+                            new AppSearchSchema.StringPropertyConfig.Builder(KEY_CAPABILITY)
+                                    .setCardinality(1)
+                                    .setTokenizerType(1)
+                                    .setIndexingType(1)
+                                    .build())
+                    .addProperty(
+                            new AppSearchSchema.StringPropertyConfig.Builder(
+                                            KEY_CAPABILITY_BINDINGS)
+                                    .setCardinality(1)
+                                    .setTokenizerType(1)
+                                    .setIndexingType(2)
+                                    .build())
+                    .build();
 
     public AppSearchShortcutInfo(GenericDocument document) {
         super(document);
@@ -68,7 +168,25 @@ public class AppSearchShortcutInfo extends GenericDocument {
 
     public static AppSearchShortcutInfo instance(ShortcutInfo shortcutInfo) {
         Objects.requireNonNull(shortcutInfo);
-        return new Builder(shortcutInfo.getPackage(), shortcutInfo.getId()).setActivity(shortcutInfo.getActivity()).setShortLabel(shortcutInfo.getShortLabel()).setLongLabel(shortcutInfo.getLongLabel()).setDisabledMessage(shortcutInfo.getDisabledMessage()).setCategories(shortcutInfo.getCategories()).setIntents(shortcutInfo.getIntents()).setExtras(shortcutInfo.getExtras()).setCreationTimestampMillis(shortcutInfo.getLastChangedTimestamp()).setFlags(shortcutInfo.getFlags()).setIconResId(shortcutInfo.getIconResourceId()).setIconResName(shortcutInfo.getIconResName()).setIconUri(shortcutInfo.getIconUri()).setDisabledReason(shortcutInfo.getDisabledReason()).setPersons(shortcutInfo.getPersons()).setLocusId(shortcutInfo.getLocusId()).setCapabilityBindings(shortcutInfo.getCapabilityBindingsInternal()).setTtlMillis(SHORTCUT_TTL).build();
+        return new Builder(shortcutInfo.getPackage(), shortcutInfo.getId())
+                .setActivity(shortcutInfo.getActivity())
+                .setShortLabel(shortcutInfo.getShortLabel())
+                .setLongLabel(shortcutInfo.getLongLabel())
+                .setDisabledMessage(shortcutInfo.getDisabledMessage())
+                .setCategories(shortcutInfo.getCategories())
+                .setIntents(shortcutInfo.getIntents())
+                .setExtras(shortcutInfo.getExtras())
+                .setCreationTimestampMillis(shortcutInfo.getLastChangedTimestamp())
+                .setFlags(shortcutInfo.getFlags())
+                .setIconResId(shortcutInfo.getIconResourceId())
+                .setIconResName(shortcutInfo.getIconResName())
+                .setIconUri(shortcutInfo.getIconUri())
+                .setDisabledReason(shortcutInfo.getDisabledReason())
+                .setPersons(shortcutInfo.getPersons())
+                .setLocusId(shortcutInfo.getLocusId())
+                .setCapabilityBindings(shortcutInfo.getCapabilityBindingsInternal())
+                .setTtlMillis(SHORTCUT_TTL)
+                .build();
     }
 
     public ShortcutInfo toShortcutInfo(int userId) {
@@ -77,52 +195,80 @@ public class AppSearchShortcutInfo extends GenericDocument {
         int disabledReason;
         String packageName = getNamespace();
         String activityString = getPropertyString("activity");
-        ComponentName activity = activityString == null ? null : ComponentName.unflattenFromString(activityString);
+        ComponentName activity =
+                activityString == null ? null : ComponentName.unflattenFromString(activityString);
         String shortLabel = getPropertyString(KEY_SHORT_LABEL);
         String longLabel = getPropertyString(KEY_LONG_LABEL);
         String disabledMessage = getPropertyString(KEY_DISABLED_MESSAGE);
         String[] categories = getPropertyStringArray(KEY_CATEGORIES);
-        Set<String> categoriesSet = categories == null ? null : new ArraySet<>(Arrays.asList(categories));
+        Set<String> categoriesSet =
+                categories == null ? null : new ArraySet<>(Arrays.asList(categories));
         String[] intentsStrings = getPropertyStringArray(KEY_INTENTS);
         if (intentsStrings == null) {
             intentArr = new Intent[0];
         } else {
-            intentArr = (Intent[]) Arrays.stream(intentsStrings).map(new Function() { // from class: android.content.pm.AppSearchShortcutInfo$$ExternalSyntheticLambda1
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    return AppSearchShortcutInfo.lambda$toShortcutInfo$0((String) obj);
-                }
-            }).toArray(new IntFunction() { // from class: android.content.pm.AppSearchShortcutInfo$$ExternalSyntheticLambda2
-                @Override // java.util.function.IntFunction
-                public final Object apply(int i) {
-                    return AppSearchShortcutInfo.lambda$toShortcutInfo$1(i);
-                }
-            });
+            intentArr =
+                    (Intent[])
+                            Arrays.stream(intentsStrings)
+                                    .map(
+                                            new Function() { // from class:
+                                                // android.content.pm.AppSearchShortcutInfo$$ExternalSyntheticLambda1
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    return AppSearchShortcutInfo
+                                                            .lambda$toShortcutInfo$0((String) obj);
+                                                }
+                                            })
+                                    .toArray(
+                                            new IntFunction() { // from class:
+                                                // android.content.pm.AppSearchShortcutInfo$$ExternalSyntheticLambda2
+                                                @Override // java.util.function.IntFunction
+                                                public final Object apply(int i) {
+                                                    return AppSearchShortcutInfo
+                                                            .lambda$toShortcutInfo$1(i);
+                                                }
+                                            });
         }
         Intent[] intents = intentArr;
         byte[][] intentExtrasesBytes = getPropertyBytesArray(KEY_INTENT_PERSISTABLE_EXTRAS);
         if (intentExtrasesBytes == null) {
             bundleArr = null;
         } else {
-            bundleArr = (Bundle[]) Arrays.stream(intentExtrasesBytes).map(new Function() { // from class: android.content.pm.AppSearchShortcutInfo$$ExternalSyntheticLambda3
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    Bundle transformToBundle;
-                    transformToBundle = AppSearchShortcutInfo.this.transformToBundle((byte[]) obj);
-                    return transformToBundle;
-                }
-            }).toArray(new IntFunction() { // from class: android.content.pm.AppSearchShortcutInfo$$ExternalSyntheticLambda4
-                @Override // java.util.function.IntFunction
-                public final Object apply(int i) {
-                    return AppSearchShortcutInfo.lambda$toShortcutInfo$2(i);
-                }
-            });
+            bundleArr =
+                    (Bundle[])
+                            Arrays.stream(intentExtrasesBytes)
+                                    .map(
+                                            new Function() { // from class:
+                                                // android.content.pm.AppSearchShortcutInfo$$ExternalSyntheticLambda3
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    Bundle transformToBundle;
+                                                    transformToBundle =
+                                                            AppSearchShortcutInfo.this
+                                                                    .transformToBundle(
+                                                                            (byte[]) obj);
+                                                    return transformToBundle;
+                                                }
+                                            })
+                                    .toArray(
+                                            new IntFunction() { // from class:
+                                                // android.content.pm.AppSearchShortcutInfo$$ExternalSyntheticLambda4
+                                                @Override // java.util.function.IntFunction
+                                                public final Object apply(int i) {
+                                                    return AppSearchShortcutInfo
+                                                            .lambda$toShortcutInfo$2(i);
+                                                }
+                                            });
         }
         Bundle[] intentExtrases = bundleArr;
         if (intents != null) {
             for (int i = 0; i < intents.length; i++) {
                 Intent intent = intents[i];
-                if (intent != null && intentExtrases != null && intentExtrases.length > i && intentExtrases[i] != null && intentExtrases[i].size() != 0) {
+                if (intent != null
+                        && intentExtrases != null
+                        && intentExtrases.length > i
+                        && intentExtrases[i] != null
+                        && intentExtrases[i].size() != 0) {
                     intent.replaceExtras(intentExtrases[i]);
                 }
             }
@@ -142,8 +288,38 @@ public class AppSearchShortcutInfo extends GenericDocument {
         } else {
             disabledReason = 0;
         }
-        Map<String, Map<String, List<String>>> capabilityBindings = parseCapabilityBindings(getPropertyStringArray(KEY_CAPABILITY_BINDINGS));
-        return new ShortcutInfo(userId, getId(), packageName, activity, null, shortLabel, 0, null, longLabel, 0, null, disabledMessage, 0, null, categoriesSet, intents, Integer.MAX_VALUE, extras, getCreationTimestampMillis(), flags, iconResId, iconResName, null, iconUri, disabledReason, persons, locusId, null, capabilityBindings);
+        Map<String, Map<String, List<String>>> capabilityBindings =
+                parseCapabilityBindings(getPropertyStringArray(KEY_CAPABILITY_BINDINGS));
+        return new ShortcutInfo(
+                userId,
+                getId(),
+                packageName,
+                activity,
+                null,
+                shortLabel,
+                0,
+                null,
+                longLabel,
+                0,
+                null,
+                disabledMessage,
+                0,
+                null,
+                categoriesSet,
+                intents,
+                Integer.MAX_VALUE,
+                extras,
+                getCreationTimestampMillis(),
+                flags,
+                iconResId,
+                iconResName,
+                null,
+                iconUri,
+                disabledReason,
+                persons,
+                locusId,
+                null,
+                capabilityBindings);
     }
 
     static /* synthetic */ Intent lambda$toShortcutInfo$0(String uri) {
@@ -197,33 +373,50 @@ public class AppSearchShortcutInfo extends GenericDocument {
 
         public Builder setShortLabel(CharSequence shortLabel) {
             if (!TextUtils.isEmpty(shortLabel)) {
-                setPropertyString(AppSearchShortcutInfo.KEY_SHORT_LABEL, Preconditions.checkStringNotEmpty(shortLabel, "shortLabel cannot be empty").toString());
+                setPropertyString(
+                        AppSearchShortcutInfo.KEY_SHORT_LABEL,
+                        Preconditions.checkStringNotEmpty(shortLabel, "shortLabel cannot be empty")
+                                .toString());
             }
             return this;
         }
 
         public Builder setLongLabel(CharSequence longLabel) {
             if (!TextUtils.isEmpty(longLabel)) {
-                setPropertyString(AppSearchShortcutInfo.KEY_LONG_LABEL, Preconditions.checkStringNotEmpty(longLabel, "longLabel cannot be empty").toString());
+                setPropertyString(
+                        AppSearchShortcutInfo.KEY_LONG_LABEL,
+                        Preconditions.checkStringNotEmpty(longLabel, "longLabel cannot be empty")
+                                .toString());
             }
             return this;
         }
 
         public Builder setDisabledMessage(CharSequence disabledMessage) {
             if (!TextUtils.isEmpty(disabledMessage)) {
-                setPropertyString(AppSearchShortcutInfo.KEY_DISABLED_MESSAGE, Preconditions.checkStringNotEmpty(disabledMessage, "disabledMessage cannot be empty").toString());
+                setPropertyString(
+                        AppSearchShortcutInfo.KEY_DISABLED_MESSAGE,
+                        Preconditions.checkStringNotEmpty(
+                                        disabledMessage, "disabledMessage cannot be empty")
+                                .toString());
             }
             return this;
         }
 
         public Builder setCategories(Set<String> categories) {
             if (categories != null && !categories.isEmpty()) {
-                setPropertyString(AppSearchShortcutInfo.KEY_CATEGORIES, (String[]) categories.stream().toArray(new IntFunction() { // from class: android.content.pm.AppSearchShortcutInfo$Builder$$ExternalSyntheticLambda2
-                    @Override // java.util.function.IntFunction
-                    public final Object apply(int i) {
-                        return AppSearchShortcutInfo.Builder.lambda$setCategories$0(i);
-                    }
-                }));
+                setPropertyString(
+                        AppSearchShortcutInfo.KEY_CATEGORIES,
+                        (String[])
+                                categories.stream()
+                                        .toArray(
+                                                new IntFunction() { // from class:
+                                                    // android.content.pm.AppSearchShortcutInfo$Builder$$ExternalSyntheticLambda2
+                                                    @Override // java.util.function.IntFunction
+                                                    public final Object apply(int i) {
+                                                        return AppSearchShortcutInfo.Builder
+                                                                .lambda$setCategories$0(i);
+                                                    }
+                                                }));
             }
             return this;
         }
@@ -233,7 +426,7 @@ public class AppSearchShortcutInfo extends GenericDocument {
         }
 
         public Builder setIntent(Intent intent) {
-            return intent == null ? this : setIntents(new Intent[]{intent});
+            return intent == null ? this : setIntents(new Intent[] {intent});
         }
 
         public Builder setIntents(Intent[] intents) {
@@ -247,21 +440,35 @@ public class AppSearchShortcutInfo extends GenericDocument {
             byte[][] intentExtrases = new byte[intents.length][];
             for (int i = 0; i < intents.length; i++) {
                 Bundle extras = intents[i].getExtras();
-                intentExtrases[i] = extras == null ? new byte[0] : AppSearchShortcutInfo.transformToByteArray(new PersistableBundle(extras));
+                intentExtrases[i] =
+                        extras == null
+                                ? new byte[0]
+                                : AppSearchShortcutInfo.transformToByteArray(
+                                        new PersistableBundle(extras));
             }
-            setPropertyString(AppSearchShortcutInfo.KEY_INTENTS, (String[]) Arrays.stream(intents).map(new Function() { // from class: android.content.pm.AppSearchShortcutInfo$Builder$$ExternalSyntheticLambda0
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    String uri;
-                    uri = ((Intent) obj).toUri(0);
-                    return uri;
-                }
-            }).toArray(new IntFunction() { // from class: android.content.pm.AppSearchShortcutInfo$Builder$$ExternalSyntheticLambda1
-                @Override // java.util.function.IntFunction
-                public final Object apply(int i2) {
-                    return AppSearchShortcutInfo.Builder.lambda$setIntents$2(i2);
-                }
-            }));
+            setPropertyString(
+                    AppSearchShortcutInfo.KEY_INTENTS,
+                    (String[])
+                            Arrays.stream(intents)
+                                    .map(
+                                            new Function() { // from class:
+                                                // android.content.pm.AppSearchShortcutInfo$Builder$$ExternalSyntheticLambda0
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    String uri;
+                                                    uri = ((Intent) obj).toUri(0);
+                                                    return uri;
+                                                }
+                                            })
+                                    .toArray(
+                                            new IntFunction() { // from class:
+                                                // android.content.pm.AppSearchShortcutInfo$Builder$$ExternalSyntheticLambda1
+                                                @Override // java.util.function.IntFunction
+                                                public final Object apply(int i2) {
+                                                    return AppSearchShortcutInfo.Builder
+                                                            .lambda$setIntents$2(i2);
+                                                }
+                                            }));
             setPropertyBytes(AppSearchShortcutInfo.KEY_INTENT_PERSISTABLE_EXTRAS, intentExtrases);
             return this;
         }
@@ -271,7 +478,7 @@ public class AppSearchShortcutInfo extends GenericDocument {
         }
 
         public Builder setPerson(Person person) {
-            return person == null ? this : setPersons(new Person[]{person});
+            return person == null ? this : setPersons(new Person[] {person});
         }
 
         public Builder setPersons(Person[] persons) {
@@ -292,7 +499,9 @@ public class AppSearchShortcutInfo extends GenericDocument {
 
         public Builder setExtras(PersistableBundle extras) {
             if (extras != null) {
-                setPropertyBytes(AppSearchShortcutInfo.KEY_EXTRAS, AppSearchShortcutInfo.transformToByteArray(extras));
+                setPropertyBytes(
+                        AppSearchShortcutInfo.KEY_EXTRAS,
+                        AppSearchShortcutInfo.transformToByteArray(extras));
             }
             return this;
         }
@@ -325,7 +534,8 @@ public class AppSearchShortcutInfo extends GenericDocument {
         }
 
         public Builder setDisabledReason(int disabledReason) {
-            setPropertyString(AppSearchShortcutInfo.KEY_DISABLED_REASON, String.valueOf(disabledReason));
+            setPropertyString(
+                    AppSearchShortcutInfo.KEY_DISABLED_REASON, String.valueOf(disabledReason));
             return this;
         }
 
@@ -336,28 +546,43 @@ public class AppSearchShortcutInfo extends GenericDocument {
                 for (final String capabilityName : capabilityNames) {
                     Map<String, List<String>> params = bindings.get(capabilityName);
                     for (final String paramName : params.keySet()) {
-                        Stream<R> map = params.get(paramName).stream().map(new Function() { // from class: android.content.pm.AppSearchShortcutInfo$Builder$$ExternalSyntheticLambda3
-                            @Override // java.util.function.Function
-                            public final Object apply(Object obj) {
-                                return AppSearchShortcutInfo.Builder.lambda$setCapabilityBindings$3(capabilityName, paramName, (String) obj);
-                            }
-                        });
+                        Stream<R> map =
+                                params.get(paramName).stream()
+                                        .map(
+                                                new Function() { // from class:
+                                                    // android.content.pm.AppSearchShortcutInfo$Builder$$ExternalSyntheticLambda3
+                                                    @Override // java.util.function.Function
+                                                    public final Object apply(Object obj) {
+                                                        return AppSearchShortcutInfo.Builder
+                                                                .lambda$setCapabilityBindings$3(
+                                                                        capabilityName,
+                                                                        paramName,
+                                                                        (String) obj);
+                                                    }
+                                                });
                         Objects.requireNonNull(capabilityBindings);
-                        map.forEach(new Consumer() { // from class: android.content.pm.AppSearchShortcutInfo$Builder$$ExternalSyntheticLambda4
-                            @Override // java.util.function.Consumer
-                            public final void accept(Object obj) {
-                                capabilityBindings.add((String) obj);
-                            }
-                        });
+                        map.forEach(
+                                new Consumer() { // from class:
+                                    // android.content.pm.AppSearchShortcutInfo$Builder$$ExternalSyntheticLambda4
+                                    @Override // java.util.function.Consumer
+                                    public final void accept(Object obj) {
+                                        capabilityBindings.add((String) obj);
+                                    }
+                                });
                     }
                 }
-                setPropertyString(AppSearchShortcutInfo.KEY_CAPABILITY, (String[]) capabilityNames.toArray(new String[0]));
-                setPropertyString(AppSearchShortcutInfo.KEY_CAPABILITY_BINDINGS, (String[]) capabilityBindings.toArray(new String[0]));
+                setPropertyString(
+                        AppSearchShortcutInfo.KEY_CAPABILITY,
+                        (String[]) capabilityNames.toArray(new String[0]));
+                setPropertyString(
+                        AppSearchShortcutInfo.KEY_CAPABILITY_BINDINGS,
+                        (String[]) capabilityBindings.toArray(new String[0]));
             }
             return this;
         }
 
-        static /* synthetic */ String lambda$setCapabilityBindings$3(String capabilityName, String paramName, String v) {
+        static /* synthetic */ String lambda$setCapabilityBindings$3(
+                String capabilityName, String paramName, String v) {
             return capabilityName + "/" + paramName + "/" + v;
         }
 
@@ -526,23 +751,30 @@ public class AppSearchShortcutInfo extends GenericDocument {
         return ret;
     }
 
-    private static Map<String, Map<String, List<String>>> parseCapabilityBindings(String[] capabilityBindings) {
+    private static Map<String, Map<String, List<String>>> parseCapabilityBindings(
+            String[] capabilityBindings) {
         if (capabilityBindings == null || capabilityBindings.length == 0) {
             return null;
         }
         final Map<String, Map<String, List<String>>> ret = new ArrayMap<>(1);
-        Arrays.stream(capabilityBindings).forEach(new Consumer() { // from class: android.content.pm.AppSearchShortcutInfo$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                AppSearchShortcutInfo.lambda$parseCapabilityBindings$3(ret, (String) obj);
-            }
-        });
+        Arrays.stream(capabilityBindings)
+                .forEach(
+                        new Consumer() { // from class:
+                            // android.content.pm.AppSearchShortcutInfo$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                AppSearchShortcutInfo.lambda$parseCapabilityBindings$3(
+                                        ret, (String) obj);
+                            }
+                        });
         return ret;
     }
 
     static /* synthetic */ void lambda$parseCapabilityBindings$3(Map ret, String binding) {
         int capabilityStopIndex;
-        if (TextUtils.isEmpty(binding) || (capabilityStopIndex = binding.indexOf("/")) == -1 || capabilityStopIndex == binding.length() - 1) {
+        if (TextUtils.isEmpty(binding)
+                || (capabilityStopIndex = binding.indexOf("/")) == -1
+                || capabilityStopIndex == binding.length() - 1) {
             return;
         }
         String capabilityName = binding.substring(0, capabilityStopIndex);

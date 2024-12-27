@@ -1,6 +1,5 @@
 package android.renderscript;
 
-import android.renderscript.Script;
 import com.samsung.epic.Request;
 
 @Deprecated

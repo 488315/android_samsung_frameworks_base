@@ -26,6 +26,7 @@ import android.window.RemoteTransition;
 import android.window.TransitionInfo;
 import android.window.TransitionRequestInfo;
 import android.window.WindowContainerTransaction;
+
 import com.android.internal.protolog.ProtoLogGroup;
 import com.android.internal.protolog.ProtoLogImpl_54989576;
 import com.android.internal.statusbar.IStatusBar;
@@ -36,16 +37,10 @@ import com.android.server.accessibility.magnification.FullScreenMagnificationGes
 import com.android.server.am.ActivityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.statusbar.StatusBarManagerInternal;
 import com.android.server.statusbar.StatusBarManagerService;
-import com.android.server.wm.ActivityRecord;
-import com.android.server.wm.ActivityTaskSupervisor;
-import com.android.server.wm.AsyncRotationController;
-import com.android.server.wm.BLASTSyncEngine;
-import com.android.server.wm.DisplayContent;
-import com.android.server.wm.TransitionController;
-import com.android.server.wm.WallpaperController;
-import com.android.server.wm.WindowManagerInternal;
 import com.android.window.flags.Flags;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -186,7 +181,10 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
             boolean z = CoreRune.MW_SPLIT_SHELL_TRANSITION;
             WindowContainer windowContainer = this.mContainer;
             if (z) {
-                if ((windowContainer.asTask() == null || !windowContainer.inSplitScreenWindowingMode()) ? false : this.mForceChangeSplitTask) {
+                if ((windowContainer.asTask() == null
+                                || !windowContainer.inSplitScreenWindowingMode())
+                        ? false
+                        : this.mForceChangeSplitTask) {
                     return true;
                 }
             }
@@ -198,19 +196,23 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
             if (isVisibleRequested != z2 || this.mKnownConfigChanges != 0) {
                 return true;
             }
-            if ((this.mWindowingMode != 0 && windowContainer.getWindowingMode() != this.mWindowingMode) || !windowContainer.getBounds().equals(this.mAbsoluteBounds)) {
+            if ((this.mWindowingMode != 0
+                            && windowContainer.getWindowingMode() != this.mWindowingMode)
+                    || !windowContainer.getBounds().equals(this.mAbsoluteBounds)) {
                 return true;
             }
             if (this.mRotation != windowContainer.getWindowConfiguration().getRotation()) {
                 return true;
             }
-            if (this.mDisplayId != Transition.getDisplayId(windowContainer) || (this.mFlags & 32) != 0) {
+            if (this.mDisplayId != Transition.getDisplayId(windowContainer)
+                    || (this.mFlags & 32) != 0) {
                 return true;
             }
             if (CoreRune.MW_SHELL_CHANGE_TRANSITION && this.mChangeLeash != null) {
                 return true;
             }
-            if ((CoreRune.MW_SHELL_DISPLAY_CHANGE_TRANSITION && this.mForceChanged) || this.mHideWhileTwoHandDragging) {
+            if ((CoreRune.MW_SHELL_DISPLAY_CHANGE_TRANSITION && this.mForceChanged)
+                    || this.mHideWhileTwoHandDragging) {
                 return true;
             }
             if (this.mForceHidingTransit != 0) {
@@ -225,8 +227,7 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface IContainerFreezer {
-    }
+    public interface IContainerFreezer {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ReadyCondition {
@@ -263,22 +264,42 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
                 return;
             }
             if (transition.mState >= 2) {
-                Slog.w("Transition", "#%d: Condition met too late, already in state=" + transition.mState + ": " + this);
+                Slog.w(
+                        "Transition",
+                        "#%d: Condition met too late, already in state="
+                                + transition.mState
+                                + ": "
+                                + this);
                 return;
             }
             if (readyTracker.mConditions.remove(this)) {
                 this.mMet = true;
                 if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_TRANSITIONS_enabled[1]) {
-                    ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS, 7631061720069910622L, 20, null, String.valueOf(this), Long.valueOf(transition.mSyncId), Long.valueOf(readyTracker.mConditions.size()));
+                    ProtoLogImpl_54989576.v(
+                            ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS,
+                            7631061720069910622L,
+                            20,
+                            null,
+                            String.valueOf(this),
+                            Long.valueOf(transition.mSyncId),
+                            Long.valueOf(readyTracker.mConditions.size()));
                 }
                 readyTracker.mMet.add(this);
                 transition.applyReady();
                 return;
             }
             if (readyTracker.mMet.contains(this)) {
-                throw new IllegalStateException("Can't meet the same condition more than once: " + this + " #" + transition.mSyncId);
+                throw new IllegalStateException(
+                        "Can't meet the same condition more than once: "
+                                + this
+                                + " #"
+                                + transition.mSyncId);
             }
-            throw new IllegalArgumentException("Can't meet a condition that isn't being waited on: " + this + " in #" + transition.mSyncId);
+            throw new IllegalArgumentException(
+                    "Can't meet a condition that isn't being waited on: "
+                            + this
+                            + " in #"
+                            + transition.mSyncId);
         }
 
         public final String toString() {
@@ -289,7 +310,13 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
                 str = str + ":" + obj;
             }
             sb.append(str);
-            return AudioOffloadInfo$$ExternalSyntheticOutline0.m(sb, this.mAlternate != null ? AudioOffloadInfo$$ExternalSyntheticOutline0.m(new StringBuilder(" ("), this.mAlternate, ")") : "", "}");
+            return AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                    sb,
+                    this.mAlternate != null
+                            ? AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder(" ("), this.mAlternate, ")")
+                            : "",
+                    "}");
         }
     }
 
@@ -313,7 +340,13 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
             this.mConditions.add(readyCondition);
             readyCondition.mTracker = this;
             if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_TRANSITIONS_enabled[1]) {
-                ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS, -2971560715211489406L, 4, null, String.valueOf(readyCondition), Long.valueOf(transition.mSyncId));
+                ProtoLogImpl_54989576.v(
+                        ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS,
+                        -2971560715211489406L,
+                        4,
+                        null,
+                        String.valueOf(readyCondition),
+                        Long.valueOf(transition.mSyncId));
             }
         }
     }
@@ -339,7 +372,15 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
                     sb.append(':');
                     sb.append(this.mReadyGroups.valueAt(i));
                 }
-                ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS, -3263748870548668913L, 31, null, Boolean.valueOf(z), Boolean.valueOf(z2), Long.valueOf(j), String.valueOf(sb.toString()));
+                ProtoLogImpl_54989576.v(
+                        ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS,
+                        -3263748870548668913L,
+                        31,
+                        null,
+                        Boolean.valueOf(z),
+                        Boolean.valueOf(z2),
+                        Long.valueOf(j),
+                        String.valueOf(sb.toString()));
             }
             if (!this.mUsed || this.mDeferReadyDepth > 0) {
                 return false;
@@ -349,7 +390,9 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
             }
             for (int size = this.mReadyGroups.size() - 1; size >= 0; size--) {
                 WindowContainer windowContainer = (WindowContainer) this.mReadyGroups.keyAt(size);
-                if (windowContainer.isAttached() && windowContainer.isVisibleRequested() && !((Boolean) this.mReadyGroups.valueAt(size)).booleanValue()) {
+                if (windowContainer.isAttached()
+                        && windowContainer.isVisibleRequested()
+                        && !((Boolean) this.mReadyGroups.valueAt(size)).booleanValue()) {
                     return false;
                 }
             }
@@ -361,8 +404,7 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
     class ScreenshotFreezer implements IContainerFreezer {
         public final ArraySet mFrozen = new ArraySet();
 
-        public ScreenshotFreezer() {
-        }
+        public ScreenshotFreezer() {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -396,11 +438,19 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         }
 
         public final String toString() {
-            return "Token{" + Integer.toHexString(System.identityHashCode(this)) + " " + this.mTransition.get() + "}";
+            return "Token{"
+                    + Integer.toHexString(System.identityHashCode(this))
+                    + " "
+                    + this.mTransition.get()
+                    + "}";
         }
     }
 
-    public Transition(int i, int i2, TransitionController transitionController, BLASTSyncEngine bLASTSyncEngine) {
+    public Transition(
+            int i,
+            int i2,
+            TransitionController transitionController,
+            BLASTSyncEngine bLASTSyncEngine) {
         TransitionController.Logger logger = new TransitionController.Logger();
         this.mLogger = logger;
         this.mForcePlaying = false;
@@ -427,14 +477,23 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
     }
 
     public static void addOnTopTasks(DisplayContent displayContent, ArrayList arrayList) {
-        final int collectingTransitionType = displayContent.mTransitionController.getCollectingTransitionType();
-        Task rootTask = displayContent.getRootTask(new Predicate() { // from class: com.android.server.wm.Transition$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                Task task = (Task) obj;
-                return !(task.getWindowConfiguration().isAlwaysOnTop() || (task.inFreeformWindowingMode() && task.isDexMode())) || (task.inFreeformWindowingMode() && !task.isDexMode() && collectingTransitionType == 3);
-            }
-        });
+        final int collectingTransitionType =
+                displayContent.mTransitionController.getCollectingTransitionType();
+        Task rootTask =
+                displayContent.getRootTask(
+                        new Predicate() { // from class:
+                                          // com.android.server.wm.Transition$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Predicate
+                            public final boolean test(Object obj) {
+                                Task task = (Task) obj;
+                                return !(task.getWindowConfiguration().isAlwaysOnTop()
+                                                || (task.inFreeformWindowingMode()
+                                                        && task.isDexMode()))
+                                        || (task.inFreeformWindowingMode()
+                                                && !task.isDexMode()
+                                                && collectingTransitionType == 3);
+                            }
+                        });
         if (rootTask == null) {
             return;
         }
@@ -456,7 +515,8 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         }
     }
 
-    public static void assignLayers(SurfaceControl.Transaction transaction, WindowContainer windowContainer) {
+    public static void assignLayers(
+            SurfaceControl.Transaction transaction, WindowContainer windowContainer) {
         windowContainer.mTransitionController.mBuildingFinishLayers = true;
         try {
             windowContainer.assignChildLayers(transaction);
@@ -465,7 +525,8 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         }
     }
 
-    public static TransitionInfo.AnimationOptions calculateAnimationOptionsForActivityTransition(int i, ArrayList arrayList, WindowManager.LayoutParams layoutParams) {
+    public static TransitionInfo.AnimationOptions calculateAnimationOptionsForActivityTransition(
+            int i, ArrayList arrayList, WindowManager.LayoutParams layoutParams) {
         TransitionInfo.AnimationOptions animationOptions;
         WindowContainer windowContainer;
         int i2 = 0;
@@ -475,7 +536,11 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
                 windowContainer = null;
                 break;
             }
-            if (!isWallpaper(((ChangeInfo) arrayList.get(i2)).mContainer) && (!CoreRune.FW_SHELL_TRANSITION_TRANSIENT_LAUNCH_OVERLAY || ((ChangeInfo) arrayList.get(i2)).mContainer.asTransientLaunchOverlay() == null)) {
+            if (!isWallpaper(((ChangeInfo) arrayList.get(i2)).mContainer)
+                    && (!CoreRune.FW_SHELL_TRANSITION_TRANSIENT_LAUNCH_OVERLAY
+                            || ((ChangeInfo) arrayList.get(i2))
+                                            .mContainer.asTransientLaunchOverlay()
+                                    == null)) {
                 break;
             }
             i2++;
@@ -483,17 +548,31 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         windowContainer = ((ChangeInfo) arrayList.get(i2)).mContainer;
         if (windowContainer.asActivityRecord() != null) {
             ActivityRecord asActivityRecord = windowContainer.asActivityRecord();
-            ActivityRecord.CustomAppTransition customAppTransition = asActivityRecord.mCustomOpenTransition;
+            ActivityRecord.CustomAppTransition customAppTransition =
+                    asActivityRecord.mCustomOpenTransition;
             if (customAppTransition != null) {
-                animationOptions = TransitionInfo.AnimationOptions.makeCommonAnimOptions(asActivityRecord.packageName);
-                animationOptions.addCustomActivityTransition(true, customAppTransition.mEnterAnim, customAppTransition.mExitAnim, customAppTransition.mBackgroundColor);
+                animationOptions =
+                        TransitionInfo.AnimationOptions.makeCommonAnimOptions(
+                                asActivityRecord.packageName);
+                animationOptions.addCustomActivityTransition(
+                        true,
+                        customAppTransition.mEnterAnim,
+                        customAppTransition.mExitAnim,
+                        customAppTransition.mBackgroundColor);
             }
-            ActivityRecord.CustomAppTransition customAppTransition2 = asActivityRecord.mCustomCloseTransition;
+            ActivityRecord.CustomAppTransition customAppTransition2 =
+                    asActivityRecord.mCustomCloseTransition;
             if (customAppTransition2 != null) {
                 if (animationOptions == null) {
-                    animationOptions = TransitionInfo.AnimationOptions.makeCommonAnimOptions(asActivityRecord.packageName);
+                    animationOptions =
+                            TransitionInfo.AnimationOptions.makeCommonAnimOptions(
+                                    asActivityRecord.packageName);
                 }
-                animationOptions.addCustomActivityTransition(false, customAppTransition2.mEnterAnim, customAppTransition2.mExitAnim, customAppTransition2.mBackgroundColor);
+                animationOptions.addCustomActivityTransition(
+                        false,
+                        customAppTransition2.mEnterAnim,
+                        customAppTransition2.mExitAnim,
+                        customAppTransition2.mBackgroundColor);
             }
         }
         if (!CoreRune.FW_SHELL_TRANSITION_WITH_DIM || layoutParams == null) {
@@ -503,7 +582,8 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
             return animationOptions;
         }
         if (animationOptions == null) {
-            return TransitionInfo.AnimationOptions.makeAnimOptionsFromLayoutParameters(layoutParams);
+            return TransitionInfo.AnimationOptions.makeAnimOptionsFromLayoutParameters(
+                    layoutParams);
         }
         animationOptions.addOptionsFromLayoutParameters(layoutParams);
         return animationOptions;
@@ -514,76 +594,80 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:228:0x04aa, code lost:
-    
-        if (r10 == false) goto L235;
-     */
+
+       if (r10 == false) goto L235;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:229:0x04ac, code lost:
-    
-        r8.mEndParent = r9;
-     */
+
+       r8.mEndParent = r9;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:231:0x04b6, code lost:
-    
-        if ((r8.mFlags & 64) == 0) goto L243;
-     */
+
+       if ((r8.mFlags & 64) == 0) goto L243;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:232:0x04b8, code lost:
-    
-        r10 = r8.mContainer;
-     */
+
+       r10 = r8.mContainer;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:233:0x04be, code lost:
-    
-        if (r10.asActivityRecord() == null) goto L243;
-     */
+
+       if (r10.asActivityRecord() == null) goto L243;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:235:0x04c4, code lost:
-    
-        if (r10.getParent() != r9) goto L243;
-     */
+
+       if (r10.getParent() != r9) goto L243;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:236:0x04c6, code lost:
-    
-        r12.mFlags |= 64;
-     */
+
+       r12.mFlags |= 64;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:238:0x04d0, code lost:
-    
-        if (r4.isEmpty() == false) goto L246;
-     */
+
+       if (r4.isEmpty() == false) goto L246;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:239:0x04d3, code lost:
-    
-        r8.mEndParent = ((com.android.server.wm.Transition.ChangeInfo) r4.get(0)).mContainer;
-     */
+
+       r8.mEndParent = ((com.android.server.wm.Transition.ChangeInfo) r4.get(0)).mContainer;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:241:0x04e3, code lost:
-    
-        if (r11 >= (r4.size() - 1)) goto L303;
-     */
+
+       if (r11 >= (r4.size() - 1)) goto L303;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:242:0x04e5, code lost:
-    
-        r8 = (com.android.server.wm.Transition.ChangeInfo) r4.get(r11);
-        r11 = r11 + 1;
-        r8.mEndParent = ((com.android.server.wm.Transition.ChangeInfo) r4.get(r11)).mContainer;
-        r1.add(r8);
-     */
+
+       r8 = (com.android.server.wm.Transition.ChangeInfo) r4.get(r11);
+       r11 = r11 + 1;
+       r8.mEndParent = ((com.android.server.wm.Transition.ChangeInfo) r4.get(r11)).mContainer;
+       r1.add(r8);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:245:0x04af, code lost:
-    
-        r4.add(r12);
-     */
+
+       r4.add(r12);
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.util.ArrayList calculateTargets(android.util.ArraySet r25, android.util.ArrayMap r26, int r27) {
+    public static java.util.ArrayList calculateTargets(
+            android.util.ArraySet r25, android.util.ArrayMap r26, int r27) {
         /*
             Method dump skipped, instructions count: 1504
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.Transition.calculateTargets(android.util.ArraySet, android.util.ArrayMap, int):java.util.ArrayList");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.Transition.calculateTargets(android.util.ArraySet,"
+                    + " android.util.ArrayMap, int):java.util.ArrayList");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:135:0x01f7, code lost:
-    
-        if (r15.mChildren.indexOf(r1) < r15.mChildren.indexOf(r9)) goto L154;
-     */
+
+       if (r15.mChildren.indexOf(r1) < r15.mChildren.indexOf(r9)) goto L154;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:199:0x0359, code lost:
-    
-        if (r13.getMode() == 1) goto L263;
-     */
+
+       if (r13.getMode() == 1) goto L263;
+    */
     /* JADX WARN: Removed duplicated region for block: B:107:0x018f  */
     /* JADX WARN: Removed duplicated region for block: B:121:0x01ba  */
     /* JADX WARN: Removed duplicated region for block: B:163:0x02e2  */
@@ -638,12 +722,20 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.window.TransitionInfo calculateTransitionInfo(int r29, int r30, java.util.ArrayList r31, android.view.SurfaceControl.Transaction r32) {
+    public static android.window.TransitionInfo calculateTransitionInfo(
+            int r29,
+            int r30,
+            java.util.ArrayList r31,
+            android.view.SurfaceControl.Transaction r32) {
         /*
             Method dump skipped, instructions count: 2085
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.Transition.calculateTransitionInfo(int, int, java.util.ArrayList, android.view.SurfaceControl$Transaction):android.window.TransitionInfo");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.Transition.calculateTransitionInfo(int, int,"
+                    + " java.util.ArrayList,"
+                    + " android.view.SurfaceControl$Transaction):android.window.TransitionInfo");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:24:0x0081  */
@@ -651,17 +743,23 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
     /* JADX WARN: Removed duplicated region for block: B:30:0x0172  */
     /* JADX WARN: Removed duplicated region for block: B:36:0x0196  */
     /* JADX WARN: Removed duplicated region for block: B:38:0x0132 A[LOOP:1: B:38:0x0132->B:40:0x0138, LOOP_START, PHI: r0
-      0x0132: PHI (r0v4 com.android.server.wm.WindowContainer) = (r0v3 com.android.server.wm.WindowContainer), (r0v5 com.android.server.wm.WindowContainer) binds: [B:26:0x0116, B:40:0x0138] A[DONT_GENERATE, DONT_INLINE]] */
+    0x0132: PHI (r0v4 com.android.server.wm.WindowContainer) = (r0v3 com.android.server.wm.WindowContainer), (r0v5 com.android.server.wm.WindowContainer) binds: [B:26:0x0116, B:40:0x0138] A[DONT_GENERATE, DONT_INLINE]] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void calculateTransitionRoots(android.window.TransitionInfo r16, java.util.ArrayList r17, android.view.SurfaceControl.Transaction r18) {
+    public static void calculateTransitionRoots(
+            android.window.TransitionInfo r16,
+            java.util.ArrayList r17,
+            android.view.SurfaceControl.Transaction r18) {
         /*
             Method dump skipped, instructions count: 426
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.Transition.calculateTransitionRoots(android.window.TransitionInfo, java.util.ArrayList, android.view.SurfaceControl$Transaction):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.Transition.calculateTransitionRoots(android.window.TransitionInfo,"
+                    + " java.util.ArrayList, android.view.SurfaceControl$Transaction):void");
     }
 
     public static boolean containsChangeFor(WindowContainer windowContainer, ArrayList arrayList) {
@@ -687,7 +785,9 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
 
     public static WindowContainer getAnimatableParent(WindowContainer windowContainer) {
         WindowContainer parent = windowContainer.getParent();
-        while (parent != null && !parent.canCreateRemoteAnimationTarget() && !parent.isOrganized()) {
+        while (parent != null
+                && !parent.canCreateRemoteAnimationTarget()
+                && !parent.isOrganized()) {
             parent = parent.getParent();
         }
         return parent;
@@ -700,47 +800,69 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         return -1;
     }
 
-    public static WindowManager.LayoutParams getLayoutParamsForAnimationsStyle(ArrayList arrayList, final int i) {
+    public static WindowManager.LayoutParams getLayoutParamsForAnimationsStyle(
+            ArrayList arrayList, final int i) {
         final ArraySet arraySet = new ArraySet();
         int size = arrayList.size();
         for (int i2 = 0; i2 < size; i2++) {
             WindowContainer windowContainer = ((ChangeInfo) arrayList.get(i2)).mContainer;
             if (windowContainer.asActivityRecord() != null) {
                 arraySet.add(Integer.valueOf(windowContainer.getActivityType()));
-            } else if (windowContainer.asWindowToken() == null && windowContainer.asWindowState() == null) {
+            } else if (windowContainer.asWindowToken() == null
+                    && windowContainer.asWindowState() == null) {
                 return null;
             }
         }
         if (arraySet.isEmpty()) {
             return null;
         }
-        ActivityRecord lookForTopWindowWithFilter = lookForTopWindowWithFilter(arrayList, new Predicate() { // from class: com.android.server.wm.Transition$$ExternalSyntheticLambda8
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                int i3 = i;
-                ArraySet arraySet2 = arraySet;
-                RemoteAnimationDefinition remoteAnimationDefinition = ((ActivityRecord) obj).mRemoteAnimationDefinition;
-                return remoteAnimationDefinition != null && remoteAnimationDefinition.hasTransition(i3, arraySet2);
-            }
-        });
-        if (lookForTopWindowWithFilter == null && (lookForTopWindowWithFilter = lookForTopWindowWithFilter(arrayList, new Transition$$ExternalSyntheticLambda2(2))) == null) {
-            lookForTopWindowWithFilter = lookForTopWindowWithFilter(arrayList, new Transition$$ExternalSyntheticLambda2(1));
+        ActivityRecord lookForTopWindowWithFilter =
+                lookForTopWindowWithFilter(
+                        arrayList,
+                        new Predicate() { // from class:
+                                          // com.android.server.wm.Transition$$ExternalSyntheticLambda8
+                            @Override // java.util.function.Predicate
+                            public final boolean test(Object obj) {
+                                int i3 = i;
+                                ArraySet arraySet2 = arraySet;
+                                RemoteAnimationDefinition remoteAnimationDefinition =
+                                        ((ActivityRecord) obj).mRemoteAnimationDefinition;
+                                return remoteAnimationDefinition != null
+                                        && remoteAnimationDefinition.hasTransition(i3, arraySet2);
+                            }
+                        });
+        if (lookForTopWindowWithFilter == null
+                && (lookForTopWindowWithFilter =
+                                lookForTopWindowWithFilter(
+                                        arrayList, new Transition$$ExternalSyntheticLambda2(2)))
+                        == null) {
+            lookForTopWindowWithFilter =
+                    lookForTopWindowWithFilter(
+                            arrayList, new Transition$$ExternalSyntheticLambda2(1));
         }
-        WindowState findMainWindow = lookForTopWindowWithFilter != null ? lookForTopWindowWithFilter.findMainWindow(true) : null;
+        WindowState findMainWindow =
+                lookForTopWindowWithFilter != null
+                        ? lookForTopWindowWithFilter.findMainWindow(true)
+                        : null;
         if (findMainWindow != null) {
             return findMainWindow.mAttrs;
         }
         return null;
     }
 
-    public static SurfaceControl getLeashSurface(SurfaceControl.Transaction transaction, WindowContainer windowContainer) {
+    public static SurfaceControl getLeashSurface(
+            SurfaceControl.Transaction transaction, WindowContainer windowContainer) {
         WindowToken asWindowToken;
         DisplayContent asDisplayContent = windowContainer.asDisplayContent();
         if (asDisplayContent != null) {
             return asDisplayContent.getWindowingLayer();
         }
-        if (!windowContainer.mTransitionController.useShellTransitionsRotation() && (asWindowToken = windowContainer.asWindowToken()) != null) {
-            SurfaceControl orCreateFixedRotationLeash = transaction != null ? asWindowToken.getOrCreateFixedRotationLeash(transaction) : asWindowToken.mFixedRotationTransformLeash;
+        if (!windowContainer.mTransitionController.useShellTransitionsRotation()
+                && (asWindowToken = windowContainer.asWindowToken()) != null) {
+            SurfaceControl orCreateFixedRotationLeash =
+                    transaction != null
+                            ? asWindowToken.getOrCreateFixedRotationLeash(transaction)
+                            : asWindowToken.mFixedRotationTransformLeash;
             if (orCreateFixedRotationLeash != null) {
                 return orCreateFixedRotationLeash;
             }
@@ -756,7 +878,12 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         int size = list.size();
         for (int i = 0; i < size; i++) {
             WindowContainer windowContainer = ((ChangeInfo) list.get(i)).mContainer;
-            ActivityRecord topNonFinishingActivity = windowContainer.asTaskFragment() != null ? windowContainer.asTaskFragment().getTopNonFinishingActivity(true, true) : windowContainer.asActivityRecord();
+            ActivityRecord topNonFinishingActivity =
+                    windowContainer.asTaskFragment() != null
+                            ? windowContainer
+                                    .asTaskFragment()
+                                    .getTopNonFinishingActivity(true, true)
+                            : windowContainer.asActivityRecord();
             if (topNonFinishingActivity != null && predicate.test(topNonFinishingActivity)) {
                 return topNonFinishingActivity;
             }
@@ -764,21 +891,37 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         return null;
     }
 
-    public static void resetSurfaceTransform(SurfaceControl.Transaction transaction, WindowContainer windowContainer, SurfaceControl surfaceControl) {
+    public static void resetSurfaceTransform(
+            SurfaceControl.Transaction transaction,
+            WindowContainer windowContainer,
+            SurfaceControl surfaceControl) {
         windowContainer.getRelativePosition(new Point());
         transaction.setPosition(surfaceControl, r0.x, r0.y);
         if (windowContainer.asTaskFragment() == null) {
             transaction.setCrop(surfaceControl, null);
         } else {
             Rect resolvedOverrideBounds = windowContainer.getResolvedOverrideBounds();
-            if (!CoreRune.MW_SPLIT_SHELL_TRANSITION || !windowContainer.inSplitScreenWindowingMode() || windowContainer.asTask() == null || windowContainer.asTask().mCreatedByOrganizer || resolvedOverrideBounds.isEmpty() || windowContainer.getParent() == null) {
-                transaction.setWindowCrop(surfaceControl, resolvedOverrideBounds.width(), resolvedOverrideBounds.height());
+            if (!CoreRune.MW_SPLIT_SHELL_TRANSITION
+                    || !windowContainer.inSplitScreenWindowingMode()
+                    || windowContainer.asTask() == null
+                    || windowContainer.asTask().mCreatedByOrganizer
+                    || resolvedOverrideBounds.isEmpty()
+                    || windowContainer.getParent() == null) {
+                transaction.setWindowCrop(
+                        surfaceControl,
+                        resolvedOverrideBounds.width(),
+                        resolvedOverrideBounds.height());
             } else {
                 Rect bounds = windowContainer.getParent().getBounds();
                 transaction.setWindowCrop(surfaceControl, bounds.width(), bounds.height());
             }
         }
-        transaction.setMatrix(surfaceControl, 1.0f, FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE, 1.0f);
+        transaction.setMatrix(
+                surfaceControl,
+                1.0f,
+                FullScreenMagnificationGestureHandler.MAX_SCALE,
+                FullScreenMagnificationGestureHandler.MAX_SCALE,
+                1.0f);
         if (windowContainer.isOrganized() && windowContainer.matchParentBounds()) {
             transaction.setWindowCrop(surfaceControl, -1, -1);
         }
@@ -792,7 +935,12 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         }
         if (i == -1) {
             if (CoreRune.FW_SHELL_TRANSITION_LOG) {
-                Slog.d("WindowManager", "Aborting Transition: " + this.mSyncId + " in STATE_PENDING called from" + Debug.getCaller());
+                Slog.d(
+                        "WindowManager",
+                        "Aborting Transition: "
+                                + this.mSyncId
+                                + " in STATE_PENDING called from"
+                                + Debug.getCaller());
             }
             this.mState = 3;
             return;
@@ -801,9 +949,21 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
             throw new IllegalStateException("Too late to abort. state=" + this.mState);
         }
         if (CoreRune.FW_SHELL_TRANSITION_LOG) {
-            Slog.d("WindowManager", "Aborting Transition: " + this.mSyncId + " in state " + this.mState + " called from " + Debug.getCaller());
+            Slog.d(
+                    "WindowManager",
+                    "Aborting Transition: "
+                            + this.mSyncId
+                            + " in state "
+                            + this.mState
+                            + " called from "
+                            + Debug.getCaller());
         } else if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_TRANSITIONS_enabled[1]) {
-            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS, 1230784960534033968L, 1, null, Long.valueOf(this.mSyncId));
+            ProtoLogImpl_54989576.v(
+                    ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS,
+                    1230784960534033968L,
+                    1,
+                    null,
+                    Long.valueOf(this.mSyncId));
         }
         this.mState = 3;
         long elapsedRealtimeNanos = SystemClock.elapsedRealtimeNanos();
@@ -818,7 +978,9 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         syncGroup.finishNow();
         bLASTSyncEngine.removeFromDependencies(syncGroup);
         for (int i3 = 0; i3 < transitionController.mLegacyListeners.size(); i3++) {
-            ((WindowManagerInternal.AppTransitionListener) transitionController.mLegacyListeners.get(i3)).onAppTransitionCancelledLocked(false);
+            ((WindowManagerInternal.AppTransitionListener)
+                            transitionController.mLegacyListeners.get(i3))
+                    .onAppTransitionCancelledLocked(false);
         }
         invokeTransitionEndedListeners();
         if (CoreRune.MW_SHELL_CHANGE_TRANSITION) {
@@ -826,15 +988,23 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
             changeTransitionController.getClass();
             if (CoreRune.MW_NATURAL_SWITCHING_PIP) {
                 if (changeTransitionController.mTransitionToChangingPipTask.containsKey(this)) {
-                    Slog.d("ChangeTransitionController", "onTransitionAborted: " + this + ", changingPipTasks=" + changeTransitionController.mTransitionToChangingPipTask);
-                    ((Task) changeTransitionController.mTransitionToChangingPipTask.get(this)).mIsChangingPipToSplit = false;
+                    Slog.d(
+                            "ChangeTransitionController",
+                            "onTransitionAborted: "
+                                    + this
+                                    + ", changingPipTasks="
+                                    + changeTransitionController.mTransitionToChangingPipTask);
+                    ((Task) changeTransitionController.mTransitionToChangingPipTask.get(this))
+                                    .mIsChangingPipToSplit =
+                            false;
                 }
                 changeTransitionController.mTransitionToChangingPipTask.clear();
             }
         }
         if (CoreRune.MW_SHELL_TRANSITION) {
             transitionController.getClass();
-            if (logger.mRequest == null || (transitionPlayer = transitionController.getTransitionPlayer()) == null) {
+            if (logger.mRequest == null
+                    || (transitionPlayer = transitionController.getTransitionPlayer()) == null) {
                 return;
             }
             try {
@@ -855,14 +1025,18 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
 
     public final void applyDisplayChangeIfNeeded(ArraySet arraySet) {
         for (int size = this.mParticipants.size() - 1; size >= 0; size--) {
-            DisplayContent asDisplayContent = ((WindowContainer) this.mParticipants.valueAt(size)).asDisplayContent();
-            if (asDisplayContent != null && ((ChangeInfo) this.mChanges.get(asDisplayContent)).hasChanged()) {
+            DisplayContent asDisplayContent =
+                    ((WindowContainer) this.mParticipants.valueAt(size)).asDisplayContent();
+            if (asDisplayContent != null
+                    && ((ChangeInfo) this.mChanges.get(asDisplayContent)).hasChanged()) {
                 boolean sendNewConfiguration = asDisplayContent.sendNewConfiguration();
                 if (!this.mReadyTrackerOld.mUsed) {
                     setReady(asDisplayContent, true);
                 }
-                if (sendNewConfiguration && this.mController.mAtm.mTaskSupervisor.mDeferRootVisibilityUpdate) {
-                    asDisplayContent.forAllActivities(new Transition$$ExternalSyntheticLambda11(1, arraySet));
+                if (sendNewConfiguration
+                        && this.mController.mAtm.mTaskSupervisor.mDeferRootVisibilityUpdate) {
+                    asDisplayContent.forAllActivities(
+                            new Transition$$ExternalSyntheticLambda11(1, arraySet));
                 }
             }
         }
@@ -881,19 +1055,27 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
             allReady = this.mReadyTrackerOld.allReady();
         }
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_TRANSITIONS_enabled[1]) {
-            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS, -3942072270654590479L, 7, null, Boolean.valueOf(allReady), Long.valueOf(this.mSyncId));
+            ProtoLogImpl_54989576.v(
+                    ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS,
+                    -3942072270654590479L,
+                    7,
+                    null,
+                    Boolean.valueOf(allReady),
+                    Long.valueOf(this.mSyncId));
         }
         if (this.mSyncEngine.setReady(this.mSyncId, allReady) && allReady) {
             this.mLogger.mReadyTimeNs = SystemClock.elapsedRealtimeNanos();
             this.mOnTopTasksAtReady.clear();
             for (int i = 0; i < this.mTargetDisplays.size(); i++) {
-                addOnTopTasks((DisplayContent) this.mTargetDisplays.get(i), this.mOnTopTasksAtReady);
+                addOnTopTasks(
+                        (DisplayContent) this.mTargetDisplays.get(i), this.mOnTopTasksAtReady);
             }
             transitionController.tryStartCollectFromQueue();
         }
     }
 
-    public final void buildFinishTransaction(SurfaceControl.Transaction transaction, TransitionInfo transitionInfo) {
+    public final void buildFinishTransaction(
+            SurfaceControl.Transaction transaction, TransitionInfo transitionInfo) {
         int i;
         ArraySet arraySet = new ArraySet();
         int size = this.mTargets.size() - 1;
@@ -905,7 +1087,11 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
             WindowContainer windowContainer = ((ChangeInfo) this.mTargets.get(size)).mContainer;
             if (windowContainer.getParent() != null) {
                 SurfaceControl leashSurface = getLeashSurface(null, windowContainer);
-                transaction.reparent(leashSurface, windowContainer.asDisplayContent() != null ? windowContainer.getSurfaceControl() : windowContainer.getParent().getSurfaceControl());
+                transaction.reparent(
+                        leashSurface,
+                        windowContainer.asDisplayContent() != null
+                                ? windowContainer.getSurfaceControl()
+                                : windowContainer.getParent().getSurfaceControl());
                 transaction.setLayer(leashSurface, windowContainer.getLastLayer());
                 Task asTask = windowContainer.asTask();
                 boolean z = asTask != null && asTask.inFreeformWindowingMode();
@@ -916,20 +1102,27 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
                 if (asTask != null && asTask.isStageRootTask()) {
                     i = 1;
                 }
-                if ((!CoreRune.MW_PIP_SHELL_TRANSITION || !z2) && (!CoreRune.MW_MULTI_SPLIT_ROUNDED_CORNER || i == 0)) {
-                    transaction.setCornerRadius(leashSurface, FullScreenMagnificationGestureHandler.MAX_SCALE);
-                    transaction.setShadowRadius(leashSurface, FullScreenMagnificationGestureHandler.MAX_SCALE);
+                if ((!CoreRune.MW_PIP_SHELL_TRANSITION || !z2)
+                        && (!CoreRune.MW_MULTI_SPLIT_ROUNDED_CORNER || i == 0)) {
+                    transaction.setCornerRadius(
+                            leashSurface, FullScreenMagnificationGestureHandler.MAX_SCALE);
+                    transaction.setShadowRadius(
+                            leashSurface, FullScreenMagnificationGestureHandler.MAX_SCALE);
                 }
-                if (CoreRune.FW_SHELL_TRANSITION_TRANSIENT_LAUNCH_OVERLAY && windowContainer.asTransientLaunchOverlay() != null) {
+                if (CoreRune.FW_SHELL_TRANSITION_TRANSIENT_LAUNCH_OVERLAY
+                        && windowContainer.asTransientLaunchOverlay() != null) {
                     transaction.hide(leashSurface);
                 }
                 if (z && asTask.isFreeformForceHidden()) {
-                    transaction.setAlpha(leashSurface, FullScreenMagnificationGestureHandler.MAX_SCALE);
+                    transaction.setAlpha(
+                            leashSurface, FullScreenMagnificationGestureHandler.MAX_SCALE);
                 } else {
                     transaction.setAlpha(leashSurface, 1.0f);
                 }
                 arraySet.add(windowContainer.getDisplayContent());
-                if ((((ChangeInfo) this.mTargets.get(size)).mFlags & 64) == 0 && (windowContainer.asWallpaperToken() == null || !windowContainer.asWallpaperToken().mIsPortraitWindowToken)) {
+                if ((((ChangeInfo) this.mTargets.get(size)).mFlags & 64) == 0
+                        && (windowContainer.asWallpaperToken() == null
+                                || !windowContainer.asWallpaperToken().mIsPortraitWindowToken)) {
                     resetSurfaceTransform(transaction, windowContainer, leashSurface);
                 }
             }
@@ -939,7 +1132,9 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         if (iContainerFreezer != null) {
             ScreenshotFreezer screenshotFreezer = (ScreenshotFreezer) iContainerFreezer;
             for (int i2 = 0; i2 < screenshotFreezer.mFrozen.size(); i2++) {
-                ChangeInfo changeInfo = (ChangeInfo) Transition.this.mChanges.get(screenshotFreezer.mFrozen.valueAt(i2));
+                ChangeInfo changeInfo =
+                        (ChangeInfo)
+                                Transition.this.mChanges.get(screenshotFreezer.mFrozen.valueAt(i2));
                 Objects.requireNonNull(changeInfo);
                 SurfaceControl surfaceControl = changeInfo.mSnapshot;
                 if (surfaceControl != null) {
@@ -958,17 +1153,33 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         }
     }
 
-    public final void calcParallelCollectType(WindowContainerTransaction windowContainerTransaction) {
+    public final void calcParallelCollectType(
+            WindowContainerTransaction windowContainerTransaction) {
         Bundle launchOptions;
         for (int i = 0; i < windowContainerTransaction.getHierarchyOps().size(); i++) {
-            WindowContainerTransaction.HierarchyOp hierarchyOp = (WindowContainerTransaction.HierarchyOp) windowContainerTransaction.getHierarchyOps().get(i);
-            if (hierarchyOp.getType() == 7 && (launchOptions = hierarchyOp.getLaunchOptions()) != null && !launchOptions.isEmpty() && launchOptions.getBoolean("android.activity.transientLaunch")) {
+            WindowContainerTransaction.HierarchyOp hierarchyOp =
+                    (WindowContainerTransaction.HierarchyOp)
+                            windowContainerTransaction.getHierarchyOps().get(i);
+            if (hierarchyOp.getType() == 7
+                    && (launchOptions = hierarchyOp.getLaunchOptions()) != null
+                    && !launchOptions.isEmpty()
+                    && launchOptions.getBoolean("android.activity.transientLaunch")) {
                 if (CoreRune.FW_SHELL_TRANSITION_LOG) {
                     if (ProtoLogImpl_54989576.Cache.WM_FORCE_DEBUG_WINDOW_TRANSITIONS_enabled[1]) {
-                        ProtoLogImpl_54989576.v(ProtoLogGroup.WM_FORCE_DEBUG_WINDOW_TRANSITIONS, 4330128790342680291L, 0, "Starting a Recents transition which can be parallel.", null);
+                        ProtoLogImpl_54989576.v(
+                                ProtoLogGroup.WM_FORCE_DEBUG_WINDOW_TRANSITIONS,
+                                4330128790342680291L,
+                                0,
+                                "Starting a Recents transition which can be parallel.",
+                                null);
                     }
                 } else if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_TRANSITIONS_enabled[1]) {
-                    ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS, -2700498872917476567L, 0, null, null);
+                    ProtoLogImpl_54989576.v(
+                            ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS,
+                            -2700498872917476567L,
+                            0,
+                            null,
+                            null);
                 }
                 this.mParallelCollectType = 2;
             }
@@ -983,13 +1194,16 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
             if (surfaceControl2 != null) {
                 surfaceControl2.release();
             }
-            if (CoreRune.MW_SHELL_CHANGE_TRANSITION && (surfaceControl = changeInfo.mChangeLeash) != null) {
+            if (CoreRune.MW_SHELL_CHANGE_TRANSITION
+                    && (surfaceControl = changeInfo.mChangeLeash) != null) {
                 surfaceControl.release();
                 changeInfo.mChangeLeash = null;
             }
             if (CoreRune.MW_FREEFORM_MINIMIZE_SHELL_TRANSITION) {
                 changeInfo.mMinimizeAnimState = 0;
-                changeInfo.mMinimizePoint.set(FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE);
+                changeInfo.mMinimizePoint.set(
+                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        FullScreenMagnificationGestureHandler.MAX_SCALE);
             }
             Task asTask = changeInfo.mContainer.asTask();
             if (asTask != null) {
@@ -1010,24 +1224,42 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         if (isCollecting()) {
             if (CoreRune.FW_SHELL_TRANSITION_BUG_FIX && isWallpaper(windowContainer)) {
                 DisplayContent displayContent = windowContainer.mDisplayContent;
-                if (!displayContent.isDefaultDisplay && !this.mTargetDisplays.contains(displayContent)) {
-                    ActivityManagerService$$ExternalSyntheticOutline0.m(10, new StringBuilder("don't collect wallpaper of other display. caller="), "Transition");
+                if (!displayContent.isDefaultDisplay
+                        && !this.mTargetDisplays.contains(displayContent)) {
+                    ActivityManagerService$$ExternalSyntheticOutline0.m(
+                            10,
+                            new StringBuilder("don't collect wallpaper of other display. caller="),
+                            "Transition");
                     return;
                 }
             }
             if (CoreRune.FW_SHELL_TRANSITION_LOG) {
                 if (ProtoLogImpl_54989576.Cache.WM_FORCE_DEBUG_WINDOW_TRANSITIONS_enabled[1]) {
-                    ProtoLogImpl_54989576.v(ProtoLogGroup.WM_FORCE_DEBUG_WINDOW_TRANSITIONS, 4599273309511892975L, 1, "Collecting in transition %d: %s, caller=%s", Long.valueOf(this.mSyncId), String.valueOf(windowContainer), String.valueOf(Debug.getCallers(5)));
+                    ProtoLogImpl_54989576.v(
+                            ProtoLogGroup.WM_FORCE_DEBUG_WINDOW_TRANSITIONS,
+                            4599273309511892975L,
+                            1,
+                            "Collecting in transition %d: %s, caller=%s",
+                            Long.valueOf(this.mSyncId),
+                            String.valueOf(windowContainer),
+                            String.valueOf(Debug.getCallers(5)));
                 }
             } else if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_TRANSITIONS_enabled[1]) {
-                ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS, -4672522645315112127L, 1, null, Long.valueOf(this.mSyncId), String.valueOf(windowContainer));
+                ProtoLogImpl_54989576.v(
+                        ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS,
+                        -4672522645315112127L,
+                        1,
+                        null,
+                        Long.valueOf(this.mSyncId),
+                        String.valueOf(windowContainer));
             }
             snapshotStartState(getAnimatableParent(windowContainer));
             if (!this.mParticipants.contains(windowContainer) || z) {
                 if (!isInTransientHide(windowContainer)) {
                     this.mSyncEngine.addToSyncSet(this.mSyncId, windowContainer);
                 }
-                if (windowContainer.asWindowToken() == null || !windowContainer.asWindowToken().mRoundedCornerOverlay) {
+                if (windowContainer.asWindowToken() == null
+                        || !windowContainer.asWindowToken().mRoundedCornerOverlay) {
                     ChangeInfo changeInfo = (ChangeInfo) this.mChanges.get(windowContainer);
                     if (changeInfo == null) {
                         changeInfo = new ChangeInfo(windowContainer);
@@ -1036,7 +1268,25 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
                         if (windowContainer2.asActivityRecord() != null) {
                             TransitionController.Logger logger = this.mLogger;
                             TransitionRequestInfo transitionRequestInfo = logger.mRequest;
-                            if (((transitionRequestInfo == null || transitionRequestInfo.getType() != 6 || logger.mRequest.getDisplayChange() == null) ? false : logger.mRequest.getDisplayChange().isPhysicalDisplayChanged()) && windowContainer2.asActivityRecord().task != null && windowContainer2.asActivityRecord().task.topRunningActivity(false) != null && windowContainer2.asActivityRecord().task.topRunningActivity(false).mPopOverState.mIsActivated) {
+                            if (((transitionRequestInfo == null
+                                                    || transitionRequestInfo.getType() != 6
+                                                    || logger.mRequest.getDisplayChange() == null)
+                                            ? false
+                                            : logger.mRequest
+                                                    .getDisplayChange()
+                                                    .isPhysicalDisplayChanged())
+                                    && windowContainer2.asActivityRecord().task != null
+                                    && windowContainer2
+                                                    .asActivityRecord()
+                                                    .task
+                                                    .topRunningActivity(false)
+                                            != null
+                                    && windowContainer2
+                                            .asActivityRecord()
+                                            .task
+                                            .topRunningActivity(false)
+                                            .mPopOverState
+                                            .mIsActivated) {
                                 changeInfo.mFlags |= 262144;
                             }
                         }
@@ -1045,8 +1295,10 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
                     this.mParticipants.add(windowContainer);
                     recordDisplay(windowContainer.getDisplayContent());
                     if (changeInfo.mShowWallpaper) {
-                        WallpaperController.FindWallpaperTargetResult findWallpaperTargetResult = windowContainer.mDisplayContent.mWallpaperController.mFindResults;
-                        WallpaperController.FindWallpaperTargetResult.TopWallpaper topWallpaper = findWallpaperTargetResult.mTopWallpaper;
+                        WallpaperController.FindWallpaperTargetResult findWallpaperTargetResult =
+                                windowContainer.mDisplayContent.mWallpaperController.mFindResults;
+                        WallpaperController.FindWallpaperTargetResult.TopWallpaper topWallpaper =
+                                findWallpaperTargetResult.mTopWallpaper;
                         if (topWallpaper.mTopShowWhenLockedWallpaper != null) {
                             if (Flags.ensureWallpaperInTransitions()) {
                                 collect(topWallpaper.mTopShowWhenLockedWallpaper.mToken, false);
@@ -1054,7 +1306,8 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
                                 collect(topWallpaper.mTopShowWhenLockedWallpaper, false);
                             }
                         }
-                        if (findWallpaperTargetResult.mTopWallpaper.mTopHideWhenLockedWallpaper != null) {
+                        if (findWallpaperTargetResult.mTopWallpaper.mTopHideWhenLockedWallpaper
+                                != null) {
                             if (Flags.ensureWallpaperInTransitions()) {
                                 collect(topWallpaper.mTopHideWhenLockedWallpaper.mToken, false);
                             } else {
@@ -1080,7 +1333,13 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
             return;
         }
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_TRANSITIONS_enabled[1]) {
-            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS, 1101215730201607371L, 1, null, Long.valueOf(this.mSyncId), String.valueOf(windowContainer));
+            ProtoLogImpl_54989576.v(
+                    ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS,
+                    1101215730201607371L,
+                    1,
+                    null,
+                    Long.valueOf(this.mSyncId),
+                    String.valueOf(windowContainer));
         }
         collect(windowContainer, false);
         ((ChangeInfo) this.mChanges.get(windowContainer)).mExistenceChanged = true;
@@ -1210,21 +1469,23 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         Le4:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.Transition.collectOrderChanges(boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.Transition.collectOrderChanges(boolean):void");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:146:0x044d, code lost:
-    
-        if (r2.inSplitScreenWindowingMode() != false) goto L190;
-     */
+
+       if (r2.inSplitScreenWindowingMode() != false) goto L190;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:153:0x0469, code lost:
-    
-        if (com.android.server.wm.MultiTaskingAppCompatConfiguration.isPresetWallpaperLetterboxed(r2 != null ? r2.getTopNonFinishingActivity(true, true) : r25.asActivityRecord()) != false) goto L190;
-     */
+
+       if (com.android.server.wm.MultiTaskingAppCompatConfiguration.isPresetWallpaperLetterboxed(r2 != null ? r2.getTopNonFinishingActivity(true, true) : r25.asActivityRecord()) != false) goto L190;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:175:0x04be, code lost:
-    
-        if ((r3.mChangeTransitFlags & 1) != 0) goto L226;
-     */
+
+       if ((r3.mChangeTransitFlags & 1) != 0) goto L226;
+    */
     /* JADX WARN: Removed duplicated region for block: B:185:0x0525  */
     /* JADX WARN: Removed duplicated region for block: B:187:0x052a  */
     /* JADX WARN: Removed duplicated region for block: B:189:0x0530  */
@@ -1246,7 +1507,9 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
             Method dump skipped, instructions count: 1661
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.Transition.collectVisibleChange(com.android.server.wm.WindowContainer):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.Transition.collectVisibleChange(com.android.server.wm.WindowContainer):void");
     }
 
     public final boolean didCommitTransientLaunch() {
@@ -1269,25 +1532,32 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         return this.mStartTransaction;
     }
 
-    public final void handleLegacyRecentsStartBehavior(DisplayContent displayContent, TransitionInfo transitionInfo) {
+    public final void handleLegacyRecentsStartBehavior(
+            DisplayContent displayContent, TransitionInfo transitionInfo) {
         WindowState windowState;
         WindowToken windowToken;
         Task fromWindowContainerToken;
         if ((this.mFlags & 128) == 0) {
             return;
         }
-        InputConsumerImpl inputConsumer = displayContent.mInputMonitor.getInputConsumer("recents_animation_input_consumer");
+        InputConsumerImpl inputConsumer =
+                displayContent.mInputMonitor.getInputConsumer("recents_animation_input_consumer");
         WindowContainer windowContainer = null;
         ActivityRecord activityRecord = null;
         if (inputConsumer != null) {
             Task task = null;
             for (int i = 0; i < transitionInfo.getChanges().size(); i++) {
-                ActivityManager.RunningTaskInfo taskInfo = ((TransitionInfo.Change) transitionInfo.getChanges().get(i)).getTaskInfo();
-                if (taskInfo != null && (fromWindowContainerToken = Task.fromWindowContainerToken(taskInfo.token)) != null) {
+                ActivityManager.RunningTaskInfo taskInfo =
+                        ((TransitionInfo.Change) transitionInfo.getChanges().get(i)).getTaskInfo();
+                if (taskInfo != null
+                        && (fromWindowContainerToken =
+                                        Task.fromWindowContainerToken(taskInfo.token))
+                                != null) {
                     int i2 = taskInfo.topActivityType;
                     boolean z = i2 == 2 || i2 == 3;
                     if (z && activityRecord == null) {
-                        activityRecord = fromWindowContainerToken.getTopVisibleActivity(true, false);
+                        activityRecord =
+                                fromWindowContainerToken.getTopVisibleActivity(true, false);
                     } else if (!z && task == null) {
                         task = fromWindowContainerToken;
                     }
@@ -1302,30 +1572,41 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
             return;
         }
         this.mRecentsDisplayId = displayContent.mDisplayId;
-        if (displayContent.mDisplayPolicy.shouldAttachNavBarToAppDuringTransition() && displayContent.getAsyncRotationController() == null) {
+        if (displayContent.mDisplayPolicy.shouldAttachNavBarToAppDuringTransition()
+                && displayContent.getAsyncRotationController() == null) {
             for (int i3 = 0; i3 < transitionInfo.getChanges().size(); i3++) {
-                TransitionInfo.Change change = (TransitionInfo.Change) transitionInfo.getChanges().get(i3);
-                if (change.getTaskInfo() != null && change.getTaskInfo().displayId == this.mRecentsDisplayId && change.getTaskInfo().getActivityType() == 1 && (change.getMode() == 2 || change.getMode() == 4)) {
+                TransitionInfo.Change change =
+                        (TransitionInfo.Change) transitionInfo.getChanges().get(i3);
+                if (change.getTaskInfo() != null
+                        && change.getTaskInfo().displayId == this.mRecentsDisplayId
+                        && change.getTaskInfo().getActivityType() == 1
+                        && (change.getMode() == 2 || change.getMode() == 4)) {
                     windowContainer = WindowContainer.fromBinder(change.getContainer().asBinder());
                     break;
                 }
             }
-            if (windowContainer == null || windowContainer.inMultiWindowMode() || (windowState = displayContent.mDisplayPolicy.mNavigationBar) == null || (windowToken = windowState.mToken) == null) {
+            if (windowContainer == null
+                    || windowContainer.inMultiWindowMode()
+                    || (windowState = displayContent.mDisplayPolicy.mNavigationBar) == null
+                    || (windowToken = windowState.mToken) == null) {
                 return;
             }
             this.mController.mNavigationBarAttachedToApp = true;
             windowToken.cancelAnimation();
-            SurfaceControl.Transaction pendingTransaction = windowState.mToken.getPendingTransaction();
+            SurfaceControl.Transaction pendingTransaction =
+                    windowState.mToken.getPendingTransaction();
             SurfaceControl surfaceControl = windowState.mToken.mSurfaceControl;
             pendingTransaction.reparent(surfaceControl, windowContainer.getSurfaceControl());
             pendingTransaction.show(surfaceControl);
             DisplayContent.ImeContainer imeContainer = displayContent.mImeWindowsContainer;
             if (imeContainer.isVisible()) {
-                pendingTransaction.setRelativeLayer(surfaceControl, imeContainer.getSurfaceControl(), 1);
+                pendingTransaction.setRelativeLayer(
+                        surfaceControl, imeContainer.getSurfaceControl(), 1);
             } else {
                 pendingTransaction.setLayer(surfaceControl, Integer.MAX_VALUE);
             }
-            StatusBarManagerInternal statusBarManagerInternal = displayContent.mDisplayPolicy.getStatusBarManagerInternal();
+            StatusBarManagerInternal statusBarManagerInternal =
+                    displayContent.mDisplayPolicy.getStatusBarManagerInternal();
             if (statusBarManagerInternal != null) {
                 int i4 = this.mRecentsDisplayId;
                 IStatusBar iStatusBar = StatusBarManagerService.this.mBar;
@@ -1399,16 +1680,30 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         int i = 0;
         for (int i2 = size - 1; i2 >= 0; i2--) {
             Task rootTask = ((ActivityRecord) this.mTransientLaunches.keyAt(i2)).getRootTask();
-            if (rootTask != null && (parent = rootTask.getParent()) != null && parent.getTopChild() != rootTask) {
-                ActivityTaskSupervisor.OpaqueActivityHelper opaqueActivityHelper = this.mController.mAtm.mTaskSupervisor.mOpaqueActivityHelper;
+            if (rootTask != null
+                    && (parent = rootTask.getParent()) != null
+                    && parent.getTopChild() != rootTask) {
+                ActivityTaskSupervisor.OpaqueActivityHelper opaqueActivityHelper =
+                        this.mController.mAtm.mTaskSupervisor.mOpaqueActivityHelper;
                 opaqueActivityHelper.mIncludeInvisibleAndFinishing = true;
                 opaqueActivityHelper.mIgnoringKeyguard = true;
                 opaqueActivityHelper.mIgnoreFloatingWindow = true;
                 ActivityRecord activity = parent.getActivity(opaqueActivityHelper, true, null);
                 if (rootTask.compareTo((WindowContainer) activity.getRootTask()) < 0) {
                     ActivityRecord activityRecord = task.topRunningActivity(false);
-                    if (this.mCanPipOnFinish && isInTransientHide(task) && activityRecord != null && activityRecord.checkEnterPictureInPictureState("startActivityUnchecked", false, false) && (pictureInPictureParams = activityRecord.pictureInPictureArgs) != null && pictureInPictureParams.isAutoEnterEnabled() && activity.isActivityTypeHome() && rootTask.isActivityTypeRecents()) {
-                        Slog.d("Transition", "PipTask isTransientVisible: Allow for auto-pip: " + task);
+                    if (this.mCanPipOnFinish
+                            && isInTransientHide(task)
+                            && activityRecord != null
+                            && activityRecord.checkEnterPictureInPictureState(
+                                    "startActivityUnchecked", false, false)
+                            && (pictureInPictureParams = activityRecord.pictureInPictureArgs)
+                                    != null
+                            && pictureInPictureParams.isAutoEnterEnabled()
+                            && activity.isActivityTypeHome()
+                            && rootTask.isActivityTypeRecents()) {
+                        Slog.d(
+                                "Transition",
+                                "PipTask isTransientVisible: Allow for auto-pip: " + task);
                         return true;
                     }
                     i++;
@@ -1436,12 +1731,17 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
             transitionController.mNavigationBarAttachedToApp = false;
             int i = this.mRecentsDisplayId;
             if (i == -1) {
-                Slog.i("Transition", "Restore parent surface of navigation bar by another transition");
+                Slog.i(
+                        "Transition",
+                        "Restore parent surface of navigation bar by another transition");
                 i = 0;
             }
-            DisplayContent displayContent = transitionController.mAtm.mRootWindowContainer.getDisplayContent(i);
-            StatusBarManagerInternal statusBarManagerInternal = displayContent.mDisplayPolicy.getStatusBarManagerInternal();
-            if (statusBarManagerInternal != null && (iStatusBar = StatusBarManagerService.this.mBar) != null) {
+            DisplayContent displayContent =
+                    transitionController.mAtm.mRootWindowContainer.getDisplayContent(i);
+            StatusBarManagerInternal statusBarManagerInternal =
+                    displayContent.mDisplayPolicy.getStatusBarManagerInternal();
+            if (statusBarManagerInternal != null
+                    && (iStatusBar = StatusBarManagerService.this.mBar) != null) {
                 try {
                     iStatusBar.setNavigationBarLumaSamplingEnabled(i, true);
                 } catch (RemoteException unused) {
@@ -1475,7 +1775,8 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
             if (z) {
                 new NavBarFadeAnimationController(displayContent).fadeWindowToken(true);
             } else {
-                pendingTransaction.reparent(windowToken.mSurfaceControl, parent.getSurfaceControl());
+                pendingTransaction.reparent(
+                        windowToken.mSurfaceControl, parent.getSurfaceControl());
             }
             displayContent.mWmService.scheduleAnimationLocked();
         }
@@ -1518,13 +1819,24 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
             windowState.mSyncMethodOverride = 1;
             if (!CoreRune.FW_SHELL_TRANSITION_LOG) {
                 if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_TRANSITIONS_enabled[1]) {
-                    ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS, 2734227875286695843L, 0, null, String.valueOf(windowState.getName()));
+                    ProtoLogImpl_54989576.v(
+                            ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS,
+                            2734227875286695843L,
+                            0,
+                            null,
+                            String.valueOf(windowState.getName()));
                     return;
                 }
                 return;
             }
             if (ProtoLogImpl_54989576.Cache.WM_FORCE_DEBUG_WINDOW_TRANSITIONS_enabled[1]) {
-                ProtoLogImpl_54989576.v(ProtoLogGroup.WM_FORCE_DEBUG_WINDOW_TRANSITIONS, -9070539140885954971L, 0, "Override sync-method for %s because seamless rotating, caller=%s", String.valueOf(windowState.getName()), String.valueOf(Debug.getCallers(5)));
+                ProtoLogImpl_54989576.v(
+                        ProtoLogGroup.WM_FORCE_DEBUG_WINDOW_TRANSITIONS,
+                        -9070539140885954971L,
+                        0,
+                        "Override sync-method for %s because seamless rotating, caller=%s",
+                        String.valueOf(windowState.getName()),
+                        String.valueOf(Debug.getCallers(5)));
             }
         }
     }
@@ -1537,18 +1849,41 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         }
         for (int size = this.mTargetDisplays.size() - 1; size >= 0; size--) {
             DisplayContent displayContent = (DisplayContent) this.mTargetDisplays.get(size);
-            AsyncRotationController asyncRotationController = displayContent.getAsyncRotationController();
-            if (asyncRotationController != null && containsChangeFor(displayContent, this.mTargets)) {
+            AsyncRotationController asyncRotationController =
+                    displayContent.getAsyncRotationController();
+            if (asyncRotationController != null
+                    && containsChangeFor(displayContent, this.mTargets)) {
                 SurfaceControl.Transaction transaction = this.mCleanupTransaction;
                 if (!asyncRotationController.mIsStartTransactionCommitted) {
-                    for (int size2 = asyncRotationController.mTargetWindowTokens.size() - 1; size2 >= 0; size2--) {
-                        AsyncRotationController.Operation operation = (AsyncRotationController.Operation) asyncRotationController.mTargetWindowTokens.valueAt(size2);
+                    for (int size2 = asyncRotationController.mTargetWindowTokens.size() - 1;
+                            size2 >= 0;
+                            size2--) {
+                        AsyncRotationController.Operation operation =
+                                (AsyncRotationController.Operation)
+                                        asyncRotationController.mTargetWindowTokens.valueAt(size2);
                         operation.mIsCompletionPending = true;
-                        if (operation.mAction == 1 && (surfaceControl = operation.mLeash) != null && surfaceControl.isValid()) {
-                            Slog.d("AsyncRotation_WindowManager", "Transaction timeout. Clear transform for " + ((WindowToken) asyncRotationController.mTargetWindowTokens.keyAt(size2)).getTopChild());
+                        if (operation.mAction == 1
+                                && (surfaceControl = operation.mLeash) != null
+                                && surfaceControl.isValid()) {
+                            Slog.d(
+                                    "AsyncRotation_WindowManager",
+                                    "Transaction timeout. Clear transform for "
+                                            + ((WindowToken)
+                                                            asyncRotationController
+                                                                    .mTargetWindowTokens.keyAt(
+                                                                    size2))
+                                                    .getTopChild());
                             SurfaceControl surfaceControl2 = operation.mLeash;
-                            transaction.setMatrix(surfaceControl2, 1.0f, FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE, 1.0f);
-                            transaction.setPosition(surfaceControl2, FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE);
+                            transaction.setMatrix(
+                                    surfaceControl2,
+                                    1.0f,
+                                    FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                    FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                    1.0f);
+                            transaction.setPosition(
+                                    surfaceControl2,
+                                    FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                    FullScreenMagnificationGestureHandler.MAX_SCALE);
                         }
                     }
                 }
@@ -1578,7 +1913,10 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
             Method dump skipped, instructions count: 2891
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.Transition.onTransactionReady(android.view.SurfaceControl$Transaction, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.Transition.onTransactionReady(android.view.SurfaceControl$Transaction,"
+                    + " int):void");
     }
 
     public final void postCleanupOnFailure() {
@@ -1606,7 +1944,9 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         if (iRemoteCallback == null) {
             return;
         }
-        this.mController.mAtm.mH.sendMessage(PooledLambda.obtainMessage(new Transition$$ExternalSyntheticLambda1(1), iRemoteCallback));
+        this.mController.mAtm.mH.sendMessage(
+                PooledLambda.obtainMessage(
+                        new Transition$$ExternalSyntheticLambda1(1), iRemoteCallback));
     }
 
     public final void setAllReady() {
@@ -1617,14 +1957,18 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         ReadyTrackerOld readyTrackerOld = this.mReadyTrackerOld;
         if (z) {
             readyTrackerOld.getClass();
-            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS, 6039132370452820927L, 0, null, null);
+            ProtoLogImpl_54989576.v(
+                    ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS, 6039132370452820927L, 0, null, null);
         }
         readyTrackerOld.mUsed = true;
         readyTrackerOld.mReadyOverride = true;
         applyReady();
     }
 
-    public final void setOverrideAnimation(TransitionInfo.AnimationOptions animationOptions, IRemoteCallback iRemoteCallback, IRemoteCallback iRemoteCallback2) {
+    public final void setOverrideAnimation(
+            TransitionInfo.AnimationOptions animationOptions,
+            IRemoteCallback iRemoteCallback,
+            IRemoteCallback iRemoteCallback2) {
         if (isCollecting()) {
             this.mOverrideOptions = animationOptions;
             sendRemoteCallback(this.mClientAnimationStartCallback);
@@ -1647,7 +1991,14 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
             if (windowContainer2 instanceof DisplayContent) {
                 readyTrackerOld.mReadyGroups.put(windowContainer2, Boolean.valueOf(z));
                 if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_TRANSITIONS_enabled[1]) {
-                    ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS, -4770394322045550928L, 3, null, Boolean.valueOf(z), String.valueOf(windowContainer2), String.valueOf(windowContainer));
+                    ProtoLogImpl_54989576.v(
+                            ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS,
+                            -4770394322045550928L,
+                            3,
+                            null,
+                            Boolean.valueOf(z),
+                            String.valueOf(windowContainer2),
+                            String.valueOf(windowContainer));
                 }
             } else {
                 windowContainer2 = windowContainer2.getParent();
@@ -1659,8 +2010,10 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
     public final boolean shouldApplyOnDisplayThread() {
         ChangeInfo changeInfo;
         for (int size = this.mParticipants.size() - 1; size >= 0; size--) {
-            DisplayContent asDisplayContent = ((WindowContainer) this.mParticipants.valueAt(size)).asDisplayContent();
-            if (asDisplayContent != null && (changeInfo = (ChangeInfo) this.mChanges.get(asDisplayContent)) != null) {
+            DisplayContent asDisplayContent =
+                    ((WindowContainer) this.mParticipants.valueAt(size)).asDisplayContent();
+            if (asDisplayContent != null
+                    && (changeInfo = (ChangeInfo) this.mChanges.get(asDisplayContent)) != null) {
                 if (changeInfo.mRotation != asDisplayContent.mDisplayRotation.mRotation) {
                     return Looper.myLooper() != this.mController.mAtm.mWindowManager.mH.getLooper();
                 }
@@ -1671,7 +2024,10 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
 
     public final boolean shouldUsePerfHint(DisplayContent displayContent) {
         TransitionInfo.AnimationOptions animationOptions = this.mOverrideOptions;
-        if (animationOptions != null && animationOptions.getType() == 5 && this.mType == 4 && this.mParticipants.size() == 1) {
+        if (animationOptions != null
+                && animationOptions.getType() == 5
+                && this.mType == 4
+                && this.mParticipants.size() == 1) {
             return false;
         }
         return this.mTargetDisplays.contains(displayContent);
@@ -1688,7 +2044,13 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
                     readyTrackerOld.mReadyGroups.put(windowContainer, Boolean.FALSE);
                 }
                 if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_TRANSITIONS_enabled[1]) {
-                    ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS, 65881049096729394L, 1, null, Long.valueOf(this.mSyncId), String.valueOf(windowContainer));
+                    ProtoLogImpl_54989576.v(
+                            ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS,
+                            65881049096729394L,
+                            1,
+                            null,
+                            Long.valueOf(this.mSyncId),
+                            String.valueOf(windowContainer));
                 }
             }
             windowContainer = getAnimatableParent(windowContainer);
@@ -1710,10 +2072,21 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
         this.mState = 1;
         if (CoreRune.FW_SHELL_TRANSITION_LOG) {
             if (ProtoLogImpl_54989576.Cache.WM_FORCE_DEBUG_WINDOW_TRANSITIONS_enabled[1]) {
-                ProtoLogImpl_54989576.v(ProtoLogGroup.WM_FORCE_DEBUG_WINDOW_TRANSITIONS, 6426378928388453266L, 1, "Starting Transition %d, caller=%s", Long.valueOf(this.mSyncId), String.valueOf(Debug.getCallers(3)));
+                ProtoLogImpl_54989576.v(
+                        ProtoLogGroup.WM_FORCE_DEBUG_WINDOW_TRANSITIONS,
+                        6426378928388453266L,
+                        1,
+                        "Starting Transition %d, caller=%s",
+                        Long.valueOf(this.mSyncId),
+                        String.valueOf(Debug.getCallers(3)));
             }
         } else if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_TRANSITIONS_enabled[1]) {
-            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS, 2808217645990556209L, 1, null, Long.valueOf(this.mSyncId));
+            ProtoLogImpl_54989576.v(
+                    ProtoLogGroup.WM_DEBUG_WINDOW_TRANSITIONS,
+                    2808217645990556209L,
+                    1,
+                    null,
+                    Long.valueOf(this.mSyncId));
         }
         applyReady();
         this.mLogger.mStartTimeNs = SystemClock.elapsedRealtimeNanos();
@@ -1732,7 +2105,9 @@ public final class Transition implements BLASTSyncEngine.TransactionReadyListene
 
     public final void updateTransientFlags(ChangeInfo changeInfo) {
         WindowContainer windowContainer = changeInfo.mContainer;
-        if (!(windowContainer.asTaskFragment() == null && windowContainer.asActivityRecord() == null) && isInTransientHide(windowContainer)) {
+        if (!(windowContainer.asTaskFragment() == null
+                        && windowContainer.asActivityRecord() == null)
+                && isInTransientHide(windowContainer)) {
             changeInfo.mFlags |= 4;
         }
     }

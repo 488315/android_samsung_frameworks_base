@@ -11,13 +11,13 @@ import android.util.IntArray;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.window.TaskSnapshot;
+
 import com.android.internal.util.ToBooleanFunction;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
-import com.android.server.wm.ActivitySnapshotController;
-import com.android.server.wm.SnapshotPersistQueue;
 import com.android.window.flags.Flags;
+
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -61,7 +61,12 @@ public final class ActivitySnapshotController extends AbsAppSnapshotController {
         public final ActivityRecord[] mActivities;
         public final int mCode;
 
-        public LoadActivitySnapshotItem(ActivityRecord[] activityRecordArr, int i, int i2, BaseAppSnapshotPersister$PersistInfoProvider baseAppSnapshotPersister$PersistInfoProvider) {
+        public LoadActivitySnapshotItem(
+                ActivityRecord[] activityRecordArr,
+                int i,
+                int i2,
+                BaseAppSnapshotPersister$PersistInfoProvider
+                        baseAppSnapshotPersister$PersistInfoProvider) {
             super(baseAppSnapshotPersister$PersistInfoProvider, i2);
             this.mActivities = activityRecordArr;
             this.mCode = i;
@@ -72,7 +77,9 @@ public final class ActivitySnapshotController extends AbsAppSnapshotController {
                 return false;
             }
             LoadActivitySnapshotItem loadActivitySnapshotItem = (LoadActivitySnapshotItem) obj;
-            return this.mCode == loadActivitySnapshotItem.mCode && this.mUserId == loadActivitySnapshotItem.mUserId && this.mPersistInfoProvider == loadActivitySnapshotItem.mPersistInfoProvider;
+            return this.mCode == loadActivitySnapshotItem.mCode
+                    && this.mUserId == loadActivitySnapshotItem.mUserId
+                    && this.mPersistInfoProvider == loadActivitySnapshotItem.mPersistInfoProvider;
         }
 
         public final String toString() {
@@ -86,14 +93,17 @@ public final class ActivitySnapshotController extends AbsAppSnapshotController {
         public final void write() {
             try {
                 Trace.traceBegin(32L, "load_activity_snapshot");
-                TaskSnapshot loadTask = ActivitySnapshotController.this.mSnapshotLoader.loadTask(this.mCode, this.mUserId, false);
+                TaskSnapshot loadTask =
+                        ActivitySnapshotController.this.mSnapshotLoader.loadTask(
+                                this.mCode, this.mUserId, false);
                 if (loadTask == null) {
                     return;
                 }
                 synchronized (ActivitySnapshotController.this.mService.mGlobalLock) {
                     if (ActivitySnapshotController.this.hasRecord(this.mActivities[0])) {
                         for (ActivityRecord activityRecord : this.mActivities) {
-                            ((ActivitySnapshotCache) ActivitySnapshotController.this.mCache).putSnapshot(loadTask, activityRecord);
+                            ((ActivitySnapshotCache) ActivitySnapshotController.this.mCache)
+                                    .putSnapshot(loadTask, activityRecord);
                         }
                     }
                 }
@@ -130,7 +140,8 @@ public final class ActivitySnapshotController extends AbsAppSnapshotController {
         }
     }
 
-    public ActivitySnapshotController(WindowManagerService windowManagerService, SnapshotPersistQueue snapshotPersistQueue) {
+    public ActivitySnapshotController(
+            WindowManagerService windowManagerService, SnapshotPersistQueue snapshotPersistQueue) {
         super(windowManagerService);
         this.mPendingRemoveActivity = new ArraySet();
         this.mPendingDeleteActivity = new ArraySet();
@@ -141,13 +152,32 @@ public final class ActivitySnapshotController extends AbsAppSnapshotController {
         this.mUserSavedFiles = new SparseArray();
         this.mSavedFilesInOrder = new ArrayList();
         this.mSnapshotPersistQueue = snapshotPersistQueue;
-        BaseAppSnapshotPersister$PersistInfoProvider baseAppSnapshotPersister$PersistInfoProvider = new BaseAppSnapshotPersister$PersistInfoProvider(new ActivitySnapshotController$$ExternalSyntheticLambda1(), "activity_snapshots", false, FullScreenMagnificationGestureHandler.MAX_SCALE, windowManagerService.mContext.getResources().getBoolean(R.bool.config_use_strict_phone_number_comparation_for_kazakhstan));
+        BaseAppSnapshotPersister$PersistInfoProvider baseAppSnapshotPersister$PersistInfoProvider =
+                new BaseAppSnapshotPersister$PersistInfoProvider(
+                        new ActivitySnapshotController$$ExternalSyntheticLambda1(),
+                        "activity_snapshots",
+                        false,
+                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        windowManagerService
+                                .mContext
+                                .getResources()
+                                .getBoolean(
+                                        R.bool
+                                                .config_use_strict_phone_number_comparation_for_kazakhstan));
         this.mPersistInfoProvider = baseAppSnapshotPersister$PersistInfoProvider;
-        this.mPersister = new TaskSnapshotPersister(snapshotPersistQueue, baseAppSnapshotPersister$PersistInfoProvider);
+        this.mPersister =
+                new TaskSnapshotPersister(
+                        snapshotPersistQueue, baseAppSnapshotPersister$PersistInfoProvider);
         this.mSnapshotLoader = new AppSnapshotLoader(baseAppSnapshotPersister$PersistInfoProvider);
         this.mCache = new ActivitySnapshotCache("Activity");
         boolean z = false;
-        if (!windowManagerService.mContext.getResources().getBoolean(R.bool.config_displayBlanksAfterDoze) && ((SystemProperties.getInt("persist.wm.debug.activity_screenshot", 0) != 0 || Flags.activitySnapshotByDefault()) && !ActivityManager.isLowRamDeviceStatic())) {
+        if (!windowManagerService
+                        .mContext
+                        .getResources()
+                        .getBoolean(R.bool.config_displayBlanksAfterDoze)
+                && ((SystemProperties.getInt("persist.wm.debug.activity_screenshot", 0) != 0
+                                || Flags.activitySnapshotByDefault())
+                        && !ActivityManager.isLowRamDeviceStatic())) {
             z = true;
         }
         this.mSnapshotEnabled = z;
@@ -160,14 +190,16 @@ public final class ActivitySnapshotController extends AbsAppSnapshotController {
     public static boolean isInParticipant(ActivityRecord activityRecord, ArrayList arrayList) {
         for (int size = arrayList.size() - 1; size >= 0; size--) {
             WindowContainer windowContainer = (WindowContainer) arrayList.get(size);
-            if (activityRecord == windowContainer || activityRecord.isDescendantOf(windowContainer)) {
+            if (activityRecord == windowContainer
+                    || activityRecord.isDescendantOf(windowContainer)) {
                 return true;
             }
         }
         return false;
     }
 
-    public final void addBelowActivityIfExist(ActivityRecord activityRecord, ArraySet arraySet, boolean z) {
+    public final void addBelowActivityIfExist(
+            ActivityRecord activityRecord, ArraySet arraySet, boolean z) {
         getActivityBelow(activityRecord, z, this.mTmpBelowActivities);
         for (int size = this.mTmpBelowActivities.size() - 1; size >= 0; size--) {
             arraySet.add((ActivityRecord) this.mTmpBelowActivities.get(size));
@@ -179,7 +211,9 @@ public final class ActivitySnapshotController extends AbsAppSnapshotController {
         int i2 = 0;
         UserSavedFile userSavedFile = (UserSavedFile) getUserFiles(i).get(iArr[0]);
         if (userSavedFile != null) {
-            Slog.w("WindowManager", "Duplicate request for recording activity snapshot " + userSavedFile);
+            Slog.w(
+                    "WindowManager",
+                    "Duplicate request for recording activity snapshot " + userSavedFile);
             return;
         }
         for (int length = iArr.length - 1; length >= 0; length--) {
@@ -202,16 +236,20 @@ public final class ActivitySnapshotController extends AbsAppSnapshotController {
             ArrayList arrayList = new ArrayList();
             for (int i3 = size - 21; i3 >= 0; i3--) {
                 UserSavedFile userSavedFile3 = (UserSavedFile) this.mSavedFilesInOrder.remove(i3);
-                SparseArray sparseArray = (SparseArray) this.mUserSavedFiles.get(userSavedFile3.mUserId);
+                SparseArray sparseArray =
+                        (SparseArray) this.mUserSavedFiles.get(userSavedFile3.mUserId);
                 for (int size2 = userSavedFile3.mActivityIds.size() - 1; size2 >= 0; size2--) {
-                    ((ActivitySnapshotCache) this.mCache).removeRunningEntry(Integer.valueOf(userSavedFile3.mActivityIds.get(size2)));
+                    ((ActivitySnapshotCache) this.mCache)
+                            .removeRunningEntry(
+                                    Integer.valueOf(userSavedFile3.mActivityIds.get(size2)));
                     sparseArray.remove(userSavedFile3.mActivityIds.get(size2));
                 }
                 arrayList.add(userSavedFile3);
             }
             for (int size3 = arrayList.size() - 1; size3 >= 0; size3--) {
                 UserSavedFile userSavedFile4 = (UserSavedFile) arrayList.get(size3);
-                taskSnapshotPersister.removeSnapshot(userSavedFile4.mFileId, userSavedFile4.mUserId);
+                taskSnapshotPersister.removeSnapshot(
+                        userSavedFile4.mFileId, userSavedFile4.mUserId);
             }
         }
     }
@@ -238,17 +276,25 @@ public final class ActivitySnapshotController extends AbsAppSnapshotController {
         if (activityRecord == null) {
             return null;
         }
-        if (!((!activityRecord.mLastSurfaceShowing || activityRecord.findMainWindow(true) == null || activityRecord.mPopOverState.mIsActivated) ? false : activityRecord.forAllWindows((ToBooleanFunction) new ActivityRecord$$ExternalSyntheticLambda18(0), true))) {
+        if (!((!activityRecord.mLastSurfaceShowing
+                        || activityRecord.findMainWindow(true) == null
+                        || activityRecord.mPopOverState.mIsActivated)
+                ? false
+                : activityRecord.forAllWindows(
+                        (ToBooleanFunction) new ActivityRecord$$ExternalSyntheticLambda18(0),
+                        true))) {
             activityRecord = null;
         }
         return activityRecord;
     }
 
     public final UserSavedFile findSavedFile(ActivityRecord activityRecord) {
-        return (UserSavedFile) getUserFiles(activityRecord.mUserId).get(getSystemHashCode(activityRecord));
+        return (UserSavedFile)
+                getUserFiles(activityRecord.mUserId).get(getSystemHashCode(activityRecord));
     }
 
-    public final void getActivityBelow(ActivityRecord activityRecord, boolean z, ArrayList arrayList) {
+    public final void getActivityBelow(
+            ActivityRecord activityRecord, boolean z, ArrayList arrayList) {
         ActivityRecord activityBelow;
         Task task = activityRecord.task;
         if (task == null || (activityBelow = task.getActivityBelow(activityRecord)) == null) {
@@ -256,7 +302,8 @@ public final class ActivitySnapshotController extends AbsAppSnapshotController {
         }
         TaskFragment taskFragment = activityRecord.getTaskFragment();
         TaskFragment taskFragment2 = activityBelow.getTaskFragment();
-        TaskFragment taskFragment3 = taskFragment2 != null ? taskFragment2.mAdjacentTaskFragment : null;
+        TaskFragment taskFragment3 =
+                taskFragment2 != null ? taskFragment2.mAdjacentTaskFragment : null;
         if ((taskFragment == taskFragment2 && taskFragment != null) || taskFragment3 == null) {
             if (!z || isInParticipant(activityBelow, this.mTmpTransitionParticipants)) {
                 arrayList.add(activityBelow);
@@ -270,7 +317,10 @@ public final class ActivitySnapshotController extends AbsAppSnapshotController {
         }
         Task task2 = taskFragment3.getTask();
         if (task2 == task) {
-            if (task2.mChildren.indexOf(taskFragment3) > (taskFragment != null ? task.mChildren.indexOf(taskFragment) : task.mChildren.indexOf(activityRecord))) {
+            if (task2.mChildren.indexOf(taskFragment3)
+                    > (taskFragment != null
+                            ? task.mChildren.indexOf(taskFragment)
+                            : task.mChildren.indexOf(activityRecord))) {
                 return;
             }
         }
@@ -292,7 +342,9 @@ public final class ActivitySnapshotController extends AbsAppSnapshotController {
 
     public final TaskSnapshot getSnapshot(ActivityRecord[] activityRecordArr) {
         UserSavedFile findSavedFile;
-        if (activityRecordArr.length == 0 || (findSavedFile = findSavedFile(activityRecordArr[0])) == null || findSavedFile.mActivityIds.size() != activityRecordArr.length) {
+        if (activityRecordArr.length == 0
+                || (findSavedFile = findSavedFile(activityRecordArr[0])) == null
+                || findSavedFile.mActivityIds.size() != activityRecordArr.length) {
             return null;
         }
         int i = 0;
@@ -300,13 +352,15 @@ public final class ActivitySnapshotController extends AbsAppSnapshotController {
             i ^= getSystemHashCode(activityRecordArr[length]);
         }
         if (findSavedFile.mFileId == i) {
-            return ((ActivitySnapshotCache) this.mCache).getSnapshot(Integer.valueOf(findSavedFile.mActivityIds.get(0)));
+            return ((ActivitySnapshotCache) this.mCache)
+                    .getSnapshot(Integer.valueOf(findSavedFile.mActivityIds.get(0)));
         }
         return null;
     }
 
     @Override // com.android.server.wm.AbsAppSnapshotController
-    public final ActivityManager.TaskDescription getTaskDescription(WindowContainer windowContainer) {
+    public final ActivityManager.TaskDescription getTaskDescription(
+            WindowContainer windowContainer) {
         return ((ActivityRecord) windowContainer).taskDescription;
     }
 
@@ -319,7 +373,8 @@ public final class ActivitySnapshotController extends AbsAppSnapshotController {
         if (this.mUserSavedFiles.get(i) == null) {
             this.mUserSavedFiles.put(i, new SparseArray());
             synchronized (this.mSnapshotPersistQueue.mLock) {
-                this.mSnapshotPersistQueue.addToQueueInternal(new AnonymousClass1(this.mPersistInfoProvider, i), false);
+                this.mSnapshotPersistQueue.addToQueueInternal(
+                        new AnonymousClass1(this.mPersistInfoProvider, i), false);
             }
         }
         return (SparseArray) this.mUserSavedFiles.get(i);
@@ -342,29 +397,40 @@ public final class ActivitySnapshotController extends AbsAppSnapshotController {
         this.mTmpTransitionParticipants.clear();
         this.mTmpTransitionParticipants.addAll(arrayList);
         for (int size = this.mTmpTransitionParticipants.size() - 1; size >= 0; size--) {
-            WindowContainer windowContainer = (WindowContainer) this.mTmpTransitionParticipants.get(size);
+            WindowContainer windowContainer =
+                    (WindowContainer) this.mTmpTransitionParticipants.get(size);
             if (windowContainer.asTask() != null) {
                 Task asTask = windowContainer.asTask();
-                if (!shouldDisableSnapshots() && (topMostActivity = asTask.getTopMostActivity()) != null) {
+                if (!shouldDisableSnapshots()
+                        && (topMostActivity = asTask.getTopMostActivity()) != null) {
                     if (asTask.isVisibleRequested()) {
                         addBelowActivityIfExist(topMostActivity, this.mPendingLoadActivity, true);
-                        asTask.forAllActivities(new Consumer() { // from class: com.android.server.wm.ActivitySnapshotController$$ExternalSyntheticLambda0
-                            @Override // java.util.function.Consumer
-                            public final void accept(Object obj) {
-                                ActivitySnapshotController activitySnapshotController = ActivitySnapshotController.this;
-                                ActivitySnapshotController.UserSavedFile findSavedFile = activitySnapshotController.findSavedFile((ActivityRecord) obj);
-                                if (findSavedFile != null) {
-                                    activitySnapshotController.mSavedFilesInOrder.remove(findSavedFile);
-                                    activitySnapshotController.mSavedFilesInOrder.add(findSavedFile);
-                                }
-                            }
-                        }, false);
+                        asTask.forAllActivities(
+                                new Consumer() { // from class:
+                                                 // com.android.server.wm.ActivitySnapshotController$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Consumer
+                                    public final void accept(Object obj) {
+                                        ActivitySnapshotController activitySnapshotController =
+                                                ActivitySnapshotController.this;
+                                        ActivitySnapshotController.UserSavedFile findSavedFile =
+                                                activitySnapshotController.findSavedFile(
+                                                        (ActivityRecord) obj);
+                                        if (findSavedFile != null) {
+                                            activitySnapshotController.mSavedFilesInOrder.remove(
+                                                    findSavedFile);
+                                            activitySnapshotController.mSavedFilesInOrder.add(
+                                                    findSavedFile);
+                                        }
+                                    }
+                                },
+                                false);
                     } else {
                         addBelowActivityIfExist(topMostActivity, this.mPendingRemoveActivity, true);
                     }
                 }
             } else if (windowContainer.asTaskFragment() != null) {
-                ActivityRecord topMostActivity2 = windowContainer.asTaskFragment().getTopMostActivity();
+                ActivityRecord topMostActivity2 =
+                        windowContainer.asTaskFragment().getTopMostActivity();
                 if (topMostActivity2 != null) {
                     handleActivityTransition(topMostActivity2);
                 }
@@ -380,12 +446,25 @@ public final class ActivitySnapshotController extends AbsAppSnapshotController {
 
     @Override // com.android.server.wm.AbsAppSnapshotController
     public final float initSnapshotScale() {
-        return Math.max(Math.min(this.mService.mContext.getResources().getFloat(R.dimen.control_padding_material), 1.0f), 0.1f);
+        return Math.max(
+                Math.min(
+                        this.mService
+                                .mContext
+                                .getResources()
+                                .getFloat(R.dimen.control_padding_material),
+                        1.0f),
+                0.1f);
     }
 
     public void loadSnapshotInner(ActivityRecord[] activityRecordArr, UserSavedFile userSavedFile) {
         synchronized (this.mSnapshotPersistQueue.mLock) {
-            this.mSnapshotPersistQueue.addToQueueInternal(new LoadActivitySnapshotItem(activityRecordArr, userSavedFile.mFileId, userSavedFile.mUserId, this.mPersistInfoProvider), true);
+            this.mSnapshotPersistQueue.addToQueueInternal(
+                    new LoadActivitySnapshotItem(
+                            activityRecordArr,
+                            userSavedFile.mFileId,
+                            userSavedFile.mUserId,
+                            this.mPersistInfoProvider),
+                    true);
         }
     }
 
@@ -393,7 +472,8 @@ public final class ActivitySnapshotController extends AbsAppSnapshotController {
         if (!this.mPendingLoadActivity.isEmpty()) {
             ArraySet arraySet = new ArraySet();
             for (int size = this.mPendingLoadActivity.size() - 1; size >= 0; size--) {
-                UserSavedFile findSavedFile = findSavedFile((ActivityRecord) this.mPendingLoadActivity.valueAt(size));
+                UserSavedFile findSavedFile =
+                        findSavedFile((ActivityRecord) this.mPendingLoadActivity.valueAt(size));
                 if (findSavedFile != null) {
                     arraySet.add(findSavedFile);
                 }
@@ -422,10 +502,13 @@ public final class ActivitySnapshotController extends AbsAppSnapshotController {
             }
         }
         for (int size4 = this.mPendingRemoveActivity.size() - 1; size4 >= 0; size4--) {
-            UserSavedFile findSavedFile2 = findSavedFile((ActivityRecord) this.mPendingRemoveActivity.valueAt(size4));
+            UserSavedFile findSavedFile2 =
+                    findSavedFile((ActivityRecord) this.mPendingRemoveActivity.valueAt(size4));
             if (findSavedFile2 != null) {
                 for (int size5 = findSavedFile2.mActivityIds.size() - 1; size5 >= 0; size5--) {
-                    ((ActivitySnapshotCache) this.mCache).removeRunningEntry(Integer.valueOf(findSavedFile2.mActivityIds.get(size5)));
+                    ((ActivitySnapshotCache) this.mCache)
+                            .removeRunningEntry(
+                                    Integer.valueOf(findSavedFile2.mActivityIds.get(size5)));
                 }
             }
         }

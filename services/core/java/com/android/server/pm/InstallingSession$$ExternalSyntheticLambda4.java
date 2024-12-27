@@ -1,7 +1,7 @@
 package com.android.server.pm;
 
 import android.os.Trace;
-import com.android.server.pm.InstallingSession;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -11,7 +11,8 @@ public final /* synthetic */ class InstallingSession$$ExternalSyntheticLambda4 i
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ InstallingSession.MultiPackageInstallingSession f$0;
 
-    public /* synthetic */ InstallingSession$$ExternalSyntheticLambda4(InstallingSession.MultiPackageInstallingSession multiPackageInstallingSession, int i) {
+    public /* synthetic */ InstallingSession$$ExternalSyntheticLambda4(
+            InstallingSession.MultiPackageInstallingSession multiPackageInstallingSession, int i) {
         this.$r8$classId = i;
         this.f$0 = multiPackageInstallingSession;
     }
@@ -23,22 +24,30 @@ public final /* synthetic */ class InstallingSession$$ExternalSyntheticLambda4 i
         switch (i) {
             case 0:
                 Objects.requireNonNull(multiPackageInstallingSession);
-                new InstallingSession$$ExternalSyntheticLambda4(multiPackageInstallingSession, 1).run();
+                new InstallingSession$$ExternalSyntheticLambda4(multiPackageInstallingSession, 1)
+                        .run();
                 break;
             default:
                 multiPackageInstallingSession.getClass();
-                Trace.asyncTraceEnd(262144L, "queueInstall", System.identityHashCode(multiPackageInstallingSession));
+                Trace.asyncTraceEnd(
+                        262144L,
+                        "queueInstall",
+                        System.identityHashCode(multiPackageInstallingSession));
                 Trace.traceBegin(262144L, "start");
                 int size = multiPackageInstallingSession.mChildInstallingSessions.size();
                 ArrayList arrayList = new ArrayList(size);
                 for (int i2 = 0; i2 < size; i2++) {
-                    InstallingSession installingSession = (InstallingSession) multiPackageInstallingSession.mChildInstallingSessions.get(i2);
+                    InstallingSession installingSession =
+                            (InstallingSession)
+                                    multiPackageInstallingSession.mChildInstallingSessions.get(i2);
                     InstallRequest installRequest = new InstallRequest(installingSession);
                     arrayList.add(installRequest);
                     installingSession.handleStartCopy(installRequest);
                 }
                 for (int i3 = 0; i3 < size; i3++) {
-                    ((InstallingSession) multiPackageInstallingSession.mChildInstallingSessions.get(i3)).handleReturnCode((InstallRequest) arrayList.get(i3));
+                    ((InstallingSession)
+                                    multiPackageInstallingSession.mChildInstallingSessions.get(i3))
+                            .handleReturnCode((InstallRequest) arrayList.get(i3));
                 }
                 Trace.traceEnd(262144L);
                 break;

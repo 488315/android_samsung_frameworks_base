@@ -6,21 +6,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class GetCodecCapacityReturn implements Parcelable {
-    public static final Parcelable.Creator<GetCodecCapacityReturn> CREATOR = new Parcelable.Creator<GetCodecCapacityReturn>() { // from class: com.samsung.android.media.GetCodecCapacityReturn.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GetCodecCapacityReturn createFromParcel(Parcel _aidl_source) {
-            GetCodecCapacityReturn _aidl_out = new GetCodecCapacityReturn();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<GetCodecCapacityReturn> CREATOR =
+            new Parcelable.Creator<
+                    GetCodecCapacityReturn>() { // from class:
+                                                // com.samsung.android.media.GetCodecCapacityReturn.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GetCodecCapacityReturn createFromParcel(Parcel _aidl_source) {
+                    GetCodecCapacityReturn _aidl_out = new GetCodecCapacityReturn();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GetCodecCapacityReturn[] newArray(int _aidl_size) {
-            return new GetCodecCapacityReturn[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GetCodecCapacityReturn[] newArray(int _aidl_size) {
+                    return new GetCodecCapacityReturn[_aidl_size];
+                }
+            };
     public int status = 0;
     public int value = 0;
 

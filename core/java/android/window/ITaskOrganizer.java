@@ -21,84 +21,86 @@ public interface ITaskOrganizer extends IInterface {
 
     void onAppSplashScreenViewRemoved(int i) throws RemoteException;
 
-    void onBackPressedOnTaskRoot(ActivityManager.RunningTaskInfo runningTaskInfo) throws RemoteException;
+    void onBackPressedOnTaskRoot(ActivityManager.RunningTaskInfo runningTaskInfo)
+            throws RemoteException;
 
     void onImeDrawnOnTask(int i) throws RemoteException;
 
     void onImmersiveModeChanged(int i, boolean z) throws RemoteException;
 
-    void onSplitLayoutChangeRequested(ActivityManager.RunningTaskInfo runningTaskInfo, Bundle bundle) throws RemoteException;
+    void onSplitLayoutChangeRequested(
+            ActivityManager.RunningTaskInfo runningTaskInfo, Bundle bundle) throws RemoteException;
 
-    void onTaskAppeared(ActivityManager.RunningTaskInfo runningTaskInfo, SurfaceControl surfaceControl) throws RemoteException;
+    void onTaskAppeared(
+            ActivityManager.RunningTaskInfo runningTaskInfo, SurfaceControl surfaceControl)
+            throws RemoteException;
 
     void onTaskInfoChanged(ActivityManager.RunningTaskInfo runningTaskInfo) throws RemoteException;
 
     void onTaskVanished(ActivityManager.RunningTaskInfo runningTaskInfo) throws RemoteException;
 
-    void preloadSplashScreenAppIcon(ActivityInfo activityInfo, int i, Configuration configuration) throws RemoteException;
+    void preloadSplashScreenAppIcon(ActivityInfo activityInfo, int i, Configuration configuration)
+            throws RemoteException;
 
-    void removeStartingWindow(StartingWindowRemovalInfo startingWindowRemovalInfo) throws RemoteException;
+    void removeStartingWindow(StartingWindowRemovalInfo startingWindowRemovalInfo)
+            throws RemoteException;
 
-    void requestAffordanceAnim(ActivityManager.RunningTaskInfo runningTaskInfo, int i) throws RemoteException;
+    void requestAffordanceAnim(ActivityManager.RunningTaskInfo runningTaskInfo, int i)
+            throws RemoteException;
 
     void resetStashedFreeform(int i, boolean z) throws RemoteException;
 
     public static class Default implements ITaskOrganizer {
         @Override // android.window.ITaskOrganizer
-        public void addStartingWindow(StartingWindowInfo info) throws RemoteException {
-        }
+        public void addStartingWindow(StartingWindowInfo info) throws RemoteException {}
 
         @Override // android.window.ITaskOrganizer
-        public void removeStartingWindow(StartingWindowRemovalInfo removalInfo) throws RemoteException {
-        }
+        public void removeStartingWindow(StartingWindowRemovalInfo removalInfo)
+                throws RemoteException {}
 
         @Override // android.window.ITaskOrganizer
-        public void copySplashScreenView(int taskId) throws RemoteException {
-        }
+        public void copySplashScreenView(int taskId) throws RemoteException {}
 
         @Override // android.window.ITaskOrganizer
-        public void onAppSplashScreenViewRemoved(int taskId) throws RemoteException {
-        }
+        public void onAppSplashScreenViewRemoved(int taskId) throws RemoteException {}
 
         @Override // android.window.ITaskOrganizer
-        public void onTaskAppeared(ActivityManager.RunningTaskInfo taskInfo, SurfaceControl leash) throws RemoteException {
-        }
+        public void onTaskAppeared(ActivityManager.RunningTaskInfo taskInfo, SurfaceControl leash)
+                throws RemoteException {}
 
         @Override // android.window.ITaskOrganizer
-        public void onTaskVanished(ActivityManager.RunningTaskInfo taskInfo) throws RemoteException {
-        }
+        public void onTaskVanished(ActivityManager.RunningTaskInfo taskInfo)
+                throws RemoteException {}
 
         @Override // android.window.ITaskOrganizer
-        public void onTaskInfoChanged(ActivityManager.RunningTaskInfo taskInfo) throws RemoteException {
-        }
+        public void onTaskInfoChanged(ActivityManager.RunningTaskInfo taskInfo)
+                throws RemoteException {}
 
         @Override // android.window.ITaskOrganizer
-        public void onBackPressedOnTaskRoot(ActivityManager.RunningTaskInfo taskInfo) throws RemoteException {
-        }
+        public void onBackPressedOnTaskRoot(ActivityManager.RunningTaskInfo taskInfo)
+                throws RemoteException {}
 
         @Override // android.window.ITaskOrganizer
-        public void onImeDrawnOnTask(int taskId) throws RemoteException {
-        }
+        public void onImeDrawnOnTask(int taskId) throws RemoteException {}
 
         @Override // android.window.ITaskOrganizer
-        public void onSplitLayoutChangeRequested(ActivityManager.RunningTaskInfo taskInfo, Bundle infoBundle) throws RemoteException {
-        }
+        public void onSplitLayoutChangeRequested(
+                ActivityManager.RunningTaskInfo taskInfo, Bundle infoBundle)
+                throws RemoteException {}
 
         @Override // android.window.ITaskOrganizer
-        public void onImmersiveModeChanged(int taskId, boolean immersive) throws RemoteException {
-        }
+        public void onImmersiveModeChanged(int taskId, boolean immersive) throws RemoteException {}
 
         @Override // android.window.ITaskOrganizer
-        public void resetStashedFreeform(int taskId, boolean anim) throws RemoteException {
-        }
+        public void resetStashedFreeform(int taskId, boolean anim) throws RemoteException {}
 
         @Override // android.window.ITaskOrganizer
-        public void requestAffordanceAnim(ActivityManager.RunningTaskInfo taskInfo, int gestureFrom) throws RemoteException {
-        }
+        public void requestAffordanceAnim(ActivityManager.RunningTaskInfo taskInfo, int gestureFrom)
+                throws RemoteException {}
 
         @Override // android.window.ITaskOrganizer
-        public void preloadSplashScreenAppIcon(ActivityInfo info, int userId, Configuration config) throws RemoteException {
-        }
+        public void preloadSplashScreenAppIcon(ActivityInfo info, int userId, Configuration config)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -106,7 +108,7 @@ public interface ITaskOrganizer extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITaskOrganizer {
+    public abstract static class Stub extends Binder implements ITaskOrganizer {
         static final int TRANSACTION_addStartingWindow = 1;
         static final int TRANSACTION_copySplashScreenView = 3;
         static final int TRANSACTION_onAppSplashScreenViewRemoved = 4;
@@ -183,7 +185,8 @@ public interface ITaskOrganizer extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITaskOrganizer.DESCRIPTOR);
             }
@@ -193,12 +196,15 @@ public interface ITaskOrganizer extends IInterface {
             }
             switch (code) {
                 case 1:
-                    StartingWindowInfo _arg0 = (StartingWindowInfo) data.readTypedObject(StartingWindowInfo.CREATOR);
+                    StartingWindowInfo _arg0 =
+                            (StartingWindowInfo) data.readTypedObject(StartingWindowInfo.CREATOR);
                     data.enforceNoDataAvail();
                     addStartingWindow(_arg0);
                     return true;
                 case 2:
-                    StartingWindowRemovalInfo _arg02 = (StartingWindowRemovalInfo) data.readTypedObject(StartingWindowRemovalInfo.CREATOR);
+                    StartingWindowRemovalInfo _arg02 =
+                            (StartingWindowRemovalInfo)
+                                    data.readTypedObject(StartingWindowRemovalInfo.CREATOR);
                     data.enforceNoDataAvail();
                     removeStartingWindow(_arg02);
                     return true;
@@ -213,23 +219,32 @@ public interface ITaskOrganizer extends IInterface {
                     onAppSplashScreenViewRemoved(_arg04);
                     return true;
                 case 5:
-                    ActivityManager.RunningTaskInfo _arg05 = (ActivityManager.RunningTaskInfo) data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
-                    SurfaceControl _arg1 = (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
+                    ActivityManager.RunningTaskInfo _arg05 =
+                            (ActivityManager.RunningTaskInfo)
+                                    data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
+                    SurfaceControl _arg1 =
+                            (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
                     data.enforceNoDataAvail();
                     onTaskAppeared(_arg05, _arg1);
                     return true;
                 case 6:
-                    ActivityManager.RunningTaskInfo _arg06 = (ActivityManager.RunningTaskInfo) data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
+                    ActivityManager.RunningTaskInfo _arg06 =
+                            (ActivityManager.RunningTaskInfo)
+                                    data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onTaskVanished(_arg06);
                     return true;
                 case 7:
-                    ActivityManager.RunningTaskInfo _arg07 = (ActivityManager.RunningTaskInfo) data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
+                    ActivityManager.RunningTaskInfo _arg07 =
+                            (ActivityManager.RunningTaskInfo)
+                                    data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onTaskInfoChanged(_arg07);
                     return true;
                 case 8:
-                    ActivityManager.RunningTaskInfo _arg08 = (ActivityManager.RunningTaskInfo) data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
+                    ActivityManager.RunningTaskInfo _arg08 =
+                            (ActivityManager.RunningTaskInfo)
+                                    data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onBackPressedOnTaskRoot(_arg08);
                     return true;
@@ -239,7 +254,9 @@ public interface ITaskOrganizer extends IInterface {
                     onImeDrawnOnTask(_arg09);
                     return true;
                 case 10:
-                    ActivityManager.RunningTaskInfo _arg010 = (ActivityManager.RunningTaskInfo) data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
+                    ActivityManager.RunningTaskInfo _arg010 =
+                            (ActivityManager.RunningTaskInfo)
+                                    data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
                     Bundle _arg12 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
                     onSplitLayoutChangeRequested(_arg010, _arg12);
@@ -257,15 +274,19 @@ public interface ITaskOrganizer extends IInterface {
                     resetStashedFreeform(_arg012, _arg14);
                     return true;
                 case 13:
-                    ActivityManager.RunningTaskInfo _arg013 = (ActivityManager.RunningTaskInfo) data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
+                    ActivityManager.RunningTaskInfo _arg013 =
+                            (ActivityManager.RunningTaskInfo)
+                                    data.readTypedObject(ActivityManager.RunningTaskInfo.CREATOR);
                     int _arg15 = data.readInt();
                     data.enforceNoDataAvail();
                     requestAffordanceAnim(_arg013, _arg15);
                     return true;
                 case 14:
-                    ActivityInfo _arg014 = (ActivityInfo) data.readTypedObject(ActivityInfo.CREATOR);
+                    ActivityInfo _arg014 =
+                            (ActivityInfo) data.readTypedObject(ActivityInfo.CREATOR);
                     int _arg16 = data.readInt();
-                    Configuration _arg2 = (Configuration) data.readTypedObject(Configuration.CREATOR);
+                    Configuration _arg2 =
+                            (Configuration) data.readTypedObject(Configuration.CREATOR);
                     data.enforceNoDataAvail();
                     preloadSplashScreenAppIcon(_arg014, _arg16, _arg2);
                     return true;
@@ -303,7 +324,8 @@ public interface ITaskOrganizer extends IInterface {
             }
 
             @Override // android.window.ITaskOrganizer
-            public void removeStartingWindow(StartingWindowRemovalInfo removalInfo) throws RemoteException {
+            public void removeStartingWindow(StartingWindowRemovalInfo removalInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
@@ -339,7 +361,9 @@ public interface ITaskOrganizer extends IInterface {
             }
 
             @Override // android.window.ITaskOrganizer
-            public void onTaskAppeared(ActivityManager.RunningTaskInfo taskInfo, SurfaceControl leash) throws RemoteException {
+            public void onTaskAppeared(
+                    ActivityManager.RunningTaskInfo taskInfo, SurfaceControl leash)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
@@ -352,7 +376,8 @@ public interface ITaskOrganizer extends IInterface {
             }
 
             @Override // android.window.ITaskOrganizer
-            public void onTaskVanished(ActivityManager.RunningTaskInfo taskInfo) throws RemoteException {
+            public void onTaskVanished(ActivityManager.RunningTaskInfo taskInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
@@ -364,7 +389,8 @@ public interface ITaskOrganizer extends IInterface {
             }
 
             @Override // android.window.ITaskOrganizer
-            public void onTaskInfoChanged(ActivityManager.RunningTaskInfo taskInfo) throws RemoteException {
+            public void onTaskInfoChanged(ActivityManager.RunningTaskInfo taskInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
@@ -376,7 +402,8 @@ public interface ITaskOrganizer extends IInterface {
             }
 
             @Override // android.window.ITaskOrganizer
-            public void onBackPressedOnTaskRoot(ActivityManager.RunningTaskInfo taskInfo) throws RemoteException {
+            public void onBackPressedOnTaskRoot(ActivityManager.RunningTaskInfo taskInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
@@ -400,7 +427,9 @@ public interface ITaskOrganizer extends IInterface {
             }
 
             @Override // android.window.ITaskOrganizer
-            public void onSplitLayoutChangeRequested(ActivityManager.RunningTaskInfo taskInfo, Bundle infoBundle) throws RemoteException {
+            public void onSplitLayoutChangeRequested(
+                    ActivityManager.RunningTaskInfo taskInfo, Bundle infoBundle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
@@ -413,7 +442,8 @@ public interface ITaskOrganizer extends IInterface {
             }
 
             @Override // android.window.ITaskOrganizer
-            public void onImmersiveModeChanged(int taskId, boolean immersive) throws RemoteException {
+            public void onImmersiveModeChanged(int taskId, boolean immersive)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
@@ -439,7 +469,9 @@ public interface ITaskOrganizer extends IInterface {
             }
 
             @Override // android.window.ITaskOrganizer
-            public void requestAffordanceAnim(ActivityManager.RunningTaskInfo taskInfo, int gestureFrom) throws RemoteException {
+            public void requestAffordanceAnim(
+                    ActivityManager.RunningTaskInfo taskInfo, int gestureFrom)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);
@@ -452,7 +484,8 @@ public interface ITaskOrganizer extends IInterface {
             }
 
             @Override // android.window.ITaskOrganizer
-            public void preloadSplashScreenAppIcon(ActivityInfo info, int userId, Configuration config) throws RemoteException {
+            public void preloadSplashScreenAppIcon(
+                    ActivityInfo info, int userId, Configuration config) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITaskOrganizer.DESCRIPTOR);

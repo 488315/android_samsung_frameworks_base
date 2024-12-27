@@ -1,6 +1,7 @@
 package android.service.voice;
 
 import android.annotation.SystemApi;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -14,9 +15,7 @@ public final class FailureSuggestedAction {
     public static final int UNKNOWN = 0;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FailureSuggestedActionDef {
-    }
+    public @interface FailureSuggestedActionDef {}
 
-    private FailureSuggestedAction() {
-    }
+    private FailureSuggestedAction() {}
 }

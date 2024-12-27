@@ -3,27 +3,30 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class AudioAttributes implements Parcelable {
-    public static final Parcelable.Creator<AudioAttributes> CREATOR = new Parcelable.Creator<AudioAttributes>() { // from class: android.media.audio.common.AudioAttributes.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioAttributes createFromParcel(Parcel _aidl_source) {
-            AudioAttributes _aidl_out = new AudioAttributes();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioAttributes> CREATOR =
+            new Parcelable.Creator<
+                    AudioAttributes>() { // from class: android.media.audio.common.AudioAttributes.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioAttributes createFromParcel(Parcel _aidl_source) {
+                    AudioAttributes _aidl_out = new AudioAttributes();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioAttributes[] newArray(int _aidl_size) {
-            return new AudioAttributes[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioAttributes[] newArray(int _aidl_size) {
+                    return new AudioAttributes[_aidl_size];
+                }
+            };
     public String[] tags;
     public int contentType = 0;
     public int usage = 0;
@@ -128,7 +131,11 @@ public class AudioAttributes implements Parcelable {
             return false;
         }
         AudioAttributes that = (AudioAttributes) other;
-        if (Objects.deepEquals(Integer.valueOf(this.contentType), Integer.valueOf(that.contentType)) && Objects.deepEquals(Integer.valueOf(this.usage), Integer.valueOf(that.usage)) && Objects.deepEquals(Integer.valueOf(this.source), Integer.valueOf(that.source)) && Objects.deepEquals(Integer.valueOf(this.flags), Integer.valueOf(that.flags)) && Objects.deepEquals(this.tags, that.tags)) {
+        if (Objects.deepEquals(Integer.valueOf(this.contentType), Integer.valueOf(that.contentType))
+                && Objects.deepEquals(Integer.valueOf(this.usage), Integer.valueOf(that.usage))
+                && Objects.deepEquals(Integer.valueOf(this.source), Integer.valueOf(that.source))
+                && Objects.deepEquals(Integer.valueOf(this.flags), Integer.valueOf(that.flags))
+                && Objects.deepEquals(this.tags, that.tags)) {
             return true;
         }
         return false;
@@ -136,7 +143,14 @@ public class AudioAttributes implements Parcelable {
 
     /* JADX WARN: Multi-variable type inference failed */
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.contentType), Integer.valueOf(this.usage), Integer.valueOf(this.source), Integer.valueOf(this.flags), this.tags).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                Integer.valueOf(this.contentType),
+                                Integer.valueOf(this.usage),
+                                Integer.valueOf(this.source),
+                                Integer.valueOf(this.flags),
+                                this.tags)
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

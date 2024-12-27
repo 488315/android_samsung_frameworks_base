@@ -2,23 +2,28 @@ package android.service.games;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class GameSessionViewHostConfiguration implements Parcelable {
-    public static final Parcelable.Creator<GameSessionViewHostConfiguration> CREATOR = new Parcelable.Creator<GameSessionViewHostConfiguration>() { // from class: android.service.games.GameSessionViewHostConfiguration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GameSessionViewHostConfiguration createFromParcel(Parcel source) {
-            return new GameSessionViewHostConfiguration(source.readInt(), source.readInt(), source.readInt());
-        }
+    public static final Parcelable.Creator<GameSessionViewHostConfiguration> CREATOR =
+            new Parcelable.Creator<
+                    GameSessionViewHostConfiguration>() { // from class:
+                                                          // android.service.games.GameSessionViewHostConfiguration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GameSessionViewHostConfiguration createFromParcel(Parcel source) {
+                    return new GameSessionViewHostConfiguration(
+                            source.readInt(), source.readInt(), source.readInt());
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GameSessionViewHostConfiguration[] newArray(int size) {
-            return new GameSessionViewHostConfiguration[0];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GameSessionViewHostConfiguration[] newArray(int size) {
+                    return new GameSessionViewHostConfiguration[0];
+                }
+            };
     final int mDisplayId;
     final int mHeightPx;
     final int mWidthPx;
@@ -49,14 +54,25 @@ public final class GameSessionViewHostConfiguration implements Parcelable {
             return false;
         }
         GameSessionViewHostConfiguration that = (GameSessionViewHostConfiguration) o;
-        return this.mDisplayId == that.mDisplayId && this.mWidthPx == that.mWidthPx && this.mHeightPx == that.mHeightPx;
+        return this.mDisplayId == that.mDisplayId
+                && this.mWidthPx == that.mWidthPx
+                && this.mHeightPx == that.mHeightPx;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mDisplayId), Integer.valueOf(this.mWidthPx), Integer.valueOf(this.mHeightPx));
+        return Objects.hash(
+                Integer.valueOf(this.mDisplayId),
+                Integer.valueOf(this.mWidthPx),
+                Integer.valueOf(this.mHeightPx));
     }
 
     public String toString() {
-        return "GameSessionViewHostConfiguration{mDisplayId=" + this.mDisplayId + ", mWidthPx=" + this.mWidthPx + ", mHeightPx=" + this.mHeightPx + '}';
+        return "GameSessionViewHostConfiguration{mDisplayId="
+                + this.mDisplayId
+                + ", mWidthPx="
+                + this.mWidthPx
+                + ", mHeightPx="
+                + this.mHeightPx
+                + '}';
     }
 }

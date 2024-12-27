@@ -4,8 +4,6 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.icu.util.Calendar;
 import android.util.AttributeSet;
-import android.widget.CalendarView;
-import android.widget.DayPickerView;
 
 /* loaded from: classes4.dex */
 class CalendarViewMaterialDelegate extends CalendarView.AbstractCalendarViewDelegate {
@@ -13,19 +11,32 @@ class CalendarViewMaterialDelegate extends CalendarView.AbstractCalendarViewDele
     private CalendarView.OnDateChangeListener mOnDateChangeListener;
     private final DayPickerView.OnDaySelectedListener mOnDaySelectedListener;
 
-    public CalendarViewMaterialDelegate(CalendarView delegator, Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public CalendarViewMaterialDelegate(
+            CalendarView delegator,
+            Context context,
+            AttributeSet attrs,
+            int defStyleAttr,
+            int defStyleRes) {
         super(delegator, context);
-        this.mOnDaySelectedListener = new DayPickerView.OnDaySelectedListener() { // from class: android.widget.CalendarViewMaterialDelegate.1
-            @Override // android.widget.DayPickerView.OnDaySelectedListener
-            public void onDaySelected(DayPickerView view, Calendar day) {
-                if (CalendarViewMaterialDelegate.this.mOnDateChangeListener != null) {
-                    int year = day.get(1);
-                    int month = day.get(2);
-                    int dayOfMonth = day.get(5);
-                    CalendarViewMaterialDelegate.this.mOnDateChangeListener.onSelectedDayChange(CalendarViewMaterialDelegate.this.mDelegator, year, month, dayOfMonth);
-                }
-            }
-        };
+        this.mOnDaySelectedListener =
+                new DayPickerView
+                        .OnDaySelectedListener() { // from class:
+                                                   // android.widget.CalendarViewMaterialDelegate.1
+                    @Override // android.widget.DayPickerView.OnDaySelectedListener
+                    public void onDaySelected(DayPickerView view, Calendar day) {
+                        if (CalendarViewMaterialDelegate.this.mOnDateChangeListener != null) {
+                            int year = day.get(1);
+                            int month = day.get(2);
+                            int dayOfMonth = day.get(5);
+                            CalendarViewMaterialDelegate.this.mOnDateChangeListener
+                                    .onSelectedDayChange(
+                                            CalendarViewMaterialDelegate.this.mDelegator,
+                                            year,
+                                            month,
+                                            dayOfMonth);
+                        }
+                    }
+                };
         this.mDayPickerView = new DayPickerView(context, attrs, defStyleAttr, defStyleRes);
         this.mDayPickerView.setOnDaySelectedListener(this.mOnDaySelectedListener);
         delegator.addView(this.mDayPickerView);

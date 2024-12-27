@@ -68,13 +68,11 @@ public class DeviceTypes {
     public static final int TYPE_WINDOW = 43;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DeviceType {
-    }
+    public @interface DeviceType {}
 
     public static boolean validDeviceType(int deviceType) {
         return deviceType >= -7 && deviceType <= 52;
     }
 
-    private DeviceTypes() {
-    }
+    private DeviceTypes() {}
 }

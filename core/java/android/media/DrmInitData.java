@@ -9,8 +9,7 @@ public abstract class DrmInitData {
     @Deprecated
     public abstract SchemeInitData get(UUID uuid);
 
-    DrmInitData() {
-    }
+    DrmInitData() {}
 
     public int getSchemeInitDataCount() {
         return 0;
@@ -40,11 +39,14 @@ public abstract class DrmInitData {
                 return true;
             }
             SchemeInitData other = (SchemeInitData) obj;
-            return this.uuid.equals(other.uuid) && this.mimeType.equals(other.mimeType) && Arrays.equals(this.data, other.data);
+            return this.uuid.equals(other.uuid)
+                    && this.mimeType.equals(other.mimeType)
+                    && Arrays.equals(this.data, other.data);
         }
 
         public int hashCode() {
-            return this.uuid.hashCode() + ((this.mimeType.hashCode() + (Arrays.hashCode(this.data) * 31)) * 31);
+            return this.uuid.hashCode()
+                    + ((this.mimeType.hashCode() + (Arrays.hashCode(this.data) * 31)) * 31);
         }
     }
 }

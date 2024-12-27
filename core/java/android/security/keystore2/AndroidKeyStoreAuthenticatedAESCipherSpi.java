@@ -4,8 +4,11 @@ import android.hardware.security.keymint.KeyParameter;
 import android.security.KeyStoreException;
 import android.security.KeyStoreOperation;
 import android.security.keystore.ArrayUtils;
-import android.security.keystore2.KeyStoreCryptoOperationChunkedStreamer;
+
+import libcore.util.EmptyArray;
+
 import com.samsung.android.security.mdf.MdfUtils;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.security.AlgorithmParameters;
@@ -18,8 +21,8 @@ import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.InvalidParameterSpecException;
 import java.util.Arrays;
 import java.util.List;
+
 import javax.crypto.spec.GCMParameterSpec;
-import libcore.util.EmptyArray;
 
 /* loaded from: classes3.dex */
 abstract class AndroidKeyStoreAuthenticatedAESCipherSpi extends AndroidKeyStoreCipherSpiBase {
@@ -29,7 +32,7 @@ abstract class AndroidKeyStoreAuthenticatedAESCipherSpi extends AndroidKeyStoreC
     private final int mKeymasterBlockMode;
     private final int mKeymasterPadding;
 
-    static abstract class GCM extends AndroidKeyStoreAuthenticatedAESCipherSpi {
+    abstract static class GCM extends AndroidKeyStoreAuthenticatedAESCipherSpi {
         private static final int DEFAULT_TAG_LENGTH_BITS = 128;
         private static final int IV_LENGTH_BYTES = 12;
         private static final int MAX_SUPPORTED_TAG_LENGTH_BITS = 128;
@@ -46,7 +49,8 @@ abstract class AndroidKeyStoreAuthenticatedAESCipherSpi extends AndroidKeyStoreC
             return MdfUtils.MDF_CIPHER_MODE;
         }
 
-        @Override // android.security.keystore2.AndroidKeyStoreAuthenticatedAESCipherSpi, android.security.keystore2.AndroidKeyStoreCipherSpiBase
+        @Override // android.security.keystore2.AndroidKeyStoreAuthenticatedAESCipherSpi,
+                  // android.security.keystore2.AndroidKeyStoreCipherSpiBase
         protected final void resetAll() {
             this.mTagLengthBits = 128;
             super.resetAll();
@@ -60,15 +64,19 @@ abstract class AndroidKeyStoreAuthenticatedAESCipherSpi extends AndroidKeyStoreC
         @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase
         protected final void initAlgorithmSpecificParameters() throws InvalidKeyException {
             if (!isEncrypting()) {
-                throw new InvalidKeyException("IV required when decrypting. Use IvParameterSpec or AlgorithmParameters to provide it.");
+                throw new InvalidKeyException(
+                        "IV required when decrypting. Use IvParameterSpec or AlgorithmParameters to"
+                            + " provide it.");
             }
         }
 
         @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase
-        protected final void initAlgorithmSpecificParameters(AlgorithmParameterSpec params) throws InvalidAlgorithmParameterException {
+        protected final void initAlgorithmSpecificParameters(AlgorithmParameterSpec params)
+                throws InvalidAlgorithmParameterException {
             if (params == null) {
                 if (!isEncrypting()) {
-                    throw new InvalidAlgorithmParameterException("GCMParameterSpec must be provided when decrypting");
+                    throw new InvalidAlgorithmParameterException(
+                            "GCMParameterSpec must be provided when decrypting");
                 }
                 return;
             }
@@ -81,32 +89,49 @@ abstract class AndroidKeyStoreAuthenticatedAESCipherSpi extends AndroidKeyStoreC
                 throw new InvalidAlgorithmParameterException("Null IV in GCMParameterSpec");
             }
             if (iv.length != 12) {
-                throw new InvalidAlgorithmParameterException("Unsupported IV length: " + iv.length + " bytes. Only 12 bytes long IV supported");
+                throw new InvalidAlgorithmParameterException(
+                        "Unsupported IV length: "
+                                + iv.length
+                                + " bytes. Only 12 bytes long IV supported");
             }
             int tagLengthBits = spec.getTLen();
             if (tagLengthBits < 96 || tagLengthBits > 128 || tagLengthBits % 8 != 0) {
-                throw new InvalidAlgorithmParameterException("Unsupported tag length: " + tagLengthBits + " bits. Supported lengths: 96, 104, 112, 120, 128");
+                throw new InvalidAlgorithmParameterException(
+                        "Unsupported tag length: "
+                                + tagLengthBits
+                                + " bits. Supported lengths: 96, 104, 112, 120, 128");
             }
             setIv(iv);
             this.mTagLengthBits = tagLengthBits;
         }
 
         @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase
-        protected final void initAlgorithmSpecificParameters(AlgorithmParameters params) throws InvalidAlgorithmParameterException {
+        protected final void initAlgorithmSpecificParameters(AlgorithmParameters params)
+                throws InvalidAlgorithmParameterException {
             if (params == null) {
                 if (!isEncrypting()) {
-                    throw new InvalidAlgorithmParameterException("IV required when decrypting. Use GCMParameterSpec or GCM AlgorithmParameters to provide it.");
+                    throw new InvalidAlgorithmParameterException(
+                            "IV required when decrypting. Use GCMParameterSpec or GCM"
+                                + " AlgorithmParameters to provide it.");
                 }
             } else {
                 if (!"GCM".equalsIgnoreCase(params.getAlgorithm())) {
-                    throw new InvalidAlgorithmParameterException("Unsupported AlgorithmParameters algorithm: " + params.getAlgorithm() + ". Supported: GCM");
+                    throw new InvalidAlgorithmParameterException(
+                            "Unsupported AlgorithmParameters algorithm: "
+                                    + params.getAlgorithm()
+                                    + ". Supported: GCM");
                 }
                 try {
-                    GCMParameterSpec spec = (GCMParameterSpec) params.getParameterSpec(GCMParameterSpec.class);
+                    GCMParameterSpec spec =
+                            (GCMParameterSpec) params.getParameterSpec(GCMParameterSpec.class);
                     initAlgorithmSpecificParameters(spec);
                 } catch (InvalidParameterSpecException e) {
                     if (!isEncrypting()) {
-                        throw new InvalidAlgorithmParameterException("IV and tag length required when decrypting, but not found in parameters: " + params, e);
+                        throw new InvalidAlgorithmParameterException(
+                                "IV and tag length required when decrypting, but not found in"
+                                    + " parameters: "
+                                        + params,
+                                e);
                     }
                     setIv(null);
                 }
@@ -131,8 +156,12 @@ abstract class AndroidKeyStoreAuthenticatedAESCipherSpi extends AndroidKeyStoreC
         }
 
         @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase
-        protected KeyStoreCryptoOperationStreamer createMainDataStreamer(KeyStoreOperation operation) {
-            KeyStoreCryptoOperationStreamer streamer = new KeyStoreCryptoOperationChunkedStreamer(new KeyStoreCryptoOperationChunkedStreamer.MainDataStream(operation), 0);
+        protected KeyStoreCryptoOperationStreamer createMainDataStreamer(
+                KeyStoreOperation operation) {
+            KeyStoreCryptoOperationStreamer streamer =
+                    new KeyStoreCryptoOperationChunkedStreamer(
+                            new KeyStoreCryptoOperationChunkedStreamer.MainDataStream(operation),
+                            0);
             if (isEncrypting()) {
                 return streamer;
             }
@@ -140,8 +169,10 @@ abstract class AndroidKeyStoreAuthenticatedAESCipherSpi extends AndroidKeyStoreC
         }
 
         @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase
-        protected final KeyStoreCryptoOperationStreamer createAdditionalAuthenticationDataStreamer(KeyStoreOperation operation) {
-            return new KeyStoreCryptoOperationChunkedStreamer(new AdditionalAuthenticationDataStream(operation), 0);
+        protected final KeyStoreCryptoOperationStreamer createAdditionalAuthenticationDataStreamer(
+                KeyStoreOperation operation) {
+            return new KeyStoreCryptoOperationChunkedStreamer(
+                    new AdditionalAuthenticationDataStream(operation), 0);
         }
 
         @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase
@@ -157,7 +188,8 @@ abstract class AndroidKeyStoreAuthenticatedAESCipherSpi extends AndroidKeyStoreC
             return 0;
         }
 
-        @Override // android.security.keystore2.AndroidKeyStoreAuthenticatedAESCipherSpi, android.security.keystore2.AndroidKeyStoreCipherSpiBase
+        @Override // android.security.keystore2.AndroidKeyStoreAuthenticatedAESCipherSpi,
+                  // android.security.keystore2.AndroidKeyStoreCipherSpiBase
         protected final void addAlgorithmSpecificParametersToBegin(List<KeyParameter> parameters) {
             super.addAlgorithmSpecificParametersToBegin(parameters);
             parameters.add(KeyStore2ParameterUtils.makeInt(805307371, this.mTagLengthBits));
@@ -182,7 +214,10 @@ abstract class AndroidKeyStoreAuthenticatedAESCipherSpi extends AndroidKeyStoreC
                 long result;
                 int tagLengthBytes = (getTagLengthBits() + 7) / 8;
                 if (isEncrypting()) {
-                    result = (getConsumedInputSizeBytes() - getProducedOutputSizeBytes()) + inputLen + tagLengthBytes;
+                    result =
+                            (getConsumedInputSizeBytes() - getProducedOutputSizeBytes())
+                                    + inputLen
+                                    + tagLengthBytes;
                 } else {
                     long result2 = getConsumedInputSizeBytes();
                     result = ((result2 - getProducedOutputSizeBytes()) + inputLen) - tagLengthBytes;
@@ -213,10 +248,12 @@ abstract class AndroidKeyStoreAuthenticatedAESCipherSpi extends AndroidKeyStoreC
     @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase
     protected final void initKey(int opmode, Key key) throws InvalidKeyException {
         if (!(key instanceof AndroidKeyStoreSecretKey)) {
-            throw new InvalidKeyException("Unsupported key: " + (key != null ? key.getClass().getName() : "null"));
+            throw new InvalidKeyException(
+                    "Unsupported key: " + (key != null ? key.getClass().getName() : "null"));
         }
         if (!"AES".equalsIgnoreCase(key.getAlgorithm())) {
-            throw new InvalidKeyException("Unsupported key algorithm: " + key.getAlgorithm() + ". Only AES supported");
+            throw new InvalidKeyException(
+                    "Unsupported key algorithm: " + key.getAlgorithm() + ". Only AES supported");
         }
         setKey((AndroidKeyStoreSecretKey) key);
     }
@@ -224,7 +261,9 @@ abstract class AndroidKeyStoreAuthenticatedAESCipherSpi extends AndroidKeyStoreC
     @Override // android.security.keystore2.AndroidKeyStoreCipherSpiBase
     protected void addAlgorithmSpecificParametersToBegin(List<KeyParameter> parameters) {
         if (isEncrypting() && this.mIvHasBeenUsed) {
-            throw new IllegalStateException("IV has already been used. Reusing IV in encryption mode violates security best practices.");
+            throw new IllegalStateException(
+                    "IV has already been used. Reusing IV in encryption mode violates security best"
+                        + " practices.");
         }
         parameters.add(KeyStore2ParameterUtils.makeEnum(268435458, 32));
         parameters.add(KeyStore2ParameterUtils.makeEnum(536870916, this.mKeymasterBlockMode));
@@ -279,7 +318,8 @@ abstract class AndroidKeyStoreAuthenticatedAESCipherSpi extends AndroidKeyStoreC
         return this.mIv;
     }
 
-    private static class BufferAllOutputUntilDoFinalStreamer implements KeyStoreCryptoOperationStreamer {
+    private static class BufferAllOutputUntilDoFinalStreamer
+            implements KeyStoreCryptoOperationStreamer {
         private ByteArrayOutputStream mBufferedOutput;
         private final KeyStoreCryptoOperationStreamer mDelegate;
         private long mProducedOutputSizeBytes;
@@ -290,7 +330,8 @@ abstract class AndroidKeyStoreAuthenticatedAESCipherSpi extends AndroidKeyStoreC
         }
 
         @Override // android.security.keystore2.KeyStoreCryptoOperationStreamer
-        public byte[] update(byte[] input, int inputOffset, int inputLength) throws KeyStoreException {
+        public byte[] update(byte[] input, int inputOffset, int inputLength)
+                throws KeyStoreException {
             byte[] output = this.mDelegate.update(input, inputOffset, inputLength);
             if (output != null) {
                 try {
@@ -303,7 +344,8 @@ abstract class AndroidKeyStoreAuthenticatedAESCipherSpi extends AndroidKeyStoreC
         }
 
         @Override // android.security.keystore2.KeyStoreCryptoOperationStreamer
-        public byte[] doFinal(byte[] input, int inputOffset, int inputLength, byte[] signature) throws KeyStoreException {
+        public byte[] doFinal(byte[] input, int inputOffset, int inputLength, byte[] signature)
+                throws KeyStoreException {
             byte[] output = this.mDelegate.doFinal(input, inputOffset, inputLength, signature);
             if (output != null) {
                 try {
@@ -329,7 +371,8 @@ abstract class AndroidKeyStoreAuthenticatedAESCipherSpi extends AndroidKeyStoreC
         }
     }
 
-    private static class AdditionalAuthenticationDataStream implements KeyStoreCryptoOperationChunkedStreamer.Stream {
+    private static class AdditionalAuthenticationDataStream
+            implements KeyStoreCryptoOperationChunkedStreamer.Stream {
         private final KeyStoreOperation mOperation;
 
         private AdditionalAuthenticationDataStream(KeyStoreOperation operation) {

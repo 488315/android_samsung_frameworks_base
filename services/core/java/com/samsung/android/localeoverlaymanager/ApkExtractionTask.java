@@ -14,6 +14,18 @@ public final class ApkExtractionTask {
     public String mTargetPackage;
 
     public final String toString() {
-        return "ApkExtractionTask{mTargetPackage='" + this.mTargetPackage + "', mLocaleLanguages=" + this.mLocaleLanguages + ", mShouldReplace=" + this.mShouldReplace + ", mContextRef=" + this.mContextRef + ", mExtractorRunnable=" + this.mExtractorRunnable + ", mCurrentThread=null, mExtractedLocaleApks=" + this.mExtractedLocaleApks + '}';
+        return "ApkExtractionTask{mTargetPackage='"
+                + this.mTargetPackage
+                + "', mLocaleLanguages="
+                + this.mLocaleLanguages
+                + ", mShouldReplace="
+                + this.mShouldReplace
+                + ", mContextRef="
+                + this.mContextRef
+                + ", mExtractorRunnable="
+                + this.mExtractorRunnable
+                + ", mCurrentThread=null, mExtractedLocaleApks="
+                + this.mExtractedLocaleApks
+                + '}';
     }
 }

@@ -39,6 +39,7 @@ import android.window.ClientWindowFrames;
 import android.window.InputTransferToken;
 import android.window.OnBackInvokedCallbackInfo;
 import android.window.WindowContainerToken;
+
 import com.android.internal.protolog.ProtoLogGroup;
 import com.android.internal.protolog.ProtoLogImpl_54989576;
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
@@ -48,12 +49,12 @@ import com.android.server.accessibility.magnification.FullScreenMagnificationGes
 import com.android.server.am.ActivityManagerService;
 import com.android.server.policy.PhoneWindowManager;
 import com.android.server.policy.WindowManagerPolicy;
-import com.android.server.wm.DragState;
-import com.android.server.wm.WindowManagerInternal;
 import com.android.window.flags.Flags;
+
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
 import com.samsung.android.knoxguard.service.utils.Constants;
 import com.samsung.android.rune.CoreRune;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -91,7 +92,11 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
     public final InsetsSourceControl.Array mDummyControls = new InsetsSourceControl.Array();
     public int mWinSurfaceVisibleCount = 0;
 
-    public Session(WindowManagerService windowManagerService, IWindowSessionCallback iWindowSessionCallback, int i, int i2) {
+    public Session(
+            WindowManagerService windowManagerService,
+            IWindowSessionCallback iWindowSessionCallback,
+            int i,
+            int i2) {
         WindowProcessController process;
         this.mClientDead = false;
         this.mCanDeliverTouchToKeyguardWallpaper = false;
@@ -113,20 +118,54 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
         }
         WindowManagerService.resetPriorityAfterLockedSection();
         if (process == null) {
-            throw new IllegalStateException(ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "Unknown pid=", " uid="));
+            throw new IllegalStateException(
+                    ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "Unknown pid=", " uid="));
         }
-        this.mCanAddInternalSystemWindow = windowManagerService.mContext.checkCallingOrSelfPermission("android.permission.INTERNAL_SYSTEM_WINDOW") == 0;
-        this.mCanForceShowingInsets = windowManagerService.mAtmService.mRecentTasks.isCallerRecents(i2) || windowManagerService.mContext.checkCallingOrSelfPermission("android.permission.STATUS_BAR_SERVICE") == 0;
-        this.mCanHideNonSystemOverlayWindows = windowManagerService.mContext.checkCallingOrSelfPermission("android.permission.HIDE_NON_SYSTEM_OVERLAY_WINDOWS") == 0 || windowManagerService.mContext.checkCallingOrSelfPermission("android.permission.HIDE_OVERLAY_WINDOWS") == 0;
-        this.mCanCreateSystemApplicationOverlay = windowManagerService.mContext.checkCallingOrSelfPermission("android.permission.SYSTEM_APPLICATION_OVERLAY") == 0;
-        this.mCanStartTasksFromRecents = windowManagerService.mContext.checkCallingOrSelfPermission("android.permission.START_TASKS_FROM_RECENTS") == 0;
-        this.mSetsUnrestrictedKeepClearAreas = windowManagerService.mContext.checkCallingOrSelfPermission("android.permission.SET_UNRESTRICTED_KEEP_CLEAR_AREAS") == 0;
-        this.mCanSetUnrestrictedGestureExclusion = windowManagerService.mContext.checkCallingOrSelfPermission("android.permission.SET_UNRESTRICTED_GESTURE_EXCLUSION") == 0;
-        this.mCanAlwaysUpdateWallpaper = Flags.alwaysUpdateWallpaperPermission() && windowManagerService.mContext.checkCallingOrSelfPermission("android.permission.ALWAYS_UPDATE_WALLPAPER") == 0;
-        this.mShowingAlertWindowNotificationAllowed = windowManagerService.mShowAlertWindowNotifications;
+        this.mCanAddInternalSystemWindow =
+                windowManagerService.mContext.checkCallingOrSelfPermission(
+                                "android.permission.INTERNAL_SYSTEM_WINDOW")
+                        == 0;
+        this.mCanForceShowingInsets =
+                windowManagerService.mAtmService.mRecentTasks.isCallerRecents(i2)
+                        || windowManagerService.mContext.checkCallingOrSelfPermission(
+                                        "android.permission.STATUS_BAR_SERVICE")
+                                == 0;
+        this.mCanHideNonSystemOverlayWindows =
+                windowManagerService.mContext.checkCallingOrSelfPermission(
+                                        "android.permission.HIDE_NON_SYSTEM_OVERLAY_WINDOWS")
+                                == 0
+                        || windowManagerService.mContext.checkCallingOrSelfPermission(
+                                        "android.permission.HIDE_OVERLAY_WINDOWS")
+                                == 0;
+        this.mCanCreateSystemApplicationOverlay =
+                windowManagerService.mContext.checkCallingOrSelfPermission(
+                                "android.permission.SYSTEM_APPLICATION_OVERLAY")
+                        == 0;
+        this.mCanStartTasksFromRecents =
+                windowManagerService.mContext.checkCallingOrSelfPermission(
+                                "android.permission.START_TASKS_FROM_RECENTS")
+                        == 0;
+        this.mSetsUnrestrictedKeepClearAreas =
+                windowManagerService.mContext.checkCallingOrSelfPermission(
+                                "android.permission.SET_UNRESTRICTED_KEEP_CLEAR_AREAS")
+                        == 0;
+        this.mCanSetUnrestrictedGestureExclusion =
+                windowManagerService.mContext.checkCallingOrSelfPermission(
+                                "android.permission.SET_UNRESTRICTED_GESTURE_EXCLUSION")
+                        == 0;
+        this.mCanAlwaysUpdateWallpaper =
+                Flags.alwaysUpdateWallpaperPermission()
+                        && windowManagerService.mContext.checkCallingOrSelfPermission(
+                                        "android.permission.ALWAYS_UPDATE_WALLPAPER")
+                                == 0;
+        this.mShowingAlertWindowNotificationAllowed =
+                windowManagerService.mShowAlertWindowNotifications;
         this.mDragDropController = windowManagerService.mDragDropController;
         if (CoreRune.FW_ALLOW_TOUCH_TO_KEYGUARD_WALLPAPER) {
-            this.mCanDeliverTouchToKeyguardWallpaper = windowManagerService.mContext.checkCallingOrSelfPermission("android.permission.READ_WALLPAPER_INTERNAL") == 0;
+            this.mCanDeliverTouchToKeyguardWallpaper =
+                    windowManagerService.mContext.checkCallingOrSelfPermission(
+                                    "android.permission.READ_WALLPAPER_INTERNAL")
+                            == 0;
         }
         StringBuilder sb = new StringBuilder("Session{");
         sb.append(Integer.toHexString(System.identityHashCode(this)));
@@ -151,20 +190,87 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
     }
 
     public final void actionOnWallpaper(IBinder iBinder, BiConsumer biConsumer) {
-        WindowState windowForClientLocked = this.mService.windowForClientLocked(this, iBinder, true);
-        biConsumer.accept(windowForClientLocked.getDisplayContent().mWallpaperController, windowForClientLocked);
+        WindowState windowForClientLocked =
+                this.mService.windowForClientLocked(this, iBinder, true);
+        biConsumer.accept(
+                windowForClientLocked.getDisplayContent().mWallpaperController,
+                windowForClientLocked);
     }
 
-    public final int addToDisplay(IWindow iWindow, WindowManager.LayoutParams layoutParams, int i, int i2, int i3, InputChannel inputChannel, InsetsState insetsState, InsetsSourceControl.Array array, Rect rect, float[] fArr) {
-        return this.mService.addWindow(this, iWindow, layoutParams, i, i2, UserHandle.getUserId(this.mUid), i3, inputChannel, insetsState, array, rect, fArr);
+    public final int addToDisplay(
+            IWindow iWindow,
+            WindowManager.LayoutParams layoutParams,
+            int i,
+            int i2,
+            int i3,
+            InputChannel inputChannel,
+            InsetsState insetsState,
+            InsetsSourceControl.Array array,
+            Rect rect,
+            float[] fArr) {
+        return this.mService.addWindow(
+                this,
+                iWindow,
+                layoutParams,
+                i,
+                i2,
+                UserHandle.getUserId(this.mUid),
+                i3,
+                inputChannel,
+                insetsState,
+                array,
+                rect,
+                fArr);
     }
 
-    public final int addToDisplayAsUser(IWindow iWindow, WindowManager.LayoutParams layoutParams, int i, int i2, int i3, int i4, InputChannel inputChannel, InsetsState insetsState, InsetsSourceControl.Array array, Rect rect, float[] fArr) {
-        return this.mService.addWindow(this, iWindow, layoutParams, i, i2, i3, i4, inputChannel, insetsState, array, rect, fArr);
+    public final int addToDisplayAsUser(
+            IWindow iWindow,
+            WindowManager.LayoutParams layoutParams,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            InputChannel inputChannel,
+            InsetsState insetsState,
+            InsetsSourceControl.Array array,
+            Rect rect,
+            float[] fArr) {
+        return this.mService.addWindow(
+                this,
+                iWindow,
+                layoutParams,
+                i,
+                i2,
+                i3,
+                i4,
+                inputChannel,
+                insetsState,
+                array,
+                rect,
+                fArr);
     }
 
-    public final int addToDisplayWithoutInputChannel(IWindow iWindow, WindowManager.LayoutParams layoutParams, int i, int i2, InsetsState insetsState, Rect rect, float[] fArr) {
-        return this.mService.addWindow(this, iWindow, layoutParams, i, i2, UserHandle.getUserId(this.mUid), WindowInsets.Type.defaultVisible(), null, insetsState, this.mDummyControls, rect, fArr);
+    public final int addToDisplayWithoutInputChannel(
+            IWindow iWindow,
+            WindowManager.LayoutParams layoutParams,
+            int i,
+            int i2,
+            InsetsState insetsState,
+            Rect rect,
+            float[] fArr) {
+        return this.mService.addWindow(
+                this,
+                iWindow,
+                layoutParams,
+                i,
+                i2,
+                UserHandle.getUserId(this.mUid),
+                WindowInsets.Type.defaultVisible(),
+                null,
+                insetsState,
+                this.mDummyControls,
+                rect,
+                fArr);
     }
 
     @Override // android.os.IBinder.DeathRecipient
@@ -180,22 +286,28 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
                         WindowState windowState = (WindowState) this.mAddedWindows.get(size);
                         Slog.i("WindowManager", "WIN DEATH: " + windowState);
                         ActivityRecord activityRecord = windowState.mActivityRecord;
-                        if (activityRecord != null && activityRecord.findMainWindow(true) == windowState) {
-                            SnapshotController snapshotController = this.mService.mSnapshotController;
+                        if (activityRecord != null
+                                && activityRecord.findMainWindow(true) == windowState) {
+                            SnapshotController snapshotController =
+                                    this.mService.mSnapshotController;
                             ActivityRecord activityRecord2 = windowState.mActivityRecord;
-                            SnapshotCache snapshotCache = snapshotController.mTaskSnapshotController.mCache;
+                            SnapshotCache snapshotCache =
+                                    snapshotController.mTaskSnapshotController.mCache;
                             synchronized (snapshotCache.mLock) {
                                 try {
-                                    Integer num = (Integer) snapshotCache.mAppIdMap.get(activityRecord2);
+                                    Integer num =
+                                            (Integer) snapshotCache.mAppIdMap.get(activityRecord2);
                                     if (num != null) {
                                         snapshotCache.removeRunningEntry(num);
                                     }
                                 } finally {
                                 }
                             }
-                            ActivitySnapshotController activitySnapshotController = snapshotController.mActivitySnapshotController;
+                            ActivitySnapshotController activitySnapshotController =
+                                    snapshotController.mActivitySnapshotController;
                             if (!activitySnapshotController.shouldDisableSnapshots()) {
-                                activitySnapshotController.removeIfUserSavedFileExist(activityRecord2);
+                                activitySnapshotController.removeIfUserSavedFileExist(
+                                        activityRecord2);
                             }
                         }
                         windowState.removeIfPossible();
@@ -235,7 +347,8 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    WindowState windowForClientLocked = windowManagerService.windowForClientLocked(this, iWindow, false);
+                    WindowState windowForClientLocked =
+                            windowManagerService.windowForClientLocked(this, iWindow, false);
                     windowForClientLocked.mTouchableInsets = 0;
                     windowForClientLocked.mGivenTouchableRegion.setEmpty();
                 } catch (Throwable th) {
@@ -276,7 +389,8 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
         }
     }
 
-    public final void finishDrawing(IWindow iWindow, SurfaceControl.Transaction transaction, int i) {
+    public final void finishDrawing(
+            IWindow iWindow, SurfaceControl.Transaction transaction, int i) {
         if (Trace.isTagEnabled(32L)) {
             Trace.traceBegin(32L, "finishDrawing: " + this.mPackageName);
         }
@@ -291,14 +405,29 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    WindowState windowForClientLocked = windowManagerService.windowForClientLocked(this, iWindow, false);
+                    WindowState windowForClientLocked =
+                            windowManagerService.windowForClientLocked(this, iWindow, false);
                     if (ProtoLogImpl_54989576.Cache.WM_FORCE_DEBUG_ADD_REMOVE_enabled[0]) {
-                        ProtoLogImpl_54989576.d(ProtoLogGroup.WM_FORCE_DEBUG_ADD_REMOVE, 7561682476338461067L, 16, "finishDrawingWindow: %s mDrawState=%s seqId=%d", String.valueOf(windowForClientLocked), String.valueOf(windowForClientLocked != null ? windowForClientLocked.mWinAnimator.drawStateToString() : "null"), Long.valueOf(i));
+                        ProtoLogImpl_54989576.d(
+                                ProtoLogGroup.WM_FORCE_DEBUG_ADD_REMOVE,
+                                7561682476338461067L,
+                                16,
+                                "finishDrawingWindow: %s mDrawState=%s seqId=%d",
+                                String.valueOf(windowForClientLocked),
+                                String.valueOf(
+                                        windowForClientLocked != null
+                                                ? windowForClientLocked.mWinAnimator
+                                                        .drawStateToString()
+                                                : "null"),
+                                Long.valueOf(i));
                     }
                     if (transaction != null && !TextUtils.isEmpty(transaction.mDebugName)) {
-                        Slog.d("WindowManager", "finishDrawingWindow: syncBuffer=" + transaction.mDebugName);
+                        Slog.d(
+                                "WindowManager",
+                                "finishDrawingWindow: syncBuffer=" + transaction.mDebugName);
                     }
-                    if (windowForClientLocked != null && windowForClientLocked.finishDrawing(transaction, i)) {
+                    if (windowForClientLocked != null
+                            && windowForClientLocked.finishDrawing(transaction, i)) {
                         if (windowForClientLocked.hasWallpaper()) {
                             windowForClientLocked.getDisplayContent().pendingLayoutChanges |= 4;
                         }
@@ -322,7 +451,8 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
     public final void finishMovingTask(IWindow iWindow) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            TaskPositioningController taskPositioningController = this.mService.mTaskPositioningController;
+            TaskPositioningController taskPositioningController =
+                    this.mService.mTaskPositioningController;
             TaskPositioner taskPositioner = taskPositioningController.mTaskPositioner;
             if (taskPositioner != null && taskPositioner.mClientCallback == iWindow.asBinder()) {
                 taskPositioningController.finishTaskPositioning$1();
@@ -332,7 +462,8 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
         }
     }
 
-    public final void generateDisplayHash(IWindow iWindow, Rect rect, String str, RemoteCallback remoteCallback) {
+    public final void generateDisplayHash(
+            IWindow iWindow, Rect rect, String str, RemoteCallback remoteCallback) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mService.generateDisplayHash(this, iWindow, rect, str, remoteCallback);
@@ -368,7 +499,9 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
         try {
             DragState dragState = this.mDragDropController.mDragState;
             IBinder iBinder = null;
-            if (dragState != null && (inputInterceptor = dragState.mInputInterceptor) != null && (inputChannel = inputInterceptor.mClientChannel) != null) {
+            if (dragState != null
+                    && (inputInterceptor = dragState.mInputInterceptor) != null
+                    && (inputChannel = inputInterceptor.mClientChannel) != null) {
                 iBinder = inputChannel.getToken();
             }
             return iBinder;
@@ -381,7 +514,8 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
         return this.mService.getWindowId(iBinder);
     }
 
-    public final void grantEmbeddedWindowFocus(IWindow iWindow, InputTransferToken inputTransferToken, boolean z) {
+    public final void grantEmbeddedWindowFocus(
+            IWindow iWindow, InputTransferToken inputTransferToken, boolean z) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             if (iWindow != null) {
@@ -399,25 +533,83 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
         }
     }
 
-    public final void grantInputChannel(int i, SurfaceControl surfaceControl, IBinder iBinder, InputTransferToken inputTransferToken, int i2, int i3, int i4, int i5, IBinder iBinder2, InputTransferToken inputTransferToken2, String str, InputChannel inputChannel) {
+    public final void grantInputChannel(
+            int i,
+            SurfaceControl surfaceControl,
+            IBinder iBinder,
+            InputTransferToken inputTransferToken,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            IBinder iBinder2,
+            InputTransferToken inputTransferToken2,
+            String str,
+            InputChannel inputChannel) {
         if (inputTransferToken == null && !this.mCanAddInternalSystemWindow) {
             throw new SecurityException("Requires INTERNAL_SYSTEM_WINDOW permission");
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            this.mService.grantInputChannel(this, this.mUid, this.mPid, i, surfaceControl, iBinder, inputTransferToken, i2, this.mCanAddInternalSystemWindow ? i3 : 0, i4, i5, iBinder2, inputTransferToken2, str, inputChannel);
+            this.mService.grantInputChannel(
+                    this,
+                    this.mUid,
+                    this.mPid,
+                    i,
+                    surfaceControl,
+                    iBinder,
+                    inputTransferToken,
+                    i2,
+                    this.mCanAddInternalSystemWindow ? i3 : 0,
+                    i4,
+                    i5,
+                    iBinder2,
+                    inputTransferToken2,
+                    str,
+                    inputChannel);
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
     }
 
-    public final void grantInputChannelWithTaskToken(int i, SurfaceControl surfaceControl, IBinder iBinder, InputTransferToken inputTransferToken, int i2, int i3, int i4, int i5, IBinder iBinder2, InputTransferToken inputTransferToken2, String str, InputChannel inputChannel, int i6, WindowContainerToken windowContainerToken) {
+    public final void grantInputChannelWithTaskToken(
+            int i,
+            SurfaceControl surfaceControl,
+            IBinder iBinder,
+            InputTransferToken inputTransferToken,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            IBinder iBinder2,
+            InputTransferToken inputTransferToken2,
+            String str,
+            InputChannel inputChannel,
+            int i6,
+            WindowContainerToken windowContainerToken) {
         if (inputTransferToken == null && !this.mCanAddInternalSystemWindow) {
             throw new SecurityException("Requires INTERNAL_SYSTEM_WINDOW permission");
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            this.mService.grantInputChannelWithTaskToken(this, this.mUid, this.mPid, i, surfaceControl, iBinder, inputTransferToken, i2, this.mCanAddInternalSystemWindow ? i3 : 0, i4, i5, iBinder2, inputTransferToken2, str, inputChannel, i6, windowContainerToken);
+            this.mService.grantInputChannelWithTaskToken(
+                    this,
+                    this.mUid,
+                    this.mPid,
+                    i,
+                    surfaceControl,
+                    iBinder,
+                    inputTransferToken,
+                    i2,
+                    this.mCanAddInternalSystemWindow ? i3 : 0,
+                    i4,
+                    i5,
+                    iBinder2,
+                    inputTransferToken2,
+                    str,
+                    inputChannel,
+                    i6,
+                    windowContainerToken);
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
@@ -429,13 +621,16 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
 
     public final boolean isSatellitePointingUiPackage() {
         String str = this.mPackageName;
-        if (str == null || !str.equals(this.mService.mContext.getString(R.string.ext_media_move_title))) {
+        if (str == null
+                || !str.equals(this.mService.mContext.getString(R.string.ext_media_move_title))) {
             return false;
         }
         int i = this.mPid;
         int i2 = this.mUid;
         Boolean bool = ActivityTaskManagerService.sIsPip2ExperimentEnabled;
-        return ActivityManagerService.checkComponentPermission(i, i2, "android.permission.SATELLITE_COMMUNICATION", 0, -1, true) == 0;
+        return ActivityManagerService.checkComponentPermission(
+                        i, i2, "android.permission.SATELLITE_COMMUNICATION", 0, -1, true)
+                == 0;
     }
 
     public final void killSessionLocked() {
@@ -446,12 +641,24 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
                 return;
             }
             if (ProtoLogImpl_54989576.Cache.WM_SHOW_TRANSACTIONS_enabled[2]) {
-                ProtoLogImpl_54989576.i(ProtoLogGroup.WM_SHOW_TRANSACTIONS, 2638961674625826260L, 0, null, String.valueOf(surfaceSession));
+                ProtoLogImpl_54989576.i(
+                        ProtoLogGroup.WM_SHOW_TRANSACTIONS,
+                        2638961674625826260L,
+                        0,
+                        null,
+                        String.valueOf(surfaceSession));
             }
             try {
                 this.mSurfaceSession.kill();
             } catch (Exception e) {
-                Slog.w("WindowManager", "Exception thrown when killing surface session " + this.mSurfaceSession + " in session " + this + ": " + e.toString());
+                Slog.w(
+                        "WindowManager",
+                        "Exception thrown when killing surface session "
+                                + this.mSurfaceSession
+                                + " in session "
+                                + this
+                                + ": "
+                                + e.toString());
             }
             this.mSurfaceSession = null;
             this.mAddedWindows.clear();
@@ -461,7 +668,9 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
             if (alertWindowNotification == null) {
                 return;
             }
-            alertWindowNotification.mService.mH.post(new AlertWindowNotification$$ExternalSyntheticLambda1(alertWindowNotification, true));
+            alertWindowNotification.mService.mH.post(
+                    new AlertWindowNotification$$ExternalSyntheticLambda1(
+                            alertWindowNotification, true));
             this.mAlertWindowNotification = null;
         }
     }
@@ -473,12 +682,14 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    WindowState windowForClientLocked = this.mService.windowForClientLocked(this, iWindow, false);
+                    WindowState windowForClientLocked =
+                            this.mService.windowForClientLocked(this, iWindow, false);
                     if (windowForClientLocked == null) {
                         WindowManagerService.resetPriorityAfterLockedSection();
                         return false;
                     }
-                    boolean moveFocusToAdjacentWindow = this.mService.moveFocusToAdjacentWindow(windowForClientLocked, i);
+                    boolean moveFocusToAdjacentWindow =
+                            this.mService.moveFocusToAdjacentWindow(windowForClientLocked, i);
                     WindowManagerService.resetPriorityAfterLockedSection();
                     return moveFocusToAdjacentWindow;
                 } catch (Throwable th) {
@@ -530,7 +741,12 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
             SurfaceSession surfaceSession = new SurfaceSession();
             this.mSurfaceSession = surfaceSession;
             if (ProtoLogImpl_54989576.Cache.WM_SHOW_TRANSACTIONS_enabled[2]) {
-                ProtoLogImpl_54989576.i(ProtoLogGroup.WM_SHOW_TRANSACTIONS, -1594708154257031561L, 0, null, String.valueOf(surfaceSession));
+                ProtoLogImpl_54989576.i(
+                        ProtoLogGroup.WM_SHOW_TRANSACTIONS,
+                        -1594708154257031561L,
+                        0,
+                        null,
+                        String.valueOf(surfaceSession));
             }
             this.mService.mSessions.add(this);
             if (this.mLastReportedAnimatorScale != this.mService.getCurrentAnimatorScale()) {
@@ -550,20 +766,28 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
         DragDropController dragDropController = this.mDragDropController;
         dragDropController.getClass();
         try {
-            WindowManagerGlobalLock windowManagerGlobalLock = dragDropController.mService.mGlobalLock;
+            WindowManagerGlobalLock windowManagerGlobalLock =
+                    dragDropController.mService.mGlobalLock;
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
                     DragState dragState = dragDropController.mDragState;
                     if (dragState == null) {
-                        Slog.w("WindowManager", "updateClipData: there is no clipdata to be updated.");
+                        Slog.w(
+                                "WindowManager",
+                                "updateClipData: there is no clipdata to be updated.");
                         WindowManagerService.resetPriorityAfterLockedSection();
                         return;
                     }
                     if (dragState.mUid == callingUid) {
                         ClipData clipData2 = dragState.mData;
                         if (clipData2 == null || clipData == null) {
-                            Slog.w("WindowManager", "updateClipData: wrong clipdata mData=" + dragDropController.mDragState.mData + " data=" + clipData);
+                            Slog.w(
+                                    "WindowManager",
+                                    "updateClipData: wrong clipdata mData="
+                                            + dragDropController.mDragState.mData
+                                            + " data="
+                                            + clipData);
                         } else {
                             int itemCount = clipData2.getItemCount();
                             int itemCount2 = clipData.getItemCount();
@@ -584,26 +808,80 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
                 }
             }
         } catch (Exception e) {
-            WallpaperUpdateReceiver$$ExternalSyntheticOutline0.m(e, "updateClipData: exception e=", "WindowManager");
+            WallpaperUpdateReceiver$$ExternalSyntheticOutline0.m(
+                    e, "updateClipData: exception e=", "WindowManager");
         }
     }
 
-    public final IBinder performDrag(IWindow iWindow, int i, SurfaceControl surfaceControl, int i2, int i3, int i4, float f, float f2, float f3, float f4, ClipData clipData) {
+    public final IBinder performDrag(
+            IWindow iWindow,
+            int i,
+            SurfaceControl surfaceControl,
+            int i2,
+            int i3,
+            int i4,
+            float f,
+            float f2,
+            float f3,
+            float f4,
+            ClipData clipData) {
         int callingUid = Binder.getCallingUid();
-        validateAndResolveDragMimeTypeExtras(clipData, callingUid, Binder.getCallingPid(), this.mPackageName);
+        validateAndResolveDragMimeTypeExtras(
+                clipData, callingUid, Binder.getCallingPid(), this.mPackageName);
         validateDragFlags(i, callingUid);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            return this.mDragDropController.performDragWithArea(this.mPid, this.mUid, iWindow, i, surfaceControl, i2, i3, i4, f, f2, f3, f4, clipData, null);
+            return this.mDragDropController.performDragWithArea(
+                    this.mPid,
+                    this.mUid,
+                    iWindow,
+                    i,
+                    surfaceControl,
+                    i2,
+                    i3,
+                    i4,
+                    f,
+                    f2,
+                    f3,
+                    f4,
+                    clipData,
+                    null);
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
     }
 
-    public final IBinder performDragWithArea(IWindow iWindow, int i, SurfaceControl surfaceControl, int i2, int i3, int i4, float f, float f2, float f3, float f4, ClipData clipData, RectF rectF, Point point) {
+    public final IBinder performDragWithArea(
+            IWindow iWindow,
+            int i,
+            SurfaceControl surfaceControl,
+            int i2,
+            int i3,
+            int i4,
+            float f,
+            float f2,
+            float f3,
+            float f4,
+            ClipData clipData,
+            RectF rectF,
+            Point point) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            return this.mDragDropController.performDragWithArea(this.mPid, this.mUid, iWindow, i, surfaceControl, i2, i3, i4, f, f2, f3, f4, clipData, rectF);
+            return this.mDragDropController.performDragWithArea(
+                    this.mPid,
+                    this.mUid,
+                    iWindow,
+                    i,
+                    surfaceControl,
+                    i2,
+                    i3,
+                    i4,
+                    f,
+                    f2,
+                    f3,
+                    f4,
+                    clipData,
+                    rectF);
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
@@ -613,7 +891,8 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             WindowManagerPolicy windowManagerPolicy = this.mService.mPolicy;
-            return ((PhoneWindowManager) windowManagerPolicy).mExt.performHapticFeedback(this.mUid, i, this.mPackageName, null, z, z2);
+            return ((PhoneWindowManager) windowManagerPolicy)
+                    .mExt.performHapticFeedback(this.mUid, i, this.mPackageName, null, z, z2);
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
@@ -632,24 +911,88 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
         }
     }
 
-    public final int relayout(IWindow iWindow, WindowManager.LayoutParams layoutParams, int i, int i2, int i3, int i4, int i5, int i6, WindowRelayoutResult windowRelayoutResult) {
+    public final int relayout(
+            IWindow iWindow,
+            WindowManager.LayoutParams layoutParams,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            WindowRelayoutResult windowRelayoutResult) {
         Trace.traceBegin(32L, this.mRelayoutTag);
-        int relayoutWindow = this.mService.relayoutWindow(this, iWindow, layoutParams, i, i2, i3, i4, i5, i6, windowRelayoutResult);
+        int relayoutWindow =
+                this.mService.relayoutWindow(
+                        this, iWindow, layoutParams, i, i2, i3, i4, i5, i6, windowRelayoutResult);
         Trace.traceEnd(32L);
         return relayoutWindow;
     }
 
-    public final void relayoutAsync(IWindow iWindow, WindowManager.LayoutParams layoutParams, int i, int i2, int i3, int i4, int i5, int i6) {
+    public final void relayoutAsync(
+            IWindow iWindow,
+            WindowManager.LayoutParams layoutParams,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6) {
         if (Flags.windowSessionRelayoutInfo()) {
             relayout(iWindow, layoutParams, i, i2, i3, i4, i5, i6, null);
         } else {
-            relayoutLegacy(iWindow, layoutParams, i, i2, i3, i4, i5, i6, null, null, null, null, null, null);
+            relayoutLegacy(
+                    iWindow,
+                    layoutParams,
+                    i,
+                    i2,
+                    i3,
+                    i4,
+                    i5,
+                    i6,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null);
         }
     }
 
-    public final int relayoutLegacy(IWindow iWindow, WindowManager.LayoutParams layoutParams, int i, int i2, int i3, int i4, int i5, int i6, ClientWindowFrames clientWindowFrames, MergedConfiguration mergedConfiguration, SurfaceControl surfaceControl, InsetsState insetsState, InsetsSourceControl.Array array, Bundle bundle) {
+    public final int relayoutLegacy(
+            IWindow iWindow,
+            WindowManager.LayoutParams layoutParams,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            ClientWindowFrames clientWindowFrames,
+            MergedConfiguration mergedConfiguration,
+            SurfaceControl surfaceControl,
+            InsetsState insetsState,
+            InsetsSourceControl.Array array,
+            Bundle bundle) {
         Trace.traceBegin(32L, this.mRelayoutTag);
-        int relayoutWindowInner = this.mService.relayoutWindowInner(this, iWindow, layoutParams, i, i2, i3, i4, i5, i6, clientWindowFrames, mergedConfiguration, surfaceControl, insetsState, array, bundle, null);
+        int relayoutWindowInner =
+                this.mService.relayoutWindowInner(
+                        this,
+                        iWindow,
+                        layoutParams,
+                        i,
+                        i2,
+                        i3,
+                        i4,
+                        i5,
+                        i6,
+                        clientWindowFrames,
+                        mergedConfiguration,
+                        surfaceControl,
+                        insetsState,
+                        array,
+                        bundle,
+                        null);
         Trace.traceEnd(32L);
         return relayoutWindowInner;
     }
@@ -660,7 +1003,8 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
-                WindowState windowForClientLocked = windowManagerService.windowForClientLocked(this, iBinder, false);
+                WindowState windowForClientLocked =
+                        windowManagerService.windowForClientLocked(this, iBinder, false);
                 if (windowForClientLocked != null) {
                     windowForClientLocked.removeIfPossible();
                     WindowManagerService.resetPriorityAfterLockedSection();
@@ -675,7 +1019,8 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
         }
     }
 
-    public final void removeWithTaskToken(IBinder iBinder, WindowContainerToken windowContainerToken) {
+    public final void removeWithTaskToken(
+            IBinder iBinder, WindowContainerToken windowContainerToken) {
         WindowManagerService windowManagerService = this.mService;
         WindowManagerGlobalLock windowManagerGlobalLock = windowManagerService.mGlobalLock;
         WindowManagerService.boostPriorityForLockedSection();
@@ -729,16 +1074,21 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
         }
     }
 
-    public final void sendWallpaperCommand(IBinder iBinder, String str, int i, int i2, int i3, Bundle bundle, boolean z) {
+    public final void sendWallpaperCommand(
+            IBinder iBinder, String str, int i, int i2, int i3, Bundle bundle, boolean z) {
         WindowManagerGlobalLock windowManagerGlobalLock = this.mService.mGlobalLock;
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    WindowState windowForClientLocked = this.mService.windowForClientLocked(this, iBinder, true);
-                    WallpaperController wallpaperController = windowForClientLocked.getDisplayContent().mWallpaperController;
-                    if (this.mCanAlwaysUpdateWallpaper || windowForClientLocked == wallpaperController.mWallpaperTarget || windowForClientLocked == wallpaperController.mPrevWallpaperTarget) {
+                    WindowState windowForClientLocked =
+                            this.mService.windowForClientLocked(this, iBinder, true);
+                    WallpaperController wallpaperController =
+                            windowForClientLocked.getDisplayContent().mWallpaperController;
+                    if (this.mCanAlwaysUpdateWallpaper
+                            || windowForClientLocked == wallpaperController.mWallpaperTarget
+                            || windowForClientLocked == wallpaperController.mPrevWallpaperTarget) {
                         wallpaperController.sendWindowWallpaperCommand(str, i, i2, i3, bundle, z);
                     }
                 } finally {
@@ -756,7 +1106,8 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
         this.mService.mH.obtainMessage(58, this.mPid, z ? 1 : 0).sendToTarget();
     }
 
-    public final void setInsets(IWindow iWindow, int i, Rect rect, Rect rect2, Region region, Rect rect3) {
+    public final void setInsets(
+            IWindow iWindow, int i, Rect rect, Rect rect2, Region region, Rect rect3) {
         String str;
         WindowManagerService windowManagerService = this.mService;
         windowManagerService.getClass();
@@ -767,7 +1118,8 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    WindowState windowForClientLocked = windowManagerService.windowForClientLocked(this, iWindow, false);
+                    WindowState windowForClientLocked =
+                            windowManagerService.windowForClientLocked(this, iWindow, false);
                     if (windowForClientLocked != null && windowForClientLocked.mIsImWindow) {
                         StringBuilder sb = new StringBuilder("setInsetsWindow ");
                         sb.append(windowForClientLocked);
@@ -788,7 +1140,11 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
                         sb.append(" -> ");
                         sb.append(i);
                         if (CoreRune.FW_MINIMIZED_IME_INSET_ANIM) {
-                            str = ", minimizedInsets=" + windowForClientLocked.mMinimizedInsets + " -> " + rect3;
+                            str =
+                                    ", minimizedInsets="
+                                            + windowForClientLocked.mMinimizedInsets
+                                            + " -> "
+                                            + rect3;
                         } else {
                             str = "";
                         }
@@ -798,7 +1154,11 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
                     if (windowForClientLocked != null) {
                         boolean z = windowForClientLocked.mGivenInsetsPending;
                         windowForClientLocked.mGivenInsetsPending = false;
-                        if (!(z && windowForClientLocked.hasInsetsSourceProvider()) && windowForClientLocked.mTouchableInsets == i && windowForClientLocked.mGivenContentInsets.equals(rect) && windowForClientLocked.mGivenVisibleInsets.equals(rect2) && windowForClientLocked.mGivenTouchableRegion.equals(region)) {
+                        if (!(z && windowForClientLocked.hasInsetsSourceProvider())
+                                && windowForClientLocked.mTouchableInsets == i
+                                && windowForClientLocked.mGivenContentInsets.equals(rect)
+                                && windowForClientLocked.mGivenVisibleInsets.equals(rect2)
+                                && windowForClientLocked.mGivenTouchableRegion.equals(region)) {
                             WindowManagerService.resetPriorityAfterLockedSection();
                         } else {
                             windowForClientLocked.mGivenContentInsets.set(rect);
@@ -808,18 +1168,28 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
                             float f = windowForClientLocked.mGlobalScale;
                             if (f != 1.0f) {
                                 windowForClientLocked.mGivenContentInsets.scale(f);
-                                windowForClientLocked.mGivenVisibleInsets.scale(windowForClientLocked.mGlobalScale);
-                                windowForClientLocked.mGivenTouchableRegion.scale(windowForClientLocked.mGlobalScale);
+                                windowForClientLocked.mGivenVisibleInsets.scale(
+                                        windowForClientLocked.mGlobalScale);
+                                windowForClientLocked.mGivenTouchableRegion.scale(
+                                        windowForClientLocked.mGlobalScale);
                             }
                             if (CoreRune.FW_MINIMIZED_IME_INSET_ANIM) {
                                 windowForClientLocked.mMinimizedInsets.set(rect3);
                             }
                             windowForClientLocked.setDisplayLayoutNeeded();
-                            windowForClientLocked.updateSourceFrame(windowForClientLocked.mWindowFrames.mFrame);
+                            windowForClientLocked.updateSourceFrame(
+                                    windowForClientLocked.mWindowFrames.mFrame);
                             windowManagerService.mWindowPlacerLocked.performSurfacePlacement(false);
-                            windowForClientLocked.getDisplayContent().mInputMonitor.updateInputWindowsLw(true);
+                            windowForClientLocked
+                                    .getDisplayContent()
+                                    .mInputMonitor
+                                    .updateInputWindowsLw(true);
                             if (windowManagerService.mAccessibilityController.hasCallbacks()) {
-                                windowManagerService.mAccessibilityController.onSomeWindowResizedOrMovedWithCallingUid(callingUid, windowForClientLocked.getDisplayContent().mDisplayId);
+                                windowManagerService.mAccessibilityController
+                                        .onSomeWindowResizedOrMovedWithCallingUid(
+                                                callingUid,
+                                                windowForClientLocked.getDisplayContent()
+                                                        .mDisplayId);
                             }
                         }
                     }
@@ -842,7 +1212,9 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
-                this.mService.windowForClientLocked(this, iWindow, true).mKeyguardWallpaperTouchAllowed = z;
+                this.mService.windowForClientLocked(this, iWindow, true)
+                                .mKeyguardWallpaperTouchAllowed =
+                        z;
             } catch (Throwable th) {
                 WindowManagerService.resetPriorityAfterLockedSection();
                 throw th;
@@ -851,17 +1223,28 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
         WindowManagerService.resetPriorityAfterLockedSection();
     }
 
-    public final void setOnBackInvokedCallbackInfo(IWindow iWindow, OnBackInvokedCallbackInfo onBackInvokedCallbackInfo) {
+    public final void setOnBackInvokedCallbackInfo(
+            IWindow iWindow, OnBackInvokedCallbackInfo onBackInvokedCallbackInfo) {
         WindowManagerGlobalLock windowManagerGlobalLock = this.mService.mGlobalLock;
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
-                WindowState windowForClientLocked = this.mService.windowForClientLocked(this, iWindow, false);
+                WindowState windowForClientLocked =
+                        this.mService.windowForClientLocked(this, iWindow, false);
                 if (windowForClientLocked == null) {
-                    Slog.i("WindowManager", "setOnBackInvokedCallback(): No window state for package:" + this.mPackageName);
+                    Slog.i(
+                            "WindowManager",
+                            "setOnBackInvokedCallback(): No window state for package:"
+                                    + this.mPackageName);
                 } else {
                     if (ProtoLogImpl_54989576.Cache.WM_DEBUG_BACK_PREVIEW_enabled[0]) {
-                        ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_BACK_PREVIEW, -7237767461056267619L, 0, "%s: Setting back callback %s", String.valueOf(windowForClientLocked), String.valueOf(onBackInvokedCallbackInfo));
+                        ProtoLogImpl_54989576.d(
+                                ProtoLogGroup.WM_DEBUG_BACK_PREVIEW,
+                                -7237767461056267619L,
+                                0,
+                                "%s: Setting back callback %s",
+                                String.valueOf(windowForClientLocked),
+                                String.valueOf(onBackInvokedCallbackInfo));
                     }
                     windowForClientLocked.mOnBackInvokedCallbackInfo = onBackInvokedCallbackInfo;
                 }
@@ -878,19 +1261,23 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
-                actionOnWallpaper(iBinder, new BiConsumer() { // from class: com.android.server.wm.Session$$ExternalSyntheticLambda3
-                    @Override // java.util.function.BiConsumer
-                    public final void accept(Object obj, Object obj2) {
-                        boolean z2 = z;
-                        WallpaperController wallpaperController = (WallpaperController) obj;
-                        WindowState windowState = (WindowState) obj2;
-                        wallpaperController.getClass();
-                        if (z2 != windowState.mShouldScaleWallpaper) {
-                            windowState.mShouldScaleWallpaper = z2;
-                            wallpaperController.updateWallpaperOffsetLocked(windowState, false);
-                        }
-                    }
-                });
+                actionOnWallpaper(
+                        iBinder,
+                        new BiConsumer() { // from class:
+                                           // com.android.server.wm.Session$$ExternalSyntheticLambda3
+                            @Override // java.util.function.BiConsumer
+                            public final void accept(Object obj, Object obj2) {
+                                boolean z2 = z;
+                                WallpaperController wallpaperController = (WallpaperController) obj;
+                                WindowState windowState = (WindowState) obj2;
+                                wallpaperController.getClass();
+                                if (z2 != windowState.mShouldScaleWallpaper) {
+                                    windowState.mShouldScaleWallpaper = z2;
+                                    wallpaperController.updateWallpaperOffsetLocked(
+                                            windowState, false);
+                                }
+                            }
+                        });
             } catch (Throwable th) {
                 WindowManagerService.resetPriorityAfterLockedSection();
                 throw th;
@@ -914,22 +1301,32 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
             try {
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    actionOnWallpaper(iBinder, new BiConsumer() { // from class: com.android.server.wm.Session$$ExternalSyntheticLambda0
-                        @Override // java.util.function.BiConsumer
-                        public final void accept(Object obj, Object obj2) {
-                            int i3 = i;
-                            int i4 = i2;
-                            WallpaperController wallpaperController = (WallpaperController) obj;
-                            WindowState windowState = (WindowState) obj2;
-                            wallpaperController.getClass();
-                            if (windowState.mWallpaperDisplayOffsetX == i3 && windowState.mWallpaperDisplayOffsetY == i4) {
-                                return;
-                            }
-                            windowState.mWallpaperDisplayOffsetX = i3;
-                            windowState.mWallpaperDisplayOffsetY = i4;
-                            wallpaperController.updateWallpaperOffsetLocked(windowState, !wallpaperController.mService.mFlags.mWallpaperOffsetAsync);
-                        }
-                    });
+                    actionOnWallpaper(
+                            iBinder,
+                            new BiConsumer() { // from class:
+                                               // com.android.server.wm.Session$$ExternalSyntheticLambda0
+                                @Override // java.util.function.BiConsumer
+                                public final void accept(Object obj, Object obj2) {
+                                    int i3 = i;
+                                    int i4 = i2;
+                                    WallpaperController wallpaperController =
+                                            (WallpaperController) obj;
+                                    WindowState windowState = (WindowState) obj2;
+                                    wallpaperController.getClass();
+                                    if (windowState.mWallpaperDisplayOffsetX == i3
+                                            && windowState.mWallpaperDisplayOffsetY == i4) {
+                                        return;
+                                    }
+                                    windowState.mWallpaperDisplayOffsetX = i3;
+                                    windowState.mWallpaperDisplayOffsetY = i4;
+                                    wallpaperController.updateWallpaperOffsetLocked(
+                                            windowState,
+                                            !wallpaperController
+                                                    .mService
+                                                    .mFlags
+                                                    .mWallpaperOffsetAsync);
+                                }
+                            });
                 } finally {
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                 }
@@ -941,33 +1338,44 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
         WindowManagerService.resetPriorityAfterLockedSection();
     }
 
-    public final void setWallpaperPosition(IBinder iBinder, final float f, final float f2, final float f3, final float f4) {
+    public final void setWallpaperPosition(
+            IBinder iBinder, final float f, final float f2, final float f3, final float f4) {
         WindowManagerGlobalLock windowManagerGlobalLock = this.mService.mGlobalLock;
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    actionOnWallpaper(iBinder, new BiConsumer() { // from class: com.android.server.wm.Session$$ExternalSyntheticLambda5
-                        @Override // java.util.function.BiConsumer
-                        public final void accept(Object obj, Object obj2) {
-                            float f5 = f;
-                            float f6 = f2;
-                            float f7 = f3;
-                            float f8 = f4;
-                            WallpaperController wallpaperController = (WallpaperController) obj;
-                            WindowState windowState = (WindowState) obj2;
-                            wallpaperController.getClass();
-                            if (windowState.mWallpaperX == f5 && windowState.mWallpaperY == f6) {
-                                return;
-                            }
-                            windowState.mWallpaperX = f5;
-                            windowState.mWallpaperY = f6;
-                            windowState.mWallpaperXStep = f7;
-                            windowState.mWallpaperYStep = f8;
-                            wallpaperController.updateWallpaperOffsetLocked(windowState, !wallpaperController.mService.mFlags.mWallpaperOffsetAsync);
-                        }
-                    });
+                    actionOnWallpaper(
+                            iBinder,
+                            new BiConsumer() { // from class:
+                                               // com.android.server.wm.Session$$ExternalSyntheticLambda5
+                                @Override // java.util.function.BiConsumer
+                                public final void accept(Object obj, Object obj2) {
+                                    float f5 = f;
+                                    float f6 = f2;
+                                    float f7 = f3;
+                                    float f8 = f4;
+                                    WallpaperController wallpaperController =
+                                            (WallpaperController) obj;
+                                    WindowState windowState = (WindowState) obj2;
+                                    wallpaperController.getClass();
+                                    if (windowState.mWallpaperX == f5
+                                            && windowState.mWallpaperY == f6) {
+                                        return;
+                                    }
+                                    windowState.mWallpaperX = f5;
+                                    windowState.mWallpaperY = f6;
+                                    windowState.mWallpaperXStep = f7;
+                                    windowState.mWallpaperYStep = f8;
+                                    wallpaperController.updateWallpaperOffsetLocked(
+                                            windowState,
+                                            !wallpaperController
+                                                    .mService
+                                                    .mFlags
+                                                    .mWallpaperOffsetAsync);
+                                }
+                            });
                 } finally {
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                 }
@@ -980,7 +1388,9 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
     }
 
     public final void setWallpaperZoomOut(IBinder iBinder, final float f) {
-        if (Float.compare(FullScreenMagnificationGestureHandler.MAX_SCALE, f) > 0 || Float.compare(1.0f, f) < 0 || Float.isNaN(f)) {
+        if (Float.compare(FullScreenMagnificationGestureHandler.MAX_SCALE, f) > 0
+                || Float.compare(1.0f, f) < 0
+                || Float.isNaN(f)) {
             throw new IllegalArgumentException("Zoom must be a valid float between 0 and 1: " + f);
         }
         WindowManagerGlobalLock windowManagerGlobalLock = this.mService.mGlobalLock;
@@ -989,23 +1399,39 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
             try {
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    actionOnWallpaper(iBinder, new BiConsumer() { // from class: com.android.server.wm.Session$$ExternalSyntheticLambda1
-                        @Override // java.util.function.BiConsumer
-                        public final void accept(Object obj, Object obj2) {
-                            float f2 = f;
-                            WallpaperController wallpaperController = (WallpaperController) obj;
-                            WindowState windowState = (WindowState) obj2;
-                            wallpaperController.getClass();
-                            if (Float.compare(windowState.mWallpaperZoomOut, f2) != 0) {
-                                windowState.mWallpaperZoomOut = f2;
-                                wallpaperController.mLastWallpaperZoomOut = FullScreenMagnificationGestureHandler.MAX_SCALE;
-                                wallpaperController.mDisplayContent.forAllWindows((Consumer) wallpaperController.mComputeMaxZoomOutFunction, true);
-                                for (int size = wallpaperController.mWallpaperTokens.size() - 1; size >= 0; size--) {
-                                    ((WallpaperWindowToken) wallpaperController.mWallpaperTokens.get(size)).updateWallpaperOffset(false);
+                    actionOnWallpaper(
+                            iBinder,
+                            new BiConsumer() { // from class:
+                                               // com.android.server.wm.Session$$ExternalSyntheticLambda1
+                                @Override // java.util.function.BiConsumer
+                                public final void accept(Object obj, Object obj2) {
+                                    float f2 = f;
+                                    WallpaperController wallpaperController =
+                                            (WallpaperController) obj;
+                                    WindowState windowState = (WindowState) obj2;
+                                    wallpaperController.getClass();
+                                    if (Float.compare(windowState.mWallpaperZoomOut, f2) != 0) {
+                                        windowState.mWallpaperZoomOut = f2;
+                                        wallpaperController.mLastWallpaperZoomOut =
+                                                FullScreenMagnificationGestureHandler.MAX_SCALE;
+                                        wallpaperController.mDisplayContent.forAllWindows(
+                                                (Consumer)
+                                                        wallpaperController
+                                                                .mComputeMaxZoomOutFunction,
+                                                true);
+                                        for (int size =
+                                                        wallpaperController.mWallpaperTokens.size()
+                                                                - 1;
+                                                size >= 0;
+                                                size--) {
+                                            ((WallpaperWindowToken)
+                                                            wallpaperController.mWallpaperTokens
+                                                                    .get(size))
+                                                    .updateWallpaperOffset(false);
+                                        }
+                                    }
                                 }
-                            }
-                        }
-                    });
+                            });
                 } finally {
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                 }
@@ -1030,20 +1456,51 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
         return this.mStringName;
     }
 
-    public final void updateInputChannel(IBinder iBinder, int i, SurfaceControl surfaceControl, int i2, int i3, int i4, Region region) {
+    public final void updateInputChannel(
+            IBinder iBinder,
+            int i,
+            SurfaceControl surfaceControl,
+            int i2,
+            int i3,
+            int i4,
+            Region region) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            this.mService.updateInputChannel(iBinder, i, surfaceControl, i2, this.mCanAddInternalSystemWindow ? i3 : 0, i4, region, null);
+            this.mService.updateInputChannel(
+                    iBinder,
+                    i,
+                    surfaceControl,
+                    i2,
+                    this.mCanAddInternalSystemWindow ? i3 : 0,
+                    i4,
+                    region,
+                    null);
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
     }
 
-    public final void updateInputChannelWithPointerRegion(IBinder iBinder, int i, SurfaceControl surfaceControl, int i2, int i3, int i4, Region region, Region region2) {
+    public final void updateInputChannelWithPointerRegion(
+            IBinder iBinder,
+            int i,
+            SurfaceControl surfaceControl,
+            int i2,
+            int i3,
+            int i4,
+            Region region,
+            Region region2) {
         if (CoreRune.MW_FREEFORM_RESIZE_TOUCHABLE_REGION) {
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                this.mService.updateInputChannel(iBinder, i, surfaceControl, i2, this.mCanAddInternalSystemWindow ? i3 : 0, i4, region, region2);
+                this.mService.updateInputChannel(
+                        iBinder,
+                        i,
+                        surfaceControl,
+                        i2,
+                        this.mCanAddInternalSystemWindow ? i3 : 0,
+                        i4,
+                        region,
+                        region2);
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
@@ -1055,12 +1512,16 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
-                WindowState windowForClientLocked = this.mService.windowForClientLocked(this, iWindow, false);
+                WindowState windowForClientLocked =
+                        this.mService.windowForClientLocked(this, iWindow, false);
                 if (windowForClientLocked != null) {
                     if (windowForClientLocked.mRequestedVisibleTypes != i) {
                         windowForClientLocked.mRequestedVisibleTypes = i;
                     }
-                    windowForClientLocked.getDisplayContent().mInsetsPolicy.onRequestedVisibleTypesChanged(windowForClientLocked);
+                    windowForClientLocked
+                            .getDisplayContent()
+                            .mInsetsPolicy
+                            .onRequestedVisibleTypesChanged(windowForClientLocked);
                 }
             } catch (Throwable th) {
                 WindowManagerService.resetPriorityAfterLockedSection();
@@ -1097,7 +1558,8 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
             return;
         }
         if (i4 > 1) {
-            throw new IllegalArgumentException("Can not specify more than one of activity, shortcut, or task mime types");
+            throw new IllegalArgumentException(
+                    "Can not specify more than one of activity, shortcut, or task mime types");
         }
         if (clipData.getItemCount() == 0) {
             throw new IllegalArgumentException("Unexpected number of items (none)");
@@ -1107,23 +1569,48 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
                 throw new IllegalArgumentException("Unexpected item, expected an intent");
             }
         }
-        MultiTaskingController multiTaskingController = this.mService.mAtmService.mMultiTaskingController;
+        MultiTaskingController multiTaskingController =
+                this.mService.mAtmService.mMultiTaskingController;
         if (multiTaskingController.mSystemUIUid == -1) {
-            multiTaskingController.mSystemUIUid = multiTaskingController.mAtm.getPackageManagerInternalLocked().getPackageUid(Constants.SYSTEMUI_PACKAGE_NAME, 1048576L, 0);
+            multiTaskingController.mSystemUIUid =
+                    multiTaskingController
+                            .mAtm
+                            .getPackageManagerInternalLocked()
+                            .getPackageUid(Constants.SYSTEMUI_PACKAGE_NAME, 1048576L, 0);
         }
-        int i6 = (multiTaskingController.mSystemUIUid == i || UserHandle.isSameApp(i, this.mService.mAtmService.mRecentTasks.mRecentsUid) || UserHandle.isSameApp(i, this.mService.mAtmService.mRecentTasks.mLauncherInfo)) ? 1000 : i;
+        int i6 =
+                (multiTaskingController.mSystemUIUid == i
+                                || UserHandle.isSameApp(
+                                        i, this.mService.mAtmService.mRecentTasks.mRecentsUid)
+                                || UserHandle.isSameApp(
+                                        i, this.mService.mAtmService.mRecentTasks.mLauncherInfo))
+                        ? 1000
+                        : i;
         if (hasMimeType) {
             long clearCallingIdentity = Binder.clearCallingIdentity();
             for (int i7 = 0; i7 < clipData.getItemCount(); i7++) {
                 try {
                     ClipData.Item itemAt = clipData.getItemAt(i7);
                     Intent intent = itemAt.getIntent();
-                    PendingIntent pendingIntent = (PendingIntent) intent.getParcelableExtra("android.intent.extra.PENDING_INTENT");
-                    UserHandle userHandle = (UserHandle) intent.getParcelableExtra("android.intent.extra.USER");
+                    PendingIntent pendingIntent =
+                            (PendingIntent)
+                                    intent.getParcelableExtra(
+                                            "android.intent.extra.PENDING_INTENT");
+                    UserHandle userHandle =
+                            (UserHandle) intent.getParcelableExtra("android.intent.extra.USER");
                     if (pendingIntent == null || userHandle == null) {
-                        throw new IllegalArgumentException("Clip data must include the pending intent to launch and its associated user to launch for.");
+                        throw new IllegalArgumentException(
+                                "Clip data must include the pending intent to launch and its"
+                                    + " associated user to launch for.");
                     }
-                    itemAt.setActivityInfo(this.mService.mAtmService.resolveActivityInfoForIntent(userHandle.getIdentifier(), i6, i2, this.mService.mAmInternal.getIntentForIntentSender(pendingIntent.getIntentSender().getTarget()), null));
+                    itemAt.setActivityInfo(
+                            this.mService.mAtmService.resolveActivityInfoForIntent(
+                                    userHandle.getIdentifier(),
+                                    i6,
+                                    i2,
+                                    this.mService.mAmInternal.getIntentForIntentSender(
+                                            pendingIntent.getIntentSender().getTarget()),
+                                    null));
                 } catch (Throwable th) {
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                     throw th;
@@ -1140,7 +1627,8 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
                 }
                 if (clipData.getItemCount() > 0) {
                     ClipData.Item itemAt2 = clipData.getItemAt(0);
-                    int intExtra = itemAt2.getIntent().getIntExtra("android.intent.extra.TASK_ID", -1);
+                    int intExtra =
+                            itemAt2.getIntent().getIntExtra("android.intent.extra.TASK_ID", -1);
                     if (intExtra == -1) {
                         throw new IllegalArgumentException("Clip item must include the task id.");
                     }
@@ -1163,7 +1651,9 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
                         itemAt2.setActivityInfo(rootActivity.info);
                         return;
                     } else {
-                        itemAt2.setActivityInfo(this.mService.mAtmService.resolveActivityInfoForIntent(anyTaskForId.mUserId, i8, i2, anyTaskForId.intent, null));
+                        itemAt2.setActivityInfo(
+                                this.mService.mAtmService.resolveActivityInfoForIntent(
+                                        anyTaskForId.mUserId, i8, i2, anyTaskForId.intent, null));
                         return;
                     }
                 }
@@ -1180,23 +1670,47 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
             Intent intent2 = itemAt3.getIntent();
             String stringExtra = intent2.getStringExtra("android.intent.extra.shortcut.ID");
             String stringExtra2 = intent2.getStringExtra("android.intent.extra.PACKAGE_NAME");
-            UserHandle userHandle2 = (UserHandle) intent2.getParcelableExtra("android.intent.extra.USER");
-            if (TextUtils.isEmpty(stringExtra) || TextUtils.isEmpty(stringExtra2) || userHandle2 == null) {
-                throw new IllegalArgumentException("Clip item must include the package name, shortcut id, and the user to launch for.");
+            UserHandle userHandle2 =
+                    (UserHandle) intent2.getParcelableExtra("android.intent.extra.USER");
+            if (TextUtils.isEmpty(stringExtra)
+                    || TextUtils.isEmpty(stringExtra2)
+                    || userHandle2 == null) {
+                throw new IllegalArgumentException(
+                        "Clip item must include the package name, shortcut id, and the user to"
+                            + " launch for.");
             }
             int i10 = i6;
-            Intent[] createShortcutIntents = ((ShortcutServiceInternal) LocalServices.getService(ShortcutServiceInternal.class)).createShortcutIntents(UserHandle.getUserId(i), str, stringExtra2, stringExtra, userHandle2.getIdentifier(), i2, i);
+            Intent[] createShortcutIntents =
+                    ((ShortcutServiceInternal)
+                                    LocalServices.getService(ShortcutServiceInternal.class))
+                            .createShortcutIntents(
+                                    UserHandle.getUserId(i),
+                                    str,
+                                    stringExtra2,
+                                    stringExtra,
+                                    userHandle2.getIdentifier(),
+                                    i2,
+                                    i);
             if (createShortcutIntents == null || createShortcutIntents.length == 0) {
                 throw new IllegalArgumentException("Invalid shortcut id");
             }
             if (i10 == 1000) {
                 item = itemAt3;
                 i3 = i9;
-                resolveActivityInfoForIntent = this.mService.mAtmService.resolveActivityInfoForIntent(userHandle2.getIdentifier(), i10, i2, createShortcutIntents[0], createShortcutIntents[0].resolveTypeIfNeeded(this.mService.mContext.getContentResolver()));
+                resolveActivityInfoForIntent =
+                        this.mService.mAtmService.resolveActivityInfoForIntent(
+                                userHandle2.getIdentifier(),
+                                i10,
+                                i2,
+                                createShortcutIntents[0],
+                                createShortcutIntents[0].resolveTypeIfNeeded(
+                                        this.mService.mContext.getContentResolver()));
             } else {
                 item = itemAt3;
                 i3 = i9;
-                resolveActivityInfoForIntent = this.mService.mAtmService.resolveActivityInfoForIntent(userHandle2.getIdentifier(), i, i2, createShortcutIntents[0], null);
+                resolveActivityInfoForIntent =
+                        this.mService.mAtmService.resolveActivityInfoForIntent(
+                                userHandle2.getIdentifier(), i, i2, createShortcutIntents[0], null);
             }
             item.setActivityInfo(resolveActivityInfoForIntent);
             i9 = i3 + 1;
@@ -1208,7 +1722,8 @@ public final class Session extends IWindowSession.Stub implements IBinder.DeathR
         if ((i & 2048) != 0 && !this.mCanStartTasksFromRecents) {
             throw new SecurityException("Requires START_TASKS_FROM_RECENTS permission");
         }
-        if ((i & EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION) != 0 && !SafeActivityOptions.isAssistant(i2, this.mService.mAtmService)) {
+        if ((i & EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION) != 0
+                && !SafeActivityOptions.isAssistant(i2, this.mService.mAtmService)) {
             throw new SecurityException("Caller is not the assistant");
         }
     }

@@ -3,6 +3,7 @@ package com.android.internal.org.bouncycastle.asn1.x500;
 import com.android.internal.org.bouncycastle.asn1.ASN1Encodable;
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.internal.org.bouncycastle.asn1.x500.style.BCStyle;
+
 import java.util.Vector;
 
 /* loaded from: classes5.dex */

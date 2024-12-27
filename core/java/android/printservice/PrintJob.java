@@ -18,7 +18,8 @@ public final class PrintJob {
         this.mContext = context;
         this.mCachedInfo = jobInfo;
         this.mPrintServiceClient = client;
-        this.mDocument = new PrintDocument(this.mCachedInfo.getId(), client, jobInfo.getDocumentInfo());
+        this.mDocument =
+                new PrintDocument(this.mCachedInfo.getId(), client, jobInfo.getDocumentInfo());
     }
 
     public PrintJobId getId() {
@@ -142,7 +143,8 @@ public final class PrintJob {
     public void setStatus(int statusResId) {
         PrintService.throwIfNotCalledOnMainThread();
         try {
-            this.mPrintServiceClient.setStatusRes(this.mCachedInfo.getId(), statusResId, this.mContext.getPackageName());
+            this.mPrintServiceClient.setStatusRes(
+                    this.mCachedInfo.getId(), statusResId, this.mContext.getPackageName());
         } catch (RemoteException re) {
             Log.e(LOG_TAG, "Error setting status for job: " + this.mCachedInfo.getId(), re);
         }

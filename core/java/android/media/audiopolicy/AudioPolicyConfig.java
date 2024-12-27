@@ -1,10 +1,10 @@
 package android.media.audiopolicy;
 
-import android.media.audiopolicy.AudioMixingRule;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 import android.util.Pair;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,19 +15,21 @@ import java.util.stream.Stream;
 
 /* loaded from: classes2.dex */
 public class AudioPolicyConfig implements Parcelable {
-    public static final Parcelable.Creator<AudioPolicyConfig> CREATOR = new Parcelable.Creator<AudioPolicyConfig>() { // from class: android.media.audiopolicy.AudioPolicyConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioPolicyConfig createFromParcel(Parcel p) {
-            return new AudioPolicyConfig(p);
-        }
+    public static final Parcelable.Creator<AudioPolicyConfig> CREATOR =
+            new Parcelable.Creator<AudioPolicyConfig>() { // from class:
+                // android.media.audiopolicy.AudioPolicyConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioPolicyConfig createFromParcel(Parcel p) {
+                    return new AudioPolicyConfig(p);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioPolicyConfig[] newArray(int size) {
-            return new AudioPolicyConfig[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioPolicyConfig[] newArray(int size) {
+                    return new AudioPolicyConfig[size];
+                }
+            };
     private static final String TAG = "AudioPolicyConfig";
     protected int mDuckingPolicy;
     private int mMixCounter;
@@ -92,12 +94,44 @@ public class AudioPolicyConfig implements Parcelable {
     public String toLogFriendlyString() {
         String textDump;
         String textDump2 = new String("android.media.audiopolicy.AudioPolicyConfig:\n");
-        String textDump3 = textDump2 + this.mMixes.size() + " AudioMix, reg:" + this.mRegistrationId + "\n";
+        String textDump3 =
+                textDump2 + this.mMixes.size() + " AudioMix, reg:" + this.mRegistrationId + "\n";
         Iterator<AudioMix> it = this.mMixes.iterator();
         while (it.hasNext()) {
             AudioMix mix = it.next();
-            textDump3 = (((((((textDump3 + "* route flags=0x" + Integer.toHexString(mix.getRouteFlags()) + "\n") + "  rate=" + mix.getFormat().getSampleRate() + "Hz\n") + "  encoding=" + mix.getFormat().getEncoding() + "\n") + "  channels=0x") + Integer.toHexString(mix.getFormat().getChannelMask()).toUpperCase() + "\n") + "  ignore playback capture opt out=" + mix.getRule().allowPrivilegedMediaPlaybackCapture() + "\n") + "  allow voice communication capture=" + mix.getRule().voiceCommunicationCaptureAllowed() + "\n") + "  specified mix type=" + mix.getRule().getTargetMixRole() + "\n";
-            ArrayList<AudioMixingRule.AudioMixMatchCriterion> criteria = mix.getRule().getCriteria();
+            textDump3 =
+                    (((((((textDump3
+                                                                                    + "* route"
+                                                                                    + " flags=0x"
+                                                                                    + Integer
+                                                                                            .toHexString(
+                                                                                                    mix
+                                                                                                            .getRouteFlags())
+                                                                                    + "\n")
+                                                                            + "  rate="
+                                                                            + mix.getFormat()
+                                                                                    .getSampleRate()
+                                                                            + "Hz\n")
+                                                                    + "  encoding="
+                                                                    + mix.getFormat().getEncoding()
+                                                                    + "\n")
+                                                            + "  channels=0x")
+                                                    + Integer.toHexString(
+                                                                    mix.getFormat()
+                                                                            .getChannelMask())
+                                                            .toUpperCase()
+                                                    + "\n")
+                                            + "  ignore playback capture opt out="
+                                            + mix.getRule().allowPrivilegedMediaPlaybackCapture()
+                                            + "\n")
+                                    + "  allow voice communication capture="
+                                    + mix.getRule().voiceCommunicationCaptureAllowed()
+                                    + "\n")
+                            + "  specified mix type="
+                            + mix.getRule().getTargetMixRole()
+                            + "\n";
+            ArrayList<AudioMixingRule.AudioMixMatchCriterion> criteria =
+                    mix.getRule().getCriteria();
             Iterator<AudioMixingRule.AudioMixMatchCriterion> it2 = criteria.iterator();
             while (it2.hasNext()) {
                 AudioMixingRule.AudioMixMatchCriterion criterion = it2.next();
@@ -106,7 +140,9 @@ public class AudioPolicyConfig implements Parcelable {
                         textDump = (textDump3 + "  match usage ") + criterion.mAttr.usageToString();
                         break;
                     case 2:
-                        textDump = (textDump3 + "  match capture preset ") + criterion.mAttr.getCapturePreset();
+                        textDump =
+                                (textDump3 + "  match capture preset ")
+                                        + criterion.mAttr.getCapturePreset();
                         break;
                     case 4:
                         textDump = (textDump3 + "  match UID ") + criterion.mIntProp;
@@ -118,10 +154,13 @@ public class AudioPolicyConfig implements Parcelable {
                         textDump = (textDump3 + " match audio session id") + criterion.mIntProp;
                         break;
                     case 32769:
-                        textDump = (textDump3 + "  exclude usage ") + criterion.mAttr.usageToString();
+                        textDump =
+                                (textDump3 + "  exclude usage ") + criterion.mAttr.usageToString();
                         break;
                     case 32770:
-                        textDump = (textDump3 + "  exclude capture preset ") + criterion.mAttr.getCapturePreset();
+                        textDump =
+                                (textDump3 + "  exclude capture preset ")
+                                        + criterion.mAttr.getCapturePreset();
                         break;
                     case 32772:
                         textDump = (textDump3 + "  exclude UID ") + criterion.mIntProp;
@@ -148,7 +187,14 @@ public class AudioPolicyConfig implements Parcelable {
         Iterator<AudioMix> it = this.mMixes.iterator();
         while (it.hasNext()) {
             AudioMix mix = it.next();
-            compactDump = compactDump + " Mix:" + mixNum + "-Typ:" + mixTypePrefix(mix.getMixType()) + "-Rul:" + mix.getRule().getCriteria().size();
+            compactDump =
+                    compactDump
+                            + " Mix:"
+                            + mixNum
+                            + "-Typ:"
+                            + mixTypePrefix(mix.getMixType())
+                            + "-Rul:"
+                            + mix.getRule().getCriteria().size();
             mixNum++;
         }
         return compactDump;
@@ -173,7 +219,12 @@ public class AudioPolicyConfig implements Parcelable {
         boolean currentRegNull = this.mRegistrationId == null || this.mRegistrationId.isEmpty();
         boolean newRegNull = regId == null || regId.isEmpty();
         if (!currentRegNull && !newRegNull && !this.mRegistrationId.equals(regId)) {
-            Log.e(TAG, "Invalid registration transition from " + this.mRegistrationId + " to " + regId);
+            Log.e(
+                    TAG,
+                    "Invalid registration transition from "
+                            + this.mRegistrationId
+                            + " to "
+                            + regId);
             return;
         }
         this.mRegistrationId = regId == null ? "" : regId;
@@ -187,7 +238,12 @@ public class AudioPolicyConfig implements Parcelable {
     protected void setMixRegistration(AudioMix mix) {
         if (!this.mRegistrationId.isEmpty()) {
             if ((mix.getRouteFlags() & 2) == 2) {
-                StringBuilder append = new StringBuilder().append(this.mRegistrationId).append("mix").append(mixTypeId(mix.getMixType())).append(":");
+                StringBuilder append =
+                        new StringBuilder()
+                                .append(this.mRegistrationId)
+                                .append("mix")
+                                .append(mixTypeId(mix.getMixType()))
+                                .append(":");
                 int i = this.mMixCounter;
                 this.mMixCounter = i + 1;
                 mix.setRegistration(append.append(i).toString());
@@ -222,12 +278,15 @@ public class AudioPolicyConfig implements Parcelable {
     }
 
     public void updateMixingRules(List<Pair<AudioMix, AudioMixingRule>> audioMixingRuleUpdates) {
-        ((List) Objects.requireNonNull(audioMixingRuleUpdates)).forEach(new Consumer() { // from class: android.media.audiopolicy.AudioPolicyConfig$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                AudioPolicyConfig.this.lambda$updateMixingRules$0((Pair) obj);
-            }
-        });
+        ((List) Objects.requireNonNull(audioMixingRuleUpdates))
+                .forEach(
+                        new Consumer() { // from class:
+                            // android.media.audiopolicy.AudioPolicyConfig$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                AudioPolicyConfig.this.lambda$updateMixingRules$0((Pair) obj);
+                            }
+                        });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -236,20 +295,27 @@ public class AudioPolicyConfig implements Parcelable {
         updateMixingRule((AudioMix) update.first, (AudioMixingRule) update.second);
     }
 
-    private void updateMixingRule(final AudioMix audioMixToUpdate, final AudioMixingRule audioMixingRule) {
+    private void updateMixingRule(
+            final AudioMix audioMixToUpdate, final AudioMixingRule audioMixingRule) {
         Stream stream = this.mMixes.stream();
         Objects.requireNonNull(audioMixToUpdate);
-        stream.filter(new Predicate() { // from class: android.media.audiopolicy.AudioPolicyConfig$$ExternalSyntheticLambda1
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return AudioMix.this.equals((AudioMix) obj);
-            }
-        }).findAny().ifPresent(new Consumer() { // from class: android.media.audiopolicy.AudioPolicyConfig$$ExternalSyntheticLambda2
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                ((AudioMix) obj).setAudioMixingRule(AudioMixingRule.this);
-            }
-        });
+        stream.filter(
+                        new Predicate() { // from class:
+                            // android.media.audiopolicy.AudioPolicyConfig$$ExternalSyntheticLambda1
+                            @Override // java.util.function.Predicate
+                            public final boolean test(Object obj) {
+                                return AudioMix.this.equals((AudioMix) obj);
+                            }
+                        })
+                .findAny()
+                .ifPresent(
+                        new Consumer() { // from class:
+                            // android.media.audiopolicy.AudioPolicyConfig$$ExternalSyntheticLambda2
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                ((AudioMix) obj).setAudioMixingRule(AudioMixingRule.this);
+                            }
+                        });
     }
 
     private static String mixTypeId(int type) {

@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 import android.util.Slog;
+
 import com.android.internal.logging.MetricsLogger;
 
 /* loaded from: classes5.dex */
@@ -28,35 +29,57 @@ public final class EdgeSharpnessController {
     public EdgeSharpnessController(Context context, int userId) {
         this.mContext = context.getApplicationContext();
         this.mUserId = userId;
-        this.mContentObserver = new ContentObserver(new Handler(Looper.getMainLooper())) { // from class: com.android.internal.app.EdgeSharpnessController.1
-            @Override // android.database.ContentObserver
-            public void onChange(boolean selfChange, Uri uri) {
-                super.onChange(selfChange, uri);
-                String setting = uri == null ? null : uri.getLastPathSegment();
-                if (setting != null) {
-                    EdgeSharpnessController.this.onSettingChanged(setting);
-                }
-            }
-        };
+        this.mContentObserver =
+                new ContentObserver(
+                        new Handler(
+                                Looper
+                                        .getMainLooper())) { // from class:
+                                                             // com.android.internal.app.EdgeSharpnessController.1
+                    @Override // android.database.ContentObserver
+                    public void onChange(boolean selfChange, Uri uri) {
+                        super.onChange(selfChange, uri);
+                        String setting = uri == null ? null : uri.getLastPathSegment();
+                        if (setting != null) {
+                            EdgeSharpnessController.this.onSettingChanged(setting);
+                        }
+                    }
+                };
     }
 
     public boolean isActivated() {
-        return Settings.Secure.getIntForUser(this.mContext.getContentResolver(), Settings.Secure.EDGE_SHARPNESS_DISPLAY_ACTIVATED, 0, this.mUserId) == 1;
+        return Settings.Secure.getIntForUser(
+                        this.mContext.getContentResolver(),
+                        Settings.Secure.EDGE_SHARPNESS_DISPLAY_ACTIVATED,
+                        0,
+                        this.mUserId)
+                == 1;
     }
 
     public boolean setActivated(boolean z) {
         if (!z) {
             setEdgeSharpnessIntensityLevel(getDefaultIntensityLevel());
         }
-        return Settings.Secure.putIntForUser(this.mContext.getContentResolver(), Settings.Secure.EDGE_SHARPNESS_DISPLAY_ACTIVATED, z ? 1 : 0, this.mUserId);
+        return Settings.Secure.putIntForUser(
+                this.mContext.getContentResolver(),
+                Settings.Secure.EDGE_SHARPNESS_DISPLAY_ACTIVATED,
+                z ? 1 : 0,
+                this.mUserId);
     }
 
     public int getEdgeSharpnessIntensityLevel() {
-        return Settings.Secure.getIntForUser(this.mContext.getContentResolver(), Settings.Secure.EDGE_SHARPNESS_DISPLAY_INTENSITY_LEVEL, getDefaultIntensityLevel(), this.mUserId);
+        return Settings.Secure.getIntForUser(
+                this.mContext.getContentResolver(),
+                Settings.Secure.EDGE_SHARPNESS_DISPLAY_INTENSITY_LEVEL,
+                getDefaultIntensityLevel(),
+                this.mUserId);
     }
 
     public boolean setEdgeSharpnessIntensityLevel(int level) {
-        return Settings.Secure.putIntForUser(this.mContext.getContentResolver(), Settings.Secure.EDGE_SHARPNESS_DISPLAY_INTENSITY_LEVEL, level, this.mUserId);
+        return Settings.Secure.putIntForUser(
+                this.mContext.getContentResolver(),
+                Settings.Secure.EDGE_SHARPNESS_DISPLAY_INTENSITY_LEVEL,
+                level,
+                this.mUserId);
     }
 
     public int getMinimumIntensityLevel() {
@@ -101,7 +124,8 @@ public final class EdgeSharpnessController {
                     this.mCallback.onActivated(isActivated());
                     break;
                 case 1:
-                    this.mCallback.onEdgeSharpnessIntensityLevelChanged(getEdgeSharpnessIntensityLevel());
+                    this.mCallback.onEdgeSharpnessIntensityLevelChanged(
+                            getEdgeSharpnessIntensityLevel());
                     break;
             }
         }
@@ -115,8 +139,17 @@ public final class EdgeSharpnessController {
                 this.mContext.getContentResolver().unregisterContentObserver(this.mContentObserver);
             } else if (oldCallback == null) {
                 ContentResolver cr = this.mContext.getContentResolver();
-                cr.registerContentObserver(Settings.Secure.getUriFor(Settings.Secure.EDGE_SHARPNESS_DISPLAY_ACTIVATED), false, this.mContentObserver, this.mUserId);
-                cr.registerContentObserver(Settings.Secure.getUriFor(Settings.Secure.EDGE_SHARPNESS_DISPLAY_INTENSITY_LEVEL), false, this.mContentObserver, this.mUserId);
+                cr.registerContentObserver(
+                        Settings.Secure.getUriFor(Settings.Secure.EDGE_SHARPNESS_DISPLAY_ACTIVATED),
+                        false,
+                        this.mContentObserver,
+                        this.mUserId);
+                cr.registerContentObserver(
+                        Settings.Secure.getUriFor(
+                                Settings.Secure.EDGE_SHARPNESS_DISPLAY_INTENSITY_LEVEL),
+                        false,
+                        this.mContentObserver,
+                        this.mUserId);
             }
         }
     }
@@ -133,10 +166,8 @@ public final class EdgeSharpnessController {
     }
 
     public interface Callback {
-        default void onActivated(boolean activated) {
-        }
+        default void onActivated(boolean activated) {}
 
-        default void onEdgeSharpnessIntensityLevelChanged(int level) {
-        }
+        default void onEdgeSharpnessIntensityLevelChanged(int level) {}
     }
 }

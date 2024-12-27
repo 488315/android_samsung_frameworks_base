@@ -37,6 +37,7 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
 import android.util.Pair;
+
 import com.android.server.DirEncryptService$$ExternalSyntheticOutline0;
 import com.android.server.ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0;
 import com.android.server.LocalServices;
@@ -60,6 +61,7 @@ import com.android.server.enterprise.utils.NetworkUtils;
 import com.android.server.enterprise.utils.Utils;
 import com.android.server.input.KeyboardMetricsCollector;
 import com.android.server.pm.UserManagerInternal;
+
 import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.EnterpriseDeviceManager;
 import com.samsung.android.knox.SemPersonaManager;
@@ -70,6 +72,7 @@ import com.samsung.android.knox.net.ProxyProperties;
 import com.samsung.android.knox.net.wifi.IWifiPolicy;
 import com.samsung.android.knox.net.wifi.WifiControlInfo;
 import com.samsung.android.wifi.SemWifiManager;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.net.InetAddress;
@@ -101,12 +104,86 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
     public final UserManager mUserManager;
     public final UserManagerInternal mUserManagerInternal;
     public WifiManagerAdapter mWifiAdapter;
-    public static final String[] EAP_STRINGS = {"PEAP", "TLS", "TTLS", "PWD", "SIM", "AKA", "AKA'", "WFA-UNAUTH-TLS", "WAPI_CERT"};
-    public static final String[] PHASE2_STRINGS = {"NULL", "PAP", "MSCHAP", "MSCHAPV2", "GTC", "SIM", "AKA", "AKA'"};
-    public static final String[] ACCEPTABLE_SECURITY_LEVELS = {"NONE", "WEP", "PSK", "", "", "EAP-PEAP", "EAP-TTLS", "EAP-TLS", "", "", "", "", "", "", "", "", "", "", "", "EAP-PWD", "", "", "EAP-SIM", "", "", "EAP-AKA", "", "", "EAP-AKA'", "", "", "SAE"};
-    public static final String[] SECURITY_LEVELS = {"NONE", "WEP", "PSK", "EAP-LEAP", "EAP-FAST", "EAP-PEAP", "EAP-TTLS", "EAP-TLS", "FT-PSK", "EAP-PEAP-FT", "EAP-PEAP-CCKM", "EAP-TTLS-FT", "EAP-TTLS-CCKM", "EAP-TLS-FT", "EAP-TLS-CCKM", "EAP-LEAP-FT", "EAP-LEAP-CCKM", "EAP-FAST-FT", "EAP-FAST-CCKM", "EAP-PWD", "EAP-PWD-FT", "EAP-PWD-CCKM", "EAP-SIM", "EAP-SIM-FT", "EAP-SIM-CCKM", "EAP-AKA", "EAP-AKA-FT", "EAP-AKA-CCKM", "EAP-AKA'", "EAP-AKA'-FT", "EAP-AKA'-CCKM", "SAE"};
-    public static final Pattern HOSTNAME_PATTERN = Pattern.compile("^$|^[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*(\\.[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*)*$");
-    public static final Pattern EXCLLIST_PATTERN = Pattern.compile("^$|^[a-zA-Z0-9*]+(\\-[a-zA-Z0-9*]+)*(\\.[a-zA-Z0-9*]+(\\-[a-zA-Z0-9*]+)*)*(,[a-zA-Z0-9*]+(\\-[a-zA-Z0-9*]+)*(\\.[a-zA-Z0-9*]+(\\-[a-zA-Z0-9*]+)*)*)*$");
+    public static final String[] EAP_STRINGS = {
+        "PEAP", "TLS", "TTLS", "PWD", "SIM", "AKA", "AKA'", "WFA-UNAUTH-TLS", "WAPI_CERT"
+    };
+    public static final String[] PHASE2_STRINGS = {
+        "NULL", "PAP", "MSCHAP", "MSCHAPV2", "GTC", "SIM", "AKA", "AKA'"
+    };
+    public static final String[] ACCEPTABLE_SECURITY_LEVELS = {
+        "NONE",
+        "WEP",
+        "PSK",
+        "",
+        "",
+        "EAP-PEAP",
+        "EAP-TTLS",
+        "EAP-TLS",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "EAP-PWD",
+        "",
+        "",
+        "EAP-SIM",
+        "",
+        "",
+        "EAP-AKA",
+        "",
+        "",
+        "EAP-AKA'",
+        "",
+        "",
+        "SAE"
+    };
+    public static final String[] SECURITY_LEVELS = {
+        "NONE",
+        "WEP",
+        "PSK",
+        "EAP-LEAP",
+        "EAP-FAST",
+        "EAP-PEAP",
+        "EAP-TTLS",
+        "EAP-TLS",
+        "FT-PSK",
+        "EAP-PEAP-FT",
+        "EAP-PEAP-CCKM",
+        "EAP-TTLS-FT",
+        "EAP-TTLS-CCKM",
+        "EAP-TLS-FT",
+        "EAP-TLS-CCKM",
+        "EAP-LEAP-FT",
+        "EAP-LEAP-CCKM",
+        "EAP-FAST-FT",
+        "EAP-FAST-CCKM",
+        "EAP-PWD",
+        "EAP-PWD-FT",
+        "EAP-PWD-CCKM",
+        "EAP-SIM",
+        "EAP-SIM-FT",
+        "EAP-SIM-CCKM",
+        "EAP-AKA",
+        "EAP-AKA-FT",
+        "EAP-AKA-CCKM",
+        "EAP-AKA'",
+        "EAP-AKA'-FT",
+        "EAP-AKA'-CCKM",
+        "SAE"
+    };
+    public static final Pattern HOSTNAME_PATTERN =
+            Pattern.compile(
+                    "^$|^[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*(\\.[a-zA-Z0-9]+(\\-[a-zA-Z0-9]+)*)*$");
+    public static final Pattern EXCLLIST_PATTERN =
+            Pattern.compile(
+                    "^$|^[a-zA-Z0-9*]+(\\-[a-zA-Z0-9*]+)*(\\.[a-zA-Z0-9*]+(\\-[a-zA-Z0-9*]+)*)*(,[a-zA-Z0-9*]+(\\-[a-zA-Z0-9*]+)*(\\.[a-zA-Z0-9*]+(\\-[a-zA-Z0-9*]+)*)*)*$");
     public WifiManager mWifiManager = null;
     public volatile boolean mIsAPSettingFromAdmin = false;
     public final AtomicInteger mWifiState = new AtomicInteger(4);
@@ -115,148 +192,303 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
     public WifiPolicy(Context context) {
         this.mAppPolicy = null;
         this.mUserManagerInternal = null;
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class: com.android.server.enterprise.wifi.WifiPolicy.1
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                Map allNetworksByAdminUid;
-                String action = intent.getAction();
-                Log.d("WifiPolicyService", action);
-                if (action.equals("android.net.wifi.WIFI_STATE_CHANGED")) {
-                    int intExtra = intent.getIntExtra("wifi_state", 4);
-                    if ((intExtra == 2 || intExtra == 0) && intExtra != WifiPolicy.this.mWifiState.get()) {
-                        WifiPolicy.this.mWifiState.set(intExtra);
-                        AuditLog.logEvent(intExtra != 2 ? 3 : 2, new Object[0]);
-                        return;
-                    }
-                    return;
-                }
-                if (!action.equals("android.intent.action.LOCKED_BOOT_COMPLETED")) {
-                    if ("com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL".equals(action)) {
-                        int intExtra2 = intent.getIntExtra("com.samsung.android.knox.intent.extra.USER_ID_INTERNAL", 0);
-                        WifiPolicy wifiPolicy = WifiPolicy.this;
-                        wifiPolicy.setWifiStateChangeAllowedSystemUI(intExtra2, wifiPolicy.isWifiStateChangeAllowed(null));
-                        wifiPolicy.setWifiAllowedSystemUI(intExtra2, wifiPolicy.isWifiAllowed(null, false));
-                        return;
-                    }
-                    if (action.equals("android.net.wifi.CONFIGURED_NETWORKS_CHANGE")) {
-                        int intExtra3 = intent.getIntExtra("changeReason", -1);
-                        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(intExtra3, "reason = ", "WifiPolicyService");
-                        if (intExtra3 == 1) {
-                            new Thread(new Runnable() { // from class: com.android.server.enterprise.wifi.WifiPolicy.1.1
-                                @Override // java.lang.Runnable
-                                public final void run() {
-                                    WifiPolicy wifiPolicy2 = WifiPolicy.this;
-                                    String[] strArr = WifiPolicy.EAP_STRINGS;
-                                    wifiPolicy2.getClass();
-                                    Log.i("WifiPolicyService", "evaluateNetworkFromDatabase - START");
-                                    Map allNetworksByAdminUid2 = wifiPolicy2.getAllNetworksByAdminUid();
-                                    if (allNetworksByAdminUid2 != null) {
-                                        ArrayMap arrayMap = (ArrayMap) allNetworksByAdminUid2;
-                                        if (!arrayMap.isEmpty()) {
-                                            Log.i("WifiPolicyService", "evaluateNetworkFromDatabase - network map size: " + arrayMap.size());
-                                            for (Map.Entry entry : arrayMap.entrySet()) {
-                                                if (entry != null && entry.getKey() != null && ((Integer) entry.getKey()).intValue() != -1 && entry.getValue() != null && !((List) entry.getValue()).isEmpty()) {
-                                                    for (WifiConfiguration wifiConfiguration : (List) entry.getValue()) {
-                                                        if (wifiConfiguration != null && wifiPolicy2.getNetworkFromWifiModule(wifiConfiguration.SSID, WifiPolicy.makeString(wifiConfiguration.allowedKeyManagement, WifiConfiguration.KeyMgmt.strings)) == null) {
-                                                            Log.i("WifiPolicyService", "SSID from admin " + entry.getKey() + " does not exist anymore on Wi-Fi module");
-                                                            wifiPolicy2.removeNetworkConfigurationMDM(((Integer) entry.getKey()).intValue(), wifiConfiguration.SSID);
+        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class:
+                    // com.android.server.enterprise.wifi.WifiPolicy.1
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        Map allNetworksByAdminUid;
+                        String action = intent.getAction();
+                        Log.d("WifiPolicyService", action);
+                        if (action.equals("android.net.wifi.WIFI_STATE_CHANGED")) {
+                            int intExtra = intent.getIntExtra("wifi_state", 4);
+                            if ((intExtra == 2 || intExtra == 0)
+                                    && intExtra != WifiPolicy.this.mWifiState.get()) {
+                                WifiPolicy.this.mWifiState.set(intExtra);
+                                AuditLog.logEvent(intExtra != 2 ? 3 : 2, new Object[0]);
+                                return;
+                            }
+                            return;
+                        }
+                        if (!action.equals("android.intent.action.LOCKED_BOOT_COMPLETED")) {
+                            if ("com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL"
+                                    .equals(action)) {
+                                int intExtra2 =
+                                        intent.getIntExtra(
+                                                "com.samsung.android.knox.intent.extra.USER_ID_INTERNAL",
+                                                0);
+                                WifiPolicy wifiPolicy = WifiPolicy.this;
+                                wifiPolicy.setWifiStateChangeAllowedSystemUI(
+                                        intExtra2, wifiPolicy.isWifiStateChangeAllowed(null));
+                                wifiPolicy.setWifiAllowedSystemUI(
+                                        intExtra2, wifiPolicy.isWifiAllowed(null, false));
+                                return;
+                            }
+                            if (action.equals("android.net.wifi.CONFIGURED_NETWORKS_CHANGE")) {
+                                int intExtra3 = intent.getIntExtra("changeReason", -1);
+                                NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                                        intExtra3, "reason = ", "WifiPolicyService");
+                                if (intExtra3 == 1) {
+                                    new Thread(
+                                                    new Runnable() { // from class:
+                                                        // com.android.server.enterprise.wifi.WifiPolicy.1.1
+                                                        @Override // java.lang.Runnable
+                                                        public final void run() {
+                                                            WifiPolicy wifiPolicy2 =
+                                                                    WifiPolicy.this;
+                                                            String[] strArr =
+                                                                    WifiPolicy.EAP_STRINGS;
+                                                            wifiPolicy2.getClass();
+                                                            Log.i(
+                                                                    "WifiPolicyService",
+                                                                    "evaluateNetworkFromDatabase -"
+                                                                        + " START");
+                                                            Map allNetworksByAdminUid2 =
+                                                                    wifiPolicy2
+                                                                            .getAllNetworksByAdminUid();
+                                                            if (allNetworksByAdminUid2 != null) {
+                                                                ArrayMap arrayMap =
+                                                                        (ArrayMap)
+                                                                                allNetworksByAdminUid2;
+                                                                if (!arrayMap.isEmpty()) {
+                                                                    Log.i(
+                                                                            "WifiPolicyService",
+                                                                            "evaluateNetworkFromDatabase"
+                                                                                + " - network map"
+                                                                                + " size: "
+                                                                                    + arrayMap
+                                                                                            .size());
+                                                                    for (Map.Entry entry :
+                                                                            arrayMap.entrySet()) {
+                                                                        if (entry != null
+                                                                                && entry.getKey()
+                                                                                        != null
+                                                                                && ((Integer)
+                                                                                                        entry
+                                                                                                                .getKey())
+                                                                                                .intValue()
+                                                                                        != -1
+                                                                                && entry.getValue()
+                                                                                        != null
+                                                                                && !((List)
+                                                                                                entry
+                                                                                                        .getValue())
+                                                                                        .isEmpty()) {
+                                                                            for (WifiConfiguration
+                                                                                    wifiConfiguration :
+                                                                                            (List)
+                                                                                                    entry
+                                                                                                            .getValue()) {
+                                                                                if (wifiConfiguration
+                                                                                                != null
+                                                                                        && wifiPolicy2
+                                                                                                        .getNetworkFromWifiModule(
+                                                                                                                wifiConfiguration
+                                                                                                                        .SSID,
+                                                                                                                WifiPolicy
+                                                                                                                        .makeString(
+                                                                                                                                wifiConfiguration
+                                                                                                                                        .allowedKeyManagement,
+                                                                                                                                WifiConfiguration
+                                                                                                                                        .KeyMgmt
+                                                                                                                                        .strings))
+                                                                                                == null) {
+                                                                                    Log.i(
+                                                                                            "WifiPolicyService",
+                                                                                            "SSID from"
+                                                                                                + " admin"
+                                                                                                + " "
+                                                                                                    + entry
+                                                                                                            .getKey()
+                                                                                                    + " does"
+                                                                                                    + " not exist"
+                                                                                                    + " anymore"
+                                                                                                    + " on Wi-Fi"
+                                                                                                    + " module");
+                                                                                    wifiPolicy2
+                                                                                            .removeNetworkConfigurationMDM(
+                                                                                                    ((Integer)
+                                                                                                                    entry
+                                                                                                                            .getKey())
+                                                                                                            .intValue(),
+                                                                                                    wifiConfiguration
+                                                                                                            .SSID);
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                    Log.i(
+                                                                            "WifiPolicyService",
+                                                                            "evaluateNetworkFromDatabase"
+                                                                                + " - END");
+                                                                    return;
+                                                                }
+                                                            }
+                                                            Log.w(
+                                                                    "WifiPolicyService",
+                                                                    "Network list is null or"
+                                                                        + " empty");
+                                                        }
+                                                    })
+                                            .start();
+                                    return;
+                                }
+                                return;
+                            }
+                            return;
+                        }
+                        String[] strArr = WifiPolicy.EAP_STRINGS;
+                        WifiPolicy wifiPolicy2 = WifiPolicy.this;
+                        wifiPolicy2.getClass();
+                        Log.i("WifiPolicyService", "migrateWifiNetworkIfNeeded");
+                        try {
+                            if (!wifiPolicy2.isWifiMigrationNeeded("wifi_network_migration")) {
+                                Log.i(
+                                        "WifiPolicyService",
+                                        "Wi-Fi network migration is not needed, skipping...");
+                                return;
+                            }
+                            try {
+                                allNetworksByAdminUid = wifiPolicy2.getAllNetworksByAdminUid();
+                            } catch (Exception e) {
+                                Log.e("WifiPolicyService", "migrateWifiNetworkIfNeeded", e);
+                            }
+                            if (allNetworksByAdminUid != null) {
+                                ArrayMap arrayMap = (ArrayMap) allNetworksByAdminUid;
+                                if (!arrayMap.isEmpty()) {
+                                    Log.i(
+                                            "WifiPolicyService",
+                                            "migrateWifiNetworkIfNeeded - network map size: "
+                                                    + arrayMap.size());
+                                    for (Map.Entry entry : arrayMap.entrySet()) {
+                                        if (entry != null
+                                                && entry.getKey() != null
+                                                && ((Integer) entry.getKey()).intValue() != -1
+                                                && entry.getValue() != null
+                                                && !((List) entry.getValue()).isEmpty()) {
+                                            Pair callerInfoFromUid =
+                                                    wifiPolicy2.getCallerInfoFromUid(
+                                                            ((Integer) entry.getKey()).intValue());
+                                            if (callerInfoFromUid == null) {
+                                                Log.e(
+                                                        "WifiPolicyService",
+                                                        "Could not get network creator information"
+                                                            + " for "
+                                                                + entry.getKey()
+                                                                + " uid");
+                                            } else {
+                                                int intValue =
+                                                        ((Integer) callerInfoFromUid.first)
+                                                                .intValue();
+                                                String packageName =
+                                                        ((ComponentName) callerInfoFromUid.second)
+                                                                .getPackageName();
+                                                DevicePolicyManager devicePolicyManager =
+                                                        (DevicePolicyManager)
+                                                                wifiPolicy2.mContext
+                                                                        .getSystemService(
+                                                                                "device_policy");
+                                                if (devicePolicyManager == null
+                                                        || (!devicePolicyManager.isDeviceOwnerApp(
+                                                                        packageName)
+                                                                && UserHandle.getUserId(intValue)
+                                                                        == 0)) {
+                                                    Log.i(
+                                                            "WifiPolicyService",
+                                                            "Do not migrate networks from Device"
+                                                                + " Admin - uid = "
+                                                                    + callerInfoFromUid.first);
+                                                } else {
+                                                    int i = 0;
+                                                    for (WifiConfiguration wifiConfiguration :
+                                                            (List) entry.getValue()) {
+                                                        if (wifiConfiguration != null) {
+                                                            WifiConfiguration
+                                                                    networkFromWifiModule =
+                                                                            wifiPolicy2
+                                                                                    .getNetworkFromWifiModule(
+                                                                                            wifiConfiguration
+                                                                                                    .SSID,
+                                                                                            WifiPolicy
+                                                                                                    .makeString(
+                                                                                                            wifiConfiguration
+                                                                                                                    .allowedKeyManagement,
+                                                                                                            WifiConfiguration
+                                                                                                                    .KeyMgmt
+                                                                                                                    .strings));
+                                                            if (networkFromWifiModule != null) {
+                                                                StringBuilder sb =
+                                                                        new StringBuilder();
+                                                                sb.append("Migrating network ");
+                                                                i++;
+                                                                sb.append(i);
+                                                                sb.append(" from uid ");
+                                                                sb.append(callerInfoFromUid.first);
+                                                                Log.i(
+                                                                        "WifiPolicyService",
+                                                                        sb.toString());
+                                                                WifiManagerAdapter
+                                                                        wifiManagerAdapter =
+                                                                                wifiPolicy2
+                                                                                        .mWifiAdapter;
+                                                                int intValue2 =
+                                                                        ((Integer)
+                                                                                        callerInfoFromUid
+                                                                                                .first)
+                                                                                .intValue();
+                                                                String packageName2 =
+                                                                        ((ComponentName)
+                                                                                        callerInfoFromUid
+                                                                                                .second)
+                                                                                .getPackageName();
+                                                                wifiManagerAdapter.getClass();
+                                                                WifiManagerAdapter.save(
+                                                                        networkFromWifiModule,
+                                                                        intValue2,
+                                                                        packageName2);
+                                                            } else {
+                                                                Log.e(
+                                                                        "WifiPolicyService",
+                                                                        "Could not find wifi"
+                                                                            + " network from uid "
+                                                                                + callerInfoFromUid
+                                                                                        .first);
+                                                            }
                                                         }
                                                     }
                                                 }
                                             }
-                                            Log.i("WifiPolicyService", "evaluateNetworkFromDatabase - END");
-                                            return;
                                         }
                                     }
-                                    Log.w("WifiPolicyService", "Network list is null or empty");
-                                }
-                            }).start();
-                            return;
-                        }
-                        return;
-                    }
-                    return;
-                }
-                String[] strArr = WifiPolicy.EAP_STRINGS;
-                WifiPolicy wifiPolicy2 = WifiPolicy.this;
-                wifiPolicy2.getClass();
-                Log.i("WifiPolicyService", "migrateWifiNetworkIfNeeded");
-                try {
-                    if (!wifiPolicy2.isWifiMigrationNeeded("wifi_network_migration")) {
-                        Log.i("WifiPolicyService", "Wi-Fi network migration is not needed, skipping...");
-                        return;
-                    }
-                    try {
-                        allNetworksByAdminUid = wifiPolicy2.getAllNetworksByAdminUid();
-                    } catch (Exception e) {
-                        Log.e("WifiPolicyService", "migrateWifiNetworkIfNeeded", e);
-                    }
-                    if (allNetworksByAdminUid != null) {
-                        ArrayMap arrayMap = (ArrayMap) allNetworksByAdminUid;
-                        if (!arrayMap.isEmpty()) {
-                            Log.i("WifiPolicyService", "migrateWifiNetworkIfNeeded - network map size: " + arrayMap.size());
-                            for (Map.Entry entry : arrayMap.entrySet()) {
-                                if (entry != null && entry.getKey() != null && ((Integer) entry.getKey()).intValue() != -1 && entry.getValue() != null && !((List) entry.getValue()).isEmpty()) {
-                                    Pair callerInfoFromUid = wifiPolicy2.getCallerInfoFromUid(((Integer) entry.getKey()).intValue());
-                                    if (callerInfoFromUid == null) {
-                                        Log.e("WifiPolicyService", "Could not get network creator information for " + entry.getKey() + " uid");
-                                    } else {
-                                        int intValue = ((Integer) callerInfoFromUid.first).intValue();
-                                        String packageName = ((ComponentName) callerInfoFromUid.second).getPackageName();
-                                        DevicePolicyManager devicePolicyManager = (DevicePolicyManager) wifiPolicy2.mContext.getSystemService("device_policy");
-                                        if (devicePolicyManager == null || (!devicePolicyManager.isDeviceOwnerApp(packageName) && UserHandle.getUserId(intValue) == 0)) {
-                                            Log.i("WifiPolicyService", "Do not migrate networks from Device Admin - uid = " + callerInfoFromUid.first);
-                                        } else {
-                                            int i = 0;
-                                            for (WifiConfiguration wifiConfiguration : (List) entry.getValue()) {
-                                                if (wifiConfiguration != null) {
-                                                    WifiConfiguration networkFromWifiModule = wifiPolicy2.getNetworkFromWifiModule(wifiConfiguration.SSID, WifiPolicy.makeString(wifiConfiguration.allowedKeyManagement, WifiConfiguration.KeyMgmt.strings));
-                                                    if (networkFromWifiModule != null) {
-                                                        StringBuilder sb = new StringBuilder();
-                                                        sb.append("Migrating network ");
-                                                        i++;
-                                                        sb.append(i);
-                                                        sb.append(" from uid ");
-                                                        sb.append(callerInfoFromUid.first);
-                                                        Log.i("WifiPolicyService", sb.toString());
-                                                        WifiManagerAdapter wifiManagerAdapter = wifiPolicy2.mWifiAdapter;
-                                                        int intValue2 = ((Integer) callerInfoFromUid.first).intValue();
-                                                        String packageName2 = ((ComponentName) callerInfoFromUid.second).getPackageName();
-                                                        wifiManagerAdapter.getClass();
-                                                        WifiManagerAdapter.save(networkFromWifiModule, intValue2, packageName2);
-                                                    } else {
-                                                        Log.e("WifiPolicyService", "Could not find wifi network from uid " + callerInfoFromUid.first);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
+                                    wifiPolicy2.updateWifiMigrationFlag("wifi_network_migration");
                                 }
                             }
+                            Log.w(
+                                    "WifiPolicyService",
+                                    "Network list is null or empty, network migration is not"
+                                        + " required");
                             wifiPolicy2.updateWifiMigrationFlag("wifi_network_migration");
+                        } catch (Throwable th) {
+                            wifiPolicy2.updateWifiMigrationFlag("wifi_network_migration");
+                            throw th;
                         }
                     }
-                    Log.w("WifiPolicyService", "Network list is null or empty, network migration is not required");
-                    wifiPolicy2.updateWifiMigrationFlag("wifi_network_migration");
-                } catch (Throwable th) {
-                    wifiPolicy2.updateWifiMigrationFlag("wifi_network_migration");
-                    throw th;
-                }
-            }
-        };
+                };
         this.mContext = context;
         context.getPackageManager();
         this.mEdmStorageProvider = new EdmStorageProvider(context);
-        this.mAppPolicy = (ApplicationPolicy) EnterpriseService.getPolicyService("application_policy");
+        this.mAppPolicy =
+                (ApplicationPolicy) EnterpriseService.getPolicyService("application_policy");
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("android.net.wifi.WIFI_STATE_CHANGED");
         intentFilter.addAction("android.intent.action.LOCKED_BOOT_COMPLETED");
-        intentFilter.addAction("com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL");
+        intentFilter.addAction(
+                "com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL");
         intentFilter.addAction("android.net.wifi.CONFIGURED_NETWORKS_CHANGE");
         context.registerReceiver(broadcastReceiver, intentFilter, 2);
         this.mLocalProxyManager = LocalProxyManager.getInstance(context);
         this.mUserManager = (UserManager) context.getSystemService("user");
-        this.mUserManagerInternal = (UserManagerInternal) LocalServices.getService(UserManagerInternal.class);
+        this.mUserManagerInternal =
+                (UserManagerInternal) LocalServices.getService(UserManagerInternal.class);
     }
 
     public static int computeprefixLength(InetAddress inetAddress) {
@@ -298,7 +530,8 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         return "\"" + str + '\"';
     }
 
-    public static ProxyProperties createProxyProperties(String str, int i, String str2, List list, List list2, int i2) {
+    public static ProxyProperties createProxyProperties(
+            String str, int i, String str2, List list, List list2, int i2) {
         ProxyProperties proxyProperties = new ProxyProperties();
         if (i2 == 1) {
             proxyProperties.setHostname(str);
@@ -316,16 +549,26 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         return proxyProperties;
     }
 
-    public static StaticIpConfiguration createStaticIpConfigurationFromSourceAndGateway(StaticIpConfiguration staticIpConfiguration, InetAddress inetAddress) {
-        StaticIpConfiguration.Builder domains = new StaticIpConfiguration.Builder().setIpAddress(staticIpConfiguration.getIpAddress()).setGateway(inetAddress).setDomains(staticIpConfiguration.getDomains());
+    public static StaticIpConfiguration createStaticIpConfigurationFromSourceAndGateway(
+            StaticIpConfiguration staticIpConfiguration, InetAddress inetAddress) {
+        StaticIpConfiguration.Builder domains =
+                new StaticIpConfiguration.Builder()
+                        .setIpAddress(staticIpConfiguration.getIpAddress())
+                        .setGateway(inetAddress)
+                        .setDomains(staticIpConfiguration.getDomains());
         if (staticIpConfiguration.getDnsServers() != null) {
             domains.setDnsServers(staticIpConfiguration.getDnsServers());
         }
         return domains.build();
     }
 
-    public static StaticIpConfiguration createStaticIpConfigurationFromSourceAndIpAddress(StaticIpConfiguration staticIpConfiguration, LinkAddress linkAddress) {
-        StaticIpConfiguration.Builder domains = new StaticIpConfiguration.Builder().setIpAddress(linkAddress).setGateway(staticIpConfiguration.getGateway()).setDomains(staticIpConfiguration.getDomains());
+    public static StaticIpConfiguration createStaticIpConfigurationFromSourceAndIpAddress(
+            StaticIpConfiguration staticIpConfiguration, LinkAddress linkAddress) {
+        StaticIpConfiguration.Builder domains =
+                new StaticIpConfiguration.Builder()
+                        .setIpAddress(linkAddress)
+                        .setGateway(staticIpConfiguration.getGateway())
+                        .setDomains(staticIpConfiguration.getDomains());
         if (staticIpConfiguration.getDnsServers() != null) {
             domains.setDnsServers(staticIpConfiguration.getDnsServers());
         }
@@ -385,7 +628,8 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         return stringBuffer.toString();
     }
 
-    public static boolean setDns1AndDns2(StaticIpConfiguration staticIpConfiguration, String str, String str2) {
+    public static boolean setDns1AndDns2(
+            StaticIpConfiguration staticIpConfiguration, String str, String str2) {
         InetAddress parseNumericAddress;
         if (TextUtils.isEmpty(str)) {
             parseNumericAddress = InetAddresses.parseNumericAddress("8.8.8.8");
@@ -423,19 +667,25 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         return true;
     }
 
-    public static StaticIpConfiguration setGateway(StaticIpConfiguration staticIpConfiguration, String str) {
+    public static StaticIpConfiguration setGateway(
+            StaticIpConfiguration staticIpConfiguration, String str) {
         if (TextUtils.isEmpty(str)) {
-            return staticIpConfiguration.getGateway() == null ? createStaticIpConfigurationFromSourceAndGateway(staticIpConfiguration, InetAddresses.parseNumericAddress("192.168.1.1")) : staticIpConfiguration;
+            return staticIpConfiguration.getGateway() == null
+                    ? createStaticIpConfigurationFromSourceAndGateway(
+                            staticIpConfiguration, InetAddresses.parseNumericAddress("192.168.1.1"))
+                    : staticIpConfiguration;
         }
         try {
-            return createStaticIpConfigurationFromSourceAndGateway(staticIpConfiguration, InetAddresses.parseNumericAddress(str));
+            return createStaticIpConfigurationFromSourceAndGateway(
+                    staticIpConfiguration, InetAddresses.parseNumericAddress(str));
         } catch (IllegalArgumentException e) {
             Log.e("WifiPolicyService", "", e);
             return null;
         }
     }
 
-    public static StaticIpConfiguration setIpAndSubnetMask(StaticIpConfiguration staticIpConfiguration, String str, String str2) {
+    public static StaticIpConfiguration setIpAndSubnetMask(
+            StaticIpConfiguration staticIpConfiguration, String str, String str2) {
         int i = 24;
         if (TextUtils.isEmpty(str)) {
             InetAddress parseNumericAddress = InetAddresses.parseNumericAddress("192.168.1.100");
@@ -446,7 +696,8 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
             if (str2 != null) {
                 i = computeprefixLength(InetAddresses.parseNumericAddress(str2));
             }
-            return createStaticIpConfigurationFromSourceAndIpAddress(staticIpConfiguration, new LinkAddress(parseNumericAddress, i));
+            return createStaticIpConfigurationFromSourceAndIpAddress(
+                    staticIpConfiguration, new LinkAddress(parseNumericAddress, i));
         }
         try {
             InetAddress parseNumericAddress2 = InetAddresses.parseNumericAddress(str);
@@ -455,16 +706,20 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
             } else if (staticIpConfiguration.getIpAddress() != null) {
                 i = staticIpConfiguration.getIpAddress().getPrefixLength();
             }
-            return createStaticIpConfigurationFromSourceAndIpAddress(staticIpConfiguration, new LinkAddress(parseNumericAddress2, i));
+            return createStaticIpConfigurationFromSourceAndIpAddress(
+                    staticIpConfiguration, new LinkAddress(parseNumericAddress2, i));
         } catch (IllegalArgumentException e) {
             Log.e("WifiPolicyService", "", e);
             return null;
         }
     }
 
-    public static void setMinimumRequiredWifiSecurityLevel(ComponentName componentName, int i, int i2) {
+    public static void setMinimumRequiredWifiSecurityLevel(
+            ComponentName componentName, int i, int i2) {
         if (componentName == null) {
-            Log.e("WifiPolicyService", "setMinimumRequiredWifiSecurityLevel - component name is null");
+            Log.e(
+                    "WifiPolicyService",
+                    "setMinimumRequiredWifiSecurityLevel - component name is null");
             return;
         }
         int i3 = 0;
@@ -478,9 +733,13 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
             }
             i3 = 1;
         }
-        DevicePolicyManagerInternal devicePolicyManagerInternal = (DevicePolicyManagerInternal) LocalServices.getService(DevicePolicyManagerInternal.class);
+        DevicePolicyManagerInternal devicePolicyManagerInternal =
+                (DevicePolicyManagerInternal)
+                        LocalServices.getService(DevicePolicyManagerInternal.class);
         if (devicePolicyManagerInternal == null) {
-            Log.e("WifiPolicyService", "setMinimumRequiredWifiSecurityLevel - fail to retrieve dpmi object");
+            Log.e(
+                    "WifiPolicyService",
+                    "setMinimumRequiredWifiSecurityLevel - fail to retrieve dpmi object");
             return;
         }
         devicePolicyManagerInternal.setMinimumRequiredWifiSecurityLevel(componentName, i3, i);
@@ -492,7 +751,8 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         UiModeManagerService$13$$ExternalSyntheticOutline0.m(sb, i3, "WifiPolicyService");
     }
 
-    public static WifiConfiguration updateEnterpriseFieldValue(WifiConfiguration wifiConfiguration, String str, String str2) {
+    public static WifiConfiguration updateEnterpriseFieldValue(
+            WifiConfiguration wifiConfiguration, String str, String str2) {
         if (str2 == null || TextUtils.isEmpty(wifiConfiguration.SSID)) {
             return null;
         }
@@ -534,32 +794,33 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
             if (!str.equals("ca_cert")) {
                 return null;
             }
-            wifiConfiguration.enterpriseConfig.setCaCertificateAliases(new String[]{str2});
+            wifiConfiguration.enterpriseConfig.setCaCertificateAliases(new String[] {str2});
         }
         return wifiConfiguration;
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:13:0x0040, code lost:
-    
-        if (r3 != null) goto L17;
-     */
+
+       if (r3 != null) goto L17;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:14:0x0042, code lost:
-    
-        r2 = true;
-     */
+
+       r2 = true;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:23:0x0051, code lost:
-    
-        if (r3 != null) goto L17;
-     */
+
+       if (r3 != null) goto L17;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:33:0x007d, code lost:
-    
-        if (r3 != null) goto L17;
-     */
+
+       if (r3 != null) goto L17;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.net.wifi.WifiConfiguration updateNetworkAddress(android.net.wifi.WifiConfiguration r6, java.lang.String r7, java.lang.String r8) {
+    public static android.net.wifi.WifiConfiguration updateNetworkAddress(
+            android.net.wifi.WifiConfiguration r6, java.lang.String r7, java.lang.String r8) {
         /*
             java.lang.String r0 = r6.SSID
             boolean r0 = android.text.TextUtils.isEmpty(r0)
@@ -633,10 +894,14 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
             com.android.server.StorageManagerService$$ExternalSyntheticOutline0.m(r6, r7, r8)
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.wifi.WifiPolicy.updateNetworkAddress(android.net.wifi.WifiConfiguration, java.lang.String, java.lang.String):android.net.wifi.WifiConfiguration");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.wifi.WifiPolicy.updateNetworkAddress(android.net.wifi.WifiConfiguration,"
+                    + " java.lang.String, java.lang.String):android.net.wifi.WifiConfiguration");
     }
 
-    public static void updateNetworkProxyInfo(WifiConfiguration wifiConfiguration, ProxyInfo proxyInfo) {
+    public static void updateNetworkProxyInfo(
+            WifiConfiguration wifiConfiguration, ProxyInfo proxyInfo) {
         IpConfiguration ipConfiguration = wifiConfiguration.getIpConfiguration();
         if (ipConfiguration == null) {
             ipConfiguration = new IpConfiguration();
@@ -645,7 +910,8 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         wifiConfiguration.setIpConfiguration(ipConfiguration);
     }
 
-    public static WifiConfiguration updateNetworkWEPKey(WifiConfiguration wifiConfiguration, int i, String str) {
+    public static WifiConfiguration updateNetworkWEPKey(
+            WifiConfiguration wifiConfiguration, int i, String str) {
         if (TextUtils.isEmpty(wifiConfiguration.SSID) || str == null || i < 0 || i > 3) {
             return null;
         }
@@ -682,35 +948,65 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
     }
 
     public final boolean activateWifiSsidRestriction(ContextInfo contextInfo, boolean z) {
-        ContextInfo enforceOwnerOnlyAndWifiPermission = enforceOwnerOnlyAndWifiPermission(contextInfo);
+        ContextInfo enforceOwnerOnlyAndWifiPermission =
+                enforceOwnerOnlyAndWifiPermission(contextInfo);
         Pair callerInfoFromUid = getCallerInfoFromUid(enforceOwnerOnlyAndWifiPermission.mCallerUid);
         if (callerInfoFromUid == null) {
-            Log.e("WifiPolicyService", "activateWifiSsidRestriction - not a valid caller, aborting!");
+            Log.e(
+                    "WifiPolicyService",
+                    "activateWifiSsidRestriction - not a valid caller, aborting!");
             return false;
         }
-        boolean putBoolean = this.mEdmStorageProvider.putBoolean("WIFI", enforceOwnerOnlyAndWifiPermission.mCallerUid, z, 0, "wifiSsidRestriction");
+        boolean putBoolean =
+                this.mEdmStorageProvider.putBoolean(
+                        "WIFI",
+                        enforceOwnerOnlyAndWifiPermission.mCallerUid,
+                        z,
+                        0,
+                        "wifiSsidRestriction");
         if (!putBoolean) {
-            Log.e("WifiPolicyService", "activateWifiSsidRestriction - fail to store value to database");
+            Log.e(
+                    "WifiPolicyService",
+                    "activateWifiSsidRestriction - fail to store value to database");
             return putBoolean;
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            AuditLog.logEventAsUser(UserHandle.getUserId(enforceOwnerOnlyAndWifiPermission.mCallerUid), 68, new Object[]{Integer.valueOf(enforceOwnerOnlyAndWifiPermission.mCallerUid), Boolean.valueOf(z)});
+            AuditLog.logEventAsUser(
+                    UserHandle.getUserId(enforceOwnerOnlyAndWifiPermission.mCallerUid),
+                    68,
+                    new Object[] {
+                        Integer.valueOf(enforceOwnerOnlyAndWifiPermission.mCallerUid),
+                        Boolean.valueOf(z)
+                    });
             Binder.restoreCallingIdentity(clearCallingIdentity);
-            Log.i("WifiPolicyService", "activateWifiSsidRestriction - caller uid: " + callerInfoFromUid.first + ", enforced caller uid: " + enforceOwnerOnlyAndWifiPermission.mCallerUid + ", enable = " + z);
-            return setSsidAllowDenyList((ComponentName) callerInfoFromUid.second, UserHandle.getUserId(((Integer) callerInfoFromUid.first).intValue()), enforceOwnerOnlyAndWifiPermission.mCallerUid, z);
+            Log.i(
+                    "WifiPolicyService",
+                    "activateWifiSsidRestriction - caller uid: "
+                            + callerInfoFromUid.first
+                            + ", enforced caller uid: "
+                            + enforceOwnerOnlyAndWifiPermission.mCallerUid
+                            + ", enable = "
+                            + z);
+            return setSsidAllowDenyList(
+                    (ComponentName) callerInfoFromUid.second,
+                    UserHandle.getUserId(((Integer) callerInfoFromUid.first).intValue()),
+                    enforceOwnerOnlyAndWifiPermission.mCallerUid,
+                    z);
         } catch (Throwable th) {
             Binder.restoreCallingIdentity(clearCallingIdentity);
             throw th;
         }
     }
 
-    public final int addNetworkWithRandomizationState(WifiConfiguration wifiConfiguration, boolean z) {
+    public final int addNetworkWithRandomizationState(
+            WifiConfiguration wifiConfiguration, boolean z) {
         if (wifiConfiguration == null) {
             Log.i("WifiPolicyService", "addNetworkWithRandomizationState() : config is null");
             return -1;
         }
-        this.mContext.enforceCallingPermission("com.samsung.android.knox.permission.KNOX_INTERNAL_EXCEPTION", null);
+        this.mContext.enforceCallingPermission(
+                "com.samsung.android.knox.permission.KNOX_INTERNAL_EXCEPTION", null);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         if (z) {
             try {
@@ -732,7 +1028,8 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
     }
 
     public final boolean addWifiSsidToBlackList(ContextInfo contextInfo, List list) {
-        ContextInfo enforceOwnerOnlyAndWifiPermission = enforceOwnerOnlyAndWifiPermission(contextInfo);
+        ContextInfo enforceOwnerOnlyAndWifiPermission =
+                enforceOwnerOnlyAndWifiPermission(contextInfo);
         Pair callerInfoFromUid = getCallerInfoFromUid(enforceOwnerOnlyAndWifiPermission.mCallerUid);
         boolean z = false;
         if (callerInfoFromUid == null) {
@@ -747,13 +1044,30 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
                 boolean z2 = true;
                 while (it.hasNext()) {
                     String str = (String) it.next();
-                    ContentValues m = AccountManagerService$$ExternalSyntheticOutline0.m("WIFI_SSID", str);
-                    KnoxMUMContainerPolicy$$ExternalSyntheticOutline0.m(enforceOwnerOnlyAndWifiPermission.mCallerUid, m, "adminUid", "WIFI_LIST_TYPE", "BLACKLIST");
-                    z2 = z2 && this.mEdmStorageProvider.putValuesNoUpdate("WIFI_SSID_BLACK_WHITE_LIST", m);
+                    ContentValues m =
+                            AccountManagerService$$ExternalSyntheticOutline0.m("WIFI_SSID", str);
+                    KnoxMUMContainerPolicy$$ExternalSyntheticOutline0.m(
+                            enforceOwnerOnlyAndWifiPermission.mCallerUid,
+                            m,
+                            "adminUid",
+                            "WIFI_LIST_TYPE",
+                            "BLACKLIST");
+                    z2 =
+                            z2
+                                    && this.mEdmStorageProvider.putValuesNoUpdate(
+                                            "WIFI_SSID_BLACK_WHITE_LIST", m);
                     if (z2) {
                         long clearCallingIdentity = Binder.clearCallingIdentity();
                         try {
-                            AuditLog.logEventAsUser(UserHandle.getUserId(enforceOwnerOnlyAndWifiPermission.mCallerUid), 62, new Object[]{Integer.valueOf(enforceOwnerOnlyAndWifiPermission.mCallerUid), str});
+                            AuditLog.logEventAsUser(
+                                    UserHandle.getUserId(
+                                            enforceOwnerOnlyAndWifiPermission.mCallerUid),
+                                    62,
+                                    new Object[] {
+                                        Integer.valueOf(
+                                                enforceOwnerOnlyAndWifiPermission.mCallerUid),
+                                        str
+                                    });
                         } finally {
                             Binder.restoreCallingIdentity(clearCallingIdentity);
                         }
@@ -762,8 +1076,21 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
                 if (!isWifiSsidRestrictionActive(enforceOwnerOnlyAndWifiPermission.mCallerUid)) {
                     return z2;
                 }
-                Log.i("WifiPolicyService", "addWifiSsidToBlackList - caller uid: " + callerInfoFromUid.first + ", enforced caller uid: " + enforceOwnerOnlyAndWifiPermission.mCallerUid + ", list size: " + arrayList.size());
-                if (z2 && setSsidAllowDenyList((ComponentName) callerInfoFromUid.second, UserHandle.getUserId(((Integer) callerInfoFromUid.first).intValue()), enforceOwnerOnlyAndWifiPermission.mCallerUid, true)) {
+                Log.i(
+                        "WifiPolicyService",
+                        "addWifiSsidToBlackList - caller uid: "
+                                + callerInfoFromUid.first
+                                + ", enforced caller uid: "
+                                + enforceOwnerOnlyAndWifiPermission.mCallerUid
+                                + ", list size: "
+                                + arrayList.size());
+                if (z2
+                        && setSsidAllowDenyList(
+                                (ComponentName) callerInfoFromUid.second,
+                                UserHandle.getUserId(
+                                        ((Integer) callerInfoFromUid.first).intValue()),
+                                enforceOwnerOnlyAndWifiPermission.mCallerUid,
+                                true)) {
                     z = true;
                 }
                 return z;
@@ -774,7 +1101,8 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
     }
 
     public final boolean addWifiSsidToWhiteList(ContextInfo contextInfo, List list) {
-        ContextInfo enforceOwnerOnlyAndWifiPermission = enforceOwnerOnlyAndWifiPermission(contextInfo);
+        ContextInfo enforceOwnerOnlyAndWifiPermission =
+                enforceOwnerOnlyAndWifiPermission(contextInfo);
         Pair callerInfoFromUid = getCallerInfoFromUid(enforceOwnerOnlyAndWifiPermission.mCallerUid);
         boolean z = false;
         if (callerInfoFromUid == null) {
@@ -789,13 +1117,30 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
                 boolean z2 = true;
                 while (it.hasNext()) {
                     String str = (String) it.next();
-                    ContentValues m = AccountManagerService$$ExternalSyntheticOutline0.m("WIFI_SSID", str);
-                    KnoxMUMContainerPolicy$$ExternalSyntheticOutline0.m(enforceOwnerOnlyAndWifiPermission.mCallerUid, m, "adminUid", "WIFI_LIST_TYPE", "WHITELIST");
-                    z2 = z2 && this.mEdmStorageProvider.putValuesNoUpdate("WIFI_SSID_BLACK_WHITE_LIST", m);
+                    ContentValues m =
+                            AccountManagerService$$ExternalSyntheticOutline0.m("WIFI_SSID", str);
+                    KnoxMUMContainerPolicy$$ExternalSyntheticOutline0.m(
+                            enforceOwnerOnlyAndWifiPermission.mCallerUid,
+                            m,
+                            "adminUid",
+                            "WIFI_LIST_TYPE",
+                            "WHITELIST");
+                    z2 =
+                            z2
+                                    && this.mEdmStorageProvider.putValuesNoUpdate(
+                                            "WIFI_SSID_BLACK_WHITE_LIST", m);
                     if (z2) {
                         long clearCallingIdentity = Binder.clearCallingIdentity();
                         try {
-                            AuditLog.logEventAsUser(UserHandle.getUserId(enforceOwnerOnlyAndWifiPermission.mCallerUid), 65, new Object[]{Integer.valueOf(enforceOwnerOnlyAndWifiPermission.mCallerUid), str});
+                            AuditLog.logEventAsUser(
+                                    UserHandle.getUserId(
+                                            enforceOwnerOnlyAndWifiPermission.mCallerUid),
+                                    65,
+                                    new Object[] {
+                                        Integer.valueOf(
+                                                enforceOwnerOnlyAndWifiPermission.mCallerUid),
+                                        str
+                                    });
                         } finally {
                             Binder.restoreCallingIdentity(clearCallingIdentity);
                         }
@@ -804,8 +1149,21 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
                 if (!isWifiSsidRestrictionActive(enforceOwnerOnlyAndWifiPermission.mCallerUid)) {
                     return z2;
                 }
-                Log.i("WifiPolicyService", "addWifiSsidToWhiteList - caller uid: " + callerInfoFromUid.first + ", enforced caller uid: " + enforceOwnerOnlyAndWifiPermission.mCallerUid + ", list size: " + arrayList.size());
-                if (z2 && setSsidAllowDenyList((ComponentName) callerInfoFromUid.second, UserHandle.getUserId(((Integer) callerInfoFromUid.first).intValue()), enforceOwnerOnlyAndWifiPermission.mCallerUid, true)) {
+                Log.i(
+                        "WifiPolicyService",
+                        "addWifiSsidToWhiteList - caller uid: "
+                                + callerInfoFromUid.first
+                                + ", enforced caller uid: "
+                                + enforceOwnerOnlyAndWifiPermission.mCallerUid
+                                + ", list size: "
+                                + arrayList.size());
+                if (z2
+                        && setSsidAllowDenyList(
+                                (ComponentName) callerInfoFromUid.second,
+                                UserHandle.getUserId(
+                                        ((Integer) callerInfoFromUid.first).intValue()),
+                                enforceOwnerOnlyAndWifiPermission.mCallerUid,
+                                true)) {
                     z = true;
                 }
                 return z;
@@ -817,36 +1175,70 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
 
     public final boolean allowOpenWifiAp(ContextInfo contextInfo, boolean z) {
         int wifiApState;
-        ContextInfo enforceOwnerOnlyAndWifiPermission = enforceOwnerOnlyAndWifiPermission(contextInfo);
-        Log.i("WifiPolicyService", "allowOpenWifiAp - caller uid: " + enforceOwnerOnlyAndWifiPermission.mCallerUid + ", enable: " + z);
+        ContextInfo enforceOwnerOnlyAndWifiPermission =
+                enforceOwnerOnlyAndWifiPermission(contextInfo);
+        Log.i(
+                "WifiPolicyService",
+                "allowOpenWifiAp - caller uid: "
+                        + enforceOwnerOnlyAndWifiPermission.mCallerUid
+                        + ", enable: "
+                        + z);
         if (!z) {
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 WifiConfiguration wifiApConfiguration = this.mWifiManager.getWifiApConfiguration();
-                if (wifiApConfiguration != null && wifiApConfiguration.allowedKeyManagement.get(0) && ((wifiApState = this.mWifiManager.getWifiApState()) == 13 || wifiApState == 12)) {
-                    SemWifiManager semWifiManager = (SemWifiManager) this.mContext.getSystemService("sem_wifi");
+                if (wifiApConfiguration != null
+                        && wifiApConfiguration.allowedKeyManagement.get(0)
+                        && ((wifiApState = this.mWifiManager.getWifiApState()) == 13
+                                || wifiApState == 12)) {
+                    SemWifiManager semWifiManager =
+                            (SemWifiManager) this.mContext.getSystemService("sem_wifi");
                     semWifiManager.setWifiApEnabled(semWifiManager.getSoftApConfiguration(), false);
                 }
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
         }
-        return this.mEdmStorageProvider.putBoolean("WIFI", enforceOwnerOnlyAndWifiPermission.mCallerUid, z, 0, "allowOpenWifi");
+        return this.mEdmStorageProvider.putBoolean(
+                "WIFI", enforceOwnerOnlyAndWifiPermission.mCallerUid, z, 0, "allowOpenWifi");
     }
 
     public final boolean allowWifiApSettingUserModification(ContextInfo contextInfo, boolean z) {
-        ContextInfo enforceOwnerOnlyAndWifiPermission = enforceOwnerOnlyAndWifiPermission(contextInfo);
-        Log.i("WifiPolicyService", "allowWifiApSettingUserModification - caller uid: " + enforceOwnerOnlyAndWifiPermission.mCallerUid + ", enable: " + z);
-        return this.mEdmStorageProvider.putBoolean("WIFI", enforceOwnerOnlyAndWifiPermission.mCallerUid, z, 0, "allowWifiApSettingModification");
+        ContextInfo enforceOwnerOnlyAndWifiPermission =
+                enforceOwnerOnlyAndWifiPermission(contextInfo);
+        Log.i(
+                "WifiPolicyService",
+                "allowWifiApSettingUserModification - caller uid: "
+                        + enforceOwnerOnlyAndWifiPermission.mCallerUid
+                        + ", enable: "
+                        + z);
+        return this.mEdmStorageProvider.putBoolean(
+                "WIFI",
+                enforceOwnerOnlyAndWifiPermission.mCallerUid,
+                z,
+                0,
+                "allowWifiApSettingModification");
     }
 
     public final boolean allowWifiScanning(ContextInfo contextInfo, boolean z) {
         if (this.mEDM == null) {
             this.mEDM = EnterpriseDeviceManager.getInstance(this.mContext);
         }
-        ContextInfo enforceOwnerOnlyAndActiveAdminPermission = this.mEDM.enforceOwnerOnlyAndActiveAdminPermission(contextInfo, new ArrayList(Arrays.asList("com.sec.enterprise.knox.permission.KNOX_RESTRICTION", "com.samsung.android.knox.permission.KNOX_ADVANCED_RESTRICTION")));
+        ContextInfo enforceOwnerOnlyAndActiveAdminPermission =
+                this.mEDM.enforceOwnerOnlyAndActiveAdminPermission(
+                        contextInfo,
+                        new ArrayList(
+                                Arrays.asList(
+                                        "com.sec.enterprise.knox.permission.KNOX_RESTRICTION",
+                                        "com.samsung.android.knox.permission.KNOX_ADVANCED_RESTRICTION")));
         ContentResolver contentResolver = this.mContext.getContentResolver();
-        boolean putBoolean = this.mEdmStorageProvider.putBoolean("WIFI", enforceOwnerOnlyAndActiveAdminPermission.mCallerUid, z, 0, "allowWifiScanning");
+        boolean putBoolean =
+                this.mEdmStorageProvider.putBoolean(
+                        "WIFI",
+                        enforceOwnerOnlyAndActiveAdminPermission.mCallerUid,
+                        z,
+                        0,
+                        "allowWifiScanning");
         long clearCallingIdentity = Binder.clearCallingIdentity();
         if (!z) {
             try {
@@ -862,18 +1254,31 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
     }
 
     public final boolean clearWifiSsidBlackList(ContextInfo contextInfo) {
-        ContextInfo enforceOwnerOnlyAndWifiPermission = enforceOwnerOnlyAndWifiPermission(contextInfo);
+        ContextInfo enforceOwnerOnlyAndWifiPermission =
+                enforceOwnerOnlyAndWifiPermission(contextInfo);
         Pair callerInfoFromUid = getCallerInfoFromUid(enforceOwnerOnlyAndWifiPermission.mCallerUid);
         boolean z = false;
         if (callerInfoFromUid == null) {
             Log.e("WifiPolicyService", "clearWifiSsidBlackList - not a valid caller, aborting!");
             return false;
         }
-        boolean deleteDataByFields = this.mEdmStorageProvider.deleteDataByFields("WIFI_SSID_BLACK_WHITE_LIST", new String[]{"adminUid", "WIFI_LIST_TYPE"}, new String[]{String.valueOf(enforceOwnerOnlyAndWifiPermission.mCallerUid), "BLACKLIST"});
+        boolean deleteDataByFields =
+                this.mEdmStorageProvider.deleteDataByFields(
+                        "WIFI_SSID_BLACK_WHITE_LIST",
+                        new String[] {"adminUid", "WIFI_LIST_TYPE"},
+                        new String[] {
+                            String.valueOf(enforceOwnerOnlyAndWifiPermission.mCallerUid),
+                            "BLACKLIST"
+                        });
         if (deleteDataByFields) {
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                AuditLog.logEventAsUser(UserHandle.getUserId(enforceOwnerOnlyAndWifiPermission.mCallerUid), 64, new Object[]{Integer.valueOf(enforceOwnerOnlyAndWifiPermission.mCallerUid)});
+                AuditLog.logEventAsUser(
+                        UserHandle.getUserId(enforceOwnerOnlyAndWifiPermission.mCallerUid),
+                        64,
+                        new Object[] {
+                            Integer.valueOf(enforceOwnerOnlyAndWifiPermission.mCallerUid)
+                        });
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
@@ -884,26 +1289,45 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         StringBuilder sb = new StringBuilder("clearWifiSsidBlackList - caller uid: ");
         sb.append(callerInfoFromUid.first);
         sb.append(", enforced caller uid: ");
-        UiModeManagerService$13$$ExternalSyntheticOutline0.m(sb, enforceOwnerOnlyAndWifiPermission.mCallerUid, "WifiPolicyService");
-        if (deleteDataByFields && setSsidAllowDenyList((ComponentName) callerInfoFromUid.second, UserHandle.getUserId(((Integer) callerInfoFromUid.first).intValue()), enforceOwnerOnlyAndWifiPermission.mCallerUid, true)) {
+        UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                sb, enforceOwnerOnlyAndWifiPermission.mCallerUid, "WifiPolicyService");
+        if (deleteDataByFields
+                && setSsidAllowDenyList(
+                        (ComponentName) callerInfoFromUid.second,
+                        UserHandle.getUserId(((Integer) callerInfoFromUid.first).intValue()),
+                        enforceOwnerOnlyAndWifiPermission.mCallerUid,
+                        true)) {
             z = true;
         }
         return z;
     }
 
     public final boolean clearWifiSsidWhiteList(ContextInfo contextInfo) {
-        ContextInfo enforceOwnerOnlyAndWifiPermission = enforceOwnerOnlyAndWifiPermission(contextInfo);
+        ContextInfo enforceOwnerOnlyAndWifiPermission =
+                enforceOwnerOnlyAndWifiPermission(contextInfo);
         Pair callerInfoFromUid = getCallerInfoFromUid(enforceOwnerOnlyAndWifiPermission.mCallerUid);
         boolean z = false;
         if (callerInfoFromUid == null) {
             Log.e("WifiPolicyService", "clearWifiSsidWhiteList - not a valid caller, aborting!");
             return false;
         }
-        boolean deleteDataByFields = this.mEdmStorageProvider.deleteDataByFields("WIFI_SSID_BLACK_WHITE_LIST", new String[]{"adminUid", "WIFI_LIST_TYPE"}, new String[]{String.valueOf(enforceOwnerOnlyAndWifiPermission.mCallerUid), "WHITELIST"});
+        boolean deleteDataByFields =
+                this.mEdmStorageProvider.deleteDataByFields(
+                        "WIFI_SSID_BLACK_WHITE_LIST",
+                        new String[] {"adminUid", "WIFI_LIST_TYPE"},
+                        new String[] {
+                            String.valueOf(enforceOwnerOnlyAndWifiPermission.mCallerUid),
+                            "WHITELIST"
+                        });
         if (deleteDataByFields) {
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                AuditLog.logEventAsUser(UserHandle.getUserId(enforceOwnerOnlyAndWifiPermission.mCallerUid), 67, new Object[]{Integer.valueOf(enforceOwnerOnlyAndWifiPermission.mCallerUid)});
+                AuditLog.logEventAsUser(
+                        UserHandle.getUserId(enforceOwnerOnlyAndWifiPermission.mCallerUid),
+                        67,
+                        new Object[] {
+                            Integer.valueOf(enforceOwnerOnlyAndWifiPermission.mCallerUid)
+                        });
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
@@ -914,14 +1338,21 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         StringBuilder sb = new StringBuilder("clearWifiSsidWhiteList - caller uid: ");
         sb.append(callerInfoFromUid.first);
         sb.append(", enforced caller uid: ");
-        UiModeManagerService$13$$ExternalSyntheticOutline0.m(sb, enforceOwnerOnlyAndWifiPermission.mCallerUid, "WifiPolicyService");
-        if (deleteDataByFields && setSsidAllowDenyList((ComponentName) callerInfoFromUid.second, UserHandle.getUserId(((Integer) callerInfoFromUid.first).intValue()), enforceOwnerOnlyAndWifiPermission.mCallerUid, true)) {
+        UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                sb, enforceOwnerOnlyAndWifiPermission.mCallerUid, "WifiPolicyService");
+        if (deleteDataByFields
+                && setSsidAllowDenyList(
+                        (ComponentName) callerInfoFromUid.second,
+                        UserHandle.getUserId(((Integer) callerInfoFromUid.first).intValue()),
+                        enforceOwnerOnlyAndWifiPermission.mCallerUid,
+                        true)) {
             z = true;
         }
         return z;
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         ArrayList arrayList;
         ArrayList arrayList2;
         if (this.mContext.checkCallingOrSelfPermission("android.permission.DUMP") != 0) {
@@ -934,14 +1365,30 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         sb2.append(isWifiAllowed(null, false));
         sb2.append(System.lineSeparator());
         sb.append(sb2.toString());
-        sb.append("  mAllowStateChange : " + isWifiStateChangeAllowed(null) + System.lineSeparator());
-        sb.append("  mAllowAutomaticConnections : " + getAutomaticConnectionToWifi(null) + System.lineSeparator());
-        sb.append("  mAllowUserChanges : " + getAllowUserPolicyChanges(null) + System.lineSeparator());
-        sb.append("  mPromptCredentialsEnabled : " + getPromptCredentialsEnabled(null) + System.lineSeparator());
-        sb.append("  mAllowUserProfiles : " + getAllowUserProfiles(null, false, 0) + System.lineSeparator());
+        sb.append(
+                "  mAllowStateChange : " + isWifiStateChangeAllowed(null) + System.lineSeparator());
+        sb.append(
+                "  mAllowAutomaticConnections : "
+                        + getAutomaticConnectionToWifi(null)
+                        + System.lineSeparator());
+        sb.append(
+                "  mAllowUserChanges : "
+                        + getAllowUserPolicyChanges(null)
+                        + System.lineSeparator());
+        sb.append(
+                "  mPromptCredentialsEnabled : "
+                        + getPromptCredentialsEnabled(null)
+                        + System.lineSeparator());
+        sb.append(
+                "  mAllowUserProfiles : "
+                        + getAllowUserProfiles(null, false, 0)
+                        + System.lineSeparator());
         StringBuilder sb3 = new StringBuilder("  ssidBlockList : ");
         StringBuilder sb4 = new StringBuilder();
-        TreeSet treeSet = new TreeSet(this.mEdmStorageProvider.getIntListAsUser(0, 0, "WIFI_SSID_BLACK_WHITE_LIST", "adminUid"));
+        TreeSet treeSet =
+                new TreeSet(
+                        this.mEdmStorageProvider.getIntListAsUser(
+                                0, 0, "WIFI_SSID_BLACK_WHITE_LIST", "adminUid"));
         if (treeSet.isEmpty()) {
             arrayList = new ArrayList();
         } else {
@@ -954,8 +1401,11 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
             ArrayList arrayList3 = new ArrayList(hashMap.keySet().size());
             for (Map.Entry entry : hashMap.entrySet()) {
                 WifiControlInfo wifiControlInfo = new WifiControlInfo();
-                wifiControlInfo.adminPackageName = this.mEdmStorageProvider.getPackageNameForUid(((Integer) entry.getKey()).intValue());
-                wifiControlInfo.entries = new ArrayList((Collection) ((Map) entry.getValue()).get("BLACKLIST"));
+                wifiControlInfo.adminPackageName =
+                        this.mEdmStorageProvider.getPackageNameForUid(
+                                ((Integer) entry.getKey()).intValue());
+                wifiControlInfo.entries =
+                        new ArrayList((Collection) ((Map) entry.getValue()).get("BLACKLIST"));
                 arrayList3.add(wifiControlInfo);
             }
             arrayList = arrayList3;
@@ -964,7 +1414,11 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
             sb4.append("No item found");
         } else {
             for (int i = 0; i < arrayList.size(); i++) {
-                sb4.append(((WifiControlInfo) arrayList.get(i)).adminPackageName + " : " + ((WifiControlInfo) arrayList.get(i)).entries + "  ");
+                sb4.append(
+                        ((WifiControlInfo) arrayList.get(i)).adminPackageName
+                                + " : "
+                                + ((WifiControlInfo) arrayList.get(i)).entries
+                                + "  ");
             }
         }
         sb3.append(sb4.toString());
@@ -972,7 +1426,10 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         sb.append(sb3.toString());
         StringBuilder sb5 = new StringBuilder("  ssidAllowList : ");
         StringBuilder sb6 = new StringBuilder();
-        TreeSet treeSet2 = new TreeSet(this.mEdmStorageProvider.getIntListAsUser(0, 0, "WIFI_SSID_BLACK_WHITE_LIST", "adminUid"));
+        TreeSet treeSet2 =
+                new TreeSet(
+                        this.mEdmStorageProvider.getIntListAsUser(
+                                0, 0, "WIFI_SSID_BLACK_WHITE_LIST", "adminUid"));
         if (treeSet2.isEmpty()) {
             arrayList2 = new ArrayList();
         } else {
@@ -985,8 +1442,11 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
             ArrayList arrayList4 = new ArrayList(hashMap2.keySet().size());
             for (Map.Entry entry2 : hashMap2.entrySet()) {
                 WifiControlInfo wifiControlInfo2 = new WifiControlInfo();
-                wifiControlInfo2.adminPackageName = this.mEdmStorageProvider.getPackageNameForUid(((Integer) entry2.getKey()).intValue());
-                wifiControlInfo2.entries = new ArrayList((Collection) ((Map) entry2.getValue()).get("WHITELIST"));
+                wifiControlInfo2.adminPackageName =
+                        this.mEdmStorageProvider.getPackageNameForUid(
+                                ((Integer) entry2.getKey()).intValue());
+                wifiControlInfo2.entries =
+                        new ArrayList((Collection) ((Map) entry2.getValue()).get("WHITELIST"));
                 arrayList4.add(wifiControlInfo2);
             }
             arrayList2 = arrayList4;
@@ -995,7 +1455,11 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
             sb6.append("No item found");
         } else {
             for (int i2 = 0; i2 < arrayList2.size(); i2++) {
-                sb6.append(((WifiControlInfo) arrayList2.get(i2)).adminPackageName + " : " + ((WifiControlInfo) arrayList2.get(i2)).entries + "  ");
+                sb6.append(
+                        ((WifiControlInfo) arrayList2.get(i2)).adminPackageName
+                                + " : "
+                                + ((WifiControlInfo) arrayList2.get(i2)).entries
+                                + "  ");
             }
         }
         sb5.append(sb6.toString());
@@ -1006,7 +1470,9 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
 
     public final void enableNetworkAndMaybeConnect(int i) {
         WifiManager wifiManager;
-        if (-1 == i || (wifiManager = this.mWifiManager) == null || wifiManager.getWifiState() != 3) {
+        if (-1 == i
+                || (wifiManager = this.mWifiManager) == null
+                || wifiManager.getWifiState() != 3) {
             return;
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -1017,7 +1483,9 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
             } catch (Exception e) {
                 Log.e("WifiManagerAdapter", "Failed to enable network " + e.getMessage());
             }
-            if (!((ConnectivityManager) this.mContext.getSystemService(ConnectivityManager.class)).getNetworkInfo(1).isConnected()) {
+            if (!((ConnectivityManager) this.mContext.getSystemService(ConnectivityManager.class))
+                    .getNetworkInfo(1)
+                    .isConnected()) {
                 this.mWifiAdapter.getClass();
                 WifiManagerAdapter.connect(i);
             }
@@ -1030,7 +1498,9 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         if (this.mEDM == null) {
             this.mEDM = EnterpriseDeviceManager.getInstance(this.mContext);
         }
-        return this.mEDM.enforceOwnerOnlyAndActiveAdminPermission(contextInfo, new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_WIFI")));
+        return this.mEDM.enforceOwnerOnlyAndActiveAdminPermission(
+                contextInfo,
+                new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_WIFI")));
     }
 
     public final void evaluateAndMigrateDPMAPIs(Cursor cursor) {
@@ -1044,10 +1514,19 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
                     if (callerInfoFromUid != null) {
                         int i2 = cursor.getInt(cursor.getColumnIndex("minimumRequiredSecurity"));
                         if (i2 != 0) {
-                            setMinimumRequiredWifiSecurityLevel((ComponentName) callerInfoFromUid.second, UserHandle.getUserId(((Integer) callerInfoFromUid.first).intValue()), i2);
+                            setMinimumRequiredWifiSecurityLevel(
+                                    (ComponentName) callerInfoFromUid.second,
+                                    UserHandle.getUserId(
+                                            ((Integer) callerInfoFromUid.first).intValue()),
+                                    i2);
                         }
                         if (cursor.getInt(cursor.getColumnIndex("wifiSsidRestriction")) == 1) {
-                            setSsidAllowDenyList((ComponentName) callerInfoFromUid.second, UserHandle.getUserId(((Integer) callerInfoFromUid.first).intValue()), i, true);
+                            setSsidAllowDenyList(
+                                    (ComponentName) callerInfoFromUid.second,
+                                    UserHandle.getUserId(
+                                            ((Integer) callerInfoFromUid.first).intValue()),
+                                    i,
+                                    true);
                         }
                     }
                 } while (cursor.moveToNext());
@@ -1148,7 +1627,9 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
             android.util.Log.i(r1, r0)
             throw r10
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.wifi.WifiPolicy.evaluateAndMigrateUserRestrictionAPIs(android.database.Cursor):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.wifi.WifiPolicy.evaluateAndMigrateUserRestrictionAPIs(android.database.Cursor):void");
     }
 
     public final Map getAllNetworksByAdminUid() {
@@ -1157,7 +1638,12 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         String str2;
         String str3 = "adminUid";
         String str4 = "networkSSID";
-        ArrayList arrayList = (ArrayList) this.mEdmStorageProvider.getValues("WIFI_CONF", new String[]{"adminUid", "networkSSID", "networkKeyMgmt"}, null);
+        ArrayList arrayList =
+                (ArrayList)
+                        this.mEdmStorageProvider.getValues(
+                                "WIFI_CONF",
+                                new String[] {"adminUid", "networkSSID", "networkKeyMgmt"},
+                                null);
         if (arrayList.isEmpty()) {
             Log.i("WifiPolicyService", "getAllNetworksByAdminUid - cv is empty or null");
             return null;
@@ -1211,7 +1697,10 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
                         if (arrayMap.get(asInteger) == null) {
                             arrayMap.put(asInteger, new ArrayList());
                         }
-                        Log.i("WifiPolicyService", "getAllNetworksByAdminUid - adding network for admin: " + asInteger);
+                        Log.i(
+                                "WifiPolicyService",
+                                "getAllNetworksByAdminUid - adding network for admin: "
+                                        + asInteger);
                         ((List) arrayMap.get(asInteger)).add(wifiConfiguration);
                         i++;
                         str3 = str;
@@ -1230,7 +1719,10 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
 
     public final List getAllWifiSsidBlackLists(ContextInfo contextInfo) {
         enforceOwnerOnlyAndWifiPermission(contextInfo);
-        TreeSet treeSet = new TreeSet(this.mEdmStorageProvider.getIntListAsUser(0, 0, "WIFI_SSID_BLACK_WHITE_LIST", "adminUid"));
+        TreeSet treeSet =
+                new TreeSet(
+                        this.mEdmStorageProvider.getIntListAsUser(
+                                0, 0, "WIFI_SSID_BLACK_WHITE_LIST", "adminUid"));
         if (treeSet.isEmpty()) {
             return new ArrayList();
         }
@@ -1243,8 +1735,11 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         ArrayList arrayList = new ArrayList(hashMap.keySet().size());
         for (Map.Entry entry : hashMap.entrySet()) {
             WifiControlInfo wifiControlInfo = new WifiControlInfo();
-            wifiControlInfo.adminPackageName = this.mEdmStorageProvider.getPackageNameForUid(((Integer) entry.getKey()).intValue());
-            wifiControlInfo.entries = new ArrayList((Collection) ((Map) entry.getValue()).get("BLACKLIST"));
+            wifiControlInfo.adminPackageName =
+                    this.mEdmStorageProvider.getPackageNameForUid(
+                            ((Integer) entry.getKey()).intValue());
+            wifiControlInfo.entries =
+                    new ArrayList((Collection) ((Map) entry.getValue()).get("BLACKLIST"));
             arrayList.add(wifiControlInfo);
         }
         Log.i("WifiPolicyService", "getAllWifiSsidBlackLists: list size = " + arrayList.size());
@@ -1253,7 +1748,10 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
 
     public final List getAllWifiSsidWhiteLists(ContextInfo contextInfo) {
         enforceOwnerOnlyAndWifiPermission(contextInfo);
-        TreeSet treeSet = new TreeSet(this.mEdmStorageProvider.getIntListAsUser(0, 0, "WIFI_SSID_BLACK_WHITE_LIST", "adminUid"));
+        TreeSet treeSet =
+                new TreeSet(
+                        this.mEdmStorageProvider.getIntListAsUser(
+                                0, 0, "WIFI_SSID_BLACK_WHITE_LIST", "adminUid"));
         if (treeSet.isEmpty()) {
             return new ArrayList();
         }
@@ -1266,8 +1764,11 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         ArrayList arrayList = new ArrayList(hashMap.keySet().size());
         for (Map.Entry entry : hashMap.entrySet()) {
             WifiControlInfo wifiControlInfo = new WifiControlInfo();
-            wifiControlInfo.adminPackageName = this.mEdmStorageProvider.getPackageNameForUid(((Integer) entry.getKey()).intValue());
-            wifiControlInfo.entries = new ArrayList((Collection) ((Map) entry.getValue()).get("WHITELIST"));
+            wifiControlInfo.adminPackageName =
+                    this.mEdmStorageProvider.getPackageNameForUid(
+                            ((Integer) entry.getKey()).intValue());
+            wifiControlInfo.entries =
+                    new ArrayList((Collection) ((Map) entry.getValue()).get("WHITELIST"));
             arrayList.add(wifiControlInfo);
         }
         Log.i("WifiPolicyService", "getAllWifiSsidWhiteLists: list size = " + arrayList.size());
@@ -1276,7 +1777,10 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
 
     public final boolean getAllowUserPolicyChanges(ContextInfo contextInfo) {
         boolean z;
-        Iterator it = this.mEdmStorageProvider.getBooleanListAsUser(0, "WIFI", "allowUserChanges").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getBooleanListAsUser(0, "WIFI", "allowUserChanges")
+                        .iterator();
         while (true) {
             if (!it.hasNext()) {
                 z = true;
@@ -1287,7 +1791,8 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
                 break;
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("getAllowUserPolicyChanges: ", "WifiPolicyService", z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "getAllowUserPolicyChanges: ", "WifiPolicyService", z);
         return z;
     }
 
@@ -1296,7 +1801,10 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         if (i == -1) {
             i = Utils.getCallingOrCurrentUserId(contextInfo);
         }
-        Iterator it = this.mEdmStorageProvider.getBooleanListAsUser(i, "WIFI", "allowUserProfiles").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getBooleanListAsUser(i, "WIFI", "allowUserProfiles")
+                        .iterator();
         while (true) {
             if (!it.hasNext()) {
                 z2 = true;
@@ -1310,14 +1818,21 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         if (!z2 && z) {
             RestrictionToastManager.show(R.string.indeterminate_progress_02);
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("getAllowUserProfiles: ", "WifiPolicyService", z2);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "getAllowUserProfiles: ", "WifiPolicyService", z2);
         return z2;
     }
 
     public final List getAuthConfigFromDb(String str) {
         ArrayList arrayList = new ArrayList();
         ContentValues m = AccountManagerService$$ExternalSyntheticOutline0.m("networkSSID", str);
-        Iterator it = ((ArrayList) this.mEdmStorageProvider.getValues("WifiProxyAuthTable", new String[]{"host", "port", "username", "password"}, m)).iterator();
+        Iterator it =
+                ((ArrayList)
+                                this.mEdmStorageProvider.getValues(
+                                        "WifiProxyAuthTable",
+                                        new String[] {"host", "port", "username", "password"},
+                                        m))
+                        .iterator();
         while (it.hasNext()) {
             ContentValues contentValues = (ContentValues) it.next();
             String asString = contentValues.getAsString("host");
@@ -1334,7 +1849,10 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
 
     public final boolean getAutomaticConnectionToWifi(ContextInfo contextInfo) {
         boolean z;
-        Iterator it = this.mEdmStorageProvider.getBooleanListAsUser(0, "WIFI", "allowAutomaticConnection").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getBooleanListAsUser(0, "WIFI", "allowAutomaticConnection")
+                        .iterator();
         while (true) {
             if (!it.hasNext()) {
                 z = true;
@@ -1345,7 +1863,8 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
                 break;
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("getAutomaticConnectionToWifi: ", "WifiPolicyService", z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "getAutomaticConnectionToWifi: ", "WifiPolicyService", z);
         return z;
     }
 
@@ -1363,7 +1882,8 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
     public final List getBlockedNetworks(ContextInfo contextInfo) {
         enforceOwnerOnlyAndWifiPermission(contextInfo);
         LinkedList linkedList = new LinkedList();
-        List stringListAsUser = this.mEdmStorageProvider.getStringListAsUser(0, "WIFI", "blockedSSIDList");
+        List stringListAsUser =
+                this.mEdmStorageProvider.getStringListAsUser(0, "WIFI", "blockedSSIDList");
         HashSet hashSet = new HashSet();
         Iterator it = ((ArrayList) stringListAsUser).iterator();
         while (it.hasNext()) {
@@ -1380,8 +1900,14 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
     }
 
     public final Pair getCallerInfoFromUid(int i) {
-        DirEncryptService$$ExternalSyntheticOutline0.m(i, "getCallerInfoFromUid START - parentUid = ", "WifiPolicyService");
-        ArrayList dataByFields = this.mEdmStorageProvider.getDataByFields("ADMIN_INFO", new String[]{"adminUid"}, new String[]{String.valueOf(i)}, new String[]{"adminName", "isPseudoAdmin"});
+        DirEncryptService$$ExternalSyntheticOutline0.m(
+                i, "getCallerInfoFromUid START - parentUid = ", "WifiPolicyService");
+        ArrayList dataByFields =
+                this.mEdmStorageProvider.getDataByFields(
+                        "ADMIN_INFO",
+                        new String[] {"adminUid"},
+                        new String[] {String.valueOf(i)},
+                        new String[] {"adminName", "isPseudoAdmin"});
         if (dataByFields.isEmpty()) {
             Log.e("WifiPolicyService", "getCallerInfoFromUid - cv is empty or null");
             return null;
@@ -1389,7 +1915,12 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         String asString = ((ContentValues) dataByFields.get(0)).getAsString("adminName");
         Boolean asBoolean = ((ContentValues) dataByFields.get(0)).getAsBoolean("isPseudoAdmin");
         if (asBoolean != null && asBoolean.booleanValue()) {
-            ArrayList dataByFields2 = this.mEdmStorageProvider.getDataByFields("ADMIN_INFO", new String[]{"adminName", "isPseudoAdmin"}, new String[]{asString, "0"}, new String[]{"adminUid"});
+            ArrayList dataByFields2 =
+                    this.mEdmStorageProvider.getDataByFields(
+                            "ADMIN_INFO",
+                            new String[] {"adminName", "isPseudoAdmin"},
+                            new String[] {asString, "0"},
+                            new String[] {"adminUid"});
             if (dataByFields2.isEmpty()) {
                 Log.e("WifiPolicyService", "getWorkProfileUid - cv is empty or null");
                 i = -1;
@@ -1399,7 +1930,12 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
             }
         }
         ComponentName unflattenFromString = ComponentName.unflattenFromString(asString);
-        Log.i("WifiPolicyService", "getCallerInfoFromUid END - profileUid = " + i + ", componentName = " + unflattenFromString);
+        Log.i(
+                "WifiPolicyService",
+                "getCallerInfoFromUid END - profileUid = "
+                        + i
+                        + ", componentName = "
+                        + unflattenFromString);
         if (unflattenFromString == null || i == -1) {
             return null;
         }
@@ -1408,19 +1944,36 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
 
     public final int getMinimumRequiredSecurity(ContextInfo contextInfo) {
         int i = 0;
-        Iterator it = this.mEdmStorageProvider.getIntListAsUser(0, 0, "WIFI", "minimumRequiredSecurity").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getIntListAsUser(0, 0, "WIFI", "minimumRequiredSecurity")
+                        .iterator();
         while (it.hasNext()) {
             int intValue = ((Integer) it.next()).intValue();
             if (getSecurityLevel(intValue) > getSecurityLevel(i)) {
                 i = intValue;
             }
         }
-        DirEncryptService$$ExternalSyntheticOutline0.m(i, "getMinimumRequiredSecurity: ", "WifiPolicyService");
+        DirEncryptService$$ExternalSyntheticOutline0.m(
+                i, "getMinimumRequiredSecurity: ", "WifiPolicyService");
         return i;
     }
 
     public final WifiConfiguration getNetworkConfiguration(int i, String str) {
-        ArrayList dataByFields = this.mEdmStorageProvider.getDataByFields("WIFI_CONF", new String[]{"adminUid", "networkSSID"}, new String[]{String.valueOf(i), NetworkUtils.removeDoubleQuotes(str)}, new String[]{"networkSSID", "networkKeyMgmt", "networkProxyState", "networProxyName", "networkProxyPort", "networkProxyExclList", "networkProxyPacUrl"});
+        ArrayList dataByFields =
+                this.mEdmStorageProvider.getDataByFields(
+                        "WIFI_CONF",
+                        new String[] {"adminUid", "networkSSID"},
+                        new String[] {String.valueOf(i), NetworkUtils.removeDoubleQuotes(str)},
+                        new String[] {
+                            "networkSSID",
+                            "networkKeyMgmt",
+                            "networkProxyState",
+                            "networProxyName",
+                            "networkProxyPort",
+                            "networkProxyExclList",
+                            "networkProxyPacUrl"
+                        });
         if (dataByFields.isEmpty()) {
             Log.i("WifiPolicyService", "getNetworkConfiguration - cv is empty or null");
             return null;
@@ -1434,18 +1987,33 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
                 } else {
                     String asString2 = contentValues.getAsString("networkKeyMgmt");
                     if (!TextUtils.isEmpty(asString2)) {
-                        WifiConfiguration networkFromWifiModule = getNetworkFromWifiModule(asString, asString2);
+                        WifiConfiguration networkFromWifiModule =
+                                getNetworkFromWifiModule(asString, asString2);
                         Integer asInteger = contentValues.getAsInteger("networkProxyState");
                         if (asInteger != null && networkFromWifiModule.getHttpProxy() != null) {
                             Integer asInteger2 = contentValues.getAsInteger("networkProxyPort");
-                            networkFromWifiModule.setHttpProxy(NetworkUtils.convertToProxyInfo(createProxyProperties(contentValues.getAsString("networProxyName"), asInteger2 != null ? asInteger2.intValue() : 0, contentValues.getAsString("networkProxyPacUrl"), null, Arrays.asList(convertStringToArray(contentValues.getAsString("networkProxyExclList"))), asInteger.intValue())));
+                            networkFromWifiModule.setHttpProxy(
+                                    NetworkUtils.convertToProxyInfo(
+                                            createProxyProperties(
+                                                    contentValues.getAsString("networProxyName"),
+                                                    asInteger2 != null ? asInteger2.intValue() : 0,
+                                                    contentValues.getAsString("networkProxyPacUrl"),
+                                                    null,
+                                                    Arrays.asList(
+                                                            convertStringToArray(
+                                                                    contentValues.getAsString(
+                                                                            "networkProxyExclList"))),
+                                                    asInteger.intValue())));
                         }
                         return networkFromWifiModule;
                     }
                 }
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(i, "getNetworkConfiguration - network not found in database - callingUid: ", "WifiPolicyService");
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                i,
+                "getNetworkConfiguration - network not found in database - callingUid: ",
+                "WifiPolicyService");
         return null;
     }
 
@@ -1465,7 +2033,15 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
                         break;
                     }
                     WifiConfiguration wifiConfiguration2 = (WifiConfiguration) it.next();
-                    if (wifiConfiguration2.SSID != null && !wifiConfiguration2.isEphemeral() && !wifiConfiguration2.isPasspoint() && wifiConfiguration2.SSID.equals(convertToQuotedString(str)) && !TextUtils.isEmpty(str2) && str2.equals(makeString(wifiConfiguration2.allowedKeyManagement, WifiConfiguration.KeyMgmt.strings))) {
+                    if (wifiConfiguration2.SSID != null
+                            && !wifiConfiguration2.isEphemeral()
+                            && !wifiConfiguration2.isPasspoint()
+                            && wifiConfiguration2.SSID.equals(convertToQuotedString(str))
+                            && !TextUtils.isEmpty(str2)
+                            && str2.equals(
+                                    makeString(
+                                            wifiConfiguration2.allowedKeyManagement,
+                                            WifiConfiguration.KeyMgmt.strings))) {
                         wifiConfiguration = wifiConfiguration2;
                         break;
                     }
@@ -1480,7 +2056,9 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
     public final List getNetworkSSIDList(ContextInfo contextInfo) {
         enforceOwnerOnlyAndWifiPermission(contextInfo);
         ArrayList arrayList = new ArrayList();
-        ArrayList dataByFields = this.mEdmStorageProvider.getDataByFields("WIFI_CONF", null, null, new String[]{"networkSSID"});
+        ArrayList dataByFields =
+                this.mEdmStorageProvider.getDataByFields(
+                        "WIFI_CONF", null, null, new String[] {"networkSSID"});
         for (int i = 0; i < dataByFields.size(); i++) {
             arrayList.add(((ContentValues) dataByFields.get(i)).getAsString("networkSSID"));
         }
@@ -1489,20 +2067,27 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
 
     public final boolean getPasswordHidden(ContextInfo contextInfo) {
         boolean z = false;
-        Iterator it = this.mEdmStorageProvider.getBooleanListAsUser(0, "WIFI", "passwordHidden").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getBooleanListAsUser(0, "WIFI", "passwordHidden")
+                        .iterator();
         while (it.hasNext()) {
             boolean booleanValue = ((Boolean) it.next()).booleanValue();
             if (booleanValue) {
                 z = booleanValue;
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("getPasswordHidden: ", "WifiPolicyService", z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "getPasswordHidden: ", "WifiPolicyService", z);
         return z;
     }
 
     public final boolean getPromptCredentialsEnabled(ContextInfo contextInfo) {
         boolean z;
-        Iterator it = this.mEdmStorageProvider.getBooleanListAsUser(0, "WIFI", "promptCredentials").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getBooleanListAsUser(0, "WIFI", "promptCredentials")
+                        .iterator();
         while (true) {
             if (!it.hasNext()) {
                 z = true;
@@ -1513,7 +2098,8 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
                 break;
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("getPromptCredentialsEnabled: ", "WifiPolicyService", z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "getPromptCredentialsEnabled: ", "WifiPolicyService", z);
         return z;
     }
 
@@ -1522,7 +2108,8 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mWifiAdapter.getClass();
-            SoftApConfiguration softApConfiguration = WifiManagerAdapter.mSemWifiManager.getSoftApConfiguration();
+            SoftApConfiguration softApConfiguration =
+                    WifiManagerAdapter.mSemWifiManager.getSoftApConfiguration();
             WifiConfiguration wifiConfiguration = null;
             if (softApConfiguration != null) {
                 WifiConfiguration wifiConfiguration2 = new WifiConfiguration();
@@ -1534,7 +2121,10 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
                     wifiConfiguration2.allowedKeyManagement.set(4);
                 } else {
                     if (securityType != 3) {
-                        Log.e("WifiPolicyService", "Convert fail, unsupported security type :" + softApConfiguration.getSecurityType());
+                        Log.e(
+                                "WifiPolicyService",
+                                "Convert fail, unsupported security type :"
+                                        + softApConfiguration.getSecurityType());
                         return null;
                     }
                     wifiConfiguration2.allowedKeyManagement.set(8);
@@ -1550,19 +2140,23 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:192:0x021f, code lost:
-    
-        if (r6 == 4) goto L76;
-     */
+
+       if (r6 == 4) goto L76;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.samsung.android.knox.net.wifi.WifiAdminProfile getWifiProfile(com.samsung.android.knox.ContextInfo r17, java.lang.String r18) {
+    public final com.samsung.android.knox.net.wifi.WifiAdminProfile getWifiProfile(
+            com.samsung.android.knox.ContextInfo r17, java.lang.String r18) {
         /*
             Method dump skipped, instructions count: 835
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.wifi.WifiPolicy.getWifiProfile(com.samsung.android.knox.ContextInfo, java.lang.String):com.samsung.android.knox.net.wifi.WifiAdminProfile");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.wifi.WifiPolicy.getWifiProfile(com.samsung.android.knox.ContextInfo,"
+                    + " java.lang.String):com.samsung.android.knox.net.wifi.WifiAdminProfile");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:11:0x003c  */
@@ -1633,12 +2227,17 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
             android.util.Log.i(r2, r0)
             throw r7
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.wifi.WifiPolicy.handleUpgradeUserRestrictionAPIs(android.database.Cursor):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.wifi.WifiPolicy.handleUpgradeUserRestrictionAPIs(android.database.Cursor):void");
     }
 
     public final boolean isOpenWifiApAllowed(ContextInfo contextInfo) {
         boolean z;
-        Iterator it = this.mEdmStorageProvider.getBooleanListAsUser(0, "WIFI", "allowOpenWifi").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getBooleanListAsUser(0, "WIFI", "allowOpenWifi")
+                        .iterator();
         while (true) {
             if (!it.hasNext()) {
                 z = true;
@@ -1649,7 +2248,8 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
                 break;
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("isOpenWifiApAllowed: ", "WifiPolicyService", z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "isOpenWifiApAllowed: ", "WifiPolicyService", z);
         return z;
     }
 
@@ -1659,7 +2259,9 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
             return false;
         }
         String[] strArr = ACCEPTABLE_SECURITY_LEVELS;
-        if (((TelephonyManager) this.mContext.getSystemService(TelephonyManager.class)) == null ? false : !r5.isDataCapable()) {
+        if (((TelephonyManager) this.mContext.getSystemService(TelephonyManager.class)) == null
+                ? false
+                : !r5.isDataCapable()) {
             strArr[22] = "";
             strArr[23] = "";
             strArr[25] = "";
@@ -1676,7 +2278,8 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
 
     public final boolean isWifiAllowed(ContextInfo contextInfo, boolean z) {
         boolean z2;
-        Iterator it = this.mEdmStorageProvider.getBooleanListAsUser(0, "WIFI", "allowWifi").iterator();
+        Iterator it =
+                this.mEdmStorageProvider.getBooleanListAsUser(0, "WIFI", "allowWifi").iterator();
         while (true) {
             if (!it.hasNext()) {
                 z2 = true;
@@ -1687,7 +2290,8 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
                 break;
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("isWifiAllowed: ", "WifiPolicyService", z2);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "isWifiAllowed: ", "WifiPolicyService", z2);
         return z2;
     }
 
@@ -1696,7 +2300,10 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         if (this.mIsAPSettingFromAdmin) {
             return true;
         }
-        Iterator it = this.mEdmStorageProvider.getBooleanListAsUser(0, "WIFI", "allowWifiApSettingModification").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getBooleanListAsUser(0, "WIFI", "allowWifiApSettingModification")
+                        .iterator();
         while (true) {
             if (!it.hasNext()) {
                 break;
@@ -1707,7 +2314,8 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
                 break;
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("isWifiApSettingUserModificationAllowed: ", "WifiPolicyService", z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "isWifiApSettingUserModificationAllowed: ", "WifiPolicyService", z);
         return z;
     }
 
@@ -1726,7 +2334,10 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
     }
 
     public final boolean isWifiScanningAllowed(ContextInfo contextInfo) {
-        Iterator it = this.mEdmStorageProvider.getBooleanListAsUser(0, "WIFI", "allowWifiScanning").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getBooleanListAsUser(0, "WIFI", "allowWifiScanning")
+                        .iterator();
         while (it.hasNext()) {
             boolean booleanValue = ((Boolean) it.next()).booleanValue();
             if (!booleanValue) {
@@ -1748,12 +2359,16 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
     }
 
     public final boolean isWifiSsidRestrictionActive(ContextInfo contextInfo) {
-        return isWifiSsidRestrictionActive(enforceOwnerOnlyAndWifiPermission(contextInfo).mCallerUid);
+        return isWifiSsidRestrictionActive(
+                enforceOwnerOnlyAndWifiPermission(contextInfo).mCallerUid);
     }
 
     public final boolean isWifiStateChangeAllowed(ContextInfo contextInfo) {
         boolean z;
-        Iterator it = this.mEdmStorageProvider.getBooleanListAsUser(0, "WIFI", "allowWifiStateChanges").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getBooleanListAsUser(0, "WIFI", "allowWifiStateChanges")
+                        .iterator();
         while (true) {
             if (!it.hasNext()) {
                 z = true;
@@ -1764,7 +2379,8 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
                 break;
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("isWifiStateChangeAllowed: ", "WifiPolicyService", z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "isWifiStateChangeAllowed: ", "WifiPolicyService", z);
         return z;
     }
 
@@ -1772,7 +2388,11 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         try {
             ContentValues contentValues = new ContentValues();
             contentValues.put("adminUid", Integer.valueOf(i));
-            List valuesList = this.mEdmStorageProvider.getValuesList("WIFI_SSID_BLACK_WHITE_LIST", new String[]{"WIFI_LIST_TYPE", "WIFI_SSID"}, contentValues);
+            List valuesList =
+                    this.mEdmStorageProvider.getValuesList(
+                            "WIFI_SSID_BLACK_WHITE_LIST",
+                            new String[] {"WIFI_LIST_TYPE", "WIFI_SSID"},
+                            contentValues);
             TreeSet treeSet = new TreeSet();
             if (z) {
                 Iterator it = ((HashSet) getBlockedList$1(i)).iterator();
@@ -1791,7 +2411,8 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
             Iterator it2 = arrayList.iterator();
             while (it2.hasNext()) {
                 ContentValues contentValues2 = (ContentValues) it2.next();
-                ((Set) hashMap.get(contentValues2.getAsString("WIFI_LIST_TYPE"))).add(contentValues2.getAsString("WIFI_SSID"));
+                ((Set) hashMap.get(contentValues2.getAsString("WIFI_LIST_TYPE")))
+                        .add(contentValues2.getAsString("WIFI_SSID"));
             }
             return hashMap;
         } catch (Throwable th) {
@@ -1800,35 +2421,34 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
     }
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void notifyToAddSystemService(String str, IBinder iBinder) {
-    }
+    public final void notifyToAddSystemService(String str, IBinder iBinder) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void onAdminAdded(int i) {
-    }
+    public final void onAdminAdded(int i) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
     public final void onAdminRemoved(int i) {
         int callingOrCurrentUserId = Utils.getCallingOrCurrentUserId(new ContextInfo(i, 0));
         if (callingOrCurrentUserId == ActivityManager.getCurrentUser()) {
-            setWifiStateChangeAllowedSystemUI(callingOrCurrentUserId, isWifiStateChangeAllowed(null));
+            setWifiStateChangeAllowedSystemUI(
+                    callingOrCurrentUserId, isWifiStateChangeAllowed(null));
             setWifiAllowedSystemUI(callingOrCurrentUserId, isWifiAllowed(null, false));
             this.mLocalProxyManager.updateWifiProxy(null);
         }
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:42:0x0086, code lost:
-    
-        r13 = "Cursor is null";
-     */
+
+       r13 = "Cursor is null";
+    */
     /* JADX WARN: Code restructure failed: missing block: B:44:0x0092, code lost:
-    
-        if (r8 != null) goto L39;
-     */
+
+       if (r8 != null) goto L39;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:55:0x00a1, code lost:
-    
-        if (0 == 0) goto L40;
-     */
+
+       if (0 == 0) goto L40;
+    */
     /* JADX WARN: Removed duplicated region for block: B:16:0x006c  */
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
     /*
@@ -1947,11 +2567,14 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
             android.util.Log.i(r1, r0)
             throw r13
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.wifi.WifiPolicy.onPreAdminRemoval(int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.wifi.WifiPolicy.onPreAdminRemoval(int):void");
     }
 
     public final boolean removeBlockedNetwork(ContextInfo contextInfo, String str) {
-        ContextInfo enforceOwnerOnlyAndWifiPermission = enforceOwnerOnlyAndWifiPermission(contextInfo);
+        ContextInfo enforceOwnerOnlyAndWifiPermission =
+                enforceOwnerOnlyAndWifiPermission(contextInfo);
         if (str == null) {
             return false;
         }
@@ -1967,7 +2590,12 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         this.mEdmStorageProvider.putString(i, 0, "WIFI", "blockedSSIDList", sb.toString());
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            AuditLog.logEventAsUser(UserHandle.getUserId(enforceOwnerOnlyAndWifiPermission.mCallerUid), 60, new Object[]{Integer.valueOf(enforceOwnerOnlyAndWifiPermission.mCallerUid), str});
+            AuditLog.logEventAsUser(
+                    UserHandle.getUserId(enforceOwnerOnlyAndWifiPermission.mCallerUid),
+                    60,
+                    new Object[] {
+                        Integer.valueOf(enforceOwnerOnlyAndWifiPermission.mCallerUid), str
+                    });
             Binder.restoreCallingIdentity(clearCallingIdentity);
             return true;
         } catch (Throwable th) {
@@ -1991,7 +2619,11 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         if (removeDoubleQuotes == null) {
             return false;
         }
-        int adminByField = UserHandle.getAppId(Binder.getCallingUid()) != 1000 ? enforceOwnerOnlyAndWifiPermission(contextInfo).mCallerUid : this.mEdmStorageProvider.getAdminByField("WIFI_CONF", "networkSSID", removeDoubleQuotes);
+        int adminByField =
+                UserHandle.getAppId(Binder.getCallingUid()) != 1000
+                        ? enforceOwnerOnlyAndWifiPermission(contextInfo).mCallerUid
+                        : this.mEdmStorageProvider.getAdminByField(
+                                "WIFI_CONF", "networkSSID", removeDoubleQuotes);
         if (adminByField == -1) {
             Log.d("WifiPolicyService", "No admin found for the given SSID");
         }
@@ -2003,22 +2635,29 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            WifiConfiguration networkConfiguration = getNetworkConfiguration(adminByField, removeDoubleQuotes);
+            WifiConfiguration networkConfiguration =
+                    getNetworkConfiguration(adminByField, removeDoubleQuotes);
             if (networkConfiguration != null && networkConfiguration.SSID != null) {
-                boolean removeNetworkConfigurationMDM = removeNetworkConfigurationMDM(adminByField, removeDoubleQuotes);
+                boolean removeNetworkConfigurationMDM =
+                        removeNetworkConfigurationMDM(adminByField, removeDoubleQuotes);
                 if (!removeNetworkConfigurationMDM) {
                     Log.i("WifiPolicyService", "Could not remove network from database");
                     return false;
                 }
-                String[] caCertificateAliases = networkConfiguration.enterpriseConfig.getCaCertificateAliases();
+                String[] caCertificateAliases =
+                        networkConfiguration.enterpriseConfig.getCaCertificateAliases();
                 boolean z3 = true;
-                if (caCertificateAliases == null || caCertificateAliases.length <= 0 || TextUtils.isEmpty(caCertificateAliases[0])) {
+                if (caCertificateAliases == null
+                        || caCertificateAliases.length <= 0
+                        || TextUtils.isEmpty(caCertificateAliases[0])) {
                     z = false;
                 } else {
-                    networkConfiguration.enterpriseConfig.setCaCertificateAliases(new String[]{""});
+                    networkConfiguration.enterpriseConfig.setCaCertificateAliases(
+                            new String[] {""});
                     z = true;
                 }
-                if (TextUtils.isEmpty(networkConfiguration.enterpriseConfig.getClientCertificateAlias())) {
+                if (TextUtils.isEmpty(
+                        networkConfiguration.enterpriseConfig.getClientCertificateAlias())) {
                     z3 = z;
                 } else {
                     networkConfiguration.enterpriseConfig.setClientCertificateAlias("");
@@ -2030,11 +2669,18 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
                     }
                     this.mWifiAdapter.getClass();
                     try {
-                        z2 = WifiManagerAdapter.mWifiManager.removeNetwork(networkConfiguration.networkId);
+                        z2 =
+                                WifiManagerAdapter.mWifiManager.removeNetwork(
+                                        networkConfiguration.networkId);
                     } catch (Exception unused) {
                         Log.e("WifiManagerAdapter", "forget - failed to get wifi service");
                     }
-                    Log.i("WifiPolicyService", "Removing network id " + networkConfiguration.networkId + ", ret = " + z2);
+                    Log.i(
+                            "WifiPolicyService",
+                            "Removing network id "
+                                    + networkConfiguration.networkId
+                                    + ", ret = "
+                                    + z2);
                     removeNetworkConfigurationMDM = z2;
                 }
                 return removeNetworkConfigurationMDM;
@@ -2047,9 +2693,12 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
     }
 
     public final boolean removeNetworkConfigurationMDM(int i, String str) {
-        boolean removeByAdminAndField = this.mEdmStorageProvider.removeByAdminAndField(i, "WIFI_CONF", "networkSSID", str);
+        boolean removeByAdminAndField =
+                this.mEdmStorageProvider.removeByAdminAndField(i, "WIFI_CONF", "networkSSID", str);
         if (removeByAdminAndField) {
-            this.mEdmStorageProvider.delete("WifiProxyAuthTable", AccountManagerService$$ExternalSyntheticOutline0.m("networkSSID", str));
+            this.mEdmStorageProvider.delete(
+                    "WifiProxyAuthTable",
+                    AccountManagerService$$ExternalSyntheticOutline0.m("networkSSID", str));
             ContentValues contentValues = new ContentValues();
             contentValues.put("networkSSID", str);
             this.mEdmStorageProvider.delete("WifiProxyTable", contentValues);
@@ -2063,11 +2712,14 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
     }
 
     public final boolean removeWifiSsidFromBlackList(ContextInfo contextInfo, List list) {
-        ContextInfo enforceOwnerOnlyAndWifiPermission = enforceOwnerOnlyAndWifiPermission(contextInfo);
+        ContextInfo enforceOwnerOnlyAndWifiPermission =
+                enforceOwnerOnlyAndWifiPermission(contextInfo);
         Pair callerInfoFromUid = getCallerInfoFromUid(enforceOwnerOnlyAndWifiPermission.mCallerUid);
         boolean z = false;
         if (callerInfoFromUid == null) {
-            Log.e("WifiPolicyService", "removeWifiSsidFromBlackList - not a valid caller, aborting!");
+            Log.e(
+                    "WifiPolicyService",
+                    "removeWifiSsidFromBlackList - not a valid caller, aborting!");
             return false;
         }
         List validateSSIDList = validateSSIDList(list);
@@ -2078,11 +2730,32 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
                 boolean z2 = true;
                 while (it.hasNext()) {
                     String str = (String) it.next();
-                    z2 = z2 && this.mEdmStorageProvider.deleteDataByFields("WIFI_SSID_BLACK_WHITE_LIST", new String[]{"adminUid", "WIFI_SSID", "WIFI_LIST_TYPE"}, new String[]{String.valueOf(enforceOwnerOnlyAndWifiPermission.mCallerUid), str, "BLACKLIST"});
+                    z2 =
+                            z2
+                                    && this.mEdmStorageProvider.deleteDataByFields(
+                                            "WIFI_SSID_BLACK_WHITE_LIST",
+                                            new String[] {
+                                                "adminUid", "WIFI_SSID", "WIFI_LIST_TYPE"
+                                            },
+                                            new String[] {
+                                                String.valueOf(
+                                                        enforceOwnerOnlyAndWifiPermission
+                                                                .mCallerUid),
+                                                str,
+                                                "BLACKLIST"
+                                            });
                     if (z2) {
                         long clearCallingIdentity = Binder.clearCallingIdentity();
                         try {
-                            AuditLog.logEventAsUser(UserHandle.getUserId(enforceOwnerOnlyAndWifiPermission.mCallerUid), 63, new Object[]{Integer.valueOf(enforceOwnerOnlyAndWifiPermission.mCallerUid), str});
+                            AuditLog.logEventAsUser(
+                                    UserHandle.getUserId(
+                                            enforceOwnerOnlyAndWifiPermission.mCallerUid),
+                                    63,
+                                    new Object[] {
+                                        Integer.valueOf(
+                                                enforceOwnerOnlyAndWifiPermission.mCallerUid),
+                                        str
+                                    });
                         } finally {
                             Binder.restoreCallingIdentity(clearCallingIdentity);
                         }
@@ -2091,8 +2764,21 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
                 if (!isWifiSsidRestrictionActive(enforceOwnerOnlyAndWifiPermission.mCallerUid)) {
                     return z2;
                 }
-                Log.i("WifiPolicyService", "removeWifiSsidFromBlackList - caller uid: " + callerInfoFromUid.first + ", enforced caller uid: " + enforceOwnerOnlyAndWifiPermission.mCallerUid + ", list size: " + arrayList.size());
-                if (z2 && setSsidAllowDenyList((ComponentName) callerInfoFromUid.second, UserHandle.getUserId(((Integer) callerInfoFromUid.first).intValue()), enforceOwnerOnlyAndWifiPermission.mCallerUid, true)) {
+                Log.i(
+                        "WifiPolicyService",
+                        "removeWifiSsidFromBlackList - caller uid: "
+                                + callerInfoFromUid.first
+                                + ", enforced caller uid: "
+                                + enforceOwnerOnlyAndWifiPermission.mCallerUid
+                                + ", list size: "
+                                + arrayList.size());
+                if (z2
+                        && setSsidAllowDenyList(
+                                (ComponentName) callerInfoFromUid.second,
+                                UserHandle.getUserId(
+                                        ((Integer) callerInfoFromUid.first).intValue()),
+                                enforceOwnerOnlyAndWifiPermission.mCallerUid,
+                                true)) {
                     z = true;
                 }
                 return z;
@@ -2103,11 +2789,14 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
     }
 
     public final boolean removeWifiSsidFromWhiteList(ContextInfo contextInfo, List list) {
-        ContextInfo enforceOwnerOnlyAndWifiPermission = enforceOwnerOnlyAndWifiPermission(contextInfo);
+        ContextInfo enforceOwnerOnlyAndWifiPermission =
+                enforceOwnerOnlyAndWifiPermission(contextInfo);
         Pair callerInfoFromUid = getCallerInfoFromUid(enforceOwnerOnlyAndWifiPermission.mCallerUid);
         boolean z = false;
         if (callerInfoFromUid == null) {
-            Log.e("WifiPolicyService", "removeWifiSsidFromWhiteList - not a valid caller, aborting!");
+            Log.e(
+                    "WifiPolicyService",
+                    "removeWifiSsidFromWhiteList - not a valid caller, aborting!");
             return false;
         }
         List validateSSIDList = validateSSIDList(list);
@@ -2118,11 +2807,32 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
                 boolean z2 = true;
                 while (it.hasNext()) {
                     String str = (String) it.next();
-                    z2 = z2 && this.mEdmStorageProvider.deleteDataByFields("WIFI_SSID_BLACK_WHITE_LIST", new String[]{"adminUid", "WIFI_SSID", "WIFI_LIST_TYPE"}, new String[]{String.valueOf(enforceOwnerOnlyAndWifiPermission.mCallerUid), str, "WHITELIST"});
+                    z2 =
+                            z2
+                                    && this.mEdmStorageProvider.deleteDataByFields(
+                                            "WIFI_SSID_BLACK_WHITE_LIST",
+                                            new String[] {
+                                                "adminUid", "WIFI_SSID", "WIFI_LIST_TYPE"
+                                            },
+                                            new String[] {
+                                                String.valueOf(
+                                                        enforceOwnerOnlyAndWifiPermission
+                                                                .mCallerUid),
+                                                str,
+                                                "WHITELIST"
+                                            });
                     if (z2) {
                         long clearCallingIdentity = Binder.clearCallingIdentity();
                         try {
-                            AuditLog.logEventAsUser(UserHandle.getUserId(enforceOwnerOnlyAndWifiPermission.mCallerUid), 66, new Object[]{Integer.valueOf(enforceOwnerOnlyAndWifiPermission.mCallerUid), str});
+                            AuditLog.logEventAsUser(
+                                    UserHandle.getUserId(
+                                            enforceOwnerOnlyAndWifiPermission.mCallerUid),
+                                    66,
+                                    new Object[] {
+                                        Integer.valueOf(
+                                                enforceOwnerOnlyAndWifiPermission.mCallerUid),
+                                        str
+                                    });
                         } finally {
                             Binder.restoreCallingIdentity(clearCallingIdentity);
                         }
@@ -2131,8 +2841,21 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
                 if (!isWifiSsidRestrictionActive(enforceOwnerOnlyAndWifiPermission.mCallerUid)) {
                     return z2;
                 }
-                Log.i("WifiPolicyService", "removeWifiSsidFromWhiteList - caller uid: " + callerInfoFromUid.first + ", enforced caller uid: " + enforceOwnerOnlyAndWifiPermission.mCallerUid + ", list size: " + arrayList.size());
-                if (z2 && setSsidAllowDenyList((ComponentName) callerInfoFromUid.second, UserHandle.getUserId(((Integer) callerInfoFromUid.first).intValue()), enforceOwnerOnlyAndWifiPermission.mCallerUid, true)) {
+                Log.i(
+                        "WifiPolicyService",
+                        "removeWifiSsidFromWhiteList - caller uid: "
+                                + callerInfoFromUid.first
+                                + ", enforced caller uid: "
+                                + enforceOwnerOnlyAndWifiPermission.mCallerUid
+                                + ", list size: "
+                                + arrayList.size());
+                if (z2
+                        && setSsidAllowDenyList(
+                                (ComponentName) callerInfoFromUid.second,
+                                UserHandle.getUserId(
+                                        ((Integer) callerInfoFromUid.first).intValue()),
+                                enforceOwnerOnlyAndWifiPermission.mCallerUid,
+                                true)) {
                     z = true;
                 }
                 return z;
@@ -2143,13 +2866,13 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:31:0x0080, code lost:
-    
-        r9 = "Cursor is null";
-     */
+
+       r9 = "Cursor is null";
+    */
     /* JADX WARN: Code restructure failed: missing block: B:45:0x009b, code lost:
-    
-        if (0 == 0) goto L30;
-     */
+
+       if (0 == 0) goto L30;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2252,7 +2975,9 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
             r9.<init>(r10)
             throw r9
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.wifi.WifiPolicy.resetAutomaticConnectionPolicy(int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.wifi.WifiPolicy.resetAutomaticConnectionPolicy(int):void");
     }
 
     public final int save(WifiConfiguration wifiConfiguration, int i) {
@@ -2260,10 +2985,18 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         Log.i("WifiPolicyService", "getNetworkCreatorInfo - START");
         if (i == -1) {
             String str = wifiConfiguration.SSID;
-            String makeString = makeString(wifiConfiguration.allowedKeyManagement, WifiConfiguration.KeyMgmt.strings);
+            String makeString =
+                    makeString(
+                            wifiConfiguration.allowedKeyManagement,
+                            WifiConfiguration.KeyMgmt.strings);
             Log.i("WifiPolicyService", "getNetworkUidFromDatabase - START");
             String[] strArr = {NetworkUtils.removeDoubleQuotes(str), makeString};
-            ArrayList dataByFields = this.mEdmStorageProvider.getDataByFields("WIFI_CONF", new String[]{"networkSSID", "networkKeyMgmt"}, strArr, new String[]{"adminUid"});
+            ArrayList dataByFields =
+                    this.mEdmStorageProvider.getDataByFields(
+                            "WIFI_CONF",
+                            new String[] {"networkSSID", "networkKeyMgmt"},
+                            strArr,
+                            new String[] {"adminUid"});
             if (dataByFields.isEmpty()) {
                 Log.e("WifiPolicyService", "getNetworkUidFromDatabase - cv is empty or null");
             } else {
@@ -2286,8 +3019,11 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         }
         int intValue = ((Integer) callerInfoFromUid.first).intValue();
         String packageName = ((ComponentName) callerInfoFromUid.second).getPackageName();
-        DevicePolicyManager devicePolicyManager = (DevicePolicyManager) this.mContext.getSystemService("device_policy");
-        if (devicePolicyManager == null || (!devicePolicyManager.isDeviceOwnerApp(packageName) && UserHandle.getUserId(intValue) == 0)) {
+        DevicePolicyManager devicePolicyManager =
+                (DevicePolicyManager) this.mContext.getSystemService("device_policy");
+        if (devicePolicyManager == null
+                || (!devicePolicyManager.isDeviceOwnerApp(packageName)
+                        && UserHandle.getUserId(intValue) == 0)) {
             intValue = 1000;
         }
         WifiManagerAdapter wifiManagerAdapter = this.mWifiAdapter;
@@ -2309,17 +3045,32 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
     public final void setAllowAutojoinGlobal(int i, String str, boolean z) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            WifiManagerAdapter.retrieveWifiManagerObjectWithAttributionSource(this.mContext, str, i).allowAutojoinGlobal(z);
-            Log.i("WifiPolicyService", "setAllowAutojoinGlobal - uid = " + i + ", packageName = " + str + ", allowAutojoin = " + z);
+            WifiManagerAdapter.retrieveWifiManagerObjectWithAttributionSource(this.mContext, str, i)
+                    .allowAutojoinGlobal(z);
+            Log.i(
+                    "WifiPolicyService",
+                    "setAllowAutojoinGlobal - uid = "
+                            + i
+                            + ", packageName = "
+                            + str
+                            + ", allowAutojoin = "
+                            + z);
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
     }
 
     public final boolean setAllowUserPolicyChanges(ContextInfo contextInfo, boolean z) {
-        ContextInfo enforceOwnerOnlyAndWifiPermission = enforceOwnerOnlyAndWifiPermission(contextInfo);
-        Log.i("WifiPolicyService", "setAllowUserPolicyChanges - caller uid: " + enforceOwnerOnlyAndWifiPermission.mCallerUid + ", enable: " + z);
-        return this.mEdmStorageProvider.putBoolean("WIFI", enforceOwnerOnlyAndWifiPermission.mCallerUid, z, 0, "allowUserChanges");
+        ContextInfo enforceOwnerOnlyAndWifiPermission =
+                enforceOwnerOnlyAndWifiPermission(contextInfo);
+        Log.i(
+                "WifiPolicyService",
+                "setAllowUserPolicyChanges - caller uid: "
+                        + enforceOwnerOnlyAndWifiPermission.mCallerUid
+                        + ", enable: "
+                        + z);
+        return this.mEdmStorageProvider.putBoolean(
+                "WIFI", enforceOwnerOnlyAndWifiPermission.mCallerUid, z, 0, "allowUserChanges");
     }
 
     public final boolean setAllowUserProfiles(ContextInfo contextInfo, boolean z) {
@@ -2327,19 +3078,41 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         if (this.mEDM == null) {
             this.mEDM = EnterpriseDeviceManager.getInstance(this.mContext);
         }
-        ContextInfo enforceActiveAdminPermissionByContext = this.mEDM.enforceActiveAdminPermissionByContext(contextInfo, new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_WIFI")));
-        int callingOrCurrentUserId = Utils.getCallingOrCurrentUserId(enforceActiveAdminPermissionByContext);
-        ((PersonaManagerAdapter) ((IPersonaManagerAdapter) AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class))).getClass();
+        ContextInfo enforceActiveAdminPermissionByContext =
+                this.mEDM.enforceActiveAdminPermissionByContext(
+                        contextInfo,
+                        new ArrayList(
+                                Arrays.asList("com.samsung.android.knox.permission.KNOX_WIFI")));
+        int callingOrCurrentUserId =
+                Utils.getCallingOrCurrentUserId(enforceActiveAdminPermissionByContext);
+        ((PersonaManagerAdapter)
+                        ((IPersonaManagerAdapter)
+                                AdapterRegistry.mAdapterHandles.get(IPersonaManagerAdapter.class)))
+                .getClass();
         if (SemPersonaManager.isKnoxId(callingOrCurrentUserId)) {
             return false;
         }
-        Log.i("WifiPolicyService", "setAllowUserProfiles - caller uid: " + enforceActiveAdminPermissionByContext.mCallerUid + ", enable: " + z);
-        boolean putBoolean = this.mEdmStorageProvider.putBoolean("WIFI", enforceActiveAdminPermissionByContext.mCallerUid, z, 0, "allowUserProfiles");
+        Log.i(
+                "WifiPolicyService",
+                "setAllowUserProfiles - caller uid: "
+                        + enforceActiveAdminPermissionByContext.mCallerUid
+                        + ", enable: "
+                        + z);
+        boolean putBoolean =
+                this.mEdmStorageProvider.putBoolean(
+                        "WIFI",
+                        enforceActiveAdminPermissionByContext.mCallerUid,
+                        z,
+                        0,
+                        "allowUserProfiles");
         if (!putBoolean) {
             Log.e("WifiPolicyService", "setAllowUserProfiles - fail to store value to database");
             return putBoolean;
         }
-        Iterator it = this.mEdmStorageProvider.getBooleanListAsUser(0, "WIFI", "allowUserProfiles").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getBooleanListAsUser(0, "WIFI", "allowUserProfiles")
+                        .iterator();
         while (true) {
             if (!it.hasNext()) {
                 z2 = true;
@@ -2355,18 +3128,32 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
     }
 
     public final boolean setAutomaticConnectionToWifi(ContextInfo contextInfo, boolean z) {
-        ContextInfo enforceOwnerOnlyAndWifiPermission = enforceOwnerOnlyAndWifiPermission(contextInfo);
+        ContextInfo enforceOwnerOnlyAndWifiPermission =
+                enforceOwnerOnlyAndWifiPermission(contextInfo);
         Pair callerInfoFromUid = getCallerInfoFromUid(enforceOwnerOnlyAndWifiPermission.mCallerUid);
         if (callerInfoFromUid == null) {
-            Log.e("WifiPolicyService", "setAutomaticConnectionToWifi - not a valid caller, aborting!");
+            Log.e(
+                    "WifiPolicyService",
+                    "setAutomaticConnectionToWifi - not a valid caller, aborting!");
             return false;
         }
-        boolean putBoolean = this.mEdmStorageProvider.putBoolean("WIFI", enforceOwnerOnlyAndWifiPermission.mCallerUid, z, 0, "allowAutomaticConnection");
+        boolean putBoolean =
+                this.mEdmStorageProvider.putBoolean(
+                        "WIFI",
+                        enforceOwnerOnlyAndWifiPermission.mCallerUid,
+                        z,
+                        0,
+                        "allowAutomaticConnection");
         if (putBoolean) {
-            setAllowAutojoinGlobal(((Integer) callerInfoFromUid.first).intValue(), ((ComponentName) callerInfoFromUid.second).getPackageName(), getAutomaticConnectionToWifi(null));
+            setAllowAutojoinGlobal(
+                    ((Integer) callerInfoFromUid.first).intValue(),
+                    ((ComponentName) callerInfoFromUid.second).getPackageName(),
+                    getAutomaticConnectionToWifi(null));
             return true;
         }
-        Log.e("WifiPolicyService", "setAutomaticConnectionToWifi - fail to store value to database");
+        Log.e(
+                "WifiPolicyService",
+                "setAutomaticConnectionToWifi - fail to store value to database");
         return putBoolean;
     }
 
@@ -2381,44 +3168,82 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
     }
 
     public final boolean setMinimumRequiredSecurity(ContextInfo contextInfo, int i) {
-        ContextInfo enforceOwnerOnlyAndWifiPermission = enforceOwnerOnlyAndWifiPermission(contextInfo);
+        ContextInfo enforceOwnerOnlyAndWifiPermission =
+                enforceOwnerOnlyAndWifiPermission(contextInfo);
         Pair callerInfoFromUid = getCallerInfoFromUid(enforceOwnerOnlyAndWifiPermission.mCallerUid);
         if (callerInfoFromUid == null) {
-            Log.e("WifiPolicyService", "setMinimumRequiredSecurity - not a valid caller, aborting!");
+            Log.e(
+                    "WifiPolicyService",
+                    "setMinimumRequiredSecurity - not a valid caller, aborting!");
             return false;
         }
         if (i < 0 || i > 31 || !isSecurityLevelSupported(ACCEPTABLE_SECURITY_LEVELS[i])) {
             Log.e("WifiPolicyService", "setMinimumRequiredSecurity - security level not supported");
             return false;
         }
-        boolean putInt = this.mEdmStorageProvider.putInt(enforceOwnerOnlyAndWifiPermission.mCallerUid, 0, i, "WIFI", "minimumRequiredSecurity");
+        boolean putInt =
+                this.mEdmStorageProvider.putInt(
+                        enforceOwnerOnlyAndWifiPermission.mCallerUid,
+                        0,
+                        i,
+                        "WIFI",
+                        "minimumRequiredSecurity");
         if (!putInt) {
-            Log.e("WifiPolicyService", "setMinimumRequiredSecurity - fail to store security type to database");
+            Log.e(
+                    "WifiPolicyService",
+                    "setMinimumRequiredSecurity - fail to store security type to database");
             return putInt;
         }
-        Log.i("WifiPolicyService", "setMinimumRequiredSecurity - caller uid: " + callerInfoFromUid.first + ", enforced caller uid: " + enforceOwnerOnlyAndWifiPermission.mCallerUid + ", secType: " + i);
-        setMinimumRequiredWifiSecurityLevel((ComponentName) callerInfoFromUid.second, UserHandle.getUserId(((Integer) callerInfoFromUid.first).intValue()), i);
+        Log.i(
+                "WifiPolicyService",
+                "setMinimumRequiredSecurity - caller uid: "
+                        + callerInfoFromUid.first
+                        + ", enforced caller uid: "
+                        + enforceOwnerOnlyAndWifiPermission.mCallerUid
+                        + ", secType: "
+                        + i);
+        setMinimumRequiredWifiSecurityLevel(
+                (ComponentName) callerInfoFromUid.second,
+                UserHandle.getUserId(((Integer) callerInfoFromUid.first).intValue()),
+                i);
         return true;
     }
 
     public final boolean setPasswordHidden(ContextInfo contextInfo, boolean z) {
-        ContextInfo enforceOwnerOnlyAndWifiPermission = enforceOwnerOnlyAndWifiPermission(contextInfo);
-        Log.i("WifiPolicyService", "setPasswordHidden - caller uid: " + enforceOwnerOnlyAndWifiPermission.mCallerUid + ", value: " + z);
-        return this.mEdmStorageProvider.putBoolean("WIFI", enforceOwnerOnlyAndWifiPermission.mCallerUid, z, 0, "passwordHidden");
+        ContextInfo enforceOwnerOnlyAndWifiPermission =
+                enforceOwnerOnlyAndWifiPermission(contextInfo);
+        Log.i(
+                "WifiPolicyService",
+                "setPasswordHidden - caller uid: "
+                        + enforceOwnerOnlyAndWifiPermission.mCallerUid
+                        + ", value: "
+                        + z);
+        return this.mEdmStorageProvider.putBoolean(
+                "WIFI", enforceOwnerOnlyAndWifiPermission.mCallerUid, z, 0, "passwordHidden");
     }
 
     public final boolean setPromptCredentialsEnabled(ContextInfo contextInfo, boolean z) {
-        ContextInfo enforceOwnerOnlyAndWifiPermission = enforceOwnerOnlyAndWifiPermission(contextInfo);
-        Log.i("WifiPolicyService", "setPromptCredentialsEnabled - caller uid: " + enforceOwnerOnlyAndWifiPermission.mCallerUid + ", enable: " + z);
-        return this.mEdmStorageProvider.putBoolean("WIFI", enforceOwnerOnlyAndWifiPermission.mCallerUid, z, 0, "promptCredentials");
+        ContextInfo enforceOwnerOnlyAndWifiPermission =
+                enforceOwnerOnlyAndWifiPermission(contextInfo);
+        Log.i(
+                "WifiPolicyService",
+                "setPromptCredentialsEnabled - caller uid: "
+                        + enforceOwnerOnlyAndWifiPermission.mCallerUid
+                        + ", enable: "
+                        + z);
+        return this.mEdmStorageProvider.putBoolean(
+                "WIFI", enforceOwnerOnlyAndWifiPermission.mCallerUid, z, 0, "promptCredentials");
     }
 
-    public final boolean setSsidAllowDenyList(ComponentName componentName, int i, int i2, boolean z) {
+    public final boolean setSsidAllowDenyList(
+            ComponentName componentName, int i, int i2, boolean z) {
         if (componentName == null) {
             Log.e("WifiPolicyService", "setSsidAllowDenyList - component name is null");
             return false;
         }
-        DevicePolicyManagerInternal devicePolicyManagerInternal = (DevicePolicyManagerInternal) LocalServices.getService(DevicePolicyManagerInternal.class);
+        DevicePolicyManagerInternal devicePolicyManagerInternal =
+                (DevicePolicyManagerInternal)
+                        LocalServices.getService(DevicePolicyManagerInternal.class);
         if (devicePolicyManagerInternal == null) {
             Log.e("WifiPolicyService", "setSsidAllowDenyList - fail to retrieve dpmi object");
             return false;
@@ -2433,7 +3258,9 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
                     ArraySet arraySet = new ArraySet();
                     Iterator it = set.iterator();
                     while (it.hasNext()) {
-                        arraySet.add(WifiSsid.fromBytes(((String) it.next()).getBytes(StandardCharsets.UTF_8)));
+                        arraySet.add(
+                                WifiSsid.fromBytes(
+                                        ((String) it.next()).getBytes(StandardCharsets.UTF_8)));
                     }
                     wifiSsidPolicy = new WifiSsidPolicy(0, arraySet);
                 }
@@ -2445,14 +3272,26 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
                 sb.append(", enforced caller uid: ");
                 UiModeManagerService$13$$ExternalSyntheticOutline0.m(sb, i2, "WifiPolicyService");
             } else if (set2.isEmpty()) {
-                devicePolicyManagerInternal.setWifiSsidPolicy(componentName, (WifiSsidPolicy) null, i);
-                Log.i("WifiPolicyService", "setWifiSsidPolicy(null) - who: " + componentName + ", userId: " + i + ", enforced caller uid: " + i2 + ", ssid restriction is activated but there is no allow/deny list in database");
+                devicePolicyManagerInternal.setWifiSsidPolicy(
+                        componentName, (WifiSsidPolicy) null, i);
+                Log.i(
+                        "WifiPolicyService",
+                        "setWifiSsidPolicy(null) - who: "
+                                + componentName
+                                + ", userId: "
+                                + i
+                                + ", enforced caller uid: "
+                                + i2
+                                + ", ssid restriction is activated but there is no allow/deny list"
+                                + " in database");
             } else {
                 if (!set2.contains("*")) {
                     ArraySet arraySet2 = new ArraySet();
                     Iterator it2 = set2.iterator();
                     while (it2.hasNext()) {
-                        arraySet2.add(WifiSsid.fromBytes(((String) it2.next()).getBytes(StandardCharsets.UTF_8)));
+                        arraySet2.add(
+                                WifiSsid.fromBytes(
+                                        ((String) it2.next()).getBytes(StandardCharsets.UTF_8)));
                     }
                     wifiSsidPolicy = new WifiSsidPolicy(1, arraySet2);
                 }
@@ -2466,20 +3305,38 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
             }
         } else {
             devicePolicyManagerInternal.setWifiSsidPolicy(componentName, (WifiSsidPolicy) null, i);
-            Log.i("WifiPolicyService", "setWifiSsidPolicy(null) - who: " + componentName + ", userId: " + i + ", enforced caller uid: " + i2 + ", ssid restriction is not activated");
+            Log.i(
+                    "WifiPolicyService",
+                    "setWifiSsidPolicy(null) - who: "
+                            + componentName
+                            + ", userId: "
+                            + i
+                            + ", enforced caller uid: "
+                            + i2
+                            + ", ssid restriction is not activated");
         }
         return true;
     }
 
     public final boolean setWifi(ContextInfo contextInfo, boolean z) {
-        ContextInfo enforceOwnerOnlyAndWifiPermission = enforceOwnerOnlyAndWifiPermission(contextInfo);
-        if (Utils.isEthernetOnlyApplied(this.mEdmStorageProvider) && Utils.isDexActivated(this.mContext) && Utils.getAdminUidForEthernetOnly(this.mEdmStorageProvider) == enforceOwnerOnlyAndWifiPermission.mCallerUid) {
+        ContextInfo enforceOwnerOnlyAndWifiPermission =
+                enforceOwnerOnlyAndWifiPermission(contextInfo);
+        if (Utils.isEthernetOnlyApplied(this.mEdmStorageProvider)
+                && Utils.isDexActivated(this.mContext)
+                && Utils.getAdminUidForEthernetOnly(this.mEdmStorageProvider)
+                        == enforceOwnerOnlyAndWifiPermission.mCallerUid) {
             Log.d("WifiPolicyService", "failed to setwifi due to Ethernet only mode");
             return false;
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            boolean putBoolean = this.mEdmStorageProvider.putBoolean("WIFI", enforceOwnerOnlyAndWifiPermission.mCallerUid, z, 0, "allowWifi");
+            boolean putBoolean =
+                    this.mEdmStorageProvider.putBoolean(
+                            "WIFI",
+                            enforceOwnerOnlyAndWifiPermission.mCallerUid,
+                            z,
+                            0,
+                            "allowWifi");
             boolean isWifiAllowed = isWifiAllowed(enforceOwnerOnlyAndWifiPermission, false);
             if (z && isWifiAllowed) {
                 this.mWifiManager.setWifiEnabled(true);
@@ -2487,7 +3344,8 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
                 this.mWifiManager.setWifiEnabled(false);
             }
             Binder.restoreCallingIdentity(clearCallingIdentity);
-            int callingOrCurrentUserId = Utils.getCallingOrCurrentUserId(enforceOwnerOnlyAndWifiPermission);
+            int callingOrCurrentUserId =
+                    Utils.getCallingOrCurrentUserId(enforceOwnerOnlyAndWifiPermission);
             if (putBoolean && callingOrCurrentUserId == 0) {
                 setWifiAllowedSystemUI(callingOrCurrentUserId, isWifiAllowed);
             }
@@ -2501,12 +3359,21 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
     public final boolean setWifiAllowed(ContextInfo contextInfo, boolean z) {
         boolean z2;
         long clearCallingIdentity;
-        ContextInfo enforceOwnerOnlyAndWifiPermission = enforceOwnerOnlyAndWifiPermission(contextInfo);
-        Log.i("WifiPolicyService", "setWifiAllowed - caller uid: " + enforceOwnerOnlyAndWifiPermission.mCallerUid + ", enable: " + z);
+        ContextInfo enforceOwnerOnlyAndWifiPermission =
+                enforceOwnerOnlyAndWifiPermission(contextInfo);
+        Log.i(
+                "WifiPolicyService",
+                "setWifiAllowed - caller uid: "
+                        + enforceOwnerOnlyAndWifiPermission.mCallerUid
+                        + ", enable: "
+                        + z);
         if (!isWifiStateChangeAllowed(null)) {
             return false;
         }
-        if (Utils.isEthernetOnlyApplied(this.mEdmStorageProvider) && Utils.isDexActivated(this.mContext) && Utils.getAdminUidForEthernetOnly(this.mEdmStorageProvider) == enforceOwnerOnlyAndWifiPermission.mCallerUid) {
+        if (Utils.isEthernetOnlyApplied(this.mEdmStorageProvider)
+                && Utils.isDexActivated(this.mContext)
+                && Utils.getAdminUidForEthernetOnly(this.mEdmStorageProvider)
+                        == enforceOwnerOnlyAndWifiPermission.mCallerUid) {
             Log.d("WifiPolicyService", "failed to setWifiAllowed due to Ethernet only mode");
             return false;
         }
@@ -2515,7 +3382,13 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         } else {
             if (this.mWifiManager == null) {
                 Log.i("WifiPolicyService", "setWifiAllowed - mWifiManager = null");
-                boolean putBoolean = this.mEdmStorageProvider.putBoolean("WIFI", enforceOwnerOnlyAndWifiPermission.mCallerUid, z, 0, "allowWifi");
+                boolean putBoolean =
+                        this.mEdmStorageProvider.putBoolean(
+                                "WIFI",
+                                enforceOwnerOnlyAndWifiPermission.mCallerUid,
+                                z,
+                                0,
+                                "allowWifi");
                 if (putBoolean) {
                     setChangeWifiStateUserRestriction(!isWifiAllowed(null, false));
                     return true;
@@ -2531,19 +3404,35 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
             } finally {
             }
         }
-        boolean putBoolean2 = this.mEdmStorageProvider.putBoolean("WIFI", enforceOwnerOnlyAndWifiPermission.mCallerUid, z, 0, "allowWifi") & z2;
+        boolean putBoolean2 =
+                this.mEdmStorageProvider.putBoolean(
+                                "WIFI",
+                                enforceOwnerOnlyAndWifiPermission.mCallerUid,
+                                z,
+                                0,
+                                "allowWifi")
+                        & z2;
         if (!putBoolean2) {
             Log.e("WifiPolicyService", "setWifiAllowed - fail to store value to database");
             return putBoolean2;
         }
         clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            AuditLog.logEventAsUser(UserHandle.getUserId(enforceOwnerOnlyAndWifiPermission.mCallerUid), 61, new Object[]{Integer.valueOf(enforceOwnerOnlyAndWifiPermission.mCallerUid), Boolean.valueOf(z)});
+            AuditLog.logEventAsUser(
+                    UserHandle.getUserId(enforceOwnerOnlyAndWifiPermission.mCallerUid),
+                    61,
+                    new Object[] {
+                        Integer.valueOf(enforceOwnerOnlyAndWifiPermission.mCallerUid),
+                        Boolean.valueOf(z)
+                    });
             Binder.restoreCallingIdentity(clearCallingIdentity);
             setChangeWifiStateUserRestriction(!isWifiAllowed(null, false));
-            int callingOrCurrentUserId = Utils.getCallingOrCurrentUserId(enforceOwnerOnlyAndWifiPermission);
+            int callingOrCurrentUserId =
+                    Utils.getCallingOrCurrentUserId(enforceOwnerOnlyAndWifiPermission);
             if (callingOrCurrentUserId == 0) {
-                setWifiAllowedSystemUI(callingOrCurrentUserId, isWifiAllowed(enforceOwnerOnlyAndWifiPermission, false));
+                setWifiAllowedSystemUI(
+                        callingOrCurrentUserId,
+                        isWifiAllowed(enforceOwnerOnlyAndWifiPermission, false));
             }
             return true;
         } finally {
@@ -2563,7 +3452,8 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         }
     }
 
-    public final boolean setWifiApSetting(ContextInfo contextInfo, String str, String str2, String str3) {
+    public final boolean setWifiApSetting(
+            ContextInfo contextInfo, String str, String str2, String str3) {
         enforceOwnerOnlyAndWifiPermission(contextInfo);
         Log.i("WifiPolicyService", "setWifiApSetting");
         if (TextUtils.isEmpty(str)) {
@@ -2590,15 +3480,20 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
             Log.e("WifiPolicyService", "Security Type (" + str2 + ") is not valid");
             return false;
         }
-        if ((str2.equals("WPA2_PSK") || str2.equals("SAE")) && (str3 == null || str3.length() < 8 || str3.length() > 63)) {
-            Log.e("WifiPolicyService", "Password does not meet requirements for " + str2 + " security type");
+        if ((str2.equals("WPA2_PSK") || str2.equals("SAE"))
+                && (str3 == null || str3.length() < 8 || str3.length() > 63)) {
+            Log.e(
+                    "WifiPolicyService",
+                    "Password does not meet requirements for " + str2 + " security type");
             return false;
         }
         this.mIsAPSettingFromAdmin = true;
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mWifiAdapter.getClass();
-            SoftApConfiguration.Builder builder = new SoftApConfiguration.Builder(WifiManagerAdapter.mSemWifiManager.getSoftApConfiguration());
+            SoftApConfiguration.Builder builder =
+                    new SoftApConfiguration.Builder(
+                            WifiManagerAdapter.mSemWifiManager.getSoftApConfiguration());
             builder.setSsid(str);
             builder.setHiddenSsid(false);
             if (str2.equals("WPA2_PSK")) {
@@ -2608,7 +3503,9 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
             } else {
                 builder.setPassphrase((String) null, 0);
             }
-            int i = Settings.Secure.getInt(this.mContext.getContentResolver(), "wifi_ap_last_2g_channel", 0);
+            int i =
+                    Settings.Secure.getInt(
+                            this.mContext.getContentResolver(), "wifi_ap_last_2g_channel", 0);
             if (i == 0) {
                 builder.setBand(1);
             } else {
@@ -2629,12 +3526,18 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
                 this.mWifiAdapter.getClass();
                 WifiManagerAdapter.mSemWifiManager.resetSoftAp(new Message());
             }
-            ApplicationRestrictionsManager applicationRestrictionsManager = ApplicationRestrictionsManager.getInstance(this.mContext);
-            if (applicationRestrictionsManager != null && !applicationRestrictionsManager.isSettingPolicyApplied()) {
+            ApplicationRestrictionsManager applicationRestrictionsManager =
+                    ApplicationRestrictionsManager.getInstance(this.mContext);
+            if (applicationRestrictionsManager != null
+                    && !applicationRestrictionsManager.isSettingPolicyApplied()) {
                 if (this.mAppPolicy == null) {
-                    this.mAppPolicy = (ApplicationPolicy) EnterpriseService.getPolicyService("application_policy");
+                    this.mAppPolicy =
+                            (ApplicationPolicy)
+                                    EnterpriseService.getPolicyService("application_policy");
                 }
-                this.mAppPolicy.stopApp(new ContextInfo(Binder.getCallingUid()), KnoxCustomManagerService.SETTING_PKG_NAME);
+                this.mAppPolicy.stopApp(
+                        new ContextInfo(Binder.getCallingUid()),
+                        KnoxCustomManagerService.SETTING_PKG_NAME);
             }
             Binder.restoreCallingIdentity(clearCallingIdentity);
             this.mIsAPSettingFromAdmin = false;
@@ -2670,30 +3573,58 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean setWifiProfile(com.samsung.android.knox.ContextInfo r29, com.samsung.android.knox.net.wifi.WifiAdminProfile r30) {
+    public final boolean setWifiProfile(
+            com.samsung.android.knox.ContextInfo r29,
+            com.samsung.android.knox.net.wifi.WifiAdminProfile r30) {
         /*
             Method dump skipped, instructions count: 3081
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.wifi.WifiPolicy.setWifiProfile(com.samsung.android.knox.ContextInfo, com.samsung.android.knox.net.wifi.WifiAdminProfile):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.wifi.WifiPolicy.setWifiProfile(com.samsung.android.knox.ContextInfo,"
+                    + " com.samsung.android.knox.net.wifi.WifiAdminProfile):boolean");
     }
 
     public final boolean setWifiStateChangeAllowed(ContextInfo contextInfo, boolean z) {
-        ContextInfo enforceOwnerOnlyAndWifiPermission = enforceOwnerOnlyAndWifiPermission(contextInfo);
-        Log.i("WifiPolicyService", "setWifiStateChangeAllowed - caller uid: " + enforceOwnerOnlyAndWifiPermission.mCallerUid + ", allow: " + z);
-        boolean putBoolean = this.mEdmStorageProvider.putBoolean("WIFI", enforceOwnerOnlyAndWifiPermission.mCallerUid, z, 0, "allowWifiStateChanges");
+        ContextInfo enforceOwnerOnlyAndWifiPermission =
+                enforceOwnerOnlyAndWifiPermission(contextInfo);
+        Log.i(
+                "WifiPolicyService",
+                "setWifiStateChangeAllowed - caller uid: "
+                        + enforceOwnerOnlyAndWifiPermission.mCallerUid
+                        + ", allow: "
+                        + z);
+        boolean putBoolean =
+                this.mEdmStorageProvider.putBoolean(
+                        "WIFI",
+                        enforceOwnerOnlyAndWifiPermission.mCallerUid,
+                        z,
+                        0,
+                        "allowWifiStateChanges");
         if (!putBoolean) {
-            Log.e("WifiPolicyService", "setWifiStateChangeAllowed - fail to store value to database");
+            Log.e(
+                    "WifiPolicyService",
+                    "setWifiStateChangeAllowed - fail to store value to database");
             return putBoolean;
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            AuditLog.logEventAsUser(UserHandle.getUserId(enforceOwnerOnlyAndWifiPermission.mCallerUid), 69, new Object[]{Integer.valueOf(enforceOwnerOnlyAndWifiPermission.mCallerUid), Boolean.valueOf(z)});
+            AuditLog.logEventAsUser(
+                    UserHandle.getUserId(enforceOwnerOnlyAndWifiPermission.mCallerUid),
+                    69,
+                    new Object[] {
+                        Integer.valueOf(enforceOwnerOnlyAndWifiPermission.mCallerUid),
+                        Boolean.valueOf(z)
+                    });
             Binder.restoreCallingIdentity(clearCallingIdentity);
             setChangeWifiStateUserRestriction(!isWifiStateChangeAllowed(null));
-            int callingOrCurrentUserId = Utils.getCallingOrCurrentUserId(enforceOwnerOnlyAndWifiPermission);
+            int callingOrCurrentUserId =
+                    Utils.getCallingOrCurrentUserId(enforceOwnerOnlyAndWifiPermission);
             if (callingOrCurrentUserId == 0) {
-                setWifiStateChangeAllowedSystemUI(callingOrCurrentUserId, isWifiStateChangeAllowed(enforceOwnerOnlyAndWifiPermission));
+                setWifiStateChangeAllowedSystemUI(
+                        callingOrCurrentUserId,
+                        isWifiStateChangeAllowed(enforceOwnerOnlyAndWifiPermission));
             }
             return true;
         } catch (Throwable th) {
@@ -2716,29 +3647,29 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:106:0x021d, code lost:
-    
-        if (r5 == null) goto L120;
-     */
+
+       if (r5 == null) goto L120;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:123:0x027b, code lost:
-    
-        if (r3 == null) goto L112;
-     */
+
+       if (r3 == null) goto L112;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:124:0x027d, code lost:
-    
-        r3.close();
-     */
+
+       r3.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:125:0x0280, code lost:
-    
-        updateWifiMigrationFlag("wifi_policy_migration");
-     */
+
+       updateWifiMigrationFlag("wifi_policy_migration");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:130:0x028e, code lost:
-    
-        if (r3 == null) goto L112;
-     */
+
+       if (r3 == null) goto L112;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:55:0x020c, code lost:
-    
-        if (r5 != null) goto L81;
-     */
+
+       if (r5 != null) goto L81;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:111:0x0222  */
     /* JADX WARN: Removed duplicated region for block: B:144:0x02ef  */
@@ -2760,7 +3691,9 @@ public final class WifiPolicy extends IWifiPolicy.Stub implements EnterpriseServ
             Method dump skipped, instructions count: 760
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.wifi.WifiPolicy.systemReady():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.wifi.WifiPolicy.systemReady():void");
     }
 
     public final void updateWifiMigrationFlag(String str) {

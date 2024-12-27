@@ -2,6 +2,7 @@ package com.samsung.android.sume.core.format;
 
 import android.graphics.Rect;
 import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -13,8 +14,7 @@ public interface Shape extends Serializable, Parcelable, Copyable<Shape>, Compar
     public static final int TYPE_NWHC = 1;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Type {
-    }
+    public @interface Type {}
 
     int getBatch();
 

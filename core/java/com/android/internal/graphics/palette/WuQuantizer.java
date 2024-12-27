@@ -2,7 +2,7 @@ package com.android.internal.graphics.palette;
 
 import android.graphics.Color;
 import android.hardware.scontext.SContextConstants;
-import com.android.internal.graphics.palette.Palette;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -84,7 +84,9 @@ public final class WuQuantizer implements Quantizer {
         wuQuantizer.mMomentsG = new int[TOTAL_SIZE];
         wuQuantizer.mMomentsB = new int[TOTAL_SIZE];
         wuQuantizer.mMoments = new double[TOTAL_SIZE];
-        for (Iterator<Map.Entry<Integer, Integer>> it = pixels.entrySet().iterator(); it.hasNext(); it = it) {
+        for (Iterator<Map.Entry<Integer, Integer>> it = pixels.entrySet().iterator();
+                it.hasNext();
+                it = it) {
             Map.Entry<Integer, Integer> pair = it.next();
             int pixel = pair.getKey().intValue();
             int count = pair.getValue().intValue();
@@ -175,7 +177,8 @@ public final class WuQuantizer implements Quantizer {
         int i2 = 1;
         while (i2 < maxColorCount) {
             if (cut(this.mCubes[next], this.mCubes[i2])) {
-                volumeVariance[next] = this.mCubes[next].vol > 1 ? variance(this.mCubes[next]) : 0.0d;
+                volumeVariance[next] =
+                        this.mCubes[next].vol > 1 ? variance(this.mCubes[next]) : 0.0d;
                 volumeVariance[i2] = this.mCubes[i2].vol > 1 ? variance(this.mCubes[i2]) : 0.0d;
             } else {
                 volumeVariance[next] = 0.0d;
@@ -222,7 +225,25 @@ public final class WuQuantizer implements Quantizer {
         int dr = volume(cube, this.mMomentsR);
         int dg = volume(cube, this.mMomentsG);
         int db = volume(cube, this.mMomentsB);
-        double xx = ((((((this.mMoments[getIndex(cube.r1, cube.g1, cube.b1)] - this.mMoments[getIndex(cube.r1, cube.g1, cube.b0)]) - this.mMoments[getIndex(cube.r1, cube.g0, cube.b1)]) + this.mMoments[getIndex(cube.r1, cube.g0, cube.b0)]) - this.mMoments[getIndex(cube.r0, cube.g1, cube.b1)]) + this.mMoments[getIndex(cube.r0, cube.g1, cube.b0)]) + this.mMoments[getIndex(cube.r0, cube.g0, cube.b1)]) - this.mMoments[getIndex(cube.r0, cube.g0, cube.b0)];
+        double xx =
+                ((((((this.mMoments[getIndex(cube.r1, cube.g1, cube.b1)]
+                                                                        - this.mMoments[
+                                                                                getIndex(
+                                                                                        cube.r1,
+                                                                                        cube.g1,
+                                                                                        cube.b0)])
+                                                                - this.mMoments[
+                                                                        getIndex(
+                                                                                cube.r1, cube.g0,
+                                                                                cube.b1)])
+                                                        + this.mMoments[
+                                                                getIndex(
+                                                                        cube.r1, cube.g0, cube.b0)])
+                                                - this.mMoments[
+                                                        getIndex(cube.r0, cube.g1, cube.b1)])
+                                        + this.mMoments[getIndex(cube.r0, cube.g1, cube.b0)])
+                                + this.mMoments[getIndex(cube.r0, cube.g0, cube.b1)])
+                        - this.mMoments[getIndex(cube.r0, cube.g0, cube.b0)];
         int hypotenuse = (dr * dr) + (dg * dg) + (db * db);
         int volume2 = volume(cube, this.mWeights);
         double variance2 = xx - (hypotenuse / volume2);
@@ -235,9 +256,12 @@ public final class WuQuantizer implements Quantizer {
         int wholeG = volume(one, this.mMomentsG);
         int wholeB = volume(one, this.mMomentsB);
         int wholeW = volume(one, this.mWeights);
-        MaximizeResult maxRResult = maximize(one, Direction.RED, one.r0 + 1, one.r1, wholeR, wholeG, wholeB, wholeW);
-        MaximizeResult maxGResult = maximize(one, Direction.GREEN, one.g0 + 1, one.g1, wholeR, wholeG, wholeB, wholeW);
-        MaximizeResult maxBResult = maximize(one, Direction.BLUE, one.b0 + 1, one.b1, wholeR, wholeG, wholeB, wholeW);
+        MaximizeResult maxRResult =
+                maximize(one, Direction.RED, one.r0 + 1, one.r1, wholeR, wholeG, wholeB, wholeW);
+        MaximizeResult maxGResult =
+                maximize(one, Direction.GREEN, one.g0 + 1, one.g1, wholeR, wholeG, wholeB, wholeW);
+        MaximizeResult maxBResult =
+                maximize(one, Direction.BLUE, one.b0 + 1, one.b1, wholeR, wholeG, wholeB, wholeW);
         double maxR = maxRResult.mMaximum;
         double maxG = maxGResult.mMaximum;
         double maxB = maxBResult.mMaximum;
@@ -283,7 +307,15 @@ public final class WuQuantizer implements Quantizer {
         return true;
     }
 
-    private MaximizeResult maximize(Box cube, Direction direction, int first, int last, int wholeR, int wholeG, int wholeB, int wholeW) {
+    private MaximizeResult maximize(
+            Box cube,
+            Direction direction,
+            int first,
+            int last,
+            int wholeR,
+            int wholeG,
+            int wholeB,
+            int wholeW) {
         int baseR;
         WuQuantizer wuQuantizer = this;
         Box box = cube;
@@ -312,7 +344,8 @@ public final class WuQuantizer implements Quantizer {
                 int halfB2 = wholeB - halfB;
                 int halfW2 = wholeW - halfW;
                 if (halfW2 != 0) {
-                    double tempNumerator2 = (halfR2 * halfR2) + (halfG2 * halfG2) + (halfB2 * halfB2);
+                    double tempNumerator2 =
+                            (halfR2 * halfR2) + (halfG2 * halfG2) + (halfB2 * halfB2);
                     double tempDenominator2 = halfW2;
                     double temp2 = temp + (tempNumerator2 / tempDenominator2);
                     if (temp2 > max) {
@@ -331,17 +364,38 @@ public final class WuQuantizer implements Quantizer {
     }
 
     private static int volume(Box cube, int[] moment) {
-        return ((((((moment[getIndex(cube.r1, cube.g1, cube.b1)] - moment[getIndex(cube.r1, cube.g1, cube.b0)]) - moment[getIndex(cube.r1, cube.g0, cube.b1)]) + moment[getIndex(cube.r1, cube.g0, cube.b0)]) - moment[getIndex(cube.r0, cube.g1, cube.b1)]) + moment[getIndex(cube.r0, cube.g1, cube.b0)]) + moment[getIndex(cube.r0, cube.g0, cube.b1)]) - moment[getIndex(cube.r0, cube.g0, cube.b0)];
+        return ((((((moment[getIndex(cube.r1, cube.g1, cube.b1)]
+                                                                - moment[
+                                                                        getIndex(
+                                                                                cube.r1, cube.g1,
+                                                                                cube.b0)])
+                                                        - moment[
+                                                                getIndex(
+                                                                        cube.r1, cube.g0, cube.b1)])
+                                                + moment[getIndex(cube.r1, cube.g0, cube.b0)])
+                                        - moment[getIndex(cube.r0, cube.g1, cube.b1)])
+                                + moment[getIndex(cube.r0, cube.g1, cube.b0)])
+                        + moment[getIndex(cube.r0, cube.g0, cube.b1)])
+                - moment[getIndex(cube.r0, cube.g0, cube.b0)];
     }
 
     private static int bottom(Box cube, Direction direction, int[] moment) {
         switch (direction) {
             case RED:
-                return (((-moment[getIndex(cube.r0, cube.g1, cube.b1)]) + moment[getIndex(cube.r0, cube.g1, cube.b0)]) + moment[getIndex(cube.r0, cube.g0, cube.b1)]) - moment[getIndex(cube.r0, cube.g0, cube.b0)];
+                return (((-moment[getIndex(cube.r0, cube.g1, cube.b1)])
+                                        + moment[getIndex(cube.r0, cube.g1, cube.b0)])
+                                + moment[getIndex(cube.r0, cube.g0, cube.b1)])
+                        - moment[getIndex(cube.r0, cube.g0, cube.b0)];
             case GREEN:
-                return (((-moment[getIndex(cube.r1, cube.g0, cube.b1)]) + moment[getIndex(cube.r1, cube.g0, cube.b0)]) + moment[getIndex(cube.r0, cube.g0, cube.b1)]) - moment[getIndex(cube.r0, cube.g0, cube.b0)];
+                return (((-moment[getIndex(cube.r1, cube.g0, cube.b1)])
+                                        + moment[getIndex(cube.r1, cube.g0, cube.b0)])
+                                + moment[getIndex(cube.r0, cube.g0, cube.b1)])
+                        - moment[getIndex(cube.r0, cube.g0, cube.b0)];
             case BLUE:
-                return (((-moment[getIndex(cube.r1, cube.g1, cube.b0)]) + moment[getIndex(cube.r1, cube.g0, cube.b0)]) + moment[getIndex(cube.r0, cube.g1, cube.b0)]) - moment[getIndex(cube.r0, cube.g0, cube.b0)];
+                return (((-moment[getIndex(cube.r1, cube.g1, cube.b0)])
+                                        + moment[getIndex(cube.r1, cube.g0, cube.b0)])
+                                + moment[getIndex(cube.r0, cube.g1, cube.b0)])
+                        - moment[getIndex(cube.r0, cube.g0, cube.b0)];
             default:
                 throw new IllegalArgumentException("unexpected direction " + direction);
         }
@@ -350,11 +404,20 @@ public final class WuQuantizer implements Quantizer {
     private static int top(Box cube, Direction direction, int position, int[] moment) {
         switch (direction) {
             case RED:
-                return ((moment[getIndex(position, cube.g1, cube.b1)] - moment[getIndex(position, cube.g1, cube.b0)]) - moment[getIndex(position, cube.g0, cube.b1)]) + moment[getIndex(position, cube.g0, cube.b0)];
+                return ((moment[getIndex(position, cube.g1, cube.b1)]
+                                        - moment[getIndex(position, cube.g1, cube.b0)])
+                                - moment[getIndex(position, cube.g0, cube.b1)])
+                        + moment[getIndex(position, cube.g0, cube.b0)];
             case GREEN:
-                return ((moment[getIndex(cube.r1, position, cube.b1)] - moment[getIndex(cube.r1, position, cube.b0)]) - moment[getIndex(cube.r0, position, cube.b1)]) + moment[getIndex(cube.r0, position, cube.b0)];
+                return ((moment[getIndex(cube.r1, position, cube.b1)]
+                                        - moment[getIndex(cube.r1, position, cube.b0)])
+                                - moment[getIndex(cube.r0, position, cube.b1)])
+                        + moment[getIndex(cube.r0, position, cube.b0)];
             case BLUE:
-                return ((moment[getIndex(cube.r1, cube.g1, position)] - moment[getIndex(cube.r1, cube.g0, position)]) - moment[getIndex(cube.r0, cube.g1, position)]) + moment[getIndex(cube.r0, cube.g0, position)];
+                return ((moment[getIndex(cube.r1, cube.g1, position)]
+                                        - moment[getIndex(cube.r1, cube.g0, position)])
+                                - moment[getIndex(cube.r0, cube.g1, position)])
+                        + moment[getIndex(cube.r0, cube.g0, position)];
             default:
                 throw new IllegalArgumentException("unexpected direction " + direction);
         }

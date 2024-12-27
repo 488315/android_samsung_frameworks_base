@@ -5,6 +5,7 @@ import android.content.res.XmlResourceParser;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.provider.ContactsContract;
 import android.util.SparseIntArray;
+
 import com.android.internal.R;
 import com.android.internal.telephony.cdma.sms.UserData;
 import com.android.internal.telephony.util.TelephonyUtils;
@@ -36,7 +37,9 @@ public class Sms7BitEncodingTranslator {
             return "";
         }
         ensure7BitTranslationTableLoaded();
-        if ((mTranslationTableCommon == null || mTranslationTableCommon.size() <= 0) && ((mTranslationTableGSM == null || mTranslationTableGSM.size() <= 0) && (mTranslationTableCDMA == null || mTranslationTableCDMA.size() <= 0))) {
+        if ((mTranslationTableCommon == null || mTranslationTableCommon.size() <= 0)
+                && ((mTranslationTableGSM == null || mTranslationTableGSM.size() <= 0)
+                        && (mTranslationTableCDMA == null || mTranslationTableCDMA.size() <= 0))) {
             return null;
         }
         char[] output = new char[size];
@@ -69,12 +72,25 @@ public class Sms7BitEncodingTranslator {
         }
         if (translation != -1) {
             if (DBG) {
-                Rlog.v(TAG, Integer.toHexString(c) + " (" + c + ") translated to " + Integer.toHexString(translation) + " (" + ((char) translation) + NavigationBarInflaterView.KEY_CODE_END);
+                Rlog.v(
+                        TAG,
+                        Integer.toHexString(c)
+                                + " ("
+                                + c
+                                + ") translated to "
+                                + Integer.toHexString(translation)
+                                + " ("
+                                + ((char) translation)
+                                + NavigationBarInflaterView.KEY_CODE_END);
             }
             return (char) translation;
         }
         if (DBG) {
-            Rlog.w(TAG, "No translation found for " + Integer.toHexString(c) + "! Replacing for empty space");
+            Rlog.w(
+                    TAG,
+                    "No translation found for "
+                            + Integer.toHexString(c)
+                            + "! Replacing for empty space");
             return ' ';
         }
         return ' ';
@@ -129,7 +145,10 @@ public class Sms7BitEncodingTranslator {
                         } else if (type.equals("cdma")) {
                             mTranslationTable = mTranslationTableCDMA;
                         } else {
-                            Rlog.e(TAG, "Error Parsing 7BitTranslationTable: found incorrect type" + type);
+                            Rlog.e(
+                                    TAG,
+                                    "Error Parsing 7BitTranslationTable: found incorrect type"
+                                            + type);
                         }
                     } else {
                         if (!XML_CHARACTOR_TAG.equals(tag) || mTranslationTable == null) {
@@ -141,7 +160,12 @@ public class Sms7BitEncodingTranslator {
                             Rlog.d(TAG, "Invalid translation table file format");
                         } else {
                             if (DBG) {
-                                Rlog.d(TAG, "Loading mapping " + Integer.toHexString(from).toUpperCase() + " -> " + Integer.toHexString(to).toUpperCase());
+                                Rlog.d(
+                                        TAG,
+                                        "Loading mapping "
+                                                + Integer.toHexString(from).toUpperCase()
+                                                + " -> "
+                                                + Integer.toHexString(to).toUpperCase());
                             }
                             mTranslationTable.put(from, to);
                         }

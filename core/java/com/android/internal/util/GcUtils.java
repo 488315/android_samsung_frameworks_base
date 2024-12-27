@@ -1,6 +1,7 @@
 package com.android.internal.util;
 
 import android.util.Slog;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -36,6 +37,5 @@ public final class GcUtils {
         };
     }
 
-    private GcUtils() {
-    }
+    private GcUtils() {}
 }

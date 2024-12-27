@@ -5,9 +5,11 @@ import com.samsung.android.sume.core.buffer.MutableMediaBuffer;
 
 /* loaded from: classes6.dex */
 public interface Operator {
-    MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer) throws UnsupportedOperationException;
+    MutableMediaBuffer run(MediaBuffer mediaBuffer, MutableMediaBuffer mutableMediaBuffer)
+            throws UnsupportedOperationException;
 
-    default MutableMediaBuffer run(MediaBuffer ibuf, MediaBuffer obuf) throws UnsupportedOperationException {
+    default MutableMediaBuffer run(MediaBuffer ibuf, MediaBuffer obuf)
+            throws UnsupportedOperationException {
         if (obuf instanceof MutableMediaBuffer) {
             return run(ibuf, (MutableMediaBuffer) obuf);
         }

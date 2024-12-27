@@ -1,6 +1,7 @@
 package android.media.tv.tuner.dvr;
 
 import android.annotation.SystemApi;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -18,10 +19,14 @@ public class DvrSettings {
     private final int mStatusMask;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DataFormat {
-    }
+    public @interface DataFormat {}
 
-    private DvrSettings(int statusMask, long lowThreshold, long highThreshold, long packetSize, int dataFormat) {
+    private DvrSettings(
+            int statusMask,
+            long lowThreshold,
+            long highThreshold,
+            long packetSize,
+            int dataFormat) {
         this.mStatusMask = statusMask;
         this.mLowThreshold = lowThreshold;
         this.mHighThreshold = highThreshold;
@@ -86,7 +91,12 @@ public class DvrSettings {
         }
 
         public DvrSettings build() {
-            return new DvrSettings(this.mStatusMask, this.mLowThreshold, this.mHighThreshold, this.mPacketSize, this.mDataFormat);
+            return new DvrSettings(
+                    this.mStatusMask,
+                    this.mLowThreshold,
+                    this.mHighThreshold,
+                    this.mPacketSize,
+                    this.mDataFormat);
         }
     }
 }

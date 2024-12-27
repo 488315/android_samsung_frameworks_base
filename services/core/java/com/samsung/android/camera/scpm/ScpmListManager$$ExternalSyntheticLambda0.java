@@ -1,6 +1,5 @@
 package com.samsung.android.camera.scpm;
 
-import com.samsung.android.camera.scpm.ScpmList;
 import java.util.function.Predicate;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -9,7 +8,8 @@ public final /* synthetic */ class ScpmListManager$$ExternalSyntheticLambda0 imp
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ ScpmList.PolicyType f$0;
 
-    public /* synthetic */ ScpmListManager$$ExternalSyntheticLambda0(int i, ScpmList.PolicyType policyType) {
+    public /* synthetic */ ScpmListManager$$ExternalSyntheticLambda0(
+            int i, ScpmList.PolicyType policyType) {
         this.$r8$classId = i;
         this.f$0 = policyType;
     }

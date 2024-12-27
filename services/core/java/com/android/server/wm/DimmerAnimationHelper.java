@@ -4,8 +4,9 @@ import android.os.Debug;
 import android.util.Log;
 import android.util.proto.ProtoOutputStream;
 import android.view.SurfaceControl;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
-import com.android.server.wm.LocalAnimationAdapter;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -18,8 +19,7 @@ public final class DimmerAnimationHelper {
     public final Change mRequestedProperties = new Change();
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class AnimationAdapterFactory {
-    }
+    public final class AnimationAdapterFactory {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AnimationSpec implements LocalAnimationAdapter.AnimationSpec {
@@ -45,14 +45,16 @@ public final class DimmerAnimationHelper {
             }
         }
 
-        public AnimationSpec(AnimationExtremes animationExtremes, AnimationExtremes animationExtremes2, long j) {
+        public AnimationSpec(
+                AnimationExtremes animationExtremes, AnimationExtremes animationExtremes2, long j) {
             this.mAlpha = animationExtremes;
             this.mBlur = animationExtremes2;
             this.mDuration = j;
         }
 
         @Override // com.android.server.wm.LocalAnimationAdapter.AnimationSpec
-        public final void apply(SurfaceControl.Transaction transaction, SurfaceControl surfaceControl, long j) {
+        public final void apply(
+                SurfaceControl.Transaction transaction, SurfaceControl surfaceControl, long j) {
             if (!this.mStarted) {
                 this.mStarted = true;
                 return;
@@ -61,20 +63,31 @@ public final class DimmerAnimationHelper {
             AnimationExtremes animationExtremes = this.mAlpha;
             float floatValue = ((Float) animationExtremes.mFinishValue).floatValue();
             Object obj = animationExtremes.mStartValue;
-            this.mCurrentAlpha = ((Float) obj).floatValue() + ((floatValue - ((Float) obj).floatValue()) * fraction);
+            this.mCurrentAlpha =
+                    ((Float) obj).floatValue()
+                            + ((floatValue - ((Float) obj).floatValue()) * fraction);
             AnimationExtremes animationExtremes2 = this.mBlur;
             int intValue = ((Integer) animationExtremes2.mFinishValue).intValue();
             Object obj2 = animationExtremes2.mStartValue;
-            this.mCurrentBlur = ((Integer) obj2).intValue() + ((intValue - ((Integer) obj2).intValue()) * ((int) fraction));
+            this.mCurrentBlur =
+                    ((Integer) obj2).intValue()
+                            + ((intValue - ((Integer) obj2).intValue()) * ((int) fraction));
             if (!surfaceControl.isValid()) {
-                Log.w("WindowManager", "Dimmer#AnimationSpec tried to access " + surfaceControl + " after release");
+                Log.w(
+                        "WindowManager",
+                        "Dimmer#AnimationSpec tried to access "
+                                + surfaceControl
+                                + " after release");
                 return;
             }
             try {
                 transaction.setAlpha(surfaceControl, this.mCurrentAlpha);
                 transaction.setBackgroundBlurRadius(surfaceControl, this.mCurrentBlur);
             } catch (IllegalStateException | NullPointerException e) {
-                Log.e("WindowManager", "Dimmer#AnimationSpec tried to access " + surfaceControl + " after release", e);
+                Log.e(
+                        "WindowManager",
+                        "Dimmer#AnimationSpec tried to access " + surfaceControl + " after release",
+                        e);
             }
         }
 
@@ -100,8 +113,10 @@ public final class DimmerAnimationHelper {
         public final void dumpDebugInner(ProtoOutputStream protoOutputStream) {
             long start = protoOutputStream.start(1146756268035L);
             AnimationExtremes animationExtremes = this.mAlpha;
-            protoOutputStream.write(1108101562369L, ((Float) animationExtremes.mStartValue).floatValue());
-            protoOutputStream.write(1108101562370L, ((Float) animationExtremes.mFinishValue).floatValue());
+            protoOutputStream.write(
+                    1108101562369L, ((Float) animationExtremes.mStartValue).floatValue());
+            protoOutputStream.write(
+                    1108101562370L, ((Float) animationExtremes.mFinishValue).floatValue());
             protoOutputStream.write(1112396529667L, this.mDuration);
             protoOutputStream.end(start);
         }
@@ -124,7 +139,14 @@ public final class DimmerAnimationHelper {
         public WindowContainer mGeometryParent = null;
 
         public final String toString() {
-            return "Dim state: alpha=" + this.mAlpha + ", blur=" + this.mBlurRadius + ", container=" + this.mDimmingContainer + ", geometryParent " + this.mGeometryParent;
+            return "Dim state: alpha="
+                    + this.mAlpha
+                    + ", blur="
+                    + this.mBlurRadius
+                    + ", container="
+                    + this.mDimmingContainer
+                    + ", geometryParent "
+                    + this.mGeometryParent;
         }
     }
 
@@ -132,7 +154,8 @@ public final class DimmerAnimationHelper {
         this.mAnimationAdapterFactory = animationAdapterFactory;
     }
 
-    public final void setCurrentAlphaBlur(SurfaceControl.Transaction transaction, SurfaceControl surfaceControl) {
+    public final void setCurrentAlphaBlur(
+            SurfaceControl.Transaction transaction, SurfaceControl surfaceControl) {
         Change change = this.mCurrentProperties;
         try {
             if (surfaceControl.isValid()) {
@@ -140,15 +163,24 @@ public final class DimmerAnimationHelper {
                 transaction.setBackgroundBlurRadius(surfaceControl, change.mBlurRadius);
                 return;
             }
-            Log.w("WindowManager", "Tried to change look of dim " + surfaceControl + " after remove, caller=" + Debug.getCallers(3));
+            Log.w(
+                    "WindowManager",
+                    "Tried to change look of dim "
+                            + surfaceControl
+                            + " after remove, caller="
+                            + Debug.getCallers(3));
         } catch (NullPointerException e) {
-            Log.w("WindowManager", "Tried to change look of dim " + surfaceControl + " after remove", e);
+            Log.w(
+                    "WindowManager",
+                    "Tried to change look of dim " + surfaceControl + " after remove",
+                    e);
         }
     }
 
     public final void stopCurrentAnimation(SurfaceControl surfaceControl) {
         AnimationSpec animationSpec;
-        if (this.mLocalAnimationAdapter == null || (animationSpec = this.mAlphaAnimationSpec) == null) {
+        if (this.mLocalAnimationAdapter == null
+                || (animationSpec = this.mAlphaAnimationSpec) == null) {
             return;
         }
         Change change = this.mCurrentProperties;

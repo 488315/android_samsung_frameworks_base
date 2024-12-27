@@ -10,6 +10,7 @@ import android.os.Parcelable;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
+
 import com.android.internal.util.BitUtils;
 
 @SystemApi
@@ -21,12 +22,10 @@ public class IpConnectivityLog {
     private static final String TAG = IpConnectivityLog.class.getSimpleName();
     private IIpConnectivityMetrics mService;
 
-    public interface Event extends Parcelable {
-    }
+    public interface Event extends Parcelable {}
 
     @SystemApi
-    public IpConnectivityLog() {
-    }
+    public IpConnectivityLog() {}
 
     public IpConnectivityLog(IIpConnectivityMetrics service) {
         this.mService = service;
@@ -36,7 +35,8 @@ public class IpConnectivityLog {
         if (this.mService != null) {
             return true;
         }
-        IIpConnectivityMetrics service = IIpConnectivityMetrics.Stub.asInterface(ServiceManager.getService(SERVICE_NAME));
+        IIpConnectivityMetrics service =
+                IIpConnectivityMetrics.Stub.asInterface(ServiceManager.getService(SERVICE_NAME));
         if (service == null) {
             return false;
         }
@@ -99,12 +99,30 @@ public class IpConnectivityLog {
         }
     }
 
-    public boolean logDefaultNetworkEvent(Network defaultNetwork, int score, boolean validated, LinkProperties lp, NetworkCapabilities nc, Network previousDefaultNetwork, int previousScore, LinkProperties previousLp, NetworkCapabilities previousNc) {
+    public boolean logDefaultNetworkEvent(
+            Network defaultNetwork,
+            int score,
+            boolean validated,
+            LinkProperties lp,
+            NetworkCapabilities nc,
+            Network previousDefaultNetwork,
+            int previousScore,
+            LinkProperties previousLp,
+            NetworkCapabilities previousNc) {
         if (!checkLoggerService()) {
             return false;
         }
         try {
-            this.mService.logDefaultNetworkEvent(defaultNetwork, score, validated, lp, nc, previousDefaultNetwork, previousScore, previousLp, previousNc);
+            this.mService.logDefaultNetworkEvent(
+                    defaultNetwork,
+                    score,
+                    validated,
+                    lp,
+                    nc,
+                    previousDefaultNetwork,
+                    previousScore,
+                    previousLp,
+                    previousNc);
             return true;
         } catch (RemoteException e) {
             return true;

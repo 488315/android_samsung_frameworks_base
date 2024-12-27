@@ -1,7 +1,5 @@
 package android.hardware.radio.messaging;
 
-import android.hardware.radio.messaging.IRadioMessagingIndication;
-import android.hardware.radio.messaging.IRadioMessagingResponse;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -10,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IRadioMessaging extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$radio$messaging$IRadioMessaging".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$radio$messaging$IRadioMessaging".replace('$', '.');
     public static final String HASH = "30b0bc0e84679bc3b5ccb3a52da34c47cda6b7eb";
     public static final int VERSION = 3;
 
@@ -50,13 +49,18 @@ public interface IRadioMessaging extends IInterface {
 
     void setCdmaBroadcastActivation(int i, boolean z) throws RemoteException;
 
-    void setCdmaBroadcastConfig(int i, CdmaBroadcastSmsConfigInfo[] cdmaBroadcastSmsConfigInfoArr) throws RemoteException;
+    void setCdmaBroadcastConfig(int i, CdmaBroadcastSmsConfigInfo[] cdmaBroadcastSmsConfigInfoArr)
+            throws RemoteException;
 
     void setGsmBroadcastActivation(int i, boolean z) throws RemoteException;
 
-    void setGsmBroadcastConfig(int i, GsmBroadcastSmsConfigInfo[] gsmBroadcastSmsConfigInfoArr) throws RemoteException;
+    void setGsmBroadcastConfig(int i, GsmBroadcastSmsConfigInfo[] gsmBroadcastSmsConfigInfoArr)
+            throws RemoteException;
 
-    void setResponseFunctions(IRadioMessagingResponse iRadioMessagingResponse, IRadioMessagingIndication iRadioMessagingIndication) throws RemoteException;
+    void setResponseFunctions(
+            IRadioMessagingResponse iRadioMessagingResponse,
+            IRadioMessagingIndication iRadioMessagingIndication)
+            throws RemoteException;
 
     void setSmscAddress(int i, String str) throws RemoteException;
 
@@ -66,96 +70,83 @@ public interface IRadioMessaging extends IInterface {
 
     public static class Default implements IRadioMessaging {
         @Override // android.hardware.radio.messaging.IRadioMessaging
-        public void acknowledgeIncomingGsmSmsWithPdu(int serial, boolean success, String ackPdu) throws RemoteException {
-        }
+        public void acknowledgeIncomingGsmSmsWithPdu(int serial, boolean success, String ackPdu)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessaging
-        public void acknowledgeLastIncomingCdmaSms(int serial, CdmaSmsAck smsAck) throws RemoteException {
-        }
+        public void acknowledgeLastIncomingCdmaSms(int serial, CdmaSmsAck smsAck)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessaging
-        public void acknowledgeLastIncomingGsmSms(int serial, boolean success, int cause) throws RemoteException {
-        }
+        public void acknowledgeLastIncomingGsmSms(int serial, boolean success, int cause)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessaging
-        public void deleteSmsOnRuim(int serial, int index) throws RemoteException {
-        }
+        public void deleteSmsOnRuim(int serial, int index) throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessaging
-        public void deleteSmsOnSim(int serial, int index) throws RemoteException {
-        }
+        public void deleteSmsOnSim(int serial, int index) throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessaging
-        public void getCdmaBroadcastConfig(int serial) throws RemoteException {
-        }
+        public void getCdmaBroadcastConfig(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessaging
-        public void getGsmBroadcastConfig(int serial) throws RemoteException {
-        }
+        public void getGsmBroadcastConfig(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessaging
-        public void getSmscAddress(int serial) throws RemoteException {
-        }
+        public void getSmscAddress(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessaging
-        public void reportSmsMemoryStatus(int serial, boolean available) throws RemoteException {
-        }
+        public void reportSmsMemoryStatus(int serial, boolean available) throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessaging
-        public void responseAcknowledgement() throws RemoteException {
-        }
+        public void responseAcknowledgement() throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessaging
-        public void sendCdmaSms(int serial, CdmaSmsMessage sms) throws RemoteException {
-        }
+        public void sendCdmaSms(int serial, CdmaSmsMessage sms) throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessaging
-        public void sendCdmaSmsExpectMore(int serial, CdmaSmsMessage sms) throws RemoteException {
-        }
+        public void sendCdmaSmsExpectMore(int serial, CdmaSmsMessage sms) throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessaging
-        public void sendImsSms(int serial, ImsSmsMessage message) throws RemoteException {
-        }
+        public void sendImsSms(int serial, ImsSmsMessage message) throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessaging
-        public void sendSms(int serial, GsmSmsMessage message) throws RemoteException {
-        }
+        public void sendSms(int serial, GsmSmsMessage message) throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessaging
-        public void sendSmsExpectMore(int serial, GsmSmsMessage message) throws RemoteException {
-        }
+        public void sendSmsExpectMore(int serial, GsmSmsMessage message) throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessaging
-        public void setCdmaBroadcastActivation(int serial, boolean activate) throws RemoteException {
-        }
+        public void setCdmaBroadcastActivation(int serial, boolean activate)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessaging
-        public void setCdmaBroadcastConfig(int serial, CdmaBroadcastSmsConfigInfo[] configInfo) throws RemoteException {
-        }
+        public void setCdmaBroadcastConfig(int serial, CdmaBroadcastSmsConfigInfo[] configInfo)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessaging
-        public void setGsmBroadcastActivation(int serial, boolean activate) throws RemoteException {
-        }
+        public void setGsmBroadcastActivation(int serial, boolean activate)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessaging
-        public void setGsmBroadcastConfig(int serial, GsmBroadcastSmsConfigInfo[] configInfo) throws RemoteException {
-        }
+        public void setGsmBroadcastConfig(int serial, GsmBroadcastSmsConfigInfo[] configInfo)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessaging
-        public void setResponseFunctions(IRadioMessagingResponse radioMessagingResponse, IRadioMessagingIndication radioMessagingIndication) throws RemoteException {
-        }
+        public void setResponseFunctions(
+                IRadioMessagingResponse radioMessagingResponse,
+                IRadioMessagingIndication radioMessagingIndication)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessaging
-        public void setSmscAddress(int serial, String smsc) throws RemoteException {
-        }
+        public void setSmscAddress(int serial, String smsc) throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessaging
-        public void writeSmsToRuim(int serial, CdmaSmsWriteArgs cdmaSms) throws RemoteException {
-        }
+        public void writeSmsToRuim(int serial, CdmaSmsWriteArgs cdmaSms) throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessaging
-        public void writeSmsToSim(int serial, SmsWriteArgs smsWriteArgs) throws RemoteException {
-        }
+        public void writeSmsToSim(int serial, SmsWriteArgs smsWriteArgs) throws RemoteException {}
 
         @Override // android.hardware.radio.messaging.IRadioMessaging
         public int getInterfaceVersion() {
@@ -173,7 +164,7 @@ public interface IRadioMessaging extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRadioMessaging {
+    public abstract static class Stub extends Binder implements IRadioMessaging {
         static final int TRANSACTION_acknowledgeIncomingGsmSmsWithPdu = 1;
         static final int TRANSACTION_acknowledgeLastIncomingCdmaSms = 2;
         static final int TRANSACTION_acknowledgeLastIncomingGsmSms = 3;
@@ -222,7 +213,8 @@ public interface IRadioMessaging extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -300,31 +292,36 @@ public interface IRadioMessaging extends IInterface {
                     return true;
                 case 11:
                     int _arg010 = data.readInt();
-                    CdmaSmsMessage _arg17 = (CdmaSmsMessage) data.readTypedObject(CdmaSmsMessage.CREATOR);
+                    CdmaSmsMessage _arg17 =
+                            (CdmaSmsMessage) data.readTypedObject(CdmaSmsMessage.CREATOR);
                     data.enforceNoDataAvail();
                     sendCdmaSms(_arg010, _arg17);
                     return true;
                 case 12:
                     int _arg011 = data.readInt();
-                    CdmaSmsMessage _arg18 = (CdmaSmsMessage) data.readTypedObject(CdmaSmsMessage.CREATOR);
+                    CdmaSmsMessage _arg18 =
+                            (CdmaSmsMessage) data.readTypedObject(CdmaSmsMessage.CREATOR);
                     data.enforceNoDataAvail();
                     sendCdmaSmsExpectMore(_arg011, _arg18);
                     return true;
                 case 13:
                     int _arg012 = data.readInt();
-                    ImsSmsMessage _arg19 = (ImsSmsMessage) data.readTypedObject(ImsSmsMessage.CREATOR);
+                    ImsSmsMessage _arg19 =
+                            (ImsSmsMessage) data.readTypedObject(ImsSmsMessage.CREATOR);
                     data.enforceNoDataAvail();
                     sendImsSms(_arg012, _arg19);
                     return true;
                 case 14:
                     int _arg013 = data.readInt();
-                    GsmSmsMessage _arg110 = (GsmSmsMessage) data.readTypedObject(GsmSmsMessage.CREATOR);
+                    GsmSmsMessage _arg110 =
+                            (GsmSmsMessage) data.readTypedObject(GsmSmsMessage.CREATOR);
                     data.enforceNoDataAvail();
                     sendSms(_arg013, _arg110);
                     return true;
                 case 15:
                     int _arg014 = data.readInt();
-                    GsmSmsMessage _arg111 = (GsmSmsMessage) data.readTypedObject(GsmSmsMessage.CREATOR);
+                    GsmSmsMessage _arg111 =
+                            (GsmSmsMessage) data.readTypedObject(GsmSmsMessage.CREATOR);
                     data.enforceNoDataAvail();
                     sendSmsExpectMore(_arg014, _arg111);
                     return true;
@@ -336,7 +333,9 @@ public interface IRadioMessaging extends IInterface {
                     return true;
                 case 17:
                     int _arg016 = data.readInt();
-                    CdmaBroadcastSmsConfigInfo[] _arg113 = (CdmaBroadcastSmsConfigInfo[]) data.createTypedArray(CdmaBroadcastSmsConfigInfo.CREATOR);
+                    CdmaBroadcastSmsConfigInfo[] _arg113 =
+                            (CdmaBroadcastSmsConfigInfo[])
+                                    data.createTypedArray(CdmaBroadcastSmsConfigInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setCdmaBroadcastConfig(_arg016, _arg113);
                     return true;
@@ -348,13 +347,17 @@ public interface IRadioMessaging extends IInterface {
                     return true;
                 case 19:
                     int _arg018 = data.readInt();
-                    GsmBroadcastSmsConfigInfo[] _arg115 = (GsmBroadcastSmsConfigInfo[]) data.createTypedArray(GsmBroadcastSmsConfigInfo.CREATOR);
+                    GsmBroadcastSmsConfigInfo[] _arg115 =
+                            (GsmBroadcastSmsConfigInfo[])
+                                    data.createTypedArray(GsmBroadcastSmsConfigInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setGsmBroadcastConfig(_arg018, _arg115);
                     return true;
                 case 20:
-                    IRadioMessagingResponse _arg019 = IRadioMessagingResponse.Stub.asInterface(data.readStrongBinder());
-                    IRadioMessagingIndication _arg116 = IRadioMessagingIndication.Stub.asInterface(data.readStrongBinder());
+                    IRadioMessagingResponse _arg019 =
+                            IRadioMessagingResponse.Stub.asInterface(data.readStrongBinder());
+                    IRadioMessagingIndication _arg116 =
+                            IRadioMessagingIndication.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setResponseFunctions(_arg019, _arg116);
                     return true;
@@ -366,13 +369,15 @@ public interface IRadioMessaging extends IInterface {
                     return true;
                 case 22:
                     int _arg021 = data.readInt();
-                    CdmaSmsWriteArgs _arg118 = (CdmaSmsWriteArgs) data.readTypedObject(CdmaSmsWriteArgs.CREATOR);
+                    CdmaSmsWriteArgs _arg118 =
+                            (CdmaSmsWriteArgs) data.readTypedObject(CdmaSmsWriteArgs.CREATOR);
                     data.enforceNoDataAvail();
                     writeSmsToRuim(_arg021, _arg118);
                     return true;
                 case 23:
                     int _arg022 = data.readInt();
-                    SmsWriteArgs _arg119 = (SmsWriteArgs) data.readTypedObject(SmsWriteArgs.CREATOR);
+                    SmsWriteArgs _arg119 =
+                            (SmsWriteArgs) data.readTypedObject(SmsWriteArgs.CREATOR);
                     data.enforceNoDataAvail();
                     writeSmsToSim(_arg022, _arg119);
                     return true;
@@ -400,7 +405,8 @@ public interface IRadioMessaging extends IInterface {
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
-            public void acknowledgeIncomingGsmSmsWithPdu(int serial, boolean success, String ackPdu) throws RemoteException {
+            public void acknowledgeIncomingGsmSmsWithPdu(int serial, boolean success, String ackPdu)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -409,7 +415,8 @@ public interface IRadioMessaging extends IInterface {
                     _data.writeString(ackPdu);
                     boolean _status = this.mRemote.transact(1, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method acknowledgeIncomingGsmSmsWithPdu is unimplemented.");
+                        throw new RemoteException(
+                                "Method acknowledgeIncomingGsmSmsWithPdu is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -417,7 +424,8 @@ public interface IRadioMessaging extends IInterface {
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
-            public void acknowledgeLastIncomingCdmaSms(int serial, CdmaSmsAck smsAck) throws RemoteException {
+            public void acknowledgeLastIncomingCdmaSms(int serial, CdmaSmsAck smsAck)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -425,7 +433,8 @@ public interface IRadioMessaging extends IInterface {
                     _data.writeTypedObject(smsAck, 0);
                     boolean _status = this.mRemote.transact(2, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method acknowledgeLastIncomingCdmaSms is unimplemented.");
+                        throw new RemoteException(
+                                "Method acknowledgeLastIncomingCdmaSms is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -433,7 +442,8 @@ public interface IRadioMessaging extends IInterface {
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
-            public void acknowledgeLastIncomingGsmSms(int serial, boolean success, int cause) throws RemoteException {
+            public void acknowledgeLastIncomingGsmSms(int serial, boolean success, int cause)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -442,7 +452,8 @@ public interface IRadioMessaging extends IInterface {
                     _data.writeInt(cause);
                     boolean _status = this.mRemote.transact(3, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method acknowledgeLastIncomingGsmSms is unimplemented.");
+                        throw new RemoteException(
+                                "Method acknowledgeLastIncomingGsmSms is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -489,7 +500,8 @@ public interface IRadioMessaging extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(6, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getCdmaBroadcastConfig is unimplemented.");
+                        throw new RemoteException(
+                                "Method getCdmaBroadcastConfig is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -527,7 +539,8 @@ public interface IRadioMessaging extends IInterface {
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
-            public void reportSmsMemoryStatus(int serial, boolean available) throws RemoteException {
+            public void reportSmsMemoryStatus(int serial, boolean available)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -549,7 +562,8 @@ public interface IRadioMessaging extends IInterface {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(10, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method responseAcknowledgement is unimplemented.");
+                        throw new RemoteException(
+                                "Method responseAcknowledgement is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -573,7 +587,8 @@ public interface IRadioMessaging extends IInterface {
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
-            public void sendCdmaSmsExpectMore(int serial, CdmaSmsMessage sms) throws RemoteException {
+            public void sendCdmaSmsExpectMore(int serial, CdmaSmsMessage sms)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -621,7 +636,8 @@ public interface IRadioMessaging extends IInterface {
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
-            public void sendSmsExpectMore(int serial, GsmSmsMessage message) throws RemoteException {
+            public void sendSmsExpectMore(int serial, GsmSmsMessage message)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -637,7 +653,8 @@ public interface IRadioMessaging extends IInterface {
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
-            public void setCdmaBroadcastActivation(int serial, boolean activate) throws RemoteException {
+            public void setCdmaBroadcastActivation(int serial, boolean activate)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -645,7 +662,8 @@ public interface IRadioMessaging extends IInterface {
                     _data.writeBoolean(activate);
                     boolean _status = this.mRemote.transact(16, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setCdmaBroadcastActivation is unimplemented.");
+                        throw new RemoteException(
+                                "Method setCdmaBroadcastActivation is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -653,7 +671,8 @@ public interface IRadioMessaging extends IInterface {
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
-            public void setCdmaBroadcastConfig(int serial, CdmaBroadcastSmsConfigInfo[] configInfo) throws RemoteException {
+            public void setCdmaBroadcastConfig(int serial, CdmaBroadcastSmsConfigInfo[] configInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -661,7 +680,8 @@ public interface IRadioMessaging extends IInterface {
                     _data.writeTypedArray(configInfo, 0);
                     boolean _status = this.mRemote.transact(17, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setCdmaBroadcastConfig is unimplemented.");
+                        throw new RemoteException(
+                                "Method setCdmaBroadcastConfig is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -669,7 +689,8 @@ public interface IRadioMessaging extends IInterface {
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
-            public void setGsmBroadcastActivation(int serial, boolean activate) throws RemoteException {
+            public void setGsmBroadcastActivation(int serial, boolean activate)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -677,7 +698,8 @@ public interface IRadioMessaging extends IInterface {
                     _data.writeBoolean(activate);
                     boolean _status = this.mRemote.transact(18, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setGsmBroadcastActivation is unimplemented.");
+                        throw new RemoteException(
+                                "Method setGsmBroadcastActivation is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -685,7 +707,8 @@ public interface IRadioMessaging extends IInterface {
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
-            public void setGsmBroadcastConfig(int serial, GsmBroadcastSmsConfigInfo[] configInfo) throws RemoteException {
+            public void setGsmBroadcastConfig(int serial, GsmBroadcastSmsConfigInfo[] configInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -701,7 +724,10 @@ public interface IRadioMessaging extends IInterface {
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
-            public void setResponseFunctions(IRadioMessagingResponse radioMessagingResponse, IRadioMessagingIndication radioMessagingIndication) throws RemoteException {
+            public void setResponseFunctions(
+                    IRadioMessagingResponse radioMessagingResponse,
+                    IRadioMessagingIndication radioMessagingIndication)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -733,7 +759,8 @@ public interface IRadioMessaging extends IInterface {
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
-            public void writeSmsToRuim(int serial, CdmaSmsWriteArgs cdmaSms) throws RemoteException {
+            public void writeSmsToRuim(int serial, CdmaSmsWriteArgs cdmaSms)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -749,7 +776,8 @@ public interface IRadioMessaging extends IInterface {
             }
 
             @Override // android.hardware.radio.messaging.IRadioMessaging
-            public void writeSmsToSim(int serial, SmsWriteArgs smsWriteArgs) throws RemoteException {
+            public void writeSmsToSim(int serial, SmsWriteArgs smsWriteArgs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);

@@ -3,7 +3,9 @@ package android.hardware.camera2.params;
 import android.hardware.camera2.utils.HashCodeHelpers;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.util.Rational;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.Arrays;
 
 /* loaded from: classes2.dex */
@@ -24,7 +26,8 @@ public final class ColorSpaceTransform {
         }
         this.mElements = new int[18];
         for (int i = 0; i < elements.length; i++) {
-            Preconditions.checkNotNull(elements, "element[%d] must not be null", Integer.valueOf(i));
+            Preconditions.checkNotNull(
+                    elements, "element[%d] must not be null", Integer.valueOf(i));
             this.mElements[(i * 2) + 0] = elements[i].getNumerator();
             this.mElements[(i * 2) + 1] = elements[i].getDenominator();
         }

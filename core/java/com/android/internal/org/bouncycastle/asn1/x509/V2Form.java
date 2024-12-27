@@ -40,7 +40,10 @@ public class V2Form extends ASN1Object {
         this(issuerName, null, objectDigestInfo);
     }
 
-    public V2Form(GeneralNames issuerName, IssuerSerial baseCertificateID, ObjectDigestInfo objectDigestInfo) {
+    public V2Form(
+            GeneralNames issuerName,
+            IssuerSerial baseCertificateID,
+            ObjectDigestInfo objectDigestInfo) {
         this.issuerName = issuerName;
         this.baseCertificateID = baseCertificateID;
         this.objectDigestInfo = objectDigestInfo;
@@ -79,7 +82,8 @@ public class V2Form extends ASN1Object {
         return this.objectDigestInfo;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(3);
         if (this.issuerName != null) {

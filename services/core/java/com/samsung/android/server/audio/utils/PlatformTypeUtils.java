@@ -9,7 +9,12 @@ import android.util.Log;
 public abstract class PlatformTypeUtils {
     public static int getPlatformType(Context context) {
         try {
-            String[] split = String.valueOf(context.getPackageManager().getPackageInfo("com.samsung.android.mdecservice", 0).versionName).split("\\.");
+            String[] split =
+                    String.valueOf(
+                                    context.getPackageManager()
+                                            .getPackageInfo("com.samsung.android.mdecservice", 0)
+                                            .versionName)
+                            .split("\\.");
             if (split.length == 4) {
                 if (Integer.parseInt(split[0]) >= 2) {
                     return 1;

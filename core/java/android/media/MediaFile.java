@@ -2,27 +2,29 @@ package android.media;
 
 import android.mtp.MtpConstants;
 import android.text.format.DateFormat;
+
 import com.android.internal.widget.MessagingMessage;
+
+import libcore.content.type.MimeMap;
+
 import com.google.android.mms.ContentType;
 import com.samsung.android.wallpaperbackup.BnRConstants;
+
 import java.util.HashMap;
 import java.util.Locale;
-import libcore.content.type.MimeMap;
 
 /* loaded from: classes2.dex */
 public class MediaFile {
 
-    @Deprecated
-    private static final int FIRST_AUDIO_FILE_TYPE = 1;
+    @Deprecated private static final int FIRST_AUDIO_FILE_TYPE = 1;
 
-    @Deprecated
-    private static final int LAST_AUDIO_FILE_TYPE = 10;
+    @Deprecated private static final int LAST_AUDIO_FILE_TYPE = 10;
 
-    @Deprecated
-    private static final HashMap<String, MediaFileType> sFileTypeMap = new HashMap<>();
+    @Deprecated private static final HashMap<String, MediaFileType> sFileTypeMap = new HashMap<>();
 
     @Deprecated
     private static final HashMap<String, Integer> sFileTypeToFormatMap = new HashMap<>();
+
     private static final HashMap<String, Integer> sMimeTypeToFormatMap = new HashMap<>();
     private static final HashMap<Integer, String> sFormatToMimeTypeMap = new HashMap<>();
 
@@ -79,16 +81,22 @@ public class MediaFile {
         addFileType(12293, "text/html");
         addFileType(MtpConstants.FORMAT_XML_DOCUMENT, "text/xml");
         addFileType(MtpConstants.FORMAT_MS_WORD_DOCUMENT, "application/msword");
-        addFileType(MtpConstants.FORMAT_MS_WORD_DOCUMENT, "application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+        addFileType(
+                MtpConstants.FORMAT_MS_WORD_DOCUMENT,
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document");
         addFileType(MtpConstants.FORMAT_MS_EXCEL_SPREADSHEET, "application/vnd.ms-excel");
-        addFileType(MtpConstants.FORMAT_MS_EXCEL_SPREADSHEET, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        addFileType(MtpConstants.FORMAT_MS_POWERPOINT_PRESENTATION, "application/vnd.ms-powerpoint");
-        addFileType(MtpConstants.FORMAT_MS_POWERPOINT_PRESENTATION, "application/vnd.openxmlformats-officedocument.presentationml.presentation");
+        addFileType(
+                MtpConstants.FORMAT_MS_EXCEL_SPREADSHEET,
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        addFileType(
+                MtpConstants.FORMAT_MS_POWERPOINT_PRESENTATION, "application/vnd.ms-powerpoint");
+        addFileType(
+                MtpConstants.FORMAT_MS_POWERPOINT_PRESENTATION,
+                "application/vnd.openxmlformats-officedocument.presentationml.presentation");
     }
 
     @Deprecated
-    static void addFileType(String extension, int fileType, String mimeType) {
-    }
+    static void addFileType(String extension, int fileType, String mimeType) {}
 
     private static void addFileType(int mtpFormatCode, String mimeType) {
         if (!sMimeTypeToFormatMap.containsKey(mimeType)) {
@@ -226,7 +234,8 @@ public class MediaFile {
                 c = 65535;
                 break;
             case -1506009513:
-                if (lowerCase.equals("application/vnd.openxmlformats-officedocument.spreadsheetml.template")) {
+                if (lowerCase.equals(
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.template")) {
                     c = '!';
                     break;
                 }
@@ -268,7 +277,8 @@ public class MediaFile {
                 c = 65535;
                 break;
             case -1073633483:
-                if (lowerCase.equals("application/vnd.openxmlformats-officedocument.presentationml.presentation")) {
+                if (lowerCase.equals(
+                        "application/vnd.openxmlformats-officedocument.presentationml.presentation")) {
                     c = 29;
                     break;
                 }
@@ -282,7 +292,8 @@ public class MediaFile {
                 c = 65535;
                 break;
             case -1050893613:
-                if (lowerCase.equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
+                if (lowerCase.equals(
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.document")) {
                     c = '\"';
                     break;
                 }
@@ -422,7 +433,8 @@ public class MediaFile {
                 c = 65535;
                 break;
             case 694663701:
-                if (lowerCase.equals("application/vnd.openxmlformats-officedocument.presentationml.template")) {
+                if (lowerCase.equals(
+                        "application/vnd.openxmlformats-officedocument.presentationml.template")) {
                     c = 31;
                     break;
                 }
@@ -443,7 +455,8 @@ public class MediaFile {
                 c = 65535;
                 break;
             case 1060806194:
-                if (lowerCase.equals("application/vnd.openxmlformats-officedocument.wordprocessingml.template")) {
+                if (lowerCase.equals(
+                        "application/vnd.openxmlformats-officedocument.wordprocessingml.template")) {
                     c = '#';
                     break;
                 }
@@ -485,7 +498,8 @@ public class MediaFile {
                 c = 65535;
                 break;
             case 1577426419:
-                if (lowerCase.equals("application/vnd.openxmlformats-officedocument.presentationml.slideshow")) {
+                if (lowerCase.equals(
+                        "application/vnd.openxmlformats-officedocument.presentationml.slideshow")) {
                     c = 30;
                     break;
                 }
@@ -506,14 +520,16 @@ public class MediaFile {
                 c = 65535;
                 break;
             case 1750539587:
-                if (lowerCase.equals("application/vnd.ms-powerpoint.presentation.macroenabled.12")) {
+                if (lowerCase.equals(
+                        "application/vnd.ms-powerpoint.presentation.macroenabled.12")) {
                     c = 11;
                     break;
                 }
                 c = 65535;
                 break;
             case 1993842850:
-                if (lowerCase.equals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")) {
+                if (lowerCase.equals(
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")) {
                     c = ' ';
                     break;
                 }
@@ -770,7 +786,8 @@ public class MediaFile {
         String extensionMimeType;
         MimeMap mimeMap = MimeMap.getDefault();
         String extension = mimeMap.guessExtensionFromMimeType(mimeType);
-        if (extension == null || (extensionMimeType = mimeMap.guessMimeTypeFromExtension(extension)) == null) {
+        if (extension == null
+                || (extensionMimeType = mimeMap.guessMimeTypeFromExtension(extension)) == null) {
             return mimeType != null ? mimeType : "application/octet-stream";
         }
         return extensionMimeType;

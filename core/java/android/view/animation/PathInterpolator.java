@@ -10,6 +10,7 @@ import android.graphics.animation.NativeInterpolatorFactory;
 import android.util.AttributeSet;
 import android.util.PathParser;
 import android.view.InflateException;
+
 import com.android.internal.R;
 
 @HasNativeInterpolator
@@ -66,7 +67,9 @@ public class PathInterpolator extends BaseInterpolator implements NativeInterpol
             boolean hasX2 = a.hasValue(2);
             boolean hasY2 = a.hasValue(3);
             if (hasX2 != hasY2) {
-                throw new InflateException("pathInterpolator requires both controlX2 and controlY2 for cubic Beziers.");
+                throw new InflateException(
+                        "pathInterpolator requires both controlX2 and controlY2 for cubic"
+                            + " Beziers.");
             }
             if (!hasX2) {
                 initQuad(x1, y1);
@@ -97,7 +100,10 @@ public class PathInterpolator extends BaseInterpolator implements NativeInterpol
     private void initPath(Path path) {
         float[] pointComponents = path.approximate(0.002f);
         int numPoints = pointComponents.length / 3;
-        if (pointComponents[1] != 0.0f || pointComponents[2] != 0.0f || pointComponents[pointComponents.length - 2] != 1.0f || pointComponents[pointComponents.length - 1] != 1.0f) {
+        if (pointComponents[1] != 0.0f
+                || pointComponents[2] != 0.0f
+                || pointComponents[pointComponents.length - 2] != 1.0f
+                || pointComponents[pointComponents.length - 1] != 1.0f) {
             throw new IllegalArgumentException("The Path must start at (0,0) and end at (1,1)");
         }
         this.mX = new float[numPoints];
@@ -114,7 +120,8 @@ public class PathInterpolator extends BaseInterpolator implements NativeInterpol
             int componentIndex4 = componentIndex3 + 1;
             float y = pointComponents[componentIndex3];
             if (fraction == prevFraction && x != prevX) {
-                throw new IllegalArgumentException("The Path cannot have discontinuity in the X axis.");
+                throw new IllegalArgumentException(
+                        "The Path cannot have discontinuity in the X axis.");
             }
             if (x < prevX) {
                 throw new IllegalArgumentException("The Path cannot loop back on itself.");

@@ -32,8 +32,8 @@ public interface IOemLockService extends IInterface {
         }
 
         @Override // android.service.oemlock.IOemLockService
-        public void setOemUnlockAllowedByCarrier(boolean allowed, byte[] signature) throws RemoteException {
-        }
+        public void setOemUnlockAllowedByCarrier(boolean allowed, byte[] signature)
+                throws RemoteException {}
 
         @Override // android.service.oemlock.IOemLockService
         public boolean isOemUnlockAllowedByCarrier() throws RemoteException {
@@ -41,8 +41,7 @@ public interface IOemLockService extends IInterface {
         }
 
         @Override // android.service.oemlock.IOemLockService
-        public void setOemUnlockAllowedByUser(boolean allowed) throws RemoteException {
-        }
+        public void setOemUnlockAllowedByUser(boolean allowed) throws RemoteException {}
 
         @Override // android.service.oemlock.IOemLockService
         public boolean isOemUnlockAllowedByUser() throws RemoteException {
@@ -65,7 +64,7 @@ public interface IOemLockService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IOemLockService {
+    public abstract static class Stub extends Binder implements IOemLockService {
         public static final String DESCRIPTOR = "android.service.oemlock.IOemLockService";
         static final int TRANSACTION_getLockName = 1;
         static final int TRANSACTION_isDeviceOemUnlocked = 7;
@@ -75,8 +74,12 @@ public interface IOemLockService extends IInterface {
         static final int TRANSACTION_setOemUnlockAllowedByCarrier = 2;
         static final int TRANSACTION_setOemUnlockAllowedByUser = 4;
         private final PermissionEnforcer mEnforcer;
-        static final String[] PERMISSIONS_isOemUnlockAllowed = {Manifest.permission.READ_OEM_UNLOCK_STATE, Manifest.permission.OEM_UNLOCK_STATE};
-        static final String[] PERMISSIONS_isDeviceOemUnlocked = {Manifest.permission.READ_OEM_UNLOCK_STATE, Manifest.permission.OEM_UNLOCK_STATE};
+        static final String[] PERMISSIONS_isOemUnlockAllowed = {
+            Manifest.permission.READ_OEM_UNLOCK_STATE, Manifest.permission.OEM_UNLOCK_STATE
+        };
+        static final String[] PERMISSIONS_isDeviceOemUnlocked = {
+            Manifest.permission.READ_OEM_UNLOCK_STATE, Manifest.permission.OEM_UNLOCK_STATE
+        };
 
         public Stub(PermissionEnforcer enforcer) {
             attachInterface(this, DESCRIPTOR);
@@ -88,7 +91,9 @@ public interface IOemLockService extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IOemLockService asInterface(IBinder obj) {
@@ -134,7 +139,8 @@ public interface IOemLockService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -219,7 +225,8 @@ public interface IOemLockService extends IInterface {
             }
 
             @Override // android.service.oemlock.IOemLockService
-            public void setOemUnlockAllowedByCarrier(boolean allowed, byte[] signature) throws RemoteException {
+            public void setOemUnlockAllowedByCarrier(boolean allowed, byte[] signature)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -315,31 +322,48 @@ public interface IOemLockService extends IInterface {
         }
 
         protected void getLockName_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_CARRIER_OEM_UNLOCK_STATE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_CARRIER_OEM_UNLOCK_STATE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setOemUnlockAllowedByCarrier_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_CARRIER_OEM_UNLOCK_STATE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_CARRIER_OEM_UNLOCK_STATE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void isOemUnlockAllowedByCarrier_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_CARRIER_OEM_UNLOCK_STATE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_CARRIER_OEM_UNLOCK_STATE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setOemUnlockAllowedByUser_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_USER_OEM_UNLOCK_STATE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_USER_OEM_UNLOCK_STATE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void isOemUnlockAllowedByUser_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_USER_OEM_UNLOCK_STATE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_USER_OEM_UNLOCK_STATE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void isOemUnlockAllowed_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermissionAnyOf(PERMISSIONS_isOemUnlockAllowed, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermissionAnyOf(
+                    PERMISSIONS_isOemUnlockAllowed, getCallingPid(), getCallingUid());
         }
 
         protected void isDeviceOemUnlocked_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermissionAnyOf(PERMISSIONS_isDeviceOemUnlocked, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermissionAnyOf(
+                    PERMISSIONS_isDeviceOemUnlocked, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

@@ -10,6 +10,7 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.telephony.euicc.DownloadableSubscription;
 import android.telephony.euicc.EuiccInfo;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -18,19 +19,34 @@ public interface IEuiccController extends IInterface {
 
     void continueOperation(int i, Intent intent, Bundle bundle) throws RemoteException;
 
-    void deleteSubscription(int i, int i2, String str, PendingIntent pendingIntent) throws RemoteException;
+    void deleteSubscription(int i, int i2, String str, PendingIntent pendingIntent)
+            throws RemoteException;
 
-    void downloadSubscription(int i, DownloadableSubscription downloadableSubscription, boolean z, String str, Bundle bundle, PendingIntent pendingIntent) throws RemoteException;
+    void downloadSubscription(
+            int i,
+            DownloadableSubscription downloadableSubscription,
+            boolean z,
+            String str,
+            Bundle bundle,
+            PendingIntent pendingIntent)
+            throws RemoteException;
 
     void eraseSubscriptions(int i, PendingIntent pendingIntent) throws RemoteException;
 
-    void eraseSubscriptionsWithOptions(int i, int i2, PendingIntent pendingIntent) throws RemoteException;
+    void eraseSubscriptionsWithOptions(int i, int i2, PendingIntent pendingIntent)
+            throws RemoteException;
 
     long getAvailableMemoryInBytes(int i, String str) throws RemoteException;
 
-    void getDefaultDownloadableSubscriptionList(int i, String str, PendingIntent pendingIntent) throws RemoteException;
+    void getDefaultDownloadableSubscriptionList(int i, String str, PendingIntent pendingIntent)
+            throws RemoteException;
 
-    void getDownloadableSubscriptionMetadata(int i, DownloadableSubscription downloadableSubscription, String str, PendingIntent pendingIntent) throws RemoteException;
+    void getDownloadableSubscriptionMetadata(
+            int i,
+            DownloadableSubscription downloadableSubscription,
+            String str,
+            PendingIntent pendingIntent)
+            throws RemoteException;
 
     String getEid(int i, String str) throws RemoteException;
 
@@ -50,30 +66,40 @@ public interface IEuiccController extends IInterface {
 
     boolean isSupportedCountry(String str) throws RemoteException;
 
-    void retainSubscriptionsForFactoryReset(int i, PendingIntent pendingIntent) throws RemoteException;
+    void retainSubscriptionsForFactoryReset(int i, PendingIntent pendingIntent)
+            throws RemoteException;
 
     void setPsimConversionSupportedCarriers(int[] iArr) throws RemoteException;
 
     void setSupportedCountries(boolean z, List<String> list) throws RemoteException;
 
-    void switchToSubscription(int i, int i2, String str, PendingIntent pendingIntent) throws RemoteException;
+    void switchToSubscription(int i, int i2, String str, PendingIntent pendingIntent)
+            throws RemoteException;
 
-    void switchToSubscriptionWithPort(int i, int i2, int i3, String str, PendingIntent pendingIntent) throws RemoteException;
+    void switchToSubscriptionWithPort(
+            int i, int i2, int i3, String str, PendingIntent pendingIntent) throws RemoteException;
 
-    void updateSubscriptionNickname(int i, int i2, String str, String str2, PendingIntent pendingIntent) throws RemoteException;
+    void updateSubscriptionNickname(
+            int i, int i2, String str, String str2, PendingIntent pendingIntent)
+            throws RemoteException;
 
     public static class Default implements IEuiccController {
         @Override // com.android.internal.telephony.euicc.IEuiccController
-        public void continueOperation(int cardId, Intent resolutionIntent, Bundle resolutionExtras) throws RemoteException {
-        }
+        public void continueOperation(int cardId, Intent resolutionIntent, Bundle resolutionExtras)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.euicc.IEuiccController
-        public void getDownloadableSubscriptionMetadata(int cardId, DownloadableSubscription subscription, String callingPackage, PendingIntent callbackIntent) throws RemoteException {
-        }
+        public void getDownloadableSubscriptionMetadata(
+                int cardId,
+                DownloadableSubscription subscription,
+                String callingPackage,
+                PendingIntent callbackIntent)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.euicc.IEuiccController
-        public void getDefaultDownloadableSubscriptionList(int cardId, String callingPackage, PendingIntent callbackIntent) throws RemoteException {
-        }
+        public void getDefaultDownloadableSubscriptionList(
+                int cardId, String callingPackage, PendingIntent callbackIntent)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.euicc.IEuiccController
         public String getEid(int cardId, String callingPackage) throws RemoteException {
@@ -86,8 +112,14 @@ public interface IEuiccController extends IInterface {
         }
 
         @Override // com.android.internal.telephony.euicc.IEuiccController
-        public void downloadSubscription(int cardId, DownloadableSubscription subscription, boolean switchAfterDownload, String callingPackage, Bundle resolvedBundle, PendingIntent callbackIntent) throws RemoteException {
-        }
+        public void downloadSubscription(
+                int cardId,
+                DownloadableSubscription subscription,
+                boolean switchAfterDownload,
+                String callingPackage,
+                Bundle resolvedBundle,
+                PendingIntent callbackIntent)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.euicc.IEuiccController
         public EuiccInfo getEuiccInfo(int cardId) throws RemoteException {
@@ -95,36 +127,48 @@ public interface IEuiccController extends IInterface {
         }
 
         @Override // com.android.internal.telephony.euicc.IEuiccController
-        public void deleteSubscription(int cardId, int subscriptionId, String callingPackage, PendingIntent callbackIntent) throws RemoteException {
-        }
+        public void deleteSubscription(
+                int cardId, int subscriptionId, String callingPackage, PendingIntent callbackIntent)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.euicc.IEuiccController
-        public void switchToSubscription(int cardId, int subscriptionId, String callingPackage, PendingIntent callbackIntent) throws RemoteException {
-        }
+        public void switchToSubscription(
+                int cardId, int subscriptionId, String callingPackage, PendingIntent callbackIntent)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.euicc.IEuiccController
-        public void switchToSubscriptionWithPort(int cardId, int subscriptionId, int portIndex, String callingPackage, PendingIntent callbackIntent) throws RemoteException {
-        }
+        public void switchToSubscriptionWithPort(
+                int cardId,
+                int subscriptionId,
+                int portIndex,
+                String callingPackage,
+                PendingIntent callbackIntent)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.euicc.IEuiccController
-        public void updateSubscriptionNickname(int cardId, int subscriptionId, String nickname, String callingPackage, PendingIntent callbackIntent) throws RemoteException {
-        }
+        public void updateSubscriptionNickname(
+                int cardId,
+                int subscriptionId,
+                String nickname,
+                String callingPackage,
+                PendingIntent callbackIntent)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.euicc.IEuiccController
-        public void eraseSubscriptions(int cardId, PendingIntent callbackIntent) throws RemoteException {
-        }
+        public void eraseSubscriptions(int cardId, PendingIntent callbackIntent)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.euicc.IEuiccController
-        public void eraseSubscriptionsWithOptions(int cardId, int options, PendingIntent callbackIntent) throws RemoteException {
-        }
+        public void eraseSubscriptionsWithOptions(
+                int cardId, int options, PendingIntent callbackIntent) throws RemoteException {}
 
         @Override // com.android.internal.telephony.euicc.IEuiccController
-        public void retainSubscriptionsForFactoryReset(int cardId, PendingIntent callbackIntent) throws RemoteException {
-        }
+        public void retainSubscriptionsForFactoryReset(int cardId, PendingIntent callbackIntent)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.euicc.IEuiccController
-        public void setSupportedCountries(boolean isSupported, List<String> countriesList) throws RemoteException {
-        }
+        public void setSupportedCountries(boolean isSupported, List<String> countriesList)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.euicc.IEuiccController
         public List<String> getSupportedCountries(boolean isSupported) throws RemoteException {
@@ -137,23 +181,25 @@ public interface IEuiccController extends IInterface {
         }
 
         @Override // com.android.internal.telephony.euicc.IEuiccController
-        public boolean isSimPortAvailable(int cardId, int portIndex, String callingPackage) throws RemoteException {
+        public boolean isSimPortAvailable(int cardId, int portIndex, String callingPackage)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.telephony.euicc.IEuiccController
-        public boolean hasCarrierPrivilegesForPackageOnAnyPhone(String callingPackage) throws RemoteException {
+        public boolean hasCarrierPrivilegesForPackageOnAnyPhone(String callingPackage)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.telephony.euicc.IEuiccController
-        public boolean isCompatChangeEnabled(String callingPackage, long changeId) throws RemoteException {
+        public boolean isCompatChangeEnabled(String callingPackage, long changeId)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.telephony.euicc.IEuiccController
-        public void setPsimConversionSupportedCarriers(int[] carrierIds) throws RemoteException {
-        }
+        public void setPsimConversionSupportedCarriers(int[] carrierIds) throws RemoteException {}
 
         @Override // com.android.internal.telephony.euicc.IEuiccController
         public boolean isPsimConversionSupported(int carrierId) throws RemoteException {
@@ -161,7 +207,8 @@ public interface IEuiccController extends IInterface {
         }
 
         @Override // com.android.internal.telephony.euicc.IEuiccController
-        public long getAvailableMemoryInBytes(int cardId, String callingPackage) throws RemoteException {
+        public long getAvailableMemoryInBytes(int cardId, String callingPackage)
+                throws RemoteException {
             return 0L;
         }
 
@@ -171,7 +218,7 @@ public interface IEuiccController extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IEuiccController {
+    public abstract static class Stub extends Binder implements IEuiccController {
         static final int TRANSACTION_continueOperation = 1;
         static final int TRANSACTION_deleteSubscription = 8;
         static final int TRANSACTION_downloadSubscription = 6;
@@ -275,7 +322,8 @@ public interface IEuiccController extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IEuiccController.DESCRIPTOR);
             }
@@ -293,16 +341,20 @@ public interface IEuiccController extends IInterface {
                     return true;
                 case 2:
                     int _arg02 = data.readInt();
-                    DownloadableSubscription _arg12 = (DownloadableSubscription) data.readTypedObject(DownloadableSubscription.CREATOR);
+                    DownloadableSubscription _arg12 =
+                            (DownloadableSubscription)
+                                    data.readTypedObject(DownloadableSubscription.CREATOR);
                     String _arg22 = data.readString();
-                    PendingIntent _arg3 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg3 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     data.enforceNoDataAvail();
                     getDownloadableSubscriptionMetadata(_arg02, _arg12, _arg22, _arg3);
                     return true;
                 case 3:
                     int _arg03 = data.readInt();
                     String _arg13 = data.readString();
-                    PendingIntent _arg23 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg23 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     data.enforceNoDataAvail();
                     getDefaultDownloadableSubscriptionList(_arg03, _arg13, _arg23);
                     return true;
@@ -323,11 +375,14 @@ public interface IEuiccController extends IInterface {
                     return true;
                 case 6:
                     int _arg06 = data.readInt();
-                    DownloadableSubscription _arg15 = (DownloadableSubscription) data.readTypedObject(DownloadableSubscription.CREATOR);
+                    DownloadableSubscription _arg15 =
+                            (DownloadableSubscription)
+                                    data.readTypedObject(DownloadableSubscription.CREATOR);
                     boolean _arg24 = data.readBoolean();
                     String _arg32 = data.readString();
                     Bundle _arg4 = (Bundle) data.readTypedObject(Bundle.CREATOR);
-                    PendingIntent _arg5 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg5 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     data.enforceNoDataAvail();
                     downloadSubscription(_arg06, _arg15, _arg24, _arg32, _arg4, _arg5);
                     return true;
@@ -342,7 +397,8 @@ public interface IEuiccController extends IInterface {
                     int _arg08 = data.readInt();
                     int _arg16 = data.readInt();
                     String _arg25 = data.readString();
-                    PendingIntent _arg33 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg33 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     data.enforceNoDataAvail();
                     deleteSubscription(_arg08, _arg16, _arg25, _arg33);
                     return true;
@@ -350,7 +406,8 @@ public interface IEuiccController extends IInterface {
                     int _arg09 = data.readInt();
                     int _arg17 = data.readInt();
                     String _arg26 = data.readString();
-                    PendingIntent _arg34 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg34 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     data.enforceNoDataAvail();
                     switchToSubscription(_arg09, _arg17, _arg26, _arg34);
                     return true;
@@ -359,7 +416,8 @@ public interface IEuiccController extends IInterface {
                     int _arg18 = data.readInt();
                     int _arg27 = data.readInt();
                     String _arg35 = data.readString();
-                    PendingIntent _arg42 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg42 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     data.enforceNoDataAvail();
                     switchToSubscriptionWithPort(_arg010, _arg18, _arg27, _arg35, _arg42);
                     return true;
@@ -368,26 +426,30 @@ public interface IEuiccController extends IInterface {
                     int _arg19 = data.readInt();
                     String _arg28 = data.readString();
                     String _arg36 = data.readString();
-                    PendingIntent _arg43 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg43 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     data.enforceNoDataAvail();
                     updateSubscriptionNickname(_arg011, _arg19, _arg28, _arg36, _arg43);
                     return true;
                 case 12:
                     int _arg012 = data.readInt();
-                    PendingIntent _arg110 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg110 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     data.enforceNoDataAvail();
                     eraseSubscriptions(_arg012, _arg110);
                     return true;
                 case 13:
                     int _arg013 = data.readInt();
                     int _arg111 = data.readInt();
-                    PendingIntent _arg29 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg29 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     data.enforceNoDataAvail();
                     eraseSubscriptionsWithOptions(_arg013, _arg111, _arg29);
                     return true;
                 case 14:
                     int _arg014 = data.readInt();
-                    PendingIntent _arg112 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg112 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     data.enforceNoDataAvail();
                     retainSubscriptionsForFactoryReset(_arg014, _arg112);
                     return true;
@@ -479,7 +541,9 @@ public interface IEuiccController extends IInterface {
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
-            public void continueOperation(int cardId, Intent resolutionIntent, Bundle resolutionExtras) throws RemoteException {
+            public void continueOperation(
+                    int cardId, Intent resolutionIntent, Bundle resolutionExtras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IEuiccController.DESCRIPTOR);
@@ -493,7 +557,12 @@ public interface IEuiccController extends IInterface {
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
-            public void getDownloadableSubscriptionMetadata(int cardId, DownloadableSubscription subscription, String callingPackage, PendingIntent callbackIntent) throws RemoteException {
+            public void getDownloadableSubscriptionMetadata(
+                    int cardId,
+                    DownloadableSubscription subscription,
+                    String callingPackage,
+                    PendingIntent callbackIntent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IEuiccController.DESCRIPTOR);
@@ -508,7 +577,9 @@ public interface IEuiccController extends IInterface {
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
-            public void getDefaultDownloadableSubscriptionList(int cardId, String callingPackage, PendingIntent callbackIntent) throws RemoteException {
+            public void getDefaultDownloadableSubscriptionList(
+                    int cardId, String callingPackage, PendingIntent callbackIntent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IEuiccController.DESCRIPTOR);
@@ -557,7 +628,14 @@ public interface IEuiccController extends IInterface {
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
-            public void downloadSubscription(int cardId, DownloadableSubscription subscription, boolean switchAfterDownload, String callingPackage, Bundle resolvedBundle, PendingIntent callbackIntent) throws RemoteException {
+            public void downloadSubscription(
+                    int cardId,
+                    DownloadableSubscription subscription,
+                    boolean switchAfterDownload,
+                    String callingPackage,
+                    Bundle resolvedBundle,
+                    PendingIntent callbackIntent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IEuiccController.DESCRIPTOR);
@@ -591,7 +669,12 @@ public interface IEuiccController extends IInterface {
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
-            public void deleteSubscription(int cardId, int subscriptionId, String callingPackage, PendingIntent callbackIntent) throws RemoteException {
+            public void deleteSubscription(
+                    int cardId,
+                    int subscriptionId,
+                    String callingPackage,
+                    PendingIntent callbackIntent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IEuiccController.DESCRIPTOR);
@@ -606,7 +689,12 @@ public interface IEuiccController extends IInterface {
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
-            public void switchToSubscription(int cardId, int subscriptionId, String callingPackage, PendingIntent callbackIntent) throws RemoteException {
+            public void switchToSubscription(
+                    int cardId,
+                    int subscriptionId,
+                    String callingPackage,
+                    PendingIntent callbackIntent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IEuiccController.DESCRIPTOR);
@@ -621,7 +709,13 @@ public interface IEuiccController extends IInterface {
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
-            public void switchToSubscriptionWithPort(int cardId, int subscriptionId, int portIndex, String callingPackage, PendingIntent callbackIntent) throws RemoteException {
+            public void switchToSubscriptionWithPort(
+                    int cardId,
+                    int subscriptionId,
+                    int portIndex,
+                    String callingPackage,
+                    PendingIntent callbackIntent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IEuiccController.DESCRIPTOR);
@@ -637,7 +731,13 @@ public interface IEuiccController extends IInterface {
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
-            public void updateSubscriptionNickname(int cardId, int subscriptionId, String nickname, String callingPackage, PendingIntent callbackIntent) throws RemoteException {
+            public void updateSubscriptionNickname(
+                    int cardId,
+                    int subscriptionId,
+                    String nickname,
+                    String callingPackage,
+                    PendingIntent callbackIntent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IEuiccController.DESCRIPTOR);
@@ -653,7 +753,8 @@ public interface IEuiccController extends IInterface {
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
-            public void eraseSubscriptions(int cardId, PendingIntent callbackIntent) throws RemoteException {
+            public void eraseSubscriptions(int cardId, PendingIntent callbackIntent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IEuiccController.DESCRIPTOR);
@@ -666,7 +767,8 @@ public interface IEuiccController extends IInterface {
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
-            public void eraseSubscriptionsWithOptions(int cardId, int options, PendingIntent callbackIntent) throws RemoteException {
+            public void eraseSubscriptionsWithOptions(
+                    int cardId, int options, PendingIntent callbackIntent) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IEuiccController.DESCRIPTOR);
@@ -680,7 +782,8 @@ public interface IEuiccController extends IInterface {
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
-            public void retainSubscriptionsForFactoryReset(int cardId, PendingIntent callbackIntent) throws RemoteException {
+            public void retainSubscriptionsForFactoryReset(int cardId, PendingIntent callbackIntent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IEuiccController.DESCRIPTOR);
@@ -693,7 +796,8 @@ public interface IEuiccController extends IInterface {
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
-            public void setSupportedCountries(boolean isSupported, List<String> countriesList) throws RemoteException {
+            public void setSupportedCountries(boolean isSupported, List<String> countriesList)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -743,7 +847,8 @@ public interface IEuiccController extends IInterface {
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
-            public boolean isSimPortAvailable(int cardId, int portIndex, String callingPackage) throws RemoteException {
+            public boolean isSimPortAvailable(int cardId, int portIndex, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -762,7 +867,8 @@ public interface IEuiccController extends IInterface {
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
-            public boolean hasCarrierPrivilegesForPackageOnAnyPhone(String callingPackage) throws RemoteException {
+            public boolean hasCarrierPrivilegesForPackageOnAnyPhone(String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -779,7 +885,8 @@ public interface IEuiccController extends IInterface {
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
-            public boolean isCompatChangeEnabled(String callingPackage, long changeId) throws RemoteException {
+            public boolean isCompatChangeEnabled(String callingPackage, long changeId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -797,7 +904,8 @@ public interface IEuiccController extends IInterface {
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
-            public void setPsimConversionSupportedCarriers(int[] carrierIds) throws RemoteException {
+            public void setPsimConversionSupportedCarriers(int[] carrierIds)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -829,7 +937,8 @@ public interface IEuiccController extends IInterface {
             }
 
             @Override // com.android.internal.telephony.euicc.IEuiccController
-            public long getAvailableMemoryInBytes(int cardId, String callingPackage) throws RemoteException {
+            public long getAvailableMemoryInBytes(int cardId, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

@@ -12,7 +12,8 @@ import android.os.RemoteException;
 public interface IUriGrantsManager extends IInterface {
     public static final String DESCRIPTOR = "android.app.IUriGrantsManager";
 
-    int checkGrantUriPermission_ignoreNonSystem(int i, String str, Uri uri, int i2, int i3) throws RemoteException;
+    int checkGrantUriPermission_ignoreNonSystem(int i, String str, Uri uri, int i2, int i3)
+            throws RemoteException;
 
     void clearGrantedUriPermissions(String str, int i) throws RemoteException;
 
@@ -20,7 +21,9 @@ public interface IUriGrantsManager extends IInterface {
 
     ParceledListSlice getUriPermissions(String str, boolean z, boolean z2) throws RemoteException;
 
-    void grantUriPermissionFromOwner(IBinder iBinder, int i, String str, Uri uri, int i2, int i3, int i4) throws RemoteException;
+    void grantUriPermissionFromOwner(
+            IBinder iBinder, int i, String str, Uri uri, int i2, int i3, int i4)
+            throws RemoteException;
 
     void releasePersistableUriPermission(Uri uri, int i, String str, int i2) throws RemoteException;
 
@@ -28,33 +31,45 @@ public interface IUriGrantsManager extends IInterface {
 
     public static class Default implements IUriGrantsManager {
         @Override // android.app.IUriGrantsManager
-        public void takePersistableUriPermission(Uri uri, int modeFlags, String toPackage, int userId) throws RemoteException {
-        }
+        public void takePersistableUriPermission(
+                Uri uri, int modeFlags, String toPackage, int userId) throws RemoteException {}
 
         @Override // android.app.IUriGrantsManager
-        public void releasePersistableUriPermission(Uri uri, int modeFlags, String toPackage, int userId) throws RemoteException {
-        }
+        public void releasePersistableUriPermission(
+                Uri uri, int modeFlags, String toPackage, int userId) throws RemoteException {}
 
         @Override // android.app.IUriGrantsManager
-        public void grantUriPermissionFromOwner(IBinder owner, int fromUid, String targetPkg, Uri uri, int mode, int sourceUserId, int targetUserId) throws RemoteException {
-        }
+        public void grantUriPermissionFromOwner(
+                IBinder owner,
+                int fromUid,
+                String targetPkg,
+                Uri uri,
+                int mode,
+                int sourceUserId,
+                int targetUserId)
+                throws RemoteException {}
 
         @Override // android.app.IUriGrantsManager
-        public ParceledListSlice getGrantedUriPermissions(String packageName, int userId) throws RemoteException {
+        public ParceledListSlice getGrantedUriPermissions(String packageName, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IUriGrantsManager
-        public void clearGrantedUriPermissions(String packageName, int userId) throws RemoteException {
-        }
+        public void clearGrantedUriPermissions(String packageName, int userId)
+                throws RemoteException {}
 
         @Override // android.app.IUriGrantsManager
-        public ParceledListSlice getUriPermissions(String packageName, boolean incoming, boolean persistedOnly) throws RemoteException {
+        public ParceledListSlice getUriPermissions(
+                String packageName, boolean incoming, boolean persistedOnly)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IUriGrantsManager
-        public int checkGrantUriPermission_ignoreNonSystem(int sourceUid, String targetPkg, Uri uri, int modeFlags, int userId) throws RemoteException {
+        public int checkGrantUriPermission_ignoreNonSystem(
+                int sourceUid, String targetPkg, Uri uri, int modeFlags, int userId)
+                throws RemoteException {
             return 0;
         }
 
@@ -64,7 +79,7 @@ public interface IUriGrantsManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUriGrantsManager {
+    public abstract static class Stub extends Binder implements IUriGrantsManager {
         static final int TRANSACTION_checkGrantUriPermission_ignoreNonSystem = 7;
         static final int TRANSACTION_clearGrantedUriPermissions = 5;
         static final int TRANSACTION_getGrantedUriPermissions = 4;
@@ -120,7 +135,8 @@ public interface IUriGrantsManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IUriGrantsManager.DESCRIPTOR);
             }
@@ -156,7 +172,8 @@ public interface IUriGrantsManager extends IInterface {
                     int _arg5 = data.readInt();
                     int _arg6 = data.readInt();
                     data.enforceNoDataAvail();
-                    grantUriPermissionFromOwner(_arg03, _arg13, _arg23, _arg33, _arg4, _arg5, _arg6);
+                    grantUriPermissionFromOwner(
+                            _arg03, _arg13, _arg23, _arg33, _arg4, _arg5, _arg6);
                     reply.writeNoException();
                     return true;
                 case 4:
@@ -190,7 +207,9 @@ public interface IUriGrantsManager extends IInterface {
                     int _arg34 = data.readInt();
                     int _arg42 = data.readInt();
                     data.enforceNoDataAvail();
-                    int _result3 = checkGrantUriPermission_ignoreNonSystem(_arg07, _arg17, _arg25, _arg34, _arg42);
+                    int _result3 =
+                            checkGrantUriPermission_ignoreNonSystem(
+                                    _arg07, _arg17, _arg25, _arg34, _arg42);
                     reply.writeNoException();
                     reply.writeInt(_result3);
                     return true;
@@ -216,7 +235,8 @@ public interface IUriGrantsManager extends IInterface {
             }
 
             @Override // android.app.IUriGrantsManager
-            public void takePersistableUriPermission(Uri uri, int modeFlags, String toPackage, int userId) throws RemoteException {
+            public void takePersistableUriPermission(
+                    Uri uri, int modeFlags, String toPackage, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -234,7 +254,8 @@ public interface IUriGrantsManager extends IInterface {
             }
 
             @Override // android.app.IUriGrantsManager
-            public void releasePersistableUriPermission(Uri uri, int modeFlags, String toPackage, int userId) throws RemoteException {
+            public void releasePersistableUriPermission(
+                    Uri uri, int modeFlags, String toPackage, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -252,7 +273,15 @@ public interface IUriGrantsManager extends IInterface {
             }
 
             @Override // android.app.IUriGrantsManager
-            public void grantUriPermissionFromOwner(IBinder owner, int fromUid, String targetPkg, Uri uri, int mode, int sourceUserId, int targetUserId) throws RemoteException {
+            public void grantUriPermissionFromOwner(
+                    IBinder owner,
+                    int fromUid,
+                    String targetPkg,
+                    Uri uri,
+                    int mode,
+                    int sourceUserId,
+                    int targetUserId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -273,7 +302,8 @@ public interface IUriGrantsManager extends IInterface {
             }
 
             @Override // android.app.IUriGrantsManager
-            public ParceledListSlice getGrantedUriPermissions(String packageName, int userId) throws RemoteException {
+            public ParceledListSlice getGrantedUriPermissions(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -282,7 +312,8 @@ public interface IUriGrantsManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -291,7 +322,8 @@ public interface IUriGrantsManager extends IInterface {
             }
 
             @Override // android.app.IUriGrantsManager
-            public void clearGrantedUriPermissions(String packageName, int userId) throws RemoteException {
+            public void clearGrantedUriPermissions(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -307,7 +339,9 @@ public interface IUriGrantsManager extends IInterface {
             }
 
             @Override // android.app.IUriGrantsManager
-            public ParceledListSlice getUriPermissions(String packageName, boolean incoming, boolean persistedOnly) throws RemoteException {
+            public ParceledListSlice getUriPermissions(
+                    String packageName, boolean incoming, boolean persistedOnly)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -317,7 +351,8 @@ public interface IUriGrantsManager extends IInterface {
                     _data.writeBoolean(persistedOnly);
                     this.mRemote.transact(6, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -326,7 +361,9 @@ public interface IUriGrantsManager extends IInterface {
             }
 
             @Override // android.app.IUriGrantsManager
-            public int checkGrantUriPermission_ignoreNonSystem(int sourceUid, String targetPkg, Uri uri, int modeFlags, int userId) throws RemoteException {
+            public int checkGrantUriPermission_ignoreNonSystem(
+                    int sourceUid, String targetPkg, Uri uri, int modeFlags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

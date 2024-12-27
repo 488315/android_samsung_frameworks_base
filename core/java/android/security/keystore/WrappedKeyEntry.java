@@ -10,7 +10,11 @@ public class WrappedKeyEntry implements KeyStore.Entry {
     private final byte[] mWrappedKeyBytes;
     private final String mWrappingKeyAlias;
 
-    public WrappedKeyEntry(byte[] wrappedKeyBytes, String wrappingKeyAlias, String transformation, AlgorithmParameterSpec algorithmParameterSpec) {
+    public WrappedKeyEntry(
+            byte[] wrappedKeyBytes,
+            String wrappingKeyAlias,
+            String transformation,
+            AlgorithmParameterSpec algorithmParameterSpec) {
         this.mWrappedKeyBytes = wrappedKeyBytes;
         this.mWrappingKeyAlias = wrappingKeyAlias;
         this.mTransformation = transformation;

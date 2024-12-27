@@ -15,40 +15,43 @@ public interface ICarrierConfigLoader extends IInterface {
     @Deprecated
     PersistableBundle getConfigForSubId(int i, String str) throws RemoteException;
 
-    PersistableBundle getConfigForSubIdWithFeature(int i, String str, String str2) throws RemoteException;
+    PersistableBundle getConfigForSubIdWithFeature(int i, String str, String str2)
+            throws RemoteException;
 
-    PersistableBundle getConfigSubsetForSubIdWithFeature(int i, String str, String str2, String[] strArr) throws RemoteException;
+    PersistableBundle getConfigSubsetForSubIdWithFeature(
+            int i, String str, String str2, String[] strArr) throws RemoteException;
 
     String getDefaultCarrierServicePackageName() throws RemoteException;
 
     void notifyConfigChangedForSubId(int i) throws RemoteException;
 
-    void overrideConfig(int i, PersistableBundle persistableBundle, boolean z) throws RemoteException;
+    void overrideConfig(int i, PersistableBundle persistableBundle, boolean z)
+            throws RemoteException;
 
     void updateConfigForPhoneId(int i, String str) throws RemoteException;
 
     public static class Default implements ICarrierConfigLoader {
         @Override // com.android.internal.telephony.ICarrierConfigLoader
-        public PersistableBundle getConfigForSubId(int subId, String callingPackage) throws RemoteException {
+        public PersistableBundle getConfigForSubId(int subId, String callingPackage)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.ICarrierConfigLoader
-        public PersistableBundle getConfigForSubIdWithFeature(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+        public PersistableBundle getConfigForSubIdWithFeature(
+                int subId, String callingPackage, String callingFeatureId) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.ICarrierConfigLoader
-        public void overrideConfig(int subId, PersistableBundle overrides, boolean persistent) throws RemoteException {
-        }
+        public void overrideConfig(int subId, PersistableBundle overrides, boolean persistent)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ICarrierConfigLoader
-        public void notifyConfigChangedForSubId(int subId) throws RemoteException {
-        }
+        public void notifyConfigChangedForSubId(int subId) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ICarrierConfigLoader
-        public void updateConfigForPhoneId(int phoneId, String simState) throws RemoteException {
-        }
+        public void updateConfigForPhoneId(int phoneId, String simState) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ICarrierConfigLoader
         public String getDefaultCarrierServicePackageName() throws RemoteException {
@@ -56,7 +59,9 @@ public interface ICarrierConfigLoader extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ICarrierConfigLoader
-        public PersistableBundle getConfigSubsetForSubIdWithFeature(int subId, String callingPackage, String callingFeatureId, String[] carrierConfigs) throws RemoteException {
+        public PersistableBundle getConfigSubsetForSubIdWithFeature(
+                int subId, String callingPackage, String callingFeatureId, String[] carrierConfigs)
+                throws RemoteException {
             return null;
         }
 
@@ -66,8 +71,9 @@ public interface ICarrierConfigLoader extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICarrierConfigLoader {
-        public static final String DESCRIPTOR = "com.android.internal.telephony.ICarrierConfigLoader";
+    public abstract static class Stub extends Binder implements ICarrierConfigLoader {
+        public static final String DESCRIPTOR =
+                "com.android.internal.telephony.ICarrierConfigLoader";
         static final int TRANSACTION_getConfigForSubId = 1;
         static final int TRANSACTION_getConfigForSubIdWithFeature = 2;
         static final int TRANSACTION_getConfigSubsetForSubIdWithFeature = 7;
@@ -87,7 +93,9 @@ public interface ICarrierConfigLoader extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static ICarrierConfigLoader asInterface(IBinder obj) {
@@ -133,7 +141,8 @@ public interface ICarrierConfigLoader extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -155,13 +164,15 @@ public interface ICarrierConfigLoader extends IInterface {
                     String _arg12 = data.readString();
                     String _arg2 = data.readString();
                     data.enforceNoDataAvail();
-                    PersistableBundle _result2 = getConfigForSubIdWithFeature(_arg02, _arg12, _arg2);
+                    PersistableBundle _result2 =
+                            getConfigForSubIdWithFeature(_arg02, _arg12, _arg2);
                     reply.writeNoException();
                     reply.writeTypedObject(_result2, 1);
                     return true;
                 case 3:
                     int _arg03 = data.readInt();
-                    PersistableBundle _arg13 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _arg13 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
                     boolean _arg22 = data.readBoolean();
                     data.enforceNoDataAvail();
                     overrideConfig(_arg03, _arg13, _arg22);
@@ -191,7 +202,8 @@ public interface ICarrierConfigLoader extends IInterface {
                     String _arg23 = data.readString();
                     String[] _arg3 = data.createStringArray();
                     data.enforceNoDataAvail();
-                    PersistableBundle _result4 = getConfigSubsetForSubIdWithFeature(_arg06, _arg15, _arg23, _arg3);
+                    PersistableBundle _result4 =
+                            getConfigSubsetForSubIdWithFeature(_arg06, _arg15, _arg23, _arg3);
                     reply.writeNoException();
                     reply.writeTypedObject(_result4, 1);
                     return true;
@@ -217,7 +229,8 @@ public interface ICarrierConfigLoader extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ICarrierConfigLoader
-            public PersistableBundle getConfigForSubId(int subId, String callingPackage) throws RemoteException {
+            public PersistableBundle getConfigForSubId(int subId, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -226,7 +239,8 @@ public interface ICarrierConfigLoader extends IInterface {
                     _data.writeString(callingPackage);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    PersistableBundle _result = (PersistableBundle) _reply.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _result =
+                            (PersistableBundle) _reply.readTypedObject(PersistableBundle.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -235,7 +249,9 @@ public interface ICarrierConfigLoader extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ICarrierConfigLoader
-            public PersistableBundle getConfigForSubIdWithFeature(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+            public PersistableBundle getConfigForSubIdWithFeature(
+                    int subId, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -245,7 +261,8 @@ public interface ICarrierConfigLoader extends IInterface {
                     _data.writeString(callingFeatureId);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    PersistableBundle _result = (PersistableBundle) _reply.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _result =
+                            (PersistableBundle) _reply.readTypedObject(PersistableBundle.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -254,7 +271,8 @@ public interface ICarrierConfigLoader extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ICarrierConfigLoader
-            public void overrideConfig(int subId, PersistableBundle overrides, boolean persistent) throws RemoteException {
+            public void overrideConfig(int subId, PersistableBundle overrides, boolean persistent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -286,7 +304,8 @@ public interface ICarrierConfigLoader extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ICarrierConfigLoader
-            public void updateConfigForPhoneId(int phoneId, String simState) throws RemoteException {
+            public void updateConfigForPhoneId(int phoneId, String simState)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -318,7 +337,12 @@ public interface ICarrierConfigLoader extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ICarrierConfigLoader
-            public PersistableBundle getConfigSubsetForSubIdWithFeature(int subId, String callingPackage, String callingFeatureId, String[] carrierConfigs) throws RemoteException {
+            public PersistableBundle getConfigSubsetForSubIdWithFeature(
+                    int subId,
+                    String callingPackage,
+                    String callingFeatureId,
+                    String[] carrierConfigs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -329,7 +353,8 @@ public interface ICarrierConfigLoader extends IInterface {
                     _data.writeStringArray(carrierConfigs);
                     this.mRemote.transact(7, _data, _reply, 0);
                     _reply.readException();
-                    PersistableBundle _result = (PersistableBundle) _reply.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _result =
+                            (PersistableBundle) _reply.readTypedObject(PersistableBundle.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -339,15 +364,21 @@ public interface ICarrierConfigLoader extends IInterface {
         }
 
         protected void overrideConfig_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_PHONE_STATE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_PHONE_STATE, getCallingPid(), getCallingUid());
         }
 
         protected void updateConfigForPhoneId_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_PHONE_STATE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_PHONE_STATE, getCallingPid(), getCallingUid());
         }
 
-        protected void getDefaultCarrierServicePackageName_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.READ_PRIVILEGED_PHONE_STATE, getCallingPid(), getCallingUid());
+        protected void getDefaultCarrierServicePackageName_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.READ_PRIVILEGED_PHONE_STATE,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         @Override // android.os.Binder

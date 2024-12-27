@@ -46,7 +46,8 @@ public interface IOemLock extends IInterface {
                 try {
                     obtain.writeInterfaceToken(IOemLock.DESCRIPTOR);
                     if (!this.mRemote.transact(2, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method isOemUnlockAllowedByCarrier is unimplemented.");
+                        throw new RemoteException(
+                                "Method isOemUnlockAllowedByCarrier is unimplemented.");
                     }
                     obtain2.readException();
                     return obtain2.readBoolean();
@@ -62,7 +63,8 @@ public interface IOemLock extends IInterface {
                 try {
                     obtain.writeInterfaceToken(IOemLock.DESCRIPTOR);
                     if (!this.mRemote.transact(3, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method isOemUnlockAllowedByDevice is unimplemented.");
+                        throw new RemoteException(
+                                "Method isOemUnlockAllowedByDevice is unimplemented.");
                     }
                     obtain2.readException();
                     return obtain2.readBoolean();
@@ -80,7 +82,8 @@ public interface IOemLock extends IInterface {
                     obtain.writeBoolean(z);
                     obtain.writeByteArray(bArr);
                     if (!this.mRemote.transact(4, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method setOemUnlockAllowedByCarrier is unimplemented.");
+                        throw new RemoteException(
+                                "Method setOemUnlockAllowedByCarrier is unimplemented.");
                     }
                     obtain2.readException();
                     return obtain2.readInt();
@@ -97,7 +100,8 @@ public interface IOemLock extends IInterface {
                     obtain.writeInterfaceToken(IOemLock.DESCRIPTOR);
                     obtain.writeBoolean(z);
                     if (!this.mRemote.transact(5, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method setOemUnlockAllowedByDevice is unimplemented.");
+                        throw new RemoteException(
+                                "Method setOemUnlockAllowedByDevice is unimplemented.");
                     }
                     obtain2.readException();
                 } finally {

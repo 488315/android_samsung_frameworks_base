@@ -4,6 +4,7 @@ import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.util.Printer;
 import android.util.Slog;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -25,7 +26,8 @@ public class InputMethodSubtypeArray {
             this.mCount = 0;
         } else {
             this.mCount = subtypes.size();
-            this.mInstance = (InputMethodSubtype[]) subtypes.toArray(new InputMethodSubtype[this.mCount]);
+            this.mInstance =
+                    (InputMethodSubtype[]) subtypes.toArray(new InputMethodSubtype[this.mCount]);
         }
     }
 
@@ -84,7 +86,8 @@ public class InputMethodSubtypeArray {
             synchronized (this.mLockObject) {
                 instance = this.mInstance;
                 if (instance == null) {
-                    byte[] decompressedData = decompress(this.mCompressedData, this.mDecompressedSize);
+                    byte[] decompressedData =
+                            decompress(this.mCompressedData, this.mDecompressedSize);
                     this.mCompressedData = null;
                     this.mDecompressedSize = 0;
                     if (decompressedData != null) {

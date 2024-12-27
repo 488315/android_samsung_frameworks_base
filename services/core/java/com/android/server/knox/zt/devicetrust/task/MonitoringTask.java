@@ -2,10 +2,13 @@ package com.android.server.knox.zt.devicetrust.task;
 
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.android.server.knox.zt.devicetrust.EndpointMonitorImpl;
 import com.android.server.knox.zt.devicetrust.EndpointMonitorNative;
 import com.android.server.knox.zt.devicetrust.data.EndpointData;
+
 import com.samsung.android.knox.zt.devicetrust.IEndpointMonitorListener;
+
 import java.util.function.Predicate;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -21,7 +24,15 @@ public abstract class MonitoringTask implements Runnable {
     public final int mType;
     public final int mUid;
 
-    public MonitoringTask(int i, int i2, int i3, int i4, int i5, IEndpointMonitorListener iEndpointMonitorListener, Predicate predicate, EndpointMonitorImpl.Injector injector) {
+    public MonitoringTask(
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            IEndpointMonitorListener iEndpointMonitorListener,
+            Predicate predicate,
+            EndpointMonitorImpl.Injector injector) {
         this.mType = i;
         this.mUid = i2;
         this.mMode = i3;
@@ -45,8 +56,11 @@ public abstract class MonitoringTask implements Runnable {
         return predicate != null ? predicate : new MonitoringTask$$ExternalSyntheticLambda0();
     }
 
-    public final IEndpointMonitorListener ensureListener(IEndpointMonitorListener iEndpointMonitorListener) {
-        return iEndpointMonitorListener != null ? iEndpointMonitorListener : new IEndpointMonitorListener.Default();
+    public final IEndpointMonitorListener ensureListener(
+            IEndpointMonitorListener iEndpointMonitorListener) {
+        return iEndpointMonitorListener != null
+                ? iEndpointMonitorListener
+                : new IEndpointMonitorListener.Default();
     }
 
     public final long getBootTimeNanos() {
@@ -95,17 +109,33 @@ public abstract class MonitoringTask implements Runnable {
 
     public final void onEvent(EndpointData endpointData) throws RemoteException {
         IEndpointMonitorListener iEndpointMonitorListener;
-        if (this.mFilter.test(endpointData) && (iEndpointMonitorListener = this.mListener) != null) {
+        if (this.mFilter.test(endpointData)
+                && (iEndpointMonitorListener = this.mListener) != null) {
             int i = this.mMode;
             if (i == 1) {
-                iEndpointMonitorListener.onEventSimplified(this.mType, endpointData.adjustTime(this.mBootTimeNanos).updateExtras(this.mExtras).toLine());
+                iEndpointMonitorListener.onEventSimplified(
+                        this.mType,
+                        endpointData
+                                .adjustTime(this.mBootTimeNanos)
+                                .updateExtras(this.mExtras)
+                                .toLine());
             } else if (i == 2) {
-                iEndpointMonitorListener.onEventGeneralized(this.mType, endpointData.adjustTime(this.mBootTimeNanos).updateExtras(this.mExtras).toJson());
+                iEndpointMonitorListener.onEventGeneralized(
+                        this.mType,
+                        endpointData
+                                .adjustTime(this.mBootTimeNanos)
+                                .updateExtras(this.mExtras)
+                                .toJson());
             } else {
                 if (i != 3) {
                     return;
                 }
-                iEndpointMonitorListener.onEvent(this.mType, endpointData.adjustTime(this.mBootTimeNanos).updateExtras(this.mExtras).toBundle());
+                iEndpointMonitorListener.onEvent(
+                        this.mType,
+                        endpointData
+                                .adjustTime(this.mBootTimeNanos)
+                                .updateExtras(this.mExtras)
+                                .toBundle());
             }
         }
     }

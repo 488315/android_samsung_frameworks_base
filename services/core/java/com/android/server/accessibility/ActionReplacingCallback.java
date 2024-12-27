@@ -9,12 +9,14 @@ import android.view.MagnificationSpec;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.IAccessibilityInteractionConnection;
 import android.view.accessibility.IAccessibilityInteractionConnectionCallback;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class ActionReplacingCallback extends IAccessibilityInteractionConnectionCallback.Stub {
+public final class ActionReplacingCallback
+        extends IAccessibilityInteractionConnectionCallback.Stub {
     public final int mInteractionId;
     public AccessibilityNodeInfo mNodeFromOriginalWindow;
     public AccessibilityNodeInfo mNodeWithReplacementActions;
@@ -28,7 +30,12 @@ public final class ActionReplacingCallback extends IAccessibilityInteractionConn
     public boolean mSetFindNodesFromOriginalWindowCalled = false;
     public boolean mSetPrefetchFromOriginalWindowCalled = false;
 
-    public ActionReplacingCallback(IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback, IAccessibilityInteractionConnection iAccessibilityInteractionConnection, int i, int i2, long j) {
+    public ActionReplacingCallback(
+            IAccessibilityInteractionConnectionCallback iAccessibilityInteractionConnectionCallback,
+            IAccessibilityInteractionConnection iAccessibilityInteractionConnection,
+            int i,
+            int i2,
+            long j) {
         this.mServiceCallback = iAccessibilityInteractionConnectionCallback;
         this.mInteractionId = i;
         int i3 = i + 1;
@@ -36,7 +43,17 @@ public final class ActionReplacingCallback extends IAccessibilityInteractionConn
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                iAccessibilityInteractionConnection.findAccessibilityNodeInfoByAccessibilityId(AccessibilityNodeInfo.ROOT_NODE_ID, (Region) null, i3, this, 0, i2, j, (MagnificationSpec) null, (float[]) null, (Bundle) null);
+                iAccessibilityInteractionConnection.findAccessibilityNodeInfoByAccessibilityId(
+                        AccessibilityNodeInfo.ROOT_NODE_ID,
+                        (Region) null,
+                        i3,
+                        this,
+                        0,
+                        i2,
+                        j,
+                        (MagnificationSpec) null,
+                        (float[]) null,
+                        (Bundle) null);
             } catch (RemoteException unused) {
                 this.mReplacementNodeIsReadyOrFailed = true;
             }
@@ -66,20 +83,25 @@ public final class ActionReplacingCallback extends IAccessibilityInteractionConn
         accessibilityNodeInfo.setScrollable(false);
         accessibilityNodeInfo.setLongClickable(false);
         accessibilityNodeInfo.setDismissable(false);
-        if (accessibilityNodeInfo.getSourceNodeId() != AccessibilityNodeInfo.ROOT_NODE_ID || (accessibilityNodeInfo2 = this.mNodeWithReplacementActions) == null) {
+        if (accessibilityNodeInfo.getSourceNodeId() != AccessibilityNodeInfo.ROOT_NODE_ID
+                || (accessibilityNodeInfo2 = this.mNodeWithReplacementActions) == null) {
             return;
         }
-        List<AccessibilityNodeInfo.AccessibilityAction> actionList = accessibilityNodeInfo2.getActionList();
+        List<AccessibilityNodeInfo.AccessibilityAction> actionList =
+                accessibilityNodeInfo2.getActionList();
         if (actionList != null) {
             for (int i = 0; i < actionList.size(); i++) {
                 accessibilityNodeInfo.addAction(actionList.get(i));
             }
-            accessibilityNodeInfo.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_ACCESSIBILITY_FOCUS);
-            accessibilityNodeInfo.addAction(AccessibilityNodeInfo.AccessibilityAction.ACTION_CLEAR_ACCESSIBILITY_FOCUS);
+            accessibilityNodeInfo.addAction(
+                    AccessibilityNodeInfo.AccessibilityAction.ACTION_ACCESSIBILITY_FOCUS);
+            accessibilityNodeInfo.addAction(
+                    AccessibilityNodeInfo.AccessibilityAction.ACTION_CLEAR_ACCESSIBILITY_FOCUS);
         }
         accessibilityNodeInfo.setClickable(this.mNodeWithReplacementActions.isClickable());
         accessibilityNodeInfo.setFocusable(this.mNodeWithReplacementActions.isFocusable());
-        accessibilityNodeInfo.setContextClickable(this.mNodeWithReplacementActions.isContextClickable());
+        accessibilityNodeInfo.setContextClickable(
+                this.mNodeWithReplacementActions.isContextClickable());
         accessibilityNodeInfo.setScrollable(this.mNodeWithReplacementActions.isScrollable());
         accessibilityNodeInfo.setLongClickable(this.mNodeWithReplacementActions.isLongClickable());
         accessibilityNodeInfo.setDismissable(this.mNodeWithReplacementActions.isDismissable());
@@ -96,7 +118,9 @@ public final class ActionReplacingCallback extends IAccessibilityInteractionConn
         synchronized (this.mLock) {
             try {
                 z = true;
-                z2 = this.mReplacementNodeIsReadyOrFailed && this.mSetFindNodeFromOriginalWindowCalled;
+                z2 =
+                        this.mReplacementNodeIsReadyOrFailed
+                                && this.mSetFindNodeFromOriginalWindowCalled;
                 if (z2 && (accessibilityNodeInfo2 = this.mNodeFromOriginalWindow) != null) {
                     replaceActionsOnInfoLocked(accessibilityNodeInfo2);
                     this.mSetFindNodeFromOriginalWindowCalled = false;
@@ -107,13 +131,16 @@ public final class ActionReplacingCallback extends IAccessibilityInteractionConn
         }
         if (z2) {
             try {
-                this.mServiceCallback.setFindAccessibilityNodeInfoResult(accessibilityNodeInfo, this.mInteractionId);
+                this.mServiceCallback.setFindAccessibilityNodeInfoResult(
+                        accessibilityNodeInfo, this.mInteractionId);
             } catch (RemoteException unused) {
             }
         }
         synchronized (this.mLock) {
             try {
-                z3 = this.mReplacementNodeIsReadyOrFailed && this.mSetFindNodesFromOriginalWindowCalled;
+                z3 =
+                        this.mReplacementNodeIsReadyOrFailed
+                                && this.mSetFindNodesFromOriginalWindowCalled;
                 list = null;
                 if (z3) {
                     list2 = replaceActionsLocked(this.mNodesFromOriginalWindow);
@@ -126,13 +153,15 @@ public final class ActionReplacingCallback extends IAccessibilityInteractionConn
         }
         if (z3) {
             try {
-                this.mServiceCallback.setFindAccessibilityNodeInfosResult(list2, this.mInteractionId);
+                this.mServiceCallback.setFindAccessibilityNodeInfosResult(
+                        list2, this.mInteractionId);
             } catch (RemoteException unused2) {
             }
         }
         synchronized (this.mLock) {
             try {
-                if (!this.mReplacementNodeIsReadyOrFailed || !this.mSetPrefetchFromOriginalWindowCalled) {
+                if (!this.mReplacementNodeIsReadyOrFailed
+                        || !this.mSetPrefetchFromOriginalWindowCalled) {
                     z = false;
                 }
                 if (z) {
@@ -144,7 +173,8 @@ public final class ActionReplacingCallback extends IAccessibilityInteractionConn
         }
         if (z) {
             try {
-                this.mServiceCallback.setPrefetchAccessibilityNodeInfoResult(list, this.mInteractionId);
+                this.mServiceCallback.setPrefetchAccessibilityNodeInfoResult(
+                        list, this.mInteractionId);
             } catch (RemoteException unused3) {
             }
         }
@@ -158,7 +188,8 @@ public final class ActionReplacingCallback extends IAccessibilityInteractionConn
         this.mServiceCallback.sendTakeScreenshotOfWindowError(i, i2);
     }
 
-    public final void setFindAccessibilityNodeInfoResult(AccessibilityNodeInfo accessibilityNodeInfo, int i) {
+    public final void setFindAccessibilityNodeInfoResult(
+            AccessibilityNodeInfo accessibilityNodeInfo, int i) {
         synchronized (this.mLock) {
             try {
                 if (i == this.mInteractionId) {
@@ -190,8 +221,10 @@ public final class ActionReplacingCallback extends IAccessibilityInteractionConn
                         return;
                     }
                     for (int i2 = 0; i2 < list.size(); i2++) {
-                        AccessibilityNodeInfo accessibilityNodeInfo = (AccessibilityNodeInfo) list.get(i2);
-                        if (accessibilityNodeInfo.getSourceNodeId() == AccessibilityNodeInfo.ROOT_NODE_ID) {
+                        AccessibilityNodeInfo accessibilityNodeInfo =
+                                (AccessibilityNodeInfo) list.get(i2);
+                        if (accessibilityNodeInfo.getSourceNodeId()
+                                == AccessibilityNodeInfo.ROOT_NODE_ID) {
                             this.mNodeWithReplacementActions = accessibilityNodeInfo;
                         }
                     }

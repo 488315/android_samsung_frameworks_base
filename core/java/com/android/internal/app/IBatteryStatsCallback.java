@@ -6,6 +6,7 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.SemSimpleNetworkStats;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -16,8 +17,8 @@ public interface IBatteryStatsCallback extends IInterface {
 
     public static class Default implements IBatteryStatsCallback {
         @Override // com.android.internal.app.IBatteryStatsCallback
-        public void notifyNetworkStatsUpdated(List<SemSimpleNetworkStats> stats) throws RemoteException {
-        }
+        public void notifyNetworkStatsUpdated(List<SemSimpleNetworkStats> stats)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -25,7 +26,7 @@ public interface IBatteryStatsCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBatteryStatsCallback {
+    public abstract static class Stub extends Binder implements IBatteryStatsCallback {
         static final int TRANSACTION_notifyNetworkStatsUpdated = 1;
 
         public Stub() {
@@ -63,7 +64,8 @@ public interface IBatteryStatsCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IBatteryStatsCallback.DESCRIPTOR);
             }
@@ -73,7 +75,8 @@ public interface IBatteryStatsCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    List<SemSimpleNetworkStats> _arg0 = data.createTypedArrayList(SemSimpleNetworkStats.CREATOR);
+                    List<SemSimpleNetworkStats> _arg0 =
+                            data.createTypedArrayList(SemSimpleNetworkStats.CREATOR);
                     data.enforceNoDataAvail();
                     notifyNetworkStatsUpdated(_arg0);
                     return true;
@@ -99,7 +102,8 @@ public interface IBatteryStatsCallback extends IInterface {
             }
 
             @Override // com.android.internal.app.IBatteryStatsCallback
-            public void notifyNetworkStatsUpdated(List<SemSimpleNetworkStats> stats) throws RemoteException {
+            public void notifyNetworkStatsUpdated(List<SemSimpleNetworkStats> stats)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IBatteryStatsCallback.DESCRIPTOR);

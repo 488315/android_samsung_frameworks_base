@@ -4,6 +4,7 @@ import android.net.resolv.aidl.IDnsResolverUnsolicitedEventListener;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.nio.BufferOverflowException;
@@ -19,28 +20,29 @@ public abstract class Metric implements Parcelable {
     private final String mClassName;
     private final int mMetricId;
     private static final Map sLoadedClasses = new HashMap();
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() { // from class: com.att.iqi.lib.Metric.1
-        @Override // android.os.Parcelable.Creator
-        public Metric createFromParcel(Parcel parcel) {
-            int dataPosition = parcel.dataPosition();
-            if (parcel.readInt() == 1) {
-                throw new IllegalArgumentException("API 1 not supported");
-            }
-            parcel.readInt();
-            String readString = parcel.readString();
-            String packageName = Metric.class.getPackageName();
-            if (readString == null || !readString.startsWith(packageName)) {
-                throw new IllegalArgumentException("Invalid or null package name found");
-            }
-            parcel.setDataPosition(dataPosition);
-            return Metric.maybeLoadAndInstantiate(readString, parcel);
-        }
+    public static final Parcelable.Creator CREATOR =
+            new Parcelable.Creator() { // from class: com.att.iqi.lib.Metric.1
+                @Override // android.os.Parcelable.Creator
+                public Metric createFromParcel(Parcel parcel) {
+                    int dataPosition = parcel.dataPosition();
+                    if (parcel.readInt() == 1) {
+                        throw new IllegalArgumentException("API 1 not supported");
+                    }
+                    parcel.readInt();
+                    String readString = parcel.readString();
+                    String packageName = Metric.class.getPackageName();
+                    if (readString == null || !readString.startsWith(packageName)) {
+                        throw new IllegalArgumentException("Invalid or null package name found");
+                    }
+                    parcel.setDataPosition(dataPosition);
+                    return Metric.maybeLoadAndInstantiate(readString, parcel);
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public Metric[] newArray(int i) {
-            return new Metric[i];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public Metric[] newArray(int i) {
+                    return new Metric[i];
+                }
+            };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ID implements Parcelable {
@@ -48,17 +50,18 @@ public abstract class Metric implements Parcelable {
         private final String mStringID;
         private static final String sIDPattern = "[A-Z0-9_]{4}";
         private static final Pattern sPattern = Pattern.compile(sIDPattern);
-        public static final Parcelable.Creator CREATOR = new Parcelable.Creator() { // from class: com.att.iqi.lib.Metric.ID.1
-            @Override // android.os.Parcelable.Creator
-            public ID createFromParcel(Parcel parcel) {
-                return new ID(parcel, 0);
-            }
+        public static final Parcelable.Creator CREATOR =
+                new Parcelable.Creator() { // from class: com.att.iqi.lib.Metric.ID.1
+                    @Override // android.os.Parcelable.Creator
+                    public ID createFromParcel(Parcel parcel) {
+                        return new ID(parcel, 0);
+                    }
 
-            @Override // android.os.Parcelable.Creator
-            public ID[] newArray(int i) {
-                return new ID[i];
-            }
-        };
+                    @Override // android.os.Parcelable.Creator
+                    public ID[] newArray(int i) {
+                        return new ID[i];
+                    }
+                };
 
         public ID(int i) {
             this.mID = i;
@@ -88,14 +91,32 @@ public abstract class Metric implements Parcelable {
         }
 
         private static String idFromInt(int i) {
-            return new String(new char[]{(char) ((i >> 24) & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT), (char) ((i >> 16) & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT), (char) ((i >> 8) & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT), (char) (i & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT)});
+            return new String(
+                    new char[] {
+                        (char)
+                                ((i >> 24)
+                                        & IDnsResolverUnsolicitedEventListener
+                                                .DNS_HEALTH_RESULT_TIMEOUT),
+                        (char)
+                                ((i >> 16)
+                                        & IDnsResolverUnsolicitedEventListener
+                                                .DNS_HEALTH_RESULT_TIMEOUT),
+                        (char)
+                                ((i >> 8)
+                                        & IDnsResolverUnsolicitedEventListener
+                                                .DNS_HEALTH_RESULT_TIMEOUT),
+                        (char) (i & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT)
+                    });
         }
 
         private static int idFromString(String str) {
             if (str.length() != 4) {
                 return 0;
             }
-            return (str.charAt(3) & 255) | ((str.charAt(0) & 255) << 24) | ((str.charAt(1) & 255) << 16) | ((str.charAt(2) & 255) << 8);
+            return (str.charAt(3) & 255)
+                    | ((str.charAt(0) & 255) << 24)
+                    | ((str.charAt(1) & 255) << 16)
+                    | ((str.charAt(2) & 255) << 8);
         }
 
         private boolean isInvalidId(String str) {

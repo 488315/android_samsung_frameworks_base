@@ -15,7 +15,8 @@ public class KeyStoreOperation {
     private final IKeystoreOperation mOperation;
     private final KeyParameter[] mParameters;
 
-    public KeyStoreOperation(IKeystoreOperation operation, Long challenge, KeyParameter[] parameters) {
+    public KeyStoreOperation(
+            IKeystoreOperation operation, Long challenge, KeyParameter[] parameters) {
         Binder.allowBlocking(operation.asBinder());
         this.mOperation = operation;
         this.mChallenge = challenge;
@@ -39,7 +40,8 @@ public class KeyStoreOperation {
         } catch (ServiceSpecificException e2) {
             switch (e2.errorCode) {
                 case 19:
-                    throw new IllegalThreadStateException("Cannot update the same operation concurrently.");
+                    throw new IllegalThreadStateException(
+                            "Cannot update the same operation concurrently.");
                 default:
                     throw KeyStore2.getKeyStoreException(e2.errorCode, e2.getMessage());
             }
@@ -48,14 +50,16 @@ public class KeyStoreOperation {
 
     public void updateAad(final byte[] input) throws KeyStoreException {
         StrictMode.noteSlowCall("updateAad");
-        handleExceptions(new CheckedRemoteRequest() { // from class: android.security.KeyStoreOperation$$ExternalSyntheticLambda0
-            @Override // android.security.CheckedRemoteRequest
-            public final Object execute() {
-                Integer lambda$updateAad$0;
-                lambda$updateAad$0 = KeyStoreOperation.this.lambda$updateAad$0(input);
-                return lambda$updateAad$0;
-            }
-        });
+        handleExceptions(
+                new CheckedRemoteRequest() { // from class:
+                                             // android.security.KeyStoreOperation$$ExternalSyntheticLambda0
+                    @Override // android.security.CheckedRemoteRequest
+                    public final Object execute() {
+                        Integer lambda$updateAad$0;
+                        lambda$updateAad$0 = KeyStoreOperation.this.lambda$updateAad$0(input);
+                        return lambda$updateAad$0;
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -66,14 +70,17 @@ public class KeyStoreOperation {
 
     public byte[] update(final byte[] input) throws KeyStoreException {
         StrictMode.noteSlowCall("update");
-        return (byte[]) handleExceptions(new CheckedRemoteRequest() { // from class: android.security.KeyStoreOperation$$ExternalSyntheticLambda2
-            @Override // android.security.CheckedRemoteRequest
-            public final Object execute() {
-                byte[] lambda$update$1;
-                lambda$update$1 = KeyStoreOperation.this.lambda$update$1(input);
-                return lambda$update$1;
-            }
-        });
+        return (byte[])
+                handleExceptions(
+                        new CheckedRemoteRequest() { // from class:
+                                                     // android.security.KeyStoreOperation$$ExternalSyntheticLambda2
+                            @Override // android.security.CheckedRemoteRequest
+                            public final Object execute() {
+                                byte[] lambda$update$1;
+                                lambda$update$1 = KeyStoreOperation.this.lambda$update$1(input);
+                                return lambda$update$1;
+                            }
+                        });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -83,31 +90,38 @@ public class KeyStoreOperation {
 
     public byte[] finish(final byte[] input, final byte[] signature) throws KeyStoreException {
         StrictMode.noteSlowCall("finish");
-        return (byte[]) handleExceptions(new CheckedRemoteRequest() { // from class: android.security.KeyStoreOperation$$ExternalSyntheticLambda1
-            @Override // android.security.CheckedRemoteRequest
-            public final Object execute() {
-                byte[] lambda$finish$2;
-                lambda$finish$2 = KeyStoreOperation.this.lambda$finish$2(input, signature);
-                return lambda$finish$2;
-            }
-        });
+        return (byte[])
+                handleExceptions(
+                        new CheckedRemoteRequest() { // from class:
+                                                     // android.security.KeyStoreOperation$$ExternalSyntheticLambda1
+                            @Override // android.security.CheckedRemoteRequest
+                            public final Object execute() {
+                                byte[] lambda$finish$2;
+                                lambda$finish$2 =
+                                        KeyStoreOperation.this.lambda$finish$2(input, signature);
+                                return lambda$finish$2;
+                            }
+                        });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ byte[] lambda$finish$2(byte[] input, byte[] signature) throws RemoteException {
+    public /* synthetic */ byte[] lambda$finish$2(byte[] input, byte[] signature)
+            throws RemoteException {
         return this.mOperation.finish(input, signature);
     }
 
     public void abort() throws KeyStoreException {
         StrictMode.noteSlowCall("abort");
-        handleExceptions(new CheckedRemoteRequest() { // from class: android.security.KeyStoreOperation$$ExternalSyntheticLambda3
-            @Override // android.security.CheckedRemoteRequest
-            public final Object execute() {
-                Integer lambda$abort$3;
-                lambda$abort$3 = KeyStoreOperation.this.lambda$abort$3();
-                return lambda$abort$3;
-            }
-        });
+        handleExceptions(
+                new CheckedRemoteRequest() { // from class:
+                                             // android.security.KeyStoreOperation$$ExternalSyntheticLambda3
+                    @Override // android.security.CheckedRemoteRequest
+                    public final Object execute() {
+                        Integer lambda$abort$3;
+                        lambda$abort$3 = KeyStoreOperation.this.lambda$abort$3();
+                        return lambda$abort$3;
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */

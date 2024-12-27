@@ -14,8 +14,14 @@ import android.util.ArraySet;
 import android.util.Log;
 import android.util.Printer;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.hidden_from_bootclasspath.android.content.pm.Flags;
 import com.android.internal.util.XmlUtils;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlSerializer;
+
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -27,9 +33,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlSerializer;
 
 /* loaded from: classes.dex */
 public class IntentFilter implements Parcelable {
@@ -106,23 +109,23 @@ public class IntentFilter implements Parcelable {
     private static final double[] EMPTY_DOUBLE_ARRAY = new double[0];
     private static final String[] EMPTY_STRING_ARRAY = new String[0];
     private static final boolean[] EMPTY_BOOLEAN_ARRAY = new boolean[0];
-    public static final Parcelable.Creator<IntentFilter> CREATOR = new Parcelable.Creator<IntentFilter>() { // from class: android.content.IntentFilter.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IntentFilter createFromParcel(Parcel source) {
-            return new IntentFilter(source);
-        }
+    public static final Parcelable.Creator<IntentFilter> CREATOR =
+            new Parcelable.Creator<IntentFilter>() { // from class: android.content.IntentFilter.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IntentFilter createFromParcel(Parcel source) {
+                    return new IntentFilter(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IntentFilter[] newArray(int size) {
-            return new IntentFilter[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IntentFilter[] newArray(int size) {
+                    return new IntentFilter[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface InstantAppVisibility {
-    }
+    public @interface InstantAppVisibility {}
 
     private static int findStringInSet(String[] set, String string, int[] lengths, int lenPos) {
         if (set == null) {
@@ -160,7 +163,8 @@ public class IntentFilter implements Parcelable {
         return newSet;
     }
 
-    private static String[] removeStringFromSet(String[] set, String string, int[] lengths, int lenPos) {
+    private static String[] removeStringFromSet(
+            String[] set, String string, int[] lengths, int lenPos) {
         int pos = findStringInSet(set, string, lengths, lenPos);
         if (pos < 0) {
             return set;
@@ -186,8 +190,7 @@ public class IntentFilter implements Parcelable {
     }
 
     public static class MalformedMimeTypeException extends AndroidException {
-        public MalformedMimeTypeException() {
-        }
+        public MalformedMimeTypeException() {}
 
         public MalformedMimeTypeException(String name) {
             super(name);
@@ -363,11 +366,15 @@ public class IntentFilter implements Parcelable {
     }
 
     public final boolean handleAllWebDataURI() {
-        return hasCategory(Intent.CATEGORY_APP_BROWSER) || (handlesWebUris(false) && countDataAuthorities() == 0);
+        return hasCategory(Intent.CATEGORY_APP_BROWSER)
+                || (handlesWebUris(false) && countDataAuthorities() == 0);
     }
 
     public final boolean handlesWebUris(boolean onlyWebSchemes) {
-        if (!hasAction("android.intent.action.VIEW") || !hasCategory(Intent.CATEGORY_BROWSABLE) || this.mDataSchemes == null || this.mDataSchemes.size() == 0) {
+        if (!hasAction("android.intent.action.VIEW")
+                || !hasCategory(Intent.CATEGORY_BROWSABLE)
+                || this.mDataSchemes == null
+                || this.mDataSchemes.size() == 0) {
             return false;
         }
         int N = this.mDataSchemes.size();
@@ -454,7 +461,8 @@ public class IntentFilter implements Parcelable {
         return matchAction(action, false, null);
     }
 
-    private boolean matchAction(String action, boolean wildcardSupported, Collection<String> ignoreActions) {
+    private boolean matchAction(
+            String action, boolean wildcardSupported, Collection<String> ignoreActions) {
         if (!wildcardSupported || !"*".equals(action)) {
             if (ignoreActions != null && ignoreActions.contains(action)) {
                 return false;
@@ -483,12 +491,15 @@ public class IntentFilter implements Parcelable {
     }
 
     public final void addDataType(String type) throws MalformedMimeTypeException {
-        processMimeType(type, new BiConsumer() { // from class: android.content.IntentFilter$$ExternalSyntheticLambda2
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                IntentFilter.this.lambda$addDataType$0((String) obj, (Boolean) obj2);
-            }
-        });
+        processMimeType(
+                type,
+                new BiConsumer() { // from class:
+                    // android.content.IntentFilter$$ExternalSyntheticLambda2
+                    @Override // java.util.function.BiConsumer
+                    public final void accept(Object obj, Object obj2) {
+                        IntentFilter.this.lambda$addDataType$0((String) obj, (Boolean) obj2);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -508,16 +519,20 @@ public class IntentFilter implements Parcelable {
     }
 
     public final void addDynamicDataType(String type) throws MalformedMimeTypeException {
-        processMimeType(type, new BiConsumer() { // from class: android.content.IntentFilter$$ExternalSyntheticLambda0
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                IntentFilter.this.lambda$addDynamicDataType$1((String) obj, (Boolean) obj2);
-            }
-        });
+        processMimeType(
+                type,
+                new BiConsumer() { // from class:
+                    // android.content.IntentFilter$$ExternalSyntheticLambda0
+                    @Override // java.util.function.BiConsumer
+                    public final void accept(Object obj, Object obj2) {
+                        IntentFilter.this.lambda$addDynamicDataType$1((String) obj, (Boolean) obj2);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$addDynamicDataType$1(String internalType, Boolean isPartial) {
+    public /* synthetic */ void lambda$addDynamicDataType$1(
+            String internalType, Boolean isPartial) {
         if (this.mDataTypes == null) {
             this.mDataTypes = new ArrayList<>();
         }
@@ -527,7 +542,8 @@ public class IntentFilter implements Parcelable {
         }
     }
 
-    private void processMimeType(String type, BiConsumer<String, Boolean> action) throws MalformedMimeTypeException {
+    private void processMimeType(String type, BiConsumer<String, Boolean> action)
+            throws MalformedMimeTypeException {
         int slashpos = type.indexOf(47);
         int typelen = type.length();
         if (slashpos <= 0 || typelen < slashpos + 2) {
@@ -713,7 +729,9 @@ public class IntentFilter implements Parcelable {
         }
 
         public boolean match(AuthorityEntry other) {
-            return this.mWild == other.mWild && this.mHost.equals(other.mHost) && this.mPort == other.mPort;
+            return this.mWild == other.mWild
+                    && this.mHost.equals(other.mHost)
+                    && this.mPort == other.mPort;
         }
 
         public boolean equals(Object obj) {
@@ -990,7 +1008,8 @@ public class IntentFilter implements Parcelable {
             return 1081344;
         }
         if (schemes != null) {
-            if (!schemes.contains(scheme != null ? scheme : "") && (!wildcardSupported || !"*".equals(scheme))) {
+            if (!schemes.contains(scheme != null ? scheme : "")
+                    && (!wildcardSupported || !"*".equals(scheme))) {
                 return -2;
             }
             match = 2097152;
@@ -1016,7 +1035,8 @@ public class IntentFilter implements Parcelable {
                         if (paths == null && groups == null) {
                             match = authMatch;
                         } else {
-                            if (!hasDataPath(data.getPath(), wildcardSupported) && !matchRelRefGroups(data)) {
+                            if (!hasDataPath(data.getPath(), wildcardSupported)
+                                    && !matchRelRefGroups(data)) {
                                 return -2;
                             }
                             match = 5242880;
@@ -1034,7 +1054,11 @@ public class IntentFilter implements Parcelable {
             if (match == -2) {
                 return -2;
             }
-        } else if (scheme != null && !"".equals(scheme) && !"content".equals(scheme) && !"file".equals(scheme) && (!wildcardSupported || !"*".equals(scheme))) {
+        } else if (scheme != null
+                && !"".equals(scheme)
+                && !"content".equals(scheme)
+                && !"file".equals(scheme)
+                && (!wildcardSupported || !"*".equals(scheme))) {
             return -2;
         }
         if (wildcardWithMimegroups) {
@@ -1120,7 +1144,9 @@ public class IntentFilter implements Parcelable {
             }
             Object value = this.mExtras.get(key);
             Object otherValue = extras.get(key);
-            if (otherValue == null || value.getClass() != otherValue.getClass() || !Objects.deepEquals(value, otherValue)) {
+            if (otherValue == null
+                    || value.getClass() != otherValue.getClass()
+                    || !Objects.deepEquals(value, otherValue)) {
                 return key;
             }
         }
@@ -1197,7 +1223,9 @@ public class IntentFilter implements Parcelable {
 
     public final double getDoubleExtra(String name) {
         Objects.requireNonNull(name);
-        return this.mExtras == null ? SContextConstants.ENVIRONMENT_VALUE_UNKNOWN : this.mExtras.getDouble(name);
+        return this.mExtras == null
+                ? SContextConstants.ENVIRONMENT_VALUE_UNKNOWN
+                : this.mExtras.getDouble(name);
     }
 
     public final void addExtra(String name, double[] value) {
@@ -1297,7 +1325,8 @@ public class IntentFilter implements Parcelable {
     }
 
     public Predicate<Intent> asPredicate() {
-        return new Predicate() { // from class: android.content.IntentFilter$$ExternalSyntheticLambda1
+        return new Predicate() { // from class:
+            // android.content.IntentFilter$$ExternalSyntheticLambda1
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 boolean lambda$asPredicate$2;
@@ -1309,35 +1338,81 @@ public class IntentFilter implements Parcelable {
 
     public Predicate<Intent> asPredicateWithTypeResolution(final ContentResolver resolver) {
         Objects.requireNonNull(resolver);
-        return new Predicate() { // from class: android.content.IntentFilter$$ExternalSyntheticLambda3
+        return new Predicate() { // from class:
+            // android.content.IntentFilter$$ExternalSyntheticLambda3
             @Override // java.util.function.Predicate
             public final boolean test(Object obj) {
                 boolean lambda$asPredicateWithTypeResolution$3;
-                lambda$asPredicateWithTypeResolution$3 = IntentFilter.this.lambda$asPredicateWithTypeResolution$3(resolver, (Intent) obj);
+                lambda$asPredicateWithTypeResolution$3 =
+                        IntentFilter.this.lambda$asPredicateWithTypeResolution$3(
+                                resolver, (Intent) obj);
                 return lambda$asPredicateWithTypeResolution$3;
             }
         };
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ boolean lambda$asPredicateWithTypeResolution$3(ContentResolver resolver, Intent i) {
+    public /* synthetic */ boolean lambda$asPredicateWithTypeResolution$3(
+            ContentResolver resolver, Intent i) {
         return match(resolver, i, true, TAG) >= 0;
     }
 
-    public final int match(ContentResolver resolver, Intent intent, boolean resolve, String logTag) {
+    public final int match(
+            ContentResolver resolver, Intent intent, boolean resolve, String logTag) {
         String type = resolve ? intent.resolveType(resolver) : intent.getType();
-        return match(intent.getAction(), type, intent.getScheme(), intent.getData(), intent.getCategories(), logTag, false, null, intent.getExtras());
+        return match(
+                intent.getAction(),
+                type,
+                intent.getScheme(),
+                intent.getData(),
+                intent.getCategories(),
+                logTag,
+                false,
+                null,
+                intent.getExtras());
     }
 
-    public final int match(String action, String type, String scheme, Uri data, Set<String> categories, String logTag) {
+    public final int match(
+            String action,
+            String type,
+            String scheme,
+            Uri data,
+            Set<String> categories,
+            String logTag) {
         return match(action, type, scheme, data, categories, logTag, false, null);
     }
 
-    public final int match(String action, String type, String scheme, Uri data, Set<String> categories, String logTag, boolean supportWildcards, Collection<String> ignoreActions) {
-        return match(action, type, scheme, data, categories, logTag, supportWildcards, ignoreActions, null);
+    public final int match(
+            String action,
+            String type,
+            String scheme,
+            Uri data,
+            Set<String> categories,
+            String logTag,
+            boolean supportWildcards,
+            Collection<String> ignoreActions) {
+        return match(
+                action,
+                type,
+                scheme,
+                data,
+                categories,
+                logTag,
+                supportWildcards,
+                ignoreActions,
+                null);
     }
 
-    public final int match(String action, String type, String scheme, Uri data, Set<String> categories, String logTag, boolean supportWildcards, Collection<String> ignoreActions, Bundle extras) {
+    public final int match(
+            String action,
+            String type,
+            String scheme,
+            Uri data,
+            Set<String> categories,
+            String logTag,
+            boolean supportWildcards,
+            Collection<String> ignoreActions,
+            Bundle extras) {
         if (action != null && !matchAction(action, supportWildcards, ignoreActions)) {
             return -3;
         }
@@ -1447,7 +1522,8 @@ public class IntentFilter implements Parcelable {
                 this.mExtras.saveToXml(serializer);
                 serializer.endTag(null, "extras");
             } catch (XmlPullParserException e) {
-                throw new IllegalStateException("Failed to write extras: " + this.mExtras.toString(), e);
+                throw new IllegalStateException(
+                        "Failed to write extras: " + this.mExtras.toString(), e);
             }
         }
         if (Flags.relativeReferenceIntentFilters()) {
@@ -1479,7 +1555,8 @@ public class IntentFilter implements Parcelable {
         }
     }
 
-    private void writeDataTypeToXml(XmlSerializer serializer, String type, String tag) throws IOException {
+    private void writeDataTypeToXml(XmlSerializer serializer, String type, String tag)
+            throws IOException {
         serializer.startTag(null, tag);
         if (type.indexOf(47) < 0) {
             type = type + WILDCARD_PATH;
@@ -1551,7 +1628,8 @@ public class IntentFilter implements Parcelable {
                                         if (ssp4 != null) {
                                             addDataSchemeSpecificPart(ssp4, 3);
                                         } else {
-                                            String ssp5 = parser.getAttributeValue(null, SUFFIX_STR);
+                                            String ssp5 =
+                                                    parser.getAttributeValue(null, SUFFIX_STR);
                                             if (ssp5 != null) {
                                                 addDataSchemeSpecificPart(ssp5, 4);
                                             }
@@ -1582,7 +1660,8 @@ public class IntentFilter implements Parcelable {
                                         if (path4 != null) {
                                             addDataPath(path4, 3);
                                         } else {
-                                            String path5 = parser.getAttributeValue(null, SUFFIX_STR);
+                                            String path5 =
+                                                    parser.getAttributeValue(null, SUFFIX_STR);
                                             if (path5 != null) {
                                                 addDataPath(path5, 4);
                                             }
@@ -1592,7 +1671,8 @@ public class IntentFilter implements Parcelable {
                             }
                         } else if (tagName.equals("extras")) {
                             this.mExtras = PersistableBundle.restoreFromXml(parser);
-                        } else if (Flags.relativeReferenceIntentFilters() && URI_RELATIVE_FILTER_GROUP_STR.equals(tagName)) {
+                        } else if (Flags.relativeReferenceIntentFilters()
+                                && URI_RELATIVE_FILTER_GROUP_STR.equals(tagName)) {
                             addUriRelativeFilterGroup(new UriRelativeFilterGroup(parser));
                         } else {
                             Log.w(TAG, "Unknown tag parsing IntentFilter: " + tagName);
@@ -1920,7 +2000,8 @@ public class IntentFilter implements Parcelable {
 
     public boolean checkDataPathAndSchemeSpecificParts() {
         int numDataPath = this.mDataPaths == null ? 0 : this.mDataPaths.size();
-        int numDataSchemeSpecificParts = this.mDataSchemeSpecificParts == null ? 0 : this.mDataSchemeSpecificParts.size();
+        int numDataSchemeSpecificParts =
+                this.mDataSchemeSpecificParts == null ? 0 : this.mDataSchemeSpecificParts.size();
         for (int i = 0; i < numDataPath; i++) {
             if (!this.mDataPaths.get(i).check()) {
                 return false;

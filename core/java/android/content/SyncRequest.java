@@ -7,19 +7,20 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class SyncRequest implements Parcelable {
-    public static final Parcelable.Creator<SyncRequest> CREATOR = new Parcelable.Creator<SyncRequest>() { // from class: android.content.SyncRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SyncRequest createFromParcel(Parcel in) {
-            return new SyncRequest(in);
-        }
+    public static final Parcelable.Creator<SyncRequest> CREATOR =
+            new Parcelable.Creator<SyncRequest>() { // from class: android.content.SyncRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SyncRequest createFromParcel(Parcel in) {
+                    return new SyncRequest(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SyncRequest[] newArray(int size) {
-            return new SyncRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SyncRequest[] newArray(int size) {
+                    return new SyncRequest[size];
+                }
+            };
     private static final String TAG = "SyncRequest";
     private final Account mAccountToSync;
     private final String mAuthority;
@@ -153,7 +154,8 @@ public class SyncRequest implements Parcelable {
 
         private void setupInterval(long at, long before) {
             if (before > at) {
-                throw new IllegalArgumentException("Specified run time for the sync must be after the specified flex time.");
+                throw new IllegalArgumentException(
+                        "Specified run time for the sync must be after the specified flex time.");
             }
             this.mSyncRunTimeSecs = at;
             this.mSyncFlexTimeSecs = before;
@@ -161,7 +163,9 @@ public class SyncRequest implements Parcelable {
 
         public Builder setDisallowMetered(boolean disallow) {
             if (this.mIgnoreSettings && disallow) {
-                throw new IllegalArgumentException("setDisallowMetered(true) after having specified that settings are ignored.");
+                throw new IllegalArgumentException(
+                        "setDisallowMetered(true) after having specified that settings are"
+                                + " ignored.");
             }
             this.mDisallowMetered = disallow;
             return this;
@@ -197,7 +201,9 @@ public class SyncRequest implements Parcelable {
 
         public Builder setIgnoreSettings(boolean ignoreSettings) {
             if (this.mDisallowMetered && ignoreSettings) {
-                throw new IllegalArgumentException("setIgnoreSettings(true) after having specified sync settings with this builder.");
+                throw new IllegalArgumentException(
+                        "setIgnoreSettings(true) after having specified sync settings with this"
+                                + " builder.");
             }
             this.mIgnoreSettings = ignoreSettings;
             return this;
@@ -232,10 +238,12 @@ public class SyncRequest implements Parcelable {
                 this.mSyncConfigExtras.putBoolean("allow_metered", true);
             }
             if (this.mRequiresCharging) {
-                this.mSyncConfigExtras.putBoolean(ContentResolver.SYNC_EXTRAS_REQUIRE_CHARGING, true);
+                this.mSyncConfigExtras.putBoolean(
+                        ContentResolver.SYNC_EXTRAS_REQUIRE_CHARGING, true);
             }
             if (this.mIgnoreSettings) {
-                this.mSyncConfigExtras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_SETTINGS, true);
+                this.mSyncConfigExtras.putBoolean(
+                        ContentResolver.SYNC_EXTRAS_IGNORE_SETTINGS, true);
             }
             if (this.mNoRetry) {
                 this.mSyncConfigExtras.putBoolean(ContentResolver.SYNC_EXTRAS_DO_NOT_RETRY, true);
@@ -244,24 +252,34 @@ public class SyncRequest implements Parcelable {
                 this.mSyncConfigExtras.putBoolean(ContentResolver.SYNC_EXTRAS_EXPEDITED, true);
             }
             if (this.mScheduleAsExpeditedJob) {
-                this.mSyncConfigExtras.putBoolean(ContentResolver.SYNC_EXTRAS_SCHEDULE_AS_EXPEDITED_JOB, true);
+                this.mSyncConfigExtras.putBoolean(
+                        ContentResolver.SYNC_EXTRAS_SCHEDULE_AS_EXPEDITED_JOB, true);
             }
             if (this.mIsManual) {
                 this.mSyncConfigExtras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_BACKOFF, true);
-                this.mSyncConfigExtras.putBoolean(ContentResolver.SYNC_EXTRAS_IGNORE_SETTINGS, true);
+                this.mSyncConfigExtras.putBoolean(
+                        ContentResolver.SYNC_EXTRAS_IGNORE_SETTINGS, true);
             }
             if (this.mCustomExtras == null) {
                 this.mCustomExtras = new Bundle();
             }
             ContentResolver.validateSyncExtrasBundle(this.mCustomExtras);
-            if (this.mSyncType == 1 && (ContentResolver.invalidPeriodicExtras(this.mCustomExtras) || ContentResolver.invalidPeriodicExtras(this.mSyncConfigExtras))) {
+            if (this.mSyncType == 1
+                    && (ContentResolver.invalidPeriodicExtras(this.mCustomExtras)
+                            || ContentResolver.invalidPeriodicExtras(this.mSyncConfigExtras))) {
                 throw new IllegalArgumentException("Illegal extras were set");
             }
-            if ((this.mCustomExtras.getBoolean(ContentResolver.SYNC_EXTRAS_SCHEDULE_AS_EXPEDITED_JOB) || this.mScheduleAsExpeditedJob) && (ContentResolver.hasInvalidScheduleAsEjExtras(this.mCustomExtras) || ContentResolver.hasInvalidScheduleAsEjExtras(this.mSyncConfigExtras))) {
+            if ((this.mCustomExtras.getBoolean(
+                                    ContentResolver.SYNC_EXTRAS_SCHEDULE_AS_EXPEDITED_JOB)
+                            || this.mScheduleAsExpeditedJob)
+                    && (ContentResolver.hasInvalidScheduleAsEjExtras(this.mCustomExtras)
+                            || ContentResolver.hasInvalidScheduleAsEjExtras(
+                                    this.mSyncConfigExtras))) {
                 throw new IllegalArgumentException("Illegal extras were set");
             }
             if (this.mSyncTarget == 0) {
-                throw new IllegalArgumentException("Must specify an adapter with setSyncAdapter(Account, String");
+                throw new IllegalArgumentException(
+                        "Must specify an adapter with setSyncAdapter(Account, String");
             }
             return new SyncRequest(this);
         }

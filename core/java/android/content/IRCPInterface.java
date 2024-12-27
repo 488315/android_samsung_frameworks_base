@@ -7,7 +7,9 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.samsung.android.knox.SemIRCPCallback;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -18,9 +20,18 @@ public interface IRCPInterface extends IInterface {
 
     int copyFile(int i, String str, int i2, String str2) throws RemoteException;
 
-    long copyFiles(int i, List<String> list, int i2, List<String> list2, SemIRCPCallback semIRCPCallback) throws RemoteException;
+    long copyFiles(
+            int i, List<String> list, int i2, List<String> list2, SemIRCPCallback semIRCPCallback)
+            throws RemoteException;
 
-    long copyFiles2(int i, List<String> list, int i2, List<String> list2, SemIRCPCallback semIRCPCallback, String str) throws RemoteException;
+    long copyFiles2(
+            int i,
+            List<String> list,
+            int i2,
+            List<String> list2,
+            SemIRCPCallback semIRCPCallback,
+            String str)
+            throws RemoteException;
 
     String getErrorMessage(int i) throws RemoteException;
 
@@ -32,37 +43,64 @@ public interface IRCPInterface extends IInterface {
 
     int moveFile(int i, String str, int i2, String str2) throws RemoteException;
 
-    long moveFiles(int i, List<String> list, int i2, List<String> list2, SemIRCPCallback semIRCPCallback) throws RemoteException;
+    long moveFiles(
+            int i, List<String> list, int i2, List<String> list2, SemIRCPCallback semIRCPCallback)
+            throws RemoteException;
 
-    long moveFiles2(int i, List<String> list, int i2, List<String> list2, SemIRCPCallback semIRCPCallback, String str) throws RemoteException;
+    long moveFiles2(
+            int i,
+            List<String> list,
+            int i2,
+            List<String> list2,
+            SemIRCPCallback semIRCPCallback,
+            String str)
+            throws RemoteException;
 
-    long moveFilesForAppEx(int i, List<String> list, List<String> list2, int i2) throws RemoteException;
+    long moveFilesForAppEx(int i, List<String> list, List<String> list2, int i2)
+            throws RemoteException;
 
     long moveUnlimitedFilesForApp(int i, Uri uri, int i2, int i3) throws RemoteException;
 
     public static class Default implements IRCPInterface {
         @Override // android.content.IRCPInterface
-        public long copyFiles(int srcContainerId, List<String> srcFilePaths, int destContainerId, List<String> destFilePaths, SemIRCPCallback callback) throws RemoteException {
+        public long copyFiles(
+                int srcContainerId,
+                List<String> srcFilePaths,
+                int destContainerId,
+                List<String> destFilePaths,
+                SemIRCPCallback callback)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.content.IRCPInterface
-        public long moveFiles(int srcContainerId, List<String> srcFilePaths, int destContainerId, List<String> destFilePaths, SemIRCPCallback callback) throws RemoteException {
+        public long moveFiles(
+                int srcContainerId,
+                List<String> srcFilePaths,
+                int destContainerId,
+                List<String> destFilePaths,
+                SemIRCPCallback callback)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.content.IRCPInterface
-        public long moveUnlimitedFilesForApp(int requestApp, Uri uri, int fileCount, int containerId) throws RemoteException {
+        public long moveUnlimitedFilesForApp(
+                int requestApp, Uri uri, int fileCount, int containerId) throws RemoteException {
             return 0L;
         }
 
         @Override // android.content.IRCPInterface
-        public int copyFile(int srcContainerId, String srcFilePath, int destContainerId, String destFilePath) throws RemoteException {
+        public int copyFile(
+                int srcContainerId, String srcFilePath, int destContainerId, String destFilePath)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.content.IRCPInterface
-        public int moveFile(int srcContainerId, String srcFilePath, int destContainerId, String destFilePath) throws RemoteException {
+        public int moveFile(
+                int srcContainerId, String srcFilePath, int destContainerId, String destFilePath)
+                throws RemoteException {
             return 0;
         }
 
@@ -87,21 +125,39 @@ public interface IRCPInterface extends IInterface {
         }
 
         @Override // android.content.IRCPInterface
-        public void cancel(long threadId) throws RemoteException {
-        }
+        public void cancel(long threadId) throws RemoteException {}
 
         @Override // android.content.IRCPInterface
-        public long moveFilesForAppEx(int requestApp, List<String> srcFilePaths, List<String> destFilePaths, int containerId) throws RemoteException {
+        public long moveFilesForAppEx(
+                int requestApp,
+                List<String> srcFilePaths,
+                List<String> destFilePaths,
+                int containerId)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.content.IRCPInterface
-        public long copyFiles2(int srcContainerId, List<String> srcFilePaths, int destContainerId, List<String> destFilePaths, SemIRCPCallback callback, String mSourceClassName) throws RemoteException {
+        public long copyFiles2(
+                int srcContainerId,
+                List<String> srcFilePaths,
+                int destContainerId,
+                List<String> destFilePaths,
+                SemIRCPCallback callback,
+                String mSourceClassName)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.content.IRCPInterface
-        public long moveFiles2(int srcContainerId, List<String> srcFilePaths, int destContainerId, List<String> destFilePaths, SemIRCPCallback callback, String mSourceClassName) throws RemoteException {
+        public long moveFiles2(
+                int srcContainerId,
+                List<String> srcFilePaths,
+                int destContainerId,
+                List<String> destFilePaths,
+                SemIRCPCallback callback,
+                String mSourceClassName)
+                throws RemoteException {
             return 0L;
         }
 
@@ -111,7 +167,7 @@ public interface IRCPInterface extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRCPInterface {
+    public abstract static class Stub extends Binder implements IRCPInterface {
         static final int TRANSACTION_cancel = 10;
         static final int TRANSACTION_copyFile = 4;
         static final int TRANSACTION_copyFiles = 1;
@@ -185,7 +241,8 @@ public interface IRCPInterface extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRCPInterface.DESCRIPTOR);
             }
@@ -199,7 +256,8 @@ public interface IRCPInterface extends IInterface {
                     List<String> _arg1 = data.createStringArrayList();
                     int _arg2 = data.readInt();
                     List<String> _arg3 = data.createStringArrayList();
-                    SemIRCPCallback _arg4 = SemIRCPCallback.Stub.asInterface(data.readStrongBinder());
+                    SemIRCPCallback _arg4 =
+                            SemIRCPCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     long _result = copyFiles(_arg0, _arg1, _arg2, _arg3, _arg4);
                     reply.writeNoException();
@@ -210,7 +268,8 @@ public interface IRCPInterface extends IInterface {
                     List<String> _arg12 = data.createStringArrayList();
                     int _arg22 = data.readInt();
                     List<String> _arg32 = data.createStringArrayList();
-                    SemIRCPCallback _arg42 = SemIRCPCallback.Stub.asInterface(data.readStrongBinder());
+                    SemIRCPCallback _arg42 =
+                            SemIRCPCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     long _result2 = moveFiles(_arg02, _arg12, _arg22, _arg32, _arg42);
                     reply.writeNoException();
@@ -298,7 +357,8 @@ public interface IRCPInterface extends IInterface {
                     List<String> _arg110 = data.createStringArrayList();
                     int _arg27 = data.readInt();
                     List<String> _arg37 = data.createStringArrayList();
-                    SemIRCPCallback _arg43 = SemIRCPCallback.Stub.asInterface(data.readStrongBinder());
+                    SemIRCPCallback _arg43 =
+                            SemIRCPCallback.Stub.asInterface(data.readStrongBinder());
                     String _arg5 = data.readString();
                     data.enforceNoDataAvail();
                     long _result11 = copyFiles2(_arg012, _arg110, _arg27, _arg37, _arg43, _arg5);
@@ -310,7 +370,8 @@ public interface IRCPInterface extends IInterface {
                     List<String> _arg111 = data.createStringArrayList();
                     int _arg28 = data.readInt();
                     List<String> _arg38 = data.createStringArrayList();
-                    SemIRCPCallback _arg44 = SemIRCPCallback.Stub.asInterface(data.readStrongBinder());
+                    SemIRCPCallback _arg44 =
+                            SemIRCPCallback.Stub.asInterface(data.readStrongBinder());
                     String _arg52 = data.readString();
                     data.enforceNoDataAvail();
                     long _result12 = moveFiles2(_arg013, _arg111, _arg28, _arg38, _arg44, _arg52);
@@ -339,7 +400,13 @@ public interface IRCPInterface extends IInterface {
             }
 
             @Override // android.content.IRCPInterface
-            public long copyFiles(int srcContainerId, List<String> srcFilePaths, int destContainerId, List<String> destFilePaths, SemIRCPCallback callback) throws RemoteException {
+            public long copyFiles(
+                    int srcContainerId,
+                    List<String> srcFilePaths,
+                    int destContainerId,
+                    List<String> destFilePaths,
+                    SemIRCPCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -360,7 +427,13 @@ public interface IRCPInterface extends IInterface {
             }
 
             @Override // android.content.IRCPInterface
-            public long moveFiles(int srcContainerId, List<String> srcFilePaths, int destContainerId, List<String> destFilePaths, SemIRCPCallback callback) throws RemoteException {
+            public long moveFiles(
+                    int srcContainerId,
+                    List<String> srcFilePaths,
+                    int destContainerId,
+                    List<String> destFilePaths,
+                    SemIRCPCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -381,7 +454,9 @@ public interface IRCPInterface extends IInterface {
             }
 
             @Override // android.content.IRCPInterface
-            public long moveUnlimitedFilesForApp(int requestApp, Uri uri, int fileCount, int containerId) throws RemoteException {
+            public long moveUnlimitedFilesForApp(
+                    int requestApp, Uri uri, int fileCount, int containerId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -401,7 +476,12 @@ public interface IRCPInterface extends IInterface {
             }
 
             @Override // android.content.IRCPInterface
-            public int copyFile(int srcContainerId, String srcFilePath, int destContainerId, String destFilePath) throws RemoteException {
+            public int copyFile(
+                    int srcContainerId,
+                    String srcFilePath,
+                    int destContainerId,
+                    String destFilePath)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -421,7 +501,12 @@ public interface IRCPInterface extends IInterface {
             }
 
             @Override // android.content.IRCPInterface
-            public int moveFile(int srcContainerId, String srcFilePath, int destContainerId, String destFilePath) throws RemoteException {
+            public int moveFile(
+                    int srcContainerId,
+                    String srcFilePath,
+                    int destContainerId,
+                    String destFilePath)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -527,7 +612,12 @@ public interface IRCPInterface extends IInterface {
             }
 
             @Override // android.content.IRCPInterface
-            public long moveFilesForAppEx(int requestApp, List<String> srcFilePaths, List<String> destFilePaths, int containerId) throws RemoteException {
+            public long moveFilesForAppEx(
+                    int requestApp,
+                    List<String> srcFilePaths,
+                    List<String> destFilePaths,
+                    int containerId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -547,7 +637,14 @@ public interface IRCPInterface extends IInterface {
             }
 
             @Override // android.content.IRCPInterface
-            public long copyFiles2(int srcContainerId, List<String> srcFilePaths, int destContainerId, List<String> destFilePaths, SemIRCPCallback callback, String mSourceClassName) throws RemoteException {
+            public long copyFiles2(
+                    int srcContainerId,
+                    List<String> srcFilePaths,
+                    int destContainerId,
+                    List<String> destFilePaths,
+                    SemIRCPCallback callback,
+                    String mSourceClassName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -569,7 +666,14 @@ public interface IRCPInterface extends IInterface {
             }
 
             @Override // android.content.IRCPInterface
-            public long moveFiles2(int srcContainerId, List<String> srcFilePaths, int destContainerId, List<String> destFilePaths, SemIRCPCallback callback, String mSourceClassName) throws RemoteException {
+            public long moveFiles2(
+                    int srcContainerId,
+                    List<String> srcFilePaths,
+                    int destContainerId,
+                    List<String> destFilePaths,
+                    SemIRCPCallback callback,
+                    String mSourceClassName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

@@ -8,7 +8,6 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.telecom.VideoProfile;
 import android.view.Surface;
-import com.android.ims.internal.IImsVideoCallCallback;
 
 /* loaded from: classes5.dex */
 public interface IImsVideoCallProvider extends IInterface {
@@ -16,7 +15,8 @@ public interface IImsVideoCallProvider extends IInterface {
 
     void requestCameraCapabilities() throws RemoteException;
 
-    void sendSessionModifyRequest(VideoProfile videoProfile, VideoProfile videoProfile2) throws RemoteException;
+    void sendSessionModifyRequest(VideoProfile videoProfile, VideoProfile videoProfile2)
+            throws RemoteException;
 
     void sendSessionModifyResponse(VideoProfile videoProfile) throws RemoteException;
 
@@ -36,48 +36,39 @@ public interface IImsVideoCallProvider extends IInterface {
 
     public static class Default implements IImsVideoCallProvider {
         @Override // com.android.ims.internal.IImsVideoCallProvider
-        public void setCallback(IImsVideoCallCallback callback) throws RemoteException {
-        }
+        public void setCallback(IImsVideoCallCallback callback) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsVideoCallProvider
-        public void setCamera(String cameraId, int uid) throws RemoteException {
-        }
+        public void setCamera(String cameraId, int uid) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsVideoCallProvider
-        public void setPreviewSurface(Surface surface) throws RemoteException {
-        }
+        public void setPreviewSurface(Surface surface) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsVideoCallProvider
-        public void setDisplaySurface(Surface surface) throws RemoteException {
-        }
+        public void setDisplaySurface(Surface surface) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsVideoCallProvider
-        public void setDeviceOrientation(int rotation) throws RemoteException {
-        }
+        public void setDeviceOrientation(int rotation) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsVideoCallProvider
-        public void setZoom(float value) throws RemoteException {
-        }
+        public void setZoom(float value) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsVideoCallProvider
-        public void sendSessionModifyRequest(VideoProfile fromProfile, VideoProfile toProfile) throws RemoteException {
-        }
+        public void sendSessionModifyRequest(VideoProfile fromProfile, VideoProfile toProfile)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsVideoCallProvider
-        public void sendSessionModifyResponse(VideoProfile responseProfile) throws RemoteException {
-        }
+        public void sendSessionModifyResponse(VideoProfile responseProfile)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsVideoCallProvider
-        public void requestCameraCapabilities() throws RemoteException {
-        }
+        public void requestCameraCapabilities() throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsVideoCallProvider
-        public void requestCallDataUsage() throws RemoteException {
-        }
+        public void requestCallDataUsage() throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsVideoCallProvider
-        public void setPauseImage(Uri uri) throws RemoteException {
-        }
+        public void setPauseImage(Uri uri) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -85,7 +76,7 @@ public interface IImsVideoCallProvider extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImsVideoCallProvider {
+    public abstract static class Stub extends Binder implements IImsVideoCallProvider {
         public static final String DESCRIPTOR = "com.android.ims.internal.IImsVideoCallProvider";
         static final int TRANSACTION_requestCallDataUsage = 10;
         static final int TRANSACTION_requestCameraCapabilities = 9;
@@ -154,7 +145,8 @@ public interface IImsVideoCallProvider extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -164,7 +156,8 @@ public interface IImsVideoCallProvider extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IImsVideoCallCallback _arg0 = IImsVideoCallCallback.Stub.asInterface(data.readStrongBinder());
+                    IImsVideoCallCallback _arg0 =
+                            IImsVideoCallCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setCallback(_arg0);
                     return true;
@@ -311,7 +304,8 @@ public interface IImsVideoCallProvider extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsVideoCallProvider
-            public void sendSessionModifyRequest(VideoProfile fromProfile, VideoProfile toProfile) throws RemoteException {
+            public void sendSessionModifyRequest(VideoProfile fromProfile, VideoProfile toProfile)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -324,7 +318,8 @@ public interface IImsVideoCallProvider extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsVideoCallProvider
-            public void sendSessionModifyResponse(VideoProfile responseProfile) throws RemoteException {
+            public void sendSessionModifyResponse(VideoProfile responseProfile)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

@@ -31,10 +31,17 @@ public final class ApplicationUsageDb {
                     }
                 }
                 try {
-                    sQLiteDatabase.execSQL("create table ApplicationControl (_id integer primary key autoincrement, pkgname text, lastpausetime long, applastservicestarttime long, applastservicestoptime long, totalusagetime long, launchcount integer, lastlaunchtime long );");
+                    sQLiteDatabase.execSQL(
+                            "create table ApplicationControl (_id integer primary key"
+                                + " autoincrement, pkgname text, lastpausetime long,"
+                                + " applastservicestarttime long, applastservicestoptime long,"
+                                + " totalusagetime long, launchcount integer, lastlaunchtime long"
+                                + " );");
                     Log.i("ApplicationUsageDb", "::createDmAppMgrTable: Table is Created ");
                 } catch (Exception e2) {
-                    Log.i("ApplicationUsageDb", "::createDmAppMgrTable: Exception while table is creating ");
+                    Log.i(
+                            "ApplicationUsageDb",
+                            "::createDmAppMgrTable: Exception while table is creating ");
                     e2.printStackTrace();
                 }
             }
@@ -62,25 +69,27 @@ public final class ApplicationUsageDb {
             Method dump skipped, instructions count: 233
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.application.ApplicationUsageDb.getAppUsageData():java.util.HashMap");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.application.ApplicationUsageDb.getAppUsageData():java.util.HashMap");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:10:0x007f, code lost:
-    
-        return r2;
-     */
+
+       return r2;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:32:0x007c, code lost:
-    
-        if (r10 != null) goto L29;
-     */
+
+       if (r10 != null) goto L29;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:8:0x0064, code lost:
-    
-        if (r10 != null) goto L29;
-     */
+
+       if (r10 != null) goto L29;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:9:0x0066, code lost:
-    
-        r10.close();
-     */
+
+       r10.close();
+    */
     /* JADX WARN: Removed duplicated region for block: B:38:0x0082  */
     /* JADX WARN: Removed duplicated region for block: B:40:0x0087  */
     /*
@@ -190,7 +199,9 @@ public final class ApplicationUsageDb {
         L8a:
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.application.ApplicationUsageDb.getLaunchCountOfAllApplication():java.util.HashMap");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.application.ApplicationUsageDb.getLaunchCountOfAllApplication():java.util.HashMap");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:17:0x008e  */
@@ -280,7 +291,10 @@ public final class ApplicationUsageDb {
         L97:
             throw r8
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.application.ApplicationUsageDb.updateBackGroundUsageDetails(long, long, java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.application.ApplicationUsageDb.updateBackGroundUsageDetails(long,"
+                    + " long, java.lang.String):void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:17:0x00a8  */
@@ -289,7 +303,8 @@ public final class ApplicationUsageDb {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateForeGroundUsageDetails(int r10, long r11, long r13, java.lang.String r15) {
+    public final void updateForeGroundUsageDetails(
+            int r10, long r11, long r13, java.lang.String r15) {
         /*
             r9 = this;
             java.lang.String r0 = "'"
@@ -378,6 +393,9 @@ public final class ApplicationUsageDb {
         Lb1:
             throw r9
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.application.ApplicationUsageDb.updateForeGroundUsageDetails(int, long, long, java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.application.ApplicationUsageDb.updateForeGroundUsageDetails(int,"
+                    + " long, long, java.lang.String):void");
     }
 }

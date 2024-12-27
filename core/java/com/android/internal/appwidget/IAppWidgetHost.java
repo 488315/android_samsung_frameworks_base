@@ -24,28 +24,23 @@ public interface IAppWidgetHost extends IInterface {
 
     public static class Default implements IAppWidgetHost {
         @Override // com.android.internal.appwidget.IAppWidgetHost
-        public void updateAppWidgetDeferred(int appWidgetId) throws RemoteException {
-        }
+        public void updateAppWidgetDeferred(int appWidgetId) throws RemoteException {}
 
         @Override // com.android.internal.appwidget.IAppWidgetHost
-        public void updateAppWidget(int appWidgetId, RemoteViews views) throws RemoteException {
-        }
+        public void updateAppWidget(int appWidgetId, RemoteViews views) throws RemoteException {}
 
         @Override // com.android.internal.appwidget.IAppWidgetHost
-        public void providerChanged(int appWidgetId, AppWidgetProviderInfo info) throws RemoteException {
-        }
+        public void providerChanged(int appWidgetId, AppWidgetProviderInfo info)
+                throws RemoteException {}
 
         @Override // com.android.internal.appwidget.IAppWidgetHost
-        public void providersChanged() throws RemoteException {
-        }
+        public void providersChanged() throws RemoteException {}
 
         @Override // com.android.internal.appwidget.IAppWidgetHost
-        public void viewDataChanged(int appWidgetId, int viewId) throws RemoteException {
-        }
+        public void viewDataChanged(int appWidgetId, int viewId) throws RemoteException {}
 
         @Override // com.android.internal.appwidget.IAppWidgetHost
-        public void appWidgetRemoved(int appWidgetId) throws RemoteException {
-        }
+        public void appWidgetRemoved(int appWidgetId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -53,7 +48,7 @@ public interface IAppWidgetHost extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAppWidgetHost {
+    public abstract static class Stub extends Binder implements IAppWidgetHost {
         public static final String DESCRIPTOR = "com.android.internal.appwidget.IAppWidgetHost";
         static final int TRANSACTION_appWidgetRemoved = 6;
         static final int TRANSACTION_providerChanged = 3;
@@ -107,7 +102,8 @@ public interface IAppWidgetHost extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -129,7 +125,9 @@ public interface IAppWidgetHost extends IInterface {
                     return true;
                 case 3:
                     int _arg03 = data.readInt();
-                    AppWidgetProviderInfo _arg12 = (AppWidgetProviderInfo) data.readTypedObject(AppWidgetProviderInfo.CREATOR);
+                    AppWidgetProviderInfo _arg12 =
+                            (AppWidgetProviderInfo)
+                                    data.readTypedObject(AppWidgetProviderInfo.CREATOR);
                     data.enforceNoDataAvail();
                     providerChanged(_arg03, _arg12);
                     return true;
@@ -194,7 +192,8 @@ public interface IAppWidgetHost extends IInterface {
             }
 
             @Override // com.android.internal.appwidget.IAppWidgetHost
-            public void providerChanged(int appWidgetId, AppWidgetProviderInfo info) throws RemoteException {
+            public void providerChanged(int appWidgetId, AppWidgetProviderInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

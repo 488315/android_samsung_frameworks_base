@@ -2,7 +2,9 @@ package android.app;
 
 import android.content.ComponentName;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.samsung.android.media.AudioTag;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -33,14 +35,41 @@ public class ForegroundServiceDelegationOptions {
     public final boolean mSticky;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DelegationService {
+    public @interface DelegationService {}
+
+    public ForegroundServiceDelegationOptions(
+            int clientPid,
+            int clientUid,
+            String clientPackageName,
+            IApplicationThread clientAppThread,
+            boolean isSticky,
+            String clientInstanceName,
+            int foregroundServiceTypes,
+            int delegationService) {
+        this(
+                clientPid,
+                clientUid,
+                clientPackageName,
+                clientAppThread,
+                isSticky,
+                clientInstanceName,
+                foregroundServiceTypes,
+                delegationService,
+                0,
+                null);
     }
 
-    public ForegroundServiceDelegationOptions(int clientPid, int clientUid, String clientPackageName, IApplicationThread clientAppThread, boolean isSticky, String clientInstanceName, int foregroundServiceTypes, int delegationService) {
-        this(clientPid, clientUid, clientPackageName, clientAppThread, isSticky, clientInstanceName, foregroundServiceTypes, delegationService, 0, null);
-    }
-
-    public ForegroundServiceDelegationOptions(int clientPid, int clientUid, String clientPackageName, IApplicationThread clientAppThread, boolean isSticky, String clientInstanceName, int foregroundServiceTypes, int delegationService, int clientNotificationId, Notification clientNotification) {
+    public ForegroundServiceDelegationOptions(
+            int clientPid,
+            int clientUid,
+            String clientPackageName,
+            IApplicationThread clientAppThread,
+            boolean isSticky,
+            String clientInstanceName,
+            int foregroundServiceTypes,
+            int delegationService,
+            int clientNotificationId,
+            Notification clientNotification) {
         this.mClientPid = clientPid;
         this.mClientUid = clientUid;
         this.mClientPackageName = clientPackageName;
@@ -54,16 +83,36 @@ public class ForegroundServiceDelegationOptions {
     }
 
     public boolean isSameDelegate(ForegroundServiceDelegationOptions that) {
-        return this.mDelegationService == that.mDelegationService && this.mClientUid == that.mClientUid && this.mClientPid == that.mClientPid && this.mClientInstanceName.equals(that.mClientInstanceName);
+        return this.mDelegationService == that.mDelegationService
+                && this.mClientUid == that.mClientUid
+                && this.mClientPid == that.mClientPid
+                && this.mClientInstanceName.equals(that.mClientInstanceName);
     }
 
     public ComponentName getComponentName() {
-        return new ComponentName(this.mClientPackageName, serviceCodeToString(this.mDelegationService) + ":" + this.mClientInstanceName);
+        return new ComponentName(
+                this.mClientPackageName,
+                serviceCodeToString(this.mDelegationService) + ":" + this.mClientInstanceName);
     }
 
     public String getDescription() {
         StringBuilder sb = new StringBuilder(128);
-        sb.append("ForegroundServiceDelegate{").append("package:").append(this.mClientPackageName).append(",").append("service:").append(serviceCodeToString(this.mDelegationService)).append(",").append("uid:").append(this.mClientUid).append(",").append("pid:").append(this.mClientPid).append(",").append("instance:").append(this.mClientInstanceName).append("}");
+        sb.append("ForegroundServiceDelegate{")
+                .append("package:")
+                .append(this.mClientPackageName)
+                .append(",")
+                .append("service:")
+                .append(serviceCodeToString(this.mDelegationService))
+                .append(",")
+                .append("uid:")
+                .append(this.mClientUid)
+                .append(",")
+                .append("pid:")
+                .append(this.mClientPid)
+                .append(",")
+                .append("instance:")
+                .append(this.mClientInstanceName)
+                .append("}");
         return sb.toString();
     }
 
@@ -127,7 +176,8 @@ public class ForegroundServiceDelegationOptions {
             return this;
         }
 
-        public Builder setClientNotification(int clientNotificationId, Notification clientNotification) {
+        public Builder setClientNotification(
+                int clientNotificationId, Notification clientNotification) {
             this.mClientNotificationId = clientNotificationId;
             this.mClientNotification = clientNotification;
             return this;
@@ -159,7 +209,17 @@ public class ForegroundServiceDelegationOptions {
         }
 
         public ForegroundServiceDelegationOptions build() {
-            return new ForegroundServiceDelegationOptions(this.mClientPid, this.mClientUid, this.mClientPackageName, this.mClientAppThread, this.mSticky, this.mClientInstanceName, this.mForegroundServiceTypes, this.mDelegationService, this.mClientNotificationId, this.mClientNotification);
+            return new ForegroundServiceDelegationOptions(
+                    this.mClientPid,
+                    this.mClientUid,
+                    this.mClientPackageName,
+                    this.mClientAppThread,
+                    this.mSticky,
+                    this.mClientInstanceName,
+                    this.mForegroundServiceTypes,
+                    this.mDelegationService,
+                    this.mClientNotificationId,
+                    this.mClientNotification);
         }
     }
 }

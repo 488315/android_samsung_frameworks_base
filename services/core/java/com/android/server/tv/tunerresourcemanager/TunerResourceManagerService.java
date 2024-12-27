@@ -25,6 +25,7 @@ import android.util.Log;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
+
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
@@ -37,12 +38,9 @@ import com.android.server.accessibility.BrailleDisplayConnection$$ExternalSynthe
 import com.android.server.am.ActivityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.am.PendingIntentController$$ExternalSyntheticOutline0;
 import com.android.server.asks.ASKSManagerService$$ExternalSyntheticOutline0;
-import com.android.server.tv.tunerresourcemanager.CasResource;
-import com.android.server.tv.tunerresourcemanager.CiCamResource;
-import com.android.server.tv.tunerresourcemanager.ClientProfile;
-import com.android.server.tv.tunerresourcemanager.DemuxResource;
-import com.android.server.tv.tunerresourcemanager.FrontendResource;
-import com.android.server.tv.tunerresourcemanager.LnbResource;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
@@ -56,11 +54,11 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class TunerResourceManagerService extends SystemService implements IBinder.DeathRecipient {
+public final class TunerResourceManagerService extends SystemService
+        implements IBinder.DeathRecipient {
     public static final boolean DEBUG = Log.isLoggable("TunerResourceManagerService", 3);
     public ActivityManager mActivityManager;
     public final Map mCasResources;
@@ -91,8 +89,7 @@ public final class TunerResourceManagerService extends SystemService implements 
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BinderService extends ITunerResourceManager.Stub {
-        public BinderService() {
-        }
+        public BinderService() {}
 
         /* JADX WARN: Removed duplicated region for block: B:23:0x0053  */
         /* JADX WARN: Removed duplicated region for block: B:27:0x00a8 A[Catch: all -> 0x003a, InterruptedException -> 0x003d, TryCatch #0 {InterruptedException -> 0x003d, blocks: (B:8:0x0027, B:12:0x0031, B:20:0x0049, B:38:0x006f, B:43:0x0101, B:45:0x010b, B:57:0x0135, B:58:0x0159, B:60:0x015d, B:61:0x0182, B:63:0x0186, B:64:0x01a1, B:27:0x00a8, B:31:0x00b9), top: B:7:0x0027, outer: #1 }] */
@@ -114,75 +111,163 @@ public final class TunerResourceManagerService extends SystemService implements 
                 Method dump skipped, instructions count: 518
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.tv.tunerresourcemanager.TunerResourceManagerService.BinderService.acquireLock(int, long):boolean");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.tv.tunerresourcemanager.TunerResourceManagerService.BinderService.acquireLock(int,"
+                        + " long):boolean");
         }
 
         public final void clearResourceMap(int i) {
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "clearResourceMap");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "clearResourceMap");
             synchronized (TunerResourceManagerService.this.mLock) {
-                TunerResourceManagerService tunerResourceManagerService = TunerResourceManagerService.this;
+                TunerResourceManagerService tunerResourceManagerService =
+                        TunerResourceManagerService.this;
                 if (i != 0) {
                     tunerResourceManagerService.getClass();
                 } else {
-                    TunerResourceManagerService.replaceFeResourceMap(null, tunerResourceManagerService.mFrontendResources);
-                    TunerResourceManagerService.replaceFeCounts(null, tunerResourceManagerService.mFrontendExistingNums);
-                    TunerResourceManagerService.replaceFeCounts(null, tunerResourceManagerService.mFrontendUsedNums);
-                    TunerResourceManagerService.replaceFeCounts(null, tunerResourceManagerService.mFrontendMaxUsableNums);
+                    TunerResourceManagerService.replaceFeResourceMap(
+                            null, tunerResourceManagerService.mFrontendResources);
+                    TunerResourceManagerService.replaceFeCounts(
+                            null, tunerResourceManagerService.mFrontendExistingNums);
+                    TunerResourceManagerService.replaceFeCounts(
+                            null, tunerResourceManagerService.mFrontendUsedNums);
+                    TunerResourceManagerService.replaceFeCounts(
+                            null, tunerResourceManagerService.mFrontendMaxUsableNums);
                 }
             }
         }
 
-        public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+        public final void dump(
+                FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
             IndentingPrintWriter indentingPrintWriter = new IndentingPrintWriter(printWriter, "  ");
-            if (TunerResourceManagerService.this.getContext().checkCallingOrSelfPermission("android.permission.DUMP") != 0) {
+            if (TunerResourceManagerService.this
+                            .getContext()
+                            .checkCallingOrSelfPermission("android.permission.DUMP")
+                    != 0) {
                 indentingPrintWriter.println("Permission Denial: can't dump!");
                 return;
             }
             synchronized (TunerResourceManagerService.this.mLock) {
-                TunerResourceManagerService tunerResourceManagerService = TunerResourceManagerService.this;
-                TunerResourceManagerService.m996$$Nest$mdumpMap(tunerResourceManagerService, tunerResourceManagerService.mClientProfiles, "ClientProfiles:", indentingPrintWriter);
-                TunerResourceManagerService tunerResourceManagerService2 = TunerResourceManagerService.this;
-                TunerResourceManagerService.m996$$Nest$mdumpMap(tunerResourceManagerService2, tunerResourceManagerService2.mFrontendResources, "FrontendResources:", indentingPrintWriter);
-                TunerResourceManagerService tunerResourceManagerService3 = TunerResourceManagerService.this;
-                TunerResourceManagerService.m997$$Nest$mdumpSIA(tunerResourceManagerService3, tunerResourceManagerService3.mFrontendExistingNums, "FrontendExistingNums:", indentingPrintWriter);
-                TunerResourceManagerService tunerResourceManagerService4 = TunerResourceManagerService.this;
-                TunerResourceManagerService.m997$$Nest$mdumpSIA(tunerResourceManagerService4, tunerResourceManagerService4.mFrontendUsedNums, "FrontendUsedNums:", indentingPrintWriter);
-                TunerResourceManagerService tunerResourceManagerService5 = TunerResourceManagerService.this;
-                TunerResourceManagerService.m997$$Nest$mdumpSIA(tunerResourceManagerService5, tunerResourceManagerService5.mFrontendMaxUsableNums, "FrontendMaxUsableNums:", indentingPrintWriter);
-                TunerResourceManagerService tunerResourceManagerService6 = TunerResourceManagerService.this;
-                TunerResourceManagerService.m996$$Nest$mdumpMap(tunerResourceManagerService6, tunerResourceManagerService6.mFrontendResourcesBackup, "FrontendResourcesBackUp:", indentingPrintWriter);
-                TunerResourceManagerService tunerResourceManagerService7 = TunerResourceManagerService.this;
-                TunerResourceManagerService.m997$$Nest$mdumpSIA(tunerResourceManagerService7, tunerResourceManagerService7.mFrontendExistingNumsBackup, "FrontendExistingNumsBackup:", indentingPrintWriter);
-                TunerResourceManagerService tunerResourceManagerService8 = TunerResourceManagerService.this;
-                TunerResourceManagerService.m997$$Nest$mdumpSIA(tunerResourceManagerService8, tunerResourceManagerService8.mFrontendUsedNumsBackup, "FrontendUsedNumsBackup:", indentingPrintWriter);
-                TunerResourceManagerService tunerResourceManagerService9 = TunerResourceManagerService.this;
-                TunerResourceManagerService.m997$$Nest$mdumpSIA(tunerResourceManagerService9, tunerResourceManagerService9.mFrontendMaxUsableNumsBackup, "FrontendUsedNumsBackup:", indentingPrintWriter);
-                TunerResourceManagerService tunerResourceManagerService10 = TunerResourceManagerService.this;
-                TunerResourceManagerService.m996$$Nest$mdumpMap(tunerResourceManagerService10, tunerResourceManagerService10.mDemuxResources, "DemuxResource:", indentingPrintWriter);
-                TunerResourceManagerService tunerResourceManagerService11 = TunerResourceManagerService.this;
-                TunerResourceManagerService.m996$$Nest$mdumpMap(tunerResourceManagerService11, tunerResourceManagerService11.mLnbResources, "LnbResource:", indentingPrintWriter);
-                TunerResourceManagerService tunerResourceManagerService12 = TunerResourceManagerService.this;
-                TunerResourceManagerService.m996$$Nest$mdumpMap(tunerResourceManagerService12, tunerResourceManagerService12.mCasResources, "CasResource:", indentingPrintWriter);
-                TunerResourceManagerService tunerResourceManagerService13 = TunerResourceManagerService.this;
-                TunerResourceManagerService.m996$$Nest$mdumpMap(tunerResourceManagerService13, tunerResourceManagerService13.mCiCamResources, "CiCamResource:", indentingPrintWriter);
-                TunerResourceManagerService tunerResourceManagerService14 = TunerResourceManagerService.this;
-                TunerResourceManagerService.m996$$Nest$mdumpMap(tunerResourceManagerService14, tunerResourceManagerService14.mListeners, "Listners:", indentingPrintWriter);
+                TunerResourceManagerService tunerResourceManagerService =
+                        TunerResourceManagerService.this;
+                TunerResourceManagerService.m996$$Nest$mdumpMap(
+                        tunerResourceManagerService,
+                        tunerResourceManagerService.mClientProfiles,
+                        "ClientProfiles:",
+                        indentingPrintWriter);
+                TunerResourceManagerService tunerResourceManagerService2 =
+                        TunerResourceManagerService.this;
+                TunerResourceManagerService.m996$$Nest$mdumpMap(
+                        tunerResourceManagerService2,
+                        tunerResourceManagerService2.mFrontendResources,
+                        "FrontendResources:",
+                        indentingPrintWriter);
+                TunerResourceManagerService tunerResourceManagerService3 =
+                        TunerResourceManagerService.this;
+                TunerResourceManagerService.m997$$Nest$mdumpSIA(
+                        tunerResourceManagerService3,
+                        tunerResourceManagerService3.mFrontendExistingNums,
+                        "FrontendExistingNums:",
+                        indentingPrintWriter);
+                TunerResourceManagerService tunerResourceManagerService4 =
+                        TunerResourceManagerService.this;
+                TunerResourceManagerService.m997$$Nest$mdumpSIA(
+                        tunerResourceManagerService4,
+                        tunerResourceManagerService4.mFrontendUsedNums,
+                        "FrontendUsedNums:",
+                        indentingPrintWriter);
+                TunerResourceManagerService tunerResourceManagerService5 =
+                        TunerResourceManagerService.this;
+                TunerResourceManagerService.m997$$Nest$mdumpSIA(
+                        tunerResourceManagerService5,
+                        tunerResourceManagerService5.mFrontendMaxUsableNums,
+                        "FrontendMaxUsableNums:",
+                        indentingPrintWriter);
+                TunerResourceManagerService tunerResourceManagerService6 =
+                        TunerResourceManagerService.this;
+                TunerResourceManagerService.m996$$Nest$mdumpMap(
+                        tunerResourceManagerService6,
+                        tunerResourceManagerService6.mFrontendResourcesBackup,
+                        "FrontendResourcesBackUp:",
+                        indentingPrintWriter);
+                TunerResourceManagerService tunerResourceManagerService7 =
+                        TunerResourceManagerService.this;
+                TunerResourceManagerService.m997$$Nest$mdumpSIA(
+                        tunerResourceManagerService7,
+                        tunerResourceManagerService7.mFrontendExistingNumsBackup,
+                        "FrontendExistingNumsBackup:",
+                        indentingPrintWriter);
+                TunerResourceManagerService tunerResourceManagerService8 =
+                        TunerResourceManagerService.this;
+                TunerResourceManagerService.m997$$Nest$mdumpSIA(
+                        tunerResourceManagerService8,
+                        tunerResourceManagerService8.mFrontendUsedNumsBackup,
+                        "FrontendUsedNumsBackup:",
+                        indentingPrintWriter);
+                TunerResourceManagerService tunerResourceManagerService9 =
+                        TunerResourceManagerService.this;
+                TunerResourceManagerService.m997$$Nest$mdumpSIA(
+                        tunerResourceManagerService9,
+                        tunerResourceManagerService9.mFrontendMaxUsableNumsBackup,
+                        "FrontendUsedNumsBackup:",
+                        indentingPrintWriter);
+                TunerResourceManagerService tunerResourceManagerService10 =
+                        TunerResourceManagerService.this;
+                TunerResourceManagerService.m996$$Nest$mdumpMap(
+                        tunerResourceManagerService10,
+                        tunerResourceManagerService10.mDemuxResources,
+                        "DemuxResource:",
+                        indentingPrintWriter);
+                TunerResourceManagerService tunerResourceManagerService11 =
+                        TunerResourceManagerService.this;
+                TunerResourceManagerService.m996$$Nest$mdumpMap(
+                        tunerResourceManagerService11,
+                        tunerResourceManagerService11.mLnbResources,
+                        "LnbResource:",
+                        indentingPrintWriter);
+                TunerResourceManagerService tunerResourceManagerService12 =
+                        TunerResourceManagerService.this;
+                TunerResourceManagerService.m996$$Nest$mdumpMap(
+                        tunerResourceManagerService12,
+                        tunerResourceManagerService12.mCasResources,
+                        "CasResource:",
+                        indentingPrintWriter);
+                TunerResourceManagerService tunerResourceManagerService13 =
+                        TunerResourceManagerService.this;
+                TunerResourceManagerService.m996$$Nest$mdumpMap(
+                        tunerResourceManagerService13,
+                        tunerResourceManagerService13.mCiCamResources,
+                        "CiCamResource:",
+                        indentingPrintWriter);
+                TunerResourceManagerService tunerResourceManagerService14 =
+                        TunerResourceManagerService.this;
+                TunerResourceManagerService.m996$$Nest$mdumpMap(
+                        tunerResourceManagerService14,
+                        tunerResourceManagerService14.mListeners,
+                        "Listners:",
+                        indentingPrintWriter);
             }
         }
 
         public final int getClientPriority(int i, int i2) {
             int clientPriority;
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "getClientPriority");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "getClientPriority");
             synchronized (TunerResourceManagerService.this.mLock) {
-                TunerResourceManagerService tunerResourceManagerService = TunerResourceManagerService.this;
-                clientPriority = tunerResourceManagerService.getClientPriority(i, tunerResourceManagerService.checkIsForeground(i2));
+                TunerResourceManagerService tunerResourceManagerService =
+                        TunerResourceManagerService.this;
+                clientPriority =
+                        tunerResourceManagerService.getClientPriority(
+                                i, tunerResourceManagerService.checkIsForeground(i2));
             }
             return clientPriority;
         }
 
         public final int getConfigPriority(int i, boolean z) {
             int clientPriority;
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "getConfigPriority");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "getConfigPriority");
             synchronized (TunerResourceManagerService.this.mLock) {
                 clientPriority = TunerResourceManagerService.this.getClientPriority(i, z);
             }
@@ -191,10 +276,13 @@ public final class TunerResourceManagerService extends SystemService implements 
 
         public final int getMaxNumberOfFrontends(int i) {
             int i2;
-            TunerResourceManagerService.m999$$Nest$menforceTunerAccessPermission(TunerResourceManagerService.this, "getMaxNumberOfFrontends");
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "getMaxNumberOfFrontends");
+            TunerResourceManagerService.m999$$Nest$menforceTunerAccessPermission(
+                    TunerResourceManagerService.this, "getMaxNumberOfFrontends");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "getMaxNumberOfFrontends");
             synchronized (TunerResourceManagerService.this.mLock) {
-                TunerResourceManagerService tunerResourceManagerService = TunerResourceManagerService.this;
+                TunerResourceManagerService tunerResourceManagerService =
+                        TunerResourceManagerService.this;
                 i2 = -1;
                 int i3 = tunerResourceManagerService.mFrontendExistingNums.get(i, -1);
                 if (i3 == -1) {
@@ -209,9 +297,11 @@ public final class TunerResourceManagerService extends SystemService implements 
 
         public final boolean hasUnusedFrontend(int i) {
             boolean z;
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "hasUnusedFrontend");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "hasUnusedFrontend");
             synchronized (TunerResourceManagerService.this.mLock) {
-                Iterator it = TunerResourceManagerService.this.getFrontendResources().values().iterator();
+                Iterator it =
+                        TunerResourceManagerService.this.getFrontendResources().values().iterator();
                 while (true) {
                     if (!it.hasNext()) {
                         z = false;
@@ -227,39 +317,56 @@ public final class TunerResourceManagerService extends SystemService implements 
             return z;
         }
 
-        public final boolean isHigherPriority(ResourceClientProfile resourceClientProfile, ResourceClientProfile resourceClientProfile2) {
+        public final boolean isHigherPriority(
+                ResourceClientProfile resourceClientProfile,
+                ResourceClientProfile resourceClientProfile2) {
             boolean isHigherPriorityInternal;
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "isHigherPriority");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "isHigherPriority");
             if (resourceClientProfile == null || resourceClientProfile2 == null) {
                 throw new RemoteException("Client profiles can't be null.");
             }
             synchronized (TunerResourceManagerService.this.mLock) {
-                isHigherPriorityInternal = TunerResourceManagerService.this.isHigherPriorityInternal(resourceClientProfile, resourceClientProfile2);
+                isHigherPriorityInternal =
+                        TunerResourceManagerService.this.isHigherPriorityInternal(
+                                resourceClientProfile, resourceClientProfile2);
             }
             return isHigherPriorityInternal;
         }
 
         public final boolean isLowestPriority(int i, int i2) {
             boolean z;
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "isLowestPriority");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "isLowestPriority");
             synchronized (TunerResourceManagerService.this.mLock) {
                 try {
                     if (!TunerResourceManagerService.this.checkClientExists(i)) {
-                        throw new RemoteException("isLowestPriority called from unregistered client: " + i);
+                        throw new RemoteException(
+                                "isLowestPriority called from unregistered client: " + i);
                     }
-                    TunerResourceManagerService tunerResourceManagerService = TunerResourceManagerService.this;
+                    TunerResourceManagerService tunerResourceManagerService =
+                            TunerResourceManagerService.this;
                     ClientProfile clientProfile = tunerResourceManagerService.getClientProfile(i);
                     z = true;
                     if (clientProfile != null) {
                         tunerResourceManagerService.clientPriorityUpdateOnRequest(clientProfile);
                         int priority = clientProfile.getPriority();
-                        Iterator it = tunerResourceManagerService.getFrontendResources().values().iterator();
+                        Iterator it =
+                                tunerResourceManagerService
+                                        .getFrontendResources()
+                                        .values()
+                                        .iterator();
                         while (true) {
                             if (!it.hasNext()) {
                                 break;
                             }
                             FrontendResource frontendResource = (FrontendResource) it.next();
-                            if (frontendResource.mType == i2 && frontendResource.mIsInUse && priority > tunerResourceManagerService.updateAndGetOwnerClientPriority(frontendResource.mOwnerClientId)) {
+                            if (frontendResource.mType == i2
+                                    && frontendResource.mIsInUse
+                                    && priority
+                                            > tunerResourceManagerService
+                                                    .updateAndGetOwnerClientPriority(
+                                                            frontendResource.mOwnerClientId)) {
                                 z = false;
                                 break;
                             }
@@ -271,9 +378,14 @@ public final class TunerResourceManagerService extends SystemService implements 
             return z;
         }
 
-        public final void registerClientProfile(ResourceClientProfile resourceClientProfile, IResourcesReclaimListener iResourcesReclaimListener, int[] iArr) {
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "registerClientProfile");
-            TunerResourceManagerService.m999$$Nest$menforceTunerAccessPermission(TunerResourceManagerService.this, "registerClientProfile");
+        public final void registerClientProfile(
+                ResourceClientProfile resourceClientProfile,
+                IResourcesReclaimListener iResourcesReclaimListener,
+                int[] iArr) {
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "registerClientProfile");
+            TunerResourceManagerService.m999$$Nest$menforceTunerAccessPermission(
+                    TunerResourceManagerService.this, "registerClientProfile");
             if (resourceClientProfile == null) {
                 throw new RemoteException("ResourceClientProfile can't be null");
             }
@@ -283,19 +395,29 @@ public final class TunerResourceManagerService extends SystemService implements 
             if (iResourcesReclaimListener == null) {
                 throw new RemoteException("IResourcesReclaimListener can't be null!");
             }
-            UseCasePriorityHints useCasePriorityHints = TunerResourceManagerService.this.mPriorityCongfig;
+            UseCasePriorityHints useCasePriorityHints =
+                    TunerResourceManagerService.this.mPriorityCongfig;
             int i = resourceClientProfile.useCase;
-            if (!((HashSet) useCasePriorityHints.mVendorDefinedUseCase).contains(Integer.valueOf(i)) && i != 100 && i != 200 && i != 300 && i != 400 && i != 500) {
-                throw new RemoteException("Use undefined client use case:" + resourceClientProfile.useCase);
+            if (!((HashSet) useCasePriorityHints.mVendorDefinedUseCase).contains(Integer.valueOf(i))
+                    && i != 100
+                    && i != 200
+                    && i != 300
+                    && i != 400
+                    && i != 500) {
+                throw new RemoteException(
+                        "Use undefined client use case:" + resourceClientProfile.useCase);
             }
             synchronized (TunerResourceManagerService.this.mLock) {
-                TunerResourceManagerService.this.registerClientProfileInternal(resourceClientProfile, iResourcesReclaimListener, iArr);
+                TunerResourceManagerService.this.registerClientProfileInternal(
+                        resourceClientProfile, iResourcesReclaimListener, iArr);
             }
         }
 
         public final void releaseCasSession(int i, int i2) {
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "releaseCasSession");
-            if (!TunerResourceManagerService.m1001$$Nest$mvalidateResourceHandle(TunerResourceManagerService.this, 4, i)) {
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "releaseCasSession");
+            if (!TunerResourceManagerService.m1001$$Nest$mvalidateResourceHandle(
+                    TunerResourceManagerService.this, 4, i)) {
                 throw new RemoteException("casSessionHandle can't be invalid");
             }
             synchronized (TunerResourceManagerService.this.mLock) {
@@ -303,12 +425,16 @@ public final class TunerResourceManagerService extends SystemService implements 
                     if (!TunerResourceManagerService.this.checkClientExists(i2)) {
                         throw new RemoteException("Release cas from unregistered client:" + i2);
                     }
-                    CasResource casResource = TunerResourceManagerService.this.getCasResource(TunerResourceManagerService.this.getClientProfile(i2).mUsingCasSystemId);
+                    CasResource casResource =
+                            TunerResourceManagerService.this.getCasResource(
+                                    TunerResourceManagerService.this.getClientProfile(i2)
+                                            .mUsingCasSystemId);
                     if (casResource == null) {
                         throw new RemoteException("Releasing cas does not exist.");
                     }
                     if (!casResource.getOwnerClientIds().contains(Integer.valueOf(i2))) {
-                        throw new RemoteException("Client is not the current owner of the releasing cas.");
+                        throw new RemoteException(
+                                "Client is not the current owner of the releasing cas.");
                     }
                     TunerResourceManagerService.this.releaseCasSessionInternal(casResource, i2);
                 } catch (Throwable th) {
@@ -318,8 +444,10 @@ public final class TunerResourceManagerService extends SystemService implements 
         }
 
         public final void releaseCiCam(int i, int i2) {
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "releaseCiCam");
-            if (!TunerResourceManagerService.m1001$$Nest$mvalidateResourceHandle(TunerResourceManagerService.this, 5, i)) {
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "releaseCiCam");
+            if (!TunerResourceManagerService.m1001$$Nest$mvalidateResourceHandle(
+                    TunerResourceManagerService.this, 5, i)) {
                 throw new RemoteException("ciCamHandle can't be invalid");
             }
             synchronized (TunerResourceManagerService.this.mLock) {
@@ -329,14 +457,17 @@ public final class TunerResourceManagerService extends SystemService implements 
                     }
                     int i3 = TunerResourceManagerService.this.getClientProfile(i2).mUsingCiCamId;
                     if (i3 != TunerResourceManagerService.this.getResourceIdFromHandle(i)) {
-                        throw new RemoteException("The client " + i2 + " is not the owner of the releasing ciCam.");
+                        throw new RemoteException(
+                                "The client " + i2 + " is not the owner of the releasing ciCam.");
                     }
-                    CiCamResource ciCamResource = TunerResourceManagerService.this.getCiCamResource(i3);
+                    CiCamResource ciCamResource =
+                            TunerResourceManagerService.this.getCiCamResource(i3);
                     if (ciCamResource == null) {
                         throw new RemoteException("Releasing ciCam does not exist.");
                     }
                     if (!ciCamResource.getOwnerClientIds().contains(Integer.valueOf(i2))) {
-                        throw new RemoteException("Client is not the current owner of the releasing ciCam.");
+                        throw new RemoteException(
+                                "Client is not the current owner of the releasing ciCam.");
                     }
                     TunerResourceManagerService.this.releaseCiCamInternal(ciCamResource, i2);
                 } catch (Throwable th) {
@@ -346,10 +477,13 @@ public final class TunerResourceManagerService extends SystemService implements 
         }
 
         public final void releaseDemux(int i, int i2) {
-            TunerResourceManagerService.m999$$Nest$menforceTunerAccessPermission(TunerResourceManagerService.this, "releaseDemux");
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "releaseDemux");
+            TunerResourceManagerService.m999$$Nest$menforceTunerAccessPermission(
+                    TunerResourceManagerService.this, "releaseDemux");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "releaseDemux");
             if (TunerResourceManagerService.DEBUG) {
-                FileDescriptorWatcher$FileDescriptorLeakWatcher$$ExternalSyntheticOutline0.m(i, "releaseDemux(demuxHandle=", ")", "TunerResourceManagerService");
+                FileDescriptorWatcher$FileDescriptorLeakWatcher$$ExternalSyntheticOutline0.m(
+                        i, "releaseDemux(demuxHandle=", ")", "TunerResourceManagerService");
             }
             synchronized (TunerResourceManagerService.this.mLock) {
                 try {
@@ -359,12 +493,14 @@ public final class TunerResourceManagerService extends SystemService implements 
                     if (!TunerResourceManagerService.this.checkClientExists(i2)) {
                         throw new RemoteException("Release demux for unregistered client:" + i2);
                     }
-                    DemuxResource demuxResource = TunerResourceManagerService.this.getDemuxResource(i);
+                    DemuxResource demuxResource =
+                            TunerResourceManagerService.this.getDemuxResource(i);
                     if (demuxResource == null) {
                         throw new RemoteException("Releasing demux does not exist.");
                     }
                     if (demuxResource.mOwnerClientId != i2) {
-                        throw new RemoteException("Client is not the current owner of the releasing demux.");
+                        throw new RemoteException(
+                                "Client is not the current owner of the releasing demux.");
                     }
                     TunerResourceManagerService.this.releaseDemuxInternal(demuxResource);
                 } catch (Throwable th) {
@@ -374,33 +510,47 @@ public final class TunerResourceManagerService extends SystemService implements 
         }
 
         public final void releaseDescrambler(int i, int i2) {
-            TunerResourceManagerService.m999$$Nest$menforceTunerAccessPermission(TunerResourceManagerService.this, "releaseDescrambler");
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "releaseDescrambler");
+            TunerResourceManagerService.m999$$Nest$menforceTunerAccessPermission(
+                    TunerResourceManagerService.this, "releaseDescrambler");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "releaseDescrambler");
             if (TunerResourceManagerService.DEBUG) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m(i, "releaseDescrambler(descramblerHandle=", ")", "TunerResourceManagerService");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        i,
+                        "releaseDescrambler(descramblerHandle=",
+                        ")",
+                        "TunerResourceManagerService");
             }
         }
 
         public final void releaseFrontend(int i, int i2) {
-            TunerResourceManagerService.m999$$Nest$menforceTunerAccessPermission(TunerResourceManagerService.this, "releaseFrontend");
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "releaseFrontend");
-            if (!TunerResourceManagerService.m1001$$Nest$mvalidateResourceHandle(TunerResourceManagerService.this, 0, i)) {
+            TunerResourceManagerService.m999$$Nest$menforceTunerAccessPermission(
+                    TunerResourceManagerService.this, "releaseFrontend");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "releaseFrontend");
+            if (!TunerResourceManagerService.m1001$$Nest$mvalidateResourceHandle(
+                    TunerResourceManagerService.this, 0, i)) {
                 throw new RemoteException("frontendHandle can't be invalid");
             }
             synchronized (TunerResourceManagerService.this.mLock) {
                 try {
                     if (!TunerResourceManagerService.this.checkClientExists(i2)) {
-                        throw new RemoteException("Release frontend from unregistered client:" + i2);
+                        throw new RemoteException(
+                                "Release frontend from unregistered client:" + i2);
                     }
-                    FrontendResource frontendResource = TunerResourceManagerService.this.getFrontendResource(i);
+                    FrontendResource frontendResource =
+                            TunerResourceManagerService.this.getFrontendResource(i);
                     if (frontendResource == null) {
                         throw new RemoteException("Releasing frontend does not exist.");
                     }
                     int i3 = frontendResource.mOwnerClientId;
-                    ClientProfile clientProfile = TunerResourceManagerService.this.getClientProfile(i3);
+                    ClientProfile clientProfile =
+                            TunerResourceManagerService.this.getClientProfile(i3);
                     if (i3 != i2 && clientProfile != null) {
-                        if (!((HashSet) clientProfile.mShareFeClientIds).contains(Integer.valueOf(i2))) {
-                            throw new RemoteException("Client is not the current owner of the releasing fe.");
+                        if (!((HashSet) clientProfile.mShareFeClientIds)
+                                .contains(Integer.valueOf(i2))) {
+                            throw new RemoteException(
+                                    "Client is not the current owner of the releasing fe.");
                         }
                     }
                     TunerResourceManagerService.this.releaseFrontendInternal(frontendResource, i2);
@@ -411,9 +561,12 @@ public final class TunerResourceManagerService extends SystemService implements 
         }
 
         public final void releaseLnb(int i, int i2) {
-            TunerResourceManagerService.m999$$Nest$menforceTunerAccessPermission(TunerResourceManagerService.this, "releaseLnb");
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "releaseLnb");
-            if (!TunerResourceManagerService.m1001$$Nest$mvalidateResourceHandle(TunerResourceManagerService.this, 3, i)) {
+            TunerResourceManagerService.m999$$Nest$menforceTunerAccessPermission(
+                    TunerResourceManagerService.this, "releaseLnb");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "releaseLnb");
+            if (!TunerResourceManagerService.m1001$$Nest$mvalidateResourceHandle(
+                    TunerResourceManagerService.this, 3, i)) {
                 throw new RemoteException("lnbHandle can't be invalid");
             }
             synchronized (TunerResourceManagerService.this.mLock) {
@@ -426,7 +579,8 @@ public final class TunerResourceManagerService extends SystemService implements 
                         throw new RemoteException("Releasing lnb does not exist.");
                     }
                     if (lnbResource.mOwnerClientId != i2) {
-                        throw new RemoteException("Client is not the current owner of the releasing lnb.");
+                        throw new RemoteException(
+                                "Client is not the current owner of the releasing lnb.");
                     }
                     TunerResourceManagerService.this.releaseLnbInternal(lnbResource);
                 } catch (Throwable th) {
@@ -436,22 +590,30 @@ public final class TunerResourceManagerService extends SystemService implements 
         }
 
         public final boolean releaseLock(int i) {
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "releaseLock");
-            return TunerResourceManagerService.m1000$$Nest$mreleaseLockInternal(TunerResourceManagerService.this, i, false, false);
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "releaseLock");
+            return TunerResourceManagerService.m1000$$Nest$mreleaseLockInternal(
+                    TunerResourceManagerService.this, i, false, false);
         }
 
         public final boolean requestCasSession(CasSessionRequest casSessionRequest, int[] iArr) {
             boolean requestCasSessionInternal;
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "requestCasSession");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "requestCasSession");
             if (iArr == null) {
                 throw new RemoteException("casSessionHandle can't be null");
             }
             synchronized (TunerResourceManagerService.this.mLock) {
                 try {
-                    if (!TunerResourceManagerService.this.checkClientExists(casSessionRequest.clientId)) {
-                        throw new RemoteException("Request cas from unregistered client:" + casSessionRequest.clientId);
+                    if (!TunerResourceManagerService.this.checkClientExists(
+                            casSessionRequest.clientId)) {
+                        throw new RemoteException(
+                                "Request cas from unregistered client:"
+                                        + casSessionRequest.clientId);
                     }
-                    requestCasSessionInternal = TunerResourceManagerService.this.requestCasSessionInternal(casSessionRequest, iArr);
+                    requestCasSessionInternal =
+                            TunerResourceManagerService.this.requestCasSessionInternal(
+                                    casSessionRequest, iArr);
                 } catch (Throwable th) {
                     throw th;
                 }
@@ -461,16 +623,22 @@ public final class TunerResourceManagerService extends SystemService implements 
 
         public final boolean requestCiCam(TunerCiCamRequest tunerCiCamRequest, int[] iArr) {
             boolean requestCiCamInternal;
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "requestCiCam");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "requestCiCam");
             if (iArr == null) {
                 throw new RemoteException("ciCamHandle can't be null");
             }
             synchronized (TunerResourceManagerService.this.mLock) {
                 try {
-                    if (!TunerResourceManagerService.this.checkClientExists(tunerCiCamRequest.clientId)) {
-                        throw new RemoteException("Request ciCam from unregistered client:" + tunerCiCamRequest.clientId);
+                    if (!TunerResourceManagerService.this.checkClientExists(
+                            tunerCiCamRequest.clientId)) {
+                        throw new RemoteException(
+                                "Request ciCam from unregistered client:"
+                                        + tunerCiCamRequest.clientId);
                     }
-                    requestCiCamInternal = TunerResourceManagerService.this.requestCiCamInternal(tunerCiCamRequest, iArr);
+                    requestCiCamInternal =
+                            TunerResourceManagerService.this.requestCiCamInternal(
+                                    tunerCiCamRequest, iArr);
                 } catch (Throwable th) {
                     throw th;
                 }
@@ -480,17 +648,24 @@ public final class TunerResourceManagerService extends SystemService implements 
 
         public final boolean requestDemux(TunerDemuxRequest tunerDemuxRequest, int[] iArr) {
             boolean requestDemuxInternal;
-            TunerResourceManagerService.m999$$Nest$menforceTunerAccessPermission(TunerResourceManagerService.this, "requestDemux");
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "requestDemux");
+            TunerResourceManagerService.m999$$Nest$menforceTunerAccessPermission(
+                    TunerResourceManagerService.this, "requestDemux");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "requestDemux");
             if (iArr == null) {
                 throw new RemoteException("demuxHandle can't be null");
             }
             synchronized (TunerResourceManagerService.this.mLock) {
                 try {
-                    if (!TunerResourceManagerService.this.checkClientExists(tunerDemuxRequest.clientId)) {
-                        throw new RemoteException("Request demux from unregistered client:" + tunerDemuxRequest.clientId);
+                    if (!TunerResourceManagerService.this.checkClientExists(
+                            tunerDemuxRequest.clientId)) {
+                        throw new RemoteException(
+                                "Request demux from unregistered client:"
+                                        + tunerDemuxRequest.clientId);
                     }
-                    requestDemuxInternal = TunerResourceManagerService.this.requestDemuxInternal(tunerDemuxRequest, iArr);
+                    requestDemuxInternal =
+                            TunerResourceManagerService.this.requestDemuxInternal(
+                                    tunerDemuxRequest, iArr);
                 } catch (Throwable th) {
                     throw th;
                 }
@@ -498,19 +673,30 @@ public final class TunerResourceManagerService extends SystemService implements 
             return requestDemuxInternal;
         }
 
-        public final boolean requestDescrambler(TunerDescramblerRequest tunerDescramblerRequest, int[] iArr) {
+        public final boolean requestDescrambler(
+                TunerDescramblerRequest tunerDescramblerRequest, int[] iArr) {
             boolean requestDescramblerInternal;
-            TunerResourceManagerService.this.getContext().enforceCallingPermission("android.permission.ACCESS_TV_DESCRAMBLER", "TunerResourceManagerService: requestDescrambler");
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "requestDescrambler");
+            TunerResourceManagerService.this
+                    .getContext()
+                    .enforceCallingPermission(
+                            "android.permission.ACCESS_TV_DESCRAMBLER",
+                            "TunerResourceManagerService: requestDescrambler");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "requestDescrambler");
             if (iArr == null) {
                 throw new RemoteException("descramblerHandle can't be null");
             }
             synchronized (TunerResourceManagerService.this.mLock) {
                 try {
-                    if (!TunerResourceManagerService.this.checkClientExists(tunerDescramblerRequest.clientId)) {
-                        throw new RemoteException("Request descrambler from unregistered client:" + tunerDescramblerRequest.clientId);
+                    if (!TunerResourceManagerService.this.checkClientExists(
+                            tunerDescramblerRequest.clientId)) {
+                        throw new RemoteException(
+                                "Request descrambler from unregistered client:"
+                                        + tunerDescramblerRequest.clientId);
                     }
-                    requestDescramblerInternal = TunerResourceManagerService.this.requestDescramblerInternal(tunerDescramblerRequest, iArr);
+                    requestDescramblerInternal =
+                            TunerResourceManagerService.this.requestDescramblerInternal(
+                                    tunerDescramblerRequest, iArr);
                 } catch (Throwable th) {
                     throw th;
                 }
@@ -518,23 +704,38 @@ public final class TunerResourceManagerService extends SystemService implements 
             return requestDescramblerInternal;
         }
 
-        public final boolean requestFrontend(TunerFrontendRequest tunerFrontendRequest, int[] iArr) {
-            TunerResourceManagerService.m999$$Nest$menforceTunerAccessPermission(TunerResourceManagerService.this, "requestFrontend");
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "requestFrontend");
+        public final boolean requestFrontend(
+                TunerFrontendRequest tunerFrontendRequest, int[] iArr) {
+            TunerResourceManagerService.m999$$Nest$menforceTunerAccessPermission(
+                    TunerResourceManagerService.this, "requestFrontend");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "requestFrontend");
             if (iArr == null) {
                 Slog.e("TunerResourceManagerService", "frontendHandle can't be null");
                 return false;
             }
             synchronized (TunerResourceManagerService.this.mLock) {
                 try {
-                    if (!TunerResourceManagerService.this.checkClientExists(tunerFrontendRequest.clientId)) {
-                        Slog.e("TunerResourceManagerService", "Request frontend from unregistered client: " + tunerFrontendRequest.clientId);
+                    if (!TunerResourceManagerService.this.checkClientExists(
+                            tunerFrontendRequest.clientId)) {
+                        Slog.e(
+                                "TunerResourceManagerService",
+                                "Request frontend from unregistered client: "
+                                        + tunerFrontendRequest.clientId);
                         return false;
                     }
-                    if (((HashSet) TunerResourceManagerService.this.getClientProfile(tunerFrontendRequest.clientId).mUsingFrontendHandles).isEmpty()) {
-                        return TunerResourceManagerService.this.requestFrontendInternal(tunerFrontendRequest, iArr);
+                    if (((HashSet)
+                                    TunerResourceManagerService.this.getClientProfile(
+                                                    tunerFrontendRequest.clientId)
+                                            .mUsingFrontendHandles)
+                            .isEmpty()) {
+                        return TunerResourceManagerService.this.requestFrontendInternal(
+                                tunerFrontendRequest, iArr);
                     }
-                    Slog.e("TunerResourceManagerService", "Release frontend before requesting another one. Client id: " + tunerFrontendRequest.clientId);
+                    Slog.e(
+                            "TunerResourceManagerService",
+                            "Release frontend before requesting another one. Client id: "
+                                    + tunerFrontendRequest.clientId);
                     return false;
                 } catch (Throwable th) {
                     throw th;
@@ -544,17 +745,23 @@ public final class TunerResourceManagerService extends SystemService implements 
 
         public final boolean requestLnb(TunerLnbRequest tunerLnbRequest, int[] iArr) {
             boolean requestLnbInternal;
-            TunerResourceManagerService.m999$$Nest$menforceTunerAccessPermission(TunerResourceManagerService.this, "requestLnb");
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "requestLnb");
+            TunerResourceManagerService.m999$$Nest$menforceTunerAccessPermission(
+                    TunerResourceManagerService.this, "requestLnb");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "requestLnb");
             if (iArr == null) {
                 throw new RemoteException("lnbHandle can't be null");
             }
             synchronized (TunerResourceManagerService.this.mLock) {
                 try {
-                    if (!TunerResourceManagerService.this.checkClientExists(tunerLnbRequest.clientId)) {
-                        throw new RemoteException("Request lnb from unregistered client:" + tunerLnbRequest.clientId);
+                    if (!TunerResourceManagerService.this.checkClientExists(
+                            tunerLnbRequest.clientId)) {
+                        throw new RemoteException(
+                                "Request lnb from unregistered client:" + tunerLnbRequest.clientId);
                     }
-                    requestLnbInternal = TunerResourceManagerService.this.requestLnbInternal(tunerLnbRequest, iArr);
+                    requestLnbInternal =
+                            TunerResourceManagerService.this.requestLnbInternal(
+                                    tunerLnbRequest, iArr);
                 } catch (Throwable th) {
                     throw th;
                 }
@@ -563,22 +770,33 @@ public final class TunerResourceManagerService extends SystemService implements 
         }
 
         public final void restoreResourceMap(int i) {
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "restoreResourceMap");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "restoreResourceMap");
             synchronized (TunerResourceManagerService.this.mLock) {
-                TunerResourceManagerService tunerResourceManagerService = TunerResourceManagerService.this;
+                TunerResourceManagerService tunerResourceManagerService =
+                        TunerResourceManagerService.this;
                 if (i != 0) {
                     tunerResourceManagerService.getClass();
                 } else {
-                    TunerResourceManagerService.replaceFeResourceMap(tunerResourceManagerService.mFrontendResourcesBackup, tunerResourceManagerService.mFrontendResources);
-                    TunerResourceManagerService.replaceFeCounts(tunerResourceManagerService.mFrontendExistingNumsBackup, tunerResourceManagerService.mFrontendExistingNums);
-                    TunerResourceManagerService.replaceFeCounts(tunerResourceManagerService.mFrontendUsedNumsBackup, tunerResourceManagerService.mFrontendUsedNums);
-                    TunerResourceManagerService.replaceFeCounts(tunerResourceManagerService.mFrontendMaxUsableNumsBackup, tunerResourceManagerService.mFrontendMaxUsableNums);
+                    TunerResourceManagerService.replaceFeResourceMap(
+                            tunerResourceManagerService.mFrontendResourcesBackup,
+                            tunerResourceManagerService.mFrontendResources);
+                    TunerResourceManagerService.replaceFeCounts(
+                            tunerResourceManagerService.mFrontendExistingNumsBackup,
+                            tunerResourceManagerService.mFrontendExistingNums);
+                    TunerResourceManagerService.replaceFeCounts(
+                            tunerResourceManagerService.mFrontendUsedNumsBackup,
+                            tunerResourceManagerService.mFrontendUsedNums);
+                    TunerResourceManagerService.replaceFeCounts(
+                            tunerResourceManagerService.mFrontendMaxUsableNumsBackup,
+                            tunerResourceManagerService.mFrontendMaxUsableNums);
                 }
             }
         }
 
         public final void setDemuxInfoList(TunerDemuxInfo[] tunerDemuxInfoArr) {
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "setDemuxInfoList");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "setDemuxInfoList");
             if (tunerDemuxInfoArr == null) {
                 throw new RemoteException("TunerDemuxInfo can't be null");
             }
@@ -588,7 +806,8 @@ public final class TunerResourceManagerService extends SystemService implements 
         }
 
         public final void setFrontendInfoList(TunerFrontendInfo[] tunerFrontendInfoArr) {
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "setFrontendInfoList");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "setFrontendInfoList");
             if (tunerFrontendInfoArr == null) {
                 throw new RemoteException("TunerFrontendInfo can't be null");
             }
@@ -598,7 +817,8 @@ public final class TunerResourceManagerService extends SystemService implements 
         }
 
         public final void setLnbInfoList(int[] iArr) {
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "setLnbInfoList");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "setLnbInfoList");
             if (iArr == null) {
                 throw new RemoteException("Lnb handle list can't be null");
             }
@@ -609,17 +829,34 @@ public final class TunerResourceManagerService extends SystemService implements 
 
         public final boolean setMaxNumberOfFrontends(int i, int i2) {
             boolean z;
-            TunerResourceManagerService.m999$$Nest$menforceTunerAccessPermission(TunerResourceManagerService.this, "setMaxNumberOfFrontends");
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "setMaxNumberOfFrontends");
+            TunerResourceManagerService.m999$$Nest$menforceTunerAccessPermission(
+                    TunerResourceManagerService.this, "setMaxNumberOfFrontends");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "setMaxNumberOfFrontends");
             if (i2 < 0) {
-                PendingIntentController$$ExternalSyntheticOutline0.m(i2, i, "setMaxNumberOfFrontends failed with maxUsableNum:", " frontendType:", "TunerResourceManagerService");
+                PendingIntentController$$ExternalSyntheticOutline0.m(
+                        i2,
+                        i,
+                        "setMaxNumberOfFrontends failed with maxUsableNum:",
+                        " frontendType:",
+                        "TunerResourceManagerService");
                 return false;
             }
             synchronized (TunerResourceManagerService.this.mLock) {
-                TunerResourceManagerService tunerResourceManagerService = TunerResourceManagerService.this;
+                TunerResourceManagerService tunerResourceManagerService =
+                        TunerResourceManagerService.this;
                 int i3 = tunerResourceManagerService.mFrontendUsedNums.get(i, -1);
                 if (i3 != -1 && i3 > i2) {
-                    VaultKeeperService$$ExternalSyntheticOutline0.m(ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "max number of frontend for frontendType: ", " cannot be set to a value lower than the current usage count. (requested max num = ", ", current usage = "), i3, "TunerResourceManagerService");
+                    VaultKeeperService$$ExternalSyntheticOutline0.m(
+                            ArrayUtils$$ExternalSyntheticOutline0.m(
+                                    i,
+                                    i2,
+                                    "max number of frontend for frontendType: ",
+                                    " cannot be set to a value lower than the current usage count."
+                                        + " (requested max num = ",
+                                    ", current usage = "),
+                            i3,
+                            "TunerResourceManagerService");
                     z = false;
                 }
                 tunerResourceManagerService.mFrontendMaxUsableNums.put(i, i2);
@@ -629,18 +866,28 @@ public final class TunerResourceManagerService extends SystemService implements 
         }
 
         public final void shareFrontend(int i, int i2) {
-            TunerResourceManagerService.m999$$Nest$menforceTunerAccessPermission(TunerResourceManagerService.this, "shareFrontend");
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "shareFrontend");
+            TunerResourceManagerService.m999$$Nest$menforceTunerAccessPermission(
+                    TunerResourceManagerService.this, "shareFrontend");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "shareFrontend");
             synchronized (TunerResourceManagerService.this.mLock) {
                 try {
                     if (!TunerResourceManagerService.this.checkClientExists(i)) {
-                        throw new RemoteException("Share frontend request from an unregistered client:" + i);
+                        throw new RemoteException(
+                                "Share frontend request from an unregistered client:" + i);
                     }
                     if (!TunerResourceManagerService.this.checkClientExists(i2)) {
-                        throw new RemoteException("Request to share frontend with an unregistered client:" + i2);
+                        throw new RemoteException(
+                                "Request to share frontend with an unregistered client:" + i2);
                     }
-                    if (((HashSet) TunerResourceManagerService.this.getClientProfile(i2).mUsingFrontendHandles).isEmpty()) {
-                        throw new RemoteException("Request to share frontend with a client that has no frontend resources. Target client id:" + i2);
+                    if (((HashSet)
+                                    TunerResourceManagerService.this.getClientProfile(i2)
+                                            .mUsingFrontendHandles)
+                            .isEmpty()) {
+                        throw new RemoteException(
+                                "Request to share frontend with a client that has no frontend"
+                                    + " resources. Target client id:"
+                                        + i2);
                     }
                     TunerResourceManagerService.this.shareFrontendInternal(i, i2);
                 } catch (Throwable th) {
@@ -650,27 +897,41 @@ public final class TunerResourceManagerService extends SystemService implements 
         }
 
         public final void storeResourceMap(int i) {
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "storeResourceMap");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "storeResourceMap");
             synchronized (TunerResourceManagerService.this.mLock) {
-                TunerResourceManagerService tunerResourceManagerService = TunerResourceManagerService.this;
+                TunerResourceManagerService tunerResourceManagerService =
+                        TunerResourceManagerService.this;
                 if (i != 0) {
                     tunerResourceManagerService.getClass();
                 } else {
-                    TunerResourceManagerService.replaceFeResourceMap(tunerResourceManagerService.mFrontendResources, tunerResourceManagerService.mFrontendResourcesBackup);
-                    TunerResourceManagerService.replaceFeCounts(tunerResourceManagerService.mFrontendExistingNums, tunerResourceManagerService.mFrontendExistingNumsBackup);
-                    TunerResourceManagerService.replaceFeCounts(tunerResourceManagerService.mFrontendUsedNums, tunerResourceManagerService.mFrontendUsedNumsBackup);
-                    TunerResourceManagerService.replaceFeCounts(tunerResourceManagerService.mFrontendMaxUsableNums, tunerResourceManagerService.mFrontendMaxUsableNumsBackup);
+                    TunerResourceManagerService.replaceFeResourceMap(
+                            tunerResourceManagerService.mFrontendResources,
+                            tunerResourceManagerService.mFrontendResourcesBackup);
+                    TunerResourceManagerService.replaceFeCounts(
+                            tunerResourceManagerService.mFrontendExistingNums,
+                            tunerResourceManagerService.mFrontendExistingNumsBackup);
+                    TunerResourceManagerService.replaceFeCounts(
+                            tunerResourceManagerService.mFrontendUsedNums,
+                            tunerResourceManagerService.mFrontendUsedNumsBackup);
+                    TunerResourceManagerService.replaceFeCounts(
+                            tunerResourceManagerService.mFrontendMaxUsableNums,
+                            tunerResourceManagerService.mFrontendMaxUsableNumsBackup);
                 }
             }
         }
 
         public final boolean transferOwner(int i, int i2, int i3) {
-            TunerResourceManagerService.m999$$Nest$menforceTunerAccessPermission(TunerResourceManagerService.this, "transferOwner");
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "transferOwner");
+            TunerResourceManagerService.m999$$Nest$menforceTunerAccessPermission(
+                    TunerResourceManagerService.this, "transferOwner");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "transferOwner");
             synchronized (TunerResourceManagerService.this.mLock) {
                 try {
                     if (!TunerResourceManagerService.this.checkClientExists(i2)) {
-                        Slog.e("TunerResourceManagerService", "currentOwnerId:" + i2 + " does not exit");
+                        Slog.e(
+                                "TunerResourceManagerService",
+                                "currentOwnerId:" + i2 + " does not exit");
                         return false;
                     }
                     if (TunerResourceManagerService.this.checkClientExists(i3)) {
@@ -685,7 +946,8 @@ public final class TunerResourceManagerService extends SystemService implements 
         }
 
         public final void unregisterClientProfile(int i) {
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "unregisterClientProfile");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "unregisterClientProfile");
             synchronized (TunerResourceManagerService.this.mLock) {
                 try {
                     if (TunerResourceManagerService.this.checkClientExists(i)) {
@@ -700,7 +962,8 @@ public final class TunerResourceManagerService extends SystemService implements 
         }
 
         public final void updateCasInfo(int i, int i2) {
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "updateCasInfo");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "updateCasInfo");
             synchronized (TunerResourceManagerService.this.mLock) {
                 TunerResourceManagerService.this.updateCasInfoInternal(i, i2);
             }
@@ -708,9 +971,11 @@ public final class TunerResourceManagerService extends SystemService implements 
 
         public final boolean updateClientPriority(int i, int i2, int i3) {
             boolean updateClientPriorityInternal;
-            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService.this, "updateClientPriority");
+            TunerResourceManagerService.m998$$Nest$menforceTrmAccessPermission(
+                    TunerResourceManagerService.this, "updateClientPriority");
             synchronized (TunerResourceManagerService.this.mLock) {
-                updateClientPriorityInternal = TunerResourceManagerService.this.updateClientPriorityInternal(i, i2, i3);
+                updateClientPriorityInternal =
+                        TunerResourceManagerService.this.updateClientPriorityInternal(i, i2, i3);
             }
             return updateClientPriorityInternal;
         }
@@ -721,7 +986,8 @@ public final class TunerResourceManagerService extends SystemService implements 
         public final int mClientId;
         public final IResourcesReclaimListener mListener;
 
-        public ResourcesReclaimListenerRecord(IResourcesReclaimListener iResourcesReclaimListener, int i) {
+        public ResourcesReclaimListenerRecord(
+                IResourcesReclaimListener iResourcesReclaimListener, int i) {
             this.mListener = iResourcesReclaimListener;
             this.mClientId = i;
         }
@@ -739,13 +1005,18 @@ public final class TunerResourceManagerService extends SystemService implements 
                     }
                 }
             } finally {
-                TunerResourceManagerService.m1000$$Nest$mreleaseLockInternal(TunerResourceManagerService.this, this.mClientId, true, true);
+                TunerResourceManagerService.m1000$$Nest$mreleaseLockInternal(
+                        TunerResourceManagerService.this, this.mClientId, true, true);
             }
         }
     }
 
     /* renamed from: -$$Nest$mdumpMap, reason: not valid java name */
-    public static void m996$$Nest$mdumpMap(TunerResourceManagerService tunerResourceManagerService, Map map, String str, IndentingPrintWriter indentingPrintWriter) {
+    public static void m996$$Nest$mdumpMap(
+            TunerResourceManagerService tunerResourceManagerService,
+            Map map,
+            String str,
+            IndentingPrintWriter indentingPrintWriter) {
         tunerResourceManagerService.getClass();
         if (map != null) {
             indentingPrintWriter.println(str);
@@ -760,13 +1031,18 @@ public final class TunerResourceManagerService extends SystemService implements 
     }
 
     /* renamed from: -$$Nest$mdumpSIA, reason: not valid java name */
-    public static void m997$$Nest$mdumpSIA(TunerResourceManagerService tunerResourceManagerService, SparseIntArray sparseIntArray, String str, IndentingPrintWriter indentingPrintWriter) {
+    public static void m997$$Nest$mdumpSIA(
+            TunerResourceManagerService tunerResourceManagerService,
+            SparseIntArray sparseIntArray,
+            String str,
+            IndentingPrintWriter indentingPrintWriter) {
         tunerResourceManagerService.getClass();
         if (sparseIntArray != null) {
             indentingPrintWriter.println(str);
             indentingPrintWriter.increaseIndent();
             for (int i = 0; i < sparseIntArray.size(); i++) {
-                indentingPrintWriter.print(sparseIntArray.keyAt(i) + " : " + sparseIntArray.valueAt(i));
+                indentingPrintWriter.print(
+                        sparseIntArray.keyAt(i) + " : " + sparseIntArray.valueAt(i));
                 indentingPrintWriter.print(", ");
             }
             indentingPrintWriter.println();
@@ -775,17 +1051,28 @@ public final class TunerResourceManagerService extends SystemService implements 
     }
 
     /* renamed from: -$$Nest$menforceTrmAccessPermission, reason: not valid java name */
-    public static void m998$$Nest$menforceTrmAccessPermission(TunerResourceManagerService tunerResourceManagerService, String str) {
-        tunerResourceManagerService.getContext().enforceCallingOrSelfPermission("android.permission.TUNER_RESOURCE_ACCESS", "TunerResourceManagerService: ".concat(str));
+    public static void m998$$Nest$menforceTrmAccessPermission(
+            TunerResourceManagerService tunerResourceManagerService, String str) {
+        tunerResourceManagerService
+                .getContext()
+                .enforceCallingOrSelfPermission(
+                        "android.permission.TUNER_RESOURCE_ACCESS",
+                        "TunerResourceManagerService: ".concat(str));
     }
 
     /* renamed from: -$$Nest$menforceTunerAccessPermission, reason: not valid java name */
-    public static void m999$$Nest$menforceTunerAccessPermission(TunerResourceManagerService tunerResourceManagerService, String str) {
-        tunerResourceManagerService.getContext().enforceCallingPermission("android.permission.ACCESS_TV_TUNER", "TunerResourceManagerService: ".concat(str));
+    public static void m999$$Nest$menforceTunerAccessPermission(
+            TunerResourceManagerService tunerResourceManagerService, String str) {
+        tunerResourceManagerService
+                .getContext()
+                .enforceCallingPermission(
+                        "android.permission.ACCESS_TV_TUNER",
+                        "TunerResourceManagerService: ".concat(str));
     }
 
     /* renamed from: -$$Nest$mreleaseLockInternal, reason: not valid java name */
-    public static boolean m1000$$Nest$mreleaseLockInternal(TunerResourceManagerService tunerResourceManagerService, int i, boolean z, boolean z2) {
+    public static boolean m1000$$Nest$mreleaseLockInternal(
+            TunerResourceManagerService tunerResourceManagerService, int i, boolean z, boolean z2) {
         if (!tunerResourceManagerService.lockForTunerApiLock(i, "releaseLockInternal()")) {
             return false;
         }
@@ -794,14 +1081,24 @@ public final class TunerResourceManagerService extends SystemService implements 
             if (i2 != i) {
                 if (i2 == -1) {
                     if (!z2) {
-                        Slog.w("TunerResourceManagerService", "releaseLockInternal(" + i + ", 500) - called while there is no current holder");
+                        Slog.w(
+                                "TunerResourceManagerService",
+                                "releaseLockInternal("
+                                        + i
+                                        + ", 500) - called while there is no current holder");
                     }
                     if (!tunerResourceManagerService.mLockForTRMSLock.isHeldByCurrentThread()) {
                         return false;
                     }
                 } else {
                     if (!z2) {
-                        Slog.e("TunerResourceManagerService", "releaseLockInternal(" + i + ", 500) - called while someone else:" + tunerResourceManagerService.mTunerApiLockHolder + "is the current holder");
+                        Slog.e(
+                                "TunerResourceManagerService",
+                                "releaseLockInternal("
+                                        + i
+                                        + ", 500) - called while someone else:"
+                                        + tunerResourceManagerService.mTunerApiLockHolder
+                                        + "is the current holder");
                     }
                     if (!tunerResourceManagerService.mLockForTRMSLock.isHeldByCurrentThread()) {
                         return false;
@@ -814,14 +1111,32 @@ public final class TunerResourceManagerService extends SystemService implements 
             tunerResourceManagerService.mTunerApiLockNestedCount = i3;
             if (z || i3 <= 0) {
                 if (DEBUG) {
-                    Slog.d("TunerResourceManagerService", "SUCCESS:releaseLockInternal(" + i + ", 500, " + z + ", " + z2 + ") - signaling!");
+                    Slog.d(
+                            "TunerResourceManagerService",
+                            "SUCCESS:releaseLockInternal("
+                                    + i
+                                    + ", 500, "
+                                    + z
+                                    + ", "
+                                    + z2
+                                    + ") - signaling!");
                 }
                 tunerResourceManagerService.mTunerApiLockHolder = -1;
                 tunerResourceManagerService.mTunerApiLockHolderThreadId = -1L;
                 tunerResourceManagerService.mTunerApiLockNestedCount = 0;
                 tunerResourceManagerService.mTunerApiLockReleasedCV.signal();
             } else if (DEBUG) {
-                Slog.d("TunerResourceManagerService", "releaseLockInternal(" + i + ", 500, " + z + ", " + z2 + ") - NOT signaling because nested count is not zero (" + tunerResourceManagerService.mTunerApiLockNestedCount + ")");
+                Slog.d(
+                        "TunerResourceManagerService",
+                        "releaseLockInternal("
+                                + i
+                                + ", 500, "
+                                + z
+                                + ", "
+                                + z2
+                                + ") - NOT signaling because nested count is not zero ("
+                                + tunerResourceManagerService.mTunerApiLockNestedCount
+                                + ")");
             }
             if (tunerResourceManagerService.mLockForTRMSLock.isHeldByCurrentThread()) {
                 tunerResourceManagerService.mLockForTRMSLock.unlock();
@@ -836,7 +1151,8 @@ public final class TunerResourceManagerService extends SystemService implements 
     }
 
     /* renamed from: -$$Nest$mvalidateResourceHandle, reason: not valid java name */
-    public static boolean m1001$$Nest$mvalidateResourceHandle(TunerResourceManagerService tunerResourceManagerService, int i, int i2) {
+    public static boolean m1001$$Nest$mvalidateResourceHandle(
+            TunerResourceManagerService tunerResourceManagerService, int i, int i2) {
         tunerResourceManagerService.getClass();
         return i2 != -1 && (((-16777216) & i2) >> 24) == i;
     }
@@ -874,7 +1190,8 @@ public final class TunerResourceManagerService extends SystemService implements 
         this.mTunerApiLockNestedCount = 0;
     }
 
-    public static void replaceFeCounts(SparseIntArray sparseIntArray, SparseIntArray sparseIntArray2) {
+    public static void replaceFeCounts(
+            SparseIntArray sparseIntArray, SparseIntArray sparseIntArray2) {
         if (sparseIntArray2 != null) {
             sparseIntArray2.clear();
             if (sparseIntArray != null) {
@@ -912,7 +1229,8 @@ public final class TunerResourceManagerService extends SystemService implements 
     public boolean checkIsForeground(int i) {
         List<ActivityManager.RunningAppProcessInfo> runningAppProcesses;
         ActivityManager activityManager = this.mActivityManager;
-        if (activityManager == null || (runningAppProcesses = activityManager.getRunningAppProcesses()) == null) {
+        if (activityManager == null
+                || (runningAppProcesses = activityManager.getRunningAppProcesses()) == null) {
             return false;
         }
         for (ActivityManager.RunningAppProcessInfo runningAppProcessInfo : runningAppProcesses) {
@@ -967,7 +1285,8 @@ public final class TunerResourceManagerService extends SystemService implements 
         }
         Iterator it = ((HashSet) clientProfile.mUsingFrontendHandles).iterator();
         while (it.hasNext()) {
-            FrontendResource frontendResource2 = getFrontendResource(((Integer) it.next()).intValue());
+            FrontendResource frontendResource2 =
+                    getFrontendResource(((Integer) it.next()).intValue());
             int i3 = frontendResource2.mOwnerClientId;
             int i4 = clientProfile.mId;
             if (i3 == i4) {
@@ -981,7 +1300,12 @@ public final class TunerResourceManagerService extends SystemService implements 
             }
         }
         int i5 = clientProfile.mPrimaryUsingFrontendHandle;
-        if (i5 != -1 && (frontendResource = getFrontendResource(i5)) != null && (i2 = (sparseIntArray = this.mFrontendUsedNums).get((i = frontendResource.mType), -1)) != -1) {
+        if (i5 != -1
+                && (frontendResource = getFrontendResource(i5)) != null
+                && (i2 =
+                                (sparseIntArray = this.mFrontendUsedNums)
+                                        .get((i = frontendResource.mType), -1))
+                        != -1) {
             sparseIntArray.put(i, i2 - 1);
         }
         ((HashSet) clientProfile.mUsingFrontendHandles).clear();
@@ -994,7 +1318,9 @@ public final class TunerResourceManagerService extends SystemService implements 
         if (clientProfile.mIsPriorityOverwritten) {
             return;
         }
-        int clientPriority = getClientPriority(clientProfile.mUseCase, checkIsForeground(clientProfile.mProcessId));
+        int clientPriority =
+                getClientPriority(
+                        clientProfile.mUseCase, checkIsForeground(clientProfile.mProcessId));
         if (clientPriority < 0) {
             return;
         }
@@ -1002,7 +1328,9 @@ public final class TunerResourceManagerService extends SystemService implements 
     }
 
     public final int generateResourceHandle(int i, int i2) {
-        int i3 = ((i & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT) << 24) | (i2 << 16);
+        int i3 =
+                ((i & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT) << 24)
+                        | (i2 << 16);
         int i4 = this.mResourceRequestCount;
         this.mResourceRequestCount = i4 + 1;
         return (65535 & i4) | i3;
@@ -1026,14 +1354,22 @@ public final class TunerResourceManagerService extends SystemService implements 
 
     public int getClientPriority(int i, boolean z) {
         if (DEBUG) {
-            Slog.d("TunerResourceManagerService", "getClientPriority useCase=" + i + ", isForeground=" + z + ")");
+            Slog.d(
+                    "TunerResourceManagerService",
+                    "getClientPriority useCase=" + i + ", isForeground=" + z + ")");
         }
         if (z) {
             UseCasePriorityHints useCasePriorityHints = this.mPriorityCongfig;
-            return (useCasePriorityHints.mPriorityHints.get(i) == null || ((int[]) useCasePriorityHints.mPriorityHints.get(i)).length != 2) ? useCasePriorityHints.mDefaultForeground : ((int[]) useCasePriorityHints.mPriorityHints.get(i))[0];
+            return (useCasePriorityHints.mPriorityHints.get(i) == null
+                            || ((int[]) useCasePriorityHints.mPriorityHints.get(i)).length != 2)
+                    ? useCasePriorityHints.mDefaultForeground
+                    : ((int[]) useCasePriorityHints.mPriorityHints.get(i))[0];
         }
         UseCasePriorityHints useCasePriorityHints2 = this.mPriorityCongfig;
-        return (useCasePriorityHints2.mPriorityHints.get(i) == null || ((int[]) useCasePriorityHints2.mPriorityHints.get(i)).length != 2) ? useCasePriorityHints2.mDefaultBackground : ((int[]) useCasePriorityHints2.mPriorityHints.get(i))[1];
+        return (useCasePriorityHints2.mPriorityHints.get(i) == null
+                        || ((int[]) useCasePriorityHints2.mPriorityHints.get(i)).length != 2)
+                ? useCasePriorityHints2.mDefaultBackground
+                : ((int[]) useCasePriorityHints2.mPriorityHints.get(i))[1];
     }
 
     public ClientProfile getClientProfile(int i) {
@@ -1068,19 +1404,35 @@ public final class TunerResourceManagerService extends SystemService implements 
         return i == -1 ? i : (16711680 & i) >> 16;
     }
 
-    public boolean isHigherPriorityInternal(ResourceClientProfile resourceClientProfile, ResourceClientProfile resourceClientProfile2) {
+    public boolean isHigherPriorityInternal(
+            ResourceClientProfile resourceClientProfile,
+            ResourceClientProfile resourceClientProfile2) {
         if (DEBUG) {
-            Slog.d("TunerResourceManagerService", "isHigherPriority(challengerProfile=" + resourceClientProfile + ", holderProfile=" + resourceClientProfile + ")");
+            Slog.d(
+                    "TunerResourceManagerService",
+                    "isHigherPriority(challengerProfile="
+                            + resourceClientProfile
+                            + ", holderProfile="
+                            + resourceClientProfile
+                            + ")");
         }
         TvInputManager tvInputManager = this.mTvInputManager;
         if (tvInputManager == null) {
-            Slog.e("TunerResourceManagerService", "TvInputManager is null. Can't compare the priority.");
+            Slog.e(
+                    "TunerResourceManagerService",
+                    "TvInputManager is null. Can't compare the priority.");
             return true;
         }
         String str = resourceClientProfile.tvInputSessionId;
         int callingPid = str == null ? Binder.getCallingPid() : tvInputManager.getClientPid(str);
         String str2 = resourceClientProfile2.tvInputSessionId;
-        return getClientPriority(resourceClientProfile.useCase, checkIsForeground(callingPid)) > getClientPriority(resourceClientProfile2.useCase, checkIsForeground(str2 == null ? Binder.getCallingPid() : this.mTvInputManager.getClientPid(str2)));
+        return getClientPriority(resourceClientProfile.useCase, checkIsForeground(callingPid))
+                > getClientPriority(
+                        resourceClientProfile2.useCase,
+                        checkIsForeground(
+                                str2 == null
+                                        ? Binder.getCallingPid()
+                                        : this.mTvInputManager.getClientPid(str2)));
     }
 
     public final boolean lockForTunerApiLock(int i, String str) {
@@ -1088,7 +1440,14 @@ public final class TunerResourceManagerService extends SystemService implements 
             if (this.mLockForTRMSLock.tryLock(500L, TimeUnit.MILLISECONDS)) {
                 return true;
             }
-            Slog.e("TunerResourceManagerService", "FAILED to lock mLockForTRMSLock in " + str + ", clientId:" + i + ", timeoutMS:500, mTunerApiLockHolder:" + this.mTunerApiLockHolder);
+            Slog.e(
+                    "TunerResourceManagerService",
+                    "FAILED to lock mLockForTRMSLock in "
+                            + str
+                            + ", clientId:"
+                            + i
+                            + ", timeoutMS:500, mTunerApiLockHolder:"
+                            + this.mTunerApiLockHolder);
             return false;
         } catch (InterruptedException e) {
             Slog.e("TunerResourceManagerService", "exception thrown in " + str + ":" + e);
@@ -1123,11 +1482,14 @@ public final class TunerResourceManagerService extends SystemService implements 
             }
         } else {
             if (UseCasePriorityHints.DEBUG) {
-                Slog.i("UseCasePriorityHints", "no vendor priority configuration available. Using default priority");
+                Slog.i(
+                        "UseCasePriorityHints",
+                        "no vendor priority configuration available. Using default priority");
             }
             useCasePriorityHints.addNewUseCasePriority(100, 180, 100);
             useCasePriorityHints.addNewUseCasePriority(200, 450, 200);
-            useCasePriorityHints.addNewUseCasePriority(300, SystemService.PHASE_LOCK_SETTINGS_READY, 300);
+            useCasePriorityHints.addNewUseCasePriority(
+                    300, SystemService.PHASE_LOCK_SETTINGS_READY, 300);
             useCasePriorityHints.addNewUseCasePriority(400, 490, 400);
             useCasePriorityHints.addNewUseCasePriority(500, 600, 500);
         }
@@ -1142,9 +1504,12 @@ public final class TunerResourceManagerService extends SystemService implements 
             }
             try {
                 binderService.linkToDeath(this, 0);
-                this.mMediaResourceManager = IResourceManagerService.Stub.asInterface(binderService);
+                this.mMediaResourceManager =
+                        IResourceManagerService.Stub.asInterface(binderService);
             } catch (RemoteException unused) {
-                Slog.w("TunerResourceManagerService", "Could not link to death of native resource manager service.");
+                Slog.w(
+                        "TunerResourceManagerService",
+                        "Could not link to death of native resource manager service.");
             }
         }
     }
@@ -1160,18 +1525,28 @@ public final class TunerResourceManagerService extends SystemService implements 
             Integer num = (Integer) it.next();
             int intValue = num.intValue();
             try {
-                ((ResourcesReclaimListenerRecord) ((HashMap) this.mListeners).get(num)).mListener.onReclaimResources();
+                ((ResourcesReclaimListenerRecord) ((HashMap) this.mListeners).get(num))
+                        .mListener.onReclaimResources();
                 clearAllResourcesAndClientMapping(getClientProfile(intValue));
             } catch (RemoteException e) {
-                Slog.e("TunerResourceManagerService", "Failed to reclaim resources on client " + intValue, e);
+                Slog.e(
+                        "TunerResourceManagerService",
+                        "Failed to reclaim resources on client " + intValue,
+                        e);
                 return false;
             }
         }
         if (DEBUG) {
-            ASKSManagerService$$ExternalSyntheticOutline0.m(i2, i, "Reclaiming resources because higher priority client request resource type ", ", clientId:", "TunerResourceManagerService");
+            ASKSManagerService$$ExternalSyntheticOutline0.m(
+                    i2,
+                    i,
+                    "Reclaiming resources because higher priority client request resource type ",
+                    ", clientId:",
+                    "TunerResourceManagerService");
         }
         try {
-            ((ResourcesReclaimListenerRecord) ((HashMap) this.mListeners).get(Integer.valueOf(i))).mListener.onReclaimResources();
+            ((ResourcesReclaimListenerRecord) ((HashMap) this.mListeners).get(Integer.valueOf(i)))
+                    .mListener.onReclaimResources();
             clearAllResourcesAndClientMapping(clientProfile);
             return true;
         } catch (RemoteException e2) {
@@ -1180,15 +1555,22 @@ public final class TunerResourceManagerService extends SystemService implements 
         }
     }
 
-    public void registerClientProfileInternal(ResourceClientProfile resourceClientProfile, IResourcesReclaimListener iResourcesReclaimListener, int[] iArr) {
+    public void registerClientProfileInternal(
+            ResourceClientProfile resourceClientProfile,
+            IResourcesReclaimListener iResourcesReclaimListener,
+            int[] iArr) {
         IResourceManagerService iResourceManagerService;
         if (DEBUG) {
-            Slog.d("TunerResourceManagerService", "registerClientProfile(clientProfile=" + resourceClientProfile + ")");
+            Slog.d(
+                    "TunerResourceManagerService",
+                    "registerClientProfile(clientProfile=" + resourceClientProfile + ")");
         }
         iArr[0] = -1;
         TvInputManager tvInputManager = this.mTvInputManager;
         if (tvInputManager == null) {
-            Slog.e("TunerResourceManagerService", "TvInputManager is null. Can't register client profile.");
+            Slog.e(
+                    "TunerResourceManagerService",
+                    "TvInputManager is null. Can't register client profile.");
             return;
         }
         int i = this.mNextUnusedClientId;
@@ -1196,11 +1578,14 @@ public final class TunerResourceManagerService extends SystemService implements 
         iArr[0] = i;
         String str = resourceClientProfile.tvInputSessionId;
         int callingPid = str == null ? Binder.getCallingPid() : tvInputManager.getClientPid(str);
-        if (resourceClientProfile.tvInputSessionId != null && (iResourceManagerService = this.mMediaResourceManager) != null) {
+        if (resourceClientProfile.tvInputSessionId != null
+                && (iResourceManagerService = this.mMediaResourceManager) != null) {
             try {
                 iResourceManagerService.overridePid(Binder.getCallingPid(), callingPid);
             } catch (RemoteException e) {
-                Slog.e("TunerResourceManagerService", "Could not overridePid in resourceManagerSercice, remote exception: " + e);
+                Slog.e(
+                        "TunerResourceManagerService",
+                        "Could not overridePid in resourceManagerSercice, remote exception: " + e);
             }
         }
         ClientProfile.Builder builder = new ClientProfile.Builder(iArr[0]);
@@ -1208,7 +1593,8 @@ public final class TunerResourceManagerService extends SystemService implements 
         builder.mUseCase = resourceClientProfile.useCase;
         builder.mProcessId = callingPid;
         ClientProfile clientProfile = new ClientProfile(builder);
-        int clientPriority = getClientPriority(resourceClientProfile.useCase, checkIsForeground(callingPid));
+        int clientPriority =
+                getClientPriority(resourceClientProfile.useCase, checkIsForeground(callingPid));
         if (clientPriority >= 0) {
             clientProfile.mPriority = clientPriority;
         }
@@ -1216,13 +1602,19 @@ public final class TunerResourceManagerService extends SystemService implements 
         ((HashMap) this.mClientProfiles).put(Integer.valueOf(i2), clientProfile);
         if (iResourcesReclaimListener == null) {
             if (DEBUG) {
-                BrailleDisplayConnection$$ExternalSyntheticOutline0.m(i2, "Listener is null when client ", " registered!", "TunerResourceManagerService");
+                BrailleDisplayConnection$$ExternalSyntheticOutline0.m(
+                        i2,
+                        "Listener is null when client ",
+                        " registered!",
+                        "TunerResourceManagerService");
             }
         } else {
-            ResourcesReclaimListenerRecord resourcesReclaimListenerRecord = new ResourcesReclaimListenerRecord(iResourcesReclaimListener, i2);
+            ResourcesReclaimListenerRecord resourcesReclaimListenerRecord =
+                    new ResourcesReclaimListenerRecord(iResourcesReclaimListener, i2);
             try {
                 iResourcesReclaimListener.asBinder().linkToDeath(resourcesReclaimListenerRecord, 0);
-                ((HashMap) this.mListeners).put(Integer.valueOf(i2), resourcesReclaimListenerRecord);
+                ((HashMap) this.mListeners)
+                        .put(Integer.valueOf(i2), resourcesReclaimListenerRecord);
             } catch (RemoteException unused) {
                 Slog.w("TunerResourceManagerService", "Listener already died.");
             }
@@ -1231,16 +1623,27 @@ public final class TunerResourceManagerService extends SystemService implements 
 
     public void releaseCasSessionInternal(CasResource casResource, int i) {
         if (DEBUG) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("releaseCasSession(sessionResourceId="), casResource.mSystemId, ")", "TunerResourceManagerService");
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("releaseCasSession(sessionResourceId="),
+                    casResource.mSystemId,
+                    ")",
+                    "TunerResourceManagerService");
         }
         if (((HashMap) casResource.mOwnerClientIdsToSessionNum).containsKey(Integer.valueOf(i))) {
-            int intValue = ((Integer) ((HashMap) casResource.mOwnerClientIdsToSessionNum).get(Integer.valueOf(i))).intValue();
+            int intValue =
+                    ((Integer)
+                                    ((HashMap) casResource.mOwnerClientIdsToSessionNum)
+                                            .get(Integer.valueOf(i)))
+                            .intValue();
             if (intValue > 0) {
-                ((HashMap) casResource.mOwnerClientIdsToSessionNum).put(Integer.valueOf(i), Integer.valueOf(intValue - 1));
+                ((HashMap) casResource.mOwnerClientIdsToSessionNum)
+                        .put(Integer.valueOf(i), Integer.valueOf(intValue - 1));
                 casResource.mAvailableSessionNum++;
             }
         }
-        if (((Integer) ((HashMap) casResource.mOwnerClientIdsToSessionNum).get(Integer.valueOf(i))).intValue() > 0) {
+        if (((Integer) ((HashMap) casResource.mOwnerClientIdsToSessionNum).get(Integer.valueOf(i)))
+                        .intValue()
+                > 0) {
             return;
         }
         ClientProfile clientProfile = getClientProfile(i);
@@ -1250,7 +1653,11 @@ public final class TunerResourceManagerService extends SystemService implements 
 
     public void releaseCiCamInternal(CiCamResource ciCamResource, int i) {
         if (DEBUG) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("releaseCiCamInternal(ciCamId="), ciCamResource.mSystemId, ")", "TunerResourceManagerService");
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("releaseCiCamInternal(ciCamId="),
+                    ciCamResource.mSystemId,
+                    ")",
+                    "TunerResourceManagerService");
         }
         ClientProfile clientProfile = getClientProfile(i);
         ciCamResource.removeOwner(i);
@@ -1259,7 +1666,11 @@ public final class TunerResourceManagerService extends SystemService implements 
 
     public void releaseDemuxInternal(DemuxResource demuxResource) {
         if (DEBUG) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("releaseDemux(DemuxHandle="), demuxResource.mHandle, ")", "TunerResourceManagerService");
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("releaseDemux(DemuxHandle="),
+                    demuxResource.mHandle,
+                    ")",
+                    "TunerResourceManagerService");
         }
         ClientProfile clientProfile = getClientProfile(demuxResource.mOwnerClientId);
         demuxResource.mIsInUse = false;
@@ -1270,7 +1681,14 @@ public final class TunerResourceManagerService extends SystemService implements 
     public void releaseFrontendInternal(FrontendResource frontendResource, int i) {
         ClientProfile clientProfile;
         if (DEBUG) {
-            Slog.d("TunerResourceManagerService", ActivityManagerService$$ExternalSyntheticOutline0.m(frontendResource.mHandle, i, ", clientId=", " )", new StringBuilder("releaseFrontend(id=")));
+            Slog.d(
+                    "TunerResourceManagerService",
+                    ActivityManagerService$$ExternalSyntheticOutline0.m(
+                            frontendResource.mHandle,
+                            i,
+                            ", clientId=",
+                            " )",
+                            new StringBuilder("releaseFrontend(id=")));
         }
         int i2 = frontendResource.mOwnerClientId;
         if (i == i2 && (clientProfile = getClientProfile(i2)) != null) {
@@ -1284,7 +1702,11 @@ public final class TunerResourceManagerService extends SystemService implements 
 
     public void releaseLnbInternal(LnbResource lnbResource) {
         if (DEBUG) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("releaseLnb(lnbHandle="), lnbResource.mHandle, ")", "TunerResourceManagerService");
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("releaseLnb(lnbHandle="),
+                    lnbResource.mHandle,
+                    ")",
+                    "TunerResourceManagerService");
         }
         ClientProfile clientProfile = getClientProfile(lnbResource.mOwnerClientId);
         lnbResource.mIsInUse = false;
@@ -1301,9 +1723,14 @@ public final class TunerResourceManagerService extends SystemService implements 
         ((HashMap) this.mClientProfiles).remove(Integer.valueOf(i));
         synchronized (this.mLock) {
             try {
-                ResourcesReclaimListenerRecord resourcesReclaimListenerRecord = (ResourcesReclaimListenerRecord) ((HashMap) this.mListeners).remove(Integer.valueOf(i));
+                ResourcesReclaimListenerRecord resourcesReclaimListenerRecord =
+                        (ResourcesReclaimListenerRecord)
+                                ((HashMap) this.mListeners).remove(Integer.valueOf(i));
                 if (resourcesReclaimListenerRecord != null) {
-                    resourcesReclaimListenerRecord.mListener.asBinder().unlinkToDeath(resourcesReclaimListenerRecord, 0);
+                    resourcesReclaimListenerRecord
+                            .mListener
+                            .asBinder()
+                            .unlinkToDeath(resourcesReclaimListenerRecord, 0);
                 }
             } catch (Throwable th) {
                 throw th;
@@ -1313,14 +1740,17 @@ public final class TunerResourceManagerService extends SystemService implements 
 
     public boolean requestCasSessionInternal(CasSessionRequest casSessionRequest, int[] iArr) {
         if (DEBUG) {
-            Slog.d("TunerResourceManagerService", "requestCasSession(request=" + casSessionRequest + ")");
+            Slog.d(
+                    "TunerResourceManagerService",
+                    "requestCasSession(request=" + casSessionRequest + ")");
         }
         CasResource casResource = getCasResource(casSessionRequest.casSystemId);
         if (casResource == null) {
             CasResource.Builder builder = new CasResource.Builder(casSessionRequest.casSystemId);
             builder.mMaxSessionNum = Integer.MAX_VALUE;
             CasResource casResource2 = new CasResource(builder);
-            ((HashMap) this.mCasResources).put(Integer.valueOf(casResource2.mSystemId), casResource2);
+            ((HashMap) this.mCasResources)
+                    .put(Integer.valueOf(casResource2.mSystemId), casResource2);
             casResource = casResource2;
         }
         iArr[0] = -1;
@@ -1351,7 +1781,10 @@ public final class TunerResourceManagerService extends SystemService implements 
                 i4 = updateAndGetOwnerClientPriority;
             }
         }
-        if (i5 <= -1 || ((clientProfile.getPriority() <= i4 && !(clientProfile.getPriority() == i4 && z2)) || !reclaimResource(i5, 4))) {
+        if (i5 <= -1
+                || ((clientProfile.getPriority() <= i4
+                                && !(clientProfile.getPriority() == i4 && z2))
+                        || !reclaimResource(i5, 4))) {
             return false;
         }
         iArr[0] = generateResourceHandle(4, i);
@@ -1366,14 +1799,17 @@ public final class TunerResourceManagerService extends SystemService implements 
 
     public boolean requestCiCamInternal(TunerCiCamRequest tunerCiCamRequest, int[] iArr) {
         if (DEBUG) {
-            Slog.d("TunerResourceManagerService", "requestCiCamInternal(TunerCiCamRequest=" + tunerCiCamRequest + ")");
+            Slog.d(
+                    "TunerResourceManagerService",
+                    "requestCiCamInternal(TunerCiCamRequest=" + tunerCiCamRequest + ")");
         }
         CiCamResource ciCamResource = getCiCamResource(tunerCiCamRequest.ciCamId);
         if (ciCamResource == null) {
             CiCamResource.Builder builder = new CiCamResource.Builder(tunerCiCamRequest.ciCamId);
             builder.mMaxSessionNum = Integer.MAX_VALUE;
             CiCamResource ciCamResource2 = new CiCamResource(builder);
-            ((HashMap) this.mCiCamResources).put(Integer.valueOf(ciCamResource2.mSystemId), ciCamResource2);
+            ((HashMap) this.mCiCamResources)
+                    .put(Integer.valueOf(ciCamResource2.mSystemId), ciCamResource2);
             ciCamResource = ciCamResource2;
         }
         iArr[0] = -1;
@@ -1404,7 +1840,10 @@ public final class TunerResourceManagerService extends SystemService implements 
                 i4 = updateAndGetOwnerClientPriority;
             }
         }
-        if (i5 <= -1 || ((clientProfile.getPriority() <= i4 && !(clientProfile.getPriority() == i4 && z2)) || !reclaimResource(i5, 5))) {
+        if (i5 <= -1
+                || ((clientProfile.getPriority() <= i4
+                                && !(clientProfile.getPriority() == i4 && z2))
+                        || !reclaimResource(i5, 5))) {
             return false;
         }
         iArr[0] = generateResourceHandle(5, i);
@@ -1418,26 +1857,33 @@ public final class TunerResourceManagerService extends SystemService implements 
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:21:0x0072, code lost:
-    
-        if (r15 == (r14.mFilterTypes & r15)) goto L23;
-     */
+
+       if (r15 == (r14.mFilterTypes & r15)) goto L23;
+    */
     /* JADX WARN: Removed duplicated region for block: B:58:0x00dc  */
     /* JADX WARN: Removed duplicated region for block: B:60:0x00de A[SYNTHETIC] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean requestDemuxInternal(android.media.tv.tunerresourcemanager.TunerDemuxRequest r20, int[] r21) {
+    public boolean requestDemuxInternal(
+            android.media.tv.tunerresourcemanager.TunerDemuxRequest r20, int[] r21) {
         /*
             Method dump skipped, instructions count: 329
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.tv.tunerresourcemanager.TunerResourceManagerService.requestDemuxInternal(android.media.tv.tunerresourcemanager.TunerDemuxRequest, int[]):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.tv.tunerresourcemanager.TunerResourceManagerService.requestDemuxInternal(android.media.tv.tunerresourcemanager.TunerDemuxRequest,"
+                    + " int[]):boolean");
     }
 
-    public boolean requestDescramblerInternal(TunerDescramblerRequest tunerDescramblerRequest, int[] iArr) {
+    public boolean requestDescramblerInternal(
+            TunerDescramblerRequest tunerDescramblerRequest, int[] iArr) {
         if (DEBUG) {
-            Slog.d("TunerResourceManagerService", "requestDescrambler(request=" + tunerDescramblerRequest + ")");
+            Slog.d(
+                    "TunerResourceManagerService",
+                    "requestDescrambler(request=" + tunerDescramblerRequest + ")");
         }
         iArr[0] = generateResourceHandle(2, 0);
         return true;
@@ -1447,7 +1893,9 @@ public final class TunerResourceManagerService extends SystemService implements 
         int updateAndGetOwnerClientPriority;
         int i;
         if (DEBUG) {
-            Slog.d("TunerResourceManagerService", "requestFrontend(request=" + tunerFrontendRequest + ")");
+            Slog.d(
+                    "TunerResourceManagerService",
+                    "requestFrontend(request=" + tunerFrontendRequest + ")");
         }
         int i2 = 0;
         iArr[0] = -1;
@@ -1500,22 +1948,34 @@ public final class TunerResourceManagerService extends SystemService implements 
                         updateAndGetOwnerClientPriority = updateAndGetOwnerClientPriority(i11);
                         Iterator it2 = ((HashSet) clientProfile2.mShareFeClientIds).iterator();
                         while (it2.hasNext()) {
-                            int updateAndGetOwnerClientPriority2 = updateAndGetOwnerClientPriority(((Integer) it2.next()).intValue());
-                            if (updateAndGetOwnerClientPriority2 > updateAndGetOwnerClientPriority) {
+                            int updateAndGetOwnerClientPriority2 =
+                                    updateAndGetOwnerClientPriority(
+                                            ((Integer) it2.next()).intValue());
+                            if (updateAndGetOwnerClientPriority2
+                                    > updateAndGetOwnerClientPriority) {
                                 updateAndGetOwnerClientPriority = updateAndGetOwnerClientPriority2;
                             }
                         }
                     }
                     if (i3 > updateAndGetOwnerClientPriority) {
-                        if (i7 != getFrontendResource(getClientProfile(frontendResource.mOwnerClientId).mPrimaryUsingFrontendHandle).mType && (i = this.mFrontendMaxUsableNums.get(i7, -1)) != -1) {
+                        if (i7
+                                        != getFrontendResource(
+                                                        getClientProfile(
+                                                                        frontendResource
+                                                                                .mOwnerClientId)
+                                                                .mPrimaryUsingFrontendHandle)
+                                                .mType
+                                && (i = this.mFrontendMaxUsableNums.get(i7, -1)) != -1) {
                             int i12 = this.mFrontendUsedNums.get(i7, -1);
                             if (i12 == -1) {
                                 i12 = 0;
                             }
-                            if (i12 >= i) {
-                            }
+                            if (i12 >= i) {}
                         }
-                        z2 = clientProfile.mProcessId == getClientProfile(frontendResource.mOwnerClientId).mProcessId;
+                        z2 =
+                                clientProfile.mProcessId
+                                        == getClientProfile(frontendResource.mOwnerClientId)
+                                                .mProcessId;
                         i3 = updateAndGetOwnerClientPriority;
                         i5 = i8;
                     }
@@ -1531,7 +1991,8 @@ public final class TunerResourceManagerService extends SystemService implements 
         if (i5 == -1) {
             return false;
         }
-        if ((clientProfile.getPriority() <= i3 && (clientProfile.getPriority() != i3 || !z2)) || !reclaimResource(getFrontendResource(i5).mOwnerClientId, 0)) {
+        if ((clientProfile.getPriority() <= i3 && (clientProfile.getPriority() != i3 || !z2))
+                || !reclaimResource(getFrontendResource(i5).mOwnerClientId, 0)) {
             return false;
         }
         iArr[0] = i5;
@@ -1562,9 +2023,12 @@ public final class TunerResourceManagerService extends SystemService implements 
             if (!z2) {
                 break;
             }
-            int updateAndGetOwnerClientPriority = updateAndGetOwnerClientPriority(lnbResource.mOwnerClientId);
+            int updateAndGetOwnerClientPriority =
+                    updateAndGetOwnerClientPriority(lnbResource.mOwnerClientId);
             if (i2 > updateAndGetOwnerClientPriority) {
-                z = clientProfile.mProcessId == getClientProfile(lnbResource.mOwnerClientId).mProcessId;
+                z =
+                        clientProfile.mProcessId
+                                == getClientProfile(lnbResource.mOwnerClientId).mProcessId;
                 i2 = updateAndGetOwnerClientPriority;
                 i3 = i;
             }
@@ -1578,7 +2042,9 @@ public final class TunerResourceManagerService extends SystemService implements 
             ((HashSet) clientProfile2.mUsingLnbHandles).add(Integer.valueOf(i));
             return true;
         }
-        if (i3 <= -1 || ((clientProfile.getPriority() <= i2 && !(clientProfile.getPriority() == i2 && z)) || !reclaimResource(getLnbResource(i3).mOwnerClientId, 3))) {
+        if (i3 <= -1
+                || ((clientProfile.getPriority() <= i2 && !(clientProfile.getPriority() == i2 && z))
+                        || !reclaimResource(getLnbResource(i3).mOwnerClientId, 3))) {
             return false;
         }
         iArr[0] = i3;
@@ -1601,7 +2067,11 @@ public final class TunerResourceManagerService extends SystemService implements 
         for (int i = 0; i < tunerDemuxInfoArr.length; i++) {
             if (getDemuxResource(tunerDemuxInfoArr[i].handle) != null) {
                 if (DEBUG) {
-                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Demux handle="), tunerDemuxInfoArr[i].handle, "exists.", "TunerResourceManagerService");
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("Demux handle="),
+                            tunerDemuxInfoArr[i].handle,
+                            "exists.",
+                            "TunerResourceManagerService");
                 }
                 hashSet.remove(Integer.valueOf(tunerDemuxInfoArr[i].handle));
             } else {
@@ -1609,7 +2079,8 @@ public final class TunerResourceManagerService extends SystemService implements 
                 DemuxResource.Builder builder = new DemuxResource.Builder(tunerDemuxInfo2.handle);
                 builder.mFilterTypes = tunerDemuxInfo2.filterTypes;
                 DemuxResource demuxResource = new DemuxResource(builder);
-                ((HashMap) this.mDemuxResources).put(Integer.valueOf(demuxResource.mHandle), demuxResource);
+                ((HashMap) this.mDemuxResources)
+                        .put(Integer.valueOf(demuxResource.mHandle), demuxResource);
             }
         }
         Iterator it = hashSet.iterator();
@@ -1637,12 +2108,17 @@ public final class TunerResourceManagerService extends SystemService implements 
         for (int i2 = 0; i2 < tunerFrontendInfoArr.length; i2++) {
             if (getFrontendResource(tunerFrontendInfoArr[i2].handle) != null) {
                 if (DEBUG) {
-                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Frontend handle="), tunerFrontendInfoArr[i2].handle, "exists.", "TunerResourceManagerService");
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("Frontend handle="),
+                            tunerFrontendInfoArr[i2].handle,
+                            "exists.",
+                            "TunerResourceManagerService");
                 }
                 hashSet.remove(Integer.valueOf(tunerFrontendInfoArr[i2].handle));
             } else {
                 TunerFrontendInfo tunerFrontendInfo2 = tunerFrontendInfoArr[i2];
-                FrontendResource.Builder builder = new FrontendResource.Builder(tunerFrontendInfo2.handle);
+                FrontendResource.Builder builder =
+                        new FrontendResource.Builder(tunerFrontendInfo2.handle);
                 builder.mType = tunerFrontendInfo2.type;
                 builder.mExclusiveGroupId = tunerFrontendInfo2.exclusiveGroupId;
                 FrontendResource frontendResource = new FrontendResource(builder);
@@ -1655,13 +2131,21 @@ public final class TunerResourceManagerService extends SystemService implements 
                     }
                     FrontendResource frontendResource2 = (FrontendResource) it.next();
                     if (frontendResource2.mExclusiveGroupId == frontendResource.mExclusiveGroupId) {
-                        ((HashSet) frontendResource.mExclusiveGroupMemberHandles).add(Integer.valueOf(frontendResource2.mHandle));
-                        frontendResource.mExclusiveGroupMemberHandles.addAll(frontendResource2.mExclusiveGroupMemberHandles);
-                        Iterator it2 = ((HashSet) frontendResource2.mExclusiveGroupMemberHandles).iterator();
+                        ((HashSet) frontendResource.mExclusiveGroupMemberHandles)
+                                .add(Integer.valueOf(frontendResource2.mHandle));
+                        frontendResource.mExclusiveGroupMemberHandles.addAll(
+                                frontendResource2.mExclusiveGroupMemberHandles);
+                        Iterator it2 =
+                                ((HashSet) frontendResource2.mExclusiveGroupMemberHandles)
+                                        .iterator();
                         while (it2.hasNext()) {
-                            ((HashSet) getFrontendResource(((Integer) it2.next()).intValue()).mExclusiveGroupMemberHandles).add(Integer.valueOf(i));
+                            ((HashSet)
+                                            getFrontendResource(((Integer) it2.next()).intValue())
+                                                    .mExclusiveGroupMemberHandles)
+                                    .add(Integer.valueOf(i));
                         }
-                        ((HashSet) frontendResource2.mExclusiveGroupMemberHandles).add(Integer.valueOf(i));
+                        ((HashSet) frontendResource2.mExclusiveGroupMemberHandles)
+                                .add(Integer.valueOf(i));
                     }
                 }
                 ((HashMap) this.mFrontendResources).put(Integer.valueOf(i), frontendResource);
@@ -1681,16 +2165,22 @@ public final class TunerResourceManagerService extends SystemService implements 
             FrontendResource frontendResource3 = getFrontendResource(num.intValue());
             if (frontendResource3 != null) {
                 if (frontendResource3.mIsInUse) {
-                    ClientProfile clientProfile = getClientProfile(frontendResource3.mOwnerClientId);
+                    ClientProfile clientProfile =
+                            getClientProfile(frontendResource3.mOwnerClientId);
                     Iterator it4 = ((HashSet) clientProfile.mShareFeClientIds).iterator();
                     while (it4.hasNext()) {
-                        clearFrontendAndClientMapping(getClientProfile(((Integer) it4.next()).intValue()));
+                        clearFrontendAndClientMapping(
+                                getClientProfile(((Integer) it4.next()).intValue()));
                     }
                     clearFrontendAndClientMapping(clientProfile);
                 }
-                Iterator it5 = ((HashSet) frontendResource3.mExclusiveGroupMemberHandles).iterator();
+                Iterator it5 =
+                        ((HashSet) frontendResource3.mExclusiveGroupMemberHandles).iterator();
                 while (it5.hasNext()) {
-                    ((HashSet) getFrontendResource(((Integer) it5.next()).intValue()).mExclusiveGroupMemberHandles).remove(Integer.valueOf(frontendResource3.mHandle));
+                    ((HashSet)
+                                    getFrontendResource(((Integer) it5.next()).intValue())
+                                            .mExclusiveGroupMemberHandles)
+                            .remove(Integer.valueOf(frontendResource3.mHandle));
                 }
                 SparseIntArray sparseIntArray2 = this.mFrontendExistingNums;
                 int i5 = frontendResource3.mType;
@@ -1713,12 +2203,17 @@ public final class TunerResourceManagerService extends SystemService implements 
         for (int i2 = 0; i2 < iArr.length; i2++) {
             if (getLnbResource(iArr[i2]) != null) {
                 if (DEBUG) {
-                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Lnb handle="), iArr[i2], "exists.", "TunerResourceManagerService");
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("Lnb handle="),
+                            iArr[i2],
+                            "exists.",
+                            "TunerResourceManagerService");
                 }
                 hashSet.remove(Integer.valueOf(iArr[i2]));
             } else {
                 LnbResource lnbResource = new LnbResource(new LnbResource.Builder(iArr[i2]));
-                ((HashMap) this.mLnbResources).put(Integer.valueOf(lnbResource.mHandle), lnbResource);
+                ((HashMap) this.mLnbResources)
+                        .put(Integer.valueOf(lnbResource.mHandle), lnbResource);
             }
         }
         Iterator it = hashSet.iterator();
@@ -1736,11 +2231,13 @@ public final class TunerResourceManagerService extends SystemService implements 
 
     public void shareFrontendInternal(int i, int i2) {
         if (DEBUG) {
-            ASKSManagerService$$ExternalSyntheticOutline0.m(i, i2, "shareFrontend from ", " with ", "TunerResourceManagerService");
+            ASKSManagerService$$ExternalSyntheticOutline0.m(
+                    i, i2, "shareFrontend from ", " with ", "TunerResourceManagerService");
         }
         Integer num = getClientProfile(i).mShareeFeClientId;
         if (num.intValue() != -1) {
-            ((HashSet) getClientProfile(num.intValue()).mShareFeClientIds).remove(Integer.valueOf(i));
+            ((HashSet) getClientProfile(num.intValue()).mShareFeClientIds)
+                    .remove(Integer.valueOf(i));
             ClientProfile clientProfile = getClientProfile(i);
             ((HashSet) clientProfile.mUsingFrontendHandles).clear();
             ((HashSet) clientProfile.mShareFeClientIds).clear();
@@ -1776,7 +2273,15 @@ public final class TunerResourceManagerService extends SystemService implements 
                 int intValue = ((Integer) it2.next()).intValue();
                 int i4 = getFrontendResource(intValue).mOwnerClientId;
                 if (i4 != i3) {
-                    VaultKeeperService$$ExternalSyntheticOutline0.m(ArrayUtils$$ExternalSyntheticOutline0.m(intValue, i4, "something is wrong in transferFeOwner:", ", ", ", "), i3, "TunerResourceManagerService");
+                    VaultKeeperService$$ExternalSyntheticOutline0.m(
+                            ArrayUtils$$ExternalSyntheticOutline0.m(
+                                    intValue,
+                                    i4,
+                                    "something is wrong in transferFeOwner:",
+                                    ", ",
+                                    ", "),
+                            i3,
+                            "TunerResourceManagerService");
                     return false;
                 }
             }
@@ -1784,7 +2289,10 @@ public final class TunerResourceManagerService extends SystemService implements 
         }
         if (i != 3) {
             if (i != 5) {
-                NandswapManager$$ExternalSyntheticOutline0.m(i, "transferOwnerInternal. unsupported resourceType: ", "TunerResourceManagerService");
+                NandswapManager$$ExternalSyntheticOutline0.m(
+                        i,
+                        "transferOwnerInternal. unsupported resourceType: ",
+                        "TunerResourceManagerService");
                 return false;
             }
             ClientProfile clientProfile3 = getClientProfile(i2);
@@ -1817,7 +2325,8 @@ public final class TunerResourceManagerService extends SystemService implements 
 
     public void unregisterClientProfileInternal(int i) {
         if (DEBUG) {
-            DeviceIdleController$$ExternalSyntheticOutline0.m(i, "unregisterClientProfile(clientId=", ")", "TunerResourceManagerService");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    i, "unregisterClientProfile(clientId=", ")", "TunerResourceManagerService");
         }
         removeClientProfile(i);
         IResourceManagerService iResourceManagerService = this.mMediaResourceManager;
@@ -1825,7 +2334,11 @@ public final class TunerResourceManagerService extends SystemService implements 
             try {
                 iResourceManagerService.overridePid(Binder.getCallingPid(), -1);
             } catch (RemoteException e) {
-                Slog.e("TunerResourceManagerService", "Could not overridePid in resourceManagerSercice when unregister, remote exception: " + e);
+                Slog.e(
+                        "TunerResourceManagerService",
+                        "Could not overridePid in resourceManagerSercice when unregister, remote"
+                            + " exception: "
+                                + e);
             }
         }
     }
@@ -1838,7 +2351,10 @@ public final class TunerResourceManagerService extends SystemService implements 
 
     public void updateCasInfoInternal(int i, int i2) {
         if (DEBUG) {
-            Slog.d("TunerResourceManagerService", DualAppManagerService$$ExternalSyntheticOutline0.m(i, i2, "updateCasInfo(casSystemId=", ", maxSessionNum=", ")"));
+            Slog.d(
+                    "TunerResourceManagerService",
+                    DualAppManagerService$$ExternalSyntheticOutline0.m(
+                            i, i2, "updateCasInfo(casSystemId=", ", maxSessionNum=", ")"));
         }
         if (i2 == 0) {
             CasResource casResource = getCasResource(i);
@@ -1863,10 +2379,17 @@ public final class TunerResourceManagerService extends SystemService implements 
         CasResource casResource2 = getCasResource(i);
         CiCamResource ciCamResource2 = getCiCamResource(i);
         if (casResource2 != null) {
-            casResource2.mAvailableSessionNum = Math.max(0, (i2 - casResource2.mMaxSessionNum) + casResource2.mAvailableSessionNum);
+            casResource2.mAvailableSessionNum =
+                    Math.max(
+                            0,
+                            (i2 - casResource2.mMaxSessionNum) + casResource2.mAvailableSessionNum);
             casResource2.mMaxSessionNum = i2;
             if (ciCamResource2 != null) {
-                ciCamResource2.mAvailableSessionNum = Math.max(0, (i2 - ciCamResource2.mMaxSessionNum) + ciCamResource2.mAvailableSessionNum);
+                ciCamResource2.mAvailableSessionNum =
+                        Math.max(
+                                0,
+                                (i2 - ciCamResource2.mMaxSessionNum)
+                                        + ciCamResource2.mAvailableSessionNum);
                 ciCamResource2.mMaxSessionNum = i2;
                 return;
             }
@@ -1879,16 +2402,26 @@ public final class TunerResourceManagerService extends SystemService implements 
         builder2.mMaxSessionNum = i2;
         CiCamResource ciCamResource3 = new CiCamResource(builder2);
         ((HashMap) this.mCasResources).put(Integer.valueOf(casResource3.mSystemId), casResource3);
-        ((HashMap) this.mCiCamResources).put(Integer.valueOf(ciCamResource3.mSystemId), ciCamResource3);
+        ((HashMap) this.mCiCamResources)
+                .put(Integer.valueOf(ciCamResource3.mSystemId), ciCamResource3);
     }
 
     public boolean updateClientPriorityInternal(int i, int i2, int i3) {
         if (DEBUG) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "updateClientPriority(clientId=", ", priority=", ", niceValue="), i3, ")", "TunerResourceManagerService");
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    ArrayUtils$$ExternalSyntheticOutline0.m(
+                            i, i2, "updateClientPriority(clientId=", ", priority=", ", niceValue="),
+                    i3,
+                    ")",
+                    "TunerResourceManagerService");
         }
         ClientProfile clientProfile = getClientProfile(i);
         if (clientProfile == null) {
-            FileDescriptorWatcher$FileDescriptorLeakWatcher$$ExternalSyntheticOutline0.m(i, "Can not find client profile with id ", " when trying to update the client priority.", "TunerResourceManagerService");
+            FileDescriptorWatcher$FileDescriptorLeakWatcher$$ExternalSyntheticOutline0.m(
+                    i,
+                    "Can not find client profile with id ",
+                    " when trying to update the client priority.",
+                    "TunerResourceManagerService");
             return false;
         }
         if (i2 >= 0) {

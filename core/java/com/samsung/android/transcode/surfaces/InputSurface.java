@@ -7,6 +7,7 @@ import android.opengl.EGLDisplay;
 import android.opengl.EGLExt;
 import android.opengl.EGLSurface;
 import android.view.Surface;
+
 import com.samsung.android.transcode.util.LogS;
 
 /* loaded from: classes6.dex */
@@ -39,15 +40,20 @@ public class InputSurface {
         int[] attribList = {12324, 8, 12323, 8, 12322, 8, 12352, 4, 12610, 1, 12344};
         EGLConfig[] configs = new EGLConfig[1];
         int[] numConfigs = new int[1];
-        if (EGL14.eglChooseConfig(this.mEGLDisplay, attribList, 0, configs, 0, configs.length, numConfigs, 0)) {
+        if (EGL14.eglChooseConfig(
+                this.mEGLDisplay, attribList, 0, configs, 0, configs.length, numConfigs, 0)) {
             int[] attrib_list = {12440, 2, 12344};
-            this.mEGLContext = EGL14.eglCreateContext(this.mEGLDisplay, configs[0], EGL14.EGL_NO_CONTEXT, attrib_list, 0);
+            this.mEGLContext =
+                    EGL14.eglCreateContext(
+                            this.mEGLDisplay, configs[0], EGL14.EGL_NO_CONTEXT, attrib_list, 0);
             checkEglError("eglCreateContext");
             if (this.mEGLContext == null) {
                 throw new RuntimeException("null context");
             }
             int[] surfaceAttribs = {12344};
-            this.mEGLSurface = EGL14.eglCreateWindowSurface(this.mEGLDisplay, configs[0], this.mSurface, surfaceAttribs, 0);
+            this.mEGLSurface =
+                    EGL14.eglCreateWindowSurface(
+                            this.mEGLDisplay, configs[0], this.mSurface, surfaceAttribs, 0);
             checkEglError("eglCreateWindowSurface");
             if (this.mEGLSurface == null) {
                 throw new RuntimeException("surface was null");
@@ -59,7 +65,11 @@ public class InputSurface {
 
     public void release() {
         if (EGL14.eglGetCurrentContext().equals(this.mEGLContext)) {
-            EGL14.eglMakeCurrent(this.mEGLDisplay, EGL14.EGL_NO_SURFACE, EGL14.EGL_NO_SURFACE, EGL14.EGL_NO_CONTEXT);
+            EGL14.eglMakeCurrent(
+                    this.mEGLDisplay,
+                    EGL14.EGL_NO_SURFACE,
+                    EGL14.EGL_NO_SURFACE,
+                    EGL14.EGL_NO_CONTEXT);
         }
         EGL14.eglDestroySurface(this.mEGLDisplay, this.mEGLSurface);
         EGL14.eglDestroyContext(this.mEGLDisplay, this.mEGLContext);
@@ -73,7 +83,8 @@ public class InputSurface {
     }
 
     public void makeCurrent() {
-        if (!EGL14.eglMakeCurrent(this.mEGLDisplay, this.mEGLSurface, this.mEGLSurface, this.mEGLContext)) {
+        if (!EGL14.eglMakeCurrent(
+                this.mEGLDisplay, this.mEGLSurface, this.mEGLSurface, this.mEGLContext)) {
             throw new RuntimeException("eglMakeCurrent failed");
         }
     }

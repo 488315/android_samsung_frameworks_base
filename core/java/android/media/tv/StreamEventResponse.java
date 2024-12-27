@@ -5,20 +5,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public final class StreamEventResponse extends BroadcastInfoResponse implements Parcelable {
-    public static final Parcelable.Creator<StreamEventResponse> CREATOR = new Parcelable.Creator<StreamEventResponse>() { // from class: android.media.tv.StreamEventResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StreamEventResponse createFromParcel(Parcel source) {
-            source.readInt();
-            return StreamEventResponse.createFromParcelBody(source);
-        }
+    public static final Parcelable.Creator<StreamEventResponse> CREATOR =
+            new Parcelable.Creator<
+                    StreamEventResponse>() { // from class: android.media.tv.StreamEventResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StreamEventResponse createFromParcel(Parcel source) {
+                    source.readInt();
+                    return StreamEventResponse.createFromParcelBody(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StreamEventResponse[] newArray(int size) {
-            return new StreamEventResponse[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StreamEventResponse[] newArray(int size) {
+                    return new StreamEventResponse[size];
+                }
+            };
     private static final int RESPONSE_TYPE = 5;
     private final byte[] mData;
     private final int mEventId;
@@ -28,7 +30,13 @@ public final class StreamEventResponse extends BroadcastInfoResponse implements 
         return new StreamEventResponse(in);
     }
 
-    public StreamEventResponse(int requestId, int sequence, int responseResult, int eventId, long nptMillis, byte[] data) {
+    public StreamEventResponse(
+            int requestId,
+            int sequence,
+            int responseResult,
+            int eventId,
+            long nptMillis,
+            byte[] data) {
         super(5, requestId, sequence, responseResult);
         this.mEventId = eventId;
         this.mNptMillis = nptMillis;

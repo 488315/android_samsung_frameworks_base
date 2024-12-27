@@ -17,6 +17,7 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.SparseIntArray;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.internal.util.RingBuffer;
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
@@ -25,14 +26,15 @@ import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.RCPManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.am.MARsPolicyManager;
-import com.android.server.chimera.AbnormalFgsDetector;
-import com.android.server.chimera.ChimeraAppInfo;
-import com.android.server.chimera.ChimeraCommonUtil;
-import com.android.server.chimera.SystemEventListener;
-import com.android.server.chimera.SystemRepository;
 import com.android.server.chimera.heimdall.HeimdallAlwaysRunningMonitor;
 import com.android.server.chimera.ppn.ChimeraQuotaMonitor;
 import com.android.server.chimera.ppn.PerProcessNandswap;
+
+import libcore.io.IoUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.text.DateFormat;
@@ -51,13 +53,18 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicInteger;
-import libcore.io.IoUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public abstract class PolicyHandler implements SystemEventListener.LmkdEventListener, SystemEventListener.HomeLaunchListener, SystemEventListener.CarModeChangeListener, SystemRepository.ChimeraProcessObserver, SystemEventListener.AppLaunchIntentListener, SystemEventListener.CameraStateListener, SystemEventListener.AlwaysRunningQuotaExceedListener, SystemEventListener.DeviceIdleListener {
+public abstract class PolicyHandler
+        implements SystemEventListener.LmkdEventListener,
+                SystemEventListener.HomeLaunchListener,
+                SystemEventListener.CarModeChangeListener,
+                SystemRepository.ChimeraProcessObserver,
+                SystemEventListener.AppLaunchIntentListener,
+                SystemEventListener.CameraStateListener,
+                SystemEventListener.AlwaysRunningQuotaExceedListener,
+                SystemEventListener.DeviceIdleListener {
     public final AbnormalFgsDetector mAbnormalFgsDetector;
     public int mAlwaysRunningQuotaKillCnt;
     public int mAlwaysRunningQuotaKillTriggerCnt;
@@ -109,7 +116,8 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
     public final ProtectLevel mCurProtectLevel = ProtectLevel.NORMAL;
     public int mPkgKillIntervalHeavy = 43200000;
     public final AtomicInteger mQuickReclaimKillCnt = new AtomicInteger();
-    public final ThreadPoolExecutor mThreadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(4);
+    public final ThreadPoolExecutor mThreadPoolExecutor =
+            (ThreadPoolExecutor) Executors.newFixedThreadPool(4);
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PolicyEventHandler extends Handler {
@@ -128,7 +136,9 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
                 Method dump skipped, instructions count: 320
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.chimera.PolicyHandler.PolicyEventHandler.handleMessage(android.os.Message):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.chimera.PolicyHandler.PolicyEventHandler.handleMessage(android.os.Message):void");
         }
     }
 
@@ -145,7 +155,7 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
             NORMAL = protectLevel;
             ProtectLevel protectLevel2 = new ProtectLevel("HEAVY", 1);
             HEAVY = protectLevel2;
-            $VALUES = new ProtectLevel[]{protectLevel, protectLevel2};
+            $VALUES = new ProtectLevel[] {protectLevel, protectLevel2};
         }
 
         public static ProtectLevel valueOf(String str) {
@@ -174,7 +184,16 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
             ProtectedReason protectedReason4 = new ProtectedReason("RUNNING_INTENT", 3);
             ProtectedReason protectedReason5 = new ProtectedReason("ACTIVITY_TIME", 4);
             ACTIVITY_TIME = protectedReason5;
-            $VALUES = new ProtectedReason[]{protectedReason, protectedReason2, protectedReason3, protectedReason4, protectedReason5, new ProtectedReason("VISIBLE_ADJ", 5), new ProtectedReason("HAS_CONNECTION_PROVIDER", 6)};
+            $VALUES =
+                    new ProtectedReason[] {
+                        protectedReason,
+                        protectedReason2,
+                        protectedReason3,
+                        protectedReason4,
+                        protectedReason5,
+                        new ProtectedReason("VISIBLE_ADJ", 5),
+                        new ProtectedReason("HAS_CONNECTION_PROVIDER", 6)
+                    };
         }
 
         public static ProtectedReason valueOf(String str) {
@@ -186,12 +205,21 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
         }
     }
 
-    public PolicyHandler(ChimeraAppManager chimeraAppManager, ChimeraStrategy chimeraStrategy, SystemRepository systemRepository, SettingRepository settingRepository, AbnormalFgsDetector abnormalFgsDetector, Looper looper) {
-        SystemRepository.CameraProcInfo cameraProcInfo = new SystemRepository.CameraProcInfo("vendor.samsung.hardware.camera.provider");
+    public PolicyHandler(
+            ChimeraAppManager chimeraAppManager,
+            ChimeraStrategy chimeraStrategy,
+            SystemRepository systemRepository,
+            SettingRepository settingRepository,
+            AbnormalFgsDetector abnormalFgsDetector,
+            Looper looper) {
+        SystemRepository.CameraProcInfo cameraProcInfo =
+                new SystemRepository.CameraProcInfo("vendor.samsung.hardware.camera.provider");
         this.mCameraProviderInfo = cameraProcInfo;
-        SystemRepository.CameraProcInfo cameraProcInfo2 = new SystemRepository.CameraProcInfo("cameraserver");
+        SystemRepository.CameraProcInfo cameraProcInfo2 =
+                new SystemRepository.CameraProcInfo("cameraserver");
         this.mCameraServerInfo = cameraProcInfo2;
-        SystemRepository.CameraProcInfo cameraProcInfo3 = new SystemRepository.CameraProcInfo("com.sec.android.app.camera");
+        SystemRepository.CameraProcInfo cameraProcInfo3 =
+                new SystemRepository.CameraProcInfo("com.sec.android.app.camera");
         this.mCameraAppInfo = cameraProcInfo3;
         this.mCameraRelateInfos = Arrays.asList(cameraProcInfo, cameraProcInfo2, cameraProcInfo3);
         this.mIsDynamicCameraMemorySuccess = false;
@@ -209,9 +237,25 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
         this.mAbnormalFgsDetector = abnormalFgsDetector;
         String valueOf = String.valueOf(1800000);
         systemRepository.getClass();
-        this.mPkgKillIntervalMs = Integer.parseInt(SystemProperties.get("persist.sys.chimera_pkg_kill_interval_ms", valueOf));
-        this.mCemPkgKillIntervalMs = Integer.parseInt(SystemProperties.get("ro.slmk.chimera_cem_pkg_kill_interval_ms", CEM_PKG_KILL_INTERVAL_DEFAULT));
-        this.mPkgProtectedParameters = new int[][]{new int[]{300, FrameworkStatsLog.VPN_CONNECTION_STATE_CHANGED, this.mPkgKillIntervalMs}, new int[]{300, FrameworkStatsLog.VPN_CONNECTION_STATE_CHANGED, this.mPkgKillIntervalHeavy}};
+        this.mPkgKillIntervalMs =
+                Integer.parseInt(
+                        SystemProperties.get("persist.sys.chimera_pkg_kill_interval_ms", valueOf));
+        this.mCemPkgKillIntervalMs =
+                Integer.parseInt(
+                        SystemProperties.get(
+                                "ro.slmk.chimera_cem_pkg_kill_interval_ms",
+                                CEM_PKG_KILL_INTERVAL_DEFAULT));
+        this.mPkgProtectedParameters =
+                new int[][] {
+                    new int[] {
+                        300, FrameworkStatsLog.VPN_CONNECTION_STATE_CHANGED, this.mPkgKillIntervalMs
+                    },
+                    new int[] {
+                        300,
+                        FrameworkStatsLog.VPN_CONNECTION_STATE_CHANGED,
+                        this.mPkgKillIntervalHeavy
+                    }
+                };
         systemRepository.registerProcessObserver(this);
     }
 
@@ -261,7 +305,9 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
 
     public static String toHHmmss(long j) {
         long j2 = j / 1000;
-        return String.format("%02d:%02d:%02d", Long.valueOf(j2 / 3600), Long.valueOf((j2 % 3600) / 60), Long.valueOf(j2 % 60));
+        return String.format(
+                "%02d:%02d:%02d",
+                Long.valueOf(j2 / 3600), Long.valueOf((j2 % 3600) / 60), Long.valueOf(j2 % 60));
     }
 
     public final void clearQuickReclaimFields() {
@@ -280,7 +326,11 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
     public final void dumpAdjInfo(PrintWriter printWriter) {
         int[] killCntByAdj = getKillCntByAdj();
         for (int i = 0; i < 13; i++) {
-            printWriter.println("kills at or below oom_adj " + ChimeraCommonUtil.ADJ_LEVELS[i] + ": " + killCntByAdj[i]);
+            printWriter.println(
+                    "kills at or below oom_adj "
+                            + ChimeraCommonUtil.ADJ_LEVELS[i]
+                            + ": "
+                            + killCntByAdj[i]);
         }
         printWriter.println();
         printWriter.println("details:");
@@ -299,26 +349,54 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
     }
 
     public void dumpCommonInfo(PrintWriter printWriter) {
-        ChimeraCommonUtil.TriggerSource[] triggerSourceArr = {ChimeraCommonUtil.TriggerSource.TRIGGER_SOURCE_LMKD, ChimeraCommonUtil.TriggerSource.TRIGGER_SOURCE_BOTTLENECK_HINT, ChimeraCommonUtil.TriggerSource.TRIGGER_SOURCE_HOME_IDLE, ChimeraCommonUtil.TriggerSource.TRIGGER_SOURCE_DEVICE_IDLE, ChimeraCommonUtil.TriggerSource.TRIGGER_SOURCE_APP_LAUNCH_INTENT, ChimeraCommonUtil.TriggerSource.TRIGGER_SOURCE_QUOTA};
+        ChimeraCommonUtil.TriggerSource[] triggerSourceArr = {
+            ChimeraCommonUtil.TriggerSource.TRIGGER_SOURCE_LMKD,
+            ChimeraCommonUtil.TriggerSource.TRIGGER_SOURCE_BOTTLENECK_HINT,
+            ChimeraCommonUtil.TriggerSource.TRIGGER_SOURCE_HOME_IDLE,
+            ChimeraCommonUtil.TriggerSource.TRIGGER_SOURCE_DEVICE_IDLE,
+            ChimeraCommonUtil.TriggerSource.TRIGGER_SOURCE_APP_LAUNCH_INTENT,
+            ChimeraCommonUtil.TriggerSource.TRIGGER_SOURCE_QUOTA
+        };
         printWriter.println("Total Trigger Count: " + this.mTriggerCnt);
         StringBuilder sb = new StringBuilder("ActionCnt: " + this.mActionCnt);
         for (int i = 0; i < 6; i++) {
             ChimeraCommonUtil.TriggerSource triggerSource = triggerSourceArr[i];
-            printWriter.println("Triggered by " + triggerSource.name + ": " + this.mTriggerCntSrc[triggerSource.ordinal()]);
+            printWriter.println(
+                    "Triggered by "
+                            + triggerSource.name
+                            + ": "
+                            + this.mTriggerCntSrc[triggerSource.ordinal()]);
             sb.append("\nAction by ");
             sb.append(triggerSource.name);
             sb.append(": ");
             sb.append(this.mActionCntSrc[triggerSource.ordinal()]);
         }
         printWriter.println(sb);
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m(new StringBuilder("KillCnt: "), this.mKillCnt, printWriter);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                new StringBuilder("KillCnt: "), this.mKillCnt, printWriter);
         int i2 = 0;
         while (i2 < 3) {
             int i3 = i2 + 1;
-            printWriter.println(String.format("     G%d: %d", Integer.valueOf(i3), Integer.valueOf(this.mKillCntByGrp[i2])));
+            printWriter.println(
+                    String.format(
+                            "     G%d: %d",
+                            Integer.valueOf(i3), Integer.valueOf(this.mKillCntByGrp[i2])));
             i2 = i3;
         }
-        StringBuilder m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("NoActionCnt: "), this.mNoActionCnt, printWriter, "AvgAvailableMem: "), this.mAvgAvailableMem, printWriter, "AvgReleasedMem: "), this.mAvgReleasedMem, printWriter, "mIsQuickReclaimEnabled: ");
+        StringBuilder m =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                        new StringBuilder("NoActionCnt: "),
+                                        this.mNoActionCnt,
+                                        printWriter,
+                                        "AvgAvailableMem: "),
+                                this.mAvgAvailableMem,
+                                printWriter,
+                                "AvgReleasedMem: "),
+                        this.mAvgReleasedMem,
+                        printWriter,
+                        "mIsQuickReclaimEnabled: ");
         SettingRepository settingRepository = this.mSettingRepository;
         m.append(settingRepository.mQuickReclaimEnable);
         m.append(", heavy apps : ");
@@ -331,16 +409,33 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
             m2.append(systemRepository.mBigGameApps);
             sb3 = m2.toString();
         }
-        StringBuilder m3 = BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, sb3, "QuickReclaimKillCnt: ", m);
+        StringBuilder m3 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        printWriter, sb3, "QuickReclaimKillCnt: ", m);
         m3.append(this.mQuickReclaimKillCnt);
         printWriter.println(m3.toString());
-        StringBuilder m4 = BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("QuickReclaimDynamicThreshold: "), this.mDynamicQuickReclaimAdditionalMemory, printWriter, "Protected AccessibilityPackges: ");
+        StringBuilder m4 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("QuickReclaimDynamicThreshold: "),
+                        this.mDynamicQuickReclaimAdditionalMemory,
+                        printWriter,
+                        "Protected AccessibilityPackges: ");
         m4.append(String.join(", ", systemRepository.getAccessibilityServicePackages()));
         printWriter.println(m4.toString());
-        StringBuilder m5 = BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("App File Cache Reclaim Enable: "), settingRepository.mIsAppCacheReclaimEnable, printWriter, "App File Cache Reclaim: ");
+        StringBuilder m5 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("App File Cache Reclaim Enable: "),
+                        settingRepository.mIsAppCacheReclaimEnable,
+                        printWriter,
+                        "App File Cache Reclaim: ");
         m5.append(Arrays.toString(this.mAppFileCacheRecliamCnt));
         printWriter.println(m5.toString());
-        StringBuilder m6 = BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Fast Madvise Enable: "), settingRepository.mIsFastMadviseEnable, printWriter, "SubProcessKillEnable: ");
+        StringBuilder m6 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("Fast Madvise Enable: "),
+                        settingRepository.mIsFastMadviseEnable,
+                        printWriter,
+                        "SubProcessKillEnable: ");
         m6.append(settingRepository.mIsSubProcEnable);
         printWriter.println(m6.toString());
         dumpQuotaPPN(printWriter);
@@ -348,7 +443,9 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
 
     public final void dumpHistoryBuffer(PrintWriter printWriter) {
         if (this.mKillHistoryBuffer.size() > 0) {
-            printWriter.println("Date Time PackageName AppType StandbyBucket PSS PIDs OomScores TriggerSource:");
+            printWriter.println(
+                    "Date Time PackageName AppType StandbyBucket PSS PIDs OomScores"
+                        + " TriggerSource:");
             for (String str : (String[]) this.mKillHistoryBuffer.toArray()) {
                 printWriter.println(str);
             }
@@ -359,13 +456,27 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
     public final void dumpQuotaPPN(PrintWriter printWriter) {
         int[] iArr = ChimeraCommonUtil.ADJ_LEVELS;
         if (SystemProperties.getBoolean("ro.slmk.chimera_quota_enable", false)) {
-            AccessibilityManagerService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("AlwaysRunningQuotaPPN Trigger Cnt: "), PerProcessNandswap.mAlwaysRunningQuotaPPNTriggerCnt, printWriter, "AlwaysRunningQuotaPPN Cnt: "), PerProcessNandswap.mAlwaysRunningQuotaPPNCnt, printWriter);
+            AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("AlwaysRunningQuotaPPN Trigger Cnt: "),
+                            PerProcessNandswap.mAlwaysRunningQuotaPPNTriggerCnt,
+                            printWriter,
+                            "AlwaysRunningQuotaPPN Cnt: "),
+                    PerProcessNandswap.mAlwaysRunningQuotaPPNCnt,
+                    printWriter);
             boolean z = MARsPolicyManager.MARs_ENABLE;
             MARsPolicyManager.MARsPolicyManagerHolder.INSTANCE.getClass();
             boolean isChinaPolicyEnabled = MARsPolicyManager.isChinaPolicyEnabled();
             printWriter.println("AlwaysRunningQuotaKill Enable: " + isChinaPolicyEnabled);
             if (isChinaPolicyEnabled) {
-                AccessibilityManagerService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("AlwaysRunningQuotaKill Trigger Cnt: "), this.mAlwaysRunningQuotaKillTriggerCnt, printWriter, "AlwaysRunningQuotaKill Cnt: "), this.mAlwaysRunningQuotaKillCnt, printWriter);
+                AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("AlwaysRunningQuotaKill Trigger Cnt: "),
+                                this.mAlwaysRunningQuotaKillTriggerCnt,
+                                printWriter,
+                                "AlwaysRunningQuotaKill Cnt: "),
+                        this.mAlwaysRunningQuotaKillCnt,
+                        printWriter);
             }
             ChimeraQuotaMonitor chimeraQuotaMonitor = ChimeraQuotaMonitor.INSTANCE;
             if (chimeraQuotaMonitor.mTaskHistory.isEmpty()) {
@@ -413,21 +524,26 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:139:0x02a5, code lost:
-    
-        if (r3 == null) goto L154;
-     */
+
+       if (r3 == null) goto L154;
+    */
     /* JADX WARN: Removed duplicated region for block: B:119:0x02b0 A[RETURN] */
     /* JADX WARN: Removed duplicated region for block: B:120:0x02b1  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean isAppKillable(com.android.server.chimera.ChimeraAppInfo r13, com.android.server.chimera.ChimeraCommonUtil.TriggerSource r14) {
+    public final boolean isAppKillable(
+            com.android.server.chimera.ChimeraAppInfo r13,
+            com.android.server.chimera.ChimeraCommonUtil.TriggerSource r14) {
         /*
             Method dump skipped, instructions count: 808
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.chimera.PolicyHandler.isAppKillable(com.android.server.chimera.ChimeraAppInfo, com.android.server.chimera.ChimeraCommonUtil$TriggerSource):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.chimera.PolicyHandler.isAppKillable(com.android.server.chimera.ChimeraAppInfo,"
+                    + " com.android.server.chimera.ChimeraCommonUtil$TriggerSource):boolean");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:40:0x017a  */
@@ -441,11 +557,15 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
             Method dump skipped, instructions count: 761
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.chimera.PolicyHandler.onAppLaunchIntent(java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.chimera.PolicyHandler.onAppLaunchIntent(java.lang.String):void");
     }
 
     public final void onCameraClose() {
-        if (this.mIsDynamicCameraMemorySuccess || !this.mCameraRelateInfos.stream().allMatch(new PolicyHandler$$ExternalSyntheticLambda2())) {
+        if (this.mIsDynamicCameraMemorySuccess
+                || !this.mCameraRelateInfos.stream()
+                        .allMatch(new PolicyHandler$$ExternalSyntheticLambda2())) {
             return;
         }
         Iterator it = this.mCameraRelateInfos.iterator();
@@ -461,13 +581,24 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
                 this.mIsDynamicCameraMemorySuccess = true;
                 this.mDynamicQuickReclaimAdditionalMemory = min;
                 systemRepository.getClass();
-                SystemRepository.logDebug("PolicyHandler", "get dynamic quick reclaim additional memory successfully " + min + " (MB)");
+                SystemRepository.logDebug(
+                        "PolicyHandler",
+                        "get dynamic quick reclaim additional memory successfully "
+                                + min
+                                + " (MB)");
                 return;
             }
-            SystemRepository.CameraProcInfo cameraProcInfo = (SystemRepository.CameraProcInfo) it.next();
+            SystemRepository.CameraProcInfo cameraProcInfo =
+                    (SystemRepository.CameraProcInfo) it.next();
             long[] rss = Process.getRss(cameraProcInfo.pid);
             cameraProcInfo.closeRss = rss[0] + rss[3];
-            String str = "pid: " + cameraProcInfo.pid + " name: " + cameraProcInfo.name + " closeRss: " + cameraProcInfo.closeRss;
+            String str =
+                    "pid: "
+                            + cameraProcInfo.pid
+                            + " name: "
+                            + cameraProcInfo.name
+                            + " closeRss: "
+                            + cameraProcInfo.closeRss;
             systemRepository.getClass();
             SystemRepository.logDebug("PolicyHandler", str);
             j += cameraProcInfo.openRss - cameraProcInfo.closeRss;
@@ -475,13 +606,21 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
     }
 
     public final void onCameraOpen() {
-        if (this.mIsDynamicCameraMemorySuccess || !this.mCameraRelateInfos.stream().allMatch(new PolicyHandler$$ExternalSyntheticLambda2())) {
+        if (this.mIsDynamicCameraMemorySuccess
+                || !this.mCameraRelateInfos.stream()
+                        .allMatch(new PolicyHandler$$ExternalSyntheticLambda2())) {
             return;
         }
         for (SystemRepository.CameraProcInfo cameraProcInfo : this.mCameraRelateInfos) {
             long[] rss = Process.getRss(cameraProcInfo.pid);
             cameraProcInfo.openRss = rss[0] + rss[3];
-            String str = "pid: " + cameraProcInfo.pid + " name: " + cameraProcInfo.name + " openRss: " + cameraProcInfo.openRss;
+            String str =
+                    "pid: "
+                            + cameraProcInfo.pid
+                            + " name: "
+                            + cameraProcInfo.name
+                            + " openRss: "
+                            + cameraProcInfo.openRss;
             this.mSystemRepository.getClass();
             SystemRepository.logDebug("PolicyHandler", str);
         }
@@ -490,23 +629,29 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
     public final void onDeviceIdle() {
         this.mSystemRepository.getClass();
         SystemRepository.logDebug("PolicyHandler", "onDeviceIdle()");
-        HeimdallAlwaysRunningMonitor heimdallAlwaysRunningMonitor = HeimdallAlwaysRunningMonitor.INSTANCE;
+        HeimdallAlwaysRunningMonitor heimdallAlwaysRunningMonitor =
+                HeimdallAlwaysRunningMonitor.INSTANCE;
         heimdallAlwaysRunningMonitor.getClass();
         try {
             if (heimdallAlwaysRunningMonitor.isEnable()) {
                 heimdallAlwaysRunningMonitor.mHandler.sendEmptyMessage(3);
             }
         } catch (Exception e) {
-            RCPManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Handler onDozeState catch exception "), "HeimdallAlwaysRunningMonitor");
+            RCPManagerService$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder("Handler onDozeState catch exception "),
+                    "HeimdallAlwaysRunningMonitor");
         }
     }
 
-    public void onForegroundActivitiesChanged(int i, int i2, boolean z, int i3, String[] strArr, boolean z2) {
+    public void onForegroundActivitiesChanged(
+            int i, int i2, boolean z, int i3, String[] strArr, boolean z2) {
         String str = strArr[0];
         if (!z2) {
             if (z) {
                 ((HashMap) this.mLastKilledTimeMap).put(str, 0L);
-                SystemRepository.ForegroundActivityManager foregroundActivityManager = this.mSystemRepository.mFGActivityManager;
+                SystemRepository.ForegroundActivityManager foregroundActivityManager =
+                        this.mSystemRepository.mFGActivityManager;
                 if (foregroundActivityManager != null) {
                     synchronized (foregroundActivityManager) {
                         foregroundActivityManager.mForegroundActivities.put(i, str);
@@ -514,7 +659,8 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
                 }
             } else if (this.mSettingRepository.mQuickReclaimEnable) {
                 SystemRepository systemRepository = this.mSystemRepository;
-                if (!systemRepository.mBigGameApps.contains(str) && !"com.sec.android.app.camera".equals(str)) {
+                if (!systemRepository.mBigGameApps.contains(str)
+                        && !"com.sec.android.app.camera".equals(str)) {
                     Long l = (Long) ((ArrayMap) this.mBigAppPssMap).get(str);
                     Long l2 = -1L;
                     if (!l2.equals(l)) {
@@ -543,7 +689,8 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
                 }
             }
         }
-        if (str.equals("com.samsung.android.permissioncontroller") || str.equals("com.google.android.permissioncontroller")) {
+        if (str.equals("com.samsung.android.permissioncontroller")
+                || str.equals("com.google.android.permissioncontroller")) {
             return;
         }
         if (!this.mSettingRepository.mIsAppCacheReclaimEnable) {
@@ -553,13 +700,15 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
         if (z2 || z) {
             return;
         }
-        ConcurrentHashMap concurrentHashMap = (ConcurrentHashMap) ChimeraCommonUtil.mAppLaunchInfoMap;
+        ConcurrentHashMap concurrentHashMap =
+                (ConcurrentHashMap) ChimeraCommonUtil.mAppLaunchInfoMap;
         String str2 = (String) concurrentHashMap.get(str);
         if (!(str2 != null ? str2.startsWith("COLD") : false)) {
             String str3 = (String) concurrentHashMap.get(str);
             if (!(str3 != null ? str3.startsWith("WARM") : false)) {
                 SystemRepository systemRepository2 = this.mSystemRepository;
-                String concat = "Chimera AppFileCacheReclaim do reclaimAppCaches skip: ".concat(str);
+                String concat =
+                        "Chimera AppFileCacheReclaim do reclaimAppCaches skip: ".concat(str);
                 systemRepository2.getClass();
                 SystemRepository.logDebug("PolicyHandler", concat);
                 return;
@@ -571,9 +720,9 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:146:0x011c, code lost:
-    
-        if (r15.contains(r1.name) != false) goto L50;
-     */
+
+       if (r15.contains(r1.name) != false) goto L50;
+    */
     /* JADX WARN: Removed duplicated region for block: B:58:0x0175  */
     /* JADX WARN: Removed duplicated region for block: B:72:0x0196 A[LOOP:4: B:70:0x018f->B:72:0x0196, LOOP_END] */
     /* JADX WARN: Removed duplicated region for block: B:77:0x01e6  */
@@ -586,11 +735,15 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
             Method dump skipped, instructions count: 684
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.chimera.PolicyHandler.onHomeLaunched():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.chimera.PolicyHandler.onHomeLaunched():void");
     }
 
     public final void onLmkdEventTriggered(int i, int i2) {
-        String m = ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "onLmkdKillTriggered() - lmkdLevel: ", " type: ");
+        String m =
+                ArrayUtils$$ExternalSyntheticOutline0.m(
+                        i, i2, "onLmkdKillTriggered() - lmkdLevel: ", " type: ");
         this.mSystemRepository.getClass();
         SystemRepository.logDebug("PolicyHandler", m);
         if (i2 != 1) {
@@ -608,7 +761,8 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
             ArrayList<Integer> arrayList3 = new ArrayList<>();
             Iterator it = ((ArrayList) abnormalFgsDetector.mAbnormalHeavyApps).iterator();
             while (it.hasNext()) {
-                AbnormalFgsDetector.HeavyAppItem heavyAppItem = (AbnormalFgsDetector.HeavyAppItem) it.next();
+                AbnormalFgsDetector.HeavyAppItem heavyAppItem =
+                        (AbnormalFgsDetector.HeavyAppItem) it.next();
                 arrayList.add(heavyAppItem.processName);
                 arrayList2.add(Integer.valueOf(heavyAppItem.uid));
                 arrayList3.add(5000);
@@ -637,10 +791,14 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
             intent.setPackage("com.sec.android.sdhms");
             AbnormalFgsDetector.mSystemRepository.mContext.sendBroadcast(intent);
             SystemRepository systemRepository = AbnormalFgsDetector.mSystemRepository;
-            String str2 = "reported AbnormalHeavyApp : " + Arrays.toString(abnormalFgsDetector.mAbnormalHeavyApps.stream().toArray());
+            String str2 =
+                    "reported AbnormalHeavyApp : "
+                            + Arrays.toString(
+                                    abnormalFgsDetector.mAbnormalHeavyApps.stream().toArray());
             systemRepository.getClass();
             SystemRepository.logDebug("AbnormalFgsDetector", str2);
-            ((ArrayList) abnormalFgsDetector.mReportedAbnormalHeavyApps).addAll(abnormalFgsDetector.mAbnormalHeavyApps);
+            ((ArrayList) abnormalFgsDetector.mReportedAbnormalHeavyApps)
+                    .addAll(abnormalFgsDetector.mAbnormalHeavyApps);
             ((ArrayList) abnormalFgsDetector.mAbnormalHeavyApps).clear();
         }
     }
@@ -659,33 +817,42 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
             Method dump skipped, instructions count: 920
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.chimera.PolicyHandler.onQuotaKill(boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.chimera.PolicyHandler.onQuotaKill(boolean):void");
     }
 
     public final boolean prepareForTrigger(ChimeraCommonUtil.TriggerSource triggerSource) {
         IDeviceIdleController iDeviceIdleController;
         int ordinal = triggerSource.ordinal();
         if (ordinal == 0 || ordinal == 2) {
-            if (!((PowerManager) this.mSystemRepository.mContext.getSystemService("power")).isInteractive()) {
+            if (!((PowerManager) this.mSystemRepository.mContext.getSystemService("power"))
+                    .isInteractive()) {
                 this.mSystemRepository.getClass();
-                SystemRepository.log("PolicyHandler", "prepareForTrigger() - skip reason: screen off");
+                SystemRepository.log(
+                        "PolicyHandler", "prepareForTrigger() - skip reason: screen off");
                 return false;
             }
-        } else if (ordinal == 6 && !(!((PowerManager) this.mSystemRepository.mContext.getSystemService("power")).isInteractive())) {
+        } else if (ordinal == 6
+                && !(!((PowerManager) this.mSystemRepository.mContext.getSystemService("power"))
+                        .isInteractive())) {
             return false;
         }
         SystemRepository systemRepository = this.mSystemRepository;
         if (systemRepository.mAudioManager == null) {
-            systemRepository.mAudioManager = (AudioManager) systemRepository.mContext.getSystemService("audio");
+            systemRepository.mAudioManager =
+                    (AudioManager) systemRepository.mContext.getSystemService("audio");
         }
         if (systemRepository.mAudioManager.getMode() >= 1) {
             this.mSystemRepository.getClass();
             SystemRepository.log("PolicyHandler", "prepareForTrigger() - skip reason: incall");
             return false;
         }
-        SystemRepository.SmartSwitchEventReceiver smartSwitchEventReceiver = this.mSystemRepository.mSmartSwitchEventReceiver;
+        SystemRepository.SmartSwitchEventReceiver smartSwitchEventReceiver =
+                this.mSystemRepository.mSmartSwitchEventReceiver;
         if (smartSwitchEventReceiver.mOnStart || smartSwitchEventReceiver.mOnTransfer) {
-            SystemRepository.log("PolicyHandler", "prepareForTrigger() - skip reason: smart switch");
+            SystemRepository.log(
+                    "PolicyHandler", "prepareForTrigger() - skip reason: smart switch");
             return false;
         }
         if (this.mIsCarMode) {
@@ -694,26 +861,40 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
         }
         WakeLockManager wakeLockManager = this.mWakeLockManager;
         ((HashSet) wakeLockManager.mWakeLockPackages).clear();
-        Collections.addAll(wakeLockManager.mWakeLockPackages, (String[]) Optional.ofNullable((PowerManager) wakeLockManager.mSystemRepository.mContext.getSystemService("power")).map(new SystemRepository$$ExternalSyntheticLambda1(4)).orElse(new String[0]));
+        Collections.addAll(
+                wakeLockManager.mWakeLockPackages,
+                (String[])
+                        Optional.ofNullable(
+                                        (PowerManager)
+                                                wakeLockManager.mSystemRepository.mContext
+                                                        .getSystemService("power"))
+                                .map(new SystemRepository$$ExternalSyntheticLambda1(4))
+                                .orElse(new String[0]));
         ((ConcurrentHashMap) RestartImmediatePackages.getInstance().sPackages).clear();
         final SystemRepository systemRepository2 = this.mSystemRepository;
         synchronized (systemRepository2) {
             if (systemRepository2.mDeviceIdleController == null) {
                 IBinder service = ServiceManager.getService("deviceidle");
                 if (service != null) {
-                    IDeviceIdleController asInterface = IDeviceIdleController.Stub.asInterface(service);
+                    IDeviceIdleController asInterface =
+                            IDeviceIdleController.Stub.asInterface(service);
                     systemRepository2.mDeviceIdleController = asInterface;
                     if (asInterface != null) {
                         try {
-                            service.linkToDeath(new IBinder.DeathRecipient() { // from class: com.android.server.chimera.SystemRepository$$ExternalSyntheticLambda6
-                                @Override // android.os.IBinder.DeathRecipient
-                                public final void binderDied() {
-                                    SystemRepository systemRepository3 = SystemRepository.this;
-                                    synchronized (systemRepository3) {
-                                        systemRepository3.mDeviceIdleController = null;
-                                    }
-                                }
-                            }, 0);
+                            service.linkToDeath(
+                                    new IBinder
+                                            .DeathRecipient() { // from class:
+                                                                // com.android.server.chimera.SystemRepository$$ExternalSyntheticLambda6
+                                        @Override // android.os.IBinder.DeathRecipient
+                                        public final void binderDied() {
+                                            SystemRepository systemRepository3 =
+                                                    SystemRepository.this;
+                                            synchronized (systemRepository3) {
+                                                systemRepository3.mDeviceIdleController = null;
+                                            }
+                                        }
+                                    },
+                                    0);
                         } catch (RemoteException e) {
                             e.printStackTrace();
                         }
@@ -726,7 +907,12 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
             }
             iDeviceIdleController = systemRepository2.mDeviceIdleController;
         }
-        this.mPowerWhitelistedApps = (List) Optional.ofNullable(iDeviceIdleController).map(new SystemRepository$$ExternalSyntheticLambda1(2)).map(new SystemRepository$$ExternalSyntheticLambda1(3)).orElse(Collections.emptyList());
+        this.mPowerWhitelistedApps =
+                (List)
+                        Optional.ofNullable(iDeviceIdleController)
+                                .map(new SystemRepository$$ExternalSyntheticLambda1(2))
+                                .map(new SystemRepository$$ExternalSyntheticLambda1(3))
+                                .orElse(Collections.emptyList());
         return true;
     }
 
@@ -737,7 +923,8 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
         iArr[ordinal] = iArr[ordinal] + 1;
     }
 
-    public final void updateKillStatistics(ChimeraAppInfo chimeraAppInfo, ChimeraCommonUtil.TriggerSource triggerSource) {
+    public final void updateKillStatistics(
+            ChimeraAppInfo chimeraAppInfo, ChimeraCommonUtil.TriggerSource triggerSource) {
         DateFormat dateFormat;
         String format;
         this.mKillCnt++;
@@ -800,7 +987,14 @@ public abstract class PolicyHandler implements SystemEventListener.LmkdEventList
                     sb2.append(",");
                 }
             }
-            sb.append(String.format("%s %xH %d %d %s", str, Integer.valueOf(chimeraAppInfo.appType), Integer.valueOf(chimeraAppInfo.curStandbyBucket), Long.valueOf(chimeraAppInfo.pss), sb2.toString()));
+            sb.append(
+                    String.format(
+                            "%s %xH %d %d %s",
+                            str,
+                            Integer.valueOf(chimeraAppInfo.appType),
+                            Integer.valueOf(chimeraAppInfo.curStandbyBucket),
+                            Long.valueOf(chimeraAppInfo.pss),
+                            sb2.toString()));
             sb.append(" ");
             if (chimeraAppInfo.statsAndOomScores != null) {
                 while (true) {

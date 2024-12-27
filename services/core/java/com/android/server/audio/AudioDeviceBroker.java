@@ -40,19 +40,18 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
 import android.util.PrintWriterPrinter;
+
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0;
 import com.android.server.NetworkScoreService$$ExternalSyntheticOutline0;
-import com.android.server.audio.AudioDeviceBroker;
-import com.android.server.audio.AudioDeviceInventory;
-import com.android.server.audio.AudioService;
 import com.android.server.input.KeyboardMetricsCollector;
 import com.android.server.utils.EventLogger;
 import com.android.server.vibrator.VibrationCustomSettings;
 import com.android.server.vibrator.VibratorManagerService;
+
 import com.google.android.collect.Sets;
 import com.samsung.android.audio.Rune;
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
@@ -61,6 +60,7 @@ import com.samsung.android.server.audio.DualA2dpVolumeManager;
 import com.samsung.android.server.audio.MicModeManager;
 import com.samsung.android.server.audio.MultiSoundManager;
 import com.samsung.android.server.audio.utils.BtUtils;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -112,7 +112,9 @@ public final class AudioDeviceBroker {
     public final boolean mScoManagedByAudio;
     public final SystemServerAdapter mSystemServer;
     public static final Object sLastDeviceConnectionMsgTimeLock = new Object();
-    public static final int[] VALID_COMMUNICATION_DEVICE_TYPES = {2, 7, 3, 22, 1, 4, 23, 26, 11, 27, 5, 9, 19};
+    public static final int[] VALID_COMMUNICATION_DEVICE_TYPES = {
+        2, 7, 3, 22, 1, 4, 23, 26, 11, 27, 5, 9, 19
+    };
     public static final Set MESSAGES_MUTE_MUSIC = new HashSet();
     public int mCommunicationStrategyId = -1;
     public int mAccessibilityStrategyId = -1;
@@ -142,7 +144,12 @@ public final class AudioDeviceBroker {
         }
 
         public final String toString() {
-            return "AudioModeInfo: mMode=" + AudioSystem.modeToString(this.mMode) + ", mPid=" + this.mPid + ", mUid=" + this.mUid;
+            return "AudioModeInfo: mMode="
+                    + AudioSystem.modeToString(this.mMode)
+                    + ", mPid="
+                    + this.mPid
+                    + ", mUid="
+                    + this.mUid;
         }
     }
 
@@ -161,8 +168,7 @@ public final class AudioDeviceBroker {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BrokerHandler extends Handler {
-        public BrokerHandler() {
-        }
+        public BrokerHandler() {}
 
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Removed duplicated region for block: B:258:0x0394  */
@@ -177,7 +183,9 @@ public final class AudioDeviceBroker {
                 Method dump skipped, instructions count: 1714
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.audio.AudioDeviceBroker.BrokerHandler.handleMessage(android.os.Message):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.audio.AudioDeviceBroker.BrokerHandler.handleMessage(android.os.Message):void");
         }
     }
 
@@ -205,7 +213,11 @@ public final class AudioDeviceBroker {
         public final BluetoothDevice mNewDevice;
         public final BluetoothDevice mPreviousDevice;
 
-        public BtDeviceChangedData(BluetoothDevice bluetoothDevice, BluetoothDevice bluetoothDevice2, BluetoothProfileConnectionInfo bluetoothProfileConnectionInfo, String str) {
+        public BtDeviceChangedData(
+                BluetoothDevice bluetoothDevice,
+                BluetoothDevice bluetoothDevice2,
+                BluetoothProfileConnectionInfo bluetoothProfileConnectionInfo,
+                String str) {
             this.mNewDevice = bluetoothDevice;
             this.mPreviousDevice = bluetoothDevice2;
             this.mInfo = bluetoothProfileConnectionInfo;
@@ -213,7 +225,13 @@ public final class AudioDeviceBroker {
         }
 
         public final String toString() {
-            return "BtDeviceChangedData profile=" + BluetoothProfile.getProfileName(this.mInfo.getProfile()) + ", switch device: [" + this.mPreviousDevice + "] -> [" + this.mNewDevice + "]";
+            return "BtDeviceChangedData profile="
+                    + BluetoothProfile.getProfileName(this.mInfo.getProfile())
+                    + ", switch device: ["
+                    + this.mPreviousDevice
+                    + "] -> ["
+                    + this.mNewDevice
+                    + "]";
         }
     }
 
@@ -241,7 +259,11 @@ public final class AudioDeviceBroker {
             this.mIsLeOutput = false;
         }
 
-        public BtDeviceInfo(BtDeviceChangedData btDeviceChangedData, BluetoothDevice bluetoothDevice, int i, int i2) {
+        public BtDeviceInfo(
+                BtDeviceChangedData btDeviceChangedData,
+                BluetoothDevice bluetoothDevice,
+                int i,
+                int i2) {
             this.mDevice = bluetoothDevice;
             this.mState = i;
             this.mProfile = btDeviceChangedData.mInfo.getProfile();
@@ -276,7 +298,8 @@ public final class AudioDeviceBroker {
                 return false;
             }
             BtDeviceInfo btDeviceInfo = (BtDeviceInfo) obj;
-            return this.mProfile == btDeviceInfo.mProfile && this.mDevice.equals(btDeviceInfo.mDevice);
+            return this.mProfile == btDeviceInfo.mProfile
+                    && this.mDevice.equals(btDeviceInfo.mDevice);
         }
 
         public final int hashCode() {
@@ -284,7 +307,24 @@ public final class AudioDeviceBroker {
         }
 
         public final String toString() {
-            return "BtDeviceInfo: device=" + this.mDevice.toString() + " state=" + this.mState + " prof=" + this.mProfile + " supprNoisy=" + this.mSupprNoisy + " volume=" + this.mVolume + " isLeOutput=" + this.mIsLeOutput + " eventSource=" + this.mEventSource + " audioSystemDevice=" + this.mAudioSystemDevice + " musicDevice=" + this.mMusicDevice;
+            return "BtDeviceInfo: device="
+                    + this.mDevice.toString()
+                    + " state="
+                    + this.mState
+                    + " prof="
+                    + this.mProfile
+                    + " supprNoisy="
+                    + this.mSupprNoisy
+                    + " volume="
+                    + this.mVolume
+                    + " isLeOutput="
+                    + this.mIsLeOutput
+                    + " eventSource="
+                    + this.mEventSource
+                    + " audioSystemDevice="
+                    + this.mAudioSystemDevice
+                    + " musicDevice="
+                    + this.mMusicDevice;
         }
     }
 
@@ -298,7 +338,14 @@ public final class AudioDeviceBroker {
         public final int mScoAudioMode;
         public final int mUid;
 
-        public CommunicationDeviceInfo(IBinder iBinder, int i, AudioDeviceAttributes audioDeviceAttributes, boolean z, int i2, String str, boolean z2) {
+        public CommunicationDeviceInfo(
+                IBinder iBinder,
+                int i,
+                AudioDeviceAttributes audioDeviceAttributes,
+                boolean z,
+                int i2,
+                String str,
+                boolean z2) {
             this.mCb = iBinder;
             this.mUid = i;
             this.mDevice = audioDeviceAttributes;
@@ -319,7 +366,8 @@ public final class AudioDeviceBroker {
                 return false;
             }
             CommunicationDeviceInfo communicationDeviceInfo = (CommunicationDeviceInfo) obj;
-            return this.mCb.equals(communicationDeviceInfo.mCb) && this.mUid == communicationDeviceInfo.mUid;
+            return this.mCb.equals(communicationDeviceInfo.mCb)
+                    && this.mUid == communicationDeviceInfo.mUid;
         }
 
         public final int hashCode() {
@@ -355,13 +403,15 @@ public final class AudioDeviceBroker {
         public boolean mRecordingActive;
         public final int mUid;
 
-        public CommunicationRouteClient(IBinder iBinder, int i, AudioDeviceAttributes audioDeviceAttributes, boolean z) {
+        public CommunicationRouteClient(
+                IBinder iBinder, int i, AudioDeviceAttributes audioDeviceAttributes, boolean z) {
             this.mCb = iBinder;
             this.mUid = i;
             this.mDevice = audioDeviceAttributes;
             this.mIsPrivileged = z;
             this.mPlaybackActive = AudioDeviceBroker.this.mAudioService.isPlaybackActiveForUid(i);
-            this.mRecordingActive = AudioDeviceBroker.this.mAudioService.mRecordMonitor.isRecordingActiveForUid(i);
+            this.mRecordingActive =
+                    AudioDeviceBroker.this.mAudioService.mRecordMonitor.isRecordingActiveForUid(i);
         }
 
         @Override // android.os.IBinder.DeathRecipient
@@ -390,90 +440,142 @@ public final class AudioDeviceBroker {
             try {
                 this.mCb.unlinkToDeath(this, 0);
             } catch (NoSuchElementException unused) {
-                Log.w("AS.AudioDeviceBroker", "CommunicationRouteClient could not unlink to " + this.mCb + " binder death");
+                Log.w(
+                        "AS.AudioDeviceBroker",
+                        "CommunicationRouteClient could not unlink to "
+                                + this.mCb
+                                + " binder death");
             }
         }
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:87:0x0108, code lost:
-    
-        if (r12 != 1) goto L60;
-     */
+
+       if (r12 != 1) goto L60;
+    */
     /* renamed from: -$$Nest$mhandleCustomMessage, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void m257$$Nest$mhandleCustomMessage(com.android.server.audio.AudioDeviceBroker r11, android.os.Message r12) {
+    public static void m257$$Nest$mhandleCustomMessage(
+            com.android.server.audio.AudioDeviceBroker r11, android.os.Message r12) {
         /*
             Method dump skipped, instructions count: 372
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.audio.AudioDeviceBroker.m257$$Nest$mhandleCustomMessage(com.android.server.audio.AudioDeviceBroker, android.os.Message):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.audio.AudioDeviceBroker.m257$$Nest$mhandleCustomMessage(com.android.server.audio.AudioDeviceBroker,"
+                    + " android.os.Message):void");
     }
 
     /* renamed from: -$$Nest$monReceiveBtEvent, reason: not valid java name */
-    public static void m258$$Nest$monReceiveBtEvent(AudioDeviceBroker audioDeviceBroker, Intent intent) {
+    public static void m258$$Nest$monReceiveBtEvent(
+            AudioDeviceBroker audioDeviceBroker, Intent intent) {
         final BtHelper btHelper = audioDeviceBroker.mBtHelper;
         synchronized (btHelper) {
             String action = intent.getAction();
-            Log.i("AS.BtHelper", "onReceiveBtEvent action: " + action + " mScoAudioState: " + btHelper.mScoAudioState);
+            Log.i(
+                    "AS.BtHelper",
+                    "onReceiveBtEvent action: "
+                            + action
+                            + " mScoAudioState: "
+                            + btHelper.mScoAudioState);
             if (action.equals("android.bluetooth.headset.profile.action.ACTIVE_DEVICE_CHANGED")) {
-                BluetoothDevice bluetoothDevice = (BluetoothDevice) intent.getParcelableExtra("android.bluetooth.device.extra.DEVICE", BluetoothDevice.class);
+                BluetoothDevice bluetoothDevice =
+                        (BluetoothDevice)
+                                intent.getParcelableExtra(
+                                        "android.bluetooth.device.extra.DEVICE",
+                                        BluetoothDevice.class);
                 if (bluetoothDevice != null && !btHelper.isProfilePoxyConnected(1)) {
                     EventLogger eventLogger = AudioService.sDeviceLogger;
-                    EventLogger.StringEvent stringEvent = new EventLogger.StringEvent("onReceiveBtEvent ACTION_ACTIVE_DEVICE_CHANGED received with null profile proxy for device: " + bluetoothDevice);
+                    EventLogger.StringEvent stringEvent =
+                            new EventLogger.StringEvent(
+                                    "onReceiveBtEvent ACTION_ACTIVE_DEVICE_CHANGED received with"
+                                        + " null profile proxy for device: "
+                                            + bluetoothDevice);
                     stringEvent.printLog(0, "AS.BtHelper");
                     eventLogger.enqueue(stringEvent);
                     return;
                 }
                 btHelper.onSetBtScoActiveDevice(bluetoothDevice);
-                AudioExecutor.execute(new Runnable() { // from class: com.android.server.audio.BtHelper$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        List<BluetoothDevice> connectedDevices;
-                        BtHelper btHelper2 = BtHelper.this;
-                        BluetoothHeadset bluetoothHeadset = btHelper2.mBluetoothHeadset;
-                        boolean z = false;
-                        if (bluetoothHeadset != null && (connectedDevices = bluetoothHeadset.getConnectedDevices()) != null && connectedDevices.size() == 1) {
-                            z = BtUtils.isSamsungWatch(connectedDevices.get(0), btHelper2.mBluetoothHeadset);
-                        }
-                        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("receiveBtEvent updateWatchConnectionState = ", "AS.BtHelper", z);
-                        VibratorManagerService vibratorManagerService = (VibratorManagerService) btHelper2.mVibratorManagerInternal.mServiceWeakReference.get();
-                        if (vibratorManagerService == null) {
-                            return;
-                        }
-                        VibrationCustomSettings vibrationCustomSettings = vibratorManagerService.mVibrationSettings.mCustomSettings;
-                        vibrationCustomSettings.getClass();
-                        Log.d("VibratorManagerService", "Update only watch connected: " + z);
-                        vibrationCustomSettings.mOnlyWatchConnected = z;
-                    }
-                });
-            } else if (action.equals("android.bluetooth.headset.profile.action.AUDIO_STATE_CHANGED")) {
+                AudioExecutor.execute(
+                        new Runnable() { // from class:
+                                         // com.android.server.audio.BtHelper$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                List<BluetoothDevice> connectedDevices;
+                                BtHelper btHelper2 = BtHelper.this;
+                                BluetoothHeadset bluetoothHeadset = btHelper2.mBluetoothHeadset;
+                                boolean z = false;
+                                if (bluetoothHeadset != null
+                                        && (connectedDevices =
+                                                        bluetoothHeadset.getConnectedDevices())
+                                                != null
+                                        && connectedDevices.size() == 1) {
+                                    z =
+                                            BtUtils.isSamsungWatch(
+                                                    connectedDevices.get(0),
+                                                    btHelper2.mBluetoothHeadset);
+                                }
+                                ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                                        "receiveBtEvent updateWatchConnectionState = ",
+                                        "AS.BtHelper",
+                                        z);
+                                VibratorManagerService vibratorManagerService =
+                                        (VibratorManagerService)
+                                                btHelper2.mVibratorManagerInternal
+                                                        .mServiceWeakReference.get();
+                                if (vibratorManagerService == null) {
+                                    return;
+                                }
+                                VibrationCustomSettings vibrationCustomSettings =
+                                        vibratorManagerService.mVibrationSettings.mCustomSettings;
+                                vibrationCustomSettings.getClass();
+                                Log.d(
+                                        "VibratorManagerService",
+                                        "Update only watch connected: " + z);
+                                vibrationCustomSettings.mOnlyWatchConnected = z;
+                            }
+                        });
+            } else if (action.equals(
+                    "android.bluetooth.headset.profile.action.AUDIO_STATE_CHANGED")) {
                 int intExtra = intent.getIntExtra("android.bluetooth.profile.extra.STATE", -1);
                 btHelper.onScoAudioStateChanged(intExtra);
                 if (intExtra == 12) {
-                    int intExtra2 = intent.getIntExtra("com.samsung.bt.hfp.intent.extra.HEADSET_SCO_VOLUME", 7) * 10;
-                    btHelper.mDeviceBroker.mAudioService.postSetVolumeIndexOnDevice(6, intExtra2, 32, "BtHelper.receiveBtEvent");
+                    int intExtra2 =
+                            intent.getIntExtra(
+                                            "com.samsung.bt.hfp.intent.extra.HEADSET_SCO_VOLUME", 7)
+                                    * 10;
+                    btHelper.mDeviceBroker.mAudioService.postSetVolumeIndexOnDevice(
+                            6, intExtra2, 32, "BtHelper.receiveBtEvent");
                     Log.i("AS.BtHelper", "SCO volume set to index " + intExtra2 + " by BT intent");
                 }
-            } else if ("android.bluetooth.headset.profile.action.CONNECTION_STATE_CHANGED".equals(action)) {
+            } else if ("android.bluetooth.headset.profile.action.CONNECTION_STATE_CHANGED"
+                    .equals(action)) {
                 int intExtra3 = intent.getIntExtra("android.bluetooth.profile.extra.STATE", 0);
                 int intExtra4 = intent.getIntExtra("android.bluetooth.device.extra.DEVICE_TYPE", 0);
                 if (intExtra3 == 2 && intExtra4 != 1) {
-                    btHelper.onSetBtScoActiveDevice((BluetoothDevice) intent.getParcelableExtra("android.bluetooth.device.extra.DEVICE"));
+                    btHelper.onSetBtScoActiveDevice(
+                            (BluetoothDevice)
+                                    intent.getParcelableExtra(
+                                            "android.bluetooth.device.extra.DEVICE"));
                 }
             }
         }
     }
 
     /* renamed from: -$$Nest$monSendBecomingNoisyIntent, reason: not valid java name */
-    public static void m259$$Nest$monSendBecomingNoisyIntent(AudioDeviceBroker audioDeviceBroker, int i) {
+    public static void m259$$Nest$monSendBecomingNoisyIntent(
+            AudioDeviceBroker audioDeviceBroker, int i) {
         long clearCallingIdentity;
         String[] strArr;
-        if (!audioDeviceBroker.mAudioService.isMultiSoundOnInternal() || audioDeviceBroker.mAudioService.getPinDevice() == i) {
+        if (!audioDeviceBroker.mAudioService.isMultiSoundOnInternal()
+                || audioDeviceBroker.mAudioService.getPinDevice() == i) {
             EventLogger eventLogger = AudioService.sDeviceLogger;
-            EventLogger.StringEvent stringEvent = new EventLogger.StringEvent("broadcast ACTION_AUDIO_BECOMING_NOISY");
+            EventLogger.StringEvent stringEvent =
+                    new EventLogger.StringEvent("broadcast ACTION_AUDIO_BECOMING_NOISY");
             stringEvent.printLog(0, "AS.AudioDeviceBroker");
             eventLogger.enqueue(stringEvent);
             SystemServerAdapter systemServerAdapter = audioDeviceBroker.mSystemServer;
@@ -508,19 +610,24 @@ public final class AudioDeviceBroker {
         multiSoundManager.getClass();
         Log.d("AS.MultiSoundManager", "sendBecomingNoisyIntentToUnpinApps, " + i);
         multiSoundManager.mAudioSystem.getClass();
-        if (AudioSystem.getDeviceConnectionState(32768, "0") <= 0 || i == 32768 || !multiSoundManager.isRemoteSubmixAppExist()) {
+        if (AudioSystem.getDeviceConnectionState(32768, "0") <= 0
+                || i == 32768
+                || !multiSoundManager.isRemoteSubmixAppExist()) {
             int pinDevice = multiSoundManager.getPinDevice(false);
             synchronized (multiSoundManager.mMultiSoundLock) {
                 try {
-                    Iterator it = new ArrayList(multiSoundManager.mPinAppInfoList.values()).iterator();
+                    Iterator it =
+                            new ArrayList(multiSoundManager.mPinAppInfoList.values()).iterator();
                     while (true) {
                         if (!it.hasNext()) {
-                            strArr = new String[]{""};
+                            strArr = new String[] {""};
                             break;
                         }
-                        MultiSoundManager.MultiSoundItem multiSoundItem = (MultiSoundManager.MultiSoundItem) it.next();
+                        MultiSoundManager.MultiSoundItem multiSoundItem =
+                                (MultiSoundManager.MultiSoundItem) it.next();
                         if (multiSoundItem.mDevice == pinDevice) {
-                            AudioService.AnonymousClass11 anonymousClass11 = multiSoundManager.mInterface;
+                            AudioService.AnonymousClass11 anonymousClass11 =
+                                    multiSoundManager.mInterface;
                             int i2 = multiSoundItem.mUid;
                             anonymousClass11.getClass();
                             int i3 = AudioService.BECOMING_NOISY_DELAY_MS;
@@ -537,7 +644,8 @@ public final class AudioDeviceBroker {
                     Iterator it2 = ((HashSet) multiSoundManager.mRemoteSubmixApps).iterator();
                     while (it2.hasNext()) {
                         Integer num = (Integer) it2.next();
-                        AudioService.AnonymousClass11 anonymousClass112 = multiSoundManager.mInterface;
+                        AudioService.AnonymousClass11 anonymousClass112 =
+                                multiSoundManager.mInterface;
                         int intValue = num.intValue();
                         anonymousClass112.getClass();
                         int i4 = AudioService.BECOMING_NOISY_DELAY_MS;
@@ -560,21 +668,23 @@ public final class AudioDeviceBroker {
         }
         multiSoundManager.sendIntentToSpecificPackage(intent3, strArr);
         EventLogger eventLogger2 = AudioService.sDeviceLogger;
-        EventLogger.StringEvent stringEvent2 = new EventLogger.StringEvent("broadcast ACTION_AUDIO_BECOMING_NOISY to unppin apps");
+        EventLogger.StringEvent stringEvent2 =
+                new EventLogger.StringEvent("broadcast ACTION_AUDIO_BECOMING_NOISY to unppin apps");
         stringEvent2.printLog(0, "AS.AudioDeviceBroker");
         eventLogger2.enqueue(stringEvent2);
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:19:0x0070, code lost:
-    
-        if (r14[3] != 1) goto L25;
-     */
+
+       if (r14[3] != 1) goto L25;
+    */
     /* renamed from: -$$Nest$monUpdateCommunicationRouteClient, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void m260$$Nest$monUpdateCommunicationRouteClient(com.android.server.audio.AudioDeviceBroker r13, boolean r14, java.lang.String r15) {
+    public static void m260$$Nest$monUpdateCommunicationRouteClient(
+            com.android.server.audio.AudioDeviceBroker r13, boolean r14, java.lang.String r15) {
         /*
             r0 = 0
             r1 = 1
@@ -686,7 +796,10 @@ public final class AudioDeviceBroker {
         Le0:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.audio.AudioDeviceBroker.m260$$Nest$monUpdateCommunicationRouteClient(com.android.server.audio.AudioDeviceBroker, boolean, java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.audio.AudioDeviceBroker.m260$$Nest$monUpdateCommunicationRouteClient(com.android.server.audio.AudioDeviceBroker,"
+                    + " boolean, java.lang.String):void");
     }
 
     static {
@@ -698,7 +811,8 @@ public final class AudioDeviceBroker {
         hashSet.add(42);
     }
 
-    public AudioDeviceBroker(Context context, AudioService audioService, AudioSystemAdapter audioSystemAdapter) {
+    public AudioDeviceBroker(
+            Context context, AudioService audioService, AudioSystemAdapter audioSystemAdapter) {
         Boolean bool = Boolean.FALSE;
         this.mReceiverSupported = bool;
         this.mRequestScoUid = 0;
@@ -715,8 +829,13 @@ public final class AudioDeviceBroker {
         Objects.requireNonNull(context);
         this.mSystemServer = new SystemServerAdapter(context);
         this.mAudioSystem = audioSystemAdapter;
-        this.mScoManagedByAudio = Flags.scoManagedByAudio() && ((Boolean) BluetoothProperties.isScoManagedByAudioEnabled().orElse(bool)).booleanValue();
-        this.mBrokerEventWakeLock = ((PowerManager) context.getSystemService("power")).newWakeLock(1, "handleAudioDeviceEvent");
+        this.mScoManagedByAudio =
+                Flags.scoManagedByAudio()
+                        && ((Boolean) BluetoothProperties.isScoManagedByAudioEnabled().orElse(bool))
+                                .booleanValue();
+        this.mBrokerEventWakeLock =
+                ((PowerManager) context.getSystemService("power"))
+                        .newWakeLock(1, "handleAudioDeviceEvent");
         new BrokerThread().start();
         synchronized (this) {
             while (this.mBrokerHandler == null) {
@@ -741,41 +860,77 @@ public final class AudioDeviceBroker {
         systemServerAdapter.getClass();
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("android.intent.action.USER_STARTED");
-        context2.registerReceiverAsUser(new BroadcastReceiver() { // from class: com.android.server.audio.SystemServerAdapter.1
-            public AnonymousClass1() {
-            }
+        context2.registerReceiverAsUser(
+                new BroadcastReceiver() { // from class:
+                                          // com.android.server.audio.SystemServerAdapter.1
+                    public AnonymousClass1() {}
 
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context3, Intent intent) {
-                int intExtra;
-                UserInfo profileParent;
-                if (!"android.intent.action.USER_STARTED".equals(intent.getAction()) || (intExtra = intent.getIntExtra("android.intent.extra.user_handle", -10000)) == -10000 || (profileParent = ((UserManager) context3.getSystemService(UserManager.class)).getProfileParent(intExtra)) == null) {
-                    return;
-                }
-                SystemServerAdapter systemServerAdapter2 = SystemServerAdapter.this;
-                int i = profileParent.id;
-                systemServerAdapter2.getClass();
-                Intent registerReceiverAsUser = context3.registerReceiverAsUser(null, UserHandle.of(i), new IntentFilter("android.media.action.HDMI_AUDIO_PLUG"), null, null);
-                if (registerReceiverAsUser != null) {
-                    ActivityManager.broadcastStickyIntent(registerReceiverAsUser, intExtra);
-                }
-                SystemServerAdapter systemServerAdapter3 = SystemServerAdapter.this;
-                int i2 = profileParent.id;
-                systemServerAdapter3.getClass();
-                Intent registerReceiverAsUser2 = context3.registerReceiverAsUser(null, UserHandle.of(i2), new IntentFilter("android.intent.action.HEADSET_PLUG"), null, null);
-                if (registerReceiverAsUser2 != null) {
-                    ActivityManager.broadcastStickyIntent(registerReceiverAsUser2, intExtra);
-                }
-            }
-        }, UserHandle.ALL, intentFilter, null, null);
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context3, Intent intent) {
+                        int intExtra;
+                        UserInfo profileParent;
+                        if (!"android.intent.action.USER_STARTED".equals(intent.getAction())
+                                || (intExtra =
+                                                intent.getIntExtra(
+                                                        "android.intent.extra.user_handle", -10000))
+                                        == -10000
+                                || (profileParent =
+                                                ((UserManager)
+                                                                context3.getSystemService(
+                                                                        UserManager.class))
+                                                        .getProfileParent(intExtra))
+                                        == null) {
+                            return;
+                        }
+                        SystemServerAdapter systemServerAdapter2 = SystemServerAdapter.this;
+                        int i = profileParent.id;
+                        systemServerAdapter2.getClass();
+                        Intent registerReceiverAsUser =
+                                context3.registerReceiverAsUser(
+                                        null,
+                                        UserHandle.of(i),
+                                        new IntentFilter("android.media.action.HDMI_AUDIO_PLUG"),
+                                        null,
+                                        null);
+                        if (registerReceiverAsUser != null) {
+                            ActivityManager.broadcastStickyIntent(registerReceiverAsUser, intExtra);
+                        }
+                        SystemServerAdapter systemServerAdapter3 = SystemServerAdapter.this;
+                        int i2 = profileParent.id;
+                        systemServerAdapter3.getClass();
+                        Intent registerReceiverAsUser2 =
+                                context3.registerReceiverAsUser(
+                                        null,
+                                        UserHandle.of(i2),
+                                        new IntentFilter("android.intent.action.HEADSET_PLUG"),
+                                        null,
+                                        null);
+                        if (registerReceiverAsUser2 != null) {
+                            ActivityManager.broadcastStickyIntent(
+                                    registerReceiverAsUser2, intExtra);
+                        }
+                    }
+                },
+                UserHandle.ALL,
+                intentFilter,
+                null,
+                null);
         this.mBrokerHandler.sendEmptyMessage(2759);
     }
 
-    public static void btMediaMetricRecord(BluetoothDevice bluetoothDevice, String str, BtDeviceChangedData btDeviceChangedData) {
-        new MediaMetrics.Item("audio.device.queueOnBluetoothActiveDeviceChanged").set(MediaMetrics.Property.STATE, str).set(MediaMetrics.Property.STATUS, Integer.valueOf(btDeviceChangedData.mInfo.getProfile())).set(MediaMetrics.Property.NAME, TextUtils.emptyIfNull(bluetoothDevice.getName())).record();
+    public static void btMediaMetricRecord(
+            BluetoothDevice bluetoothDevice, String str, BtDeviceChangedData btDeviceChangedData) {
+        new MediaMetrics.Item("audio.device.queueOnBluetoothActiveDeviceChanged")
+                .set(MediaMetrics.Property.STATE, str)
+                .set(
+                        MediaMetrics.Property.STATUS,
+                        Integer.valueOf(btDeviceChangedData.mInfo.getProfile()))
+                .set(MediaMetrics.Property.NAME, TextUtils.emptyIfNull(bluetoothDevice.getName()))
+                .record();
     }
 
-    public static BtDeviceInfo createBtDeviceInfo(BtDeviceChangedData btDeviceChangedData, BluetoothDevice bluetoothDevice, int i) {
+    public static BtDeviceInfo createBtDeviceInfo(
+            BtDeviceChangedData btDeviceChangedData, BluetoothDevice bluetoothDevice, int i) {
         int i2;
         int profile = btDeviceChangedData.mInfo.getProfile();
         if (profile == 1) {
@@ -790,7 +945,8 @@ public final class AudioDeviceBroker {
             i2 = 134217728;
         } else {
             if (profile != 22) {
-                throw new IllegalArgumentException("Invalid profile " + btDeviceChangedData.mInfo.getProfile());
+                throw new IllegalArgumentException(
+                        "Invalid profile " + btDeviceChangedData.mInfo.getProfile());
             }
             i2 = btDeviceChangedData.mInfo.isLeOutput() ? 536870912 : -1610612736;
         }
@@ -808,16 +964,23 @@ public final class AudioDeviceBroker {
     }
 
     public static AudioDeviceInfo getCommunicationDeviceOfType(final int i) {
-        return (AudioDeviceInfo) getAvailableCommunicationDevices().stream().filter(new Predicate() { // from class: com.android.server.audio.AudioDeviceBroker$$ExternalSyntheticLambda1
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((AudioDeviceInfo) obj).getType() == i;
-            }
-        }).findFirst().orElse(null);
+        return (AudioDeviceInfo)
+                getAvailableCommunicationDevices().stream()
+                        .filter(
+                                new Predicate() { // from class:
+                                                  // com.android.server.audio.AudioDeviceBroker$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        return ((AudioDeviceInfo) obj).getType() == i;
+                                    }
+                                })
+                        .findFirst()
+                        .orElse(null);
     }
 
     public static boolean isMessageHandledUnderWakelock(int i) {
-        return i == 2 || i == 29 || i == 31 || i == 35 || i == 49 || i == 6 || i == 7 || i == 10 || i == 11;
+        return i == 2 || i == 29 || i == 31 || i == 35 || i == 49 || i == 6 || i == 7 || i == 10
+                || i == 11;
     }
 
     public static boolean isValidCommunicationDevice(AudioDeviceInfo audioDeviceInfo) {
@@ -835,19 +998,28 @@ public final class AudioDeviceBroker {
         return false;
     }
 
-    public final CommunicationRouteClient addCommunicationRouteClient(IBinder iBinder, int i, AudioDeviceAttributes audioDeviceAttributes, boolean z) {
+    public final CommunicationRouteClient addCommunicationRouteClient(
+            IBinder iBinder, int i, AudioDeviceAttributes audioDeviceAttributes, boolean z) {
         removeCommunicationRouteClient(iBinder);
-        CommunicationRouteClient communicationRouteClient = new CommunicationRouteClient(iBinder, i, audioDeviceAttributes, z);
+        CommunicationRouteClient communicationRouteClient =
+                new CommunicationRouteClient(iBinder, i, audioDeviceAttributes, z);
         try {
             iBinder.linkToDeath(communicationRouteClient, 0);
             this.mCommunicationRouteClients.add(0, communicationRouteClient);
             if (!communicationRouteClient.isActive()) {
                 AudioService audioService = this.mAudioService;
-                setForceCommunicationClientStateAndDelayedCheck(communicationRouteClient, !audioService.isPlaybackActiveForUid(i), !audioService.mRecordMonitor.isRecordingActiveForUid(i));
+                setForceCommunicationClientStateAndDelayedCheck(
+                        communicationRouteClient,
+                        !audioService.isPlaybackActiveForUid(i),
+                        !audioService.mRecordMonitor.isRecordingActiveForUid(i));
             }
             return communicationRouteClient;
         } catch (RemoteException unused) {
-            Log.w("AS.AudioDeviceBroker", "CommunicationRouteClient could not link to " + communicationRouteClient.mCb + " binder death");
+            Log.w(
+                    "AS.AudioDeviceBroker",
+                    "CommunicationRouteClient could not link to "
+                            + communicationRouteClient.mCb
+                            + " binder death");
             return null;
         }
     }
@@ -857,10 +1029,14 @@ public final class AudioDeviceBroker {
         if (this.mRequestScoCount <= 4 || (iBinder = this.mScoCb) == null) {
             return;
         }
-        CommunicationRouteClient removeCommunicationRouteClient = removeCommunicationRouteClient(iBinder);
+        CommunicationRouteClient removeCommunicationRouteClient =
+                removeCommunicationRouteClient(iBinder);
         if (removeCommunicationRouteClient != null) {
             EventLogger eventLogger = AudioService.sScoPreventionLogger;
-            EventLogger.StringEvent stringEvent = new EventLogger.StringEvent("checkAndResetBtSco remove SCO client of uid = " + removeCommunicationRouteClient.mUid);
+            EventLogger.StringEvent stringEvent =
+                    new EventLogger.StringEvent(
+                            "checkAndResetBtSco remove SCO client of uid = "
+                                    + removeCommunicationRouteClient.mUid);
             stringEvent.printLog(0, "AS.AudioDeviceBroker");
             eventLogger.enqueue(stringEvent);
         }
@@ -937,7 +1113,10 @@ public final class AudioDeviceBroker {
             Method dump skipped, instructions count: 379
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.audio.AudioDeviceBroker.connectA2dpDevice(android.bluetooth.BluetoothDevice, int, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.audio.AudioDeviceBroker.connectA2dpDevice(android.bluetooth.BluetoothDevice,"
+                    + " int, int):void");
     }
 
     public final void dump(final PrintWriter printWriter) {
@@ -952,545 +1131,804 @@ public final class AudioDeviceBroker {
         AudioDeviceInventory audioDeviceInventory = this.mDeviceInventory;
         audioDeviceInventory.getClass();
         printWriter.println("\n  BECOMING_NOISY_INTENT_DEVICES_SET=");
-        AudioDeviceInventory.BECOMING_NOISY_INTENT_DEVICES_SET.forEach(new AudioDeviceInventory$$ExternalSyntheticLambda33(2, printWriter));
+        AudioDeviceInventory.BECOMING_NOISY_INTENT_DEVICES_SET.forEach(
+                new AudioDeviceInventory$$ExternalSyntheticLambda33(2, printWriter));
         printWriter.println("\n  Preferred devices for strategy:");
         final int i = 0;
-        audioDeviceInventory.mPreferredDevices.forEach(new BiConsumer() { // from class: com.android.server.audio.AudioDeviceInventory$$ExternalSyntheticLambda15
-            public final /* synthetic */ String f$1 = "  ";
+        audioDeviceInventory.mPreferredDevices.forEach(
+                new BiConsumer() { // from class:
+                                   // com.android.server.audio.AudioDeviceInventory$$ExternalSyntheticLambda15
+                    public final /* synthetic */ String f$1 = "  ";
 
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                switch (i) {
-                    case 0:
-                        printWriter.println("  " + this.f$1 + "strategy:" + ((Integer) obj) + " device:" + ((List) obj2));
-                        break;
-                    case 1:
-                        printWriter.println("  " + this.f$1 + "strategy:" + ((Integer) obj) + " device:" + ((List) obj2));
-                        break;
-                    case 2:
-                        printWriter.println("  " + this.f$1 + ((AudioDeviceInventory.DeviceInfo) obj2).toString());
-                        break;
-                    case 3:
-                        printWriter.println("  " + this.f$1 + "capturePreset:" + ((Integer) obj) + " devices:" + ((List) obj2));
-                        break;
-                    case 4:
-                        PrintWriter printWriter2 = printWriter;
-                        Pair pair = (Pair) obj;
-                        StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "strategy: ");
-                        m.append(pair.first);
-                        m.append(" role:");
-                        m.append(pair.second);
-                        m.append(" devices:");
-                        m.append((List) obj2);
-                        printWriter2.println(m.toString());
-                        break;
-                    case 5:
-                        PrintWriter printWriter3 = printWriter;
-                        Pair pair2 = (Pair) obj;
-                        StringBuilder m2 = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "strategy: ");
-                        m2.append(pair2.first);
-                        m2.append(" role:");
-                        m2.append(pair2.second);
-                        m2.append(" devices:");
-                        m2.append((List) obj2);
-                        printWriter3.println(m2.toString());
-                        break;
-                    case 6:
-                        PrintWriter printWriter4 = printWriter;
-                        Pair pair3 = (Pair) obj;
-                        StringBuilder m3 = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "preset: ");
-                        m3.append(pair3.first);
-                        m3.append(" role:");
-                        m3.append(pair3.second);
-                        m3.append(" devices:");
-                        m3.append((List) obj2);
-                        printWriter4.println(m3.toString());
-                        break;
-                    default:
-                        PrintWriter printWriter5 = printWriter;
-                        Pair pair4 = (Pair) obj;
-                        StringBuilder m4 = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "preset: ");
-                        m4.append(pair4.first);
-                        m4.append(" role:");
-                        m4.append(pair4.second);
-                        m4.append(" devices:");
-                        m4.append((List) obj2);
-                        printWriter5.println(m4.toString());
-                        break;
-                }
-            }
-        });
+                    @Override // java.util.function.BiConsumer
+                    public final void accept(Object obj, Object obj2) {
+                        switch (i) {
+                            case 0:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + "strategy:"
+                                                + ((Integer) obj)
+                                                + " device:"
+                                                + ((List) obj2));
+                                break;
+                            case 1:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + "strategy:"
+                                                + ((Integer) obj)
+                                                + " device:"
+                                                + ((List) obj2));
+                                break;
+                            case 2:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + ((AudioDeviceInventory.DeviceInfo) obj2)
+                                                        .toString());
+                                break;
+                            case 3:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + "capturePreset:"
+                                                + ((Integer) obj)
+                                                + " devices:"
+                                                + ((List) obj2));
+                                break;
+                            case 4:
+                                PrintWriter printWriter2 = printWriter;
+                                Pair pair = (Pair) obj;
+                                StringBuilder m =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "strategy: ");
+                                m.append(pair.first);
+                                m.append(" role:");
+                                m.append(pair.second);
+                                m.append(" devices:");
+                                m.append((List) obj2);
+                                printWriter2.println(m.toString());
+                                break;
+                            case 5:
+                                PrintWriter printWriter3 = printWriter;
+                                Pair pair2 = (Pair) obj;
+                                StringBuilder m2 =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "strategy: ");
+                                m2.append(pair2.first);
+                                m2.append(" role:");
+                                m2.append(pair2.second);
+                                m2.append(" devices:");
+                                m2.append((List) obj2);
+                                printWriter3.println(m2.toString());
+                                break;
+                            case 6:
+                                PrintWriter printWriter4 = printWriter;
+                                Pair pair3 = (Pair) obj;
+                                StringBuilder m3 =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "preset: ");
+                                m3.append(pair3.first);
+                                m3.append(" role:");
+                                m3.append(pair3.second);
+                                m3.append(" devices:");
+                                m3.append((List) obj2);
+                                printWriter4.println(m3.toString());
+                                break;
+                            default:
+                                PrintWriter printWriter5 = printWriter;
+                                Pair pair4 = (Pair) obj;
+                                StringBuilder m4 =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "preset: ");
+                                m4.append(pair4.first);
+                                m4.append(" role:");
+                                m4.append(pair4.second);
+                                m4.append(" devices:");
+                                m4.append((List) obj2);
+                                printWriter5.println(m4.toString());
+                                break;
+                        }
+                    }
+                });
         printWriter.println("\n  Non-default devices for strategy:");
         final int i2 = 1;
-        audioDeviceInventory.mNonDefaultDevices.forEach(new BiConsumer() { // from class: com.android.server.audio.AudioDeviceInventory$$ExternalSyntheticLambda15
-            public final /* synthetic */ String f$1 = "  ";
+        audioDeviceInventory.mNonDefaultDevices.forEach(
+                new BiConsumer() { // from class:
+                                   // com.android.server.audio.AudioDeviceInventory$$ExternalSyntheticLambda15
+                    public final /* synthetic */ String f$1 = "  ";
 
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                switch (i2) {
-                    case 0:
-                        printWriter.println("  " + this.f$1 + "strategy:" + ((Integer) obj) + " device:" + ((List) obj2));
-                        break;
-                    case 1:
-                        printWriter.println("  " + this.f$1 + "strategy:" + ((Integer) obj) + " device:" + ((List) obj2));
-                        break;
-                    case 2:
-                        printWriter.println("  " + this.f$1 + ((AudioDeviceInventory.DeviceInfo) obj2).toString());
-                        break;
-                    case 3:
-                        printWriter.println("  " + this.f$1 + "capturePreset:" + ((Integer) obj) + " devices:" + ((List) obj2));
-                        break;
-                    case 4:
-                        PrintWriter printWriter2 = printWriter;
-                        Pair pair = (Pair) obj;
-                        StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "strategy: ");
-                        m.append(pair.first);
-                        m.append(" role:");
-                        m.append(pair.second);
-                        m.append(" devices:");
-                        m.append((List) obj2);
-                        printWriter2.println(m.toString());
-                        break;
-                    case 5:
-                        PrintWriter printWriter3 = printWriter;
-                        Pair pair2 = (Pair) obj;
-                        StringBuilder m2 = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "strategy: ");
-                        m2.append(pair2.first);
-                        m2.append(" role:");
-                        m2.append(pair2.second);
-                        m2.append(" devices:");
-                        m2.append((List) obj2);
-                        printWriter3.println(m2.toString());
-                        break;
-                    case 6:
-                        PrintWriter printWriter4 = printWriter;
-                        Pair pair3 = (Pair) obj;
-                        StringBuilder m3 = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "preset: ");
-                        m3.append(pair3.first);
-                        m3.append(" role:");
-                        m3.append(pair3.second);
-                        m3.append(" devices:");
-                        m3.append((List) obj2);
-                        printWriter4.println(m3.toString());
-                        break;
-                    default:
-                        PrintWriter printWriter5 = printWriter;
-                        Pair pair4 = (Pair) obj;
-                        StringBuilder m4 = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "preset: ");
-                        m4.append(pair4.first);
-                        m4.append(" role:");
-                        m4.append(pair4.second);
-                        m4.append(" devices:");
-                        m4.append((List) obj2);
-                        printWriter5.println(m4.toString());
-                        break;
-                }
-            }
-        });
+                    @Override // java.util.function.BiConsumer
+                    public final void accept(Object obj, Object obj2) {
+                        switch (i2) {
+                            case 0:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + "strategy:"
+                                                + ((Integer) obj)
+                                                + " device:"
+                                                + ((List) obj2));
+                                break;
+                            case 1:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + "strategy:"
+                                                + ((Integer) obj)
+                                                + " device:"
+                                                + ((List) obj2));
+                                break;
+                            case 2:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + ((AudioDeviceInventory.DeviceInfo) obj2)
+                                                        .toString());
+                                break;
+                            case 3:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + "capturePreset:"
+                                                + ((Integer) obj)
+                                                + " devices:"
+                                                + ((List) obj2));
+                                break;
+                            case 4:
+                                PrintWriter printWriter2 = printWriter;
+                                Pair pair = (Pair) obj;
+                                StringBuilder m =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "strategy: ");
+                                m.append(pair.first);
+                                m.append(" role:");
+                                m.append(pair.second);
+                                m.append(" devices:");
+                                m.append((List) obj2);
+                                printWriter2.println(m.toString());
+                                break;
+                            case 5:
+                                PrintWriter printWriter3 = printWriter;
+                                Pair pair2 = (Pair) obj;
+                                StringBuilder m2 =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "strategy: ");
+                                m2.append(pair2.first);
+                                m2.append(" role:");
+                                m2.append(pair2.second);
+                                m2.append(" devices:");
+                                m2.append((List) obj2);
+                                printWriter3.println(m2.toString());
+                                break;
+                            case 6:
+                                PrintWriter printWriter4 = printWriter;
+                                Pair pair3 = (Pair) obj;
+                                StringBuilder m3 =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "preset: ");
+                                m3.append(pair3.first);
+                                m3.append(" role:");
+                                m3.append(pair3.second);
+                                m3.append(" devices:");
+                                m3.append((List) obj2);
+                                printWriter4.println(m3.toString());
+                                break;
+                            default:
+                                PrintWriter printWriter5 = printWriter;
+                                Pair pair4 = (Pair) obj;
+                                StringBuilder m4 =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "preset: ");
+                                m4.append(pair4.first);
+                                m4.append(" role:");
+                                m4.append(pair4.second);
+                                m4.append(" devices:");
+                                m4.append((List) obj2);
+                                printWriter5.println(m4.toString());
+                                break;
+                        }
+                    }
+                });
         printWriter.println("\n  Connected devices:");
         final int i3 = 2;
-        audioDeviceInventory.mConnectedDevices.forEach(new BiConsumer() { // from class: com.android.server.audio.AudioDeviceInventory$$ExternalSyntheticLambda15
-            public final /* synthetic */ String f$1 = "  ";
+        audioDeviceInventory.mConnectedDevices.forEach(
+                new BiConsumer() { // from class:
+                                   // com.android.server.audio.AudioDeviceInventory$$ExternalSyntheticLambda15
+                    public final /* synthetic */ String f$1 = "  ";
 
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                switch (i3) {
-                    case 0:
-                        printWriter.println("  " + this.f$1 + "strategy:" + ((Integer) obj) + " device:" + ((List) obj2));
-                        break;
-                    case 1:
-                        printWriter.println("  " + this.f$1 + "strategy:" + ((Integer) obj) + " device:" + ((List) obj2));
-                        break;
-                    case 2:
-                        printWriter.println("  " + this.f$1 + ((AudioDeviceInventory.DeviceInfo) obj2).toString());
-                        break;
-                    case 3:
-                        printWriter.println("  " + this.f$1 + "capturePreset:" + ((Integer) obj) + " devices:" + ((List) obj2));
-                        break;
-                    case 4:
-                        PrintWriter printWriter2 = printWriter;
-                        Pair pair = (Pair) obj;
-                        StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "strategy: ");
-                        m.append(pair.first);
-                        m.append(" role:");
-                        m.append(pair.second);
-                        m.append(" devices:");
-                        m.append((List) obj2);
-                        printWriter2.println(m.toString());
-                        break;
-                    case 5:
-                        PrintWriter printWriter3 = printWriter;
-                        Pair pair2 = (Pair) obj;
-                        StringBuilder m2 = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "strategy: ");
-                        m2.append(pair2.first);
-                        m2.append(" role:");
-                        m2.append(pair2.second);
-                        m2.append(" devices:");
-                        m2.append((List) obj2);
-                        printWriter3.println(m2.toString());
-                        break;
-                    case 6:
-                        PrintWriter printWriter4 = printWriter;
-                        Pair pair3 = (Pair) obj;
-                        StringBuilder m3 = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "preset: ");
-                        m3.append(pair3.first);
-                        m3.append(" role:");
-                        m3.append(pair3.second);
-                        m3.append(" devices:");
-                        m3.append((List) obj2);
-                        printWriter4.println(m3.toString());
-                        break;
-                    default:
-                        PrintWriter printWriter5 = printWriter;
-                        Pair pair4 = (Pair) obj;
-                        StringBuilder m4 = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "preset: ");
-                        m4.append(pair4.first);
-                        m4.append(" role:");
-                        m4.append(pair4.second);
-                        m4.append(" devices:");
-                        m4.append((List) obj2);
-                        printWriter5.println(m4.toString());
-                        break;
-                }
-            }
-        });
+                    @Override // java.util.function.BiConsumer
+                    public final void accept(Object obj, Object obj2) {
+                        switch (i3) {
+                            case 0:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + "strategy:"
+                                                + ((Integer) obj)
+                                                + " device:"
+                                                + ((List) obj2));
+                                break;
+                            case 1:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + "strategy:"
+                                                + ((Integer) obj)
+                                                + " device:"
+                                                + ((List) obj2));
+                                break;
+                            case 2:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + ((AudioDeviceInventory.DeviceInfo) obj2)
+                                                        .toString());
+                                break;
+                            case 3:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + "capturePreset:"
+                                                + ((Integer) obj)
+                                                + " devices:"
+                                                + ((List) obj2));
+                                break;
+                            case 4:
+                                PrintWriter printWriter2 = printWriter;
+                                Pair pair = (Pair) obj;
+                                StringBuilder m =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "strategy: ");
+                                m.append(pair.first);
+                                m.append(" role:");
+                                m.append(pair.second);
+                                m.append(" devices:");
+                                m.append((List) obj2);
+                                printWriter2.println(m.toString());
+                                break;
+                            case 5:
+                                PrintWriter printWriter3 = printWriter;
+                                Pair pair2 = (Pair) obj;
+                                StringBuilder m2 =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "strategy: ");
+                                m2.append(pair2.first);
+                                m2.append(" role:");
+                                m2.append(pair2.second);
+                                m2.append(" devices:");
+                                m2.append((List) obj2);
+                                printWriter3.println(m2.toString());
+                                break;
+                            case 6:
+                                PrintWriter printWriter4 = printWriter;
+                                Pair pair3 = (Pair) obj;
+                                StringBuilder m3 =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "preset: ");
+                                m3.append(pair3.first);
+                                m3.append(" role:");
+                                m3.append(pair3.second);
+                                m3.append(" devices:");
+                                m3.append((List) obj2);
+                                printWriter4.println(m3.toString());
+                                break;
+                            default:
+                                PrintWriter printWriter5 = printWriter;
+                                Pair pair4 = (Pair) obj;
+                                StringBuilder m4 =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "preset: ");
+                                m4.append(pair4.first);
+                                m4.append(" role:");
+                                m4.append(pair4.second);
+                                m4.append(" devices:");
+                                m4.append((List) obj2);
+                                printWriter5.println(m4.toString());
+                                break;
+                        }
+                    }
+                });
         printWriter.println("\n  APM Connected device (A2DP sink only):");
-        printWriter.println("\n  mBluetoothDualModeEnabled = " + audioDeviceInventory.mBluetoothDualModeEnabled);
+        printWriter.println(
+                "\n  mBluetoothDualModeEnabled = "
+                        + audioDeviceInventory.mBluetoothDualModeEnabled);
         printWriter.println("\n  Preferred devices for capture preset:");
         final int i4 = 3;
-        audioDeviceInventory.mPreferredDevicesForCapturePreset.forEach(new BiConsumer() { // from class: com.android.server.audio.AudioDeviceInventory$$ExternalSyntheticLambda15
-            public final /* synthetic */ String f$1 = "  ";
+        audioDeviceInventory.mPreferredDevicesForCapturePreset.forEach(
+                new BiConsumer() { // from class:
+                                   // com.android.server.audio.AudioDeviceInventory$$ExternalSyntheticLambda15
+                    public final /* synthetic */ String f$1 = "  ";
 
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                switch (i4) {
-                    case 0:
-                        printWriter.println("  " + this.f$1 + "strategy:" + ((Integer) obj) + " device:" + ((List) obj2));
-                        break;
-                    case 1:
-                        printWriter.println("  " + this.f$1 + "strategy:" + ((Integer) obj) + " device:" + ((List) obj2));
-                        break;
-                    case 2:
-                        printWriter.println("  " + this.f$1 + ((AudioDeviceInventory.DeviceInfo) obj2).toString());
-                        break;
-                    case 3:
-                        printWriter.println("  " + this.f$1 + "capturePreset:" + ((Integer) obj) + " devices:" + ((List) obj2));
-                        break;
-                    case 4:
-                        PrintWriter printWriter2 = printWriter;
-                        Pair pair = (Pair) obj;
-                        StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "strategy: ");
-                        m.append(pair.first);
-                        m.append(" role:");
-                        m.append(pair.second);
-                        m.append(" devices:");
-                        m.append((List) obj2);
-                        printWriter2.println(m.toString());
-                        break;
-                    case 5:
-                        PrintWriter printWriter3 = printWriter;
-                        Pair pair2 = (Pair) obj;
-                        StringBuilder m2 = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "strategy: ");
-                        m2.append(pair2.first);
-                        m2.append(" role:");
-                        m2.append(pair2.second);
-                        m2.append(" devices:");
-                        m2.append((List) obj2);
-                        printWriter3.println(m2.toString());
-                        break;
-                    case 6:
-                        PrintWriter printWriter4 = printWriter;
-                        Pair pair3 = (Pair) obj;
-                        StringBuilder m3 = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "preset: ");
-                        m3.append(pair3.first);
-                        m3.append(" role:");
-                        m3.append(pair3.second);
-                        m3.append(" devices:");
-                        m3.append((List) obj2);
-                        printWriter4.println(m3.toString());
-                        break;
-                    default:
-                        PrintWriter printWriter5 = printWriter;
-                        Pair pair4 = (Pair) obj;
-                        StringBuilder m4 = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "preset: ");
-                        m4.append(pair4.first);
-                        m4.append(" role:");
-                        m4.append(pair4.second);
-                        m4.append(" devices:");
-                        m4.append((List) obj2);
-                        printWriter5.println(m4.toString());
-                        break;
-                }
-            }
-        });
+                    @Override // java.util.function.BiConsumer
+                    public final void accept(Object obj, Object obj2) {
+                        switch (i4) {
+                            case 0:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + "strategy:"
+                                                + ((Integer) obj)
+                                                + " device:"
+                                                + ((List) obj2));
+                                break;
+                            case 1:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + "strategy:"
+                                                + ((Integer) obj)
+                                                + " device:"
+                                                + ((List) obj2));
+                                break;
+                            case 2:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + ((AudioDeviceInventory.DeviceInfo) obj2)
+                                                        .toString());
+                                break;
+                            case 3:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + "capturePreset:"
+                                                + ((Integer) obj)
+                                                + " devices:"
+                                                + ((List) obj2));
+                                break;
+                            case 4:
+                                PrintWriter printWriter2 = printWriter;
+                                Pair pair = (Pair) obj;
+                                StringBuilder m =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "strategy: ");
+                                m.append(pair.first);
+                                m.append(" role:");
+                                m.append(pair.second);
+                                m.append(" devices:");
+                                m.append((List) obj2);
+                                printWriter2.println(m.toString());
+                                break;
+                            case 5:
+                                PrintWriter printWriter3 = printWriter;
+                                Pair pair2 = (Pair) obj;
+                                StringBuilder m2 =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "strategy: ");
+                                m2.append(pair2.first);
+                                m2.append(" role:");
+                                m2.append(pair2.second);
+                                m2.append(" devices:");
+                                m2.append((List) obj2);
+                                printWriter3.println(m2.toString());
+                                break;
+                            case 6:
+                                PrintWriter printWriter4 = printWriter;
+                                Pair pair3 = (Pair) obj;
+                                StringBuilder m3 =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "preset: ");
+                                m3.append(pair3.first);
+                                m3.append(" role:");
+                                m3.append(pair3.second);
+                                m3.append(" devices:");
+                                m3.append((List) obj2);
+                                printWriter4.println(m3.toString());
+                                break;
+                            default:
+                                PrintWriter printWriter5 = printWriter;
+                                Pair pair4 = (Pair) obj;
+                                StringBuilder m4 =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "preset: ");
+                                m4.append(pair4.first);
+                                m4.append(" role:");
+                                m4.append(pair4.second);
+                                m4.append(" devices:");
+                                m4.append((List) obj2);
+                                printWriter5.println(m4.toString());
+                                break;
+                        }
+                    }
+                });
         printWriter.println("\n  Applied devices roles for strategies (from API):");
         final int i5 = 4;
-        audioDeviceInventory.mAppliedStrategyRoles.forEach(new BiConsumer() { // from class: com.android.server.audio.AudioDeviceInventory$$ExternalSyntheticLambda15
-            public final /* synthetic */ String f$1 = "  ";
+        audioDeviceInventory.mAppliedStrategyRoles.forEach(
+                new BiConsumer() { // from class:
+                                   // com.android.server.audio.AudioDeviceInventory$$ExternalSyntheticLambda15
+                    public final /* synthetic */ String f$1 = "  ";
 
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                switch (i5) {
-                    case 0:
-                        printWriter.println("  " + this.f$1 + "strategy:" + ((Integer) obj) + " device:" + ((List) obj2));
-                        break;
-                    case 1:
-                        printWriter.println("  " + this.f$1 + "strategy:" + ((Integer) obj) + " device:" + ((List) obj2));
-                        break;
-                    case 2:
-                        printWriter.println("  " + this.f$1 + ((AudioDeviceInventory.DeviceInfo) obj2).toString());
-                        break;
-                    case 3:
-                        printWriter.println("  " + this.f$1 + "capturePreset:" + ((Integer) obj) + " devices:" + ((List) obj2));
-                        break;
-                    case 4:
-                        PrintWriter printWriter2 = printWriter;
-                        Pair pair = (Pair) obj;
-                        StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "strategy: ");
-                        m.append(pair.first);
-                        m.append(" role:");
-                        m.append(pair.second);
-                        m.append(" devices:");
-                        m.append((List) obj2);
-                        printWriter2.println(m.toString());
-                        break;
-                    case 5:
-                        PrintWriter printWriter3 = printWriter;
-                        Pair pair2 = (Pair) obj;
-                        StringBuilder m2 = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "strategy: ");
-                        m2.append(pair2.first);
-                        m2.append(" role:");
-                        m2.append(pair2.second);
-                        m2.append(" devices:");
-                        m2.append((List) obj2);
-                        printWriter3.println(m2.toString());
-                        break;
-                    case 6:
-                        PrintWriter printWriter4 = printWriter;
-                        Pair pair3 = (Pair) obj;
-                        StringBuilder m3 = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "preset: ");
-                        m3.append(pair3.first);
-                        m3.append(" role:");
-                        m3.append(pair3.second);
-                        m3.append(" devices:");
-                        m3.append((List) obj2);
-                        printWriter4.println(m3.toString());
-                        break;
-                    default:
-                        PrintWriter printWriter5 = printWriter;
-                        Pair pair4 = (Pair) obj;
-                        StringBuilder m4 = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "preset: ");
-                        m4.append(pair4.first);
-                        m4.append(" role:");
-                        m4.append(pair4.second);
-                        m4.append(" devices:");
-                        m4.append((List) obj2);
-                        printWriter5.println(m4.toString());
-                        break;
-                }
-            }
-        });
+                    @Override // java.util.function.BiConsumer
+                    public final void accept(Object obj, Object obj2) {
+                        switch (i5) {
+                            case 0:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + "strategy:"
+                                                + ((Integer) obj)
+                                                + " device:"
+                                                + ((List) obj2));
+                                break;
+                            case 1:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + "strategy:"
+                                                + ((Integer) obj)
+                                                + " device:"
+                                                + ((List) obj2));
+                                break;
+                            case 2:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + ((AudioDeviceInventory.DeviceInfo) obj2)
+                                                        .toString());
+                                break;
+                            case 3:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + "capturePreset:"
+                                                + ((Integer) obj)
+                                                + " devices:"
+                                                + ((List) obj2));
+                                break;
+                            case 4:
+                                PrintWriter printWriter2 = printWriter;
+                                Pair pair = (Pair) obj;
+                                StringBuilder m =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "strategy: ");
+                                m.append(pair.first);
+                                m.append(" role:");
+                                m.append(pair.second);
+                                m.append(" devices:");
+                                m.append((List) obj2);
+                                printWriter2.println(m.toString());
+                                break;
+                            case 5:
+                                PrintWriter printWriter3 = printWriter;
+                                Pair pair2 = (Pair) obj;
+                                StringBuilder m2 =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "strategy: ");
+                                m2.append(pair2.first);
+                                m2.append(" role:");
+                                m2.append(pair2.second);
+                                m2.append(" devices:");
+                                m2.append((List) obj2);
+                                printWriter3.println(m2.toString());
+                                break;
+                            case 6:
+                                PrintWriter printWriter4 = printWriter;
+                                Pair pair3 = (Pair) obj;
+                                StringBuilder m3 =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "preset: ");
+                                m3.append(pair3.first);
+                                m3.append(" role:");
+                                m3.append(pair3.second);
+                                m3.append(" devices:");
+                                m3.append((List) obj2);
+                                printWriter4.println(m3.toString());
+                                break;
+                            default:
+                                PrintWriter printWriter5 = printWriter;
+                                Pair pair4 = (Pair) obj;
+                                StringBuilder m4 =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "preset: ");
+                                m4.append(pair4.first);
+                                m4.append(" role:");
+                                m4.append(pair4.second);
+                                m4.append(" devices:");
+                                m4.append((List) obj2);
+                                printWriter5.println(m4.toString());
+                                break;
+                        }
+                    }
+                });
         printWriter.println("\n  Applied devices roles for strategies (internal):");
         final int i6 = 5;
-        audioDeviceInventory.mAppliedStrategyRolesInt.forEach(new BiConsumer() { // from class: com.android.server.audio.AudioDeviceInventory$$ExternalSyntheticLambda15
-            public final /* synthetic */ String f$1 = "  ";
+        audioDeviceInventory.mAppliedStrategyRolesInt.forEach(
+                new BiConsumer() { // from class:
+                                   // com.android.server.audio.AudioDeviceInventory$$ExternalSyntheticLambda15
+                    public final /* synthetic */ String f$1 = "  ";
 
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                switch (i6) {
-                    case 0:
-                        printWriter.println("  " + this.f$1 + "strategy:" + ((Integer) obj) + " device:" + ((List) obj2));
-                        break;
-                    case 1:
-                        printWriter.println("  " + this.f$1 + "strategy:" + ((Integer) obj) + " device:" + ((List) obj2));
-                        break;
-                    case 2:
-                        printWriter.println("  " + this.f$1 + ((AudioDeviceInventory.DeviceInfo) obj2).toString());
-                        break;
-                    case 3:
-                        printWriter.println("  " + this.f$1 + "capturePreset:" + ((Integer) obj) + " devices:" + ((List) obj2));
-                        break;
-                    case 4:
-                        PrintWriter printWriter2 = printWriter;
-                        Pair pair = (Pair) obj;
-                        StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "strategy: ");
-                        m.append(pair.first);
-                        m.append(" role:");
-                        m.append(pair.second);
-                        m.append(" devices:");
-                        m.append((List) obj2);
-                        printWriter2.println(m.toString());
-                        break;
-                    case 5:
-                        PrintWriter printWriter3 = printWriter;
-                        Pair pair2 = (Pair) obj;
-                        StringBuilder m2 = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "strategy: ");
-                        m2.append(pair2.first);
-                        m2.append(" role:");
-                        m2.append(pair2.second);
-                        m2.append(" devices:");
-                        m2.append((List) obj2);
-                        printWriter3.println(m2.toString());
-                        break;
-                    case 6:
-                        PrintWriter printWriter4 = printWriter;
-                        Pair pair3 = (Pair) obj;
-                        StringBuilder m3 = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "preset: ");
-                        m3.append(pair3.first);
-                        m3.append(" role:");
-                        m3.append(pair3.second);
-                        m3.append(" devices:");
-                        m3.append((List) obj2);
-                        printWriter4.println(m3.toString());
-                        break;
-                    default:
-                        PrintWriter printWriter5 = printWriter;
-                        Pair pair4 = (Pair) obj;
-                        StringBuilder m4 = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "preset: ");
-                        m4.append(pair4.first);
-                        m4.append(" role:");
-                        m4.append(pair4.second);
-                        m4.append(" devices:");
-                        m4.append((List) obj2);
-                        printWriter5.println(m4.toString());
-                        break;
-                }
-            }
-        });
+                    @Override // java.util.function.BiConsumer
+                    public final void accept(Object obj, Object obj2) {
+                        switch (i6) {
+                            case 0:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + "strategy:"
+                                                + ((Integer) obj)
+                                                + " device:"
+                                                + ((List) obj2));
+                                break;
+                            case 1:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + "strategy:"
+                                                + ((Integer) obj)
+                                                + " device:"
+                                                + ((List) obj2));
+                                break;
+                            case 2:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + ((AudioDeviceInventory.DeviceInfo) obj2)
+                                                        .toString());
+                                break;
+                            case 3:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + "capturePreset:"
+                                                + ((Integer) obj)
+                                                + " devices:"
+                                                + ((List) obj2));
+                                break;
+                            case 4:
+                                PrintWriter printWriter2 = printWriter;
+                                Pair pair = (Pair) obj;
+                                StringBuilder m =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "strategy: ");
+                                m.append(pair.first);
+                                m.append(" role:");
+                                m.append(pair.second);
+                                m.append(" devices:");
+                                m.append((List) obj2);
+                                printWriter2.println(m.toString());
+                                break;
+                            case 5:
+                                PrintWriter printWriter3 = printWriter;
+                                Pair pair2 = (Pair) obj;
+                                StringBuilder m2 =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "strategy: ");
+                                m2.append(pair2.first);
+                                m2.append(" role:");
+                                m2.append(pair2.second);
+                                m2.append(" devices:");
+                                m2.append((List) obj2);
+                                printWriter3.println(m2.toString());
+                                break;
+                            case 6:
+                                PrintWriter printWriter4 = printWriter;
+                                Pair pair3 = (Pair) obj;
+                                StringBuilder m3 =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "preset: ");
+                                m3.append(pair3.first);
+                                m3.append(" role:");
+                                m3.append(pair3.second);
+                                m3.append(" devices:");
+                                m3.append((List) obj2);
+                                printWriter4.println(m3.toString());
+                                break;
+                            default:
+                                PrintWriter printWriter5 = printWriter;
+                                Pair pair4 = (Pair) obj;
+                                StringBuilder m4 =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "preset: ");
+                                m4.append(pair4.first);
+                                m4.append(" role:");
+                                m4.append(pair4.second);
+                                m4.append(" devices:");
+                                m4.append((List) obj2);
+                                printWriter5.println(m4.toString());
+                                break;
+                        }
+                    }
+                });
         printWriter.println("\n  Applied devices roles for presets (from API):");
         final int i7 = 6;
-        audioDeviceInventory.mAppliedPresetRoles.forEach(new BiConsumer() { // from class: com.android.server.audio.AudioDeviceInventory$$ExternalSyntheticLambda15
-            public final /* synthetic */ String f$1 = "  ";
+        audioDeviceInventory.mAppliedPresetRoles.forEach(
+                new BiConsumer() { // from class:
+                                   // com.android.server.audio.AudioDeviceInventory$$ExternalSyntheticLambda15
+                    public final /* synthetic */ String f$1 = "  ";
 
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                switch (i7) {
-                    case 0:
-                        printWriter.println("  " + this.f$1 + "strategy:" + ((Integer) obj) + " device:" + ((List) obj2));
-                        break;
-                    case 1:
-                        printWriter.println("  " + this.f$1 + "strategy:" + ((Integer) obj) + " device:" + ((List) obj2));
-                        break;
-                    case 2:
-                        printWriter.println("  " + this.f$1 + ((AudioDeviceInventory.DeviceInfo) obj2).toString());
-                        break;
-                    case 3:
-                        printWriter.println("  " + this.f$1 + "capturePreset:" + ((Integer) obj) + " devices:" + ((List) obj2));
-                        break;
-                    case 4:
-                        PrintWriter printWriter2 = printWriter;
-                        Pair pair = (Pair) obj;
-                        StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "strategy: ");
-                        m.append(pair.first);
-                        m.append(" role:");
-                        m.append(pair.second);
-                        m.append(" devices:");
-                        m.append((List) obj2);
-                        printWriter2.println(m.toString());
-                        break;
-                    case 5:
-                        PrintWriter printWriter3 = printWriter;
-                        Pair pair2 = (Pair) obj;
-                        StringBuilder m2 = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "strategy: ");
-                        m2.append(pair2.first);
-                        m2.append(" role:");
-                        m2.append(pair2.second);
-                        m2.append(" devices:");
-                        m2.append((List) obj2);
-                        printWriter3.println(m2.toString());
-                        break;
-                    case 6:
-                        PrintWriter printWriter4 = printWriter;
-                        Pair pair3 = (Pair) obj;
-                        StringBuilder m3 = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "preset: ");
-                        m3.append(pair3.first);
-                        m3.append(" role:");
-                        m3.append(pair3.second);
-                        m3.append(" devices:");
-                        m3.append((List) obj2);
-                        printWriter4.println(m3.toString());
-                        break;
-                    default:
-                        PrintWriter printWriter5 = printWriter;
-                        Pair pair4 = (Pair) obj;
-                        StringBuilder m4 = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "preset: ");
-                        m4.append(pair4.first);
-                        m4.append(" role:");
-                        m4.append(pair4.second);
-                        m4.append(" devices:");
-                        m4.append((List) obj2);
-                        printWriter5.println(m4.toString());
-                        break;
-                }
-            }
-        });
+                    @Override // java.util.function.BiConsumer
+                    public final void accept(Object obj, Object obj2) {
+                        switch (i7) {
+                            case 0:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + "strategy:"
+                                                + ((Integer) obj)
+                                                + " device:"
+                                                + ((List) obj2));
+                                break;
+                            case 1:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + "strategy:"
+                                                + ((Integer) obj)
+                                                + " device:"
+                                                + ((List) obj2));
+                                break;
+                            case 2:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + ((AudioDeviceInventory.DeviceInfo) obj2)
+                                                        .toString());
+                                break;
+                            case 3:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + "capturePreset:"
+                                                + ((Integer) obj)
+                                                + " devices:"
+                                                + ((List) obj2));
+                                break;
+                            case 4:
+                                PrintWriter printWriter2 = printWriter;
+                                Pair pair = (Pair) obj;
+                                StringBuilder m =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "strategy: ");
+                                m.append(pair.first);
+                                m.append(" role:");
+                                m.append(pair.second);
+                                m.append(" devices:");
+                                m.append((List) obj2);
+                                printWriter2.println(m.toString());
+                                break;
+                            case 5:
+                                PrintWriter printWriter3 = printWriter;
+                                Pair pair2 = (Pair) obj;
+                                StringBuilder m2 =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "strategy: ");
+                                m2.append(pair2.first);
+                                m2.append(" role:");
+                                m2.append(pair2.second);
+                                m2.append(" devices:");
+                                m2.append((List) obj2);
+                                printWriter3.println(m2.toString());
+                                break;
+                            case 6:
+                                PrintWriter printWriter4 = printWriter;
+                                Pair pair3 = (Pair) obj;
+                                StringBuilder m3 =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "preset: ");
+                                m3.append(pair3.first);
+                                m3.append(" role:");
+                                m3.append(pair3.second);
+                                m3.append(" devices:");
+                                m3.append((List) obj2);
+                                printWriter4.println(m3.toString());
+                                break;
+                            default:
+                                PrintWriter printWriter5 = printWriter;
+                                Pair pair4 = (Pair) obj;
+                                StringBuilder m4 =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "preset: ");
+                                m4.append(pair4.first);
+                                m4.append(" role:");
+                                m4.append(pair4.second);
+                                m4.append(" devices:");
+                                m4.append((List) obj2);
+                                printWriter5.println(m4.toString());
+                                break;
+                        }
+                    }
+                });
         printWriter.println("\n  Applied devices roles for presets (internal:");
         final int i8 = 7;
-        audioDeviceInventory.mAppliedPresetRolesInt.forEach(new BiConsumer() { // from class: com.android.server.audio.AudioDeviceInventory$$ExternalSyntheticLambda15
-            public final /* synthetic */ String f$1 = "  ";
+        audioDeviceInventory.mAppliedPresetRolesInt.forEach(
+                new BiConsumer() { // from class:
+                                   // com.android.server.audio.AudioDeviceInventory$$ExternalSyntheticLambda15
+                    public final /* synthetic */ String f$1 = "  ";
 
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                switch (i8) {
-                    case 0:
-                        printWriter.println("  " + this.f$1 + "strategy:" + ((Integer) obj) + " device:" + ((List) obj2));
-                        break;
-                    case 1:
-                        printWriter.println("  " + this.f$1 + "strategy:" + ((Integer) obj) + " device:" + ((List) obj2));
-                        break;
-                    case 2:
-                        printWriter.println("  " + this.f$1 + ((AudioDeviceInventory.DeviceInfo) obj2).toString());
-                        break;
-                    case 3:
-                        printWriter.println("  " + this.f$1 + "capturePreset:" + ((Integer) obj) + " devices:" + ((List) obj2));
-                        break;
-                    case 4:
-                        PrintWriter printWriter2 = printWriter;
-                        Pair pair = (Pair) obj;
-                        StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "strategy: ");
-                        m.append(pair.first);
-                        m.append(" role:");
-                        m.append(pair.second);
-                        m.append(" devices:");
-                        m.append((List) obj2);
-                        printWriter2.println(m.toString());
-                        break;
-                    case 5:
-                        PrintWriter printWriter3 = printWriter;
-                        Pair pair2 = (Pair) obj;
-                        StringBuilder m2 = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "strategy: ");
-                        m2.append(pair2.first);
-                        m2.append(" role:");
-                        m2.append(pair2.second);
-                        m2.append(" devices:");
-                        m2.append((List) obj2);
-                        printWriter3.println(m2.toString());
-                        break;
-                    case 6:
-                        PrintWriter printWriter4 = printWriter;
-                        Pair pair3 = (Pair) obj;
-                        StringBuilder m3 = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "preset: ");
-                        m3.append(pair3.first);
-                        m3.append(" role:");
-                        m3.append(pair3.second);
-                        m3.append(" devices:");
-                        m3.append((List) obj2);
-                        printWriter4.println(m3.toString());
-                        break;
-                    default:
-                        PrintWriter printWriter5 = printWriter;
-                        Pair pair4 = (Pair) obj;
-                        StringBuilder m4 = DumpUtils$$ExternalSyntheticOutline0.m("  ", this.f$1, "preset: ");
-                        m4.append(pair4.first);
-                        m4.append(" role:");
-                        m4.append(pair4.second);
-                        m4.append(" devices:");
-                        m4.append((List) obj2);
-                        printWriter5.println(m4.toString());
-                        break;
-                }
-            }
-        });
+                    @Override // java.util.function.BiConsumer
+                    public final void accept(Object obj, Object obj2) {
+                        switch (i8) {
+                            case 0:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + "strategy:"
+                                                + ((Integer) obj)
+                                                + " device:"
+                                                + ((List) obj2));
+                                break;
+                            case 1:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + "strategy:"
+                                                + ((Integer) obj)
+                                                + " device:"
+                                                + ((List) obj2));
+                                break;
+                            case 2:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + ((AudioDeviceInventory.DeviceInfo) obj2)
+                                                        .toString());
+                                break;
+                            case 3:
+                                printWriter.println(
+                                        "  "
+                                                + this.f$1
+                                                + "capturePreset:"
+                                                + ((Integer) obj)
+                                                + " devices:"
+                                                + ((List) obj2));
+                                break;
+                            case 4:
+                                PrintWriter printWriter2 = printWriter;
+                                Pair pair = (Pair) obj;
+                                StringBuilder m =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "strategy: ");
+                                m.append(pair.first);
+                                m.append(" role:");
+                                m.append(pair.second);
+                                m.append(" devices:");
+                                m.append((List) obj2);
+                                printWriter2.println(m.toString());
+                                break;
+                            case 5:
+                                PrintWriter printWriter3 = printWriter;
+                                Pair pair2 = (Pair) obj;
+                                StringBuilder m2 =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "strategy: ");
+                                m2.append(pair2.first);
+                                m2.append(" role:");
+                                m2.append(pair2.second);
+                                m2.append(" devices:");
+                                m2.append((List) obj2);
+                                printWriter3.println(m2.toString());
+                                break;
+                            case 6:
+                                PrintWriter printWriter4 = printWriter;
+                                Pair pair3 = (Pair) obj;
+                                StringBuilder m3 =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "preset: ");
+                                m3.append(pair3.first);
+                                m3.append(" role:");
+                                m3.append(pair3.second);
+                                m3.append(" devices:");
+                                m3.append((List) obj2);
+                                printWriter4.println(m3.toString());
+                                break;
+                            default:
+                                PrintWriter printWriter5 = printWriter;
+                                Pair pair4 = (Pair) obj;
+                                StringBuilder m4 =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                "  ", this.f$1, "preset: ");
+                                m4.append(pair4.first);
+                                m4.append(" role:");
+                                m4.append(pair4.second);
+                                m4.append(" devices:");
+                                m4.append((List) obj2);
+                                printWriter5.println(m4.toString());
+                                break;
+                        }
+                    }
+                });
         printWriter.println("\ndevices:\n");
         synchronized (audioDeviceInventory.mDeviceInventoryLock) {
             try {
@@ -1503,29 +1941,55 @@ public final class AudioDeviceBroker {
             }
         }
         printWriter.println("\n  Communication route clients:");
-        this.mCommunicationRouteClients.forEach(new Consumer() { // from class: com.android.server.audio.AudioDeviceBroker$$ExternalSyntheticLambda0
-            public final /* synthetic */ String f$1 = "  ";
+        this.mCommunicationRouteClients.forEach(
+                new Consumer() { // from class:
+                                 // com.android.server.audio.AudioDeviceBroker$$ExternalSyntheticLambda0
+                    public final /* synthetic */ String f$1 = "  ";
 
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                printWriter.println("  " + this.f$1 + ((AudioDeviceBroker.CommunicationRouteClient) obj).toString());
-            }
-        });
-        printWriter.println("\n  Computed Preferred communication device: " + preferredCommunicationDevice());
-        printWriter.println("\n  Applied Preferred communication device: " + this.mPreferredCommunicationDevice);
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        printWriter.println(
+                                "  "
+                                        + this.f$1
+                                        + ((AudioDeviceBroker.CommunicationRouteClient) obj)
+                                                .toString());
+                    }
+                });
+        printWriter.println(
+                "\n  Computed Preferred communication device: " + preferredCommunicationDevice());
+        printWriter.println(
+                "\n  Applied Preferred communication device: "
+                        + this.mPreferredCommunicationDevice);
         StringBuilder sb = new StringBuilder("  Active communication device: ");
-        sb.append((Object) (this.mActiveCommunicationDevice == null ? KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG : new AudioDeviceAttributes(this.mActiveCommunicationDevice)));
+        sb.append(
+                (Object)
+                        (this.mActiveCommunicationDevice == null
+                                ? KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG
+                                : new AudioDeviceAttributes(this.mActiveCommunicationDevice)));
         printWriter.println(sb.toString());
-        StringBuilder m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("  mCommunicationStrategyId: "), this.mCommunicationStrategyId, printWriter, "  mAccessibilityStrategyId: "), this.mAccessibilityStrategyId, printWriter, "\n  mAudioModeOwner: ");
+        StringBuilder m =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("  mCommunicationStrategyId: "),
+                                this.mCommunicationStrategyId,
+                                printWriter,
+                                "  mAccessibilityStrategyId: "),
+                        this.mAccessibilityStrategyId,
+                        printWriter,
+                        "\n  mAudioModeOwner: ");
         m.append(this.mAudioModeOwner);
         printWriter.println(m.toString());
-        BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("\n  mScoManagedByAudio: "), this.mScoManagedByAudio, printWriter);
+        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                new StringBuilder("\n  mScoManagedByAudio: "),
+                this.mScoManagedByAudio,
+                printWriter);
         BtHelper btHelper = this.mBtHelper;
         btHelper.getClass();
         printWriter.println("\n  mBluetoothHeadset: " + btHelper.mBluetoothHeadset);
         printWriter.println("  mBluetoothHeadsetDevice: " + btHelper.mBluetoothHeadsetDevice);
         BluetoothDevice bluetoothDevice = btHelper.mBluetoothHeadsetDevice;
-        if (bluetoothDevice != null && (bluetoothClass = bluetoothDevice.getBluetoothClass()) != null) {
+        if (bluetoothDevice != null
+                && (bluetoothClass = bluetoothDevice.getBluetoothClass()) != null) {
             StringBuilder sb2 = new StringBuilder("  mBluetoothHeadsetDevice.DeviceClass: ");
             int deviceClass = bluetoothClass.getDeviceClass();
             switch (deviceClass) {
@@ -1587,20 +2051,41 @@ public final class AudioDeviceBroker {
                     str = "AUDIO_VIDEO_VIDEO_GAMING_TOY";
                     break;
                 default:
-                    str = TextUtils.formatSimple("0x%04x", new Object[]{Integer.valueOf(deviceClass)});
+                    str =
+                            TextUtils.formatSimple(
+                                    "0x%04x", new Object[] {Integer.valueOf(deviceClass)});
                     break;
             }
             BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb2, str, printWriter);
         }
         StringBuilder sb3 = new StringBuilder("  mScoAudioState: ");
         int i9 = btHelper.mScoAudioState;
-        StringBuilder m2 = BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, i9 != 0 ? i9 != 1 ? i9 != 2 ? i9 != 3 ? i9 != 5 ? BinaryTransparencyService$$ExternalSyntheticOutline0.m(i9, "SCO_STATE_(", ")") : "SCO_STATE_DEACTIVATING" : "SCO_STATE_ACTIVE_INTERNAL" : "SCO_STATE_ACTIVE_EXTERNAL" : "SCO_STATE_ACTIVATE_REQ" : "SCO_STATE_INACTIVE", "  mScoAudioMode: ", sb3);
+        StringBuilder m2 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        printWriter,
+                        i9 != 0
+                                ? i9 != 1
+                                        ? i9 != 2
+                                                ? i9 != 3
+                                                        ? i9 != 5
+                                                                ? BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                                        .m(i9, "SCO_STATE_(", ")")
+                                                                : "SCO_STATE_DEACTIVATING"
+                                                        : "SCO_STATE_ACTIVE_INTERNAL"
+                                                : "SCO_STATE_ACTIVE_EXTERNAL"
+                                        : "SCO_STATE_ACTIVATE_REQ"
+                                : "SCO_STATE_INACTIVE",
+                        "  mScoAudioMode: ",
+                        sb3);
         m2.append(BtHelper.scoAudioModeToString(btHelper.mScoAudioMode));
         printWriter.println(m2.toString());
         printWriter.println("\n  mHearingAid: " + btHelper.mHearingAid);
         printWriter.println("\n  mLeAudio: " + btHelper.mLeAudio);
         printWriter.println("  mA2dp: " + btHelper.mA2dp);
-        BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("  mAvrcpAbsVolSupported: "), btHelper.mAvrcpAbsVolSupported, printWriter);
+        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                new StringBuilder("  mAvrcpAbsVolSupported: "),
+                btHelper.mAvrcpAbsVolSupported,
+                printWriter);
     }
 
     public final BluetoothA2dp getA2dp() {
@@ -1622,7 +2107,11 @@ public final class AudioDeviceBroker {
         int intValue;
         DualA2dpVolumeManager dualA2dpVolumeManager = this.mDualA2dpManager;
         synchronized (dualA2dpVolumeManager.mConnectedDevicesVolume) {
-            intValue = ((Integer) dualA2dpVolumeManager.mConnectedDevicesVolume.getOrDefault(bluetoothDevice, -1)).intValue();
+            intValue =
+                    ((Integer)
+                                    dualA2dpVolumeManager.mConnectedDevicesVolume.getOrDefault(
+                                            bluetoothDevice, -1))
+                            .intValue();
         }
         return intValue;
     }
@@ -1634,7 +2123,9 @@ public final class AudioDeviceBroker {
         BluetoothDevice activeDevice;
         AudioDeviceInventory audioDeviceInventory = this.mDeviceInventory;
         audioDeviceInventory.getClass();
-        if (AudioDeviceInfo.convertInternalDeviceToDeviceType(i) == 8 && (a2dp = audioDeviceInventory.mDeviceBroker.getA2dp()) != null && (activeDevice = a2dp.getActiveDevice()) != null) {
+        if (AudioDeviceInfo.convertInternalDeviceToDeviceType(i) == 8
+                && (a2dp = audioDeviceInventory.mDeviceBroker.getA2dp()) != null
+                && (activeDevice = a2dp.getActiveDevice()) != null) {
             return activeDevice.getAddress();
         }
         if (AudioDeviceInfo.convertInternalDeviceToDeviceType(i) == 7) {
@@ -1645,7 +2136,8 @@ public final class AudioDeviceBroker {
                     bluetoothHeadset = btHelper.mBluetoothHeadset;
                 }
             }
-            if (bluetoothHeadset != null && (connectedDevices = bluetoothHeadset.getConnectedDevices()) != null) {
+            if (bluetoothHeadset != null
+                    && (connectedDevices = bluetoothHeadset.getConnectedDevices()) != null) {
                 for (BluetoothDevice bluetoothDevice : connectedDevices) {
                     if (bluetoothHeadset.isAudioConnected(bluetoothDevice)) {
                         return bluetoothDevice.getAddress();
@@ -1654,11 +2146,17 @@ public final class AudioDeviceBroker {
             }
         }
         if (i == 32768) {
-            if (((AudioDeviceInventory.DeviceInfo) audioDeviceInventory.mConnectedDevices.get(AudioDeviceInventory.DeviceInfo.makeDeviceListKey(i, "0"))) != null) {
+            if (((AudioDeviceInventory.DeviceInfo)
+                            audioDeviceInventory.mConnectedDevices.get(
+                                    AudioDeviceInventory.DeviceInfo.makeDeviceListKey(i, "0")))
+                    != null) {
                 return "0";
             }
         }
-        AudioDeviceInventory.DeviceInfo deviceInfo = (AudioDeviceInventory.DeviceInfo) audioDeviceInventory.mConnectedDevices.get(AudioDeviceInventory.DeviceInfo.makeDeviceListKey(i, ""));
+        AudioDeviceInventory.DeviceInfo deviceInfo =
+                (AudioDeviceInventory.DeviceInfo)
+                        audioDeviceInventory.mConnectedDevices.get(
+                                AudioDeviceInventory.DeviceInfo.makeDeviceListKey(i, ""));
         return deviceInfo != null ? deviceInfo.mDeviceAddress : "";
     }
 
@@ -1674,11 +2172,15 @@ public final class AudioDeviceBroker {
                 try {
                     this.mCommunicationDeviceLock.wait(3000 - j);
                 } catch (InterruptedException unused) {
-                    Log.w("AS.AudioDeviceBroker", "Interrupted while waiting for communication device update.");
+                    Log.w(
+                            "AS.AudioDeviceBroker",
+                            "Interrupted while waiting for communication device update.");
                 }
                 j = System.currentTimeMillis() - currentTimeMillis;
                 if (j >= 3000) {
-                    Log.e("AS.AudioDeviceBroker", "Timeout waiting for communication device update.");
+                    Log.e(
+                            "AS.AudioDeviceBroker",
+                            "Timeout waiting for communication device update.");
                     break;
                 }
             }
@@ -1703,13 +2205,16 @@ public final class AudioDeviceBroker {
             return communicationDeviceOfType;
         }
         ArrayList arrayList = (ArrayList) getAvailableCommunicationDevices();
-        return !arrayList.isEmpty() ? (AudioDeviceInfo) arrayList.get(0) : communicationDeviceOfType;
+        return !arrayList.isEmpty()
+                ? (AudioDeviceInfo) arrayList.get(0)
+                : communicationDeviceOfType;
     }
 
     public final CommunicationRouteClient getCommunicationRouteClientForUid(int i) {
         Iterator it = this.mCommunicationRouteClients.iterator();
         while (it.hasNext()) {
-            CommunicationRouteClient communicationRouteClient = (CommunicationRouteClient) it.next();
+            CommunicationRouteClient communicationRouteClient =
+                    (CommunicationRouteClient) it.next();
             if (communicationRouteClient.mUid == i) {
                 return communicationRouteClient;
             }
@@ -1724,11 +2229,16 @@ public final class AudioDeviceBroker {
         }
         AudioDeviceInventory audioDeviceInventory = this.mDeviceInventory;
         audioDeviceInventory.getClass();
-        AudioDeviceInventory.DeviceInfo firstConnectedDeviceOfTypes = audioDeviceInventory.getFirstConnectedDeviceOfTypes(Sets.newHashSet(new Integer[]{134217728}));
+        AudioDeviceInventory.DeviceInfo firstConnectedDeviceOfTypes =
+                audioDeviceInventory.getFirstConnectedDeviceOfTypes(
+                        Sets.newHashSet(new Integer[] {134217728}));
         if (firstConnectedDeviceOfTypes == null) {
             return null;
         }
-        return new AudioDeviceAttributes(firstConnectedDeviceOfTypes.mDeviceType, firstConnectedDeviceOfTypes.mDeviceAddress, firstConnectedDeviceOfTypes.mDeviceName);
+        return new AudioDeviceAttributes(
+                firstConnectedDeviceOfTypes.mDeviceType,
+                firstConnectedDeviceOfTypes.mDeviceAddress,
+                firstConnectedDeviceOfTypes.mDeviceName);
     }
 
     public final Collection getImmutableDeviceInventory() {
@@ -1748,7 +2258,10 @@ public final class AudioDeviceBroker {
         if (defaultAdapter != null && btHelper.mLeAudio != null) {
             for (BluetoothDevice bluetoothDevice : defaultAdapter.getActiveDevices(22)) {
                 if (bluetoothDevice != null && btHelper.mLeAudio.getGroupId(bluetoothDevice) == i) {
-                    arrayList.add(new Pair(bluetoothDevice.getAddress(), bluetoothDevice.getIdentityAddress()));
+                    arrayList.add(
+                            new Pair(
+                                    bluetoothDevice.getAddress(),
+                                    bluetoothDevice.getIdentityAddress()));
                 }
             }
         }
@@ -1758,14 +2271,29 @@ public final class AudioDeviceBroker {
     public final int getPriorityDevice(int i) {
         int i2 = 2;
         AudioDeviceInventory audioDeviceInventory = this.mDeviceInventory;
-        int[] iArr = {32768, 128, 8, 4, 67108864, 8192, EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION, 4096, 1024, 2048, 2};
+        int[] iArr = {
+            32768,
+            128,
+            8,
+            4,
+            67108864,
+            8192,
+            EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION,
+            4096,
+            1024,
+            2048,
+            2
+        };
         synchronized (audioDeviceInventory.mDevicesLock) {
             try {
                 int i3 = 0;
                 int i4 = 0;
                 for (Map.Entry entry : audioDeviceInventory.mConnectedDevices.entrySet()) {
                     String str = (String) entry.getKey();
-                    int i5 = ((AudioDeviceInventory.DeviceInfo) audioDeviceInventory.mConnectedDevices.get(str)).mDeviceType;
+                    int i5 =
+                            ((AudioDeviceInventory.DeviceInfo)
+                                            audioDeviceInventory.mConnectedDevices.get(str))
+                                    .mDeviceType;
                     if ((Integer.MIN_VALUE & i5) == 0) {
                         i4 |= i5;
                     }
@@ -1787,10 +2315,15 @@ public final class AudioDeviceBroker {
         return i2;
     }
 
-    public final boolean handleDeviceConnection(AudioDeviceAttributes audioDeviceAttributes, boolean z, BluetoothDevice bluetoothDevice) {
+    public final boolean handleDeviceConnection(
+            AudioDeviceAttributes audioDeviceAttributes,
+            boolean z,
+            BluetoothDevice bluetoothDevice) {
         boolean handleDeviceConnection;
         synchronized (this.mDeviceStateLock) {
-            handleDeviceConnection = this.mDeviceInventory.handleDeviceConnection(audioDeviceAttributes, z, false, bluetoothDevice);
+            handleDeviceConnection =
+                    this.mDeviceInventory.handleDeviceConnection(
+                            audioDeviceAttributes, z, false, bluetoothDevice);
         }
         return handleDeviceConnection;
     }
@@ -1799,19 +2332,23 @@ public final class AudioDeviceBroker {
         synchronized (this.mDeviceStateLock) {
             AudioDeviceInventory audioDeviceInventory = this.mDeviceInventory;
             audioDeviceInventory.getClass();
-            audioDeviceInventory.mAudioSystem.setDeviceConnectionState(new AudioDeviceAttributes(-2147475456, "dummy", ""), 1, 0);
+            audioDeviceInventory.mAudioSystem.setDeviceConnectionState(
+                    new AudioDeviceAttributes(-2147475456, "dummy", ""), 1, 0);
         }
     }
 
     public final void initRoutingStrategyIds() {
-        List<AudioProductStrategy> audioProductStrategies = AudioProductStrategy.getAudioProductStrategies();
+        List<AudioProductStrategy> audioProductStrategies =
+                AudioProductStrategy.getAudioProductStrategies();
         this.mCommunicationStrategyId = -1;
         this.mAccessibilityStrategyId = -1;
         for (AudioProductStrategy audioProductStrategy : audioProductStrategies) {
-            if (this.mCommunicationStrategyId == -1 && audioProductStrategy.getAudioAttributesForLegacyStreamType(0) != null) {
+            if (this.mCommunicationStrategyId == -1
+                    && audioProductStrategy.getAudioAttributesForLegacyStreamType(0) != null) {
                 this.mCommunicationStrategyId = audioProductStrategy.getId();
             }
-            if (this.mAccessibilityStrategyId == -1 && audioProductStrategy.getAudioAttributesForLegacyStreamType(10) != null) {
+            if (this.mAccessibilityStrategyId == -1
+                    && audioProductStrategy.getAudioAttributesForLegacyStreamType(10) != null) {
                 this.mAccessibilityStrategyId = audioProductStrategy.getId();
             }
         }
@@ -1820,7 +2357,10 @@ public final class AudioDeviceBroker {
     public final boolean isDeviceActiveForCommunication(int i) {
         AudioDeviceAttributes audioDeviceAttributes;
         AudioDeviceInfo audioDeviceInfo = this.mActiveCommunicationDevice;
-        return audioDeviceInfo != null && audioDeviceInfo.getType() == i && (audioDeviceAttributes = this.mPreferredCommunicationDevice) != null && audioDeviceAttributes.getType() == i;
+        return audioDeviceInfo != null
+                && audioDeviceInfo.getType() == i
+                && (audioDeviceAttributes = this.mPreferredCommunicationDevice) != null
+                && audioDeviceAttributes.getType() == i;
     }
 
     public final boolean isDeviceConnected(AudioDeviceAttributes audioDeviceAttributes) {
@@ -1828,7 +2368,10 @@ public final class AudioDeviceBroker {
         synchronized (this.mDeviceStateLock) {
             AudioDeviceInventory audioDeviceInventory = this.mDeviceInventory;
             audioDeviceInventory.getClass();
-            String makeDeviceListKey = AudioDeviceInventory.DeviceInfo.makeDeviceListKey(audioDeviceAttributes.getInternalType(), audioDeviceAttributes.getAddress());
+            String makeDeviceListKey =
+                    AudioDeviceInventory.DeviceInfo.makeDeviceListKey(
+                            audioDeviceAttributes.getInternalType(),
+                            audioDeviceAttributes.getAddress());
             synchronized (audioDeviceInventory.mDevicesLock) {
                 z = audioDeviceInventory.mConnectedDevices.get(makeDeviceListKey) != null;
             }
@@ -1841,7 +2384,9 @@ public final class AudioDeviceBroker {
         synchronized (this.mDeviceStateLock) {
             try {
                 AudioDeviceAttributes preferredCommunicationDevice = preferredCommunicationDevice();
-                z = preferredCommunicationDevice != null && preferredCommunicationDevice.getType() == i;
+                z =
+                        preferredCommunicationDevice != null
+                                && preferredCommunicationDevice.getType() == i;
             } finally {
             }
         }
@@ -1853,7 +2398,9 @@ public final class AudioDeviceBroker {
         synchronized (this.mDeviceStateLock) {
             try {
                 AudioDeviceAttributes requestedCommunicationDevice = requestedCommunicationDevice();
-                z = requestedCommunicationDevice != null && requestedCommunicationDevice.getType() == i;
+                z =
+                        requestedCommunicationDevice != null
+                                && requestedCommunicationDevice.getType() == i;
             } finally {
             }
         }
@@ -1927,14 +2474,31 @@ public final class AudioDeviceBroker {
         }
     }
 
-    public final void onCheckCommunicationDeviceRemoval(AudioDeviceAttributes audioDeviceAttributes) {
-        Log.v("AS.AudioDeviceBroker", "onCheckCommunicationDeviceRemoval device: " + audioDeviceAttributes.toString());
+    public final void onCheckCommunicationDeviceRemoval(
+            AudioDeviceAttributes audioDeviceAttributes) {
+        Log.v(
+                "AS.AudioDeviceBroker",
+                "onCheckCommunicationDeviceRemoval device: " + audioDeviceAttributes.toString());
         Iterator it = this.mCommunicationRouteClients.iterator();
         while (it.hasNext()) {
-            CommunicationRouteClient communicationRouteClient = (CommunicationRouteClient) it.next();
+            CommunicationRouteClient communicationRouteClient =
+                    (CommunicationRouteClient) it.next();
             if (audioDeviceAttributes.equals(communicationRouteClient.mDevice)) {
-                Log.v("AS.AudioDeviceBroker", "onCheckCommunicationDeviceRemoval removing client: " + communicationRouteClient.toString());
-                sendLMsgNoDelay(42, 2, new CommunicationDeviceInfo(communicationRouteClient.mCb, communicationRouteClient.mUid, audioDeviceAttributes, false, -1, "onCheckCommunicationDeviceRemoval", communicationRouteClient.mIsPrivileged));
+                Log.v(
+                        "AS.AudioDeviceBroker",
+                        "onCheckCommunicationDeviceRemoval removing client: "
+                                + communicationRouteClient.toString());
+                sendLMsgNoDelay(
+                        42,
+                        2,
+                        new CommunicationDeviceInfo(
+                                communicationRouteClient.mCb,
+                                communicationRouteClient.mUid,
+                                audioDeviceAttributes,
+                                false,
+                                -1,
+                                "onCheckCommunicationDeviceRemoval",
+                                communicationRouteClient.mIsPrivileged));
             }
         }
     }
@@ -1944,7 +2508,8 @@ public final class AudioDeviceBroker {
         AudioDeviceInventory audioDeviceInventory = this.mDeviceInventory;
         synchronized (audioDeviceInventory.mDeviceInventoryLock) {
             try {
-                StringBuilder sb2 = new StringBuilder(audioDeviceInventory.mDeviceInventory.size() * 39);
+                StringBuilder sb2 =
+                        new StringBuilder(audioDeviceInventory.mDeviceInventory.size() * 39);
                 Iterator it = audioDeviceInventory.mDeviceInventory.values().iterator();
                 if (it.hasNext()) {
                     sb2.append(((AdiDeviceState) it.next()).toPersistableString());
@@ -1963,11 +2528,14 @@ public final class AudioDeviceBroker {
             return;
         }
         if (this.mAudioService.getSettings() == null) {
-            Log.e("AS.AudioDeviceBroker", "No settings adapter when saving AdiDeviceState: ".concat(sb));
+            Log.e(
+                    "AS.AudioDeviceBroker",
+                    "No settings adapter when saving AdiDeviceState: ".concat(sb));
             return;
         }
         try {
-            if (Settings.Secure.putStringForUser(this.mAudioService.mContentResolver, "audio_device_inventory", sb, -2)) {
+            if (Settings.Secure.putStringForUser(
+                    this.mAudioService.mContentResolver, "audio_device_inventory", sb, -2)) {
                 return;
             }
             Log.e("AS.AudioDeviceBroker", "error saving AdiDeviceState: " + sb);
@@ -1976,19 +2544,30 @@ public final class AudioDeviceBroker {
         }
     }
 
-    public final void onSetCommunicationDeviceForClient(CommunicationDeviceInfo communicationDeviceInfo) {
-        Log.v("AS.AudioDeviceBroker", "onSetCommunicationDeviceForClient: " + communicationDeviceInfo);
+    public final void onSetCommunicationDeviceForClient(
+            CommunicationDeviceInfo communicationDeviceInfo) {
+        Log.v(
+                "AS.AudioDeviceBroker",
+                "onSetCommunicationDeviceForClient: " + communicationDeviceInfo);
         if (!communicationDeviceInfo.mOn) {
-            CommunicationRouteClient communicationRouteClientForUid = getCommunicationRouteClientForUid(communicationDeviceInfo.mUid);
+            CommunicationRouteClient communicationRouteClientForUid =
+                    getCommunicationRouteClientForUid(communicationDeviceInfo.mUid);
             if (communicationRouteClientForUid == null) {
                 return;
             }
             AudioDeviceAttributes audioDeviceAttributes = communicationDeviceInfo.mDevice;
-            if (audioDeviceAttributes != null && !audioDeviceAttributes.equals(communicationRouteClientForUid.mDevice)) {
+            if (audioDeviceAttributes != null
+                    && !audioDeviceAttributes.equals(communicationRouteClientForUid.mDevice)) {
                 return;
             }
         }
-        setCommunicationRouteForClient(communicationDeviceInfo.mCb, communicationDeviceInfo.mUid, communicationDeviceInfo.mOn ? communicationDeviceInfo.mDevice : null, communicationDeviceInfo.mScoAudioMode, communicationDeviceInfo.mIsPrivileged, communicationDeviceInfo.mEventSource);
+        setCommunicationRouteForClient(
+                communicationDeviceInfo.mCb,
+                communicationDeviceInfo.mUid,
+                communicationDeviceInfo.mOn ? communicationDeviceInfo.mDevice : null,
+                communicationDeviceInfo.mScoAudioMode,
+                communicationDeviceInfo.mIsPrivileged,
+                communicationDeviceInfo.mEventSource);
     }
 
     public final void onSetForceUse(int i, int i2, String str, boolean z) {
@@ -1996,17 +2575,41 @@ public final class AudioDeviceBroker {
             sendIILMsg(z ? 36 : 13, 1, 0, 0, null, 0);
         }
         AudioService.sForceUseLogger.enqueue(new AudioServiceEvents$ForceUseEvent(i, i2, str));
-        new MediaMetrics.Item("audio.forceUse." + AudioSystem.forceUseUsageToString(i)).set(MediaMetrics.Property.EVENT, "onSetForceUse").set(MediaMetrics.Property.FORCE_USE_DUE_TO, str).set(MediaMetrics.Property.FORCE_USE_MODE, AudioSystem.forceUseConfigToString(i2)).record();
-        Log.v("AS.AudioDeviceBroker", "onSetForceUse(useCase<" + i + ">, config<" + i2 + ">, fromA2dp<" + z + ">, eventSource<" + str + ">)");
+        new MediaMetrics.Item("audio.forceUse." + AudioSystem.forceUseUsageToString(i))
+                .set(MediaMetrics.Property.EVENT, "onSetForceUse")
+                .set(MediaMetrics.Property.FORCE_USE_DUE_TO, str)
+                .set(MediaMetrics.Property.FORCE_USE_MODE, AudioSystem.forceUseConfigToString(i2))
+                .record();
+        Log.v(
+                "AS.AudioDeviceBroker",
+                "onSetForceUse(useCase<"
+                        + i
+                        + ">, config<"
+                        + i2
+                        + ">, fromA2dp<"
+                        + z
+                        + ">, eventSource<"
+                        + str
+                        + ">)");
         this.mAudioSystem.setForceUse(i, i2);
     }
 
     public final void postApplyVolumeOnDevice(int i, int i2, String str) {
-        AudioService.sendMsg(this.mAudioService.mAudioHandler, 26, 2, 0, 0, new AudioService.DeviceVolumeUpdate(i, i2, str), 0);
+        AudioService.sendMsg(
+                this.mAudioService.mAudioHandler,
+                26,
+                2,
+                0,
+                0,
+                new AudioService.DeviceVolumeUpdate(i, i2, str),
+                0);
     }
 
-    public final void postCheckCommunicationDeviceRemoval(AudioDeviceAttributes audioDeviceAttributes) {
-        int convertInternalDeviceToDeviceType = AudioDeviceInfo.convertInternalDeviceToDeviceType(audioDeviceAttributes.getInternalType());
+    public final void postCheckCommunicationDeviceRemoval(
+            AudioDeviceAttributes audioDeviceAttributes) {
+        int convertInternalDeviceToDeviceType =
+                AudioDeviceInfo.convertInternalDeviceToDeviceType(
+                        audioDeviceAttributes.getInternalType());
         int[] iArr = VALID_COMMUNICATION_DEVICE_TYPES;
         for (int i = 0; i < 13; i++) {
             if (convertInternalDeviceToDeviceType == iArr[i]) {
@@ -2058,7 +2661,9 @@ public final class AudioDeviceBroker {
             if (bluetoothDevice == null) {
                 audioDeviceAttributes = null;
             } else {
-                audioDeviceAttributes = (AudioDeviceAttributes) ((HashMap) btHelper.mResolvedScoAudioDevices).get(bluetoothDevice);
+                audioDeviceAttributes =
+                        (AudioDeviceAttributes)
+                                ((HashMap) btHelper.mResolvedScoAudioDevices).get(bluetoothDevice);
                 if (audioDeviceAttributes == null) {
                     audioDeviceAttributes = BtHelper.btHeadsetDeviceToAudioDevice(bluetoothDevice);
                 }
@@ -2077,32 +2682,63 @@ public final class AudioDeviceBroker {
     public final void queueOnBluetoothActiveDeviceChanged(BtDeviceChangedData btDeviceChangedData) {
         BluetoothDevice bluetoothDevice;
         BluetoothDevice bluetoothDevice2;
-        if (btDeviceChangedData.mInfo.getProfile() == 2 && (bluetoothDevice2 = btDeviceChangedData.mPreviousDevice) != null && bluetoothDevice2.equals(btDeviceChangedData.mNewDevice)) {
-            new MediaMetrics.Item("audio.device.queueOnBluetoothActiveDeviceChanged_update").set(MediaMetrics.Property.NAME, TextUtils.emptyIfNull(btDeviceChangedData.mNewDevice.getName())).set(MediaMetrics.Property.STATUS, Integer.valueOf(btDeviceChangedData.mInfo.getProfile())).record();
+        if (btDeviceChangedData.mInfo.getProfile() == 2
+                && (bluetoothDevice2 = btDeviceChangedData.mPreviousDevice) != null
+                && bluetoothDevice2.equals(btDeviceChangedData.mNewDevice)) {
+            new MediaMetrics.Item("audio.device.queueOnBluetoothActiveDeviceChanged_update")
+                    .set(
+                            MediaMetrics.Property.NAME,
+                            TextUtils.emptyIfNull(btDeviceChangedData.mNewDevice.getName()))
+                    .set(
+                            MediaMetrics.Property.STATUS,
+                            Integer.valueOf(btDeviceChangedData.mInfo.getProfile()))
+                    .record();
             synchronized (this.mDeviceStateLock) {
-                Log.i("AS.AudioDeviceBroker", "queueOnBluetoothActiveDeviceChanged A2DP config change");
-                sendLMsgNoDelay(11, 2, createBtDeviceInfo(btDeviceChangedData, btDeviceChangedData.mNewDevice, 2));
+                Log.i(
+                        "AS.AudioDeviceBroker",
+                        "queueOnBluetoothActiveDeviceChanged A2DP config change");
+                sendLMsgNoDelay(
+                        11,
+                        2,
+                        createBtDeviceInfo(btDeviceChangedData, btDeviceChangedData.mNewDevice, 2));
             }
             AudioService.mBtDeviceChangedData = btDeviceChangedData;
             return;
         }
         synchronized (this.mDeviceStateLock) {
             try {
-                if (btDeviceChangedData.mInfo.getProfile() == 22 && (bluetoothDevice = btDeviceChangedData.mPreviousDevice) != null && bluetoothDevice.equals(btDeviceChangedData.mNewDevice)) {
-                    btMediaMetricRecord(btDeviceChangedData.mNewDevice, "connected", btDeviceChangedData);
-                    Log.i("AS.AudioDeviceBroker", "queueOnBluetoothActiveDeviceChanged BLE STATE_CONNECTED_IMPLICIT");
-                    sendLMsgNoDelay(45, 2, createBtDeviceInfo(btDeviceChangedData, btDeviceChangedData.mNewDevice, 99));
+                if (btDeviceChangedData.mInfo.getProfile() == 22
+                        && (bluetoothDevice = btDeviceChangedData.mPreviousDevice) != null
+                        && bluetoothDevice.equals(btDeviceChangedData.mNewDevice)) {
+                    btMediaMetricRecord(
+                            btDeviceChangedData.mNewDevice, "connected", btDeviceChangedData);
+                    Log.i(
+                            "AS.AudioDeviceBroker",
+                            "queueOnBluetoothActiveDeviceChanged BLE STATE_CONNECTED_IMPLICIT");
+                    sendLMsgNoDelay(
+                            45,
+                            2,
+                            createBtDeviceInfo(
+                                    btDeviceChangedData, btDeviceChangedData.mNewDevice, 99));
                     return;
                 }
                 BluetoothDevice bluetoothDevice3 = btDeviceChangedData.mPreviousDevice;
                 if (bluetoothDevice3 != null) {
                     btMediaMetricRecord(bluetoothDevice3, "disconnected", btDeviceChangedData);
-                    sendLMsgNoDelay(45, 2, createBtDeviceInfo(btDeviceChangedData, btDeviceChangedData.mPreviousDevice, 0));
+                    sendLMsgNoDelay(
+                            45,
+                            2,
+                            createBtDeviceInfo(
+                                    btDeviceChangedData, btDeviceChangedData.mPreviousDevice, 0));
                 }
                 BluetoothDevice bluetoothDevice4 = btDeviceChangedData.mNewDevice;
                 if (bluetoothDevice4 != null) {
                     btMediaMetricRecord(bluetoothDevice4, "connected", btDeviceChangedData);
-                    sendLMsgNoDelay(45, 2, createBtDeviceInfo(btDeviceChangedData, btDeviceChangedData.mNewDevice, 2));
+                    sendLMsgNoDelay(
+                            45,
+                            2,
+                            createBtDeviceInfo(
+                                    btDeviceChangedData, btDeviceChangedData.mNewDevice, 2));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -2117,12 +2753,22 @@ public final class AudioDeviceBroker {
         if (settings != null && contentResolver != null) {
             return Settings.Secure.getStringForUser(contentResolver, "audio_device_inventory", -2);
         }
-        Log.e("AS.AudioDeviceBroker", "No settings adapter or content resolver to read device settings", new Exception("readDeviceSettings_NPE"));
+        Log.e(
+                "AS.AudioDeviceBroker",
+                "No settings adapter or content resolver to read device settings",
+                new Exception("readDeviceSettings_NPE"));
         return "";
     }
 
     public final void reapplyAudioHalBluetoothState() {
-        Log.v("AS.AudioDeviceBroker", "reapplyAudioHalBluetoothState() mBluetoothScoOnApplied: " + this.mBluetoothScoOnApplied + ", mBluetoothA2dpSuspendedApplied: " + this.mBluetoothA2dpSuspendedApplied + ", mBluetoothLeSuspendedApplied: " + this.mBluetoothLeSuspendedApplied);
+        Log.v(
+                "AS.AudioDeviceBroker",
+                "reapplyAudioHalBluetoothState() mBluetoothScoOnApplied: "
+                        + this.mBluetoothScoOnApplied
+                        + ", mBluetoothA2dpSuspendedApplied: "
+                        + this.mBluetoothA2dpSuspendedApplied
+                        + ", mBluetoothLeSuspendedApplied: "
+                        + this.mBluetoothLeSuspendedApplied);
         if (this.mBluetoothScoOnApplied) {
             AudioSystem.setParameters("A2dpSuspended=true");
             AudioSystem.setParameters("LeAudioSuspended=true");
@@ -2145,10 +2791,12 @@ public final class AudioDeviceBroker {
     public final CommunicationRouteClient removeCommunicationRouteClient(IBinder iBinder) {
         Iterator it = this.mCommunicationRouteClients.iterator();
         while (it.hasNext()) {
-            CommunicationRouteClient communicationRouteClient = (CommunicationRouteClient) it.next();
+            CommunicationRouteClient communicationRouteClient =
+                    (CommunicationRouteClient) it.next();
             if (communicationRouteClient.mCb == iBinder) {
                 communicationRouteClient.unregisterDeathRecipient();
-                CommunicationRouteClient communicationRouteClientForUid = getCommunicationRouteClientForUid(communicationRouteClient.mUid);
+                CommunicationRouteClient communicationRouteClientForUid =
+                        getCommunicationRouteClientForUid(communicationRouteClient.mUid);
                 if (communicationRouteClientForUid != null) {
                     this.mBrokerHandler.removeEqualMessages(56, communicationRouteClientForUid);
                 }
@@ -2161,8 +2809,14 @@ public final class AudioDeviceBroker {
 
     public final AudioDeviceAttributes requestedCommunicationDevice() {
         CommunicationRouteClient communicationRouteClient = topCommunicationRouteClient();
-        AudioDeviceAttributes audioDeviceAttributes = communicationRouteClient != null ? communicationRouteClient.mDevice : null;
-        Log.v("AS.AudioDeviceBroker", "requestedCommunicationDevice: " + audioDeviceAttributes + " mAudioModeOwner: " + this.mAudioModeOwner.toString());
+        AudioDeviceAttributes audioDeviceAttributes =
+                communicationRouteClient != null ? communicationRouteClient.mDevice : null;
+        Log.v(
+                "AS.AudioDeviceBroker",
+                "requestedCommunicationDevice: "
+                        + audioDeviceAttributes
+                        + " mAudioModeOwner: "
+                        + this.mAudioModeOwner.toString());
         return audioDeviceAttributes;
     }
 
@@ -2205,7 +2859,8 @@ public final class AudioDeviceBroker {
                 sLastDeviceConnectMsgTime = uptimeMillis;
             }
             BrokerHandler brokerHandler = this.mBrokerHandler;
-            brokerHandler.sendMessageAtTime(brokerHandler.obtainMessage(i, i3, i4, obj), uptimeMillis);
+            brokerHandler.sendMessageAtTime(
+                    brokerHandler.obtainMessage(i, i3, i4, obj), uptimeMillis);
         }
     }
 
@@ -2224,7 +2879,18 @@ public final class AudioDeviceBroker {
     public final void setA2dpSuspended(String str, boolean z, boolean z2) {
         synchronized (this.mBluetoothAudioStateLock) {
             try {
-                Log.v("AS.AudioDeviceBroker", "setA2dpSuspended source: " + str + ", enable: " + z + ", internal: " + z2 + ", mBluetoothA2dpSuspendedInt: " + this.mBluetoothA2dpSuspendedInt + ", mBluetoothA2dpSuspendedExt: " + this.mBluetoothA2dpSuspendedExt);
+                Log.v(
+                        "AS.AudioDeviceBroker",
+                        "setA2dpSuspended source: "
+                                + str
+                                + ", enable: "
+                                + z
+                                + ", internal: "
+                                + z2
+                                + ", mBluetoothA2dpSuspendedInt: "
+                                + this.mBluetoothA2dpSuspendedInt
+                                + ", mBluetoothA2dpSuspendedExt: "
+                                + this.mBluetoothA2dpSuspendedExt);
                 if (z2) {
                     this.mBluetoothA2dpSuspendedInt = z;
                 } else {
@@ -2241,7 +2907,8 @@ public final class AudioDeviceBroker {
         synchronized (this.mDeviceStateLock) {
             try {
                 if (this.mDualA2dpManager.setActiveDevice(bluetoothDevice)) {
-                    postSetVolumeIndexForA2dpDevice("setActiveBluetoothDevice", !updateAvrcpAbsoluteVolumeSupported());
+                    postSetVolumeIndexForA2dpDevice(
+                            "setActiveBluetoothDevice", !updateAvrcpAbsoluteVolumeSupported());
                 }
             } catch (Throwable th) {
                 throw th;
@@ -2250,7 +2917,9 @@ public final class AudioDeviceBroker {
     }
 
     public final void setBluetoothA2dpOnInt(String str, boolean z, boolean z2) {
-        StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m("setBluetoothA2dpOn(", ") from u/pid:", z);
+        StringBuilder m =
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        "setBluetoothA2dpOn(", ") from u/pid:", z);
         m.append(Binder.getCallingUid());
         m.append("/");
         m.append(Binder.getCallingPid());
@@ -2272,9 +2941,17 @@ public final class AudioDeviceBroker {
         }
     }
 
-    public final boolean setCommunicationDevice(IBinder iBinder, int i, AudioDeviceInfo audioDeviceInfo, boolean z, String str) {
-        AudioDeviceInfo communicationDeviceOfType = (Rune.SEC_AUDIO_USB_HEADSET_CALL_SUPPORT || audioDeviceInfo == null || audioDeviceInfo.getType() != 22) ? audioDeviceInfo : getCommunicationDeviceOfType(1);
-        Log.v("AS.AudioDeviceBroker", "setCommunicationDevice, device: " + communicationDeviceOfType + ", uid: " + i);
+    public final boolean setCommunicationDevice(
+            IBinder iBinder, int i, AudioDeviceInfo audioDeviceInfo, boolean z, String str) {
+        AudioDeviceInfo communicationDeviceOfType =
+                (Rune.SEC_AUDIO_USB_HEADSET_CALL_SUPPORT
+                                || audioDeviceInfo == null
+                                || audioDeviceInfo.getType() != 22)
+                        ? audioDeviceInfo
+                        : getCommunicationDeviceOfType(1);
+        Log.v(
+                "AS.AudioDeviceBroker",
+                "setCommunicationDevice, device: " + communicationDeviceOfType + ", uid: " + i);
         synchronized (this.mDeviceStateLock) {
             if (communicationDeviceOfType == null) {
                 try {
@@ -2287,7 +2964,19 @@ public final class AudioDeviceBroker {
             synchronized (this.mCommunicationDeviceLock) {
                 try {
                     this.mCommunicationDeviceUpdateCount++;
-                    sendLMsgNoDelay(42, 2, new CommunicationDeviceInfo(iBinder, i, communicationDeviceOfType != null ? new AudioDeviceAttributes(communicationDeviceOfType) : null, communicationDeviceOfType != null, -1, str, z));
+                    sendLMsgNoDelay(
+                            42,
+                            2,
+                            new CommunicationDeviceInfo(
+                                    iBinder,
+                                    i,
+                                    communicationDeviceOfType != null
+                                            ? new AudioDeviceAttributes(communicationDeviceOfType)
+                                            : null,
+                                    communicationDeviceOfType != null,
+                                    -1,
+                                    str,
+                                    z));
                 } finally {
                 }
             }
@@ -2295,18 +2984,39 @@ public final class AudioDeviceBroker {
         }
     }
 
-    public final void setCommunicationRouteForClient(IBinder iBinder, int i, AudioDeviceAttributes audioDeviceAttributes, int i2, boolean z, String str) {
+    public final void setCommunicationRouteForClient(
+            IBinder iBinder,
+            int i,
+            AudioDeviceAttributes audioDeviceAttributes,
+            int i2,
+            boolean z,
+            String str) {
         boolean z2;
         AudioDeviceAttributes audioDeviceAttributes2;
         CommunicationRouteClient removeCommunicationRouteClient;
         boolean requestScoState;
-        Log.v("AS.AudioDeviceBroker", "setCommunicationRouteForClient: device: " + audioDeviceAttributes + ", eventSource: " + str);
+        Log.v(
+                "AS.AudioDeviceBroker",
+                "setCommunicationRouteForClient: device: "
+                        + audioDeviceAttributes
+                        + ", eventSource: "
+                        + str);
         EventLogger eventLogger = AudioService.sDeviceLogger;
-        EventLogger.StringEvent stringEvent = new EventLogger.StringEvent("setCommunicationRouteForClient for uid: " + i + " device: " + audioDeviceAttributes + " isPrivileged: " + z + " from API: " + str);
+        EventLogger.StringEvent stringEvent =
+                new EventLogger.StringEvent(
+                        "setCommunicationRouteForClient for uid: "
+                                + i
+                                + " device: "
+                                + audioDeviceAttributes
+                                + " isPrivileged: "
+                                + z
+                                + " from API: "
+                                + str);
         stringEvent.printLog(0, "AS.AudioDeviceBroker");
         eventLogger.enqueue(stringEvent);
         boolean isDeviceRequestedForCommunication = isDeviceRequestedForCommunication(7);
-        CommunicationRouteClient communicationRouteClientForUid = getCommunicationRouteClientForUid(i);
+        CommunicationRouteClient communicationRouteClientForUid =
+                getCommunicationRouteClientForUid(i);
         if (communicationRouteClientForUid != null) {
             audioDeviceAttributes2 = communicationRouteClientForUid.mDevice;
             z2 = communicationRouteClientForUid.mIsPrivileged;
@@ -2317,11 +3027,19 @@ public final class AudioDeviceBroker {
         if (audioDeviceAttributes != null) {
             if (audioDeviceAttributes.getType() == 7 && this.mBrokerHandler.hasMessages(2764)) {
                 this.mBrokerHandler.removeMessages(2764);
-                Log.d("AS.AudioDeviceBroker", "MSG_CHECK_ABNORMAL_SCO removeMessages when creating Sco client.");
+                Log.d(
+                        "AS.AudioDeviceBroker",
+                        "MSG_CHECK_ABNORMAL_SCO removeMessages when creating Sco client.");
             }
-            removeCommunicationRouteClient = addCommunicationRouteClient(iBinder, i, audioDeviceAttributes, z);
+            removeCommunicationRouteClient =
+                    addCommunicationRouteClient(iBinder, i, audioDeviceAttributes, z);
             if (removeCommunicationRouteClient == null) {
-                Log.w("AS.AudioDeviceBroker", "setCommunicationRouteForClient: could not add client for uid: " + i + " and device: " + audioDeviceAttributes);
+                Log.w(
+                        "AS.AudioDeviceBroker",
+                        "setCommunicationRouteForClient: could not add client for uid: "
+                                + i
+                                + " and device: "
+                                + audioDeviceAttributes);
             }
         } else {
             removeCommunicationRouteClient = removeCommunicationRouteClient(iBinder);
@@ -2329,7 +3047,9 @@ public final class AudioDeviceBroker {
         if (removeCommunicationRouteClient == null) {
             return;
         }
-        if (audioDeviceAttributes != null && audioDeviceAttributes.getType() == 7 && str.contains("receiveBtEvent")) {
+        if (audioDeviceAttributes != null
+                && audioDeviceAttributes.getType() == 7
+                && str.contains("receiveBtEvent")) {
             int i3 = this.mRequestScoUid;
             if (i3 == 0 || i3 != i) {
                 this.mRequestScoUid = i;
@@ -2344,14 +3064,18 @@ public final class AudioDeviceBroker {
         }
         if (!this.mScoManagedByAudio) {
             boolean isDeviceRequestedForCommunication2 = isDeviceRequestedForCommunication(7);
-            if (isDeviceRequestedForCommunication2 && (!isDeviceRequestedForCommunication || !isDeviceActiveForCommunication(7))) {
+            if (isDeviceRequestedForCommunication2
+                    && (!isDeviceRequestedForCommunication || !isDeviceActiveForCommunication(7))) {
                 BtHelper btHelper = this.mBtHelper;
                 synchronized (btHelper) {
                     eventLogger.enqueue(new EventLogger.StringEvent(str));
                     requestScoState = btHelper.requestScoState(12, i2);
                 }
                 if (!requestScoState) {
-                    NetworkScoreService$$ExternalSyntheticOutline0.m(i, "setCommunicationRouteForClient: failure to start BT SCO for uid: ", "AS.AudioDeviceBroker");
+                    NetworkScoreService$$ExternalSyntheticOutline0.m(
+                            i,
+                            "setCommunicationRouteForClient: failure to start BT SCO for uid: ",
+                            "AS.AudioDeviceBroker");
                     if (audioDeviceAttributes2 != null) {
                         addCommunicationRouteClient(iBinder, i, audioDeviceAttributes2, z2);
                     } else {
@@ -2363,11 +3087,18 @@ public final class AudioDeviceBroker {
                 this.mBtHelper.stopBluetoothSco(str);
             }
         }
-        if ((isDeviceRequestedForCommunication(26) || isDeviceRequestedForCommunication(27)) && audioDeviceAttributes != null) {
-            int bluetoothContextualVolumeStream = this.mAudioService.getBluetoothContextualVolumeStream();
-            int vssVolumeForDevice = this.mAudioService.getVssVolumeForDevice(bluetoothContextualVolumeStream, audioDeviceAttributes.getInternalType());
+        if ((isDeviceRequestedForCommunication(26) || isDeviceRequestedForCommunication(27))
+                && audioDeviceAttributes != null) {
+            int bluetoothContextualVolumeStream =
+                    this.mAudioService.getBluetoothContextualVolumeStream();
+            int vssVolumeForDevice =
+                    this.mAudioService.getVssVolumeForDevice(
+                            bluetoothContextualVolumeStream,
+                            audioDeviceAttributes.getInternalType());
             int i4 = this.mAudioService.mStreamStates[bluetoothContextualVolumeStream].mIndexMax;
-            Log.v("AS.AudioDeviceBroker", "setCommunicationRouteForClient restoring LE Audio device volume lvl.");
+            Log.v(
+                    "AS.AudioDeviceBroker",
+                    "setCommunicationRouteForClient restoring LE Audio device volume lvl.");
             postSetLeAudioVolumeIndex(vssVolumeForDevice, i4, bluetoothContextualVolumeStream);
         }
         updateCommunicationRoute(str);
@@ -2403,8 +3134,7 @@ public final class AudioDeviceBroker {
                             }
                             BluetoothDevice next = it2.next();
                             if (next.equals(activeDevice)) {
-                                if (next.semGetAudioType() == 2) {
-                                }
+                                if (next.semGetAudioType() == 2) {}
                             }
                         }
                         z2 = false;
@@ -2417,7 +3147,8 @@ public final class AudioDeviceBroker {
         postSetVolumeIndexForA2dpDevice("setDualA2dpMode", false);
     }
 
-    public final void setForceCommunicationClientStateAndDelayedCheck(CommunicationRouteClient communicationRouteClient, boolean z, boolean z2) {
+    public final void setForceCommunicationClientStateAndDelayedCheck(
+            CommunicationRouteClient communicationRouteClient, boolean z, boolean z2) {
         if (z) {
             communicationRouteClient.mPlaybackActive = true;
         }
@@ -2426,12 +3157,16 @@ public final class AudioDeviceBroker {
         }
         int i = communicationRouteClient.mUid;
         boolean isActive = communicationRouteClient.isActive();
-        CommunicationRouteClient communicationRouteClientForUid = getCommunicationRouteClientForUid(i);
+        CommunicationRouteClient communicationRouteClientForUid =
+                getCommunicationRouteClientForUid(i);
         if (communicationRouteClientForUid != null) {
             this.mBrokerHandler.removeEqualMessages(56, communicationRouteClientForUid);
             long uptimeMillis = SystemClock.uptimeMillis() + 6000;
             BrokerHandler brokerHandler = this.mBrokerHandler;
-            brokerHandler.sendMessageAtTime(brokerHandler.obtainMessage(56, i, isActive ? 1 : 0, communicationRouteClientForUid), uptimeMillis);
+            brokerHandler.sendMessageAtTime(
+                    brokerHandler.obtainMessage(
+                            56, i, isActive ? 1 : 0, communicationRouteClientForUid),
+                    uptimeMillis);
         }
     }
 
@@ -2442,7 +3177,18 @@ public final class AudioDeviceBroker {
     public final void setLeAudioSuspended(String str, boolean z, boolean z2) {
         synchronized (this.mBluetoothAudioStateLock) {
             try {
-                Log.v("AS.AudioDeviceBroker", "setLeAudioSuspended source: " + str + ", enable: " + z + ", internal: " + z2 + ", mBluetoothLeSuspendedInt: " + this.mBluetoothA2dpSuspendedInt + ", mBluetoothLeSuspendedExt: " + this.mBluetoothA2dpSuspendedExt);
+                Log.v(
+                        "AS.AudioDeviceBroker",
+                        "setLeAudioSuspended source: "
+                                + str
+                                + ", enable: "
+                                + z
+                                + ", internal: "
+                                + z2
+                                + ", mBluetoothLeSuspendedInt: "
+                                + this.mBluetoothA2dpSuspendedInt
+                                + ", mBluetoothLeSuspendedExt: "
+                                + this.mBluetoothA2dpSuspendedExt);
                 if (z2) {
                     this.mBluetoothLeSuspendedInt = z;
                 } else {
@@ -2457,18 +3203,25 @@ public final class AudioDeviceBroker {
 
     public final void setSpeakerphoneOn(IBinder iBinder, int i, boolean z, boolean z2, String str) {
         Log.v("AS.AudioDeviceBroker", "setSpeakerphoneOn, on: " + z + " uid: " + i);
-        sendLMsgNoDelay(42, 2, new CommunicationDeviceInfo(iBinder, i, new AudioDeviceAttributes(2, ""), z, -1, str, z2));
+        sendLMsgNoDelay(
+                42,
+                2,
+                new CommunicationDeviceInfo(
+                        iBinder, i, new AudioDeviceAttributes(2, ""), z, -1, str, z2));
     }
 
     public final CommunicationRouteClient topCommunicationRouteClient() {
         Iterator it = this.mCommunicationRouteClients.iterator();
         while (it.hasNext()) {
-            CommunicationRouteClient communicationRouteClient = (CommunicationRouteClient) it.next();
+            CommunicationRouteClient communicationRouteClient =
+                    (CommunicationRouteClient) it.next();
             if (communicationRouteClient.mUid == this.mAudioModeOwner.mUid) {
                 return communicationRouteClient;
             }
         }
-        if (!this.mCommunicationRouteClients.isEmpty() && this.mAudioModeOwner.mPid == 0 && ((CommunicationRouteClient) this.mCommunicationRouteClients.get(0)).isActive()) {
+        if (!this.mCommunicationRouteClients.isEmpty()
+                && this.mAudioModeOwner.mPid == 0
+                && ((CommunicationRouteClient) this.mCommunicationRouteClients.get(0)).isActive()) {
             return (CommunicationRouteClient) this.mCommunicationRouteClients.get(0);
         }
         return null;
@@ -2477,23 +3230,37 @@ public final class AudioDeviceBroker {
     public final void updateActiveCommunicationDevice() {
         AudioDeviceAttributes preferredCommunicationDevice = preferredCommunicationDevice();
         if (preferredCommunicationDevice == null) {
-            ArrayList devicesForAttributes = this.mAudioSystem.getDevicesForAttributes(AudioProductStrategy.getAudioAttributesForStrategyWithLegacyStreamType(0), false);
+            ArrayList devicesForAttributes =
+                    this.mAudioSystem.getDevicesForAttributes(
+                            AudioProductStrategy.getAudioAttributesForStrategyWithLegacyStreamType(
+                                    0),
+                            false);
             if (devicesForAttributes.isEmpty()) {
                 if (this.mAudioService.mPlatformType == 1) {
-                    Log.w("AS.AudioDeviceBroker", "updateActiveCommunicationDevice(): no device for phone strategy");
+                    Log.w(
+                            "AS.AudioDeviceBroker",
+                            "updateActiveCommunicationDevice(): no device for phone strategy");
                 }
                 this.mActiveCommunicationDevice = null;
                 return;
             }
             preferredCommunicationDevice = (AudioDeviceAttributes) devicesForAttributes.get(0);
         }
-        this.mActiveCommunicationDevice = AudioManager.getDeviceInfoFromTypeAndAddress(preferredCommunicationDevice.getType(), preferredCommunicationDevice.getAddress());
+        this.mActiveCommunicationDevice =
+                AudioManager.getDeviceInfoFromTypeAndAddress(
+                        preferredCommunicationDevice.getType(),
+                        preferredCommunicationDevice.getAddress());
     }
 
     public final void updateAudioHalBluetoothState() {
         boolean z = true;
         if (this.mBluetoothScoOn != this.mBluetoothScoOnApplied) {
-            Log.v("AS.AudioDeviceBroker", "updateAudioHalBluetoothState() mBluetoothScoOn: " + this.mBluetoothScoOn + ", mBluetoothScoOnApplied: " + this.mBluetoothScoOnApplied);
+            Log.v(
+                    "AS.AudioDeviceBroker",
+                    "updateAudioHalBluetoothState() mBluetoothScoOn: "
+                            + this.mBluetoothScoOn
+                            + ", mBluetoothScoOnApplied: "
+                            + this.mBluetoothScoOnApplied);
             if (this.mBluetoothScoOn) {
                 if (!this.mBluetoothA2dpSuspendedApplied) {
                     AudioSystem.setParameters("A2dpSuspended=true");
@@ -2516,8 +3283,16 @@ public final class AudioDeviceBroker {
         if (this.mBluetoothScoOnApplied) {
             return;
         }
-        if ((this.mBluetoothA2dpSuspendedExt || this.mBluetoothA2dpSuspendedInt) != this.mBluetoothA2dpSuspendedApplied) {
-            Log.v("AS.AudioDeviceBroker", "updateAudioHalBluetoothState() mBluetoothA2dpSuspendedExt: " + this.mBluetoothA2dpSuspendedExt + ", mBluetoothA2dpSuspendedInt: " + this.mBluetoothA2dpSuspendedInt + ", mBluetoothA2dpSuspendedApplied: " + this.mBluetoothA2dpSuspendedApplied);
+        if ((this.mBluetoothA2dpSuspendedExt || this.mBluetoothA2dpSuspendedInt)
+                != this.mBluetoothA2dpSuspendedApplied) {
+            Log.v(
+                    "AS.AudioDeviceBroker",
+                    "updateAudioHalBluetoothState() mBluetoothA2dpSuspendedExt: "
+                            + this.mBluetoothA2dpSuspendedExt
+                            + ", mBluetoothA2dpSuspendedInt: "
+                            + this.mBluetoothA2dpSuspendedInt
+                            + ", mBluetoothA2dpSuspendedApplied: "
+                            + this.mBluetoothA2dpSuspendedApplied);
             boolean z2 = this.mBluetoothA2dpSuspendedExt || this.mBluetoothA2dpSuspendedInt;
             this.mBluetoothA2dpSuspendedApplied = z2;
             if (z2) {
@@ -2526,8 +3301,16 @@ public final class AudioDeviceBroker {
                 AudioSystem.setParameters("A2dpSuspended=false");
             }
         }
-        if ((this.mBluetoothLeSuspendedExt || this.mBluetoothLeSuspendedInt) != this.mBluetoothLeSuspendedApplied) {
-            Log.v("AS.AudioDeviceBroker", "updateAudioHalBluetoothState() mBluetoothLeSuspendedExt: " + this.mBluetoothLeSuspendedExt + ", mBluetoothLeSuspendedInt: " + this.mBluetoothLeSuspendedInt + ", mBluetoothLeSuspendedApplied: " + this.mBluetoothLeSuspendedApplied);
+        if ((this.mBluetoothLeSuspendedExt || this.mBluetoothLeSuspendedInt)
+                != this.mBluetoothLeSuspendedApplied) {
+            Log.v(
+                    "AS.AudioDeviceBroker",
+                    "updateAudioHalBluetoothState() mBluetoothLeSuspendedExt: "
+                            + this.mBluetoothLeSuspendedExt
+                            + ", mBluetoothLeSuspendedInt: "
+                            + this.mBluetoothLeSuspendedInt
+                            + ", mBluetoothLeSuspendedApplied: "
+                            + this.mBluetoothLeSuspendedApplied);
             if (!this.mBluetoothLeSuspendedExt && !this.mBluetoothLeSuspendedInt) {
                 z = false;
             }
@@ -2541,19 +3324,27 @@ public final class AudioDeviceBroker {
     }
 
     public final boolean updateAvrcpAbsoluteVolumeSupported() {
-        boolean isAvrcpAbsoluteVolumeSupportedForActiveDevice = this.mDualA2dpManager.isAvrcpAbsoluteVolumeSupportedForActiveDevice();
-        this.mBtHelper.setAvrcpAbsoluteVolumeSupported(isAvrcpAbsoluteVolumeSupportedForActiveDevice);
+        boolean isAvrcpAbsoluteVolumeSupportedForActiveDevice =
+                this.mDualA2dpManager.isAvrcpAbsoluteVolumeSupportedForActiveDevice();
+        this.mBtHelper.setAvrcpAbsoluteVolumeSupported(
+                isAvrcpAbsoluteVolumeSupportedForActiveDevice);
         AudioService audioService = this.mAudioService;
         if (audioService.mAvrcpAbsVolSupported != isAvrcpAbsoluteVolumeSupportedForActiveDevice) {
-            AudioService.sVolumeLogger.enqueue(new EventLogger.StringEvent("a2dp AVC : " + isAvrcpAbsoluteVolumeSupportedForActiveDevice));
+            AudioService.sVolumeLogger.enqueue(
+                    new EventLogger.StringEvent(
+                            "a2dp AVC : " + isAvrcpAbsoluteVolumeSupportedForActiveDevice));
         }
         audioService.mAvrcpAbsVolSupported = isAvrcpAbsoluteVolumeSupportedForActiveDevice;
         return isAvrcpAbsoluteVolumeSupportedForActiveDevice;
     }
 
-    public final void updateBluetoothA2dpDeviceConfigChange(BtDeviceChangedData btDeviceChangedData) {
+    public final void updateBluetoothA2dpDeviceConfigChange(
+            BtDeviceChangedData btDeviceChangedData) {
         synchronized (this.mDeviceStateLock) {
-            sendLMsgNoDelay(11, 2, createBtDeviceInfo(btDeviceChangedData, btDeviceChangedData.mNewDevice, 2));
+            sendLMsgNoDelay(
+                    11,
+                    2,
+                    createBtDeviceInfo(btDeviceChangedData, btDeviceChangedData.mNewDevice, 2));
         }
     }
 
@@ -2561,52 +3352,93 @@ public final class AudioDeviceBroker {
         AudioDeviceAttributes audioDeviceAttributes;
         String str2;
         AudioDeviceAttributes preferredCommunicationDevice = preferredCommunicationDevice();
-        Log.v("AS.AudioDeviceBroker", "updateCommunicationRoute, preferredCommunicationDevice: " + preferredCommunicationDevice + " eventSource: " + str);
-        AudioService.sDeviceLogger.enqueue(new EventLogger.StringEvent("updateCommunicationRoute, preferredCommunicationDevice: " + preferredCommunicationDevice + " eventSource: " + str));
+        Log.v(
+                "AS.AudioDeviceBroker",
+                "updateCommunicationRoute, preferredCommunicationDevice: "
+                        + preferredCommunicationDevice
+                        + " eventSource: "
+                        + str);
+        AudioService.sDeviceLogger.enqueue(
+                new EventLogger.StringEvent(
+                        "updateCommunicationRoute, preferredCommunicationDevice: "
+                                + preferredCommunicationDevice
+                                + " eventSource: "
+                                + str));
         boolean booleanValue = this.mReceiverSupported.booleanValue();
         AudioDeviceInventory audioDeviceInventory = this.mDeviceInventory;
         if (booleanValue) {
             if (preferredCommunicationDevice == null) {
                 AudioDeviceAttributes defaultCommunicationDevice = getDefaultCommunicationDevice();
                 if (defaultCommunicationDevice == null || isDeviceRequestedForCommunication(7)) {
-                    audioDeviceInventory.clearDevicesRoleForStrategy(this.mCommunicationStrategyId, true);
-                    audioDeviceInventory.clearDevicesRoleForStrategy(this.mAccessibilityStrategyId, true);
+                    audioDeviceInventory.clearDevicesRoleForStrategy(
+                            this.mCommunicationStrategyId, true);
+                    audioDeviceInventory.clearDevicesRoleForStrategy(
+                            this.mAccessibilityStrategyId, true);
                 } else {
-                    Log.i("AS.AudioDeviceBroker", "updateCommunicationRoute set default Device = " + defaultCommunicationDevice.getType());
-                    audioDeviceInventory.setDevicesRoleForStrategy(this.mCommunicationStrategyId, true, Arrays.asList(defaultCommunicationDevice));
-                    audioDeviceInventory.setDevicesRoleForStrategy(this.mAccessibilityStrategyId, true, Arrays.asList(defaultCommunicationDevice));
+                    Log.i(
+                            "AS.AudioDeviceBroker",
+                            "updateCommunicationRoute set default Device = "
+                                    + defaultCommunicationDevice.getType());
+                    audioDeviceInventory.setDevicesRoleForStrategy(
+                            this.mCommunicationStrategyId,
+                            true,
+                            Arrays.asList(defaultCommunicationDevice));
+                    audioDeviceInventory.setDevicesRoleForStrategy(
+                            this.mAccessibilityStrategyId,
+                            true,
+                            Arrays.asList(defaultCommunicationDevice));
                 }
                 synchronized (audioDeviceInventory.mDevicesLock) {
                     audioDeviceInventory.applyConnectedDevicesRoles_l();
                 }
                 audioDeviceInventory.reapplyExternalDevicesRoles();
             } else {
-                if (this.mAudioModeOwner.mUid == 1000 && (audioDeviceAttributes = this.mPreferredCommunicationDevice) != null && audioDeviceAttributes.getType() == 2 && preferredCommunicationDevice.getType() == 7) {
+                if (this.mAudioModeOwner.mUid == 1000
+                        && (audioDeviceAttributes = this.mPreferredCommunicationDevice) != null
+                        && audioDeviceAttributes.getType() == 2
+                        && preferredCommunicationDevice.getType() == 7) {
                     Iterator it = this.mCommunicationRouteClients.iterator();
                     while (true) {
                         if (!it.hasNext()) {
                             break;
                         }
-                        CommunicationRouteClient communicationRouteClient = (CommunicationRouteClient) it.next();
-                        if (communicationRouteClient.mDevice.getType() == 2 && communicationRouteClient.mUid == 1000) {
+                        CommunicationRouteClient communicationRouteClient =
+                                (CommunicationRouteClient) it.next();
+                        if (communicationRouteClient.mDevice.getType() == 2
+                                && communicationRouteClient.mUid == 1000) {
                             this.mCommunicationRouteClients.remove(communicationRouteClient);
-                            Log.i("AS.AudioDeviceBroker", "updateCommunicationRoute removed SPK client");
+                            Log.i(
+                                    "AS.AudioDeviceBroker",
+                                    "updateCommunicationRoute removed SPK client");
                             break;
                         }
                     }
                 }
-                audioDeviceInventory.setDevicesRoleForStrategy(this.mCommunicationStrategyId, true, Arrays.asList(preferredCommunicationDevice));
-                audioDeviceInventory.setDevicesRoleForStrategy(this.mAccessibilityStrategyId, true, Arrays.asList(preferredCommunicationDevice));
+                audioDeviceInventory.setDevicesRoleForStrategy(
+                        this.mCommunicationStrategyId,
+                        true,
+                        Arrays.asList(preferredCommunicationDevice));
+                audioDeviceInventory.setDevicesRoleForStrategy(
+                        this.mAccessibilityStrategyId,
+                        true,
+                        Arrays.asList(preferredCommunicationDevice));
             }
             sendIILMsg(2763, 0, 0, 0, null, 500);
         } else if (preferredCommunicationDevice == null) {
             this.mCurrentCallDevice = null;
             AudioDeviceAttributes defaultCommunicationDevice2 = getDefaultCommunicationDevice();
             if (defaultCommunicationDevice2 == null || isDeviceRequestedForCommunication(7)) {
-                audioDeviceInventory.clearDevicesRoleForStrategy(this.mCommunicationStrategyId, true);
+                audioDeviceInventory.clearDevicesRoleForStrategy(
+                        this.mCommunicationStrategyId, true);
             } else {
-                Log.i("AS.AudioDeviceBroker", "updateCommunicationRoute set default Device = " + defaultCommunicationDevice2.getType());
-                audioDeviceInventory.setDevicesRoleForStrategy(this.mCommunicationStrategyId, true, Arrays.asList(defaultCommunicationDevice2));
+                Log.i(
+                        "AS.AudioDeviceBroker",
+                        "updateCommunicationRoute set default Device = "
+                                + defaultCommunicationDevice2.getType());
+                audioDeviceInventory.setDevicesRoleForStrategy(
+                        this.mCommunicationStrategyId,
+                        true,
+                        Arrays.asList(defaultCommunicationDevice2));
             }
             synchronized (audioDeviceInventory.mDevicesLock) {
                 audioDeviceInventory.applyConnectedDevicesRoles_l();
@@ -2614,8 +3446,14 @@ public final class AudioDeviceBroker {
             audioDeviceInventory.reapplyExternalDevicesRoles();
         } else {
             this.mCurrentCallDevice = preferredCommunicationDevice;
-            Log.i("AS.AudioDeviceBroker", "updateCommunicationRoute return already mCurrentCallDevice = " + this.mCurrentCallDevice);
-            audioDeviceInventory.setDevicesRoleForStrategy(this.mCommunicationStrategyId, true, Arrays.asList(preferredCommunicationDevice));
+            Log.i(
+                    "AS.AudioDeviceBroker",
+                    "updateCommunicationRoute return already mCurrentCallDevice = "
+                            + this.mCurrentCallDevice);
+            audioDeviceInventory.setDevicesRoleForStrategy(
+                    this.mCommunicationStrategyId,
+                    true,
+                    Arrays.asList(preferredCommunicationDevice));
         }
         boolean isDeviceActiveForCommunication = isDeviceActiveForCommunication(2);
         this.mPreferredCommunicationDevice = preferredCommunicationDevice;
@@ -2643,17 +3481,22 @@ public final class AudioDeviceBroker {
         }
         if (isDeviceActiveForCommunication != isDeviceActiveForCommunication(2)) {
             try {
-                Intent flags = new Intent("android.media.action.SPEAKERPHONE_STATE_CHANGED").setFlags(1073741824);
+                Intent flags =
+                        new Intent("android.media.action.SPEAKERPHONE_STATE_CHANGED")
+                                .setFlags(1073741824);
                 if (this.mAudioModeOwner.mPid == 0) {
                     str2 = this.mModeRequesterPackage;
                 } else {
-                    AudioService.SetModeDeathHandler audioModeOwnerHandler = audioService.getAudioModeOwnerHandler();
+                    AudioService.SetModeDeathHandler audioModeOwnerHandler =
+                            audioService.getAudioModeOwnerHandler();
                     str2 = audioModeOwnerHandler != null ? audioModeOwnerHandler.mPackage : "";
                 }
                 flags.putExtra("modeOwner", str2);
                 this.mContext.sendBroadcastAsUser(flags, UserHandle.ALL);
             } catch (Exception e) {
-                Log.w("AS.AudioDeviceBroker", "failed to broadcast ACTION_SPEAKERPHONE_STATE_CHANGED: " + e);
+                Log.w(
+                        "AS.AudioDeviceBroker",
+                        "failed to broadcast ACTION_SPEAKERPHONE_STATE_CHANGED: " + e);
             }
         }
         AudioService.sendMsg(audioService.mAudioHandler, 25, 2, 0, 0, null, 0);
@@ -2674,14 +3517,19 @@ public final class AudioDeviceBroker {
         this.mCommDevDispatchers.finishBroadcast();
     }
 
-    public final void updateCommunicationRouteClientState(CommunicationRouteClient communicationRouteClient, boolean z) {
+    public final void updateCommunicationRouteClientState(
+            CommunicationRouteClient communicationRouteClient, boolean z) {
         boolean isDeviceRequestedForCommunication = isDeviceRequestedForCommunication(7);
         int i = communicationRouteClient.mUid;
         AudioService audioService = this.mAudioService;
         communicationRouteClient.mPlaybackActive = audioService.isPlaybackActiveForUid(i);
-        communicationRouteClient.mRecordingActive = audioService.mRecordMonitor.isRecordingActiveForUid(communicationRouteClient.mUid);
+        communicationRouteClient.mRecordingActive =
+                audioService.mRecordMonitor.isRecordingActiveForUid(communicationRouteClient.mUid);
         if (z != communicationRouteClient.isActive()) {
-            sendILMsgNoDelay(43, isDeviceRequestedForCommunication ? 1 : 0, "updateCommunicationRouteClientState");
+            sendILMsgNoDelay(
+                    43,
+                    isDeviceRequestedForCommunication ? 1 : 0,
+                    "updateCommunicationRouteClientState");
         }
     }
 
@@ -2692,14 +3540,18 @@ public final class AudioDeviceBroker {
                 try {
                     Iterator it = this.mCommunicationRouteClients.iterator();
                     while (it.hasNext()) {
-                        CommunicationRouteClient communicationRouteClient = (CommunicationRouteClient) it.next();
+                        CommunicationRouteClient communicationRouteClient =
+                                (CommunicationRouteClient) it.next();
                         boolean isActive = communicationRouteClient.isActive();
                         if (list != null) {
                             communicationRouteClient.mPlaybackActive = false;
                             Iterator it2 = list.iterator();
                             while (it2.hasNext()) {
-                                AudioPlaybackConfiguration audioPlaybackConfiguration = (AudioPlaybackConfiguration) it2.next();
-                                if (audioPlaybackConfiguration.getClientUid() == communicationRouteClient.mUid && audioPlaybackConfiguration.isActive()) {
+                                AudioPlaybackConfiguration audioPlaybackConfiguration =
+                                        (AudioPlaybackConfiguration) it2.next();
+                                if (audioPlaybackConfiguration.getClientUid()
+                                                == communicationRouteClient.mUid
+                                        && audioPlaybackConfiguration.isActive()) {
                                     communicationRouteClient.mPlaybackActive = true;
                                     z = true;
                                     break;
@@ -2714,8 +3566,11 @@ public final class AudioDeviceBroker {
                                 if (!it3.hasNext()) {
                                     break;
                                 }
-                                AudioRecordingConfiguration audioRecordingConfiguration = (AudioRecordingConfiguration) it3.next();
-                                if (audioRecordingConfiguration.getClientUid() == communicationRouteClient.mUid && !audioRecordingConfiguration.isClientSilenced()) {
+                                AudioRecordingConfiguration audioRecordingConfiguration =
+                                        (AudioRecordingConfiguration) it3.next();
+                                if (audioRecordingConfiguration.getClientUid()
+                                                == communicationRouteClient.mUid
+                                        && !audioRecordingConfiguration.isClientSilenced()) {
                                     communicationRouteClient.mRecordingActive = true;
                                     z = true;
                                     break;
@@ -2723,13 +3578,17 @@ public final class AudioDeviceBroker {
                             }
                         }
                         if (z) {
-                            CommunicationRouteClient communicationRouteClientForUid = getCommunicationRouteClientForUid(communicationRouteClient.mUid);
+                            CommunicationRouteClient communicationRouteClientForUid =
+                                    getCommunicationRouteClientForUid(
+                                            communicationRouteClient.mUid);
                             if (communicationRouteClientForUid != null) {
-                                this.mBrokerHandler.removeEqualMessages(56, communicationRouteClientForUid);
+                                this.mBrokerHandler.removeEqualMessages(
+                                        56, communicationRouteClientForUid);
                             }
                             updateCommunicationRouteClientState(communicationRouteClient, isActive);
                         } else if (isActive) {
-                            setForceCommunicationClientStateAndDelayedCheck(communicationRouteClient, list != null, list2 != null);
+                            setForceCommunicationClientStateAndDelayedCheck(
+                                    communicationRouteClient, list != null, list2 != null);
                         }
                     }
                 } catch (Throwable th) {
@@ -2744,7 +3603,8 @@ public final class AudioDeviceBroker {
             AudioDeviceInventory audioDeviceInventory = this.mDeviceInventory;
             audioDeviceInventory.getClass();
             String makeDeviceListKey = AudioDeviceInventory.DeviceInfo.makeDeviceListKey(i, str);
-            AudioDeviceInventory.DeviceInfo deviceInfo = new AudioDeviceInventory.DeviceInfo(i, 0, str2, str, null);
+            AudioDeviceInventory.DeviceInfo deviceInfo =
+                    new AudioDeviceInventory.DeviceInfo(i, 0, str2, str, null);
             if (z) {
                 audioDeviceInventory.mConnectedDevices.put(makeDeviceListKey, deviceInfo);
             } else {
@@ -2757,7 +3617,12 @@ public final class AudioDeviceBroker {
         DualA2dpVolumeManager dualA2dpVolumeManager = this.mDualA2dpManager;
         synchronized (dualA2dpVolumeManager.mConnectedDevicesVolume) {
             try {
-                dualA2dpVolumeManager.mVolumeLogger.enqueue(new EventLogger.StringEvent("updateVolume:" + i + ",main:" + dualA2dpVolumeManager.mMainVolume));
+                dualA2dpVolumeManager.mVolumeLogger.enqueue(
+                        new EventLogger.StringEvent(
+                                "updateVolume:"
+                                        + i
+                                        + ",main:"
+                                        + dualA2dpVolumeManager.mMainVolume));
                 if (!dualA2dpVolumeManager.mDualModeEnabled) {
                     BluetoothDevice bluetoothDevice = dualA2dpVolumeManager.mActiveDevice;
                     if (bluetoothDevice != null) {
@@ -2771,22 +3636,30 @@ public final class AudioDeviceBroker {
                 dualA2dpVolumeManager.mMinVolume = dualA2dpVolumeManager.MAX_VOLUME;
                 int i3 = 0;
                 for (int i4 = 0; i4 < dualA2dpVolumeManager.mConnectedDevicesVolume.size(); i4++) {
-                    int intValue = ((Integer) dualA2dpVolumeManager.mConnectedDevicesVolume.valueAt(i4)).intValue();
+                    int intValue =
+                            ((Integer) dualA2dpVolumeManager.mConnectedDevicesVolume.valueAt(i4))
+                                    .intValue();
                     if (intValue == dualA2dpVolumeManager.MAX_VOLUME) {
                         i3++;
                     }
                     int i5 = intValue + i2;
-                    dualA2dpVolumeManager.setVolume((BluetoothDevice) dualA2dpVolumeManager.mConnectedDevicesVolume.keyAt(i4), i5);
+                    dualA2dpVolumeManager.setVolume(
+                            (BluetoothDevice)
+                                    dualA2dpVolumeManager.mConnectedDevicesVolume.keyAt(i4),
+                            i5);
                     if (dualA2dpVolumeManager.mMainVolume < i5) {
                         dualA2dpVolumeManager.mMainVolume = i5;
                     }
                     if (dualA2dpVolumeManager.mMinVolume > i5) {
                         dualA2dpVolumeManager.mMinVolume = i5;
                     }
-                    dualA2dpVolumeManager.mMainVolume = dualA2dpVolumeManager.getValidIndex(dualA2dpVolumeManager.mMainVolume);
-                    dualA2dpVolumeManager.mMinVolume = dualA2dpVolumeManager.getValidIndex(dualA2dpVolumeManager.mMinVolume);
+                    dualA2dpVolumeManager.mMainVolume =
+                            dualA2dpVolumeManager.getValidIndex(dualA2dpVolumeManager.mMainVolume);
+                    dualA2dpVolumeManager.mMinVolume =
+                            dualA2dpVolumeManager.getValidIndex(dualA2dpVolumeManager.mMinVolume);
                 }
-                dualA2dpVolumeManager.needVolumeChangedIntent = i3 != dualA2dpVolumeManager.mConnectedDevicesVolume.size();
+                dualA2dpVolumeManager.needVolumeChangedIntent =
+                        i3 != dualA2dpVolumeManager.mConnectedDevicesVolume.size();
             } finally {
             }
         }
@@ -2796,7 +3669,13 @@ public final class AudioDeviceBroker {
         AudioService audioService = this.mAudioService;
         int activeStreamType = audioService.getActiveStreamType(Integer.MIN_VALUE);
         int i2 = AudioService.mStreamVolumeAlias[activeStreamType];
-        StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(i, activeStreamType, "updateLeAudioVolume: device = ", "streamType = ", ", streamAlias = ");
+        StringBuilder m =
+                ArrayUtils$$ExternalSyntheticOutline0.m(
+                        i,
+                        activeStreamType,
+                        "updateLeAudioVolume: device = ",
+                        "streamType = ",
+                        ", streamAlias = ");
         m.append(i2);
         Log.v("AS.AudioService", m.toString());
         int index = audioService.mStreamStates[i2].getIndex(i);

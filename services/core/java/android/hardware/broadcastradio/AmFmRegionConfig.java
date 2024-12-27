@@ -4,6 +4,7 @@ import android.companion.virtualcamera.SupportedStreamConfiguration$$ExternalSyn
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -31,13 +32,15 @@ public final class AmFmRegionConfig implements Parcelable {
                     throw new BadParcelableException("Parcelable too small");
                 }
                 if (parcel.dataPosition() - dataPosition < readInt) {
-                    amFmRegionConfig.ranges = (AmFmBandRange[]) parcel.createTypedArray(AmFmBandRange.CREATOR);
+                    amFmRegionConfig.ranges =
+                            (AmFmBandRange[]) parcel.createTypedArray(AmFmBandRange.CREATOR);
                     if (parcel.dataPosition() - dataPosition < readInt) {
                         amFmRegionConfig.fmDeemphasis = parcel.readInt();
                         if (parcel.dataPosition() - dataPosition < readInt) {
                             amFmRegionConfig.fmRds = parcel.readInt();
                             if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -95,7 +98,12 @@ public final class AmFmRegionConfig implements Parcelable {
             return false;
         }
         AmFmRegionConfig amFmRegionConfig = (AmFmRegionConfig) obj;
-        return Objects.deepEquals(this.ranges, amFmRegionConfig.ranges) && Objects.deepEquals(Integer.valueOf(this.fmDeemphasis), Integer.valueOf(amFmRegionConfig.fmDeemphasis)) && Objects.deepEquals(Integer.valueOf(this.fmRds), Integer.valueOf(amFmRegionConfig.fmRds));
+        return Objects.deepEquals(this.ranges, amFmRegionConfig.ranges)
+                && Objects.deepEquals(
+                        Integer.valueOf(this.fmDeemphasis),
+                        Integer.valueOf(amFmRegionConfig.fmDeemphasis))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.fmRds), Integer.valueOf(amFmRegionConfig.fmRds));
     }
 
     public final int getStability() {
@@ -104,12 +112,31 @@ public final class AmFmRegionConfig implements Parcelable {
 
     /* JADX WARN: Multi-variable type inference failed */
     public final int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(this.ranges, Integer.valueOf(this.fmDeemphasis), Integer.valueOf(this.fmRds)).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                this.ranges,
+                                Integer.valueOf(this.fmDeemphasis),
+                                Integer.valueOf(this.fmRds))
+                        .toArray());
     }
 
     public final String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, AmFmBandRange$$ExternalSyntheticOutline0.m(AmFmBandRange$$ExternalSyntheticOutline0.m(AmFmRegionConfig$$ExternalSyntheticOutline0.m(Arrays.toString(this.ranges), "fmDeemphasis: ", new StringBuilder("ranges: "), stringJoiner), this.fmDeemphasis, stringJoiner, "fmRds: "), this.fmRds, stringJoiner, "AmFmRegionConfig"));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner,
+                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                        AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                AmFmRegionConfig$$ExternalSyntheticOutline0.m(
+                                        Arrays.toString(this.ranges),
+                                        "fmDeemphasis: ",
+                                        new StringBuilder("ranges: "),
+                                        stringJoiner),
+                                this.fmDeemphasis,
+                                stringJoiner,
+                                "fmRds: "),
+                        this.fmRds,
+                        stringJoiner,
+                        "AmFmRegionConfig"));
     }
 
     @Override // android.os.Parcelable
@@ -118,7 +145,9 @@ public final class AmFmRegionConfig implements Parcelable {
         parcel.writeInt(0);
         parcel.writeTypedArray(this.ranges, i);
         parcel.writeInt(this.fmDeemphasis);
-        int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.fmRds, dataPosition);
+        int m =
+                SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                        parcel, this.fmRds, dataPosition);
         SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
     }
 }

@@ -8,19 +8,20 @@ import android.os.PersistableBundle;
 
 /* loaded from: classes.dex */
 public final class JobWorkItem implements Parcelable {
-    public static final Parcelable.Creator<JobWorkItem> CREATOR = new Parcelable.Creator<JobWorkItem>() { // from class: android.app.job.JobWorkItem.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public JobWorkItem createFromParcel(Parcel in) {
-            return new JobWorkItem(in);
-        }
+    public static final Parcelable.Creator<JobWorkItem> CREATOR =
+            new Parcelable.Creator<JobWorkItem>() { // from class: android.app.job.JobWorkItem.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public JobWorkItem createFromParcel(Parcel in) {
+                    return new JobWorkItem(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public JobWorkItem[] newArray(int size) {
-            return new JobWorkItem[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public JobWorkItem[] newArray(int size) {
+                    return new JobWorkItem[size];
+                }
+            };
     int mDeliveryCount;
     private final PersistableBundle mExtras;
     Object mGrants;
@@ -38,7 +39,8 @@ public final class JobWorkItem implements Parcelable {
         this(intent, downloadBytes, uploadBytes, -1L);
     }
 
-    public JobWorkItem(Intent intent, long downloadBytes, long uploadBytes, long minimumChunkBytes) {
+    public JobWorkItem(
+            Intent intent, long downloadBytes, long uploadBytes, long minimumChunkBytes) {
         this.mExtras = PersistableBundle.EMPTY;
         this.mIntent = intent;
         this.mNetworkDownloadBytes = downloadBytes;
@@ -156,7 +158,8 @@ public final class JobWorkItem implements Parcelable {
 
         public Builder setEstimatedNetworkBytes(long downloadBytes, long uploadBytes) {
             if (downloadBytes != -1 && downloadBytes < 0) {
-                throw new IllegalArgumentException("Invalid network download bytes: " + downloadBytes);
+                throw new IllegalArgumentException(
+                        "Invalid network download bytes: " + downloadBytes);
             }
             if (uploadBytes != -1 && uploadBytes < 0) {
                 throw new IllegalArgumentException("Invalid network upload bytes: " + uploadBytes);
@@ -189,20 +192,27 @@ public final class JobWorkItem implements Parcelable {
         long estimatedTransfer;
         if (rejectNegativeNetworkEstimates) {
             if (this.mNetworkUploadBytes != -1 && this.mNetworkUploadBytes < 0) {
-                throw new IllegalArgumentException("Invalid network upload bytes: " + this.mNetworkUploadBytes);
+                throw new IllegalArgumentException(
+                        "Invalid network upload bytes: " + this.mNetworkUploadBytes);
             }
             if (this.mNetworkDownloadBytes != -1 && this.mNetworkDownloadBytes < 0) {
-                throw new IllegalArgumentException("Invalid network download bytes: " + this.mNetworkDownloadBytes);
+                throw new IllegalArgumentException(
+                        "Invalid network download bytes: " + this.mNetworkDownloadBytes);
             }
         }
         if (this.mNetworkUploadBytes == -1) {
             estimatedTransfer = this.mNetworkDownloadBytes;
         } else {
             long estimatedTransfer2 = this.mNetworkUploadBytes;
-            estimatedTransfer = estimatedTransfer2 + (this.mNetworkDownloadBytes == -1 ? 0L : this.mNetworkDownloadBytes);
+            estimatedTransfer =
+                    estimatedTransfer2
+                            + (this.mNetworkDownloadBytes == -1 ? 0L : this.mNetworkDownloadBytes);
         }
-        if (this.mMinimumChunkBytes != -1 && estimatedTransfer != -1 && this.mMinimumChunkBytes > estimatedTransfer) {
-            throw new IllegalArgumentException("Minimum chunk size can't be greater than estimated network usage");
+        if (this.mMinimumChunkBytes != -1
+                && estimatedTransfer != -1
+                && this.mMinimumChunkBytes > estimatedTransfer) {
+            throw new IllegalArgumentException(
+                    "Minimum chunk size can't be greater than estimated network usage");
         }
         if (this.mMinimumChunkBytes != -1 && this.mMinimumChunkBytes <= 0) {
             throw new IllegalArgumentException("Minimum chunk size must be positive");

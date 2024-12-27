@@ -2,6 +2,7 @@ package android.telephony;
 
 import android.annotation.SystemApi;
 import android.os.CancellationSignal;
+
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -10,5 +11,10 @@ import java.util.function.Consumer;
 public interface WwanSelectorCallback {
     void onDomainSelected(int i, boolean z);
 
-    void onRequestEmergencyNetworkScan(List<Integer> list, int i, boolean z, CancellationSignal cancellationSignal, Consumer<EmergencyRegistrationResult> consumer);
+    void onRequestEmergencyNetworkScan(
+            List<Integer> list,
+            int i,
+            boolean z,
+            CancellationSignal cancellationSignal,
+            Consumer<EmergencyRegistrationResult> consumer);
 }

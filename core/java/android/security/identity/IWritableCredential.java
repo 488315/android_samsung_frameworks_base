@@ -12,7 +12,11 @@ public interface IWritableCredential extends IInterface {
 
     byte[] getCredentialKeyCertificateChain(byte[] bArr) throws RemoteException;
 
-    byte[] personalize(AccessControlProfileParcel[] accessControlProfileParcelArr, EntryNamespaceParcel[] entryNamespaceParcelArr, long j) throws RemoteException;
+    byte[] personalize(
+            AccessControlProfileParcel[] accessControlProfileParcelArr,
+            EntryNamespaceParcel[] entryNamespaceParcelArr,
+            long j)
+            throws RemoteException;
 
     public static class Default implements IWritableCredential {
         @Override // android.security.identity.IWritableCredential
@@ -21,7 +25,11 @@ public interface IWritableCredential extends IInterface {
         }
 
         @Override // android.security.identity.IWritableCredential
-        public byte[] personalize(AccessControlProfileParcel[] accessControlProfiles, EntryNamespaceParcel[] entryNamespaces, long secureUserId) throws RemoteException {
+        public byte[] personalize(
+                AccessControlProfileParcel[] accessControlProfiles,
+                EntryNamespaceParcel[] entryNamespaces,
+                long secureUserId)
+                throws RemoteException {
             return null;
         }
 
@@ -31,7 +39,7 @@ public interface IWritableCredential extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWritableCredential {
+    public abstract static class Stub extends Binder implements IWritableCredential {
         static final int TRANSACTION_getCredentialKeyCertificateChain = 1;
         static final int TRANSACTION_personalize = 2;
 
@@ -72,7 +80,8 @@ public interface IWritableCredential extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IWritableCredential.DESCRIPTOR);
             }
@@ -89,8 +98,12 @@ public interface IWritableCredential extends IInterface {
                     reply.writeByteArray(_result);
                     return true;
                 case 2:
-                    AccessControlProfileParcel[] _arg02 = (AccessControlProfileParcel[]) data.createTypedArray(AccessControlProfileParcel.CREATOR);
-                    EntryNamespaceParcel[] _arg1 = (EntryNamespaceParcel[]) data.createTypedArray(EntryNamespaceParcel.CREATOR);
+                    AccessControlProfileParcel[] _arg02 =
+                            (AccessControlProfileParcel[])
+                                    data.createTypedArray(AccessControlProfileParcel.CREATOR);
+                    EntryNamespaceParcel[] _arg1 =
+                            (EntryNamespaceParcel[])
+                                    data.createTypedArray(EntryNamespaceParcel.CREATOR);
                     long _arg2 = data.readLong();
                     data.enforceNoDataAvail();
                     byte[] _result2 = personalize(_arg02, _arg1, _arg2);
@@ -119,7 +132,8 @@ public interface IWritableCredential extends IInterface {
             }
 
             @Override // android.security.identity.IWritableCredential
-            public byte[] getCredentialKeyCertificateChain(byte[] challenge) throws RemoteException {
+            public byte[] getCredentialKeyCertificateChain(byte[] challenge)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -136,7 +150,11 @@ public interface IWritableCredential extends IInterface {
             }
 
             @Override // android.security.identity.IWritableCredential
-            public byte[] personalize(AccessControlProfileParcel[] accessControlProfiles, EntryNamespaceParcel[] entryNamespaces, long secureUserId) throws RemoteException {
+            public byte[] personalize(
+                    AccessControlProfileParcel[] accessControlProfiles,
+                    EntryNamespaceParcel[] entryNamespaces,
+                    long secureUserId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

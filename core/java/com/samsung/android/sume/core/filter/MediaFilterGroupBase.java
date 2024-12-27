@@ -1,6 +1,7 @@
 package com.samsung.android.sume.core.filter;
 
 import com.samsung.android.sume.core.channel.BufferChannel;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -41,12 +42,14 @@ public abstract class MediaFilterGroupBase implements MediaFilterGroup {
 
     @Override // com.samsung.android.sume.core.filter.MediaFilter
     public void prepare() {
-        this.filters.forEach(new Consumer() { // from class: com.samsung.android.sume.core.filter.MediaFilterGroupBase$$ExternalSyntheticLambda1
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                ((MediaFilter) obj).prepare();
-            }
-        });
+        this.filters.forEach(
+                new Consumer() { // from class:
+                                 // com.samsung.android.sume.core.filter.MediaFilterGroupBase$$ExternalSyntheticLambda1
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        ((MediaFilter) obj).prepare();
+                    }
+                });
     }
 
     @Override // com.samsung.android.sume.core.filter.MediaFilter

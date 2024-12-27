@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.security.rkp.IRegistration;
 
 /* loaded from: classes3.dex */
 public interface IGetRegistrationCallback extends IInterface {
@@ -19,16 +18,13 @@ public interface IGetRegistrationCallback extends IInterface {
 
     public static class Default implements IGetRegistrationCallback {
         @Override // android.security.rkp.IGetRegistrationCallback
-        public void onSuccess(IRegistration registration) throws RemoteException {
-        }
+        public void onSuccess(IRegistration registration) throws RemoteException {}
 
         @Override // android.security.rkp.IGetRegistrationCallback
-        public void onCancel() throws RemoteException {
-        }
+        public void onCancel() throws RemoteException {}
 
         @Override // android.security.rkp.IGetRegistrationCallback
-        public void onError(String error) throws RemoteException {
-        }
+        public void onError(String error) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -36,7 +32,7 @@ public interface IGetRegistrationCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGetRegistrationCallback {
+    public abstract static class Stub extends Binder implements IGetRegistrationCallback {
         static final int TRANSACTION_onCancel = 2;
         static final int TRANSACTION_onError = 3;
         static final int TRANSACTION_onSuccess = 1;
@@ -80,7 +76,8 @@ public interface IGetRegistrationCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IGetRegistrationCallback.DESCRIPTOR);
             }

@@ -56,6 +56,11 @@ abstract class BooleanFlagBase implements Flag<Boolean> {
     }
 
     public String toString() {
-        return getNamespace() + MediaMetrics.SEPARATOR + getName() + NavigationBarInflaterView.SIZE_MOD_START + getDefault() + NavigationBarInflaterView.SIZE_MOD_END;
+        return getNamespace()
+                + MediaMetrics.SEPARATOR
+                + getName()
+                + NavigationBarInflaterView.SIZE_MOD_START
+                + getDefault()
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 }

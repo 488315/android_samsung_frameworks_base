@@ -1,11 +1,6 @@
 package android.app;
 
 import android.annotation.SystemApi;
-import android.app.ICallNotificationEventCallback;
-import android.app.INotificationManager;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.Person;
 import android.app.compat.CompatChanges;
 import android.content.ComponentName;
 import android.content.Context;
@@ -33,7 +28,9 @@ import android.util.Log;
 import android.util.NtpTrustedTime;
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;
+
 import com.samsung.android.core.pm.runtimemanifest.RuntimeManifestUtils;
+
 import java.io.File;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -49,29 +46,46 @@ import java.util.concurrent.Executor;
 
 /* loaded from: classes.dex */
 public class NotificationManager {
-    public static final String ACTION_APP_BLOCK_STATE_CHANGED = "android.app.action.APP_BLOCK_STATE_CHANGED";
+    public static final String ACTION_APP_BLOCK_STATE_CHANGED =
+            "android.app.action.APP_BLOCK_STATE_CHANGED";
     public static final String ACTION_AUTOMATIC_ZEN_RULE = "android.app.action.AUTOMATIC_ZEN_RULE";
-    public static final String ACTION_AUTOMATIC_ZEN_RULE_STATUS_CHANGED = "android.app.action.AUTOMATIC_ZEN_RULE_STATUS_CHANGED";
+    public static final String ACTION_AUTOMATIC_ZEN_RULE_STATUS_CHANGED =
+            "android.app.action.AUTOMATIC_ZEN_RULE_STATUS_CHANGED";
 
     @SystemApi
-    public static final String ACTION_CLOSE_NOTIFICATION_HANDLER_PANEL = "android.app.action.CLOSE_NOTIFICATION_HANDLER_PANEL";
-    public static final String ACTION_CONSOLIDATED_NOTIFICATION_POLICY_CHANGED = "android.app.action.CONSOLIDATED_NOTIFICATION_POLICY_CHANGED";
-    public static final String ACTION_EFFECTS_SUPPRESSOR_CHANGED = "android.os.action.ACTION_EFFECTS_SUPPRESSOR_CHANGED";
-    public static final String ACTION_INTERRUPTION_FILTER_CHANGED = "android.app.action.INTERRUPTION_FILTER_CHANGED";
-    public static final String ACTION_INTERRUPTION_FILTER_CHANGED_INTERNAL = "android.app.action.INTERRUPTION_FILTER_CHANGED_INTERNAL";
-    public static final String ACTION_NOTIFICATION_CHANNEL_BLOCK_STATE_CHANGED = "android.app.action.NOTIFICATION_CHANNEL_BLOCK_STATE_CHANGED";
-    public static final String ACTION_NOTIFICATION_CHANNEL_GROUP_BLOCK_STATE_CHANGED = "android.app.action.NOTIFICATION_CHANNEL_GROUP_BLOCK_STATE_CHANGED";
+    public static final String ACTION_CLOSE_NOTIFICATION_HANDLER_PANEL =
+            "android.app.action.CLOSE_NOTIFICATION_HANDLER_PANEL";
+
+    public static final String ACTION_CONSOLIDATED_NOTIFICATION_POLICY_CHANGED =
+            "android.app.action.CONSOLIDATED_NOTIFICATION_POLICY_CHANGED";
+    public static final String ACTION_EFFECTS_SUPPRESSOR_CHANGED =
+            "android.os.action.ACTION_EFFECTS_SUPPRESSOR_CHANGED";
+    public static final String ACTION_INTERRUPTION_FILTER_CHANGED =
+            "android.app.action.INTERRUPTION_FILTER_CHANGED";
+    public static final String ACTION_INTERRUPTION_FILTER_CHANGED_INTERNAL =
+            "android.app.action.INTERRUPTION_FILTER_CHANGED_INTERNAL";
+    public static final String ACTION_NOTIFICATION_CHANNEL_BLOCK_STATE_CHANGED =
+            "android.app.action.NOTIFICATION_CHANNEL_BLOCK_STATE_CHANGED";
+    public static final String ACTION_NOTIFICATION_CHANNEL_GROUP_BLOCK_STATE_CHANGED =
+            "android.app.action.NOTIFICATION_CHANNEL_GROUP_BLOCK_STATE_CHANGED";
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-    public static final String ACTION_NOTIFICATION_LISTENER_ENABLED_CHANGED = "android.app.action.NOTIFICATION_LISTENER_ENABLED_CHANGED";
-    public static final String ACTION_NOTIFICATION_POLICY_ACCESS_GRANTED_CHANGED = "android.app.action.NOTIFICATION_POLICY_ACCESS_GRANTED_CHANGED";
-    public static final String ACTION_NOTIFICATION_POLICY_CHANGED = "android.app.action.NOTIFICATION_POLICY_CHANGED";
+    public static final String ACTION_NOTIFICATION_LISTENER_ENABLED_CHANGED =
+            "android.app.action.NOTIFICATION_LISTENER_ENABLED_CHANGED";
+
+    public static final String ACTION_NOTIFICATION_POLICY_ACCESS_GRANTED_CHANGED =
+            "android.app.action.NOTIFICATION_POLICY_ACCESS_GRANTED_CHANGED";
+    public static final String ACTION_NOTIFICATION_POLICY_CHANGED =
+            "android.app.action.NOTIFICATION_POLICY_CHANGED";
 
     @SystemApi
-    public static final String ACTION_OPEN_NOTIFICATION_HANDLER_PANEL = "android.app.action.OPEN_NOTIFICATION_HANDLER_PANEL";
+    public static final String ACTION_OPEN_NOTIFICATION_HANDLER_PANEL =
+            "android.app.action.OPEN_NOTIFICATION_HANDLER_PANEL";
 
     @SystemApi
-    public static final String ACTION_TOGGLE_NOTIFICATION_HANDLER_PANEL = "android.app.action.TOGGLE_NOTIFICATION_HANDLER_PANEL";
+    public static final String ACTION_TOGGLE_NOTIFICATION_HANDLER_PANEL =
+            "android.app.action.TOGGLE_NOTIFICATION_HANDLER_PANEL";
+
     public static final int AUTOMATIC_RULE_STATUS_ACTIVATED = 4;
     public static final int AUTOMATIC_RULE_STATUS_DEACTIVATED = 5;
     public static final int AUTOMATIC_RULE_STATUS_DISABLED = 2;
@@ -83,11 +97,15 @@ public class NotificationManager {
     public static final int BUBBLE_PREFERENCE_SELECTED = 2;
     private static final long DELAY_FOR_OVERFLOW = 10000;
     public static final String EXTRA_AUTOMATIC_RULE_ID = "android.app.extra.AUTOMATIC_RULE_ID";
-    public static final String EXTRA_AUTOMATIC_ZEN_RULE_ID = "android.app.extra.AUTOMATIC_ZEN_RULE_ID";
-    public static final String EXTRA_AUTOMATIC_ZEN_RULE_STATUS = "android.app.extra.AUTOMATIC_ZEN_RULE_STATUS";
+    public static final String EXTRA_AUTOMATIC_ZEN_RULE_ID =
+            "android.app.extra.AUTOMATIC_ZEN_RULE_ID";
+    public static final String EXTRA_AUTOMATIC_ZEN_RULE_STATUS =
+            "android.app.extra.AUTOMATIC_ZEN_RULE_STATUS";
     public static final String EXTRA_BLOCKED_STATE = "android.app.extra.BLOCKED_STATE";
-    public static final String EXTRA_NOTIFICATION_CHANNEL_GROUP_ID = "android.app.extra.NOTIFICATION_CHANNEL_GROUP_ID";
-    public static final String EXTRA_NOTIFICATION_CHANNEL_ID = "android.app.extra.NOTIFICATION_CHANNEL_ID";
+    public static final String EXTRA_NOTIFICATION_CHANNEL_GROUP_ID =
+            "android.app.extra.NOTIFICATION_CHANNEL_GROUP_ID";
+    public static final String EXTRA_NOTIFICATION_CHANNEL_ID =
+            "android.app.extra.NOTIFICATION_CHANNEL_ID";
     public static final String EXTRA_NOTIFICATION_POLICY = "android.app.extra.NOTIFICATION_POLICY";
     public static final int IMPORTANCE_DEFAULT = 3;
     public static final int IMPORTANCE_HIGH = 4;
@@ -101,8 +119,10 @@ public class NotificationManager {
     public static final int INTERRUPTION_FILTER_NONE = 3;
     public static final int INTERRUPTION_FILTER_PRIORITY = 2;
     public static final int INTERRUPTION_FILTER_UNKNOWN = 0;
-    public static final String META_DATA_AUTOMATIC_RULE_TYPE = "android.service.zen.automatic.ruleType";
-    public static final String META_DATA_RULE_INSTANCE_LIMIT = "android.service.zen.automatic.ruleInstanceLimit";
+    public static final String META_DATA_AUTOMATIC_RULE_TYPE =
+            "android.service.zen.automatic.ruleType";
+    public static final String META_DATA_RULE_INSTANCE_LIMIT =
+            "android.service.zen.automatic.ruleInstanceLimit";
     public static final int SEM_NOTIFICATION_HISTORY_TYPE_GENERAL = 0;
     public static final int SEM_NOTIFICATION_HISTORY_TYPE_IMAGE = 2;
     public static final int SEM_NOTIFICATION_HISTORY_TYPE_REPLY = 1;
@@ -114,7 +134,8 @@ public class NotificationManager {
     private static String TAG = "NotificationManager";
     private static boolean localLOGV = false;
     public static int MAX_SERVICE_COMPONENT_NAME_LENGTH = 500;
-    private final Map<CallNotificationEventListener, CallNotificationEventCallbackStub> mCallNotificationEventCallbacks = new HashMap();
+    private final Map<CallNotificationEventListener, CallNotificationEventCallbackStub>
+            mCallNotificationEventCallbacks = new HashMap();
     private List<String> mBlockedChannelsForOverflowNoti = null;
     private ConcurrentHashMap<String, Long> mOverflowNotiUpdateTimeMap = new ConcurrentHashMap<>();
     final Object mNMLock = new Object();
@@ -122,12 +143,10 @@ public class NotificationManager {
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AutomaticZenRuleStatus {
-    }
+    public @interface AutomaticZenRuleStatus {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BubblePreference {
-    }
+    public @interface BubblePreference {}
 
     @SystemApi
     public interface CallNotificationEventListener {
@@ -137,12 +156,10 @@ public class NotificationManager {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Importance {
-    }
+    public @interface Importance {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface InterruptionFilter {
-    }
+    public @interface InterruptionFilter {}
 
     private final class ReNotifyRunnable implements Runnable {
         private int mId;
@@ -152,7 +169,13 @@ public class NotificationManager {
         private long mUpdateTime;
         private UserHandle mUser;
 
-        public ReNotifyRunnable(String pkg, String tag, int id, Notification notification, UserHandle user, long updateTime) {
+        public ReNotifyRunnable(
+                String pkg,
+                String tag,
+                int id,
+                Notification notification,
+                UserHandle user,
+                long updateTime) {
             this.mPkg = pkg;
             this.mTag = tag;
             this.mId = id;
@@ -166,10 +189,29 @@ public class NotificationManager {
             synchronized (NotificationManager.this.mNMLock) {
                 INotificationManager service = NotificationManager.getService();
                 try {
-                    String notiKey = this.mUser.getIdentifier() + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + this.mPkg + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + this.mId + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + this.mTag;
-                    NotificationManager.this.mOverflowNotiUpdateTimeMap.put(notiKey, Long.valueOf(this.mUpdateTime));
-                    Slog.d(NotificationManager.TAG, "received notification posted with delay. pkg=" + this.mPkg + " update lastUpdateTime=" + this.mUpdateTime);
-                    service.enqueueNotificationWithTag(this.mPkg, NotificationManager.this.mContext.getOpPackageName(), this.mTag, this.mId, NotificationManager.this.fixNotification(this.mNotification), this.mUser.getIdentifier());
+                    String notiKey =
+                            this.mUser.getIdentifier()
+                                    + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                                    + this.mPkg
+                                    + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                                    + this.mId
+                                    + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                                    + this.mTag;
+                    NotificationManager.this.mOverflowNotiUpdateTimeMap.put(
+                            notiKey, Long.valueOf(this.mUpdateTime));
+                    Slog.d(
+                            NotificationManager.TAG,
+                            "received notification posted with delay. pkg="
+                                    + this.mPkg
+                                    + " update lastUpdateTime="
+                                    + this.mUpdateTime);
+                    service.enqueueNotificationWithTag(
+                            this.mPkg,
+                            NotificationManager.this.mContext.getOpPackageName(),
+                            this.mTag,
+                            this.mId,
+                            NotificationManager.this.fixNotification(this.mNotification),
+                            this.mUser.getIdentifier());
                 } catch (RemoteException e) {
                     throw e.rethrowFromSystemServer();
                 }
@@ -202,12 +244,21 @@ public class NotificationManager {
         notifyAsUser(tag, id, notification, this.mContext.getUser());
     }
 
-    public void notifyAsPackage(String targetPackage, String tag, int id, Notification notification) {
+    public void notifyAsPackage(
+            String targetPackage, String tag, int id, Notification notification) {
         INotificationManager service = getService();
         String sender = this.mContext.getPackageName();
         try {
-            Slog.i(TAG, sender + ": notify(" + id + ", " + tag + ", " + notification + ") as package");
-            service.enqueueNotificationWithTag(targetPackage, sender, tag, id, fixNotification(notification), this.mContext.getUser().getIdentifier());
+            Slog.i(
+                    TAG,
+                    sender + ": notify(" + id + ", " + tag + ", " + notification + ") as package");
+            service.enqueueNotificationWithTag(
+                    targetPackage,
+                    sender,
+                    tag,
+                    id,
+                    fixNotification(notification),
+                    this.mContext.getUser().getIdentifier());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -232,14 +283,29 @@ public class NotificationManager {
             Slog.i(TAG, pkg + ": notify(" + id + ", " + tag + ", " + notification + ") as user");
             if (this.mBlockedChannelsForOverflowNoti == null) {
                 try {
-                    this.mBlockedChannelsForOverflowNoti = service.getBlockInfoOfNotificationsForOverflow(this.mContext.getPackageName());
-                    Slog.d(TAG, "BOOTING pkg =" + pkg + " mBlockedChannelsForOverflowNoti=" + this.mBlockedChannelsForOverflowNoti);
+                    this.mBlockedChannelsForOverflowNoti =
+                            service.getBlockInfoOfNotificationsForOverflow(
+                                    this.mContext.getPackageName());
+                    Slog.d(
+                            TAG,
+                            "BOOTING pkg ="
+                                    + pkg
+                                    + " mBlockedChannelsForOverflowNoti="
+                                    + this.mBlockedChannelsForOverflowNoti);
                 } catch (RemoteException e) {
                     throw e.rethrowFromSystemServer();
                 }
             }
-            if (this.mBlockedChannelsForOverflowNoti != null && !this.mBlockedChannelsForOverflowNoti.isEmpty()) {
-                String notiKey = user.getIdentifier() + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + pkg + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + id + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER + tag;
+            if (this.mBlockedChannelsForOverflowNoti != null
+                    && !this.mBlockedChannelsForOverflowNoti.isEmpty()) {
+                String notiKey =
+                        user.getIdentifier()
+                                + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                                + pkg
+                                + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                                + id
+                                + NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER
+                                + tag;
                 long currentTime = System.currentTimeMillis();
                 if (this.mOverflowNotiUpdateTimeMap.containsKey(notiKey)) {
                     if (this.mHandler.hasCallbacks(this.mReNotifyRunnable)) {
@@ -248,7 +314,8 @@ public class NotificationManager {
                     long lastUpdateTime = this.mOverflowNotiUpdateTimeMap.get(notiKey).longValue();
                     long diffTime = currentTime - lastUpdateTime;
                     if (diffTime < 10000) {
-                        this.mReNotifyRunnable = new ReNotifyRunnable(pkg, tag, id, notification, user, currentTime);
+                        this.mReNotifyRunnable =
+                                new ReNotifyRunnable(pkg, tag, id, notification, user, currentTime);
                         this.mHandler.postDelayed(this.mReNotifyRunnable, 10000 - diffTime);
                         return;
                     } else {
@@ -260,7 +327,13 @@ public class NotificationManager {
                     this.mOverflowNotiUpdateTimeMap.put(notiKey, Long.valueOf(currentTime));
                 }
             }
-            service.enqueueNotificationWithTag(pkg, this.mContext.getOpPackageName(), tag, id, fixNotification(notification), user.getIdentifier());
+            service.enqueueNotificationWithTag(
+                    pkg,
+                    this.mContext.getOpPackageName(),
+                    tag,
+                    id,
+                    fixNotification(notification),
+                    user.getIdentifier());
         } catch (RemoteException e2) {
             throw e2.rethrowFromSystemServer();
         }
@@ -277,8 +350,10 @@ public class NotificationManager {
             }
         }
         fixLegacySmallIcon(notification, pkg);
-        if (this.mContext.getApplicationInfo().targetSdkVersion > 22 && notification.getSmallIcon() == null) {
-            throw new IllegalArgumentException("Invalid notification (no valid small icon): " + notification);
+        if (this.mContext.getApplicationInfo().targetSdkVersion > 22
+                && notification.getSmallIcon() == null) {
+            throw new IllegalArgumentException(
+                    "Invalid notification (no valid small icon): " + notification);
         }
         notification.reduceImageSizes(this.mContext);
         return Notification.Builder.maybeCloneStrippedForDelivery(notification);
@@ -301,7 +376,12 @@ public class NotificationManager {
     public void cancelAsPackage(String targetPackage, String tag, int id) {
         INotificationManager service = getService();
         try {
-            service.cancelNotificationWithTag(targetPackage, this.mContext.getOpPackageName(), tag, id, this.mContext.getUser().getIdentifier());
+            service.cancelNotificationWithTag(
+                    targetPackage,
+                    this.mContext.getOpPackageName(),
+                    tag,
+                    id,
+                    this.mContext.getUser().getIdentifier());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -314,7 +394,8 @@ public class NotificationManager {
             Log.v(TAG, pkg + ": cancel(" + id + NavigationBarInflaterView.KEY_CODE_END);
         }
         try {
-            service.cancelNotificationWithTag(pkg, this.mContext.getOpPackageName(), tag, id, user.getIdentifier());
+            service.cancelNotificationWithTag(
+                    pkg, this.mContext.getOpPackageName(), tag, id, user.getIdentifier());
             if (this.mEdgeNotificationManager != null) {
                 this.mEdgeNotificationManager.removeEdgeNotificationByNormal(id);
             }
@@ -365,7 +446,8 @@ public class NotificationManager {
     public boolean canNotifyAsPackage(String pkg) {
         INotificationManager service = getService();
         try {
-            return service.canNotifyAsPackage(this.mContext.getPackageName(), pkg, this.mContext.getUserId());
+            return service.canNotifyAsPackage(
+                    this.mContext.getPackageName(), pkg, this.mContext.getUserId());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -387,7 +469,8 @@ public class NotificationManager {
     public void createNotificationChannelGroups(List<NotificationChannelGroup> groups) {
         INotificationManager service = getService();
         try {
-            service.createNotificationChannelGroups(this.mContext.getPackageName(), new ParceledListSlice(groups));
+            service.createNotificationChannelGroups(
+                    this.mContext.getPackageName(), new ParceledListSlice(groups));
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -400,7 +483,8 @@ public class NotificationManager {
     public void createNotificationChannels(List<NotificationChannel> channels) {
         INotificationManager service = getService();
         try {
-            service.createNotificationChannels(this.mContext.getPackageName(), new ParceledListSlice(channels));
+            service.createNotificationChannels(
+                    this.mContext.getPackageName(), new ParceledListSlice(channels));
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -409,7 +493,11 @@ public class NotificationManager {
     public NotificationChannel getNotificationChannel(String channelId) {
         INotificationManager service = getService();
         try {
-            return service.getNotificationChannel(this.mContext.getOpPackageName(), this.mContext.getUserId(), this.mContext.getPackageName(), channelId);
+            return service.getNotificationChannel(
+                    this.mContext.getOpPackageName(),
+                    this.mContext.getUserId(),
+                    this.mContext.getPackageName(),
+                    channelId);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -418,7 +506,13 @@ public class NotificationManager {
     public NotificationChannel getNotificationChannel(String channelId, String conversationId) {
         INotificationManager service = getService();
         try {
-            return service.getConversationNotificationChannel(this.mContext.getOpPackageName(), this.mContext.getUserId(), this.mContext.getPackageName(), channelId, true, conversationId);
+            return service.getConversationNotificationChannel(
+                    this.mContext.getOpPackageName(),
+                    this.mContext.getUserId(),
+                    this.mContext.getPackageName(),
+                    channelId,
+                    true,
+                    conversationId);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -427,7 +521,11 @@ public class NotificationManager {
     public List<NotificationChannel> getNotificationChannels() {
         INotificationManager service = getService();
         try {
-            return service.getNotificationChannels(this.mContext.getOpPackageName(), this.mContext.getPackageName(), this.mContext.getUserId()).getList();
+            return service.getNotificationChannels(
+                            this.mContext.getOpPackageName(),
+                            this.mContext.getPackageName(),
+                            this.mContext.getUserId())
+                    .getList();
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -445,7 +543,8 @@ public class NotificationManager {
     public NotificationChannelGroup getNotificationChannelGroup(String channelGroupId) {
         INotificationManager service = getService();
         try {
-            return service.getNotificationChannelGroup(this.mContext.getPackageName(), channelGroupId);
+            return service.getNotificationChannelGroup(
+                    this.mContext.getPackageName(), channelGroupId);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -454,7 +553,8 @@ public class NotificationManager {
     public List<NotificationChannelGroup> getNotificationChannelGroups() {
         INotificationManager service = getService();
         try {
-            ParceledListSlice<NotificationChannelGroup> parceledList = service.getNotificationChannelGroups(this.mContext.getPackageName());
+            ParceledListSlice<NotificationChannelGroup> parceledList =
+                    service.getNotificationChannelGroups(this.mContext.getPackageName());
             if (parceledList != null) {
                 return parceledList.getList();
             }
@@ -580,7 +680,16 @@ public class NotificationManager {
             List<ZenModeConfig.ZenRule> rules = service.getZenRules();
             Map<String, AutomaticZenRule> ruleMap = new HashMap<>();
             for (ZenModeConfig.ZenRule rule : rules) {
-                AutomaticZenRule azr = new AutomaticZenRule(rule.name, rule.component, rule.configurationActivity, rule.conditionId, rule.zenPolicy, zenModeToInterruptionFilter(rule.zenMode), rule.enabled, rule.creationTime);
+                AutomaticZenRule azr =
+                        new AutomaticZenRule(
+                                rule.name,
+                                rule.component,
+                                rule.configurationActivity,
+                                rule.conditionId,
+                                rule.zenPolicy,
+                                zenModeToInterruptionFilter(rule.zenMode),
+                                rule.enabled,
+                                rule.creationTime);
                 azr.setPackageName(rule.pkg);
                 ruleMap.put(rule.id, azr);
             }
@@ -606,7 +715,8 @@ public class NotificationManager {
     public String addAutomaticZenRule(AutomaticZenRule automaticZenRule, boolean fromUser) {
         INotificationManager service = getService();
         try {
-            return service.addAutomaticZenRule(automaticZenRule, this.mContext.getPackageName(), fromUser);
+            return service.addAutomaticZenRule(
+                    automaticZenRule, this.mContext.getPackageName(), fromUser);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -616,7 +726,8 @@ public class NotificationManager {
         return updateAutomaticZenRule(id, automaticZenRule, false);
     }
 
-    public boolean updateAutomaticZenRule(String id, AutomaticZenRule automaticZenRule, boolean fromUser) {
+    public boolean updateAutomaticZenRule(
+            String id, AutomaticZenRule automaticZenRule, boolean fromUser) {
         INotificationManager service = getService();
         try {
             return service.updateAutomaticZenRule(id, automaticZenRule, fromUser);
@@ -709,7 +820,8 @@ public class NotificationManager {
     public int getBubblePreference() {
         INotificationManager service = getService();
         try {
-            return service.getBubblePreferenceForPackage(this.mContext.getPackageName(), Binder.getCallingUid());
+            return service.getBubblePreferenceForPackage(
+                    this.mContext.getPackageName(), Binder.getCallingUid());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -853,11 +965,13 @@ public class NotificationManager {
     }
 
     @SystemApi
-    public void setNotificationListenerAccessGranted(ComponentName listener, boolean granted, boolean userSet) {
+    public void setNotificationListenerAccessGranted(
+            ComponentName listener, boolean granted, boolean userSet) {
         INotificationManager service = getService();
         try {
             if (CompatChanges.isChangeEnabled(SET_LISTENER_ACCESS_GRANTED_IS_USER_AWARE)) {
-                service.setNotificationListenerAccessGrantedForUser(listener, this.mContext.getUserId(), granted, userSet);
+                service.setNotificationListenerAccessGrantedForUser(
+                        listener, this.mContext.getUserId(), granted, userSet);
             } else {
                 service.setNotificationListenerAccessGranted(listener, granted, userSet);
             }
@@ -866,7 +980,8 @@ public class NotificationManager {
         }
     }
 
-    public void setNotificationListenerAccessGrantedForUser(ComponentName listener, int userId, boolean granted) {
+    public void setNotificationListenerAccessGrantedForUser(
+            ComponentName listener, int userId, boolean granted) {
         INotificationManager service = getService();
         try {
             service.setNotificationListenerAccessGrantedForUser(listener, userId, granted, true);
@@ -996,11 +1111,9 @@ public class NotificationManager {
         public static final int SUPPRESSED_EFFECT_NOTIFICATION_LIST = 256;
         public static final int SUPPRESSED_EFFECT_PEEK = 16;
 
-        @Deprecated
-        public static final int SUPPRESSED_EFFECT_SCREEN_OFF = 1;
+        @Deprecated public static final int SUPPRESSED_EFFECT_SCREEN_OFF = 1;
 
-        @Deprecated
-        public static final int SUPPRESSED_EFFECT_SCREEN_ON = 2;
+        @Deprecated public static final int SUPPRESSED_EFFECT_SCREEN_ON = 2;
         public static final int SUPPRESSED_EFFECT_STATUS_BAR = 32;
         public final int appBypassDndFlag;
         public final int exceptionContactsFlag;
@@ -1016,45 +1129,86 @@ public class NotificationManager {
         private static final int[] ALL_SUPPRESSED_EFFECTS = {1, 2, 4, 8, 16, 32, 64, 128, 256};
         private static final int[] SCREEN_OFF_SUPPRESSED_EFFECTS = {1, 4, 8, 128};
         private static final int[] SCREEN_ON_SUPPRESSED_EFFECTS = {2, 16, 32, 64, 256};
-        public static final Parcelable.Creator<Policy> CREATOR = new Parcelable.Creator<Policy>() { // from class: android.app.NotificationManager.Policy.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Policy createFromParcel(Parcel in) {
-                return new Policy(in);
-            }
+        public static final Parcelable.Creator<Policy> CREATOR =
+                new Parcelable.Creator<
+                        Policy>() { // from class: android.app.NotificationManager.Policy.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Policy createFromParcel(Parcel in) {
+                        return new Policy(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Policy[] newArray(int size) {
-                return new Policy[size];
-            }
-        };
-
-        @Retention(RetentionPolicy.SOURCE)
-        public @interface ConversationSenders {
-        }
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Policy[] newArray(int size) {
+                        return new Policy[size];
+                    }
+                };
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface PrioritySenders {
-        }
+        public @interface ConversationSenders {}
+
+        @Retention(RetentionPolicy.SOURCE)
+        public @interface PrioritySenders {}
 
         public Policy(int priorityCategories, int priorityCallSenders, int priorityMessageSenders) {
             this(priorityCategories, priorityCallSenders, priorityMessageSenders, -1, -1, -1);
         }
 
-        public Policy(int priorityCategories, int priorityCallSenders, int priorityMessageSenders, int suppressedVisualEffects) {
-            this(priorityCategories, priorityCallSenders, priorityMessageSenders, suppressedVisualEffects, -1, -1);
+        public Policy(
+                int priorityCategories,
+                int priorityCallSenders,
+                int priorityMessageSenders,
+                int suppressedVisualEffects) {
+            this(
+                    priorityCategories,
+                    priorityCallSenders,
+                    priorityMessageSenders,
+                    suppressedVisualEffects,
+                    -1,
+                    -1);
         }
 
-        public Policy(int priorityCategories, int priorityCallSenders, int priorityMessageSenders, int suppressedVisualEffects, int priorityConversationSenders) {
-            this(priorityCategories, priorityCallSenders, priorityMessageSenders, suppressedVisualEffects, -1, priorityConversationSenders);
+        public Policy(
+                int priorityCategories,
+                int priorityCallSenders,
+                int priorityMessageSenders,
+                int suppressedVisualEffects,
+                int priorityConversationSenders) {
+            this(
+                    priorityCategories,
+                    priorityCallSenders,
+                    priorityMessageSenders,
+                    suppressedVisualEffects,
+                    -1,
+                    priorityConversationSenders);
         }
 
-        public Policy(int priorityCategories, int priorityCallSenders, int priorityMessageSenders, int suppressedVisualEffects, int state, int priorityConversationSenders) {
-            this(priorityCategories, priorityCallSenders, priorityMessageSenders, suppressedVisualEffects, state, priorityConversationSenders, new ArrayList());
+        public Policy(
+                int priorityCategories,
+                int priorityCallSenders,
+                int priorityMessageSenders,
+                int suppressedVisualEffects,
+                int state,
+                int priorityConversationSenders) {
+            this(
+                    priorityCategories,
+                    priorityCallSenders,
+                    priorityMessageSenders,
+                    suppressedVisualEffects,
+                    state,
+                    priorityConversationSenders,
+                    new ArrayList());
         }
 
-        public Policy(int priorityCategories, int priorityCallSenders, int priorityMessageSenders, int suppressedVisualEffects, int state, int priorityConversationSenders, List<String> exceptionContacts) {
+        public Policy(
+                int priorityCategories,
+                int priorityCallSenders,
+                int priorityMessageSenders,
+                int suppressedVisualEffects,
+                int state,
+                int priorityConversationSenders,
+                List<String> exceptionContacts) {
             this.priorityCategories = priorityCategories;
             this.priorityCallSenders = priorityCallSenders;
             this.priorityMessageSenders = priorityMessageSenders;
@@ -1062,12 +1216,21 @@ public class NotificationManager {
             this.state = state;
             this.priorityConversationSenders = priorityConversationSenders;
             this.exceptionContactsFlag = -1;
-            this.mExceptionContacts = exceptionContacts != null ? exceptionContacts : new ArrayList<>();
+            this.mExceptionContacts =
+                    exceptionContacts != null ? exceptionContacts : new ArrayList<>();
             this.appBypassDndFlag = -1;
             this.mAppBypassDndList = new ArrayList();
         }
 
-        public Policy(int priorityCategories, int priorityCallSenders, int priorityMessageSenders, int suppressedVisualEffects, int state, int priorityConversationSenders, List<String> exceptionContacts, List<String> appBypassDndList) {
+        public Policy(
+                int priorityCategories,
+                int priorityCallSenders,
+                int priorityMessageSenders,
+                int suppressedVisualEffects,
+                int state,
+                int priorityConversationSenders,
+                List<String> exceptionContacts,
+                List<String> appBypassDndList) {
             this.priorityCategories = priorityCategories;
             this.priorityCallSenders = priorityCallSenders;
             this.priorityMessageSenders = priorityMessageSenders;
@@ -1075,12 +1238,24 @@ public class NotificationManager {
             this.state = state;
             this.priorityConversationSenders = priorityConversationSenders;
             this.exceptionContactsFlag = -1;
-            this.mExceptionContacts = exceptionContacts != null ? exceptionContacts : new ArrayList<>();
+            this.mExceptionContacts =
+                    exceptionContacts != null ? exceptionContacts : new ArrayList<>();
             this.appBypassDndFlag = -1;
-            this.mAppBypassDndList = appBypassDndList != null ? appBypassDndList : new ArrayList<>();
+            this.mAppBypassDndList =
+                    appBypassDndList != null ? appBypassDndList : new ArrayList<>();
         }
 
-        public Policy(int priorityCategories, int priorityCallSenders, int priorityMessageSenders, int suppressedVisualEffects, int state, int priorityConversationSenders, int exceptionContactsFlag, List<String> exceptionContacts, int appBypassDndFlag, List<String> appBypassDndList) {
+        public Policy(
+                int priorityCategories,
+                int priorityCallSenders,
+                int priorityMessageSenders,
+                int suppressedVisualEffects,
+                int state,
+                int priorityConversationSenders,
+                int exceptionContactsFlag,
+                List<String> exceptionContacts,
+                int appBypassDndFlag,
+                List<String> appBypassDndList) {
             this.priorityCategories = priorityCategories;
             this.priorityCallSenders = priorityCallSenders;
             this.priorityMessageSenders = priorityMessageSenders;
@@ -1088,13 +1263,25 @@ public class NotificationManager {
             this.state = state;
             this.priorityConversationSenders = priorityConversationSenders;
             this.exceptionContactsFlag = exceptionContactsFlag;
-            this.mExceptionContacts = exceptionContacts != null ? exceptionContacts : new ArrayList<>();
+            this.mExceptionContacts =
+                    exceptionContacts != null ? exceptionContacts : new ArrayList<>();
             this.appBypassDndFlag = appBypassDndFlag;
-            this.mAppBypassDndList = appBypassDndList != null ? appBypassDndList : new ArrayList<>();
+            this.mAppBypassDndList =
+                    appBypassDndList != null ? appBypassDndList : new ArrayList<>();
         }
 
         public Policy(Parcel source) {
-            this(source.readInt(), source.readInt(), source.readInt(), source.readInt(), source.readInt(), source.readInt(), source.readInt(), source.createStringArrayList(), source.readInt(), source.createStringArrayList());
+            this(
+                    source.readInt(),
+                    source.readInt(),
+                    source.readInt(),
+                    source.readInt(),
+                    source.readInt(),
+                    source.readInt(),
+                    source.readInt(),
+                    source.createStringArrayList(),
+                    source.readInt(),
+                    source.createStringArrayList());
         }
 
         @Override // android.os.Parcelable
@@ -1117,7 +1304,13 @@ public class NotificationManager {
         }
 
         public int hashCode() {
-            return Objects.hash(Integer.valueOf(this.priorityCategories), Integer.valueOf(this.priorityCallSenders), Integer.valueOf(this.priorityMessageSenders), Integer.valueOf(this.suppressedVisualEffects), Integer.valueOf(this.state), Integer.valueOf(this.priorityConversationSenders));
+            return Objects.hash(
+                    Integer.valueOf(this.priorityCategories),
+                    Integer.valueOf(this.priorityCallSenders),
+                    Integer.valueOf(this.priorityMessageSenders),
+                    Integer.valueOf(this.suppressedVisualEffects),
+                    Integer.valueOf(this.state),
+                    Integer.valueOf(this.priorityConversationSenders));
         }
 
         public boolean equals(Object o) {
@@ -1128,10 +1321,23 @@ public class NotificationManager {
                 return true;
             }
             Policy other = (Policy) o;
-            return other.priorityCategories == this.priorityCategories && other.priorityCallSenders == this.priorityCallSenders && other.priorityMessageSenders == this.priorityMessageSenders && suppressedVisualEffectsEqual(this.suppressedVisualEffects, other.suppressedVisualEffects) && other.state == this.state && other.priorityConversationSenders == this.priorityConversationSenders && other.exceptionContactsFlag == this.exceptionContactsFlag && other.mExceptionContacts != null && other.mExceptionContacts.equals(this.mExceptionContacts) && other.appBypassDndFlag == this.appBypassDndFlag && other.mAppBypassDndList != null && other.mAppBypassDndList.equals(this.mAppBypassDndList);
+            return other.priorityCategories == this.priorityCategories
+                    && other.priorityCallSenders == this.priorityCallSenders
+                    && other.priorityMessageSenders == this.priorityMessageSenders
+                    && suppressedVisualEffectsEqual(
+                            this.suppressedVisualEffects, other.suppressedVisualEffects)
+                    && other.state == this.state
+                    && other.priorityConversationSenders == this.priorityConversationSenders
+                    && other.exceptionContactsFlag == this.exceptionContactsFlag
+                    && other.mExceptionContacts != null
+                    && other.mExceptionContacts.equals(this.mExceptionContacts)
+                    && other.appBypassDndFlag == this.appBypassDndFlag
+                    && other.mAppBypassDndList != null
+                    && other.mAppBypassDndList.equals(this.mAppBypassDndList);
         }
 
-        private boolean suppressedVisualEffectsEqual(int suppressedEffects, int otherSuppressedVisualEffects) {
+        private boolean suppressedVisualEffectsEqual(
+                int suppressedEffects, int otherSuppressedVisualEffects) {
             if (suppressedEffects == otherSuppressedVisualEffects) {
                 return true;
             }
@@ -1148,15 +1354,23 @@ public class NotificationManager {
                 otherSuppressedVisualEffects = otherSuppressedVisualEffects | 4 | 8 | 128;
             }
             if ((suppressedEffects & 2) != (otherSuppressedVisualEffects & 2)) {
-                int currSuppressedEffects = (suppressedEffects & 2) != 0 ? otherSuppressedVisualEffects : suppressedEffects;
+                int currSuppressedEffects =
+                        (suppressedEffects & 2) != 0
+                                ? otherSuppressedVisualEffects
+                                : suppressedEffects;
                 if ((currSuppressedEffects & 16) == 0) {
                     return false;
                 }
             }
             int currSuppressedEffects2 = suppressedEffects & 1;
             if (currSuppressedEffects2 != (otherSuppressedVisualEffects & 1)) {
-                int currSuppressedEffects3 = (suppressedEffects & 1) != 0 ? otherSuppressedVisualEffects : suppressedEffects;
-                if ((currSuppressedEffects3 & 4) == 0 || (currSuppressedEffects3 & 8) == 0 || (currSuppressedEffects3 & 128) == 0) {
+                int currSuppressedEffects3 =
+                        (suppressedEffects & 1) != 0
+                                ? otherSuppressedVisualEffects
+                                : suppressedEffects;
+                if ((currSuppressedEffects3 & 4) == 0
+                        || (currSuppressedEffects3 & 8) == 0
+                        || (currSuppressedEffects3 & 128) == 0) {
                     return false;
                 }
             }
@@ -1168,7 +1382,27 @@ public class NotificationManager {
 
         public String toString() {
             String str;
-            StringBuilder sb = new StringBuilder().append("NotificationManager.Policy[").append("priorityCategories=").append(priorityCategoriesToString(this.priorityCategories)).append(",priorityCallSenders=").append(prioritySendersToString(this.priorityCallSenders)).append(",priorityMessageSenders=").append(prioritySendersToString(this.priorityMessageSenders)).append(",priorityConvSenders=").append(conversationSendersToString(this.priorityConversationSenders)).append(",exceptionContactsFlag=").append(exceptionContactsFlagToString(this.exceptionContactsFlag)).append(",mExceptionContacts=").append(this.mExceptionContacts).append(",appBypassDndFlag=").append(appBypassDndFlagToString(this.appBypassDndFlag)).append(",mAppBypassDndList=").append(this.mAppBypassDndList).append(",suppressedVisualEffects=").append(suppressedEffectsToString(this.suppressedVisualEffects));
+            StringBuilder sb =
+                    new StringBuilder()
+                            .append("NotificationManager.Policy[")
+                            .append("priorityCategories=")
+                            .append(priorityCategoriesToString(this.priorityCategories))
+                            .append(",priorityCallSenders=")
+                            .append(prioritySendersToString(this.priorityCallSenders))
+                            .append(",priorityMessageSenders=")
+                            .append(prioritySendersToString(this.priorityMessageSenders))
+                            .append(",priorityConvSenders=")
+                            .append(conversationSendersToString(this.priorityConversationSenders))
+                            .append(",exceptionContactsFlag=")
+                            .append(exceptionContactsFlagToString(this.exceptionContactsFlag))
+                            .append(",mExceptionContacts=")
+                            .append(this.mExceptionContacts)
+                            .append(",appBypassDndFlag=")
+                            .append(appBypassDndFlagToString(this.appBypassDndFlag))
+                            .append(",mAppBypassDndList=")
+                            .append(this.mAppBypassDndList)
+                            .append(",suppressedVisualEffects=")
+                            .append(suppressedEffectsToString(this.suppressedVisualEffects));
             if (Flags.modesApi()) {
                 sb.append(",hasPriorityChannels=");
             } else {
@@ -1236,7 +1470,10 @@ public class NotificationManager {
         public static boolean secAreAllVisualEffectsSuppressed(int effects) {
             for (int i = 0; i < ALL_SUPPRESSED_EFFECTS.length; i++) {
                 int effect = ALL_SUPPRESSED_EFFECTS[i];
-                if (effect != 128 && effect != 1 && effect != 2 && ((supportLedIndicator() || effect != 8) && (effects & effect) == 0)) {
+                if (effect != 128
+                        && effect != 1
+                        && effect != 2
+                        && ((supportLedIndicator() || effect != 8) && (effects & effect) == 0)) {
                     return false;
                 }
             }
@@ -1246,7 +1483,9 @@ public class NotificationManager {
         public static boolean secAreAnyScreenOffEffectsSuppressed(int effects) {
             for (int i = 0; i < SCREEN_OFF_SUPPRESSED_EFFECTS.length; i++) {
                 int effect = SCREEN_OFF_SUPPRESSED_EFFECTS[i];
-                if (effect != 128 && effect != 1 && ((supportLedIndicator() || effect != 8) && (effects & effect) != 0)) {
+                if (effect != 128
+                        && effect != 1
+                        && ((supportLedIndicator() || effect != 8) && (effects & effect) != 0)) {
                     return true;
                 }
             }
@@ -1552,7 +1791,9 @@ public class NotificationManager {
         }
 
         public void addAppBypassDnd(String pkg, int uid, boolean allow) {
-            Log.d(NotificationManager.TAG, "add bypass dnd app - pkg=" + pkg + " uid=" + uid + " allow=" + allow);
+            Log.d(
+                    NotificationManager.TAG,
+                    "add bypass dnd app - pkg=" + pkg + " uid=" + uid + " allow=" + allow);
             if (pkg == null || pkg.isEmpty()) {
                 return;
             }
@@ -1599,10 +1840,12 @@ public class NotificationManager {
         INotificationManager service = getService();
         String pkg = this.mContext.getPackageName();
         try {
-            ParceledListSlice<StatusBarNotification> parceledList = service.getAppActiveNotifications(pkg, this.mContext.getUserId());
+            ParceledListSlice<StatusBarNotification> parceledList =
+                    service.getAppActiveNotifications(pkg, this.mContext.getUserId());
             if (parceledList != null) {
                 List<StatusBarNotification> list = parceledList.getList();
-                return (StatusBarNotification[]) list.toArray(new StatusBarNotification[list.size()]);
+                return (StatusBarNotification[])
+                        list.toArray(new StatusBarNotification[list.size()]);
             }
             return new StatusBarNotification[0];
         } catch (RemoteException e) {
@@ -1626,7 +1869,8 @@ public class NotificationManager {
     public final void setInterruptionFilter(int interruptionFilter, boolean fromUser) {
         INotificationManager service = getService();
         try {
-            service.setInterruptionFilter(this.mContext.getOpPackageName(), interruptionFilter, fromUser);
+            service.setInterruptionFilter(
+                    this.mContext.getOpPackageName(), interruptionFilter, fromUser);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -1677,7 +1921,11 @@ public class NotificationManager {
         final String mPackageName;
         final UserHandle mUserHandle;
 
-        CallNotificationEventCallbackStub(String packageName, UserHandle userHandle, Executor executor, CallNotificationEventListener listener) {
+        CallNotificationEventCallbackStub(
+                String packageName,
+                UserHandle userHandle,
+                Executor executor,
+                CallNotificationEventListener listener) {
             this.mPackageName = packageName;
             this.mUserHandle = userHandle;
             this.mExecutor = executor;
@@ -1685,38 +1933,52 @@ public class NotificationManager {
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onCallNotificationPosted$0(String packageName, UserHandle userHandle) {
+        public /* synthetic */ void lambda$onCallNotificationPosted$0(
+                String packageName, UserHandle userHandle) {
             this.mListener.onCallNotificationPosted(packageName, userHandle);
         }
 
         @Override // android.app.ICallNotificationEventCallback
-        public void onCallNotificationPosted(final String packageName, final UserHandle userHandle) {
-            this.mExecutor.execute(new Runnable() { // from class: android.app.NotificationManager$CallNotificationEventCallbackStub$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    NotificationManager.CallNotificationEventCallbackStub.this.lambda$onCallNotificationPosted$0(packageName, userHandle);
-                }
-            });
+        public void onCallNotificationPosted(
+                final String packageName, final UserHandle userHandle) {
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.app.NotificationManager$CallNotificationEventCallbackStub$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            NotificationManager.CallNotificationEventCallbackStub.this
+                                    .lambda$onCallNotificationPosted$0(packageName, userHandle);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onCallNotificationRemoved$1(String packageName, UserHandle userHandle) {
+        public /* synthetic */ void lambda$onCallNotificationRemoved$1(
+                String packageName, UserHandle userHandle) {
             this.mListener.onCallNotificationRemoved(packageName, userHandle);
         }
 
         @Override // android.app.ICallNotificationEventCallback
-        public void onCallNotificationRemoved(final String packageName, final UserHandle userHandle) {
-            this.mExecutor.execute(new Runnable() { // from class: android.app.NotificationManager$CallNotificationEventCallbackStub$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    NotificationManager.CallNotificationEventCallbackStub.this.lambda$onCallNotificationRemoved$1(packageName, userHandle);
-                }
-            });
+        public void onCallNotificationRemoved(
+                final String packageName, final UserHandle userHandle) {
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                        // android.app.NotificationManager$CallNotificationEventCallbackStub$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            NotificationManager.CallNotificationEventCallbackStub.this
+                                    .lambda$onCallNotificationRemoved$1(packageName, userHandle);
+                        }
+                    });
         }
     }
 
     @SystemApi
-    public void registerCallNotificationEventListener(String packageName, UserHandle userHandle, Executor executor, CallNotificationEventListener listener) {
+    public void registerCallNotificationEventListener(
+            String packageName,
+            UserHandle userHandle,
+            Executor executor,
+            CallNotificationEventListener listener) {
         checkRequired("packageName", packageName);
         checkRequired("userHandle", userHandle);
         checkRequired("executor", executor);
@@ -1724,9 +1986,12 @@ public class NotificationManager {
         INotificationManager service = getService();
         try {
             synchronized (this.mCallNotificationEventCallbacks) {
-                CallNotificationEventCallbackStub callbackStub = new CallNotificationEventCallbackStub(packageName, userHandle, executor, listener);
+                CallNotificationEventCallbackStub callbackStub =
+                        new CallNotificationEventCallbackStub(
+                                packageName, userHandle, executor, listener);
                 this.mCallNotificationEventCallbacks.put(listener, callbackStub);
-                service.registerCallNotificationEventListener(packageName, userHandle, callbackStub);
+                service.registerCallNotificationEventListener(
+                        packageName, userHandle, callbackStub);
             }
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
@@ -1739,9 +2004,11 @@ public class NotificationManager {
         INotificationManager service = getService();
         try {
             synchronized (this.mCallNotificationEventCallbacks) {
-                CallNotificationEventCallbackStub callbackStub = this.mCallNotificationEventCallbacks.remove(listener);
+                CallNotificationEventCallbackStub callbackStub =
+                        this.mCallNotificationEventCallbacks.remove(listener);
                 if (callbackStub != null) {
-                    service.unregisterCallNotificationEventListener(callbackStub.mPackageName, callbackStub.mUserHandle, callbackStub);
+                    service.unregisterCallNotificationEventListener(
+                            callbackStub.mPackageName, callbackStub.mUserHandle, callbackStub);
                 }
             }
         } catch (RemoteException e) {
@@ -1779,18 +2046,22 @@ public class NotificationManager {
     public void semUpdateNotificationChannels(List<NotificationChannel> channels) {
         INotificationManager service = getService();
         try {
-            service.updateNotificationChannels(this.mContext.getPackageName(), new ParceledListSlice(channels));
+            service.updateNotificationChannels(
+                    this.mContext.getPackageName(), new ParceledListSlice(channels));
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
     private static class EdgeNotificationManager {
-        private static final String EXTRA_SAMSUNG_NOTIFICATION_PENDINGINTENT = "samsung.notification.pendingIntent";
-        private static final String EXTRA_SAMSUNG_NOTIFICATION_REMOVE_ALL = "samsung.notification.remove_all";
+        private static final String EXTRA_SAMSUNG_NOTIFICATION_PENDINGINTENT =
+                "samsung.notification.pendingIntent";
+        private static final String EXTRA_SAMSUNG_NOTIFICATION_REMOVE_ALL =
+                "samsung.notification.remove_all";
         private static final String EXTRA_SAMSUNG_NOTIFICATION_TYPE = "samsung.notification.type";
         private static final String EXTRA_SAMSUNG_NOTIFICATION_WHEN = "samsung.notification.when";
-        private static final String EXTRA_SAMSUNG_PEOPLE_PENDINGINTENT = "samsung.people.pendingIntents";
+        private static final String EXTRA_SAMSUNG_PEOPLE_PENDINGINTENT =
+                "samsung.people.pendingIntents";
         private static final String EXTRA_SAMSUNG_PEOPLE_SUBCATEGORY = "samsung.people.subcategory";
         private static final String EXTRA_SAMSUNG_PEOPLE_SUBTITLES = "samsung.people.subTitles";
         private static final String EXTRA_SAMSUNG_PEOPLE_TIMESTAMPS = "samsung.people.timestamps";
@@ -1820,11 +2091,13 @@ public class NotificationManager {
         }
 
         public void postEdgeNotificationByNormal(int id, Notification notification) {
-            if (notification.extras != null && notification.extras.getStringArrayList(EXTRA_SAMSUNG_PEOPLE_URIS) != null) {
+            if (notification.extras != null
+                    && notification.extras.getStringArrayList(EXTRA_SAMSUNG_PEOPLE_URIS) != null) {
                 Log.i(TAG, "postEdgeNotificationByNormal");
                 Bundle extra = new Bundle(notification.extras);
                 extra.putString(EXTRA_SAMSUNG_NOTIFICATION_TYPE, "normal");
-                extra.putParcelable(EXTRA_SAMSUNG_NOTIFICATION_PENDINGINTENT, notification.contentIntent);
+                extra.putParcelable(
+                        EXTRA_SAMSUNG_NOTIFICATION_PENDINGINTENT, notification.contentIntent);
                 extra.putLong(EXTRA_SAMSUNG_NOTIFICATION_WHEN, notification.when);
                 notification.extras.remove(EXTRA_SAMSUNG_PEOPLE_URIS);
                 notification.extras.remove(EXTRA_SAMSUNG_PEOPLE_TITLES);
@@ -1853,7 +2126,8 @@ public class NotificationManager {
             INotificationManager service = NotificationManager.getService();
             String pkg = this.mContext.getPackageName();
             try {
-                service.enqueueEdgeNotification(pkg, this.mContext.getOpPackageName(), id, extra, UserHandle.myUserId());
+                service.enqueueEdgeNotification(
+                        pkg, this.mContext.getOpPackageName(), id, extra, UserHandle.myUserId());
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -1920,16 +2194,24 @@ public class NotificationManager {
         }
     }
 
-    public List<Bundle> semGetNotificationHistoryForPackage(String callingPkg, String callingAttributionTag, int userId, String pkg, String key, int maxNotifications) {
+    public List<Bundle> semGetNotificationHistoryForPackage(
+            String callingPkg,
+            String callingAttributionTag,
+            int userId,
+            String pkg,
+            String key,
+            int maxNotifications) {
         INotificationManager service = getService();
         try {
-            return service.getNotificationHistoryDataForPackage(callingPkg, callingAttributionTag, userId, pkg, key, maxNotifications);
+            return service.getNotificationHistoryDataForPackage(
+                    callingPkg, callingAttributionTag, userId, pkg, key, maxNotifications);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public void semAddReplyHistory(int type, String key, String pkg, int userId, String title, String text) {
+    public void semAddReplyHistory(
+            int type, String key, String pkg, int userId, String title, String text) {
         INotificationManager service = getService();
         try {
             service.addReplyHistory(type, key, pkg, userId, title, text);

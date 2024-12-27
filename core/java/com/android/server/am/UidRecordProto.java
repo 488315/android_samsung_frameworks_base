@@ -26,7 +26,6 @@ public final class UidRecordProto {
         public static final long LAST_DISPATCHED = 1112396529667L;
         public static final long LAST_NETWORK_UPDATED = 1112396529666L;
 
-        public ProcStateSequence() {
-        }
+        public ProcStateSequence() {}
     }
 }

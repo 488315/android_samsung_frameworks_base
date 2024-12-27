@@ -21,7 +21,9 @@ public class SignerInfoGeneratorBuilder {
         this(digestProvider, new DefaultCMSSignatureEncryptionAlgorithmFinder());
     }
 
-    public SignerInfoGeneratorBuilder(DigestCalculatorProvider digestProvider, CMSSignatureEncryptionAlgorithmFinder sigEncAlgFinder) {
+    public SignerInfoGeneratorBuilder(
+            DigestCalculatorProvider digestProvider,
+            CMSSignatureEncryptionAlgorithmFinder sigEncAlgFinder) {
         this.digestProvider = digestProvider;
         this.sigEncAlgFinder = sigEncAlgFinder;
     }
@@ -31,38 +33,53 @@ public class SignerInfoGeneratorBuilder {
         return this;
     }
 
-    public SignerInfoGeneratorBuilder setSignedAttributeGenerator(CMSAttributeTableGenerator signedGen) {
+    public SignerInfoGeneratorBuilder setSignedAttributeGenerator(
+            CMSAttributeTableGenerator signedGen) {
         this.signedGen = signedGen;
         return this;
     }
 
-    public SignerInfoGeneratorBuilder setUnsignedAttributeGenerator(CMSAttributeTableGenerator unsignedGen) {
+    public SignerInfoGeneratorBuilder setUnsignedAttributeGenerator(
+            CMSAttributeTableGenerator unsignedGen) {
         this.unsignedGen = unsignedGen;
         return this;
     }
 
-    public SignerInfoGenerator build(ContentSigner contentSigner, X509CertificateHolder certHolder) throws OperatorCreationException {
-        SignerIdentifier sigId = new SignerIdentifier(new IssuerAndSerialNumber(certHolder.toASN1Structure()));
+    public SignerInfoGenerator build(ContentSigner contentSigner, X509CertificateHolder certHolder)
+            throws OperatorCreationException {
+        SignerIdentifier sigId =
+                new SignerIdentifier(new IssuerAndSerialNumber(certHolder.toASN1Structure()));
         SignerInfoGenerator sigInfoGen = createGenerator(contentSigner, sigId);
         sigInfoGen.setAssociatedCertificate(certHolder);
         return sigInfoGen;
     }
 
-    public SignerInfoGenerator build(ContentSigner contentSigner, byte[] subjectKeyIdentifier) throws OperatorCreationException {
-        SignerIdentifier sigId = new SignerIdentifier((ASN1OctetString) new DEROctetString(subjectKeyIdentifier));
+    public SignerInfoGenerator build(ContentSigner contentSigner, byte[] subjectKeyIdentifier)
+            throws OperatorCreationException {
+        SignerIdentifier sigId =
+                new SignerIdentifier((ASN1OctetString) new DEROctetString(subjectKeyIdentifier));
         return createGenerator(contentSigner, sigId);
     }
 
-    private SignerInfoGenerator createGenerator(ContentSigner contentSigner, SignerIdentifier sigId) throws OperatorCreationException {
+    private SignerInfoGenerator createGenerator(ContentSigner contentSigner, SignerIdentifier sigId)
+            throws OperatorCreationException {
         if (this.directSignature) {
-            return new SignerInfoGenerator(sigId, contentSigner, this.digestProvider, this.sigEncAlgFinder, true);
+            return new SignerInfoGenerator(
+                    sigId, contentSigner, this.digestProvider, this.sigEncAlgFinder, true);
         }
         if (this.signedGen != null || this.unsignedGen != null) {
             if (this.signedGen == null) {
                 this.signedGen = new DefaultSignedAttributeTableGenerator();
             }
-            return new SignerInfoGenerator(sigId, contentSigner, this.digestProvider, this.sigEncAlgFinder, this.signedGen, this.unsignedGen);
+            return new SignerInfoGenerator(
+                    sigId,
+                    contentSigner,
+                    this.digestProvider,
+                    this.sigEncAlgFinder,
+                    this.signedGen,
+                    this.unsignedGen);
         }
-        return new SignerInfoGenerator(sigId, contentSigner, this.digestProvider, this.sigEncAlgFinder);
+        return new SignerInfoGenerator(
+                sigId, contentSigner, this.digestProvider, this.sigEncAlgFinder);
     }
 }

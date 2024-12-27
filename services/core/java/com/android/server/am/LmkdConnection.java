@@ -4,7 +4,7 @@ import android.net.LocalSocket;
 import android.net.LocalSocketAddress;
 import android.os.MessageQueue;
 import android.util.Slog;
-import com.android.server.am.ProcessList;
+
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -39,7 +39,8 @@ public final class LmkdConnection {
     public static LocalSocket openSocket() {
         try {
             LocalSocket localSocket = new LocalSocket(3);
-            localSocket.connect(new LocalSocketAddress("lmkd", LocalSocketAddress.Namespace.RESERVED));
+            localSocket.connect(
+                    new LocalSocketAddress("lmkd", LocalSocketAddress.Namespace.RESERVED));
             return localSocket;
         } catch (IOException e) {
             Slog.e("ActivityManager", "Connection failed: " + e.toString());

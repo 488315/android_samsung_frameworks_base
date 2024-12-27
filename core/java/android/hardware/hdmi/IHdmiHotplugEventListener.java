@@ -12,8 +12,7 @@ public interface IHdmiHotplugEventListener extends IInterface {
 
     public static class Default implements IHdmiHotplugEventListener {
         @Override // android.hardware.hdmi.IHdmiHotplugEventListener
-        public void onReceived(HdmiHotplugEvent event) throws RemoteException {
-        }
+        public void onReceived(HdmiHotplugEvent event) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface IHdmiHotplugEventListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IHdmiHotplugEventListener {
+    public abstract static class Stub extends Binder implements IHdmiHotplugEventListener {
         public static final String DESCRIPTOR = "android.hardware.hdmi.IHdmiHotplugEventListener";
         static final int TRANSACTION_onReceived = 1;
 
@@ -60,7 +59,8 @@ public interface IHdmiHotplugEventListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -70,7 +70,8 @@ public interface IHdmiHotplugEventListener extends IInterface {
             }
             switch (code) {
                 case 1:
-                    HdmiHotplugEvent _arg0 = (HdmiHotplugEvent) data.readTypedObject(HdmiHotplugEvent.CREATOR);
+                    HdmiHotplugEvent _arg0 =
+                            (HdmiHotplugEvent) data.readTypedObject(HdmiHotplugEvent.CREATOR);
                     data.enforceNoDataAvail();
                     onReceived(_arg0);
                     return true;

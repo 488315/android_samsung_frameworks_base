@@ -4,9 +4,12 @@ import android.content.Context;
 import android.net.shared.InitialConfiguration$$ExternalSyntheticOutline0;
 import android.os.SystemProperties;
 import android.telephony.TelephonyManager;
+
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
+
 import com.samsung.android.server.dynamicfeature.InfoBoard;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -41,7 +44,8 @@ public final class HttpConnector {
     public final String getParams(boolean z) {
         String str;
         String str2;
-        TelephonyManager telephonyManager = (TelephonyManager) this.mContext.getSystemService("phone");
+        TelephonyManager telephonyManager =
+                (TelephonyManager) this.mContext.getSystemService("phone");
         if (telephonyManager.getNetworkOperator().length() > 4) {
             str2 = telephonyManager.getNetworkOperator().substring(0, 3);
             str = telephonyManager.getNetworkOperator().substring(3);
@@ -50,9 +54,13 @@ public final class HttpConnector {
             str2 = str;
         }
         String str3 = SystemProperties.get("ro.csc.sales_code", "");
-        InfoBoard.setParams(str2, str, str3, this.mOneUiVersion, this.mBinaryType, this.mSdkVersion);
-        StringBuilder m = InitialConfiguration$$ExternalSyntheticOutline0.m("?mcc=", str2, "&mnc=", str, "&modelName=");
-        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(m, this.mModelName, "&csc=", str3, "&sdkVersion=");
+        InfoBoard.setParams(
+                str2, str, str3, this.mOneUiVersion, this.mBinaryType, this.mSdkVersion);
+        StringBuilder m =
+                InitialConfiguration$$ExternalSyntheticOutline0.m(
+                        "?mcc=", str2, "&mnc=", str, "&modelName=");
+        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                m, this.mModelName, "&csc=", str3, "&sdkVersion=");
         m.append(this.mSdkVersion);
         m.append("&oneUiVersion=");
         m.append(this.mOneUiVersion);

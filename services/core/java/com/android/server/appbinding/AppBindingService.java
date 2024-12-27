@@ -19,6 +19,7 @@ import android.service.carrier.ICarrierMessagingClientService;
 import android.text.TextUtils;
 import android.util.Slog;
 import android.util.SparseBooleanArray;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.util.CollectionUtils;
 import com.android.internal.util.DumpUtils;
@@ -26,6 +27,7 @@ import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.SystemService;
 import com.android.server.am.PersistentConnection;
 import com.android.server.appbinding.finders.CarrierMessagingClientServiceFinder;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -53,8 +55,23 @@ public final class AppBindingService extends Binder {
         public final AppBindingConstants mConstants;
         public final CarrierMessagingClientServiceFinder mFinder;
 
-        public AppServiceConnection(Context context, int i, AppBindingConstants appBindingConstants, Handler handler, CarrierMessagingClientServiceFinder carrierMessagingClientServiceFinder, ComponentName componentName) {
-            super("AppBindingService", context, handler, i, componentName, appBindingConstants.SERVICE_RECONNECT_BACKOFF_SEC, appBindingConstants.SERVICE_RECONNECT_BACKOFF_INCREASE, appBindingConstants.SERVICE_RECONNECT_MAX_BACKOFF_SEC, appBindingConstants.SERVICE_STABLE_CONNECTION_THRESHOLD_SEC);
+        public AppServiceConnection(
+                Context context,
+                int i,
+                AppBindingConstants appBindingConstants,
+                Handler handler,
+                CarrierMessagingClientServiceFinder carrierMessagingClientServiceFinder,
+                ComponentName componentName) {
+            super(
+                    "AppBindingService",
+                    context,
+                    handler,
+                    i,
+                    componentName,
+                    appBindingConstants.SERVICE_RECONNECT_BACKOFF_SEC,
+                    appBindingConstants.SERVICE_RECONNECT_BACKOFF_INCREASE,
+                    appBindingConstants.SERVICE_RECONNECT_MAX_BACKOFF_SEC,
+                    appBindingConstants.SERVICE_STABLE_CONNECTION_THRESHOLD_SEC);
             this.mFinder = carrierMessagingClientServiceFinder;
             this.mConstants = appBindingConstants;
         }
@@ -73,8 +90,7 @@ public final class AppBindingService extends Binder {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class Injector {
-    }
+    public final class Injector {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Lifecycle extends SystemService {
@@ -97,7 +113,8 @@ public final class AppBindingService extends Binder {
                     return;
                 }
                 synchronized (appBindingService.mLock) {
-                    appBindingService.forAllAppsLocked(new AppBindingService$$ExternalSyntheticLambda2());
+                    appBindingService.forAllAppsLocked(
+                            new AppBindingService$$ExternalSyntheticLambda2());
                 }
                 return;
             }
@@ -108,9 +125,22 @@ public final class AppBindingService extends Binder {
             Context context = appBindingService.mContext;
             BroadcastReceiver broadcastReceiver = appBindingService.mPackageUserMonitor;
             UserHandle userHandle = UserHandle.ALL;
-            context.registerReceiverAsUser(broadcastReceiver, userHandle, intentFilter, null, appBindingService.mHandler);
-            appBindingService.mContext.registerReceiverAsUser(appBindingService.mPackageUserMonitor, userHandle, BatteryService$$ExternalSyntheticOutline0.m("android.intent.action.USER_REMOVED"), null, appBindingService.mHandler);
-            appBindingService.mContext.getContentResolver().registerContentObserver(Settings.Global.getUriFor("app_binding_constants"), false, appBindingService.mSettingsObserver);
+            context.registerReceiverAsUser(
+                    broadcastReceiver, userHandle, intentFilter, null, appBindingService.mHandler);
+            appBindingService.mContext.registerReceiverAsUser(
+                    appBindingService.mPackageUserMonitor,
+                    userHandle,
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            "android.intent.action.USER_REMOVED"),
+                    null,
+                    appBindingService.mHandler);
+            appBindingService
+                    .mContext
+                    .getContentResolver()
+                    .registerContentObserver(
+                            Settings.Global.getUriFor("app_binding_constants"),
+                            false,
+                            appBindingService.mSettingsObserver);
             appBindingService.refreshConstants();
         }
 
@@ -150,7 +180,8 @@ public final class AppBindingService extends Binder {
     }
 
     /* renamed from: -$$Nest$mhandlePackageAddedReplacing, reason: not valid java name */
-    public static void m227$$Nest$mhandlePackageAddedReplacing(AppBindingService appBindingService, String str, int i) {
+    public static void m227$$Nest$mhandlePackageAddedReplacing(
+            AppBindingService appBindingService, String str, int i) {
         CarrierMessagingClientServiceFinder carrierMessagingClientServiceFinder;
         synchronized (appBindingService.mLock) {
             int i2 = 0;
@@ -160,8 +191,16 @@ public final class AppBindingService extends Binder {
                         carrierMessagingClientServiceFinder = null;
                         break;
                     } else {
-                        carrierMessagingClientServiceFinder = (CarrierMessagingClientServiceFinder) appBindingService.mApps.get(i2);
-                        if (!str.equals((String) CollectionUtils.firstOrNull(carrierMessagingClientServiceFinder.mRoleManager.getRoleHoldersAsUser("android.app.role.SMS", UserHandle.of(i))))) {
+                        carrierMessagingClientServiceFinder =
+                                (CarrierMessagingClientServiceFinder)
+                                        appBindingService.mApps.get(i2);
+                        if (!str.equals(
+                                (String)
+                                        CollectionUtils.firstOrNull(
+                                                carrierMessagingClientServiceFinder.mRoleManager
+                                                        .getRoleHoldersAsUser(
+                                                                "android.app.role.SMS",
+                                                                UserHandle.of(i))))) {
                             i2++;
                         }
                     }
@@ -181,72 +220,103 @@ public final class AppBindingService extends Binder {
         ArrayList arrayList = new ArrayList();
         this.mApps = arrayList;
         this.mConnections = new ArrayList();
-        this.mSettingsObserver = new ContentObserver() { // from class: com.android.server.appbinding.AppBindingService.1
-            @Override // android.database.ContentObserver
-            public final void onChange(boolean z) {
-                AppBindingService.this.refreshConstants();
-            }
-        };
-        this.mPackageUserMonitor = new BroadcastReceiver() { // from class: com.android.server.appbinding.AppBindingService.2
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                final int intExtra = intent.getIntExtra("android.intent.extra.user_handle", -10000);
-                if (intExtra == -10000) {
-                    Slog.w("AppBindingService", "Intent broadcast does not contain user handle: " + intent);
-                    return;
-                }
-                String action = intent.getAction();
-                if ("android.intent.action.USER_REMOVED".equals(action)) {
-                    AppBindingService appBindingService = AppBindingService.this;
-                    synchronized (appBindingService.mLock) {
-                        appBindingService.forAllAppsLocked(new Consumer() { // from class: com.android.server.appbinding.AppBindingService$$ExternalSyntheticLambda4
-                            @Override // java.util.function.Consumer
-                            public final void accept(Object obj) {
-                                int i = intExtra;
-                                CarrierMessagingClientServiceFinder carrierMessagingClientServiceFinder = (CarrierMessagingClientServiceFinder) obj;
-                                synchronized (carrierMessagingClientServiceFinder.mLock) {
-                                    carrierMessagingClientServiceFinder.mTargetPackages.delete(i);
-                                    carrierMessagingClientServiceFinder.mTargetServices.delete(i);
-                                    carrierMessagingClientServiceFinder.mLastMessages.delete(i);
-                                }
-                            }
-                        });
-                        appBindingService.mRunningUsers.delete(intExtra);
+        this.mSettingsObserver =
+                new ContentObserver() { // from class:
+                                        // com.android.server.appbinding.AppBindingService.1
+                    @Override // android.database.ContentObserver
+                    public final void onChange(boolean z) {
+                        AppBindingService.this.refreshConstants();
                     }
-                    return;
-                }
-                Uri data = intent.getData();
-                String schemeSpecificPart = data != null ? data.getSchemeSpecificPart() : null;
-                if (schemeSpecificPart == null) {
-                    Slog.w("AppBindingService", "Intent broadcast does not contain package name: " + intent);
-                    return;
-                }
-                boolean booleanExtra = intent.getBooleanExtra("android.intent.extra.REPLACING", false);
-                action.getClass();
-                if (action.equals("android.intent.action.PACKAGE_CHANGED")) {
-                    AppBindingService.m227$$Nest$mhandlePackageAddedReplacing(AppBindingService.this, schemeSpecificPart, intExtra);
-                } else if (action.equals("android.intent.action.PACKAGE_ADDED") && booleanExtra) {
-                    AppBindingService.m227$$Nest$mhandlePackageAddedReplacing(AppBindingService.this, schemeSpecificPart, intExtra);
-                }
-            }
-        };
+                };
+        this.mPackageUserMonitor =
+                new BroadcastReceiver() { // from class:
+                                          // com.android.server.appbinding.AppBindingService.2
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        final int intExtra =
+                                intent.getIntExtra("android.intent.extra.user_handle", -10000);
+                        if (intExtra == -10000) {
+                            Slog.w(
+                                    "AppBindingService",
+                                    "Intent broadcast does not contain user handle: " + intent);
+                            return;
+                        }
+                        String action = intent.getAction();
+                        if ("android.intent.action.USER_REMOVED".equals(action)) {
+                            AppBindingService appBindingService = AppBindingService.this;
+                            synchronized (appBindingService.mLock) {
+                                appBindingService.forAllAppsLocked(
+                                        new Consumer() { // from class:
+                                                         // com.android.server.appbinding.AppBindingService$$ExternalSyntheticLambda4
+                                            @Override // java.util.function.Consumer
+                                            public final void accept(Object obj) {
+                                                int i = intExtra;
+                                                CarrierMessagingClientServiceFinder
+                                                        carrierMessagingClientServiceFinder =
+                                                                (CarrierMessagingClientServiceFinder)
+                                                                        obj;
+                                                synchronized (
+                                                        carrierMessagingClientServiceFinder.mLock) {
+                                                    carrierMessagingClientServiceFinder
+                                                            .mTargetPackages.delete(i);
+                                                    carrierMessagingClientServiceFinder
+                                                            .mTargetServices.delete(i);
+                                                    carrierMessagingClientServiceFinder
+                                                            .mLastMessages.delete(i);
+                                                }
+                                            }
+                                        });
+                                appBindingService.mRunningUsers.delete(intExtra);
+                            }
+                            return;
+                        }
+                        Uri data = intent.getData();
+                        String schemeSpecificPart =
+                                data != null ? data.getSchemeSpecificPart() : null;
+                        if (schemeSpecificPart == null) {
+                            Slog.w(
+                                    "AppBindingService",
+                                    "Intent broadcast does not contain package name: " + intent);
+                            return;
+                        }
+                        boolean booleanExtra =
+                                intent.getBooleanExtra("android.intent.extra.REPLACING", false);
+                        action.getClass();
+                        if (action.equals("android.intent.action.PACKAGE_CHANGED")) {
+                            AppBindingService.m227$$Nest$mhandlePackageAddedReplacing(
+                                    AppBindingService.this, schemeSpecificPart, intExtra);
+                        } else if (action.equals("android.intent.action.PACKAGE_ADDED")
+                                && booleanExtra) {
+                            AppBindingService.m227$$Nest$mhandlePackageAddedReplacing(
+                                    AppBindingService.this, schemeSpecificPart, intExtra);
+                        }
+                    }
+                };
         this.mInjector = injector;
         this.mContext = context;
         this.mIPackageManager = AppGlobals.getPackageManager();
         this.mHandler = BackgroundThread.getHandler();
-        arrayList.add(new CarrierMessagingClientServiceFinder(context, new BiConsumer() { // from class: com.android.server.appbinding.AppBindingService$$ExternalSyntheticLambda0
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                AppBindingService appBindingService = AppBindingService.this;
-                CarrierMessagingClientServiceFinder carrierMessagingClientServiceFinder = (CarrierMessagingClientServiceFinder) obj;
-                int intValue = ((Integer) obj2).intValue();
-                synchronized (appBindingService.mLock) {
-                    carrierMessagingClientServiceFinder.getClass();
-                    appBindingService.unbindServicesLocked(intValue, carrierMessagingClientServiceFinder);
-                    appBindingService.bindServicesLocked(intValue, carrierMessagingClientServiceFinder);
-                }
-            }
-        }));
+        arrayList.add(
+                new CarrierMessagingClientServiceFinder(
+                        context,
+                        new BiConsumer() { // from class:
+                                           // com.android.server.appbinding.AppBindingService$$ExternalSyntheticLambda0
+                            @Override // java.util.function.BiConsumer
+                            public final void accept(Object obj, Object obj2) {
+                                AppBindingService appBindingService = AppBindingService.this;
+                                CarrierMessagingClientServiceFinder
+                                        carrierMessagingClientServiceFinder =
+                                                (CarrierMessagingClientServiceFinder) obj;
+                                int intValue = ((Integer) obj2).intValue();
+                                synchronized (appBindingService.mLock) {
+                                    carrierMessagingClientServiceFinder.getClass();
+                                    appBindingService.unbindServicesLocked(
+                                            intValue, carrierMessagingClientServiceFinder);
+                                    appBindingService.bindServicesLocked(
+                                            intValue, carrierMessagingClientServiceFinder);
+                                }
+                            }
+                        }));
         this.mConstants = new AppBindingConstants("");
     }
 
@@ -256,16 +326,22 @@ public final class AppBindingService extends Binder {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void bindServicesLocked(int r17, com.android.server.appbinding.finders.CarrierMessagingClientServiceFinder r18) {
+    public final void bindServicesLocked(
+            int r17,
+            com.android.server.appbinding.finders.CarrierMessagingClientServiceFinder r18) {
         /*
             Method dump skipped, instructions count: 309
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.appbinding.AppBindingService.bindServicesLocked(int, com.android.server.appbinding.finders.CarrierMessagingClientServiceFinder):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.appbinding.AppBindingService.bindServicesLocked(int,"
+                    + " com.android.server.appbinding.finders.CarrierMessagingClientServiceFinder):void");
     }
 
     @Override // android.os.Binder
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         if (DumpUtils.checkDumpPermission(this.mContext, "AppBindingService", printWriter)) {
             if (strArr.length > 0 && "-s".equals(strArr[0])) {
                 dumpSimple(printWriter);
@@ -285,7 +361,8 @@ public final class AppBindingService extends Binder {
                     printWriter.println();
                     printWriter.println("  Connections:");
                     for (int i2 = 0; i2 < this.mConnections.size(); i2++) {
-                        AppServiceConnection appServiceConnection = (AppServiceConnection) this.mConnections.get(i2);
+                        AppServiceConnection appServiceConnection =
+                                (AppServiceConnection) this.mConnections.get(i2);
                         printWriter.print("    App type: ");
                         appServiceConnection.mFinder.getClass();
                         printWriter.print("[Default SMS app]");
@@ -297,7 +374,8 @@ public final class AppBindingService extends Binder {
                     }
                     printWriter.println();
                     printWriter.println("  Finders:");
-                    forAllAppsLocked(new AppBindingService$$ExternalSyntheticLambda1(0, printWriter));
+                    forAllAppsLocked(
+                            new AppBindingService$$ExternalSyntheticLambda1(0, printWriter));
                 } catch (Throwable th) {
                     throw th;
                 }
@@ -312,7 +390,8 @@ public final class AppBindingService extends Binder {
         synchronized (this.mLock) {
             for (int i2 = 0; i2 < this.mConnections.size(); i2++) {
                 try {
-                    AppServiceConnection appServiceConnection = (AppServiceConnection) this.mConnections.get(i2);
+                    AppServiceConnection appServiceConnection =
+                            (AppServiceConnection) this.mConnections.get(i2);
                     printWriter.print("conn,");
                     appServiceConnection.mFinder.getClass();
                     printWriter.print("[Default SMS app]");
@@ -383,10 +462,15 @@ public final class AppBindingService extends Binder {
         }
     }
 
-    public final void unbindServicesLocked(int i, CarrierMessagingClientServiceFinder carrierMessagingClientServiceFinder) {
+    public final void unbindServicesLocked(
+            int i, CarrierMessagingClientServiceFinder carrierMessagingClientServiceFinder) {
         for (int size = this.mConnections.size() - 1; size >= 0; size--) {
-            AppServiceConnection appServiceConnection = (AppServiceConnection) this.mConnections.get(size);
-            if (appServiceConnection.mUserId == i && (carrierMessagingClientServiceFinder == null || appServiceConnection.mFinder == carrierMessagingClientServiceFinder)) {
+            AppServiceConnection appServiceConnection =
+                    (AppServiceConnection) this.mConnections.get(size);
+            if (appServiceConnection.mUserId == i
+                    && (carrierMessagingClientServiceFinder == null
+                            || appServiceConnection.mFinder
+                                    == carrierMessagingClientServiceFinder)) {
                 this.mConnections.remove(size);
                 appServiceConnection.unbind();
             }

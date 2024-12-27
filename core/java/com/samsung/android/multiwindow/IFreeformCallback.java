@@ -15,7 +15,8 @@ public interface IFreeformCallback extends IInterface {
 
     void onMinimizeAnimationEnd(int i) throws RemoteException;
 
-    void onMinimized(ComponentName componentName, int i, int i2, int i3, int i4, boolean z) throws RemoteException;
+    void onMinimized(ComponentName componentName, int i, int i2, int i3, int i4, boolean z)
+            throws RemoteException;
 
     void onTaskMoveEnded(int i, IRemoteCallback iRemoteCallback) throws RemoteException;
 
@@ -25,24 +26,21 @@ public interface IFreeformCallback extends IInterface {
 
     public static class Default implements IFreeformCallback {
         @Override // com.samsung.android.multiwindow.IFreeformCallback
-        public void onMinimized(ComponentName realActivity, int taskId, int userId, int x, int y, boolean center) throws RemoteException {
-        }
+        public void onMinimized(
+                ComponentName realActivity, int taskId, int userId, int x, int y, boolean center)
+                throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IFreeformCallback
-        public void onUnminimized(int taskId) throws RemoteException {
-        }
+        public void onUnminimized(int taskId) throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IFreeformCallback
-        public void onMinimizeAnimationEnd(int taskId) throws RemoteException {
-        }
+        public void onMinimizeAnimationEnd(int taskId) throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IFreeformCallback
-        public void onTaskMoveStarted(int taskId, Point point) throws RemoteException {
-        }
+        public void onTaskMoveStarted(int taskId, Point point) throws RemoteException {}
 
         @Override // com.samsung.android.multiwindow.IFreeformCallback
-        public void onTaskMoveEnded(int taskId, IRemoteCallback callback) throws RemoteException {
-        }
+        public void onTaskMoveEnded(int taskId, IRemoteCallback callback) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -50,7 +48,7 @@ public interface IFreeformCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFreeformCallback {
+    public abstract static class Stub extends Binder implements IFreeformCallback {
         static final int TRANSACTION_onMinimizeAnimationEnd = 3;
         static final int TRANSACTION_onMinimized = 1;
         static final int TRANSACTION_onTaskMoveEnded = 5;
@@ -100,7 +98,8 @@ public interface IFreeformCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IFreeformCallback.DESCRIPTOR);
             }
@@ -110,7 +109,8 @@ public interface IFreeformCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg1 = data.readInt();
                     int _arg2 = data.readInt();
                     int _arg3 = data.readInt();
@@ -137,7 +137,8 @@ public interface IFreeformCallback extends IInterface {
                     return true;
                 case 5:
                     int _arg05 = data.readInt();
-                    IRemoteCallback _arg13 = IRemoteCallback.Stub.asInterface(data.readStrongBinder());
+                    IRemoteCallback _arg13 =
+                            IRemoteCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onTaskMoveEnded(_arg05, _arg13);
                     return true;
@@ -163,7 +164,14 @@ public interface IFreeformCallback extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IFreeformCallback
-            public void onMinimized(ComponentName realActivity, int taskId, int userId, int x, int y, boolean center) throws RemoteException {
+            public void onMinimized(
+                    ComponentName realActivity,
+                    int taskId,
+                    int userId,
+                    int x,
+                    int y,
+                    boolean center)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IFreeformCallback.DESCRIPTOR);
@@ -217,7 +225,8 @@ public interface IFreeformCallback extends IInterface {
             }
 
             @Override // com.samsung.android.multiwindow.IFreeformCallback
-            public void onTaskMoveEnded(int taskId, IRemoteCallback callback) throws RemoteException {
+            public void onTaskMoveEnded(int taskId, IRemoteCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IFreeformCallback.DESCRIPTOR);

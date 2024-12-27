@@ -6,11 +6,12 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
 import com.android.internal.R;
-import com.android.internal.view.menu.MenuBuilder;
 
 /* loaded from: classes5.dex */
-public final class ExpandedMenuView extends ListView implements MenuBuilder.ItemInvoker, MenuView, AdapterView.OnItemClickListener {
+public final class ExpandedMenuView extends ListView
+        implements MenuBuilder.ItemInvoker, MenuView, AdapterView.OnItemClickListener {
     private int mAnimations;
     private MenuBuilder mMenu;
 
@@ -27,7 +28,8 @@ public final class ExpandedMenuView extends ListView implements MenuBuilder.Item
         this.mMenu = menu;
     }
 
-    @Override // android.widget.ListView, android.widget.AbsListView, android.widget.AdapterView, android.view.ViewGroup, android.view.View
+    @Override // android.widget.ListView, android.widget.AbsListView, android.widget.AdapterView,
+              // android.view.ViewGroup, android.view.View
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         setChildrenDrawingCacheEnabled(false);

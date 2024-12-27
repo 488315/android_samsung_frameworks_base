@@ -71,44 +71,35 @@ public interface IGnssCallback extends IInterface {
 
     public static class Default implements IGnssCallback {
         @Override // android.hardware.gnss.IGnssCallback
-        public void gnssSetCapabilitiesCb(int capabilities) throws RemoteException {
-        }
+        public void gnssSetCapabilitiesCb(int capabilities) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssCallback
-        public void gnssStatusCb(int status) throws RemoteException {
-        }
+        public void gnssStatusCb(int status) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssCallback
-        public void gnssSvStatusCb(GnssSvInfo[] svInfoList) throws RemoteException {
-        }
+        public void gnssSvStatusCb(GnssSvInfo[] svInfoList) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssCallback
-        public void gnssLocationCb(GnssLocation location) throws RemoteException {
-        }
+        public void gnssLocationCb(GnssLocation location) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssCallback
-        public void gnssNmeaCb(long timestamp, String nmea) throws RemoteException {
-        }
+        public void gnssNmeaCb(long timestamp, String nmea) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssCallback
-        public void gnssAcquireWakelockCb() throws RemoteException {
-        }
+        public void gnssAcquireWakelockCb() throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssCallback
-        public void gnssReleaseWakelockCb() throws RemoteException {
-        }
+        public void gnssReleaseWakelockCb() throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssCallback
-        public void gnssSetSystemInfoCb(GnssSystemInfo info) throws RemoteException {
-        }
+        public void gnssSetSystemInfoCb(GnssSystemInfo info) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssCallback
-        public void gnssRequestTimeCb() throws RemoteException {
-        }
+        public void gnssRequestTimeCb() throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssCallback
-        public void gnssRequestLocationCb(boolean independentFromGnss, boolean isUserEmergency) throws RemoteException {
-        }
+        public void gnssRequestLocationCb(boolean independentFromGnss, boolean isUserEmergency)
+                throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssCallback
         public int getInterfaceVersion() {
@@ -126,7 +117,7 @@ public interface IGnssCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGnssCallback {
+    public abstract static class Stub extends Binder implements IGnssCallback {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_gnssAcquireWakelockCb = 6;
@@ -198,7 +189,8 @@ public interface IGnssCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -258,7 +250,8 @@ public interface IGnssCallback extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 8:
-                    GnssSystemInfo _arg06 = (GnssSystemInfo) data.readTypedObject(GnssSystemInfo.CREATOR);
+                    GnssSystemInfo _arg06 =
+                            (GnssSystemInfo) data.readTypedObject(GnssSystemInfo.CREATOR);
                     data.enforceNoDataAvail();
                     gnssSetSystemInfoCb(_arg06);
                     reply.writeNoException();
@@ -458,7 +451,8 @@ public interface IGnssCallback extends IInterface {
             }
 
             @Override // android.hardware.gnss.IGnssCallback
-            public void gnssRequestLocationCb(boolean independentFromGnss, boolean isUserEmergency) throws RemoteException {
+            public void gnssRequestLocationCb(boolean independentFromGnss, boolean isUserEmergency)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -523,21 +517,23 @@ public interface IGnssCallback extends IInterface {
     }
 
     public static class GnssSvInfo implements Parcelable {
-        public static final Parcelable.Creator<GnssSvInfo> CREATOR = new Parcelable.Creator<GnssSvInfo>() { // from class: android.hardware.gnss.IGnssCallback.GnssSvInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public GnssSvInfo createFromParcel(Parcel _aidl_source) {
-                GnssSvInfo _aidl_out = new GnssSvInfo();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<GnssSvInfo> CREATOR =
+                new Parcelable.Creator<GnssSvInfo>() { // from class:
+                    // android.hardware.gnss.IGnssCallback.GnssSvInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public GnssSvInfo createFromParcel(Parcel _aidl_source) {
+                        GnssSvInfo _aidl_out = new GnssSvInfo();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public GnssSvInfo[] newArray(int _aidl_size) {
-                return new GnssSvInfo[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public GnssSvInfo[] newArray(int _aidl_size) {
+                        return new GnssSvInfo[_aidl_size];
+                    }
+                };
         public int constellation;
         public int svid = 0;
         public float cN0Dbhz = 0.0f;
@@ -661,21 +657,23 @@ public interface IGnssCallback extends IInterface {
     }
 
     public static class GnssSystemInfo implements Parcelable {
-        public static final Parcelable.Creator<GnssSystemInfo> CREATOR = new Parcelable.Creator<GnssSystemInfo>() { // from class: android.hardware.gnss.IGnssCallback.GnssSystemInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public GnssSystemInfo createFromParcel(Parcel _aidl_source) {
-                GnssSystemInfo _aidl_out = new GnssSystemInfo();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<GnssSystemInfo> CREATOR =
+                new Parcelable.Creator<GnssSystemInfo>() { // from class:
+                    // android.hardware.gnss.IGnssCallback.GnssSystemInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public GnssSystemInfo createFromParcel(Parcel _aidl_source) {
+                        GnssSystemInfo _aidl_out = new GnssSystemInfo();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public GnssSystemInfo[] newArray(int _aidl_size) {
-                return new GnssSystemInfo[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public GnssSystemInfo[] newArray(int _aidl_size) {
+                        return new GnssSystemInfo[_aidl_size];
+                    }
+                };
         public String name;
         public int yearOfHw = 0;
 

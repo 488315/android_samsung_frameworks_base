@@ -24,7 +24,7 @@ public interface IKeystoreMetrics extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IKeystoreMetrics {
+    public abstract static class Stub extends Binder implements IKeystoreMetrics {
         static final int TRANSACTION_pullMetrics = 1;
 
         public Stub() {
@@ -62,7 +62,8 @@ public interface IKeystoreMetrics extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IKeystoreMetrics.DESCRIPTOR);
             }
@@ -108,7 +109,8 @@ public interface IKeystoreMetrics extends IInterface {
                     _data.writeInt(atomID);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    KeystoreAtom[] _result = (KeystoreAtom[]) _reply.createTypedArray(KeystoreAtom.CREATOR);
+                    KeystoreAtom[] _result =
+                            (KeystoreAtom[]) _reply.createTypedArray(KeystoreAtom.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

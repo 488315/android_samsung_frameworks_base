@@ -4,6 +4,7 @@ import android.hardware.audio.common.V2_0.AudioConfig$$ExternalSyntheticOutline0
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -17,7 +18,8 @@ public final class DabTableEntry {
         ArrayList arrayList = new ArrayList();
         HwBlob readBuffer = hwParcel.readBuffer(16L);
         int int32 = readBuffer.getInt32(8L);
-        HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 24, readBuffer.handle(), 0L, true);
+        HwBlob readEmbeddedBuffer =
+                hwParcel.readEmbeddedBuffer(int32 * 24, readBuffer.handle(), 0L, true);
         arrayList.clear();
         int i = 0;
         int i2 = 0;
@@ -27,7 +29,8 @@ public final class DabTableEntry {
             dabTableEntry.frequency = i;
             long j = i2 * 24;
             dabTableEntry.label = readEmbeddedBuffer.getString(j);
-            hwParcel.readEmbeddedBuffer(r3.getBytes().length + 1, readEmbeddedBuffer.handle(), j, false);
+            hwParcel.readEmbeddedBuffer(
+                    r3.getBytes().length + 1, readEmbeddedBuffer.handle(), j, false);
             dabTableEntry.frequency = readEmbeddedBuffer.getInt32(j + 16);
             arrayList.add(dabTableEntry);
             i2++;
@@ -44,11 +47,14 @@ public final class DabTableEntry {
             return false;
         }
         DabTableEntry dabTableEntry = (DabTableEntry) obj;
-        return HidlSupport.deepEquals(this.label, dabTableEntry.label) && this.frequency == dabTableEntry.frequency;
+        return HidlSupport.deepEquals(this.label, dabTableEntry.label)
+                && this.frequency == dabTableEntry.frequency;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.label)), AudioConfig$$ExternalSyntheticOutline0.m(this.frequency));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(this.label)),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.frequency));
     }
 
     public final String toString() {

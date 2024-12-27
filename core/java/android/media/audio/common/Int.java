@@ -3,27 +3,29 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class Int implements Parcelable {
-    public static final Parcelable.Creator<Int> CREATOR = new Parcelable.Creator<Int>() { // from class: android.media.audio.common.Int.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Int createFromParcel(Parcel _aidl_source) {
-            Int _aidl_out = new Int();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<Int> CREATOR =
+            new Parcelable.Creator<Int>() { // from class: android.media.audio.common.Int.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Int createFromParcel(Parcel _aidl_source) {
+                    Int _aidl_out = new Int();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Int[] newArray(int _aidl_size) {
-            return new Int[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Int[] newArray(int _aidl_size) {
+                    return new Int[_aidl_size];
+                }
+            };
     public int value = 0;
 
     @Override // android.os.Parcelable

@@ -1,21 +1,5 @@
 package android.app;
 
-import android.app.ActivityManager;
-import android.app.ActivityTaskManager;
-import android.app.ApplicationErrorReport;
-import android.app.IActivityController;
-import android.app.IApplicationStartInfoCompleteListener;
-import android.app.IApplicationThread;
-import android.app.IForegroundServiceObserver;
-import android.app.IInstrumentationWatcher;
-import android.app.IProcessObserver;
-import android.app.IServiceConnection;
-import android.app.IStopUserCallback;
-import android.app.ITaskStackListener;
-import android.app.IUiAutomationConnection;
-import android.app.IUidFrozenStateChangedCallback;
-import android.app.IUidObserver;
-import android.app.IUserSwitchObserver;
 import android.content.ComponentName;
 import android.content.IIntentReceiver;
 import android.content.IIntentSender;
@@ -45,16 +29,22 @@ import android.os.RemoteException;
 import android.os.StrictMode;
 import android.os.WorkSource;
 import android.text.TextUtils;
+
 import com.android.internal.os.IResultReceiver;
+
 import com.samsung.android.globalactions.presentation.viewmodel.DefaultActionNames;
 import com.samsung.android.sdhms.SemAppRestrictionManager;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
 public interface IActivityManager extends IInterface {
-    void addApplicationStartInfoCompleteListener(IApplicationStartInfoCompleteListener iApplicationStartInfoCompleteListener, int i) throws RemoteException;
+    void addApplicationStartInfoCompleteListener(
+            IApplicationStartInfoCompleteListener iApplicationStartInfoCompleteListener, int i)
+            throws RemoteException;
 
-    void addInstrumentationResults(IApplicationThread iApplicationThread, Bundle bundle) throws RemoteException;
+    void addInstrumentationResults(IApplicationThread iApplicationThread, Bundle bundle)
+            throws RemoteException;
 
     boolean addLongLiveApp(String str) throws RemoteException;
 
@@ -78,16 +68,66 @@ public interface IActivityManager extends IInterface {
 
     boolean bindBackupAgent(String str, int i, int i2, int i3) throws RemoteException;
 
-    int bindService(IApplicationThread iApplicationThread, IBinder iBinder, Intent intent, String str, IServiceConnection iServiceConnection, long j, String str2, int i) throws RemoteException;
+    int bindService(
+            IApplicationThread iApplicationThread,
+            IBinder iBinder,
+            Intent intent,
+            String str,
+            IServiceConnection iServiceConnection,
+            long j,
+            String str2,
+            int i)
+            throws RemoteException;
 
-    int bindServiceInstance(IApplicationThread iApplicationThread, IBinder iBinder, Intent intent, String str, IServiceConnection iServiceConnection, long j, String str2, String str3, int i) throws RemoteException;
+    int bindServiceInstance(
+            IApplicationThread iApplicationThread,
+            IBinder iBinder,
+            Intent intent,
+            String str,
+            IServiceConnection iServiceConnection,
+            long j,
+            String str2,
+            String str3,
+            int i)
+            throws RemoteException;
 
     void bootAnimationComplete() throws RemoteException;
 
     @Deprecated
-    int broadcastIntent(IApplicationThread iApplicationThread, Intent intent, String str, IIntentReceiver iIntentReceiver, int i, String str2, Bundle bundle, String[] strArr, int i2, Bundle bundle2, boolean z, boolean z2, int i3) throws RemoteException;
+    int broadcastIntent(
+            IApplicationThread iApplicationThread,
+            Intent intent,
+            String str,
+            IIntentReceiver iIntentReceiver,
+            int i,
+            String str2,
+            Bundle bundle,
+            String[] strArr,
+            int i2,
+            Bundle bundle2,
+            boolean z,
+            boolean z2,
+            int i3)
+            throws RemoteException;
 
-    int broadcastIntentWithFeature(IApplicationThread iApplicationThread, String str, Intent intent, String str2, IIntentReceiver iIntentReceiver, int i, String str3, Bundle bundle, String[] strArr, String[] strArr2, String[] strArr3, int i2, Bundle bundle2, boolean z, boolean z2, int i3) throws RemoteException;
+    int broadcastIntentWithFeature(
+            IApplicationThread iApplicationThread,
+            String str,
+            Intent intent,
+            String str2,
+            IIntentReceiver iIntentReceiver,
+            int i,
+            String str3,
+            Bundle bundle,
+            String[] strArr,
+            String[] strArr2,
+            String[] strArr3,
+            int i2,
+            Bundle bundle2,
+            boolean z,
+            boolean z2,
+            int i3)
+            throws RemoteException;
 
     boolean canRestrict(int i, String str, int i2) throws RemoteException;
 
@@ -95,7 +135,8 @@ public interface IActivityManager extends IInterface {
 
     void cancelTaskWindowTransition(int i) throws RemoteException;
 
-    int checkContentUriPermissionFull(Uri uri, int i, int i2, int i3, int i4) throws RemoteException;
+    int checkContentUriPermissionFull(Uri uri, int i, int i2, int i3, int i4)
+            throws RemoteException;
 
     int checkPermission(String str, int i, int i2) throws RemoteException;
 
@@ -103,19 +144,24 @@ public interface IActivityManager extends IInterface {
 
     void checkProfileForADCP(int i, String str) throws RemoteException;
 
-    int checkUriPermission(Uri uri, int i, int i2, int i3, int i4, IBinder iBinder) throws RemoteException;
+    int checkUriPermission(Uri uri, int i, int i2, int i3, int i4, IBinder iBinder)
+            throws RemoteException;
 
-    int[] checkUriPermissions(List<Uri> list, int i, int i2, int i3, int i4, IBinder iBinder) throws RemoteException;
+    int[] checkUriPermissions(List<Uri> list, int i, int i2, int i3, int i4, IBinder iBinder)
+            throws RemoteException;
 
     void clearAllOverridePermissionStates(int i) throws RemoteException;
 
-    boolean clearApplicationUserData(String str, boolean z, IPackageDataObserver iPackageDataObserver, int i) throws RemoteException;
+    boolean clearApplicationUserData(
+            String str, boolean z, IPackageDataObserver iPackageDataObserver, int i)
+            throws RemoteException;
 
     boolean clearLongLiveTask(int i) throws RemoteException;
 
     void clearOverridePermissionStates(int i, int i2) throws RemoteException;
 
-    boolean clearRestrictionInfo(List<SemAppRestrictionManager.AppRestrictionInfo> list) throws RemoteException;
+    boolean clearRestrictionInfo(List<SemAppRestrictionManager.AppRestrictionInfo> list)
+            throws RemoteException;
 
     void clearTTSPkgInfo() throws RemoteException;
 
@@ -123,15 +169,28 @@ public interface IActivityManager extends IInterface {
 
     void closeSystemDialogsInDisplay(String str, int i) throws RemoteException;
 
-    void crashApplicationWithType(int i, int i2, String str, int i3, String str2, boolean z, int i4) throws RemoteException;
+    void crashApplicationWithType(int i, int i2, String str, int i3, String str2, boolean z, int i4)
+            throws RemoteException;
 
-    void crashApplicationWithTypeWithExtras(int i, int i2, String str, int i3, String str2, boolean z, int i4, Bundle bundle) throws RemoteException;
+    void crashApplicationWithTypeWithExtras(
+            int i, int i2, String str, int i3, String str2, boolean z, int i4, Bundle bundle)
+            throws RemoteException;
 
     void dismissUserSwitchingDialog(int i) throws RemoteException;
 
     void doActiveLaunch(String str, boolean z, int i) throws RemoteException;
 
-    boolean dumpHeap(String str, int i, boolean z, boolean z2, boolean z3, String str2, String str3, ParcelFileDescriptor parcelFileDescriptor, RemoteCallback remoteCallback) throws RemoteException;
+    boolean dumpHeap(
+            String str,
+            int i,
+            boolean z,
+            boolean z2,
+            boolean z3,
+            String str2,
+            String str3,
+            ParcelFileDescriptor parcelFileDescriptor,
+            RemoteCallback remoteCallback)
+            throws RemoteException;
 
     void dumpHeapFinished(String str) throws RemoteException;
 
@@ -147,9 +206,11 @@ public interface IActivityManager extends IInterface {
 
     void finishHeavyWeightApp() throws RemoteException;
 
-    void finishInstrumentation(IApplicationThread iApplicationThread, int i, Bundle bundle) throws RemoteException;
+    void finishInstrumentation(IApplicationThread iApplicationThread, int i, Bundle bundle)
+            throws RemoteException;
 
-    void finishReceiver(IBinder iBinder, int i, String str, Bundle bundle, boolean z, int i2) throws RemoteException;
+    void finishReceiver(IBinder iBinder, int i, String str, Bundle bundle, boolean z, int i2)
+            throws RemoteException;
 
     void forceDelayBroadcastDelivery(String str, long j) throws RemoteException;
 
@@ -177,9 +238,12 @@ public interface IActivityManager extends IInterface {
 
     String[] getContentByTask(int i) throws RemoteException;
 
-    ContentProviderHolder getContentProvider(IApplicationThread iApplicationThread, String str, String str2, int i, boolean z) throws RemoteException;
+    ContentProviderHolder getContentProvider(
+            IApplicationThread iApplicationThread, String str, String str2, int i, boolean z)
+            throws RemoteException;
 
-    ContentProviderHolder getContentProviderExternal(String str, int i, IBinder iBinder, String str2) throws RemoteException;
+    ContentProviderHolder getContentProviderExternal(
+            String str, int i, IBinder iBinder, String str2) throws RemoteException;
 
     UserInfo getCurrentUser() throws RemoteException;
 
@@ -191,24 +255,52 @@ public interface IActivityManager extends IInterface {
 
     ActivityTaskManager.RootTaskInfo getFocusedRootTaskInfo() throws RemoteException;
 
-    int getForegroundServiceType(ComponentName componentName, IBinder iBinder) throws RemoteException;
+    int getForegroundServiceType(ComponentName componentName, IBinder iBinder)
+            throws RemoteException;
 
     Configuration getGlobalConfiguration() throws RemoteException;
 
-    ParceledListSlice<ApplicationExitInfo> getHistoricalProcessExitReasons(String str, int i, int i2, int i3) throws RemoteException;
+    ParceledListSlice<ApplicationExitInfo> getHistoricalProcessExitReasons(
+            String str, int i, int i2, int i3) throws RemoteException;
 
-    ParceledListSlice<ApplicationStartInfo> getHistoricalProcessStartReasons(String str, int i, int i2) throws RemoteException;
+    ParceledListSlice<ApplicationStartInfo> getHistoricalProcessStartReasons(
+            String str, int i, int i2) throws RemoteException;
 
-    ActivityManager.PendingIntentInfo getInfoForIntentSender(IIntentSender iIntentSender) throws RemoteException;
+    ActivityManager.PendingIntentInfo getInfoForIntentSender(IIntentSender iIntentSender)
+            throws RemoteException;
 
-    ParceledListSlice<PackageInfo> getInstalledPackageListFromMARs(int i, int i2) throws RemoteException;
+    ParceledListSlice<PackageInfo> getInstalledPackageListFromMARs(int i, int i2)
+            throws RemoteException;
 
     Intent getIntentForIntentSender(IIntentSender iIntentSender) throws RemoteException;
 
     @Deprecated
-    IIntentSender getIntentSender(int i, String str, IBinder iBinder, String str2, int i2, Intent[] intentArr, String[] strArr, int i3, Bundle bundle, int i4) throws RemoteException;
+    IIntentSender getIntentSender(
+            int i,
+            String str,
+            IBinder iBinder,
+            String str2,
+            int i2,
+            Intent[] intentArr,
+            String[] strArr,
+            int i3,
+            Bundle bundle,
+            int i4)
+            throws RemoteException;
 
-    IIntentSender getIntentSenderWithFeature(int i, String str, String str2, IBinder iBinder, String str3, int i2, Intent[] intentArr, String[] strArr, int i3, Bundle bundle, int i4) throws RemoteException;
+    IIntentSender getIntentSenderWithFeature(
+            int i,
+            String str,
+            String str2,
+            IBinder iBinder,
+            String str3,
+            int i2,
+            Intent[] intentArr,
+            String[] strArr,
+            int i3,
+            Bundle bundle,
+            int i4)
+            throws RemoteException;
 
     int[] getIsolatedProcessList() throws RemoteException;
 
@@ -236,9 +328,11 @@ public interface IActivityManager extends IInterface {
 
     int getMemoryTrimLevel() throws RemoteException;
 
-    void getMimeTypeFilterAsync(Uri uri, int i, RemoteCallback remoteCallback) throws RemoteException;
+    void getMimeTypeFilterAsync(Uri uri, int i, RemoteCallback remoteCallback)
+            throws RemoteException;
 
-    void getMyMemoryState(ActivityManager.RunningAppProcessInfo runningAppProcessInfo) throws RemoteException;
+    void getMyMemoryState(ActivityManager.RunningAppProcessInfo runningAppProcessInfo)
+            throws RemoteException;
 
     Bundle getOptionsForIntentSender(IIntentSender iIntentSender) throws RemoteException;
 
@@ -256,11 +350,14 @@ public interface IActivityManager extends IInterface {
 
     ParceledListSlice getRecentTasks(int i, int i2, int i3) throws RemoteException;
 
-    List<SemAppRestrictionManager.AppRestrictionInfo> getRestrictableList(int i) throws RemoteException;
+    List<SemAppRestrictionManager.AppRestrictionInfo> getRestrictableList(int i)
+            throws RemoteException;
 
-    List<SemAppRestrictionManager.AppRestrictionInfo> getRestrictedList(int i) throws RemoteException;
+    List<SemAppRestrictionManager.AppRestrictionInfo> getRestrictedList(int i)
+            throws RemoteException;
 
-    SemAppRestrictionManager.RestrictionInfo getRestrictionInfo(int i, String str, int i2) throws RemoteException;
+    SemAppRestrictionManager.RestrictionInfo getRestrictionInfo(int i, String str, int i2)
+            throws RemoteException;
 
     List<ActivityManager.RunningAppProcessInfo> getRunningAppProcesses() throws RemoteException;
 
@@ -292,19 +389,32 @@ public interface IActivityManager extends IInterface {
 
     int getUidProcessState(int i, String str) throws RemoteException;
 
-    void grantUriPermission(IApplicationThread iApplicationThread, String str, Uri uri, int i, int i2) throws RemoteException;
+    void grantUriPermission(
+            IApplicationThread iApplicationThread, String str, Uri uri, int i, int i2)
+            throws RemoteException;
 
-    void handleApplicationCrash(IBinder iBinder, ApplicationErrorReport.ParcelableCrashInfo parcelableCrashInfo) throws RemoteException;
+    void handleApplicationCrash(
+            IBinder iBinder, ApplicationErrorReport.ParcelableCrashInfo parcelableCrashInfo)
+            throws RemoteException;
 
-    void handleApplicationStrictModeViolation(IBinder iBinder, int i, StrictMode.ViolationInfo violationInfo) throws RemoteException;
+    void handleApplicationStrictModeViolation(
+            IBinder iBinder, int i, StrictMode.ViolationInfo violationInfo) throws RemoteException;
 
-    boolean handleApplicationWtf(IBinder iBinder, String str, boolean z, ApplicationErrorReport.ParcelableCrashInfo parcelableCrashInfo, int i) throws RemoteException;
+    boolean handleApplicationWtf(
+            IBinder iBinder,
+            String str,
+            boolean z,
+            ApplicationErrorReport.ParcelableCrashInfo parcelableCrashInfo,
+            int i)
+            throws RemoteException;
 
-    int handleIncomingUser(int i, int i2, int i3, boolean z, boolean z2, String str, String str2) throws RemoteException;
+    int handleIncomingUser(int i, int i2, int i3, boolean z, boolean z2, String str, String str2)
+            throws RemoteException;
 
     void hang(IBinder iBinder, boolean z) throws RemoteException;
 
-    boolean hasServiceTimeLimitExceeded(ComponentName componentName, IBinder iBinder) throws RemoteException;
+    boolean hasServiceTimeLimitExceeded(ComponentName componentName, IBinder iBinder)
+            throws RemoteException;
 
     void holdLock(IBinder iBinder, int i) throws RemoteException;
 
@@ -374,17 +484,25 @@ public interface IActivityManager extends IInterface {
 
     boolean moveTaskToBackWithBundle(int i, boolean z, Bundle bundle) throws RemoteException;
 
-    void moveTaskToFront(IApplicationThread iApplicationThread, String str, int i, int i2, Bundle bundle) throws RemoteException;
+    void moveTaskToFront(
+            IApplicationThread iApplicationThread, String str, int i, int i2, Bundle bundle)
+            throws RemoteException;
 
     void moveTaskToRootTask(int i, int i2, boolean z) throws RemoteException;
 
-    void noteAlarmFinish(IIntentSender iIntentSender, WorkSource workSource, int i, String str) throws RemoteException;
+    void noteAlarmFinish(IIntentSender iIntentSender, WorkSource workSource, int i, String str)
+            throws RemoteException;
 
-    void noteAlarmStart(IIntentSender iIntentSender, WorkSource workSource, int i, String str) throws RemoteException;
+    void noteAlarmStart(IIntentSender iIntentSender, WorkSource workSource, int i, String str)
+            throws RemoteException;
 
-    void noteAppRestrictionEnabled(String str, int i, int i2, boolean z, int i3, String str2, int i4, long j) throws RemoteException;
+    void noteAppRestrictionEnabled(
+            String str, int i, int i2, boolean z, int i3, String str2, int i4, long j)
+            throws RemoteException;
 
-    void noteWakeupAlarm(IIntentSender iIntentSender, WorkSource workSource, int i, String str, String str2) throws RemoteException;
+    void noteWakeupAlarm(
+            IIntentSender iIntentSender, WorkSource workSource, int i, String str, String str2)
+            throws RemoteException;
 
     void notifyCleartextNetwork(int i, byte[] bArr) throws RemoteException;
 
@@ -398,50 +516,83 @@ public interface IActivityManager extends IInterface {
 
     void preloadBoosterAppsFromIpm(List<String> list, int i) throws RemoteException;
 
-    boolean profileControl(String str, int i, boolean z, ProfilerInfo profilerInfo, int i2) throws RemoteException;
+    boolean profileControl(String str, int i, boolean z, ProfilerInfo profilerInfo, int i2)
+            throws RemoteException;
 
-    void publishContentProviders(IApplicationThread iApplicationThread, List<ContentProviderHolder> list) throws RemoteException;
+    void publishContentProviders(
+            IApplicationThread iApplicationThread, List<ContentProviderHolder> list)
+            throws RemoteException;
 
     void publishService(IBinder iBinder, Intent intent, IBinder iBinder2) throws RemoteException;
 
-    ParceledListSlice queryIntentComponentsForIntentSender(IIntentSender iIntentSender, int i) throws RemoteException;
+    ParceledListSlice queryIntentComponentsForIntentSender(IIntentSender iIntentSender, int i)
+            throws RemoteException;
 
-    String[] queryRegisteredReceiverPackages(Intent intent, String str, int i) throws RemoteException;
+    String[] queryRegisteredReceiverPackages(Intent intent, String str, int i)
+            throws RemoteException;
 
     boolean refContentProvider(IBinder iBinder, int i, int i2) throws RemoteException;
 
     void registerDedicatedCallback(RemoteCallback remoteCallback, int i) throws RemoteException;
 
-    boolean registerForegroundServiceObserver(IForegroundServiceObserver iForegroundServiceObserver) throws RemoteException;
+    boolean registerForegroundServiceObserver(IForegroundServiceObserver iForegroundServiceObserver)
+            throws RemoteException;
 
-    boolean registerIntentSenderCancelListenerEx(IIntentSender iIntentSender, IResultReceiver iResultReceiver) throws RemoteException;
+    boolean registerIntentSenderCancelListenerEx(
+            IIntentSender iIntentSender, IResultReceiver iResultReceiver) throws RemoteException;
 
     void registerProcessObserver(IProcessObserver iProcessObserver) throws RemoteException;
 
-    Intent registerReceiver(IApplicationThread iApplicationThread, String str, IIntentReceiver iIntentReceiver, IntentFilter intentFilter, String str2, int i, int i2) throws RemoteException;
+    Intent registerReceiver(
+            IApplicationThread iApplicationThread,
+            String str,
+            IIntentReceiver iIntentReceiver,
+            IntentFilter intentFilter,
+            String str2,
+            int i,
+            int i2)
+            throws RemoteException;
 
-    Intent registerReceiverWithFeature(IApplicationThread iApplicationThread, String str, String str2, String str3, IIntentReceiver iIntentReceiver, IntentFilter intentFilter, String str4, int i, int i2) throws RemoteException;
+    Intent registerReceiverWithFeature(
+            IApplicationThread iApplicationThread,
+            String str,
+            String str2,
+            String str3,
+            IIntentReceiver iIntentReceiver,
+            IntentFilter intentFilter,
+            String str4,
+            int i,
+            int i2)
+            throws RemoteException;
 
     void registerStrictModeCallback(IBinder iBinder) throws RemoteException;
 
     void registerTaskStackListener(ITaskStackListener iTaskStackListener) throws RemoteException;
 
-    void registerUidFrozenStateChangedCallback(IUidFrozenStateChangedCallback iUidFrozenStateChangedCallback) throws RemoteException;
+    void registerUidFrozenStateChangedCallback(
+            IUidFrozenStateChangedCallback iUidFrozenStateChangedCallback) throws RemoteException;
 
-    void registerUidObserver(IUidObserver iUidObserver, int i, int i2, String str) throws RemoteException;
+    void registerUidObserver(IUidObserver iUidObserver, int i, int i2, String str)
+            throws RemoteException;
 
-    IBinder registerUidObserverForUids(IUidObserver iUidObserver, int i, int i2, String str, int[] iArr) throws RemoteException;
+    IBinder registerUidObserverForUids(
+            IUidObserver iUidObserver, int i, int i2, String str, int[] iArr)
+            throws RemoteException;
 
-    void registerUserSwitchObserver(IUserSwitchObserver iUserSwitchObserver, String str) throws RemoteException;
+    void registerUserSwitchObserver(IUserSwitchObserver iUserSwitchObserver, String str)
+            throws RemoteException;
 
-    void removeApplicationStartInfoCompleteListener(IApplicationStartInfoCompleteListener iApplicationStartInfoCompleteListener, int i) throws RemoteException;
+    void removeApplicationStartInfoCompleteListener(
+            IApplicationStartInfoCompleteListener iApplicationStartInfoCompleteListener, int i)
+            throws RemoteException;
 
     void removeContentProvider(IBinder iBinder, boolean z) throws RemoteException;
 
     @Deprecated
     void removeContentProviderExternal(String str, IBinder iBinder) throws RemoteException;
 
-    void removeContentProviderExternalAsUser(String str, IBinder iBinder, int i) throws RemoteException;
+    void removeContentProviderExternalAsUser(String str, IBinder iBinder, int i)
+            throws RemoteException;
 
     boolean removeLongLiveApp(String str) throws RemoteException;
 
@@ -489,19 +640,34 @@ public interface IActivityManager extends IInterface {
 
     void resumeAppSwitches() throws RemoteException;
 
-    void revokeUriPermission(IApplicationThread iApplicationThread, String str, Uri uri, int i, int i2) throws RemoteException;
+    void revokeUriPermission(
+            IApplicationThread iApplicationThread, String str, Uri uri, int i, int i2)
+            throws RemoteException;
 
     void scheduleApplicationInfoChanged(List<String> list, int i) throws RemoteException;
 
     void sendIdleJobTrigger() throws RemoteException;
 
-    int sendIntentSender(IApplicationThread iApplicationThread, IIntentSender iIntentSender, IBinder iBinder, int i, Intent intent, String str, IIntentReceiver iIntentReceiver, String str2, Bundle bundle) throws RemoteException;
+    int sendIntentSender(
+            IApplicationThread iApplicationThread,
+            IIntentSender iIntentSender,
+            IBinder iBinder,
+            int i,
+            Intent intent,
+            String str,
+            IIntentReceiver iIntentReceiver,
+            String str2,
+            Bundle bundle)
+            throws RemoteException;
 
-    void serviceDoneExecuting(IBinder iBinder, int i, int i2, int i3, Intent intent) throws RemoteException;
+    void serviceDoneExecuting(IBinder iBinder, int i, int i2, int i3, Intent intent)
+            throws RemoteException;
 
-    void setActivityController(IActivityController iActivityController, boolean z) throws RemoteException;
+    void setActivityController(IActivityController iActivityController, boolean z)
+            throws RemoteException;
 
-    void setActivityLocusContext(ComponentName componentName, LocusId locusId, IBinder iBinder) throws RemoteException;
+    void setActivityLocusContext(ComponentName componentName, LocusId locusId, IBinder iBinder)
+            throws RemoteException;
 
     void setAgentApp(String str, String str2) throws RemoteException;
 
@@ -541,7 +707,14 @@ public interface IActivityManager extends IInterface {
 
     void setRequestedOrientation(IBinder iBinder, int i) throws RemoteException;
 
-    void setServiceForeground(ComponentName componentName, IBinder iBinder, int i, Notification notification, int i2, int i3) throws RemoteException;
+    void setServiceForeground(
+            ComponentName componentName,
+            IBinder iBinder,
+            int i,
+            Notification notification,
+            int i2,
+            int i3)
+            throws RemoteException;
 
     void setStopUserOnSwitch(int i) throws RemoteException;
 
@@ -553,27 +726,77 @@ public interface IActivityManager extends IInterface {
 
     void setUserIsMonkey(boolean z) throws RemoteException;
 
-    boolean shouldServiceTimeOut(ComponentName componentName, IBinder iBinder) throws RemoteException;
+    boolean shouldServiceTimeOut(ComponentName componentName, IBinder iBinder)
+            throws RemoteException;
 
     void showBootMessage(CharSequence charSequence, boolean z) throws RemoteException;
 
-    void showWaitingForDebugger(IApplicationThread iApplicationThread, boolean z) throws RemoteException;
+    void showWaitingForDebugger(IApplicationThread iApplicationThread, boolean z)
+            throws RemoteException;
 
     boolean shutdown(int i) throws RemoteException;
 
     void signalPersistentProcesses(int i) throws RemoteException;
 
     @Deprecated
-    int startActivity(IApplicationThread iApplicationThread, String str, Intent intent, String str2, IBinder iBinder, String str3, int i, int i2, ProfilerInfo profilerInfo, Bundle bundle) throws RemoteException;
+    int startActivity(
+            IApplicationThread iApplicationThread,
+            String str,
+            Intent intent,
+            String str2,
+            IBinder iBinder,
+            String str3,
+            int i,
+            int i2,
+            ProfilerInfo profilerInfo,
+            Bundle bundle)
+            throws RemoteException;
 
     @Deprecated
-    int startActivityAsUser(IApplicationThread iApplicationThread, String str, Intent intent, String str2, IBinder iBinder, String str3, int i, int i2, ProfilerInfo profilerInfo, Bundle bundle, int i3) throws RemoteException;
+    int startActivityAsUser(
+            IApplicationThread iApplicationThread,
+            String str,
+            Intent intent,
+            String str2,
+            IBinder iBinder,
+            String str3,
+            int i,
+            int i2,
+            ProfilerInfo profilerInfo,
+            Bundle bundle,
+            int i3)
+            throws RemoteException;
 
-    int startActivityAsUserWithFeature(IApplicationThread iApplicationThread, String str, String str2, Intent intent, String str3, IBinder iBinder, String str4, int i, int i2, ProfilerInfo profilerInfo, Bundle bundle, int i3) throws RemoteException;
+    int startActivityAsUserWithFeature(
+            IApplicationThread iApplicationThread,
+            String str,
+            String str2,
+            Intent intent,
+            String str3,
+            IBinder iBinder,
+            String str4,
+            int i,
+            int i2,
+            ProfilerInfo profilerInfo,
+            Bundle bundle,
+            int i3)
+            throws RemoteException;
 
     int startActivityFromRecents(int i, Bundle bundle) throws RemoteException;
 
-    int startActivityWithFeature(IApplicationThread iApplicationThread, String str, String str2, Intent intent, String str3, IBinder iBinder, String str4, int i, int i2, ProfilerInfo profilerInfo, Bundle bundle) throws RemoteException;
+    int startActivityWithFeature(
+            IApplicationThread iApplicationThread,
+            String str,
+            String str2,
+            Intent intent,
+            String str3,
+            IBinder iBinder,
+            String str4,
+            int i,
+            int i2,
+            ProfilerInfo profilerInfo,
+            Bundle bundle)
+            throws RemoteException;
 
     boolean startBinderTracking() throws RemoteException;
 
@@ -581,45 +804,71 @@ public interface IActivityManager extends IInterface {
 
     void startDelegateShellPermissionIdentity(int i, String[] strArr) throws RemoteException;
 
-    boolean startInstrumentation(ComponentName componentName, String str, int i, Bundle bundle, IInstrumentationWatcher iInstrumentationWatcher, IUiAutomationConnection iUiAutomationConnection, int i2, String str2) throws RemoteException;
+    boolean startInstrumentation(
+            ComponentName componentName,
+            String str,
+            int i,
+            Bundle bundle,
+            IInstrumentationWatcher iInstrumentationWatcher,
+            IUiAutomationConnection iUiAutomationConnection,
+            int i2,
+            String str2)
+            throws RemoteException;
 
     boolean startProfile(int i) throws RemoteException;
 
-    boolean startProfileWithListener(int i, IProgressListener iProgressListener) throws RemoteException;
+    boolean startProfileWithListener(int i, IProgressListener iProgressListener)
+            throws RemoteException;
 
-    ComponentName startService(IApplicationThread iApplicationThread, Intent intent, String str, boolean z, String str2, String str3, int i) throws RemoteException;
+    ComponentName startService(
+            IApplicationThread iApplicationThread,
+            Intent intent,
+            String str,
+            boolean z,
+            String str2,
+            String str3,
+            int i)
+            throws RemoteException;
 
     void startSystemLockTaskMode(int i) throws RemoteException;
 
     boolean startUserInBackground(int i) throws RemoteException;
 
-    boolean startUserInBackgroundVisibleOnDisplay(int i, int i2, IProgressListener iProgressListener) throws RemoteException;
+    boolean startUserInBackgroundVisibleOnDisplay(
+            int i, int i2, IProgressListener iProgressListener) throws RemoteException;
 
-    boolean startUserInBackgroundWithListener(int i, IProgressListener iProgressListener) throws RemoteException;
+    boolean startUserInBackgroundWithListener(int i, IProgressListener iProgressListener)
+            throws RemoteException;
 
-    boolean startUserInForegroundWithListener(int i, IProgressListener iProgressListener) throws RemoteException;
+    boolean startUserInForegroundWithListener(int i, IProgressListener iProgressListener)
+            throws RemoteException;
 
     void stopAppForUser(String str, int i) throws RemoteException;
 
     void stopAppSwitches() throws RemoteException;
 
-    boolean stopBinderTrackingAndDump(ParcelFileDescriptor parcelFileDescriptor) throws RemoteException;
+    boolean stopBinderTrackingAndDump(ParcelFileDescriptor parcelFileDescriptor)
+            throws RemoteException;
 
     void stopDelegateShellPermissionIdentity() throws RemoteException;
 
     boolean stopProfile(int i) throws RemoteException;
 
-    int stopService(IApplicationThread iApplicationThread, Intent intent, String str, int i) throws RemoteException;
+    int stopService(IApplicationThread iApplicationThread, Intent intent, String str, int i)
+            throws RemoteException;
 
-    boolean stopServiceToken(ComponentName componentName, IBinder iBinder, int i) throws RemoteException;
+    boolean stopServiceToken(ComponentName componentName, IBinder iBinder, int i)
+            throws RemoteException;
 
     int stopUser(int i, boolean z, IStopUserCallback iStopUserCallback) throws RemoteException;
 
-    int stopUserExceptCertainProfiles(int i, boolean z, IStopUserCallback iStopUserCallback) throws RemoteException;
+    int stopUserExceptCertainProfiles(int i, boolean z, IStopUserCallback iStopUserCallback)
+            throws RemoteException;
 
     int stopUserWithCallback(int i, IStopUserCallback iStopUserCallback) throws RemoteException;
 
-    int stopUserWithDelayedLocking(int i, IStopUserCallback iStopUserCallback) throws RemoteException;
+    int stopUserWithDelayedLocking(int i, IStopUserCallback iStopUserCallback)
+            throws RemoteException;
 
     void suppressResizeConfigChanges(boolean z) throws RemoteException;
 
@@ -631,16 +880,19 @@ public interface IActivityManager extends IInterface {
 
     boolean unbindService(IServiceConnection iServiceConnection) throws RemoteException;
 
-    void unbroadcastIntent(IApplicationThread iApplicationThread, Intent intent, int i) throws RemoteException;
+    void unbroadcastIntent(IApplicationThread iApplicationThread, Intent intent, int i)
+            throws RemoteException;
 
     void unhandledBack() throws RemoteException;
 
     @Deprecated
-    boolean unlockUser(int i, byte[] bArr, byte[] bArr2, IProgressListener iProgressListener) throws RemoteException;
+    boolean unlockUser(int i, byte[] bArr, byte[] bArr2, IProgressListener iProgressListener)
+            throws RemoteException;
 
     boolean unlockUser2(int i, IProgressListener iProgressListener) throws RemoteException;
 
-    void unregisterIntentSenderCancelListener(IIntentSender iIntentSender, IResultReceiver iResultReceiver) throws RemoteException;
+    void unregisterIntentSenderCancelListener(
+            IIntentSender iIntentSender, IResultReceiver iResultReceiver) throws RemoteException;
 
     void unregisterProcessObserver(IProcessObserver iProcessObserver) throws RemoteException;
 
@@ -648,11 +900,13 @@ public interface IActivityManager extends IInterface {
 
     void unregisterTaskStackListener(ITaskStackListener iTaskStackListener) throws RemoteException;
 
-    void unregisterUidFrozenStateChangedCallback(IUidFrozenStateChangedCallback iUidFrozenStateChangedCallback) throws RemoteException;
+    void unregisterUidFrozenStateChangedCallback(
+            IUidFrozenStateChangedCallback iUidFrozenStateChangedCallback) throws RemoteException;
 
     void unregisterUidObserver(IUidObserver iUidObserver) throws RemoteException;
 
-    void unregisterUserSwitchObserver(IUserSwitchObserver iUserSwitchObserver) throws RemoteException;
+    void unregisterUserSwitchObserver(IUserSwitchObserver iUserSwitchObserver)
+            throws RemoteException;
 
     void unstableProviderDied(IBinder iBinder) throws RemoteException;
 
@@ -666,13 +920,20 @@ public interface IActivityManager extends IInterface {
 
     void updatePersistentConfiguration(Configuration configuration) throws RemoteException;
 
-    void updatePersistentConfigurationAndLocaleOverlays(Configuration configuration, String str, String str2, LocaleList localeList) throws RemoteException;
+    void updatePersistentConfigurationAndLocaleOverlays(
+            Configuration configuration, String str, String str2, LocaleList localeList)
+            throws RemoteException;
 
-    void updatePersistentConfigurationWithAttribution(Configuration configuration, String str, String str2) throws RemoteException;
+    void updatePersistentConfigurationWithAttribution(
+            Configuration configuration, String str, String str2) throws RemoteException;
 
-    boolean updateRestrictionInfo(SemAppRestrictionManager.RestrictionInfo restrictionInfo, List<SemAppRestrictionManager.AppRestrictionInfo> list) throws RemoteException;
+    boolean updateRestrictionInfo(
+            SemAppRestrictionManager.RestrictionInfo restrictionInfo,
+            List<SemAppRestrictionManager.AppRestrictionInfo> list)
+            throws RemoteException;
 
-    void updateServiceGroup(IServiceConnection iServiceConnection, int i, int i2) throws RemoteException;
+    void updateServiceGroup(IServiceConnection iServiceConnection, int i, int i2)
+            throws RemoteException;
 
     void waitForBroadcastBarrier() throws RemoteException;
 
@@ -687,25 +948,27 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void registerUidObserver(IUidObserver observer, int which, int cutpoint, String callingPackage) throws RemoteException {
-        }
+        public void registerUidObserver(
+                IUidObserver observer, int which, int cutpoint, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void unregisterUidObserver(IUidObserver observer) throws RemoteException {
-        }
+        public void unregisterUidObserver(IUidObserver observer) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public IBinder registerUidObserverForUids(IUidObserver observer, int which, int cutpoint, String callingPackage, int[] uids) throws RemoteException {
+        public IBinder registerUidObserverForUids(
+                IUidObserver observer, int which, int cutpoint, String callingPackage, int[] uids)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityManager
-        public void addUidToObserver(IBinder observerToken, String callingPackage, int uid) throws RemoteException {
-        }
+        public void addUidToObserver(IBinder observerToken, String callingPackage, int uid)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void removeUidFromObserver(IBinder observerToken, String callingPackage, int uid) throws RemoteException {
-        }
+        public void removeUidFromObserver(IBinder observerToken, String callingPackage, int uid)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public boolean isUidActive(int uid, String callingPackage) throws RemoteException {
@@ -723,79 +986,155 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void logFgsApiBegin(int apiType, int appUid, int appPid) throws RemoteException {
-        }
+        public void logFgsApiBegin(int apiType, int appUid, int appPid) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void logFgsApiEnd(int apiType, int appUid, int appPid) throws RemoteException {
-        }
+        public void logFgsApiEnd(int apiType, int appUid, int appPid) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void logFgsApiStateChanged(int apiType, int state, int appUid, int appPid) throws RemoteException {
-        }
+        public void logFgsApiStateChanged(int apiType, int state, int appUid, int appPid)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void handleApplicationCrash(IBinder app, ApplicationErrorReport.ParcelableCrashInfo crashInfo) throws RemoteException {
-        }
+        public void handleApplicationCrash(
+                IBinder app, ApplicationErrorReport.ParcelableCrashInfo crashInfo)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public int startActivity(IApplicationThread caller, String callingPackage, Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode, int flags, ProfilerInfo profilerInfo, Bundle options) throws RemoteException {
+        public int startActivity(
+                IApplicationThread caller,
+                String callingPackage,
+                Intent intent,
+                String resolvedType,
+                IBinder resultTo,
+                String resultWho,
+                int requestCode,
+                int flags,
+                ProfilerInfo profilerInfo,
+                Bundle options)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityManager
-        public int startActivityWithFeature(IApplicationThread caller, String callingPackage, String callingFeatureId, Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode, int flags, ProfilerInfo profilerInfo, Bundle options) throws RemoteException {
+        public int startActivityWithFeature(
+                IApplicationThread caller,
+                String callingPackage,
+                String callingFeatureId,
+                Intent intent,
+                String resolvedType,
+                IBinder resultTo,
+                String resultWho,
+                int requestCode,
+                int flags,
+                ProfilerInfo profilerInfo,
+                Bundle options)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityManager
-        public void unhandledBack() throws RemoteException {
-        }
+        public void unhandledBack() throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public boolean finishActivity(IBinder token, int code, Intent data, int finishTask) throws RemoteException {
+        public boolean finishActivity(IBinder token, int code, Intent data, int finishTask)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityManager
-        public Intent registerReceiver(IApplicationThread caller, String callerPackage, IIntentReceiver receiver, IntentFilter filter, String requiredPermission, int userId, int flags) throws RemoteException {
+        public Intent registerReceiver(
+                IApplicationThread caller,
+                String callerPackage,
+                IIntentReceiver receiver,
+                IntentFilter filter,
+                String requiredPermission,
+                int userId,
+                int flags)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityManager
-        public Intent registerReceiverWithFeature(IApplicationThread caller, String callerPackage, String callingFeatureId, String receiverId, IIntentReceiver receiver, IntentFilter filter, String requiredPermission, int userId, int flags) throws RemoteException {
+        public Intent registerReceiverWithFeature(
+                IApplicationThread caller,
+                String callerPackage,
+                String callingFeatureId,
+                String receiverId,
+                IIntentReceiver receiver,
+                IntentFilter filter,
+                String requiredPermission,
+                int userId,
+                int flags)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityManager
-        public void unregisterReceiver(IIntentReceiver receiver) throws RemoteException {
-        }
+        public void unregisterReceiver(IIntentReceiver receiver) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public int broadcastIntent(IApplicationThread caller, Intent intent, String resolvedType, IIntentReceiver resultTo, int resultCode, String resultData, Bundle map, String[] requiredPermissions, int appOp, Bundle options, boolean serialized, boolean sticky, int userId) throws RemoteException {
+        public int broadcastIntent(
+                IApplicationThread caller,
+                Intent intent,
+                String resolvedType,
+                IIntentReceiver resultTo,
+                int resultCode,
+                String resultData,
+                Bundle map,
+                String[] requiredPermissions,
+                int appOp,
+                Bundle options,
+                boolean serialized,
+                boolean sticky,
+                int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityManager
-        public int broadcastIntentWithFeature(IApplicationThread caller, String callingFeatureId, Intent intent, String resolvedType, IIntentReceiver resultTo, int resultCode, String resultData, Bundle map, String[] requiredPermissions, String[] excludePermissions, String[] excludePackages, int appOp, Bundle options, boolean serialized, boolean sticky, int userId) throws RemoteException {
+        public int broadcastIntentWithFeature(
+                IApplicationThread caller,
+                String callingFeatureId,
+                Intent intent,
+                String resolvedType,
+                IIntentReceiver resultTo,
+                int resultCode,
+                String resultData,
+                Bundle map,
+                String[] requiredPermissions,
+                String[] excludePermissions,
+                String[] excludePackages,
+                int appOp,
+                Bundle options,
+                boolean serialized,
+                boolean sticky,
+                int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityManager
-        public void unbroadcastIntent(IApplicationThread caller, Intent intent, int userId) throws RemoteException {
-        }
+        public void unbroadcastIntent(IApplicationThread caller, Intent intent, int userId)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void finishReceiver(IBinder who, int resultCode, String resultData, Bundle map, boolean abortBroadcast, int flags) throws RemoteException {
-        }
+        public void finishReceiver(
+                IBinder who,
+                int resultCode,
+                String resultData,
+                Bundle map,
+                boolean abortBroadcast,
+                int flags)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void attachApplication(IApplicationThread app, long startSeq) throws RemoteException {
-        }
+        public void attachApplication(IApplicationThread app, long startSeq)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void finishAttachApplication(long startSeq, long timestampApplicationOnCreateNs) throws RemoteException {
-        }
+        public void finishAttachApplication(long startSeq, long timestampApplicationOnCreateNs)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public List<ActivityManager.RunningTaskInfo> getTasks(int maxNum) throws RemoteException {
@@ -803,8 +1142,13 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void moveTaskToFront(IApplicationThread caller, String callingPackage, int task, int flags, Bundle options) throws RemoteException {
-        }
+        public void moveTaskToFront(
+                IApplicationThread caller,
+                String callingPackage,
+                int task,
+                int flags,
+                Bundle options)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public int getTaskForActivity(IBinder token, boolean onlyRoot) throws RemoteException {
@@ -812,47 +1156,85 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public ContentProviderHolder getContentProvider(IApplicationThread caller, String callingPackage, String name, int userId, boolean stable) throws RemoteException {
+        public ContentProviderHolder getContentProvider(
+                IApplicationThread caller,
+                String callingPackage,
+                String name,
+                int userId,
+                boolean stable)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityManager
-        public void publishContentProviders(IApplicationThread caller, List<ContentProviderHolder> providers) throws RemoteException {
-        }
+        public void publishContentProviders(
+                IApplicationThread caller, List<ContentProviderHolder> providers)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public boolean refContentProvider(IBinder connection, int stableDelta, int unstableDelta) throws RemoteException {
+        public boolean refContentProvider(IBinder connection, int stableDelta, int unstableDelta)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityManager
-        public PendingIntent getRunningServiceControlPanel(ComponentName service) throws RemoteException {
+        public PendingIntent getRunningServiceControlPanel(ComponentName service)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityManager
-        public ComponentName startService(IApplicationThread caller, Intent service, String resolvedType, boolean requireForeground, String callingPackage, String callingFeatureId, int userId) throws RemoteException {
+        public ComponentName startService(
+                IApplicationThread caller,
+                Intent service,
+                String resolvedType,
+                boolean requireForeground,
+                String callingPackage,
+                String callingFeatureId,
+                int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityManager
-        public int stopService(IApplicationThread caller, Intent service, String resolvedType, int userId) throws RemoteException {
+        public int stopService(
+                IApplicationThread caller, Intent service, String resolvedType, int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityManager
-        public int bindService(IApplicationThread caller, IBinder token, Intent service, String resolvedType, IServiceConnection connection, long flags, String callingPackage, int userId) throws RemoteException {
+        public int bindService(
+                IApplicationThread caller,
+                IBinder token,
+                Intent service,
+                String resolvedType,
+                IServiceConnection connection,
+                long flags,
+                String callingPackage,
+                int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityManager
-        public int bindServiceInstance(IApplicationThread caller, IBinder token, Intent service, String resolvedType, IServiceConnection connection, long flags, String instanceName, String callingPackage, int userId) throws RemoteException {
+        public int bindServiceInstance(
+                IApplicationThread caller,
+                IBinder token,
+                Intent service,
+                String resolvedType,
+                IServiceConnection connection,
+                long flags,
+                String instanceName,
+                String callingPackage,
+                int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityManager
-        public void updateServiceGroup(IServiceConnection connection, int group, int importance) throws RemoteException {
-        }
+        public void updateServiceGroup(IServiceConnection connection, int group, int importance)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public boolean unbindService(IServiceConnection connection) throws RemoteException {
@@ -860,33 +1242,40 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void publishService(IBinder token, Intent intent, IBinder service) throws RemoteException {
-        }
+        public void publishService(IBinder token, Intent intent, IBinder service)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void setDebugApp(String packageName, boolean waitForDebugger, boolean persistent) throws RemoteException {
-        }
+        public void setDebugApp(String packageName, boolean waitForDebugger, boolean persistent)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void setAgentApp(String packageName, String agent) throws RemoteException {
-        }
+        public void setAgentApp(String packageName, String agent) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void setAlwaysFinish(boolean enabled) throws RemoteException {
-        }
+        public void setAlwaysFinish(boolean enabled) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public boolean startInstrumentation(ComponentName className, String profileFile, int flags, Bundle arguments, IInstrumentationWatcher watcher, IUiAutomationConnection connection, int userId, String abiOverride) throws RemoteException {
+        public boolean startInstrumentation(
+                ComponentName className,
+                String profileFile,
+                int flags,
+                Bundle arguments,
+                IInstrumentationWatcher watcher,
+                IUiAutomationConnection connection,
+                int userId,
+                String abiOverride)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityManager
-        public void addInstrumentationResults(IApplicationThread target, Bundle results) throws RemoteException {
-        }
+        public void addInstrumentationResults(IApplicationThread target, Bundle results)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void finishInstrumentation(IApplicationThread target, int resultCode, Bundle results) throws RemoteException {
-        }
+        public void finishInstrumentation(IApplicationThread target, int resultCode, Bundle results)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public Configuration getConfiguration() throws RemoteException {
@@ -904,13 +1293,13 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public boolean stopServiceToken(ComponentName className, IBinder token, int startId) throws RemoteException {
+        public boolean stopServiceToken(ComponentName className, IBinder token, int startId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityManager
-        public void setProcessLimit(int max) throws RemoteException {
-        }
+        public void setProcessLimit(int max) throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public int getProcessLimit() throws RemoteException {
@@ -918,149 +1307,194 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public int checkUriPermission(Uri uri, int pid, int uid, int mode, int userId, IBinder callerToken) throws RemoteException {
+        public int checkUriPermission(
+                Uri uri, int pid, int uid, int mode, int userId, IBinder callerToken)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityManager
-        public int checkContentUriPermissionFull(Uri uri, int pid, int uid, int mode, int userId) throws RemoteException {
+        public int checkContentUriPermissionFull(Uri uri, int pid, int uid, int mode, int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityManager
-        public int[] checkUriPermissions(List<Uri> uris, int pid, int uid, int mode, int userId, IBinder callerToken) throws RemoteException {
+        public int[] checkUriPermissions(
+                List<Uri> uris, int pid, int uid, int mode, int userId, IBinder callerToken)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityManager
-        public void grantUriPermission(IApplicationThread caller, String targetPkg, Uri uri, int mode, int userId) throws RemoteException {
-        }
+        public void grantUriPermission(
+                IApplicationThread caller, String targetPkg, Uri uri, int mode, int userId)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void revokeUriPermission(IApplicationThread caller, String targetPkg, Uri uri, int mode, int userId) throws RemoteException {
-        }
+        public void revokeUriPermission(
+                IApplicationThread caller, String targetPkg, Uri uri, int mode, int userId)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void setActivityController(IActivityController watcher, boolean imAMonkey) throws RemoteException {
-        }
+        public void setActivityController(IActivityController watcher, boolean imAMonkey)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void showWaitingForDebugger(IApplicationThread who, boolean waiting) throws RemoteException {
-        }
+        public void showWaitingForDebugger(IApplicationThread who, boolean waiting)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void signalPersistentProcesses(int signal) throws RemoteException {
-        }
+        public void signalPersistentProcesses(int signal) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public ParceledListSlice getRecentTasks(int maxNum, int flags, int userId) throws RemoteException {
+        public ParceledListSlice getRecentTasks(int maxNum, int flags, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityManager
-        public void serviceDoneExecuting(IBinder token, int type, int startId, int res, Intent intent) throws RemoteException {
-        }
+        public void serviceDoneExecuting(
+                IBinder token, int type, int startId, int res, Intent intent)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public IIntentSender getIntentSender(int type, String packageName, IBinder token, String resultWho, int requestCode, Intent[] intents, String[] resolvedTypes, int flags, Bundle options, int userId) throws RemoteException {
+        public IIntentSender getIntentSender(
+                int type,
+                String packageName,
+                IBinder token,
+                String resultWho,
+                int requestCode,
+                Intent[] intents,
+                String[] resolvedTypes,
+                int flags,
+                Bundle options,
+                int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityManager
-        public IIntentSender getIntentSenderWithFeature(int type, String packageName, String featureId, IBinder token, String resultWho, int requestCode, Intent[] intents, String[] resolvedTypes, int flags, Bundle options, int userId) throws RemoteException {
+        public IIntentSender getIntentSenderWithFeature(
+                int type,
+                String packageName,
+                String featureId,
+                IBinder token,
+                String resultWho,
+                int requestCode,
+                Intent[] intents,
+                String[] resolvedTypes,
+                int flags,
+                Bundle options,
+                int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityManager
-        public void cancelIntentSender(IIntentSender sender) throws RemoteException {
-        }
+        public void cancelIntentSender(IIntentSender sender) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public ActivityManager.PendingIntentInfo getInfoForIntentSender(IIntentSender sender) throws RemoteException {
+        public ActivityManager.PendingIntentInfo getInfoForIntentSender(IIntentSender sender)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityManager
-        public boolean registerIntentSenderCancelListenerEx(IIntentSender sender, IResultReceiver receiver) throws RemoteException {
+        public boolean registerIntentSenderCancelListenerEx(
+                IIntentSender sender, IResultReceiver receiver) throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityManager
-        public void unregisterIntentSenderCancelListener(IIntentSender sender, IResultReceiver receiver) throws RemoteException {
-        }
+        public void unregisterIntentSenderCancelListener(
+                IIntentSender sender, IResultReceiver receiver) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void enterSafeMode() throws RemoteException {
-        }
+        public void enterSafeMode() throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void noteWakeupAlarm(IIntentSender sender, WorkSource workSource, int sourceUid, String sourcePkg, String tag) throws RemoteException {
-        }
+        public void noteWakeupAlarm(
+                IIntentSender sender,
+                WorkSource workSource,
+                int sourceUid,
+                String sourcePkg,
+                String tag)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void removeContentProvider(IBinder connection, boolean stable) throws RemoteException {
-        }
+        public void removeContentProvider(IBinder connection, boolean stable)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void setRequestedOrientation(IBinder token, int requestedOrientation) throws RemoteException {
-        }
+        public void setRequestedOrientation(IBinder token, int requestedOrientation)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void unbindFinished(IBinder token, Intent service, boolean doRebind) throws RemoteException {
-        }
+        public void unbindFinished(IBinder token, Intent service, boolean doRebind)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void setProcessImportant(IBinder token, int pid, boolean isForeground, String reason) throws RemoteException {
-        }
+        public void setProcessImportant(IBinder token, int pid, boolean isForeground, String reason)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void setServiceForeground(ComponentName className, IBinder token, int id, Notification notification, int flags, int foregroundServiceType) throws RemoteException {
-        }
+        public void setServiceForeground(
+                ComponentName className,
+                IBinder token,
+                int id,
+                Notification notification,
+                int flags,
+                int foregroundServiceType)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public int getForegroundServiceType(ComponentName className, IBinder token) throws RemoteException {
+        public int getForegroundServiceType(ComponentName className, IBinder token)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityManager
-        public boolean moveActivityTaskToBack(IBinder token, boolean nonRoot) throws RemoteException {
+        public boolean moveActivityTaskToBack(IBinder token, boolean nonRoot)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityManager
-        public void getMemoryInfo(ActivityManager.MemoryInfo outInfo) throws RemoteException {
-        }
+        public void getMemoryInfo(ActivityManager.MemoryInfo outInfo) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public List<ActivityManager.ProcessErrorStateInfo> getProcessesInErrorState() throws RemoteException {
+        public List<ActivityManager.ProcessErrorStateInfo> getProcessesInErrorState()
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityManager
-        public boolean clearApplicationUserData(String packageName, boolean keepState, IPackageDataObserver observer, int userId) throws RemoteException {
+        public boolean clearApplicationUserData(
+                String packageName, boolean keepState, IPackageDataObserver observer, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityManager
-        public void stopAppForUser(String packageName, int userId) throws RemoteException {
-        }
+        public void stopAppForUser(String packageName, int userId) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public boolean registerForegroundServiceObserver(IForegroundServiceObserver callback) throws RemoteException {
+        public boolean registerForegroundServiceObserver(IForegroundServiceObserver callback)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityManager
-        public void forceStopPackage(String packageName, int userId) throws RemoteException {
-        }
+        public void forceStopPackage(String packageName, int userId) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void forceStopPackageEvenWhenStopping(String packageName, int userId) throws RemoteException {
-        }
+        public void forceStopPackageEvenWhenStopping(String packageName, int userId)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void forceStopPackageByAdmin(String packageName, int userId) throws RemoteException {
-        }
+        public void forceStopPackageByAdmin(String packageName, int userId)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public boolean killPids(int[] pids, String reason, boolean secure) throws RemoteException {
@@ -1068,22 +1502,31 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public List<ActivityManager.RunningServiceInfo> getServices(int maxNum, int flags) throws RemoteException {
+        public List<ActivityManager.RunningServiceInfo> getServices(int maxNum, int flags)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityManager
-        public List<ActivityManager.RunningAppProcessInfo> getRunningAppProcesses() throws RemoteException {
+        public List<ActivityManager.RunningAppProcessInfo> getRunningAppProcesses()
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityManager
-        public IBinder peekService(Intent service, String resolvedType, String callingPackage) throws RemoteException {
+        public IBinder peekService(Intent service, String resolvedType, String callingPackage)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityManager
-        public boolean profileControl(String process, int userId, boolean start, ProfilerInfo profilerInfo, int profileType) throws RemoteException {
+        public boolean profileControl(
+                String process,
+                int userId,
+                boolean start,
+                ProfilerInfo profilerInfo,
+                int profileType)
+                throws RemoteException {
             return false;
         }
 
@@ -1093,46 +1536,52 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void stopAppSwitches() throws RemoteException {
-        }
+        public void stopAppSwitches() throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void resumeAppSwitches() throws RemoteException {
-        }
+        public void resumeAppSwitches() throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public boolean bindBackupAgent(String packageName, int backupRestoreMode, int targetUserId, int backupDestination) throws RemoteException {
+        public boolean bindBackupAgent(
+                String packageName, int backupRestoreMode, int targetUserId, int backupDestination)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityManager
-        public void backupAgentCreated(String packageName, IBinder agent, int userId) throws RemoteException {
-        }
+        public void backupAgentCreated(String packageName, IBinder agent, int userId)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void unbindBackupAgent(ApplicationInfo appInfo) throws RemoteException {
-        }
+        public void unbindBackupAgent(ApplicationInfo appInfo) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public int handleIncomingUser(int callingPid, int callingUid, int userId, boolean allowAll, boolean requireFull, String name, String callerPackage) throws RemoteException {
+        public int handleIncomingUser(
+                int callingPid,
+                int callingUid,
+                int userId,
+                boolean allowAll,
+                boolean requireFull,
+                String name,
+                String callerPackage)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityManager
-        public void addPackageDependency(String packageName) throws RemoteException {
-        }
+        public void addPackageDependency(String packageName) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void killApplication(String pkg, int appId, int userId, String reason, int exitInfoReason) throws RemoteException {
-        }
+        public void killApplication(
+                String pkg, int appId, int userId, String reason, int exitInfoReason)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void closeSystemDialogs(String reason) throws RemoteException {
-        }
+        public void closeSystemDialogs(String reason) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void closeSystemDialogsInDisplay(String reason, int displayId) throws RemoteException {
-        }
+        public void closeSystemDialogsInDisplay(String reason, int displayId)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public Debug.MemoryInfo[] getProcessMemoryInfo(int[] pids) throws RemoteException {
@@ -1140,17 +1589,22 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void killApplicationProcess(String processName, int uid) throws RemoteException {
-        }
+        public void killApplicationProcess(String processName, int uid) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public boolean handleApplicationWtf(IBinder app, String tag, boolean system, ApplicationErrorReport.ParcelableCrashInfo crashInfo, int immediateCallerPid) throws RemoteException {
+        public boolean handleApplicationWtf(
+                IBinder app,
+                String tag,
+                boolean system,
+                ApplicationErrorReport.ParcelableCrashInfo crashInfo,
+                int immediateCallerPid)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityManager
-        public void killBackgroundProcesses(String packageName, int userId) throws RemoteException {
-        }
+        public void killBackgroundProcesses(String packageName, int userId)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public boolean isUserAMonkey() throws RemoteException {
@@ -1163,16 +1617,15 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void finishHeavyWeightApp() throws RemoteException {
-        }
+        public void finishHeavyWeightApp() throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void handleApplicationStrictModeViolation(IBinder app, int penaltyMask, StrictMode.ViolationInfo crashInfo) throws RemoteException {
-        }
+        public void handleApplicationStrictModeViolation(
+                IBinder app, int penaltyMask, StrictMode.ViolationInfo crashInfo)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void registerStrictModeCallback(IBinder binder) throws RemoteException {
-        }
+        public void registerStrictModeCallback(IBinder binder) throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public boolean isTopActivityImmersive() throws RemoteException {
@@ -1180,19 +1633,44 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void crashApplicationWithType(int uid, int initialPid, String packageName, int userId, String message, boolean force, int exceptionTypeId) throws RemoteException {
-        }
+        public void crashApplicationWithType(
+                int uid,
+                int initialPid,
+                String packageName,
+                int userId,
+                String message,
+                boolean force,
+                int exceptionTypeId)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void crashApplicationWithTypeWithExtras(int uid, int initialPid, String packageName, int userId, String message, boolean force, int exceptionTypeId, Bundle extras) throws RemoteException {
-        }
+        public void crashApplicationWithTypeWithExtras(
+                int uid,
+                int initialPid,
+                String packageName,
+                int userId,
+                String message,
+                boolean force,
+                int exceptionTypeId,
+                Bundle extras)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void getMimeTypeFilterAsync(Uri uri, int userId, RemoteCallback resultCallback) throws RemoteException {
-        }
+        public void getMimeTypeFilterAsync(Uri uri, int userId, RemoteCallback resultCallback)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public boolean dumpHeap(String process, int userId, boolean managed, boolean mallocInfo, boolean runGc, String dumpBitmaps, String path, ParcelFileDescriptor fd, RemoteCallback finishCallback) throws RemoteException {
+        public boolean dumpHeap(
+                String process,
+                int userId,
+                boolean managed,
+                boolean mallocInfo,
+                boolean runGc,
+                String dumpBitmaps,
+                String path,
+                ParcelFileDescriptor fd,
+                RemoteCallback finishCallback)
+                throws RemoteException {
             return false;
         }
 
@@ -1202,8 +1680,8 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void setPackageScreenCompatMode(String packageName, int mode) throws RemoteException {
-        }
+        public void setPackageScreenCompatMode(String packageName, int mode)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public boolean switchUser(int userid) throws RemoteException {
@@ -1221,8 +1699,7 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void setStopUserOnSwitch(int value) throws RemoteException {
-        }
+        public void setStopUserOnSwitch(int value) throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public boolean removeTask(int taskId) throws RemoteException {
@@ -1230,25 +1707,24 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void registerProcessObserver(IProcessObserver observer) throws RemoteException {
-        }
+        public void registerProcessObserver(IProcessObserver observer) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void unregisterProcessObserver(IProcessObserver observer) throws RemoteException {
-        }
+        public void unregisterProcessObserver(IProcessObserver observer) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public boolean isIntentSenderTargetedToPackage(IIntentSender sender) throws RemoteException {
+        public boolean isIntentSenderTargetedToPackage(IIntentSender sender)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityManager
-        public void updatePersistentConfiguration(Configuration values) throws RemoteException {
-        }
+        public void updatePersistentConfiguration(Configuration values) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void updatePersistentConfigurationWithAttribution(Configuration values, String callingPackageName, String callingAttributionTag) throws RemoteException {
-        }
+        public void updatePersistentConfigurationWithAttribution(
+                Configuration values, String callingPackageName, String callingAttributionTag)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public long[] getProcessPss(int[] pids) throws RemoteException {
@@ -1256,29 +1732,28 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void showBootMessage(CharSequence msg, boolean always) throws RemoteException {
-        }
+        public void showBootMessage(CharSequence msg, boolean always) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void killAllBackgroundProcesses() throws RemoteException {
-        }
+        public void killAllBackgroundProcesses() throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public ContentProviderHolder getContentProviderExternal(String name, int userId, IBinder token, String tag) throws RemoteException {
+        public ContentProviderHolder getContentProviderExternal(
+                String name, int userId, IBinder token, String tag) throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityManager
-        public void removeContentProviderExternal(String name, IBinder token) throws RemoteException {
-        }
+        public void removeContentProviderExternal(String name, IBinder token)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void removeContentProviderExternalAsUser(String name, IBinder token, int userId) throws RemoteException {
-        }
+        public void removeContentProviderExternalAsUser(String name, IBinder token, int userId)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void getMyMemoryState(ActivityManager.RunningAppProcessInfo outInfo) throws RemoteException {
-        }
+        public void getMyMemoryState(ActivityManager.RunningAppProcessInfo outInfo)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public boolean killProcessesBelowForeground(String reason) throws RemoteException {
@@ -1301,8 +1776,7 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void unstableProviderDied(IBinder connection) throws RemoteException {
-        }
+        public void unstableProviderDied(IBinder connection) throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public boolean isIntentSenderAnActivity(IIntentSender sender) throws RemoteException {
@@ -1310,42 +1784,73 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public int startActivityAsUser(IApplicationThread caller, String callingPackage, Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode, int flags, ProfilerInfo profilerInfo, Bundle options, int userId) throws RemoteException {
+        public int startActivityAsUser(
+                IApplicationThread caller,
+                String callingPackage,
+                Intent intent,
+                String resolvedType,
+                IBinder resultTo,
+                String resultWho,
+                int requestCode,
+                int flags,
+                ProfilerInfo profilerInfo,
+                Bundle options,
+                int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityManager
-        public int startActivityAsUserWithFeature(IApplicationThread caller, String callingPackage, String callingFeatureId, Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode, int flags, ProfilerInfo profilerInfo, Bundle options, int userId) throws RemoteException {
+        public int startActivityAsUserWithFeature(
+                IApplicationThread caller,
+                String callingPackage,
+                String callingFeatureId,
+                Intent intent,
+                String resolvedType,
+                IBinder resultTo,
+                String resultWho,
+                int requestCode,
+                int flags,
+                ProfilerInfo profilerInfo,
+                Bundle options,
+                int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityManager
-        public int stopUser(int userid, boolean stopProfileRegardlessOfParent, IStopUserCallback callback) throws RemoteException {
+        public int stopUser(
+                int userid, boolean stopProfileRegardlessOfParent, IStopUserCallback callback)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityManager
-        public int stopUserWithCallback(int userid, IStopUserCallback callback) throws RemoteException {
+        public int stopUserWithCallback(int userid, IStopUserCallback callback)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityManager
-        public int stopUserExceptCertainProfiles(int userid, boolean stopProfileRegardlessOfParent, IStopUserCallback callback) throws RemoteException {
+        public int stopUserExceptCertainProfiles(
+                int userid, boolean stopProfileRegardlessOfParent, IStopUserCallback callback)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityManager
-        public int stopUserWithDelayedLocking(int userid, IStopUserCallback callback) throws RemoteException {
+        public int stopUserWithDelayedLocking(int userid, IStopUserCallback callback)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityManager
-        public void registerUserSwitchObserver(IUserSwitchObserver observer, String name) throws RemoteException {
-        }
+        public void registerUserSwitchObserver(IUserSwitchObserver observer, String name)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void unregisterUserSwitchObserver(IUserSwitchObserver observer) throws RemoteException {
-        }
+        public void unregisterUserSwitchObserver(IUserSwitchObserver observer)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public int[] getRunningUserIds() throws RemoteException {
@@ -1353,44 +1858,40 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void requestSystemServerHeapDump() throws RemoteException {
-        }
+        public void requestSystemServerHeapDump() throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void requestBugReport(int bugreportType) throws RemoteException {
-        }
+        public void requestBugReport(int bugreportType) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void requestBugReportWithDescription(String shareTitle, String shareDescription, int bugreportType) throws RemoteException {
-        }
+        public void requestBugReportWithDescription(
+                String shareTitle, String shareDescription, int bugreportType)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void requestTelephonyBugReport(String shareTitle, String shareDescription) throws RemoteException {
-        }
+        public void requestTelephonyBugReport(String shareTitle, String shareDescription)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void requestWifiBugReport(String shareTitle, String shareDescription) throws RemoteException {
-        }
+        public void requestWifiBugReport(String shareTitle, String shareDescription)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void requestInteractiveBugReportWithDescription(String shareTitle, String shareDescription) throws RemoteException {
-        }
+        public void requestInteractiveBugReportWithDescription(
+                String shareTitle, String shareDescription) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void requestInteractiveBugReport() throws RemoteException {
-        }
+        public void requestInteractiveBugReport() throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void requestBugReportWithExtraAttachment(Uri extraAttachment) throws RemoteException {
-        }
+        public void requestBugReportWithExtraAttachment(Uri extraAttachment)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void requestFullBugReport() throws RemoteException {
-        }
+        public void requestFullBugReport() throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void requestRemoteBugReport(long nonce) throws RemoteException {
-        }
+        public void requestRemoteBugReport(long nonce) throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public boolean launchBugReportHandlerApp() throws RemoteException {
@@ -1413,16 +1914,13 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void killUid(int appId, int userId, String reason) throws RemoteException {
-        }
+        public void killUid(int appId, int userId, String reason) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void setUserIsMonkey(boolean monkey) throws RemoteException {
-        }
+        public void setUserIsMonkey(boolean monkey) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void hang(IBinder who, boolean allowRestart) throws RemoteException {
-        }
+        public void hang(IBinder who, boolean allowRestart) throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public List<ActivityTaskManager.RootTaskInfo> getAllRootTaskInfos() throws RemoteException {
@@ -1430,12 +1928,11 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void moveTaskToRootTask(int taskId, int rootTaskId, boolean toTop) throws RemoteException {
-        }
+        public void moveTaskToRootTask(int taskId, int rootTaskId, boolean toTop)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void setFocusedRootTask(int taskId) throws RemoteException {
-        }
+        public void setFocusedRootTask(int taskId) throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public ActivityTaskManager.RootTaskInfo getFocusedRootTaskInfo() throws RemoteException {
@@ -1443,16 +1940,13 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void restart() throws RemoteException {
-        }
+        public void restart() throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void performIdleMaintenance() throws RemoteException {
-        }
+        public void performIdleMaintenance() throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void appNotRespondingViaProvider(IBinder connection) throws RemoteException {
-        }
+        public void appNotRespondingViaProvider(IBinder connection) throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public Rect getTaskBounds(int taskId) throws RemoteException {
@@ -1460,12 +1954,14 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public boolean setProcessMemoryTrimLevel(String process, int userId, int level) throws RemoteException {
+        public boolean setProcessMemoryTrimLevel(String process, int userId, int level)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityManager
-        public String getTagForIntentSender(IIntentSender sender, String prefix) throws RemoteException {
+        public String getTagForIntentSender(IIntentSender sender, String prefix)
+                throws RemoteException {
             return null;
         }
 
@@ -1485,8 +1981,7 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void startSystemLockTaskMode(int taskId) throws RemoteException {
-        }
+        public void startSystemLockTaskMode(int taskId) throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public boolean isTopOfTask(IBinder token) throws RemoteException {
@@ -1494,32 +1989,26 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void bootAnimationComplete() throws RemoteException {
-        }
+        public void bootAnimationComplete() throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void setThemeOverlayReady(int userId) throws RemoteException {
-        }
+        public void setThemeOverlayReady(int userId) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void registerTaskStackListener(ITaskStackListener listener) throws RemoteException {
-        }
+        public void registerTaskStackListener(ITaskStackListener listener) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void unregisterTaskStackListener(ITaskStackListener listener) throws RemoteException {
-        }
+        public void unregisterTaskStackListener(ITaskStackListener listener)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void notifyCleartextNetwork(int uid, byte[] firstPacket) throws RemoteException {
-        }
+        public void notifyCleartextNetwork(int uid, byte[] firstPacket) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void setTaskResizeable(int taskId, int resizeableMode) throws RemoteException {
-        }
+        public void setTaskResizeable(int taskId, int resizeableMode) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void resizeTask(int taskId, Rect bounds, int resizeMode) throws RemoteException {
-        }
+        public void resizeTask(int taskId, Rect bounds, int resizeMode) throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public int getLockTaskModeState() throws RemoteException {
@@ -1527,27 +2016,29 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void setDumpHeapDebugLimit(String processName, int uid, long maxMemSize, String reportPackage) throws RemoteException {
-        }
+        public void setDumpHeapDebugLimit(
+                String processName, int uid, long maxMemSize, String reportPackage)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void dumpHeapFinished(String path) throws RemoteException {
-        }
+        public void dumpHeapFinished(String path) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void updateLockTaskPackages(int userId, String[] packages) throws RemoteException {
-        }
+        public void updateLockTaskPackages(int userId, String[] packages) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void noteAlarmStart(IIntentSender sender, WorkSource workSource, int sourceUid, String tag) throws RemoteException {
-        }
+        public void noteAlarmStart(
+                IIntentSender sender, WorkSource workSource, int sourceUid, String tag)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void noteAlarmFinish(IIntentSender sender, WorkSource workSource, int sourceUid, String tag) throws RemoteException {
-        }
+        public void noteAlarmFinish(
+                IIntentSender sender, WorkSource workSource, int sourceUid, String tag)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public int getPackageProcessState(String packageName, String callingPackage) throws RemoteException {
+        public int getPackageProcessState(String packageName, String callingPackage)
+                throws RemoteException {
             return 0;
         }
 
@@ -1562,11 +2053,12 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void suppressResizeConfigChanges(boolean suppress) throws RemoteException {
-        }
+        public void suppressResizeConfigChanges(boolean suppress) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public boolean unlockUser(int userid, byte[] token, byte[] secret, IProgressListener listener) throws RemoteException {
+        public boolean unlockUser(
+                int userid, byte[] token, byte[] secret, IProgressListener listener)
+                throws RemoteException {
             return false;
         }
 
@@ -1576,16 +2068,13 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void killPackageDependents(String packageName, int userId) throws RemoteException {
-        }
+        public void killPackageDependents(String packageName, int userId) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void makePackageIdle(String packageName, int userId) throws RemoteException {
-        }
+        public void makePackageIdle(String packageName, int userId) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void setDeterministicUidIdle(boolean deterministic) throws RemoteException {
-        }
+        public void setDeterministicUidIdle(boolean deterministic) throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public int getMemoryTrimLevel() throws RemoteException {
@@ -1598,19 +2087,27 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void notifyLockedProfile(int userId) throws RemoteException {
-        }
+        public void notifyLockedProfile(int userId) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void startConfirmDeviceCredentialIntent(Intent intent, Bundle options) throws RemoteException {
-        }
+        public void startConfirmDeviceCredentialIntent(Intent intent, Bundle options)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void sendIdleJobTrigger() throws RemoteException {
-        }
+        public void sendIdleJobTrigger() throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public int sendIntentSender(IApplicationThread caller, IIntentSender target, IBinder whitelistToken, int code, Intent intent, String resolvedType, IIntentReceiver finishedReceiver, String requiredPermission, Bundle options) throws RemoteException {
+        public int sendIntentSender(
+                IApplicationThread caller,
+                IIntentSender target,
+                IBinder whitelistToken,
+                int code,
+                Intent intent,
+                String resolvedType,
+                IIntentReceiver finishedReceiver,
+                String requiredPermission,
+                Bundle options)
+                throws RemoteException {
             return 0;
         }
 
@@ -1620,45 +2117,39 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void setRenderThread(int tid) throws RemoteException {
-        }
+        public void setRenderThread(int tid) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void setHasTopUi(boolean hasTopUi) throws RemoteException {
-        }
+        public void setHasTopUi(boolean hasTopUi) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void cancelTaskWindowTransition(int taskId) throws RemoteException {
-        }
+        public void cancelTaskWindowTransition(int taskId) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void scheduleApplicationInfoChanged(List<String> packageNames, int userId) throws RemoteException {
-        }
+        public void scheduleApplicationInfoChanged(List<String> packageNames, int userId)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void setPersistentVrThread(int tid) throws RemoteException {
-        }
+        public void setPersistentVrThread(int tid) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void waitForNetworkStateUpdate(long procStateSeq) throws RemoteException {
-        }
+        public void waitForNetworkStateUpdate(long procStateSeq) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void backgroundAllowlistUid(int uid) throws RemoteException {
-        }
+        public void backgroundAllowlistUid(int uid) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public boolean startUserInBackgroundWithListener(int userid, IProgressListener unlockProgressListener) throws RemoteException {
+        public boolean startUserInBackgroundWithListener(
+                int userid, IProgressListener unlockProgressListener) throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityManager
-        public void startDelegateShellPermissionIdentity(int uid, String[] permissions) throws RemoteException {
-        }
+        public void startDelegateShellPermissionIdentity(int uid, String[] permissions)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void stopDelegateShellPermissionIdentity() throws RemoteException {
-        }
+        public void stopDelegateShellPermissionIdentity() throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public List<String> getDelegatedShellPermissions() throws RemoteException {
@@ -1671,55 +2162,59 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public boolean startUserInForegroundWithListener(int userid, IProgressListener unlockProgressListener) throws RemoteException {
+        public boolean startUserInForegroundWithListener(
+                int userid, IProgressListener unlockProgressListener) throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityManager
-        public void appNotResponding(String reason) throws RemoteException {
-        }
+        public void appNotResponding(String reason) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void doActiveLaunch(String packageName, boolean isLauncher, int userId) throws RemoteException {
-        }
+        public void doActiveLaunch(String packageName, boolean isLauncher, int userId)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public ParceledListSlice<ApplicationStartInfo> getHistoricalProcessStartReasons(String packageName, int maxNum, int userId) throws RemoteException {
+        public ParceledListSlice<ApplicationStartInfo> getHistoricalProcessStartReasons(
+                String packageName, int maxNum, int userId) throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityManager
-        public void addApplicationStartInfoCompleteListener(IApplicationStartInfoCompleteListener listener, int userId) throws RemoteException {
-        }
+        public void addApplicationStartInfoCompleteListener(
+                IApplicationStartInfoCompleteListener listener, int userId)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void removeApplicationStartInfoCompleteListener(IApplicationStartInfoCompleteListener listener, int userId) throws RemoteException {
-        }
+        public void removeApplicationStartInfoCompleteListener(
+                IApplicationStartInfoCompleteListener listener, int userId)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void addStartInfoTimestamp(int key, long timestampNs, int userId) throws RemoteException {
-        }
+        public void addStartInfoTimestamp(int key, long timestampNs, int userId)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void reportStartInfoViewTimestamps(long renderThreadDrawStartTimeNs, long framePresentedTimeNs) throws RemoteException {
-        }
+        public void reportStartInfoViewTimestamps(
+                long renderThreadDrawStartTimeNs, long framePresentedTimeNs)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public ParceledListSlice<ApplicationExitInfo> getHistoricalProcessExitReasons(String packageName, int pid, int maxNum, int userId) throws RemoteException {
+        public ParceledListSlice<ApplicationExitInfo> getHistoricalProcessExitReasons(
+                String packageName, int pid, int maxNum, int userId) throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityManager
-        public void killProcessesWhenImperceptible(int[] pids, String reason) throws RemoteException {
-        }
+        public void killProcessesWhenImperceptible(int[] pids, String reason)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void setActivityLocusContext(ComponentName activity, LocusId locusId, IBinder appToken) throws RemoteException {
-        }
+        public void setActivityLocusContext(
+                ComponentName activity, LocusId locusId, IBinder appToken) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void setProcessStateSummary(byte[] state) throws RemoteException {
-        }
+        public void setProcessStateSummary(byte[] state) throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public boolean isAppFreezerSupported() throws RemoteException {
@@ -1732,12 +2227,11 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void killUidForPermissionChange(int appId, int userId, String reason) throws RemoteException {
-        }
+        public void killUidForPermissionChange(int appId, int userId, String reason)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void resetAppErrors() throws RemoteException {
-        }
+        public void resetAppErrors() throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public boolean enableAppFreezer(boolean enable) throws RemoteException {
@@ -1750,8 +2244,7 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void holdLock(IBinder token, int durationMs) throws RemoteException {
-        }
+        public void holdLock(IBinder token, int durationMs) throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public boolean startProfile(int userId) throws RemoteException {
@@ -1764,26 +2257,26 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public ParceledListSlice queryIntentComponentsForIntentSender(IIntentSender sender, int matchFlags) throws RemoteException {
+        public ParceledListSlice queryIntentComponentsForIntentSender(
+                IIntentSender sender, int matchFlags) throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityManager
-        public int getUidProcessCapabilities(int uid, String callingPackage) throws RemoteException {
+        public int getUidProcessCapabilities(int uid, String callingPackage)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityManager
-        public void waitForBroadcastIdle() throws RemoteException {
-        }
+        public void waitForBroadcastIdle() throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void waitForBroadcastBarrier() throws RemoteException {
-        }
+        public void waitForBroadcastBarrier() throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void forceDelayBroadcastDelivery(String targetPackage, long delayedDurationMs) throws RemoteException {
-        }
+        public void forceDelayBroadcastDelivery(String targetPackage, long delayedDurationMs)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public boolean isProcessFrozen(int pid) throws RemoteException {
@@ -1796,17 +2289,21 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public String[] queryRegisteredReceiverPackages(Intent intent, String resolvedType, int userId) throws RemoteException {
+        public String[] queryRegisteredReceiverPackages(
+                Intent intent, String resolvedType, int userId) throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityManager
-        public boolean startUserInBackgroundVisibleOnDisplay(int userid, int displayId, IProgressListener unlockProgressListener) throws RemoteException {
+        public boolean startUserInBackgroundVisibleOnDisplay(
+                int userid, int displayId, IProgressListener unlockProgressListener)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityManager
-        public boolean startProfileWithListener(int userid, IProgressListener unlockProgressListener) throws RemoteException {
+        public boolean startProfileWithListener(
+                int userid, IProgressListener unlockProgressListener) throws RemoteException {
             return false;
         }
 
@@ -1821,22 +2318,24 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public boolean shouldServiceTimeOut(ComponentName className, IBinder token) throws RemoteException {
+        public boolean shouldServiceTimeOut(ComponentName className, IBinder token)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityManager
-        public boolean hasServiceTimeLimitExceeded(ComponentName className, IBinder token) throws RemoteException {
+        public boolean hasServiceTimeLimitExceeded(ComponentName className, IBinder token)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityManager
-        public void registerUidFrozenStateChangedCallback(IUidFrozenStateChangedCallback callback) throws RemoteException {
-        }
+        public void registerUidFrozenStateChangedCallback(IUidFrozenStateChangedCallback callback)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void unregisterUidFrozenStateChangedCallback(IUidFrozenStateChangedCallback callback) throws RemoteException {
-        }
+        public void unregisterUidFrozenStateChangedCallback(IUidFrozenStateChangedCallback callback)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public int[] getUidFrozenState(int[] uids) throws RemoteException {
@@ -1899,8 +2398,8 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void registerDedicatedCallback(RemoteCallback resultCallback, int type) throws RemoteException {
-        }
+        public void registerDedicatedCallback(RemoteCallback resultCallback, int type)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public boolean setLongLiveApp(String packageName) throws RemoteException {
@@ -1918,13 +2417,13 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public boolean moveTaskToBackWithBundle(int taskId, boolean keepAlive, Bundle options) throws RemoteException {
+        public boolean moveTaskToBackWithBundle(int taskId, boolean keepAlive, Bundle options)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityManager
-        public void dismissUserSwitchingDialog(int userId) throws RemoteException {
-        }
+        public void dismissUserSwitchingDialog(int userId) throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public Configuration getGlobalConfiguration() throws RemoteException {
@@ -1932,58 +2431,68 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public int checkPermissionForDevice(String permission, int pid, int uid, int deviceId) throws RemoteException {
+        public int checkPermissionForDevice(String permission, int pid, int uid, int deviceId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityManager
-        public void frozenBinderTransactionDetected(int debugPid, int code, int flags, int err) throws RemoteException {
-        }
+        public void frozenBinderTransactionDetected(int debugPid, int code, int flags, int err)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public int getBindingUidProcessState(int uid, String callingPackage) throws RemoteException {
+        public int getBindingUidProcessState(int uid, String callingPackage)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityManager
-        public long getUidLastIdleElapsedTime(int uid, String callingPackage) throws RemoteException {
+        public long getUidLastIdleElapsedTime(int uid, String callingPackage)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.app.IActivityManager
-        public void addOverridePermissionState(int originatingUid, int uid, String permission, int result) throws RemoteException {
-        }
+        public void addOverridePermissionState(
+                int originatingUid, int uid, String permission, int result)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void removeOverridePermissionState(int originatingUid, int uid, String permission) throws RemoteException {
-        }
+        public void removeOverridePermissionState(int originatingUid, int uid, String permission)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void clearOverridePermissionStates(int originatingUid, int uid) throws RemoteException {
-        }
+        public void clearOverridePermissionStates(int originatingUid, int uid)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void clearAllOverridePermissionStates(int originatingUid) throws RemoteException {
-        }
+        public void clearAllOverridePermissionStates(int originatingUid) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void noteAppRestrictionEnabled(String packageName, int uid, int restrictionType, boolean enabled, int reason, String subReason, int source, long threshold) throws RemoteException {
-        }
+        public void noteAppRestrictionEnabled(
+                String packageName,
+                int uid,
+                int restrictionType,
+                boolean enabled,
+                int reason,
+                String subReason,
+                int source,
+                long threshold)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void checkProfileForADCP(int pid, String pkg) throws RemoteException {
-        }
+        public void checkProfileForADCP(int pid, String pkg) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void preloadBoosterAppsFromIpm(List<String> packageNames, int type) throws RemoteException {
-        }
+        public void preloadBoosterAppsFromIpm(List<String> packageNames, int type)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void updateFlingerFlag(int pid, String pkg) throws RemoteException {
-        }
+        public void updateFlingerFlag(int pid, String pkg) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public SemAppRestrictionManager.RestrictionInfo getRestrictionInfo(int type, String packageName, int uid) throws RemoteException {
+        public SemAppRestrictionManager.RestrictionInfo getRestrictionInfo(
+                int type, String packageName, int uid) throws RemoteException {
             return null;
         }
 
@@ -1993,45 +2502,52 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public boolean restrict(int type, int state, boolean byUser, String packageName, int uid) throws RemoteException {
+        public boolean restrict(int type, int state, boolean byUser, String packageName, int uid)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityManager
-        public List<SemAppRestrictionManager.AppRestrictionInfo> getRestrictableList(int type) throws RemoteException {
+        public List<SemAppRestrictionManager.AppRestrictionInfo> getRestrictableList(int type)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityManager
-        public List<SemAppRestrictionManager.AppRestrictionInfo> getAllRestrictedList() throws RemoteException {
+        public List<SemAppRestrictionManager.AppRestrictionInfo> getAllRestrictedList()
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityManager
-        public List<SemAppRestrictionManager.AppRestrictionInfo> getRestrictedList(int type) throws RemoteException {
+        public List<SemAppRestrictionManager.AppRestrictionInfo> getRestrictedList(int type)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityManager
-        public boolean updateRestrictionInfo(SemAppRestrictionManager.RestrictionInfo info, List<SemAppRestrictionManager.AppRestrictionInfo> list) throws RemoteException {
+        public boolean updateRestrictionInfo(
+                SemAppRestrictionManager.RestrictionInfo info,
+                List<SemAppRestrictionManager.AppRestrictionInfo> list)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityManager
-        public boolean clearRestrictionInfo(List<SemAppRestrictionManager.AppRestrictionInfo> list) throws RemoteException {
+        public boolean clearRestrictionInfo(List<SemAppRestrictionManager.AppRestrictionInfo> list)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityManager
-        public void setTTSPkgInfo(int uid) throws RemoteException {
-        }
+        public void setTTSPkgInfo(int uid) throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void clearTTSPkgInfo() throws RemoteException {
-        }
+        public void clearTTSPkgInfo() throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public ParceledListSlice<PackageInfo> getInstalledPackageListFromMARs(int flags, int userId) throws RemoteException {
+        public ParceledListSlice<PackageInfo> getInstalledPackageListFromMARs(int flags, int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -2041,12 +2557,15 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void updatePersistentConfigurationAndLocaleOverlays(Configuration values, String callingPackageName, String callingAttributionTag, LocaleList ll) throws RemoteException {
-        }
+        public void updatePersistentConfigurationAndLocaleOverlays(
+                Configuration values,
+                String callingPackageName,
+                String callingAttributionTag,
+                LocaleList ll)
+                throws RemoteException {}
 
         @Override // android.app.IActivityManager
-        public void reportAbnormalUsage(int pid, int type) throws RemoteException {
-        }
+        public void reportAbnormalUsage(int pid, int type) throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public boolean isHeapDumpAllowed() throws RemoteException {
@@ -2059,8 +2578,7 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.app.IActivityManager
-        public void resetAbnormalList() throws RemoteException {
-        }
+        public void resetAbnormalList() throws RemoteException {}
 
         @Override // android.app.IActivityManager
         public boolean isFreezableUid(int uid) throws RemoteException {
@@ -2088,7 +2606,7 @@ public interface IActivityManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IActivityManager {
+    public abstract static class Stub extends Binder implements IActivityManager {
         public static final String DESCRIPTOR = "android.app.IActivityManager";
         static final int TRANSACTION_addApplicationStartInfoCompleteListener = 227;
         static final int TRANSACTION_addInstrumentationResults = 45;
@@ -3057,7 +3575,8 @@ public interface IActivityManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -3155,7 +3674,10 @@ public interface IActivityManager extends IInterface {
                     return true;
                 case 13:
                     IBinder _arg012 = data.readStrongBinder();
-                    ApplicationErrorReport.ParcelableCrashInfo _arg110 = (ApplicationErrorReport.ParcelableCrashInfo) data.readTypedObject(ApplicationErrorReport.ParcelableCrashInfo.CREATOR);
+                    ApplicationErrorReport.ParcelableCrashInfo _arg110 =
+                            (ApplicationErrorReport.ParcelableCrashInfo)
+                                    data.readTypedObject(
+                                            ApplicationErrorReport.ParcelableCrashInfo.CREATOR);
                     data.enforceNoDataAvail();
                     handleApplicationCrash(_arg012, _arg110);
                     reply.writeNoException();
@@ -3183,7 +3705,8 @@ public interface IActivityManager extends IInterface {
                 case 19:
                     return onTransact$registerReceiverWithFeature$(data, reply);
                 case 20:
-                    IIntentReceiver _arg014 = IIntentReceiver.Stub.asInterface(data.readStrongBinder());
+                    IIntentReceiver _arg014 =
+                            IIntentReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterReceiver(_arg014);
                     reply.writeNoException();
@@ -3193,7 +3716,8 @@ public interface IActivityManager extends IInterface {
                 case 22:
                     return onTransact$broadcastIntentWithFeature$(data, reply);
                 case 23:
-                    IApplicationThread _arg015 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    IApplicationThread _arg015 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     Intent _arg112 = (Intent) data.readTypedObject(Intent.CREATOR);
                     int _arg29 = data.readInt();
                     data.enforceNoDataAvail();
@@ -3203,7 +3727,8 @@ public interface IActivityManager extends IInterface {
                 case 24:
                     return onTransact$finishReceiver$(data, reply);
                 case 25:
-                    IApplicationThread _arg016 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    IApplicationThread _arg016 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     long _arg113 = data.readLong();
                     data.enforceNoDataAvail();
                     attachApplication(_arg016, _arg113);
@@ -3238,7 +3763,8 @@ public interface IActivityManager extends IInterface {
                 case 31:
                     IBinder _arg020 = data.readStrongBinder();
                     IApplicationThread _arg021 = IApplicationThread.Stub.asInterface(_arg020);
-                    List<ContentProviderHolder> _arg116 = data.createTypedArrayList(ContentProviderHolder.CREATOR);
+                    List<ContentProviderHolder> _arg116 =
+                            data.createTypedArrayList(ContentProviderHolder.CREATOR);
                     data.enforceNoDataAvail();
                     publishContentProviders(_arg021, _arg116);
                     reply.writeNoException();
@@ -3253,7 +3779,8 @@ public interface IActivityManager extends IInterface {
                     reply.writeBoolean(_result8);
                     return true;
                 case 33:
-                    ComponentName _arg023 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg023 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     PendingIntent _result9 = getRunningServiceControlPanel(_arg023);
                     reply.writeNoException();
@@ -3262,7 +3789,8 @@ public interface IActivityManager extends IInterface {
                 case 34:
                     return onTransact$startService$(data, reply);
                 case 35:
-                    IApplicationThread _arg024 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    IApplicationThread _arg024 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     Intent _arg118 = (Intent) data.readTypedObject(Intent.CREATOR);
                     String _arg211 = data.readString();
                     int _arg34 = data.readInt();
@@ -3276,7 +3804,8 @@ public interface IActivityManager extends IInterface {
                 case 37:
                     return onTransact$bindServiceInstance$(data, reply);
                 case 38:
-                    IServiceConnection _arg025 = IServiceConnection.Stub.asInterface(data.readStrongBinder());
+                    IServiceConnection _arg025 =
+                            IServiceConnection.Stub.asInterface(data.readStrongBinder());
                     int _arg119 = data.readInt();
                     int _arg212 = data.readInt();
                     data.enforceNoDataAvail();
@@ -3323,14 +3852,16 @@ public interface IActivityManager extends IInterface {
                 case 44:
                     return onTransact$startInstrumentation$(data, reply);
                 case 45:
-                    IApplicationThread _arg032 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    IApplicationThread _arg032 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     Bundle _arg123 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
                     addInstrumentationResults(_arg032, _arg123);
                     reply.writeNoException();
                     return true;
                 case 46:
-                    IApplicationThread _arg033 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    IApplicationThread _arg033 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     int _arg124 = data.readInt();
                     Bundle _arg215 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
@@ -3343,7 +3874,8 @@ public interface IActivityManager extends IInterface {
                     reply.writeTypedObject(_result12, 1);
                     return true;
                 case 48:
-                    Configuration _arg034 = (Configuration) data.readTypedObject(Configuration.CREATOR);
+                    Configuration _arg034 =
+                            (Configuration) data.readTypedObject(Configuration.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result13 = updateConfiguration(_arg034);
                     reply.writeNoException();
@@ -3358,7 +3890,8 @@ public interface IActivityManager extends IInterface {
                     reply.writeBoolean(_result14);
                     return true;
                 case 50:
-                    ComponentName _arg036 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg036 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     IBinder _arg126 = data.readStrongBinder();
                     int _arg216 = data.readInt();
                     data.enforceNoDataAvail();
@@ -3388,14 +3921,16 @@ public interface IActivityManager extends IInterface {
                 case 57:
                     return onTransact$revokeUriPermission$(data, reply);
                 case 58:
-                    IActivityController _arg038 = IActivityController.Stub.asInterface(data.readStrongBinder());
+                    IActivityController _arg038 =
+                            IActivityController.Stub.asInterface(data.readStrongBinder());
                     boolean _arg127 = data.readBoolean();
                     data.enforceNoDataAvail();
                     setActivityController(_arg038, _arg127);
                     reply.writeNoException();
                     return true;
                 case 59:
-                    IApplicationThread _arg039 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    IApplicationThread _arg039 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     boolean _arg128 = data.readBoolean();
                     data.enforceNoDataAvail();
                     showWaitingForDebugger(_arg039, _arg128);
@@ -3437,7 +3972,8 @@ public interface IActivityManager extends IInterface {
                     return true;
                 case 67:
                     IIntentSender _arg044 = IIntentSender.Stub.asInterface(data.readStrongBinder());
-                    IResultReceiver _arg130 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg130 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result19 = registerIntentSenderCancelListenerEx(_arg044, _arg130);
                     reply.writeNoException();
@@ -3445,7 +3981,8 @@ public interface IActivityManager extends IInterface {
                     return true;
                 case 68:
                     IIntentSender _arg045 = IIntentSender.Stub.asInterface(data.readStrongBinder());
-                    IResultReceiver _arg131 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg131 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterIntentSenderCancelListener(_arg045, _arg131);
                     reply.writeNoException();
@@ -3489,7 +4026,8 @@ public interface IActivityManager extends IInterface {
                 case 75:
                     return onTransact$setServiceForeground$(data, reply);
                 case 76:
-                    ComponentName _arg050 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg050 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     IBinder _arg136 = data.readStrongBinder();
                     data.enforceNoDataAvail();
                     int _result20 = getForegroundServiceType(_arg050, _arg136);
@@ -3512,14 +4050,16 @@ public interface IActivityManager extends IInterface {
                     reply.writeTypedObject(_arg052, 1);
                     return true;
                 case 79:
-                    List<ActivityManager.ProcessErrorStateInfo> _result22 = getProcessesInErrorState();
+                    List<ActivityManager.ProcessErrorStateInfo> _result22 =
+                            getProcessesInErrorState();
                     reply.writeNoException();
                     reply.writeTypedList(_result22, 1);
                     return true;
                 case 80:
                     String _arg053 = data.readString();
                     boolean _arg138 = data.readBoolean();
-                    IPackageDataObserver _arg220 = IPackageDataObserver.Stub.asInterface(data.readStrongBinder());
+                    IPackageDataObserver _arg220 =
+                            IPackageDataObserver.Stub.asInterface(data.readStrongBinder());
                     int _arg36 = data.readInt();
                     data.enforceNoDataAvail();
                     boolean _result23 = clearApplicationUserData(_arg053, _arg138, _arg220, _arg36);
@@ -3534,7 +4074,8 @@ public interface IActivityManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 82:
-                    IForegroundServiceObserver _arg055 = IForegroundServiceObserver.Stub.asInterface(data.readStrongBinder());
+                    IForegroundServiceObserver _arg055 =
+                            IForegroundServiceObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result24 = registerForegroundServiceObserver(_arg055);
                     reply.writeNoException();
@@ -3574,12 +4115,14 @@ public interface IActivityManager extends IInterface {
                     int _arg060 = data.readInt();
                     int _arg144 = data.readInt();
                     data.enforceNoDataAvail();
-                    List<ActivityManager.RunningServiceInfo> _result26 = getServices(_arg060, _arg144);
+                    List<ActivityManager.RunningServiceInfo> _result26 =
+                            getServices(_arg060, _arg144);
                     reply.writeNoException();
                     reply.writeTypedList(_result26, 1);
                     return true;
                 case 88:
-                    List<ActivityManager.RunningAppProcessInfo> _result27 = getRunningAppProcesses();
+                    List<ActivityManager.RunningAppProcessInfo> _result27 =
+                            getRunningAppProcesses();
                     reply.writeNoException();
                     reply.writeTypedList(_result27, 1);
                     return true;
@@ -3628,7 +4171,8 @@ public interface IActivityManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 96:
-                    ApplicationInfo _arg065 = (ApplicationInfo) data.readTypedObject(ApplicationInfo.CREATOR);
+                    ApplicationInfo _arg065 =
+                            (ApplicationInfo) data.readTypedObject(ApplicationInfo.CREATOR);
                     data.enforceNoDataAvail();
                     unbindBackupAgent(_arg065);
                     reply.writeNoException();
@@ -3696,7 +4240,9 @@ public interface IActivityManager extends IInterface {
                 case 109:
                     IBinder _arg072 = data.readStrongBinder();
                     int _arg151 = data.readInt();
-                    StrictMode.ViolationInfo _arg225 = (StrictMode.ViolationInfo) data.readTypedObject(StrictMode.ViolationInfo.CREATOR);
+                    StrictMode.ViolationInfo _arg225 =
+                            (StrictMode.ViolationInfo)
+                                    data.readTypedObject(StrictMode.ViolationInfo.CREATOR);
                     data.enforceNoDataAvail();
                     handleApplicationStrictModeViolation(_arg072, _arg151, _arg225);
                     reply.writeNoException();
@@ -3719,7 +4265,8 @@ public interface IActivityManager extends IInterface {
                 case 114:
                     Uri _arg074 = (Uri) data.readTypedObject(Uri.CREATOR);
                     int _arg152 = data.readInt();
-                    RemoteCallback _arg226 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg226 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     getMimeTypeFilterAsync(_arg074, _arg152, _arg226);
                     return true;
@@ -3771,13 +4318,15 @@ public interface IActivityManager extends IInterface {
                     reply.writeBoolean(_result39);
                     return true;
                 case 123:
-                    IProcessObserver _arg080 = IProcessObserver.Stub.asInterface(data.readStrongBinder());
+                    IProcessObserver _arg080 =
+                            IProcessObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerProcessObserver(_arg080);
                     reply.writeNoException();
                     return true;
                 case 124:
-                    IProcessObserver _arg081 = IProcessObserver.Stub.asInterface(data.readStrongBinder());
+                    IProcessObserver _arg081 =
+                            IProcessObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterProcessObserver(_arg081);
                     reply.writeNoException();
@@ -3790,13 +4339,15 @@ public interface IActivityManager extends IInterface {
                     reply.writeBoolean(_result40);
                     return true;
                 case 126:
-                    Configuration _arg083 = (Configuration) data.readTypedObject(Configuration.CREATOR);
+                    Configuration _arg083 =
+                            (Configuration) data.readTypedObject(Configuration.CREATOR);
                     data.enforceNoDataAvail();
                     updatePersistentConfiguration(_arg083);
                     reply.writeNoException();
                     return true;
                 case 127:
-                    Configuration _arg084 = (Configuration) data.readTypedObject(Configuration.CREATOR);
+                    Configuration _arg084 =
+                            (Configuration) data.readTypedObject(Configuration.CREATOR);
                     String _arg155 = data.readString();
                     String _arg227 = data.readString();
                     data.enforceNoDataAvail();
@@ -3811,7 +4362,8 @@ public interface IActivityManager extends IInterface {
                     reply.writeLongArray(_result41);
                     return true;
                 case 129:
-                    CharSequence _arg086 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg086 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     boolean _arg156 = data.readBoolean();
                     data.enforceNoDataAvail();
                     showBootMessage(_arg086, _arg156);
@@ -3827,7 +4379,8 @@ public interface IActivityManager extends IInterface {
                     IBinder _arg228 = data.readStrongBinder();
                     String _arg38 = data.readString();
                     data.enforceNoDataAvail();
-                    ContentProviderHolder _result42 = getContentProviderExternal(_arg087, _arg157, _arg228, _arg38);
+                    ContentProviderHolder _result42 =
+                            getContentProviderExternal(_arg087, _arg157, _arg228, _arg38);
                     reply.writeNoException();
                     reply.writeTypedObject(_result42, 1);
                     return true;
@@ -3847,7 +4400,8 @@ public interface IActivityManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 134:
-                    ActivityManager.RunningAppProcessInfo _arg090 = new ActivityManager.RunningAppProcessInfo();
+                    ActivityManager.RunningAppProcessInfo _arg090 =
+                            new ActivityManager.RunningAppProcessInfo();
                     data.enforceNoDataAvail();
                     getMyMemoryState(_arg090);
                     reply.writeNoException();
@@ -3897,7 +4451,8 @@ public interface IActivityManager extends IInterface {
                 case 143:
                     int _arg095 = data.readInt();
                     boolean _arg160 = data.readBoolean();
-                    IStopUserCallback _arg230 = IStopUserCallback.Stub.asInterface(data.readStrongBinder());
+                    IStopUserCallback _arg230 =
+                            IStopUserCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result48 = stopUser(_arg095, _arg160, _arg230);
                     reply.writeNoException();
@@ -3905,7 +4460,8 @@ public interface IActivityManager extends IInterface {
                     return true;
                 case 144:
                     int _arg096 = data.readInt();
-                    IStopUserCallback _arg161 = IStopUserCallback.Stub.asInterface(data.readStrongBinder());
+                    IStopUserCallback _arg161 =
+                            IStopUserCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result49 = stopUserWithCallback(_arg096, _arg161);
                     reply.writeNoException();
@@ -3914,7 +4470,8 @@ public interface IActivityManager extends IInterface {
                 case 145:
                     int _arg097 = data.readInt();
                     boolean _arg162 = data.readBoolean();
-                    IStopUserCallback _arg231 = IStopUserCallback.Stub.asInterface(data.readStrongBinder());
+                    IStopUserCallback _arg231 =
+                            IStopUserCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result50 = stopUserExceptCertainProfiles(_arg097, _arg162, _arg231);
                     reply.writeNoException();
@@ -3922,21 +4479,24 @@ public interface IActivityManager extends IInterface {
                     return true;
                 case 146:
                     int _arg098 = data.readInt();
-                    IStopUserCallback _arg163 = IStopUserCallback.Stub.asInterface(data.readStrongBinder());
+                    IStopUserCallback _arg163 =
+                            IStopUserCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result51 = stopUserWithDelayedLocking(_arg098, _arg163);
                     reply.writeNoException();
                     reply.writeInt(_result51);
                     return true;
                 case 147:
-                    IUserSwitchObserver _arg099 = IUserSwitchObserver.Stub.asInterface(data.readStrongBinder());
+                    IUserSwitchObserver _arg099 =
+                            IUserSwitchObserver.Stub.asInterface(data.readStrongBinder());
                     String _arg164 = data.readString();
                     data.enforceNoDataAvail();
                     registerUserSwitchObserver(_arg099, _arg164);
                     reply.writeNoException();
                     return true;
                 case 148:
-                    IUserSwitchObserver _arg0100 = IUserSwitchObserver.Stub.asInterface(data.readStrongBinder());
+                    IUserSwitchObserver _arg0100 =
+                            IUserSwitchObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterUserSwitchObserver(_arg0100);
                     reply.writeNoException();
@@ -4106,7 +4666,8 @@ public interface IActivityManager extends IInterface {
                     reply.writeBoolean(_result60);
                     return true;
                 case 176:
-                    IIntentSender _arg0119 = IIntentSender.Stub.asInterface(data.readStrongBinder());
+                    IIntentSender _arg0119 =
+                            IIntentSender.Stub.asInterface(data.readStrongBinder());
                     String _arg173 = data.readString();
                     data.enforceNoDataAvail();
                     String _result61 = getTagForIntentSender(_arg0119, _arg173);
@@ -4157,13 +4718,15 @@ public interface IActivityManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 184:
-                    ITaskStackListener _arg0125 = ITaskStackListener.Stub.asInterface(data.readStrongBinder());
+                    ITaskStackListener _arg0125 =
+                            ITaskStackListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerTaskStackListener(_arg0125);
                     reply.writeNoException();
                     return true;
                 case 185:
-                    ITaskStackListener _arg0126 = ITaskStackListener.Stub.asInterface(data.readStrongBinder());
+                    ITaskStackListener _arg0126 =
+                            ITaskStackListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterTaskStackListener(_arg0126);
                     reply.writeNoException();
@@ -4218,7 +4781,8 @@ public interface IActivityManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 193:
-                    IIntentSender _arg0133 = IIntentSender.Stub.asInterface(data.readStrongBinder());
+                    IIntentSender _arg0133 =
+                            IIntentSender.Stub.asInterface(data.readStrongBinder());
                     WorkSource _arg180 = (WorkSource) data.readTypedObject(WorkSource.CREATOR);
                     int _arg238 = data.readInt();
                     String _arg310 = data.readString();
@@ -4227,7 +4791,8 @@ public interface IActivityManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 194:
-                    IIntentSender _arg0134 = IIntentSender.Stub.asInterface(data.readStrongBinder());
+                    IIntentSender _arg0134 =
+                            IIntentSender.Stub.asInterface(data.readStrongBinder());
                     WorkSource _arg181 = (WorkSource) data.readTypedObject(WorkSource.CREATOR);
                     int _arg239 = data.readInt();
                     String _arg311 = data.readString();
@@ -4249,7 +4814,9 @@ public interface IActivityManager extends IInterface {
                     reply.writeBoolean(_result68);
                     return true;
                 case 197:
-                    ParcelFileDescriptor _arg0136 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg0136 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result69 = stopBinderTrackingAndDump(_arg0136);
                     reply.writeNoException();
@@ -4265,7 +4832,8 @@ public interface IActivityManager extends IInterface {
                     int _arg0138 = data.readInt();
                     byte[] _arg183 = data.createByteArray();
                     byte[] _arg240 = data.createByteArray();
-                    IProgressListener _arg312 = IProgressListener.Stub.asInterface(data.readStrongBinder());
+                    IProgressListener _arg312 =
+                            IProgressListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result70 = unlockUser(_arg0138, _arg183, _arg240, _arg312);
                     reply.writeNoException();
@@ -4273,7 +4841,8 @@ public interface IActivityManager extends IInterface {
                     return true;
                 case 200:
                     int _arg0139 = data.readInt();
-                    IProgressListener _arg184 = IProgressListener.Stub.asInterface(data.readStrongBinder());
+                    IProgressListener _arg184 =
+                            IProgressListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result71 = unlockUser2(_arg0139, _arg184);
                     reply.writeNoException();
@@ -4305,7 +4874,8 @@ public interface IActivityManager extends IInterface {
                     reply.writeInt(_result72);
                     return true;
                 case 205:
-                    ComponentName _arg0143 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0143 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result73 = isVrModePackageEnabled(_arg0143);
                     reply.writeNoException();
@@ -4382,7 +4952,8 @@ public interface IActivityManager extends IInterface {
                     return true;
                 case 218:
                     int _arg0154 = data.readInt();
-                    IProgressListener _arg189 = IProgressListener.Stub.asInterface(data.readStrongBinder());
+                    IProgressListener _arg189 =
+                            IProgressListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result75 = startUserInBackgroundWithListener(_arg0154, _arg189);
                     reply.writeNoException();
@@ -4411,7 +4982,8 @@ public interface IActivityManager extends IInterface {
                     return true;
                 case 223:
                     int _arg0156 = data.readInt();
-                    IProgressListener _arg191 = IProgressListener.Stub.asInterface(data.readStrongBinder());
+                    IProgressListener _arg191 =
+                            IProgressListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result78 = startUserInForegroundWithListener(_arg0156, _arg191);
                     reply.writeNoException();
@@ -4435,19 +5007,24 @@ public interface IActivityManager extends IInterface {
                     int _arg193 = data.readInt();
                     int _arg242 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParceledListSlice<ApplicationStartInfo> _result79 = getHistoricalProcessStartReasons(_arg0159, _arg193, _arg242);
+                    ParceledListSlice<ApplicationStartInfo> _result79 =
+                            getHistoricalProcessStartReasons(_arg0159, _arg193, _arg242);
                     reply.writeNoException();
                     reply.writeTypedObject(_result79, 1);
                     return true;
                 case 227:
-                    IApplicationStartInfoCompleteListener _arg0160 = IApplicationStartInfoCompleteListener.Stub.asInterface(data.readStrongBinder());
+                    IApplicationStartInfoCompleteListener _arg0160 =
+                            IApplicationStartInfoCompleteListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     int _arg194 = data.readInt();
                     data.enforceNoDataAvail();
                     addApplicationStartInfoCompleteListener(_arg0160, _arg194);
                     reply.writeNoException();
                     return true;
                 case 228:
-                    IApplicationStartInfoCompleteListener _arg0161 = IApplicationStartInfoCompleteListener.Stub.asInterface(data.readStrongBinder());
+                    IApplicationStartInfoCompleteListener _arg0161 =
+                            IApplicationStartInfoCompleteListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     int _arg195 = data.readInt();
                     data.enforceNoDataAvail();
                     removeApplicationStartInfoCompleteListener(_arg0161, _arg195);
@@ -4473,7 +5050,8 @@ public interface IActivityManager extends IInterface {
                     int _arg244 = data.readInt();
                     int _arg313 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParceledListSlice<ApplicationExitInfo> _result80 = getHistoricalProcessExitReasons(_arg0164, _arg198, _arg244, _arg313);
+                    ParceledListSlice<ApplicationExitInfo> _result80 =
+                            getHistoricalProcessExitReasons(_arg0164, _arg198, _arg244, _arg313);
                     reply.writeNoException();
                     reply.writeTypedObject(_result80, 1);
                     return true;
@@ -4485,7 +5063,8 @@ public interface IActivityManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 233:
-                    ComponentName _arg0166 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0166 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     LocusId _arg1100 = (LocusId) data.readTypedObject(LocusId.CREATOR);
                     IBinder _arg245 = data.readStrongBinder();
                     data.enforceNoDataAvail();
@@ -4556,10 +5135,12 @@ public interface IActivityManager extends IInterface {
                     reply.writeBoolean(_result86);
                     return true;
                 case 244:
-                    IIntentSender _arg0174 = IIntentSender.Stub.asInterface(data.readStrongBinder());
+                    IIntentSender _arg0174 =
+                            IIntentSender.Stub.asInterface(data.readStrongBinder());
                     int _arg1103 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParceledListSlice _result87 = queryIntentComponentsForIntentSender(_arg0174, _arg1103);
+                    ParceledListSlice _result87 =
+                            queryIntentComponentsForIntentSender(_arg0174, _arg1103);
                     reply.writeNoException();
                     reply.writeTypedObject(_result87, 1);
                     return true;
@@ -4605,22 +5186,26 @@ public interface IActivityManager extends IInterface {
                     String _arg1106 = data.readString();
                     int _arg247 = data.readInt();
                     data.enforceNoDataAvail();
-                    String[] _result91 = queryRegisteredReceiverPackages(_arg0179, _arg1106, _arg247);
+                    String[] _result91 =
+                            queryRegisteredReceiverPackages(_arg0179, _arg1106, _arg247);
                     reply.writeNoException();
                     reply.writeStringArray(_result91);
                     return true;
                 case 252:
                     int _arg0180 = data.readInt();
                     int _arg1107 = data.readInt();
-                    IProgressListener _arg248 = IProgressListener.Stub.asInterface(data.readStrongBinder());
+                    IProgressListener _arg248 =
+                            IProgressListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
-                    boolean _result92 = startUserInBackgroundVisibleOnDisplay(_arg0180, _arg1107, _arg248);
+                    boolean _result92 =
+                            startUserInBackgroundVisibleOnDisplay(_arg0180, _arg1107, _arg248);
                     reply.writeNoException();
                     reply.writeBoolean(_result92);
                     return true;
                 case 253:
                     int _arg0181 = data.readInt();
-                    IProgressListener _arg1108 = IProgressListener.Stub.asInterface(data.readStrongBinder());
+                    IProgressListener _arg1108 =
+                            IProgressListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result93 = startProfileWithListener(_arg0181, _arg1108);
                     reply.writeNoException();
@@ -4640,7 +5225,8 @@ public interface IActivityManager extends IInterface {
                     reply.writeIntArray(_result95);
                     return true;
                 case 256:
-                    ComponentName _arg0183 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0183 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     IBinder _arg1110 = data.readStrongBinder();
                     data.enforceNoDataAvail();
                     boolean _result96 = shouldServiceTimeOut(_arg0183, _arg1110);
@@ -4648,7 +5234,8 @@ public interface IActivityManager extends IInterface {
                     reply.writeBoolean(_result96);
                     return true;
                 case 257:
-                    ComponentName _arg0184 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0184 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     IBinder _arg1111 = data.readStrongBinder();
                     data.enforceNoDataAvail();
                     boolean _result97 = hasServiceTimeLimitExceeded(_arg0184, _arg1111);
@@ -4656,13 +5243,17 @@ public interface IActivityManager extends IInterface {
                     reply.writeBoolean(_result97);
                     return true;
                 case 258:
-                    IUidFrozenStateChangedCallback _arg0185 = IUidFrozenStateChangedCallback.Stub.asInterface(data.readStrongBinder());
+                    IUidFrozenStateChangedCallback _arg0185 =
+                            IUidFrozenStateChangedCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerUidFrozenStateChangedCallback(_arg0185);
                     reply.writeNoException();
                     return true;
                 case 259:
-                    IUidFrozenStateChangedCallback _arg0186 = IUidFrozenStateChangedCallback.Stub.asInterface(data.readStrongBinder());
+                    IUidFrozenStateChangedCallback _arg0186 =
+                            IUidFrozenStateChangedCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterUidFrozenStateChangedCallback(_arg0186);
                     reply.writeNoException();
@@ -4746,7 +5337,8 @@ public interface IActivityManager extends IInterface {
                     reply.writeBoolean(_result109);
                     return true;
                 case 272:
-                    RemoteCallback _arg0196 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg0196 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     int _arg1112 = data.readInt();
                     data.enforceNoDataAvail();
                     registerDedicatedCallback(_arg0196, _arg1112);
@@ -4884,7 +5476,8 @@ public interface IActivityManager extends IInterface {
                     String _arg1125 = data.readString();
                     int _arg254 = data.readInt();
                     data.enforceNoDataAvail();
-                    SemAppRestrictionManager.RestrictionInfo _result118 = getRestrictionInfo(_arg0212, _arg1125, _arg254);
+                    SemAppRestrictionManager.RestrictionInfo _result118 =
+                            getRestrictionInfo(_arg0212, _arg1125, _arg254);
                     reply.writeNoException();
                     reply.writeTypedObject(_result118, 1);
                     return true;
@@ -4902,32 +5495,42 @@ public interface IActivityManager extends IInterface {
                 case 294:
                     int _arg0214 = data.readInt();
                     data.enforceNoDataAvail();
-                    List<SemAppRestrictionManager.AppRestrictionInfo> _result120 = getRestrictableList(_arg0214);
+                    List<SemAppRestrictionManager.AppRestrictionInfo> _result120 =
+                            getRestrictableList(_arg0214);
                     reply.writeNoException();
                     reply.writeTypedList(_result120, 1);
                     return true;
                 case 295:
-                    List<SemAppRestrictionManager.AppRestrictionInfo> _result121 = getAllRestrictedList();
+                    List<SemAppRestrictionManager.AppRestrictionInfo> _result121 =
+                            getAllRestrictedList();
                     reply.writeNoException();
                     reply.writeTypedList(_result121, 1);
                     return true;
                 case 296:
                     int _arg0215 = data.readInt();
                     data.enforceNoDataAvail();
-                    List<SemAppRestrictionManager.AppRestrictionInfo> _result122 = getRestrictedList(_arg0215);
+                    List<SemAppRestrictionManager.AppRestrictionInfo> _result122 =
+                            getRestrictedList(_arg0215);
                     reply.writeNoException();
                     reply.writeTypedList(_result122, 1);
                     return true;
                 case 297:
-                    SemAppRestrictionManager.RestrictionInfo _arg0216 = (SemAppRestrictionManager.RestrictionInfo) data.readTypedObject(SemAppRestrictionManager.RestrictionInfo.CREATOR);
-                    List<SemAppRestrictionManager.AppRestrictionInfo> _arg1127 = data.createTypedArrayList(SemAppRestrictionManager.AppRestrictionInfo.CREATOR);
+                    SemAppRestrictionManager.RestrictionInfo _arg0216 =
+                            (SemAppRestrictionManager.RestrictionInfo)
+                                    data.readTypedObject(
+                                            SemAppRestrictionManager.RestrictionInfo.CREATOR);
+                    List<SemAppRestrictionManager.AppRestrictionInfo> _arg1127 =
+                            data.createTypedArrayList(
+                                    SemAppRestrictionManager.AppRestrictionInfo.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result123 = updateRestrictionInfo(_arg0216, _arg1127);
                     reply.writeNoException();
                     reply.writeBoolean(_result123);
                     return true;
                 case 298:
-                    List<SemAppRestrictionManager.AppRestrictionInfo> _arg0217 = data.createTypedArrayList(SemAppRestrictionManager.AppRestrictionInfo.CREATOR);
+                    List<SemAppRestrictionManager.AppRestrictionInfo> _arg0217 =
+                            data.createTypedArrayList(
+                                    SemAppRestrictionManager.AppRestrictionInfo.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result124 = clearRestrictionInfo(_arg0217);
                     reply.writeNoException();
@@ -4947,7 +5550,8 @@ public interface IActivityManager extends IInterface {
                     int _arg0219 = data.readInt();
                     int _arg1128 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParceledListSlice<PackageInfo> _result125 = getInstalledPackageListFromMARs(_arg0219, _arg1128);
+                    ParceledListSlice<PackageInfo> _result125 =
+                            getInstalledPackageListFromMARs(_arg0219, _arg1128);
                     reply.writeNoException();
                     reply.writeTypedObject(_result125, 1);
                     return true;
@@ -4959,12 +5563,14 @@ public interface IActivityManager extends IInterface {
                     reply.writeString(_result126);
                     return true;
                 case 303:
-                    Configuration _arg0221 = (Configuration) data.readTypedObject(Configuration.CREATOR);
+                    Configuration _arg0221 =
+                            (Configuration) data.readTypedObject(Configuration.CREATOR);
                     String _arg1129 = data.readString();
                     String _arg256 = data.readString();
                     LocaleList _arg317 = (LocaleList) data.readTypedObject(LocaleList.CREATOR);
                     data.enforceNoDataAvail();
-                    updatePersistentConfigurationAndLocaleOverlays(_arg0221, _arg1129, _arg256, _arg317);
+                    updatePersistentConfigurationAndLocaleOverlays(
+                            _arg0221, _arg1129, _arg256, _arg317);
                     reply.writeNoException();
                     return true;
                 case 304:
@@ -5012,7 +5618,8 @@ public interface IActivityManager extends IInterface {
                     reply.writeIntArray(_result131);
                     return true;
                 case 311:
-                    IIntentSender _arg0226 = IIntentSender.Stub.asInterface(data.readStrongBinder());
+                    IIntentSender _arg0226 =
+                            IIntentSender.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     Bundle _result132 = getOptionsForIntentSender(_arg0226);
                     reply.writeNoException();
@@ -5048,7 +5655,9 @@ public interface IActivityManager extends IInterface {
                     _data.writeString(uriString);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5057,7 +5666,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void registerUidObserver(IUidObserver observer, int which, int cutpoint, String callingPackage) throws RemoteException {
+            public void registerUidObserver(
+                    IUidObserver observer, int which, int cutpoint, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5090,7 +5701,13 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public IBinder registerUidObserverForUids(IUidObserver observer, int which, int cutpoint, String callingPackage, int[] uids) throws RemoteException {
+            public IBinder registerUidObserverForUids(
+                    IUidObserver observer,
+                    int which,
+                    int cutpoint,
+                    String callingPackage,
+                    int[] uids)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5111,7 +5728,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void addUidToObserver(IBinder observerToken, String callingPackage, int uid) throws RemoteException {
+            public void addUidToObserver(IBinder observerToken, String callingPackage, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5128,7 +5746,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void removeUidFromObserver(IBinder observerToken, String callingPackage, int uid) throws RemoteException {
+            public void removeUidFromObserver(IBinder observerToken, String callingPackage, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5228,7 +5847,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void logFgsApiStateChanged(int apiType, int state, int appUid, int appPid) throws RemoteException {
+            public void logFgsApiStateChanged(int apiType, int state, int appUid, int appPid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -5243,7 +5863,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void handleApplicationCrash(IBinder app, ApplicationErrorReport.ParcelableCrashInfo crashInfo) throws RemoteException {
+            public void handleApplicationCrash(
+                    IBinder app, ApplicationErrorReport.ParcelableCrashInfo crashInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5259,7 +5881,18 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public int startActivity(IApplicationThread caller, String callingPackage, Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode, int flags, ProfilerInfo profilerInfo, Bundle options) throws RemoteException {
+            public int startActivity(
+                    IApplicationThread caller,
+                    String callingPackage,
+                    Intent intent,
+                    String resolvedType,
+                    IBinder resultTo,
+                    String resultWho,
+                    int requestCode,
+                    int flags,
+                    ProfilerInfo profilerInfo,
+                    Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5285,7 +5918,19 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public int startActivityWithFeature(IApplicationThread caller, String callingPackage, String callingFeatureId, Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode, int flags, ProfilerInfo profilerInfo, Bundle options) throws RemoteException {
+            public int startActivityWithFeature(
+                    IApplicationThread caller,
+                    String callingPackage,
+                    String callingFeatureId,
+                    Intent intent,
+                    String resolvedType,
+                    IBinder resultTo,
+                    String resultWho,
+                    int requestCode,
+                    int flags,
+                    ProfilerInfo profilerInfo,
+                    Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5401,7 +6046,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean finishActivity(IBinder token, int code, Intent data, int finishTask) throws RemoteException {
+            public boolean finishActivity(IBinder token, int code, Intent data, int finishTask)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5421,7 +6067,15 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public Intent registerReceiver(IApplicationThread caller, String callerPackage, IIntentReceiver receiver, IntentFilter filter, String requiredPermission, int userId, int flags) throws RemoteException {
+            public Intent registerReceiver(
+                    IApplicationThread caller,
+                    String callerPackage,
+                    IIntentReceiver receiver,
+                    IntentFilter filter,
+                    String requiredPermission,
+                    int userId,
+                    int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5444,7 +6098,17 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public Intent registerReceiverWithFeature(IApplicationThread caller, String callerPackage, String callingFeatureId, String receiverId, IIntentReceiver receiver, IntentFilter filter, String requiredPermission, int userId, int flags) throws RemoteException {
+            public Intent registerReceiverWithFeature(
+                    IApplicationThread caller,
+                    String callerPackage,
+                    String callingFeatureId,
+                    String receiverId,
+                    IIntentReceiver receiver,
+                    IntentFilter filter,
+                    String requiredPermission,
+                    int userId,
+                    int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5484,7 +6148,21 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public int broadcastIntent(IApplicationThread caller, Intent intent, String resolvedType, IIntentReceiver resultTo, int resultCode, String resultData, Bundle map, String[] requiredPermissions, int appOp, Bundle options, boolean serialized, boolean sticky, int userId) throws RemoteException {
+            public int broadcastIntent(
+                    IApplicationThread caller,
+                    Intent intent,
+                    String resolvedType,
+                    IIntentReceiver resultTo,
+                    int resultCode,
+                    String resultData,
+                    Bundle map,
+                    String[] requiredPermissions,
+                    int appOp,
+                    Bundle options,
+                    boolean serialized,
+                    boolean sticky,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5591,7 +6269,24 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public int broadcastIntentWithFeature(IApplicationThread caller, String callingFeatureId, Intent intent, String resolvedType, IIntentReceiver resultTo, int resultCode, String resultData, Bundle map, String[] requiredPermissions, String[] excludePermissions, String[] excludePackages, int appOp, Bundle options, boolean serialized, boolean sticky, int userId) throws RemoteException {
+            public int broadcastIntentWithFeature(
+                    IApplicationThread caller,
+                    String callingFeatureId,
+                    Intent intent,
+                    String resolvedType,
+                    IIntentReceiver resultTo,
+                    int resultCode,
+                    String resultData,
+                    Bundle map,
+                    String[] requiredPermissions,
+                    String[] excludePermissions,
+                    String[] excludePackages,
+                    int appOp,
+                    Bundle options,
+                    boolean serialized,
+                    boolean sticky,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5701,7 +6396,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void unbroadcastIntent(IApplicationThread caller, Intent intent, int userId) throws RemoteException {
+            public void unbroadcastIntent(IApplicationThread caller, Intent intent, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5718,7 +6414,14 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void finishReceiver(IBinder who, int resultCode, String resultData, Bundle map, boolean abortBroadcast, int flags) throws RemoteException {
+            public void finishReceiver(
+                    IBinder who,
+                    int resultCode,
+                    String resultData,
+                    Bundle map,
+                    boolean abortBroadcast,
+                    int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -5735,7 +6438,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void attachApplication(IApplicationThread app, long startSeq) throws RemoteException {
+            public void attachApplication(IApplicationThread app, long startSeq)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5751,7 +6455,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void finishAttachApplication(long startSeq, long timestampApplicationOnCreateNs) throws RemoteException {
+            public void finishAttachApplication(long startSeq, long timestampApplicationOnCreateNs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5767,7 +6472,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public List<ActivityManager.RunningTaskInfo> getTasks(int maxNum) throws RemoteException {
+            public List<ActivityManager.RunningTaskInfo> getTasks(int maxNum)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5775,7 +6481,8 @@ public interface IActivityManager extends IInterface {
                     _data.writeInt(maxNum);
                     this.mRemote.transact(27, _data, _reply, 0);
                     _reply.readException();
-                    List<ActivityManager.RunningTaskInfo> _result = _reply.createTypedArrayList(ActivityManager.RunningTaskInfo.CREATOR);
+                    List<ActivityManager.RunningTaskInfo> _result =
+                            _reply.createTypedArrayList(ActivityManager.RunningTaskInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5784,7 +6491,13 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void moveTaskToFront(IApplicationThread caller, String callingPackage, int task, int flags, Bundle options) throws RemoteException {
+            public void moveTaskToFront(
+                    IApplicationThread caller,
+                    String callingPackage,
+                    int task,
+                    int flags,
+                    Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5821,7 +6534,13 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public ContentProviderHolder getContentProvider(IApplicationThread caller, String callingPackage, String name, int userId, boolean stable) throws RemoteException {
+            public ContentProviderHolder getContentProvider(
+                    IApplicationThread caller,
+                    String callingPackage,
+                    String name,
+                    int userId,
+                    boolean stable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5833,7 +6552,9 @@ public interface IActivityManager extends IInterface {
                     _data.writeBoolean(stable);
                     this.mRemote.transact(30, _data, _reply, 0);
                     _reply.readException();
-                    ContentProviderHolder _result = (ContentProviderHolder) _reply.readTypedObject(ContentProviderHolder.CREATOR);
+                    ContentProviderHolder _result =
+                            (ContentProviderHolder)
+                                    _reply.readTypedObject(ContentProviderHolder.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5842,7 +6563,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void publishContentProviders(IApplicationThread caller, List<ContentProviderHolder> providers) throws RemoteException {
+            public void publishContentProviders(
+                    IApplicationThread caller, List<ContentProviderHolder> providers)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5858,7 +6581,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean refContentProvider(IBinder connection, int stableDelta, int unstableDelta) throws RemoteException {
+            public boolean refContentProvider(
+                    IBinder connection, int stableDelta, int unstableDelta) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5877,7 +6601,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public PendingIntent getRunningServiceControlPanel(ComponentName service) throws RemoteException {
+            public PendingIntent getRunningServiceControlPanel(ComponentName service)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5885,7 +6610,8 @@ public interface IActivityManager extends IInterface {
                     _data.writeTypedObject(service, 0);
                     this.mRemote.transact(33, _data, _reply, 0);
                     _reply.readException();
-                    PendingIntent _result = (PendingIntent) _reply.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _result =
+                            (PendingIntent) _reply.readTypedObject(PendingIntent.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5894,7 +6620,15 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public ComponentName startService(IApplicationThread caller, Intent service, String resolvedType, boolean requireForeground, String callingPackage, String callingFeatureId, int userId) throws RemoteException {
+            public ComponentName startService(
+                    IApplicationThread caller,
+                    Intent service,
+                    String resolvedType,
+                    boolean requireForeground,
+                    String callingPackage,
+                    String callingFeatureId,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5908,7 +6642,8 @@ public interface IActivityManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(34, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName _result = (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _result =
+                            (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5917,7 +6652,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public int stopService(IApplicationThread caller, Intent service, String resolvedType, int userId) throws RemoteException {
+            public int stopService(
+                    IApplicationThread caller, Intent service, String resolvedType, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5937,7 +6674,16 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public int bindService(IApplicationThread caller, IBinder token, Intent service, String resolvedType, IServiceConnection connection, long flags, String callingPackage, int userId) throws RemoteException {
+            public int bindService(
+                    IApplicationThread caller,
+                    IBinder token,
+                    Intent service,
+                    String resolvedType,
+                    IServiceConnection connection,
+                    long flags,
+                    String callingPackage,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5961,7 +6707,17 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public int bindServiceInstance(IApplicationThread caller, IBinder token, Intent service, String resolvedType, IServiceConnection connection, long flags, String instanceName, String callingPackage, int userId) throws RemoteException {
+            public int bindServiceInstance(
+                    IApplicationThread caller,
+                    IBinder token,
+                    Intent service,
+                    String resolvedType,
+                    IServiceConnection connection,
+                    long flags,
+                    String instanceName,
+                    String callingPackage,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5986,7 +6742,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void updateServiceGroup(IServiceConnection connection, int group, int importance) throws RemoteException {
+            public void updateServiceGroup(IServiceConnection connection, int group, int importance)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6020,7 +6777,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void publishService(IBinder token, Intent intent, IBinder service) throws RemoteException {
+            public void publishService(IBinder token, Intent intent, IBinder service)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6037,7 +6795,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void setDebugApp(String packageName, boolean waitForDebugger, boolean persistent) throws RemoteException {
+            public void setDebugApp(String packageName, boolean waitForDebugger, boolean persistent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6085,7 +6844,16 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean startInstrumentation(ComponentName className, String profileFile, int flags, Bundle arguments, IInstrumentationWatcher watcher, IUiAutomationConnection connection, int userId, String abiOverride) throws RemoteException {
+            public boolean startInstrumentation(
+                    ComponentName className,
+                    String profileFile,
+                    int flags,
+                    Bundle arguments,
+                    IInstrumentationWatcher watcher,
+                    IUiAutomationConnection connection,
+                    int userId,
+                    String abiOverride)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6109,7 +6877,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void addInstrumentationResults(IApplicationThread target, Bundle results) throws RemoteException {
+            public void addInstrumentationResults(IApplicationThread target, Bundle results)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6125,7 +6894,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void finishInstrumentation(IApplicationThread target, int resultCode, Bundle results) throws RemoteException {
+            public void finishInstrumentation(
+                    IApplicationThread target, int resultCode, Bundle results)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6149,7 +6920,8 @@ public interface IActivityManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(47, _data, _reply, 0);
                     _reply.readException();
-                    Configuration _result = (Configuration) _reply.readTypedObject(Configuration.CREATOR);
+                    Configuration _result =
+                            (Configuration) _reply.readTypedObject(Configuration.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6175,7 +6947,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean updateMccMncConfiguration(String mcc, String mnc) throws RemoteException {
+            public boolean updateMccMncConfiguration(String mcc, String mnc)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6193,7 +6966,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean stopServiceToken(ComponentName className, IBinder token, int startId) throws RemoteException {
+            public boolean stopServiceToken(ComponentName className, IBinder token, int startId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6243,7 +7017,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public int checkUriPermission(Uri uri, int pid, int uid, int mode, int userId, IBinder callerToken) throws RemoteException {
+            public int checkUriPermission(
+                    Uri uri, int pid, int uid, int mode, int userId, IBinder callerToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6265,7 +7041,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public int checkContentUriPermissionFull(Uri uri, int pid, int uid, int mode, int userId) throws RemoteException {
+            public int checkContentUriPermissionFull(
+                    Uri uri, int pid, int uid, int mode, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6286,7 +7063,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public int[] checkUriPermissions(List<Uri> uris, int pid, int uid, int mode, int userId, IBinder callerToken) throws RemoteException {
+            public int[] checkUriPermissions(
+                    List<Uri> uris, int pid, int uid, int mode, int userId, IBinder callerToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6308,7 +7087,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void grantUriPermission(IApplicationThread caller, String targetPkg, Uri uri, int mode, int userId) throws RemoteException {
+            public void grantUriPermission(
+                    IApplicationThread caller, String targetPkg, Uri uri, int mode, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6327,7 +7108,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void revokeUriPermission(IApplicationThread caller, String targetPkg, Uri uri, int mode, int userId) throws RemoteException {
+            public void revokeUriPermission(
+                    IApplicationThread caller, String targetPkg, Uri uri, int mode, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6346,7 +7129,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void setActivityController(IActivityController watcher, boolean imAMonkey) throws RemoteException {
+            public void setActivityController(IActivityController watcher, boolean imAMonkey)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6362,7 +7146,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void showWaitingForDebugger(IApplicationThread who, boolean waiting) throws RemoteException {
+            public void showWaitingForDebugger(IApplicationThread who, boolean waiting)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6393,7 +7178,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public ParceledListSlice getRecentTasks(int maxNum, int flags, int userId) throws RemoteException {
+            public ParceledListSlice getRecentTasks(int maxNum, int flags, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6403,7 +7189,8 @@ public interface IActivityManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(61, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6412,7 +7199,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void serviceDoneExecuting(IBinder token, int type, int startId, int res, Intent intent) throws RemoteException {
+            public void serviceDoneExecuting(
+                    IBinder token, int type, int startId, int res, Intent intent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -6428,7 +7217,18 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public IIntentSender getIntentSender(int type, String packageName, IBinder token, String resultWho, int requestCode, Intent[] intents, String[] resolvedTypes, int flags, Bundle options, int userId) throws RemoteException {
+            public IIntentSender getIntentSender(
+                    int type,
+                    String packageName,
+                    IBinder token,
+                    String resultWho,
+                    int requestCode,
+                    Intent[] intents,
+                    String[] resolvedTypes,
+                    int flags,
+                    Bundle options,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6445,7 +7245,8 @@ public interface IActivityManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(63, _data, _reply, 0);
                     _reply.readException();
-                    IIntentSender _result = IIntentSender.Stub.asInterface(_reply.readStrongBinder());
+                    IIntentSender _result =
+                            IIntentSender.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6454,7 +7255,19 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public IIntentSender getIntentSenderWithFeature(int type, String packageName, String featureId, IBinder token, String resultWho, int requestCode, Intent[] intents, String[] resolvedTypes, int flags, Bundle options, int userId) throws RemoteException {
+            public IIntentSender getIntentSenderWithFeature(
+                    int type,
+                    String packageName,
+                    String featureId,
+                    IBinder token,
+                    String resultWho,
+                    int requestCode,
+                    Intent[] intents,
+                    String[] resolvedTypes,
+                    int flags,
+                    Bundle options,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6537,7 +7350,8 @@ public interface IActivityManager extends IInterface {
                     try {
                         this.mRemote.transact(64, _data, _reply, 0);
                         _reply.readException();
-                        IIntentSender _result = IIntentSender.Stub.asInterface(_reply.readStrongBinder());
+                        IIntentSender _result =
+                                IIntentSender.Stub.asInterface(_reply.readStrongBinder());
                         _reply.recycle();
                         _data.recycle();
                         return _result;
@@ -6571,7 +7385,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public ActivityManager.PendingIntentInfo getInfoForIntentSender(IIntentSender sender) throws RemoteException {
+            public ActivityManager.PendingIntentInfo getInfoForIntentSender(IIntentSender sender)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6579,7 +7394,10 @@ public interface IActivityManager extends IInterface {
                     _data.writeStrongInterface(sender);
                     this.mRemote.transact(66, _data, _reply, 0);
                     _reply.readException();
-                    ActivityManager.PendingIntentInfo _result = (ActivityManager.PendingIntentInfo) _reply.readTypedObject(ActivityManager.PendingIntentInfo.CREATOR);
+                    ActivityManager.PendingIntentInfo _result =
+                            (ActivityManager.PendingIntentInfo)
+                                    _reply.readTypedObject(
+                                            ActivityManager.PendingIntentInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6588,7 +7406,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean registerIntentSenderCancelListenerEx(IIntentSender sender, IResultReceiver receiver) throws RemoteException {
+            public boolean registerIntentSenderCancelListenerEx(
+                    IIntentSender sender, IResultReceiver receiver) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6606,7 +7425,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void unregisterIntentSenderCancelListener(IIntentSender sender, IResultReceiver receiver) throws RemoteException {
+            public void unregisterIntentSenderCancelListener(
+                    IIntentSender sender, IResultReceiver receiver) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6636,7 +7456,13 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void noteWakeupAlarm(IIntentSender sender, WorkSource workSource, int sourceUid, String sourcePkg, String tag) throws RemoteException {
+            public void noteWakeupAlarm(
+                    IIntentSender sender,
+                    WorkSource workSource,
+                    int sourceUid,
+                    String sourcePkg,
+                    String tag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6655,7 +7481,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void removeContentProvider(IBinder connection, boolean stable) throws RemoteException {
+            public void removeContentProvider(IBinder connection, boolean stable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -6668,7 +7495,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void setRequestedOrientation(IBinder token, int requestedOrientation) throws RemoteException {
+            public void setRequestedOrientation(IBinder token, int requestedOrientation)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6684,7 +7512,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void unbindFinished(IBinder token, Intent service, boolean doRebind) throws RemoteException {
+            public void unbindFinished(IBinder token, Intent service, boolean doRebind)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6701,7 +7530,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void setProcessImportant(IBinder token, int pid, boolean isForeground, String reason) throws RemoteException {
+            public void setProcessImportant(
+                    IBinder token, int pid, boolean isForeground, String reason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6719,7 +7550,14 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void setServiceForeground(ComponentName className, IBinder token, int id, Notification notification, int flags, int foregroundServiceType) throws RemoteException {
+            public void setServiceForeground(
+                    ComponentName className,
+                    IBinder token,
+                    int id,
+                    Notification notification,
+                    int flags,
+                    int foregroundServiceType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6739,7 +7577,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public int getForegroundServiceType(ComponentName className, IBinder token) throws RemoteException {
+            public int getForegroundServiceType(ComponentName className, IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6757,7 +7596,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean moveActivityTaskToBack(IBinder token, boolean nonRoot) throws RemoteException {
+            public boolean moveActivityTaskToBack(IBinder token, boolean nonRoot)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6792,14 +7632,17 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public List<ActivityManager.ProcessErrorStateInfo> getProcessesInErrorState() throws RemoteException {
+            public List<ActivityManager.ProcessErrorStateInfo> getProcessesInErrorState()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(79, _data, _reply, 0);
                     _reply.readException();
-                    List<ActivityManager.ProcessErrorStateInfo> _result = _reply.createTypedArrayList(ActivityManager.ProcessErrorStateInfo.CREATOR);
+                    List<ActivityManager.ProcessErrorStateInfo> _result =
+                            _reply.createTypedArrayList(
+                                    ActivityManager.ProcessErrorStateInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6808,7 +7651,12 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean clearApplicationUserData(String packageName, boolean keepState, IPackageDataObserver observer, int userId) throws RemoteException {
+            public boolean clearApplicationUserData(
+                    String packageName,
+                    boolean keepState,
+                    IPackageDataObserver observer,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6844,7 +7692,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean registerForegroundServiceObserver(IForegroundServiceObserver callback) throws RemoteException {
+            public boolean registerForegroundServiceObserver(IForegroundServiceObserver callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6877,7 +7726,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void forceStopPackageEvenWhenStopping(String packageName, int userId) throws RemoteException {
+            public void forceStopPackageEvenWhenStopping(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6893,7 +7743,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void forceStopPackageByAdmin(String packageName, int userId) throws RemoteException {
+            public void forceStopPackageByAdmin(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6909,7 +7760,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean killPids(int[] pids, String reason, boolean secure) throws RemoteException {
+            public boolean killPids(int[] pids, String reason, boolean secure)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6928,7 +7780,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public List<ActivityManager.RunningServiceInfo> getServices(int maxNum, int flags) throws RemoteException {
+            public List<ActivityManager.RunningServiceInfo> getServices(int maxNum, int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6937,7 +7790,8 @@ public interface IActivityManager extends IInterface {
                     _data.writeInt(flags);
                     this.mRemote.transact(87, _data, _reply, 0);
                     _reply.readException();
-                    List<ActivityManager.RunningServiceInfo> _result = _reply.createTypedArrayList(ActivityManager.RunningServiceInfo.CREATOR);
+                    List<ActivityManager.RunningServiceInfo> _result =
+                            _reply.createTypedArrayList(ActivityManager.RunningServiceInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6946,14 +7800,17 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public List<ActivityManager.RunningAppProcessInfo> getRunningAppProcesses() throws RemoteException {
+            public List<ActivityManager.RunningAppProcessInfo> getRunningAppProcesses()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(88, _data, _reply, 0);
                     _reply.readException();
-                    List<ActivityManager.RunningAppProcessInfo> _result = _reply.createTypedArrayList(ActivityManager.RunningAppProcessInfo.CREATOR);
+                    List<ActivityManager.RunningAppProcessInfo> _result =
+                            _reply.createTypedArrayList(
+                                    ActivityManager.RunningAppProcessInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6962,7 +7819,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public IBinder peekService(Intent service, String resolvedType, String callingPackage) throws RemoteException {
+            public IBinder peekService(Intent service, String resolvedType, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6981,7 +7839,13 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean profileControl(String process, int userId, boolean start, ProfilerInfo profilerInfo, int profileType) throws RemoteException {
+            public boolean profileControl(
+                    String process,
+                    int userId,
+                    boolean start,
+                    ProfilerInfo profilerInfo,
+                    int profileType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7047,7 +7911,12 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean bindBackupAgent(String packageName, int backupRestoreMode, int targetUserId, int backupDestination) throws RemoteException {
+            public boolean bindBackupAgent(
+                    String packageName,
+                    int backupRestoreMode,
+                    int targetUserId,
+                    int backupDestination)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7067,7 +7936,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void backupAgentCreated(String packageName, IBinder agent, int userId) throws RemoteException {
+            public void backupAgentCreated(String packageName, IBinder agent, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7099,7 +7969,15 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public int handleIncomingUser(int callingPid, int callingUid, int userId, boolean allowAll, boolean requireFull, String name, String callerPackage) throws RemoteException {
+            public int handleIncomingUser(
+                    int callingPid,
+                    int callingUid,
+                    int userId,
+                    boolean allowAll,
+                    boolean requireFull,
+                    String name,
+                    String callerPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7137,7 +8015,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void killApplication(String pkg, int appId, int userId, String reason, int exitInfoReason) throws RemoteException {
+            public void killApplication(
+                    String pkg, int appId, int userId, String reason, int exitInfoReason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7171,7 +8051,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void closeSystemDialogsInDisplay(String reason, int displayId) throws RemoteException {
+            public void closeSystemDialogsInDisplay(String reason, int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7195,7 +8076,8 @@ public interface IActivityManager extends IInterface {
                     _data.writeIntArray(pids);
                     this.mRemote.transact(102, _data, _reply, 0);
                     _reply.readException();
-                    Debug.MemoryInfo[] _result = (Debug.MemoryInfo[]) _reply.createTypedArray(Debug.MemoryInfo.CREATOR);
+                    Debug.MemoryInfo[] _result =
+                            (Debug.MemoryInfo[]) _reply.createTypedArray(Debug.MemoryInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7220,7 +8102,13 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean handleApplicationWtf(IBinder app, String tag, boolean system, ApplicationErrorReport.ParcelableCrashInfo crashInfo, int immediateCallerPid) throws RemoteException {
+            public boolean handleApplicationWtf(
+                    IBinder app,
+                    String tag,
+                    boolean system,
+                    ApplicationErrorReport.ParcelableCrashInfo crashInfo,
+                    int immediateCallerPid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7241,7 +8129,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void killBackgroundProcesses(String packageName, int userId) throws RemoteException {
+            public void killBackgroundProcesses(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7280,7 +8169,8 @@ public interface IActivityManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(107, _data, _reply, 0);
                     _reply.readException();
-                    List<ApplicationInfo> _result = _reply.createTypedArrayList(ApplicationInfo.CREATOR);
+                    List<ApplicationInfo> _result =
+                            _reply.createTypedArrayList(ApplicationInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7303,7 +8193,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void handleApplicationStrictModeViolation(IBinder app, int penaltyMask, StrictMode.ViolationInfo crashInfo) throws RemoteException {
+            public void handleApplicationStrictModeViolation(
+                    IBinder app, int penaltyMask, StrictMode.ViolationInfo crashInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7351,7 +8243,15 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void crashApplicationWithType(int uid, int initialPid, String packageName, int userId, String message, boolean force, int exceptionTypeId) throws RemoteException {
+            public void crashApplicationWithType(
+                    int uid,
+                    int initialPid,
+                    String packageName,
+                    int userId,
+                    String message,
+                    boolean force,
+                    int exceptionTypeId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7372,7 +8272,16 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void crashApplicationWithTypeWithExtras(int uid, int initialPid, String packageName, int userId, String message, boolean force, int exceptionTypeId, Bundle extras) throws RemoteException {
+            public void crashApplicationWithTypeWithExtras(
+                    int uid,
+                    int initialPid,
+                    String packageName,
+                    int userId,
+                    String message,
+                    boolean force,
+                    int exceptionTypeId,
+                    Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7394,7 +8303,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void getMimeTypeFilterAsync(Uri uri, int userId, RemoteCallback resultCallback) throws RemoteException {
+            public void getMimeTypeFilterAsync(Uri uri, int userId, RemoteCallback resultCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -7408,7 +8318,17 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean dumpHeap(String process, int userId, boolean managed, boolean mallocInfo, boolean runGc, String dumpBitmaps, String path, ParcelFileDescriptor fd, RemoteCallback finishCallback) throws RemoteException {
+            public boolean dumpHeap(
+                    String process,
+                    int userId,
+                    boolean managed,
+                    boolean mallocInfo,
+                    boolean runGc,
+                    String dumpBitmaps,
+                    String path,
+                    ParcelFileDescriptor fd,
+                    RemoteCallback finishCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7451,7 +8371,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void setPackageScreenCompatMode(String packageName, int mode) throws RemoteException {
+            public void setPackageScreenCompatMode(String packageName, int mode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7563,7 +8484,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void unregisterProcessObserver(IProcessObserver observer) throws RemoteException {
+            public void unregisterProcessObserver(IProcessObserver observer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7578,7 +8500,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean isIntentSenderTargetedToPackage(IIntentSender sender) throws RemoteException {
+            public boolean isIntentSenderTargetedToPackage(IIntentSender sender)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7610,7 +8533,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void updatePersistentConfigurationWithAttribution(Configuration values, String callingPackageName, String callingAttributionTag) throws RemoteException {
+            public void updatePersistentConfigurationWithAttribution(
+                    Configuration values, String callingPackageName, String callingAttributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7679,7 +8604,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public ContentProviderHolder getContentProviderExternal(String name, int userId, IBinder token, String tag) throws RemoteException {
+            public ContentProviderHolder getContentProviderExternal(
+                    String name, int userId, IBinder token, String tag) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7690,7 +8616,9 @@ public interface IActivityManager extends IInterface {
                     _data.writeString(tag);
                     this.mRemote.transact(131, _data, _reply, 0);
                     _reply.readException();
-                    ContentProviderHolder _result = (ContentProviderHolder) _reply.readTypedObject(ContentProviderHolder.CREATOR);
+                    ContentProviderHolder _result =
+                            (ContentProviderHolder)
+                                    _reply.readTypedObject(ContentProviderHolder.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7699,7 +8627,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void removeContentProviderExternal(String name, IBinder token) throws RemoteException {
+            public void removeContentProviderExternal(String name, IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7715,7 +8644,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void removeContentProviderExternalAsUser(String name, IBinder token, int userId) throws RemoteException {
+            public void removeContentProviderExternalAsUser(String name, IBinder token, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7732,7 +8662,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void getMyMemoryState(ActivityManager.RunningAppProcessInfo outInfo) throws RemoteException {
+            public void getMyMemoryState(ActivityManager.RunningAppProcessInfo outInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7847,7 +8778,19 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public int startActivityAsUser(IApplicationThread caller, String callingPackage, Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode, int flags, ProfilerInfo profilerInfo, Bundle options, int userId) throws RemoteException {
+            public int startActivityAsUser(
+                    IApplicationThread caller,
+                    String callingPackage,
+                    Intent intent,
+                    String resolvedType,
+                    IBinder resultTo,
+                    String resultWho,
+                    int requestCode,
+                    int flags,
+                    ProfilerInfo profilerInfo,
+                    Bundle options,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7949,7 +8892,20 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public int startActivityAsUserWithFeature(IApplicationThread caller, String callingPackage, String callingFeatureId, Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode, int flags, ProfilerInfo profilerInfo, Bundle options, int userId) throws RemoteException {
+            public int startActivityAsUserWithFeature(
+                    IApplicationThread caller,
+                    String callingPackage,
+                    String callingFeatureId,
+                    Intent intent,
+                    String resolvedType,
+                    IBinder resultTo,
+                    String resultWho,
+                    int requestCode,
+                    int flags,
+                    ProfilerInfo profilerInfo,
+                    Bundle options,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8052,7 +9008,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public int stopUser(int userid, boolean stopProfileRegardlessOfParent, IStopUserCallback callback) throws RemoteException {
+            public int stopUser(
+                    int userid, boolean stopProfileRegardlessOfParent, IStopUserCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8071,7 +9029,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public int stopUserWithCallback(int userid, IStopUserCallback callback) throws RemoteException {
+            public int stopUserWithCallback(int userid, IStopUserCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8089,7 +9048,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public int stopUserExceptCertainProfiles(int userid, boolean stopProfileRegardlessOfParent, IStopUserCallback callback) throws RemoteException {
+            public int stopUserExceptCertainProfiles(
+                    int userid, boolean stopProfileRegardlessOfParent, IStopUserCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8108,7 +9069,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public int stopUserWithDelayedLocking(int userid, IStopUserCallback callback) throws RemoteException {
+            public int stopUserWithDelayedLocking(int userid, IStopUserCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8126,7 +9088,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void registerUserSwitchObserver(IUserSwitchObserver observer, String name) throws RemoteException {
+            public void registerUserSwitchObserver(IUserSwitchObserver observer, String name)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8142,7 +9105,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void unregisterUserSwitchObserver(IUserSwitchObserver observer) throws RemoteException {
+            public void unregisterUserSwitchObserver(IUserSwitchObserver observer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8202,7 +9166,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void requestBugReportWithDescription(String shareTitle, String shareDescription, int bugreportType) throws RemoteException {
+            public void requestBugReportWithDescription(
+                    String shareTitle, String shareDescription, int bugreportType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8219,7 +9185,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void requestTelephonyBugReport(String shareTitle, String shareDescription) throws RemoteException {
+            public void requestTelephonyBugReport(String shareTitle, String shareDescription)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8235,7 +9202,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void requestWifiBugReport(String shareTitle, String shareDescription) throws RemoteException {
+            public void requestWifiBugReport(String shareTitle, String shareDescription)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8251,7 +9219,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void requestInteractiveBugReportWithDescription(String shareTitle, String shareDescription) throws RemoteException {
+            public void requestInteractiveBugReportWithDescription(
+                    String shareTitle, String shareDescription) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8281,7 +9250,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void requestBugReportWithExtraAttachment(Uri extraAttachment) throws RemoteException {
+            public void requestBugReportWithExtraAttachment(Uri extraAttachment)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8439,14 +9409,16 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public List<ActivityTaskManager.RootTaskInfo> getAllRootTaskInfos() throws RemoteException {
+            public List<ActivityTaskManager.RootTaskInfo> getAllRootTaskInfos()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(167, _data, _reply, 0);
                     _reply.readException();
-                    List<ActivityTaskManager.RootTaskInfo> _result = _reply.createTypedArrayList(ActivityTaskManager.RootTaskInfo.CREATOR);
+                    List<ActivityTaskManager.RootTaskInfo> _result =
+                            _reply.createTypedArrayList(ActivityTaskManager.RootTaskInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -8455,7 +9427,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void moveTaskToRootTask(int taskId, int rootTaskId, boolean toTop) throws RemoteException {
+            public void moveTaskToRootTask(int taskId, int rootTaskId, boolean toTop)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8487,14 +9460,18 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public ActivityTaskManager.RootTaskInfo getFocusedRootTaskInfo() throws RemoteException {
+            public ActivityTaskManager.RootTaskInfo getFocusedRootTaskInfo()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(170, _data, _reply, 0);
                     _reply.readException();
-                    ActivityTaskManager.RootTaskInfo _result = (ActivityTaskManager.RootTaskInfo) _reply.readTypedObject(ActivityTaskManager.RootTaskInfo.CREATOR);
+                    ActivityTaskManager.RootTaskInfo _result =
+                            (ActivityTaskManager.RootTaskInfo)
+                                    _reply.readTypedObject(
+                                            ActivityTaskManager.RootTaskInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -8563,7 +9540,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean setProcessMemoryTrimLevel(String process, int userId, int level) throws RemoteException {
+            public boolean setProcessMemoryTrimLevel(String process, int userId, int level)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8582,7 +9560,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public String getTagForIntentSender(IIntentSender sender, String prefix) throws RemoteException {
+            public String getTagForIntentSender(IIntentSender sender, String prefix)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8712,7 +9691,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void registerTaskStackListener(ITaskStackListener listener) throws RemoteException {
+            public void registerTaskStackListener(ITaskStackListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8727,7 +9707,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void unregisterTaskStackListener(ITaskStackListener listener) throws RemoteException {
+            public void unregisterTaskStackListener(ITaskStackListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8807,7 +9788,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void setDumpHeapDebugLimit(String processName, int uid, long maxMemSize, String reportPackage) throws RemoteException {
+            public void setDumpHeapDebugLimit(
+                    String processName, int uid, long maxMemSize, String reportPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8840,7 +9823,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void updateLockTaskPackages(int userId, String[] packages) throws RemoteException {
+            public void updateLockTaskPackages(int userId, String[] packages)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8856,7 +9840,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void noteAlarmStart(IIntentSender sender, WorkSource workSource, int sourceUid, String tag) throws RemoteException {
+            public void noteAlarmStart(
+                    IIntentSender sender, WorkSource workSource, int sourceUid, String tag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8874,7 +9860,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void noteAlarmFinish(IIntentSender sender, WorkSource workSource, int sourceUid, String tag) throws RemoteException {
+            public void noteAlarmFinish(
+                    IIntentSender sender, WorkSource workSource, int sourceUid, String tag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8892,7 +9880,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public int getPackageProcessState(String packageName, String callingPackage) throws RemoteException {
+            public int getPackageProcessState(String packageName, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8926,7 +9915,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean stopBinderTrackingAndDump(ParcelFileDescriptor fd) throws RemoteException {
+            public boolean stopBinderTrackingAndDump(ParcelFileDescriptor fd)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8958,7 +9948,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean unlockUser(int userid, byte[] token, byte[] secret, IProgressListener listener) throws RemoteException {
+            public boolean unlockUser(
+                    int userid, byte[] token, byte[] secret, IProgressListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8978,7 +9970,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean unlockUser2(int userId, IProgressListener listener) throws RemoteException {
+            public boolean unlockUser2(int userId, IProgressListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8996,7 +9989,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void killPackageDependents(String packageName, int userId) throws RemoteException {
+            public void killPackageDependents(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9059,7 +10053,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean isVrModePackageEnabled(ComponentName packageName) throws RemoteException {
+            public boolean isVrModePackageEnabled(ComponentName packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9091,7 +10086,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void startConfirmDeviceCredentialIntent(Intent intent, Bundle options) throws RemoteException {
+            public void startConfirmDeviceCredentialIntent(Intent intent, Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9121,7 +10117,17 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public int sendIntentSender(IApplicationThread caller, IIntentSender target, IBinder whitelistToken, int code, Intent intent, String resolvedType, IIntentReceiver finishedReceiver, String requiredPermission, Bundle options) throws RemoteException {
+            public int sendIntentSender(
+                    IApplicationThread caller,
+                    IIntentSender target,
+                    IBinder whitelistToken,
+                    int code,
+                    Intent intent,
+                    String resolvedType,
+                    IIntentReceiver finishedReceiver,
+                    String requiredPermission,
+                    Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9208,7 +10214,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void scheduleApplicationInfoChanged(List<String> packageNames, int userId) throws RemoteException {
+            public void scheduleApplicationInfoChanged(List<String> packageNames, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9269,7 +10276,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean startUserInBackgroundWithListener(int userid, IProgressListener unlockProgressListener) throws RemoteException {
+            public boolean startUserInBackgroundWithListener(
+                    int userid, IProgressListener unlockProgressListener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9287,7 +10295,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void startDelegateShellPermissionIdentity(int uid, String[] permissions) throws RemoteException {
+            public void startDelegateShellPermissionIdentity(int uid, String[] permissions)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9340,7 +10349,9 @@ public interface IActivityManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(222, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -9349,7 +10360,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean startUserInForegroundWithListener(int userid, IProgressListener unlockProgressListener) throws RemoteException {
+            public boolean startUserInForegroundWithListener(
+                    int userid, IProgressListener unlockProgressListener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9382,7 +10394,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void doActiveLaunch(String packageName, boolean isLauncher, int userId) throws RemoteException {
+            public void doActiveLaunch(String packageName, boolean isLauncher, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -9396,7 +10409,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public ParceledListSlice<ApplicationStartInfo> getHistoricalProcessStartReasons(String packageName, int maxNum, int userId) throws RemoteException {
+            public ParceledListSlice<ApplicationStartInfo> getHistoricalProcessStartReasons(
+                    String packageName, int maxNum, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9406,7 +10420,8 @@ public interface IActivityManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(226, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice<ApplicationStartInfo> _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice<ApplicationStartInfo> _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -9415,7 +10430,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void addApplicationStartInfoCompleteListener(IApplicationStartInfoCompleteListener listener, int userId) throws RemoteException {
+            public void addApplicationStartInfoCompleteListener(
+                    IApplicationStartInfoCompleteListener listener, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9431,7 +10448,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void removeApplicationStartInfoCompleteListener(IApplicationStartInfoCompleteListener listener, int userId) throws RemoteException {
+            public void removeApplicationStartInfoCompleteListener(
+                    IApplicationStartInfoCompleteListener listener, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9447,7 +10466,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void addStartInfoTimestamp(int key, long timestampNs, int userId) throws RemoteException {
+            public void addStartInfoTimestamp(int key, long timestampNs, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9464,7 +10484,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void reportStartInfoViewTimestamps(long renderThreadDrawStartTimeNs, long framePresentedTimeNs) throws RemoteException {
+            public void reportStartInfoViewTimestamps(
+                    long renderThreadDrawStartTimeNs, long framePresentedTimeNs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -9477,7 +10499,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public ParceledListSlice<ApplicationExitInfo> getHistoricalProcessExitReasons(String packageName, int pid, int maxNum, int userId) throws RemoteException {
+            public ParceledListSlice<ApplicationExitInfo> getHistoricalProcessExitReasons(
+                    String packageName, int pid, int maxNum, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9488,7 +10511,8 @@ public interface IActivityManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(231, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice<ApplicationExitInfo> _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice<ApplicationExitInfo> _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -9497,7 +10521,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void killProcessesWhenImperceptible(int[] pids, String reason) throws RemoteException {
+            public void killProcessesWhenImperceptible(int[] pids, String reason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9513,7 +10538,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void setActivityLocusContext(ComponentName activity, LocusId locusId, IBinder appToken) throws RemoteException {
+            public void setActivityLocusContext(
+                    ComponentName activity, LocusId locusId, IBinder appToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9577,7 +10604,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void killUidForPermissionChange(int appId, int userId, String reason) throws RemoteException {
+            public void killUidForPermissionChange(int appId, int userId, String reason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9692,7 +10720,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public ParceledListSlice queryIntentComponentsForIntentSender(IIntentSender sender, int matchFlags) throws RemoteException {
+            public ParceledListSlice queryIntentComponentsForIntentSender(
+                    IIntentSender sender, int matchFlags) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9701,7 +10730,8 @@ public interface IActivityManager extends IInterface {
                     _data.writeInt(matchFlags);
                     this.mRemote.transact(244, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -9710,7 +10740,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public int getUidProcessCapabilities(int uid, String callingPackage) throws RemoteException {
+            public int getUidProcessCapabilities(int uid, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9756,7 +10787,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void forceDelayBroadcastDelivery(String targetPackage, long delayedDurationMs) throws RemoteException {
+            public void forceDelayBroadcastDelivery(String targetPackage, long delayedDurationMs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9806,7 +10838,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public String[] queryRegisteredReceiverPackages(Intent intent, String resolvedType, int userId) throws RemoteException {
+            public String[] queryRegisteredReceiverPackages(
+                    Intent intent, String resolvedType, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9825,7 +10858,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean startUserInBackgroundVisibleOnDisplay(int userid, int displayId, IProgressListener unlockProgressListener) throws RemoteException {
+            public boolean startUserInBackgroundVisibleOnDisplay(
+                    int userid, int displayId, IProgressListener unlockProgressListener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9844,7 +10879,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean startProfileWithListener(int userid, IProgressListener unlockProgressListener) throws RemoteException {
+            public boolean startProfileWithListener(
+                    int userid, IProgressListener unlockProgressListener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9862,7 +10898,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public int restartUserInBackground(int userId, int userStartMode) throws RemoteException {
+            public int restartUserInBackground(int userId, int userStartMode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9896,7 +10933,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean shouldServiceTimeOut(ComponentName className, IBinder token) throws RemoteException {
+            public boolean shouldServiceTimeOut(ComponentName className, IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9914,7 +10952,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean hasServiceTimeLimitExceeded(ComponentName className, IBinder token) throws RemoteException {
+            public boolean hasServiceTimeLimitExceeded(ComponentName className, IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9932,7 +10971,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void registerUidFrozenStateChangedCallback(IUidFrozenStateChangedCallback callback) throws RemoteException {
+            public void registerUidFrozenStateChangedCallback(
+                    IUidFrozenStateChangedCallback callback) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9947,7 +10987,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void unregisterUidFrozenStateChangedCallback(IUidFrozenStateChangedCallback callback) throws RemoteException {
+            public void unregisterUidFrozenStateChangedCallback(
+                    IUidFrozenStateChangedCallback callback) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10164,7 +11205,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void registerDedicatedCallback(RemoteCallback resultCallback, int type) throws RemoteException {
+            public void registerDedicatedCallback(RemoteCallback resultCallback, int type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10231,7 +11273,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean moveTaskToBackWithBundle(int taskId, boolean keepAlive, Bundle options) throws RemoteException {
+            public boolean moveTaskToBackWithBundle(int taskId, boolean keepAlive, Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10272,7 +11315,8 @@ public interface IActivityManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(278, _data, _reply, 0);
                     _reply.readException();
-                    Configuration _result = (Configuration) _reply.readTypedObject(Configuration.CREATOR);
+                    Configuration _result =
+                            (Configuration) _reply.readTypedObject(Configuration.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -10281,7 +11325,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public int checkPermissionForDevice(String permission, int pid, int uid, int deviceId) throws RemoteException {
+            public int checkPermissionForDevice(String permission, int pid, int uid, int deviceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10301,7 +11346,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void frozenBinderTransactionDetected(int debugPid, int code, int flags, int err) throws RemoteException {
+            public void frozenBinderTransactionDetected(int debugPid, int code, int flags, int err)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -10316,7 +11362,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public int getBindingUidProcessState(int uid, String callingPackage) throws RemoteException {
+            public int getBindingUidProcessState(int uid, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10334,7 +11381,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public long getUidLastIdleElapsedTime(int uid, String callingPackage) throws RemoteException {
+            public long getUidLastIdleElapsedTime(int uid, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10352,7 +11400,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void addOverridePermissionState(int originatingUid, int uid, String permission, int result) throws RemoteException {
+            public void addOverridePermissionState(
+                    int originatingUid, int uid, String permission, int result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10370,7 +11420,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void removeOverridePermissionState(int originatingUid, int uid, String permission) throws RemoteException {
+            public void removeOverridePermissionState(
+                    int originatingUid, int uid, String permission) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10387,7 +11438,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void clearOverridePermissionStates(int originatingUid, int uid) throws RemoteException {
+            public void clearOverridePermissionStates(int originatingUid, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10403,7 +11455,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void clearAllOverridePermissionStates(int originatingUid) throws RemoteException {
+            public void clearAllOverridePermissionStates(int originatingUid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10418,7 +11471,16 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void noteAppRestrictionEnabled(String packageName, int uid, int restrictionType, boolean enabled, int reason, String subReason, int source, long threshold) throws RemoteException {
+            public void noteAppRestrictionEnabled(
+                    String packageName,
+                    int uid,
+                    int restrictionType,
+                    boolean enabled,
+                    int reason,
+                    String subReason,
+                    int source,
+                    long threshold)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10456,7 +11518,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void preloadBoosterAppsFromIpm(List<String> packageNames, int type) throws RemoteException {
+            public void preloadBoosterAppsFromIpm(List<String> packageNames, int type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10488,7 +11551,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public SemAppRestrictionManager.RestrictionInfo getRestrictionInfo(int type, String packageName, int uid) throws RemoteException {
+            public SemAppRestrictionManager.RestrictionInfo getRestrictionInfo(
+                    int type, String packageName, int uid) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10498,7 +11562,10 @@ public interface IActivityManager extends IInterface {
                     _data.writeInt(uid);
                     this.mRemote.transact(291, _data, _reply, 0);
                     _reply.readException();
-                    SemAppRestrictionManager.RestrictionInfo _result = (SemAppRestrictionManager.RestrictionInfo) _reply.readTypedObject(SemAppRestrictionManager.RestrictionInfo.CREATOR);
+                    SemAppRestrictionManager.RestrictionInfo _result =
+                            (SemAppRestrictionManager.RestrictionInfo)
+                                    _reply.readTypedObject(
+                                            SemAppRestrictionManager.RestrictionInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -10507,7 +11574,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean canRestrict(int type, String packageName, int uid) throws RemoteException {
+            public boolean canRestrict(int type, String packageName, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10526,7 +11594,9 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean restrict(int type, int state, boolean byUser, String packageName, int uid) throws RemoteException {
+            public boolean restrict(
+                    int type, int state, boolean byUser, String packageName, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10547,7 +11617,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public List<SemAppRestrictionManager.AppRestrictionInfo> getRestrictableList(int type) throws RemoteException {
+            public List<SemAppRestrictionManager.AppRestrictionInfo> getRestrictableList(int type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10555,7 +11626,9 @@ public interface IActivityManager extends IInterface {
                     _data.writeInt(type);
                     this.mRemote.transact(294, _data, _reply, 0);
                     _reply.readException();
-                    List<SemAppRestrictionManager.AppRestrictionInfo> _result = _reply.createTypedArrayList(SemAppRestrictionManager.AppRestrictionInfo.CREATOR);
+                    List<SemAppRestrictionManager.AppRestrictionInfo> _result =
+                            _reply.createTypedArrayList(
+                                    SemAppRestrictionManager.AppRestrictionInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -10564,14 +11637,17 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public List<SemAppRestrictionManager.AppRestrictionInfo> getAllRestrictedList() throws RemoteException {
+            public List<SemAppRestrictionManager.AppRestrictionInfo> getAllRestrictedList()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(295, _data, _reply, 0);
                     _reply.readException();
-                    List<SemAppRestrictionManager.AppRestrictionInfo> _result = _reply.createTypedArrayList(SemAppRestrictionManager.AppRestrictionInfo.CREATOR);
+                    List<SemAppRestrictionManager.AppRestrictionInfo> _result =
+                            _reply.createTypedArrayList(
+                                    SemAppRestrictionManager.AppRestrictionInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -10580,7 +11656,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public List<SemAppRestrictionManager.AppRestrictionInfo> getRestrictedList(int type) throws RemoteException {
+            public List<SemAppRestrictionManager.AppRestrictionInfo> getRestrictedList(int type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10588,7 +11665,9 @@ public interface IActivityManager extends IInterface {
                     _data.writeInt(type);
                     this.mRemote.transact(296, _data, _reply, 0);
                     _reply.readException();
-                    List<SemAppRestrictionManager.AppRestrictionInfo> _result = _reply.createTypedArrayList(SemAppRestrictionManager.AppRestrictionInfo.CREATOR);
+                    List<SemAppRestrictionManager.AppRestrictionInfo> _result =
+                            _reply.createTypedArrayList(
+                                    SemAppRestrictionManager.AppRestrictionInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -10597,7 +11676,10 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean updateRestrictionInfo(SemAppRestrictionManager.RestrictionInfo info, List<SemAppRestrictionManager.AppRestrictionInfo> list) throws RemoteException {
+            public boolean updateRestrictionInfo(
+                    SemAppRestrictionManager.RestrictionInfo info,
+                    List<SemAppRestrictionManager.AppRestrictionInfo> list)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10615,7 +11697,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public boolean clearRestrictionInfo(List<SemAppRestrictionManager.AppRestrictionInfo> list) throws RemoteException {
+            public boolean clearRestrictionInfo(
+                    List<SemAppRestrictionManager.AppRestrictionInfo> list) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10661,7 +11744,8 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public ParceledListSlice<PackageInfo> getInstalledPackageListFromMARs(int flags, int userId) throws RemoteException {
+            public ParceledListSlice<PackageInfo> getInstalledPackageListFromMARs(
+                    int flags, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10670,7 +11754,8 @@ public interface IActivityManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(301, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice<PackageInfo> _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice<PackageInfo> _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -10696,7 +11781,12 @@ public interface IActivityManager extends IInterface {
             }
 
             @Override // android.app.IActivityManager
-            public void updatePersistentConfigurationAndLocaleOverlays(Configuration values, String callingPackageName, String callingAttributionTag, LocaleList ll) throws RemoteException {
+            public void updatePersistentConfigurationAndLocaleOverlays(
+                    Configuration values,
+                    String callingPackageName,
+                    String callingAttributionTag,
+                    LocaleList ll)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10846,7 +11936,8 @@ public interface IActivityManager extends IInterface {
             }
         }
 
-        private boolean onTransact$registerUidObserverForUids$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$registerUidObserverForUids$(Parcel data, Parcel reply)
+                throws RemoteException {
             IUidObserver _arg0 = IUidObserver.Stub.asInterface(data.readStrongBinder());
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -10859,7 +11950,8 @@ public interface IActivityManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$startActivity$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$startActivity$(Parcel data, Parcel reply)
+                throws RemoteException {
             IApplicationThread _arg0 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
             String _arg1 = data.readString();
             Intent _arg2 = (Intent) data.readTypedObject(Intent.CREATOR);
@@ -10871,13 +11963,16 @@ public interface IActivityManager extends IInterface {
             ProfilerInfo _arg8 = (ProfilerInfo) data.readTypedObject(ProfilerInfo.CREATOR);
             Bundle _arg9 = (Bundle) data.readTypedObject(Bundle.CREATOR);
             data.enforceNoDataAvail();
-            int _result = startActivity(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9);
+            int _result =
+                    startActivity(
+                            _arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9);
             reply.writeNoException();
             reply.writeInt(_result);
             return true;
         }
 
-        private boolean onTransact$startActivityWithFeature$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$startActivityWithFeature$(Parcel data, Parcel reply)
+                throws RemoteException {
             IApplicationThread _arg0 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -10890,13 +11985,17 @@ public interface IActivityManager extends IInterface {
             ProfilerInfo _arg9 = (ProfilerInfo) data.readTypedObject(ProfilerInfo.CREATOR);
             Bundle _arg10 = (Bundle) data.readTypedObject(Bundle.CREATOR);
             data.enforceNoDataAvail();
-            int _result = startActivityWithFeature(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9, _arg10);
+            int _result =
+                    startActivityWithFeature(
+                            _arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9,
+                            _arg10);
             reply.writeNoException();
             reply.writeInt(_result);
             return true;
         }
 
-        private boolean onTransact$registerReceiver$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$registerReceiver$(Parcel data, Parcel reply)
+                throws RemoteException {
             IApplicationThread _arg0 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
             String _arg1 = data.readString();
             IIntentReceiver _arg2 = IIntentReceiver.Stub.asInterface(data.readStrongBinder());
@@ -10911,7 +12010,8 @@ public interface IActivityManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$registerReceiverWithFeature$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$registerReceiverWithFeature$(Parcel data, Parcel reply)
+                throws RemoteException {
             IApplicationThread _arg0 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -10922,13 +12022,16 @@ public interface IActivityManager extends IInterface {
             int _arg7 = data.readInt();
             int _arg8 = data.readInt();
             data.enforceNoDataAvail();
-            Intent _result = registerReceiverWithFeature(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8);
+            Intent _result =
+                    registerReceiverWithFeature(
+                            _arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8);
             reply.writeNoException();
             reply.writeTypedObject(_result, 1);
             return true;
         }
 
-        private boolean onTransact$broadcastIntent$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$broadcastIntent$(Parcel data, Parcel reply)
+                throws RemoteException {
             IApplicationThread _arg0 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
             Intent _arg1 = (Intent) data.readTypedObject(Intent.CREATOR);
             String _arg2 = data.readString();
@@ -10943,13 +12046,17 @@ public interface IActivityManager extends IInterface {
             boolean _arg11 = data.readBoolean();
             int _arg12 = data.readInt();
             data.enforceNoDataAvail();
-            int _result = broadcastIntent(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9, _arg10, _arg11, _arg12);
+            int _result =
+                    broadcastIntent(
+                            _arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9,
+                            _arg10, _arg11, _arg12);
             reply.writeNoException();
             reply.writeInt(_result);
             return true;
         }
 
-        private boolean onTransact$broadcastIntentWithFeature$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$broadcastIntentWithFeature$(Parcel data, Parcel reply)
+                throws RemoteException {
             IApplicationThread _arg0 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
             String _arg1 = data.readString();
             Intent _arg2 = (Intent) data.readTypedObject(Intent.CREATOR);
@@ -10967,13 +12074,17 @@ public interface IActivityManager extends IInterface {
             boolean _arg14 = data.readBoolean();
             int _arg15 = data.readInt();
             data.enforceNoDataAvail();
-            int _result = broadcastIntentWithFeature(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9, _arg10, _arg11, _arg12, _arg13, _arg14, _arg15);
+            int _result =
+                    broadcastIntentWithFeature(
+                            _arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9,
+                            _arg10, _arg11, _arg12, _arg13, _arg14, _arg15);
             reply.writeNoException();
             reply.writeInt(_result);
             return true;
         }
 
-        private boolean onTransact$finishReceiver$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$finishReceiver$(Parcel data, Parcel reply)
+                throws RemoteException {
             IBinder _arg0 = data.readStrongBinder();
             int _arg1 = data.readInt();
             String _arg2 = data.readString();
@@ -10985,7 +12096,8 @@ public interface IActivityManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$moveTaskToFront$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$moveTaskToFront$(Parcel data, Parcel reply)
+                throws RemoteException {
             IApplicationThread _arg0 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
             String _arg1 = data.readString();
             int _arg2 = data.readInt();
@@ -10997,7 +12109,8 @@ public interface IActivityManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getContentProvider$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getContentProvider$(Parcel data, Parcel reply)
+                throws RemoteException {
             IApplicationThread _arg0 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -11041,7 +12154,8 @@ public interface IActivityManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$bindServiceInstance$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$bindServiceInstance$(Parcel data, Parcel reply)
+                throws RemoteException {
             IApplicationThread _arg0 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
             IBinder _arg1 = data.readStrongBinder();
             Intent _arg2 = (Intent) data.readTypedObject(Intent.CREATOR);
@@ -11052,29 +12166,36 @@ public interface IActivityManager extends IInterface {
             String _arg7 = data.readString();
             int _arg8 = data.readInt();
             data.enforceNoDataAvail();
-            int _result = bindServiceInstance(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8);
+            int _result =
+                    bindServiceInstance(
+                            _arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8);
             reply.writeNoException();
             reply.writeInt(_result);
             return true;
         }
 
-        private boolean onTransact$startInstrumentation$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$startInstrumentation$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             int _arg2 = data.readInt();
             Bundle _arg3 = (Bundle) data.readTypedObject(Bundle.CREATOR);
-            IInstrumentationWatcher _arg4 = IInstrumentationWatcher.Stub.asInterface(data.readStrongBinder());
-            IUiAutomationConnection _arg5 = IUiAutomationConnection.Stub.asInterface(data.readStrongBinder());
+            IInstrumentationWatcher _arg4 =
+                    IInstrumentationWatcher.Stub.asInterface(data.readStrongBinder());
+            IUiAutomationConnection _arg5 =
+                    IUiAutomationConnection.Stub.asInterface(data.readStrongBinder());
             int _arg6 = data.readInt();
             String _arg7 = data.readString();
             data.enforceNoDataAvail();
-            boolean _result = startInstrumentation(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7);
+            boolean _result =
+                    startInstrumentation(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7);
             reply.writeNoException();
             reply.writeBoolean(_result);
             return true;
         }
 
-        private boolean onTransact$checkUriPermission$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$checkUriPermission$(Parcel data, Parcel reply)
+                throws RemoteException {
             Uri _arg0 = (Uri) data.readTypedObject(Uri.CREATOR);
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -11088,7 +12209,8 @@ public interface IActivityManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$checkContentUriPermissionFull$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$checkContentUriPermissionFull$(Parcel data, Parcel reply)
+                throws RemoteException {
             Uri _arg0 = (Uri) data.readTypedObject(Uri.CREATOR);
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -11101,7 +12223,8 @@ public interface IActivityManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$checkUriPermissions$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$checkUriPermissions$(Parcel data, Parcel reply)
+                throws RemoteException {
             List<Uri> _arg0 = data.createTypedArrayList(Uri.CREATOR);
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -11115,7 +12238,8 @@ public interface IActivityManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$grantUriPermission$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$grantUriPermission$(Parcel data, Parcel reply)
+                throws RemoteException {
             IApplicationThread _arg0 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
             String _arg1 = data.readString();
             Uri _arg2 = (Uri) data.readTypedObject(Uri.CREATOR);
@@ -11127,7 +12251,8 @@ public interface IActivityManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$revokeUriPermission$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$revokeUriPermission$(Parcel data, Parcel reply)
+                throws RemoteException {
             IApplicationThread _arg0 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
             String _arg1 = data.readString();
             Uri _arg2 = (Uri) data.readTypedObject(Uri.CREATOR);
@@ -11139,7 +12264,8 @@ public interface IActivityManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$serviceDoneExecuting$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$serviceDoneExecuting$(Parcel data, Parcel reply)
+                throws RemoteException {
             IBinder _arg0 = data.readStrongBinder();
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -11150,7 +12276,8 @@ public interface IActivityManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getIntentSender$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getIntentSender$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             String _arg1 = data.readString();
             IBinder _arg2 = data.readStrongBinder();
@@ -11162,13 +12289,16 @@ public interface IActivityManager extends IInterface {
             Bundle _arg8 = (Bundle) data.readTypedObject(Bundle.CREATOR);
             int _arg9 = data.readInt();
             data.enforceNoDataAvail();
-            IIntentSender _result = getIntentSender(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9);
+            IIntentSender _result =
+                    getIntentSender(
+                            _arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9);
             reply.writeNoException();
             reply.writeStrongInterface(_result);
             return true;
         }
 
-        private boolean onTransact$getIntentSenderWithFeature$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getIntentSenderWithFeature$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -11181,13 +12311,17 @@ public interface IActivityManager extends IInterface {
             Bundle _arg9 = (Bundle) data.readTypedObject(Bundle.CREATOR);
             int _arg10 = data.readInt();
             data.enforceNoDataAvail();
-            IIntentSender _result = getIntentSenderWithFeature(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9, _arg10);
+            IIntentSender _result =
+                    getIntentSenderWithFeature(
+                            _arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9,
+                            _arg10);
             reply.writeNoException();
             reply.writeStrongInterface(_result);
             return true;
         }
 
-        private boolean onTransact$noteWakeupAlarm$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$noteWakeupAlarm$(Parcel data, Parcel reply)
+                throws RemoteException {
             IIntentSender _arg0 = IIntentSender.Stub.asInterface(data.readStrongBinder());
             WorkSource _arg1 = (WorkSource) data.readTypedObject(WorkSource.CREATOR);
             int _arg2 = data.readInt();
@@ -11199,7 +12333,8 @@ public interface IActivityManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setServiceForeground$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setServiceForeground$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             IBinder _arg1 = data.readStrongBinder();
             int _arg2 = data.readInt();
@@ -11212,7 +12347,8 @@ public interface IActivityManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$profileControl$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$profileControl$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -11225,7 +12361,8 @@ public interface IActivityManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$handleIncomingUser$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$handleIncomingUser$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -11240,7 +12377,8 @@ public interface IActivityManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$killApplication$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$killApplication$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -11252,11 +12390,15 @@ public interface IActivityManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$handleApplicationWtf$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$handleApplicationWtf$(Parcel data, Parcel reply)
+                throws RemoteException {
             IBinder _arg0 = data.readStrongBinder();
             String _arg1 = data.readString();
             boolean _arg2 = data.readBoolean();
-            ApplicationErrorReport.ParcelableCrashInfo _arg3 = (ApplicationErrorReport.ParcelableCrashInfo) data.readTypedObject(ApplicationErrorReport.ParcelableCrashInfo.CREATOR);
+            ApplicationErrorReport.ParcelableCrashInfo _arg3 =
+                    (ApplicationErrorReport.ParcelableCrashInfo)
+                            data.readTypedObject(
+                                    ApplicationErrorReport.ParcelableCrashInfo.CREATOR);
             int _arg4 = data.readInt();
             data.enforceNoDataAvail();
             boolean _result = handleApplicationWtf(_arg0, _arg1, _arg2, _arg3, _arg4);
@@ -11265,7 +12407,8 @@ public interface IActivityManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$crashApplicationWithType$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$crashApplicationWithType$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             int _arg1 = data.readInt();
             String _arg2 = data.readString();
@@ -11279,7 +12422,8 @@ public interface IActivityManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$crashApplicationWithTypeWithExtras$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$crashApplicationWithTypeWithExtras$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             int _arg1 = data.readInt();
             String _arg2 = data.readString();
@@ -11289,7 +12433,8 @@ public interface IActivityManager extends IInterface {
             int _arg6 = data.readInt();
             Bundle _arg7 = (Bundle) data.readTypedObject(Bundle.CREATOR);
             data.enforceNoDataAvail();
-            crashApplicationWithTypeWithExtras(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7);
+            crashApplicationWithTypeWithExtras(
+                    _arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7);
             reply.writeNoException();
             return true;
         }
@@ -11302,16 +12447,19 @@ public interface IActivityManager extends IInterface {
             boolean _arg4 = data.readBoolean();
             String _arg5 = data.readString();
             String _arg6 = data.readString();
-            ParcelFileDescriptor _arg7 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+            ParcelFileDescriptor _arg7 =
+                    (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
             RemoteCallback _arg8 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
             data.enforceNoDataAvail();
-            boolean _result = dumpHeap(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8);
+            boolean _result =
+                    dumpHeap(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8);
             reply.writeNoException();
             reply.writeBoolean(_result);
             return true;
         }
 
-        private boolean onTransact$startActivityAsUser$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$startActivityAsUser$(Parcel data, Parcel reply)
+                throws RemoteException {
             IApplicationThread _arg0 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
             String _arg1 = data.readString();
             Intent _arg2 = (Intent) data.readTypedObject(Intent.CREATOR);
@@ -11324,13 +12472,17 @@ public interface IActivityManager extends IInterface {
             Bundle _arg9 = (Bundle) data.readTypedObject(Bundle.CREATOR);
             int _arg10 = data.readInt();
             data.enforceNoDataAvail();
-            int _result = startActivityAsUser(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9, _arg10);
+            int _result =
+                    startActivityAsUser(
+                            _arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9,
+                            _arg10);
             reply.writeNoException();
             reply.writeInt(_result);
             return true;
         }
 
-        private boolean onTransact$startActivityAsUserWithFeature$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$startActivityAsUserWithFeature$(Parcel data, Parcel reply)
+                throws RemoteException {
             IApplicationThread _arg0 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -11344,13 +12496,17 @@ public interface IActivityManager extends IInterface {
             Bundle _arg10 = (Bundle) data.readTypedObject(Bundle.CREATOR);
             int _arg11 = data.readInt();
             data.enforceNoDataAvail();
-            int _result = startActivityAsUserWithFeature(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9, _arg10, _arg11);
+            int _result =
+                    startActivityAsUserWithFeature(
+                            _arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9,
+                            _arg10, _arg11);
             reply.writeNoException();
             reply.writeInt(_result);
             return true;
         }
 
-        private boolean onTransact$sendIntentSender$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$sendIntentSender$(Parcel data, Parcel reply)
+                throws RemoteException {
             IApplicationThread _arg0 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
             IIntentSender _arg1 = IIntentSender.Stub.asInterface(data.readStrongBinder());
             IBinder _arg2 = data.readStrongBinder();
@@ -11361,13 +12517,15 @@ public interface IActivityManager extends IInterface {
             String _arg7 = data.readString();
             Bundle _arg8 = (Bundle) data.readTypedObject(Bundle.CREATOR);
             data.enforceNoDataAvail();
-            int _result = sendIntentSender(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8);
+            int _result =
+                    sendIntentSender(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8);
             reply.writeNoException();
             reply.writeInt(_result);
             return true;
         }
 
-        private boolean onTransact$noteAppRestrictionEnabled$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$noteAppRestrictionEnabled$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();

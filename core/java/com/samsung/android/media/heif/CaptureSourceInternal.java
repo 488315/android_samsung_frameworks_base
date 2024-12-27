@@ -1,8 +1,10 @@
 package com.samsung.android.media.heif;
 
 import android.media.MediaFormat;
+
 import com.samsung.android.media.heif.jni.AMessageJNI;
 import com.samsung.android.sume.core.message.Message;
+
 import java.io.FileDescriptor;
 import java.nio.ByteBuffer;
 
@@ -12,8 +14,7 @@ final class CaptureSourceInternal {
     public static final String KEY_CAMERA_INFO_SIZE = "camera-info-size";
     private AMessageJNI msg = new AMessageJNI();
 
-    CaptureSourceInternal() {
-    }
+    CaptureSourceInternal() {}
 
     public AMessageJNI getMsg() {
         return this.msg;
@@ -110,8 +111,7 @@ final class CaptureSourceInternal {
     }
 
     static class Parser {
-        Parser() {
-        }
+        Parser() {}
 
         static CaptureSourceInternal makeInternalSource(SemInputImage in) {
             CaptureSourceInternal source = new CaptureSourceInternal();

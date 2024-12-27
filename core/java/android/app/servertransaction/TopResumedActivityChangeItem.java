@@ -10,41 +10,48 @@ import android.os.Trace;
 
 /* loaded from: classes.dex */
 public class TopResumedActivityChangeItem extends ActivityTransactionItem {
-    public static final Parcelable.Creator<TopResumedActivityChangeItem> CREATOR = new Parcelable.Creator<TopResumedActivityChangeItem>() { // from class: android.app.servertransaction.TopResumedActivityChangeItem.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TopResumedActivityChangeItem createFromParcel(Parcel in) {
-            return new TopResumedActivityChangeItem(in);
-        }
+    public static final Parcelable.Creator<TopResumedActivityChangeItem> CREATOR =
+            new Parcelable.Creator<TopResumedActivityChangeItem>() { // from class:
+                // android.app.servertransaction.TopResumedActivityChangeItem.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TopResumedActivityChangeItem createFromParcel(Parcel in) {
+                    return new TopResumedActivityChangeItem(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TopResumedActivityChangeItem[] newArray(int size) {
-            return new TopResumedActivityChangeItem[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TopResumedActivityChangeItem[] newArray(int size) {
+                    return new TopResumedActivityChangeItem[size];
+                }
+            };
     private boolean mOnTop;
 
     @Override // android.app.servertransaction.ActivityTransactionItem
-    public void execute(ClientTransactionHandler client, ActivityThread.ActivityClientRecord r, PendingTransactionActions pendingActions) {
+    public void execute(
+            ClientTransactionHandler client,
+            ActivityThread.ActivityClientRecord r,
+            PendingTransactionActions pendingActions) {
         Trace.traceBegin(64L, "topResumedActivityChangeItem");
         client.handleTopResumedActivityChanged(r, this.mOnTop, "topResumedActivityChangeItem");
         Trace.traceEnd(64L);
     }
 
     @Override // android.app.servertransaction.BaseClientRequest
-    public void postExecute(ClientTransactionHandler client, PendingTransactionActions pendingActions) {
+    public void postExecute(
+            ClientTransactionHandler client, PendingTransactionActions pendingActions) {
         if (this.mOnTop) {
             return;
         }
         ActivityClient.getInstance().activityTopResumedStateLost();
     }
 
-    private TopResumedActivityChangeItem() {
-    }
+    private TopResumedActivityChangeItem() {}
 
     public static TopResumedActivityChangeItem obtain(IBinder activityToken, boolean onTop) {
-        TopResumedActivityChangeItem instance = (TopResumedActivityChangeItem) ObjectPool.obtain(TopResumedActivityChangeItem.class);
+        TopResumedActivityChangeItem instance =
+                (TopResumedActivityChangeItem)
+                        ObjectPool.obtain(TopResumedActivityChangeItem.class);
         if (instance == null) {
             instance = new TopResumedActivityChangeItem();
         }
@@ -53,7 +60,8 @@ public class TopResumedActivityChangeItem extends ActivityTransactionItem {
         return instance;
     }
 
-    @Override // android.app.servertransaction.ActivityTransactionItem, android.app.servertransaction.ObjectPoolItem
+    @Override // android.app.servertransaction.ActivityTransactionItem,
+    // android.app.servertransaction.ObjectPoolItem
     public void recycle() {
         super.recycle();
         this.mOnTop = false;

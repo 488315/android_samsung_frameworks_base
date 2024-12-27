@@ -1,6 +1,5 @@
 package android.media;
 
-import android.media.MediaMetrics;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -28,8 +27,7 @@ public interface IMediaHTTPConnection extends IInterface {
         }
 
         @Override // android.media.IMediaHTTPConnection
-        public void disconnect() throws RemoteException {
-        }
+        public void disconnect() throws RemoteException {}
 
         @Override // android.media.IMediaHTTPConnection
         public int readAt(long offset, int size) throws RemoteException {
@@ -57,7 +55,7 @@ public interface IMediaHTTPConnection extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMediaHTTPConnection {
+    public abstract static class Stub extends Binder implements IMediaHTTPConnection {
         public static final String DESCRIPTOR = "android.media.IMediaHTTPConnection";
         static final int TRANSACTION_connect = 1;
         static final int TRANSACTION_disconnect = 2;
@@ -111,7 +109,8 @@ public interface IMediaHTTPConnection extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

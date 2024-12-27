@@ -10,6 +10,7 @@ import android.os.Trace;
 import android.util.ArrayMap;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.framework.protobuf.nano.MessageNanoPrinter;
 import com.android.internal.os.TimeoutRecord;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
@@ -19,6 +20,7 @@ import com.android.server.SystemServerInitThreadPool$$ExternalSyntheticLambda0;
 import com.android.server.am.StackTracesDumpHelper;
 import com.android.server.criticalevents.CriticalEventLog;
 import com.android.server.policy.WindowManagerPolicy;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -47,10 +49,17 @@ public final class AnrController {
     }
 
     public final void notifyWindowUnresponsive(int i, TimeoutRecord timeoutRecord) {
-        DeviceIdleController$$ExternalSyntheticOutline0.m(BatteryService$$ExternalSyntheticOutline0.m(i, "ANR in input window owned by pid=", ". Reason: "), timeoutRecord.mReason, "WindowManager");
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        i, "ANR in input window owned by pid=", ". Reason: "),
+                timeoutRecord.mReason,
+                "WindowManager");
         this.mService.mAmInternal.inputDispatchingTimedOut(i, true, timeoutRecord);
         String str = timeoutRecord.mReason;
-        FgThread.getExecutor().execute(new AnrController$$ExternalSyntheticLambda0(this, null, 0 == true ? 1 : 0, str));
+        FgThread.getExecutor()
+                .execute(
+                        new AnrController$$ExternalSyntheticLambda0(
+                                this, null, 0 == true ? 1 : 0, str));
     }
 
     public final boolean notifyWindowUnresponsive(IBinder iBinder, TimeoutRecord timeoutRecord) {
@@ -70,23 +79,38 @@ public final class AnrController {
                 }
                 WindowState windowState = inputTargetFromToken.getWindowState();
                 int pid = inputTargetFromToken.getPid();
-                ActivityRecord activityRecord = windowState.mInputChannelToken == iBinder ? windowState.mActivityRecord : null;
-                Slog.i("WindowManager", "ANR in " + inputTargetFromToken + ". Reason:" + timeoutRecord.mReason);
+                ActivityRecord activityRecord =
+                        windowState.mInputChannelToken == iBinder
+                                ? windowState.mActivityRecord
+                                : null;
+                Slog.i(
+                        "WindowManager",
+                        "ANR in " + inputTargetFromToken + ". Reason:" + timeoutRecord.mReason);
                 WindowManagerPolicy windowManagerPolicy = this.mService.mPolicy;
                 boolean z = windowState.mOwnerCanAddInternalSystemWindow;
                 windowManagerPolicy.getClass();
-                boolean z2 = windowState.mBaseLayer > WindowManagerPolicy.getWindowLayerFromTypeLw(2038, z, false);
+                boolean z2 =
+                        windowState.mBaseLayer
+                                > WindowManagerPolicy.getWindowLayerFromTypeLw(2038, z, false);
                 WindowManagerService.resetPriorityAfterLockedSection();
                 if (!SystemProperties.get("ro.boot.debug_level", "0x4f4c").equals("0x4f4c")) {
                     long uptimeMillis = SystemClock.uptimeMillis();
-                    if (this.mLastPreDumpTimeMs_onlyForAnr <= 0 || uptimeMillis - this.mLastPreDumpTimeMs_onlyForAnr >= PRE_DUMP_MIN_INTERVAL_MS) {
+                    if (this.mLastPreDumpTimeMs_onlyForAnr <= 0
+                            || uptimeMillis - this.mLastPreDumpTimeMs_onlyForAnr
+                                    >= PRE_DUMP_MIN_INTERVAL_MS) {
                         this.mLastPreDumpTimeMs_onlyForAnr = uptimeMillis;
                         Slog.i("WindowManager", "Pre-dump(onlyForAnr) for unresponsive");
                         ArrayList arrayList = new ArrayList(1);
                         arrayList.add(Integer.valueOf(pid));
-                        File dumpStackTraces = StackTracesDumpHelper.dumpStackTraces(arrayList, null, null, null, null, null, null, null, null, null, null, null);
+                        File dumpStackTraces =
+                                StackTracesDumpHelper.dumpStackTraces(
+                                        arrayList, null, null, null, null, null, null, null, null,
+                                        null, null, null);
                         if (dumpStackTraces != null) {
-                            dumpStackTraces.renameTo(new File(dumpStackTraces.getParent(), dumpStackTraces.getName() + "_preOnlyForAnr"));
+                            dumpStackTraces.renameTo(
+                                    new File(
+                                            dumpStackTraces.getParent(),
+                                            dumpStackTraces.getName() + "_preOnlyForAnr"));
                         }
                     }
                 }
@@ -95,7 +119,10 @@ public final class AnrController {
                 } else {
                     this.mService.mAmInternal.inputDispatchingTimedOut(pid, z2, timeoutRecord);
                 }
-                FgThread.getExecutor().execute(new AnrController$$ExternalSyntheticLambda0(this, activityRecord, windowState, timeoutRecord.mReason));
+                FgThread.getExecutor()
+                        .execute(
+                                new AnrController$$ExternalSyntheticLambda0(
+                                        this, activityRecord, windowState, timeoutRecord.mReason));
                 return true;
             } catch (Throwable th) {
                 WindowManagerService.resetPriorityAfterLockedSection();
@@ -109,45 +136,53 @@ public final class AnrController {
         final int i2 = 1;
         if (Build.IS_DEBUGGABLE) {
             final long uptimeMillis = SystemClock.uptimeMillis();
-            if (this.mLastPreDumpTimeMs <= 0 || uptimeMillis - this.mLastPreDumpTimeMs >= PRE_DUMP_MIN_INTERVAL_MS) {
+            if (this.mLastPreDumpTimeMs <= 0
+                    || uptimeMillis - this.mLastPreDumpTimeMs >= PRE_DUMP_MIN_INTERVAL_MS) {
                 Trace.traceBegin(64L, "preDumpIfLockTooSlow()");
                 try {
                     final boolean[] zArr = {true};
                     ArrayMap arrayMap = new ArrayMap(2);
                     final WindowManagerService windowManagerService = this.mService;
                     Objects.requireNonNull(windowManagerService);
-                    arrayMap.put("WindowManager", new Runnable() { // from class: com.android.server.wm.AnrController$$ExternalSyntheticLambda1
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            int i3 = i;
-                            Object obj = windowManagerService;
-                            switch (i3) {
-                                case 0:
-                                    ((WindowManagerService) obj).monitor();
-                                    break;
-                                default:
-                                    ((ActivityManagerInternal) obj).monitor();
-                                    break;
-                            }
-                        }
-                    });
-                    final ActivityManagerInternal activityManagerInternal = this.mService.mAmInternal;
+                    arrayMap.put(
+                            "WindowManager",
+                            new Runnable() { // from class:
+                                             // com.android.server.wm.AnrController$$ExternalSyntheticLambda1
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    int i3 = i;
+                                    Object obj = windowManagerService;
+                                    switch (i3) {
+                                        case 0:
+                                            ((WindowManagerService) obj).monitor();
+                                            break;
+                                        default:
+                                            ((ActivityManagerInternal) obj).monitor();
+                                            break;
+                                    }
+                                }
+                            });
+                    final ActivityManagerInternal activityManagerInternal =
+                            this.mService.mAmInternal;
                     Objects.requireNonNull(activityManagerInternal);
-                    arrayMap.put("ActivityManager", new Runnable() { // from class: com.android.server.wm.AnrController$$ExternalSyntheticLambda1
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            int i3 = i2;
-                            Object obj = activityManagerInternal;
-                            switch (i3) {
-                                case 0:
-                                    ((WindowManagerService) obj).monitor();
-                                    break;
-                                default:
-                                    ((ActivityManagerInternal) obj).monitor();
-                                    break;
-                            }
-                        }
-                    });
+                    arrayMap.put(
+                            "ActivityManager",
+                            new Runnable() { // from class:
+                                             // com.android.server.wm.AnrController$$ExternalSyntheticLambda1
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    int i3 = i2;
+                                    Object obj = activityManagerInternal;
+                                    switch (i3) {
+                                        case 0:
+                                            ((WindowManagerService) obj).monitor();
+                                            break;
+                                        default:
+                                            ((ActivityManagerInternal) obj).monitor();
+                                            break;
+                                    }
+                                }
+                            });
                     CountDownLatch countDownLatch = new CountDownLatch(arrayMap.size());
                     int i3 = 0;
                     while (i3 < arrayMap.size()) {
@@ -172,7 +207,8 @@ public final class AnrController {
                                     sb.append(str);
                                     sb.append(" in ");
                                     sb.append(uptimeMillis2);
-                                    DeviceIdleController$$ExternalSyntheticOutline0.m(sb, "ms", "WindowManager");
+                                    DeviceIdleController$$ExternalSyntheticOutline0.m(
+                                            sb, "ms", "WindowManager");
                                 }
                             }
                         }.start();
@@ -181,7 +217,8 @@ public final class AnrController {
                         arrayMap = arrayMap2;
                     }
                     try {
-                        if (countDownLatch.await(PRE_DUMP_MONITOR_TIMEOUT_MS, TimeUnit.MILLISECONDS)) {
+                        if (countDownLatch.await(
+                                PRE_DUMP_MONITOR_TIMEOUT_MS, TimeUnit.MILLISECONDS)) {
                             return;
                         }
                     } catch (InterruptedException unused) {
@@ -192,16 +229,41 @@ public final class AnrController {
                     arrayList.add(Integer.valueOf(WindowManagerService.MY_PID));
                     boolean z = zArr[0];
                     ArrayList arrayList2 = null;
-                    int[] pidsForCommands = z ? Process.getPidsForCommands(new String[]{"/system/bin/surfaceflinger"}) : null;
+                    int[] pidsForCommands =
+                            z
+                                    ? Process.getPidsForCommands(
+                                            new String[] {"/system/bin/surfaceflinger"})
+                                    : null;
                     if (pidsForCommands != null) {
                         arrayList2 = new ArrayList(1);
                         for (int i5 : pidsForCommands) {
                             arrayList2.add(Integer.valueOf(i5));
                         }
                     }
-                    File dumpStackTraces = StackTracesDumpHelper.dumpStackTraces(arrayList, null, null, CompletableFuture.completedFuture(arrayList2), null, null, "Pre-dump", "--- CriticalEventLog ---\n" + MessageNanoPrinter.print(CriticalEventLog.getInstance().getOutputLogProto(3, "AID_SYSTEM", 1000)) + '\n', null, new SystemServerInitThreadPool$$ExternalSyntheticLambda0(), null, null);
+                    File dumpStackTraces =
+                            StackTracesDumpHelper.dumpStackTraces(
+                                    arrayList,
+                                    null,
+                                    null,
+                                    CompletableFuture.completedFuture(arrayList2),
+                                    null,
+                                    null,
+                                    "Pre-dump",
+                                    "--- CriticalEventLog ---\n"
+                                            + MessageNanoPrinter.print(
+                                                    CriticalEventLog.getInstance()
+                                                            .getOutputLogProto(
+                                                                    3, "AID_SYSTEM", 1000))
+                                            + '\n',
+                                    null,
+                                    new SystemServerInitThreadPool$$ExternalSyntheticLambda0(),
+                                    null,
+                                    null);
                     if (dumpStackTraces != null) {
-                        dumpStackTraces.renameTo(new File(dumpStackTraces.getParent(), dumpStackTraces.getName() + "_pre"));
+                        dumpStackTraces.renameTo(
+                                new File(
+                                        dumpStackTraces.getParent(),
+                                        dumpStackTraces.getName() + "_pre"));
                     }
                 } finally {
                     Trace.traceEnd(64L);

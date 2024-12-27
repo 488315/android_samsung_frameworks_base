@@ -9,19 +9,21 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes3.dex */
 public final class ChooserTarget implements Parcelable {
-    public static final Parcelable.Creator<ChooserTarget> CREATOR = new Parcelable.Creator<ChooserTarget>() { // from class: android.service.chooser.ChooserTarget.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ChooserTarget createFromParcel(Parcel source) {
-            return new ChooserTarget(source);
-        }
+    public static final Parcelable.Creator<ChooserTarget> CREATOR =
+            new Parcelable.Creator<
+                    ChooserTarget>() { // from class: android.service.chooser.ChooserTarget.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ChooserTarget createFromParcel(Parcel source) {
+                    return new ChooserTarget(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ChooserTarget[] newArray(int size) {
-            return new ChooserTarget[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ChooserTarget[] newArray(int size) {
+                    return new ChooserTarget[size];
+                }
+            };
     private static final String TAG = "ChooserTarget";
     private ComponentName mComponentName;
     private Icon mIcon;
@@ -29,11 +31,17 @@ public final class ChooserTarget implements Parcelable {
     private float mScore;
     private CharSequence mTitle;
 
-    public ChooserTarget(CharSequence title, Icon icon, float score, ComponentName componentName, Bundle intentExtras) {
+    public ChooserTarget(
+            CharSequence title,
+            Icon icon,
+            float score,
+            ComponentName componentName,
+            Bundle intentExtras) {
         this.mTitle = title;
         this.mIcon = icon;
         if (score > 1.0f || score < 0.0f) {
-            throw new IllegalArgumentException("Score " + score + " out of range; must be between 0.0f and 1.0f");
+            throw new IllegalArgumentException(
+                    "Score " + score + " out of range; must be between 0.0f and 1.0f");
         }
         this.mScore = score;
         this.mComponentName = componentName;
@@ -73,7 +81,15 @@ public final class ChooserTarget implements Parcelable {
     }
 
     public String toString() {
-        return "ChooserTarget{" + this.mComponentName + ", " + this.mIntentExtras + ", '" + ((Object) this.mTitle) + "', " + this.mScore + "}";
+        return "ChooserTarget{"
+                + this.mComponentName
+                + ", "
+                + this.mIntentExtras
+                + ", '"
+                + ((Object) this.mTitle)
+                + "', "
+                + this.mScore
+                + "}";
     }
 
     @Override // android.os.Parcelable

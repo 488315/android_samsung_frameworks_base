@@ -3,6 +3,7 @@ package com.android.server.oemlock;
 import android.hardware.oemlock.V1_0.IOemLock$Proxy;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
@@ -49,7 +50,8 @@ public final class VendorLockHidl extends OemLock {
         Boolean[] boolArr = new Boolean[1];
         Integer[] numArr = new Integer[1];
         try {
-            this.mOemLock.isOemUnlockAllowedByCarrier(new VendorLockHidl$$ExternalSyntheticLambda0(numArr, boolArr));
+            this.mOemLock.isOemUnlockAllowedByCarrier(
+                    new VendorLockHidl$$ExternalSyntheticLambda0(numArr, boolArr));
             int intValue = numArr[0].intValue();
             if (intValue == 0) {
                 return boolArr[0].booleanValue();
@@ -69,7 +71,8 @@ public final class VendorLockHidl extends OemLock {
         Boolean[] boolArr = new Boolean[1];
         Integer[] numArr = new Integer[1];
         try {
-            this.mOemLock.isOemUnlockAllowedByDevice(new VendorLockHidl$$ExternalSyntheticLambda0(numArr, boolArr));
+            this.mOemLock.isOemUnlockAllowedByDevice(
+                    new VendorLockHidl$$ExternalSyntheticLambda0(numArr, boolArr));
             int intValue = numArr[0].intValue();
             if (intValue == 0) {
                 return boolArr[0].booleanValue();
@@ -97,7 +100,8 @@ public final class VendorLockHidl extends OemLock {
                 }
                 arrayList = arrayList2;
             }
-            int oemUnlockAllowedByCarrier = this.mOemLock.setOemUnlockAllowedByCarrier(arrayList, z);
+            int oemUnlockAllowedByCarrier =
+                    this.mOemLock.setOemUnlockAllowedByCarrier(arrayList, z);
             if (oemUnlockAllowedByCarrier == 0) {
                 Slog.i("OemLock", "Updated carrier allows OEM lock state to: " + z);
                 return;
@@ -105,7 +109,8 @@ public final class VendorLockHidl extends OemLock {
             if (oemUnlockAllowedByCarrier != 1) {
                 if (oemUnlockAllowedByCarrier == 2) {
                     if (!arrayList.isEmpty()) {
-                        throw new SecurityException("Invalid signature used in attempt to carrier unlock");
+                        throw new SecurityException(
+                                "Invalid signature used in attempt to carrier unlock");
                     }
                     throw new IllegalArgumentException("Signature required for carrier unlock");
                 }
@@ -124,7 +129,9 @@ public final class VendorLockHidl extends OemLock {
             int oemUnlockAllowedByDevice = this.mOemLock.setOemUnlockAllowedByDevice(z);
             if (oemUnlockAllowedByDevice != 0) {
                 if (oemUnlockAllowedByDevice != 1) {
-                    Slog.e("OemLock", "Unknown return value indicates code is out of sync with HAL");
+                    Slog.e(
+                            "OemLock",
+                            "Unknown return value indicates code is out of sync with HAL");
                 }
                 throw new RuntimeException("Failed to set device OEM unlock state");
             }

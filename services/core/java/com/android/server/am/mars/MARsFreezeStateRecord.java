@@ -6,6 +6,7 @@ import android.os.Message;
 import android.os.UserHandle;
 import android.util.ArraySet;
 import android.util.Slog;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.am.FreecessController;
@@ -15,6 +16,7 @@ import com.android.server.am.MARsHandler;
 import com.android.server.am.MARsPackageInfo;
 import com.android.server.am.MARsPolicyManager;
 import com.android.server.input.KeyboardMetricsCollector;
+
 import java.text.SimpleDateFormat;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -149,7 +151,11 @@ public final class MARsFreezeStateRecord {
         this.mAvailableTokens = Math.min(512L, this.mAvailableTokens + j3);
         this.mTokensUpdateTime = j;
         if (MARsDebugConfig.DEBUG_FREECESS) {
-            BatteryService$$ExternalSyntheticOutline0.m(BatteryService$$ExternalSyntheticOutline0.m("newTokens:", j3, " adjusted available tokens: "), this.mAvailableTokens, "MARsFreezeStateRecord");
+            BatteryService$$ExternalSyntheticOutline0.m(
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            "newTokens:", j3, " adjusted available tokens: "),
+                    this.mAvailableTokens,
+                    "MARsFreezeStateRecord");
         }
         long j4 = this.mAvailableTokens;
         if (j4 <= 0) {
@@ -179,16 +185,22 @@ public final class MARsFreezeStateRecord {
         }
         mARsPolicyManager.addDebugInfoToHistory("Abusive", "[cancel_restrict]" + i);
         boolean z2 = FreecessController.IS_MINIMIZE_OLAF_LOCK;
-        FreecessController freecessController = FreecessController.FreecessControllerHolder.INSTANCE;
+        FreecessController freecessController =
+                FreecessController.FreecessControllerHolder.INSTANCE;
         FreecessPkgStatus freecessPkgStatus2 = this.mFreecessParent;
         freecessController.getClass();
         if (MARsDebugConfig.DEBUG_ENG) {
-            DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("removeRestrictedPackages uid: "), freecessPkgStatus2.uid, "FreecessController");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("removeRestrictedPackages uid: "),
+                    freecessPkgStatus2.uid,
+                    "FreecessController");
         }
         synchronized (MARsPolicyManager.MARsLock) {
             try {
-                if (freecessController.mRestrictedPackages.mUidMap.get(freecessPkgStatus2.uid) != null) {
-                    freecessController.mRestrictedPackages.remove(freecessPkgStatus2.uid, freecessPkgStatus2.name);
+                if (freecessController.mRestrictedPackages.mUidMap.get(freecessPkgStatus2.uid)
+                        != null) {
+                    freecessController.mRestrictedPackages.remove(
+                            freecessPkgStatus2.uid, freecessPkgStatus2.name);
                 }
             } catch (Throwable th) {
                 throw th;
@@ -202,7 +214,15 @@ public final class MARsFreezeStateRecord {
         int length = values.length;
         int i = 0;
         while (i < length) {
-            i = MARsFreezeStateRecord$$ExternalSyntheticOutline0.m("%-4d|", new Object[]{Integer.valueOf(this.mUnfreezeCounts[values[i].getTypeNum()])}, sb, i, 1);
+            i =
+                    MARsFreezeStateRecord$$ExternalSyntheticOutline0.m(
+                            "%-4d|",
+                            new Object[] {
+                                Integer.valueOf(this.mUnfreezeCounts[values[i].getTypeNum()])
+                            },
+                            sb,
+                            i,
+                            1);
         }
         return sb.toString();
     }
@@ -231,35 +251,56 @@ public final class MARsFreezeStateRecord {
         MARsPolicyManager.Lock lock = MARsPolicyManager.MARsLock;
         synchronized (lock) {
             try {
-                MARsPackageInfo mARsPackageInfo = MARsPolicyManager.getMARsPackageInfo(mARsPolicyManager.mMARsTargetPackages, str, UserHandle.getUserId(i5));
+                MARsPackageInfo mARsPackageInfo =
+                        MARsPolicyManager.getMARsPackageInfo(
+                                mARsPolicyManager.mMARsTargetPackages,
+                                str,
+                                UserHandle.getUserId(i5));
                 if (mARsPackageInfo != null) {
-                    Slog.d("MARsPolicyManager", "updateAbusiveAppFromBartender uid:" + i5 + " pkgname:" + str + " type:excessive_unfreez");
+                    Slog.d(
+                            "MARsPolicyManager",
+                            "updateAbusiveAppFromBartender uid:"
+                                    + i5
+                                    + " pkgname:"
+                                    + str
+                                    + " type:excessive_unfreez");
                     if (UnfreezeReasonType.UNFREEZE_REASON_ALARM.getTypeNum() == i2) {
                         mARsPackageInfo.optionFlag |= 8;
                     } else if (UnfreezeReasonType.UNFREEZE_REASON_PACKET.getTypeNum() == i2) {
                         mARsPackageInfo.optionFlag |= 16;
                         boolean z2 = FreecessController.IS_MINIMIZE_OLAF_LOCK;
-                        FreecessController.FreecessControllerHolder.INSTANCE.updateAbnormalAppFirewall(mARsPackageInfo.uid, false);
+                        FreecessController.FreecessControllerHolder.INSTANCE
+                                .updateAbnormalAppFirewall(mARsPackageInfo.uid, false);
                         mARsPolicyManager.closeSocketsForUid(mARsPackageInfo.uid);
                     }
-                    MARsHandler.MARsHandlerHolder.INSTANCE.sendAnomalyMsgToMainHandler(mARsPackageInfo.uid, mARsPackageInfo.name, "excessive_unfreeze");
+                    MARsHandler.MARsHandlerHolder.INSTANCE.sendAnomalyMsgToMainHandler(
+                            mARsPackageInfo.uid, mARsPackageInfo.name, "excessive_unfreeze");
                     mARsPolicyManager.addDebugInfoToHistory("Abusive", "[excessive_unfreez]" + i5);
                 }
             } finally {
             }
         }
-        if (UnfreezeReasonType.UNFREEZE_REASON_ALARM.getTypeNum() == i2 || UnfreezeReasonType.UNFREEZE_REASON_PACKET.getTypeNum() == i2) {
+        if (UnfreezeReasonType.UNFREEZE_REASON_ALARM.getTypeNum() == i2
+                || UnfreezeReasonType.UNFREEZE_REASON_PACKET.getTypeNum() == i2) {
             boolean z3 = FreecessController.IS_MINIMIZE_OLAF_LOCK;
-            FreecessController freecessController = FreecessController.FreecessControllerHolder.INSTANCE;
+            FreecessController freecessController =
+                    FreecessController.FreecessControllerHolder.INSTANCE;
             FreecessPkgStatus freecessPkgStatus2 = this.mFreecessParent;
             freecessController.getClass();
             if (MARsDebugConfig.DEBUG_ENG) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("addRestrictedPackages uid: "), freecessPkgStatus2.uid, "FreecessController");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("addRestrictedPackages uid: "),
+                        freecessPkgStatus2.uid,
+                        "FreecessController");
             }
             synchronized (lock) {
                 try {
-                    if (freecessController.mRestrictedPackages.mUidMap.get(freecessPkgStatus2.uid) == null) {
-                        freecessController.mRestrictedPackages.put(freecessPkgStatus2.name, freecessPkgStatus2.uid, freecessPkgStatus2);
+                    if (freecessController.mRestrictedPackages.mUidMap.get(freecessPkgStatus2.uid)
+                            == null) {
+                        freecessController.mRestrictedPackages.put(
+                                freecessPkgStatus2.name,
+                                freecessPkgStatus2.uid,
+                                freecessPkgStatus2);
                     }
                 } finally {
                 }
@@ -281,13 +322,19 @@ public final class MARsFreezeStateRecord {
             MARsPolicyManager.MARsPolicyManagerHolder.INSTANCE.getClass();
             if (MARsPolicyManager.isChinaPolicyEnabled()) {
                 boolean z2 = FreecessController.IS_MINIMIZE_OLAF_LOCK;
-                FreecessController freecessController = FreecessController.FreecessControllerHolder.INSTANCE;
+                FreecessController freecessController =
+                        FreecessController.FreecessControllerHolder.INSTANCE;
                 FreecessPkgStatus freecessPkgStatus = this.mFreecessParent;
                 freecessController.getClass();
-                if (FreecessController.isInFreecessExcludeList(freecessPkgStatus) || !abnormalRealtimeDetectionVer0(j)) {
+                if (FreecessController.isInFreecessExcludeList(freecessPkgStatus)
+                        || !abnormalRealtimeDetectionVer0(j)) {
                     return;
                 }
-                Slog.i("MARsFreezeStateRecord", "ver:0 catch abnormal unfreeze detection at " + new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS").format(Long.valueOf(j)));
+                Slog.i(
+                        "MARsFreezeStateRecord",
+                        "ver:0 catch abnormal unfreeze detection at "
+                                + new SimpleDateFormat("yyyy/MM/dd HH:mm:ss.SSS")
+                                        .format(Long.valueOf(j)));
                 handleAbnormalApp(j);
             }
         } catch (Exception e) {

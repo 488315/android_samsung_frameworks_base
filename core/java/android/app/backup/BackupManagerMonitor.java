@@ -6,27 +6,42 @@ import android.os.Bundle;
 @SystemApi
 /* loaded from: classes.dex */
 public class BackupManagerMonitor {
-    public static final String EXTRA_LOG_AGENT_LOGGING_RESULTS = "android.app.backup.extra.LOG_AGENT_LOGGING_RESULTS";
+    public static final String EXTRA_LOG_AGENT_LOGGING_RESULTS =
+            "android.app.backup.extra.LOG_AGENT_LOGGING_RESULTS";
     public static final String EXTRA_LOG_CANCEL_ALL = "android.app.backup.extra.LOG_CANCEL_ALL";
-    public static final String EXTRA_LOG_EVENT_CATEGORY = "android.app.backup.extra.LOG_EVENT_CATEGORY";
+    public static final String EXTRA_LOG_EVENT_CATEGORY =
+            "android.app.backup.extra.LOG_EVENT_CATEGORY";
     public static final String EXTRA_LOG_EVENT_ID = "android.app.backup.extra.LOG_EVENT_ID";
-    public static final String EXTRA_LOG_EVENT_PACKAGE_LONG_VERSION = "android.app.backup.extra.LOG_EVENT_PACKAGE_FULL_VERSION";
-    public static final String EXTRA_LOG_EVENT_PACKAGE_NAME = "android.app.backup.extra.LOG_EVENT_PACKAGE_NAME";
+    public static final String EXTRA_LOG_EVENT_PACKAGE_LONG_VERSION =
+            "android.app.backup.extra.LOG_EVENT_PACKAGE_FULL_VERSION";
+    public static final String EXTRA_LOG_EVENT_PACKAGE_NAME =
+            "android.app.backup.extra.LOG_EVENT_PACKAGE_NAME";
 
     @Deprecated
-    public static final String EXTRA_LOG_EVENT_PACKAGE_VERSION = "android.app.backup.extra.LOG_EVENT_PACKAGE_VERSION";
-    public static final String EXTRA_LOG_EXCEPTION_FULL_BACKUP = "android.app.backup.extra.LOG_EXCEPTION_FULL_BACKUP";
+    public static final String EXTRA_LOG_EVENT_PACKAGE_VERSION =
+            "android.app.backup.extra.LOG_EVENT_PACKAGE_VERSION";
+
+    public static final String EXTRA_LOG_EXCEPTION_FULL_BACKUP =
+            "android.app.backup.extra.LOG_EXCEPTION_FULL_BACKUP";
     public static final String EXTRA_LOG_ILLEGAL_KEY = "android.app.backup.extra.LOG_ILLEGAL_KEY";
-    public static final String EXTRA_LOG_MANIFEST_PACKAGE_NAME = "android.app.backup.extra.LOG_MANIFEST_PACKAGE_NAME";
+    public static final String EXTRA_LOG_MANIFEST_PACKAGE_NAME =
+            "android.app.backup.extra.LOG_MANIFEST_PACKAGE_NAME";
     public static final String EXTRA_LOG_OLD_VERSION = "android.app.backup.extra.LOG_OLD_VERSION";
     public static final String EXTRA_LOG_OPERATION_TYPE = "android.app.backup.extra.OPERATION_TYPE";
-    public static final String EXTRA_LOG_POLICY_ALLOW_APKS = "android.app.backup.extra.LOG_POLICY_ALLOW_APKS";
-    public static final String EXTRA_LOG_PREFLIGHT_ERROR = "android.app.backup.extra.LOG_PREFLIGHT_ERROR";
-    public static final String EXTRA_LOG_RESTORE_ANYWAY = "android.app.backup.extra.LOG_RESTORE_ANYWAY";
-    public static final String EXTRA_LOG_RESTORE_VERSION = "android.app.backup.extra.LOG_RESTORE_VERSION";
-    public static final String EXTRA_LOG_V_TO_U_ALLOWLIST = "android.app.backup.extra.V_TO_U_ALLOWLIST";
-    public static final String EXTRA_LOG_V_TO_U_DENYLIST = "android.app.backup.extra.V_TO_U_DENYLIST";
-    public static final String EXTRA_LOG_WIDGET_PACKAGE_NAME = "android.app.backup.extra.LOG_WIDGET_PACKAGE_NAME";
+    public static final String EXTRA_LOG_POLICY_ALLOW_APKS =
+            "android.app.backup.extra.LOG_POLICY_ALLOW_APKS";
+    public static final String EXTRA_LOG_PREFLIGHT_ERROR =
+            "android.app.backup.extra.LOG_PREFLIGHT_ERROR";
+    public static final String EXTRA_LOG_RESTORE_ANYWAY =
+            "android.app.backup.extra.LOG_RESTORE_ANYWAY";
+    public static final String EXTRA_LOG_RESTORE_VERSION =
+            "android.app.backup.extra.LOG_RESTORE_VERSION";
+    public static final String EXTRA_LOG_V_TO_U_ALLOWLIST =
+            "android.app.backup.extra.V_TO_U_ALLOWLIST";
+    public static final String EXTRA_LOG_V_TO_U_DENYLIST =
+            "android.app.backup.extra.V_TO_U_DENYLIST";
+    public static final String EXTRA_LOG_WIDGET_PACKAGE_NAME =
+            "android.app.backup.extra.LOG_WIDGET_PACKAGE_NAME";
     public static final int LOG_EVENT_CATEGORY_AGENT = 2;
     public static final int LOG_EVENT_CATEGORY_BACKUP_MANAGER_POLICY = 3;
     public static final int LOG_EVENT_CATEGORY_TRANSPORT = 1;
@@ -103,6 +118,5 @@ public class BackupManagerMonitor {
     public static final int LOG_EVENT_ID_WIDGET_METADATA_MISMATCH = 47;
     public static final int LOG_EVENT_ID_WIDGET_UNKNOWN_VERSION = 48;
 
-    public void onEvent(Bundle event) {
-    }
+    public void onEvent(Bundle event) {}
 }

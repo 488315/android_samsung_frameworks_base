@@ -1,6 +1,7 @@
 package com.android.server.backup.transport;
 
 import android.content.ComponentName;
+
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Locale;
@@ -21,7 +22,12 @@ public final class TransportStats {
     }
 
     public static void dumpStats(PrintWriter printWriter, String str, Stats stats) {
-        printWriter.println(String.format(Locale.US, "%sAverage connection time: %.2f ms", str, Double.valueOf(stats.average)));
+        printWriter.println(
+                String.format(
+                        Locale.US,
+                        "%sAverage connection time: %.2f ms",
+                        str,
+                        Double.valueOf(stats.average)));
         printWriter.println(str + "Max connection time: " + stats.max + " ms");
         printWriter.println(str + "Min connection time: " + stats.min + " ms");
         printWriter.println(str + "Number of connections: " + stats.n + " ");

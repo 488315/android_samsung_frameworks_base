@@ -20,6 +20,7 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.LocalLog;
 import android.util.Slog;
+
 import com.android.internal.util.HexDump;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.VcnManagementService;
@@ -28,10 +29,8 @@ import com.android.server.vcn.TelephonySubscriptionTracker;
 import com.android.server.vcn.VcnContext;
 import com.android.server.vcn.VcnGatewayConnection;
 import com.android.server.vcn.routeselection.IpSecPacketLossDetector.PollIpSecStateRunnable;
-import com.android.server.vcn.routeselection.NetworkMetricMonitor;
-import com.android.server.vcn.routeselection.UnderlyingNetworkEvaluator;
-import com.android.server.vcn.routeselection.UnderlyingNetworkRecord;
 import com.android.server.vcn.util.PersistableBundleUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -79,29 +78,30 @@ public final class UnderlyingNetworkController {
                 return false;
             }
             CapabilityMatchCriteria capabilityMatchCriteria = (CapabilityMatchCriteria) obj;
-            return this.capability == capabilityMatchCriteria.capability && this.matchCriteria == capabilityMatchCriteria.matchCriteria;
+            return this.capability == capabilityMatchCriteria.capability
+                    && this.matchCriteria == capabilityMatchCriteria.matchCriteria;
         }
 
         public final int hashCode() {
-            return Objects.hash(Integer.valueOf(this.capability), Integer.valueOf(this.matchCriteria));
+            return Objects.hash(
+                    Integer.valueOf(this.capability), Integer.valueOf(this.matchCriteria));
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public class Dependencies {
-    }
+    public class Dependencies {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    class NetworkBringupCallback extends ConnectivityManager.NetworkCallback {
-    }
+    class NetworkBringupCallback extends ConnectivityManager.NetworkCallback {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    class NetworkEvaluatorCallbackImpl implements UnderlyingNetworkEvaluator.NetworkEvaluatorCallback {
-        public NetworkEvaluatorCallbackImpl() {
-        }
+    class NetworkEvaluatorCallbackImpl
+            implements UnderlyingNetworkEvaluator.NetworkEvaluatorCallback {
+        public NetworkEvaluatorCallbackImpl() {}
 
         public final void onEvaluationResultChanged() {
-            UnderlyingNetworkController underlyingNetworkController = UnderlyingNetworkController.this;
+            UnderlyingNetworkController underlyingNetworkController =
+                    UnderlyingNetworkController.this;
             if (underlyingNetworkController.mVcnContext.isFlagNetworkMetricMonitorEnabled()) {
                 VcnContext vcnContext = underlyingNetworkController.mVcnContext;
                 vcnContext.getClass();
@@ -111,13 +111,13 @@ public final class UnderlyingNetworkController {
                     return;
                 }
             }
-            underlyingNetworkController.logWtf("#onEvaluationResultChanged: unexpected call; flags missing");
+            underlyingNetworkController.logWtf(
+                    "#onEvaluationResultChanged: unexpected call; flags missing");
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface UnderlyingNetworkControllerCallback {
-    }
+    public interface UnderlyingNetworkControllerCallback {}
 
     /* JADX INFO: Access modifiers changed from: package-private */
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -128,63 +128,115 @@ public final class UnderlyingNetworkController {
 
         @Override // android.net.ConnectivityManager.NetworkCallback
         public final void onAvailable(Network network) {
-            UnderlyingNetworkController underlyingNetworkController = UnderlyingNetworkController.this;
+            UnderlyingNetworkController underlyingNetworkController =
+                    UnderlyingNetworkController.this;
             Map map = underlyingNetworkController.mUnderlyingNetworkRecords;
             Dependencies dependencies = underlyingNetworkController.mDeps;
             VcnContext vcnContext = underlyingNetworkController.mVcnContext;
-            List<VcnUnderlyingNetworkTemplate> vcnUnderlyingNetworkPriorities = underlyingNetworkController.mConnectionConfig.getVcnUnderlyingNetworkPriorities();
-            UnderlyingNetworkController underlyingNetworkController2 = UnderlyingNetworkController.this;
+            List<VcnUnderlyingNetworkTemplate> vcnUnderlyingNetworkPriorities =
+                    underlyingNetworkController.mConnectionConfig
+                            .getVcnUnderlyingNetworkPriorities();
+            UnderlyingNetworkController underlyingNetworkController2 =
+                    UnderlyingNetworkController.this;
             ParcelUuid parcelUuid = underlyingNetworkController2.mSubscriptionGroup;
-            TelephonySubscriptionTracker.TelephonySubscriptionSnapshot telephonySubscriptionSnapshot = underlyingNetworkController2.mLastSnapshot;
-            PersistableBundleUtils.PersistableBundleWrapper persistableBundleWrapper = underlyingNetworkController2.mCarrierConfig;
-            NetworkEvaluatorCallbackImpl networkEvaluatorCallbackImpl = underlyingNetworkController2.new NetworkEvaluatorCallbackImpl();
+            TelephonySubscriptionTracker.TelephonySubscriptionSnapshot
+                    telephonySubscriptionSnapshot = underlyingNetworkController2.mLastSnapshot;
+            PersistableBundleUtils.PersistableBundleWrapper persistableBundleWrapper =
+                    underlyingNetworkController2.mCarrierConfig;
+            NetworkEvaluatorCallbackImpl networkEvaluatorCallbackImpl =
+                    underlyingNetworkController2.new NetworkEvaluatorCallbackImpl();
             dependencies.getClass();
-            ((ArrayMap) map).put(network, new UnderlyingNetworkEvaluator(vcnContext, network, vcnUnderlyingNetworkPriorities, parcelUuid, telephonySubscriptionSnapshot, persistableBundleWrapper, networkEvaluatorCallbackImpl, new UnderlyingNetworkEvaluator.Dependencies()));
+            ((ArrayMap) map)
+                    .put(
+                            network,
+                            new UnderlyingNetworkEvaluator(
+                                    vcnContext,
+                                    network,
+                                    vcnUnderlyingNetworkPriorities,
+                                    parcelUuid,
+                                    telephonySubscriptionSnapshot,
+                                    persistableBundleWrapper,
+                                    networkEvaluatorCallbackImpl,
+                                    new UnderlyingNetworkEvaluator.Dependencies()));
         }
 
         @Override // android.net.ConnectivityManager.NetworkCallback
         public final void onBlockedStatusChanged(Network network, boolean z) {
-            UnderlyingNetworkEvaluator underlyingNetworkEvaluator = (UnderlyingNetworkEvaluator) ((ArrayMap) UnderlyingNetworkController.this.mUnderlyingNetworkRecords).get(network);
+            UnderlyingNetworkEvaluator underlyingNetworkEvaluator =
+                    (UnderlyingNetworkEvaluator)
+                            ((ArrayMap) UnderlyingNetworkController.this.mUnderlyingNetworkRecords)
+                                    .get(network);
             if (underlyingNetworkEvaluator == null) {
-                UnderlyingNetworkController.this.logWtf("Got blocked status change for unknown key: " + network);
+                UnderlyingNetworkController.this.logWtf(
+                        "Got blocked status change for unknown key: " + network);
                 return;
             }
-            List<VcnUnderlyingNetworkTemplate> vcnUnderlyingNetworkPriorities = UnderlyingNetworkController.this.mConnectionConfig.getVcnUnderlyingNetworkPriorities();
-            UnderlyingNetworkController underlyingNetworkController = UnderlyingNetworkController.this;
+            List<VcnUnderlyingNetworkTemplate> vcnUnderlyingNetworkPriorities =
+                    UnderlyingNetworkController.this.mConnectionConfig
+                            .getVcnUnderlyingNetworkPriorities();
+            UnderlyingNetworkController underlyingNetworkController =
+                    UnderlyingNetworkController.this;
             ParcelUuid parcelUuid = underlyingNetworkController.mSubscriptionGroup;
-            TelephonySubscriptionTracker.TelephonySubscriptionSnapshot telephonySubscriptionSnapshot = underlyingNetworkController.mLastSnapshot;
-            PersistableBundleUtils.PersistableBundleWrapper persistableBundleWrapper = underlyingNetworkController.mCarrierConfig;
-            UnderlyingNetworkRecord.Builder builder = underlyingNetworkEvaluator.mNetworkRecordBuilder;
+            TelephonySubscriptionTracker.TelephonySubscriptionSnapshot
+                    telephonySubscriptionSnapshot = underlyingNetworkController.mLastSnapshot;
+            PersistableBundleUtils.PersistableBundleWrapper persistableBundleWrapper =
+                    underlyingNetworkController.mCarrierConfig;
+            UnderlyingNetworkRecord.Builder builder =
+                    underlyingNetworkEvaluator.mNetworkRecordBuilder;
             builder.mIsBlocked = z;
             builder.mWasIsBlockedSet = true;
-            underlyingNetworkEvaluator.updatePriorityClass(vcnUnderlyingNetworkPriorities, parcelUuid, telephonySubscriptionSnapshot, persistableBundleWrapper);
+            underlyingNetworkEvaluator.updatePriorityClass(
+                    vcnUnderlyingNetworkPriorities,
+                    parcelUuid,
+                    telephonySubscriptionSnapshot,
+                    persistableBundleWrapper);
             if (builder.isValid()) {
                 UnderlyingNetworkController.this.reevaluateNetworks();
             }
         }
 
         @Override // android.net.ConnectivityManager.NetworkCallback
-        public final void onCapabilitiesChanged(Network network, NetworkCapabilities networkCapabilities) {
-            UnderlyingNetworkEvaluator underlyingNetworkEvaluator = (UnderlyingNetworkEvaluator) ((ArrayMap) UnderlyingNetworkController.this.mUnderlyingNetworkRecords).get(network);
+        public final void onCapabilitiesChanged(
+                Network network, NetworkCapabilities networkCapabilities) {
+            UnderlyingNetworkEvaluator underlyingNetworkEvaluator =
+                    (UnderlyingNetworkEvaluator)
+                            ((ArrayMap) UnderlyingNetworkController.this.mUnderlyingNetworkRecords)
+                                    .get(network);
             if (underlyingNetworkEvaluator == null) {
-                UnderlyingNetworkController.this.logWtf("Got capabilities change for unknown key: " + network);
+                UnderlyingNetworkController.this.logWtf(
+                        "Got capabilities change for unknown key: " + network);
                 return;
             }
-            List<VcnUnderlyingNetworkTemplate> vcnUnderlyingNetworkPriorities = UnderlyingNetworkController.this.mConnectionConfig.getVcnUnderlyingNetworkPriorities();
-            UnderlyingNetworkController underlyingNetworkController = UnderlyingNetworkController.this;
+            List<VcnUnderlyingNetworkTemplate> vcnUnderlyingNetworkPriorities =
+                    UnderlyingNetworkController.this.mConnectionConfig
+                            .getVcnUnderlyingNetworkPriorities();
+            UnderlyingNetworkController underlyingNetworkController =
+                    UnderlyingNetworkController.this;
             ParcelUuid parcelUuid = underlyingNetworkController.mSubscriptionGroup;
-            TelephonySubscriptionTracker.TelephonySubscriptionSnapshot telephonySubscriptionSnapshot = underlyingNetworkController.mLastSnapshot;
-            PersistableBundleUtils.PersistableBundleWrapper persistableBundleWrapper = underlyingNetworkController.mCarrierConfig;
-            UnderlyingNetworkRecord.Builder builder = underlyingNetworkEvaluator.mNetworkRecordBuilder;
+            TelephonySubscriptionTracker.TelephonySubscriptionSnapshot
+                    telephonySubscriptionSnapshot = underlyingNetworkController.mLastSnapshot;
+            PersistableBundleUtils.PersistableBundleWrapper persistableBundleWrapper =
+                    underlyingNetworkController.mCarrierConfig;
+            UnderlyingNetworkRecord.Builder builder =
+                    underlyingNetworkEvaluator.mNetworkRecordBuilder;
             builder.mNetworkCapabilities = networkCapabilities;
-            underlyingNetworkEvaluator.updatePriorityClass(vcnUnderlyingNetworkPriorities, parcelUuid, telephonySubscriptionSnapshot, persistableBundleWrapper);
+            underlyingNetworkEvaluator.updatePriorityClass(
+                    vcnUnderlyingNetworkPriorities,
+                    parcelUuid,
+                    telephonySubscriptionSnapshot,
+                    persistableBundleWrapper);
             if (Flags.evaluateIpsecLossOnLpNcChange()) {
                 Iterator it = ((ArrayList) underlyingNetworkEvaluator.mMetricMonitors).iterator();
                 while (it.hasNext()) {
-                    IpSecPacketLossDetector ipSecPacketLossDetector = (IpSecPacketLossDetector) ((NetworkMetricMonitor) it.next());
+                    IpSecPacketLossDetector ipSecPacketLossDetector =
+                            (IpSecPacketLossDetector) ((NetworkMetricMonitor) it.next());
                     if (ipSecPacketLossDetector.mIsStarted) {
-                        ipSecPacketLossDetector.mHandler.removeCallbacksAndEqualMessages(ipSecPacketLossDetector.mCancellationToken);
-                        ipSecPacketLossDetector.mHandler.postDelayed(ipSecPacketLossDetector.new PollIpSecStateRunnable(), ipSecPacketLossDetector.mCancellationToken, 0L);
+                        ipSecPacketLossDetector.mHandler.removeCallbacksAndEqualMessages(
+                                ipSecPacketLossDetector.mCancellationToken);
+                        ipSecPacketLossDetector.mHandler.postDelayed(
+                                ipSecPacketLossDetector.new PollIpSecStateRunnable(),
+                                ipSecPacketLossDetector.mCancellationToken,
+                                0L);
                     }
                 }
             }
@@ -195,26 +247,45 @@ public final class UnderlyingNetworkController {
 
         @Override // android.net.ConnectivityManager.NetworkCallback
         public final void onLinkPropertiesChanged(Network network, LinkProperties linkProperties) {
-            UnderlyingNetworkEvaluator underlyingNetworkEvaluator = (UnderlyingNetworkEvaluator) ((ArrayMap) UnderlyingNetworkController.this.mUnderlyingNetworkRecords).get(network);
+            UnderlyingNetworkEvaluator underlyingNetworkEvaluator =
+                    (UnderlyingNetworkEvaluator)
+                            ((ArrayMap) UnderlyingNetworkController.this.mUnderlyingNetworkRecords)
+                                    .get(network);
             if (underlyingNetworkEvaluator == null) {
-                UnderlyingNetworkController.this.logWtf("Got link properties change for unknown key: " + network);
+                UnderlyingNetworkController.this.logWtf(
+                        "Got link properties change for unknown key: " + network);
                 return;
             }
-            List<VcnUnderlyingNetworkTemplate> vcnUnderlyingNetworkPriorities = UnderlyingNetworkController.this.mConnectionConfig.getVcnUnderlyingNetworkPriorities();
-            UnderlyingNetworkController underlyingNetworkController = UnderlyingNetworkController.this;
+            List<VcnUnderlyingNetworkTemplate> vcnUnderlyingNetworkPriorities =
+                    UnderlyingNetworkController.this.mConnectionConfig
+                            .getVcnUnderlyingNetworkPriorities();
+            UnderlyingNetworkController underlyingNetworkController =
+                    UnderlyingNetworkController.this;
             ParcelUuid parcelUuid = underlyingNetworkController.mSubscriptionGroup;
-            TelephonySubscriptionTracker.TelephonySubscriptionSnapshot telephonySubscriptionSnapshot = underlyingNetworkController.mLastSnapshot;
-            PersistableBundleUtils.PersistableBundleWrapper persistableBundleWrapper = underlyingNetworkController.mCarrierConfig;
-            UnderlyingNetworkRecord.Builder builder = underlyingNetworkEvaluator.mNetworkRecordBuilder;
+            TelephonySubscriptionTracker.TelephonySubscriptionSnapshot
+                    telephonySubscriptionSnapshot = underlyingNetworkController.mLastSnapshot;
+            PersistableBundleUtils.PersistableBundleWrapper persistableBundleWrapper =
+                    underlyingNetworkController.mCarrierConfig;
+            UnderlyingNetworkRecord.Builder builder =
+                    underlyingNetworkEvaluator.mNetworkRecordBuilder;
             builder.mLinkProperties = linkProperties;
-            underlyingNetworkEvaluator.updatePriorityClass(vcnUnderlyingNetworkPriorities, parcelUuid, telephonySubscriptionSnapshot, persistableBundleWrapper);
+            underlyingNetworkEvaluator.updatePriorityClass(
+                    vcnUnderlyingNetworkPriorities,
+                    parcelUuid,
+                    telephonySubscriptionSnapshot,
+                    persistableBundleWrapper);
             if (Flags.evaluateIpsecLossOnLpNcChange()) {
                 Iterator it = ((ArrayList) underlyingNetworkEvaluator.mMetricMonitors).iterator();
                 while (it.hasNext()) {
-                    IpSecPacketLossDetector ipSecPacketLossDetector = (IpSecPacketLossDetector) ((NetworkMetricMonitor) it.next());
+                    IpSecPacketLossDetector ipSecPacketLossDetector =
+                            (IpSecPacketLossDetector) ((NetworkMetricMonitor) it.next());
                     if (ipSecPacketLossDetector.mIsStarted) {
-                        ipSecPacketLossDetector.mHandler.removeCallbacksAndEqualMessages(ipSecPacketLossDetector.mCancellationToken);
-                        ipSecPacketLossDetector.mHandler.postDelayed(ipSecPacketLossDetector.new PollIpSecStateRunnable(), ipSecPacketLossDetector.mCancellationToken, 0L);
+                        ipSecPacketLossDetector.mHandler.removeCallbacksAndEqualMessages(
+                                ipSecPacketLossDetector.mCancellationToken);
+                        ipSecPacketLossDetector.mHandler.postDelayed(
+                                ipSecPacketLossDetector.new PollIpSecStateRunnable(),
+                                ipSecPacketLossDetector.mCancellationToken,
+                                0L);
                     }
                 }
             }
@@ -228,7 +299,12 @@ public final class UnderlyingNetworkController {
             if (UnderlyingNetworkController.this.mVcnContext.isFlagNetworkMetricMonitorEnabled()) {
                 UnderlyingNetworkController.this.mVcnContext.getClass();
                 if (VcnContext.isFlagIpSecTransformStateEnabled()) {
-                    ((UnderlyingNetworkEvaluator) ((ArrayMap) UnderlyingNetworkController.this.mUnderlyingNetworkRecords).get(network)).close();
+                    ((UnderlyingNetworkEvaluator)
+                                    ((ArrayMap)
+                                                    UnderlyingNetworkController.this
+                                                            .mUnderlyingNetworkRecords)
+                                            .get(network))
+                            .close();
                 }
             }
             ((ArrayMap) UnderlyingNetworkController.this.mUnderlyingNetworkRecords).remove(network);
@@ -237,9 +313,9 @@ public final class UnderlyingNetworkController {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class VcnActiveDataSubscriptionIdListener extends TelephonyCallback implements TelephonyCallback.ActiveDataSubscriptionIdListener {
-        public VcnActiveDataSubscriptionIdListener() {
-        }
+    public final class VcnActiveDataSubscriptionIdListener extends TelephonyCallback
+            implements TelephonyCallback.ActiveDataSubscriptionIdListener {
+        public VcnActiveDataSubscriptionIdListener() {}
 
         @Override // android.telephony.TelephonyCallback.ActiveDataSubscriptionIdListener
         public final void onActiveDataSubscriptionIdChanged(int i) {
@@ -247,8 +323,16 @@ public final class UnderlyingNetworkController {
         }
     }
 
-    public UnderlyingNetworkController(VcnContext vcnContext, VcnGatewayConnectionConfig vcnGatewayConnectionConfig, ParcelUuid parcelUuid, TelephonySubscriptionTracker.TelephonySubscriptionSnapshot telephonySubscriptionSnapshot, UnderlyingNetworkControllerCallback underlyingNetworkControllerCallback, Dependencies dependencies) {
-        VcnActiveDataSubscriptionIdListener vcnActiveDataSubscriptionIdListener = new VcnActiveDataSubscriptionIdListener();
+    public UnderlyingNetworkController(
+            VcnContext vcnContext,
+            VcnGatewayConnectionConfig vcnGatewayConnectionConfig,
+            ParcelUuid parcelUuid,
+            TelephonySubscriptionTracker.TelephonySubscriptionSnapshot
+                    telephonySubscriptionSnapshot,
+            UnderlyingNetworkControllerCallback underlyingNetworkControllerCallback,
+            Dependencies dependencies) {
+        VcnActiveDataSubscriptionIdListener vcnActiveDataSubscriptionIdListener =
+                new VcnActiveDataSubscriptionIdListener();
         this.mActiveDataSubIdListener = vcnActiveDataSubscriptionIdListener;
         this.mUnderlyingNetworkRecords = new ArrayMap();
         this.mCellBringupCallbacks = new ArrayList();
@@ -267,18 +351,29 @@ public final class UnderlyingNetworkController {
         this.mDeps = dependencies;
         Handler handler = new Handler(vcnContext.mLooper);
         this.mHandler = handler;
-        this.mConnectivityManager = (ConnectivityManager) vcnContext.mContext.getSystemService(ConnectivityManager.class);
-        ((TelephonyManager) vcnContext.mContext.getSystemService(TelephonyManager.class)).registerTelephonyCallback(new HandlerExecutor(handler), vcnActiveDataSubscriptionIdListener);
+        this.mConnectivityManager =
+                (ConnectivityManager)
+                        vcnContext.mContext.getSystemService(ConnectivityManager.class);
+        ((TelephonyManager) vcnContext.mContext.getSystemService(TelephonyManager.class))
+                .registerTelephonyCallback(
+                        new HandlerExecutor(handler), vcnActiveDataSubscriptionIdListener);
         this.mCarrierConfig = this.mLastSnapshot.getCarrierConfigForSubGrp(parcelUuid);
         registerOrUpdateNetworkRequests();
     }
 
     public static NetworkRequest.Builder getBaseNetworkRequestBuilder() {
-        return new NetworkRequest.Builder().removeCapability(14).removeCapability(13).removeCapability(28);
+        return new NetworkRequest.Builder()
+                .removeCapability(14)
+                .removeCapability(13)
+                .removeCapability(28);
     }
 
     public final NetworkRequest.Builder getBaseWifiNetworkRequestBuilder() {
-        return getBaseNetworkRequestBuilder().addTransportType(1).addCapability(12).setSubscriptionIds(this.mLastSnapshot.getAllSubIdsInGroup(this.mSubscriptionGroup));
+        return getBaseNetworkRequestBuilder()
+                .addTransportType(1)
+                .addCapability(12)
+                .setSubscriptionIds(
+                        this.mLastSnapshot.getAllSubIdsInGroup(this.mSubscriptionGroup));
     }
 
     public final String getLogPrefix() {
@@ -295,33 +390,42 @@ public final class UnderlyingNetworkController {
 
     public final TreeSet getSortedUnderlyingNetworks() {
         final VcnContext vcnContext = this.mVcnContext;
-        TreeSet treeSet = new TreeSet(new Comparator() { // from class: com.android.server.vcn.routeselection.UnderlyingNetworkEvaluator$$ExternalSyntheticLambda0
-            @Override // java.util.Comparator
-            public final int compare(Object obj, Object obj2) {
-                boolean z;
-                VcnContext vcnContext2 = VcnContext.this;
-                UnderlyingNetworkEvaluator underlyingNetworkEvaluator = (UnderlyingNetworkEvaluator) obj;
-                UnderlyingNetworkEvaluator underlyingNetworkEvaluator2 = (UnderlyingNetworkEvaluator) obj2;
-                vcnContext2.getClass();
-                if (!(VcnContext.isFlagIpSecTransformStateEnabled() && vcnContext2.isFlagNetworkMetricMonitorEnabled()) || (z = underlyingNetworkEvaluator.mIsPenalized) == underlyingNetworkEvaluator2.mIsPenalized) {
-                    int i = underlyingNetworkEvaluator.mPriorityClass;
-                    int i2 = underlyingNetworkEvaluator2.mPriorityClass;
-                    if (i == i2) {
-                        if (!underlyingNetworkEvaluator.mIsSelected) {
-                            if (underlyingNetworkEvaluator2.mIsSelected) {
-                                return 1;
+        TreeSet treeSet =
+                new TreeSet(
+                        new Comparator() { // from class:
+                                           // com.android.server.vcn.routeselection.UnderlyingNetworkEvaluator$$ExternalSyntheticLambda0
+                            @Override // java.util.Comparator
+                            public final int compare(Object obj, Object obj2) {
+                                boolean z;
+                                VcnContext vcnContext2 = VcnContext.this;
+                                UnderlyingNetworkEvaluator underlyingNetworkEvaluator =
+                                        (UnderlyingNetworkEvaluator) obj;
+                                UnderlyingNetworkEvaluator underlyingNetworkEvaluator2 =
+                                        (UnderlyingNetworkEvaluator) obj2;
+                                vcnContext2.getClass();
+                                if (!(VcnContext.isFlagIpSecTransformStateEnabled()
+                                                && vcnContext2.isFlagNetworkMetricMonitorEnabled())
+                                        || (z = underlyingNetworkEvaluator.mIsPenalized)
+                                                == underlyingNetworkEvaluator2.mIsPenalized) {
+                                    int i = underlyingNetworkEvaluator.mPriorityClass;
+                                    int i2 = underlyingNetworkEvaluator2.mPriorityClass;
+                                    if (i == i2) {
+                                        if (!underlyingNetworkEvaluator.mIsSelected) {
+                                            if (underlyingNetworkEvaluator2.mIsSelected) {
+                                                return 1;
+                                            }
+                                        }
+                                    }
+                                    return Integer.compare(i, i2);
+                                }
+                                if (z) {
+                                    return 1;
+                                }
+                                return -1;
                             }
-                        }
-                    }
-                    return Integer.compare(i, i2);
-                }
-                if (z) {
-                    return 1;
-                }
-                return -1;
-            }
-        });
-        for (UnderlyingNetworkEvaluator underlyingNetworkEvaluator : ((ArrayMap) this.mUnderlyingNetworkRecords).values()) {
+                        });
+        for (UnderlyingNetworkEvaluator underlyingNetworkEvaluator :
+                ((ArrayMap) this.mUnderlyingNetworkRecords).values()) {
             if (underlyingNetworkEvaluator.mPriorityClass != -1) {
                 treeSet.add(underlyingNetworkEvaluator);
             }
@@ -343,15 +447,22 @@ public final class UnderlyingNetworkController {
             return;
         }
         TreeSet sortedUnderlyingNetworks = getSortedUnderlyingNetworks();
-        UnderlyingNetworkEvaluator underlyingNetworkEvaluator = sortedUnderlyingNetworks.isEmpty() ? null : (UnderlyingNetworkEvaluator) sortedUnderlyingNetworks.first();
-        UnderlyingNetworkRecord build = underlyingNetworkEvaluator == null ? null : underlyingNetworkEvaluator.mNetworkRecordBuilder.build();
+        UnderlyingNetworkEvaluator underlyingNetworkEvaluator =
+                sortedUnderlyingNetworks.isEmpty()
+                        ? null
+                        : (UnderlyingNetworkEvaluator) sortedUnderlyingNetworks.first();
+        UnderlyingNetworkRecord build =
+                underlyingNetworkEvaluator == null
+                        ? null
+                        : underlyingNetworkEvaluator.mNetworkRecordBuilder.build();
         if (Objects.equals(this.mCurrentRecord, build)) {
             return;
         }
         Iterator it = sortedUnderlyingNetworks.iterator();
         String str = "";
         while (it.hasNext()) {
-            UnderlyingNetworkEvaluator underlyingNetworkEvaluator2 = (UnderlyingNetworkEvaluator) it.next();
+            UnderlyingNetworkEvaluator underlyingNetworkEvaluator2 =
+                    (UnderlyingNetworkEvaluator) it.next();
             if (!str.isEmpty()) {
                 str = str.concat(", ");
             }
@@ -362,7 +473,9 @@ public final class UnderlyingNetworkController {
             str = m.toString();
         }
         UnderlyingNetworkRecord underlyingNetworkRecord = this.mCurrentRecord;
-        if (!Objects.equals(underlyingNetworkRecord == null ? null : underlyingNetworkRecord.network, build == null ? null : build.network)) {
+        if (!Objects.equals(
+                underlyingNetworkRecord == null ? null : underlyingNetworkRecord.network,
+                build == null ? null : build.network)) {
             StringBuilder sb = new StringBuilder("Selected network changed to ");
             sb.append(build == null ? null : build.network);
             sb.append(", selected from list: ");
@@ -376,26 +489,37 @@ public final class UnderlyingNetworkController {
             localLog.log(sb3.toString());
         }
         this.mCurrentRecord = build;
-        ((VcnGatewayConnection.VcnUnderlyingNetworkControllerCallback) this.mCb).onSelectedUnderlyingNetworkChanged(build);
-        for (UnderlyingNetworkEvaluator underlyingNetworkEvaluator3 : ((ArrayMap) this.mUnderlyingNetworkRecords).values()) {
+        ((VcnGatewayConnection.VcnUnderlyingNetworkControllerCallback) this.mCb)
+                .onSelectedUnderlyingNetworkChanged(build);
+        for (UnderlyingNetworkEvaluator underlyingNetworkEvaluator3 :
+                ((ArrayMap) this.mUnderlyingNetworkRecords).values()) {
             boolean z = underlyingNetworkEvaluator == underlyingNetworkEvaluator3;
-            List<VcnUnderlyingNetworkTemplate> vcnUnderlyingNetworkPriorities = this.mConnectionConfig.getVcnUnderlyingNetworkPriorities();
+            List<VcnUnderlyingNetworkTemplate> vcnUnderlyingNetworkPriorities =
+                    this.mConnectionConfig.getVcnUnderlyingNetworkPriorities();
             ParcelUuid parcelUuid = this.mSubscriptionGroup;
-            TelephonySubscriptionTracker.TelephonySubscriptionSnapshot telephonySubscriptionSnapshot = this.mLastSnapshot;
-            PersistableBundleUtils.PersistableBundleWrapper persistableBundleWrapper = this.mCarrierConfig;
+            TelephonySubscriptionTracker.TelephonySubscriptionSnapshot
+                    telephonySubscriptionSnapshot = this.mLastSnapshot;
+            PersistableBundleUtils.PersistableBundleWrapper persistableBundleWrapper =
+                    this.mCarrierConfig;
             underlyingNetworkEvaluator3.mIsSelected = z;
-            underlyingNetworkEvaluator3.updatePriorityClass(vcnUnderlyingNetworkPriorities, parcelUuid, telephonySubscriptionSnapshot, persistableBundleWrapper);
+            underlyingNetworkEvaluator3.updatePriorityClass(
+                    vcnUnderlyingNetworkPriorities,
+                    parcelUuid,
+                    telephonySubscriptionSnapshot,
+                    persistableBundleWrapper);
             Iterator it2 = ((ArrayList) underlyingNetworkEvaluator3.mMetricMonitors).iterator();
             while (it2.hasNext()) {
                 NetworkMetricMonitor networkMetricMonitor = (NetworkMetricMonitor) it2.next();
                 if (networkMetricMonitor.mIsSelectedUnderlyingNetwork != z) {
                     networkMetricMonitor.mIsSelectedUnderlyingNetwork = z;
-                    IpSecPacketLossDetector ipSecPacketLossDetector = (IpSecPacketLossDetector) networkMetricMonitor;
+                    IpSecPacketLossDetector ipSecPacketLossDetector =
+                            (IpSecPacketLossDetector) networkMetricMonitor;
                     if (!ipSecPacketLossDetector.mIsSelectedUnderlyingNetwork) {
                         ipSecPacketLossDetector.mInboundTransform = null;
                         ipSecPacketLossDetector.mIsValidationFailed = false;
                         ipSecPacketLossDetector.mIsStarted = false;
-                        ipSecPacketLossDetector.mHandler.removeCallbacksAndEqualMessages(ipSecPacketLossDetector.mCancellationToken);
+                        ipSecPacketLossDetector.mHandler.removeCallbacksAndEqualMessages(
+                                ipSecPacketLossDetector.mCancellationToken);
                         ipSecPacketLossDetector.mLastIpSecTransformState = null;
                     }
                 }
@@ -411,7 +535,8 @@ public final class UnderlyingNetworkController {
         ArrayList arrayList = new ArrayList(this.mCellBringupCallbacks);
         ((ArrayList) this.mCellBringupCallbacks).clear();
         VcnContext vcnContext = this.mVcnContext;
-        if (vcnContext.isFlagNetworkMetricMonitorEnabled() && VcnContext.isFlagIpSecTransformStateEnabled()) {
+        if (vcnContext.isFlagNetworkMetricMonitorEnabled()
+                && VcnContext.isFlagIpSecTransformStateEnabled()) {
             Iterator it = ((ArrayMap) this.mUnderlyingNetworkRecords).values().iterator();
             while (it.hasNext()) {
                 ((UnderlyingNetworkEvaluator) it.next()).close();
@@ -426,31 +551,77 @@ public final class UnderlyingNetworkController {
         } else {
             this.mRouteSelectionCallback = new UnderlyingNetworkListener();
             ConnectivityManager connectivityManager = this.mConnectivityManager;
-            NetworkRequest build = vcnContext.mIsInTestMode ? new NetworkRequest.Builder().clearCapabilities().addTransportType(7).setSubscriptionIds(this.mLastSnapshot.getAllSubIdsInGroup(this.mSubscriptionGroup)).build() : getBaseNetworkRequestBuilder().addCapability(16).addCapability(21).setSubscriptionIds(this.mLastSnapshot.getAllSubIdsInGroup(this.mSubscriptionGroup)).build();
+            NetworkRequest build =
+                    vcnContext.mIsInTestMode
+                            ? new NetworkRequest.Builder()
+                                    .clearCapabilities()
+                                    .addTransportType(7)
+                                    .setSubscriptionIds(
+                                            this.mLastSnapshot.getAllSubIdsInGroup(
+                                                    this.mSubscriptionGroup))
+                                    .build()
+                            : getBaseNetworkRequestBuilder()
+                                    .addCapability(16)
+                                    .addCapability(21)
+                                    .setSubscriptionIds(
+                                            this.mLastSnapshot.getAllSubIdsInGroup(
+                                                    this.mSubscriptionGroup))
+                                    .build();
             UnderlyingNetworkListener underlyingNetworkListener2 = this.mRouteSelectionCallback;
             Handler handler = this.mHandler;
             connectivityManager.registerNetworkCallback(build, underlyingNetworkListener2, handler);
             this.mWifiEntryRssiThresholdCallback = new NetworkBringupCallback();
             ConnectivityManager connectivityManager2 = this.mConnectivityManager;
-            NetworkRequest.Builder baseWifiNetworkRequestBuilder = getBaseWifiNetworkRequestBuilder();
-            PersistableBundleUtils.PersistableBundleWrapper persistableBundleWrapper = this.mCarrierConfig;
-            connectivityManager2.registerNetworkCallback(baseWifiNetworkRequestBuilder.setSignalStrength(persistableBundleWrapper != null ? persistableBundleWrapper.mBundle.getInt("vcn_network_selection_wifi_entry_rssi_threshold", -70) : -70).build(), this.mWifiEntryRssiThresholdCallback, handler);
+            NetworkRequest.Builder baseWifiNetworkRequestBuilder =
+                    getBaseWifiNetworkRequestBuilder();
+            PersistableBundleUtils.PersistableBundleWrapper persistableBundleWrapper =
+                    this.mCarrierConfig;
+            connectivityManager2.registerNetworkCallback(
+                    baseWifiNetworkRequestBuilder
+                            .setSignalStrength(
+                                    persistableBundleWrapper != null
+                                            ? persistableBundleWrapper.mBundle.getInt(
+                                                    "vcn_network_selection_wifi_entry_rssi_threshold",
+                                                    -70)
+                                            : -70)
+                            .build(),
+                    this.mWifiEntryRssiThresholdCallback,
+                    handler);
             this.mWifiExitRssiThresholdCallback = new NetworkBringupCallback();
             ConnectivityManager connectivityManager3 = this.mConnectivityManager;
-            NetworkRequest.Builder baseWifiNetworkRequestBuilder2 = getBaseWifiNetworkRequestBuilder();
-            PersistableBundleUtils.PersistableBundleWrapper persistableBundleWrapper2 = this.mCarrierConfig;
-            connectivityManager3.registerNetworkCallback(baseWifiNetworkRequestBuilder2.setSignalStrength(persistableBundleWrapper2 != null ? persistableBundleWrapper2.mBundle.getInt("vcn_network_selection_wifi_exit_rssi_threshold", -74) : -74).build(), this.mWifiExitRssiThresholdCallback, handler);
+            NetworkRequest.Builder baseWifiNetworkRequestBuilder2 =
+                    getBaseWifiNetworkRequestBuilder();
+            PersistableBundleUtils.PersistableBundleWrapper persistableBundleWrapper2 =
+                    this.mCarrierConfig;
+            connectivityManager3.registerNetworkCallback(
+                    baseWifiNetworkRequestBuilder2
+                            .setSignalStrength(
+                                    persistableBundleWrapper2 != null
+                                            ? persistableBundleWrapper2.mBundle.getInt(
+                                                    "vcn_network_selection_wifi_exit_rssi_threshold",
+                                                    -74)
+                                            : -74)
+                            .build(),
+                    this.mWifiExitRssiThresholdCallback,
+                    handler);
             this.mWifiBringupCallback = new NetworkBringupCallback();
-            this.mConnectivityManager.requestBackgroundNetwork(getBaseWifiNetworkRequestBuilder().build(), this.mWifiBringupCallback, handler);
-            Iterator it2 = ((ArraySet) this.mLastSnapshot.getAllSubIdsInGroup(this.mSubscriptionGroup)).iterator();
+            this.mConnectivityManager.requestBackgroundNetwork(
+                    getBaseWifiNetworkRequestBuilder().build(), this.mWifiBringupCallback, handler);
+            Iterator it2 =
+                    ((ArraySet) this.mLastSnapshot.getAllSubIdsInGroup(this.mSubscriptionGroup))
+                            .iterator();
             while (it2.hasNext()) {
                 int intValue = ((Integer) it2.next()).intValue();
                 VcnGatewayConnectionConfig vcnGatewayConnectionConfig = this.mConnectionConfig;
                 ArraySet arraySet = new ArraySet();
-                for (VcnUnderlyingNetworkTemplate vcnUnderlyingNetworkTemplate : vcnGatewayConnectionConfig.getVcnUnderlyingNetworkPriorities()) {
+                for (VcnUnderlyingNetworkTemplate vcnUnderlyingNetworkTemplate :
+                        vcnGatewayConnectionConfig.getVcnUnderlyingNetworkPriorities()) {
                     if (vcnUnderlyingNetworkTemplate instanceof VcnCellUnderlyingNetworkTemplate) {
                         ArraySet arraySet2 = new ArraySet();
-                        for (Map.Entry entry : ((VcnCellUnderlyingNetworkTemplate) vcnUnderlyingNetworkTemplate).getCapabilitiesMatchCriteria().entrySet()) {
+                        for (Map.Entry entry :
+                                ((VcnCellUnderlyingNetworkTemplate) vcnUnderlyingNetworkTemplate)
+                                        .getCapabilitiesMatchCriteria()
+                                        .entrySet()) {
                             int intValue2 = ((Integer) entry.getKey()).intValue();
                             int intValue3 = ((Integer) entry.getValue()).intValue();
                             if (intValue3 != 0) {
@@ -468,7 +639,10 @@ public final class UnderlyingNetworkController {
                     NetworkBringupCallback networkBringupCallback = new NetworkBringupCallback();
                     ((ArrayList) this.mCellBringupCallbacks).add(networkBringupCallback);
                     ConnectivityManager connectivityManager4 = this.mConnectivityManager;
-                    NetworkRequest.Builder networkSpecifier = getBaseNetworkRequestBuilder().addTransportType(0).setNetworkSpecifier(new TelephonyNetworkSpecifier(intValue));
+                    NetworkRequest.Builder networkSpecifier =
+                            getBaseNetworkRequestBuilder()
+                                    .addTransportType(0)
+                                    .setNetworkSpecifier(new TelephonyNetworkSpecifier(intValue));
                     for (CapabilityMatchCriteria capabilityMatchCriteria : set) {
                         Iterator it4 = it2;
                         int i2 = capabilityMatchCriteria.capability;
@@ -481,7 +655,8 @@ public final class UnderlyingNetworkController {
                         it2 = it4;
                         i = 1;
                     }
-                    connectivityManager4.requestBackgroundNetwork(networkSpecifier.build(), networkBringupCallback, handler);
+                    connectivityManager4.requestBackgroundNetwork(
+                            networkSpecifier.build(), networkBringupCallback, handler);
                     it2 = it2;
                     i = 1;
                 }
@@ -501,22 +676,31 @@ public final class UnderlyingNetworkController {
         }
         Iterator it5 = arrayList.iterator();
         while (it5.hasNext()) {
-            this.mConnectivityManager.unregisterNetworkCallback((ConnectivityManager.NetworkCallback) it5.next());
+            this.mConnectivityManager.unregisterNetworkCallback(
+                    (ConnectivityManager.NetworkCallback) it5.next());
         }
     }
 
-    public final void updateInboundTransform(UnderlyingNetworkRecord underlyingNetworkRecord, IpSecTransform ipSecTransform) {
-        if (!this.mVcnContext.isFlagNetworkMetricMonitorEnabled() || !VcnContext.isFlagIpSecTransformStateEnabled()) {
+    public final void updateInboundTransform(
+            UnderlyingNetworkRecord underlyingNetworkRecord, IpSecTransform ipSecTransform) {
+        if (!this.mVcnContext.isFlagNetworkMetricMonitorEnabled()
+                || !VcnContext.isFlagIpSecTransformStateEnabled()) {
             logWtf("#updateInboundTransform: unexpected call; flags missing");
             return;
         }
         Objects.requireNonNull(underlyingNetworkRecord, "currentNetwork is null");
         Objects.requireNonNull(ipSecTransform, "transform is null");
         UnderlyingNetworkRecord underlyingNetworkRecord2 = this.mCurrentRecord;
-        if (underlyingNetworkRecord2 == null || this.mRouteSelectionCallback == null || !Objects.equals(underlyingNetworkRecord.network, underlyingNetworkRecord2.network)) {
+        if (underlyingNetworkRecord2 == null
+                || this.mRouteSelectionCallback == null
+                || !Objects.equals(
+                        underlyingNetworkRecord.network, underlyingNetworkRecord2.network)) {
             return;
         }
-        UnderlyingNetworkEvaluator underlyingNetworkEvaluator = (UnderlyingNetworkEvaluator) ((ArrayMap) this.mUnderlyingNetworkRecords).get(this.mCurrentRecord.network);
+        UnderlyingNetworkEvaluator underlyingNetworkEvaluator =
+                (UnderlyingNetworkEvaluator)
+                        ((ArrayMap) this.mUnderlyingNetworkRecords)
+                                .get(this.mCurrentRecord.network);
         if (!underlyingNetworkEvaluator.mIsSelected) {
             underlyingNetworkEvaluator.logWtf("setInboundTransform on an unselected evaluator");
             return;
@@ -525,7 +709,8 @@ public final class UnderlyingNetworkController {
         while (it.hasNext()) {
             NetworkMetricMonitor networkMetricMonitor = (NetworkMetricMonitor) it.next();
             networkMetricMonitor.getClass();
-            networkMetricMonitor.setInboundTransformInternal(new NetworkMetricMonitor.IpSecTransformWrapper(ipSecTransform));
+            networkMetricMonitor.setInboundTransformInternal(
+                    new NetworkMetricMonitor.IpSecTransformWrapper(ipSecTransform));
         }
     }
 }

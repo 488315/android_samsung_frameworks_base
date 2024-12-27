@@ -1,8 +1,6 @@
 package android.content;
 
 import android.accounts.Account;
-import android.content.ISyncAdapterUnsyncableAccountCallback;
-import android.content.ISyncContext;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -14,22 +12,25 @@ import android.os.RemoteException;
 public interface ISyncAdapter extends IInterface {
     void cancelSync(ISyncContext iSyncContext) throws RemoteException;
 
-    void onUnsyncableAccount(ISyncAdapterUnsyncableAccountCallback iSyncAdapterUnsyncableAccountCallback) throws RemoteException;
+    void onUnsyncableAccount(
+            ISyncAdapterUnsyncableAccountCallback iSyncAdapterUnsyncableAccountCallback)
+            throws RemoteException;
 
-    void startSync(ISyncContext iSyncContext, String str, Account account, Bundle bundle) throws RemoteException;
+    void startSync(ISyncContext iSyncContext, String str, Account account, Bundle bundle)
+            throws RemoteException;
 
     public static class Default implements ISyncAdapter {
         @Override // android.content.ISyncAdapter
-        public void onUnsyncableAccount(ISyncAdapterUnsyncableAccountCallback cb) throws RemoteException {
-        }
+        public void onUnsyncableAccount(ISyncAdapterUnsyncableAccountCallback cb)
+                throws RemoteException {}
 
         @Override // android.content.ISyncAdapter
-        public void startSync(ISyncContext syncContext, String authority, Account account, Bundle extras) throws RemoteException {
-        }
+        public void startSync(
+                ISyncContext syncContext, String authority, Account account, Bundle extras)
+                throws RemoteException {}
 
         @Override // android.content.ISyncAdapter
-        public void cancelSync(ISyncContext syncContext) throws RemoteException {
-        }
+        public void cancelSync(ISyncContext syncContext) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -37,7 +38,7 @@ public interface ISyncAdapter extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISyncAdapter {
+    public abstract static class Stub extends Binder implements ISyncAdapter {
         public static final String DESCRIPTOR = "android.content.ISyncAdapter";
         static final int TRANSACTION_cancelSync = 3;
         static final int TRANSACTION_onUnsyncableAccount = 1;
@@ -82,7 +83,8 @@ public interface ISyncAdapter extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -92,7 +94,9 @@ public interface ISyncAdapter extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ISyncAdapterUnsyncableAccountCallback _arg0 = ISyncAdapterUnsyncableAccountCallback.Stub.asInterface(data.readStrongBinder());
+                    ISyncAdapterUnsyncableAccountCallback _arg0 =
+                            ISyncAdapterUnsyncableAccountCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onUnsyncableAccount(_arg0);
                     return true;
@@ -131,7 +135,8 @@ public interface ISyncAdapter extends IInterface {
             }
 
             @Override // android.content.ISyncAdapter
-            public void onUnsyncableAccount(ISyncAdapterUnsyncableAccountCallback cb) throws RemoteException {
+            public void onUnsyncableAccount(ISyncAdapterUnsyncableAccountCallback cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -143,7 +148,9 @@ public interface ISyncAdapter extends IInterface {
             }
 
             @Override // android.content.ISyncAdapter
-            public void startSync(ISyncContext syncContext, String authority, Account account, Bundle extras) throws RemoteException {
+            public void startSync(
+                    ISyncContext syncContext, String authority, Account account, Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

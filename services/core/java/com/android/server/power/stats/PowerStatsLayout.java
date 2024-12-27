@@ -2,6 +2,7 @@ package com.android.server.power.stats;
 
 import android.net.INetd;
 import android.os.PersistableBundle;
+
 import com.android.internal.os.PowerStats;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -22,8 +23,7 @@ public class PowerStatsLayout {
     public int mUidEnergyConsumerPosition = -1;
     public int mUidPowerEstimatePosition = -1;
 
-    public PowerStatsLayout() {
-    }
+    public PowerStatsLayout() {}
 
     public PowerStatsLayout(PowerStats.Descriptor descriptor) {
         fromExtras(descriptor.extras);

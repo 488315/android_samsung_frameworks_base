@@ -5,7 +5,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArrayMap;
 import android.view.autofill.AutofillId;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Collections;
@@ -16,27 +18,29 @@ import java.util.Set;
 
 /* loaded from: classes4.dex */
 public final class ViewTranslationRequest implements Parcelable {
-    public static final Parcelable.Creator<ViewTranslationRequest> CREATOR = new Parcelable.Creator<ViewTranslationRequest>() { // from class: android.view.translation.ViewTranslationRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ViewTranslationRequest[] newArray(int size) {
-            return new ViewTranslationRequest[size];
-        }
+    public static final Parcelable.Creator<ViewTranslationRequest> CREATOR =
+            new Parcelable.Creator<
+                    ViewTranslationRequest>() { // from class:
+                                                // android.view.translation.ViewTranslationRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ViewTranslationRequest[] newArray(int size) {
+                    return new ViewTranslationRequest[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ViewTranslationRequest createFromParcel(Parcel in) {
-            return new ViewTranslationRequest(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ViewTranslationRequest createFromParcel(Parcel in) {
+                    return new ViewTranslationRequest(in);
+                }
+            };
     public static final String ID_CONTENT_DESCRIPTION = "android:content_description";
     public static final String ID_TEXT = "android:text";
     private final AutofillId mAutofillId;
     private final Map<String, TranslationRequestValue> mTranslationRequestValues;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Id {
-    }
+    public @interface Id {}
 
     public TranslationRequestValue getValue(String key) {
         Objects.requireNonNull(key, "key should not be null");
@@ -66,12 +70,14 @@ public final class ViewTranslationRequest implements Parcelable {
 
         public Builder(AutofillId autofillId) {
             this.mAutofillId = autofillId;
-            AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAutofillId);
+            AnnotationValidations.validate(
+                    (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAutofillId);
         }
 
         public Builder(AutofillId autofillId, long virtualChildId) {
             this.mAutofillId = new AutofillId(autofillId, virtualChildId, 0);
-            AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAutofillId);
+            AnnotationValidations.validate(
+                    (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAutofillId);
         }
 
         public Builder setValue(String key, TranslationRequestValue value) {
@@ -86,9 +92,11 @@ public final class ViewTranslationRequest implements Parcelable {
             checkNotUsed();
             this.mBuilderFieldsSet |= 4;
             if ((this.mBuilderFieldsSet & 2) == 0) {
-                this.mTranslationRequestValues = ViewTranslationRequest.defaultTranslationRequestValues();
+                this.mTranslationRequestValues =
+                        ViewTranslationRequest.defaultTranslationRequestValues();
             }
-            ViewTranslationRequest o = new ViewTranslationRequest(this.mAutofillId, this.mTranslationRequestValues);
+            ViewTranslationRequest o =
+                    new ViewTranslationRequest(this.mAutofillId, this.mTranslationRequestValues);
             return o;
         }
 
@@ -101,20 +109,30 @@ public final class ViewTranslationRequest implements Parcelable {
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 4) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }
 
-    public ViewTranslationRequest(AutofillId autofillId, Map<String, TranslationRequestValue> translationRequestValues) {
+    public ViewTranslationRequest(
+            AutofillId autofillId, Map<String, TranslationRequestValue> translationRequestValues) {
         this.mAutofillId = autofillId;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAutofillId);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAutofillId);
         this.mTranslationRequestValues = translationRequestValues;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mTranslationRequestValues);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mTranslationRequestValues);
     }
 
     public String toString() {
-        return "ViewTranslationRequest { autofillId = " + this.mAutofillId + ", translationRequestValues = " + this.mTranslationRequestValues + " }";
+        return "ViewTranslationRequest { autofillId = "
+                + this.mAutofillId
+                + ", translationRequestValues = "
+                + this.mTranslationRequestValues
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -125,7 +143,8 @@ public final class ViewTranslationRequest implements Parcelable {
             return false;
         }
         ViewTranslationRequest that = (ViewTranslationRequest) o;
-        if (Objects.equals(this.mAutofillId, that.mAutofillId) && Objects.equals(this.mTranslationRequestValues, that.mTranslationRequestValues)) {
+        if (Objects.equals(this.mAutofillId, that.mAutofillId)
+                && Objects.equals(this.mTranslationRequestValues, that.mTranslationRequestValues)) {
             return true;
         }
         return false;
@@ -152,12 +171,15 @@ public final class ViewTranslationRequest implements Parcelable {
         Map<String, TranslationRequestValue> translationRequestValues = new LinkedHashMap<>();
         in.readMap(translationRequestValues, TranslationRequestValue.class.getClassLoader());
         this.mAutofillId = autofillId;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAutofillId);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAutofillId);
         this.mTranslationRequestValues = translationRequestValues;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mTranslationRequestValues);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mTranslationRequestValues);
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

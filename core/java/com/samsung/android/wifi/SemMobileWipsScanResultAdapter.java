@@ -4,6 +4,7 @@ import android.net.MacAddress;
 import android.net.wifi.MloLink;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,65 +25,88 @@ public final class SemMobileWipsScanResultAdapter implements Parcelable {
     public static final int CIPHER_NO_GROUP_ADDRESSED = 1;
     public static final int CIPHER_SMS4 = 5;
     public static final int CIPHER_TKIP = 2;
-    public static final Parcelable.Creator<SemMobileWipsScanResultAdapter> CREATOR = new Parcelable.Creator<SemMobileWipsScanResultAdapter>() { // from class: com.samsung.android.wifi.SemMobileWipsScanResultAdapter.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemMobileWipsScanResultAdapter createFromParcel(Parcel in) {
-            SemMobileWipsWifiSsid wifiSsid = null;
-            if (in.readInt() == 1) {
-                SemMobileWipsWifiSsid wifiSsid2 = SemMobileWipsWifiSsid.CREATOR.createFromParcel(in);
-                wifiSsid = wifiSsid2;
-            }
-            SemMobileWipsScanResultAdapter sr = new SemMobileWipsScanResultAdapter(wifiSsid, in.readString(), in.readString(), in.readLong(), in.readInt(), in.readString(), in.readInt(), in.readInt(), in.readLong(), in.readInt(), in.readInt(), in.readInt(), in.readInt(), in.readInt(), false);
-            sr.mWifiStandard = in.readInt();
-            sr.seen = in.readLong();
-            sr.untrusted = in.readInt() != 0;
-            sr.numUsage = in.readInt();
-            sr.venueName = in.readString();
-            sr.operatorFriendlyName = in.readString();
-            sr.flags = in.readLong();
-            sr.informationElements = (InformationElement[]) in.createTypedArray(InformationElement.CREATOR);
-            int n = in.readInt();
-            if (n != 0) {
-                sr.anqpLines = new ArrayList();
-                for (int i = 0; i < n; i++) {
-                    sr.anqpLines.add(in.readString());
+    public static final Parcelable.Creator<SemMobileWipsScanResultAdapter> CREATOR =
+            new Parcelable.Creator<
+                    SemMobileWipsScanResultAdapter>() { // from class:
+                                                        // com.samsung.android.wifi.SemMobileWipsScanResultAdapter.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemMobileWipsScanResultAdapter createFromParcel(Parcel in) {
+                    SemMobileWipsWifiSsid wifiSsid = null;
+                    if (in.readInt() == 1) {
+                        SemMobileWipsWifiSsid wifiSsid2 =
+                                SemMobileWipsWifiSsid.CREATOR.createFromParcel(in);
+                        wifiSsid = wifiSsid2;
+                    }
+                    SemMobileWipsScanResultAdapter sr =
+                            new SemMobileWipsScanResultAdapter(
+                                    wifiSsid,
+                                    in.readString(),
+                                    in.readString(),
+                                    in.readLong(),
+                                    in.readInt(),
+                                    in.readString(),
+                                    in.readInt(),
+                                    in.readInt(),
+                                    in.readLong(),
+                                    in.readInt(),
+                                    in.readInt(),
+                                    in.readInt(),
+                                    in.readInt(),
+                                    in.readInt(),
+                                    false);
+                    sr.mWifiStandard = in.readInt();
+                    sr.seen = in.readLong();
+                    sr.untrusted = in.readInt() != 0;
+                    sr.numUsage = in.readInt();
+                    sr.venueName = in.readString();
+                    sr.operatorFriendlyName = in.readString();
+                    sr.flags = in.readLong();
+                    sr.informationElements =
+                            (InformationElement[]) in.createTypedArray(InformationElement.CREATOR);
+                    int n = in.readInt();
+                    if (n != 0) {
+                        sr.anqpLines = new ArrayList();
+                        for (int i = 0; i < n; i++) {
+                            sr.anqpLines.add(in.readString());
+                        }
+                    }
+                    int n2 = in.readInt();
+                    if (n2 != 0) {
+                        sr.anqpElements = new AnqpInformationElement[n2];
+                        for (int i2 = 0; i2 < n2; i2++) {
+                            int vendorId = in.readInt();
+                            int elementId = in.readInt();
+                            int len = in.readInt();
+                            byte[] payload = new byte[len];
+                            in.readByteArray(payload);
+                            sr.anqpElements[i2] =
+                                    new AnqpInformationElement(vendorId, elementId, payload);
+                        }
+                    }
+                    int n3 = in.readInt();
+                    if (n3 != 0) {
+                        sr.radioChainInfos = new RadioChainInfo[n3];
+                        for (int i3 = 0; i3 < n3; i3++) {
+                            sr.radioChainInfos[i3] = new RadioChainInfo();
+                            sr.radioChainInfos[i3].id = in.readInt();
+                            sr.radioChainInfos[i3].level = in.readInt();
+                        }
+                    }
+                    sr.ifaceName = in.readString();
+                    sr.mApMldMacAddress =
+                            (MacAddress) in.readParcelable(MacAddress.class.getClassLoader());
+                    sr.mApMloLinkId = in.readInt();
+                    sr.mAffiliatedMloLinks = in.createTypedArrayList(MloLink.CREATOR);
+                    return sr;
                 }
-            }
-            int n2 = in.readInt();
-            if (n2 != 0) {
-                sr.anqpElements = new AnqpInformationElement[n2];
-                for (int i2 = 0; i2 < n2; i2++) {
-                    int vendorId = in.readInt();
-                    int elementId = in.readInt();
-                    int len = in.readInt();
-                    byte[] payload = new byte[len];
-                    in.readByteArray(payload);
-                    sr.anqpElements[i2] = new AnqpInformationElement(vendorId, elementId, payload);
-                }
-            }
-            int n3 = in.readInt();
-            if (n3 != 0) {
-                sr.radioChainInfos = new RadioChainInfo[n3];
-                for (int i3 = 0; i3 < n3; i3++) {
-                    sr.radioChainInfos[i3] = new RadioChainInfo();
-                    sr.radioChainInfos[i3].id = in.readInt();
-                    sr.radioChainInfos[i3].level = in.readInt();
-                }
-            }
-            sr.ifaceName = in.readString();
-            sr.mApMldMacAddress = (MacAddress) in.readParcelable(MacAddress.class.getClassLoader());
-            sr.mApMloLinkId = in.readInt();
-            sr.mAffiliatedMloLinks = in.createTypedArrayList(MloLink.CREATOR);
-            return sr;
-        }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemMobileWipsScanResultAdapter[] newArray(int size) {
-            return new SemMobileWipsScanResultAdapter[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemMobileWipsScanResultAdapter[] newArray(int size) {
+                    return new SemMobileWipsScanResultAdapter[size];
+                }
+            };
     public static final long FLAG_80211mc_RESPONDER = 2;
     public static final long FLAG_PASSPOINT_NETWORK = 1;
     public static final int KEY_MGMT_EAP = 2;
@@ -145,7 +169,16 @@ public final class SemMobileWipsScanResultAdapter implements Parcelable {
     public CharSequence venueName;
     public SemMobileWipsWifiSsid wifiSsid;
 
-    public SemMobileWipsScanResultAdapter(SemMobileWipsWifiSsid wifiSsid, String BSSID, long hessid, int anqpDomainId, byte[] osuProviders, String caps, int level, int frequency, long tsf) {
+    public SemMobileWipsScanResultAdapter(
+            SemMobileWipsWifiSsid wifiSsid,
+            String BSSID,
+            long hessid,
+            int anqpDomainId,
+            byte[] osuProviders,
+            String caps,
+            int level,
+            int frequency,
+            long tsf) {
         this.mApMloLinkId = -1;
         this.mAffiliatedMloLinks = Collections.emptyList();
         this.wifiSsid = wifiSsid;
@@ -171,7 +204,15 @@ public final class SemMobileWipsScanResultAdapter implements Parcelable {
         this.mApMldMacAddress = null;
     }
 
-    public SemMobileWipsScanResultAdapter(SemMobileWipsWifiSsid wifiSsid, String BSSID, String caps, int level, int frequency, long tsf, int distCm, int distSdCm) {
+    public SemMobileWipsScanResultAdapter(
+            SemMobileWipsWifiSsid wifiSsid,
+            String BSSID,
+            String caps,
+            int level,
+            int frequency,
+            long tsf,
+            int distCm,
+            int distSdCm) {
         this.mApMloLinkId = -1;
         this.mAffiliatedMloLinks = Collections.emptyList();
         this.wifiSsid = wifiSsid;
@@ -191,7 +232,21 @@ public final class SemMobileWipsScanResultAdapter implements Parcelable {
         this.mApMldMacAddress = null;
     }
 
-    public SemMobileWipsScanResultAdapter(String Ssid, String BSSID, long hessid, int anqpDomainId, String caps, int level, int frequency, long tsf, int distCm, int distSdCm, int channelWidth, int centerFreq0, int centerFreq1, boolean is80211McRTTResponder) {
+    public SemMobileWipsScanResultAdapter(
+            String Ssid,
+            String BSSID,
+            long hessid,
+            int anqpDomainId,
+            String caps,
+            int level,
+            int frequency,
+            long tsf,
+            int distCm,
+            int distSdCm,
+            int channelWidth,
+            int centerFreq0,
+            int centerFreq1,
+            boolean is80211McRTTResponder) {
         this.mApMloLinkId = -1;
         this.mAffiliatedMloLinks = Collections.emptyList();
         this.SSID = Ssid;
@@ -216,8 +271,37 @@ public final class SemMobileWipsScanResultAdapter implements Parcelable {
         this.mApMldMacAddress = null;
     }
 
-    public SemMobileWipsScanResultAdapter(SemMobileWipsWifiSsid wifiSsid, String Ssid, String BSSID, long hessid, int anqpDomainId, String caps, int level, int frequency, long tsf, int distCm, int distSdCm, int channelWidth, int centerFreq0, int centerFreq1, boolean is80211McRTTResponder) {
-        this(Ssid, BSSID, hessid, anqpDomainId, caps, level, frequency, tsf, distCm, distSdCm, channelWidth, centerFreq0, centerFreq1, is80211McRTTResponder);
+    public SemMobileWipsScanResultAdapter(
+            SemMobileWipsWifiSsid wifiSsid,
+            String Ssid,
+            String BSSID,
+            long hessid,
+            int anqpDomainId,
+            String caps,
+            int level,
+            int frequency,
+            long tsf,
+            int distCm,
+            int distSdCm,
+            int channelWidth,
+            int centerFreq0,
+            int centerFreq1,
+            boolean is80211McRTTResponder) {
+        this(
+                Ssid,
+                BSSID,
+                hessid,
+                anqpDomainId,
+                caps,
+                level,
+                frequency,
+                tsf,
+                distCm,
+                distSdCm,
+                channelWidth,
+                centerFreq0,
+                centerFreq1,
+                is80211McRTTResponder);
         this.wifiSsid = wifiSsid;
     }
 
@@ -252,7 +336,10 @@ public final class SemMobileWipsScanResultAdapter implements Parcelable {
             this.ifaceName = source.ifaceName;
             this.mApMldMacAddress = source.mApMldMacAddress;
             this.mApMloLinkId = source.mApMloLinkId;
-            this.mAffiliatedMloLinks = source.mAffiliatedMloLinks != null ? new ArrayList<>(source.mAffiliatedMloLinks) : Collections.emptyList();
+            this.mAffiliatedMloLinks =
+                    source.mAffiliatedMloLinks != null
+                            ? new ArrayList<>(source.mAffiliatedMloLinks)
+                            : Collections.emptyList();
         }
     }
 
@@ -334,9 +421,24 @@ public final class SemMobileWipsScanResultAdapter implements Parcelable {
 
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        sb.append("SSID: ").append(this.wifiSsid == null ? "<unknown ssid>" : this.wifiSsid).append(", BSSID: ").append(this.BSSID == null ? "<none>" : this.BSSID).append(", capabilities: ").append(this.capabilities == null ? "<none>" : this.capabilities).append(", level: ").append(this.level).append(", frequency: ").append(this.frequency).append(", timestamp: ").append(this.timestamp);
-        sb.append(", distance: ").append(this.distanceCm != -1 ? Integer.valueOf(this.distanceCm) : "?").append("(cm)");
-        sb.append(", distanceSd: ").append(this.distanceSdCm != -1 ? Integer.valueOf(this.distanceSdCm) : "?").append("(cm)");
+        sb.append("SSID: ")
+                .append(this.wifiSsid == null ? "<unknown ssid>" : this.wifiSsid)
+                .append(", BSSID: ")
+                .append(this.BSSID == null ? "<none>" : this.BSSID)
+                .append(", capabilities: ")
+                .append(this.capabilities == null ? "<none>" : this.capabilities)
+                .append(", level: ")
+                .append(this.level)
+                .append(", frequency: ")
+                .append(this.frequency)
+                .append(", timestamp: ")
+                .append(this.timestamp);
+        sb.append(", distance: ")
+                .append(this.distanceCm != -1 ? Integer.valueOf(this.distanceCm) : "?")
+                .append("(cm)");
+        sb.append(", distanceSd: ")
+                .append(this.distanceSdCm != -1 ? Integer.valueOf(this.distanceSdCm) : "?")
+                .append("(cm)");
         sb.append(", passpoint: ");
         sb.append((this.flags & 1) != 0 ? "yes" : "no");
         sb.append(", ChannelBandwidth: ").append(this.channelWidth);
@@ -348,7 +450,16 @@ public final class SemMobileWipsScanResultAdapter implements Parcelable {
         sb.append(", Radio Chain Infos: ").append(Arrays.toString(this.radioChainInfos));
         sb.append(", interface name: ").append(this.ifaceName);
         if (this.mApMldMacAddress != null) {
-            sb.append(", MLO Info: ").append(" AP MLD MAC Address: ").append(this.mApMldMacAddress.toString()).append(", AP MLO Link-Id: ").append(this.mApMloLinkId == -1 ? "Unspecified" : Integer.valueOf(this.mApMloLinkId)).append(", AP MLO Affiliated Links: ").append(this.mAffiliatedMloLinks);
+            sb.append(", MLO Info: ")
+                    .append(" AP MLD MAC Address: ")
+                    .append(this.mApMldMacAddress.toString())
+                    .append(", AP MLO Link-Id: ")
+                    .append(
+                            this.mApMloLinkId == -1
+                                    ? "Unspecified"
+                                    : Integer.valueOf(this.mApMloLinkId))
+                    .append(", AP MLO Affiliated Links: ")
+                    .append(this.mAffiliatedMloLinks);
         }
         return sb.toString();
     }
@@ -384,7 +495,8 @@ public final class SemMobileWipsScanResultAdapter implements Parcelable {
         parcel.writeInt(this.untrusted ? 1 : 0);
         parcel.writeInt(this.numUsage);
         parcel.writeString(this.venueName != null ? this.venueName.toString() : "");
-        parcel.writeString(this.operatorFriendlyName != null ? this.operatorFriendlyName.toString() : "");
+        parcel.writeString(
+                this.operatorFriendlyName != null ? this.operatorFriendlyName.toString() : "");
         parcel.writeLong(this.flags);
         parcel.writeTypedArray(this.informationElements, i);
         if (this.anqpLines != null) {
@@ -499,23 +611,26 @@ public final class SemMobileWipsScanResultAdapter implements Parcelable {
     }
 
     public static class InformationElement implements Parcelable {
-        public static final Parcelable.Creator<InformationElement> CREATOR = new Parcelable.Creator<InformationElement>() { // from class: com.samsung.android.wifi.SemMobileWipsScanResultAdapter.InformationElement.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public InformationElement createFromParcel(Parcel in) {
-                InformationElement informationElement = new InformationElement();
-                informationElement.id = in.readInt();
-                informationElement.idExt = in.readInt();
-                informationElement.bytes = in.createByteArray();
-                return informationElement;
-            }
+        public static final Parcelable.Creator<InformationElement> CREATOR =
+                new Parcelable.Creator<
+                        InformationElement>() { // from class:
+                                                // com.samsung.android.wifi.SemMobileWipsScanResultAdapter.InformationElement.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public InformationElement createFromParcel(Parcel in) {
+                        InformationElement informationElement = new InformationElement();
+                        informationElement.id = in.readInt();
+                        informationElement.idExt = in.readInt();
+                        informationElement.bytes = in.createByteArray();
+                        return informationElement;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public InformationElement[] newArray(int size) {
-                return new InformationElement[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public InformationElement[] newArray(int size) {
+                        return new InformationElement[size];
+                    }
+                };
         public static final int EID_BSS_LOAD = 11;
         public static final int EID_ERP = 42;
         public static final int EID_EXTENDED_CAPS = 127;
@@ -538,8 +653,7 @@ public final class SemMobileWipsScanResultAdapter implements Parcelable {
         public int id;
         public int idExt;
 
-        public InformationElement() {
-        }
+        public InformationElement() {}
 
         public InformationElement(InformationElement rhs) {
             this.id = rhs.id;
@@ -579,11 +693,16 @@ public final class SemMobileWipsScanResultAdapter implements Parcelable {
                 return false;
             }
             InformationElement thatIE = (InformationElement) that;
-            return this.id == thatIE.id && this.idExt == thatIE.idExt && Arrays.equals(this.bytes, thatIE.bytes);
+            return this.id == thatIE.id
+                    && this.idExt == thatIE.idExt
+                    && Arrays.equals(this.bytes, thatIE.bytes);
         }
 
         public int hashCode() {
-            return Objects.hash(Integer.valueOf(this.id), Integer.valueOf(this.idExt), Integer.valueOf(Arrays.hashCode(this.bytes)));
+            return Objects.hash(
+                    Integer.valueOf(this.id),
+                    Integer.valueOf(this.idExt),
+                    Integer.valueOf(Arrays.hashCode(this.bytes)));
         }
     }
 }

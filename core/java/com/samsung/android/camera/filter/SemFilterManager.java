@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -16,13 +17,15 @@ import java.util.List;
 /* loaded from: classes5.dex */
 public class SemFilterManager {
     private static final String AUTHORITY = "com.samsung.android.provider.filterprovider/filters";
-    private static final String FILTER_AUTHORITY = "com.samsung.android.provider.filterprovider/filters";
+    private static final String FILTER_AUTHORITY =
+            "com.samsung.android.provider.filterprovider/filters";
     public static final int FILTER_EVENT_ADD = 0;
     public static final int FILTER_EVENT_DELETE = 1;
     public static final int FILTER_EVENT_LOCALE_CHANGE = 2;
 
     @Deprecated(forRemoval = true, since = "15.5")
     public static final int FILTER_EVENT_RESET = 3;
+
     private static final String FILTER_NAME = "name";
     private static final String FILTER_PACKAGE = "com.samsung.android.provider.filterprovider";
     private static final String FILTER_PACKAGE_NAME = "package_name";
@@ -36,7 +39,8 @@ public class SemFilterManager {
     private static final int INDEX_FILTER_TITLE_ID = 6;
     private static final int INDEX_FILTER_VENDOR = 3;
     private static final int INDEX_FILTER_VERSION = 5;
-    private static final String MYFILTER_AUTHORITY = "com.samsung.android.provider.filterprovider/myfilter";
+    private static final String MYFILTER_AUTHORITY =
+            "com.samsung.android.provider.filterprovider/myfilter";
     private static final String MYFILTER_SEPERATOR = "[MYFILTER]";
     private static final int SI_KEY_FILTER_VALUE_GS_NO_EFFECT = 400;
     private static final String TAG = "SemFilterManager";
@@ -47,6 +51,7 @@ public class SemFilterManager {
 
     @Deprecated(forRemoval = true, since = "15.5")
     public static final int TYPE_FILTER_EXTENDED = 101;
+
     public static final int TYPE_FILTER_USER_GENERATED = 102;
     private Context mContext;
     private ContentObserver mFilterAddObserver;
@@ -54,16 +59,30 @@ public class SemFilterManager {
     private ContentObserver mLocaleChangeObserver;
     private Handler mObserverHandler;
     private HandlerThread mObserverHandlerThread;
-    private static final Uri BASE_URI = Uri.parse("content://com.samsung.android.provider.filterprovider/filters");
-    private static final Uri FILTER_URI = Uri.parse("content://com.samsung.android.provider.filterprovider/filters");
-    private static final Uri MYFILTER_URI = Uri.parse("content://com.samsung.android.provider.filterprovider/myfilter");
-    private static final Uri notiAddUri = Uri.parse("content://com.samsung.android.provider.filterprovider/notifyAdd");
-    private static final Uri notiDeleteUri = Uri.parse("content://com.samsung.android.provider.filterprovider/notifyDelete");
-    private static final Uri notiLocaleChangeUri = Uri.parse("content://com.samsung.android.provider.filterprovider/notifyLocaleChange");
+    private static final Uri BASE_URI =
+            Uri.parse("content://com.samsung.android.provider.filterprovider/filters");
+    private static final Uri FILTER_URI =
+            Uri.parse("content://com.samsung.android.provider.filterprovider/filters");
+    private static final Uri MYFILTER_URI =
+            Uri.parse("content://com.samsung.android.provider.filterprovider/myfilter");
+    private static final Uri notiAddUri =
+            Uri.parse("content://com.samsung.android.provider.filterprovider/notifyAdd");
+    private static final Uri notiDeleteUri =
+            Uri.parse("content://com.samsung.android.provider.filterprovider/notifyDelete");
+    private static final Uri notiLocaleChangeUri =
+            Uri.parse("content://com.samsung.android.provider.filterprovider/notifyLocaleChange");
     private static final String FILTER_FILE_NAME = "filename";
     private static final String FILTER_CATEGORY = "category";
     private static final String FILTER_TITLE_ID = "title_id";
-    private static final String[] FILTER_PROJECTION = {"name", FILTER_FILE_NAME, "package_name", "vendor", FILTER_CATEGORY, "version", FILTER_TITLE_ID};
+    private static final String[] FILTER_PROJECTION = {
+        "name",
+        FILTER_FILE_NAME,
+        "package_name",
+        "vendor",
+        FILTER_CATEGORY,
+        "version",
+        FILTER_TITLE_ID
+    };
     private Handler mCallbackHandler = null;
     SemFilterManagerCallback mSemFilterManagerCallback = null;
 
@@ -84,57 +103,81 @@ public class SemFilterManager {
             this.mObserverHandlerThread.start();
             this.mObserverHandler = new Handler(this.mObserverHandlerThread.getLooper());
         }
-        this.mFilterAddObserver = new ContentObserver(this.mObserverHandler) { // from class: com.samsung.android.camera.filter.SemFilterManager.1
-            @Override // android.database.ContentObserver
-            public void onChange(boolean selfChange) {
-                if (SemFilterManager.this.mCallbackHandler != null) {
-                    SemFilterManager.this.mCallbackHandler.post(new Runnable() { // from class: com.samsung.android.camera.filter.SemFilterManager.1.1
-                        @Override // java.lang.Runnable
-                        public void run() {
-                            if (SemFilterManager.this.mSemFilterManagerCallback != null) {
-                                SemFilterManager.this.mSemFilterManagerCallback.onFilterChanged(0);
-                            }
+        this.mFilterAddObserver =
+                new ContentObserver(
+                        this
+                                .mObserverHandler) { // from class:
+                                                     // com.samsung.android.camera.filter.SemFilterManager.1
+                    @Override // android.database.ContentObserver
+                    public void onChange(boolean selfChange) {
+                        if (SemFilterManager.this.mCallbackHandler != null) {
+                            SemFilterManager.this.mCallbackHandler.post(
+                                    new Runnable() { // from class:
+                                                     // com.samsung.android.camera.filter.SemFilterManager.1.1
+                                        @Override // java.lang.Runnable
+                                        public void run() {
+                                            if (SemFilterManager.this.mSemFilterManagerCallback
+                                                    != null) {
+                                                SemFilterManager.this.mSemFilterManagerCallback
+                                                        .onFilterChanged(0);
+                                            }
+                                        }
+                                    });
+                        } else if (SemFilterManager.this.mSemFilterManagerCallback != null) {
+                            SemFilterManager.this.mSemFilterManagerCallback.onFilterChanged(0);
                         }
-                    });
-                } else if (SemFilterManager.this.mSemFilterManagerCallback != null) {
-                    SemFilterManager.this.mSemFilterManagerCallback.onFilterChanged(0);
-                }
-            }
-        };
-        this.mFilterDeleteObserver = new ContentObserver(this.mObserverHandler) { // from class: com.samsung.android.camera.filter.SemFilterManager.2
-            @Override // android.database.ContentObserver
-            public void onChange(boolean selfChange) {
-                if (SemFilterManager.this.mCallbackHandler != null) {
-                    SemFilterManager.this.mCallbackHandler.post(new Runnable() { // from class: com.samsung.android.camera.filter.SemFilterManager.2.1
-                        @Override // java.lang.Runnable
-                        public void run() {
-                            if (SemFilterManager.this.mSemFilterManagerCallback != null) {
-                                SemFilterManager.this.mSemFilterManagerCallback.onFilterChanged(1);
-                            }
+                    }
+                };
+        this.mFilterDeleteObserver =
+                new ContentObserver(
+                        this
+                                .mObserverHandler) { // from class:
+                                                     // com.samsung.android.camera.filter.SemFilterManager.2
+                    @Override // android.database.ContentObserver
+                    public void onChange(boolean selfChange) {
+                        if (SemFilterManager.this.mCallbackHandler != null) {
+                            SemFilterManager.this.mCallbackHandler.post(
+                                    new Runnable() { // from class:
+                                                     // com.samsung.android.camera.filter.SemFilterManager.2.1
+                                        @Override // java.lang.Runnable
+                                        public void run() {
+                                            if (SemFilterManager.this.mSemFilterManagerCallback
+                                                    != null) {
+                                                SemFilterManager.this.mSemFilterManagerCallback
+                                                        .onFilterChanged(1);
+                                            }
+                                        }
+                                    });
+                        } else if (SemFilterManager.this.mSemFilterManagerCallback != null) {
+                            SemFilterManager.this.mSemFilterManagerCallback.onFilterChanged(1);
                         }
-                    });
-                } else if (SemFilterManager.this.mSemFilterManagerCallback != null) {
-                    SemFilterManager.this.mSemFilterManagerCallback.onFilterChanged(1);
-                }
-            }
-        };
-        this.mLocaleChangeObserver = new ContentObserver(this.mObserverHandler) { // from class: com.samsung.android.camera.filter.SemFilterManager.3
-            @Override // android.database.ContentObserver
-            public void onChange(boolean selfChange) {
-                if (SemFilterManager.this.mCallbackHandler != null) {
-                    SemFilterManager.this.mCallbackHandler.post(new Runnable() { // from class: com.samsung.android.camera.filter.SemFilterManager.3.1
-                        @Override // java.lang.Runnable
-                        public void run() {
-                            if (SemFilterManager.this.mSemFilterManagerCallback != null) {
-                                SemFilterManager.this.mSemFilterManagerCallback.onFilterChanged(2);
-                            }
+                    }
+                };
+        this.mLocaleChangeObserver =
+                new ContentObserver(
+                        this
+                                .mObserverHandler) { // from class:
+                                                     // com.samsung.android.camera.filter.SemFilterManager.3
+                    @Override // android.database.ContentObserver
+                    public void onChange(boolean selfChange) {
+                        if (SemFilterManager.this.mCallbackHandler != null) {
+                            SemFilterManager.this.mCallbackHandler.post(
+                                    new Runnable() { // from class:
+                                                     // com.samsung.android.camera.filter.SemFilterManager.3.1
+                                        @Override // java.lang.Runnable
+                                        public void run() {
+                                            if (SemFilterManager.this.mSemFilterManagerCallback
+                                                    != null) {
+                                                SemFilterManager.this.mSemFilterManagerCallback
+                                                        .onFilterChanged(2);
+                                            }
+                                        }
+                                    });
+                        } else if (SemFilterManager.this.mSemFilterManagerCallback != null) {
+                            SemFilterManager.this.mSemFilterManagerCallback.onFilterChanged(2);
                         }
-                    });
-                } else if (SemFilterManager.this.mSemFilterManagerCallback != null) {
-                    SemFilterManager.this.mSemFilterManagerCallback.onFilterChanged(2);
-                }
-            }
-        };
+                    }
+                };
         registerObserver();
     }
 
@@ -163,9 +206,15 @@ public class SemFilterManager {
     }
 
     private void registerObserver() {
-        this.mContext.getContentResolver().registerContentObserver(notiAddUri, true, this.mFilterAddObserver);
-        this.mContext.getContentResolver().registerContentObserver(notiDeleteUri, true, this.mFilterDeleteObserver);
-        this.mContext.getContentResolver().registerContentObserver(notiLocaleChangeUri, true, this.mLocaleChangeObserver);
+        this.mContext
+                .getContentResolver()
+                .registerContentObserver(notiAddUri, true, this.mFilterAddObserver);
+        this.mContext
+                .getContentResolver()
+                .registerContentObserver(notiDeleteUri, true, this.mFilterDeleteObserver);
+        this.mContext
+                .getContentResolver()
+                .registerContentObserver(notiLocaleChangeUri, true, this.mLocaleChangeObserver);
     }
 
     private void unRegisterObserver() {
@@ -173,32 +222,65 @@ public class SemFilterManager {
             this.mContext.getContentResolver().unregisterContentObserver(this.mFilterAddObserver);
         }
         if (this.mFilterDeleteObserver != null) {
-            this.mContext.getContentResolver().unregisterContentObserver(this.mFilterDeleteObserver);
+            this.mContext
+                    .getContentResolver()
+                    .unregisterContentObserver(this.mFilterDeleteObserver);
         }
         if (this.mLocaleChangeObserver != null) {
-            this.mContext.getContentResolver().unregisterContentObserver(this.mLocaleChangeObserver);
+            this.mContext
+                    .getContentResolver()
+                    .unregisterContentObserver(this.mLocaleChangeObserver);
         }
         this.mFilterAddObserver = null;
         this.mFilterDeleteObserver = null;
         this.mLocaleChangeObserver = null;
     }
 
-    public SemFilter getFilter(int type, String filterName, String filterFileName, String filterPackageName) {
-        Log.i(TAG, "getFilter : type : " + type + ",  filterName : " + filterName + ",  filterFileName" + filterFileName + ", filterPackageName : " + filterPackageName);
+    public SemFilter getFilter(
+            int type, String filterName, String filterFileName, String filterPackageName) {
+        Log.i(
+                TAG,
+                "getFilter : type : "
+                        + type
+                        + ",  filterName : "
+                        + filterName
+                        + ",  filterFileName"
+                        + filterFileName
+                        + ", filterPackageName : "
+                        + filterPackageName);
         if (type != 450 && type != 425 && (filterFileName == null || filterFileName.isEmpty())) {
             Log.e(TAG, "There's no filter file");
             return null;
         }
         switch (type) {
             case 100:
-                String filterIdentifier = filterPackageName + "," + filterFileName.substring(filterPackageName.length() + 1);
-                return new SemFilterImpl(filterPackageName, filterName, filterIdentifier, filterName, "", 0, 0);
+                String filterIdentifier =
+                        filterPackageName
+                                + ","
+                                + filterFileName.substring(filterPackageName.length() + 1);
+                return new SemFilterImpl(
+                        filterPackageName, filterName, filterIdentifier, filterName, "", 0, 0);
             case 102:
-                return new SemFilterImpl("", filterName, MYFILTER_SEPERATOR + filterFileName, filterName, "", 0, 0);
+                return new SemFilterImpl(
+                        "", filterName, MYFILTER_SEPERATOR + filterFileName, filterName, "", 0, 0);
             case 425:
-                return new SemFilterImpl("com.samsung.android.provider", "CustomColor", 425, "Custom Color", "SAMSUNG_MOBILE", 0, 0);
+                return new SemFilterImpl(
+                        "com.samsung.android.provider",
+                        "CustomColor",
+                        425,
+                        "Custom Color",
+                        "SAMSUNG_MOBILE",
+                        0,
+                        0);
             case 450:
-                return new SemFilterImpl("com.samsung.android.provider", "Food", 450, "Food", "SAMSUNG_MOBILE", 0, 0);
+                return new SemFilterImpl(
+                        "com.samsung.android.provider",
+                        "Food",
+                        450,
+                        "Food",
+                        "SAMSUNG_MOBILE",
+                        0,
+                        0);
             default:
                 return new SemFilterImpl("", "", filterFileName, "", "", 0, 0);
         }
@@ -210,21 +292,61 @@ public class SemFilterManager {
             case 100:
                 return getAvailableFilters();
             case 101:
-                SemFilter selfieFaceCorrection = new SemFilterImpl("com.samsung.android.provider", "SelfieFaceCorrection", 447, "Selfie Face Correction", "SAMSUNG_MOBILE", 0, 0);
+                SemFilter selfieFaceCorrection =
+                        new SemFilterImpl(
+                                "com.samsung.android.provider",
+                                "SelfieFaceCorrection",
+                                447,
+                                "Selfie Face Correction",
+                                "SAMSUNG_MOBILE",
+                                0,
+                                0);
                 FilterList.add(selfieFaceCorrection);
-                SemFilter customcolorFilter1 = new SemFilterImpl("com.samsung.android.provider", "CustomColor", 425, "Custom Color", "SAMSUNG_MOBILE", 0, 0);
+                SemFilter customcolorFilter1 =
+                        new SemFilterImpl(
+                                "com.samsung.android.provider",
+                                "CustomColor",
+                                425,
+                                "Custom Color",
+                                "SAMSUNG_MOBILE",
+                                0,
+                                0);
                 FilterList.add(customcolorFilter1);
-                SemFilter foodFilter1 = new SemFilterImpl("com.samsung.android.provider", "Food", 450, "Food", "SAMSUNG_MOBILE", 0, 0);
+                SemFilter foodFilter1 =
+                        new SemFilterImpl(
+                                "com.samsung.android.provider",
+                                "Food",
+                                450,
+                                "Food",
+                                "SAMSUNG_MOBILE",
+                                0,
+                                0);
                 FilterList.add(foodFilter1);
                 break;
             case 102:
                 return getAvailableMyFilters();
             case 425:
-                SemFilter customcolorFilter2 = new SemFilterImpl("com.samsung.android.provider", "CustomColor", 425, "Custom Color", "SAMSUNG_MOBILE", 0, 0);
+                SemFilter customcolorFilter2 =
+                        new SemFilterImpl(
+                                "com.samsung.android.provider",
+                                "CustomColor",
+                                425,
+                                "Custom Color",
+                                "SAMSUNG_MOBILE",
+                                0,
+                                0);
                 FilterList.add(customcolorFilter2);
                 break;
             case 450:
-                SemFilter foodFilter2 = new SemFilterImpl("com.samsung.android.provider", "Food", 450, "Food", "SAMSUNG_MOBILE", 0, 0);
+                SemFilter foodFilter2 =
+                        new SemFilterImpl(
+                                "com.samsung.android.provider",
+                                "Food",
+                                450,
+                                "Food",
+                                "SAMSUNG_MOBILE",
+                                0,
+                                0);
                 FilterList.add(foodFilter2);
                 break;
         }
@@ -232,21 +354,21 @@ public class SemFilterManager {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:40:0x00a6, code lost:
-    
-        if (r3 != null) goto L27;
-     */
+
+       if (r3 != null) goto L27;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:41:0x00a8, code lost:
-    
-        r3.close();
-     */
+
+       r3.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:43:0x00b9, code lost:
-    
-        return java.util.Collections.unmodifiableList(r1);
-     */
+
+       return java.util.Collections.unmodifiableList(r1);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:46:0x00b2, code lost:
-    
-        if (0 == 0) goto L34;
-     */
+
+       if (0 == 0) goto L34;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -350,7 +472,9 @@ public class SemFilterManager {
         Lbf:
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.camera.filter.SemFilterManager.getAvailableMyFilters():java.util.List");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.camera.filter.SemFilterManager.getAvailableMyFilters():java.util.List");
     }
 
     public List<SemFilter> getAvailableFilters() {
@@ -364,7 +488,10 @@ public class SemFilterManager {
         String filterVendor;
         Log.i(TAG, "[SemFilterManager] loadFilter()");
         ArrayList<SemFilter> FilterList = new ArrayList<>();
-        Cursor cursor = this.mContext.getContentResolver().query(FILTER_URI, FILTER_PROJECTION, null, null, null);
+        Cursor cursor =
+                this.mContext
+                        .getContentResolver()
+                        .query(FILTER_URI, FILTER_PROJECTION, null, null, null);
         try {
             if (cursor == null) {
                 Log.i(TAG, "[SemFilterManager] loadFilter() cursor is null");
@@ -376,11 +503,19 @@ public class SemFilterManager {
             HashMap<String, Resources> resourceMap = new HashMap<>();
             while (cursor.moveToNext()) {
                 String filterName = cursor.getString(0);
-                if (filterName != null && !filterName.isEmpty() && (filterFullName = cursor.getString(1)) != null && !filterFullName.isEmpty() && (packageName = cursor.getString(2)) != null && !packageName.isEmpty()) {
+                if (filterName != null
+                        && !filterName.isEmpty()
+                        && (filterFullName = cursor.getString(1)) != null
+                        && !filterFullName.isEmpty()
+                        && (packageName = cursor.getString(2)) != null
+                        && !packageName.isEmpty()) {
                     try {
                         Resources resources = resourceMap.get(packageName);
                         if (resources == null) {
-                            resources = this.mContext.getPackageManager().getResourcesForApplication(packageName);
+                            resources =
+                                    this.mContext
+                                            .getPackageManager()
+                                            .getResourcesForApplication(packageName);
                             resourceMap.put(packageName, resources);
                         }
                         int resId = cursor.getInt(6);
@@ -391,15 +526,27 @@ public class SemFilterManager {
                         e.printStackTrace();
                         filterTitle = filterName;
                     }
-                    String filterIdentifier = packageName + "," + filterFullName.substring(packageName.length() + 1);
+                    String filterIdentifier =
+                            packageName + "," + filterFullName.substring(packageName.length() + 1);
                     Log.i(TAG, "packageName : " + packageName);
                     Log.i(TAG, "filterFullName : " + filterFullName);
                     Log.i(TAG, "filterIdentifier : " + filterIdentifier);
                     Log.i(TAG, "filterName : " + filterName);
-                    if (filterIdentifier != null && !filterIdentifier.isEmpty() && (filterVendor = cursor.getString(3)) != null && !filterVendor.isEmpty()) {
+                    if (filterIdentifier != null
+                            && !filterIdentifier.isEmpty()
+                            && (filterVendor = cursor.getString(3)) != null
+                            && !filterVendor.isEmpty()) {
                         int filterCategory = cursor.getInt(4);
                         int filterVersion = cursor.getInt(5);
-                        SemFilter filter = new SemFilterImpl(packageName, filterName, filterIdentifier, filterTitle, filterVendor, filterCategory, filterVersion);
+                        SemFilter filter =
+                                new SemFilterImpl(
+                                        packageName,
+                                        filterName,
+                                        filterIdentifier,
+                                        filterTitle,
+                                        filterVendor,
+                                        filterCategory,
+                                        filterVersion);
                         FilterList.add(filter);
                     }
                 }
@@ -421,14 +568,28 @@ public class SemFilterManager {
         private String mFilterIdentifier;
         private int mFilterIdentifierIdx;
 
-        SemFilterImpl(String packageName, String filterName, String filterIdentifier, String title, String vendor2, int category, int version) {
+        SemFilterImpl(
+                String packageName,
+                String filterName,
+                String filterIdentifier,
+                String title,
+                String vendor2,
+                int category,
+                int version) {
             super(packageName, filterName, title, vendor2, category, version);
             this.mFilterIdentifier = "";
             this.mFilterIdentifierIdx = -1;
             this.mFilterIdentifier = filterIdentifier;
         }
 
-        SemFilterImpl(String packageName, String filterName, int filterIdentifierIdx, String title, String vendor2, int category, int version) {
+        SemFilterImpl(
+                String packageName,
+                String filterName,
+                int filterIdentifierIdx,
+                String title,
+                String vendor2,
+                int category,
+                int version) {
             super(packageName, filterName, title, vendor2, category, version);
             this.mFilterIdentifier = "";
             this.mFilterIdentifierIdx = -1;

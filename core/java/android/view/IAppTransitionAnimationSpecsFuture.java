@@ -22,7 +22,7 @@ public interface IAppTransitionAnimationSpecsFuture extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAppTransitionAnimationSpecsFuture {
+    public abstract static class Stub extends Binder implements IAppTransitionAnimationSpecsFuture {
         public static final String DESCRIPTOR = "android.view.IAppTransitionAnimationSpecsFuture";
         static final int TRANSACTION_get = 1;
 
@@ -61,7 +61,8 @@ public interface IAppTransitionAnimationSpecsFuture extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -104,7 +105,9 @@ public interface IAppTransitionAnimationSpecsFuture extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    AppTransitionAnimationSpec[] _result = (AppTransitionAnimationSpec[]) _reply.createTypedArray(AppTransitionAnimationSpec.CREATOR);
+                    AppTransitionAnimationSpec[] _result =
+                            (AppTransitionAnimationSpec[])
+                                    _reply.createTypedArray(AppTransitionAnimationSpec.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

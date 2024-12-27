@@ -1,6 +1,7 @@
 package android.os;
 
 import com.android.modules.utils.BasicShellCommandHandler;
+
 import java.io.FileDescriptor;
 
 /* loaded from: classes3.dex */
@@ -8,7 +9,14 @@ public abstract class ShellCommand extends BasicShellCommandHandler {
     private ResultReceiver mResultReceiver;
     private ShellCallback mShellCallback;
 
-    public int exec(Binder target, FileDescriptor in, FileDescriptor out, FileDescriptor err, String[] args, ShellCallback callback, ResultReceiver resultReceiver) {
+    public int exec(
+            Binder target,
+            FileDescriptor in,
+            FileDescriptor out,
+            FileDescriptor err,
+            String[] args,
+            ShellCallback callback,
+            ResultReceiver resultReceiver) {
         this.mShellCallback = callback;
         this.mResultReceiver = resultReceiver;
         int result = super.exec(target, in, out, err, args);
@@ -26,7 +34,8 @@ public abstract class ShellCommand extends BasicShellCommandHandler {
 
     public ParcelFileDescriptor openFileForSystem(String path, String mode) {
         try {
-            ParcelFileDescriptor pfd = getShellCallback().openFile(path, "u:r:system_server:s0", mode);
+            ParcelFileDescriptor pfd =
+                    getShellCallback().openFile(path, "u:r:system_server:s0", mode);
             if (pfd != null) {
                 return pfd;
             }

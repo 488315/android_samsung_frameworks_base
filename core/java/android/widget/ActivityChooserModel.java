@@ -14,7 +14,12 @@ import android.os.Process;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Xml;
+
 import com.android.internal.content.PackageMonitor;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -25,8 +30,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes4.dex */
 public class ActivityChooserModel extends DataSetObservable {
@@ -153,17 +156,22 @@ public class ActivityChooserModel extends DataSetObservable {
             }
             ensureConsistentState();
             ActivityResolveInfo chosenActivity = this.mActivities.get(index);
-            ComponentName chosenName = new ComponentName(chosenActivity.resolveInfo.activityInfo.packageName, chosenActivity.resolveInfo.activityInfo.name);
+            ComponentName chosenName =
+                    new ComponentName(
+                            chosenActivity.resolveInfo.activityInfo.packageName,
+                            chosenActivity.resolveInfo.activityInfo.name);
             Intent choiceIntent = new Intent(this.mIntent);
             choiceIntent.setComponent(chosenName);
             if (this.mActivityChoserModelPolicy != null) {
                 Intent choiceIntentCopy = new Intent(choiceIntent);
-                boolean handled = this.mActivityChoserModelPolicy.onChooseActivity(this, choiceIntentCopy);
+                boolean handled =
+                        this.mActivityChoserModelPolicy.onChooseActivity(this, choiceIntentCopy);
                 if (handled) {
                     return null;
                 }
             }
-            HistoricalRecord historicalRecord = new HistoricalRecord(chosenName, System.currentTimeMillis(), 1.0f);
+            HistoricalRecord historicalRecord =
+                    new HistoricalRecord(chosenName, System.currentTimeMillis(), 1.0f);
             addHisoricalRecord(historicalRecord);
             return choiceIntent;
         }
@@ -196,8 +204,12 @@ public class ActivityChooserModel extends DataSetObservable {
             } else {
                 weight = 1.0f;
             }
-            ComponentName defaultName = new ComponentName(newDefaultActivity.resolveInfo.activityInfo.packageName, newDefaultActivity.resolveInfo.activityInfo.name);
-            HistoricalRecord historicalRecord = new HistoricalRecord(defaultName, System.currentTimeMillis(), weight);
+            ComponentName defaultName =
+                    new ComponentName(
+                            newDefaultActivity.resolveInfo.activityInfo.packageName,
+                            newDefaultActivity.resolveInfo.activityInfo.name);
+            HistoricalRecord historicalRecord =
+                    new HistoricalRecord(defaultName, System.currentTimeMillis(), weight);
             addHisoricalRecord(historicalRecord);
         }
     }
@@ -211,7 +223,11 @@ public class ActivityChooserModel extends DataSetObservable {
         }
         this.mHistoricalRecordsChanged = false;
         if (!TextUtils.isEmpty(this.mHistoryFileName)) {
-            new PersistHistoryAsyncTask().executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, new ArrayList(this.mHistoricalRecords), this.mHistoryFileName);
+            new PersistHistoryAsyncTask()
+                    .executeOnExecutor(
+                            AsyncTask.SERIAL_EXECUTOR,
+                            new ArrayList(this.mHistoricalRecords),
+                            this.mHistoryFileName);
         }
     }
 
@@ -273,8 +289,14 @@ public class ActivityChooserModel extends DataSetObservable {
     }
 
     private boolean sortActivitiesIfNeeded() {
-        if (this.mActivitySorter != null && this.mIntent != null && !this.mActivities.isEmpty() && !this.mHistoricalRecords.isEmpty()) {
-            this.mActivitySorter.sort(this.mIntent, this.mActivities, Collections.unmodifiableList(this.mHistoricalRecords));
+        if (this.mActivitySorter != null
+                && this.mIntent != null
+                && !this.mActivities.isEmpty()
+                && !this.mHistoricalRecords.isEmpty()) {
+            this.mActivitySorter.sort(
+                    this.mIntent,
+                    this.mActivities,
+                    Collections.unmodifiableList(this.mHistoricalRecords));
             return true;
         }
         return false;
@@ -286,12 +308,18 @@ public class ActivityChooserModel extends DataSetObservable {
         }
         this.mReloadActivities = false;
         this.mActivities.clear();
-        List<ResolveInfo> resolveInfos = this.mContext.getPackageManager().queryIntentActivities(this.mIntent, 0);
+        List<ResolveInfo> resolveInfos =
+                this.mContext.getPackageManager().queryIntentActivities(this.mIntent, 0);
         int resolveInfoCount = resolveInfos.size();
         for (int i = 0; i < resolveInfoCount; i++) {
             ResolveInfo resolveInfo = resolveInfos.get(i);
             ActivityInfo activityInfo = resolveInfo.activityInfo;
-            if (ActivityManager.checkComponentPermission(activityInfo.permission, Process.myUid(), activityInfo.applicationInfo.uid, activityInfo.exported) == 0) {
+            if (ActivityManager.checkComponentPermission(
+                            activityInfo.permission,
+                            Process.myUid(),
+                            activityInfo.applicationInfo.uid,
+                            activityInfo.exported)
+                    == 0) {
                 this.mActivities.add(new ActivityResolveInfo(resolveInfo));
             }
         }
@@ -299,7 +327,9 @@ public class ActivityChooserModel extends DataSetObservable {
     }
 
     private boolean readHistoricalDataIfNeeded() {
-        if (!this.mCanReadHistoricalData || !this.mHistoricalRecordsChanged || TextUtils.isEmpty(this.mHistoryFileName)) {
+        if (!this.mCanReadHistoricalData
+                || !this.mHistoricalRecordsChanged
+                || TextUtils.isEmpty(this.mHistoryFileName)) {
             return false;
         }
         this.mCanReadHistoricalData = false;
@@ -348,7 +378,8 @@ public class ActivityChooserModel extends DataSetObservable {
 
         public int hashCode() {
             int result = (1 * 31) + (this.activity == null ? 0 : this.activity.hashCode());
-            return (((result * 31) + ((int) (this.time ^ (this.time >>> 32)))) * 31) + Float.floatToIntBits(this.weight);
+            return (((result * 31) + ((int) (this.time ^ (this.time >>> 32)))) * 31)
+                    + Float.floatToIntBits(this.weight);
         }
 
         public boolean equals(Object obj) {
@@ -366,7 +397,8 @@ public class ActivityChooserModel extends DataSetObservable {
             } else if (!this.activity.equals(other.activity)) {
                 return false;
             }
-            if (this.time == other.time && Float.floatToIntBits(this.weight) == Float.floatToIntBits(other.weight)) {
+            if (this.time == other.time
+                    && Float.floatToIntBits(this.weight) == Float.floatToIntBits(other.weight)) {
                 return true;
             }
             return false;
@@ -433,14 +465,21 @@ public class ActivityChooserModel extends DataSetObservable {
         }
 
         @Override // android.widget.ActivityChooserModel.ActivitySorter
-        public void sort(Intent intent, List<ActivityResolveInfo> activities, List<HistoricalRecord> historicalRecords) {
-            Map<ComponentName, ActivityResolveInfo> componentNameToActivityMap = this.mPackageNameToActivityMap;
+        public void sort(
+                Intent intent,
+                List<ActivityResolveInfo> activities,
+                List<HistoricalRecord> historicalRecords) {
+            Map<ComponentName, ActivityResolveInfo> componentNameToActivityMap =
+                    this.mPackageNameToActivityMap;
             componentNameToActivityMap.clear();
             int activityCount = activities.size();
             for (int i = 0; i < activityCount; i++) {
                 ActivityResolveInfo activity = activities.get(i);
                 activity.weight = 0.0f;
-                ComponentName componentName = new ComponentName(activity.resolveInfo.activityInfo.packageName, activity.resolveInfo.activityInfo.name);
+                ComponentName componentName =
+                        new ComponentName(
+                                activity.resolveInfo.activityInfo.packageName,
+                                activity.resolveInfo.activityInfo.name);
                 componentNameToActivityMap.put(componentName, activity);
             }
             int i2 = historicalRecords.size();
@@ -469,10 +508,13 @@ public class ActivityChooserModel extends DataSetObservable {
                         try {
                             parser = Xml.newPullParser();
                             parser.setInput(fis, StandardCharsets.UTF_8.name());
-                            for (int type = 0; type != 1 && type != 2; type = parser.next()) {
-                            }
+                            for (int type = 0; type != 1 && type != 2; type = parser.next()) {}
                         } catch (XmlPullParserException xppe) {
-                            Log.e(LOG_TAG, "Error reading historical recrod file: " + this.mHistoryFileName, xppe);
+                            Log.e(
+                                    LOG_TAG,
+                                    "Error reading historical recrod file: "
+                                            + this.mHistoryFileName,
+                                    xppe);
                             if (fis == null) {
                                 return;
                             } else {
@@ -480,7 +522,10 @@ public class ActivityChooserModel extends DataSetObservable {
                             }
                         }
                     } catch (IOException ioe) {
-                        Log.e(LOG_TAG, "Error reading historical recrod file: " + this.mHistoryFileName, ioe);
+                        Log.e(
+                                LOG_TAG,
+                                "Error reading historical recrod file: " + this.mHistoryFileName,
+                                ioe);
                         if (fis == null) {
                             return;
                         } else {
@@ -488,7 +533,8 @@ public class ActivityChooserModel extends DataSetObservable {
                         }
                     }
                     if (!TAG_HISTORICAL_RECORDS.equals(parser.getName())) {
-                        throw new XmlPullParserException("Share records file does not start with historical-records tag.");
+                        throw new XmlPullParserException(
+                                "Share records file does not start with historical-records tag.");
                     }
                     List<HistoricalRecord> historicalRecords = this.mHistoricalRecords;
                     historicalRecords.clear();
@@ -503,12 +549,15 @@ public class ActivityChooserModel extends DataSetObservable {
                         } else if (type2 != 3 && type2 != 4) {
                             String nodeName = parser.getName();
                             if (!TAG_HISTORICAL_RECORD.equals(nodeName)) {
-                                throw new XmlPullParserException("Share records file not well-formed.");
+                                throw new XmlPullParserException(
+                                        "Share records file not well-formed.");
                             }
                             String activity = parser.getAttributeValue(null, "activity");
                             long time = Long.parseLong(parser.getAttributeValue(null, "time"));
-                            float weight = Float.parseFloat(parser.getAttributeValue(null, "weight"));
-                            HistoricalRecord readRecord = new HistoricalRecord(activity, time, weight);
+                            float weight =
+                                    Float.parseFloat(parser.getAttributeValue(null, "weight"));
+                            HistoricalRecord readRecord =
+                                    new HistoricalRecord(activity, time, weight);
                             historicalRecords.add(readRecord);
                         }
                     }
@@ -528,8 +577,7 @@ public class ActivityChooserModel extends DataSetObservable {
     }
 
     private final class PersistHistoryAsyncTask extends AsyncTask<Object, Void, Void> {
-        private PersistHistoryAsyncTask() {
-        }
+        private PersistHistoryAsyncTask() {}
 
         /* JADX WARN: Removed duplicated region for block: B:43:0x0129 A[EXC_TOP_SPLITTER, SYNTHETIC] */
         /* JADX WARN: Removed duplicated region for block: B:49:? A[SYNTHETIC] */
@@ -543,13 +591,14 @@ public class ActivityChooserModel extends DataSetObservable {
                 Method dump skipped, instructions count: 331
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: android.widget.ActivityChooserModel.PersistHistoryAsyncTask.doInBackground(java.lang.Object[]):java.lang.Void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " android.widget.ActivityChooserModel.PersistHistoryAsyncTask.doInBackground(java.lang.Object[]):java.lang.Void");
         }
     }
 
     private final class DataModelPackageMonitor extends PackageMonitor {
-        private DataModelPackageMonitor() {
-        }
+        private DataModelPackageMonitor() {}
 
         @Override // com.android.internal.content.PackageMonitor
         public void onSomePackagesChanged() {

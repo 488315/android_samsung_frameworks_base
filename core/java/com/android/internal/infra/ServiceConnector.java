@@ -14,7 +14,7 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.Log;
 import android.util.Slog;
-import com.android.internal.infra.ServiceConnector;
+
 import java.io.PrintWriter;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -56,7 +56,8 @@ public interface ServiceConnector<I extends IInterface> {
 
         /* JADX WARN: Multi-variable type inference failed */
         @Override // com.android.internal.infra.ServiceConnector.Job
-        /* bridge */ /* synthetic */ default Void run(Object obj) throws Exception {
+        /* bridge */
+        /* synthetic */ default Void run(Object obj) throws Exception {
             return run2((VoidJob<II>) obj);
         }
 
@@ -69,17 +70,15 @@ public interface ServiceConnector<I extends IInterface> {
     }
 
     public interface ServiceLifecycleCallbacks<II extends IInterface> {
-        default void onConnected(II service) {
-        }
+        default void onConnected(II service) {}
 
-        default void onDisconnected(II service) {
-        }
+        default void onDisconnected(II service) {}
 
-        default void onBinderDied() {
-        }
+        default void onBinderDied() {}
     }
 
-    public static class Impl<I extends IInterface> extends ArrayDeque<Job<I, ?>> implements ServiceConnector<I>, ServiceConnection, IBinder.DeathRecipient, Runnable {
+    public static class Impl<I extends IInterface> extends ArrayDeque<Job<I, ?>>
+            implements ServiceConnector<I>, ServiceConnection, IBinder.DeathRecipient, Runnable {
         static final boolean DEBUG = false;
         private static final long DEFAULT_DISCONNECT_TIMEOUT_MS = 15000;
         private static final long DEFAULT_REQUEST_TIMEOUT_MS = 30000;
@@ -101,7 +100,12 @@ public interface ServiceConnector<I extends IInterface> {
         private final Handler mHandler = getJobHandler();
         protected final Executor mExecutor = new HandlerExecutor(this.mHandler);
 
-        public Impl(Context context, Intent intent, int bindingFlags, int userId, Function<IBinder, I> binderAsInterface) {
+        public Impl(
+                Context context,
+                Intent intent,
+                int bindingFlags,
+                int userId,
+                Function<IBinder, I> binderAsInterface) {
             this.mContext = context.createContextAsUser(UserHandle.of(userId), 0);
             this.mIntent = intent;
             this.mBindingFlags = bindingFlags;
@@ -121,18 +125,19 @@ public interface ServiceConnector<I extends IInterface> {
         }
 
         protected boolean bindService(ServiceConnection serviceConnection) {
-            return this.mContext.bindService(this.mIntent, this.mBindingFlags | 1, this.mExecutor, serviceConnection);
+            return this.mContext.bindService(
+                    this.mIntent, this.mBindingFlags | 1, this.mExecutor, serviceConnection);
         }
 
         protected I binderAsInterface(IBinder service) {
             return this.mBinderAsInterface.apply(service);
         }
 
-        protected void onServiceUnbound() {
-        }
+        protected void onServiceUnbound() {}
 
         private void dispatchOnServiceConnectionStatusChanged(I service, boolean isConnected) {
-            ServiceLifecycleCallbacks<I> serviceLifecycleCallbacks = this.mServiceLifecycleCallbacks;
+            ServiceLifecycleCallbacks<I> serviceLifecycleCallbacks =
+                    this.mServiceLifecycleCallbacks;
             if (serviceLifecycleCallbacks != null) {
                 if (isConnected) {
                     serviceLifecycleCallbacks.onConnected(service);
@@ -143,8 +148,7 @@ public interface ServiceConnector<I extends IInterface> {
             onServiceConnectionStatusChanged(service, isConnected);
         }
 
-        protected void onServiceConnectionStatusChanged(I service, boolean isConnected) {
-        }
+        protected void onServiceConnectionStatusChanged(I service, boolean isConnected) {}
 
         @Override // com.android.internal.infra.ServiceConnector
         public boolean run(VoidJob<I> job) {
@@ -177,12 +181,14 @@ public interface ServiceConnector<I extends IInterface> {
         public synchronized AndroidFuture<I> connect() {
             if (this.mServiceConnectionFutureCache == null) {
                 this.mServiceConnectionFutureCache = new CompletionAwareJob<>();
-                this.mServiceConnectionFutureCache.mDelegate = new Job() { // from class: com.android.internal.infra.ServiceConnector$Impl$$ExternalSyntheticLambda1
-                    @Override // com.android.internal.infra.ServiceConnector.Job
-                    public final Object run(Object obj) {
-                        return ServiceConnector.Impl.lambda$connect$0((IInterface) obj);
-                    }
-                };
+                this.mServiceConnectionFutureCache.mDelegate =
+                        new Job() { // from class:
+                                    // com.android.internal.infra.ServiceConnector$Impl$$ExternalSyntheticLambda1
+                            @Override // com.android.internal.infra.ServiceConnector.Job
+                            public final Object run(Object obj) {
+                                return ServiceConnector.Impl.lambda$connect$0((IInterface) obj);
+                            }
+                        };
                 I service = this.mService;
                 if (service != null) {
                     this.mServiceConnectionFutureCache.complete(service);
@@ -199,18 +205,24 @@ public interface ServiceConnector<I extends IInterface> {
 
         private void enqueue(Impl<I>.CompletionAwareJob<I, ?> task) {
             if (!enqueue((Job) task)) {
-                task.completeExceptionally(new IllegalStateException("Failed to post a job to handler. Likely " + this.mHandler.getLooper() + " is exiting"));
+                task.completeExceptionally(
+                        new IllegalStateException(
+                                "Failed to post a job to handler. Likely "
+                                        + this.mHandler.getLooper()
+                                        + " is exiting"));
             }
         }
 
         private boolean enqueue(final Job<I, ?> job) {
             cancelTimeout();
-            return this.mHandler.post(new Runnable() { // from class: com.android.internal.infra.ServiceConnector$Impl$$ExternalSyntheticLambda2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ServiceConnector.Impl.this.lambda$enqueue$1(job);
-                }
-            });
+            return this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // com.android.internal.infra.ServiceConnector$Impl$$ExternalSyntheticLambda2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ServiceConnector.Impl.this.lambda$enqueue$1(job);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: package-private */
@@ -218,11 +230,13 @@ public interface ServiceConnector<I extends IInterface> {
         public void lambda$enqueue$1(Job<I, ?> job) {
             cancelTimeout();
             if (this.mUnbinding) {
-                completeExceptionally(job, new IllegalStateException("Service is unbinding. Ignoring " + job));
+                completeExceptionally(
+                        job, new IllegalStateException("Service is unbinding. Ignoring " + job));
                 return;
             }
             if (!this.mQueue.offer(job)) {
-                completeExceptionally(job, new IllegalStateException("Failed to add to queue: " + job));
+                completeExceptionally(
+                        job, new IllegalStateException("Failed to add to queue: " + job));
                 return;
             }
             if (isBound()) {
@@ -231,7 +245,9 @@ public interface ServiceConnector<I extends IInterface> {
                 if (bindService(this.mServiceConnection)) {
                     this.mBinding = true;
                 } else {
-                    completeExceptionally(job, new IllegalStateException("Failed to bind to service " + this.mIntent));
+                    completeExceptionally(
+                            job,
+                            new IllegalStateException("Failed to bind to service " + this.mIntent));
                 }
             }
         }
@@ -241,7 +257,8 @@ public interface ServiceConnector<I extends IInterface> {
         }
 
         void completeExceptionally(Job<?, ?> job, Throwable ex) {
-            CompletionAwareJob task = (CompletionAwareJob) castOrNull(job, CompletionAwareJob.class);
+            CompletionAwareJob task =
+                    (CompletionAwareJob) castOrNull(job, CompletionAwareJob.class);
             if (task != null) {
                 task.completeExceptionally(ex);
             }
@@ -263,7 +280,8 @@ public interface ServiceConnector<I extends IInterface> {
             while (true) {
                 Job<I, ?> poll = this.mQueue.poll();
                 if (poll != null) {
-                    Impl<I>.CompletionAwareJob<I, ?> completionAwareJob = (CompletionAwareJob) castOrNull(poll, CompletionAwareJob.class);
+                    Impl<I>.CompletionAwareJob<I, ?> completionAwareJob =
+                            (CompletionAwareJob) castOrNull(poll, CompletionAwareJob.class);
                     try {
                         i = this.mService;
                     } catch (Throwable th) {
@@ -309,12 +327,14 @@ public interface ServiceConnector<I extends IInterface> {
         @Override // com.android.internal.infra.ServiceConnector
         public void unbind() {
             this.mUnbinding = true;
-            this.mHandler.post(new Runnable() { // from class: com.android.internal.infra.ServiceConnector$Impl$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ServiceConnector.Impl.this.unbindJobThread();
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // com.android.internal.infra.ServiceConnector$Impl$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ServiceConnector.Impl.this.unbindJobThread();
+                        }
+                    });
         }
 
         @Override // com.android.internal.infra.ServiceConnector
@@ -356,7 +376,8 @@ public interface ServiceConnector<I extends IInterface> {
             while (true) {
                 Job<I, ?> job = this.mQueue.poll();
                 if (job != null) {
-                    CompletionAwareJob task = (CompletionAwareJob) castOrNull(job, CompletionAwareJob.class);
+                    CompletionAwareJob task =
+                            (CompletionAwareJob) castOrNull(job, CompletionAwareJob.class);
                     if (task != null) {
                         task.cancel(false);
                     }
@@ -407,7 +428,8 @@ public interface ServiceConnector<I extends IInterface> {
         }
 
         private void dispatchOnBinderDied() {
-            ServiceLifecycleCallbacks<I> serviceLifecycleCallbacks = this.mServiceLifecycleCallbacks;
+            ServiceLifecycleCallbacks<I> serviceLifecycleCallbacks =
+                    this.mServiceLifecycleCallbacks;
             if (serviceLifecycleCallbacks != null) {
                 serviceLifecycleCallbacks.onBinderDied();
             }
@@ -424,23 +446,52 @@ public interface ServiceConnector<I extends IInterface> {
 
         @Override // java.util.AbstractCollection
         public String toString() {
-            StringBuilder sb = new StringBuilder("ServiceConnector@").append(System.identityHashCode(this) % 1000).append(NavigationBarInflaterView.KEY_CODE_START).append(this.mIntent).append(", user: ").append(this.mContext.getUser().getIdentifier()).append(")[").append(stateToString());
+            StringBuilder sb =
+                    new StringBuilder("ServiceConnector@")
+                            .append(System.identityHashCode(this) % 1000)
+                            .append(NavigationBarInflaterView.KEY_CODE_START)
+                            .append(this.mIntent)
+                            .append(", user: ")
+                            .append(this.mContext.getUser().getIdentifier())
+                            .append(")[")
+                            .append(stateToString());
             if (!this.mQueue.isEmpty()) {
                 sb.append(", ").append(this.mQueue.size()).append(" pending job(s)");
             }
             if (!this.mUnfinishedJobs.isEmpty()) {
-                sb.append(", ").append(this.mUnfinishedJobs.size()).append(" unfinished async job(s)");
+                sb.append(", ")
+                        .append(this.mUnfinishedJobs.size())
+                        .append(" unfinished async job(s)");
             }
             return sb.append(NavigationBarInflaterView.SIZE_MOD_END).toString();
         }
 
         public void dump(String prefix, PrintWriter pw) {
             pw.append((CharSequence) prefix).append("ServiceConnector:").println();
-            pw.append((CharSequence) prefix).append("  ").append((CharSequence) String.valueOf(this.mIntent)).println();
-            pw.append((CharSequence) prefix).append("  ").append("userId: ").append((CharSequence) String.valueOf(this.mContext.getUser().getIdentifier())).println();
-            pw.append((CharSequence) prefix).append("  ").append("State: ").append((CharSequence) stateToString()).println();
-            pw.append((CharSequence) prefix).append("  ").append("Pending jobs: ").append((CharSequence) String.valueOf(this.mQueue.size())).println();
-            pw.append((CharSequence) prefix).append("  ").append("Unfinished async jobs: ").append((CharSequence) String.valueOf(this.mUnfinishedJobs.size())).println();
+            pw.append((CharSequence) prefix)
+                    .append("  ")
+                    .append((CharSequence) String.valueOf(this.mIntent))
+                    .println();
+            pw.append((CharSequence) prefix)
+                    .append("  ")
+                    .append("userId: ")
+                    .append((CharSequence) String.valueOf(this.mContext.getUser().getIdentifier()))
+                    .println();
+            pw.append((CharSequence) prefix)
+                    .append("  ")
+                    .append("State: ")
+                    .append((CharSequence) stateToString())
+                    .println();
+            pw.append((CharSequence) prefix)
+                    .append("  ")
+                    .append("Pending jobs: ")
+                    .append((CharSequence) String.valueOf(this.mQueue.size()))
+                    .println();
+            pw.append((CharSequence) prefix)
+                    .append("  ")
+                    .append("Unfinished async jobs: ")
+                    .append((CharSequence) String.valueOf(this.mUnfinishedJobs.size()))
+                    .println();
         }
 
         private String stateToString() {
@@ -460,7 +511,8 @@ public interface ServiceConnector<I extends IInterface> {
             Log.i(LOG_TAG, "See stacktrace", new Throwable());
         }
 
-        class CompletionAwareJob<II, R> extends AndroidFuture<R> implements Job<II, R>, BiConsumer<R, Throwable> {
+        class CompletionAwareJob<II, R> extends AndroidFuture<R>
+                implements Job<II, R>, BiConsumer<R, Throwable> {
             boolean mAsync = false;
             private String mDebugName;
             Job<II, R> mDelegate;
@@ -488,7 +540,8 @@ public interface ServiceConnector<I extends IInterface> {
                 return this.mDelegate.run(service);
             }
 
-            @Override // com.android.internal.infra.AndroidFuture, java.util.concurrent.CompletableFuture, java.util.concurrent.Future
+            @Override // com.android.internal.infra.AndroidFuture,
+                      // java.util.concurrent.CompletableFuture, java.util.concurrent.Future
             public boolean cancel(boolean mayInterruptIfRunning) {
                 if (mayInterruptIfRunning) {
                     Log.w(Impl.LOG_TAG, "mayInterruptIfRunning not supported - ignoring");
@@ -521,7 +574,8 @@ public interface ServiceConnector<I extends IInterface> {
         }
     }
 
-    public static class NoOp<T extends IInterface> extends AndroidFuture<Object> implements ServiceConnector<T> {
+    public static class NoOp<T extends IInterface> extends AndroidFuture<Object>
+            implements ServiceConnector<T> {
         public NoOp() {
             completeExceptionally(new IllegalStateException("ServiceConnector is a no-op"));
         }
@@ -552,11 +606,9 @@ public interface ServiceConnector<I extends IInterface> {
         }
 
         @Override // com.android.internal.infra.ServiceConnector
-        public void unbind() {
-        }
+        public void unbind() {}
 
         @Override // com.android.internal.infra.ServiceConnector
-        public void setServiceLifecycleCallbacks(ServiceLifecycleCallbacks<T> callbacks) {
-        }
+        public void setServiceLifecycleCallbacks(ServiceLifecycleCallbacks<T> callbacks) {}
     }
 }

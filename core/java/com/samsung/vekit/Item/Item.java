@@ -1,6 +1,7 @@
 package com.samsung.vekit.Item;
 
 import android.util.Log;
+
 import com.samsung.vekit.Animation.Animation;
 import com.samsung.vekit.Common.Object.Element;
 import com.samsung.vekit.Common.Object.Filter;
@@ -17,6 +18,7 @@ import com.samsung.vekit.Layer.Layer;
 import com.samsung.vekit.Listener.ItemStatusListener;
 import com.samsung.vekit.Listener.PcmInfoListener;
 import com.samsung.vekit.Panel.Panel;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -49,8 +51,7 @@ public class Item extends Element implements ItemStatusListener {
         this.regionList = new ArrayList<>();
     }
 
-    public void checkValidContent(Content content) throws Exception {
-    }
+    public void checkValidContent(Content content) throws Exception {}
 
     public Layer getParent() {
         return this.parent;
@@ -271,7 +272,9 @@ public class Item extends Element implements ItemStatusListener {
     public void checkValidAnimation(Animation animation) throws Exception {
         Boolean valid = Boolean.valueOf(animation.getAnimationType() != AnimationType.TRANSITION);
         if (!valid.booleanValue()) {
-            throw new Exception("isInvalidElement : please attach correct Animation(not TransitionAnimation) to Item.");
+            throw new Exception(
+                    "isInvalidElement : please attach correct Animation(not TransitionAnimation) to"
+                        + " Item.");
         }
     }
 

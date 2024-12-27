@@ -11,12 +11,14 @@ import com.android.internal.org.bouncycastle.crypto.params.DHPublicKeyParameters
 import com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.PrimeCertaintyCalculator;
 import com.android.internal.org.bouncycastle.jce.provider.BouncyCastleProvider;
 import com.android.internal.org.bouncycastle.util.Integers;
+
 import java.security.InvalidAlgorithmParameterException;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.SecureRandom;
 import java.security.spec.AlgorithmParameterSpec;
 import java.util.Hashtable;
+
 import javax.crypto.spec.DHParameterSpec;
 
 /* loaded from: classes5.dex */
@@ -45,7 +47,8 @@ public class KeyPairGeneratorSpi extends KeyPairGenerator {
     }
 
     @Override // java.security.KeyPairGenerator, java.security.KeyPairGeneratorSpi
-    public void initialize(AlgorithmParameterSpec params2, SecureRandom random) throws InvalidAlgorithmParameterException {
+    public void initialize(AlgorithmParameterSpec params2, SecureRandom random)
+            throws InvalidAlgorithmParameterException {
         if (!(params2 instanceof DHParameterSpec)) {
             throw new InvalidAlgorithmParameterException("parameter object not a DHParameterSpec");
         }
@@ -60,7 +63,8 @@ public class KeyPairGeneratorSpi extends KeyPairGenerator {
     }
 
     private DHKeyGenerationParameters convertParams(SecureRandom random, DHParameterSpec dhParams) {
-        return new DHKeyGenerationParameters(random, new DHParameters(dhParams.getP(), dhParams.getG(), null, dhParams.getL()));
+        return new DHKeyGenerationParameters(
+                random, new DHParameters(dhParams.getP(), dhParams.getG(), null, dhParams.getL()));
     }
 
     @Override // java.security.KeyPairGenerator, java.security.KeyPairGeneratorSpi
@@ -70,7 +74,8 @@ public class KeyPairGeneratorSpi extends KeyPairGenerator {
             if (params.containsKey(paramStrength)) {
                 this.param = (DHKeyGenerationParameters) params.get(paramStrength);
             } else {
-                DHParameterSpec dhParams = BouncyCastleProvider.CONFIGURATION.getDHDefaultParameters(this.strength);
+                DHParameterSpec dhParams =
+                        BouncyCastleProvider.CONFIGURATION.getDHDefaultParameters(this.strength);
                 if (dhParams != null) {
                     this.param = convertParams(this.random, dhParams);
                 } else {
@@ -79,8 +84,13 @@ public class KeyPairGeneratorSpi extends KeyPairGenerator {
                             this.param = (DHKeyGenerationParameters) params.get(paramStrength);
                         } else {
                             DHParametersGenerator pGen = new DHParametersGenerator();
-                            pGen.init(this.strength, PrimeCertaintyCalculator.getDefaultCertainty(this.strength), this.random);
-                            this.param = new DHKeyGenerationParameters(this.random, pGen.generateParameters());
+                            pGen.init(
+                                    this.strength,
+                                    PrimeCertaintyCalculator.getDefaultCertainty(this.strength),
+                                    this.random);
+                            this.param =
+                                    new DHKeyGenerationParameters(
+                                            this.random, pGen.generateParameters());
                             params.put(paramStrength, this.param);
                         }
                     }

@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.net.InetAddress;
@@ -15,19 +16,22 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes4.dex */
 public final class SipDelegateConfiguration implements Parcelable {
-    public static final Parcelable.Creator<SipDelegateConfiguration> CREATOR = new Parcelable.Creator<SipDelegateConfiguration>() { // from class: android.telephony.ims.SipDelegateConfiguration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SipDelegateConfiguration createFromParcel(Parcel source) {
-            return new SipDelegateConfiguration(source);
-        }
+    public static final Parcelable.Creator<SipDelegateConfiguration> CREATOR =
+            new Parcelable.Creator<
+                    SipDelegateConfiguration>() { // from class:
+                                                  // android.telephony.ims.SipDelegateConfiguration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SipDelegateConfiguration createFromParcel(Parcel source) {
+                    return new SipDelegateConfiguration(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SipDelegateConfiguration[] newArray(int size) {
-            return new SipDelegateConfiguration[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SipDelegateConfiguration[] newArray(int size) {
+                    return new SipDelegateConfiguration[size];
+                }
+            };
     public static final int SIP_TRANSPORT_TCP = 1;
     public static final int SIP_TRANSPORT_UDP = 0;
     public static final int UDP_PAYLOAD_SIZE_UNDEFINED = -1;
@@ -57,8 +61,7 @@ public final class SipDelegateConfiguration implements Parcelable {
     private final long mVersion;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TransportType {
-    }
+    public @interface TransportType {}
 
     public static final class IpSecConfiguration {
         private final int mLastLocalTxPort;
@@ -69,7 +72,14 @@ public final class SipDelegateConfiguration implements Parcelable {
         private final int mRemoteTxPort;
         private final String mSecurityHeader;
 
-        public IpSecConfiguration(int localTxPort, int localRxPort, int lastLocalTxPort, int remoteTxPort, int remoteRxPort, int lastRemoteTxPort, String securityHeader) {
+        public IpSecConfiguration(
+                int localTxPort,
+                int localRxPort,
+                int lastLocalTxPort,
+                int remoteTxPort,
+                int remoteRxPort,
+                int lastRemoteTxPort,
+                String securityHeader) {
             this.mLocalTxPort = localTxPort;
             this.mLocalRxPort = localRxPort;
             this.mLastLocalTxPort = lastLocalTxPort;
@@ -118,11 +128,32 @@ public final class SipDelegateConfiguration implements Parcelable {
         }
 
         public static IpSecConfiguration fromParcel(Parcel source) {
-            return new IpSecConfiguration(source.readInt(), source.readInt(), source.readInt(), source.readInt(), source.readInt(), source.readInt(), source.readString());
+            return new IpSecConfiguration(
+                    source.readInt(),
+                    source.readInt(),
+                    source.readInt(),
+                    source.readInt(),
+                    source.readInt(),
+                    source.readInt(),
+                    source.readString());
         }
 
         public String toString() {
-            return "IpSecConfiguration{localTx=" + this.mLocalTxPort + ", localRx=" + this.mLocalRxPort + ", lastLocalTx=" + this.mLastLocalTxPort + ", remoteTx=" + this.mRemoteTxPort + ", remoteRx=" + this.mRemoteRxPort + ", lastRemoteTx=" + this.mLastRemoteTxPort + ", securityHeader=" + this.mSecurityHeader + '}';
+            return "IpSecConfiguration{localTx="
+                    + this.mLocalTxPort
+                    + ", localRx="
+                    + this.mLocalRxPort
+                    + ", lastLocalTx="
+                    + this.mLastLocalTxPort
+                    + ", remoteTx="
+                    + this.mRemoteTxPort
+                    + ", remoteRx="
+                    + this.mRemoteRxPort
+                    + ", lastRemoteTx="
+                    + this.mLastRemoteTxPort
+                    + ", securityHeader="
+                    + this.mSecurityHeader
+                    + '}';
         }
 
         public boolean equals(Object o) {
@@ -133,22 +164,40 @@ public final class SipDelegateConfiguration implements Parcelable {
                 return false;
             }
             IpSecConfiguration that = (IpSecConfiguration) o;
-            if (this.mLocalTxPort == that.mLocalTxPort && this.mLocalRxPort == that.mLocalRxPort && this.mLastLocalTxPort == that.mLastLocalTxPort && this.mRemoteTxPort == that.mRemoteTxPort && this.mRemoteRxPort == that.mRemoteRxPort && this.mLastRemoteTxPort == that.mLastRemoteTxPort && Objects.equals(this.mSecurityHeader, that.mSecurityHeader)) {
+            if (this.mLocalTxPort == that.mLocalTxPort
+                    && this.mLocalRxPort == that.mLocalRxPort
+                    && this.mLastLocalTxPort == that.mLastLocalTxPort
+                    && this.mRemoteTxPort == that.mRemoteTxPort
+                    && this.mRemoteRxPort == that.mRemoteRxPort
+                    && this.mLastRemoteTxPort == that.mLastRemoteTxPort
+                    && Objects.equals(this.mSecurityHeader, that.mSecurityHeader)) {
                 return true;
             }
             return false;
         }
 
         public int hashCode() {
-            return Objects.hash(Integer.valueOf(this.mLocalTxPort), Integer.valueOf(this.mLocalRxPort), Integer.valueOf(this.mLastLocalTxPort), Integer.valueOf(this.mRemoteTxPort), Integer.valueOf(this.mRemoteRxPort), Integer.valueOf(this.mLastRemoteTxPort), this.mSecurityHeader);
+            return Objects.hash(
+                    Integer.valueOf(this.mLocalTxPort),
+                    Integer.valueOf(this.mLocalRxPort),
+                    Integer.valueOf(this.mLastLocalTxPort),
+                    Integer.valueOf(this.mRemoteTxPort),
+                    Integer.valueOf(this.mRemoteRxPort),
+                    Integer.valueOf(this.mLastRemoteTxPort),
+                    this.mSecurityHeader);
         }
     }
 
     public static final class Builder {
         private final SipDelegateConfiguration mConfig;
 
-        public Builder(long version, int transportType, InetSocketAddress localAddr, InetSocketAddress serverAddr) {
-            this.mConfig = new SipDelegateConfiguration(version, transportType, localAddr, serverAddr);
+        public Builder(
+                long version,
+                int transportType,
+                InetSocketAddress localAddr,
+                InetSocketAddress serverAddr) {
+            this.mConfig =
+                    new SipDelegateConfiguration(version, transportType, localAddr, serverAddr);
         }
 
         public Builder(SipDelegateConfiguration c) {
@@ -260,7 +309,11 @@ public final class SipDelegateConfiguration implements Parcelable {
         }
     }
 
-    private SipDelegateConfiguration(long version, int transportType, InetSocketAddress localAddress, InetSocketAddress sipServerAddress) {
+    private SipDelegateConfiguration(
+            long version,
+            int transportType,
+            InetSocketAddress localAddress,
+            InetSocketAddress sipServerAddress) {
         this.mIsSipCompactFormEnabled = false;
         this.mIsSipKeepaliveEnabled = false;
         this.mMaxUdpPayloadSize = -1;
@@ -375,7 +428,12 @@ public final class SipDelegateConfiguration implements Parcelable {
     }
 
     public SipDelegateConfiguration copyAndIncrementVersion() {
-        SipDelegateConfiguration c = new SipDelegateConfiguration(getVersion() + 1, this.mTransportType, this.mLocalAddress, this.mSipServerAddress);
+        SipDelegateConfiguration c =
+                new SipDelegateConfiguration(
+                        getVersion() + 1,
+                        this.mTransportType,
+                        this.mLocalAddress,
+                        this.mSipServerAddress);
         c.mIsSipCompactFormEnabled = this.mIsSipCompactFormEnabled;
         c.mIsSipKeepaliveEnabled = this.mIsSipKeepaliveEnabled;
         c.mMaxUdpPayloadSize = this.mMaxUdpPayloadSize;
@@ -524,17 +582,68 @@ public final class SipDelegateConfiguration implements Parcelable {
             return false;
         }
         SipDelegateConfiguration that = (SipDelegateConfiguration) o;
-        if (this.mVersion == that.mVersion && this.mTransportType == that.mTransportType && this.mIsSipCompactFormEnabled == that.mIsSipCompactFormEnabled && this.mIsSipKeepaliveEnabled == that.mIsSipKeepaliveEnabled && this.mMaxUdpPayloadSize == that.mMaxUdpPayloadSize && Objects.equals(this.mLocalAddress, that.mLocalAddress) && Objects.equals(this.mSipServerAddress, that.mSipServerAddress) && Objects.equals(this.mPublicUserIdentifier, that.mPublicUserIdentifier) && Objects.equals(this.mPrivateUserIdentifier, that.mPrivateUserIdentifier) && Objects.equals(this.mHomeDomain, that.mHomeDomain) && Objects.equals(this.mImei, that.mImei) && Objects.equals(this.mGruu, that.mGruu) && Objects.equals(this.mSipAuthHeader, that.mSipAuthHeader) && Objects.equals(this.mSipAuthNonce, that.mSipAuthNonce) && Objects.equals(this.mServiceRouteHeader, that.mServiceRouteHeader) && Objects.equals(this.mPathHeader, that.mPathHeader) && Objects.equals(this.mUserAgentHeader, that.mUserAgentHeader) && Objects.equals(this.mContactUserParam, that.mContactUserParam) && Objects.equals(this.mPaniHeader, that.mPaniHeader) && Objects.equals(this.mPlaniHeader, that.mPlaniHeader) && Objects.equals(this.mCniHeader, that.mCniHeader) && Objects.equals(this.mAssociatedUriHeader, that.mAssociatedUriHeader) && Objects.equals(this.mIpSecConfiguration, that.mIpSecConfiguration) && Objects.equals(this.mNatAddress, that.mNatAddress)) {
+        if (this.mVersion == that.mVersion
+                && this.mTransportType == that.mTransportType
+                && this.mIsSipCompactFormEnabled == that.mIsSipCompactFormEnabled
+                && this.mIsSipKeepaliveEnabled == that.mIsSipKeepaliveEnabled
+                && this.mMaxUdpPayloadSize == that.mMaxUdpPayloadSize
+                && Objects.equals(this.mLocalAddress, that.mLocalAddress)
+                && Objects.equals(this.mSipServerAddress, that.mSipServerAddress)
+                && Objects.equals(this.mPublicUserIdentifier, that.mPublicUserIdentifier)
+                && Objects.equals(this.mPrivateUserIdentifier, that.mPrivateUserIdentifier)
+                && Objects.equals(this.mHomeDomain, that.mHomeDomain)
+                && Objects.equals(this.mImei, that.mImei)
+                && Objects.equals(this.mGruu, that.mGruu)
+                && Objects.equals(this.mSipAuthHeader, that.mSipAuthHeader)
+                && Objects.equals(this.mSipAuthNonce, that.mSipAuthNonce)
+                && Objects.equals(this.mServiceRouteHeader, that.mServiceRouteHeader)
+                && Objects.equals(this.mPathHeader, that.mPathHeader)
+                && Objects.equals(this.mUserAgentHeader, that.mUserAgentHeader)
+                && Objects.equals(this.mContactUserParam, that.mContactUserParam)
+                && Objects.equals(this.mPaniHeader, that.mPaniHeader)
+                && Objects.equals(this.mPlaniHeader, that.mPlaniHeader)
+                && Objects.equals(this.mCniHeader, that.mCniHeader)
+                && Objects.equals(this.mAssociatedUriHeader, that.mAssociatedUriHeader)
+                && Objects.equals(this.mIpSecConfiguration, that.mIpSecConfiguration)
+                && Objects.equals(this.mNatAddress, that.mNatAddress)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Long.valueOf(this.mVersion), Integer.valueOf(this.mTransportType), this.mLocalAddress, this.mSipServerAddress, Boolean.valueOf(this.mIsSipCompactFormEnabled), Boolean.valueOf(this.mIsSipKeepaliveEnabled), Integer.valueOf(this.mMaxUdpPayloadSize), this.mPublicUserIdentifier, this.mPrivateUserIdentifier, this.mHomeDomain, this.mImei, this.mGruu, this.mSipAuthHeader, this.mSipAuthNonce, this.mServiceRouteHeader, this.mPathHeader, this.mUserAgentHeader, this.mContactUserParam, this.mPaniHeader, this.mPlaniHeader, this.mCniHeader, this.mAssociatedUriHeader, this.mIpSecConfiguration, this.mNatAddress);
+        return Objects.hash(
+                Long.valueOf(this.mVersion),
+                Integer.valueOf(this.mTransportType),
+                this.mLocalAddress,
+                this.mSipServerAddress,
+                Boolean.valueOf(this.mIsSipCompactFormEnabled),
+                Boolean.valueOf(this.mIsSipKeepaliveEnabled),
+                Integer.valueOf(this.mMaxUdpPayloadSize),
+                this.mPublicUserIdentifier,
+                this.mPrivateUserIdentifier,
+                this.mHomeDomain,
+                this.mImei,
+                this.mGruu,
+                this.mSipAuthHeader,
+                this.mSipAuthNonce,
+                this.mServiceRouteHeader,
+                this.mPathHeader,
+                this.mUserAgentHeader,
+                this.mContactUserParam,
+                this.mPaniHeader,
+                this.mPlaniHeader,
+                this.mCniHeader,
+                this.mAssociatedUriHeader,
+                this.mIpSecConfiguration,
+                this.mNatAddress);
     }
 
     public String toString() {
-        return "SipDelegateConfiguration{ mVersion=" + this.mVersion + ", mTransportType=" + this.mTransportType + '}';
+        return "SipDelegateConfiguration{ mVersion="
+                + this.mVersion
+                + ", mTransportType="
+                + this.mTransportType
+                + '}';
     }
 }

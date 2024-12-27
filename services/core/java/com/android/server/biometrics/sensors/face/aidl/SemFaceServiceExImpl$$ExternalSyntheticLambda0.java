@@ -4,16 +4,18 @@ import android.hardware.biometrics.face.ISession;
 import android.os.HandlerThread;
 import android.os.SystemProperties;
 import android.util.Slog;
-import com.android.server.biometrics.sensors.face.aidl.SemFaceServiceExImpl;
+
 import vendor.samsung.hardware.biometrics.face.ISehSession;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class SemFaceServiceExImpl$$ExternalSyntheticLambda0 implements Runnable {
+public final /* synthetic */ class SemFaceServiceExImpl$$ExternalSyntheticLambda0
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ SemFaceServiceExImpl f$0;
 
-    public /* synthetic */ SemFaceServiceExImpl$$ExternalSyntheticLambda0(SemFaceServiceExImpl semFaceServiceExImpl, int i) {
+    public /* synthetic */ SemFaceServiceExImpl$$ExternalSyntheticLambda0(
+            SemFaceServiceExImpl semFaceServiceExImpl, int i) {
         this.$r8$classId = i;
         this.f$0 = semFaceServiceExImpl;
     }
@@ -27,15 +29,23 @@ public final /* synthetic */ class SemFaceServiceExImpl$$ExternalSyntheticLambda
                 if (semFaceServiceExImpl.mOrientationEventListener.canDetectOrientation()) {
                     semFaceServiceExImpl.mOrientationEventListener.enable();
                 }
-                SemFaceServiceExImpl.AnonymousClass3 anonymousClass3 = semFaceServiceExImpl.mProximitySensorMgr;
+                SemFaceServiceExImpl.AnonymousClass3 anonymousClass3 =
+                        semFaceServiceExImpl.mProximitySensorMgr;
                 if (anonymousClass3 != null && !anonymousClass3.mIsRegisterListener) {
                     try {
                         HandlerThread handlerThread = new HandlerThread("sensor thread", 10);
                         anonymousClass3.mSensorThread = handlerThread;
                         handlerThread.start();
-                        anonymousClass3.mSmgr.registerListener(anonymousClass3, anonymousClass3.mPrxSensor, 3, anonymousClass3.mSensorThread.getThreadHandler());
+                        anonymousClass3.mSmgr.registerListener(
+                                anonymousClass3,
+                                anonymousClass3.mPrxSensor,
+                                3,
+                                anonymousClass3.mSensorThread.getThreadHandler());
                     } catch (Exception e) {
-                        Slog.e("FaceService", "registerListener : failed to register sensor listener", e);
+                        Slog.e(
+                                "FaceService",
+                                "registerListener : failed to register sensor listener",
+                                e);
                         anonymousClass3.mSensorThread.quitSafely();
                     }
                     anonymousClass3.mIsRegisterListener = true;
@@ -70,14 +80,18 @@ public final /* synthetic */ class SemFaceServiceExImpl$$ExternalSyntheticLambda
                 return;
             default:
                 semFaceServiceExImpl.mOrientationEventListener.disable();
-                SemFaceServiceExImpl.AnonymousClass3 anonymousClass32 = semFaceServiceExImpl.mProximitySensorMgr;
+                SemFaceServiceExImpl.AnonymousClass3 anonymousClass32 =
+                        semFaceServiceExImpl.mProximitySensorMgr;
                 if (anonymousClass32 != null) {
                     synchronized (anonymousClass32) {
                         if (anonymousClass32.mIsRegisterListener) {
                             try {
                                 anonymousClass32.mSmgr.unregisterListener(anonymousClass32);
                             } catch (Exception e4) {
-                                Slog.w("FaceService", "unregisterListener : failed to unregister sensor listener", e4);
+                                Slog.w(
+                                        "FaceService",
+                                        "unregisterListener : failed to unregister sensor listener",
+                                        e4);
                             }
                             HandlerThread handlerThread2 = anonymousClass32.mSensorThread;
                             if (handlerThread2 != null) {

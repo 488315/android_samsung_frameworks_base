@@ -4,6 +4,7 @@ import android.security.KeyStoreSecurityLevel;
 import android.security.keystore.KeyProperties;
 import android.system.keystore2.KeyDescriptor;
 import android.system.keystore2.KeyMetadata;
+
 import java.security.interfaces.ECPublicKey;
 import java.security.spec.ECParameterSpec;
 import java.security.spec.ECPoint;
@@ -13,23 +14,34 @@ public class AndroidKeyStoreECPublicKey extends AndroidKeyStorePublicKey impleme
     private final ECParameterSpec mParams;
     private final ECPoint mW;
 
-    public AndroidKeyStoreECPublicKey(KeyDescriptor descriptor, KeyMetadata metadata, byte[] x509EncodedForm, KeyStoreSecurityLevel securityLevel, ECParameterSpec params, ECPoint w) {
+    public AndroidKeyStoreECPublicKey(
+            KeyDescriptor descriptor,
+            KeyMetadata metadata,
+            byte[] x509EncodedForm,
+            KeyStoreSecurityLevel securityLevel,
+            ECParameterSpec params,
+            ECPoint w) {
         super(descriptor, metadata, x509EncodedForm, KeyProperties.KEY_ALGORITHM_EC, securityLevel);
         this.mParams = params;
         this.mW = w;
     }
 
-    public AndroidKeyStoreECPublicKey(KeyDescriptor descriptor, KeyMetadata metadata, KeyStoreSecurityLevel securityLevel, ECPublicKey info) {
+    public AndroidKeyStoreECPublicKey(
+            KeyDescriptor descriptor,
+            KeyMetadata metadata,
+            KeyStoreSecurityLevel securityLevel,
+            ECPublicKey info) {
         this(descriptor, metadata, info.getEncoded(), securityLevel, info.getParams(), info.getW());
         if (!"X.509".equalsIgnoreCase(info.getFormat())) {
-            throw new IllegalArgumentException("Unsupported key export format: " + info.getFormat());
+            throw new IllegalArgumentException(
+                    "Unsupported key export format: " + info.getFormat());
         }
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:10:0x0025, code lost:
-    
-        r0 = android.security.keystore2.KeymasterUtils.getCurveSpec(android.security.keystore2.KeymasterUtils.getEcCurveFromKeymaster(r4.keyParameter.value.getEcCurve()));
-     */
+
+       r0 = android.security.keystore2.KeymasterUtils.getCurveSpec(android.security.keystore2.KeymasterUtils.getEcCurveFromKeymaster(r4.keyParameter.value.getEcCurve()));
+    */
     @Override // android.security.keystore2.AndroidKeyStorePublicKey
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -85,7 +97,9 @@ public class AndroidKeyStoreECPublicKey extends AndroidKeyStorePublicKey impleme
             r5.<init>(r6, r7, r9, r10, r11)
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.security.keystore2.AndroidKeyStoreECPublicKey.getPrivateKey():android.security.keystore2.AndroidKeyStorePrivateKey");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.security.keystore2.AndroidKeyStoreECPublicKey.getPrivateKey():android.security.keystore2.AndroidKeyStorePrivateKey");
     }
 
     @Override // java.security.interfaces.ECKey

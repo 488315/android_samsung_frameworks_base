@@ -27,26 +27,55 @@ public abstract class GLHelper {
                 i = Integer.MAX_VALUE;
             }
             if (eglGetDisplay == null || eglGetDisplay == EGL14.EGL_NO_DISPLAY) {
-                throw new RuntimeException("eglGetDisplay failed: " + GLUtils.getEGLErrorString(EGL14.eglGetError()));
+                throw new RuntimeException(
+                        "eglGetDisplay failed: " + GLUtils.getEGLErrorString(EGL14.eglGetError()));
             }
             if (!EGL14.eglInitialize(eglGetDisplay, null, 0, null, 1)) {
-                throw new RuntimeException("eglInitialize failed: " + GLUtils.getEGLErrorString(EGL14.eglGetError()));
+                throw new RuntimeException(
+                        "eglInitialize failed: " + GLUtils.getEGLErrorString(EGL14.eglGetError()));
             }
             int[] iArr = new int[1];
             EGLConfig[] eGLConfigArr = new EGLConfig[1];
-            if (!EGL14.eglChooseConfig(eglGetDisplay, new int[]{12352, 4, 12324, 8, 12323, 8, 12322, 8, 12321, 0, 12325, 0, 12326, 0, 12327, 12344, 12344}, 0, eGLConfigArr, 0, 1, iArr, 0)) {
-                throw new RuntimeException("eglChooseConfig failed: " + GLUtils.getEGLErrorString(EGL14.eglGetError()));
+            if (!EGL14.eglChooseConfig(
+                    eglGetDisplay,
+                    new int[] {
+                        12352, 4, 12324, 8, 12323, 8, 12322, 8, 12321, 0, 12325, 0, 12326, 0, 12327,
+                        12344, 12344
+                    },
+                    0,
+                    eGLConfigArr,
+                    0,
+                    1,
+                    iArr,
+                    0)) {
+                throw new RuntimeException(
+                        "eglChooseConfig failed: "
+                                + GLUtils.getEGLErrorString(EGL14.eglGetError()));
             }
             EGLConfig eGLConfig = iArr[0] > 0 ? eGLConfigArr[0] : null;
             if (eGLConfig == null) {
                 throw new RuntimeException("eglConfig not initialized!");
             }
-            EGLContext eglCreateContext = EGL14.eglCreateContext(eglGetDisplay, eGLConfig, EGL14.EGL_NO_CONTEXT, new int[]{12440, 2, 12344}, 0);
+            EGLContext eglCreateContext =
+                    EGL14.eglCreateContext(
+                            eglGetDisplay,
+                            eGLConfig,
+                            EGL14.EGL_NO_CONTEXT,
+                            new int[] {12440, 2, 12344},
+                            0);
             if (eglCreateContext == null || eglCreateContext == EGL14.EGL_NO_CONTEXT) {
-                throw new RuntimeException("eglCreateContext failed: " + GLUtils.getEGLErrorString(EGL14.eglGetError()));
+                throw new RuntimeException(
+                        "eglCreateContext failed: "
+                                + GLUtils.getEGLErrorString(EGL14.eglGetError()));
             }
-            EGLSurface eglCreatePbufferSurface = EGL14.eglCreatePbufferSurface(eglGetDisplay, eGLConfig, new int[]{12375, 1, 12374, 1, 12344}, 0);
-            EGL14.eglMakeCurrent(eglGetDisplay, eglCreatePbufferSurface, eglCreatePbufferSurface, eglCreateContext);
+            EGLSurface eglCreatePbufferSurface =
+                    EGL14.eglCreatePbufferSurface(
+                            eglGetDisplay, eGLConfig, new int[] {12375, 1, 12374, 1, 12344}, 0);
+            EGL14.eglMakeCurrent(
+                    eglGetDisplay,
+                    eglCreatePbufferSurface,
+                    eglCreatePbufferSurface,
+                    eglCreateContext);
             int[] iArr2 = new int[1];
             GLES20.glGetIntegerv(3379, iArr2, 0);
             EGLSurface eGLSurface = EGL14.EGL_NO_SURFACE;

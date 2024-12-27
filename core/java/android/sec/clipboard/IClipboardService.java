@@ -6,7 +6,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.sec.clipboard.IClipboardDataPasteEvent;
+
 import com.samsung.android.content.clipboard.IOnClipboardEventListener;
 import com.samsung.android.content.clipboard.data.SemClipData;
 
@@ -14,7 +14,8 @@ import com.samsung.android.content.clipboard.data.SemClipData;
 public interface IClipboardService extends IInterface {
     public static final String DESCRIPTOR = "android.sec.clipboard.IClipboardService";
 
-    void addClipboardEventListener(IOnClipboardEventListener iOnClipboardEventListener, String str) throws RemoteException;
+    void addClipboardEventListener(IOnClipboardEventListener iOnClipboardEventListener, String str)
+            throws RemoteException;
 
     int getFilter() throws RemoteException;
 
@@ -26,18 +27,20 @@ public interface IClipboardService extends IInterface {
 
     boolean pasteClipData(ClipData clipData, String str, int i) throws RemoteException;
 
-    void removeClipboardEventListener(IOnClipboardEventListener iOnClipboardEventListener) throws RemoteException;
+    void removeClipboardEventListener(IOnClipboardEventListener iOnClipboardEventListener)
+            throws RemoteException;
 
     void setPrimaryClip(ClipData clipData, int i) throws RemoteException;
 
     void setPrimarySemClip(SemClipData semClipData, String str, int i) throws RemoteException;
 
-    void updateFilter(int i, IClipboardDataPasteEvent iClipboardDataPasteEvent) throws RemoteException;
+    void updateFilter(int i, IClipboardDataPasteEvent iClipboardDataPasteEvent)
+            throws RemoteException;
 
     public static class Default implements IClipboardService {
         @Override // android.sec.clipboard.IClipboardService
-        public void updateFilter(int type, IClipboardDataPasteEvent clPasteEvent) throws RemoteException {
-        }
+        public void updateFilter(int type, IClipboardDataPasteEvent clPasteEvent)
+                throws RemoteException {}
 
         @Override // android.sec.clipboard.IClipboardService
         public int getFilter() throws RemoteException {
@@ -45,23 +48,23 @@ public interface IClipboardService extends IInterface {
         }
 
         @Override // android.sec.clipboard.IClipboardService
-        public void addClipboardEventListener(IOnClipboardEventListener listener, String callingPackage) throws RemoteException {
-        }
+        public void addClipboardEventListener(
+                IOnClipboardEventListener listener, String callingPackage) throws RemoteException {}
 
         @Override // android.sec.clipboard.IClipboardService
-        public void removeClipboardEventListener(IOnClipboardEventListener listener) throws RemoteException {
-        }
+        public void removeClipboardEventListener(IOnClipboardEventListener listener)
+                throws RemoteException {}
 
         @Override // android.sec.clipboard.IClipboardService
-        public void setPrimaryClip(ClipData clip, int uid) throws RemoteException {
-        }
+        public void setPrimaryClip(ClipData clip, int uid) throws RemoteException {}
 
         @Override // android.sec.clipboard.IClipboardService
-        public void setPrimarySemClip(SemClipData clip, String callingPackage, int userId) throws RemoteException {
-        }
+        public void setPrimarySemClip(SemClipData clip, String callingPackage, int userId)
+                throws RemoteException {}
 
         @Override // android.sec.clipboard.IClipboardService
-        public SemClipData getPrimarySemClip(String callingPackage, int userId) throws RemoteException {
+        public SemClipData getPrimarySemClip(String callingPackage, int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -71,7 +74,8 @@ public interface IClipboardService extends IInterface {
         }
 
         @Override // android.sec.clipboard.IClipboardService
-        public boolean pasteClipData(ClipData clip, String callingPackage, int userId) throws RemoteException {
+        public boolean pasteClipData(ClipData clip, String callingPackage, int userId)
+                throws RemoteException {
             return false;
         }
 
@@ -86,7 +90,7 @@ public interface IClipboardService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IClipboardService {
+    public abstract static class Stub extends Binder implements IClipboardService {
         static final int TRANSACTION_addClipboardEventListener = 3;
         static final int TRANSACTION_getFilter = 2;
         static final int TRANSACTION_getPrimarySemClip = 7;
@@ -151,7 +155,8 @@ public interface IClipboardService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IClipboardService.DESCRIPTOR);
             }
@@ -162,7 +167,8 @@ public interface IClipboardService extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    IClipboardDataPasteEvent _arg1 = IClipboardDataPasteEvent.Stub.asInterface(data.readStrongBinder());
+                    IClipboardDataPasteEvent _arg1 =
+                            IClipboardDataPasteEvent.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     updateFilter(_arg0, _arg1);
                     reply.writeNoException();
@@ -173,14 +179,16 @@ public interface IClipboardService extends IInterface {
                     reply.writeInt(_result);
                     return true;
                 case 3:
-                    IOnClipboardEventListener _arg02 = IOnClipboardEventListener.Stub.asInterface(data.readStrongBinder());
+                    IOnClipboardEventListener _arg02 =
+                            IOnClipboardEventListener.Stub.asInterface(data.readStrongBinder());
                     String _arg12 = data.readString();
                     data.enforceNoDataAvail();
                     addClipboardEventListener(_arg02, _arg12);
                     reply.writeNoException();
                     return true;
                 case 4:
-                    IOnClipboardEventListener _arg03 = IOnClipboardEventListener.Stub.asInterface(data.readStrongBinder());
+                    IOnClipboardEventListener _arg03 =
+                            IOnClipboardEventListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeClipboardEventListener(_arg03);
                     reply.writeNoException();
@@ -254,7 +262,8 @@ public interface IClipboardService extends IInterface {
             }
 
             @Override // android.sec.clipboard.IClipboardService
-            public void updateFilter(int type, IClipboardDataPasteEvent clPasteEvent) throws RemoteException {
+            public void updateFilter(int type, IClipboardDataPasteEvent clPasteEvent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -286,7 +295,9 @@ public interface IClipboardService extends IInterface {
             }
 
             @Override // android.sec.clipboard.IClipboardService
-            public void addClipboardEventListener(IOnClipboardEventListener listener, String callingPackage) throws RemoteException {
+            public void addClipboardEventListener(
+                    IOnClipboardEventListener listener, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -302,7 +313,8 @@ public interface IClipboardService extends IInterface {
             }
 
             @Override // android.sec.clipboard.IClipboardService
-            public void removeClipboardEventListener(IOnClipboardEventListener listener) throws RemoteException {
+            public void removeClipboardEventListener(IOnClipboardEventListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -333,7 +345,8 @@ public interface IClipboardService extends IInterface {
             }
 
             @Override // android.sec.clipboard.IClipboardService
-            public void setPrimarySemClip(SemClipData clip, String callingPackage, int userId) throws RemoteException {
+            public void setPrimarySemClip(SemClipData clip, String callingPackage, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -350,7 +363,8 @@ public interface IClipboardService extends IInterface {
             }
 
             @Override // android.sec.clipboard.IClipboardService
-            public SemClipData getPrimarySemClip(String callingPackage, int userId) throws RemoteException {
+            public SemClipData getPrimarySemClip(String callingPackage, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -368,7 +382,8 @@ public interface IClipboardService extends IInterface {
             }
 
             @Override // android.sec.clipboard.IClipboardService
-            public boolean hasPrimaryClip(String callingPackage, int userId) throws RemoteException {
+            public boolean hasPrimaryClip(String callingPackage, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -386,7 +401,8 @@ public interface IClipboardService extends IInterface {
             }
 
             @Override // android.sec.clipboard.IClipboardService
-            public boolean pasteClipData(ClipData clip, String callingPackage, int userId) throws RemoteException {
+            public boolean pasteClipData(ClipData clip, String callingPackage, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

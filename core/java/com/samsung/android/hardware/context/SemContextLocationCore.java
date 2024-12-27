@@ -44,19 +44,22 @@ public class SemContextLocationCore extends SemContextEventContext {
     public static final int ACTION_GEOFENCE_VERSION_CALLBACK = 0;
     public static final int ACTION_SEND_EXTRA_CMD = 23;
     public static final int ACTION_UNKNOWN = -1;
-    public static final Parcelable.Creator<SemContextLocationCore> CREATOR = new Parcelable.Creator<SemContextLocationCore>() { // from class: com.samsung.android.hardware.context.SemContextLocationCore.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextLocationCore createFromParcel(Parcel in) {
-            return new SemContextLocationCore(in);
-        }
+    public static final Parcelable.Creator<SemContextLocationCore> CREATOR =
+            new Parcelable.Creator<
+                    SemContextLocationCore>() { // from class:
+                                                // com.samsung.android.hardware.context.SemContextLocationCore.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextLocationCore createFromParcel(Parcel in) {
+                    return new SemContextLocationCore(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextLocationCore[] newArray(int size) {
-            return new SemContextLocationCore[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextLocationCore[] newArray(int size) {
+                    return new SemContextLocationCore[size];
+                }
+            };
     public static final int MODE_CURRENT_LOCATION = 1;
     public static final int MODE_DUMPSTATE = 2;
     public static final int MODE_EXTRA_DATA = 3;

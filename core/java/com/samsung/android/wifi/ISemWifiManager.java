@@ -9,14 +9,7 @@ import android.os.IInterface;
 import android.os.Message;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.samsung.android.wifi.ISemAbTestConfigurationUpdateObserver;
-import com.samsung.android.wifi.ISemSharedPasswordCallback;
-import com.samsung.android.wifi.ISemWifiApClientListUpdateCallback;
-import com.samsung.android.wifi.ISemWifiApClientUpdateCallback;
-import com.samsung.android.wifi.ISemWifiApDataUsageCallback;
-import com.samsung.android.wifi.ISemWifiApSmartCallback;
-import com.samsung.android.wifi.ISemWifiManager;
-import com.samsung.android.wifi.SemTasPolicyListener;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,7 +27,8 @@ public interface ISemWifiManager extends IInterface {
 
     void allowAutojoinPasspoint(String str, boolean z) throws RemoteException;
 
-    int autohotspotWifiScanConnect(String str, String str2, String str3, int i, int i2, int i3) throws RemoteException;
+    int autohotspotWifiScanConnect(String str, String str2, String str3, int i, int i2, int i3)
+            throws RemoteException;
 
     void blockFccChannelBackoff(boolean z) throws RemoteException;
 
@@ -46,11 +40,16 @@ public interface ISemWifiManager extends IInterface {
 
     void clearAutoHotspotLists() throws RemoteException;
 
-    int connectToMcfMHS(String str, int i, int i2, int i3, String str2, String str3, int i4) throws RemoteException;
+    int connectToMcfMHS(String str, int i, int i2, int i3, String str2, String str3, int i4)
+            throws RemoteException;
 
-    boolean connectToSmartD2DClient(String str, String str2, ISemWifiApSmartCallback iSemWifiApSmartCallback) throws RemoteException;
+    boolean connectToSmartD2DClient(
+            String str, String str2, ISemWifiApSmartCallback iSemWifiApSmartCallback)
+            throws RemoteException;
 
-    boolean connectToSmartMHS(String str, int i, int i2, int i3, String str2, String str3, int i4, boolean z) throws RemoteException;
+    boolean connectToSmartMHS(
+            String str, int i, int i2, int i3, String str2, String str3, int i4, boolean z)
+            throws RemoteException;
 
     void disableRandomMac() throws RemoteException;
 
@@ -230,7 +229,8 @@ public interface ISemWifiManager extends IInterface {
 
     String getTopHotspotClientsTodayAsString(int i, int i2) throws RemoteException;
 
-    List<String> getTotalAndTop3ClientsDataUsageBetweenGivenDates(long j, long j2) throws RemoteException;
+    List<String> getTotalAndTop3ClientsDataUsageBetweenGivenDates(long j, long j2)
+            throws RemoteException;
 
     String getTxPower() throws RemoteException;
 
@@ -404,19 +404,38 @@ public interface ISemWifiManager extends IInterface {
 
     List<String> readWifiApMacAclList(int i) throws RemoteException;
 
-    void registerAbTestConfigUpdateObserver(ISemAbTestConfigurationUpdateObserver iSemAbTestConfigurationUpdateObserver, String str) throws RemoteException;
+    void registerAbTestConfigUpdateObserver(
+            ISemAbTestConfigurationUpdateObserver iSemAbTestConfigurationUpdateObserver, String str)
+            throws RemoteException;
 
-    void registerClientDataUsageCallback(IBinder iBinder, ISemWifiApClientUpdateCallback iSemWifiApClientUpdateCallback, int i, String str) throws RemoteException;
+    void registerClientDataUsageCallback(
+            IBinder iBinder,
+            ISemWifiApClientUpdateCallback iSemWifiApClientUpdateCallback,
+            int i,
+            String str)
+            throws RemoteException;
 
-    void registerClientListDataUsageCallback(IBinder iBinder, ISemWifiApClientListUpdateCallback iSemWifiApClientListUpdateCallback, int i, int i2, int i3) throws RemoteException;
+    void registerClientListDataUsageCallback(
+            IBinder iBinder,
+            ISemWifiApClientListUpdateCallback iSemWifiApClientListUpdateCallback,
+            int i,
+            int i2,
+            int i3)
+            throws RemoteException;
 
-    void registerPasswordCallback(String str, ISemSharedPasswordCallback iSemSharedPasswordCallback) throws RemoteException;
+    void registerPasswordCallback(String str, ISemSharedPasswordCallback iSemSharedPasswordCallback)
+            throws RemoteException;
 
-    void registerTasPolicyChangedListener(SemTasPolicyListener semTasPolicyListener) throws RemoteException;
+    void registerTasPolicyChangedListener(SemTasPolicyListener semTasPolicyListener)
+            throws RemoteException;
 
-    void registerWifiApDataUsageCallback(IBinder iBinder, ISemWifiApDataUsageCallback iSemWifiApDataUsageCallback, int i) throws RemoteException;
+    void registerWifiApDataUsageCallback(
+            IBinder iBinder, ISemWifiApDataUsageCallback iSemWifiApDataUsageCallback, int i)
+            throws RemoteException;
 
-    void registerWifiApSmartCallback(IBinder iBinder, ISemWifiApSmartCallback iSemWifiApSmartCallback, int i) throws RemoteException;
+    void registerWifiApSmartCallback(
+            IBinder iBinder, ISemWifiApSmartCallback iSemWifiApSmartCallback, int i)
+            throws RemoteException;
 
     void removeExcludedNetwork(int i) throws RemoteException;
 
@@ -464,7 +483,8 @@ public interface ISemWifiManager extends IInterface {
 
     boolean sendReassociationRequestFrame(String str, int i) throws RemoteException;
 
-    boolean sendVendorSpecificActionFrame(String str, int i, int i2, String str2) throws RemoteException;
+    boolean sendVendorSpecificActionFrame(String str, int i, int i2, String str2)
+            throws RemoteException;
 
     void set5GmmWaveSarBackoffEnabled(boolean z) throws RemoteException;
 
@@ -496,7 +516,9 @@ public interface ISemWifiManager extends IInterface {
 
     void setDtimInSuspendMode(int i) throws RemoteException;
 
-    void setEasySetupScanSettings(String str, SemEasySetupWifiScanSettings semEasySetupWifiScanSettings) throws RemoteException;
+    void setEasySetupScanSettings(
+            String str, SemEasySetupWifiScanSettings semEasySetupWifiScanSettings)
+            throws RemoteException;
 
     boolean setFactoryMacAddress(String str) throws RemoteException;
 
@@ -524,7 +546,8 @@ public interface ISemWifiManager extends IInterface {
 
     boolean setLatencyCritical(String str, int i) throws RemoteException;
 
-    boolean setLocalOnlyHotspotEnabled(boolean z, String str, String str2, int i) throws RemoteException;
+    boolean setLocalOnlyHotspotEnabled(boolean z, String str, String str2, int i)
+            throws RemoteException;
 
     String setMHSConfig(String str) throws RemoteException;
 
@@ -596,7 +619,8 @@ public interface ISemWifiManager extends IInterface {
 
     void setWifiAiIwhTrainingResult(String str, int i, int i2, int i3) throws RemoteException;
 
-    void setWifiAiServiceNsdResult(int[] iArr, int[] iArr2, int[] iArr3, String[] strArr) throws RemoteException;
+    void setWifiAiServiceNsdResult(int[] iArr, int[] iArr2, int[] iArr3, String[] strArr)
+            throws RemoteException;
 
     void setWifiAiServiceState(boolean z, int[] iArr, int[] iArr2) throws RemoteException;
 
@@ -612,7 +636,8 @@ public interface ISemWifiManager extends IInterface {
 
     void setWifiApDailyDataLimit(long j) throws RemoteException;
 
-    boolean setWifiApEnabled(SoftApConfiguration softApConfiguration, boolean z) throws RemoteException;
+    boolean setWifiApEnabled(SoftApConfiguration softApConfiguration, boolean z)
+            throws RemoteException;
 
     void setWifiApGuestModeEnabled(boolean z) throws RemoteException;
 
@@ -666,15 +691,19 @@ public interface ISemWifiManager extends IInterface {
 
     void unRegisterWifiApDataUsageCallback(int i) throws RemoteException;
 
-    void unregisterAbTestConfigUpdateObserver(ISemAbTestConfigurationUpdateObserver iSemAbTestConfigurationUpdateObserver) throws RemoteException;
+    void unregisterAbTestConfigUpdateObserver(
+            ISemAbTestConfigurationUpdateObserver iSemAbTestConfigurationUpdateObserver)
+            throws RemoteException;
 
     void unregisterClientDataUsageCallback(int i) throws RemoteException;
 
     void unregisterClientListDataUsageCallback(int i) throws RemoteException;
 
-    void unregisterPasswordCallback(ISemSharedPasswordCallback iSemSharedPasswordCallback) throws RemoteException;
+    void unregisterPasswordCallback(ISemSharedPasswordCallback iSemSharedPasswordCallback)
+            throws RemoteException;
 
-    void unregisterTasPolicyChangedListener(SemTasPolicyListener semTasPolicyListener) throws RemoteException;
+    void unregisterTasPolicyChangedListener(SemTasPolicyListener semTasPolicyListener)
+            throws RemoteException;
 
     void unregisterWifiApSmartCallback(int i) throws RemoteException;
 
@@ -702,24 +731,19 @@ public interface ISemWifiManager extends IInterface {
 
     public static class Default implements ISemWifiManager {
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setMaxDtimInSuspendMode(boolean enable) throws RemoteException {
-        }
+        public void setMaxDtimInSuspendMode(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setDtimInSuspendMode(int interval) throws RemoteException {
-        }
+        public void setDtimInSuspendMode(int interval) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setVerboseLoggingEnabled(boolean enable) throws RemoteException {
-        }
+        public void setVerboseLoggingEnabled(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void blockFccChannelBackoff(boolean choice) throws RemoteException {
-        }
+        public void blockFccChannelBackoff(boolean choice) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setWifiDeveloperModeEnabled(boolean enable) throws RemoteException {
-        }
+        public void setWifiDeveloperModeEnabled(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public boolean isWifiDeveloperModeEnabled() throws RemoteException {
@@ -772,7 +796,8 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public boolean setVendorWlanDriverProp(String propName, String value) throws RemoteException {
+        public boolean setVendorWlanDriverProp(String propName, String value)
+                throws RemoteException {
             return false;
         }
 
@@ -787,8 +812,8 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setFccChannelBackoffEnabled(String interfaceName, boolean enable) throws RemoteException {
-        }
+        public void setFccChannelBackoffEnabled(String interfaceName, boolean enable)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public boolean setPsmInfo(String data) throws RemoteException {
@@ -871,8 +896,7 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setGripSensorMonitorEnabled(boolean enable) throws RemoteException {
-        }
+        public void setGripSensorMonitorEnabled(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public boolean isGripSensorMonitorEnabled() throws RemoteException {
@@ -880,12 +904,10 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void triggerBackoffRoutine(boolean enable) throws RemoteException {
-        }
+        public void triggerBackoffRoutine(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void set5GmmWaveSarBackoffEnabled(boolean enable) throws RemoteException {
-        }
+        public void set5GmmWaveSarBackoffEnabled(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public boolean setUploadModeEnabled(boolean enable) throws RemoteException {
@@ -903,8 +925,7 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setAdvancedAutohotspotConnectSettings(int val) throws RemoteException {
-        }
+        public void setAdvancedAutohotspotConnectSettings(int val) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public int getAdvancedAutohotspotLCDSettings() throws RemoteException {
@@ -912,12 +933,10 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setWifiSettingsForegroundState(int val) throws RemoteException {
-        }
+        public void setWifiSettingsForegroundState(int val) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setWifiApWarningActivityRunning(int val) throws RemoteException {
-        }
+        public void setWifiApWarningActivityRunning(int val) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public int getWifiApWarningActivityRunningState() throws RemoteException {
@@ -925,12 +944,10 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void clearAutoHotspotLists() throws RemoteException {
-        }
+        public void clearAutoHotspotLists() throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setAdvancedAutohotspotLCDSettings(int val) throws RemoteException {
-        }
+        public void setAdvancedAutohotspotLCDSettings(int val) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public int getChannelUtilization() throws RemoteException {
@@ -1033,12 +1050,14 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public boolean sendVendorSpecificActionFrame(String bssid, int channel, int dwellTime, String frameBody) throws RemoteException {
+        public boolean sendVendorSpecificActionFrame(
+                String bssid, int channel, int dwellTime, String frameBody) throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public boolean sendReassociationRequestFrame(String bssid, int channel) throws RemoteException {
+        public boolean sendReassociationRequestFrame(String bssid, int channel)
+                throws RemoteException {
             return false;
         }
 
@@ -1058,8 +1077,7 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void isClientAcceptedWifiProfileSharing(boolean val) throws RemoteException {
-        }
+        public void isClientAcceptedWifiProfileSharing(boolean val) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public List<SemWifiApBleScanResult> getWifiApBleScanDetail() throws RemoteException {
@@ -1077,13 +1095,21 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public boolean connectToSmartMHS(String addr, int type, int mhidden, int mSecurity, String mhs_mac, String Username, int ver, boolean wifiprofileshare) throws RemoteException {
+        public boolean connectToSmartMHS(
+                String addr,
+                int type,
+                int mhidden,
+                int mSecurity,
+                String mhs_mac,
+                String Username,
+                int ver,
+                boolean wifiprofileshare)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void requestStopAutohotspotAdvertisement(boolean val) throws RemoteException {
-        }
+        public void requestStopAutohotspotAdvertisement(boolean val) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public int getSmartApConnectedStatus(String mhs_mac) throws RemoteException {
@@ -1091,20 +1117,21 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void registerWifiApSmartCallback(IBinder binder, ISemWifiApSmartCallback callback, int callbackIdentifier) throws RemoteException {
-        }
+        public void registerWifiApSmartCallback(
+                IBinder binder, ISemWifiApSmartCallback callback, int callbackIdentifier)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void unregisterWifiApSmartCallback(int callbackIdentifier) throws RemoteException {
-        }
+        public void unregisterWifiApSmartCallback(int callbackIdentifier) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void registerWifiApDataUsageCallback(IBinder binder, ISemWifiApDataUsageCallback callback, int callbackIdentifier) throws RemoteException {
-        }
+        public void registerWifiApDataUsageCallback(
+                IBinder binder, ISemWifiApDataUsageCallback callback, int callbackIdentifier)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void unRegisterWifiApDataUsageCallback(int callbackIdentifier) throws RemoteException {
-        }
+        public void unRegisterWifiApDataUsageCallback(int callbackIdentifier)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public int getSmartApConnectedStatusFromScanResult(String mac) throws RemoteException {
@@ -1127,7 +1154,9 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public boolean connectToSmartD2DClient(String bleaddr, String client_mac, ISemWifiApSmartCallback callback) throws RemoteException {
+        public boolean connectToSmartD2DClient(
+                String bleaddr, String client_mac, ISemWifiApSmartCallback callback)
+                throws RemoteException {
             return false;
         }
 
@@ -1142,12 +1171,14 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public boolean setWifiApEnabled(SoftApConfiguration mSoftApConfig, boolean enable) throws RemoteException {
+        public boolean setWifiApEnabled(SoftApConfiguration mSoftApConfig, boolean enable)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public boolean setLocalOnlyHotspotEnabled(boolean enabled, String ssid, String password, int band) throws RemoteException {
+        public boolean setLocalOnlyHotspotEnabled(
+                boolean enabled, String ssid, String password, int band) throws RemoteException {
             return false;
         }
 
@@ -1157,8 +1188,7 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setSoftApConfiguration(SoftApConfiguration mConfig) throws RemoteException {
-        }
+        public void setSoftApConfiguration(SoftApConfiguration mConfig) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public String getStationInfo(String mac) throws RemoteException {
@@ -1176,8 +1206,7 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setHotspotAntMode(int mode) throws RemoteException {
-        }
+        public void setHotspotAntMode(int mode) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public int getHotspotAntMode() throws RemoteException {
@@ -1185,12 +1214,10 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setAntMode(int mode) throws RemoteException {
-        }
+        public void setAntMode(int mode) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setPowerSavingTime(int min) throws RemoteException {
-        }
+        public void setPowerSavingTime(int min) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public String getMHSConfig(String key) throws RemoteException {
@@ -1243,8 +1270,7 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setWifiApConfigurationToDefault() throws RemoteException {
-        }
+        public void setWifiApConfigurationToDefault() throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public List<String> getWifiApInterfaceNames() throws RemoteException {
@@ -1307,24 +1333,19 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setRVFmodeStatus(int mode) throws RemoteException {
-        }
+        public void setRVFmodeStatus(int mode) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void wifiApDisassocSta(String mac) throws RemoteException {
-        }
+        public void wifiApDisassocSta(String mac) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setWifiApMaxClient(int num) throws RemoteException {
-        }
+        public void setWifiApMaxClient(int num) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void resetSoftAp(Message msg) throws RemoteException {
-        }
+        public void resetSoftAp(Message msg) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setWifiApMaxClientToFramework(int num) throws RemoteException {
-        }
+        public void setWifiApMaxClientToFramework(int num) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public int getWifiApMaxClientFromFramework() throws RemoteException {
@@ -1332,8 +1353,7 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setWifiApWpsPbc(boolean value) throws RemoteException {
-        }
+        public void setWifiApWpsPbc(boolean value) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public boolean getWifiApWpsPbc() throws RemoteException {
@@ -1341,8 +1361,7 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setWifiApIsolate(boolean value) throws RemoteException {
-        }
+        public void setWifiApIsolate(boolean value) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public boolean getWifiApIsolate() throws RemoteException {
@@ -1350,11 +1369,12 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void updateHostapdMacList(int value) throws RemoteException {
-        }
+        public void updateHostapdMacList(int value) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public int manageWifiApMacAclList(String name, String mac, int add_or_delete, int allow_or_deny) throws RemoteException {
+        public int manageWifiApMacAclList(
+                String name, String mac, int add_or_delete, int allow_or_deny)
+                throws RemoteException {
             return 0;
         }
 
@@ -1369,8 +1389,7 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setWifiApMacAclMode(int mode) throws RemoteException {
-        }
+        public void setWifiApMacAclMode(int mode) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public boolean isWifiApMacAclEnabled() throws RemoteException {
@@ -1378,12 +1397,10 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setWifiApMacAclEnable(boolean val) throws RemoteException {
-        }
+        public void setWifiApMacAclEnable(boolean val) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void reportHotspotDumpLogs(String logs) throws RemoteException {
-        }
+        public void reportHotspotDumpLogs(String logs) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public int getWifiApState() throws RemoteException {
@@ -1396,16 +1413,13 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setArdkPowerSaveMode(boolean value) throws RemoteException {
-        }
+        public void setArdkPowerSaveMode(boolean value) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void enableHotspotTsfInfo(boolean enable) throws RemoteException {
-        }
+        public void enableHotspotTsfInfo(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void notifyConnect(int netId, String key) throws RemoteException {
-        }
+        public void notifyConnect(int netId, String key) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public int[] getSoftApBands() throws RemoteException {
@@ -1423,8 +1437,7 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setAutohotspotToastMessage(int noti) throws RemoteException {
-        }
+        public void setAutohotspotToastMessage(int noti) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public int getSoftApSecurityType() throws RemoteException {
@@ -1462,8 +1475,9 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void launchWifiApWarningForMcfMHS(int wifiap_band, int wifiap_set_security, boolean wifiap_security) throws RemoteException {
-        }
+        public void launchWifiApWarningForMcfMHS(
+                int wifiap_band, int wifiap_set_security, boolean wifiap_security)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public boolean isNeededToShowWifiApDatalimitReachedDialog() throws RemoteException {
@@ -1476,7 +1490,9 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public int autohotspotWifiScanConnect(String ssid, String password, String bssid, int hideSSID, int mhsFreq, int security) throws RemoteException {
+        public int autohotspotWifiScanConnect(
+                String ssid, String password, String bssid, int hideSSID, int mhsFreq, int security)
+                throws RemoteException {
             return 0;
         }
 
@@ -1511,7 +1527,15 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public int connectToMcfMHS(String addr, int type, int mhidden, int mSecurity, String mhs_mac, String Username, int ver) throws RemoteException {
+        public int connectToMcfMHS(
+                String addr,
+                int type,
+                int mhidden,
+                int mSecurity,
+                String mhs_mac,
+                String Username,
+                int ver)
+                throws RemoteException {
             return 0;
         }
 
@@ -1526,24 +1550,19 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setWifiApClientMobileDataLimit(String mac, long val) throws RemoteException {
-        }
+        public void setWifiApClientMobileDataLimit(String mac, long val) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setWifiApClientTimeLimit(String mac, long val) throws RemoteException {
-        }
+        public void setWifiApClientTimeLimit(String mac, long val) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setWifiApClientDataPaused(String mac, boolean val) throws RemoteException {
-        }
+        public void setWifiApClientDataPaused(String mac, boolean val) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setWifiApClientEditedName(String mac, String val) throws RemoteException {
-        }
+        public void setWifiApClientEditedName(String mac, String val) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setWifiApDailyDataLimit(long bytes) throws RemoteException {
-        }
+        public void setWifiApDailyDataLimit(long bytes) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public SemWifiApClientDetails getWifiApClientDetails(String mac) throws RemoteException {
@@ -1551,12 +1570,14 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public List<SemWifiApClientDetails> getTopHotspotClientsToday(int topConnectedAndDisconnected, int maxListLength) throws RemoteException {
+        public List<SemWifiApClientDetails> getTopHotspotClientsToday(
+                int topConnectedAndDisconnected, int maxListLength) throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public String getTopHotspotClientsTodayAsString(int topConnectedAndDisconnected, int maxListLength) throws RemoteException {
+        public String getTopHotspotClientsTodayAsString(
+                int topConnectedAndDisconnected, int maxListLength) throws RemoteException {
             return null;
         }
 
@@ -1571,7 +1592,9 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public List<String> getTotalAndTop3ClientsDataUsageBetweenGivenDates(long timestampInMilliSecsDate1, long timestampInMilliSecsDate2) throws RemoteException {
+        public List<String> getTotalAndTop3ClientsDataUsageBetweenGivenDates(
+                long timestampInMilliSecsDate1, long timestampInMilliSecsDate2)
+                throws RemoteException {
             return null;
         }
 
@@ -1596,16 +1619,14 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void wifiApRestoreClientDataUsageSettingsInfo(String jsonString) throws RemoteException {
-        }
+        public void wifiApRestoreClientDataUsageSettingsInfo(String jsonString)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void wifiApRestoreDailyHotspotDataLimit(long bytes) throws RemoteException {
-        }
+        public void wifiApRestoreDailyHotspotDataLimit(long bytes) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setWifiApGuestPassword(String pwd) throws RemoteException {
-        }
+        public void setWifiApGuestPassword(String pwd) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public String getWifiApGuestPassword() throws RemoteException {
@@ -1618,8 +1639,7 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setWifiApGuestModeEnabled(boolean val) throws RemoteException {
-        }
+        public void setWifiApGuestModeEnabled(boolean val) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public boolean isWifiApGuestModeIsolationEnabled() throws RemoteException {
@@ -1627,8 +1647,7 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setWifiApGuestModeIsolationEnabled(boolean val) throws RemoteException {
-        }
+        public void setWifiApGuestModeIsolationEnabled(boolean val) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public boolean isWifiApGuestClient(String mac) throws RemoteException {
@@ -1641,28 +1660,36 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void registerClientListDataUsageCallback(IBinder binder, ISemWifiApClientListUpdateCallback callbackToRegister, int callbackIdentifier, int topConnectedAndDisconnected, int maxListLength) throws RemoteException {
-        }
+        public void registerClientListDataUsageCallback(
+                IBinder binder,
+                ISemWifiApClientListUpdateCallback callbackToRegister,
+                int callbackIdentifier,
+                int topConnectedAndDisconnected,
+                int maxListLength)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void unregisterClientListDataUsageCallback(int callbackIdentifier) throws RemoteException {
-        }
+        public void unregisterClientListDataUsageCallback(int callbackIdentifier)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void registerClientDataUsageCallback(IBinder binder, ISemWifiApClientUpdateCallback callbackToRegister, int callbackIdentifier, String clientMac) throws RemoteException {
-        }
+        public void registerClientDataUsageCallback(
+                IBinder binder,
+                ISemWifiApClientUpdateCallback callbackToRegister,
+                int callbackIdentifier,
+                String clientMac)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void unregisterClientDataUsageCallback(int callbackIdentifier) throws RemoteException {
-        }
+        public void unregisterClientDataUsageCallback(int callbackIdentifier)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void reportBigData(String featureName, String parameters) throws RemoteException {
-        }
+        public void reportBigData(String featureName, String parameters) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void addOrUpdateWifiControlHistory(String packageName, boolean enable) throws RemoteException {
-        }
+        public void addOrUpdateWifiControlHistory(String packageName, boolean enable)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public String getWifiEnableHistory() throws RemoteException {
@@ -1680,12 +1707,10 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void factoryReset() throws RemoteException {
-        }
+        public void factoryReset() throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void resetDeveloperOptionsSettings() throws RemoteException {
-        }
+        public void resetDeveloperOptionsSettings() throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public ParceledListSlice getConfiguredNetworks() throws RemoteException {
@@ -1693,8 +1718,8 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void allowAutojoinPasspoint(String fqdn, boolean allowAutojoin) throws RemoteException {
-        }
+        public void allowAutojoinPasspoint(String fqdn, boolean allowAutojoin)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public List getPasspointConfigurations() throws RemoteException {
@@ -1707,12 +1732,10 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void reportIssue(int reportId, Bundle data) throws RemoteException {
-        }
+        public void reportIssue(int reportId, Bundle data) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void updateGuiderFeature(Bundle bundle) throws RemoteException {
-        }
+        public void updateGuiderFeature(Bundle bundle) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public List<String> getDiagnosisResults() throws RemoteException {
@@ -1720,8 +1743,7 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void startIssueMonitoring(Bundle bundle) throws RemoteException {
-        }
+        public void startIssueMonitoring(Bundle bundle) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public String getSilentRoamingDump(int maxCount) throws RemoteException {
@@ -1739,28 +1761,25 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setBtmOptionUserEnabled(String configKey) throws RemoteException {
-        }
+        public void setBtmOptionUserEnabled(String configKey) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setBtmOptionUserDisabled(String configKey) throws RemoteException {
-        }
+        public void setBtmOptionUserDisabled(String configKey) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void registerPasswordCallback(String configKey, ISemSharedPasswordCallback callback) throws RemoteException {
-        }
+        public void registerPasswordCallback(String configKey, ISemSharedPasswordCallback callback)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void unregisterPasswordCallback(ISemSharedPasswordCallback callback) throws RemoteException {
-        }
+        public void unregisterPasswordCallback(ISemSharedPasswordCallback callback)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void requestPassword(boolean showConfirm) throws RemoteException {
-        }
+        public void requestPassword(boolean showConfirm) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setUserConfirmForSharingPassword(boolean isAccept, String userData) throws RemoteException {
-        }
+        public void setUserConfirmForSharingPassword(boolean isAccept, String userData)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public boolean isSupportedQoSProvider() throws RemoteException {
@@ -1783,8 +1802,7 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void runAutoShareForCurrent(List<String> target) throws RemoteException {
-        }
+        public void runAutoShareForCurrent(List<String> target) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public boolean isSupportedAutoWifi() throws RemoteException {
@@ -1822,12 +1840,10 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setTestSettings(int moduleId, Bundle settings) throws RemoteException {
-        }
+        public void setTestSettings(int moduleId, Bundle settings) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setAllowWifiScan(boolean enable, String packageName) throws RemoteException {
-        }
+        public void setAllowWifiScan(boolean enable, String packageName) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public boolean isScanningEnabled() throws RemoteException {
@@ -1840,21 +1856,20 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setEasySetupScanSettings(String packageName, SemEasySetupWifiScanSettings settings) throws RemoteException {
-        }
+        public void setEasySetupScanSettings(
+                String packageName, SemEasySetupWifiScanSettings settings) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public Map<String, SemEasySetupWifiScanSettings> getEasySetupScanSettings() throws RemoteException {
+        public Map<String, SemEasySetupWifiScanSettings> getEasySetupScanSettings()
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void disableRandomMac() throws RemoteException {
-        }
+        public void disableRandomMac() throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setImsCallEstablished(boolean isEstablished) throws RemoteException {
-        }
+        public void setImsCallEstablished(boolean isEstablished) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public int getWcmEverQualityTested() throws RemoteException {
@@ -1877,28 +1892,23 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void notifyReachabilityLost() throws RemoteException {
-        }
+        public void notifyReachabilityLost() throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setConnectivityCheckDisabled(boolean disabled) throws RemoteException {
-        }
+        public void setConnectivityCheckDisabled(boolean disabled) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setKeepConnectionAlways(boolean keepConnection) throws RemoteException {
-        }
+        public void setKeepConnectionAlways(boolean keepConnection) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setKeepConnection(boolean keepConnection, boolean always) throws RemoteException {
-        }
+        public void setKeepConnection(boolean keepConnection, boolean always)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setKeepConnectionBigData(int reason) throws RemoteException {
-        }
+        public void setKeepConnectionBigData(int reason) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void removeExcludedNetwork(int networkId) throws RemoteException {
-        }
+        public void removeExcludedNetwork(int networkId) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public String retrieveSemWifiConfigsBackupData() throws RemoteException {
@@ -1906,16 +1916,14 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void restoreSemConfigurationsBackupData(String semconfigs) throws RemoteException {
-        }
+        public void restoreSemConfigurationsBackupData(String semconfigs) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setConnectionAttemptInfo(int netId, boolean byUser, String configKey) throws RemoteException {
-        }
+        public void setConnectionAttemptInfo(int netId, boolean byUser, String configKey)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void restoreIWCSettingsValue(int opType, int value) throws RemoteException {
-        }
+        public void restoreIWCSettingsValue(int opType, int value) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public String getIWCQTables() throws RemoteException {
@@ -1923,16 +1931,13 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setIWCQTables(String qTables) throws RemoteException {
-        }
+        public void setIWCQTables(String qTables) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void updateIWCHintCard(long timestamp) throws RemoteException {
-        }
+        public void updateIWCHintCard(long timestamp) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setIWCMockAction(int action) throws RemoteException {
-        }
+        public void setIWCMockAction(int action) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public boolean disconnectApBlockAutojoin(boolean block) throws RemoteException {
@@ -1960,8 +1965,7 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setTrafficPatternTestSettings(Bundle settings) throws RemoteException {
-        }
+        public void setTrafficPatternTestSettings(Bundle settings) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public int setWifiUwbCoexEnabled(int uwbCh, boolean enable) throws RemoteException {
@@ -2004,20 +2008,16 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void startTimerForWifiOffload() throws RemoteException {
-        }
+        public void startTimerForWifiOffload() throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void checkAppForWiFiOffloading(String packageName) throws RemoteException {
-        }
+        public void checkAppForWiFiOffloading(String packageName) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setTCRule(boolean enabled, String iface, int limit) throws RemoteException {
-        }
+        public void setTCRule(boolean enabled, String iface, int limit) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void externalTwtInterface(int cmdId, String cmdLine) throws RemoteException {
-        }
+        public void externalTwtInterface(int cmdId, String cmdLine) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public int[] getTWTParams() throws RemoteException {
@@ -2030,12 +2030,10 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void resetCallbackCondition(int mode) throws RemoteException {
-        }
+        public void resetCallbackCondition(int mode) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void resetComebackCondition() throws RemoteException {
-        }
+        public void resetComebackCondition() throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public int getCurrentL2TransitionMode() throws RemoteException {
@@ -2058,12 +2056,10 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setSamsungMloCtrl(boolean enable) throws RemoteException {
-        }
+        public void setSamsungMloCtrl(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setSamsungIwhCtrl(boolean enable) throws RemoteException {
-        }
+        public void setSamsungIwhCtrl(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public boolean getSamsungMloCtrl() throws RemoteException {
@@ -2076,8 +2072,7 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setTestMode(boolean mode) throws RemoteException {
-        }
+        public void setTestMode(boolean mode) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public boolean iwhIntendedDisconnection() throws RemoteException {
@@ -2085,29 +2080,34 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public boolean linkQosQuery(long payloadBytes, long desiredLatencyMs, long desiredThroughputMbps, int queryType, long timeWindowMs) throws RemoteException {
+        public boolean linkQosQuery(
+                long payloadBytes,
+                long desiredLatencyMs,
+                long desiredThroughputMbps,
+                int queryType,
+                long timeWindowMs)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setWifiAiServiceState(boolean enabled, int[] numClass, int[] numTimeStep) throws RemoteException {
-        }
+        public void setWifiAiServiceState(boolean enabled, int[] numClass, int[] numTimeStep)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setWifiAiServiceNsdResult(int[] nsdResult, int[] l1ConvSerPredArr, int[] l2ConvSerPredArr, String[] convArr) throws RemoteException {
-        }
+        public void setWifiAiServiceNsdResult(
+                int[] nsdResult, int[] l1ConvSerPredArr, int[] l2ConvSerPredArr, String[] convArr)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setWifiAiIwhTrainingResult(String gKey, int trScore, int numBssids, int mode) throws RemoteException {
-        }
+        public void setWifiAiIwhTrainingResult(String gKey, int trScore, int numBssids, int mode)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setWifiAiIwhInferenceResult(boolean[] ret) throws RemoteException {
-        }
+        public void setWifiAiIwhInferenceResult(boolean[] ret) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setIlaTrainingResult(double RssiResult, String bssidE) throws RemoteException {
-        }
+        public void setIlaTrainingResult(double RssiResult, String bssidE) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public String getTcpMonitorSocketForegroundHistory(int count) throws RemoteException {
@@ -2175,8 +2175,7 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void resetTotalPriorityDataConsumedValues() throws RemoteException {
-        }
+        public void resetTotalPriorityDataConsumedValues() throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public Map getTasAverage() throws RemoteException {
@@ -2189,16 +2188,15 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void registerTasPolicyChangedListener(SemTasPolicyListener listener) throws RemoteException {
-        }
+        public void registerTasPolicyChangedListener(SemTasPolicyListener listener)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void unregisterTasPolicyChangedListener(SemTasPolicyListener listener) throws RemoteException {
-        }
+        public void unregisterTasPolicyChangedListener(SemTasPolicyListener listener)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void enableTxPowerLogging(boolean enable, int index) throws RemoteException {
-        }
+        public void enableTxPowerLogging(boolean enable, int index) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public String getDynamicFeatureStatus() throws RemoteException {
@@ -2211,12 +2209,12 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setMhsAiServiceState(boolean enabled, int[] numClass, int[] numTimeStep) throws RemoteException {
-        }
+        public void setMhsAiServiceState(boolean enabled, int[] numClass, int[] numTimeStep)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setMhsAiServiceNsdResult(int[] predArr, String[] convoStrArr) throws RemoteException {
-        }
+        public void setMhsAiServiceNsdResult(int[] predArr, String[] convoStrArr)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public int startCapture(int captureFrameTypes) throws RemoteException {
@@ -2239,20 +2237,20 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void setMcfMultiControlMode(boolean enable) throws RemoteException {
-        }
+        public void setMcfMultiControlMode(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void registerAbTestConfigUpdateObserver(ISemAbTestConfigurationUpdateObserver observer, String module) throws RemoteException {
-        }
+        public void registerAbTestConfigUpdateObserver(
+                ISemAbTestConfigurationUpdateObserver observer, String module)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void unregisterAbTestConfigUpdateObserver(ISemAbTestConfigurationUpdateObserver observer) throws RemoteException {
-        }
+        public void unregisterAbTestConfigUpdateObserver(
+                ISemAbTestConfigurationUpdateObserver observer) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public void reportAbTestResult(String module, String outputDim, String output) throws RemoteException {
-        }
+        public void reportAbTestResult(String module, String outputDim, String output)
+                throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemWifiManager
         public List<SemAbTestConfiguration> getAbTestConfigs() throws RemoteException {
@@ -2260,12 +2258,14 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public SemAbTestConfiguration getAbTestConfiguredModule(String module) throws RemoteException {
+        public SemAbTestConfiguration getAbTestConfiguredModule(String module)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.samsung.android.wifi.ISemWifiManager
-        public boolean sendReassociationFrequencyRequestFrame(String bssid, int channel) throws RemoteException {
+        public boolean sendReassociationFrequencyRequestFrame(String bssid, int channel)
+                throws RemoteException {
             return false;
         }
 
@@ -2275,7 +2275,7 @@ public interface ISemWifiManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemWifiManager {
+    public abstract static class Stub extends Binder implements ISemWifiManager {
         static final int TRANSACTION_addOrUpdateNetwork = 206;
         static final int TRANSACTION_addOrUpdateWifiControlHistory = 204;
         static final int TRANSACTION_allowAutojoinPasspoint = 211;
@@ -3318,7 +3318,8 @@ public interface ISemWifiManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, final Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, final Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemWifiManager.DESCRIPTOR);
             }
@@ -3852,7 +3853,8 @@ public interface ISemWifiManager extends IInterface {
                     reply.writeTypedObject(_result68, 1);
                     return true;
                 case 96:
-                    SoftApConfiguration _arg049 = (SoftApConfiguration) data.readTypedObject(SoftApConfiguration.CREATOR);
+                    SoftApConfiguration _arg049 =
+                            (SoftApConfiguration) data.readTypedObject(SoftApConfiguration.CREATOR);
                     data.enforceNoDataAvail();
                     setSoftApConfiguration(_arg049);
                     reply.writeNoException();
@@ -4301,7 +4303,8 @@ public interface ISemWifiManager extends IInterface {
                     reply.writeLong(_result125);
                     return true;
                 case 184:
-                    return onTransact$getTotalAndTop3ClientsDataUsageBetweenGivenDates$(data, reply);
+                    return onTransact$getTotalAndTop3ClientsDataUsageBetweenGivenDates$(
+                            data, reply);
                 case 185:
                     List<String> _result126 = getMonthlyDataUsage();
                     reply.writeNoException();
@@ -4405,7 +4408,9 @@ public interface ISemWifiManager extends IInterface {
                     reply.writeString(_result135);
                     return true;
                 case 206:
-                    SemWifiConfiguration _arg088 = (SemWifiConfiguration) data.readTypedObject(SemWifiConfiguration.CREATOR);
+                    SemWifiConfiguration _arg088 =
+                            (SemWifiConfiguration)
+                                    data.readTypedObject(SemWifiConfiguration.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result136 = addOrUpdateNetwork(_arg088);
                     reply.writeNoException();
@@ -4494,7 +4499,8 @@ public interface ISemWifiManager extends IInterface {
                 case 223:
                     return onTransact$registerPasswordCallback$(data, reply);
                 case 224:
-                    ISemSharedPasswordCallback _arg098 = ISemSharedPasswordCallback.Stub.asInterface(data.readStrongBinder());
+                    ISemSharedPasswordCallback _arg098 =
+                            ISemSharedPasswordCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterPasswordCallback(_arg098);
                     return true;
@@ -4586,18 +4592,24 @@ public interface ISemWifiManager extends IInterface {
                 case 243:
                     return onTransact$setEasySetupScanSettings$(data, reply);
                 case 244:
-                    Map<String, SemEasySetupWifiScanSettings> _result158 = getEasySetupScanSettings();
+                    Map<String, SemEasySetupWifiScanSettings> _result158 =
+                            getEasySetupScanSettings();
                     reply.writeNoException();
                     if (_result158 == null) {
                         reply.writeInt(-1);
                     } else {
                         reply.writeInt(_result158.size());
-                        _result158.forEach(new BiConsumer() { // from class: com.samsung.android.wifi.ISemWifiManager$Stub$$ExternalSyntheticLambda0
-                            @Override // java.util.function.BiConsumer
-                            public final void accept(Object obj, Object obj2) {
-                                ISemWifiManager.Stub.lambda$onTransact$0(Parcel.this, (String) obj, (SemEasySetupWifiScanSettings) obj2);
-                            }
-                        });
+                        _result158.forEach(
+                                new BiConsumer() { // from class:
+                                                   // com.samsung.android.wifi.ISemWifiManager$Stub$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.BiConsumer
+                                    public final void accept(Object obj, Object obj2) {
+                                        ISemWifiManager.Stub.lambda$onTransact$0(
+                                                Parcel.this,
+                                                (String) obj,
+                                                (SemEasySetupWifiScanSettings) obj2);
+                                    }
+                                });
                     }
                     return true;
                 case 245:
@@ -5000,7 +5012,8 @@ public interface ISemWifiManager extends IInterface {
             }
         }
 
-        static /* synthetic */ void lambda$onTransact$0(Parcel reply, String k, SemEasySetupWifiScanSettings v) {
+        static /* synthetic */ void lambda$onTransact$0(
+                Parcel reply, String k, SemEasySetupWifiScanSettings v) {
             reply.writeString(k);
             reply.writeTypedObject(v, 1);
         }
@@ -5259,7 +5272,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public boolean setVendorWlanDriverProp(String propName, String value) throws RemoteException {
+            public boolean setVendorWlanDriverProp(String propName, String value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5310,7 +5324,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void setFccChannelBackoffEnabled(String interfaceName, boolean enable) throws RemoteException {
+            public void setFccChannelBackoffEnabled(String interfaceName, boolean enable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6141,7 +6156,9 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public boolean sendVendorSpecificActionFrame(String bssid, int channel, int dwellTime, String frameBody) throws RemoteException {
+            public boolean sendVendorSpecificActionFrame(
+                    String bssid, int channel, int dwellTime, String frameBody)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6161,7 +6178,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public boolean sendReassociationRequestFrame(String bssid, int channel) throws RemoteException {
+            public boolean sendReassociationRequestFrame(String bssid, int channel)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6250,7 +6268,8 @@ public interface ISemWifiManager extends IInterface {
                     _data.writeInterfaceToken(ISemWifiManager.DESCRIPTOR);
                     this.mRemote.transact(76, _data, _reply, 0);
                     _reply.readException();
-                    List<SemWifiApBleScanResult> _result = _reply.createTypedArrayList(SemWifiApBleScanResult.CREATOR);
+                    List<SemWifiApBleScanResult> _result =
+                            _reply.createTypedArrayList(SemWifiApBleScanResult.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6293,7 +6312,16 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public boolean connectToSmartMHS(String addr, int type, int mhidden, int mSecurity, String mhs_mac, String Username, int ver, boolean wifiprofileshare) throws RemoteException {
+            public boolean connectToSmartMHS(
+                    String addr,
+                    int type,
+                    int mhidden,
+                    int mSecurity,
+                    String mhs_mac,
+                    String Username,
+                    int ver,
+                    boolean wifiprofileshare)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6349,7 +6377,9 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void registerWifiApSmartCallback(IBinder binder, ISemWifiApSmartCallback callback, int callbackIdentifier) throws RemoteException {
+            public void registerWifiApSmartCallback(
+                    IBinder binder, ISemWifiApSmartCallback callback, int callbackIdentifier)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6366,7 +6396,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void unregisterWifiApSmartCallback(int callbackIdentifier) throws RemoteException {
+            public void unregisterWifiApSmartCallback(int callbackIdentifier)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6381,7 +6412,9 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void registerWifiApDataUsageCallback(IBinder binder, ISemWifiApDataUsageCallback callback, int callbackIdentifier) throws RemoteException {
+            public void registerWifiApDataUsageCallback(
+                    IBinder binder, ISemWifiApDataUsageCallback callback, int callbackIdentifier)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6398,7 +6431,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void unRegisterWifiApDataUsageCallback(int callbackIdentifier) throws RemoteException {
+            public void unRegisterWifiApDataUsageCallback(int callbackIdentifier)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6437,7 +6471,8 @@ public interface ISemWifiManager extends IInterface {
                     _data.writeInterfaceToken(ISemWifiManager.DESCRIPTOR);
                     this.mRemote.transact(87, _data, _reply, 0);
                     _reply.readException();
-                    List<SemWifiApBleScanResult> _result = _reply.createTypedArrayList(SemWifiApBleScanResult.CREATOR);
+                    List<SemWifiApBleScanResult> _result =
+                            _reply.createTypedArrayList(SemWifiApBleScanResult.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6480,7 +6515,9 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public boolean connectToSmartD2DClient(String bleaddr, String client_mac, ISemWifiApSmartCallback callback) throws RemoteException {
+            public boolean connectToSmartD2DClient(
+                    String bleaddr, String client_mac, ISemWifiApSmartCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6532,7 +6569,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public boolean setWifiApEnabled(SoftApConfiguration mSoftApConfig, boolean enable) throws RemoteException {
+            public boolean setWifiApEnabled(SoftApConfiguration mSoftApConfig, boolean enable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6550,7 +6588,9 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public boolean setLocalOnlyHotspotEnabled(boolean enabled, String ssid, String password, int band) throws RemoteException {
+            public boolean setLocalOnlyHotspotEnabled(
+                    boolean enabled, String ssid, String password, int band)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6577,7 +6617,9 @@ public interface ISemWifiManager extends IInterface {
                     _data.writeInterfaceToken(ISemWifiManager.DESCRIPTOR);
                     this.mRemote.transact(95, _data, _reply, 0);
                     _reply.readException();
-                    SoftApConfiguration _result = (SoftApConfiguration) _reply.readTypedObject(SoftApConfiguration.CREATOR);
+                    SoftApConfiguration _result =
+                            (SoftApConfiguration)
+                                    _reply.readTypedObject(SoftApConfiguration.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7250,7 +7292,9 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public int manageWifiApMacAclList(String name, String mac, int add_or_delete, int allow_or_deny) throws RemoteException {
+            public int manageWifiApMacAclList(
+                    String name, String mac, int add_or_delete, int allow_or_deny)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7617,7 +7661,9 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void launchWifiApWarningForMcfMHS(int wifiap_band, int wifiap_set_security, boolean wifiap_security) throws RemoteException {
+            public void launchWifiApWarningForMcfMHS(
+                    int wifiap_band, int wifiap_set_security, boolean wifiap_security)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7666,7 +7712,14 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public int autohotspotWifiScanConnect(String ssid, String password, String bssid, int hideSSID, int mhsFreq, int security) throws RemoteException {
+            public int autohotspotWifiScanConnect(
+                    String ssid,
+                    String password,
+                    String bssid,
+                    int hideSSID,
+                    int mhsFreq,
+                    int security)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7743,7 +7796,8 @@ public interface ISemWifiManager extends IInterface {
                     _data.writeInterfaceToken(ISemWifiManager.DESCRIPTOR);
                     this.mRemote.transact(168, _data, _reply, 0);
                     _reply.readException();
-                    List<SemWifiApBleScanResult> _result = _reply.createTypedArrayList(SemWifiApBleScanResult.CREATOR);
+                    List<SemWifiApBleScanResult> _result =
+                            _reply.createTypedArrayList(SemWifiApBleScanResult.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7786,7 +7840,15 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public int connectToMcfMHS(String addr, int type, int mhidden, int mSecurity, String mhs_mac, String Username, int ver) throws RemoteException {
+            public int connectToMcfMHS(
+                    String addr,
+                    int type,
+                    int mhidden,
+                    int mSecurity,
+                    String mhs_mac,
+                    String Username,
+                    int ver)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7843,7 +7905,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void setWifiApClientMobileDataLimit(String mac, long val) throws RemoteException {
+            public void setWifiApClientMobileDataLimit(String mac, long val)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7922,7 +7985,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public SemWifiApClientDetails getWifiApClientDetails(String mac) throws RemoteException {
+            public SemWifiApClientDetails getWifiApClientDetails(String mac)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7930,7 +7994,9 @@ public interface ISemWifiManager extends IInterface {
                     _data.writeString(mac);
                     this.mRemote.transact(179, _data, _reply, 0);
                     _reply.readException();
-                    SemWifiApClientDetails _result = (SemWifiApClientDetails) _reply.readTypedObject(SemWifiApClientDetails.CREATOR);
+                    SemWifiApClientDetails _result =
+                            (SemWifiApClientDetails)
+                                    _reply.readTypedObject(SemWifiApClientDetails.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7939,7 +8005,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public List<SemWifiApClientDetails> getTopHotspotClientsToday(int topConnectedAndDisconnected, int maxListLength) throws RemoteException {
+            public List<SemWifiApClientDetails> getTopHotspotClientsToday(
+                    int topConnectedAndDisconnected, int maxListLength) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7948,7 +8015,8 @@ public interface ISemWifiManager extends IInterface {
                     _data.writeInt(maxListLength);
                     this.mRemote.transact(180, _data, _reply, 0);
                     _reply.readException();
-                    List<SemWifiApClientDetails> _result = _reply.createTypedArrayList(SemWifiApClientDetails.CREATOR);
+                    List<SemWifiApClientDetails> _result =
+                            _reply.createTypedArrayList(SemWifiApClientDetails.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7957,7 +8025,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public String getTopHotspotClientsTodayAsString(int topConnectedAndDisconnected, int maxListLength) throws RemoteException {
+            public String getTopHotspotClientsTodayAsString(
+                    int topConnectedAndDisconnected, int maxListLength) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8007,7 +8076,9 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public List<String> getTotalAndTop3ClientsDataUsageBetweenGivenDates(long timestampInMilliSecsDate1, long timestampInMilliSecsDate2) throws RemoteException {
+            public List<String> getTotalAndTop3ClientsDataUsageBetweenGivenDates(
+                    long timestampInMilliSecsDate1, long timestampInMilliSecsDate2)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8089,7 +8160,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void wifiApRestoreClientDataUsageSettingsInfo(String jsonString) throws RemoteException {
+            public void wifiApRestoreClientDataUsageSettingsInfo(String jsonString)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8245,7 +8317,13 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void registerClientListDataUsageCallback(IBinder binder, ISemWifiApClientListUpdateCallback callbackToRegister, int callbackIdentifier, int topConnectedAndDisconnected, int maxListLength) throws RemoteException {
+            public void registerClientListDataUsageCallback(
+                    IBinder binder,
+                    ISemWifiApClientListUpdateCallback callbackToRegister,
+                    int callbackIdentifier,
+                    int topConnectedAndDisconnected,
+                    int maxListLength)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8264,7 +8342,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void unregisterClientListDataUsageCallback(int callbackIdentifier) throws RemoteException {
+            public void unregisterClientListDataUsageCallback(int callbackIdentifier)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8279,7 +8358,12 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void registerClientDataUsageCallback(IBinder binder, ISemWifiApClientUpdateCallback callbackToRegister, int callbackIdentifier, String clientMac) throws RemoteException {
+            public void registerClientDataUsageCallback(
+                    IBinder binder,
+                    ISemWifiApClientUpdateCallback callbackToRegister,
+                    int callbackIdentifier,
+                    String clientMac)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8297,7 +8381,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void unregisterClientDataUsageCallback(int callbackIdentifier) throws RemoteException {
+            public void unregisterClientDataUsageCallback(int callbackIdentifier)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8312,7 +8397,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void reportBigData(String featureName, String parameters) throws RemoteException {
+            public void reportBigData(String featureName, String parameters)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemWifiManager.DESCRIPTOR);
@@ -8325,7 +8411,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void addOrUpdateWifiControlHistory(String packageName, boolean enable) throws RemoteException {
+            public void addOrUpdateWifiControlHistory(String packageName, boolean enable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemWifiManager.DESCRIPTOR);
@@ -8417,7 +8504,8 @@ public interface ISemWifiManager extends IInterface {
                     _data.writeInterfaceToken(ISemWifiManager.DESCRIPTOR);
                     this.mRemote.transact(210, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -8426,7 +8514,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void allowAutojoinPasspoint(String fqdn, boolean allowAutojoin) throws RemoteException {
+            public void allowAutojoinPasspoint(String fqdn, boolean allowAutojoin)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemWifiManager.DESCRIPTOR);
@@ -8602,7 +8691,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void registerPasswordCallback(String configKey, ISemSharedPasswordCallback callback) throws RemoteException {
+            public void registerPasswordCallback(
+                    String configKey, ISemSharedPasswordCallback callback) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemWifiManager.DESCRIPTOR);
@@ -8615,7 +8705,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void unregisterPasswordCallback(ISemSharedPasswordCallback callback) throws RemoteException {
+            public void unregisterPasswordCallback(ISemSharedPasswordCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemWifiManager.DESCRIPTOR);
@@ -8639,7 +8730,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void setUserConfirmForSharingPassword(boolean isAccept, String userData) throws RemoteException {
+            public void setUserConfirmForSharingPassword(boolean isAccept, String userData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemWifiManager.DESCRIPTOR);
@@ -8825,7 +8917,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public boolean hasConfiguredNetworkLocations(String wifiConfigKey) throws RemoteException {
+            public boolean hasConfiguredNetworkLocations(String wifiConfigKey)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8855,7 +8948,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void setAllowWifiScan(boolean enable, String packageName) throws RemoteException {
+            public void setAllowWifiScan(boolean enable, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemWifiManager.DESCRIPTOR);
@@ -8901,7 +8995,9 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void setEasySetupScanSettings(String packageName, SemEasySetupWifiScanSettings settings) throws RemoteException {
+            public void setEasySetupScanSettings(
+                    String packageName, SemEasySetupWifiScanSettings settings)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemWifiManager.DESCRIPTOR);
@@ -8914,7 +9010,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public Map<String, SemEasySetupWifiScanSettings> getEasySetupScanSettings() throws RemoteException {
+            public Map<String, SemEasySetupWifiScanSettings> getEasySetupScanSettings()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 final Parcel _reply = Parcel.obtain();
                 try {
@@ -8922,13 +9019,19 @@ public interface ISemWifiManager extends IInterface {
                     this.mRemote.transact(244, _data, _reply, 0);
                     _reply.readException();
                     int N = _reply.readInt();
-                    final Map<String, SemEasySetupWifiScanSettings> _result = N < 0 ? null : new HashMap<>();
-                    IntStream.range(0, N).forEach(new IntConsumer() { // from class: com.samsung.android.wifi.ISemWifiManager$Stub$Proxy$$ExternalSyntheticLambda0
-                        @Override // java.util.function.IntConsumer
-                        public final void accept(int i) {
-                            ISemWifiManager.Stub.Proxy.lambda$getEasySetupScanSettings$0(Parcel.this, _result, i);
-                        }
-                    });
+                    final Map<String, SemEasySetupWifiScanSettings> _result =
+                            N < 0 ? null : new HashMap<>();
+                    IntStream.range(0, N)
+                            .forEach(
+                                    new IntConsumer() { // from class:
+                                                        // com.samsung.android.wifi.ISemWifiManager$Stub$Proxy$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.IntConsumer
+                                        public final void accept(int i) {
+                                            ISemWifiManager.Stub.Proxy
+                                                    .lambda$getEasySetupScanSettings$0(
+                                                            Parcel.this, _result, i);
+                                        }
+                                    });
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -8936,9 +9039,12 @@ public interface ISemWifiManager extends IInterface {
                 }
             }
 
-            static /* synthetic */ void lambda$getEasySetupScanSettings$0(Parcel _reply, Map _result, int i) {
+            static /* synthetic */ void lambda$getEasySetupScanSettings$0(
+                    Parcel _reply, Map _result, int i) {
                 String k = _reply.readString();
-                SemEasySetupWifiScanSettings v = (SemEasySetupWifiScanSettings) _reply.readTypedObject(SemEasySetupWifiScanSettings.CREATOR);
+                SemEasySetupWifiScanSettings v =
+                        (SemEasySetupWifiScanSettings)
+                                _reply.readTypedObject(SemEasySetupWifiScanSettings.CREATOR);
                 _result.put(k, v);
             }
 
@@ -9071,7 +9177,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void setKeepConnection(boolean keepConnection, boolean always) throws RemoteException {
+            public void setKeepConnection(boolean keepConnection, boolean always)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemWifiManager.DESCRIPTOR);
@@ -9127,7 +9234,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void restoreSemConfigurationsBackupData(String semconfigs) throws RemoteException {
+            public void restoreSemConfigurationsBackupData(String semconfigs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9142,7 +9250,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void setConnectionAttemptInfo(int netId, boolean byUser, String configKey) throws RemoteException {
+            public void setConnectionAttemptInfo(int netId, boolean byUser, String configKey)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9384,7 +9493,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public boolean removePktlogFilter(String ifaceName, String filter) throws RemoteException {
+            public boolean removePktlogFilter(String ifaceName, String filter)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9748,7 +9858,13 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public boolean linkQosQuery(long payloadBytes, long desiredLatencyMs, long desiredThroughputMbps, int queryType, long timeWindowMs) throws RemoteException {
+            public boolean linkQosQuery(
+                    long payloadBytes,
+                    long desiredLatencyMs,
+                    long desiredThroughputMbps,
+                    int queryType,
+                    long timeWindowMs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9769,7 +9885,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void setWifiAiServiceState(boolean enabled, int[] numClass, int[] numTimeStep) throws RemoteException {
+            public void setWifiAiServiceState(boolean enabled, int[] numClass, int[] numTimeStep)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemWifiManager.DESCRIPTOR);
@@ -9783,7 +9900,12 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void setWifiAiServiceNsdResult(int[] nsdResult, int[] l1ConvSerPredArr, int[] l2ConvSerPredArr, String[] convArr) throws RemoteException {
+            public void setWifiAiServiceNsdResult(
+                    int[] nsdResult,
+                    int[] l1ConvSerPredArr,
+                    int[] l2ConvSerPredArr,
+                    String[] convArr)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemWifiManager.DESCRIPTOR);
@@ -9798,7 +9920,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void setWifiAiIwhTrainingResult(String gKey, int trScore, int numBssids, int mode) throws RemoteException {
+            public void setWifiAiIwhTrainingResult(
+                    String gKey, int trScore, int numBssids, int mode) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemWifiManager.DESCRIPTOR);
@@ -9825,7 +9948,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void setIlaTrainingResult(double RssiResult, String bssidE) throws RemoteException {
+            public void setIlaTrainingResult(double RssiResult, String bssidE)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemWifiManager.DESCRIPTOR);
@@ -10101,7 +10225,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void registerTasPolicyChangedListener(SemTasPolicyListener listener) throws RemoteException {
+            public void registerTasPolicyChangedListener(SemTasPolicyListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemWifiManager.DESCRIPTOR);
@@ -10113,7 +10238,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void unregisterTasPolicyChangedListener(SemTasPolicyListener listener) throws RemoteException {
+            public void unregisterTasPolicyChangedListener(SemTasPolicyListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemWifiManager.DESCRIPTOR);
@@ -10173,7 +10299,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void setMhsAiServiceState(boolean enabled, int[] numClass, int[] numTimeStep) throws RemoteException {
+            public void setMhsAiServiceState(boolean enabled, int[] numClass, int[] numTimeStep)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemWifiManager.DESCRIPTOR);
@@ -10187,7 +10314,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void setMhsAiServiceNsdResult(int[] predArr, String[] convoStrArr) throws RemoteException {
+            public void setMhsAiServiceNsdResult(int[] predArr, String[] convoStrArr)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemWifiManager.DESCRIPTOR);
@@ -10280,7 +10408,9 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void registerAbTestConfigUpdateObserver(ISemAbTestConfigurationUpdateObserver observer, String module) throws RemoteException {
+            public void registerAbTestConfigUpdateObserver(
+                    ISemAbTestConfigurationUpdateObserver observer, String module)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10296,7 +10426,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void unregisterAbTestConfigUpdateObserver(ISemAbTestConfigurationUpdateObserver observer) throws RemoteException {
+            public void unregisterAbTestConfigUpdateObserver(
+                    ISemAbTestConfigurationUpdateObserver observer) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10311,7 +10442,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public void reportAbTestResult(String module, String outputDim, String output) throws RemoteException {
+            public void reportAbTestResult(String module, String outputDim, String output)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10335,7 +10467,8 @@ public interface ISemWifiManager extends IInterface {
                     _data.writeInterfaceToken(ISemWifiManager.DESCRIPTOR);
                     this.mRemote.transact(334, _data, _reply, 0);
                     _reply.readException();
-                    List<SemAbTestConfiguration> _result = _reply.createTypedArrayList(SemAbTestConfiguration.CREATOR);
+                    List<SemAbTestConfiguration> _result =
+                            _reply.createTypedArrayList(SemAbTestConfiguration.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -10344,7 +10477,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public SemAbTestConfiguration getAbTestConfiguredModule(String module) throws RemoteException {
+            public SemAbTestConfiguration getAbTestConfiguredModule(String module)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10352,7 +10486,9 @@ public interface ISemWifiManager extends IInterface {
                     _data.writeString(module);
                     this.mRemote.transact(335, _data, _reply, 0);
                     _reply.readException();
-                    SemAbTestConfiguration _result = (SemAbTestConfiguration) _reply.readTypedObject(SemAbTestConfiguration.CREATOR);
+                    SemAbTestConfiguration _result =
+                            (SemAbTestConfiguration)
+                                    _reply.readTypedObject(SemAbTestConfiguration.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -10361,7 +10497,8 @@ public interface ISemWifiManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiManager
-            public boolean sendReassociationFrequencyRequestFrame(String bssid, int channel) throws RemoteException {
+            public boolean sendReassociationFrequencyRequestFrame(String bssid, int channel)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10379,7 +10516,8 @@ public interface ISemWifiManager extends IInterface {
             }
         }
 
-        private boolean onTransact$setVendorWlanDriverProp$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setVendorWlanDriverProp$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             String _arg1 = data.readString();
             data.enforceNoDataAvail();
@@ -10389,7 +10527,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setFccChannelBackoffEnabled$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setFccChannelBackoffEnabled$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             boolean _arg1 = data.readBoolean();
             data.enforceNoDataAvail();
@@ -10398,7 +10537,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$sendVendorSpecificActionFrame$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$sendVendorSpecificActionFrame$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -10410,7 +10550,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$sendReassociationRequestFrame$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$sendReassociationRequestFrame$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -10420,7 +10561,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$connectToSmartMHS$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$connectToSmartMHS$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -10430,15 +10572,18 @@ public interface ISemWifiManager extends IInterface {
             int _arg6 = data.readInt();
             boolean _arg7 = data.readBoolean();
             data.enforceNoDataAvail();
-            boolean _result = connectToSmartMHS(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7);
+            boolean _result =
+                    connectToSmartMHS(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7);
             reply.writeNoException();
             reply.writeBoolean(_result);
             return true;
         }
 
-        private boolean onTransact$registerWifiApSmartCallback$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$registerWifiApSmartCallback$(Parcel data, Parcel reply)
+                throws RemoteException {
             IBinder _arg0 = data.readStrongBinder();
-            ISemWifiApSmartCallback _arg1 = ISemWifiApSmartCallback.Stub.asInterface(data.readStrongBinder());
+            ISemWifiApSmartCallback _arg1 =
+                    ISemWifiApSmartCallback.Stub.asInterface(data.readStrongBinder());
             int _arg2 = data.readInt();
             data.enforceNoDataAvail();
             registerWifiApSmartCallback(_arg0, _arg1, _arg2);
@@ -10446,9 +10591,11 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$registerWifiApDataUsageCallback$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$registerWifiApDataUsageCallback$(Parcel data, Parcel reply)
+                throws RemoteException {
             IBinder _arg0 = data.readStrongBinder();
-            ISemWifiApDataUsageCallback _arg1 = ISemWifiApDataUsageCallback.Stub.asInterface(data.readStrongBinder());
+            ISemWifiApDataUsageCallback _arg1 =
+                    ISemWifiApDataUsageCallback.Stub.asInterface(data.readStrongBinder());
             int _arg2 = data.readInt();
             data.enforceNoDataAvail();
             registerWifiApDataUsageCallback(_arg0, _arg1, _arg2);
@@ -10456,10 +10603,12 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$connectToSmartD2DClient$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$connectToSmartD2DClient$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             String _arg1 = data.readString();
-            ISemWifiApSmartCallback _arg2 = ISemWifiApSmartCallback.Stub.asInterface(data.readStrongBinder());
+            ISemWifiApSmartCallback _arg2 =
+                    ISemWifiApSmartCallback.Stub.asInterface(data.readStrongBinder());
             data.enforceNoDataAvail();
             boolean _result = connectToSmartD2DClient(_arg0, _arg1, _arg2);
             reply.writeNoException();
@@ -10467,8 +10616,10 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setWifiApEnabled$(Parcel data, Parcel reply) throws RemoteException {
-            SoftApConfiguration _arg0 = (SoftApConfiguration) data.readTypedObject(SoftApConfiguration.CREATOR);
+        private boolean onTransact$setWifiApEnabled$(Parcel data, Parcel reply)
+                throws RemoteException {
+            SoftApConfiguration _arg0 =
+                    (SoftApConfiguration) data.readTypedObject(SoftApConfiguration.CREATOR);
             boolean _arg1 = data.readBoolean();
             data.enforceNoDataAvail();
             boolean _result = setWifiApEnabled(_arg0, _arg1);
@@ -10477,7 +10628,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setLocalOnlyHotspotEnabled$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setLocalOnlyHotspotEnabled$(Parcel data, Parcel reply)
+                throws RemoteException {
             boolean _arg0 = data.readBoolean();
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -10489,7 +10641,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$manageWifiApMacAclList$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$manageWifiApMacAclList$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             String _arg1 = data.readString();
             int _arg2 = data.readInt();
@@ -10501,7 +10654,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$notifyConnect$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$notifyConnect$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             String _arg1 = data.readString();
             data.enforceNoDataAvail();
@@ -10510,7 +10664,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$launchWifiApWarningForMcfMHS$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$launchWifiApWarningForMcfMHS$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -10520,7 +10675,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$autohotspotWifiScanConnect$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$autohotspotWifiScanConnect$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -10534,7 +10690,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$connectToMcfMHS$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$connectToMcfMHS$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -10549,7 +10706,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setWifiApClientMobileDataLimit$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setWifiApClientMobileDataLimit$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             long _arg1 = data.readLong();
             data.enforceNoDataAvail();
@@ -10558,7 +10716,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setWifiApClientTimeLimit$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setWifiApClientTimeLimit$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             long _arg1 = data.readLong();
             data.enforceNoDataAvail();
@@ -10567,7 +10726,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setWifiApClientDataPaused$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setWifiApClientDataPaused$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             boolean _arg1 = data.readBoolean();
             data.enforceNoDataAvail();
@@ -10576,7 +10736,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setWifiApClientEditedName$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setWifiApClientEditedName$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             String _arg1 = data.readString();
             data.enforceNoDataAvail();
@@ -10585,7 +10746,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getTopHotspotClientsToday$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getTopHotspotClientsToday$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -10595,7 +10757,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getTopHotspotClientsTodayAsString$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getTopHotspotClientsTodayAsString$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -10605,7 +10768,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getTotalAndTop3ClientsDataUsageBetweenGivenDates$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getTotalAndTop3ClientsDataUsageBetweenGivenDates$(
+                Parcel data, Parcel reply) throws RemoteException {
             long _arg0 = data.readLong();
             long _arg1 = data.readLong();
             data.enforceNoDataAvail();
@@ -10615,9 +10779,11 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$registerClientListDataUsageCallback$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$registerClientListDataUsageCallback$(Parcel data, Parcel reply)
+                throws RemoteException {
             IBinder _arg0 = data.readStrongBinder();
-            ISemWifiApClientListUpdateCallback _arg1 = ISemWifiApClientListUpdateCallback.Stub.asInterface(data.readStrongBinder());
+            ISemWifiApClientListUpdateCallback _arg1 =
+                    ISemWifiApClientListUpdateCallback.Stub.asInterface(data.readStrongBinder());
             int _arg2 = data.readInt();
             int _arg3 = data.readInt();
             int _arg4 = data.readInt();
@@ -10627,9 +10793,11 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$registerClientDataUsageCallback$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$registerClientDataUsageCallback$(Parcel data, Parcel reply)
+                throws RemoteException {
             IBinder _arg0 = data.readStrongBinder();
-            ISemWifiApClientUpdateCallback _arg1 = ISemWifiApClientUpdateCallback.Stub.asInterface(data.readStrongBinder());
+            ISemWifiApClientUpdateCallback _arg1 =
+                    ISemWifiApClientUpdateCallback.Stub.asInterface(data.readStrongBinder());
             int _arg2 = data.readInt();
             String _arg3 = data.readString();
             data.enforceNoDataAvail();
@@ -10638,7 +10806,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$reportBigData$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$reportBigData$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             String _arg1 = data.readString();
             data.enforceNoDataAvail();
@@ -10646,7 +10815,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$addOrUpdateWifiControlHistory$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$addOrUpdateWifiControlHistory$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             boolean _arg1 = data.readBoolean();
             data.enforceNoDataAvail();
@@ -10654,7 +10824,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$allowAutojoinPasspoint$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$allowAutojoinPasspoint$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             boolean _arg1 = data.readBoolean();
             data.enforceNoDataAvail();
@@ -10670,15 +10841,18 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$registerPasswordCallback$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$registerPasswordCallback$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
-            ISemSharedPasswordCallback _arg1 = ISemSharedPasswordCallback.Stub.asInterface(data.readStrongBinder());
+            ISemSharedPasswordCallback _arg1 =
+                    ISemSharedPasswordCallback.Stub.asInterface(data.readStrongBinder());
             data.enforceNoDataAvail();
             registerPasswordCallback(_arg0, _arg1);
             return true;
         }
 
-        private boolean onTransact$setUserConfirmForSharingPassword$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setUserConfirmForSharingPassword$(Parcel data, Parcel reply)
+                throws RemoteException {
             boolean _arg0 = data.readBoolean();
             String _arg1 = data.readString();
             data.enforceNoDataAvail();
@@ -10686,7 +10860,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setTestSettings$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setTestSettings$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             Bundle _arg1 = (Bundle) data.readTypedObject(Bundle.CREATOR);
             data.enforceNoDataAvail();
@@ -10694,7 +10869,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setAllowWifiScan$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setAllowWifiScan$(Parcel data, Parcel reply)
+                throws RemoteException {
             boolean _arg0 = data.readBoolean();
             String _arg1 = data.readString();
             data.enforceNoDataAvail();
@@ -10702,15 +10878,19 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setEasySetupScanSettings$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setEasySetupScanSettings$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
-            SemEasySetupWifiScanSettings _arg1 = (SemEasySetupWifiScanSettings) data.readTypedObject(SemEasySetupWifiScanSettings.CREATOR);
+            SemEasySetupWifiScanSettings _arg1 =
+                    (SemEasySetupWifiScanSettings)
+                            data.readTypedObject(SemEasySetupWifiScanSettings.CREATOR);
             data.enforceNoDataAvail();
             setEasySetupScanSettings(_arg0, _arg1);
             return true;
         }
 
-        private boolean onTransact$setKeepConnection$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setKeepConnection$(Parcel data, Parcel reply)
+                throws RemoteException {
             boolean _arg0 = data.readBoolean();
             boolean _arg1 = data.readBoolean();
             data.enforceNoDataAvail();
@@ -10718,7 +10898,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setConnectionAttemptInfo$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setConnectionAttemptInfo$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             boolean _arg1 = data.readBoolean();
             String _arg2 = data.readString();
@@ -10728,7 +10909,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$restoreIWCSettingsValue$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$restoreIWCSettingsValue$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -10737,7 +10919,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setWifiUwbCoexEnabled$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setWifiUwbCoexEnabled$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             boolean _arg1 = data.readBoolean();
             data.enforceNoDataAvail();
@@ -10747,7 +10930,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setLatencyCritical$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setLatencyCritical$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -10757,7 +10941,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setPktlogFilter$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setPktlogFilter$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             String _arg1 = data.readString();
             data.enforceNoDataAvail();
@@ -10767,7 +10952,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$removePktlogFilter$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$removePktlogFilter$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             String _arg1 = data.readString();
             data.enforceNoDataAvail();
@@ -10787,7 +10973,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$externalTwtInterface$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$externalTwtInterface$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             String _arg1 = data.readString();
             data.enforceNoDataAvail();
@@ -10809,7 +10996,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setWifiAiServiceState$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setWifiAiServiceState$(Parcel data, Parcel reply)
+                throws RemoteException {
             boolean _arg0 = data.readBoolean();
             int[] _arg1 = data.createIntArray();
             int[] _arg2 = data.createIntArray();
@@ -10818,7 +11006,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setWifiAiServiceNsdResult$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setWifiAiServiceNsdResult$(Parcel data, Parcel reply)
+                throws RemoteException {
             int[] _arg0 = data.createIntArray();
             int[] _arg1 = data.createIntArray();
             int[] _arg2 = data.createIntArray();
@@ -10828,7 +11017,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setWifiAiIwhTrainingResult$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setWifiAiIwhTrainingResult$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -10838,7 +11028,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setIlaTrainingResult$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setIlaTrainingResult$(Parcel data, Parcel reply)
+                throws RemoteException {
             double _arg0 = data.readDouble();
             String _arg1 = data.readString();
             data.enforceNoDataAvail();
@@ -10846,7 +11037,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setTdlsEnabled$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setTdlsEnabled$(Parcel data, Parcel reply)
+                throws RemoteException {
             boolean _arg0 = data.readBoolean();
             data.enforceNoDataAvail();
             boolean _result = setTdlsEnabled(_arg0);
@@ -10865,21 +11057,26 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$registerTasPolicyChangedListener$(Parcel data, Parcel reply) throws RemoteException {
-            SemTasPolicyListener _arg0 = SemTasPolicyListener.Stub.asInterface(data.readStrongBinder());
+        private boolean onTransact$registerTasPolicyChangedListener$(Parcel data, Parcel reply)
+                throws RemoteException {
+            SemTasPolicyListener _arg0 =
+                    SemTasPolicyListener.Stub.asInterface(data.readStrongBinder());
             data.enforceNoDataAvail();
             registerTasPolicyChangedListener(_arg0);
             return true;
         }
 
-        private boolean onTransact$unregisterTasPolicyChangedListener$(Parcel data, Parcel reply) throws RemoteException {
-            SemTasPolicyListener _arg0 = SemTasPolicyListener.Stub.asInterface(data.readStrongBinder());
+        private boolean onTransact$unregisterTasPolicyChangedListener$(Parcel data, Parcel reply)
+                throws RemoteException {
+            SemTasPolicyListener _arg0 =
+                    SemTasPolicyListener.Stub.asInterface(data.readStrongBinder());
             data.enforceNoDataAvail();
             unregisterTasPolicyChangedListener(_arg0);
             return true;
         }
 
-        private boolean onTransact$enableTxPowerLogging$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$enableTxPowerLogging$(Parcel data, Parcel reply)
+                throws RemoteException {
             boolean _arg0 = data.readBoolean();
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -10888,7 +11085,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setMhsAiServiceState$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setMhsAiServiceState$(Parcel data, Parcel reply)
+                throws RemoteException {
             boolean _arg0 = data.readBoolean();
             int[] _arg1 = data.createIntArray();
             int[] _arg2 = data.createIntArray();
@@ -10897,7 +11095,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setMhsAiServiceNsdResult$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setMhsAiServiceNsdResult$(Parcel data, Parcel reply)
+                throws RemoteException {
             int[] _arg0 = data.createIntArray();
             String[] _arg1 = data.createStringArray();
             data.enforceNoDataAvail();
@@ -10914,7 +11113,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setMcfMultiControlMode$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setMcfMultiControlMode$(Parcel data, Parcel reply)
+                throws RemoteException {
             boolean _arg0 = data.readBoolean();
             data.enforceNoDataAvail();
             setMcfMultiControlMode(_arg0);
@@ -10922,8 +11122,10 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$registerAbTestConfigUpdateObserver$(Parcel data, Parcel reply) throws RemoteException {
-            ISemAbTestConfigurationUpdateObserver _arg0 = ISemAbTestConfigurationUpdateObserver.Stub.asInterface(data.readStrongBinder());
+        private boolean onTransact$registerAbTestConfigUpdateObserver$(Parcel data, Parcel reply)
+                throws RemoteException {
+            ISemAbTestConfigurationUpdateObserver _arg0 =
+                    ISemAbTestConfigurationUpdateObserver.Stub.asInterface(data.readStrongBinder());
             String _arg1 = data.readString();
             data.enforceNoDataAvail();
             registerAbTestConfigUpdateObserver(_arg0, _arg1);
@@ -10931,15 +11133,18 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$unregisterAbTestConfigUpdateObserver$(Parcel data, Parcel reply) throws RemoteException {
-            ISemAbTestConfigurationUpdateObserver _arg0 = ISemAbTestConfigurationUpdateObserver.Stub.asInterface(data.readStrongBinder());
+        private boolean onTransact$unregisterAbTestConfigUpdateObserver$(Parcel data, Parcel reply)
+                throws RemoteException {
+            ISemAbTestConfigurationUpdateObserver _arg0 =
+                    ISemAbTestConfigurationUpdateObserver.Stub.asInterface(data.readStrongBinder());
             data.enforceNoDataAvail();
             unregisterAbTestConfigUpdateObserver(_arg0);
             reply.writeNoException();
             return true;
         }
 
-        private boolean onTransact$reportAbTestResult$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$reportAbTestResult$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -10949,7 +11154,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getAbTestConfiguredModule$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getAbTestConfiguredModule$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             data.enforceNoDataAvail();
             SemAbTestConfiguration _result = getAbTestConfiguredModule(_arg0);
@@ -10958,7 +11164,8 @@ public interface ISemWifiManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$sendReassociationFrequencyRequestFrame$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$sendReassociationFrequencyRequestFrame$(
+                Parcel data, Parcel reply) throws RemoteException {
             String _arg0 = data.readString();
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();

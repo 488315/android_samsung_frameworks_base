@@ -13,21 +13,23 @@ public class CameraFeatureCombinationStats implements Parcelable {
     public static final long CAMERA_FEATURE_JPEG_R = 16;
     public static final long CAMERA_FEATURE_STABILIZATION = 2;
     public static final long CAMERA_FEATURE_UNKNOWN = 0;
-    public static final Parcelable.Creator<CameraFeatureCombinationStats> CREATOR = new Parcelable.Creator<CameraFeatureCombinationStats>() { // from class: android.hardware.CameraFeatureCombinationStats.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CameraFeatureCombinationStats createFromParcel(Parcel _aidl_source) {
-            CameraFeatureCombinationStats _aidl_out = new CameraFeatureCombinationStats();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CameraFeatureCombinationStats> CREATOR =
+            new Parcelable.Creator<CameraFeatureCombinationStats>() { // from class:
+                // android.hardware.CameraFeatureCombinationStats.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CameraFeatureCombinationStats createFromParcel(Parcel _aidl_source) {
+                    CameraFeatureCombinationStats _aidl_out = new CameraFeatureCombinationStats();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CameraFeatureCombinationStats[] newArray(int _aidl_size) {
-            return new CameraFeatureCombinationStats[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CameraFeatureCombinationStats[] newArray(int _aidl_size) {
+                    return new CameraFeatureCombinationStats[_aidl_size];
+                }
+            };
     public String mCameraId;
     public int mUid = 0;
     public long mFeatureCombination = 0;

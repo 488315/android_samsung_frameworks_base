@@ -7,9 +7,11 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.ArraySet;
 import android.util.SparseArray;
+
 import com.android.internal.os.TransferPipe;
 import com.android.internal.util.CollectionUtils;
 import com.android.internal.util.DumpUtils;
+
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,7 +36,8 @@ public final class ProviderMap {
         this.mAm = activityManagerService;
     }
 
-    public static boolean collectPackageProvidersLocked(String str, Set set, boolean z, boolean z2, HashMap hashMap, ArrayList arrayList) {
+    public static boolean collectPackageProvidersLocked(
+            String str, Set set, boolean z, boolean z2, HashMap hashMap, ArrayList arrayList) {
         boolean z3 = false;
         for (ContentProviderRecord contentProviderRecord : hashMap.values()) {
             if (str != null) {
@@ -58,11 +61,18 @@ public final class ProviderMap {
         return z3;
     }
 
-    public static boolean dumpProvidersByClassLocked(PrintWriter printWriter, boolean z, String str, String str2, boolean z2, HashMap hashMap) {
+    public static boolean dumpProvidersByClassLocked(
+            PrintWriter printWriter,
+            boolean z,
+            String str,
+            String str2,
+            boolean z2,
+            HashMap hashMap) {
         Iterator it = hashMap.entrySet().iterator();
         boolean z3 = false;
         while (it.hasNext()) {
-            ContentProviderRecord contentProviderRecord = (ContentProviderRecord) ((Map.Entry) it.next()).getValue();
+            ContentProviderRecord contentProviderRecord =
+                    (ContentProviderRecord) ((Map.Entry) it.next()).getValue();
             if (str == null || str.equals(contentProviderRecord.appInfo.packageName)) {
                 if (z2) {
                     printWriter.println("");
@@ -81,7 +91,8 @@ public final class ProviderMap {
         return z3;
     }
 
-    public static boolean dumpProvidersByNameLocked(PrintWriter printWriter, String str, String str2, boolean z, HashMap hashMap) {
+    public static boolean dumpProvidersByNameLocked(
+            PrintWriter printWriter, String str, String str2, boolean z, HashMap hashMap) {
         boolean z2 = false;
         for (Map.Entry entry : hashMap.entrySet()) {
             ContentProviderRecord contentProviderRecord = (ContentProviderRecord) entry.getValue();
@@ -104,11 +115,20 @@ public final class ProviderMap {
         return z2;
     }
 
-    public static void dumpToTransferPipe(String str, FileDescriptor fileDescriptor, PrintWriter printWriter, ContentProviderRecord contentProviderRecord, IApplicationThread iApplicationThread, String[] strArr) {
+    public static void dumpToTransferPipe(
+            String str,
+            FileDescriptor fileDescriptor,
+            PrintWriter printWriter,
+            ContentProviderRecord contentProviderRecord,
+            IApplicationThread iApplicationThread,
+            String[] strArr) {
         try {
             TransferPipe transferPipe = new TransferPipe();
             try {
-                iApplicationThread.dumpProvider(transferPipe.getWriteFd(), contentProviderRecord.provider.asBinder(), strArr);
+                iApplicationThread.dumpProvider(
+                        transferPipe.getWriteFd(),
+                        contentProviderRecord.provider.asBinder(),
+                        strArr);
                 transferPipe.setBufferPrefix(str);
                 transferPipe.go(fileDescriptor, 2000L);
                 transferPipe.kill();
@@ -123,17 +143,30 @@ public final class ProviderMap {
         }
     }
 
-    public final boolean collectPackageProvidersLocked(String str, Set set, boolean z, boolean z2, int i, ArrayList arrayList) {
-        boolean collectPackageProvidersLocked = (i == -1 || i == 0) ? collectPackageProvidersLocked(str, set, z, z2, this.mSingletonByClass, arrayList) : false;
+    public final boolean collectPackageProvidersLocked(
+            String str, Set set, boolean z, boolean z2, int i, ArrayList arrayList) {
+        boolean collectPackageProvidersLocked =
+                (i == -1 || i == 0)
+                        ? collectPackageProvidersLocked(
+                                str, set, z, z2, this.mSingletonByClass, arrayList)
+                        : false;
         if (!z && collectPackageProvidersLocked) {
             return true;
         }
         if (i != -1) {
-            return collectPackageProvidersLocked | collectPackageProvidersLocked(str, set, z, z2, getProvidersByClass(i), arrayList);
+            return collectPackageProvidersLocked
+                    | collectPackageProvidersLocked(
+                            str, set, z, z2, getProvidersByClass(i), arrayList);
         }
         boolean z3 = collectPackageProvidersLocked;
         for (int i2 = 0; i2 < this.mProvidersByClassPerUser.size(); i2++) {
-            if (collectPackageProvidersLocked(str, set, z, z2, (HashMap) this.mProvidersByClassPerUser.valueAt(i2), arrayList)) {
+            if (collectPackageProvidersLocked(
+                    str,
+                    set,
+                    z,
+                    z2,
+                    (HashMap) this.mProvidersByClassPerUser.valueAt(i2),
+                    arrayList)) {
                 if (!z) {
                     return true;
                 }
@@ -143,13 +176,25 @@ public final class ProviderMap {
         return z3;
     }
 
-    public final void dumpProvider(FileDescriptor fileDescriptor, PrintWriter printWriter, ContentProviderRecord contentProviderRecord, String[] strArr, boolean z) {
+    public final void dumpProvider(
+            FileDescriptor fileDescriptor,
+            PrintWriter printWriter,
+            ContentProviderRecord contentProviderRecord,
+            String[] strArr,
+            boolean z) {
         ProcessRecord processRecord = contentProviderRecord.proc;
-        IApplicationThread iApplicationThread = processRecord != null ? processRecord.mThread : null;
+        IApplicationThread iApplicationThread =
+                processRecord != null ? processRecord.mThread : null;
         for (String str : strArr) {
             if (!z && str.contains("--proto")) {
                 if (iApplicationThread != null) {
-                    dumpToTransferPipe(null, fileDescriptor, printWriter, contentProviderRecord, iApplicationThread, strArr);
+                    dumpToTransferPipe(
+                            null,
+                            fileDescriptor,
+                            printWriter,
+                            contentProviderRecord,
+                            iApplicationThread,
+                            strArr);
                     return;
                 }
                 return;
@@ -181,23 +226,36 @@ public final class ProviderMap {
         if (iApplicationThread != null) {
             printWriter.println("    Client:");
             printWriter.flush();
-            dumpToTransferPipe("      ", fileDescriptor, printWriter, contentProviderRecord, iApplicationThread, strArr);
+            dumpToTransferPipe(
+                    "      ",
+                    fileDescriptor,
+                    printWriter,
+                    contentProviderRecord,
+                    iApplicationThread,
+                    strArr);
         }
     }
 
     public final ContentProviderRecord getProviderByClass(int i, ComponentName componentName) {
-        ContentProviderRecord contentProviderRecord = (ContentProviderRecord) this.mSingletonByClass.get(componentName);
-        return contentProviderRecord != null ? contentProviderRecord : (ContentProviderRecord) getProvidersByClass(i).get(componentName);
+        ContentProviderRecord contentProviderRecord =
+                (ContentProviderRecord) this.mSingletonByClass.get(componentName);
+        return contentProviderRecord != null
+                ? contentProviderRecord
+                : (ContentProviderRecord) getProvidersByClass(i).get(componentName);
     }
 
     public final ContentProviderRecord getProviderByName(int i, String str) {
-        ContentProviderRecord contentProviderRecord = (ContentProviderRecord) this.mSingletonByName.get(str);
-        return contentProviderRecord != null ? contentProviderRecord : (ContentProviderRecord) getProvidersByName(i).get(str);
+        ContentProviderRecord contentProviderRecord =
+                (ContentProviderRecord) this.mSingletonByName.get(str);
+        return contentProviderRecord != null
+                ? contentProviderRecord
+                : (ContentProviderRecord) getProvidersByName(i).get(str);
     }
 
     public final HashMap getProvidersByClass(int i) {
         if (i < 0) {
-            throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Bad user "));
+            throw new IllegalArgumentException(
+                    VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Bad user "));
         }
         HashMap hashMap = (HashMap) this.mProvidersByClassPerUser.get(i);
         if (hashMap != null) {
@@ -210,7 +268,8 @@ public final class ProviderMap {
 
     public final HashMap getProvidersByName(int i) {
         if (i < 0) {
-            throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Bad user "));
+            throw new IllegalArgumentException(
+                    VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Bad user "));
         }
         HashMap hashMap = (HashMap) this.mProvidersByNamePerUser.get(i);
         if (hashMap != null) {
@@ -244,11 +303,13 @@ public final class ProviderMap {
         return arrayList2;
     }
 
-    public final void putProviderByClass(ComponentName componentName, ContentProviderRecord contentProviderRecord) {
+    public final void putProviderByClass(
+            ComponentName componentName, ContentProviderRecord contentProviderRecord) {
         if (contentProviderRecord.singleton) {
             this.mSingletonByClass.put(componentName, contentProviderRecord);
         } else {
-            getProvidersByClass(UserHandle.getUserId(contentProviderRecord.appInfo.uid)).put(componentName, contentProviderRecord);
+            getProvidersByClass(UserHandle.getUserId(contentProviderRecord.appInfo.uid))
+                    .put(componentName, contentProviderRecord);
         }
     }
 }

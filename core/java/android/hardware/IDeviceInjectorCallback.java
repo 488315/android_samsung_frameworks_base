@@ -1,6 +1,5 @@
 package android.hardware;
 
-import android.hardware.IDeviceInjectorSession;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -29,28 +28,27 @@ public interface IDeviceInjectorCallback extends IInterface {
 
     public static class Default implements IDeviceInjectorCallback {
         @Override // android.hardware.IDeviceInjectorCallback
-        public void onSessionCreated(IDeviceInjectorSession deviceInjectorSession) throws RemoteException {
-        }
+        public void onSessionCreated(IDeviceInjectorSession deviceInjectorSession)
+                throws RemoteException {}
 
         @Override // android.hardware.IDeviceInjectorCallback
-        public void onInjectionStarted(String packageName, String targetId, String sourceId) throws RemoteException {
-        }
+        public void onInjectionStarted(String packageName, String targetId, String sourceId)
+                throws RemoteException {}
 
         @Override // android.hardware.IDeviceInjectorCallback
-        public void onInjectionStopped(String packageName, String targetId, String sourceId) throws RemoteException {
-        }
+        public void onInjectionStopped(String packageName, String targetId, String sourceId)
+                throws RemoteException {}
 
         @Override // android.hardware.IDeviceInjectorCallback
-        public void onInjectionPendingStarted(String packageName, String targetId) throws RemoteException {
-        }
+        public void onInjectionPendingStarted(String packageName, String targetId)
+                throws RemoteException {}
 
         @Override // android.hardware.IDeviceInjectorCallback
-        public void onInjectionPendingStopped(String packageName, String targetId) throws RemoteException {
-        }
+        public void onInjectionPendingStopped(String packageName, String targetId)
+                throws RemoteException {}
 
         @Override // android.hardware.IDeviceInjectorCallback
-        public void onError(int errorCode) throws RemoteException {
-        }
+        public void onError(int errorCode) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -58,7 +56,7 @@ public interface IDeviceInjectorCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDeviceInjectorCallback {
+    public abstract static class Stub extends Binder implements IDeviceInjectorCallback {
         static final int TRANSACTION_onError = 6;
         static final int TRANSACTION_onInjectionPendingStarted = 4;
         static final int TRANSACTION_onInjectionPendingStopped = 5;
@@ -111,7 +109,8 @@ public interface IDeviceInjectorCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDeviceInjectorCallback.DESCRIPTOR);
             }
@@ -121,7 +120,8 @@ public interface IDeviceInjectorCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IDeviceInjectorSession _arg0 = IDeviceInjectorSession.Stub.asInterface(data.readStrongBinder());
+                    IDeviceInjectorSession _arg0 =
+                            IDeviceInjectorSession.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onSessionCreated(_arg0);
                     return true;
@@ -178,7 +178,8 @@ public interface IDeviceInjectorCallback extends IInterface {
             }
 
             @Override // android.hardware.IDeviceInjectorCallback
-            public void onSessionCreated(IDeviceInjectorSession deviceInjectorSession) throws RemoteException {
+            public void onSessionCreated(IDeviceInjectorSession deviceInjectorSession)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDeviceInjectorCallback.DESCRIPTOR);
@@ -190,7 +191,8 @@ public interface IDeviceInjectorCallback extends IInterface {
             }
 
             @Override // android.hardware.IDeviceInjectorCallback
-            public void onInjectionStarted(String packageName, String targetId, String sourceId) throws RemoteException {
+            public void onInjectionStarted(String packageName, String targetId, String sourceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDeviceInjectorCallback.DESCRIPTOR);
@@ -204,7 +206,8 @@ public interface IDeviceInjectorCallback extends IInterface {
             }
 
             @Override // android.hardware.IDeviceInjectorCallback
-            public void onInjectionStopped(String packageName, String targetId, String sourceId) throws RemoteException {
+            public void onInjectionStopped(String packageName, String targetId, String sourceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDeviceInjectorCallback.DESCRIPTOR);
@@ -218,7 +221,8 @@ public interface IDeviceInjectorCallback extends IInterface {
             }
 
             @Override // android.hardware.IDeviceInjectorCallback
-            public void onInjectionPendingStarted(String packageName, String targetId) throws RemoteException {
+            public void onInjectionPendingStarted(String packageName, String targetId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDeviceInjectorCallback.DESCRIPTOR);
@@ -231,7 +235,8 @@ public interface IDeviceInjectorCallback extends IInterface {
             }
 
             @Override // android.hardware.IDeviceInjectorCallback
-            public void onInjectionPendingStopped(String packageName, String targetId) throws RemoteException {
+            public void onInjectionPendingStopped(String packageName, String targetId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDeviceInjectorCallback.DESCRIPTOR);

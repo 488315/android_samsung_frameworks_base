@@ -34,30 +34,48 @@ public class DifferentialMotionFlingHelper {
     }
 
     public interface FlingVelocityThresholdCalculator {
-        void calculateFlingVelocityThresholds(Context context, int[] iArr, MotionEvent motionEvent, int i);
+        void calculateFlingVelocityThresholds(
+                Context context, int[] iArr, MotionEvent motionEvent, int i);
     }
 
     public DifferentialMotionFlingHelper(Context context, DifferentialMotionFlingTarget target) {
-        this(context, target, new FlingVelocityThresholdCalculator() { // from class: android.widget.DifferentialMotionFlingHelper$$ExternalSyntheticLambda0
-            @Override // android.widget.DifferentialMotionFlingHelper.FlingVelocityThresholdCalculator
-            public final void calculateFlingVelocityThresholds(Context context2, int[] iArr, MotionEvent motionEvent, int i) {
-                DifferentialMotionFlingHelper.calculateFlingVelocityThresholds(context2, iArr, motionEvent, i);
-            }
-        }, new DifferentialVelocityProvider() { // from class: android.widget.DifferentialMotionFlingHelper$$ExternalSyntheticLambda1
-            @Override // android.widget.DifferentialMotionFlingHelper.DifferentialVelocityProvider
-            public final float getCurrentVelocity(VelocityTracker velocityTracker, MotionEvent motionEvent, int i) {
-                float currentVelocity;
-                currentVelocity = DifferentialMotionFlingHelper.getCurrentVelocity(velocityTracker, motionEvent, i);
-                return currentVelocity;
-            }
-        }, new FeatureFlagsImpl());
+        this(
+                context,
+                target,
+                new FlingVelocityThresholdCalculator() { // from class:
+                                                         // android.widget.DifferentialMotionFlingHelper$$ExternalSyntheticLambda0
+                    @Override // android.widget.DifferentialMotionFlingHelper.FlingVelocityThresholdCalculator
+                    public final void calculateFlingVelocityThresholds(
+                            Context context2, int[] iArr, MotionEvent motionEvent, int i) {
+                        DifferentialMotionFlingHelper.calculateFlingVelocityThresholds(
+                                context2, iArr, motionEvent, i);
+                    }
+                },
+                new DifferentialVelocityProvider() { // from class:
+                                                     // android.widget.DifferentialMotionFlingHelper$$ExternalSyntheticLambda1
+                    @Override // android.widget.DifferentialMotionFlingHelper.DifferentialVelocityProvider
+                    public final float getCurrentVelocity(
+                            VelocityTracker velocityTracker, MotionEvent motionEvent, int i) {
+                        float currentVelocity;
+                        currentVelocity =
+                                DifferentialMotionFlingHelper.getCurrentVelocity(
+                                        velocityTracker, motionEvent, i);
+                        return currentVelocity;
+                    }
+                },
+                new FeatureFlagsImpl());
     }
 
-    public DifferentialMotionFlingHelper(Context context, DifferentialMotionFlingTarget target, FlingVelocityThresholdCalculator velocityThresholdCalculator, DifferentialVelocityProvider velocityProvider, FeatureFlags widgetFeatureFlags) {
+    public DifferentialMotionFlingHelper(
+            Context context,
+            DifferentialMotionFlingTarget target,
+            FlingVelocityThresholdCalculator velocityThresholdCalculator,
+            DifferentialVelocityProvider velocityProvider,
+            FeatureFlags widgetFeatureFlags) {
         this.mLastProcessedAxis = -1;
         this.mLastProcessedSource = -1;
         this.mLastProcessedDeviceId = -1;
-        this.mFlingVelocityThresholds = new int[]{Integer.MAX_VALUE, 0};
+        this.mFlingVelocityThresholds = new int[] {Integer.MAX_VALUE, 0};
         this.mContext = context;
         this.mTarget = target;
         this.mVelocityThresholdCalculator = velocityThresholdCalculator;
@@ -74,15 +92,21 @@ public class DifferentialMotionFlingHelper {
             recycleVelocityTracker();
             return;
         }
-        float scaledVelocity = getCurrentVelocity(event, axis) * this.mTarget.getScaledScrollFactor();
+        float scaledVelocity =
+                getCurrentVelocity(event, axis) * this.mTarget.getScaledScrollFactor();
         float velocityDirection = Math.signum(scaledVelocity);
-        if (flingParamsChanged || (velocityDirection != Math.signum(this.mLastFlingVelocity) && velocityDirection != 0.0f)) {
+        if (flingParamsChanged
+                || (velocityDirection != Math.signum(this.mLastFlingVelocity)
+                        && velocityDirection != 0.0f)) {
             this.mTarget.stopDifferentialMotionFling();
         }
         if (Math.abs(scaledVelocity) < this.mFlingVelocityThresholds[0]) {
             return;
         }
-        float scaledVelocity2 = Math.max(-this.mFlingVelocityThresholds[1], Math.min(scaledVelocity, this.mFlingVelocityThresholds[1]));
+        float scaledVelocity2 =
+                Math.max(
+                        -this.mFlingVelocityThresholds[1],
+                        Math.min(scaledVelocity, this.mFlingVelocityThresholds[1]));
         boolean flung = this.mTarget.startDifferentialMotionFling(scaledVelocity2);
         this.mLastFlingVelocity = flung ? scaledVelocity2 : 0.0f;
     }
@@ -90,8 +114,11 @@ public class DifferentialMotionFlingHelper {
     private boolean calculateFlingVelocityThresholds(MotionEvent event, int axis) {
         int source = event.getSource();
         int deviceId = event.getDeviceId();
-        if (this.mLastProcessedSource != source || this.mLastProcessedDeviceId != deviceId || this.mLastProcessedAxis != axis) {
-            this.mVelocityThresholdCalculator.calculateFlingVelocityThresholds(this.mContext, this.mFlingVelocityThresholds, event, axis);
+        if (this.mLastProcessedSource != source
+                || this.mLastProcessedDeviceId != deviceId
+                || this.mLastProcessedAxis != axis) {
+            this.mVelocityThresholdCalculator.calculateFlingVelocityThresholds(
+                    this.mContext, this.mFlingVelocityThresholds, event, axis);
             this.mLastProcessedSource = source;
             this.mLastProcessedDeviceId = deviceId;
             this.mLastProcessedAxis = axis;
@@ -101,7 +128,8 @@ public class DifferentialMotionFlingHelper {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static void calculateFlingVelocityThresholds(Context context, int[] buffer, MotionEvent event, int axis) {
+    public static void calculateFlingVelocityThresholds(
+            Context context, int[] buffer, MotionEvent event, int axis) {
         int source = event.getSource();
         int deviceId = event.getDeviceId();
         ViewConfiguration vc = ViewConfiguration.get(context);

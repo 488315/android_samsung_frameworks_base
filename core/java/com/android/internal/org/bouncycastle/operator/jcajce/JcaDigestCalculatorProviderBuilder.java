@@ -7,6 +7,7 @@ import com.android.internal.org.bouncycastle.jcajce.util.ProviderJcaJceHelper;
 import com.android.internal.org.bouncycastle.operator.DigestCalculator;
 import com.android.internal.org.bouncycastle.operator.DigestCalculatorProvider;
 import com.android.internal.org.bouncycastle.operator.OperatorCreationException;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.security.GeneralSecurityException;
@@ -28,13 +29,18 @@ public class JcaDigestCalculatorProviderBuilder {
     }
 
     public DigestCalculatorProvider build() throws OperatorCreationException {
-        return new DigestCalculatorProvider() { // from class: com.android.internal.org.bouncycastle.operator.jcajce.JcaDigestCalculatorProviderBuilder.1
+        return new DigestCalculatorProvider() { // from class:
+                                                // com.android.internal.org.bouncycastle.operator.jcajce.JcaDigestCalculatorProviderBuilder.1
             @Override // com.android.internal.org.bouncycastle.operator.DigestCalculatorProvider
-            public DigestCalculator get(final AlgorithmIdentifier algorithm) throws OperatorCreationException {
+            public DigestCalculator get(final AlgorithmIdentifier algorithm)
+                    throws OperatorCreationException {
                 try {
-                    MessageDigest dig = JcaDigestCalculatorProviderBuilder.this.helper.createDigest(algorithm);
-                    final DigestOutputStream stream = JcaDigestCalculatorProviderBuilder.this.new DigestOutputStream(dig);
-                    return new DigestCalculator() { // from class: com.android.internal.org.bouncycastle.operator.jcajce.JcaDigestCalculatorProviderBuilder.1.1
+                    MessageDigest dig =
+                            JcaDigestCalculatorProviderBuilder.this.helper.createDigest(algorithm);
+                    final DigestOutputStream stream =
+                            JcaDigestCalculatorProviderBuilder.this.new DigestOutputStream(dig);
+                    return new DigestCalculator() { // from class:
+                                                    // com.android.internal.org.bouncycastle.operator.jcajce.JcaDigestCalculatorProviderBuilder.1.1
                         @Override // com.android.internal.org.bouncycastle.operator.DigestCalculator
                         public AlgorithmIdentifier getAlgorithmIdentifier() {
                             return algorithm;

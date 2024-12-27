@@ -1,6 +1,7 @@
 package com.android.server.am.pds;
 
 import android.util.Slog;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -23,7 +24,10 @@ public final class PDSHistoryLog {
 
     public static void readLogFromFile(File file, ArrayList arrayList) {
         try {
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file.getAbsolutePath()), "UTF-8"));
+            BufferedReader bufferedReader =
+                    new BufferedReader(
+                            new InputStreamReader(
+                                    new FileInputStream(file.getAbsolutePath()), "UTF-8"));
             while (true) {
                 try {
                     String readLine = bufferedReader.readLine();
@@ -94,7 +98,10 @@ public final class PDSHistoryLog {
             this.mLogFileIndex = (this.mLogFileIndex + 1) % 10;
         }
         try {
-            bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file.getAbsolutePath()), "UTF-8"));
+            bufferedWriter =
+                    new BufferedWriter(
+                            new OutputStreamWriter(
+                                    new FileOutputStream(file.getAbsolutePath()), "UTF-8"));
         } catch (Exception e) {
             e.printStackTrace();
         }

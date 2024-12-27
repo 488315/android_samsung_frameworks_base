@@ -1,6 +1,5 @@
 package android.graphics;
 
-import android.graphics.Path;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -17,11 +16,9 @@ public final class Outline {
     public float mRadius = RADIUS_UNDEFINED;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Mode {
-    }
+    public @interface Mode {}
 
-    public Outline() {
-    }
+    public Outline() {}
 
     public Outline(Outline src) {
         set(src);

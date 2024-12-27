@@ -13,6 +13,7 @@ import android.os.Parcelable;
 import android.os.Vibrator;
 import android.os.VibratorManager;
 import android.text.TextUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -20,53 +21,46 @@ import java.util.List;
 
 /* loaded from: classes4.dex */
 public final class InputDevice implements Parcelable {
-    public static final Parcelable.Creator<InputDevice> CREATOR = new Parcelable.Creator<InputDevice>() { // from class: android.view.InputDevice.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InputDevice createFromParcel(Parcel in) {
-            return new InputDevice(in);
-        }
+    public static final Parcelable.Creator<InputDevice> CREATOR =
+            new Parcelable.Creator<InputDevice>() { // from class: android.view.InputDevice.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InputDevice createFromParcel(Parcel in) {
+                    return new InputDevice(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InputDevice[] newArray(int size) {
-            return new InputDevice[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InputDevice[] newArray(int size) {
+                    return new InputDevice[size];
+                }
+            };
     public static final int KEYBOARD_TYPE_ALPHABETIC = 2;
     public static final int KEYBOARD_TYPE_NONE = 0;
     public static final int KEYBOARD_TYPE_NON_ALPHABETIC = 1;
     private static final int MAX_RANGES = 1000;
 
-    @Deprecated
-    public static final int MOTION_RANGE_ORIENTATION = 8;
+    @Deprecated public static final int MOTION_RANGE_ORIENTATION = 8;
 
-    @Deprecated
-    public static final int MOTION_RANGE_PRESSURE = 2;
+    @Deprecated public static final int MOTION_RANGE_PRESSURE = 2;
 
-    @Deprecated
-    public static final int MOTION_RANGE_SIZE = 3;
+    @Deprecated public static final int MOTION_RANGE_SIZE = 3;
 
-    @Deprecated
-    public static final int MOTION_RANGE_TOOL_MAJOR = 6;
+    @Deprecated public static final int MOTION_RANGE_TOOL_MAJOR = 6;
 
-    @Deprecated
-    public static final int MOTION_RANGE_TOOL_MINOR = 7;
+    @Deprecated public static final int MOTION_RANGE_TOOL_MINOR = 7;
 
-    @Deprecated
-    public static final int MOTION_RANGE_TOUCH_MAJOR = 4;
+    @Deprecated public static final int MOTION_RANGE_TOUCH_MAJOR = 4;
 
-    @Deprecated
-    public static final int MOTION_RANGE_TOUCH_MINOR = 5;
+    @Deprecated public static final int MOTION_RANGE_TOUCH_MINOR = 5;
 
-    @Deprecated
-    public static final int MOTION_RANGE_X = 0;
+    @Deprecated public static final int MOTION_RANGE_X = 0;
 
-    @Deprecated
-    public static final int MOTION_RANGE_Y = 1;
+    @Deprecated public static final int MOTION_RANGE_Y = 1;
 
     @Deprecated(forRemoval = true, since = "13.0")
     public static final int SEM_SOURCE_CAR_KNOB = 1073741824;
+
     public static final int SOURCE_ANY = -256;
     public static final int SOURCE_BLUETOOTH_STYLUS = 49154;
     public static final int SOURCE_CLASS_BUTTON = 1;
@@ -123,14 +117,35 @@ public final class InputDevice implements Parcelable {
     private final ViewBehavior mViewBehavior;
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface InputSourceClass {
-    }
+    @interface InputSourceClass {}
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface Source {
-    }
+    @interface Source {}
 
-    private InputDevice(int id, int generation, int controllerNumber, String name, int vendorId, int productId, int deviceBus, String descriptor, boolean isExternal, int sources, int keyboardType, KeyCharacterMap keyCharacterMap, String keyboardLanguageTag, String keyboardLayoutType, boolean hasVibrator, boolean hasMicrophone, boolean hasButtonUnderPad, boolean hasSensor, boolean hasBattery, int usiVersionMajor, int usiVersionMinor, int associatedDisplayId, boolean enabled) {
+    private InputDevice(
+            int id,
+            int generation,
+            int controllerNumber,
+            String name,
+            int vendorId,
+            int productId,
+            int deviceBus,
+            String descriptor,
+            boolean isExternal,
+            int sources,
+            int keyboardType,
+            KeyCharacterMap keyCharacterMap,
+            String keyboardLanguageTag,
+            String keyboardLayoutType,
+            boolean hasVibrator,
+            boolean hasMicrophone,
+            boolean hasButtonUnderPad,
+            boolean hasSensor,
+            boolean hasBattery,
+            int usiVersionMajor,
+            int usiVersionMinor,
+            int associatedDisplayId,
+            boolean enabled) {
         this.mMotionRanges = new ArrayList<>();
         this.mViewBehavior = new ViewBehavior(this);
         this.mId = id;
@@ -146,7 +161,9 @@ public final class InputDevice implements Parcelable {
         this.mKeyboardType = keyboardType;
         this.mKeyCharacterMap = keyCharacterMap;
         if (!TextUtils.isEmpty(keyboardLanguageTag)) {
-            String langTag = ULocale.createCanonical(ULocale.forLanguageTag(keyboardLanguageTag)).toLanguageTag();
+            String langTag =
+                    ULocale.createCanonical(ULocale.forLanguageTag(keyboardLanguageTag))
+                            .toLanguageTag();
             this.mKeyboardLanguageTag = TextUtils.equals(langTag, "und") ? null : langTag;
         } else {
             this.mKeyboardLanguageTag = null;
@@ -188,11 +205,19 @@ public final class InputDevice implements Parcelable {
         this.mHostUsiVersion = HostUsiVersion.CREATOR.createFromParcel(in);
         this.mAssociatedDisplayId = in.readInt();
         this.mEnabled = in.readInt() != 0;
-        this.mIdentifier = new InputDeviceIdentifier(this.mDescriptor, this.mVendorId, this.mProductId);
+        this.mIdentifier =
+                new InputDeviceIdentifier(this.mDescriptor, this.mVendorId, this.mProductId);
         int numRanges = in.readInt();
         numRanges = numRanges > 1000 ? 1000 : numRanges;
         for (int i = 0; i < numRanges; i++) {
-            addMotionRange(in.readInt(), in.readInt(), in.readFloat(), in.readFloat(), in.readFloat(), in.readFloat(), in.readFloat());
+            addMotionRange(
+                    in.readInt(),
+                    in.readInt(),
+                    in.readFloat(),
+                    in.readFloat(),
+                    in.readFloat(),
+                    in.readFloat(),
+                    in.readFloat());
         }
         this.mViewBehavior.mShouldSmoothScroll = in.readBoolean();
     }
@@ -335,7 +360,14 @@ public final class InputDevice implements Parcelable {
             return this;
         }
 
-        public Builder addMotionRange(int axis, int source, float min, float max, float flat, float fuzz, float resolution) {
+        public Builder addMotionRange(
+                int axis,
+                int source,
+                float min,
+                float max,
+                float flat,
+                float fuzz,
+                float resolution) {
             this.mMotionRanges.add(new MotionRange(axis, source, min, max, flat, fuzz, resolution));
             return this;
         }
@@ -346,11 +378,42 @@ public final class InputDevice implements Parcelable {
         }
 
         public InputDevice build() {
-            InputDevice device = new InputDevice(this.mId, this.mGeneration, this.mControllerNumber, this.mName, this.mVendorId, this.mProductId, this.mDeviceBus, this.mDescriptor, this.mIsExternal, this.mSources, this.mKeyboardType, this.mKeyCharacterMap, this.mKeyboardLanguageTag, this.mKeyboardLayoutType, this.mHasVibrator, this.mHasMicrophone, this.mHasButtonUnderPad, this.mHasSensor, this.mHasBattery, this.mUsiVersionMajor, this.mUsiVersionMinor, this.mAssociatedDisplayId, this.mEnabled);
+            InputDevice device =
+                    new InputDevice(
+                            this.mId,
+                            this.mGeneration,
+                            this.mControllerNumber,
+                            this.mName,
+                            this.mVendorId,
+                            this.mProductId,
+                            this.mDeviceBus,
+                            this.mDescriptor,
+                            this.mIsExternal,
+                            this.mSources,
+                            this.mKeyboardType,
+                            this.mKeyCharacterMap,
+                            this.mKeyboardLanguageTag,
+                            this.mKeyboardLayoutType,
+                            this.mHasVibrator,
+                            this.mHasMicrophone,
+                            this.mHasButtonUnderPad,
+                            this.mHasSensor,
+                            this.mHasBattery,
+                            this.mUsiVersionMajor,
+                            this.mUsiVersionMinor,
+                            this.mAssociatedDisplayId,
+                            this.mEnabled);
             int numRanges = this.mMotionRanges.size();
             for (int i = 0; i < numRanges; i++) {
                 MotionRange range = this.mMotionRanges.get(i);
-                device.addMotionRange(range.getAxis(), range.getSource(), range.getMin(), range.getMax(), range.getFlat(), range.getFuzz(), range.getResolution());
+                device.addMotionRange(
+                        range.getAxis(),
+                        range.getSource(),
+                        range.getMin(),
+                        range.getMax(),
+                        range.getFlat(),
+                        range.getFuzz(),
+                        range.getResolution());
             }
             device.setShouldSmoothScroll(this.mShouldSmoothScroll);
             return device;
@@ -476,7 +539,8 @@ public final class InputDevice implements Parcelable {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void addMotionRange(int axis, int source, float min, float max, float flat, float fuzz, float resolution) {
+    public void addMotionRange(
+            int axis, int source, float min, float max, float flat, float fuzz, float resolution) {
         this.mMotionRanges.add(new MotionRange(axis, source, min, max, flat, fuzz, resolution));
     }
 
@@ -495,7 +559,8 @@ public final class InputDevice implements Parcelable {
         synchronized (this.mMotionRanges) {
             if (this.mVibrator == null) {
                 if (this.mHasVibrator) {
-                    this.mVibrator = InputManagerGlobal.getInstance().getInputDeviceVibrator(this.mId, -1);
+                    this.mVibrator =
+                            InputManagerGlobal.getInstance().getInputDeviceVibrator(this.mId, -1);
                 } else {
                     this.mVibrator = NullVibrator.getInstance();
                 }
@@ -508,20 +573,23 @@ public final class InputDevice implements Parcelable {
     public VibratorManager getVibratorManager() {
         synchronized (this.mMotionRanges) {
             if (this.mVibratorManager == null) {
-                this.mVibratorManager = InputManagerGlobal.getInstance().getInputDeviceVibratorManager(this.mId);
+                this.mVibratorManager =
+                        InputManagerGlobal.getInstance().getInputDeviceVibratorManager(this.mId);
             }
         }
         return this.mVibratorManager;
     }
 
     public BatteryState getBatteryState() {
-        return InputManagerGlobal.getInstance().getInputDeviceBatteryState(this.mId, this.mHasBattery);
+        return InputManagerGlobal.getInstance()
+                .getInputDeviceBatteryState(this.mId, this.mHasBattery);
     }
 
     public LightsManager getLightsManager() {
         synchronized (this.mMotionRanges) {
             if (this.mLightsManager == null) {
-                this.mLightsManager = InputManagerGlobal.getInstance().getInputDeviceLightsManager(this.mId);
+                this.mLightsManager =
+                        InputManagerGlobal.getInstance().getInputDeviceLightsManager(this.mId);
             }
         }
         return this.mLightsManager;
@@ -530,7 +598,8 @@ public final class InputDevice implements Parcelable {
     public SensorManager getSensorManager() {
         synchronized (this.mMotionRanges) {
             if (this.mSensorManager == null) {
-                this.mSensorManager = InputManagerGlobal.getInstance().getInputDeviceSensorManager(this.mId);
+                this.mSensorManager =
+                        InputManagerGlobal.getInstance().getInputDeviceSensorManager(this.mId);
             }
         }
         return this.mSensorManager;
@@ -564,8 +633,7 @@ public final class InputDevice implements Parcelable {
         return this.mHasBattery;
     }
 
-    public void semSetPointerType(int pointerType) {
-    }
+    public void semSetPointerType(int pointerType) {}
 
     public HostUsiVersion getHostUsiVersion() {
         if (this.mHostUsiVersion.isValid()) {
@@ -587,7 +655,14 @@ public final class InputDevice implements Parcelable {
         private float mResolution;
         private int mSource;
 
-        private MotionRange(int axis, int source, float min, float max, float flat, float fuzz, float resolution) {
+        private MotionRange(
+                int axis,
+                int source,
+                float min,
+                float max,
+                float flat,
+                float fuzz,
+                float resolution) {
             this.mAxis = axis;
             this.mSource = source;
             this.mMin = min;
@@ -698,10 +773,18 @@ public final class InputDevice implements Parcelable {
 
     public String toString() {
         StringBuilder description = new StringBuilder();
-        description.append("Input Device ").append(this.mId).append(": ").append(this.mName).append("\n");
+        description
+                .append("Input Device ")
+                .append(this.mId)
+                .append(": ")
+                .append(this.mName)
+                .append("\n");
         description.append("  Descriptor: ").append(this.mDescriptor).append("\n");
         description.append("  Generation: ").append(this.mGeneration).append("\n");
-        description.append("  Location: ").append(this.mIsExternal ? "external" : "built-in").append("\n");
+        description
+                .append("  Location: ")
+                .append(this.mIsExternal ? "external" : "built-in")
+                .append("\n");
         description.append("  Enabled: ").append(isEnabled()).append("\n");
         description.append("  Keyboard Type: ");
         switch (this.mKeyboardType) {
@@ -722,10 +805,16 @@ public final class InputDevice implements Parcelable {
         description.append("  Has mic: ").append(this.mHasMicrophone).append("\n");
         description.append("  USI Version: ").append(getHostUsiVersion()).append("\n");
         if (this.mKeyboardLanguageTag != null) {
-            description.append(" Keyboard language tag: ").append(this.mKeyboardLanguageTag).append("\n");
+            description
+                    .append(" Keyboard language tag: ")
+                    .append(this.mKeyboardLanguageTag)
+                    .append("\n");
         }
         if (this.mKeyboardLayoutType != null) {
-            description.append(" Keyboard layout type: ").append(this.mKeyboardLayoutType).append("\n");
+            description
+                    .append(" Keyboard layout type: ")
+                    .append(this.mKeyboardLayoutType)
+                    .append("\n");
         }
         description.append("  Sources: 0x").append(Integer.toHexString(this.mSources)).append(" (");
         appendSourceDescriptionIfApplicable(description, 257, "keyboard");
@@ -754,7 +843,8 @@ public final class InputDevice implements Parcelable {
         return description.toString();
     }
 
-    private void appendSourceDescriptionIfApplicable(StringBuilder description, int source, String sourceName) {
+    private void appendSourceDescriptionIfApplicable(
+            StringBuilder description, int source, String sourceName) {
         if ((this.mSources & source) == source) {
             description.append(" ");
             description.append(sourceName);

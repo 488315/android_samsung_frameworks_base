@@ -7,7 +7,7 @@ import android.os.Parcel;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
 import android.os.UserHandle;
-import android.service.trust.ITrustAgentServiceCallback;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -38,52 +38,42 @@ public interface ITrustAgentService extends IInterface {
 
     public static class Default implements ITrustAgentService {
         @Override // android.service.trust.ITrustAgentService
-        public void onUnlockAttempt(boolean successful) throws RemoteException {
-        }
+        public void onUnlockAttempt(boolean successful) throws RemoteException {}
 
         @Override // android.service.trust.ITrustAgentService
-        public void onUserRequestedUnlock(boolean dismissKeyguard) throws RemoteException {
-        }
+        public void onUserRequestedUnlock(boolean dismissKeyguard) throws RemoteException {}
 
         @Override // android.service.trust.ITrustAgentService
-        public void onUserMayRequestUnlock() throws RemoteException {
-        }
+        public void onUserMayRequestUnlock() throws RemoteException {}
 
         @Override // android.service.trust.ITrustAgentService
-        public void onUnlockLockout(int timeoutMs) throws RemoteException {
-        }
+        public void onUnlockLockout(int timeoutMs) throws RemoteException {}
 
         @Override // android.service.trust.ITrustAgentService
-        public void onTrustTimeout() throws RemoteException {
-        }
+        public void onTrustTimeout() throws RemoteException {}
 
         @Override // android.service.trust.ITrustAgentService
-        public void onDeviceLocked() throws RemoteException {
-        }
+        public void onDeviceLocked() throws RemoteException {}
 
         @Override // android.service.trust.ITrustAgentService
-        public void onDeviceUnlocked() throws RemoteException {
-        }
+        public void onDeviceUnlocked() throws RemoteException {}
 
         @Override // android.service.trust.ITrustAgentService
-        public void onConfigure(List<PersistableBundle> options, IBinder token) throws RemoteException {
-        }
+        public void onConfigure(List<PersistableBundle> options, IBinder token)
+                throws RemoteException {}
 
         @Override // android.service.trust.ITrustAgentService
-        public void setCallback(ITrustAgentServiceCallback callback) throws RemoteException {
-        }
+        public void setCallback(ITrustAgentServiceCallback callback) throws RemoteException {}
 
         @Override // android.service.trust.ITrustAgentService
-        public void onEscrowTokenAdded(byte[] token, long handle, UserHandle user) throws RemoteException {
-        }
+        public void onEscrowTokenAdded(byte[] token, long handle, UserHandle user)
+                throws RemoteException {}
 
         @Override // android.service.trust.ITrustAgentService
-        public void onTokenStateReceived(long handle, int tokenState) throws RemoteException {
-        }
+        public void onTokenStateReceived(long handle, int tokenState) throws RemoteException {}
 
         @Override // android.service.trust.ITrustAgentService
-        public void onEscrowTokenRemoved(long handle, boolean successful) throws RemoteException {
-        }
+        public void onEscrowTokenRemoved(long handle, boolean successful) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -91,7 +81,7 @@ public interface ITrustAgentService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITrustAgentService {
+    public abstract static class Stub extends Binder implements ITrustAgentService {
         public static final String DESCRIPTOR = "android.service.trust.ITrustAgentService";
         static final int TRANSACTION_onConfigure = 8;
         static final int TRANSACTION_onDeviceLocked = 6;
@@ -163,7 +153,8 @@ public interface ITrustAgentService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -200,13 +191,15 @@ public interface ITrustAgentService extends IInterface {
                     onDeviceUnlocked();
                     return true;
                 case 8:
-                    List<PersistableBundle> _arg04 = data.createTypedArrayList(PersistableBundle.CREATOR);
+                    List<PersistableBundle> _arg04 =
+                            data.createTypedArrayList(PersistableBundle.CREATOR);
                     IBinder _arg1 = data.readStrongBinder();
                     data.enforceNoDataAvail();
                     onConfigure(_arg04, _arg1);
                     return true;
                 case 9:
-                    ITrustAgentServiceCallback _arg05 = ITrustAgentServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    ITrustAgentServiceCallback _arg05 =
+                            ITrustAgentServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setCallback(_arg05);
                     return true;
@@ -331,7 +324,8 @@ public interface ITrustAgentService extends IInterface {
             }
 
             @Override // android.service.trust.ITrustAgentService
-            public void onConfigure(List<PersistableBundle> options, IBinder token) throws RemoteException {
+            public void onConfigure(List<PersistableBundle> options, IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -356,7 +350,8 @@ public interface ITrustAgentService extends IInterface {
             }
 
             @Override // android.service.trust.ITrustAgentService
-            public void onEscrowTokenAdded(byte[] token, long handle, UserHandle user) throws RemoteException {
+            public void onEscrowTokenAdded(byte[] token, long handle, UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -383,7 +378,8 @@ public interface ITrustAgentService extends IInterface {
             }
 
             @Override // android.service.trust.ITrustAgentService
-            public void onEscrowTokenRemoved(long handle, boolean successful) throws RemoteException {
+            public void onEscrowTokenRemoved(long handle, boolean successful)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

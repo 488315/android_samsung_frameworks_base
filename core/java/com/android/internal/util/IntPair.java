@@ -2,8 +2,7 @@ package com.android.internal.util;
 
 /* loaded from: classes5.dex */
 public class IntPair {
-    private IntPair() {
-    }
+    private IntPair() {}
 
     public static long of(int first, int second) {
         return (first << 32) | (second & 4294967295L);

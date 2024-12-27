@@ -1,14 +1,18 @@
 package android.graphics.fonts;
 
 import android.util.SparseIntArray;
+
 import com.android.internal.util.Preconditions;
+
 import dalvik.annotation.optimization.CriticalNative;
 import dalvik.annotation.optimization.FastNative;
+
+import libcore.util.NativeAllocationRegistry;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.Set;
-import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes.dex */
 public final class FontFamily {
@@ -39,8 +43,7 @@ public final class FontFamily {
         private final SparseIntArray mStyles = new SparseIntArray(4);
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface VariableFontFamilyType {
-        }
+        public @interface VariableFontFamilyType {}
 
         @CriticalNative
         private static native void nAddFont(long j, long j2);
@@ -54,10 +57,11 @@ public final class FontFamily {
         private static native long nInitBuilder();
 
         private static class NoImagePreloadHolder {
-            private static final NativeAllocationRegistry sFamilyRegistry = NativeAllocationRegistry.createMalloced(FontFamily.class.getClassLoader(), Builder.nGetReleaseNativeFamily());
+            private static final NativeAllocationRegistry sFamilyRegistry =
+                    NativeAllocationRegistry.createMalloced(
+                            FontFamily.class.getClassLoader(), Builder.nGetReleaseNativeFamily());
 
-            private NoImagePreloadHolder() {
-            }
+            private NoImagePreloadHolder() {}
         }
 
         public Builder(Font font) {
@@ -89,12 +93,24 @@ public final class FontFamily {
             return build("", 0, true, false, 0);
         }
 
-        public FontFamily build(String langTags, int variant, boolean isCustomFallback, boolean isDefaultFallback, int variableFamilyType) {
+        public FontFamily build(
+                String langTags,
+                int variant,
+                boolean isCustomFallback,
+                boolean isDefaultFallback,
+                int variableFamilyType) {
             long builderPtr = nInitBuilder();
             for (int i = 0; i < this.mFonts.size(); i++) {
                 nAddFont(builderPtr, this.mFonts.get(i).getNativePtr());
             }
-            long ptr = nBuild(builderPtr, langTags, variant, isCustomFallback, isDefaultFallback, variableFamilyType);
+            long ptr =
+                    nBuild(
+                            builderPtr,
+                            langTags,
+                            variant,
+                            isCustomFallback,
+                            isDefaultFallback,
+                            variableFamilyType);
             FontFamily family = new FontFamily(ptr);
             NoImagePreloadHolder.sFamilyRegistry.registerNativeAllocation(family, ptr);
             return family;
@@ -110,7 +126,8 @@ public final class FontFamily {
             }
             if (fonts.size() == 1) {
                 Font font = fonts.get(0);
-                Set<Integer> supportedAxes = FontFileUtil.getSupportedAxes(font.getBuffer(), font.getTtcIndex());
+                Set<Integer> supportedAxes =
+                        FontFileUtil.getSupportedAxes(font.getBuffer(), font.getTtcIndex());
                 if (supportedAxes.contains(Integer.valueOf(TAG_wght))) {
                     return supportedAxes.contains(Integer.valueOf(TAG_ital)) ? 2 : 1;
                 }
@@ -118,7 +135,8 @@ public final class FontFamily {
             }
             for (int i = 0; i < fonts.size(); i++) {
                 Font font2 = fonts.get(i);
-                if (!FontFileUtil.getSupportedAxes(font2.getBuffer(), font2.getTtcIndex()).contains(Integer.valueOf(TAG_wght))) {
+                if (!FontFileUtil.getSupportedAxes(font2.getBuffer(), font2.getTtcIndex())
+                        .contains(Integer.valueOf(TAG_wght))) {
                     return -1;
                 }
             }

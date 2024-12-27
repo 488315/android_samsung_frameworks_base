@@ -9,10 +9,13 @@ import android.net.ipsec.ike.IkeIpv6AddrIdentification;
 import android.net.ipsec.ike.IkeKeyIdIdentification;
 import android.net.ipsec.ike.IkeRfc822AddrIdentification;
 import android.os.PersistableBundle;
+
 import com.android.server.vcn.repackaged.util.PersistableBundleUtils;
+
 import java.net.Inet4Address;
 import java.net.Inet6Address;
 import java.util.Objects;
+
 import javax.security.auth.x500.X500Principal;
 
 /* loaded from: classes3.dex */
@@ -35,7 +38,9 @@ public final class IkeIdentificationUtils {
         if (ikeId instanceof IkeDerAsn1DnIdentification) {
             PersistableBundle result = createPersistableBundle(1);
             IkeDerAsn1DnIdentification id = (IkeDerAsn1DnIdentification) ikeId;
-            result.putPersistableBundle(DER_ASN1_DN_KEY, PersistableBundleUtils.fromByteArray(id.derAsn1Dn.getEncoded()));
+            result.putPersistableBundle(
+                    DER_ASN1_DN_KEY,
+                    PersistableBundleUtils.fromByteArray(id.derAsn1Dn.getEncoded()));
             return result;
         }
         if (ikeId instanceof IkeFqdnIdentification) {
@@ -59,7 +64,8 @@ public final class IkeIdentificationUtils {
         if (ikeId instanceof IkeKeyIdIdentification) {
             PersistableBundle result5 = createPersistableBundle(5);
             IkeKeyIdIdentification id5 = (IkeKeyIdIdentification) ikeId;
-            result5.putPersistableBundle(KEY_ID_KEY, PersistableBundleUtils.fromByteArray(id5.keyId));
+            result5.putPersistableBundle(
+                    KEY_ID_KEY, PersistableBundleUtils.fromByteArray(id5.keyId));
             return result5;
         }
         if (ikeId instanceof IkeRfc822AddrIdentification) {
@@ -84,17 +90,20 @@ public final class IkeIdentificationUtils {
             case 1:
                 PersistableBundle dnBundle = in.getPersistableBundle(DER_ASN1_DN_KEY);
                 Objects.requireNonNull(dnBundle, "ASN1 DN was null");
-                return new IkeDerAsn1DnIdentification(new X500Principal(PersistableBundleUtils.toByteArray(dnBundle)));
+                return new IkeDerAsn1DnIdentification(
+                        new X500Principal(PersistableBundleUtils.toByteArray(dnBundle)));
             case 2:
                 return new IkeFqdnIdentification(in.getString(FQDN_KEY));
             case 3:
                 String v4AddressStr = in.getString(IP4_ADDRESS_KEY);
                 Objects.requireNonNull(v4AddressStr, "IPv4 address was null");
-                return new IkeIpv4AddrIdentification((Inet4Address) InetAddresses.parseNumericAddress(v4AddressStr));
+                return new IkeIpv4AddrIdentification(
+                        (Inet4Address) InetAddresses.parseNumericAddress(v4AddressStr));
             case 4:
                 String v6AddressStr = in.getString(IP6_ADDRESS_KEY);
                 Objects.requireNonNull(v6AddressStr, "IPv6 address was null");
-                return new IkeIpv6AddrIdentification((Inet6Address) InetAddresses.parseNumericAddress(v6AddressStr));
+                return new IkeIpv6AddrIdentification(
+                        (Inet6Address) InetAddresses.parseNumericAddress(v6AddressStr));
             case 5:
                 PersistableBundle keyIdBundle = in.getPersistableBundle(KEY_ID_KEY);
                 Objects.requireNonNull(in, "Key ID was null");

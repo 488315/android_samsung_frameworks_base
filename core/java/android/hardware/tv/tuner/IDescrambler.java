@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-import android.hardware.tv.tuner.IFilter;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -9,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IDescrambler extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$tv$tuner$IDescrambler".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$tv$tuner$IDescrambler".replace('$', '.');
     public static final String HASH = "f8d74c149f04e76b6d622db2bd8e465dae24b08c";
     public static final int VERSION = 2;
 
@@ -29,24 +29,19 @@ public interface IDescrambler extends IInterface {
 
     public static class Default implements IDescrambler {
         @Override // android.hardware.tv.tuner.IDescrambler
-        public void setDemuxSource(int demuxId) throws RemoteException {
-        }
+        public void setDemuxSource(int demuxId) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IDescrambler
-        public void setKeyToken(byte[] keyToken) throws RemoteException {
-        }
+        public void setKeyToken(byte[] keyToken) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IDescrambler
-        public void addPid(DemuxPid pid, IFilter optionalSourceFilter) throws RemoteException {
-        }
+        public void addPid(DemuxPid pid, IFilter optionalSourceFilter) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IDescrambler
-        public void removePid(DemuxPid pid, IFilter optionalSourceFilter) throws RemoteException {
-        }
+        public void removePid(DemuxPid pid, IFilter optionalSourceFilter) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IDescrambler
-        public void close() throws RemoteException {
-        }
+        public void close() throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IDescrambler
         public int getInterfaceVersion() {
@@ -64,7 +59,7 @@ public interface IDescrambler extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDescrambler {
+    public abstract static class Stub extends Binder implements IDescrambler {
         static final int TRANSACTION_addPid = 3;
         static final int TRANSACTION_close = 5;
         static final int TRANSACTION_getInterfaceHash = 16777214;
@@ -95,7 +90,8 @@ public interface IDescrambler extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -224,7 +220,8 @@ public interface IDescrambler extends IInterface {
             }
 
             @Override // android.hardware.tv.tuner.IDescrambler
-            public void removePid(DemuxPid pid, IFilter optionalSourceFilter) throws RemoteException {
+            public void removePid(DemuxPid pid, IFilter optionalSourceFilter)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

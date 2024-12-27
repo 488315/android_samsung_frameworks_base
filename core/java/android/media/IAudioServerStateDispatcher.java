@@ -12,8 +12,7 @@ public interface IAudioServerStateDispatcher extends IInterface {
 
     public static class Default implements IAudioServerStateDispatcher {
         @Override // android.media.IAudioServerStateDispatcher
-        public void dispatchAudioServerStateChange(boolean state) throws RemoteException {
-        }
+        public void dispatchAudioServerStateChange(boolean state) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface IAudioServerStateDispatcher extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAudioServerStateDispatcher {
+    public abstract static class Stub extends Binder implements IAudioServerStateDispatcher {
         public static final String DESCRIPTOR = "android.media.IAudioServerStateDispatcher";
         static final int TRANSACTION_dispatchAudioServerStateChange = 1;
 
@@ -60,7 +59,8 @@ public interface IAudioServerStateDispatcher extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

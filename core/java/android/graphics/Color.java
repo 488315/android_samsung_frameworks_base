@@ -1,8 +1,8 @@
 package android.graphics;
 
-import android.graphics.ColorSpace;
 import android.hardware.Camera;
 import android.util.Half;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
@@ -31,7 +31,7 @@ public class Color {
     private static native void nativeRGBToHSV(int i, int i2, int i3, float[] fArr);
 
     public Color() {
-        this.mComponents = new float[]{0.0f, 0.0f, 0.0f, 1.0f};
+        this.mComponents = new float[] {0.0f, 0.0f, 0.0f, 1.0f};
         this.mColorSpace = ColorSpace.get(ColorSpace.Named.SRGB);
     }
 
@@ -40,7 +40,7 @@ public class Color {
     }
 
     private Color(float r, float g, float b, float a, ColorSpace colorSpace) {
-        this.mComponents = new float[]{r, g, b, a};
+        this.mComponents = new float[] {r, g, b, a};
         this.mColorSpace = colorSpace;
     }
 
@@ -70,23 +70,38 @@ public class Color {
     }
 
     public long pack() {
-        return pack(this.mComponents[0], this.mComponents[1], this.mComponents[2], this.mComponents[3], this.mColorSpace);
+        return pack(
+                this.mComponents[0],
+                this.mComponents[1],
+                this.mComponents[2],
+                this.mComponents[3],
+                this.mColorSpace);
     }
 
     public Color convert(ColorSpace colorSpace) {
         ColorSpace.Connector connector = ColorSpace.connect(this.mColorSpace, colorSpace);
-        float[] color = {this.mComponents[0], this.mComponents[1], this.mComponents[2], this.mComponents[3]};
+        float[] color = {
+            this.mComponents[0], this.mComponents[1], this.mComponents[2], this.mComponents[3]
+        };
         connector.transform(color);
         return new Color(color, colorSpace);
     }
 
     public int toArgb() {
         if (this.mColorSpace.isSrgb()) {
-            return (((int) ((this.mComponents[3] * 255.0f) + 0.5f)) << 24) | (((int) ((this.mComponents[0] * 255.0f) + 0.5f)) << 16) | (((int) ((this.mComponents[1] * 255.0f) + 0.5f)) << 8) | ((int) ((this.mComponents[2] * 255.0f) + 0.5f));
+            return (((int) ((this.mComponents[3] * 255.0f) + 0.5f)) << 24)
+                    | (((int) ((this.mComponents[0] * 255.0f) + 0.5f)) << 16)
+                    | (((int) ((this.mComponents[1] * 255.0f) + 0.5f)) << 8)
+                    | ((int) ((this.mComponents[2] * 255.0f) + 0.5f));
         }
-        float[] color = {this.mComponents[0], this.mComponents[1], this.mComponents[2], this.mComponents[3]};
+        float[] color = {
+            this.mComponents[0], this.mComponents[1], this.mComponents[2], this.mComponents[3]
+        };
         ColorSpace.connect(this.mColorSpace).transform(color);
-        return (((int) ((color[3] * 255.0f) + 0.5f)) << 24) | (((int) ((color[0] * 255.0f) + 0.5f)) << 16) | (((int) ((color[1] * 255.0f) + 0.5f)) << 8) | ((int) ((color[2] * 255.0f) + 0.5f));
+        return (((int) ((color[3] * 255.0f) + 0.5f)) << 24)
+                | (((int) ((color[0] * 255.0f) + 0.5f)) << 16)
+                | (((int) ((color[1] * 255.0f) + 0.5f)) << 8)
+                | ((int) ((color[2] * 255.0f) + 0.5f));
     }
 
     public float red() {
@@ -114,7 +129,8 @@ public class Color {
             return Arrays.copyOf(this.mComponents, this.mComponents.length);
         }
         if (components.length < this.mComponents.length) {
-            throw new IllegalArgumentException("The specified array's length must be at least " + this.mComponents.length);
+            throw new IllegalArgumentException(
+                    "The specified array's length must be at least " + this.mComponents.length);
         }
         System.arraycopy(this.mComponents, 0, components, 0, this.mComponents.length);
         return components;
@@ -126,7 +142,10 @@ public class Color {
 
     public float luminance() {
         if (this.mColorSpace.getModel() != ColorSpace.Model.RGB) {
-            throw new IllegalArgumentException("The specified color must be encoded in an RGB color space. The supplied color space is " + this.mColorSpace.getModel());
+            throw new IllegalArgumentException(
+                    "The specified color must be encoded in an RGB color space. The supplied color"
+                            + " space is "
+                            + this.mColorSpace.getModel());
         }
         DoubleUnaryOperator eotf = ((ColorSpace.Rgb) this.mColorSpace).getEotf();
         double r = eotf.applyAsDouble(this.mComponents[0]);
@@ -169,15 +188,21 @@ public class Color {
     }
 
     public static float red(long color) {
-        return (63 & color) == 0 ? ((color >> 48) & 255) / 255.0f : Half.toFloat((short) ((color >> 48) & 65535));
+        return (63 & color) == 0
+                ? ((color >> 48) & 255) / 255.0f
+                : Half.toFloat((short) ((color >> 48) & 65535));
     }
 
     public static float green(long color) {
-        return (63 & color) == 0 ? ((color >> 40) & 255) / 255.0f : Half.toFloat((short) ((color >> 32) & 65535));
+        return (63 & color) == 0
+                ? ((color >> 40) & 255) / 255.0f
+                : Half.toFloat((short) ((color >> 32) & 65535));
     }
 
     public static float blue(long color) {
-        return (63 & color) == 0 ? ((color >> 32) & 255) / 255.0f : Half.toFloat((short) ((color >> 16) & 65535));
+        return (63 & color) == 0
+                ? ((color >> 32) & 255) / 255.0f
+                : Half.toFloat((short) ((color >> 16) & 65535));
     }
 
     public static float alpha(long color) {
@@ -205,7 +230,10 @@ public class Color {
         float b = blue(color);
         float a = alpha(color);
         float[] c = ColorSpace.connect(colorSpace(color)).transform(r, g, b);
-        return ((int) ((c[2] * 255.0f) + 0.5f)) | (((int) ((a * 255.0f) + 0.5f)) << 24) | (((int) ((c[0] * 255.0f) + 0.5f)) << 16) | (((int) ((c[1] * 255.0f) + 0.5f)) << 8);
+        return ((int) ((c[2] * 255.0f) + 0.5f))
+                | (((int) ((a * 255.0f) + 0.5f)) << 24)
+                | (((int) ((c[0] * 255.0f) + 0.5f)) << 16)
+                | (((int) ((c[1] * 255.0f) + 0.5f)) << 8);
     }
 
     public static Color valueOf(int color) {
@@ -230,14 +258,21 @@ public class Color {
 
     public static Color valueOf(float r, float g, float b, float a, ColorSpace colorSpace) {
         if (colorSpace.getComponentCount() > 3) {
-            throw new IllegalArgumentException("The specified color space must use a color model with at most 3 color components");
+            throw new IllegalArgumentException(
+                    "The specified color space must use a color model with at most 3 color"
+                            + " components");
         }
         return new Color(r, g, b, a, colorSpace);
     }
 
     public static Color valueOf(float[] components, ColorSpace colorSpace) {
         if (components.length < colorSpace.getComponentCount() + 1) {
-            throw new IllegalArgumentException("Received a component array of length " + components.length + " but the color model requires " + (colorSpace.getComponentCount() + 1) + " (including alpha)");
+            throw new IllegalArgumentException(
+                    "Received a component array of length "
+                            + components.length
+                            + " but the color model requires "
+                            + (colorSpace.getComponentCount() + 1)
+                            + " (including alpha)");
         }
         return new Color(Arrays.copyOf(components, colorSpace.getComponentCount() + 1), colorSpace);
     }
@@ -254,23 +289,34 @@ public class Color {
         return pack(red, green, blue, alpha, ColorSpace.get(ColorSpace.Named.SRGB));
     }
 
-    public static long pack(float red, float green, float blue, float alpha, ColorSpace colorSpace) {
+    public static long pack(
+            float red, float green, float blue, float alpha, ColorSpace colorSpace) {
         if (colorSpace.isSrgb()) {
-            int argb = ((int) ((255.0f * blue) + 0.5f)) | (((int) ((red * 255.0f) + 0.5f)) << 16) | (((int) ((alpha * 255.0f) + 0.5f)) << 24) | (((int) ((green * 255.0f) + 0.5f)) << 8);
+            int argb =
+                    ((int) ((255.0f * blue) + 0.5f))
+                            | (((int) ((red * 255.0f) + 0.5f)) << 16)
+                            | (((int) ((alpha * 255.0f) + 0.5f)) << 24)
+                            | (((int) ((green * 255.0f) + 0.5f)) << 8);
             return (argb & 4294967295L) << 32;
         }
         int id = colorSpace.getId();
         if (id == -1) {
-            throw new IllegalArgumentException("Unknown color space, please use a color space returned by ColorSpace.get()");
+            throw new IllegalArgumentException(
+                    "Unknown color space, please use a color space returned by ColorSpace.get()");
         }
         if (colorSpace.getComponentCount() > 3) {
-            throw new IllegalArgumentException("The color space must use a color model with at most 3 components");
+            throw new IllegalArgumentException(
+                    "The color space must use a color model with at most 3 components");
         }
         short r = Half.toHalf(red);
         short g = Half.toHalf(green);
         short b = Half.toHalf(blue);
         int a = (int) ((Math.max(0.0f, Math.min(alpha, 1.0f)) * 1023.0f) + 0.5f);
-        return ((65535 & b) << 16) | ((r & 65535) << 48) | ((g & 65535) << 32) | ((a & 1023) << 6) | (id & 63);
+        return ((65535 & b) << 16)
+                | ((r & 65535) << 48)
+                | ((g & 65535) << 32)
+                | ((a & 1023) << 6)
+                | (id & 63);
     }
 
     public static long convert(int color, ColorSpace colorSpace) {
@@ -291,7 +337,8 @@ public class Color {
         return convert(r, g, b, a, source, colorSpace);
     }
 
-    public static long convert(float r, float g, float b, float a, ColorSpace source, ColorSpace destination) {
+    public static long convert(
+            float r, float g, float b, float a, ColorSpace source, ColorSpace destination) {
         float[] c = ColorSpace.connect(source, destination).transform(r, g, b);
         return pack(c[0], c[1], c[2], a, destination);
     }
@@ -312,7 +359,10 @@ public class Color {
     public static float luminance(long color) {
         ColorSpace colorSpace = colorSpace(color);
         if (colorSpace.getModel() != ColorSpace.Model.RGB) {
-            throw new IllegalArgumentException("The specified color must be encoded in an RGB color space. The supplied color space is " + colorSpace.getModel());
+            throw new IllegalArgumentException(
+                    "The specified color must be encoded in an RGB color space. The supplied color"
+                            + " space is "
+                            + colorSpace.getModel());
         }
         DoubleUnaryOperator eotf = ((ColorSpace.Rgb) colorSpace).getEotf();
         double r = eotf.applyAsDouble(red(color));
@@ -352,7 +402,10 @@ public class Color {
     }
 
     public static int rgb(float red, float green, float blue) {
-        return ((int) ((255.0f * blue) + 0.5f)) | (((int) ((red * 255.0f) + 0.5f)) << 16) | (-16777216) | (((int) ((green * 255.0f) + 0.5f)) << 8);
+        return ((int) ((255.0f * blue) + 0.5f))
+                | (((int) ((red * 255.0f) + 0.5f)) << 16)
+                | (-16777216)
+                | (((int) ((green * 255.0f) + 0.5f)) << 8);
     }
 
     public static int argb(int alpha, int red, int green, int blue) {
@@ -360,7 +413,10 @@ public class Color {
     }
 
     public static int argb(float alpha, float red, float green, float blue) {
-        return ((int) ((255.0f * blue) + 0.5f)) | (((int) ((alpha * 255.0f) + 0.5f)) << 24) | (((int) ((red * 255.0f) + 0.5f)) << 16) | (((int) ((green * 255.0f) + 0.5f)) << 8);
+        return ((int) ((255.0f * blue) + 0.5f))
+                | (((int) ((alpha * 255.0f) + 0.5f)) << 24)
+                | (((int) ((red * 255.0f) + 0.5f)) << 16)
+                | (((int) ((green * 255.0f) + 0.5f)) << 8);
     }
 
     public static float luminance(int color) {

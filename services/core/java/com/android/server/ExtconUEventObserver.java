@@ -5,6 +5,7 @@ import android.os.UEventObserver;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Slog;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,20 +27,36 @@ public abstract class ExtconUEventObserver extends UEventObserver {
 
         public ExtconInfo(String str) {
             this.mName = str;
-            File[] listFilesOrEmpty = FileUtils.listFilesOrEmpty(new File("/sys/class/extcon", str), new ExtconUEventObserver$ExtconInfo$$ExternalSyntheticLambda0());
+            File[] listFilesOrEmpty =
+                    FileUtils.listFilesOrEmpty(
+                            new File("/sys/class/extcon", str),
+                            new ExtconUEventObserver$ExtconInfo$$ExternalSyntheticLambda0());
             if (listFilesOrEmpty.length == 0) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m("Unable to list cables in /sys/class/extcon/", str, ". This probably means the selinux policies need to be changed.", "ExtconUEventObserver");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        "Unable to list cables in /sys/class/extcon/",
+                        str,
+                        ". This probably means the selinux policies need to be changed.",
+                        "ExtconUEventObserver");
             }
             for (File file : listFilesOrEmpty) {
                 String str2 = null;
                 try {
                     String canonicalPath = file.getCanonicalPath();
                     try {
-                        this.mDeviceTypes.add(FileUtils.readTextFile(new File(file, "name"), 0, null).replace("\n", "").replace("\r", ""));
+                        this.mDeviceTypes.add(
+                                FileUtils.readTextFile(new File(file, "name"), 0, null)
+                                        .replace("\n", "")
+                                        .replace("\r", ""));
                     } catch (IOException e) {
                         e = e;
                         str2 = canonicalPath;
-                        Slog.w("ExtconUEventObserver", "Unable to read " + str2 + "/name. This probably means the selinux policies need to be changed.", e);
+                        Slog.w(
+                                "ExtconUEventObserver",
+                                "Unable to read "
+                                        + str2
+                                        + "/name. This probably means the selinux policies need to"
+                                        + " be changed.",
+                                e);
                     }
                 } catch (IOException e2) {
                     e = e2;
@@ -82,33 +99,49 @@ public abstract class ExtconUEventObserver extends UEventObserver {
                 sExtconInfos = (ExtconInfo[]) arrayList.toArray(new ExtconInfo[0]);
                 return;
             }
-            Slog.w("ExtconUEventObserver", file + " exists " + file.exists() + " isDir " + file.isDirectory() + " but listFiles returns null.This probably means the selinux policies need to be changed.");
+            Slog.w(
+                    "ExtconUEventObserver",
+                    file
+                            + " exists "
+                            + file.exists()
+                            + " isDir "
+                            + file.isDirectory()
+                            + " but listFiles returns null.This probably means the selinux policies"
+                            + " need to be changed.");
             sExtconInfos = new ExtconInfo[0];
         }
 
         public final String getDevicePath() {
             String str = this.mName;
             try {
-                File file = new File(TextUtils.formatSimple("/sys/class/extcon/%s", new Object[]{str}));
+                File file =
+                        new File(
+                                TextUtils.formatSimple("/sys/class/extcon/%s", new Object[] {str}));
                 if (!file.exists()) {
                     return null;
                 }
                 String canonicalPath = file.getCanonicalPath();
                 return canonicalPath.substring(canonicalPath.indexOf("/devices"));
             } catch (IOException e) {
-                Slog.e("ExtconUEventObserver", "Could not get the extcon device path for " + str, e);
+                Slog.e(
+                        "ExtconUEventObserver",
+                        "Could not get the extcon device path for " + str,
+                        e);
                 return null;
             }
         }
     }
 
     public final void onUEvent(UEventObserver.UEvent uEvent) {
-        ExtconInfo extconInfo = (ExtconInfo) ((ArrayMap) this.mExtconInfos).get(uEvent.get("DEVPATH"));
+        ExtconInfo extconInfo =
+                (ExtconInfo) ((ArrayMap) this.mExtconInfos).get(uEvent.get("DEVPATH"));
         if (extconInfo != null) {
             onUEvent(extconInfo, uEvent);
             return;
         }
-        Slog.w("ExtconUEventObserver", "No match found for DEVPATH of " + uEvent + " in " + this.mExtconInfos);
+        Slog.w(
+                "ExtconUEventObserver",
+                "No match found for DEVPATH of " + uEvent + " in " + this.mExtconInfos);
     }
 
     public abstract void onUEvent(ExtconInfo extconInfo, UEventObserver.UEvent uEvent);

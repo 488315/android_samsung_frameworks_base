@@ -3,26 +3,29 @@ package android.hardware.radio;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class RadioConst implements Parcelable {
     public static final int CARD_MAX_APPS = 8;
-    public static final Parcelable.Creator<RadioConst> CREATOR = new Parcelable.Creator<RadioConst>() { // from class: android.hardware.radio.RadioConst.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RadioConst createFromParcel(Parcel _aidl_source) {
-            RadioConst _aidl_out = new RadioConst();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<RadioConst> CREATOR =
+            new Parcelable.Creator<
+                    RadioConst>() { // from class: android.hardware.radio.RadioConst.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RadioConst createFromParcel(Parcel _aidl_source) {
+                    RadioConst _aidl_out = new RadioConst();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RadioConst[] newArray(int _aidl_size) {
-            return new RadioConst[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RadioConst[] newArray(int _aidl_size) {
+                    return new RadioConst[_aidl_size];
+                }
+            };
     public static final int MAX_RILDS = 3;
     public static final int MAX_UUID_LENGTH = 64;
     public static final int P2_CONSTANT_NO_P2 = -1;

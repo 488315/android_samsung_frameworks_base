@@ -1,7 +1,5 @@
 package android.content.res;
 
-import android.content.res.Resources;
-
 /* loaded from: classes.dex */
 public class ConfigurationBoundResourceCache<T> extends ThemedResourceCache<ConstantState<T>> {
     @Override // android.content.res.ThemedResourceCache
@@ -32,7 +30,8 @@ public class ConfigurationBoundResourceCache<T> extends ThemedResourceCache<Cons
 
     /* JADX WARN: Multi-variable type inference failed */
     @Override // android.content.res.ThemedResourceCache
-    public /* bridge */ /* synthetic */ void put(long j, Resources.Theme theme, Object obj, int i, boolean z) {
+    public /* bridge */ /* synthetic */ void put(
+            long j, Resources.Theme theme, Object obj, int i, boolean z) {
         super.put(j, theme, obj, i, z);
     }
 

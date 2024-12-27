@@ -3,10 +3,12 @@ package com.samsung.android.lib.dexcontrol.uvdm.sender;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
+
 import com.samsung.android.lib.dexcontrol.utils.SLog;
 import com.samsung.android.lib.dexcontrol.utils.Util;
 import com.samsung.android.lib.dexcontrol.uvdm.UvdmFileHelper;
 import com.samsung.android.lib.dexcontrol.uvdm.response.IResponseListener;
+
 import java.util.UUID;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -20,13 +22,13 @@ public abstract class UvdmSendExecutor {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ExecutorHandler {
-        public final String REQUEST_THREAD_NAME = UUID.randomUUID().toString() + "REQUEST_THREAD_NAME";
+        public final String REQUEST_THREAD_NAME =
+                UUID.randomUUID().toString() + "REQUEST_THREAD_NAME";
         public boolean isSending = false;
         public HandlerThread requestThread;
         public AnonymousClass1 requestThreadHandler;
 
-        public ExecutorHandler() {
-        }
+        public ExecutorHandler() {}
     }
 
     /* JADX WARN: Type inference failed for: r2v1, types: [com.samsung.android.lib.dexcontrol.uvdm.sender.UvdmSendExecutor$ExecutorHandler$1] */
@@ -39,23 +41,29 @@ public abstract class UvdmSendExecutor {
         HandlerThread handlerThread = new HandlerThread(executorHandler.REQUEST_THREAD_NAME);
         executorHandler.requestThread = handlerThread;
         handlerThread.start();
-        executorHandler.requestThreadHandler = new Handler(executorHandler.requestThread.getLooper()) { // from class: com.samsung.android.lib.dexcontrol.uvdm.sender.UvdmSendExecutor.ExecutorHandler.1
-            @Override // android.os.Handler
-            public final void handleMessage(Message message) {
-                if (message != null) {
-                    ExecutorHandler executorHandler2 = ExecutorHandler.this;
-                    SLog.i(UvdmSendExecutor.this.getTag(), Util.byteArrayToHex((byte[]) message.obj));
-                    executorHandler2.isSending = true;
-                    try {
-                        UvdmSendExecutor.this.sendData(message.arg1, (byte[]) message.obj);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+        executorHandler.requestThreadHandler =
+                new Handler(
+                        executorHandler.requestThread
+                                .getLooper()) { // from class:
+                                                // com.samsung.android.lib.dexcontrol.uvdm.sender.UvdmSendExecutor.ExecutorHandler.1
+                    @Override // android.os.Handler
+                    public final void handleMessage(Message message) {
+                        if (message != null) {
+                            ExecutorHandler executorHandler2 = ExecutorHandler.this;
+                            SLog.i(
+                                    UvdmSendExecutor.this.getTag(),
+                                    Util.byteArrayToHex((byte[]) message.obj));
+                            executorHandler2.isSending = true;
+                            try {
+                                UvdmSendExecutor.this.sendData(message.arg1, (byte[]) message.obj);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            executorHandler2.isSending = false;
+                            message.obj = null;
+                        }
                     }
-                    executorHandler2.isSending = false;
-                    message.obj = null;
-                }
-            }
-        };
+                };
         this.mPid = i;
         this.mIsEnabled = true;
     }
@@ -100,7 +108,8 @@ public abstract class UvdmSendExecutor {
             return;
         }
         ExecutorHandler executorHandler = this.mRequestProvider;
-        if (executorHandler == null || (anonymousClass1 = executorHandler.requestThreadHandler) == null) {
+        if (executorHandler == null
+                || (anonymousClass1 = executorHandler.requestThreadHandler) == null) {
             return;
         }
         Message obtainMessage = anonymousClass1.obtainMessage();

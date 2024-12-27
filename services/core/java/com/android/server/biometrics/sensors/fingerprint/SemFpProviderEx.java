@@ -3,8 +3,10 @@ package com.android.server.biometrics.sensors.fingerprint;
 import android.text.TextUtils;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
+
 import com.android.server.accessibility.magnification.MagnificationConnectionManager$$ExternalSyntheticOutline0;
 import com.android.server.biometrics.SemBioAnalyticsManager;
+
 import java.util.function.BiFunction;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -17,7 +19,10 @@ public final class SemFpProviderEx {
     public final SparseArray mSdkVersions = new SparseArray(1);
     public final SparseIntArray mSecurityLevels = new SparseIntArray(1);
 
-    public SemFpProviderEx(BiFunction biFunction, BiFunction biFunction2, SemBioAnalyticsManager semBioAnalyticsManager) {
+    public SemFpProviderEx(
+            BiFunction biFunction,
+            BiFunction biFunction2,
+            SemBioAnalyticsManager semBioAnalyticsManager) {
         this.mStringResultRequestProvider = biFunction;
         this.mIntResultRequestProvider = biFunction2;
         this.mAnalyticsManager = semBioAnalyticsManager;
@@ -38,7 +43,8 @@ public final class SemFpProviderEx {
         String str = (String) this.mStringResultRequestProvider.apply(Integer.valueOf(i), 5);
         this.mSensorInfos.put(i, str.replace("\n", ", "));
         TextUtils.emptyIfNull(str);
-        int intValue = ((Integer) this.mIntResultRequestProvider.apply(Integer.valueOf(i), 30)).intValue();
+        int intValue =
+                ((Integer) this.mIntResultRequestProvider.apply(Integer.valueOf(i), 30)).intValue();
         if (intValue <= 0) {
             intValue = 1;
         }
@@ -49,7 +55,8 @@ public final class SemFpProviderEx {
                 int indexOf = str2.indexOf("UID : ");
                 trim = indexOf >= 0 ? str2.substring(indexOf + 6).split("\\n")[0].trim() : "";
             } catch (Exception e) {
-                MagnificationConnectionManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("dispatchHalInfoToAnalytics: "), "FingerprintService");
+                MagnificationConnectionManager$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("dispatchHalInfoToAnalytics: "), "FingerprintService");
                 return;
             }
         } else {

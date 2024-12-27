@@ -33,7 +33,8 @@ public abstract class BatteryManagerInternal {
 
     public abstract boolean isPowered(int i);
 
-    public abstract void registerChargingPolicyChangeListener(ChargingPolicyChangeListener chargingPolicyChangeListener);
+    public abstract void registerChargingPolicyChangeListener(
+            ChargingPolicyChangeListener chargingPolicyChangeListener);
 
     public abstract void resetBattery(boolean z);
 

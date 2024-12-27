@@ -88,12 +88,16 @@ class CubicEasing extends Easing {
 
     private float getDiffX(float t) {
         float t1 = 1.0f - t;
-        return (t1 * 3.0f * t1 * this.mX1) + (6.0f * t1 * t * (this.mX2 - this.mX1)) + (3.0f * t * t * (1.0f - this.mX2));
+        return (t1 * 3.0f * t1 * this.mX1)
+                + (6.0f * t1 * t * (this.mX2 - this.mX1))
+                + (3.0f * t * t * (1.0f - this.mX2));
     }
 
     private float getDiffY(float t) {
         float t1 = 1.0f - t;
-        return (t1 * 3.0f * t1 * this.mY1) + (6.0f * t1 * t * (this.mY2 - this.mY1)) + (3.0f * t * t * (1.0f - this.mY2));
+        return (t1 * 3.0f * t1 * this.mY1)
+                + (6.0f * t1 * t * (this.mY2 - this.mY1))
+                + (3.0f * t * t * (1.0f - this.mY2));
     }
 
     @Override // com.android.internal.widget.remotecompose.core.operations.utilities.easing.Easing

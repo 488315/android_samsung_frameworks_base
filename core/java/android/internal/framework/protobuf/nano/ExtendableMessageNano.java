@@ -1,10 +1,10 @@
 package android.internal.framework.protobuf.nano;
 
-import android.internal.framework.protobuf.nano.ExtendableMessageNano;
 import java.io.IOException;
 
 /* loaded from: classes2.dex */
-public abstract class ExtendableMessageNano<M extends ExtendableMessageNano<M>> extends MessageNano {
+public abstract class ExtendableMessageNano<M extends ExtendableMessageNano<M>>
+        extends MessageNano {
     protected FieldArray unknownFieldData;
 
     @Override // android.internal.framework.protobuf.nano.MessageNano
@@ -34,13 +34,18 @@ public abstract class ExtendableMessageNano<M extends ExtendableMessageNano<M>> 
         if (this.unknownFieldData == null) {
             return false;
         }
-        FieldData field = this.unknownFieldData.get(WireFormatNano.getTagFieldNumber(extension.tag));
+        FieldData field =
+                this.unknownFieldData.get(WireFormatNano.getTagFieldNumber(extension.tag));
         return field != null;
     }
 
     public final <T> T getExtension(Extension<M, T> extension) {
         FieldData fieldData;
-        if (this.unknownFieldData == null || (fieldData = this.unknownFieldData.get(WireFormatNano.getTagFieldNumber(extension.tag))) == null) {
+        if (this.unknownFieldData == null
+                || (fieldData =
+                                this.unknownFieldData.get(
+                                        WireFormatNano.getTagFieldNumber(extension.tag)))
+                        == null) {
             return null;
         }
         return (T) fieldData.getValue(extension);
@@ -71,7 +76,8 @@ public abstract class ExtendableMessageNano<M extends ExtendableMessageNano<M>> 
         return this;
     }
 
-    protected final boolean storeUnknownField(CodedInputByteBufferNano input, int tag) throws IOException {
+    protected final boolean storeUnknownField(CodedInputByteBufferNano input, int tag)
+            throws IOException {
         int startPos = input.getPosition();
         if (!input.skipField(tag)) {
             return false;

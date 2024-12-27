@@ -3,7 +3,8 @@ package com.android.internal.telephony;
 /* loaded from: classes5.dex */
 public interface TelephonyProperties {
     public static final String CURRENT_ACTIVE_PHONE = "gsm.current.phone-type";
-    public static final String DISPLAY_OPPORTUNISTIC_SUBSCRIPTION_CARRIER_TEXT_PROPERTY_NAME = "persist.radio.display_opportunistic_carrier";
+    public static final String DISPLAY_OPPORTUNISTIC_SUBSCRIPTION_CARRIER_TEXT_PROPERTY_NAME =
+            "persist.radio.display_opportunistic_carrier";
     public static final String PROPERTY_ACCESS_CONTROL_CLASS = "gsm.sim.acc";
     public static final String PROPERTY_APN_SIM_OPERATOR_NUMERIC = "gsm.apn.sim.operator.numeric";
     public static final String PROPERTY_BASEBAND_VERSION = "gsm.version.baseband";
@@ -33,10 +34,13 @@ public interface TelephonyProperties {
     public static final String PROPERTY_OPERATOR_NUMERIC = "gsm.operator.numeric";
     public static final String PROPERTY_OTASP_NUM_SCHEMA = "ro.cdma.otaspnumschema";
     public static final String PROPERTY_PCO_VALUE_PERSIST = "persist.radio.pcovalue";
-    public static final String PROPERTY_REBOOT_REQUIRED_ON_MODEM_CHANGE = "persist.radio.reboot_on_modem_change";
-    public static final String PROPERTY_RESET_ON_RADIO_TECH_CHANGE = "persist.radio.reset_on_switch";
+    public static final String PROPERTY_REBOOT_REQUIRED_ON_MODEM_CHANGE =
+            "persist.radio.reboot_on_modem_change";
+    public static final String PROPERTY_RESET_ON_RADIO_TECH_CHANGE =
+            "persist.radio.reset_on_switch";
     public static final String PROPERTY_RIL_IMPL = "gsm.version.ril-impl";
-    public static final String PROPERTY_RIL_SENDS_MULTIPLE_CALL_RING = "ro.telephony.call_ring.multiple";
+    public static final String PROPERTY_RIL_SENDS_MULTIPLE_CALL_RING =
+            "ro.telephony.call_ring.multiple";
     public static final String PROPERTY_SIM_COUNT = "ro.telephony.sim.count";
     public static final String PROPERTY_SIM_STATE = "gsm.sim.state";
     public static final String PROPERTY_SMS_GCF_MODE = "ril.sms.gcf-mode";

@@ -4,6 +4,7 @@ import android.hardware.audio.common.V2_0.AudioOffloadInfo$$ExternalSyntheticOut
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -21,11 +22,16 @@ public final class StorageAttribute {
             return false;
         }
         StorageAttribute storageAttribute = (StorageAttribute) obj;
-        return this.isInternal == storageAttribute.isInternal && this.isBootDevice == storageAttribute.isBootDevice && HidlSupport.deepEquals(this.name, storageAttribute.name);
+        return this.isInternal == storageAttribute.isInternal
+                && this.isBootDevice == storageAttribute.isBootDevice
+                && HidlSupport.deepEquals(this.name, storageAttribute.name);
     }
 
     public final int hashCode() {
-        return Objects.hash(AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.isInternal), AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.isBootDevice), Integer.valueOf(HidlSupport.deepHashCode(this.name)));
+        return Objects.hash(
+                AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.isInternal),
+                AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.isBootDevice),
+                Integer.valueOf(HidlSupport.deepHashCode(this.name)));
     }
 
     public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob, long j) {

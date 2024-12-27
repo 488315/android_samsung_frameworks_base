@@ -6,7 +6,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.samsung.android.media.fmradio.internal.IFMEventListener;
 
 /* loaded from: classes6.dex */
 public interface IFMPlayer extends IInterface {
@@ -118,16 +117,13 @@ public interface IFMPlayer extends IInterface {
 
     public static class Default implements IFMPlayer {
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-        public void setListener(IFMEventListener listener) throws RemoteException {
-        }
+        public void setListener(IFMEventListener listener) throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-        public void removeListener(IFMEventListener listener) throws RemoteException {
-        }
+        public void removeListener(IFMEventListener listener) throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-        public void tune(long freq) throws RemoteException {
-        }
+        public void tune(long freq) throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
         public boolean on() throws RemoteException {
@@ -160,8 +156,7 @@ public interface IFMPlayer extends IInterface {
         }
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-        public void cancelSeek() throws RemoteException {
-        }
+        public void cancelSeek() throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
         public long getCurrentChannel() throws RemoteException {
@@ -169,8 +164,7 @@ public interface IFMPlayer extends IInterface {
         }
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-        public void scan() throws RemoteException {
-        }
+        public void scan() throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
         public boolean cancelScan() throws RemoteException {
@@ -208,28 +202,22 @@ public interface IFMPlayer extends IInterface {
         }
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-        public void enableRDS() throws RemoteException {
-        }
+        public void enableRDS() throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-        public void disableRDS() throws RemoteException {
-        }
+        public void disableRDS() throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-        public void enableAF() throws RemoteException {
-        }
+        public void enableAF() throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-        public void disableAF() throws RemoteException {
-        }
+        public void disableAF() throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-        public void setBand(int band) throws RemoteException {
-        }
+        public void setBand(int band) throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-        public void setChannelSpacing(int spacing) throws RemoteException {
-        }
+        public void setChannelSpacing(int spacing) throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
         public int isBusy() throws RemoteException {
@@ -247,8 +235,7 @@ public interface IFMPlayer extends IInterface {
         }
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-        public void cancelAFSwitching() throws RemoteException {
-        }
+        public void cancelAFSwitching() throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
         public long[] getLastScanResult() throws RemoteException {
@@ -256,16 +243,13 @@ public interface IFMPlayer extends IInterface {
         }
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-        public void setStereo() throws RemoteException {
-        }
+        public void setStereo() throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-        public void setMono() throws RemoteException {
-        }
+        public void setMono() throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-        public void setVolume(long val) throws RemoteException {
-        }
+        public void setVolume(long val) throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
         public long getVolume() throws RemoteException {
@@ -283,12 +267,10 @@ public interface IFMPlayer extends IInterface {
         }
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-        public void setSpeakerOn(boolean bSpeakerOn) throws RemoteException {
-        }
+        public void setSpeakerOn(boolean bSpeakerOn) throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-        public void setRecordMode(boolean isRecord) throws RemoteException {
-        }
+        public void setRecordMode(boolean isRecord) throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
         public long getMaxVolume() throws RemoteException {
@@ -301,8 +283,7 @@ public interface IFMPlayer extends IInterface {
         }
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-        public void mute(boolean value) throws RemoteException {
-        }
+        public void mute(boolean value) throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
         public boolean isBatteryLow() throws RemoteException {
@@ -310,12 +291,10 @@ public interface IFMPlayer extends IInterface {
         }
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-        public void setFMIntenna(boolean setFMIntenna) throws RemoteException {
-        }
+        public void setFMIntenna(boolean setFMIntenna) throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-        public void setSoftmute(boolean state) throws RemoteException {
-        }
+        public void setSoftmute(boolean state) throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
         public boolean getSoftMuteMode() throws RemoteException {
@@ -323,29 +302,32 @@ public interface IFMPlayer extends IInterface {
         }
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-        public void setIntegerTunningParameter(String parameterName, int value) throws RemoteException {
-        }
+        public void setIntegerTunningParameter(String parameterName, int value)
+                throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-        public int getIntegerTunningParameter(String parameterName, int defaultValue) throws RemoteException {
+        public int getIntegerTunningParameter(String parameterName, int defaultValue)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-        public void setLongTunningParameter(String parameterName, long value) throws RemoteException {
-        }
+        public void setLongTunningParameter(String parameterName, long value)
+                throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-        public long getLongTunningParameter(String parameterName, long defaultValue) throws RemoteException {
+        public long getLongTunningParameter(String parameterName, long defaultValue)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-        public void setStringTunningParameter(String parameterName, String value) throws RemoteException {
-        }
+        public void setStringTunningParameter(String parameterName, String value)
+                throws RemoteException {}
 
         @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-        public String getStringTunningParameter(String parameterName, String defaultValue) throws RemoteException {
+        public String getStringTunningParameter(String parameterName, String defaultValue)
+                throws RemoteException {
             return null;
         }
 
@@ -360,7 +342,7 @@ public interface IFMPlayer extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFMPlayer {
+    public abstract static class Stub extends Binder implements IFMPlayer {
         static final int TRANSACTION_cancelAFSwitching = 29;
         static final int TRANSACTION_cancelScan = 13;
         static final int TRANSACTION_cancelSeek = 10;
@@ -551,7 +533,8 @@ public interface IFMPlayer extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IFMPlayer.DESCRIPTOR);
             }
@@ -561,13 +544,15 @@ public interface IFMPlayer extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IFMEventListener _arg0 = IFMEventListener.Stub.asInterface(data.readStrongBinder());
+                    IFMEventListener _arg0 =
+                            IFMEventListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setListener(_arg0);
                     reply.writeNoException();
                     return true;
                 case 2:
-                    IFMEventListener _arg02 = IFMEventListener.Stub.asInterface(data.readStrongBinder());
+                    IFMEventListener _arg02 =
+                            IFMEventListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeListener(_arg02);
                     reply.writeNoException();
@@ -1550,7 +1535,8 @@ public interface IFMPlayer extends IInterface {
             }
 
             @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-            public void setIntegerTunningParameter(String parameterName, int value) throws RemoteException {
+            public void setIntegerTunningParameter(String parameterName, int value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1566,7 +1552,8 @@ public interface IFMPlayer extends IInterface {
             }
 
             @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-            public int getIntegerTunningParameter(String parameterName, int defaultValue) throws RemoteException {
+            public int getIntegerTunningParameter(String parameterName, int defaultValue)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1584,7 +1571,8 @@ public interface IFMPlayer extends IInterface {
             }
 
             @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-            public void setLongTunningParameter(String parameterName, long value) throws RemoteException {
+            public void setLongTunningParameter(String parameterName, long value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1600,7 +1588,8 @@ public interface IFMPlayer extends IInterface {
             }
 
             @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-            public long getLongTunningParameter(String parameterName, long defaultValue) throws RemoteException {
+            public long getLongTunningParameter(String parameterName, long defaultValue)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1618,7 +1607,8 @@ public interface IFMPlayer extends IInterface {
             }
 
             @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-            public void setStringTunningParameter(String parameterName, String value) throws RemoteException {
+            public void setStringTunningParameter(String parameterName, String value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1634,7 +1624,8 @@ public interface IFMPlayer extends IInterface {
             }
 
             @Override // com.samsung.android.media.fmradio.internal.IFMPlayer
-            public String getStringTunningParameter(String parameterName, String defaultValue) throws RemoteException {
+            public String getStringTunningParameter(String parameterName, String defaultValue)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

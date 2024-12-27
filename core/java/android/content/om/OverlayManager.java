@@ -3,12 +3,13 @@ package android.content.om;
 import android.annotation.SystemApi;
 import android.compat.Compatibility;
 import android.content.Context;
-import android.content.om.IOverlayManager;
 import android.content.pm.PackageManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
+
 import com.android.internal.content.om.OverlayManagerImpl;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -31,7 +32,8 @@ public class OverlayManager {
     }
 
     @SystemApi
-    public void setEnabledExclusiveInCategory(String packageName, UserHandle user) throws SecurityException, IllegalStateException {
+    public void setEnabledExclusiveInCategory(String packageName, UserHandle user)
+            throws SecurityException, IllegalStateException {
         try {
             if (!this.mService.setEnabledExclusiveInCategory(packageName, user.getIdentifier())) {
                 throw new IllegalStateException("setEnabledExclusiveInCategory failed");
@@ -44,7 +46,8 @@ public class OverlayManager {
     }
 
     @SystemApi
-    public void setEnabled(String packageName, boolean enable, UserHandle user) throws SecurityException, IllegalStateException {
+    public void setEnabled(String packageName, boolean enable, UserHandle user)
+            throws SecurityException, IllegalStateException {
         try {
             if (!this.mService.setEnabled(packageName, enable, user.getIdentifier())) {
                 throw new IllegalStateException("setEnabled failed");
@@ -99,7 +102,9 @@ public class OverlayManager {
     }
 
     public void commit(OverlayManagerTransaction transaction) {
-        if (transaction.isSelfTargeting() || this.mService == null || this.mService.asBinder() == null) {
+        if (transaction.isSelfTargeting()
+                || this.mService == null
+                || this.mService.asBinder() == null) {
             try {
                 commitSelfTarget(transaction);
                 return;
@@ -117,7 +122,8 @@ public class OverlayManager {
         throw e;
     }
 
-    void commitSelfTarget(OverlayManagerTransaction transaction) throws PackageManager.NameNotFoundException, IOException {
+    void commitSelfTarget(OverlayManagerTransaction transaction)
+            throws PackageManager.NameNotFoundException, IOException {
         synchronized (this.mOverlayManagerImpl) {
             this.mOverlayManagerImpl.commit(transaction);
         }
@@ -126,7 +132,8 @@ public class OverlayManager {
     public List<OverlayInfo> getOverlayInfosForTarget(String targetPackageName) {
         List<OverlayInfo> overlayInfosForTarget;
         synchronized (this.mOverlayManagerImpl) {
-            overlayInfosForTarget = this.mOverlayManagerImpl.getOverlayInfosForTarget(targetPackageName);
+            overlayInfosForTarget =
+                    this.mOverlayManagerImpl.getOverlayInfosForTarget(targetPackageName);
         }
         return overlayInfosForTarget;
     }

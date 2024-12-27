@@ -13,25 +13,28 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.UserHandle;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes.dex */
 public class PeopleSpaceTile implements Parcelable {
     public static final int BLOCK_CONVERSATIONS = 2;
-    public static final Parcelable.Creator<PeopleSpaceTile> CREATOR = new Parcelable.Creator<PeopleSpaceTile>() { // from class: android.app.people.PeopleSpaceTile.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PeopleSpaceTile createFromParcel(Parcel source) {
-            return new PeopleSpaceTile(source);
-        }
+    public static final Parcelable.Creator<PeopleSpaceTile> CREATOR =
+            new Parcelable.Creator<
+                    PeopleSpaceTile>() { // from class: android.app.people.PeopleSpaceTile.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PeopleSpaceTile createFromParcel(Parcel source) {
+                    return new PeopleSpaceTile(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PeopleSpaceTile[] newArray(int size) {
-            return new PeopleSpaceTile[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PeopleSpaceTile[] newArray(int size) {
+                    return new PeopleSpaceTile[size];
+                }
+            };
     public static final int SHOW_CONTACTS = 16;
     public static final int SHOW_CONVERSATIONS = 1;
     public static final int SHOW_IMPORTANT_CONVERSATIONS = 4;
@@ -240,7 +243,9 @@ public class PeopleSpaceTile implements Parcelable {
         public Builder(ShortcutInfo info, LauncherApps launcherApps) {
             this.mId = info.getId();
             this.mUserName = info.getLabel();
-            this.mUserIcon = PeopleSpaceTile.convertDrawableToIcon(launcherApps.getShortcutIconDrawable(info, 0));
+            this.mUserIcon =
+                    PeopleSpaceTile.convertDrawableToIcon(
+                            launcherApps.getShortcutIconDrawable(info, 0));
             this.mUserHandle = info.getUserHandle();
             this.mPackageName = info.getPackage();
             this.mContactUri = getContactUri(info);
@@ -252,14 +257,19 @@ public class PeopleSpaceTile implements Parcelable {
             this.mId = info.getId();
             this.mUserName = info.getLabel();
             boolean z = false;
-            this.mUserIcon = PeopleSpaceTile.convertDrawableToIcon(launcherApps.getShortcutIconDrawable(info, 0));
+            this.mUserIcon =
+                    PeopleSpaceTile.convertDrawableToIcon(
+                            launcherApps.getShortcutIconDrawable(info, 0));
             this.mUserHandle = info.getUserHandle();
             this.mPackageName = info.getPackage();
             this.mContactUri = getContactUri(info);
             this.mStatuses = channel.getStatuses();
             this.mLastInteractionTimestamp = channel.getLastEventTimestamp();
-            this.mIsImportantConversation = channel.getNotificationChannel() != null && channel.getNotificationChannel().isImportantConversation();
-            if (channel.getNotificationChannel() != null && channel.getNotificationChannel().canBypassDnd()) {
+            this.mIsImportantConversation =
+                    channel.getNotificationChannel() != null
+                            && channel.getNotificationChannel().isImportantConversation();
+            if (channel.getNotificationChannel() != null
+                    && channel.getNotificationChannel().canBypassDnd()) {
                 z = true;
             }
             this.mCanBypassDnd = z;
@@ -402,7 +412,8 @@ public class PeopleSpaceTile implements Parcelable {
         this.mUserName = in.readCharSequence();
         this.mUserIcon = (Icon) in.readParcelable(Icon.class.getClassLoader(), Icon.class);
         this.mContactUri = (Uri) in.readParcelable(Uri.class.getClassLoader(), Uri.class);
-        this.mUserHandle = (UserHandle) in.readParcelable(UserHandle.class.getClassLoader(), UserHandle.class);
+        this.mUserHandle =
+                (UserHandle) in.readParcelable(UserHandle.class.getClassLoader(), UserHandle.class);
         this.mPackageName = in.readString();
         this.mBirthdayText = in.readString();
         this.mLastInteractionTimestamp = in.readLong();
@@ -416,7 +427,10 @@ public class PeopleSpaceTile implements Parcelable {
         this.mIntent = (Intent) in.readParcelable(Intent.class.getClassLoader(), Intent.class);
         this.mNotificationTimestamp = in.readLong();
         this.mStatuses = new ArrayList();
-        in.readParcelableList(this.mStatuses, ConversationStatus.class.getClassLoader(), ConversationStatus.class);
+        in.readParcelableList(
+                this.mStatuses,
+                ConversationStatus.class.getClassLoader(),
+                ConversationStatus.class);
         this.mCanBypassDnd = in.readBoolean();
         this.mIsPackageSuspended = in.readBoolean();
         this.mIsUserQuieted = in.readBoolean();
@@ -470,7 +484,11 @@ public class PeopleSpaceTile implements Parcelable {
         if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
             bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
         } else {
-            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+            bitmap =
+                    Bitmap.createBitmap(
+                            drawable.getIntrinsicWidth(),
+                            drawable.getIntrinsicHeight(),
+                            Bitmap.Config.ARGB_8888);
         }
         Canvas canvas = new Canvas(bitmap);
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());

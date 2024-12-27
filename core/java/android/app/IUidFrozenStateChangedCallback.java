@@ -14,8 +14,8 @@ public interface IUidFrozenStateChangedCallback extends IInterface {
 
     public static class Default implements IUidFrozenStateChangedCallback {
         @Override // android.app.IUidFrozenStateChangedCallback
-        public void onUidFrozenStateChanged(int[] uids, int[] frozenStates) throws RemoteException {
-        }
+        public void onUidFrozenStateChanged(int[] uids, int[] frozenStates)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IUidFrozenStateChangedCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUidFrozenStateChangedCallback {
+    public abstract static class Stub extends Binder implements IUidFrozenStateChangedCallback {
         static final int TRANSACTION_onUidFrozenStateChanged = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface IUidFrozenStateChangedCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IUidFrozenStateChangedCallback.DESCRIPTOR);
             }
@@ -98,7 +99,8 @@ public interface IUidFrozenStateChangedCallback extends IInterface {
             }
 
             @Override // android.app.IUidFrozenStateChangedCallback
-            public void onUidFrozenStateChanged(int[] uids, int[] frozenStates) throws RemoteException {
+            public void onUidFrozenStateChanged(int[] uids, int[] frozenStates)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IUidFrozenStateChangedCallback.DESCRIPTOR);

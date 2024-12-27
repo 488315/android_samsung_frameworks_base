@@ -21,6 +21,7 @@ import android.util.Pools;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.proto.ProtoInputStream;
+
 import com.android.internal.app.ProcessMap;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.FrameworkStatsLog;
@@ -28,9 +29,10 @@ import com.android.server.ExplicitHealthCheckController$$ExternalSyntheticOutlin
 import com.android.server.IoThread;
 import com.android.server.StorageManagerService$$ExternalSyntheticOutline0;
 import com.android.server.alarm.GmsAlarmManager$$ExternalSyntheticOutline0;
-import com.android.server.am.AppExitInfoTracker;
+
 import com.samsung.android.rune.CoreRune;
 import com.sec.tmodiagnostics.DeviceReportingSecurityChecker;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -70,8 +72,10 @@ public final class AppExitInfoTracker {
     public final ArrayList mTmpInfoList = new ArrayList();
     public final ArrayList mTmpInfoList2 = new ArrayList();
     public final IsolatedUidRecords mIsolatedUidRecords = new IsolatedUidRecords();
-    public final AppExitInfoExternalSource mAppExitInfoSourceZygote = new AppExitInfoExternalSource(null);
-    public final AppExitInfoExternalSource mAppExitInfoSourceLmkd = new AppExitInfoExternalSource(3);
+    public final AppExitInfoExternalSource mAppExitInfoSourceZygote =
+            new AppExitInfoExternalSource(null);
+    public final AppExitInfoExternalSource mAppExitInfoSourceLmkd =
+            new AppExitInfoExternalSource(3);
     public final SparseArray mActiveAppStateSummary = new SparseArray();
     public final SparseArray mActiveAppTraces = new SparseArray();
     public final AppTraceRetriever mAppTraceRetriever = new AppTraceRetriever();
@@ -91,7 +95,8 @@ public final class AppExitInfoTracker {
 
         public static void destroyLocked(SparseArray sparseArray) {
             for (int size = sparseArray.size() - 1; size >= 0; size--) {
-                ApplicationExitInfo applicationExitInfo = (ApplicationExitInfo) sparseArray.valueAt(size);
+                ApplicationExitInfo applicationExitInfo =
+                        (ApplicationExitInfo) sparseArray.valueAt(size);
                 File traceFile = applicationExitInfo.getTraceFile();
                 if (traceFile != null) {
                     traceFile.delete();
@@ -101,13 +106,15 @@ public final class AppExitInfoTracker {
             }
         }
 
-        public final void addInfoLocked(SparseArray sparseArray, ApplicationExitInfo applicationExitInfo) {
+        public final void addInfoLocked(
+                SparseArray sparseArray, ApplicationExitInfo applicationExitInfo) {
             int size = sparseArray.size();
             if (size >= this.mMaxCapacity) {
                 int i = -1;
                 long j = Long.MAX_VALUE;
                 for (int i2 = 0; i2 < size; i2++) {
-                    ApplicationExitInfo applicationExitInfo2 = (ApplicationExitInfo) sparseArray.valueAt(i2);
+                    ApplicationExitInfo applicationExitInfo2 =
+                            (ApplicationExitInfo) sparseArray.valueAt(i2);
                     if (applicationExitInfo2.getTimestamp() < j) {
                         j = applicationExitInfo2.getTimestamp();
                         i = i2;
@@ -129,10 +136,18 @@ public final class AppExitInfoTracker {
             byte[] processStateSummary = applicationExitInfo.getProcessStateSummary();
             AppExitInfoTracker appExitInfoTracker = AppExitInfoTracker.this;
             if (processStateSummary == null) {
-                applicationExitInfo.setProcessStateSummary((byte[]) AppExitInfoTracker.m172$$Nest$smfindAndRemoveFromSparse2dArray(packageUid, pid, appExitInfoTracker.mActiveAppStateSummary));
+                applicationExitInfo.setProcessStateSummary(
+                        (byte[])
+                                AppExitInfoTracker.m172$$Nest$smfindAndRemoveFromSparse2dArray(
+                                        packageUid,
+                                        pid,
+                                        appExitInfoTracker.mActiveAppStateSummary));
             }
             if (applicationExitInfo.getTraceFile() == null) {
-                applicationExitInfo.setTraceFile((File) AppExitInfoTracker.m172$$Nest$smfindAndRemoveFromSparse2dArray(packageUid, pid, appExitInfoTracker.mActiveAppTraces));
+                applicationExitInfo.setTraceFile(
+                        (File)
+                                AppExitInfoTracker.m172$$Nest$smfindAndRemoveFromSparse2dArray(
+                                        packageUid, pid, appExitInfoTracker.mActiveAppTraces));
             }
             applicationExitInfo.setAppTraceRetriever(appExitInfoTracker.mAppTraceRetriever);
             sparseArray.append(pid, applicationExitInfo);
@@ -159,9 +174,11 @@ public final class AppExitInfoTracker {
                 return;
             }
             if (i2 == 1) {
-                ApplicationExitInfo applicationExitInfo2 = (ApplicationExitInfo) sparseArray.valueAt(0);
+                ApplicationExitInfo applicationExitInfo2 =
+                        (ApplicationExitInfo) sparseArray.valueAt(0);
                 for (int i4 = 1; i4 < size; i4++) {
-                    ApplicationExitInfo applicationExitInfo3 = (ApplicationExitInfo) sparseArray.valueAt(i4);
+                    ApplicationExitInfo applicationExitInfo3 =
+                            (ApplicationExitInfo) sparseArray.valueAt(i4);
                     if (applicationExitInfo2.getTimestamp() < applicationExitInfo3.getTimestamp()) {
                         applicationExitInfo2 = applicationExitInfo3;
                     }
@@ -193,7 +210,8 @@ public final class AppExitInfoTracker {
         }
 
         public final void addLocked(int i, int i2, Object obj) {
-            Integer uidByIsolatedUid = AppExitInfoTracker.this.mIsolatedUidRecords.getUidByIsolatedUid(i2);
+            Integer uidByIsolatedUid =
+                    AppExitInfoTracker.this.mIsolatedUidRecords.getUidByIsolatedUid(i2);
             if (uidByIsolatedUid != null) {
                 i2 = uidByIsolatedUid.intValue();
             }
@@ -213,38 +231,45 @@ public final class AppExitInfoTracker {
             synchronized (appExitInfoTracker.mLock) {
                 final AppExitInfoTracker appExitInfoTracker2 = AppExitInfoTracker.this;
                 final Integer num2 = this.mPresetReason;
-                Integer uidByIsolatedUid = appExitInfoTracker2.mIsolatedUidRecords.getUidByIsolatedUid(i2);
+                Integer uidByIsolatedUid =
+                        appExitInfoTracker2.mIsolatedUidRecords.getUidByIsolatedUid(i2);
                 final int intValue = uidByIsolatedUid != null ? uidByIsolatedUid.intValue() : i2;
                 final ArrayList arrayList = appExitInfoTracker2.mTmpInfoList;
                 arrayList.clear();
-                appExitInfoTracker2.forEachPackageLocked(new BiFunction() { // from class: com.android.server.am.AppExitInfoTracker$$ExternalSyntheticLambda15
-                    @Override // java.util.function.BiFunction
-                    public final Object apply(Object obj, Object obj2) {
-                        AppExitInfoTracker appExitInfoTracker3 = AppExitInfoTracker.this;
-                        int i3 = intValue;
-                        ArrayList arrayList2 = arrayList;
-                        int i4 = i;
-                        Integer num3 = num;
-                        Integer num4 = num2;
-                        appExitInfoTracker3.getClass();
-                        AppExitInfoTracker.AppExitInfoContainer appExitInfoContainer = (AppExitInfoTracker.AppExitInfoContainer) ((SparseArray) obj2).get(i3);
-                        if (appExitInfoContainer == null) {
-                            return 0;
-                        }
-                        arrayList2.clear();
-                        appExitInfoContainer.getExitInfoLocked(i4, 1, arrayList2);
-                        if (arrayList2.size() == 0) {
-                            return 0;
-                        }
-                        ApplicationExitInfo applicationExitInfo = (ApplicationExitInfo) arrayList2.get(0);
-                        if (applicationExitInfo.getRealUid() != i3) {
-                            arrayList2.clear();
-                            return 0;
-                        }
-                        appExitInfoTracker3.updateExistingExitInfoRecordLocked(applicationExitInfo, num3, num4);
-                        return 2;
-                    }
-                });
+                appExitInfoTracker2.forEachPackageLocked(
+                        new BiFunction() { // from class:
+                                           // com.android.server.am.AppExitInfoTracker$$ExternalSyntheticLambda15
+                            @Override // java.util.function.BiFunction
+                            public final Object apply(Object obj, Object obj2) {
+                                AppExitInfoTracker appExitInfoTracker3 = AppExitInfoTracker.this;
+                                int i3 = intValue;
+                                ArrayList arrayList2 = arrayList;
+                                int i4 = i;
+                                Integer num3 = num;
+                                Integer num4 = num2;
+                                appExitInfoTracker3.getClass();
+                                AppExitInfoTracker.AppExitInfoContainer appExitInfoContainer =
+                                        (AppExitInfoTracker.AppExitInfoContainer)
+                                                ((SparseArray) obj2).get(i3);
+                                if (appExitInfoContainer == null) {
+                                    return 0;
+                                }
+                                arrayList2.clear();
+                                appExitInfoContainer.getExitInfoLocked(i4, 1, arrayList2);
+                                if (arrayList2.size() == 0) {
+                                    return 0;
+                                }
+                                ApplicationExitInfo applicationExitInfo =
+                                        (ApplicationExitInfo) arrayList2.get(0);
+                                if (applicationExitInfo.getRealUid() != i3) {
+                                    arrayList2.clear();
+                                    return 0;
+                                }
+                                appExitInfoTracker3.updateExistingExitInfoRecordLocked(
+                                        applicationExitInfo, num3, num4);
+                                return 2;
+                            }
+                        });
                 if (arrayList.size() <= 0) {
                     addLocked(i, i2, num);
                 }
@@ -255,7 +280,8 @@ public final class AppExitInfoTracker {
             Pair pair;
             synchronized (AppExitInfoTracker.this.mLock) {
                 try {
-                    Integer uidByIsolatedUid = AppExitInfoTracker.this.mIsolatedUidRecords.getUidByIsolatedUid(i2);
+                    Integer uidByIsolatedUid =
+                            AppExitInfoTracker.this.mIsolatedUidRecords.getUidByIsolatedUid(i2);
                     if (uidByIsolatedUid != null) {
                         i2 = uidByIsolatedUid.intValue();
                     }
@@ -264,7 +290,9 @@ public final class AppExitInfoTracker {
                         return null;
                     }
                     sparseArray.remove(i);
-                    return AppExitInfoTracker.this.isFresh(((Long) pair.first).longValue()) ? pair : null;
+                    return AppExitInfoTracker.this.isFresh(((Long) pair.first).longValue())
+                            ? pair
+                            : null;
                 } catch (Throwable th) {
                     throw th;
                 }
@@ -273,7 +301,11 @@ public final class AppExitInfoTracker {
 
         public final void removeByUidLocked(int i, boolean z) {
             Integer uidByIsolatedUid;
-            if (UserHandle.isIsolated(i) && (uidByIsolatedUid = AppExitInfoTracker.this.mIsolatedUidRecords.getUidByIsolatedUid(i)) != null) {
+            if (UserHandle.isIsolated(i)
+                    && (uidByIsolatedUid =
+                                    AppExitInfoTracker.this.mIsolatedUidRecords.getUidByIsolatedUid(
+                                            i))
+                            != null) {
                 i = uidByIsolatedUid.intValue();
             }
             if (!z) {
@@ -312,8 +344,7 @@ public final class AppExitInfoTracker {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class AppTraceRetriever extends IAppTraceRetriever.Stub {
-        public AppTraceRetriever() {
-        }
+        public AppTraceRetriever() {}
 
         public final ParcelFileDescriptor getTraceFileDescriptor(String str, int i, int i2) {
             AppExitInfoTracker.this.mService.getClass();
@@ -324,14 +355,19 @@ public final class AppExitInfoTracker {
             int callingPid = Binder.getCallingPid();
             int callingUid = Binder.getCallingUid();
             int userId = UserHandle.getUserId(i);
-            AppExitInfoTracker.this.mService.mUserController.handleIncomingUser(callingPid, callingUid, userId, true, 0, "getTraceFileDescriptor", null);
-            int enforceDumpPermissionForPackage = AppExitInfoTracker.this.mService.enforceDumpPermissionForPackage(userId, callingUid, str, "getTraceFileDescriptor");
+            AppExitInfoTracker.this.mService.mUserController.handleIncomingUser(
+                    callingPid, callingUid, userId, true, 0, "getTraceFileDescriptor", null);
+            int enforceDumpPermissionForPackage =
+                    AppExitInfoTracker.this.mService.enforceDumpPermissionForPackage(
+                            userId, callingUid, str, "getTraceFileDescriptor");
             if (enforceDumpPermissionForPackage == -1) {
                 return null;
             }
             synchronized (AppExitInfoTracker.this.mLock) {
                 try {
-                    ApplicationExitInfo exitInfoLocked = AppExitInfoTracker.this.getExitInfoLocked(enforceDumpPermissionForPackage, i2, str);
+                    ApplicationExitInfo exitInfoLocked =
+                            AppExitInfoTracker.this.getExitInfoLocked(
+                                    enforceDumpPermissionForPackage, i2, str);
                     if (exitInfoLocked == null) {
                         return null;
                     }
@@ -359,8 +395,7 @@ public final class AppExitInfoTracker {
         public final SparseArray mUidToIsolatedUidMap = new SparseArray();
         public final SparseArray mIsolatedUidToUidMap = new SparseArray();
 
-        public IsolatedUidRecords() {
-        }
+        public IsolatedUidRecords() {}
 
         public final Integer getUidByIsolatedUid(int i) {
             Integer num;
@@ -399,7 +434,8 @@ public final class AppExitInfoTracker {
             ArraySet arraySet = (ArraySet) this.mUidToIsolatedUidMap.get(i);
             if (arraySet != null) {
                 for (int size = arraySet.size() - 1; size >= 0; size--) {
-                    this.mIsolatedUidToUidMap.remove(((Integer) arraySet.removeAt(size)).intValue());
+                    this.mIsolatedUidToUidMap.remove(
+                            ((Integer) arraySet.removeAt(size)).intValue());
                 }
             }
         }
@@ -409,7 +445,8 @@ public final class AppExitInfoTracker {
                 try {
                     int indexOfKey = this.mUidToIsolatedUidMap.indexOfKey(i2);
                     if (indexOfKey >= 0) {
-                        ArraySet arraySet = (ArraySet) this.mUidToIsolatedUidMap.valueAt(indexOfKey);
+                        ArraySet arraySet =
+                                (ArraySet) this.mUidToIsolatedUidMap.valueAt(indexOfKey);
                         arraySet.remove(Integer.valueOf(i));
                         if (arraySet.isEmpty()) {
                             this.mUidToIsolatedUidMap.removeAt(indexOfKey);
@@ -433,10 +470,12 @@ public final class AppExitInfoTracker {
         public final void handleMessage(Message message) {
             switch (message.what) {
                 case 4101:
-                    AppExitInfoTracker.this.mAppExitInfoSourceLmkd.onProcDied(message.arg1, message.arg2, null);
+                    AppExitInfoTracker.this.mAppExitInfoSourceLmkd.onProcDied(
+                            message.arg1, message.arg2, null);
                     return;
                 case 4102:
-                    AppExitInfoTracker.this.mAppExitInfoSourceZygote.onProcDied(message.arg1, message.arg2, (Integer) message.obj);
+                    AppExitInfoTracker.this.mAppExitInfoSourceZygote.onProcDied(
+                            message.arg1, message.arg2, (Integer) message.obj);
                     return;
                 case 4103:
                     ApplicationExitInfo applicationExitInfo = (ApplicationExitInfo) message.obj;
@@ -455,7 +494,8 @@ public final class AppExitInfoTracker {
                 case 4105:
                     synchronized (AppExitInfoTracker.this.mLock) {
                         AppExitInfoTracker appExitInfoTracker = AppExitInfoTracker.this;
-                        ApplicationExitInfo applicationExitInfo3 = (ApplicationExitInfo) message.obj;
+                        ApplicationExitInfo applicationExitInfo3 =
+                                (ApplicationExitInfo) message.obj;
                         appExitInfoTracker.getClass();
                         AppExitInfoTracker.performLogToStatsdLocked(applicationExitInfo3);
                     }
@@ -463,7 +503,8 @@ public final class AppExitInfoTracker {
                 case 4106:
                     ApplicationExitInfo applicationExitInfo4 = (ApplicationExitInfo) message.obj;
                     synchronized (AppExitInfoTracker.this.mLock) {
-                        AppExitInfoTracker.this.handleNoteAppRecoverableCrashLocked(applicationExitInfo4);
+                        AppExitInfoTracker.this.handleNoteAppRecoverableCrashLocked(
+                                applicationExitInfo4);
                     }
                     AppExitInfoTracker.this.recycleRawRecord(applicationExitInfo4);
                     return;
@@ -475,12 +516,15 @@ public final class AppExitInfoTracker {
     }
 
     /* renamed from: -$$Nest$smfindAndRemoveFromSparse2dArray, reason: not valid java name */
-    public static Object m172$$Nest$smfindAndRemoveFromSparse2dArray(int i, int i2, SparseArray sparseArray) {
+    public static Object m172$$Nest$smfindAndRemoveFromSparse2dArray(
+            int i, int i2, SparseArray sparseArray) {
         SparseArray sparseArray2;
         int indexOfKey;
         int indexOfKey2 = sparseArray.indexOfKey(i);
         Object obj = null;
-        if (indexOfKey2 >= 0 && (sparseArray2 = (SparseArray) sparseArray.valueAt(indexOfKey2)) != null && (indexOfKey = sparseArray2.indexOfKey(i2)) >= 0) {
+        if (indexOfKey2 >= 0
+                && (sparseArray2 = (SparseArray) sparseArray.valueAt(indexOfKey2)) != null
+                && (indexOfKey = sparseArray2.indexOfKey(i2)) >= 0) {
             obj = sparseArray2.valueAt(indexOfKey);
             sparseArray2.removeAt(indexOfKey);
             if (sparseArray2.size() == 0) {
@@ -490,24 +534,38 @@ public final class AppExitInfoTracker {
         return obj;
     }
 
-    public static void dumpHistoryProcessExitInfoLocked(PrintWriter printWriter, String str, SparseArray sparseArray, SimpleDateFormat simpleDateFormat) {
+    public static void dumpHistoryProcessExitInfoLocked(
+            PrintWriter printWriter,
+            String str,
+            SparseArray sparseArray,
+            SimpleDateFormat simpleDateFormat) {
         printWriter.println("  package: " + str);
         int size = sparseArray.size();
         for (int i = 0; i < size; i++) {
             printWriter.println("    Historical Process Exit for uid=" + sparseArray.keyAt(i));
-            AppExitInfoContainer appExitInfoContainer = (AppExitInfoContainer) sparseArray.valueAt(i);
+            AppExitInfoContainer appExitInfoContainer =
+                    (AppExitInfoContainer) sparseArray.valueAt(i);
             appExitInfoContainer.getClass();
             ArrayList arrayList = new ArrayList();
             for (int size2 = appExitInfoContainer.mInfos.size() - 1; size2 >= 0; size2--) {
                 arrayList.add((ApplicationExitInfo) appExitInfoContainer.mInfos.valueAt(size2));
             }
-            for (int size3 = appExitInfoContainer.mRecoverableCrashes.size() - 1; size3 >= 0; size3--) {
-                arrayList.add((ApplicationExitInfo) appExitInfoContainer.mRecoverableCrashes.valueAt(size3));
+            for (int size3 = appExitInfoContainer.mRecoverableCrashes.size() - 1;
+                    size3 >= 0;
+                    size3--) {
+                arrayList.add(
+                        (ApplicationExitInfo)
+                                appExitInfoContainer.mRecoverableCrashes.valueAt(size3));
             }
             Collections.sort(arrayList, new AppExitInfoTracker$$ExternalSyntheticLambda1(3));
             int size4 = arrayList.size();
             for (int i2 = 0; i2 < size4; i2++) {
-                ((ApplicationExitInfo) arrayList.get(i2)).dump(printWriter, "        ", VibrationParam$1$$ExternalSyntheticOutline0.m(i2, "#"), simpleDateFormat);
+                ((ApplicationExitInfo) arrayList.get(i2))
+                        .dump(
+                                printWriter,
+                                "        ",
+                                VibrationParam$1$$ExternalSyntheticOutline0.m(i2, "#"),
+                                simpleDateFormat);
             }
         }
     }
@@ -521,13 +579,31 @@ public final class AppExitInfoTracker {
         String processName = applicationExitInfo.getProcessName();
         if (TextUtils.equals(packageName, processName)) {
             processName = null;
-        } else if (processName != null && packageName != null && processName.startsWith(packageName)) {
+        } else if (processName != null
+                && packageName != null
+                && processName.startsWith(packageName)) {
             processName = processName.substring(packageName.length());
         }
-        FrameworkStatsLog.write(FrameworkStatsLog.APP_PROCESS_DIED, applicationExitInfo.getPackageUid(), processName, applicationExitInfo.getReason(), applicationExitInfo.getSubReason(), applicationExitInfo.getImportance(), (int) applicationExitInfo.getPss(), (int) applicationExitInfo.getRss(), applicationExitInfo.hasForegroundServices());
+        FrameworkStatsLog.write(
+                FrameworkStatsLog.APP_PROCESS_DIED,
+                applicationExitInfo.getPackageUid(),
+                processName,
+                applicationExitInfo.getReason(),
+                applicationExitInfo.getSubReason(),
+                applicationExitInfo.getImportance(),
+                (int) applicationExitInfo.getPss(),
+                (int) applicationExitInfo.getRss(),
+                applicationExitInfo.hasForegroundServices());
     }
 
-    public static void putToSparse2dArray(SparseArray sparseArray, int i, int i2, Object obj, Supplier supplier, AppExitInfoTracker$$ExternalSyntheticLambda5 appExitInfoTracker$$ExternalSyntheticLambda5) {
+    public static void putToSparse2dArray(
+            SparseArray sparseArray,
+            int i,
+            int i2,
+            Object obj,
+            Supplier supplier,
+            AppExitInfoTracker$$ExternalSyntheticLambda5
+                    appExitInfoTracker$$ExternalSyntheticLambda5) {
         SparseArray sparseArray2;
         int indexOfKey = sparseArray.indexOfKey(i);
         if (indexOfKey < 0) {
@@ -547,13 +623,19 @@ public final class AppExitInfoTracker {
         sparseArray2.setValueAt(indexOfKey2, obj);
     }
 
-    public static void removeFromSparse2dArray(SparseArray sparseArray, Predicate predicate, AppExitInfoTracker$$ExternalSyntheticLambda5 appExitInfoTracker$$ExternalSyntheticLambda5) {
+    public static void removeFromSparse2dArray(
+            SparseArray sparseArray,
+            Predicate predicate,
+            AppExitInfoTracker$$ExternalSyntheticLambda5
+                    appExitInfoTracker$$ExternalSyntheticLambda5) {
         SparseArray sparseArray2;
         for (int size = sparseArray.size() - 1; size >= 0; size--) {
-            if (predicate.test(Integer.valueOf(sparseArray.keyAt(size))) && (sparseArray2 = (SparseArray) sparseArray.valueAt(size)) != null) {
+            if (predicate.test(Integer.valueOf(sparseArray.keyAt(size)))
+                    && (sparseArray2 = (SparseArray) sparseArray.valueAt(size)) != null) {
                 for (int size2 = sparseArray2.size() - 1; size2 >= 0; size2--) {
                     if (appExitInfoTracker$$ExternalSyntheticLambda5 != null) {
-                        appExitInfoTracker$$ExternalSyntheticLambda5.accept(sparseArray2.valueAt(size2));
+                        appExitInfoTracker$$ExternalSyntheticLambda5.accept(
+                                sparseArray2.valueAt(size2));
                     }
                     sparseArray2.removeAt(size2);
                 }
@@ -564,12 +646,15 @@ public final class AppExitInfoTracker {
         }
     }
 
-    public final void addExitInfoInnerLocked(String str, int i, ApplicationExitInfo applicationExitInfo, boolean z) {
+    public final void addExitInfoInnerLocked(
+            String str, int i, ApplicationExitInfo applicationExitInfo, boolean z) {
         AppExitInfoContainer appExitInfoContainer = (AppExitInfoContainer) this.mData.get(str, i);
         if (appExitInfoContainer == null) {
             appExitInfoContainer = new AppExitInfoContainer(this.mAppExitInfoHistoryListSize);
             if (UserHandle.isIsolated(applicationExitInfo.getRealUid())) {
-                Integer uidByIsolatedUid = this.mIsolatedUidRecords.getUidByIsolatedUid(applicationExitInfo.getRealUid());
+                Integer uidByIsolatedUid =
+                        this.mIsolatedUidRecords.getUidByIsolatedUid(
+                                applicationExitInfo.getRealUid());
                 if (uidByIsolatedUid != null) {
                     appExitInfoContainer.mUid = uidByIsolatedUid.intValue();
                 }
@@ -579,22 +664,28 @@ public final class AppExitInfoTracker {
             this.mData.put(str, i, appExitInfoContainer);
         }
         if (z) {
-            appExitInfoContainer.addInfoLocked(appExitInfoContainer.mRecoverableCrashes, applicationExitInfo);
+            appExitInfoContainer.addInfoLocked(
+                    appExitInfoContainer.mRecoverableCrashes, applicationExitInfo);
         } else {
             appExitInfoContainer.addInfoLocked(appExitInfoContainer.mInfos, applicationExitInfo);
         }
     }
 
-    public final ApplicationExitInfo addExitInfoLocked(ApplicationExitInfo applicationExitInfo, boolean z) {
+    public final ApplicationExitInfo addExitInfoLocked(
+            ApplicationExitInfo applicationExitInfo, boolean z) {
         Integer uidByIsolatedUid;
         if (!this.mAppExitInfoLoaded.get()) {
-            Slog.w("ActivityManager", "Skipping saving the exit info due to ongoing loading from storage");
+            Slog.w(
+                    "ActivityManager",
+                    "Skipping saving the exit info due to ongoing loading from storage");
             return null;
         }
         ApplicationExitInfo applicationExitInfo2 = new ApplicationExitInfo(applicationExitInfo);
         String[] packageList = applicationExitInfo.getPackageList();
         int realUid = applicationExitInfo.getRealUid();
-        if (UserHandle.isIsolated(realUid) && (uidByIsolatedUid = this.mIsolatedUidRecords.getUidByIsolatedUid(realUid)) != null) {
+        if (UserHandle.isIsolated(realUid)
+                && (uidByIsolatedUid = this.mIsolatedUidRecords.getUidByIsolatedUid(realUid))
+                        != null) {
             realUid = uidByIsolatedUid.intValue();
         }
         for (String str : packageList) {
@@ -602,7 +693,8 @@ public final class AppExitInfoTracker {
         }
         if (Process.isSdkSandboxUid(realUid)) {
             for (String str2 : packageList) {
-                addExitInfoInnerLocked(str2, applicationExitInfo.getPackageUid(), applicationExitInfo2, z);
+                addExitInfoInnerLocked(
+                        str2, applicationExitInfo.getPackageUid(), applicationExitInfo2, z);
             }
         }
         schedulePersistProcessExitInfo(false);
@@ -635,23 +727,33 @@ public final class AppExitInfoTracker {
         final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         synchronized (this.mLock) {
             try {
-                printWriter.println("Last Timestamp of Persistence Into Persistent Storage: " + simpleDateFormat.format(new Date(this.mLastAppExitInfoPersistTimestamp)));
+                printWriter.println(
+                        "Last Timestamp of Persistence Into Persistent Storage: "
+                                + simpleDateFormat.format(
+                                        new Date(this.mLastAppExitInfoPersistTimestamp)));
                 if (TextUtils.isEmpty(str)) {
-                    forEachPackageLocked(new BiFunction() { // from class: com.android.server.am.AppExitInfoTracker$$ExternalSyntheticLambda12
-                        @Override // java.util.function.BiFunction
-                        public final Object apply(Object obj, Object obj2) {
-                            AppExitInfoTracker appExitInfoTracker = AppExitInfoTracker.this;
-                            PrintWriter printWriter2 = printWriter;
-                            SimpleDateFormat simpleDateFormat2 = simpleDateFormat;
-                            appExitInfoTracker.getClass();
-                            AppExitInfoTracker.dumpHistoryProcessExitInfoLocked(printWriter2, (String) obj, (SparseArray) obj2, simpleDateFormat2);
-                            return 0;
-                        }
-                    });
+                    forEachPackageLocked(
+                            new BiFunction() { // from class:
+                                               // com.android.server.am.AppExitInfoTracker$$ExternalSyntheticLambda12
+                                @Override // java.util.function.BiFunction
+                                public final Object apply(Object obj, Object obj2) {
+                                    AppExitInfoTracker appExitInfoTracker = AppExitInfoTracker.this;
+                                    PrintWriter printWriter2 = printWriter;
+                                    SimpleDateFormat simpleDateFormat2 = simpleDateFormat;
+                                    appExitInfoTracker.getClass();
+                                    AppExitInfoTracker.dumpHistoryProcessExitInfoLocked(
+                                            printWriter2,
+                                            (String) obj,
+                                            (SparseArray) obj2,
+                                            simpleDateFormat2);
+                                    return 0;
+                                }
+                            });
                 } else {
                     SparseArray sparseArray = (SparseArray) this.mData.getMap().get(str);
                     if (sparseArray != null) {
-                        dumpHistoryProcessExitInfoLocked(printWriter, str, sparseArray, simpleDateFormat);
+                        dumpHistoryProcessExitInfoLocked(
+                                printWriter, str, sparseArray, simpleDateFormat);
                     }
                 }
             } catch (Throwable th) {
@@ -664,11 +766,17 @@ public final class AppExitInfoTracker {
         ArrayMap map = this.mData.getMap();
         int size = map.size() - 1;
         while (size >= 0) {
-            int intValue = ((Integer) biFunction.apply((String) map.keyAt(size), (SparseArray) map.valueAt(size))).intValue();
+            int intValue =
+                    ((Integer)
+                                    biFunction.apply(
+                                            (String) map.keyAt(size),
+                                            (SparseArray) map.valueAt(size)))
+                            .intValue();
             if (intValue == 1) {
                 SparseArray sparseArray = (SparseArray) map.valueAt(size);
                 for (int size2 = sparseArray.size() - 1; size2 >= 0; size2--) {
-                    AppExitInfoContainer appExitInfoContainer = (AppExitInfoContainer) sparseArray.valueAt(size2);
+                    AppExitInfoContainer appExitInfoContainer =
+                            (AppExitInfoContainer) sparseArray.valueAt(size2);
                     AppExitInfoContainer.destroyLocked(appExitInfoContainer.mInfos);
                     AppExitInfoContainer.destroyLocked(appExitInfoContainer.mRecoverableCrashes);
                 }
@@ -688,37 +796,65 @@ public final class AppExitInfoTracker {
                     if (TextUtils.isEmpty(str)) {
                         final ArrayList arrayList2 = this.mTmpInfoList2;
                         arrayList2.clear();
-                        forEachPackageLocked(new BiFunction() { // from class: com.android.server.am.AppExitInfoTracker$$ExternalSyntheticLambda0
-                            @Override // java.util.function.BiFunction
-                            public final Object apply(Object obj, Object obj2) {
-                                AppExitInfoTracker appExitInfoTracker = AppExitInfoTracker.this;
-                                int i4 = i;
-                                ArrayList arrayList3 = arrayList2;
-                                int i5 = i2;
-                                appExitInfoTracker.getClass();
-                                AppExitInfoTracker.AppExitInfoContainer appExitInfoContainer = (AppExitInfoTracker.AppExitInfoContainer) ((SparseArray) obj2).get(i4);
-                                if (appExitInfoContainer != null) {
-                                    appExitInfoTracker.mTmpInfoList.clear();
-                                    ArrayList arrayList4 = appExitInfoTracker.mTmpInfoList;
-                                    if (arrayList4 == null) {
-                                        arrayList4 = new ArrayList();
-                                    }
-                                    for (int size = appExitInfoContainer.mInfos.size() - 1; size >= 0; size--) {
-                                        if (i5 == 0 || i5 == appExitInfoContainer.mInfos.keyAt(size)) {
-                                            arrayList4.add((ApplicationExitInfo) appExitInfoContainer.mInfos.valueAt(size));
+                        forEachPackageLocked(
+                                new BiFunction() { // from class:
+                                                   // com.android.server.am.AppExitInfoTracker$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.BiFunction
+                                    public final Object apply(Object obj, Object obj2) {
+                                        AppExitInfoTracker appExitInfoTracker =
+                                                AppExitInfoTracker.this;
+                                        int i4 = i;
+                                        ArrayList arrayList3 = arrayList2;
+                                        int i5 = i2;
+                                        appExitInfoTracker.getClass();
+                                        AppExitInfoTracker.AppExitInfoContainer
+                                                appExitInfoContainer =
+                                                        (AppExitInfoTracker.AppExitInfoContainer)
+                                                                ((SparseArray) obj2).get(i4);
+                                        if (appExitInfoContainer != null) {
+                                            appExitInfoTracker.mTmpInfoList.clear();
+                                            ArrayList arrayList4 = appExitInfoTracker.mTmpInfoList;
+                                            if (arrayList4 == null) {
+                                                arrayList4 = new ArrayList();
+                                            }
+                                            for (int size = appExitInfoContainer.mInfos.size() - 1;
+                                                    size >= 0;
+                                                    size--) {
+                                                if (i5 == 0
+                                                        || i5
+                                                                == appExitInfoContainer.mInfos
+                                                                        .keyAt(size)) {
+                                                    arrayList4.add(
+                                                            (ApplicationExitInfo)
+                                                                    appExitInfoContainer.mInfos
+                                                                            .valueAt(size));
+                                                }
+                                            }
+                                            for (int size2 =
+                                                            appExitInfoContainer.mRecoverableCrashes
+                                                                            .size()
+                                                                    - 1;
+                                                    size2 >= 0;
+                                                    size2--) {
+                                                if (i5 == 0
+                                                        || i5
+                                                                == appExitInfoContainer
+                                                                        .mRecoverableCrashes.keyAt(
+                                                                        size2)) {
+                                                    arrayList4.add(
+                                                            (ApplicationExitInfo)
+                                                                    appExitInfoContainer
+                                                                            .mRecoverableCrashes
+                                                                            .valueAt(size2));
+                                                }
+                                            }
+                                            arrayList3.addAll(arrayList4);
                                         }
+                                        return 0;
                                     }
-                                    for (int size2 = appExitInfoContainer.mRecoverableCrashes.size() - 1; size2 >= 0; size2--) {
-                                        if (i5 == 0 || i5 == appExitInfoContainer.mRecoverableCrashes.keyAt(size2)) {
-                                            arrayList4.add((ApplicationExitInfo) appExitInfoContainer.mRecoverableCrashes.valueAt(size2));
-                                        }
-                                    }
-                                    arrayList3.addAll(arrayList4);
-                                }
-                                return 0;
-                            }
-                        });
-                        Collections.sort(arrayList2, new AppExitInfoTracker$$ExternalSyntheticLambda1(0));
+                                });
+                        Collections.sort(
+                                arrayList2, new AppExitInfoTracker$$ExternalSyntheticLambda1(0));
                         int size = arrayList2.size();
                         if (i3 > 0) {
                             size = Math.min(size, i3);
@@ -728,7 +864,8 @@ public final class AppExitInfoTracker {
                         }
                         arrayList2.clear();
                     } else {
-                        AppExitInfoContainer appExitInfoContainer = (AppExitInfoContainer) this.mData.get(str, i);
+                        AppExitInfoContainer appExitInfoContainer =
+                                (AppExitInfoContainer) this.mData.get(str, i);
                         if (appExitInfoContainer != null) {
                             appExitInfoContainer.getExitInfoLocked(i2, i3, arrayList);
                         }
@@ -746,7 +883,8 @@ public final class AppExitInfoTracker {
         ArrayList arrayList = this.mTmpInfoList;
         arrayList.clear();
         getExitInfo(str, i, i2, 1, arrayList);
-        ApplicationExitInfo applicationExitInfo = arrayList.size() > 0 ? (ApplicationExitInfo) arrayList.get(0) : null;
+        ApplicationExitInfo applicationExitInfo =
+                arrayList.size() > 0 ? (ApplicationExitInfo) arrayList.get(0) : null;
         arrayList.clear();
         return applicationExitInfo;
     }
@@ -762,7 +900,8 @@ public final class AppExitInfoTracker {
                 if (indexOfKey < 0) {
                     return null;
                 }
-                return (byte[]) ((SparseArray) this.mActiveAppStateSummary.valueAt(indexOfKey)).get(i2);
+                return (byte[])
+                        ((SparseArray) this.mActiveAppStateSummary.valueAt(indexOfKey)).get(i2);
             } catch (Throwable th) {
                 throw th;
             }
@@ -781,9 +920,11 @@ public final class AppExitInfoTracker {
         }
         File file2 = new File(this.mProcExitStoreDir, file.getName() + ".gz");
         try {
-            BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(file));
+            BufferedInputStream bufferedInputStream =
+                    new BufferedInputStream(new FileInputStream(file));
             try {
-                GZIPOutputStream gZIPOutputStream = new GZIPOutputStream(new BufferedOutputStream(new FileOutputStream(file2)));
+                GZIPOutputStream gZIPOutputStream =
+                        new GZIPOutputStream(new BufferedOutputStream(new FileOutputStream(file2)));
                 try {
                     byte[] bArr = new byte[8192];
                     bufferedInputStream.skip(j);
@@ -799,19 +940,34 @@ public final class AppExitInfoTracker {
                     if (j3 == 0 && file2.exists()) {
                         synchronized (this.mLock) {
                             try {
-                                Integer uidByIsolatedUid = this.mIsolatedUidRecords.getUidByIsolatedUid(i2);
-                                int intValue = uidByIsolatedUid != null ? uidByIsolatedUid.intValue() : i2;
+                                Integer uidByIsolatedUid =
+                                        this.mIsolatedUidRecords.getUidByIsolatedUid(i2);
+                                int intValue =
+                                        uidByIsolatedUid != null ? uidByIsolatedUid.intValue() : i2;
                                 boolean z = true;
                                 for (String str : strArr) {
-                                    AppExitInfoContainer appExitInfoContainer = (AppExitInfoContainer) this.mData.get(str, intValue);
-                                    if (appExitInfoContainer != null && (applicationExitInfo = (ApplicationExitInfo) appExitInfoContainer.mInfos.get(i)) != null) {
+                                    AppExitInfoContainer appExitInfoContainer =
+                                            (AppExitInfoContainer) this.mData.get(str, intValue);
+                                    if (appExitInfoContainer != null
+                                            && (applicationExitInfo =
+                                                            (ApplicationExitInfo)
+                                                                    appExitInfoContainer.mInfos.get(
+                                                                            i))
+                                                    != null) {
                                         applicationExitInfo.setTraceFile(file2);
-                                        applicationExitInfo.setAppTraceRetriever(AppExitInfoTracker.this.mAppTraceRetriever);
+                                        applicationExitInfo.setAppTraceRetriever(
+                                                AppExitInfoTracker.this.mAppTraceRetriever);
                                         z = false;
                                     }
                                 }
                                 if (z) {
-                                    putToSparse2dArray(this.mActiveAppTraces, intValue, i, file2, new AppExitInfoTracker$$ExternalSyntheticLambda7(), new AppExitInfoTracker$$ExternalSyntheticLambda5(1));
+                                    putToSparse2dArray(
+                                            this.mActiveAppTraces,
+                                            intValue,
+                                            i,
+                                            file2,
+                                            new AppExitInfoTracker$$ExternalSyntheticLambda7(),
+                                            new AppExitInfoTracker$$ExternalSyntheticLambda5(1));
                                 }
                             } finally {
                             }
@@ -826,7 +982,11 @@ public final class AppExitInfoTracker {
     }
 
     public void handleNoteAppKillLocked(ApplicationExitInfo applicationExitInfo) {
-        ApplicationExitInfo exitInfoLocked = getExitInfoLocked(applicationExitInfo.getPackageUid(), applicationExitInfo.getPid(), applicationExitInfo.getPackageName());
+        ApplicationExitInfo exitInfoLocked =
+                getExitInfoLocked(
+                        applicationExitInfo.getPackageUid(),
+                        applicationExitInfo.getPid(),
+                        applicationExitInfo.getPackageName());
         final int i = 0;
         if (exitInfoLocked == null) {
             exitInfoLocked = addExitInfoLocked(applicationExitInfo, false);
@@ -852,101 +1012,154 @@ public final class AppExitInfoTracker {
             Slog.d("AppStateBroadcaster", "TMO killProcesses");
             Handler handler = AppStateBroadcaster.mObjHandler;
             if (handler != null) {
-                handler.post(new Runnable() { // from class: com.android.server.am.AppStateBroadcaster$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        boolean z2;
-                        int i2;
-                        boolean z3;
-                        String str = packageName;
-                        int i3 = pid;
-                        int i4 = i;
-                        boolean z4 = AppStateBroadcaster.DEBUG;
-                        if (z4) {
-                            StringBuilder m = StorageManagerService$$ExternalSyntheticOutline0.m(i3, "sendApplicationStop(", str, ", ", ", ");
-                            m.append(i4);
-                            m.append(")");
-                            AppStateBroadcaster.logOriginFunction(m.toString());
-                        }
-                        if (!AppStateBroadcaster.mIsBroadcastEnabled || TextUtils.isEmpty(str) || i4 < 0) {
-                            return;
-                        }
-                        String[] strArr = AppStateBroadcaster.APP_TERM_REASONS;
-                        if (i4 < strArr.length) {
-                            String str2 = "";
-                            String stripPackageName = AppStateBroadcaster.stripPackageName(str);
-                            HashMap hashMap = AppStateBroadcaster.sKnownRunningPackages;
-                            synchronized (hashMap) {
+                handler.post(
+                        new Runnable() { // from class:
+                            // com.android.server.am.AppStateBroadcaster$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                boolean z2;
+                                int i2;
+                                boolean z3;
+                                String str = packageName;
+                                int i3 = pid;
+                                int i4 = i;
+                                boolean z4 = AppStateBroadcaster.DEBUG;
                                 if (z4) {
-                                    try {
-                                        Slog.d("AppStateBroadcaster", "packageStopped for " + str + " with processId=" + i3 + " stopReason=" + i4);
-                                    } catch (Throwable th) {
-                                        throw th;
-                                    }
+                                    StringBuilder m =
+                                            StorageManagerService$$ExternalSyntheticOutline0.m(
+                                                    i3, "sendApplicationStop(", str, ", ", ", ");
+                                    m.append(i4);
+                                    m.append(")");
+                                    AppStateBroadcaster.logOriginFunction(m.toString());
                                 }
-                                ApplicationState applicationState = (ApplicationState) hashMap.get(stripPackageName);
-                                z2 = true;
-                                if (applicationState != null) {
-                                    if (z4) {
-                                        Slog.d("AppStateBroadcaster", "Removing process " + i3 + ", packageName " + str + " from rootPackage " + stripPackageName);
-                                    }
-                                    applicationState.mStopReason = Math.max(i4, applicationState.mStopReason);
-                                    applicationState.mProcessIds.remove(Integer.valueOf(i3));
-                                    if (applicationState.mProcessIds.isEmpty()) {
-                                        if (z4) {
-                                            Slog.d("AppStateBroadcaster", "Removing " + stripPackageName + " from running packages");
-                                        }
-                                        String str3 = AppStateBroadcaster.mLastFocusAppName;
-                                        if (str3 == null || !str.equals(str3)) {
-                                            z3 = false;
-                                        } else {
-                                            AppStateBroadcaster.mLastFocusAppName = null;
-                                            z3 = true;
-                                        }
-                                        hashMap.remove(stripPackageName);
-                                        str2 = strArr[applicationState.mStopReason];
-                                    } else if (i4 < 2) {
-                                        hashMap.remove(stripPackageName);
-                                        str2 = strArr[applicationState.mStopReason];
-                                    } else {
-                                        z3 = false;
-                                        z2 = false;
-                                    }
-                                } else {
-                                    if (z4) {
-                                        Slog.d("AppStateBroadcaster", "packageStopped appState is null; send app exit with stopReason=" + i4);
-                                    }
-                                    hashMap.remove(stripPackageName);
-                                    str2 = strArr[i4];
-                                }
-                                z3 = false;
-                            }
-                            if (z3) {
-                                AppStateBroadcaster.sendApplicationFocusLoss(str);
-                            }
-                            if (z2) {
-                                if (z4) {
-                                    GmsAlarmManager$$ExternalSyntheticOutline0.m(" packageName : ", stripPackageName, " termReason : ", str2, "AppStateBroadcaster");
-                                }
-                                if (AppStateBroadcaster.mContext == null || stripPackageName == null || str2 == null) {
-                                    if (z4) {
-                                        Slog.d("AppStateBroadcaster", "Can't send broadcast mContext is null");
-                                        return;
-                                    }
+                                if (!AppStateBroadcaster.mIsBroadcastEnabled
+                                        || TextUtils.isEmpty(str)
+                                        || i4 < 0) {
                                     return;
                                 }
-                                for (String str4 : AppStateBroadcaster.sPackages) {
-                                    Intent m2 = ExplicitHealthCheckController$$ExternalSyntheticOutline0.m("diagandroid.app.ApplicationState", str4);
-                                    m2.putExtra("ApplicationPackageName", AppStateBroadcaster.stripPackageName(stripPackageName));
-                                    m2.putExtra("ApplicationState", "EXITED");
-                                    m2.putExtra("ApplicationTermReason", str2);
-                                    m2.putExtra("oemIntentTimestamp", System.currentTimeMillis());
-                                    AppStateBroadcaster.mContext.sendBroadcastAsUser(m2, UserHandle.ALL, "diagandroid.app.receiveDetailedApplicationState");
+                                String[] strArr = AppStateBroadcaster.APP_TERM_REASONS;
+                                if (i4 < strArr.length) {
+                                    String str2 = "";
+                                    String stripPackageName =
+                                            AppStateBroadcaster.stripPackageName(str);
+                                    HashMap hashMap = AppStateBroadcaster.sKnownRunningPackages;
+                                    synchronized (hashMap) {
+                                        if (z4) {
+                                            try {
+                                                Slog.d(
+                                                        "AppStateBroadcaster",
+                                                        "packageStopped for "
+                                                                + str
+                                                                + " with processId="
+                                                                + i3
+                                                                + " stopReason="
+                                                                + i4);
+                                            } catch (Throwable th) {
+                                                throw th;
+                                            }
+                                        }
+                                        ApplicationState applicationState =
+                                                (ApplicationState) hashMap.get(stripPackageName);
+                                        z2 = true;
+                                        if (applicationState != null) {
+                                            if (z4) {
+                                                Slog.d(
+                                                        "AppStateBroadcaster",
+                                                        "Removing process "
+                                                                + i3
+                                                                + ", packageName "
+                                                                + str
+                                                                + " from rootPackage "
+                                                                + stripPackageName);
+                                            }
+                                            applicationState.mStopReason =
+                                                    Math.max(i4, applicationState.mStopReason);
+                                            applicationState.mProcessIds.remove(
+                                                    Integer.valueOf(i3));
+                                            if (applicationState.mProcessIds.isEmpty()) {
+                                                if (z4) {
+                                                    Slog.d(
+                                                            "AppStateBroadcaster",
+                                                            "Removing "
+                                                                    + stripPackageName
+                                                                    + " from running packages");
+                                                }
+                                                String str3 = AppStateBroadcaster.mLastFocusAppName;
+                                                if (str3 == null || !str.equals(str3)) {
+                                                    z3 = false;
+                                                } else {
+                                                    AppStateBroadcaster.mLastFocusAppName = null;
+                                                    z3 = true;
+                                                }
+                                                hashMap.remove(stripPackageName);
+                                                str2 = strArr[applicationState.mStopReason];
+                                            } else if (i4 < 2) {
+                                                hashMap.remove(stripPackageName);
+                                                str2 = strArr[applicationState.mStopReason];
+                                            } else {
+                                                z3 = false;
+                                                z2 = false;
+                                            }
+                                        } else {
+                                            if (z4) {
+                                                Slog.d(
+                                                        "AppStateBroadcaster",
+                                                        "packageStopped appState is null; send app"
+                                                            + " exit with stopReason="
+                                                                + i4);
+                                            }
+                                            hashMap.remove(stripPackageName);
+                                            str2 = strArr[i4];
+                                        }
+                                        z3 = false;
+                                    }
+                                    if (z3) {
+                                        AppStateBroadcaster.sendApplicationFocusLoss(str);
+                                    }
+                                    if (z2) {
+                                        if (z4) {
+                                            GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                                                    " packageName : ",
+                                                    stripPackageName,
+                                                    " termReason : ",
+                                                    str2,
+                                                    "AppStateBroadcaster");
+                                        }
+                                        if (AppStateBroadcaster.mContext == null
+                                                || stripPackageName == null
+                                                || str2 == null) {
+                                            if (z4) {
+                                                Slog.d(
+                                                        "AppStateBroadcaster",
+                                                        "Can't send broadcast mContext is null");
+                                                return;
+                                            }
+                                            return;
+                                        }
+                                        for (String str4 : AppStateBroadcaster.sPackages) {
+                                            Intent m2 =
+                                                    ExplicitHealthCheckController$$ExternalSyntheticOutline0
+                                                            .m(
+                                                                    "diagandroid.app.ApplicationState",
+                                                                    str4);
+                                            m2.putExtra(
+                                                    "ApplicationPackageName",
+                                                    AppStateBroadcaster.stripPackageName(
+                                                            stripPackageName));
+                                            m2.putExtra("ApplicationState", "EXITED");
+                                            m2.putExtra("ApplicationTermReason", str2);
+                                            m2.putExtra(
+                                                    "oemIntentTimestamp",
+                                                    System.currentTimeMillis());
+                                            AppStateBroadcaster.mContext.sendBroadcastAsUser(
+                                                    m2,
+                                                    UserHandle.ALL,
+                                                    "diagandroid.app.receiveDetailedApplicationState");
+                                        }
+                                    }
                                 }
                             }
-                        }
-                    }
-                });
+                        });
             }
         }
         scheduleLogToStatsdLocked(exitInfoLocked, true);
@@ -959,15 +1172,30 @@ public final class AppExitInfoTracker {
     public void handleNoteProcessDiedLocked(ApplicationExitInfo applicationExitInfo) {
         int intValue;
         if (applicationExitInfo != null) {
-            ApplicationExitInfo exitInfoLocked = getExitInfoLocked(applicationExitInfo.getPackageUid(), applicationExitInfo.getPid(), applicationExitInfo.getPackageName());
-            Pair remove = this.mAppExitInfoSourceZygote.remove(applicationExitInfo.getPid(), applicationExitInfo.getRealUid());
-            Pair remove2 = this.mAppExitInfoSourceLmkd.remove(applicationExitInfo.getPid(), applicationExitInfo.getRealUid());
+            ApplicationExitInfo exitInfoLocked =
+                    getExitInfoLocked(
+                            applicationExitInfo.getPackageUid(),
+                            applicationExitInfo.getPid(),
+                            applicationExitInfo.getPackageName());
+            Pair remove =
+                    this.mAppExitInfoSourceZygote.remove(
+                            applicationExitInfo.getPid(), applicationExitInfo.getRealUid());
+            Pair remove2 =
+                    this.mAppExitInfoSourceLmkd.remove(
+                            applicationExitInfo.getPid(), applicationExitInfo.getRealUid());
             int realUid = applicationExitInfo.getRealUid();
             IsolatedUidRecords isolatedUidRecords = this.mIsolatedUidRecords;
             isolatedUidRecords.getClass();
-            if (UserHandle.isIsolated(realUid) && (intValue = ((Integer) isolatedUidRecords.mIsolatedUidToUidMap.get(realUid, -1)).intValue()) != -1) {
+            if (UserHandle.isIsolated(realUid)
+                    && (intValue =
+                                    ((Integer)
+                                                    isolatedUidRecords.mIsolatedUidToUidMap.get(
+                                                            realUid, -1))
+                                            .intValue())
+                            != -1) {
                 isolatedUidRecords.mIsolatedUidToUidMap.remove(realUid);
-                ArraySet arraySet = (ArraySet) isolatedUidRecords.mUidToIsolatedUidMap.get(intValue);
+                ArraySet arraySet =
+                        (ArraySet) isolatedUidRecords.mUidToIsolatedUidMap.get(intValue);
                 if (arraySet != null) {
                     arraySet.remove(Integer.valueOf(realUid));
                 }
@@ -990,17 +1218,17 @@ public final class AppExitInfoTracker {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:32:0x004d, code lost:
-    
-        if (r0 != null) goto L56;
-     */
+
+       if (r0 != null) goto L56;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:44:0x004f, code lost:
-    
-        r0.close();
-     */
+
+       r0.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:58:0x0069, code lost:
-    
-        if (r0 == null) goto L35;
-     */
+
+       if (r0 == null) goto L35;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1089,7 +1317,9 @@ public final class AppExitInfoTracker {
         L81:
             throw r6
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.AppExitInfoTracker.loadExistingProcessExitInfo():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.AppExitInfoTracker.loadExistingProcessExitInfo():void");
     }
 
     public final void loadPackagesFromProto(ProtoInputStream protoInputStream, long j) {
@@ -1102,7 +1332,8 @@ public final class AppExitInfoTracker {
             } else if (nextField != 2) {
                 continue;
             } else {
-                AppExitInfoContainer appExitInfoContainer = new AppExitInfoContainer(this.mAppExitInfoHistoryListSize);
+                AppExitInfoContainer appExitInfoContainer =
+                        new AppExitInfoContainer(this.mAppExitInfoHistoryListSize);
                 long start2 = protoInputStream.start(2246267895810L);
                 int nextField2 = protoInputStream.nextField();
                 while (nextField2 != -1) {
@@ -1111,11 +1342,13 @@ public final class AppExitInfoTracker {
                     } else if (nextField2 == 2) {
                         ApplicationExitInfo applicationExitInfo = new ApplicationExitInfo();
                         applicationExitInfo.readFromProto(protoInputStream, 2246267895810L);
-                        appExitInfoContainer.mInfos.put(applicationExitInfo.getPid(), applicationExitInfo);
+                        appExitInfoContainer.mInfos.put(
+                                applicationExitInfo.getPid(), applicationExitInfo);
                     } else if (nextField2 == 3) {
                         ApplicationExitInfo applicationExitInfo2 = new ApplicationExitInfo();
                         applicationExitInfo2.readFromProto(protoInputStream, 2246267895811L);
-                        appExitInfoContainer.mRecoverableCrashes.put(applicationExitInfo2.getPid(), applicationExitInfo2);
+                        appExitInfoContainer.mRecoverableCrashes.put(
+                                applicationExitInfo2.getPid(), applicationExitInfo2);
                     }
                     nextField2 = protoInputStream.nextField();
                 }
@@ -1131,7 +1364,8 @@ public final class AppExitInfoTracker {
     }
 
     public ApplicationExitInfo obtainRawRecord(ProcessRecord processRecord, long j) {
-        ApplicationExitInfo applicationExitInfo = (ApplicationExitInfo) this.mRawRecordsPool.acquire();
+        ApplicationExitInfo applicationExitInfo =
+                (ApplicationExitInfo) this.mRawRecordsPool.acquire();
         if (applicationExitInfo == null) {
             applicationExitInfo = new ApplicationExitInfo();
         }
@@ -1139,7 +1373,10 @@ public final class AppExitInfoTracker {
         ActivityManagerService.boostPriorityForProcLockedSection();
         synchronized (activityManagerProcLock) {
             try {
-                int i = processRecord.mHostingRecord != null ? processRecord.mHostingRecord.mDefiningUid : 0;
+                int i =
+                        processRecord.mHostingRecord != null
+                                ? processRecord.mHostingRecord.mDefiningUid
+                                : 0;
                 applicationExitInfo.setPid(processRecord.mPid);
                 applicationExitInfo.setRealUid(processRecord.uid);
                 applicationExitInfo.setPackageUid(processRecord.info.uid);
@@ -1154,11 +1391,14 @@ public final class AppExitInfoTracker {
                 applicationExitInfo.setReason(0);
                 applicationExitInfo.setSubReason(0);
                 applicationExitInfo.setStatus(0);
-                applicationExitInfo.setImportance(ActivityManager.RunningAppProcessInfo.procStateToImportance(processRecord.mState.mRepProcState));
+                applicationExitInfo.setImportance(
+                        ActivityManager.RunningAppProcessInfo.procStateToImportance(
+                                processRecord.mState.mRepProcState));
                 applicationExitInfo.setPss(processRecord.mProfile.mLastPss);
                 applicationExitInfo.setRss(processRecord.mProfile.mLastRss);
                 applicationExitInfo.setTimestamp(j);
-                applicationExitInfo.setHasForegroundServices(processRecord.mServices.mRepHasForegroundServices);
+                applicationExitInfo.setHasForegroundServices(
+                        processRecord.mServices.mRepHasForegroundServices);
             } catch (Throwable th) {
                 ActivityManagerService.resetPriorityAfterProcLockedSection();
                 throw th;
@@ -1190,16 +1430,21 @@ public final class AppExitInfoTracker {
         this.mAppExitInfoSourceZygote.removeByUserId(i);
         this.mAppExitInfoSourceLmkd.removeByUserId(i);
         IsolatedUidRecords isolatedUidRecords = this.mIsolatedUidRecords;
-        int currentUserId = i == -2 ? AppExitInfoTracker.this.mService.mUserController.getCurrentUserId() : i;
+        int currentUserId =
+                i == -2 ? AppExitInfoTracker.this.mService.mUserController.getCurrentUserId() : i;
         synchronized (AppExitInfoTracker.this.mLock) {
             try {
                 if (currentUserId == -1) {
                     isolatedUidRecords.mIsolatedUidToUidMap.clear();
                     isolatedUidRecords.mUidToIsolatedUidMap.clear();
                 } else {
-                    for (int size = isolatedUidRecords.mIsolatedUidToUidMap.size() - 1; size >= 0; size--) {
+                    for (int size = isolatedUidRecords.mIsolatedUidToUidMap.size() - 1;
+                            size >= 0;
+                            size--) {
                         isolatedUidRecords.mIsolatedUidToUidMap.keyAt(size);
-                        int intValue = ((Integer) isolatedUidRecords.mIsolatedUidToUidMap.valueAt(size)).intValue();
+                        int intValue =
+                                ((Integer) isolatedUidRecords.mIsolatedUidToUidMap.valueAt(size))
+                                        .intValue();
                         if (UserHandle.getUserId(intValue) == currentUserId) {
                             isolatedUidRecords.mIsolatedUidToUidMap.removeAt(size);
                             isolatedUidRecords.mUidToIsolatedUidMap.remove(intValue);
@@ -1274,23 +1519,28 @@ public final class AppExitInfoTracker {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> L57
             throw r9
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.AppExitInfoTracker.persistProcessExitInfo():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.AppExitInfoTracker.persistProcessExitInfo():void");
     }
 
     public final void pruneAnrTracesIfNecessaryLocked() {
         final ArraySet arraySet = new ArraySet();
-        if (ArrayUtils.isEmpty(this.mProcExitStoreDir.listFiles(new FileFilter() { // from class: com.android.server.am.AppExitInfoTracker$$ExternalSyntheticLambda9
-            @Override // java.io.FileFilter
-            public final boolean accept(File file) {
-                ArraySet arraySet2 = arraySet;
-                String name = file.getName();
-                boolean z = name.startsWith("anr_") && name.endsWith(".gz");
-                if (z) {
-                    arraySet2.add(name);
-                }
-                return z;
-            }
-        }))) {
+        if (ArrayUtils.isEmpty(
+                this.mProcExitStoreDir.listFiles(
+                        new FileFilter() { // from class:
+                                           // com.android.server.am.AppExitInfoTracker$$ExternalSyntheticLambda9
+                            @Override // java.io.FileFilter
+                            public final boolean accept(File file) {
+                                ArraySet arraySet2 = arraySet;
+                                String name = file.getName();
+                                boolean z = name.startsWith("anr_") && name.endsWith(".gz");
+                                if (z) {
+                                    arraySet2.add(name);
+                                }
+                                return z;
+                            }
+                        }))) {
             return;
         }
         forEachPackageLocked(new AppExitInfoTracker$$ExternalSyntheticLambda8(1, arraySet));
@@ -1324,67 +1574,77 @@ public final class AppExitInfoTracker {
             return;
         }
         final int i2 = 0;
-        removeFromSparse2dArray(this.mActiveAppStateSummary, new Predicate() { // from class: com.android.server.am.AppExitInfoTracker$$ExternalSyntheticLambda3
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                int i3 = i2;
-                int i4 = i;
-                Integer num = (Integer) obj;
-                switch (i3) {
-                    case 0:
-                        if (UserHandle.getUserId(num.intValue()) == i4) {
+        removeFromSparse2dArray(
+                this.mActiveAppStateSummary,
+                new Predicate() { // from class:
+                                  // com.android.server.am.AppExitInfoTracker$$ExternalSyntheticLambda3
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        int i3 = i2;
+                        int i4 = i;
+                        Integer num = (Integer) obj;
+                        switch (i3) {
+                            case 0:
+                                if (UserHandle.getUserId(num.intValue()) == i4) {}
+                                break;
+                            default:
+                                if (UserHandle.getUserId(num.intValue()) == i4) {}
+                                break;
                         }
-                        break;
-                    default:
-                        if (UserHandle.getUserId(num.intValue()) == i4) {
-                        }
-                        break;
-                }
-                return false;
-            }
-        }, null);
+                        return false;
+                    }
+                },
+                null);
         final int i3 = 1;
-        removeFromSparse2dArray(this.mActiveAppTraces, new Predicate() { // from class: com.android.server.am.AppExitInfoTracker$$ExternalSyntheticLambda3
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                int i32 = i3;
-                int i4 = i;
-                Integer num = (Integer) obj;
-                switch (i32) {
-                    case 0:
-                        if (UserHandle.getUserId(num.intValue()) == i4) {
+        removeFromSparse2dArray(
+                this.mActiveAppTraces,
+                new Predicate() { // from class:
+                                  // com.android.server.am.AppExitInfoTracker$$ExternalSyntheticLambda3
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        int i32 = i3;
+                        int i4 = i;
+                        Integer num = (Integer) obj;
+                        switch (i32) {
+                            case 0:
+                                if (UserHandle.getUserId(num.intValue()) == i4) {}
+                                break;
+                            default:
+                                if (UserHandle.getUserId(num.intValue()) == i4) {}
+                                break;
                         }
-                        break;
-                    default:
-                        if (UserHandle.getUserId(num.intValue()) == i4) {
+                        return false;
+                    }
+                },
+                new AppExitInfoTracker$$ExternalSyntheticLambda5(0));
+        forEachPackageLocked(
+                new BiFunction() { // from class:
+                                   // com.android.server.am.AppExitInfoTracker$$ExternalSyntheticLambda6
+                    @Override // java.util.function.BiFunction
+                    public final Object apply(Object obj, Object obj2) {
+                        int i4 = i;
+                        SparseArray sparseArray = (SparseArray) obj2;
+                        int size = sparseArray.size() - 1;
+                        while (true) {
+                            if (size < 0) {
+                                break;
+                            }
+                            if (UserHandle.getUserId(sparseArray.keyAt(size)) == i4) {
+                                AppExitInfoTracker.AppExitInfoContainer appExitInfoContainer =
+                                        (AppExitInfoTracker.AppExitInfoContainer)
+                                                sparseArray.valueAt(size);
+                                AppExitInfoTracker.AppExitInfoContainer.destroyLocked(
+                                        appExitInfoContainer.mInfos);
+                                AppExitInfoTracker.AppExitInfoContainer.destroyLocked(
+                                        appExitInfoContainer.mRecoverableCrashes);
+                                sparseArray.removeAt(size);
+                                break;
+                            }
+                            size--;
                         }
-                        break;
-                }
-                return false;
-            }
-        }, new AppExitInfoTracker$$ExternalSyntheticLambda5(0));
-        forEachPackageLocked(new BiFunction() { // from class: com.android.server.am.AppExitInfoTracker$$ExternalSyntheticLambda6
-            @Override // java.util.function.BiFunction
-            public final Object apply(Object obj, Object obj2) {
-                int i4 = i;
-                SparseArray sparseArray = (SparseArray) obj2;
-                int size = sparseArray.size() - 1;
-                while (true) {
-                    if (size < 0) {
-                        break;
+                        return Integer.valueOf(sparseArray.size() != 0 ? 0 : 1);
                     }
-                    if (UserHandle.getUserId(sparseArray.keyAt(size)) == i4) {
-                        AppExitInfoTracker.AppExitInfoContainer appExitInfoContainer = (AppExitInfoTracker.AppExitInfoContainer) sparseArray.valueAt(size);
-                        AppExitInfoTracker.AppExitInfoContainer.destroyLocked(appExitInfoContainer.mInfos);
-                        AppExitInfoTracker.AppExitInfoContainer.destroyLocked(appExitInfoContainer.mRecoverableCrashes);
-                        sparseArray.removeAt(size);
-                        break;
-                    }
-                    size--;
-                }
-                return Integer.valueOf(sparseArray.size() != 0 ? 0 : 1);
-            }
-        });
+                });
     }
 
     public final void removePackageLocked(int i, int i2, String str, boolean z) {
@@ -1406,7 +1666,8 @@ public final class AppExitInfoTracker {
         }
         if (i2 == -1) {
             for (int size2 = sparseArray2.size() - 1; size2 >= 0; size2--) {
-                AppExitInfoContainer appExitInfoContainer = (AppExitInfoContainer) sparseArray2.valueAt(size2);
+                AppExitInfoContainer appExitInfoContainer =
+                        (AppExitInfoContainer) sparseArray2.valueAt(size2);
                 AppExitInfoContainer.destroyLocked(appExitInfoContainer.mInfos);
                 AppExitInfoContainer.destroyLocked(appExitInfoContainer.mRecoverableCrashes);
             }
@@ -1419,7 +1680,8 @@ public final class AppExitInfoTracker {
                 break;
             }
             if (UserHandle.getUserId(sparseArray2.keyAt(size3)) == i2) {
-                AppExitInfoContainer appExitInfoContainer2 = (AppExitInfoContainer) sparseArray2.valueAt(size3);
+                AppExitInfoContainer appExitInfoContainer2 =
+                        (AppExitInfoContainer) sparseArray2.valueAt(size3);
                 AppExitInfoContainer.destroyLocked(appExitInfoContainer2.mInfos);
                 AppExitInfoContainer.destroyLocked(appExitInfoContainer2.mRecoverableCrashes);
                 sparseArray2.removeAt(size3);
@@ -1432,7 +1694,8 @@ public final class AppExitInfoTracker {
         }
     }
 
-    public final void scheduleLogToStatsdLocked(ApplicationExitInfo applicationExitInfo, boolean z) {
+    public final void scheduleLogToStatsdLocked(
+            ApplicationExitInfo applicationExitInfo, boolean z) {
         if (applicationExitInfo.isLoggedInStatsd()) {
             return;
         }
@@ -1444,7 +1707,9 @@ public final class AppExitInfoTracker {
                 return;
             }
             KillHandler killHandler = this.mKillHandler;
-            killHandler.sendMessageDelayed(killHandler.obtainMessage(4105, applicationExitInfo), APP_EXIT_INFO_STATSD_LOG_DEBOUNCE);
+            killHandler.sendMessageDelayed(
+                    killHandler.obtainMessage(4105, applicationExitInfo),
+                    APP_EXIT_INFO_STATSD_LOG_DEBOUNCE);
         }
     }
 
@@ -1452,7 +1717,8 @@ public final class AppExitInfoTracker {
         if (!this.mAppExitInfoLoaded.get() || processRecord == null || processRecord.info == null) {
             return;
         }
-        ApplicationExitInfo obtainRawRecord = obtainRawRecord(processRecord, System.currentTimeMillis());
+        ApplicationExitInfo obtainRawRecord =
+                obtainRawRecord(processRecord, System.currentTimeMillis());
         obtainRawRecord.setReason(i);
         obtainRawRecord.setSubReason(i2);
         obtainRawRecord.setDescription(str);
@@ -1462,13 +1728,18 @@ public final class AppExitInfoTracker {
     public void schedulePersistProcessExitInfo(boolean z) {
         synchronized (this.mLock) {
             try {
-                AppExitInfoTracker$$ExternalSyntheticLambda2 appExitInfoTracker$$ExternalSyntheticLambda2 = this.mAppExitInfoPersistTask;
+                AppExitInfoTracker$$ExternalSyntheticLambda2
+                        appExitInfoTracker$$ExternalSyntheticLambda2 = this.mAppExitInfoPersistTask;
                 if (appExitInfoTracker$$ExternalSyntheticLambda2 == null || z) {
                     if (appExitInfoTracker$$ExternalSyntheticLambda2 != null) {
                         IoThread.getHandler().removeCallbacks(this.mAppExitInfoPersistTask);
                     }
-                    this.mAppExitInfoPersistTask = new AppExitInfoTracker$$ExternalSyntheticLambda2(this, 0);
-                    IoThread.getHandler().postDelayed(this.mAppExitInfoPersistTask, z ? 0L : APP_EXIT_INFO_PERSIST_INTERVAL);
+                    this.mAppExitInfoPersistTask =
+                            new AppExitInfoTracker$$ExternalSyntheticLambda2(this, 0);
+                    IoThread.getHandler()
+                            .postDelayed(
+                                    this.mAppExitInfoPersistTask,
+                                    z ? 0L : APP_EXIT_INFO_PERSIST_INTERVAL);
                 }
             } catch (Throwable th) {
                 throw th;
@@ -1483,7 +1754,13 @@ public final class AppExitInfoTracker {
                 if (uidByIsolatedUid != null) {
                     i = uidByIsolatedUid.intValue();
                 }
-                putToSparse2dArray(this.mActiveAppStateSummary, i, i2, bArr, new AppExitInfoTracker$$ExternalSyntheticLambda7(), null);
+                putToSparse2dArray(
+                        this.mActiveAppStateSummary,
+                        i,
+                        i2,
+                        bArr,
+                        new AppExitInfoTracker$$ExternalSyntheticLambda7(),
+                        null);
             } catch (Throwable th) {
                 throw th;
             }
@@ -1491,15 +1768,16 @@ public final class AppExitInfoTracker {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:12:0x006c, code lost:
-    
-        if (r6.intValue() == 3) goto L26;
-     */
+
+       if (r6.intValue() == 3) goto L26;
+    */
     /* JADX WARN: Removed duplicated region for block: B:11:0x0060  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateExistingExitInfoRecordLocked(android.app.ApplicationExitInfo r4, java.lang.Integer r5, java.lang.Integer r6) {
+    public final void updateExistingExitInfoRecordLocked(
+            android.app.ApplicationExitInfo r4, java.lang.Integer r5, java.lang.Integer r6) {
         /*
             r3 = this;
             if (r4 == 0) goto L73
@@ -1557,6 +1835,9 @@ public final class AppExitInfoTracker {
         L73:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.AppExitInfoTracker.updateExistingExitInfoRecordLocked(android.app.ApplicationExitInfo, java.lang.Integer, java.lang.Integer):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.AppExitInfoTracker.updateExistingExitInfoRecordLocked(android.app.ApplicationExitInfo,"
+                    + " java.lang.Integer, java.lang.Integer):void");
     }
 }

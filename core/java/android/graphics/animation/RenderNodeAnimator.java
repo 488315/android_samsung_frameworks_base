@@ -10,7 +10,9 @@ import android.graphics.RenderNode;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.Choreographer;
+
 import com.android.internal.util.VirtualRefBasePtr;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -110,7 +112,9 @@ public class RenderNodeAnimator extends Animator {
         this.mUnscaledDuration = 300L;
         this.mUnscaledStartDelay = 0L;
         this.mStartDelay = 0L;
-        init(nCreateCanvasPropertyPaintAnimator(property.getNativeContainer(), paintField, finalValue));
+        init(
+                nCreateCanvasPropertyPaintAnimator(
+                        property.getNativeContainer(), paintField, finalValue));
         this.mUiThreadHandlesDelay = false;
     }
 
@@ -133,7 +137,9 @@ public class RenderNodeAnimator extends Animator {
             throw new IllegalStateException("Animator has already started, cannot change it now!");
         }
         if (this.mNativePtr == null) {
-            throw new IllegalStateException("Animator's target has been destroyed (trying to modify an animation after activity destroy?)");
+            throw new IllegalStateException(
+                    "Animator's target has been destroyed (trying to modify an animation after"
+                            + " activity destroy?)");
         }
     }
 
@@ -150,7 +156,8 @@ public class RenderNodeAnimator extends Animator {
             duration = ((NativeInterpolator) this.mInterpolator).createNativeInterpolator();
         } else {
             long duration2 = nGetDuration(this.mNativePtr.get());
-            duration = FallbackLUTInterpolator.createNativeInterpolator(this.mInterpolator, duration2);
+            duration =
+                    FallbackLUTInterpolator.createNativeInterpolator(this.mInterpolator, duration2);
         }
         nSetInterpolator(this.mNativePtr.get(), duration);
     }
@@ -394,8 +401,7 @@ public class RenderNodeAnimator extends Animator {
         private ArrayList<RenderNodeAnimator> mDelayedAnims = new ArrayList<>();
         private final Choreographer mChoreographer = Choreographer.getInstance();
 
-        DelayedAnimationHelper() {
-        }
+        DelayedAnimationHelper() {}
 
         public void addDelayedAnimation(RenderNodeAnimator animator) {
             this.mDelayedAnims.add(animator);
@@ -440,21 +446,25 @@ public class RenderNodeAnimator extends Animator {
         if (animator.mHandler != null) {
             Handler handler = animator.mHandler;
             Objects.requireNonNull(animator);
-            handler.post(new Runnable() { // from class: android.graphics.animation.RenderNodeAnimator$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    RenderNodeAnimator.this.onFinished();
-                }
-            });
+            handler.post(
+                    new Runnable() { // from class:
+                        // android.graphics.animation.RenderNodeAnimator$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            RenderNodeAnimator.this.onFinished();
+                        }
+                    });
         } else {
             Handler handler2 = new Handler(Looper.getMainLooper(), null, true);
             Objects.requireNonNull(animator);
-            handler2.post(new Runnable() { // from class: android.graphics.animation.RenderNodeAnimator$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    RenderNodeAnimator.this.onFinished();
-                }
-            });
+            handler2.post(
+                    new Runnable() { // from class:
+                        // android.graphics.animation.RenderNodeAnimator$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            RenderNodeAnimator.this.onFinished();
+                        }
+                    });
         }
     }
 

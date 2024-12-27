@@ -27,7 +27,8 @@ public final class SecureKeyInfo implements Parcelable {
                 if (parcel.dataPosition() - dataPosition < readInt) {
                     secureKeyInfo.blob = parcel.createByteArray();
                     if (parcel.dataPosition() - dataPosition < readInt) {
-                        secureKeyInfo.attestedCertificates = (Certificate[]) parcel.createTypedArray(Certificate.CREATOR);
+                        secureKeyInfo.attestedCertificates =
+                                (Certificate[]) parcel.createTypedArray(Certificate.CREATOR);
                         if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
                         }

@@ -130,10 +130,12 @@ public class SemHapticFeedbackConstants {
     private static final int INTERNAL_INDEX_END = 50151;
     public static final int INTERNAL_INDEX_OFFSET = 50024;
     private static final int INTERNAL_INDEX_START = 50025;
-    private static final String NOTIFICATION_PATH = "content://com.android.settings.personalvibration.PersonalVibrationProvider/notification";
+    private static final String NOTIFICATION_PATH =
+            "content://com.android.settings.personalvibration.PersonalVibrationProvider/notification";
     private static final int RESOURCE_INDEX_END = 52024;
     private static final int RESOURCE_INDEX_START = 51024;
-    private static final String RINGTONE_PATH = "content://com.android.settings.personalvibration.PersonalVibrationProvider/registerinfo";
+    private static final String RINGTONE_PATH =
+            "content://com.android.settings.personalvibration.PersonalVibrationProvider/registerinfo";
     public static final int SYSTEM_BUZZ_SHORT = 50027;
     public static final int SYSTEM_SCREEN_CAPTURE = 50028;
     public static final int SYSTEM_SUCCESS = 50030;
@@ -141,7 +143,10 @@ public class SemHapticFeedbackConstants {
     public static final int SYSTEM_WARNING = 50031;
 
     public static boolean isValidatedVibeIndex(int index) {
-        if (isRamIndexValid(index) || isResourceIndexValid(index) || isHybridIndexValid(index) || isCustomIndexValid(index)) {
+        if (isRamIndexValid(index)
+                || isResourceIndexValid(index)
+                || isHybridIndexValid(index)
+                || isCustomIndexValid(index)) {
             return true;
         }
         return false;

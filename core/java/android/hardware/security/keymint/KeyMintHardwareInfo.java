@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class KeyMintHardwareInfo implements Parcelable {
-    public static final Parcelable.Creator<KeyMintHardwareInfo> CREATOR = new Parcelable.Creator<KeyMintHardwareInfo>() { // from class: android.hardware.security.keymint.KeyMintHardwareInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyMintHardwareInfo createFromParcel(Parcel _aidl_source) {
-            KeyMintHardwareInfo _aidl_out = new KeyMintHardwareInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<KeyMintHardwareInfo> CREATOR =
+            new Parcelable.Creator<KeyMintHardwareInfo>() { // from class:
+                // android.hardware.security.keymint.KeyMintHardwareInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyMintHardwareInfo createFromParcel(Parcel _aidl_source) {
+                    KeyMintHardwareInfo _aidl_out = new KeyMintHardwareInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeyMintHardwareInfo[] newArray(int _aidl_size) {
-            return new KeyMintHardwareInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeyMintHardwareInfo[] newArray(int _aidl_size) {
+                    return new KeyMintHardwareInfo[_aidl_size];
+                }
+            };
     public String keyMintAuthorName;
     public String keyMintName;
     public int versionNumber = 0;

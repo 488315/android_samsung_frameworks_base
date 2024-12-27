@@ -4,11 +4,12 @@ import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import com.samsung.android.authenticator.SemTrustedApplicationExecutor;
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
+
 import vendor.samsung.hardware.authfw.ISehAuthenticationFramework;
 import vendor.samsung.hardware.authfw.SehResult;
+
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 
 /* loaded from: classes5.dex */
 final class AidlHalService implements XidlHalService, IBinder.DeathRecipient {
@@ -17,14 +18,18 @@ final class AidlHalService implements XidlHalService, IBinder.DeathRecipient {
 
     @Override // com.samsung.android.authenticator.XidlHalService
     public boolean isAvailable() {
-        String[] instances = ServiceManager.getDeclaredInstances(ISehAuthenticationFramework.DESCRIPTOR);
+        String[] instances =
+                ServiceManager.getDeclaredInstances(ISehAuthenticationFramework.DESCRIPTOR);
         return instances != null && instances.length > 0;
     }
 
     private synchronized ISehAuthenticationFramework getService() {
         if (this.mService == null) {
             try {
-                this.mService = ISehAuthenticationFramework.Stub.asInterface(ServiceManager.waitForDeclaredService(ISehAuthenticationFramework.DESCRIPTOR + "/default"));
+                this.mService =
+                        ISehAuthenticationFramework.Stub.asInterface(
+                                ServiceManager.waitForDeclaredService(
+                                        ISehAuthenticationFramework.DESCRIPTOR + "/default"));
                 if (this.mService != null) {
                     this.mService.asBinder().linkToDeath(this, 0);
                 }
@@ -43,12 +48,20 @@ final class AidlHalService implements XidlHalService, IBinder.DeathRecipient {
     }
 
     @Override // com.samsung.android.authenticator.XidlHalService
-    public boolean load(SemTrustedApplicationExecutor.TrustedAppType type, ParcelFileDescriptor fd, long offset, long len) {
+    public boolean load(
+            SemTrustedApplicationExecutor.TrustedAppType type,
+            ParcelFileDescriptor fd,
+            long offset,
+            long len) {
         return load(translateTaType(type), fd, offset, len);
     }
 
     @Override // com.samsung.android.authenticator.XidlHalService
-    public boolean load(SemTrustedApplicationExecutor.TrustedAppAssetType type, ParcelFileDescriptor fd, long offset, long len) {
+    public boolean load(
+            SemTrustedApplicationExecutor.TrustedAppAssetType type,
+            ParcelFileDescriptor fd,
+            long offset,
+            long len) {
         return load(translateTaType(type), fd, offset, len);
     }
 
@@ -58,7 +71,8 @@ final class AidlHalService implements XidlHalService, IBinder.DeathRecipient {
             AuthenticatorLog.e(TAG, "type can not be 0");
             return false;
         }
-        ISehAuthenticationFramework service = (ISehAuthenticationFramework) checkNotNullState(getService());
+        ISehAuthenticationFramework service =
+                (ISehAuthenticationFramework) checkNotNullState(getService());
         byte[] contents = new byte[0];
         if (fd != null) {
             try {
@@ -147,7 +161,8 @@ final class AidlHalService implements XidlHalService, IBinder.DeathRecipient {
             AuthenticatorLog.e(TAG, "type can not be 0");
             return false;
         }
-        ISehAuthenticationFramework service = (ISehAuthenticationFramework) checkNotNullState(getService());
+        ISehAuthenticationFramework service =
+                (ISehAuthenticationFramework) checkNotNullState(getService());
         try {
             boolean ret = service.terminate(type);
             if (!ret) {
@@ -177,11 +192,17 @@ final class AidlHalService implements XidlHalService, IBinder.DeathRecipient {
             AuthenticatorLog.e(TAG, "type can not be 0");
             return null;
         }
-        ISehAuthenticationFramework service = (ISehAuthenticationFramework) checkNotNullState(getService());
+        ISehAuthenticationFramework service =
+                (ISehAuthenticationFramework) checkNotNullState(getService());
         byte[] resultByte = null;
         try {
             SehResult sehResult = service.execute(type, command);
-            AuthenticatorLog.i(TAG, "ret: " + sehResult.status + ", " + (sehResult.data == null ? -1 : sehResult.data.length));
+            AuthenticatorLog.i(
+                    TAG,
+                    "ret: "
+                            + sehResult.status
+                            + ", "
+                            + (sehResult.data == null ? -1 : sehResult.data.length));
             if (sehResult.data == null || sehResult.data.length <= 0) {
                 return null;
             }

@@ -5,26 +5,37 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.security.AppUriAuthenticationPolicy;
 import android.security.KeyChain;
+
 import com.android.internal.util.FunctionalUtils;
 import com.android.server.utils.Slogf;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class DevicePolicyManagerService$$ExternalSyntheticLambda10 implements FunctionalUtils.ThrowingSupplier {
+public final /* synthetic */ class DevicePolicyManagerService$$ExternalSyntheticLambda10
+        implements FunctionalUtils.ThrowingSupplier {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ DevicePolicyManagerService f$0;
     public final /* synthetic */ CallerIdentity f$1;
     public final /* synthetic */ String f$2;
 
-    public /* synthetic */ DevicePolicyManagerService$$ExternalSyntheticLambda10(DevicePolicyManagerService devicePolicyManagerService, CallerIdentity callerIdentity, String str, int i) {
+    public /* synthetic */ DevicePolicyManagerService$$ExternalSyntheticLambda10(
+            DevicePolicyManagerService devicePolicyManagerService,
+            CallerIdentity callerIdentity,
+            String str,
+            int i) {
         this.$r8$classId = i;
         this.f$0 = devicePolicyManagerService;
         this.f$1 = callerIdentity;
         this.f$2 = str;
     }
 
-    public /* synthetic */ DevicePolicyManagerService$$ExternalSyntheticLambda10(DevicePolicyManagerService devicePolicyManagerService, String str, CallerIdentity callerIdentity, int i) {
+    public /* synthetic */ DevicePolicyManagerService$$ExternalSyntheticLambda10(
+            DevicePolicyManagerService devicePolicyManagerService,
+            String str,
+            CallerIdentity callerIdentity,
+            int i) {
         this.$r8$classId = i;
         this.f$0 = devicePolicyManagerService;
         this.f$2 = str;
@@ -41,7 +52,10 @@ public final /* synthetic */ class DevicePolicyManagerService$$ExternalSynthetic
                 String str = this.f$2;
                 devicePolicyManagerService.getClass();
                 try {
-                    bindAsUser = KeyChain.bindAsUser(devicePolicyManagerService.mContext, UserHandle.getUserHandleForUid(callerIdentity.mUid));
+                    bindAsUser =
+                            KeyChain.bindAsUser(
+                                    devicePolicyManagerService.mContext,
+                                    UserHandle.getUserHandleForUid(callerIdentity.mUid));
                     try {
                         new ArrayList();
                         int[] grants = bindAsUser.getService().getGrants(str);
@@ -77,10 +91,25 @@ public final /* synthetic */ class DevicePolicyManagerService$$ExternalSynthetic
                 String str2 = this.f$2;
                 devicePolicyManagerService2.getClass();
                 try {
-                    KeyChain.KeyChainConnection bindAsUser2 = KeyChain.bindAsUser(devicePolicyManagerService2.mContext, UserHandle.getUserHandleForUid(callerIdentity2.mUid));
+                    KeyChain.KeyChainConnection bindAsUser2 =
+                            KeyChain.bindAsUser(
+                                    devicePolicyManagerService2.mContext,
+                                    UserHandle.getUserHandleForUid(callerIdentity2.mUid));
                     try {
-                        AppUriAuthenticationPolicy credentialManagementAppPolicy = bindAsUser2.getService().getCredentialManagementAppPolicy();
-                        Boolean valueOf = Boolean.valueOf((credentialManagementAppPolicy == null || credentialManagementAppPolicy.getAppAndUriMappings().isEmpty() || !DevicePolicyManagerService.containsAlias(credentialManagementAppPolicy, str2)) ? false : true);
+                        AppUriAuthenticationPolicy credentialManagementAppPolicy =
+                                bindAsUser2.getService().getCredentialManagementAppPolicy();
+                        Boolean valueOf =
+                                Boolean.valueOf(
+                                        (credentialManagementAppPolicy == null
+                                                        || credentialManagementAppPolicy
+                                                                .getAppAndUriMappings()
+                                                                .isEmpty()
+                                                        || !DevicePolicyManagerService
+                                                                .containsAlias(
+                                                                        credentialManagementAppPolicy,
+                                                                        str2))
+                                                ? false
+                                                : true);
                         bindAsUser2.close();
                         return valueOf;
                     } catch (Throwable th2) {
@@ -90,10 +119,14 @@ public final /* synthetic */ class DevicePolicyManagerService$$ExternalSynthetic
                     return Boolean.FALSE;
                 }
             case 2:
-                Bundle applicationRestrictions = this.f$0.mUserManager.getApplicationRestrictions(this.f$2, UserHandle.getUserHandleForUid(this.f$1.mUid));
+                Bundle applicationRestrictions =
+                        this.f$0.mUserManager.getApplicationRestrictions(
+                                this.f$2, UserHandle.getUserHandleForUid(this.f$1.mUid));
                 return applicationRestrictions != null ? applicationRestrictions : Bundle.EMPTY;
             case 3:
-                Bundle applicationRestrictions2 = this.f$0.mUserManager.getApplicationRestrictions(this.f$2, UserHandle.getUserHandleForUid(this.f$1.mUid));
+                Bundle applicationRestrictions2 =
+                        this.f$0.mUserManager.getApplicationRestrictions(
+                                this.f$2, UserHandle.getUserHandleForUid(this.f$1.mUid));
                 return applicationRestrictions2 != null ? applicationRestrictions2 : Bundle.EMPTY;
             default:
                 DevicePolicyManagerService devicePolicyManagerService3 = this.f$0;
@@ -102,9 +135,13 @@ public final /* synthetic */ class DevicePolicyManagerService$$ExternalSynthetic
                 devicePolicyManagerService3.getClass();
                 try {
                     try {
-                        bindAsUser = KeyChain.bindAsUser(devicePolicyManagerService3.mContext, UserHandle.getUserHandleForUid(callerIdentity3.mUid));
+                        bindAsUser =
+                                KeyChain.bindAsUser(
+                                        devicePolicyManagerService3.mContext,
+                                        UserHandle.getUserHandleForUid(callerIdentity3.mUid));
                         try {
-                            Boolean valueOf2 = Boolean.valueOf(bindAsUser.getService().containsKeyPair(str3));
+                            Boolean valueOf2 =
+                                    Boolean.valueOf(bindAsUser.getService().containsKeyPair(str3));
                             bindAsUser.close();
                             return valueOf2;
                         } finally {

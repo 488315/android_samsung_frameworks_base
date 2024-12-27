@@ -8,7 +8,8 @@ import android.os.UserManager;
 /* loaded from: classes.dex */
 public abstract class RestrictedLockUtilsInternal {
     public static int getManagedProfileId(Context context, int i) {
-        for (UserInfo userInfo : ((UserManager) context.getSystemService(UserManager.class)).getProfiles(i)) {
+        for (UserInfo userInfo :
+                ((UserManager) context.getSystemService(UserManager.class)).getProfiles(i)) {
             if (userInfo.id != i && userInfo.isManagedProfile()) {
                 return userInfo.id;
             }

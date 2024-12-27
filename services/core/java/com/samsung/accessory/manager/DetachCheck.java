@@ -2,7 +2,9 @@ package com.samsung.accessory.manager;
 
 import android.content.Context;
 import android.util.Log;
+
 import com.samsung.android.nfc.adapter.SamsungNfcAdapter;
+
 import java.io.IOException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -21,10 +23,14 @@ public final class DetachCheck {
         try {
             samsungNfcAdapter = SamsungNfcAdapter.getDefaultAdapter(this.mContext);
             if (samsungNfcAdapter == null) {
-                Log.e("SAccessoryManager_DetachCheck", "SamsungNfcAdapter.getDefaultAdapter returns null");
+                Log.e(
+                        "SAccessoryManager_DetachCheck",
+                        "SamsungNfcAdapter.getDefaultAdapter returns null");
                 samsungNfcAdapter = SamsungNfcAdapter.getDefaultAdapter(this.mContext);
                 if (samsungNfcAdapter == null) {
-                    Log.e("SAccessoryManager_DetachCheck", "retry, SamsungNfcAdapter.getDefaultAdapter returns null");
+                    Log.e(
+                            "SAccessoryManager_DetachCheck",
+                            "retry, SamsungNfcAdapter.getDefaultAdapter returns null");
                 }
             }
         } catch (Exception e) {
@@ -54,7 +60,9 @@ public final class DetachCheck {
         synchronized (this.mLock) {
             try {
                 if (!this.mAuthStarted) {
-                    Log.w("SAccessoryManager_DetachCheck", "Do not call stopAuth because startAuth is not executed");
+                    Log.w(
+                            "SAccessoryManager_DetachCheck",
+                            "Do not call stopAuth because startAuth is not executed");
                     return;
                 }
                 this.mAuthStarted = false;

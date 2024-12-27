@@ -6,19 +6,21 @@ import android.text.TextUtils;
 
 /* loaded from: classes4.dex */
 public final class CorrectionInfo implements Parcelable {
-    public static final Parcelable.Creator<CorrectionInfo> CREATOR = new Parcelable.Creator<CorrectionInfo>() { // from class: android.view.inputmethod.CorrectionInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CorrectionInfo createFromParcel(Parcel source) {
-            return new CorrectionInfo(source);
-        }
+    public static final Parcelable.Creator<CorrectionInfo> CREATOR =
+            new Parcelable.Creator<
+                    CorrectionInfo>() { // from class: android.view.inputmethod.CorrectionInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CorrectionInfo createFromParcel(Parcel source) {
+                    return new CorrectionInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CorrectionInfo[] newArray(int size) {
-            return new CorrectionInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CorrectionInfo[] newArray(int size) {
+                    return new CorrectionInfo[size];
+                }
+            };
     private final CharSequence mNewText;
     private final int mOffset;
     private final CharSequence mOldText;
@@ -48,7 +50,13 @@ public final class CorrectionInfo implements Parcelable {
     }
 
     public String toString() {
-        return "CorrectionInfo{#" + this.mOffset + " \"" + ((Object) this.mOldText) + "\" -> \"" + ((Object) this.mNewText) + "\"}";
+        return "CorrectionInfo{#"
+                + this.mOffset
+                + " \""
+                + ((Object) this.mOldText)
+                + "\" -> \""
+                + ((Object) this.mNewText)
+                + "\"}";
     }
 
     @Override // android.os.Parcelable

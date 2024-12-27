@@ -3,27 +3,30 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class AudioGain implements Parcelable {
-    public static final Parcelable.Creator<AudioGain> CREATOR = new Parcelable.Creator<AudioGain>() { // from class: android.media.audio.common.AudioGain.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioGain createFromParcel(Parcel _aidl_source) {
-            AudioGain _aidl_out = new AudioGain();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioGain> CREATOR =
+            new Parcelable.Creator<
+                    AudioGain>() { // from class: android.media.audio.common.AudioGain.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioGain createFromParcel(Parcel _aidl_source) {
+                    AudioGain _aidl_out = new AudioGain();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioGain[] newArray(int _aidl_size) {
-            return new AudioGain[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioGain[] newArray(int _aidl_size) {
+                    return new AudioGain[_aidl_size];
+                }
+            };
     public AudioChannelLayout channelMask;
     public int mode = 0;
     public int minValue = 0;
@@ -80,7 +83,8 @@ public class AudioGain implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.channelMask = (AudioChannelLayout) _aidl_parcel.readTypedObject(AudioChannelLayout.CREATOR);
+            this.channelMask =
+                    (AudioChannelLayout) _aidl_parcel.readTypedObject(AudioChannelLayout.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -172,14 +176,41 @@ public class AudioGain implements Parcelable {
             return false;
         }
         AudioGain that = (AudioGain) other;
-        if (Objects.deepEquals(Integer.valueOf(this.mode), Integer.valueOf(that.mode)) && Objects.deepEquals(this.channelMask, that.channelMask) && Objects.deepEquals(Integer.valueOf(this.minValue), Integer.valueOf(that.minValue)) && Objects.deepEquals(Integer.valueOf(this.maxValue), Integer.valueOf(that.maxValue)) && Objects.deepEquals(Integer.valueOf(this.defaultValue), Integer.valueOf(that.defaultValue)) && Objects.deepEquals(Integer.valueOf(this.stepValue), Integer.valueOf(that.stepValue)) && Objects.deepEquals(Integer.valueOf(this.minRampMs), Integer.valueOf(that.minRampMs)) && Objects.deepEquals(Integer.valueOf(this.maxRampMs), Integer.valueOf(that.maxRampMs)) && Objects.deepEquals(java.lang.Boolean.valueOf(this.useForVolume), java.lang.Boolean.valueOf(that.useForVolume))) {
+        if (Objects.deepEquals(Integer.valueOf(this.mode), Integer.valueOf(that.mode))
+                && Objects.deepEquals(this.channelMask, that.channelMask)
+                && Objects.deepEquals(
+                        Integer.valueOf(this.minValue), Integer.valueOf(that.minValue))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.maxValue), Integer.valueOf(that.maxValue))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.defaultValue), Integer.valueOf(that.defaultValue))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.stepValue), Integer.valueOf(that.stepValue))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.minRampMs), Integer.valueOf(that.minRampMs))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.maxRampMs), Integer.valueOf(that.maxRampMs))
+                && Objects.deepEquals(
+                        java.lang.Boolean.valueOf(this.useForVolume),
+                        java.lang.Boolean.valueOf(that.useForVolume))) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.mode), this.channelMask, Integer.valueOf(this.minValue), Integer.valueOf(this.maxValue), Integer.valueOf(this.defaultValue), Integer.valueOf(this.stepValue), Integer.valueOf(this.minRampMs), Integer.valueOf(this.maxRampMs), java.lang.Boolean.valueOf(this.useForVolume)).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                Integer.valueOf(this.mode),
+                                this.channelMask,
+                                Integer.valueOf(this.minValue),
+                                Integer.valueOf(this.maxValue),
+                                Integer.valueOf(this.defaultValue),
+                                Integer.valueOf(this.stepValue),
+                                Integer.valueOf(this.minRampMs),
+                                Integer.valueOf(this.maxRampMs),
+                                java.lang.Boolean.valueOf(this.useForVolume))
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

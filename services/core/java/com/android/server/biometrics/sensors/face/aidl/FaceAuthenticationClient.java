@@ -32,6 +32,7 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.util.Slog;
 import android.view.Surface;
+
 import com.android.server.biometrics.BiometricHandlerProvider;
 import com.android.server.biometrics.SemBiometricFeature;
 import com.android.server.biometrics.SemBiometricNotification;
@@ -54,14 +55,17 @@ import com.android.server.biometrics.sensors.face.SemFaceUtils;
 import com.android.server.biometrics.sensors.face.UsageStats;
 import com.android.server.biometrics.sensors.face.hidl.HidlToAidlSessionAdapter;
 import com.android.server.biometrics.sensors.face.hidl.HidlToAidlSessionAdapter.Cancellation;
-import java.util.ArrayList;
-import java.util.function.Supplier;
+
 import vendor.samsung.hardware.biometrics.face.ISehSession;
 import vendor.samsung.hardware.biometrics.face.V3_0.ISehBiometricsFace;
 
+import java.util.ArrayList;
+import java.util.function.Supplier;
+
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class FaceAuthenticationClient extends AuthenticationClient implements LockoutConsumer {
+public final class FaceAuthenticationClient extends AuthenticationClient
+        implements LockoutConsumer {
     public final AuthSessionCoordinator mAuthSessionCoordinator;
     public final AuthenticationStateListeners mAuthenticationStateListeners;
     public SemBiometricNotification mBackgroundNotification;
@@ -80,32 +84,77 @@ public final class FaceAuthenticationClient extends AuthenticationClient impleme
     public final UsageStats mUsageStats;
 
     /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.biometrics.sensors.face.aidl.FaceAuthenticationClient$2] */
-    public FaceAuthenticationClient(Context context, Supplier supplier, IBinder iBinder, long j, ClientMonitorCallbackConverter clientMonitorCallbackConverter, long j2, boolean z, FaceAuthenticateOptions faceAuthenticateOptions, int i, boolean z2, BiometricLogger biometricLogger, BiometricContext biometricContext, boolean z3, UsageStats usageStats, LockoutTracker lockoutTracker, boolean z4, SensorPrivacyManager sensorPrivacyManager, int i2, AuthenticationStateListeners authenticationStateListeners) {
-        super(context, supplier, iBinder, clientMonitorCallbackConverter, j2, z, faceAuthenticateOptions, i, z2, biometricLogger, biometricContext, z3, null, lockoutTracker, z4, i2);
-        this.mSemCancelDaemonCallback = new ClientMonitorCallback() { // from class: com.android.server.biometrics.sensors.face.aidl.FaceAuthenticationClient.2
-            @Override // com.android.server.biometrics.sensors.ClientMonitorCallback
-            public final void onClientFinished(BaseClientMonitor baseClientMonitor, boolean z5) {
-                Slog.i("FaceAuthenticationClient", "mSemCancelDaemonCallback.onClientFinished");
-                FaceAuthenticationClient faceAuthenticationClient = FaceAuthenticationClient.this;
-                faceAuthenticationClient.dismissNotification();
-                if (faceAuthenticationClient.mCancellationSignal != null) {
-                    faceAuthenticationClient.getServiceExtImpl().daemonCancel(faceAuthenticationClient.mCancellationSignal, true);
-                }
-            }
+    public FaceAuthenticationClient(
+            Context context,
+            Supplier supplier,
+            IBinder iBinder,
+            long j,
+            ClientMonitorCallbackConverter clientMonitorCallbackConverter,
+            long j2,
+            boolean z,
+            FaceAuthenticateOptions faceAuthenticateOptions,
+            int i,
+            boolean z2,
+            BiometricLogger biometricLogger,
+            BiometricContext biometricContext,
+            boolean z3,
+            UsageStats usageStats,
+            LockoutTracker lockoutTracker,
+            boolean z4,
+            SensorPrivacyManager sensorPrivacyManager,
+            int i2,
+            AuthenticationStateListeners authenticationStateListeners) {
+        super(
+                context,
+                supplier,
+                iBinder,
+                clientMonitorCallbackConverter,
+                j2,
+                z,
+                faceAuthenticateOptions,
+                i,
+                z2,
+                biometricLogger,
+                biometricContext,
+                z3,
+                null,
+                lockoutTracker,
+                z4,
+                i2);
+        this.mSemCancelDaemonCallback =
+                new ClientMonitorCallback() { // from class:
+                                              // com.android.server.biometrics.sensors.face.aidl.FaceAuthenticationClient.2
+                    @Override // com.android.server.biometrics.sensors.ClientMonitorCallback
+                    public final void onClientFinished(
+                            BaseClientMonitor baseClientMonitor, boolean z5) {
+                        Slog.i(
+                                "FaceAuthenticationClient",
+                                "mSemCancelDaemonCallback.onClientFinished");
+                        FaceAuthenticationClient faceAuthenticationClient =
+                                FaceAuthenticationClient.this;
+                        faceAuthenticationClient.dismissNotification();
+                        if (faceAuthenticationClient.mCancellationSignal != null) {
+                            faceAuthenticationClient
+                                    .getServiceExtImpl()
+                                    .daemonCancel(
+                                            faceAuthenticationClient.mCancellationSignal, true);
+                        }
+                    }
 
-            @Override // com.android.server.biometrics.sensors.ClientMonitorCallback
-            public final void onClientStarted(BaseClientMonitor baseClientMonitor) {
-            }
-        };
+                    @Override // com.android.server.biometrics.sensors.ClientMonitorCallback
+                    public final void onClientStarted(BaseClientMonitor baseClientMonitor) {}
+                };
         setRequestId(j);
         this.mIsStrongBiometric = z3;
         this.mUsageStats = usageStats;
         this.mSensorPrivacyManager = sensorPrivacyManager;
-        this.mAuthSessionCoordinator = ((BiometricContextProvider) biometricContext).mAuthSessionCoordinator;
+        this.mAuthSessionCoordinator =
+                ((BiometricContextProvider) biometricContext).mAuthSessionCoordinator;
         this.mAuthenticationStateListeners = authenticationStateListeners;
         Resources resources = context.getResources();
         this.mBiometricPromptIgnoreList = resources.getIntArray(R.array.networks_not_clear_data);
-        this.mBiometricPromptIgnoreListVendor = resources.getIntArray(R.array.pause_wallpaper_render_when_state_change);
+        this.mBiometricPromptIgnoreListVendor =
+                resources.getIntArray(R.array.pause_wallpaper_render_when_state_change);
         this.mKeyguardIgnoreList = resources.getIntArray(R.array.non_removable_euicc_slots);
         this.mKeyguardIgnoreListVendor = resources.getIntArray(R.array.preloaded_color_state_lists);
         Bundle bundle = SemFaceUtils.mBundle;
@@ -121,9 +170,13 @@ public final class FaceAuthenticationClient extends AuthenticationClient impleme
         }
         if (isBiometricPrompt()) {
             try {
-                promptInfo = IBiometricService.Stub.asInterface(ServiceManager.getService("biometric")).semGetPromptInfo(this.mCookie);
+                promptInfo =
+                        IBiometricService.Stub.asInterface(ServiceManager.getService("biometric"))
+                                .semGetPromptInfo(this.mCookie);
             } catch (RemoteException e) {
-                Slog.w("FaceAuthenticationClient", "getBiometricPrompt: failed to get prompt info" + e.getMessage());
+                Slog.w(
+                        "FaceAuthenticationClient",
+                        "getBiometricPrompt: failed to get prompt info" + e.getMessage());
             }
             if (promptInfo != null) {
                 int semGetPrivilegedFlag = promptInfo.semGetPrivilegedFlag();
@@ -163,7 +216,9 @@ public final class FaceAuthenticationClient extends AuthenticationClient impleme
 
     @Override // com.android.server.biometrics.sensors.AuthenticationClient
     public final void handleLifecycleAfterAuth(boolean z) {
-        this.mAuthenticationStateListeners.onAuthenticationStopped(new AuthenticationStoppedInfo.Builder(BiometricSourceType.FACE, getRequestReason()).build());
+        this.mAuthenticationStateListeners.onAuthenticationStopped(
+                new AuthenticationStoppedInfo.Builder(BiometricSourceType.FACE, getRequestReason())
+                        .build());
         this.mCallback.onClientFinished(this, true);
     }
 
@@ -171,60 +226,114 @@ public final class FaceAuthenticationClient extends AuthenticationClient impleme
     public final void onAcquired(int i, int i2) {
         boolean shouldSendAcquiredMessage$1 = shouldSendAcquiredMessage$1(i, i2);
         if (shouldSendAcquiredMessage$1) {
-            AuthenticationStateListeners authenticationStateListeners = this.mAuthenticationStateListeners;
+            AuthenticationStateListeners authenticationStateListeners =
+                    this.mAuthenticationStateListeners;
             BiometricSourceType biometricSourceType = BiometricSourceType.FACE;
-            authenticationStateListeners.onAuthenticationAcquired(new AuthenticationAcquiredInfo.Builder(biometricSourceType, getRequestReason(), i).build());
+            authenticationStateListeners.onAuthenticationAcquired(
+                    new AuthenticationAcquiredInfo.Builder(
+                                    biometricSourceType, getRequestReason(), i)
+                            .build());
             String authHelpMessage = FaceManager.getAuthHelpMessage(this.mContext, i, i2);
             if (authHelpMessage != null) {
-                this.mAuthenticationStateListeners.onAuthenticationHelp(new AuthenticationHelpInfo.Builder(biometricSourceType, getRequestReason(), authHelpMessage, i == 22 ? i2 + 1000 : i).build());
+                this.mAuthenticationStateListeners.onAuthenticationHelp(
+                        new AuthenticationHelpInfo.Builder(
+                                        biometricSourceType,
+                                        getRequestReason(),
+                                        authHelpMessage,
+                                        i == 22 ? i2 + 1000 : i)
+                                .build());
             }
         }
         onAcquiredInternal(i, i2, shouldSendAcquiredMessage$1);
         LockoutTracker lockoutTracker = this.mLockoutTracker;
-        if (lockoutTracker == null || lockoutTracker.getLockoutModeForUser(this.mTargetUserId) == 0) {
-            PerformanceTracker.getInstanceForSensorId(this.mSensorId).incrementAcquireForUser(this.mTargetUserId, isCryptoOperation());
+        if (lockoutTracker == null
+                || lockoutTracker.getLockoutModeForUser(this.mTargetUserId) == 0) {
+            PerformanceTracker.getInstanceForSensorId(this.mSensorId)
+                    .incrementAcquireForUser(this.mTargetUserId, isCryptoOperation());
         }
     }
 
-    @Override // com.android.server.biometrics.sensors.AuthenticationClient, com.android.server.biometrics.sensors.AuthenticationConsumer
-    public final void onAuthenticated(BiometricAuthenticator.Identifier identifier, boolean z, ArrayList arrayList) {
+    @Override // com.android.server.biometrics.sensors.AuthenticationClient,
+              // com.android.server.biometrics.sensors.AuthenticationConsumer
+    public final void onAuthenticated(
+            BiometricAuthenticator.Identifier identifier, boolean z, ArrayList arrayList) {
         super.onAuthenticated(identifier, z, arrayList);
         this.mState = 4;
-        this.mUsageStats.addEvent(new UsageStats.AuthenticationEvent(this.mStartTimeMs, System.currentTimeMillis() - this.mStartTimeMs, z, 0, 0, this.mTargetUserId));
+        this.mUsageStats.addEvent(
+                new UsageStats.AuthenticationEvent(
+                        this.mStartTimeMs,
+                        System.currentTimeMillis() - this.mStartTimeMs,
+                        z,
+                        0,
+                        0,
+                        this.mTargetUserId));
         if (Flags.reportBiometricAuthAttempts()) {
             if (z) {
-                this.mAuthenticationStateListeners.onAuthenticationSucceeded(new AuthenticationSucceededInfo.Builder(BiometricSourceType.FACE, getRequestReason(), this.mIsStrongBiometric, this.mTargetUserId).build());
+                this.mAuthenticationStateListeners.onAuthenticationSucceeded(
+                        new AuthenticationSucceededInfo.Builder(
+                                        BiometricSourceType.FACE,
+                                        getRequestReason(),
+                                        this.mIsStrongBiometric,
+                                        this.mTargetUserId)
+                                .build());
             } else {
-                this.mAuthenticationStateListeners.onAuthenticationFailed(new AuthenticationFailedInfo.Builder(BiometricSourceType.FACE, getRequestReason(), this.mTargetUserId).build());
+                this.mAuthenticationStateListeners.onAuthenticationFailed(
+                        new AuthenticationFailedInfo.Builder(
+                                        BiometricSourceType.FACE,
+                                        getRequestReason(),
+                                        this.mTargetUserId)
+                                .build());
             }
         }
         dismissNotification();
     }
 
-    @Override // com.android.server.biometrics.sensors.AuthenticationClient, com.android.server.biometrics.sensors.AcquisitionClient, com.android.server.biometrics.sensors.ErrorConsumer
+    @Override // com.android.server.biometrics.sensors.AuthenticationClient,
+              // com.android.server.biometrics.sensors.AcquisitionClient,
+              // com.android.server.biometrics.sensors.ErrorConsumer
     public final void onError(int i, int i2) {
         dismissNotification();
-        this.mUsageStats.addEvent(new UsageStats.AuthenticationEvent(this.mStartTimeMs, System.currentTimeMillis() - this.mStartTimeMs, false, i, i2, this.mTargetUserId));
-        AuthenticationStateListeners authenticationStateListeners = this.mAuthenticationStateListeners;
+        this.mUsageStats.addEvent(
+                new UsageStats.AuthenticationEvent(
+                        this.mStartTimeMs,
+                        System.currentTimeMillis() - this.mStartTimeMs,
+                        false,
+                        i,
+                        i2,
+                        this.mTargetUserId));
+        AuthenticationStateListeners authenticationStateListeners =
+                this.mAuthenticationStateListeners;
         BiometricSourceType biometricSourceType = BiometricSourceType.FACE;
-        authenticationStateListeners.onAuthenticationError(new AuthenticationErrorInfo.Builder(biometricSourceType, getRequestReason(), FaceManager.getErrorString(this.mContext, i, i2), i).build());
+        authenticationStateListeners.onAuthenticationError(
+                new AuthenticationErrorInfo.Builder(
+                                biometricSourceType,
+                                getRequestReason(),
+                                FaceManager.getErrorString(this.mContext, i, i2),
+                                i)
+                        .build());
         super.onError(i, i2);
-        this.mAuthenticationStateListeners.onAuthenticationStopped(new AuthenticationStoppedInfo.Builder(biometricSourceType, getRequestReason()).build());
+        this.mAuthenticationStateListeners.onAuthenticationStopped(
+                new AuthenticationStoppedInfo.Builder(biometricSourceType, getRequestReason())
+                        .build());
     }
 
     @Override // com.android.server.biometrics.sensors.LockoutConsumer
     public final void onLockoutPermanent() {
-        this.mAuthSessionCoordinator.lockedOutFor(this.mTargetUserId, this.mSensorStrength, this.mSensorId, this.mRequestId);
+        this.mAuthSessionCoordinator.lockedOutFor(
+                this.mTargetUserId, this.mSensorStrength, this.mSensorId, this.mRequestId);
         this.mLogger.logOnError(this.mContext, getOperationContext(), 9, 0, this.mTargetUserId);
-        PerformanceTracker.getInstanceForSensorId(this.mSensorId).incrementPermanentLockoutForUser(this.mTargetUserId);
+        PerformanceTracker.getInstanceForSensorId(this.mSensorId)
+                .incrementPermanentLockoutForUser(this.mTargetUserId);
         onError(9, 0);
     }
 
     @Override // com.android.server.biometrics.sensors.LockoutConsumer
     public final void onLockoutTimed(long j) {
-        this.mAuthSessionCoordinator.lockOutTimed(this.mTargetUserId, this.mSensorStrength, this.mSensorId, j, this.mRequestId);
+        this.mAuthSessionCoordinator.lockOutTimed(
+                this.mTargetUserId, this.mSensorStrength, this.mSensorId, j, this.mRequestId);
         this.mLogger.logOnError(this.mContext, getOperationContext(), 7, 0, this.mTargetUserId);
-        PerformanceTracker.getInstanceForSensorId(this.mSensorId).incrementTimedLockoutForUser(this.mTargetUserId);
+        PerformanceTracker.getInstanceForSensorId(this.mSensorId)
+                .incrementTimedLockoutForUser(this.mTargetUserId);
         onError(7, 0);
     }
 
@@ -248,12 +357,33 @@ public final class FaceAuthenticationClient extends AuthenticationClient impleme
             if (SemBiometricFeature.FEATURE_JDM_HAL) {
                 aidlSession.mSession.authenticate(j);
             } else if (serviceExtImpl.mIsAuthenticationExtOperation) {
-                HidlToAidlSessionAdapter hidlToAidlSessionAdapter = (HidlToAidlSessionAdapter) aidlSession.mSession;
-                Slog.w("HidlToAidlSessionAdapter", "sehAuthenticateForIssuance RESULT: " + ((ISehBiometricsFace) hidlToAidlSessionAdapter.mSession.get()).sehAuthenticateForIssuance(SemFaceUtils.getSecurityMode(serviceExtImpl.mContext), j, SemFaceUtils.getFidoRequestDataAsArrayList(), true, serviceExtImpl.mPreviewSurface != null));
+                HidlToAidlSessionAdapter hidlToAidlSessionAdapter =
+                        (HidlToAidlSessionAdapter) aidlSession.mSession;
+                Slog.w(
+                        "HidlToAidlSessionAdapter",
+                        "sehAuthenticateForIssuance RESULT: "
+                                + ((ISehBiometricsFace) hidlToAidlSessionAdapter.mSession.get())
+                                        .sehAuthenticateForIssuance(
+                                                SemFaceUtils.getSecurityMode(
+                                                        serviceExtImpl.mContext),
+                                                j,
+                                                SemFaceUtils.getFidoRequestDataAsArrayList(),
+                                                true,
+                                                serviceExtImpl.mPreviewSurface != null));
                 serviceExtImpl.mCancellationSignal = hidlToAidlSessionAdapter.new Cancellation();
             } else {
-                HidlToAidlSessionAdapter hidlToAidlSessionAdapter2 = (HidlToAidlSessionAdapter) aidlSession.mSession;
-                Slog.w("HidlToAidlSessionAdapter", "sehAuthenticate RESULT: " + ((vendor.samsung.hardware.biometrics.face.V2_0.ISehBiometricsFace) hidlToAidlSessionAdapter2.mSession.get()).sehAuthenticate(SemFaceUtils.getSecurityMode(serviceExtImpl.mContext), j, SemFaceUtils.getFidoRequestDataAsArrayList()));
+                HidlToAidlSessionAdapter hidlToAidlSessionAdapter2 =
+                        (HidlToAidlSessionAdapter) aidlSession.mSession;
+                Slog.w(
+                        "HidlToAidlSessionAdapter",
+                        "sehAuthenticate RESULT: "
+                                + ((vendor.samsung.hardware.biometrics.face.V2_0.ISehBiometricsFace)
+                                                hidlToAidlSessionAdapter2.mSession.get())
+                                        .sehAuthenticate(
+                                                SemFaceUtils.getSecurityMode(
+                                                        serviceExtImpl.mContext),
+                                                j,
+                                                SemFaceUtils.getFidoRequestDataAsArrayList()));
                 serviceExtImpl.mCancellationSignal = hidlToAidlSessionAdapter2.new Cancellation();
             }
             this.mCancellationSignal = serviceExtImpl.mCancellationSignal;
@@ -286,10 +416,12 @@ public final class FaceAuthenticationClient extends AuthenticationClient impleme
                         obtain.writeInt(securityMode);
                         obtain.writeByteArray(bArr);
                         if (!proxy.mRemote.transact(1, obtain, obtain2, 0)) {
-                            throw new RemoteException("Method authenticateExtension is unimplemented.");
+                            throw new RemoteException(
+                                    "Method authenticateExtension is unimplemented.");
                         }
                         obtain2.readException();
-                        ICancellationSignal asInterface = ICancellationSignal.Stub.asInterface(obtain2.readStrongBinder());
+                        ICancellationSignal asInterface =
+                                ICancellationSignal.Stub.asInterface(obtain2.readStrongBinder());
                         obtain2.recycle();
                         obtain.recycle();
                         serviceExtImpl2.mCancellationSignal = asInterface;
@@ -315,10 +447,12 @@ public final class FaceAuthenticationClient extends AuthenticationClient impleme
                         obtain.writeBoolean(true);
                         obtain.writeTypedObject(surface, 0);
                         if (!proxy2.mRemote.transact(16, obtain, obtain2, 0)) {
-                            throw new RemoteException("Method authenticateForIssuanceEx is unimplemented.");
+                            throw new RemoteException(
+                                    "Method authenticateForIssuanceEx is unimplemented.");
                         }
                         obtain2.readException();
-                        ICancellationSignal asInterface2 = ICancellationSignal.Stub.asInterface(obtain2.readStrongBinder());
+                        ICancellationSignal asInterface2 =
+                                ICancellationSignal.Stub.asInterface(obtain2.readStrongBinder());
                         obtain2.recycle();
                         obtain.recycle();
                         serviceExtImpl2.mCancellationSignal = asInterface2;
@@ -344,10 +478,12 @@ public final class FaceAuthenticationClient extends AuthenticationClient impleme
                         obtain.writeBoolean(true);
                         obtain.writeTypedObject(nativeHandle, 0);
                         if (!proxy3.mRemote.transact(13, obtain, obtain2, 0)) {
-                            throw new RemoteException("Method authenticateForIssuance is unimplemented.");
+                            throw new RemoteException(
+                                    "Method authenticateForIssuance is unimplemented.");
                         }
                         obtain2.readException();
-                        ICancellationSignal asInterface3 = ICancellationSignal.Stub.asInterface(obtain2.readStrongBinder());
+                        ICancellationSignal asInterface3 =
+                                ICancellationSignal.Stub.asInterface(obtain2.readStrongBinder());
                         obtain2.recycle();
                         obtain.recycle();
                         serviceExtImpl2.mCancellationSignal = asInterface3;
@@ -358,24 +494,49 @@ public final class FaceAuthenticationClient extends AuthenticationClient impleme
             }
             this.mCancellationSignal = iCancellationSignal;
             Bundle bundle = this.mBundle;
-            if ((4 & (bundle != null ? bundle.getInt("sem_privileged_attr", 0) : 0)) != 0 && !isKeyguard() && !Utils.isSystem(this.mContext, this.mOwner)) {
+            if ((4 & (bundle != null ? bundle.getInt("sem_privileged_attr", 0) : 0)) != 0
+                    && !isKeyguard()
+                    && !Utils.isSystem(this.mContext, this.mOwner)) {
                 if (this.mBackgroundNotification == null) {
-                    this.mBackgroundNotification = new SemBiometricNotification(this.mContext, this.mOwner, 8);
+                    this.mBackgroundNotification =
+                            new SemBiometricNotification(this.mContext, this.mOwner, 8);
                 }
-                Intent intent = new Intent("com.samsung.android.server.biometrics.BIOMETRICS_NOTIFICATION");
+                Intent intent =
+                        new Intent("com.samsung.android.server.biometrics.BIOMETRICS_NOTIFICATION");
                 intent.putExtra("package", this.mOwner);
                 intent.putExtra("authenticator", 8);
                 if (this.mBackgroundNotificationAction == null) {
-                    this.mBackgroundNotificationAction = new BroadcastReceiver() { // from class: com.android.server.biometrics.sensors.face.aidl.FaceAuthenticationClient.1
-                        @Override // android.content.BroadcastReceiver
-                        public final void onReceive(Context context, Intent intent2) {
-                            if ("com.samsung.android.server.biometrics.BIOMETRICS_NOTIFICATION".equals(intent2.getAction()) && FaceAuthenticationClient.this.mOwner.equals(intent2.getStringExtra("package")) && intent2.getIntExtra("authenticator", 0) == 8 && FaceAuthenticationClient.this.mCancellationSignal != null) {
-                                Slog.i("FaceAuthenticationClient", "Cancel authentication by Notification action");
-                                FaceAuthenticationClient.this.getServiceExtImpl().daemonCancel(FaceAuthenticationClient.this.mCancellationSignal, false);
-                            }
-                        }
-                    };
-                    Utils.registerBroadcastAsUser(this.mContext, this.mBackgroundNotificationAction, new IntentFilter("com.samsung.android.server.biometrics.BIOMETRICS_NOTIFICATION"), UserHandle.CURRENT, BiometricHandlerProvider.sBiometricHandlerProvider.getFaceHandler());
+                    this.mBackgroundNotificationAction =
+                            new BroadcastReceiver() { // from class:
+                                                      // com.android.server.biometrics.sensors.face.aidl.FaceAuthenticationClient.1
+                                @Override // android.content.BroadcastReceiver
+                                public final void onReceive(Context context, Intent intent2) {
+                                    if ("com.samsung.android.server.biometrics.BIOMETRICS_NOTIFICATION"
+                                                    .equals(intent2.getAction())
+                                            && FaceAuthenticationClient.this.mOwner.equals(
+                                                    intent2.getStringExtra("package"))
+                                            && intent2.getIntExtra("authenticator", 0) == 8
+                                            && FaceAuthenticationClient.this.mCancellationSignal
+                                                    != null) {
+                                        Slog.i(
+                                                "FaceAuthenticationClient",
+                                                "Cancel authentication by Notification action");
+                                        FaceAuthenticationClient.this
+                                                .getServiceExtImpl()
+                                                .daemonCancel(
+                                                        FaceAuthenticationClient.this
+                                                                .mCancellationSignal,
+                                                        false);
+                                    }
+                                }
+                            };
+                    Utils.registerBroadcastAsUser(
+                            this.mContext,
+                            this.mBackgroundNotificationAction,
+                            new IntentFilter(
+                                    "com.samsung.android.server.biometrics.BIOMETRICS_NOTIFICATION"),
+                            UserHandle.CURRENT,
+                            BiometricHandlerProvider.sBiometricHandlerProvider.getFaceHandler());
                 }
                 this.mBackgroundNotification.postNotification(intent);
             }
@@ -384,23 +545,37 @@ public final class FaceAuthenticationClient extends AuthenticationClient impleme
             aidlSession2.getClass();
             this.mCancellationSignal = aidlSession2.mSession.authenticate(this.mOperationId);
         }
-        Slog.w("FaceAuthenticationClient", "authenticate FINISH (" + (System.currentTimeMillis() - currentTimeMillis) + "ms) RESULT: " + this.mCancellationSignal);
+        Slog.w(
+                "FaceAuthenticationClient",
+                "authenticate FINISH ("
+                        + (System.currentTimeMillis() - currentTimeMillis)
+                        + "ms) RESULT: "
+                        + this.mCancellationSignal);
     }
 
     public final boolean shouldSendAcquiredMessage$1(int i, int i2) {
         if (i == 22) {
-            if (Utils.listContains(i2, isBiometricPrompt() ? this.mBiometricPromptIgnoreListVendor : this.mKeyguardIgnoreListVendor)) {
+            if (Utils.listContains(
+                    i2,
+                    isBiometricPrompt()
+                            ? this.mBiometricPromptIgnoreListVendor
+                            : this.mKeyguardIgnoreListVendor)) {
                 return false;
             }
         } else {
-            if (Utils.listContains(i, isBiometricPrompt() ? this.mBiometricPromptIgnoreList : this.mKeyguardIgnoreList)) {
+            if (Utils.listContains(
+                    i,
+                    isBiometricPrompt()
+                            ? this.mBiometricPromptIgnoreList
+                            : this.mKeyguardIgnoreList)) {
                 return false;
             }
         }
         return true;
     }
 
-    @Override // com.android.server.biometrics.sensors.AuthenticationClient, com.android.server.biometrics.sensors.BaseClientMonitor
+    @Override // com.android.server.biometrics.sensors.AuthenticationClient,
+              // com.android.server.biometrics.sensors.BaseClientMonitor
     public final void start(ClientMonitorCallback clientMonitorCallback) {
         super.start(clientMonitorCallback);
         this.mState = 1;
@@ -408,10 +583,13 @@ public final class FaceAuthenticationClient extends AuthenticationClient impleme
 
     @Override // com.android.server.biometrics.sensors.HalClientMonitor
     public final void startHalOperation() {
-        this.mAuthenticationStateListeners.onAuthenticationStarted(new AuthenticationStartedInfo.Builder(BiometricSourceType.FACE, getRequestReason()).build());
+        this.mAuthenticationStateListeners.onAuthenticationStarted(
+                new AuthenticationStartedInfo.Builder(BiometricSourceType.FACE, getRequestReason())
+                        .build());
         try {
             SensorPrivacyManager sensorPrivacyManager = this.mSensorPrivacyManager;
-            if (sensorPrivacyManager == null || !sensorPrivacyManager.isSensorPrivacyEnabled(1, 2)) {
+            if (sensorPrivacyManager == null
+                    || !sensorPrivacyManager.isSensorPrivacyEnabled(1, 2)) {
                 semDoAuthenticate();
             } else {
                 onError(8, 100003);
@@ -426,7 +604,9 @@ public final class FaceAuthenticationClient extends AuthenticationClient impleme
 
     @Override // com.android.server.biometrics.sensors.AcquisitionClient
     public final void stopHalOperation() {
-        this.mAuthenticationStateListeners.onAuthenticationStopped(new AuthenticationStoppedInfo.Builder(BiometricSourceType.FACE, getRequestReason()).build());
+        this.mAuthenticationStateListeners.onAuthenticationStopped(
+                new AuthenticationStoppedInfo.Builder(BiometricSourceType.FACE, getRequestReason())
+                        .build());
         unsubscribeBiometricContext();
         dismissNotification();
         if (this.mCancellationSignal == null) {
@@ -456,7 +636,11 @@ public final class FaceAuthenticationClient extends AuthenticationClient impleme
     }
 
     @Override // com.android.server.biometrics.sensors.BaseClientMonitor
-    public final ClientMonitorCallback wrapCallbackForStart(ClientMonitorCallback clientMonitorCallback) {
-        return new ClientMonitorCompositeCallback(this.mSemCancelDaemonCallback, new CallbackWithProbe(this.mLogger.mALSProbe, true), clientMonitorCallback);
+    public final ClientMonitorCallback wrapCallbackForStart(
+            ClientMonitorCallback clientMonitorCallback) {
+        return new ClientMonitorCompositeCallback(
+                this.mSemCancelDaemonCallback,
+                new CallbackWithProbe(this.mLogger.mALSProbe, true),
+                clientMonitorCallback);
     }
 }

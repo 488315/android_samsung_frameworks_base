@@ -1,8 +1,9 @@
 package com.android.internal.os;
 
 import android.util.SparseArray;
-import com.android.internal.os.LongArrayMultiStateCounter;
+
 import dalvik.annotation.optimization.CriticalNative;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -88,7 +89,13 @@ public class KernelSingleUidTimeReader {
         int actualCount = numBytes / 8;
         if (this.mCpuFreqsCount != actualCount) {
             this.mSingleUidCpuTimesAvailable = false;
-            throw new IllegalStateException("Freq count didn't match,count from /proc/uid_time_in_state=" + this.mCpuFreqsCount + ", butcount from " + procFile + "=" + actualCount);
+            throw new IllegalStateException(
+                    "Freq count didn't match,count from /proc/uid_time_in_state="
+                            + this.mCpuFreqsCount
+                            + ", butcount from "
+                            + procFile
+                            + "="
+                            + actualCount);
         }
         this.mCpuFreqsCountVerified = true;
     }
@@ -159,7 +166,8 @@ public class KernelSingleUidTimeReader {
             for (int i = allUidsCpuTimesMs.size() - 1; i >= 0; i--) {
                 long[] cpuTimesMs = allUidsCpuTimesMs.valueAt(i);
                 if (cpuTimesMs != null) {
-                    this.mLastUidCpuTimeMs.put(allUidsCpuTimesMs.keyAt(i), (long[]) cpuTimesMs.clone());
+                    this.mLastUidCpuTimeMs.put(
+                            allUidsCpuTimesMs.keyAt(i), (long[]) cpuTimesMs.clone());
                 }
             }
         }
@@ -188,12 +196,17 @@ public class KernelSingleUidTimeReader {
         this.mInjector.addDelta(uid, counter, timestampMs, null);
     }
 
-    public void addDelta(int uid, LongArrayMultiStateCounter counter, long timestampMs, LongArrayMultiStateCounter.LongArrayContainer deltaContainer) {
+    public void addDelta(
+            int uid,
+            LongArrayMultiStateCounter counter,
+            long timestampMs,
+            LongArrayMultiStateCounter.LongArrayContainer deltaContainer) {
         this.mInjector.addDelta(uid, counter, timestampMs, deltaContainer);
     }
 
     public static class Injector {
-        private static native boolean addDeltaForTest(int i, long j, long j2, long[][] jArr, long j3);
+        private static native boolean addDeltaForTest(
+                int i, long j, long j2, long[][] jArr, long j3);
 
         @CriticalNative
         private static native boolean addDeltaFromBpf(int i, long j, long j2, long j3);
@@ -204,12 +217,30 @@ public class KernelSingleUidTimeReader {
             return Files.readAllBytes(Paths.get(procFile, new String[0]));
         }
 
-        public boolean addDelta(int uid, LongArrayMultiStateCounter counter, long timestampMs, LongArrayMultiStateCounter.LongArrayContainer deltaOut) {
-            return addDeltaFromBpf(uid, counter.mNativeObject, timestampMs, deltaOut != null ? deltaOut.mNativeObject : 0L);
+        public boolean addDelta(
+                int uid,
+                LongArrayMultiStateCounter counter,
+                long timestampMs,
+                LongArrayMultiStateCounter.LongArrayContainer deltaOut) {
+            return addDeltaFromBpf(
+                    uid,
+                    counter.mNativeObject,
+                    timestampMs,
+                    deltaOut != null ? deltaOut.mNativeObject : 0L);
         }
 
-        public boolean addDeltaForTest(int uid, LongArrayMultiStateCounter counter, long timestampMs, long[][] timeInFreqDataNanos, LongArrayMultiStateCounter.LongArrayContainer deltaOut) {
-            return addDeltaForTest(uid, counter.mNativeObject, timestampMs, timeInFreqDataNanos, deltaOut != null ? deltaOut.mNativeObject : 0L);
+        public boolean addDeltaForTest(
+                int uid,
+                LongArrayMultiStateCounter counter,
+                long timestampMs,
+                long[][] timeInFreqDataNanos,
+                LongArrayMultiStateCounter.LongArrayContainer deltaOut) {
+            return addDeltaForTest(
+                    uid,
+                    counter.mNativeObject,
+                    timestampMs,
+                    timeInFreqDataNanos,
+                    deltaOut != null ? deltaOut.mNativeObject : 0L);
         }
     }
 

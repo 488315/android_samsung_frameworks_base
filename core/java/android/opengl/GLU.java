@@ -27,7 +27,17 @@ public class GLU {
         }
     }
 
-    public static void gluLookAt(GL10 gl, float eyeX, float eyeY, float eyeZ, float centerX, float centerY, float centerZ, float upX, float upY, float upZ) {
+    public static void gluLookAt(
+            GL10 gl,
+            float eyeX,
+            float eyeY,
+            float eyeZ,
+            float centerX,
+            float centerY,
+            float centerZ,
+            float upX,
+            float upY,
+            float upZ) {
         float[] scratch = sScratch;
         synchronized (scratch) {
             try {
@@ -35,7 +45,8 @@ public class GLU {
                 th = th;
             }
             try {
-                Matrix.setLookAtM(scratch, 0, eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ);
+                Matrix.setLookAtM(
+                        scratch, 0, eyeX, eyeY, eyeZ, centerX, centerY, centerZ, upX, upY, upZ);
                 gl.glMultMatrixf(scratch, 0);
             } catch (Throwable th2) {
                 th = th2;
@@ -56,7 +67,18 @@ public class GLU {
         gl.glFrustumf(left, right, bottom, top, zNear, zFar);
     }
 
-    public static int gluProject(float objX, float objY, float objZ, float[] model, int modelOffset, float[] project, int projectOffset, int[] view, int viewOffset, float[] win, int winOffset) {
+    public static int gluProject(
+            float objX,
+            float objY,
+            float objZ,
+            float[] model,
+            int modelOffset,
+            float[] project,
+            int projectOffset,
+            int[] view,
+            int viewOffset,
+            float[] win,
+            int winOffset) {
         float[] scratch = sScratch;
         synchronized (scratch) {
             Matrix.multiplyMM(scratch, 0, project, projectOffset, model, modelOffset);
@@ -70,14 +92,28 @@ public class GLU {
                 return 0;
             }
             float rw = 1.0f / w;
-            win[winOffset] = view[viewOffset] + (view[viewOffset + 2] * ((scratch[20] * rw) + 1.0f) * 0.5f);
-            win[winOffset + 1] = view[viewOffset + 1] + (view[viewOffset + 3] * ((scratch[21] * rw) + 1.0f) * 0.5f);
+            win[winOffset] =
+                    view[viewOffset] + (view[viewOffset + 2] * ((scratch[20] * rw) + 1.0f) * 0.5f);
+            win[winOffset + 1] =
+                    view[viewOffset + 1]
+                            + (view[viewOffset + 3] * ((scratch[21] * rw) + 1.0f) * 0.5f);
             win[winOffset + 2] = ((scratch[22] * rw) + 1.0f) * 0.5f;
             return 1;
         }
     }
 
-    public static int gluUnProject(float winX, float winY, float winZ, float[] model, int modelOffset, float[] project, int projectOffset, int[] view, int viewOffset, float[] obj, int objOffset) {
+    public static int gluUnProject(
+            float winX,
+            float winY,
+            float winZ,
+            float[] model,
+            int modelOffset,
+            float[] project,
+            int projectOffset,
+            int[] view,
+            int viewOffset,
+            float[] obj,
+            int objOffset) {
         float[] scratch = sScratch;
         synchronized (scratch) {
             Matrix.multiplyMM(scratch, 0, project, projectOffset, model, modelOffset);

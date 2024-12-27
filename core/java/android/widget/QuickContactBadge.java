@@ -14,6 +14,7 @@ import android.provider.ContactsContract;
 import android.telecom.PhoneAccount;
 import android.util.AttributeSet;
 import android.view.View;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
@@ -51,7 +52,8 @@ public class QuickContactBadge extends ImageView implements View.OnClickListener
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public QuickContactBadge(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public QuickContactBadge(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.mExtras = null;
         this.mExcludeMimes = null;
@@ -86,8 +88,7 @@ public class QuickContactBadge extends ImageView implements View.OnClickListener
         }
     }
 
-    public void setMode(int size) {
-    }
+    public void setMode(int size) {}
 
     public void setPrioritizedMimeType(String prioritizedMimeType) {
         this.mPrioritizedMimeType = prioritizedMimeType;
@@ -96,7 +97,10 @@ public class QuickContactBadge extends ImageView implements View.OnClickListener
     @Override // android.widget.ImageView, android.view.View
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if (!isEnabled() || this.mOverlay == null || this.mOverlay.getIntrinsicWidth() == 0 || this.mOverlay.getIntrinsicHeight() == 0) {
+        if (!isEnabled()
+                || this.mOverlay == null
+                || this.mOverlay.getIntrinsicWidth() == 0
+                || this.mOverlay.getIntrinsicHeight() == 0) {
             return;
         }
         this.mOverlay.setBounds(0, 0, getWidth(), getHeight());
@@ -112,7 +116,11 @@ public class QuickContactBadge extends ImageView implements View.OnClickListener
     }
 
     private boolean isAssigned() {
-        return (this.mContactUri == null && this.mContactEmail == null && this.mContactPhone == null) ? false : true;
+        return (this.mContactUri == null
+                        && this.mContactEmail == null
+                        && this.mContactPhone == null)
+                ? false
+                : true;
     }
 
     public void setImageToDefault() {
@@ -137,7 +145,16 @@ public class QuickContactBadge extends ImageView implements View.OnClickListener
         this.mContactEmail = emailAddress;
         this.mExtras = extras;
         if (!lazyLookup && this.mQueryHandler != null) {
-            this.mQueryHandler.startQuery(0, null, Uri.withAppendedPath(ContactsContract.CommonDataKinds.Email.CONTENT_LOOKUP_URI, Uri.encode(this.mContactEmail)), EMAIL_LOOKUP_PROJECTION, null, null, null);
+            this.mQueryHandler.startQuery(
+                    0,
+                    null,
+                    Uri.withAppendedPath(
+                            ContactsContract.CommonDataKinds.Email.CONTENT_LOOKUP_URI,
+                            Uri.encode(this.mContactEmail)),
+                    EMAIL_LOOKUP_PROJECTION,
+                    null,
+                    null,
+                    null);
         } else {
             this.mContactUri = null;
             onContactUriChanged();
@@ -152,7 +169,15 @@ public class QuickContactBadge extends ImageView implements View.OnClickListener
         this.mContactPhone = phoneNumber;
         this.mExtras = extras;
         if (!lazyLookup && this.mQueryHandler != null) {
-            this.mQueryHandler.startQuery(1, null, Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, this.mContactPhone), PHONE_LOOKUP_PROJECTION, null, null, null);
+            this.mQueryHandler.startQuery(
+                    1,
+                    null,
+                    Uri.withAppendedPath(
+                            ContactsContract.PhoneLookup.CONTENT_FILTER_URI, this.mContactPhone),
+                    PHONE_LOOKUP_PROJECTION,
+                    null,
+                    null,
+                    null);
         } else {
             this.mContactUri = null;
             onContactUriChanged();
@@ -172,15 +197,37 @@ public class QuickContactBadge extends ImageView implements View.OnClickListener
     public void onClick(View v) {
         Bundle extras = this.mExtras == null ? new Bundle() : this.mExtras;
         if (this.mContactUri != null) {
-            ContactsContract.QuickContact.showQuickContact(getContext(), this, this.mContactUri, this.mExcludeMimes, this.mPrioritizedMimeType);
+            ContactsContract.QuickContact.showQuickContact(
+                    getContext(),
+                    this,
+                    this.mContactUri,
+                    this.mExcludeMimes,
+                    this.mPrioritizedMimeType);
             return;
         }
         if (this.mContactEmail != null && this.mQueryHandler != null) {
             extras.putString(EXTRA_URI_CONTENT, this.mContactEmail);
-            this.mQueryHandler.startQuery(2, extras, Uri.withAppendedPath(ContactsContract.CommonDataKinds.Email.CONTENT_LOOKUP_URI, Uri.encode(this.mContactEmail)), EMAIL_LOOKUP_PROJECTION, null, null, null);
+            this.mQueryHandler.startQuery(
+                    2,
+                    extras,
+                    Uri.withAppendedPath(
+                            ContactsContract.CommonDataKinds.Email.CONTENT_LOOKUP_URI,
+                            Uri.encode(this.mContactEmail)),
+                    EMAIL_LOOKUP_PROJECTION,
+                    null,
+                    null,
+                    null);
         } else if (this.mContactPhone != null && this.mQueryHandler != null) {
             extras.putString(EXTRA_URI_CONTENT, this.mContactPhone);
-            this.mQueryHandler.startQuery(3, extras, Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, this.mContactPhone), PHONE_LOOKUP_PROJECTION, null, null, null);
+            this.mQueryHandler.startQuery(
+                    3,
+                    extras,
+                    Uri.withAppendedPath(
+                            ContactsContract.PhoneLookup.CONTENT_FILTER_URI, this.mContactPhone),
+                    PHONE_LOOKUP_PROJECTION,
+                    null,
+                    null,
+                    null);
         }
     }
 
@@ -211,7 +258,8 @@ public class QuickContactBadge extends ImageView implements View.OnClickListener
                         if (cursor != null && cursor.moveToFirst()) {
                             long contactId = cursor.getLong(0);
                             String lookupKey = cursor.getString(1);
-                            lookupUri = ContactsContract.Contacts.getLookupUri(contactId, lookupKey);
+                            lookupUri =
+                                    ContactsContract.Contacts.getLookupUri(contactId, lookupKey);
                             break;
                         }
                         break;
@@ -219,27 +267,39 @@ public class QuickContactBadge extends ImageView implements View.OnClickListener
                         if (cursor != null && cursor.moveToFirst()) {
                             long contactId2 = cursor.getLong(0);
                             String lookupKey2 = cursor.getString(1);
-                            lookupUri = ContactsContract.Contacts.getLookupUri(contactId2, lookupKey2);
+                            lookupUri =
+                                    ContactsContract.Contacts.getLookupUri(contactId2, lookupKey2);
                             break;
                         }
                         break;
                     case 2:
                         trigger = true;
-                        createUri = Uri.fromParts("mailto", extras.getString(QuickContactBadge.EXTRA_URI_CONTENT), null);
+                        createUri =
+                                Uri.fromParts(
+                                        "mailto",
+                                        extras.getString(QuickContactBadge.EXTRA_URI_CONTENT),
+                                        null);
                         if (cursor != null) {
                             long contactId3 = cursor.getLong(0);
                             String lookupKey3 = cursor.getString(1);
-                            lookupUri = ContactsContract.Contacts.getLookupUri(contactId3, lookupKey3);
+                            lookupUri =
+                                    ContactsContract.Contacts.getLookupUri(contactId3, lookupKey3);
                             break;
                         }
                         break;
                     case 3:
                         trigger = true;
-                        createUri = Uri.fromParts(PhoneAccount.SCHEME_TEL, extras.getString(QuickContactBadge.EXTRA_URI_CONTENT), null);
+                        createUri =
+                                Uri.fromParts(
+                                        PhoneAccount.SCHEME_TEL,
+                                        extras.getString(QuickContactBadge.EXTRA_URI_CONTENT),
+                                        null);
                         if (cursor != null) {
                             long contactId22 = cursor.getLong(0);
                             String lookupKey22 = cursor.getString(1);
-                            lookupUri = ContactsContract.Contacts.getLookupUri(contactId22, lookupKey22);
+                            lookupUri =
+                                    ContactsContract.Contacts.getLookupUri(
+                                            contactId22, lookupKey22);
                             break;
                         }
                         break;
@@ -250,11 +310,19 @@ public class QuickContactBadge extends ImageView implements View.OnClickListener
                 QuickContactBadge.this.mContactUri = lookupUri;
                 QuickContactBadge.this.onContactUriChanged();
                 if (trigger && QuickContactBadge.this.mContactUri != null) {
-                    ContactsContract.QuickContact.showQuickContact(QuickContactBadge.this.getContext(), QuickContactBadge.this, QuickContactBadge.this.mContactUri, QuickContactBadge.this.mExcludeMimes, QuickContactBadge.this.mPrioritizedMimeType);
+                    ContactsContract.QuickContact.showQuickContact(
+                            QuickContactBadge.this.getContext(),
+                            QuickContactBadge.this,
+                            QuickContactBadge.this.mContactUri,
+                            QuickContactBadge.this.mExcludeMimes,
+                            QuickContactBadge.this.mPrioritizedMimeType);
                     return;
                 }
                 if (createUri != null) {
-                    Intent intent = new Intent("com.android.contacts.action.SHOW_OR_CREATE_CONTACT", createUri);
+                    Intent intent =
+                            new Intent(
+                                    "com.android.contacts.action.SHOW_OR_CREATE_CONTACT",
+                                    createUri);
                     if (extras != null) {
                         Bundle bundle = new Bundle(extras);
                         bundle.remove(QuickContactBadge.EXTRA_URI_CONTENT);

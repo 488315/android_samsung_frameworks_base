@@ -6,20 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public final class TelephonyNetworkSpecifier extends NetworkSpecifier implements Parcelable {
-    public static final Parcelable.Creator<TelephonyNetworkSpecifier> CREATOR = new Parcelable.Creator<TelephonyNetworkSpecifier>() { // from class: android.net.TelephonyNetworkSpecifier.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TelephonyNetworkSpecifier createFromParcel(Parcel in) {
-            int subId = in.readInt();
-            return new TelephonyNetworkSpecifier(subId);
-        }
+    public static final Parcelable.Creator<TelephonyNetworkSpecifier> CREATOR =
+            new Parcelable.Creator<
+                    TelephonyNetworkSpecifier>() { // from class:
+                                                   // android.net.TelephonyNetworkSpecifier.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TelephonyNetworkSpecifier createFromParcel(Parcel in) {
+                    int subId = in.readInt();
+                    return new TelephonyNetworkSpecifier(subId);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TelephonyNetworkSpecifier[] newArray(int size) {
-            return new TelephonyNetworkSpecifier[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TelephonyNetworkSpecifier[] newArray(int size) {
+                    return new TelephonyNetworkSpecifier[size];
+                }
+            };
     private final int mSubId;
 
     public int getSubscriptionId() {
@@ -56,7 +59,9 @@ public final class TelephonyNetworkSpecifier extends NetworkSpecifier implements
     }
 
     public String toString() {
-        return "TelephonyNetworkSpecifier [mSubId = " + this.mSubId + NavigationBarInflaterView.SIZE_MOD_END;
+        return "TelephonyNetworkSpecifier [mSubId = "
+                + this.mSubId
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     @Override // android.net.NetworkSpecifier

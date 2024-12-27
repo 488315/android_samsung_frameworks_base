@@ -2,8 +2,10 @@ package com.samsung.android.sume.core.service;
 
 import android.app.Activity;
 import android.content.Context;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.functional.PlaceHolder;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -21,12 +23,14 @@ public class ServiceProxySupplier implements Supplier<ServiceProxy> {
 
     public ServiceProxySupplier(final Context context, final Class<?> clazz) {
         this.options = new HashMap();
-        this.supplier = new Supplier() { // from class: com.samsung.android.sume.core.service.ServiceProxySupplier$$ExternalSyntheticLambda0
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                return ServiceProxySupplier.this.m9212x1848a78a(clazz, context);
-            }
-        };
+        this.supplier =
+                new Supplier() { // from class:
+                                 // com.samsung.android.sume.core.service.ServiceProxySupplier$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Supplier
+                    public final Object get() {
+                        return ServiceProxySupplier.this.m9212x1848a78a(clazz, context);
+                    }
+                };
     }
 
     /* renamed from: lambda$new$0$com-samsung-android-sume-core-service-ServiceProxySupplier, reason: not valid java name */
@@ -42,18 +46,23 @@ public class ServiceProxySupplier implements Supplier<ServiceProxy> {
         this.supplier = supplier;
     }
 
-    public ServiceProxySupplier(final Context context, final String packageName, final String serviceName) {
+    public ServiceProxySupplier(
+            final Context context, final String packageName, final String serviceName) {
         this.options = new HashMap();
-        this.supplier = new Supplier() { // from class: com.samsung.android.sume.core.service.ServiceProxySupplier$$ExternalSyntheticLambda1
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                return ServiceProxySupplier.this.m9213x1e4c72e9(context, packageName, serviceName);
-            }
-        };
+        this.supplier =
+                new Supplier() { // from class:
+                                 // com.samsung.android.sume.core.service.ServiceProxySupplier$$ExternalSyntheticLambda1
+                    @Override // java.util.function.Supplier
+                    public final Object get() {
+                        return ServiceProxySupplier.this.m9213x1e4c72e9(
+                                context, packageName, serviceName);
+                    }
+                };
     }
 
     /* renamed from: lambda$new$1$com-samsung-android-sume-core-service-ServiceProxySupplier, reason: not valid java name */
-    /* synthetic */ ServiceProxy m9213x1e4c72e9(Context context, String packageName, String serviceName) {
+    /* synthetic */ ServiceProxy m9213x1e4c72e9(
+            Context context, String packageName, String serviceName) {
         return new RemoteServiceProxy(context, packageName, serviceName, this.options);
     }
 
@@ -94,12 +103,14 @@ public class ServiceProxySupplier implements Supplier<ServiceProxy> {
         return serviceProxySupplier.addOption(1);
     }
 
-    static class PlaceHolderImpl extends ServiceProxySupplier implements PlaceHolder<ServiceProxySupplier> {
+    static class PlaceHolderImpl extends ServiceProxySupplier
+            implements PlaceHolder<ServiceProxySupplier> {
         private Context context;
         private String packageName;
         private String serviceName;
 
-        @Override // com.samsung.android.sume.core.service.ServiceProxySupplier, java.util.function.Supplier
+        @Override // com.samsung.android.sume.core.service.ServiceProxySupplier,
+                  // java.util.function.Supplier
         public /* bridge */ /* synthetic */ ServiceProxy get() {
             return super.get();
         }
@@ -130,7 +141,8 @@ public class ServiceProxySupplier implements Supplier<ServiceProxy> {
         @Override // com.samsung.android.sume.core.functional.PlaceHolder
         public ServiceProxySupplier reset() {
             Def.require((this.packageName == null || this.serviceName == null) ? false : true);
-            ServiceProxySupplier serviceProxySupplier = ServiceProxy.of(this.context, this.packageName, this.serviceName);
+            ServiceProxySupplier serviceProxySupplier =
+                    ServiceProxy.of(this.context, this.packageName, this.serviceName);
             serviceProxySupplier.options.putAll(this.options);
             this.context = null;
             return serviceProxySupplier;

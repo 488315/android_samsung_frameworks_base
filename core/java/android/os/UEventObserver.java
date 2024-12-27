@@ -77,7 +77,9 @@ public abstract class UEventObserver {
                 int at = message.indexOf(0, offset);
                 if (at >= 0) {
                     if (equals > offset && equals < at) {
-                        this.mMap.put(message.substring(offset, equals), message.substring(equals + 1, at));
+                        this.mMap.put(
+                                message.substring(offset, equals),
+                                message.substring(equals + 1, at));
                     }
                     offset = at + 1;
                 } else {
@@ -127,7 +129,8 @@ public abstract class UEventObserver {
                 for (int i = 0; i < N; i += 2) {
                     String key = (String) this.mKeysAndObservers.get(i);
                     if (message.contains(key)) {
-                        UEventObserver observer = (UEventObserver) this.mKeysAndObservers.get(i + 1);
+                        UEventObserver observer =
+                                (UEventObserver) this.mKeysAndObservers.get(i + 1);
                         this.mTempObserversToSignal.add(observer);
                     }
                 }

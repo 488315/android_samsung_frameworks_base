@@ -16,7 +16,8 @@ public final class RequestActiveSourceAction extends HdmiCecFeatureAction {
         HdmiControlService hdmiControlService = this.mService;
         if (i2 == 1) {
             this.mState = 2;
-            hdmiControlService.sendCecCommand(HdmiCecMessage.build(getSourceAddress(), 15, 133), null);
+            hdmiControlService.sendCecCommand(
+                    HdmiCecMessage.build(getSourceAddress(), 15, 133), null);
             addTimer(this.mState, 2000);
         } else {
             if (i2 != 2) {
@@ -27,7 +28,8 @@ public final class RequestActiveSourceAction extends HdmiCecFeatureAction {
             if (i3 >= 1) {
                 finishWithCallback(1);
             } else {
-                hdmiControlService.sendCecCommand(HdmiCecMessage.build(getSourceAddress(), 15, 133), null);
+                hdmiControlService.sendCecCommand(
+                        HdmiCecMessage.build(getSourceAddress(), 15, 133), null);
                 addTimer(this.mState, 2000);
             }
         }

@@ -19,6 +19,7 @@ import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.util.Log;
+
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
@@ -26,9 +27,10 @@ import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
 import com.android.server.VpnManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.GestureWakeup$$ExternalSyntheticOutline0;
-import com.android.server.knox.zt.networktrust.KnoxNetworkEventFirewall;
 import com.android.server.pm.PackageManagerShellCommandDataLoader;
+
 import com.samsung.android.knox.SemPersonaManager;
+
 import java.net.Inet4Address;
 import java.net.Inet6Address;
 import java.net.InetAddress;
@@ -65,7 +67,10 @@ public final class KnoxNetworkEventService {
 
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
-            GestureWakeup$$ExternalSyntheticOutline0.m(new StringBuilder("handleMessage called msg.what = "), message.what, "KnoxNetworkEventService");
+            GestureWakeup$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("handleMessage called msg.what = "),
+                    message.what,
+                    "KnoxNetworkEventService");
             Bundle bundle = (Bundle) message.obj;
             int i = message.what;
             if (i == 1) {
@@ -76,18 +81,28 @@ public final class KnoxNetworkEventService {
                         ((HashSet) knoxNetworkEventService.mEnabledEvents).add(Integer.valueOf(i2));
                         switch (i2) {
                             case 14:
-                                Log.d("KnoxNetworkEventService", "handleStartMonitoring() insertRuleForInsecurePorts()");
-                                Iterator it = ((HashSet) knoxNetworkEventService.mUserIdList).iterator();
+                                Log.d(
+                                        "KnoxNetworkEventService",
+                                        "handleStartMonitoring() insertRuleForInsecurePorts()");
+                                Iterator it =
+                                        ((HashSet) knoxNetworkEventService.mUserIdList).iterator();
                                 while (it.hasNext()) {
                                     int intValue = ((Integer) it.next()).intValue();
-                                    Log.d("KnoxNetworkEventService", "handleStartMonitoring() insertRuleForInsecurePorts userId = " + intValue);
+                                    Log.d(
+                                            "KnoxNetworkEventService",
+                                            "handleStartMonitoring() insertRuleForInsecurePorts"
+                                                + " userId = "
+                                                    + intValue);
                                     knoxNetworkEventService.mKnoxNwEventFw.getClass();
                                     KnoxNetworkEventFirewall.insertRuleForInsecurePorts(intValue);
                                 }
                                 break;
                             case 15:
                             case 16:
-                                Log.d("KnoxNetworkEventService", "handleStartMonitoring() registerSystemDefaultNetworkCallback()");
+                                Log.d(
+                                        "KnoxNetworkEventService",
+                                        "handleStartMonitoring()"
+                                            + " registerSystemDefaultNetworkCallback()");
                                 knoxNetworkEventService.registerSystemDefaultNetworkCallback();
                                 break;
                             default:
@@ -109,17 +124,24 @@ public final class KnoxNetworkEventService {
                 synchronized (knoxNetworkEventService2) {
                     int i3 = bundle.getInt("android.intent.extra.user_handle", -10000);
                     Log.d("KnoxNetworkEventService", "handleActionUserRemoved for user: " + i3);
-                    if (((HashSet) knoxNetworkEventService2.mUserIdList).contains(Integer.valueOf(i3))) {
-                        KnoxNetworkEventFirewall knoxNetworkEventFirewall = knoxNetworkEventService2.mKnoxNwEventFw;
-                        KnoxNetworkEventFirewall.EventType eventType = KnoxNetworkEventFirewall.EventType.INSECURE_PORTS;
+                    if (((HashSet) knoxNetworkEventService2.mUserIdList)
+                            .contains(Integer.valueOf(i3))) {
+                        KnoxNetworkEventFirewall knoxNetworkEventFirewall =
+                                knoxNetworkEventService2.mKnoxNwEventFw;
+                        KnoxNetworkEventFirewall.EventType eventType =
+                                KnoxNetworkEventFirewall.EventType.INSECURE_PORTS;
                         knoxNetworkEventFirewall.getClass();
                         KnoxNetworkEventFirewall.flushRulesForEvent(eventType);
-                        KnoxNetworkEventFirewall knoxNetworkEventFirewall2 = knoxNetworkEventService2.mKnoxNwEventFw;
-                        KnoxNetworkEventFirewall.EventType eventType2 = KnoxNetworkEventFirewall.EventType.ABNORMAL_PACKETS;
+                        KnoxNetworkEventFirewall knoxNetworkEventFirewall2 =
+                                knoxNetworkEventService2.mKnoxNwEventFw;
+                        KnoxNetworkEventFirewall.EventType eventType2 =
+                                KnoxNetworkEventFirewall.EventType.ABNORMAL_PACKETS;
                         knoxNetworkEventFirewall2.getClass();
                         KnoxNetworkEventFirewall.flushRulesForEvent(eventType2);
-                        KnoxNetworkEventFirewall knoxNetworkEventFirewall3 = knoxNetworkEventService2.mKnoxNwEventFw;
-                        KnoxNetworkEventFirewall.EventType eventType3 = KnoxNetworkEventFirewall.EventType.LOCAL_NW;
+                        KnoxNetworkEventFirewall knoxNetworkEventFirewall3 =
+                                knoxNetworkEventService2.mKnoxNwEventFw;
+                        KnoxNetworkEventFirewall.EventType eventType3 =
+                                KnoxNetworkEventFirewall.EventType.LOCAL_NW;
                         knoxNetworkEventFirewall3.getClass();
                         KnoxNetworkEventFirewall.flushRulesForEvent(eventType3);
                         return;
@@ -132,25 +154,32 @@ public final class KnoxNetworkEventService {
                 try {
                     int i4 = bundle.getInt("eventType");
                     ((HashSet) knoxNetworkEventService3.mEnabledEvents).remove(Integer.valueOf(i4));
-                    if (!((HashSet) knoxNetworkEventService3.mEnabledEvents).contains(15) && !((HashSet) knoxNetworkEventService3.mEnabledEvents).contains(16)) {
+                    if (!((HashSet) knoxNetworkEventService3.mEnabledEvents).contains(15)
+                            && !((HashSet) knoxNetworkEventService3.mEnabledEvents).contains(16)) {
                         knoxNetworkEventService3.unregisterSystemDefaultNetworkCallback();
                     }
                     switch (i4) {
                         case 14:
-                            KnoxNetworkEventFirewall knoxNetworkEventFirewall4 = knoxNetworkEventService3.mKnoxNwEventFw;
-                            KnoxNetworkEventFirewall.EventType eventType4 = KnoxNetworkEventFirewall.EventType.INSECURE_PORTS;
+                            KnoxNetworkEventFirewall knoxNetworkEventFirewall4 =
+                                    knoxNetworkEventService3.mKnoxNwEventFw;
+                            KnoxNetworkEventFirewall.EventType eventType4 =
+                                    KnoxNetworkEventFirewall.EventType.INSECURE_PORTS;
                             knoxNetworkEventFirewall4.getClass();
                             KnoxNetworkEventFirewall.flushRulesForEvent(eventType4);
                             break;
                         case 15:
-                            KnoxNetworkEventFirewall knoxNetworkEventFirewall5 = knoxNetworkEventService3.mKnoxNwEventFw;
-                            KnoxNetworkEventFirewall.EventType eventType5 = KnoxNetworkEventFirewall.EventType.ABNORMAL_PACKETS;
+                            KnoxNetworkEventFirewall knoxNetworkEventFirewall5 =
+                                    knoxNetworkEventService3.mKnoxNwEventFw;
+                            KnoxNetworkEventFirewall.EventType eventType5 =
+                                    KnoxNetworkEventFirewall.EventType.ABNORMAL_PACKETS;
                             knoxNetworkEventFirewall5.getClass();
                             KnoxNetworkEventFirewall.flushRulesForEvent(eventType5);
                             break;
                         case 16:
-                            KnoxNetworkEventFirewall knoxNetworkEventFirewall6 = knoxNetworkEventService3.mKnoxNwEventFw;
-                            KnoxNetworkEventFirewall.EventType eventType6 = KnoxNetworkEventFirewall.EventType.LOCAL_NW;
+                            KnoxNetworkEventFirewall knoxNetworkEventFirewall6 =
+                                    knoxNetworkEventService3.mKnoxNwEventFw;
+                            KnoxNetworkEventFirewall.EventType eventType6 =
+                                    KnoxNetworkEventFirewall.EventType.LOCAL_NW;
                             knoxNetworkEventFirewall6.getClass();
                             KnoxNetworkEventFirewall.flushRulesForEvent(eventType6);
                             break;
@@ -159,13 +188,17 @@ public final class KnoxNetworkEventService {
                         long clearCallingIdentity = Binder.clearCallingIdentity();
                         try {
                             try {
-                                UserActivityReceiver userActivityReceiver = knoxNetworkEventService3.mReceiver;
+                                UserActivityReceiver userActivityReceiver =
+                                        knoxNetworkEventService3.mReceiver;
                                 if (userActivityReceiver != null) {
-                                    knoxNetworkEventService3.mContext.unregisterReceiver(userActivityReceiver);
+                                    knoxNetworkEventService3.mContext.unregisterReceiver(
+                                            userActivityReceiver);
                                 }
                                 knoxNetworkEventService3.mReceiver = null;
                             } catch (Exception unused) {
-                                Log.e("KnoxNetworkEventService", "Error while trying to unregister the receiver");
+                                Log.e(
+                                        "KnoxNetworkEventService",
+                                        "Error while trying to unregister the receiver");
                             }
                             Binder.restoreCallingIdentity(clearCallingIdentity);
                         } finally {
@@ -184,21 +217,25 @@ public final class KnoxNetworkEventService {
         public String mDefaultInterface;
         public boolean mIsWifiConfigured = false;
 
-        public NetworkCallback() {
-        }
+        public NetworkCallback() {}
 
         @Override // android.net.ConnectivityManager.NetworkCallback
         public final void onAvailable(Network network) {
-            Log.d("KnoxNetworkEventService", "onAvailable being called for netId " + network.getNetId());
+            Log.d(
+                    "KnoxNetworkEventService",
+                    "onAvailable being called for netId " + network.getNetId());
         }
 
         @Override // android.net.ConnectivityManager.NetworkCallback
-        public final void onCapabilitiesChanged(Network network, NetworkCapabilities networkCapabilities) {
+        public final void onCapabilitiesChanged(
+                Network network, NetworkCapabilities networkCapabilities) {
             if (!networkCapabilities.hasTransport(1)) {
                 this.mIsWifiConfigured = false;
                 return;
             }
-            Log.d("KnoxNetworkEventService", "onCapabilitiesChanged being called for wifi with netId " + network.getNetId());
+            Log.d(
+                    "KnoxNetworkEventService",
+                    "onCapabilitiesChanged being called for wifi with netId " + network.getNetId());
             this.mIsWifiConfigured = true;
         }
 
@@ -215,19 +252,30 @@ public final class KnoxNetworkEventService {
             NetworkCallback networkCallback = this;
             networkCallback.mDefaultInterface = linkProperties.getInterfaceName();
             String str4 = "KnoxNetworkEventService";
-            Log.d("KnoxNetworkEventService", "onLinkPropertiesChanged being called for netId " + network.getNetId() + " for interface " + networkCallback.mDefaultInterface);
+            Log.d(
+                    "KnoxNetworkEventService",
+                    "onLinkPropertiesChanged being called for netId "
+                            + network.getNetId()
+                            + " for interface "
+                            + networkCallback.mDefaultInterface);
             List<InetAddress> dnsServers = linkProperties.getDnsServers();
             boolean contains = ((HashSet) KnoxNetworkEventService.this.mEnabledEvents).contains(15);
-            KnoxNetworkEventFirewall.IpRestoreActionType ipRestoreActionType = KnoxNetworkEventFirewall.IpRestoreActionType.INSERT;
-            KnoxNetworkEventFirewall.IpRestoreActionType ipRestoreActionType2 = KnoxNetworkEventFirewall.IpRestoreActionType.APPEND;
+            KnoxNetworkEventFirewall.IpRestoreActionType ipRestoreActionType =
+                    KnoxNetworkEventFirewall.IpRestoreActionType.INSERT;
+            KnoxNetworkEventFirewall.IpRestoreActionType ipRestoreActionType2 =
+                    KnoxNetworkEventFirewall.IpRestoreActionType.APPEND;
             String str5 = PackageManagerShellCommandDataLoader.STDIN_PATH;
             if (contains) {
                 Log.d("KnoxNetworkEventService", "NetworkCallback: insertRulesForAbnormalPackets");
                 Iterator it = ((HashSet) KnoxNetworkEventService.this.mUserIdList).iterator();
                 while (it.hasNext()) {
                     int intValue = ((Integer) it.next()).intValue();
-                    NetworkScorerAppManager$$ExternalSyntheticOutline0.m(intValue, "NetworkCallback: insertRulesForAbnormalPackets userId = ", str4);
-                    KnoxNetworkEventFirewall knoxNetworkEventFirewall = KnoxNetworkEventService.this.mKnoxNwEventFw;
+                    NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                            intValue,
+                            "NetworkCallback: insertRulesForAbnormalPackets userId = ",
+                            str4);
+                    KnoxNetworkEventFirewall knoxNetworkEventFirewall =
+                            KnoxNetworkEventService.this.mKnoxNwEventFw;
                     String str6 = networkCallback.mDefaultInterface;
                     knoxNetworkEventFirewall.getClass();
                     ArrayList arrayList = new ArrayList();
@@ -244,27 +292,59 @@ public final class KnoxNetworkEventService {
                     Iterator it2 = it;
                     String str8 = str5;
                     String str9 = str4;
-                    arrayList.add(new KnoxNetworkEventFirewall.IpRestoreParam("knox_nw_event_2", "", "knox_nw_event_2_mch", "", ipRestoreActionType2));
-                    arrayList2.add(new KnoxNetworkEventFirewall.IpRestoreParam("knox_nw_event_2", "", "knox_nw_event_2_mch", "", ipRestoreActionType2));
+                    arrayList.add(
+                            new KnoxNetworkEventFirewall.IpRestoreParam(
+                                    "knox_nw_event_2",
+                                    "",
+                                    "knox_nw_event_2_mch",
+                                    "",
+                                    ipRestoreActionType2));
+                    arrayList2.add(
+                            new KnoxNetworkEventFirewall.IpRestoreParam(
+                                    "knox_nw_event_2",
+                                    "",
+                                    "knox_nw_event_2_mch",
+                                    "",
+                                    ipRestoreActionType2));
                     boolean z = false;
                     boolean z2 = false;
                     for (InetAddress inetAddress : dnsServers) {
                         if (inetAddress instanceof Inet4Address) {
-                            StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", str7, " -p udp --dport 53 -d ");
+                            StringBuilder m =
+                                    DumpUtils$$ExternalSyntheticOutline0.m(
+                                            " -m owner --uid-owner ",
+                                            str7,
+                                            " -p udp --dport 53 -d ");
                             m.append(inetAddress.getHostAddress());
                             m.append(" -o ");
                             m.append(str6);
                             list = dnsServers;
-                            arrayList.add(new KnoxNetworkEventFirewall.IpRestoreParam("knox_nw_event_2_mch", m.toString(), "RETURN", "", ipRestoreActionType));
+                            arrayList.add(
+                                    new KnoxNetworkEventFirewall.IpRestoreParam(
+                                            "knox_nw_event_2_mch",
+                                            m.toString(),
+                                            "RETURN",
+                                            "",
+                                            ipRestoreActionType));
                             z = true;
                         } else {
                             list = dnsServers;
                             if (inetAddress instanceof Inet6Address) {
-                                StringBuilder m2 = DumpUtils$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", str7, " -p udp --dport 53 -d ");
+                                StringBuilder m2 =
+                                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                                " -m owner --uid-owner ",
+                                                str7,
+                                                " -p udp --dport 53 -d ");
                                 m2.append(inetAddress.getHostAddress());
                                 m2.append(" -o ");
                                 m2.append(str6);
-                                arrayList2.add(new KnoxNetworkEventFirewall.IpRestoreParam("knox_nw_event_2_mch", m2.toString(), "RETURN", "", ipRestoreActionType));
+                                arrayList2.add(
+                                        new KnoxNetworkEventFirewall.IpRestoreParam(
+                                                "knox_nw_event_2_mch",
+                                                m2.toString(),
+                                                "RETURN",
+                                                "",
+                                                ipRestoreActionType));
                                 z2 = true;
                             }
                         }
@@ -272,10 +352,30 @@ public final class KnoxNetworkEventService {
                     }
                     List<InetAddress> list2 = dnsServers;
                     if (z) {
-                        arrayList.add(new KnoxNetworkEventFirewall.IpRestoreParam("knox_nw_event_2_mch", BootReceiver$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", str7, " -p udp --dport 53 -o ", str6), "knox_nw_event_2_act", "", ipRestoreActionType2));
+                        arrayList.add(
+                                new KnoxNetworkEventFirewall.IpRestoreParam(
+                                        "knox_nw_event_2_mch",
+                                        BootReceiver$$ExternalSyntheticOutline0.m(
+                                                " -m owner --uid-owner ",
+                                                str7,
+                                                " -p udp --dport 53 -o ",
+                                                str6),
+                                        "knox_nw_event_2_act",
+                                        "",
+                                        ipRestoreActionType2));
                     }
                     if (z2) {
-                        arrayList2.add(new KnoxNetworkEventFirewall.IpRestoreParam("knox_nw_event_2_mch", BootReceiver$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", str7, " -p udp --dport 53 -o ", str6), "knox_nw_event_2_act", "", ipRestoreActionType2));
+                        arrayList2.add(
+                                new KnoxNetworkEventFirewall.IpRestoreParam(
+                                        "knox_nw_event_2_mch",
+                                        BootReceiver$$ExternalSyntheticOutline0.m(
+                                                " -m owner --uid-owner ",
+                                                str7,
+                                                " -p udp --dport 53 -o ",
+                                                str6),
+                                        "knox_nw_event_2_act",
+                                        "",
+                                        ipRestoreActionType2));
                     }
                     KnoxNetworkEventFirewall.insertRules(true, null, arrayList, 4);
                     KnoxNetworkEventFirewall.insertRules(true, null, arrayList2, 6);
@@ -295,12 +395,22 @@ public final class KnoxNetworkEventService {
             try {
                 NetworkInterface byName = NetworkInterface.getByName(str12);
                 if (byName != null) {
-                    Iterator it3 = ((ArrayList) KnoxNetworkEventService.excludeLinkLocal(byName.getInterfaceAddresses())).iterator();
+                    Iterator it3 =
+                            ((ArrayList)
+                                            KnoxNetworkEventService.excludeLinkLocal(
+                                                    byName.getInterfaceAddresses()))
+                                    .iterator();
                     while (it3.hasNext()) {
                         InterfaceAddress interfaceAddress = (InterfaceAddress) it3.next();
-                        InetAddress networkPart = KnoxNetworkEventService.getNetworkPart(interfaceAddress.getAddress(), interfaceAddress.getNetworkPrefixLength());
+                        InetAddress networkPart =
+                                KnoxNetworkEventService.getNetworkPart(
+                                        interfaceAddress.getAddress(),
+                                        interfaceAddress.getNetworkPrefixLength());
                         if (!(networkPart instanceof Inet6Address)) {
-                            str2 = networkPart.getHostAddress() + "/" + ((int) interfaceAddress.getNetworkPrefixLength());
+                            str2 =
+                                    networkPart.getHostAddress()
+                                            + "/"
+                                            + ((int) interfaceAddress.getNetworkPrefixLength());
                             break;
                         }
                     }
@@ -318,7 +428,11 @@ public final class KnoxNetworkEventService {
             try {
                 NetworkInterface byName2 = NetworkInterface.getByName(str13);
                 if (byName2 != null) {
-                    Iterator it4 = ((ArrayList) KnoxNetworkEventService.excludeLinkLocal(byName2.getInterfaceAddresses())).iterator();
+                    Iterator it4 =
+                            ((ArrayList)
+                                            KnoxNetworkEventService.excludeLinkLocal(
+                                                    byName2.getInterfaceAddresses()))
+                                    .iterator();
                     while (it4.hasNext()) {
                         InterfaceAddress interfaceAddress2 = (InterfaceAddress) it4.next();
                         if (interfaceAddress2.getBroadcast() instanceof Inet4Address) {
@@ -331,14 +445,22 @@ public final class KnoxNetworkEventService {
             }
             str3 = null;
             StringBuilder sb = new StringBuilder("mDefaultInterface: ");
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(sb, networkCallback.mDefaultInterface, " destIpRange: ", str2, " broadcastIpAddress: ");
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    sb,
+                    networkCallback.mDefaultInterface,
+                    " destIpRange: ",
+                    str2,
+                    " broadcastIpAddress: ");
             DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(sb, str3, str);
             if (((HashSet) KnoxNetworkEventService.this.mEnabledEvents).contains(16)) {
                 Log.d(str, "NetworkCallback: insertRuleForLocalNetworkPackets");
                 Iterator it5 = ((HashSet) KnoxNetworkEventService.this.mUserIdList).iterator();
                 while (it5.hasNext()) {
                     int intValue2 = ((Integer) it5.next()).intValue();
-                    NetworkScorerAppManager$$ExternalSyntheticOutline0.m(intValue2, "NetworkCallback: insertRuleForLocalNetworkPackets userId = ", str);
+                    NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                            intValue2,
+                            "NetworkCallback: insertRuleForLocalNetworkPackets userId = ",
+                            str);
                     KnoxNetworkEventService.this.mKnoxNwEventFw.getClass();
                     ArrayList arrayList3 = new ArrayList();
                     if (intValue2 == 0) {
@@ -355,11 +477,52 @@ public final class KnoxNetworkEventService {
                     sb2.append(str14);
                     sb2.append(i4);
                     String sb3 = sb2.toString();
-                    arrayList3.add(new KnoxNetworkEventFirewall.IpRestoreParam("knox_nw_event_3", "", "knox_nw_event_3_mch", "", ipRestoreActionType2));
-                    arrayList3.add(new KnoxNetworkEventFirewall.IpRestoreParam("knox_nw_event_3_mch", XmlUtils$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", sb3, " -p udp -m multiport --dports 1900,5353"), "RETURN", "", ipRestoreActionType));
-                    arrayList3.add(new KnoxNetworkEventFirewall.IpRestoreParam("knox_nw_event_3_mch", XmlUtils$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", sb3, " -p udp -d 224.0.0.0/24"), "knox_nw_event_3_act", "", ipRestoreActionType2));
-                    arrayList3.add(new KnoxNetworkEventFirewall.IpRestoreParam("knox_nw_event_3_mch", BootReceiver$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", sb3, " -p udp -d ", str3), "knox_nw_event_3_act", "", ipRestoreActionType2));
-                    arrayList3.add(new KnoxNetworkEventFirewall.IpRestoreParam("knox_nw_event_3_mch", BootReceiver$$ExternalSyntheticOutline0.m(" -m owner --uid-owner ", sb3, " -p tcp -m state --state NEW -d ", str2), "knox_nw_event_3_act", "", ipRestoreActionType2));
+                    arrayList3.add(
+                            new KnoxNetworkEventFirewall.IpRestoreParam(
+                                    "knox_nw_event_3",
+                                    "",
+                                    "knox_nw_event_3_mch",
+                                    "",
+                                    ipRestoreActionType2));
+                    arrayList3.add(
+                            new KnoxNetworkEventFirewall.IpRestoreParam(
+                                    "knox_nw_event_3_mch",
+                                    XmlUtils$$ExternalSyntheticOutline0.m(
+                                            " -m owner --uid-owner ",
+                                            sb3,
+                                            " -p udp -m multiport --dports 1900,5353"),
+                                    "RETURN",
+                                    "",
+                                    ipRestoreActionType));
+                    arrayList3.add(
+                            new KnoxNetworkEventFirewall.IpRestoreParam(
+                                    "knox_nw_event_3_mch",
+                                    XmlUtils$$ExternalSyntheticOutline0.m(
+                                            " -m owner --uid-owner ",
+                                            sb3,
+                                            " -p udp -d 224.0.0.0/24"),
+                                    "knox_nw_event_3_act",
+                                    "",
+                                    ipRestoreActionType2));
+                    arrayList3.add(
+                            new KnoxNetworkEventFirewall.IpRestoreParam(
+                                    "knox_nw_event_3_mch",
+                                    BootReceiver$$ExternalSyntheticOutline0.m(
+                                            " -m owner --uid-owner ", sb3, " -p udp -d ", str3),
+                                    "knox_nw_event_3_act",
+                                    "",
+                                    ipRestoreActionType2));
+                    arrayList3.add(
+                            new KnoxNetworkEventFirewall.IpRestoreParam(
+                                    "knox_nw_event_3_mch",
+                                    BootReceiver$$ExternalSyntheticOutline0.m(
+                                            " -m owner --uid-owner ",
+                                            sb3,
+                                            " -p tcp -m state --state NEW -d ",
+                                            str2),
+                                    "knox_nw_event_3_act",
+                                    "",
+                                    ipRestoreActionType2));
                     KnoxNetworkEventFirewall.insertRules(true, null, arrayList3, 46);
                     networkCallback = this;
                     str11 = str14;
@@ -373,12 +536,16 @@ public final class KnoxNetworkEventService {
             this.mDefaultInterface = null;
             this.mIsWifiConfigured = false;
             Log.d("KnoxNetworkEventService", "onLost being called for netId " + network.getNetId());
-            KnoxNetworkEventFirewall knoxNetworkEventFirewall = KnoxNetworkEventService.this.mKnoxNwEventFw;
-            KnoxNetworkEventFirewall.EventType eventType = KnoxNetworkEventFirewall.EventType.ABNORMAL_PACKETS;
+            KnoxNetworkEventFirewall knoxNetworkEventFirewall =
+                    KnoxNetworkEventService.this.mKnoxNwEventFw;
+            KnoxNetworkEventFirewall.EventType eventType =
+                    KnoxNetworkEventFirewall.EventType.ABNORMAL_PACKETS;
             knoxNetworkEventFirewall.getClass();
             KnoxNetworkEventFirewall.flushRulesForEvent(eventType);
-            KnoxNetworkEventFirewall knoxNetworkEventFirewall2 = KnoxNetworkEventService.this.mKnoxNwEventFw;
-            KnoxNetworkEventFirewall.EventType eventType2 = KnoxNetworkEventFirewall.EventType.LOCAL_NW;
+            KnoxNetworkEventFirewall knoxNetworkEventFirewall2 =
+                    KnoxNetworkEventService.this.mKnoxNwEventFw;
+            KnoxNetworkEventFirewall.EventType eventType2 =
+                    KnoxNetworkEventFirewall.EventType.LOCAL_NW;
             knoxNetworkEventFirewall2.getClass();
             KnoxNetworkEventFirewall.flushRulesForEvent(eventType2);
         }
@@ -386,20 +553,21 @@ public final class KnoxNetworkEventService {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserActivityReceiver extends BroadcastReceiver {
-        public UserActivityReceiver() {
-        }
+        public UserActivityReceiver() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (isInitialStickyBroadcast() || !action.equals("android.intent.action.USER_REMOVED")) {
+            if (isInitialStickyBroadcast()
+                    || !action.equals("android.intent.action.USER_REMOVED")) {
                 return;
             }
             Bundle extras = intent.getExtras();
             KnoxNetworkEventService knoxNetworkEventService = KnoxNetworkEventService.this;
             KnoxNwEventHandler knoxNwEventHandler = knoxNetworkEventService.mHandler;
             if (knoxNwEventHandler != null) {
-                knoxNetworkEventService.mHandler.sendMessage(Message.obtain(knoxNwEventHandler, 3, 0, 0, extras));
+                knoxNetworkEventService.mHandler.sendMessage(
+                        Message.obtain(knoxNwEventHandler, 3, 0, 0, extras));
             }
         }
     }
@@ -408,7 +576,8 @@ public final class KnoxNetworkEventService {
         KnoxNetworkEventFirewall knoxNetworkEventFirewall;
         this.mContext = context;
         this.mCm = (ConnectivityManager) context.getSystemService(ConnectivityManager.class);
-        KnoxNetworkEventFirewall knoxNetworkEventFirewall2 = KnoxNetworkEventFirewall.mKnoxNwEventFw;
+        KnoxNetworkEventFirewall knoxNetworkEventFirewall2 =
+                KnoxNetworkEventFirewall.mKnoxNwEventFw;
         synchronized (KnoxNetworkEventFirewall.class) {
             try {
                 if (KnoxNetworkEventFirewall.mKnoxNwEventFw == null) {
@@ -478,10 +647,14 @@ public final class KnoxNetworkEventService {
     public static InetAddress getNetworkPart(InetAddress inetAddress, int i) {
         byte[] address = inetAddress.getAddress();
         if (i < 0 || i > address.length * 8) {
-            throw new RuntimeException("IP address with " + address.length + " bytes has invalid prefix length " + i);
+            throw new RuntimeException(
+                    "IP address with " + address.length + " bytes has invalid prefix length " + i);
         }
         int i2 = i / 8;
-        byte b = (byte) (IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT << (8 - (i % 8)));
+        byte b =
+                (byte)
+                        (IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT
+                                << (8 - (i % 8)));
         if (i2 < address.length) {
             address[i2] = (byte) (b & address[i2]);
         }
@@ -506,9 +679,13 @@ public final class KnoxNetworkEventService {
                 if (this.mDefaultNetworkCallback == null) {
                     this.mDefaultNetworkCallback = new NetworkCallback();
                 }
-                connectivityManager.registerSystemDefaultNetworkCallback(this.mDefaultNetworkCallback, this.mHandler);
+                connectivityManager.registerSystemDefaultNetworkCallback(
+                        this.mDefaultNetworkCallback, this.mHandler);
             } catch (RuntimeException e) {
-                Log.e("KnoxNetworkEventService", "Failed to register system default network callback " + Log.getStackTraceString(e));
+                Log.e(
+                        "KnoxNetworkEventService",
+                        "Failed to register system default network callback "
+                                + Log.getStackTraceString(e));
                 this.mDefaultNetworkCallback = null;
             }
         } finally {
@@ -525,7 +702,8 @@ public final class KnoxNetworkEventService {
         try {
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction("android.intent.action.USER_REMOVED");
-            this.mContext.registerReceiverAsUser(this.mReceiver, UserHandle.ALL, intentFilter, null, null);
+            this.mContext.registerReceiverAsUser(
+                    this.mReceiver, UserHandle.ALL, intentFilter, null, null);
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
@@ -541,7 +719,10 @@ public final class KnoxNetworkEventService {
                 }
                 this.mDefaultNetworkCallback = null;
             } catch (RuntimeException e) {
-                Log.e("KnoxNetworkEventService", "Failed to unregister system default network callback " + Log.getStackTraceString(e));
+                Log.e(
+                        "KnoxNetworkEventService",
+                        "Failed to unregister system default network callback "
+                                + Log.getStackTraceString(e));
             }
             Binder.restoreCallingIdentity(clearCallingIdentity);
         } catch (Throwable th) {

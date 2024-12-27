@@ -1,11 +1,12 @@
 package android.os;
 
-import android.os.DdmSyncState;
 import android.util.Slog;
-import java.nio.ByteBuffer;
+
 import org.apache.harmony.dalvik.ddmc.Chunk;
 import org.apache.harmony.dalvik.ddmc.ChunkHandler;
 import org.apache.harmony.dalvik.ddmc.DdmServer;
+
+import java.nio.ByteBuffer;
 
 /* loaded from: classes3.dex */
 public class DdmSyncStageUpdater {

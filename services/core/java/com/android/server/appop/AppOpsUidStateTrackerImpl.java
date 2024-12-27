@@ -9,10 +9,11 @@ import android.util.SparseBooleanArray;
 import android.util.SparseIntArray;
 import android.util.SparseLongArray;
 import android.util.TimeUtils;
+
 import com.android.internal.hidden_from_bootclasspath.android.permission.flags.Flags;
 import com.android.internal.os.Clock;
 import com.android.internal.util.function.pooled.PooledLambda;
-import com.android.server.appop.AppOpsService;
+
 import java.io.PrintWriter;
 import java.lang.reflect.Array;
 import java.util.concurrent.Executor;
@@ -20,8 +21,10 @@ import java.util.concurrent.Executor;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class AppOpsUidStateTrackerImpl implements AppOpsUidStateTracker {
-    public static final boolean DEBUG = "0x4948".equals(SystemProperties.get("ro.boot.debug_level", "unknown"));
-    public static final boolean DEBUG_MID = "0x494d".equals(SystemProperties.get("ro.boot.debug_level", "unknown"));
+    public static final boolean DEBUG =
+            "0x4948".equals(SystemProperties.get("ro.boot.debug_level", "unknown"));
+    public static final boolean DEBUG_MID =
+            "0x494d".equals(SystemProperties.get("ro.boot.debug_level", "unknown"));
     public final ActivityManagerInternal mActivityManagerInternal;
     public final Clock mClock;
     public final AppOpsService.Constants mConstants;
@@ -76,7 +79,12 @@ public final class AppOpsUidStateTrackerImpl implements AppOpsUidStateTracker {
         }
     }
 
-    public AppOpsUidStateTrackerImpl(ActivityManagerInternal activityManagerInternal, DelayableExecutor delayableExecutor, Clock clock, AppOpsService.Constants constants, Thread thread) {
+    public AppOpsUidStateTrackerImpl(
+            ActivityManagerInternal activityManagerInternal,
+            DelayableExecutor delayableExecutor,
+            Clock clock,
+            AppOpsService.Constants constants,
+            Thread thread) {
         this.mActivityManagerInternal = activityManagerInternal;
         this.mExecutor = delayableExecutor;
         this.mClock = clock;
@@ -97,10 +105,27 @@ public final class AppOpsUidStateTrackerImpl implements AppOpsUidStateTracker {
                 boolean z4 = z2 != z;
                 EventLog eventLog = this.mEventLog;
                 eventLog.getClass();
-                eventLog.mExecutor.execute(PooledLambda.obtainRunnable(new AppOpsUidStateTrackerImpl$EventLog$$ExternalSyntheticLambda0(1), eventLog, Long.valueOf(System.currentTimeMillis()), Integer.valueOf(i), Integer.valueOf(i2), Integer.valueOf(i3), Boolean.valueOf(z), Boolean.valueOf(z4)));
+                eventLog.mExecutor.execute(
+                        PooledLambda.obtainRunnable(
+                                new AppOpsUidStateTrackerImpl$EventLog$$ExternalSyntheticLambda0(1),
+                                eventLog,
+                                Long.valueOf(System.currentTimeMillis()),
+                                Integer.valueOf(i),
+                                Integer.valueOf(i2),
+                                Integer.valueOf(i3),
+                                Boolean.valueOf(z),
+                                Boolean.valueOf(z4)));
             }
             for (int i6 = 0; i6 < this.mUidStateChangedCallbacks.size(); i6++) {
-                ((Executor) this.mUidStateChangedCallbacks.valueAt(i6)).execute(PooledLambda.obtainRunnable(new AppOpsUidStateTrackerImpl$$ExternalSyntheticLambda1(), (AppOpsService$$ExternalSyntheticLambda12) this.mUidStateChangedCallbacks.keyAt(i6), Integer.valueOf(i), Integer.valueOf(i2), Boolean.valueOf(z3)));
+                ((Executor) this.mUidStateChangedCallbacks.valueAt(i6))
+                        .execute(
+                                PooledLambda.obtainRunnable(
+                                        new AppOpsUidStateTrackerImpl$$ExternalSyntheticLambda1(),
+                                        (AppOpsService$$ExternalSyntheticLambda12)
+                                                this.mUidStateChangedCallbacks.keyAt(i6),
+                                        Integer.valueOf(i),
+                                        Integer.valueOf(i2),
+                                        Boolean.valueOf(z3)));
             }
         }
         if (this.mPendingGone.get(i, false)) {
@@ -110,7 +135,15 @@ public final class AppOpsUidStateTrackerImpl implements AppOpsUidStateTracker {
             this.mPendingGone.delete(i);
             if (Flags.finishRunningOpsForKilledPackages()) {
                 for (int i7 = 0; i7 < this.mUidStateChangedCallbacks.size(); i7++) {
-                    ((Executor) this.mUidStateChangedCallbacks.valueAt(i7)).execute(PooledLambda.obtainRunnable(new AppOpsUidStateTrackerImpl$$ExternalSyntheticLambda1(), (AppOpsService$$ExternalSyntheticLambda12) this.mUidStateChangedCallbacks.keyAt(i7), Integer.valueOf(i), Integer.MAX_VALUE, Boolean.valueOf(z3)));
+                    ((Executor) this.mUidStateChangedCallbacks.valueAt(i7))
+                            .execute(
+                                    PooledLambda.obtainRunnable(
+                                            new AppOpsUidStateTrackerImpl$$ExternalSyntheticLambda1(),
+                                            (AppOpsService$$ExternalSyntheticLambda12)
+                                                    this.mUidStateChangedCallbacks.keyAt(i7),
+                                            Integer.valueOf(i),
+                                            Integer.MAX_VALUE,
+                                            Boolean.valueOf(z3)));
                 }
             }
         } else {
@@ -131,7 +164,9 @@ public final class AppOpsUidStateTrackerImpl implements AppOpsUidStateTracker {
         while (true) {
             EventLog eventLog = this.mEventLog;
             int i4 = eventLog.mUpdateUidProcStateLogSize;
-            if (i >= i4 && i2 >= eventLog.mCommitUidStateLogSize && i3 >= eventLog.mEvalForegroundModeLogSize) {
+            if (i >= i4
+                    && i2 >= eventLog.mCommitUidStateLogSize
+                    && i3 >= eventLog.mEvalForegroundModeLogSize) {
                 return;
             }
             int i5 = (eventLog.mUpdateUidProcStateLogHead + i) % 200;
@@ -326,11 +361,15 @@ public final class AppOpsUidStateTrackerImpl implements AppOpsUidStateTracker {
             r12.execute(r13)
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.appop.AppOpsUidStateTrackerImpl.evalMode(int, int, int):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.appop.AppOpsUidStateTrackerImpl.evalMode(int, int,"
+                    + " int):int");
     }
 
     public final void updateUidPendingStateIfNeeded(int i) {
-        if (this.mPendingCommitTime.get(i, 0L) == 0 || this.mClock.elapsedRealtime() < this.mPendingCommitTime.get(i)) {
+        if (this.mPendingCommitTime.get(i, 0L) == 0
+                || this.mClock.elapsedRealtime() < this.mPendingCommitTime.get(i)) {
             return;
         }
         commitUidPendingState(i);
@@ -347,6 +386,9 @@ public final class AppOpsUidStateTrackerImpl implements AppOpsUidStateTracker {
             Method dump skipped, instructions count: 237
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.appop.AppOpsUidStateTrackerImpl.updateUidProcState(int, int, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.appop.AppOpsUidStateTrackerImpl.updateUidProcState(int,"
+                    + " int, int):void");
     }
 }

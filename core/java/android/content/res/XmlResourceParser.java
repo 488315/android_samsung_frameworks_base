@@ -1,6 +1,7 @@
 package android.content.res;
 
 import android.util.AttributeSet;
+
 import org.xmlpull.v1.XmlPullParser;
 
 /* loaded from: classes.dex */

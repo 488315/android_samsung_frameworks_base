@@ -9,8 +9,10 @@ import android.os.WorkSource;
 import android.util.IndentingPrintWriter;
 import android.util.TimeUtils;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
+
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -58,7 +60,22 @@ public final class Alarm {
         }
     }
 
-    public Alarm(int i, int i2, int i3, int i4, long j, long j2, long j3, long j4, AlarmManager.AlarmClockInfo alarmClockInfo, IAlarmListener iAlarmListener, PendingIntent pendingIntent, Bundle bundle, WorkSource workSource, String str, String str2) {
+    public Alarm(
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            long j,
+            long j2,
+            long j3,
+            long j4,
+            AlarmManager.AlarmClockInfo alarmClockInfo,
+            IAlarmListener iAlarmListener,
+            PendingIntent pendingIntent,
+            Bundle bundle,
+            WorkSource workSource,
+            String str,
+            String str2) {
         this.type = i;
         this.origType = i;
         this.origWhen = j;
@@ -74,7 +91,10 @@ public final class Alarm {
         this.listener = iAlarmListener;
         this.listenerTag = str;
         String str3 = (i == 2 || i == 0) ? "*walarm*:" : "*alarm*:";
-        this.statsTag = pendingIntent != null ? pendingIntent.getTag(str3) : ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str3, str);
+        this.statsTag =
+                pendingIntent != null
+                        ? pendingIntent.getTag(str3)
+                        : ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str3, str);
         this.workSource = workSource;
         this.flags = i2;
         this.alarmClock = alarmClockInfo;
@@ -91,14 +111,28 @@ public final class Alarm {
     }
 
     public static String policyIndexToString(int i) {
-        return i != 0 ? i != 1 ? i != 2 ? i != 3 ? i != 4 ? BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "--unknown(", ")--") : "gms_manager" : "battery_saver" : "device_idle" : "app_standby" : "requester";
+        return i != 0
+                ? i != 1
+                        ? i != 2
+                                ? i != 3
+                                        ? i != 4
+                                                ? BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                        .m(i, "--unknown(", ")--")
+                                                : "gms_manager"
+                                        : "battery_saver"
+                                : "device_idle"
+                        : "app_standby"
+                : "requester";
     }
 
     public static String typeToString(int i) {
-        return i != 0 ? i != 1 ? i != 2 ? i != 3 ? "--unknown--" : "ELAPSED" : "ELAPSED_WAKEUP" : "RTC" : "RTC_WAKEUP";
+        return i != 0
+                ? i != 1 ? i != 2 ? i != 3 ? "--unknown--" : "ELAPSED" : "ELAPSED_WAKEUP" : "RTC"
+                : "RTC_WAKEUP";
     }
 
-    public final void dump(IndentingPrintWriter indentingPrintWriter, long j, SimpleDateFormat simpleDateFormat) {
+    public final void dump(
+            IndentingPrintWriter indentingPrintWriter, long j, SimpleDateFormat simpleDateFormat) {
         String str;
         int i = this.type;
         boolean z = true;
@@ -176,7 +210,8 @@ public final class Alarm {
         if (this.alarmClock != null) {
             indentingPrintWriter.println("Alarm clock:");
             indentingPrintWriter.print("  triggerTime=");
-            indentingPrintWriter.println(simpleDateFormat.format(new Date(this.alarmClock.getTriggerTime())));
+            indentingPrintWriter.println(
+                    simpleDateFormat.format(new Date(this.alarmClock.getTriggerTime())));
             indentingPrintWriter.print("  showIntent=");
             indentingPrintWriter.println(this.alarmClock.getShowIntent());
         }
@@ -231,7 +266,10 @@ public final class Alarm {
             this.mWhenElapsed = Math.max(this.mWhenElapsed, jArr[i2]);
         }
         long j3 = this.mMaxWhenElapsed;
-        long max = Math.max(AlarmManagerService.addClampPositive(jArr[0], this.windowLength), this.mWhenElapsed);
+        long max =
+                Math.max(
+                        AlarmManagerService.addClampPositive(jArr[0], this.windowLength),
+                        this.mWhenElapsed);
         this.mMaxWhenElapsed = max;
         return (j2 == this.mWhenElapsed && j3 == max) ? false : true;
     }

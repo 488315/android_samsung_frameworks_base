@@ -5,9 +5,11 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Slog;
+
 import com.android.server.am.MARsPolicyManager;
 import com.android.server.am.mars.MARsUtils;
 import com.android.server.am.mars.filter.IFilter;
+
 import com.sec.android.sdhms.ISamsungDeviceHealthManager;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -29,8 +31,7 @@ public final class ActiveTrafficFilter implements IFilter {
     }
 
     @Override // com.android.server.am.mars.filter.IFilter
-    public final void deInit() {
-    }
+    public final void deInit() {}
 
     @Override // com.android.server.am.mars.filter.IFilter
     public final int filter(int i, int i2, int i3, String str) {
@@ -38,11 +39,14 @@ public final class ActiveTrafficFilter implements IFilter {
         ISamsungDeviceHealthManager asInterface;
         if (MARsUtils.isChinaPolicyEnabled()) {
             boolean z = MARsPolicyManager.MARs_ENABLE;
-            if (MARsPolicyManager.MARsPolicyManagerHolder.INSTANCE.getForegroundServiceStartTime(i2) == 0) {
+            if (MARsPolicyManager.MARsPolicyManagerHolder.INSTANCE.getForegroundServiceStartTime(i2)
+                    == 0) {
                 return 0;
             }
         }
-        if (this.mIsDataConnectionConnected && (service = ServiceManager.getService("sdhms")) != null && (asInterface = ISamsungDeviceHealthManager.Stub.asInterface(service)) != null) {
+        if (this.mIsDataConnectionConnected
+                && (service = ServiceManager.getService("sdhms")) != null
+                && (asInterface = ISamsungDeviceHealthManager.Stub.asInterface(service)) != null) {
             try {
                 if (asInterface.isDownLoadingForUid(i2)) {
                     Slog.d("MARs:ActiveTrafficFilter", "filter : " + str + "(" + i + ")");

@@ -2,7 +2,9 @@ package com.sec.android.iaft;
 
 import android.content.Context;
 import android.util.Log;
+
 import dalvik.system.InMemoryDexClassLoader;
+
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -26,19 +28,28 @@ public class IAFDHotfix {
                 Log.i(TAG, dexLocation.toString() + " not found.");
                 return false;
             }
-            byte[] dexBytes = IAFDRSAUtils.decryptFileToBytes(dexLocation.toString(), "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCwaCLv6RvwU8gyFSbynkiPI1Yjb4O3PjCoTQOJadMly1MfePjpFFddlbHnEhyXZqK5znGPNCa/+grdCBV6bbdVf1DTjzcrleKeD6LwC5cioMMjtu91MqrZwDSyAvi6cpdiskEJ/ht+lDJGTdE5bpxJl5tQyy+HrXQk2wJFp3fTWwIDAQAB");
+            byte[] dexBytes =
+                    IAFDRSAUtils.decryptFileToBytes(
+                            dexLocation.toString(),
+                            "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCwaCLv6RvwU8gyFSbynkiPI1Yjb4O3PjCoTQOJadMly1MfePjpFFddlbHnEhyXZqK5znGPNCa/+grdCBV6bbdVf1DTjzcrleKeD6LwC5cioMMjtu91MqrZwDSyAvi6cpdiskEJ/ht+lDJGTdE5bpxJl5tQyy+HrXQk2wJFp3fTWwIDAQAB");
             if (dexBytes.length < 100) {
                 return false;
             }
             Log.i(TAG, "hotfix start");
             ByteBuffer byteBuf = ByteBuffer.wrap(dexBytes);
-            ClassLoader loader = new InMemoryDexClassLoader(byteBuf, ClassLoader.getSystemClassLoader());
+            ClassLoader loader =
+                    new InMemoryDexClassLoader(byteBuf, ClassLoader.getSystemClassLoader());
             Class hotfixClass = loader.loadClass("com.samsung.hotfix.hotfix");
-            Method iafdrepairMethod = hotfixClass.getMethod("iafdrepair", Context.class, Integer.TYPE, String.class);
+            Method iafdrepairMethod =
+                    hotfixClass.getMethod("iafdrepair", Context.class, Integer.TYPE, String.class);
             Constructor<?> mc = hotfixClass.getConstructor(new Class[0]);
             Object obj = mc.newInstance(new Object[0]);
             try {
-                result = ((Boolean) iafdrepairMethod.invoke(obj, context, Integer.valueOf(expType), pkgName)).booleanValue();
+                result =
+                        ((Boolean)
+                                        iafdrepairMethod.invoke(
+                                                obj, context, Integer.valueOf(expType), pkgName))
+                                .booleanValue();
                 Log.i(TAG, "hotfix end");
                 return result;
             } catch (Exception e) {

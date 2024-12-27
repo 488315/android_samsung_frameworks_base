@@ -7,28 +7,34 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.PatternMatcher;
 import android.text.TextUtils;
+
 import com.android.internal.pm.parsing.pkg.PackageImpl;
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.CollectionUtils;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 /* loaded from: classes5.dex */
-public class ParsedProviderImpl extends ParsedMainComponentImpl implements ParsedProvider, Parcelable {
-    public static final Parcelable.Creator<ParsedProviderImpl> CREATOR = new Parcelable.Creator<ParsedProviderImpl>() { // from class: com.android.internal.pm.pkg.component.ParsedProviderImpl.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParsedProviderImpl createFromParcel(Parcel source) {
-            return new ParsedProviderImpl(source);
-        }
+public class ParsedProviderImpl extends ParsedMainComponentImpl
+        implements ParsedProvider, Parcelable {
+    public static final Parcelable.Creator<ParsedProviderImpl> CREATOR =
+            new Parcelable.Creator<
+                    ParsedProviderImpl>() { // from class:
+                                            // com.android.internal.pm.pkg.component.ParsedProviderImpl.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParsedProviderImpl createFromParcel(Parcel source) {
+                    return new ParsedProviderImpl(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParsedProviderImpl[] newArray(int size) {
-            return new ParsedProviderImpl[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParsedProviderImpl[] newArray(int size) {
+                    return new ParsedProviderImpl[size];
+                }
+            };
     private String authority;
     private boolean forceUriPermissions;
     private boolean grantUriPermissions;
@@ -86,12 +92,14 @@ public class ParsedProviderImpl extends ParsedMainComponentImpl implements Parse
         return sb.toString();
     }
 
-    @Override // com.android.internal.pm.pkg.component.ParsedMainComponentImpl, com.android.internal.pm.pkg.component.ParsedComponentImpl, android.os.Parcelable
+    @Override // com.android.internal.pm.pkg.component.ParsedMainComponentImpl,
+              // com.android.internal.pm.pkg.component.ParsedComponentImpl, android.os.Parcelable
     public int describeContents() {
         return 0;
     }
 
-    @Override // com.android.internal.pm.pkg.component.ParsedMainComponentImpl, com.android.internal.pm.pkg.component.ParsedComponentImpl, android.os.Parcelable
+    @Override // com.android.internal.pm.pkg.component.ParsedMainComponentImpl,
+              // com.android.internal.pm.pkg.component.ParsedComponentImpl, android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeString(this.authority);
@@ -127,7 +135,17 @@ public class ParsedProviderImpl extends ParsedMainComponentImpl implements Parse
         this.pathPermissions = in.createTypedArrayList(PathPermission.CREATOR);
     }
 
-    public ParsedProviderImpl(String authority, boolean syncable, String readPermission, String writePermission, boolean grantUriPermissions, boolean forceUriPermissions, boolean multiProcess, int initOrder, List<PatternMatcher> uriPermissionPatterns, List<PathPermission> pathPermissions) {
+    public ParsedProviderImpl(
+            String authority,
+            boolean syncable,
+            String readPermission,
+            String writePermission,
+            boolean grantUriPermissions,
+            boolean forceUriPermissions,
+            boolean multiProcess,
+            int initOrder,
+            List<PatternMatcher> uriPermissionPatterns,
+            List<PathPermission> pathPermissions) {
         this.uriPermissionPatterns = Collections.emptyList();
         this.pathPermissions = Collections.emptyList();
         this.authority = authority;
@@ -139,9 +157,11 @@ public class ParsedProviderImpl extends ParsedMainComponentImpl implements Parse
         this.multiProcess = multiProcess;
         this.initOrder = initOrder;
         this.uriPermissionPatterns = uriPermissionPatterns;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) uriPermissionPatterns);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) uriPermissionPatterns);
         this.pathPermissions = pathPermissions;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) pathPermissions);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) pathPermissions);
     }
 
     @Override // com.android.internal.pm.pkg.component.ParsedProvider
@@ -225,6 +245,5 @@ public class ParsedProviderImpl extends ParsedMainComponentImpl implements Parse
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

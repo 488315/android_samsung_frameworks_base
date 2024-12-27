@@ -26,19 +26,20 @@ public final class MobileRadioPowerStatsLayout extends PowerStatsLayout {
         this.mDeviceCallPowerPosition = addDeviceSection(1, 2, "call-power");
     }
 
-    public final void addRxTxTimesForRat(SparseArray sparseArray, int i, int i2, long j, int[] iArr) {
+    public final void addRxTxTimesForRat(
+            SparseArray sparseArray, int i, int i2, long j, int[] iArr) {
         if (iArr.length != this.mStateTxTimesCount) {
             Slog.wtf("MobileRadioPowerStatsLayout", "Invalid TX time array size: " + iArr.length);
             return;
         }
         if (j == 0) {
             for (int length = iArr.length - 1; length >= 0; length--) {
-                if (iArr[length] == 0) {
-                }
+                if (iArr[length] == 0) {}
             }
             return;
         }
-        int mapRadioAccessNetworkTypeToRadioAccessTechnology = MobileRadioPowerStatsCollector.mapRadioAccessNetworkTypeToRadioAccessTechnology(i);
+        int mapRadioAccessNetworkTypeToRadioAccessTechnology =
+                MobileRadioPowerStatsCollector.mapRadioAccessNetworkTypeToRadioAccessTechnology(i);
         if (mapRadioAccessNetworkTypeToRadioAccessTechnology == 2) {
             mapRadioAccessNetworkTypeToRadioAccessTechnology |= i2 << 8;
         }

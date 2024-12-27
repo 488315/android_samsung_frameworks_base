@@ -1,11 +1,13 @@
 package com.samsung.android.sume.core.functional;
 
 import android.util.Log;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.MediaBuffer;
 import com.samsung.android.sume.core.buffer.MutableMediaBuffer;
 import com.samsung.android.sume.core.descriptor.ImgpDescriptor;
 import com.samsung.android.sume.core.types.ImgpType;
+
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -26,12 +28,18 @@ public class OperatorChain extends OpPriorityComputable implements Operator {
     public OperatorChain(List<Operator> processors) {
         super(ImgpType.ANY);
         this.usePersistentFormat = false;
-        this.processors = (List) processors.stream().flatMap(new Function() { // from class: com.samsung.android.sume.core.functional.OperatorChain$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return OperatorChain.lambda$new$0((Operator) obj);
-            }
-        }).collect(Collectors.toList());
+        this.processors =
+                (List)
+                        processors.stream()
+                                .flatMap(
+                                        new Function() { // from class:
+                                                         // com.samsung.android.sume.core.functional.OperatorChain$$ExternalSyntheticLambda0
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                return OperatorChain.lambda$new$0((Operator) obj);
+                                            }
+                                        })
+                                .collect(Collectors.toList());
     }
 
     static /* synthetic */ Stream lambda$new$0(Operator e) {
@@ -41,12 +49,18 @@ public class OperatorChain extends OpPriorityComputable implements Operator {
     public OperatorChain(Enum<?> type, List<Operator> processors) {
         super(type);
         this.usePersistentFormat = false;
-        this.processors = (List) processors.stream().flatMap(new Function() { // from class: com.samsung.android.sume.core.functional.OperatorChain$$ExternalSyntheticLambda1
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return OperatorChain.lambda$new$1((Operator) obj);
-            }
-        }).collect(Collectors.toList());
+        this.processors =
+                (List)
+                        processors.stream()
+                                .flatMap(
+                                        new Function() { // from class:
+                                                         // com.samsung.android.sume.core.functional.OperatorChain$$ExternalSyntheticLambda1
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                return OperatorChain.lambda$new$1((Operator) obj);
+                                            }
+                                        })
+                                .collect(Collectors.toList());
     }
 
     static /* synthetic */ Stream lambda$new$1(Operator e) {
@@ -68,7 +82,8 @@ public class OperatorChain extends OpPriorityComputable implements Operator {
     }
 
     @Override // com.samsung.android.sume.core.functional.Operator
-    public MutableMediaBuffer run(MediaBuffer ibuf, MutableMediaBuffer obuf) throws UnsupportedOperationException {
+    public MutableMediaBuffer run(MediaBuffer ibuf, MutableMediaBuffer obuf)
+            throws UnsupportedOperationException {
         Iterator<Operator> it = this.processors.iterator();
         while (it.hasNext()) {
             Operator processor = it.next();

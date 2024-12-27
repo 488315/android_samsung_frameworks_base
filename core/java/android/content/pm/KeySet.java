@@ -6,19 +6,20 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class KeySet implements Parcelable {
-    public static final Parcelable.Creator<KeySet> CREATOR = new Parcelable.Creator<KeySet>() { // from class: android.content.pm.KeySet.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeySet createFromParcel(Parcel source) {
-            return KeySet.readFromParcel(source);
-        }
+    public static final Parcelable.Creator<KeySet> CREATOR =
+            new Parcelable.Creator<KeySet>() { // from class: android.content.pm.KeySet.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeySet createFromParcel(Parcel source) {
+                    return KeySet.readFromParcel(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeySet[] newArray(int size) {
-            return new KeySet[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeySet[] newArray(int size) {
+                    return new KeySet[size];
+                }
+            };
     private final IBinder token;
 
     public KeySet(IBinder token) {

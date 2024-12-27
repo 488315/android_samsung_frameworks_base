@@ -4,23 +4,27 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.IntArray;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class SystemSelectionSpecifier implements Parcelable {
-    public static final Parcelable.Creator<SystemSelectionSpecifier> CREATOR = new Parcelable.Creator<SystemSelectionSpecifier>() { // from class: android.telephony.satellite.SystemSelectionSpecifier.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SystemSelectionSpecifier createFromParcel(Parcel in) {
-            return new SystemSelectionSpecifier(in);
-        }
+    public static final Parcelable.Creator<SystemSelectionSpecifier> CREATOR =
+            new Parcelable.Creator<
+                    SystemSelectionSpecifier>() { // from class:
+                                                  // android.telephony.satellite.SystemSelectionSpecifier.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SystemSelectionSpecifier createFromParcel(Parcel in) {
+                    return new SystemSelectionSpecifier(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SystemSelectionSpecifier[] newArray(int size) {
-            return new SystemSelectionSpecifier[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SystemSelectionSpecifier[] newArray(int size) {
+                    return new SystemSelectionSpecifier[size];
+                }
+            };
     private IntArray mBands;
     private IntArray mEarfcs;
     private String mMccMnc;
@@ -96,7 +100,9 @@ public final class SystemSelectionSpecifier implements Parcelable {
             return false;
         }
         SystemSelectionSpecifier that = (SystemSelectionSpecifier) o;
-        if (Objects.equals(this.mMccMnc, that.mMccMnc) && Objects.equals(this.mBands, that.mBands) && Objects.equals(this.mEarfcs, that.mEarfcs)) {
+        if (Objects.equals(this.mMccMnc, that.mMccMnc)
+                && Objects.equals(this.mBands, that.mBands)
+                && Objects.equals(this.mEarfcs, that.mEarfcs)) {
             return true;
         }
         return false;

@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface ISemWifiApClientUpdateCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.wifi.ISemWifiApClientUpdateCallback";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.wifi.ISemWifiApClientUpdateCallback";
 
     void onClientUpdated(SemWifiApClientDetails semWifiApClientDetails) throws RemoteException;
 
     public static class Default implements ISemWifiApClientUpdateCallback {
         @Override // com.samsung.android.wifi.ISemWifiApClientUpdateCallback
-        public void onClientUpdated(SemWifiApClientDetails clientDetails) throws RemoteException {
-        }
+        public void onClientUpdated(SemWifiApClientDetails clientDetails) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface ISemWifiApClientUpdateCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemWifiApClientUpdateCallback {
+    public abstract static class Stub extends Binder implements ISemWifiApClientUpdateCallback {
         static final int TRANSACTION_onClientUpdated = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface ISemWifiApClientUpdateCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemWifiApClientUpdateCallback.DESCRIPTOR);
             }
@@ -71,7 +72,9 @@ public interface ISemWifiApClientUpdateCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    SemWifiApClientDetails _arg0 = (SemWifiApClientDetails) data.readTypedObject(SemWifiApClientDetails.CREATOR);
+                    SemWifiApClientDetails _arg0 =
+                            (SemWifiApClientDetails)
+                                    data.readTypedObject(SemWifiApClientDetails.CREATOR);
                     data.enforceNoDataAvail();
                     onClientUpdated(_arg0);
                     return true;
@@ -97,7 +100,8 @@ public interface ISemWifiApClientUpdateCallback extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.ISemWifiApClientUpdateCallback
-            public void onClientUpdated(SemWifiApClientDetails clientDetails) throws RemoteException {
+            public void onClientUpdated(SemWifiApClientDetails clientDetails)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemWifiApClientUpdateCallback.DESCRIPTOR);

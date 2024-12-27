@@ -3,26 +3,29 @@ package android.content;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Collection;
 import java.util.List;
 
 /* loaded from: classes.dex */
 public class UriRelativeFilterGroupParcel implements Parcelable {
-    public static final Parcelable.Creator<UriRelativeFilterGroupParcel> CREATOR = new Parcelable.Creator<UriRelativeFilterGroupParcel>() { // from class: android.content.UriRelativeFilterGroupParcel.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UriRelativeFilterGroupParcel createFromParcel(Parcel _aidl_source) {
-            UriRelativeFilterGroupParcel _aidl_out = new UriRelativeFilterGroupParcel();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<UriRelativeFilterGroupParcel> CREATOR =
+            new Parcelable.Creator<UriRelativeFilterGroupParcel>() { // from class:
+                // android.content.UriRelativeFilterGroupParcel.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UriRelativeFilterGroupParcel createFromParcel(Parcel _aidl_source) {
+                    UriRelativeFilterGroupParcel _aidl_out = new UriRelativeFilterGroupParcel();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UriRelativeFilterGroupParcel[] newArray(int _aidl_size) {
-            return new UriRelativeFilterGroupParcel[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UriRelativeFilterGroupParcel[] newArray(int _aidl_size) {
+                    return new UriRelativeFilterGroupParcel[_aidl_size];
+                }
+            };
     public int action = 0;
     public List<UriRelativeFilterParcel> filters;
 

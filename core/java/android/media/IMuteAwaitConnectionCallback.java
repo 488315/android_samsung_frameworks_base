@@ -10,18 +10,21 @@ import android.os.RemoteException;
 public interface IMuteAwaitConnectionCallback extends IInterface {
     public static final String DESCRIPTOR = "android.media.IMuteAwaitConnectionCallback";
 
-    void dispatchOnMutedUntilConnection(AudioDeviceAttributes audioDeviceAttributes, int[] iArr) throws RemoteException;
+    void dispatchOnMutedUntilConnection(AudioDeviceAttributes audioDeviceAttributes, int[] iArr)
+            throws RemoteException;
 
-    void dispatchOnUnmutedEvent(int i, AudioDeviceAttributes audioDeviceAttributes, int[] iArr) throws RemoteException;
+    void dispatchOnUnmutedEvent(int i, AudioDeviceAttributes audioDeviceAttributes, int[] iArr)
+            throws RemoteException;
 
     public static class Default implements IMuteAwaitConnectionCallback {
         @Override // android.media.IMuteAwaitConnectionCallback
-        public void dispatchOnMutedUntilConnection(AudioDeviceAttributes device, int[] mutedUsages) throws RemoteException {
-        }
+        public void dispatchOnMutedUntilConnection(AudioDeviceAttributes device, int[] mutedUsages)
+                throws RemoteException {}
 
         @Override // android.media.IMuteAwaitConnectionCallback
-        public void dispatchOnUnmutedEvent(int event, AudioDeviceAttributes device, int[] mutedUsages) throws RemoteException {
-        }
+        public void dispatchOnUnmutedEvent(
+                int event, AudioDeviceAttributes device, int[] mutedUsages)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +32,7 @@ public interface IMuteAwaitConnectionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMuteAwaitConnectionCallback {
+    public abstract static class Stub extends Binder implements IMuteAwaitConnectionCallback {
         static final int TRANSACTION_dispatchOnMutedUntilConnection = 1;
         static final int TRANSACTION_dispatchOnUnmutedEvent = 2;
 
@@ -70,7 +73,8 @@ public interface IMuteAwaitConnectionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IMuteAwaitConnectionCallback.DESCRIPTOR);
             }
@@ -80,14 +84,18 @@ public interface IMuteAwaitConnectionCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    AudioDeviceAttributes _arg0 = (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
+                    AudioDeviceAttributes _arg0 =
+                            (AudioDeviceAttributes)
+                                    data.readTypedObject(AudioDeviceAttributes.CREATOR);
                     int[] _arg1 = data.createIntArray();
                     data.enforceNoDataAvail();
                     dispatchOnMutedUntilConnection(_arg0, _arg1);
                     return true;
                 case 2:
                     int _arg02 = data.readInt();
-                    AudioDeviceAttributes _arg12 = (AudioDeviceAttributes) data.readTypedObject(AudioDeviceAttributes.CREATOR);
+                    AudioDeviceAttributes _arg12 =
+                            (AudioDeviceAttributes)
+                                    data.readTypedObject(AudioDeviceAttributes.CREATOR);
                     int[] _arg2 = data.createIntArray();
                     data.enforceNoDataAvail();
                     dispatchOnUnmutedEvent(_arg02, _arg12, _arg2);
@@ -114,7 +122,8 @@ public interface IMuteAwaitConnectionCallback extends IInterface {
             }
 
             @Override // android.media.IMuteAwaitConnectionCallback
-            public void dispatchOnMutedUntilConnection(AudioDeviceAttributes device, int[] mutedUsages) throws RemoteException {
+            public void dispatchOnMutedUntilConnection(
+                    AudioDeviceAttributes device, int[] mutedUsages) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMuteAwaitConnectionCallback.DESCRIPTOR);
@@ -127,7 +136,9 @@ public interface IMuteAwaitConnectionCallback extends IInterface {
             }
 
             @Override // android.media.IMuteAwaitConnectionCallback
-            public void dispatchOnUnmutedEvent(int event, AudioDeviceAttributes device, int[] mutedUsages) throws RemoteException {
+            public void dispatchOnUnmutedEvent(
+                    int event, AudioDeviceAttributes device, int[] mutedUsages)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMuteAwaitConnectionCallback.DESCRIPTOR);

@@ -17,12 +17,15 @@ import android.os.SystemClock;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.format.DateFormat;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.SystemUpdateManagerService$$ExternalSyntheticOutline0;
+
 import com.att.iqi.lib.metrics.hw.HwConstants;
 import com.samsung.android.cover.INfcLedCoverTouchListenerCallback;
 import com.samsung.android.nfc.adapter.SamsungNfcAdapter;
 import com.samsung.android.sepunion.Log;
+
 import java.io.PrintWriter;
 import java.nio.BufferOverflowException;
 import java.nio.BufferUnderflowException;
@@ -38,7 +41,9 @@ import java.util.concurrent.locks.ReentrantLock;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class NfcLedCoverController extends BaseNfcLedCoverController {
-    public static final byte[] mResponsePattern = {HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED, 6, -47, 0, -1, -1};
+    public static final byte[] mResponsePattern = {
+        HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED, 6, -47, 0, -1, -1
+    };
     public Timer mCallDurationTimer;
     public CallDurationTask mCallDurationUpdateTask;
     public boolean mCallInProgressDisplay;
@@ -66,8 +71,7 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
     public final class CallDurationTask extends TimerTask {
         public byte prevSecond = -1;
 
-        public CallDurationTask() {
-        }
+        public CallDurationTask() {}
 
         @Override // java.util.TimerTask, java.lang.Runnable
         public final void run() {
@@ -75,9 +79,12 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
             try {
                 NfcLedCoverController nfcLedCoverController = NfcLedCoverController.this;
                 if (nfcLedCoverController.mCallInProgressDisplay) {
-                    byte[] m885$$Nest$mgetCallDuration = NfcLedCoverController.m885$$Nest$mgetCallDuration(nfcLedCoverController);
+                    byte[] m885$$Nest$mgetCallDuration =
+                            NfcLedCoverController.m885$$Nest$mgetCallDuration(
+                                    nfcLedCoverController);
                     if (m885$$Nest$mgetCallDuration[3] != this.prevSecond) {
-                        NfcLedCoverController.m887$$Nest$mhandleSendDataToNfcLedCover(NfcLedCoverController.this, 3, m885$$Nest$mgetCallDuration);
+                        NfcLedCoverController.m887$$Nest$mhandleSendDataToNfcLedCover(
+                                NfcLedCoverController.this, 3, m885$$Nest$mgetCallDuration);
                         if (!NfcLedCoverController.this.mHandler.hasMessages(4)) {
                             this.prevSecond = m885$$Nest$mgetCallDuration[3];
                         }
@@ -136,25 +143,31 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
                     if (nfcLedCoverController2.mPrevCommand == 12) {
                         nfcLedCoverController2.sendDataToNfcLedCover(15, null);
                     } else {
-                        NfcLedCoverController.m887$$Nest$mhandleSendDataToNfcLedCover(nfcLedCoverController2, 18, null);
+                        NfcLedCoverController.m887$$Nest$mhandleSendDataToNfcLedCover(
+                                nfcLedCoverController2, 18, null);
                     }
-                    BaseNfcLedCoverController.releaseWakeLockWithPermission(NfcLedCoverController.this.mLedOnOffWakeLock);
+                    BaseNfcLedCoverController.releaseWakeLockWithPermission(
+                            NfcLedCoverController.this.mLedOnOffWakeLock);
                     return;
                 case 2:
                     NfcLedCoverController nfcLedCoverController3 = NfcLedCoverController.this;
                     int i = message.arg1;
                     if (!nfcLedCoverController3.mPollingTouchEvents) {
-                        BaseNfcLedCoverController.releaseWakeLockWithPermission(nfcLedCoverController3.mPollTouchWakeLock);
+                        BaseNfcLedCoverController.releaseWakeLockWithPermission(
+                                nfcLedCoverController3.mPollTouchWakeLock);
                         return;
                     }
                     if (nfcLedCoverController3.mTestMode > 0) {
                         nfcLedCoverController3.mTestCount++;
                     }
-                    byte[] buildNfcCoverLedData$1 = NfcLedCoverController.buildNfcCoverLedData$1(17, new byte[]{0});
+                    byte[] buildNfcCoverLedData$1 =
+                            NfcLedCoverController.buildNfcCoverLedData$1(17, new byte[] {0});
                     try {
                         if (nfcLedCoverController3.mTestMode == 0) {
                             nfcLedCoverController3.mSamsungNfcAdapter.getClass();
-                            bArr = SamsungNfcAdapter.transceiveDataWithLedCover(buildNfcCoverLedData$1);
+                            bArr =
+                                    SamsungNfcAdapter.transceiveDataWithLedCover(
+                                            buildNfcCoverLedData$1);
                         }
                     } catch (Exception e) {
                         Log.e("CoverManager_NfcLedCoverController", "Error sending data to NFC", e);
@@ -171,30 +184,44 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
                         } else if (i2 == 1) {
                             bArr[4] = 2;
                         } else {
-                            Log.e("CoverManager_NfcLedCoverController", "Unknown test value: " + nfcLedCoverController3.mTestMode + ", reject by default");
+                            Log.e(
+                                    "CoverManager_NfcLedCoverController",
+                                    "Unknown test value: "
+                                            + nfcLedCoverController3.mTestMode
+                                            + ", reject by default");
                             bArr[4] = 2;
                         }
                     }
-                    NfcLedCoverControllerHandler nfcLedCoverControllerHandler = nfcLedCoverController3.mHandler;
-                    if (bArr == null || bArr.length < 5 || bArr[2] != -47 || bArr[3] != 17 || ((b = bArr[4]) != 1 && b != 2)) {
-                        Log.d("CoverManager_NfcLedCoverController", "No touch event from LED cover, keep listening");
+                    NfcLedCoverControllerHandler nfcLedCoverControllerHandler =
+                            nfcLedCoverController3.mHandler;
+                    if (bArr == null
+                            || bArr.length < 5
+                            || bArr[2] != -47
+                            || bArr[3] != 17
+                            || ((b = bArr[4]) != 1 && b != 2)) {
+                        Log.d(
+                                "CoverManager_NfcLedCoverController",
+                                "No touch event from LED cover, keep listening");
                         Message obtain = Message.obtain();
                         obtain.what = 2;
                         obtain.arg1 = i;
                         nfcLedCoverControllerHandler.sendMessageDelayed(obtain, 100L);
                         return;
                     }
-                    BaseNfcLedCoverController.acquireWakeLockWithPermission(nfcLedCoverController3.mTouchResponseWakeLock);
+                    BaseNfcLedCoverController.acquireWakeLockWithPermission(
+                            nfcLedCoverController3.mTouchResponseWakeLock);
                     Message obtain2 = Message.obtain();
                     obtain2.what = 3;
                     obtain2.arg1 = i;
                     obtain2.arg2 = bArr[4];
                     nfcLedCoverControllerHandler.sendMessage(obtain2);
                     nfcLedCoverController3.mPollingTouchEvents = false;
-                    BaseNfcLedCoverController.releaseWakeLockWithPermission(nfcLedCoverController3.mPollTouchWakeLock);
+                    BaseNfcLedCoverController.releaseWakeLockWithPermission(
+                            nfcLedCoverController3.mPollTouchWakeLock);
                     return;
                 case 3:
-                    NfcLedCoverController.m886$$Nest$mhandleEventResponse(NfcLedCoverController.this, message.arg1, message.arg2);
+                    NfcLedCoverController.m886$$Nest$mhandleEventResponse(
+                            NfcLedCoverController.this, message.arg1, message.arg2);
                     return;
                 case 4:
                     break;
@@ -203,13 +230,18 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
                     int i3 = message.arg1;
                     nfcLedCoverController4.getClass();
                     int i4 = i3 != 65534 ? i3 : 3;
-                    if (i4 == 0 || ((command = nfcLedCoverController4.mOngoingEvent) != null && command.code == i4)) {
+                    if (i4 == 0
+                            || ((command = nfcLedCoverController4.mOngoingEvent) != null
+                                    && command.code == i4)) {
                         nfcLedCoverController4.mOngoingEvent = null;
                     }
-                    if (NfcLedCoverController.this.mHandler.hasMessages(0) || NfcLedCoverController.this.mHandler.hasMessages(4) || NfcLedCoverController.this.mHandler.hasMessages(5)) {
+                    if (NfcLedCoverController.this.mHandler.hasMessages(0)
+                            || NfcLedCoverController.this.mHandler.hasMessages(4)
+                            || NfcLedCoverController.this.mHandler.hasMessages(5)) {
                         return;
                     }
-                    BaseNfcLedCoverController.releaseWakeLockWithPermission(NfcLedCoverController.this.mSendLedDataWakeLock);
+                    BaseNfcLedCoverController.releaseWakeLockWithPermission(
+                            NfcLedCoverController.this.mSendLedDataWakeLock);
                     return;
                 case 6:
                     nfcLedCoverController = NfcLedCoverController.this;
@@ -217,7 +249,8 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
                         try {
                             Iterator it = nfcLedCoverController.mListeners.iterator();
                             while (it.hasNext()) {
-                                NfcLedTouchListenerInfo nfcLedTouchListenerInfo = (NfcLedTouchListenerInfo) it.next();
+                                NfcLedTouchListenerInfo nfcLedTouchListenerInfo =
+                                        (NfcLedTouchListenerInfo) it.next();
                                 if (nfcLedTouchListenerInfo.type == 4) {
                                     nfcLedTouchListenerInfo.onSystemCoverEvent(1, null);
                                 }
@@ -227,7 +260,8 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
                     }
                     byte[] bArr2 = {0};
                     if (nfcLedCoverController.mIsLedOn) {
-                        BaseNfcLedCoverController.releaseWakeLockWithPermission(nfcLedCoverController.mLedOnOffWakeLock);
+                        BaseNfcLedCoverController.releaseWakeLockWithPermission(
+                                nfcLedCoverController.mLedOnOffWakeLock);
                         nfcLedCoverController.sendDataToNfcLedCover(18, bArr2);
                         return;
                     }
@@ -237,10 +271,14 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
                         if (command2 != null) {
                             int i5 = command2.code;
                             if (i5 == 3) {
-                                if (nfcLedCoverController.mCallDurationTimer != null && nfcLedCoverController.mCallDurationUpdateTask != null) {
+                                if (nfcLedCoverController.mCallDurationTimer != null
+                                        && nfcLedCoverController.mCallDurationUpdateTask != null) {
                                     nfcLedCoverController.mCallInProgressDisplay = true;
                                 }
-                                Log.e("CoverManager_NfcLedCoverController", "There is no time update task but we've got call duration ongoing event... displaying clock instead");
+                                Log.e(
+                                        "CoverManager_NfcLedCoverController",
+                                        "There is no time update task but we've got call duration"
+                                            + " ongoing event... displaying clock instead");
                                 nfcLedCoverController.mOngoingEvent = null;
                                 nfcLedCoverController.sendDataToNfcLedCover(15, null);
                             } else {
@@ -269,14 +307,21 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
                             nfcLedCoverController.mCallDurationTimer = null;
                             nfcLedCoverController.mCallDurationUpdateTask = null;
                         } else {
-                            Log.e("CoverManager_NfcLedCoverController", "Call duration should not be null in stop or was already stopped");
+                            Log.e(
+                                    "CoverManager_NfcLedCoverController",
+                                    "Call duration should not be null in stop or was already"
+                                        + " stopped");
                         }
                         nfcLedCoverController.mCallStartTime = -1L;
                         nfcLedCoverController.mHandler.removeCallbacksAndMessages(null);
-                        BaseNfcLedCoverController.releaseWakeLockWithPermission(nfcLedCoverController.mSendLedDataWakeLock);
-                        BaseNfcLedCoverController.releaseWakeLockWithPermission(nfcLedCoverController.mPollTouchWakeLock);
-                        BaseNfcLedCoverController.releaseWakeLockWithPermission(nfcLedCoverController.mTouchResponseWakeLock);
-                        BaseNfcLedCoverController.releaseWakeLockWithPermission(nfcLedCoverController.mLedOnOffWakeLock);
+                        BaseNfcLedCoverController.releaseWakeLockWithPermission(
+                                nfcLedCoverController.mSendLedDataWakeLock);
+                        BaseNfcLedCoverController.releaseWakeLockWithPermission(
+                                nfcLedCoverController.mPollTouchWakeLock);
+                        BaseNfcLedCoverController.releaseWakeLockWithPermission(
+                                nfcLedCoverController.mTouchResponseWakeLock);
+                        BaseNfcLedCoverController.releaseWakeLockWithPermission(
+                                nfcLedCoverController.mLedOnOffWakeLock);
                         nfcLedCoverController.mPollingTouchEvents = false;
                         nfcLedCoverController.mPrevCommand = 0;
                         nfcLedCoverController.mOngoingEvent = null;
@@ -295,7 +340,8 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
                         try {
                             Iterator it2 = nfcLedCoverController5.mListeners.iterator();
                             while (it2.hasNext()) {
-                                NfcLedTouchListenerInfo nfcLedTouchListenerInfo2 = (NfcLedTouchListenerInfo) it2.next();
+                                NfcLedTouchListenerInfo nfcLedTouchListenerInfo2 =
+                                        (NfcLedTouchListenerInfo) it2.next();
                                 if (nfcLedTouchListenerInfo2.type == 4) {
                                     nfcLedTouchListenerInfo2.onSystemCoverEvent(2, bundle);
                                 }
@@ -311,7 +357,8 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
                         try {
                             Iterator it3 = nfcLedCoverController6.mListeners.iterator();
                             while (it3.hasNext()) {
-                                NfcLedTouchListenerInfo nfcLedTouchListenerInfo3 = (NfcLedTouchListenerInfo) it3.next();
+                                NfcLedTouchListenerInfo nfcLedTouchListenerInfo3 =
+                                        (NfcLedTouchListenerInfo) it3.next();
                                 if (nfcLedTouchListenerInfo3.type == 4) {
                                     nfcLedTouchListenerInfo3.onSystemCoverEvent(3, bundle2);
                                 }
@@ -335,7 +382,8 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
                         try {
                             Iterator it4 = nfcLedCoverController7.mListeners.iterator();
                             while (it4.hasNext()) {
-                                NfcLedTouchListenerInfo nfcLedTouchListenerInfo4 = (NfcLedTouchListenerInfo) it4.next();
+                                NfcLedTouchListenerInfo nfcLedTouchListenerInfo4 =
+                                        (NfcLedTouchListenerInfo) it4.next();
                                 if (nfcLedTouchListenerInfo4.type == 4) {
                                     nfcLedTouchListenerInfo4.onSystemCoverEvent(4, bundle3);
                                 }
@@ -347,11 +395,15 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
                 default:
                     return;
             }
-            NfcLedCoverController.m887$$Nest$mhandleSendDataToNfcLedCover(NfcLedCoverController.this, message.arg1, (byte[]) message.obj);
-            if (NfcLedCoverController.this.mHandler.hasMessages(0) || NfcLedCoverController.this.mHandler.hasMessages(4) || NfcLedCoverController.this.mHandler.hasMessages(5)) {
+            NfcLedCoverController.m887$$Nest$mhandleSendDataToNfcLedCover(
+                    NfcLedCoverController.this, message.arg1, (byte[]) message.obj);
+            if (NfcLedCoverController.this.mHandler.hasMessages(0)
+                    || NfcLedCoverController.this.mHandler.hasMessages(4)
+                    || NfcLedCoverController.this.mHandler.hasMessages(5)) {
                 return;
             }
-            BaseNfcLedCoverController.releaseWakeLockWithPermission(NfcLedCoverController.this.mSendLedDataWakeLock);
+            BaseNfcLedCoverController.releaseWakeLockWithPermission(
+                    NfcLedCoverController.this.mSendLedDataWakeLock);
         }
     }
 
@@ -363,7 +415,8 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
         public final int type;
         public final int uid;
 
-        public NfcLedTouchListenerInfo(IBinder iBinder, ComponentName componentName, int i, int i2, int i3) {
+        public NfcLedTouchListenerInfo(
+                IBinder iBinder, ComponentName componentName, int i, int i2, int i3) {
             this.token = iBinder;
             this.component = componentName;
             this.pid = i;
@@ -387,12 +440,16 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
                 return;
             }
             try {
-                INfcLedCoverTouchListenerCallback asInterface = INfcLedCoverTouchListenerCallback.Stub.asInterface(iBinder);
+                INfcLedCoverTouchListenerCallback asInterface =
+                        INfcLedCoverTouchListenerCallback.Stub.asInterface(iBinder);
                 if (asInterface != null) {
                     asInterface.onSystemCoverEvent(i, bundle);
                 }
             } catch (RemoteException e) {
-                Log.e("CoverManager_NfcLedCoverController", "Failed onSystemCoverEvent callback", e);
+                Log.e(
+                        "CoverManager_NfcLedCoverController",
+                        "Failed onSystemCoverEvent callback",
+                        e);
             }
         }
     }
@@ -402,9 +459,13 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
         nfcLedCoverController.getClass();
         byte[] bArr = {0, 0, 0, 0};
         if (nfcLedCoverController.mCallStartTime != -1) {
-            long elapsedRealtime = (SystemClock.elapsedRealtime() - nfcLedCoverController.mCallStartTime) / 1000;
-            byte[] bytes = String.format(null, "%02d", Long.valueOf((elapsedRealtime / 60) % 100)).getBytes();
-            byte[] bytes2 = String.format(null, "%02d", Long.valueOf(elapsedRealtime % 60)).getBytes();
+            long elapsedRealtime =
+                    (SystemClock.elapsedRealtime() - nfcLedCoverController.mCallStartTime) / 1000;
+            byte[] bytes =
+                    String.format(null, "%02d", Long.valueOf((elapsedRealtime / 60) % 100))
+                            .getBytes();
+            byte[] bytes2 =
+                    String.format(null, "%02d", Long.valueOf(elapsedRealtime % 60)).getBytes();
             bArr[0] = bytes[0];
             bArr[1] = bytes[1];
             bArr[2] = bytes2[0];
@@ -414,28 +475,38 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
     }
 
     /* renamed from: -$$Nest$mhandleEventResponse, reason: not valid java name */
-    public static void m886$$Nest$mhandleEventResponse(NfcLedCoverController nfcLedCoverController, int i, int i2) {
+    public static void m886$$Nest$mhandleEventResponse(
+            NfcLedCoverController nfcLedCoverController, int i, int i2) {
         Iterator it;
         Iterator it2;
         nfcLedCoverController.getClass();
-        Log.d("CoverManager_NfcLedCoverController", "HandleEventResponse: type: " + i + " action: " + i2);
+        Log.d(
+                "CoverManager_NfcLedCoverController",
+                "HandleEventResponse: type: " + i + " action: " + i2);
         if (i2 == 1) {
             Log.d("CoverManager_NfcLedCoverController", "Event touch: accept");
             synchronized (nfcLedCoverController.mListeners) {
                 try {
                     it2 = nfcLedCoverController.mListeners.iterator();
                 } catch (RemoteException e) {
-                    Log.e("CoverManager_NfcLedCoverController", "Failed onCoverTouchAccept callback", e);
+                    Log.e(
+                            "CoverManager_NfcLedCoverController",
+                            "Failed onCoverTouchAccept callback",
+                            e);
                 } finally {
                 }
                 while (it2.hasNext()) {
-                    NfcLedTouchListenerInfo nfcLedTouchListenerInfo = (NfcLedTouchListenerInfo) it2.next();
+                    NfcLedTouchListenerInfo nfcLedTouchListenerInfo =
+                            (NfcLedTouchListenerInfo) it2.next();
                     if (i == nfcLedTouchListenerInfo.type) {
                         IBinder iBinder = nfcLedTouchListenerInfo.token;
                         if (iBinder == null) {
-                            Log.w("CoverManager_NfcLedCoverController", "null listener received TouchAccept!");
+                            Log.w(
+                                    "CoverManager_NfcLedCoverController",
+                                    "null listener received TouchAccept!");
                         } else {
-                            INfcLedCoverTouchListenerCallback asInterface = INfcLedCoverTouchListenerCallback.Stub.asInterface(iBinder);
+                            INfcLedCoverTouchListenerCallback asInterface =
+                                    INfcLedCoverTouchListenerCallback.Stub.asInterface(iBinder);
                             if (asInterface != null) {
                                 asInterface.onCoverTouchAccept();
                             }
@@ -449,17 +520,24 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
                 try {
                     it = nfcLedCoverController.mListeners.iterator();
                 } catch (RemoteException e2) {
-                    Log.e("CoverManager_NfcLedCoverController", "Failed onCoverTouchReject callback", e2);
+                    Log.e(
+                            "CoverManager_NfcLedCoverController",
+                            "Failed onCoverTouchReject callback",
+                            e2);
                 } finally {
                 }
                 while (it.hasNext()) {
-                    NfcLedTouchListenerInfo nfcLedTouchListenerInfo2 = (NfcLedTouchListenerInfo) it.next();
+                    NfcLedTouchListenerInfo nfcLedTouchListenerInfo2 =
+                            (NfcLedTouchListenerInfo) it.next();
                     if (i == nfcLedTouchListenerInfo2.type) {
                         IBinder iBinder2 = nfcLedTouchListenerInfo2.token;
                         if (iBinder2 == null) {
-                            Log.w("CoverManager_NfcLedCoverController", "null listener received TouchReject!");
+                            Log.w(
+                                    "CoverManager_NfcLedCoverController",
+                                    "null listener received TouchReject!");
                         } else {
-                            INfcLedCoverTouchListenerCallback asInterface2 = INfcLedCoverTouchListenerCallback.Stub.asInterface(iBinder2);
+                            INfcLedCoverTouchListenerCallback asInterface2 =
+                                    INfcLedCoverTouchListenerCallback.Stub.asInterface(iBinder2);
                             if (asInterface2 != null) {
                                 asInterface2.onCoverTouchReject();
                             }
@@ -470,13 +548,14 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
         } else {
             Log.d("CoverManager_NfcLedCoverController", "Unknown event action: " + i2);
         }
-        BaseNfcLedCoverController.releaseWakeLockWithPermission(nfcLedCoverController.mTouchResponseWakeLock);
+        BaseNfcLedCoverController.releaseWakeLockWithPermission(
+                nfcLedCoverController.mTouchResponseWakeLock);
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:69:0x0162, code lost:
-    
-        if (r5 == 3) goto L64;
-     */
+
+       if (r5 == 3) goto L64;
+    */
     /* JADX WARN: Removed duplicated region for block: B:17:0x0179  */
     /* JADX WARN: Removed duplicated region for block: B:31:0x019e A[Catch: all -> 0x0053, TryCatch #0 {all -> 0x0053, blocks: (B:102:0x001d, B:104:0x0023, B:105:0x0030, B:107:0x0036, B:109:0x0039, B:111:0x003d, B:113:0x0041, B:115:0x0047, B:116:0x0056, B:117:0x002b, B:5:0x0064, B:6:0x0145, B:23:0x018c, B:27:0x0184, B:28:0x018a, B:29:0x019a, B:31:0x019e, B:32:0x01a0, B:39:0x01af, B:41:0x01b2, B:46:0x01bb, B:48:0x01be, B:57:0x01d0, B:58:0x01e6, B:60:0x01f1, B:61:0x01fc, B:62:0x01fa, B:63:0x0198, B:65:0x015b, B:67:0x015e, B:70:0x0164, B:72:0x0168, B:73:0x0170, B:75:0x006c, B:77:0x0070, B:78:0x0080, B:81:0x008d, B:83:0x0091, B:84:0x00c5, B:85:0x00e4, B:87:0x00ea, B:88:0x00fb, B:90:0x0101, B:93:0x0128, B:94:0x012d, B:97:0x00f5), top: B:101:0x001d, inners: #1 }] */
     /* JADX WARN: Removed duplicated region for block: B:34:0x01a8  */
@@ -488,12 +567,16 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void m887$$Nest$mhandleSendDataToNfcLedCover(com.android.server.sepunion.cover.NfcLedCoverController r16, int r17, byte[] r18) {
+    public static void m887$$Nest$mhandleSendDataToNfcLedCover(
+            com.android.server.sepunion.cover.NfcLedCoverController r16, int r17, byte[] r18) {
         /*
             Method dump skipped, instructions count: 522
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.sepunion.cover.NfcLedCoverController.m887$$Nest$mhandleSendDataToNfcLedCover(com.android.server.sepunion.cover.NfcLedCoverController, int, byte[]):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.sepunion.cover.NfcLedCoverController.m887$$Nest$mhandleSendDataToNfcLedCover(com.android.server.sepunion.cover.NfcLedCoverController,"
+                    + " int, byte[]):void");
     }
 
     public NfcLedCoverController(Looper looper, Context context) {
@@ -508,21 +591,24 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
         PowerManager.WakeLock newWakeLock = this.mPowerManager.newWakeLock(1, "send leddata");
         this.mSendLedDataWakeLock = newWakeLock;
         newWakeLock.setReferenceCounted(false);
-        PowerManager.WakeLock newWakeLock2 = this.mPowerManager.newWakeLock(1, "pollTouch ledcover");
+        PowerManager.WakeLock newWakeLock2 =
+                this.mPowerManager.newWakeLock(1, "pollTouch ledcover");
         this.mPollTouchWakeLock = newWakeLock2;
         newWakeLock2.setReferenceCounted(false);
-        PowerManager.WakeLock newWakeLock3 = this.mPowerManager.newWakeLock(1, "touchResponse ledcover");
+        PowerManager.WakeLock newWakeLock3 =
+                this.mPowerManager.newWakeLock(1, "touchResponse ledcover");
         this.mTouchResponseWakeLock = newWakeLock3;
         newWakeLock3.setReferenceCounted(false);
         PowerManager.WakeLock newWakeLock4 = this.mPowerManager.newWakeLock(1, "onoff ledcover");
         this.mLedOnOffWakeLock = newWakeLock4;
         newWakeLock4.setReferenceCounted(false);
-        this.mTestMode = Settings.Secure.getInt(context.getContentResolver(), "nfc_led_cover_test", 0);
+        this.mTestMode =
+                Settings.Secure.getInt(context.getContentResolver(), "nfc_led_cover_test", 0);
     }
 
     public static byte[] buildNfcCoverLedData$1(int i, byte[] bArr) {
         if (bArr == null) {
-            bArr = new byte[]{0};
+            bArr = new byte[] {0};
         }
         int length = bArr.length;
         byte[] bArr2 = new byte[length + 10];
@@ -591,9 +677,19 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
                 printWriter.println("  Live callbacks (" + this.mListeners.size() + "):");
                 Iterator it = this.mListeners.iterator();
                 while (it.hasNext()) {
-                    NfcLedTouchListenerInfo nfcLedTouchListenerInfo = (NfcLedTouchListenerInfo) it.next();
+                    NfcLedTouchListenerInfo nfcLedTouchListenerInfo =
+                            (NfcLedTouchListenerInfo) it.next();
                     if (nfcLedTouchListenerInfo != null) {
-                        printWriter.println("    " + nfcLedTouchListenerInfo.component + " (pid=" + nfcLedTouchListenerInfo.pid + " uid=" + nfcLedTouchListenerInfo.uid + " type=" + nfcLedTouchListenerInfo.type + ")");
+                        printWriter.println(
+                                "    "
+                                        + nfcLedTouchListenerInfo.component
+                                        + " (pid="
+                                        + nfcLedTouchListenerInfo.pid
+                                        + " uid="
+                                        + nfcLedTouchListenerInfo.uid
+                                        + " type="
+                                        + nfcLedTouchListenerInfo.type
+                                        + ")");
                     }
                 }
                 printWriter.println("  ");
@@ -616,7 +712,9 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
                     case -78:
                         break;
                     default:
-                        Log.e("CoverManager_NfcLedCoverController", "Transceive error - unknown error value: " + ((int) bArr2[0]));
+                        Log.e(
+                                "CoverManager_NfcLedCoverController",
+                                "Transceive error - unknown error value: " + ((int) bArr2[0]));
                         z = false;
                         break;
                 }
@@ -627,7 +725,9 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
                     z = isValidResponse(i, bArr3);
                 }
                 if (!z && this.mLedCoverTransceiveRetryCount < 13) {
-                    StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "Repeat command ", " count: ");
+                    StringBuilder m =
+                            BatteryService$$ExternalSyntheticOutline0.m(
+                                    i, "Repeat command ", " count: ");
                     m.append(this.mLedCoverTransceiveRetryCount);
                     Log.e("CoverManager_NfcLedCoverController", m.toString());
                     this.mIsLedOn = false;
@@ -643,7 +743,9 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
                     return;
                 }
                 this.mLedCoverTransceiveRetryCount = 0;
-                Log.e("CoverManager_NfcLedCoverController", "Could not transceive command to cover so turn off led cover");
+                Log.e(
+                        "CoverManager_NfcLedCoverController",
+                        "Could not transceive command to cover so turn off led cover");
                 this.mFactoryTransceiveResponseIntentSent = false;
             }
             z = true;
@@ -653,13 +755,15 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
                 bArr32[2] = -47;
                 z = isValidResponse(i, bArr32);
             }
-            if (!z) {
-            }
+            if (!z) {}
             this.mLedCoverTransceiveRetryCount = 0;
-            Log.e("CoverManager_NfcLedCoverController", "Could not transceive command to cover so turn off led cover");
+            Log.e(
+                    "CoverManager_NfcLedCoverController",
+                    "Could not transceive command to cover so turn off led cover");
             this.mFactoryTransceiveResponseIntentSent = false;
         }
-        this.mContext.sendBroadcastAsUser(new Intent("android.intent.action.NFC_LED_COVER_MAX_RETRY_DONE"), UserHandle.ALL);
+        this.mContext.sendBroadcastAsUser(
+                new Intent("android.intent.action.NFC_LED_COVER_MAX_RETRY_DONE"), UserHandle.ALL);
         Log.d("CoverManager_NfcLedCoverController", "Sent done intent, fail transceive");
         if ((i == 2 || i == 18) && this.mCallInProgressDisplay) {
             this.mCallInProgressDisplay = false;
@@ -676,7 +780,8 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
             try {
                 Iterator it = this.mListeners.iterator();
                 while (it.hasNext()) {
-                    NfcLedTouchListenerInfo nfcLedTouchListenerInfo = (NfcLedTouchListenerInfo) it.next();
+                    NfcLedTouchListenerInfo nfcLedTouchListenerInfo =
+                            (NfcLedTouchListenerInfo) it.next();
                     if (nfcLedTouchListenerInfo.type == 4) {
                         nfcLedTouchListenerInfo.onSystemCoverEvent(0, m);
                     }
@@ -688,7 +793,8 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
     }
 
     @Override // com.android.server.sepunion.cover.BaseNfcLedCoverController
-    public final void registerNfcTouchListenerCallback(int i, IBinder iBinder, ComponentName componentName) {
+    public final void registerNfcTouchListenerCallback(
+            int i, IBinder iBinder, ComponentName componentName) {
         if (i < 0 || i > 5) {
             Log.e("CoverManager_NfcLedCoverController", "Unsupported touch listener type: " + i);
             return;
@@ -697,13 +803,23 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
             try {
                 Iterator it = this.mListeners.iterator();
                 while (it.hasNext()) {
-                    NfcLedTouchListenerInfo nfcLedTouchListenerInfo = (NfcLedTouchListenerInfo) it.next();
-                    if (nfcLedTouchListenerInfo != null && iBinder.equals(nfcLedTouchListenerInfo.token)) {
-                        Log.e("CoverManager_NfcLedCoverController", "sendDataToNfcLedCover : duplicated listener handle");
+                    NfcLedTouchListenerInfo nfcLedTouchListenerInfo =
+                            (NfcLedTouchListenerInfo) it.next();
+                    if (nfcLedTouchListenerInfo != null
+                            && iBinder.equals(nfcLedTouchListenerInfo.token)) {
+                        Log.e(
+                                "CoverManager_NfcLedCoverController",
+                                "sendDataToNfcLedCover : duplicated listener handle");
                         return;
                     }
                 }
-                NfcLedTouchListenerInfo nfcLedTouchListenerInfo2 = new NfcLedTouchListenerInfo(iBinder, componentName, Binder.getCallingPid(), Binder.getCallingUid(), i);
+                NfcLedTouchListenerInfo nfcLedTouchListenerInfo2 =
+                        new NfcLedTouchListenerInfo(
+                                iBinder,
+                                componentName,
+                                Binder.getCallingPid(),
+                                Binder.getCallingUid(),
+                                i);
                 iBinder.linkToDeath(nfcLedTouchListenerInfo2, 0);
                 this.mListeners.add(nfcLedTouchListenerInfo2);
             } catch (Throwable th) {
@@ -731,7 +847,10 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
             BaseNfcLedCoverController.releaseWakeLockWithPermission(this.mLedOnOffWakeLock);
             return;
         }
-        if (this.mIsLedOn && ((i == 15 || i == 3) && this.mPrevCommand == i && nfcLedCoverControllerHandler.hasMessages(1))) {
+        if (this.mIsLedOn
+                && ((i == 15 || i == 3)
+                        && this.mPrevCommand == i
+                        && nfcLedCoverControllerHandler.hasMessages(1))) {
             if (i == 15) {
                 Log.d("CoverManager_NfcLedCoverController", "Time update");
                 return;
@@ -766,7 +885,9 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
             }
             return;
         }
-        if (bArr == null || bArr.length < 5 || !((bArr[1] == 48 && bArr[2] == 48) || (bArr[3] == 48 && bArr[4] == 48))) {
+        if (bArr == null
+                || bArr.length < 5
+                || !((bArr[1] == 48 && bArr[2] == 48) || (bArr[3] == 48 && bArr[4] == 48))) {
             nfcLedCoverControllerHandler.sendMessageDelayed(obtain, 5100L);
         } else {
             nfcLedCoverControllerHandler.sendMessageDelayed(obtain, 3700L);
@@ -776,23 +897,32 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
     @Override // com.android.server.sepunion.cover.BaseNfcLedCoverController
     public final void sendDataToNfcLedCover(int i, byte[] bArr) {
         String format;
-        if (!this.mIsLedCoverAttached && !FactoryTest.isFactoryBinary() && this.mCoverEventsDisabledForSamsungPay) {
-            Log.d("CoverManager_NfcLedCoverController", "sendDataToLedCover : Not attached LED Cover or Disabled by SamsungPay");
+        if (!this.mIsLedCoverAttached
+                && !FactoryTest.isFactoryBinary()
+                && this.mCoverEventsDisabledForSamsungPay) {
+            Log.d(
+                    "CoverManager_NfcLedCoverController",
+                    "sendDataToLedCover : Not attached LED Cover or Disabled by SamsungPay");
             return;
         }
         if (this.mSamsungNfcAdapter == null && getSamsungNfcAdapter() == null) {
-            Log.d("CoverManager_NfcLedCoverController", "sendDataToLedCover : Nfc Service not available");
+            Log.d(
+                    "CoverManager_NfcLedCoverController",
+                    "sendDataToLedCover : Nfc Service not available");
             return;
         }
         if (i == 65535) {
             if (this.mPrevCommand != 15 || !this.mIsLedOn) {
-                Log.d("CoverManager_NfcLedCoverController", "Time tick: clock not displayed, ignore");
+                Log.d(
+                        "CoverManager_NfcLedCoverController",
+                        "Time tick: clock not displayed, ignore");
                 return;
             }
             i = 15;
         }
         if (i == 15) {
-            boolean is24HourFormat = DateFormat.is24HourFormat(this.mContext, ActivityManager.getCurrentUser());
+            boolean is24HourFormat =
+                    DateFormat.is24HourFormat(this.mContext, ActivityManager.getCurrentUser());
             long currentTimeMillis = System.currentTimeMillis();
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(currentTimeMillis);
@@ -810,7 +940,9 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
             bArr = format.getBytes();
         }
         if (i == 12 && this.mPrevCommand == 11) {
-            Log.e("CoverManager_NfcLedCoverController", "Ignore battery chargin, battery low already shown");
+            Log.e(
+                    "CoverManager_NfcLedCoverController",
+                    "Ignore battery chargin, battery low already shown");
             return;
         }
         BaseNfcLedCoverController.acquireWakeLockWithPermission(this.mSendLedDataWakeLock);
@@ -837,25 +969,43 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
         obtain.what = 0;
         if (nfcLedCoverControllerHandler.hasMessages(4)) {
             nfcLedCoverControllerHandler.removeMessages(0);
-            long currentTimeMillis2 = 500 - (System.currentTimeMillis() - this.mLedCoverRetryPostTime);
+            long currentTimeMillis2 =
+                    500 - (System.currentTimeMillis() - this.mLedCoverRetryPostTime);
             r6 = currentTimeMillis2 >= 0 ? currentTimeMillis2 : 0L;
-            Log.w("CoverManager_NfcLedCoverController", "There is pending DELAYED message due to Retry mechanism send this command with proper delay:" + r6);
+            Log.w(
+                    "CoverManager_NfcLedCoverController",
+                    "There is pending DELAYED message due to Retry mechanism send this command with"
+                        + " proper delay:"
+                            + r6);
         }
         clearRetryCountDelayedMsg$1();
         nfcLedCoverControllerHandler.sendMessageDelayed(obtain, r6);
     }
 
     public final void sendNfcFailIntentForFactoryMode(byte[] bArr) {
-        if ((FactoryTest.isFactoryBinary() || FactoryTest.isRunningFactoryApp() || this.mTestMode == 42) && !this.mFactoryTransceiveResponseIntentSent && bArr != null && bArr.length > 2 && bArr[0] == 105 && bArr[1] == -123 && bArr[2] == 0) {
+        if ((FactoryTest.isFactoryBinary()
+                        || FactoryTest.isRunningFactoryApp()
+                        || this.mTestMode == 42)
+                && !this.mFactoryTransceiveResponseIntentSent
+                && bArr != null
+                && bArr.length > 2
+                && bArr[0] == 105
+                && bArr[1] == -123
+                && bArr[2] == 0) {
             this.mFactoryTransceiveResponseIntentSent = true;
-            this.mContext.sendBroadcastAsUser(new Intent("android.intent.action.NFC_LED_COVER_FPCB_DISCONNECT"), UserHandle.ALL);
+            this.mContext.sendBroadcastAsUser(
+                    new Intent("android.intent.action.NFC_LED_COVER_FPCB_DISCONNECT"),
+                    UserHandle.ALL);
         }
     }
 
     @Override // com.android.server.sepunion.cover.BaseNfcLedCoverController
     public final void sendPowerKeyToCover() {
         if (this.mCoverEventsDisabledForSamsungPay) {
-            Log.d("CoverManager_NfcLedCoverController", "handleMessage MSG_EVENT_POWER_BUTTON: SamsungPay active - ignore power button events");
+            Log.d(
+                    "CoverManager_NfcLedCoverController",
+                    "handleMessage MSG_EVENT_POWER_BUTTON: SamsungPay active - ignore power button"
+                        + " events");
         } else {
             this.mHandler.sendEmptyMessage(6);
         }
@@ -924,7 +1074,9 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
     }
 
     public final boolean tryStartLedCover() {
-        Log.d("CoverManager_NfcLedCoverController", "Trying to start NFC LED Cover mIsLedOn=" + String.valueOf(this.mIsLedOn));
+        Log.d(
+                "CoverManager_NfcLedCoverController",
+                "Trying to start NFC LED Cover mIsLedOn=" + String.valueOf(this.mIsLedOn));
         if (this.mIsLedOn) {
             Log.d("CoverManager_NfcLedCoverController", "NFC LED Cover already started");
         } else {
@@ -952,15 +1104,21 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
             try {
                 Iterator it = this.mListeners.iterator();
                 while (it.hasNext()) {
-                    NfcLedTouchListenerInfo nfcLedTouchListenerInfo = (NfcLedTouchListenerInfo) it.next();
-                    if (nfcLedTouchListenerInfo != null && iBinder.equals(nfcLedTouchListenerInfo.token)) {
-                        Log.e("CoverManager_NfcLedCoverController", "remove listener: " + nfcLedTouchListenerInfo.pid);
+                    NfcLedTouchListenerInfo nfcLedTouchListenerInfo =
+                            (NfcLedTouchListenerInfo) it.next();
+                    if (nfcLedTouchListenerInfo != null
+                            && iBinder.equals(nfcLedTouchListenerInfo.token)) {
+                        Log.e(
+                                "CoverManager_NfcLedCoverController",
+                                "remove listener: " + nfcLedTouchListenerInfo.pid);
                         this.mListeners.remove(nfcLedTouchListenerInfo);
                         iBinder.unlinkToDeath(nfcLedTouchListenerInfo, 0);
                         return true;
                     }
                 }
-                Log.e("CoverManager_NfcLedCoverController", "UnregisterNfcTouchListener: listener does not exist");
+                Log.e(
+                        "CoverManager_NfcLedCoverController",
+                        "UnregisterNfcTouchListener: listener does not exist");
                 return false;
             } catch (Throwable th) {
                 throw th;
@@ -974,13 +1132,16 @@ public final class NfcLedCoverController extends BaseNfcLedCoverController {
         if (this.mIsLedCoverAttached != z2) {
             this.mIsLedCoverAttached = z2;
             if (!z2) {
-                Log.d("CoverManager_NfcLedCoverController", "NfcLedCover detached, start clearing all flags, messages, wakelocks");
+                Log.d(
+                        "CoverManager_NfcLedCoverController",
+                        "NfcLedCover detached, start clearing all flags, messages, wakelocks");
                 NfcLedCoverControllerHandler nfcLedCoverControllerHandler = this.mHandler;
                 Message obtainMessage = nfcLedCoverControllerHandler.obtainMessage(7);
                 obtainMessage.arg1 = z ? 1 : 0;
                 nfcLedCoverControllerHandler.sendMessageAtFrontOfQueue(obtainMessage);
             }
         }
-        this.mTestMode = Settings.Secure.getInt(this.mContext.getContentResolver(), "nfc_led_cover_test", 0);
+        this.mTestMode =
+                Settings.Secure.getInt(this.mContext.getContentResolver(), "nfc_led_cover_test", 0);
     }
 }

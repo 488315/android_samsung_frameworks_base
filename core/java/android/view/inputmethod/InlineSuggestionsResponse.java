@@ -3,35 +3,42 @@ package android.view.inputmethod;
 import android.annotation.NonNull;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class InlineSuggestionsResponse implements Parcelable {
-    public static final Parcelable.Creator<InlineSuggestionsResponse> CREATOR = new Parcelable.Creator<InlineSuggestionsResponse>() { // from class: android.view.inputmethod.InlineSuggestionsResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InlineSuggestionsResponse[] newArray(int size) {
-            return new InlineSuggestionsResponse[size];
-        }
+    public static final Parcelable.Creator<InlineSuggestionsResponse> CREATOR =
+            new Parcelable.Creator<
+                    InlineSuggestionsResponse>() { // from class:
+                                                   // android.view.inputmethod.InlineSuggestionsResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InlineSuggestionsResponse[] newArray(int size) {
+                    return new InlineSuggestionsResponse[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InlineSuggestionsResponse createFromParcel(Parcel in) {
-            return new InlineSuggestionsResponse(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InlineSuggestionsResponse createFromParcel(Parcel in) {
+                    return new InlineSuggestionsResponse(in);
+                }
+            };
     private final List<InlineSuggestion> mInlineSuggestions;
 
-    public static InlineSuggestionsResponse newInlineSuggestionsResponse(List<InlineSuggestion> inlineSuggestions) {
+    public static InlineSuggestionsResponse newInlineSuggestionsResponse(
+            List<InlineSuggestion> inlineSuggestions) {
         return new InlineSuggestionsResponse(inlineSuggestions);
     }
 
     public InlineSuggestionsResponse(List<InlineSuggestion> inlineSuggestions) {
         this.mInlineSuggestions = inlineSuggestions;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mInlineSuggestions);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mInlineSuggestions);
     }
 
     public List<InlineSuggestion> getInlineSuggestions() {
@@ -70,12 +77,13 @@ public final class InlineSuggestionsResponse implements Parcelable {
 
     InlineSuggestionsResponse(Parcel in) {
         ArrayList arrayList = new ArrayList();
-        in.readParcelableList(arrayList, InlineSuggestion.class.getClassLoader(), InlineSuggestion.class);
+        in.readParcelableList(
+                arrayList, InlineSuggestion.class.getClassLoader(), InlineSuggestion.class);
         this.mInlineSuggestions = arrayList;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mInlineSuggestions);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mInlineSuggestions);
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

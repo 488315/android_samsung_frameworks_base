@@ -3,6 +3,7 @@ package android.media;
 import android.system.ErrnoException;
 import android.system.Os;
 import android.util.Log;
+
 import java.io.Closeable;
 import java.io.FileDescriptor;
 import java.io.IOException;
@@ -13,8 +14,7 @@ import java.io.OutputStream;
 class ExifInterfaceUtils {
     private static final String TAG = "ExifInterface";
 
-    ExifInterfaceUtils() {
-    }
+    ExifInterfaceUtils() {}
 
     public static int copy(InputStream in, OutputStream out) throws IOException {
         int total = 0;
@@ -37,7 +37,9 @@ class ExifInterfaceUtils {
             int bytesToRead = Math.min(remainder, 8192);
             int bytesRead = in.read(buffer, 0, bytesToRead);
             if (bytesRead != bytesToRead) {
-                throw new IOException("Failed to copy the given amount of bytes from the inputstream to the output stream.");
+                throw new IOException(
+                        "Failed to copy the given amount of bytes from the inputstream to the"
+                                + " output stream.");
             }
             remainder -= bytesRead;
             out.write(buffer, 0, bytesRead);
@@ -68,7 +70,11 @@ class ExifInterfaceUtils {
     }
 
     public static boolean startsWith(byte[] cur, byte[] val) {
-        if (cur == null || val == null || cur.length < val.length || cur.length == 0 || val.length == 0) {
+        if (cur == null
+                || val == null
+                || cur.length < val.length
+                || cur.length == 0
+                || val.length == 0) {
             return false;
         }
         for (int i = 0; i < val.length; i++) {

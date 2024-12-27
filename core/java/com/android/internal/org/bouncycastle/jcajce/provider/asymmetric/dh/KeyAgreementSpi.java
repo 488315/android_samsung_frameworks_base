@@ -8,6 +8,7 @@ import com.android.internal.org.bouncycastle.crypto.params.DHPublicKeyParameters
 import com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseAgreementSpi;
 import com.android.internal.org.bouncycastle.jcajce.spec.DHDomainParameterSpec;
 import com.android.internal.org.bouncycastle.jcajce.spec.UserKeyingMaterialSpec;
+
 import java.math.BigInteger;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -17,6 +18,7 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.SecureRandom;
 import java.security.spec.AlgorithmParameterSpec;
+
 import javax.crypto.SecretKey;
 import javax.crypto.ShortBufferException;
 import javax.crypto.interfaces.DHPrivateKey;
@@ -43,7 +45,8 @@ public class KeyAgreementSpi extends BaseAgreementSpi {
         this.mqvAgreement = null;
     }
 
-    public KeyAgreementSpi(String kaAlgorithm, BasicAgreement mqvAgreement, DerivationFunction kdf) {
+    public KeyAgreementSpi(
+            String kaAlgorithm, BasicAgreement mqvAgreement, DerivationFunction kdf) {
         super(kaAlgorithm, kdf);
         this.mqvAgreement = mqvAgreement;
     }
@@ -65,7 +68,8 @@ public class KeyAgreementSpi extends BaseAgreementSpi {
     }
 
     @Override // javax.crypto.KeyAgreementSpi
-    protected Key engineDoPhase(Key key, boolean lastPhase) throws InvalidKeyException, IllegalStateException {
+    protected Key engineDoPhase(Key key, boolean lastPhase)
+            throws InvalidKeyException, IllegalStateException {
         if (this.x == null) {
             throw new IllegalStateException("Diffie-Hellman not initialised.");
         }
@@ -73,11 +77,14 @@ public class KeyAgreementSpi extends BaseAgreementSpi {
             throw new InvalidKeyException("DHKeyAgreement doPhase requires DHPublicKey");
         }
         DHPublicKey pubKey = (DHPublicKey) key;
-        if (!pubKey.getParams().getG().equals(this.g) || !pubKey.getParams().getP().equals(this.p)) {
+        if (!pubKey.getParams().getG().equals(this.g)
+                || !pubKey.getParams().getP().equals(this.p)) {
             throw new InvalidKeyException("DHPublicKey not for this KeyAgreement!");
         }
         BigInteger peerY = ((DHPublicKey) key).getY();
-        if (peerY == null || peerY.compareTo(TWO) < 0 || peerY.compareTo(this.p.subtract(ONE)) >= 0) {
+        if (peerY == null
+                || peerY.compareTo(TWO) < 0
+                || peerY.compareTo(this.p.subtract(ONE)) >= 0) {
             throw new InvalidKeyException("Invalid DH PublicKey");
         }
         BigInteger res = peerY.modPow(this.x, this.p);
@@ -100,7 +107,8 @@ public class KeyAgreementSpi extends BaseAgreementSpi {
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseAgreementSpi, javax.crypto.KeyAgreementSpi
-    protected int engineGenerateSecret(byte[] sharedSecret, int offset) throws IllegalStateException, ShortBufferException {
+    protected int engineGenerateSecret(byte[] sharedSecret, int offset)
+            throws IllegalStateException, ShortBufferException {
         if (this.x == null) {
             throw new IllegalStateException("Diffie-Hellman not initialised.");
         }
@@ -119,9 +127,11 @@ public class KeyAgreementSpi extends BaseAgreementSpi {
     }
 
     @Override // javax.crypto.KeyAgreementSpi
-    protected void engineInit(Key key, AlgorithmParameterSpec params, SecureRandom random) throws InvalidKeyException, InvalidAlgorithmParameterException {
+    protected void engineInit(Key key, AlgorithmParameterSpec params, SecureRandom random)
+            throws InvalidKeyException, InvalidAlgorithmParameterException {
         if (!(key instanceof DHPrivateKey)) {
-            throw new InvalidKeyException("DHKeyAgreement requires DHPrivateKey for initialisation");
+            throw new InvalidKeyException(
+                    "DHKeyAgreement requires DHPrivateKey for initialisation");
         }
         DHPrivateKey privKey = (DHPrivateKey) key;
         if (params != null) {
@@ -132,13 +142,15 @@ public class KeyAgreementSpi extends BaseAgreementSpi {
                 this.ukmParameters = null;
             } else if (params instanceof UserKeyingMaterialSpec) {
                 if (this.kdf == null) {
-                    throw new InvalidAlgorithmParameterException("no KDF specified for UserKeyingMaterialSpec");
+                    throw new InvalidAlgorithmParameterException(
+                            "no KDF specified for UserKeyingMaterialSpec");
                 }
                 this.p = privKey.getParams().getP();
                 this.g = privKey.getParams().getG();
                 this.ukmParameters = ((UserKeyingMaterialSpec) params).getUserKeyingMaterial();
             } else {
-                throw new InvalidAlgorithmParameterException("DHKeyAgreement only accepts DHParameterSpec");
+                throw new InvalidAlgorithmParameterException(
+                        "DHKeyAgreement only accepts DHParameterSpec");
             }
         } else {
             this.p = privKey.getParams().getP();
@@ -165,19 +177,23 @@ public class KeyAgreementSpi extends BaseAgreementSpi {
         return this.result;
     }
 
-    private DHPrivateKeyParameters generatePrivateKeyParameter(PrivateKey privKey) throws InvalidKeyException {
+    private DHPrivateKeyParameters generatePrivateKeyParameter(PrivateKey privKey)
+            throws InvalidKeyException {
         if (privKey instanceof DHPrivateKey) {
             if (privKey instanceof BCDHPrivateKey) {
                 return ((BCDHPrivateKey) privKey).engineGetKeyParameters();
             }
             DHPrivateKey pub = (DHPrivateKey) privKey;
             DHParameterSpec params = pub.getParams();
-            return new DHPrivateKeyParameters(pub.getX(), new DHParameters(params.getP(), params.getG(), null, params.getL()));
+            return new DHPrivateKeyParameters(
+                    pub.getX(),
+                    new DHParameters(params.getP(), params.getG(), null, params.getL()));
         }
         throw new InvalidKeyException("private key not a DHPrivateKey");
     }
 
-    private DHPublicKeyParameters generatePublicKeyParameter(PublicKey pubKey) throws InvalidKeyException {
+    private DHPublicKeyParameters generatePublicKeyParameter(PublicKey pubKey)
+            throws InvalidKeyException {
         if (pubKey instanceof DHPublicKey) {
             if (pubKey instanceof BCDHPublicKey) {
                 return ((BCDHPublicKey) pubKey).engineGetKeyParameters();
@@ -185,9 +201,12 @@ public class KeyAgreementSpi extends BaseAgreementSpi {
             DHPublicKey pub = (DHPublicKey) pubKey;
             DHParameterSpec params = pub.getParams();
             if (params instanceof DHDomainParameterSpec) {
-                return new DHPublicKeyParameters(pub.getY(), ((DHDomainParameterSpec) params).getDomainParameters());
+                return new DHPublicKeyParameters(
+                        pub.getY(), ((DHDomainParameterSpec) params).getDomainParameters());
             }
-            return new DHPublicKeyParameters(pub.getY(), new DHParameters(params.getP(), params.getG(), null, params.getL()));
+            return new DHPublicKeyParameters(
+                    pub.getY(),
+                    new DHParameters(params.getP(), params.getG(), null, params.getL()));
         }
         throw new InvalidKeyException("public key not a DHPublicKey");
     }

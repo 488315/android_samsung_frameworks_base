@@ -3,25 +3,28 @@ package android.media.metrics;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public final class PlaybackStateEvent extends Event implements Parcelable {
-    public static final Parcelable.Creator<PlaybackStateEvent> CREATOR = new Parcelable.Creator<PlaybackStateEvent>() { // from class: android.media.metrics.PlaybackStateEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PlaybackStateEvent[] newArray(int size) {
-            return new PlaybackStateEvent[size];
-        }
+    public static final Parcelable.Creator<PlaybackStateEvent> CREATOR =
+            new Parcelable.Creator<PlaybackStateEvent>() { // from class:
+                // android.media.metrics.PlaybackStateEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PlaybackStateEvent[] newArray(int size) {
+                    return new PlaybackStateEvent[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PlaybackStateEvent createFromParcel(Parcel in) {
-            return new PlaybackStateEvent(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PlaybackStateEvent createFromParcel(Parcel in) {
+                    return new PlaybackStateEvent(in);
+                }
+            };
     public static final int STATE_ABANDONED = 15;
     public static final int STATE_BUFFERING = 6;
     public static final int STATE_ENDED = 11;
@@ -41,8 +44,7 @@ public final class PlaybackStateEvent extends Event implements Parcelable {
     private final long mTimeSinceCreatedMillis;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface State {
-    }
+    public @interface State {}
 
     public static String stateToString(int value) {
         switch (value) {
@@ -110,14 +112,16 @@ public final class PlaybackStateEvent extends Event implements Parcelable {
             return false;
         }
         PlaybackStateEvent that = (PlaybackStateEvent) o;
-        if (this.mState == that.mState && this.mTimeSinceCreatedMillis == that.mTimeSinceCreatedMillis) {
+        if (this.mState == that.mState
+                && this.mTimeSinceCreatedMillis == that.mTimeSinceCreatedMillis) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mState), Long.valueOf(this.mTimeSinceCreatedMillis));
+        return Objects.hash(
+                Integer.valueOf(this.mState), Long.valueOf(this.mTimeSinceCreatedMillis));
     }
 
     @Override // android.os.Parcelable
@@ -162,7 +166,9 @@ public final class PlaybackStateEvent extends Event implements Parcelable {
         }
 
         public PlaybackStateEvent build() {
-            PlaybackStateEvent o = new PlaybackStateEvent(this.mState, this.mTimeSinceCreatedMillis, this.mMetricsBundle);
+            PlaybackStateEvent o =
+                    new PlaybackStateEvent(
+                            this.mState, this.mTimeSinceCreatedMillis, this.mMetricsBundle);
             return o;
         }
     }

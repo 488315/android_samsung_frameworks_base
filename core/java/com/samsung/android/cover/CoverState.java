@@ -6,6 +6,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.DisplayMetrics;
 import android.util.Log;
+
 import com.android.internal.R;
 
 /* loaded from: classes6.dex */
@@ -46,19 +47,21 @@ public class CoverState implements Parcelable {
     public static final int COLOR_YELLOW = 12;
     public static final boolean COVER_ATTACHED = true;
     public static final boolean COVER_DETACHED = false;
-    public static final Parcelable.Creator<CoverState> CREATOR = new Parcelable.Creator<CoverState>() { // from class: com.samsung.android.cover.CoverState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CoverState createFromParcel(Parcel parcel) {
-            return new CoverState(parcel);
-        }
+    public static final Parcelable.Creator<CoverState> CREATOR =
+            new Parcelable.Creator<
+                    CoverState>() { // from class: com.samsung.android.cover.CoverState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CoverState createFromParcel(Parcel parcel) {
+                    return new CoverState(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CoverState[] newArray(int size) {
-            return new CoverState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CoverState[] newArray(int size) {
+                    return new CoverState[size];
+                }
+            };
     public static final int FOTA_MODE_NONE = 0;
     public static final int FRIENDS_TYPE_BACK_COVER = 1;
     public static final int FRIENDS_TYPE_FLIP_COVER = 2;
@@ -145,7 +148,13 @@ public class CoverState implements Parcelable {
         updateVisibleRect(type);
     }
 
-    public CoverState(boolean switchState, int type, int color, int widthPixel, int heightPixel, boolean attached) {
+    public CoverState(
+            boolean switchState,
+            int type,
+            int color,
+            int widthPixel,
+            int heightPixel,
+            boolean attached) {
         this.mVisibleRect = new Rect();
         this.switchState = switchState;
         this.type = type;
@@ -157,7 +166,14 @@ public class CoverState implements Parcelable {
         updateVisibleRect(type);
     }
 
-    public CoverState(boolean switchState, int type, int color, int widthPixel, int heightPixel, boolean attached, int model) {
+    public CoverState(
+            boolean switchState,
+            int type,
+            int color,
+            int widthPixel,
+            int heightPixel,
+            boolean attached,
+            int model) {
         this.mVisibleRect = new Rect();
         this.switchState = switchState;
         this.type = type;
@@ -169,7 +185,16 @@ public class CoverState implements Parcelable {
         updateVisibleRect(type);
     }
 
-    public CoverState(boolean switchState, int type, int color, boolean attached, int model, String installUri, byte[] vendorData, String serialNumber, boolean isFake) {
+    public CoverState(
+            boolean switchState,
+            int type,
+            int color,
+            boolean attached,
+            int model,
+            String installUri,
+            byte[] vendorData,
+            String serialNumber,
+            boolean isFake) {
         this.mVisibleRect = new Rect();
         this.switchState = switchState;
         this.type = type;
@@ -256,7 +281,19 @@ public class CoverState implements Parcelable {
     }
 
     public String toString() {
-        return String.format("CoverState(switchState=%b type=%d color=%d widthPixel=%d heightPixel=%d model=%d attached=%b fotaMode=%d friendsType=%d VisibleRect=%s)", Boolean.valueOf(this.switchState), Integer.valueOf(this.type), Integer.valueOf(this.color), Integer.valueOf(this.widthPixel), Integer.valueOf(this.heightPixel), Integer.valueOf(this.model), Boolean.valueOf(this.attached), Integer.valueOf(this.fotaMode), Integer.valueOf(this.friendsType), this.mVisibleRect);
+        return String.format(
+                "CoverState(switchState=%b type=%d color=%d widthPixel=%d heightPixel=%d model=%d"
+                    + " attached=%b fotaMode=%d friendsType=%d VisibleRect=%s)",
+                Boolean.valueOf(this.switchState),
+                Integer.valueOf(this.type),
+                Integer.valueOf(this.color),
+                Integer.valueOf(this.widthPixel),
+                Integer.valueOf(this.heightPixel),
+                Integer.valueOf(this.model),
+                Boolean.valueOf(this.attached),
+                Integer.valueOf(this.fotaMode),
+                Integer.valueOf(this.friendsType),
+                this.mVisibleRect);
     }
 
     public void updateCoverState(int type, int color, int widthPixel, int heightPixel) {
@@ -267,7 +304,8 @@ public class CoverState implements Parcelable {
         updateVisibleRect(type);
     }
 
-    public void updateCoverState(boolean switchState, int type, int color, int widthPixel, int heightPixel) {
+    public void updateCoverState(
+            boolean switchState, int type, int color, int widthPixel, int heightPixel) {
         this.switchState = switchState;
         this.type = type;
         this.color = color;
@@ -276,7 +314,13 @@ public class CoverState implements Parcelable {
         updateVisibleRect(type);
     }
 
-    public void updateCoverState(boolean switchState, int type, int color, int widthPixel, int heightPixel, boolean attached) {
+    public void updateCoverState(
+            boolean switchState,
+            int type,
+            int color,
+            int widthPixel,
+            int heightPixel,
+            boolean attached) {
         this.switchState = switchState;
         this.type = type;
         this.color = color;
@@ -295,7 +339,8 @@ public class CoverState implements Parcelable {
         updateVisibleRect(type);
     }
 
-    public void updateCoverState(int type, int color, int widthPixel, int heightPixel, boolean attached, int model) {
+    public void updateCoverState(
+            int type, int color, int widthPixel, int heightPixel, boolean attached, int model) {
         this.type = type;
         this.color = color;
         this.widthPixel = widthPixel;
@@ -445,10 +490,14 @@ public class CoverState implements Parcelable {
         Resources resource = Resources.getSystem();
         if (resource != null) {
             if (type == 15 || type == 16 || type == 17) {
-                this.mVisibleRect.left = resource.getDimensionPixelSize(R.dimen.cover_clear_view_left);
-                this.mVisibleRect.top = resource.getDimensionPixelSize(R.dimen.cover_clear_view_top);
-                this.mVisibleRect.right = resource.getDimensionPixelSize(R.dimen.cover_clear_view_right);
-                this.mVisibleRect.bottom = resource.getDimensionPixelSize(R.dimen.cover_clear_view_bottom);
+                this.mVisibleRect.left =
+                        resource.getDimensionPixelSize(R.dimen.cover_clear_view_left);
+                this.mVisibleRect.top =
+                        resource.getDimensionPixelSize(R.dimen.cover_clear_view_top);
+                this.mVisibleRect.right =
+                        resource.getDimensionPixelSize(R.dimen.cover_clear_view_right);
+                this.mVisibleRect.bottom =
+                        resource.getDimensionPixelSize(R.dimen.cover_clear_view_bottom);
             }
             float defaultDensity = getDefaultDensity(resource);
             float currentDensity = resource.getDisplayMetrics().density;
@@ -457,13 +506,33 @@ public class CoverState implements Parcelable {
             this.mVisibleRect.top = (int) (r4.top * ratio);
             this.mVisibleRect.right = (int) (r4.right * ratio);
             this.mVisibleRect.bottom = (int) (r4.bottom * ratio);
-            Log.d(TAG, "updateVisibility type= " + type + " defaultDensity= " + defaultDensity + " currentDensity= " + currentDensity + " ratio= " + ratio + " mVisibleRect left= " + this.mVisibleRect.left + " mVisibleRect top= " + this.mVisibleRect.top + " mVisibleRect right= " + this.mVisibleRect.right + " mVisibleRect bottom= " + this.mVisibleRect.bottom);
+            Log.d(
+                    TAG,
+                    "updateVisibility type= "
+                            + type
+                            + " defaultDensity= "
+                            + defaultDensity
+                            + " currentDensity= "
+                            + currentDensity
+                            + " ratio= "
+                            + ratio
+                            + " mVisibleRect left= "
+                            + this.mVisibleRect.left
+                            + " mVisibleRect top= "
+                            + this.mVisibleRect.top
+                            + " mVisibleRect right= "
+                            + this.mVisibleRect.right
+                            + " mVisibleRect bottom= "
+                            + this.mVisibleRect.bottom);
         }
     }
 
     public float getDefaultDensity(Resources resource) {
         DisplayMetrics displayMetrics = resource.getDisplayMetrics();
-        int width = displayMetrics.widthPixels < displayMetrics.heightPixels ? displayMetrics.widthPixels : displayMetrics.heightPixels;
+        int width =
+                displayMetrics.widthPixels < displayMetrics.heightPixels
+                        ? displayMetrics.widthPixels
+                        : displayMetrics.heightPixels;
         if (width >= 1440) {
             return 4.0f;
         }

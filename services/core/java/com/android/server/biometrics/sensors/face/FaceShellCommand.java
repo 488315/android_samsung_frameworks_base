@@ -6,11 +6,13 @@ import android.os.Build;
 import android.os.ShellCommand;
 import android.util.Pair;
 import android.util.Slog;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.biometrics.AuthenticationStatsCollector;
 import com.android.server.biometrics.Utils;
 import com.android.server.biometrics.sensors.BiometricNotificationImpl;
 import com.android.server.biometrics.sensors.face.aidl.FaceProvider;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -34,8 +36,10 @@ public final class FaceShellCommand extends ShellCommand {
             try {
                 Pair singleProvider = faceService.mRegistry.getSingleProvider();
                 if (singleProvider != null) {
-                    AuthenticationStatsCollector authenticationStatsCollector = ((FaceProvider) singleProvider.second).mAuthenticationStatsCollector;
-                    BiometricNotificationImpl biometricNotificationImpl = authenticationStatsCollector.mBiometricNotification;
+                    AuthenticationStatsCollector authenticationStatsCollector =
+                            ((FaceProvider) singleProvider.second).mAuthenticationStatsCollector;
+                    BiometricNotificationImpl biometricNotificationImpl =
+                            authenticationStatsCollector.mBiometricNotification;
                     Context context2 = authenticationStatsCollector.mContext;
                     biometricNotificationImpl.getClass();
                     BiometricNotificationImpl.sendFaceEnrollNotification(context2);
@@ -138,7 +142,9 @@ public final class FaceShellCommand extends ShellCommand {
         L8e:
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.biometrics.sensors.face.FaceShellCommand.onCommand(java.lang.String):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.biometrics.sensors.face.FaceShellCommand.onCommand(java.lang.String):int");
     }
 
     public final void onHelp() {
@@ -147,6 +153,10 @@ public final class FaceShellCommand extends ShellCommand {
         outPrintWriter.println("  help");
         outPrintWriter.println("      Print this help text.");
         outPrintWriter.println("  sync");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "      Sync enrollments now (virtualized sensors only).", "  notification", "     Sends a Face re-enrollment notification");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "      Sync enrollments now (virtualized sensors only).",
+                "  notification",
+                "     Sends a Face re-enrollment notification");
     }
 }

@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes3.dex */
 public interface IControlsProviderInfoSubscriber extends IInterface {
-    public static final String DESCRIPTOR = "android.service.controls.IControlsProviderInfoSubscriber";
+    public static final String DESCRIPTOR =
+            "android.service.controls.IControlsProviderInfoSubscriber";
 
     void onNext(IBinder iBinder, ControlsProviderInfo controlsProviderInfo) throws RemoteException;
 
     public static class Default implements IControlsProviderInfoSubscriber {
         @Override // android.service.controls.IControlsProviderInfoSubscriber
-        public void onNext(IBinder token, ControlsProviderInfo cpi) throws RemoteException {
-        }
+        public void onNext(IBinder token, ControlsProviderInfo cpi) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IControlsProviderInfoSubscriber extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IControlsProviderInfoSubscriber {
+    public abstract static class Stub extends Binder implements IControlsProviderInfoSubscriber {
         static final int TRANSACTION_onNext = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface IControlsProviderInfoSubscriber extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IControlsProviderInfoSubscriber.DESCRIPTOR);
             }
@@ -72,7 +73,9 @@ public interface IControlsProviderInfoSubscriber extends IInterface {
             switch (code) {
                 case 1:
                     IBinder _arg0 = data.readStrongBinder();
-                    ControlsProviderInfo _arg1 = (ControlsProviderInfo) data.readTypedObject(ControlsProviderInfo.CREATOR);
+                    ControlsProviderInfo _arg1 =
+                            (ControlsProviderInfo)
+                                    data.readTypedObject(ControlsProviderInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onNext(_arg0, _arg1);
                     return true;

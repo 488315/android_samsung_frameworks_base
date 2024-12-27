@@ -1,9 +1,7 @@
 package android.view;
 
-import android.view.ActionMode;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -133,7 +131,8 @@ public class WindowCallbackWrapper implements Window.Callback {
     }
 
     @Override // android.view.Window.Callback
-    public void onProvideKeyboardShortcuts(List<KeyboardShortcutGroup> data, Menu menu, int deviceId) {
+    public void onProvideKeyboardShortcuts(
+            List<KeyboardShortcutGroup> data, Menu menu, int deviceId) {
         this.mWrapped.onProvideKeyboardShortcuts(data, menu, deviceId);
     }
 

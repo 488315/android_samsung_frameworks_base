@@ -5,12 +5,11 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import vendor.samsung.hardware.radio.satellite.ISehRadioSatelliteIndication;
-import vendor.samsung.hardware.radio.satellite.ISehRadioSatelliteResponse;
 
 /* loaded from: classes6.dex */
 public interface ISehRadioSatellite extends IInterface {
-    public static final String DESCRIPTOR = "vendor$samsung$hardware$radio$satellite$ISehRadioSatellite".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "vendor$samsung$hardware$radio$satellite$ISehRadioSatellite".replace('$', '.');
     public static final String HASH = "ae6e84d3e4b8110a872e15980b70939aa6b152ef";
     public static final int VERSION = 1;
 
@@ -40,7 +39,8 @@ public interface ISehRadioSatellite extends IInterface {
 
     void hangup(int i) throws RemoteException;
 
-    void sendIccSimAuthentication(int i, SehSatSimAuthRespData sehSatSimAuthRespData) throws RemoteException;
+    void sendIccSimAuthentication(int i, SehSatSimAuthRespData sehSatSimAuthRespData)
+            throws RemoteException;
 
     void sendRawAtCommand(int i, String str) throws RemoteException;
 
@@ -60,7 +60,10 @@ public interface ISehRadioSatellite extends IInterface {
 
     void setPower(int i, int i2) throws RemoteException;
 
-    void setResponseFunctions(ISehRadioSatelliteResponse iSehRadioSatelliteResponse, ISehRadioSatelliteIndication iSehRadioSatelliteIndication) throws RemoteException;
+    void setResponseFunctions(
+            ISehRadioSatelliteResponse iSehRadioSatelliteResponse,
+            ISehRadioSatelliteIndication iSehRadioSatelliteIndication)
+            throws RemoteException;
 
     void setSignalStrengthReport(int i, boolean z) throws RemoteException;
 
@@ -76,116 +79,94 @@ public interface ISehRadioSatellite extends IInterface {
 
     public static class Default implements ISehRadioSatellite {
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void answer(int serial) throws RemoteException {
-        }
+        public void answer(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void dial(int serial, String address) throws RemoteException {
-        }
+        public void dial(int serial, String address) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void hangup(int serial) throws RemoteException {
-        }
+        public void hangup(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void getCallEndReason(int serial) throws RemoteException {
-        }
+        public void getCallEndReason(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void getCallState(int serial) throws RemoteException {
-        }
+        public void getCallState(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void startDtmf(int serial, String s) throws RemoteException {
-        }
+        public void startDtmf(int serial, String s) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void stopDtmf(int serial) throws RemoteException {
-        }
+        public void stopDtmf(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void getRegistrationState(int serial) throws RemoteException {
-        }
+        public void getRegistrationState(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void getSignalStrength(int serial) throws RemoteException {
-        }
+        public void getSignalStrength(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void setNetworkQueryMode(int serial, int mode) throws RemoteException {
-        }
+        public void setNetworkQueryMode(int serial, int mode) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void setSignalStrengthReport(int serial, boolean enable) throws RemoteException {
-        }
+        public void setSignalStrengthReport(int serial, boolean enable) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void setSignalThresholdReport(int serial, int type, int[] thresholds) throws RemoteException {
-        }
+        public void setSignalThresholdReport(int serial, int type, int[] thresholds)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void setPower(int serial, int state) throws RemoteException {
-        }
+        public void setPower(int serial, int state) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void setGpsInfo(int serial, int longitude, int latitude) throws RemoteException {
-        }
+        public void setGpsInfo(int serial, int longitude, int latitude) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void setImsi(int serial, String imsi) throws RemoteException {
-        }
+        public void setImsi(int serial, String imsi) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void sendIccSimAuthentication(int serial, SehSatSimAuthRespData data) throws RemoteException {
-        }
+        public void sendIccSimAuthentication(int serial, SehSatSimAuthRespData data)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void setImei(int serial, String imei) throws RemoteException {
-        }
+        public void setImei(int serial, String imei) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void getSerialNumber(int serial) throws RemoteException {
-        }
+        public void getSerialNumber(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void getAbsoluteRfChannelNumber(int serial) throws RemoteException {
-        }
+        public void getAbsoluteRfChannelNumber(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void getTxPower(int serial) throws RemoteException {
-        }
+        public void getTxPower(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void sendSMSExpectMore(int serial, SehSatSmsMessage message) throws RemoteException {
-        }
+        public void sendSMSExpectMore(int serial, SehSatSmsMessage message)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void sendSms(int serial, SehSatSmsMessage message) throws RemoteException {
-        }
+        public void sendSms(int serial, SehSatSmsMessage message) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void setSmscAddress(int serial, String smsc) throws RemoteException {
-        }
+        public void setSmscAddress(int serial, String smsc) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void getSatelliteId(int serial) throws RemoteException {
-        }
+        public void getSatelliteId(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void setDsiConfig(int serial, int enable, int dsi) throws RemoteException {
-        }
+        public void setDsiConfig(int serial, int enable, int dsi) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void sendRawAtCommand(int serial, String cmd) throws RemoteException {
-        }
+        public void sendRawAtCommand(int serial, String cmd) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void startNetworkSearch(int serial) throws RemoteException {
-        }
+        public void startNetworkSearch(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-        public void setResponseFunctions(ISehRadioSatelliteResponse radioResponse, ISehRadioSatelliteIndication radioIndication) throws RemoteException {
-        }
+        public void setResponseFunctions(
+                ISehRadioSatelliteResponse radioResponse,
+                ISehRadioSatelliteIndication radioIndication)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
         public int getInterfaceVersion() {
@@ -203,7 +184,7 @@ public interface ISehRadioSatellite extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISehRadioSatellite {
+    public abstract static class Stub extends Binder implements ISehRadioSatellite {
         static final int TRANSACTION_answer = 1;
         static final int TRANSACTION_dial = 2;
         static final int TRANSACTION_getAbsoluteRfChannelNumber = 19;
@@ -257,7 +238,8 @@ public interface ISehRadioSatellite extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -364,7 +346,9 @@ public interface ISehRadioSatellite extends IInterface {
                     return true;
                 case 16:
                     int _arg016 = data.readInt();
-                    SehSatSimAuthRespData _arg19 = (SehSatSimAuthRespData) data.readTypedObject(SehSatSimAuthRespData.CREATOR);
+                    SehSatSimAuthRespData _arg19 =
+                            (SehSatSimAuthRespData)
+                                    data.readTypedObject(SehSatSimAuthRespData.CREATOR);
                     data.enforceNoDataAvail();
                     sendIccSimAuthentication(_arg016, _arg19);
                     return true;
@@ -391,13 +375,15 @@ public interface ISehRadioSatellite extends IInterface {
                     return true;
                 case 21:
                     int _arg021 = data.readInt();
-                    SehSatSmsMessage _arg111 = (SehSatSmsMessage) data.readTypedObject(SehSatSmsMessage.CREATOR);
+                    SehSatSmsMessage _arg111 =
+                            (SehSatSmsMessage) data.readTypedObject(SehSatSmsMessage.CREATOR);
                     data.enforceNoDataAvail();
                     sendSMSExpectMore(_arg021, _arg111);
                     return true;
                 case 22:
                     int _arg022 = data.readInt();
-                    SehSatSmsMessage _arg112 = (SehSatSmsMessage) data.readTypedObject(SehSatSmsMessage.CREATOR);
+                    SehSatSmsMessage _arg112 =
+                            (SehSatSmsMessage) data.readTypedObject(SehSatSmsMessage.CREATOR);
                     data.enforceNoDataAvail();
                     sendSms(_arg022, _arg112);
                     return true;
@@ -431,8 +417,10 @@ public interface ISehRadioSatellite extends IInterface {
                     startNetworkSearch(_arg027);
                     return true;
                 case 28:
-                    ISehRadioSatelliteResponse _arg028 = ISehRadioSatelliteResponse.Stub.asInterface(data.readStrongBinder());
-                    ISehRadioSatelliteIndication _arg116 = ISehRadioSatelliteIndication.Stub.asInterface(data.readStrongBinder());
+                    ISehRadioSatelliteResponse _arg028 =
+                            ISehRadioSatelliteResponse.Stub.asInterface(data.readStrongBinder());
+                    ISehRadioSatelliteIndication _arg116 =
+                            ISehRadioSatelliteIndication.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setResponseFunctions(_arg028, _arg116);
                     reply.writeNoException();
@@ -622,7 +610,8 @@ public interface ISehRadioSatellite extends IInterface {
                     _data.writeBoolean(enable);
                     boolean _status = this.mRemote.transact(11, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setSignalStrengthReport is unimplemented.");
+                        throw new RemoteException(
+                                "Method setSignalStrengthReport is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -630,7 +619,8 @@ public interface ISehRadioSatellite extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-            public void setSignalThresholdReport(int serial, int type, int[] thresholds) throws RemoteException {
+            public void setSignalThresholdReport(int serial, int type, int[] thresholds)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -639,7 +629,8 @@ public interface ISehRadioSatellite extends IInterface {
                     _data.writeIntArray(thresholds);
                     boolean _status = this.mRemote.transact(12, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setSignalThresholdReport is unimplemented.");
+                        throw new RemoteException(
+                                "Method setSignalThresholdReport is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -696,7 +687,8 @@ public interface ISehRadioSatellite extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-            public void sendIccSimAuthentication(int serial, SehSatSimAuthRespData data) throws RemoteException {
+            public void sendIccSimAuthentication(int serial, SehSatSimAuthRespData data)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -704,7 +696,8 @@ public interface ISehRadioSatellite extends IInterface {
                     _data.writeTypedObject(data, 0);
                     boolean _status = this.mRemote.transact(16, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method sendIccSimAuthentication is unimplemented.");
+                        throw new RemoteException(
+                                "Method sendIccSimAuthentication is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -750,7 +743,8 @@ public interface ISehRadioSatellite extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(19, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getAbsoluteRfChannelNumber is unimplemented.");
+                        throw new RemoteException(
+                                "Method getAbsoluteRfChannelNumber is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -773,7 +767,8 @@ public interface ISehRadioSatellite extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-            public void sendSMSExpectMore(int serial, SehSatSmsMessage message) throws RemoteException {
+            public void sendSMSExpectMore(int serial, SehSatSmsMessage message)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -884,7 +879,10 @@ public interface ISehRadioSatellite extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatellite
-            public void setResponseFunctions(ISehRadioSatelliteResponse radioResponse, ISehRadioSatelliteIndication radioIndication) throws RemoteException {
+            public void setResponseFunctions(
+                    ISehRadioSatelliteResponse radioResponse,
+                    ISehRadioSatelliteIndication radioIndication)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

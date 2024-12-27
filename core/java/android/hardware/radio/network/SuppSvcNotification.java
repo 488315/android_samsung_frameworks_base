@@ -3,26 +3,29 @@ package android.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class SuppSvcNotification implements Parcelable {
-    public static final Parcelable.Creator<SuppSvcNotification> CREATOR = new Parcelable.Creator<SuppSvcNotification>() { // from class: android.hardware.radio.network.SuppSvcNotification.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SuppSvcNotification createFromParcel(Parcel _aidl_source) {
-            SuppSvcNotification _aidl_out = new SuppSvcNotification();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SuppSvcNotification> CREATOR =
+            new Parcelable.Creator<SuppSvcNotification>() { // from class:
+                // android.hardware.radio.network.SuppSvcNotification.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SuppSvcNotification createFromParcel(Parcel _aidl_source) {
+                    SuppSvcNotification _aidl_out = new SuppSvcNotification();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SuppSvcNotification[] newArray(int _aidl_size) {
-            return new SuppSvcNotification[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SuppSvcNotification[] newArray(int _aidl_size) {
+                    return new SuppSvcNotification[_aidl_size];
+                }
+            };
     public String number;
     public boolean isMT = false;
     public int code = 0;

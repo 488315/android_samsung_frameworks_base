@@ -5,19 +5,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public final class WalletServiceEventListenerRequest implements Parcelable {
-    public static final Parcelable.Creator<WalletServiceEventListenerRequest> CREATOR = new Parcelable.Creator<WalletServiceEventListenerRequest>() { // from class: android.service.quickaccesswallet.WalletServiceEventListenerRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WalletServiceEventListenerRequest createFromParcel(Parcel source) {
-            return WalletServiceEventListenerRequest.readFromParcel(source);
-        }
+    public static final Parcelable.Creator<WalletServiceEventListenerRequest> CREATOR =
+            new Parcelable.Creator<
+                    WalletServiceEventListenerRequest>() { // from class:
+                                                           // android.service.quickaccesswallet.WalletServiceEventListenerRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WalletServiceEventListenerRequest createFromParcel(Parcel source) {
+                    return WalletServiceEventListenerRequest.readFromParcel(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WalletServiceEventListenerRequest[] newArray(int size) {
-            return new WalletServiceEventListenerRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WalletServiceEventListenerRequest[] newArray(int size) {
+                    return new WalletServiceEventListenerRequest[size];
+                }
+            };
     private final String mListenerId;
 
     public WalletServiceEventListenerRequest(String listenerKey) {

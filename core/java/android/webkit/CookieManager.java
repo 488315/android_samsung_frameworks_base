@@ -49,8 +49,7 @@ public abstract class CookieManager {
     public abstract void setCookie(String str, String str2, ValueCallback<Boolean> valueCallback);
 
     @Deprecated
-    public CookieManager() {
-    }
+    public CookieManager() {}
 
     protected Object clone() throws CloneNotSupportedException {
         throw new CloneNotSupportedException("doesn't implement Cloneable");

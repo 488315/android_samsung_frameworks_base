@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.content.Context;
 import android.os.IBinder;
 import android.os.ServiceManager;
+
 import com.android.net.module.util.PermissionUtils;
 
 @SystemApi
@@ -11,21 +12,24 @@ import com.android.net.module.util.PermissionUtils;
 public class NetworkStack {
 
     @SystemApi
-    public static final String PERMISSION_MAINLINE_NETWORK_STACK = "android.permission.MAINLINE_NETWORK_STACK";
+    public static final String PERMISSION_MAINLINE_NETWORK_STACK =
+            "android.permission.MAINLINE_NETWORK_STACK";
+
     private static volatile IBinder sMockService;
 
     @SystemApi
     public static IBinder getService() {
         IBinder mockService = sMockService;
-        return mockService != null ? mockService : ServiceManager.getService(Context.NETWORK_STACK_SERVICE);
+        return mockService != null
+                ? mockService
+                : ServiceManager.getService(Context.NETWORK_STACK_SERVICE);
     }
 
     public static void setServiceForTest(IBinder mockService) {
         sMockService = mockService;
     }
 
-    private NetworkStack() {
-    }
+    private NetworkStack() {}
 
     @Deprecated
     public static void checkNetworkStackPermission(Context context) {

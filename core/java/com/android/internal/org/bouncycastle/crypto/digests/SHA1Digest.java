@@ -98,7 +98,8 @@ public class SHA1Digest extends GeneralDigest implements EncodableDigest {
         return 20;
     }
 
-    @Override // com.android.internal.org.bouncycastle.crypto.digests.GeneralDigest, com.android.internal.org.bouncycastle.crypto.Digest
+    @Override // com.android.internal.org.bouncycastle.crypto.digests.GeneralDigest,
+              // com.android.internal.org.bouncycastle.crypto.Digest
     public void reset() {
         super.reset();
         this.H1 = 1732584193;

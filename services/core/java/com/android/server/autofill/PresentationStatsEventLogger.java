@@ -2,8 +2,10 @@ package com.android.server.autofill;
 
 import android.util.ArraySet;
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.alarm.GmsAlarmManager$$ExternalSyntheticOutline0;
+
 import java.util.Optional;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -68,12 +70,16 @@ public final class PresentationStatsEventLogger {
 
     public final void logAndEndEvent() {
         if (!this.mEventInternal.isPresent()) {
-            Slog.w("PresentationStatsEventLogger", "Shouldn't be logging AutofillPresentationEventReported again for same event");
+            Slog.w(
+                    "PresentationStatsEventLogger",
+                    "Shouldn't be logging AutofillPresentationEventReported again for same event");
             return;
         }
-        PresentationStatsEventInternal presentationStatsEventInternal = (PresentationStatsEventInternal) this.mEventInternal.get();
+        PresentationStatsEventInternal presentationStatsEventInternal =
+                (PresentationStatsEventInternal) this.mEventInternal.get();
         if (Helper.sVerbose) {
-            StringBuilder sb = new StringBuilder("Log AutofillPresentationEventReported: requestId=");
+            StringBuilder sb =
+                    new StringBuilder("Log AutofillPresentationEventReported: requestId=");
             sb.append(presentationStatsEventInternal.mRequestId);
             sb.append(" sessionId=");
             sb.append(this.mSessionId);
@@ -83,7 +89,9 @@ public final class PresentationStatsEventLogger {
             sb.append(presentationStatsEventInternal.mAvailableCount);
             sb.append(" mCountShown=");
             sb.append(presentationStatsEventInternal.mCountShown);
-            sb.append(" mCountFilteredUserTyping=0 mCountNotShownImePresentationNotDrawn=0 mCountNotShownImeUserNotSeen=0 mDisplayPresentationType=");
+            sb.append(
+                    " mCountFilteredUserTyping=0 mCountNotShownImePresentationNotDrawn=0"
+                        + " mCountNotShownImeUserNotSeen=0 mDisplayPresentationType=");
             sb.append(presentationStatsEventInternal.mDisplayPresentationType);
             sb.append(" mAutofillServiceUid=");
             sb.append(presentationStatsEventInternal.mAutofillServiceUid);
@@ -111,7 +119,9 @@ public final class PresentationStatsEventLogger {
             sb.append(presentationStatsEventInternal.mAuthenticationType);
             sb.append(" mAuthenticationResult=");
             sb.append(presentationStatsEventInternal.mAuthenticationResult);
-            sb.append(" mLatencyAuthenticationUiDisplayMillis=-1 mLatencyDatasetDisplayMillis=-1 mAvailablePccCount=");
+            sb.append(
+                    " mLatencyAuthenticationUiDisplayMillis=-1 mLatencyDatasetDisplayMillis=-1"
+                        + " mAvailablePccCount=");
             sb.append(presentationStatsEventInternal.mAvailablePccCount);
             sb.append(" mAvailablePccOnlyCount=");
             sb.append(presentationStatsEventInternal.mAvailablePccOnlyCount);
@@ -152,31 +162,85 @@ public final class PresentationStatsEventLogger {
             sb.append(" event.mFieldFirstLength=");
             sb.append(presentationStatsEventInternal.mFieldFirstLength);
             sb.append(" event.mFieldLastLength=");
-            GmsAlarmManager$$ExternalSyntheticOutline0.m(sb, presentationStatsEventInternal.mFieldLastLength, "PresentationStatsEventLogger");
+            GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                    sb,
+                    presentationStatsEventInternal.mFieldLastLength,
+                    "PresentationStatsEventLogger");
         }
         if (!presentationStatsEventInternal.mIsDatasetAvailable) {
             this.mEventInternal = Optional.empty();
             return;
         }
         long j = -1;
-        FrameworkStatsLog.write(FrameworkStatsLog.AUTOFILL_PRESENTATION_EVENT_REPORTED, presentationStatsEventInternal.mRequestId, this.mSessionId, presentationStatsEventInternal.mNoPresentationReason, presentationStatsEventInternal.mAvailableCount, presentationStatsEventInternal.mCountShown, 0, 0, 0, presentationStatsEventInternal.mDisplayPresentationType, presentationStatsEventInternal.mAutofillServiceUid, presentationStatsEventInternal.mInlineSuggestionHostUid, presentationStatsEventInternal.mIsRequestTriggered, presentationStatsEventInternal.mFillRequestSentTimestampMs, presentationStatsEventInternal.mFillResponseReceivedTimestampMs, presentationStatsEventInternal.mSuggestionSentTimestampMs, presentationStatsEventInternal.mSuggestionPresentedTimestampMs, presentationStatsEventInternal.mSelectedDatasetId, presentationStatsEventInternal.mDialogDismissed, presentationStatsEventInternal.mNegativeCtaButtonClicked, presentationStatsEventInternal.mPositiveCtaButtonClicked, presentationStatsEventInternal.mAuthenticationType, presentationStatsEventInternal.mAuthenticationResult, j, j, presentationStatsEventInternal.mAvailablePccCount, presentationStatsEventInternal.mAvailablePccOnlyCount, presentationStatsEventInternal.mSelectedDatasetPickedReason, presentationStatsEventInternal.mDetectionPreference, presentationStatsEventInternal.mFieldClassificationRequestId, this.mCallingAppUid, presentationStatsEventInternal.mIsCredentialRequest, presentationStatsEventInternal.mWebviewRequestedCredential, presentationStatsEventInternal.mViewFillableTotalCount, presentationStatsEventInternal.mViewFillFailureCount, presentationStatsEventInternal.mFocusedId, presentationStatsEventInternal.mViewFillSuccessCount, presentationStatsEventInternal.mViewFilledButUnexpectedCount, presentationStatsEventInternal.mSelectionTimestamp, presentationStatsEventInternal.mAutofilledTimestampMs, presentationStatsEventInternal.mFieldModifiedFirstTimestampMs, presentationStatsEventInternal.mFieldModifiedLastTimestampMs, presentationStatsEventInternal.mSuggestionPresentedLastTimestampMs, presentationStatsEventInternal.mFocusedVirtualAutofillId, presentationStatsEventInternal.mFieldFirstLength, presentationStatsEventInternal.mFieldLastLength);
+        FrameworkStatsLog.write(
+                FrameworkStatsLog.AUTOFILL_PRESENTATION_EVENT_REPORTED,
+                presentationStatsEventInternal.mRequestId,
+                this.mSessionId,
+                presentationStatsEventInternal.mNoPresentationReason,
+                presentationStatsEventInternal.mAvailableCount,
+                presentationStatsEventInternal.mCountShown,
+                0,
+                0,
+                0,
+                presentationStatsEventInternal.mDisplayPresentationType,
+                presentationStatsEventInternal.mAutofillServiceUid,
+                presentationStatsEventInternal.mInlineSuggestionHostUid,
+                presentationStatsEventInternal.mIsRequestTriggered,
+                presentationStatsEventInternal.mFillRequestSentTimestampMs,
+                presentationStatsEventInternal.mFillResponseReceivedTimestampMs,
+                presentationStatsEventInternal.mSuggestionSentTimestampMs,
+                presentationStatsEventInternal.mSuggestionPresentedTimestampMs,
+                presentationStatsEventInternal.mSelectedDatasetId,
+                presentationStatsEventInternal.mDialogDismissed,
+                presentationStatsEventInternal.mNegativeCtaButtonClicked,
+                presentationStatsEventInternal.mPositiveCtaButtonClicked,
+                presentationStatsEventInternal.mAuthenticationType,
+                presentationStatsEventInternal.mAuthenticationResult,
+                j,
+                j,
+                presentationStatsEventInternal.mAvailablePccCount,
+                presentationStatsEventInternal.mAvailablePccOnlyCount,
+                presentationStatsEventInternal.mSelectedDatasetPickedReason,
+                presentationStatsEventInternal.mDetectionPreference,
+                presentationStatsEventInternal.mFieldClassificationRequestId,
+                this.mCallingAppUid,
+                presentationStatsEventInternal.mIsCredentialRequest,
+                presentationStatsEventInternal.mWebviewRequestedCredential,
+                presentationStatsEventInternal.mViewFillableTotalCount,
+                presentationStatsEventInternal.mViewFillFailureCount,
+                presentationStatsEventInternal.mFocusedId,
+                presentationStatsEventInternal.mViewFillSuccessCount,
+                presentationStatsEventInternal.mViewFilledButUnexpectedCount,
+                presentationStatsEventInternal.mSelectionTimestamp,
+                presentationStatsEventInternal.mAutofilledTimestampMs,
+                presentationStatsEventInternal.mFieldModifiedFirstTimestampMs,
+                presentationStatsEventInternal.mFieldModifiedLastTimestampMs,
+                presentationStatsEventInternal.mSuggestionPresentedLastTimestampMs,
+                presentationStatsEventInternal.mFocusedVirtualAutofillId,
+                presentationStatsEventInternal.mFieldFirstLength,
+                presentationStatsEventInternal.mFieldLastLength);
         this.mEventInternal = Optional.empty();
     }
 
     public final void maybeSetAuthenticationResult(int i) {
-        this.mEventInternal.ifPresent(new PresentationStatsEventLogger$$ExternalSyntheticLambda1(i, 4));
+        this.mEventInternal.ifPresent(
+                new PresentationStatsEventLogger$$ExternalSyntheticLambda1(i, 4));
     }
 
     public final void maybeSetNoPresentationEventReason(int i) {
-        this.mEventInternal.ifPresent(new PresentationStatsEventLogger$$ExternalSyntheticLambda1(i, 14));
+        this.mEventInternal.ifPresent(
+                new PresentationStatsEventLogger$$ExternalSyntheticLambda1(i, 14));
     }
 
     public final void startNewEvent() {
         if (this.mEventInternal.isPresent()) {
-            Slog.e("PresentationStatsEventLogger", "Failed to start new event because already have active event.");
+            Slog.e(
+                    "PresentationStatsEventLogger",
+                    "Failed to start new event because already have active event.");
             return;
         }
-        PresentationStatsEventInternal presentationStatsEventInternal = new PresentationStatsEventInternal();
+        PresentationStatsEventInternal presentationStatsEventInternal =
+                new PresentationStatsEventInternal();
         presentationStatsEventInternal.mNoPresentationReason = 0;
         presentationStatsEventInternal.mCountShown = 0;
         presentationStatsEventInternal.mDisplayPresentationType = 0;

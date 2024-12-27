@@ -71,7 +71,12 @@ public class DisplayAiqeManager {
 
     @SystemApi
     public boolean setBlueLightFilterMode(boolean enable, int level) {
-        Slog.d(TAG, "setBlueLightFilterMode : enable - " + (enable ? "true" : "false") + " level - " + level);
+        Slog.d(
+                TAG,
+                "setBlueLightFilterMode : enable - "
+                        + (enable ? "true" : "false")
+                        + " level - "
+                        + level);
         if (this.mService != null) {
             try {
                 return this.mService.setBlueLightFilterMode(enable, level);
@@ -125,7 +130,20 @@ public class DisplayAiqeManager {
 
     @SystemApi
     public boolean setWhiteBalanceMode(int m_r, int m_g, int m_b, int s_r, int s_g, int s_b) {
-        Slog.d(TAG, "setWhiteBalanceMode : mode - " + m_r + "," + m_g + "," + m_b + "," + s_r + "," + s_g + "," + s_b);
+        Slog.d(
+                TAG,
+                "setWhiteBalanceMode : mode - "
+                        + m_r
+                        + ","
+                        + m_g
+                        + ","
+                        + m_b
+                        + ","
+                        + s_r
+                        + ","
+                        + s_g
+                        + ","
+                        + s_b);
         if (this.mService != null) {
             try {
                 return this.mService.setWhiteBalanceMode(m_r, m_g, m_b, s_r, s_g, s_b);

@@ -5,12 +5,15 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import vendor.samsung.hardware.security.hermes.SehCommandResult;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public interface ISehHermesExtension extends IInterface {
-    public static final String DESCRIPTOR = "vendor$samsung$hardware$security$hermes$extension$ISehHermesExtension".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "vendor$samsung$hardware$security$hermes$extension$ISehHermesExtension"
+                    .replace('$', '.');
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements ISehHermesExtension {
@@ -80,7 +83,8 @@ public interface ISehHermesExtension extends IInterface {
                 try {
                     obtain.writeInterfaceToken(ISehHermesExtension.DESCRIPTOR);
                     if (!this.mRemote.transact(2, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method turnOffSecureHardwarePower is unimplemented.");
+                        throw new RemoteException(
+                                "Method turnOffSecureHardwarePower is unimplemented.");
                     }
                     obtain2.readException();
                     return (SehCommandResult) obtain2.readTypedObject(SehCommandResult.CREATOR);
@@ -96,7 +100,8 @@ public interface ISehHermesExtension extends IInterface {
                 try {
                     obtain.writeInterfaceToken(ISehHermesExtension.DESCRIPTOR);
                     if (!this.mRemote.transact(1, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method turnOnSecureHardwarePower is unimplemented.");
+                        throw new RemoteException(
+                                "Method turnOnSecureHardwarePower is unimplemented.");
                     }
                     obtain2.readException();
                     return (SehCommandResult) obtain2.readTypedObject(SehCommandResult.CREATOR);
@@ -160,8 +165,10 @@ public interface ISehHermesExtension extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(ISehHermesExtension.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof ISehHermesExtension)) {
+            IInterface queryLocalInterface =
+                    iBinder.queryLocalInterface(ISehHermesExtension.DESCRIPTOR);
+            if (queryLocalInterface != null
+                    && (queryLocalInterface instanceof ISehHermesExtension)) {
                 return (ISehHermesExtension) queryLocalInterface;
             }
             Proxy proxy = new Proxy();

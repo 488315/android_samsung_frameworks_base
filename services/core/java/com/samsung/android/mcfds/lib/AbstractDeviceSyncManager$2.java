@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Message;
 import android.os.Parcel;
+
 import com.android.server.accessibility.GestureWakeup$$ExternalSyntheticOutline0;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -34,9 +35,13 @@ public final class AbstractDeviceSyncManager$2 extends Binder implements IInterf
         if (i != 1) {
             return super.onTransact(i, parcel, parcel2, i2);
         }
-        Message message = (Message) (parcel.readInt() != 0 ? Message.CREATOR.createFromParcel(parcel) : null);
+        Message message =
+                (Message) (parcel.readInt() != 0 ? Message.CREATOR.createFromParcel(parcel) : null);
         if (message.what == 10000) {
-            GestureWakeup$$ExternalSyntheticOutline0.m(new StringBuilder("mServiceStateListener - "), message.arg1, "[MCF_DS_LIB]_DeviceSyncManager");
+            GestureWakeup$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("mServiceStateListener - "),
+                    message.arg1,
+                    "[MCF_DS_LIB]_DeviceSyncManager");
             if (message.arg1 == 1) {
                 DeviceSyncManager deviceSyncManager = this.this$0;
                 deviceSyncManager.mServiceState = 5;

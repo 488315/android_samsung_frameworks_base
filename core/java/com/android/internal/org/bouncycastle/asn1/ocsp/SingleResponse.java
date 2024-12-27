@@ -19,11 +19,21 @@ public class SingleResponse extends ASN1Object {
     private Extensions singleExtensions;
     private ASN1GeneralizedTime thisUpdate;
 
-    public SingleResponse(CertID certID, CertStatus certStatus, ASN1GeneralizedTime thisUpdate, ASN1GeneralizedTime nextUpdate, X509Extensions singleExtensions) {
+    public SingleResponse(
+            CertID certID,
+            CertStatus certStatus,
+            ASN1GeneralizedTime thisUpdate,
+            ASN1GeneralizedTime nextUpdate,
+            X509Extensions singleExtensions) {
         this(certID, certStatus, thisUpdate, nextUpdate, Extensions.getInstance(singleExtensions));
     }
 
-    public SingleResponse(CertID certID, CertStatus certStatus, ASN1GeneralizedTime thisUpdate, ASN1GeneralizedTime nextUpdate, Extensions singleExtensions) {
+    public SingleResponse(
+            CertID certID,
+            CertStatus certStatus,
+            ASN1GeneralizedTime thisUpdate,
+            ASN1GeneralizedTime nextUpdate,
+            Extensions singleExtensions) {
         this.certID = certID;
         this.certStatus = certStatus;
         this.thisUpdate = thisUpdate;
@@ -36,8 +46,10 @@ public class SingleResponse extends ASN1Object {
         this.certStatus = CertStatus.getInstance(seq.getObjectAt(1));
         this.thisUpdate = ASN1GeneralizedTime.getInstance(seq.getObjectAt(2));
         if (seq.size() > 4) {
-            this.nextUpdate = ASN1GeneralizedTime.getInstance((ASN1TaggedObject) seq.getObjectAt(3), true);
-            this.singleExtensions = Extensions.getInstance((ASN1TaggedObject) seq.getObjectAt(4), true);
+            this.nextUpdate =
+                    ASN1GeneralizedTime.getInstance((ASN1TaggedObject) seq.getObjectAt(3), true);
+            this.singleExtensions =
+                    Extensions.getInstance((ASN1TaggedObject) seq.getObjectAt(4), true);
         } else if (seq.size() > 3) {
             ASN1TaggedObject o = (ASN1TaggedObject) seq.getObjectAt(3);
             if (o.getTagNo() == 0) {
@@ -82,7 +94,8 @@ public class SingleResponse extends ASN1Object {
         return this.singleExtensions;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(5);
         v.add(this.certID);

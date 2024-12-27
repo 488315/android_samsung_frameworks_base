@@ -8,8 +8,7 @@ class NativeLibSetup {
     private static final String TAG = "NativeLibSetup";
     private static final String list_tag = ".videoeditor.samsung";
 
-    NativeLibSetup() {
-    }
+    NativeLibSetup() {}
 
     public void init() {
         setCurrentDevice();

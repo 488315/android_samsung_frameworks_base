@@ -8,12 +8,10 @@ public interface IUpdateLock extends IInterface {
 
     public static class Default implements IUpdateLock {
         @Override // android.os.IUpdateLock
-        public void acquireUpdateLock(IBinder token, String tag) throws RemoteException {
-        }
+        public void acquireUpdateLock(IBinder token, String tag) throws RemoteException {}
 
         @Override // android.os.IUpdateLock
-        public void releaseUpdateLock(IBinder token) throws RemoteException {
-        }
+        public void releaseUpdateLock(IBinder token) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +19,7 @@ public interface IUpdateLock extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUpdateLock {
+    public abstract static class Stub extends Binder implements IUpdateLock {
         public static final String DESCRIPTOR = "android.os.IUpdateLock";
         static final int TRANSACTION_acquireUpdateLock = 1;
         static final int TRANSACTION_releaseUpdateLock = 2;
@@ -63,7 +61,8 @@ public interface IUpdateLock extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

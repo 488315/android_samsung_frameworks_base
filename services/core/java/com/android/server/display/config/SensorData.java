@@ -2,6 +2,7 @@ package com.android.server.display.config;
 
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.display.feature.DisplayManagerFlags;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -36,7 +37,8 @@ public final class SensorData {
         this.supportedModes = Collections.unmodifiableList(list);
     }
 
-    public static SensorData loadProxSensorConfig(DisplayManagerFlags displayManagerFlags, DisplayConfiguration displayConfiguration) {
+    public static SensorData loadProxSensorConfig(
+            DisplayManagerFlags displayManagerFlags, DisplayConfiguration displayConfiguration) {
         SensorData sensorData;
         SensorData sensorData2 = new SensorData();
         if (displayConfiguration.proxSensor == null) {
@@ -54,7 +56,8 @@ public final class SensorData {
             }
             SensorDetails sensorDetails = (SensorDetails) it.next();
             String str = sensorDetails.featureFlag;
-            if (displayManagerFlags.mUseFusionProxSensor.isEnabled() && displayManagerFlags.mUseFusionProxSensor.mName.equals(str)) {
+            if (displayManagerFlags.mUseFusionProxSensor.isEnabled()
+                    && displayManagerFlags.mUseFusionProxSensor.mName.equals(str)) {
                 sensorData = loadSensorData(sensorDetails);
                 break;
             }
@@ -89,10 +92,25 @@ public final class SensorData {
             f = FullScreenMagnificationGestureHandler.MAX_SCALE;
             f2 = Float.POSITIVE_INFINITY;
         }
-        return new SensorData(sensorDetails.type, sensorDetails.name, f, f2, SupportedModeData.load(sensorDetails.supportedModes));
+        return new SensorData(
+                sensorDetails.type,
+                sensorDetails.name,
+                f,
+                f2,
+                SupportedModeData.load(sensorDetails.supportedModes));
     }
 
     public final String toString() {
-        return "SensorData{type= " + this.type + ", name= " + this.name + ", refreshRateRange: [" + this.minRefreshRate + ", " + this.maxRefreshRate + "], supportedModes=" + this.supportedModes + '}';
+        return "SensorData{type= "
+                + this.type
+                + ", name= "
+                + this.name
+                + ", refreshRateRange: ["
+                + this.minRefreshRate
+                + ", "
+                + this.maxRefreshRate
+                + "], supportedModes="
+                + this.supportedModes
+                + '}';
     }
 }

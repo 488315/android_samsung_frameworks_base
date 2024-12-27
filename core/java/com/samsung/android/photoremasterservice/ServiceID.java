@@ -1,6 +1,5 @@
 package com.samsung.android.photoremasterservice;
 
-import com.samsung.android.photoremasterservice.ServiceID;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
@@ -22,17 +21,14 @@ public class ServiceID {
     public static final int MSG_ON_UPDATE_METADATA = 15;
     public static final int MSG_ON_UPDATE_PROGRESS = 16;
 
-    @Deprecated
-    public static final int MSG_PROCESS_AESTHETIC_SCORING = 7;
+    @Deprecated public static final int MSG_PROCESS_AESTHETIC_SCORING = 7;
     public static final int MSG_PROCESS_IMAGE = 5;
 
-    @Deprecated
-    public static final int MSG_PROCESS_IMAGE_LEGACY = 6;
+    @Deprecated public static final int MSG_PROCESS_IMAGE_LEGACY = 6;
     public static final int MSG_RET = 0;
     public static final int MSG_SET_BITMAP_PARAM = 20;
 
-    @Deprecated
-    public static final int MSG_SET_CONTEXT = 1;
+    @Deprecated public static final int MSG_SET_CONTEXT = 1;
     public static final int MSG_SET_LONG_PARAM = 10;
     public static final int MSG_SET_PROGRESS_UPDATE_LISTENER = 14;
     public static final int MSG_SET_STRING_PARAM = 9;
@@ -65,12 +61,23 @@ public class ServiceID {
         MSG_GET_FOCUS_ROI(17, "MSG_GET_FOCUS_ROI"),
         MSG_GET_BITMAP_PARAM(19, "MSG_GET_BITMAP_PARAM");
 
-        private static final Map<Integer, Description> SERVICE_ID_DESCRIPTION = Collections.unmodifiableMap((Map) Stream.of((Object[]) values()).collect(Collectors.toMap(new Function() { // from class: com.samsung.android.photoremasterservice.ServiceID$Description$$ExternalSyntheticLambda1
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return Integer.valueOf(((ServiceID.Description) obj).getId());
-            }
-        }, Function.identity())));
+        private static final Map<Integer, Description> SERVICE_ID_DESCRIPTION =
+                Collections.unmodifiableMap(
+                        (Map)
+                                Stream.of((Object[]) values())
+                                        .collect(
+                                                Collectors.toMap(
+                                                        new Function() { // from class:
+                                                                         // com.samsung.android.photoremasterservice.ServiceID$Description$$ExternalSyntheticLambda1
+                                                            @Override // java.util.function.Function
+                                                            public final Object apply(Object obj) {
+                                                                return Integer.valueOf(
+                                                                        ((ServiceID.Description)
+                                                                                        obj)
+                                                                                .getId());
+                                                            }
+                                                        },
+                                                        Function.identity())));
         private final int code;
         private final String description;
 
@@ -80,12 +87,17 @@ public class ServiceID {
         }
 
         public static Description createFromId(final int code) {
-            return (Description) Optional.ofNullable(SERVICE_ID_DESCRIPTION.get(Integer.valueOf(code))).orElseThrow(new Supplier() { // from class: com.samsung.android.photoremasterservice.ServiceID$Description$$ExternalSyntheticLambda0
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    return ServiceID.Description.lambda$createFromId$0(code);
-                }
-            });
+            return (Description)
+                    Optional.ofNullable(SERVICE_ID_DESCRIPTION.get(Integer.valueOf(code)))
+                            .orElseThrow(
+                                    new Supplier() { // from class:
+                                                     // com.samsung.android.photoremasterservice.ServiceID$Description$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.Supplier
+                                        public final Object get() {
+                                            return ServiceID.Description.lambda$createFromId$0(
+                                                    code);
+                                        }
+                                    });
         }
 
         static /* synthetic */ IllegalArgumentException lambda$createFromId$0(int code) {

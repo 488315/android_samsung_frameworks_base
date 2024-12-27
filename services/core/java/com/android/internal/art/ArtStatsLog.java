@@ -14,7 +14,20 @@ public final class ArtStatsLog {
         StatsLog.write(newBuilder.build());
     }
 
-    public static void write(int i, int i2, int i3, int i4, int i5, int i6, long j, long j2, int i7, int i8, int i9, int i10, int i11) {
+    public static void write(
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            long j,
+            long j2,
+            int i7,
+            int i8,
+            int i9,
+            int i10,
+            int i11) {
         StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
         newBuilder.setAtomId(i);
         newBuilder.writeInt(i2);
@@ -31,7 +44,8 @@ public final class ArtStatsLog {
         StatsLog.write(newBuilder.build());
     }
 
-    public static void write(int i, int i2, int i3, long j, long j2, int i4, int i5, int i6, int i7) {
+    public static void write(
+            int i, int i2, int i3, long j, long j2, int i4, int i5, int i6, int i7) {
         StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
         newBuilder.setAtomId(i);
         newBuilder.writeInt(i2);
@@ -54,7 +68,31 @@ public final class ArtStatsLog {
         StatsLog.write(newBuilder.build());
     }
 
-    public static void write(int i, long j, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, int i11, int i12, int i13, int i14, int i15, int i16, int i17, int i18, int i19, int i20, int i21, int i22, int i23) {
+    public static void write(
+            int i,
+            long j,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8,
+            int i9,
+            int i10,
+            int i11,
+            int i12,
+            int i13,
+            int i14,
+            int i15,
+            int i16,
+            int i17,
+            int i18,
+            int i19,
+            int i20,
+            int i21,
+            int i22,
+            int i23) {
         StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
         newBuilder.setAtomId(i);
         newBuilder.writeLong(j);
@@ -72,7 +110,21 @@ public final class ArtStatsLog {
         StatsLog.write(newBuilder.build());
     }
 
-    public static void write(int i, long j, int i2, int i3, int i4, long j2, int i5, int i6, long j3, int i7, int i8, int i9, int i10, int i11) {
+    public static void write(
+            int i,
+            long j,
+            int i2,
+            int i3,
+            int i4,
+            long j2,
+            int i5,
+            int i6,
+            long j3,
+            int i7,
+            int i8,
+            int i9,
+            int i10,
+            int i11) {
         StatsEvent.Builder newBuilder = StatsEvent.newBuilder();
         newBuilder.setAtomId(i);
         newBuilder.writeLong(j);

@@ -4,7 +4,9 @@ import android.annotation.SystemApi;
 import android.content.pm.ASKSManager;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -12,30 +14,31 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes.dex */
 public final class Rule implements Parcelable {
-    public static final Parcelable.Creator<Rule> CREATOR = new Parcelable.Creator<Rule>() { // from class: android.content.integrity.Rule.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Rule createFromParcel(Parcel in) {
-            return new Rule(in);
-        }
+    public static final Parcelable.Creator<Rule> CREATOR =
+            new Parcelable.Creator<Rule>() { // from class: android.content.integrity.Rule.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Rule createFromParcel(Parcel in) {
+                    return new Rule(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Rule[] newArray(int size) {
-            return new Rule[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Rule[] newArray(int size) {
+                    return new Rule[size];
+                }
+            };
     public static final int DENY = 0;
     public static final int FORCE_ALLOW = 1;
     private final int mEffect;
     private final IntegrityFormula mFormula;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Effect {
-    }
+    public @interface Effect {}
 
     public Rule(IntegrityFormula formula, int effect) {
-        Preconditions.checkArgument(isValidEffect(effect), "Unknown effect: %d", Integer.valueOf(effect));
+        Preconditions.checkArgument(
+                isValidEffect(effect), "Unknown effect: %d", Integer.valueOf(effect));
         this.mFormula = (IntegrityFormula) Objects.requireNonNull(formula);
         this.mEffect = effect;
     }

@@ -3,6 +3,7 @@ package com.samsung.android.sume.core.filter.collection;
 import com.samsung.android.sume.core.channel.BufferChannel;
 import com.samsung.android.sume.core.descriptor.SequentialDescriptor;
 import com.samsung.android.sume.core.filter.MediaFilterGroupBase;
+
 import java.util.function.Supplier;
 
 /* loaded from: classes6.dex */
@@ -23,7 +24,8 @@ public abstract class SequentialFilter extends MediaFilterGroupBase {
         this.descriptor = descriptor;
     }
 
-    public SequentialFilter(SequentialDescriptor descriptor, Supplier<BufferChannel> channelSupplier) {
+    public SequentialFilter(
+            SequentialDescriptor descriptor, Supplier<BufferChannel> channelSupplier) {
         this.descriptor = descriptor;
         this.channelSupplier = channelSupplier;
     }

@@ -3,6 +3,7 @@ package com.android.server.location.contexthub;
 import android.hardware.contexthub.ContextHubMessage;
 import android.hardware.contexthub.V1_0.ContextHubMsg;
 import android.hardware.location.NanoAppMessage;
+
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -11,9 +12,11 @@ import java.util.ArrayList;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public abstract class ContextHubServiceUtil {
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("MM/dd HH:mm:ss.SSS").withZone(ZoneId.systemDefault());
+    public static final DateTimeFormatter DATE_FORMATTER =
+            DateTimeFormatter.ofPattern("MM/dd HH:mm:ss.SSS").withZone(ZoneId.systemDefault());
 
-    public static ContextHubMessage createAidlContextHubMessage(short s, NanoAppMessage nanoAppMessage) {
+    public static ContextHubMessage createAidlContextHubMessage(
+            short s, NanoAppMessage nanoAppMessage) {
         ContextHubMessage contextHubMessage = new ContextHubMessage();
         contextHubMessage.nanoappId = nanoAppMessage.getNanoAppId();
         contextHubMessage.hostEndPoint = (char) s;
@@ -31,7 +34,11 @@ public abstract class ContextHubServiceUtil {
         for (int i = 0; i < arrayList.size(); i++) {
             bArr[i] = ((Byte) arrayList.get(i)).byteValue();
         }
-        return NanoAppMessage.createMessageFromNanoApp(contextHubMsg.appName, contextHubMsg.msgType, bArr, contextHubMsg.hostEndPoint == -1);
+        return NanoAppMessage.createMessageFromNanoApp(
+                contextHubMsg.appName,
+                contextHubMsg.msgType,
+                bArr,
+                contextHubMsg.hostEndPoint == -1);
     }
 
     public static String formatDateFromTimestamp(long j) {

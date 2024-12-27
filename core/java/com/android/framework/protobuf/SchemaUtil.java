@@ -1,7 +1,5 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.FieldSet;
-import com.android.framework.protobuf.Internal;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Iterator;
@@ -13,20 +11,26 @@ import java.util.RandomAccess;
 final class SchemaUtil {
     private static final int DEFAULT_LOOK_UP_START_NUMBER = 40;
     private static final Class<?> GENERATED_MESSAGE_CLASS = getGeneratedMessageClass();
-    private static final UnknownFieldSchema<?, ?> PROTO2_UNKNOWN_FIELD_SET_SCHEMA = getUnknownFieldSetSchema(false);
-    private static final UnknownFieldSchema<?, ?> PROTO3_UNKNOWN_FIELD_SET_SCHEMA = getUnknownFieldSetSchema(true);
-    private static final UnknownFieldSchema<?, ?> UNKNOWN_FIELD_SET_LITE_SCHEMA = new UnknownFieldSetLiteSchema();
+    private static final UnknownFieldSchema<?, ?> PROTO2_UNKNOWN_FIELD_SET_SCHEMA =
+            getUnknownFieldSetSchema(false);
+    private static final UnknownFieldSchema<?, ?> PROTO3_UNKNOWN_FIELD_SET_SCHEMA =
+            getUnknownFieldSetSchema(true);
+    private static final UnknownFieldSchema<?, ?> UNKNOWN_FIELD_SET_LITE_SCHEMA =
+            new UnknownFieldSetLiteSchema();
 
-    private SchemaUtil() {
-    }
+    private SchemaUtil() {}
 
     public static void requireGeneratedMessage(Class<?> messageType) {
-        if (!GeneratedMessageLite.class.isAssignableFrom(messageType) && GENERATED_MESSAGE_CLASS != null && !GENERATED_MESSAGE_CLASS.isAssignableFrom(messageType)) {
-            throw new IllegalArgumentException("Message classes must extend GeneratedMessageV3 or GeneratedMessageLite");
+        if (!GeneratedMessageLite.class.isAssignableFrom(messageType)
+                && GENERATED_MESSAGE_CLASS != null
+                && !GENERATED_MESSAGE_CLASS.isAssignableFrom(messageType)) {
+            throw new IllegalArgumentException(
+                    "Message classes must extend GeneratedMessageV3 or GeneratedMessageLite");
         }
     }
 
-    public static void writeDouble(int fieldNumber, double value, Writer writer) throws IOException {
+    public static void writeDouble(int fieldNumber, double value, Writer writer)
+            throws IOException {
         if (Double.doubleToRawLongBits(value) != 0) {
             writer.writeDouble(fieldNumber, value);
         }
@@ -62,7 +66,8 @@ final class SchemaUtil {
         }
     }
 
-    public static void writeSFixed64(int fieldNumber, long value, Writer writer) throws IOException {
+    public static void writeSFixed64(int fieldNumber, long value, Writer writer)
+            throws IOException {
         if (value != 0) {
             writer.writeSFixed64(fieldNumber, value);
         }
@@ -110,7 +115,8 @@ final class SchemaUtil {
         }
     }
 
-    public static void writeString(int fieldNumber, Object value, Writer writer) throws IOException {
+    public static void writeString(int fieldNumber, Object value, Writer writer)
+            throws IOException {
         if (value instanceof String) {
             writeStringInternal(fieldNumber, (String) value, writer);
         } else {
@@ -118,133 +124,162 @@ final class SchemaUtil {
         }
     }
 
-    private static void writeStringInternal(int fieldNumber, String value, Writer writer) throws IOException {
+    private static void writeStringInternal(int fieldNumber, String value, Writer writer)
+            throws IOException {
         if (value != null && !value.isEmpty()) {
             writer.writeString(fieldNumber, value);
         }
     }
 
-    public static void writeBytes(int fieldNumber, ByteString value, Writer writer) throws IOException {
+    public static void writeBytes(int fieldNumber, ByteString value, Writer writer)
+            throws IOException {
         if (value != null && !value.isEmpty()) {
             writer.writeBytes(fieldNumber, value);
         }
     }
 
-    public static void writeMessage(int fieldNumber, Object value, Writer writer) throws IOException {
+    public static void writeMessage(int fieldNumber, Object value, Writer writer)
+            throws IOException {
         if (value != null) {
             writer.writeMessage(fieldNumber, value);
         }
     }
 
-    public static void writeDoubleList(int fieldNumber, List<Double> value, Writer writer, boolean packed) throws IOException {
+    public static void writeDoubleList(
+            int fieldNumber, List<Double> value, Writer writer, boolean packed) throws IOException {
         if (value != null && !value.isEmpty()) {
             writer.writeDoubleList(fieldNumber, value, packed);
         }
     }
 
-    public static void writeFloatList(int fieldNumber, List<Float> value, Writer writer, boolean packed) throws IOException {
+    public static void writeFloatList(
+            int fieldNumber, List<Float> value, Writer writer, boolean packed) throws IOException {
         if (value != null && !value.isEmpty()) {
             writer.writeFloatList(fieldNumber, value, packed);
         }
     }
 
-    public static void writeInt64List(int fieldNumber, List<Long> value, Writer writer, boolean packed) throws IOException {
+    public static void writeInt64List(
+            int fieldNumber, List<Long> value, Writer writer, boolean packed) throws IOException {
         if (value != null && !value.isEmpty()) {
             writer.writeInt64List(fieldNumber, value, packed);
         }
     }
 
-    public static void writeUInt64List(int fieldNumber, List<Long> value, Writer writer, boolean packed) throws IOException {
+    public static void writeUInt64List(
+            int fieldNumber, List<Long> value, Writer writer, boolean packed) throws IOException {
         if (value != null && !value.isEmpty()) {
             writer.writeUInt64List(fieldNumber, value, packed);
         }
     }
 
-    public static void writeSInt64List(int fieldNumber, List<Long> value, Writer writer, boolean packed) throws IOException {
+    public static void writeSInt64List(
+            int fieldNumber, List<Long> value, Writer writer, boolean packed) throws IOException {
         if (value != null && !value.isEmpty()) {
             writer.writeSInt64List(fieldNumber, value, packed);
         }
     }
 
-    public static void writeFixed64List(int fieldNumber, List<Long> value, Writer writer, boolean packed) throws IOException {
+    public static void writeFixed64List(
+            int fieldNumber, List<Long> value, Writer writer, boolean packed) throws IOException {
         if (value != null && !value.isEmpty()) {
             writer.writeFixed64List(fieldNumber, value, packed);
         }
     }
 
-    public static void writeSFixed64List(int fieldNumber, List<Long> value, Writer writer, boolean packed) throws IOException {
+    public static void writeSFixed64List(
+            int fieldNumber, List<Long> value, Writer writer, boolean packed) throws IOException {
         if (value != null && !value.isEmpty()) {
             writer.writeSFixed64List(fieldNumber, value, packed);
         }
     }
 
-    public static void writeInt32List(int fieldNumber, List<Integer> value, Writer writer, boolean packed) throws IOException {
+    public static void writeInt32List(
+            int fieldNumber, List<Integer> value, Writer writer, boolean packed)
+            throws IOException {
         if (value != null && !value.isEmpty()) {
             writer.writeInt32List(fieldNumber, value, packed);
         }
     }
 
-    public static void writeUInt32List(int fieldNumber, List<Integer> value, Writer writer, boolean packed) throws IOException {
+    public static void writeUInt32List(
+            int fieldNumber, List<Integer> value, Writer writer, boolean packed)
+            throws IOException {
         if (value != null && !value.isEmpty()) {
             writer.writeUInt32List(fieldNumber, value, packed);
         }
     }
 
-    public static void writeSInt32List(int fieldNumber, List<Integer> value, Writer writer, boolean packed) throws IOException {
+    public static void writeSInt32List(
+            int fieldNumber, List<Integer> value, Writer writer, boolean packed)
+            throws IOException {
         if (value != null && !value.isEmpty()) {
             writer.writeSInt32List(fieldNumber, value, packed);
         }
     }
 
-    public static void writeFixed32List(int fieldNumber, List<Integer> value, Writer writer, boolean packed) throws IOException {
+    public static void writeFixed32List(
+            int fieldNumber, List<Integer> value, Writer writer, boolean packed)
+            throws IOException {
         if (value != null && !value.isEmpty()) {
             writer.writeFixed32List(fieldNumber, value, packed);
         }
     }
 
-    public static void writeSFixed32List(int fieldNumber, List<Integer> value, Writer writer, boolean packed) throws IOException {
+    public static void writeSFixed32List(
+            int fieldNumber, List<Integer> value, Writer writer, boolean packed)
+            throws IOException {
         if (value != null && !value.isEmpty()) {
             writer.writeSFixed32List(fieldNumber, value, packed);
         }
     }
 
-    public static void writeEnumList(int fieldNumber, List<Integer> value, Writer writer, boolean packed) throws IOException {
+    public static void writeEnumList(
+            int fieldNumber, List<Integer> value, Writer writer, boolean packed)
+            throws IOException {
         if (value != null && !value.isEmpty()) {
             writer.writeEnumList(fieldNumber, value, packed);
         }
     }
 
-    public static void writeBoolList(int fieldNumber, List<Boolean> value, Writer writer, boolean packed) throws IOException {
+    public static void writeBoolList(
+            int fieldNumber, List<Boolean> value, Writer writer, boolean packed)
+            throws IOException {
         if (value != null && !value.isEmpty()) {
             writer.writeBoolList(fieldNumber, value, packed);
         }
     }
 
-    public static void writeStringList(int fieldNumber, List<String> value, Writer writer) throws IOException {
+    public static void writeStringList(int fieldNumber, List<String> value, Writer writer)
+            throws IOException {
         if (value != null && !value.isEmpty()) {
             writer.writeStringList(fieldNumber, value);
         }
     }
 
-    public static void writeBytesList(int fieldNumber, List<ByteString> value, Writer writer) throws IOException {
+    public static void writeBytesList(int fieldNumber, List<ByteString> value, Writer writer)
+            throws IOException {
         if (value != null && !value.isEmpty()) {
             writer.writeBytesList(fieldNumber, value);
         }
     }
 
-    public static void writeMessageList(int fieldNumber, List<?> value, Writer writer) throws IOException {
+    public static void writeMessageList(int fieldNumber, List<?> value, Writer writer)
+            throws IOException {
         if (value != null && !value.isEmpty()) {
             writer.writeMessageList(fieldNumber, value);
         }
     }
 
-    public static void writeMessageList(int fieldNumber, List<?> value, Writer writer, Schema schema) throws IOException {
+    public static void writeMessageList(
+            int fieldNumber, List<?> value, Writer writer, Schema schema) throws IOException {
         if (value != null && !value.isEmpty()) {
             writer.writeMessageList(fieldNumber, value, schema);
         }
     }
 
-    public static void writeLazyFieldList(int fieldNumber, List<?> value, Writer writer) throws IOException {
+    public static void writeLazyFieldList(int fieldNumber, List<?> value, Writer writer)
+            throws IOException {
         if (value != null && !value.isEmpty()) {
             for (Object item : value) {
                 ((LazyFieldLite) item).writeTo(writer, fieldNumber);
@@ -252,13 +287,15 @@ final class SchemaUtil {
         }
     }
 
-    public static void writeGroupList(int fieldNumber, List<?> value, Writer writer) throws IOException {
+    public static void writeGroupList(int fieldNumber, List<?> value, Writer writer)
+            throws IOException {
         if (value != null && !value.isEmpty()) {
             writer.writeGroupList(fieldNumber, value);
         }
     }
 
-    public static void writeGroupList(int fieldNumber, List<?> value, Writer writer, Schema schema) throws IOException {
+    public static void writeGroupList(int fieldNumber, List<?> value, Writer writer, Schema schema)
+            throws IOException {
         if (value != null && !value.isEmpty()) {
             writer.writeGroupList(fieldNumber, value, schema);
         }
@@ -290,7 +327,8 @@ final class SchemaUtil {
         }
         int size = computeSizeInt64ListNoTag(list);
         if (packed) {
-            return CodedOutputStream.computeTagSize(fieldNumber) + CodedOutputStream.computeLengthDelimitedFieldSize(size);
+            return CodedOutputStream.computeTagSize(fieldNumber)
+                    + CodedOutputStream.computeLengthDelimitedFieldSize(size);
         }
         return (list.size() * CodedOutputStream.computeTagSize(fieldNumber)) + size;
     }
@@ -321,7 +359,8 @@ final class SchemaUtil {
         }
         int size = computeSizeUInt64ListNoTag(list);
         if (packed) {
-            return CodedOutputStream.computeTagSize(fieldNumber) + CodedOutputStream.computeLengthDelimitedFieldSize(size);
+            return CodedOutputStream.computeTagSize(fieldNumber)
+                    + CodedOutputStream.computeLengthDelimitedFieldSize(size);
         }
         return (CodedOutputStream.computeTagSize(fieldNumber) * length) + size;
     }
@@ -352,7 +391,8 @@ final class SchemaUtil {
         }
         int size = computeSizeSInt64ListNoTag(list);
         if (packed) {
-            return CodedOutputStream.computeTagSize(fieldNumber) + CodedOutputStream.computeLengthDelimitedFieldSize(size);
+            return CodedOutputStream.computeTagSize(fieldNumber)
+                    + CodedOutputStream.computeLengthDelimitedFieldSize(size);
         }
         return (CodedOutputStream.computeTagSize(fieldNumber) * length) + size;
     }
@@ -383,7 +423,8 @@ final class SchemaUtil {
         }
         int size = computeSizeEnumListNoTag(list);
         if (packed) {
-            return CodedOutputStream.computeTagSize(fieldNumber) + CodedOutputStream.computeLengthDelimitedFieldSize(size);
+            return CodedOutputStream.computeTagSize(fieldNumber)
+                    + CodedOutputStream.computeLengthDelimitedFieldSize(size);
         }
         return (CodedOutputStream.computeTagSize(fieldNumber) * length) + size;
     }
@@ -414,7 +455,8 @@ final class SchemaUtil {
         }
         int size = computeSizeInt32ListNoTag(list);
         if (packed) {
-            return CodedOutputStream.computeTagSize(fieldNumber) + CodedOutputStream.computeLengthDelimitedFieldSize(size);
+            return CodedOutputStream.computeTagSize(fieldNumber)
+                    + CodedOutputStream.computeLengthDelimitedFieldSize(size);
         }
         return (CodedOutputStream.computeTagSize(fieldNumber) * length) + size;
     }
@@ -445,7 +487,8 @@ final class SchemaUtil {
         }
         int size = computeSizeUInt32ListNoTag(list);
         if (packed) {
-            return CodedOutputStream.computeTagSize(fieldNumber) + CodedOutputStream.computeLengthDelimitedFieldSize(size);
+            return CodedOutputStream.computeTagSize(fieldNumber)
+                    + CodedOutputStream.computeLengthDelimitedFieldSize(size);
         }
         return (CodedOutputStream.computeTagSize(fieldNumber) * length) + size;
     }
@@ -476,7 +519,8 @@ final class SchemaUtil {
         }
         int size = computeSizeSInt32ListNoTag(list);
         if (packed) {
-            return CodedOutputStream.computeTagSize(fieldNumber) + CodedOutputStream.computeLengthDelimitedFieldSize(size);
+            return CodedOutputStream.computeTagSize(fieldNumber)
+                    + CodedOutputStream.computeLengthDelimitedFieldSize(size);
         }
         return (CodedOutputStream.computeTagSize(fieldNumber) * length) + size;
     }
@@ -492,7 +536,8 @@ final class SchemaUtil {
         }
         if (packed) {
             int dataSize = length * 4;
-            return CodedOutputStream.computeTagSize(fieldNumber) + CodedOutputStream.computeLengthDelimitedFieldSize(dataSize);
+            return CodedOutputStream.computeTagSize(fieldNumber)
+                    + CodedOutputStream.computeLengthDelimitedFieldSize(dataSize);
         }
         int dataSize2 = CodedOutputStream.computeFixed32Size(fieldNumber, 0);
         return dataSize2 * length;
@@ -509,7 +554,8 @@ final class SchemaUtil {
         }
         if (packed) {
             int dataSize = length * 8;
-            return CodedOutputStream.computeTagSize(fieldNumber) + CodedOutputStream.computeLengthDelimitedFieldSize(dataSize);
+            return CodedOutputStream.computeTagSize(fieldNumber)
+                    + CodedOutputStream.computeLengthDelimitedFieldSize(dataSize);
         }
         return CodedOutputStream.computeFixed64Size(fieldNumber, 0L) * length;
     }
@@ -524,7 +570,8 @@ final class SchemaUtil {
             return 0;
         }
         if (packed) {
-            return CodedOutputStream.computeTagSize(fieldNumber) + CodedOutputStream.computeLengthDelimitedFieldSize(length);
+            return CodedOutputStream.computeTagSize(fieldNumber)
+                    + CodedOutputStream.computeLengthDelimitedFieldSize(length);
         }
         return CodedOutputStream.computeBoolSize(fieldNumber, true) * length;
     }
@@ -542,9 +589,11 @@ final class SchemaUtil {
             for (int i = 0; i < length; i++) {
                 Object value = lazyList.getRaw(i);
                 if (value instanceof ByteString) {
-                    computeStringSizeNoTag2 = CodedOutputStream.computeBytesSizeNoTag((ByteString) value);
+                    computeStringSizeNoTag2 =
+                            CodedOutputStream.computeBytesSizeNoTag((ByteString) value);
                 } else {
-                    computeStringSizeNoTag2 = CodedOutputStream.computeStringSizeNoTag((String) value);
+                    computeStringSizeNoTag2 =
+                            CodedOutputStream.computeStringSizeNoTag((String) value);
                 }
                 size += computeStringSizeNoTag2;
             }
@@ -552,9 +601,11 @@ final class SchemaUtil {
             for (int i2 = 0; i2 < length; i2++) {
                 Object value2 = list.get(i2);
                 if (value2 instanceof ByteString) {
-                    computeStringSizeNoTag = CodedOutputStream.computeBytesSizeNoTag((ByteString) value2);
+                    computeStringSizeNoTag =
+                            CodedOutputStream.computeBytesSizeNoTag((ByteString) value2);
                 } else {
-                    computeStringSizeNoTag = CodedOutputStream.computeStringSizeNoTag((String) value2);
+                    computeStringSizeNoTag =
+                            CodedOutputStream.computeStringSizeNoTag((String) value2);
                 }
                 size += computeStringSizeNoTag;
             }
@@ -579,9 +630,11 @@ final class SchemaUtil {
         for (int i = 0; i < length; i++) {
             Object value = list.get(i);
             if (value instanceof LazyFieldLite) {
-                computeMessageSizeNoTag = CodedOutputStream.computeLazyFieldSizeNoTag((LazyFieldLite) value);
+                computeMessageSizeNoTag =
+                        CodedOutputStream.computeLazyFieldSizeNoTag((LazyFieldLite) value);
             } else {
-                computeMessageSizeNoTag = CodedOutputStream.computeMessageSizeNoTag((MessageLite) value);
+                computeMessageSizeNoTag =
+                        CodedOutputStream.computeMessageSizeNoTag((MessageLite) value);
             }
             size += computeMessageSizeNoTag;
         }
@@ -598,9 +651,11 @@ final class SchemaUtil {
         for (int i = 0; i < length; i++) {
             Object value = list.get(i);
             if (value instanceof LazyFieldLite) {
-                computeMessageSizeNoTag = CodedOutputStream.computeLazyFieldSizeNoTag((LazyFieldLite) value);
+                computeMessageSizeNoTag =
+                        CodedOutputStream.computeLazyFieldSizeNoTag((LazyFieldLite) value);
             } else {
-                computeMessageSizeNoTag = CodedOutputStream.computeMessageSizeNoTag((MessageLite) value, schema);
+                computeMessageSizeNoTag =
+                        CodedOutputStream.computeMessageSizeNoTag((MessageLite) value, schema);
             }
             size += computeMessageSizeNoTag;
         }
@@ -680,7 +735,8 @@ final class SchemaUtil {
             if (clz == null) {
                 return null;
             }
-            return (UnknownFieldSchema) clz.getConstructor(Boolean.TYPE).newInstance(Boolean.valueOf(proto3));
+            return (UnknownFieldSchema)
+                    clz.getConstructor(Boolean.TYPE).newInstance(Boolean.valueOf(proto3));
         } catch (Throwable th) {
             return null;
         }
@@ -704,10 +760,16 @@ final class SchemaUtil {
 
     static Object getMapDefaultEntry(Class<?> clazz, String name) {
         try {
-            Class<?> holder = Class.forName(clazz.getName() + "$" + toCamelCase(name, true) + "DefaultEntryHolder");
+            Class<?> holder =
+                    Class.forName(
+                            clazz.getName() + "$" + toCamelCase(name, true) + "DefaultEntryHolder");
             Field[] fields = holder.getDeclaredFields();
             if (fields.length != 1) {
-                throw new IllegalStateException("Unable to look up map field default entry holder class for " + name + " in " + clazz.getName());
+                throw new IllegalStateException(
+                        "Unable to look up map field default entry holder class for "
+                                + name
+                                + " in "
+                                + clazz.getName());
             }
             return UnsafeUtil.getStaticObject(fields[0]);
         } catch (Throwable t) {
@@ -748,11 +810,14 @@ final class SchemaUtil {
     }
 
     static <T> void mergeMap(MapFieldSchema mapFieldSchema, T message, T o, long offset) {
-        Object merged = mapFieldSchema.mergeFrom(UnsafeUtil.getObject(message, offset), UnsafeUtil.getObject(o, offset));
+        Object merged =
+                mapFieldSchema.mergeFrom(
+                        UnsafeUtil.getObject(message, offset), UnsafeUtil.getObject(o, offset));
         UnsafeUtil.putObject(message, offset, merged);
     }
 
-    static <T, FT extends FieldSet.FieldDescriptorLite<FT>> void mergeExtensions(ExtensionSchema<FT> schema, T message, T other) {
+    static <T, FT extends FieldSet.FieldDescriptorLite<FT>> void mergeExtensions(
+            ExtensionSchema<FT> schema, T message, T other) {
         FieldSet<FT> otherExtensions = schema.getExtensions(other);
         if (!otherExtensions.isEmpty()) {
             FieldSet<FT> messageExtensions = schema.getMutableExtensions(message);
@@ -760,14 +825,21 @@ final class SchemaUtil {
         }
     }
 
-    static <T, UT, UB> void mergeUnknownFields(UnknownFieldSchema<UT, UB> schema, T message, T other) {
+    static <T, UT, UB> void mergeUnknownFields(
+            UnknownFieldSchema<UT, UB> schema, T message, T other) {
         UT messageUnknowns = schema.getFromMessage(message);
         UT otherUnknowns = schema.getFromMessage(other);
         UT merged = schema.merge(messageUnknowns, otherUnknowns);
         schema.setToMessage(message, merged);
     }
 
-    static <UT, UB> UB filterUnknownEnumList(Object obj, int i, List<Integer> list, Internal.EnumLiteMap<?> enumLiteMap, UB ub, UnknownFieldSchema<UT, UB> unknownFieldSchema) {
+    static <UT, UB> UB filterUnknownEnumList(
+            Object obj,
+            int i,
+            List<Integer> list,
+            Internal.EnumLiteMap<?> enumLiteMap,
+            UB ub,
+            UnknownFieldSchema<UT, UB> unknownFieldSchema) {
         if (enumLiteMap == null) {
             return ub;
         }
@@ -801,7 +873,13 @@ final class SchemaUtil {
         return ub;
     }
 
-    static <UT, UB> UB filterUnknownEnumList(Object obj, int i, List<Integer> list, Internal.EnumVerifier enumVerifier, UB ub, UnknownFieldSchema<UT, UB> unknownFieldSchema) {
+    static <UT, UB> UB filterUnknownEnumList(
+            Object obj,
+            int i,
+            List<Integer> list,
+            Internal.EnumVerifier enumVerifier,
+            UB ub,
+            UnknownFieldSchema<UT, UB> unknownFieldSchema) {
         if (enumVerifier == null) {
             return ub;
         }
@@ -835,7 +913,8 @@ final class SchemaUtil {
         return ub;
     }
 
-    static <UT, UB> UB storeUnknownEnum(Object obj, int i, int i2, UB ub, UnknownFieldSchema<UT, UB> unknownFieldSchema) {
+    static <UT, UB> UB storeUnknownEnum(
+            Object obj, int i, int i2, UB ub, UnknownFieldSchema<UT, UB> unknownFieldSchema) {
         if (ub == null) {
             ub = unknownFieldSchema.getBuilderFromMessage(obj);
         }

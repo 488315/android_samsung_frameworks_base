@@ -3,23 +3,26 @@ package android.hardware.radio.network;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public final class AccessTechnologySpecificInfo implements Parcelable {
-    public static final Parcelable.Creator<AccessTechnologySpecificInfo> CREATOR = new Parcelable.Creator<AccessTechnologySpecificInfo>() { // from class: android.hardware.radio.network.AccessTechnologySpecificInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AccessTechnologySpecificInfo createFromParcel(Parcel _aidl_source) {
-            return new AccessTechnologySpecificInfo(_aidl_source);
-        }
+    public static final Parcelable.Creator<AccessTechnologySpecificInfo> CREATOR =
+            new Parcelable.Creator<AccessTechnologySpecificInfo>() { // from class:
+                // android.hardware.radio.network.AccessTechnologySpecificInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AccessTechnologySpecificInfo createFromParcel(Parcel _aidl_source) {
+                    return new AccessTechnologySpecificInfo(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AccessTechnologySpecificInfo[] newArray(int _aidl_size) {
-            return new AccessTechnologySpecificInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AccessTechnologySpecificInfo[] newArray(int _aidl_size) {
+                    return new AccessTechnologySpecificInfo[_aidl_size];
+                }
+            };
     public static final int cdmaInfo = 1;
     public static final int eutranInfo = 2;
     public static final int geranDtmSupported = 4;
@@ -154,15 +157,20 @@ public final class AccessTechnologySpecificInfo implements Parcelable {
                 _set(_aidl_tag, Boolean.valueOf(_aidl_value));
                 return;
             case 1:
-                Cdma2000RegistrationInfo _aidl_value2 = (Cdma2000RegistrationInfo) _aidl_parcel.readTypedObject(Cdma2000RegistrationInfo.CREATOR);
+                Cdma2000RegistrationInfo _aidl_value2 =
+                        (Cdma2000RegistrationInfo)
+                                _aidl_parcel.readTypedObject(Cdma2000RegistrationInfo.CREATOR);
                 _set(_aidl_tag, _aidl_value2);
                 return;
             case 2:
-                EutranRegistrationInfo _aidl_value3 = (EutranRegistrationInfo) _aidl_parcel.readTypedObject(EutranRegistrationInfo.CREATOR);
+                EutranRegistrationInfo _aidl_value3 =
+                        (EutranRegistrationInfo)
+                                _aidl_parcel.readTypedObject(EutranRegistrationInfo.CREATOR);
                 _set(_aidl_tag, _aidl_value3);
                 return;
             case 3:
-                NrVopsInfo _aidl_value4 = (NrVopsInfo) _aidl_parcel.readTypedObject(NrVopsInfo.CREATOR);
+                NrVopsInfo _aidl_value4 =
+                        (NrVopsInfo) _aidl_parcel.readTypedObject(NrVopsInfo.CREATOR);
                 _set(_aidl_tag, _aidl_value4);
                 return;
             case 4:
@@ -201,15 +209,25 @@ public final class AccessTechnologySpecificInfo implements Parcelable {
     public String toString() {
         switch (this._tag) {
             case 0:
-                return "AccessTechnologySpecificInfo.noinit(" + getNoinit() + NavigationBarInflaterView.KEY_CODE_END;
+                return "AccessTechnologySpecificInfo.noinit("
+                        + getNoinit()
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 1:
-                return "AccessTechnologySpecificInfo.cdmaInfo(" + Objects.toString(getCdmaInfo()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "AccessTechnologySpecificInfo.cdmaInfo("
+                        + Objects.toString(getCdmaInfo())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 2:
-                return "AccessTechnologySpecificInfo.eutranInfo(" + Objects.toString(getEutranInfo()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "AccessTechnologySpecificInfo.eutranInfo("
+                        + Objects.toString(getEutranInfo())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 3:
-                return "AccessTechnologySpecificInfo.ngranNrVopsInfo(" + Objects.toString(getNgranNrVopsInfo()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "AccessTechnologySpecificInfo.ngranNrVopsInfo("
+                        + Objects.toString(getNgranNrVopsInfo())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 4:
-                return "AccessTechnologySpecificInfo.geranDtmSupported(" + getGeranDtmSupported() + NavigationBarInflaterView.KEY_CODE_END;
+                return "AccessTechnologySpecificInfo.geranDtmSupported("
+                        + getGeranDtmSupported()
+                        + NavigationBarInflaterView.KEY_CODE_END;
             default:
                 throw new IllegalStateException("unknown field: " + this._tag);
         }
@@ -217,7 +235,12 @@ public final class AccessTechnologySpecificInfo implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

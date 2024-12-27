@@ -2,6 +2,7 @@ package com.android.internal.util;
 
 import android.os.Process;
 import android.util.Slog;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
@@ -16,24 +17,30 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ConcurrentUtils {
     public static final Executor DIRECT_EXECUTOR = new DirectExecutor();
 
-    private ConcurrentUtils() {
-    }
+    private ConcurrentUtils() {}
 
-    public static ExecutorService newFixedThreadPool(int nThreads, final String poolName, final int linuxThreadPriority) {
-        return Executors.newFixedThreadPool(nThreads, new ThreadFactory() { // from class: com.android.internal.util.ConcurrentUtils.1
-            private final AtomicInteger threadNum = new AtomicInteger(0);
+    public static ExecutorService newFixedThreadPool(
+            int nThreads, final String poolName, final int linuxThreadPriority) {
+        return Executors.newFixedThreadPool(
+                nThreads,
+                new ThreadFactory() { // from class: com.android.internal.util.ConcurrentUtils.1
+                    private final AtomicInteger threadNum = new AtomicInteger(0);
 
-            @Override // java.util.concurrent.ThreadFactory
-            public Thread newThread(final Runnable r) {
-                return new Thread(poolName + this.threadNum.incrementAndGet()) { // from class: com.android.internal.util.ConcurrentUtils.1.1
-                    @Override // java.lang.Thread, java.lang.Runnable
-                    public void run() {
-                        Process.setThreadPriority(linuxThreadPriority);
-                        r.run();
+                    @Override // java.util.concurrent.ThreadFactory
+                    public Thread newThread(final Runnable r) {
+                        return new Thread(
+                                poolName
+                                        + this.threadNum
+                                                .incrementAndGet()) { // from class:
+                                                                      // com.android.internal.util.ConcurrentUtils.1.1
+                            @Override // java.lang.Thread, java.lang.Runnable
+                            public void run() {
+                                Process.setThreadPriority(linuxThreadPriority);
+                                r.run();
+                            }
+                        };
                     }
-                };
-            }
-        });
+                });
     }
 
     public static <T> T waitForFutureNoInterrupt(Future<T> future, String description) {
@@ -47,7 +54,8 @@ public class ConcurrentUtils {
         }
     }
 
-    public static void waitForCountDownNoInterrupt(CountDownLatch countDownLatch, long timeoutMs, String description) {
+    public static void waitForCountDownNoInterrupt(
+            CountDownLatch countDownLatch, long timeoutMs, String description) {
         try {
             if (!countDownLatch.await(timeoutMs, TimeUnit.MILLISECONDS)) {
                 throw new IllegalStateException(description + " timed out.");
@@ -71,8 +79,7 @@ public class ConcurrentUtils {
     }
 
     private static class DirectExecutor implements Executor {
-        private DirectExecutor() {
-        }
+        private DirectExecutor() {}
 
         @Override // java.util.concurrent.Executor
         public void execute(Runnable command) {

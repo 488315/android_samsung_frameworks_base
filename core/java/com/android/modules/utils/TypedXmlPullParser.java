@@ -27,14 +27,16 @@ public interface TypedXmlPullParser extends XmlPullParser {
         boolean namespaceNull = namespace == null;
         int count = getAttributeCount();
         for (int i = 0; i < count; i++) {
-            if ((namespaceNull || namespace.equals(getAttributeNamespace(i))) && name.equals(getAttributeName(i))) {
+            if ((namespaceNull || namespace.equals(getAttributeNamespace(i)))
+                    && name.equals(getAttributeName(i))) {
                 return i;
             }
         }
         return -1;
     }
 
-    default int getAttributeIndexOrThrow(String namespace, String name) throws XmlPullParserException {
+    default int getAttributeIndexOrThrow(String namespace, String name)
+            throws XmlPullParserException {
         int index = getAttributeIndex(namespace, name);
         if (index == -1) {
             throw new XmlPullParserException("Missing attribute " + name);
@@ -42,11 +44,13 @@ public interface TypedXmlPullParser extends XmlPullParser {
         return index;
     }
 
-    default byte[] getAttributeBytesHex(String namespace, String name) throws XmlPullParserException {
+    default byte[] getAttributeBytesHex(String namespace, String name)
+            throws XmlPullParserException {
         return getAttributeBytesHex(getAttributeIndexOrThrow(namespace, name));
     }
 
-    default byte[] getAttributeBytesBase64(String namespace, String name) throws XmlPullParserException {
+    default byte[] getAttributeBytesBase64(String namespace, String name)
+            throws XmlPullParserException {
         return getAttributeBytesBase64(getAttributeIndexOrThrow(namespace, name));
     }
 
@@ -74,7 +78,8 @@ public interface TypedXmlPullParser extends XmlPullParser {
         return getAttributeDouble(getAttributeIndexOrThrow(namespace, name));
     }
 
-    default boolean getAttributeBoolean(String namespace, String name) throws XmlPullParserException {
+    default boolean getAttributeBoolean(String namespace, String name)
+            throws XmlPullParserException {
         return getAttributeBoolean(getAttributeIndexOrThrow(namespace, name));
     }
 

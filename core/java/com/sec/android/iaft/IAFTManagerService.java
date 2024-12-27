@@ -11,7 +11,8 @@ public class IAFTManagerService extends Service {
     private static final String TAG = "IAFTManager";
     private CallBack mCallBack;
     private Context mContext = this;
-    private IAFTManagerServiceImpl mIAFTManagerServiceImpl = new IAFTManagerServiceImpl(this.mContext);
+    private IAFTManagerServiceImpl mIAFTManagerServiceImpl =
+            new IAFTManagerServiceImpl(this.mContext);
 
     public interface CallBack {
         void traceResult(String str, int i, int i2);

@@ -41,12 +41,10 @@ public final class EncoderProfiles {
         private int width;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface ChromaSubsampling {
-        }
+        public @interface ChromaSubsampling {}
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface HdrFormat {
-        }
+        public @interface HdrFormat {}
 
         public int getCodec() {
             return this.codec;
@@ -112,7 +110,16 @@ public final class EncoderProfiles {
             return this.hdrFormat;
         }
 
-        VideoProfile(int codec, int width, int height, int frameRate, int bitrate, int profile, int chromaSubsampling, int bitDepth, int hdrFormat) {
+        VideoProfile(
+                int codec,
+                int width,
+                int height,
+                int frameRate,
+                int bitrate,
+                int profile,
+                int chromaSubsampling,
+                int bitDepth,
+                int hdrFormat) {
             this.codec = codec;
             this.width = width;
             this.height = height;
@@ -201,7 +208,11 @@ public final class EncoderProfiles {
         }
     }
 
-    EncoderProfiles(int duration, int fileFormat, VideoProfile[] videoProfiles, AudioProfile[] audioProfiles) {
+    EncoderProfiles(
+            int duration,
+            int fileFormat,
+            VideoProfile[] videoProfiles,
+            AudioProfile[] audioProfiles) {
         this.durationSecs = duration;
         this.fileFormat = fileFormat;
         this.videoProfiles = Collections.unmodifiableList(Arrays.asList(videoProfiles));

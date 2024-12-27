@@ -17,15 +17,17 @@ import android.os.UserHandle;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.WindowManagerPolicyConstants;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.ServiceThread;
 import com.android.server.UiThread;
-import com.android.server.desktopmode.StateManager;
 import com.android.server.wm.WindowManagerService;
+
 import com.samsung.android.desktopmode.DesktopModeFeature;
 import com.samsung.android.knox.custom.LauncherConfigurationInternal;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -59,8 +61,7 @@ public final class WirelessDexManager {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Receiver extends BroadcastReceiver {
-        public Receiver() {
-        }
+        public Receiver() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
@@ -69,15 +70,21 @@ public final class WirelessDexManager {
             if (z) {
                 Log.d("[DMS]WirelessDexManager", "onReceive(), action=" + action);
             }
-            StateManager.InternalState state = ((StateManager) WirelessDexManager.this.mStateManager).getState();
+            StateManager.InternalState state =
+                    ((StateManager) WirelessDexManager.this.mStateManager).getState();
             if ("android.intent.action.HDMI_PLUGGED".equals(action)) {
-                if (intent.getBooleanExtra(LauncherConfigurationInternal.KEY_STATE_BOOLEAN, false)) {
+                if (intent.getBooleanExtra(
+                        LauncherConfigurationInternal.KEY_STATE_BOOLEAN, false)) {
                     if (state.isDexOnPcOrWirelessDexConnected()) {
                         if (z) {
-                            Log.d("[DMS]WirelessDexManager", "Disconnect Wireless DeX / DFP when HDMI plugged");
+                            Log.d(
+                                    "[DMS]WirelessDexManager",
+                                    "Disconnect Wireless DeX / DFP when HDMI plugged");
                         }
-                        ((StateManager) WirelessDexManager.this.mStateManager).notifyDisplayDisconnectionRequest(1001);
-                        ((StateManager) WirelessDexManager.this.mStateManager).notifyDisplayDisconnectionRequest(1000);
+                        ((StateManager) WirelessDexManager.this.mStateManager)
+                                .notifyDisplayDisconnectionRequest(1001);
+                        ((StateManager) WirelessDexManager.this.mStateManager)
+                                .notifyDisplayDisconnectionRequest(1000);
                     }
                     WirelessDexManager.this.disconnect();
                     return;
@@ -85,9 +92,19 @@ public final class WirelessDexManager {
                 return;
             }
             if ("com.samsung.intent.action.WIFI_DISPLAY_SOURCE_STATE".equals(action)) {
-                int intExtra = intent.getIntExtra(LauncherConfigurationInternal.KEY_STATE_BOOLEAN, -1);
+                int intExtra =
+                        intent.getIntExtra(LauncherConfigurationInternal.KEY_STATE_BOOLEAN, -1);
                 boolean booleanExtra = intent.getBooleanExtra("by_user", true);
-                Log.d("[DMS]WirelessDexManager", "WifiDisplay Connection state=" + intExtra + ", disconnectedByUser=" + booleanExtra + ", isWirelessDex=" + state.isWirelessDexConnected() + ", mIsWirelessDexEntered=" + WirelessDexManager.this.mIsWirelessDexEntered);
+                Log.d(
+                        "[DMS]WirelessDexManager",
+                        "WifiDisplay Connection state="
+                                + intExtra
+                                + ", disconnectedByUser="
+                                + booleanExtra
+                                + ", isWirelessDex="
+                                + state.isWirelessDexConnected()
+                                + ", mIsWirelessDexEntered="
+                                + WirelessDexManager.this.mIsWirelessDexEntered);
                 if (intExtra != 0 || booleanExtra) {
                     return;
                 }
@@ -95,22 +112,32 @@ public final class WirelessDexManager {
                 if (TextUtils.isEmpty(wirelessDexManager.mConnectedDeviceName)) {
                     return;
                 }
-                Log.d("[DMS]WirelessDexManager", "[" + wirelessDexManager.mConnectedDeviceName + "] has been disconnected by something other than the user request.");
+                Log.d(
+                        "[DMS]WirelessDexManager",
+                        "["
+                                + wirelessDexManager.mConnectedDeviceName
+                                + "] has been disconnected by something other than the user"
+                                + " request.");
                 Context context2 = wirelessDexManager.mContext;
-                String format = String.format(context2.getString(R.string.harmful_app_warning_open_anyway), wirelessDexManager.mConnectedDeviceName);
+                String format =
+                        String.format(
+                                context2.getString(R.string.harmful_app_warning_open_anyway),
+                                wirelessDexManager.mConnectedDeviceName);
                 List list = ToastManager.sToasts;
                 if (format.isEmpty()) {
                     return;
                 }
-                UiThread.getHandler().post(new ToastManager$$ExternalSyntheticLambda0(1, context2, format, true));
+                UiThread.getHandler()
+                        .post(
+                                new ToastManager$$ExternalSyntheticLambda0(
+                                        1, context2, format, true));
             }
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StateListener extends StateManager.StateListener {
-        public StateListener() {
-        }
+        public StateListener() {}
 
         @Override // com.android.server.desktopmode.StateManager.StateListener
         public final void onDualModeStartLoadingScreen(boolean z) {
@@ -120,11 +147,14 @@ public final class WirelessDexManager {
             WirelessDexManager wirelessDexManager = WirelessDexManager.this;
             if (wirelessDexManager.mIsWirelessDexEntered) {
                 if (wirelessDexManager.mIsPointerEventListener) {
-                    wirelessDexManager.mWindowManager.unregisterPointerEventListener(wirelessDexManager.mDesktopPointerEventListener, wirelessDexManager.mDesktopDisplayId);
+                    wirelessDexManager.mWindowManager.unregisterPointerEventListener(
+                            wirelessDexManager.mDesktopPointerEventListener,
+                            wirelessDexManager.mDesktopDisplayId);
                     wirelessDexManager.mIsPointerEventListener = false;
                 }
                 if (wirelessDexManager.mIsPointerIconListener) {
-                    wirelessDexManager.mInputManager.semUnregisterOnPointerIconChangedListener(wirelessDexManager.mPointerIconChangedListener);
+                    wirelessDexManager.mInputManager.semUnregisterOnPointerIconChangedListener(
+                            wirelessDexManager.mPointerIconChangedListener);
                     wirelessDexManager.mIsPointerIconListener = false;
                 }
                 wirelessDexManager.mIsWirelessDexEntered = false;
@@ -138,9 +168,9 @@ public final class WirelessDexManager {
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:18:0x0070, code lost:
-        
-            if (r0.contains(r3) != false) goto L34;
-         */
+
+           if (r0.contains(r3) != false) goto L34;
+        */
         @Override // com.android.server.desktopmode.StateManager.StateListener
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -254,11 +284,14 @@ public final class WirelessDexManager {
             Lce:
                 return
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.desktopmode.WirelessDexManager.StateListener.onDualModeStopLoadingScreen(boolean):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.desktopmode.WirelessDexManager.StateListener.onDualModeStopLoadingScreen(boolean):void");
         }
 
         @Override // com.android.server.desktopmode.StateManager.StateListener
-        public final void onExternalDisplayConnectionChanged(StateManager.InternalState internalState) {
+        public final void onExternalDisplayConnectionChanged(
+                StateManager.InternalState internalState) {
             if (internalState.isWirelessDexConnected()) {
                 return;
             }
@@ -267,14 +300,16 @@ public final class WirelessDexManager {
             wirelessDexManager.mPointerIconSync = -1;
             wirelessDexManager.mFrequencyValue = 0;
             wirelessDexManager.mTvTizenVersion = null;
-            DesktopModeSettings.setSettings(wirelessDexManager.mResolver, "uibc_finger_enabled", false);
+            DesktopModeSettings.setSettings(
+                    wirelessDexManager.mResolver, "uibc_finger_enabled", false);
         }
 
         @Override // com.android.server.desktopmode.StateManager.StateListener
         public final void onUserChanged(StateManager.InternalState internalState) {
             WirelessDexManager wirelessDexManager = WirelessDexManager.this;
             DesktopModeSettings.setSettings(wirelessDexManager.mResolver, "wireless_dex", 2);
-            DesktopModeSettings.setSettings(wirelessDexManager.mResolver, "wireless_dex_scan_device", false);
+            DesktopModeSettings.setSettings(
+                    wirelessDexManager.mResolver, "wireless_dex_scan_device", false);
         }
     }
 
@@ -282,188 +317,269 @@ public final class WirelessDexManager {
     /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.desktopmode.WirelessDexManager$$ExternalSyntheticLambda0] */
     /* JADX WARN: Type inference failed for: r1v3, types: [com.android.server.desktopmode.WirelessDexManager$2] */
     /* JADX WARN: Type inference failed for: r1v4, types: [com.android.server.desktopmode.WirelessDexManager$3] */
-    public WirelessDexManager(Context context, IStateManager iStateManager, UiManager uiManager, DisplayManager displayManager, InputManager inputManager, ServiceThread serviceThread, WindowManagerService windowManagerService) {
+    public WirelessDexManager(
+            Context context,
+            IStateManager iStateManager,
+            UiManager uiManager,
+            DisplayManager displayManager,
+            InputManager inputManager,
+            ServiceThread serviceThread,
+            WindowManagerService windowManagerService) {
         final int i = 0;
-        this.mRunnableEnableLowLatencyMode = new Runnable(this) { // from class: com.android.server.desktopmode.WirelessDexManager$$ExternalSyntheticLambda0
-            public final /* synthetic */ WirelessDexManager f$0;
+        this.mRunnableEnableLowLatencyMode =
+                new Runnable(
+                        this) { // from class:
+                                // com.android.server.desktopmode.WirelessDexManager$$ExternalSyntheticLambda0
+                    public final /* synthetic */ WirelessDexManager f$0;
 
-            {
-                this.f$0 = this;
-            }
+                    {
+                        this.f$0 = this;
+                    }
 
-            @Override // java.lang.Runnable
-            public final void run() {
-                int i2 = i;
-                WirelessDexManager wirelessDexManager = this.f$0;
-                switch (i2) {
-                    case 0:
-                        if (!wirelessDexManager.mIsLowLatencyMode) {
-                            wirelessDexManager.mIsLowLatencyMode = true;
-                            wirelessDexManager.setWifiDisplayParameters("wfd_sec_low_latency_mode", "on");
-                            break;
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        int i2 = i;
+                        WirelessDexManager wirelessDexManager = this.f$0;
+                        switch (i2) {
+                            case 0:
+                                if (!wirelessDexManager.mIsLowLatencyMode) {
+                                    wirelessDexManager.mIsLowLatencyMode = true;
+                                    wirelessDexManager.setWifiDisplayParameters(
+                                            "wfd_sec_low_latency_mode", "on");
+                                    break;
+                                }
+                                break;
+                            default:
+                                if (wirelessDexManager.mIsLowLatencyMode) {
+                                    wirelessDexManager.mIsLowLatencyMode = false;
+                                    wirelessDexManager.setWifiDisplayParameters(
+                                            "wfd_sec_low_latency_mode", "off");
+                                    break;
+                                }
+                                break;
                         }
-                        break;
-                    default:
-                        if (wirelessDexManager.mIsLowLatencyMode) {
-                            wirelessDexManager.mIsLowLatencyMode = false;
-                            wirelessDexManager.setWifiDisplayParameters("wfd_sec_low_latency_mode", "off");
-                            break;
-                        }
-                        break;
-                }
-            }
-        };
+                    }
+                };
         final int i2 = 1;
-        this.mRunnableDisableLowLatencyMode = new Runnable(this) { // from class: com.android.server.desktopmode.WirelessDexManager$$ExternalSyntheticLambda0
-            public final /* synthetic */ WirelessDexManager f$0;
+        this.mRunnableDisableLowLatencyMode =
+                new Runnable(
+                        this) { // from class:
+                                // com.android.server.desktopmode.WirelessDexManager$$ExternalSyntheticLambda0
+                    public final /* synthetic */ WirelessDexManager f$0;
 
-            {
-                this.f$0 = this;
-            }
+                    {
+                        this.f$0 = this;
+                    }
 
-            @Override // java.lang.Runnable
-            public final void run() {
-                int i22 = i2;
-                WirelessDexManager wirelessDexManager = this.f$0;
-                switch (i22) {
-                    case 0:
-                        if (!wirelessDexManager.mIsLowLatencyMode) {
-                            wirelessDexManager.mIsLowLatencyMode = true;
-                            wirelessDexManager.setWifiDisplayParameters("wfd_sec_low_latency_mode", "on");
-                            break;
-                        }
-                        break;
-                    default:
-                        if (wirelessDexManager.mIsLowLatencyMode) {
-                            wirelessDexManager.mIsLowLatencyMode = false;
-                            wirelessDexManager.setWifiDisplayParameters("wfd_sec_low_latency_mode", "off");
-                            break;
-                        }
-                        break;
-                }
-            }
-        };
-        SemWifiDisplayParameterListener semWifiDisplayParameterListener = new SemWifiDisplayParameterListener() { // from class: com.android.server.desktopmode.WirelessDexManager.1
-            public final void onParametersChanged(List list) {
-                if (list != null) {
-                    Iterator it = list.iterator();
-                    while (it.hasNext()) {
-                        SemWifiDisplayParameter semWifiDisplayParameter = (SemWifiDisplayParameter) it.next();
-                        String key = semWifiDisplayParameter.getKey();
-                        String value = semWifiDisplayParameter.getValue();
-                        boolean z = DesktopModeFeature.DEBUG;
-                        if (z) {
-                            Log.d("[DMS]WirelessDexManager", XmlUtils$$ExternalSyntheticOutline0.m("onParametersChanged (Key : ", key, ", Value : ", value, ")"));
-                        }
-                        if ("wfd_sec_dex_support".equals(key)) {
-                            if ("yes".equals(value)) {
-                                WirelessDexManager.this.mReducedLatency = 1;
-                            } else {
-                                WirelessDexManager.this.mReducedLatency = 0;
-                            }
-                        } else if ("wfd_sec_dex_mouse_support".equals(key)) {
-                            if ("yes".equals(value)) {
-                                WirelessDexManager.this.mPointerIconSync = 1;
-                            } else {
-                                WirelessDexManager.this.mPointerIconSync = 0;
-                            }
-                        } else if ("notify".equals(key) && "weak_network".equals(value)) {
-                            WirelessDexManager wirelessDexManager = WirelessDexManager.this;
-                            StateManager.InternalState state = ((StateManager) wirelessDexManager.mStateManager).getState();
-                            if (state.isWirelessDexConnected() && state.mDesktopModeState.compareTo(4, 0)) {
-                                ToastManager.showToast(Utils.getDisplayContext(wirelessDexManager.mContext, state.mDesktopDisplayId), String.format(wirelessDexManager.mContext.getString(R.string.imProtocolCustom), wirelessDexManager.mContext.getString(17042662)), 1);
-                            }
-                        } else if ("frequency".equals(key)) {
-                            try {
-                                WirelessDexManager.this.mFrequencyValue = Integer.parseInt(value);
-                            } catch (NumberFormatException e) {
-                                Log.e("[DMS]WirelessDexManager", "Wrong number format=" + value, e);
-                            }
-                        } else if ("tizenVer".equals(key)) {
-                            if (z) {
-                                Log.d("[DMS]WirelessDexManager", "TV Tizen version : " + value);
-                            }
-                            WirelessDexManager.this.mTvTizenVersion = value;
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        int i22 = i2;
+                        WirelessDexManager wirelessDexManager = this.f$0;
+                        switch (i22) {
+                            case 0:
+                                if (!wirelessDexManager.mIsLowLatencyMode) {
+                                    wirelessDexManager.mIsLowLatencyMode = true;
+                                    wirelessDexManager.setWifiDisplayParameters(
+                                            "wfd_sec_low_latency_mode", "on");
+                                    break;
+                                }
+                                break;
+                            default:
+                                if (wirelessDexManager.mIsLowLatencyMode) {
+                                    wirelessDexManager.mIsLowLatencyMode = false;
+                                    wirelessDexManager.setWifiDisplayParameters(
+                                            "wfd_sec_low_latency_mode", "off");
+                                    break;
+                                }
+                                break;
                         }
                     }
-                }
-            }
-        };
-        this.mPointerIconChangedListener = new InputManager.SemOnPointerIconChangedListener() { // from class: com.android.server.desktopmode.WirelessDexManager.2
-            public final void onPointerIconChanged(int i3, Bitmap bitmap, float f, float f2) {
-                WirelessDexManager wirelessDexManager = WirelessDexManager.this;
-                wirelessDexManager.getClass();
-                if (i3 != 1) {
-                    switch (i3) {
-                        case FrameworkStatsLog.KEYSTORE2_KEY_OPERATION_WITH_PURPOSE_AND_MODES_INFO /* 10122 */:
-                            i3 = 1014;
-                            break;
-                        case FrameworkStatsLog.KEYSTORE2_KEY_OPERATION_WITH_GENERAL_INFO /* 10123 */:
-                            i3 = 1015;
-                            break;
-                        case FrameworkStatsLog.RKP_ERROR_STATS /* 10124 */:
-                            i3 = 1017;
-                            break;
-                        case FrameworkStatsLog.KEYSTORE2_CRASH_STATS /* 10125 */:
-                            i3 = 1016;
-                            break;
-                    }
-                    wirelessDexManager.setWifiDisplayParameters("wfd_sec_uibc_mouse_cursor_idx", String.valueOf(i3));
-                }
-                i3 = 1000;
-                wirelessDexManager.setWifiDisplayParameters("wfd_sec_uibc_mouse_cursor_idx", String.valueOf(i3));
-            }
-        };
-        this.mDesktopPointerEventListener = new WindowManagerPolicyConstants.PointerEventListener() { // from class: com.android.server.desktopmode.WirelessDexManager.3
-            public final void onPointerEvent(MotionEvent motionEvent) {
-                int action = motionEvent.getAction();
-                if (SystemClock.uptimeMillis() - WirelessDexManager.this.mMotionEventStartTime > 1000) {
-                    if (action == 2 || action == 7 || action == 0 || action == 1) {
-                        if (motionEvent.isFromSource(8194) || motionEvent.isFromSource(16386)) {
-                            WirelessDexManager.this.mMotionEventStartTime = SystemClock.uptimeMillis();
-                            WirelessDexManager wirelessDexManager = WirelessDexManager.this;
-                            if (!wirelessDexManager.mIsLowLatencyMode) {
-                                wirelessDexManager.mHandler.post(wirelessDexManager.mRunnableEnableLowLatencyMode);
+                };
+        SemWifiDisplayParameterListener semWifiDisplayParameterListener =
+                new SemWifiDisplayParameterListener() { // from class:
+                                                        // com.android.server.desktopmode.WirelessDexManager.1
+                    public final void onParametersChanged(List list) {
+                        if (list != null) {
+                            Iterator it = list.iterator();
+                            while (it.hasNext()) {
+                                SemWifiDisplayParameter semWifiDisplayParameter =
+                                        (SemWifiDisplayParameter) it.next();
+                                String key = semWifiDisplayParameter.getKey();
+                                String value = semWifiDisplayParameter.getValue();
+                                boolean z = DesktopModeFeature.DEBUG;
+                                if (z) {
+                                    Log.d(
+                                            "[DMS]WirelessDexManager",
+                                            XmlUtils$$ExternalSyntheticOutline0.m(
+                                                    "onParametersChanged (Key : ",
+                                                    key,
+                                                    ", Value : ",
+                                                    value,
+                                                    ")"));
+                                }
+                                if ("wfd_sec_dex_support".equals(key)) {
+                                    if ("yes".equals(value)) {
+                                        WirelessDexManager.this.mReducedLatency = 1;
+                                    } else {
+                                        WirelessDexManager.this.mReducedLatency = 0;
+                                    }
+                                } else if ("wfd_sec_dex_mouse_support".equals(key)) {
+                                    if ("yes".equals(value)) {
+                                        WirelessDexManager.this.mPointerIconSync = 1;
+                                    } else {
+                                        WirelessDexManager.this.mPointerIconSync = 0;
+                                    }
+                                } else if ("notify".equals(key) && "weak_network".equals(value)) {
+                                    WirelessDexManager wirelessDexManager = WirelessDexManager.this;
+                                    StateManager.InternalState state =
+                                            ((StateManager) wirelessDexManager.mStateManager)
+                                                    .getState();
+                                    if (state.isWirelessDexConnected()
+                                            && state.mDesktopModeState.compareTo(4, 0)) {
+                                        ToastManager.showToast(
+                                                Utils.getDisplayContext(
+                                                        wirelessDexManager.mContext,
+                                                        state.mDesktopDisplayId),
+                                                String.format(
+                                                        wirelessDexManager.mContext.getString(
+                                                                R.string.imProtocolCustom),
+                                                        wirelessDexManager.mContext.getString(
+                                                                17042662)),
+                                                1);
+                                    }
+                                } else if ("frequency".equals(key)) {
+                                    try {
+                                        WirelessDexManager.this.mFrequencyValue =
+                                                Integer.parseInt(value);
+                                    } catch (NumberFormatException e) {
+                                        Log.e(
+                                                "[DMS]WirelessDexManager",
+                                                "Wrong number format=" + value,
+                                                e);
+                                    }
+                                } else if ("tizenVer".equals(key)) {
+                                    if (z) {
+                                        Log.d(
+                                                "[DMS]WirelessDexManager",
+                                                "TV Tizen version : " + value);
+                                    }
+                                    WirelessDexManager.this.mTvTizenVersion = value;
+                                }
                             }
-                            WirelessDexManager wirelessDexManager2 = WirelessDexManager.this;
-                            wirelessDexManager2.mHandler.removeCallbacks(wirelessDexManager2.mRunnableDisableLowLatencyMode);
-                            WirelessDexManager wirelessDexManager3 = WirelessDexManager.this;
-                            wirelessDexManager3.mHandler.postDelayed(wirelessDexManager3.mRunnableDisableLowLatencyMode, 5000L);
                         }
                     }
-                }
-            }
-        };
+                };
+        this.mPointerIconChangedListener =
+                new InputManager
+                        .SemOnPointerIconChangedListener() { // from class:
+                                                             // com.android.server.desktopmode.WirelessDexManager.2
+                    public final void onPointerIconChanged(
+                            int i3, Bitmap bitmap, float f, float f2) {
+                        WirelessDexManager wirelessDexManager = WirelessDexManager.this;
+                        wirelessDexManager.getClass();
+                        if (i3 != 1) {
+                            switch (i3) {
+                                case FrameworkStatsLog
+                                        .KEYSTORE2_KEY_OPERATION_WITH_PURPOSE_AND_MODES_INFO /* 10122 */:
+                                    i3 = 1014;
+                                    break;
+                                case FrameworkStatsLog
+                                        .KEYSTORE2_KEY_OPERATION_WITH_GENERAL_INFO /* 10123 */:
+                                    i3 = 1015;
+                                    break;
+                                case FrameworkStatsLog.RKP_ERROR_STATS /* 10124 */:
+                                    i3 = 1017;
+                                    break;
+                                case FrameworkStatsLog.KEYSTORE2_CRASH_STATS /* 10125 */:
+                                    i3 = 1016;
+                                    break;
+                            }
+                            wirelessDexManager.setWifiDisplayParameters(
+                                    "wfd_sec_uibc_mouse_cursor_idx", String.valueOf(i3));
+                        }
+                        i3 = 1000;
+                        wirelessDexManager.setWifiDisplayParameters(
+                                "wfd_sec_uibc_mouse_cursor_idx", String.valueOf(i3));
+                    }
+                };
+        this.mDesktopPointerEventListener =
+                new WindowManagerPolicyConstants
+                        .PointerEventListener() { // from class:
+                                                  // com.android.server.desktopmode.WirelessDexManager.3
+                    public final void onPointerEvent(MotionEvent motionEvent) {
+                        int action = motionEvent.getAction();
+                        if (SystemClock.uptimeMillis()
+                                        - WirelessDexManager.this.mMotionEventStartTime
+                                > 1000) {
+                            if (action == 2 || action == 7 || action == 0 || action == 1) {
+                                if (motionEvent.isFromSource(8194)
+                                        || motionEvent.isFromSource(16386)) {
+                                    WirelessDexManager.this.mMotionEventStartTime =
+                                            SystemClock.uptimeMillis();
+                                    WirelessDexManager wirelessDexManager = WirelessDexManager.this;
+                                    if (!wirelessDexManager.mIsLowLatencyMode) {
+                                        wirelessDexManager.mHandler.post(
+                                                wirelessDexManager.mRunnableEnableLowLatencyMode);
+                                    }
+                                    WirelessDexManager wirelessDexManager2 =
+                                            WirelessDexManager.this;
+                                    wirelessDexManager2.mHandler.removeCallbacks(
+                                            wirelessDexManager2.mRunnableDisableLowLatencyMode);
+                                    WirelessDexManager wirelessDexManager3 =
+                                            WirelessDexManager.this;
+                                    wirelessDexManager3.mHandler.postDelayed(
+                                            wirelessDexManager3.mRunnableDisableLowLatencyMode,
+                                            5000L);
+                                }
+                            }
+                        }
+                    }
+                };
         this.mContext = context;
         this.mResolver = context.getContentResolver();
         this.mDisplayManager = displayManager;
-        displayManager.semRegisterWifiDisplayParameterListener(semWifiDisplayParameterListener, null);
+        displayManager.semRegisterWifiDisplayParameterListener(
+                semWifiDisplayParameterListener, null);
         this.mInputManager = inputManager;
         this.mWindowManager = windowManagerService;
         this.mStateManager = iStateManager;
         ((StateManager) iStateManager).registerListener(new StateListener());
         this.mHandler = new Handler(serviceThread.getLooper());
         this.mUiManager = uiManager;
-        context.registerReceiverAsUser(new Receiver(), UserHandle.ALL, DirEncryptServiceHelper$$ExternalSyntheticOutline0.m("android.intent.action.HDMI_PLUGGED", "com.samsung.intent.action.WIFI_DISPLAY_SOURCE_STATE"), null, null, 2);
+        context.registerReceiverAsUser(
+                new Receiver(),
+                UserHandle.ALL,
+                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                        "android.intent.action.HDMI_PLUGGED",
+                        "com.samsung.intent.action.WIFI_DISPLAY_SOURCE_STATE"),
+                null,
+                null,
+                2);
     }
 
     public final void disconnect() {
         if (DesktopModeFeature.DEBUG) {
             Log.d("[DMS]WirelessDexManager", "disconnect()");
         }
-        SemWifiDisplayStatus semGetWifiDisplayStatus = this.mDisplayManager.semGetWifiDisplayStatus();
+        SemWifiDisplayStatus semGetWifiDisplayStatus =
+                this.mDisplayManager.semGetWifiDisplayStatus();
         if (semGetWifiDisplayStatus == null || semGetWifiDisplayStatus.getActiveDisplay() == null) {
             return;
         }
-        if (semGetWifiDisplayStatus.getConnectedState() == 2 || semGetWifiDisplayStatus.getConnectedState() == 3) {
+        if (semGetWifiDisplayStatus.getConnectedState() == 2
+                || semGetWifiDisplayStatus.getConnectedState() == 3) {
             this.mDisplayManager.disconnectWifiDisplay();
         }
     }
 
     public final void setWifiDisplayParameters(String str, String str2) {
         if (DesktopModeFeature.DEBUG) {
-            Log.d("[DMS]WirelessDexManager", XmlUtils$$ExternalSyntheticOutline0.m("setWifiDisplayParameters(key=", str, ", value=", str2, ")"));
+            Log.d(
+                    "[DMS]WirelessDexManager",
+                    XmlUtils$$ExternalSyntheticOutline0.m(
+                            "setWifiDisplayParameters(key=", str, ", value=", str2, ")"));
         }
-        this.mDisplayManager.semRequestWifiDisplayParameter("setparams", new SemWifiDisplayParameter(str, str2));
+        this.mDisplayManager.semRequestWifiDisplayParameter(
+                "setparams", new SemWifiDisplayParameter(str, str2));
     }
 }

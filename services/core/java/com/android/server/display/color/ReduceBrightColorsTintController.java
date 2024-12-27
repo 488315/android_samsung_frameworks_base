@@ -1,7 +1,9 @@
 package com.android.server.display.color;
 
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
+
 import java.util.Arrays;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -13,7 +15,8 @@ public final class ReduceBrightColorsTintController extends TintController {
 
     @Override // com.android.server.display.color.TintController
     public final int getLevel() {
-        return FrameworkStatsLog.CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_MACRO_RAW_SR_MERGE;
+        return FrameworkStatsLog
+                .CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_MACRO_RAW_SR_MERGE;
     }
 
     @Override // com.android.server.display.color.TintController
@@ -31,13 +34,17 @@ public final class ReduceBrightColorsTintController extends TintController {
 
     public final void setActivated(Boolean bool) {
         this.mIsActivated = bool;
-        Slog.i("ColorDisplayService", (bool == null || !bool.booleanValue()) ? "Turning off reduce bright colors" : "Turning on reduce bright colors");
+        Slog.i(
+                "ColorDisplayService",
+                (bool == null || !bool.booleanValue())
+                        ? "Turning off reduce bright colors"
+                        : "Turning on reduce bright colors");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:11:0x0038, code lost:
-    
-        if (r5 < com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler.MAX_SCALE) goto L10;
-     */
+
+       if (r5 < com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler.MAX_SCALE) goto L10;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -94,6 +101,8 @@ public final class ReduceBrightColorsTintController extends TintController {
             r1[r4] = r5
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.color.ReduceBrightColorsTintController.setMatrix(int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.color.ReduceBrightColorsTintController.setMatrix(int):void");
     }
 }

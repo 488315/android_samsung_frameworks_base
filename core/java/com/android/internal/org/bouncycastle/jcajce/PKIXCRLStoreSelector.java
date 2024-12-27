@@ -5,6 +5,7 @@ import com.android.internal.org.bouncycastle.asn1.ASN1OctetString;
 import com.android.internal.org.bouncycastle.asn1.x509.Extension;
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.Selector;
+
 import java.math.BigInteger;
 import java.security.cert.CRL;
 import java.security.cert.CRLSelector;
@@ -94,7 +95,9 @@ public class PKIXCRLStoreSelector<T extends CRL> implements Selector<T> {
             if (isCompleteCRLEnabled() && dci != null) {
                 return false;
             }
-            if (dci != null && this.maxBaseCRLNumber != null && dci.getPositiveValue().compareTo(this.maxBaseCRLNumber) == 1) {
+            if (dci != null
+                    && this.maxBaseCRLNumber != null
+                    && dci.getPositiveValue().compareTo(this.maxBaseCRLNumber) == 1) {
                 return false;
             }
             if (this.issuingDistributionPointEnabled) {
@@ -141,7 +144,8 @@ public class PKIXCRLStoreSelector<T extends CRL> implements Selector<T> {
         return null;
     }
 
-    public static Collection<? extends CRL> getCRLs(PKIXCRLStoreSelector selector, CertStore certStore) throws CertStoreException {
+    public static Collection<? extends CRL> getCRLs(
+            PKIXCRLStoreSelector selector, CertStore certStore) throws CertStoreException {
         return certStore.getCRLs(new SelectorClone(selector));
     }
 

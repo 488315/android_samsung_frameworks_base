@@ -2,6 +2,7 @@ package com.samsung.android.sdk.scs.base.feature;
 
 import android.content.Context;
 import android.os.Build;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -14,9 +15,57 @@ public abstract class Feature {
     public static Boolean sIsVst;
     public static Boolean sIsWatch;
     public static final Map sinceVersionMap;
-    public static final List SUPPORTED_SIVS_FEATURES = Arrays.asList("FEATURE_SPEECH_RECOGNITION", "FEATURE_SPEECH_LOCALE_RECOGNITION", "FEATURE_SPEAKER_DIARISATION", "FEATURE_AUDIO_TO_TRANSLATION", "FEATURE_AI_GEN_SUMMARY", "FEATURE_AI_GEN_TRANSLATION", "FEATURE_AI_GEN_TONE", "FEATURE_AI_GEN_CORRECTION", "FEATURE_AI_GEN_SUGGESTION", "FEATURE_AI_GEN_SUGGESTION_ONDEVICE", "FEATURE_AI_GEN_SMART_COVER", "FEATURE_AI_GEN_SMART_REPLY", "FEATURE_AI_GEN_EMOJI_AUGMENTATION", "FEATURE_AI_GEN_NOTES_ORGANIZATION", "FEATURE_AI_GEN_SMART_CAPTURE", "FEATURE_AI_GEN_GENERIC", "FEATURE_AI_GEN_USAGE", "FEATURE_NEURAL_TRANSLATION", "FEATURE_LANGUAGE_LIST_IDENTIFICATION", "FEATURE_LANGUAGE_IDENTIFICATION_AND_GET_CANDIDATE", "FEATURE_NEURAL_TRANSLATION_BY_CHUNK", "FEATURE_NEURAL_TRANSLATION_CLEAR_WITH_SOURCE_ID", "FEATURE_NEURAL_TRANSLATION_TAG_SUPPORTED", "FEATURE_SIVS_CLASSIFICATION", "FEATURE_SIVS_CONFIGURATION", "FEATURE_SIVS_EXTRACTION", "FEATURE_SIVS_EXTRACTION_ONDEVICE", "FEATURE_SIVS_WRITING_COMPOSER", "FEATURE_SIVS_WRITING_COMPOSER_ONDEVICE", "FEATURE_SIVS_FORMAT_CONVERSION", "FEATURE_AI_LANGUAGE_PACK_CONFIGURATION_PROVIDER");
-    public static final List SUPPORTED_VISUAL_FEATURES = Arrays.asList("FEATURE_DOWNLOAD", "FEATURE_WALLPAPER", "FEATURE_GEN_EDIT_ON_DEVICE", "FEATURE_PORTRAIT_ON_DEVICE", "FEATURE_SKETCH_TO_IMAGE_ON_DEVICE", "FEATURE_SKETCH_GUIDE_EDITING_ON_DEVICE", "FEATURE_PORTRAIT_RELIGHT_ON_DEVICE");
-    public static final List SUPPORTED_VISUAL_CLOUD_FEATURES = Arrays.asList("FEATURE_PORTRAIT", "FEATURE_SKETCH_TO_IMAGE", "FEATURE_SKETCH_GUIDE_EDITING", "FEATURE_SKETCH_GUIDE_EDITING_CROPPING_RECT", "FEATURE_C2PA", "FEATURE_GEN_STICKER", "FEATURE_IMAGE_CONVERSION");
+    public static final List SUPPORTED_SIVS_FEATURES =
+            Arrays.asList(
+                    "FEATURE_SPEECH_RECOGNITION",
+                    "FEATURE_SPEECH_LOCALE_RECOGNITION",
+                    "FEATURE_SPEAKER_DIARISATION",
+                    "FEATURE_AUDIO_TO_TRANSLATION",
+                    "FEATURE_AI_GEN_SUMMARY",
+                    "FEATURE_AI_GEN_TRANSLATION",
+                    "FEATURE_AI_GEN_TONE",
+                    "FEATURE_AI_GEN_CORRECTION",
+                    "FEATURE_AI_GEN_SUGGESTION",
+                    "FEATURE_AI_GEN_SUGGESTION_ONDEVICE",
+                    "FEATURE_AI_GEN_SMART_COVER",
+                    "FEATURE_AI_GEN_SMART_REPLY",
+                    "FEATURE_AI_GEN_EMOJI_AUGMENTATION",
+                    "FEATURE_AI_GEN_NOTES_ORGANIZATION",
+                    "FEATURE_AI_GEN_SMART_CAPTURE",
+                    "FEATURE_AI_GEN_GENERIC",
+                    "FEATURE_AI_GEN_USAGE",
+                    "FEATURE_NEURAL_TRANSLATION",
+                    "FEATURE_LANGUAGE_LIST_IDENTIFICATION",
+                    "FEATURE_LANGUAGE_IDENTIFICATION_AND_GET_CANDIDATE",
+                    "FEATURE_NEURAL_TRANSLATION_BY_CHUNK",
+                    "FEATURE_NEURAL_TRANSLATION_CLEAR_WITH_SOURCE_ID",
+                    "FEATURE_NEURAL_TRANSLATION_TAG_SUPPORTED",
+                    "FEATURE_SIVS_CLASSIFICATION",
+                    "FEATURE_SIVS_CONFIGURATION",
+                    "FEATURE_SIVS_EXTRACTION",
+                    "FEATURE_SIVS_EXTRACTION_ONDEVICE",
+                    "FEATURE_SIVS_WRITING_COMPOSER",
+                    "FEATURE_SIVS_WRITING_COMPOSER_ONDEVICE",
+                    "FEATURE_SIVS_FORMAT_CONVERSION",
+                    "FEATURE_AI_LANGUAGE_PACK_CONFIGURATION_PROVIDER");
+    public static final List SUPPORTED_VISUAL_FEATURES =
+            Arrays.asList(
+                    "FEATURE_DOWNLOAD",
+                    "FEATURE_WALLPAPER",
+                    "FEATURE_GEN_EDIT_ON_DEVICE",
+                    "FEATURE_PORTRAIT_ON_DEVICE",
+                    "FEATURE_SKETCH_TO_IMAGE_ON_DEVICE",
+                    "FEATURE_SKETCH_GUIDE_EDITING_ON_DEVICE",
+                    "FEATURE_PORTRAIT_RELIGHT_ON_DEVICE");
+    public static final List SUPPORTED_VISUAL_CLOUD_FEATURES =
+            Arrays.asList(
+                    "FEATURE_PORTRAIT",
+                    "FEATURE_SKETCH_TO_IMAGE",
+                    "FEATURE_SKETCH_GUIDE_EDITING",
+                    "FEATURE_SKETCH_GUIDE_EDITING_CROPPING_RECT",
+                    "FEATURE_C2PA",
+                    "FEATURE_GEN_STICKER",
+                    "FEATURE_IMAGE_CONVERSION");
 
     static {
         HashMap hashMap = new HashMap();
@@ -109,7 +158,9 @@ public abstract class Feature {
             Method dump skipped, instructions count: 553
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.sdk.scs.base.feature.Feature.checkFeature(android.content.Context):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.sdk.scs.base.feature.Feature.checkFeature(android.content.Context):int");
     }
 
     public static boolean isSIVSAvailableOSVersion(Context context) {
@@ -129,7 +180,10 @@ public abstract class Feature {
             return bool.booleanValue();
         }
         try {
-            Boolean valueOf = Boolean.valueOf(context.getPackageManager().hasSystemFeature("android.software.xr.immersive"));
+            Boolean valueOf =
+                    Boolean.valueOf(
+                            context.getPackageManager()
+                                    .hasSystemFeature("android.software.xr.immersive"));
             sIsVst = valueOf;
             return valueOf.booleanValue();
         } catch (Error | Exception unused) {
@@ -143,7 +197,10 @@ public abstract class Feature {
             return bool.booleanValue();
         }
         try {
-            Boolean valueOf = Boolean.valueOf(context.getPackageManager().hasSystemFeature("android.hardware.type.watch"));
+            Boolean valueOf =
+                    Boolean.valueOf(
+                            context.getPackageManager()
+                                    .hasSystemFeature("android.hardware.type.watch"));
             sIsWatch = valueOf;
             return valueOf.booleanValue();
         } catch (Error | Exception unused) {

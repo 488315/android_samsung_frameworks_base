@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class PhysicalCaptureResultInfo implements Parcelable {
-    public static final Parcelable.Creator<PhysicalCaptureResultInfo> CREATOR = new Parcelable.Creator<PhysicalCaptureResultInfo>() { // from class: android.hardware.camera2.impl.PhysicalCaptureResultInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PhysicalCaptureResultInfo createFromParcel(Parcel in) {
-            return new PhysicalCaptureResultInfo(in);
-        }
+    public static final Parcelable.Creator<PhysicalCaptureResultInfo> CREATOR =
+            new Parcelable.Creator<PhysicalCaptureResultInfo>() { // from class:
+                // android.hardware.camera2.impl.PhysicalCaptureResultInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PhysicalCaptureResultInfo createFromParcel(Parcel in) {
+                    return new PhysicalCaptureResultInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PhysicalCaptureResultInfo[] newArray(int size) {
-            return new PhysicalCaptureResultInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PhysicalCaptureResultInfo[] newArray(int size) {
+                    return new PhysicalCaptureResultInfo[size];
+                }
+            };
     private String cameraId;
     private CameraMetadataNative cameraMetadata;
 

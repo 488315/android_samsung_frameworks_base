@@ -1,6 +1,7 @@
 package com.samsung.android.server.dynamicfeature.dlog;
 
 import com.samsung.android.server.dynamicfeature.InfoBoard;
+
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -14,7 +15,9 @@ public abstract class Dlog {
     public static void event(String... strArr) {
         StringBuilder sb = new StringBuilder();
         String str = InfoBoard.sExecutableBinaryType;
-        sb.append(ZonedDateTime.now(ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("yyyy-mm-dd HH:mm:ss")));
+        sb.append(
+                ZonedDateTime.now(ZoneId.systemDefault())
+                        .format(DateTimeFormatter.ofPattern("yyyy-mm-dd HH:mm:ss")));
         sb.append(">\n ");
         StringBuilder sb2 = new StringBuilder(sb.toString());
         for (String str2 : strArr) {

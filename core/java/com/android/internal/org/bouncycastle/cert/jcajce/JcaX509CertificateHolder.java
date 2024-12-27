@@ -2,6 +2,7 @@ package com.android.internal.org.bouncycastle.cert.jcajce;
 
 import com.android.internal.org.bouncycastle.asn1.x509.Certificate;
 import com.android.internal.org.bouncycastle.cert.X509CertificateHolder;
+
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.X509Certificate;
 

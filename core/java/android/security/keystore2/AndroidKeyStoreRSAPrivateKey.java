@@ -3,6 +3,7 @@ package android.security.keystore2;
 import android.security.KeyStoreSecurityLevel;
 import android.system.keystore2.Authorization;
 import android.system.keystore2.KeyDescriptor;
+
 import java.math.BigInteger;
 import java.security.interfaces.RSAKey;
 
@@ -10,7 +11,12 @@ import java.security.interfaces.RSAKey;
 public class AndroidKeyStoreRSAPrivateKey extends AndroidKeyStorePrivateKey implements RSAKey {
     private final BigInteger mModulus;
 
-    public AndroidKeyStoreRSAPrivateKey(KeyDescriptor descriptor, long keyId, Authorization[] authorizations, KeyStoreSecurityLevel securityLevel, BigInteger modulus) {
+    public AndroidKeyStoreRSAPrivateKey(
+            KeyDescriptor descriptor,
+            long keyId,
+            Authorization[] authorizations,
+            KeyStoreSecurityLevel securityLevel,
+            BigInteger modulus) {
         super(descriptor, keyId, authorizations, "RSA", securityLevel);
         this.mModulus = modulus;
     }

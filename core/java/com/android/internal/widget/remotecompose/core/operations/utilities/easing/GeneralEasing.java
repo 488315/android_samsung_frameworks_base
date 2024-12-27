@@ -26,7 +26,12 @@ public class GeneralEasing extends Easing {
                 this.mEasingCurve = new CubicEasing(type);
                 break;
             case 11:
-                this.mEasingCurve = new CubicEasing(this.mEasingData[1], this.mEasingData[2], this.mEasingData[3], this.mEasingData[5]);
+                this.mEasingCurve =
+                        new CubicEasing(
+                                this.mEasingData[1],
+                                this.mEasingData[2],
+                                this.mEasingData[3],
+                                this.mEasingData[5]);
                 break;
             case 13:
                 this.mEasingCurve = new BounceCurve(type);

@@ -1,8 +1,10 @@
 package com.samsung.android.wallpaper.colortheme;
 
 import com.android.internal.graphics.ColorUtils;
+
 import com.samsung.android.wallpaper.colortheme.monet.ColorScheme;
 import com.samsung.android.wallpaper.colortheme.monet.Style;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +23,17 @@ public class ColorPaletteCreator {
     private static final float GRAY_SAT_PRESET2 = 0.05f;
     private static final int MAX_RANGE = 17;
     private static final float NEUTRAL_SAT_MAX = 0.15f;
-    private static final int[] hueRange = {8, 22, 40, 52, 60, 81, 139, 169, 200, 219, 256, 279, 318, 337, 348, 356, 361};
-    private static final int[] range = {-4, 8, 22, 40, 52, 60, 81, 139, 169, 200, 219, 256, 279, 318, 337, 348, 356};
+    private static final int[] hueRange = {
+        8, 22, 40, 52, 60, 81, 139, 169, 200, 219, 256, 279, 318, 337, 348, 356, 361
+    };
+    private static final int[] range = {
+        -4, 8, 22, 40, 52, 60, 81, 139, 169, 200, 219, 256, 279, 318, 337, 348, 356
+    };
     protected int[] mSeedColors;
     protected final List<int[][]> mColorPalettes = new ArrayList();
-    protected final Style[] mWallpaperColorStyles = {Style.TONAL_SPOT, Style.SPRITZ, Style.VIBRANT, Style.EXPRESSIVE};
+    protected final Style[] mWallpaperColorStyles = {
+        Style.TONAL_SPOT, Style.SPRITZ, Style.VIBRANT, Style.EXPRESSIVE
+    };
 
     public List<int[][]> getColorPalettes() {
         return this.mColorPalettes;
@@ -135,7 +143,8 @@ public class ColorPaletteCreator {
         float[] accent3 = new float[3];
         float[] neutral1 = new float[3];
         float[] neutral2 = new float[3];
-        float[][] colorHsl = (float[][]) Array.newInstance((Class<?>) Float.TYPE, this.mSeedColors.length, 3);
+        float[][] colorHsl =
+                (float[][]) Array.newInstance((Class<?>) Float.TYPE, this.mSeedColors.length, 3);
         for (int i = 0; i < this.mSeedColors.length; i++) {
             ColorUtils.colorToHSL(this.mSeedColors[i], colorHsl[i]);
         }
@@ -150,7 +159,8 @@ public class ColorPaletteCreator {
             neutral1[1] = 0.0f;
             neutral2[0] = 0.0f;
             neutral2[1] = 0.0f;
-            this.mColorPalettes.add(new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
+            this.mColorPalettes.add(
+                    new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
             accent1[0] = 0.0f;
             accent1[1] = 0.05f;
             accent2[0] = 0.0f;
@@ -161,7 +171,8 @@ public class ColorPaletteCreator {
             neutral1[1] = 0.05f;
             neutral2[0] = 0.0f;
             neutral2[1] = 0.05f;
-            this.mColorPalettes.add(new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
+            this.mColorPalettes.add(
+                    new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
             accent1[0] = 240.0f;
             accent1[1] = 0.05f;
             accent2[0] = 240.0f;
@@ -172,7 +183,8 @@ public class ColorPaletteCreator {
             neutral1[1] = 0.05f;
             neutral2[0] = 240.0f;
             neutral2[1] = 0.05f;
-            this.mColorPalettes.add(new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
+            this.mColorPalettes.add(
+                    new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
             return;
         }
         if (this.mSeedColors.length == 1) {
@@ -186,19 +198,22 @@ public class ColorPaletteCreator {
             accent3[1] = Math.min(colorHsl[0][1] + 0.1f, 0.6f);
             neutral1[1] = Math.min(colorHsl[0][1], NEUTRAL_SAT_MAX);
             neutral2[1] = Math.min(colorHsl[0][1], NEUTRAL_SAT_MAX);
-            this.mColorPalettes.add(new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
+            this.mColorPalettes.add(
+                    new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
             accent1[0] = hueMove(colorHsl[0][0], 1);
             accent2[0] = hueMove(colorHsl[0][0], 2);
             accent3[0] = comp(hueMove(colorHsl[0][0], 1));
             neutral1[0] = hueMove(colorHsl[0][0], 1);
             neutral2[0] = comp(hueMove(colorHsl[0][0], 1));
-            this.mColorPalettes.add(new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
+            this.mColorPalettes.add(
+                    new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
             accent1[0] = colorHsl[0][0];
             accent2[0] = comp(colorHsl[0][0]);
             accent3[0] = hueMove(colorHsl[0][0], 1);
             neutral1[0] = colorHsl[0][0];
             neutral2[0] = comp(colorHsl[0][0]);
-            this.mColorPalettes.add(new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
+            this.mColorPalettes.add(
+                    new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
             return;
         }
         if (this.mSeedColors.length == 2) {
@@ -212,7 +227,8 @@ public class ColorPaletteCreator {
             accent3[1] = Math.min(colorHsl[1][1] + 0.1f, 0.6f);
             neutral1[1] = Math.min(colorHsl[0][1], NEUTRAL_SAT_MAX);
             neutral2[1] = Math.min(colorHsl[1][1], NEUTRAL_SAT_MAX);
-            this.mColorPalettes.add(new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
+            this.mColorPalettes.add(
+                    new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
             accent1[0] = colorHsl[1][0];
             accent2[0] = hueMove(colorHsl[1][0], 1);
             accent3[0] = colorHsl[0][0];
@@ -223,7 +239,8 @@ public class ColorPaletteCreator {
             accent3[1] = Math.min(colorHsl[0][1] + 0.1f, 0.6f);
             neutral1[1] = Math.min(colorHsl[1][1], NEUTRAL_SAT_MAX);
             neutral2[1] = Math.min(colorHsl[0][1], NEUTRAL_SAT_MAX);
-            this.mColorPalettes.add(new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
+            this.mColorPalettes.add(
+                    new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
             accent1[0] = hueMove(colorHsl[0][0], 1);
             accent2[0] = hueMove(colorHsl[0][0], 2);
             accent3[0] = colorHsl[1][0];
@@ -234,7 +251,8 @@ public class ColorPaletteCreator {
             accent3[1] = Math.min(colorHsl[1][1] + 0.1f, 0.6f);
             neutral1[1] = Math.min(colorHsl[0][1], NEUTRAL_SAT_MAX);
             neutral2[1] = Math.min(colorHsl[1][1], NEUTRAL_SAT_MAX);
-            this.mColorPalettes.add(new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
+            this.mColorPalettes.add(
+                    new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
             accent1[0] = colorHsl[0][0];
             accent2[0] = colorHsl[1][0];
             accent3[0] = hueMove(colorHsl[1][0], 1);
@@ -245,7 +263,8 @@ public class ColorPaletteCreator {
             accent3[1] = Math.min(colorHsl[1][1] + 0.1f, 0.6f);
             neutral1[1] = Math.min(colorHsl[0][1], NEUTRAL_SAT_MAX);
             neutral2[1] = Math.min(colorHsl[1][1], NEUTRAL_SAT_MAX);
-            this.mColorPalettes.add(new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
+            this.mColorPalettes.add(
+                    new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
             return;
         }
         accent1[0] = colorHsl[0][0];
@@ -258,7 +277,8 @@ public class ColorPaletteCreator {
         accent3[1] = Math.min(colorHsl[1][1] + 0.1f, 0.6f);
         neutral1[1] = Math.min(colorHsl[0][1], NEUTRAL_SAT_MAX);
         neutral2[1] = Math.min(colorHsl[1][1], NEUTRAL_SAT_MAX);
-        this.mColorPalettes.add(new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
+        this.mColorPalettes.add(
+                new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
         accent1[0] = colorHsl[1][0];
         accent2[0] = hueMove(colorHsl[1][0], 1);
         accent3[0] = colorHsl[0][0];
@@ -269,7 +289,8 @@ public class ColorPaletteCreator {
         accent3[1] = Math.min(colorHsl[0][1] + 0.1f, 0.6f);
         neutral1[1] = Math.min(colorHsl[1][1], NEUTRAL_SAT_MAX);
         neutral2[1] = Math.min(colorHsl[0][1], NEUTRAL_SAT_MAX);
-        this.mColorPalettes.add(new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
+        this.mColorPalettes.add(
+                new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
         accent1[0] = colorHsl[2][0];
         accent2[0] = hueMove(colorHsl[2][0], 1);
         accent3[0] = colorHsl[0][0];
@@ -280,7 +301,8 @@ public class ColorPaletteCreator {
         accent3[1] = Math.min(colorHsl[0][1] + 0.1f, 0.6f);
         neutral1[1] = Math.min(colorHsl[2][1], NEUTRAL_SAT_MAX);
         neutral2[1] = Math.min(colorHsl[0][1], NEUTRAL_SAT_MAX);
-        this.mColorPalettes.add(new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
+        this.mColorPalettes.add(
+                new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
         accent1[0] = colorHsl[0][0];
         accent2[0] = colorHsl[1][0];
         accent3[0] = colorHsl[2][0];
@@ -291,7 +313,8 @@ public class ColorPaletteCreator {
         accent3[1] = Math.min(colorHsl[2][1] + 0.1f, 0.6f);
         neutral1[1] = Math.min(colorHsl[0][1], NEUTRAL_SAT_MAX);
         neutral2[1] = Math.min(colorHsl[1][1], NEUTRAL_SAT_MAX);
-        this.mColorPalettes.add(new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
+        this.mColorPalettes.add(
+                new ColorPalette(accent1, accent2, accent3, neutral1, neutral2).getTable());
     }
 
     public static int[] converAccent1ToSeedColors(int[] seeds) {
@@ -353,13 +376,17 @@ public class ColorPaletteCreator {
             accent1[1] = Math.min(colorHsl[0][1] + ACCENT1_SAT_DELTA, 0.8f);
             covertedSeeds.add(Integer.valueOf(ColorUtils.HSLToColor(accent1)));
         }
-        return covertedSeeds.stream().mapToInt(new ToIntFunction() { // from class: com.samsung.android.wallpaper.colortheme.ColorPaletteCreator$$ExternalSyntheticLambda0
-            @Override // java.util.function.ToIntFunction
-            public final int applyAsInt(Object obj) {
-                int intValue;
-                intValue = ((Integer) obj).intValue();
-                return intValue;
-            }
-        }).toArray();
+        return covertedSeeds.stream()
+                .mapToInt(
+                        new ToIntFunction() { // from class:
+                                              // com.samsung.android.wallpaper.colortheme.ColorPaletteCreator$$ExternalSyntheticLambda0
+                            @Override // java.util.function.ToIntFunction
+                            public final int applyAsInt(Object obj) {
+                                int intValue;
+                                intValue = ((Integer) obj).intValue();
+                                return intValue;
+                            }
+                        })
+                .toArray();
     }
 }

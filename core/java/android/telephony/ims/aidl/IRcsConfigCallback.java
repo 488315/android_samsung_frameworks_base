@@ -22,24 +22,20 @@ public interface IRcsConfigCallback extends IInterface {
 
     public static class Default implements IRcsConfigCallback {
         @Override // android.telephony.ims.aidl.IRcsConfigCallback
-        public void onConfigurationChanged(byte[] config) throws RemoteException {
-        }
+        public void onConfigurationChanged(byte[] config) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IRcsConfigCallback
-        public void onAutoConfigurationErrorReceived(int errorCode, String errorString) throws RemoteException {
-        }
+        public void onAutoConfigurationErrorReceived(int errorCode, String errorString)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IRcsConfigCallback
-        public void onConfigurationReset() throws RemoteException {
-        }
+        public void onConfigurationReset() throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IRcsConfigCallback
-        public void onRemoved() throws RemoteException {
-        }
+        public void onRemoved() throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IRcsConfigCallback
-        public void onPreProvisioningReceived(byte[] config) throws RemoteException {
-        }
+        public void onPreProvisioningReceived(byte[] config) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -47,7 +43,7 @@ public interface IRcsConfigCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRcsConfigCallback {
+    public abstract static class Stub extends Binder implements IRcsConfigCallback {
         static final int TRANSACTION_onAutoConfigurationErrorReceived = 2;
         static final int TRANSACTION_onConfigurationChanged = 1;
         static final int TRANSACTION_onConfigurationReset = 3;
@@ -97,7 +93,8 @@ public interface IRcsConfigCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRcsConfigCallback.DESCRIPTOR);
             }
@@ -162,7 +159,8 @@ public interface IRcsConfigCallback extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IRcsConfigCallback
-            public void onAutoConfigurationErrorReceived(int errorCode, String errorString) throws RemoteException {
+            public void onAutoConfigurationErrorReceived(int errorCode, String errorString)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRcsConfigCallback.DESCRIPTOR);

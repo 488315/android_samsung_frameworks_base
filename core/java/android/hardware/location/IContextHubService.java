@@ -3,27 +3,30 @@ package android.hardware.location;
 import android.Manifest;
 import android.app.ActivityThread;
 import android.app.PendingIntent;
-import android.hardware.location.IContextHubCallback;
-import android.hardware.location.IContextHubClient;
-import android.hardware.location.IContextHubClientCallback;
-import android.hardware.location.IContextHubTransactionCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public interface IContextHubService extends IInterface {
-    IContextHubClient createClient(int i, IContextHubClientCallback iContextHubClientCallback, String str, String str2) throws RemoteException;
+    IContextHubClient createClient(
+            int i, IContextHubClientCallback iContextHubClientCallback, String str, String str2)
+            throws RemoteException;
 
-    IContextHubClient createPendingIntentClient(int i, PendingIntent pendingIntent, long j, String str) throws RemoteException;
+    IContextHubClient createPendingIntentClient(
+            int i, PendingIntent pendingIntent, long j, String str) throws RemoteException;
 
-    void disableNanoApp(int i, IContextHubTransactionCallback iContextHubTransactionCallback, long j) throws RemoteException;
+    void disableNanoApp(
+            int i, IContextHubTransactionCallback iContextHubTransactionCallback, long j)
+            throws RemoteException;
 
-    void enableNanoApp(int i, IContextHubTransactionCallback iContextHubTransactionCallback, long j) throws RemoteException;
+    void enableNanoApp(int i, IContextHubTransactionCallback iContextHubTransactionCallback, long j)
+            throws RemoteException;
 
     int[] findNanoAppOnHub(int i, NanoAppFilter nanoAppFilter) throws RemoteException;
 
@@ -39,9 +42,14 @@ public interface IContextHubService extends IInterface {
 
     int loadNanoApp(int i, NanoApp nanoApp) throws RemoteException;
 
-    void loadNanoAppOnHub(int i, IContextHubTransactionCallback iContextHubTransactionCallback, NanoAppBinary nanoAppBinary) throws RemoteException;
+    void loadNanoAppOnHub(
+            int i,
+            IContextHubTransactionCallback iContextHubTransactionCallback,
+            NanoAppBinary nanoAppBinary)
+            throws RemoteException;
 
-    void queryNanoApps(int i, IContextHubTransactionCallback iContextHubTransactionCallback) throws RemoteException;
+    void queryNanoApps(int i, IContextHubTransactionCallback iContextHubTransactionCallback)
+            throws RemoteException;
 
     int registerCallback(IContextHubCallback iContextHubCallback) throws RemoteException;
 
@@ -51,7 +59,9 @@ public interface IContextHubService extends IInterface {
 
     int unloadNanoApp(int i) throws RemoteException;
 
-    void unloadNanoAppFromHub(int i, IContextHubTransactionCallback iContextHubTransactionCallback, long j) throws RemoteException;
+    void unloadNanoAppFromHub(
+            int i, IContextHubTransactionCallback iContextHubTransactionCallback, long j)
+            throws RemoteException;
 
     public static class Default implements IContextHubService {
         @Override // android.hardware.location.IContextHubService
@@ -80,27 +90,40 @@ public interface IContextHubService extends IInterface {
         }
 
         @Override // android.hardware.location.IContextHubService
-        public NanoAppInstanceInfo getNanoAppInstanceInfo(int nanoAppHandle) throws RemoteException {
+        public NanoAppInstanceInfo getNanoAppInstanceInfo(int nanoAppHandle)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.location.IContextHubService
-        public int[] findNanoAppOnHub(int contextHubHandle, NanoAppFilter filter) throws RemoteException {
+        public int[] findNanoAppOnHub(int contextHubHandle, NanoAppFilter filter)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.location.IContextHubService
-        public int sendMessage(int contextHubHandle, int nanoAppHandle, ContextHubMessage msg) throws RemoteException {
+        public int sendMessage(int contextHubHandle, int nanoAppHandle, ContextHubMessage msg)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.hardware.location.IContextHubService
-        public IContextHubClient createClient(int contextHubId, IContextHubClientCallback client, String attributionTag, String packageName) throws RemoteException {
+        public IContextHubClient createClient(
+                int contextHubId,
+                IContextHubClientCallback client,
+                String attributionTag,
+                String packageName)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.location.IContextHubService
-        public IContextHubClient createPendingIntentClient(int contextHubId, PendingIntent pendingIntent, long nanoAppId, String attributionTag) throws RemoteException {
+        public IContextHubClient createPendingIntentClient(
+                int contextHubId,
+                PendingIntent pendingIntent,
+                long nanoAppId,
+                String attributionTag)
+                throws RemoteException {
             return null;
         }
 
@@ -110,24 +133,37 @@ public interface IContextHubService extends IInterface {
         }
 
         @Override // android.hardware.location.IContextHubService
-        public void loadNanoAppOnHub(int contextHubId, IContextHubTransactionCallback transactionCallback, NanoAppBinary nanoAppBinary) throws RemoteException {
-        }
+        public void loadNanoAppOnHub(
+                int contextHubId,
+                IContextHubTransactionCallback transactionCallback,
+                NanoAppBinary nanoAppBinary)
+                throws RemoteException {}
 
         @Override // android.hardware.location.IContextHubService
-        public void unloadNanoAppFromHub(int contextHubId, IContextHubTransactionCallback transactionCallback, long nanoAppId) throws RemoteException {
-        }
+        public void unloadNanoAppFromHub(
+                int contextHubId,
+                IContextHubTransactionCallback transactionCallback,
+                long nanoAppId)
+                throws RemoteException {}
 
         @Override // android.hardware.location.IContextHubService
-        public void enableNanoApp(int contextHubId, IContextHubTransactionCallback transactionCallback, long nanoAppId) throws RemoteException {
-        }
+        public void enableNanoApp(
+                int contextHubId,
+                IContextHubTransactionCallback transactionCallback,
+                long nanoAppId)
+                throws RemoteException {}
 
         @Override // android.hardware.location.IContextHubService
-        public void disableNanoApp(int contextHubId, IContextHubTransactionCallback transactionCallback, long nanoAppId) throws RemoteException {
-        }
+        public void disableNanoApp(
+                int contextHubId,
+                IContextHubTransactionCallback transactionCallback,
+                long nanoAppId)
+                throws RemoteException {}
 
         @Override // android.hardware.location.IContextHubService
-        public void queryNanoApps(int contextHubId, IContextHubTransactionCallback transactionCallback) throws RemoteException {
-        }
+        public void queryNanoApps(
+                int contextHubId, IContextHubTransactionCallback transactionCallback)
+                throws RemoteException {}
 
         @Override // android.hardware.location.IContextHubService
         public long[] getPreloadedNanoAppIds(ContextHubInfo hubInfo) throws RemoteException {
@@ -145,7 +181,7 @@ public interface IContextHubService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IContextHubService {
+    public abstract static class Stub extends Binder implements IContextHubService {
         public static final String DESCRIPTOR = "android.hardware.location.IContextHubService";
         static final int TRANSACTION_createClient = 9;
         static final int TRANSACTION_createPendingIntentClient = 10;
@@ -177,7 +213,9 @@ public interface IContextHubService extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IContextHubService asInterface(IBinder obj) {
@@ -245,7 +283,8 @@ public interface IContextHubService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -255,7 +294,8 @@ public interface IContextHubService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IContextHubCallback _arg0 = IContextHubCallback.Stub.asInterface(data.readStrongBinder());
+                    IContextHubCallback _arg0 =
+                            IContextHubCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result = registerCallback(_arg0);
                     reply.writeNoException();
@@ -297,7 +337,8 @@ public interface IContextHubService extends IInterface {
                     return true;
                 case 7:
                     int _arg06 = data.readInt();
-                    NanoAppFilter _arg12 = (NanoAppFilter) data.readTypedObject(NanoAppFilter.CREATOR);
+                    NanoAppFilter _arg12 =
+                            (NanoAppFilter) data.readTypedObject(NanoAppFilter.CREATOR);
                     data.enforceNoDataAvail();
                     int[] _result7 = findNanoAppOnHub(_arg06, _arg12);
                     reply.writeNoException();
@@ -306,7 +347,8 @@ public interface IContextHubService extends IInterface {
                 case 8:
                     int _arg07 = data.readInt();
                     int _arg13 = data.readInt();
-                    ContextHubMessage _arg2 = (ContextHubMessage) data.readTypedObject(ContextHubMessage.CREATOR);
+                    ContextHubMessage _arg2 =
+                            (ContextHubMessage) data.readTypedObject(ContextHubMessage.CREATOR);
                     data.enforceNoDataAvail();
                     int _result8 = sendMessage(_arg07, _arg13, _arg2);
                     reply.writeNoException();
@@ -314,7 +356,8 @@ public interface IContextHubService extends IInterface {
                     return true;
                 case 9:
                     int _arg08 = data.readInt();
-                    IContextHubClientCallback _arg14 = IContextHubClientCallback.Stub.asInterface(data.readStrongBinder());
+                    IContextHubClientCallback _arg14 =
+                            IContextHubClientCallback.Stub.asInterface(data.readStrongBinder());
                     String _arg22 = data.readString();
                     String _arg3 = data.readString();
                     data.enforceNoDataAvail();
@@ -324,11 +367,13 @@ public interface IContextHubService extends IInterface {
                     return true;
                 case 10:
                     int _arg09 = data.readInt();
-                    PendingIntent _arg15 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg15 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     long _arg23 = data.readLong();
                     String _arg32 = data.readString();
                     data.enforceNoDataAvail();
-                    IContextHubClient _result10 = createPendingIntentClient(_arg09, _arg15, _arg23, _arg32);
+                    IContextHubClient _result10 =
+                            createPendingIntentClient(_arg09, _arg15, _arg23, _arg32);
                     reply.writeNoException();
                     reply.writeStrongInterface(_result10);
                     return true;
@@ -339,15 +384,20 @@ public interface IContextHubService extends IInterface {
                     return true;
                 case 12:
                     int _arg010 = data.readInt();
-                    IContextHubTransactionCallback _arg16 = IContextHubTransactionCallback.Stub.asInterface(data.readStrongBinder());
-                    NanoAppBinary _arg24 = (NanoAppBinary) data.readTypedObject(NanoAppBinary.CREATOR);
+                    IContextHubTransactionCallback _arg16 =
+                            IContextHubTransactionCallback.Stub.asInterface(
+                                    data.readStrongBinder());
+                    NanoAppBinary _arg24 =
+                            (NanoAppBinary) data.readTypedObject(NanoAppBinary.CREATOR);
                     data.enforceNoDataAvail();
                     loadNanoAppOnHub(_arg010, _arg16, _arg24);
                     reply.writeNoException();
                     return true;
                 case 13:
                     int _arg011 = data.readInt();
-                    IContextHubTransactionCallback _arg17 = IContextHubTransactionCallback.Stub.asInterface(data.readStrongBinder());
+                    IContextHubTransactionCallback _arg17 =
+                            IContextHubTransactionCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     long _arg25 = data.readLong();
                     data.enforceNoDataAvail();
                     unloadNanoAppFromHub(_arg011, _arg17, _arg25);
@@ -355,7 +405,9 @@ public interface IContextHubService extends IInterface {
                     return true;
                 case 14:
                     int _arg012 = data.readInt();
-                    IContextHubTransactionCallback _arg18 = IContextHubTransactionCallback.Stub.asInterface(data.readStrongBinder());
+                    IContextHubTransactionCallback _arg18 =
+                            IContextHubTransactionCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     long _arg26 = data.readLong();
                     data.enforceNoDataAvail();
                     enableNanoApp(_arg012, _arg18, _arg26);
@@ -363,7 +415,9 @@ public interface IContextHubService extends IInterface {
                     return true;
                 case 15:
                     int _arg013 = data.readInt();
-                    IContextHubTransactionCallback _arg19 = IContextHubTransactionCallback.Stub.asInterface(data.readStrongBinder());
+                    IContextHubTransactionCallback _arg19 =
+                            IContextHubTransactionCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     long _arg27 = data.readLong();
                     data.enforceNoDataAvail();
                     disableNanoApp(_arg013, _arg19, _arg27);
@@ -371,13 +425,16 @@ public interface IContextHubService extends IInterface {
                     return true;
                 case 16:
                     int _arg014 = data.readInt();
-                    IContextHubTransactionCallback _arg110 = IContextHubTransactionCallback.Stub.asInterface(data.readStrongBinder());
+                    IContextHubTransactionCallback _arg110 =
+                            IContextHubTransactionCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     queryNanoApps(_arg014, _arg110);
                     reply.writeNoException();
                     return true;
                 case 17:
-                    ContextHubInfo _arg015 = (ContextHubInfo) data.readTypedObject(ContextHubInfo.CREATOR);
+                    ContextHubInfo _arg015 =
+                            (ContextHubInfo) data.readTypedObject(ContextHubInfo.CREATOR);
                     data.enforceNoDataAvail();
                     long[] _result12 = getPreloadedNanoAppIds(_arg015);
                     reply.writeNoException();
@@ -453,7 +510,8 @@ public interface IContextHubService extends IInterface {
                     _data.writeInt(contextHubHandle);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    ContextHubInfo _result = (ContextHubInfo) _reply.readTypedObject(ContextHubInfo.CREATOR);
+                    ContextHubInfo _result =
+                            (ContextHubInfo) _reply.readTypedObject(ContextHubInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -497,7 +555,8 @@ public interface IContextHubService extends IInterface {
             }
 
             @Override // android.hardware.location.IContextHubService
-            public NanoAppInstanceInfo getNanoAppInstanceInfo(int nanoAppHandle) throws RemoteException {
+            public NanoAppInstanceInfo getNanoAppInstanceInfo(int nanoAppHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -505,7 +564,9 @@ public interface IContextHubService extends IInterface {
                     _data.writeInt(nanoAppHandle);
                     this.mRemote.transact(6, _data, _reply, 0);
                     _reply.readException();
-                    NanoAppInstanceInfo _result = (NanoAppInstanceInfo) _reply.readTypedObject(NanoAppInstanceInfo.CREATOR);
+                    NanoAppInstanceInfo _result =
+                            (NanoAppInstanceInfo)
+                                    _reply.readTypedObject(NanoAppInstanceInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -514,7 +575,8 @@ public interface IContextHubService extends IInterface {
             }
 
             @Override // android.hardware.location.IContextHubService
-            public int[] findNanoAppOnHub(int contextHubHandle, NanoAppFilter filter) throws RemoteException {
+            public int[] findNanoAppOnHub(int contextHubHandle, NanoAppFilter filter)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -532,7 +594,8 @@ public interface IContextHubService extends IInterface {
             }
 
             @Override // android.hardware.location.IContextHubService
-            public int sendMessage(int contextHubHandle, int nanoAppHandle, ContextHubMessage msg) throws RemoteException {
+            public int sendMessage(int contextHubHandle, int nanoAppHandle, ContextHubMessage msg)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -551,7 +614,12 @@ public interface IContextHubService extends IInterface {
             }
 
             @Override // android.hardware.location.IContextHubService
-            public IContextHubClient createClient(int contextHubId, IContextHubClientCallback client, String attributionTag, String packageName) throws RemoteException {
+            public IContextHubClient createClient(
+                    int contextHubId,
+                    IContextHubClientCallback client,
+                    String attributionTag,
+                    String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -562,7 +630,8 @@ public interface IContextHubService extends IInterface {
                     _data.writeString(packageName);
                     this.mRemote.transact(9, _data, _reply, 0);
                     _reply.readException();
-                    IContextHubClient _result = IContextHubClient.Stub.asInterface(_reply.readStrongBinder());
+                    IContextHubClient _result =
+                            IContextHubClient.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -571,7 +640,12 @@ public interface IContextHubService extends IInterface {
             }
 
             @Override // android.hardware.location.IContextHubService
-            public IContextHubClient createPendingIntentClient(int contextHubId, PendingIntent pendingIntent, long nanoAppId, String attributionTag) throws RemoteException {
+            public IContextHubClient createPendingIntentClient(
+                    int contextHubId,
+                    PendingIntent pendingIntent,
+                    long nanoAppId,
+                    String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -582,7 +656,8 @@ public interface IContextHubService extends IInterface {
                     _data.writeString(attributionTag);
                     this.mRemote.transact(10, _data, _reply, 0);
                     _reply.readException();
-                    IContextHubClient _result = IContextHubClient.Stub.asInterface(_reply.readStrongBinder());
+                    IContextHubClient _result =
+                            IContextHubClient.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -598,7 +673,8 @@ public interface IContextHubService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(11, _data, _reply, 0);
                     _reply.readException();
-                    List<ContextHubInfo> _result = _reply.createTypedArrayList(ContextHubInfo.CREATOR);
+                    List<ContextHubInfo> _result =
+                            _reply.createTypedArrayList(ContextHubInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -607,7 +683,11 @@ public interface IContextHubService extends IInterface {
             }
 
             @Override // android.hardware.location.IContextHubService
-            public void loadNanoAppOnHub(int contextHubId, IContextHubTransactionCallback transactionCallback, NanoAppBinary nanoAppBinary) throws RemoteException {
+            public void loadNanoAppOnHub(
+                    int contextHubId,
+                    IContextHubTransactionCallback transactionCallback,
+                    NanoAppBinary nanoAppBinary)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -624,7 +704,11 @@ public interface IContextHubService extends IInterface {
             }
 
             @Override // android.hardware.location.IContextHubService
-            public void unloadNanoAppFromHub(int contextHubId, IContextHubTransactionCallback transactionCallback, long nanoAppId) throws RemoteException {
+            public void unloadNanoAppFromHub(
+                    int contextHubId,
+                    IContextHubTransactionCallback transactionCallback,
+                    long nanoAppId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -641,7 +725,11 @@ public interface IContextHubService extends IInterface {
             }
 
             @Override // android.hardware.location.IContextHubService
-            public void enableNanoApp(int contextHubId, IContextHubTransactionCallback transactionCallback, long nanoAppId) throws RemoteException {
+            public void enableNanoApp(
+                    int contextHubId,
+                    IContextHubTransactionCallback transactionCallback,
+                    long nanoAppId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -658,7 +746,11 @@ public interface IContextHubService extends IInterface {
             }
 
             @Override // android.hardware.location.IContextHubService
-            public void disableNanoApp(int contextHubId, IContextHubTransactionCallback transactionCallback, long nanoAppId) throws RemoteException {
+            public void disableNanoApp(
+                    int contextHubId,
+                    IContextHubTransactionCallback transactionCallback,
+                    long nanoAppId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -675,7 +767,9 @@ public interface IContextHubService extends IInterface {
             }
 
             @Override // android.hardware.location.IContextHubService
-            public void queryNanoApps(int contextHubId, IContextHubTransactionCallback transactionCallback) throws RemoteException {
+            public void queryNanoApps(
+                    int contextHubId, IContextHubTransactionCallback transactionCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -726,75 +820,93 @@ public interface IContextHubService extends IInterface {
         }
 
         protected void registerCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
         }
 
         protected void getContextHubHandles_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
         }
 
         protected void getContextHubInfo_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
         }
 
         protected void loadNanoApp_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
         }
 
         protected void unloadNanoApp_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
         }
 
         protected void getNanoAppInstanceInfo_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
         }
 
         protected void findNanoAppOnHub_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
         }
 
         protected void sendMessage_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
         }
 
         protected void createClient_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
         }
 
         protected void createPendingIntentClient_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
         }
 
         protected void getContextHubs_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
         }
 
         protected void loadNanoAppOnHub_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
         }
 
         protected void unloadNanoAppFromHub_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
         }
 
         protected void enableNanoApp_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
         }
 
         protected void disableNanoApp_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
         }
 
         protected void queryNanoApps_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
         }
 
         protected void getPreloadedNanoAppIds_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
         }
 
         protected void setTestMode_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_CONTEXT_HUB, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

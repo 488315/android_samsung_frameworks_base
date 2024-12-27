@@ -5,11 +5,13 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
 public interface ICarrierPrivilegesCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.telephony.ICarrierPrivilegesCallback";
+    public static final String DESCRIPTOR =
+            "com.android.internal.telephony.ICarrierPrivilegesCallback";
 
     void onCarrierPrivilegesChanged(List<String> list, int[] iArr) throws RemoteException;
 
@@ -17,12 +19,12 @@ public interface ICarrierPrivilegesCallback extends IInterface {
 
     public static class Default implements ICarrierPrivilegesCallback {
         @Override // com.android.internal.telephony.ICarrierPrivilegesCallback
-        public void onCarrierPrivilegesChanged(List<String> privilegedPackageNames, int[] privilegedUids) throws RemoteException {
-        }
+        public void onCarrierPrivilegesChanged(
+                List<String> privilegedPackageNames, int[] privilegedUids) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ICarrierPrivilegesCallback
-        public void onCarrierServiceChanged(String carrierServicePackageName, int carrierServiceUid) throws RemoteException {
-        }
+        public void onCarrierServiceChanged(String carrierServicePackageName, int carrierServiceUid)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +32,7 @@ public interface ICarrierPrivilegesCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICarrierPrivilegesCallback {
+    public abstract static class Stub extends Binder implements ICarrierPrivilegesCallback {
         static final int TRANSACTION_onCarrierPrivilegesChanged = 1;
         static final int TRANSACTION_onCarrierServiceChanged = 2;
 
@@ -71,7 +73,8 @@ public interface ICarrierPrivilegesCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICarrierPrivilegesCallback.DESCRIPTOR);
             }
@@ -114,7 +117,9 @@ public interface ICarrierPrivilegesCallback extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ICarrierPrivilegesCallback
-            public void onCarrierPrivilegesChanged(List<String> privilegedPackageNames, int[] privilegedUids) throws RemoteException {
+            public void onCarrierPrivilegesChanged(
+                    List<String> privilegedPackageNames, int[] privilegedUids)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICarrierPrivilegesCallback.DESCRIPTOR);
@@ -127,7 +132,9 @@ public interface ICarrierPrivilegesCallback extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ICarrierPrivilegesCallback
-            public void onCarrierServiceChanged(String carrierServicePackageName, int carrierServiceUid) throws RemoteException {
+            public void onCarrierServiceChanged(
+                    String carrierServicePackageName, int carrierServiceUid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICarrierPrivilegesCallback.DESCRIPTOR);

@@ -3,24 +3,28 @@ package android.net;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class StringNetworkSpecifier extends NetworkSpecifier implements Parcelable {
-    public static final Parcelable.Creator<StringNetworkSpecifier> CREATOR = new Parcelable.Creator<StringNetworkSpecifier>() { // from class: android.net.StringNetworkSpecifier.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StringNetworkSpecifier createFromParcel(Parcel in) {
-            return new StringNetworkSpecifier(in.readString());
-        }
+    public static final Parcelable.Creator<StringNetworkSpecifier> CREATOR =
+            new Parcelable.Creator<
+                    StringNetworkSpecifier>() { // from class: android.net.StringNetworkSpecifier.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StringNetworkSpecifier createFromParcel(Parcel in) {
+                    return new StringNetworkSpecifier(in.readString());
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StringNetworkSpecifier[] newArray(int size) {
-            return new StringNetworkSpecifier[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StringNetworkSpecifier[] newArray(int size) {
+                    return new StringNetworkSpecifier[size];
+                }
+            };
     public final String specifier;
 
     public StringNetworkSpecifier(String specifier) {

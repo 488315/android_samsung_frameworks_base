@@ -13,11 +13,14 @@ public final class BackEvent {
     private final float mTouchY;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SwipeEdge {
-    }
+    public @interface SwipeEdge {}
 
     public static BackEvent fromBackMotionEvent(BackMotionEvent backMotionEvent) {
-        return new BackEvent(backMotionEvent.getTouchX(), backMotionEvent.getTouchY(), backMotionEvent.getProgress(), backMotionEvent.getSwipeEdge());
+        return new BackEvent(
+                backMotionEvent.getTouchX(),
+                backMotionEvent.getTouchY(),
+                backMotionEvent.getProgress(),
+                backMotionEvent.getSwipeEdge());
     }
 
     public BackEvent(float touchX, float touchY, float progress, int swipeEdge) {
@@ -44,6 +47,14 @@ public final class BackEvent {
     }
 
     public String toString() {
-        return "BackEvent{mTouchX=" + this.mTouchX + ", mTouchY=" + this.mTouchY + ", mProgress=" + this.mProgress + ", mSwipeEdge" + this.mSwipeEdge + "}";
+        return "BackEvent{mTouchX="
+                + this.mTouchX
+                + ", mTouchY="
+                + this.mTouchY
+                + ", mProgress="
+                + this.mProgress
+                + ", mSwipeEdge"
+                + this.mSwipeEdge
+                + "}";
     }
 }

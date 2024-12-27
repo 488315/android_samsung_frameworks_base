@@ -7,19 +7,21 @@ import android.os.Parcelable;
 @SystemApi
 /* loaded from: classes3.dex */
 public final class ResolverTarget implements Parcelable {
-    public static final Parcelable.Creator<ResolverTarget> CREATOR = new Parcelable.Creator<ResolverTarget>() { // from class: android.service.resolver.ResolverTarget.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ResolverTarget createFromParcel(Parcel source) {
-            return new ResolverTarget(source);
-        }
+    public static final Parcelable.Creator<ResolverTarget> CREATOR =
+            new Parcelable.Creator<
+                    ResolverTarget>() { // from class: android.service.resolver.ResolverTarget.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ResolverTarget createFromParcel(Parcel source) {
+                    return new ResolverTarget(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ResolverTarget[] newArray(int size) {
-            return new ResolverTarget[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ResolverTarget[] newArray(int size) {
+                    return new ResolverTarget[size];
+                }
+            };
     private static final String TAG = "ResolverTarget";
     private float mChooserScore;
     private float mLaunchScore;
@@ -27,8 +29,7 @@ public final class ResolverTarget implements Parcelable {
     private float mSelectProbability;
     private float mTimeSpentScore;
 
-    public ResolverTarget() {
-    }
+    public ResolverTarget() {}
 
     ResolverTarget(Parcel in) {
         this.mRecencyScore = in.readFloat();
@@ -79,7 +80,17 @@ public final class ResolverTarget implements Parcelable {
     }
 
     public String toString() {
-        return "ResolverTarget{" + this.mRecencyScore + ", " + this.mTimeSpentScore + ", " + this.mLaunchScore + ", " + this.mChooserScore + ", " + this.mSelectProbability + "}";
+        return "ResolverTarget{"
+                + this.mRecencyScore
+                + ", "
+                + this.mTimeSpentScore
+                + ", "
+                + this.mLaunchScore
+                + ", "
+                + this.mChooserScore
+                + ", "
+                + this.mSelectProbability
+                + "}";
     }
 
     @Override // android.os.Parcelable

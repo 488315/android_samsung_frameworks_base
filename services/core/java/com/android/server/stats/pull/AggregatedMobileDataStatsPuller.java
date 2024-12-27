@@ -6,9 +6,11 @@ import android.net.NetworkStats;
 import android.os.Handler;
 import android.util.ArrayMap;
 import android.util.SparseIntArray;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.KnoxCaptureInputFilter$$ExternalSyntheticOutline0;
 import com.android.server.selinux.RateLimiter;
+
 import java.time.Duration;
 import java.util.Iterator;
 import java.util.List;
@@ -61,16 +63,24 @@ public final class AggregatedMobileDataStatsPuller {
 
     public AggregatedMobileDataStatsPuller(NetworkStatsManager networkStatsManager) {
         this.mNetworkStatsManager = networkStatsManager;
-        Handler handler = new Handler(KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m("MobileDataStatsHandler").getLooper());
+        Handler handler =
+                new Handler(
+                        KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m(
+                                        "MobileDataStatsHandler")
+                                .getLooper());
         this.mMobileDataStatsHandler = handler;
         if (networkStatsManager != null) {
-            handler.post(new Runnable() { // from class: com.android.server.stats.pull.AggregatedMobileDataStatsPuller$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AggregatedMobileDataStatsPuller aggregatedMobileDataStatsPuller = AggregatedMobileDataStatsPuller.this;
-                    aggregatedMobileDataStatsPuller.updateNetworkStats(aggregatedMobileDataStatsPuller.mNetworkStatsManager);
-                }
-            });
+            handler.post(
+                    new Runnable() { // from class:
+                                     // com.android.server.stats.pull.AggregatedMobileDataStatsPuller$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AggregatedMobileDataStatsPuller aggregatedMobileDataStatsPuller =
+                                    AggregatedMobileDataStatsPuller.this;
+                            aggregatedMobileDataStatsPuller.updateNetworkStats(
+                                    aggregatedMobileDataStatsPuller.mNetworkStatsManager);
+                        }
+                    });
         }
     }
 
@@ -117,9 +127,21 @@ public final class AggregatedMobileDataStatsPuller {
     public final void pullDataBytesTransferLocked(List list) {
         for (Map.Entry entry : ((ArrayMap) this.mUidStats).entrySet()) {
             MobileDataStats mobileDataStats = (MobileDataStats) entry.getValue();
-            if (mobileDataStats.mRxPackets != 0 || mobileDataStats.mTxPackets != 0 || mobileDataStats.mRxBytes != 0 || mobileDataStats.mTxBytes != 0) {
+            if (mobileDataStats.mRxPackets != 0
+                    || mobileDataStats.mTxPackets != 0
+                    || mobileDataStats.mRxBytes != 0
+                    || mobileDataStats.mTxBytes != 0) {
                 MobileDataStats mobileDataStats2 = (MobileDataStats) entry.getValue();
-                list.add(FrameworkStatsLog.buildStatsEvent(FrameworkStatsLog.MOBILE_BYTES_TRANSFER_BY_PROC_STATE, ((UidProcState) entry.getKey()).mUid, ActivityManager.processStateAmToProto(((UidProcState) entry.getKey()).mState), mobileDataStats2.mRxBytes, mobileDataStats2.mRxPackets, mobileDataStats2.mTxBytes, mobileDataStats2.mTxPackets));
+                list.add(
+                        FrameworkStatsLog.buildStatsEvent(
+                                FrameworkStatsLog.MOBILE_BYTES_TRANSFER_BY_PROC_STATE,
+                                ((UidProcState) entry.getKey()).mUid,
+                                ActivityManager.processStateAmToProto(
+                                        ((UidProcState) entry.getKey()).mState),
+                                mobileDataStats2.mRxBytes,
+                                mobileDataStats2.mRxPackets,
+                                mobileDataStats2.mTxBytes,
+                                mobileDataStats2.mTxPackets));
             }
         }
     }
@@ -140,7 +162,8 @@ public final class AggregatedMobileDataStatsPuller {
                 while (it.hasNext()) {
                     NetworkStats.Entry entry = (NetworkStats.Entry) it.next();
                     if (entry.getRxPackets() != 0 || entry.getTxPackets() != 0) {
-                        MobileDataStats uidStatsForPreviousStateLocked = getUidStatsForPreviousStateLocked(entry.getUid());
+                        MobileDataStats uidStatsForPreviousStateLocked =
+                                getUidStatsForPreviousStateLocked(entry.getUid());
                         if (uidStatsForPreviousStateLocked != null) {
                             uidStatsForPreviousStateLocked.mTxBytes += entry.getTxBytes();
                             uidStatsForPreviousStateLocked.mRxBytes += entry.getRxBytes();

@@ -2,12 +2,14 @@ package android.content;
 
 import android.net.Uri;
 import android.util.Xml;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Stack;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Stack;
 
 /* loaded from: classes.dex */
 public class DefaultDataHandler implements ContentInsertHandler {
@@ -23,7 +25,8 @@ public class DefaultDataHandler implements ContentInsertHandler {
     private ContentValues mValues;
 
     @Override // android.content.ContentInsertHandler
-    public void insert(ContentResolver contentResolver, InputStream in) throws IOException, SAXException {
+    public void insert(ContentResolver contentResolver, InputStream in)
+            throws IOException, SAXException {
         this.mContentResolver = contentResolver;
         Xml.parse(in, Xml.Encoding.UTF_8, this);
     }
@@ -62,7 +65,8 @@ public class DefaultDataHandler implements ContentInsertHandler {
     }
 
     @Override // org.xml.sax.ContentHandler
-    public void startElement(String uri, String localName, String name, Attributes atts) throws SAXException {
+    public void startElement(String uri, String localName, String name, Attributes atts)
+            throws SAXException {
         if (ROW.equals(localName)) {
             if (this.mValues != null) {
                 if (this.mUris.empty()) {
@@ -70,7 +74,8 @@ public class DefaultDataHandler implements ContentInsertHandler {
                 }
                 Uri nextUri = insertRow();
                 if (nextUri == null) {
-                    throw new SAXException("insert to uri " + this.mUris.lastElement().toString() + " failure");
+                    throw new SAXException(
+                            "insert to uri " + this.mUris.lastElement().toString() + " failure");
                 }
                 this.mUris.pop();
                 this.mUris.push(nextUri);
@@ -140,38 +145,29 @@ public class DefaultDataHandler implements ContentInsertHandler {
     }
 
     @Override // org.xml.sax.ContentHandler
-    public void characters(char[] ch, int start, int length) throws SAXException {
-    }
+    public void characters(char[] ch, int start, int length) throws SAXException {}
 
     @Override // org.xml.sax.ContentHandler
-    public void endDocument() throws SAXException {
-    }
+    public void endDocument() throws SAXException {}
 
     @Override // org.xml.sax.ContentHandler
-    public void endPrefixMapping(String prefix) throws SAXException {
-    }
+    public void endPrefixMapping(String prefix) throws SAXException {}
 
     @Override // org.xml.sax.ContentHandler
-    public void ignorableWhitespace(char[] ch, int start, int length) throws SAXException {
-    }
+    public void ignorableWhitespace(char[] ch, int start, int length) throws SAXException {}
 
     @Override // org.xml.sax.ContentHandler
-    public void processingInstruction(String target, String data) throws SAXException {
-    }
+    public void processingInstruction(String target, String data) throws SAXException {}
 
     @Override // org.xml.sax.ContentHandler
-    public void setDocumentLocator(Locator locator) {
-    }
+    public void setDocumentLocator(Locator locator) {}
 
     @Override // org.xml.sax.ContentHandler
-    public void skippedEntity(String name) throws SAXException {
-    }
+    public void skippedEntity(String name) throws SAXException {}
 
     @Override // org.xml.sax.ContentHandler
-    public void startDocument() throws SAXException {
-    }
+    public void startDocument() throws SAXException {}
 
     @Override // org.xml.sax.ContentHandler
-    public void startPrefixMapping(String prefix, String uri) throws SAXException {
-    }
+    public void startPrefixMapping(String prefix, String uri) throws SAXException {}
 }

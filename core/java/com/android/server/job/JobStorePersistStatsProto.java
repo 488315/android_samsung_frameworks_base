@@ -10,7 +10,6 @@ public final class JobStorePersistStatsProto {
         public static final long NUM_SYSTEM_SYNC_MANAGER_JOBS = 1120986464259L;
         public static final long NUM_TOTAL_JOBS = 1120986464257L;
 
-        public Stats() {
-        }
+        public Stats() {}
     }
 }

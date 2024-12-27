@@ -7,8 +7,7 @@ public class Double3 {
     public double y;
     public double z;
 
-    public Double3() {
-    }
+    public Double3() {}
 
     public Double3(Double3 data) {
         this.x = data.x;

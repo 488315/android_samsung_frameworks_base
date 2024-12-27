@@ -3,14 +3,22 @@ package com.android.internal.hidden_from_bootclasspath.android.hardware.usb.flag
 /* loaded from: classes5.dex */
 public final class Flags {
     private static FeatureFlags FEATURE_FLAGS = new FeatureFlagsImpl();
-    public static final String FLAG_ENABLE_INPUT_POWER_LIMITED_WARNING = "android.hardware.usb.flags.enable_input_power_limited_warning";
-    public static final String FLAG_ENABLE_INTERFACE_NAME_DEVICE_FILTER = "android.hardware.usb.flags.enable_interface_name_device_filter";
-    public static final String FLAG_ENABLE_IS_MODE_CHANGE_SUPPORTED_API = "android.hardware.usb.flags.enable_is_mode_change_supported_api";
-    public static final String FLAG_ENABLE_IS_PD_COMPLIANT_API = "android.hardware.usb.flags.enable_is_pd_compliant_api";
-    public static final String FLAG_ENABLE_REPORT_USB_DATA_COMPLIANCE_WARNING = "android.hardware.usb.flags.enable_report_usb_data_compliance_warning";
-    public static final String FLAG_ENABLE_USB_DATA_COMPLIANCE_WARNING = "android.hardware.usb.flags.enable_usb_data_compliance_warning";
-    public static final String FLAG_ENABLE_USB_DATA_SIGNAL_STAKING = "android.hardware.usb.flags.enable_usb_data_signal_staking";
-    public static final String FLAG_ENABLE_USB_SYSFS_MIDI_IDENTIFICATION = "android.hardware.usb.flags.enable_usb_sysfs_midi_identification";
+    public static final String FLAG_ENABLE_INPUT_POWER_LIMITED_WARNING =
+            "android.hardware.usb.flags.enable_input_power_limited_warning";
+    public static final String FLAG_ENABLE_INTERFACE_NAME_DEVICE_FILTER =
+            "android.hardware.usb.flags.enable_interface_name_device_filter";
+    public static final String FLAG_ENABLE_IS_MODE_CHANGE_SUPPORTED_API =
+            "android.hardware.usb.flags.enable_is_mode_change_supported_api";
+    public static final String FLAG_ENABLE_IS_PD_COMPLIANT_API =
+            "android.hardware.usb.flags.enable_is_pd_compliant_api";
+    public static final String FLAG_ENABLE_REPORT_USB_DATA_COMPLIANCE_WARNING =
+            "android.hardware.usb.flags.enable_report_usb_data_compliance_warning";
+    public static final String FLAG_ENABLE_USB_DATA_COMPLIANCE_WARNING =
+            "android.hardware.usb.flags.enable_usb_data_compliance_warning";
+    public static final String FLAG_ENABLE_USB_DATA_SIGNAL_STAKING =
+            "android.hardware.usb.flags.enable_usb_data_signal_staking";
+    public static final String FLAG_ENABLE_USB_SYSFS_MIDI_IDENTIFICATION =
+            "android.hardware.usb.flags.enable_usb_sysfs_midi_identification";
 
     public static boolean enableInputPowerLimitedWarning() {
         return FEATURE_FLAGS.enableInputPowerLimitedWarning();

@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class FrontendIptvCapabilities implements Parcelable {
-    public static final Parcelable.Creator<FrontendIptvCapabilities> CREATOR = new Parcelable.Creator<FrontendIptvCapabilities>() { // from class: android.hardware.tv.tuner.FrontendIptvCapabilities.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendIptvCapabilities createFromParcel(Parcel _aidl_source) {
-            FrontendIptvCapabilities _aidl_out = new FrontendIptvCapabilities();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<FrontendIptvCapabilities> CREATOR =
+            new Parcelable.Creator<FrontendIptvCapabilities>() { // from class:
+                // android.hardware.tv.tuner.FrontendIptvCapabilities.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendIptvCapabilities createFromParcel(Parcel _aidl_source) {
+                    FrontendIptvCapabilities _aidl_out = new FrontendIptvCapabilities();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FrontendIptvCapabilities[] newArray(int _aidl_size) {
-            return new FrontendIptvCapabilities[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FrontendIptvCapabilities[] newArray(int _aidl_size) {
+                    return new FrontendIptvCapabilities[_aidl_size];
+                }
+            };
     public int protocolCap = 0;
 
     @Override // android.os.Parcelable

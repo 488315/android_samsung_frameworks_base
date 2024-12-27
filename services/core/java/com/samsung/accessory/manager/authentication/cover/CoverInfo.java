@@ -5,7 +5,10 @@ import com.android.server.am.mars.MARsFreezeStateRecord$$ExternalSyntheticOutlin
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class CoverInfo {
-    public final String[] HexDecimalTable = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "X", "Y", "Z", "I", "O", "U"};
+    public final String[] HexDecimalTable = {
+        "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H",
+        "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "X", "Y", "Z", "I", "O", "U"
+    };
     public final byte[] chip_id;
     public final int color;
     public final String id;
@@ -53,7 +56,9 @@ public final class CoverInfo {
         StringBuilder sb = new StringBuilder();
         int i = 0;
         while (i < bArr.length) {
-            i = MARsFreezeStateRecord$$ExternalSyntheticOutline0.m("%02x", new Object[]{Byte.valueOf(bArr[i])}, sb, i, 1);
+            i =
+                    MARsFreezeStateRecord$$ExternalSyntheticOutline0.m(
+                            "%02x", new Object[] {Byte.valueOf(bArr[i])}, sb, i, 1);
         }
         return sb.toString();
     }

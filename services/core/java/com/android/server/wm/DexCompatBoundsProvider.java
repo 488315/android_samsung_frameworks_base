@@ -6,8 +6,10 @@ import android.util.Slog;
 import android.view.InsetsSource;
 import android.view.InsetsState;
 import android.view.WindowInsets;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.am.PendingIntentController$$ExternalSyntheticOutline0;
+
 import com.samsung.android.rune.CoreRune;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -42,7 +44,9 @@ public class DexCompatBoundsProvider {
                             break;
                         }
                     } else {
-                        Slog.w("DexCompatBoundsProvider", "getBounds: Cannot find custom size, use default, " + this.mTask);
+                        Slog.w(
+                                "DexCompatBoundsProvider",
+                                "getBounds: Cannot find custom size, use default, " + this.mTask);
                         super.getBounds(rect);
                         break;
                     }
@@ -51,35 +55,66 @@ public class DexCompatBoundsProvider {
                         rect.setEmpty();
                         break;
                     } else {
-                        int defaultWidth = DexCompatBoundsProvider.getDefaultWidth(getDexMode(), getDisplayShortSize());
-                        int defaultHeight = DexCompatBoundsProvider.getDefaultHeight(getDexMode(), getDisplayShortSize());
+                        int defaultWidth =
+                                DexCompatBoundsProvider.getDefaultWidth(
+                                        getDexMode(), getDisplayShortSize());
+                        int defaultHeight =
+                                DexCompatBoundsProvider.getDefaultHeight(
+                                        getDexMode(), getDisplayShortSize());
                         if (defaultWidth > 0 && defaultHeight > 0) {
-                            float f = defaultWidth < defaultHeight ? defaultWidth / defaultHeight : defaultHeight / defaultWidth;
-                            Rect appBounds = this.mTask.getDisplayContent().getWindowConfiguration().getAppBounds();
+                            float f =
+                                    defaultWidth < defaultHeight
+                                            ? defaultWidth / defaultHeight
+                                            : defaultHeight / defaultWidth;
+                            Rect appBounds =
+                                    this.mTask
+                                            .getDisplayContent()
+                                            .getWindowConfiguration()
+                                            .getAppBounds();
                             Rect rect2 = new Rect(appBounds);
                             if (appBounds == null) {
-                                int height = (int) ((this.mTask.getDisplayContent().getBounds().height() * 0.9f) + 0.5f);
+                                int height =
+                                        (int)
+                                                ((this.mTask
+                                                                        .getDisplayContent()
+                                                                        .getBounds()
+                                                                        .height()
+                                                                * 0.9f)
+                                                        + 0.5f);
                                 rect.set(0, 0, (int) ((height * f) + 0.5f), height);
                                 break;
                             } else {
-                                InsetsState insetsState = this.mTask.getDisplayContent().mInsetsStateController.mState;
+                                InsetsState insetsState =
+                                        this.mTask.getDisplayContent()
+                                                .mInsetsStateController
+                                                .mState;
                                 int sourceSize = insetsState.sourceSize();
                                 int i = 0;
                                 while (true) {
                                     if (i < sourceSize) {
                                         InsetsSource sourceAt = insetsState.sourceAt(i);
-                                        if (sourceAt.getType() != WindowInsets.Type.navigationBars()) {
+                                        if (sourceAt.getType()
+                                                != WindowInsets.Type.navigationBars()) {
                                             i++;
                                         } else if (sourceAt.isVisible()) {
                                             rect2.inset(0, 0, 0, sourceAt.getFrame().height());
                                         }
                                     }
                                 }
-                                rect.set(0, 0, (int) ((rect2.height() * f) + 0.5f), rect2.height() - (this.mTask.getFreeformThickness() * 2));
+                                rect.set(
+                                        0,
+                                        0,
+                                        (int) ((rect2.height() * f) + 0.5f),
+                                        rect2.height() - (this.mTask.getFreeformThickness() * 2));
                                 break;
                             }
                         } else {
-                            PendingIntentController$$ExternalSyntheticOutline0.m(defaultWidth, defaultHeight, "getBounds: invalid value, ", "x", "DexCompatBoundsProvider");
+                            PendingIntentController$$ExternalSyntheticOutline0.m(
+                                    defaultWidth,
+                                    defaultHeight,
+                                    "getBounds: invalid value, ",
+                                    "x",
+                                    "DexCompatBoundsProvider");
                             break;
                         }
                     }
@@ -117,11 +152,24 @@ public class DexCompatBoundsProvider {
         int defaultWidth = getDefaultWidth(getDexMode(), getDisplayShortSize());
         int defaultHeight = getDefaultHeight(getDexMode(), getDisplayShortSize());
         if (defaultWidth <= 0 || defaultHeight <= 0) {
-            PendingIntentController$$ExternalSyntheticOutline0.m(defaultWidth, defaultHeight, "getBounds: Invalid default size, ", "x", "DexCompatBoundsProvider");
+            PendingIntentController$$ExternalSyntheticOutline0.m(
+                    defaultWidth,
+                    defaultHeight,
+                    "getBounds: Invalid default size, ",
+                    "x",
+                    "DexCompatBoundsProvider");
         } else if (this.mIsPortrait) {
-            rect.set(0, 0, Math.min(defaultWidth, defaultHeight), Math.max(defaultWidth, defaultHeight));
+            rect.set(
+                    0,
+                    0,
+                    Math.min(defaultWidth, defaultHeight),
+                    Math.max(defaultWidth, defaultHeight));
         } else {
-            rect.set(0, 0, Math.max(defaultWidth, defaultHeight), Math.min(defaultWidth, defaultHeight));
+            rect.set(
+                    0,
+                    0,
+                    Math.max(defaultWidth, defaultHeight),
+                    Math.min(defaultWidth, defaultHeight));
         }
     }
 
@@ -134,25 +182,25 @@ public class DexCompatBoundsProvider {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:19:0x0044, code lost:
-    
-        if (r6.width() <= r6.height()) goto L28;
-     */
+
+       if (r6.width() <= r6.height()) goto L28;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:20:0x0047, code lost:
-    
-        r2 = 1;
-     */
+
+       r2 = 1;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:28:0x0058, code lost:
-    
-        if (r5.x > r5.y) goto L45;
-     */
+
+       if (r5.x > r5.y) goto L45;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:30:0x0063, code lost:
-    
-        if (r6.width() > r6.height()) goto L45;
-     */
+
+       if (r6.width() > r6.height()) goto L45;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:34:0x0076, code lost:
-    
-        if (r6.width() > r6.height()) goto L45;
-     */
+
+       if (r6.width() > r6.height()) goto L45;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -240,6 +288,8 @@ public class DexCompatBoundsProvider {
         L7c:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.DexCompatBoundsProvider.isPortrait(int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.DexCompatBoundsProvider.isPortrait(int):boolean");
     }
 }

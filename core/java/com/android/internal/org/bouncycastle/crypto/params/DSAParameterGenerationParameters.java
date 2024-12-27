@@ -16,7 +16,8 @@ public class DSAParameterGenerationParameters {
         this(L, N, certainty, random, -1);
     }
 
-    public DSAParameterGenerationParameters(int L, int N, int certainty, SecureRandom random, int usageIndex) {
+    public DSAParameterGenerationParameters(
+            int L, int N, int certainty, SecureRandom random, int usageIndex) {
         this.l = L;
         this.n = N;
         this.certainty = certainty;

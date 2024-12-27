@@ -17,19 +17,22 @@ import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.os.RemoteException;
 import android.os.StrictMode;
-import android.provider.SyncStateContract;
+
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes3.dex */
 public final class CalendarContract {
     public static final String ACCOUNT_TYPE_LOCAL = "LOCAL";
     public static final String ACTION_EVENT_REMINDER = "android.intent.action.EVENT_REMINDER";
-    public static final String ACTION_HANDLE_CUSTOM_EVENT = "android.provider.calendar.action.HANDLE_CUSTOM_EVENT";
-    public static final String ACTION_VIEW_MANAGED_PROFILE_CALENDAR_EVENT = "android.provider.calendar.action.VIEW_MANAGED_PROFILE_CALENDAR_EVENT";
+    public static final String ACTION_HANDLE_CUSTOM_EVENT =
+            "android.provider.calendar.action.HANDLE_CUSTOM_EVENT";
+    public static final String ACTION_VIEW_MANAGED_PROFILE_CALENDAR_EVENT =
+            "android.provider.calendar.action.VIEW_MANAGED_PROFILE_CALENDAR_EVENT";
     public static final String AUTHORITY = "com.android.calendar";
     public static final String CALLER_IS_SYNCADAPTER = "caller_is_syncadapter";
     public static final Uri CONTENT_URI = Uri.parse("content://com.android.calendar");
-    public static final Uri ENTERPRISE_CONTENT_URI = Uri.parse("content://com.android.calendar/enterprise");
+    public static final Uri ENTERPRISE_CONTENT_URI =
+            Uri.parse("content://com.android.calendar/enterprise");
     public static final String EXTRA_CUSTOM_APP_URI = "customAppUri";
     public static final String EXTRA_EVENT_ALL_DAY = "allDay";
     public static final String EXTRA_EVENT_BEGIN_TIME = "beginTime";
@@ -242,20 +245,21 @@ public final class CalendarContract {
         public static final String _SYNC_ID = "_sync_id";
     }
 
-    private CalendarContract() {
-    }
+    private CalendarContract() {}
 
-    public static boolean startViewCalendarEventInManagedProfile(Context context, long eventId, long startMs, long endMs, boolean allDay, int flags) {
+    public static boolean startViewCalendarEventInManagedProfile(
+            Context context, long eventId, long startMs, long endMs, boolean allDay, int flags) {
         Preconditions.checkNotNull(context, "Context is null");
-        DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+        DevicePolicyManager dpm =
+                (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
         return dpm.startViewCalendarEventInManagedProfile(eventId, startMs, endMs, allDay, flags);
     }
 
     public static final class CalendarEntity implements BaseColumns, SyncColumns, CalendarColumns {
-        public static final Uri CONTENT_URI = Uri.parse("content://com.android.calendar/calendar_entities");
+        public static final Uri CONTENT_URI =
+                Uri.parse("content://com.android.calendar/calendar_entities");
 
-        private CalendarEntity() {
-        }
+        private CalendarEntity() {}
 
         public static EntityIterator newEntityIterator(Cursor cursor) {
             return new EntityIteratorImpl(cursor);
@@ -275,32 +279,57 @@ public final class CalendarContract {
                 DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, "account_type");
                 DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, "_sync_id");
                 DatabaseUtils.cursorLongToContentValuesIfPresent(cursor, cv, "dirty");
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, SyncColumns.MUTATORS);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, CalendarSyncColumns.CAL_SYNC1);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, CalendarSyncColumns.CAL_SYNC2);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, CalendarSyncColumns.CAL_SYNC3);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, CalendarSyncColumns.CAL_SYNC4);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, CalendarSyncColumns.CAL_SYNC5);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, CalendarSyncColumns.CAL_SYNC6);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, CalendarSyncColumns.CAL_SYNC7);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, CalendarSyncColumns.CAL_SYNC8);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, CalendarSyncColumns.CAL_SYNC9);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, CalendarSyncColumns.CAL_SYNC10);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, SyncColumns.MUTATORS);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, CalendarSyncColumns.CAL_SYNC1);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, CalendarSyncColumns.CAL_SYNC2);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, CalendarSyncColumns.CAL_SYNC3);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, CalendarSyncColumns.CAL_SYNC4);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, CalendarSyncColumns.CAL_SYNC5);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, CalendarSyncColumns.CAL_SYNC6);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, CalendarSyncColumns.CAL_SYNC7);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, CalendarSyncColumns.CAL_SYNC8);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, CalendarSyncColumns.CAL_SYNC9);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, CalendarSyncColumns.CAL_SYNC10);
                 DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, "name");
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, "calendar_displayName");
-                DatabaseUtils.cursorIntToContentValuesIfPresent(cursor, cv, CalendarColumns.CALENDAR_COLOR);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, CalendarColumns.CALENDAR_COLOR_KEY);
-                DatabaseUtils.cursorIntToContentValuesIfPresent(cursor, cv, CalendarColumns.CALENDAR_ACCESS_LEVEL);
-                DatabaseUtils.cursorIntToContentValuesIfPresent(cursor, cv, CalendarColumns.VISIBLE);
-                DatabaseUtils.cursorIntToContentValuesIfPresent(cursor, cv, CalendarColumns.SYNC_EVENTS);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, Calendars.CALENDAR_LOCATION);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, CalendarColumns.CALENDAR_TIME_ZONE);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, CalendarColumns.OWNER_ACCOUNT);
-                DatabaseUtils.cursorIntToContentValuesIfPresent(cursor, cv, CalendarColumns.CAN_ORGANIZER_RESPOND);
-                DatabaseUtils.cursorIntToContentValuesIfPresent(cursor, cv, CalendarColumns.CAN_MODIFY_TIME_ZONE);
-                DatabaseUtils.cursorIntToContentValuesIfPresent(cursor, cv, CalendarColumns.MAX_REMINDERS);
-                DatabaseUtils.cursorIntToContentValuesIfPresent(cursor, cv, SyncColumns.CAN_PARTIALLY_UPDATE);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, CalendarColumns.ALLOWED_REMINDERS);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, "calendar_displayName");
+                DatabaseUtils.cursorIntToContentValuesIfPresent(
+                        cursor, cv, CalendarColumns.CALENDAR_COLOR);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, CalendarColumns.CALENDAR_COLOR_KEY);
+                DatabaseUtils.cursorIntToContentValuesIfPresent(
+                        cursor, cv, CalendarColumns.CALENDAR_ACCESS_LEVEL);
+                DatabaseUtils.cursorIntToContentValuesIfPresent(
+                        cursor, cv, CalendarColumns.VISIBLE);
+                DatabaseUtils.cursorIntToContentValuesIfPresent(
+                        cursor, cv, CalendarColumns.SYNC_EVENTS);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, Calendars.CALENDAR_LOCATION);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, CalendarColumns.CALENDAR_TIME_ZONE);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, CalendarColumns.OWNER_ACCOUNT);
+                DatabaseUtils.cursorIntToContentValuesIfPresent(
+                        cursor, cv, CalendarColumns.CAN_ORGANIZER_RESPOND);
+                DatabaseUtils.cursorIntToContentValuesIfPresent(
+                        cursor, cv, CalendarColumns.CAN_MODIFY_TIME_ZONE);
+                DatabaseUtils.cursorIntToContentValuesIfPresent(
+                        cursor, cv, CalendarColumns.MAX_REMINDERS);
+                DatabaseUtils.cursorIntToContentValuesIfPresent(
+                        cursor, cv, SyncColumns.CAN_PARTIALLY_UPDATE);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, CalendarColumns.ALLOWED_REMINDERS);
                 DatabaseUtils.cursorIntToContentValuesIfPresent(cursor, cv, "deleted");
                 Entity entity = new Entity(cv);
                 cursor.moveToNext();
@@ -313,20 +342,45 @@ public final class CalendarContract {
         public static final String DEFAULT_SORT_ORDER = "calendar_displayName";
         public static final String NAME = "name";
         public static final Uri CONTENT_URI = Uri.parse("content://com.android.calendar/calendars");
-        public static final Uri ENTERPRISE_CONTENT_URI = Uri.parse("content://com.android.calendar/enterprise/calendars");
+        public static final Uri ENTERPRISE_CONTENT_URI =
+                Uri.parse("content://com.android.calendar/enterprise/calendars");
         public static final String CALENDAR_LOCATION = "calendar_location";
-        public static final String[] SYNC_WRITABLE_COLUMNS = {"account_name", "account_type", "_sync_id", "dirty", SyncColumns.MUTATORS, CalendarColumns.OWNER_ACCOUNT, CalendarColumns.MAX_REMINDERS, CalendarColumns.ALLOWED_REMINDERS, CalendarColumns.CAN_MODIFY_TIME_ZONE, CalendarColumns.CAN_ORGANIZER_RESPOND, SyncColumns.CAN_PARTIALLY_UPDATE, CALENDAR_LOCATION, CalendarColumns.CALENDAR_TIME_ZONE, CalendarColumns.CALENDAR_ACCESS_LEVEL, "deleted", CalendarSyncColumns.CAL_SYNC1, CalendarSyncColumns.CAL_SYNC2, CalendarSyncColumns.CAL_SYNC3, CalendarSyncColumns.CAL_SYNC4, CalendarSyncColumns.CAL_SYNC5, CalendarSyncColumns.CAL_SYNC6, CalendarSyncColumns.CAL_SYNC7, CalendarSyncColumns.CAL_SYNC8, CalendarSyncColumns.CAL_SYNC9, CalendarSyncColumns.CAL_SYNC10};
+        public static final String[] SYNC_WRITABLE_COLUMNS = {
+            "account_name",
+            "account_type",
+            "_sync_id",
+            "dirty",
+            SyncColumns.MUTATORS,
+            CalendarColumns.OWNER_ACCOUNT,
+            CalendarColumns.MAX_REMINDERS,
+            CalendarColumns.ALLOWED_REMINDERS,
+            CalendarColumns.CAN_MODIFY_TIME_ZONE,
+            CalendarColumns.CAN_ORGANIZER_RESPOND,
+            SyncColumns.CAN_PARTIALLY_UPDATE,
+            CALENDAR_LOCATION,
+            CalendarColumns.CALENDAR_TIME_ZONE,
+            CalendarColumns.CALENDAR_ACCESS_LEVEL,
+            "deleted",
+            CalendarSyncColumns.CAL_SYNC1,
+            CalendarSyncColumns.CAL_SYNC2,
+            CalendarSyncColumns.CAL_SYNC3,
+            CalendarSyncColumns.CAL_SYNC4,
+            CalendarSyncColumns.CAL_SYNC5,
+            CalendarSyncColumns.CAL_SYNC6,
+            CalendarSyncColumns.CAL_SYNC7,
+            CalendarSyncColumns.CAL_SYNC8,
+            CalendarSyncColumns.CAL_SYNC9,
+            CalendarSyncColumns.CAL_SYNC10
+        };
 
-        private Calendars() {
-        }
+        private Calendars() {}
     }
 
     public static final class Attendees implements BaseColumns, AttendeesColumns, EventsColumns {
         private static final String ATTENDEES_WHERE = "event_id=?";
         public static final Uri CONTENT_URI = Uri.parse("content://com.android.calendar/attendees");
 
-        private Attendees() {
-        }
+        private Attendees() {}
 
         public static final Cursor query(ContentResolver cr, long eventId, String[] projection) {
             String[] attArgs = {Long.toString(eventId)};
@@ -335,16 +389,17 @@ public final class CalendarContract {
     }
 
     public static final class EventsEntity implements BaseColumns, SyncColumns, EventsColumns {
-        public static final Uri CONTENT_URI = Uri.parse("content://com.android.calendar/event_entities");
+        public static final Uri CONTENT_URI =
+                Uri.parse("content://com.android.calendar/event_entities");
 
-        private EventsEntity() {
-        }
+        private EventsEntity() {}
 
         public static EntityIterator newEntityIterator(Cursor cursor, ContentResolver resolver) {
             return new EntityIteratorImpl(cursor, resolver);
         }
 
-        public static EntityIterator newEntityIterator(Cursor cursor, ContentProviderClient provider) {
+        public static EntityIterator newEntityIterator(
+                Cursor cursor, ContentProviderClient provider) {
             return new EntityIteratorImpl(cursor, provider);
         }
 
@@ -364,8 +419,18 @@ public final class CalendarContract {
             private static final String WHERE_EVENT_ID = "event_id=?";
             private final ContentProviderClient mProvider;
             private final ContentResolver mResolver;
-            private static final String[] REMINDERS_PROJECTION = {"minutes", RemindersColumns.METHOD};
-            private static final String[] ATTENDEES_PROJECTION = {AttendeesColumns.ATTENDEE_NAME, AttendeesColumns.ATTENDEE_EMAIL, AttendeesColumns.ATTENDEE_RELATIONSHIP, AttendeesColumns.ATTENDEE_TYPE, AttendeesColumns.ATTENDEE_STATUS, AttendeesColumns.ATTENDEE_IDENTITY, AttendeesColumns.ATTENDEE_ID_NAMESPACE};
+            private static final String[] REMINDERS_PROJECTION = {
+                "minutes", RemindersColumns.METHOD
+            };
+            private static final String[] ATTENDEES_PROJECTION = {
+                AttendeesColumns.ATTENDEE_NAME,
+                AttendeesColumns.ATTENDEE_EMAIL,
+                AttendeesColumns.ATTENDEE_RELATIONSHIP,
+                AttendeesColumns.ATTENDEE_TYPE,
+                AttendeesColumns.ATTENDEE_STATUS,
+                AttendeesColumns.ATTENDEE_IDENTITY,
+                AttendeesColumns.ATTENDEE_ID_NAMESPACE
+            };
             private static final String[] EXTENDED_PROJECTION = {"_id", "name", "value"};
 
             public EntityIteratorImpl(Cursor cursor, ContentResolver resolver) {
@@ -388,107 +453,199 @@ public final class CalendarContract {
                 long eventId = cursor.getLong(cursor.getColumnIndexOrThrow("_id"));
                 ContentValues cv = new ContentValues();
                 cv.put("_id", Long.valueOf(eventId));
-                DatabaseUtils.cursorIntToContentValuesIfPresent(cursor, cv, EventsColumns.CALENDAR_ID);
+                DatabaseUtils.cursorIntToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.CALENDAR_ID);
                 DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, "title");
                 DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, "description");
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, EventsColumns.EVENT_LOCATION);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.EVENT_LOCATION);
                 DatabaseUtils.cursorIntToContentValuesIfPresent(cursor, cv, EventsColumns.STATUS);
-                DatabaseUtils.cursorIntToContentValuesIfPresent(cursor, cv, EventsColumns.SELF_ATTENDEE_STATUS);
+                DatabaseUtils.cursorIntToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.SELF_ATTENDEE_STATUS);
                 DatabaseUtils.cursorLongToContentValuesIfPresent(cursor, cv, EventsColumns.DTSTART);
                 DatabaseUtils.cursorLongToContentValuesIfPresent(cursor, cv, EventsColumns.DTEND);
                 DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, "duration");
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, EventsColumns.EVENT_TIMEZONE);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, EventsColumns.EVENT_END_TIMEZONE);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.EVENT_TIMEZONE);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.EVENT_END_TIMEZONE);
                 DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, "allDay");
-                DatabaseUtils.cursorIntToContentValuesIfPresent(cursor, cv, EventsColumns.ACCESS_LEVEL);
+                DatabaseUtils.cursorIntToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.ACCESS_LEVEL);
                 DatabaseUtils.cursorIntToContentValuesIfPresent(cursor, cv, "availability");
-                DatabaseUtils.cursorIntToContentValuesIfPresent(cursor, cv, EventsColumns.EVENT_COLOR);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, EventsColumns.EVENT_COLOR_KEY);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, EventsColumns.HAS_ALARM);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, EventsColumns.HAS_EXTENDED_PROPERTIES);
+                DatabaseUtils.cursorIntToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.EVENT_COLOR);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.EVENT_COLOR_KEY);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.HAS_ALARM);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.HAS_EXTENDED_PROPERTIES);
                 DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, EventsColumns.RRULE);
                 DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, EventsColumns.RDATE);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, EventsColumns.EXRULE);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, EventsColumns.EXDATE);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, EventsColumns.ORIGINAL_SYNC_ID);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, EventsColumns.ORIGINAL_ID);
-                DatabaseUtils.cursorLongToContentValuesIfPresent(cursor, cv, EventsColumns.ORIGINAL_INSTANCE_TIME);
-                DatabaseUtils.cursorIntToContentValuesIfPresent(cursor, cv, EventsColumns.ORIGINAL_ALL_DAY);
-                DatabaseUtils.cursorLongToContentValuesIfPresent(cursor, cv, EventsColumns.LAST_DATE);
-                DatabaseUtils.cursorIntToContentValuesIfPresent(cursor, cv, EventsColumns.HAS_ATTENDEE_DATA);
-                DatabaseUtils.cursorIntToContentValuesIfPresent(cursor, cv, EventsColumns.GUESTS_CAN_INVITE_OTHERS);
-                DatabaseUtils.cursorIntToContentValuesIfPresent(cursor, cv, EventsColumns.GUESTS_CAN_MODIFY);
-                DatabaseUtils.cursorIntToContentValuesIfPresent(cursor, cv, EventsColumns.GUESTS_CAN_SEE_GUESTS);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, EventsColumns.CUSTOM_APP_PACKAGE);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.EXRULE);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.EXDATE);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.ORIGINAL_SYNC_ID);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.ORIGINAL_ID);
+                DatabaseUtils.cursorLongToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.ORIGINAL_INSTANCE_TIME);
+                DatabaseUtils.cursorIntToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.ORIGINAL_ALL_DAY);
+                DatabaseUtils.cursorLongToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.LAST_DATE);
+                DatabaseUtils.cursorIntToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.HAS_ATTENDEE_DATA);
+                DatabaseUtils.cursorIntToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.GUESTS_CAN_INVITE_OTHERS);
+                DatabaseUtils.cursorIntToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.GUESTS_CAN_MODIFY);
+                DatabaseUtils.cursorIntToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.GUESTS_CAN_SEE_GUESTS);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.CUSTOM_APP_PACKAGE);
                 DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, "customAppUri");
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, EventsColumns.UID_2445);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, EventsColumns.ORGANIZER);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, EventsColumns.IS_ORGANIZER);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.UID_2445);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.ORGANIZER);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.IS_ORGANIZER);
                 DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, "_sync_id");
                 DatabaseUtils.cursorLongToContentValuesIfPresent(cursor, cv, "dirty");
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, SyncColumns.MUTATORS);
-                DatabaseUtils.cursorLongToContentValuesIfPresent(cursor, cv, EventsColumns.LAST_SYNCED);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, SyncColumns.MUTATORS);
+                DatabaseUtils.cursorLongToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.LAST_SYNCED);
                 DatabaseUtils.cursorIntToContentValuesIfPresent(cursor, cv, "deleted");
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, EventsColumns.SYNC_DATA1);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, EventsColumns.SYNC_DATA2);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, EventsColumns.SYNC_DATA3);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, EventsColumns.SYNC_DATA4);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, EventsColumns.SYNC_DATA5);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, EventsColumns.SYNC_DATA6);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, EventsColumns.SYNC_DATA7);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, EventsColumns.SYNC_DATA8);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, EventsColumns.SYNC_DATA9);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, EventsColumns.SYNC_DATA10);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, CalendarSyncColumns.CAL_SYNC1);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, CalendarSyncColumns.CAL_SYNC2);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, CalendarSyncColumns.CAL_SYNC3);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, CalendarSyncColumns.CAL_SYNC4);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, CalendarSyncColumns.CAL_SYNC5);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, CalendarSyncColumns.CAL_SYNC6);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, CalendarSyncColumns.CAL_SYNC7);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, CalendarSyncColumns.CAL_SYNC8);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, CalendarSyncColumns.CAL_SYNC9);
-                DatabaseUtils.cursorStringToContentValuesIfPresent(cursor, cv, CalendarSyncColumns.CAL_SYNC10);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.SYNC_DATA1);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.SYNC_DATA2);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.SYNC_DATA3);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.SYNC_DATA4);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.SYNC_DATA5);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.SYNC_DATA6);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.SYNC_DATA7);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.SYNC_DATA8);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.SYNC_DATA9);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, EventsColumns.SYNC_DATA10);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, CalendarSyncColumns.CAL_SYNC1);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, CalendarSyncColumns.CAL_SYNC2);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, CalendarSyncColumns.CAL_SYNC3);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, CalendarSyncColumns.CAL_SYNC4);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, CalendarSyncColumns.CAL_SYNC5);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, CalendarSyncColumns.CAL_SYNC6);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, CalendarSyncColumns.CAL_SYNC7);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, CalendarSyncColumns.CAL_SYNC8);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, CalendarSyncColumns.CAL_SYNC9);
+                DatabaseUtils.cursorStringToContentValuesIfPresent(
+                        cursor, cv, CalendarSyncColumns.CAL_SYNC10);
                 Entity entity = new Entity(cv);
                 if (this.mResolver != null) {
-                    subCursor = this.mResolver.query(Reminders.CONTENT_URI, REMINDERS_PROJECTION, WHERE_EVENT_ID, new String[]{Long.toString(eventId)}, null);
+                    subCursor =
+                            this.mResolver.query(
+                                    Reminders.CONTENT_URI,
+                                    REMINDERS_PROJECTION,
+                                    WHERE_EVENT_ID,
+                                    new String[] {Long.toString(eventId)},
+                                    null);
                 } else {
-                    subCursor = this.mProvider.query(Reminders.CONTENT_URI, REMINDERS_PROJECTION, WHERE_EVENT_ID, new String[]{Long.toString(eventId)}, null);
+                    subCursor =
+                            this.mProvider.query(
+                                    Reminders.CONTENT_URI,
+                                    REMINDERS_PROJECTION,
+                                    WHERE_EVENT_ID,
+                                    new String[] {Long.toString(eventId)},
+                                    null);
                 }
                 while (subCursor.moveToNext()) {
                     try {
                         ContentValues reminderValues = new ContentValues();
                         reminderValues.put("minutes", Integer.valueOf(subCursor.getInt(0)));
-                        reminderValues.put(RemindersColumns.METHOD, Integer.valueOf(subCursor.getInt(1)));
+                        reminderValues.put(
+                                RemindersColumns.METHOD, Integer.valueOf(subCursor.getInt(1)));
                         entity.addSubValue(Reminders.CONTENT_URI, reminderValues);
                     } finally {
                     }
                 }
                 subCursor.close();
                 if (this.mResolver != null) {
-                    subCursor2 = this.mResolver.query(Attendees.CONTENT_URI, ATTENDEES_PROJECTION, WHERE_EVENT_ID, new String[]{Long.toString(eventId)}, null);
+                    subCursor2 =
+                            this.mResolver.query(
+                                    Attendees.CONTENT_URI,
+                                    ATTENDEES_PROJECTION,
+                                    WHERE_EVENT_ID,
+                                    new String[] {Long.toString(eventId)},
+                                    null);
                 } else {
-                    subCursor2 = this.mProvider.query(Attendees.CONTENT_URI, ATTENDEES_PROJECTION, WHERE_EVENT_ID, new String[]{Long.toString(eventId)}, null);
+                    subCursor2 =
+                            this.mProvider.query(
+                                    Attendees.CONTENT_URI,
+                                    ATTENDEES_PROJECTION,
+                                    WHERE_EVENT_ID,
+                                    new String[] {Long.toString(eventId)},
+                                    null);
                 }
                 while (subCursor.moveToNext()) {
                     try {
                         ContentValues attendeeValues = new ContentValues();
                         attendeeValues.put(AttendeesColumns.ATTENDEE_NAME, subCursor.getString(0));
                         attendeeValues.put(AttendeesColumns.ATTENDEE_EMAIL, subCursor.getString(1));
-                        attendeeValues.put(AttendeesColumns.ATTENDEE_RELATIONSHIP, Integer.valueOf(subCursor.getInt(2)));
-                        attendeeValues.put(AttendeesColumns.ATTENDEE_TYPE, Integer.valueOf(subCursor.getInt(3)));
-                        attendeeValues.put(AttendeesColumns.ATTENDEE_STATUS, Integer.valueOf(subCursor.getInt(4)));
-                        attendeeValues.put(AttendeesColumns.ATTENDEE_IDENTITY, subCursor.getString(5));
-                        attendeeValues.put(AttendeesColumns.ATTENDEE_ID_NAMESPACE, subCursor.getString(6));
+                        attendeeValues.put(
+                                AttendeesColumns.ATTENDEE_RELATIONSHIP,
+                                Integer.valueOf(subCursor.getInt(2)));
+                        attendeeValues.put(
+                                AttendeesColumns.ATTENDEE_TYPE,
+                                Integer.valueOf(subCursor.getInt(3)));
+                        attendeeValues.put(
+                                AttendeesColumns.ATTENDEE_STATUS,
+                                Integer.valueOf(subCursor.getInt(4)));
+                        attendeeValues.put(
+                                AttendeesColumns.ATTENDEE_IDENTITY, subCursor.getString(5));
+                        attendeeValues.put(
+                                AttendeesColumns.ATTENDEE_ID_NAMESPACE, subCursor.getString(6));
                         entity.addSubValue(Attendees.CONTENT_URI, attendeeValues);
                     } finally {
                     }
                 }
                 subCursor.close();
                 if (this.mResolver != null) {
-                    subCursor3 = this.mResolver.query(ExtendedProperties.CONTENT_URI, EXTENDED_PROJECTION, WHERE_EVENT_ID, new String[]{Long.toString(eventId)}, null);
+                    subCursor3 =
+                            this.mResolver.query(
+                                    ExtendedProperties.CONTENT_URI,
+                                    EXTENDED_PROJECTION,
+                                    WHERE_EVENT_ID,
+                                    new String[] {Long.toString(eventId)},
+                                    null);
                 } else {
-                    subCursor3 = this.mProvider.query(ExtendedProperties.CONTENT_URI, EXTENDED_PROJECTION, WHERE_EVENT_ID, new String[]{Long.toString(eventId)}, null);
+                    subCursor3 =
+                            this.mProvider.query(
+                                    ExtendedProperties.CONTENT_URI,
+                                    EXTENDED_PROJECTION,
+                                    WHERE_EVENT_ID,
+                                    new String[] {Long.toString(eventId)},
+                                    null);
                 }
                 while (subCursor.moveToNext()) {
                     try {
@@ -507,16 +664,57 @@ public final class CalendarContract {
         }
     }
 
-    public static final class Events implements BaseColumns, SyncColumns, EventsColumns, CalendarColumns {
+    public static final class Events
+            implements BaseColumns, SyncColumns, EventsColumns, CalendarColumns {
         private static final String DEFAULT_SORT_ORDER = "";
         public static final Uri CONTENT_URI = Uri.parse("content://com.android.calendar/events");
-        public static final Uri ENTERPRISE_CONTENT_URI = Uri.parse("content://com.android.calendar/enterprise/events");
-        public static final Uri CONTENT_EXCEPTION_URI = Uri.parse("content://com.android.calendar/exception");
-        public static String[] PROVIDER_WRITABLE_COLUMNS = {"account_name", "account_type", CalendarSyncColumns.CAL_SYNC1, CalendarSyncColumns.CAL_SYNC2, CalendarSyncColumns.CAL_SYNC3, CalendarSyncColumns.CAL_SYNC4, CalendarSyncColumns.CAL_SYNC5, CalendarSyncColumns.CAL_SYNC6, CalendarSyncColumns.CAL_SYNC7, CalendarSyncColumns.CAL_SYNC8, CalendarSyncColumns.CAL_SYNC9, CalendarSyncColumns.CAL_SYNC10, CalendarColumns.ALLOWED_REMINDERS, CalendarColumns.ALLOWED_ATTENDEE_TYPES, CalendarColumns.ALLOWED_AVAILABILITY, CalendarColumns.CALENDAR_ACCESS_LEVEL, CalendarColumns.CALENDAR_COLOR, CalendarColumns.CALENDAR_TIME_ZONE, CalendarColumns.CAN_MODIFY_TIME_ZONE, CalendarColumns.CAN_ORGANIZER_RESPOND, "calendar_displayName", SyncColumns.CAN_PARTIALLY_UPDATE, CalendarColumns.SYNC_EVENTS, CalendarColumns.VISIBLE};
-        public static final String[] SYNC_WRITABLE_COLUMNS = {"_sync_id", "dirty", SyncColumns.MUTATORS, EventsColumns.SYNC_DATA1, EventsColumns.SYNC_DATA2, EventsColumns.SYNC_DATA3, EventsColumns.SYNC_DATA4, EventsColumns.SYNC_DATA5, EventsColumns.SYNC_DATA6, EventsColumns.SYNC_DATA7, EventsColumns.SYNC_DATA8, EventsColumns.SYNC_DATA9, EventsColumns.SYNC_DATA10};
+        public static final Uri ENTERPRISE_CONTENT_URI =
+                Uri.parse("content://com.android.calendar/enterprise/events");
+        public static final Uri CONTENT_EXCEPTION_URI =
+                Uri.parse("content://com.android.calendar/exception");
+        public static String[] PROVIDER_WRITABLE_COLUMNS = {
+            "account_name",
+            "account_type",
+            CalendarSyncColumns.CAL_SYNC1,
+            CalendarSyncColumns.CAL_SYNC2,
+            CalendarSyncColumns.CAL_SYNC3,
+            CalendarSyncColumns.CAL_SYNC4,
+            CalendarSyncColumns.CAL_SYNC5,
+            CalendarSyncColumns.CAL_SYNC6,
+            CalendarSyncColumns.CAL_SYNC7,
+            CalendarSyncColumns.CAL_SYNC8,
+            CalendarSyncColumns.CAL_SYNC9,
+            CalendarSyncColumns.CAL_SYNC10,
+            CalendarColumns.ALLOWED_REMINDERS,
+            CalendarColumns.ALLOWED_ATTENDEE_TYPES,
+            CalendarColumns.ALLOWED_AVAILABILITY,
+            CalendarColumns.CALENDAR_ACCESS_LEVEL,
+            CalendarColumns.CALENDAR_COLOR,
+            CalendarColumns.CALENDAR_TIME_ZONE,
+            CalendarColumns.CAN_MODIFY_TIME_ZONE,
+            CalendarColumns.CAN_ORGANIZER_RESPOND,
+            "calendar_displayName",
+            SyncColumns.CAN_PARTIALLY_UPDATE,
+            CalendarColumns.SYNC_EVENTS,
+            CalendarColumns.VISIBLE
+        };
+        public static final String[] SYNC_WRITABLE_COLUMNS = {
+            "_sync_id",
+            "dirty",
+            SyncColumns.MUTATORS,
+            EventsColumns.SYNC_DATA1,
+            EventsColumns.SYNC_DATA2,
+            EventsColumns.SYNC_DATA3,
+            EventsColumns.SYNC_DATA4,
+            EventsColumns.SYNC_DATA5,
+            EventsColumns.SYNC_DATA6,
+            EventsColumns.SYNC_DATA7,
+            EventsColumns.SYNC_DATA8,
+            EventsColumns.SYNC_DATA9,
+            EventsColumns.SYNC_DATA10
+        };
 
-        private Events() {
-        }
+        private Events() {}
     }
 
     public static final class Instances implements BaseColumns, EventsColumns, CalendarColumns {
@@ -530,30 +728,49 @@ public final class CalendarContract {
         public static final String START_MINUTE = "startMinute";
         private static final String WHERE_CALENDARS_SELECTED = "visible=?";
         private static final String[] WHERE_CALENDARS_ARGS = {"1"};
-        public static final Uri CONTENT_URI = Uri.parse("content://com.android.calendar/instances/when");
-        public static final Uri CONTENT_BY_DAY_URI = Uri.parse("content://com.android.calendar/instances/whenbyday");
-        public static final Uri CONTENT_SEARCH_URI = Uri.parse("content://com.android.calendar/instances/search");
-        public static final Uri CONTENT_SEARCH_BY_DAY_URI = Uri.parse("content://com.android.calendar/instances/searchbyday");
-        public static final Uri ENTERPRISE_CONTENT_URI = Uri.parse("content://com.android.calendar/enterprise/instances/when");
-        public static final Uri ENTERPRISE_CONTENT_BY_DAY_URI = Uri.parse("content://com.android.calendar/enterprise/instances/whenbyday");
-        public static final Uri ENTERPRISE_CONTENT_SEARCH_URI = Uri.parse("content://com.android.calendar/enterprise/instances/search");
-        public static final Uri ENTERPRISE_CONTENT_SEARCH_BY_DAY_URI = Uri.parse("content://com.android.calendar/enterprise/instances/searchbyday");
+        public static final Uri CONTENT_URI =
+                Uri.parse("content://com.android.calendar/instances/when");
+        public static final Uri CONTENT_BY_DAY_URI =
+                Uri.parse("content://com.android.calendar/instances/whenbyday");
+        public static final Uri CONTENT_SEARCH_URI =
+                Uri.parse("content://com.android.calendar/instances/search");
+        public static final Uri CONTENT_SEARCH_BY_DAY_URI =
+                Uri.parse("content://com.android.calendar/instances/searchbyday");
+        public static final Uri ENTERPRISE_CONTENT_URI =
+                Uri.parse("content://com.android.calendar/enterprise/instances/when");
+        public static final Uri ENTERPRISE_CONTENT_BY_DAY_URI =
+                Uri.parse("content://com.android.calendar/enterprise/instances/whenbyday");
+        public static final Uri ENTERPRISE_CONTENT_SEARCH_URI =
+                Uri.parse("content://com.android.calendar/enterprise/instances/search");
+        public static final Uri ENTERPRISE_CONTENT_SEARCH_BY_DAY_URI =
+                Uri.parse("content://com.android.calendar/enterprise/instances/searchbyday");
 
-        private Instances() {
-        }
+        private Instances() {}
 
-        public static final Cursor query(ContentResolver cr, String[] projection, long begin, long end) {
+        public static final Cursor query(
+                ContentResolver cr, String[] projection, long begin, long end) {
             Uri.Builder builder = CONTENT_URI.buildUpon();
             ContentUris.appendId(builder, begin);
             ContentUris.appendId(builder, end);
-            return cr.query(builder.build(), projection, WHERE_CALENDARS_SELECTED, WHERE_CALENDARS_ARGS, DEFAULT_SORT_ORDER);
+            return cr.query(
+                    builder.build(),
+                    projection,
+                    WHERE_CALENDARS_SELECTED,
+                    WHERE_CALENDARS_ARGS,
+                    DEFAULT_SORT_ORDER);
         }
 
-        public static final Cursor query(ContentResolver cr, String[] projection, long begin, long end, String searchQuery) {
+        public static final Cursor query(
+                ContentResolver cr, String[] projection, long begin, long end, String searchQuery) {
             Uri.Builder builder = CONTENT_SEARCH_URI.buildUpon();
             ContentUris.appendId(builder, begin);
             ContentUris.appendId(builder, end);
-            return cr.query(builder.appendPath(searchQuery).build(), projection, WHERE_CALENDARS_SELECTED, WHERE_CALENDARS_ARGS, DEFAULT_SORT_ORDER);
+            return cr.query(
+                    builder.appendPath(searchQuery).build(),
+                    projection,
+                    WHERE_CALENDARS_SELECTED,
+                    WHERE_CALENDARS_ARGS,
+                    DEFAULT_SORT_ORDER);
         }
     }
 
@@ -565,23 +782,22 @@ public final class CalendarContract {
         public static final String TIMEZONE_TYPE_HOME = "home";
         public static final Uri URI = Uri.parse("content://com.android.calendar/properties");
 
-        private CalendarCache() {
-        }
+        private CalendarCache() {}
     }
 
     public static final class CalendarMetaData implements CalendarMetaDataColumns, BaseColumns {
-        private CalendarMetaData() {
-        }
+        private CalendarMetaData() {}
     }
 
     public static final class EventDays implements EventDaysColumns {
-        public static final Uri CONTENT_URI = Uri.parse("content://com.android.calendar/instances/groupbyday");
+        public static final Uri CONTENT_URI =
+                Uri.parse("content://com.android.calendar/instances/groupbyday");
         private static final String SELECTION = "selected=1";
 
-        private EventDays() {
-        }
+        private EventDays() {}
 
-        public static final Cursor query(ContentResolver cr, int startDay, int numDays, String[] projection) {
+        public static final Cursor query(
+                ContentResolver cr, int startDay, int numDays, String[] projection) {
             if (numDays >= 1) {
                 int endDay = (startDay + numDays) - 1;
                 Uri.Builder builder = CONTENT_URI.buildUpon();
@@ -597,8 +813,7 @@ public final class CalendarContract {
         public static final Uri CONTENT_URI = Uri.parse("content://com.android.calendar/reminders");
         private static final String REMINDERS_WHERE = "event_id=?";
 
-        private Reminders() {
-        }
+        private Reminders() {}
 
         public static final Cursor query(ContentResolver cr, long eventId, String[] projection) {
             String[] remArgs = {Long.toString(eventId)};
@@ -606,20 +821,29 @@ public final class CalendarContract {
         }
     }
 
-    public static final class CalendarAlerts implements BaseColumns, CalendarAlertsColumns, EventsColumns, CalendarColumns {
-        public static final Uri CONTENT_URI = Uri.parse("content://com.android.calendar/calendar_alerts");
-        public static final Uri CONTENT_URI_BY_INSTANCE = Uri.parse("content://com.android.calendar/calendar_alerts/by_instance");
+    public static final class CalendarAlerts
+            implements BaseColumns, CalendarAlertsColumns, EventsColumns, CalendarColumns {
+        public static final Uri CONTENT_URI =
+                Uri.parse("content://com.android.calendar/calendar_alerts");
+        public static final Uri CONTENT_URI_BY_INSTANCE =
+                Uri.parse("content://com.android.calendar/calendar_alerts/by_instance");
         private static final boolean DEBUG = false;
         private static final String SORT_ORDER_ALARMTIME_ASC = "alarmTime ASC";
         public static final String TABLE_NAME = "CalendarAlerts";
         private static final String WHERE_ALARM_EXISTS = "event_id=? AND begin=? AND alarmTime=?";
         private static final String WHERE_FINDNEXTALARMTIME = "alarmTime>=?";
-        private static final String WHERE_RESCHEDULE_MISSED_ALARMS = "state=0 AND alarmTime<? AND alarmTime>? AND end>=?";
+        private static final String WHERE_RESCHEDULE_MISSED_ALARMS =
+                "state=0 AND alarmTime<? AND alarmTime>? AND end>=?";
 
-        private CalendarAlerts() {
-        }
+        private CalendarAlerts() {}
 
-        public static final Uri insert(ContentResolver cr, long eventId, long begin, long end, long alarmTime, int minutes) {
+        public static final Uri insert(
+                ContentResolver cr,
+                long eventId,
+                long begin,
+                long end,
+                long alarmTime,
+                int minutes) {
             ContentValues values = new ContentValues();
             values.put("event_id", Long.valueOf(eventId));
             values.put("begin", Long.valueOf(begin));
@@ -637,7 +861,13 @@ public final class CalendarContract {
         public static final long findNextAlarmTime(ContentResolver cr, long millis) {
             String str = "alarmTime>=" + millis;
             String[] projection = {CalendarAlertsColumns.ALARM_TIME};
-            Cursor cursor = cr.query(CONTENT_URI, projection, WHERE_FINDNEXTALARMTIME, new String[]{Long.toString(millis)}, SORT_ORDER_ALARMTIME_ASC);
+            Cursor cursor =
+                    cr.query(
+                            CONTENT_URI,
+                            projection,
+                            WHERE_FINDNEXTALARMTIME,
+                            new String[] {Long.toString(millis)},
+                            SORT_ORDER_ALARMTIME_ASC);
             long alarmTime = -1;
             if (cursor != null) {
                 try {
@@ -653,11 +883,20 @@ public final class CalendarContract {
             return alarmTime;
         }
 
-        public static final void rescheduleMissedAlarms(ContentResolver cr, Context context, AlarmManager manager) {
+        public static final void rescheduleMissedAlarms(
+                ContentResolver cr, Context context, AlarmManager manager) {
             long now = System.currentTimeMillis();
             long ancient = now - 86400000;
             String[] projection = {CalendarAlertsColumns.ALARM_TIME};
-            Cursor cursor = cr.query(CONTENT_URI, projection, WHERE_RESCHEDULE_MISSED_ALARMS, new String[]{Long.toString(now), Long.toString(ancient), Long.toString(now)}, SORT_ORDER_ALARMTIME_ASC);
+            Cursor cursor =
+                    cr.query(
+                            CONTENT_URI,
+                            projection,
+                            WHERE_RESCHEDULE_MISSED_ALARMS,
+                            new String[] {
+                                Long.toString(now), Long.toString(ancient), Long.toString(now)
+                            },
+                            SORT_ORDER_ALARMTIME_ASC);
             if (cursor == null) {
                 return;
             }
@@ -689,9 +928,20 @@ public final class CalendarContract {
             manager.setExactAndAllowWhileIdle(0, alarmTime, pi);
         }
 
-        public static final boolean alarmExists(ContentResolver cr, long eventId, long begin, long alarmTime) {
+        public static final boolean alarmExists(
+                ContentResolver cr, long eventId, long begin, long alarmTime) {
             String[] projection = {CalendarAlertsColumns.ALARM_TIME};
-            Cursor cursor = cr.query(CONTENT_URI, projection, WHERE_ALARM_EXISTS, new String[]{Long.toString(eventId), Long.toString(begin), Long.toString(alarmTime)}, null);
+            Cursor cursor =
+                    cr.query(
+                            CONTENT_URI,
+                            projection,
+                            WHERE_ALARM_EXISTS,
+                            new String[] {
+                                Long.toString(eventId),
+                                Long.toString(begin),
+                                Long.toString(alarmTime)
+                            },
+                            null);
             boolean found = false;
             if (cursor != null) {
                 try {
@@ -712,27 +962,26 @@ public final class CalendarContract {
         public static final Uri CONTENT_URI = Uri.parse("content://com.android.calendar/colors");
         public static final String TABLE_NAME = "Colors";
 
-        private Colors() {
-        }
+        private Colors() {}
     }
 
-    public static final class ExtendedProperties implements BaseColumns, ExtendedPropertiesColumns, EventsColumns {
-        public static final Uri CONTENT_URI = Uri.parse("content://com.android.calendar/extendedproperties");
+    public static final class ExtendedProperties
+            implements BaseColumns, ExtendedPropertiesColumns, EventsColumns {
+        public static final Uri CONTENT_URI =
+                Uri.parse("content://com.android.calendar/extendedproperties");
 
-        private ExtendedProperties() {
-        }
+        private ExtendedProperties() {}
     }
 
     public static final class SyncState implements SyncStateContract.Columns {
         private static final String CONTENT_DIRECTORY = "syncstate";
-        public static final Uri CONTENT_URI = Uri.withAppendedPath(CalendarContract.CONTENT_URI, "syncstate");
+        public static final Uri CONTENT_URI =
+                Uri.withAppendedPath(CalendarContract.CONTENT_URI, "syncstate");
 
-        private SyncState() {
-        }
+        private SyncState() {}
     }
 
     public static final class EventsRawTimes implements BaseColumns, EventsRawTimesColumns {
-        private EventsRawTimes() {
-        }
+        private EventsRawTimes() {}
     }
 }

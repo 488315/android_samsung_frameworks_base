@@ -1,7 +1,9 @@
 package com.android.server.soundtrigger;
 
 import android.util.Slog;
+
 import com.android.server.utils.EventLogger;
+
 import java.util.UUID;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -28,7 +30,7 @@ public final class SoundTriggerEvent$ServiceEvent extends EventLogger.Event {
             LIST_MODULE = type2;
             Type type3 = new Type("DETACH", 2);
             DETACH = type3;
-            $VALUES = new Type[]{type, type2, type3};
+            $VALUES = new Type[] {type, type2, type3};
         }
 
         public static Type valueOf(String str) {
@@ -46,7 +48,10 @@ public final class SoundTriggerEvent$ServiceEvent extends EventLogger.Event {
         this.mErrorString = str2;
     }
 
-    public SoundTriggerEvent$ServiceEvent(SoundTriggerEvent$SessionEvent$Type soundTriggerEvent$SessionEvent$Type, UUID uuid, String str) {
+    public SoundTriggerEvent$ServiceEvent(
+            SoundTriggerEvent$SessionEvent$Type soundTriggerEvent$SessionEvent$Type,
+            UUID uuid,
+            String str) {
         this.mErrorString = soundTriggerEvent$SessionEvent$Type;
         this.mType = uuid;
         this.mPackageName = str;
@@ -56,7 +61,8 @@ public final class SoundTriggerEvent$ServiceEvent extends EventLogger.Event {
     public final String eventToString() {
         switch (this.$r8$classId) {
             case 0:
-                StringBuilder sb = new StringBuilder(String.format("%-12s", ((Type) this.mType).name()));
+                StringBuilder sb =
+                        new StringBuilder(String.format("%-12s", ((Type) this.mType).name()));
                 String str = (String) this.mErrorString;
                 if (str != null) {
                     sb.append(" ERROR: ");
@@ -69,7 +75,12 @@ public final class SoundTriggerEvent$ServiceEvent extends EventLogger.Event {
                 }
                 return sb.toString();
             default:
-                StringBuilder sb2 = new StringBuilder(String.format("%-25s", ((SoundTriggerEvent$SessionEvent$Type) this.mErrorString).name()));
+                StringBuilder sb2 =
+                        new StringBuilder(
+                                String.format(
+                                        "%-25s",
+                                        ((SoundTriggerEvent$SessionEvent$Type) this.mErrorString)
+                                                .name()));
                 String str3 = this.mPackageName;
                 if (str3 != null) {
                     sb2.append(" ERROR: ");

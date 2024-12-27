@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.crypto.generators;
 
 import android.content.pm.PackageManager;
+
 import com.android.internal.org.bouncycastle.crypto.AsymmetricCipherKeyPair;
 import com.android.internal.org.bouncycastle.crypto.AsymmetricCipherKeyPairGenerator;
 import com.android.internal.org.bouncycastle.crypto.KeyGenerationParameters;
@@ -11,6 +12,7 @@ import com.android.internal.org.bouncycastle.crypto.params.RSAPrivateCrtKeyParam
 import com.android.internal.org.bouncycastle.math.Primes;
 import com.android.internal.org.bouncycastle.math.ec.WNafUtil;
 import com.android.internal.org.bouncycastle.util.BigIntegers;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
@@ -94,7 +96,12 @@ public class RSAKeyPairGenerator implements AsymmetricCipherKeyPairGenerator {
                 BigInteger dP = d.remainder(pSub1);
                 BigInteger dQ = d.remainder(qSub1);
                 BigInteger qInv = BigIntegers.modOddInverse(gcd, q2);
-                result = new AsymmetricCipherKeyPair((AsymmetricKeyParameter) new RSAKeyParameters(false, n, e), (AsymmetricKeyParameter) new RSAPrivateCrtKeyParameters(n, e, d, gcd, q2, dP, dQ, qInv));
+                result =
+                        new AsymmetricCipherKeyPair(
+                                (AsymmetricKeyParameter) new RSAKeyParameters(false, n, e),
+                                (AsymmetricKeyParameter)
+                                        new RSAPrivateCrtKeyParameters(
+                                                n, e, d, gcd, q2, dP, dQ, qInv));
                 rSAKeyPairGenerator = this;
                 strength = strength2;
                 done2 = true;
@@ -108,7 +115,10 @@ public class RSAKeyPairGenerator implements AsymmetricCipherKeyPairGenerator {
     protected BigInteger chooseRandomPrime(int bitlength, BigInteger e, BigInteger sqrdBound) {
         for (int i = 0; i != bitlength * 5; i++) {
             BigInteger p = BigIntegers.createRandomPrime(bitlength, 1, this.param.getRandom());
-            if (!p.mod(e).equals(ONE) && p.multiply(p).compareTo(sqrdBound) >= 0 && isProbablePrime(p) && e.gcd(p.subtract(ONE)).equals(ONE)) {
+            if (!p.mod(e).equals(ONE)
+                    && p.multiply(p).compareTo(sqrdBound) >= 0
+                    && isProbablePrime(p)
+                    && e.gcd(p.subtract(ONE)).equals(ONE)) {
                 return p;
             }
         }
@@ -117,7 +127,8 @@ public class RSAKeyPairGenerator implements AsymmetricCipherKeyPairGenerator {
 
     protected boolean isProbablePrime(BigInteger x) {
         int iterations = getNumberOfIterations(x.bitLength(), this.param.getCertainty());
-        return !Primes.hasAnySmallFactors(x) && Primes.isMRProbablePrime(x, this.param.getRandom(), iterations);
+        return !Primes.hasAnySmallFactors(x)
+                && Primes.isMRProbablePrime(x, this.param.getRandom(), iterations);
     }
 
     private static int getNumberOfIterations(int bits, int certainty) {

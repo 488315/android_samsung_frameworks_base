@@ -4,6 +4,7 @@ import android.app.backup.IBackupManagerMonitor;
 import android.content.pm.Signature;
 import android.os.Bundle;
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
@@ -12,6 +13,7 @@ import com.android.server.HermesService$3$$ExternalSyntheticOutline0;
 import com.android.server.backup.FileMetadata;
 import com.android.server.backup.UserBackupManagerService;
 import com.android.server.backup.restore.FullRestoreEngine$$ExternalSyntheticLambda0;
+
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -25,10 +27,14 @@ public final class TarBackupReader {
     public final InputStream mInputStream;
     public byte[] mWidgetData = null;
 
-    public TarBackupReader(InputStream inputStream, FullRestoreEngine$$ExternalSyntheticLambda0 fullRestoreEngine$$ExternalSyntheticLambda0, IBackupManagerMonitor iBackupManagerMonitor) {
+    public TarBackupReader(
+            InputStream inputStream,
+            FullRestoreEngine$$ExternalSyntheticLambda0 fullRestoreEngine$$ExternalSyntheticLambda0,
+            IBackupManagerMonitor iBackupManagerMonitor) {
         this.mInputStream = inputStream;
         this.mBytesReadListener = fullRestoreEngine$$ExternalSyntheticLambda0;
-        this.mBackupManagerMonitorEventSender = new BackupManagerMonitorEventSender(iBackupManagerMonitor);
+        this.mBackupManagerMonitorEventSender =
+                new BackupManagerMonitorEventSender(iBackupManagerMonitor);
     }
 
     public static int extractLine(byte[] bArr, int i, String[] strArr) {
@@ -53,7 +59,8 @@ public final class TarBackupReader {
                 break;
             }
             if (b < 48 || b > i3 + 47) {
-                throw new IOException("Invalid number in header: '" + ((char) b) + "' for radix " + i3);
+                throw new IOException(
+                        "Invalid number in header: '" + ((char) b) + "' for radix " + i3);
             }
             j = (b - 48) + (i3 * j);
             i++;
@@ -81,16 +88,32 @@ public final class TarBackupReader {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.android.server.backup.restore.RestorePolicy chooseRestorePolicy(android.content.pm.PackageManager r19, boolean r20, com.android.server.backup.FileMetadata r21, android.content.pm.Signature[] r22, int r23, com.android.server.backup.utils.BackupEligibilityRules r24, android.content.Context r25, boolean r26) {
+    public final com.android.server.backup.restore.RestorePolicy chooseRestorePolicy(
+            android.content.pm.PackageManager r19,
+            boolean r20,
+            com.android.server.backup.FileMetadata r21,
+            android.content.pm.Signature[] r22,
+            int r23,
+            com.android.server.backup.utils.BackupEligibilityRules r24,
+            android.content.Context r25,
+            boolean r26) {
         /*
             Method dump skipped, instructions count: 477
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.backup.utils.TarBackupReader.chooseRestorePolicy(android.content.pm.PackageManager, boolean, com.android.server.backup.FileMetadata, android.content.pm.Signature[], int, com.android.server.backup.utils.BackupEligibilityRules, android.content.Context, boolean):com.android.server.backup.restore.RestorePolicy");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.backup.utils.TarBackupReader.chooseRestorePolicy(android.content.pm.PackageManager,"
+                    + " boolean, com.android.server.backup.FileMetadata,"
+                    + " android.content.pm.Signature[], int,"
+                    + " com.android.server.backup.utils.BackupEligibilityRules,"
+                    + " android.content.Context,"
+                    + " boolean):com.android.server.backup.restore.RestorePolicy");
     }
 
     public final void getMonitor() {
-        IBackupManagerMonitor iBackupManagerMonitor = this.mBackupManagerMonitorEventSender.mMonitor;
+        IBackupManagerMonitor iBackupManagerMonitor =
+                this.mBackupManagerMonitorEventSender.mMonitor;
     }
 
     public final byte[] getWidgetData() {
@@ -98,7 +121,8 @@ public final class TarBackupReader {
     }
 
     public final Signature[] readAppManifestAndReturnSignatures(FileMetadata fileMetadata) {
-        BackupManagerMonitorEventSender backupManagerMonitorEventSender = this.mBackupManagerMonitorEventSender;
+        BackupManagerMonitorEventSender backupManagerMonitorEventSender =
+                this.mBackupManagerMonitorEventSender;
         long j = fileMetadata.size;
         if (j > 65536) {
             throw new IOException("Restore manifest too big; corrupt? size=" + fileMetadata.size);
@@ -138,23 +162,58 @@ public final class TarBackupReader {
                         }
                         return signatureArr;
                     }
-                    Slog.i("BackupManagerService", "Missing signature on backed-up package " + fileMetadata.packageName);
-                    backupManagerMonitorEventSender.monitorEvent(42, null, 3, BackupManagerMonitorEventSender.putMonitoringExtra("android.app.backup.extra.LOG_EVENT_PACKAGE_NAME", fileMetadata.packageName));
+                    Slog.i(
+                            "BackupManagerService",
+                            "Missing signature on backed-up package " + fileMetadata.packageName);
+                    backupManagerMonitorEventSender.monitorEvent(
+                            42,
+                            null,
+                            3,
+                            BackupManagerMonitorEventSender.putMonitoringExtra(
+                                    "android.app.backup.extra.LOG_EVENT_PACKAGE_NAME",
+                                    fileMetadata.packageName));
                 } else {
-                    Slog.i("BackupManagerService", "Expected package " + fileMetadata.packageName + " but restore manifest claims " + str);
-                    Bundle putMonitoringExtra = BackupManagerMonitorEventSender.putMonitoringExtra("android.app.backup.extra.LOG_EVENT_PACKAGE_NAME", fileMetadata.packageName);
-                    putMonitoringExtra.putString("android.app.backup.extra.LOG_MANIFEST_PACKAGE_NAME", str);
+                    Slog.i(
+                            "BackupManagerService",
+                            "Expected package "
+                                    + fileMetadata.packageName
+                                    + " but restore manifest claims "
+                                    + str);
+                    Bundle putMonitoringExtra =
+                            BackupManagerMonitorEventSender.putMonitoringExtra(
+                                    "android.app.backup.extra.LOG_EVENT_PACKAGE_NAME",
+                                    fileMetadata.packageName);
+                    putMonitoringExtra.putString(
+                            "android.app.backup.extra.LOG_MANIFEST_PACKAGE_NAME", str);
                     backupManagerMonitorEventSender.monitorEvent(43, null, 3, putMonitoringExtra);
                 }
             } else {
-                Slog.i("BackupManagerService", "Unknown restore manifest version " + parseInt + " for package " + fileMetadata.packageName);
-                Bundle putMonitoringExtra2 = BackupManagerMonitorEventSender.putMonitoringExtra("android.app.backup.extra.LOG_EVENT_PACKAGE_NAME", fileMetadata.packageName);
-                putMonitoringExtra2.putInt("android.app.backup.extra.LOG_EVENT_PACKAGE_VERSION", parseInt);
+                Slog.i(
+                        "BackupManagerService",
+                        "Unknown restore manifest version "
+                                + parseInt
+                                + " for package "
+                                + fileMetadata.packageName);
+                Bundle putMonitoringExtra2 =
+                        BackupManagerMonitorEventSender.putMonitoringExtra(
+                                "android.app.backup.extra.LOG_EVENT_PACKAGE_NAME",
+                                fileMetadata.packageName);
+                putMonitoringExtra2.putInt(
+                        "android.app.backup.extra.LOG_EVENT_PACKAGE_VERSION", parseInt);
                 backupManagerMonitorEventSender.monitorEvent(44, null, 3, putMonitoringExtra2);
             }
         } catch (NumberFormatException unused) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Corrupt restore manifest for package "), fileMetadata.packageName, "BackupManagerService");
-            backupManagerMonitorEventSender.monitorEvent(46, null, 3, BackupManagerMonitorEventSender.putMonitoringExtra("android.app.backup.extra.LOG_EVENT_PACKAGE_NAME", fileMetadata.packageName));
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("Corrupt restore manifest for package "),
+                    fileMetadata.packageName,
+                    "BackupManagerService");
+            backupManagerMonitorEventSender.monitorEvent(
+                    46,
+                    null,
+                    3,
+                    BackupManagerMonitorEventSender.putMonitoringExtra(
+                            "android.app.backup.extra.LOG_EVENT_PACKAGE_NAME",
+                            fileMetadata.packageName));
         } catch (IllegalArgumentException e) {
             Slog.w("BackupManagerService", e.getMessage());
         }
@@ -175,31 +234,47 @@ public final class TarBackupReader {
         String[] strArr = new String[1];
         int extractLine = extractLine(bArr, 0, strArr);
         int parseInt = Integer.parseInt(strArr[0]);
-        BackupManagerMonitorEventSender backupManagerMonitorEventSender = this.mBackupManagerMonitorEventSender;
+        BackupManagerMonitorEventSender backupManagerMonitorEventSender =
+                this.mBackupManagerMonitorEventSender;
         if (parseInt != 1) {
-            DeviceIdleController$$ExternalSyntheticOutline0.m(parseInt, "Unsupported metadata version ", "BackupManagerService");
-            Bundle putMonitoringExtra = BackupManagerMonitorEventSender.putMonitoringExtra("android.app.backup.extra.LOG_EVENT_PACKAGE_NAME", fileMetadata.packageName);
-            putMonitoringExtra.putInt("android.app.backup.extra.LOG_EVENT_PACKAGE_VERSION", parseInt);
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    parseInt, "Unsupported metadata version ", "BackupManagerService");
+            Bundle putMonitoringExtra =
+                    BackupManagerMonitorEventSender.putMonitoringExtra(
+                            "android.app.backup.extra.LOG_EVENT_PACKAGE_NAME",
+                            fileMetadata.packageName);
+            putMonitoringExtra.putInt(
+                    "android.app.backup.extra.LOG_EVENT_PACKAGE_VERSION", parseInt);
             backupManagerMonitorEventSender.monitorEvent(48, null, 3, putMonitoringExtra);
             return;
         }
         int extractLine2 = extractLine(bArr, extractLine, strArr);
         String str = strArr[0];
         if (!fileMetadata.packageName.equals(str)) {
-            Slog.w("BackupManagerService", "Metadata mismatch: package " + fileMetadata.packageName + " but widget data for " + str);
-            Bundle putMonitoringExtra2 = BackupManagerMonitorEventSender.putMonitoringExtra("android.app.backup.extra.LOG_EVENT_PACKAGE_NAME", fileMetadata.packageName);
+            Slog.w(
+                    "BackupManagerService",
+                    "Metadata mismatch: package "
+                            + fileMetadata.packageName
+                            + " but widget data for "
+                            + str);
+            Bundle putMonitoringExtra2 =
+                    BackupManagerMonitorEventSender.putMonitoringExtra(
+                            "android.app.backup.extra.LOG_EVENT_PACKAGE_NAME",
+                            fileMetadata.packageName);
             putMonitoringExtra2.putString("android.app.backup.extra.LOG_WIDGET_PACKAGE_NAME", str);
             backupManagerMonitorEventSender.monitorEvent(47, null, 3, putMonitoringExtra2);
             return;
         }
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bArr, extractLine2, i - extractLine2);
+        ByteArrayInputStream byteArrayInputStream =
+                new ByteArrayInputStream(bArr, extractLine2, i - extractLine2);
         DataInputStream dataInputStream = new DataInputStream(byteArrayInputStream);
         while (byteArrayInputStream.available() > 0) {
             int readInt = dataInputStream.readInt();
             int readInt2 = dataInputStream.readInt();
             if (readInt2 > 65536) {
                 StringBuilder sb = new StringBuilder("Datum ");
-                BatteryService$$ExternalSyntheticOutline0.m(readInt, sb, " too big; corrupt? size=");
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        readInt, sb, " too big; corrupt? size=");
                 sb.append(fileMetadata.size);
                 throw new IOException(sb.toString());
             }
@@ -220,7 +295,9 @@ public final class TarBackupReader {
     public final void readPaxExtendedHeader(FileMetadata fileMetadata) {
         long j = fileMetadata.size;
         if (j > 32768) {
-            Slog.w("BackupManagerService", "Suspiciously large pax header size " + fileMetadata.size + " - aborting");
+            Slog.w(
+                    "BackupManagerService",
+                    "Suspiciously large pax header size " + fileMetadata.size + " - aborting");
             throw new IOException("Sanity failure: pax header size " + fileMetadata.size);
         }
         int i = ((int) ((j + 511) >> 9)) * 512;
@@ -256,7 +333,8 @@ public final class TarBackupReader {
             } else if ("size".equals(str)) {
                 fileMetadata.size = Long.parseLong(str2);
             } else {
-                HermesService$3$$ExternalSyntheticOutline0.m(i5, "Unhandled pax key: ", "BackupManagerService");
+                HermesService$3$$ExternalSyntheticOutline0.m(
+                        i5, "Unhandled pax key: ", "BackupManagerService");
             }
         } while (i3 < i2);
     }
@@ -265,7 +343,8 @@ public final class TarBackupReader {
         boolean z;
         byte[] bArr = new byte[512];
         int readExactly = readExactly(this.mInputStream, bArr, 512);
-        FullRestoreEngine$$ExternalSyntheticLambda0 fullRestoreEngine$$ExternalSyntheticLambda0 = this.mBytesReadListener;
+        FullRestoreEngine$$ExternalSyntheticLambda0 fullRestoreEngine$$ExternalSyntheticLambda0 =
+                this.mBytesReadListener;
         if (readExactly == 0) {
             z = false;
         } else {
@@ -287,7 +366,12 @@ public final class TarBackupReader {
             while (i < 500 && bArr[i] != 0) {
                 i++;
             }
-            fileMetadata.path = new String(bArr, FrameworkStatsLog.MAGNIFICATION_USAGE_REPORTED, i - FrameworkStatsLog.MAGNIFICATION_USAGE_REPORTED, "US-ASCII");
+            fileMetadata.path =
+                    new String(
+                            bArr,
+                            FrameworkStatsLog.MAGNIFICATION_USAGE_REPORTED,
+                            i - FrameworkStatsLog.MAGNIFICATION_USAGE_REPORTED,
+                            "US-ASCII");
             int i2 = 0;
             while (i2 < 100 && bArr[i2] != 0) {
                 i2++;
@@ -346,7 +430,8 @@ public final class TarBackupReader {
                 if (!substring2.equals("_manifest") && !fileMetadata.path.equals("_meta")) {
                     int indexOf2 = fileMetadata.path.indexOf(47);
                     if (indexOf2 < 0) {
-                        throw new IOException("Illegal semantic path in non-manifest " + fileMetadata.path);
+                        throw new IOException(
+                                "Illegal semantic path in non-manifest " + fileMetadata.path);
                     }
                     fileMetadata.domain = fileMetadata.path.substring(0, indexOf2);
                     fileMetadata.path = fileMetadata.path.substring(indexOf2 + 1);

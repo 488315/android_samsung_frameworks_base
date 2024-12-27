@@ -2,8 +2,6 @@ package android.app.backup;
 
 import android.app.IBackupAgent;
 import android.app.QueuedWork;
-import android.app.backup.BackupRestoreEventLogger;
-import android.app.backup.FullBackup;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.pm.ApplicationInfo;
@@ -22,9 +20,16 @@ import android.system.OsConstants;
 import android.system.StructStat;
 import android.util.ArraySet;
 import android.util.Log;
+
 import com.android.internal.infra.AndroidFuture;
 import com.android.server.backup.Flags;
+
+import libcore.io.IoUtils;
+
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -41,8 +46,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
-import libcore.io.IoUtils;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public abstract class BackupAgent extends ContextWrapper {
@@ -69,12 +72,17 @@ public abstract class BackupAgent extends ContextWrapper {
     private UserHandle mUser;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BackupTransportFlags {
-    }
+    public @interface BackupTransportFlags {}
 
-    public abstract void onBackup(ParcelFileDescriptor parcelFileDescriptor, BackupDataOutput backupDataOutput, ParcelFileDescriptor parcelFileDescriptor2) throws IOException;
+    public abstract void onBackup(
+            ParcelFileDescriptor parcelFileDescriptor,
+            BackupDataOutput backupDataOutput,
+            ParcelFileDescriptor parcelFileDescriptor2)
+            throws IOException;
 
-    public abstract void onRestore(BackupDataInput backupDataInput, int i, ParcelFileDescriptor parcelFileDescriptor) throws IOException;
+    public abstract void onRestore(
+            BackupDataInput backupDataInput, int i, ParcelFileDescriptor parcelFileDescriptor)
+            throws IOException;
 
     Handler getHandler() {
         if (this.mHandler == null) {
@@ -86,8 +94,7 @@ public abstract class BackupAgent extends ContextWrapper {
     class SharedPrefsSynchronizer implements Runnable {
         public final CountDownLatch mLatch = new CountDownLatch(1);
 
-        SharedPrefsSynchronizer() {
-        }
+        SharedPrefsSynchronizer() {}
 
         @Override // java.lang.Runnable
         public void run() {
@@ -120,8 +127,7 @@ public abstract class BackupAgent extends ContextWrapper {
         this.mBinder = new BackupServiceBinder().asBinder();
     }
 
-    public void onCreate() {
-    }
+    public void onCreate() {}
 
     public void onCreate(UserHandle user) {
         this.mUser = user;
@@ -140,14 +146,19 @@ public abstract class BackupAgent extends ContextWrapper {
         onCreate(user, backupDestination);
     }
 
-    public void onDestroy() {
-    }
+    public void onDestroy() {}
 
-    public void onRestore(BackupDataInput data, long appVersionCode, ParcelFileDescriptor newState) throws IOException {
+    public void onRestore(BackupDataInput data, long appVersionCode, ParcelFileDescriptor newState)
+            throws IOException {
         onRestore(data, (int) appVersionCode, newState);
     }
 
-    public void onRestore(BackupDataInput data, long appVersionCode, ParcelFileDescriptor newState, Set<String> excludedKeys) throws IOException {
+    public void onRestore(
+            BackupDataInput data,
+            long appVersionCode,
+            ParcelFileDescriptor newState,
+            Set<String> excludedKeys)
+            throws IOException {
         onRestore(data, appVersionCode, newState);
     }
 
@@ -155,7 +166,8 @@ public abstract class BackupAgent extends ContextWrapper {
         String str;
         boolean z;
         BackupAgent backupAgent;
-        FullBackup.BackupScheme backupScheme = FullBackup.getBackupScheme(this, this.mBackupDestination);
+        FullBackup.BackupScheme backupScheme =
+                FullBackup.getBackupScheme(this, this.mBackupDestination);
         if (this.mDisableDataExtractionRule) {
             backupScheme.disableDataExtractionRule(this.mDisableDataExtractionRule);
         }
@@ -164,20 +176,26 @@ public abstract class BackupAgent extends ContextWrapper {
         }
         try {
             IncludeExcludeRules includeExcludeRules = getIncludeExcludeRules(backupScheme);
-            Map<String, Set<FullBackup.BackupScheme.PathWithRequiredFlags>> manifestIncludeMap = includeExcludeRules.getIncludeMap();
-            Set<FullBackup.BackupScheme.PathWithRequiredFlags> manifestExcludeSet = includeExcludeRules.getExcludeSet();
+            Map<String, Set<FullBackup.BackupScheme.PathWithRequiredFlags>> manifestIncludeMap =
+                    includeExcludeRules.getIncludeMap();
+            Set<FullBackup.BackupScheme.PathWithRequiredFlags> manifestExcludeSet =
+                    includeExcludeRules.getExcludeSet();
             String packageName = getPackageName();
             ApplicationInfo appInfo = getApplicationInfo();
             Context ceContext = createCredentialProtectedStorageContext();
             String rootDir = ceContext.getDataDir().getCanonicalPath();
             String filesDir = ceContext.getFilesDir().getCanonicalPath();
-            String databaseDir = ceContext.getDatabasePath("foo").getParentFile().getCanonicalPath();
-            String sharedPrefsDir = ceContext.getSharedPreferencesPath("foo").getParentFile().getCanonicalPath();
+            String databaseDir =
+                    ceContext.getDatabasePath("foo").getParentFile().getCanonicalPath();
+            String sharedPrefsDir =
+                    ceContext.getSharedPreferencesPath("foo").getParentFile().getCanonicalPath();
             Context deContext = createDeviceProtectedStorageContext();
             String deviceRootDir = deContext.getDataDir().getCanonicalPath();
             String deviceFilesDir = deContext.getFilesDir().getCanonicalPath();
-            String deviceDatabaseDir = deContext.getDatabasePath("foo").getParentFile().getCanonicalPath();
-            String deviceSharedPrefsDir = deContext.getSharedPreferencesPath("foo").getParentFile().getCanonicalPath();
+            String deviceDatabaseDir =
+                    deContext.getDatabasePath("foo").getParentFile().getCanonicalPath();
+            String deviceSharedPrefsDir =
+                    deContext.getSharedPreferencesPath("foo").getParentFile().getCanonicalPath();
             String deviceRootDir2 = appInfo.nativeLibraryDir;
             if (deviceRootDir2 != null) {
                 str = new File(appInfo.nativeLibraryDir).getCanonicalPath();
@@ -199,43 +217,103 @@ public abstract class BackupAgent extends ContextWrapper {
             Set<String> extraExcludedDeviceDirs = getExtraExcludeDirsIfAny(deContext);
             traversalExcludeSet.addAll(extraExcludedDirs);
             traversalExcludeSet.addAll(extraExcludedDeviceDirs);
-            applyXmlFiltersAndDoFullBackupForDomain(packageName, "r", manifestIncludeMap, manifestExcludeSet, traversalExcludeSet, data);
+            applyXmlFiltersAndDoFullBackupForDomain(
+                    packageName,
+                    "r",
+                    manifestIncludeMap,
+                    manifestExcludeSet,
+                    traversalExcludeSet,
+                    data);
             traversalExcludeSet.add(rootDir);
             traversalExcludeSet.addAll(extraExcludedDirs);
-            applyXmlFiltersAndDoFullBackupForDomain(packageName, FullBackup.DEVICE_ROOT_TREE_TOKEN, manifestIncludeMap, manifestExcludeSet, traversalExcludeSet, data);
+            applyXmlFiltersAndDoFullBackupForDomain(
+                    packageName,
+                    FullBackup.DEVICE_ROOT_TREE_TOKEN,
+                    manifestIncludeMap,
+                    manifestExcludeSet,
+                    traversalExcludeSet,
+                    data);
             traversalExcludeSet.add(deviceRootDir);
             traversalExcludeSet.addAll(extraExcludedDeviceDirs);
             traversalExcludeSet.remove(filesDir);
-            applyXmlFiltersAndDoFullBackupForDomain(packageName, FullBackup.FILES_TREE_TOKEN, manifestIncludeMap, manifestExcludeSet, traversalExcludeSet, data);
+            applyXmlFiltersAndDoFullBackupForDomain(
+                    packageName,
+                    FullBackup.FILES_TREE_TOKEN,
+                    manifestIncludeMap,
+                    manifestExcludeSet,
+                    traversalExcludeSet,
+                    data);
             traversalExcludeSet.add(filesDir);
             traversalExcludeSet.remove(deviceFilesDir);
-            applyXmlFiltersAndDoFullBackupForDomain(packageName, FullBackup.DEVICE_FILES_TREE_TOKEN, manifestIncludeMap, manifestExcludeSet, traversalExcludeSet, data);
+            applyXmlFiltersAndDoFullBackupForDomain(
+                    packageName,
+                    FullBackup.DEVICE_FILES_TREE_TOKEN,
+                    manifestIncludeMap,
+                    manifestExcludeSet,
+                    traversalExcludeSet,
+                    data);
             traversalExcludeSet.add(deviceFilesDir);
             traversalExcludeSet.remove(databaseDir);
-            applyXmlFiltersAndDoFullBackupForDomain(packageName, FullBackup.DATABASE_TREE_TOKEN, manifestIncludeMap, manifestExcludeSet, traversalExcludeSet, data);
+            applyXmlFiltersAndDoFullBackupForDomain(
+                    packageName,
+                    FullBackup.DATABASE_TREE_TOKEN,
+                    manifestIncludeMap,
+                    manifestExcludeSet,
+                    traversalExcludeSet,
+                    data);
             traversalExcludeSet.add(databaseDir);
             traversalExcludeSet.remove(deviceDatabaseDir);
-            applyXmlFiltersAndDoFullBackupForDomain(packageName, FullBackup.DEVICE_DATABASE_TREE_TOKEN, manifestIncludeMap, manifestExcludeSet, traversalExcludeSet, data);
+            applyXmlFiltersAndDoFullBackupForDomain(
+                    packageName,
+                    FullBackup.DEVICE_DATABASE_TREE_TOKEN,
+                    manifestIncludeMap,
+                    manifestExcludeSet,
+                    traversalExcludeSet,
+                    data);
             traversalExcludeSet.add(deviceDatabaseDir);
             traversalExcludeSet.remove(sharedPrefsDir);
-            applyXmlFiltersAndDoFullBackupForDomain(packageName, FullBackup.SHAREDPREFS_TREE_TOKEN, manifestIncludeMap, manifestExcludeSet, traversalExcludeSet, data);
+            applyXmlFiltersAndDoFullBackupForDomain(
+                    packageName,
+                    FullBackup.SHAREDPREFS_TREE_TOKEN,
+                    manifestIncludeMap,
+                    manifestExcludeSet,
+                    traversalExcludeSet,
+                    data);
             traversalExcludeSet.add(sharedPrefsDir);
             traversalExcludeSet.remove(deviceSharedPrefsDir);
-            applyXmlFiltersAndDoFullBackupForDomain(packageName, FullBackup.DEVICE_SHAREDPREFS_TREE_TOKEN, manifestIncludeMap, manifestExcludeSet, traversalExcludeSet, data);
+            applyXmlFiltersAndDoFullBackupForDomain(
+                    packageName,
+                    FullBackup.DEVICE_SHAREDPREFS_TREE_TOKEN,
+                    manifestIncludeMap,
+                    manifestExcludeSet,
+                    traversalExcludeSet,
+                    data);
             traversalExcludeSet.add(deviceSharedPrefsDir);
             if (Process.myUid() != 1000) {
                 backupAgent = this;
                 File efLocation = backupAgent.getExternalFilesDir(null);
                 if (efLocation != null) {
                     z = false;
-                    applyXmlFiltersAndDoFullBackupForDomain(packageName, FullBackup.MANAGED_EXTERNAL_TREE_TOKEN, manifestIncludeMap, manifestExcludeSet, traversalExcludeSet, data);
+                    applyXmlFiltersAndDoFullBackupForDomain(
+                            packageName,
+                            FullBackup.MANAGED_EXTERNAL_TREE_TOKEN,
+                            manifestIncludeMap,
+                            manifestExcludeSet,
+                            traversalExcludeSet,
+                            data);
                     if (backupAgent.mSmartSwitchBackupPath != null) {
                         String[] strArr = backupAgent.mSmartSwitchBackupPath;
                         int length = strArr.length;
                         int i = 0;
                         while (i < length) {
                             String path = strArr[i];
-                            applyXmlFiltersAndDoFullBackupForDomain(packageName, path, manifestIncludeMap, manifestExcludeSet, traversalExcludeSet, data);
+                            applyXmlFiltersAndDoFullBackupForDomain(
+                                    packageName,
+                                    path,
+                                    manifestIncludeMap,
+                                    manifestExcludeSet,
+                                    traversalExcludeSet,
+                                    data);
                             i++;
                             length = length;
                             strArr = strArr;
@@ -252,7 +330,11 @@ public abstract class BackupAgent extends ContextWrapper {
             backupAgent.mDisableDataExtractionRule = z;
         } catch (IOException | XmlPullParserException e) {
             if (Log.isLoggable("BackupXmlParserLogging", 2)) {
-                Log.v("BackupXmlParserLogging", "Exception trying to parse fullBackupContent xml file! Aborting full backup.", e);
+                Log.v(
+                        "BackupXmlParserLogging",
+                        "Exception trying to parse fullBackupContent xml file! Aborting full"
+                                + " backup.",
+                        e);
             }
         }
     }
@@ -265,35 +347,60 @@ public abstract class BackupAgent extends ContextWrapper {
         return Collections.unmodifiableSet(excludedDirs);
     }
 
-    public IncludeExcludeRules getIncludeExcludeRules(FullBackup.BackupScheme backupScheme) throws IOException, XmlPullParserException {
-        Map<String, Set<FullBackup.BackupScheme.PathWithRequiredFlags>> manifestIncludeMap = backupScheme.maybeParseAndGetCanonicalIncludePaths();
-        ArraySet<FullBackup.BackupScheme.PathWithRequiredFlags> manifestExcludeSet = backupScheme.maybeParseAndGetCanonicalExcludePaths();
+    public IncludeExcludeRules getIncludeExcludeRules(FullBackup.BackupScheme backupScheme)
+            throws IOException, XmlPullParserException {
+        Map<String, Set<FullBackup.BackupScheme.PathWithRequiredFlags>> manifestIncludeMap =
+                backupScheme.maybeParseAndGetCanonicalIncludePaths();
+        ArraySet<FullBackup.BackupScheme.PathWithRequiredFlags> manifestExcludeSet =
+                backupScheme.maybeParseAndGetCanonicalExcludePaths();
         return new IncludeExcludeRules(manifestIncludeMap, manifestExcludeSet);
     }
 
-    public void onQuotaExceeded(long backupDataBytes, long quotaBytes) {
-    }
+    public void onQuotaExceeded(long backupDataBytes, long quotaBytes) {}
 
     /* JADX INFO: Access modifiers changed from: private */
     public int getBackupUserId() {
         return this.mUser == null ? super.getUserId() : this.mUser.getIdentifier();
     }
 
-    private void applyXmlFiltersAndDoFullBackupForDomain(String packageName, String domainToken, Map<String, Set<FullBackup.BackupScheme.PathWithRequiredFlags>> includeMap, Set<FullBackup.BackupScheme.PathWithRequiredFlags> filterSet, ArraySet<String> traversalExcludeSet, FullBackupDataOutput data) throws IOException {
+    private void applyXmlFiltersAndDoFullBackupForDomain(
+            String packageName,
+            String domainToken,
+            Map<String, Set<FullBackup.BackupScheme.PathWithRequiredFlags>> includeMap,
+            Set<FullBackup.BackupScheme.PathWithRequiredFlags> filterSet,
+            ArraySet<String> traversalExcludeSet,
+            FullBackupDataOutput data)
+            throws IOException {
         if (includeMap == null || includeMap.size() == 0) {
-            fullBackupFileTree(packageName, domainToken, FullBackup.getBackupScheme(this, this.mBackupDestination).tokenToDirectoryPath(domainToken), filterSet, traversalExcludeSet, data);
+            fullBackupFileTree(
+                    packageName,
+                    domainToken,
+                    FullBackup.getBackupScheme(this, this.mBackupDestination)
+                            .tokenToDirectoryPath(domainToken),
+                    filterSet,
+                    traversalExcludeSet,
+                    data);
             return;
         }
         if (includeMap.get(domainToken) != null) {
-            for (FullBackup.BackupScheme.PathWithRequiredFlags includeFile : includeMap.get(domainToken)) {
-                if (areIncludeRequiredTransportFlagsSatisfied(includeFile.getRequiredFlags(), data.getTransportFlags())) {
-                    fullBackupFileTree(packageName, domainToken, includeFile.getPath(), filterSet, traversalExcludeSet, data);
+            for (FullBackup.BackupScheme.PathWithRequiredFlags includeFile :
+                    includeMap.get(domainToken)) {
+                if (areIncludeRequiredTransportFlagsSatisfied(
+                        includeFile.getRequiredFlags(), data.getTransportFlags())) {
+                    fullBackupFileTree(
+                            packageName,
+                            domainToken,
+                            includeFile.getPath(),
+                            filterSet,
+                            traversalExcludeSet,
+                            data);
                 }
             }
         }
     }
 
-    private boolean areIncludeRequiredTransportFlagsSatisfied(int includeFlags, int transportFlags) {
+    private boolean areIncludeRequiredTransportFlagsSatisfied(
+            int includeFlags, int transportFlags) {
         return (transportFlags & includeFlags) == includeFlags;
     }
 
@@ -303,22 +410,33 @@ public abstract class BackupAgent extends ContextWrapper {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void fullBackupFile(java.io.File r30, android.app.backup.FullBackupDataOutput r31) {
+    public final void fullBackupFile(
+            java.io.File r30, android.app.backup.FullBackupDataOutput r31) {
         /*
             Method dump skipped, instructions count: 533
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.app.backup.BackupAgent.fullBackupFile(java.io.File, android.app.backup.FullBackupDataOutput):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.app.backup.BackupAgent.fullBackupFile(java.io.File,"
+                        + " android.app.backup.FullBackupDataOutput):void");
     }
 
-    protected final void fullBackupFileTree(String packageName, String domain, String startingPath, Set<FullBackup.BackupScheme.PathWithRequiredFlags> manifestExcludes, ArraySet<String> systemExcludes, FullBackupDataOutput output) {
+    protected final void fullBackupFileTree(
+            String packageName,
+            String domain,
+            String startingPath,
+            Set<FullBackup.BackupScheme.PathWithRequiredFlags> manifestExcludes,
+            ArraySet<String> systemExcludes,
+            FullBackupDataOutput output) {
         String domain2;
         File file;
         File file2;
         StructStat stat;
         File[] contents;
         BackupAgent backupAgent = this;
-        String domainPath = FullBackup.getBackupScheme(backupAgent, backupAgent.mBackupDestination).tokenToDirectoryPath(domain);
+        String domainPath =
+                FullBackup.getBackupScheme(backupAgent, backupAgent.mBackupDestination)
+                        .tokenToDirectoryPath(domain);
         if (domainPath == null) {
             return;
         }
@@ -326,7 +444,9 @@ public abstract class BackupAgent extends ContextWrapper {
             domain2 = domain;
         } else {
             int slash = domain.lastIndexOf(47);
-            String specificDomain = FullBackup.MANAGED_EXTERNAL_SPECIFIC_TREE_RESTORE_TOKEN + domain.substring(slash + 1, domain.length());
+            String specificDomain =
+                    FullBackup.MANAGED_EXTERNAL_SPECIFIC_TREE_RESTORE_TOKEN
+                            + domain.substring(slash + 1, domain.length());
             domain2 = specificDomain;
         }
         File rootFile = new File(startingPath);
@@ -349,7 +469,9 @@ public abstract class BackupAgent extends ContextWrapper {
                         e = e3;
                         file2 = file3;
                         if (Log.isLoggable("BackupXmlParserLogging", 2)) {
-                            Log.v("BackupXmlParserLogging", "Error scanning file " + file2 + " : " + e);
+                            Log.v(
+                                    "BackupXmlParserLogging",
+                                    "Error scanning file " + file2 + " : " + e);
                         }
                         backupAgent = this;
                     } catch (IOException e4) {
@@ -359,18 +481,21 @@ public abstract class BackupAgent extends ContextWrapper {
                         }
                         backupAgent = this;
                     }
-                    if (!OsConstants.S_ISDIR(stat.st_mode)) {
-                    }
+                    if (!OsConstants.S_ISDIR(stat.st_mode)) {}
                 }
                 String filePath = file3.getCanonicalPath();
-                if (manifestExcludes == null || !backupAgent.manifestExcludesContainFilePath(manifestExcludes, filePath)) {
+                if (manifestExcludes == null
+                        || !backupAgent.manifestExcludesContainFilePath(
+                                manifestExcludes, filePath)) {
                     if (systemExcludes == null || !systemExcludes.contains(filePath)) {
-                        if (OsConstants.S_ISDIR(stat.st_mode) && (contents = file3.listFiles()) != null) {
+                        if (OsConstants.S_ISDIR(stat.st_mode)
+                                && (contents = file3.listFiles()) != null) {
                             for (File entry : contents) {
                                 scanQueue.add(0, entry);
                             }
                         }
-                        FullBackup.backupToTar(packageName, domain2, null, domainPath, filePath, output);
+                        FullBackup.backupToTar(
+                                packageName, domain2, null, domainPath, filePath, output);
                         backupAgent = this;
                     }
                 }
@@ -378,7 +503,8 @@ public abstract class BackupAgent extends ContextWrapper {
         }
     }
 
-    private boolean manifestExcludesContainFilePath(Set<FullBackup.BackupScheme.PathWithRequiredFlags> manifestExcludes, String filePath) {
+    private boolean manifestExcludesContainFilePath(
+            Set<FullBackup.BackupScheme.PathWithRequiredFlags> manifestExcludes, String filePath) {
         for (FullBackup.BackupScheme.PathWithRequiredFlags exclude : manifestExcludes) {
             String excludePath = exclude.getPath();
             if (excludePath != null && excludePath.equals(filePath)) {
@@ -388,7 +514,9 @@ public abstract class BackupAgent extends ContextWrapper {
         return false;
     }
 
-    public void onRestoreFile(ParcelFileDescriptor data, long size, File destination, int type, long mode, long mtime) throws IOException {
+    public void onRestoreFile(
+            ParcelFileDescriptor data, long size, File destination, int type, long mode, long mtime)
+            throws IOException {
         Log.i(TAG, "mDisableDataExtractionRule = " + this.mDisableDataExtractionRule);
         if (this.mDisableDataExtractionRule) {
             FullBackup.restoreFile(data, size, type, mode, mtime, destination);
@@ -402,31 +530,49 @@ public abstract class BackupAgent extends ContextWrapper {
         FullBackup.BackupScheme bs = FullBackup.getBackupScheme(this, this.mBackupDestination);
         if (!bs.isFullRestoreEnabled()) {
             if (Log.isLoggable("BackupXmlParserLogging", 2)) {
-                Log.v("BackupXmlParserLogging", "onRestoreFile \"" + destination.getCanonicalPath() + "\" : fullBackupContent not enabled for " + getPackageName());
+                Log.v(
+                        "BackupXmlParserLogging",
+                        "onRestoreFile \""
+                                + destination.getCanonicalPath()
+                                + "\" : fullBackupContent not enabled for "
+                                + getPackageName());
             }
             return false;
         }
         String destinationCanonicalPath = destination.getCanonicalPath();
         try {
-            Map<String, Set<FullBackup.BackupScheme.PathWithRequiredFlags>> includes = bs.maybeParseAndGetCanonicalIncludePaths();
-            ArraySet<FullBackup.BackupScheme.PathWithRequiredFlags> excludes = bs.maybeParseAndGetCanonicalExcludePaths();
+            Map<String, Set<FullBackup.BackupScheme.PathWithRequiredFlags>> includes =
+                    bs.maybeParseAndGetCanonicalIncludePaths();
+            ArraySet<FullBackup.BackupScheme.PathWithRequiredFlags> excludes =
+                    bs.maybeParseAndGetCanonicalExcludePaths();
             if (excludes != null && BackupUtils.isFileSpecifiedInPathList(destination, excludes)) {
                 if (Log.isLoggable("BackupXmlParserLogging", 2)) {
-                    Log.v("BackupXmlParserLogging", "onRestoreFile: \"" + destinationCanonicalPath + "\": listed in excludes; skipping.");
+                    Log.v(
+                            "BackupXmlParserLogging",
+                            "onRestoreFile: \""
+                                    + destinationCanonicalPath
+                                    + "\": listed in excludes; skipping.");
                 }
                 return false;
             }
             if (includes != null && !includes.isEmpty()) {
                 boolean explicitlyIncluded = false;
-                for (Set<FullBackup.BackupScheme.PathWithRequiredFlags> domainIncludes : includes.values()) {
-                    explicitlyIncluded |= BackupUtils.isFileSpecifiedInPathList(destination, domainIncludes);
+                for (Set<FullBackup.BackupScheme.PathWithRequiredFlags> domainIncludes :
+                        includes.values()) {
+                    explicitlyIncluded |=
+                            BackupUtils.isFileSpecifiedInPathList(destination, domainIncludes);
                     if (explicitlyIncluded) {
                         break;
                     }
                 }
                 if (!explicitlyIncluded) {
                     if (Log.isLoggable("BackupXmlParserLogging", 2)) {
-                        Log.v("BackupXmlParserLogging", "onRestoreFile: Trying to restore \"" + destinationCanonicalPath + "\" but it isn't specified in the included files; skipping.");
+                        Log.v(
+                                "BackupXmlParserLogging",
+                                "onRestoreFile: Trying to restore \""
+                                        + destinationCanonicalPath
+                                        + "\" but it isn't specified in the included files;"
+                                        + " skipping.");
                     }
                     return false;
                 }
@@ -435,7 +581,13 @@ public abstract class BackupAgent extends ContextWrapper {
             return true;
         } catch (XmlPullParserException e) {
             if (Log.isLoggable("BackupXmlParserLogging", 2)) {
-                Log.v("BackupXmlParserLogging", "onRestoreFile \"" + destinationCanonicalPath + "\" : Exception trying to parse fullBackupContent xml file! Aborting onRestoreFile.", e);
+                Log.v(
+                        "BackupXmlParserLogging",
+                        "onRestoreFile \""
+                                + destinationCanonicalPath
+                                + "\" : Exception trying to parse fullBackupContent xml file!"
+                                + " Aborting onRestoreFile.",
+                        e);
             }
             return false;
         }
@@ -449,9 +601,24 @@ public abstract class BackupAgent extends ContextWrapper {
         }
     }
 
-    protected void onRestoreFile(ParcelFileDescriptor data, long size, int type, String domain, String path, long mode, long mtime) throws IOException {
-        String basePath = FullBackup.getBackupScheme(this, this.mBackupDestination).tokenToDirectoryPath(domain);
-        long mode2 = (domain.equals(FullBackup.MANAGED_EXTERNAL_TREE_TOKEN) || domain.startsWith(FullBackup.MANAGED_EXTERNAL_SPECIFIC_TREE_RESTORE_TOKEN)) ? -1L : mode;
+    protected void onRestoreFile(
+            ParcelFileDescriptor data,
+            long size,
+            int type,
+            String domain,
+            String path,
+            long mode,
+            long mtime)
+            throws IOException {
+        String basePath =
+                FullBackup.getBackupScheme(this, this.mBackupDestination)
+                        .tokenToDirectoryPath(domain);
+        long mode2 =
+                (domain.equals(FullBackup.MANAGED_EXTERNAL_TREE_TOKEN)
+                                || domain.startsWith(
+                                        FullBackup.MANAGED_EXTERNAL_SPECIFIC_TREE_RESTORE_TOKEN))
+                        ? -1L
+                        : mode;
         if (basePath != null) {
             File outFile = new File(basePath, path);
             String outPath = outFile.getCanonicalPath();
@@ -493,7 +660,23 @@ public abstract class BackupAgent extends ContextWrapper {
     }
 
     private void doCleanDbFiles() {
-        byte[] DB_HEADER = {83, 81, 76, 105, 116, 101, 32, 102, 111, 114, 109, SprAttributeBase.TYPE_ANIMATOR_SET, 116, 32, 51};
+        byte[] DB_HEADER = {
+            83,
+            81,
+            76,
+            105,
+            116,
+            101,
+            32,
+            102,
+            111,
+            114,
+            109,
+            SprAttributeBase.TYPE_ANIMATOR_SET,
+            116,
+            32,
+            51
+        };
         Iterator<String> it = this.dbFilesToCheck.iterator();
         while (it.hasNext()) {
             String s = it.next();
@@ -527,8 +710,7 @@ public abstract class BackupAgent extends ContextWrapper {
     private class BackupServiceBinder extends IBackupAgent.Stub {
         private static final String TAG = "BackupServiceBinder";
 
-        private BackupServiceBinder() {
-        }
+        private BackupServiceBinder() {}
 
         /* JADX WARN: Removed duplicated region for block: B:34:0x00cf  */
         /* JADX WARN: Removed duplicated region for block: B:36:? A[SYNTHETIC] */
@@ -537,7 +719,14 @@ public abstract class BackupAgent extends ContextWrapper {
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public void doBackup(android.os.ParcelFileDescriptor r18, android.os.ParcelFileDescriptor r19, android.os.ParcelFileDescriptor r20, long r21, android.app.backup.IBackupCallback r23, int r24) throws android.os.RemoteException {
+        public void doBackup(
+                android.os.ParcelFileDescriptor r18,
+                android.os.ParcelFileDescriptor r19,
+                android.os.ParcelFileDescriptor r20,
+                long r21,
+                android.app.backup.IBackupCallback r23,
+                int r24)
+                throws android.os.RemoteException {
             /*
                 r17 = this;
                 r1 = r17
@@ -649,16 +838,33 @@ public abstract class BackupAgent extends ContextWrapper {
             Ld8:
                 throw r3
             */
-            throw new UnsupportedOperationException("Method not decompiled: android.app.backup.BackupAgent.BackupServiceBinder.doBackup(android.os.ParcelFileDescriptor, android.os.ParcelFileDescriptor, android.os.ParcelFileDescriptor, long, android.app.backup.IBackupCallback, int):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " android.app.backup.BackupAgent.BackupServiceBinder.doBackup(android.os.ParcelFileDescriptor,"
+                        + " android.os.ParcelFileDescriptor, android.os.ParcelFileDescriptor, long,"
+                        + " android.app.backup.IBackupCallback, int):void");
         }
 
         @Override // android.app.IBackupAgent
-        public void doRestore(ParcelFileDescriptor data, long appVersionCode, ParcelFileDescriptor newState, int token, IBackupManager callbackBinder) throws RemoteException {
+        public void doRestore(
+                ParcelFileDescriptor data,
+                long appVersionCode,
+                ParcelFileDescriptor newState,
+                int token,
+                IBackupManager callbackBinder)
+                throws RemoteException {
             doRestoreInternal(data, appVersionCode, newState, token, callbackBinder, null);
         }
 
         @Override // android.app.IBackupAgent
-        public void doRestoreWithExcludedKeys(ParcelFileDescriptor data, long appVersionCode, ParcelFileDescriptor newState, int token, IBackupManager callbackBinder, List<String> excludedKeys) throws RemoteException {
+        public void doRestoreWithExcludedKeys(
+                ParcelFileDescriptor data,
+                long appVersionCode,
+                ParcelFileDescriptor newState,
+                int token,
+                IBackupManager callbackBinder,
+                List<String> excludedKeys)
+                throws RemoteException {
             doRestoreInternal(data, appVersionCode, newState, token, callbackBinder, excludedKeys);
         }
 
@@ -671,12 +877,23 @@ public abstract class BackupAgent extends ContextWrapper {
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        private void doRestoreInternal(android.os.ParcelFileDescriptor r18, long r19, android.os.ParcelFileDescriptor r21, int r22, android.app.backup.IBackupManager r23, java.util.List<java.lang.String> r24) throws android.os.RemoteException {
+        private void doRestoreInternal(
+                android.os.ParcelFileDescriptor r18,
+                long r19,
+                android.os.ParcelFileDescriptor r21,
+                int r22,
+                android.app.backup.IBackupManager r23,
+                java.util.List<java.lang.String> r24)
+                throws android.os.RemoteException {
             /*
                 Method dump skipped, instructions count: 239
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: android.app.backup.BackupAgent.BackupServiceBinder.doRestoreInternal(android.os.ParcelFileDescriptor, long, android.os.ParcelFileDescriptor, int, android.app.backup.IBackupManager, java.util.List):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " android.app.backup.BackupAgent.BackupServiceBinder.doRestoreInternal(android.os.ParcelFileDescriptor,"
+                        + " long, android.os.ParcelFileDescriptor, int,"
+                        + " android.app.backup.IBackupManager, java.util.List):void");
         }
 
         /* JADX WARN: Removed duplicated region for block: B:42:0x00fa  */
@@ -686,12 +903,20 @@ public abstract class BackupAgent extends ContextWrapper {
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public void doFullBackup(android.os.ParcelFileDescriptor r17, long r18, int r20, android.app.backup.IBackupManager r21, int r22) {
+        public void doFullBackup(
+                android.os.ParcelFileDescriptor r17,
+                long r18,
+                int r20,
+                android.app.backup.IBackupManager r21,
+                int r22) {
             /*
                 Method dump skipped, instructions count: 254
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: android.app.backup.BackupAgent.BackupServiceBinder.doFullBackup(android.os.ParcelFileDescriptor, long, int, android.app.backup.IBackupManager, int):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " android.app.backup.BackupAgent.BackupServiceBinder.doFullBackup(android.os.ParcelFileDescriptor,"
+                        + " long, int, android.app.backup.IBackupManager, int):void");
         }
 
         /* JADX WARN: Removed duplicated region for block: B:45:0x0103  */
@@ -701,12 +926,22 @@ public abstract class BackupAgent extends ContextWrapper {
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public void doFullBackupPath(android.os.ParcelFileDescriptor r17, long r18, int r20, android.app.backup.IBackupManager r21, int r22, java.lang.String[] r23) {
+        public void doFullBackupPath(
+                android.os.ParcelFileDescriptor r17,
+                long r18,
+                int r20,
+                android.app.backup.IBackupManager r21,
+                int r22,
+                java.lang.String[] r23) {
             /*
                 Method dump skipped, instructions count: 263
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: android.app.backup.BackupAgent.BackupServiceBinder.doFullBackupPath(android.os.ParcelFileDescriptor, long, int, android.app.backup.IBackupManager, int, java.lang.String[]):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " android.app.backup.BackupAgent.BackupServiceBinder.doFullBackupPath(android.os.ParcelFileDescriptor,"
+                        + " long, int, android.app.backup.IBackupManager, int,"
+                        + " java.lang.String[]):void");
         }
 
         @Override // android.app.IBackupAgent
@@ -715,8 +950,10 @@ public abstract class BackupAgent extends ContextWrapper {
         }
 
         @Override // android.app.IBackupAgent
-        public void doMeasureFullBackup(long quotaBytes, int token, IBackupManager callbackBinder, int transportFlags) {
-            FullBackupDataOutput measureOutput = new FullBackupDataOutput(quotaBytes, transportFlags);
+        public void doMeasureFullBackup(
+                long quotaBytes, int token, IBackupManager callbackBinder, int transportFlags) {
+            FullBackupDataOutput measureOutput =
+                    new FullBackupDataOutput(quotaBytes, transportFlags);
             BackupAgent.this.waitForSharedPrefs();
             long ident = Binder.clearCallingIdentity();
             try {
@@ -724,20 +961,28 @@ public abstract class BackupAgent extends ContextWrapper {
                     BackupAgent.this.onFullBackup(measureOutput);
                     Binder.restoreCallingIdentity(ident);
                     try {
-                        callbackBinder.opCompleteForUser(BackupAgent.this.getBackupUserId(), token, measureOutput.getSize());
+                        callbackBinder.opCompleteForUser(
+                                BackupAgent.this.getBackupUserId(), token, measureOutput.getSize());
                     } catch (RemoteException e) {
                     }
                 } catch (IOException ex) {
-                    Log.d(TAG, "onFullBackup[M] (" + BackupAgent.this.getClass().getName() + ") threw", ex);
+                    Log.d(
+                            TAG,
+                            "onFullBackup[M] (" + BackupAgent.this.getClass().getName() + ") threw",
+                            ex);
                     throw new RuntimeException(ex);
                 } catch (RuntimeException ex2) {
-                    Log.d(TAG, "onFullBackup[M] (" + BackupAgent.this.getClass().getName() + ") threw", ex2);
+                    Log.d(
+                            TAG,
+                            "onFullBackup[M] (" + BackupAgent.this.getClass().getName() + ") threw",
+                            ex2);
                     throw ex2;
                 }
             } catch (Throwable th) {
                 Binder.restoreCallingIdentity(ident);
                 try {
-                    callbackBinder.opCompleteForUser(BackupAgent.this.getBackupUserId(), token, measureOutput.getSize());
+                    callbackBinder.opCompleteForUser(
+                            BackupAgent.this.getBackupUserId(), token, measureOutput.getSize());
                 } catch (RemoteException e2) {
                 }
                 throw th;
@@ -745,7 +990,17 @@ public abstract class BackupAgent extends ContextWrapper {
         }
 
         @Override // android.app.IBackupAgent
-        public void doRestoreFile(ParcelFileDescriptor data, long size, int type, String domain, String path, long mode, long mtime, int token, IBackupManager callbackBinder) throws RemoteException {
+        public void doRestoreFile(
+                ParcelFileDescriptor data,
+                long size,
+                int type,
+                String domain,
+                String path,
+                long mode,
+                long mtime,
+                int token,
+                IBackupManager callbackBinder)
+                throws RemoteException {
             long ident = Binder.clearCallingIdentity();
             try {
                 try {
@@ -757,14 +1012,18 @@ public abstract class BackupAgent extends ContextWrapper {
                     }
                     Binder.restoreCallingIdentity(ident);
                     try {
-                        callbackBinder.opCompleteForUser(BackupAgent.this.getBackupUserId(), token, 0L);
+                        callbackBinder.opCompleteForUser(
+                                BackupAgent.this.getBackupUserId(), token, 0L);
                     } catch (RemoteException e) {
                     }
                     if (Binder.getCallingPid() != Process.myPid()) {
                         IoUtils.closeQuietly(data);
                     }
                 } catch (IOException e2) {
-                    Log.d(TAG, "onRestoreFile (" + BackupAgent.this.getClass().getName() + ") threw", e2);
+                    Log.d(
+                            TAG,
+                            "onRestoreFile (" + BackupAgent.this.getClass().getName() + ") threw",
+                            e2);
                     throw new RuntimeException(e2);
                 }
             } finally {
@@ -795,11 +1054,17 @@ public abstract class BackupAgent extends ContextWrapper {
                     BackupAgent.this.waitForSharedPrefs();
                     Binder.restoreCallingIdentity(ident);
                     try {
-                        callbackBinder.opCompleteForUser(BackupAgent.this.getBackupUserId(), token, 0L);
+                        callbackBinder.opCompleteForUser(
+                                BackupAgent.this.getBackupUserId(), token, 0L);
                     } catch (RemoteException e) {
                     }
                 } catch (Exception e2) {
-                    Log.d(TAG, "onRestoreFinished (" + BackupAgent.this.getClass().getName() + ") threw", e2);
+                    Log.d(
+                            TAG,
+                            "onRestoreFinished ("
+                                    + BackupAgent.this.getClass().getName()
+                                    + ") threw",
+                            e2);
                     throw e2;
                 }
             } catch (Throwable th) {
@@ -819,7 +1084,8 @@ public abstract class BackupAgent extends ContextWrapper {
         }
 
         @Override // android.app.IBackupAgent
-        public void doQuotaExceeded(long backupDataBytes, long quotaBytes, IBackupCallback callbackBinder) {
+        public void doQuotaExceeded(
+                long backupDataBytes, long quotaBytes, IBackupCallback callbackBinder) {
             long ident = Binder.clearCallingIdentity();
             try {
                 try {
@@ -840,13 +1106,17 @@ public abstract class BackupAgent extends ContextWrapper {
                     throw th;
                 }
             } catch (Exception e3) {
-                Log.d(TAG, "onQuotaExceeded(" + BackupAgent.this.getClass().getName() + ") threw", e3);
+                Log.d(
+                        TAG,
+                        "onQuotaExceeded(" + BackupAgent.this.getClass().getName() + ") threw",
+                        e3);
                 throw e3;
             }
         }
 
         @Override // android.app.IBackupAgent
-        public void getLoggerResults(AndroidFuture<List<BackupRestoreEventLogger.DataTypeResult>> in) {
+        public void getLoggerResults(
+                AndroidFuture<List<BackupRestoreEventLogger.DataTypeResult>> in) {
             if (BackupAgent.this.mLogger != null) {
                 in.complete(BackupAgent.this.mLogger.getLoggingResults());
             } else {
@@ -856,7 +1126,11 @@ public abstract class BackupAgent extends ContextWrapper {
 
         @Override // android.app.IBackupAgent
         public void getOperationType(AndroidFuture<Integer> in) {
-            in.complete(Integer.valueOf(BackupAgent.this.mLogger == null ? -1 : BackupAgent.this.mLogger.getOperationType()));
+            in.complete(
+                    Integer.valueOf(
+                            BackupAgent.this.mLogger == null
+                                    ? -1
+                                    : BackupAgent.this.mLogger.getOperationType()));
         }
 
         @Override // android.app.IBackupAgent
@@ -866,7 +1140,12 @@ public abstract class BackupAgent extends ContextWrapper {
                 try {
                     BackupAgent.this.clearBackupRestoreEventLogger();
                 } catch (Exception e) {
-                    Log.d(TAG, "clearBackupRestoreEventLogger (" + BackupAgent.this.getClass().getName() + ") threw", e);
+                    Log.d(
+                            TAG,
+                            "clearBackupRestoreEventLogger ("
+                                    + BackupAgent.this.getClass().getName()
+                                    + ") threw",
+                            e);
                     throw e;
                 }
             } finally {
@@ -890,9 +1169,12 @@ public abstract class BackupAgent extends ContextWrapper {
 
     public static class IncludeExcludeRules {
         private final Set<FullBackup.BackupScheme.PathWithRequiredFlags> mManifestExcludeSet;
-        private final Map<String, Set<FullBackup.BackupScheme.PathWithRequiredFlags>> mManifestIncludeMap;
+        private final Map<String, Set<FullBackup.BackupScheme.PathWithRequiredFlags>>
+                mManifestIncludeMap;
 
-        public IncludeExcludeRules(Map<String, Set<FullBackup.BackupScheme.PathWithRequiredFlags>> manifestIncludeMap, Set<FullBackup.BackupScheme.PathWithRequiredFlags> manifestExcludeSet) {
+        public IncludeExcludeRules(
+                Map<String, Set<FullBackup.BackupScheme.PathWithRequiredFlags>> manifestIncludeMap,
+                Set<FullBackup.BackupScheme.PathWithRequiredFlags> manifestExcludeSet) {
             this.mManifestIncludeMap = manifestIncludeMap;
             this.mManifestExcludeSet = manifestExcludeSet;
         }
@@ -923,7 +1205,8 @@ public abstract class BackupAgent extends ContextWrapper {
                 return false;
             }
             IncludeExcludeRules that = (IncludeExcludeRules) object;
-            if (Objects.equals(this.mManifestIncludeMap, that.mManifestIncludeMap) && Objects.equals(this.mManifestExcludeSet, that.mManifestExcludeSet)) {
+            if (Objects.equals(this.mManifestIncludeMap, that.mManifestIncludeMap)
+                    && Objects.equals(this.mManifestExcludeSet, that.mManifestExcludeSet)) {
                 return true;
             }
             return false;

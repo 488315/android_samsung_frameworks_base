@@ -1,6 +1,5 @@
 package android.renderscript;
 
-import android.renderscript.Script;
 
 @Deprecated
 /* loaded from: classes3.dex */
@@ -48,11 +47,9 @@ public class ScriptIntrinsicBlend extends ScriptIntrinsic {
         return createKernelID(1, 3, null, null);
     }
 
-    public void forEachDst(Allocation ain, Allocation aout) {
-    }
+    public void forEachDst(Allocation ain, Allocation aout) {}
 
-    public void forEachDst(Allocation ain, Allocation aout, Script.LaunchOptions opt) {
-    }
+    public void forEachDst(Allocation ain, Allocation aout, Script.LaunchOptions opt) {}
 
     public Script.KernelID getKernelIDDst() {
         return createKernelID(2, 3, null, null);

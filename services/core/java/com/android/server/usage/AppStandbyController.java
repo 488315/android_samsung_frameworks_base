@@ -50,6 +50,7 @@ import android.util.SparseIntArray;
 import android.util.SparseLongArray;
 import android.util.SparseSetArray;
 import android.util.TimeUtils;
+
 import com.android.internal.app.IAppOpsCallback;
 import com.android.internal.app.IAppOpsService;
 import com.android.internal.app.IBatteryStats;
@@ -71,8 +72,7 @@ import com.android.server.pm.PackageManagerService;
 import com.android.server.pm.PackageSetting;
 import com.android.server.pm.pkg.AndroidPackage;
 import com.android.server.pm.pkg.PackageStateInternal;
-import com.android.server.usage.AppIdleHistory;
-import com.android.server.usage.AppStandbyInternal;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -85,7 +85,8 @@ import java.util.concurrent.CountDownLatch;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public class AppStandbyController implements AppStandbyInternal, UsageStatsManagerInternal.UsageEventListener {
+public class AppStandbyController
+        implements AppStandbyInternal, UsageStatsManagerInternal.UsageEventListener {
     public final SparseArray mActiveAdminApps;
     public final CountDownLatch mAdminDataAvailableLatch;
     public final SparseArray mAdminProtectedPackages;
@@ -144,10 +145,26 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
     public long mSystemUpdateUsageTimeoutMillis;
     public boolean mTriggerQuotaBumpOnNotificationSeen;
     public long mUnexemptedSyncScheduledTimeoutMillis;
-    static final long[] DEFAULT_SCREEN_TIME_THRESHOLDS = {0, 0, ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS, 7200000, 21600000};
-    static final long[] MINIMUM_SCREEN_TIME_THRESHOLDS = {0, 0, 0, 1800000, ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS};
-    static final long[] DEFAULT_ELAPSED_TIME_THRESHOLDS = {0, 43200000, BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS, 172800000, 691200000};
-    static final long[] MINIMUM_ELAPSED_TIME_THRESHOLDS = {0, ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS, ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS, 7200000, BackupManagerConstants.DEFAULT_KEY_VALUE_BACKUP_INTERVAL_MILLISECONDS};
+    static final long[] DEFAULT_SCREEN_TIME_THRESHOLDS = {
+        0, 0, ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS, 7200000, 21600000
+    };
+    static final long[] MINIMUM_SCREEN_TIME_THRESHOLDS = {
+        0, 0, 0, 1800000, ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS
+    };
+    static final long[] DEFAULT_ELAPSED_TIME_THRESHOLDS = {
+        0,
+        43200000,
+        BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS,
+        172800000,
+        691200000
+    };
+    static final long[] MINIMUM_ELAPSED_TIME_THRESHOLDS = {
+        0,
+        ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS,
+        ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS,
+        7200000,
+        BackupManagerConstants.DEFAULT_KEY_VALUE_BACKUP_INTERVAL_MILLISECONDS
+    };
     public static final int[] THRESHOLD_BUCKETS = {10, 20, 30, 40, 45};
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -165,11 +182,18 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
             switch (message.what) {
                 case 3:
                     StandbyUpdateRecord standbyUpdateRecord = (StandbyUpdateRecord) message.obj;
-                    AppStandbyController.m1004$$Nest$minformListeners(AppStandbyController.this, standbyUpdateRecord.packageName, standbyUpdateRecord.userId, standbyUpdateRecord.bucket, standbyUpdateRecord.reason, standbyUpdateRecord.isUserInteraction);
+                    AppStandbyController.m1004$$Nest$minformListeners(
+                            AppStandbyController.this,
+                            standbyUpdateRecord.packageName,
+                            standbyUpdateRecord.userId,
+                            standbyUpdateRecord.bucket,
+                            standbyUpdateRecord.reason,
+                            standbyUpdateRecord.isUserInteraction);
                     StandbyUpdateRecord.sPool.recycle(standbyUpdateRecord);
                     return;
                 case 4:
-                    AppStandbyController.this.forceIdleState((String) message.obj, message.arg1, message.arg2 == 1);
+                    AppStandbyController.this.forceIdleState(
+                            (String) message.obj, message.arg1, message.arg2 == 1);
                     return;
                 case 5:
                     removeMessages(5);
@@ -178,17 +202,30 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
                     synchronized (AppStandbyController.this.mPendingIdleStateChecks) {
                         try {
                             j = Long.MAX_VALUE;
-                            for (int size = AppStandbyController.this.mPendingIdleStateChecks.size() - 1; size >= 0; size--) {
-                                long valueAt = AppStandbyController.this.mPendingIdleStateChecks.valueAt(size);
+                            for (int size =
+                                            AppStandbyController.this.mPendingIdleStateChecks.size()
+                                                    - 1;
+                                    size >= 0;
+                                    size--) {
+                                long valueAt =
+                                        AppStandbyController.this.mPendingIdleStateChecks.valueAt(
+                                                size);
                                 if (valueAt <= elapsedRealtime) {
-                                    int keyAt = AppStandbyController.this.mPendingIdleStateChecks.keyAt(size);
-                                    if (AppStandbyController.this.checkIdleStates(keyAt) && AppStandbyController.this.mAppIdleEnabled) {
-                                        AppStandbyController appStandbyController = AppStandbyController.this;
-                                        long j3 = appStandbyController.mCheckIdleIntervalMillis + elapsedRealtime;
+                                    int keyAt =
+                                            AppStandbyController.this.mPendingIdleStateChecks.keyAt(
+                                                    size);
+                                    if (AppStandbyController.this.checkIdleStates(keyAt)
+                                            && AppStandbyController.this.mAppIdleEnabled) {
+                                        AppStandbyController appStandbyController =
+                                                AppStandbyController.this;
+                                        long j3 =
+                                                appStandbyController.mCheckIdleIntervalMillis
+                                                        + elapsedRealtime;
                                         appStandbyController.mPendingIdleStateChecks.put(keyAt, j3);
                                         valueAt = j3;
                                     } else {
-                                        AppStandbyController.this.mPendingIdleStateChecks.removeAt(size);
+                                        AppStandbyController.this.mPendingIdleStateChecks.removeAt(
+                                                size);
                                     }
                                 }
                                 j = Math.min(j, valueAt);
@@ -198,7 +235,8 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
                     }
                     if (j != Long.MAX_VALUE) {
                         AppStandbyHandler appStandbyHandler = AppStandbyController.this.mHandler;
-                        appStandbyHandler.sendMessageDelayed(appStandbyHandler.obtainMessage(5), j - elapsedRealtime);
+                        appStandbyHandler.sendMessageDelayed(
+                                appStandbyHandler.obtainMessage(5), j - elapsedRealtime);
                         return;
                     }
                     return;
@@ -207,21 +245,34 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
                     super.handleMessage(message);
                     return;
                 case 7:
-                    AppStandbyController.m1007$$Nest$mtriggerListenerQuotaBump(AppStandbyController.this, (String) message.obj, message.arg1);
+                    AppStandbyController.m1007$$Nest$mtriggerListenerQuotaBump(
+                            AppStandbyController.this, (String) message.obj, message.arg1);
                     return;
                 case 8:
-                    ContentProviderUsageRecord contentProviderUsageRecord = (ContentProviderUsageRecord) message.obj;
-                    AppStandbyController.m1006$$Nest$mreportContentProviderUsage(AppStandbyController.this, contentProviderUsageRecord.name, contentProviderUsageRecord.packageName, contentProviderUsageRecord.userId);
+                    ContentProviderUsageRecord contentProviderUsageRecord =
+                            (ContentProviderUsageRecord) message.obj;
+                    AppStandbyController.m1006$$Nest$mreportContentProviderUsage(
+                            AppStandbyController.this,
+                            contentProviderUsageRecord.name,
+                            contentProviderUsageRecord.packageName,
+                            contentProviderUsageRecord.userId);
                     ContentProviderUsageRecord.sPool.recycle(contentProviderUsageRecord);
                     return;
                 case 9:
-                    AppStandbyController.m1005$$Nest$minformParoleStateChanged(AppStandbyController.this);
+                    AppStandbyController.m1005$$Nest$minformParoleStateChanged(
+                            AppStandbyController.this);
                     return;
                 case 10:
                     AppStandbyController.this.mHandler.removeMessages(10);
                     AppStandbyController appStandbyController2 = AppStandbyController.this;
-                    if (appStandbyController2.mContext.getPackageManager().hasSystemFeature("android.software.device_admin")) {
-                        ConcurrentUtils.waitForCountDownNoInterrupt(appStandbyController2.mAdminDataAvailableLatch, 10000L, "Wait for admin data");
+                    if (appStandbyController2
+                            .mContext
+                            .getPackageManager()
+                            .hasSystemFeature("android.software.device_admin")) {
+                        ConcurrentUtils.waitForCountDownNoInterrupt(
+                                appStandbyController2.mAdminDataAvailableLatch,
+                                10000L,
+                                "Wait for admin data");
                     }
                     AppStandbyController.this.checkIdleStates(-1);
                     return;
@@ -231,7 +282,8 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
                     int i3 = message.arg1;
                     int i4 = message.arg2;
                     appStandbyController3.mInjector.getClass();
-                    appStandbyController3.checkAndUpdateStandbyState(i3, i4, SystemClock.elapsedRealtime(), str);
+                    appStandbyController3.checkAndUpdateStandbyState(
+                            i3, i4, SystemClock.elapsedRealtime(), str);
                     return;
                 case 12:
                     if (message.arg2 <= 0) {
@@ -243,9 +295,25 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
                             long elapsedRealtime2 = SystemClock.elapsedRealtime();
                             synchronized (appStandbyController4.mAppIdleLock) {
                                 try {
-                                    AppIdleHistory.AppUsageHistory packageHistory = AppIdleHistory.getPackageHistory(appStandbyController4.mAppIdleHistory.getUserHistory(i5), str2, false);
-                                    if ((packageHistory == null ? 50 : packageHistory.currentBucket) == 50) {
-                                        appStandbyController4.reportNoninteractiveUsageCrossUserLocked(str2, i5, 20, 14, elapsedRealtime2, appStandbyController4.mUnexemptedSyncScheduledTimeoutMillis, appStandbyController4.getCrossProfileTargets(i5, str2));
+                                    AppIdleHistory.AppUsageHistory packageHistory =
+                                            AppIdleHistory.getPackageHistory(
+                                                    appStandbyController4.mAppIdleHistory
+                                                            .getUserHistory(i5),
+                                                    str2,
+                                                    false);
+                                    if ((packageHistory == null ? 50 : packageHistory.currentBucket)
+                                            == 50) {
+                                        appStandbyController4
+                                                .reportNoninteractiveUsageCrossUserLocked(
+                                                        str2,
+                                                        i5,
+                                                        20,
+                                                        14,
+                                                        elapsedRealtime2,
+                                                        appStandbyController4
+                                                                .mUnexemptedSyncScheduledTimeoutMillis,
+                                                        appStandbyController4
+                                                                .getCrossProfileTargets(i5, str2));
                                     }
                                 } finally {
                                 }
@@ -271,9 +339,11 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
                         int i8 = i2;
                         appStandbyController5.mInjector.getClass();
                         long elapsedRealtime3 = SystemClock.elapsedRealtime();
-                        List crossProfileTargets = appStandbyController5.getCrossProfileTargets(i6, str3);
+                        List crossProfileTargets =
+                                appStandbyController5.getCrossProfileTargets(i6, str3);
                         synchronized (appStandbyController5.mAppIdleLock) {
-                            appStandbyController5.reportNoninteractiveUsageCrossUserLocked(str3, i6, i8, i7, elapsedRealtime3, j4, crossProfileTargets);
+                            appStandbyController5.reportNoninteractiveUsageCrossUserLocked(
+                                    str3, i6, i8, i7, elapsedRealtime3, j4, crossProfileTargets);
                         }
                         return;
                     }
@@ -285,9 +355,17 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
                     if (appStandbyController6.mAppIdleEnabled) {
                         appStandbyController6.mInjector.getClass();
                         long elapsedRealtime4 = SystemClock.elapsedRealtime();
-                        List crossProfileTargets2 = appStandbyController6.getCrossProfileTargets(i9, str4);
+                        List crossProfileTargets2 =
+                                appStandbyController6.getCrossProfileTargets(i9, str4);
                         synchronized (appStandbyController6.mAppIdleLock) {
-                            appStandbyController6.reportNoninteractiveUsageCrossUserLocked(str4, i9, 10, 13, elapsedRealtime4, appStandbyController6.mExemptedSyncStartTimeoutMillis, crossProfileTargets2);
+                            appStandbyController6.reportNoninteractiveUsageCrossUserLocked(
+                                    str4,
+                                    i9,
+                                    10,
+                                    13,
+                                    elapsedRealtime4,
+                                    appStandbyController6.mExemptedSyncStartTimeoutMillis,
+                                    crossProfileTargets2);
                         }
                         return;
                     }
@@ -297,27 +375,51 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class ConstantsObserver extends ContentObserver implements DeviceConfig.OnPropertiesChangedListener {
+    public final class ConstantsObserver extends ContentObserver
+            implements DeviceConfig.OnPropertiesChangedListener {
         public final String[] KEYS_ELAPSED_TIME_THRESHOLDS;
         public final String[] KEYS_SCREEN_TIME_THRESHOLDS;
         public final TextUtils.SimpleStringSplitter mStringPipeSplitter;
 
         public ConstantsObserver(Handler handler) {
             super(handler);
-            this.KEYS_SCREEN_TIME_THRESHOLDS = new String[]{"screen_threshold_active", "screen_threshold_working_set", "screen_threshold_frequent", "screen_threshold_rare", "screen_threshold_restricted"};
-            this.KEYS_ELAPSED_TIME_THRESHOLDS = new String[]{"elapsed_threshold_active", "elapsed_threshold_working_set", "elapsed_threshold_frequent", "elapsed_threshold_rare", "elapsed_threshold_restricted"};
+            this.KEYS_SCREEN_TIME_THRESHOLDS =
+                    new String[] {
+                        "screen_threshold_active",
+                        "screen_threshold_working_set",
+                        "screen_threshold_frequent",
+                        "screen_threshold_rare",
+                        "screen_threshold_restricted"
+                    };
+            this.KEYS_ELAPSED_TIME_THRESHOLDS =
+                    new String[] {
+                        "elapsed_threshold_active",
+                        "elapsed_threshold_working_set",
+                        "elapsed_threshold_frequent",
+                        "elapsed_threshold_rare",
+                        "elapsed_threshold_restricted"
+                    };
             this.mStringPipeSplitter = new TextUtils.SimpleStringSplitter('|');
         }
 
-        public static long[] generateThresholdArray(DeviceConfig.Properties properties, String[] strArr, long[] jArr, long[] jArr2) {
+        public static long[] generateThresholdArray(
+                DeviceConfig.Properties properties, String[] strArr, long[] jArr, long[] jArr2) {
             if (properties.getKeyset().isEmpty()) {
                 return jArr;
             }
             if (strArr.length != 5) {
-                throw new IllegalStateException(AmFmBandRange$$ExternalSyntheticOutline0.m(strArr.length, new StringBuilder("# keys ("), ") != # buckets (5)"));
+                throw new IllegalStateException(
+                        AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                strArr.length,
+                                new StringBuilder("# keys ("),
+                                ") != # buckets (5)"));
             }
             if (jArr.length != 5) {
-                throw new IllegalStateException(AmFmBandRange$$ExternalSyntheticOutline0.m(jArr.length, new StringBuilder("# defaults ("), ") != # buckets (5)"));
+                throw new IllegalStateException(
+                        AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                jArr.length,
+                                new StringBuilder("# defaults ("),
+                                ") != # buckets (5)"));
             }
             if (jArr2.length != 5) {
                 Slog.wtf("AppStandbyController", "minValues array is the wrong size");
@@ -378,7 +480,8 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
                                     c = 65535;
                                     break;
                                 case -1525033432:
-                                    if (str.equals("broadcast_sessions_with_response_duration_ms")) {
+                                    if (str.equals(
+                                            "broadcast_sessions_with_response_duration_ms")) {
                                         c = 20;
                                         break;
                                     }
@@ -413,7 +516,8 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
                                     c = 65535;
                                     break;
                                 case -641750299:
-                                    if (str.equals("note_response_event_for_all_broadcast_sessions")) {
+                                    if (str.equals(
+                                            "note_response_event_for_all_broadcast_sessions")) {
                                         c = 21;
                                         break;
                                     }
@@ -448,7 +552,8 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
                                     c = 65535;
                                     break;
                                 case 276460958:
-                                    if (str.equals("retain_notification_seen_impact_for_pre_t_apps")) {
+                                    if (str.equals(
+                                            "retain_notification_seen_impact_for_pre_t_apps")) {
                                         c = 5;
                                         break;
                                     }
@@ -523,102 +628,185 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
                             }
                             switch (c) {
                                 case 0:
-                                    AppStandbyController.this.mInjector.mAutoRestrictedBucketDelayMs = Math.max(BackupManagerConstants.DEFAULT_KEY_VALUE_BACKUP_INTERVAL_MILLISECONDS, properties.getLong("auto_restricted_bucket_delay_ms", ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS));
+                                    AppStandbyController.this
+                                                    .mInjector
+                                                    .mAutoRestrictedBucketDelayMs =
+                                            Math.max(
+                                                    BackupManagerConstants
+                                                            .DEFAULT_KEY_VALUE_BACKUP_INTERVAL_MILLISECONDS,
+                                                    properties.getLong(
+                                                            "auto_restricted_bucket_delay_ms",
+                                                            ClipboardService
+                                                                    .DEFAULT_CLIPBOARD_TIMEOUT_MILLIS));
                                     break;
                                 case 1:
-                                    AppStandbyController.this.mLinkCrossProfileApps = properties.getBoolean("cross_profile_apps_share_standby_buckets", true);
+                                    AppStandbyController.this.mLinkCrossProfileApps =
+                                            properties.getBoolean(
+                                                    "cross_profile_apps_share_standby_buckets",
+                                                    true);
                                     break;
                                 case 2:
-                                    AppStandbyController.this.mInitialForegroundServiceStartTimeoutMillis = properties.getLong("initial_foreground_service_start_duration", 1800000L);
+                                    AppStandbyController.this
+                                                    .mInitialForegroundServiceStartTimeoutMillis =
+                                            properties.getLong(
+                                                    "initial_foreground_service_start_duration",
+                                                    1800000L);
                                     break;
                                 case 3:
-                                    AppStandbyController.this.mNotificationSeenTimeoutMillis = properties.getLong("notification_seen_duration", 43200000L);
+                                    AppStandbyController.this.mNotificationSeenTimeoutMillis =
+                                            properties.getLong(
+                                                    "notification_seen_duration", 43200000L);
                                     break;
                                 case 4:
-                                    AppStandbyController.this.mNotificationSeenPromotedBucket = properties.getInt("notification_seen_promoted_bucket", 20);
+                                    AppStandbyController.this.mNotificationSeenPromotedBucket =
+                                            properties.getInt(
+                                                    "notification_seen_promoted_bucket", 20);
                                     break;
                                 case 5:
-                                    AppStandbyController.this.mRetainNotificationSeenImpactForPreTApps = properties.getBoolean("retain_notification_seen_impact_for_pre_t_apps", false);
+                                    AppStandbyController.this
+                                                    .mRetainNotificationSeenImpactForPreTApps =
+                                            properties.getBoolean(
+                                                    "retain_notification_seen_impact_for_pre_t_apps",
+                                                    false);
                                     break;
                                 case 6:
-                                    AppStandbyController.this.mTriggerQuotaBumpOnNotificationSeen = properties.getBoolean("trigger_quota_bump_on_notification_seen", false);
+                                    AppStandbyController.this.mTriggerQuotaBumpOnNotificationSeen =
+                                            properties.getBoolean(
+                                                    "trigger_quota_bump_on_notification_seen",
+                                                    false);
                                     break;
                                 case 7:
-                                    AppStandbyController.this.mSlicePinnedTimeoutMillis = properties.getLong("slice_pinned_duration", 43200000L);
+                                    AppStandbyController.this.mSlicePinnedTimeoutMillis =
+                                            properties.getLong("slice_pinned_duration", 43200000L);
                                     break;
                                 case '\b':
-                                    AppStandbyController.this.mStrongUsageTimeoutMillis = properties.getLong("strong_usage_duration", ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS);
+                                    AppStandbyController.this.mStrongUsageTimeoutMillis =
+                                            properties.getLong(
+                                                    "strong_usage_duration",
+                                                    ClipboardService
+                                                            .DEFAULT_CLIPBOARD_TIMEOUT_MILLIS);
                                     break;
                                 case '\t':
-                                    AppStandbyController.this.mPredictionTimeoutMillis = properties.getLong("prediction_timeout", 43200000L);
+                                    AppStandbyController.this.mPredictionTimeoutMillis =
+                                            properties.getLong("prediction_timeout", 43200000L);
                                     break;
                                 case '\n':
-                                    AppStandbyController.this.mSystemInteractionTimeoutMillis = properties.getLong("system_interaction_duration", 600000L);
+                                    AppStandbyController.this.mSystemInteractionTimeoutMillis =
+                                            properties.getLong(
+                                                    "system_interaction_duration", 600000L);
                                     break;
                                 case 11:
-                                    AppStandbyController.this.mSystemUpdateUsageTimeoutMillis = properties.getLong("system_update_usage_duration", 7200000L);
+                                    AppStandbyController.this.mSystemUpdateUsageTimeoutMillis =
+                                            properties.getLong(
+                                                    "system_update_usage_duration", 7200000L);
                                     break;
                                 case '\f':
-                                    AppStandbyController.this.mSyncAdapterTimeoutMillis = properties.getLong("sync_adapter_duration", 600000L);
+                                    AppStandbyController.this.mSyncAdapterTimeoutMillis =
+                                            properties.getLong("sync_adapter_duration", 600000L);
                                     break;
                                 case '\r':
-                                    AppStandbyController.this.mExemptedSyncScheduledDozeTimeoutMillis = properties.getLong("exempted_sync_scheduled_d_duration", BackupManagerConstants.DEFAULT_KEY_VALUE_BACKUP_INTERVAL_MILLISECONDS);
+                                    AppStandbyController.this
+                                                    .mExemptedSyncScheduledDozeTimeoutMillis =
+                                            properties.getLong(
+                                                    "exempted_sync_scheduled_d_duration",
+                                                    BackupManagerConstants
+                                                            .DEFAULT_KEY_VALUE_BACKUP_INTERVAL_MILLISECONDS);
                                     break;
                                 case 14:
-                                    AppStandbyController.this.mExemptedSyncScheduledNonDozeTimeoutMillis = properties.getLong("exempted_sync_scheduled_nd_duration", 600000L);
+                                    AppStandbyController.this
+                                                    .mExemptedSyncScheduledNonDozeTimeoutMillis =
+                                            properties.getLong(
+                                                    "exempted_sync_scheduled_nd_duration", 600000L);
                                     break;
                                 case 15:
-                                    AppStandbyController.this.mExemptedSyncStartTimeoutMillis = properties.getLong("exempted_sync_start_duration", 600000L);
+                                    AppStandbyController.this.mExemptedSyncStartTimeoutMillis =
+                                            properties.getLong(
+                                                    "exempted_sync_start_duration", 600000L);
                                     break;
                                 case 16:
-                                    AppStandbyController.this.mUnexemptedSyncScheduledTimeoutMillis = properties.getLong("unexempted_sync_scheduled_duration", 600000L);
+                                    AppStandbyController.this
+                                                    .mUnexemptedSyncScheduledTimeoutMillis =
+                                            properties.getLong(
+                                                    "unexempted_sync_scheduled_duration", 600000L);
                                     break;
                                 case 17:
-                                    AppStandbyController.this.mBroadcastResponseWindowDurationMillis = properties.getLong("broadcast_response_window_timeout_ms", 120000L);
+                                    AppStandbyController.this
+                                                    .mBroadcastResponseWindowDurationMillis =
+                                            properties.getLong(
+                                                    "broadcast_response_window_timeout_ms",
+                                                    120000L);
                                     break;
                                 case 18:
-                                    AppStandbyController.this.mBroadcastResponseFgThresholdState = properties.getInt("broadcast_response_fg_threshold_state", 2);
+                                    AppStandbyController.this.mBroadcastResponseFgThresholdState =
+                                            properties.getInt(
+                                                    "broadcast_response_fg_threshold_state", 2);
                                     break;
                                 case 19:
-                                    AppStandbyController.this.mBroadcastSessionsDurationMs = properties.getLong("broadcast_sessions_duration_ms", 120000L);
+                                    AppStandbyController.this.mBroadcastSessionsDurationMs =
+                                            properties.getLong(
+                                                    "broadcast_sessions_duration_ms", 120000L);
                                     break;
                                 case 20:
-                                    AppStandbyController.this.mBroadcastSessionsWithResponseDurationMs = properties.getLong("broadcast_sessions_with_response_duration_ms", 120000L);
+                                    AppStandbyController.this
+                                                    .mBroadcastSessionsWithResponseDurationMs =
+                                            properties.getLong(
+                                                    "broadcast_sessions_with_response_duration_ms",
+                                                    120000L);
                                     break;
                                 case 21:
-                                    AppStandbyController.this.mNoteResponseEventForAllBroadcastSessions = properties.getBoolean("note_response_event_for_all_broadcast_sessions", true);
+                                    AppStandbyController.this
+                                                    .mNoteResponseEventForAllBroadcastSessions =
+                                            properties.getBoolean(
+                                                    "note_response_event_for_all_broadcast_sessions",
+                                                    true);
                                     break;
                                 case 22:
-                                    AppStandbyController.this.mBroadcastResponseExemptedRoles = properties.getString("brodacast_response_exempted_roles", "");
-                                    AppStandbyController appStandbyController = AppStandbyController.this;
-                                    String str2 = appStandbyController.mBroadcastResponseExemptedRoles;
+                                    AppStandbyController.this.mBroadcastResponseExemptedRoles =
+                                            properties.getString(
+                                                    "brodacast_response_exempted_roles", "");
+                                    AppStandbyController appStandbyController =
+                                            AppStandbyController.this;
+                                    String str2 =
+                                            appStandbyController.mBroadcastResponseExemptedRoles;
                                     ArrayList arrayList = new ArrayList();
                                     this.mStringPipeSplitter.setString(str2);
                                     while (this.mStringPipeSplitter.hasNext()) {
                                         arrayList.add(this.mStringPipeSplitter.next());
                                     }
-                                    appStandbyController.mBroadcastResponseExemptedRolesList = arrayList;
+                                    appStandbyController.mBroadcastResponseExemptedRolesList =
+                                            arrayList;
                                     break;
                                 case 23:
-                                    AppStandbyController.this.mBroadcastResponseExemptedPermissions = properties.getString("brodacast_response_exempted_permissions", "");
-                                    AppStandbyController appStandbyController2 = AppStandbyController.this;
-                                    String str3 = appStandbyController2.mBroadcastResponseExemptedPermissions;
+                                    AppStandbyController.this
+                                                    .mBroadcastResponseExemptedPermissions =
+                                            properties.getString(
+                                                    "brodacast_response_exempted_permissions", "");
+                                    AppStandbyController appStandbyController2 =
+                                            AppStandbyController.this;
+                                    String str3 =
+                                            appStandbyController2
+                                                    .mBroadcastResponseExemptedPermissions;
                                     ArrayList arrayList2 = new ArrayList();
                                     this.mStringPipeSplitter.setString(str3);
                                     while (this.mStringPipeSplitter.hasNext()) {
                                         arrayList2.add(this.mStringPipeSplitter.next());
                                     }
-                                    appStandbyController2.mBroadcastResponseExemptedPermissionsList = arrayList2;
+                                    appStandbyController2
+                                                    .mBroadcastResponseExemptedPermissionsList =
+                                            arrayList2;
                                     break;
                                 default:
-                                    if (!z && (str.startsWith("screen_threshold_") || str.startsWith("elapsed_threshold_"))) {
+                                    if (!z
+                                            && (str.startsWith("screen_threshold_")
+                                                    || str.startsWith("elapsed_threshold_"))) {
                                         updateTimeThresholds();
                                         z = true;
                                         break;
                                     }
                                     break;
                             }
-                            ((ArrayMap) AppStandbyController.this.mAppStandbyProperties).put(str, properties.getString(str, (String) null));
+                            ((ArrayMap) AppStandbyController.this.mAppStandbyProperties)
+                                    .put(str, properties.getString(str, (String) null));
                         }
                     }
                 } catch (Throwable th) {
@@ -630,7 +818,20 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         public final void updateSettings() {
             AppStandbyController appStandbyController = AppStandbyController.this;
             Injector injector = appStandbyController.mInjector;
-            appStandbyController.setAppIdleEnabled(injector.mContext.getResources().getBoolean(R.bool.config_enableDefaultHdrConversionPassthrough) && (Settings.Global.getInt(injector.mContext.getContentResolver(), "app_standby_enabled", 1) == 1 && Settings.Global.getInt(injector.mContext.getContentResolver(), "adaptive_battery_management_enabled", 1) == 1));
+            appStandbyController.setAppIdleEnabled(
+                    injector.mContext
+                                    .getResources()
+                                    .getBoolean(R.bool.config_enableDefaultHdrConversionPassthrough)
+                            && (Settings.Global.getInt(
+                                                    injector.mContext.getContentResolver(),
+                                                    "app_standby_enabled",
+                                                    1)
+                                            == 1
+                                    && Settings.Global.getInt(
+                                                    injector.mContext.getContentResolver(),
+                                                    "adaptive_battery_management_enabled",
+                                                    1)
+                                            == 1));
         }
 
         public final void updateTimeThresholds() {
@@ -641,11 +842,25 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
             Injector injector2 = AppStandbyController.this.mInjector;
             String[] strArr2 = this.KEYS_ELAPSED_TIME_THRESHOLDS;
             injector2.getClass();
-            DeviceConfig.Properties properties2 = DeviceConfig.getProperties("app_standby", strArr2);
-            AppStandbyController.this.mAppStandbyScreenThresholds = generateThresholdArray(properties, this.KEYS_SCREEN_TIME_THRESHOLDS, AppStandbyController.DEFAULT_SCREEN_TIME_THRESHOLDS, AppStandbyController.MINIMUM_SCREEN_TIME_THRESHOLDS);
-            AppStandbyController.this.mAppStandbyElapsedThresholds = generateThresholdArray(properties2, this.KEYS_ELAPSED_TIME_THRESHOLDS, AppStandbyController.DEFAULT_ELAPSED_TIME_THRESHOLDS, AppStandbyController.MINIMUM_ELAPSED_TIME_THRESHOLDS);
+            DeviceConfig.Properties properties2 =
+                    DeviceConfig.getProperties("app_standby", strArr2);
+            AppStandbyController.this.mAppStandbyScreenThresholds =
+                    generateThresholdArray(
+                            properties,
+                            this.KEYS_SCREEN_TIME_THRESHOLDS,
+                            AppStandbyController.DEFAULT_SCREEN_TIME_THRESHOLDS,
+                            AppStandbyController.MINIMUM_SCREEN_TIME_THRESHOLDS);
+            AppStandbyController.this.mAppStandbyElapsedThresholds =
+                    generateThresholdArray(
+                            properties2,
+                            this.KEYS_ELAPSED_TIME_THRESHOLDS,
+                            AppStandbyController.DEFAULT_ELAPSED_TIME_THRESHOLDS,
+                            AppStandbyController.MINIMUM_ELAPSED_TIME_THRESHOLDS);
             AppStandbyController appStandbyController = AppStandbyController.this;
-            appStandbyController.mCheckIdleIntervalMillis = Math.min(appStandbyController.mAppStandbyElapsedThresholds[1] / 4, BackupManagerConstants.DEFAULT_KEY_VALUE_BACKUP_INTERVAL_MILLISECONDS);
+            appStandbyController.mCheckIdleIntervalMillis =
+                    Math.min(
+                            appStandbyController.mAppStandbyElapsedThresholds[1] / 4,
+                            BackupManagerConstants.DEFAULT_KEY_VALUE_BACKUP_INTERVAL_MILLISECONDS);
         }
     }
 
@@ -670,7 +885,8 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         public final Looper mLooper;
         public PackageManagerInternal mPackageManagerInternal;
         public PowerManager mPowerManager;
-        public long mAutoRestrictedBucketDelayMs = ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS;
+        public long mAutoRestrictedBucketDelayMs =
+                ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS;
         public final ArraySet mPowerWhitelistedApps = new ArraySet();
         public String mWellbeingApp = null;
 
@@ -702,8 +918,7 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class Lock {
-    }
+    public final class Lock {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class PackageReceiver extends BroadcastReceiver {
@@ -722,44 +937,73 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
                     String action = intent.getAction();
                     String schemeSpecificPart = intent.getData().getSchemeSpecificPart();
                     int sendingUserId = getSendingUserId();
-                    if ("android.intent.action.PACKAGE_ADDED".equals(action) || "android.intent.action.PACKAGE_CHANGED".equals(action)) {
-                        String[] stringArrayExtra = intent.getStringArrayExtra("android.intent.extra.changed_component_name_list");
-                        if (stringArrayExtra == null || (stringArrayExtra.length == 1 && schemeSpecificPart.equals(stringArrayExtra[0]))) {
+                    if ("android.intent.action.PACKAGE_ADDED".equals(action)
+                            || "android.intent.action.PACKAGE_CHANGED".equals(action)) {
+                        String[] stringArrayExtra =
+                                intent.getStringArrayExtra(
+                                        "android.intent.extra.changed_component_name_list");
+                        if (stringArrayExtra == null
+                                || (stringArrayExtra.length == 1
+                                        && schemeSpecificPart.equals(stringArrayExtra[0]))) {
                             this.this$0.clearCarrierPrivilegedApps();
                             AppStandbyController appStandbyController = this.this$0;
                             if (appStandbyController.mSystemServicesReady) {
                                 try {
-                                    appStandbyController.maybeUpdateHeadlessSystemAppCache(appStandbyController.mPackageManager.getPackageInfoAsUser(schemeSpecificPart, 1835520, sendingUserId));
+                                    appStandbyController.maybeUpdateHeadlessSystemAppCache(
+                                            appStandbyController.mPackageManager
+                                                    .getPackageInfoAsUser(
+                                                            schemeSpecificPart,
+                                                            1835520,
+                                                            sendingUserId));
                                 } catch (PackageManager.NameNotFoundException unused) {
                                     synchronized (appStandbyController.mHeadlessSystemApps) {
-                                        appStandbyController.mHeadlessSystemApps.remove(schemeSpecificPart);
+                                        appStandbyController.mHeadlessSystemApps.remove(
+                                                schemeSpecificPart);
                                     }
                                 }
                             }
                         }
                         if ("android.intent.action.PACKAGE_CHANGED".equals(action)) {
-                            this.this$0.mHandler.obtainMessage(11, sendingUserId, -1, schemeSpecificPart).sendToTarget();
+                            this.this$0
+                                    .mHandler
+                                    .obtainMessage(11, sendingUserId, -1, schemeSpecificPart)
+                                    .sendToTarget();
                         }
                     }
-                    if ("android.intent.action.PACKAGE_REMOVED".equals(action) || "android.intent.action.PACKAGE_ADDED".equals(action)) {
+                    if ("android.intent.action.PACKAGE_REMOVED".equals(action)
+                            || "android.intent.action.PACKAGE_ADDED".equals(action)) {
                         if (intent.getBooleanExtra("android.intent.extra.REPLACING", false)) {
                             this.this$0.maybeUnrestrictBuggyApp(schemeSpecificPart, sendingUserId);
                         } else if (!"android.intent.action.PACKAGE_ADDED".equals(action)) {
                             this.this$0.clearAppIdleForPackage(schemeSpecificPart, sendingUserId);
-                        } else if (this.this$0.mAppsToRestoreToRare.contains(sendingUserId, schemeSpecificPart)) {
+                        } else if (this.this$0.mAppsToRestoreToRare.contains(
+                                sendingUserId, schemeSpecificPart)) {
                             AppStandbyController appStandbyController2 = this.this$0;
                             appStandbyController2.mInjector.getClass();
                             long elapsedRealtime = SystemClock.elapsedRealtime();
-                            if (appStandbyController2.getAppStandbyBucket(schemeSpecificPart, sendingUserId, elapsedRealtime, false) == 50) {
-                                appStandbyController2.setAppStandbyBucket(sendingUserId, 40, 258, elapsedRealtime, schemeSpecificPart, false);
+                            if (appStandbyController2.getAppStandbyBucket(
+                                            schemeSpecificPart,
+                                            sendingUserId,
+                                            elapsedRealtime,
+                                            false)
+                                    == 50) {
+                                appStandbyController2.setAppStandbyBucket(
+                                        sendingUserId,
+                                        40,
+                                        258,
+                                        elapsedRealtime,
+                                        schemeSpecificPart,
+                                        false);
                             }
-                            this.this$0.mAppsToRestoreToRare.remove(sendingUserId, schemeSpecificPart);
+                            this.this$0.mAppsToRestoreToRare.remove(
+                                    sendingUserId, schemeSpecificPart);
                         }
                     }
                     synchronized (this.this$0.mSystemExemptionAppOpMode) {
                         try {
                             if ("android.intent.action.PACKAGE_REMOVED".equals(action)) {
-                                this.this$0.mSystemExemptionAppOpMode.delete(intent.getIntExtra("android.intent.extra.UID", -1));
+                                this.this$0.mSystemExemptionAppOpMode.delete(
+                                        intent.getIntExtra("android.intent.extra.UID", -1));
                             }
                         } catch (Throwable th) {
                             throw th;
@@ -773,7 +1017,9 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
                         case "android.os.action.POWER_SAVE_WHITELIST_CHANGED":
                             AppStandbyController appStandbyController3 = this.this$0;
                             if (appStandbyController3.mSystemServicesReady) {
-                                appStandbyController3.mHandler.post(new AppStandbyController$$ExternalSyntheticLambda0(appStandbyController3, 0));
+                                appStandbyController3.mHandler.post(
+                                        new AppStandbyController$$ExternalSyntheticLambda0(
+                                                appStandbyController3, 0));
                                 return;
                             }
                             return;
@@ -834,14 +1080,21 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
     }
 
     /* renamed from: -$$Nest$minformListeners, reason: not valid java name */
-    public static void m1004$$Nest$minformListeners(AppStandbyController appStandbyController, String str, int i, int i2, int i3, boolean z) {
+    public static void m1004$$Nest$minformListeners(
+            AppStandbyController appStandbyController,
+            String str,
+            int i,
+            int i2,
+            int i3,
+            boolean z) {
         appStandbyController.getClass();
         boolean z2 = i2 >= 40;
         synchronized (appStandbyController.mPackageAccessListeners) {
             try {
                 Iterator it = appStandbyController.mPackageAccessListeners.iterator();
                 while (it.hasNext()) {
-                    AppStandbyInternal.AppIdleStateChangeListener appIdleStateChangeListener = (AppStandbyInternal.AppIdleStateChangeListener) it.next();
+                    AppStandbyInternal.AppIdleStateChangeListener appIdleStateChangeListener =
+                            (AppStandbyInternal.AppIdleStateChangeListener) it.next();
                     appIdleStateChangeListener.onAppIdleStateChanged(str, i, z2, i2, i3);
                     if (z) {
                         appIdleStateChangeListener.onUserInteractionStarted(str, i);
@@ -854,13 +1107,15 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
     }
 
     /* renamed from: -$$Nest$minformParoleStateChanged, reason: not valid java name */
-    public static void m1005$$Nest$minformParoleStateChanged(AppStandbyController appStandbyController) {
+    public static void m1005$$Nest$minformParoleStateChanged(
+            AppStandbyController appStandbyController) {
         boolean isInParole = appStandbyController.isInParole();
         synchronized (appStandbyController.mPackageAccessListeners) {
             try {
                 Iterator it = appStandbyController.mPackageAccessListeners.iterator();
                 while (it.hasNext()) {
-                    ((AppStandbyInternal.AppIdleStateChangeListener) it.next()).onParoleStateChanged(isInParole);
+                    ((AppStandbyInternal.AppIdleStateChangeListener) it.next())
+                            .onParoleStateChanged(isInParole);
                 }
             } catch (Throwable th) {
                 throw th;
@@ -870,21 +1125,28 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
 
     /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:25:? -> B:20:0x0068). Please report as a decompilation issue!!! */
     /* renamed from: -$$Nest$mreportContentProviderUsage, reason: not valid java name */
-    public static void m1006$$Nest$mreportContentProviderUsage(AppStandbyController appStandbyController, String str, String str2, int i) {
+    public static void m1006$$Nest$mreportContentProviderUsage(
+            AppStandbyController appStandbyController, String str, String str2, int i) {
         Lock lock;
         int i2;
         int i3;
         if (appStandbyController.mAppIdleEnabled) {
-            String[] syncAdapterPackagesForAuthorityAsUser = ContentResolver.getSyncAdapterPackagesForAuthorityAsUser(str, i);
-            PackageManagerInternal packageManagerInternal = appStandbyController.mInjector.mPackageManagerInternal;
+            String[] syncAdapterPackagesForAuthorityAsUser =
+                    ContentResolver.getSyncAdapterPackagesForAuthorityAsUser(str, i);
+            PackageManagerInternal packageManagerInternal =
+                    appStandbyController.mInjector.mPackageManagerInternal;
             long elapsedRealtime = SystemClock.elapsedRealtime();
             int length = syncAdapterPackagesForAuthorityAsUser.length;
             int i4 = 0;
             while (i4 < length) {
                 String str3 = syncAdapterPackagesForAuthorityAsUser[i4];
                 if (!str3.equals(str2)) {
-                    if (appStandbyController.mSystemPackagesAppIds.contains(Integer.valueOf(UserHandle.getAppId(packageManagerInternal.getPackageUid(str3, 0L, i))))) {
-                        List crossProfileTargets = appStandbyController.getCrossProfileTargets(i, str3);
+                    if (appStandbyController.mSystemPackagesAppIds.contains(
+                            Integer.valueOf(
+                                    UserHandle.getAppId(
+                                            packageManagerInternal.getPackageUid(str3, 0L, i))))) {
+                        List crossProfileTargets =
+                                appStandbyController.getCrossProfileTargets(i, str3);
                         Lock lock2 = appStandbyController.mAppIdleLock;
                         synchronized (lock2) {
                             try {
@@ -897,7 +1159,14 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
                                 throw th;
                             }
                             try {
-                                appStandbyController.reportNoninteractiveUsageCrossUserLocked(str3, i, 10, 8, elapsedRealtime, appStandbyController.mSyncAdapterTimeoutMillis, crossProfileTargets);
+                                appStandbyController.reportNoninteractiveUsageCrossUserLocked(
+                                        str3,
+                                        i,
+                                        10,
+                                        8,
+                                        elapsedRealtime,
+                                        appStandbyController.mSyncAdapterTimeoutMillis,
+                                        crossProfileTargets);
                                 i4 = i2 + 1;
                                 length = i3;
                             } catch (Throwable th2) {
@@ -916,13 +1185,15 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
     }
 
     /* renamed from: -$$Nest$mtriggerListenerQuotaBump, reason: not valid java name */
-    public static void m1007$$Nest$mtriggerListenerQuotaBump(AppStandbyController appStandbyController, String str, int i) {
+    public static void m1007$$Nest$mtriggerListenerQuotaBump(
+            AppStandbyController appStandbyController, String str, int i) {
         if (appStandbyController.mAppIdleEnabled) {
             synchronized (appStandbyController.mPackageAccessListeners) {
                 try {
                     Iterator it = appStandbyController.mPackageAccessListeners.iterator();
                     while (it.hasNext()) {
-                        ((AppStandbyInternal.AppIdleStateChangeListener) it.next()).triggerTemporaryQuotaBump(str, i);
+                        ((AppStandbyInternal.AppIdleStateChangeListener) it.next())
+                                .triggerTemporaryQuotaBump(str, i);
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -948,7 +1219,10 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         this.mCachedNetworkScorerAtMillis = 0L;
         this.mCachedDeviceProvisioningPackage = null;
         long[] jArr = DEFAULT_ELAPSED_TIME_THRESHOLDS;
-        this.mCheckIdleIntervalMillis = Math.min(jArr[1] / 4, BackupManagerConstants.DEFAULT_KEY_VALUE_BACKUP_INTERVAL_MILLISECONDS);
+        this.mCheckIdleIntervalMillis =
+                Math.min(
+                        jArr[1] / 4,
+                        BackupManagerConstants.DEFAULT_KEY_VALUE_BACKUP_INTERVAL_MILLISECONDS);
         this.mAppStandbyScreenThresholds = DEFAULT_SCREEN_TIME_THRESHOLDS;
         this.mAppStandbyElapsedThresholds = jArr;
         this.mStrongUsageTimeoutMillis = ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS;
@@ -961,7 +1235,8 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         this.mPredictionTimeoutMillis = 43200000L;
         this.mSyncAdapterTimeoutMillis = 600000L;
         this.mExemptedSyncScheduledNonDozeTimeoutMillis = 600000L;
-        this.mExemptedSyncScheduledDozeTimeoutMillis = BackupManagerConstants.DEFAULT_KEY_VALUE_BACKUP_INTERVAL_MILLISECONDS;
+        this.mExemptedSyncScheduledDozeTimeoutMillis =
+                BackupManagerConstants.DEFAULT_KEY_VALUE_BACKUP_INTERVAL_MILLISECONDS;
         this.mExemptedSyncStartTimeoutMillis = 600000L;
         this.mUnexemptedSyncScheduledTimeoutMillis = 600000L;
         this.mSystemInteractionTimeoutMillis = 600000L;
@@ -981,28 +1256,37 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         this.mAppsToRestoreToRare = new SparseSetArray();
         this.mSystemPackagesAppIds = new ArrayList();
         this.mSystemServicesReady = false;
-        this.mDisplayListener = new DisplayManager.DisplayListener() { // from class: com.android.server.usage.AppStandbyController.2
-            @Override // android.hardware.display.DisplayManager.DisplayListener
-            public final void onDisplayAdded(int i) {
-            }
+        this.mDisplayListener =
+                new DisplayManager
+                        .DisplayListener() { // from class:
+                                             // com.android.server.usage.AppStandbyController.2
+                    @Override // android.hardware.display.DisplayManager.DisplayListener
+                    public final void onDisplayAdded(int i) {}
 
-            @Override // android.hardware.display.DisplayManager.DisplayListener
-            public final void onDisplayChanged(int i) {
-                if (i == 0) {
-                    boolean z = AppStandbyController.this.mInjector.mDisplayManager.getDisplay(0).getState() == 2;
-                    synchronized (AppStandbyController.this.mAppIdleLock) {
-                        AppStandbyController appStandbyController = AppStandbyController.this;
-                        AppIdleHistory appIdleHistory = appStandbyController.mAppIdleHistory;
-                        appStandbyController.mInjector.getClass();
-                        appIdleHistory.updateDisplay(SystemClock.elapsedRealtime(), z);
+                    @Override // android.hardware.display.DisplayManager.DisplayListener
+                    public final void onDisplayChanged(int i) {
+                        if (i == 0) {
+                            boolean z =
+                                    AppStandbyController.this
+                                                    .mInjector
+                                                    .mDisplayManager
+                                                    .getDisplay(0)
+                                                    .getState()
+                                            == 2;
+                            synchronized (AppStandbyController.this.mAppIdleLock) {
+                                AppStandbyController appStandbyController =
+                                        AppStandbyController.this;
+                                AppIdleHistory appIdleHistory =
+                                        appStandbyController.mAppIdleHistory;
+                                appStandbyController.mInjector.getClass();
+                                appIdleHistory.updateDisplay(SystemClock.elapsedRealtime(), z);
+                            }
+                        }
                     }
-                }
-            }
 
-            @Override // android.hardware.display.DisplayManager.DisplayListener
-            public final void onDisplayRemoved(int i) {
-            }
-        };
+                    @Override // android.hardware.display.DisplayManager.DisplayListener
+                    public final void onDisplayRemoved(int i) {}
+                };
         this.mInjector = injector;
         Context context2 = injector.mContext;
         this.mContext = context2;
@@ -1015,17 +1299,25 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         intentFilter.addAction("android.os.action.POWER_SAVE_WHITELIST_CHANGED");
         context2.registerReceiver(packageReceiver, intentFilter);
         synchronized (lock) {
-            this.mAppIdleHistory = new AppIdleHistory(Environment.getDataSystemDirectory(), SystemClock.elapsedRealtime());
+            this.mAppIdleHistory =
+                    new AppIdleHistory(
+                            Environment.getDataSystemDirectory(), SystemClock.elapsedRealtime());
         }
         IntentFilter intentFilter2 = new IntentFilter();
         intentFilter2.addAction("android.intent.action.PACKAGE_ADDED");
         intentFilter2.addAction("android.intent.action.PACKAGE_CHANGED");
         intentFilter2.addAction("android.intent.action.PACKAGE_REMOVED");
         intentFilter2.addDataScheme("package");
-        context2.registerReceiverAsUser(new PackageReceiver(this, 0), UserHandle.ALL, intentFilter2, null, appStandbyHandler);
+        context2.registerReceiverAsUser(
+                new PackageReceiver(this, 0),
+                UserHandle.ALL,
+                intentFilter2,
+                null,
+                appStandbyHandler);
     }
 
-    public static int getMinBucketWithValidExpiryTime(AppIdleHistory.AppUsageHistory appUsageHistory, int i, long j) {
+    public static int getMinBucketWithValidExpiryTime(
+            AppIdleHistory.AppUsageHistory appUsageHistory, int i, long j) {
         SparseLongArray sparseLongArray = appUsageHistory.bucketExpiryTimesMs;
         if (sparseLongArray == null) {
             return -1;
@@ -1058,7 +1350,8 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         }
     }
 
-    public final void addListener(AppStandbyInternal.AppIdleStateChangeListener appIdleStateChangeListener) {
+    public final void addListener(
+            AppStandbyInternal.AppIdleStateChangeListener appIdleStateChangeListener) {
         synchronized (this.mPackageAccessListeners) {
             try {
                 if (!this.mPackageAccessListeners.contains(appIdleStateChangeListener)) {
@@ -1086,7 +1379,10 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
             Method dump skipped, instructions count: 349
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.usage.AppStandbyController.checkAndUpdateStandbyState(int, int, long, java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.usage.AppStandbyController.checkAndUpdateStandbyState(int,"
+                    + " int, long, java.lang.String):void");
     }
 
     public boolean checkIdleStates(int i) {
@@ -1105,11 +1401,16 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
             long elapsedRealtime = SystemClock.elapsedRealtime();
             for (int i2 : runningUserIds) {
                 if (i == -1 || i == i2) {
-                    List installedPackagesAsUser = this.mPackageManager.getInstalledPackagesAsUser(512, i2);
+                    List installedPackagesAsUser =
+                            this.mPackageManager.getInstalledPackagesAsUser(512, i2);
                     int i3 = 0;
                     for (int size = installedPackagesAsUser.size(); i3 < size; size = size) {
                         PackageInfo packageInfo = (PackageInfo) installedPackagesAsUser.get(i3);
-                        checkAndUpdateStandbyState(i2, packageInfo.applicationInfo.uid, elapsedRealtime, packageInfo.packageName);
+                        checkAndUpdateStandbyState(
+                                i2,
+                                packageInfo.applicationInfo.uid,
+                                elapsedRealtime,
+                                packageInfo.packageName);
                         i3++;
                     }
                 }
@@ -1137,7 +1438,8 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         synchronized (this.mAppIdleLock) {
             ArrayMap userHistory = this.mAppIdleHistory.getUserHistory(i);
             SystemClock.elapsedRealtime();
-            AppIdleHistory.AppUsageHistory packageHistory = AppIdleHistory.getPackageHistory(userHistory, str, false);
+            AppIdleHistory.AppUsageHistory packageHistory =
+                    AppIdleHistory.getPackageHistory(userHistory, str, false);
             if (packageHistory != null) {
                 packageHistory.lastUsedByUserElapsedTime = -2147483648L;
                 packageHistory.lastUsedElapsedTime = -2147483648L;
@@ -1153,7 +1455,11 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         printWriter.println("    com.android.server.usage.avoid_idle_check: false");
         printWriter.println();
         synchronized (this.mCarrierPrivilegedLock) {
-            printWriter.println("Carrier privileged apps (have=" + this.mHaveCarrierPrivilegedApps + "): " + this.mCarrierPrivilegedApps);
+            printWriter.println(
+                    "Carrier privileged apps (have="
+                            + this.mHaveCarrierPrivilegedApps
+                            + "): "
+                            + this.mCarrierPrivilegedApps);
         }
         printWriter.println();
         printWriter.println("Settings:");
@@ -1167,7 +1473,8 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         TimeUtils.formatDuration(this.mNotificationSeenTimeoutMillis, printWriter);
         printWriter.println();
         printWriter.print("  mNotificationSeenPromotedBucket=");
-        printWriter.print(UsageStatsManager.standbyBucketToString(this.mNotificationSeenPromotedBucket));
+        printWriter.print(
+                UsageStatsManager.standbyBucketToString(this.mNotificationSeenPromotedBucket));
         printWriter.println();
         printWriter.print("  mTriggerQuotaBumpOnNotificationSeen=");
         printWriter.print(this.mTriggerQuotaBumpOnNotificationSeen);
@@ -1209,7 +1516,8 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         TimeUtils.formatDuration(this.mBroadcastResponseWindowDurationMillis, printWriter);
         printWriter.println();
         printWriter.print("  mBroadcastResponseFgThresholdState=");
-        printWriter.print(ActivityManager.procStateToString(this.mBroadcastResponseFgThresholdState));
+        printWriter.print(
+                ActivityManager.procStateToString(this.mBroadcastResponseFgThresholdState));
         printWriter.println();
         printWriter.print("  mBroadcastSessionsDurationMs=");
         TimeUtils.formatDuration(this.mBroadcastSessionsDurationMs, printWriter);
@@ -1317,7 +1625,8 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
     }
 
     public boolean flushHandler(long j) {
-        return this.mHandler.runWithScissors(new InlineSuggestionFactory$$ExternalSyntheticLambda2(), j);
+        return this.mHandler.runWithScissors(
+                new InlineSuggestionFactory$$ExternalSyntheticLambda2(), j);
     }
 
     public final void flushToDisk() {
@@ -1327,12 +1636,15 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
             long elapsedRealtime = SystemClock.elapsedRealtime();
             int size = appIdleHistory.mIdleHistory.size();
             for (int i = 0; i < size; i++) {
-                appIdleHistory.writeAppIdleTimes(appIdleHistory.mIdleHistory.keyAt(i), elapsedRealtime);
+                appIdleHistory.writeAppIdleTimes(
+                        appIdleHistory.mIdleHistory.keyAt(i), elapsedRealtime);
             }
             AppIdleHistory appIdleHistory2 = this.mAppIdleHistory;
             appIdleHistory2.getClass();
             long elapsedRealtime2 = SystemClock.elapsedRealtime();
-            appIdleHistory2.mElapsedDuration = (elapsedRealtime2 - appIdleHistory2.mElapsedSnapshot) + appIdleHistory2.mElapsedDuration;
+            appIdleHistory2.mElapsedDuration =
+                    (elapsedRealtime2 - appIdleHistory2.mElapsedSnapshot)
+                            + appIdleHistory2.mElapsedDuration;
             appIdleHistory2.mElapsedSnapshot = elapsedRealtime2;
             appIdleHistory2.writeScreenOnTime();
         }
@@ -1345,7 +1657,10 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         if (this.mAppIdleEnabled && (appId = getAppId(str)) >= 0) {
             int appMinBucket = getAppMinBucket(appId, i, str);
             if (z && appMinBucket < 40) {
-                Slog.e("AppStandbyController", "Tried to force an app to be idle when its min bucket is " + UsageStatsManager.standbyBucketToString(appMinBucket));
+                Slog.e(
+                        "AppStandbyController",
+                        "Tried to force an app to be idle when its min bucket is "
+                                + UsageStatsManager.standbyBucketToString(appMinBucket));
                 return;
             }
             this.mInjector.getClass();
@@ -1354,7 +1669,8 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
             synchronized (this.mAppIdleLock) {
                 AppIdleHistory appIdleHistory = this.mAppIdleHistory;
                 if (z) {
-                    AppIdleHistory.AppUsageHistory appUsageHistory = appIdleHistory.getAppUsageHistory(i, str, elapsedRealtime);
+                    AppIdleHistory.AppUsageHistory appUsageHistory =
+                            appIdleHistory.getAppUsageHistory(i, str, elapsedRealtime);
                     SparseLongArray sparseLongArray = appUsageHistory.bucketExpiryTimesMs;
                     if (sparseLongArray != null) {
                         for (int size = sparseLongArray.size() - 1; size >= 0; size--) {
@@ -1435,7 +1751,14 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
             }
             synchronized (this.mAdminProtectedPackages) {
                 try {
-                    z = (this.mAdminProtectedPackages.contains(-1) && ((Set) this.mAdminProtectedPackages.get(-1)).contains(str)) ? true : this.mAdminProtectedPackages.contains(i2) && ((Set) this.mAdminProtectedPackages.get(i2)).contains(str);
+                    z =
+                            (this.mAdminProtectedPackages.contains(-1)
+                                            && ((Set) this.mAdminProtectedPackages.get(-1))
+                                                    .contains(str))
+                                    ? true
+                                    : this.mAdminProtectedPackages.contains(i2)
+                                            && ((Set) this.mAdminProtectedPackages.get(i2))
+                                                    .contains(str);
                 } finally {
                 }
             }
@@ -1443,8 +1766,12 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
                 return 5;
             }
             long elapsedRealtime = SystemClock.elapsedRealtime();
-            if (this.mCachedNetworkScorer == null || this.mCachedNetworkScorerAtMillis < elapsedRealtime - 5000) {
-                this.mCachedNetworkScorer = ((NetworkScoreManager) this.mInjector.mContext.getSystemService("network_score")).getActiveScorerPackage();
+            if (this.mCachedNetworkScorer == null
+                    || this.mCachedNetworkScorerAtMillis < elapsedRealtime - 5000) {
+                this.mCachedNetworkScorer =
+                        ((NetworkScoreManager)
+                                        this.mInjector.mContext.getSystemService("network_score"))
+                                .getActiveScorerPackage();
                 this.mCachedNetworkScorerAtMillis = elapsedRealtime;
             }
             if (str.equals(this.mCachedNetworkScorer)) {
@@ -1470,7 +1797,10 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
                         }
                     }
                     if (this.mCachedDeviceProvisioningPackage == null) {
-                        this.mCachedDeviceProvisioningPackage = this.mContext.getResources().getString(R.string.display_manager_built_in_display_name);
+                        this.mCachedDeviceProvisioningPackage =
+                                this.mContext
+                                        .getResources()
+                                        .getString(R.string.display_manager_built_in_display_name);
                     }
                     if (this.mCachedDeviceProvisioningPackage.equals(str)) {
                         return 5;
@@ -1481,7 +1811,11 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
                     Injector injector2 = this.mInjector;
                     int uid2 = UserHandle.getUid(i2, i);
                     AlarmManagerService alarmManagerService = AlarmManagerService.this;
-                    if (alarmManagerService.hasUseExactAlarmInternal(uid2, str) || (!CompatChanges.isChangeEnabled(262645982L, str, UserHandle.getUserHandleForUid(uid2)) && alarmManagerService.hasScheduleExactAlarmInternal(uid2, str))) {
+                    if (alarmManagerService.hasUseExactAlarmInternal(uid2, str)
+                            || (!CompatChanges.isChangeEnabled(
+                                            262645982L, str, UserHandle.getUserHandleForUid(uid2))
+                                    && alarmManagerService.hasScheduleExactAlarmInternal(
+                                            uid2, str))) {
                         return 20;
                     }
                 } finally {
@@ -1491,7 +1825,10 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         synchronized (this.mCarrierPrivilegedLock) {
             try {
                 if (!this.mHaveCarrierPrivilegedApps) {
-                    this.mCarrierPrivilegedApps = ((TelephonyManager) this.mContext.getSystemService(TelephonyManager.class)).getCarrierPrivilegedPackagesForAllActiveSubscriptions();
+                    this.mCarrierPrivilegedApps =
+                            ((TelephonyManager)
+                                            this.mContext.getSystemService(TelephonyManager.class))
+                                    .getCarrierPrivilegedPackagesForAllActiveSubscriptions();
                     this.mHaveCarrierPrivilegedApps = true;
                 }
                 List list = this.mCarrierPrivilegedApps;
@@ -1507,7 +1844,11 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         if (isHeadlessSystemApp(str)) {
             return 10;
         }
-        return this.mPackageManager.checkPermission("android.permission.ACCESS_BACKGROUND_LOCATION", str) == 0 ? 30 : 50;
+        return this.mPackageManager.checkPermission(
+                                "android.permission.ACCESS_BACKGROUND_LOCATION", str)
+                        == 0
+                ? 30
+                : 50;
     }
 
     public final int getAppMinStandbyBucket(String str, int i, int i2, boolean z) {
@@ -1530,7 +1871,9 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
             return 10;
         }
         synchronized (this.mAppIdleLock) {
-            AppIdleHistory.AppUsageHistory packageHistory = AppIdleHistory.getPackageHistory(this.mAppIdleHistory.getUserHistory(i), str, false);
+            AppIdleHistory.AppUsageHistory packageHistory =
+                    AppIdleHistory.getPackageHistory(
+                            this.mAppIdleHistory.getUserHistory(i), str, false);
             i2 = packageHistory == null ? 50 : packageHistory.currentBucket;
         }
         return i2;
@@ -1539,7 +1882,9 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
     public final int getAppStandbyBucketReason(String str, int i, long j) {
         int i2;
         synchronized (this.mAppIdleLock) {
-            AppIdleHistory.AppUsageHistory packageHistory = AppIdleHistory.getPackageHistory(this.mAppIdleHistory.getUserHistory(i), str, false);
+            AppIdleHistory.AppUsageHistory packageHistory =
+                    AppIdleHistory.getPackageHistory(
+                            this.mAppIdleHistory.getUserHistory(i), str, false);
             i2 = packageHistory != null ? packageHistory.bucketingReason : 0;
         }
         return i2;
@@ -1554,7 +1899,13 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
             int size = userHistory.size();
             arrayList = new ArrayList(size);
             for (int i2 = 0; i2 < size; i2++) {
-                arrayList.add(new AppStandbyInfo((String) userHistory.keyAt(i2), z ? ((AppIdleHistory.AppUsageHistory) userHistory.valueAt(i2)).currentBucket : 10));
+                arrayList.add(
+                        new AppStandbyInfo(
+                                (String) userHistory.keyAt(i2),
+                                z
+                                        ? ((AppIdleHistory.AppUsageHistory) userHistory.valueAt(i2))
+                                                .currentBucket
+                                        : 10));
             }
         }
         return arrayList;
@@ -1651,7 +2002,10 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         L53:
             return r9
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.usage.AppStandbyController.getBucketForLocked(int, java.lang.String, long):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.usage.AppStandbyController.getBucketForLocked(int,"
+                    + " java.lang.String, long):int");
     }
 
     public final List getCrossProfileTargets(int i, String str) {
@@ -1662,12 +2016,18 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
                 }
                 Injector injector = this.mInjector;
                 int packageUid = injector.mPackageManagerInternal.getPackageUid(str, 0L, i);
-                AndroidPackage androidPackage = injector.mPackageManagerInternal.getPackage(packageUid);
-                if (packageUid >= 0 && androidPackage != null && androidPackage.isCrossProfile() && injector.mCrossProfileAppsInternal.verifyUidHasInteractAcrossProfilePermission(str, packageUid)) {
+                AndroidPackage androidPackage =
+                        injector.mPackageManagerInternal.getPackage(packageUid);
+                if (packageUid >= 0
+                        && androidPackage != null
+                        && androidPackage.isCrossProfile()
+                        && injector.mCrossProfileAppsInternal
+                                .verifyUidHasInteractAcrossProfilePermission(str, packageUid)) {
                     return injector.mCrossProfileAppsInternal.getTargetUserProfiles(str, i);
                 }
                 if (packageUid >= 0 && androidPackage == null) {
-                    Slog.wtf("AppStandbyController", "Null package retrieved for UID " + packageUid);
+                    Slog.wtf(
+                            "AppStandbyController", "Null package retrieved for UID " + packageUid);
                 }
                 return Collections.emptyList();
             } catch (Throwable th) {
@@ -1681,8 +2041,15 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         this.mInjector.getClass();
         SystemClock.elapsedRealtime();
         synchronized (this.mAppIdleLock) {
-            AppIdleHistory.AppUsageHistory packageHistory = AppIdleHistory.getPackageHistory(this.mAppIdleHistory.getUserHistory(i), str, false);
-            j = (packageHistory != null && packageHistory.nextEstimatedLaunchTime >= System.currentTimeMillis()) ? packageHistory.nextEstimatedLaunchTime : Long.MAX_VALUE;
+            AppIdleHistory.AppUsageHistory packageHistory =
+                    AppIdleHistory.getPackageHistory(
+                            this.mAppIdleHistory.getUserHistory(i), str, false);
+            j =
+                    (packageHistory != null
+                                    && packageHistory.nextEstimatedLaunchTime
+                                            >= System.currentTimeMillis())
+                            ? packageHistory.nextEstimatedLaunchTime
+                            : Long.MAX_VALUE;
         }
         return j;
     }
@@ -1795,7 +2162,9 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
             android.os.Trace.traceEnd(r2)
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.usage.AppStandbyController.getIdleUidsForUser(int):int[]");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.usage.AppStandbyController.getIdleUidsForUser(int):int[]");
     }
 
     public final long getTimeSinceLastJobRun(String str, int i) {
@@ -1804,8 +2173,13 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         long elapsedRealtime = SystemClock.elapsedRealtime();
         synchronized (this.mAppIdleLock) {
             AppIdleHistory appIdleHistory = this.mAppIdleHistory;
-            AppIdleHistory.AppUsageHistory packageHistory = AppIdleHistory.getPackageHistory(appIdleHistory.getUserHistory(i), str, false);
-            elapsedTime = (packageHistory == null || packageHistory.lastJobRunTime == Long.MIN_VALUE) ? Long.MAX_VALUE : appIdleHistory.getElapsedTime(elapsedRealtime) - packageHistory.lastJobRunTime;
+            AppIdleHistory.AppUsageHistory packageHistory =
+                    AppIdleHistory.getPackageHistory(appIdleHistory.getUserHistory(i), str, false);
+            elapsedTime =
+                    (packageHistory == null || packageHistory.lastJobRunTime == Long.MIN_VALUE)
+                            ? Long.MAX_VALUE
+                            : appIdleHistory.getElapsedTime(elapsedRealtime)
+                                    - packageHistory.lastJobRunTime;
         }
         return elapsedTime;
     }
@@ -1816,10 +2190,15 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         long elapsedRealtime = SystemClock.elapsedRealtime();
         synchronized (this.mAppIdleLock) {
             AppIdleHistory appIdleHistory = this.mAppIdleHistory;
-            AppIdleHistory.AppUsageHistory packageHistory = AppIdleHistory.getPackageHistory(appIdleHistory.getUserHistory(i), str, false);
+            AppIdleHistory.AppUsageHistory packageHistory =
+                    AppIdleHistory.getPackageHistory(appIdleHistory.getUserHistory(i), str, false);
             if (packageHistory != null) {
                 long j = packageHistory.lastUsedByUserElapsedTime;
-                elapsedTime = (j != Long.MIN_VALUE && j > 0) ? appIdleHistory.getElapsedTime(elapsedRealtime) - packageHistory.lastUsedByUserElapsedTime : Long.MAX_VALUE;
+                elapsedTime =
+                        (j != Long.MIN_VALUE && j > 0)
+                                ? appIdleHistory.getElapsedTime(elapsedRealtime)
+                                        - packageHistory.lastUsedByUserElapsedTime
+                                : Long.MAX_VALUE;
             }
         }
         return elapsedTime;
@@ -1833,7 +2212,11 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
             this.mPendingInitializeDefaults = true;
             return;
         }
-        AnyMotionDetector$$ExternalSyntheticOutline0.m("AppStandbyController", BatteryService$$ExternalSyntheticOutline0.m(i, "Initializing defaults for system apps on user ", ", appIdleEnabled="), this.mAppIdleEnabled);
+        AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                "AppStandbyController",
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        i, "Initializing defaults for system apps on user ", ", appIdleEnabled="),
+                this.mAppIdleEnabled);
         this.mInjector.getClass();
         long elapsedRealtime = SystemClock.elapsedRealtime();
         List installedPackagesAsUser = this.mPackageManager.getInstalledPackagesAsUser(512, i);
@@ -1856,7 +2239,15 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
                         i3 = size;
                         lock = lock2;
                         try {
-                            appIdleHistory.reportUsage(AppIdleHistory.getPackageHistory(appIdleHistory.getUserHistory(i), str, true), str, i, 10, 6, 0L, elapsedRealtime + this.mSystemUpdateUsageTimeoutMillis);
+                            appIdleHistory.reportUsage(
+                                    AppIdleHistory.getPackageHistory(
+                                            appIdleHistory.getUserHistory(i), str, true),
+                                    str,
+                                    i,
+                                    10,
+                                    6,
+                                    0L,
+                                    elapsedRealtime + this.mSystemUpdateUsageTimeoutMillis);
                         } catch (Throwable th) {
                             th = th;
                             throw th;
@@ -1924,10 +2315,13 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
     public final void maybeInformListeners(int i, int i2, int i3, long j, String str, boolean z) {
         synchronized (this.mAppIdleLock) {
             try {
-                AppIdleHistory.AppUsageHistory packageHistory = AppIdleHistory.getPackageHistory(this.mAppIdleHistory.getUserHistory(i), str, true);
+                AppIdleHistory.AppUsageHistory packageHistory =
+                        AppIdleHistory.getPackageHistory(
+                                this.mAppIdleHistory.getUserHistory(i), str, true);
                 if (packageHistory.lastInformedBucket != i2) {
                     packageHistory.lastInformedBucket = i2;
-                    StandbyUpdateRecord standbyUpdateRecord = (StandbyUpdateRecord) StandbyUpdateRecord.sPool.obtain();
+                    StandbyUpdateRecord standbyUpdateRecord =
+                            (StandbyUpdateRecord) StandbyUpdateRecord.sPool.obtain();
                     if (standbyUpdateRecord == null) {
                         standbyUpdateRecord = new StandbyUpdateRecord();
                     }
@@ -1937,7 +2331,8 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
                     standbyUpdateRecord.reason = i3;
                     standbyUpdateRecord.isUserInteraction = z;
                     AppStandbyHandler appStandbyHandler = this.mHandler;
-                    appStandbyHandler.sendMessage(appStandbyHandler.obtainMessage(3, standbyUpdateRecord));
+                    appStandbyHandler.sendMessage(
+                            appStandbyHandler.obtainMessage(3, standbyUpdateRecord));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -1951,18 +2346,21 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
             try {
                 this.mInjector.getClass();
                 long elapsedRealtime = SystemClock.elapsedRealtime();
-                AppIdleHistory.AppUsageHistory appUsageHistory = this.mAppIdleHistory.getAppUsageHistory(i, str, elapsedRealtime);
+                AppIdleHistory.AppUsageHistory appUsageHistory =
+                        this.mAppIdleHistory.getAppUsageHistory(i, str, elapsedRealtime);
                 int i7 = 45;
                 if (appUsageHistory.currentBucket == 45) {
                     int i8 = appUsageHistory.bucketingReason;
                     if ((65280 & i8) == i2) {
-                        if ((i8 & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT) == i3) {
+                        if ((i8 & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT)
+                                == i3) {
                             i6 = i4 | i5;
                             i7 = 40;
                         } else {
                             i6 = (~i3) & i8;
                         }
-                        this.mAppIdleHistory.setAppStandbyBucket(i, i7, i6, elapsedRealtime, str, false);
+                        this.mAppIdleHistory.setAppStandbyBucket(
+                                i, i7, i6, elapsedRealtime, str, false);
                         maybeInformListeners(i, i7, i6, elapsedRealtime, str, false);
                     }
                 }
@@ -1972,7 +2370,13 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
     }
 
     public void maybeUnrestrictBuggyApp(String str, int i) {
-        maybeUnrestrictApp(str, i, FrameworkStatsLog.APP_STANDBY_BUCKET_CHANGED__MAIN_REASON__MAIN_FORCED_BY_SYSTEM, 4, 256, 1);
+        maybeUnrestrictApp(
+                str,
+                i,
+                FrameworkStatsLog.APP_STANDBY_BUCKET_CHANGED__MAIN_REASON__MAIN_FORCED_BY_SYSTEM,
+                4,
+                256,
+                1);
     }
 
     public final void maybeUpdateHeadlessSystemAppCache(PackageInfo packageInfo) {
@@ -1981,7 +2385,15 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
             return;
         }
         if (applicationInfo.isSystemApp() || packageInfo.applicationInfo.isUpdatedSystemApp()) {
-            updateHeadlessSystemAppCache(packageInfo.packageName, ArrayUtils.isEmpty(this.mPackageManager.queryIntentActivitiesAsUser(new Intent("android.intent.action.MAIN").addCategory("android.intent.category.LAUNCHER").setPackage(packageInfo.packageName), 1835520, 0)));
+            updateHeadlessSystemAppCache(
+                    packageInfo.packageName,
+                    ArrayUtils.isEmpty(
+                            this.mPackageManager.queryIntentActivitiesAsUser(
+                                    new Intent("android.intent.action.MAIN")
+                                            .addCategory("android.intent.category.LAUNCHER")
+                                            .setPackage(packageInfo.packageName),
+                                    1835520,
+                                    0)));
         }
     }
 
@@ -2012,19 +2424,31 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         Injector injector = this.mInjector;
         if (i == 500) {
             injector.getClass();
-            injector.mDeviceIdleController = IDeviceIdleController.Stub.asInterface(ServiceManager.getService("deviceidle"));
-            injector.mBatteryStats = IBatteryStats.Stub.asInterface(ServiceManager.getService("batterystats"));
-            injector.mPackageManagerInternal = (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
-            injector.mDisplayManager = (DisplayManager) injector.mContext.getSystemService("display");
-            injector.mPowerManager = (PowerManager) injector.mContext.getSystemService(PowerManager.class);
-            injector.mBatteryManager = (BatteryManager) injector.mContext.getSystemService(BatteryManager.class);
-            injector.mCrossProfileAppsInternal = (CrossProfileAppsInternal) LocalServices.getService(CrossProfileAppsInternal.class);
-            injector.mAlarmManagerInternal = (AlarmManagerService.LocalService) LocalServices.getService(AlarmManagerService.LocalService.class);
-            if (((ActivityManager) injector.mContext.getSystemService("activity")).isLowRamDevice() || ActivityManager.isSmallBatteryDevice()) {
+            injector.mDeviceIdleController =
+                    IDeviceIdleController.Stub.asInterface(ServiceManager.getService("deviceidle"));
+            injector.mBatteryStats =
+                    IBatteryStats.Stub.asInterface(ServiceManager.getService("batterystats"));
+            injector.mPackageManagerInternal =
+                    (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
+            injector.mDisplayManager =
+                    (DisplayManager) injector.mContext.getSystemService("display");
+            injector.mPowerManager =
+                    (PowerManager) injector.mContext.getSystemService(PowerManager.class);
+            injector.mBatteryManager =
+                    (BatteryManager) injector.mContext.getSystemService(BatteryManager.class);
+            injector.mCrossProfileAppsInternal =
+                    (CrossProfileAppsInternal)
+                            LocalServices.getService(CrossProfileAppsInternal.class);
+            injector.mAlarmManagerInternal =
+                    (AlarmManagerService.LocalService)
+                            LocalServices.getService(AlarmManagerService.LocalService.class);
+            if (((ActivityManager) injector.mContext.getSystemService("activity")).isLowRamDevice()
+                    || ActivityManager.isSmallBatteryDevice()) {
                 injector.mAutoRestrictedBucketDelayMs = 43200000L;
             }
         } else if (i == 1000) {
-            injector.mWellbeingApp = injector.mContext.getPackageManager().getWellbeingPackageName();
+            injector.mWellbeingApp =
+                    injector.mContext.getPackageManager().getWellbeingPackageName();
         }
         injector.mBootPhase = i;
         if (i != 500) {
@@ -2038,34 +2462,55 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         }
         Slog.d("AppStandbyController", "Setting app idle enabled state");
         if (this.mAppIdleEnabled) {
-            ((UsageStatsManagerInternal) LocalServices.getService(UsageStatsManagerInternal.class)).registerListener(this);
+            ((UsageStatsManagerInternal) LocalServices.getService(UsageStatsManagerInternal.class))
+                    .registerListener(this);
         }
         ConstantsObserver constantsObserver = new ConstantsObserver(this.mHandler);
         ContentResolver contentResolver = this.mContext.getContentResolver();
-        contentResolver.registerContentObserver(Settings.Global.getUriFor("app_standby_enabled"), false, constantsObserver);
-        contentResolver.registerContentObserver(Settings.Global.getUriFor("adaptive_battery_management_enabled"), false, constantsObserver);
+        contentResolver.registerContentObserver(
+                Settings.Global.getUriFor("app_standby_enabled"), false, constantsObserver);
+        contentResolver.registerContentObserver(
+                Settings.Global.getUriFor("adaptive_battery_management_enabled"),
+                false,
+                constantsObserver);
         this.mInjector.getClass();
-        DeviceConfig.addOnPropertiesChangedListener("app_standby", AppSchedulingModuleThread.getExecutor(), constantsObserver);
+        DeviceConfig.addOnPropertiesChangedListener(
+                "app_standby", AppSchedulingModuleThread.getExecutor(), constantsObserver);
         this.mInjector.getClass();
-        constantsObserver.processProperties(DeviceConfig.getProperties("app_standby", new String[0]));
+        constantsObserver.processProperties(
+                DeviceConfig.getProperties("app_standby", new String[0]));
         constantsObserver.updateSettings();
-        this.mAppWidgetManager = (AppWidgetManager) this.mContext.getSystemService(AppWidgetManager.class);
+        this.mAppWidgetManager =
+                (AppWidgetManager) this.mContext.getSystemService(AppWidgetManager.class);
         this.mAppOpsManager = (AppOpsManager) this.mContext.getSystemService(AppOpsManager.class);
         this.mInjector.getClass();
         try {
-            IAppOpsService.Stub.asInterface(ServiceManager.getService("appops")).startWatchingMode(128, (String) null, new IAppOpsCallback.Stub() { // from class: com.android.server.usage.AppStandbyController.1
-                public final void opChanged(int i2, int i3, String str, String str2) {
-                    int userId = UserHandle.getUserId(i3);
-                    synchronized (AppStandbyController.this.mSystemExemptionAppOpMode) {
-                        AppStandbyController.this.mSystemExemptionAppOpMode.delete(i3);
-                    }
-                    AppStandbyController.this.mHandler.obtainMessage(11, userId, i3, str).sendToTarget();
-                }
-            });
+            IAppOpsService.Stub.asInterface(ServiceManager.getService("appops"))
+                    .startWatchingMode(
+                            128,
+                            (String) null,
+                            new IAppOpsCallback
+                                    .Stub() { // from class:
+                                              // com.android.server.usage.AppStandbyController.1
+                                public final void opChanged(
+                                        int i2, int i3, String str, String str2) {
+                                    int userId = UserHandle.getUserId(i3);
+                                    synchronized (
+                                            AppStandbyController.this.mSystemExemptionAppOpMode) {
+                                        AppStandbyController.this.mSystemExemptionAppOpMode.delete(
+                                                i3);
+                                    }
+                                    AppStandbyController.this
+                                            .mHandler
+                                            .obtainMessage(11, userId, i3, str)
+                                            .sendToTarget();
+                                }
+                            });
         } catch (RemoteException e) {
             Slog.wtf("AppStandbyController", "Failed start watching for app op", e);
         }
-        this.mInjector.mDisplayManager.registerDisplayListener(this.mDisplayListener, this.mHandler);
+        this.mInjector.mDisplayManager.registerDisplayListener(
+                this.mDisplayListener, this.mHandler);
         synchronized (this.mAppIdleLock) {
             AppIdleHistory appIdleHistory = this.mAppIdleHistory;
             boolean z = this.mInjector.mDisplayManager.getDisplay(0).getState() == 2;
@@ -2083,10 +2528,12 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         if (this.mPendingOneTimeCheckIdleStates) {
             postOneTimeCheckIdleStates();
         }
-        List<ApplicationInfo> installedApplications = this.mPackageManager.getInstalledApplications(542908416);
+        List<ApplicationInfo> installedApplications =
+                this.mPackageManager.getInstalledApplications(542908416);
         int size = installedApplications.size();
         for (int i2 = 0; i2 < size; i2++) {
-            this.mSystemPackagesAppIds.add(Integer.valueOf(UserHandle.getAppId(installedApplications.get(i2).uid)));
+            this.mSystemPackagesAppIds.add(
+                    Integer.valueOf(UserHandle.getAppId(installedApplications.get(i2).uid)));
         }
     }
 
@@ -2094,7 +2541,14 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
     public final void onUsageEvent(int i, UsageEvents.Event event) {
         if (this.mAppIdleEnabled) {
             int eventType = event.getEventType();
-            if (eventType == 1 || eventType == 2 || eventType == 6 || eventType == 7 || eventType == 10 || eventType == 14 || eventType == 13 || eventType == 19) {
+            if (eventType == 1
+                    || eventType == 2
+                    || eventType == 6
+                    || eventType == 7
+                    || eventType == 10
+                    || eventType == 14
+                    || eventType == 13
+                    || eventType == 19) {
                 String packageName = event.getPackageName();
                 List crossProfileTargets = getCrossProfileTargets(i, packageName);
                 synchronized (this.mAppIdleLock) {
@@ -2104,7 +2558,11 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
                         reportEventLocked(eventType, i, elapsedRealtime, packageName);
                         int size = crossProfileTargets.size();
                         for (int i2 = 0; i2 < size; i2++) {
-                            reportEventLocked(eventType, ((UserHandle) crossProfileTargets.get(i2)).getIdentifier(), elapsedRealtime, packageName);
+                            reportEventLocked(
+                                    eventType,
+                                    ((UserHandle) crossProfileTargets.get(i2)).getIdentifier(),
+                                    elapsedRealtime,
+                                    packageName);
                         }
                     } catch (Throwable th) {
                         throw th;
@@ -2149,7 +2607,8 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
     }
 
     public final void postReportContentProviderUsage(String str, String str2, int i) {
-        ContentProviderUsageRecord contentProviderUsageRecord = (ContentProviderUsageRecord) ContentProviderUsageRecord.sPool.obtain();
+        ContentProviderUsageRecord contentProviderUsageRecord =
+                (ContentProviderUsageRecord) ContentProviderUsageRecord.sPool.obtain();
         if (contentProviderUsageRecord == null) {
             contentProviderUsageRecord = new ContentProviderUsageRecord();
         }
@@ -2167,7 +2626,8 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         this.mHandler.obtainMessage(12, i, z ? 1 : 0, str).sendToTarget();
     }
 
-    public final void removeListener(AppStandbyInternal.AppIdleStateChangeListener appIdleStateChangeListener) {
+    public final void removeListener(
+            AppStandbyInternal.AppIdleStateChangeListener appIdleStateChangeListener) {
         synchronized (this.mPackageAccessListeners) {
             this.mPackageAccessListeners.remove(appIdleStateChangeListener);
         }
@@ -2190,7 +2650,8 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         long j3;
         AndroidPackageInternal androidPackageInternal;
         boolean isIdle = this.mAppIdleHistory.isIdle(i2, str, j);
-        AppIdleHistory.AppUsageHistory appUsageHistory2 = this.mAppIdleHistory.getAppUsageHistory(i2, str, j);
+        AppIdleHistory.AppUsageHistory appUsageHistory2 =
+                this.mAppIdleHistory.getAppUsageHistory(i2, str, j);
         int i10 = appUsageHistory2.currentBucket;
         int i11 = appUsageHistory2.bucketingReason;
         if (i != 1) {
@@ -2210,8 +2671,17 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         int i12 = i3 | FrameworkStatsLog.APP_STANDBY_BUCKET_CHANGED__MAIN_REASON__MAIN_USAGE;
         if (i == 10) {
             if (this.mRetainNotificationSeenImpactForPreTApps) {
-                PackageStateInternal packageStateInternal = ((PackageManagerService.PackageManagerInternalImpl) this.mInjector.mPackageManagerInternal).getPackageStateInternal(str);
-                if (((packageStateInternal == null || (androidPackageInternal = ((PackageSetting) packageStateInternal).pkg) == null) ? 10000 : androidPackageInternal.getTargetSdkVersion()) < 33) {
+                PackageStateInternal packageStateInternal =
+                        ((PackageManagerService.PackageManagerInternalImpl)
+                                        this.mInjector.mPackageManagerInternal)
+                                .getPackageStateInternal(str);
+                if (((packageStateInternal == null
+                                        || (androidPackageInternal =
+                                                        ((PackageSetting) packageStateInternal).pkg)
+                                                == null)
+                                ? 10000
+                                : androidPackageInternal.getTargetSdkVersion())
+                        < 33) {
                     i9 = 20;
                     j3 = 43200000;
                     long j4 = j3;
@@ -2223,7 +2693,8 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
                     i4 = -1;
                     i5 = i11;
                     i6 = i12;
-                    this.mAppIdleHistory.reportUsage(appUsageHistory2, str, i2, i14, i13, 0L, j + j4);
+                    this.mAppIdleHistory.reportUsage(
+                            appUsageHistory2, str, i2, i14, i13, 0L, j + j4);
                     j2 = j4;
                 }
             }
@@ -2252,34 +2723,52 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
             z2 = true;
             if (i == 14) {
                 i7 = 10;
-                this.mAppIdleHistory.reportUsage(appUsageHistory2, str, i2, 20, i15, 0L, j + this.mSlicePinnedTimeoutMillis);
+                this.mAppIdleHistory.reportUsage(
+                        appUsageHistory2, str, i2, 20, i15, 0L, j + this.mSlicePinnedTimeoutMillis);
                 j2 = this.mSlicePinnedTimeoutMillis;
             } else if (i == 6) {
                 i7 = 10;
-                this.mAppIdleHistory.reportUsage(appUsageHistory2, str, i2, 10, i15, 0L, j + this.mSystemInteractionTimeoutMillis);
+                this.mAppIdleHistory.reportUsage(
+                        appUsageHistory2,
+                        str,
+                        i2,
+                        10,
+                        i15,
+                        0L,
+                        j + this.mSystemInteractionTimeoutMillis);
                 j2 = this.mSystemInteractionTimeoutMillis;
             } else if (i != 19) {
                 i7 = 10;
-                this.mAppIdleHistory.reportUsage(appUsageHistory2, str, i2, 10, i15, j, j + this.mStrongUsageTimeoutMillis);
+                this.mAppIdleHistory.reportUsage(
+                        appUsageHistory2, str, i2, 10, i15, j, j + this.mStrongUsageTimeoutMillis);
                 j2 = this.mStrongUsageTimeoutMillis;
             } else {
                 if (i10 != 50) {
                     return;
                 }
                 i7 = 10;
-                this.mAppIdleHistory.reportUsage(appUsageHistory2, str, i2, 10, i15, 0L, j + this.mInitialForegroundServiceStartTimeoutMillis);
+                this.mAppIdleHistory.reportUsage(
+                        appUsageHistory2,
+                        str,
+                        i2,
+                        10,
+                        i15,
+                        0L,
+                        j + this.mInitialForegroundServiceStartTimeoutMillis);
                 j2 = this.mInitialForegroundServiceStartTimeoutMillis;
             }
         }
         if (appUsageHistory2.currentBucket != i10) {
             AppStandbyHandler appStandbyHandler = this.mHandler;
-            appStandbyHandler.sendMessageDelayed(appStandbyHandler.obtainMessage(11, i2, i4, str), j2);
+            appStandbyHandler.sendMessageDelayed(
+                    appStandbyHandler.obtainMessage(11, i2, i4, str), j2);
             int i16 = appUsageHistory2.currentBucket;
             appUsageHistory = appUsageHistory2;
             z3 = z;
             str2 = str;
             i8 = i2;
-            maybeInformListeners(i2, i16, i6, j, str, (i16 != i7 || (i5 & 65280) == 768) ? false : z2);
+            maybeInformListeners(
+                    i2, i16, i6, j, str, (i16 != i7 || (i5 & 65280) == 768) ? false : z2);
         } else {
             appUsageHistory = appUsageHistory2;
             str2 = str;
@@ -2292,21 +2781,26 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         }
     }
 
-    public final void reportNoninteractiveUsageCrossUserLocked(String str, int i, int i2, int i3, long j, long j2, List list) {
+    public final void reportNoninteractiveUsageCrossUserLocked(
+            String str, int i, int i2, int i3, long j, long j2, List list) {
         reportNoninteractiveUsageLocked(i, j, i2, i3, str, j2);
         int size = list.size();
         for (int i4 = 0; i4 < size; i4++) {
-            reportNoninteractiveUsageLocked(((UserHandle) list.get(i4)).getIdentifier(), j, i2, i3, str, j2);
+            reportNoninteractiveUsageLocked(
+                    ((UserHandle) list.get(i4)).getIdentifier(), j, i2, i3, str, j2);
         }
     }
 
-    public final void reportNoninteractiveUsageLocked(int i, long j, int i2, int i3, String str, long j2) {
+    public final void reportNoninteractiveUsageLocked(
+            int i, long j, int i2, int i3, String str, long j2) {
         AppIdleHistory appIdleHistory = this.mAppIdleHistory;
-        AppIdleHistory.AppUsageHistory packageHistory = AppIdleHistory.getPackageHistory(appIdleHistory.getUserHistory(i), str, true);
+        AppIdleHistory.AppUsageHistory packageHistory =
+                AppIdleHistory.getPackageHistory(appIdleHistory.getUserHistory(i), str, true);
         appIdleHistory.reportUsage(packageHistory, str, i, i2, i3, 0L, j + j2);
         AppStandbyHandler appStandbyHandler = this.mHandler;
         appStandbyHandler.sendMessageDelayed(appStandbyHandler.obtainMessage(11, i, -1, str), j2);
-        maybeInformListeners(i, packageHistory.currentBucket, packageHistory.bucketingReason, j, str, false);
+        maybeInformListeners(
+                i, packageHistory.currentBucket, packageHistory.bucketingReason, j, str, false);
     }
 
     public final void restoreAppsToRare(Set set, final int i) {
@@ -2316,35 +2810,49 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         while (it.hasNext()) {
             String str = (String) it.next();
             if (!this.mInjector.isPackageInstalled(i, str)) {
-                Slog.i("AppStandbyController", "Tried to restore bucket for uninstalled app: " + str);
+                Slog.i(
+                        "AppStandbyController",
+                        "Tried to restore bucket for uninstalled app: " + str);
                 this.mAppsToRestoreToRare.add(i, str);
             } else if (getAppStandbyBucket(str, i, elapsedRealtime, false) == 50) {
                 setAppStandbyBucket(i, 40, 258, elapsedRealtime, str, false);
             }
         }
-        this.mHandler.postDelayed(new Runnable() { // from class: com.android.server.usage.AppStandbyController$$ExternalSyntheticLambda2
-            @Override // java.lang.Runnable
-            public final void run() {
-                AppStandbyController appStandbyController = AppStandbyController.this;
-                appStandbyController.mAppsToRestoreToRare.remove(i);
-            }
-        }, 28800000L);
+        this.mHandler.postDelayed(
+                new Runnable() { // from class:
+                                 // com.android.server.usage.AppStandbyController$$ExternalSyntheticLambda2
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        AppStandbyController appStandbyController = AppStandbyController.this;
+                        appStandbyController.mAppsToRestoreToRare.remove(i);
+                    }
+                },
+                28800000L);
     }
 
     public final void restrictApp(String str, int i, int i2) {
-        restrictApp(str, i, FrameworkStatsLog.APP_STANDBY_BUCKET_CHANGED__MAIN_REASON__MAIN_FORCED_BY_SYSTEM, i2);
+        restrictApp(
+                str,
+                i,
+                FrameworkStatsLog.APP_STANDBY_BUCKET_CHANGED__MAIN_REASON__MAIN_FORCED_BY_SYSTEM,
+                i2);
     }
 
     public final void restrictApp(String str, int i, int i2, int i3) {
         if (i2 != 1536 && i2 != 1024) {
-            Slog.e("AppStandbyController", "Tried to restrict app " + str + " for an unsupported reason");
+            Slog.e(
+                    "AppStandbyController",
+                    "Tried to restrict app " + str + " for an unsupported reason");
             return;
         }
         if (!this.mInjector.isPackageInstalled(i, str)) {
-            BootReceiver$$ExternalSyntheticOutline0.m("Tried to restrict uninstalled app: ", str, "AppStandbyController");
+            BootReceiver$$ExternalSyntheticOutline0.m(
+                    "Tried to restrict uninstalled app: ", str, "AppStandbyController");
             return;
         }
-        int i4 = (i2 & 65280) | (i3 & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
+        int i4 =
+                (i2 & 65280)
+                        | (i3 & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
         this.mInjector.getClass();
         setAppStandbyBucket(i, 45, i4, SystemClock.elapsedRealtime(), str, false);
     }
@@ -2390,7 +2898,9 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
     }
 
     public void setAppIdleEnabled(boolean z) {
-        UsageStatsManagerInternal usageStatsManagerInternal = (UsageStatsManagerInternal) LocalServices.getService(UsageStatsManagerInternal.class);
+        UsageStatsManagerInternal usageStatsManagerInternal =
+                (UsageStatsManagerInternal)
+                        LocalServices.getService(UsageStatsManagerInternal.class);
         if (z) {
             usageStatsManagerInternal.registerListener(this);
         } else {
@@ -2417,59 +2927,59 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
 
     /* JADX WARN: Can't wrap try/catch for region: R(17:51|(1:53)(1:123)|54|(1:(1:(2:60|61))(2:62|(2:70|71)))|122|(12:81|(4:83|(2:88|89)|107|89)(2:108|(1:113))|90|91|92|(1:94)(1:104)|95|(1:97)(1:103)|(1:99)|100|101|102)|114|90|91|92|(0)(0)|95|(0)(0)|(0)|100|101|102) */
     /* JADX WARN: Code restructure failed: missing block: B:106:0x01ce, code lost:
-    
-        r8 = 50;
-     */
+
+       r8 = 50;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:115:0x012d, code lost:
-    
-        android.util.Slog.i("AppStandbyController", r26 + " restricted by user");
-     */
+
+       android.util.Slog.i("AppStandbyController", r26 + " restricted by user");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:116:0x0145, code lost:
-    
-        r4 = (r3.lastUsedByUserElapsedTime + r20.mInjector.mAutoRestrictedBucketDelayMs) - r24;
-     */
+
+       r4 = (r3.lastUsedByUserElapsedTime + r20.mInjector.mAutoRestrictedBucketDelayMs) - r24;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:117:0x0152, code lost:
-    
-        if (r4 <= 0) goto L94;
-     */
+
+       if (r4 <= 0) goto L94;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:118:0x0154, code lost:
-    
-        android.util.Slog.w("AppStandbyController", "Tried to restrict recently used app: " + r26 + " due to " + r23);
-        r0 = r20.mHandler;
-        r0.sendMessageDelayed(r0.obtainMessage(11, r21, -1, r26), r4);
-     */
+
+       android.util.Slog.w("AppStandbyController", "Tried to restrict recently used app: " + r26 + " due to " + r23);
+       r0 = r20.mHandler;
+       r0.sendMessageDelayed(r0.obtainMessage(11, r21, -1, r26), r4);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:120:0x017e, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:121:0x017f, code lost:
-    
-        r9 = r21;
-     */
+
+       r9 = r21;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:73:0x00ed, code lost:
-    
-        r5 = r20.mAppIdleHistory;
-        r15 = true;
-        r7 = com.android.server.usage.AppIdleHistory.getPackageHistory(r5.getUserHistory(r9), r26, true);
-        r7.lastRestrictAttemptElapsedTime = r5.getElapsedTime(r24);
-        r7.lastRestrictReason = r23;
-     */
+
+       r5 = r20.mAppIdleHistory;
+       r15 = true;
+       r7 = com.android.server.usage.AppIdleHistory.getPackageHistory(r5.getUserHistory(r9), r26, true);
+       r7.lastRestrictAttemptElapsedTime = r5.getElapsedTime(r24);
+       r7.lastRestrictReason = r23;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:74:0x0100, code lost:
-    
-        if (r8 == false) goto L89;
-     */
+
+       if (r8 == false) goto L89;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:76:0x0104, code lost:
-    
-        if (android.os.Build.IS_DEBUGGABLE == false) goto L88;
-     */
+
+       if (android.os.Build.IS_DEBUGGABLE == false) goto L88;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:78:0x0109, code lost:
-    
-        if ((r23 & android.net.resolv.aidl.IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT) == 2) goto L88;
-     */
+
+       if ((r23 & android.net.resolv.aidl.IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT) == 2) goto L88;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:79:0x010b, code lost:
-    
-        android.widget.Toast.makeText(r20.mContext, r20.mHandler.getLooper(), r20.mContext.getResources().getString(android.R.string.config_chooseTypeAndAccountActivity, r26), 0).show();
-     */
+
+       android.widget.Toast.makeText(r20.mContext, r20.mHandler.getLooper(), r20.mContext.getResources().getString(android.R.string.config_chooseTypeAndAccountActivity, r26), 0).show();
+    */
     /* JADX WARN: Removed duplicated region for block: B:103:0x01f5  */
     /* JADX WARN: Removed duplicated region for block: B:104:0x01dc  */
     /* JADX WARN: Removed duplicated region for block: B:94:0x01da  */
@@ -2479,12 +2989,16 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void setAppStandbyBucket(int r21, int r22, int r23, long r24, java.lang.String r26, boolean r27) {
+    public final void setAppStandbyBucket(
+            int r21, int r22, int r23, long r24, java.lang.String r26, boolean r27) {
         /*
             Method dump skipped, instructions count: 527
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.usage.AppStandbyController.setAppStandbyBucket(int, int, int, long, java.lang.String, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.usage.AppStandbyController.setAppStandbyBucket(int, int,"
+                    + " int, long, java.lang.String, boolean):void");
     }
 
     public void setAppStandbyBucket(String str, int i, int i2, int i3) {
@@ -2496,24 +3010,29 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         setAppStandbyBuckets(Collections.singletonList(new AppStandbyInfo(str, i)), i2, i3, i4);
     }
 
-    public final void setAppStandbyBucketForMARs(String str, int i, int i2, int i3, boolean z, boolean z2) {
+    public final void setAppStandbyBucketForMARs(
+            String str, int i, int i2, int i3, boolean z, boolean z2) {
         int i4;
         int i5 = i2;
         if (i3 != 1792) {
             return;
         }
         if (i5 < 10 || i5 > 50) {
-            throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i5, "Cannot set the standby bucket to "));
+            throw new IllegalArgumentException(
+                    VibrationParam$1$$ExternalSyntheticOutline0.m(
+                            i5, "Cannot set the standby bucket to "));
         }
         if (!this.mInjector.isPackageInstalled(i, str)) {
-            BootReceiver$$ExternalSyntheticOutline0.m("Tried to restrict uninstalled app: ", str, "AppStandbyController");
+            BootReceiver$$ExternalSyntheticOutline0.m(
+                    "Tried to restrict uninstalled app: ", str, "AppStandbyController");
             return;
         }
         this.mInjector.getClass();
         long elapsedRealtime = SystemClock.elapsedRealtime();
         synchronized (this.mAppIdleLock) {
             try {
-                AppIdleHistory.AppUsageHistory appUsageHistory = this.mAppIdleHistory.getAppUsageHistory(i, str, elapsedRealtime);
+                AppIdleHistory.AppUsageHistory appUsageHistory =
+                        this.mAppIdleHistory.getAppUsageHistory(i, str, elapsedRealtime);
                 if (!z2 && (appUsageHistory.bucketingReason & 65280) == 1792) {
                     i5 = 45;
                 }
@@ -2527,9 +3046,17 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
     }
 
     public final void setAppStandbyBuckets(List list, int i, int i2, int i3) {
-        int handleIncomingUser = ActivityManager.handleIncomingUser(i3, i2, i, false, true, "setAppStandbyBucket", null);
+        int handleIncomingUser =
+                ActivityManager.handleIncomingUser(
+                        i3, i2, i, false, true, "setAppStandbyBucket", null);
         boolean z = i2 == 0 || i2 == 2000;
-        int i4 = ((!UserHandle.isSameApp(i2, 1000) || i3 == Process.myPid()) && !z) ? UserHandle.isCore(i2) ? FrameworkStatsLog.APP_STANDBY_BUCKET_CHANGED__MAIN_REASON__MAIN_FORCED_BY_SYSTEM : 1280 : 1024;
+        int i4 =
+                ((!UserHandle.isSameApp(i2, 1000) || i3 == Process.myPid()) && !z)
+                        ? UserHandle.isCore(i2)
+                                ? FrameworkStatsLog
+                                        .APP_STANDBY_BUCKET_CHANGED__MAIN_REASON__MAIN_FORCED_BY_SYSTEM
+                                : 1280
+                        : 1024;
         int size = list.size();
         this.mInjector.getClass();
         long elapsedRealtime = SystemClock.elapsedRealtime();
@@ -2538,26 +3065,34 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
             String str = appStandbyInfo.mPackageName;
             int i6 = appStandbyInfo.mStandbyBucket;
             if (i6 < 10 || i6 > 50) {
-                throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i6, "Cannot set the standby bucket to "));
+                throw new IllegalArgumentException(
+                        VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                i6, "Cannot set the standby bucket to "));
             }
-            int packageUid = this.mInjector.mPackageManagerInternal.getPackageUid(str, 4980736L, handleIncomingUser);
+            int packageUid =
+                    this.mInjector.mPackageManagerInternal.getPackageUid(
+                            str, 4980736L, handleIncomingUser);
             if (packageUid == i2) {
                 throw new IllegalArgumentException("Cannot set your own standby bucket");
             }
             if (packageUid < 0) {
-                throw new IllegalArgumentException(XmlUtils$$ExternalSyntheticOutline0.m("Cannot set standby bucket for non existent package (", str, ")"));
+                throw new IllegalArgumentException(
+                        XmlUtils$$ExternalSyntheticOutline0.m(
+                                "Cannot set standby bucket for non existent package (", str, ")"));
             }
             setAppStandbyBucket(handleIncomingUser, i6, i4, elapsedRealtime, str, z);
         }
     }
 
-    public final void setAppStandbyBucketsForMARs(List list, int i, int i2, int i3, boolean z, boolean z2) {
+    public final void setAppStandbyBucketsForMARs(
+            List list, int i, int i2, int i3, boolean z, boolean z2) {
         if (i3 != 1792) {
             return;
         }
         int size = list.size();
         for (int i4 = 0; i4 < size; i4++) {
-            setAppStandbyBucketForMARs(((AppStandbyInfo) list.get(i4)).mPackageName, i, i2, i3, z, z2);
+            setAppStandbyBucketForMARs(
+                    ((AppStandbyInfo) list.get(i4)).mPackageName, i, i2, i3, z, z2);
         }
     }
 
@@ -2573,14 +3108,18 @@ public class AppStandbyController implements AppStandbyInternal, UsageStatsManag
         this.mInjector.getClass();
         SystemClock.elapsedRealtime();
         synchronized (this.mAppIdleLock) {
-            AppIdleHistory.getPackageHistory(this.mAppIdleHistory.getUserHistory(i), str, true).nextEstimatedLaunchTime = j;
+            AppIdleHistory.getPackageHistory(this.mAppIdleHistory.getUserHistory(i), str, true)
+                            .nextEstimatedLaunchTime =
+                    j;
         }
     }
 
     public final void setLastJobRunTime(String str, int i, long j) {
         synchronized (this.mAppIdleLock) {
             AppIdleHistory appIdleHistory = this.mAppIdleHistory;
-            AppIdleHistory.getPackageHistory(appIdleHistory.getUserHistory(i), str, true).lastJobRunTime = appIdleHistory.getElapsedTime(j);
+            AppIdleHistory.getPackageHistory(appIdleHistory.getUserHistory(i), str, true)
+                            .lastJobRunTime =
+                    appIdleHistory.getElapsedTime(j);
         }
     }
 

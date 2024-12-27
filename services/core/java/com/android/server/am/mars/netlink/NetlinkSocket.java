@@ -3,6 +3,7 @@ package com.android.server.am.mars.netlink;
 import android.system.Os;
 import android.system.OsConstants;
 import android.system.StructTimeval;
+
 import java.io.FileDescriptor;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -14,7 +15,11 @@ public abstract class NetlinkSocket {
         if (j < 0) {
             throw new IllegalArgumentException("Negative timeouts not permitted");
         }
-        Os.setsockoptTimeval(fileDescriptor, OsConstants.SOL_SOCKET, OsConstants.SO_RCVTIMEO, StructTimeval.fromMillis(j));
+        Os.setsockoptTimeval(
+                fileDescriptor,
+                OsConstants.SOL_SOCKET,
+                OsConstants.SO_RCVTIMEO,
+                StructTimeval.fromMillis(j));
         ByteBuffer allocate = ByteBuffer.allocate(i);
         int read = Os.read(fileDescriptor, allocate);
         allocate.position(0);

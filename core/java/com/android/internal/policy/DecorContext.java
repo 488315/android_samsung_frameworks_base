@@ -9,6 +9,7 @@ import android.content.res.Resources;
 import android.view.ContextThemeWrapper;
 import android.view.Display;
 import android.view.contentcapture.ContentCaptureManager;
+
 import java.lang.ref.WeakReference;
 
 /* loaded from: classes5.dex */
@@ -39,7 +40,8 @@ public class DecorContext extends ContextThemeWrapper {
         this.mResources = context.getResources();
     }
 
-    @Override // android.view.ContextThemeWrapper, android.content.ContextWrapper, android.content.Context
+    @Override // android.view.ContextThemeWrapper, android.content.ContextWrapper,
+              // android.content.Context
     public Object getSystemService(String name) {
         if (Context.WINDOW_SERVICE.equals(name)) {
             return this.mPhoneWindow.getWindowManager();
@@ -54,7 +56,8 @@ public class DecorContext extends ContextThemeWrapper {
         return this.mContentCaptureManager;
     }
 
-    @Override // android.view.ContextThemeWrapper, android.content.ContextWrapper, android.content.Context
+    @Override // android.view.ContextThemeWrapper, android.content.ContextWrapper,
+              // android.content.Context
     public Resources getResources() {
         Context context = this.mContext.get();
         if (context != null) {
@@ -63,7 +66,8 @@ public class DecorContext extends ContextThemeWrapper {
         return this.mResources;
     }
 
-    @Override // android.view.ContextThemeWrapper, android.content.ContextWrapper, android.content.Context
+    @Override // android.view.ContextThemeWrapper, android.content.ContextWrapper,
+              // android.content.Context
     public AssetManager getAssets() {
         return this.mResources.getAssets();
     }

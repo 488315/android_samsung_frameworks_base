@@ -5,6 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.format.DateFormat;
 import android.util.Slog;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -13,19 +14,21 @@ import java.util.Iterator;
 
 /* loaded from: classes5.dex */
 public class BinderStats implements Parcelable {
-    public static final Parcelable.Creator<BinderStats> CREATOR = new Parcelable.Creator<BinderStats>() { // from class: com.android.internal.os.BinderStats.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BinderStats createFromParcel(Parcel in) {
-            return new BinderStats(in);
-        }
+    public static final Parcelable.Creator<BinderStats> CREATOR =
+            new Parcelable.Creator<
+                    BinderStats>() { // from class: com.android.internal.os.BinderStats.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BinderStats createFromParcel(Parcel in) {
+                    return new BinderStats(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BinderStats[] newArray(int size) {
-            return new BinderStats[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BinderStats[] newArray(int size) {
+                    return new BinderStats[size];
+                }
+            };
     private static final int MAGIC = -2130369756;
     private static final int MAX_ENTRY_NUMBER = 1000;
     private static final String TAG = "BinderStats";
@@ -51,8 +54,7 @@ public class BinderStats implements Parcelable {
         }
     }
 
-    public BinderStats() {
-    }
+    public BinderStats() {}
 
     public BinderStats(Parcel in) {
         reset();
@@ -112,7 +114,10 @@ public class BinderStats implements Parcelable {
             int num = in.readInt();
             if (num > 5) {
                 reset();
-                Slog.e(TAG, "The binder_calls_stats file seems to be broken. We discard previous stats.");
+                Slog.e(
+                        TAG,
+                        "The binder_calls_stats file seems to be broken. We discard previous"
+                            + " stats.");
                 return;
             }
             for (int j = 0; j < num; j++) {
@@ -198,7 +203,22 @@ public class BinderStats implements Parcelable {
             while (it2.hasNext()) {
                 BinderStatsUnit u = it2.next();
                 if (u != null) {
-                    pw.println("   " + u.packageName + NavigationBarInflaterView.KEY_CODE_START + u.callingUid + NavigationBarInflaterView.KEY_CODE_END + u.binderClass + "#" + u.methodName + "," + u.cpuTimeMicros + "," + u.callCount + NavigationBarInflaterView.KEY_CODE_START + u.recordedCallCount + NavigationBarInflaterView.KEY_CODE_END);
+                    pw.println(
+                            "   "
+                                    + u.packageName
+                                    + NavigationBarInflaterView.KEY_CODE_START
+                                    + u.callingUid
+                                    + NavigationBarInflaterView.KEY_CODE_END
+                                    + u.binderClass
+                                    + "#"
+                                    + u.methodName
+                                    + ","
+                                    + u.cpuTimeMicros
+                                    + ","
+                                    + u.callCount
+                                    + NavigationBarInflaterView.KEY_CODE_START
+                                    + u.recordedCallCount
+                                    + NavigationBarInflaterView.KEY_CODE_END);
                 }
             }
         }

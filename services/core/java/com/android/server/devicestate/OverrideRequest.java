@@ -13,7 +13,8 @@ public final class OverrideRequest {
     public final IBinder mToken;
     public final int mUid;
 
-    public OverrideRequest(IBinder iBinder, int i, int i2, DeviceState deviceState, int i3, int i4) {
+    public OverrideRequest(
+            IBinder iBinder, int i, int i2, DeviceState deviceState, int i3, int i4) {
         this.mToken = iBinder;
         this.mPid = i;
         this.mUid = i2;

@@ -1,6 +1,5 @@
 package android.media.tv;
 
-import android.media.tv.ITvRemoteServiceInput;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -11,16 +10,16 @@ import android.os.RemoteException;
 public interface ITvRemoteProvider extends IInterface {
     void onInputBridgeConnected(IBinder iBinder) throws RemoteException;
 
-    void setRemoteServiceInputSink(ITvRemoteServiceInput iTvRemoteServiceInput) throws RemoteException;
+    void setRemoteServiceInputSink(ITvRemoteServiceInput iTvRemoteServiceInput)
+            throws RemoteException;
 
     public static class Default implements ITvRemoteProvider {
         @Override // android.media.tv.ITvRemoteProvider
-        public void setRemoteServiceInputSink(ITvRemoteServiceInput tvServiceInput) throws RemoteException {
-        }
+        public void setRemoteServiceInputSink(ITvRemoteServiceInput tvServiceInput)
+                throws RemoteException {}
 
         @Override // android.media.tv.ITvRemoteProvider
-        public void onInputBridgeConnected(IBinder token) throws RemoteException {
-        }
+        public void onInputBridgeConnected(IBinder token) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -28,7 +27,7 @@ public interface ITvRemoteProvider extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITvRemoteProvider {
+    public abstract static class Stub extends Binder implements ITvRemoteProvider {
         public static final String DESCRIPTOR = "android.media.tv.ITvRemoteProvider";
         static final int TRANSACTION_onInputBridgeConnected = 2;
         static final int TRANSACTION_setRemoteServiceInputSink = 1;
@@ -70,7 +69,8 @@ public interface ITvRemoteProvider extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -112,7 +112,8 @@ public interface ITvRemoteProvider extends IInterface {
             }
 
             @Override // android.media.tv.ITvRemoteProvider
-            public void setRemoteServiceInputSink(ITvRemoteServiceInput tvServiceInput) throws RemoteException {
+            public void setRemoteServiceInputSink(ITvRemoteServiceInput tvServiceInput)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

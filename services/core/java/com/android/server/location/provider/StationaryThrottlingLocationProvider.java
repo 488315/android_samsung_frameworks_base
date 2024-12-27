@@ -6,6 +6,7 @@ import android.location.provider.ProviderRequest;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.SystemClock;
+
 import com.android.internal.util.ConcurrentUtils;
 import com.android.internal.util.Preconditions;
 import com.android.server.DeviceIdleInternal;
@@ -16,14 +17,17 @@ import com.android.server.location.eventlog.LocationEventLog;
 import com.android.server.location.injector.DeviceIdleHelper$DeviceIdleListener;
 import com.android.server.location.injector.SystemDeviceIdleHelper;
 import com.android.server.location.injector.SystemDeviceStationaryHelper;
-import com.android.server.location.provider.AbstractLocationProvider;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.Collections;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class StationaryThrottlingLocationProvider extends AbstractLocationProvider implements DeviceIdleHelper$DeviceIdleListener, DeviceIdleInternal.StationaryListener, AbstractLocationProvider.Listener {
+public final class StationaryThrottlingLocationProvider extends AbstractLocationProvider
+        implements DeviceIdleHelper$DeviceIdleListener,
+                DeviceIdleInternal.StationaryListener,
+                AbstractLocationProvider.Listener {
     public final AbstractLocationProvider mDelegate;
     public DeliverLastLocationRunnable mDeliverLastLocationCallback;
     public boolean mDeviceIdle;
@@ -42,21 +46,22 @@ public final class StationaryThrottlingLocationProvider extends AbstractLocation
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeliverLastLocationRunnable implements Runnable {
-        public DeliverLastLocationRunnable() {
-        }
+        public DeliverLastLocationRunnable() {}
 
         @Override // java.lang.Runnable
         public final void run() {
             synchronized (StationaryThrottlingLocationProvider.this.mLock) {
                 try {
-                    StationaryThrottlingLocationProvider stationaryThrottlingLocationProvider = StationaryThrottlingLocationProvider.this;
+                    StationaryThrottlingLocationProvider stationaryThrottlingLocationProvider =
+                            StationaryThrottlingLocationProvider.this;
                     if (stationaryThrottlingLocationProvider.mDeliverLastLocationCallback != this) {
                         return;
                     }
                     if (stationaryThrottlingLocationProvider.mLastLocation == null) {
                         return;
                     }
-                    Location location = new Location(StationaryThrottlingLocationProvider.this.mLastLocation);
+                    Location location =
+                            new Location(StationaryThrottlingLocationProvider.this.mLastLocation);
                     location.setTime(System.currentTimeMillis());
                     location.setElapsedRealtimeNanos(SystemClock.elapsedRealtimeNanos());
                     if (location.hasSpeed()) {
@@ -78,8 +83,13 @@ public final class StationaryThrottlingLocationProvider extends AbstractLocation
                     extras.putBoolean("isThrottling", true);
                     location.setExtras(extras);
                     StationaryThrottlingLocationProvider.this.mLastLocation = location;
-                    LocationServiceThread.getHandler().postDelayed(this, StationaryThrottlingLocationProvider.this.mThrottlingIntervalMs);
-                    StationaryThrottlingLocationProvider.this.reportLocation(LocationResult.wrap(new Location[]{location}));
+                    LocationServiceThread.getHandler()
+                            .postDelayed(
+                                    this,
+                                    StationaryThrottlingLocationProvider.this
+                                            .mThrottlingIntervalMs);
+                    StationaryThrottlingLocationProvider.this.reportLocation(
+                            LocationResult.wrap(new Location[] {location}));
                 } catch (Throwable th) {
                     throw th;
                 }
@@ -87,7 +97,10 @@ public final class StationaryThrottlingLocationProvider extends AbstractLocation
         }
     }
 
-    public StationaryThrottlingLocationProvider(String str, LocationManagerService.SystemInjector systemInjector, AbstractLocationProvider abstractLocationProvider) {
+    public StationaryThrottlingLocationProvider(
+            String str,
+            LocationManagerService.SystemInjector systemInjector,
+            AbstractLocationProvider abstractLocationProvider) {
         super(ConcurrentUtils.DIRECT_EXECUTOR, null, null, Collections.emptySet());
         Object obj = new Object();
         this.mInitializationLock = obj;
@@ -113,7 +126,8 @@ public final class StationaryThrottlingLocationProvider extends AbstractLocation
     }
 
     @Override // com.android.server.location.provider.AbstractLocationProvider
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         if (this.mThrottlingIntervalMs != Long.MAX_VALUE) {
             printWriter.println("stationary throttled=" + this.mLastLocation);
         } else {
@@ -140,7 +154,8 @@ public final class StationaryThrottlingLocationProvider extends AbstractLocation
                 if (z) {
                     this.mDeviceStationaryHelper.addListener(this);
                 } else {
-                    SystemDeviceStationaryHelper systemDeviceStationaryHelper = this.mDeviceStationaryHelper;
+                    SystemDeviceStationaryHelper systemDeviceStationaryHelper =
+                            this.mDeviceStationaryHelper;
                     Preconditions.checkState(systemDeviceStationaryHelper.mDeviceIdle != null);
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
@@ -188,9 +203,12 @@ public final class StationaryThrottlingLocationProvider extends AbstractLocation
     }
 
     @Override // com.android.server.location.provider.AbstractLocationProvider
-    public final void onFlush(LocationProviderManager$Registration$$ExternalSyntheticLambda0 locationProviderManager$Registration$$ExternalSyntheticLambda0) {
+    public final void onFlush(
+            LocationProviderManager$Registration$$ExternalSyntheticLambda0
+                    locationProviderManager$Registration$$ExternalSyntheticLambda0) {
         Preconditions.checkState(this.mInitialized);
-        this.mDelegate.mController.flush(locationProviderManager$Registration$$ExternalSyntheticLambda0);
+        this.mDelegate.mController.flush(
+                locationProviderManager$Registration$$ExternalSyntheticLambda0);
     }
 
     @Override // com.android.server.location.provider.AbstractLocationProvider.Listener
@@ -225,7 +243,8 @@ public final class StationaryThrottlingLocationProvider extends AbstractLocation
     }
 
     @Override // com.android.server.location.provider.AbstractLocationProvider.Listener
-    public final void onStateChanged(AbstractLocationProvider.State state, AbstractLocationProvider.State state2) {
+    public final void onStateChanged(
+            AbstractLocationProvider.State state, AbstractLocationProvider.State state2) {
         synchronized (this.mInitializationLock) {
             Preconditions.checkState(this.mInitialized);
         }
@@ -238,7 +257,8 @@ public final class StationaryThrottlingLocationProvider extends AbstractLocation
             try {
                 SystemDeviceIdleHelper systemDeviceIdleHelper = this.mDeviceIdleHelper;
                 synchronized (systemDeviceIdleHelper) {
-                    if (systemDeviceIdleHelper.mListeners.remove(this) && systemDeviceIdleHelper.mListeners.isEmpty()) {
+                    if (systemDeviceIdleHelper.mListeners.remove(this)
+                            && systemDeviceIdleHelper.mListeners.isEmpty()) {
                         synchronized (systemDeviceIdleHelper) {
                             systemDeviceIdleHelper.mRegistrationRequired = false;
                             systemDeviceIdleHelper.onRegistrationStateChanged();
@@ -251,7 +271,8 @@ public final class StationaryThrottlingLocationProvider extends AbstractLocation
                 this.mOutgoingRequest = providerRequest;
                 this.mThrottlingIntervalMs = Long.MAX_VALUE;
                 if (this.mDeliverLastLocationCallback != null) {
-                    LocationServiceThread.getHandler().removeCallbacks(this.mDeliverLastLocationCallback);
+                    LocationServiceThread.getHandler()
+                            .removeCallbacks(this.mDeliverLastLocationCallback);
                     this.mDeliverLastLocationCallback = null;
                 }
                 this.mLastLocation = null;
@@ -264,8 +285,19 @@ public final class StationaryThrottlingLocationProvider extends AbstractLocation
 
     public final void onThrottlingChangedLocked(boolean z) {
         Location location;
-        long max = (!this.mDeviceStationary || !this.mDeviceIdle || this.mIncomingRequest.isLocationSettingsIgnored() || this.mIncomingRequest.getQuality() == 100 || (location = this.mLastLocation) == null || location.getElapsedRealtimeAgeMillis(this.mDeviceStationaryRealtimeMs) > 30000) ? Long.MAX_VALUE : Math.max(this.mIncomingRequest.getIntervalMillis(), 1000L);
-        ProviderRequest providerRequest = max != Long.MAX_VALUE ? ProviderRequest.EMPTY_REQUEST : this.mIncomingRequest;
+        long max =
+                (!this.mDeviceStationary
+                                || !this.mDeviceIdle
+                                || this.mIncomingRequest.isLocationSettingsIgnored()
+                                || this.mIncomingRequest.getQuality() == 100
+                                || (location = this.mLastLocation) == null
+                                || location.getElapsedRealtimeAgeMillis(
+                                                this.mDeviceStationaryRealtimeMs)
+                                        > 30000)
+                        ? Long.MAX_VALUE
+                        : Math.max(this.mIncomingRequest.getIntervalMillis(), 1000L);
+        ProviderRequest providerRequest =
+                max != Long.MAX_VALUE ? ProviderRequest.EMPTY_REQUEST : this.mIncomingRequest;
         if (!providerRequest.equals(this.mOutgoingRequest)) {
             this.mOutgoingRequest = providerRequest;
             this.mDelegate.mController.setRequest(providerRequest);
@@ -281,20 +313,32 @@ public final class StationaryThrottlingLocationProvider extends AbstractLocation
                 String str = this.mName;
                 ProviderRequest providerRequest2 = this.mOutgoingRequest;
                 locationEventLog.getClass();
-                locationEventLog.addLog$1(new LocationEventLog.ProviderClientPermittedEvent(str, false, providerRequest2, 2));
-                RCPManagerService$$ExternalSyntheticOutline0.m(new StringBuilder(), this.mName, " provider stationary unthrottled", "LocationManagerService");
+                locationEventLog.addLog$1(
+                        new LocationEventLog.ProviderClientPermittedEvent(
+                                str, false, providerRequest2, 2));
+                RCPManagerService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder(),
+                        this.mName,
+                        " provider stationary unthrottled",
+                        "LocationManagerService");
             }
             LocationServiceThread.getHandler().removeCallbacks(this.mDeliverLastLocationCallback);
             this.mDeliverLastLocationCallback = null;
             return;
         }
         if (j == Long.MAX_VALUE) {
-            RCPManagerService$$ExternalSyntheticOutline0.m(new StringBuilder(), this.mName, " provider stationary throttled", "LocationManagerService");
+            RCPManagerService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder(),
+                    this.mName,
+                    " provider stationary throttled",
+                    "LocationManagerService");
             LocationEventLog locationEventLog2 = LocationEventLog.EVENT_LOG;
             String str2 = this.mName;
             ProviderRequest providerRequest3 = this.mOutgoingRequest;
             locationEventLog2.getClass();
-            locationEventLog2.addLog$1(new LocationEventLog.ProviderClientPermittedEvent(str2, true, providerRequest3, 2));
+            locationEventLog2.addLog$1(
+                    new LocationEventLog.ProviderClientPermittedEvent(
+                            str2, true, providerRequest3, 2));
         }
         if (this.mDeliverLastLocationCallback != null) {
             LocationServiceThread.getHandler().removeCallbacks(this.mDeliverLastLocationCallback);
@@ -304,7 +348,11 @@ public final class StationaryThrottlingLocationProvider extends AbstractLocation
         if (z) {
             LocationServiceThread.getHandler().post(this.mDeliverLastLocationCallback);
         } else {
-            LocationServiceThread.getHandler().postDelayed(this.mDeliverLastLocationCallback, this.mThrottlingIntervalMs - this.mLastLocation.getElapsedRealtimeAgeMillis());
+            LocationServiceThread.getHandler()
+                    .postDelayed(
+                            this.mDeliverLastLocationCallback,
+                            this.mThrottlingIntervalMs
+                                    - this.mLastLocation.getElapsedRealtimeAgeMillis());
         }
     }
 }

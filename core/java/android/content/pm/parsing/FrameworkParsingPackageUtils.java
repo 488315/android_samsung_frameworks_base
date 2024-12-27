@@ -13,7 +13,9 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Slog;
 import android.util.apk.ApkSignatureVerifier;
+
 import com.android.internal.util.ArrayUtils;
+
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
@@ -29,7 +31,8 @@ public class FrameworkParsingPackageUtils {
     public static final int PARSE_IGNORE_OVERLAY_REQUIRED_SYSTEM_PROPERTY = 128;
     private static final String TAG = "FrameworkParsingPackageUtils";
 
-    public static String validateName(String name, boolean requireSeparator, boolean requireFilename) {
+    public static String validateName(
+            String name, boolean requireSeparator, boolean requireFilename) {
         int N = name.length();
         boolean hasSep = false;
         boolean front = true;
@@ -60,7 +63,8 @@ public class FrameworkParsingPackageUtils {
         return "must have at least one '.' separator";
     }
 
-    public static ParseResult validateName(ParseInput input, String name, boolean requireSeparator, boolean requireFilename) {
+    public static ParseResult validateName(
+            ParseInput input, String name, boolean requireSeparator, boolean requireFilename) {
         String errorMessage = validateName(name, requireSeparator, requireFilename);
         if (errorMessage != null) {
             return input.error(errorMessage);
@@ -97,12 +101,15 @@ public class FrameworkParsingPackageUtils {
                     KeyFactory keyFactory2 = KeyFactory.getInstance(KeyProperties.KEY_ALGORITHM_EC);
                     return keyFactory2.generatePublic(keySpec);
                 } catch (NoSuchAlgorithmException e2) {
-                    Slog.wtf(TAG, "Could not parse public key: EC KeyFactory not included in build");
+                    Slog.wtf(
+                            TAG, "Could not parse public key: EC KeyFactory not included in build");
                     try {
                         KeyFactory keyFactory3 = KeyFactory.getInstance("DSA");
                         return keyFactory3.generatePublic(keySpec);
                     } catch (NoSuchAlgorithmException e3) {
-                        Slog.wtf(TAG, "Could not parse public key: DSA KeyFactory not included in build");
+                        Slog.wtf(
+                                TAG,
+                                "Could not parse public key: DSA KeyFactory not included in build");
                         return null;
                     } catch (InvalidKeySpecException e4) {
                         return null;
@@ -126,13 +133,27 @@ public class FrameworkParsingPackageUtils {
             if (TextUtils.isEmpty(rawPropNames) && TextUtils.isEmpty(rawPropValues)) {
                 return true;
             }
-            Slog.w(TAG, "Disabling overlay - incomplete property :'" + rawPropNames + "=" + rawPropValues + "' - require both requiredSystemPropertyName AND requiredSystemPropertyValue to be specified.");
+            Slog.w(
+                    TAG,
+                    "Disabling overlay - incomplete property :'"
+                            + rawPropNames
+                            + "="
+                            + rawPropValues
+                            + "' - require both requiredSystemPropertyName AND"
+                            + " requiredSystemPropertyValue to be specified.");
             return false;
         }
         String[] propNames = rawPropNames.split(",");
         String[] propValues = rawPropValues.split(",");
         if (propNames.length != propValues.length) {
-            Slog.w(TAG, "Disabling overlay - property :'" + rawPropNames + "=" + rawPropValues + "' - require both requiredSystemPropertyName AND requiredSystemPropertyValue lists to have the same size.");
+            Slog.w(
+                    TAG,
+                    "Disabling overlay - property :'"
+                            + rawPropNames
+                            + "="
+                            + rawPropValues
+                            + "' - require both requiredSystemPropertyName AND"
+                            + " requiredSystemPropertyValue lists to have the same size.");
             return false;
         }
         for (int i = 0; i < propNames.length; i++) {
@@ -144,14 +165,22 @@ public class FrameworkParsingPackageUtils {
         return true;
     }
 
-    public static ParseResult<SigningDetails> getSigningDetails(ParseInput input, String baseCodePath, boolean skipVerify, boolean isStaticSharedLibrary, SigningDetails existingSigningDetails, int targetSdk) {
+    public static ParseResult<SigningDetails> getSigningDetails(
+            ParseInput input,
+            String baseCodePath,
+            boolean skipVerify,
+            boolean isStaticSharedLibrary,
+            SigningDetails existingSigningDetails,
+            int targetSdk) {
         ParseResult<SigningDetails> verified;
-        int minSignatureScheme = ApkSignatureVerifier.getMinimumSignatureSchemeVersionForTargetSdk(targetSdk);
+        int minSignatureScheme =
+                ApkSignatureVerifier.getMinimumSignatureSchemeVersionForTargetSdk(targetSdk);
         if (isStaticSharedLibrary) {
             minSignatureScheme = 2;
         }
         if (skipVerify) {
-            verified = ApkSignatureVerifier.unsafeGetCertsWithoutVerification(input, baseCodePath, 1);
+            verified =
+                    ApkSignatureVerifier.unsafeGetCertsWithoutVerification(input, baseCodePath, 1);
         } else {
             verified = ApkSignatureVerifier.verify(input, baseCodePath, minSignatureScheme);
         }
@@ -167,10 +196,21 @@ public class FrameworkParsingPackageUtils {
         return input.success(existingSigningDetails);
     }
 
-    public static ParseResult<Integer> computeMinSdkVersion(int minVers, String minCode, int platformSdkVersion, String[] platformSdkCodenames, ParseInput input) {
+    public static ParseResult<Integer> computeMinSdkVersion(
+            int minVers,
+            String minCode,
+            int platformSdkVersion,
+            String[] platformSdkCodenames,
+            ParseInput input) {
         if (minCode == null) {
             if (minVers > platformSdkVersion) {
-                return input.error(-12, "Requires newer sdk version #" + minVers + " (current version is #" + platformSdkVersion + NavigationBarInflaterView.KEY_CODE_END);
+                return input.error(
+                        -12,
+                        "Requires newer sdk version #"
+                                + minVers
+                                + " (current version is #"
+                                + platformSdkVersion
+                                + NavigationBarInflaterView.KEY_CODE_END);
             }
             return input.success(Integer.valueOf(minVers));
         }
@@ -178,12 +218,25 @@ public class FrameworkParsingPackageUtils {
             return input.success(10000);
         }
         if (platformSdkCodenames.length > 0) {
-            return input.error(-12, "Requires development platform " + minCode + " (current platform is any of " + Arrays.toString(platformSdkCodenames) + NavigationBarInflaterView.KEY_CODE_END);
+            return input.error(
+                    -12,
+                    "Requires development platform "
+                            + minCode
+                            + " (current platform is any of "
+                            + Arrays.toString(platformSdkCodenames)
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
-        return input.error(-12, "Requires development platform " + minCode + " but this is a release platform.");
+        return input.error(
+                -12,
+                "Requires development platform " + minCode + " but this is a release platform.");
     }
 
-    public static ParseResult<Integer> computeTargetSdkVersion(int targetVers, String targetCode, String[] platformSdkCodenames, ParseInput input, boolean allowUnknownCodenames) {
+    public static ParseResult<Integer> computeTargetSdkVersion(
+            int targetVers,
+            String targetCode,
+            String[] platformSdkCodenames,
+            ParseInput input,
+            boolean allowUnknownCodenames) {
         if (targetCode == null) {
             return input.success(Integer.valueOf(targetVers));
         }
@@ -200,14 +253,24 @@ public class FrameworkParsingPackageUtils {
             return input.success(10000);
         }
         if (platformSdkCodenames.length > 0) {
-            return input.error(-12, "Requires development platform " + targetCode + " (current platform is any of " + Arrays.toString(platformSdkCodenames) + NavigationBarInflaterView.KEY_CODE_END);
+            return input.error(
+                    -12,
+                    "Requires development platform "
+                            + targetCode
+                            + " (current platform is any of "
+                            + Arrays.toString(platformSdkCodenames)
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
-        return input.error(-12, "Requires development platform " + targetCode + " but this is a release platform.");
+        return input.error(
+                -12,
+                "Requires development platform " + targetCode + " but this is a release platform.");
     }
 
-    public static ParseResult<Integer> computeMaxSdkVersion(int maxVers, int platformSdkVersion, ParseInput input) {
+    public static ParseResult<Integer> computeMaxSdkVersion(
+            int maxVers, int platformSdkVersion, ParseInput input) {
         if (platformSdkVersion > maxVers) {
-            return input.error(-14, "Requires max SDK version " + maxVers + " but is " + platformSdkVersion);
+            return input.error(
+                    -14, "Requires max SDK version " + maxVers + " but is " + platformSdkVersion);
         }
         return input.success(Integer.valueOf(maxVers));
     }

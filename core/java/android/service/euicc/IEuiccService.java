@@ -6,121 +6,180 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.service.euicc.IDeleteSubscriptionCallback;
-import android.service.euicc.IDownloadSubscriptionCallback;
-import android.service.euicc.IEraseSubscriptionsCallback;
-import android.service.euicc.IEuiccServiceDumpResultCallback;
-import android.service.euicc.IGetAvailableMemoryInBytesCallback;
-import android.service.euicc.IGetDefaultDownloadableSubscriptionListCallback;
-import android.service.euicc.IGetDownloadableSubscriptionMetadataCallback;
-import android.service.euicc.IGetEidCallback;
-import android.service.euicc.IGetEuiccInfoCallback;
-import android.service.euicc.IGetEuiccProfileInfoListCallback;
-import android.service.euicc.IGetOtaStatusCallback;
-import android.service.euicc.IOtaStatusChangedCallback;
-import android.service.euicc.IRetainSubscriptionsForFactoryResetCallback;
-import android.service.euicc.ISwitchToSubscriptionCallback;
-import android.service.euicc.IUpdateSubscriptionNicknameCallback;
 import android.telephony.euicc.DownloadableSubscription;
 
 /* loaded from: classes3.dex */
 public interface IEuiccService extends IInterface {
-    void deleteSubscription(int i, String str, IDeleteSubscriptionCallback iDeleteSubscriptionCallback) throws RemoteException;
+    void deleteSubscription(
+            int i, String str, IDeleteSubscriptionCallback iDeleteSubscriptionCallback)
+            throws RemoteException;
 
-    void downloadSubscription(int i, int i2, DownloadableSubscription downloadableSubscription, boolean z, boolean z2, Bundle bundle, IDownloadSubscriptionCallback iDownloadSubscriptionCallback) throws RemoteException;
+    void downloadSubscription(
+            int i,
+            int i2,
+            DownloadableSubscription downloadableSubscription,
+            boolean z,
+            boolean z2,
+            Bundle bundle,
+            IDownloadSubscriptionCallback iDownloadSubscriptionCallback)
+            throws RemoteException;
 
-    void dump(IEuiccServiceDumpResultCallback iEuiccServiceDumpResultCallback) throws RemoteException;
+    void dump(IEuiccServiceDumpResultCallback iEuiccServiceDumpResultCallback)
+            throws RemoteException;
 
-    void eraseSubscriptions(int i, IEraseSubscriptionsCallback iEraseSubscriptionsCallback) throws RemoteException;
+    void eraseSubscriptions(int i, IEraseSubscriptionsCallback iEraseSubscriptionsCallback)
+            throws RemoteException;
 
-    void eraseSubscriptionsWithOptions(int i, int i2, IEraseSubscriptionsCallback iEraseSubscriptionsCallback) throws RemoteException;
+    void eraseSubscriptionsWithOptions(
+            int i, int i2, IEraseSubscriptionsCallback iEraseSubscriptionsCallback)
+            throws RemoteException;
 
-    void getAvailableMemoryInBytes(int i, IGetAvailableMemoryInBytesCallback iGetAvailableMemoryInBytesCallback) throws RemoteException;
+    void getAvailableMemoryInBytes(
+            int i, IGetAvailableMemoryInBytesCallback iGetAvailableMemoryInBytesCallback)
+            throws RemoteException;
 
-    void getDefaultDownloadableSubscriptionList(int i, boolean z, IGetDefaultDownloadableSubscriptionListCallback iGetDefaultDownloadableSubscriptionListCallback) throws RemoteException;
+    void getDefaultDownloadableSubscriptionList(
+            int i,
+            boolean z,
+            IGetDefaultDownloadableSubscriptionListCallback
+                    iGetDefaultDownloadableSubscriptionListCallback)
+            throws RemoteException;
 
-    void getDownloadableSubscriptionMetadata(int i, int i2, DownloadableSubscription downloadableSubscription, boolean z, boolean z2, IGetDownloadableSubscriptionMetadataCallback iGetDownloadableSubscriptionMetadataCallback) throws RemoteException;
+    void getDownloadableSubscriptionMetadata(
+            int i,
+            int i2,
+            DownloadableSubscription downloadableSubscription,
+            boolean z,
+            boolean z2,
+            IGetDownloadableSubscriptionMetadataCallback
+                    iGetDownloadableSubscriptionMetadataCallback)
+            throws RemoteException;
 
     void getEid(int i, IGetEidCallback iGetEidCallback) throws RemoteException;
 
     void getEuiccInfo(int i, IGetEuiccInfoCallback iGetEuiccInfoCallback) throws RemoteException;
 
-    void getEuiccProfileInfoList(int i, IGetEuiccProfileInfoListCallback iGetEuiccProfileInfoListCallback) throws RemoteException;
+    void getEuiccProfileInfoList(
+            int i, IGetEuiccProfileInfoListCallback iGetEuiccProfileInfoListCallback)
+            throws RemoteException;
 
     void getOtaStatus(int i, IGetOtaStatusCallback iGetOtaStatusCallback) throws RemoteException;
 
-    void retainSubscriptionsForFactoryReset(int i, IRetainSubscriptionsForFactoryResetCallback iRetainSubscriptionsForFactoryResetCallback) throws RemoteException;
+    void retainSubscriptionsForFactoryReset(
+            int i,
+            IRetainSubscriptionsForFactoryResetCallback iRetainSubscriptionsForFactoryResetCallback)
+            throws RemoteException;
 
-    void startOtaIfNecessary(int i, IOtaStatusChangedCallback iOtaStatusChangedCallback) throws RemoteException;
+    void startOtaIfNecessary(int i, IOtaStatusChangedCallback iOtaStatusChangedCallback)
+            throws RemoteException;
 
-    void switchToSubscription(int i, int i2, String str, boolean z, ISwitchToSubscriptionCallback iSwitchToSubscriptionCallback, boolean z2) throws RemoteException;
+    void switchToSubscription(
+            int i,
+            int i2,
+            String str,
+            boolean z,
+            ISwitchToSubscriptionCallback iSwitchToSubscriptionCallback,
+            boolean z2)
+            throws RemoteException;
 
-    void updateSubscriptionNickname(int i, String str, String str2, IUpdateSubscriptionNicknameCallback iUpdateSubscriptionNicknameCallback) throws RemoteException;
+    void updateSubscriptionNickname(
+            int i,
+            String str,
+            String str2,
+            IUpdateSubscriptionNicknameCallback iUpdateSubscriptionNicknameCallback)
+            throws RemoteException;
 
     public static class Default implements IEuiccService {
         @Override // android.service.euicc.IEuiccService
-        public void downloadSubscription(int slotId, int portIndex, DownloadableSubscription subscription, boolean switchAfterDownload, boolean forceDeactivateSim, Bundle resolvedBundle, IDownloadSubscriptionCallback callback) throws RemoteException {
-        }
+        public void downloadSubscription(
+                int slotId,
+                int portIndex,
+                DownloadableSubscription subscription,
+                boolean switchAfterDownload,
+                boolean forceDeactivateSim,
+                Bundle resolvedBundle,
+                IDownloadSubscriptionCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.euicc.IEuiccService
-        public void getDownloadableSubscriptionMetadata(int slotId, int portIndex, DownloadableSubscription subscription, boolean switchAfterDownload, boolean forceDeactivateSim, IGetDownloadableSubscriptionMetadataCallback callback) throws RemoteException {
-        }
+        public void getDownloadableSubscriptionMetadata(
+                int slotId,
+                int portIndex,
+                DownloadableSubscription subscription,
+                boolean switchAfterDownload,
+                boolean forceDeactivateSim,
+                IGetDownloadableSubscriptionMetadataCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.euicc.IEuiccService
-        public void getEid(int slotId, IGetEidCallback callback) throws RemoteException {
-        }
+        public void getEid(int slotId, IGetEidCallback callback) throws RemoteException {}
 
         @Override // android.service.euicc.IEuiccService
-        public void getOtaStatus(int slotId, IGetOtaStatusCallback callback) throws RemoteException {
-        }
+        public void getOtaStatus(int slotId, IGetOtaStatusCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.euicc.IEuiccService
-        public void startOtaIfNecessary(int slotId, IOtaStatusChangedCallback statusChangedCallback) throws RemoteException {
-        }
+        public void startOtaIfNecessary(int slotId, IOtaStatusChangedCallback statusChangedCallback)
+                throws RemoteException {}
 
         @Override // android.service.euicc.IEuiccService
-        public void getEuiccProfileInfoList(int slotId, IGetEuiccProfileInfoListCallback callback) throws RemoteException {
-        }
+        public void getEuiccProfileInfoList(int slotId, IGetEuiccProfileInfoListCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.euicc.IEuiccService
-        public void getDefaultDownloadableSubscriptionList(int slotId, boolean forceDeactivateSim, IGetDefaultDownloadableSubscriptionListCallback callback) throws RemoteException {
-        }
+        public void getDefaultDownloadableSubscriptionList(
+                int slotId,
+                boolean forceDeactivateSim,
+                IGetDefaultDownloadableSubscriptionListCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.euicc.IEuiccService
-        public void getEuiccInfo(int slotId, IGetEuiccInfoCallback callback) throws RemoteException {
-        }
+        public void getEuiccInfo(int slotId, IGetEuiccInfoCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.euicc.IEuiccService
-        public void deleteSubscription(int slotId, String iccid, IDeleteSubscriptionCallback callback) throws RemoteException {
-        }
+        public void deleteSubscription(
+                int slotId, String iccid, IDeleteSubscriptionCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.euicc.IEuiccService
-        public void switchToSubscription(int slotId, int portIndex, String iccid, boolean forceDeactivateSim, ISwitchToSubscriptionCallback callback, boolean useLegacyApi) throws RemoteException {
-        }
+        public void switchToSubscription(
+                int slotId,
+                int portIndex,
+                String iccid,
+                boolean forceDeactivateSim,
+                ISwitchToSubscriptionCallback callback,
+                boolean useLegacyApi)
+                throws RemoteException {}
 
         @Override // android.service.euicc.IEuiccService
-        public void updateSubscriptionNickname(int slotId, String iccid, String nickname, IUpdateSubscriptionNicknameCallback callback) throws RemoteException {
-        }
+        public void updateSubscriptionNickname(
+                int slotId,
+                String iccid,
+                String nickname,
+                IUpdateSubscriptionNicknameCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.euicc.IEuiccService
-        public void eraseSubscriptions(int slotId, IEraseSubscriptionsCallback callback) throws RemoteException {
-        }
+        public void eraseSubscriptions(int slotId, IEraseSubscriptionsCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.euicc.IEuiccService
-        public void eraseSubscriptionsWithOptions(int slotIndex, int options, IEraseSubscriptionsCallback callback) throws RemoteException {
-        }
+        public void eraseSubscriptionsWithOptions(
+                int slotIndex, int options, IEraseSubscriptionsCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.euicc.IEuiccService
-        public void retainSubscriptionsForFactoryReset(int slotId, IRetainSubscriptionsForFactoryResetCallback callback) throws RemoteException {
-        }
+        public void retainSubscriptionsForFactoryReset(
+                int slotId, IRetainSubscriptionsForFactoryResetCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.euicc.IEuiccService
-        public void dump(IEuiccServiceDumpResultCallback callback) throws RemoteException {
-        }
+        public void dump(IEuiccServiceDumpResultCallback callback) throws RemoteException {}
 
         @Override // android.service.euicc.IEuiccService
-        public void getAvailableMemoryInBytes(int slotId, IGetAvailableMemoryInBytesCallback callback) throws RemoteException {
-        }
+        public void getAvailableMemoryInBytes(
+                int slotId, IGetAvailableMemoryInBytesCallback callback) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -128,7 +187,7 @@ public interface IEuiccService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IEuiccService {
+    public abstract static class Stub extends Binder implements IEuiccService {
         public static final String DESCRIPTOR = "android.service.euicc.IEuiccService";
         static final int TRANSACTION_deleteSubscription = 9;
         static final int TRANSACTION_downloadSubscription = 1;
@@ -212,7 +271,8 @@ public interface IEuiccService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -224,65 +284,82 @@ public interface IEuiccService extends IInterface {
                 case 1:
                     int _arg0 = data.readInt();
                     int _arg1 = data.readInt();
-                    DownloadableSubscription _arg2 = (DownloadableSubscription) data.readTypedObject(DownloadableSubscription.CREATOR);
+                    DownloadableSubscription _arg2 =
+                            (DownloadableSubscription)
+                                    data.readTypedObject(DownloadableSubscription.CREATOR);
                     boolean _arg3 = data.readBoolean();
                     boolean _arg4 = data.readBoolean();
                     Bundle _arg5 = (Bundle) data.readTypedObject(Bundle.CREATOR);
-                    IDownloadSubscriptionCallback _arg6 = IDownloadSubscriptionCallback.Stub.asInterface(data.readStrongBinder());
+                    IDownloadSubscriptionCallback _arg6 =
+                            IDownloadSubscriptionCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     downloadSubscription(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6);
                     return true;
                 case 2:
                     int _arg02 = data.readInt();
                     int _arg12 = data.readInt();
-                    DownloadableSubscription _arg22 = (DownloadableSubscription) data.readTypedObject(DownloadableSubscription.CREATOR);
+                    DownloadableSubscription _arg22 =
+                            (DownloadableSubscription)
+                                    data.readTypedObject(DownloadableSubscription.CREATOR);
                     boolean _arg32 = data.readBoolean();
                     boolean _arg42 = data.readBoolean();
-                    IGetDownloadableSubscriptionMetadataCallback _arg52 = IGetDownloadableSubscriptionMetadataCallback.Stub.asInterface(data.readStrongBinder());
+                    IGetDownloadableSubscriptionMetadataCallback _arg52 =
+                            IGetDownloadableSubscriptionMetadataCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
-                    getDownloadableSubscriptionMetadata(_arg02, _arg12, _arg22, _arg32, _arg42, _arg52);
+                    getDownloadableSubscriptionMetadata(
+                            _arg02, _arg12, _arg22, _arg32, _arg42, _arg52);
                     return true;
                 case 3:
                     int _arg03 = data.readInt();
-                    IGetEidCallback _arg13 = IGetEidCallback.Stub.asInterface(data.readStrongBinder());
+                    IGetEidCallback _arg13 =
+                            IGetEidCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getEid(_arg03, _arg13);
                     return true;
                 case 4:
                     int _arg04 = data.readInt();
-                    IGetOtaStatusCallback _arg14 = IGetOtaStatusCallback.Stub.asInterface(data.readStrongBinder());
+                    IGetOtaStatusCallback _arg14 =
+                            IGetOtaStatusCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getOtaStatus(_arg04, _arg14);
                     return true;
                 case 5:
                     int _arg05 = data.readInt();
-                    IOtaStatusChangedCallback _arg15 = IOtaStatusChangedCallback.Stub.asInterface(data.readStrongBinder());
+                    IOtaStatusChangedCallback _arg15 =
+                            IOtaStatusChangedCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     startOtaIfNecessary(_arg05, _arg15);
                     return true;
                 case 6:
                     int _arg06 = data.readInt();
-                    IGetEuiccProfileInfoListCallback _arg16 = IGetEuiccProfileInfoListCallback.Stub.asInterface(data.readStrongBinder());
+                    IGetEuiccProfileInfoListCallback _arg16 =
+                            IGetEuiccProfileInfoListCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getEuiccProfileInfoList(_arg06, _arg16);
                     return true;
                 case 7:
                     int _arg07 = data.readInt();
                     boolean _arg17 = data.readBoolean();
-                    IGetDefaultDownloadableSubscriptionListCallback _arg23 = IGetDefaultDownloadableSubscriptionListCallback.Stub.asInterface(data.readStrongBinder());
+                    IGetDefaultDownloadableSubscriptionListCallback _arg23 =
+                            IGetDefaultDownloadableSubscriptionListCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getDefaultDownloadableSubscriptionList(_arg07, _arg17, _arg23);
                     return true;
                 case 8:
                     int _arg08 = data.readInt();
-                    IGetEuiccInfoCallback _arg18 = IGetEuiccInfoCallback.Stub.asInterface(data.readStrongBinder());
+                    IGetEuiccInfoCallback _arg18 =
+                            IGetEuiccInfoCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getEuiccInfo(_arg08, _arg18);
                     return true;
                 case 9:
                     int _arg09 = data.readInt();
                     String _arg19 = data.readString();
-                    IDeleteSubscriptionCallback _arg24 = IDeleteSubscriptionCallback.Stub.asInterface(data.readStrongBinder());
+                    IDeleteSubscriptionCallback _arg24 =
+                            IDeleteSubscriptionCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     deleteSubscription(_arg09, _arg19, _arg24);
                     return true;
@@ -291,7 +368,8 @@ public interface IEuiccService extends IInterface {
                     int _arg110 = data.readInt();
                     String _arg25 = data.readString();
                     boolean _arg33 = data.readBoolean();
-                    ISwitchToSubscriptionCallback _arg43 = ISwitchToSubscriptionCallback.Stub.asInterface(data.readStrongBinder());
+                    ISwitchToSubscriptionCallback _arg43 =
+                            ISwitchToSubscriptionCallback.Stub.asInterface(data.readStrongBinder());
                     boolean _arg53 = data.readBoolean();
                     data.enforceNoDataAvail();
                     switchToSubscription(_arg010, _arg110, _arg25, _arg33, _arg43, _arg53);
@@ -300,37 +378,47 @@ public interface IEuiccService extends IInterface {
                     int _arg011 = data.readInt();
                     String _arg111 = data.readString();
                     String _arg26 = data.readString();
-                    IUpdateSubscriptionNicknameCallback _arg34 = IUpdateSubscriptionNicknameCallback.Stub.asInterface(data.readStrongBinder());
+                    IUpdateSubscriptionNicknameCallback _arg34 =
+                            IUpdateSubscriptionNicknameCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     updateSubscriptionNickname(_arg011, _arg111, _arg26, _arg34);
                     return true;
                 case 12:
                     int _arg012 = data.readInt();
-                    IEraseSubscriptionsCallback _arg112 = IEraseSubscriptionsCallback.Stub.asInterface(data.readStrongBinder());
+                    IEraseSubscriptionsCallback _arg112 =
+                            IEraseSubscriptionsCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     eraseSubscriptions(_arg012, _arg112);
                     return true;
                 case 13:
                     int _arg013 = data.readInt();
                     int _arg113 = data.readInt();
-                    IEraseSubscriptionsCallback _arg27 = IEraseSubscriptionsCallback.Stub.asInterface(data.readStrongBinder());
+                    IEraseSubscriptionsCallback _arg27 =
+                            IEraseSubscriptionsCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     eraseSubscriptionsWithOptions(_arg013, _arg113, _arg27);
                     return true;
                 case 14:
                     int _arg014 = data.readInt();
-                    IRetainSubscriptionsForFactoryResetCallback _arg114 = IRetainSubscriptionsForFactoryResetCallback.Stub.asInterface(data.readStrongBinder());
+                    IRetainSubscriptionsForFactoryResetCallback _arg114 =
+                            IRetainSubscriptionsForFactoryResetCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     retainSubscriptionsForFactoryReset(_arg014, _arg114);
                     return true;
                 case 15:
-                    IEuiccServiceDumpResultCallback _arg015 = IEuiccServiceDumpResultCallback.Stub.asInterface(data.readStrongBinder());
+                    IEuiccServiceDumpResultCallback _arg015 =
+                            IEuiccServiceDumpResultCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     dump(_arg015);
                     return true;
                 case 16:
                     int _arg016 = data.readInt();
-                    IGetAvailableMemoryInBytesCallback _arg115 = IGetAvailableMemoryInBytesCallback.Stub.asInterface(data.readStrongBinder());
+                    IGetAvailableMemoryInBytesCallback _arg115 =
+                            IGetAvailableMemoryInBytesCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getAvailableMemoryInBytes(_arg016, _arg115);
                     return true;
@@ -356,7 +444,15 @@ public interface IEuiccService extends IInterface {
             }
 
             @Override // android.service.euicc.IEuiccService
-            public void downloadSubscription(int slotId, int portIndex, DownloadableSubscription subscription, boolean switchAfterDownload, boolean forceDeactivateSim, Bundle resolvedBundle, IDownloadSubscriptionCallback callback) throws RemoteException {
+            public void downloadSubscription(
+                    int slotId,
+                    int portIndex,
+                    DownloadableSubscription subscription,
+                    boolean switchAfterDownload,
+                    boolean forceDeactivateSim,
+                    Bundle resolvedBundle,
+                    IDownloadSubscriptionCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -374,7 +470,14 @@ public interface IEuiccService extends IInterface {
             }
 
             @Override // android.service.euicc.IEuiccService
-            public void getDownloadableSubscriptionMetadata(int slotId, int portIndex, DownloadableSubscription subscription, boolean switchAfterDownload, boolean forceDeactivateSim, IGetDownloadableSubscriptionMetadataCallback callback) throws RemoteException {
+            public void getDownloadableSubscriptionMetadata(
+                    int slotId,
+                    int portIndex,
+                    DownloadableSubscription subscription,
+                    boolean switchAfterDownload,
+                    boolean forceDeactivateSim,
+                    IGetDownloadableSubscriptionMetadataCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -404,7 +507,8 @@ public interface IEuiccService extends IInterface {
             }
 
             @Override // android.service.euicc.IEuiccService
-            public void getOtaStatus(int slotId, IGetOtaStatusCallback callback) throws RemoteException {
+            public void getOtaStatus(int slotId, IGetOtaStatusCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -417,7 +521,9 @@ public interface IEuiccService extends IInterface {
             }
 
             @Override // android.service.euicc.IEuiccService
-            public void startOtaIfNecessary(int slotId, IOtaStatusChangedCallback statusChangedCallback) throws RemoteException {
+            public void startOtaIfNecessary(
+                    int slotId, IOtaStatusChangedCallback statusChangedCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -430,7 +536,8 @@ public interface IEuiccService extends IInterface {
             }
 
             @Override // android.service.euicc.IEuiccService
-            public void getEuiccProfileInfoList(int slotId, IGetEuiccProfileInfoListCallback callback) throws RemoteException {
+            public void getEuiccProfileInfoList(
+                    int slotId, IGetEuiccProfileInfoListCallback callback) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -443,7 +550,11 @@ public interface IEuiccService extends IInterface {
             }
 
             @Override // android.service.euicc.IEuiccService
-            public void getDefaultDownloadableSubscriptionList(int slotId, boolean forceDeactivateSim, IGetDefaultDownloadableSubscriptionListCallback callback) throws RemoteException {
+            public void getDefaultDownloadableSubscriptionList(
+                    int slotId,
+                    boolean forceDeactivateSim,
+                    IGetDefaultDownloadableSubscriptionListCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -457,7 +568,8 @@ public interface IEuiccService extends IInterface {
             }
 
             @Override // android.service.euicc.IEuiccService
-            public void getEuiccInfo(int slotId, IGetEuiccInfoCallback callback) throws RemoteException {
+            public void getEuiccInfo(int slotId, IGetEuiccInfoCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -470,7 +582,9 @@ public interface IEuiccService extends IInterface {
             }
 
             @Override // android.service.euicc.IEuiccService
-            public void deleteSubscription(int slotId, String iccid, IDeleteSubscriptionCallback callback) throws RemoteException {
+            public void deleteSubscription(
+                    int slotId, String iccid, IDeleteSubscriptionCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -484,7 +598,14 @@ public interface IEuiccService extends IInterface {
             }
 
             @Override // android.service.euicc.IEuiccService
-            public void switchToSubscription(int slotId, int portIndex, String iccid, boolean forceDeactivateSim, ISwitchToSubscriptionCallback callback, boolean useLegacyApi) throws RemoteException {
+            public void switchToSubscription(
+                    int slotId,
+                    int portIndex,
+                    String iccid,
+                    boolean forceDeactivateSim,
+                    ISwitchToSubscriptionCallback callback,
+                    boolean useLegacyApi)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -501,7 +622,12 @@ public interface IEuiccService extends IInterface {
             }
 
             @Override // android.service.euicc.IEuiccService
-            public void updateSubscriptionNickname(int slotId, String iccid, String nickname, IUpdateSubscriptionNicknameCallback callback) throws RemoteException {
+            public void updateSubscriptionNickname(
+                    int slotId,
+                    String iccid,
+                    String nickname,
+                    IUpdateSubscriptionNicknameCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -516,7 +642,8 @@ public interface IEuiccService extends IInterface {
             }
 
             @Override // android.service.euicc.IEuiccService
-            public void eraseSubscriptions(int slotId, IEraseSubscriptionsCallback callback) throws RemoteException {
+            public void eraseSubscriptions(int slotId, IEraseSubscriptionsCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -529,7 +656,9 @@ public interface IEuiccService extends IInterface {
             }
 
             @Override // android.service.euicc.IEuiccService
-            public void eraseSubscriptionsWithOptions(int slotIndex, int options, IEraseSubscriptionsCallback callback) throws RemoteException {
+            public void eraseSubscriptionsWithOptions(
+                    int slotIndex, int options, IEraseSubscriptionsCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -543,7 +672,9 @@ public interface IEuiccService extends IInterface {
             }
 
             @Override // android.service.euicc.IEuiccService
-            public void retainSubscriptionsForFactoryReset(int slotId, IRetainSubscriptionsForFactoryResetCallback callback) throws RemoteException {
+            public void retainSubscriptionsForFactoryReset(
+                    int slotId, IRetainSubscriptionsForFactoryResetCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -568,7 +699,9 @@ public interface IEuiccService extends IInterface {
             }
 
             @Override // android.service.euicc.IEuiccService
-            public void getAvailableMemoryInBytes(int slotId, IGetAvailableMemoryInBytesCallback callback) throws RemoteException {
+            public void getAvailableMemoryInBytes(
+                    int slotId, IGetAvailableMemoryInBytesCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

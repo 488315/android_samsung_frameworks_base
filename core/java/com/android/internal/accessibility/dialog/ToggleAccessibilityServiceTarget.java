@@ -2,10 +2,11 @@ package com.android.internal.accessibility.dialog;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Context;
+
 import com.android.internal.R;
-import com.android.internal.accessibility.dialog.TargetAdapter;
 import com.android.internal.accessibility.util.AccessibilityUtils;
 import com.android.internal.accessibility.util.ShortcutUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -19,7 +20,8 @@ class ToggleAccessibilityServiceTarget extends AccessibilityServiceTarget {
         public static final float OPAQUE = 1.0f;
     }
 
-    ToggleAccessibilityServiceTarget(Context context, int shortcutType, AccessibilityServiceInfo serviceInfo) {
+    ToggleAccessibilityServiceTarget(
+            Context context, int shortcutType, AccessibilityServiceInfo serviceInfo) {
         super(context, shortcutType, 2, serviceInfo);
         int statusResId;
         if (AccessibilityUtils.isAccessibilityServiceEnabled(getContext(), getId())) {
@@ -31,10 +33,14 @@ class ToggleAccessibilityServiceTarget extends AccessibilityServiceTarget {
         this.mContext = context;
     }
 
-    @Override // com.android.internal.accessibility.dialog.AccessibilityServiceTarget, com.android.internal.accessibility.dialog.AccessibilityTarget, com.android.internal.accessibility.dialog.TargetOperations
+    @Override // com.android.internal.accessibility.dialog.AccessibilityServiceTarget,
+              // com.android.internal.accessibility.dialog.AccessibilityTarget,
+              // com.android.internal.accessibility.dialog.TargetOperations
     public void updateActionItem(TargetAdapter.ViewHolder holder, int shortcutMenuMode) {
         super.updateActionItem(holder, shortcutMenuMode);
-        boolean isAllowed = AccessibilityTargetHelper.isAccessibilityTargetAllowed(getContext(), getComponentName().getPackageName(), getUid());
+        boolean isAllowed =
+                AccessibilityTargetHelper.isAccessibilityTargetAllowed(
+                        getContext(), getComponentName().getPackageName(), getUid());
         boolean isEditMenuMode = shortcutMenuMode == 1;
         holder.mStatusView.setVisibility(isEditMenuMode ? 8 : 0);
         holder.mStatusView.lambda$setTextAsync$0(getStateDescription());
@@ -46,7 +52,8 @@ class ToggleAccessibilityServiceTarget extends AccessibilityServiceTarget {
         }
     }
 
-    @Override // com.android.internal.accessibility.dialog.AccessibilityTarget, com.android.internal.accessibility.dialog.OnTargetSelectedListener
+    @Override // com.android.internal.accessibility.dialog.AccessibilityTarget,
+              // com.android.internal.accessibility.dialog.OnTargetSelectedListener
     public void onSelected() {
         int statusResId;
         if (AccessibilityUtils.isAccessibilityServiceEnabled(getContext(), getId())) {

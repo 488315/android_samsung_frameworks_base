@@ -25,7 +25,9 @@ import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.NtpTrustedTime;
+
 import com.android.graphics.flags.Flags;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -62,23 +64,23 @@ public final class Icon implements Parcelable {
     private final int mType;
     private boolean mUseMonochrome;
     static final BlendMode DEFAULT_BLEND_MODE = Drawable.DEFAULT_BLEND_MODE;
-    public static final Parcelable.Creator<Icon> CREATOR = new Parcelable.Creator<Icon>() { // from class: android.graphics.drawable.Icon.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Icon createFromParcel(Parcel in) {
-            return new Icon(in);
-        }
+    public static final Parcelable.Creator<Icon> CREATOR =
+            new Parcelable.Creator<Icon>() { // from class: android.graphics.drawable.Icon.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Icon createFromParcel(Parcel in) {
+                    return new Icon(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Icon[] newArray(int size) {
-            return new Icon[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Icon[] newArray(int size) {
+                    return new Icon[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface IconType {
-    }
+    public @interface IconType {}
 
     public interface OnDrawableLoadedListener {
         void onDrawableLoaded(Drawable drawable);
@@ -195,7 +197,8 @@ public final class Icon implements Parcelable {
         new LoadDrawableTask(context, andThen).runAsync();
     }
 
-    public void loadDrawableAsync(Context context, OnDrawableLoadedListener listener, Handler handler) {
+    public void loadDrawableAsync(
+            Context context, OnDrawableLoadedListener listener, Handler handler) {
         new LoadDrawableTask(context, handler, listener).runAsync();
     }
 
@@ -214,7 +217,9 @@ public final class Icon implements Parcelable {
 
     private static Drawable crateMonochromeDrawable(Drawable drawable, float inset) {
         Drawable monochromeDrawable;
-        if ((drawable instanceof AdaptiveIconDrawable) && (monochromeDrawable = ((AdaptiveIconDrawable) drawable).getMonochrome()) != null) {
+        if ((drawable instanceof AdaptiveIconDrawable)
+                && (monochromeDrawable = ((AdaptiveIconDrawable) drawable).getMonochrome())
+                        != null) {
             return new InsetDrawable(monochromeDrawable, inset);
         }
         return drawable;
@@ -261,18 +266,33 @@ public final class Icon implements Parcelable {
                                 this.mObj1 = pm.getResourcesForApplication(ai);
                             }
                         } catch (PackageManager.NameNotFoundException e) {
-                            Log.e(TAG, String.format("Unable to find pkg=%s for icon %s", resPackage, this), e);
+                            Log.e(
+                                    TAG,
+                                    String.format(
+                                            "Unable to find pkg=%s for icon %s", resPackage, this),
+                                    e);
                         }
                         return null;
                     }
                 }
                 try {
-                    return fixMaxBitmapSize(getResources(), getResources().getDrawable(getResId(), context.getTheme()));
+                    return fixMaxBitmapSize(
+                            getResources(),
+                            getResources().getDrawable(getResId(), context.getTheme()));
                 } catch (RuntimeException e2) {
-                    Log.e(TAG, String.format("Unable to load resource 0x%08x from pkg=%s", Integer.valueOf(getResId()), getResPackage()), e2);
+                    Log.e(
+                            TAG,
+                            String.format(
+                                    "Unable to load resource 0x%08x from pkg=%s",
+                                    Integer.valueOf(getResId()), getResPackage()),
+                            e2);
                 }
             case 3:
-                return new BitmapDrawable(context.getResources(), fixMaxBitmapSize(BitmapFactory.decodeByteArray(getDataBytes(), getDataOffset(), getDataLength())));
+                return new BitmapDrawable(
+                        context.getResources(),
+                        fixMaxBitmapSize(
+                                BitmapFactory.decodeByteArray(
+                                        getDataBytes(), getDataOffset(), getDataLength())));
             case 4:
                 InputStream is = getUriInputStream(context);
                 if (is != null) {
@@ -287,7 +307,9 @@ public final class Icon implements Parcelable {
                 }
                 return null;
             case 5:
-                return new AdaptiveIconDrawable((Drawable) null, new BitmapDrawable(context.getResources(), fixMaxBitmapSize(getBitmap())));
+                return new AdaptiveIconDrawable(
+                        (Drawable) null,
+                        new BitmapDrawable(context.getResources(), fixMaxBitmapSize(getBitmap())));
             case 6:
                 InputStream is2 = getUriInputStream(context);
                 if (is2 != null) {
@@ -298,7 +320,9 @@ public final class Icon implements Parcelable {
                             return null;
                         }
                     }
-                    return new AdaptiveIconDrawable((Drawable) null, new BitmapDrawable(context.getResources(), fixMaxBitmapSize(bitmap2)));
+                    return new AdaptiveIconDrawable(
+                            (Drawable) null,
+                            new BitmapDrawable(context.getResources(), fixMaxBitmapSize(bitmap2)));
                 }
                 return null;
             default:
@@ -336,22 +360,44 @@ public final class Icon implements Parcelable {
                 if (context.getUserId() == i) {
                     createContextAsUser = context;
                 } else {
-                    createContextAsUser = context.createContextAsUser(UserHandle.of(i), (UserHandle.isSameApp(context.getApplicationInfo().uid, Process.myUid()) ? 1 : 0) | 4);
+                    createContextAsUser =
+                            context.createContextAsUser(
+                                    UserHandle.of(i),
+                                    (UserHandle.isSameApp(
+                                                            context.getApplicationInfo().uid,
+                                                            Process.myUid())
+                                                    ? 1
+                                                    : 0)
+                                            | 4);
                 }
                 try {
-                    this.mObj1 = createContextAsUser.getPackageManager().getResourcesForApplication(resPackage);
+                    this.mObj1 =
+                            createContextAsUser
+                                    .getPackageManager()
+                                    .getResourcesForApplication(resPackage);
                 } catch (PackageManager.NameNotFoundException e) {
-                    Log.e(TAG, String.format("Unable to find pkg=%s user=%d", getResPackage(), Integer.valueOf(i)), e);
+                    Log.e(
+                            TAG,
+                            String.format(
+                                    "Unable to find pkg=%s user=%d",
+                                    getResPackage(), Integer.valueOf(i)),
+                            e);
                 }
             }
         }
         return loadDrawable(context);
     }
 
-    public Drawable loadDrawableCheckingUriGrant(Context context, IUriGrantsManager iugm, int callingUid, String packageName) {
+    public Drawable loadDrawableCheckingUriGrant(
+            Context context, IUriGrantsManager iugm, int callingUid, String packageName) {
         if (getType() == 4 || getType() == 6) {
             try {
-                iugm.checkGrantUriPermission_ignoreNonSystem(callingUid, packageName, ContentProvider.getUriWithoutUserId(getUri()), 1, ContentProvider.getUserIdFromUri(getUri()));
+                iugm.checkGrantUriPermission_ignoreNonSystem(
+                        callingUid,
+                        packageName,
+                        ContentProvider.getUriWithoutUserId(getUri()),
+                        1,
+                        ContentProvider.getUserIdFromUri(getUri()));
             } catch (RemoteException | SecurityException e) {
                 Log.e(TAG, "Failed to get URI permission for: " + getUri(), e);
                 return null;
@@ -361,7 +407,9 @@ public final class Icon implements Parcelable {
     }
 
     public void convertToAshmem() {
-        if ((this.mType == 1 || this.mType == 5) && getBitmap().isMutable() && getBitmap().getAllocationByteCount() >= 131072) {
+        if ((this.mType == 1 || this.mType == 5)
+                && getBitmap().isMutable()
+                && getBitmap().getAllocationByteCount() >= 131072) {
             setBitmap(getBitmap().asShared());
         }
         this.mCachedAshmem = true;
@@ -443,9 +491,14 @@ public final class Icon implements Parcelable {
             case 5:
                 return getBitmap() == otherIcon.getBitmap();
             case 2:
-                return getResId() == otherIcon.getResId() && Objects.equals(getResPackage(), otherIcon.getResPackage()) && this.mUseMonochrome == otherIcon.mUseMonochrome && this.mInsetScale == otherIcon.mInsetScale;
+                return getResId() == otherIcon.getResId()
+                        && Objects.equals(getResPackage(), otherIcon.getResPackage())
+                        && this.mUseMonochrome == otherIcon.mUseMonochrome
+                        && this.mInsetScale == otherIcon.mInsetScale;
             case 3:
-                return getDataLength() == otherIcon.getDataLength() && getDataOffset() == otherIcon.getDataOffset() && Arrays.equals(getDataBytes(), otherIcon.getDataBytes());
+                return getDataLength() == otherIcon.getDataLength()
+                        && getDataOffset() == otherIcon.getDataOffset()
+                        && Arrays.equals(getDataBytes(), otherIcon.getDataBytes());
             case 4:
             case 6:
                 return Objects.equals(getUriString(), otherIcon.getUriString());
@@ -484,7 +537,8 @@ public final class Icon implements Parcelable {
         return rep;
     }
 
-    public static Icon createWithResourceAdaptiveDrawable(String resPackage, int resId, boolean useMonochrome, float inset) {
+    public static Icon createWithResourceAdaptiveDrawable(
+            String resPackage, int resId, boolean useMonochrome, float inset) {
         if (resPackage == null) {
             throw new IllegalArgumentException("Resource package name must not be null.");
         }
@@ -602,10 +656,16 @@ public final class Icon implements Parcelable {
         switch (this.mType) {
             case 1:
             case 5:
-                sb.append(" size=").append(getBitmap().getWidth()).append("x").append(getBitmap().getHeight());
+                sb.append(" size=")
+                        .append(getBitmap().getWidth())
+                        .append("x")
+                        .append(getBitmap().getHeight());
                 break;
             case 2:
-                sb.append(" pkg=").append(getResPackage()).append(" id=").append(String.format("0x%08x", Integer.valueOf(getResId())));
+                sb.append(" pkg=")
+                        .append(getResPackage())
+                        .append(" id=")
+                        .append(String.format("0x%08x", Integer.valueOf(getResId())));
                 break;
             case 3:
                 sb.append(" len=").append(getDataLength());
@@ -659,7 +719,12 @@ public final class Icon implements Parcelable {
                 int len = in.readInt();
                 byte[] a = in.readBlob();
                 if (len != a.length) {
-                    throw new RuntimeException("internal unparceling error: blob length (" + a.length + ") != expected length (" + len + NavigationBarInflaterView.KEY_CODE_END);
+                    throw new RuntimeException(
+                            "internal unparceling error: blob length ("
+                                    + a.length
+                                    + ") != expected length ("
+                                    + len
+                                    + NavigationBarInflaterView.KEY_CODE_END);
                 }
                 this.mInt1 = len;
                 this.mObj1 = a;
@@ -670,7 +735,8 @@ public final class Icon implements Parcelable {
                 this.mString1 = uri;
                 break;
             default:
-                throw new RuntimeException("invalid " + getClass().getSimpleName() + " type in parcel: " + this.mType);
+                throw new RuntimeException(
+                        "invalid " + getClass().getSimpleName() + " type in parcel: " + this.mType);
         }
         if (in.readInt() == 1) {
             this.mTintList = ColorStateList.CREATOR.createFromParcel(in);
@@ -719,7 +785,11 @@ public final class Icon implements Parcelable {
         int bitmapHeight = bitmap.getHeight();
         if (bitmapWidth > maxWidth || bitmapHeight > maxHeight) {
             float scale = Math.min(maxWidth / bitmapWidth, maxHeight / bitmapHeight);
-            return Bitmap.createScaledBitmap(bitmap, Math.max(1, (int) (bitmapWidth * scale)), Math.max(1, (int) (bitmapHeight * scale)), true);
+            return Bitmap.createScaledBitmap(
+                    bitmap,
+                    Math.max(1, (int) (bitmapWidth * scale)),
+                    Math.max(1, (int) (bitmapHeight * scale)),
+                    true);
         }
         return bitmap;
     }
@@ -736,14 +806,20 @@ public final class Icon implements Parcelable {
         final Context mContext;
         final Message mMessage;
 
-        public LoadDrawableTask(Context context, Handler handler, final OnDrawableLoadedListener listener) {
+        public LoadDrawableTask(
+                Context context, Handler handler, final OnDrawableLoadedListener listener) {
             this.mContext = context;
-            this.mMessage = Message.obtain(handler, new Runnable() { // from class: android.graphics.drawable.Icon.LoadDrawableTask.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    listener.onDrawableLoaded((Drawable) LoadDrawableTask.this.mMessage.obj);
-                }
-            });
+            this.mMessage =
+                    Message.obtain(
+                            handler,
+                            new Runnable() { // from class:
+                                // android.graphics.drawable.Icon.LoadDrawableTask.1
+                                @Override // java.lang.Runnable
+                                public void run() {
+                                    listener.onDrawableLoaded(
+                                            (Drawable) LoadDrawableTask.this.mMessage.obj);
+                                }
+                            });
         }
 
         public LoadDrawableTask(Context context, Message message) {

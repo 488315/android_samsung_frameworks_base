@@ -2,7 +2,6 @@ package android.app.usage;
 
 import android.annotation.SystemApi;
 import android.app.Service;
-import android.app.usage.ICacheQuotaService;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +11,7 @@ import android.os.Message;
 import android.os.RemoteCallback;
 import android.util.Log;
 import android.util.Pair;
+
 import java.util.List;
 
 @SystemApi
@@ -38,8 +38,7 @@ public abstract class CacheQuotaService extends Service {
     }
 
     private final class CacheQuotaServiceWrapper extends ICacheQuotaService.Stub {
-        private CacheQuotaServiceWrapper() {
-        }
+        private CacheQuotaServiceWrapper() {}
 
         @Override // android.app.usage.ICacheQuotaService
         public void computeCacheQuotaHints(RemoteCallback callback, List<CacheQuotaHint> requests) {
@@ -62,7 +61,8 @@ public abstract class CacheQuotaService extends Service {
             switch (action) {
                 case 1:
                     Pair<RemoteCallback, List<CacheQuotaHint>> pair = (Pair) msg.obj;
-                    List<CacheQuotaHint> processed = CacheQuotaService.this.onComputeCacheQuotaHints(pair.second);
+                    List<CacheQuotaHint> processed =
+                            CacheQuotaService.this.onComputeCacheQuotaHints(pair.second);
                     Bundle data = new Bundle();
                     data.putParcelableList(CacheQuotaService.REQUEST_LIST_KEY, processed);
                     RemoteCallback callback = pair.first;

@@ -14,8 +14,7 @@ public interface IEuiccServiceDumpResultCallback extends IInterface {
 
     public static class Default implements IEuiccServiceDumpResultCallback {
         @Override // android.service.euicc.IEuiccServiceDumpResultCallback
-        public void onComplete(String logs) throws RemoteException {
-        }
+        public void onComplete(String logs) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IEuiccServiceDumpResultCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IEuiccServiceDumpResultCallback {
+    public abstract static class Stub extends Binder implements IEuiccServiceDumpResultCallback {
         static final int TRANSACTION_onComplete = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IEuiccServiceDumpResultCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IEuiccServiceDumpResultCallback.DESCRIPTOR);
             }

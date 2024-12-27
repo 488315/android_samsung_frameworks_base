@@ -2,24 +2,27 @@ package android.os;
 
 import android.app.slice.SliceItem;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.os.Parcelable;
 import android.util.ArrayMap;
 import android.util.Slog;
 import android.util.Xml;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.util.XmlUtils;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
+
 /* loaded from: classes3.dex */
-public final class PersistableBundle extends BaseBundle implements Cloneable, Parcelable, XmlUtils.WriteMapCallback {
+public final class PersistableBundle extends BaseBundle
+        implements Cloneable, Parcelable, XmlUtils.WriteMapCallback {
     public static final Parcelable.Creator<PersistableBundle> CREATOR;
     public static final PersistableBundle EMPTY = new PersistableBundle();
     private static final String TAG = "PersistableBundle";
@@ -27,23 +30,36 @@ public final class PersistableBundle extends BaseBundle implements Cloneable, Pa
 
     static {
         EMPTY.mMap = ArrayMap.EMPTY;
-        CREATOR = new Parcelable.Creator<PersistableBundle>() { // from class: android.os.PersistableBundle.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public PersistableBundle createFromParcel(Parcel in) {
-                return in.readPersistableBundle();
-            }
+        CREATOR =
+                new Parcelable.Creator<
+                        PersistableBundle>() { // from class: android.os.PersistableBundle.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public PersistableBundle createFromParcel(Parcel in) {
+                        return in.readPersistableBundle();
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public PersistableBundle[] newArray(int size) {
-                return new PersistableBundle[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public PersistableBundle[] newArray(int size) {
+                        return new PersistableBundle[size];
+                    }
+                };
     }
 
     public static boolean isValidType(Object value) {
-        return (value instanceof Integer) || (value instanceof Long) || (value instanceof Double) || (value instanceof String) || (value instanceof int[]) || (value instanceof long[]) || (value instanceof double[]) || (value instanceof String[]) || (value instanceof PersistableBundle) || value == null || (value instanceof Boolean) || (value instanceof boolean[]);
+        return (value instanceof Integer)
+                || (value instanceof Long)
+                || (value instanceof Double)
+                || (value instanceof String)
+                || (value instanceof int[])
+                || (value instanceof long[])
+                || (value instanceof double[])
+                || (value instanceof String[])
+                || (value instanceof PersistableBundle)
+                || value == null
+                || (value instanceof Boolean)
+                || (value instanceof boolean[]);
     }
 
     public PersistableBundle() {
@@ -75,13 +91,18 @@ public final class PersistableBundle extends BaseBundle implements Cloneable, Pa
         for (int i = N - 1; i >= 0; i--) {
             Object value = this.mMap.valueAt(i);
             if (value instanceof ArrayMap) {
-                this.mMap.setValueAt(i, new PersistableBundle((ArrayMap<String, Object>) value, throwException));
+                this.mMap.setValueAt(
+                        i, new PersistableBundle((ArrayMap<String, Object>) value, throwException));
             } else if (value instanceof Bundle) {
                 this.mMap.setValueAt(i, new PersistableBundle((Bundle) value, throwException));
             } else if (isValidType(value)) {
                 continue;
             } else {
-                String errorMsg = "Bad value in PersistableBundle key=" + this.mMap.keyAt(i) + " value=" + value;
+                String errorMsg =
+                        "Bad value in PersistableBundle key="
+                                + this.mMap.keyAt(i)
+                                + " value="
+                                + value;
                 if (throwException) {
                     throw new IllegalArgumentException(errorMsg);
                 }
@@ -134,7 +155,8 @@ public final class PersistableBundle extends BaseBundle implements Cloneable, Pa
     }
 
     @Override // com.android.internal.util.XmlUtils.WriteMapCallback
-    public void writeUnknownObject(Object v, String name, TypedXmlSerializer out) throws XmlPullParserException, IOException {
+    public void writeUnknownObject(Object v, String name, TypedXmlSerializer out)
+            throws XmlPullParserException, IOException {
         if (v instanceof PersistableBundle) {
             out.startTag(null, TAG_PERSISTABLEMAP);
             out.attribute(null, "name", name);
@@ -154,7 +176,9 @@ public final class PersistableBundle extends BaseBundle implements Cloneable, Pa
         for (int i = this.mMap.size() - 1; i >= 0; i--) {
             Object value = this.mMap.valueAt(i);
             if (!isValidType(value)) {
-                Slog.e(TAG, "Dropping bad data before persisting: " + this.mMap.keyAt(i) + "=" + value);
+                Slog.e(
+                        TAG,
+                        "Dropping bad data before persisting: " + this.mMap.keyAt(i) + "=" + value);
                 this.mMap.removeAt(i);
             }
         }
@@ -181,7 +205,8 @@ public final class PersistableBundle extends BaseBundle implements Cloneable, Pa
                         return false;
                     }
                 }
-            } else if ((value instanceof PersistableBundle) && !((PersistableBundle) value).isBundleContentsWithinLengthLimit(limit)) {
+            } else if ((value instanceof PersistableBundle)
+                    && !((PersistableBundle) value).isBundleContentsWithinLengthLimit(limit)) {
                 return false;
             }
         }
@@ -189,11 +214,11 @@ public final class PersistableBundle extends BaseBundle implements Cloneable, Pa
     }
 
     static class MyReadMapCallback implements XmlUtils.ReadMapCallback {
-        MyReadMapCallback() {
-        }
+        MyReadMapCallback() {}
 
         @Override // com.android.internal.util.XmlUtils.ReadMapCallback
-        public Object readThisUnknownObjectXml(TypedXmlPullParser in, String tag) throws XmlPullParserException, IOException {
+        public Object readThisUnknownObjectXml(TypedXmlPullParser in, String tag)
+                throws XmlPullParserException, IOException {
             if (PersistableBundle.TAG_PERSISTABLEMAP.equals(tag)) {
                 return PersistableBundle.restoreFromXml(in);
             }
@@ -216,11 +241,13 @@ public final class PersistableBundle extends BaseBundle implements Cloneable, Pa
         }
     }
 
-    public static PersistableBundle restoreFromXml(XmlPullParser in) throws IOException, XmlPullParserException {
+    public static PersistableBundle restoreFromXml(XmlPullParser in)
+            throws IOException, XmlPullParserException {
         return restoreFromXml(XmlUtils.makeTyped(in));
     }
 
-    public static PersistableBundle restoreFromXml(TypedXmlPullParser in) throws IOException, XmlPullParserException {
+    public static PersistableBundle restoreFromXml(TypedXmlPullParser in)
+            throws IOException, XmlPullParserException {
         int event;
         int outerDepth = in.getDepth();
         String startTag = in.getName();
@@ -231,7 +258,11 @@ public final class PersistableBundle extends BaseBundle implements Cloneable, Pa
                 return new PersistableBundle();
             }
         } while (event != 2);
-        return new PersistableBundle((ArrayMap<String, Object>) XmlUtils.readThisArrayMapXml(in, startTag, tagName, new MyReadMapCallback()), false);
+        return new PersistableBundle(
+                (ArrayMap<String, Object>)
+                        XmlUtils.readThisArrayMapXml(
+                                in, startTag, tagName, new MyReadMapCallback()),
+                false);
     }
 
     public synchronized String toString() {
@@ -239,7 +270,9 @@ public final class PersistableBundle extends BaseBundle implements Cloneable, Pa
             if (isEmptyParcel()) {
                 return "PersistableBundle[EMPTY_PARCEL]";
             }
-            return "PersistableBundle[mParcelledData.dataSize=" + this.mParcelledData.dataSize() + NavigationBarInflaterView.SIZE_MOD_END;
+            return "PersistableBundle[mParcelledData.dataSize="
+                    + this.mParcelledData.dataSize()
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
         return "PersistableBundle[" + this.mMap.toString() + NavigationBarInflaterView.SIZE_MOD_END;
     }

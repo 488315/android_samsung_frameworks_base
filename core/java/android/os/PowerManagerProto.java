@@ -14,7 +14,6 @@ public final class PowerManagerProto {
         public static final long TAG = 1138166333441L;
         public static final long WORK_SOURCE = 1146756268037L;
 
-        public WakeLock() {
-        }
+        public WakeLock() {}
     }
 }

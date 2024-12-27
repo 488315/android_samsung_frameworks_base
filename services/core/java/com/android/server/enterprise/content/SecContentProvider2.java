@@ -11,6 +11,7 @@ import android.os.Binder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
+
 import com.android.server.enterprise.EnterpriseService;
 import com.android.server.enterprise.container.KnoxMUMContainerPolicy;
 import com.android.server.enterprise.email.EmailAccountPolicy;
@@ -21,8 +22,10 @@ import com.android.server.enterprise.multiuser.MultiUserManagerService;
 import com.android.server.enterprise.restriction.PhoneRestrictionPolicy;
 import com.android.server.enterprise.security.DeviceAccountPolicy;
 import com.android.server.enterprise.vpn.VpnInfoPolicy;
+
 import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
+
 import java.lang.reflect.Array;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -54,30 +57,43 @@ public class SecContentProvider2 extends ContentProvider {
     }
 
     public static MatrixCursor populateCursor(String str, boolean z) {
-        MatrixCursor matrixCursor = new MatrixCursor(new String[]{str});
-        matrixCursor.addRow(new Boolean[]{Boolean.valueOf(z)});
+        MatrixCursor matrixCursor = new MatrixCursor(new String[] {str});
+        matrixCursor.addRow(new Boolean[] {Boolean.valueOf(z)});
         return matrixCursor;
     }
 
     public static Cursor queryDeviceAccount(String str, String[] strArr) {
-        DeviceAccountPolicy deviceAccountPolicy = (DeviceAccountPolicy) EnterpriseService.getPolicyService("device_account_policy");
+        DeviceAccountPolicy deviceAccountPolicy =
+                (DeviceAccountPolicy) EnterpriseService.getPolicyService("device_account_policy");
         if (deviceAccountPolicy != null && str != null) {
             switch (str) {
                 case "isAccountRemovalAllowed":
                     if (strArr != null && Array.getLength(strArr) >= 3) {
-                        return populateCursor(str, deviceAccountPolicy.isAccountRemovalAllowed(strArr[0], strArr[1], Boolean.parseBoolean(strArr[2])));
+                        return populateCursor(
+                                str,
+                                deviceAccountPolicy.isAccountRemovalAllowed(
+                                        strArr[0], strArr[1], Boolean.parseBoolean(strArr[2])));
                     }
                     break;
                 case "isAccountRemovalAllowedAsUser":
                     if (strArr == null || Array.getLength(strArr) < 4) {
                         return null;
                     }
-                    return populateCursor(str, deviceAccountPolicy.isAccountRemovalAllowedAsUser(strArr[0], strArr[1], Boolean.parseBoolean(strArr[2]), Integer.parseInt(strArr[3])));
+                    return populateCursor(
+                            str,
+                            deviceAccountPolicy.isAccountRemovalAllowedAsUser(
+                                    strArr[0],
+                                    strArr[1],
+                                    Boolean.parseBoolean(strArr[2]),
+                                    Integer.parseInt(strArr[3])));
                 case "isAccountAdditionAllowed":
                     if (strArr == null || Array.getLength(strArr) < 3) {
                         return null;
                     }
-                    return populateCursor(str, deviceAccountPolicy.isAccountAdditionAllowed(strArr[0], strArr[1], Boolean.parseBoolean(strArr[2])));
+                    return populateCursor(
+                            str,
+                            deviceAccountPolicy.isAccountAdditionAllowed(
+                                    strArr[0], strArr[1], Boolean.parseBoolean(strArr[2])));
                 default:
                     return null;
             }
@@ -86,21 +102,28 @@ public class SecContentProvider2 extends ContentProvider {
     }
 
     public static Cursor queryEmailAccount(String str, int i, String[] strArr) {
-        EmailAccountPolicy emailAccountPolicy = (EmailAccountPolicy) EnterpriseService.getPolicyService("email_account_policy");
+        EmailAccountPolicy emailAccountPolicy =
+                (EmailAccountPolicy) EnterpriseService.getPolicyService("email_account_policy");
         if (emailAccountPolicy != null && str != null) {
             if (!str.equals("getSecurityOutgoingServerPassword")) {
-                if (!str.equals("getSecurityIncomingServerPassword") || strArr == null || Array.getLength(strArr) <= 0) {
+                if (!str.equals("getSecurityIncomingServerPassword")
+                        || strArr == null
+                        || Array.getLength(strArr) <= 0) {
                     return null;
                 }
-                String securityInComingServerPassword = emailAccountPolicy.getSecurityInComingServerPassword(new ContextInfo(i), Long.parseLong(strArr[0]));
-                MatrixCursor matrixCursor = new MatrixCursor(new String[]{str});
-                matrixCursor.addRow(new String[]{securityInComingServerPassword});
+                String securityInComingServerPassword =
+                        emailAccountPolicy.getSecurityInComingServerPassword(
+                                new ContextInfo(i), Long.parseLong(strArr[0]));
+                MatrixCursor matrixCursor = new MatrixCursor(new String[] {str});
+                matrixCursor.addRow(new String[] {securityInComingServerPassword});
                 return matrixCursor;
             }
             if (strArr != null && Array.getLength(strArr) > 0) {
-                String securityOutGoingServerPassword = emailAccountPolicy.getSecurityOutGoingServerPassword(new ContextInfo(i), Long.parseLong(strArr[0]));
-                MatrixCursor matrixCursor2 = new MatrixCursor(new String[]{str});
-                matrixCursor2.addRow(new String[]{securityOutGoingServerPassword});
+                String securityOutGoingServerPassword =
+                        emailAccountPolicy.getSecurityOutGoingServerPassword(
+                                new ContextInfo(i), Long.parseLong(strArr[0]));
+                MatrixCursor matrixCursor2 = new MatrixCursor(new String[] {str});
+                matrixCursor2.addRow(new String[] {securityOutGoingServerPassword});
                 return matrixCursor2;
             }
         }
@@ -108,7 +131,9 @@ public class SecContentProvider2 extends ContentProvider {
     }
 
     public static Cursor queryEnterpriseLicense(String str, String[] strArr) {
-        EnterpriseLicenseService enterpriseLicenseService = (EnterpriseLicenseService) EnterpriseService.getPolicyService("enterprise_license_policy");
+        EnterpriseLicenseService enterpriseLicenseService =
+                (EnterpriseLicenseService)
+                        EnterpriseService.getPolicyService("enterprise_license_policy");
         if (enterpriseLicenseService != null) {
             str.getClass();
             if (!str.equals("isServiceAvailable")) {
@@ -116,7 +141,8 @@ public class SecContentProvider2 extends ContentProvider {
                 return null;
             }
             if (strArr != null && Array.getLength(strArr) > 1) {
-                return populateCursor(str, enterpriseLicenseService.isServiceAvailable(strArr[0], strArr[1]));
+                return populateCursor(
+                        str, enterpriseLicenseService.isServiceAvailable(strArr[0], strArr[1]));
             }
         }
         return null;
@@ -134,20 +160,23 @@ public class SecContentProvider2 extends ContentProvider {
             return null;
         }
         String currentLockScreenString = miscPolicy.getCurrentLockScreenString(new ContextInfo(i));
-        MatrixCursor matrixCursor = new MatrixCursor(new String[]{str});
-        matrixCursor.addRow(new String[]{currentLockScreenString});
+        MatrixCursor matrixCursor = new MatrixCursor(new String[] {str});
+        matrixCursor.addRow(new String[] {currentLockScreenString});
         return matrixCursor;
     }
 
     public static Cursor queryMultiUser(int i, String str) {
-        MultiUserManagerService multiUserManagerService = (MultiUserManagerService) EnterpriseService.getPolicyService("multi_user_manager_service");
+        MultiUserManagerService multiUserManagerService =
+                (MultiUserManagerService)
+                        EnterpriseService.getPolicyService("multi_user_manager_service");
         if (multiUserManagerService != null) {
             str.getClass();
             if (!str.equals("multipleUsersSupported")) {
                 return null;
             }
             try {
-                return populateCursor(str, multiUserManagerService.multipleUsersSupported(new ContextInfo(i)));
+                return populateCursor(
+                        str, multiUserManagerService.multipleUsersSupported(new ContextInfo(i)));
             } catch (RemoteException unused) {
             }
         }
@@ -155,7 +184,8 @@ public class SecContentProvider2 extends ContentProvider {
     }
 
     public static Cursor queryMumContainer(int i, String str) {
-        KnoxMUMContainerPolicy knoxMUMContainerPolicy = (KnoxMUMContainerPolicy) ServiceManager.getService("mum_container_policy");
+        KnoxMUMContainerPolicy knoxMUMContainerPolicy =
+                (KnoxMUMContainerPolicy) ServiceManager.getService("mum_container_policy");
         if (knoxMUMContainerPolicy == null) {
             Log.e("SecContentProvider2", "container policy is null");
             return null;
@@ -171,16 +201,20 @@ public class SecContentProvider2 extends ContentProvider {
     public static Cursor queryPhoneRestriction(String str, int i, String[] strArr) {
         boolean z = true;
         boolean z2 = false;
-        PhoneRestrictionPolicy phoneRestrictionPolicy = (PhoneRestrictionPolicy) EnterpriseService.getPolicyService("phone_restriction_policy");
+        PhoneRestrictionPolicy phoneRestrictionPolicy =
+                (PhoneRestrictionPolicy)
+                        EnterpriseService.getPolicyService("phone_restriction_policy");
         if (phoneRestrictionPolicy == null) {
             return null;
         }
         str.getClass();
         switch (str) {
             case "isOutgoingMmsAllowed":
-                return populateCursor(str, phoneRestrictionPolicy.isOutgoingMmsAllowed(new ContextInfo(i)));
+                return populateCursor(
+                        str, phoneRestrictionPolicy.isOutgoingMmsAllowed(new ContextInfo(i)));
             case "getEmergencyCallOnly":
-                return populateCursor(str, phoneRestrictionPolicy.getEmergencyCallOnly(new ContextInfo(i), true));
+                return populateCursor(
+                        str, phoneRestrictionPolicy.getEmergencyCallOnly(new ContextInfo(i), true));
             case "isRCSEnabled":
                 int length = Array.getLength(strArr);
                 if (strArr == null || length < 3) {
@@ -190,22 +224,31 @@ public class SecContentProvider2 extends ContentProvider {
                 boolean parseBoolean = Boolean.parseBoolean(strArr[1]);
                 int parseInt2 = Integer.parseInt(strArr[2]);
                 new ContextInfo(i);
-                boolean isRCSEnabledInternal = phoneRestrictionPolicy.isRCSEnabledInternal(parseInt, "enableRCS", parseBoolean);
+                boolean isRCSEnabledInternal =
+                        phoneRestrictionPolicy.isRCSEnabledInternal(
+                                parseInt, "enableRCS", parseBoolean);
                 if (isRCSEnabledInternal) {
-                    isRCSEnabledInternal = phoneRestrictionPolicy.isRCSEnabledBySimSlot(new ContextInfo(i), parseInt, parseBoolean, parseInt2);
+                    isRCSEnabledInternal =
+                            phoneRestrictionPolicy.isRCSEnabledBySimSlot(
+                                    new ContextInfo(i), parseInt, parseBoolean, parseInt2);
                 }
                 return populateCursor(str, isRCSEnabledInternal);
             case "isIncomingMmsAllowed":
                 new ContextInfo(i);
-                return populateCursor(str, phoneRestrictionPolicy.getSmsMmsAllowed("allowIncomingMms"));
+                return populateCursor(
+                        str, phoneRestrictionPolicy.getSmsMmsAllowed("allowIncomingMms"));
             case "isCopyContactToSimAllowed":
-                boolean isCopyContactToSimAllowed = phoneRestrictionPolicy.isCopyContactToSimAllowed(new ContextInfo(i));
-                Log.d("SecContentProvider2", "isCopyContactToSimAllowed = " + isCopyContactToSimAllowed);
+                boolean isCopyContactToSimAllowed =
+                        phoneRestrictionPolicy.isCopyContactToSimAllowed(new ContextInfo(i));
+                Log.d(
+                        "SecContentProvider2",
+                        "isCopyContactToSimAllowed = " + isCopyContactToSimAllowed);
                 return populateCursor(str, isCopyContactToSimAllowed);
             case "getDisclaimerText":
-                String disclaimerText = phoneRestrictionPolicy.getDisclaimerText(new ContextInfo(i));
-                MatrixCursor matrixCursor = new MatrixCursor(new String[]{"getDisclaimerText"});
-                matrixCursor.addRow(new String[]{disclaimerText});
+                String disclaimerText =
+                        phoneRestrictionPolicy.getDisclaimerText(new ContextInfo(i));
+                MatrixCursor matrixCursor = new MatrixCursor(new String[] {"getDisclaimerText"});
+                matrixCursor.addRow(new String[] {disclaimerText});
                 return matrixCursor;
             case "isMmsAllowedFromSimSlot1":
                 try {
@@ -257,7 +300,8 @@ public class SecContentProvider2 extends ContentProvider {
 
     public static Cursor queryVPN(String str, int i, String[] strArr) {
         boolean z = false;
-        VpnInfoPolicy vpnInfoPolicy = (VpnInfoPolicy) EnterpriseService.getPolicyService("vpn_policy");
+        VpnInfoPolicy vpnInfoPolicy =
+                (VpnInfoPolicy) EnterpriseService.getPolicyService("vpn_policy");
         if (vpnInfoPolicy == null) {
             return null;
         }
@@ -267,17 +311,20 @@ public class SecContentProvider2 extends ContentProvider {
                 if (strArr != null && Array.getLength(strArr) > 0) {
                     z = Boolean.parseBoolean(strArr[0]);
                 }
-                return populateCursor(str, vpnInfoPolicy.isUserAddProfilesAllowed(new ContextInfo(i), z));
+                return populateCursor(
+                        str, vpnInfoPolicy.isUserAddProfilesAllowed(new ContextInfo(i), z));
             case "isUserSetAlwaysOnAllowed":
                 if (strArr != null && Array.getLength(strArr) > 0) {
                     z = Boolean.parseBoolean(strArr[0]);
                 }
-                return populateCursor(str, vpnInfoPolicy.isUserSetAlwaysOnAllowed(new ContextInfo(i), z));
+                return populateCursor(
+                        str, vpnInfoPolicy.isUserSetAlwaysOnAllowed(new ContextInfo(i), z));
             case "isUserChangeProfilesAllowed":
                 if (strArr != null && Array.getLength(strArr) > 0) {
                     z = Boolean.parseBoolean(strArr[0]);
                 }
-                return populateCursor(str, vpnInfoPolicy.isUserChangeProfilesAllowed(new ContextInfo(i), z));
+                return populateCursor(
+                        str, vpnInfoPolicy.isUserChangeProfilesAllowed(new ContextInfo(i), z));
             default:
                 return null;
         }
@@ -304,9 +351,14 @@ public class SecContentProvider2 extends ContentProvider {
         int callingUid = Binder.getCallingUid();
         int match = URI_MATCHER.match(uri);
         if (match == 12) {
-            ExchangeAccountPolicy exchangeAccountPolicy = (ExchangeAccountPolicy) EnterpriseService.getPolicyService("eas_account_policy");
-            if (exchangeAccountPolicy != null && (asString = contentValues.getAsString("API")) != null && asString.equals("setAccountEmailPassword")) {
-                exchangeAccountPolicy.setAccountEmailPassword(new ContextInfo(callingUid), contentValues.getAsString("password"));
+            ExchangeAccountPolicy exchangeAccountPolicy =
+                    (ExchangeAccountPolicy)
+                            EnterpriseService.getPolicyService("eas_account_policy");
+            if (exchangeAccountPolicy != null
+                    && (asString = contentValues.getAsString("API")) != null
+                    && asString.equals("setAccountEmailPassword")) {
+                exchangeAccountPolicy.setAccountEmailPassword(
+                        new ContextInfo(callingUid), contentValues.getAsString("password"));
             }
         } else if (match == 18) {
             getContext().getContentResolver().notifyChange(uri, null);
@@ -328,21 +380,21 @@ public class SecContentProvider2 extends ContentProvider {
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:38:0x0090, code lost:
-    
-        if (r21.equals("isWifiScanningAllowed") == false) goto L19;
-     */
+
+       if (r21.equals("isWifiScanningAllowed") == false) goto L19;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:589:0x0729, code lost:
-    
-        if (r21.equals("getTorchOnVolumeButtonsState") == false) goto L393;
-     */
+
+       if (r21.equals("getTorchOnVolumeButtonsState") == false) goto L393;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:828:0x0c5a, code lost:
-    
-        if (r21.equals("getRequiredSignedMIMEMessages") == false) goto L664;
-     */
+
+       if (r21.equals("getRequiredSignedMIMEMessages") == false) goto L664;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:935:0x0f89, code lost:
-    
-        if (r21.equals("getAllowEmailForwarding") == false) goto L855;
-     */
+
+       if (r21.equals("getAllowEmailForwarding") == false) goto L855;
+    */
     /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue */
     /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue
     java.lang.NullPointerException: Cannot invoke "java.util.List.iterator()" because the return value of "jadx.core.dex.visitors.regions.SwitchOverStringVisitor$SwitchData.getNewCases()" is null
@@ -356,12 +408,21 @@ public class SecContentProvider2 extends ContentProvider {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.database.Cursor query(android.net.Uri r19, java.lang.String[] r20, java.lang.String r21, java.lang.String[] r22, java.lang.String r23) {
+    public final android.database.Cursor query(
+            android.net.Uri r19,
+            java.lang.String[] r20,
+            java.lang.String r21,
+            java.lang.String[] r22,
+            java.lang.String r23) {
         /*
             Method dump skipped, instructions count: 6220
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.content.SecContentProvider2.query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String):android.database.Cursor");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.content.SecContentProvider2.query(android.net.Uri,"
+                    + " java.lang.String[], java.lang.String, java.lang.String[],"
+                    + " java.lang.String):android.database.Cursor");
     }
 
     @Override // android.content.ContentProvider

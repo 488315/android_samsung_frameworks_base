@@ -5,7 +5,7 @@ import android.os.Parcelable;
 import android.os.RemoteException;
 import android.os.SystemClock;
 import android.util.Log;
-import com.android.modules.utils.ISynchronousResultReceiver;
+
 import java.time.Duration;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
@@ -23,20 +23,25 @@ public final class SynchronousResultReceiver<T> implements Parcelable {
     private final boolean mLocal;
     ISynchronousResultReceiver mReceiver;
     private static final Object sLock = new Object();
-    private static final ConcurrentLinkedQueue<SynchronousResultReceiver> sAvailableReceivers = new ConcurrentLinkedQueue<>();
-    public static final Parcelable.Creator<SynchronousResultReceiver<?>> CREATOR = new Parcelable.Creator<SynchronousResultReceiver<?>>() { // from class: com.android.modules.utils.SynchronousResultReceiver.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SynchronousResultReceiver<?> createFromParcel(Parcel in) {
-            return new SynchronousResultReceiver<>(in);
-        }
+    private static final ConcurrentLinkedQueue<SynchronousResultReceiver> sAvailableReceivers =
+            new ConcurrentLinkedQueue<>();
+    public static final Parcelable.Creator<SynchronousResultReceiver<?>> CREATOR =
+            new Parcelable.Creator<
+                    SynchronousResultReceiver<
+                            ?>>() { // from class:
+                                    // com.android.modules.utils.SynchronousResultReceiver.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SynchronousResultReceiver<?> createFromParcel(Parcel in) {
+                    return new SynchronousResultReceiver<>(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SynchronousResultReceiver<?>[] newArray(int size) {
-            return new SynchronousResultReceiver[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SynchronousResultReceiver<?>[] newArray(int size) {
+                    return new SynchronousResultReceiver[size];
+                }
+            };
 
     public static <T> SynchronousResultReceiver<T> get() {
         synchronized (sLock) {
@@ -78,17 +83,21 @@ public final class SynchronousResultReceiver<T> implements Parcelable {
     }
 
     public static class Result<T> implements Parcelable {
-        public static final Parcelable.Creator<Result<?>> CREATOR = new Parcelable.Creator<Result<?>>() { // from class: com.android.modules.utils.SynchronousResultReceiver.Result.1
-            @Override // android.os.Parcelable.Creator
-            public Result<?> createFromParcel(Parcel in) {
-                return new Result<>(in);
-            }
+        public static final Parcelable.Creator<Result<?>> CREATOR =
+                new Parcelable.Creator<
+                        Result<
+                                ?>>() { // from class:
+                                        // com.android.modules.utils.SynchronousResultReceiver.Result.1
+                    @Override // android.os.Parcelable.Creator
+                    public Result<?> createFromParcel(Parcel in) {
+                        return new Result<>(in);
+                    }
 
-            @Override // android.os.Parcelable.Creator
-            public Result<?>[] newArray(int size) {
-                return new Result[size];
-            }
-        };
+                    @Override // android.os.Parcelable.Creator
+                    public Result<?>[] newArray(int size) {
+                        return new Result[size];
+                    }
+                };
         private final RuntimeException mException;
         private final T mObject;
 
@@ -172,7 +181,10 @@ public final class SynchronousResultReceiver<T> implements Parcelable {
                 }
                 return result;
             } catch (InterruptedException e) {
-                remainingTime = timeout.minus(Duration.ofNanos(SystemClock.elapsedRealtimeNanos() - startWaitNanoTime));
+                remainingTime =
+                        timeout.minus(
+                                Duration.ofNanos(
+                                        SystemClock.elapsedRealtimeNanos() - startWaitNanoTime));
             } catch (ExecutionException e2) {
                 throw new AssertionError("Error receiving response", e2);
             }
@@ -184,8 +196,7 @@ public final class SynchronousResultReceiver<T> implements Parcelable {
     }
 
     private final class MyResultReceiver extends ISynchronousResultReceiver.Stub {
-        private MyResultReceiver() {
-        }
+        private MyResultReceiver() {}
 
         @Override // com.android.modules.utils.ISynchronousResultReceiver
         public void send(Result result) {

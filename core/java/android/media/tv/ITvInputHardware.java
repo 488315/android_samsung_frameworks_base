@@ -22,12 +22,12 @@ public interface ITvInputHardware extends IInterface {
         }
 
         @Override // android.media.tv.ITvInputHardware
-        public void setStreamVolume(float volume) throws RemoteException {
-        }
+        public void setStreamVolume(float volume) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputHardware
-        public void overrideAudioSink(int audioType, String audioAddress, int samplingRate, int channelMask, int format) throws RemoteException {
-        }
+        public void overrideAudioSink(
+                int audioType, String audioAddress, int samplingRate, int channelMask, int format)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -35,7 +35,7 @@ public interface ITvInputHardware extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITvInputHardware {
+    public abstract static class Stub extends Binder implements ITvInputHardware {
         public static final String DESCRIPTOR = "android.media.tv.ITvInputHardware";
         static final int TRANSACTION_overrideAudioSink = 3;
         static final int TRANSACTION_setStreamVolume = 2;
@@ -80,7 +80,8 @@ public interface ITvInputHardware extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -91,7 +92,8 @@ public interface ITvInputHardware extends IInterface {
             switch (code) {
                 case 1:
                     Surface _arg0 = (Surface) data.readTypedObject(Surface.CREATOR);
-                    TvStreamConfig _arg1 = (TvStreamConfig) data.readTypedObject(TvStreamConfig.CREATOR);
+                    TvStreamConfig _arg1 =
+                            (TvStreamConfig) data.readTypedObject(TvStreamConfig.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result = setSurface(_arg0, _arg1);
                     reply.writeNoException();
@@ -135,7 +137,8 @@ public interface ITvInputHardware extends IInterface {
             }
 
             @Override // android.media.tv.ITvInputHardware
-            public boolean setSurface(Surface surface, TvStreamConfig config) throws RemoteException {
+            public boolean setSurface(Surface surface, TvStreamConfig config)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -168,7 +171,13 @@ public interface ITvInputHardware extends IInterface {
             }
 
             @Override // android.media.tv.ITvInputHardware
-            public void overrideAudioSink(int audioType, String audioAddress, int samplingRate, int channelMask, int format) throws RemoteException {
+            public void overrideAudioSink(
+                    int audioType,
+                    String audioAddress,
+                    int samplingRate,
+                    int channelMask,
+                    int format)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

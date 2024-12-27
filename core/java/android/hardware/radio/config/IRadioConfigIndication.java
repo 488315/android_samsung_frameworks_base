@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IRadioConfigIndication extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$radio$config$IRadioConfigIndication".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$radio$config$IRadioConfigIndication".replace('$', '.');
     public static final String HASH = "1e3dcfffc1e90fc886cf5a22ecaa94601b115710";
     public static final int VERSION = 3;
 
@@ -22,12 +23,12 @@ public interface IRadioConfigIndication extends IInterface {
 
     public static class Default implements IRadioConfigIndication {
         @Override // android.hardware.radio.config.IRadioConfigIndication
-        public void simSlotsStatusChanged(int type, SimSlotStatus[] slotStatus) throws RemoteException {
-        }
+        public void simSlotsStatusChanged(int type, SimSlotStatus[] slotStatus)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.config.IRadioConfigIndication
-        public void onSimultaneousCallingSupportChanged(int[] enabledLogicalSlots) throws RemoteException {
-        }
+        public void onSimultaneousCallingSupportChanged(int[] enabledLogicalSlots)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.config.IRadioConfigIndication
         public int getInterfaceVersion() {
@@ -45,7 +46,7 @@ public interface IRadioConfigIndication extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRadioConfigIndication {
+    public abstract static class Stub extends Binder implements IRadioConfigIndication {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_onSimultaneousCallingSupportChanged = 2;
@@ -73,7 +74,8 @@ public interface IRadioConfigIndication extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -95,7 +97,8 @@ public interface IRadioConfigIndication extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    SimSlotStatus[] _arg1 = (SimSlotStatus[]) data.createTypedArray(SimSlotStatus.CREATOR);
+                    SimSlotStatus[] _arg1 =
+                            (SimSlotStatus[]) data.createTypedArray(SimSlotStatus.CREATOR);
                     data.enforceNoDataAvail();
                     simSlotsStatusChanged(_arg0, _arg1);
                     return true;
@@ -128,7 +131,8 @@ public interface IRadioConfigIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.config.IRadioConfigIndication
-            public void simSlotsStatusChanged(int type, SimSlotStatus[] slotStatus) throws RemoteException {
+            public void simSlotsStatusChanged(int type, SimSlotStatus[] slotStatus)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -144,14 +148,16 @@ public interface IRadioConfigIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.config.IRadioConfigIndication
-            public void onSimultaneousCallingSupportChanged(int[] enabledLogicalSlots) throws RemoteException {
+            public void onSimultaneousCallingSupportChanged(int[] enabledLogicalSlots)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     _data.writeIntArray(enabledLogicalSlots);
                     boolean _status = this.mRemote.transact(2, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method onSimultaneousCallingSupportChanged is unimplemented.");
+                        throw new RemoteException(
+                                "Method onSimultaneousCallingSupportChanged is unimplemented.");
                     }
                 } finally {
                     _data.recycle();

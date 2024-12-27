@@ -2,7 +2,9 @@ package android.telephony.satellite;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.telephony.util.TelephonyUtils;
+
 import vendor.samsung.hardware.radio.satellite.SehSatSimAuthRespData;
 
 /* loaded from: classes4.dex */
@@ -23,21 +25,35 @@ public final class SemSatSimAuthResultData implements Parcelable {
     public static int SIM_AUTH_SUCCESSFUL = 219;
     public static int SIM_AUTH_SYNC_FAILURE = 220;
     public static int SIM_AUTH_NO_SIM = 255;
-    public static final Parcelable.Creator<SemSatSimAuthResultData> CREATOR = new Parcelable.Creator<SemSatSimAuthResultData>() { // from class: android.telephony.satellite.SemSatSimAuthResultData.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemSatSimAuthResultData createFromParcel(Parcel source) {
-            return new SemSatSimAuthResultData(source);
-        }
+    public static final Parcelable.Creator<SemSatSimAuthResultData> CREATOR =
+            new Parcelable.Creator<
+                    SemSatSimAuthResultData>() { // from class:
+                                                 // android.telephony.satellite.SemSatSimAuthResultData.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemSatSimAuthResultData createFromParcel(Parcel source) {
+                    return new SemSatSimAuthResultData(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemSatSimAuthResultData[] newArray(int size) {
-            return new SemSatSimAuthResultData[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemSatSimAuthResultData[] newArray(int size) {
+                    return new SemSatSimAuthResultData[size];
+                }
+            };
 
-    public SemSatSimAuthResultData(int result, int resLen, String res, int ckLen, String ck, int ikLen, String ik, int kcLen, String kc, int autsLen, String auts) {
+    public SemSatSimAuthResultData(
+            int result,
+            int resLen,
+            String res,
+            int ckLen,
+            String ck,
+            int ikLen,
+            String ik,
+            int kcLen,
+            String kc,
+            int autsLen,
+            String auts) {
         this.mResult = result;
         this.mResLen = resLen;
         this.mRes = res;
@@ -82,7 +98,11 @@ public final class SemSatSimAuthResultData implements Parcelable {
     }
 
     public boolean isValid() {
-        return this.mResult == SIM_AUTH_SUCCESSFUL ? this.mResLen > 0 && this.mCkLen > 0 && this.mIkLen > 0 && this.mKcLen > 0 : this.mResult == SIM_AUTH_SYNC_FAILURE ? this.mAutsLen > 0 : this.mResult == SIM_AUTH_MAC_FAILURE || this.mResult == SIM_AUTH_NO_SIM;
+        return this.mResult == SIM_AUTH_SUCCESSFUL
+                ? this.mResLen > 0 && this.mCkLen > 0 && this.mIkLen > 0 && this.mKcLen > 0
+                : this.mResult == SIM_AUTH_SYNC_FAILURE
+                        ? this.mAutsLen > 0
+                        : this.mResult == SIM_AUTH_MAC_FAILURE || this.mResult == SIM_AUTH_NO_SIM;
     }
 
     @Override // android.os.Parcelable
@@ -107,7 +127,28 @@ public final class SemSatSimAuthResultData implements Parcelable {
 
     public String toString() {
         if (TelephonyUtils.IS_DEBUGGABLE) {
-            return "SemSatSimAuthResultData result: " + this.mResult + " reslen: " + this.mResLen + " res: " + this.mRes + " cklen: " + this.mCkLen + " ck: " + this.mCk + " iklen: " + this.mIkLen + " ik: " + this.mIk + " kclen: " + this.mKcLen + " kc: " + this.mKc + " autslen: " + this.mAutsLen + " auts: " + this.mAuts;
+            return "SemSatSimAuthResultData result: "
+                    + this.mResult
+                    + " reslen: "
+                    + this.mResLen
+                    + " res: "
+                    + this.mRes
+                    + " cklen: "
+                    + this.mCkLen
+                    + " ck: "
+                    + this.mCk
+                    + " iklen: "
+                    + this.mIkLen
+                    + " ik: "
+                    + this.mIk
+                    + " kclen: "
+                    + this.mKcLen
+                    + " kc: "
+                    + this.mKc
+                    + " autslen: "
+                    + this.mAutsLen
+                    + " auts: "
+                    + this.mAuts;
         }
         return LOG_TAG;
     }
@@ -209,7 +250,18 @@ public final class SemSatSimAuthResultData implements Parcelable {
         }
 
         public SemSatSimAuthResultData build() {
-            return new SemSatSimAuthResultData(this.mResult, this.mResLen, this.mRes, this.mCkLen, this.mCk, this.mIkLen, this.mIk, this.mKcLen, this.mKc, this.mAutsLen, this.mAuts);
+            return new SemSatSimAuthResultData(
+                    this.mResult,
+                    this.mResLen,
+                    this.mRes,
+                    this.mCkLen,
+                    this.mCk,
+                    this.mIkLen,
+                    this.mIk,
+                    this.mKcLen,
+                    this.mKc,
+                    this.mAutsLen,
+                    this.mAuts);
         }
     }
 

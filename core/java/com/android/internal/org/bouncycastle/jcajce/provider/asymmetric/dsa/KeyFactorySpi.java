@@ -4,6 +4,7 @@ import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.internal.org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 import com.android.internal.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 import com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseKeyFactorySpi;
+
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.Key;
@@ -22,11 +23,13 @@ public class KeyFactorySpi extends BaseKeyFactorySpi {
     protected KeySpec engineGetKeySpec(Key key, Class spec) throws InvalidKeySpecException {
         if (spec.isAssignableFrom(DSAPublicKeySpec.class) && (key instanceof DSAPublicKey)) {
             DSAPublicKey k = (DSAPublicKey) key;
-            return new DSAPublicKeySpec(k.getY(), k.getParams().getP(), k.getParams().getQ(), k.getParams().getG());
+            return new DSAPublicKeySpec(
+                    k.getY(), k.getParams().getP(), k.getParams().getQ(), k.getParams().getG());
         }
         if (spec.isAssignableFrom(DSAPrivateKeySpec.class) && (key instanceof DSAPrivateKey)) {
             DSAPrivateKey k2 = (DSAPrivateKey) key;
-            return new DSAPrivateKeySpec(k2.getX(), k2.getParams().getP(), k2.getParams().getQ(), k2.getParams().getG());
+            return new DSAPrivateKeySpec(
+                    k2.getX(), k2.getParams().getP(), k2.getParams().getQ(), k2.getParams().getG());
         }
         return super.engineGetKeySpec(key, spec);
     }
@@ -74,7 +77,11 @@ public class KeyFactorySpi extends BaseKeyFactorySpi {
             try {
                 return new BCDSAPublicKey((DSAPublicKeySpec) keySpec);
             } catch (Exception e) {
-                throw new InvalidKeySpecException("invalid KeySpec: " + e.getMessage()) { // from class: com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.dsa.KeyFactorySpi.1
+                throw new InvalidKeySpecException(
+                        "invalid KeySpec: "
+                                + e
+                                        .getMessage()) { // from class:
+                                                         // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.dsa.KeyFactorySpi.1
                     @Override // java.lang.Throwable
                     public Throwable getCause() {
                         return e;

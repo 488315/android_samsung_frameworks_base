@@ -3,6 +3,7 @@ package com.android.server;
 import android.content.Context;
 import android.service.watchdog.IExplicitHealthCheckService;
 import android.util.Slog;
+
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -22,9 +23,9 @@ public final class ExplicitHealthCheckController {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:21:0x0043, code lost:
-    
-        android.util.Slog.i("ExplicitHealthCheckController", "Not binding to service, service disabled");
-     */
+
+       android.util.Slog.i("ExplicitHealthCheckController", "Not binding to service, service disabled");
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r1v5, types: [android.content.ServiceConnection, com.android.server.ExplicitHealthCheckController$1] */
     /*
@@ -94,7 +95,9 @@ public final class ExplicitHealthCheckController {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> L1f
             throw r5
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.ExplicitHealthCheckController.bindService():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.ExplicitHealthCheckController.bindService():void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:6:0x0037 A[RETURN] */
@@ -155,7 +158,9 @@ public final class ExplicitHealthCheckController {
         L64:
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.ExplicitHealthCheckController.getServiceComponentNameLocked():android.content.ComponentName");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.ExplicitHealthCheckController.getServiceComponentNameLocked():android.content.ComponentName");
     }
 
     public final boolean prepareServiceLocked(String str) {
@@ -164,7 +169,8 @@ public final class ExplicitHealthCheckController {
         }
         StringBuilder sb = new StringBuilder("Service not ready to ");
         sb.append(str);
-        DeviceIdleController$$ExternalSyntheticOutline0.m(sb, this.mEnabled ? ". Binding..." : ". Disabled", "ExplicitHealthCheckController");
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                sb, this.mEnabled ? ". Binding..." : ". Disabled", "ExplicitHealthCheckController");
         if (!this.mEnabled) {
             return false;
         }

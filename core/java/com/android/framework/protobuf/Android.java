@@ -6,11 +6,13 @@ final class Android {
     private static final boolean IS_ROBOLECTRIC;
     private static final Class<?> MEMORY_CLASS = getClassForName("libcore.io.Memory");
 
-    private Android() {
-    }
+    private Android() {}
 
     static {
-        IS_ROBOLECTRIC = (ASSUME_ANDROID || getClassForName("org.robolectric.Robolectric") == null) ? false : true;
+        IS_ROBOLECTRIC =
+                (ASSUME_ANDROID || getClassForName("org.robolectric.Robolectric") == null)
+                        ? false
+                        : true;
     }
 
     static boolean isOnAndroidDevice() {

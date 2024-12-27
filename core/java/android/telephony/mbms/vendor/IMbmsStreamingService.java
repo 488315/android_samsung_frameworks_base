@@ -8,6 +8,7 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.telephony.mbms.IMbmsStreamingSessionCallback;
 import android.telephony.mbms.IStreamingServiceCallback;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -16,27 +17,32 @@ public interface IMbmsStreamingService extends IInterface {
 
     Uri getPlaybackUri(int i, String str) throws RemoteException;
 
-    int initialize(IMbmsStreamingSessionCallback iMbmsStreamingSessionCallback, int i) throws RemoteException;
+    int initialize(IMbmsStreamingSessionCallback iMbmsStreamingSessionCallback, int i)
+            throws RemoteException;
 
     int requestUpdateStreamingServices(int i, List<String> list) throws RemoteException;
 
-    int startStreaming(int i, String str, IStreamingServiceCallback iStreamingServiceCallback) throws RemoteException;
+    int startStreaming(int i, String str, IStreamingServiceCallback iStreamingServiceCallback)
+            throws RemoteException;
 
     void stopStreaming(int i, String str) throws RemoteException;
 
     public static class Default implements IMbmsStreamingService {
         @Override // android.telephony.mbms.vendor.IMbmsStreamingService
-        public int initialize(IMbmsStreamingSessionCallback callback, int subId) throws RemoteException {
+        public int initialize(IMbmsStreamingSessionCallback callback, int subId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.telephony.mbms.vendor.IMbmsStreamingService
-        public int requestUpdateStreamingServices(int subId, List<String> serviceClasses) throws RemoteException {
+        public int requestUpdateStreamingServices(int subId, List<String> serviceClasses)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.telephony.mbms.vendor.IMbmsStreamingService
-        public int startStreaming(int subId, String serviceId, IStreamingServiceCallback callback) throws RemoteException {
+        public int startStreaming(int subId, String serviceId, IStreamingServiceCallback callback)
+                throws RemoteException {
             return 0;
         }
 
@@ -46,12 +52,10 @@ public interface IMbmsStreamingService extends IInterface {
         }
 
         @Override // android.telephony.mbms.vendor.IMbmsStreamingService
-        public void stopStreaming(int subId, String serviceId) throws RemoteException {
-        }
+        public void stopStreaming(int subId, String serviceId) throws RemoteException {}
 
         @Override // android.telephony.mbms.vendor.IMbmsStreamingService
-        public void dispose(int subId) throws RemoteException {
-        }
+        public void dispose(int subId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -59,8 +63,9 @@ public interface IMbmsStreamingService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMbmsStreamingService {
-        public static final String DESCRIPTOR = "android.telephony.mbms.vendor.IMbmsStreamingService";
+    public abstract static class Stub extends Binder implements IMbmsStreamingService {
+        public static final String DESCRIPTOR =
+                "android.telephony.mbms.vendor.IMbmsStreamingService";
         static final int TRANSACTION_dispose = 6;
         static final int TRANSACTION_getPlaybackUri = 4;
         static final int TRANSACTION_initialize = 1;
@@ -113,7 +118,8 @@ public interface IMbmsStreamingService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -123,7 +129,8 @@ public interface IMbmsStreamingService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IMbmsStreamingSessionCallback _arg0 = IMbmsStreamingSessionCallback.Stub.asInterface(data.readStrongBinder());
+                    IMbmsStreamingSessionCallback _arg0 =
+                            IMbmsStreamingSessionCallback.Stub.asInterface(data.readStrongBinder());
                     int _arg1 = data.readInt();
                     data.enforceNoDataAvail();
                     int _result = initialize(_arg0, _arg1);
@@ -141,7 +148,8 @@ public interface IMbmsStreamingService extends IInterface {
                 case 3:
                     int _arg03 = data.readInt();
                     String _arg13 = data.readString();
-                    IStreamingServiceCallback _arg2 = IStreamingServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    IStreamingServiceCallback _arg2 =
+                            IStreamingServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result3 = startStreaming(_arg03, _arg13, _arg2);
                     reply.writeNoException();
@@ -190,7 +198,8 @@ public interface IMbmsStreamingService extends IInterface {
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsStreamingService
-            public int initialize(IMbmsStreamingSessionCallback callback, int subId) throws RemoteException {
+            public int initialize(IMbmsStreamingSessionCallback callback, int subId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -208,7 +217,8 @@ public interface IMbmsStreamingService extends IInterface {
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsStreamingService
-            public int requestUpdateStreamingServices(int subId, List<String> serviceClasses) throws RemoteException {
+            public int requestUpdateStreamingServices(int subId, List<String> serviceClasses)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -226,7 +236,9 @@ public interface IMbmsStreamingService extends IInterface {
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsStreamingService
-            public int startStreaming(int subId, String serviceId, IStreamingServiceCallback callback) throws RemoteException {
+            public int startStreaming(
+                    int subId, String serviceId, IStreamingServiceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

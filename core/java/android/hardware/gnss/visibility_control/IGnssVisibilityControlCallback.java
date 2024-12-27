@@ -10,7 +10,9 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IGnssVisibilityControlCallback extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$gnss$visibility_control$IGnssVisibilityControlCallback".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$gnss$visibility_control$IGnssVisibilityControlCallback"
+                    .replace('$', '.');
     public static final String HASH = "fc957f1d3d261d065ff5e5415f2d21caa79c310f";
     public static final int VERSION = 2;
 
@@ -48,8 +50,7 @@ public interface IGnssVisibilityControlCallback extends IInterface {
 
     public static class Default implements IGnssVisibilityControlCallback {
         @Override // android.hardware.gnss.visibility_control.IGnssVisibilityControlCallback
-        public void nfwNotifyCb(NfwNotification notification) throws RemoteException {
-        }
+        public void nfwNotifyCb(NfwNotification notification) throws RemoteException {}
 
         @Override // android.hardware.gnss.visibility_control.IGnssVisibilityControlCallback
         public boolean isInEmergencySession() throws RemoteException {
@@ -72,7 +73,7 @@ public interface IGnssVisibilityControlCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGnssVisibilityControlCallback {
+    public abstract static class Stub extends Binder implements IGnssVisibilityControlCallback {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_isInEmergencySession = 2;
@@ -120,7 +121,8 @@ public interface IGnssVisibilityControlCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -141,7 +143,8 @@ public interface IGnssVisibilityControlCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    NfwNotification _arg0 = (NfwNotification) data.readTypedObject(NfwNotification.CREATOR);
+                    NfwNotification _arg0 =
+                            (NfwNotification) data.readTypedObject(NfwNotification.CREATOR);
                     data.enforceNoDataAvail();
                     nfwNotifyCb(_arg0);
                     reply.writeNoException();
@@ -258,21 +261,23 @@ public interface IGnssVisibilityControlCallback extends IInterface {
     }
 
     public static class NfwNotification implements Parcelable {
-        public static final Parcelable.Creator<NfwNotification> CREATOR = new Parcelable.Creator<NfwNotification>() { // from class: android.hardware.gnss.visibility_control.IGnssVisibilityControlCallback.NfwNotification.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public NfwNotification createFromParcel(Parcel _aidl_source) {
-                NfwNotification _aidl_out = new NfwNotification();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<NfwNotification> CREATOR =
+                new Parcelable.Creator<NfwNotification>() { // from class:
+                    // android.hardware.gnss.visibility_control.IGnssVisibilityControlCallback.NfwNotification.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public NfwNotification createFromParcel(Parcel _aidl_source) {
+                        NfwNotification _aidl_out = new NfwNotification();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public NfwNotification[] newArray(int _aidl_size) {
-                return new NfwNotification[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public NfwNotification[] newArray(int _aidl_size) {
+                        return new NfwNotification[_aidl_size];
+                    }
+                };
         public boolean inEmergencyMode = false;
         public boolean isCachedLocation = false;
         public String otherProtocolStackName;

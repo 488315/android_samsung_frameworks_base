@@ -9,8 +9,10 @@ import android.util.Log;
 import android.view.autofill.AutofillId;
 import android.view.inputmethod.InlineSuggestionsRequest;
 import android.view.inputmethod.InlineSuggestionsResponse;
+
 import com.android.internal.inputmethod.IInlineSuggestionsRequestCallback;
 import com.android.internal.inputmethod.InlineSuggestionsRequestInfo;
+
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -28,17 +30,29 @@ class InlineSuggestionSessionController {
     private final Consumer<InlineSuggestionsResponse> mResponseConsumer;
     private InlineSuggestionSession mSession;
 
-    InlineSuggestionSessionController(Function<Bundle, InlineSuggestionsRequest> requestSupplier, Supplier<IBinder> hostInputTokenSupplier, Consumer<InlineSuggestionsResponse> responseConsumer) {
+    InlineSuggestionSessionController(
+            Function<Bundle, InlineSuggestionsRequest> requestSupplier,
+            Supplier<IBinder> hostInputTokenSupplier,
+            Consumer<InlineSuggestionsResponse> responseConsumer) {
         this.mRequestSupplier = requestSupplier;
         this.mHostInputTokenSupplier = hostInputTokenSupplier;
         this.mResponseConsumer = responseConsumer;
     }
 
-    void onMakeInlineSuggestionsRequest(InlineSuggestionsRequestInfo requestInfo, IInlineSuggestionsRequestCallback callback) {
+    void onMakeInlineSuggestionsRequest(
+            InlineSuggestionsRequestInfo requestInfo, IInlineSuggestionsRequestCallback callback) {
         if (this.mSession != null) {
             this.mSession.invalidate();
         }
-        this.mSession = new InlineSuggestionSession(requestInfo, callback, this.mRequestSupplier, this.mHostInputTokenSupplier, this.mResponseConsumer, this, this.mMainThreadHandler);
+        this.mSession =
+                new InlineSuggestionSession(
+                        requestInfo,
+                        callback,
+                        this.mRequestSupplier,
+                        this.mHostInputTokenSupplier,
+                        this.mResponseConsumer,
+                        this,
+                        this.mMainThreadHandler);
         if (this.mImeInputStarted && match(this.mSession.getRequestInfo())) {
             this.mSession.makeInlineSuggestionRequestUncheck();
             if (this.mImeInputViewStarted) {
@@ -64,7 +78,9 @@ class InlineSuggestionSessionController {
                 this.mSession.makeInlineSuggestionRequestUncheck();
             } else if (this.mSession.shouldSendImeStatus()) {
                 try {
-                    this.mSession.getRequestCallback().onInputMethodStartInput(this.mImeClientFieldId);
+                    this.mSession
+                            .getRequestCallback()
+                            .onInputMethodStartInput(this.mImeClientFieldId);
                 } catch (RemoteException e) {
                     Log.w(TAG, "onInputMethodStartInput() remote exception:" + e);
                 }
@@ -126,11 +142,27 @@ class InlineSuggestionSessionController {
         return match(autofillId, this.mImeClientFieldId);
     }
 
-    private static boolean match(InlineSuggestionsRequestInfo inlineSuggestionsRequestInfo, String imeClientPackageName, AutofillId imeClientFieldId) {
-        return (inlineSuggestionsRequestInfo == null || imeClientPackageName == null || imeClientFieldId == null || !inlineSuggestionsRequestInfo.getComponentName().getPackageName().equals(imeClientPackageName) || !match(inlineSuggestionsRequestInfo.getAutofillId(), imeClientFieldId)) ? false : true;
+    private static boolean match(
+            InlineSuggestionsRequestInfo inlineSuggestionsRequestInfo,
+            String imeClientPackageName,
+            AutofillId imeClientFieldId) {
+        return (inlineSuggestionsRequestInfo == null
+                        || imeClientPackageName == null
+                        || imeClientFieldId == null
+                        || !inlineSuggestionsRequestInfo
+                                .getComponentName()
+                                .getPackageName()
+                                .equals(imeClientPackageName)
+                        || !match(inlineSuggestionsRequestInfo.getAutofillId(), imeClientFieldId))
+                ? false
+                : true;
     }
 
     private static boolean match(AutofillId autofillId, AutofillId imeClientFieldId) {
-        return (autofillId == null || imeClientFieldId == null || autofillId.getViewId() != imeClientFieldId.getViewId()) ? false : true;
+        return (autofillId == null
+                        || imeClientFieldId == null
+                        || autofillId.getViewId() != imeClientFieldId.getViewId())
+                ? false
+                : true;
     }
 }

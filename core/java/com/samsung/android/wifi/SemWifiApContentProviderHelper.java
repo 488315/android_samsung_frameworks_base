@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteException;
 import android.net.Uri;
 import android.os.Binder;
 import android.util.Log;
+
 import com.samsung.android.wifi.ap.SemWifiApContentProvider;
 
 /* loaded from: classes6.dex */
@@ -21,7 +22,12 @@ public class SemWifiApContentProviderHelper {
 
     public static synchronized void insert(Context mContext, String key, String val) {
         synchronized (SemWifiApContentProviderHelper.class) {
-            boolean hasPermission = mContext.checkPermission(Manifest.permission.OVERRIDE_WIFI_CONFIG, -1, Binder.getCallingUid()) == 0;
+            boolean hasPermission =
+                    mContext.checkPermission(
+                                    Manifest.permission.OVERRIDE_WIFI_CONFIG,
+                                    -1,
+                                    Binder.getCallingUid())
+                            == 0;
             if (hasPermission) {
                 long ident = Binder.clearCallingIdentity();
                 ContentValues values = new ContentValues();
@@ -40,7 +46,8 @@ public class SemWifiApContentProviderHelper {
                 }
                 if (isKeypresent(mContext, key)) {
                     String[] selectionArgs = {key};
-                    mContext.getContentResolver().update(CONTENT_URI, values, "name = ?", selectionArgs);
+                    mContext.getContentResolver()
+                            .update(CONTENT_URI, values, "name = ?", selectionArgs);
                 } else {
                     mContext.getContentResolver().insert(CONTENT_URI, values);
                     Log.i(TAG, "Inserting Key:" + key);
@@ -52,7 +59,12 @@ public class SemWifiApContentProviderHelper {
     public static synchronized String get(Context mContext, String key) {
         String returnValue;
         synchronized (SemWifiApContentProviderHelper.class) {
-            boolean hasPermission = mContext.checkPermission(Manifest.permission.OVERRIDE_WIFI_CONFIG, -1, Binder.getCallingUid()) == 0;
+            boolean hasPermission =
+                    mContext.checkPermission(
+                                    Manifest.permission.OVERRIDE_WIFI_CONFIG,
+                                    -1,
+                                    Binder.getCallingUid())
+                            == 0;
             if (!hasPermission) {
                 return "";
             }
@@ -61,10 +73,13 @@ public class SemWifiApContentProviderHelper {
             long ident = Binder.clearCallingIdentity();
             try {
                 try {
-                    Cursor c = mContext.getContentResolver().query(CONTENT_URI, null, "name = ?", selectionArgs, null);
+                    Cursor c =
+                            mContext.getContentResolver()
+                                    .query(CONTENT_URI, null, "name = ?", selectionArgs, null);
                     if (c != null) {
                         try {
-                            returnValue = c.moveToFirst() ? c.getString(c.getColumnIndex("value")) : "";
+                            returnValue =
+                                    c.moveToFirst() ? c.getString(c.getColumnIndex("value")) : "";
                             c.close();
                         } catch (Throwable th) {
                             c.close();
@@ -90,7 +105,9 @@ public class SemWifiApContentProviderHelper {
             String[] selectionArgs = {key};
             ret = false;
             try {
-                Cursor c = mContext.getContentResolver().query(CONTENT_URI, null, "name = ?", selectionArgs, null);
+                Cursor c =
+                        mContext.getContentResolver()
+                                .query(CONTENT_URI, null, "name = ?", selectionArgs, null);
                 if (c != null) {
                     try {
                         ret = c.moveToFirst();

@@ -3,7 +3,9 @@ package com.android.server.wm;
 import android.app.BackgroundStartPrivileges;
 import android.util.ArrayMap;
 import android.util.IntArray;
+
 import com.android.server.notification.NotificationManagerService;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,8 +20,12 @@ public final class BackgroundLaunchProcessController {
     public IntArray mBalOptInBoundClientUids;
     public final IntPredicate mUidHasActiveVisibleWindowPredicate;
 
-    public BackgroundLaunchProcessController(WindowProcessController$$ExternalSyntheticLambda4 windowProcessController$$ExternalSyntheticLambda4, NotificationManagerService.AnonymousClass2 anonymousClass2) {
-        this.mUidHasActiveVisibleWindowPredicate = windowProcessController$$ExternalSyntheticLambda4;
+    public BackgroundLaunchProcessController(
+            WindowProcessController$$ExternalSyntheticLambda4
+                    windowProcessController$$ExternalSyntheticLambda4,
+            NotificationManagerService.AnonymousClass2 anonymousClass2) {
+        this.mUidHasActiveVisibleWindowPredicate =
+                windowProcessController$$ExternalSyntheticLambda4;
         this.mBackgroundActivityStartCallback = anonymousClass2;
     }
 
@@ -29,7 +35,8 @@ public final class BackgroundLaunchProcessController {
                 ArrayMap arrayMap = this.mBackgroundStartPrivileges;
                 if (arrayMap != null && !arrayMap.isEmpty()) {
                     printWriter.print("    ");
-                    printWriter.println("Background activity start tokens (token: originating token):");
+                    printWriter.println(
+                            "Background activity start tokens (token: originating token):");
                     for (int size = this.mBackgroundStartPrivileges.size() - 1; size >= 0; size--) {
                         printWriter.print("    ");
                         printWriter.print("  - ");
@@ -58,7 +65,8 @@ public final class BackgroundLaunchProcessController {
             if (size <= 0) {
                 return arrayList;
             }
-            BackgroundStartPrivileges backgroundStartPrivileges = (BackgroundStartPrivileges) this.mBackgroundStartPrivileges.valueAt(i);
+            BackgroundStartPrivileges backgroundStartPrivileges =
+                    (BackgroundStartPrivileges) this.mBackgroundStartPrivileges.valueAt(i);
             if (backgroundStartPrivileges.allowsBackgroundActivityStarts()) {
                 arrayList.add(backgroundStartPrivileges.getOriginatingToken());
             }
@@ -72,7 +80,8 @@ public final class BackgroundLaunchProcessController {
                 IntArray intArray = this.mBalOptInBoundClientUids;
                 if (intArray != null) {
                     for (int size = intArray.size() - 1; size >= 0; size--) {
-                        if (this.mUidHasActiveVisibleWindowPredicate.test(this.mBalOptInBoundClientUids.get(size))) {
+                        if (this.mUidHasActiveVisibleWindowPredicate.test(
+                                this.mBalOptInBoundClientUids.get(size))) {
                             return true;
                         }
                     }

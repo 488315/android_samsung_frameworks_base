@@ -10,6 +10,8 @@ public final class AppCompatResizeOverrides {
 
     public AppCompatResizeOverrides(ActivityRecord activityRecord, OptPropFactory optPropFactory) {
         this.mActivityRecord = activityRecord;
-        this.mAllowForceResizeOverrideOptProp = optPropFactory.create("android.window.PROPERTY_COMPAT_ALLOW_RESIZEABLE_ACTIVITY_OVERRIDES");
+        this.mAllowForceResizeOverrideOptProp =
+                optPropFactory.create(
+                        "android.window.PROPERTY_COMPAT_ALLOW_RESIZEABLE_ACTIVITY_OVERRIDES");
     }
 }

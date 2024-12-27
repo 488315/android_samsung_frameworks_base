@@ -38,19 +38,28 @@ public class PreferenceProvider extends ContentProvider {
         String str4;
         String str5;
         ChimeraManager chimeraManager;
-        ChimeraManagerService chimeraManagerService = (ChimeraManagerService) ServiceManager.getService("ChimeraManagerService");
-        if (chimeraManagerService == null || (chimeraManager = chimeraManagerService.mChimeraManager) == null) {
+        ChimeraManagerService chimeraManagerService =
+                (ChimeraManagerService) ServiceManager.getService("ChimeraManagerService");
+        if (chimeraManagerService == null
+                || (chimeraManager = chimeraManagerService.mChimeraManager) == null) {
             str3 = "";
             str4 = "";
             str5 = str4;
         } else {
             SettingRepository settingRepository = chimeraManager.mSettingRepository;
             settingRepository.mSystemRepository.getClass();
-            str3 = SystemProperties.get("ro.slmk.use_bg_keeping_policy", "false").equals("true") ? "Default,Conservative,Aggressive" : "Default,Conservative";
+            str3 =
+                    SystemProperties.get("ro.slmk.use_bg_keeping_policy", "false").equals("true")
+                            ? "Default,Conservative,Aggressive"
+                            : "Default,Conservative";
             str5 = "2.0";
-            str4 = settingRepository.mIsCustomMode ? settingRepository.mIsConservativeMode ? "Conservative" : "Aggressive" : "Default";
+            str4 =
+                    settingRepository.mIsCustomMode
+                            ? settingRepository.mIsConservativeMode ? "Conservative" : "Aggressive"
+                            : "Default";
         }
-        MatrixCursor matrixCursor = new MatrixCursor(new String[]{"VERSION", "SUPPORTED_MODE", "CURRENT_MODE"});
+        MatrixCursor matrixCursor =
+                new MatrixCursor(new String[] {"VERSION", "SUPPORTED_MODE", "CURRENT_MODE"});
         MatrixCursor.RowBuilder newRow = matrixCursor.newRow();
         newRow.add("VERSION", str5);
         newRow.add("SUPPORTED_MODE", str3);
@@ -62,8 +71,10 @@ public class PreferenceProvider extends ContentProvider {
     @Override // android.content.ContentProvider
     public final int update(Uri uri, ContentValues contentValues, String str, String[] strArr) {
         ChimeraManager chimeraManager;
-        ChimeraManagerService chimeraManagerService = (ChimeraManagerService) ServiceManager.getService("ChimeraManagerService");
-        if (chimeraManagerService != null && (chimeraManager = chimeraManagerService.mChimeraManager) != null) {
+        ChimeraManagerService chimeraManagerService =
+                (ChimeraManagerService) ServiceManager.getService("ChimeraManagerService");
+        if (chimeraManagerService != null
+                && (chimeraManager = chimeraManagerService.mChimeraManager) != null) {
             String asString = contentValues.getAsString("MODE");
             boolean equals = "Aggressive".equals(asString);
             SettingRepository settingRepository = chimeraManager.mSettingRepository;

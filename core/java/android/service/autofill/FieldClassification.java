@@ -2,6 +2,7 @@ package android.service.autofill;
 
 import android.os.Parcel;
 import android.view.autofill.Helper;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -14,15 +15,18 @@ public final class FieldClassification {
 
     public FieldClassification(ArrayList<Match> matches) {
         this.mMatches = (ArrayList) Objects.requireNonNull(matches);
-        Collections.sort(this.mMatches, new Comparator<Match>() { // from class: android.service.autofill.FieldClassification.1
-            @Override // java.util.Comparator
-            public int compare(Match o1, Match o2) {
-                if (o1.mScore > o2.mScore) {
-                    return -1;
-                }
-                return o1.mScore < o2.mScore ? 1 : 0;
-            }
-        });
+        Collections.sort(
+                this.mMatches,
+                new Comparator<
+                        Match>() { // from class: android.service.autofill.FieldClassification.1
+                    @Override // java.util.Comparator
+                    public int compare(Match o1, Match o2) {
+                        if (o1.mScore > o2.mScore) {
+                            return -1;
+                        }
+                        return o1.mScore < o2.mScore ? 1 : 0;
+                    }
+                });
     }
 
     public List<Match> getMatches() {

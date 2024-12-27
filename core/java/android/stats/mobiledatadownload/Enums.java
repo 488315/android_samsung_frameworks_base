@@ -32,7 +32,8 @@ public final class Enums {
     public static final int LOW_DISK_ERROR = 303;
     public static final int MALFORMED_DOWNLOAD_URL = 325;
     public static final int MALFORMED_FILE_URI_ERROR = 306;
-    public static final int MANIFEST_FILE_GROUP_POPULATOR_CONTENT_CHANGED_DURING_DOWNLOAD_ERROR = 401;
+    public static final int MANIFEST_FILE_GROUP_POPULATOR_CONTENT_CHANGED_DURING_DOWNLOAD_ERROR =
+            401;
     public static final int MANIFEST_FILE_GROUP_POPULATOR_DELETE_MANIFEST_FILE_ERROR = 403;
     public static final int MANIFEST_FILE_GROUP_POPULATOR_INVALID_FLAG_ERROR = 400;
     public static final int MANIFEST_FILE_GROUP_POPULATOR_METADATA_IO_ERROR = 404;

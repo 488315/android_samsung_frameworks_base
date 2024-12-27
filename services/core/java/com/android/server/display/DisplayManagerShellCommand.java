@@ -9,16 +9,16 @@ import android.os.Message;
 import android.os.ShellCommand;
 import android.util.Slog;
 import android.view.Display;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
-import com.android.server.display.AdaptiveBrightnessLongtermModelBuilder;
-import com.android.server.display.BrightnessMappingStrategy;
 import com.android.server.display.feature.DisplayManagerFlags;
 import com.android.server.display.mode.DisplayModeDirector;
 import com.android.server.power.PowerHistorian;
 import com.android.server.power.PowerManagerUtil;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,7 +31,8 @@ public final class DisplayManagerShellCommand extends ShellCommand {
     public final DisplayManagerFlags mFlags;
     public final DisplayManagerService mService;
 
-    public DisplayManagerShellCommand(DisplayManagerService displayManagerService, DisplayManagerFlags displayManagerFlags) {
+    public DisplayManagerShellCommand(
+            DisplayManagerService displayManagerService, DisplayManagerFlags displayManagerFlags) {
         this.mService = displayManagerService;
         this.mFlags = displayManagerFlags;
     }
@@ -48,7 +49,10 @@ public final class DisplayManagerShellCommand extends ShellCommand {
             float parseFloat4 = Float.parseFloat(split[3]);
             DisplayManagerService displayManagerService = this.mService;
             synchronized (displayManagerService.mSyncRoot) {
-                ((DisplayPowerController) ((DisplayPowerControllerInterface) displayManagerService.mDisplayPowerControllers.get(0))).addBrightnessWeights(parseFloat, parseFloat2, parseFloat3, parseFloat4);
+                ((DisplayPowerController)
+                                ((DisplayPowerControllerInterface)
+                                        displayManagerService.mDisplayPowerControllers.get(0)))
+                        .addBrightnessWeights(parseFloat, parseFloat2, parseFloat3, parseFloat4);
             }
             return 0;
         } catch (Exception unused) {
@@ -343,26 +347,46 @@ public final class DisplayManagerShellCommand extends ShellCommand {
                         String nextArg = getNextArg();
                         if (nextArg != null) {
                             if (str2 != null) {
-                                outPrintWriter2.println("Error: the category has been specified both with the -c option and the positional argument. Please select only one category.");
+                                outPrintWriter2.println(
+                                        "Error: the category has been specified both with the -c"
+                                            + " option and the positional argument. Please select"
+                                            + " only one category.");
                             } else {
                                 str2 = nextArg;
                             }
                         }
-                        Display[] displays = ((DisplayManager) this.mService.getContext().getSystemService(DisplayManager.class)).getDisplays(str2);
+                        Display[] displays =
+                                ((DisplayManager)
+                                                this.mService
+                                                        .getContext()
+                                                        .getSystemService(DisplayManager.class))
+                                        .getDisplays(str2);
                         Object[] objArr = displays;
                         if (z4) {
-                            objArr = (Display[]) Arrays.stream(displays).filter(new Predicate() { // from class: com.android.server.display.DisplayManagerShellCommand$$ExternalSyntheticLambda0
-                                @Override // java.util.function.Predicate
-                                public final boolean test(Object obj) {
-                                    return arrayList.contains(Integer.valueOf(((Display) obj).getType()));
-                                }
-                            }).toArray(new DisplayManagerShellCommand$$ExternalSyntheticLambda1());
+                            objArr =
+                                    (Display[])
+                                            Arrays.stream(displays)
+                                                    .filter(
+                                                            new Predicate() { // from class:
+                                                                              // com.android.server.display.DisplayManagerShellCommand$$ExternalSyntheticLambda0
+                                                                @Override // java.util.function.Predicate
+                                                                public final boolean test(
+                                                                        Object obj) {
+                                                                    return arrayList.contains(
+                                                                            Integer.valueOf(
+                                                                                    ((Display) obj)
+                                                                                            .getType()));
+                                                                }
+                                                            })
+                                                    .toArray(
+                                                            new DisplayManagerShellCommand$$ExternalSyntheticLambda1());
                         }
                         if (!z3) {
                             outPrintWriter2.println("Displays:");
                         }
                         for (int i2 = 0; i2 < objArr.length; i2++) {
-                            outPrintWriter2.println(z3 ? Integer.valueOf(objArr[i2].getDisplayId()) : objArr[i2]);
+                            outPrintWriter2.println(
+                                    z3 ? Integer.valueOf(objArr[i2].getDisplayId()) : objArr[i2]);
                         }
                         return 0;
                     }
@@ -425,7 +449,9 @@ public final class DisplayManagerShellCommand extends ShellCommand {
                         case true:
                         case true:
                             if (str2 != null) {
-                                outPrintWriter2.println("Error: the category has been specified more than one time. Please select only one category.");
+                                outPrintWriter2.println(
+                                        "Error: the category has been specified more than one time."
+                                            + " Please select only one category.");
                                 break;
                             } else {
                                 str2 = getNextArgRequired();
@@ -505,7 +531,13 @@ public final class DisplayManagerShellCommand extends ShellCommand {
                                     i = 1;
                                     break;
                                 default:
-                                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(outPrintWriter2, "Error: argument for display type should be one of 'UNKNOWN', 'INTERNAL', 'EXTERNAL', 'WIFI', 'OVERLAY', 'VIRTUAL', but got '", upperCase, "' instead.");
+                                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                            outPrintWriter2,
+                                            "Error: argument for display type should be one of"
+                                                + " 'UNKNOWN', 'INTERNAL', 'EXTERNAL', 'WIFI',"
+                                                + " 'OVERLAY', 'VIRTUAL', but got '",
+                                            upperCase,
+                                            "' instead.");
                                     i = -1;
                                     break;
                             }
@@ -516,7 +548,8 @@ public final class DisplayManagerShellCommand extends ShellCommand {
                                 z4 = true;
                             }
                         default:
-                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(outPrintWriter2, "Error: unknown option '", nextOption, "'");
+                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                    outPrintWriter2, "Error: unknown option '", nextOption, "'");
                             break;
                     }
                 }
@@ -529,8 +562,16 @@ public final class DisplayManagerShellCommand extends ShellCommand {
                 setTestModeEnabled(true);
                 return 0;
             case 5:
-                int[] userDisabledHdrTypes = ((DisplayManager) this.mService.getContext().getSystemService(DisplayManager.class)).getUserDisabledHdrTypes();
-                getOutPrintWriter().println("User disabled HDR types: " + Arrays.toString(userDisabledHdrTypes));
+                int[] userDisabledHdrTypes =
+                        ((DisplayManager)
+                                        this.mService
+                                                .getContext()
+                                                .getSystemService(DisplayManager.class))
+                                .getUserDisabledHdrTypes();
+                getOutPrintWriter()
+                        .println(
+                                "User disabled HDR types: "
+                                        + Arrays.toString(userDisabledHdrTypes));
                 return 0;
             case 6:
                 this.mService.setDockedAndIdleEnabled(false);
@@ -555,21 +596,31 @@ public final class DisplayManagerShellCommand extends ShellCommand {
                                 int parseInt = Integer.parseInt(nextArg2);
                                 int parseInt2 = Integer.parseInt(nextArg3);
                                 float parseFloat = Float.parseFloat(nextArg4);
-                                if ((parseInt >= 0 && parseInt2 >= 0) || parseFloat > FullScreenMagnificationGestureHandler.MAX_SCALE) {
+                                if ((parseInt >= 0 && parseInt2 >= 0)
+                                        || parseFloat
+                                                > FullScreenMagnificationGestureHandler.MAX_SCALE) {
                                     String nextArg5 = getNextArg();
                                     if (nextArg5 != null) {
                                         try {
                                             r6 = Integer.parseInt(nextArg5);
                                         } catch (NumberFormatException unused) {
-                                            getErrPrintWriter().println("Error: invalid format of display ID");
+                                            getErrPrintWriter()
+                                                    .println("Error: invalid format of display ID");
                                         }
                                     }
-                                    this.mService.setUserPreferredDisplayModeInternal(r6, new Display.Mode(parseInt, parseInt2, parseFloat));
+                                    this.mService.setUserPreferredDisplayModeInternal(
+                                            r6, new Display.Mode(parseInt, parseInt2, parseFloat));
                                     return 0;
                                 }
-                                getErrPrintWriter().println("Error: invalid value of resolution (width, height) and refresh rate");
+                                getErrPrintWriter()
+                                        .println(
+                                                "Error: invalid value of resolution (width, height)"
+                                                    + " and refresh rate");
                             } catch (NumberFormatException unused2) {
-                                getErrPrintWriter().println("Error: invalid format of width, height or refresh rate");
+                                getErrPrintWriter()
+                                        .println(
+                                                "Error: invalid format of width, height or refresh"
+                                                    + " rate");
                             }
                         }
                     }
@@ -589,27 +640,45 @@ public final class DisplayManagerShellCommand extends ShellCommand {
                     getOutPrintWriter().println("User preferred display mode: null");
                     return 0;
                 }
-                getOutPrintWriter().println("User preferred display mode: " + r1.getPhysicalWidth() + " " + r1.getPhysicalHeight() + " " + r1.getRefreshRate());
+                getOutPrintWriter()
+                        .println(
+                                "User preferred display mode: "
+                                        + r1.getPhysicalWidth()
+                                        + " "
+                                        + r1.getPhysicalHeight()
+                                        + " "
+                                        + r1.getRefreshRate());
                 return 0;
             case '\n':
                 String nextArg7 = getNextArg();
                 if (nextArg7 != null) {
                     switch (nextArg7) {
                         case "on-cable-dp-incapable":
-                            this.mService.mDisplayNotificationManager.onCableNotCapableDisplayPort();
+                            this.mService.mDisplayNotificationManager
+                                    .onCableNotCapableDisplayPort();
                             return 0;
                         case "on-hotplug-error":
                             this.mService.mDisplayNotificationManager.onHotplugConnectionError();
                             return 0;
                         case "on-link-training-failure":
-                            this.mService.mDisplayNotificationManager.onDisplayPortLinkTrainingFailure();
+                            this.mService.mDisplayNotificationManager
+                                    .onDisplayPortLinkTrainingFailure();
                             return 0;
                         default:
-                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(getErrPrintWriter(), "Error: unexpected notification type=", nextArg7, ", use one of: on-hotplug-error, on-link-training-failure, on-cable-dp-incapable");
+                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                    getErrPrintWriter(),
+                                    "Error: unexpected notification type=",
+                                    nextArg7,
+                                    ", use one of: on-hotplug-error, on-link-training-failure,"
+                                        + " on-cable-dp-incapable");
                             break;
                     }
                 } else {
-                    getErrPrintWriter().println("Error: no notificationType specified, use one of: on-hotplug-error, on-link-training-failure, on-cable-dp-incapable");
+                    getErrPrintWriter()
+                            .println(
+                                    "Error: no notificationType specified, use one of:"
+                                        + " on-hotplug-error, on-link-training-failure,"
+                                        + " on-cable-dp-incapable");
                 }
                 return 1;
             case 11:
@@ -624,28 +693,52 @@ public final class DisplayManagerShellCommand extends ShellCommand {
                 if (nextArg10 != null) {
                     f3 = Float.parseFloat(nextArg10);
                 }
-                final SensorEvent sensorEvent = new SensorEvent(null, 0, 0L, new float[]{parseFloat2, parseFloat3, f3});
-                Slog.d("DisplayManagerShellCommand", "injectLux: lux: " + sensorEvent.values[0] + " minLux: " + sensorEvent.values[1] + " fromRear: " + sensorEvent.values[2]);
+                final SensorEvent sensorEvent =
+                        new SensorEvent(null, 0, 0L, new float[] {parseFloat2, parseFloat3, f3});
+                Slog.d(
+                        "DisplayManagerShellCommand",
+                        "injectLux: lux: "
+                                + sensorEvent.values[0]
+                                + " minLux: "
+                                + sensorEvent.values[1]
+                                + " fromRear: "
+                                + sensorEvent.values[2]);
                 outPrintWriter.println(this.mService.getAmbientBrightnessInfo(parseFloat2));
                 DisplayManagerService displayManagerService = this.mService;
                 synchronized (displayManagerService.mSyncRoot) {
-                    final AutomaticBrightnessController automaticBrightnessController = ((DisplayPowerController) ((DisplayPowerControllerInterface) displayManagerService.mDisplayPowerControllers.get(0))).mAutomaticBrightnessController;
+                    final AutomaticBrightnessController automaticBrightnessController =
+                            ((DisplayPowerController)
+                                            ((DisplayPowerControllerInterface)
+                                                    displayManagerService.mDisplayPowerControllers
+                                                            .get(0)))
+                                    .mAutomaticBrightnessController;
                     if (automaticBrightnessController != null) {
-                        automaticBrightnessController.mHandler.post(new Runnable() { // from class: com.android.server.display.AutomaticBrightnessController$$ExternalSyntheticLambda0
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                AutomaticBrightnessController automaticBrightnessController2 = AutomaticBrightnessController.this;
-                                SensorEvent sensorEvent2 = sensorEvent;
-                                automaticBrightnessController2.getClass();
-                                if (sensorEvent2.values[0] >= FullScreenMagnificationGestureHandler.MAX_SCALE) {
-                                    automaticBrightnessController2.mInjectedLuxEvent = sensorEvent2;
-                                    automaticBrightnessController2.onSensorChangedInternal(sensorEvent2);
-                                } else if (automaticBrightnessController2.mInjectedLuxEvent != null) {
-                                    automaticBrightnessController2.onSensorChangedInternal(automaticBrightnessController2.mLastRealLuxEventDuringInjection);
-                                    automaticBrightnessController2.mInjectedLuxEvent = null;
-                                }
-                            }
-                        });
+                        automaticBrightnessController.mHandler.post(
+                                new Runnable() { // from class:
+                                                 // com.android.server.display.AutomaticBrightnessController$$ExternalSyntheticLambda0
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        AutomaticBrightnessController
+                                                automaticBrightnessController2 =
+                                                        AutomaticBrightnessController.this;
+                                        SensorEvent sensorEvent2 = sensorEvent;
+                                        automaticBrightnessController2.getClass();
+                                        if (sensorEvent2.values[0]
+                                                >= FullScreenMagnificationGestureHandler
+                                                        .MAX_SCALE) {
+                                            automaticBrightnessController2.mInjectedLuxEvent =
+                                                    sensorEvent2;
+                                            automaticBrightnessController2.onSensorChangedInternal(
+                                                    sensorEvent2);
+                                        } else if (automaticBrightnessController2.mInjectedLuxEvent
+                                                != null) {
+                                            automaticBrightnessController2.onSensorChangedInternal(
+                                                    automaticBrightnessController2
+                                                            .mLastRealLuxEventDuringInjection);
+                                            automaticBrightnessController2.mInjectedLuxEvent = null;
+                                        }
+                                    }
+                                });
                     }
                 }
                 return 0;
@@ -655,9 +748,12 @@ public final class DisplayManagerShellCommand extends ShellCommand {
             case '\r':
                 return setDisplayEnabled(false);
             case 14:
-                NotificationManager notificationManager = this.mService.mDisplayNotificationManager.mNotificationManager;
+                NotificationManager notificationManager =
+                        this.mService.mDisplayNotificationManager.mNotificationManager;
                 if (notificationManager == null) {
-                    Slog.e("DisplayNotificationManager", "Can't cancelNotifications: NotificationManager is null");
+                    Slog.e(
+                            "DisplayNotificationManager",
+                            "Can't cancelNotifications: NotificationManager is null");
                 } else {
                     notificationManager.cancel("DisplayNotificationManager", 1);
                 }
@@ -676,9 +772,13 @@ public final class DisplayManagerShellCommand extends ShellCommand {
                         float parseFloat4 = Float.parseFloat(nextArg11);
                         DisplayManagerService displayManagerService2 = this.mService;
                         synchronized (displayManagerService2.mSyncRoot) {
-                            DisplayPowerControllerInterface displayPowerControllerInterface = (DisplayPowerControllerInterface) displayManagerService2.mDisplayPowerControllers.get(0);
+                            DisplayPowerControllerInterface displayPowerControllerInterface =
+                                    (DisplayPowerControllerInterface)
+                                            displayManagerService2.mDisplayPowerControllers.get(0);
                             if (displayPowerControllerInterface != null) {
-                                Message obtainMessage = ((DisplayPowerController) displayPowerControllerInterface).mHandler.obtainMessage();
+                                Message obtainMessage =
+                                        ((DisplayPowerController) displayPowerControllerInterface)
+                                                .mHandler.obtainMessage();
                                 obtainMessage.what = 15;
                                 obtainMessage.arg1 = Float.floatToIntBits(parseFloat4);
                                 obtainMessage.sendToTarget();
@@ -701,11 +801,15 @@ public final class DisplayManagerShellCommand extends ShellCommand {
             case 21:
                 DisplayManagerService displayManagerService3 = this.mService;
                 synchronized (displayManagerService3.mSyncRoot) {
-                    DisplayPowerController displayPowerController = (DisplayPowerController) ((DisplayPowerControllerInterface) displayManagerService3.mDisplayPowerControllers.get(0));
+                    DisplayPowerController displayPowerController =
+                            (DisplayPowerController)
+                                    ((DisplayPowerControllerInterface)
+                                            displayManagerService3.mDisplayPowerControllers.get(0));
                     if (displayPowerController.mAutomaticBrightnessController != null) {
                         PowerHistorian powerHistorian = displayPowerController.mPowerHistorian;
                         powerHistorian.getClass();
-                        powerHistorian.addRecord(3, new PowerHistorian.MessageRecord("ShortTermModel: shell cmd"));
+                        powerHistorian.addRecord(
+                                3, new PowerHistorian.MessageRecord("ShortTermModel: shell cmd"));
                         displayPowerController.mAutomaticBrightnessController.resetShortTermModel();
                     }
                 }
@@ -720,9 +824,12 @@ public final class DisplayManagerShellCommand extends ShellCommand {
                         DisplayManagerService displayManagerService4 = this.mService;
                         synchronized (displayManagerService4.mSyncRoot) {
                             try {
-                                DisplayDevice deviceForDisplayLocked = displayManagerService4.getDeviceForDisplayLocked(parseInt3);
+                                DisplayDevice deviceForDisplayLocked =
+                                        displayManagerService4.getDeviceForDisplayLocked(parseInt3);
                                 if (deviceForDisplayLocked != null) {
-                                    activeDisplayModeAtStartLocked = deviceForDisplayLocked.getActiveDisplayModeAtStartLocked();
+                                    activeDisplayModeAtStartLocked =
+                                            deviceForDisplayLocked
+                                                    .getActiveDisplayModeAtStartLocked();
                                 }
                             } finally {
                             }
@@ -731,7 +838,14 @@ public final class DisplayManagerShellCommand extends ShellCommand {
                             getOutPrintWriter().println("Boot display mode: null");
                             return 0;
                         }
-                        getOutPrintWriter().println("Boot display mode: " + activeDisplayModeAtStartLocked.getPhysicalWidth() + " " + activeDisplayModeAtStartLocked.getPhysicalHeight() + " " + activeDisplayModeAtStartLocked.getRefreshRate());
+                        getOutPrintWriter()
+                                .println(
+                                        "Boot display mode: "
+                                                + activeDisplayModeAtStartLocked.getPhysicalWidth()
+                                                + " "
+                                                + activeDisplayModeAtStartLocked.getPhysicalHeight()
+                                                + " "
+                                                + activeDisplayModeAtStartLocked.getRefreshRate());
                         return 0;
                     } catch (NumberFormatException unused5) {
                         getErrPrintWriter().println("Error: invalid displayId");
@@ -765,15 +879,22 @@ public final class DisplayManagerShellCommand extends ShellCommand {
                             if (parseInt4 != 0) {
                                 if (parseInt4 != 1) {
                                     if (parseInt4 != 2) {
-                                        Slog.e("DisplayManagerShellCommand", parseInt4 + " is not a valid value of matchContentFrameRate type.");
+                                        Slog.e(
+                                                "DisplayManagerShellCommand",
+                                                parseInt4
+                                                        + " is not a valid value of"
+                                                        + " matchContentFrameRate type.");
                                     }
                                 }
                             }
                             return 0;
                         }
-                        getErrPrintWriter().println("Error: invalid value of matchContentFrameRatePreference");
+                        getErrPrintWriter()
+                                .println("Error: invalid value of matchContentFrameRatePreference");
                     } catch (NumberFormatException unused7) {
-                        getErrPrintWriter().println("Error: invalid format of matchContentFrameRatePreference");
+                        getErrPrintWriter()
+                                .println(
+                                        "Error: invalid format of matchContentFrameRatePreference");
                     }
                 }
                 return 1;
@@ -787,15 +908,25 @@ public final class DisplayManagerShellCommand extends ShellCommand {
                     } catch (NumberFormatException unused8) {
                     }
                     if (f2 >= FullScreenMagnificationGestureHandler.MAX_SCALE && f2 <= 1.0f) {
-                        ((DisplayManager) this.mService.getContext().getSystemService(DisplayManager.class)).setBrightness(0, f2);
+                        ((DisplayManager)
+                                        this.mService
+                                                .getContext()
+                                                .getSystemService(DisplayManager.class))
+                                .setBrightness(0, f2);
                         return 0;
                     }
-                    getErrPrintWriter().println("Error: brightness should be a number between 0 and 1");
+                    getErrPrintWriter()
+                            .println("Error: brightness should be a number between 0 and 1");
                 }
                 return 1;
             case 26:
-                DisplayManager displayManager = (DisplayManager) this.mService.getContext().getSystemService(DisplayManager.class);
-                getOutPrintWriter().println("Match content frame rate type: " + displayManager.getMatchContentFrameRateUserPreference());
+                DisplayManager displayManager =
+                        (DisplayManager)
+                                this.mService.getContext().getSystemService(DisplayManager.class);
+                getOutPrintWriter()
+                        .println(
+                                "Match content frame rate type: "
+                                        + displayManager.getMatchContentFrameRateUserPreference());
                 return 0;
             case 27:
                 setDisplayModeDirectorLoggingEnabled(false);
@@ -819,10 +950,15 @@ public final class DisplayManagerShellCommand extends ShellCommand {
                             i3++;
                             i4 = i5;
                         }
-                        ((DisplayManager) this.mService.getContext().getSystemService(DisplayManager.class)).setUserDisabledHdrTypes(iArr);
+                        ((DisplayManager)
+                                        this.mService
+                                                .getContext()
+                                                .getSystemService(DisplayManager.class))
+                                .setUserDisabledHdrTypes(iArr);
                         return 0;
                     } catch (NumberFormatException unused9) {
-                        getErrPrintWriter().println("Error: invalid format of userDisabledHdrTypes");
+                        getErrPrintWriter()
+                                .println("Error: invalid format of userDisabledHdrTypes");
                     }
                 }
                 return 1;
@@ -841,8 +977,12 @@ public final class DisplayManagerShellCommand extends ShellCommand {
                     } catch (NumberFormatException unused11) {
                         f = -1.0f;
                     }
-                    if (f >= FullScreenMagnificationGestureHandler.MAX_SCALE && f2 >= FullScreenMagnificationGestureHandler.MAX_SCALE) {
-                        DisplayPowerController displayPowerController2 = (DisplayPowerController) ((DisplayPowerControllerInterface) this.mService.mDisplayPowerControllers.get(0));
+                    if (f >= FullScreenMagnificationGestureHandler.MAX_SCALE
+                            && f2 >= FullScreenMagnificationGestureHandler.MAX_SCALE) {
+                        DisplayPowerController displayPowerController2 =
+                                (DisplayPowerController)
+                                        ((DisplayPowerControllerInterface)
+                                                this.mService.mDisplayPowerControllers.get(0));
                         displayPowerController2.mBrightnessRampRateHdrIncrease = f;
                         displayPowerController2.mBrightnessRampRateHdrDecrease = f2;
                         return 0;
@@ -874,23 +1014,107 @@ public final class DisplayManagerShellCommand extends ShellCommand {
         outPrintWriter.println("    Print this help text.");
         outPrintWriter.println();
         outPrintWriter.println("  show-notification NOTIFICATION_TYPE");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Show notification for one of the following types: on-hotplug-error, on-link-training-failure, on-cable-dp-incapable", "  cancel-notifications", "    Cancel notifications.", "  set-brightness BRIGHTNESS");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Sets the current brightness to BRIGHTNESS (a number between 0 and 1).", "  reset-brightness-configuration", "    Reset the brightness to its default configuration.", "  ab-logging-enable");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Enable auto-brightness logging.", "  ab-logging-disable", "    Disable auto-brightness logging.", "  dwb-logging-enable");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Enable display white-balance logging.", "  dwb-logging-disable", "    Disable display white-balance logging.", "  dmd-logging-enable");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Enable display mode director logging.", "  dmd-logging-disable", "    Disable display mode director logging.", "  dwb-set-cct CCT");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Sets the ambient color temperature override to CCT (use -1 to disable).", "  get-ambient-brightness-info [lux]", "    Gets the ambient brightness thresholds and brightness info.", "  ab-short-term-reset");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Do short-term reset immediately.", "  ab-test-enable", "    Enable adaptive brightness test mode for sec long-term model.", "  ab-test-disable");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Disable adaptive brightness test mode for sec long-term model.", "  ab-add-brightness-weights [lux]:[brightness(0.0f~1.0f)]:[durationSec]:[continuity]", "    Add brightness weights directly  for sec long-term model.", "  set-user-preferred-display-mode WIDTH HEIGHT REFRESH-RATE DISPLAY_ID (optional)");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Sets the user preferred display mode which has fields WIDTH, HEIGHT and REFRESH-RATE. If DISPLAY_ID is passed, the mode change is applied to displaywith id = DISPLAY_ID, else mode change is applied globally.", "  clear-user-preferred-display-mode DISPLAY_ID (optional)", "    Clears the user preferred display mode. If DISPLAY_ID is passed, the mode is cleared for  display with id = DISPLAY_ID, else mode is cleared globally.", "  get-user-preferred-display-mode DISPLAY_ID (optional)");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Returns the user preferred display mode or null if no mode is set by user.If DISPLAY_ID is passed, the mode for display with id = DISPLAY_ID is returned, else global display mode is returned.", "  get-active-display-mode-at-start DISPLAY_ID", "    Returns the display mode which was found at boot time of display with id = DISPLAY_ID", "  set-match-content-frame-rate-pref PREFERENCE");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Sets the match content frame rate preference as PREFERENCE ", "  get-match-content-frame-rate-pref", "    Returns the match content frame rate preference", "  set-user-disabled-hdr-types TYPES...");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Sets the user disabled HDR types as TYPES", "  get-user-disabled-hdr-types", "    Returns the user disabled HDR types", "  get-displays [-c|--category CATEGORY] [-i|--ids-only] [-t|--type TYPE]");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    [CATEGORY]", "    Returns the current displays. Can specify string category among", "    DisplayManager.DISPLAY_CATEGORY_*; must use the actual string value.", "    Can choose to print only the ids of the displays. Can filter by");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    display types. For example, '--type external'", "  dock", "    Sets brightness to docked + idle screen brightness mode", "  undock");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Show notification for one of the following types: on-hotplug-error,"
+                    + " on-link-training-failure, on-cable-dp-incapable",
+                "  cancel-notifications",
+                "    Cancel notifications.",
+                "  set-brightness BRIGHTNESS");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Sets the current brightness to BRIGHTNESS (a number between 0 and 1).",
+                "  reset-brightness-configuration",
+                "    Reset the brightness to its default configuration.",
+                "  ab-logging-enable");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Enable auto-brightness logging.",
+                "  ab-logging-disable",
+                "    Disable auto-brightness logging.",
+                "  dwb-logging-enable");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Enable display white-balance logging.",
+                "  dwb-logging-disable",
+                "    Disable display white-balance logging.",
+                "  dmd-logging-enable");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Enable display mode director logging.",
+                "  dmd-logging-disable",
+                "    Disable display mode director logging.",
+                "  dwb-set-cct CCT");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Sets the ambient color temperature override to CCT (use -1 to disable).",
+                "  get-ambient-brightness-info [lux]",
+                "    Gets the ambient brightness thresholds and brightness info.",
+                "  ab-short-term-reset");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Do short-term reset immediately.",
+                "  ab-test-enable",
+                "    Enable adaptive brightness test mode for sec long-term model.",
+                "  ab-test-disable");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Disable adaptive brightness test mode for sec long-term model.",
+                "  ab-add-brightness-weights"
+                    + " [lux]:[brightness(0.0f~1.0f)]:[durationSec]:[continuity]",
+                "    Add brightness weights directly  for sec long-term model.",
+                "  set-user-preferred-display-mode WIDTH HEIGHT REFRESH-RATE DISPLAY_ID"
+                    + " (optional)");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Sets the user preferred display mode which has fields WIDTH, HEIGHT and"
+                    + " REFRESH-RATE. If DISPLAY_ID is passed, the mode change is applied to"
+                    + " displaywith id = DISPLAY_ID, else mode change is applied globally.",
+                "  clear-user-preferred-display-mode DISPLAY_ID (optional)",
+                "    Clears the user preferred display mode. If DISPLAY_ID is passed, the mode is"
+                    + " cleared for  display with id = DISPLAY_ID, else mode is cleared globally.",
+                "  get-user-preferred-display-mode DISPLAY_ID (optional)");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Returns the user preferred display mode or null if no mode is set by user.If"
+                    + " DISPLAY_ID is passed, the mode for display with id = DISPLAY_ID is"
+                    + " returned, else global display mode is returned.",
+                "  get-active-display-mode-at-start DISPLAY_ID",
+                "    Returns the display mode which was found at boot time of display with id ="
+                    + " DISPLAY_ID",
+                "  set-match-content-frame-rate-pref PREFERENCE");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Sets the match content frame rate preference as PREFERENCE ",
+                "  get-match-content-frame-rate-pref",
+                "    Returns the match content frame rate preference",
+                "  set-user-disabled-hdr-types TYPES...");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Sets the user disabled HDR types as TYPES",
+                "  get-user-disabled-hdr-types",
+                "    Returns the user disabled HDR types",
+                "  get-displays [-c|--category CATEGORY] [-i|--ids-only] [-t|--type TYPE]");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    [CATEGORY]",
+                "    Returns the current displays. Can specify string category among",
+                "    DisplayManager.DISPLAY_CATEGORY_*; must use the actual string value.",
+                "    Can choose to print only the ids of the displays. Can filter by");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    display types. For example, '--type external'",
+                "  dock",
+                "    Sets brightness to docked + idle screen brightness mode",
+                "  undock");
         outPrintWriter.println("    Sets brightness to active (normal) screen brightness mode");
         if (this.mFlags.mConnectedDisplayManagementFlagState.isEnabled()) {
-            BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  enable-display DISPLAY_ID", "    Enable the DISPLAY_ID. Only possible if this is a connected display.", "  disable-display DISPLAY_ID", "    Disable the DISPLAY_ID. Only possible if this is a connected display.");
+            BatteryService$$ExternalSyntheticOutline0.m(
+                    outPrintWriter,
+                    "  enable-display DISPLAY_ID",
+                    "    Enable the DISPLAY_ID. Only possible if this is a connected display.",
+                    "  disable-display DISPLAY_ID",
+                    "    Disable the DISPLAY_ID. Only possible if this is a connected display.");
         }
         outPrintWriter.println();
         Intent.printIntentArgsHelp(outPrintWriter, "");
@@ -906,7 +1130,8 @@ public final class DisplayManagerShellCommand extends ShellCommand {
             this.mService.requestDisplayPower(Integer.parseInt(nextArg), z);
             return 0;
         } catch (NumberFormatException unused) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(getErrPrintWriter(), "Error: invalid displayId: '", nextArg, "'");
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    getErrPrintWriter(), "Error: invalid displayId: '", nextArg, "'");
             return 1;
         }
     }
@@ -915,10 +1140,22 @@ public final class DisplayManagerShellCommand extends ShellCommand {
         AutomaticBrightnessController automaticBrightnessController;
         DisplayManagerService displayManagerService = this.mService;
         synchronized (displayManagerService.mSyncRoot) {
-            DisplayPowerControllerInterface displayPowerControllerInterface = (DisplayPowerControllerInterface) displayManagerService.mDisplayPowerControllers.get(0);
-            if (displayPowerControllerInterface != null && (automaticBrightnessController = ((DisplayPowerController) displayPowerControllerInterface).mAutomaticBrightnessController) != null && automaticBrightnessController.mLoggingEnabled != z) {
-                for (int i = 0; i < automaticBrightnessController.mBrightnessMappingStrategyMap.size(); i++) {
-                    BrightnessMappingStrategy brightnessMappingStrategy = (BrightnessMappingStrategy) automaticBrightnessController.mBrightnessMappingStrategyMap.valueAt(i);
+            DisplayPowerControllerInterface displayPowerControllerInterface =
+                    (DisplayPowerControllerInterface)
+                            displayManagerService.mDisplayPowerControllers.get(0);
+            if (displayPowerControllerInterface != null
+                    && (automaticBrightnessController =
+                                    ((DisplayPowerController) displayPowerControllerInterface)
+                                            .mAutomaticBrightnessController)
+                            != null
+                    && automaticBrightnessController.mLoggingEnabled != z) {
+                for (int i = 0;
+                        i < automaticBrightnessController.mBrightnessMappingStrategyMap.size();
+                        i++) {
+                    BrightnessMappingStrategy brightnessMappingStrategy =
+                            (BrightnessMappingStrategy)
+                                    automaticBrightnessController.mBrightnessMappingStrategyMap
+                                            .valueAt(i);
                     if (brightnessMappingStrategy.mLoggingEnabled != z) {
                         brightnessMappingStrategy.mLoggingEnabled = z;
                         if (BrightnessMappingStrategy.UserOffsetManager.sDebugLogging != z) {
@@ -933,7 +1170,8 @@ public final class DisplayManagerShellCommand extends ShellCommand {
 
     public final int setDisplayEnabled(boolean z) {
         if (!this.mFlags.mConnectedDisplayManagementFlagState.isEnabled()) {
-            getErrPrintWriter().println("Error: external display management is not available on this device.");
+            getErrPrintWriter()
+                    .println("Error: external display management is not available on this device.");
             return 1;
         }
         String nextArg = getNextArg();
@@ -945,7 +1183,8 @@ public final class DisplayManagerShellCommand extends ShellCommand {
             this.mService.enableConnectedDisplay(Integer.parseInt(nextArg), z);
             return 0;
         } catch (NumberFormatException unused) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(getErrPrintWriter(), "Error: invalid displayId: '", nextArg, "'");
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    getErrPrintWriter(), "Error: invalid displayId: '", nextArg, "'");
             return 1;
         }
     }
@@ -956,10 +1195,12 @@ public final class DisplayManagerShellCommand extends ShellCommand {
             DisplayModeDirector displayModeDirector = displayManagerService.mDisplayModeDirector;
             if (displayModeDirector.mLoggingEnabled != z) {
                 displayModeDirector.mLoggingEnabled = z;
-                DisplayModeDirector.BrightnessObserver brightnessObserver = displayModeDirector.mBrightnessObserver;
+                DisplayModeDirector.BrightnessObserver brightnessObserver =
+                        displayModeDirector.mBrightnessObserver;
                 if (brightnessObserver.mLoggingEnabled != z) {
                     brightnessObserver.mLoggingEnabled = z;
-                    DisplayModeDirector.BrightnessObserver.LightSensorEventListener lightSensorEventListener = brightnessObserver.mLightSensorListener;
+                    DisplayModeDirector.BrightnessObserver.LightSensorEventListener
+                            lightSensorEventListener = brightnessObserver.mLightSensorListener;
                     if (lightSensorEventListener.mLoggingEnabled != z) {
                         lightSensorEventListener.mLoggingEnabled = z;
                     }
@@ -973,9 +1214,13 @@ public final class DisplayManagerShellCommand extends ShellCommand {
     public final void setDisplayWhiteBalanceLoggingEnabled(boolean z) {
         DisplayManagerService displayManagerService = this.mService;
         synchronized (displayManagerService.mSyncRoot) {
-            DisplayPowerControllerInterface displayPowerControllerInterface = (DisplayPowerControllerInterface) displayManagerService.mDisplayPowerControllers.get(0);
+            DisplayPowerControllerInterface displayPowerControllerInterface =
+                    (DisplayPowerControllerInterface)
+                            displayManagerService.mDisplayPowerControllers.get(0);
             if (displayPowerControllerInterface != null) {
-                Message obtainMessage = ((DisplayPowerController) displayPowerControllerInterface).mHandler.obtainMessage();
+                Message obtainMessage =
+                        ((DisplayPowerController) displayPowerControllerInterface)
+                                .mHandler.obtainMessage();
                 obtainMessage.what = 16;
                 obtainMessage.arg1 = z ? 1 : 0;
                 obtainMessage.sendToTarget();
@@ -989,12 +1234,18 @@ public final class DisplayManagerShellCommand extends ShellCommand {
         }
         DisplayManagerService displayManagerService = this.mService;
         synchronized (displayManagerService.mSyncRoot) {
-            AdaptiveBrightnessLongtermModelBuilder adaptiveBrightnessLongtermModelBuilder = ((DisplayPowerController) ((DisplayPowerControllerInterface) displayManagerService.mDisplayPowerControllers.get(0))).mAdaptiveBrightnessLongtermModelBuilder;
+            AdaptiveBrightnessLongtermModelBuilder adaptiveBrightnessLongtermModelBuilder =
+                    ((DisplayPowerController)
+                                    ((DisplayPowerControllerInterface)
+                                            displayManagerService.mDisplayPowerControllers.get(0)))
+                            .mAdaptiveBrightnessLongtermModelBuilder;
             if (adaptiveBrightnessLongtermModelBuilder != null) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m("setTestModeEnabled:", "AdaptiveBrightnessLongtermModelBuilder", z);
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        "setTestModeEnabled:", "AdaptiveBrightnessLongtermModelBuilder", z);
                 if (adaptiveBrightnessLongtermModelBuilder.mTestModeEnabled != z) {
                     adaptiveBrightnessLongtermModelBuilder.mTestModeEnabled = z;
-                    AdaptiveBrightnessLongtermModelBuilder.ModelBuilderHandler modelBuilderHandler = adaptiveBrightnessLongtermModelBuilder.mBgHandler;
+                    AdaptiveBrightnessLongtermModelBuilder.ModelBuilderHandler modelBuilderHandler =
+                            adaptiveBrightnessLongtermModelBuilder.mBgHandler;
                     if (z) {
                         modelBuilderHandler.obtainMessage(2).sendToTarget();
                     } else {

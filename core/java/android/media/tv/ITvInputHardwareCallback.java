@@ -14,12 +14,10 @@ public interface ITvInputHardwareCallback extends IInterface {
 
     public static class Default implements ITvInputHardwareCallback {
         @Override // android.media.tv.ITvInputHardwareCallback
-        public void onReleased() throws RemoteException {
-        }
+        public void onReleased() throws RemoteException {}
 
         @Override // android.media.tv.ITvInputHardwareCallback
-        public void onStreamConfigChanged(TvStreamConfig[] configs) throws RemoteException {
-        }
+        public void onStreamConfigChanged(TvStreamConfig[] configs) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -27,7 +25,7 @@ public interface ITvInputHardwareCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITvInputHardwareCallback {
+    public abstract static class Stub extends Binder implements ITvInputHardwareCallback {
         public static final String DESCRIPTOR = "android.media.tv.ITvInputHardwareCallback";
         static final int TRANSACTION_onReleased = 1;
         static final int TRANSACTION_onStreamConfigChanged = 2;
@@ -69,7 +67,8 @@ public interface ITvInputHardwareCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -82,7 +81,8 @@ public interface ITvInputHardwareCallback extends IInterface {
                     onReleased();
                     return true;
                 case 2:
-                    TvStreamConfig[] _arg0 = (TvStreamConfig[]) data.createTypedArray(TvStreamConfig.CREATOR);
+                    TvStreamConfig[] _arg0 =
+                            (TvStreamConfig[]) data.createTypedArray(TvStreamConfig.CREATOR);
                     data.enforceNoDataAvail();
                     onStreamConfigChanged(_arg0);
                     return true;

@@ -7,8 +7,10 @@ import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+
 import com.android.internal.telephony.SemTelephonyUtils;
 import com.android.internal.telephony.util.TelephonyUtils;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -16,8 +18,7 @@ import java.security.NoSuchAlgorithmException;
 public final class Rlog {
     private static final boolean USER_BUILD = TelephonyUtils.IS_USER;
 
-    private Rlog() {
-    }
+    private Rlog() {}
 
     private static int log(int priority, String tag, String msg) {
         return Log.logToRadioBuffer(priority, tag, msg);
@@ -77,10 +78,14 @@ public final class Rlog {
 
     public static String pii(String tag, Object pii) {
         String val = String.valueOf(pii);
-        if (pii == null || TextUtils.isEmpty(val) || (!SemTelephonyUtils.SHIP_BUILD && isLoggable(tag, 2))) {
+        if (pii == null
+                || TextUtils.isEmpty(val)
+                || (!SemTelephonyUtils.SHIP_BUILD && isLoggable(tag, 2))) {
             return val;
         }
-        return NavigationBarInflaterView.SIZE_MOD_START + secureHash(val.getBytes()) + NavigationBarInflaterView.SIZE_MOD_END;
+        return NavigationBarInflaterView.SIZE_MOD_START
+                + secureHash(val.getBytes())
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     public static String pii(boolean enablePiiLogging, Object pii) {
@@ -88,7 +93,9 @@ public final class Rlog {
         if (pii == null || TextUtils.isEmpty(val) || enablePiiLogging) {
             return val;
         }
-        return NavigationBarInflaterView.SIZE_MOD_START + secureHash(val.getBytes()) + NavigationBarInflaterView.SIZE_MOD_END;
+        return NavigationBarInflaterView.SIZE_MOD_START
+                + secureHash(val.getBytes())
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     public static String piiHandle(Object pii) {

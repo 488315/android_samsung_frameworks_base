@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface ISecureClock extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$security$secureclock$ISecureClock".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$security$secureclock$ISecureClock".replace('$', '.');
     public static final String HASH = "cd55ca9963c6a57fa5f2f120a45c6e0c4fafb423";
     public static final String TIME_STAMP_MAC_LABEL = "Auth Verification";
     public static final int VERSION = 1;
@@ -41,7 +42,7 @@ public interface ISecureClock extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISecureClock {
+    public abstract static class Stub extends Binder implements ISecureClock {
         static final int TRANSACTION_generateTimeStamp = 1;
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
@@ -86,7 +87,8 @@ public interface ISecureClock extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -147,7 +149,8 @@ public interface ISecureClock extends IInterface {
                         throw new RemoteException("Method generateTimeStamp is unimplemented.");
                     }
                     _reply.readException();
-                    TimeStampToken _result = (TimeStampToken) _reply.readTypedObject(TimeStampToken.CREATOR);
+                    TimeStampToken _result =
+                            (TimeStampToken) _reply.readTypedObject(TimeStampToken.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

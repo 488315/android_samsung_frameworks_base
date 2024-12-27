@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.Handler;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -17,12 +18,15 @@ public class ContentObserverWrapper {
     }
 
     public void registerObserver(Uri uri, final Runnable runnable) {
-        ContentObserver contentObserver = new ContentObserver(new Handler()) { // from class: com.samsung.android.globalactions.util.ContentObserverWrapper.1
-            @Override // android.database.ContentObserver
-            public void onChange(boolean selfChange) {
-                runnable.run();
-            }
-        };
+        ContentObserver contentObserver =
+                new ContentObserver(
+                        new Handler()) { // from class:
+                                         // com.samsung.android.globalactions.util.ContentObserverWrapper.1
+                    @Override // android.database.ContentObserver
+                    public void onChange(boolean selfChange) {
+                        runnable.run();
+                    }
+                };
         this.mContext.getContentResolver().registerContentObserver(uri, false, contentObserver);
         this.mObserverList.add(contentObserver);
     }

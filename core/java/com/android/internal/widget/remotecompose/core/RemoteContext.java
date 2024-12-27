@@ -114,7 +114,13 @@ public abstract class RemoteContext {
         this.mDocument = document;
     }
 
-    public void header(int majorVersion, int minorVersion, int patchVersion, int width, int height, long capabilities) {
+    public void header(
+            int majorVersion,
+            int minorVersion,
+            int patchVersion,
+            int width,
+            int height,
+            long capabilities) {
         this.mRemoteComposeState.setWindowWidth(width);
         this.mRemoteComposeState.setWindowHeight(height);
         this.mDocument.setVersion(majorVersion, minorVersion, patchVersion);
@@ -128,7 +134,8 @@ public abstract class RemoteContext {
     }
 
     public void setDocumentContentDescription(int contentDescriptionId) {
-        String contentDescription = (String) this.mRemoteComposeState.getFromId(contentDescriptionId);
+        String contentDescription =
+                (String) this.mRemoteComposeState.getFromId(contentDescriptionId);
         this.mDocument.setContentDescription(contentDescription);
     }
 }

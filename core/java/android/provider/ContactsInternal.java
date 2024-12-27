@@ -8,10 +8,11 @@ import android.content.Intent;
 import android.content.UriMatcher;
 import android.net.Uri;
 import android.os.UserHandle;
-import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.widget.Toast;
+
 import com.android.internal.R;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -20,8 +21,7 @@ public class ContactsInternal {
     private static final int CONTACTS_URI_LOOKUP_ID = 1000;
     private static final UriMatcher sContactsUriMatcher = new UriMatcher(-1);
 
-    private ContactsInternal() {
-    }
+    private ContactsInternal() {}
 
     static {
         UriMatcher matcher = sContactsUriMatcher;
@@ -43,7 +43,8 @@ public class ContactsInternal {
         startQuickContactWithErrorToastForUser(context, intent, context.getUser());
     }
 
-    public static void startQuickContactWithErrorToastForUser(Context context, Intent intent, UserHandle user) {
+    public static void startQuickContactWithErrorToastForUser(
+            Context context, Intent intent, UserHandle user) {
         try {
             context.startActivityAsUser(intent, user);
         } catch (ActivityNotFoundException e) {
@@ -71,18 +72,29 @@ public class ContactsInternal {
             parseLong = Long.parseLong(directoryIdStr);
         }
         long directoryId = parseLong;
-        if (!TextUtils.isEmpty(lookupKey) && lookupKey.startsWith(ContactsContract.Contacts.ENTERPRISE_CONTACT_LOOKUP_PREFIX)) {
+        if (!TextUtils.isEmpty(lookupKey)
+                && lookupKey.startsWith(
+                        ContactsContract.Contacts.ENTERPRISE_CONTACT_LOOKUP_PREFIX)) {
             if (!ContactsContract.Contacts.isEnterpriseContactId(contactId)) {
                 throw new IllegalArgumentException("Invalid enterprise contact id: " + contactId);
             }
             if (!ContactsContract.Directory.isEnterpriseDirectoryId(directoryId)) {
-                throw new IllegalArgumentException("Invalid enterprise directory id: " + directoryId);
+                throw new IllegalArgumentException(
+                        "Invalid enterprise directory id: " + directoryId);
             }
-            DevicePolicyManager dpm = (DevicePolicyManager) context.getSystemService(DevicePolicyManager.class);
-            String actualLookupKey = lookupKey.substring(ContactsContract.Contacts.ENTERPRISE_CONTACT_LOOKUP_PREFIX.length());
+            DevicePolicyManager dpm =
+                    (DevicePolicyManager) context.getSystemService(DevicePolicyManager.class);
+            String actualLookupKey =
+                    lookupKey.substring(
+                            ContactsContract.Contacts.ENTERPRISE_CONTACT_LOOKUP_PREFIX.length());
             long actualContactId = contactId - ContactsContract.Contacts.ENTERPRISE_CONTACT_ID_BASE;
             long actualDirectoryId = directoryId - 1000000000;
-            dpm.startManagedQuickContact(actualLookupKey, actualContactId, isContactIdIgnored, actualDirectoryId, originalIntent);
+            dpm.startManagedQuickContact(
+                    actualLookupKey,
+                    actualContactId,
+                    isContactIdIgnored,
+                    actualDirectoryId,
+                    originalIntent);
             return true;
         }
         return false;

@@ -3,7 +3,6 @@ package com.samsung.android.service.vaultkeeper;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.ServiceManager;
 import android.util.Log;
-import com.samsung.android.service.vaultkeeper.IVaultKeeperService;
 
 /* loaded from: classes6.dex */
 public final class VaultKeeperManager {
@@ -33,13 +32,14 @@ public final class VaultKeeperManager {
     private IVaultKeeperService mService;
     private String mVaultName;
 
-    private VaultKeeperManager() {
-    }
+    private VaultKeeperManager() {}
 
     private VaultKeeperManager(String vaultName) {
         this.mErrorCode = -101;
         this.mVaultName = vaultName;
-        this.mService = IVaultKeeperService.Stub.asInterface(ServiceManager.getService("VaultKeeperService"));
+        this.mService =
+                IVaultKeeperService.Stub.asInterface(
+                        ServiceManager.getService("VaultKeeperService"));
     }
 
     public static VaultKeeperManager getInstance(String vaultName) {
@@ -48,7 +48,12 @@ public final class VaultKeeperManager {
             return null;
         }
         if (vaultName.length() == 0 || vaultName.length() > 32) {
-            Log.e(TAG, "vaultName length is wrong(" + vaultName.length() + "). It should be less than (32" + NavigationBarInflaterView.KEY_CODE_END);
+            Log.e(
+                    TAG,
+                    "vaultName length is wrong("
+                            + vaultName.length()
+                            + "). It should be less than (32"
+                            + NavigationBarInflaterView.KEY_CODE_END);
             return null;
         }
         VaultKeeperManager vkm = new VaultKeeperManager(vaultName);

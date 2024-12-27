@@ -5,7 +5,7 @@ import android.content.Context;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
-import com.samsung.android.chimera.IChimera;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -35,7 +35,9 @@ public class ChimeraMemManager {
         IChimera iChimera;
         synchronized (mLock) {
             if (sService == null) {
-                sService = IChimera.Stub.asInterface(ServiceManager.getService("ChimeraManagerService"));
+                sService =
+                        IChimera.Stub.asInterface(
+                                ServiceManager.getService("ChimeraManagerService"));
             }
             iChimera = sService;
         }

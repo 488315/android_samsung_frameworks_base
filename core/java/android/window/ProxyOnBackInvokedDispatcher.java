@@ -2,7 +2,7 @@ package android.window;
 
 import android.content.Context;
 import android.util.Pair;
-import android.window.WindowOnBackInvokedDispatcher;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -34,21 +34,26 @@ public class ProxyOnBackInvokedDispatcher implements OnBackInvokedDispatcher {
     @Override // android.window.OnBackInvokedDispatcher
     public void unregisterOnBackInvokedCallback(final OnBackInvokedCallback callback) {
         synchronized (this.mLock) {
-            this.mCallbacks.removeIf(new Predicate() { // from class: android.window.ProxyOnBackInvokedDispatcher$$ExternalSyntheticLambda0
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    boolean equals;
-                    equals = ((OnBackInvokedCallback) ((Pair) obj).first).equals(OnBackInvokedCallback.this);
-                    return equals;
-                }
-            });
+            this.mCallbacks.removeIf(
+                    new Predicate() { // from class:
+                                      // android.window.ProxyOnBackInvokedDispatcher$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Predicate
+                        public final boolean test(Object obj) {
+                            boolean equals;
+                            equals =
+                                    ((OnBackInvokedCallback) ((Pair) obj).first)
+                                            .equals(OnBackInvokedCallback.this);
+                            return equals;
+                        }
+                    });
             if (this.mActualDispatcher != null) {
                 this.mActualDispatcher.unregisterOnBackInvokedCallback(callback);
             }
         }
     }
 
-    private void registerOnBackInvokedCallbackUnchecked(OnBackInvokedCallback callback, int priority) {
+    private void registerOnBackInvokedCallbackUnchecked(
+            OnBackInvokedCallback callback, int priority) {
         synchronized (this.mLock) {
             this.mCallbacks.add(Pair.create(callback, Integer.valueOf(priority)));
             if (this.mActualDispatcher != null) {

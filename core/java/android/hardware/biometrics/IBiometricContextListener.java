@@ -25,16 +25,13 @@ public interface IBiometricContextListener extends IInterface {
 
     public static class Default implements IBiometricContextListener {
         @Override // android.hardware.biometrics.IBiometricContextListener
-        public void onFoldChanged(int FoldState) throws RemoteException {
-        }
+        public void onFoldChanged(int FoldState) throws RemoteException {}
 
         @Override // android.hardware.biometrics.IBiometricContextListener
-        public void onDisplayStateChanged(int displayState) throws RemoteException {
-        }
+        public void onDisplayStateChanged(int displayState) throws RemoteException {}
 
         @Override // android.hardware.biometrics.IBiometricContextListener
-        public void onHardwareIgnoreTouchesChanged(boolean shouldIgnore) throws RemoteException {
-        }
+        public void onHardwareIgnoreTouchesChanged(boolean shouldIgnore) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -42,7 +39,7 @@ public interface IBiometricContextListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBiometricContextListener {
+    public abstract static class Stub extends Binder implements IBiometricContextListener {
         static final int TRANSACTION_onDisplayStateChanged = 2;
         static final int TRANSACTION_onFoldChanged = 1;
         static final int TRANSACTION_onHardwareIgnoreTouchesChanged = 3;
@@ -86,7 +83,8 @@ public interface IBiometricContextListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IBiometricContextListener.DESCRIPTOR);
             }
@@ -156,7 +154,8 @@ public interface IBiometricContextListener extends IInterface {
             }
 
             @Override // android.hardware.biometrics.IBiometricContextListener
-            public void onHardwareIgnoreTouchesChanged(boolean shouldIgnore) throws RemoteException {
+            public void onHardwareIgnoreTouchesChanged(boolean shouldIgnore)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IBiometricContextListener.DESCRIPTOR);

@@ -1,10 +1,13 @@
 package com.android.server.sepunion.cover;
 
 import android.content.Context;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.cover.CoverState;
 import com.samsung.android.os.SemDvfsManager;
 import com.samsung.android.sepunion.Log;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -26,14 +29,18 @@ public final class CoverManagerUtils {
         } else if ("0".equals(valueFromSysFS.trim())) {
             Log.d("CoverManager_CoverManagerUtils", "Wireless Charge is NOT Supported");
         } else {
-            Log.d("CoverManager_CoverManagerUtils", "Wireless Charge is Supported: Type ".concat(valueFromSysFS));
+            Log.d(
+                    "CoverManager_CoverManagerUtils",
+                    "Wireless Charge is Supported: Type ".concat(valueFromSysFS));
             z = true;
         }
         isSupportWirelessCharge = z;
     }
 
     public static void fileWriteInt(int i) {
-        Log.d("CoverManager_CoverManagerUtils", "fileWriteInt to /sys/class/power_supply/battery/led_cover, " + i);
+        Log.d(
+                "CoverManager_CoverManagerUtils",
+                "fileWriteInt to /sys/class/power_supply/battery/led_cover, " + i);
         if (i != 0 && i != 1) {
             Log.e("CoverManager_CoverManagerUtils", "Invalid value : " + i);
             return;
@@ -41,7 +48,8 @@ public final class CoverManagerUtils {
         FileOutputStream fileOutputStream = null;
         try {
             try {
-                FileOutputStream fileOutputStream2 = new FileOutputStream(new File("/sys/class/power_supply/battery/led_cover"));
+                FileOutputStream fileOutputStream2 =
+                        new FileOutputStream(new File("/sys/class/power_supply/battery/led_cover"));
                 try {
                     fileOutputStream2.write(Integer.toString(i).getBytes());
                     fileOutputStream2.close();
@@ -64,17 +72,17 @@ public final class CoverManagerUtils {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:16:0x003b, code lost:
-    
-        if (r0 == null) goto L26;
-     */
+
+       if (r0 == null) goto L26;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:17:0x0037, code lost:
-    
-        r0.close();
-     */
+
+       r0.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:19:0x0035, code lost:
-    
-        if (r0 == null) goto L26;
-     */
+
+       if (r0 == null) goto L26;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -127,21 +135,24 @@ public final class CoverManagerUtils {
         L3e:
             return r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.sepunion.cover.CoverManagerUtils.getValueFromSysFS(int, java.lang.String):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.sepunion.cover.CoverManagerUtils.getValueFromSysFS(int,"
+                    + " java.lang.String):int");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:17:0x0038, code lost:
-    
-        if (r0 == null) goto L26;
-     */
+
+       if (r0 == null) goto L26;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:18:0x0034, code lost:
-    
-        r0.close();
-     */
+
+       r0.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:20:0x0032, code lost:
-    
-        if (r0 == null) goto L26;
-     */
+
+       if (r0 == null) goto L26;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -194,7 +205,10 @@ public final class CoverManagerUtils {
         L3b:
             return r5
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.sepunion.cover.CoverManagerUtils.getValueFromSysFS(java.lang.String, java.lang.String):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.sepunion.cover.CoverManagerUtils.getValueFromSysFS(java.lang.String,"
+                    + " java.lang.String):java.lang.String");
     }
 
     public static boolean isBackCover(CoverState coverState) {
@@ -212,9 +226,11 @@ public final class CoverManagerUtils {
         int i;
         int[] supportedFrequency3;
         if (sCoverCpuBooster == null) {
-            SemDvfsManager createInstance = SemDvfsManager.createInstance(context, "COVER_BOOSTER", 12);
+            SemDvfsManager createInstance =
+                    SemDvfsManager.createInstance(context, "COVER_BOOSTER", 12);
             sCoverCpuBooster = createInstance;
-            if (createInstance != null && (supportedFrequency3 = createInstance.getSupportedFrequency()) != null) {
+            if (createInstance != null
+                    && (supportedFrequency3 = createInstance.getSupportedFrequency()) != null) {
                 sCoverCpuBooster.setDvfsValue(supportedFrequency3[0]);
             }
         }
@@ -227,9 +243,13 @@ public final class CoverManagerUtils {
             }
         }
         if (sCoverCoreNumLockHelper == null) {
-            SemDvfsManager createInstance2 = SemDvfsManager.createInstance(context, "COVER_CORE_BOOSTER", 14);
+            SemDvfsManager createInstance2 =
+                    SemDvfsManager.createInstance(context, "COVER_CORE_BOOSTER", 14);
             sCoverCoreNumLockHelper = createInstance2;
-            if (createInstance2 != null && (supportedFrequency2 = createInstance2.getSupportedFrequency()) != null && supportedFrequency2.length > 0 && (i = supportedFrequency2[0]) >= 2) {
+            if (createInstance2 != null
+                    && (supportedFrequency2 = createInstance2.getSupportedFrequency()) != null
+                    && supportedFrequency2.length > 0
+                    && (i = supportedFrequency2[0]) >= 2) {
                 sCoverCoreNumLockHelper.setDvfsValue(i);
             }
         }
@@ -238,13 +258,19 @@ public final class CoverManagerUtils {
             try {
                 semDvfsManager2.acquire(2000);
             } catch (Exception e2) {
-                Log.e("CoverManager_CoverManagerUtils", "sCoverCoreNumLockHelper.acquire is failed", e2);
+                Log.e(
+                        "CoverManager_CoverManagerUtils",
+                        "sCoverCoreNumLockHelper.acquire is failed",
+                        e2);
             }
         }
         if (sCoverBusBooster == null) {
-            SemDvfsManager createInstance3 = SemDvfsManager.createInstance(context, "COVER_BUS_BOOSTER", 19);
+            SemDvfsManager createInstance3 =
+                    SemDvfsManager.createInstance(context, "COVER_BUS_BOOSTER", 19);
             sCoverBusBooster = createInstance3;
-            if (createInstance3 != null && (supportedFrequency = createInstance3.getSupportedFrequency()) != null && supportedFrequency.length > 0) {
+            if (createInstance3 != null
+                    && (supportedFrequency = createInstance3.getSupportedFrequency()) != null
+                    && supportedFrequency.length > 0) {
                 sCoverBusBooster.setDvfsValue(supportedFrequency[0]);
             }
         }

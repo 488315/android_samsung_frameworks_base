@@ -2,7 +2,9 @@ package com.android.server.locksettings.recoverablekeystore.storage;
 
 import android.os.SystemClock;
 import android.util.SparseArray;
+
 import com.android.security.SecureBox;
+
 import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
 
@@ -29,7 +31,8 @@ public final class RemoteLockscreenValidationSessionStorage {
     public final LockscreenVerificationSession get(int i) {
         LockscreenVerificationSession lockscreenVerificationSession;
         synchronized (this.mSessionsByUserId) {
-            lockscreenVerificationSession = (LockscreenVerificationSession) this.mSessionsByUserId.get(i);
+            lockscreenVerificationSession =
+                    (LockscreenVerificationSession) this.mSessionsByUserId.get(i);
         }
         return lockscreenVerificationSession;
     }

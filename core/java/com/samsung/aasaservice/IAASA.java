@@ -20,8 +20,7 @@ public interface IAASA extends IInterface {
 
     public static class Default implements IAASA {
         @Override // com.samsung.aasaservice.IAASA
-        public void getRemoveTargetList(int type) throws RemoteException {
-        }
+        public void getRemoveTargetList(int type) throws RemoteException {}
 
         @Override // com.samsung.aasaservice.IAASA
         public String[] readInstallBlockedPKList() throws RemoteException {
@@ -34,8 +33,7 @@ public interface IAASA extends IInterface {
         }
 
         @Override // com.samsung.aasaservice.IAASA
-        public void onReceivePolicyUpdateCompletion() throws RemoteException {
-        }
+        public void onReceivePolicyUpdateCompletion() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -43,7 +41,7 @@ public interface IAASA extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAASA {
+    public abstract static class Stub extends Binder implements IAASA {
         static final int TRANSACTION_getRemoveTargetList = 1;
         static final int TRANSACTION_getTrustedToday = 3;
         static final int TRANSACTION_onReceivePolicyUpdateCompletion = 4;
@@ -90,7 +88,8 @@ public interface IAASA extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAASA.DESCRIPTOR);
             }

@@ -87,7 +87,7 @@ public interface IPerfSDKService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPerfSDKService {
+    public abstract static class Stub extends Binder implements IPerfSDKService {
         static final int TRANSACTION_connectionRequest = 10;
         static final int TRANSACTION_getAllowedPkgName = 2;
         static final int TRANSACTION_getChangedForegroundPackagename = 7;
@@ -152,7 +152,8 @@ public interface IPerfSDKService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IPerfSDKService.DESCRIPTOR);
             }

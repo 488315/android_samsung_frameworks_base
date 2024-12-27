@@ -8,6 +8,7 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.service.autofill.Dataset;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -24,12 +25,12 @@ public interface IFillCallback extends IInterface {
 
     public static class Default implements IFillCallback {
         @Override // android.service.autofill.augmented.IFillCallback
-        public void onCancellable(ICancellationSignal cancellation) throws RemoteException {
-        }
+        public void onCancellable(ICancellationSignal cancellation) throws RemoteException {}
 
         @Override // android.service.autofill.augmented.IFillCallback
-        public void onSuccess(List<Dataset> inlineSuggestionsData, Bundle clientState, boolean showingFillWindow) throws RemoteException {
-        }
+        public void onSuccess(
+                List<Dataset> inlineSuggestionsData, Bundle clientState, boolean showingFillWindow)
+                throws RemoteException {}
 
         @Override // android.service.autofill.augmented.IFillCallback
         public boolean isCompleted() throws RemoteException {
@@ -37,8 +38,7 @@ public interface IFillCallback extends IInterface {
         }
 
         @Override // android.service.autofill.augmented.IFillCallback
-        public void cancel() throws RemoteException {
-        }
+        public void cancel() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -46,7 +46,7 @@ public interface IFillCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFillCallback {
+    public abstract static class Stub extends Binder implements IFillCallback {
         static final int TRANSACTION_cancel = 4;
         static final int TRANSACTION_isCompleted = 3;
         static final int TRANSACTION_onCancellable = 1;
@@ -93,7 +93,8 @@ public interface IFillCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IFillCallback.DESCRIPTOR);
             }
@@ -103,7 +104,8 @@ public interface IFillCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ICancellationSignal _arg0 = ICancellationSignal.Stub.asInterface(data.readStrongBinder());
+                    ICancellationSignal _arg0 =
+                            ICancellationSignal.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onCancellable(_arg0);
                     reply.writeNoException();
@@ -162,7 +164,11 @@ public interface IFillCallback extends IInterface {
             }
 
             @Override // android.service.autofill.augmented.IFillCallback
-            public void onSuccess(List<Dataset> inlineSuggestionsData, Bundle clientState, boolean showingFillWindow) throws RemoteException {
+            public void onSuccess(
+                    List<Dataset> inlineSuggestionsData,
+                    Bundle clientState,
+                    boolean showingFillWindow)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

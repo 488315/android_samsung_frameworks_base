@@ -3,6 +3,7 @@ package android.telephony.data;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.util.Objects;
@@ -13,19 +14,21 @@ import java.util.regex.Pattern;
 
 /* loaded from: classes4.dex */
 public final class TrafficDescriptor implements Parcelable {
-    public static final Parcelable.Creator<TrafficDescriptor> CREATOR = new Parcelable.Creator<TrafficDescriptor>() { // from class: android.telephony.data.TrafficDescriptor.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TrafficDescriptor createFromParcel(Parcel source) {
-            return new TrafficDescriptor(source);
-        }
+    public static final Parcelable.Creator<TrafficDescriptor> CREATOR =
+            new Parcelable.Creator<
+                    TrafficDescriptor>() { // from class: android.telephony.data.TrafficDescriptor.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TrafficDescriptor createFromParcel(Parcel source) {
+                    return new TrafficDescriptor(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TrafficDescriptor[] newArray(int size) {
-            return new TrafficDescriptor[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TrafficDescriptor[] newArray(int size) {
+                    return new TrafficDescriptor[size];
+                }
+            };
     private final String mDnn;
     private final OsAppId mOsAppId;
 
@@ -33,8 +36,10 @@ public final class TrafficDescriptor implements Parcelable {
         private final String mAppId;
         private final int mDifferentiator;
         private final UUID mOsId;
-        public static final UUID ANDROID_OS_ID = UUID.fromString("97a498e3-fc92-5c94-8986-0333d06e4e47");
-        private static final Set<String> ALLOWED_APP_IDS = Set.of("ENTERPRISE", "PRIORITIZE_LATENCY", "PRIORITIZE_BANDWIDTH", "CBS");
+        public static final UUID ANDROID_OS_ID =
+                UUID.fromString("97a498e3-fc92-5c94-8986-0333d06e4e47");
+        private static final Set<String> ALLOWED_APP_IDS =
+                Set.of("ENTERPRISE", "PRIORITIZE_LATENCY", "PRIORITIZE_BANDWIDTH", "CBS");
 
         public OsAppId(UUID osId, String appId) {
             this(osId, appId, 1);
@@ -69,7 +74,11 @@ public final class TrafficDescriptor implements Parcelable {
                     this.mAppId = appIdAndDifferentiatorStr;
                 }
             } catch (Exception e) {
-                throw new IllegalArgumentException("Failed to decode " + (rawOsAppId != null ? new BigInteger(1, rawOsAppId).toString(16) : null));
+                throw new IllegalArgumentException(
+                        "Failed to decode "
+                                + (rawOsAppId != null
+                                        ? new BigInteger(1, rawOsAppId).toString(16)
+                                        : null));
             }
         }
 
@@ -86,7 +95,12 @@ public final class TrafficDescriptor implements Parcelable {
         }
 
         public byte[] getBytes() {
-            byte[] osAppId = (this.mAppId + (this.mDifferentiator > 1 ? Integer.valueOf(this.mDifferentiator) : "")).getBytes();
+            byte[] osAppId =
+                    (this.mAppId
+                                    + (this.mDifferentiator > 1
+                                            ? Integer.valueOf(this.mDifferentiator)
+                                            : ""))
+                            .getBytes();
             ByteBuffer bb = ByteBuffer.allocate(osAppId.length + 17);
             bb.putLong(this.mOsId.getMostSignificantBits());
             bb.putLong(this.mOsId.getLeastSignificantBits());
@@ -96,7 +110,15 @@ public final class TrafficDescriptor implements Parcelable {
         }
 
         public String toString() {
-            return "[OsAppId: OS=" + this.mOsId + ", App=" + this.mAppId + ", differentiator=" + this.mDifferentiator + ", raw=" + new BigInteger(1, getBytes()).toString(16) + NavigationBarInflaterView.SIZE_MOD_END;
+            return "[OsAppId: OS="
+                    + this.mOsId
+                    + ", App="
+                    + this.mAppId
+                    + ", differentiator="
+                    + this.mDifferentiator
+                    + ", raw="
+                    + new BigInteger(1, getBytes()).toString(16)
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
 
         public boolean equals(Object o) {
@@ -107,7 +129,9 @@ public final class TrafficDescriptor implements Parcelable {
                 return false;
             }
             OsAppId osAppId = (OsAppId) o;
-            if (this.mDifferentiator == osAppId.mDifferentiator && this.mOsId.equals(osAppId.mOsId) && this.mAppId.equals(osAppId.mAppId)) {
+            if (this.mDifferentiator == osAppId.mDifferentiator
+                    && this.mOsId.equals(osAppId.mOsId)
+                    && this.mAppId.equals(osAppId.mAppId)) {
                 return true;
             }
             return false;
@@ -135,10 +159,18 @@ public final class TrafficDescriptor implements Parcelable {
 
     private void enforceAllowedIds() {
         if (this.mOsAppId != null && !this.mOsAppId.getOsId().equals(OsAppId.ANDROID_OS_ID)) {
-            throw new IllegalArgumentException("OS id " + this.mOsAppId.getOsId() + " does not match " + OsAppId.ANDROID_OS_ID);
+            throw new IllegalArgumentException(
+                    "OS id "
+                            + this.mOsAppId.getOsId()
+                            + " does not match "
+                            + OsAppId.ANDROID_OS_ID);
         }
         if (this.mOsAppId != null && !OsAppId.ALLOWED_APP_IDS.contains(this.mOsAppId.getAppId())) {
-            throw new IllegalArgumentException("Illegal app id " + this.mOsAppId.getAppId() + ". Only allowing one of the following " + OsAppId.ALLOWED_APP_IDS);
+            throw new IllegalArgumentException(
+                    "Illegal app id "
+                            + this.mOsAppId.getAppId()
+                            + ". Only allowing one of the following "
+                            + OsAppId.ALLOWED_APP_IDS);
         }
     }
 

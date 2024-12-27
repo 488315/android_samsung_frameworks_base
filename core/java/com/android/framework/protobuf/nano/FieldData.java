@@ -43,7 +43,8 @@ class FieldData implements Cloneable {
     <T> T getValue(Extension<?, T> extension) {
         if (this.value != null) {
             if (this.cachedExtension != extension) {
-                throw new IllegalStateException("Tried to getExtension with a differernt Extension.");
+                throw new IllegalStateException(
+                        "Tried to getExtension with a differernt Extension.");
             }
         } else {
             this.cachedExtension = extension;

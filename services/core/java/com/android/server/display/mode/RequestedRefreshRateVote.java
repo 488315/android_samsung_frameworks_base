@@ -16,7 +16,9 @@ public final class RequestedRefreshRateVote implements Vote {
         if (this == obj) {
             return true;
         }
-        return (obj instanceof RequestedRefreshRateVote) && Float.compare(this.mRefreshRate, ((RequestedRefreshRateVote) obj).mRefreshRate) == 0;
+        return (obj instanceof RequestedRefreshRateVote)
+                && Float.compare(this.mRefreshRate, ((RequestedRefreshRateVote) obj).mRefreshRate)
+                        == 0;
     }
 
     public final int hashCode() {

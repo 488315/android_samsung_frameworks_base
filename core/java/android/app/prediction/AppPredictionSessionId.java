@@ -3,24 +3,27 @@ package android.app.prediction;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class AppPredictionSessionId implements Parcelable {
-    public static final Parcelable.Creator<AppPredictionSessionId> CREATOR = new Parcelable.Creator<AppPredictionSessionId>() { // from class: android.app.prediction.AppPredictionSessionId.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppPredictionSessionId createFromParcel(Parcel parcel) {
-            return new AppPredictionSessionId(parcel);
-        }
+    public static final Parcelable.Creator<AppPredictionSessionId> CREATOR =
+            new Parcelable.Creator<AppPredictionSessionId>() { // from class:
+                // android.app.prediction.AppPredictionSessionId.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppPredictionSessionId createFromParcel(Parcel parcel) {
+                    return new AppPredictionSessionId(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppPredictionSessionId[] newArray(int size) {
-            return new AppPredictionSessionId[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppPredictionSessionId[] newArray(int size) {
+                    return new AppPredictionSessionId[size];
+                }
+            };
     private final String mId;
     private final int mUserId;
 

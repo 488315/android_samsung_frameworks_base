@@ -1,11 +1,13 @@
 package android.inputmethodservice;
 
 import android.view.View;
+
 import java.util.function.Predicate;
 
 /* compiled from: D8$$SyntheticClass */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class NavigationBarController$Impl$$ExternalSyntheticLambda1 implements Predicate {
+public final /* synthetic */ class NavigationBarController$Impl$$ExternalSyntheticLambda1
+        implements Predicate {
     public final /* synthetic */ Class f$0;
 
     @Override // java.util.function.Predicate

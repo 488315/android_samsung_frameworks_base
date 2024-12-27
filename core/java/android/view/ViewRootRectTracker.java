@@ -1,7 +1,9 @@
 package android.view;
 
 import android.graphics.Rect;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;

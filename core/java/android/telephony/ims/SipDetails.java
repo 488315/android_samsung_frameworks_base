@@ -3,25 +3,27 @@ package android.telephony.ims;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class SipDetails implements Parcelable {
-    public static final Parcelable.Creator<SipDetails> CREATOR = new Parcelable.Creator<SipDetails>() { // from class: android.telephony.ims.SipDetails.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SipDetails createFromParcel(Parcel source) {
-            return new SipDetails(source);
-        }
+    public static final Parcelable.Creator<SipDetails> CREATOR =
+            new Parcelable.Creator<SipDetails>() { // from class: android.telephony.ims.SipDetails.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SipDetails createFromParcel(Parcel source) {
+                    return new SipDetails(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SipDetails[] newArray(int size) {
-            return new SipDetails[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SipDetails[] newArray(int size) {
+                    return new SipDetails[size];
+                }
+            };
     public static final int METHOD_PUBLISH = 2;
     public static final int METHOD_REGISTER = 1;
     public static final int METHOD_SUBSCRIBE = 3;
@@ -35,8 +37,7 @@ public final class SipDetails implements Parcelable {
     private final String mResponsePhrase;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Method {
-    }
+    public @interface Method {}
 
     public static final class Builder {
         private String mCallId;
@@ -150,17 +151,44 @@ public final class SipDetails implements Parcelable {
             return false;
         }
         SipDetails that = (SipDetails) o;
-        if (this.mMethod == that.mMethod && this.mCseq == that.mCseq && this.mResponseCode == that.mResponseCode && TextUtils.equals(this.mResponsePhrase, that.mResponsePhrase) && this.mReasonHeaderCause == that.mReasonHeaderCause && TextUtils.equals(this.mReasonHeaderText, that.mReasonHeaderText) && TextUtils.equals(this.mCallId, that.mCallId)) {
+        if (this.mMethod == that.mMethod
+                && this.mCseq == that.mCseq
+                && this.mResponseCode == that.mResponseCode
+                && TextUtils.equals(this.mResponsePhrase, that.mResponsePhrase)
+                && this.mReasonHeaderCause == that.mReasonHeaderCause
+                && TextUtils.equals(this.mReasonHeaderText, that.mReasonHeaderText)
+                && TextUtils.equals(this.mCallId, that.mCallId)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mMethod), Integer.valueOf(this.mCseq), Integer.valueOf(this.mResponseCode), this.mResponsePhrase, Integer.valueOf(this.mReasonHeaderCause), this.mReasonHeaderText, this.mCallId);
+        return Objects.hash(
+                Integer.valueOf(this.mMethod),
+                Integer.valueOf(this.mCseq),
+                Integer.valueOf(this.mResponseCode),
+                this.mResponsePhrase,
+                Integer.valueOf(this.mReasonHeaderCause),
+                this.mReasonHeaderText,
+                this.mCallId);
     }
 
     public String toString() {
-        return "SipDetails { methodType= " + this.mMethod + ", cSeq=" + this.mCseq + ", ResponseCode=" + this.mResponseCode + ", ResponseCPhrase=" + this.mResponsePhrase + ", ReasonHeaderCause=" + this.mReasonHeaderCause + ", ReasonHeaderText=" + this.mReasonHeaderText + ", callId=" + this.mCallId + "}";
+        return "SipDetails { methodType= "
+                + this.mMethod
+                + ", cSeq="
+                + this.mCseq
+                + ", ResponseCode="
+                + this.mResponseCode
+                + ", ResponseCPhrase="
+                + this.mResponsePhrase
+                + ", ReasonHeaderCause="
+                + this.mReasonHeaderCause
+                + ", ReasonHeaderText="
+                + this.mReasonHeaderText
+                + ", callId="
+                + this.mCallId
+                + "}";
     }
 }

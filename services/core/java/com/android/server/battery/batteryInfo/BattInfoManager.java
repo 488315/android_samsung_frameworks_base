@@ -5,12 +5,14 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.SystemClock;
 import android.util.Slog;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.HeimdAllFsService$$ExternalSyntheticOutline0;
 import com.android.server.battery.BattFeatures;
 import com.android.server.battery.BattLogBuffer;
 import com.android.server.battery.BattUtils;
 import com.android.server.battery.BatteryLogger;
+
 import java.util.Arrays;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -98,20 +100,40 @@ public final class BattInfoManager {
             this.mBatteryCount = 1;
         }
         this.mAuthentificationResults = new boolean[this.mBatteryCount];
-        Slog.i("[SS][BattInfo]BattInfoManager", "[BattInfoManager]mBatteryType:" + this.mBatteryType + " ,mBatteryCount:" + this.mBatteryCount);
+        Slog.i(
+                "[SS][BattInfo]BattInfoManager",
+                "[BattInfoManager]mBatteryType:"
+                        + this.mBatteryType
+                        + " ,mBatteryCount:"
+                        + this.mBatteryCount);
         StringBuilder sb = new StringBuilder("[BattInfoManager]FEATURE_SAVE_BATTERY_CYCLE:");
         sb.append(BattFeatures.FEATURE_SAVE_BATTERY_CYCLE);
         sb.append(" ,FEATURE_FULL_BATTERY_CYCLE:");
         boolean z2 = BattFeatures.FEATURE_FULL_BATTERY_CYCLE;
         HeimdAllFsService$$ExternalSyntheticOutline0.m("[SS][BattInfo]BattInfoManager", sb, z2);
-        boolean z3 = (!BattFeatures.FEATURE_SUPPORT_ASOC || (i2 = this.mBatteryType) == 2 || i2 == 4) ? false : true;
+        boolean z3 =
+                (!BattFeatures.FEATURE_SUPPORT_ASOC || (i2 = this.mBatteryType) == 2 || i2 == 4)
+                        ? false
+                        : true;
         this.mSupportsAsoc = z3;
         if (z2 && (i = this.mBatteryType) != 2 && i != 4) {
             z = true;
         }
         this.mSupportsFullStatusUsage = z;
-        Slog.i("[SS][BattInfo]BattInfoManager", "[BattInfoManager]supportsAsoc:" + z3 + " ,supportsFullStatusUsage:" + z);
-        BatteryLogger.writeToFile("/data/log/battery_service/battery_service_main_history", "BattInfoManager Created", "mBatteryType:" + this.mBatteryType + " ,mBatteryCount:" + this.mBatteryCount + " ,supportsAsoc:" + z3 + " ,supportsFullStatusUsage:" + z);
+        Slog.i(
+                "[SS][BattInfo]BattInfoManager",
+                "[BattInfoManager]supportsAsoc:" + z3 + " ,supportsFullStatusUsage:" + z);
+        BatteryLogger.writeToFile(
+                "/data/log/battery_service/battery_service_main_history",
+                "BattInfoManager Created",
+                "mBatteryType:"
+                        + this.mBatteryType
+                        + " ,mBatteryCount:"
+                        + this.mBatteryCount
+                        + " ,supportsAsoc:"
+                        + z3
+                        + " ,supportsFullStatusUsage:"
+                        + z);
         StringBuilder sb2 = new StringBuilder("mBatteryType:");
         sb2.append(this.mBatteryType);
         sb2.append(" ,mBatteryCount:");
@@ -131,7 +153,9 @@ public final class BattInfoManager {
             return null;
         }
         if (this.mSupportsAsoc) {
-            return Arrays.stream((Long[]) this.mAsocData.readEfsValues()).mapToLong(new AsocData$$ExternalSyntheticLambda1()).toArray();
+            return Arrays.stream((Long[]) this.mAsocData.readEfsValues())
+                    .mapToLong(new AsocData$$ExternalSyntheticLambda1())
+                    .toArray();
         }
         Slog.w("[SS][BattInfo]BattInfoManager", "[getAsocValue]unsupported");
         return null;
@@ -139,7 +163,9 @@ public final class BattInfoManager {
 
     public final long[] getDischargeLevel() {
         if (this.mInitFinished) {
-            return Arrays.stream((Long[]) this.mDischargeLevelData.readEfsValues()).mapToLong(new AsocData$$ExternalSyntheticLambda1()).toArray();
+            return Arrays.stream((Long[]) this.mDischargeLevelData.readEfsValues())
+                    .mapToLong(new AsocData$$ExternalSyntheticLambda1())
+                    .toArray();
         }
         Slog.w("[SS][BattInfo]BattInfoManager", "[getDischargeLevel]InitFinished False");
         return null;
@@ -151,7 +177,9 @@ public final class BattInfoManager {
             return null;
         }
         if (this.mSupportsFullStatusUsage) {
-            return Arrays.stream((Long[]) this.mFullStatusUsageData.readEfsValues()).mapToLong(new AsocData$$ExternalSyntheticLambda1()).toArray();
+            return Arrays.stream((Long[]) this.mFullStatusUsageData.readEfsValues())
+                    .mapToLong(new AsocData$$ExternalSyntheticLambda1())
+                    .toArray();
         }
         Slog.w("[SS][BattInfo]BattInfoManager", "[getFullStatusUsage]unsupported");
         return null;
@@ -159,10 +187,15 @@ public final class BattInfoManager {
 
     public final boolean[] getIcAuthenticationResults() {
         if (!this.mInitFinished) {
-            Slog.w("[SS][BattInfo]BattInfoManager", "[getIcAuthenticationResults]InitFinished False");
+            Slog.w(
+                    "[SS][BattInfo]BattInfoManager",
+                    "[getIcAuthenticationResults]InitFinished False");
             return null;
         }
-        Slog.d("[SS][BattInfo]BattInfoManager", "[getIcAuthenticationResults]IcAuthenticationResults:" + Arrays.toString(this.mAuthentificationResults));
+        Slog.d(
+                "[SS][BattInfo]BattInfoManager",
+                "[getIcAuthenticationResults]IcAuthenticationResults:"
+                        + Arrays.toString(this.mAuthentificationResults));
         return this.mAuthentificationResults;
     }
 
@@ -175,22 +208,32 @@ public final class BattInfoManager {
             return;
         }
         if (j2 < j) {
-            this.mBatteryUsageSinceLastAsocUpdate = (j - j2) + this.mBatteryUsageSinceLastAsocUpdate;
-            BatteryService$$ExternalSyntheticOutline0.m(new StringBuilder("[processAsoc]mBatteryUsageSinceLastAsocUpdate:"), this.mBatteryUsageSinceLastAsocUpdate, "[SS][BattInfo]BattInfoManager");
+            this.mBatteryUsageSinceLastAsocUpdate =
+                    (j - j2) + this.mBatteryUsageSinceLastAsocUpdate;
+            BatteryService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("[processAsoc]mBatteryUsageSinceLastAsocUpdate:"),
+                    this.mBatteryUsageSinceLastAsocUpdate,
+                    "[SS][BattInfo]BattInfoManager");
         }
         AsocData asocData = this.mAsocData;
-        if (Arrays.stream((Long[]) asocData.mCurrentValues).anyMatch(new AsocData$$ExternalSyntheticLambda0())) {
-            Slog.w(asocData.TAG, "[isValueInvalid]Invalid - mCurrentValues:" + Arrays.toString(asocData.mCurrentValues));
+        if (Arrays.stream((Long[]) asocData.mCurrentValues)
+                .anyMatch(new AsocData$$ExternalSyntheticLambda0())) {
+            Slog.w(
+                    asocData.TAG,
+                    "[isValueInvalid]Invalid - mCurrentValues:"
+                            + Arrays.toString(asocData.mCurrentValues));
         } else if (this.mBatteryUsageSinceLastAsocUpdate < 100) {
             return;
         }
         this.mBatteryUsageSinceLastAsocUpdate = 0L;
-        this.mHandler.post(new Runnable() { // from class: com.android.server.battery.batteryInfo.BattInfoManager.1
-            @Override // java.lang.Runnable
-            public final void run() {
-                BattInfoManager.this.mAsocData.updateAndSet();
-            }
-        });
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // com.android.server.battery.batteryInfo.BattInfoManager.1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        BattInfoManager.this.mAsocData.updateAndSet();
+                    }
+                });
     }
 
     public final void processCycle() {
@@ -211,7 +254,10 @@ public final class BattInfoManager {
         }
         if (j2 < j) {
             this.mCurrentBatteryUsage = (j - j2) + this.mCurrentBatteryUsage;
-            BatteryService$$ExternalSyntheticOutline0.m(new StringBuilder("[processDischargingLevel]mCurrentBatteryUsage:"), this.mCurrentBatteryUsage, "[SS][BattInfo]BattInfoManager");
+            BatteryService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("[processDischargingLevel]mCurrentBatteryUsage:"),
+                    this.mCurrentBatteryUsage,
+                    "[SS][BattInfo]BattInfoManager");
         }
         if (z || this.mCurrentBatteryUsage >= 10) {
             long j3 = this.mCurrentBatteryUsage;
@@ -228,7 +274,10 @@ public final class BattInfoManager {
         if (this.mFullBatteryStartTime == -1) {
             if (j == 100) {
                 this.mFullBatteryStartTime = SystemClock.elapsedRealtime();
-                Slog.i("[SS][BattInfo]BattInfoManager", "[processFullStatusUsage]FullBatteryStartTime:" + this.mFullBatteryStartTime);
+                Slog.i(
+                        "[SS][BattInfo]BattInfoManager",
+                        "[processFullStatusUsage]FullBatteryStartTime:"
+                                + this.mFullBatteryStartTime);
                 return;
             }
             return;
@@ -238,10 +287,14 @@ public final class BattInfoManager {
         if (z || j != 100 || j2 >= 10) {
             if (j == 100) {
                 this.mFullBatteryStartTime = elapsedRealtime;
-                Slog.i("[SS][BattInfo]BattInfoManager", "[processFullStatusUsage]time to save. maintains 100%");
+                Slog.i(
+                        "[SS][BattInfo]BattInfoManager",
+                        "[processFullStatusUsage]time to save. maintains 100%");
             } else {
                 this.mFullBatteryStartTime = -1L;
-                Slog.i("[SS][BattInfo]BattInfoManager", "[processFullStatusUsage]time to save. end of 100%");
+                Slog.i(
+                        "[SS][BattInfo]BattInfoManager",
+                        "[processFullStatusUsage]time to save. end of 100%");
             }
             this.mHandler.post(new AnonymousClass2(this, j2, 1));
         }

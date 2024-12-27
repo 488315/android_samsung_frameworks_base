@@ -18,16 +18,14 @@ public final class IntervalStatsProto {
         public static final long SIZE = 1120986464257L;
         public static final long STRINGS = 2237677961218L;
 
-        public StringPool() {
-        }
+        public StringPool() {}
     }
 
     public final class CountAndTime {
         public static final long COUNT = 1120986464257L;
         public static final long TIME_MS = 1112396529666L;
 
-        public CountAndTime() {
-        }
+        public CountAndTime() {}
     }
 
     public final class UsageStats {
@@ -44,22 +42,19 @@ public final class IntervalStatsProto {
         public static final long TOTAL_TIME_SERVICE_USED_MS = 1112396529673L;
         public static final long TOTAL_TIME_VISIBLE_MS = 1112396529675L;
 
-        public UsageStats() {
-        }
+        public UsageStats() {}
 
         public final class ChooserAction {
             public static final long COUNTS = 2246267895811L;
             public static final long NAME = 1138166333441L;
 
-            public ChooserAction() {
-            }
+            public ChooserAction() {}
 
             public final class CategoryCount {
                 public static final long COUNT = 1120986464259L;
                 public static final long NAME = 1138166333441L;
 
-                public CategoryCount() {
-                }
+                public CategoryCount() {}
             }
         }
     }
@@ -71,8 +66,7 @@ public final class IntervalStatsProto {
         public static final long LAST_TIME_ACTIVE_MS = 1112396529666L;
         public static final long TOTAL_TIME_ACTIVE_MS = 1112396529667L;
 
-        public Configuration() {
-        }
+        public Configuration() {}
     }
 
     public final class Event {
@@ -93,7 +87,6 @@ public final class IntervalStatsProto {
         public static final long TIME_MS = 1112396529669L;
         public static final long TYPE = 1120986464263L;
 
-        public Event() {
-        }
+        public Event() {}
     }
 }

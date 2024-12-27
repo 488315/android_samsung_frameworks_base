@@ -5,8 +5,6 @@ import android.app.BroadcastOptions;
 import android.app.IApplicationThread;
 import android.app.IServiceConnection;
 import android.app.compat.CompatChanges;
-import android.content.Context;
-import android.content.IntentSender;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
@@ -26,6 +24,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.DisplayAdjustments;
 import android.view.autofill.AutofillManager;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -288,12 +287,17 @@ public class ContextWrapper extends Context {
     }
 
     @Override // android.content.Context
-    public SQLiteDatabase openOrCreateDatabase(String name, int mode, SQLiteDatabase.CursorFactory factory) {
+    public SQLiteDatabase openOrCreateDatabase(
+            String name, int mode, SQLiteDatabase.CursorFactory factory) {
         return this.mBase.openOrCreateDatabase(name, mode, factory);
     }
 
     @Override // android.content.Context
-    public SQLiteDatabase openOrCreateDatabase(String name, int mode, SQLiteDatabase.CursorFactory factory, DatabaseErrorHandler errorHandler) {
+    public SQLiteDatabase openOrCreateDatabase(
+            String name,
+            int mode,
+            SQLiteDatabase.CursorFactory factory,
+            DatabaseErrorHandler errorHandler) {
         return this.mBase.openOrCreateDatabase(name, mode, factory, errorHandler);
     }
 
@@ -405,13 +409,27 @@ public class ContextWrapper extends Context {
     }
 
     @Override // android.content.Context
-    public void startIntentSender(IntentSender intent, Intent fillInIntent, int flagsMask, int flagsValues, int extraFlags) throws IntentSender.SendIntentException {
+    public void startIntentSender(
+            IntentSender intent,
+            Intent fillInIntent,
+            int flagsMask,
+            int flagsValues,
+            int extraFlags)
+            throws IntentSender.SendIntentException {
         this.mBase.startIntentSender(intent, fillInIntent, flagsMask, flagsValues, extraFlags);
     }
 
     @Override // android.content.Context
-    public void startIntentSender(IntentSender intent, Intent fillInIntent, int flagsMask, int flagsValues, int extraFlags, Bundle options) throws IntentSender.SendIntentException {
-        this.mBase.startIntentSender(intent, fillInIntent, flagsMask, flagsValues, extraFlags, options);
+    public void startIntentSender(
+            IntentSender intent,
+            Intent fillInIntent,
+            int flagsMask,
+            int flagsValues,
+            int extraFlags,
+            Bundle options)
+            throws IntentSender.SendIntentException {
+        this.mBase.startIntentSender(
+                intent, fillInIntent, flagsMask, flagsValues, extraFlags, options);
     }
 
     @Override // android.content.Context
@@ -430,22 +448,31 @@ public class ContextWrapper extends Context {
     }
 
     @Override // android.content.Context
-    public void sendBroadcastMultiplePermissions(Intent intent, String[] receiverPermissions, String[] excludedPermissions, String[] excludedPackages, BroadcastOptions options) {
-        this.mBase.sendBroadcastMultiplePermissions(intent, receiverPermissions, excludedPermissions, excludedPackages, options);
+    public void sendBroadcastMultiplePermissions(
+            Intent intent,
+            String[] receiverPermissions,
+            String[] excludedPermissions,
+            String[] excludedPackages,
+            BroadcastOptions options) {
+        this.mBase.sendBroadcastMultiplePermissions(
+                intent, receiverPermissions, excludedPermissions, excludedPackages, options);
     }
 
     @Override // android.content.Context
-    public void sendBroadcastMultiplePermissions(Intent intent, String[] receiverPermissions, Bundle options) {
+    public void sendBroadcastMultiplePermissions(
+            Intent intent, String[] receiverPermissions, Bundle options) {
         this.mBase.sendBroadcastMultiplePermissions(intent, receiverPermissions, options);
     }
 
     @Override // android.content.Context
-    public void sendBroadcastMultiplePermissionsAsUser(Intent intent, String[] receiverPermissions, UserHandle user) {
+    public void sendBroadcastMultiplePermissionsAsUser(
+            Intent intent, String[] receiverPermissions, UserHandle user) {
         this.mBase.sendBroadcastMultiplePermissionsAsUser(intent, receiverPermissions, user);
     }
 
     @Override // android.content.Context
-    public void sendBroadcastAsUserMultiplePermissions(Intent intent, UserHandle user, String[] receiverPermissions) {
+    public void sendBroadcastAsUserMultiplePermissions(
+            Intent intent, UserHandle user, String[] receiverPermissions) {
         this.mBase.sendBroadcastAsUserMultiplePermissions(intent, user, receiverPermissions);
     }
 
@@ -470,18 +497,64 @@ public class ContextWrapper extends Context {
     }
 
     @Override // android.content.Context
-    public void sendOrderedBroadcast(Intent intent, String receiverPermission, BroadcastReceiver resultReceiver, Handler scheduler, int initialCode, String initialData, Bundle initialExtras) {
-        this.mBase.sendOrderedBroadcast(intent, receiverPermission, resultReceiver, scheduler, initialCode, initialData, initialExtras);
+    public void sendOrderedBroadcast(
+            Intent intent,
+            String receiverPermission,
+            BroadcastReceiver resultReceiver,
+            Handler scheduler,
+            int initialCode,
+            String initialData,
+            Bundle initialExtras) {
+        this.mBase.sendOrderedBroadcast(
+                intent,
+                receiverPermission,
+                resultReceiver,
+                scheduler,
+                initialCode,
+                initialData,
+                initialExtras);
     }
 
     @Override // android.content.Context
-    public void sendOrderedBroadcast(Intent intent, String receiverPermission, Bundle options, BroadcastReceiver resultReceiver, Handler scheduler, int initialCode, String initialData, Bundle initialExtras) {
-        this.mBase.sendOrderedBroadcast(intent, receiverPermission, options, resultReceiver, scheduler, initialCode, initialData, initialExtras);
+    public void sendOrderedBroadcast(
+            Intent intent,
+            String receiverPermission,
+            Bundle options,
+            BroadcastReceiver resultReceiver,
+            Handler scheduler,
+            int initialCode,
+            String initialData,
+            Bundle initialExtras) {
+        this.mBase.sendOrderedBroadcast(
+                intent,
+                receiverPermission,
+                options,
+                resultReceiver,
+                scheduler,
+                initialCode,
+                initialData,
+                initialExtras);
     }
 
     @Override // android.content.Context
-    public void sendOrderedBroadcast(Intent intent, String receiverPermission, int appOp, BroadcastReceiver resultReceiver, Handler scheduler, int initialCode, String initialData, Bundle initialExtras) {
-        this.mBase.sendOrderedBroadcast(intent, receiverPermission, appOp, resultReceiver, scheduler, initialCode, initialData, initialExtras);
+    public void sendOrderedBroadcast(
+            Intent intent,
+            String receiverPermission,
+            int appOp,
+            BroadcastReceiver resultReceiver,
+            Handler scheduler,
+            int initialCode,
+            String initialData,
+            Bundle initialExtras) {
+        this.mBase.sendOrderedBroadcast(
+                intent,
+                receiverPermission,
+                appOp,
+                resultReceiver,
+                scheduler,
+                initialCode,
+                initialData,
+                initialExtras);
     }
 
     @Override // android.content.Context
@@ -495,38 +568,128 @@ public class ContextWrapper extends Context {
     }
 
     @Override // android.content.Context
-    public void sendBroadcastAsUser(Intent intent, UserHandle user, String receiverPermission, Bundle options) {
+    public void sendBroadcastAsUser(
+            Intent intent, UserHandle user, String receiverPermission, Bundle options) {
         this.mBase.sendBroadcastAsUser(intent, user, receiverPermission, options);
     }
 
     @Override // android.content.Context
-    public void sendBroadcastAsUser(Intent intent, UserHandle user, String receiverPermission, int appOp) {
+    public void sendBroadcastAsUser(
+            Intent intent, UserHandle user, String receiverPermission, int appOp) {
         this.mBase.sendBroadcastAsUser(intent, user, receiverPermission, appOp);
     }
 
     @Override // android.content.Context
-    public void sendOrderedBroadcastAsUser(Intent intent, UserHandle user, String receiverPermission, BroadcastReceiver resultReceiver, Handler scheduler, int initialCode, String initialData, Bundle initialExtras) {
-        this.mBase.sendOrderedBroadcastAsUser(intent, user, receiverPermission, resultReceiver, scheduler, initialCode, initialData, initialExtras);
+    public void sendOrderedBroadcastAsUser(
+            Intent intent,
+            UserHandle user,
+            String receiverPermission,
+            BroadcastReceiver resultReceiver,
+            Handler scheduler,
+            int initialCode,
+            String initialData,
+            Bundle initialExtras) {
+        this.mBase.sendOrderedBroadcastAsUser(
+                intent,
+                user,
+                receiverPermission,
+                resultReceiver,
+                scheduler,
+                initialCode,
+                initialData,
+                initialExtras);
     }
 
     @Override // android.content.Context
-    public void sendOrderedBroadcastAsUser(Intent intent, UserHandle user, String receiverPermission, int appOp, BroadcastReceiver resultReceiver, Handler scheduler, int initialCode, String initialData, Bundle initialExtras) {
-        this.mBase.sendOrderedBroadcastAsUser(intent, user, receiverPermission, appOp, resultReceiver, scheduler, initialCode, initialData, initialExtras);
+    public void sendOrderedBroadcastAsUser(
+            Intent intent,
+            UserHandle user,
+            String receiverPermission,
+            int appOp,
+            BroadcastReceiver resultReceiver,
+            Handler scheduler,
+            int initialCode,
+            String initialData,
+            Bundle initialExtras) {
+        this.mBase.sendOrderedBroadcastAsUser(
+                intent,
+                user,
+                receiverPermission,
+                appOp,
+                resultReceiver,
+                scheduler,
+                initialCode,
+                initialData,
+                initialExtras);
     }
 
     @Override // android.content.Context
-    public void sendOrderedBroadcastAsUser(Intent intent, UserHandle user, String receiverPermission, int appOp, Bundle options, BroadcastReceiver resultReceiver, Handler scheduler, int initialCode, String initialData, Bundle initialExtras) {
-        this.mBase.sendOrderedBroadcastAsUser(intent, user, receiverPermission, appOp, options, resultReceiver, scheduler, initialCode, initialData, initialExtras);
+    public void sendOrderedBroadcastAsUser(
+            Intent intent,
+            UserHandle user,
+            String receiverPermission,
+            int appOp,
+            Bundle options,
+            BroadcastReceiver resultReceiver,
+            Handler scheduler,
+            int initialCode,
+            String initialData,
+            Bundle initialExtras) {
+        this.mBase.sendOrderedBroadcastAsUser(
+                intent,
+                user,
+                receiverPermission,
+                appOp,
+                options,
+                resultReceiver,
+                scheduler,
+                initialCode,
+                initialData,
+                initialExtras);
     }
 
     @Override // android.content.Context
-    public void sendOrderedBroadcast(Intent intent, String receiverPermission, String receiverAppOp, BroadcastReceiver resultReceiver, Handler scheduler, int initialCode, String initialData, Bundle initialExtras) {
-        this.mBase.sendOrderedBroadcast(intent, receiverPermission, receiverAppOp, resultReceiver, scheduler, initialCode, initialData, initialExtras);
+    public void sendOrderedBroadcast(
+            Intent intent,
+            String receiverPermission,
+            String receiverAppOp,
+            BroadcastReceiver resultReceiver,
+            Handler scheduler,
+            int initialCode,
+            String initialData,
+            Bundle initialExtras) {
+        this.mBase.sendOrderedBroadcast(
+                intent,
+                receiverPermission,
+                receiverAppOp,
+                resultReceiver,
+                scheduler,
+                initialCode,
+                initialData,
+                initialExtras);
     }
 
     @Override // android.content.Context
-    public void sendOrderedBroadcast(Intent intent, int initialCode, String receiverPermission, String receiverAppOp, BroadcastReceiver resultReceiver, Handler scheduler, String initialData, Bundle initialExtras, Bundle options) {
-        this.mBase.sendOrderedBroadcast(intent, initialCode, receiverPermission, receiverAppOp, resultReceiver, scheduler, initialData, initialExtras, options);
+    public void sendOrderedBroadcast(
+            Intent intent,
+            int initialCode,
+            String receiverPermission,
+            String receiverAppOp,
+            BroadcastReceiver resultReceiver,
+            Handler scheduler,
+            String initialData,
+            Bundle initialExtras,
+            Bundle options) {
+        this.mBase.sendOrderedBroadcast(
+                intent,
+                initialCode,
+                receiverPermission,
+                receiverAppOp,
+                resultReceiver,
+                scheduler,
+                initialData,
+                initialExtras,
+                options);
     }
 
     @Override // android.content.Context
@@ -543,8 +706,15 @@ public class ContextWrapper extends Context {
 
     @Override // android.content.Context
     @Deprecated
-    public void sendStickyOrderedBroadcast(Intent intent, BroadcastReceiver resultReceiver, Handler scheduler, int initialCode, String initialData, Bundle initialExtras) {
-        this.mBase.sendStickyOrderedBroadcast(intent, resultReceiver, scheduler, initialCode, initialData, initialExtras);
+    public void sendStickyOrderedBroadcast(
+            Intent intent,
+            BroadcastReceiver resultReceiver,
+            Handler scheduler,
+            int initialCode,
+            String initialData,
+            Bundle initialExtras) {
+        this.mBase.sendStickyOrderedBroadcast(
+                intent, resultReceiver, scheduler, initialCode, initialData, initialExtras);
     }
 
     @Override // android.content.Context
@@ -567,8 +737,16 @@ public class ContextWrapper extends Context {
 
     @Override // android.content.Context
     @Deprecated
-    public void sendStickyOrderedBroadcastAsUser(Intent intent, UserHandle user, BroadcastReceiver resultReceiver, Handler scheduler, int initialCode, String initialData, Bundle initialExtras) {
-        this.mBase.sendStickyOrderedBroadcastAsUser(intent, user, resultReceiver, scheduler, initialCode, initialData, initialExtras);
+    public void sendStickyOrderedBroadcastAsUser(
+            Intent intent,
+            UserHandle user,
+            BroadcastReceiver resultReceiver,
+            Handler scheduler,
+            int initialCode,
+            String initialData,
+            Bundle initialExtras) {
+        this.mBase.sendStickyOrderedBroadcastAsUser(
+                intent, user, resultReceiver, scheduler, initialCode, initialData, initialExtras);
     }
 
     @Override // android.content.Context
@@ -588,33 +766,66 @@ public class ContextWrapper extends Context {
     }
 
     @Override // android.content.Context
-    public Intent registerReceiver(BroadcastReceiver receiver, IntentFilter filter, String broadcastPermission, Handler scheduler) {
+    public Intent registerReceiver(
+            BroadcastReceiver receiver,
+            IntentFilter filter,
+            String broadcastPermission,
+            Handler scheduler) {
         return this.mBase.registerReceiver(receiver, filter, broadcastPermission, scheduler);
     }
 
     @Override // android.content.Context
-    public Intent registerReceiver(BroadcastReceiver receiver, IntentFilter filter, String broadcastPermission, Handler scheduler, int flags) {
+    public Intent registerReceiver(
+            BroadcastReceiver receiver,
+            IntentFilter filter,
+            String broadcastPermission,
+            Handler scheduler,
+            int flags) {
         return this.mBase.registerReceiver(receiver, filter, broadcastPermission, scheduler, flags);
     }
 
     @Override // android.content.Context
-    public Intent registerReceiverForAllUsers(BroadcastReceiver receiver, IntentFilter filter, String broadcastPermission, Handler scheduler) {
-        return this.mBase.registerReceiverForAllUsers(receiver, filter, broadcastPermission, scheduler);
+    public Intent registerReceiverForAllUsers(
+            BroadcastReceiver receiver,
+            IntentFilter filter,
+            String broadcastPermission,
+            Handler scheduler) {
+        return this.mBase.registerReceiverForAllUsers(
+                receiver, filter, broadcastPermission, scheduler);
     }
 
     @Override // android.content.Context
-    public Intent registerReceiverForAllUsers(BroadcastReceiver receiver, IntentFilter filter, String broadcastPermission, Handler scheduler, int flags) {
-        return this.mBase.registerReceiverForAllUsers(receiver, filter, broadcastPermission, scheduler, flags);
+    public Intent registerReceiverForAllUsers(
+            BroadcastReceiver receiver,
+            IntentFilter filter,
+            String broadcastPermission,
+            Handler scheduler,
+            int flags) {
+        return this.mBase.registerReceiverForAllUsers(
+                receiver, filter, broadcastPermission, scheduler, flags);
     }
 
     @Override // android.content.Context
-    public Intent registerReceiverAsUser(BroadcastReceiver receiver, UserHandle user, IntentFilter filter, String broadcastPermission, Handler scheduler) {
-        return this.mBase.registerReceiverAsUser(receiver, user, filter, broadcastPermission, scheduler);
+    public Intent registerReceiverAsUser(
+            BroadcastReceiver receiver,
+            UserHandle user,
+            IntentFilter filter,
+            String broadcastPermission,
+            Handler scheduler) {
+        return this.mBase.registerReceiverAsUser(
+                receiver, user, filter, broadcastPermission, scheduler);
     }
 
     @Override // android.content.Context
-    public Intent registerReceiverAsUser(BroadcastReceiver receiver, UserHandle user, IntentFilter filter, String broadcastPermission, Handler scheduler, int flags) {
-        return this.mBase.registerReceiverAsUser(receiver, user, filter, broadcastPermission, scheduler, flags);
+    public Intent registerReceiverAsUser(
+            BroadcastReceiver receiver,
+            UserHandle user,
+            IntentFilter filter,
+            String broadcastPermission,
+            Handler scheduler,
+            int flags) {
+        return this.mBase.registerReceiverAsUser(
+                receiver, user, filter, broadcastPermission, scheduler, flags);
     }
 
     @Override // android.content.Context
@@ -658,42 +869,64 @@ public class ContextWrapper extends Context {
     }
 
     @Override // android.content.Context
-    public boolean bindService(Intent service, ServiceConnection conn, Context.BindServiceFlags flags) {
+    public boolean bindService(
+            Intent service, ServiceConnection conn, Context.BindServiceFlags flags) {
         return this.mBase.bindService(service, conn, flags);
     }
 
     @Override // android.content.Context
-    public boolean bindService(Intent service, int flags, Executor executor, ServiceConnection conn) {
+    public boolean bindService(
+            Intent service, int flags, Executor executor, ServiceConnection conn) {
         return this.mBase.bindService(service, flags, executor, conn);
     }
 
     @Override // android.content.Context
-    public boolean bindService(Intent service, Context.BindServiceFlags flags, Executor executor, ServiceConnection conn) {
+    public boolean bindService(
+            Intent service,
+            Context.BindServiceFlags flags,
+            Executor executor,
+            ServiceConnection conn) {
         return this.mBase.bindService(service, flags, executor, conn);
     }
 
     @Override // android.content.Context
-    public boolean bindIsolatedService(Intent service, int flags, String instanceName, Executor executor, ServiceConnection conn) {
+    public boolean bindIsolatedService(
+            Intent service,
+            int flags,
+            String instanceName,
+            Executor executor,
+            ServiceConnection conn) {
         return this.mBase.bindIsolatedService(service, flags, instanceName, executor, conn);
     }
 
     @Override // android.content.Context
-    public boolean bindServiceAsUser(Intent service, ServiceConnection conn, int flags, UserHandle user) {
+    public boolean bindServiceAsUser(
+            Intent service, ServiceConnection conn, int flags, UserHandle user) {
         return this.mBase.bindServiceAsUser(service, conn, flags, user);
     }
 
     @Override // android.content.Context
-    public boolean bindServiceAsUser(Intent service, ServiceConnection conn, Context.BindServiceFlags flags, UserHandle user) {
+    public boolean bindServiceAsUser(
+            Intent service,
+            ServiceConnection conn,
+            Context.BindServiceFlags flags,
+            UserHandle user) {
         return this.mBase.bindServiceAsUser(service, conn, flags, user);
     }
 
     @Override // android.content.Context
-    public boolean bindServiceAsUser(Intent service, ServiceConnection conn, int flags, Handler handler, UserHandle user) {
+    public boolean bindServiceAsUser(
+            Intent service, ServiceConnection conn, int flags, Handler handler, UserHandle user) {
         return this.mBase.bindServiceAsUser(service, conn, flags, handler, user);
     }
 
     @Override // android.content.Context
-    public boolean bindServiceAsUser(Intent service, ServiceConnection conn, Context.BindServiceFlags flags, Handler handler, UserHandle user) {
+    public boolean bindServiceAsUser(
+            Intent service,
+            ServiceConnection conn,
+            Context.BindServiceFlags flags,
+            Handler handler,
+            UserHandle user) {
         return this.mBase.bindServiceAsUser(service, conn, flags, handler, user);
     }
 
@@ -708,7 +941,8 @@ public class ContextWrapper extends Context {
     }
 
     @Override // android.content.Context
-    public boolean startInstrumentation(ComponentName className, String profileFile, Bundle arguments) {
+    public boolean startInstrumentation(
+            ComponentName className, String profileFile, Bundle arguments) {
         return this.mBase.startInstrumentation(className, profileFile, arguments);
     }
 
@@ -818,8 +1052,15 @@ public class ContextWrapper extends Context {
     }
 
     @Override // android.content.Context
-    public int checkUriPermission(Uri uri, String readPermission, String writePermission, int pid, int uid, int modeFlags) {
-        return this.mBase.checkUriPermission(uri, readPermission, writePermission, pid, uid, modeFlags);
+    public int checkUriPermission(
+            Uri uri,
+            String readPermission,
+            String writePermission,
+            int pid,
+            int uid,
+            int modeFlags) {
+        return this.mBase.checkUriPermission(
+                uri, readPermission, writePermission, pid, uid, modeFlags);
     }
 
     @Override // android.content.Context
@@ -838,8 +1079,16 @@ public class ContextWrapper extends Context {
     }
 
     @Override // android.content.Context
-    public void enforceUriPermission(Uri uri, String readPermission, String writePermission, int pid, int uid, int modeFlags, String message) {
-        this.mBase.enforceUriPermission(uri, readPermission, writePermission, pid, uid, modeFlags, message);
+    public void enforceUriPermission(
+            Uri uri,
+            String readPermission,
+            String writePermission,
+            int pid,
+            int uid,
+            int modeFlags,
+            String message) {
+        this.mBase.enforceUriPermission(
+                uri, readPermission, writePermission, pid, uid, modeFlags, message);
     }
 
     @Override // android.content.Context
@@ -848,12 +1097,14 @@ public class ContextWrapper extends Context {
     }
 
     @Override // android.content.Context
-    public Context createPackageContext(String packageName, int flags) throws PackageManager.NameNotFoundException {
+    public Context createPackageContext(String packageName, int flags)
+            throws PackageManager.NameNotFoundException {
         return this.mBase.createPackageContext(packageName, flags);
     }
 
     @Override // android.content.Context
-    public Context createPackageContextAsUser(String packageName, int flags, UserHandle user) throws PackageManager.NameNotFoundException {
+    public Context createPackageContextAsUser(String packageName, int flags, UserHandle user)
+            throws PackageManager.NameNotFoundException {
         return this.mBase.createPackageContextAsUser(packageName, flags, user);
     }
 
@@ -863,18 +1114,21 @@ public class ContextWrapper extends Context {
     }
 
     @Override // android.content.Context
-    public Context createApplicationContext(ApplicationInfo application, int flags) throws PackageManager.NameNotFoundException {
+    public Context createApplicationContext(ApplicationInfo application, int flags)
+            throws PackageManager.NameNotFoundException {
         return this.mBase.createApplicationContext(application, flags);
     }
 
     @Override // android.content.Context
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-    public Context createContextForSdkInSandbox(ApplicationInfo sdkInfo, int flags) throws PackageManager.NameNotFoundException {
+    public Context createContextForSdkInSandbox(ApplicationInfo sdkInfo, int flags)
+            throws PackageManager.NameNotFoundException {
         return this.mBase.createContextForSdkInSandbox(sdkInfo, flags);
     }
 
     @Override // android.content.Context
-    public Context createContextForSplit(String splitName) throws PackageManager.NameNotFoundException {
+    public Context createContextForSplit(String splitName)
+            throws PackageManager.NameNotFoundException {
         return this.mBase.createContextForSplit(splitName);
     }
 
@@ -1029,7 +1283,8 @@ public class ContextWrapper extends Context {
     }
 
     @Override // android.content.Context
-    public IServiceConnection getServiceDispatcher(ServiceConnection conn, Handler handler, long flags) {
+    public IServiceConnection getServiceDispatcher(
+            ServiceConnection conn, Handler handler, long flags) {
         return this.mBase.getServiceDispatcher(conn, handler, flags);
     }
 
@@ -1125,19 +1380,24 @@ public class ContextWrapper extends Context {
             }
             return;
         }
-        throw new IllegalStateException("ComponentCallbacks must be registered after this ContextWrapper is attached to a base Context.");
+        throw new IllegalStateException(
+                "ComponentCallbacks must be registered after this ContextWrapper is attached to a"
+                        + " base Context.");
     }
 
     @Override // android.content.Context
     public void unregisterComponentCallbacks(ComponentCallbacks callback) {
         synchronized (this.mLock) {
-            if (this.mCallbacksRegisteredToSuper != null && this.mCallbacksRegisteredToSuper.contains(callback)) {
+            if (this.mCallbacksRegisteredToSuper != null
+                    && this.mCallbacksRegisteredToSuper.contains(callback)) {
                 super.unregisterComponentCallbacks(callback);
                 this.mCallbacksRegisteredToSuper.remove(callback);
             } else if (this.mBase != null) {
                 this.mBase.unregisterComponentCallbacks(callback);
             } else if (CompatChanges.isChangeEnabled(Context.OVERRIDABLE_COMPONENT_CALLBACKS)) {
-                throw new IllegalStateException("ComponentCallbacks must be unregistered after this ContextWrapper is attached to a base Context.");
+                throw new IllegalStateException(
+                        "ComponentCallbacks must be unregistered after this ContextWrapper is"
+                                + " attached to a base Context.");
             }
         }
     }
@@ -1148,16 +1408,33 @@ public class ContextWrapper extends Context {
     }
 
     @Override // android.content.Context
-    public Intent semRegisterReceiverAsUser(BroadcastReceiver receiver, UserHandle user, IntentFilter filter, String broadcastPermission, Handler scheduler) {
+    public Intent semRegisterReceiverAsUser(
+            BroadcastReceiver receiver,
+            UserHandle user,
+            IntentFilter filter,
+            String broadcastPermission,
+            Handler scheduler) {
         if (getApplicationInfo().targetSdkVersion >= 34) {
-            Log.w(getApplicationInfo().className, "This API will be deprecated instead use semRegisterReceiverAsUser(BroadcastReceiver, IntentFilter, String, Handler, int) with flag");
+            Log.w(
+                    getApplicationInfo().className,
+                    "This API will be deprecated instead use"
+                            + " semRegisterReceiverAsUser(BroadcastReceiver, IntentFilter, String,"
+                            + " Handler, int) with flag");
         }
-        return this.mBase.semRegisterReceiverAsUser(receiver, user, filter, broadcastPermission, scheduler);
+        return this.mBase.semRegisterReceiverAsUser(
+                receiver, user, filter, broadcastPermission, scheduler);
     }
 
     @Override // android.content.Context
-    public Intent semRegisterReceiverAsUser(BroadcastReceiver receiver, UserHandle user, IntentFilter filter, String broadcastPermission, Handler scheduler, int flags) {
-        return this.mBase.semRegisterReceiverAsUser(receiver, user, filter, broadcastPermission, scheduler, flags);
+    public Intent semRegisterReceiverAsUser(
+            BroadcastReceiver receiver,
+            UserHandle user,
+            IntentFilter filter,
+            String broadcastPermission,
+            Handler scheduler,
+            int flags) {
+        return this.mBase.semRegisterReceiverAsUser(
+                receiver, user, filter, broadcastPermission, scheduler, flags);
     }
 
     @Override // android.content.Context

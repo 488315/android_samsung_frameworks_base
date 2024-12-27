@@ -43,11 +43,15 @@ public abstract class SemRemoteViewsAnimation implements Parcelable {
             return;
         }
         startAnimation(root);
-        new Handler(Looper.myLooper()).postDelayed(new Runnable() { // from class: android.widget.SemRemoteViewsAnimation$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                SemRemoteViewsAnimation.this.lambda$play$0(root);
-            }
-        }, 4000L);
+        new Handler(Looper.myLooper())
+                .postDelayed(
+                        new Runnable() { // from class:
+                                         // android.widget.SemRemoteViewsAnimation$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SemRemoteViewsAnimation.this.lambda$play$0(root);
+                            }
+                        },
+                        4000L);
     }
 }

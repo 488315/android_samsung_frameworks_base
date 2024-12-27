@@ -33,7 +33,6 @@ public final class ConfigSettingsProto {
         public static final long NAMESPACE = 1138166333441L;
         public static final long SETTINGS = 2246267895810L;
 
-        public NamespaceProto() {
-        }
+        public NamespaceProto() {}
     }
 }

@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.util.Log;
+
 import com.samsung.android.core.SizeCompatInfo;
 import com.samsung.android.service.EngineeringMode.token.EngineeringModeToken;
 import com.samsung.android.service.ProtectedATCommand.PACMError;
+
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -77,7 +79,8 @@ public final class EngineeringModeManager {
 
         private native int getNumOfModes(Context context);
 
-        private native byte[] getRequestMsg(Context context, String str, String str2, byte[] bArr, int i);
+        private native byte[] getRequestMsg(
+                Context context, String str, String str2, byte[] bArr, int i);
 
         private native String getServerTime(Context context);
 
@@ -97,7 +100,8 @@ public final class EngineeringModeManager {
 
         private native byte[] makeITLReq(Context context, String str, String str2);
 
-        private native byte[] makeTokenReq(Context context, String str, String str2, byte[] bArr, String str3);
+        private native byte[] makeTokenReq(
+                Context context, String str, String str2, byte[] bArr, String str3);
 
         private native int recoveryITL(Context context, byte[] bArr);
 
@@ -123,9 +127,22 @@ public final class EngineeringModeManager {
         }
 
         public int _getStatus(int mode, String packageName) {
-            Log.i(EngineeringModeManager.TAG, packageName + NavigationBarInflaterView.KEY_CODE_START + EngineeringModeManager.this.mCallerUid + ", " + EngineeringModeManager.this.mSignature + ") call em(" + mode + NavigationBarInflaterView.KEY_CODE_END);
+            Log.i(
+                    EngineeringModeManager.TAG,
+                    packageName
+                            + NavigationBarInflaterView.KEY_CODE_START
+                            + EngineeringModeManager.this.mCallerUid
+                            + ", "
+                            + EngineeringModeManager.this.mSignature
+                            + ") call em("
+                            + mode
+                            + NavigationBarInflaterView.KEY_CODE_END);
             if (EngineeringModeManager.this.mSignature == 0) {
-                return getStatusWithSignature(mode, packageName, EngineeringModeManager.this.mCallerUid, EngineeringModeManager.this.mSignature);
+                return getStatusWithSignature(
+                        mode,
+                        packageName,
+                        EngineeringModeManager.this.mCallerUid,
+                        EngineeringModeManager.this.mSignature);
             }
             return getStatus(this.mClientContext, mode);
         }
@@ -170,7 +187,8 @@ public final class EngineeringModeManager {
             return recoveryITL(this.mClientContext, recoveryMsg);
         }
 
-        public byte[] _makeTokenReq(String singleId, String otp, byte[] modeSet, String expiryDate) {
+        public byte[] _makeTokenReq(
+                String singleId, String otp, byte[] modeSet, String expiryDate) {
             return makeTokenReq(this.mClientContext, singleId, otp, modeSet, expiryDate);
         }
 
@@ -204,7 +222,8 @@ public final class EngineeringModeManager {
         }
 
         public byte[] _makeTimeReq() {
-            return getTokenInfoForJanus(this.mClientContext, "9,9,8".getBytes(Charset.forName("UTF-8")));
+            return getTokenInfoForJanus(
+                    this.mClientContext, "9,9,8".getBytes(Charset.forName("UTF-8")));
         }
 
         public byte[] _updateTime(byte[] resTime) {
@@ -240,9 +259,23 @@ public final class EngineeringModeManager {
             e.printStackTrace();
         }
         if (this.mNative.isSupport()) {
-            Log.i(TAG, this.mPkgName + NavigationBarInflaterView.KEY_CODE_START + this.mCallerUid + ", " + this.mSignature + ") connects to EngineeringModeNative");
+            Log.i(
+                    TAG,
+                    this.mPkgName
+                            + NavigationBarInflaterView.KEY_CODE_START
+                            + this.mCallerUid
+                            + ", "
+                            + this.mSignature
+                            + ") connects to EngineeringModeNative");
         } else {
-            Log.e(TAG, this.mPkgName + NavigationBarInflaterView.KEY_CODE_START + this.mCallerUid + ", " + this.mSignature + ") can't be connect..");
+            Log.e(
+                    TAG,
+                    this.mPkgName
+                            + NavigationBarInflaterView.KEY_CODE_START
+                            + this.mCallerUid
+                            + ", "
+                            + this.mSignature
+                            + ") can't be connect..");
         }
     }
 
@@ -800,8 +833,7 @@ public final class EngineeringModeManager {
             public static final int VALI_EXPIRY_DATE = 2;
             public static final int VALI_ISSUED_DATE = 1;
 
-            EmType() {
-            }
+            EmType() {}
         }
 
         EmPacketManager() {
@@ -857,7 +889,9 @@ public final class EngineeringModeManager {
             this.mToken.setPrefix(prefix);
             this.mToken.setType(type);
             this.mToken.setVersion(version);
-            Log.d(EngineeringModeManager.TAG, "Prefix : " + prefix + ", Type : " + type + ", Version : " + version);
+            Log.d(
+                    EngineeringModeManager.TAG,
+                    "Prefix : " + prefix + ", Type : " + type + ", Version : " + version);
             this.headerLen = getInt(buf, this.mPos);
             this.mPos += 4;
             this.mPosTokenInfo = getInt(buf, this.mPos);
@@ -942,7 +976,9 @@ public final class EngineeringModeManager {
             this.mToken.setPrefix(prefix);
             this.mToken.setType(type);
             this.mToken.setVersion(version);
-            Log.d(EngineeringModeManager.TAG, "Prefix : " + prefix + ", Type : " + type + ", Version : " + version);
+            Log.d(
+                    EngineeringModeManager.TAG,
+                    "Prefix : " + prefix + ", Type : " + type + ", Version : " + version);
             int ret = parseModeDb(buf, this.mPos);
             if (ret < 0) {
                 Log.e(EngineeringModeManager.TAG, "Error parseModeDB");
@@ -1013,7 +1049,9 @@ public final class EngineeringModeManager {
                     return i;
                 }
                 if (type != 1 && type != 2 && type != 3) {
-                    Log.e(EngineeringModeManager.TAG, "Unregistered type but it can be new one : " + type);
+                    Log.e(
+                            EngineeringModeManager.TAG,
+                            "Unregistered type but it can be new one : " + type);
                 }
                 byte[] value = getBytes(buf, pos6, len);
                 pos4 = pos6 + len;
@@ -1082,7 +1120,9 @@ public final class EngineeringModeManager {
                     return i;
                 }
                 if (type != 1 && type != 2 && type != 3) {
-                    Log.d(EngineeringModeManager.TAG, "Unregistered type but it can be new one : " + type);
+                    Log.d(
+                            EngineeringModeManager.TAG,
+                            "Unregistered type but it can be new one : " + type);
                 }
                 byte[] value = getBytes(buf, pos6, len);
                 pos4 = pos6 + len;
@@ -1147,8 +1187,15 @@ public final class EngineeringModeManager {
                     Log.e(EngineeringModeManager.TAG, "Error issuerInfo item len : type : " + type);
                     return i;
                 }
-                if (type != 1 && type != 2 && type != 3 && type != 4097 && type != 4098 && type != 4099) {
-                    Log.d(EngineeringModeManager.TAG, "Unregistered type but it can be new one : " + type);
+                if (type != 1
+                        && type != 2
+                        && type != 3
+                        && type != 4097
+                        && type != 4098
+                        && type != 4099) {
+                    Log.d(
+                            EngineeringModeManager.TAG,
+                            "Unregistered type but it can be new one : " + type);
                 }
                 byte[] value = getBytes(buf, pos6, len);
                 pos4 = pos6 + len;
@@ -1265,11 +1312,15 @@ public final class EngineeringModeManager {
                 int len = getShort(buf, pos5);
                 int pos6 = pos5 + 2;
                 if (len < 0) {
-                    Log.e(EngineeringModeManager.TAG, "Error validityInfo item len : type : " + type);
+                    Log.e(
+                            EngineeringModeManager.TAG,
+                            "Error validityInfo item len : type : " + type);
                     return -1;
                 }
                 if (type != 1 && type != 2) {
-                    Log.d(EngineeringModeManager.TAG, "Unregistered type but it can be new one : " + type);
+                    Log.d(
+                            EngineeringModeManager.TAG,
+                            "Unregistered type but it can be new one : " + type);
                 }
                 byte[] value = getBytes(buf, pos6, len);
                 pos4 = pos6 + len;
@@ -1326,7 +1377,9 @@ public final class EngineeringModeManager {
                     return -1;
                 }
                 if (type != 1 && type != 2) {
-                    Log.d(EngineeringModeManager.TAG, "Unregistered type but it can be new one : " + type);
+                    Log.d(
+                            EngineeringModeManager.TAG,
+                            "Unregistered type but it can be new one : " + type);
                 }
                 byte[] value = getBytes(buf, pos6, len);
                 pos4 = pos6 + len;
@@ -1402,7 +1455,9 @@ public final class EngineeringModeManager {
                     return i2;
                 }
                 if (type != 1 && type != i && type != 3 && type != 4 && type != 5 && type != 6) {
-                    Log.d(EngineeringModeManager.TAG, "Unregistered type but it can be new one : " + type);
+                    Log.d(
+                            EngineeringModeManager.TAG,
+                            "Unregistered type but it can be new one : " + type);
                 }
                 byte[] value = getBytes(bArr, pos9, len);
                 pos7 = pos9 + len;
@@ -1532,7 +1587,9 @@ public final class EngineeringModeManager {
                     return i;
                 }
                 if (type != 1) {
-                    Log.d(EngineeringModeManager.TAG, "Unregistered type but it can be new one : " + type);
+                    Log.d(
+                            EngineeringModeManager.TAG,
+                            "Unregistered type but it can be new one : " + type);
                 }
                 byte[] value = getBytes(buf, pos8, len);
                 pos6 = pos8 + len;

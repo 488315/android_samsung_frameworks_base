@@ -21,12 +21,10 @@ public interface ISendMgmtFrameEvent extends IInterface {
 
     public static class Default implements ISendMgmtFrameEvent {
         @Override // android.net.wifi.nl80211.ISendMgmtFrameEvent
-        public void OnAck(int elapsedTimeMs) throws RemoteException {
-        }
+        public void OnAck(int elapsedTimeMs) throws RemoteException {}
 
         @Override // android.net.wifi.nl80211.ISendMgmtFrameEvent
-        public void OnFailure(int reason) throws RemoteException {
-        }
+        public void OnFailure(int reason) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -34,7 +32,7 @@ public interface ISendMgmtFrameEvent extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISendMgmtFrameEvent {
+    public abstract static class Stub extends Binder implements ISendMgmtFrameEvent {
         static final int TRANSACTION_OnAck = 1;
         static final int TRANSACTION_OnFailure = 2;
 
@@ -75,7 +73,8 @@ public interface ISendMgmtFrameEvent extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISendMgmtFrameEvent.DESCRIPTOR);
             }

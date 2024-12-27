@@ -5,10 +5,10 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.service.contentcapture.IDataShareCallback;
 import android.view.contentcapture.ContentCaptureContext;
 import android.view.contentcapture.DataRemovalRequest;
 import android.view.contentcapture.DataShareRequest;
+
 import com.android.internal.os.IResultReceiver;
 
 /* loaded from: classes3.dex */
@@ -23,46 +23,54 @@ public interface IContentCaptureService extends IInterface {
 
     void onDataRemovalRequest(DataRemovalRequest dataRemovalRequest) throws RemoteException;
 
-    void onDataShared(DataShareRequest dataShareRequest, IDataShareCallback iDataShareCallback) throws RemoteException;
+    void onDataShared(DataShareRequest dataShareRequest, IDataShareCallback iDataShareCallback)
+            throws RemoteException;
 
     void onDisconnected() throws RemoteException;
 
     void onSessionFinished(int i) throws RemoteException;
 
-    void onSessionStarted(ContentCaptureContext contentCaptureContext, int i, int i2, IResultReceiver iResultReceiver, int i3) throws RemoteException;
+    void onSessionStarted(
+            ContentCaptureContext contentCaptureContext,
+            int i,
+            int i2,
+            IResultReceiver iResultReceiver,
+            int i3)
+            throws RemoteException;
 
     public static class Default implements IContentCaptureService {
         @Override // android.service.contentcapture.IContentCaptureService
-        public void onConnected(IBinder callback, boolean verbose, boolean debug) throws RemoteException {
-        }
+        public void onConnected(IBinder callback, boolean verbose, boolean debug)
+                throws RemoteException {}
 
         @Override // android.service.contentcapture.IContentCaptureService
-        public void onDisconnected() throws RemoteException {
-        }
+        public void onDisconnected() throws RemoteException {}
 
         @Override // android.service.contentcapture.IContentCaptureService
-        public void onSessionStarted(ContentCaptureContext context, int sessionId, int uid, IResultReceiver clientReceiver, int initialState) throws RemoteException {
-        }
+        public void onSessionStarted(
+                ContentCaptureContext context,
+                int sessionId,
+                int uid,
+                IResultReceiver clientReceiver,
+                int initialState)
+                throws RemoteException {}
 
         @Override // android.service.contentcapture.IContentCaptureService
-        public void onSessionFinished(int sessionId) throws RemoteException {
-        }
+        public void onSessionFinished(int sessionId) throws RemoteException {}
 
         @Override // android.service.contentcapture.IContentCaptureService
-        public void onActivitySnapshot(int sessionId, SnapshotData snapshotData) throws RemoteException {
-        }
+        public void onActivitySnapshot(int sessionId, SnapshotData snapshotData)
+                throws RemoteException {}
 
         @Override // android.service.contentcapture.IContentCaptureService
-        public void onDataRemovalRequest(DataRemovalRequest request) throws RemoteException {
-        }
+        public void onDataRemovalRequest(DataRemovalRequest request) throws RemoteException {}
 
         @Override // android.service.contentcapture.IContentCaptureService
-        public void onDataShared(DataShareRequest request, IDataShareCallback callback) throws RemoteException {
-        }
+        public void onDataShared(DataShareRequest request, IDataShareCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.contentcapture.IContentCaptureService
-        public void onActivityEvent(ActivityEvent event) throws RemoteException {
-        }
+        public void onActivityEvent(ActivityEvent event) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -70,7 +78,7 @@ public interface IContentCaptureService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IContentCaptureService {
+    public abstract static class Stub extends Binder implements IContentCaptureService {
         static final int TRANSACTION_onActivityEvent = 8;
         static final int TRANSACTION_onActivitySnapshot = 5;
         static final int TRANSACTION_onConnected = 1;
@@ -129,7 +137,8 @@ public interface IContentCaptureService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IContentCaptureService.DESCRIPTOR);
             }
@@ -149,10 +158,13 @@ public interface IContentCaptureService extends IInterface {
                     onDisconnected();
                     return true;
                 case 3:
-                    ContentCaptureContext _arg02 = (ContentCaptureContext) data.readTypedObject(ContentCaptureContext.CREATOR);
+                    ContentCaptureContext _arg02 =
+                            (ContentCaptureContext)
+                                    data.readTypedObject(ContentCaptureContext.CREATOR);
                     int _arg12 = data.readInt();
                     int _arg22 = data.readInt();
-                    IResultReceiver _arg3 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg3 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     int _arg4 = data.readInt();
                     data.enforceNoDataAvail();
                     onSessionStarted(_arg02, _arg12, _arg22, _arg3, _arg4);
@@ -169,18 +181,22 @@ public interface IContentCaptureService extends IInterface {
                     onActivitySnapshot(_arg04, _arg13);
                     return true;
                 case 6:
-                    DataRemovalRequest _arg05 = (DataRemovalRequest) data.readTypedObject(DataRemovalRequest.CREATOR);
+                    DataRemovalRequest _arg05 =
+                            (DataRemovalRequest) data.readTypedObject(DataRemovalRequest.CREATOR);
                     data.enforceNoDataAvail();
                     onDataRemovalRequest(_arg05);
                     return true;
                 case 7:
-                    DataShareRequest _arg06 = (DataShareRequest) data.readTypedObject(DataShareRequest.CREATOR);
-                    IDataShareCallback _arg14 = IDataShareCallback.Stub.asInterface(data.readStrongBinder());
+                    DataShareRequest _arg06 =
+                            (DataShareRequest) data.readTypedObject(DataShareRequest.CREATOR);
+                    IDataShareCallback _arg14 =
+                            IDataShareCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onDataShared(_arg06, _arg14);
                     return true;
                 case 8:
-                    ActivityEvent _arg07 = (ActivityEvent) data.readTypedObject(ActivityEvent.CREATOR);
+                    ActivityEvent _arg07 =
+                            (ActivityEvent) data.readTypedObject(ActivityEvent.CREATOR);
                     data.enforceNoDataAvail();
                     onActivityEvent(_arg07);
                     return true;
@@ -206,7 +222,8 @@ public interface IContentCaptureService extends IInterface {
             }
 
             @Override // android.service.contentcapture.IContentCaptureService
-            public void onConnected(IBinder callback, boolean verbose, boolean debug) throws RemoteException {
+            public void onConnected(IBinder callback, boolean verbose, boolean debug)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentCaptureService.DESCRIPTOR);
@@ -231,7 +248,13 @@ public interface IContentCaptureService extends IInterface {
             }
 
             @Override // android.service.contentcapture.IContentCaptureService
-            public void onSessionStarted(ContentCaptureContext context, int sessionId, int uid, IResultReceiver clientReceiver, int initialState) throws RemoteException {
+            public void onSessionStarted(
+                    ContentCaptureContext context,
+                    int sessionId,
+                    int uid,
+                    IResultReceiver clientReceiver,
+                    int initialState)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentCaptureService.DESCRIPTOR);
@@ -259,7 +282,8 @@ public interface IContentCaptureService extends IInterface {
             }
 
             @Override // android.service.contentcapture.IContentCaptureService
-            public void onActivitySnapshot(int sessionId, SnapshotData snapshotData) throws RemoteException {
+            public void onActivitySnapshot(int sessionId, SnapshotData snapshotData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentCaptureService.DESCRIPTOR);
@@ -284,7 +308,8 @@ public interface IContentCaptureService extends IInterface {
             }
 
             @Override // android.service.contentcapture.IContentCaptureService
-            public void onDataShared(DataShareRequest request, IDataShareCallback callback) throws RemoteException {
+            public void onDataShared(DataShareRequest request, IDataShareCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentCaptureService.DESCRIPTOR);

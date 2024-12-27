@@ -12,6 +12,14 @@ public final class UserLevelState {
     public long savedByte;
 
     public final String toString() {
-        return "UserLevelState{packageName='" + this.packageName + "', hibernated=" + this.hibernated + "', savedByte=" + this.savedByte + "', lastUnhibernated=" + DATE_FORMAT.format(Long.valueOf(this.lastUnhibernatedMs)) + '}';
+        return "UserLevelState{packageName='"
+                + this.packageName
+                + "', hibernated="
+                + this.hibernated
+                + "', savedByte="
+                + this.savedByte
+                + "', lastUnhibernated="
+                + DATE_FORMAT.format(Long.valueOf(this.lastUnhibernatedMs))
+                + '}';
     }
 }

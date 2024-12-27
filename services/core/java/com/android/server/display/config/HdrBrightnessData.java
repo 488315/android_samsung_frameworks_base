@@ -29,12 +29,29 @@ public final class HdrBrightnessData {
         List<NonNegativeFloatToFloatPoint> point = hdrBrightnessConfig.brightnessMap.getPoint();
         HashMap hashMap = new HashMap();
         for (NonNegativeFloatToFloatPoint nonNegativeFloatToFloatPoint : point) {
-            hashMap.put(Float.valueOf(nonNegativeFloatToFloatPoint.first.floatValue()), Float.valueOf(nonNegativeFloatToFloatPoint.second.floatValue()));
+            hashMap.put(
+                    Float.valueOf(nonNegativeFloatToFloatPoint.first.floatValue()),
+                    Float.valueOf(nonNegativeFloatToFloatPoint.second.floatValue()));
         }
-        return new HdrBrightnessData(hashMap, hdrBrightnessConfig.brightnessIncreaseDebounceMillis.longValue(), hdrBrightnessConfig.screenBrightnessRampIncrease.floatValue(), hdrBrightnessConfig.brightnessDecreaseDebounceMillis.longValue(), hdrBrightnessConfig.screenBrightnessRampDecrease.floatValue());
+        return new HdrBrightnessData(
+                hashMap,
+                hdrBrightnessConfig.brightnessIncreaseDebounceMillis.longValue(),
+                hdrBrightnessConfig.screenBrightnessRampIncrease.floatValue(),
+                hdrBrightnessConfig.brightnessDecreaseDebounceMillis.longValue(),
+                hdrBrightnessConfig.screenBrightnessRampDecrease.floatValue());
     }
 
     public final String toString() {
-        return "HdrBrightnessData {mMaxBrightnessLimits: " + this.mMaxBrightnessLimits + ", mBrightnessIncreaseDebounceMillis: " + this.mBrightnessIncreaseDebounceMillis + ", mScreenBrightnessRampIncrease: " + this.mScreenBrightnessRampIncrease + ", mBrightnessDecreaseDebounceMillis: " + this.mBrightnessDecreaseDebounceMillis + ", mScreenBrightnessRampDecrease: " + this.mScreenBrightnessRampDecrease + "} ";
+        return "HdrBrightnessData {mMaxBrightnessLimits: "
+                + this.mMaxBrightnessLimits
+                + ", mBrightnessIncreaseDebounceMillis: "
+                + this.mBrightnessIncreaseDebounceMillis
+                + ", mScreenBrightnessRampIncrease: "
+                + this.mScreenBrightnessRampIncrease
+                + ", mBrightnessDecreaseDebounceMillis: "
+                + this.mBrightnessDecreaseDebounceMillis
+                + ", mScreenBrightnessRampDecrease: "
+                + this.mScreenBrightnessRampDecrease
+                + "} ";
     }
 }

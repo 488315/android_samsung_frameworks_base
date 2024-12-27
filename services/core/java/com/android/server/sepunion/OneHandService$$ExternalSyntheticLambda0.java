@@ -20,8 +20,17 @@ public final /* synthetic */ class OneHandService$$ExternalSyntheticLambda0 impl
         switch (i) {
             case 0:
                 OneHandService oneHandService = (OneHandService) obj;
-                if (Settings.System.getIntForUser(oneHandService.mContext.getContentResolver(), "any_screen_running", 0, -2) == 1) {
-                    Settings.System.putIntForUser(oneHandService.mContext.getContentResolver(), "any_screen_running", 0, -2);
+                if (Settings.System.getIntForUser(
+                                oneHandService.mContext.getContentResolver(),
+                                "any_screen_running",
+                                0,
+                                -2)
+                        == 1) {
+                    Settings.System.putIntForUser(
+                            oneHandService.mContext.getContentResolver(),
+                            "any_screen_running",
+                            0,
+                            -2);
                     break;
                 }
                 break;

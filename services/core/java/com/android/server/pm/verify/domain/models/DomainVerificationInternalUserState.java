@@ -4,7 +4,9 @@ import android.annotation.NonNull;
 import android.annotation.UserIdInt;
 import android.hardware.biometrics.face.V1_0.OptionalBool$$ExternalSyntheticOutline0;
 import android.util.ArraySet;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -36,12 +38,18 @@ public final class DomainVerificationInternalUserState {
         if (obj == null || DomainVerificationInternalUserState.class != obj.getClass()) {
             return false;
         }
-        DomainVerificationInternalUserState domainVerificationInternalUserState = (DomainVerificationInternalUserState) obj;
-        return this.mUserId == domainVerificationInternalUserState.mUserId && Objects.equals(this.mEnabledHosts, domainVerificationInternalUserState.mEnabledHosts) && this.mLinkHandlingAllowed == domainVerificationInternalUserState.mLinkHandlingAllowed;
+        DomainVerificationInternalUserState domainVerificationInternalUserState =
+                (DomainVerificationInternalUserState) obj;
+        return this.mUserId == domainVerificationInternalUserState.mUserId
+                && Objects.equals(
+                        this.mEnabledHosts, domainVerificationInternalUserState.mEnabledHosts)
+                && this.mLinkHandlingAllowed
+                        == domainVerificationInternalUserState.mLinkHandlingAllowed;
     }
 
     public final int hashCode() {
-        return Boolean.hashCode(this.mLinkHandlingAllowed) + ((Objects.hashCode(this.mEnabledHosts) + ((this.mUserId + 31) * 31)) * 31);
+        return Boolean.hashCode(this.mLinkHandlingAllowed)
+                + ((Objects.hashCode(this.mEnabledHosts) + ((this.mUserId + 31) * 31)) * 31);
     }
 
     public final String toString() {

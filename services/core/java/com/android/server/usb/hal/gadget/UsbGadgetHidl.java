@@ -8,10 +8,12 @@ import android.os.IHwBinder;
 import android.os.Message;
 import android.os.RemoteException;
 import android.util.sysfwutil.Slog;
+
 import com.android.internal.util.IndentingPrintWriter;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.UserspaceRebootLogger$$ExternalSyntheticOutline0;
 import com.android.server.usb.UsbDeviceManager;
+
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Set;
@@ -29,12 +31,12 @@ public final class UsbGadgetHidl implements UsbGadgetHal {
     public final class DeathRecipient implements IHwBinder.DeathRecipient {
         public final IndentingPrintWriter mPw = null;
 
-        public DeathRecipient() {
-        }
+        public DeathRecipient() {}
 
         public final void serviceDied(long j) {
             if (j == 2000) {
-                UsbDeviceManager.logAndPrint(6, this.mPw, "Usb Gadget hal service died cookie: " + j);
+                UsbDeviceManager.logAndPrint(
+                        6, this.mPw, "Usb Gadget hal service died cookie: " + j);
                 synchronized (UsbGadgetHidl.this.mGadgetProxyLock) {
                     UsbGadgetHidl.this.mGadgetProxy = null;
                 }
@@ -44,12 +46,15 @@ public final class UsbGadgetHidl implements UsbGadgetHal {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ServiceNotification extends IServiceNotification.Stub {
-        public ServiceNotification() {
-        }
+        public ServiceNotification() {}
 
         @Override // android.hidl.manager.V1_0.IServiceNotification
         public final void onRegistration(String str, String str2, boolean z) {
-            UsbDeviceManager.logAndPrint(4, UsbGadgetHidl.this.mPw, BootReceiver$$ExternalSyntheticOutline0.m("Usb gadget hal service started ", str, " ", str2));
+            UsbDeviceManager.logAndPrint(
+                    4,
+                    UsbGadgetHidl.this.mPw,
+                    BootReceiver$$ExternalSyntheticOutline0.m(
+                            "Usb gadget hal service started ", str, " ", str2));
             UsbGadgetHidl.this.connectToProxy$1();
         }
     }
@@ -60,8 +65,7 @@ public final class UsbGadgetHidl implements UsbGadgetHal {
         public final long mFunctions;
         public final int mRequest;
 
-        public UsbGadgetCallback() {
-        }
+        public UsbGadgetCallback() {}
 
         public UsbGadgetCallback(int i, long j, boolean z) {
             this.mRequest = i;
@@ -89,7 +93,8 @@ public final class UsbGadgetHidl implements UsbGadgetHal {
         public final void setCurrentUsbFunctionsCb(long j, int i) {
             UsbDeviceManager usbDeviceManager = UsbGadgetHidl.this.mDeviceManager;
             int i2 = this.mRequest;
-            usbDeviceManager.mHandler.setCurrentUsbFunctionsCb(i, j, this.mFunctions, i2, this.mChargingFunctions);
+            usbDeviceManager.mHandler.setCurrentUsbFunctionsCb(
+                    i, j, this.mFunctions, i2, this.mChargingFunctions);
         }
     }
 
@@ -98,8 +103,13 @@ public final class UsbGadgetHidl implements UsbGadgetHal {
         this.mDeviceManager = usbDeviceManager;
         this.mPw = null;
         try {
-            if (!IServiceManager.getService().registerForNotifications("android.hardware.usb.gadget@1.0::IUsbGadget", "", new ServiceNotification())) {
-                Slog.println(6, "UsbDeviceManager", "Failed to register service start notification");
+            if (!IServiceManager.getService()
+                    .registerForNotifications(
+                            "android.hardware.usb.gadget@1.0::IUsbGadget",
+                            "",
+                            new ServiceNotification())) {
+                Slog.println(
+                        6, "UsbDeviceManager", "Failed to register service start notification");
             }
             connectToProxy$1();
         } catch (RemoteException e) {
@@ -118,10 +128,17 @@ public final class UsbGadgetHidl implements UsbGadgetHal {
                 service.linkToDeath(new DeathRecipient(), 2000L);
             } catch (RemoteException e) {
                 Set set = UsbDeviceManager.sDenyInterfaces;
-                Slog.e("UsbDeviceManager", "connectToProxy: usb gadget hal service not responding", e);
+                Slog.e(
+                        "UsbDeviceManager",
+                        "connectToProxy: usb gadget hal service not responding",
+                        e);
             } catch (NoSuchElementException e2) {
                 Set set2 = UsbDeviceManager.sDenyInterfaces;
-                Slog.e("UsbDeviceManager", "connectToProxy: usb gadget hal service not found. Did the service fail to start?", e2);
+                Slog.e(
+                        "UsbDeviceManager",
+                        "connectToProxy: usb gadget hal service not found. Did the service fail to"
+                            + " start?",
+                        e2);
             }
         }
     }
@@ -133,7 +150,8 @@ public final class UsbGadgetHidl implements UsbGadgetHal {
                 this.mGadgetProxy.getCurrentUsbFunctions(new UsbGadgetCallback());
             }
         } catch (RemoteException e) {
-            UsbDeviceManager.logAndPrintException(this.mPw, "RemoteException while calling getCurrentUsbFunctions", e);
+            UsbDeviceManager.logAndPrintException(
+                    this.mPw, "RemoteException while calling getCurrentUsbFunctions", e);
         }
     }
 
@@ -146,7 +164,14 @@ public final class UsbGadgetHidl implements UsbGadgetHal {
                 if (iUsbGadget == null) {
                     throw new RemoteException("IUsbGadget not initialized yet");
                 }
-                i = android.hardware.usb.gadget.V1_2.IUsbGadget.castFrom(iUsbGadget) != null ? 12 : android.hardware.usb.gadget.V1_1.IUsbGadget.castFrom(this.mGadgetProxy) != null ? 11 : 10;
+                i =
+                        android.hardware.usb.gadget.V1_2.IUsbGadget.castFrom(iUsbGadget) != null
+                                ? 12
+                                : android.hardware.usb.gadget.V1_1.IUsbGadget.castFrom(
+                                                        this.mGadgetProxy)
+                                                != null
+                                        ? 11
+                                        : 10;
                 UsbDeviceManager.logAndPrint(4, this.mPw, "USB Gadget HAL HIDL version: " + i);
             } catch (Throwable th) {
                 throw th;
@@ -160,8 +185,10 @@ public final class UsbGadgetHidl implements UsbGadgetHal {
         try {
             synchronized (this.mGadgetProxyLock) {
                 try {
-                    if (android.hardware.usb.gadget.V1_2.IUsbGadget.castFrom(this.mGadgetProxy) != null) {
-                        android.hardware.usb.gadget.V1_2.IUsbGadget.castFrom(this.mGadgetProxy).getUsbSpeed(new UsbGadgetCallback());
+                    if (android.hardware.usb.gadget.V1_2.IUsbGadget.castFrom(this.mGadgetProxy)
+                            != null) {
+                        android.hardware.usb.gadget.V1_2.IUsbGadget.castFrom(this.mGadgetProxy)
+                                .getUsbSpeed(new UsbGadgetCallback());
                     }
                 } finally {
                 }
@@ -176,14 +203,17 @@ public final class UsbGadgetHidl implements UsbGadgetHal {
         try {
             synchronized (this.mGadgetProxyLock) {
                 try {
-                    if (android.hardware.usb.gadget.V1_1.IUsbGadget.castFrom(this.mGadgetProxy) != null) {
-                        android.hardware.usb.gadget.V1_1.IUsbGadget.castFrom(this.mGadgetProxy).reset();
+                    if (android.hardware.usb.gadget.V1_1.IUsbGadget.castFrom(this.mGadgetProxy)
+                            != null) {
+                        android.hardware.usb.gadget.V1_1.IUsbGadget.castFrom(this.mGadgetProxy)
+                                .reset();
                     }
                 } finally {
                 }
             }
         } catch (RemoteException e) {
-            UsbDeviceManager.logAndPrintException(this.mPw, "RemoteException while calling reset", e);
+            UsbDeviceManager.logAndPrintException(
+                    this.mPw, "RemoteException while calling reset", e);
         }
     }
 
@@ -196,7 +226,12 @@ public final class UsbGadgetHidl implements UsbGadgetHal {
             }
         } catch (RemoteException e) {
             IndentingPrintWriter indentingPrintWriter = this.mPw;
-            StringBuilder m = UserspaceRebootLogger$$ExternalSyntheticOutline0.m(i, "RemoteException while calling setCurrentUsbFunctions mRequest = ", j, ", mFunctions = ");
+            StringBuilder m =
+                    UserspaceRebootLogger$$ExternalSyntheticOutline0.m(
+                            i,
+                            "RemoteException while calling setCurrentUsbFunctions mRequest = ",
+                            j,
+                            ", mFunctions = ");
             m.append(", timeout = 2500, mChargingFunctions = ");
             m.append(z);
             m.append(", operationId =");

@@ -15,8 +15,11 @@ public final class FreeformPersistBoundsParams {
             return true;
         }
         if (obj != null && FreeformPersistBoundsParams.class == obj.getClass()) {
-            FreeformPersistBoundsParams freeformPersistBoundsParams = (FreeformPersistBoundsParams) obj;
-            if (this.mFreeformBounds.equals(freeformPersistBoundsParams.mFreeformBounds) && this.mDisplayBounds.equals(freeformPersistBoundsParams.mDisplayBounds) && this.mRotation == freeformPersistBoundsParams.mRotation) {
+            FreeformPersistBoundsParams freeformPersistBoundsParams =
+                    (FreeformPersistBoundsParams) obj;
+            if (this.mFreeformBounds.equals(freeformPersistBoundsParams.mFreeformBounds)
+                    && this.mDisplayBounds.equals(freeformPersistBoundsParams.mDisplayBounds)
+                    && this.mRotation == freeformPersistBoundsParams.mRotation) {
                 return true;
             }
         }
@@ -24,7 +27,8 @@ public final class FreeformPersistBoundsParams {
     }
 
     public final int hashCode() {
-        return ((this.mDisplayBounds.hashCode() + (this.mFreeformBounds.hashCode() * 31)) * 31) + this.mRotation;
+        return ((this.mDisplayBounds.hashCode() + (this.mFreeformBounds.hashCode() * 31)) * 31)
+                + this.mRotation;
     }
 
     public final String toString() {

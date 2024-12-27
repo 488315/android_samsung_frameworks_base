@@ -1,22 +1,24 @@
 package android.os;
 
-import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public final class CarrierAssociatedAppEntry implements Parcelable {
-    public static final Parcelable.Creator<CarrierAssociatedAppEntry> CREATOR = new Parcelable.Creator<CarrierAssociatedAppEntry>() { // from class: android.os.CarrierAssociatedAppEntry.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CarrierAssociatedAppEntry createFromParcel(Parcel source) {
-            return new CarrierAssociatedAppEntry(source);
-        }
+    public static final Parcelable.Creator<CarrierAssociatedAppEntry> CREATOR =
+            new Parcelable.Creator<
+                    CarrierAssociatedAppEntry>() { // from class:
+                                                   // android.os.CarrierAssociatedAppEntry.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CarrierAssociatedAppEntry createFromParcel(Parcel source) {
+                    return new CarrierAssociatedAppEntry(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CarrierAssociatedAppEntry[] newArray(int size) {
-            return new CarrierAssociatedAppEntry[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CarrierAssociatedAppEntry[] newArray(int size) {
+                    return new CarrierAssociatedAppEntry[size];
+                }
+            };
     public static final int SDK_UNSPECIFIED = -1;
     public final int addedInSdk;
     public final String packageName;

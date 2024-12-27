@@ -5,6 +5,7 @@ import android.app.timedetector.TimeSuggestionHelper;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.ShellCommand;
+
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Objects;
@@ -12,24 +13,31 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes.dex */
 public final class ExternalTimeSuggestion implements Parcelable {
-    public static final Parcelable.Creator<ExternalTimeSuggestion> CREATOR = new Parcelable.Creator<ExternalTimeSuggestion>() { // from class: android.app.time.ExternalTimeSuggestion.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ExternalTimeSuggestion createFromParcel(Parcel in) {
-            TimeSuggestionHelper helper = TimeSuggestionHelper.handleCreateFromParcel(ExternalTimeSuggestion.class, in);
-            return new ExternalTimeSuggestion(helper);
-        }
+    public static final Parcelable.Creator<ExternalTimeSuggestion> CREATOR =
+            new Parcelable.Creator<ExternalTimeSuggestion>() { // from class:
+                // android.app.time.ExternalTimeSuggestion.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ExternalTimeSuggestion createFromParcel(Parcel in) {
+                    TimeSuggestionHelper helper =
+                            TimeSuggestionHelper.handleCreateFromParcel(
+                                    ExternalTimeSuggestion.class, in);
+                    return new ExternalTimeSuggestion(helper);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ExternalTimeSuggestion[] newArray(int size) {
-            return new ExternalTimeSuggestion[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ExternalTimeSuggestion[] newArray(int size) {
+                    return new ExternalTimeSuggestion[size];
+                }
+            };
     private final TimeSuggestionHelper mTimeSuggestionHelper;
 
     public ExternalTimeSuggestion(long elapsedRealtimeMillis, long suggestionMillis) {
-        this.mTimeSuggestionHelper = new TimeSuggestionHelper(ExternalTimeSuggestion.class, new UnixEpochTime(elapsedRealtimeMillis, suggestionMillis));
+        this.mTimeSuggestionHelper =
+                new TimeSuggestionHelper(
+                        ExternalTimeSuggestion.class,
+                        new UnixEpochTime(elapsedRealtimeMillis, suggestionMillis));
     }
 
     private ExternalTimeSuggestion(TimeSuggestionHelper helper) {
@@ -77,11 +85,14 @@ public final class ExternalTimeSuggestion implements Parcelable {
         return this.mTimeSuggestionHelper.handleToString();
     }
 
-    public static ExternalTimeSuggestion parseCommandLineArg(ShellCommand cmd) throws IllegalArgumentException {
-        return new ExternalTimeSuggestion(TimeSuggestionHelper.handleParseCommandLineArg(ExternalTimeSuggestion.class, cmd));
+    public static ExternalTimeSuggestion parseCommandLineArg(ShellCommand cmd)
+            throws IllegalArgumentException {
+        return new ExternalTimeSuggestion(
+                TimeSuggestionHelper.handleParseCommandLineArg(ExternalTimeSuggestion.class, cmd));
     }
 
     public static void printCommandLineOpts(PrintWriter pw) {
-        TimeSuggestionHelper.handlePrintCommandLineOpts(pw, "External", ExternalTimeSuggestion.class);
+        TimeSuggestionHelper.handlePrintCommandLineOpts(
+                pw, "External", ExternalTimeSuggestion.class);
     }
 }

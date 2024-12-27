@@ -1,16 +1,18 @@
 package com.android.server.wm;
 
 import android.content.Intent;
+
 import com.android.internal.protolog.ProtoLogGroup;
 import com.android.internal.protolog.ProtoLogImpl_54989576;
 import com.android.server.policy.PermissionPolicyService;
-import com.android.server.wm.ActivityRecord;
+
 import java.util.Objects;
 import java.util.function.Predicate;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class RootWindowContainer$$ExternalSyntheticLambda12 implements Predicate {
+public final /* synthetic */ class RootWindowContainer$$ExternalSyntheticLambda12
+        implements Predicate {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
 
@@ -27,9 +29,20 @@ public final /* synthetic */ class RootWindowContainer$$ExternalSyntheticLambda1
             case 0:
                 boolean[] zArr = (boolean[]) obj2;
                 ActivityRecord topPausingActivity = ((Task) obj).getTopPausingActivity();
-                if (topPausingActivity != null && !topPausingActivity.isState(ActivityRecord.State.PAUSED, ActivityRecord.State.STOPPED, ActivityRecord.State.STOPPING, ActivityRecord.State.FINISHING)) {
+                if (topPausingActivity != null
+                        && !topPausingActivity.isState(
+                                ActivityRecord.State.PAUSED,
+                                ActivityRecord.State.STOPPED,
+                                ActivityRecord.State.STOPPING,
+                                ActivityRecord.State.FINISHING)) {
                     if (ProtoLogImpl_54989576.Cache.WM_DEBUG_STATES_enabled[0]) {
-                        ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_STATES, 3785779399471740019L, 0, null, String.valueOf(topPausingActivity), String.valueOf(topPausingActivity.mState));
+                        ProtoLogImpl_54989576.d(
+                                ProtoLogGroup.WM_DEBUG_STATES,
+                                3785779399471740019L,
+                                0,
+                                null,
+                                String.valueOf(topPausingActivity),
+                                String.valueOf(topPausingActivity.mState));
                     }
                     if (ProtoLogGroup.WM_DEBUG_STATES.isEnabled()) {
                         zArr[0] = false;
@@ -55,8 +68,16 @@ public final /* synthetic */ class RootWindowContainer$$ExternalSyntheticLambda1
                 if (activityRecord.canBeTopRunning() && activityRecord.isVisibleRequested()) {
                     Intent intent = activityRecord.intent;
                     internal.getClass();
-                    if (!Objects.equals(intent.getPackage(), PermissionPolicyService.this.mPackageManager.getPermissionControllerPackageName()) || (!Objects.equals(intent.getAction(), "android.content.pm.action.REQUEST_PERMISSIONS_FOR_OTHER") && !Objects.equals(intent.getAction(), "android.content.pm.action.REQUEST_PERMISSIONS"))) {
-                    }
+                    if (!Objects.equals(
+                                    intent.getPackage(),
+                                    PermissionPolicyService.this.mPackageManager
+                                            .getPermissionControllerPackageName())
+                            || (!Objects.equals(
+                                            intent.getAction(),
+                                            "android.content.pm.action.REQUEST_PERMISSIONS_FOR_OTHER")
+                                    && !Objects.equals(
+                                            intent.getAction(),
+                                            "android.content.pm.action.REQUEST_PERMISSIONS"))) {}
                 }
                 break;
         }

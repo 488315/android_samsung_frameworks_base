@@ -29,7 +29,8 @@ public class SemInputImage {
         this.mFd = fd;
     }
 
-    public SemInputImage(byte[] buffer, int offset, int bufferLength, int width, int height, int format) {
+    public SemInputImage(
+            byte[] buffer, int offset, int bufferLength, int width, int height, int format) {
         this(width, height, format);
         this.mBuffer = ByteBuffer.allocateDirect(bufferLength);
         this.mBuffer.put(buffer, offset, bufferLength);

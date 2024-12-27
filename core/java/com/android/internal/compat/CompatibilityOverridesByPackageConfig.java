@@ -2,27 +2,32 @@ package com.android.internal.compat;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /* loaded from: classes5.dex */
 public final class CompatibilityOverridesByPackageConfig implements Parcelable {
-    public static final Parcelable.Creator<CompatibilityOverridesByPackageConfig> CREATOR = new Parcelable.Creator<CompatibilityOverridesByPackageConfig>() { // from class: com.android.internal.compat.CompatibilityOverridesByPackageConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CompatibilityOverridesByPackageConfig createFromParcel(Parcel in) {
-            return new CompatibilityOverridesByPackageConfig(in);
-        }
+    public static final Parcelable.Creator<CompatibilityOverridesByPackageConfig> CREATOR =
+            new Parcelable.Creator<
+                    CompatibilityOverridesByPackageConfig>() { // from class:
+                                                               // com.android.internal.compat.CompatibilityOverridesByPackageConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CompatibilityOverridesByPackageConfig createFromParcel(Parcel in) {
+                    return new CompatibilityOverridesByPackageConfig(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CompatibilityOverridesByPackageConfig[] newArray(int size) {
-            return new CompatibilityOverridesByPackageConfig[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CompatibilityOverridesByPackageConfig[] newArray(int size) {
+                    return new CompatibilityOverridesByPackageConfig[size];
+                }
+            };
     public final Map<String, CompatibilityOverrideConfig> packageNameToOverrides;
 
-    public CompatibilityOverridesByPackageConfig(Map<String, CompatibilityOverrideConfig> packageNameToOverrides) {
+    public CompatibilityOverridesByPackageConfig(
+            Map<String, CompatibilityOverrideConfig> packageNameToOverrides) {
         this.packageNameToOverrides = packageNameToOverrides;
     }
 
@@ -31,7 +36,8 @@ public final class CompatibilityOverridesByPackageConfig implements Parcelable {
         this.packageNameToOverrides = new HashMap();
         for (int i = 0; i < keyCount; i++) {
             String key = in.readString();
-            this.packageNameToOverrides.put(key, CompatibilityOverrideConfig.CREATOR.createFromParcel(in));
+            this.packageNameToOverrides.put(
+                    key, CompatibilityOverrideConfig.CREATOR.createFromParcel(in));
         }
     }
 

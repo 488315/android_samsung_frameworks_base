@@ -1,14 +1,17 @@
 package android.graphics;
 
-import android.graphics.ColorSpace;
 import java.io.OutputStream;
 
 /* loaded from: classes.dex */
 public class YuvImage {
     private static final int WORKING_COMPRESS_STORAGE = 4096;
     private static final String[] sSupportedFormats = {"NV21", "YUY2", "YCBCR_P010", "YUV_420_888"};
-    private static final ColorSpace.Named[] sSupportedJpegRHdrColorSpaces = {ColorSpace.Named.BT2020_HLG, ColorSpace.Named.BT2020_PQ};
-    private static final ColorSpace.Named[] sSupportedJpegRSdrColorSpaces = {ColorSpace.Named.SRGB, ColorSpace.Named.DISPLAY_P3};
+    private static final ColorSpace.Named[] sSupportedJpegRHdrColorSpaces = {
+        ColorSpace.Named.BT2020_HLG, ColorSpace.Named.BT2020_PQ
+    };
+    private static final ColorSpace.Named[] sSupportedJpegRSdrColorSpaces = {
+        ColorSpace.Named.SRGB, ColorSpace.Named.DISPLAY_P3
+    };
     private ColorSpace mColorSpace;
     private byte[] mData;
     private int mFormat;
@@ -16,9 +19,30 @@ public class YuvImage {
     private int[] mStrides;
     private int mWidth;
 
-    private static native boolean nativeCompressToJpeg(byte[] bArr, int i, int i2, int i3, int[] iArr, int[] iArr2, int i4, OutputStream outputStream, byte[] bArr2);
+    private static native boolean nativeCompressToJpeg(
+            byte[] bArr,
+            int i,
+            int i2,
+            int i3,
+            int[] iArr,
+            int[] iArr2,
+            int i4,
+            OutputStream outputStream,
+            byte[] bArr2);
 
-    private static native boolean nativeCompressToJpegR(byte[] bArr, int i, byte[] bArr2, int i2, int i3, int i4, int i5, OutputStream outputStream, byte[] bArr3, byte[] bArr4, int[] iArr, int[] iArr2);
+    private static native boolean nativeCompressToJpegR(
+            byte[] bArr,
+            int i,
+            byte[] bArr2,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            OutputStream outputStream,
+            byte[] bArr3,
+            byte[] bArr4,
+            int[] iArr,
+            int[] iArr2);
 
     private static String printSupportedFormats() {
         StringBuilder sb = new StringBuilder();
@@ -32,7 +56,8 @@ public class YuvImage {
     }
 
     private static String printSupportedJpegRColorSpaces(boolean isHdr) {
-        ColorSpace.Named[] colorSpaces = isHdr ? sSupportedJpegRHdrColorSpaces : sSupportedJpegRSdrColorSpaces;
+        ColorSpace.Named[] colorSpaces =
+                isHdr ? sSupportedJpegRHdrColorSpaces : sSupportedJpegRSdrColorSpaces;
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < colorSpaces.length; i++) {
             sb.append(ColorSpace.get(colorSpaces[i]).getName());
@@ -44,7 +69,8 @@ public class YuvImage {
     }
 
     private static boolean isSupportedJpegRColorSpace(boolean isHdr, int colorSpace) {
-        ColorSpace.Named[] colorSpaces = isHdr ? sSupportedJpegRHdrColorSpaces : sSupportedJpegRSdrColorSpaces;
+        ColorSpace.Named[] colorSpaces =
+                isHdr ? sSupportedJpegRHdrColorSpaces : sSupportedJpegRSdrColorSpaces;
         for (ColorSpace.Named cs : colorSpaces) {
             if (cs.ordinal() == colorSpace) {
                 return true;
@@ -57,9 +83,11 @@ public class YuvImage {
         this(yuv, format, width, height, strides, ColorSpace.get(ColorSpace.Named.SRGB));
     }
 
-    public YuvImage(byte[] yuv, int format, int width, int height, int[] strides, ColorSpace colorSpace) {
+    public YuvImage(
+            byte[] yuv, int format, int width, int height, int[] strides, ColorSpace colorSpace) {
         if (format != 17 && format != 20 && format != 54 && format != 35) {
-            throw new IllegalArgumentException("only supports the following ImageFormat:" + printSupportedFormats());
+            throw new IllegalArgumentException(
+                    "only supports the following ImageFormat:" + printSupportedFormats());
         }
         if (width <= 0 || height <= 0) {
             throw new IllegalArgumentException("width and height must large than 0");
@@ -84,7 +112,8 @@ public class YuvImage {
 
     public boolean compressToJpeg(Rect rectangle, int quality, OutputStream stream) {
         if (this.mFormat != 17 && this.mFormat != 20) {
-            throw new IllegalArgumentException("Only ImageFormat.NV21 and ImageFormat.YUY2 are supported.");
+            throw new IllegalArgumentException(
+                    "Only ImageFormat.NV21 and ImageFormat.YUY2 are supported.");
         }
         if (this.mColorSpace.getId() != ColorSpace.Named.SRGB.ordinal()) {
             throw new IllegalArgumentException("Only SRGB color space is supported.");
@@ -101,7 +130,16 @@ public class YuvImage {
         }
         adjustRectangle(rectangle);
         int[] offsets = calculateOffsets(rectangle.left, rectangle.top);
-        return nativeCompressToJpeg(this.mData, this.mFormat, rectangle.width(), rectangle.height(), offsets, this.mStrides, quality, stream, new byte[4096]);
+        return nativeCompressToJpeg(
+                this.mData,
+                this.mFormat,
+                rectangle.width(),
+                rectangle.height(),
+                offsets,
+                this.mStrides,
+                quality,
+                stream,
+                new byte[4096]);
     }
 
     public boolean compressToJpegR(YuvImage sdr, int quality, OutputStream stream) {
@@ -126,12 +164,30 @@ public class YuvImage {
             if (stream == null) {
                 throw new IllegalArgumentException("stream cannot be null");
             }
-            if (!isSupportedJpegRColorSpace(true, this.mColorSpace.getId()) || !isSupportedJpegRColorSpace(false, sdr.getColorSpace().getId())) {
-                throw new IllegalArgumentException("Not supported color space. SDR only supports: " + printSupportedJpegRColorSpaces(false) + "HDR only supports: " + printSupportedJpegRColorSpaces(true));
+            if (!isSupportedJpegRColorSpace(true, this.mColorSpace.getId())
+                    || !isSupportedJpegRColorSpace(false, sdr.getColorSpace().getId())) {
+                throw new IllegalArgumentException(
+                        "Not supported color space. SDR only supports: "
+                                + printSupportedJpegRColorSpaces(false)
+                                + "HDR only supports: "
+                                + printSupportedJpegRColorSpaces(true));
             }
-            return nativeCompressToJpegR(this.mData, this.mColorSpace.getDataSpace(), sdr.getYuvData(), sdr.getColorSpace().getDataSpace(), this.mWidth, this.mHeight, quality, stream, new byte[4096], exif, this.mStrides, sdr.getStrides());
+            return nativeCompressToJpegR(
+                    this.mData,
+                    this.mColorSpace.getDataSpace(),
+                    sdr.getYuvData(),
+                    sdr.getColorSpace().getDataSpace(),
+                    this.mWidth,
+                    this.mHeight,
+                    quality,
+                    stream,
+                    new byte[4096],
+                    exif,
+                    this.mStrides,
+                    sdr.getStrides());
         }
-        throw new IllegalArgumentException("only support ImageFormat.YCBCR_P010 and ImageFormat.YUV_420_888");
+        throw new IllegalArgumentException(
+                "only support ImageFormat.YCBCR_P010 and ImageFormat.YUV_420_888");
     }
 
     public byte[] getYuvData() {
@@ -160,7 +216,12 @@ public class YuvImage {
 
     int[] calculateOffsets(int left, int top) {
         if (this.mFormat == 17) {
-            int[] offsets = {(this.mStrides[0] * top) + left, (this.mHeight * this.mStrides[0]) + ((top / 2) * this.mStrides[1]) + ((left / 2) * 2)};
+            int[] offsets = {
+                (this.mStrides[0] * top) + left,
+                (this.mHeight * this.mStrides[0])
+                        + ((top / 2) * this.mStrides[1])
+                        + ((left / 2) * 2)
+            };
             return offsets;
         }
         if (this.mFormat != 20) {
@@ -185,7 +246,8 @@ public class YuvImage {
                 int[] strides4 = {width * 2, width * 2};
                 return strides4;
             default:
-                throw new IllegalArgumentException("only supports the following ImageFormat:" + printSupportedFormats());
+                throw new IllegalArgumentException(
+                        "only supports the following ImageFormat:" + printSupportedFormats());
         }
     }
 

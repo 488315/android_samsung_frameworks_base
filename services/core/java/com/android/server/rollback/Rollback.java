@@ -8,9 +8,11 @@ import android.frameworks.vibrator.VibrationParam$1$$ExternalSyntheticOutline0;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.SparseIntArray;
+
 import com.android.internal.hidden_from_bootclasspath.android.content.pm.Flags;
 import com.android.internal.util.IndentingPrintWriter;
 import com.android.internal.util.Preconditions;
+
 import java.io.File;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -34,7 +36,15 @@ public final class Rollback {
     public Instant mTimestamp;
     public final int mUserId;
 
-    public Rollback(int i, File file, int i2, boolean z, int i3, String str, int[] iArr, SparseIntArray sparseIntArray) {
+    public Rollback(
+            int i,
+            File file,
+            int i2,
+            boolean z,
+            int i3,
+            String str,
+            int[] iArr,
+            SparseIntArray sparseIntArray) {
         this.mStateDescription = "";
         this.mRestoreUserDataInProgress = false;
         this.mRollbackLifetimeMillis = 0L;
@@ -50,7 +60,17 @@ public final class Rollback {
         this.mHandler = Looper.myLooper() != null ? new Handler(Looper.myLooper()) : null;
     }
 
-    public Rollback(RollbackInfo rollbackInfo, File file, Instant instant, int i, int i2, String str, boolean z, int i3, String str2, SparseIntArray sparseIntArray) {
+    public Rollback(
+            RollbackInfo rollbackInfo,
+            File file,
+            Instant instant,
+            int i,
+            int i2,
+            String str,
+            boolean z,
+            int i3,
+            String str2,
+            SparseIntArray sparseIntArray) {
         this.mRollbackLifetimeMillis = 0L;
         this.info = rollbackInfo;
         this.mUserId = i3;
@@ -66,16 +86,21 @@ public final class Rollback {
         this.mHandler = Looper.myLooper() != null ? new Handler(Looper.myLooper()) : null;
     }
 
-    public static boolean extensionVersionReductionWouldViolateConstraint(SparseIntArray sparseIntArray, PackageManagerInternal packageManagerInternal) {
+    public static boolean extensionVersionReductionWouldViolateConstraint(
+            SparseIntArray sparseIntArray, PackageManagerInternal packageManagerInternal) {
         if (sparseIntArray.size() == 0) {
             return false;
         }
         List list = packageManagerInternal.getPackageList(null).mPackageNames;
         for (int i = 0; i < list.size(); i++) {
-            SparseIntArray minExtensionVersions = packageManagerInternal.getPackage((String) list.get(i)).getMinExtensionVersions();
+            SparseIntArray minExtensionVersions =
+                    packageManagerInternal
+                            .getPackage((String) list.get(i))
+                            .getMinExtensionVersions();
             if (minExtensionVersions != null) {
                 for (int i2 = 0; i2 < sparseIntArray.size(); i2++) {
-                    if (sparseIntArray.valueAt(i2) < minExtensionVersions.get(sparseIntArray.keyAt(i2), -1)) {
+                    if (sparseIntArray.valueAt(i2)
+                            < minExtensionVersions.get(sparseIntArray.keyAt(i2), -1)) {
                         return true;
                     }
                 }
@@ -116,24 +141,37 @@ public final class Rollback {
         sb2.append(this.mRollbackLifetimeMillis);
         indentingPrintWriter.println(sb2.toString());
         if (Flags.recoverabilityDetection()) {
-            indentingPrintWriter.println("-rollbackImpactLevel: " + this.info.getRollbackImpactLevel());
+            indentingPrintWriter.println(
+                    "-rollbackImpactLevel: " + this.info.getRollbackImpactLevel());
         }
         indentingPrintWriter.println("-isStaged: " + this.info.isStaged());
         indentingPrintWriter.println("-originalSessionId: " + this.mOriginalSessionId);
         indentingPrintWriter.println("-packages:");
         indentingPrintWriter.increaseIndent();
         for (PackageRollbackInfo packageRollbackInfo : this.info.getPackages()) {
-            indentingPrintWriter.println(packageRollbackInfo.getPackageName() + " " + packageRollbackInfo.getVersionRolledBackFrom().getLongVersionCode() + " -> " + packageRollbackInfo.getVersionRolledBackTo().getLongVersionCode() + " [" + packageRollbackInfo.getRollbackDataPolicy() + "]");
+            indentingPrintWriter.println(
+                    packageRollbackInfo.getPackageName()
+                            + " "
+                            + packageRollbackInfo.getVersionRolledBackFrom().getLongVersionCode()
+                            + " -> "
+                            + packageRollbackInfo.getVersionRolledBackTo().getLongVersionCode()
+                            + " ["
+                            + packageRollbackInfo.getRollbackDataPolicy()
+                            + "]");
         }
         indentingPrintWriter.decreaseIndent();
         if (isCommitted()) {
             indentingPrintWriter.println("-causePackages:");
             indentingPrintWriter.increaseIndent();
             for (VersionedPackage versionedPackage : this.info.getCausePackages()) {
-                indentingPrintWriter.println(versionedPackage.getPackageName() + " " + versionedPackage.getLongVersionCode());
+                indentingPrintWriter.println(
+                        versionedPackage.getPackageName()
+                                + " "
+                                + versionedPackage.getLongVersionCode());
             }
             indentingPrintWriter.decreaseIndent();
-            indentingPrintWriter.println("-committedSessionId: " + this.info.getCommittedSessionId());
+            indentingPrintWriter.println(
+                    "-committedSessionId: " + this.info.getCommittedSessionId());
         }
         if (this.mExtensionVersions.size() > 0) {
             indentingPrintWriter.println("-extensionVersions:");
@@ -169,7 +207,8 @@ public final class Rollback {
         if (i == 4) {
             return "deleted";
         }
-        throw new AssertionError(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Invalid rollback state: "));
+        throw new AssertionError(
+                VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Invalid rollback state: "));
     }
 
     public final boolean isAvailable() {

@@ -5,14 +5,15 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.android.ims.internal.uce.common.CapInfo;
 import com.android.ims.internal.uce.common.StatusCode;
 import com.android.ims.internal.uce.common.UceLong;
-import com.android.ims.internal.uce.options.IOptionsListener;
 
 /* loaded from: classes5.dex */
 public interface IOptionsService extends IInterface {
-    StatusCode addListener(int i, IOptionsListener iOptionsListener, UceLong uceLong) throws RemoteException;
+    StatusCode addListener(int i, IOptionsListener iOptionsListener, UceLong uceLong)
+            throws RemoteException;
 
     StatusCode getContactCap(int i, String str, int i2) throws RemoteException;
 
@@ -24,7 +25,9 @@ public interface IOptionsService extends IInterface {
 
     StatusCode removeListener(int i, UceLong uceLong) throws RemoteException;
 
-    StatusCode responseIncomingOptions(int i, int i2, int i3, String str, OptionsCapInfo optionsCapInfo, boolean z) throws RemoteException;
+    StatusCode responseIncomingOptions(
+            int i, int i2, int i3, String str, OptionsCapInfo optionsCapInfo, boolean z)
+            throws RemoteException;
 
     StatusCode setMyInfo(int i, CapInfo capInfo, int i2) throws RemoteException;
 
@@ -35,37 +38,55 @@ public interface IOptionsService extends IInterface {
         }
 
         @Override // com.android.ims.internal.uce.options.IOptionsService
-        public StatusCode addListener(int optionsServiceHandle, IOptionsListener optionsListener, UceLong optionsServiceListenerHdl) throws RemoteException {
+        public StatusCode addListener(
+                int optionsServiceHandle,
+                IOptionsListener optionsListener,
+                UceLong optionsServiceListenerHdl)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.ims.internal.uce.options.IOptionsService
-        public StatusCode removeListener(int optionsServiceHandle, UceLong optionsServiceListenerHdl) throws RemoteException {
+        public StatusCode removeListener(
+                int optionsServiceHandle, UceLong optionsServiceListenerHdl)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.ims.internal.uce.options.IOptionsService
-        public StatusCode setMyInfo(int optionsServiceHandle, CapInfo capInfo, int reqUserData) throws RemoteException {
+        public StatusCode setMyInfo(int optionsServiceHandle, CapInfo capInfo, int reqUserData)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.ims.internal.uce.options.IOptionsService
-        public StatusCode getMyInfo(int optionsServiceHandle, int reqUserdata) throws RemoteException {
+        public StatusCode getMyInfo(int optionsServiceHandle, int reqUserdata)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.ims.internal.uce.options.IOptionsService
-        public StatusCode getContactCap(int optionsServiceHandle, String remoteURI, int reqUserData) throws RemoteException {
+        public StatusCode getContactCap(int optionsServiceHandle, String remoteURI, int reqUserData)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.ims.internal.uce.options.IOptionsService
-        public StatusCode getContactListCap(int optionsServiceHandle, String[] remoteURIList, int reqUserData) throws RemoteException {
+        public StatusCode getContactListCap(
+                int optionsServiceHandle, String[] remoteURIList, int reqUserData)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.ims.internal.uce.options.IOptionsService
-        public StatusCode responseIncomingOptions(int optionsServiceHandle, int tId, int sipResponseCode, String reasonPhrase, OptionsCapInfo capInfo, boolean bContactInBL) throws RemoteException {
+        public StatusCode responseIncomingOptions(
+                int optionsServiceHandle,
+                int tId,
+                int sipResponseCode,
+                String reasonPhrase,
+                OptionsCapInfo capInfo,
+                boolean bContactInBL)
+                throws RemoteException {
             return null;
         }
 
@@ -75,8 +96,9 @@ public interface IOptionsService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IOptionsService {
-        public static final String DESCRIPTOR = "com.android.ims.internal.uce.options.IOptionsService";
+    public abstract static class Stub extends Binder implements IOptionsService {
+        public static final String DESCRIPTOR =
+                "com.android.ims.internal.uce.options.IOptionsService";
         static final int TRANSACTION_addListener = 2;
         static final int TRANSACTION_getContactCap = 6;
         static final int TRANSACTION_getContactListCap = 7;
@@ -135,7 +157,8 @@ public interface IOptionsService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -153,7 +176,8 @@ public interface IOptionsService extends IInterface {
                     return true;
                 case 2:
                     int _arg02 = data.readInt();
-                    IOptionsListener _arg1 = IOptionsListener.Stub.asInterface(data.readStrongBinder());
+                    IOptionsListener _arg1 =
+                            IOptionsListener.Stub.asInterface(data.readStrongBinder());
                     UceLong _arg2 = (UceLong) data.readTypedObject(UceLong.CREATOR);
                     data.enforceNoDataAvail();
                     StatusCode _result2 = addListener(_arg02, _arg1, _arg2);
@@ -209,10 +233,12 @@ public interface IOptionsService extends IInterface {
                     int _arg17 = data.readInt();
                     int _arg25 = data.readInt();
                     String _arg3 = data.readString();
-                    OptionsCapInfo _arg4 = (OptionsCapInfo) data.readTypedObject(OptionsCapInfo.CREATOR);
+                    OptionsCapInfo _arg4 =
+                            (OptionsCapInfo) data.readTypedObject(OptionsCapInfo.CREATOR);
                     boolean _arg5 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    StatusCode _result8 = responseIncomingOptions(_arg08, _arg17, _arg25, _arg3, _arg4, _arg5);
+                    StatusCode _result8 =
+                            responseIncomingOptions(_arg08, _arg17, _arg25, _arg3, _arg4, _arg5);
                     reply.writeNoException();
                     reply.writeTypedObject(_result8, 1);
                     return true;
@@ -255,7 +281,11 @@ public interface IOptionsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.uce.options.IOptionsService
-            public StatusCode addListener(int optionsServiceHandle, IOptionsListener optionsListener, UceLong optionsServiceListenerHdl) throws RemoteException {
+            public StatusCode addListener(
+                    int optionsServiceHandle,
+                    IOptionsListener optionsListener,
+                    UceLong optionsServiceListenerHdl)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -277,7 +307,9 @@ public interface IOptionsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.uce.options.IOptionsService
-            public StatusCode removeListener(int optionsServiceHandle, UceLong optionsServiceListenerHdl) throws RemoteException {
+            public StatusCode removeListener(
+                    int optionsServiceHandle, UceLong optionsServiceListenerHdl)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -295,7 +327,8 @@ public interface IOptionsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.uce.options.IOptionsService
-            public StatusCode setMyInfo(int optionsServiceHandle, CapInfo capInfo, int reqUserData) throws RemoteException {
+            public StatusCode setMyInfo(int optionsServiceHandle, CapInfo capInfo, int reqUserData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -314,7 +347,8 @@ public interface IOptionsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.uce.options.IOptionsService
-            public StatusCode getMyInfo(int optionsServiceHandle, int reqUserdata) throws RemoteException {
+            public StatusCode getMyInfo(int optionsServiceHandle, int reqUserdata)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -332,7 +366,9 @@ public interface IOptionsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.uce.options.IOptionsService
-            public StatusCode getContactCap(int optionsServiceHandle, String remoteURI, int reqUserData) throws RemoteException {
+            public StatusCode getContactCap(
+                    int optionsServiceHandle, String remoteURI, int reqUserData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -351,7 +387,9 @@ public interface IOptionsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.uce.options.IOptionsService
-            public StatusCode getContactListCap(int optionsServiceHandle, String[] remoteURIList, int reqUserData) throws RemoteException {
+            public StatusCode getContactListCap(
+                    int optionsServiceHandle, String[] remoteURIList, int reqUserData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -370,7 +408,14 @@ public interface IOptionsService extends IInterface {
             }
 
             @Override // com.android.ims.internal.uce.options.IOptionsService
-            public StatusCode responseIncomingOptions(int optionsServiceHandle, int tId, int sipResponseCode, String reasonPhrase, OptionsCapInfo capInfo, boolean bContactInBL) throws RemoteException {
+            public StatusCode responseIncomingOptions(
+                    int optionsServiceHandle,
+                    int tId,
+                    int sipResponseCode,
+                    String reasonPhrase,
+                    OptionsCapInfo capInfo,
+                    boolean bContactInBL)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

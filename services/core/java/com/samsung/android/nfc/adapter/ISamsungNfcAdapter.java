@@ -26,7 +26,8 @@ public interface ISamsungNfcAdapter extends IInterface {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.nfc.adapter.ISamsungNfcAdapter");
+                    obtain.writeInterfaceToken(
+                            "com.samsung.android.nfc.adapter.ISamsungNfcAdapter");
                     obtain.writeBoolean(z);
                     this.mRemote.transact(7, obtain, obtain2, 0);
                     obtain2.readException();
@@ -41,7 +42,8 @@ public interface ISamsungNfcAdapter extends IInterface {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.nfc.adapter.ISamsungNfcAdapter");
+                    obtain.writeInterfaceToken(
+                            "com.samsung.android.nfc.adapter.ISamsungNfcAdapter");
                     obtain.writeStrongBinder(iBinder);
                     this.mRemote.transact(1, obtain, obtain2, 0);
                     obtain2.readException();
@@ -56,7 +58,8 @@ public interface ISamsungNfcAdapter extends IInterface {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.nfc.adapter.ISamsungNfcAdapter");
+                    obtain.writeInterfaceToken(
+                            "com.samsung.android.nfc.adapter.ISamsungNfcAdapter");
                     obtain.writeStrongBinder(iBinder);
                     this.mRemote.transact(5, obtain, obtain2, 0);
                     obtain2.readException();
@@ -71,7 +74,8 @@ public interface ISamsungNfcAdapter extends IInterface {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.nfc.adapter.ISamsungNfcAdapter");
+                    obtain.writeInterfaceToken(
+                            "com.samsung.android.nfc.adapter.ISamsungNfcAdapter");
                     obtain.writeByteArray(bArr);
                     this.mRemote.transact(2, obtain, obtain2, 0);
                     obtain2.readException();
@@ -86,7 +90,8 @@ public interface ISamsungNfcAdapter extends IInterface {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
-                    obtain.writeInterfaceToken("com.samsung.android.nfc.adapter.ISamsungNfcAdapter");
+                    obtain.writeInterfaceToken(
+                            "com.samsung.android.nfc.adapter.ISamsungNfcAdapter");
                     obtain.writeByteArray(bArr);
                     this.mRemote.transact(4, obtain, obtain2, 0);
                     obtain2.readException();

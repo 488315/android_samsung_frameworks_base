@@ -7,8 +7,7 @@ public class ElasticEaseInOut implements Interpolator {
     private float amplitude;
     private float period;
 
-    public ElasticEaseInOut() {
-    }
+    public ElasticEaseInOut() {}
 
     public ElasticEaseInOut(float amplitude, float period) {
         this.amplitude = amplitude;
@@ -40,9 +39,18 @@ public class ElasticEaseInOut implements Interpolator {
         float t2 = t * 2.0f;
         if (t2 < 1.0f) {
             float t3 = t2 - 1.0f;
-            return (float) (a * Math.pow(2.0d, t3 * 10.0f) * Math.sin(((t3 - s) * 6.283185307179586d) / p) * (-0.5d));
+            return (float)
+                    (a
+                            * Math.pow(2.0d, t3 * 10.0f)
+                            * Math.sin(((t3 - s) * 6.283185307179586d) / p)
+                            * (-0.5d));
         }
         float t4 = t2 - 1.0f;
-        return (float) ((a * Math.pow(2.0d, t4 * (-10.0f)) * Math.sin(((t4 - s) * 6.283185307179586d) / p) * 0.5d) + 1.0d);
+        return (float)
+                ((a
+                                * Math.pow(2.0d, t4 * (-10.0f))
+                                * Math.sin(((t4 - s) * 6.283185307179586d) / p)
+                                * 0.5d)
+                        + 1.0d);
     }
 }

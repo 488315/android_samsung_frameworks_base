@@ -13,9 +13,9 @@ public final class AllSensorStateController {
     public Handler mListenerHandler;
 
     /* JADX WARN: Code restructure failed: missing block: B:28:0x003b, code lost:
-    
-        r7.mEnabled = com.android.internal.util.XmlUtils.readBooleanAttribute(r2, "enabled", false) | r7.mEnabled;
-     */
+
+       r7.mEnabled = com.android.internal.util.XmlUtils.readBooleanAttribute(r2, "enabled", false) | r7.mEnabled;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -102,6 +102,8 @@ public final class AllSensorStateController {
         L94:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.sensorprivacy.AllSensorStateController.<init>():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.sensorprivacy.AllSensorStateController.<init>():void");
     }
 }

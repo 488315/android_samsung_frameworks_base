@@ -8,14 +8,15 @@ import android.os.RemoteException;
 
 /* loaded from: classes3.dex */
 public interface IStorageLoadingProgressListener extends IInterface {
-    public static final String DESCRIPTOR = "android.os.incremental.IStorageLoadingProgressListener";
+    public static final String DESCRIPTOR =
+            "android.os.incremental.IStorageLoadingProgressListener";
 
     void onStorageLoadingProgressChanged(int i, float f) throws RemoteException;
 
     public static class Default implements IStorageLoadingProgressListener {
         @Override // android.os.incremental.IStorageLoadingProgressListener
-        public void onStorageLoadingProgressChanged(int storageId, float progress) throws RemoteException {
-        }
+        public void onStorageLoadingProgressChanged(int storageId, float progress)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +24,7 @@ public interface IStorageLoadingProgressListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IStorageLoadingProgressListener {
+    public abstract static class Stub extends Binder implements IStorageLoadingProgressListener {
         static final int TRANSACTION_onStorageLoadingProgressChanged = 1;
 
         public Stub() {
@@ -61,7 +62,8 @@ public interface IStorageLoadingProgressListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IStorageLoadingProgressListener.DESCRIPTOR);
             }
@@ -98,7 +100,8 @@ public interface IStorageLoadingProgressListener extends IInterface {
             }
 
             @Override // android.os.incremental.IStorageLoadingProgressListener
-            public void onStorageLoadingProgressChanged(int storageId, float progress) throws RemoteException {
+            public void onStorageLoadingProgressChanged(int storageId, float progress)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IStorageLoadingProgressListener.DESCRIPTOR);

@@ -4,14 +4,16 @@ import com.android.internal.util.FunctionalUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class KnoxCustomManagerService$$ExternalSyntheticLambda19 implements FunctionalUtils.ThrowingSupplier {
+public final /* synthetic */ class KnoxCustomManagerService$$ExternalSyntheticLambda19
+        implements FunctionalUtils.ThrowingSupplier {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ KnoxCustomManagerService f$0;
     public final /* synthetic */ int f$1;
     public final /* synthetic */ int f$2;
     public final /* synthetic */ boolean f$3;
 
-    public /* synthetic */ KnoxCustomManagerService$$ExternalSyntheticLambda19(KnoxCustomManagerService knoxCustomManagerService, int i, int i2, boolean z, int i3) {
+    public /* synthetic */ KnoxCustomManagerService$$ExternalSyntheticLambda19(
+            KnoxCustomManagerService knoxCustomManagerService, int i, int i2, boolean z, int i3) {
         this.$r8$classId = i3;
         this.f$0 = knoxCustomManagerService;
         this.f$1 = i;
@@ -19,7 +21,8 @@ public final /* synthetic */ class KnoxCustomManagerService$$ExternalSyntheticLa
         this.f$3 = z;
     }
 
-    public /* synthetic */ KnoxCustomManagerService$$ExternalSyntheticLambda19(KnoxCustomManagerService knoxCustomManagerService, int i, boolean z, int i2, int i3) {
+    public /* synthetic */ KnoxCustomManagerService$$ExternalSyntheticLambda19(
+            KnoxCustomManagerService knoxCustomManagerService, int i, boolean z, int i2, int i3) {
         this.$r8$classId = i3;
         this.f$0 = knoxCustomManagerService;
         this.f$1 = i;

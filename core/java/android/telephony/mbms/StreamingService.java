@@ -5,6 +5,7 @@ import android.os.RemoteException;
 import android.telephony.MbmsStreamingSession;
 import android.telephony.mbms.vendor.IMbmsStreamingService;
 import android.util.Log;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -30,14 +31,17 @@ public class StreamingService implements AutoCloseable {
     private final int mSubscriptionId;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StreamingState {
-    }
+    public @interface StreamingState {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StreamingStateChangeReason {
-    }
+    public @interface StreamingStateChangeReason {}
 
-    public StreamingService(int subscriptionId, IMbmsStreamingService service, MbmsStreamingSession session, StreamingServiceInfo streamingServiceInfo, InternalStreamingServiceCallback callback) {
+    public StreamingService(
+            int subscriptionId,
+            IMbmsStreamingService service,
+            MbmsStreamingSession session,
+            StreamingServiceInfo streamingServiceInfo,
+            InternalStreamingServiceCallback callback) {
         this.mSubscriptionId = subscriptionId;
         this.mParentSession = session;
         this.mService = service;
@@ -50,7 +54,8 @@ public class StreamingService implements AutoCloseable {
             throw new IllegalStateException("No streaming service attached");
         }
         try {
-            return this.mService.getPlaybackUri(this.mSubscriptionId, this.mServiceInfo.getServiceId());
+            return this.mService.getPlaybackUri(
+                    this.mSubscriptionId, this.mServiceInfo.getServiceId());
         } catch (RemoteException e) {
             Log.w(LOG_TAG, "Remote process died");
             this.mService = null;

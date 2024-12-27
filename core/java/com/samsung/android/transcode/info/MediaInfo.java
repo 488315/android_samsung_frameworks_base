@@ -7,8 +7,10 @@ import android.media.MediaFormat;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.opengl.GLES30;
+
 import com.samsung.android.transcode.util.LogS;
 import com.samsung.android.transcode.util.SEFHelper;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.Map;
@@ -54,8 +56,10 @@ public class MediaInfo {
         throw new InstantiationException("do not instatiate");
     }
 
-    private static MediaMetadataRetriever newMetadataRetriever(String filepath, Context context, Uri uri) {
-        MediaMetadataRetriever retriever = sMetadataRetriever != null ? sMetadataRetriever : new MediaMetadataRetriever();
+    private static MediaMetadataRetriever newMetadataRetriever(
+            String filepath, Context context, Uri uri) {
+        MediaMetadataRetriever retriever =
+                sMetadataRetriever != null ? sMetadataRetriever : new MediaMetadataRetriever();
         if (filepath != null) {
             retriever.setDataSource(filepath);
         } else {
@@ -64,7 +68,8 @@ public class MediaInfo {
         return retriever;
     }
 
-    private static MediaExtractor newMediaExtractor(String filepath, Context context, Uri uri) throws IOException {
+    private static MediaExtractor newMediaExtractor(String filepath, Context context, Uri uri)
+            throws IOException {
         MediaExtractor extractor = sMediaExtractor != null ? sMediaExtractor : new MediaExtractor();
         if (filepath != null) {
             extractor.setDataSource(filepath);
@@ -78,7 +83,14 @@ public class MediaInfo {
         MediaMetadataRetriever retriever;
         MediaFileInfo info = new MediaFileInfo();
         if ((context == null || uri == null) && filepath == null) {
-            LogS.d(TAG, "Can't get MediaInfo filepath : " + filepath + " or context : " + context + ", uri : " + uri);
+            LogS.d(
+                    TAG,
+                    "Can't get MediaInfo filepath : "
+                            + filepath
+                            + " or context : "
+                            + context
+                            + ", uri : "
+                            + uri);
         } else {
             try {
                 retriever = newMetadataRetriever(filepath, context, uri);
@@ -97,15 +109,18 @@ public class MediaInfo {
                 int parseInt2 = Integer.parseInt((String) Optional.ofNullable(height).orElse("0"));
                 Height = parseInt2;
                 info.Height = parseInt2;
-                info.Rotation = Integer.parseInt((String) Optional.ofNullable(rotation).orElse("0"));
+                info.Rotation =
+                        Integer.parseInt((String) Optional.ofNullable(rotation).orElse("0"));
                 String editedDuration = retriever.extractMetadata(1029);
                 String duration = retriever.extractMetadata(9);
                 String bitrate = retriever.extractMetadata(20);
                 String transfer = retriever.extractMetadata(36);
                 info.MimeType = retriever.extractMetadata(12);
                 info.Writer = retriever.extractMetadata(11);
-                info.EditedDuration = Integer.parseInt((String) Optional.ofNullable(editedDuration).orElse("0"));
-                info.Duration = Integer.parseInt((String) Optional.ofNullable(duration).orElse("0"));
+                info.EditedDuration =
+                        Integer.parseInt((String) Optional.ofNullable(editedDuration).orElse("0"));
+                info.Duration =
+                        Integer.parseInt((String) Optional.ofNullable(duration).orElse("0"));
                 info.Bitrate = Integer.parseInt((String) Optional.ofNullable(bitrate).orElse("0"));
                 String auth = retriever.extractMetadata(1015);
                 String recordingMode = retriever.extractMetadata(1022);
@@ -113,9 +128,16 @@ public class MediaInfo {
                 String bitDepth = retriever.extractMetadata(1028);
                 String is360 = retriever.extractMetadata(1021);
                 info.Author = Integer.parseInt((String) Optional.ofNullable(auth).orElse("-1"));
-                info.RecordingMode = Integer.parseInt((String) Optional.ofNullable(recordingMode).orElse(Integer.toString(0)));
-                info.Bitdepth = Integer.parseInt((String) Optional.ofNullable(bitDepth).orElse("8"));
-                info.colorTransfer = Integer.parseInt((String) Optional.ofNullable(transfer).orElse(String.valueOf(3)));
+                info.RecordingMode =
+                        Integer.parseInt(
+                                (String)
+                                        Optional.ofNullable(recordingMode)
+                                                .orElse(Integer.toString(0)));
+                info.Bitdepth =
+                        Integer.parseInt((String) Optional.ofNullable(bitDepth).orElse("8"));
+                info.colorTransfer =
+                        Integer.parseInt(
+                                (String) Optional.ofNullable(transfer).orElse(String.valueOf(3)));
                 info.HDR10 = "yes".equals(hdr10bit);
                 info.Is360 = "1".equals(is360);
                 getSEFSlowMotionInfo(info, retriever);
@@ -123,7 +145,36 @@ public class MediaInfo {
                 if (retriever != null) {
                     retriever.close();
                 }
-                LogS.d(TAG, "Width : " + info.Width + ", Height : " + info.Height + ", RecordingMode : " + info.RecordingMode + ", Bitdepth :" + info.Bitdepth + ", ColorTransfer : " + info.colorTransfer + ", Author : " + info.Author + ",Is360 : " + info.Is360 + ", HDR10 :" + info.HDR10 + ", Duration : " + info.Duration + ", EditedDuration :" + info.EditedDuration + ", MimeType :" + info.MimeType + ", Rotation : " + info.Rotation + ",Bitrate : " + info.Bitrate + ", IsLocationAvailable : " + info.IsLocationAvailable);
+                LogS.d(
+                        TAG,
+                        "Width : "
+                                + info.Width
+                                + ", Height : "
+                                + info.Height
+                                + ", RecordingMode : "
+                                + info.RecordingMode
+                                + ", Bitdepth :"
+                                + info.Bitdepth
+                                + ", ColorTransfer : "
+                                + info.colorTransfer
+                                + ", Author : "
+                                + info.Author
+                                + ",Is360 : "
+                                + info.Is360
+                                + ", HDR10 :"
+                                + info.HDR10
+                                + ", Duration : "
+                                + info.Duration
+                                + ", EditedDuration :"
+                                + info.EditedDuration
+                                + ", MimeType :"
+                                + info.MimeType
+                                + ", Rotation : "
+                                + info.Rotation
+                                + ",Bitrate : "
+                                + info.Bitrate
+                                + ", IsLocationAvailable : "
+                                + info.IsLocationAvailable);
             } finally {
             }
         }
@@ -144,9 +195,15 @@ public class MediaInfo {
             }
             if (info.RecordingFramerate == 0) {
                 String fps = retriever.extractMetadata(25);
-                info.RecordingFramerate = Integer.parseInt((String) Optional.ofNullable(fps).orElse("0"));
+                info.RecordingFramerate =
+                        Integer.parseInt((String) Optional.ofNullable(fps).orElse("0"));
             }
-            LogS.d(TAG, "getSEFSlowMotionInfo  NumOfSVCLayers:" + info.NumOfSVCLayers + "RecordingFramerate:" + info.RecordingFramerate);
+            LogS.d(
+                    TAG,
+                    "getSEFSlowMotionInfo  NumOfSVCLayers:"
+                            + info.NumOfSVCLayers
+                            + "RecordingFramerate:"
+                            + info.RecordingFramerate);
         }
     }
 
@@ -170,14 +227,15 @@ public class MediaInfo {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:35:0x004c, code lost:
-    
-        if (r1 == null) goto L30;
-     */
+
+       if (r1 == null) goto L30;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.media.MediaFormat getTrackInfo(java.lang.String r6, android.content.Context r7, android.net.Uri r8, boolean r9) {
+    public static android.media.MediaFormat getTrackInfo(
+            java.lang.String r6, android.content.Context r7, android.net.Uri r8, boolean r9) {
         /*
             android.media.MediaFormat r0 = new android.media.MediaFormat
             r0.<init>()
@@ -241,7 +299,11 @@ public class MediaInfo {
             com.samsung.android.transcode.util.LogS.d(r2, r1)
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.transcode.info.MediaInfo.getTrackInfo(java.lang.String, android.content.Context, android.net.Uri, boolean):android.media.MediaFormat");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.transcode.info.MediaInfo.getTrackInfo(java.lang.String,"
+                    + " android.content.Context, android.net.Uri,"
+                    + " boolean):android.media.MediaFormat");
     }
 
     private static void setVideoFramerate(MediaExtractor extractor, MediaFormat videoFormat) {
@@ -257,7 +319,9 @@ public class MediaInfo {
             Framerate = frameRate;
             FrameInterval = 1000000 / frameRate;
         }
-        LogS.d(TAG, "setVideoFramerate Framerate: " + Framerate + ", FrameInterval : " + FrameInterval);
+        LogS.d(
+                TAG,
+                "setVideoFramerate Framerate: " + Framerate + ", FrameInterval : " + FrameInterval);
     }
 
     private static void setFrameRateBySampleInterval(MediaExtractor extractor) {
@@ -284,12 +348,23 @@ public class MediaInfo {
             }
             if (avgTime <= 0 || frameCount <= 0) {
                 previousTime = previousTime2;
-                LogS.d(TAG, "Fail to Calculate Framerate  avgTime :" + avgTime + ", frameCount : " + frameCount);
+                LogS.d(
+                        TAG,
+                        "Fail to Calculate Framerate  avgTime :"
+                                + avgTime
+                                + ", frameCount : "
+                                + frameCount);
             } else {
-                FrameInterval = ((int) (avgTime / ((long) frameCount))) > 0 ? (int) (avgTime / frameCount) : GLES30.GL_R32I;
+                FrameInterval =
+                        ((int) (avgTime / ((long) frameCount))) > 0
+                                ? (int) (avgTime / frameCount)
+                                : GLES30.GL_R32I;
                 previousTime = previousTime2;
                 long previousTime3 = frameCount;
-                int frameRate = ((int) (1000 / ((avgTime / 1000) / previousTime3))) > 0 ? (int) (1000 / ((avgTime / 1000) / frameCount)) : 30;
+                int frameRate =
+                        ((int) (1000 / ((avgTime / 1000) / previousTime3))) > 0
+                                ? (int) (1000 / ((avgTime / 1000) / frameCount))
+                                : 30;
                 Framerate = frameRate;
             }
         }

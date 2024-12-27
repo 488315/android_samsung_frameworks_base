@@ -12,15 +12,16 @@ import android.util.SparseArray;
 import android.view.Display;
 import android.view.DisplayInfo;
 import android.view.SurfaceControl;
+
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
-import com.android.server.display.mode.DisplayModeDirector;
-import com.android.server.display.mode.RefreshRateVote;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class SkinThermalStatusObserver extends IThermalEventListener.Stub implements DisplayManager.DisplayListener {
+public final class SkinThermalStatusObserver extends IThermalEventListener.Stub
+        implements DisplayManager.DisplayListener {
     public final Handler mHandler;
     public final DisplayModeDirector.Injector mInjector;
     public boolean mLoggingEnabled;
@@ -29,13 +30,15 @@ public final class SkinThermalStatusObserver extends IThermalEventListener.Stub 
     public int mStatus = 0;
     public final SparseArray mThermalThrottlingByDisplay = new SparseArray();
 
-    public SkinThermalStatusObserver(DisplayModeDirector.Injector injector, VotesStorage votesStorage, Handler handler) {
+    public SkinThermalStatusObserver(
+            DisplayModeDirector.Injector injector, VotesStorage votesStorage, Handler handler) {
         this.mInjector = injector;
         this.mVotesStorage = votesStorage;
         this.mHandler = handler;
     }
 
-    public static SurfaceControl.RefreshRateRange findBestMatchingRefreshRateRange(int i, SparseArray sparseArray) {
+    public static SurfaceControl.RefreshRateRange findBestMatchingRefreshRateRange(
+            int i, SparseArray sparseArray) {
         SurfaceControl.RefreshRateRange refreshRateRange = null;
         while (i >= 0) {
             refreshRateRange = (SurfaceControl.RefreshRateRange) sparseArray.get(i);
@@ -67,27 +70,38 @@ public final class SkinThermalStatusObserver extends IThermalEventListener.Stub 
                     return;
                 }
                 this.mStatus = status;
-                this.mHandler.post(new Runnable() { // from class: com.android.server.display.mode.SkinThermalStatusObserver$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        int i;
-                        SparseArray clone;
-                        SkinThermalStatusObserver skinThermalStatusObserver = SkinThermalStatusObserver.this;
-                        synchronized (skinThermalStatusObserver.mThermalObserverLock) {
-                            i = skinThermalStatusObserver.mStatus;
-                            clone = skinThermalStatusObserver.mThermalThrottlingByDisplay.clone();
-                        }
-                        if (skinThermalStatusObserver.mLoggingEnabled) {
-                            Slog.d("SkinThermalStatusObserver", "Updating votes for status=" + i + ", map=" + clone);
-                        }
-                        int size = clone.size();
-                        for (int i2 = 0; i2 < size; i2++) {
-                            skinThermalStatusObserver.reportThrottlingIfNeeded(clone.keyAt(i2), i, (SparseArray) clone.valueAt(i2));
-                        }
-                    }
-                });
+                this.mHandler.post(
+                        new Runnable() { // from class:
+                                         // com.android.server.display.mode.SkinThermalStatusObserver$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                int i;
+                                SparseArray clone;
+                                SkinThermalStatusObserver skinThermalStatusObserver =
+                                        SkinThermalStatusObserver.this;
+                                synchronized (skinThermalStatusObserver.mThermalObserverLock) {
+                                    i = skinThermalStatusObserver.mStatus;
+                                    clone =
+                                            skinThermalStatusObserver.mThermalThrottlingByDisplay
+                                                    .clone();
+                                }
+                                if (skinThermalStatusObserver.mLoggingEnabled) {
+                                    Slog.d(
+                                            "SkinThermalStatusObserver",
+                                            "Updating votes for status=" + i + ", map=" + clone);
+                                }
+                                int size = clone.size();
+                                for (int i2 = 0; i2 < size; i2++) {
+                                    skinThermalStatusObserver.reportThrottlingIfNeeded(
+                                            clone.keyAt(i2), i, (SparseArray) clone.valueAt(i2));
+                                }
+                            }
+                        });
                 if (this.mLoggingEnabled) {
-                    AnyMotionDetector$$ExternalSyntheticOutline0.m(status, "New thermal throttling status , current thermal status = ", "SkinThermalStatusObserver");
+                    AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                            status,
+                            "New thermal throttling status , current thermal status = ",
+                            "SkinThermalStatusObserver");
                 }
             } catch (Throwable th) {
                 throw th;
@@ -97,16 +111,25 @@ public final class SkinThermalStatusObserver extends IThermalEventListener.Stub 
 
     public final void observe() {
         ((DisplayModeDirector.RealInjector) this.mInjector).getClass();
-        IThermalService asInterface = IThermalService.Stub.asInterface(ServiceManager.getService("thermalservice"));
+        IThermalService asInterface =
+                IThermalService.Stub.asInterface(ServiceManager.getService("thermalservice"));
         if (asInterface == null) {
-            Slog.w("DisplayModeDirector", "Could not observe thermal status. Service not available");
+            Slog.w(
+                    "DisplayModeDirector",
+                    "Could not observe thermal status. Service not available");
             return;
         }
         try {
             asInterface.registerThermalEventListenerWithType(this, 3);
-            ((DisplayModeDirector.RealInjector) this.mInjector).getDisplayManager().registerDisplayListener(this, this.mHandler, 7L);
+            ((DisplayModeDirector.RealInjector) this.mInjector)
+                    .getDisplayManager()
+                    .registerDisplayListener(this, this.mHandler, 7L);
             DisplayInfo displayInfo = new DisplayInfo();
-            Display[] displays = ((DisplayModeDirector.RealInjector) this.mInjector).getDisplayManager().getDisplays("android.hardware.display.category.ALL_INCLUDING_DISABLED");
+            Display[] displays =
+                    ((DisplayModeDirector.RealInjector) this.mInjector)
+                            .getDisplayManager()
+                            .getDisplays(
+                                    "android.hardware.display.category.ALL_INCLUDING_DISABLED");
             int length = displays.length;
             SparseArray sparseArray = new SparseArray(length);
             for (Display display : displays) {
@@ -117,7 +140,8 @@ public final class SkinThermalStatusObserver extends IThermalEventListener.Stub 
             synchronized (this.mThermalObserverLock) {
                 for (int i = 0; i < length; i++) {
                     try {
-                        this.mThermalThrottlingByDisplay.put(sparseArray.keyAt(i), (SparseArray) sparseArray.valueAt(i));
+                        this.mThermalThrottlingByDisplay.put(
+                                sparseArray.keyAt(i), (SparseArray) sparseArray.valueAt(i));
                     } catch (Throwable th) {
                         throw th;
                     }
@@ -135,7 +159,8 @@ public final class SkinThermalStatusObserver extends IThermalEventListener.Stub 
     public final void onDisplayAdded(int i) {
         updateThermalRefreshRateThrottling(i);
         if (this.mLoggingEnabled) {
-            AnyMotionDetector$$ExternalSyntheticOutline0.m(i, "Display added:", "SkinThermalStatusObserver");
+            AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                    i, "Display added:", "SkinThermalStatusObserver");
         }
     }
 
@@ -143,7 +168,8 @@ public final class SkinThermalStatusObserver extends IThermalEventListener.Stub 
     public final void onDisplayChanged(int i) {
         updateThermalRefreshRateThrottling(i);
         if (this.mLoggingEnabled) {
-            AnyMotionDetector$$ExternalSyntheticOutline0.m(i, "Display changed:", "SkinThermalStatusObserver");
+            AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                    i, "Display changed:", "SkinThermalStatusObserver");
         }
     }
 
@@ -154,7 +180,8 @@ public final class SkinThermalStatusObserver extends IThermalEventListener.Stub 
             this.mHandler.post(new SkinThermalStatusObserver$$ExternalSyntheticLambda0(this, i, 1));
         }
         if (this.mLoggingEnabled) {
-            AnyMotionDetector$$ExternalSyntheticOutline0.m(i, "Display removed and voted: displayId=", "SkinThermalStatusObserver");
+            AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                    i, "Display removed and voted: displayId=", "SkinThermalStatusObserver");
         }
     }
 
@@ -164,16 +191,28 @@ public final class SkinThermalStatusObserver extends IThermalEventListener.Stub 
             return;
         }
         if (sparseArray.size() == 0) {
-            renderVote = i2 >= 4 ? new RefreshRateVote.RenderVote(FullScreenMagnificationGestureHandler.MAX_SCALE, 60.0f) : null;
+            renderVote =
+                    i2 >= 4
+                            ? new RefreshRateVote.RenderVote(
+                                    FullScreenMagnificationGestureHandler.MAX_SCALE, 60.0f)
+                            : null;
             this.mVotesStorage.updateVote(i, 22, renderVote);
             if (this.mLoggingEnabled) {
-                Slog.d("SkinThermalStatusObserver", "Voted(fallback): vote=" + renderVote + ", display =" + i);
+                Slog.d(
+                        "SkinThermalStatusObserver",
+                        "Voted(fallback): vote=" + renderVote + ", display =" + i);
                 return;
             }
             return;
         }
-        SurfaceControl.RefreshRateRange findBestMatchingRefreshRateRange = findBestMatchingRefreshRateRange(i2, sparseArray);
-        renderVote = findBestMatchingRefreshRateRange != null ? new RefreshRateVote.RenderVote(findBestMatchingRefreshRateRange.min, findBestMatchingRefreshRateRange.max) : null;
+        SurfaceControl.RefreshRateRange findBestMatchingRefreshRateRange =
+                findBestMatchingRefreshRateRange(i2, sparseArray);
+        renderVote =
+                findBestMatchingRefreshRateRange != null
+                        ? new RefreshRateVote.RenderVote(
+                                findBestMatchingRefreshRateRange.min,
+                                findBestMatchingRefreshRateRange.max)
+                        : null;
         this.mVotesStorage.updateVote(i, 22, renderVote);
         if (this.mLoggingEnabled) {
             Slog.d("SkinThermalStatusObserver", "Voted: vote=" + renderVote + ", display =" + i);
@@ -182,7 +221,10 @@ public final class SkinThermalStatusObserver extends IThermalEventListener.Stub 
 
     public final void updateThermalRefreshRateThrottling(int i) {
         DisplayInfo displayInfo = new DisplayInfo();
-        Display display = ((DisplayModeDirector.RealInjector) this.mInjector).getDisplayManager().getDisplay(i);
+        Display display =
+                ((DisplayModeDirector.RealInjector) this.mInjector)
+                        .getDisplayManager()
+                        .getDisplay(i);
         if (display != null) {
             display.getDisplayInfo(displayInfo);
         }
@@ -192,7 +234,9 @@ public final class SkinThermalStatusObserver extends IThermalEventListener.Stub 
             this.mHandler.post(new SkinThermalStatusObserver$$ExternalSyntheticLambda0(this, i, 0));
         }
         if (this.mLoggingEnabled) {
-            Slog.d("SkinThermalStatusObserver", "Thermal throttling updated: display=" + i + ", map=" + sparseArray);
+            Slog.d(
+                    "SkinThermalStatusObserver",
+                    "Thermal throttling updated: display=" + i + ", map=" + sparseArray);
         }
     }
 }

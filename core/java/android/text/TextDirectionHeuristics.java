@@ -1,6 +1,7 @@
 package android.text;
 
 import android.content.res.Configuration;
+
 import java.nio.CharBuffer;
 import java.util.Locale;
 
@@ -34,8 +35,24 @@ public class TextDirectionHeuristics {
     public static int isRtlCodePoint(int codePoint) {
         switch (Character.getDirectionality(codePoint)) {
             case -1:
-                if ((1424 > codePoint || codePoint > 2303) && ((64285 > codePoint || codePoint > 64975) && ((65008 > codePoint || codePoint > 65023) && ((65136 > codePoint || codePoint > 65279) && ((67584 > codePoint || codePoint > 69631) && (124928 > codePoint || codePoint > 126975)))))) {
-                    return ((8293 > codePoint || codePoint > 8297) && (65520 > codePoint || codePoint > 65528) && ((917504 > codePoint || codePoint > 921599) && ((64976 > codePoint || codePoint > 65007) && (codePoint & Configuration.DENSITY_DPI_ANY) != 65534 && ((8352 > codePoint || codePoint > 8399) && (55296 > codePoint || codePoint > 57343))))) ? 1 : 2;
+                if ((1424 > codePoint || codePoint > 2303)
+                        && ((64285 > codePoint || codePoint > 64975)
+                                && ((65008 > codePoint || codePoint > 65023)
+                                        && ((65136 > codePoint || codePoint > 65279)
+                                                && ((67584 > codePoint || codePoint > 69631)
+                                                        && (124928 > codePoint
+                                                                || codePoint > 126975)))))) {
+                    return ((8293 > codePoint || codePoint > 8297)
+                                    && (65520 > codePoint || codePoint > 65528)
+                                    && ((917504 > codePoint || codePoint > 921599)
+                                            && ((64976 > codePoint || codePoint > 65007)
+                                                    && (codePoint & Configuration.DENSITY_DPI_ANY)
+                                                            != 65534
+                                                    && ((8352 > codePoint || codePoint > 8399)
+                                                            && (55296 > codePoint
+                                                                    || codePoint > 57343)))))
+                            ? 1
+                            : 2;
                 }
                 return 0;
             case 0:
@@ -48,7 +65,7 @@ public class TextDirectionHeuristics {
         }
     }
 
-    private static abstract class TextDirectionHeuristicImpl implements TextDirectionHeuristic {
+    private abstract static class TextDirectionHeuristicImpl implements TextDirectionHeuristic {
         private final TextDirectionAlgorithm mAlgorithm;
 
         protected abstract boolean defaultIsRtl();
@@ -88,7 +105,8 @@ public class TextDirectionHeuristics {
     private static class TextDirectionHeuristicInternal extends TextDirectionHeuristicImpl {
         private final boolean mDefaultIsRtl;
 
-        private TextDirectionHeuristicInternal(TextDirectionAlgorithm algorithm, boolean defaultIsRtl) {
+        private TextDirectionHeuristicInternal(
+                TextDirectionAlgorithm algorithm, boolean defaultIsRtl) {
             super(algorithm);
             this.mDefaultIsRtl = defaultIsRtl;
         }
@@ -124,8 +142,7 @@ public class TextDirectionHeuristics {
             return result;
         }
 
-        private FirstStrong() {
-        }
+        private FirstStrong() {}
     }
 
     private static class AnyStrong implements TextDirectionAlgorithm {
@@ -134,9 +151,9 @@ public class TextDirectionHeuristics {
         public static final AnyStrong INSTANCE_LTR = new AnyStrong(false);
 
         /* JADX WARN: Code restructure failed: missing block: B:32:0x0039, code lost:
-        
-            continue;
-         */
+
+           continue;
+        */
         @Override // android.text.TextDirectionHeuristics.TextDirectionAlgorithm
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -201,7 +218,10 @@ public class TextDirectionHeuristics {
                 r2 = 2
                 return r2
             */
-            throw new UnsupportedOperationException("Method not decompiled: android.text.TextDirectionHeuristics.AnyStrong.checkRtl(java.lang.CharSequence, int, int):int");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " android.text.TextDirectionHeuristics.AnyStrong.checkRtl(java.lang.CharSequence,"
+                        + " int, int):int");
         }
 
         private AnyStrong(boolean lookForRtl) {
@@ -210,7 +230,8 @@ public class TextDirectionHeuristics {
     }
 
     private static class TextDirectionHeuristicLocale extends TextDirectionHeuristicImpl {
-        public static final TextDirectionHeuristicLocale INSTANCE = new TextDirectionHeuristicLocale();
+        public static final TextDirectionHeuristicLocale INSTANCE =
+                new TextDirectionHeuristicLocale();
 
         public TextDirectionHeuristicLocale() {
             super(null);

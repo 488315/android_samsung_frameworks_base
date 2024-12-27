@@ -3,11 +3,13 @@ package com.samsung.android.sume.core.message;
 import android.content.ContentValues;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda3;
 import com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda4;
 import com.samsung.android.sume.core.types.ColorFormat;
 import com.samsung.android.sume.core.types.DataType;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -19,19 +21,22 @@ import java.util.stream.Stream;
 public class ContentsInfo implements Parcelable {
     private final Map<String, Object> data;
     private static final String TAG = Def.tagOf((Class<?>) ContentsInfo.class);
-    public static final Parcelable.Creator<ContentsInfo> CREATOR = new Parcelable.Creator<ContentsInfo>() { // from class: com.samsung.android.sume.core.message.ContentsInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContentsInfo createFromParcel(Parcel in) {
-            return new ContentsInfo(in);
-        }
+    public static final Parcelable.Creator<ContentsInfo> CREATOR =
+            new Parcelable.Creator<
+                    ContentsInfo>() { // from class:
+                                      // com.samsung.android.sume.core.message.ContentsInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContentsInfo createFromParcel(Parcel in) {
+                    return new ContentsInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContentsInfo[] newArray(int size) {
-            return new ContentsInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContentsInfo[] newArray(int size) {
+                    return new ContentsInfo[size];
+                }
+            };
 
     public ContentsInfo() {
         this.data = new HashMap();
@@ -39,7 +44,13 @@ public class ContentsInfo implements Parcelable {
     }
 
     public ContentsInfo(ContentValues contentValues) {
-        this.data = (Map) contentValues.valueSet().stream().collect(Collectors.toMap(new MediaBufferBase$$ExternalSyntheticLambda3(), new MediaBufferBase$$ExternalSyntheticLambda4()));
+        this.data =
+                (Map)
+                        contentValues.valueSet().stream()
+                                .collect(
+                                        Collectors.toMap(
+                                                new MediaBufferBase$$ExternalSyntheticLambda3(),
+                                                new MediaBufferBase$$ExternalSyntheticLambda4()));
         setStatusCode(0);
     }
 
@@ -181,7 +192,9 @@ public class ContentsInfo implements Parcelable {
     }
 
     public long getProcessingTime(TimeUnit timeUnit) {
-        long duration = getAsLongOr(Message.KEY_END_TIME_MS, 0L) - getAsLongOr(Message.KEY_START_TIME_MS, 0L);
+        long duration =
+                getAsLongOr(Message.KEY_END_TIME_MS, 0L)
+                        - getAsLongOr(Message.KEY_START_TIME_MS, 0L);
         return timeUnit.convert(duration, TimeUnit.MILLISECONDS);
     }
 
@@ -337,12 +350,17 @@ public class ContentsInfo implements Parcelable {
     }
 
     public String toString() {
-        return (String) this.data.keySet().stream().map(new Function() { // from class: com.samsung.android.sume.core.message.ContentsInfo$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return ContentsInfo.this.m9186x3d006615((String) obj);
-            }
-        }).collect(Collectors.joining(", ", "{", "}"));
+        return (String)
+                this.data.keySet().stream()
+                        .map(
+                                new Function() { // from class:
+                                                 // com.samsung.android.sume.core.message.ContentsInfo$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        return ContentsInfo.this.m9186x3d006615((String) obj);
+                                    }
+                                })
+                        .collect(Collectors.joining(", ", "{", "}"));
     }
 
     /* renamed from: lambda$toString$0$com-samsung-android-sume-core-message-ContentsInfo, reason: not valid java name */

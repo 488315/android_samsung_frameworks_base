@@ -1,9 +1,10 @@
 package com.samsung.android.sume.core.buffer;
 
 import android.os.ParcelFileDescriptor;
-import com.samsung.android.sume.core.buffer.MediaBufferAllocator;
+
 import com.samsung.android.sume.core.format.MediaFormat;
 import com.samsung.android.sume.core.message.Message;
+
 import java.nio.ByteBuffer;
 
 /* loaded from: classes6.dex */
@@ -43,7 +44,8 @@ class StapleBufferAllocator extends MediaBufferAllocator {
     @Override // com.samsung.android.sume.core.buffer.MediaBufferAllocator
     <T> MediaBuffer wrap(T data) {
         if (data instanceof ParcelFileDescriptor) {
-            MediaBuffer buf = new GenericMediaBuffer(this.format, new MediaBufferAllocator.Nothing());
+            MediaBuffer buf =
+                    new GenericMediaBuffer(this.format, new MediaBufferAllocator.Nothing());
             buf.setExtra(Message.KEY_FILE_DESCRIPTOR, data);
             return buf;
         }
@@ -78,6 +80,10 @@ class StapleBufferAllocator extends MediaBufferAllocator {
     }
 
     private MediaBuffer allocAsByteBuffer() {
-        return new GenericMediaBuffer(this.format, this.align, ByteBuffer.allocateDirect((int) (this.format.bytePerPixel() * this.align.getDimension())));
+        return new GenericMediaBuffer(
+                this.format,
+                this.align,
+                ByteBuffer.allocateDirect(
+                        (int) (this.format.bytePerPixel() * this.align.getDimension())));
     }
 }

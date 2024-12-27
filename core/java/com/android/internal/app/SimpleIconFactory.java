@@ -23,10 +23,13 @@ import android.os.UserHandle;
 import android.util.AttributeSet;
 import android.util.Pools;
 import android.util.TypedValue;
+
 import com.android.internal.R;
+
+import org.xmlpull.v1.XmlPullParser;
+
 import java.util.Optional;
 import java.util.function.Consumer;
-import org.xmlpull.v1.XmlPullParser;
 
 @Deprecated
 /* loaded from: classes5.dex */
@@ -42,7 +45,8 @@ public class SimpleIconFactory {
     private static final float MAX_SQUARE_AREA_FACTOR = 0.6510417f;
     private static final int MIN_VISIBLE_ALPHA = 40;
     private static final float SCALE_NOT_INITIALIZED = 0.0f;
-    private static final Pools.SynchronizedPool<SimpleIconFactory> sPool = new Pools.SynchronizedPool<>(Runtime.getRuntime().availableProcessors());
+    private static final Pools.SynchronizedPool<SimpleIconFactory> sPool =
+            new Pools.SynchronizedPool<>(Runtime.getRuntime().availableProcessors());
     private static boolean sPoolEnabled = true;
     private final Rect mAdaptiveIconBounds;
     private float mAdaptiveIconScale;
@@ -95,11 +99,13 @@ public class SimpleIconFactory {
     }
 
     private static int getIconSizeFromContext(Context ctx) {
-        return getAttrDimFromContext(ctx, R.attr.iconfactoryIconSize, "Expected theme to define iconfactoryIconSize.");
+        return getAttrDimFromContext(
+                ctx, R.attr.iconfactoryIconSize, "Expected theme to define iconfactoryIconSize.");
     }
 
     private static int getBadgeSizeFromContext(Context ctx) {
-        return getAttrDimFromContext(ctx, R.attr.iconfactoryBadgeSize, "Expected theme to define iconfactoryBadgeSize.");
+        return getAttrDimFromContext(
+                ctx, R.attr.iconfactoryBadgeSize, "Expected theme to define iconfactoryBadgeSize.");
     }
 
     @Deprecated
@@ -109,7 +115,8 @@ public class SimpleIconFactory {
     }
 
     @Deprecated
-    private SimpleIconFactory(Context context, int fillResIconDpi, int iconBitmapSize, int badgeBitmapSize) {
+    private SimpleIconFactory(
+            Context context, int fillResIconDpi, int iconBitmapSize, int badgeBitmapSize) {
         this.mContext = context.getApplicationContext();
         this.mPm = this.mContext.getPackageManager();
         this.mIconBitmapSize = iconBitmapSize;
@@ -125,7 +132,8 @@ public class SimpleIconFactory {
         this.mBounds = new Rect();
         this.mAdaptiveIconBounds = new Rect();
         this.mAdaptiveIconScale = 0.0f;
-        this.mDefaultBlurMaskFilter = new BlurMaskFilter(iconBitmapSize * BLUR_FACTOR, BlurMaskFilter.Blur.NORMAL);
+        this.mDefaultBlurMaskFilter =
+                new BlurMaskFilter(iconBitmapSize * BLUR_FACTOR, BlurMaskFilter.Blur.NORMAL);
     }
 
     @Deprecated
@@ -172,26 +180,39 @@ public class SimpleIconFactory {
         } else if (w > h && h > 0) {
             scale = w / h;
         }
-        Drawable icon2 = new BitmapDrawable(this.mContext.getResources(), maskBitmapToCircle(createIconBitmapNoInsetOrMask(icon, scale)));
+        Drawable icon2 =
+                new BitmapDrawable(
+                        this.mContext.getResources(),
+                        maskBitmapToCircle(createIconBitmapNoInsetOrMask(icon, scale)));
         Bitmap bitmap = createIconBitmap(icon2, getScale(icon2, null));
         this.mCanvas.setBitmap(bitmap);
         recreateIcon(Bitmap.createBitmap(bitmap), this.mCanvas);
         if (renderedAppIcon != null) {
-            this.mCanvas.drawBitmap(Bitmap.createScaledBitmap(renderedAppIcon, this.mBadgeBitmapSize, this.mBadgeBitmapSize, false), this.mIconBitmapSize - this.mBadgeBitmapSize, this.mIconBitmapSize - this.mBadgeBitmapSize, (Paint) null);
+            this.mCanvas.drawBitmap(
+                    Bitmap.createScaledBitmap(
+                            renderedAppIcon, this.mBadgeBitmapSize, this.mBadgeBitmapSize, false),
+                    this.mIconBitmapSize - this.mBadgeBitmapSize,
+                    this.mIconBitmapSize - this.mBadgeBitmapSize,
+                    (Paint) null);
         }
         this.mCanvas.setBitmap(null);
         return bitmap;
     }
 
     private Bitmap maskBitmapToCircle(Bitmap bitmap) {
-        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Bitmap output =
+                Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(output);
         Paint paint = new Paint(7);
         int size = bitmap.getWidth();
         int offset = Math.max((int) Math.ceil(size * BLUR_FACTOR), 1);
         paint.setColor(-1);
         canvas.drawARGB(0, 0, 0, 0);
-        canvas.drawCircle(bitmap.getWidth() / 2.0f, bitmap.getHeight() / 2.0f, (bitmap.getWidth() / 2.0f) - offset, paint);
+        canvas.drawCircle(
+                bitmap.getWidth() / 2.0f,
+                bitmap.getHeight() / 2.0f,
+                (bitmap.getWidth() / 2.0f) - offset,
+                paint);
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
         canvas.drawBitmap(bitmap, rect, rect, paint);
@@ -210,7 +231,12 @@ public class SimpleIconFactory {
         return createIconBitmap(icon, scale, this.mIconBitmapSize, false, true);
     }
 
-    private Bitmap createIconBitmap(Drawable icon, float scale, int size, boolean insetAdiForShadow, boolean ignoreAdiMask) {
+    private Bitmap createIconBitmap(
+            Drawable icon,
+            float scale,
+            int size,
+            boolean insetAdiForShadow,
+            boolean ignoreAdiMask) {
         Bitmap bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
         this.mCanvas.setBitmap(bitmap);
         this.mOldBounds.set(icon.getBounds());
@@ -224,22 +250,36 @@ public class SimpleIconFactory {
             if (ignoreAdiMask) {
                 int cX = bounds.width() / 2;
                 int cY = bounds.height() / 2;
-                float portScale = 1.0f / ((AdaptiveIconDrawable.getExtraInsetFraction() * 2.0f) + 1.0f);
+                float portScale =
+                        1.0f / ((AdaptiveIconDrawable.getExtraInsetFraction() * 2.0f) + 1.0f);
                 int insetWidth = (int) (bounds.width() / (portScale * 2.0f));
                 int insetHeight = (int) (bounds.height() / (2.0f * portScale));
-                final Rect childRect = new Rect(cX - insetWidth, cY - insetHeight, cX + insetWidth, cY + insetHeight);
-                Optional.ofNullable(adi.getBackground()).ifPresent(new Consumer() { // from class: com.android.internal.app.SimpleIconFactory$$ExternalSyntheticLambda0
-                    @Override // java.util.function.Consumer
-                    public final void accept(Object obj) {
-                        SimpleIconFactory.this.lambda$createIconBitmap$0(childRect, (Drawable) obj);
-                    }
-                });
-                Optional.ofNullable(adi.getForeground()).ifPresent(new Consumer() { // from class: com.android.internal.app.SimpleIconFactory$$ExternalSyntheticLambda1
-                    @Override // java.util.function.Consumer
-                    public final void accept(Object obj) {
-                        SimpleIconFactory.this.lambda$createIconBitmap$1(childRect, (Drawable) obj);
-                    }
-                });
+                final Rect childRect =
+                        new Rect(
+                                cX - insetWidth,
+                                cY - insetHeight,
+                                cX + insetWidth,
+                                cY + insetHeight);
+                Optional.ofNullable(adi.getBackground())
+                        .ifPresent(
+                                new Consumer() { // from class:
+                                                 // com.android.internal.app.SimpleIconFactory$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Consumer
+                                    public final void accept(Object obj) {
+                                        SimpleIconFactory.this.lambda$createIconBitmap$0(
+                                                childRect, (Drawable) obj);
+                                    }
+                                });
+                Optional.ofNullable(adi.getForeground())
+                        .ifPresent(
+                                new Consumer() { // from class:
+                                                 // com.android.internal.app.SimpleIconFactory$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.Consumer
+                                    public final void accept(Object obj) {
+                                        SimpleIconFactory.this.lambda$createIconBitmap$1(
+                                                childRect, (Drawable) obj);
+                                    }
+                                });
             } else {
                 adi.setBounds(bounds);
                 adi.draw(this.mCanvas);
@@ -249,7 +289,8 @@ public class SimpleIconFactory {
                 BitmapDrawable bitmapDrawable = (BitmapDrawable) icon;
                 Bitmap b = bitmapDrawable.getBitmap();
                 if (bitmap != null && b.getDensity() == 0) {
-                    bitmapDrawable.setTargetDensity(this.mContext.getResources().getDisplayMetrics());
+                    bitmapDrawable.setTargetDensity(
+                            this.mContext.getResources().getDisplayMetrics());
                 }
             }
             int width = size;
@@ -289,9 +330,13 @@ public class SimpleIconFactory {
         drawable.draw(this.mCanvas);
     }
 
-    private Drawable normalizeAndWrapToAdaptiveIcon(Drawable icon, RectF outIconBounds, float[] outScale) {
+    private Drawable normalizeAndWrapToAdaptiveIcon(
+            Drawable icon, RectF outIconBounds, float[] outScale) {
         if (this.mWrapperIcon == null) {
-            this.mWrapperIcon = this.mContext.getDrawable(R.drawable.iconfactory_adaptive_icon_drawable_wrapper).mutate();
+            this.mWrapperIcon =
+                    this.mContext
+                            .getDrawable(R.drawable.iconfactory_adaptive_icon_drawable_wrapper)
+                            .mutate();
         }
         AdaptiveIconDrawable dr = (AdaptiveIconDrawable) this.mWrapperIcon;
         dr.setBounds(0, 0, 1, 1);
@@ -309,13 +354,13 @@ public class SimpleIconFactory {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:86:0x0045, code lost:
-    
-        if (r3 <= r22.mMaxSize) goto L26;
-     */
+
+       if (r3 <= r22.mMaxSize) goto L26;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:88:0x0048, code lost:
-    
-        r6 = r3;
-     */
+
+       r6 = r3;
+    */
     /* JADX WARN: Removed duplicated region for block: B:25:0x0084  */
     /* JADX WARN: Removed duplicated region for block: B:49:0x00dc A[ADDED_TO_REGION] */
     /* JADX WARN: Removed duplicated region for block: B:55:0x00f6 A[Catch: all -> 0x01af, TryCatch #0 {, blocks: (B:4:0x0007, B:6:0x000c, B:9:0x0014, B:10:0x0019, B:14:0x001d, B:18:0x002a, B:20:0x002e, B:22:0x0059, B:27:0x0092, B:34:0x00a4, B:37:0x00ad, B:42:0x00c1, B:44:0x00cc, B:53:0x00e6, B:55:0x00f6, B:59:0x010c, B:60:0x0101, B:63:0x010f, B:66:0x012f, B:68:0x0141, B:69:0x0175, B:71:0x017e, B:72:0x018b, B:74:0x0193, B:76:0x019a, B:81:0x0124, B:83:0x0032, B:85:0x0043, B:91:0x004f, B:96:0x0056, B:97:0x004a), top: B:3:0x0007 }] */
@@ -330,15 +375,20 @@ public class SimpleIconFactory {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private synchronized float getScale(android.graphics.drawable.Drawable r23, android.graphics.RectF r24) {
+    private synchronized float getScale(
+            android.graphics.drawable.Drawable r23, android.graphics.RectF r24) {
         /*
             Method dump skipped, instructions count: 434
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.app.SimpleIconFactory.getScale(android.graphics.drawable.Drawable, android.graphics.RectF):float");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.app.SimpleIconFactory.getScale(android.graphics.drawable.Drawable,"
+                    + " android.graphics.RectF):float");
     }
 
-    private static void convertToConvexArray(float[] xCoordinates, int direction, int topY, int bottomY) {
+    private static void convertToConvexArray(
+            float[] xCoordinates, int direction, int topY, int bottomY) {
         int start;
         int total = xCoordinates.length;
         float[] angles = new float[total - 1];
@@ -357,7 +407,8 @@ public class SimpleIconFactory {
                         start = start2;
                         while (start > topY) {
                             start--;
-                            float currentAngle2 = (xCoordinates[i] - xCoordinates[start]) / (i - start);
+                            float currentAngle2 =
+                                    (xCoordinates[i] - xCoordinates[start]) / (i - start);
                             if ((currentAngle2 - angles[start]) * direction >= 0.0f) {
                                 break;
                             }
@@ -379,14 +430,23 @@ public class SimpleIconFactory {
         recreateIcon(icon, this.mDefaultBlurMaskFilter, 7, 10, out);
     }
 
-    private synchronized void recreateIcon(Bitmap icon, BlurMaskFilter blurMaskFilter, int ambientAlpha, int keyAlpha, Canvas out) {
+    private synchronized void recreateIcon(
+            Bitmap icon,
+            BlurMaskFilter blurMaskFilter,
+            int ambientAlpha,
+            int keyAlpha,
+            Canvas out) {
         int[] offset = new int[2];
         this.mBlurPaint.setMaskFilter(blurMaskFilter);
         Bitmap shadow = icon.extractAlpha(this.mBlurPaint, offset);
         this.mDrawPaint.setAlpha(ambientAlpha);
         out.drawBitmap(shadow, offset[0], offset[1], this.mDrawPaint);
         this.mDrawPaint.setAlpha(keyAlpha);
-        out.drawBitmap(shadow, offset[0], offset[1] + (this.mIconBitmapSize * KEY_SHADOW_DISTANCE), this.mDrawPaint);
+        out.drawBitmap(
+                shadow,
+                offset[0],
+                offset[1] + (this.mIconBitmapSize * KEY_SHADOW_DISTANCE),
+                this.mDrawPaint);
         this.mDrawPaint.setAlpha(255);
         out.drawBitmap(icon, 0.0f, 0.0f, this.mDrawPaint);
     }
@@ -405,18 +465,21 @@ public class SimpleIconFactory {
         @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
         public void draw(Canvas canvas) {
             int saveCount = canvas.save();
-            canvas.scale(this.mScaleX, this.mScaleY, getBounds().exactCenterX(), getBounds().exactCenterY());
+            canvas.scale(
+                    this.mScaleX,
+                    this.mScaleY,
+                    getBounds().exactCenterX(),
+                    getBounds().exactCenterY());
             super.draw(canvas);
             canvas.restoreToCount(saveCount);
         }
 
         @Override // android.graphics.drawable.Drawable
-        public void inflate(Resources r, XmlPullParser parser, AttributeSet attrs) {
-        }
+        public void inflate(Resources r, XmlPullParser parser, AttributeSet attrs) {}
 
         @Override // android.graphics.drawable.DrawableWrapper, android.graphics.drawable.Drawable
-        public void inflate(Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) {
-        }
+        public void inflate(
+                Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) {}
 
         public void setScale(float scale) {
             float h = getIntrinsicHeight();

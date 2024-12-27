@@ -8,7 +8,6 @@ import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Pair;
 import android.util.Slog;
-import com.android.server.biometrics.BiometricService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -23,7 +22,15 @@ public final /* synthetic */ class BiometricService$$ExternalSyntheticLambda2 im
     public final /* synthetic */ long f$6;
     public final /* synthetic */ IBiometricServiceReceiver f$7;
 
-    public /* synthetic */ BiometricService$$ExternalSyntheticLambda2(BiometricService.BiometricServiceWrapper biometricServiceWrapper, IBinder iBinder, long j, long j2, int i, IBiometricServiceReceiver iBiometricServiceReceiver, String str, PromptInfo promptInfo) {
+    public /* synthetic */ BiometricService$$ExternalSyntheticLambda2(
+            BiometricService.BiometricServiceWrapper biometricServiceWrapper,
+            IBinder iBinder,
+            long j,
+            long j2,
+            int i,
+            IBiometricServiceReceiver iBiometricServiceReceiver,
+            String str,
+            PromptInfo promptInfo) {
         this.f$0 = biometricServiceWrapper;
         this.f$5 = iBinder;
         this.f$4 = j;
@@ -34,7 +41,15 @@ public final /* synthetic */ class BiometricService$$ExternalSyntheticLambda2 im
         this.f$2 = promptInfo;
     }
 
-    public /* synthetic */ BiometricService$$ExternalSyntheticLambda2(BiometricService biometricService, int i, PromptInfo promptInfo, String str, long j, IBinder iBinder, long j2, IBiometricServiceReceiver iBiometricServiceReceiver) {
+    public /* synthetic */ BiometricService$$ExternalSyntheticLambda2(
+            BiometricService biometricService,
+            int i,
+            PromptInfo promptInfo,
+            String str,
+            long j,
+            IBinder iBinder,
+            long j2,
+            IBiometricServiceReceiver iBiometricServiceReceiver) {
         this.f$0 = biometricService;
         this.f$1 = i;
         this.f$2 = promptInfo;
@@ -66,8 +81,20 @@ public final /* synthetic */ class BiometricService$$ExternalSyntheticLambda2 im
                     str = "BiometricService";
                 }
                 try {
-                    PreAuthInfo create = PreAuthInfo.create(biometricService.mTrustManager, biometricService.mDevicePolicyManager, biometricService.mSettingObserver, biometricService.mSensors, i, promptInfo, str2, promptInfo.isDisallowBiometricsIfPolicyExists(), biometricService.getContext(), biometricService.mBiometricCameraManager);
-                    if (promptInfo.isUseDefaultTitle() && TextUtils.isEmpty(promptInfo.getTitle())) {
+                    PreAuthInfo create =
+                            PreAuthInfo.create(
+                                    biometricService.mTrustManager,
+                                    biometricService.mDevicePolicyManager,
+                                    biometricService.mSettingObserver,
+                                    biometricService.mSensors,
+                                    i,
+                                    promptInfo,
+                                    str2,
+                                    promptInfo.isDisallowBiometricsIfPolicyExists(),
+                                    biometricService.getContext(),
+                                    biometricService.mBiometricCameraManager);
+                    if (promptInfo.isUseDefaultTitle()
+                            && TextUtils.isEmpty(promptInfo.getTitle())) {
                         promptInfo.setTitle(biometricService.getContext().getString(17042805));
                     }
                     int eligibleModalities = create.getEligibleModalities();
@@ -78,25 +105,63 @@ public final /* synthetic */ class BiometricService$$ExternalSyntheticLambda2 im
                     }
                     if (promptInfo.isUseDefaultSubtitle()) {
                         if (z2 && z) {
-                            promptInfo.setSubtitle(biometricService.getContext().getString(R.string.config_defaultProfcollectReportUploaderAction));
+                            promptInfo.setSubtitle(
+                                    biometricService
+                                            .getContext()
+                                            .getString(
+                                                    R.string
+                                                            .config_defaultProfcollectReportUploaderAction));
                         } else if (z2) {
-                            promptInfo.setSubtitle(biometricService.getContext().getString(R.string.lockscreen_sound_off_label));
+                            promptInfo.setSubtitle(
+                                    biometricService
+                                            .getContext()
+                                            .getString(R.string.lockscreen_sound_off_label));
                         } else if (z) {
-                            promptInfo.setSubtitle(biometricService.getContext().getString(R.string.language_picker_section_suggested_bilingual));
+                            promptInfo.setSubtitle(
+                                    biometricService
+                                            .getContext()
+                                            .getString(
+                                                    R.string
+                                                            .language_picker_section_suggested_bilingual));
                         } else {
-                            promptInfo.setSubtitle(biometricService.getContext().getString(17042723));
+                            promptInfo.setSubtitle(
+                                    biometricService.getContext().getString(17042723));
                         }
                     }
                     Pair preAuthenticateStatus = create.getPreAuthenticateStatus();
-                    Slog.d(str, "handleAuthenticate: modality(" + preAuthenticateStatus.first + "), status(" + preAuthenticateStatus.second + "), preAuthInfo: " + create + " requestId: " + j + " promptInfo.isIgnoreEnrollmentState: " + promptInfo.isIgnoreEnrollmentState());
+                    Slog.d(
+                            str,
+                            "handleAuthenticate: modality("
+                                    + preAuthenticateStatus.first
+                                    + "), status("
+                                    + preAuthenticateStatus.second
+                                    + "), preAuthInfo: "
+                                    + create
+                                    + " requestId: "
+                                    + j
+                                    + " promptInfo.isIgnoreEnrollmentState: "
+                                    + promptInfo.isIgnoreEnrollmentState());
                     if (((Integer) preAuthenticateStatus.second).intValue() != 0) {
-                        iBiometricServiceReceiver.onError(((Integer) preAuthenticateStatus.first).intValue(), ((Integer) preAuthenticateStatus.second).intValue(), 0);
+                        iBiometricServiceReceiver.onError(
+                                ((Integer) preAuthenticateStatus.first).intValue(),
+                                ((Integer) preAuthenticateStatus.second).intValue(),
+                                0);
                         break;
                     } else {
-                        if (create.credentialRequested && create.credentialAvailable && create.eligibleSensors.isEmpty()) {
+                        if (create.credentialRequested
+                                && create.credentialAvailable
+                                && create.eligibleSensors.isEmpty()) {
                             promptInfo.setAuthenticators(32768);
                         }
-                        biometricService.authenticateInternal(iBinder, j, j2, i, iBiometricServiceReceiver, str2, promptInfo, create);
+                        biometricService.authenticateInternal(
+                                iBinder,
+                                j,
+                                j2,
+                                i,
+                                iBiometricServiceReceiver,
+                                str2,
+                                promptInfo,
+                                create);
                         break;
                     }
                 } catch (RemoteException e2) {
@@ -105,7 +170,8 @@ public final /* synthetic */ class BiometricService$$ExternalSyntheticLambda2 im
                     return;
                 }
             default:
-                BiometricService.BiometricServiceWrapper biometricServiceWrapper = (BiometricService.BiometricServiceWrapper) this.f$0;
+                BiometricService.BiometricServiceWrapper biometricServiceWrapper =
+                        (BiometricService.BiometricServiceWrapper) this.f$0;
                 IBinder iBinder2 = this.f$5;
                 long j3 = this.f$4;
                 long j4 = this.f$6;
@@ -115,7 +181,16 @@ public final /* synthetic */ class BiometricService$$ExternalSyntheticLambda2 im
                 PromptInfo promptInfo2 = this.f$2;
                 BiometricService biometricService2 = BiometricService.this;
                 biometricService2.getClass();
-                biometricService2.mHandler.post(new BiometricService$$ExternalSyntheticLambda2(biometricService2, i2, promptInfo2, str3, j3, iBinder2, j4, iBiometricServiceReceiver2));
+                biometricService2.mHandler.post(
+                        new BiometricService$$ExternalSyntheticLambda2(
+                                biometricService2,
+                                i2,
+                                promptInfo2,
+                                str3,
+                                j3,
+                                iBinder2,
+                                j4,
+                                iBiometricServiceReceiver2));
                 break;
         }
     }

@@ -25,6 +25,10 @@ public class ArgbEvaluator implements TypeEvaluator {
         float r = ((endR2 - startR) * fraction) + startR;
         float g = ((((float) Math.pow(endG, 2.2d)) - startG) * fraction) + startG;
         float b = ((((float) Math.pow(endB, 2.2d)) - startB) * fraction) + startB;
-        return Integer.valueOf((Math.round(a * 255.0f) << 24) | (Math.round(((float) Math.pow(r, 0.45454545454545453d)) * 255.0f) << 16) | (Math.round(((float) Math.pow(g, 0.45454545454545453d)) * 255.0f) << 8) | Math.round(((float) Math.pow(b, 0.45454545454545453d)) * 255.0f));
+        return Integer.valueOf(
+                (Math.round(a * 255.0f) << 24)
+                        | (Math.round(((float) Math.pow(r, 0.45454545454545453d)) * 255.0f) << 16)
+                        | (Math.round(((float) Math.pow(g, 0.45454545454545453d)) * 255.0f) << 8)
+                        | Math.round(((float) Math.pow(b, 0.45454545454545453d)) * 255.0f));
     }
 }

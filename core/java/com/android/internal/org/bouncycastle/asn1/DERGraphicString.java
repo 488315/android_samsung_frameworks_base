@@ -2,6 +2,7 @@ package com.android.internal.org.bouncycastle.asn1;
 
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.Strings;
+
 import java.io.IOException;
 
 /* loaded from: classes5.dex */
@@ -16,10 +17,12 @@ public class DERGraphicString extends ASN1Primitive implements ASN1String {
             try {
                 return (DERGraphicString) fromByteArray((byte[]) obj);
             } catch (Exception e) {
-                throw new IllegalArgumentException("encoding error in getInstance: " + e.toString());
+                throw new IllegalArgumentException(
+                        "encoding error in getInstance: " + e.toString());
             }
         }
-        throw new IllegalArgumentException("illegal object in getInstance: " + obj.getClass().getName());
+        throw new IllegalArgumentException(
+                "illegal object in getInstance: " + obj.getClass().getName());
     }
 
     public static DERGraphicString getInstance(ASN1TaggedObject obj, boolean explicit) {
@@ -53,7 +56,8 @@ public class DERGraphicString extends ASN1Primitive implements ASN1String {
         out.writeEncoded(withTag, 25, this.string);
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive, com.android.internal.org.bouncycastle.asn1.ASN1Object
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Object
     public int hashCode() {
         return Arrays.hashCode(this.string);
     }

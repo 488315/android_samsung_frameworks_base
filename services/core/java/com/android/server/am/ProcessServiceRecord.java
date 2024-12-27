@@ -5,10 +5,13 @@ import android.os.SystemClock;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.IntArray;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.wm.BackgroundLaunchProcessController;
 import com.android.server.wm.WindowProcessController;
+
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -50,7 +53,8 @@ public final class ProcessServiceRecord {
         for (int size = arrayMap.size() - 1; size >= 0; size--) {
             ArrayList arrayList = (ArrayList) arrayMap.valueAt(size);
             for (int size2 = arrayList.size() - 1; size2 >= 0; size2--) {
-                if (((ConnectionRecord) arrayList.get(size2)).hasFlag(EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT)) {
+                if (((ConnectionRecord) arrayList.get(size2))
+                        .hasFlag(EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT)) {
                     return true;
                 }
             }
@@ -60,7 +64,8 @@ public final class ProcessServiceRecord {
 
     public final void clearBoundClientUids() {
         this.mBoundClientUids.clear();
-        BackgroundLaunchProcessController backgroundLaunchProcessController = this.mApp.mWindowProcessController.mBgLaunchController;
+        BackgroundLaunchProcessController backgroundLaunchProcessController =
+                this.mApp.mWindowProcessController.mBgLaunchController;
         synchronized (backgroundLaunchProcessController) {
             try {
                 IntArray intArray = backgroundLaunchProcessController.mBalOptInBoundClientUids;
@@ -98,7 +103,9 @@ public final class ProcessServiceRecord {
         if (i >= 100) {
             i2 = 200;
             if (i >= 200) {
-                i2 = FrameworkStatsLog.CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_MACRO_RAW_SR_MERGE;
+                i2 =
+                        FrameworkStatsLog
+                                .CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_MACRO_RAW_SR_MERGE;
                 if (i >= 250) {
                     i2 = FrameworkStatsLog.CAMERA_FEATURE_COMBINATION_QUERY_EVENT;
                     if (i >= 900) {
@@ -148,7 +155,8 @@ public final class ProcessServiceRecord {
         }
         long j = serviceRecord.lastTopAlmostPerceptibleBindRequestUptimeMs;
         if (j > 0) {
-            this.mLastTopStartedAlmostPerceptibleBindRequestUptimeMs = Math.max(this.mLastTopStartedAlmostPerceptibleBindRequestUptimeMs, j);
+            this.mLastTopStartedAlmostPerceptibleBindRequestUptimeMs =
+                    Math.max(this.mLastTopStartedAlmostPerceptibleBindRequestUptimeMs, j);
             if (!this.mHasTopStartedAlmostPerceptibleServices) {
                 this.mHasTopStartedAlmostPerceptibleServices = isAlmostPerceptible(serviceRecord);
             }
@@ -182,7 +190,10 @@ public final class ProcessServiceRecord {
                 for (int i3 = 0; i3 < arrayList.size(); i3++) {
                     ConnectionRecord connectionRecord = (ConnectionRecord) arrayList.get(i3);
                     arraySet.add(Integer.valueOf(connectionRecord.clientUid));
-                    windowProcessController.addBoundClientUid(connectionRecord.clientUid, connectionRecord.clientPackageName, connectionRecord.flags);
+                    windowProcessController.addBoundClientUid(
+                            connectionRecord.clientUid,
+                            connectionRecord.clientPackageName,
+                            connectionRecord.flags);
                 }
             }
         }
@@ -194,8 +205,12 @@ public final class ProcessServiceRecord {
         this.mLastTopStartedAlmostPerceptibleBindRequestUptimeMs = 0L;
         for (int size = this.mServices.size() - 1; size >= 0; size--) {
             ServiceRecord serviceRecord = (ServiceRecord) this.mServices.valueAt(size);
-            this.mLastTopStartedAlmostPerceptibleBindRequestUptimeMs = Math.max(this.mLastTopStartedAlmostPerceptibleBindRequestUptimeMs, serviceRecord.lastTopAlmostPerceptibleBindRequestUptimeMs);
-            if (!this.mHasTopStartedAlmostPerceptibleServices && isAlmostPerceptible(serviceRecord)) {
+            this.mLastTopStartedAlmostPerceptibleBindRequestUptimeMs =
+                    Math.max(
+                            this.mLastTopStartedAlmostPerceptibleBindRequestUptimeMs,
+                            serviceRecord.lastTopAlmostPerceptibleBindRequestUptimeMs);
+            if (!this.mHasTopStartedAlmostPerceptibleServices
+                    && isAlmostPerceptible(serviceRecord)) {
                 this.mHasTopStartedAlmostPerceptibleServices = true;
             }
         }

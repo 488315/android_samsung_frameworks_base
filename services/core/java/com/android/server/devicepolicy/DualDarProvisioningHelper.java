@@ -10,9 +10,11 @@ import android.os.IBinder;
 import android.os.PersistableBundle;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
 import com.android.server.pm.UserManagerInternal;
 import com.android.server.utils.Slogf;
+
 import com.samsung.android.knox.SemPersonaManager;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -32,7 +34,13 @@ public final class DualDarProvisioningHelper {
         public final /* synthetic */ Object val$mutex;
         public final /* synthetic */ boolean[] val$success;
 
-        public /* synthetic */ AnonymousClass1(DualDarProvisioningHelper dualDarProvisioningHelper, boolean[] zArr, int[] iArr, Object obj, boolean[] zArr2, int i) {
+        public /* synthetic */ AnonymousClass1(
+                DualDarProvisioningHelper dualDarProvisioningHelper,
+                boolean[] zArr,
+                int[] iArr,
+                Object obj,
+                boolean[] zArr2,
+                int i) {
             this.$r8$classId = i;
             this.this$0 = dualDarProvisioningHelper;
             this.val$success = zArr;
@@ -46,10 +54,14 @@ public final class DualDarProvisioningHelper {
             switch (this.$r8$classId) {
                 case 0:
                     String action = intent.getAction();
-                    DualAppManagerService$$ExternalSyntheticOutline0.m("DualDAR Managed Profile Started Service onReceived is called: ", action, "DualDarProvisioningHelper");
+                    DualAppManagerService$$ExternalSyntheticOutline0.m(
+                            "DualDAR Managed Profile Started Service onReceived is called: ",
+                            action,
+                            "DualDarProvisioningHelper");
                     this.this$0.mContext.unregisterReceiver(this);
                     DualDarProvisioningHelper dualDarProvisioningHelper = this.this$0;
-                    dualDarProvisioningHelper.mContext.unbindService(dualDarProvisioningHelper.connection);
+                    dualDarProvisioningHelper.mContext.unbindService(
+                            dualDarProvisioningHelper.connection);
                     if ("com.android.dualdar.started.provisioning_success".equals(action)) {
                         this.val$success[0] = true;
                     } else {
@@ -63,15 +75,21 @@ public final class DualDarProvisioningHelper {
                     return;
                 case 1:
                     String action2 = intent.getAction();
-                    DualAppManagerService$$ExternalSyntheticOutline0.m("DualDAR Managed Profile Completed Service onReceived is called: ", action2, "DualDarProvisioningHelper");
+                    DualAppManagerService$$ExternalSyntheticOutline0.m(
+                            "DualDAR Managed Profile Completed Service onReceived is called: ",
+                            action2,
+                            "DualDarProvisioningHelper");
                     this.this$0.mContext.unregisterReceiver(this);
                     DualDarProvisioningHelper dualDarProvisioningHelper2 = this.this$0;
-                    dualDarProvisioningHelper2.mContext.unbindService(dualDarProvisioningHelper2.connection);
+                    dualDarProvisioningHelper2.mContext.unbindService(
+                            dualDarProvisioningHelper2.connection);
                     if ("com.android.dualdar.completed.provisioning_success".equals(action2)) {
                         this.val$success[0] = true;
                     } else if ("com.android.dualdar.completed.cancelled".equals(action2)) {
                         this.val$success[0] = true;
-                        Log.d("DualDarProvisioningHelper", "DualDAR is not enabled. dualdar completed provisinoing cacelled.");
+                        Log.d(
+                                "DualDarProvisioningHelper",
+                                "DualDAR is not enabled. dualdar completed provisinoing cacelled.");
                     } else {
                         this.val$success[0] = false;
                         this.val$errorCode[0] = intent.getIntExtra("ERROR_CODE", 5);
@@ -83,10 +101,14 @@ public final class DualDarProvisioningHelper {
                     return;
                 case 2:
                     String action3 = intent.getAction();
-                    DualAppManagerService$$ExternalSyntheticOutline0.m("DualDAR Managed Device Started Service onReceived is called: ", action3, "DualDarProvisioningHelper");
+                    DualAppManagerService$$ExternalSyntheticOutline0.m(
+                            "DualDAR Managed Device Started Service onReceived is called: ",
+                            action3,
+                            "DualDarProvisioningHelper");
                     this.this$0.mContext.unregisterReceiver(this);
                     DualDarProvisioningHelper dualDarProvisioningHelper3 = this.this$0;
-                    dualDarProvisioningHelper3.mContext.unbindService(dualDarProvisioningHelper3.connection);
+                    dualDarProvisioningHelper3.mContext.unbindService(
+                            dualDarProvisioningHelper3.connection);
                     if ("com.android.dualdar.started.provisioning_success".equals(action3)) {
                         this.val$success[0] = true;
                     } else {
@@ -100,10 +122,14 @@ public final class DualDarProvisioningHelper {
                     return;
                 default:
                     String action4 = intent.getAction();
-                    DualAppManagerService$$ExternalSyntheticOutline0.m("DualDAR Managed Device Completed Service onReceived is called: ", action4, "DualDarProvisioningHelper");
+                    DualAppManagerService$$ExternalSyntheticOutline0.m(
+                            "DualDAR Managed Device Completed Service onReceived is called: ",
+                            action4,
+                            "DualDarProvisioningHelper");
                     this.this$0.mContext.unregisterReceiver(this);
                     DualDarProvisioningHelper dualDarProvisioningHelper4 = this.this$0;
-                    dualDarProvisioningHelper4.mContext.unbindService(dualDarProvisioningHelper4.connection);
+                    dualDarProvisioningHelper4.mContext.unbindService(
+                            dualDarProvisioningHelper4.connection);
                     if ("com.android.dualdar.completed.provisioning_success".equals(action4)) {
                         this.val$success[0] = true;
                     } else {
@@ -129,7 +155,9 @@ public final class DualDarProvisioningHelper {
 
         @Override // android.content.ServiceConnection
         public final void onServiceDisconnected(ComponentName componentName) {
-            Log.d("DualDarProvisioningHelper", "Service disconnected!! : " + componentName.toString());
+            Log.d(
+                    "DualDarProvisioningHelper",
+                    "Service disconnected!! : " + componentName.toString());
         }
     }
 
@@ -138,7 +166,8 @@ public final class DualDarProvisioningHelper {
         this.mUserManagerInternal = userManagerInternal;
     }
 
-    public static Bundle getDualDARConfigParams(Context context, PersistableBundle persistableBundle) {
+    public static Bundle getDualDARConfigParams(
+            Context context, PersistableBundle persistableBundle) {
         if (persistableBundle != null && isDualDARIntentProvisioned(persistableBundle)) {
             return new Bundle(persistableBundle).deepCopy();
         }
@@ -156,19 +185,22 @@ public final class DualDarProvisioningHelper {
             string2 = null;
         }
         bundle.putString("dualdar-config-client-signature", string2);
-        bundle.putString("dualdar-config-client-location", "default".equals(string3) ? null : string3);
+        bundle.putString(
+                "dualdar-config-client-location", "default".equals(string3) ? null : string3);
         return bundle;
     }
 
     public static Bundle getDualDARProfile(Context context) {
-        SemPersonaManager semPersonaManager = (SemPersonaManager) context.getSystemService("persona");
+        SemPersonaManager semPersonaManager =
+                (SemPersonaManager) context.getSystemService("persona");
         if (semPersonaManager != null) {
             return semPersonaManager.getDualDARProfile();
         }
         return null;
     }
 
-    public static boolean isDualDARConfigured(Context context, PersistableBundle persistableBundle) {
+    public static boolean isDualDARConfigured(
+            Context context, PersistableBundle persistableBundle) {
         if (persistableBundle != null && persistableBundle.getBoolean("dualdar-config")) {
             Slogf.d("DualDarProvisioningHelper", "isDualDARConfigured from provisioning params");
             return true;
@@ -188,8 +220,11 @@ public final class DualDarProvisioningHelper {
         return true;
     }
 
-    public static boolean isDualDARNativeCrypto(Context context, PersistableBundle persistableBundle) {
-        if (persistableBundle != null && !TextUtils.isEmpty(persistableBundle.getString("dualdar-config-client-package"))) {
+    public static boolean isDualDARNativeCrypto(
+            Context context, PersistableBundle persistableBundle) {
+        if (persistableBundle != null
+                && !TextUtils.isEmpty(
+                        persistableBundle.getString("dualdar-config-client-package"))) {
             Log.d("DualDarProvisioningHelper", "Custom crypto from provisioning params");
             return false;
         }
@@ -197,7 +232,11 @@ public final class DualDarProvisioningHelper {
             Log.d("DualDarProvisioningHelper", "native crypto from provisioning params");
             return true;
         }
-        if (getDualDARProfile(context) == null || !"default".equals(getDualDARProfile(context).getString("dualdar-config-client-package"))) {
+        if (getDualDARProfile(context) == null
+                || !"default"
+                        .equals(
+                                getDualDARProfile(context)
+                                        .getString("dualdar-config-client-package"))) {
             return false;
         }
         Log.d("DualDarProvisioningHelper", "isDualDARNativeCrypto from preset params");

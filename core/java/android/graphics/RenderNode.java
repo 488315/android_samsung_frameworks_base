@@ -3,12 +3,16 @@ package android.graphics;
 import android.animation.Animator;
 import android.graphics.animation.RenderNodeAnimator;
 import android.view.NativeVectorDrawableAnimator;
+
 import com.android.internal.util.ArrayUtils;
+
 import dalvik.annotation.optimization.CriticalNative;
+
+import libcore.util.NativeAllocationRegistry;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
-import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes.dex */
 public final class RenderNode {
@@ -24,12 +28,12 @@ public final class RenderNode {
 
         void registerAnimatingRenderNode(RenderNode renderNode, Animator animator);
 
-        void registerVectorDrawableAnimator(NativeVectorDrawableAnimator nativeVectorDrawableAnimator);
+        void registerVectorDrawableAnimator(
+                NativeVectorDrawableAnimator nativeVectorDrawableAnimator);
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface UsageHint {
-    }
+    public @interface UsageHint {}
 
     private static native void nAddAnimator(long j, long j2);
 
@@ -162,7 +166,8 @@ public final class RenderNode {
 
     private static native void nOutput(long j);
 
-    private static native void nRequestPositionUpdates(long j, WeakReference<PositionUpdateListener> weakReference);
+    private static native void nRequestPositionUpdates(
+            long j, WeakReference<PositionUpdateListener> weakReference);
 
     @CriticalNative
     private static native boolean nResetPivot(long j);
@@ -231,7 +236,8 @@ public final class RenderNode {
     private static native boolean nSetOutlinePath(long j, long j2, float f);
 
     @CriticalNative
-    private static native boolean nSetOutlineRoundRect(long j, int i, int i2, int i3, int i4, float f, float f2);
+    private static native boolean nSetOutlineRoundRect(
+            long j, int i, int i2, int i3, int i4, float f, float f2);
 
     @CriticalNative
     private static native boolean nSetPivotX(long j, float f);
@@ -294,10 +300,11 @@ public final class RenderNode {
     private static native boolean nStretch(long j, float f, float f2, float f3, float f4);
 
     private static class NoImagePreloadHolder {
-        public static final NativeAllocationRegistry sRegistry = NativeAllocationRegistry.createMalloced(RenderNode.class.getClassLoader(), RenderNode.nGetNativeFinalizer());
+        public static final NativeAllocationRegistry sRegistry =
+                NativeAllocationRegistry.createMalloced(
+                        RenderNode.class.getClassLoader(), RenderNode.nGetNativeFinalizer());
 
-        private NoImagePreloadHolder() {
-        }
+        private NoImagePreloadHolder() {}
     }
 
     public RenderNode(String name) {
@@ -329,11 +336,26 @@ public final class RenderNode {
 
         void positionLost(long j);
 
-        default void positionChanged(long frameNumber, int left, int top, int right, int bottom, int clipLeft, int clipTop, int clipRight, int clipBottom) {
+        default void positionChanged(
+                long frameNumber,
+                int left,
+                int top,
+                int right,
+                int bottom,
+                int clipLeft,
+                int clipTop,
+                int clipRight,
+                int clipBottom) {
             positionChanged(frameNumber, left, top, right, bottom);
         }
 
-        static boolean callPositionChanged(WeakReference<PositionUpdateListener> weakListener, long frameNumber, int left, int top, int right, int bottom) {
+        static boolean callPositionChanged(
+                WeakReference<PositionUpdateListener> weakListener,
+                long frameNumber,
+                int left,
+                int top,
+                int right,
+                int bottom) {
             PositionUpdateListener listener = weakListener.get();
             if (listener != null) {
                 listener.positionChanged(frameNumber, left, top, right, bottom);
@@ -342,28 +364,81 @@ public final class RenderNode {
             return false;
         }
 
-        static boolean callPositionChanged2(WeakReference<PositionUpdateListener> weakListener, long frameNumber, int left, int top, int right, int bottom, int clipLeft, int clipTop, int clipRight, int clipBottom) {
+        static boolean callPositionChanged2(
+                WeakReference<PositionUpdateListener> weakListener,
+                long frameNumber,
+                int left,
+                int top,
+                int right,
+                int bottom,
+                int clipLeft,
+                int clipTop,
+                int clipRight,
+                int clipBottom) {
             PositionUpdateListener listener = weakListener.get();
             if (listener != null) {
-                listener.positionChanged(frameNumber, left, top, right, bottom, clipLeft, clipTop, clipRight, clipBottom);
+                listener.positionChanged(
+                        frameNumber,
+                        left,
+                        top,
+                        right,
+                        bottom,
+                        clipLeft,
+                        clipTop,
+                        clipRight,
+                        clipBottom);
                 return true;
             }
             return false;
         }
 
-        default void applyStretch(long frameNumber, float width, float height, float vecX, float vecY, float maxStretchX, float maxStretchY, float childRelativeLeft, float childRelativeTop, float childRelativeRight, float childRelativeBottom) {
-        }
+        default void applyStretch(
+                long frameNumber,
+                float width,
+                float height,
+                float vecX,
+                float vecY,
+                float maxStretchX,
+                float maxStretchY,
+                float childRelativeLeft,
+                float childRelativeTop,
+                float childRelativeRight,
+                float childRelativeBottom) {}
 
-        static boolean callApplyStretch(WeakReference<PositionUpdateListener> weakListener, long frameNumber, float width, float height, float vecX, float vecY, float maxStretchX, float maxStretchY, float childRelativeLeft, float childRelativeTop, float childRelativeRight, float childRelativeBottom) {
+        static boolean callApplyStretch(
+                WeakReference<PositionUpdateListener> weakListener,
+                long frameNumber,
+                float width,
+                float height,
+                float vecX,
+                float vecY,
+                float maxStretchX,
+                float maxStretchY,
+                float childRelativeLeft,
+                float childRelativeTop,
+                float childRelativeRight,
+                float childRelativeBottom) {
             PositionUpdateListener listener = weakListener.get();
             if (listener != null) {
-                listener.applyStretch(frameNumber, width, height, vecX, vecY, maxStretchX, maxStretchY, childRelativeLeft, childRelativeTop, childRelativeRight, childRelativeBottom);
+                listener.applyStretch(
+                        frameNumber,
+                        width,
+                        height,
+                        vecX,
+                        vecY,
+                        maxStretchX,
+                        maxStretchY,
+                        childRelativeLeft,
+                        childRelativeTop,
+                        childRelativeRight,
+                        childRelativeBottom);
                 return true;
             }
             return false;
         }
 
-        static boolean callPositionLost(WeakReference<PositionUpdateListener> weakListener, long frameNumber) {
+        static boolean callPositionLost(
+                WeakReference<PositionUpdateListener> weakListener, long frameNumber) {
             PositionUpdateListener listener = weakListener.get();
             if (listener != null) {
                 listener.positionLost(frameNumber);
@@ -382,11 +457,17 @@ public final class RenderNode {
         }
 
         public CompositePositionUpdateListener with(PositionUpdateListener listener) {
-            return new CompositePositionUpdateListener((PositionUpdateListener[]) ArrayUtils.appendElement(PositionUpdateListener.class, this.mListeners, listener));
+            return new CompositePositionUpdateListener(
+                    (PositionUpdateListener[])
+                            ArrayUtils.appendElement(
+                                    PositionUpdateListener.class, this.mListeners, listener));
         }
 
         public CompositePositionUpdateListener without(PositionUpdateListener listener) {
-            return new CompositePositionUpdateListener((PositionUpdateListener[]) ArrayUtils.removeElement(PositionUpdateListener.class, this.mListeners, listener));
+            return new CompositePositionUpdateListener(
+                    (PositionUpdateListener[])
+                            ArrayUtils.removeElement(
+                                    PositionUpdateListener.class, this.mListeners, listener));
         }
 
         @Override // android.graphics.RenderNode.PositionUpdateListener
@@ -397,9 +478,27 @@ public final class RenderNode {
         }
 
         @Override // android.graphics.RenderNode.PositionUpdateListener
-        public void positionChanged(long frameNumber, int left, int top, int right, int bottom, int clipLeft, int clipTop, int clipRight, int clipBottom) {
+        public void positionChanged(
+                long frameNumber,
+                int left,
+                int top,
+                int right,
+                int bottom,
+                int clipLeft,
+                int clipTop,
+                int clipRight,
+                int clipBottom) {
             for (PositionUpdateListener pul : this.mListeners) {
-                pul.positionChanged(frameNumber, left, top, right, bottom, clipLeft, clipTop, clipRight, clipBottom);
+                pul.positionChanged(
+                        frameNumber,
+                        left,
+                        top,
+                        right,
+                        bottom,
+                        clipLeft,
+                        clipTop,
+                        clipRight,
+                        clipBottom);
             }
         }
 
@@ -411,9 +510,31 @@ public final class RenderNode {
         }
 
         @Override // android.graphics.RenderNode.PositionUpdateListener
-        public void applyStretch(long frameNumber, float width, float height, float vecX, float vecY, float maxStretchX, float maxStretchY, float childRelativeLeft, float childRelativeTop, float childRelativeRight, float childRelativeBottom) {
+        public void applyStretch(
+                long frameNumber,
+                float width,
+                float height,
+                float vecX,
+                float vecY,
+                float maxStretchX,
+                float maxStretchY,
+                float childRelativeLeft,
+                float childRelativeTop,
+                float childRelativeRight,
+                float childRelativeBottom) {
             for (PositionUpdateListener pul : this.mListeners) {
-                pul.applyStretch(frameNumber, width, height, vecX, vecY, maxStretchX, maxStretchY, childRelativeLeft, childRelativeTop, childRelativeRight, childRelativeBottom);
+                pul.applyStretch(
+                        frameNumber,
+                        width,
+                        height,
+                        vecX,
+                        vecY,
+                        maxStretchX,
+                        maxStretchY,
+                        childRelativeLeft,
+                        childRelativeTop,
+                        childRelativeRight,
+                        childRelativeBottom);
             }
         }
     }
@@ -441,19 +562,22 @@ public final class RenderNode {
 
     public RecordingCanvas beginRecording(int width, int height) {
         if (this.mCurrentRecordingCanvas != null) {
-            throw new IllegalStateException("Recording currently in progress - missing #endRecording() call?");
+            throw new IllegalStateException(
+                    "Recording currently in progress - missing #endRecording() call?");
         }
         this.mCurrentRecordingCanvas = RecordingCanvas.obtain(this, width, height);
         return this.mCurrentRecordingCanvas;
     }
 
     public RecordingCanvas beginRecording() {
-        return beginRecording(nGetWidth(this.mNativeRenderNode), nGetHeight(this.mNativeRenderNode));
+        return beginRecording(
+                nGetWidth(this.mNativeRenderNode), nGetHeight(this.mNativeRenderNode));
     }
 
     public void endRecording() {
         if (this.mCurrentRecordingCanvas == null) {
-            throw new IllegalStateException("No recording in progress, forgot to call #beginRecording()?");
+            throw new IllegalStateException(
+                    "No recording in progress, forgot to call #beginRecording()?");
         }
         RecordingCanvas canvas = this.mCurrentRecordingCanvas;
         this.mCurrentRecordingCanvas = null;
@@ -501,12 +625,15 @@ public final class RenderNode {
 
     @Deprecated
     public boolean setLayerPaint(Paint paint) {
-        return nSetLayerPaint(this.mNativeRenderNode, paint != null ? paint.getNativeInstance() : 0L);
+        return nSetLayerPaint(
+                this.mNativeRenderNode, paint != null ? paint.getNativeInstance() : 0L);
     }
 
     public boolean setUseCompositingLayer(boolean forceToLayer, Paint paint) {
         boolean didChange = nSetLayerType(this.mNativeRenderNode, forceToLayer ? 2 : 0);
-        return didChange | nSetLayerPaint(this.mNativeRenderNode, paint != null ? paint.getNativeInstance() : 0L);
+        return didChange
+                | nSetLayerPaint(
+                        this.mNativeRenderNode, paint != null ? paint.getNativeInstance() : 0L);
     }
 
     public boolean getUseCompositingLayer() {
@@ -544,9 +671,17 @@ public final class RenderNode {
             case 0:
                 return nSetOutlineEmpty(this.mNativeRenderNode);
             case 1:
-                return nSetOutlineRoundRect(this.mNativeRenderNode, outline.mRect.left, outline.mRect.top, outline.mRect.right, outline.mRect.bottom, outline.mRadius, outline.mAlpha);
+                return nSetOutlineRoundRect(
+                        this.mNativeRenderNode,
+                        outline.mRect.left,
+                        outline.mRect.top,
+                        outline.mRect.right,
+                        outline.mRect.bottom,
+                        outline.mRadius,
+                        outline.mAlpha);
             case 2:
-                return nSetOutlinePath(this.mNativeRenderNode, outline.mPath.mNativePath, outline.mAlpha);
+                return nSetOutlinePath(
+                        this.mNativeRenderNode, outline.mPath.mNativePath, outline.mAlpha);
             default:
                 throw new IllegalArgumentException("Unrecognized outline?");
         }
@@ -556,7 +691,8 @@ public final class RenderNode {
         return nClearStretch(this.mNativeRenderNode);
     }
 
-    public boolean stretch(float vecX, float vecY, float maxStretchAmountX, float maxStretchAmountY) {
+    public boolean stretch(
+            float vecX, float vecY, float maxStretchAmountX, float maxStretchAmountY) {
         if (Float.isInfinite(vecX) || Float.isNaN(vecX)) {
             throw new IllegalArgumentException("vecX must be a finite, non-NaN value " + vecX);
         }
@@ -564,10 +700,12 @@ public final class RenderNode {
             throw new IllegalArgumentException("vecY must be a finite, non-NaN value " + vecY);
         }
         if (maxStretchAmountX <= 0.0f) {
-            throw new IllegalArgumentException("The max horizontal stretch amount must be >0, got " + maxStretchAmountX);
+            throw new IllegalArgumentException(
+                    "The max horizontal stretch amount must be >0, got " + maxStretchAmountX);
         }
         if (maxStretchAmountY <= 0.0f) {
-            throw new IllegalArgumentException("The max vertical stretch amount must be >0, got " + maxStretchAmountY);
+            throw new IllegalArgumentException(
+                    "The max vertical stretch amount must be >0, got " + maxStretchAmountY);
         }
         return nStretch(this.mNativeRenderNode, vecX, vecY, maxStretchAmountX, maxStretchAmountY);
     }
@@ -625,11 +763,15 @@ public final class RenderNode {
     }
 
     public boolean setRenderEffect(RenderEffect renderEffect) {
-        return nSetRenderEffect(this.mNativeRenderNode, renderEffect != null ? renderEffect.getNativeInstance() : 0L);
+        return nSetRenderEffect(
+                this.mNativeRenderNode,
+                renderEffect != null ? renderEffect.getNativeInstance() : 0L);
     }
 
     public boolean setBackdropRenderEffect(RenderEffect renderEffect) {
-        return nSetBackdropRenderEffect(this.mNativeRenderNode, renderEffect != null ? renderEffect.getNativeInstance() : 0L);
+        return nSetBackdropRenderEffect(
+                this.mNativeRenderNode,
+                renderEffect != null ? renderEffect.getNativeInstance() : 0L);
     }
 
     public float getAlpha() {
@@ -746,7 +888,8 @@ public final class RenderNode {
 
     public boolean setCameraDistance(float distance) {
         if (!Float.isFinite(distance) || distance < 0.0f) {
-            throw new IllegalArgumentException("distance must be finite & positive, given=" + distance);
+            throw new IllegalArgumentException(
+                    "distance must be finite & positive, given=" + distance);
         }
         return nSetCameraDistance(this.mNativeRenderNode, -distance);
     }
@@ -804,7 +947,12 @@ public final class RenderNode {
     }
 
     public boolean setPosition(Rect position) {
-        return nSetLeftTopRightBottom(this.mNativeRenderNode, position.left, position.top, position.right, position.bottom);
+        return nSetLeftTopRightBottom(
+                this.mNativeRenderNode,
+                position.left,
+                position.top,
+                position.right,
+                position.bottom);
     }
 
     public boolean offsetLeftAndRight(int offset) {

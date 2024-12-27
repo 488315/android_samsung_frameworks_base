@@ -6,6 +6,7 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.Region;
 import android.util.Log;
+
 import com.samsung.android.graphics.spr.document.SprDocument;
 import com.samsung.android.graphics.spr.document.SprInputStream;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeAnimatorSet;
@@ -20,6 +21,7 @@ import com.samsung.android.graphics.spr.document.attribute.SprAttributeStrokeLin
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeStrokeLinejoin;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeStrokeMiterlimit;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeStrokeWidth;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,8 +41,12 @@ public abstract class SprObjectBase implements Cloneable {
     public final byte mType;
     public Paint strokePaint;
     private static final String TAG = SprObjectBase.class.getSimpleName();
-    private static final Paint.Cap[] sCapArray = {Paint.Cap.BUTT, Paint.Cap.ROUND, Paint.Cap.SQUARE};
-    private static final Paint.Join[] sJoinArray = {Paint.Join.MITER, Paint.Join.ROUND, Paint.Join.BEVEL};
+    private static final Paint.Cap[] sCapArray = {
+        Paint.Cap.BUTT, Paint.Cap.ROUND, Paint.Cap.SQUARE
+    };
+    private static final Paint.Join[] sJoinArray = {
+        Paint.Join.MITER, Paint.Join.ROUND, Paint.Join.BEVEL
+    };
     public ArrayList<SprAttributeBase> mAttributeList = new ArrayList<>();
     public boolean isVisibleStroke = false;
     public boolean isVisibleFill = false;
@@ -163,36 +169,55 @@ public abstract class SprObjectBase implements Cloneable {
             switch (attribute.mType) {
                 case 1:
                     SprAttributeClip clip = (SprAttributeClip) attribute;
-                    canvas.clipRect(clip.left, clip.top, clip.right, clip.bottom, Region.Op.INTERSECT);
+                    canvas.clipRect(
+                            clip.left, clip.top, clip.right, clip.bottom, Region.Op.INTERSECT);
                     break;
                 case 3:
-                    SprObjectBase reference = document.getReference(((SprAttributeClipPath) attribute).link);
+                    SprObjectBase reference =
+                            document.getReference(((SprAttributeClipPath) attribute).link);
                     if (reference == null) {
                         break;
                     } else {
                         switch (reference.mType) {
                             case 1:
                                 Path path = new Path();
-                                path.addCircle(((SprObjectShapeCircle) reference).cx, ((SprObjectShapeCircle) reference).cy, ((SprObjectShapeCircle) reference).cr, Path.Direction.CW);
+                                path.addCircle(
+                                        ((SprObjectShapeCircle) reference).cx,
+                                        ((SprObjectShapeCircle) reference).cy,
+                                        ((SprObjectShapeCircle) reference).cr,
+                                        Path.Direction.CW);
                                 canvas.clipPath(path);
                                 break;
                             case 2:
                                 Path path2 = new Path();
-                                path2.addOval(new RectF(((SprObjectShapeEllipse) reference).left, ((SprObjectShapeEllipse) reference).top, ((SprObjectShapeEllipse) reference).right, ((SprObjectShapeEllipse) reference).bottom), Path.Direction.CW);
+                                path2.addOval(
+                                        new RectF(
+                                                ((SprObjectShapeEllipse) reference).left,
+                                                ((SprObjectShapeEllipse) reference).top,
+                                                ((SprObjectShapeEllipse) reference).right,
+                                                ((SprObjectShapeEllipse) reference).bottom),
+                                        Path.Direction.CW);
                                 canvas.clipPath(path2);
                                 break;
                             case 4:
-                                canvas.clipPath(((SprObjectShapePath) reference).path, Region.Op.INTERSECT);
+                                canvas.clipPath(
+                                        ((SprObjectShapePath) reference).path, Region.Op.INTERSECT);
                                 break;
                             case 5:
-                                canvas.clipRect(((SprObjectShapeRectangle) reference).left, ((SprObjectShapeRectangle) reference).top, ((SprObjectShapeRectangle) reference).right, ((SprObjectShapeRectangle) reference).bottom, Region.Op.INTERSECT);
+                                canvas.clipRect(
+                                        ((SprObjectShapeRectangle) reference).left,
+                                        ((SprObjectShapeRectangle) reference).top,
+                                        ((SprObjectShapeRectangle) reference).right,
+                                        ((SprObjectShapeRectangle) reference).bottom,
+                                        Region.Op.INTERSECT);
                                 break;
                         }
                     }
                 case 32:
                     if (this.isVisibleFill && this.fillPaint != null) {
                         if (getIntrinsic().fillPaint != null) {
-                            this.fillPaint.setAlpha((int) (getIntrinsic().fillPaint.getAlpha() * alpha));
+                            this.fillPaint.setAlpha(
+                                    (int) (getIntrinsic().fillPaint.getAlpha() * alpha));
                             break;
                         } else {
                             this.fillPaint.setAlpha((int) (255.0f * alpha));
@@ -203,7 +228,8 @@ public abstract class SprObjectBase implements Cloneable {
                 case 35:
                     if (this.isVisibleStroke && this.strokePaint != null) {
                         if (getIntrinsic().strokePaint != null) {
-                            this.strokePaint.setAlpha((int) (getIntrinsic().strokePaint.getAlpha() * alpha));
+                            this.strokePaint.setAlpha(
+                                    (int) (getIntrinsic().strokePaint.getAlpha() * alpha));
                             break;
                         } else {
                             this.strokePaint.setAlpha((int) (255.0f * alpha));
@@ -221,7 +247,11 @@ public abstract class SprObjectBase implements Cloneable {
                     canvas.concat(((SprAttributeMatrix) attribute).matrix);
                     break;
                 default:
-                    Log.d(TAG, "Attribute type = " + ((int) attribute.mType) + "is not supported type");
+                    Log.d(
+                            TAG,
+                            "Attribute type = "
+                                    + ((int) attribute.mType)
+                                    + "is not supported type");
                     break;
             }
         }
@@ -231,10 +261,22 @@ public abstract class SprObjectBase implements Cloneable {
         if (this.strokePaint == null || this.fillPaint == null) {
             return;
         }
-        preDraw(document, this.strokePaint, this.fillPaint, this.isVisibleStroke, this.isVisibleFill, this.shadow);
+        preDraw(
+                document,
+                this.strokePaint,
+                this.fillPaint,
+                this.isVisibleStroke,
+                this.isVisibleFill,
+                this.shadow);
     }
 
-    public void preDraw(SprDocument document, Paint strokePaint, Paint fillPaint, boolean isVisibleStroke, boolean isVisibleFill, SprAttributeShadow shadow) {
+    public void preDraw(
+            SprDocument document,
+            Paint strokePaint,
+            Paint fillPaint,
+            boolean isVisibleStroke,
+            boolean isVisibleFill,
+            SprAttributeShadow shadow) {
         Paint newStrokePaint = strokePaint;
         Paint newFillPaint = fillPaint;
         this.isVisibleStroke = isVisibleStroke;
@@ -310,22 +352,29 @@ public abstract class SprObjectBase implements Cloneable {
                             break;
                     }
                 case 37:
-                    strokePaint.setStrokeCap(sCapArray[((SprAttributeStrokeLinecap) attribute).linecap - 1]);
+                    strokePaint.setStrokeCap(
+                            sCapArray[((SprAttributeStrokeLinecap) attribute).linecap - 1]);
                     break;
                 case 38:
-                    strokePaint.setStrokeJoin(sJoinArray[((SprAttributeStrokeLinejoin) attribute).linejoin - 1]);
+                    strokePaint.setStrokeJoin(
+                            sJoinArray[((SprAttributeStrokeLinejoin) attribute).linejoin - 1]);
                     break;
                 case 40:
                     strokePaint.setStrokeWidth(((SprAttributeStrokeWidth) attribute).strokeWidth);
                     break;
                 case 41:
-                    strokePaint.setStrokeMiter(((SprAttributeStrokeMiterlimit) attribute).miterLimit);
+                    strokePaint.setStrokeMiter(
+                            ((SprAttributeStrokeMiterlimit) attribute).miterLimit);
                     break;
                 case 112:
                     this.shadow = (SprAttributeShadow) attribute;
                     break;
                 default:
-                    Log.d(TAG, "Attribute type = " + ((int) attribute.mType) + "is not supported type");
+                    Log.d(
+                            TAG,
+                            "Attribute type = "
+                                    + ((int) attribute.mType)
+                                    + "is not supported type");
                     break;
             }
         }
@@ -340,13 +389,18 @@ public abstract class SprObjectBase implements Cloneable {
             if (this.isVisibleStroke) {
                 radius += this.strokePaint.getStrokeWidth();
             }
-            this.fillPaint.setShadowLayer(radius <= 0.5f ? radius : (radius - 0.5f) / 0.57735f, this.shadow.dx, this.shadow.dy, this.shadow.shadowColor);
+            this.fillPaint.setShadowLayer(
+                    radius <= 0.5f ? radius : (radius - 0.5f) / 0.57735f,
+                    this.shadow.dx,
+                    this.shadow.dy,
+                    this.shadow.shadowColor);
             return;
         }
         if (this.isVisibleStroke) {
             float radius2 = this.shadow.radius;
             float f = radius2 <= 0.5f ? radius2 : (radius2 - 0.5f) / 0.57735f;
-            this.strokePaint.setShadowLayer(this.shadow.radius, this.shadow.dx, this.shadow.dy, this.shadow.shadowColor);
+            this.strokePaint.setShadowLayer(
+                    this.shadow.radius, this.shadow.dx, this.shadow.dy, this.shadow.shadowColor);
         }
     }
 
@@ -358,7 +412,7 @@ public abstract class SprObjectBase implements Cloneable {
         this.strokePaint.clearShadowLayer();
     }
 
-    @Override // 
+    @Override //
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
     public SprObjectBase mo8816clone() throws CloneNotSupportedException {
         SprObjectBase object = (SprObjectBase) super.clone();

@@ -35,7 +35,6 @@ public final class InputMethodServiceProto {
         public static final long TOUCHABLE_REGION = 1138166333444L;
         public static final long VISIBLE_TOP_INSETS = 1120986464258L;
 
-        public InsetsProto() {
-        }
+        public InsetsProto() {}
     }
 }

@@ -2,6 +2,7 @@ package android.window;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
@@ -12,21 +13,28 @@ public final class TaskFragmentAnimationParams implements Parcelable {
     private final int mCloseAnimationResId;
     private final int mOpenAnimationResId;
     public static final TaskFragmentAnimationParams DEFAULT = new Builder().build();
-    public static final Parcelable.Creator<TaskFragmentAnimationParams> CREATOR = new Parcelable.Creator<TaskFragmentAnimationParams>() { // from class: android.window.TaskFragmentAnimationParams.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TaskFragmentAnimationParams createFromParcel(Parcel in) {
-            return new TaskFragmentAnimationParams(in);
-        }
+    public static final Parcelable.Creator<TaskFragmentAnimationParams> CREATOR =
+            new Parcelable.Creator<
+                    TaskFragmentAnimationParams>() { // from class:
+                                                     // android.window.TaskFragmentAnimationParams.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TaskFragmentAnimationParams createFromParcel(Parcel in) {
+                    return new TaskFragmentAnimationParams(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TaskFragmentAnimationParams[] newArray(int size) {
-            return new TaskFragmentAnimationParams[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TaskFragmentAnimationParams[] newArray(int size) {
+                    return new TaskFragmentAnimationParams[size];
+                }
+            };
 
-    private TaskFragmentAnimationParams(int animationBackgroundColor, int openAnimationResId, int changeAnimationResId, int closeAnimationResId) {
+    private TaskFragmentAnimationParams(
+            int animationBackgroundColor,
+            int openAnimationResId,
+            int changeAnimationResId,
+            int closeAnimationResId) {
         this.mAnimationBackgroundColor = animationBackgroundColor;
         this.mOpenAnimationResId = openAnimationResId;
         this.mChangeAnimationResId = changeAnimationResId;
@@ -65,11 +73,23 @@ public final class TaskFragmentAnimationParams implements Parcelable {
     }
 
     public String toString() {
-        return "TaskFragmentAnimationParams{ animationBgColor=" + Integer.toHexString(this.mAnimationBackgroundColor) + " openAnimResId=" + this.mOpenAnimationResId + " changeAnimResId=" + this.mChangeAnimationResId + " closeAnimResId=" + this.mCloseAnimationResId + "}";
+        return "TaskFragmentAnimationParams{ animationBgColor="
+                + Integer.toHexString(this.mAnimationBackgroundColor)
+                + " openAnimResId="
+                + this.mOpenAnimationResId
+                + " changeAnimResId="
+                + this.mChangeAnimationResId
+                + " closeAnimResId="
+                + this.mCloseAnimationResId
+                + "}";
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mAnimationBackgroundColor), Integer.valueOf(this.mOpenAnimationResId), Integer.valueOf(this.mChangeAnimationResId), Integer.valueOf(this.mCloseAnimationResId));
+        return Objects.hash(
+                Integer.valueOf(this.mAnimationBackgroundColor),
+                Integer.valueOf(this.mOpenAnimationResId),
+                Integer.valueOf(this.mChangeAnimationResId),
+                Integer.valueOf(this.mCloseAnimationResId));
     }
 
     public boolean equals(Object obj) {
@@ -77,11 +97,18 @@ public final class TaskFragmentAnimationParams implements Parcelable {
             return false;
         }
         TaskFragmentAnimationParams other = (TaskFragmentAnimationParams) obj;
-        return this.mAnimationBackgroundColor == other.mAnimationBackgroundColor && this.mOpenAnimationResId == other.mOpenAnimationResId && this.mChangeAnimationResId == other.mChangeAnimationResId && this.mCloseAnimationResId == other.mCloseAnimationResId;
+        return this.mAnimationBackgroundColor == other.mAnimationBackgroundColor
+                && this.mOpenAnimationResId == other.mOpenAnimationResId
+                && this.mChangeAnimationResId == other.mChangeAnimationResId
+                && this.mCloseAnimationResId == other.mCloseAnimationResId;
     }
 
     public boolean hasOverrideAnimation() {
-        return (this.mOpenAnimationResId == -1 && this.mChangeAnimationResId == 0 && this.mCloseAnimationResId == -1) ? false : true;
+        return (this.mOpenAnimationResId == -1
+                        && this.mChangeAnimationResId == 0
+                        && this.mCloseAnimationResId == -1)
+                ? false
+                : true;
     }
 
     @Override // android.os.Parcelable
@@ -116,7 +143,11 @@ public final class TaskFragmentAnimationParams implements Parcelable {
         }
 
         public TaskFragmentAnimationParams build() {
-            return new TaskFragmentAnimationParams(this.mAnimationBackgroundColor, this.mOpenAnimationResId, this.mChangeAnimationResId, this.mCloseAnimationResId);
+            return new TaskFragmentAnimationParams(
+                    this.mAnimationBackgroundColor,
+                    this.mOpenAnimationResId,
+                    this.mChangeAnimationResId,
+                    this.mCloseAnimationResId);
         }
     }
 }

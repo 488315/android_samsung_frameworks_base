@@ -80,7 +80,19 @@ public class QuoteSpan implements LeadingMarginSpan, ParcelableSpan {
     }
 
     @Override // android.text.style.LeadingMarginSpan
-    public void drawLeadingMargin(Canvas c, Paint p, int x, int dir, int top, int baseline, int bottom, CharSequence text, int start, int end, boolean first, Layout layout) {
+    public void drawLeadingMargin(
+            Canvas c,
+            Paint p,
+            int x,
+            int dir,
+            int top,
+            int baseline,
+            int bottom,
+            CharSequence text,
+            int start,
+            int end,
+            boolean first,
+            Layout layout) {
         Paint.Style style = p.getStyle();
         int color = p.getColor();
         p.setStyle(Paint.Style.FILL);
@@ -91,6 +103,12 @@ public class QuoteSpan implements LeadingMarginSpan, ParcelableSpan {
     }
 
     public String toString() {
-        return "QuoteSpan{color=" + String.format("#%08X", Integer.valueOf(getColor())) + ", stripeWidth=" + getStripeWidth() + ", gapWidth=" + getGapWidth() + '}';
+        return "QuoteSpan{color="
+                + String.format("#%08X", Integer.valueOf(getColor()))
+                + ", stripeWidth="
+                + getStripeWidth()
+                + ", gapWidth="
+                + getGapWidth()
+                + '}';
     }
 }

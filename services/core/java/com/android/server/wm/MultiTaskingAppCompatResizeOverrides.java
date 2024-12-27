@@ -1,9 +1,11 @@
 package com.android.server.wm;
 
 import android.util.Slog;
+
 import com.samsung.android.server.packagefeature.PackageFeature;
 import com.samsung.android.server.packagefeature.PackageFeatureCallback;
 import com.samsung.android.server.packagefeature.PackageFeatureData;
+
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -34,7 +36,9 @@ public final class MultiTaskingAppCompatResizeOverrides implements PackageFeatur
                     } else if ("b".equals(str2)) {
                         ((HashSet) this.mForceNonResizeAppList).add(str);
                     } else {
-                        Slog.w("MultiTaskingAppCompat", "UnknownResizeOverrides: packageName=" + str + ", value=" + str2);
+                        Slog.w(
+                                "MultiTaskingAppCompat",
+                                "UnknownResizeOverrides: packageName=" + str + ", value=" + str2);
                     }
                 }
             } catch (Throwable th) {

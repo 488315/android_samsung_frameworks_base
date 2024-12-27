@@ -9,8 +9,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.PopupWindow;
+
 import com.android.internal.util.Preconditions;
+
 import com.samsung.android.rune.ViewRune;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -19,43 +22,62 @@ import java.util.Objects;
 /* loaded from: classes5.dex */
 public final class FloatingToolbar {
     public static final String FLOATING_TOOLBAR_TAG = "floating_toolbar";
-    private static final MenuItem.OnMenuItemClickListener NO_OP_MENUITEM_CLICK_LISTENER = new MenuItem.OnMenuItemClickListener() { // from class: com.android.internal.widget.floatingtoolbar.FloatingToolbar$$ExternalSyntheticLambda1
-        @Override // android.view.MenuItem.OnMenuItemClickListener
-        public final boolean onMenuItemClick(MenuItem menuItem) {
-            return FloatingToolbar.lambda$static$0(menuItem);
-        }
-    };
+    private static final MenuItem.OnMenuItemClickListener NO_OP_MENUITEM_CLICK_LISTENER =
+            new MenuItem
+                    .OnMenuItemClickListener() { // from class:
+                                                 // com.android.internal.widget.floatingtoolbar.FloatingToolbar$$ExternalSyntheticLambda1
+                @Override // android.view.MenuItem.OnMenuItemClickListener
+                public final boolean onMenuItemClick(MenuItem menuItem) {
+                    return FloatingToolbar.lambda$static$0(menuItem);
+                }
+            };
     private Menu mMenu;
     private int mOrientation;
     private final FloatingToolbarPopup mPopup;
     private final Window mWindow;
     private final Rect mContentRect = new Rect();
     private MenuItem.OnMenuItemClickListener mMenuItemClickListener = NO_OP_MENUITEM_CLICK_LISTENER;
-    private final View.OnLayoutChangeListener mOrientationChangeHandler = new View.OnLayoutChangeListener() { // from class: com.android.internal.widget.floatingtoolbar.FloatingToolbar.1
-        private final Rect mNewRect = new Rect();
-        private final Rect mOldRect = new Rect();
+    private final View.OnLayoutChangeListener mOrientationChangeHandler =
+            new View
+                    .OnLayoutChangeListener() { // from class:
+                                                // com.android.internal.widget.floatingtoolbar.FloatingToolbar.1
+                private final Rect mNewRect = new Rect();
+                private final Rect mOldRect = new Rect();
 
-        @Override // android.view.View.OnLayoutChangeListener
-        public void onLayoutChange(View view, int newLeft, int newRight, int newTop, int newBottom, int oldLeft, int oldRight, int oldTop, int oldBottom) {
-            int orientation = view.getContext().getResources().getConfiguration().orientation;
-            if (FloatingToolbar.this.mOrientation != orientation) {
-                FloatingToolbar.this.mPopup.setIsMovingStarted(false);
-            }
-            FloatingToolbar.this.mOrientation = orientation;
-            this.mNewRect.set(newLeft, newRight, newTop, newBottom);
-            this.mOldRect.set(oldLeft, oldRight, oldTop, oldBottom);
-            if (!FloatingToolbar.this.mPopup.isDismissed() && !this.mNewRect.equals(this.mOldRect)) {
-                FloatingToolbar.this.mPopup.setWidthChanged(true);
-                FloatingToolbar.this.updateLayout();
-            }
-        }
-    };
-    private final Comparator<MenuItem> mMenuItemComparator = new Comparator() { // from class: com.android.internal.widget.floatingtoolbar.FloatingToolbar$$ExternalSyntheticLambda0
-        @Override // java.util.Comparator
-        public final int compare(Object obj, Object obj2) {
-            return FloatingToolbar.lambda$new$1((MenuItem) obj, (MenuItem) obj2);
-        }
-    };
+                @Override // android.view.View.OnLayoutChangeListener
+                public void onLayoutChange(
+                        View view,
+                        int newLeft,
+                        int newRight,
+                        int newTop,
+                        int newBottom,
+                        int oldLeft,
+                        int oldRight,
+                        int oldTop,
+                        int oldBottom) {
+                    int orientation =
+                            view.getContext().getResources().getConfiguration().orientation;
+                    if (FloatingToolbar.this.mOrientation != orientation) {
+                        FloatingToolbar.this.mPopup.setIsMovingStarted(false);
+                    }
+                    FloatingToolbar.this.mOrientation = orientation;
+                    this.mNewRect.set(newLeft, newRight, newTop, newBottom);
+                    this.mOldRect.set(oldLeft, oldRight, oldTop, oldBottom);
+                    if (!FloatingToolbar.this.mPopup.isDismissed()
+                            && !this.mNewRect.equals(this.mOldRect)) {
+                        FloatingToolbar.this.mPopup.setWidthChanged(true);
+                        FloatingToolbar.this.updateLayout();
+                    }
+                }
+            };
+    private final Comparator<MenuItem> mMenuItemComparator =
+            new Comparator() { // from class:
+                               // com.android.internal.widget.floatingtoolbar.FloatingToolbar$$ExternalSyntheticLambda0
+                @Override // java.util.Comparator
+                public final int compare(Object obj, Object obj2) {
+                    return FloatingToolbar.lambda$new$1((MenuItem) obj, (MenuItem) obj2);
+                }
+            };
 
     static /* synthetic */ boolean lambda$static$0(MenuItem item) {
         return false;
@@ -85,12 +107,16 @@ public final class FloatingToolbar {
 
     public FloatingToolbar(Window window) {
         this.mWindow = (Window) Objects.requireNonNull(window);
-        this.mPopup = FloatingToolbarPopup.createInstance(window.getContext(), window.getDecorView(), false);
+        this.mPopup =
+                FloatingToolbarPopup.createInstance(
+                        window.getContext(), window.getDecorView(), false);
     }
 
     public FloatingToolbar(Window window, boolean isSemTypeFloating) {
         this.mWindow = (Window) Preconditions.checkNotNull(window);
-        this.mPopup = FloatingToolbarPopup.createInstance(window.getContext(), window.getDecorView(), isSemTypeFloating);
+        this.mPopup =
+                FloatingToolbarPopup.createInstance(
+                        window.getContext(), window.getDecorView(), isSemTypeFloating);
     }
 
     public FloatingToolbar setMenu(Menu menu) {
@@ -98,7 +124,8 @@ public final class FloatingToolbar {
         return this;
     }
 
-    public FloatingToolbar setOnMenuItemClickListener(MenuItem.OnMenuItemClickListener menuItemClickListener) {
+    public FloatingToolbar setOnMenuItemClickListener(
+            MenuItem.OnMenuItemClickListener menuItemClickListener) {
         if (menuItemClickListener != null) {
             this.mMenuItemClickListener = menuItemClickListener;
         } else {
@@ -163,7 +190,8 @@ public final class FloatingToolbar {
         return this.mPopup.isDiscardTouch();
     }
 
-    public void setOutsideTouchable(boolean outsideTouchable, PopupWindow.OnDismissListener onDismiss) {
+    public void setOutsideTouchable(
+            boolean outsideTouchable, PopupWindow.OnDismissListener onDismiss) {
         this.mPopup.setOutsideTouchable(outsideTouchable, onDismiss);
     }
 

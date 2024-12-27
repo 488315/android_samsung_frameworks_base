@@ -8,52 +8,73 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.ResultReceiver;
-import android.service.media.IMediaBrowserServiceCallbacks;
 
 /* loaded from: classes3.dex */
 public interface IMediaBrowserService extends IInterface {
-    void addSubscription(String str, IBinder iBinder, Bundle bundle, IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacks) throws RemoteException;
+    void addSubscription(
+            String str,
+            IBinder iBinder,
+            Bundle bundle,
+            IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacks)
+            throws RemoteException;
 
-    void addSubscriptionDeprecated(String str, IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacks) throws RemoteException;
+    void addSubscriptionDeprecated(
+            String str, IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacks)
+            throws RemoteException;
 
-    void connect(String str, Bundle bundle, IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacks) throws RemoteException;
+    void connect(
+            String str, Bundle bundle, IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacks)
+            throws RemoteException;
 
-    void disconnect(IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacks) throws RemoteException;
+    void disconnect(IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacks)
+            throws RemoteException;
 
-    void getMediaItem(String str, ResultReceiver resultReceiver, IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacks) throws RemoteException;
+    void getMediaItem(
+            String str,
+            ResultReceiver resultReceiver,
+            IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacks)
+            throws RemoteException;
 
-    void removeSubscription(String str, IBinder iBinder, IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacks) throws RemoteException;
+    void removeSubscription(
+            String str,
+            IBinder iBinder,
+            IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacks)
+            throws RemoteException;
 
-    void removeSubscriptionDeprecated(String str, IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacks) throws RemoteException;
+    void removeSubscriptionDeprecated(
+            String str, IMediaBrowserServiceCallbacks iMediaBrowserServiceCallbacks)
+            throws RemoteException;
 
     public static class Default implements IMediaBrowserService {
         @Override // android.service.media.IMediaBrowserService
-        public void connect(String pkg, Bundle rootHints, IMediaBrowserServiceCallbacks callbacks) throws RemoteException {
-        }
+        public void connect(String pkg, Bundle rootHints, IMediaBrowserServiceCallbacks callbacks)
+                throws RemoteException {}
 
         @Override // android.service.media.IMediaBrowserService
-        public void disconnect(IMediaBrowserServiceCallbacks callbacks) throws RemoteException {
-        }
+        public void disconnect(IMediaBrowserServiceCallbacks callbacks) throws RemoteException {}
 
         @Override // android.service.media.IMediaBrowserService
-        public void addSubscriptionDeprecated(String uri, IMediaBrowserServiceCallbacks callbacks) throws RemoteException {
-        }
+        public void addSubscriptionDeprecated(String uri, IMediaBrowserServiceCallbacks callbacks)
+                throws RemoteException {}
 
         @Override // android.service.media.IMediaBrowserService
-        public void removeSubscriptionDeprecated(String uri, IMediaBrowserServiceCallbacks callbacks) throws RemoteException {
-        }
+        public void removeSubscriptionDeprecated(
+                String uri, IMediaBrowserServiceCallbacks callbacks) throws RemoteException {}
 
         @Override // android.service.media.IMediaBrowserService
-        public void getMediaItem(String uri, ResultReceiver cb, IMediaBrowserServiceCallbacks callbacks) throws RemoteException {
-        }
+        public void getMediaItem(
+                String uri, ResultReceiver cb, IMediaBrowserServiceCallbacks callbacks)
+                throws RemoteException {}
 
         @Override // android.service.media.IMediaBrowserService
-        public void addSubscription(String uri, IBinder token, Bundle options, IMediaBrowserServiceCallbacks callbacks) throws RemoteException {
-        }
+        public void addSubscription(
+                String uri, IBinder token, Bundle options, IMediaBrowserServiceCallbacks callbacks)
+                throws RemoteException {}
 
         @Override // android.service.media.IMediaBrowserService
-        public void removeSubscription(String uri, IBinder token, IMediaBrowserServiceCallbacks callbacks) throws RemoteException {
-        }
+        public void removeSubscription(
+                String uri, IBinder token, IMediaBrowserServiceCallbacks callbacks)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -61,7 +82,7 @@ public interface IMediaBrowserService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMediaBrowserService {
+    public abstract static class Stub extends Binder implements IMediaBrowserService {
         public static final String DESCRIPTOR = "android.service.media.IMediaBrowserService";
         static final int TRANSACTION_addSubscription = 6;
         static final int TRANSACTION_addSubscriptionDeprecated = 3;
@@ -118,7 +139,8 @@ public interface IMediaBrowserService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -130,31 +152,37 @@ public interface IMediaBrowserService extends IInterface {
                 case 1:
                     String _arg0 = data.readString();
                     Bundle _arg1 = (Bundle) data.readTypedObject(Bundle.CREATOR);
-                    IMediaBrowserServiceCallbacks _arg2 = IMediaBrowserServiceCallbacks.Stub.asInterface(data.readStrongBinder());
+                    IMediaBrowserServiceCallbacks _arg2 =
+                            IMediaBrowserServiceCallbacks.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     connect(_arg0, _arg1, _arg2);
                     return true;
                 case 2:
-                    IMediaBrowserServiceCallbacks _arg02 = IMediaBrowserServiceCallbacks.Stub.asInterface(data.readStrongBinder());
+                    IMediaBrowserServiceCallbacks _arg02 =
+                            IMediaBrowserServiceCallbacks.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     disconnect(_arg02);
                     return true;
                 case 3:
                     String _arg03 = data.readString();
-                    IMediaBrowserServiceCallbacks _arg12 = IMediaBrowserServiceCallbacks.Stub.asInterface(data.readStrongBinder());
+                    IMediaBrowserServiceCallbacks _arg12 =
+                            IMediaBrowserServiceCallbacks.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addSubscriptionDeprecated(_arg03, _arg12);
                     return true;
                 case 4:
                     String _arg04 = data.readString();
-                    IMediaBrowserServiceCallbacks _arg13 = IMediaBrowserServiceCallbacks.Stub.asInterface(data.readStrongBinder());
+                    IMediaBrowserServiceCallbacks _arg13 =
+                            IMediaBrowserServiceCallbacks.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeSubscriptionDeprecated(_arg04, _arg13);
                     return true;
                 case 5:
                     String _arg05 = data.readString();
-                    ResultReceiver _arg14 = (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
-                    IMediaBrowserServiceCallbacks _arg22 = IMediaBrowserServiceCallbacks.Stub.asInterface(data.readStrongBinder());
+                    ResultReceiver _arg14 =
+                            (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
+                    IMediaBrowserServiceCallbacks _arg22 =
+                            IMediaBrowserServiceCallbacks.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getMediaItem(_arg05, _arg14, _arg22);
                     return true;
@@ -162,14 +190,16 @@ public interface IMediaBrowserService extends IInterface {
                     String _arg06 = data.readString();
                     IBinder _arg15 = data.readStrongBinder();
                     Bundle _arg23 = (Bundle) data.readTypedObject(Bundle.CREATOR);
-                    IMediaBrowserServiceCallbacks _arg3 = IMediaBrowserServiceCallbacks.Stub.asInterface(data.readStrongBinder());
+                    IMediaBrowserServiceCallbacks _arg3 =
+                            IMediaBrowserServiceCallbacks.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addSubscription(_arg06, _arg15, _arg23, _arg3);
                     return true;
                 case 7:
                     String _arg07 = data.readString();
                     IBinder _arg16 = data.readStrongBinder();
-                    IMediaBrowserServiceCallbacks _arg24 = IMediaBrowserServiceCallbacks.Stub.asInterface(data.readStrongBinder());
+                    IMediaBrowserServiceCallbacks _arg24 =
+                            IMediaBrowserServiceCallbacks.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeSubscription(_arg07, _arg16, _arg24);
                     return true;
@@ -195,7 +225,9 @@ public interface IMediaBrowserService extends IInterface {
             }
 
             @Override // android.service.media.IMediaBrowserService
-            public void connect(String pkg, Bundle rootHints, IMediaBrowserServiceCallbacks callbacks) throws RemoteException {
+            public void connect(
+                    String pkg, Bundle rootHints, IMediaBrowserServiceCallbacks callbacks)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -221,7 +253,8 @@ public interface IMediaBrowserService extends IInterface {
             }
 
             @Override // android.service.media.IMediaBrowserService
-            public void addSubscriptionDeprecated(String uri, IMediaBrowserServiceCallbacks callbacks) throws RemoteException {
+            public void addSubscriptionDeprecated(
+                    String uri, IMediaBrowserServiceCallbacks callbacks) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -234,7 +267,8 @@ public interface IMediaBrowserService extends IInterface {
             }
 
             @Override // android.service.media.IMediaBrowserService
-            public void removeSubscriptionDeprecated(String uri, IMediaBrowserServiceCallbacks callbacks) throws RemoteException {
+            public void removeSubscriptionDeprecated(
+                    String uri, IMediaBrowserServiceCallbacks callbacks) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -247,7 +281,9 @@ public interface IMediaBrowserService extends IInterface {
             }
 
             @Override // android.service.media.IMediaBrowserService
-            public void getMediaItem(String uri, ResultReceiver cb, IMediaBrowserServiceCallbacks callbacks) throws RemoteException {
+            public void getMediaItem(
+                    String uri, ResultReceiver cb, IMediaBrowserServiceCallbacks callbacks)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -261,7 +297,12 @@ public interface IMediaBrowserService extends IInterface {
             }
 
             @Override // android.service.media.IMediaBrowserService
-            public void addSubscription(String uri, IBinder token, Bundle options, IMediaBrowserServiceCallbacks callbacks) throws RemoteException {
+            public void addSubscription(
+                    String uri,
+                    IBinder token,
+                    Bundle options,
+                    IMediaBrowserServiceCallbacks callbacks)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -276,7 +317,9 @@ public interface IMediaBrowserService extends IInterface {
             }
 
             @Override // android.service.media.IMediaBrowserService
-            public void removeSubscription(String uri, IBinder token, IMediaBrowserServiceCallbacks callbacks) throws RemoteException {
+            public void removeSubscription(
+                    String uri, IBinder token, IMediaBrowserServiceCallbacks callbacks)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

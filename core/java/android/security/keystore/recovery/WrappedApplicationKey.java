@@ -3,24 +3,28 @@ package android.security.keystore.recovery;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class WrappedApplicationKey implements Parcelable {
-    public static final Parcelable.Creator<WrappedApplicationKey> CREATOR = new Parcelable.Creator<WrappedApplicationKey>() { // from class: android.security.keystore.recovery.WrappedApplicationKey.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WrappedApplicationKey createFromParcel(Parcel in) {
-            return new WrappedApplicationKey(in);
-        }
+    public static final Parcelable.Creator<WrappedApplicationKey> CREATOR =
+            new Parcelable.Creator<
+                    WrappedApplicationKey>() { // from class:
+                                               // android.security.keystore.recovery.WrappedApplicationKey.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WrappedApplicationKey createFromParcel(Parcel in) {
+                    return new WrappedApplicationKey(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WrappedApplicationKey[] newArray(int length) {
-            return new WrappedApplicationKey[length];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WrappedApplicationKey[] newArray(int length) {
+                    return new WrappedApplicationKey[length];
+                }
+            };
     private String mAlias;
     private byte[] mEncryptedKeyMaterial;
     private byte[] mMetadata;
@@ -50,8 +54,7 @@ public final class WrappedApplicationKey implements Parcelable {
         }
     }
 
-    private WrappedApplicationKey() {
-    }
+    private WrappedApplicationKey() {}
 
     @Deprecated
     public WrappedApplicationKey(String alias, byte[] encryptedKeyMaterial) {

@@ -7,8 +7,9 @@ import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.util.ArrayMap;
 import android.util.Log;
-import android.view.ICrossWindowBlurEnabledListener;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
@@ -18,15 +19,15 @@ public final class CrossWindowBlurListeners {
     private static volatile CrossWindowBlurListeners sInstance;
     private boolean mCrossWindowBlurEnabled;
     private static final String BLUR_PROPERTY = "ro.surface_flinger.supports_background_blur";
-    public static final boolean CROSS_WINDOW_BLUR_SUPPORTED = SystemProperties.getBoolean(BLUR_PROPERTY, false);
+    public static final boolean CROSS_WINDOW_BLUR_SUPPORTED =
+            SystemProperties.getBoolean(BLUR_PROPERTY, false);
     private static final Object sLock = new Object();
     private final BlurEnabledListenerInternal mListenerInternal = new BlurEnabledListenerInternal();
     private final ArrayMap<Consumer<Boolean>, Executor> mListeners = new ArrayMap<>();
     private final Handler mMainHandler = new Handler(Looper.getMainLooper());
     private boolean mInternalListenerAttached = false;
 
-    private CrossWindowBlurListeners() {
-    }
+    private CrossWindowBlurListeners() {}
 
     public static CrossWindowBlurListeners getInstance() {
         CrossWindowBlurListeners instance = sInstance;
@@ -67,7 +68,8 @@ public final class CrossWindowBlurListeners {
             this.mListeners.remove(listener);
             if (this.mInternalListenerAttached && this.mListeners.size() == 0) {
                 try {
-                    WindowManagerGlobal.getWindowManagerService().unregisterCrossWindowBlurEnabledListener(this.mListenerInternal);
+                    WindowManagerGlobal.getWindowManagerService()
+                            .unregisterCrossWindowBlurEnabledListener(this.mListenerInternal);
                     this.mInternalListenerAttached = false;
                 } catch (RemoteException e) {
                     Log.d(TAG, "Could not unregister ICrossWindowBlurEnabledListener");
@@ -79,7 +81,9 @@ public final class CrossWindowBlurListeners {
     private void attachInternalListenerIfNeededLocked() {
         if (!this.mInternalListenerAttached) {
             try {
-                this.mCrossWindowBlurEnabled = WindowManagerGlobal.getWindowManagerService().registerCrossWindowBlurEnabledListener(this.mListenerInternal);
+                this.mCrossWindowBlurEnabled =
+                        WindowManagerGlobal.getWindowManagerService()
+                                .registerCrossWindowBlurEnabledListener(this.mListenerInternal);
                 this.mInternalListenerAttached = true;
             } catch (RemoteException e) {
                 Log.d(TAG, "Could not register ICrossWindowBlurEnabledListener");
@@ -88,18 +92,20 @@ public final class CrossWindowBlurListeners {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void notifyListener(final Consumer<Boolean> listener, Executor executor, final boolean enabled) {
-        executor.execute(new Runnable() { // from class: android.view.CrossWindowBlurListeners$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                listener.accept(Boolean.valueOf(enabled));
-            }
-        });
+    public void notifyListener(
+            final Consumer<Boolean> listener, Executor executor, final boolean enabled) {
+        executor.execute(
+                new Runnable() { // from class:
+                                 // android.view.CrossWindowBlurListeners$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        listener.accept(Boolean.valueOf(enabled));
+                    }
+                });
     }
 
     private final class BlurEnabledListenerInternal extends ICrossWindowBlurEnabledListener.Stub {
-        private BlurEnabledListenerInternal() {
-        }
+        private BlurEnabledListenerInternal() {}
 
         @Override // android.view.ICrossWindowBlurEnabledListener
         public void onCrossWindowBlurEnabledChanged(boolean enabled) {
@@ -108,7 +114,10 @@ public final class CrossWindowBlurListeners {
                 long token = Binder.clearCallingIdentity();
                 for (int i = 0; i < CrossWindowBlurListeners.this.mListeners.size(); i++) {
                     try {
-                        CrossWindowBlurListeners.this.notifyListener((Consumer) CrossWindowBlurListeners.this.mListeners.keyAt(i), (Executor) CrossWindowBlurListeners.this.mListeners.valueAt(i), enabled);
+                        CrossWindowBlurListeners.this.notifyListener(
+                                (Consumer) CrossWindowBlurListeners.this.mListeners.keyAt(i),
+                                (Executor) CrossWindowBlurListeners.this.mListeners.valueAt(i),
+                                enabled);
                     } finally {
                         Binder.restoreCallingIdentity(token);
                     }

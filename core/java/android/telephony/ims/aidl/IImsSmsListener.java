@@ -24,28 +24,29 @@ public interface IImsSmsListener extends IInterface {
 
     public static class Default implements IImsSmsListener {
         @Override // android.telephony.ims.aidl.IImsSmsListener
-        public void onSendSmsResult(int token, int messageRef, int status, int reason, int networkErrorCode) throws RemoteException {
-        }
+        public void onSendSmsResult(
+                int token, int messageRef, int status, int reason, int networkErrorCode)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsSmsListener
-        public void onSmsStatusReportReceived(int token, String format, byte[] pdu) throws RemoteException {
-        }
+        public void onSmsStatusReportReceived(int token, String format, byte[] pdu)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsSmsListener
-        public void onSmsReceived(int token, String format, byte[] pdu) throws RemoteException {
-        }
+        public void onSmsReceived(int token, String format, byte[] pdu) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsSmsListener
-        public void onSendSmsResponse(int token, int messageRef, int status, int reason, int errorCode, int errorClass) throws RemoteException {
-        }
+        public void onSendSmsResponse(
+                int token, int messageRef, int status, int reason, int errorCode, int errorClass)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsSmsListener
-        public void onReceiveSmsDeliveryReportAck(int token, int reasonCode) throws RemoteException {
-        }
+        public void onReceiveSmsDeliveryReportAck(int token, int reasonCode)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsSmsListener
-        public void onMemoryAvailableResult(int token, int status, int networkErrorCode) throws RemoteException {
-        }
+        public void onMemoryAvailableResult(int token, int status, int networkErrorCode)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -53,7 +54,7 @@ public interface IImsSmsListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImsSmsListener {
+    public abstract static class Stub extends Binder implements IImsSmsListener {
         static final int TRANSACTION_onMemoryAvailableResult = 6;
         static final int TRANSACTION_onReceiveSmsDeliveryReportAck = 5;
         static final int TRANSACTION_onSendSmsResponse = 4;
@@ -106,7 +107,8 @@ public interface IImsSmsListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IImsSmsListener.DESCRIPTOR);
             }
@@ -183,7 +185,9 @@ public interface IImsSmsListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsSmsListener
-            public void onSendSmsResult(int token, int messageRef, int status, int reason, int networkErrorCode) throws RemoteException {
+            public void onSendSmsResult(
+                    int token, int messageRef, int status, int reason, int networkErrorCode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IImsSmsListener.DESCRIPTOR);
@@ -199,7 +203,8 @@ public interface IImsSmsListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsSmsListener
-            public void onSmsStatusReportReceived(int token, String format, byte[] pdu) throws RemoteException {
+            public void onSmsStatusReportReceived(int token, String format, byte[] pdu)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IImsSmsListener.DESCRIPTOR);
@@ -227,7 +232,14 @@ public interface IImsSmsListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsSmsListener
-            public void onSendSmsResponse(int token, int messageRef, int status, int reason, int errorCode, int errorClass) throws RemoteException {
+            public void onSendSmsResponse(
+                    int token,
+                    int messageRef,
+                    int status,
+                    int reason,
+                    int errorCode,
+                    int errorClass)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IImsSmsListener.DESCRIPTOR);
@@ -244,7 +256,8 @@ public interface IImsSmsListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsSmsListener
-            public void onReceiveSmsDeliveryReportAck(int token, int reasonCode) throws RemoteException {
+            public void onReceiveSmsDeliveryReportAck(int token, int reasonCode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IImsSmsListener.DESCRIPTOR);
@@ -257,7 +270,8 @@ public interface IImsSmsListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsSmsListener
-            public void onMemoryAvailableResult(int token, int status, int networkErrorCode) throws RemoteException {
+            public void onMemoryAvailableResult(int token, int status, int networkErrorCode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IImsSmsListener.DESCRIPTOR);

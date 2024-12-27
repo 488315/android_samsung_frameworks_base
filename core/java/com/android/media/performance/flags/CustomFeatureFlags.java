@@ -10,7 +10,8 @@ import java.util.function.Predicate;
 /* loaded from: classes5.dex */
 public class CustomFeatureFlags implements FeatureFlags {
     private BiPredicate<String, Predicate<FeatureFlags>> mGetValueImpl;
-    private Set<String> mReadOnlyFlagsSet = new HashSet(Arrays.asList(Flags.FLAG_MEDIA_DESCRIPTION_ASHMEM_BITMAP, ""));
+    private Set<String> mReadOnlyFlagsSet =
+            new HashSet(Arrays.asList(Flags.FLAG_MEDIA_DESCRIPTION_ASHMEM_BITMAP, ""));
 
     public CustomFeatureFlags(BiPredicate<String, Predicate<FeatureFlags>> getValueImpl) {
         this.mGetValueImpl = getValueImpl;
@@ -18,12 +19,15 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.media.performance.flags.FeatureFlags
     public boolean mediaDescriptionAshmemBitmap() {
-        return getValue(Flags.FLAG_MEDIA_DESCRIPTION_ASHMEM_BITMAP, new Predicate() { // from class: com.android.media.performance.flags.CustomFeatureFlags$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).mediaDescriptionAshmemBitmap();
-            }
-        });
+        return getValue(
+                Flags.FLAG_MEDIA_DESCRIPTION_ASHMEM_BITMAP,
+                new Predicate() { // from class:
+                                  // com.android.media.performance.flags.CustomFeatureFlags$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).mediaDescriptionAshmemBitmap();
+                    }
+                });
     }
 
     public boolean isFlagReadOnlyOptimized(String flagName) {

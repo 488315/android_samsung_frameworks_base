@@ -4,6 +4,7 @@ import android.companion.virtual.IVirtualDevice;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
+
 import java.io.Closeable;
 
 /* loaded from: classes2.dex */
@@ -13,7 +14,8 @@ abstract class VirtualInputDevice implements Closeable {
     protected final IBinder mToken;
     protected final IVirtualDevice mVirtualDevice;
 
-    VirtualInputDevice(VirtualInputDeviceConfig config, IVirtualDevice virtualDevice, IBinder token) {
+    VirtualInputDevice(
+            VirtualInputDeviceConfig config, IVirtualDevice virtualDevice, IBinder token) {
         this.mConfig = config;
         this.mVirtualDevice = virtualDevice;
         this.mToken = token;

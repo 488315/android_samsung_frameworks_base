@@ -12,8 +12,7 @@ public class EventLogTags {
     public static final int SYSUI_MULTI_ACTION = 524292;
     public static final int SYSUI_VIEW_VISIBILITY = 524287;
 
-    private EventLogTags() {
-    }
+    private EventLogTags() {}
 
     public static void writeSysuiViewVisibility(int category, int visible) {
         EventLog.writeEvent(524287, Integer.valueOf(category), Integer.valueOf(visible));

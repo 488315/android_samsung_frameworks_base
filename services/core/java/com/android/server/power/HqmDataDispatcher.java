@@ -14,9 +14,11 @@ import android.os.SemHqmManager;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.util.SparseArray;
+
 import com.android.internal.display.BrightnessSynchronizer;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.LocalServices;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -48,8 +50,14 @@ public final class HqmDataDispatcher {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisplayStat {
-        public static final int BRIGHTNESS_DIM = Math.max(0, Resources.getSystem().getInteger(R.integer.config_vibrationWaveformRampStepDuration));
-        public static final int BRIGHTNESS_HIGHEST = Resources.getSystem().getInteger(R.integer.config_vibratorControlServiceDumpSizeLimit);
+        public static final int BRIGHTNESS_DIM =
+                Math.max(
+                        0,
+                        Resources.getSystem()
+                                .getInteger(R.integer.config_vibrationWaveformRampStepDuration));
+        public static final int BRIGHTNESS_HIGHEST =
+                Resources.getSystem()
+                        .getInteger(R.integer.config_vibratorControlServiceDumpSizeLimit);
         public final int mDisplayType;
         public long mScreenBrightnessHighestDuration;
         public boolean mScreenBrightnessHighestStarted;
@@ -102,8 +110,7 @@ public final class HqmDataDispatcher {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class HqmRequestReceiver extends BroadcastReceiver {
-        public HqmRequestReceiver() {
-        }
+        public HqmRequestReceiver() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
@@ -121,7 +128,10 @@ public final class HqmDataDispatcher {
             long[] jArr = new long[3];
             for (int i2 = 0; i2 < hqmDataDispatcher.mDisplayStats.size(); i2++) {
                 for (int i3 = 0; i3 < 3; i3++) {
-                    jArr[i3] = jArr[i3] + ((DisplayStat) hqmDataDispatcher.mDisplayStats.get(i2)).mBrightnessDuration[i3];
+                    jArr[i3] =
+                            jArr[i3]
+                                    + ((DisplayStat) hqmDataDispatcher.mDisplayStats.get(i2))
+                                            .mBrightnessDuration[i3];
                 }
             }
             hqmDataSetBuilder.put(jArr[0], "LBLD");
@@ -131,7 +141,9 @@ public final class HqmDataDispatcher {
                 long j3 = 0;
                 for (int i4 = 0; i4 < hqmDataDispatcher.mDisplayStats.size(); i4++) {
                     if (((DisplayStat) hqmDataDispatcher.mDisplayStats.get(i4)).mDisplayType == 0) {
-                        j3 += ((DisplayStat) hqmDataDispatcher.mDisplayStats.get(i4)).mBrightnessDuration[2];
+                        j3 +=
+                                ((DisplayStat) hqmDataDispatcher.mDisplayStats.get(i4))
+                                        .mBrightnessDuration[2];
                     }
                 }
                 hqmDataSetBuilder.put(j3, "LBHD_M");
@@ -140,7 +152,9 @@ public final class HqmDataDispatcher {
                 long j4 = 0;
                 for (int i5 = 0; i5 < hqmDataDispatcher.mDisplayStats.size(); i5++) {
                     if (((DisplayStat) hqmDataDispatcher.mDisplayStats.get(i5)).mDisplayType == 0) {
-                        j4 += ((DisplayStat) hqmDataDispatcher.mDisplayStats.get(i5)).mScreenBrightnessHighestDuration;
+                        j4 +=
+                                ((DisplayStat) hqmDataDispatcher.mDisplayStats.get(i5))
+                                        .mScreenBrightnessHighestDuration;
                     }
                 }
                 hqmDataSetBuilder.put(j4, "LBHD_HIGHEST");
@@ -150,14 +164,24 @@ public final class HqmDataDispatcher {
                 long j6 = 0;
                 for (int i6 = 0; i6 < hqmDataDispatcher.mDisplayStats.size(); i6++) {
                     if (((DisplayStat) hqmDataDispatcher.mDisplayStats.get(i6)).mDisplayType == 0) {
-                        j6 += ((DisplayStat) hqmDataDispatcher.mDisplayStats.get(i6)).mScreenCurtainCount;
-                        j5 += ((DisplayStat) hqmDataDispatcher.mDisplayStats.get(i6)).mScreenCurtainDuration;
+                        j6 +=
+                                ((DisplayStat) hqmDataDispatcher.mDisplayStats.get(i6))
+                                        .mScreenCurtainCount;
+                        j5 +=
+                                ((DisplayStat) hqmDataDispatcher.mDisplayStats.get(i6))
+                                        .mScreenCurtainDuration;
                     }
                 }
                 hqmDataSetBuilder.put(j5, "SC_DUR");
                 hqmDataSetBuilder.put(j6, "SC_CNT");
             }
-            hqmDataDispatcher.sendDataSetToHqm("DPLD", hqmDataSetBuilder.mJsonObj.toString().replaceAll("\\{", "").replaceAll("\\}", ""));
+            hqmDataDispatcher.sendDataSetToHqm(
+                    "DPLD",
+                    hqmDataSetBuilder
+                            .mJsonObj
+                            .toString()
+                            .replaceAll("\\{", "")
+                            .replaceAll("\\}", ""));
             for (int i7 = 0; i7 < hqmDataDispatcher.mDisplayStats.size(); i7++) {
                 DisplayStat displayStat = (DisplayStat) hqmDataDispatcher.mDisplayStats.get(i7);
                 displayStat.mScreenOnCount = 0L;
@@ -173,8 +197,10 @@ public final class HqmDataDispatcher {
             }
             HqmDataDispatcher hqmDataDispatcher2 = HqmDataDispatcher.this;
             ContentResolver contentResolver = hqmDataDispatcher2.mContext.getContentResolver();
-            int intForUser = Settings.System.getIntForUser(contentResolver, "screen_brightness_mode", 0, -2);
-            int intForUser2 = Settings.System.getIntForUser(contentResolver, "screen_brightness", 0, -2);
+            int intForUser =
+                    Settings.System.getIntForUser(contentResolver, "screen_brightness_mode", 0, -2);
+            int intForUser2 =
+                    Settings.System.getIntForUser(contentResolver, "screen_brightness", 0, -2);
             JSONObject jSONObject = new JSONObject();
             try {
                 jSONObject.put("MODE", String.valueOf(intForUser));
@@ -186,7 +212,8 @@ public final class HqmDataDispatcher {
             } catch (JSONException e2) {
                 e2.printStackTrace();
             }
-            hqmDataDispatcher2.sendDataSetToHqm("DPSI", jSONObject.toString().replaceAll("\\{", "").replaceAll("\\}", ""));
+            hqmDataDispatcher2.sendDataSetToHqm(
+                    "DPSI", jSONObject.toString().replaceAll("\\{", "").replaceAll("\\}", ""));
         }
     }
 
@@ -201,8 +228,14 @@ public final class HqmDataDispatcher {
         DispatchHandler dispatchHandler = new DispatchHandler(looper);
         this.mHandler = dispatchHandler;
         this.mHqmManager = (SemHqmManager) context.getSystemService("HqmManagerService");
-        this.mBatteryManagerInternal = (BatteryManagerInternal) LocalServices.getService(BatteryManagerInternal.class);
-        context.registerReceiver(new HqmRequestReceiver(), BatteryService$$ExternalSyntheticOutline0.m("com.sec.android.intent.action.HQM_UPDATE_REQ"), null, dispatchHandler);
+        this.mBatteryManagerInternal =
+                (BatteryManagerInternal) LocalServices.getService(BatteryManagerInternal.class);
+        context.registerReceiver(
+                new HqmRequestReceiver(),
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        "com.sec.android.intent.action.HQM_UPDATE_REQ"),
+                null,
+                dispatchHandler);
     }
 
     public final DisplayStat getDisplayStat(int i) {
@@ -238,7 +271,13 @@ public final class HqmDataDispatcher {
                         float f2 = jArr[i4];
                         displayStat.mScreenBrightnessTimers[i4].getClass();
                         i2 = brightnessFloatToInt;
-                        jArr[i4] = (long) (((float) ((SystemClock.uptimeMillis() - r12.startTimeMillis) / 1000.0d)) + f2);
+                        jArr[i4] =
+                                (long)
+                                        (((float)
+                                                        ((SystemClock.uptimeMillis()
+                                                                        - r12.startTimeMillis)
+                                                                / 1000.0d))
+                                                + f2);
                         displayStat.mCurrentBrightnessRange = -1;
                     } else {
                         i2 = brightnessFloatToInt;
@@ -264,7 +303,13 @@ public final class HqmDataDispatcher {
                     } else if (z && i6 != i5 && z) {
                         float f3 = displayStat.mScreenBrightnessHighestDuration;
                         displayStat.mScreenBrightnessHighestTimer.getClass();
-                        displayStat.mScreenBrightnessHighestDuration = (long) (((float) ((SystemClock.uptimeMillis() - r3.startTimeMillis) / 1000.0d)) + f3);
+                        displayStat.mScreenBrightnessHighestDuration =
+                                (long)
+                                        (((float)
+                                                        ((SystemClock.uptimeMillis()
+                                                                        - r3.startTimeMillis)
+                                                                / 1000.0d))
+                                                + f3);
                         displayStat.mScreenBrightnessHighestStarted = false;
                     }
                 }

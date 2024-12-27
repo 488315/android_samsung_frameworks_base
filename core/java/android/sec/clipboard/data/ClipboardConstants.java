@@ -7,7 +7,8 @@ import android.os.Build;
 public class ClipboardConstants {
     public static final int ADD_ITEM = 1;
     public static final int CAT_USERID_ADJUST_FACTOR = 1000;
-    public static final String CLIPBOARD_AUTH = "com.samsung.android.honeyboard.provider.RichcontentProvider";
+    public static final String CLIPBOARD_AUTH =
+            "com.samsung.android.honeyboard.provider.RichcontentProvider";
     public static final String CLIPBOARD_DELETE_CLIPS_PATH = "/data/semclipboard/deletedClips.xml";
     public static final String CLIPBOARD_DRAGNDROP = "clipboarddragNdrop";
     public static final String CLIPBOARD_REMOTE_FILE = "remote_file";
@@ -16,7 +17,8 @@ public class ClipboardConstants {
     public static final String CLIPBOARD_ROOT_PATH = "/data/semclipboard";
     public static final String CLIPBOARD_ROOT_PATH_TEMP = "/data/semclipboard/temp/";
     public static final String CLIPBOARD_SHARED_PATH = "/shared";
-    public static final String CLIPBOARD_URI = "content://com.samsung.android.honeyboard.provider.RichcontentProvider/clipboard";
+    public static final String CLIPBOARD_URI =
+            "content://com.samsung.android.honeyboard.provider.RichcontentProvider/clipboard";
     public static final String CLIP_HTML = "clip_html";
     public static final String CLIP_LABEL = "clip_label";
     public static final String CLIP_MIMETYPES = "clip_mimetypes";
@@ -44,9 +46,11 @@ public class ClipboardConstants {
     public static final int DUAL_MESSENGER_USERID_END = 99;
     public static final int DUAL_MESSENGER_USERID_START = 95;
     public static final String HTML_PREVIEW_IMAGE_NAME = "previewhtmlclipboarditem";
-    public static final String INTENT_RESPONSE_RESTORE_CLIPBOARD = "com.samsung.android.intent.action.RESPONSE_RESTORE_CLIP_BOARD";
+    public static final String INTENT_RESPONSE_RESTORE_CLIPBOARD =
+            "com.samsung.android.intent.action.RESPONSE_RESTORE_CLIP_BOARD";
     public static final String IS_MIGRATION = "is_migration";
-    public static final String KNOX_CLIPBOARD_DELETE_CLIPS_PATH = "/com.sec.knox.bridge/shared_prefs/deletedClips.xml";
+    public static final String KNOX_CLIPBOARD_DELETE_CLIPS_PATH =
+            "/com.sec.knox.bridge/shared_prefs/deletedClips.xml";
     public static final int LOG_LEN = 20;
     public static final int MAX_DATA_COUNT = 40;
     public static final int MAX_DATA_LOCK_COUNT = 20;
@@ -73,10 +77,16 @@ public class ClipboardConstants {
     public static final String USER_SWITCHED = "SWITCHED";
     public static boolean DEBUG = "eng".equals(Build.TYPE);
     public static boolean INFO_DEBUG = "eng".equals(Build.TYPE);
-    public static final Uri CLIPBOARD_ALLOWED_URI = Uri.parse("content://com.sec.knox.provider/RestrictionPolicy1/isClipboardAllowed");
-    public static final Uri CLIPBOARD_SHARED_ALLOWED_URI = Uri.parse("content://com.sec.knox.provider/RestrictionPolicy1/isClipboardShareAllowed");
+    public static final Uri CLIPBOARD_ALLOWED_URI =
+            Uri.parse("content://com.sec.knox.provider/RestrictionPolicy1/isClipboardAllowed");
+    public static final Uri CLIPBOARD_SHARED_ALLOWED_URI =
+            Uri.parse("content://com.sec.knox.provider/RestrictionPolicy1/isClipboardShareAllowed");
     public static final String RCP_URL = "content://com.sec.knox.rcppolicyprovider/RCP_DATA";
     public static final Uri RCP_CONTENT_URI = Uri.parse(RCP_URL);
-    public static final Uri CLIPBOARD_ALLOWED_DENYLIST_APP_URI = Uri.parse("content://com.sec.knox.provider2/ApplicationPolicy/getPackagesFromDisableClipboardBlackList");
-    public static final Uri CLIPBOARD_ALLOWED_ALLOWLIST_APP_URI = Uri.parse("content://com.sec.knox.provider2/ApplicationPolicy/getPackagesFromDisableClipboardWhiteList");
+    public static final Uri CLIPBOARD_ALLOWED_DENYLIST_APP_URI =
+            Uri.parse(
+                    "content://com.sec.knox.provider2/ApplicationPolicy/getPackagesFromDisableClipboardBlackList");
+    public static final Uri CLIPBOARD_ALLOWED_ALLOWLIST_APP_URI =
+            Uri.parse(
+                    "content://com.sec.knox.provider2/ApplicationPolicy/getPackagesFromDisableClipboardWhiteList");
 }

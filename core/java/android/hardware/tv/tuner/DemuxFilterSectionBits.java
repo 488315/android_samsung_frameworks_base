@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class DemuxFilterSectionBits implements Parcelable {
-    public static final Parcelable.Creator<DemuxFilterSectionBits> CREATOR = new Parcelable.Creator<DemuxFilterSectionBits>() { // from class: android.hardware.tv.tuner.DemuxFilterSectionBits.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxFilterSectionBits createFromParcel(Parcel _aidl_source) {
-            DemuxFilterSectionBits _aidl_out = new DemuxFilterSectionBits();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<DemuxFilterSectionBits> CREATOR =
+            new Parcelable.Creator<DemuxFilterSectionBits>() { // from class:
+                // android.hardware.tv.tuner.DemuxFilterSectionBits.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxFilterSectionBits createFromParcel(Parcel _aidl_source) {
+                    DemuxFilterSectionBits _aidl_out = new DemuxFilterSectionBits();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxFilterSectionBits[] newArray(int _aidl_size) {
-            return new DemuxFilterSectionBits[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxFilterSectionBits[] newArray(int _aidl_size) {
+                    return new DemuxFilterSectionBits[_aidl_size];
+                }
+            };
     public byte[] filter;
     public byte[] mask;
     public byte[] mode;

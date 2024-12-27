@@ -1,7 +1,9 @@
 package android.media.audiofx;
 
 import android.util.Log;
+
 import com.samsung.android.audio.Rune;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.UUID;
@@ -17,9 +19,12 @@ public class SemDolbyAudioEffect extends AudioEffect {
     private static final int EFFECT_PARAM_REVERT_SPECIFIC_PARAMS = 12;
     public static final int EFFECT_PARAM_STEREO_WIDENING_DISTANCE = 1;
     private static final int EFFECT_PARAM_VOLUME_LEVELER_AMOUNT = 9;
-    public static final UUID EFFECT_TYPE_DOLBY_AUDIO_PROCESSING = UUID.fromString("46d279d9-9be7-453d-9d7c-ef937f675587");
-    public static final UUID EFFECT_TYPE_DOLBY_GAME_AUDIO_PROCESSING = UUID.fromString("4f81d40e-05e2-47eb-9a0a-3686daf37649");
-    public static final UUID EFFECT_TYPE_DOLBY_SPATIALIZER_AUDIO_PROCESSING = UUID.fromString("ccd4cf09-a79d-46c2-9aae-06a1698d6c8f");
+    public static final UUID EFFECT_TYPE_DOLBY_AUDIO_PROCESSING =
+            UUID.fromString("46d279d9-9be7-453d-9d7c-ef937f675587");
+    public static final UUID EFFECT_TYPE_DOLBY_GAME_AUDIO_PROCESSING =
+            UUID.fromString("4f81d40e-05e2-47eb-9a0a-3686daf37649");
+    public static final UUID EFFECT_TYPE_DOLBY_SPATIALIZER_AUDIO_PROCESSING =
+            UUID.fromString("ccd4cf09-a79d-46c2-9aae-06a1698d6c8f");
     public static final int PROFILE_AUTO = 0;
     public static final int PROFILE_GAME = 4;
     public static final int PROFILE_GAME_1 = 6;
@@ -33,20 +38,31 @@ public class SemDolbyAudioEffect extends AudioEffect {
     private static final String TAG = "SemDolbyAudioEffect";
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DialogEnhancerType {
-    }
+    public @interface DialogEnhancerType {}
 
-    public SemDolbyAudioEffect(int priority, int audioSession) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException, RuntimeException {
+    public SemDolbyAudioEffect(int priority, int audioSession)
+            throws IllegalStateException,
+                    IllegalArgumentException,
+                    UnsupportedOperationException,
+                    RuntimeException {
         super(EFFECT_TYPE_DOLBY_AUDIO_PROCESSING, EFFECT_TYPE_NULL, priority, audioSession);
         if (audioSession == 0) {
-            Log.w(TAG, "WARNING: attaching a SemDolbyAudioEffect to global output mix is deprecated!");
+            Log.w(
+                    TAG,
+                    "WARNING: attaching a SemDolbyAudioEffect to global output mix is deprecated!");
         }
     }
 
-    public SemDolbyAudioEffect(UUID uuid, int priority, int audioSession) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException, RuntimeException {
+    public SemDolbyAudioEffect(UUID uuid, int priority, int audioSession)
+            throws IllegalStateException,
+                    IllegalArgumentException,
+                    UnsupportedOperationException,
+                    RuntimeException {
         super(uuid, EFFECT_TYPE_NULL, priority, audioSession);
         if (audioSession == 0) {
-            Log.w(TAG, "WARNING: attaching a SemDolbyAudioEffect to global output mix is deprecated!");
+            Log.w(
+                    TAG,
+                    "WARNING: attaching a SemDolbyAudioEffect to global output mix is deprecated!");
         }
     }
 

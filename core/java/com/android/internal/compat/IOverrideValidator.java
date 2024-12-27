@@ -14,7 +14,8 @@ public interface IOverrideValidator extends IInterface {
 
     public static class Default implements IOverrideValidator {
         @Override // com.android.internal.compat.IOverrideValidator
-        public OverrideAllowedState getOverrideAllowedState(long changeId, String packageName) throws RemoteException {
+        public OverrideAllowedState getOverrideAllowedState(long changeId, String packageName)
+                throws RemoteException {
             return null;
         }
 
@@ -24,7 +25,7 @@ public interface IOverrideValidator extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IOverrideValidator {
+    public abstract static class Stub extends Binder implements IOverrideValidator {
         static final int TRANSACTION_getOverrideAllowedState = 1;
 
         public Stub() {
@@ -62,7 +63,8 @@ public interface IOverrideValidator extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IOverrideValidator.DESCRIPTOR);
             }
@@ -101,7 +103,8 @@ public interface IOverrideValidator extends IInterface {
             }
 
             @Override // com.android.internal.compat.IOverrideValidator
-            public OverrideAllowedState getOverrideAllowedState(long changeId, String packageName) throws RemoteException {
+            public OverrideAllowedState getOverrideAllowedState(long changeId, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -110,7 +113,9 @@ public interface IOverrideValidator extends IInterface {
                     _data.writeString(packageName);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    OverrideAllowedState _result = (OverrideAllowedState) _reply.readTypedObject(OverrideAllowedState.CREATOR);
+                    OverrideAllowedState _result =
+                            (OverrideAllowedState)
+                                    _reply.readTypedObject(OverrideAllowedState.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

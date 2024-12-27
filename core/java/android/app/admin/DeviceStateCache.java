@@ -8,11 +8,12 @@ public abstract class DeviceStateCache {
 
     public abstract boolean isUserOrganizationManaged(int i);
 
-    protected DeviceStateCache() {
-    }
+    protected DeviceStateCache() {}
 
     public static DeviceStateCache getInstance() {
-        DevicePolicyManagerInternal dpmi = (DevicePolicyManagerInternal) LocalServices.getService(DevicePolicyManagerInternal.class);
+        DevicePolicyManagerInternal dpmi =
+                (DevicePolicyManagerInternal)
+                        LocalServices.getService(DevicePolicyManagerInternal.class);
         return dpmi != null ? dpmi.getDeviceStateCache() : EmptyDeviceStateCache.INSTANCE;
     }
 
@@ -23,8 +24,7 @@ public abstract class DeviceStateCache {
     private static class EmptyDeviceStateCache extends DeviceStateCache {
         private static final EmptyDeviceStateCache INSTANCE = new EmptyDeviceStateCache();
 
-        private EmptyDeviceStateCache() {
-        }
+        private EmptyDeviceStateCache() {}
 
         @Override // android.app.admin.DeviceStateCache
         public boolean isDeviceProvisioned() {

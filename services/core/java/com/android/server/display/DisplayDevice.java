@@ -8,9 +8,11 @@ import android.util.ArraySet;
 import android.view.Display;
 import android.view.Surface;
 import android.view.SurfaceControl;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.display.mode.DisplayModeDirector;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,7 +35,12 @@ public abstract class DisplayDevice {
     public int mCurrentOrientation = -1;
     public DisplayDeviceConfig mDisplayDeviceConfig = null;
 
-    public DisplayDevice(DisplayAdapter displayAdapter, IBinder iBinder, String str, Context context, boolean z) {
+    public DisplayDevice(
+            DisplayAdapter displayAdapter,
+            IBinder iBinder,
+            String str,
+            Context context,
+            boolean z) {
         this.mDisplayAdapter = displayAdapter;
         this.mDisplayToken = iBinder;
         this.mUniqueId = str;
@@ -41,14 +48,35 @@ public abstract class DisplayDevice {
         this.mIsAnisotropyCorrectionEnabled = z;
     }
 
-    public void applyPendingDisplayDeviceInfoChangesLocked() {
-    }
+    public void applyPendingDisplayDeviceInfoChangesLocked() {}
 
     public void dumpLocked(PrintWriter printWriter) {
-        StringBuilder m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, this.mUniqueId, "mDisplayToken=", BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, this.mDisplayAdapter.mName, "mUniqueId=", new StringBuilder("mAdapter=")));
+        StringBuilder m =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        printWriter,
+                        this.mUniqueId,
+                        "mDisplayToken=",
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                printWriter,
+                                this.mDisplayAdapter.mName,
+                                "mUniqueId=",
+                                new StringBuilder("mAdapter=")));
         m.append(this.mDisplayToken);
         printWriter.println(m.toString());
-        StringBuilder m2 = BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("mCurrentLayerStack="), this.mCurrentLayerStack, printWriter, "mCurrentFlags="), this.mCurrentFlags, printWriter, "mCurrentOrientation="), this.mCurrentOrientation, printWriter, "mCurrentLayerStackRect=");
+        StringBuilder m2 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                        new StringBuilder("mCurrentLayerStack="),
+                                        this.mCurrentLayerStack,
+                                        printWriter,
+                                        "mCurrentFlags="),
+                                this.mCurrentFlags,
+                                printWriter,
+                                "mCurrentOrientation="),
+                        this.mCurrentOrientation,
+                        printWriter,
+                        "mCurrentLayerStackRect=");
         m2.append(this.mCurrentLayerStackRect);
         printWriter.println(m2.toString());
         printWriter.println("mCurrentDisplayRect=" + this.mCurrentDisplayRect);
@@ -65,7 +93,9 @@ public abstract class DisplayDevice {
 
     public DisplayDeviceConfig getDisplayDeviceConfig() {
         if (this.mDisplayDeviceConfig == null) {
-            this.mDisplayDeviceConfig = DisplayDeviceConfig.getConfigFromPmValues(this.mContext, this.mDisplayAdapter.mFeatureFlags);
+            this.mDisplayDeviceConfig =
+                    DisplayDeviceConfig.getConfigFromPmValues(
+                            this.mContext, this.mDisplayAdapter.mFeatureFlags);
         }
         return this.mDisplayDeviceConfig;
     }
@@ -130,38 +160,37 @@ public abstract class DisplayDevice {
         return false;
     }
 
-    public void onOverlayChangedLocked() {
-    }
+    public void onOverlayChangedLocked() {}
 
-    public void performTraversalLocked(SurfaceControl.Transaction transaction) {
-    }
+    public void performTraversalLocked(SurfaceControl.Transaction transaction) {}
 
-    public Runnable requestDisplayStateLocked(int i, float f, float f2, DisplayOffloadSessionImpl displayOffloadSessionImpl) {
+    public Runnable requestDisplayStateLocked(
+            int i, float f, float f2, DisplayOffloadSessionImpl displayOffloadSessionImpl) {
         return null;
     }
 
-    public Runnable requestDisplayStateLocked(int i, float f, float f2, DisplayOffloadSessionImpl displayOffloadSessionImpl, int i2, ArrayList arrayList) {
+    public Runnable requestDisplayStateLocked(
+            int i,
+            float f,
+            float f2,
+            DisplayOffloadSessionImpl displayOffloadSessionImpl,
+            int i2,
+            ArrayList arrayList) {
         return requestDisplayStateLocked(i, f, f2, displayOffloadSessionImpl);
     }
 
-    public void setAutoLowLatencyModeLocked(boolean z) {
-    }
+    public void setAutoLowLatencyModeLocked(boolean z) {}
 
-    public void setDesiredDisplayModeSpecsLocked(DisplayModeDirector.DesiredDisplayModeSpecs desiredDisplayModeSpecs) {
-    }
+    public void setDesiredDisplayModeSpecsLocked(
+            DisplayModeDirector.DesiredDisplayModeSpecs desiredDisplayModeSpecs) {}
 
-    public void setGameContentTypeLocked(boolean z) {
-    }
+    public void setGameContentTypeLocked(boolean z) {}
 
-    public void setRequestedColorModeLocked(int i) {
-    }
+    public void setRequestedColorModeLocked(int i) {}
 
-    public void setUserPreferredDisplayModeLocked(Display.Mode mode) {
-    }
+    public void setUserPreferredDisplayModeLocked(Display.Mode mode) {}
 
-    public void setWindowManagerMirroringLocked(boolean z) {
-    }
+    public void setWindowManagerMirroringLocked(boolean z) {}
 
-    public void updateDexEnabledStateLocked(boolean z) {
-    }
+    public void updateDexEnabledStateLocked(boolean z) {}
 }

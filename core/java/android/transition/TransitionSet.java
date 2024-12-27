@@ -3,12 +3,13 @@ package android.transition;
 import android.animation.TimeInterpolator;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.transition.Transition;
 import android.util.AndroidRuntimeException;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.android.internal.R;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -54,7 +55,8 @@ public class TransitionSet extends Transition {
                 this.mPlayTogether = false;
                 return this;
             default:
-                throw new AndroidRuntimeException("Invalid parameter for TransitionSet ordering: " + ordering);
+                throw new AndroidRuntimeException(
+                        "Invalid parameter for TransitionSet ordering: " + ordering);
         }
     }
 
@@ -269,7 +271,8 @@ public class TransitionSet extends Transition {
             this.mTransitionSet = transitionSet;
         }
 
-        @Override // android.transition.TransitionListenerAdapter, android.transition.Transition.TransitionListener
+        @Override // android.transition.TransitionListenerAdapter,
+                  // android.transition.Transition.TransitionListener
         public void onTransitionStart(Transition transition) {
             if (!this.mTransitionSet.mStarted) {
                 this.mTransitionSet.start();
@@ -277,7 +280,8 @@ public class TransitionSet extends Transition {
             }
         }
 
-        @Override // android.transition.TransitionListenerAdapter, android.transition.Transition.TransitionListener
+        @Override // android.transition.TransitionListenerAdapter,
+                  // android.transition.Transition.TransitionListener
         public void onTransitionEnd(Transition transition) {
             TransitionSet transitionSet = this.mTransitionSet;
             transitionSet.mCurrentListeners--;
@@ -290,7 +294,12 @@ public class TransitionSet extends Transition {
     }
 
     @Override // android.transition.Transition
-    protected void createAnimators(ViewGroup sceneRoot, TransitionValuesMaps startValues, TransitionValuesMaps endValues, ArrayList<TransitionValues> startValuesList, ArrayList<TransitionValues> endValuesList) {
+    protected void createAnimators(
+            ViewGroup sceneRoot,
+            TransitionValuesMaps startValues,
+            TransitionValuesMaps endValues,
+            ArrayList<TransitionValues> startValuesList,
+            ArrayList<TransitionValues> endValuesList) {
         long startDelay = getStartDelay();
         int numTransitions = this.mTransitions.size();
         for (int i = 0; i < numTransitions; i++) {
@@ -303,7 +312,8 @@ public class TransitionSet extends Transition {
                     childTransition.setStartDelay(startDelay);
                 }
             }
-            childTransition.createAnimators(sceneRoot, startValues, endValues, startValuesList, endValuesList);
+            childTransition.createAnimators(
+                    sceneRoot, startValues, endValues, startValuesList, endValuesList);
         }
     }
 
@@ -320,13 +330,16 @@ public class TransitionSet extends Transition {
             for (int i = 1; i < numTransitions; i++) {
                 Transition previousTransition = this.mTransitions.get(i - 1);
                 final Transition nextTransition = this.mTransitions.get(i);
-                previousTransition.addListener(new TransitionListenerAdapter() { // from class: android.transition.TransitionSet.1
-                    @Override // android.transition.TransitionListenerAdapter, android.transition.Transition.TransitionListener
-                    public void onTransitionEnd(Transition transition) {
-                        nextTransition.runAnimators();
-                        transition.removeListener(this);
-                    }
-                });
+                previousTransition.addListener(
+                        new TransitionListenerAdapter() { // from class:
+                                                          // android.transition.TransitionSet.1
+                            @Override // android.transition.TransitionListenerAdapter,
+                                      // android.transition.Transition.TransitionListener
+                            public void onTransitionEnd(Transition transition) {
+                                nextTransition.runAnimators();
+                                transition.removeListener(this);
+                            }
+                        });
             }
             Transition firstTransition = this.mTransitions.get(0);
             if (firstTransition != null) {

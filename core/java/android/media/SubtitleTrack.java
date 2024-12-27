@@ -1,11 +1,11 @@
 package android.media;
 
 import android.graphics.Canvas;
-import android.media.MediaTimeProvider;
 import android.os.Handler;
 import android.util.Log;
 import android.util.LongSparseArray;
 import android.util.Pair;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.SortedMap;
@@ -71,9 +71,9 @@ public abstract class SubtitleTrack implements MediaTimeProvider.OnMediaTimeList
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:50:0x0007, code lost:
-    
-        if (r7.mLastUpdateTimeMs > r9) goto L6;
-     */
+
+       if (r7.mLastUpdateTimeMs > r9) goto L6;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -176,7 +176,9 @@ public abstract class SubtitleTrack implements MediaTimeProvider.OnMediaTimeList
             monitor-exit(r7)
             throw r8
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.media.SubtitleTrack.updateActiveCues(boolean, long):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.media.SubtitleTrack.updateActiveCues(boolean,"
+                        + " long):void");
     }
 
     private void removeRunsByEndTimeIndex(int ix) {
@@ -224,7 +226,8 @@ public abstract class SubtitleTrack implements MediaTimeProvider.OnMediaTimeList
             if (this.DEBUG) {
                 Log.d(TAG, "sched @" + this.mNextScheduledTimeMs + " after " + this.mLastTimeMs);
             }
-            this.mTimeProvider.notifyAt(this.mNextScheduledTimeMs >= 0 ? this.mNextScheduledTimeMs * 1000 : -1L, this);
+            this.mTimeProvider.notifyAt(
+                    this.mNextScheduledTimeMs >= 0 ? this.mNextScheduledTimeMs * 1000 : -1L, this);
         }
     }
 
@@ -322,23 +325,35 @@ public abstract class SubtitleTrack implements MediaTimeProvider.OnMediaTimeList
             }
         }
         if (this.DEBUG) {
-            Log.v(TAG, "mVisible=" + this.mVisible + ", " + cue.mStartTimeMs + " <= " + nowMs + ", " + cue.mEndTimeMs + " >= " + this.mLastTimeMs);
+            Log.v(
+                    TAG,
+                    "mVisible="
+                            + this.mVisible
+                            + ", "
+                            + cue.mStartTimeMs
+                            + " <= "
+                            + nowMs
+                            + ", "
+                            + cue.mEndTimeMs
+                            + " >= "
+                            + this.mLastTimeMs);
         }
         if (this.mVisible && cue.mStartTimeMs <= nowMs && cue.mEndTimeMs >= this.mLastTimeMs) {
             if (this.mRunnable != null) {
                 this.mHandler.removeCallbacks(this.mRunnable);
             }
             final long thenMs = nowMs;
-            this.mRunnable = new Runnable() { // from class: android.media.SubtitleTrack.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    synchronized (track) {
-                        SubtitleTrack.this.mRunnable = null;
-                        SubtitleTrack.this.updateActiveCues(true, thenMs);
-                        SubtitleTrack.this.updateView(SubtitleTrack.this.mActiveCues);
-                    }
-                }
-            };
+            this.mRunnable =
+                    new Runnable() { // from class: android.media.SubtitleTrack.1
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            synchronized (track) {
+                                SubtitleTrack.this.mRunnable = null;
+                                SubtitleTrack.this.updateActiveCues(true, thenMs);
+                                SubtitleTrack.this.updateView(SubtitleTrack.this.mActiveCues);
+                            }
+                        }
+                    };
             if (this.mHandler.postDelayed(this.mRunnable, 10L)) {
                 if (this.DEBUG) {
                     Log.v(TAG, "scheduling update");
@@ -348,7 +363,10 @@ public abstract class SubtitleTrack implements MediaTimeProvider.OnMediaTimeList
             }
             return true;
         }
-        if (this.mVisible && cue.mEndTimeMs >= this.mLastTimeMs && (cue.mStartTimeMs < this.mNextScheduledTimeMs || this.mNextScheduledTimeMs < 0)) {
+        if (this.mVisible
+                && cue.mEndTimeMs >= this.mLastTimeMs
+                && (cue.mStartTimeMs < this.mNextScheduledTimeMs
+                        || this.mNextScheduledTimeMs < 0)) {
             scheduleTimedEvents();
         }
         return false;
@@ -422,14 +440,18 @@ public abstract class SubtitleTrack implements MediaTimeProvider.OnMediaTimeList
         }
 
         public Iterable<Pair<Long, Cue>> entriesBetween(final long lastTimeMs, final long timeMs) {
-            return new Iterable<Pair<Long, Cue>>() { // from class: android.media.SubtitleTrack.CueList.1
+            return new Iterable<
+                    Pair<Long, Cue>>() { // from class: android.media.SubtitleTrack.CueList.1
                 @Override // java.lang.Iterable
                 public Iterator<Pair<Long, Cue>> iterator() {
                     if (CueList.this.DEBUG) {
                         Log.d(CueList.TAG, "slice (" + lastTimeMs + ", " + timeMs + "]=");
                     }
                     try {
-                        return CueList.this.new EntryIterator(CueList.this.mCues.subMap(Long.valueOf(lastTimeMs + 1), Long.valueOf(timeMs + 1)));
+                        return CueList.this
+                        .new EntryIterator(
+                                CueList.this.mCues.subMap(
+                                        Long.valueOf(lastTimeMs + 1), Long.valueOf(timeMs + 1)));
                     } catch (IllegalArgumentException e) {
                         return CueList.this.new EntryIterator(null);
                     }
@@ -470,7 +492,8 @@ public abstract class SubtitleTrack implements MediaTimeProvider.OnMediaTimeList
                 if (this.mDone) {
                     throw new NoSuchElementException("");
                 }
-                this.mLastEntry = new Pair<>(Long.valueOf(this.mCurrentTimeMs), this.mListIterator.next());
+                this.mLastEntry =
+                        new Pair<>(Long.valueOf(this.mCurrentTimeMs), this.mListIterator.next());
                 this.mLastListIterator = this.mListIterator;
                 if (!this.mListIterator.hasNext()) {
                     nextKey();
@@ -480,7 +503,8 @@ public abstract class SubtitleTrack implements MediaTimeProvider.OnMediaTimeList
 
             @Override // java.util.Iterator
             public void remove() {
-                if (this.mLastListIterator == null || this.mLastEntry.second.mEndTimeMs != this.mLastEntry.first.longValue()) {
+                if (this.mLastListIterator == null
+                        || this.mLastEntry.second.mEndTimeMs != this.mLastEntry.first.longValue()) {
                     throw new IllegalStateException("");
                 }
                 this.mLastListIterator.remove();
@@ -510,9 +534,14 @@ public abstract class SubtitleTrack implements MediaTimeProvider.OnMediaTimeList
                 while (this.mRemainingCues != null) {
                     try {
                         this.mCurrentTimeMs = this.mRemainingCues.firstKey().longValue();
-                        this.mListIterator = this.mRemainingCues.get(Long.valueOf(this.mCurrentTimeMs)).iterator();
+                        this.mListIterator =
+                                this.mRemainingCues
+                                        .get(Long.valueOf(this.mCurrentTimeMs))
+                                        .iterator();
                         try {
-                            this.mRemainingCues = this.mRemainingCues.tailMap(Long.valueOf(this.mCurrentTimeMs + 1));
+                            this.mRemainingCues =
+                                    this.mRemainingCues.tailMap(
+                                            Long.valueOf(this.mCurrentTimeMs + 1));
                         } catch (IllegalArgumentException e) {
                             this.mRemainingCues = null;
                         }
@@ -531,8 +560,7 @@ public abstract class SubtitleTrack implements MediaTimeProvider.OnMediaTimeList
             }
         }
 
-        CueList() {
-        }
+        CueList() {}
     }
 
     public static class Cue {
@@ -542,8 +570,7 @@ public abstract class SubtitleTrack implements MediaTimeProvider.OnMediaTimeList
         public long mRunID;
         public long mStartTimeMs;
 
-        public void onTime(long timeMs) {
-        }
+        public void onTime(long timeMs) {}
     }
 
     protected void finishedRun(long runID) {

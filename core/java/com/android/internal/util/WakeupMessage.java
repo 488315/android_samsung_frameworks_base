@@ -17,7 +17,14 @@ public class WakeupMessage implements AlarmManager.OnAlarmListener {
     private final Runnable mRunnable;
     private boolean mScheduled;
 
-    public WakeupMessage(Context context, Handler handler, String cmdName, int cmd, int arg1, int arg2, Object obj) {
+    public WakeupMessage(
+            Context context,
+            Handler handler,
+            String cmdName,
+            int cmd,
+            int arg1,
+            int arg2,
+            Object obj) {
         this.mAlarmManager = getAlarmManager(context);
         this.mHandler = handler;
         this.mCmdName = cmdName;
@@ -32,7 +39,8 @@ public class WakeupMessage implements AlarmManager.OnAlarmListener {
         this(context, handler, cmdName, cmd, arg1, 0, null);
     }
 
-    public WakeupMessage(Context context, Handler handler, String cmdName, int cmd, int arg1, int arg2) {
+    public WakeupMessage(
+            Context context, Handler handler, String cmdName, int cmd, int arg1, int arg2) {
         this(context, handler, cmdName, cmd, arg1, arg2, null);
     }
 

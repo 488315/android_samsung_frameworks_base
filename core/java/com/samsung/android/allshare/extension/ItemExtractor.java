@@ -3,9 +3,11 @@ package com.samsung.android.allshare.extension;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcel;
+
 import com.samsung.android.allshare.DLog;
 import com.samsung.android.allshare.Item;
 import com.sec.android.allshare.iface.message.AllShareKey;
+
 import java.util.StringTokenizer;
 
 /* loaded from: classes3.dex */
@@ -39,11 +41,34 @@ public class ItemExtractor {
 
         public String getSeedString() {
             String itemUri = "null";
-            String subtitle = (this.mSubtitle == null || this.mSubtitle.toString() == null || this.mSubtitle.toString().length() <= 0) ? "null" : this.mSubtitle.toString();
-            if (this.mItemUri != null && this.mItemUri.toString() != null && this.mItemUri.toString().length() > 0) {
+            String subtitle =
+                    (this.mSubtitle == null
+                                    || this.mSubtitle.toString() == null
+                                    || this.mSubtitle.toString().length() <= 0)
+                            ? "null"
+                            : this.mSubtitle.toString();
+            if (this.mItemUri != null
+                    && this.mItemUri.toString() != null
+                    && this.mItemUri.toString().length() > 0) {
                 itemUri = this.mItemUri.toString();
             }
-            return this.mItemType + DELIMITER + this.mProviderId + DELIMITER + this.mObjectId + DELIMITER + this.mTitle + DELIMITER + subtitle + DELIMITER + this.mDuration + DELIMITER + itemUri + DELIMITER + this.mMimeType + DELIMITER + this.mFileSize;
+            return this.mItemType
+                    + DELIMITER
+                    + this.mProviderId
+                    + DELIMITER
+                    + this.mObjectId
+                    + DELIMITER
+                    + this.mTitle
+                    + DELIMITER
+                    + subtitle
+                    + DELIMITER
+                    + this.mDuration
+                    + DELIMITER
+                    + itemUri
+                    + DELIMITER
+                    + this.mMimeType
+                    + DELIMITER
+                    + this.mFileSize;
         }
 
         public String getObjectID() {
@@ -250,7 +275,8 @@ public class ItemExtractor {
             case ITEM_IMAGE:
                 break;
             case ITEM_VIDEO:
-                bundle.putParcelable(AllShareKey.BUNDLE_PARCELABLE_VIDEO_ITEM_SUBTITLE, seed.getSubtitle());
+                bundle.putParcelable(
+                        AllShareKey.BUNDLE_PARCELABLE_VIDEO_ITEM_SUBTITLE, seed.getSubtitle());
                 bundle.putLong(AllShareKey.BUNDLE_LONG_VIDEO_ITEM_DURATION, seed.getDuration());
                 break;
             case ITEM_FOLDER:
@@ -294,7 +320,10 @@ public class ItemExtractor {
                 duration = -1;
                 break;
             case ITEM_VIDEO:
-                subtitle = (Uri) bundle.getParcelable(AllShareKey.BUNDLE_PARCELABLE_VIDEO_ITEM_SUBTITLE);
+                subtitle =
+                        (Uri)
+                                bundle.getParcelable(
+                                        AllShareKey.BUNDLE_PARCELABLE_VIDEO_ITEM_SUBTITLE);
                 long duration3 = bundle.getLong(AllShareKey.BUNDLE_LONG_VIDEO_ITEM_DURATION);
                 duration = duration3;
                 break;
@@ -309,7 +338,8 @@ public class ItemExtractor {
                 }
                 if (constructorKey != null && !constructorKey.equals("MEDIA_SERVER")) {
                     DLog.w_api(CLASS_TAG, "ItemExtractor support only MEDIA_SERVER Item");
-                    throw new IllegalArgumentException("ItemExtractor support only MEDIA_SERVER Item");
+                    throw new IllegalArgumentException(
+                            "ItemExtractor support only MEDIA_SERVER Item");
                 }
                 if (!objId.contains(",@,#,") && !providerId.contains(",@,#,")) {
                     if (!title.contains(",@,#,")) {
@@ -327,7 +357,10 @@ public class ItemExtractor {
                         return seed2;
                     }
                 }
-                DLog.w_api(CLASS_TAG, "ItemExtractor doesn't suppport object id or provider id that contains DELIMITER");
+                DLog.w_api(
+                        CLASS_TAG,
+                        "ItemExtractor doesn't suppport object id or provider id that contains"
+                            + " DELIMITER");
                 return null;
             }
             seed = null;

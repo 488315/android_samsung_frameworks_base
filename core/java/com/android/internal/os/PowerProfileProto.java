@@ -50,7 +50,6 @@ public final class PowerProfileProto {
         public static final long ID = 1120986464257L;
         public static final long SPEED = 2211908157444L;
 
-        public CpuCluster() {
-        }
+        public CpuCluster() {}
     }
 }

@@ -3,6 +3,7 @@ package android.util;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.SystemClock;
 import android.os.Trace;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -63,7 +64,13 @@ public class TimingsTraceLog {
         assertSameThread();
         Trace.traceBegin(this.mTraceTag, name);
         if (this.mCurrentLevel + 1 >= this.mMaxNestedCalls) {
-            Slog.w(this.mTag, "not tracing duration of '" + name + "' because already reached " + this.mMaxNestedCalls + " levels");
+            Slog.w(
+                    this.mTag,
+                    "not tracing duration of '"
+                            + name
+                            + "' because already reached "
+                            + this.mMaxNestedCalls
+                            + " levels");
             return;
         }
         this.mCurrentLevel++;
@@ -87,17 +94,40 @@ public class TimingsTraceLog {
     private void assertSameThread() {
         Thread currentThread = Thread.currentThread();
         if (currentThread.getId() != this.mThreadId) {
-            throw new IllegalStateException("Instance of TimingsTraceLog can only be called from the thread it was created on (tid: " + this.mThreadId + "), but was from " + currentThread.getName() + " (tid: " + currentThread.getId() + NavigationBarInflaterView.KEY_CODE_END);
+            throw new IllegalStateException(
+                    "Instance of TimingsTraceLog can only be called from the thread it was created"
+                        + " on (tid: "
+                            + this.mThreadId
+                            + "), but was from "
+                            + currentThread.getName()
+                            + " (tid: "
+                            + currentThread.getId()
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
     }
 
     public void logDuration(String name, long timeMs) {
         Slog.v(this.mTag, name + " took to complete: " + timeMs + "ms");
-        if (timeMs <= 200 || !"SystemServerTiming".equals(this.mTag) || "PhaseActivityManagerReady".equals(name) || "SystemUserUnlock".equals(name) || "StartServices".equals(name)) {
+        if (timeMs <= 200
+                || !"SystemServerTiming".equals(this.mTag)
+                || "PhaseActivityManagerReady".equals(name)
+                || "SystemUserUnlock".equals(name)
+                || "StartServices".equals(name)) {
             return;
         }
-        Slog.d(this.mTag, "!@Boot_SystemServer: " + timeMs + "ms : " + name.substring(0, Math.min(50, name.length())));
-        Slog.i(this.mTag, "!@Boot_EBS:   Took " + timeMs + "ms by '" + name.substring(0, Math.min(50, name.length())) + "'");
+        Slog.d(
+                this.mTag,
+                "!@Boot_SystemServer: "
+                        + timeMs
+                        + "ms : "
+                        + name.substring(0, Math.min(50, name.length())));
+        Slog.i(
+                this.mTag,
+                "!@Boot_EBS:   Took "
+                        + timeMs
+                        + "ms by '"
+                        + name.substring(0, Math.min(50, name.length()))
+                        + "'");
     }
 
     public final List<String> getUnfinishedTracesForDebug() {

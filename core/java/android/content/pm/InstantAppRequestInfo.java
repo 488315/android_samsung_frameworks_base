@@ -6,39 +6,50 @@ import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.UserHandle;
+
 import com.android.internal.util.AnnotationValidations;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class InstantAppRequestInfo implements Parcelable {
-    public static final Parcelable.Creator<InstantAppRequestInfo> CREATOR = new Parcelable.Creator<InstantAppRequestInfo>() { // from class: android.content.pm.InstantAppRequestInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InstantAppRequestInfo[] newArray(int size) {
-            return new InstantAppRequestInfo[size];
-        }
+    public static final Parcelable.Creator<InstantAppRequestInfo> CREATOR =
+            new Parcelable.Creator<InstantAppRequestInfo>() { // from class:
+                // android.content.pm.InstantAppRequestInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InstantAppRequestInfo[] newArray(int size) {
+                    return new InstantAppRequestInfo[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InstantAppRequestInfo createFromParcel(Parcel in) {
-            return new InstantAppRequestInfo(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InstantAppRequestInfo createFromParcel(Parcel in) {
+                    return new InstantAppRequestInfo(in);
+                }
+            };
     private final int[] mHostDigestPrefix;
     private final Intent mIntent;
     private final boolean mRequesterInstantApp;
     private final String mToken;
     private final UserHandle mUserHandle;
 
-    public InstantAppRequestInfo(Intent intent, int[] hostDigestPrefix, UserHandle userHandle, boolean requesterInstantApp, String token) {
+    public InstantAppRequestInfo(
+            Intent intent,
+            int[] hostDigestPrefix,
+            UserHandle userHandle,
+            boolean requesterInstantApp,
+            String token) {
         this.mIntent = intent;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mIntent);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mIntent);
         this.mHostDigestPrefix = hostDigestPrefix;
         this.mUserHandle = userHandle;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mUserHandle);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mUserHandle);
         this.mRequesterInstantApp = requesterInstantApp;
         this.mToken = token;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mToken);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mToken);
     }
 
     public Intent getIntent() {
@@ -89,16 +100,18 @@ public final class InstantAppRequestInfo implements Parcelable {
         UserHandle userHandle = (UserHandle) in.readTypedObject(UserHandle.CREATOR);
         String token = in.readString();
         this.mIntent = intent;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mIntent);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mIntent);
         this.mHostDigestPrefix = hostDigestPrefix;
         this.mUserHandle = userHandle;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mUserHandle);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mUserHandle);
         this.mRequesterInstantApp = requesterInstantApp;
         this.mToken = token;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mToken);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mToken);
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

@@ -2,7 +2,9 @@ package com.android.server.pm;
 
 import android.app.appsearch.AppSearchResult;
 import android.app.appsearch.AppSearchSession;
+
 import com.android.internal.infra.AndroidFuture;
+
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -14,7 +16,8 @@ public final /* synthetic */ class ShortcutPackage$$ExternalSyntheticLambda29 im
     public final /* synthetic */ ShortcutPackage f$0;
     public final /* synthetic */ AndroidFuture f$1;
 
-    public /* synthetic */ ShortcutPackage$$ExternalSyntheticLambda29(ShortcutPackage shortcutPackage, AndroidFuture androidFuture, int i) {
+    public /* synthetic */ ShortcutPackage$$ExternalSyntheticLambda29(
+            ShortcutPackage shortcutPackage, AndroidFuture androidFuture, int i) {
         this.$r8$classId = i;
         this.f$0 = shortcutPackage;
         this.f$1 = androidFuture;
@@ -25,7 +28,12 @@ public final /* synthetic */ class ShortcutPackage$$ExternalSyntheticLambda29 im
         switch (this.$r8$classId) {
             case 0:
                 ShortcutPackage shortcutPackage = this.f$0;
-                ((AppSearchSession) obj).search("", shortcutPackage.getSearchSpec()).getNextPage(shortcutPackage.mShortcutUser.mExecutor, new ShortcutPackage$$ExternalSyntheticLambda29(shortcutPackage, this.f$1, 1));
+                ((AppSearchSession) obj)
+                        .search("", shortcutPackage.getSearchSpec())
+                        .getNextPage(
+                                shortcutPackage.mShortcutUser.mExecutor,
+                                new ShortcutPackage$$ExternalSyntheticLambda29(
+                                        shortcutPackage, this.f$1, 1));
                 break;
             default:
                 ShortcutPackage shortcutPackage2 = this.f$0;
@@ -33,10 +41,21 @@ public final /* synthetic */ class ShortcutPackage$$ExternalSyntheticLambda29 im
                 AppSearchResult appSearchResult = (AppSearchResult) obj;
                 shortcutPackage2.getClass();
                 if (!appSearchResult.isSuccess()) {
-                    androidFuture.completeExceptionally(new IllegalStateException(appSearchResult.getErrorMessage()));
+                    androidFuture.completeExceptionally(
+                            new IllegalStateException(appSearchResult.getErrorMessage()));
                     break;
                 } else {
-                    androidFuture.complete((List) ((List) appSearchResult.getResultValue()).stream().map(new ShortcutPackage$$ExternalSyntheticLambda51(1)).map(new ShortcutPackage$$ExternalSyntheticLambda43(shortcutPackage2, 1)).collect(Collectors.toList()));
+                    androidFuture.complete(
+                            (List)
+                                    ((List) appSearchResult.getResultValue())
+                                            .stream()
+                                                    .map(
+                                                            new ShortcutPackage$$ExternalSyntheticLambda51(
+                                                                    1))
+                                                    .map(
+                                                            new ShortcutPackage$$ExternalSyntheticLambda43(
+                                                                    shortcutPackage2, 1))
+                                                    .collect(Collectors.toList()));
                     break;
                 }
         }

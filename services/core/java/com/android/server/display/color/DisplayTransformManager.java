@@ -8,6 +8,7 @@ import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
@@ -19,7 +20,8 @@ public final class DisplayTransformManager {
     static final String PERSISTENT_PROPERTY_SATURATION = "persist.sys.sf.color_saturation";
     public static final IBinder sFlinger = ServiceManager.getService("SurfaceFlinger");
     public final SparseArray mColorMatrix = new SparseArray(6);
-    public final float[][] mTempColorMatrix = (float[][]) Array.newInstance((Class<?>) Float.TYPE, 2, 16);
+    public final float[][] mTempColorMatrix =
+            (float[][]) Array.newInstance((Class<?>) Float.TYPE, 2, 16);
     final Object mDaltonizerModeLock = new Object();
     int mDaltonizerMode = -1;
     int mDaltonizerLevel = -1;
@@ -94,7 +96,8 @@ public final class DisplayTransformManager {
         Matrix.setIdentityM(fArr[0], 0);
         while (i < size) {
             int i2 = i + 1;
-            Matrix.multiplyMM(fArr[i2 % 2], 0, fArr[i % 2], 0, (float[]) this.mColorMatrix.valueAt(i), 0);
+            Matrix.multiplyMM(
+                    fArr[i2 % 2], 0, fArr[i % 2], 0, (float[]) this.mColorMatrix.valueAt(i), 0);
             i = i2;
         }
         return fArr[size % 2];
@@ -102,7 +105,8 @@ public final class DisplayTransformManager {
 
     public final void setColorMatrix(int i, float[] fArr) {
         if (fArr != null && fArr.length != 16) {
-            throw new IllegalArgumentException("Expected length: 16 (4x4 matrix), actual length: " + fArr.length);
+            throw new IllegalArgumentException(
+                    "Expected length: 16 (4x4 matrix), actual length: " + fArr.length);
         }
         synchronized (this.mColorMatrix) {
             try {
@@ -125,13 +129,13 @@ public final class DisplayTransformManager {
 
     /* JADX WARN: Can't wrap try/catch for region: R(8:3|4|(3:6|(1:8)|9)|12|13|14|15|9) */
     /* JADX WARN: Code restructure failed: missing block: B:17:0x0030, code lost:
-    
-        r4 = move-exception;
-     */
+
+       r4 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:18:0x0031, code lost:
-    
-        android.util.Slog.e("DisplayTransformManager", "Failed to set Daltonizer mode", r4);
-     */
+
+       android.util.Slog.e("DisplayTransformManager", "Failed to set Daltonizer mode", r4);
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -184,6 +188,9 @@ public final class DisplayTransformManager {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> Lc
             throw r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.color.DisplayTransformManager.setDaltonizerMode(int, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.color.DisplayTransformManager.setDaltonizerMode(int,"
+                    + " int):void");
     }
 }

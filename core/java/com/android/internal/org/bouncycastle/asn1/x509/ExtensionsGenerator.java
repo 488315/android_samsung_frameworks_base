@@ -4,6 +4,7 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Encodable;
 import com.android.internal.org.bouncycastle.asn1.ASN1Encoding;
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.internal.org.bouncycastle.asn1.DEROctetString;
+
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.Vector;
@@ -18,7 +19,8 @@ public class ExtensionsGenerator {
         this.extOrdering = new Vector();
     }
 
-    public void addExtension(ASN1ObjectIdentifier oid, boolean critical, ASN1Encodable value) throws IOException {
+    public void addExtension(ASN1ObjectIdentifier oid, boolean critical, ASN1Encodable value)
+            throws IOException {
         addExtension(oid, critical, value.toASN1Primitive().getEncoded(ASN1Encoding.DER));
     }
 
@@ -32,13 +34,15 @@ public class ExtensionsGenerator {
 
     public void addExtension(Extension extension) {
         if (this.extensions.containsKey(extension.getExtnId())) {
-            throw new IllegalArgumentException("extension " + extension.getExtnId() + " already added");
+            throw new IllegalArgumentException(
+                    "extension " + extension.getExtnId() + " already added");
         }
         this.extOrdering.addElement(extension.getExtnId());
         this.extensions.put(extension.getExtnId(), extension);
     }
 
-    public void replaceExtension(ASN1ObjectIdentifier oid, boolean critical, ASN1Encodable value) throws IOException {
+    public void replaceExtension(ASN1ObjectIdentifier oid, boolean critical, ASN1Encodable value)
+            throws IOException {
         replaceExtension(oid, critical, value.toASN1Primitive().getEncoded(ASN1Encoding.DER));
     }
 
@@ -48,7 +52,8 @@ public class ExtensionsGenerator {
 
     public void replaceExtension(Extension extension) {
         if (!this.extensions.containsKey(extension.getExtnId())) {
-            throw new IllegalArgumentException("extension " + extension.getExtnId() + " not present");
+            throw new IllegalArgumentException(
+                    "extension " + extension.getExtnId() + " not present");
         }
         this.extensions.put(extension.getExtnId(), extension);
     }

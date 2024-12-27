@@ -1,6 +1,7 @@
 package android.hardware.camera2.marshal;
 
 import android.hardware.camera2.utils.TypeReference;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -39,7 +40,12 @@ public class MarshalRegistry {
                     }
                 }
                 if (marshaler == null) {
-                    throw new UnsupportedOperationException("Could not find marshaler that matches the requested combination of type reference " + typeToken + " and native type " + MarshalHelpers.toStringNativeType(nativeType));
+                    throw new UnsupportedOperationException(
+                            "Could not find marshaler that matches the requested combination of"
+                                    + " type reference "
+                                    + typeToken
+                                    + " and native type "
+                                    + MarshalHelpers.toStringNativeType(nativeType));
                 }
                 sMarshalerMap.put(marshalToken, marshaler);
             }
@@ -63,7 +69,8 @@ public class MarshalRegistry {
                 return false;
             }
             MarshalToken<?> otherToken = (MarshalToken) other;
-            return this.typeReference.equals(otherToken.typeReference) && this.nativeType == otherToken.nativeType;
+            return this.typeReference.equals(otherToken.typeReference)
+                    && this.nativeType == otherToken.nativeType;
         }
 
         public int hashCode() {

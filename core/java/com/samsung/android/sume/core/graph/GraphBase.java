@@ -4,10 +4,10 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.MediaBuffer;
 import com.samsung.android.sume.core.channel.BufferChannel;
-import com.samsung.android.sume.core.graph.Graph;
 import com.samsung.android.sume.core.message.Event;
 import com.samsung.android.sume.core.message.Message;
 import com.samsung.android.sume.core.message.MessageChannelRouter;
@@ -15,6 +15,7 @@ import com.samsung.android.sume.core.message.MessagePublisher;
 import com.samsung.android.sume.core.message.MessageSubscriber;
 import com.samsung.android.sume.core.types.MediaType;
 import com.samsung.android.sume.solution.filter.UniImgp;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
@@ -33,7 +34,8 @@ public abstract class GraphBase<T> implements Graph<T> {
     protected final List<GraphNode<T>> nodes;
     protected final Graph.Option option;
     protected BufferChannel outputChannel;
-    protected final ConcurrentHashMap<Integer, MediaBuffer> outBufferMap = new ConcurrentHashMap<>();
+    protected final ConcurrentHashMap<Integer, MediaBuffer> outBufferMap =
+            new ConcurrentHashMap<>();
     protected final MessageChannelRouter messageChannelRouter = new MessageChannelRouter(32);
 
     GraphBase(List<GraphNode<T>> nodes, Graph.Option option) {
@@ -44,8 +46,11 @@ public abstract class GraphBase<T> implements Graph<T> {
     /* JADX WARN: Unsupported multi-entry loop pattern (BACK_EDGE: B:16:0x0094 -> B:12:0x00a3). Please report as a decompilation issue!!! */
     private MediaBuffer onReceiveOutputBuffer(MediaBuffer mediaBuffer) {
         MediaType outMediaType = mediaBuffer.getFormat().getMediaType();
-        MediaBuffer storedOutput = this.outBufferMap.remove(mediaBuffer.getExtra(Message.KEY_CONTENTS_ID));
-        if (outMediaType == MediaType.SCALA || outMediaType == MediaType.META || storedOutput == null) {
+        MediaBuffer storedOutput =
+                this.outBufferMap.remove(mediaBuffer.getExtra(Message.KEY_CONTENTS_ID));
+        if (outMediaType == MediaType.SCALA
+                || outMediaType == MediaType.META
+                || storedOutput == null) {
             return mediaBuffer;
         }
         Log.d(TAG, "onReceiveOutputBuffer: " + mediaBuffer + " => " + storedOutput);
@@ -56,9 +61,12 @@ public abstract class GraphBase<T> implements Graph<T> {
             try {
                 try {
                     try {
-                        ParcelFileDescriptor pfd = (ParcelFileDescriptor) storedOutput.getExtra(Message.KEY_FILE_DESCRIPTOR);
+                        ParcelFileDescriptor pfd =
+                                (ParcelFileDescriptor)
+                                        storedOutput.getExtra(Message.KEY_FILE_DESCRIPTOR);
                         os = new FileOutputStream(pfd.getFileDescriptor());
-                        ((Bitmap) storedOutput.getTypedData(Bitmap.class)).compress(Bitmap.CompressFormat.JPEG, 95, os);
+                        ((Bitmap) storedOutput.getTypedData(Bitmap.class))
+                                .compress(Bitmap.CompressFormat.JPEG, 95, os);
                         os.close();
                     } catch (Throwable th) {
                         if (os != null) {
@@ -86,12 +94,16 @@ public abstract class GraphBase<T> implements Graph<T> {
 
     protected void runBatch(List<MediaBuffer> inBuffers, List<MediaBuffer> outBuffers) {
         Log.d(TAG, "runBatch: # of inputs " + inBuffers.size());
-        inBuffers.forEach(new Consumer() { // from class: com.samsung.android.sume.core.graph.GraphBase$$ExternalSyntheticLambda4
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                GraphBase.this.m9175lambda$runBatch$0$comsamsungandroidsumecoregraphGraphBase((MediaBuffer) obj);
-            }
-        });
+        inBuffers.forEach(
+                new Consumer() { // from class:
+                                 // com.samsung.android.sume.core.graph.GraphBase$$ExternalSyntheticLambda4
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        GraphBase.this
+                                .m9175lambda$runBatch$0$comsamsungandroidsumecoregraphGraphBase(
+                                        (MediaBuffer) obj);
+                    }
+                });
         try {
             int remains = inBuffers.size();
             inBuffers.clear();
@@ -115,7 +127,8 @@ public abstract class GraphBase<T> implements Graph<T> {
     }
 
     /* renamed from: lambda$runBatch$0$com-samsung-android-sume-core-graph-GraphBase, reason: not valid java name */
-    /* synthetic */ void m9175lambda$runBatch$0$comsamsungandroidsumecoregraphGraphBase(MediaBuffer it) {
+    /* synthetic */ void m9175lambda$runBatch$0$comsamsungandroidsumecoregraphGraphBase(
+            MediaBuffer it) {
         this.inputChannel.send(it);
         publishEvent(509, it);
     }
@@ -123,12 +136,14 @@ public abstract class GraphBase<T> implements Graph<T> {
     protected void runOneByOne(List<MediaBuffer> inBuffers, final List<MediaBuffer> outBuffers) {
         Log.d(TAG, "runOneByOne: # of inputs " + inBuffers.size());
         try {
-            inBuffers.forEach(new Consumer() { // from class: com.samsung.android.sume.core.graph.GraphBase$$ExternalSyntheticLambda5
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    GraphBase.this.m9176x8ab719a8(outBuffers, (MediaBuffer) obj);
-                }
-            });
+            inBuffers.forEach(
+                    new Consumer() { // from class:
+                                     // com.samsung.android.sume.core.graph.GraphBase$$ExternalSyntheticLambda5
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            GraphBase.this.m9176x8ab719a8(outBuffers, (MediaBuffer) obj);
+                        }
+                    });
         } catch (CancellationException e) {
             onCanceled();
         }
@@ -153,36 +168,66 @@ public abstract class GraphBase<T> implements Graph<T> {
             event.setPublisher(this.messagePublisher);
             switch (code) {
                 case 509:
-                    event.put(Message.KEY_CONTENTS_ID, mediaBuffer.getExtra(Message.KEY_CONTENTS_ID));
+                    event.put(
+                            Message.KEY_CONTENTS_ID, mediaBuffer.getExtra(Message.KEY_CONTENTS_ID));
                     if (mediaBuffer.containsExtra(Message.KEY_IN_FILE)) {
                         event.put(Message.KEY_IN_FILE, mediaBuffer.getExtra(Message.KEY_IN_FILE));
                     }
                     event.put(Message.KEY_START_TIME_MS, Long.valueOf(System.currentTimeMillis()));
                     break;
                 case 510:
-                    event.put(Message.KEY_CONTENTS_ID, mediaBuffer.getExtra(Message.KEY_CONTENTS_ID));
+                    event.put(
+                            Message.KEY_CONTENTS_ID, mediaBuffer.getExtra(Message.KEY_CONTENTS_ID));
                     if (mediaBuffer.containsExtra(Message.KEY_IN_FILE)) {
                         event.put(Message.KEY_IN_FILE, mediaBuffer.getExtra(Message.KEY_IN_FILE));
                     }
                     event.put("width", Integer.valueOf(mediaBuffer.getCols()));
                     event.put("height", Integer.valueOf(mediaBuffer.getRows()));
                     event.put(Message.KEY_END_TIME_MS, Long.valueOf(System.currentTimeMillis()));
-                    Stream.of((Object[]) new String[]{"rotation-degrees", "last-video-timestamp-us", "last-audio-timestamp-us"}).filter(new Predicate() { // from class: com.samsung.android.sume.core.graph.GraphBase$$ExternalSyntheticLambda0
-                        @Override // java.util.function.Predicate
-                        public final boolean test(Object obj) {
-                            boolean contains;
-                            contains = MediaBuffer.this.getFormat().contains((String) obj);
-                            return contains;
-                        }
-                    }).forEach(new Consumer() { // from class: com.samsung.android.sume.core.graph.GraphBase$$ExternalSyntheticLambda1
-                        @Override // java.util.function.Consumer
-                        public final void accept(Object obj) {
-                            Event.this.put(r3, mediaBuffer.getFormat().get((String) obj));
-                        }
-                    });
+                    Stream.of(
+                                    (Object[])
+                                            new String[] {
+                                                "rotation-degrees",
+                                                "last-video-timestamp-us",
+                                                "last-audio-timestamp-us"
+                                            })
+                            .filter(
+                                    new Predicate() { // from class:
+                                                      // com.samsung.android.sume.core.graph.GraphBase$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.Predicate
+                                        public final boolean test(Object obj) {
+                                            boolean contains;
+                                            contains =
+                                                    MediaBuffer.this
+                                                            .getFormat()
+                                                            .contains((String) obj);
+                                            return contains;
+                                        }
+                                    })
+                            .forEach(
+                                    new Consumer() { // from class:
+                                                     // com.samsung.android.sume.core.graph.GraphBase$$ExternalSyntheticLambda1
+                                        @Override // java.util.function.Consumer
+                                        public final void accept(Object obj) {
+                                            Event.this.put(
+                                                    r3, mediaBuffer.getFormat().get((String) obj));
+                                        }
+                                    });
                     if (mediaBuffer.getFormat().getMediaType().isVideo()) {
-                        long videoDurationUs = ((Long) Optional.ofNullable(event.get("last-video-timestamp-us")).orElse(-1L)).longValue();
-                        long audioDurationUs = ((Long) Optional.ofNullable(event.get("last-audio-timestamp-us")).orElse(-1L)).longValue();
+                        long videoDurationUs =
+                                ((Long)
+                                                Optional.ofNullable(
+                                                                event.get(
+                                                                        "last-video-timestamp-us"))
+                                                        .orElse(-1L))
+                                        .longValue();
+                        long audioDurationUs =
+                                ((Long)
+                                                Optional.ofNullable(
+                                                                event.get(
+                                                                        "last-audio-timestamp-us"))
+                                                        .orElse(-1L))
+                                        .longValue();
                         if (videoDurationUs > audioDurationUs) {
                             durationMs = (videoDurationUs / 1000) + 1;
                         } else {
@@ -193,12 +238,17 @@ public abstract class GraphBase<T> implements Graph<T> {
                     }
                     if (this.option.isOutputOnEventCallback()) {
                         Log.d(TAG, "set output buffer to event cb");
-                        event.setBundledDataHandler(new Message.BundledDataHandler() { // from class: com.samsung.android.sume.core.graph.GraphBase$$ExternalSyntheticLambda2
-                            @Override // com.samsung.android.sume.core.message.Message.BundledDataHandler
-                            public final void accept(Bundle bundle) {
-                                bundle.putParcelableArray("buffer-list", new MediaBuffer[]{MediaBuffer.this});
-                            }
-                        });
+                        event.setBundledDataHandler(
+                                new Message
+                                        .BundledDataHandler() { // from class:
+                                                                // com.samsung.android.sume.core.graph.GraphBase$$ExternalSyntheticLambda2
+                                    @Override // com.samsung.android.sume.core.message.Message.BundledDataHandler
+                                    public final void accept(Bundle bundle) {
+                                        bundle.putParcelableArray(
+                                                "buffer-list",
+                                                new MediaBuffer[] {MediaBuffer.this});
+                                    }
+                                });
                         break;
                     }
                     break;
@@ -224,12 +274,14 @@ public abstract class GraphBase<T> implements Graph<T> {
         Log.d(TAG, "release...E");
         this.inputChannel.cancel();
         this.outputChannel.cancel();
-        this.nodes.forEach(new Consumer() { // from class: com.samsung.android.sume.core.graph.GraphBase$$ExternalSyntheticLambda3
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                ((GraphNode) obj).release();
-            }
-        });
+        this.nodes.forEach(
+                new Consumer() { // from class:
+                                 // com.samsung.android.sume.core.graph.GraphBase$$ExternalSyntheticLambda3
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        ((GraphNode) obj).release();
+                    }
+                });
         this.option.clear();
         Log.d(TAG, "release...X");
     }

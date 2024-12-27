@@ -3,6 +3,7 @@ package com.android.internal.org.bouncycastle.jcajce.io;
 import java.io.OutputStream;
 import java.security.MessageDigest;
 import java.security.Signature;
+
 import javax.crypto.Mac;
 
 /* loaded from: classes5.dex */

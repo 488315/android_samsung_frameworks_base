@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IInjectModelEvent extends IInterface {
-    public static final String DESCRIPTOR = "android.media.soundtrigger_middleware.IInjectModelEvent";
+    public static final String DESCRIPTOR =
+            "android.media.soundtrigger_middleware.IInjectModelEvent";
 
     void triggerUnloadModel() throws RemoteException;
 
     public static class Default implements IInjectModelEvent {
         @Override // android.media.soundtrigger_middleware.IInjectModelEvent
-        public void triggerUnloadModel() throws RemoteException {
-        }
+        public void triggerUnloadModel() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IInjectModelEvent extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInjectModelEvent {
+    public abstract static class Stub extends Binder implements IInjectModelEvent {
         static final int TRANSACTION_triggerUnloadModel = 1;
 
         public Stub() {
@@ -47,7 +47,8 @@ public interface IInjectModelEvent extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IInjectModelEvent.DESCRIPTOR);
             }

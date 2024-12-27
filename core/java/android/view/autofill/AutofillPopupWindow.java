@@ -11,22 +11,25 @@ import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
 import android.window.WindowMetricsHelper;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
 public class AutofillPopupWindow extends PopupWindow {
     private static final String TAG = "AutofillPopupWindow";
     private boolean mFullScreen;
-    private final View.OnAttachStateChangeListener mOnAttachStateChangeListener = new View.OnAttachStateChangeListener() { // from class: android.view.autofill.AutofillPopupWindow.1
-        @Override // android.view.View.OnAttachStateChangeListener
-        public void onViewAttachedToWindow(View v) {
-        }
+    private final View.OnAttachStateChangeListener mOnAttachStateChangeListener =
+            new View
+                    .OnAttachStateChangeListener() { // from class:
+                                                     // android.view.autofill.AutofillPopupWindow.1
+                @Override // android.view.View.OnAttachStateChangeListener
+                public void onViewAttachedToWindow(View v) {}
 
-        @Override // android.view.View.OnAttachStateChangeListener
-        public void onViewDetachedFromWindow(View v) {
-            AutofillPopupWindow.this.dismiss();
-        }
-    };
+                @Override // android.view.View.OnAttachStateChangeListener
+                public void onViewDetachedFromWindow(View v) {
+                    AutofillPopupWindow.this.dismiss();
+                }
+            };
     private WindowManager.LayoutParams mWindowLayoutParams;
     private final WindowPresenter mWindowPresenter;
 
@@ -54,15 +57,24 @@ public class AutofillPopupWindow extends PopupWindow {
         return this.mWindowLayoutParams;
     }
 
-    public void update(final View anchor, int offsetX, int offsetY, int width, int height, Rect virtualBounds) {
+    public void update(
+            final View anchor,
+            int offsetX,
+            int offsetY,
+            int width,
+            int height,
+            Rect virtualBounds) {
         View actualAnchor;
         this.mFullScreen = width == -1;
         setWindowLayoutType(this.mFullScreen ? 2008 : 1005);
         if (this.mFullScreen) {
             offsetX = 0;
             offsetY = 0;
-            WindowManager windowManager = (WindowManager) anchor.getContext().getSystemService(WindowManager.class);
-            Rect windowBounds = WindowMetricsHelper.getBoundsExcludingNavigationBarAndCutout(windowManager.getCurrentWindowMetrics());
+            WindowManager windowManager =
+                    (WindowManager) anchor.getContext().getSystemService(WindowManager.class);
+            Rect windowBounds =
+                    WindowMetricsHelper.getBoundsExcludingNavigationBarAndCutout(
+                            windowManager.getCurrentWindowMetrics());
             width = windowBounds.width();
             if (height != -1) {
                 offsetY = windowBounds.height() - height;
@@ -70,77 +82,91 @@ public class AutofillPopupWindow extends PopupWindow {
             actualAnchor = anchor;
         } else if (virtualBounds != null) {
             final int[] mLocationOnScreen = {virtualBounds.left, virtualBounds.top};
-            View actualAnchor2 = new View(anchor.getContext()) { // from class: android.view.autofill.AutofillPopupWindow.2
-                @Override // android.view.View
-                public void getLocationOnScreen(int[] location) {
-                    location[0] = mLocationOnScreen[0];
-                    location[1] = mLocationOnScreen[1];
-                }
+            View actualAnchor2 =
+                    new View(
+                            anchor
+                                    .getContext()) { // from class:
+                                                     // android.view.autofill.AutofillPopupWindow.2
+                        @Override // android.view.View
+                        public void getLocationOnScreen(int[] location) {
+                            location[0] = mLocationOnScreen[0];
+                            location[1] = mLocationOnScreen[1];
+                        }
 
-                @Override // android.view.View
-                public int getAccessibilityViewId() {
-                    return anchor.getAccessibilityViewId();
-                }
+                        @Override // android.view.View
+                        public int getAccessibilityViewId() {
+                            return anchor.getAccessibilityViewId();
+                        }
 
-                @Override // android.view.View
-                public ViewTreeObserver getViewTreeObserver() {
-                    return anchor.getViewTreeObserver();
-                }
+                        @Override // android.view.View
+                        public ViewTreeObserver getViewTreeObserver() {
+                            return anchor.getViewTreeObserver();
+                        }
 
-                @Override // android.view.View
-                public IBinder getApplicationWindowToken() {
-                    return anchor.getApplicationWindowToken();
-                }
+                        @Override // android.view.View
+                        public IBinder getApplicationWindowToken() {
+                            return anchor.getApplicationWindowToken();
+                        }
 
-                @Override // android.view.View
-                public View getRootView() {
-                    return anchor.getRootView();
-                }
+                        @Override // android.view.View
+                        public View getRootView() {
+                            return anchor.getRootView();
+                        }
 
-                @Override // android.view.View
-                public int getLayoutDirection() {
-                    return anchor.getLayoutDirection();
-                }
+                        @Override // android.view.View
+                        public int getLayoutDirection() {
+                            return anchor.getLayoutDirection();
+                        }
 
-                @Override // android.view.View
-                public void getWindowDisplayFrame(Rect outRect) {
-                    anchor.getWindowDisplayFrame(outRect);
-                }
+                        @Override // android.view.View
+                        public void getWindowDisplayFrame(Rect outRect) {
+                            anchor.getWindowDisplayFrame(outRect);
+                        }
 
-                @Override // android.view.View
-                public void addOnAttachStateChangeListener(View.OnAttachStateChangeListener listener) {
-                    anchor.addOnAttachStateChangeListener(listener);
-                }
+                        @Override // android.view.View
+                        public void addOnAttachStateChangeListener(
+                                View.OnAttachStateChangeListener listener) {
+                            anchor.addOnAttachStateChangeListener(listener);
+                        }
 
-                @Override // android.view.View
-                public void removeOnAttachStateChangeListener(View.OnAttachStateChangeListener listener) {
-                    anchor.removeOnAttachStateChangeListener(listener);
-                }
+                        @Override // android.view.View
+                        public void removeOnAttachStateChangeListener(
+                                View.OnAttachStateChangeListener listener) {
+                            anchor.removeOnAttachStateChangeListener(listener);
+                        }
 
-                @Override // android.view.View
-                public boolean isAttachedToWindow() {
-                    return anchor.isAttachedToWindow();
-                }
+                        @Override // android.view.View
+                        public boolean isAttachedToWindow() {
+                            return anchor.isAttachedToWindow();
+                        }
 
-                @Override // android.view.View
-                public boolean requestRectangleOnScreen(Rect rectangle, boolean immediate) {
-                    return anchor.requestRectangleOnScreen(rectangle, immediate);
-                }
+                        @Override // android.view.View
+                        public boolean requestRectangleOnScreen(Rect rectangle, boolean immediate) {
+                            return anchor.requestRectangleOnScreen(rectangle, immediate);
+                        }
 
-                @Override // android.view.View
-                public IBinder getWindowToken() {
-                    return anchor.getWindowToken();
-                }
-            };
-            actualAnchor2.setLeftTopRightBottom(virtualBounds.left, virtualBounds.top, virtualBounds.right, virtualBounds.bottom);
+                        @Override // android.view.View
+                        public IBinder getWindowToken() {
+                            return anchor.getWindowToken();
+                        }
+                    };
+            actualAnchor2.setLeftTopRightBottom(
+                    virtualBounds.left,
+                    virtualBounds.top,
+                    virtualBounds.right,
+                    virtualBounds.bottom);
             actualAnchor2.setScrollX(anchor.getScrollX());
             actualAnchor2.setScrollY(anchor.getScrollY());
-            anchor.setOnScrollChangeListener(new View.OnScrollChangeListener() { // from class: android.view.autofill.AutofillPopupWindow$$ExternalSyntheticLambda0
-                @Override // android.view.View.OnScrollChangeListener
-                public final void onScrollChange(View view, int i, int i2, int i3, int i4) {
-                    AutofillPopupWindow.lambda$update$0(mLocationOnScreen, view, i, i2, i3, i4);
-                }
-            });
+            anchor.setOnScrollChangeListener(
+                    new View
+                            .OnScrollChangeListener() { // from class:
+                                                        // android.view.autofill.AutofillPopupWindow$$ExternalSyntheticLambda0
+                        @Override // android.view.View.OnScrollChangeListener
+                        public final void onScrollChange(View view, int i, int i2, int i3, int i4) {
+                            AutofillPopupWindow.lambda$update$0(
+                                    mLocationOnScreen, view, i, i2, i3, i4);
+                        }
+                    });
             actualAnchor2.setWillNotDraw(true);
             actualAnchor = actualAnchor2;
         } else {
@@ -162,7 +188,13 @@ public class AutofillPopupWindow extends PopupWindow {
         update(actualAnchor, offsetX, offsetY, width, height);
     }
 
-    static /* synthetic */ void lambda$update$0(int[] mLocationOnScreen, View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+    static /* synthetic */ void lambda$update$0(
+            int[] mLocationOnScreen,
+            View v,
+            int scrollX,
+            int scrollY,
+            int oldScrollX,
+            int oldScrollY) {
         mLocationOnScreen[0] = mLocationOnScreen[0] - (scrollX - oldScrollX);
         mLocationOnScreen[1] = mLocationOnScreen[1] - (scrollY - oldScrollY);
     }
@@ -170,11 +202,20 @@ public class AutofillPopupWindow extends PopupWindow {
     @Override // android.widget.PopupWindow
     protected void update(View anchor, WindowManager.LayoutParams params) {
         int layoutDirection = anchor != null ? anchor.getLayoutDirection() : 3;
-        this.mWindowPresenter.show(params, getTransitionEpicenter(), isLayoutInsetDecor(), layoutDirection);
+        this.mWindowPresenter.show(
+                params, getTransitionEpicenter(), isLayoutInsetDecor(), layoutDirection);
     }
 
     @Override // android.widget.PopupWindow
-    protected boolean findDropDownPosition(View anchor, WindowManager.LayoutParams outParams, int xOffset, int yOffset, int width, int height, int gravity, boolean allowScroll) {
+    protected boolean findDropDownPosition(
+            View anchor,
+            WindowManager.LayoutParams outParams,
+            int xOffset,
+            int yOffset,
+            int width,
+            int height,
+            int gravity,
+            boolean allowScroll) {
         if (this.mFullScreen) {
             outParams.x = xOffset;
             outParams.y = yOffset;
@@ -183,13 +224,23 @@ public class AutofillPopupWindow extends PopupWindow {
             outParams.gravity = gravity;
             return false;
         }
-        return super.findDropDownPosition(anchor, outParams, xOffset, yOffset, width, height, gravity, allowScroll);
+        return super.findDropDownPosition(
+                anchor, outParams, xOffset, yOffset, width, height, gravity, allowScroll);
     }
 
     @Override // android.widget.PopupWindow
     public void showAsDropDown(View anchor, int xoff, int yoff, int gravity) {
         if (Helper.sVerbose) {
-            Log.v(TAG, "showAsDropDown(): anchor=" + anchor + ", xoff=" + xoff + ", yoff=" + yoff + ", isShowing(): " + isShowing());
+            Log.v(
+                    TAG,
+                    "showAsDropDown(): anchor="
+                            + anchor
+                            + ", xoff="
+                            + xoff
+                            + ", yoff="
+                            + yoff
+                            + ", isShowing(): "
+                            + isShowing());
         }
         if (isShowing()) {
             return;
@@ -199,11 +250,21 @@ public class AutofillPopupWindow extends PopupWindow {
         attachToAnchor(anchor, xoff, yoff, gravity);
         WindowManager.LayoutParams p = createPopupLayoutParams(anchor.getWindowToken());
         this.mWindowLayoutParams = p;
-        boolean aboveAnchor = findDropDownPosition(anchor, p, xoff, yoff, p.width, p.height, gravity, getAllowScrollingAnchorParent());
+        boolean aboveAnchor =
+                findDropDownPosition(
+                        anchor,
+                        p,
+                        xoff,
+                        yoff,
+                        p.width,
+                        p.height,
+                        gravity,
+                        getAllowScrollingAnchorParent());
         updateAboveAnchor(aboveAnchor);
         p.accessibilityIdOfAnchor = anchor.getAccessibilityViewId();
         p.packageName = anchor.getContext().getPackageName();
-        this.mWindowPresenter.show(p, getTransitionEpicenter(), isLayoutInsetDecor(), anchor.getLayoutDirection());
+        this.mWindowPresenter.show(
+                p, getTransitionEpicenter(), isLayoutInsetDecor(), anchor.getLayoutDirection());
     }
 
     @Override // android.widget.PopupWindow
@@ -304,7 +365,11 @@ public class AutofillPopupWindow extends PopupWindow {
             this.mPresenter = presenter;
         }
 
-        void show(WindowManager.LayoutParams p, Rect transitionEpicenter, boolean fitsSystemWindows, int layoutDirection) {
+        void show(
+                WindowManager.LayoutParams p,
+                Rect transitionEpicenter,
+                boolean fitsSystemWindows,
+                int layoutDirection) {
             try {
                 this.mPresenter.show(p, transitionEpicenter, fitsSystemWindows, layoutDirection);
             } catch (RemoteException e) {

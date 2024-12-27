@@ -4,8 +4,10 @@ import android.content.Context;
 import android.os.PowerManager;
 import android.os.PowerSaveState;
 import android.util.Log;
+
 import com.android.server.location.LocationServiceThread;
 import com.android.server.location.eventlog.LocationEventLog;
+
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
@@ -30,21 +32,33 @@ public final class SystemLocationPowerSaveModeHelper implements Consumer {
             return;
         }
         this.mLocationPowerSaveMode = i;
-        LocationServiceThread.getHandler().post(new Runnable() { // from class: com.android.server.location.injector.SystemLocationPowerSaveModeHelper$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                SystemLocationPowerSaveModeHelper systemLocationPowerSaveModeHelper = SystemLocationPowerSaveModeHelper.this;
-                int i2 = i;
-                systemLocationPowerSaveModeHelper.getClass();
-                Log.d("LocationManagerService", "location power save mode is now " + PowerManager.locationPowerSaveModeToString(i2));
-                LocationEventLog locationEventLog = LocationEventLog.EVENT_LOG;
-                locationEventLog.getClass();
-                locationEventLog.addLog$1(new LocationEventLog.LocationPowerSaveModeEvent(i2));
-                Iterator it = systemLocationPowerSaveModeHelper.mListeners.iterator();
-                while (it.hasNext()) {
-                    ((LocationPowerSaveModeHelper$LocationPowerSaveModeChangedListener) it.next()).onLocationPowerSaveModeChanged(i2);
-                }
-            }
-        });
+        LocationServiceThread.getHandler()
+                .post(
+                        new Runnable() { // from class:
+                                         // com.android.server.location.injector.SystemLocationPowerSaveModeHelper$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SystemLocationPowerSaveModeHelper
+                                        systemLocationPowerSaveModeHelper =
+                                                SystemLocationPowerSaveModeHelper.this;
+                                int i2 = i;
+                                systemLocationPowerSaveModeHelper.getClass();
+                                Log.d(
+                                        "LocationManagerService",
+                                        "location power save mode is now "
+                                                + PowerManager.locationPowerSaveModeToString(i2));
+                                LocationEventLog locationEventLog = LocationEventLog.EVENT_LOG;
+                                locationEventLog.getClass();
+                                locationEventLog.addLog$1(
+                                        new LocationEventLog.LocationPowerSaveModeEvent(i2));
+                                Iterator it =
+                                        systemLocationPowerSaveModeHelper.mListeners.iterator();
+                                while (it.hasNext()) {
+                                    ((LocationPowerSaveModeHelper$LocationPowerSaveModeChangedListener)
+                                                    it.next())
+                                            .onLocationPowerSaveModeChanged(i2);
+                                }
+                            }
+                        });
     }
 }

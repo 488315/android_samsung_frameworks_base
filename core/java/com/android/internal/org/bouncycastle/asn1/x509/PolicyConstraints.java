@@ -8,6 +8,7 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
@@ -15,7 +16,8 @@ public class PolicyConstraints extends ASN1Object {
     private BigInteger inhibitPolicyMapping;
     private BigInteger requireExplicitPolicyMapping;
 
-    public PolicyConstraints(BigInteger requireExplicitPolicyMapping, BigInteger inhibitPolicyMapping) {
+    public PolicyConstraints(
+            BigInteger requireExplicitPolicyMapping, BigInteger inhibitPolicyMapping) {
         this.requireExplicitPolicyMapping = requireExplicitPolicyMapping;
         this.inhibitPolicyMapping = inhibitPolicyMapping;
     }
@@ -44,7 +46,8 @@ public class PolicyConstraints extends ASN1Object {
     }
 
     public static PolicyConstraints fromExtensions(Extensions extensions) {
-        return getInstance(Extensions.getExtensionParsedValue(extensions, Extension.policyConstraints));
+        return getInstance(
+                Extensions.getExtensionParsedValue(extensions, Extension.policyConstraints));
     }
 
     public BigInteger getRequireExplicitPolicyMapping() {
@@ -55,11 +58,14 @@ public class PolicyConstraints extends ASN1Object {
         return this.inhibitPolicyMapping;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(2);
         if (this.requireExplicitPolicyMapping != null) {
-            v.add(new DERTaggedObject(false, 0, new ASN1Integer(this.requireExplicitPolicyMapping)));
+            v.add(
+                    new DERTaggedObject(
+                            false, 0, new ASN1Integer(this.requireExplicitPolicyMapping)));
         }
         if (this.inhibitPolicyMapping != null) {
             v.add(new DERTaggedObject(false, 1, new ASN1Integer(this.inhibitPolicyMapping)));

@@ -6,6 +6,7 @@ import android.os.RemoteException;
 import android.telephony.SmsMessage;
 import android.telephony.ims.aidl.IImsSmsListener;
 import android.util.Log;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
@@ -30,19 +31,15 @@ public class ImsSmsImplBase {
     private final Object mLock = new Object();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DeliverStatusResult {
-    }
+    public @interface DeliverStatusResult {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SendStatusResult {
-    }
+    public @interface SendStatusResult {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StatusReportResult {
-    }
+    public @interface StatusReportResult {}
 
-    public ImsSmsImplBase() {
-    }
+    public ImsSmsImplBase() {}
 
     public ImsSmsImplBase(Executor executor) {
         this.mExecutor = executor;
@@ -54,7 +51,8 @@ public class ImsSmsImplBase {
         }
     }
 
-    public void sendSms(int token, int messageRef, String format, String smsc, boolean isRetry, byte[] pdu) {
+    public void sendSms(
+            int token, int messageRef, String format, String smsc, boolean isRetry, byte[] pdu) {
         try {
             onSendSmsResult(token, messageRef, 2, 1);
         } catch (RuntimeException e) {
@@ -62,8 +60,7 @@ public class ImsSmsImplBase {
         }
     }
 
-    public void onMemoryAvailable(int token) {
-    }
+    public void onMemoryAvailable(int token) {}
 
     public void acknowledgeSms(int token, int messageRef, int result) {
         Log.e(LOG_TAG, "acknowledgeSms() not implemented.");
@@ -116,7 +113,8 @@ public class ImsSmsImplBase {
     }
 
     @Deprecated
-    public final void onSendSmsResult(int token, int messageRef, int status, int reason) throws RuntimeException {
+    public final void onSendSmsResult(int token, int messageRef, int status, int reason)
+            throws RuntimeException {
         IImsSmsListener listener;
         synchronized (this.mLock) {
             listener = this.mListener;
@@ -131,7 +129,9 @@ public class ImsSmsImplBase {
         }
     }
 
-    public final void onSendSmsResultError(int token, int messageRef, int status, int reason, int networkErrorCode) throws RuntimeException {
+    public final void onSendSmsResultError(
+            int token, int messageRef, int status, int reason, int networkErrorCode)
+            throws RuntimeException {
         IImsSmsListener listener;
         synchronized (this.mLock) {
             listener = this.mListener;
@@ -146,7 +146,9 @@ public class ImsSmsImplBase {
         }
     }
 
-    public final void onSendSmsResultIncludeErrClass(int token, int messageRef, int status, int reason, int networkErrorCode, int errorClass) throws RuntimeException {
+    public final void onSendSmsResultIncludeErrClass(
+            int token, int messageRef, int status, int reason, int networkErrorCode, int errorClass)
+            throws RuntimeException {
         IImsSmsListener listener;
         synchronized (this.mLock) {
             listener = this.mListener;
@@ -155,7 +157,8 @@ public class ImsSmsImplBase {
             throw new RuntimeException("Feature not ready.");
         }
         try {
-            listener.onSendSmsResponse(token, messageRef, status, reason, networkErrorCode, errorClass);
+            listener.onSendSmsResponse(
+                    token, messageRef, status, reason, networkErrorCode, errorClass);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
@@ -176,7 +179,8 @@ public class ImsSmsImplBase {
         }
     }
 
-    public final void onMemoryAvailableResult(int token, int result, int networkErrorCode) throws RuntimeException {
+    public final void onMemoryAvailableResult(int token, int result, int networkErrorCode)
+            throws RuntimeException {
         IImsSmsListener listener;
         synchronized (this.mLock) {
             listener = this.mListener;
@@ -192,7 +196,8 @@ public class ImsSmsImplBase {
     }
 
     @Deprecated
-    public final void onSmsStatusReportReceived(int token, int messageRef, String format, byte[] pdu) throws RuntimeException {
+    public final void onSmsStatusReportReceived(
+            int token, int messageRef, String format, byte[] pdu) throws RuntimeException {
         IImsSmsListener listener;
         synchronized (this.mLock) {
             listener = this.mListener;
@@ -208,7 +213,8 @@ public class ImsSmsImplBase {
         }
     }
 
-    public final void onSmsStatusReportReceived(int token, String format, byte[] pdu) throws RuntimeException {
+    public final void onSmsStatusReportReceived(int token, String format, byte[] pdu)
+            throws RuntimeException {
         IImsSmsListener listener;
         synchronized (this.mLock) {
             listener = this.mListener;
@@ -234,14 +240,11 @@ public class ImsSmsImplBase {
         return "3gpp";
     }
 
-    public void onReady() {
-    }
+    public void onReady() {}
 
-    public void setRetryCount(int token, int retryCount) throws RuntimeException {
-    }
+    public void setRetryCount(int token, int retryCount) throws RuntimeException {}
 
-    public void setSmsc(String smsc) throws RuntimeException {
-    }
+    public void setSmsc(String smsc) throws RuntimeException {}
 
     public final void setDefaultExecutor(Executor executor) {
         if (this.mExecutor == null) {
@@ -250,6 +253,8 @@ public class ImsSmsImplBase {
     }
 
     public Executor getExecutor() {
-        return this.mExecutor != null ? this.mExecutor : new PendingIntent$$ExternalSyntheticLambda0();
+        return this.mExecutor != null
+                ? this.mExecutor
+                : new PendingIntent$$ExternalSyntheticLambda0();
     }
 }

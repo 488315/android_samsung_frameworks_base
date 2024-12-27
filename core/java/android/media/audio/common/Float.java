@@ -3,27 +3,29 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class Float implements Parcelable {
-    public static final Parcelable.Creator<Float> CREATOR = new Parcelable.Creator<Float>() { // from class: android.media.audio.common.Float.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Float createFromParcel(Parcel _aidl_source) {
-            Float _aidl_out = new Float();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<Float> CREATOR =
+            new Parcelable.Creator<Float>() { // from class: android.media.audio.common.Float.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Float createFromParcel(Parcel _aidl_source) {
+                    Float _aidl_out = new Float();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Float[] newArray(int _aidl_size) {
-            return new Float[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Float[] newArray(int _aidl_size) {
+                    return new Float[_aidl_size];
+                }
+            };
     public float value = 0.0f;
 
     @Override // android.os.Parcelable
@@ -84,7 +86,8 @@ public class Float implements Parcelable {
             return false;
         }
         Float that = (Float) other;
-        if (Objects.deepEquals(java.lang.Float.valueOf(this.value), java.lang.Float.valueOf(that.value))) {
+        if (Objects.deepEquals(
+                java.lang.Float.valueOf(this.value), java.lang.Float.valueOf(that.value))) {
             return true;
         }
         return false;

@@ -1,6 +1,7 @@
 package com.android.server.credentials.metrics;
 
 import com.android.server.audio.AudioService$$ExternalSyntheticLambda1;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -21,7 +22,9 @@ public final class InitialPhaseMetric {
     }
 
     public final int[] getUniqueRequestCounts() {
-        return this.mRequestCounts.values().stream().mapToInt(new AudioService$$ExternalSyntheticLambda1(2)).toArray();
+        return this.mRequestCounts.values().stream()
+                .mapToInt(new AudioService$$ExternalSyntheticLambda1(2))
+                .toArray();
     }
 
     public final String[] getUniqueRequestStrings() {

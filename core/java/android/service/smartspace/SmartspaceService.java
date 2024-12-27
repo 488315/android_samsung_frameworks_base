@@ -13,12 +13,12 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.RemoteException;
-import android.service.smartspace.ISmartspaceService;
-import android.service.smartspace.SmartspaceService;
 import android.util.ArrayMap;
 import android.util.Slog;
+
 import com.android.internal.util.function.TriConsumer;
 import com.android.internal.util.function.pooled.PooledLambda;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -31,12 +31,15 @@ public abstract class SmartspaceService extends Service {
     public static final String SERVICE_INTERFACE = "android.service.smartspace.SmartspaceService";
     private static final String TAG = "SmartspaceService";
     private Handler mHandler;
-    private final ArrayMap<SmartspaceSessionId, ArrayList<CallbackWrapper>> mSessionCallbacks = new ArrayMap<>();
+    private final ArrayMap<SmartspaceSessionId, ArrayList<CallbackWrapper>> mSessionCallbacks =
+            new ArrayMap<>();
     private final ISmartspaceService mInterface = new AnonymousClass1();
 
-    public abstract void notifySmartspaceEvent(SmartspaceSessionId smartspaceSessionId, SmartspaceTargetEvent smartspaceTargetEvent);
+    public abstract void notifySmartspaceEvent(
+            SmartspaceSessionId smartspaceSessionId, SmartspaceTargetEvent smartspaceTargetEvent);
 
-    public abstract void onCreateSmartspaceSession(SmartspaceConfig smartspaceConfig, SmartspaceSessionId smartspaceSessionId);
+    public abstract void onCreateSmartspaceSession(
+            SmartspaceConfig smartspaceConfig, SmartspaceSessionId smartspaceSessionId);
 
     public abstract void onDestroy(SmartspaceSessionId smartspaceSessionId);
 
@@ -46,67 +49,117 @@ public abstract class SmartspaceService extends Service {
 
     /* renamed from: android.service.smartspace.SmartspaceService$1, reason: invalid class name */
     class AnonymousClass1 extends ISmartspaceService.Stub {
-        AnonymousClass1() {
+        AnonymousClass1() {}
+
+        @Override // android.service.smartspace.ISmartspaceService
+        public void onCreateSmartspaceSession(
+                SmartspaceConfig smartspaceConfig, SmartspaceSessionId sessionId) {
+            SmartspaceService.this.mHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new TriConsumer() { // from class:
+                                                // android.service.smartspace.SmartspaceService$1$$ExternalSyntheticLambda2
+                                @Override // com.android.internal.util.function.TriConsumer
+                                public final void accept(Object obj, Object obj2, Object obj3) {
+                                    ((SmartspaceService) obj)
+                                            .doCreateSmartspaceSession(
+                                                    (SmartspaceConfig) obj2,
+                                                    (SmartspaceSessionId) obj3);
+                                }
+                            },
+                            SmartspaceService.this,
+                            smartspaceConfig,
+                            sessionId));
         }
 
         @Override // android.service.smartspace.ISmartspaceService
-        public void onCreateSmartspaceSession(SmartspaceConfig smartspaceConfig, SmartspaceSessionId sessionId) {
-            SmartspaceService.this.mHandler.sendMessage(PooledLambda.obtainMessage(new TriConsumer() { // from class: android.service.smartspace.SmartspaceService$1$$ExternalSyntheticLambda2
-                @Override // com.android.internal.util.function.TriConsumer
-                public final void accept(Object obj, Object obj2, Object obj3) {
-                    ((SmartspaceService) obj).doCreateSmartspaceSession((SmartspaceConfig) obj2, (SmartspaceSessionId) obj3);
-                }
-            }, SmartspaceService.this, smartspaceConfig, sessionId));
-        }
-
-        @Override // android.service.smartspace.ISmartspaceService
-        public void notifySmartspaceEvent(SmartspaceSessionId sessionId, SmartspaceTargetEvent event) {
-            SmartspaceService.this.mHandler.sendMessage(PooledLambda.obtainMessage(new TriConsumer() { // from class: android.service.smartspace.SmartspaceService$1$$ExternalSyntheticLambda4
-                @Override // com.android.internal.util.function.TriConsumer
-                public final void accept(Object obj, Object obj2, Object obj3) {
-                    ((SmartspaceService) obj).notifySmartspaceEvent((SmartspaceSessionId) obj2, (SmartspaceTargetEvent) obj3);
-                }
-            }, SmartspaceService.this, sessionId, event));
+        public void notifySmartspaceEvent(
+                SmartspaceSessionId sessionId, SmartspaceTargetEvent event) {
+            SmartspaceService.this.mHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new TriConsumer() { // from class:
+                                                // android.service.smartspace.SmartspaceService$1$$ExternalSyntheticLambda4
+                                @Override // com.android.internal.util.function.TriConsumer
+                                public final void accept(Object obj, Object obj2, Object obj3) {
+                                    ((SmartspaceService) obj)
+                                            .notifySmartspaceEvent(
+                                                    (SmartspaceSessionId) obj2,
+                                                    (SmartspaceTargetEvent) obj3);
+                                }
+                            },
+                            SmartspaceService.this,
+                            sessionId,
+                            event));
         }
 
         @Override // android.service.smartspace.ISmartspaceService
         public void requestSmartspaceUpdate(SmartspaceSessionId sessionId) {
-            SmartspaceService.this.mHandler.sendMessage(PooledLambda.obtainMessage(new BiConsumer() { // from class: android.service.smartspace.SmartspaceService$1$$ExternalSyntheticLambda1
-                @Override // java.util.function.BiConsumer
-                public final void accept(Object obj, Object obj2) {
-                    ((SmartspaceService) obj).doRequestPredictionUpdate((SmartspaceSessionId) obj2);
-                }
-            }, SmartspaceService.this, sessionId));
+            SmartspaceService.this.mHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new BiConsumer() { // from class:
+                                               // android.service.smartspace.SmartspaceService$1$$ExternalSyntheticLambda1
+                                @Override // java.util.function.BiConsumer
+                                public final void accept(Object obj, Object obj2) {
+                                    ((SmartspaceService) obj)
+                                            .doRequestPredictionUpdate((SmartspaceSessionId) obj2);
+                                }
+                            },
+                            SmartspaceService.this,
+                            sessionId));
         }
 
         @Override // android.service.smartspace.ISmartspaceService
-        public void registerSmartspaceUpdates(SmartspaceSessionId sessionId, ISmartspaceCallback callback) {
-            SmartspaceService.this.mHandler.sendMessage(PooledLambda.obtainMessage(new TriConsumer() { // from class: android.service.smartspace.SmartspaceService$1$$ExternalSyntheticLambda0
-                @Override // com.android.internal.util.function.TriConsumer
-                public final void accept(Object obj, Object obj2, Object obj3) {
-                    ((SmartspaceService) obj).doRegisterSmartspaceUpdates((SmartspaceSessionId) obj2, (ISmartspaceCallback) obj3);
-                }
-            }, SmartspaceService.this, sessionId, callback));
+        public void registerSmartspaceUpdates(
+                SmartspaceSessionId sessionId, ISmartspaceCallback callback) {
+            SmartspaceService.this.mHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new TriConsumer() { // from class:
+                                                // android.service.smartspace.SmartspaceService$1$$ExternalSyntheticLambda0
+                                @Override // com.android.internal.util.function.TriConsumer
+                                public final void accept(Object obj, Object obj2, Object obj3) {
+                                    ((SmartspaceService) obj)
+                                            .doRegisterSmartspaceUpdates(
+                                                    (SmartspaceSessionId) obj2,
+                                                    (ISmartspaceCallback) obj3);
+                                }
+                            },
+                            SmartspaceService.this,
+                            sessionId,
+                            callback));
         }
 
         @Override // android.service.smartspace.ISmartspaceService
-        public void unregisterSmartspaceUpdates(SmartspaceSessionId sessionId, ISmartspaceCallback callback) {
-            SmartspaceService.this.mHandler.sendMessage(PooledLambda.obtainMessage(new TriConsumer() { // from class: android.service.smartspace.SmartspaceService$1$$ExternalSyntheticLambda3
-                @Override // com.android.internal.util.function.TriConsumer
-                public final void accept(Object obj, Object obj2, Object obj3) {
-                    ((SmartspaceService) obj).doUnregisterSmartspaceUpdates((SmartspaceSessionId) obj2, (ISmartspaceCallback) obj3);
-                }
-            }, SmartspaceService.this, sessionId, callback));
+        public void unregisterSmartspaceUpdates(
+                SmartspaceSessionId sessionId, ISmartspaceCallback callback) {
+            SmartspaceService.this.mHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new TriConsumer() { // from class:
+                                                // android.service.smartspace.SmartspaceService$1$$ExternalSyntheticLambda3
+                                @Override // com.android.internal.util.function.TriConsumer
+                                public final void accept(Object obj, Object obj2, Object obj3) {
+                                    ((SmartspaceService) obj)
+                                            .doUnregisterSmartspaceUpdates(
+                                                    (SmartspaceSessionId) obj2,
+                                                    (ISmartspaceCallback) obj3);
+                                }
+                            },
+                            SmartspaceService.this,
+                            sessionId,
+                            callback));
         }
 
         @Override // android.service.smartspace.ISmartspaceService
         public void onDestroySmartspaceSession(SmartspaceSessionId sessionId) {
-            SmartspaceService.this.mHandler.sendMessage(PooledLambda.obtainMessage(new BiConsumer() { // from class: android.service.smartspace.SmartspaceService$1$$ExternalSyntheticLambda5
-                @Override // java.util.function.BiConsumer
-                public final void accept(Object obj, Object obj2) {
-                    ((SmartspaceService) obj).doDestroy((SmartspaceSessionId) obj2);
-                }
-            }, SmartspaceService.this, sessionId));
+            SmartspaceService.this.mHandler.sendMessage(
+                    PooledLambda.obtainMessage(
+                            new BiConsumer() { // from class:
+                                               // android.service.smartspace.SmartspaceService$1$$ExternalSyntheticLambda5
+                                @Override // java.util.function.BiConsumer
+                                public final void accept(Object obj, Object obj2) {
+                                    ((SmartspaceService) obj).doDestroy((SmartspaceSessionId) obj2);
+                                }
+                            },
+                            SmartspaceService.this,
+                            sessionId));
         }
     }
 
@@ -121,7 +174,11 @@ public abstract class SmartspaceService extends Service {
         if (SERVICE_INTERFACE.equals(intent.getAction())) {
             return this.mInterface.asBinder();
         }
-        Slog.w(TAG, "Tried to bind to wrong intent (should be android.service.smartspace.SmartspaceService: " + intent);
+        Slog.w(
+                TAG,
+                "Tried to bind to wrong intent (should be"
+                    + " android.service.smartspace.SmartspaceService: "
+                        + intent);
         return null;
     }
 
@@ -132,7 +189,8 @@ public abstract class SmartspaceService extends Service {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void doRegisterSmartspaceUpdates(SmartspaceSessionId sessionId, ISmartspaceCallback callback) {
+    public void doRegisterSmartspaceUpdates(
+            SmartspaceSessionId sessionId, ISmartspaceCallback callback) {
         final ArrayList<CallbackWrapper> callbacks = this.mSessionCallbacks.get(sessionId);
         if (callbacks == null) {
             Slog.e(TAG, "Failed to register for updates for unknown session: " + sessionId);
@@ -140,27 +198,37 @@ public abstract class SmartspaceService extends Service {
         }
         CallbackWrapper wrapper = findCallbackWrapper(callbacks, callback);
         if (wrapper == null) {
-            callbacks.add(new CallbackWrapper(callback, new Consumer() { // from class: android.service.smartspace.SmartspaceService$$ExternalSyntheticLambda1
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    SmartspaceService.this.lambda$doRegisterSmartspaceUpdates$1(callbacks, (SmartspaceService.CallbackWrapper) obj);
-                }
-            }));
+            callbacks.add(
+                    new CallbackWrapper(
+                            callback,
+                            new Consumer() { // from class:
+                                             // android.service.smartspace.SmartspaceService$$ExternalSyntheticLambda1
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    SmartspaceService.this.lambda$doRegisterSmartspaceUpdates$1(
+                                            callbacks, (SmartspaceService.CallbackWrapper) obj);
+                                }
+                            }));
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$doRegisterSmartspaceUpdates$1(final ArrayList callbacks, final CallbackWrapper callbackWrapper) {
-        this.mHandler.post(new Runnable() { // from class: android.service.smartspace.SmartspaceService$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                SmartspaceService.this.lambda$doRegisterSmartspaceUpdates$0(callbacks, callbackWrapper);
-            }
-        });
+    public /* synthetic */ void lambda$doRegisterSmartspaceUpdates$1(
+            final ArrayList callbacks, final CallbackWrapper callbackWrapper) {
+        this.mHandler.post(
+                new Runnable() { // from class:
+                                 // android.service.smartspace.SmartspaceService$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        SmartspaceService.this.lambda$doRegisterSmartspaceUpdates$0(
+                                callbacks, callbackWrapper);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void doUnregisterSmartspaceUpdates(SmartspaceSessionId sessionId, ISmartspaceCallback callback) {
+    public void doUnregisterSmartspaceUpdates(
+            SmartspaceSessionId sessionId, ISmartspaceCallback callback) {
         ArrayList<CallbackWrapper> callbacks = this.mSessionCallbacks.get(sessionId);
         if (callbacks == null) {
             Slog.e(TAG, "Failed to unregister for updates for unknown session: " + sessionId);
@@ -178,7 +246,8 @@ public abstract class SmartspaceService extends Service {
         }
     }
 
-    private CallbackWrapper findCallbackWrapper(ArrayList<CallbackWrapper> callbacks, ISmartspaceCallback callback) {
+    private CallbackWrapper findCallbackWrapper(
+            ArrayList<CallbackWrapper> callbacks, ISmartspaceCallback callback) {
         for (int i = callbacks.size() - 1; i >= 0; i--) {
             if (callbacks.get(i).isCallback(callback)) {
                 return callbacks.get(i);
@@ -189,7 +258,8 @@ public abstract class SmartspaceService extends Service {
 
     /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: removeCallbackWrapper, reason: merged with bridge method [inline-methods] */
-    public void lambda$doRegisterSmartspaceUpdates$0(ArrayList<CallbackWrapper> callbacks, CallbackWrapper wrapper) {
+    public void lambda$doRegisterSmartspaceUpdates$0(
+            ArrayList<CallbackWrapper> callbacks, CallbackWrapper wrapper) {
         if (callbacks == null || wrapper == null) {
             return;
         }
@@ -202,17 +272,20 @@ public abstract class SmartspaceService extends Service {
         super.onDestroy();
         ArrayList<CallbackWrapper> callbacks = this.mSessionCallbacks.remove(sessionId);
         if (callbacks != null) {
-            callbacks.forEach(new Consumer() { // from class: android.service.smartspace.SmartspaceService$$ExternalSyntheticLambda2
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ((SmartspaceService.CallbackWrapper) obj).destroy();
-                }
-            });
+            callbacks.forEach(
+                    new Consumer() { // from class:
+                                     // android.service.smartspace.SmartspaceService$$ExternalSyntheticLambda2
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            ((SmartspaceService.CallbackWrapper) obj).destroy();
+                        }
+                    });
         }
         onDestroySmartspaceSession(sessionId);
     }
 
-    public final void updateSmartspaceTargets(SmartspaceSessionId sessionId, List<SmartspaceTarget> targets) {
+    public final void updateSmartspaceTargets(
+            SmartspaceSessionId sessionId, List<SmartspaceTarget> targets) {
         List<CallbackWrapper> callbacks = this.mSessionCallbacks.get(sessionId);
         if (callbacks != null) {
             for (CallbackWrapper callback : callbacks) {
@@ -222,7 +295,8 @@ public abstract class SmartspaceService extends Service {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    static final class CallbackWrapper implements Consumer<List<SmartspaceTarget>>, IBinder.DeathRecipient {
+    static final class CallbackWrapper
+            implements Consumer<List<SmartspaceTarget>>, IBinder.DeathRecipient {
         private ISmartspaceCallback mCallback;
         private final Consumer<CallbackWrapper> mOnBinderDied;
 

@@ -22,10 +22,11 @@ public final class DisplayWindowSettings$SettingsProvider$SettingsEntry {
     public int mWindowingMode = 0;
     public int mRemoveContentMode = 0;
 
-    public DisplayWindowSettings$SettingsProvider$SettingsEntry() {
-    }
+    public DisplayWindowSettings$SettingsProvider$SettingsEntry() {}
 
-    public DisplayWindowSettings$SettingsProvider$SettingsEntry(DisplayWindowSettings$SettingsProvider$SettingsEntry displayWindowSettings$SettingsProvider$SettingsEntry) {
+    public DisplayWindowSettings$SettingsProvider$SettingsEntry(
+            DisplayWindowSettings$SettingsProvider$SettingsEntry
+                    displayWindowSettings$SettingsProvider$SettingsEntry) {
         setTo(displayWindowSettings$SettingsProvider$SettingsEntry);
     }
 
@@ -33,22 +34,103 @@ public final class DisplayWindowSettings$SettingsProvider$SettingsEntry {
         if (this == obj) {
             return true;
         }
-        if (obj == null || DisplayWindowSettings$SettingsProvider$SettingsEntry.class != obj.getClass()) {
+        if (obj == null
+                || DisplayWindowSettings$SettingsProvider$SettingsEntry.class != obj.getClass()) {
             return false;
         }
-        DisplayWindowSettings$SettingsProvider$SettingsEntry displayWindowSettings$SettingsProvider$SettingsEntry = (DisplayWindowSettings$SettingsProvider$SettingsEntry) obj;
-        return this.mWindowingMode == displayWindowSettings$SettingsProvider$SettingsEntry.mWindowingMode && this.mForcedWidth == displayWindowSettings$SettingsProvider$SettingsEntry.mForcedWidth && this.mForcedHeight == displayWindowSettings$SettingsProvider$SettingsEntry.mForcedHeight && this.mForcedDensity == displayWindowSettings$SettingsProvider$SettingsEntry.mForcedDensity && this.mRemoveContentMode == displayWindowSettings$SettingsProvider$SettingsEntry.mRemoveContentMode && Objects.equals(this.mUserRotationMode, displayWindowSettings$SettingsProvider$SettingsEntry.mUserRotationMode) && Objects.equals(this.mUserRotation, displayWindowSettings$SettingsProvider$SettingsEntry.mUserRotation) && Objects.equals(this.mForcedScalingMode, displayWindowSettings$SettingsProvider$SettingsEntry.mForcedScalingMode) && Objects.equals(this.mShouldShowWithInsecureKeyguard, displayWindowSettings$SettingsProvider$SettingsEntry.mShouldShowWithInsecureKeyguard) && Objects.equals(this.mShouldShowSystemDecors, displayWindowSettings$SettingsProvider$SettingsEntry.mShouldShowSystemDecors) && Objects.equals(this.mIsHomeSupported, displayWindowSettings$SettingsProvider$SettingsEntry.mIsHomeSupported) && Objects.equals(this.mImePolicy, displayWindowSettings$SettingsProvider$SettingsEntry.mImePolicy) && Objects.equals(this.mFixedToUserRotation, displayWindowSettings$SettingsProvider$SettingsEntry.mFixedToUserRotation) && Objects.equals(this.mIgnoreOrientationRequest, displayWindowSettings$SettingsProvider$SettingsEntry.mIgnoreOrientationRequest) && Objects.equals(this.mIgnoreDisplayCutout, displayWindowSettings$SettingsProvider$SettingsEntry.mIgnoreDisplayCutout) && Objects.equals(this.mDontMoveToTop, displayWindowSettings$SettingsProvider$SettingsEntry.mDontMoveToTop);
+        DisplayWindowSettings$SettingsProvider$SettingsEntry
+                displayWindowSettings$SettingsProvider$SettingsEntry =
+                        (DisplayWindowSettings$SettingsProvider$SettingsEntry) obj;
+        return this.mWindowingMode
+                        == displayWindowSettings$SettingsProvider$SettingsEntry.mWindowingMode
+                && this.mForcedWidth
+                        == displayWindowSettings$SettingsProvider$SettingsEntry.mForcedWidth
+                && this.mForcedHeight
+                        == displayWindowSettings$SettingsProvider$SettingsEntry.mForcedHeight
+                && this.mForcedDensity
+                        == displayWindowSettings$SettingsProvider$SettingsEntry.mForcedDensity
+                && this.mRemoveContentMode
+                        == displayWindowSettings$SettingsProvider$SettingsEntry.mRemoveContentMode
+                && Objects.equals(
+                        this.mUserRotationMode,
+                        displayWindowSettings$SettingsProvider$SettingsEntry.mUserRotationMode)
+                && Objects.equals(
+                        this.mUserRotation,
+                        displayWindowSettings$SettingsProvider$SettingsEntry.mUserRotation)
+                && Objects.equals(
+                        this.mForcedScalingMode,
+                        displayWindowSettings$SettingsProvider$SettingsEntry.mForcedScalingMode)
+                && Objects.equals(
+                        this.mShouldShowWithInsecureKeyguard,
+                        displayWindowSettings$SettingsProvider$SettingsEntry
+                                .mShouldShowWithInsecureKeyguard)
+                && Objects.equals(
+                        this.mShouldShowSystemDecors,
+                        displayWindowSettings$SettingsProvider$SettingsEntry
+                                .mShouldShowSystemDecors)
+                && Objects.equals(
+                        this.mIsHomeSupported,
+                        displayWindowSettings$SettingsProvider$SettingsEntry.mIsHomeSupported)
+                && Objects.equals(
+                        this.mImePolicy,
+                        displayWindowSettings$SettingsProvider$SettingsEntry.mImePolicy)
+                && Objects.equals(
+                        this.mFixedToUserRotation,
+                        displayWindowSettings$SettingsProvider$SettingsEntry.mFixedToUserRotation)
+                && Objects.equals(
+                        this.mIgnoreOrientationRequest,
+                        displayWindowSettings$SettingsProvider$SettingsEntry
+                                .mIgnoreOrientationRequest)
+                && Objects.equals(
+                        this.mIgnoreDisplayCutout,
+                        displayWindowSettings$SettingsProvider$SettingsEntry.mIgnoreDisplayCutout)
+                && Objects.equals(
+                        this.mDontMoveToTop,
+                        displayWindowSettings$SettingsProvider$SettingsEntry.mDontMoveToTop);
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mWindowingMode), this.mUserRotationMode, this.mUserRotation, Integer.valueOf(this.mForcedWidth), Integer.valueOf(this.mForcedHeight), Integer.valueOf(this.mForcedDensity), this.mForcedScalingMode, Integer.valueOf(this.mRemoveContentMode), this.mShouldShowWithInsecureKeyguard, this.mShouldShowSystemDecors, this.mIsHomeSupported, this.mImePolicy, this.mFixedToUserRotation, this.mIgnoreOrientationRequest, this.mIgnoreDisplayCutout, this.mDontMoveToTop);
+        return Objects.hash(
+                Integer.valueOf(this.mWindowingMode),
+                this.mUserRotationMode,
+                this.mUserRotation,
+                Integer.valueOf(this.mForcedWidth),
+                Integer.valueOf(this.mForcedHeight),
+                Integer.valueOf(this.mForcedDensity),
+                this.mForcedScalingMode,
+                Integer.valueOf(this.mRemoveContentMode),
+                this.mShouldShowWithInsecureKeyguard,
+                this.mShouldShowSystemDecors,
+                this.mIsHomeSupported,
+                this.mImePolicy,
+                this.mFixedToUserRotation,
+                this.mIgnoreOrientationRequest,
+                this.mIgnoreDisplayCutout,
+                this.mDontMoveToTop);
     }
 
     public final boolean isEmpty() {
-        return this.mWindowingMode == 0 && this.mUserRotationMode == null && this.mUserRotation == null && this.mForcedWidth == 0 && this.mForcedHeight == 0 && this.mForcedDensity == 0 && this.mForcedScalingMode == null && this.mRemoveContentMode == 0 && this.mShouldShowWithInsecureKeyguard == null && this.mShouldShowSystemDecors == null && this.mIsHomeSupported == null && this.mImePolicy == null && this.mFixedToUserRotation == null && this.mIgnoreOrientationRequest == null && this.mIgnoreDisplayCutout == null && this.mDontMoveToTop == null;
+        return this.mWindowingMode == 0
+                && this.mUserRotationMode == null
+                && this.mUserRotation == null
+                && this.mForcedWidth == 0
+                && this.mForcedHeight == 0
+                && this.mForcedDensity == 0
+                && this.mForcedScalingMode == null
+                && this.mRemoveContentMode == 0
+                && this.mShouldShowWithInsecureKeyguard == null
+                && this.mShouldShowSystemDecors == null
+                && this.mIsHomeSupported == null
+                && this.mImePolicy == null
+                && this.mFixedToUserRotation == null
+                && this.mIgnoreOrientationRequest == null
+                && this.mIgnoreDisplayCutout == null
+                && this.mDontMoveToTop == null;
     }
 
-    public final boolean setTo(DisplayWindowSettings$SettingsProvider$SettingsEntry displayWindowSettings$SettingsProvider$SettingsEntry) {
+    public final boolean setTo(
+            DisplayWindowSettings$SettingsProvider$SettingsEntry
+                    displayWindowSettings$SettingsProvider$SettingsEntry) {
         boolean z;
         int i = displayWindowSettings$SettingsProvider$SettingsEntry.mWindowingMode;
         if (i != this.mWindowingMode) {
@@ -57,11 +139,16 @@ public final class DisplayWindowSettings$SettingsProvider$SettingsEntry {
         } else {
             z = false;
         }
-        if (!Objects.equals(displayWindowSettings$SettingsProvider$SettingsEntry.mUserRotationMode, this.mUserRotationMode)) {
-            this.mUserRotationMode = displayWindowSettings$SettingsProvider$SettingsEntry.mUserRotationMode;
+        if (!Objects.equals(
+                displayWindowSettings$SettingsProvider$SettingsEntry.mUserRotationMode,
+                this.mUserRotationMode)) {
+            this.mUserRotationMode =
+                    displayWindowSettings$SettingsProvider$SettingsEntry.mUserRotationMode;
             z = true;
         }
-        if (!Objects.equals(displayWindowSettings$SettingsProvider$SettingsEntry.mUserRotation, this.mUserRotation)) {
+        if (!Objects.equals(
+                displayWindowSettings$SettingsProvider$SettingsEntry.mUserRotation,
+                this.mUserRotation)) {
             this.mUserRotation = displayWindowSettings$SettingsProvider$SettingsEntry.mUserRotation;
             z = true;
         }
@@ -80,8 +167,11 @@ public final class DisplayWindowSettings$SettingsProvider$SettingsEntry {
             this.mForcedDensity = i4;
             z = true;
         }
-        if (!Objects.equals(displayWindowSettings$SettingsProvider$SettingsEntry.mForcedScalingMode, this.mForcedScalingMode)) {
-            this.mForcedScalingMode = displayWindowSettings$SettingsProvider$SettingsEntry.mForcedScalingMode;
+        if (!Objects.equals(
+                displayWindowSettings$SettingsProvider$SettingsEntry.mForcedScalingMode,
+                this.mForcedScalingMode)) {
+            this.mForcedScalingMode =
+                    displayWindowSettings$SettingsProvider$SettingsEntry.mForcedScalingMode;
             z = true;
         }
         int i5 = displayWindowSettings$SettingsProvider$SettingsEntry.mRemoveContentMode;
@@ -89,35 +179,58 @@ public final class DisplayWindowSettings$SettingsProvider$SettingsEntry {
             this.mRemoveContentMode = i5;
             z = true;
         }
-        if (!Objects.equals(displayWindowSettings$SettingsProvider$SettingsEntry.mShouldShowWithInsecureKeyguard, this.mShouldShowWithInsecureKeyguard)) {
-            this.mShouldShowWithInsecureKeyguard = displayWindowSettings$SettingsProvider$SettingsEntry.mShouldShowWithInsecureKeyguard;
+        if (!Objects.equals(
+                displayWindowSettings$SettingsProvider$SettingsEntry
+                        .mShouldShowWithInsecureKeyguard,
+                this.mShouldShowWithInsecureKeyguard)) {
+            this.mShouldShowWithInsecureKeyguard =
+                    displayWindowSettings$SettingsProvider$SettingsEntry
+                            .mShouldShowWithInsecureKeyguard;
             z = true;
         }
-        if (!Objects.equals(displayWindowSettings$SettingsProvider$SettingsEntry.mShouldShowSystemDecors, this.mShouldShowSystemDecors)) {
-            this.mShouldShowSystemDecors = displayWindowSettings$SettingsProvider$SettingsEntry.mShouldShowSystemDecors;
+        if (!Objects.equals(
+                displayWindowSettings$SettingsProvider$SettingsEntry.mShouldShowSystemDecors,
+                this.mShouldShowSystemDecors)) {
+            this.mShouldShowSystemDecors =
+                    displayWindowSettings$SettingsProvider$SettingsEntry.mShouldShowSystemDecors;
             z = true;
         }
-        if (!Objects.equals(displayWindowSettings$SettingsProvider$SettingsEntry.mIsHomeSupported, this.mIsHomeSupported)) {
-            this.mIsHomeSupported = displayWindowSettings$SettingsProvider$SettingsEntry.mIsHomeSupported;
+        if (!Objects.equals(
+                displayWindowSettings$SettingsProvider$SettingsEntry.mIsHomeSupported,
+                this.mIsHomeSupported)) {
+            this.mIsHomeSupported =
+                    displayWindowSettings$SettingsProvider$SettingsEntry.mIsHomeSupported;
             z = true;
         }
-        if (!Objects.equals(displayWindowSettings$SettingsProvider$SettingsEntry.mImePolicy, this.mImePolicy)) {
+        if (!Objects.equals(
+                displayWindowSettings$SettingsProvider$SettingsEntry.mImePolicy, this.mImePolicy)) {
             this.mImePolicy = displayWindowSettings$SettingsProvider$SettingsEntry.mImePolicy;
             z = true;
         }
-        if (!Objects.equals(displayWindowSettings$SettingsProvider$SettingsEntry.mFixedToUserRotation, this.mFixedToUserRotation)) {
-            this.mFixedToUserRotation = displayWindowSettings$SettingsProvider$SettingsEntry.mFixedToUserRotation;
+        if (!Objects.equals(
+                displayWindowSettings$SettingsProvider$SettingsEntry.mFixedToUserRotation,
+                this.mFixedToUserRotation)) {
+            this.mFixedToUserRotation =
+                    displayWindowSettings$SettingsProvider$SettingsEntry.mFixedToUserRotation;
             z = true;
         }
-        if (!Objects.equals(displayWindowSettings$SettingsProvider$SettingsEntry.mIgnoreOrientationRequest, this.mIgnoreOrientationRequest)) {
-            this.mIgnoreOrientationRequest = displayWindowSettings$SettingsProvider$SettingsEntry.mIgnoreOrientationRequest;
+        if (!Objects.equals(
+                displayWindowSettings$SettingsProvider$SettingsEntry.mIgnoreOrientationRequest,
+                this.mIgnoreOrientationRequest)) {
+            this.mIgnoreOrientationRequest =
+                    displayWindowSettings$SettingsProvider$SettingsEntry.mIgnoreOrientationRequest;
             z = true;
         }
-        if (!Objects.equals(displayWindowSettings$SettingsProvider$SettingsEntry.mIgnoreDisplayCutout, this.mIgnoreDisplayCutout)) {
-            this.mIgnoreDisplayCutout = displayWindowSettings$SettingsProvider$SettingsEntry.mIgnoreDisplayCutout;
+        if (!Objects.equals(
+                displayWindowSettings$SettingsProvider$SettingsEntry.mIgnoreDisplayCutout,
+                this.mIgnoreDisplayCutout)) {
+            this.mIgnoreDisplayCutout =
+                    displayWindowSettings$SettingsProvider$SettingsEntry.mIgnoreDisplayCutout;
             z = true;
         }
-        if (Objects.equals(displayWindowSettings$SettingsProvider$SettingsEntry.mDontMoveToTop, this.mDontMoveToTop)) {
+        if (Objects.equals(
+                displayWindowSettings$SettingsProvider$SettingsEntry.mDontMoveToTop,
+                this.mDontMoveToTop)) {
             return z;
         }
         this.mDontMoveToTop = displayWindowSettings$SettingsProvider$SettingsEntry.mDontMoveToTop;
@@ -125,6 +238,38 @@ public final class DisplayWindowSettings$SettingsProvider$SettingsEntry {
     }
 
     public final String toString() {
-        return "SettingsEntry{mWindowingMode=" + this.mWindowingMode + ", mUserRotationMode=" + this.mUserRotationMode + ", mUserRotation=" + this.mUserRotation + ", mForcedWidth=" + this.mForcedWidth + ", mForcedHeight=" + this.mForcedHeight + ", mForcedDensity=" + this.mForcedDensity + ", mForcedScalingMode=" + this.mForcedScalingMode + ", mRemoveContentMode=" + this.mRemoveContentMode + ", mShouldShowWithInsecureKeyguard=" + this.mShouldShowWithInsecureKeyguard + ", mShouldShowSystemDecors=" + this.mShouldShowSystemDecors + ", mIsHomeSupported=" + this.mIsHomeSupported + ", mShouldShowIme=" + this.mImePolicy + ", mFixedToUserRotation=" + this.mFixedToUserRotation + ", mIgnoreOrientationRequest=" + this.mIgnoreOrientationRequest + ", mIgnoreDisplayCutout=" + this.mIgnoreDisplayCutout + ", mDontMoveToTop=" + this.mDontMoveToTop + '}';
+        return "SettingsEntry{mWindowingMode="
+                + this.mWindowingMode
+                + ", mUserRotationMode="
+                + this.mUserRotationMode
+                + ", mUserRotation="
+                + this.mUserRotation
+                + ", mForcedWidth="
+                + this.mForcedWidth
+                + ", mForcedHeight="
+                + this.mForcedHeight
+                + ", mForcedDensity="
+                + this.mForcedDensity
+                + ", mForcedScalingMode="
+                + this.mForcedScalingMode
+                + ", mRemoveContentMode="
+                + this.mRemoveContentMode
+                + ", mShouldShowWithInsecureKeyguard="
+                + this.mShouldShowWithInsecureKeyguard
+                + ", mShouldShowSystemDecors="
+                + this.mShouldShowSystemDecors
+                + ", mIsHomeSupported="
+                + this.mIsHomeSupported
+                + ", mShouldShowIme="
+                + this.mImePolicy
+                + ", mFixedToUserRotation="
+                + this.mFixedToUserRotation
+                + ", mIgnoreOrientationRequest="
+                + this.mIgnoreOrientationRequest
+                + ", mIgnoreDisplayCutout="
+                + this.mIgnoreDisplayCutout
+                + ", mDontMoveToTop="
+                + this.mDontMoveToTop
+                + '}';
     }
 }

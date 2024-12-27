@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.asn1;
 
 import com.android.internal.org.bouncycastle.util.io.Streams;
+
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -34,7 +35,11 @@ class DefiniteLengthInputStream extends LimitedInputStream {
         }
         int b = this._in.read();
         if (b < 0) {
-            throw new EOFException("DEF length " + this._originalLength + " object truncated by " + this._remaining);
+            throw new EOFException(
+                    "DEF length "
+                            + this._originalLength
+                            + " object truncated by "
+                            + this._remaining);
         }
         int i = this._remaining - 1;
         this._remaining = i;
@@ -52,7 +57,11 @@ class DefiniteLengthInputStream extends LimitedInputStream {
         int toRead = Math.min(len, this._remaining);
         int numRead = this._in.read(buf, off, toRead);
         if (numRead < 0) {
-            throw new EOFException("DEF length " + this._originalLength + " object truncated by " + this._remaining);
+            throw new EOFException(
+                    "DEF length "
+                            + this._originalLength
+                            + " object truncated by "
+                            + this._remaining);
         }
         int i = this._remaining - numRead;
         this._remaining = i;
@@ -71,12 +80,20 @@ class DefiniteLengthInputStream extends LimitedInputStream {
         }
         int limit = getLimit();
         if (this._remaining >= limit) {
-            throw new IOException("corrupted stream - out of bounds length found: " + this._remaining + " >= " + limit);
+            throw new IOException(
+                    "corrupted stream - out of bounds length found: "
+                            + this._remaining
+                            + " >= "
+                            + limit);
         }
         int readFully = this._remaining - Streams.readFully(this._in, buf);
         this._remaining = readFully;
         if (readFully != 0) {
-            throw new EOFException("DEF length " + this._originalLength + " object truncated by " + this._remaining);
+            throw new EOFException(
+                    "DEF length "
+                            + this._originalLength
+                            + " object truncated by "
+                            + this._remaining);
         }
         setParentEofDetect(true);
     }
@@ -87,13 +104,21 @@ class DefiniteLengthInputStream extends LimitedInputStream {
         }
         int limit = getLimit();
         if (this._remaining >= limit) {
-            throw new IOException("corrupted stream - out of bounds length found: " + this._remaining + " >= " + limit);
+            throw new IOException(
+                    "corrupted stream - out of bounds length found: "
+                            + this._remaining
+                            + " >= "
+                            + limit);
         }
         byte[] bytes = new byte[this._remaining];
         int readFully = this._remaining - Streams.readFully(this._in, bytes);
         this._remaining = readFully;
         if (readFully != 0) {
-            throw new EOFException("DEF length " + this._originalLength + " object truncated by " + this._remaining);
+            throw new EOFException(
+                    "DEF length "
+                            + this._originalLength
+                            + " object truncated by "
+                            + this._remaining);
         }
         setParentEofDetect(true);
         return bytes;

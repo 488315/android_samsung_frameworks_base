@@ -17,12 +17,14 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.animation.Interpolator;
 import android.view.animation.PathInterpolator;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 
 /* loaded from: classes2.dex */
 final class KeyButtonRipple extends Drawable {
-    private static final Interpolator ALPHA_OUT_INTERPOLATOR = new PathInterpolator(0.0f, 0.0f, 0.8f, 1.0f);
+    private static final Interpolator ALPHA_OUT_INTERPOLATOR =
+            new PathInterpolator(0.0f, 0.0f, 0.8f, 1.0f);
     private static final int ANIMATION_DURATION_FADE = 450;
     private static final int ANIMATION_DURATION_SCALE = 350;
     private static final float GLOW_MAX_ALPHA = 0.2f;
@@ -52,20 +54,26 @@ final class KeyButtonRipple extends Drawable {
     private final Handler mHandler = new Handler();
     private final HashSet<Animator> mRunningAnimations = new HashSet<>();
     private final ArrayList<Animator> mTmpArray = new ArrayList<>();
-    private final TraceAnimatorListener mExitHwTraceAnimator = new TraceAnimatorListener("exitHardware");
-    private final TraceAnimatorListener mEnterHwTraceAnimator = new TraceAnimatorListener("enterHardware");
+    private final TraceAnimatorListener mExitHwTraceAnimator =
+            new TraceAnimatorListener("exitHardware");
+    private final TraceAnimatorListener mEnterHwTraceAnimator =
+            new TraceAnimatorListener("enterHardware");
     private Type mType = Type.ROUNDED_RECT;
-    private final AnimatorListenerAdapter mAnimatorListener = new AnimatorListenerAdapter() { // from class: android.inputmethodservice.navigationbar.KeyButtonRipple.1
-        @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-        public void onAnimationEnd(Animator animation) {
-            KeyButtonRipple.this.mRunningAnimations.remove(animation);
-            if (KeyButtonRipple.this.mRunningAnimations.isEmpty() && !KeyButtonRipple.this.mPressed) {
-                KeyButtonRipple.this.mVisible = false;
-                KeyButtonRipple.this.mDrawingHardwareGlow = false;
-                KeyButtonRipple.this.invalidateSelf();
-            }
-        }
-    };
+    private final AnimatorListenerAdapter mAnimatorListener =
+            new AnimatorListenerAdapter() { // from class:
+                // android.inputmethodservice.navigationbar.KeyButtonRipple.1
+                @Override // android.animation.AnimatorListenerAdapter,
+                // android.animation.Animator.AnimatorListener
+                public void onAnimationEnd(Animator animation) {
+                    KeyButtonRipple.this.mRunningAnimations.remove(animation);
+                    if (KeyButtonRipple.this.mRunningAnimations.isEmpty()
+                            && !KeyButtonRipple.this.mPressed) {
+                        KeyButtonRipple.this.mVisible = false;
+                        KeyButtonRipple.this.mDrawingHardwareGlow = false;
+                        KeyButtonRipple.this.invalidateSelf();
+                    }
+                }
+            };
 
     public enum Type {
         OVAL,
@@ -79,7 +87,11 @@ final class KeyButtonRipple extends Drawable {
     }
 
     public void updateResources() {
-        this.mMaxWidth = this.mTargetView.getContext().getResources().getDimensionPixelSize(this.mMaxWidthResource);
+        this.mMaxWidth =
+                this.mTargetView
+                        .getContext()
+                        .getResources()
+                        .getDimensionPixelSize(this.mMaxWidthResource);
         invalidateSelf();
     }
 
@@ -141,12 +153,10 @@ final class KeyButtonRipple extends Drawable {
     }
 
     @Override // android.graphics.drawable.Drawable
-    public void setAlpha(int alpha) {
-    }
+    public void setAlpha(int alpha) {}
 
     @Override // android.graphics.drawable.Drawable
-    public void setColorFilter(ColorFilter colorFilter) {
-    }
+    public void setColorFilter(ColorFilter colorFilter) {}
 
     @Override // android.graphics.drawable.Drawable
     public int getOpacity() {
@@ -160,7 +170,14 @@ final class KeyButtonRipple extends Drawable {
     private void drawHardware(RecordingCanvas c) {
         if (this.mDrawingHardwareGlow) {
             if (this.mType == Type.ROUNDED_RECT) {
-                c.drawRoundRect(this.mLeftProp, this.mTopProp, this.mRightProp, this.mBottomProp, this.mRxProp, this.mRyProp, this.mPaintProp);
+                c.drawRoundRect(
+                        this.mLeftProp,
+                        this.mTopProp,
+                        this.mRightProp,
+                        this.mBottomProp,
+                        this.mRxProp,
+                        this.mRyProp,
+                        this.mPaintProp);
                 return;
             }
             CanvasProperty<Float> cx = CanvasProperty.createFloat(getBounds().width() / 2);
@@ -280,12 +297,15 @@ final class KeyButtonRipple extends Drawable {
             if (this.mDelayTouchFeedback) {
                 if (this.mRunningAnimations.isEmpty()) {
                     this.mHandler.removeCallbacksAndMessages(null);
-                    this.mHandler.postDelayed(new Runnable() { // from class: android.inputmethodservice.navigationbar.KeyButtonRipple$$ExternalSyntheticLambda1
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            KeyButtonRipple.this.enterSoftware();
-                        }
-                    }, ViewConfiguration.getTapTimeout());
+                    this.mHandler.postDelayed(
+                            new Runnable() { // from class:
+                                // android.inputmethodservice.navigationbar.KeyButtonRipple$$ExternalSyntheticLambda1
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    KeyButtonRipple.this.enterSoftware();
+                                }
+                            },
+                            ViewConfiguration.getTapTimeout());
                     return;
                 } else {
                     if (this.mVisible) {
@@ -306,7 +326,8 @@ final class KeyButtonRipple extends Drawable {
         endAnimations("enterSoftware", true);
         this.mVisible = true;
         this.mGlowAlpha = getMaxGlowAlpha();
-        ObjectAnimator scaleAnimator = ObjectAnimator.ofFloat(this, "glowScale", 0.0f, GLOW_MAX_SCALE_FACTOR);
+        ObjectAnimator scaleAnimator =
+                ObjectAnimator.ofFloat(this, "glowScale", 0.0f, GLOW_MAX_SCALE_FACTOR);
         scaleAnimator.setInterpolator(this.mInterpolator);
         scaleAnimator.setDuration(350L);
         scaleAnimator.addListener(this.mAnimatorListener);
@@ -318,7 +339,8 @@ final class KeyButtonRipple extends Drawable {
     }
 
     private void exitSoftware() {
-        ObjectAnimator alphaAnimator = ObjectAnimator.ofFloat(this, "glowAlpha", this.mGlowAlpha, 0.0f);
+        ObjectAnimator alphaAnimator =
+                ObjectAnimator.ofFloat(this, "glowAlpha", this.mGlowAlpha, 0.0f);
         alphaAnimator.setInterpolator(ALPHA_OUT_INTERPOLATOR);
         alphaAnimator.setDuration(450L);
         alphaAnimator.addListener(this.mAnimatorListener);
@@ -331,12 +353,15 @@ final class KeyButtonRipple extends Drawable {
             if (this.mDelayTouchFeedback) {
                 if (this.mRunningAnimations.isEmpty()) {
                     this.mHandler.removeCallbacksAndMessages(null);
-                    this.mHandler.postDelayed(new Runnable() { // from class: android.inputmethodservice.navigationbar.KeyButtonRipple$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            KeyButtonRipple.this.enterHardware();
-                        }
-                    }, ViewConfiguration.getTapTimeout());
+                    this.mHandler.postDelayed(
+                            new Runnable() { // from class:
+                                // android.inputmethodservice.navigationbar.KeyButtonRipple$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    KeyButtonRipple.this.enterHardware();
+                                }
+                            },
+                            ViewConfiguration.getTapTimeout());
                     return;
                 } else {
                     if (this.mVisible) {
@@ -391,13 +416,19 @@ final class KeyButtonRipple extends Drawable {
         this.mVisible = true;
         this.mDrawingHardwareGlow = true;
         setExtendStart(CanvasProperty.createFloat(getExtendSize() / 2));
-        RenderNodeAnimator startAnim = new RenderNodeAnimator(getExtendStart(), (getExtendSize() / 2) - ((getRippleSize() * GLOW_MAX_SCALE_FACTOR) / 2.0f));
+        RenderNodeAnimator startAnim =
+                new RenderNodeAnimator(
+                        getExtendStart(),
+                        (getExtendSize() / 2) - ((getRippleSize() * GLOW_MAX_SCALE_FACTOR) / 2.0f));
         startAnim.setDuration(350L);
         startAnim.setInterpolator(this.mInterpolator);
         startAnim.addListener(this.mAnimatorListener);
         startAnim.setTarget(this.mTargetView);
         setExtendEnd(CanvasProperty.createFloat(getExtendSize() / 2));
-        RenderNodeAnimator endAnim = new RenderNodeAnimator(getExtendEnd(), (getExtendSize() / 2) + ((getRippleSize() * GLOW_MAX_SCALE_FACTOR) / 2.0f));
+        RenderNodeAnimator endAnim =
+                new RenderNodeAnimator(
+                        getExtendEnd(),
+                        (getExtendSize() / 2) + ((getRippleSize() * GLOW_MAX_SCALE_FACTOR) / 2.0f));
         endAnim.setDuration(350L);
         endAnim.setInterpolator(this.mInterpolator);
         endAnim.addListener(this.mAnimatorListener);
@@ -449,19 +480,22 @@ final class KeyButtonRipple extends Drawable {
             this.mName = name;
         }
 
-        @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+        @Override // android.animation.AnimatorListenerAdapter,
+        // android.animation.Animator.AnimatorListener
         public void onAnimationStart(Animator animation) {
             Trace.beginSection("KeyButtonRipple.start." + this.mName);
             Trace.endSection();
         }
 
-        @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+        @Override // android.animation.AnimatorListenerAdapter,
+        // android.animation.Animator.AnimatorListener
         public void onAnimationCancel(Animator animation) {
             Trace.beginSection("KeyButtonRipple.cancel." + this.mName);
             Trace.endSection();
         }
 
-        @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+        @Override // android.animation.AnimatorListenerAdapter,
+        // android.animation.Animator.AnimatorListener
         public void onAnimationEnd(Animator animation) {
             Trace.beginSection("KeyButtonRipple.end." + this.mName);
             Trace.endSection();
@@ -469,8 +503,7 @@ final class KeyButtonRipple extends Drawable {
     }
 
     private static final class LogInterpolator implements Interpolator {
-        private LogInterpolator() {
-        }
+        private LogInterpolator() {}
 
         @Override // android.animation.TimeInterpolator
         public float getInterpolation(float input) {

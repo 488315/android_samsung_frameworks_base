@@ -1,6 +1,7 @@
 package android.util;
 
 import com.android.internal.util.Preconditions;
+
 import java.io.IOException;
 import java.io.InvalidObjectException;
 import java.io.ObjectInputStream;
@@ -194,15 +195,18 @@ public final class Rational extends Number implements Comparable<Rational> {
         if (this.mNumerator == 0) {
             if (this.mDenominator == 1 || this.mDenominator == 0) {
             } else {
-                throw new InvalidObjectException("Rational must be deserialized from a reduced form for zero values");
+                throw new InvalidObjectException(
+                        "Rational must be deserialized from a reduced form for zero values");
             }
         } else if (this.mDenominator == 0) {
             if (this.mNumerator == 1 || this.mNumerator == -1) {
             } else {
-                throw new InvalidObjectException("Rational must be deserialized from a reduced form for infinity values");
+                throw new InvalidObjectException(
+                        "Rational must be deserialized from a reduced form for infinity values");
             }
         } else if (gcd(this.mNumerator, this.mDenominator) > 1) {
-            throw new InvalidObjectException("Rational must be deserialized from a reduced form for finite values");
+            throw new InvalidObjectException(
+                    "Rational must be deserialized from a reduced form for finite values");
         }
     }
 
@@ -230,7 +234,9 @@ public final class Rational extends Number implements Comparable<Rational> {
             throw e;
         }
         try {
-            return new Rational(Integer.parseInt(string.substring(0, sep_ix)), Integer.parseInt(string.substring(sep_ix + 1)));
+            return new Rational(
+                    Integer.parseInt(string.substring(0, sep_ix)),
+                    Integer.parseInt(string.substring(sep_ix + 1)));
         } catch (NumberFormatException e2) {
             throw invalidRational(string);
         }

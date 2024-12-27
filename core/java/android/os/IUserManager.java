@@ -4,13 +4,13 @@ import android.content.IntentSender;
 import android.content.pm.UserInfo;
 import android.content.pm.UserProperties;
 import android.graphics.Bitmap;
-import android.os.IUserRestrictionsListener;
-import android.os.UserManager;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
 public interface IUserManager extends IInterface {
-    void addUserRestrictionsListener(IUserRestrictionsListener iUserRestrictionsListener) throws RemoteException;
+    void addUserRestrictionsListener(IUserRestrictionsListener iUserRestrictionsListener)
+            throws RemoteException;
 
     boolean canAddMoreManagedProfiles(int i, boolean z) throws RemoteException;
 
@@ -24,13 +24,23 @@ public interface IUserManager extends IInterface {
 
     void clearSeedAccountData(int i) throws RemoteException;
 
-    UserInfo createProfileForUserEvenWhenDisallowedWithThrow(String str, String str2, int i, int i2, String[] strArr) throws RemoteException;
+    UserInfo createProfileForUserEvenWhenDisallowedWithThrow(
+            String str, String str2, int i, int i2, String[] strArr) throws RemoteException;
 
-    UserInfo createProfileForUserWithThrow(String str, String str2, int i, int i2, String[] strArr) throws RemoteException;
+    UserInfo createProfileForUserWithThrow(String str, String str2, int i, int i2, String[] strArr)
+            throws RemoteException;
 
     UserInfo createRestrictedProfileWithThrow(String str, int i) throws RemoteException;
 
-    UserHandle createUserWithAttributes(String str, String str2, int i, Bitmap bitmap, String str3, String str4, PersistableBundle persistableBundle) throws RemoteException;
+    UserHandle createUserWithAttributes(
+            String str,
+            String str2,
+            int i,
+            Bitmap bitmap,
+            String str3,
+            String str4,
+            PersistableBundle persistableBundle)
+            throws RemoteException;
 
     UserInfo createUserWithThrow(String str, String str2, int i) throws RemoteException;
 
@@ -114,7 +124,8 @@ public interface IUserManager extends IInterface {
 
     int getUserRestrictionSource(String str, int i) throws RemoteException;
 
-    List<UserManager.EnforcingUser> getUserRestrictionSources(String str, int i) throws RemoteException;
+    List<UserManager.EnforcingUser> getUserRestrictionSources(String str, int i)
+            throws RemoteException;
 
     Bundle getUserRestrictions(int i) throws RemoteException;
 
@@ -158,7 +169,8 @@ public interface IUserManager extends IInterface {
 
     boolean isSameProfileGroup(int i, int i2) throws RemoteException;
 
-    boolean isSettingRestrictedForUser(String str, int i, String str2, int i2) throws RemoteException;
+    boolean isSettingRestrictedForUser(String str, int i, String str2, int i2)
+            throws RemoteException;
 
     boolean isUserForeground(int i) throws RemoteException;
 
@@ -188,7 +200,8 @@ public interface IUserManager extends IInterface {
 
     int removeUserWhenPossible(int i, boolean z) throws RemoteException;
 
-    boolean requestQuietModeEnabled(String str, boolean z, int i, IntentSender intentSender, int i2) throws RemoteException;
+    boolean requestQuietModeEnabled(String str, boolean z, int i, IntentSender intentSender, int i2)
+            throws RemoteException;
 
     void revokeUserAdmin(int i) throws RemoteException;
 
@@ -198,7 +211,9 @@ public interface IUserManager extends IInterface {
 
     void setDefaultGuestRestrictions(Bundle bundle) throws RemoteException;
 
-    void setSeedAccountData(int i, String str, String str2, PersistableBundle persistableBundle, boolean z) throws RemoteException;
+    void setSeedAccountData(
+            int i, String str, String str2, PersistableBundle persistableBundle, boolean z)
+            throws RemoteException;
 
     void setUserAccount(int i, String str) throws RemoteException;
 
@@ -232,7 +247,8 @@ public interface IUserManager extends IInterface {
         }
 
         @Override // android.os.IUserManager
-        public UserInfo createUserWithThrow(String name, String userType, int flags) throws RemoteException {
+        public UserInfo createUserWithThrow(String name, String userType, int flags)
+                throws RemoteException {
             return null;
         }
 
@@ -242,12 +258,15 @@ public interface IUserManager extends IInterface {
         }
 
         @Override // android.os.IUserManager
-        public UserInfo createProfileForUserWithThrow(String name, String userType, int flags, int userId, String[] disallowedPackages) throws RemoteException {
+        public UserInfo createProfileForUserWithThrow(
+                String name, String userType, int flags, int userId, String[] disallowedPackages)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.os.IUserManager
-        public UserInfo createRestrictedProfileWithThrow(String name, int parentUserHandle) throws RemoteException {
+        public UserInfo createRestrictedProfileWithThrow(String name, int parentUserHandle)
+                throws RemoteException {
             return null;
         }
 
@@ -257,20 +276,16 @@ public interface IUserManager extends IInterface {
         }
 
         @Override // android.os.IUserManager
-        public void setUserEnabled(int userId) throws RemoteException {
-        }
+        public void setUserEnabled(int userId) throws RemoteException {}
 
         @Override // android.os.IUserManager
-        public void setUserAdmin(int userId) throws RemoteException {
-        }
+        public void setUserAdmin(int userId) throws RemoteException {}
 
         @Override // android.os.IUserManager
-        public void revokeUserAdmin(int userId) throws RemoteException {
-        }
+        public void revokeUserAdmin(int userId) throws RemoteException {}
 
         @Override // android.os.IUserManager
-        public void evictCredentialEncryptionKey(int userId) throws RemoteException {
-        }
+        public void evictCredentialEncryptionKey(int userId) throws RemoteException {}
 
         @Override // android.os.IUserManager
         public boolean removeUser(int userId) throws RemoteException {
@@ -283,12 +298,10 @@ public interface IUserManager extends IInterface {
         }
 
         @Override // android.os.IUserManager
-        public void setUserName(int userId, String name) throws RemoteException {
-        }
+        public void setUserName(int userId, String name) throws RemoteException {}
 
         @Override // android.os.IUserManager
-        public void setUserIcon(int userId, Bitmap icon) throws RemoteException {
-        }
+        public void setUserIcon(int userId, Bitmap icon) throws RemoteException {}
 
         @Override // android.os.IUserManager
         public ParcelFileDescriptor getUserIcon(int userId) throws RemoteException {
@@ -316,7 +329,9 @@ public interface IUserManager extends IInterface {
         }
 
         @Override // android.os.IUserManager
-        public List<UserInfo> getUsers(boolean excludePartial, boolean excludeDying, boolean excludePreCreated) throws RemoteException {
+        public List<UserInfo> getUsers(
+                boolean excludePartial, boolean excludeDying, boolean excludePreCreated)
+                throws RemoteException {
             return null;
         }
 
@@ -346,17 +361,20 @@ public interface IUserManager extends IInterface {
         }
 
         @Override // android.os.IUserManager
-        public int getRemainingCreatableProfileCount(String userType, int userId) throws RemoteException {
+        public int getRemainingCreatableProfileCount(String userType, int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.os.IUserManager
-        public boolean canAddMoreProfilesToUser(String userType, int userId, boolean allowedToRemoveOne) throws RemoteException {
+        public boolean canAddMoreProfilesToUser(
+                String userType, int userId, boolean allowedToRemoveOne) throws RemoteException {
             return false;
         }
 
         @Override // android.os.IUserManager
-        public boolean canAddMoreManagedProfiles(int userId, boolean allowedToRemoveOne) throws RemoteException {
+        public boolean canAddMoreManagedProfiles(int userId, boolean allowedToRemoveOne)
+                throws RemoteException {
             return false;
         }
 
@@ -396,8 +414,7 @@ public interface IUserManager extends IInterface {
         }
 
         @Override // android.os.IUserManager
-        public void setUserAccount(int userId, String accountName) throws RemoteException {
-        }
+        public void setUserAccount(int userId, String accountName) throws RemoteException {}
 
         @Override // android.os.IUserManager
         public long getUserCreationTime(int userId) throws RemoteException {
@@ -410,7 +427,8 @@ public interface IUserManager extends IInterface {
         }
 
         @Override // android.os.IUserManager
-        public boolean isUserSwitcherEnabled(boolean showEvenIfNotActionable, int mUserId) throws RemoteException {
+        public boolean isUserSwitcherEnabled(boolean showEvenIfNotActionable, int mUserId)
+                throws RemoteException {
             return false;
         }
 
@@ -440,12 +458,14 @@ public interface IUserManager extends IInterface {
         }
 
         @Override // android.os.IUserManager
-        public int getUserRestrictionSource(String restrictionKey, int userId) throws RemoteException {
+        public int getUserRestrictionSource(String restrictionKey, int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.os.IUserManager
-        public List<UserManager.EnforcingUser> getUserRestrictionSources(String restrictionKey, int userId) throws RemoteException {
+        public List<UserManager.EnforcingUser> getUserRestrictionSources(
+                String restrictionKey, int userId) throws RemoteException {
             return null;
         }
 
@@ -455,12 +475,14 @@ public interface IUserManager extends IInterface {
         }
 
         @Override // android.os.IUserManager
-        public boolean hasBaseUserRestriction(String restrictionKey, int userId) throws RemoteException {
+        public boolean hasBaseUserRestriction(String restrictionKey, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.os.IUserManager
-        public boolean hasUserRestriction(String restrictionKey, int userId) throws RemoteException {
+        public boolean hasUserRestriction(String restrictionKey, int userId)
+                throws RemoteException {
             return false;
         }
 
@@ -470,21 +492,22 @@ public interface IUserManager extends IInterface {
         }
 
         @Override // android.os.IUserManager
-        public boolean isSettingRestrictedForUser(String setting, int userId, String value, int callingUid) throws RemoteException {
+        public boolean isSettingRestrictedForUser(
+                String setting, int userId, String value, int callingUid) throws RemoteException {
             return false;
         }
 
         @Override // android.os.IUserManager
-        public void addUserRestrictionsListener(IUserRestrictionsListener listener) throws RemoteException {
-        }
+        public void addUserRestrictionsListener(IUserRestrictionsListener listener)
+                throws RemoteException {}
 
         @Override // android.os.IUserManager
-        public void setUserRestriction(String key, boolean value, int userId) throws RemoteException {
-        }
+        public void setUserRestriction(String key, boolean value, int userId)
+                throws RemoteException {}
 
         @Override // android.os.IUserManager
-        public void setApplicationRestrictions(String packageName, Bundle restrictions, int userId) throws RemoteException {
-        }
+        public void setApplicationRestrictions(String packageName, Bundle restrictions, int userId)
+                throws RemoteException {}
 
         @Override // android.os.IUserManager
         public Bundle getApplicationRestrictions(String packageName) throws RemoteException {
@@ -492,13 +515,13 @@ public interface IUserManager extends IInterface {
         }
 
         @Override // android.os.IUserManager
-        public Bundle getApplicationRestrictionsForUser(String packageName, int userId) throws RemoteException {
+        public Bundle getApplicationRestrictionsForUser(String packageName, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.os.IUserManager
-        public void setDefaultGuestRestrictions(Bundle restrictions) throws RemoteException {
-        }
+        public void setDefaultGuestRestrictions(Bundle restrictions) throws RemoteException {}
 
         @Override // android.os.IUserManager
         public Bundle getDefaultGuestRestrictions() throws RemoteException {
@@ -506,7 +529,8 @@ public interface IUserManager extends IInterface {
         }
 
         @Override // android.os.IUserManager
-        public int removeUserWhenPossible(int userId, boolean overrideDevicePolicy) throws RemoteException {
+        public int removeUserWhenPossible(int userId, boolean overrideDevicePolicy)
+                throws RemoteException {
             return 0;
         }
 
@@ -526,13 +550,26 @@ public interface IUserManager extends IInterface {
         }
 
         @Override // android.os.IUserManager
-        public UserHandle createUserWithAttributes(String userName, String userType, int flags, Bitmap userIcon, String accountName, String accountType, PersistableBundle accountOptions) throws RemoteException {
+        public UserHandle createUserWithAttributes(
+                String userName,
+                String userType,
+                int flags,
+                Bitmap userIcon,
+                String accountName,
+                String accountType,
+                PersistableBundle accountOptions)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.os.IUserManager
-        public void setSeedAccountData(int userId, String accountName, String accountType, PersistableBundle accountOptions, boolean persist) throws RemoteException {
-        }
+        public void setSeedAccountData(
+                int userId,
+                String accountName,
+                String accountType,
+                PersistableBundle accountOptions,
+                boolean persist)
+                throws RemoteException {}
 
         @Override // android.os.IUserManager
         public String getSeedAccountName(int userId) throws RemoteException {
@@ -550,16 +587,17 @@ public interface IUserManager extends IInterface {
         }
 
         @Override // android.os.IUserManager
-        public void clearSeedAccountData(int userId) throws RemoteException {
-        }
+        public void clearSeedAccountData(int userId) throws RemoteException {}
 
         @Override // android.os.IUserManager
-        public boolean someUserHasSeedAccount(String accountName, String accountType) throws RemoteException {
+        public boolean someUserHasSeedAccount(String accountName, String accountType)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.os.IUserManager
-        public boolean someUserHasAccount(String accountName, String accountType) throws RemoteException {
+        public boolean someUserHasAccount(String accountName, String accountType)
+                throws RemoteException {
             return false;
         }
 
@@ -584,7 +622,9 @@ public interface IUserManager extends IInterface {
         }
 
         @Override // android.os.IUserManager
-        public UserInfo createProfileForUserEvenWhenDisallowedWithThrow(String name, String userType, int flags, int userId, String[] disallowedPackages) throws RemoteException {
+        public UserInfo createProfileForUserEvenWhenDisallowedWithThrow(
+                String name, String userType, int flags, int userId, String[] disallowedPackages)
+                throws RemoteException {
             return null;
         }
 
@@ -689,7 +729,13 @@ public interface IUserManager extends IInterface {
         }
 
         @Override // android.os.IUserManager
-        public boolean requestQuietModeEnabled(String callingPackage, boolean enableQuietMode, int userId, IntentSender target, int flags) throws RemoteException {
+        public boolean requestQuietModeEnabled(
+                String callingPackage,
+                boolean enableQuietMode,
+                int userId,
+                IntentSender target,
+                int flags)
+                throws RemoteException {
             return false;
         }
 
@@ -709,13 +755,13 @@ public interface IUserManager extends IInterface {
         }
 
         @Override // android.os.IUserManager
-        public boolean setUserEphemeral(int userId, boolean enableEphemeral) throws RemoteException {
+        public boolean setUserEphemeral(int userId, boolean enableEphemeral)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.os.IUserManager
-        public void setBootUser(int userId) throws RemoteException {
-        }
+        public void setBootUser(int userId) throws RemoteException {}
 
         @Override // android.os.IUserManager
         public int getBootUser() throws RemoteException {
@@ -723,7 +769,8 @@ public interface IUserManager extends IInterface {
         }
 
         @Override // android.os.IUserManager
-        public int[] getProfileIdsExcludingHidden(int userId, boolean enabledOnly) throws RemoteException {
+        public int[] getProfileIdsExcludingHidden(int userId, boolean enabledOnly)
+                throws RemoteException {
             return null;
         }
 
@@ -738,7 +785,7 @@ public interface IUserManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUserManager {
+    public abstract static class Stub extends Binder implements IUserManager {
         public static final String DESCRIPTOR = "android.os.IUserManager";
         static final int TRANSACTION_addUserRestrictionsListener = 53;
         static final int TRANSACTION_canAddMoreManagedProfiles = 29;
@@ -1089,7 +1136,8 @@ public interface IUserManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -1135,7 +1183,8 @@ public interface IUserManager extends IInterface {
                     int _arg3 = data.readInt();
                     String[] _arg4 = data.createStringArray();
                     data.enforceNoDataAvail();
-                    UserInfo _result5 = createProfileForUserWithThrow(_arg05, _arg12, _arg22, _arg3, _arg4);
+                    UserInfo _result5 =
+                            createProfileForUserWithThrow(_arg05, _arg12, _arg22, _arg3, _arg4);
                     reply.writeNoException();
                     reply.writeTypedObject(_result5, 1);
                     return true;
@@ -1429,7 +1478,8 @@ public interface IUserManager extends IInterface {
                     String _arg042 = data.readString();
                     int _arg117 = data.readInt();
                     data.enforceNoDataAvail();
-                    List<UserManager.EnforcingUser> _result40 = getUserRestrictionSources(_arg042, _arg117);
+                    List<UserManager.EnforcingUser> _result40 =
+                            getUserRestrictionSources(_arg042, _arg117);
                     reply.writeNoException();
                     reply.writeTypedList(_result40, 1);
                     return true;
@@ -1469,12 +1519,14 @@ public interface IUserManager extends IInterface {
                     String _arg25 = data.readString();
                     int _arg32 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result45 = isSettingRestrictedForUser(_arg047, _arg120, _arg25, _arg32);
+                    boolean _result45 =
+                            isSettingRestrictedForUser(_arg047, _arg120, _arg25, _arg32);
                     reply.writeNoException();
                     reply.writeBoolean(_result45);
                     return true;
                 case 53:
-                    IUserRestrictionsListener _arg048 = IUserRestrictionsListener.Stub.asInterface(data.readStrongBinder());
+                    IUserRestrictionsListener _arg048 =
+                            IUserRestrictionsListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addUserRestrictionsListener(_arg048);
                     reply.writeNoException();
@@ -1555,9 +1607,12 @@ public interface IUserManager extends IInterface {
                     Bitmap _arg33 = (Bitmap) data.readTypedObject(Bitmap.CREATOR);
                     String _arg42 = data.readString();
                     String _arg5 = data.readString();
-                    PersistableBundle _arg6 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _arg6 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
                     data.enforceNoDataAvail();
-                    UserHandle _result53 = createUserWithAttributes(_arg057, _arg125, _arg28, _arg33, _arg42, _arg5, _arg6);
+                    UserHandle _result53 =
+                            createUserWithAttributes(
+                                    _arg057, _arg125, _arg28, _arg33, _arg42, _arg5, _arg6);
                     reply.writeNoException();
                     reply.writeTypedObject(_result53, 1);
                     return true;
@@ -1565,7 +1620,8 @@ public interface IUserManager extends IInterface {
                     int _arg058 = data.readInt();
                     String _arg126 = data.readString();
                     String _arg29 = data.readString();
-                    PersistableBundle _arg34 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _arg34 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
                     boolean _arg43 = data.readBoolean();
                     data.enforceNoDataAvail();
                     setSeedAccountData(_arg058, _arg126, _arg29, _arg34, _arg43);
@@ -1649,7 +1705,9 @@ public interface IUserManager extends IInterface {
                     int _arg35 = data.readInt();
                     String[] _arg44 = data.createStringArray();
                     data.enforceNoDataAvail();
-                    UserInfo _result63 = createProfileForUserEvenWhenDisallowedWithThrow(_arg069, _arg129, _arg210, _arg35, _arg44);
+                    UserInfo _result63 =
+                            createProfileForUserEvenWhenDisallowedWithThrow(
+                                    _arg069, _arg129, _arg210, _arg35, _arg44);
                     reply.writeNoException();
                     reply.writeTypedObject(_result63, 1);
                     return true;
@@ -1794,7 +1852,8 @@ public interface IUserManager extends IInterface {
                     IntentSender _arg36 = (IntentSender) data.readTypedObject(IntentSender.CREATOR);
                     int _arg45 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result84 = requestQuietModeEnabled(_arg087, _arg130, _arg211, _arg36, _arg45);
+                    boolean _result84 =
+                            requestQuietModeEnabled(_arg087, _arg130, _arg211, _arg36, _arg45);
                     reply.writeNoException();
                     reply.writeBoolean(_result84);
                     return true;
@@ -1904,7 +1963,8 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public UserInfo createUserWithThrow(String name, String userType, int flags) throws RemoteException {
+            public UserInfo createUserWithThrow(String name, String userType, int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1940,7 +2000,13 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public UserInfo createProfileForUserWithThrow(String name, String userType, int flags, int userId, String[] disallowedPackages) throws RemoteException {
+            public UserInfo createProfileForUserWithThrow(
+                    String name,
+                    String userType,
+                    int flags,
+                    int userId,
+                    String[] disallowedPackages)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1961,7 +2027,8 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public UserInfo createRestrictedProfileWithThrow(String name, int parentUserHandle) throws RemoteException {
+            public UserInfo createRestrictedProfileWithThrow(String name, int parentUserHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1979,7 +2046,8 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public String[] getPreInstallableSystemPackages(String userType) throws RemoteException {
+            public String[] getPreInstallableSystemPackages(String userType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2130,7 +2198,9 @@ public interface IUserManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(16, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2203,7 +2273,9 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public List<UserInfo> getUsers(boolean excludePartial, boolean excludeDying, boolean excludePreCreated) throws RemoteException {
+            public List<UserInfo> getUsers(
+                    boolean excludePartial, boolean excludeDying, boolean excludePreCreated)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2222,7 +2294,8 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public List<UserInfo> getProfiles(int userId, boolean enabledOnly) throws RemoteException {
+            public List<UserInfo> getProfiles(int userId, boolean enabledOnly)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2309,7 +2382,8 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public int getRemainingCreatableProfileCount(String userType, int userId) throws RemoteException {
+            public int getRemainingCreatableProfileCount(String userType, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2327,7 +2401,9 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public boolean canAddMoreProfilesToUser(String userType, int userId, boolean allowedToRemoveOne) throws RemoteException {
+            public boolean canAddMoreProfilesToUser(
+                    String userType, int userId, boolean allowedToRemoveOne)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2346,7 +2422,8 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public boolean canAddMoreManagedProfiles(int userId, boolean allowedToRemoveOne) throws RemoteException {
+            public boolean canAddMoreManagedProfiles(int userId, boolean allowedToRemoveOne)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2381,7 +2458,8 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public boolean isSameProfileGroup(int userId, int otherUserHandle) throws RemoteException {
+            public boolean isSameProfileGroup(int userId, int otherUserHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2458,7 +2536,8 @@ public interface IUserManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(35, _data, _reply, 0);
                     _reply.readException();
-                    UserProperties _result = (UserProperties) _reply.readTypedObject(UserProperties.CREATOR);
+                    UserProperties _result =
+                            (UserProperties) _reply.readTypedObject(UserProperties.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2534,7 +2613,8 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public boolean isUserSwitcherEnabled(boolean showEvenIfNotActionable, int mUserId) throws RemoteException {
+            public boolean isUserSwitcherEnabled(boolean showEvenIfNotActionable, int mUserId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2637,7 +2717,8 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public int getUserRestrictionSource(String restrictionKey, int userId) throws RemoteException {
+            public int getUserRestrictionSource(String restrictionKey, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2655,7 +2736,8 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public List<UserManager.EnforcingUser> getUserRestrictionSources(String restrictionKey, int userId) throws RemoteException {
+            public List<UserManager.EnforcingUser> getUserRestrictionSources(
+                    String restrictionKey, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2664,7 +2746,8 @@ public interface IUserManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(47, _data, _reply, 0);
                     _reply.readException();
-                    List<UserManager.EnforcingUser> _result = _reply.createTypedArrayList(UserManager.EnforcingUser.CREATOR);
+                    List<UserManager.EnforcingUser> _result =
+                            _reply.createTypedArrayList(UserManager.EnforcingUser.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2690,7 +2773,8 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public boolean hasBaseUserRestriction(String restrictionKey, int userId) throws RemoteException {
+            public boolean hasBaseUserRestriction(String restrictionKey, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2708,7 +2792,8 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public boolean hasUserRestriction(String restrictionKey, int userId) throws RemoteException {
+            public boolean hasUserRestriction(String restrictionKey, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2726,7 +2811,8 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public boolean hasUserRestrictionOnAnyUser(String restrictionKey) throws RemoteException {
+            public boolean hasUserRestrictionOnAnyUser(String restrictionKey)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2743,7 +2829,9 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public boolean isSettingRestrictedForUser(String setting, int userId, String value, int callingUid) throws RemoteException {
+            public boolean isSettingRestrictedForUser(
+                    String setting, int userId, String value, int callingUid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2763,7 +2851,8 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public void addUserRestrictionsListener(IUserRestrictionsListener listener) throws RemoteException {
+            public void addUserRestrictionsListener(IUserRestrictionsListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2778,7 +2867,8 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public void setUserRestriction(String key, boolean value, int userId) throws RemoteException {
+            public void setUserRestriction(String key, boolean value, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2795,7 +2885,8 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public void setApplicationRestrictions(String packageName, Bundle restrictions, int userId) throws RemoteException {
+            public void setApplicationRestrictions(
+                    String packageName, Bundle restrictions, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2829,7 +2920,8 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public Bundle getApplicationRestrictionsForUser(String packageName, int userId) throws RemoteException {
+            public Bundle getApplicationRestrictionsForUser(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2878,7 +2970,8 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public int removeUserWhenPossible(int userId, boolean overrideDevicePolicy) throws RemoteException {
+            public int removeUserWhenPossible(int userId, boolean overrideDevicePolicy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2946,7 +3039,15 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public UserHandle createUserWithAttributes(String userName, String userType, int flags, Bitmap userIcon, String accountName, String accountType, PersistableBundle accountOptions) throws RemoteException {
+            public UserHandle createUserWithAttributes(
+                    String userName,
+                    String userType,
+                    int flags,
+                    Bitmap userIcon,
+                    String accountName,
+                    String accountType,
+                    PersistableBundle accountOptions)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2969,7 +3070,13 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public void setSeedAccountData(int userId, String accountName, String accountType, PersistableBundle accountOptions, boolean persist) throws RemoteException {
+            public void setSeedAccountData(
+                    int userId,
+                    String accountName,
+                    String accountType,
+                    PersistableBundle accountOptions,
+                    boolean persist)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3030,7 +3137,8 @@ public interface IUserManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(68, _data, _reply, 0);
                     _reply.readException();
-                    PersistableBundle _result = (PersistableBundle) _reply.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _result =
+                            (PersistableBundle) _reply.readTypedObject(PersistableBundle.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3054,7 +3162,8 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public boolean someUserHasSeedAccount(String accountName, String accountType) throws RemoteException {
+            public boolean someUserHasSeedAccount(String accountName, String accountType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3072,7 +3181,8 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public boolean someUserHasAccount(String accountName, String accountType) throws RemoteException {
+            public boolean someUserHasAccount(String accountName, String accountType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3158,7 +3268,13 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public UserInfo createProfileForUserEvenWhenDisallowedWithThrow(String name, String userType, int flags, int userId, String[] disallowedPackages) throws RemoteException {
+            public UserInfo createProfileForUserEvenWhenDisallowedWithThrow(
+                    String name,
+                    String userType,
+                    int flags,
+                    int userId,
+                    String[] disallowedPackages)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3516,7 +3632,13 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public boolean requestQuietModeEnabled(String callingPackage, boolean enableQuietMode, int userId, IntentSender target, int flags) throws RemoteException {
+            public boolean requestQuietModeEnabled(
+                    String callingPackage,
+                    boolean enableQuietMode,
+                    int userId,
+                    IntentSender target,
+                    int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3585,7 +3707,8 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public boolean setUserEphemeral(int userId, boolean enableEphemeral) throws RemoteException {
+            public boolean setUserEphemeral(int userId, boolean enableEphemeral)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3634,7 +3757,8 @@ public interface IUserManager extends IInterface {
             }
 
             @Override // android.os.IUserManager
-            public int[] getProfileIdsExcludingHidden(int userId, boolean enabledOnly) throws RemoteException {
+            public int[] getProfileIdsExcludingHidden(int userId, boolean enabledOnly)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

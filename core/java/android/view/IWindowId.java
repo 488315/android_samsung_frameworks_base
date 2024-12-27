@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.view.IWindowFocusObserver;
 
 /* loaded from: classes4.dex */
 public interface IWindowId extends IInterface {
@@ -17,12 +16,10 @@ public interface IWindowId extends IInterface {
 
     public static class Default implements IWindowId {
         @Override // android.view.IWindowId
-        public void registerFocusObserver(IWindowFocusObserver observer) throws RemoteException {
-        }
+        public void registerFocusObserver(IWindowFocusObserver observer) throws RemoteException {}
 
         @Override // android.view.IWindowId
-        public void unregisterFocusObserver(IWindowFocusObserver observer) throws RemoteException {
-        }
+        public void unregisterFocusObserver(IWindowFocusObserver observer) throws RemoteException {}
 
         @Override // android.view.IWindowId
         public boolean isFocused() throws RemoteException {
@@ -35,7 +32,7 @@ public interface IWindowId extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWindowId {
+    public abstract static class Stub extends Binder implements IWindowId {
         public static final String DESCRIPTOR = "android.view.IWindowId";
         static final int TRANSACTION_isFocused = 3;
         static final int TRANSACTION_registerFocusObserver = 1;
@@ -80,7 +77,8 @@ public interface IWindowId extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -90,13 +88,15 @@ public interface IWindowId extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IWindowFocusObserver _arg0 = IWindowFocusObserver.Stub.asInterface(data.readStrongBinder());
+                    IWindowFocusObserver _arg0 =
+                            IWindowFocusObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerFocusObserver(_arg0);
                     reply.writeNoException();
                     return true;
                 case 2:
-                    IWindowFocusObserver _arg02 = IWindowFocusObserver.Stub.asInterface(data.readStrongBinder());
+                    IWindowFocusObserver _arg02 =
+                            IWindowFocusObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterFocusObserver(_arg02);
                     reply.writeNoException();
@@ -128,7 +128,8 @@ public interface IWindowId extends IInterface {
             }
 
             @Override // android.view.IWindowId
-            public void registerFocusObserver(IWindowFocusObserver observer) throws RemoteException {
+            public void registerFocusObserver(IWindowFocusObserver observer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -143,7 +144,8 @@ public interface IWindowId extends IInterface {
             }
 
             @Override // android.view.IWindowId
-            public void unregisterFocusObserver(IWindowFocusObserver observer) throws RemoteException {
+            public void unregisterFocusObserver(IWindowFocusObserver observer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

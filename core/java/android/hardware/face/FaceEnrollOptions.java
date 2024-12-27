@@ -3,24 +3,27 @@ package android.hardware.face;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes2.dex */
 public class FaceEnrollOptions implements Parcelable {
-    public static final Parcelable.Creator<FaceEnrollOptions> CREATOR = new Parcelable.Creator<FaceEnrollOptions>() { // from class: android.hardware.face.FaceEnrollOptions.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FaceEnrollOptions[] newArray(int size) {
-            return new FaceEnrollOptions[size];
-        }
+    public static final Parcelable.Creator<FaceEnrollOptions> CREATOR =
+            new Parcelable.Creator<
+                    FaceEnrollOptions>() { // from class: android.hardware.face.FaceEnrollOptions.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FaceEnrollOptions[] newArray(int size) {
+                    return new FaceEnrollOptions[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FaceEnrollOptions createFromParcel(Parcel in) {
-            return new FaceEnrollOptions(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FaceEnrollOptions createFromParcel(Parcel in) {
+                    return new FaceEnrollOptions(in);
+                }
+            };
     public static final int ENROLL_REASON_RE_ENROLL_NOTIFICATION = 1;
     public static final int ENROLL_REASON_SETTINGS = 2;
     public static final int ENROLL_REASON_SUW = 3;
@@ -28,8 +31,7 @@ public class FaceEnrollOptions implements Parcelable {
     private final int mEnrollReason;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface EnrollReason {
-    }
+    public @interface EnrollReason {}
 
     /* JADX INFO: Access modifiers changed from: private */
     public static int defaultEnrollReason() {
@@ -53,8 +55,17 @@ public class FaceEnrollOptions implements Parcelable {
 
     FaceEnrollOptions(int enrollReason) {
         this.mEnrollReason = enrollReason;
-        if (this.mEnrollReason != 0 && this.mEnrollReason != 1 && this.mEnrollReason != 2 && this.mEnrollReason != 3) {
-            throw new IllegalArgumentException("enrollReason was " + this.mEnrollReason + " but must be one of: ENROLL_REASON_UNKNOWN(0), ENROLL_REASON_RE_ENROLL_NOTIFICATION(1), ENROLL_REASON_SETTINGS(2), ENROLL_REASON_SUW(3" + NavigationBarInflaterView.KEY_CODE_END);
+        if (this.mEnrollReason != 0
+                && this.mEnrollReason != 1
+                && this.mEnrollReason != 2
+                && this.mEnrollReason != 3) {
+            throw new IllegalArgumentException(
+                    "enrollReason was "
+                            + this.mEnrollReason
+                            + " but must be one of: ENROLL_REASON_UNKNOWN(0),"
+                            + " ENROLL_REASON_RE_ENROLL_NOTIFICATION(1), ENROLL_REASON_SETTINGS(2),"
+                            + " ENROLL_REASON_SUW(3"
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
     }
 
@@ -94,8 +105,17 @@ public class FaceEnrollOptions implements Parcelable {
     protected FaceEnrollOptions(Parcel in) {
         int enrollReason = in.readInt();
         this.mEnrollReason = enrollReason;
-        if (this.mEnrollReason != 0 && this.mEnrollReason != 1 && this.mEnrollReason != 2 && this.mEnrollReason != 3) {
-            throw new IllegalArgumentException("enrollReason was " + this.mEnrollReason + " but must be one of: ENROLL_REASON_UNKNOWN(0), ENROLL_REASON_RE_ENROLL_NOTIFICATION(1), ENROLL_REASON_SETTINGS(2), ENROLL_REASON_SUW(3" + NavigationBarInflaterView.KEY_CODE_END);
+        if (this.mEnrollReason != 0
+                && this.mEnrollReason != 1
+                && this.mEnrollReason != 2
+                && this.mEnrollReason != 3) {
+            throw new IllegalArgumentException(
+                    "enrollReason was "
+                            + this.mEnrollReason
+                            + " but must be one of: ENROLL_REASON_UNKNOWN(0),"
+                            + " ENROLL_REASON_RE_ENROLL_NOTIFICATION(1), ENROLL_REASON_SETTINGS(2),"
+                            + " ENROLL_REASON_SUW(3"
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
     }
 
@@ -122,12 +142,12 @@ public class FaceEnrollOptions implements Parcelable {
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 2) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

@@ -8,8 +8,10 @@ import android.content.res.Resources;
 import android.hardware.soundtrigger.V2_3.OptionalModelParameterRange$$ExternalSyntheticOutline0;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.server.pm.ShortcutPackage.AnonymousClass1;
+
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.List;
@@ -24,21 +26,24 @@ public final /* synthetic */ class ShortcutPackage$$ExternalSyntheticLambda2 imp
     public final /* synthetic */ Object f$1;
     public final /* synthetic */ Object f$2;
 
-    public /* synthetic */ ShortcutPackage$$ExternalSyntheticLambda2(Resources resources, ShortcutService shortcutService, List list) {
+    public /* synthetic */ ShortcutPackage$$ExternalSyntheticLambda2(
+            Resources resources, ShortcutService shortcutService, List list) {
         this.$r8$classId = 2;
         this.f$2 = resources;
         this.f$1 = shortcutService;
         this.f$0 = list;
     }
 
-    public /* synthetic */ ShortcutPackage$$ExternalSyntheticLambda2(ShortcutPackage shortcutPackage, boolean[] zArr, ShortcutService shortcutService) {
+    public /* synthetic */ ShortcutPackage$$ExternalSyntheticLambda2(
+            ShortcutPackage shortcutPackage, boolean[] zArr, ShortcutService shortcutService) {
         this.$r8$classId = 3;
         this.f$0 = shortcutPackage;
         this.f$2 = zArr;
         this.f$1 = shortcutService;
     }
 
-    public /* synthetic */ ShortcutPackage$$ExternalSyntheticLambda2(Object obj, Object obj2, Object obj3, int i) {
+    public /* synthetic */ ShortcutPackage$$ExternalSyntheticLambda2(
+            Object obj, Object obj2, Object obj3, int i) {
         this.$r8$classId = i;
         this.f$0 = obj;
         this.f$1 = obj2;
@@ -58,10 +63,19 @@ public final /* synthetic */ class ShortcutPackage$$ExternalSyntheticLambda2 imp
                     if (shortcutInfo.getActivity() == null) {
                         shortcutService.wtf("null activity detected.", null);
                     } else {
-                        if (!shortcutService.injectIsMainActivity(shortcutPackage.mPackageUserId, shortcutInfo.getActivity())) {
-                            Slog.w("ShortcutService", OptionalModelParameterRange$$ExternalSyntheticOutline0.m(new StringBuilder(), shortcutPackage.mPackageName, " is no longer main activity. Disabling shorcut ", shortcutInfo.getId(), "."));
-                            if (shortcutPackage.deleteOrDisableWithId(shortcutInfo.getId(), true, false, false, 2, false) != null) {
-                            }
+                        if (!shortcutService.injectIsMainActivity(
+                                shortcutPackage.mPackageUserId, shortcutInfo.getActivity())) {
+                            Slog.w(
+                                    "ShortcutService",
+                                    OptionalModelParameterRange$$ExternalSyntheticOutline0.m(
+                                            new StringBuilder(),
+                                            shortcutPackage.mPackageName,
+                                            " is no longer main activity. Disabling shorcut ",
+                                            shortcutInfo.getId(),
+                                            "."));
+                            if (shortcutPackage.deleteOrDisableWithId(
+                                            shortcutInfo.getId(), true, false, false, 2, false)
+                                    != null) {}
                         }
                     }
                 }
@@ -109,37 +123,46 @@ public final /* synthetic */ class ShortcutPackage$$ExternalSyntheticLambda2 imp
                 shortcutPackage2.getClass();
                 boolean isDeclaredInManifest = shortcutInfo4.isDeclaredInManifest();
                 String str2 = shortcutPackage2.mPackageName;
-                if (!isDeclaredInManifest && !shortcutInfo4.isDynamic() && !shortcutInfo4.isPinned() && !shortcutInfo4.isCached()) {
+                if (!isDeclaredInManifest
+                        && !shortcutInfo4.isDynamic()
+                        && !shortcutInfo4.isPinned()
+                        && !shortcutInfo4.isCached()) {
                     zArr[0] = true;
-                    StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("Package ", str2, ": shortcut ");
+                    StringBuilder m =
+                            DumpUtils$$ExternalSyntheticOutline0.m("Package ", str2, ": shortcut ");
                     m.append(shortcutInfo4.getId());
                     m.append(" is not manifest, dynamic or pinned.");
                     Log.e("ShortcutService.verify", m.toString());
                 }
                 if (shortcutInfo4.isDeclaredInManifest() && shortcutInfo4.isDynamic()) {
                     zArr[0] = true;
-                    StringBuilder m2 = DumpUtils$$ExternalSyntheticOutline0.m("Package ", str2, ": shortcut ");
+                    StringBuilder m2 =
+                            DumpUtils$$ExternalSyntheticOutline0.m("Package ", str2, ": shortcut ");
                     m2.append(shortcutInfo4.getId());
                     m2.append(" is both dynamic and manifest at the same time.");
                     Log.e("ShortcutService.verify", m2.toString());
                 }
                 if (shortcutInfo4.getActivity() == null && !shortcutInfo4.isFloating()) {
                     zArr[0] = true;
-                    StringBuilder m3 = DumpUtils$$ExternalSyntheticOutline0.m("Package ", str2, ": shortcut ");
+                    StringBuilder m3 =
+                            DumpUtils$$ExternalSyntheticOutline0.m("Package ", str2, ": shortcut ");
                     m3.append(shortcutInfo4.getId());
                     m3.append(" has null activity, but not floating.");
                     Log.e("ShortcutService.verify", m3.toString());
                 }
-                if ((shortcutInfo4.isDynamic() || shortcutInfo4.isManifestShortcut()) && !shortcutInfo4.isEnabled()) {
+                if ((shortcutInfo4.isDynamic() || shortcutInfo4.isManifestShortcut())
+                        && !shortcutInfo4.isEnabled()) {
                     zArr[0] = true;
-                    StringBuilder m4 = DumpUtils$$ExternalSyntheticOutline0.m("Package ", str2, ": shortcut ");
+                    StringBuilder m4 =
+                            DumpUtils$$ExternalSyntheticOutline0.m("Package ", str2, ": shortcut ");
                     m4.append(shortcutInfo4.getId());
                     m4.append(" is not floating, but is disabled.");
                     Log.e("ShortcutService.verify", m4.toString());
                 }
                 if (shortcutInfo4.isFloating() && shortcutInfo4.getRank() != 0) {
                     zArr[0] = true;
-                    StringBuilder m5 = DumpUtils$$ExternalSyntheticOutline0.m("Package ", str2, ": shortcut ");
+                    StringBuilder m5 =
+                            DumpUtils$$ExternalSyntheticOutline0.m("Package ", str2, ": shortcut ");
                     m5.append(shortcutInfo4.getId());
                     m5.append(" is floating, but has rank=");
                     m5.append(shortcutInfo4.getRank());
@@ -147,42 +170,50 @@ public final /* synthetic */ class ShortcutPackage$$ExternalSyntheticLambda2 imp
                 }
                 if (shortcutInfo4.getIcon() != null) {
                     zArr[0] = true;
-                    StringBuilder m6 = DumpUtils$$ExternalSyntheticOutline0.m("Package ", str2, ": shortcut ");
+                    StringBuilder m6 =
+                            DumpUtils$$ExternalSyntheticOutline0.m("Package ", str2, ": shortcut ");
                     m6.append(shortcutInfo4.getId());
                     m6.append(" still has an icon");
                     Log.e("ShortcutService.verify", m6.toString());
                 }
-                if (shortcutInfo4.hasAdaptiveBitmap() && !shortcutInfo4.hasIconFile() && !shortcutInfo4.hasIconUri()) {
+                if (shortcutInfo4.hasAdaptiveBitmap()
+                        && !shortcutInfo4.hasIconFile()
+                        && !shortcutInfo4.hasIconUri()) {
                     zArr[0] = true;
-                    StringBuilder m7 = DumpUtils$$ExternalSyntheticOutline0.m("Package ", str2, ": shortcut ");
+                    StringBuilder m7 =
+                            DumpUtils$$ExternalSyntheticOutline0.m("Package ", str2, ": shortcut ");
                     m7.append(shortcutInfo4.getId());
                     m7.append(" has adaptive bitmap but was not saved to a file nor has icon uri.");
                     Log.e("ShortcutService.verify", m7.toString());
                 }
                 if (shortcutInfo4.hasIconFile() && shortcutInfo4.hasIconResource()) {
                     zArr[0] = true;
-                    StringBuilder m8 = DumpUtils$$ExternalSyntheticOutline0.m("Package ", str2, ": shortcut ");
+                    StringBuilder m8 =
+                            DumpUtils$$ExternalSyntheticOutline0.m("Package ", str2, ": shortcut ");
                     m8.append(shortcutInfo4.getId());
                     m8.append(" has both resource and bitmap icons");
                     Log.e("ShortcutService.verify", m8.toString());
                 }
                 if (shortcutInfo4.hasIconFile() && shortcutInfo4.hasIconUri()) {
                     zArr[0] = true;
-                    StringBuilder m9 = DumpUtils$$ExternalSyntheticOutline0.m("Package ", str2, ": shortcut ");
+                    StringBuilder m9 =
+                            DumpUtils$$ExternalSyntheticOutline0.m("Package ", str2, ": shortcut ");
                     m9.append(shortcutInfo4.getId());
                     m9.append(" has both url and bitmap icons");
                     Log.e("ShortcutService.verify", m9.toString());
                 }
                 if (shortcutInfo4.hasIconUri() && shortcutInfo4.hasIconResource()) {
                     zArr[0] = true;
-                    StringBuilder m10 = DumpUtils$$ExternalSyntheticOutline0.m("Package ", str2, ": shortcut ");
+                    StringBuilder m10 =
+                            DumpUtils$$ExternalSyntheticOutline0.m("Package ", str2, ": shortcut ");
                     m10.append(shortcutInfo4.getId());
                     m10.append(" has both url and resource icons");
                     Log.e("ShortcutService.verify", m10.toString());
                 }
                 if (shortcutInfo4.isEnabled() != (shortcutInfo4.getDisabledReason() == 0)) {
                     zArr[0] = true;
-                    StringBuilder m11 = DumpUtils$$ExternalSyntheticOutline0.m("Package ", str2, ": shortcut ");
+                    StringBuilder m11 =
+                            DumpUtils$$ExternalSyntheticOutline0.m("Package ", str2, ": shortcut ");
                     m11.append(shortcutInfo4.getId());
                     m11.append(" isEnabled() and getDisabledReason() disagree: ");
                     m11.append(shortcutInfo4.isEnabled());
@@ -190,9 +221,11 @@ public final /* synthetic */ class ShortcutPackage$$ExternalSyntheticLambda2 imp
                     m11.append(shortcutInfo4.getDisabledReason());
                     Log.e("ShortcutService.verify", m11.toString());
                 }
-                if (shortcutInfo4.getDisabledReason() == 100 && shortcutPackage2.mPackageInfo.mBackupSourceVersionCode == -1) {
+                if (shortcutInfo4.getDisabledReason() == 100
+                        && shortcutPackage2.mPackageInfo.mBackupSourceVersionCode == -1) {
                     zArr[0] = true;
-                    StringBuilder m12 = DumpUtils$$ExternalSyntheticOutline0.m("Package ", str2, ": shortcut ");
+                    StringBuilder m12 =
+                            DumpUtils$$ExternalSyntheticOutline0.m("Package ", str2, ": shortcut ");
                     m12.append(shortcutInfo4.getId());
                     m12.append(" RESTORED_VERSION_LOWER with no backup source version code.");
                     Log.e("ShortcutService.verify", m12.toString());
@@ -201,7 +234,8 @@ public final /* synthetic */ class ShortcutPackage$$ExternalSyntheticLambda2 imp
                 shortcutService3.getClass();
                 if (activity != null && "android.__dummy__".equals(activity.getClassName())) {
                     zArr[0] = true;
-                    StringBuilder m13 = DumpUtils$$ExternalSyntheticOutline0.m("Package ", str2, ": shortcut ");
+                    StringBuilder m13 =
+                            DumpUtils$$ExternalSyntheticOutline0.m("Package ", str2, ": shortcut ");
                     m13.append(shortcutInfo4.getId());
                     m13.append(" has a dummy target activity");
                     Log.e("ShortcutService.verify", m13.toString());
@@ -213,7 +247,13 @@ public final /* synthetic */ class ShortcutPackage$$ExternalSyntheticLambda2 imp
                 Set set = (Set) this.f$1;
                 Consumer consumer = (Consumer) this.f$2;
                 shortcutPackage3.getClass();
-                ((AppSearchSession) obj).getByDocumentId(new GetByDocumentIdRequest.Builder(shortcutPackage3.mPackageName).addIds(set).build(), shortcutPackage3.mShortcutUser.mExecutor, shortcutPackage3.new AnonymousClass1(consumer));
+                ((AppSearchSession) obj)
+                        .getByDocumentId(
+                                new GetByDocumentIdRequest.Builder(shortcutPackage3.mPackageName)
+                                        .addIds(set)
+                                        .build(),
+                                shortcutPackage3.mShortcutUser.mExecutor,
+                                shortcutPackage3.new AnonymousClass1(consumer));
                 break;
         }
     }

@@ -3,27 +3,30 @@ package android.media.soundtrigger;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class PhraseSoundModel implements Parcelable {
-    public static final Parcelable.Creator<PhraseSoundModel> CREATOR = new Parcelable.Creator<PhraseSoundModel>() { // from class: android.media.soundtrigger.PhraseSoundModel.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PhraseSoundModel createFromParcel(Parcel _aidl_source) {
-            PhraseSoundModel _aidl_out = new PhraseSoundModel();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<PhraseSoundModel> CREATOR =
+            new Parcelable.Creator<PhraseSoundModel>() { // from class:
+                // android.media.soundtrigger.PhraseSoundModel.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PhraseSoundModel createFromParcel(Parcel _aidl_source) {
+                    PhraseSoundModel _aidl_out = new PhraseSoundModel();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PhraseSoundModel[] newArray(int _aidl_size) {
-            return new PhraseSoundModel[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PhraseSoundModel[] newArray(int _aidl_size) {
+                    return new PhraseSoundModel[_aidl_size];
+                }
+            };
     public SoundModel common;
     public Phrase[] phrases;
 
@@ -95,7 +98,8 @@ public class PhraseSoundModel implements Parcelable {
             return false;
         }
         PhraseSoundModel that = (PhraseSoundModel) other;
-        if (Objects.deepEquals(this.common, that.common) && Objects.deepEquals(this.phrases, that.phrases)) {
+        if (Objects.deepEquals(this.common, that.common)
+                && Objects.deepEquals(this.phrases, that.phrases)) {
             return true;
         }
         return false;

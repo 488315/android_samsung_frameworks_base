@@ -2,6 +2,7 @@ package android.util;
 
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.GrowingArrayUtils;
+
 import java.util.Arrays;
 
 /* loaded from: classes4.dex */

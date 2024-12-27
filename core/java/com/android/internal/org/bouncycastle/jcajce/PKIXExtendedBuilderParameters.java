@@ -1,6 +1,5 @@
 package com.android.internal.org.bouncycastle.jcajce;
 
-import com.android.internal.org.bouncycastle.jcajce.PKIXExtendedParameters;
 import java.security.InvalidParameterException;
 import java.security.cert.CertPathParameters;
 import java.security.cert.PKIXBuilderParameters;
@@ -40,7 +39,8 @@ public class PKIXExtendedBuilderParameters implements CertPathParameters {
 
         public Builder setMaxPathLength(int maxPathLength) {
             if (maxPathLength < -1) {
-                throw new InvalidParameterException("The maximum path length parameter can not be less than -1.");
+                throw new InvalidParameterException(
+                        "The maximum path length parameter can not be less than -1.");
             }
             this.maxPathLength = maxPathLength;
             return this;

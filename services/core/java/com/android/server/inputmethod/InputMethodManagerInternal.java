@@ -1,10 +1,12 @@
 package com.android.server.inputmethod;
 
 import android.os.IBinder;
+
 import com.android.internal.inputmethod.IAccessibilityInputMethodSession;
 import com.android.internal.inputmethod.InlineSuggestionsRequestInfo;
 import com.android.server.LocalServices;
 import com.android.server.autofill.AutofillInlineSuggestionsRequestSession;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -27,36 +29,33 @@ public abstract class InputMethodManagerInternal {
         }
 
         @Override // com.android.server.inputmethod.InputMethodManagerInternal
-        public final void hideAllInputMethods(int i) {
-        }
+        public final void hideAllInputMethods(int i) {}
 
         @Override // com.android.server.inputmethod.InputMethodManagerInternal
-        public final void maybeFinishStylusHandwriting() {
-        }
+        public final void maybeFinishStylusHandwriting() {}
 
         @Override // com.android.server.inputmethod.InputMethodManagerInternal
-        public final void onCreateInlineSuggestionsRequest(int i, InlineSuggestionsRequestInfo inlineSuggestionsRequestInfo, AutofillInlineSuggestionsRequestSession.InlineSuggestionsRequestCallbackImpl inlineSuggestionsRequestCallbackImpl) {
-        }
+        public final void onCreateInlineSuggestionsRequest(
+                int i,
+                InlineSuggestionsRequestInfo inlineSuggestionsRequestInfo,
+                AutofillInlineSuggestionsRequestSession.InlineSuggestionsRequestCallbackImpl
+                        inlineSuggestionsRequestCallbackImpl) {}
 
         @Override // com.android.server.inputmethod.InputMethodManagerInternal
-        public final void onImeParentChanged() {
-        }
+        public final void onImeParentChanged() {}
 
         @Override // com.android.server.inputmethod.InputMethodManagerInternal
-        public final void onSessionForAccessibilityCreated(IAccessibilityInputMethodSession iAccessibilityInputMethodSession, int i) {
-        }
+        public final void onSessionForAccessibilityCreated(
+                IAccessibilityInputMethodSession iAccessibilityInputMethodSession, int i) {}
 
         @Override // com.android.server.inputmethod.InputMethodManagerInternal
-        public final void onSwitchKeyboardLayoutShortcut(int i) {
-        }
+        public final void onSwitchKeyboardLayoutShortcut(int i) {}
 
         @Override // com.android.server.inputmethod.InputMethodManagerInternal
-        public final void removeImeSurface() {
-        }
+        public final void removeImeSurface() {}
 
         @Override // com.android.server.inputmethod.InputMethodManagerInternal
-        public final void reportImeControl(IBinder iBinder) {
-        }
+        public final void reportImeControl(IBinder iBinder) {}
 
         @Override // com.android.server.inputmethod.InputMethodManagerInternal
         public final boolean setInputMethodEnabled(int i, String str, boolean z) {
@@ -64,12 +63,10 @@ public abstract class InputMethodManagerInternal {
         }
 
         @Override // com.android.server.inputmethod.InputMethodManagerInternal
-        public final void setInteractive(boolean z) {
-        }
+        public final void setInteractive(boolean z) {}
 
         @Override // com.android.server.inputmethod.InputMethodManagerInternal
-        public final void setVirtualDeviceInputMethodForAllUsers(int i, String str) {
-        }
+        public final void setVirtualDeviceInputMethodForAllUsers(int i, String str) {}
 
         @Override // com.android.server.inputmethod.InputMethodManagerInternal
         public final boolean switchToInputMethod(int i, String str) {
@@ -82,16 +79,16 @@ public abstract class InputMethodManagerInternal {
         }
 
         @Override // com.android.server.inputmethod.InputMethodManagerInternal
-        public final void unbindAccessibilityFromCurrentClient(int i) {
-        }
+        public final void unbindAccessibilityFromCurrentClient(int i) {}
 
         @Override // com.android.server.inputmethod.InputMethodManagerInternal
-        public final void updateImeWindowStatus(boolean z) {
-        }
+        public final void updateImeWindowStatus(boolean z) {}
     }
 
     public static InputMethodManagerInternal get() {
-        InputMethodManagerInternal inputMethodManagerInternal = (InputMethodManagerInternal) LocalServices.getService(InputMethodManagerInternal.class);
+        InputMethodManagerInternal inputMethodManagerInternal =
+                (InputMethodManagerInternal)
+                        LocalServices.getService(InputMethodManagerInternal.class);
         return inputMethodManagerInternal != null ? inputMethodManagerInternal : NOP;
     }
 
@@ -103,11 +100,16 @@ public abstract class InputMethodManagerInternal {
 
     public abstract void maybeFinishStylusHandwriting();
 
-    public abstract void onCreateInlineSuggestionsRequest(int i, InlineSuggestionsRequestInfo inlineSuggestionsRequestInfo, AutofillInlineSuggestionsRequestSession.InlineSuggestionsRequestCallbackImpl inlineSuggestionsRequestCallbackImpl);
+    public abstract void onCreateInlineSuggestionsRequest(
+            int i,
+            InlineSuggestionsRequestInfo inlineSuggestionsRequestInfo,
+            AutofillInlineSuggestionsRequestSession.InlineSuggestionsRequestCallbackImpl
+                    inlineSuggestionsRequestCallbackImpl);
 
     public abstract void onImeParentChanged();
 
-    public abstract void onSessionForAccessibilityCreated(IAccessibilityInputMethodSession iAccessibilityInputMethodSession, int i);
+    public abstract void onSessionForAccessibilityCreated(
+            IAccessibilityInputMethodSession iAccessibilityInputMethodSession, int i);
 
     public abstract void onSwitchKeyboardLayoutShortcut(int i);
 

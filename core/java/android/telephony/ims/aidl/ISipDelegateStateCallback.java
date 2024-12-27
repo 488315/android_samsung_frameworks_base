@@ -9,43 +9,45 @@ import android.telephony.ims.DelegateRegistrationState;
 import android.telephony.ims.FeatureTagState;
 import android.telephony.ims.SipDelegateConfiguration;
 import android.telephony.ims.SipDelegateImsConfiguration;
-import android.telephony.ims.aidl.ISipDelegate;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
 public interface ISipDelegateStateCallback extends IInterface {
     public static final String DESCRIPTOR = "android.telephony.ims.aidl.ISipDelegateStateCallback";
 
-    void onConfigurationChanged(SipDelegateConfiguration sipDelegateConfiguration) throws RemoteException;
+    void onConfigurationChanged(SipDelegateConfiguration sipDelegateConfiguration)
+            throws RemoteException;
 
     void onCreated(ISipDelegate iSipDelegate, List<FeatureTagState> list) throws RemoteException;
 
     void onDestroyed(int i) throws RemoteException;
 
-    void onFeatureTagRegistrationChanged(DelegateRegistrationState delegateRegistrationState) throws RemoteException;
+    void onFeatureTagRegistrationChanged(DelegateRegistrationState delegateRegistrationState)
+            throws RemoteException;
 
-    void onImsConfigurationChanged(SipDelegateImsConfiguration sipDelegateImsConfiguration) throws RemoteException;
+    void onImsConfigurationChanged(SipDelegateImsConfiguration sipDelegateImsConfiguration)
+            throws RemoteException;
 
     public static class Default implements ISipDelegateStateCallback {
         @Override // android.telephony.ims.aidl.ISipDelegateStateCallback
-        public void onCreated(ISipDelegate c, List<FeatureTagState> deniedFeatureTags) throws RemoteException {
-        }
+        public void onCreated(ISipDelegate c, List<FeatureTagState> deniedFeatureTags)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.ISipDelegateStateCallback
-        public void onFeatureTagRegistrationChanged(DelegateRegistrationState registrationState) throws RemoteException {
-        }
+        public void onFeatureTagRegistrationChanged(DelegateRegistrationState registrationState)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.ISipDelegateStateCallback
-        public void onImsConfigurationChanged(SipDelegateImsConfiguration registeredSipConfig) throws RemoteException {
-        }
+        public void onImsConfigurationChanged(SipDelegateImsConfiguration registeredSipConfig)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.ISipDelegateStateCallback
-        public void onConfigurationChanged(SipDelegateConfiguration registeredSipConfig) throws RemoteException {
-        }
+        public void onConfigurationChanged(SipDelegateConfiguration registeredSipConfig)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.ISipDelegateStateCallback
-        public void onDestroyed(int reason) throws RemoteException {
-        }
+        public void onDestroyed(int reason) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -53,7 +55,7 @@ public interface ISipDelegateStateCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISipDelegateStateCallback {
+    public abstract static class Stub extends Binder implements ISipDelegateStateCallback {
         static final int TRANSACTION_onConfigurationChanged = 4;
         static final int TRANSACTION_onCreated = 1;
         static final int TRANSACTION_onDestroyed = 5;
@@ -103,7 +105,8 @@ public interface ISipDelegateStateCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISipDelegateStateCallback.DESCRIPTOR);
             }
@@ -114,22 +117,29 @@ public interface ISipDelegateStateCallback extends IInterface {
             switch (code) {
                 case 1:
                     ISipDelegate _arg0 = ISipDelegate.Stub.asInterface(data.readStrongBinder());
-                    List<FeatureTagState> _arg1 = data.createTypedArrayList(FeatureTagState.CREATOR);
+                    List<FeatureTagState> _arg1 =
+                            data.createTypedArrayList(FeatureTagState.CREATOR);
                     data.enforceNoDataAvail();
                     onCreated(_arg0, _arg1);
                     return true;
                 case 2:
-                    DelegateRegistrationState _arg02 = (DelegateRegistrationState) data.readTypedObject(DelegateRegistrationState.CREATOR);
+                    DelegateRegistrationState _arg02 =
+                            (DelegateRegistrationState)
+                                    data.readTypedObject(DelegateRegistrationState.CREATOR);
                     data.enforceNoDataAvail();
                     onFeatureTagRegistrationChanged(_arg02);
                     return true;
                 case 3:
-                    SipDelegateImsConfiguration _arg03 = (SipDelegateImsConfiguration) data.readTypedObject(SipDelegateImsConfiguration.CREATOR);
+                    SipDelegateImsConfiguration _arg03 =
+                            (SipDelegateImsConfiguration)
+                                    data.readTypedObject(SipDelegateImsConfiguration.CREATOR);
                     data.enforceNoDataAvail();
                     onImsConfigurationChanged(_arg03);
                     return true;
                 case 4:
-                    SipDelegateConfiguration _arg04 = (SipDelegateConfiguration) data.readTypedObject(SipDelegateConfiguration.CREATOR);
+                    SipDelegateConfiguration _arg04 =
+                            (SipDelegateConfiguration)
+                                    data.readTypedObject(SipDelegateConfiguration.CREATOR);
                     data.enforceNoDataAvail();
                     onConfigurationChanged(_arg04);
                     return true;
@@ -160,7 +170,8 @@ public interface ISipDelegateStateCallback extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.ISipDelegateStateCallback
-            public void onCreated(ISipDelegate c, List<FeatureTagState> deniedFeatureTags) throws RemoteException {
+            public void onCreated(ISipDelegate c, List<FeatureTagState> deniedFeatureTags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISipDelegateStateCallback.DESCRIPTOR);
@@ -173,7 +184,8 @@ public interface ISipDelegateStateCallback extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.ISipDelegateStateCallback
-            public void onFeatureTagRegistrationChanged(DelegateRegistrationState registrationState) throws RemoteException {
+            public void onFeatureTagRegistrationChanged(DelegateRegistrationState registrationState)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISipDelegateStateCallback.DESCRIPTOR);
@@ -185,7 +197,8 @@ public interface ISipDelegateStateCallback extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.ISipDelegateStateCallback
-            public void onImsConfigurationChanged(SipDelegateImsConfiguration registeredSipConfig) throws RemoteException {
+            public void onImsConfigurationChanged(SipDelegateImsConfiguration registeredSipConfig)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISipDelegateStateCallback.DESCRIPTOR);
@@ -197,7 +210,8 @@ public interface ISipDelegateStateCallback extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.ISipDelegateStateCallback
-            public void onConfigurationChanged(SipDelegateConfiguration registeredSipConfig) throws RemoteException {
+            public void onConfigurationChanged(SipDelegateConfiguration registeredSipConfig)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISipDelegateStateCallback.DESCRIPTOR);

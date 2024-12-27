@@ -6,14 +6,17 @@ import android.os.Binder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
+
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
 import com.android.server.NetworkScoreService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.GestureWakeup$$ExternalSyntheticOutline0;
 import com.android.server.knox.zt.devicetrust.EndpointMonitorImpl;
 import com.android.server.knox.zt.devicetrust.data.NetworkEventData;
+
 import com.samsung.android.knox.zt.devicetrust.IEndpointMonitorListener;
 import com.samsung.android.knox.zt.internal.IKnoxZtInternalService;
+
 import java.net.NetworkInterface;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -28,7 +31,14 @@ public class NetworkEventMonitoring extends SchedulableMonitoringTask {
     public final int mEventType;
     public EndpointMonitorImpl.Injector mInjector;
 
-    public NetworkEventMonitoring(int i, int i2, int i3, int i4, int i5, IEndpointMonitorListener iEndpointMonitorListener, EndpointMonitorImpl.Injector injector) {
+    public NetworkEventMonitoring(
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            IEndpointMonitorListener iEndpointMonitorListener,
+            EndpointMonitorImpl.Injector injector) {
         super(i, i2, i3, i4, i5, iEndpointMonitorListener, null, injector);
         this.mInjector = injector;
         this.mEventType = i;
@@ -40,7 +50,8 @@ public class NetworkEventMonitoring extends SchedulableMonitoringTask {
         try {
             return NetworkInterface.getByIndex(i).getName();
         } catch (Exception e) {
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e, "getInterfaceName error: ", this.TAG);
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    e, "getInterfaceName error: ", this.TAG);
             return "";
         }
     }
@@ -50,7 +61,8 @@ public class NetworkEventMonitoring extends SchedulableMonitoringTask {
             PackageManager packageManager = this.mInjector.mContext.getPackageManager();
             return packageManager != null ? packageManager.getNameForUid(i) : "";
         } catch (Exception e) {
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e, "getPackageNameForUid error: ", this.TAG);
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    e, "getPackageNameForUid error: ", this.TAG);
             return "";
         }
     }
@@ -69,7 +81,9 @@ public class NetworkEventMonitoring extends SchedulableMonitoringTask {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                if (IPackageManager.Stub.asInterface(ServiceManager.getService("package")).checkUidSignatures(i, 1000) == 0) {
+                if (IPackageManager.Stub.asInterface(ServiceManager.getService("package"))
+                                .checkUidSignatures(i, 1000)
+                        == 0) {
                     Log.d(this.TAG, "uid = " + i + " signature matched.");
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                     return true;
@@ -77,7 +91,8 @@ public class NetworkEventMonitoring extends SchedulableMonitoringTask {
             } catch (Exception e) {
                 Log.e(this.TAG, "Exception checking platform signed app.. " + e);
             }
-            NetworkScoreService$$ExternalSyntheticOutline0.m(i, "uid = ", " signature didn't match.", this.TAG);
+            NetworkScoreService$$ExternalSyntheticOutline0.m(
+                    i, "uid = ", " signature didn't match.", this.TAG);
             return false;
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -109,12 +124,16 @@ public class NetworkEventMonitoring extends SchedulableMonitoringTask {
         }
         int tagFromEventType = getTagFromEventType(networkEventData.eventType);
         if (tagFromEventType == -1) {
-            GestureWakeup$$ExternalSyntheticOutline0.m(new StringBuilder("onEvent: Invalid network event type: "), networkEventData.eventType, this.TAG);
+            GestureWakeup$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("onEvent: Invalid network event type: "),
+                    networkEventData.eventType,
+                    this.TAG);
             return;
         }
         String packageNameFromUid = getPackageNameFromUid(networkEventData.uid);
         if (tagFromEventType == 1 && isPlatformSignedApp(networkEventData.uid)) {
-            DualAppManagerService$$ExternalSyntheticOutline0.m("Excluding insecure network event for package ", packageNameFromUid, this.TAG);
+            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                    "Excluding insecure network event for package ", packageNameFromUid, this.TAG);
             return;
         }
         networkEventData.packageName = packageNameFromUid;
@@ -126,7 +145,8 @@ public class NetworkEventMonitoring extends SchedulableMonitoringTask {
 
     @Override // com.android.server.knox.zt.devicetrust.task.MonitoringTask
     public final void onMonitored() {
-        ArrayList readNetworkEventData = this.mInjector.mNative.readNetworkEventData(this.mEventType);
+        ArrayList readNetworkEventData =
+                this.mInjector.mNative.readNetworkEventData(this.mEventType);
         if (readNetworkEventData != null) {
             try {
                 Iterator it = readNetworkEventData.iterator();

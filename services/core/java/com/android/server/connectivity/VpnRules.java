@@ -5,6 +5,7 @@ import android.net.INetd;
 import android.os.ServiceManager;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.internal.net.IOemNetd;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
@@ -17,7 +18,11 @@ public final class VpnRules {
     public IOemNetd mOemNetd;
 
     public final void addVpnRuleForTethering(String str) {
-        runVpnRulesCommand(4, "*nat\n-I tetherctrl_nat_POSTROUTING -s " + str.substring(0, str.indexOf("/")) + " -j RETURN\nCOMMIT\n");
+        runVpnRulesCommand(
+                4,
+                "*nat\n-I tetherctrl_nat_POSTROUTING -s "
+                        + str.substring(0, str.indexOf("/"))
+                        + " -j RETURN\nCOMMIT\n");
     }
 
     public final boolean bindNetdNativeService() {
@@ -41,17 +46,23 @@ public final class VpnRules {
                 Log.e("VpnRules", "Failed to get OemNetd listener: null");
                 return false;
             } catch (Exception e) {
-                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e, "Failed to get OemNetd listener: err = ", "VpnRules");
+                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                        e, "Failed to get OemNetd listener: err = ", "VpnRules");
                 return false;
             }
         } catch (Exception e2) {
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(e2, "Failed to bind netd: err = ", "VpnRules");
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    e2, "Failed to bind netd: err = ", "VpnRules");
             return false;
         }
     }
 
     public final void deleteTetheringRule(String str) {
-        runVpnRulesCommand(4, "*nat\n-D tetherctrl_nat_POSTROUTING -s " + str.substring(0, str.indexOf("/")) + " -j RETURN\nCOMMIT\n");
+        runVpnRulesCommand(
+                4,
+                "*nat\n-D tetherctrl_nat_POSTROUTING -s "
+                        + str.substring(0, str.indexOf("/"))
+                        + " -j RETURN\nCOMMIT\n");
     }
 
     public final void deleteVpnPostroutingChain() {
@@ -63,13 +74,13 @@ public final class VpnRules {
 
     /* JADX WARN: Can't wrap try/catch for region: R(14:2|3|(11:5|(1:7)|8|9|(2:12|10)|13|14|(2:16|(5:18|(1:20)(1:25)|21|22|23))|26|27|28)|32|(3:34|35|36)|8|9|(1:10)|13|14|(0)|26|27|28) */
     /* JADX WARN: Code restructure failed: missing block: B:29:0x003e, code lost:
-    
-        r7 = move-exception;
-     */
+
+       r7 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:31:0x00e0, code lost:
-    
-        android.util.Log.e("VpnRules", "runShellCmd: err = " + r7);
-     */
+
+       android.util.Log.e("VpnRules", "runShellCmd: err = " + r7);
+    */
     /* JADX WARN: Removed duplicated region for block: B:12:0x002a A[Catch: all -> 0x000b, Exception -> 0x003e, LOOP:0: B:10:0x0024->B:12:0x002a, LOOP_END, TryCatch #0 {Exception -> 0x003e, blocks: (B:9:0x001e, B:10:0x0024, B:12:0x002a, B:14:0x0041, B:16:0x0071, B:18:0x0088, B:21:0x00b0, B:25:0x00a8, B:26:0x00c2), top: B:8:0x001e, outer: #1 }] */
     /* JADX WARN: Removed duplicated region for block: B:16:0x0071 A[Catch: all -> 0x000b, Exception -> 0x003e, TryCatch #0 {Exception -> 0x003e, blocks: (B:9:0x001e, B:10:0x0024, B:12:0x002a, B:14:0x0041, B:16:0x0071, B:18:0x0088, B:21:0x00b0, B:25:0x00a8, B:26:0x00c2), top: B:8:0x001e, outer: #1 }] */
     /*
@@ -192,18 +203,20 @@ public final class VpnRules {
             monitor-exit(r6)
             throw r7
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.connectivity.VpnRules.runShellCommand(java.lang.String):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.connectivity.VpnRules.runShellCommand(java.lang.String):java.lang.String");
     }
 
     /* JADX WARN: Can't wrap try/catch for region: R(14:2|3|(11:5|(1:7)|8|9|(2:12|10)|13|14|(1:16)|17|18|19)|25|(3:27|28|29)|8|9|(1:10)|13|14|(0)|17|18|19) */
     /* JADX WARN: Code restructure failed: missing block: B:22:0x003d, code lost:
-    
-        r6 = move-exception;
-     */
+
+       r6 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:24:0x009c, code lost:
-    
-        android.util.Log.e("VpnRules", "runCmd: err = " + r6);
-     */
+
+       android.util.Log.e("VpnRules", "runCmd: err = " + r6);
+    */
     /* JADX WARN: Removed duplicated region for block: B:12:0x0029 A[Catch: all -> 0x000a, Exception -> 0x003d, LOOP:0: B:10:0x0023->B:12:0x0029, LOOP_END, TryCatch #0 {Exception -> 0x003d, blocks: (B:9:0x001d, B:10:0x0023, B:12:0x0029, B:14:0x003f, B:17:0x008b), top: B:8:0x001d, outer: #1 }] */
     /* JADX WARN: Removed duplicated region for block: B:16:0x0089  */
     /*
@@ -299,7 +312,10 @@ public final class VpnRules {
             monitor-exit(r5)
             throw r6
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.connectivity.VpnRules.runVpnRulesCommand(int, java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.connectivity.VpnRules.runVpnRulesCommand(int,"
+                    + " java.lang.String):void");
     }
 
     public final void setFirewallEgressDestRule(int i, String str, boolean z) {
@@ -308,22 +324,26 @@ public final class VpnRules {
         }
         int i2 = str.contains(":") ? 6 : 4;
         StringBuilder sb = new StringBuilder("*filter\n");
-        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(sb, z ? "-I" : "-D", " fw_INPUT -s ", str, " -p tcp --sport ");
+        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                sb, z ? "-I" : "-D", " fw_INPUT -s ", str, " -p tcp --sport ");
         sb.append(i);
         sb.append(" -j RETURN\nCOMMIT\n");
         runVpnRulesCommand(i2, sb.toString());
         StringBuilder sb2 = new StringBuilder("*filter\n");
-        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(sb2, z ? "-I" : "-D", " fw_OUTPUT -d ", str, " -p tcp --dport ");
+        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                sb2, z ? "-I" : "-D", " fw_OUTPUT -d ", str, " -p tcp --dport ");
         sb2.append(i);
         sb2.append(" -j RETURN\nCOMMIT\n");
         runVpnRulesCommand(i2, sb2.toString());
         StringBuilder sb3 = new StringBuilder("*filter\n");
-        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(sb3, z ? "-I" : "-D", " fw_INPUT -s ", str, " -p udp --sport ");
+        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                sb3, z ? "-I" : "-D", " fw_INPUT -s ", str, " -p udp --sport ");
         sb3.append(i);
         sb3.append(" -j RETURN\nCOMMIT\n");
         runVpnRulesCommand(i2, sb3.toString());
         StringBuilder sb4 = new StringBuilder("*filter\n");
-        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(sb4, z ? "-I" : "-D", " fw_OUTPUT -d ", str, " -p udp --dport ");
+        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                sb4, z ? "-I" : "-D", " fw_OUTPUT -d ", str, " -p udp --dport ");
         sb4.append(i);
         sb4.append(" -j RETURN\nCOMMIT\n");
         runVpnRulesCommand(i2, sb4.toString());
@@ -334,8 +354,22 @@ public final class VpnRules {
             return;
         }
         int i = str.contains(":") ? 6 : 4;
-        runVpnRulesCommand(i, OptionalModelParameterRange$$ExternalSyntheticOutline0.m(new StringBuilder("*filter\n"), z ? "-I" : "-D", " fw_INPUT -d ", str, " -j RETURN\nCOMMIT\n"));
-        runVpnRulesCommand(i, OptionalModelParameterRange$$ExternalSyntheticOutline0.m(new StringBuilder("*filter\n"), z ? "-I" : "-D", " fw_OUTPUT -s ", str, " -j RETURN\nCOMMIT\n"));
+        runVpnRulesCommand(
+                i,
+                OptionalModelParameterRange$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("*filter\n"),
+                        z ? "-I" : "-D",
+                        " fw_INPUT -d ",
+                        str,
+                        " -j RETURN\nCOMMIT\n"));
+        runVpnRulesCommand(
+                i,
+                OptionalModelParameterRange$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("*filter\n"),
+                        z ? "-I" : "-D",
+                        " fw_OUTPUT -s ",
+                        str,
+                        " -j RETURN\nCOMMIT\n"));
     }
 
     public final void setFirewallEnabled(boolean z) {
@@ -364,8 +398,14 @@ public final class VpnRules {
         runVpnRulesCommand(46, sb2.toString());
     }
 
-    public final int setTcpPortBypassRule(int i, int i2, int i3, int i4, String str, String str2, boolean z) {
-        if (i <= 0 || i2 <= 0 || i3 <= 0 || i4 <= 0 || TextUtils.isEmpty(str) || TextUtils.isEmpty(str2)) {
+    public final int setTcpPortBypassRule(
+            int i, int i2, int i3, int i4, String str, String str2, boolean z) {
+        if (i <= 0
+                || i2 <= 0
+                || i3 <= 0
+                || i4 <= 0
+                || TextUtils.isEmpty(str)
+                || TextUtils.isEmpty(str2)) {
             Log.d("VpnRules", "Failed to run setTcpPortBypassRule: invalid parameter");
             return -1;
         }
@@ -384,18 +424,21 @@ public final class VpnRules {
             return -1;
         }
         StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i5, "ip -", " rule ");
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m(i2, z ? "add" : "del", " from all fwmark ", " table ", m);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                i2, z ? "add" : "del", " from all fwmark ", " table ", m);
         m.append(i4);
         m.append(" prio ");
         m.append(i3);
         runShellCommand(m.toString());
         StringBuilder sb = new StringBuilder("*mangle\n");
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m(i, z ? "-A" : "-D", " OUTPUT -p tcp --dport ", " -j MARK --set-mark ", sb);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                i, z ? "-A" : "-D", " OUTPUT -p tcp --dport ", " -j MARK --set-mark ", sb);
         sb.append(i2);
         sb.append("\nCOMMIT\n");
         runVpnRulesCommand(i5, sb.toString());
         StringBuilder sb2 = new StringBuilder("*nat\n");
-        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(sb2, z ? "-A" : "-D", " POSTROUTING -o ", str, " -j SNAT --to ");
+        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                sb2, z ? "-A" : "-D", " POSTROUTING -o ", str, " -j SNAT --to ");
         sb2.append(str2);
         sb2.append("\nCOMMIT\n");
         runVpnRulesCommand(i5, sb2.toString());

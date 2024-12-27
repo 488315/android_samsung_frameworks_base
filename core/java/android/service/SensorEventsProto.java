@@ -11,8 +11,7 @@ public final class SensorEventsProto {
         public static final long TIMESTAMP_SEC = 1108101562369L;
         public static final long WALL_TIMESTAMP_MS = 1112396529666L;
 
-        public Event() {
-        }
+        public Event() {}
     }
 
     public final class RecentEventsLog {
@@ -20,7 +19,6 @@ public final class SensorEventsProto {
         public static final long NAME = 1138166333441L;
         public static final long RECENT_EVENTS_COUNT = 1120986464258L;
 
-        public RecentEventsLog() {
-        }
+        public RecentEventsLog() {}
     }
 }

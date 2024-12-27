@@ -12,24 +12,30 @@ import android.os.RemoteException;
 public interface IUsageStatsWatcher extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.app.usage.IUsageStatsWatcher";
 
-    void notePauseComponent(ComponentName componentName, Intent intent, int i, int i2) throws RemoteException;
+    void notePauseComponent(ComponentName componentName, Intent intent, int i, int i2)
+            throws RemoteException;
 
-    void noteResumeComponent(ComponentName componentName, Intent intent, int i, int i2) throws RemoteException;
+    void noteResumeComponent(ComponentName componentName, Intent intent, int i, int i2)
+            throws RemoteException;
 
-    void noteStopComponent(ComponentName componentName, Intent intent, int i, int i2) throws RemoteException;
+    void noteStopComponent(ComponentName componentName, Intent intent, int i, int i2)
+            throws RemoteException;
 
     public static class Default implements IUsageStatsWatcher {
         @Override // com.samsung.android.app.usage.IUsageStatsWatcher
-        public void noteResumeComponent(ComponentName resumeComponent, Intent intent, int instanceId, int userId) throws RemoteException {
-        }
+        public void noteResumeComponent(
+                ComponentName resumeComponent, Intent intent, int instanceId, int userId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.app.usage.IUsageStatsWatcher
-        public void notePauseComponent(ComponentName pauseComponent, Intent intent, int instanceId, int userId) throws RemoteException {
-        }
+        public void notePauseComponent(
+                ComponentName pauseComponent, Intent intent, int instanceId, int userId)
+                throws RemoteException {}
 
         @Override // com.samsung.android.app.usage.IUsageStatsWatcher
-        public void noteStopComponent(ComponentName stopComponent, Intent intent, int instanceId, int userId) throws RemoteException {
-        }
+        public void noteStopComponent(
+                ComponentName stopComponent, Intent intent, int instanceId, int userId)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -37,7 +43,7 @@ public interface IUsageStatsWatcher extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUsageStatsWatcher {
+    public abstract static class Stub extends Binder implements IUsageStatsWatcher {
         static final int TRANSACTION_notePauseComponent = 2;
         static final int TRANSACTION_noteResumeComponent = 1;
         static final int TRANSACTION_noteStopComponent = 3;
@@ -81,7 +87,8 @@ public interface IUsageStatsWatcher extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IUsageStatsWatcher.DESCRIPTOR);
             }
@@ -91,7 +98,8 @@ public interface IUsageStatsWatcher extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     Intent _arg1 = (Intent) data.readTypedObject(Intent.CREATOR);
                     int _arg2 = data.readInt();
                     int _arg3 = data.readInt();
@@ -99,7 +107,8 @@ public interface IUsageStatsWatcher extends IInterface {
                     noteResumeComponent(_arg0, _arg1, _arg2, _arg3);
                     return true;
                 case 2:
-                    ComponentName _arg02 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg02 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     Intent _arg12 = (Intent) data.readTypedObject(Intent.CREATOR);
                     int _arg22 = data.readInt();
                     int _arg32 = data.readInt();
@@ -107,7 +116,8 @@ public interface IUsageStatsWatcher extends IInterface {
                     notePauseComponent(_arg02, _arg12, _arg22, _arg32);
                     return true;
                 case 3:
-                    ComponentName _arg03 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg03 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     Intent _arg13 = (Intent) data.readTypedObject(Intent.CREATOR);
                     int _arg23 = data.readInt();
                     int _arg33 = data.readInt();
@@ -136,7 +146,9 @@ public interface IUsageStatsWatcher extends IInterface {
             }
 
             @Override // com.samsung.android.app.usage.IUsageStatsWatcher
-            public void noteResumeComponent(ComponentName resumeComponent, Intent intent, int instanceId, int userId) throws RemoteException {
+            public void noteResumeComponent(
+                    ComponentName resumeComponent, Intent intent, int instanceId, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IUsageStatsWatcher.DESCRIPTOR);
@@ -151,7 +163,9 @@ public interface IUsageStatsWatcher extends IInterface {
             }
 
             @Override // com.samsung.android.app.usage.IUsageStatsWatcher
-            public void notePauseComponent(ComponentName pauseComponent, Intent intent, int instanceId, int userId) throws RemoteException {
+            public void notePauseComponent(
+                    ComponentName pauseComponent, Intent intent, int instanceId, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IUsageStatsWatcher.DESCRIPTOR);
@@ -166,7 +180,9 @@ public interface IUsageStatsWatcher extends IInterface {
             }
 
             @Override // com.samsung.android.app.usage.IUsageStatsWatcher
-            public void noteStopComponent(ComponentName stopComponent, Intent intent, int instanceId, int userId) throws RemoteException {
+            public void noteStopComponent(
+                    ComponentName stopComponent, Intent intent, int instanceId, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IUsageStatsWatcher.DESCRIPTOR);

@@ -8,8 +8,7 @@ abstract class Learner {
 
     abstract ArrayList<Prediction> classify(int i, int i2, float[] fArr);
 
-    Learner() {
-    }
+    Learner() {}
 
     void addInstance(Instance instance) {
         this.mInstances.add(instance);
@@ -37,7 +36,8 @@ abstract class Learner {
         int count = instances.size();
         for (int i = 0; i < count; i++) {
             Instance instance = instances.get(i);
-            if ((instance.label == null && name == null) || (instance.label != null && instance.label.equals(name))) {
+            if ((instance.label == null && name == null)
+                    || (instance.label != null && instance.label.equals(name))) {
                 toDelete.add(instance);
             }
         }

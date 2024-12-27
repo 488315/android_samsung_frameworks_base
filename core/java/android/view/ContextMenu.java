@@ -5,8 +5,7 @@ import android.graphics.drawable.Drawable;
 /* loaded from: classes4.dex */
 public interface ContextMenu extends Menu {
 
-    public interface ContextMenuInfo {
-    }
+    public interface ContextMenuInfo {}
 
     void clearHeader();
 

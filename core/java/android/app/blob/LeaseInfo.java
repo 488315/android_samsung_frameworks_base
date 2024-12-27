@@ -3,29 +3,32 @@ package android.app.blob;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
 public final class LeaseInfo implements Parcelable {
-    public static final Parcelable.Creator<LeaseInfo> CREATOR = new Parcelable.Creator<LeaseInfo>() { // from class: android.app.blob.LeaseInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LeaseInfo createFromParcel(Parcel source) {
-            return new LeaseInfo(source);
-        }
+    public static final Parcelable.Creator<LeaseInfo> CREATOR =
+            new Parcelable.Creator<LeaseInfo>() { // from class: android.app.blob.LeaseInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LeaseInfo createFromParcel(Parcel source) {
+                    return new LeaseInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LeaseInfo[] newArray(int size) {
-            return new LeaseInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LeaseInfo[] newArray(int size) {
+                    return new LeaseInfo[size];
+                }
+            };
     private final CharSequence mDescription;
     private final int mDescriptionResId;
     private final long mExpiryTimeMillis;
     private final String mPackageName;
 
-    public LeaseInfo(String packageName, long expiryTimeMs, int descriptionResId, CharSequence description) {
+    public LeaseInfo(
+            String packageName, long expiryTimeMs, int descriptionResId, CharSequence description) {
         this.mPackageName = packageName;
         this.mExpiryTimeMillis = expiryTimeMs;
         this.mDescriptionResId = descriptionResId;
@@ -64,7 +67,15 @@ public final class LeaseInfo implements Parcelable {
     }
 
     public String toString() {
-        return "LeaseInfo {package: " + this.mPackageName + ",expiryMs: " + this.mExpiryTimeMillis + ",descriptionResId: " + this.mDescriptionResId + ",description: " + ((Object) this.mDescription) + ",}";
+        return "LeaseInfo {package: "
+                + this.mPackageName
+                + ",expiryMs: "
+                + this.mExpiryTimeMillis
+                + ",descriptionResId: "
+                + this.mDescriptionResId
+                + ",description: "
+                + ((Object) this.mDescription)
+                + ",}";
     }
 
     private String toShortString() {

@@ -5,6 +5,7 @@ import android.hardware.audio.common.V2_0.AudioOffloadInfo$$ExternalSyntheticOut
 import android.hardware.broadcastradio.V2_0.AmFmBandRange$$ExternalSyntheticOutline0;
 import android.hardware.health.V2_1.HealthInfo;
 import android.os.HidlSupport;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -30,11 +31,32 @@ public final class SehHealthInfo {
             return false;
         }
         SehHealthInfo sehHealthInfo = (SehHealthInfo) obj;
-        return HidlSupport.deepEquals(this.legacy, sehHealthInfo.legacy) && this.batteryCurrentNow == sehHealthInfo.batteryCurrentNow && this.batteryOnline == sehHealthInfo.batteryOnline && this.batteryChargeType == sehHealthInfo.batteryChargeType && this.batteryPowerSharingOnline == sehHealthInfo.batteryPowerSharingOnline && this.chargerPogoOnline == sehHealthInfo.chargerPogoOnline && this.batteryHighVoltageCharger == sehHealthInfo.batteryHighVoltageCharger && this.batteryEvent == sehHealthInfo.batteryEvent && this.batteryCurrentEvent == sehHealthInfo.batteryCurrentEvent && this.chargerOtgOnline == sehHealthInfo.chargerOtgOnline && this.wirelessPowerSharingTxEvent == sehHealthInfo.wirelessPowerSharingTxEvent;
+        return HidlSupport.deepEquals(this.legacy, sehHealthInfo.legacy)
+                && this.batteryCurrentNow == sehHealthInfo.batteryCurrentNow
+                && this.batteryOnline == sehHealthInfo.batteryOnline
+                && this.batteryChargeType == sehHealthInfo.batteryChargeType
+                && this.batteryPowerSharingOnline == sehHealthInfo.batteryPowerSharingOnline
+                && this.chargerPogoOnline == sehHealthInfo.chargerPogoOnline
+                && this.batteryHighVoltageCharger == sehHealthInfo.batteryHighVoltageCharger
+                && this.batteryEvent == sehHealthInfo.batteryEvent
+                && this.batteryCurrentEvent == sehHealthInfo.batteryCurrentEvent
+                && this.chargerOtgOnline == sehHealthInfo.chargerOtgOnline
+                && this.wirelessPowerSharingTxEvent == sehHealthInfo.wirelessPowerSharingTxEvent;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.legacy)), AudioConfig$$ExternalSyntheticOutline0.m(this.batteryCurrentNow), AudioConfig$$ExternalSyntheticOutline0.m(this.batteryOnline), AudioConfig$$ExternalSyntheticOutline0.m(this.batteryChargeType), AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.batteryPowerSharingOnline), AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.chargerPogoOnline), AudioConfig$$ExternalSyntheticOutline0.m(this.batteryHighVoltageCharger), AudioConfig$$ExternalSyntheticOutline0.m(this.batteryEvent), AudioConfig$$ExternalSyntheticOutline0.m(this.batteryCurrentEvent), AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.chargerOtgOnline), AudioConfig$$ExternalSyntheticOutline0.m(this.wirelessPowerSharingTxEvent));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(this.legacy)),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.batteryCurrentNow),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.batteryOnline),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.batteryChargeType),
+                AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.batteryPowerSharingOnline),
+                AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.chargerPogoOnline),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.batteryHighVoltageCharger),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.batteryEvent),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.batteryCurrentEvent),
+                AudioOffloadInfo$$ExternalSyntheticOutline0.m(this.chargerOtgOnline),
+                AudioConfig$$ExternalSyntheticOutline0.m(this.wirelessPowerSharingTxEvent));
     }
 
     public final String toString() {
@@ -59,6 +81,7 @@ public final class SehHealthInfo {
         sb.append(", .chargerOtgOnline = ");
         sb.append(this.chargerOtgOnline);
         sb.append(", .wirelessPowerSharingTxEvent = ");
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(this.wirelessPowerSharingTxEvent, sb, "}");
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                this.wirelessPowerSharingTxEvent, sb, "}");
     }
 }

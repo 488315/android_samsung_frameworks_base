@@ -12,7 +12,9 @@ public abstract class SDPLog {
     public static final boolean DEBUG;
 
     static {
-        DEBUG = "userdebug".equals(SystemProperties.get("ro.build.type")) || "eng".equals(SystemProperties.get("ro.build.type"));
+        DEBUG =
+                "userdebug".equals(SystemProperties.get("ro.build.type"))
+                        || "eng".equals(SystemProperties.get("ro.build.type"));
     }
 
     public static void d(String str, String str2) {
@@ -70,11 +72,41 @@ public abstract class SDPLog {
         String str4 = SDPLogUtil.getCurrentTime() + ",I,";
         try {
             StackTraceElement[] stackTrace = th.getStackTrace();
-            str3 = str4 + SDPLogUtil.makePairs("UserId", String.valueOf(Binder.getCallingUserHandle().getIdentifier()), "UID", String.valueOf(Binder.getCallingUid()), "PID", String.valueOf(Binder.getCallingPid()), "TID", String.valueOf(Process.myTid()), "Curr", stackTrace.length > 1 ? stackTrace[1].getClassName() + "." + stackTrace[1].getMethodName() + "()" : "()", "Prev", stackTrace.length > 2 ? stackTrace[2].getClassName() + "." + stackTrace[2].getMethodName() + "()" : "()");
+            str3 =
+                    str4
+                            + SDPLogUtil.makePairs(
+                                    "UserId",
+                                    String.valueOf(Binder.getCallingUserHandle().getIdentifier()),
+                                    "UID",
+                                    String.valueOf(Binder.getCallingUid()),
+                                    "PID",
+                                    String.valueOf(Binder.getCallingPid()),
+                                    "TID",
+                                    String.valueOf(Process.myTid()),
+                                    "Curr",
+                                    stackTrace.length > 1
+                                            ? stackTrace[1].getClassName()
+                                                    + "."
+                                                    + stackTrace[1].getMethodName()
+                                                    + "()"
+                                            : "()",
+                                    "Prev",
+                                    stackTrace.length > 2
+                                            ? stackTrace[2].getClassName()
+                                                    + "."
+                                                    + stackTrace[2].getMethodName()
+                                                    + "()"
+                                            : "()");
         } catch (ArrayIndexOutOfBoundsException unused) {
             str3 = str4;
         }
-        for (String str5 : str2 == null ? new String[]{str3} : new String[]{ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str4, str2), str3}) {
+        for (String str5 :
+                str2 == null
+                        ? new String[] {str3}
+                        : new String[] {
+                            ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str4, str2),
+                            str3
+                        }) {
             SDPLogger.enqMessage(str5);
         }
         if (str2 != null) {

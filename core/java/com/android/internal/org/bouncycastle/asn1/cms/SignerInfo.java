@@ -12,6 +12,7 @@ import com.android.internal.org.bouncycastle.asn1.DEROctetString;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 import com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
+
 import java.util.Enumeration;
 
 /* loaded from: classes5.dex */
@@ -34,7 +35,13 @@ public class SignerInfo extends ASN1Object {
         return null;
     }
 
-    public SignerInfo(SignerIdentifier sid, AlgorithmIdentifier digAlgorithm, ASN1Set authenticatedAttributes, AlgorithmIdentifier digEncryptionAlgorithm, ASN1OctetString encryptedDigest, ASN1Set unauthenticatedAttributes) {
+    public SignerInfo(
+            SignerIdentifier sid,
+            AlgorithmIdentifier digAlgorithm,
+            ASN1Set authenticatedAttributes,
+            AlgorithmIdentifier digEncryptionAlgorithm,
+            ASN1OctetString encryptedDigest,
+            ASN1Set unauthenticatedAttributes) {
         if (sid.isTagged()) {
             this.version = new ASN1Integer(3L);
         } else {
@@ -48,7 +55,13 @@ public class SignerInfo extends ASN1Object {
         this.unauthenticatedAttributes = unauthenticatedAttributes;
     }
 
-    public SignerInfo(SignerIdentifier sid, AlgorithmIdentifier digAlgorithm, Attributes authenticatedAttributes, AlgorithmIdentifier digEncryptionAlgorithm, ASN1OctetString encryptedDigest, Attributes unauthenticatedAttributes) {
+    public SignerInfo(
+            SignerIdentifier sid,
+            AlgorithmIdentifier digAlgorithm,
+            Attributes authenticatedAttributes,
+            AlgorithmIdentifier digEncryptionAlgorithm,
+            ASN1OctetString encryptedDigest,
+            Attributes unauthenticatedAttributes) {
         if (sid.isTagged()) {
             this.version = new ASN1Integer(3L);
         } else {
@@ -77,7 +90,8 @@ public class SignerInfo extends ASN1Object {
         }
         this.encryptedDigest = DEROctetString.getInstance(e.nextElement());
         if (e.hasMoreElements()) {
-            this.unauthenticatedAttributes = ASN1Set.getInstance((ASN1TaggedObject) e.nextElement(), false);
+            this.unauthenticatedAttributes =
+                    ASN1Set.getInstance((ASN1TaggedObject) e.nextElement(), false);
         } else {
             this.unauthenticatedAttributes = null;
         }
@@ -111,7 +125,8 @@ public class SignerInfo extends ASN1Object {
         return this.unauthenticatedAttributes;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(7);
         v.add(this.version);

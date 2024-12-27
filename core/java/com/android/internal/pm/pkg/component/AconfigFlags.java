@@ -9,18 +9,26 @@ import android.os.Process;
 import android.util.ArrayMap;
 import android.util.Slog;
 import android.util.Xml;
+
 import com.android.modules.utils.TypedXmlPullParser;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes5.dex */
 public class AconfigFlags {
     private static final String LOG_TAG = "AconfigFlags";
-    private static final List<String> sTextProtoFilesOnDevice = List.of("/system/etc/aconfig_flags.pb", "/system_ext/etc/aconfig_flags.pb", "/product/etc/aconfig_flags.pb", "/vendor/etc/aconfig_flags.pb");
+    private static final List<String> sTextProtoFilesOnDevice =
+            List.of(
+                    "/system/etc/aconfig_flags.pb",
+                    "/system_ext/etc/aconfig_flags.pb",
+                    "/product/etc/aconfig_flags.pb",
+                    "/vendor/etc/aconfig_flags.pb");
     private final ArrayMap<String, Boolean> mFlagValues = new ArrayMap<>();
 
     public AconfigFlags() {
@@ -96,7 +104,9 @@ public class AconfigFlags {
                                 String value = parser.getAttributeValue(null, "value");
                                 if (name == null) {
                                     i = 3;
-                                } else if (value != null && ("false".equalsIgnoreCase(value) || "true".equalsIgnoreCase(value))) {
+                                } else if (value != null
+                                        && ("false".equalsIgnoreCase(value)
+                                                || "true".equalsIgnoreCase(value))) {
                                     String separator = "/";
                                     if (name.startsWith(flagPackageAndName)) {
                                         String prefix3 = flagPackageAndName;
@@ -117,7 +127,8 @@ public class AconfigFlags {
                                         prefix2 = str;
                                         priority = 0;
                                     }
-                                    String flagPackageAndName2 = parseFlagPackageAndName(name, separator);
+                                    String flagPackageAndName2 =
+                                            parseFlagPackageAndName(name, separator);
                                     String str2 = flagPackageAndName;
                                     if (flagPackageAndName2 == null) {
                                         str = prefix2;
@@ -128,12 +139,26 @@ public class AconfigFlags {
                                         try {
                                             if (this.mFlagValues.containsKey(flagPackageAndName2)) {
                                                 TypedXmlPullParser parser2 = parser;
-                                                Slog.d(LOG_TAG, "Found " + prefix + " Aconfig flag value for " + flagPackageAndName2 + " = " + value);
-                                                Integer currentPriority = flagPriority.get(flagPackageAndName2);
-                                                if (currentPriority == null || currentPriority.intValue() < priority) {
+                                                Slog.d(
+                                                        LOG_TAG,
+                                                        "Found "
+                                                                + prefix
+                                                                + " Aconfig flag value for "
+                                                                + flagPackageAndName2
+                                                                + " = "
+                                                                + value);
+                                                Integer currentPriority =
+                                                        flagPriority.get(flagPackageAndName2);
+                                                if (currentPriority == null
+                                                        || currentPriority.intValue() < priority) {
                                                     int outerDepth2 = outerDepth;
-                                                    flagPriority.put(flagPackageAndName2, Integer.valueOf(priority));
-                                                    this.mFlagValues.put(flagPackageAndName2, Boolean.valueOf(Boolean.parseBoolean(value)));
+                                                    flagPriority.put(
+                                                            flagPackageAndName2,
+                                                            Integer.valueOf(priority));
+                                                    this.mFlagValues.put(
+                                                            flagPackageAndName2,
+                                                            Boolean.valueOf(
+                                                                    Boolean.parseBoolean(value)));
                                                     str = prefix2;
                                                     flagPackageAndName = str2;
                                                     settingsFile = settingsFile2;
@@ -141,7 +166,15 @@ public class AconfigFlags {
                                                     outerDepth = outerDepth2;
                                                     i = 3;
                                                 } else {
-                                                    Slog.i(LOG_TAG, "Skipping " + prefix + " flag " + flagPackageAndName2 + " because of the existing one with priority " + currentPriority);
+                                                    Slog.i(
+                                                            LOG_TAG,
+                                                            "Skipping "
+                                                                    + prefix
+                                                                    + " flag "
+                                                                    + flagPackageAndName2
+                                                                    + " because of the existing one"
+                                                                    + " with priority "
+                                                                    + currentPriority);
                                                     str = prefix2;
                                                     flagPackageAndName = str2;
                                                     settingsFile = settingsFile2;
@@ -196,7 +229,9 @@ public class AconfigFlags {
                 z = false;
             }
             boolean flagValue = z;
-            Slog.v(LOG_TAG, "Read Aconfig default flag value " + flagPackageAndName + " = " + flagValue);
+            Slog.v(
+                    LOG_TAG,
+                    "Read Aconfig default flag value " + flagPackageAndName + " = " + flagValue);
             this.mFlagValues.put(flagPackageAndName, Boolean.valueOf(flagValue));
         }
     }
@@ -209,7 +244,12 @@ public class AconfigFlags {
 
     public boolean skipCurrentElement(XmlResourceParser parser) {
         String featureFlag;
-        if (!Flags.manifestFlagging() || (featureFlag = parser.getAttributeValue("http://schemas.android.com/apk/res/android", "featureFlag")) == null) {
+        if (!Flags.manifestFlagging()
+                || (featureFlag =
+                                parser.getAttributeValue(
+                                        "http://schemas.android.com/apk/res/android",
+                                        "featureFlag"))
+                        == null) {
             return false;
         }
         String featureFlag2 = featureFlag.strip();
@@ -220,13 +260,25 @@ public class AconfigFlags {
         }
         Boolean flagValue = getFlagValue(featureFlag2);
         if (flagValue == null) {
-            Slog.w(LOG_TAG, "Skipping element " + parser.getName() + " due to unknown feature flag " + featureFlag2);
+            Slog.w(
+                    LOG_TAG,
+                    "Skipping element "
+                            + parser.getName()
+                            + " due to unknown feature flag "
+                            + featureFlag2);
             return true;
         }
         if (flagValue.booleanValue() != negated) {
             return false;
         }
-        Slog.v(LOG_TAG, "Skipping element " + parser.getName() + " behind feature flag " + featureFlag2 + " = " + flagValue);
+        Slog.v(
+                LOG_TAG,
+                "Skipping element "
+                        + parser.getName()
+                        + " behind feature flag "
+                        + featureFlag2
+                        + " = "
+                        + flagValue);
         return true;
     }
 

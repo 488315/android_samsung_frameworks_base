@@ -9,7 +9,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IRadioModemResponse extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$radio$modem$IRadioModemResponse".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$radio$modem$IRadioModemResponse".replace('$', '.');
     public static final String HASH = "8586a5528f0085c15cff4b6628f1b8153aca29ad";
     public static final int VERSION = 3;
 
@@ -17,24 +18,35 @@ public interface IRadioModemResponse extends IInterface {
 
     void enableModemResponse(RadioResponseInfo radioResponseInfo) throws RemoteException;
 
-    void getBasebandVersionResponse(RadioResponseInfo radioResponseInfo, String str) throws RemoteException;
+    void getBasebandVersionResponse(RadioResponseInfo radioResponseInfo, String str)
+            throws RemoteException;
 
     @Deprecated
-    void getDeviceIdentityResponse(RadioResponseInfo radioResponseInfo, String str, String str2, String str3, String str4) throws RemoteException;
+    void getDeviceIdentityResponse(
+            RadioResponseInfo radioResponseInfo, String str, String str2, String str3, String str4)
+            throws RemoteException;
 
-    void getHardwareConfigResponse(RadioResponseInfo radioResponseInfo, HardwareConfig[] hardwareConfigArr) throws RemoteException;
+    void getHardwareConfigResponse(
+            RadioResponseInfo radioResponseInfo, HardwareConfig[] hardwareConfigArr)
+            throws RemoteException;
 
-    void getImeiResponse(RadioResponseInfo radioResponseInfo, ImeiInfo imeiInfo) throws RemoteException;
+    void getImeiResponse(RadioResponseInfo radioResponseInfo, ImeiInfo imeiInfo)
+            throws RemoteException;
 
     String getInterfaceHash() throws RemoteException;
 
     int getInterfaceVersion() throws RemoteException;
 
-    void getModemActivityInfoResponse(RadioResponseInfo radioResponseInfo, ActivityStatsInfo activityStatsInfo) throws RemoteException;
+    void getModemActivityInfoResponse(
+            RadioResponseInfo radioResponseInfo, ActivityStatsInfo activityStatsInfo)
+            throws RemoteException;
 
-    void getModemStackStatusResponse(RadioResponseInfo radioResponseInfo, boolean z) throws RemoteException;
+    void getModemStackStatusResponse(RadioResponseInfo radioResponseInfo, boolean z)
+            throws RemoteException;
 
-    void getRadioCapabilityResponse(RadioResponseInfo radioResponseInfo, RadioCapability radioCapability) throws RemoteException;
+    void getRadioCapabilityResponse(
+            RadioResponseInfo radioResponseInfo, RadioCapability radioCapability)
+            throws RemoteException;
 
     @Deprecated
     void nvReadItemResponse(RadioResponseInfo radioResponseInfo, String str) throws RemoteException;
@@ -51,78 +63,73 @@ public interface IRadioModemResponse extends IInterface {
 
     void sendDeviceStateResponse(RadioResponseInfo radioResponseInfo) throws RemoteException;
 
-    void setRadioCapabilityResponse(RadioResponseInfo radioResponseInfo, RadioCapability radioCapability) throws RemoteException;
+    void setRadioCapabilityResponse(
+            RadioResponseInfo radioResponseInfo, RadioCapability radioCapability)
+            throws RemoteException;
 
     void setRadioPowerResponse(RadioResponseInfo radioResponseInfo) throws RemoteException;
 
     public static class Default implements IRadioModemResponse {
         @Override // android.hardware.radio.modem.IRadioModemResponse
-        public void acknowledgeRequest(int serial) throws RemoteException {
-        }
+        public void acknowledgeRequest(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModemResponse
-        public void enableModemResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void enableModemResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModemResponse
-        public void getBasebandVersionResponse(RadioResponseInfo info, String version) throws RemoteException {
-        }
+        public void getBasebandVersionResponse(RadioResponseInfo info, String version)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModemResponse
-        public void getDeviceIdentityResponse(RadioResponseInfo info, String imei, String imeisv, String esn, String meid) throws RemoteException {
-        }
+        public void getDeviceIdentityResponse(
+                RadioResponseInfo info, String imei, String imeisv, String esn, String meid)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModemResponse
-        public void getHardwareConfigResponse(RadioResponseInfo info, HardwareConfig[] config) throws RemoteException {
-        }
+        public void getHardwareConfigResponse(RadioResponseInfo info, HardwareConfig[] config)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModemResponse
-        public void getModemActivityInfoResponse(RadioResponseInfo info, ActivityStatsInfo activityInfo) throws RemoteException {
-        }
+        public void getModemActivityInfoResponse(
+                RadioResponseInfo info, ActivityStatsInfo activityInfo) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModemResponse
-        public void getModemStackStatusResponse(RadioResponseInfo info, boolean isEnabled) throws RemoteException {
-        }
+        public void getModemStackStatusResponse(RadioResponseInfo info, boolean isEnabled)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModemResponse
-        public void getRadioCapabilityResponse(RadioResponseInfo info, RadioCapability rc) throws RemoteException {
-        }
+        public void getRadioCapabilityResponse(RadioResponseInfo info, RadioCapability rc)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModemResponse
-        public void nvReadItemResponse(RadioResponseInfo info, String result) throws RemoteException {
-        }
+        public void nvReadItemResponse(RadioResponseInfo info, String result)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModemResponse
-        public void nvResetConfigResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void nvResetConfigResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModemResponse
-        public void nvWriteCdmaPrlResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void nvWriteCdmaPrlResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModemResponse
-        public void nvWriteItemResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void nvWriteItemResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModemResponse
-        public void requestShutdownResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void requestShutdownResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModemResponse
-        public void sendDeviceStateResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void sendDeviceStateResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModemResponse
-        public void setRadioCapabilityResponse(RadioResponseInfo info, RadioCapability rc) throws RemoteException {
-        }
+        public void setRadioCapabilityResponse(RadioResponseInfo info, RadioCapability rc)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModemResponse
-        public void setRadioPowerResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void setRadioPowerResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModemResponse
-        public void getImeiResponse(RadioResponseInfo responseInfo, ImeiInfo imeiInfo) throws RemoteException {
-        }
+        public void getImeiResponse(RadioResponseInfo responseInfo, ImeiInfo imeiInfo)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.modem.IRadioModemResponse
         public int getInterfaceVersion() {
@@ -140,7 +147,7 @@ public interface IRadioModemResponse extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRadioModemResponse {
+    public abstract static class Stub extends Binder implements IRadioModemResponse {
         static final int TRANSACTION_acknowledgeRequest = 1;
         static final int TRANSACTION_enableModemResponse = 2;
         static final int TRANSACTION_getBasebandVersionResponse = 3;
@@ -183,7 +190,8 @@ public interface IRadioModemResponse extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -209,18 +217,21 @@ public interface IRadioModemResponse extends IInterface {
                     acknowledgeRequest(_arg0);
                     return true;
                 case 2:
-                    RadioResponseInfo _arg02 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg02 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     enableModemResponse(_arg02);
                     return true;
                 case 3:
-                    RadioResponseInfo _arg03 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg03 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     String _arg1 = data.readString();
                     data.enforceNoDataAvail();
                     getBasebandVersionResponse(_arg03, _arg1);
                     return true;
                 case 4:
-                    RadioResponseInfo _arg04 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg04 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     String _arg12 = data.readString();
                     String _arg2 = data.readString();
                     String _arg3 = data.readString();
@@ -229,73 +240,90 @@ public interface IRadioModemResponse extends IInterface {
                     getDeviceIdentityResponse(_arg04, _arg12, _arg2, _arg3, _arg4);
                     return true;
                 case 5:
-                    RadioResponseInfo _arg05 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
-                    HardwareConfig[] _arg13 = (HardwareConfig[]) data.createTypedArray(HardwareConfig.CREATOR);
+                    RadioResponseInfo _arg05 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    HardwareConfig[] _arg13 =
+                            (HardwareConfig[]) data.createTypedArray(HardwareConfig.CREATOR);
                     data.enforceNoDataAvail();
                     getHardwareConfigResponse(_arg05, _arg13);
                     return true;
                 case 6:
-                    RadioResponseInfo _arg06 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
-                    ActivityStatsInfo _arg14 = (ActivityStatsInfo) data.readTypedObject(ActivityStatsInfo.CREATOR);
+                    RadioResponseInfo _arg06 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    ActivityStatsInfo _arg14 =
+                            (ActivityStatsInfo) data.readTypedObject(ActivityStatsInfo.CREATOR);
                     data.enforceNoDataAvail();
                     getModemActivityInfoResponse(_arg06, _arg14);
                     return true;
                 case 7:
-                    RadioResponseInfo _arg07 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg07 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     boolean _arg15 = data.readBoolean();
                     data.enforceNoDataAvail();
                     getModemStackStatusResponse(_arg07, _arg15);
                     return true;
                 case 8:
-                    RadioResponseInfo _arg08 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
-                    RadioCapability _arg16 = (RadioCapability) data.readTypedObject(RadioCapability.CREATOR);
+                    RadioResponseInfo _arg08 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioCapability _arg16 =
+                            (RadioCapability) data.readTypedObject(RadioCapability.CREATOR);
                     data.enforceNoDataAvail();
                     getRadioCapabilityResponse(_arg08, _arg16);
                     return true;
                 case 9:
-                    RadioResponseInfo _arg09 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg09 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     String _arg17 = data.readString();
                     data.enforceNoDataAvail();
                     nvReadItemResponse(_arg09, _arg17);
                     return true;
                 case 10:
-                    RadioResponseInfo _arg010 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg010 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     nvResetConfigResponse(_arg010);
                     return true;
                 case 11:
-                    RadioResponseInfo _arg011 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg011 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     nvWriteCdmaPrlResponse(_arg011);
                     return true;
                 case 12:
-                    RadioResponseInfo _arg012 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg012 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     nvWriteItemResponse(_arg012);
                     return true;
                 case 13:
-                    RadioResponseInfo _arg013 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg013 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     requestShutdownResponse(_arg013);
                     return true;
                 case 14:
-                    RadioResponseInfo _arg014 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg014 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     sendDeviceStateResponse(_arg014);
                     return true;
                 case 15:
-                    RadioResponseInfo _arg015 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
-                    RadioCapability _arg18 = (RadioCapability) data.readTypedObject(RadioCapability.CREATOR);
+                    RadioResponseInfo _arg015 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioCapability _arg18 =
+                            (RadioCapability) data.readTypedObject(RadioCapability.CREATOR);
                     data.enforceNoDataAvail();
                     setRadioCapabilityResponse(_arg015, _arg18);
                     return true;
                 case 16:
-                    RadioResponseInfo _arg016 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg016 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setRadioPowerResponse(_arg016);
                     return true;
                 case 17:
-                    RadioResponseInfo _arg017 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg017 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     ImeiInfo _arg19 = (ImeiInfo) data.readTypedObject(ImeiInfo.CREATOR);
                     data.enforceNoDataAvail();
                     getImeiResponse(_arg017, _arg19);
@@ -354,7 +382,8 @@ public interface IRadioModemResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.modem.IRadioModemResponse
-            public void getBasebandVersionResponse(RadioResponseInfo info, String version) throws RemoteException {
+            public void getBasebandVersionResponse(RadioResponseInfo info, String version)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -362,7 +391,8 @@ public interface IRadioModemResponse extends IInterface {
                     _data.writeString(version);
                     boolean _status = this.mRemote.transact(3, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getBasebandVersionResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method getBasebandVersionResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -370,7 +400,9 @@ public interface IRadioModemResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.modem.IRadioModemResponse
-            public void getDeviceIdentityResponse(RadioResponseInfo info, String imei, String imeisv, String esn, String meid) throws RemoteException {
+            public void getDeviceIdentityResponse(
+                    RadioResponseInfo info, String imei, String imeisv, String esn, String meid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -381,7 +413,8 @@ public interface IRadioModemResponse extends IInterface {
                     _data.writeString(meid);
                     boolean _status = this.mRemote.transact(4, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getDeviceIdentityResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method getDeviceIdentityResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -389,7 +422,8 @@ public interface IRadioModemResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.modem.IRadioModemResponse
-            public void getHardwareConfigResponse(RadioResponseInfo info, HardwareConfig[] config) throws RemoteException {
+            public void getHardwareConfigResponse(RadioResponseInfo info, HardwareConfig[] config)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -397,7 +431,8 @@ public interface IRadioModemResponse extends IInterface {
                     _data.writeTypedArray(config, 0);
                     boolean _status = this.mRemote.transact(5, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getHardwareConfigResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method getHardwareConfigResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -405,7 +440,8 @@ public interface IRadioModemResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.modem.IRadioModemResponse
-            public void getModemActivityInfoResponse(RadioResponseInfo info, ActivityStatsInfo activityInfo) throws RemoteException {
+            public void getModemActivityInfoResponse(
+                    RadioResponseInfo info, ActivityStatsInfo activityInfo) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -413,7 +449,8 @@ public interface IRadioModemResponse extends IInterface {
                     _data.writeTypedObject(activityInfo, 0);
                     boolean _status = this.mRemote.transact(6, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getModemActivityInfoResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method getModemActivityInfoResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -421,7 +458,8 @@ public interface IRadioModemResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.modem.IRadioModemResponse
-            public void getModemStackStatusResponse(RadioResponseInfo info, boolean isEnabled) throws RemoteException {
+            public void getModemStackStatusResponse(RadioResponseInfo info, boolean isEnabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -429,7 +467,8 @@ public interface IRadioModemResponse extends IInterface {
                     _data.writeBoolean(isEnabled);
                     boolean _status = this.mRemote.transact(7, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getModemStackStatusResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method getModemStackStatusResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -437,7 +476,8 @@ public interface IRadioModemResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.modem.IRadioModemResponse
-            public void getRadioCapabilityResponse(RadioResponseInfo info, RadioCapability rc) throws RemoteException {
+            public void getRadioCapabilityResponse(RadioResponseInfo info, RadioCapability rc)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -445,7 +485,8 @@ public interface IRadioModemResponse extends IInterface {
                     _data.writeTypedObject(rc, 0);
                     boolean _status = this.mRemote.transact(8, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getRadioCapabilityResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method getRadioCapabilityResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -453,7 +494,8 @@ public interface IRadioModemResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.modem.IRadioModemResponse
-            public void nvReadItemResponse(RadioResponseInfo info, String result) throws RemoteException {
+            public void nvReadItemResponse(RadioResponseInfo info, String result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -491,7 +533,8 @@ public interface IRadioModemResponse extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(11, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method nvWriteCdmaPrlResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method nvWriteCdmaPrlResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -521,7 +564,8 @@ public interface IRadioModemResponse extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(13, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method requestShutdownResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method requestShutdownResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -536,7 +580,8 @@ public interface IRadioModemResponse extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(14, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method sendDeviceStateResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method sendDeviceStateResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -544,7 +589,8 @@ public interface IRadioModemResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.modem.IRadioModemResponse
-            public void setRadioCapabilityResponse(RadioResponseInfo info, RadioCapability rc) throws RemoteException {
+            public void setRadioCapabilityResponse(RadioResponseInfo info, RadioCapability rc)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -552,7 +598,8 @@ public interface IRadioModemResponse extends IInterface {
                     _data.writeTypedObject(rc, 0);
                     boolean _status = this.mRemote.transact(15, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setRadioCapabilityResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method setRadioCapabilityResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -575,7 +622,8 @@ public interface IRadioModemResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.modem.IRadioModemResponse
-            public void getImeiResponse(RadioResponseInfo responseInfo, ImeiInfo imeiInfo) throws RemoteException {
+            public void getImeiResponse(RadioResponseInfo responseInfo, ImeiInfo imeiInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);

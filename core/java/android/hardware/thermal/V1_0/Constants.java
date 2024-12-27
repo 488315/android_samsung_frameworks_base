@@ -10,7 +10,6 @@ public class Constants {
         public static final int SKIN = 3;
         public static final int UNKNOWN = -1;
 
-        public TemperatureType() {
-        }
+        public TemperatureType() {}
     }
 }

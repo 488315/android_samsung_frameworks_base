@@ -4,30 +4,34 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import java.util.ArrayList;
 
 /* loaded from: classes6.dex */
 public class SemContextActivityNotificationAttribute extends SemContextAttribute {
-    public static final Parcelable.Creator<SemContextActivityNotificationAttribute> CREATOR = new Parcelable.Creator<SemContextActivityNotificationAttribute>() { // from class: com.samsung.android.hardware.context.SemContextActivityNotificationAttribute.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextActivityNotificationAttribute createFromParcel(Parcel in) {
-            return new SemContextActivityNotificationAttribute(in);
-        }
+    public static final Parcelable.Creator<SemContextActivityNotificationAttribute> CREATOR =
+            new Parcelable.Creator<
+                    SemContextActivityNotificationAttribute>() { // from class:
+                                                                 // com.samsung.android.hardware.context.SemContextActivityNotificationAttribute.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextActivityNotificationAttribute createFromParcel(Parcel in) {
+                    return new SemContextActivityNotificationAttribute(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextActivityNotificationAttribute[] newArray(int size) {
-            return new SemContextActivityNotificationAttribute[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextActivityNotificationAttribute[] newArray(int size) {
+                    return new SemContextActivityNotificationAttribute[size];
+                }
+            };
     private static final int STATUS_MAX = 5;
     private static final String TAG = "SemContextActivityNotificationAttribute";
     private int[] mActivityFilter;
 
     SemContextActivityNotificationAttribute() {
         this.mActivityFilter = null;
-        this.mActivityFilter = new int[]{4};
+        this.mActivityFilter = new int[] {4};
         setAttribute();
     }
 

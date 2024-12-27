@@ -9,6 +9,7 @@ import com.android.internal.org.bouncycastle.asn1.x9.X9ECParameters;
 import com.android.internal.org.bouncycastle.asn1.x9.X9ECPoint;
 import com.android.internal.org.bouncycastle.crypto.ec.CustomNamedCurves;
 import com.android.internal.org.bouncycastle.math.ec.ECCurve;
+
 import java.io.IOException;
 import java.security.interfaces.ECPublicKey;
 import java.security.spec.ECParameterSpec;
@@ -45,8 +46,10 @@ public class ECKeyUtil {
         @Override // java.security.Key
         public byte[] getEncoded() {
             ECCurve curve;
-            SubjectPublicKeyInfo publicKeyInfo = SubjectPublicKeyInfo.getInstance(this.ecPublicKey.getEncoded());
-            X962Parameters params = X962Parameters.getInstance(publicKeyInfo.getAlgorithm().getParameters());
+            SubjectPublicKeyInfo publicKeyInfo =
+                    SubjectPublicKeyInfo.getInstance(this.ecPublicKey.getEncoded());
+            X962Parameters params =
+                    X962Parameters.getInstance(publicKeyInfo.getAlgorithm().getParameters());
             if (params.isNamedCurve()) {
                 ASN1ObjectIdentifier oid = (ASN1ObjectIdentifier) params.getParameters();
                 X9ECParameters x9 = CustomNamedCurves.getByOID(oid);
@@ -60,12 +63,16 @@ public class ECKeyUtil {
                 }
                 curve = X9ECParameters.getInstance(params.getParameters()).getCurve();
             }
-            com.android.internal.org.bouncycastle.math.ec.ECPoint p = curve.decodePoint(publicKeyInfo.getPublicKeyData().getOctets());
-            ASN1OctetString pEnc = ASN1OctetString.getInstance(new X9ECPoint(p, true).toASN1Primitive());
+            com.android.internal.org.bouncycastle.math.ec.ECPoint p =
+                    curve.decodePoint(publicKeyInfo.getPublicKeyData().getOctets());
+            ASN1OctetString pEnc =
+                    ASN1OctetString.getInstance(new X9ECPoint(p, true).toASN1Primitive());
             try {
-                return new SubjectPublicKeyInfo(publicKeyInfo.getAlgorithm(), pEnc.getOctets()).getEncoded();
+                return new SubjectPublicKeyInfo(publicKeyInfo.getAlgorithm(), pEnc.getOctets())
+                        .getEncoded();
             } catch (IOException e) {
-                throw new IllegalStateException("unable to encode EC public key: " + e.getMessage());
+                throw new IllegalStateException(
+                        "unable to encode EC public key: " + e.getMessage());
             }
         }
 

@@ -8,7 +8,9 @@ import android.util.ArrayMap;
 import android.util.Log;
 import android.util.LongSparseArray;
 import android.util.SparseArray;
+
 import com.android.internal.util.RingBuffer;
+
 import java.io.PrintWriter;
 import java.util.Comparator;
 
@@ -38,8 +40,7 @@ public abstract class AnrTimer implements AutoCloseable {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public abstract class Error {
-    }
+    public abstract class Error {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class FeatureDisabled {
@@ -51,8 +52,7 @@ public abstract class AnrTimer implements AutoCloseable {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class Injector {
-    }
+    public final class Injector {}
 
     static {
         new RingBuffer(Error.class, 20);
@@ -77,12 +77,28 @@ public abstract class AnrTimer implements AutoCloseable {
     }
 
     private boolean expire(int i, int i2, int i3, long j) {
-        Trace.instantForTrack(64L, "AnrTimerTrack", TextUtils.formatSimple("%s(%d,%d,%d,%s,%d)", new Object[]{"expired", Integer.valueOf(i), Integer.valueOf(i2), Integer.valueOf(i3), this.mLabel, Long.valueOf(j)}));
+        Trace.instantForTrack(
+                64L,
+                "AnrTimerTrack",
+                TextUtils.formatSimple(
+                        "%s(%d,%d,%d,%s,%d)",
+                        new Object[] {
+                            "expired",
+                            Integer.valueOf(i),
+                            Integer.valueOf(i2),
+                            Integer.valueOf(i3),
+                            this.mLabel,
+                            Long.valueOf(j)
+                        }));
         synchronized (this.mLock) {
             try {
                 Object obj = this.mTimerArgMap.get(i);
                 if (obj == null) {
-                    Log.e("AnrTimer", TextUtils.formatSimple("failed to expire timer %s:%d : arg not found", new Object[]{this.mLabel, Integer.valueOf(i)}));
+                    Log.e(
+                            "AnrTimer",
+                            TextUtils.formatSimple(
+                                    "failed to expire timer %s:%d : arg not found",
+                                    new Object[] {this.mLabel, Integer.valueOf(i)}));
                     return false;
                 }
                 Handler handler = this.mHandler;
@@ -143,6 +159,7 @@ public abstract class AnrTimer implements AutoCloseable {
         getPid(obj);
         getUid(obj);
         AnrTimer anrTimer = AnrTimer.this;
-        anrTimer.mHandler.sendMessageDelayed(anrTimer.mHandler.obtainMessage(anrTimer.mWhat, obj), j);
+        anrTimer.mHandler.sendMessageDelayed(
+                anrTimer.mHandler.obtainMessage(anrTimer.mWhat, obj), j);
     }
 }

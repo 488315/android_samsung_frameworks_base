@@ -2,9 +2,12 @@ package android.media;
 
 import android.graphics.Color;
 import android.util.Log;
+
 import com.android.internal.midi.MidiConstants;
+
 import com.google.android.mms.pdu.CharacterSets;
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
+
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -29,7 +32,8 @@ class Cea708CCParser {
     public static final int CAPTION_EMIT_TYPE_COMMAND_TGW = 7;
     public static final int CAPTION_EMIT_TYPE_CONTROL = 2;
     private static final boolean DEBUG = false;
-    private static final String MUSIC_NOTE_CHAR = new String("♫".getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
+    private static final String MUSIC_NOTE_CHAR =
+            new String("♫".getBytes(StandardCharsets.UTF_8), StandardCharsets.UTF_8);
     private static final String TAG = "Cea708CCParser";
     private final StringBuffer mBuffer = new StringBuffer();
     private int mCommand = 0;
@@ -41,11 +45,11 @@ class Cea708CCParser {
     }
 
     Cea708CCParser(DisplayListener listener) {
-        this.mListener = new DisplayListener() { // from class: android.media.Cea708CCParser.1
-            @Override // android.media.Cea708CCParser.DisplayListener
-            public void emitEvent(CaptionEvent event) {
-            }
-        };
+        this.mListener =
+                new DisplayListener() { // from class: android.media.Cea708CCParser.1
+                    @Override // android.media.Cea708CCParser.DisplayListener
+                    public void emitEvent(CaptionEvent event) {}
+                };
         if (listener != null) {
             this.mListener = listener;
         }
@@ -99,7 +103,10 @@ class Cea708CCParser {
                     if (data[pos] == 0) {
                         this.mBuffer.append((char) data[pos + 1]);
                     } else {
-                        String value = new String(Arrays.copyOfRange(data, pos, pos + 2), CharacterSets.MIMENAME_EUC_KR);
+                        String value =
+                                new String(
+                                        Arrays.copyOfRange(data, pos, pos + 2),
+                                        CharacterSets.MIMENAME_EUC_KR);
                         this.mBuffer.append(value);
                     }
                 } catch (UnsupportedEncodingException e) {
@@ -194,7 +201,12 @@ class Cea708CCParser {
                 int edgeType = (data[pos + 1] & 56) >> 3;
                 int fontTag = 7 & data[pos + 1];
                 int pos8 = pos + 2;
-                emitCaptionEvent(new CaptionEvent(12, new CaptionPenAttr(penSize, penOffset, textTag, fontTag, edgeType, underline, italic)));
+                emitCaptionEvent(
+                        new CaptionEvent(
+                                12,
+                                new CaptionPenAttr(
+                                        penSize, penOffset, textTag, fontTag, edgeType, underline,
+                                        italic)));
                 return pos8;
             case 145:
                 int row = data[pos];
@@ -215,7 +227,10 @@ class Cea708CCParser {
                 int blue3 = data[pos10] & 3;
                 CaptionColor edgeColor = new CaptionColor(0, red3, green3, blue3);
                 int pos11 = pos10 + 1;
-                emitCaptionEvent(new CaptionEvent(13, new CaptionPenColor(foregroundColor, backgroundColor, edgeColor)));
+                emitCaptionEvent(
+                        new CaptionEvent(
+                                13,
+                                new CaptionPenColor(foregroundColor, backgroundColor, edgeColor)));
                 return pos11;
             case 146:
                 int row2 = data[pos] & 15;
@@ -230,20 +245,36 @@ class Cea708CCParser {
                 int green4 = (data[pos] & 12) >> 2;
                 int blue4 = data[pos] & 3;
                 CaptionColor fillColor = new CaptionColor(opacity4, red4, green4, blue4);
-                int borderType = ((data[pos + 2] & 128) >> 5) | ((data[pos + 1] & MidiConstants.STATUS_PROGRAM_CHANGE) >> 6);
+                int borderType =
+                        ((data[pos + 2] & 128) >> 5)
+                                | ((data[pos + 1] & MidiConstants.STATUS_PROGRAM_CHANGE) >> 6);
                 int red5 = (data[pos + 1] & SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90) >> 4;
                 int green5 = (data[pos + 1] & 12) >> 2;
                 int blue5 = data[pos + 1] & 3;
                 CaptionColor borderColor = new CaptionColor(0, red5, green5, blue5);
                 boolean wordWrap = (data[pos + 2] & 64) != 0;
-                int printDirection = (data[pos + 2] & SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90) >> 4;
+                int printDirection =
+                        (data[pos + 2] & SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90) >> 4;
                 int scrollDirection = (data[pos + 2] & 12) >> 2;
                 int justify = data[pos + 2] & 3;
                 int effectSpeed = (data[pos + 3] & 240) >> 4;
                 int effectDirection = (12 & data[pos + 3]) >> 2;
                 int displayEffect = 3 & data[pos + 3];
                 int pos13 = pos + 4;
-                emitCaptionEvent(new CaptionEvent(15, new CaptionWindowAttr(fillColor, borderColor, borderType, wordWrap, printDirection, scrollDirection, justify, effectDirection, effectSpeed, displayEffect)));
+                emitCaptionEvent(
+                        new CaptionEvent(
+                                15,
+                                new CaptionWindowAttr(
+                                        fillColor,
+                                        borderColor,
+                                        borderType,
+                                        wordWrap,
+                                        printDirection,
+                                        scrollDirection,
+                                        justify,
+                                        effectDirection,
+                                        effectSpeed,
+                                        displayEffect)));
                 return pos13;
             case 152:
             case 153:
@@ -267,7 +298,23 @@ class Cea708CCParser {
                 int windowStyle = (data[pos + 5] & 56) >> 3;
                 int penStyle = 7 & data[pos + 5];
                 int pos14 = pos + 6;
-                emitCaptionEvent(new CaptionEvent(16, new CaptionWindow(windowId3, visible, rowLock, columnLock, priority, relativePositioning, anchorVertical, anchorHorizontal, anchorId, rowCount, columnCount, penStyle, windowStyle)));
+                emitCaptionEvent(
+                        new CaptionEvent(
+                                16,
+                                new CaptionWindow(
+                                        windowId3,
+                                        visible,
+                                        rowLock,
+                                        columnLock,
+                                        priority,
+                                        relativePositioning,
+                                        anchorVertical,
+                                        anchorHorizontal,
+                                        anchorId,
+                                        rowCount,
+                                        columnCount,
+                                        penStyle,
+                                        windowStyle)));
                 return pos14;
         }
         return pos;
@@ -418,8 +465,7 @@ class Cea708CCParser {
         public static final int CODE_G3_RANGE_END = 255;
         public static final int CODE_G3_RANGE_START = 160;
 
-        private Const() {
-        }
+        private Const() {}
     }
 
     /* compiled from: Cea708CaptionRenderer.java */
@@ -443,7 +489,11 @@ class Cea708CCParser {
         }
 
         public int getArgbValue() {
-            return Color.argb(OPACITY_MAP[this.opacity], COLOR_MAP[this.red], COLOR_MAP[this.green], COLOR_MAP[this.blue]);
+            return Color.argb(
+                    OPACITY_MAP[this.opacity],
+                    COLOR_MAP[this.red],
+                    COLOR_MAP[this.green],
+                    COLOR_MAP[this.blue]);
         }
     }
 
@@ -474,7 +524,14 @@ class Cea708CCParser {
         public final int textTag;
         public final boolean underline;
 
-        public CaptionPenAttr(int penSize, int penOffset, int textTag, int fontTag, int edgeType, boolean underline, boolean italic) {
+        public CaptionPenAttr(
+                int penSize,
+                int penOffset,
+                int textTag,
+                int fontTag,
+                int edgeType,
+                boolean underline,
+                boolean italic) {
             this.penSize = penSize;
             this.penOffset = penOffset;
             this.textTag = textTag;
@@ -491,7 +548,10 @@ class Cea708CCParser {
         public final CaptionColor edgeColor;
         public final CaptionColor foregroundColor;
 
-        public CaptionPenColor(CaptionColor foregroundColor, CaptionColor backgroundColor, CaptionColor edgeColor) {
+        public CaptionPenColor(
+                CaptionColor foregroundColor,
+                CaptionColor backgroundColor,
+                CaptionColor edgeColor) {
             this.foregroundColor = foregroundColor;
             this.backgroundColor = backgroundColor;
             this.edgeColor = edgeColor;
@@ -522,7 +582,17 @@ class Cea708CCParser {
         public final int scrollDirection;
         public final boolean wordWrap;
 
-        public CaptionWindowAttr(CaptionColor fillColor, CaptionColor borderColor, int borderType, boolean wordWrap, int printDirection, int scrollDirection, int justify, int effectDirection, int effectSpeed, int displayEffect) {
+        public CaptionWindowAttr(
+                CaptionColor fillColor,
+                CaptionColor borderColor,
+                int borderType,
+                boolean wordWrap,
+                int printDirection,
+                int scrollDirection,
+                int justify,
+                int effectDirection,
+                int effectSpeed,
+                int displayEffect) {
             this.fillColor = fillColor;
             this.borderColor = borderColor;
             this.borderType = borderType;
@@ -552,7 +622,20 @@ class Cea708CCParser {
         public final boolean visible;
         public final int windowStyle;
 
-        public CaptionWindow(int id, boolean visible, boolean rowLock, boolean columnLock, int priority, boolean relativePositioning, int anchorVertical, int anchorHorizontal, int anchorId, int rowCount, int columnCount, int penStyle, int windowStyle) {
+        public CaptionWindow(
+                int id,
+                boolean visible,
+                boolean rowLock,
+                boolean columnLock,
+                int priority,
+                boolean relativePositioning,
+                int anchorVertical,
+                int anchorHorizontal,
+                int anchorId,
+                int rowCount,
+                int columnCount,
+                int penStyle,
+                int windowStyle) {
             this.id = id;
             this.visible = visible;
             this.rowLock = rowLock;

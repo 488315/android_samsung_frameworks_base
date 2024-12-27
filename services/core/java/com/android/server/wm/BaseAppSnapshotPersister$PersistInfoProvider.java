@@ -1,7 +1,9 @@
 package com.android.server.wm;
 
 import android.os.Environment;
+
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
+
 import java.io.File;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -13,7 +15,13 @@ public final class BaseAppSnapshotPersister$PersistInfoProvider {
     public final float mLowResScaleFactor;
     public final boolean mUse16BitFormat;
 
-    public BaseAppSnapshotPersister$PersistInfoProvider(ActivitySnapshotController$$ExternalSyntheticLambda1 activitySnapshotController$$ExternalSyntheticLambda1, String str, boolean z, float f, boolean z2) {
+    public BaseAppSnapshotPersister$PersistInfoProvider(
+            ActivitySnapshotController$$ExternalSyntheticLambda1
+                    activitySnapshotController$$ExternalSyntheticLambda1,
+            String str,
+            boolean z,
+            float f,
+            boolean z2) {
         this.mDirectoryResolver = activitySnapshotController$$ExternalSyntheticLambda1;
         this.mDirName = str;
         this.mEnableLowResSnapshots = z;
@@ -31,10 +39,12 @@ public final class BaseAppSnapshotPersister$PersistInfoProvider {
     }
 
     public final File getLowResolutionBitmapFile(int i, int i2) {
-        return new File(getDirectory(i2), NandswapManager$$ExternalSyntheticOutline0.m(i, "_reduced.jpg"));
+        return new File(
+                getDirectory(i2), NandswapManager$$ExternalSyntheticOutline0.m(i, "_reduced.jpg"));
     }
 
     public final File getProtoFile(int i, int i2) {
-        return new File(getDirectory(i2), NandswapManager$$ExternalSyntheticOutline0.m(i, ".proto"));
+        return new File(
+                getDirectory(i2), NandswapManager$$ExternalSyntheticOutline0.m(i, ".proto"));
     }
 }

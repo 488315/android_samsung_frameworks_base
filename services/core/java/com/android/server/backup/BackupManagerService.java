@@ -35,6 +35,7 @@ import android.util.Log;
 import android.util.Pair;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.util.DumpUtils;
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
@@ -45,7 +46,6 @@ import com.android.server.SystemConfig;
 import com.android.server.SystemService;
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.BrailleDisplayConnection$$ExternalSyntheticOutline0;
-import com.android.server.backup.BackupPasswordManager;
 import com.android.server.backup.fullbackup.PerformFullTransportBackupTask;
 import com.android.server.backup.fullbackup.PerformFullTransportBackupTask$$ExternalSyntheticLambda0;
 import com.android.server.backup.internal.BackupHandler;
@@ -62,7 +62,11 @@ import com.android.server.backup.utils.BackupObserverUtils;
 import com.android.server.backup.utils.DataStreamFileCodec;
 import com.android.server.backup.utils.PasswordUtils;
 import com.android.server.clipboard.ClipboardService;
+
+import libcore.util.HexEncoding;
+
 import com.samsung.android.knox.analytics.activation.ActivationMonitor;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.IOException;
@@ -76,8 +80,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
+
 import javax.crypto.SecretKey;
-import libcore.util.HexEncoding;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -98,16 +102,18 @@ public final class BackupManagerService extends IBackupManager.Stub {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.backup.BackupManagerService$1, reason: invalid class name */
     public final class AnonymousClass1 extends BroadcastReceiver {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
             int intExtra;
-            if (!"android.intent.action.USER_REMOVED".equals(intent.getAction()) || (intExtra = intent.getIntExtra("android.intent.extra.user_handle", -10000)) <= 0) {
+            if (!"android.intent.action.USER_REMOVED".equals(intent.getAction())
+                    || (intExtra = intent.getIntExtra("android.intent.extra.user_handle", -10000))
+                            <= 0) {
                 return;
             }
-            BackupManagerService.this.mHandler.post(new BackupManagerService$$ExternalSyntheticLambda0(intExtra, 1, this));
+            BackupManagerService.this.mHandler.post(
+                    new BackupManagerService$$ExternalSyntheticLambda0(intExtra, 1, this));
         }
     }
 
@@ -132,29 +138,48 @@ public final class BackupManagerService extends IBackupManager.Stub {
             BackupManagerService backupManagerService = BackupManagerService.sInstance;
             int userIdentifier = targetUser.getUserIdentifier();
             backupManagerService.getClass();
-            backupManagerService.postToHandler(new BackupManagerService$$ExternalSyntheticLambda0(userIdentifier, 0, backupManagerService));
+            backupManagerService.postToHandler(
+                    new BackupManagerService$$ExternalSyntheticLambda0(
+                            userIdentifier, 0, backupManagerService));
         }
 
         @Override // com.android.server.SystemService
         public final void onUserUnlocking(final SystemService.TargetUser targetUser) {
-            BackupManagerService.sInstance.postToHandler(new Runnable() { // from class: com.android.server.backup.BackupManagerService$Lifecycle$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    UserHandle mainUser;
-                    SystemService.TargetUser targetUser2 = SystemService.TargetUser.this;
-                    BackupManagerService backupManagerService = BackupManagerService.sInstance;
-                    if (!backupManagerService.mHasFirstUserUnlockedSinceBoot && backupManagerService.mDefaultBackupUserId == 0 && (mainUser = backupManagerService.getUserManager().getMainUser()) != null && backupManagerService.mDefaultBackupUserId != mainUser.getIdentifier()) {
-                        int i = backupManagerService.mDefaultBackupUserId;
-                        backupManagerService.mDefaultBackupUserId = mainUser.getIdentifier();
-                        if (!backupManagerService.isBackupActivatedForUser(i)) {
-                            backupManagerService.stopServiceForUser(i);
+            BackupManagerService.sInstance.postToHandler(
+                    new Runnable() { // from class:
+                                     // com.android.server.backup.BackupManagerService$Lifecycle$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            UserHandle mainUser;
+                            SystemService.TargetUser targetUser2 = SystemService.TargetUser.this;
+                            BackupManagerService backupManagerService =
+                                    BackupManagerService.sInstance;
+                            if (!backupManagerService.mHasFirstUserUnlockedSinceBoot
+                                    && backupManagerService.mDefaultBackupUserId == 0
+                                    && (mainUser =
+                                                    backupManagerService
+                                                            .getUserManager()
+                                                            .getMainUser())
+                                            != null
+                                    && backupManagerService.mDefaultBackupUserId
+                                            != mainUser.getIdentifier()) {
+                                int i = backupManagerService.mDefaultBackupUserId;
+                                backupManagerService.mDefaultBackupUserId =
+                                        mainUser.getIdentifier();
+                                if (!backupManagerService.isBackupActivatedForUser(i)) {
+                                    backupManagerService.stopServiceForUser(i);
+                                }
+                                SystemServiceManager$$ExternalSyntheticOutline0.m(
+                                        BatteryService$$ExternalSyntheticOutline0.m(
+                                                i, "Default backup user changed from ", " to "),
+                                        backupManagerService.mDefaultBackupUserId,
+                                        "BackupManagerService");
+                            }
+                            BackupManagerService.sInstance.startServiceForUser(
+                                    targetUser2.getUserIdentifier());
+                            BackupManagerService.sInstance.mHasFirstUserUnlockedSinceBoot = true;
                         }
-                        SystemServiceManager$$ExternalSyntheticOutline0.m(BatteryService$$ExternalSyntheticOutline0.m(i, "Default backup user changed from ", " to "), backupManagerService.mDefaultBackupUserId, "BackupManagerService");
-                    }
-                    BackupManagerService.sInstance.startServiceForUser(targetUser2.getUserIdentifier());
-                    BackupManagerService.sInstance.mHasFirstUserUnlockedSinceBoot = true;
-                }
-            });
+                    });
         }
 
         public void publishService(String str, IBinder iBinder) {
@@ -174,10 +199,14 @@ public final class BackupManagerService extends IBackupManager.Stub {
         this.mUserServices = new SparseArray();
         Set set = SystemConfig.getInstance().mBackupTransportWhitelist;
         this.mTransportWhitelist = set == null ? Collections.emptySet() : set;
-        context.registerReceiver(anonymousClass1, new IntentFilter("android.intent.action.USER_REMOVED"));
+        context.registerReceiver(
+                anonymousClass1, new IntentFilter("android.intent.action.USER_REMOVED"));
         UserHandle mainUser = getUserManager().getMainUser();
         this.mDefaultBackupUserId = mainUser != null ? mainUser.getIdentifier() : 0;
-        DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("Default backup user id = "), this.mDefaultBackupUserId, "BackupManagerService");
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                new StringBuilder("Default backup user id = "),
+                this.mDefaultBackupUserId,
+                "BackupManagerService");
     }
 
     public static void createFile(File file) {
@@ -198,32 +227,76 @@ public final class BackupManagerService extends IBackupManager.Stub {
     }
 
     public static void showDumpUsage(PrintWriter printWriter) {
-        BatteryService$$ExternalSyntheticOutline0.m(printWriter, "'dumpsys backup' optional arguments:", "  --help    : this help text", "  a[gents] : dump information about defined backup agents", "  transportclients : dump information about transport clients");
-        BatteryService$$ExternalSyntheticOutline0.m(printWriter, "  transportstats : dump transport stats", "  users    : dump the list of users for which backup service is running", "  --user <userId> : dump information for user userId");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                printWriter,
+                "'dumpsys backup' optional arguments:",
+                "  --help    : this help text",
+                "  a[gents] : dump information about defined backup agents",
+                "  transportclients : dump information about transport clients");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                printWriter,
+                "  transportstats : dump transport stats",
+                "  users    : dump the list of users for which backup service is running",
+                "  --user <userId> : dump information for user userId");
     }
 
-    public final void acknowledgeFullBackupOrRestore(int i, boolean z, String str, String str2, IFullBackupRestoreObserver iFullBackupRestoreObserver) {
-        acknowledgeFullBackupOrRestoreForUser(binderGetCallingUserId(), i, z, str, str2, iFullBackupRestoreObserver);
+    public final void acknowledgeFullBackupOrRestore(
+            int i,
+            boolean z,
+            String str,
+            String str2,
+            IFullBackupRestoreObserver iFullBackupRestoreObserver) {
+        acknowledgeFullBackupOrRestoreForUser(
+                binderGetCallingUserId(), i, z, str, str2, iFullBackupRestoreObserver);
     }
 
-    public final void acknowledgeFullBackupOrRestoreForUser(int i, int i2, boolean z, String str, String str2, IFullBackupRestoreObserver iFullBackupRestoreObserver) {
+    public final void acknowledgeFullBackupOrRestoreForUser(
+            int i,
+            int i2,
+            boolean z,
+            String str,
+            String str2,
+            IFullBackupRestoreObserver iFullBackupRestoreObserver) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
-        if (!isUserReadyForBackup(i) || (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "acknowledgeAdbBackupOrRestore()")) == null) {
+        if (!isUserReadyForBackup(i)
+                || (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(
+                                        i, "acknowledgeAdbBackupOrRestore()"))
+                        == null) {
             return;
         }
-        serviceForUserIfCallerHasPermission.acknowledgeAdbBackupOrRestore(i2, z, str, str2, iFullBackupRestoreObserver);
+        serviceForUserIfCallerHasPermission.acknowledgeAdbBackupOrRestore(
+                i2, z, str, str2, iFullBackupRestoreObserver);
     }
 
-    public final void adbBackup(int i, ParcelFileDescriptor parcelFileDescriptor, boolean z, boolean z2, boolean z3, boolean z4, boolean z5, boolean z6, boolean z7, boolean z8, String[] strArr) {
+    public final void adbBackup(
+            int i,
+            ParcelFileDescriptor parcelFileDescriptor,
+            boolean z,
+            boolean z2,
+            boolean z3,
+            boolean z4,
+            boolean z5,
+            boolean z6,
+            boolean z7,
+            boolean z8,
+            String[] strArr) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
-        if (isUserReadyForBackup(i) && (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "adbBackup()")) != null) {
-            serviceForUserIfCallerHasPermission.adbBackup(parcelFileDescriptor, z, z2, z3, z4, z5, z6, z7, z8, strArr, true);
+        if (isUserReadyForBackup(i)
+                && (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(i, "adbBackup()"))
+                        != null) {
+            serviceForUserIfCallerHasPermission.adbBackup(
+                    parcelFileDescriptor, z, z2, z3, z4, z5, z6, z7, z8, strArr, true);
         }
     }
 
     public final void adbRestore(int i, ParcelFileDescriptor parcelFileDescriptor) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
-        if (isUserReadyForBackup(i) && (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "adbRestore()")) != null) {
+        if (isUserReadyForBackup(i)
+                && (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(i, "adbRestore()"))
+                        != null) {
             serviceForUserIfCallerHasPermission.adbRestore(parcelFileDescriptor, true);
         }
     }
@@ -234,17 +307,31 @@ public final class BackupManagerService extends IBackupManager.Stub {
 
     public final void agentConnectedForUser(int i, String str, IBinder iBinder) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
-        if (!isUserReadyForBackup(i) || (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "agentConnected()")) == null) {
+        if (!isUserReadyForBackup(i)
+                || (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(i, "agentConnected()"))
+                        == null) {
             return;
         }
         synchronized (serviceForUserIfCallerHasPermission.mAgentConnectLock) {
             try {
                 if (Binder.getCallingUid() == 1000) {
-                    Slog.d("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(serviceForUserIfCallerHasPermission.mUserId, "agentConnected pkg=" + str + " agent=" + iBinder));
-                    serviceForUserIfCallerHasPermission.mConnectedAgent = IBackupAgent.Stub.asInterface(iBinder);
+                    Slog.d(
+                            "BackupManagerService",
+                            UserBackupManagerService.addUserIdToLogMessage(
+                                    serviceForUserIfCallerHasPermission.mUserId,
+                                    "agentConnected pkg=" + str + " agent=" + iBinder));
+                    serviceForUserIfCallerHasPermission.mConnectedAgent =
+                            IBackupAgent.Stub.asInterface(iBinder);
                     serviceForUserIfCallerHasPermission.mConnecting = false;
                 } else {
-                    Slog.w("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(serviceForUserIfCallerHasPermission.mUserId, "Non-system process uid=" + Binder.getCallingUid() + " claiming agent connected"));
+                    Slog.w(
+                            "BackupManagerService",
+                            UserBackupManagerService.addUserIdToLogMessage(
+                                    serviceForUserIfCallerHasPermission.mUserId,
+                                    "Non-system process uid="
+                                            + Binder.getCallingUid()
+                                            + " claiming agent connected"));
                 }
                 serviceForUserIfCallerHasPermission.mAgentConnectLock.notifyAll();
             } finally {
@@ -258,7 +345,10 @@ public final class BackupManagerService extends IBackupManager.Stub {
 
     public final void agentDisconnectedForUser(int i, String str) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
-        if (!isUserReadyForBackup(i) || (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "agentDisconnected()")) == null) {
+        if (!isUserReadyForBackup(i)
+                || (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(i, "agentDisconnected()"))
+                        == null) {
             return;
         }
         synchronized (serviceForUserIfCallerHasPermission.mAgentConnectLock) {
@@ -267,10 +357,25 @@ public final class BackupManagerService extends IBackupManager.Stub {
                     serviceForUserIfCallerHasPermission.mConnectedAgent = null;
                     serviceForUserIfCallerHasPermission.mConnecting = false;
                 } else {
-                    Slog.w("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(serviceForUserIfCallerHasPermission.mUserId, "Non-system process uid=" + Binder.getCallingUid() + " claiming agent disconnected"));
+                    Slog.w(
+                            "BackupManagerService",
+                            UserBackupManagerService.addUserIdToLogMessage(
+                                    serviceForUserIfCallerHasPermission.mUserId,
+                                    "Non-system process uid="
+                                            + Binder.getCallingUid()
+                                            + " claiming agent disconnected"));
                 }
-                Slog.w("BackupManagerService", "agentDisconnected: the backup agent for " + str + " died: cancel current operations");
-                serviceForUserIfCallerHasPermission.getThreadForAsyncOperation("agent-disconnected", new UserBackupManagerService$$ExternalSyntheticLambda11(str, 0, serviceForUserIfCallerHasPermission)).start();
+                Slog.w(
+                        "BackupManagerService",
+                        "agentDisconnected: the backup agent for "
+                                + str
+                                + " died: cancel current operations");
+                serviceForUserIfCallerHasPermission
+                        .getThreadForAsyncOperation(
+                                "agent-disconnected",
+                                new UserBackupManagerService$$ExternalSyntheticLambda11(
+                                        str, 0, serviceForUserIfCallerHasPermission))
+                        .start();
                 serviceForUserIfCallerHasPermission.mAgentConnectLock.notifyAll();
             } catch (Throwable th) {
                 throw th;
@@ -279,13 +384,18 @@ public final class BackupManagerService extends IBackupManager.Stub {
         AdbBackupParams adbBackupParams = serviceForUserIfCallerHasPermission.mAdbBackupParams;
         if (adbBackupParams != null) {
             serviceForUserIfCallerHasPermission.mBackupHandler.removeMessages(101, adbBackupParams);
-            serviceForUserIfCallerHasPermission.mBackupHandler.sendMessage(serviceForUserIfCallerHasPermission.mBackupHandler.obtainMessage(101, serviceForUserIfCallerHasPermission.mAdbBackupParams));
+            serviceForUserIfCallerHasPermission.mBackupHandler.sendMessage(
+                    serviceForUserIfCallerHasPermission.mBackupHandler.obtainMessage(
+                            101, serviceForUserIfCallerHasPermission.mAdbBackupParams));
             return;
         }
         AdbRestoreParams adbRestoreParams = serviceForUserIfCallerHasPermission.mAdbRestoreParams;
         if (adbRestoreParams != null) {
-            serviceForUserIfCallerHasPermission.mBackupHandler.removeMessages(101, adbRestoreParams);
-            serviceForUserIfCallerHasPermission.mBackupHandler.sendMessage(serviceForUserIfCallerHasPermission.mBackupHandler.obtainMessage(101, serviceForUserIfCallerHasPermission.mAdbRestoreParams));
+            serviceForUserIfCallerHasPermission.mBackupHandler.removeMessages(
+                    101, adbRestoreParams);
+            serviceForUserIfCallerHasPermission.mBackupHandler.sendMessage(
+                    serviceForUserIfCallerHasPermission.mBackupHandler.obtainMessage(
+                            101, serviceForUserIfCallerHasPermission.mAdbRestoreParams));
         }
     }
 
@@ -295,7 +405,10 @@ public final class BackupManagerService extends IBackupManager.Stub {
 
     public final void backupNowForUser(int i) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
-        if (!isUserReadyForBackup(i) || (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "backupNow()")) == null) {
+        if (!isUserReadyForBackup(i)
+                || (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(i, "backupNow()"))
+                        == null) {
             return;
         }
         serviceForUserIfCallerHasPermission.backupNow();
@@ -306,12 +419,16 @@ public final class BackupManagerService extends IBackupManager.Stub {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.app.backup.IRestoreSession beginRestoreSessionForUser(int r6, java.lang.String r7, java.lang.String r8) {
+    public final android.app.backup.IRestoreSession beginRestoreSessionForUser(
+            int r6, java.lang.String r7, java.lang.String r8) {
         /*
             Method dump skipped, instructions count: 285
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.backup.BackupManagerService.beginRestoreSessionForUser(int, java.lang.String, java.lang.String):android.app.backup.IRestoreSession");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.backup.BackupManagerService.beginRestoreSessionForUser(int,"
+                    + " java.lang.String, java.lang.String):android.app.backup.IRestoreSession");
     }
 
     public int binderGetCallingUid() {
@@ -328,20 +445,36 @@ public final class BackupManagerService extends IBackupManager.Stub {
 
     public final void cancelBackupsForUser(int i) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
-        if (!isUserReadyForBackup(i) || (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "cancelBackups()")) == null) {
+        if (!isUserReadyForBackup(i)
+                || (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(i, "cancelBackups()"))
+                        == null) {
             return;
         }
         int i2 = serviceForUserIfCallerHasPermission.mUserId;
-        LifecycleOperationStorage lifecycleOperationStorage = serviceForUserIfCallerHasPermission.mOperationStorage;
-        serviceForUserIfCallerHasPermission.mContext.enforceCallingPermission("android.permission.BACKUP", "cancelBackups");
+        LifecycleOperationStorage lifecycleOperationStorage =
+                serviceForUserIfCallerHasPermission.mOperationStorage;
+        serviceForUserIfCallerHasPermission.mContext.enforceCallingPermission(
+                "android.permission.BACKUP", "cancelBackups");
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             Iterator it = lifecycleOperationStorage.operationTokensForOpType().iterator();
             while (it.hasNext()) {
-                lifecycleOperationStorage.cancelOperation(((Integer) it.next()).intValue(), true, new UserBackupManagerService$$ExternalSyntheticLambda12());
+                lifecycleOperationStorage.cancelOperation(
+                        ((Integer) it.next()).intValue(),
+                        true,
+                        new UserBackupManagerService$$ExternalSyntheticLambda12());
             }
-            KeyValueBackupJob.schedule(i2, serviceForUserIfCallerHasPermission.mContext, ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS, serviceForUserIfCallerHasPermission);
-            FullBackupJob.schedule(i2, serviceForUserIfCallerHasPermission.mContext, 7200000L, serviceForUserIfCallerHasPermission);
+            KeyValueBackupJob.schedule(
+                    i2,
+                    serviceForUserIfCallerHasPermission.mContext,
+                    ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS,
+                    serviceForUserIfCallerHasPermission);
+            FullBackupJob.schedule(
+                    i2,
+                    serviceForUserIfCallerHasPermission.mContext,
+                    7200000L,
+                    serviceForUserIfCallerHasPermission);
             Binder.restoreCallingIdentity(clearCallingIdentity);
         } catch (Throwable th) {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -355,7 +488,10 @@ public final class BackupManagerService extends IBackupManager.Stub {
 
     public final void clearBackupDataForUser(int i, String str, String str2) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
-        if (!isUserReadyForBackup(i) || (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "clearBackupData()")) == null) {
+        if (!isUserReadyForBackup(i)
+                || (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(i, "clearBackupData()"))
+                        == null) {
             return;
         }
         serviceForUserIfCallerHasPermission.clearBackupData(str, str2);
@@ -367,34 +503,48 @@ public final class BackupManagerService extends IBackupManager.Stub {
 
     public final void dataChangedForUser(int i, final String str) {
         final UserBackupManagerService serviceForUserIfCallerHasPermission;
-        if (!isUserReadyForBackup(i) || (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "dataChanged()")) == null) {
+        if (!isUserReadyForBackup(i)
+                || (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(i, "dataChanged()"))
+                        == null) {
             return;
         }
-        final HashSet dataChangedTargets = serviceForUserIfCallerHasPermission.dataChangedTargets(str);
+        final HashSet dataChangedTargets =
+                serviceForUserIfCallerHasPermission.dataChangedTargets(str);
         if (dataChangedTargets != null) {
-            serviceForUserIfCallerHasPermission.mBackupHandler.post(new Runnable() { // from class: com.android.server.backup.UserBackupManagerService.4
-                public final /* synthetic */ String val$packageName;
-                public final /* synthetic */ HashSet val$targets;
+            serviceForUserIfCallerHasPermission.mBackupHandler.post(
+                    new Runnable() { // from class:
+                                     // com.android.server.backup.UserBackupManagerService.4
+                        public final /* synthetic */ String val$packageName;
+                        public final /* synthetic */ HashSet val$targets;
 
-                public AnonymousClass4(final String str2, final HashSet dataChangedTargets2) {
-                    r2 = str2;
-                    r3 = dataChangedTargets2;
-                }
+                        public AnonymousClass4(
+                                final String str2, final HashSet dataChangedTargets2) {
+                            r2 = str2;
+                            r3 = dataChangedTargets2;
+                        }
 
-                @Override // java.lang.Runnable
-                public final void run() {
-                    UserBackupManagerService.this.dataChangedImpl(r2, r3);
-                }
-            });
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            UserBackupManagerService.this.dataChangedImpl(r2, r3);
+                        }
+                    });
             return;
         }
-        StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("dataChanged but no participant pkg='", str2, "' uid=");
+        StringBuilder m =
+                DumpUtils$$ExternalSyntheticOutline0.m(
+                        "dataChanged but no participant pkg='", str2, "' uid=");
         m.append(Binder.getCallingUid());
-        Slog.w("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(serviceForUserIfCallerHasPermission.mUserId, m.toString()));
+        Slog.w(
+                "BackupManagerService",
+                UserBackupManagerService.addUserIdToLogMessage(
+                        serviceForUserIfCallerHasPermission.mUserId, m.toString()));
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
-        if (DumpUtils.checkDumpAndUsageStatsPermission(this.mContext, "BackupManagerService", printWriter)) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+        if (DumpUtils.checkDumpAndUsageStatsPermission(
+                this.mContext, "BackupManagerService", printWriter)) {
             int i = 0;
             String str = strArr.length <= 0 ? null : strArr[0];
             if ("--help".equals(str) || "-h".equals(str)) {
@@ -404,7 +554,9 @@ public final class BackupManagerService extends IBackupManager.Stub {
             if ("users".equals(str)) {
                 printWriter.print(DUMP_RUNNING_USERS_MESSAGE);
                 while (i < this.mUserServices.size()) {
-                    UserBackupManagerService serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(this.mUserServices.keyAt(i), "dump()");
+                    UserBackupManagerService serviceForUserIfCallerHasPermission =
+                            getServiceForUserIfCallerHasPermission(
+                                    this.mUserServices.keyAt(i), "dump()");
                     if (serviceForUserIfCallerHasPermission != null) {
                         printWriter.print(" " + serviceForUserIfCallerHasPermission.mUserId);
                     }
@@ -415,7 +567,9 @@ public final class BackupManagerService extends IBackupManager.Stub {
             }
             if (!"--user".equals(str)) {
                 while (i < this.mUserServices.size()) {
-                    UserBackupManagerService serviceForUserIfCallerHasPermission2 = getServiceForUserIfCallerHasPermission(this.mUserServices.keyAt(i), "dump()");
+                    UserBackupManagerService serviceForUserIfCallerHasPermission2 =
+                            getServiceForUserIfCallerHasPermission(
+                                    this.mUserServices.keyAt(i), "dump()");
                     if (serviceForUserIfCallerHasPermission2 != null) {
                         serviceForUserIfCallerHasPermission2.dump(printWriter, strArr);
                     }
@@ -428,7 +582,8 @@ public final class BackupManagerService extends IBackupManager.Stub {
                 showDumpUsage(printWriter);
                 return;
             }
-            UserBackupManagerService serviceForUserIfCallerHasPermission3 = getServiceForUserIfCallerHasPermission(UserHandle.parseUserArg(str2), "dump()");
+            UserBackupManagerService serviceForUserIfCallerHasPermission3 =
+                    getServiceForUserIfCallerHasPermission(UserHandle.parseUserArg(str2), "dump()");
             if (serviceForUserIfCallerHasPermission3 != null) {
                 serviceForUserIfCallerHasPermission3.dump(printWriter, strArr);
             }
@@ -438,15 +593,25 @@ public final class BackupManagerService extends IBackupManager.Stub {
     public final void excludeKeysFromRestore(String str, List list) {
         int identifier = Binder.getCallingUserHandle().getIdentifier();
         if (!isUserReadyForBackup(identifier)) {
-            BrailleDisplayConnection$$ExternalSyntheticOutline0.m(identifier, "Returning from excludeKeysFromRestore as backup for user", " is not initialized yet", "BackupManagerService");
+            BrailleDisplayConnection$$ExternalSyntheticOutline0.m(
+                    identifier,
+                    "Returning from excludeKeysFromRestore as backup for user",
+                    " is not initialized yet",
+                    "BackupManagerService");
             return;
         }
-        UserBackupManagerService serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(identifier, "excludeKeysFromRestore()");
+        UserBackupManagerService serviceForUserIfCallerHasPermission =
+                getServiceForUserIfCallerHasPermission(identifier, "excludeKeysFromRestore()");
         if (serviceForUserIfCallerHasPermission != null) {
-            serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "excludeKeysFromRestore");
-            UserBackupPreferences userBackupPreferences = serviceForUserIfCallerHasPermission.mBackupPreferences;
+            serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.BACKUP", "excludeKeysFromRestore");
+            UserBackupPreferences userBackupPreferences =
+                    serviceForUserIfCallerHasPermission.mBackupPreferences;
             userBackupPreferences.getClass();
-            HashSet hashSet = new HashSet(userBackupPreferences.mPreferences.getStringSet(str, Collections.emptySet()));
+            HashSet hashSet =
+                    new HashSet(
+                            userBackupPreferences.mPreferences.getStringSet(
+                                    str, Collections.emptySet()));
             hashSet.addAll(list);
             userBackupPreferences.mEditor.putStringSet(str, hashSet);
             userBackupPreferences.mEditor.commit();
@@ -455,22 +620,31 @@ public final class BackupManagerService extends IBackupManager.Stub {
 
     public final String[] filterAppsEligibleForBackupForUser(int i, String[] strArr) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
-        if (!isUserReadyForBackup(i) || (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "filterAppsEligibleForBackup()")) == null) {
+        if (!isUserReadyForBackup(i)
+                || (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(
+                                        i, "filterAppsEligibleForBackup()"))
+                        == null) {
             return null;
         }
         TransportManager transportManager = serviceForUserIfCallerHasPermission.mTransportManager;
-        serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "filterAppsEligibleForBackup");
+        serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission(
+                "android.permission.BACKUP", "filterAppsEligibleForBackup");
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            TransportConnection currentTransportClient = transportManager.getCurrentTransportClient("BMS.filterAppsEligibleForBackup");
+            TransportConnection currentTransportClient =
+                    transportManager.getCurrentTransportClient("BMS.filterAppsEligibleForBackup");
             ArrayList arrayList = new ArrayList();
             for (String str : strArr) {
-                if (serviceForUserIfCallerHasPermission.mScheduledBackupEligibility.appIsRunningAndEligibleForBackupWithTransport(currentTransportClient, str)) {
+                if (serviceForUserIfCallerHasPermission.mScheduledBackupEligibility
+                        .appIsRunningAndEligibleForBackupWithTransport(
+                                currentTransportClient, str)) {
                     arrayList.add(str);
                 }
             }
             if (currentTransportClient != null) {
-                transportManager.mTransportConnectionManager.disposeOfTransportClient(currentTransportClient, "BMS.filterAppsEligibleForBackup");
+                transportManager.mTransportConnectionManager.disposeOfTransportClient(
+                        currentTransportClient, "BMS.filterAppsEligibleForBackup");
             }
             String[] strArr2 = (String[]) arrayList.toArray(new String[0]);
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -481,9 +655,24 @@ public final class BackupManagerService extends IBackupManager.Stub {
         }
     }
 
-    public final void fullBackupCustomized(int i, String str, boolean z, boolean z2, boolean z3, boolean z4, boolean z5, boolean z6, boolean z7, String[] strArr, boolean z8, String str2, boolean z9, IMemorySaverBackupRestoreObserver iMemorySaverBackupRestoreObserver) {
+    public final void fullBackupCustomized(
+            int i,
+            String str,
+            boolean z,
+            boolean z2,
+            boolean z3,
+            boolean z4,
+            boolean z5,
+            boolean z6,
+            boolean z7,
+            String[] strArr,
+            boolean z8,
+            String str2,
+            boolean z9,
+            IMemorySaverBackupRestoreObserver iMemorySaverBackupRestoreObserver) {
         try {
-            UserBackupManagerService serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "fullBackupCustomized()");
+            UserBackupManagerService serviceForUserIfCallerHasPermission =
+                    getServiceForUserIfCallerHasPermission(i, "fullBackupCustomized()");
             if (serviceForUserIfCallerHasPermission != null) {
                 ParcelFileDescriptor open = ParcelFileDescriptor.open(new File(str), 805306368);
                 serviceForUserIfCallerHasPermission.mExtraFlag = 512;
@@ -497,47 +686,83 @@ public final class BackupManagerService extends IBackupManager.Stub {
                 }
                 serviceForUserIfCallerHasPermission.mEncPassword = str2;
                 UserBackupManagerService.mSplitBackupFlag = Boolean.TRUE;
-                serviceForUserIfCallerHasPermission.adbBackup(open, z, z2, z3, z4, z5, z6, z7, z9, strArr, true);
+                serviceForUserIfCallerHasPermission.adbBackup(
+                        open, z, z2, z3, z4, z5, z6, z7, z9, strArr, true);
                 UserBackupManagerService.mSplitBackupFlag = Boolean.FALSE;
             }
         } catch (Exception unused) {
-            BootReceiver$$ExternalSyntheticOutline0.m(i, "userId ", " fullbackupCustomized error", "BackupManagerService");
+            BootReceiver$$ExternalSyntheticOutline0.m(
+                    i, "userId ", " fullbackupCustomized error", "BackupManagerService");
         }
     }
 
-    public final void fullRestoreCustomized(int i, String str, boolean z, String str2, IMemorySaverBackupRestoreObserver iMemorySaverBackupRestoreObserver) {
+    public final void fullRestoreCustomized(
+            int i,
+            String str,
+            boolean z,
+            String str2,
+            IMemorySaverBackupRestoreObserver iMemorySaverBackupRestoreObserver) {
         try {
-            UserBackupManagerService serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "fullRestoreCustomized()");
+            UserBackupManagerService serviceForUserIfCallerHasPermission =
+                    getServiceForUserIfCallerHasPermission(i, "fullRestoreCustomized()");
             if (serviceForUserIfCallerHasPermission != null) {
-                serviceForUserIfCallerHasPermission.fullRestoreCustomized(str, str2, iMemorySaverBackupRestoreObserver);
+                serviceForUserIfCallerHasPermission.fullRestoreCustomized(
+                        str, str2, iMemorySaverBackupRestoreObserver);
             }
         } catch (Exception unused) {
-            BootReceiver$$ExternalSyntheticOutline0.m(i, "userId ", " fullRestoreCustomized error ", "BackupManagerService");
+            BootReceiver$$ExternalSyntheticOutline0.m(
+                    i, "userId ", " fullRestoreCustomized error ", "BackupManagerService");
         }
     }
 
     public final void fullTransportBackupForUser(int i, String[] strArr) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
-        if (!isUserReadyForBackup(i) || (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "fullTransportBackup()")) == null) {
+        if (!isUserReadyForBackup(i)
+                || (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(i, "fullTransportBackup()"))
+                        == null) {
             return;
         }
-        serviceForUserIfCallerHasPermission.mContext.enforceCallingPermission("android.permission.BACKUP", "fullTransportBackup");
+        serviceForUserIfCallerHasPermission.mContext.enforceCallingPermission(
+                "android.permission.BACKUP", "fullTransportBackup");
         if (UserHandle.getCallingUserId() != 0) {
             throw new IllegalStateException("Restore supported only for the device owner");
         }
-        if (serviceForUserIfCallerHasPermission.fullBackupAllowable(serviceForUserIfCallerHasPermission.mTransportManager.mCurrentTransportName)) {
-            Slog.d("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(serviceForUserIfCallerHasPermission.mUserId, "fullTransportBackup()"));
+        if (serviceForUserIfCallerHasPermission.fullBackupAllowable(
+                serviceForUserIfCallerHasPermission.mTransportManager.mCurrentTransportName)) {
+            Slog.d(
+                    "BackupManagerService",
+                    UserBackupManagerService.addUserIdToLogMessage(
+                            serviceForUserIfCallerHasPermission.mUserId, "fullTransportBackup()"));
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 CountDownLatch countDownLatch = new CountDownLatch(1);
-                LifecycleOperationStorage lifecycleOperationStorage = serviceForUserIfCallerHasPermission.mOperationStorage;
-                BackupEligibilityRules eligibilityRulesForOperation = serviceForUserIfCallerHasPermission.getEligibilityRulesForOperation(0);
-                TransportManager transportManager = serviceForUserIfCallerHasPermission.mTransportManager;
-                TransportConnection currentTransportClient = transportManager.getCurrentTransportClient("BMS.fullTransportBackup()");
+                LifecycleOperationStorage lifecycleOperationStorage =
+                        serviceForUserIfCallerHasPermission.mOperationStorage;
+                BackupEligibilityRules eligibilityRulesForOperation =
+                        serviceForUserIfCallerHasPermission.getEligibilityRulesForOperation(0);
+                TransportManager transportManager =
+                        serviceForUserIfCallerHasPermission.mTransportManager;
+                TransportConnection currentTransportClient =
+                        transportManager.getCurrentTransportClient("BMS.fullTransportBackup()");
                 if (currentTransportClient == null) {
                     throw new IllegalStateException("No TransportConnection available");
                 }
-                PerformFullTransportBackupTask performFullTransportBackupTask = new PerformFullTransportBackupTask(serviceForUserIfCallerHasPermission, lifecycleOperationStorage, currentTransportClient, strArr, false, null, countDownLatch, null, null, new PerformFullTransportBackupTask$$ExternalSyntheticLambda0(transportManager, currentTransportClient), false, eligibilityRulesForOperation);
+                PerformFullTransportBackupTask performFullTransportBackupTask =
+                        new PerformFullTransportBackupTask(
+                                serviceForUserIfCallerHasPermission,
+                                lifecycleOperationStorage,
+                                currentTransportClient,
+                                strArr,
+                                false,
+                                null,
+                                countDownLatch,
+                                null,
+                                null,
+                                new PerformFullTransportBackupTask$$ExternalSyntheticLambda0(
+                                        transportManager, currentTransportClient),
+                                false,
+                                eligibilityRulesForOperation);
                 serviceForUserIfCallerHasPermission.mWakelock.acquire();
                 new Thread(performFullTransportBackupTask, "full-transport-master").start();
                 while (true) {
@@ -558,18 +783,34 @@ public final class BackupManagerService extends IBackupManager.Stub {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
         } else {
-            Slog.i("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(serviceForUserIfCallerHasPermission.mUserId, "Full backup not currently possible -- key/value backup not yet run?"));
+            Slog.i(
+                    "BackupManagerService",
+                    UserBackupManagerService.addUserIdToLogMessage(
+                            serviceForUserIfCallerHasPermission.mUserId,
+                            "Full backup not currently possible -- key/value backup not yet run?"));
         }
-        Slog.d("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(serviceForUserIfCallerHasPermission.mUserId, "Done with full transport backup."));
+        Slog.d(
+                "BackupManagerService",
+                UserBackupManagerService.addUserIdToLogMessage(
+                        serviceForUserIfCallerHasPermission.mUserId,
+                        "Done with full transport backup."));
     }
 
     public File getActivatedFileForUser(int i) {
-        return new File(new File(UserBackupManagerFiles.getBaseStateDir(0), VibrationParam$1$$ExternalSyntheticOutline0.m(i, "")), "backup-activated");
+        return new File(
+                new File(
+                        UserBackupManagerFiles.getBaseStateDir(0),
+                        VibrationParam$1$$ExternalSyntheticOutline0.m(i, "")),
+                "backup-activated");
     }
 
     public final long getAvailableRestoreTokenForUser(int i, String str) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
-        if (!isUserReadyForBackup(i) || (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "getAvailableRestoreToken()")) == null) {
+        if (!isUserReadyForBackup(i)
+                || (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(
+                                        i, "getAvailableRestoreToken()"))
+                        == null) {
             return 0L;
         }
         return serviceForUserIfCallerHasPermission.getAvailableRestoreToken(str);
@@ -586,18 +827,31 @@ public final class BackupManagerService extends IBackupManager.Stub {
     public final Intent getConfigurationIntentForUser(int i, String str) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
         Intent intent;
-        if (!isUserReadyForBackup(i) || (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "getConfigurationIntent()")) == null) {
+        if (!isUserReadyForBackup(i)
+                || (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(
+                                        i, "getConfigurationIntent()"))
+                        == null) {
             return null;
         }
-        serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "getConfigurationIntent");
+        serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission(
+                "android.permission.BACKUP", "getConfigurationIntent");
         try {
-            TransportManager transportManager = serviceForUserIfCallerHasPermission.mTransportManager;
+            TransportManager transportManager =
+                    serviceForUserIfCallerHasPermission.mTransportManager;
             synchronized (transportManager.mTransportLock) {
-                intent = transportManager.getRegisteredTransportDescriptionOrThrowLocked(str).configurationIntent;
+                intent =
+                        transportManager.getRegisteredTransportDescriptionOrThrowLocked(str)
+                                .configurationIntent;
             }
             return intent;
         } catch (TransportNotRegisteredException e) {
-            Slog.e("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(serviceForUserIfCallerHasPermission.mUserId, "Unable to get configuration intent from transport: " + e.getMessage()));
+            Slog.e(
+                    "BackupManagerService",
+                    UserBackupManagerService.addUserIdToLogMessage(
+                            serviceForUserIfCallerHasPermission.mUserId,
+                            "Unable to get configuration intent from transport: "
+                                    + e.getMessage()));
             return null;
         }
     }
@@ -613,11 +867,18 @@ public final class BackupManagerService extends IBackupManager.Stub {
     public final ComponentName getCurrentTransportComponentForUser(int i) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
         ComponentName componentName = null;
-        if (isUserReadyForBackup(i) && (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "getCurrentTransportComponent()")) != null) {
-            serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "getCurrentTransportComponent");
+        if (isUserReadyForBackup(i)
+                && (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(
+                                        i, "getCurrentTransportComponent()"))
+                        != null) {
+            serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.BACKUP", "getCurrentTransportComponent");
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                componentName = serviceForUserIfCallerHasPermission.mTransportManager.getCurrentTransportComponent();
+                componentName =
+                        serviceForUserIfCallerHasPermission.mTransportManager
+                                .getCurrentTransportComponent();
             } catch (TransportNotRegisteredException unused) {
             } catch (Throwable th) {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -630,10 +891,14 @@ public final class BackupManagerService extends IBackupManager.Stub {
 
     public final String getCurrentTransportForUser(int i) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
-        if (!isUserReadyForBackup(i) || (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "getCurrentTransport()")) == null) {
+        if (!isUserReadyForBackup(i)
+                || (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(i, "getCurrentTransport()"))
+                        == null) {
             return null;
         }
-        serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "getCurrentTransport");
+        serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission(
+                "android.permission.BACKUP", "getCurrentTransport");
         return serviceForUserIfCallerHasPermission.mTransportManager.mCurrentTransportName;
     }
 
@@ -644,18 +909,30 @@ public final class BackupManagerService extends IBackupManager.Stub {
     public final Intent getDataManagementIntentForUser(int i, String str) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
         Intent intent;
-        if (!isUserReadyForBackup(i) || (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "getDataManagementIntent()")) == null) {
+        if (!isUserReadyForBackup(i)
+                || (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(
+                                        i, "getDataManagementIntent()"))
+                        == null) {
             return null;
         }
-        serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "getDataManagementIntent");
+        serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission(
+                "android.permission.BACKUP", "getDataManagementIntent");
         try {
-            TransportManager transportManager = serviceForUserIfCallerHasPermission.mTransportManager;
+            TransportManager transportManager =
+                    serviceForUserIfCallerHasPermission.mTransportManager;
             synchronized (transportManager.mTransportLock) {
-                intent = transportManager.getRegisteredTransportDescriptionOrThrowLocked(str).dataManagementIntent;
+                intent =
+                        transportManager.getRegisteredTransportDescriptionOrThrowLocked(str)
+                                .dataManagementIntent;
             }
             return intent;
         } catch (TransportNotRegisteredException e) {
-            Slog.e("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(serviceForUserIfCallerHasPermission.mUserId, "Unable to get management intent from transport: " + e.getMessage()));
+            Slog.e(
+                    "BackupManagerService",
+                    UserBackupManagerService.addUserIdToLogMessage(
+                            serviceForUserIfCallerHasPermission.mUserId,
+                            "Unable to get management intent from transport: " + e.getMessage()));
             return null;
         }
     }
@@ -663,18 +940,30 @@ public final class BackupManagerService extends IBackupManager.Stub {
     public final CharSequence getDataManagementLabelForUser(int i, String str) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
         CharSequence charSequence;
-        if (!isUserReadyForBackup(i) || (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "getDataManagementLabel()")) == null) {
+        if (!isUserReadyForBackup(i)
+                || (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(
+                                        i, "getDataManagementLabel()"))
+                        == null) {
             return null;
         }
-        serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "getDataManagementLabel");
+        serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission(
+                "android.permission.BACKUP", "getDataManagementLabel");
         try {
-            TransportManager transportManager = serviceForUserIfCallerHasPermission.mTransportManager;
+            TransportManager transportManager =
+                    serviceForUserIfCallerHasPermission.mTransportManager;
             synchronized (transportManager.mTransportLock) {
-                charSequence = transportManager.getRegisteredTransportDescriptionOrThrowLocked(str).dataManagementLabel;
+                charSequence =
+                        transportManager.getRegisteredTransportDescriptionOrThrowLocked(str)
+                                .dataManagementLabel;
             }
             return charSequence;
         } catch (TransportNotRegisteredException e) {
-            Slog.e("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(serviceForUserIfCallerHasPermission.mUserId, "Unable to get management label from transport: " + e.getMessage()));
+            Slog.e(
+                    "BackupManagerService",
+                    UserBackupManagerService.addUserIdToLogMessage(
+                            serviceForUserIfCallerHasPermission.mUserId,
+                            "Unable to get management label from transport: " + e.getMessage()));
             return null;
         }
     }
@@ -686,31 +975,48 @@ public final class BackupManagerService extends IBackupManager.Stub {
     public final String getDestinationStringForUser(int i, String str) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
         String str2;
-        if (!isUserReadyForBackup(i) || (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "getDestinationString()")) == null) {
+        if (!isUserReadyForBackup(i)
+                || (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(i, "getDestinationString()"))
+                        == null) {
             return null;
         }
-        serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "getDestinationString");
+        serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission(
+                "android.permission.BACKUP", "getDestinationString");
         try {
-            TransportManager transportManager = serviceForUserIfCallerHasPermission.mTransportManager;
+            TransportManager transportManager =
+                    serviceForUserIfCallerHasPermission.mTransportManager;
             synchronized (transportManager.mTransportLock) {
-                str2 = transportManager.getRegisteredTransportDescriptionOrThrowLocked(str).currentDestinationString;
+                str2 =
+                        transportManager.getRegisteredTransportDescriptionOrThrowLocked(str)
+                                .currentDestinationString;
             }
             return str2;
         } catch (TransportNotRegisteredException e) {
-            Slog.e("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(serviceForUserIfCallerHasPermission.mUserId, "Unable to get destination string from transport: " + e.getMessage()));
+            Slog.e(
+                    "BackupManagerService",
+                    UserBackupManagerService.addUserIdToLogMessage(
+                            serviceForUserIfCallerHasPermission.mUserId,
+                            "Unable to get destination string from transport: " + e.getMessage()));
             return null;
         }
     }
 
     public File getRememberActivatedFileForNonSystemUser(int i) {
-        return new File(new File(UserBackupManagerFiles.getBaseStateDir(0), VibrationParam$1$$ExternalSyntheticOutline0.m(i, "")), "backup-remember-activated");
+        return new File(
+                new File(
+                        UserBackupManagerFiles.getBaseStateDir(0),
+                        VibrationParam$1$$ExternalSyntheticOutline0.m(i, "")),
+                "backup-remember-activated");
     }
 
     public UserBackupManagerService getServiceForUserIfCallerHasPermission(int i, String str) {
         if (binderGetCallingUserId() != i) {
-            this.mContext.enforceCallingOrSelfPermission("android.permission.INTERACT_ACROSS_USERS_FULL", str);
+            this.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.INTERACT_ACROSS_USERS_FULL", str);
         }
-        UserBackupManagerService userBackupManagerService = (UserBackupManagerService) this.mUserServices.get(i);
+        UserBackupManagerService userBackupManagerService =
+                (UserBackupManagerService) this.mUserServices.get(i);
         if (userBackupManagerService == null) {
             Slog.w("BackupManagerService", "Called " + str + " for unknown user: " + i);
         }
@@ -815,7 +1121,9 @@ public final class BackupManagerService extends IBackupManager.Stub {
             android.os.Binder.restoreCallingIdentity(r2)
             throw r10
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.backup.BackupManagerService.getUserForAncestralSerialNumber(long):android.os.UserHandle");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.backup.BackupManagerService.getUserForAncestralSerialNumber(long):android.os.UserHandle");
     }
 
     public UserManager getUserManager() {
@@ -828,18 +1136,27 @@ public final class BackupManagerService extends IBackupManager.Stub {
 
     public final boolean hasBackupPassword() {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
-        if (!isUserReadyForBackup(binderGetCallingUserId()) || (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(0, "hasBackupPassword()")) == null) {
+        if (!isUserReadyForBackup(binderGetCallingUserId())
+                || (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(0, "hasBackupPassword()"))
+                        == null) {
             return false;
         }
-        BackupPasswordManager backupPasswordManager = serviceForUserIfCallerHasPermission.mBackupPasswordManager;
-        backupPasswordManager.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "hasBackupPassword");
+        BackupPasswordManager backupPasswordManager =
+                serviceForUserIfCallerHasPermission.mBackupPasswordManager;
+        backupPasswordManager.mContext.enforceCallingOrSelfPermission(
+                "android.permission.BACKUP", "hasBackupPassword");
         String str = backupPasswordManager.mPasswordHash;
         return str != null && str.length() > 0;
     }
 
-    public final void initializeTransportsForUser(int i, String[] strArr, IBackupObserver iBackupObserver) {
+    public final void initializeTransportsForUser(
+            int i, String[] strArr, IBackupObserver iBackupObserver) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
-        if (!isUserReadyForBackup(i) || (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "initializeTransports()")) == null) {
+        if (!isUserReadyForBackup(i)
+                || (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(i, "initializeTransports()"))
+                        == null) {
             return;
         }
         serviceForUserIfCallerHasPermission.initializeTransports(strArr, iBackupObserver);
@@ -847,15 +1164,26 @@ public final class BackupManagerService extends IBackupManager.Stub {
 
     public final boolean isAppEligibleForBackupForUser(int i, String str) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
-        if (isUserReadyForBackup(i) && (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "isAppEligibleForBackup()")) != null) {
-            TransportManager transportManager = serviceForUserIfCallerHasPermission.mTransportManager;
-            serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "isAppEligibleForBackup");
+        if (isUserReadyForBackup(i)
+                && (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(
+                                        i, "isAppEligibleForBackup()"))
+                        != null) {
+            TransportManager transportManager =
+                    serviceForUserIfCallerHasPermission.mTransportManager;
+            serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.BACKUP", "isAppEligibleForBackup");
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                TransportConnection currentTransportClient = transportManager.getCurrentTransportClient("BMS.isAppEligibleForBackup");
-                boolean appIsRunningAndEligibleForBackupWithTransport = serviceForUserIfCallerHasPermission.mScheduledBackupEligibility.appIsRunningAndEligibleForBackupWithTransport(currentTransportClient, str);
+                TransportConnection currentTransportClient =
+                        transportManager.getCurrentTransportClient("BMS.isAppEligibleForBackup");
+                boolean appIsRunningAndEligibleForBackupWithTransport =
+                        serviceForUserIfCallerHasPermission.mScheduledBackupEligibility
+                                .appIsRunningAndEligibleForBackupWithTransport(
+                                        currentTransportClient, str);
                 if (currentTransportClient != null) {
-                    transportManager.mTransportConnectionManager.disposeOfTransportClient(currentTransportClient, "BMS.isAppEligibleForBackup");
+                    transportManager.mTransportConnectionManager.disposeOfTransportClient(
+                            currentTransportClient, "BMS.isAppEligibleForBackup");
                 }
                 if (appIsRunningAndEligibleForBackupWithTransport) {
                     return true;
@@ -891,8 +1219,12 @@ public final class BackupManagerService extends IBackupManager.Stub {
 
     public final boolean isBackupEnabledForUser(int i) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
-        if (isUserReadyForBackup(i) && (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "isBackupEnabled()")) != null) {
-            serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "isBackupEnabled");
+        if (isUserReadyForBackup(i)
+                && (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(i, "isBackupEnabled()"))
+                        != null) {
+            serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.BACKUP", "isBackupEnabled");
             if (serviceForUserIfCallerHasPermission.mEnabled) {
                 return true;
             }
@@ -903,7 +1235,8 @@ public final class BackupManagerService extends IBackupManager.Stub {
     public final boolean isBackupServiceActive(int i) {
         boolean z;
         if (CompatChanges.isChangeEnabled(158482162L, Binder.getCallingUid())) {
-            this.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "isBackupServiceActive");
+            this.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.BACKUP", "isBackupServiceActive");
         }
         synchronized (this.mStateLock) {
             try {
@@ -920,7 +1253,8 @@ public final class BackupManagerService extends IBackupManager.Stub {
 
     public final boolean isUserReadyForBackup(int i) {
         if (binderGetCallingUserId() != i) {
-            this.mContext.enforceCallingOrSelfPermission("android.permission.INTERACT_ACROSS_USERS_FULL", "isUserReadyForBackup()");
+            this.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.INTERACT_ACROSS_USERS_FULL", "isUserReadyForBackup()");
         }
         return this.mUserServices.get(i) != null;
     }
@@ -928,11 +1262,26 @@ public final class BackupManagerService extends IBackupManager.Stub {
     public final ComponentName[] listAllTransportComponentsForUser(int i) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
         ComponentName[] componentNameArr = null;
-        if (isUserReadyForBackup(i) && (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "listAllTransportComponents()")) != null) {
-            serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "listAllTransportComponents");
-            TransportManager transportManager = serviceForUserIfCallerHasPermission.mTransportManager;
+        if (isUserReadyForBackup(i)
+                && (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(
+                                        i, "listAllTransportComponents()"))
+                        != null) {
+            serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.BACKUP", "listAllTransportComponents");
+            TransportManager transportManager =
+                    serviceForUserIfCallerHasPermission.mTransportManager;
             synchronized (transportManager.mTransportLock) {
-                componentNameArr = (ComponentName[]) ((ArrayMap) transportManager.mRegisteredTransportsDescriptionMap).keySet().toArray(new ComponentName[((ArrayMap) transportManager.mRegisteredTransportsDescriptionMap).size()]);
+                componentNameArr =
+                        (ComponentName[])
+                                ((ArrayMap) transportManager.mRegisteredTransportsDescriptionMap)
+                                        .keySet()
+                                        .toArray(
+                                                new ComponentName
+                                                        [((ArrayMap)
+                                                                        transportManager
+                                                                                .mRegisteredTransportsDescriptionMap)
+                                                                .size()]);
             }
         }
         return componentNameArr;
@@ -944,7 +1293,10 @@ public final class BackupManagerService extends IBackupManager.Stub {
 
     public final String[] listAllTransportsForUser(int i) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
-        if (!isUserReadyForBackup(i) || (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "listAllTransports()")) == null) {
+        if (!isUserReadyForBackup(i)
+                || (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(i, "listAllTransports()"))
+                        == null) {
             return null;
         }
         return serviceForUserIfCallerHasPermission.listAllTransports();
@@ -958,10 +1310,14 @@ public final class BackupManagerService extends IBackupManager.Stub {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
         Operation operation;
         BackupRestoreTask backupRestoreTask;
-        if (!isUserReadyForBackup(i) || (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "opComplete()")) == null) {
+        if (!isUserReadyForBackup(i)
+                || (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(i, "opComplete()"))
+                        == null) {
             return;
         }
-        LifecycleOperationStorage lifecycleOperationStorage = serviceForUserIfCallerHasPermission.mOperationStorage;
+        LifecycleOperationStorage lifecycleOperationStorage =
+                serviceForUserIfCallerHasPermission.mOperationStorage;
         synchronized (lifecycleOperationStorage.mOperationsLock) {
             try {
                 operation = (Operation) lifecycleOperationStorage.mOperations.get(i2);
@@ -970,7 +1326,12 @@ public final class BackupManagerService extends IBackupManager.Stub {
                     if (i3 == -1) {
                         lifecycleOperationStorage.mOperations.remove(i2);
                     } else if (i3 == 1) {
-                        Slog.w("LifecycleOperationStorage", "[UserID:" + lifecycleOperationStorage.mUserId + "] Received duplicate ack for token=" + Integer.toHexString(i2));
+                        Slog.w(
+                                "LifecycleOperationStorage",
+                                "[UserID:"
+                                        + lifecycleOperationStorage.mUserId
+                                        + "] Received duplicate ack for token="
+                                        + Integer.toHexString(i2));
                         lifecycleOperationStorage.mOperations.remove(i2);
                     } else if (i3 == 0) {
                         operation.state = 1;
@@ -997,10 +1358,15 @@ public final class BackupManagerService extends IBackupManager.Stub {
     public final void reportDelayedRestoreResult(String str, List list) {
         int identifier = Binder.getCallingUserHandle().getIdentifier();
         if (!isUserReadyForBackup(identifier)) {
-            BrailleDisplayConnection$$ExternalSyntheticOutline0.m(identifier, "Returning from reportDelayedRestoreResult as backup for user", " is not initialized yet", "BackupManagerService");
+            BrailleDisplayConnection$$ExternalSyntheticOutline0.m(
+                    identifier,
+                    "Returning from reportDelayedRestoreResult as backup for user",
+                    " is not initialized yet",
+                    "BackupManagerService");
             return;
         }
-        UserBackupManagerService serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(identifier, "reportDelayedRestoreResult()");
+        UserBackupManagerService serviceForUserIfCallerHasPermission =
+                getServiceForUserIfCallerHasPermission(identifier, "reportDelayedRestoreResult()");
         if (serviceForUserIfCallerHasPermission != null) {
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
@@ -1011,48 +1377,104 @@ public final class BackupManagerService extends IBackupManager.Stub {
         }
     }
 
-    public final int requestBackup(int i, String[] strArr, IBackupObserver iBackupObserver, IBackupManagerMonitor iBackupManagerMonitor, int i2) {
-        UserBackupManagerService serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "requestBackup()");
+    public final int requestBackup(
+            int i,
+            String[] strArr,
+            IBackupObserver iBackupObserver,
+            IBackupManagerMonitor iBackupManagerMonitor,
+            int i2) {
+        UserBackupManagerService serviceForUserIfCallerHasPermission =
+                getServiceForUserIfCallerHasPermission(i, "requestBackup()");
         if (serviceForUserIfCallerHasPermission == null) {
             return -2001;
         }
-        BackupManagerMonitorEventSender bMMEventSender = serviceForUserIfCallerHasPermission.getBMMEventSender(iBackupManagerMonitor);
-        serviceForUserIfCallerHasPermission.mContext.enforceCallingPermission("android.permission.BACKUP", "requestBackup");
+        BackupManagerMonitorEventSender bMMEventSender =
+                serviceForUserIfCallerHasPermission.getBMMEventSender(iBackupManagerMonitor);
+        serviceForUserIfCallerHasPermission.mContext.enforceCallingPermission(
+                "android.permission.BACKUP", "requestBackup");
         if (strArr == null || strArr.length < 1) {
-            Slog.e("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(serviceForUserIfCallerHasPermission.mUserId, "No packages named for backup request"));
+            Slog.e(
+                    "BackupManagerService",
+                    UserBackupManagerService.addUserIdToLogMessage(
+                            serviceForUserIfCallerHasPermission.mUserId,
+                            "No packages named for backup request"));
             BackupObserverUtils.sendBackupFinished(iBackupObserver, -1000);
             bMMEventSender.monitorEvent(49, null, 1, null);
             throw new IllegalArgumentException("No packages are provided for backup");
         }
-        if (!serviceForUserIfCallerHasPermission.mEnabled || !serviceForUserIfCallerHasPermission.mSetupComplete) {
-            Slog.i("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(serviceForUserIfCallerHasPermission.mUserId, "Backup requested but enabled=" + serviceForUserIfCallerHasPermission.mEnabled + " setupComplete=" + serviceForUserIfCallerHasPermission.mSetupComplete));
+        if (!serviceForUserIfCallerHasPermission.mEnabled
+                || !serviceForUserIfCallerHasPermission.mSetupComplete) {
+            Slog.i(
+                    "BackupManagerService",
+                    UserBackupManagerService.addUserIdToLogMessage(
+                            serviceForUserIfCallerHasPermission.mUserId,
+                            "Backup requested but enabled="
+                                    + serviceForUserIfCallerHasPermission.mEnabled
+                                    + " setupComplete="
+                                    + serviceForUserIfCallerHasPermission.mSetupComplete));
             BackupObserverUtils.sendBackupFinished(iBackupObserver, -2001);
-            bMMEventSender.monitorEvent(serviceForUserIfCallerHasPermission.mSetupComplete ? 13 : 14, null, 3, null);
+            bMMEventSender.monitorEvent(
+                    serviceForUserIfCallerHasPermission.mSetupComplete ? 13 : 14, null, 3, null);
             return -2001;
         }
         try {
-            TransportManager transportManager = serviceForUserIfCallerHasPermission.mTransportManager;
-            String transportDirName = transportManager.getTransportDirName(transportManager.mCurrentTransportName);
-            TransportConnection currentTransportClientOrThrow = serviceForUserIfCallerHasPermission.mTransportManager.getCurrentTransportClientOrThrow();
-            int backupDestinationFromTransport = serviceForUserIfCallerHasPermission.getBackupDestinationFromTransport(currentTransportClientOrThrow);
-            UserBackupManagerService$$ExternalSyntheticLambda0 userBackupManagerService$$ExternalSyntheticLambda0 = new UserBackupManagerService$$ExternalSyntheticLambda0(serviceForUserIfCallerHasPermission, currentTransportClientOrThrow, 1);
-            BackupEligibilityRules eligibilityRulesForOperation = serviceForUserIfCallerHasPermission.getEligibilityRulesForOperation(backupDestinationFromTransport);
-            Message obtainMessage = serviceForUserIfCallerHasPermission.mBackupHandler.obtainMessage(15);
-            obtainMessage.obj = serviceForUserIfCallerHasPermission.getRequestBackupParams(strArr, iBackupObserver, iBackupManagerMonitor, i2, eligibilityRulesForOperation, currentTransportClientOrThrow, transportDirName, userBackupManagerService$$ExternalSyntheticLambda0);
+            TransportManager transportManager =
+                    serviceForUserIfCallerHasPermission.mTransportManager;
+            String transportDirName =
+                    transportManager.getTransportDirName(transportManager.mCurrentTransportName);
+            TransportConnection currentTransportClientOrThrow =
+                    serviceForUserIfCallerHasPermission.mTransportManager
+                            .getCurrentTransportClientOrThrow();
+            int backupDestinationFromTransport =
+                    serviceForUserIfCallerHasPermission.getBackupDestinationFromTransport(
+                            currentTransportClientOrThrow);
+            UserBackupManagerService$$ExternalSyntheticLambda0
+                    userBackupManagerService$$ExternalSyntheticLambda0 =
+                            new UserBackupManagerService$$ExternalSyntheticLambda0(
+                                    serviceForUserIfCallerHasPermission,
+                                    currentTransportClientOrThrow,
+                                    1);
+            BackupEligibilityRules eligibilityRulesForOperation =
+                    serviceForUserIfCallerHasPermission.getEligibilityRulesForOperation(
+                            backupDestinationFromTransport);
+            Message obtainMessage =
+                    serviceForUserIfCallerHasPermission.mBackupHandler.obtainMessage(15);
+            obtainMessage.obj =
+                    serviceForUserIfCallerHasPermission.getRequestBackupParams(
+                            strArr,
+                            iBackupObserver,
+                            iBackupManagerMonitor,
+                            i2,
+                            eligibilityRulesForOperation,
+                            currentTransportClientOrThrow,
+                            transportDirName,
+                            userBackupManagerService$$ExternalSyntheticLambda0);
             serviceForUserIfCallerHasPermission.mBackupHandler.sendMessage(obtainMessage);
             return 0;
-        } catch (RemoteException | TransportNotAvailableException | TransportNotRegisteredException unused) {
+        } catch (RemoteException
+                | TransportNotAvailableException
+                | TransportNotRegisteredException unused) {
             BackupObserverUtils.sendBackupFinished(iBackupObserver, -1000);
             bMMEventSender.monitorEvent(50, null, 1, null);
             return -1000;
         }
     }
 
-    public final int requestBackup(String[] strArr, IBackupObserver iBackupObserver, IBackupManagerMonitor iBackupManagerMonitor, int i) {
-        return requestBackup(binderGetCallingUserId(), strArr, iBackupObserver, iBackupManagerMonitor, i);
+    public final int requestBackup(
+            String[] strArr,
+            IBackupObserver iBackupObserver,
+            IBackupManagerMonitor iBackupManagerMonitor,
+            int i) {
+        return requestBackup(
+                binderGetCallingUserId(), strArr, iBackupObserver, iBackupManagerMonitor, i);
     }
 
-    public final int requestBackupForUser(int i, String[] strArr, IBackupObserver iBackupObserver, IBackupManagerMonitor iBackupManagerMonitor, int i2) {
+    public final int requestBackupForUser(
+            int i,
+            String[] strArr,
+            IBackupObserver iBackupObserver,
+            IBackupManagerMonitor iBackupManagerMonitor,
+            int i2) {
         if (isUserReadyForBackup(i)) {
             return requestBackup(i, strArr, iBackupObserver, iBackupManagerMonitor, i2);
         }
@@ -1074,14 +1496,20 @@ public final class BackupManagerService extends IBackupManager.Stub {
             Method dump skipped, instructions count: 442
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.backup.BackupManagerService.restoreAtInstallForUser(int, java.lang.String, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.backup.BackupManagerService.restoreAtInstallForUser(int,"
+                    + " java.lang.String, int):void");
     }
 
     public final String selectBackupTransport(String str) {
         return selectBackupTransportForUser(binderGetCallingUserId(), str);
     }
 
-    public final void selectBackupTransportAsyncForUser(int i, ComponentName componentName, ISelectBackupTransportCallback iSelectBackupTransportCallback) {
+    public final void selectBackupTransportAsyncForUser(
+            int i,
+            ComponentName componentName,
+            ISelectBackupTransportCallback iSelectBackupTransportCallback) {
         if (!isUserReadyForBackup(i)) {
             if (iSelectBackupTransportCallback != null) {
                 try {
@@ -1093,14 +1521,26 @@ public final class BackupManagerService extends IBackupManager.Stub {
             }
             return;
         }
-        UserBackupManagerService serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "selectBackupTransportAsync()");
+        UserBackupManagerService serviceForUserIfCallerHasPermission =
+                getServiceForUserIfCallerHasPermission(i, "selectBackupTransportAsync()");
         if (serviceForUserIfCallerHasPermission != null) {
-            serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "selectBackupTransportAsync");
+            serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.BACKUP", "selectBackupTransportAsync");
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 String flattenToShortString = componentName.flattenToShortString();
-                Slog.v("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(serviceForUserIfCallerHasPermission.mUserId, "selectBackupTransportAsync(transport = " + flattenToShortString + ")"));
-                serviceForUserIfCallerHasPermission.mBackupHandler.post(new UserBackupManagerService$$ExternalSyntheticLambda6(serviceForUserIfCallerHasPermission, componentName, iSelectBackupTransportCallback));
+                Slog.v(
+                        "BackupManagerService",
+                        UserBackupManagerService.addUserIdToLogMessage(
+                                serviceForUserIfCallerHasPermission.mUserId,
+                                "selectBackupTransportAsync(transport = "
+                                        + flattenToShortString
+                                        + ")"));
+                serviceForUserIfCallerHasPermission.mBackupHandler.post(
+                        new UserBackupManagerService$$ExternalSyntheticLambda6(
+                                serviceForUserIfCallerHasPermission,
+                                componentName,
+                                iSelectBackupTransportCallback));
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
@@ -1110,9 +1550,15 @@ public final class BackupManagerService extends IBackupManager.Stub {
     public final String selectBackupTransportForUser(int i, String str) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
         String str2 = null;
-        if (isUserReadyForBackup(i) && (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "selectBackupTransport()")) != null) {
-            TransportManager transportManager = serviceForUserIfCallerHasPermission.mTransportManager;
-            serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "selectBackupTransport");
+        if (isUserReadyForBackup(i)
+                && (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(
+                                        i, "selectBackupTransport()"))
+                        != null) {
+            TransportManager transportManager =
+                    serviceForUserIfCallerHasPermission.mTransportManager;
+            serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.BACKUP", "selectBackupTransport");
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 boolean isTransportRegistered = transportManager.isTransportRegistered(str);
@@ -1120,9 +1566,22 @@ public final class BackupManagerService extends IBackupManager.Stub {
                 if (isTransportRegistered) {
                     str2 = transportManager.selectTransport(str);
                     serviceForUserIfCallerHasPermission.updateStateForTransport(str);
-                    Slog.v("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(i2, "selectBackupTransport(transport = " + str + "): previous transport = " + str2));
+                    Slog.v(
+                            "BackupManagerService",
+                            UserBackupManagerService.addUserIdToLogMessage(
+                                    i2,
+                                    "selectBackupTransport(transport = "
+                                            + str
+                                            + "): previous transport = "
+                                            + str2));
                 } else {
-                    Slog.v("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(i2, "Could not select transport " + str + ", as the transport is not registered."));
+                    Slog.v(
+                            "BackupManagerService",
+                            UserBackupManagerService.addUserIdToLogMessage(
+                                    i2,
+                                    "Could not select transport "
+                                            + str
+                                            + ", as the transport is not registered."));
                 }
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -1131,8 +1590,11 @@ public final class BackupManagerService extends IBackupManager.Stub {
         return str2;
     }
 
-    public final Map semBackupPackage(ParcelFileDescriptor parcelFileDescriptor, String[] strArr, String str, int i) {
-        UserBackupManagerService serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(binderGetCallingUserId(), "semBackupPackage()");
+    public final Map semBackupPackage(
+            ParcelFileDescriptor parcelFileDescriptor, String[] strArr, String str, int i) {
+        UserBackupManagerService serviceForUserIfCallerHasPermission =
+                getServiceForUserIfCallerHasPermission(
+                        binderGetCallingUserId(), "semBackupPackage()");
         if (serviceForUserIfCallerHasPermission == null) {
             return null;
         }
@@ -1158,7 +1620,8 @@ public final class BackupManagerService extends IBackupManager.Stub {
                     if (z8) {
                         z2 = true;
                     }
-                    serviceForUserIfCallerHasPermission.adbBackup(parcelFileDescriptor, z, z2, z3, z4, z5, z6, z7, z10, strArr, false);
+                    serviceForUserIfCallerHasPermission.adbBackup(
+                            parcelFileDescriptor, z, z2, z3, z4, z5, z6, z7, z10, strArr, false);
                 }
             } finally {
             }
@@ -1166,8 +1629,15 @@ public final class BackupManagerService extends IBackupManager.Stub {
         return null;
     }
 
-    public final Map semBackupPackagePath(ParcelFileDescriptor parcelFileDescriptor, String[] strArr, String str, int i, String[] strArr2) {
-        UserBackupManagerService serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(binderGetCallingUserId(), "semBackupPackagePath()");
+    public final Map semBackupPackagePath(
+            ParcelFileDescriptor parcelFileDescriptor,
+            String[] strArr,
+            String str,
+            int i,
+            String[] strArr2) {
+        UserBackupManagerService serviceForUserIfCallerHasPermission =
+                getServiceForUserIfCallerHasPermission(
+                        binderGetCallingUserId(), "semBackupPackagePath()");
         if (serviceForUserIfCallerHasPermission == null) {
             return null;
         }
@@ -1175,7 +1645,10 @@ public final class BackupManagerService extends IBackupManager.Stub {
             throw new IllegalArgumentException("packageName is not available");
         }
         serviceForUserIfCallerHasPermission.mSepTimeOut = true;
-        boolean equalsIgnoreCase = "CHINA".equalsIgnoreCase(SystemProperties.get(ActivationMonitor.COUNTRY_CODE_PROPERTY));
+        boolean equalsIgnoreCase =
+                "CHINA"
+                        .equalsIgnoreCase(
+                                SystemProperties.get(ActivationMonitor.COUNTRY_CODE_PROPERTY));
         if (strArr2 != null && equalsIgnoreCase) {
             serviceForUserIfCallerHasPermission.mSmartSwitchBackupPath = strArr2;
             for (String str2 : strArr2) {
@@ -1197,7 +1670,18 @@ public final class BackupManagerService extends IBackupManager.Stub {
                 if (!z9) {
                     serviceForUserIfCallerHasPermission.mEncPassword = str;
                     serviceForUserIfCallerHasPermission.mExtraFlag = i;
-                    serviceForUserIfCallerHasPermission.adbBackup(parcelFileDescriptor, z, z8 ? true : z2, z3, z4, z5, z6, z7, z10, strArr, false);
+                    serviceForUserIfCallerHasPermission.adbBackup(
+                            parcelFileDescriptor,
+                            z,
+                            z8 ? true : z2,
+                            z3,
+                            z4,
+                            z5,
+                            z6,
+                            z7,
+                            z10,
+                            strArr,
+                            false);
                 }
             } finally {
             }
@@ -1207,13 +1691,16 @@ public final class BackupManagerService extends IBackupManager.Stub {
 
     public final boolean semCancelBackupAndRestore() {
         Slog.i("BackupManagerService", "semCancelBackupAndRestore Start");
-        UserBackupManagerService serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(binderGetCallingUserId(), "semCancelBackupAndRestore()");
+        UserBackupManagerService serviceForUserIfCallerHasPermission =
+                getServiceForUserIfCallerHasPermission(
+                        binderGetCallingUserId(), "semCancelBackupAndRestore()");
         if (serviceForUserIfCallerHasPermission == null) {
             Slog.e("BackupManagerService", "Fail - UserBackupManagerService null");
             return false;
         }
         AdbBackupParams adbBackupParams = serviceForUserIfCallerHasPermission.mAdbBackupParams;
-        if (adbBackupParams == null && serviceForUserIfCallerHasPermission.mAdbRestoreParams == null) {
+        if (adbBackupParams == null
+                && serviceForUserIfCallerHasPermission.mAdbRestoreParams == null) {
             Slog.w("BackupManagerService", "all of adbParams null");
         } else {
             if (adbBackupParams != null) {
@@ -1236,12 +1723,15 @@ public final class BackupManagerService extends IBackupManager.Stub {
 
     public final boolean semDisableDataExtractionRule(boolean z) {
         Slog.i("BackupManagerService", "semDisableDataExtractionRule Start, set  = " + z);
-        UserBackupManagerService serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(binderGetCallingUserId(), "semDisableDataExtractionRule()");
+        UserBackupManagerService serviceForUserIfCallerHasPermission =
+                getServiceForUserIfCallerHasPermission(
+                        binderGetCallingUserId(), "semDisableDataExtractionRule()");
         if (serviceForUserIfCallerHasPermission == null) {
             Slog.e("BackupManagerService", "Fail - UserBackupManagerService null");
             return false;
         }
-        if ("CHINA".equalsIgnoreCase(SystemProperties.get(ActivationMonitor.COUNTRY_CODE_PROPERTY))) {
+        if ("CHINA"
+                .equalsIgnoreCase(SystemProperties.get(ActivationMonitor.COUNTRY_CODE_PROPERTY))) {
             serviceForUserIfCallerHasPermission.mDisableDataExtractionRule = z;
             return true;
         }
@@ -1251,16 +1741,22 @@ public final class BackupManagerService extends IBackupManager.Stub {
 
     public final boolean semIsBackupEnabled() {
         int binderGetCallingUserId = binderGetCallingUserId();
-        UserBackupManagerService serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(binderGetCallingUserId, "semIsBackupEnabled()");
-        if (!isUserReadyForBackup(binderGetCallingUserId) || serviceForUserIfCallerHasPermission == null) {
+        UserBackupManagerService serviceForUserIfCallerHasPermission =
+                getServiceForUserIfCallerHasPermission(
+                        binderGetCallingUserId, "semIsBackupEnabled()");
+        if (!isUserReadyForBackup(binderGetCallingUserId)
+                || serviceForUserIfCallerHasPermission == null) {
             return false;
         }
-        serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "semIsBackupEnabled");
+        serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission(
+                "android.permission.BACKUP", "semIsBackupEnabled");
         return serviceForUserIfCallerHasPermission.mEnabled;
     }
 
     public final void semRestorePackage(ParcelFileDescriptor parcelFileDescriptor, String str) {
-        UserBackupManagerService serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(binderGetCallingUserId(), "semRestorePackage()");
+        UserBackupManagerService serviceForUserIfCallerHasPermission =
+                getServiceForUserIfCallerHasPermission(
+                        binderGetCallingUserId(), "semRestorePackage()");
         if (serviceForUserIfCallerHasPermission != null) {
             if (parcelFileDescriptor == null) {
                 throw new IllegalArgumentException("fd is null");
@@ -1275,14 +1771,25 @@ public final class BackupManagerService extends IBackupManager.Stub {
 
     public final void semSetAutoRestoreEnabled(boolean z) {
         int binderGetCallingUserId = binderGetCallingUserId();
-        UserBackupManagerService serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(binderGetCallingUserId, "semSetAutoRestoreEnabled()");
-        if (isUserReadyForBackup(binderGetCallingUserId) && serviceForUserIfCallerHasPermission != null) {
-            serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "setAutoRestoreEnabled");
-            Slog.i("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(serviceForUserIfCallerHasPermission.mUserId, "Auto restore => " + z));
+        UserBackupManagerService serviceForUserIfCallerHasPermission =
+                getServiceForUserIfCallerHasPermission(
+                        binderGetCallingUserId, "semSetAutoRestoreEnabled()");
+        if (isUserReadyForBackup(binderGetCallingUserId)
+                && serviceForUserIfCallerHasPermission != null) {
+            serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.BACKUP", "setAutoRestoreEnabled");
+            Slog.i(
+                    "BackupManagerService",
+                    UserBackupManagerService.addUserIdToLogMessage(
+                            serviceForUserIfCallerHasPermission.mUserId, "Auto restore => " + z));
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 synchronized (serviceForUserIfCallerHasPermission) {
-                    Settings.Secure.putIntForUser(serviceForUserIfCallerHasPermission.mContext.getContentResolver(), "backup_auto_restore", z ? 1 : 0, serviceForUserIfCallerHasPermission.mUserId);
+                    Settings.Secure.putIntForUser(
+                            serviceForUserIfCallerHasPermission.mContext.getContentResolver(),
+                            "backup_auto_restore",
+                            z ? 1 : 0,
+                            serviceForUserIfCallerHasPermission.mUserId);
                     serviceForUserIfCallerHasPermission.mAutoRestore = z;
                 }
             } finally {
@@ -1293,27 +1800,38 @@ public final class BackupManagerService extends IBackupManager.Stub {
 
     public final void semSetBackupEnabled(boolean z) {
         int binderGetCallingUserId = binderGetCallingUserId();
-        UserBackupManagerService serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(binderGetCallingUserId, "semSetBackupEnabled()");
-        if (isUserReadyForBackup(binderGetCallingUserId) && serviceForUserIfCallerHasPermission != null) {
+        UserBackupManagerService serviceForUserIfCallerHasPermission =
+                getServiceForUserIfCallerHasPermission(
+                        binderGetCallingUserId, "semSetBackupEnabled()");
+        if (isUserReadyForBackup(binderGetCallingUserId)
+                && serviceForUserIfCallerHasPermission != null) {
             EnterpriseDeviceManager enterpriseDeviceManager = EnterpriseDeviceManager.getInstance();
             if (z && !enterpriseDeviceManager.getRestrictionPolicy().isBackupAllowed(true)) {
                 Slog.w("BackupManagerService", "Backup is not allowed by MDM");
                 return;
             }
-            serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "setBackupEnabled");
-            Slog.i("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(serviceForUserIfCallerHasPermission.mUserId, "Backup enabled => " + z));
+            serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.BACKUP", "setBackupEnabled");
+            Slog.i(
+                    "BackupManagerService",
+                    UserBackupManagerService.addUserIdToLogMessage(
+                            serviceForUserIfCallerHasPermission.mUserId, "Backup enabled => " + z));
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 boolean z2 = serviceForUserIfCallerHasPermission.mEnabled;
                 synchronized (serviceForUserIfCallerHasPermission) {
-                    UserBackupManagerFilePersistedSettings.writeBackupEnableState(serviceForUserIfCallerHasPermission.mUserId, z);
+                    UserBackupManagerFilePersistedSettings.writeBackupEnableState(
+                            serviceForUserIfCallerHasPermission.mUserId, z);
                     serviceForUserIfCallerHasPermission.mEnabled = z;
                 }
                 synchronized (serviceForUserIfCallerHasPermission.mQueueLock) {
                     if (z && !z2) {
                         try {
                             if (serviceForUserIfCallerHasPermission.mSetupComplete) {
-                                KeyValueBackupJob.schedule(serviceForUserIfCallerHasPermission.mUserId, serviceForUserIfCallerHasPermission.mContext, serviceForUserIfCallerHasPermission);
+                                KeyValueBackupJob.schedule(
+                                        serviceForUserIfCallerHasPermission.mUserId,
+                                        serviceForUserIfCallerHasPermission.mContext,
+                                        serviceForUserIfCallerHasPermission);
                                 serviceForUserIfCallerHasPermission.scheduleNextFullBackupJob(0L);
                             }
                         } catch (Throwable th) {
@@ -1321,15 +1839,29 @@ public final class BackupManagerService extends IBackupManager.Stub {
                         }
                     }
                     if (!z) {
-                        KeyValueBackupJob.cancel(serviceForUserIfCallerHasPermission.mContext, serviceForUserIfCallerHasPermission.mUserId);
+                        KeyValueBackupJob.cancel(
+                                serviceForUserIfCallerHasPermission.mContext,
+                                serviceForUserIfCallerHasPermission.mUserId);
                         if (z2 && serviceForUserIfCallerHasPermission.mSetupComplete) {
                             ArrayList arrayList = new ArrayList();
                             ArrayList arrayList2 = new ArrayList();
-                            serviceForUserIfCallerHasPermission.mTransportManager.forEachRegisteredTransport(new UserBackupManagerService$$ExternalSyntheticLambda7(serviceForUserIfCallerHasPermission, arrayList, arrayList2, 0));
+                            serviceForUserIfCallerHasPermission.mTransportManager
+                                    .forEachRegisteredTransport(
+                                            new UserBackupManagerService$$ExternalSyntheticLambda7(
+                                                    serviceForUserIfCallerHasPermission,
+                                                    arrayList,
+                                                    arrayList2,
+                                                    0));
                             for (int i = 0; i < arrayList.size(); i++) {
-                                serviceForUserIfCallerHasPermission.recordInitPending((String) arrayList.get(i), (String) arrayList2.get(i), true);
+                                serviceForUserIfCallerHasPermission.recordInitPending(
+                                        (String) arrayList.get(i),
+                                        (String) arrayList2.get(i),
+                                        true);
                             }
-                            serviceForUserIfCallerHasPermission.mAlarmManager.set(0, System.currentTimeMillis(), serviceForUserIfCallerHasPermission.mRunInitIntent);
+                            serviceForUserIfCallerHasPermission.mAlarmManager.set(
+                                    0,
+                                    System.currentTimeMillis(),
+                                    serviceForUserIfCallerHasPermission.mRunInitIntent);
                         }
                     }
                 }
@@ -1341,7 +1873,9 @@ public final class BackupManagerService extends IBackupManager.Stub {
 
     public final boolean semSetTimeoutBackupAndRestore(int i) {
         Slog.i("BackupManagerService", "semSetTimeoutBackupAndRestore Start");
-        UserBackupManagerService serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(binderGetCallingUserId(), "semSetTimeoutBackupAndRestore()");
+        UserBackupManagerService serviceForUserIfCallerHasPermission =
+                getServiceForUserIfCallerHasPermission(
+                        binderGetCallingUserId(), "semSetTimeoutBackupAndRestore()");
         boolean z = false;
         if (serviceForUserIfCallerHasPermission == null) {
             Slog.e("BackupManagerService", "Fail - UserBackupManagerService null");
@@ -1351,42 +1885,68 @@ public final class BackupManagerService extends IBackupManager.Stub {
             serviceForUserIfCallerHasPermission.mSepTimeoutMin = i;
             z = true;
         }
-        Slog.i("BackupManagerService", "semSetTimeoutBackupAndRestore, timeout(min) : " + serviceForUserIfCallerHasPermission.mSepTimeoutMin + ", " + z);
+        Slog.i(
+                "BackupManagerService",
+                "semSetTimeoutBackupAndRestore, timeout(min) : "
+                        + serviceForUserIfCallerHasPermission.mSepTimeoutMin
+                        + ", "
+                        + z);
         return z;
     }
 
     public final boolean semSetTransportFlagsForAdbBackup(int i) {
         Slog.i("BackupManagerService", "semSetTransportFlagsForAdbBackup Start");
-        UserBackupManagerService serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(binderGetCallingUserId(), "semSetTransportFlagsForAdbBackup()");
+        UserBackupManagerService serviceForUserIfCallerHasPermission =
+                getServiceForUserIfCallerHasPermission(
+                        binderGetCallingUserId(), "semSetTransportFlagsForAdbBackup()");
         if (serviceForUserIfCallerHasPermission == null) {
             Slog.e("BackupManagerService", "Fail - UserBackupManagerService null");
             return false;
         }
         serviceForUserIfCallerHasPermission.mTransportFlagsForAdbBackup = i;
-        SystemServiceManager$$ExternalSyntheticOutline0.m(new StringBuilder("semSetTransportFlagsForAdbBackup, set flags : "), serviceForUserIfCallerHasPermission.mTransportFlagsForAdbBackup, "BackupManagerService");
+        SystemServiceManager$$ExternalSyntheticOutline0.m(
+                new StringBuilder("semSetTransportFlagsForAdbBackup, set flags : "),
+                serviceForUserIfCallerHasPermission.mTransportFlagsForAdbBackup,
+                "BackupManagerService");
         return true;
     }
 
     public final void setAncestralSerialNumber(long j) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
-        if (this.mGlobalDisable || (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(Binder.getCallingUserHandle().getIdentifier(), "setAncestralSerialNumber()")) == null) {
+        if (this.mGlobalDisable
+                || (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(
+                                        Binder.getCallingUserHandle().getIdentifier(),
+                                        "setAncestralSerialNumber()"))
+                        == null) {
             return;
         }
-        serviceForUserIfCallerHasPermission.mContext.enforceCallingPermission("android.permission.BACKUP", "setAncestralSerialNumber");
+        serviceForUserIfCallerHasPermission.mContext.enforceCallingPermission(
+                "android.permission.BACKUP", "setAncestralSerialNumber");
         int i = serviceForUserIfCallerHasPermission.mUserId;
-        Slog.v("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(i, "Setting ancestral work profile id to " + j));
+        Slog.v(
+                "BackupManagerService",
+                UserBackupManagerService.addUserIdToLogMessage(
+                        i, "Setting ancestral work profile id to " + j));
         try {
             if (serviceForUserIfCallerHasPermission.mAncestralSerialNumberFile == null) {
-                serviceForUserIfCallerHasPermission.mAncestralSerialNumberFile = new File(UserBackupManagerFiles.getBaseStateDir(i), "serial_id");
+                serviceForUserIfCallerHasPermission.mAncestralSerialNumberFile =
+                        new File(UserBackupManagerFiles.getBaseStateDir(i), "serial_id");
             }
-            RandomAccessFile randomAccessFile = new RandomAccessFile(serviceForUserIfCallerHasPermission.mAncestralSerialNumberFile, "rwd");
+            RandomAccessFile randomAccessFile =
+                    new RandomAccessFile(
+                            serviceForUserIfCallerHasPermission.mAncestralSerialNumberFile, "rwd");
             try {
                 randomAccessFile.writeLong(j);
                 randomAccessFile.close();
             } finally {
             }
         } catch (IOException e) {
-            Slog.w("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(i, "Unable to write to work profile serial mapping file:"), e);
+            Slog.w(
+                    "BackupManagerService",
+                    UserBackupManagerService.addUserIdToLogMessage(
+                            i, "Unable to write to work profile serial mapping file:"),
+                    e);
         }
     }
 
@@ -1396,15 +1956,26 @@ public final class BackupManagerService extends IBackupManager.Stub {
 
     public final void setAutoRestoreForUser(int i, boolean z) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
-        if (!isUserReadyForBackup(i) || (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "setAutoRestore()")) == null) {
+        if (!isUserReadyForBackup(i)
+                || (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(i, "setAutoRestore()"))
+                        == null) {
             return;
         }
-        serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "setAutoRestore");
-        Slog.i("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(serviceForUserIfCallerHasPermission.mUserId, "Auto restore => " + z));
+        serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission(
+                "android.permission.BACKUP", "setAutoRestore");
+        Slog.i(
+                "BackupManagerService",
+                UserBackupManagerService.addUserIdToLogMessage(
+                        serviceForUserIfCallerHasPermission.mUserId, "Auto restore => " + z));
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             synchronized (serviceForUserIfCallerHasPermission) {
-                Settings.Secure.putIntForUser(serviceForUserIfCallerHasPermission.mContext.getContentResolver(), "backup_auto_restore", z ? 1 : 0, serviceForUserIfCallerHasPermission.mUserId);
+                Settings.Secure.putIntForUser(
+                        serviceForUserIfCallerHasPermission.mContext.getContentResolver(),
+                        "backup_auto_restore",
+                        z ? 1 : 0,
+                        serviceForUserIfCallerHasPermission.mUserId);
                 serviceForUserIfCallerHasPermission.mAutoRestore = z;
             }
         } finally {
@@ -1418,7 +1989,10 @@ public final class BackupManagerService extends IBackupManager.Stub {
 
     public final void setBackupEnabledForUser(int i, boolean z) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
-        if (!isUserReadyForBackup(i) || (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "setBackupEnabled()")) == null) {
+        if (!isUserReadyForBackup(i)
+                || (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(i, "setBackupEnabled()"))
+                        == null) {
             return;
         }
         serviceForUserIfCallerHasPermission.setBackupEnabled(z, true);
@@ -1426,16 +2000,27 @@ public final class BackupManagerService extends IBackupManager.Stub {
 
     public final boolean setBackupPassword(String str, String str2) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
-        if (!isUserReadyForBackup(binderGetCallingUserId()) || (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(0, "setBackupPassword()")) == null) {
+        if (!isUserReadyForBackup(binderGetCallingUserId())
+                || (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(0, "setBackupPassword()"))
+                        == null) {
             return false;
         }
-        BackupPasswordManager backupPasswordManager = serviceForUserIfCallerHasPermission.mBackupPasswordManager;
-        backupPasswordManager.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "setBackupPassword");
-        if (!backupPasswordManager.passwordMatchesSaved("PBKDF2WithHmacSHA1", str) && (backupPasswordManager.mPasswordVersion >= 2 || !backupPasswordManager.passwordMatchesSaved("PBKDF2WithHmacSHA1And8bit", str))) {
+        BackupPasswordManager backupPasswordManager =
+                serviceForUserIfCallerHasPermission.mBackupPasswordManager;
+        backupPasswordManager.mContext.enforceCallingOrSelfPermission(
+                "android.permission.BACKUP", "setBackupPassword");
+        if (!backupPasswordManager.passwordMatchesSaved("PBKDF2WithHmacSHA1", str)
+                && (backupPasswordManager.mPasswordVersion >= 2
+                        || !backupPasswordManager.passwordMatchesSaved(
+                                "PBKDF2WithHmacSHA1And8bit", str))) {
             return false;
         }
         try {
-            new DataStreamFileCodec(new File(backupPasswordManager.mBaseStateDir, "pwversion"), new BackupPasswordManager.PasswordHashFileCodec(1)).serialize(2);
+            new DataStreamFileCodec(
+                            new File(backupPasswordManager.mBaseStateDir, "pwversion"),
+                            new BackupPasswordManager.PasswordHashFileCodec(1))
+                    .serialize(2);
             backupPasswordManager.mPasswordVersion = 2;
             if (str2 == null || str2.isEmpty()) {
                 File file = new File(backupPasswordManager.mBaseStateDir, "pwhash");
@@ -1449,9 +2034,20 @@ public final class BackupManagerService extends IBackupManager.Stub {
                 try {
                     byte[] bArr = new byte[64];
                     backupPasswordManager.mRng.nextBytes(bArr);
-                    SecretKey buildCharArrayKey = PasswordUtils.buildCharArrayKey("PBKDF2WithHmacSHA1", str2.toCharArray(), bArr, 10000);
-                    String encodeToString = buildCharArrayKey != null ? HexEncoding.encodeToString(buildCharArrayKey.getEncoded(), true) : null;
-                    new DataStreamFileCodec(new File(backupPasswordManager.mBaseStateDir, "pwhash"), new BackupPasswordManager.PasswordHashFileCodec(0)).serialize(new BackupPasswordManager.BackupPasswordHash(encodeToString, bArr));
+                    SecretKey buildCharArrayKey =
+                            PasswordUtils.buildCharArrayKey(
+                                    "PBKDF2WithHmacSHA1", str2.toCharArray(), bArr, 10000);
+                    String encodeToString =
+                            buildCharArrayKey != null
+                                    ? HexEncoding.encodeToString(
+                                            buildCharArrayKey.getEncoded(), true)
+                                    : null;
+                    new DataStreamFileCodec(
+                                    new File(backupPasswordManager.mBaseStateDir, "pwhash"),
+                                    new BackupPasswordManager.PasswordHashFileCodec(0))
+                            .serialize(
+                                    new BackupPasswordManager.BackupPasswordHash(
+                                            encodeToString, bArr));
                     backupPasswordManager.mPasswordHash = encodeToString;
                     backupPasswordManager.mPasswordSalt = bArr;
                 } catch (IOException unused) {
@@ -1461,7 +2057,9 @@ public final class BackupManagerService extends IBackupManager.Stub {
             }
             return true;
         } catch (IOException unused2) {
-            Slog.e("BackupPasswordManager", "Unable to write backup pw version; password not changed");
+            Slog.e(
+                    "BackupPasswordManager",
+                    "Unable to write backup pw version; password not changed");
             return false;
         }
     }
@@ -1596,15 +2194,20 @@ public final class BackupManagerService extends IBackupManager.Stub {
             monitor-exit(r1)     // Catch: java.lang.Throwable -> L65
             throw r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.backup.BackupManagerService.setBackupServiceActive(int, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.backup.BackupManagerService.setBackupServiceActive(int,"
+                    + " boolean):void");
     }
 
     public final void setFrameworkSchedulingEnabledForUser(int i, boolean z) {
-        UserBackupManagerService serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "setFrameworkSchedulingEnabledForUser()");
+        UserBackupManagerService serviceForUserIfCallerHasPermission =
+                getServiceForUserIfCallerHasPermission(i, "setFrameworkSchedulingEnabledForUser()");
         if (serviceForUserIfCallerHasPermission != null) {
             synchronized (serviceForUserIfCallerHasPermission) {
                 try {
-                    serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "setFrameworkSchedulingEnabled");
+                    serviceForUserIfCallerHasPermission.mContext.enforceCallingOrSelfPermission(
+                            "android.permission.BACKUP", "setFrameworkSchedulingEnabled");
                     if (serviceForUserIfCallerHasPermission.isFrameworkSchedulingEnabled() == z) {
                         return;
                     }
@@ -1612,19 +2215,31 @@ public final class BackupManagerService extends IBackupManager.Stub {
                     StringBuilder sb = new StringBuilder();
                     sb.append(z ? "Enabling" : "Disabling");
                     sb.append(" backup scheduling");
-                    Slog.i("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(i2, sb.toString()));
+                    Slog.i(
+                            "BackupManagerService",
+                            UserBackupManagerService.addUserIdToLogMessage(i2, sb.toString()));
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
-                        Settings.Secure.putIntForUser(serviceForUserIfCallerHasPermission.mContext.getContentResolver(), "backup_scheduling_enabled", z ? 1 : 0, serviceForUserIfCallerHasPermission.mUserId);
+                        Settings.Secure.putIntForUser(
+                                serviceForUserIfCallerHasPermission.mContext.getContentResolver(),
+                                "backup_scheduling_enabled",
+                                z ? 1 : 0,
+                                serviceForUserIfCallerHasPermission.mUserId);
                         if (z) {
-                            KeyValueBackupJob.schedule(serviceForUserIfCallerHasPermission.mUserId, serviceForUserIfCallerHasPermission.mContext, serviceForUserIfCallerHasPermission);
+                            KeyValueBackupJob.schedule(
+                                    serviceForUserIfCallerHasPermission.mUserId,
+                                    serviceForUserIfCallerHasPermission.mContext,
+                                    serviceForUserIfCallerHasPermission);
                             serviceForUserIfCallerHasPermission.scheduleNextFullBackupJob(0L);
                         } else {
-                            KeyValueBackupJob.cancel(serviceForUserIfCallerHasPermission.mContext, serviceForUserIfCallerHasPermission.mUserId);
+                            KeyValueBackupJob.cancel(
+                                    serviceForUserIfCallerHasPermission.mContext,
+                                    serviceForUserIfCallerHasPermission.mUserId);
                             int i3 = serviceForUserIfCallerHasPermission.mUserId;
                             Context context = serviceForUserIfCallerHasPermission.mContext;
                             int i4 = FullBackupJob.MIN_JOB_ID;
-                            ((JobScheduler) context.getSystemService("jobscheduler")).cancel(FullBackupJob.getJobIdForUserId(i3));
+                            ((JobScheduler) context.getSystemService("jobscheduler"))
+                                    .cancel(FullBackupJob.getJobIdForUserId(i3));
                         }
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                     } catch (Throwable th) {
@@ -1644,28 +2259,49 @@ public final class BackupManagerService extends IBackupManager.Stub {
             return;
         }
         if (!isBackupActivatedForUser(i)) {
-            HermesService$3$$ExternalSyntheticOutline0.m(i, "Backup not activated for user ", "BackupManagerService");
+            HermesService$3$$ExternalSyntheticOutline0.m(
+                    i, "Backup not activated for user ", "BackupManagerService");
             return;
         }
         if (this.mUserServices.get(i) != null) {
-            BootReceiver$$ExternalSyntheticOutline0.m(i, "userId ", " already started, so not starting again", "BackupManagerService");
+            BootReceiver$$ExternalSyntheticOutline0.m(
+                    i,
+                    "userId ",
+                    " already started, so not starting again",
+                    "BackupManagerService");
             return;
         }
-        HermesService$3$$ExternalSyntheticOutline0.m(i, "Starting service for user: ", "BackupManagerService");
+        HermesService$3$$ExternalSyntheticOutline0.m(
+                i, "Starting service for user: ", "BackupManagerService");
         Context context = this.mContext;
         Set set = this.mTransportWhitelist;
-        String stringForUser = Settings.Secure.getStringForUser(context.getContentResolver(), "backup_transport", i);
+        String stringForUser =
+                Settings.Secure.getStringForUser(
+                        context.getContentResolver(), "backup_transport", i);
         if (TextUtils.isEmpty(stringForUser)) {
             stringForUser = null;
         }
-        Slog.v("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(i, "Starting with transport " + stringForUser));
+        Slog.v(
+                "BackupManagerService",
+                UserBackupManagerService.addUserIdToLogMessage(
+                        i, "Starting with transport " + stringForUser));
         TransportManager transportManager = new TransportManager(i, context, set, stringForUser);
         File baseStateDir = UserBackupManagerFiles.getBaseStateDir(i);
-        File file = i != 0 ? new File(Environment.getDataSystemCeDirectory(i), "backup_stage") : new File(Environment.getDownloadCacheDirectory(), "backup_stage");
-        HandlerThread handlerThread = new HandlerThread(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "backup-"), 10);
+        File file =
+                i != 0
+                        ? new File(Environment.getDataSystemCeDirectory(i), "backup_stage")
+                        : new File(Environment.getDownloadCacheDirectory(), "backup_stage");
+        HandlerThread handlerThread =
+                new HandlerThread(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "backup-"), 10);
         handlerThread.start();
-        Slog.d("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(i, "Started thread " + handlerThread.getName()));
-        startServiceForUser(i, UserBackupManagerService.createAndInitializeService(i, context, this, handlerThread, baseStateDir, file, transportManager));
+        Slog.d(
+                "BackupManagerService",
+                UserBackupManagerService.addUserIdToLogMessage(
+                        i, "Started thread " + handlerThread.getName()));
+        startServiceForUser(
+                i,
+                UserBackupManagerService.createAndInitializeService(
+                        i, context, this, handlerThread, baseStateDir, file, transportManager));
     }
 
     public void startServiceForUser(int i, UserBackupManagerService userBackupManagerService) {
@@ -1676,21 +2312,35 @@ public final class BackupManagerService extends IBackupManager.Stub {
     }
 
     public void stopServiceForUser(int i) {
-        UserBackupManagerService userBackupManagerService = (UserBackupManagerService) this.mUserServices.removeReturnOld(i);
+        UserBackupManagerService userBackupManagerService =
+                (UserBackupManagerService) this.mUserServices.removeReturnOld(i);
         if (userBackupManagerService != null) {
             userBackupManagerService.tearDownService();
             KeyValueBackupJob.cancel(this.mContext, i);
             Context context = this.mContext;
             int i2 = FullBackupJob.MIN_JOB_ID;
-            ((JobScheduler) context.getSystemService("jobscheduler")).cancel(FullBackupJob.getJobIdForUserId(i));
+            ((JobScheduler) context.getSystemService("jobscheduler"))
+                    .cancel(FullBackupJob.getJobIdForUserId(i));
         }
     }
 
-    public final void updateTransportAttributesForUser(int i, ComponentName componentName, String str, Intent intent, String str2, Intent intent2, CharSequence charSequence) {
+    public final void updateTransportAttributesForUser(
+            int i,
+            ComponentName componentName,
+            String str,
+            Intent intent,
+            String str2,
+            Intent intent2,
+            CharSequence charSequence) {
         UserBackupManagerService serviceForUserIfCallerHasPermission;
-        if (!isUserReadyForBackup(i) || (serviceForUserIfCallerHasPermission = getServiceForUserIfCallerHasPermission(i, "updateTransportAttributes()")) == null) {
+        if (!isUserReadyForBackup(i)
+                || (serviceForUserIfCallerHasPermission =
+                                getServiceForUserIfCallerHasPermission(
+                                        i, "updateTransportAttributes()"))
+                        == null) {
             return;
         }
-        serviceForUserIfCallerHasPermission.updateTransportAttributes(Binder.getCallingUid(), componentName, str, intent, str2, intent2, charSequence);
+        serviceForUserIfCallerHasPermission.updateTransportAttributes(
+                Binder.getCallingUid(), componentName, str, intent, str2, intent2, charSequence);
     }
 }

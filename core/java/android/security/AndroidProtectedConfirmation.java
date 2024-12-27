@@ -23,12 +23,19 @@ public class AndroidProtectedConfirmation {
 
     private synchronized IProtectedConfirmation getService() {
         if (this.mProtectedConfirmation == null) {
-            this.mProtectedConfirmation = IProtectedConfirmation.Stub.asInterface(ServiceManager.getService("android.security.apc"));
+            this.mProtectedConfirmation =
+                    IProtectedConfirmation.Stub.asInterface(
+                            ServiceManager.getService("android.security.apc"));
         }
         return this.mProtectedConfirmation;
     }
 
-    public int presentConfirmationPrompt(IConfirmationCallback listener, String promptText, byte[] extraData, String locale, int uiOptionsAsFlags) {
+    public int presentConfirmationPrompt(
+            IConfirmationCallback listener,
+            String promptText,
+            byte[] extraData,
+            String locale,
+            int uiOptionsAsFlags) {
         try {
             getService().presentPrompt(listener, promptText, extraData, locale, uiOptionsAsFlags);
             return 0;

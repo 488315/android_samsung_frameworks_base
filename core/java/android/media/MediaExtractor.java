@@ -1,14 +1,13 @@
 package android.media;
 
 import android.content.res.AssetFileDescriptor;
-import android.media.DrmInitData;
-import android.media.MediaCas;
-import android.media.MediaCodec;
 import android.media.metrics.LogSessionId;
 import android.os.IBinder;
 import android.os.IHwBinder;
 import android.os.PersistableBundle;
+
 import com.android.internal.util.Preconditions;
+
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.lang.annotation.Retention;
@@ -40,18 +39,17 @@ public final class MediaExtractor {
     private long mNativeContext;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SampleFlag {
-    }
+    public @interface SampleFlag {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SeekMode {
-    }
+    public @interface SeekMode {}
 
     private native Map<String, Object> getFileFormatNative();
 
     private native Map<String, Object> getTrackFormatNative(int i);
 
-    private final native void nativeSetDataSource(IBinder iBinder, String str, String[] strArr, String[] strArr2) throws IOException;
+    private final native void nativeSetDataSource(
+            IBinder iBinder, String str, String[] strArr, String[] strArr2) throws IOException;
 
     private final native void nativeSetMediaCas(IHwBinder iHwBinder);
 
@@ -97,7 +95,8 @@ public final class MediaExtractor {
 
     public final native void setDataSource(MediaDataSource mediaDataSource) throws IOException;
 
-    public final native void setDataSource(FileDescriptor fileDescriptor, long j, long j2) throws IOException;
+    public final native void setDataSource(FileDescriptor fileDescriptor, long j, long j2)
+            throws IOException;
 
     public native void unselectTrack(int i);
 
@@ -106,30 +105,34 @@ public final class MediaExtractor {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:24:0x0054, code lost:
-    
-        if (0 == 0) goto L31;
-     */
+
+       if (0 == 0) goto L31;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:25:0x0056, code lost:
-    
-        r1.close();
-     */
+
+       r1.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:26:0x005e, code lost:
-    
-        setDataSource(r11.toString(), r12);
-     */
+
+       setDataSource(r11.toString(), r12);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:27:0x0065, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:29:0x005b, code lost:
-    
-        if (0 == 0) goto L31;
-     */
+
+       if (0 == 0) goto L31;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void setDataSource(android.content.Context r10, android.net.Uri r11, java.util.Map<java.lang.String, java.lang.String> r12) throws java.io.IOException {
+    public final void setDataSource(
+            android.content.Context r10,
+            android.net.Uri r11,
+            java.util.Map<java.lang.String, java.lang.String> r12)
+            throws java.io.IOException {
         /*
             r9 = this;
             java.lang.String r0 = r11.getScheme()
@@ -193,7 +196,10 @@ public final class MediaExtractor {
             r9.setDataSource(r1)
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.media.MediaExtractor.setDataSource(android.content.Context, android.net.Uri, java.util.Map):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                        + " android.media.MediaExtractor.setDataSource(android.content.Context,"
+                        + " android.net.Uri, java.util.Map):void");
     }
 
     public final void setDataSource(String path, Map<String, String> headers) throws IOException {
@@ -209,14 +215,17 @@ public final class MediaExtractor {
                 i++;
             }
         }
-        nativeSetDataSource(MediaHTTPService.createHttpServiceBinderIfNecessary(path), path, keys, values);
+        nativeSetDataSource(
+                MediaHTTPService.createHttpServiceBinderIfNecessary(path), path, keys, values);
     }
 
     public final void setDataSource(String path) throws IOException {
-        nativeSetDataSource(MediaHTTPService.createHttpServiceBinderIfNecessary(path), path, null, null);
+        nativeSetDataSource(
+                MediaHTTPService.createHttpServiceBinderIfNecessary(path), path, null, null);
     }
 
-    public final void setDataSource(AssetFileDescriptor afd) throws IOException, IllegalArgumentException, IllegalStateException {
+    public final void setDataSource(AssetFileDescriptor afd)
+            throws IOException, IllegalArgumentException, IllegalStateException {
         Preconditions.checkNotNull(afd);
         if (afd.getDeclaredLength() < 0) {
             setDataSource(afd.getFileDescriptor());
@@ -294,30 +303,55 @@ public final class MediaExtractor {
         }
         if (formatMap.containsKey("pssh")) {
             Map<UUID, byte[]> psshMap = getPsshInfo();
-            final DrmInitData.SchemeInitData[] schemeInitDatas = (DrmInitData.SchemeInitData[]) psshMap.entrySet().stream().map(new Function() { // from class: android.media.MediaExtractor$$ExternalSyntheticLambda0
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    return MediaExtractor.lambda$getDrmInitData$0((Map.Entry) obj);
-                }
-            }).toArray(new IntFunction() { // from class: android.media.MediaExtractor$$ExternalSyntheticLambda1
-                @Override // java.util.function.IntFunction
-                public final Object apply(int i) {
-                    return MediaExtractor.lambda$getDrmInitData$1(i);
-                }
-            });
-            final Map<UUID, DrmInitData.SchemeInitData> initDataMap = (Map) Arrays.stream(schemeInitDatas).collect(Collectors.toMap(new Function() { // from class: android.media.MediaExtractor$$ExternalSyntheticLambda2
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    UUID uuid;
-                    uuid = ((DrmInitData.SchemeInitData) obj).uuid;
-                    return uuid;
-                }
-            }, new Function() { // from class: android.media.MediaExtractor$$ExternalSyntheticLambda3
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    return MediaExtractor.lambda$getDrmInitData$3((DrmInitData.SchemeInitData) obj);
-                }
-            }));
+            final DrmInitData.SchemeInitData[] schemeInitDatas =
+                    (DrmInitData.SchemeInitData[])
+                            psshMap.entrySet().stream()
+                                    .map(
+                                            new Function() { // from class:
+                                                // android.media.MediaExtractor$$ExternalSyntheticLambda0
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    return MediaExtractor.lambda$getDrmInitData$0(
+                                                            (Map.Entry) obj);
+                                                }
+                                            })
+                                    .toArray(
+                                            new IntFunction() { // from class:
+                                                // android.media.MediaExtractor$$ExternalSyntheticLambda1
+                                                @Override // java.util.function.IntFunction
+                                                public final Object apply(int i) {
+                                                    return MediaExtractor.lambda$getDrmInitData$1(
+                                                            i);
+                                                }
+                                            });
+            final Map<UUID, DrmInitData.SchemeInitData> initDataMap =
+                    (Map)
+                            Arrays.stream(schemeInitDatas)
+                                    .collect(
+                                            Collectors.toMap(
+                                                    new Function() { // from class:
+                                                        // android.media.MediaExtractor$$ExternalSyntheticLambda2
+                                                        @Override // java.util.function.Function
+                                                        public final Object apply(Object obj) {
+                                                            UUID uuid;
+                                                            uuid =
+                                                                    ((DrmInitData.SchemeInitData)
+                                                                                    obj)
+                                                                            .uuid;
+                                                            return uuid;
+                                                        }
+                                                    },
+                                                    new Function() { // from class:
+                                                        // android.media.MediaExtractor$$ExternalSyntheticLambda3
+                                                        @Override // java.util.function.Function
+                                                        public final Object apply(Object obj) {
+                                                            return MediaExtractor
+                                                                    .lambda$getDrmInitData$3(
+                                                                            (DrmInitData
+                                                                                            .SchemeInitData)
+                                                                                    obj);
+                                                        }
+                                                    }));
             return new DrmInitData() { // from class: android.media.MediaExtractor.1
                 @Override // android.media.DrmInitData
                 public DrmInitData.SchemeInitData get(UUID schemeUuid) {
@@ -343,7 +377,9 @@ public final class MediaExtractor {
                 buf.rewind();
                 byte[] data = new byte[buf.remaining()];
                 buf.get(data);
-                final DrmInitData.SchemeInitData webmSchemeInitData = new DrmInitData.SchemeInitData(DrmInitData.SchemeInitData.UUID_NIL, "webm", data);
+                final DrmInitData.SchemeInitData webmSchemeInitData =
+                        new DrmInitData.SchemeInitData(
+                                DrmInitData.SchemeInitData.UUID_NIL, "webm", data);
                 return new DrmInitData() { // from class: android.media.MediaExtractor.2
                     @Override // android.media.DrmInitData
                     public DrmInitData.SchemeInitData get(UUID schemeUuid) {
@@ -366,14 +402,16 @@ public final class MediaExtractor {
     }
 
     static /* synthetic */ DrmInitData.SchemeInitData lambda$getDrmInitData$0(Map.Entry entry) {
-        return new DrmInitData.SchemeInitData((UUID) entry.getKey(), "cenc", (byte[]) entry.getValue());
+        return new DrmInitData.SchemeInitData(
+                (UUID) entry.getKey(), "cenc", (byte[]) entry.getValue());
     }
 
     static /* synthetic */ DrmInitData.SchemeInitData[] lambda$getDrmInitData$1(int x$0) {
         return new DrmInitData.SchemeInitData[x$0];
     }
 
-    static /* synthetic */ DrmInitData.SchemeInitData lambda$getDrmInitData$3(DrmInitData.SchemeInitData initData) {
+    static /* synthetic */ DrmInitData.SchemeInitData lambda$getDrmInitData$3(
+            DrmInitData.SchemeInitData initData) {
         return initData;
     }
 
@@ -437,7 +475,6 @@ public final class MediaExtractor {
         public static final String MIME_TYPE = "android.media.mediaextractor.mime";
         public static final String TRACKS = "android.media.mediaextractor.ntrk";
 
-        private MetricsConstants() {
-        }
+        private MetricsConstants() {}
     }
 }

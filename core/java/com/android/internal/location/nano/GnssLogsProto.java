@@ -1,12 +1,14 @@
 package com.android.internal.location.nano;
 
 import android.hardware.scontext.SContextConstants;
+
 import com.android.framework.protobuf.nano.CodedInputByteBufferNano;
 import com.android.framework.protobuf.nano.CodedOutputByteBufferNano;
 import com.android.framework.protobuf.nano.InternalNano;
 import com.android.framework.protobuf.nano.InvalidProtocolBufferNanoException;
 import com.android.framework.protobuf.nano.MessageNano;
 import com.android.framework.protobuf.nano.WireFormatNano;
+
 import java.io.IOException;
 
 /* loaded from: classes5.dex */
@@ -61,7 +63,8 @@ public interface GnssLogsProto {
             this.standardDeviationPositionAccuracyMeters = 0;
             this.numTopFourAverageCn0Processed = 0;
             this.meanTopFourAverageCn0DbHz = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
-            this.standardDeviationTopFourAverageCn0DbHz = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
+            this.standardDeviationTopFourAverageCn0DbHz =
+                    SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
             this.powerMetrics = null;
             this.hardwareRevision = "";
             this.numSvStatusProcessed = 0;
@@ -70,7 +73,8 @@ public interface GnssLogsProto {
             this.numL5SvStatusUsedInFix = 0;
             this.numL5TopFourAverageCn0Processed = 0;
             this.meanL5TopFourAverageCn0DbHz = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
-            this.standardDeviationL5TopFourAverageCn0DbHz = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
+            this.standardDeviationL5TopFourAverageCn0DbHz =
+                    SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
             this.cachedSize = -1;
             return this;
         }
@@ -104,10 +108,12 @@ public interface GnssLogsProto {
             if (this.numTopFourAverageCn0Processed != 0) {
                 output.writeInt32(9, this.numTopFourAverageCn0Processed);
             }
-            if (Double.doubleToLongBits(this.meanTopFourAverageCn0DbHz) != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
+            if (Double.doubleToLongBits(this.meanTopFourAverageCn0DbHz)
+                    != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
                 output.writeDouble(10, this.meanTopFourAverageCn0DbHz);
             }
-            if (Double.doubleToLongBits(this.standardDeviationTopFourAverageCn0DbHz) != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
+            if (Double.doubleToLongBits(this.standardDeviationTopFourAverageCn0DbHz)
+                    != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
                 output.writeDouble(11, this.standardDeviationTopFourAverageCn0DbHz);
             }
             if (this.powerMetrics != null) {
@@ -131,10 +137,12 @@ public interface GnssLogsProto {
             if (this.numL5TopFourAverageCn0Processed != 0) {
                 output.writeInt32(18, this.numL5TopFourAverageCn0Processed);
             }
-            if (Double.doubleToLongBits(this.meanL5TopFourAverageCn0DbHz) != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
+            if (Double.doubleToLongBits(this.meanL5TopFourAverageCn0DbHz)
+                    != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
                 output.writeDouble(19, this.meanL5TopFourAverageCn0DbHz);
             }
-            if (Double.doubleToLongBits(this.standardDeviationL5TopFourAverageCn0DbHz) != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
+            if (Double.doubleToLongBits(this.standardDeviationL5TopFourAverageCn0DbHz)
+                    != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
                 output.writeDouble(20, this.standardDeviationL5TopFourAverageCn0DbHz);
             }
             super.writeTo(output);
@@ -144,37 +152,59 @@ public interface GnssLogsProto {
         protected int computeSerializedSize() {
             int size = super.computeSerializedSize();
             if (this.numLocationReportProcessed != 0) {
-                size += CodedOutputByteBufferNano.computeInt32Size(1, this.numLocationReportProcessed);
+                size +=
+                        CodedOutputByteBufferNano.computeInt32Size(
+                                1, this.numLocationReportProcessed);
             }
             if (this.percentageLocationFailure != 0) {
-                size += CodedOutputByteBufferNano.computeInt32Size(2, this.percentageLocationFailure);
+                size +=
+                        CodedOutputByteBufferNano.computeInt32Size(
+                                2, this.percentageLocationFailure);
             }
             if (this.numTimeToFirstFixProcessed != 0) {
-                size += CodedOutputByteBufferNano.computeInt32Size(3, this.numTimeToFirstFixProcessed);
+                size +=
+                        CodedOutputByteBufferNano.computeInt32Size(
+                                3, this.numTimeToFirstFixProcessed);
             }
             if (this.meanTimeToFirstFixSecs != 0) {
                 size += CodedOutputByteBufferNano.computeInt32Size(4, this.meanTimeToFirstFixSecs);
             }
             if (this.standardDeviationTimeToFirstFixSecs != 0) {
-                size += CodedOutputByteBufferNano.computeInt32Size(5, this.standardDeviationTimeToFirstFixSecs);
+                size +=
+                        CodedOutputByteBufferNano.computeInt32Size(
+                                5, this.standardDeviationTimeToFirstFixSecs);
             }
             if (this.numPositionAccuracyProcessed != 0) {
-                size += CodedOutputByteBufferNano.computeInt32Size(6, this.numPositionAccuracyProcessed);
+                size +=
+                        CodedOutputByteBufferNano.computeInt32Size(
+                                6, this.numPositionAccuracyProcessed);
             }
             if (this.meanPositionAccuracyMeters != 0) {
-                size += CodedOutputByteBufferNano.computeInt32Size(7, this.meanPositionAccuracyMeters);
+                size +=
+                        CodedOutputByteBufferNano.computeInt32Size(
+                                7, this.meanPositionAccuracyMeters);
             }
             if (this.standardDeviationPositionAccuracyMeters != 0) {
-                size += CodedOutputByteBufferNano.computeInt32Size(8, this.standardDeviationPositionAccuracyMeters);
+                size +=
+                        CodedOutputByteBufferNano.computeInt32Size(
+                                8, this.standardDeviationPositionAccuracyMeters);
             }
             if (this.numTopFourAverageCn0Processed != 0) {
-                size += CodedOutputByteBufferNano.computeInt32Size(9, this.numTopFourAverageCn0Processed);
+                size +=
+                        CodedOutputByteBufferNano.computeInt32Size(
+                                9, this.numTopFourAverageCn0Processed);
             }
-            if (Double.doubleToLongBits(this.meanTopFourAverageCn0DbHz) != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
-                size += CodedOutputByteBufferNano.computeDoubleSize(10, this.meanTopFourAverageCn0DbHz);
+            if (Double.doubleToLongBits(this.meanTopFourAverageCn0DbHz)
+                    != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
+                size +=
+                        CodedOutputByteBufferNano.computeDoubleSize(
+                                10, this.meanTopFourAverageCn0DbHz);
             }
-            if (Double.doubleToLongBits(this.standardDeviationTopFourAverageCn0DbHz) != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
-                size += CodedOutputByteBufferNano.computeDoubleSize(11, this.standardDeviationTopFourAverageCn0DbHz);
+            if (Double.doubleToLongBits(this.standardDeviationTopFourAverageCn0DbHz)
+                    != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
+                size +=
+                        CodedOutputByteBufferNano.computeDoubleSize(
+                                11, this.standardDeviationTopFourAverageCn0DbHz);
             }
             if (this.powerMetrics != null) {
                 size += CodedOutputByteBufferNano.computeMessageSize(12, this.powerMetrics);
@@ -195,13 +225,21 @@ public interface GnssLogsProto {
                 size += CodedOutputByteBufferNano.computeInt32Size(17, this.numL5SvStatusUsedInFix);
             }
             if (this.numL5TopFourAverageCn0Processed != 0) {
-                size += CodedOutputByteBufferNano.computeInt32Size(18, this.numL5TopFourAverageCn0Processed);
+                size +=
+                        CodedOutputByteBufferNano.computeInt32Size(
+                                18, this.numL5TopFourAverageCn0Processed);
             }
-            if (Double.doubleToLongBits(this.meanL5TopFourAverageCn0DbHz) != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
-                size += CodedOutputByteBufferNano.computeDoubleSize(19, this.meanL5TopFourAverageCn0DbHz);
+            if (Double.doubleToLongBits(this.meanL5TopFourAverageCn0DbHz)
+                    != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
+                size +=
+                        CodedOutputByteBufferNano.computeDoubleSize(
+                                19, this.meanL5TopFourAverageCn0DbHz);
             }
-            if (Double.doubleToLongBits(this.standardDeviationL5TopFourAverageCn0DbHz) != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
-                return size + CodedOutputByteBufferNano.computeDoubleSize(20, this.standardDeviationL5TopFourAverageCn0DbHz);
+            if (Double.doubleToLongBits(this.standardDeviationL5TopFourAverageCn0DbHz)
+                    != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
+                return size
+                        + CodedOutputByteBufferNano.computeDoubleSize(
+                                20, this.standardDeviationL5TopFourAverageCn0DbHz);
             }
             return size;
         }
@@ -328,10 +366,12 @@ public interface GnssLogsProto {
             if (this.loggingDurationMs != 0) {
                 output.writeInt64(1, this.loggingDurationMs);
             }
-            if (Double.doubleToLongBits(this.energyConsumedMah) != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
+            if (Double.doubleToLongBits(this.energyConsumedMah)
+                    != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
                 output.writeDouble(2, this.energyConsumedMah);
             }
-            if (this.timeInSignalQualityLevelMs != null && this.timeInSignalQualityLevelMs.length > 0) {
+            if (this.timeInSignalQualityLevelMs != null
+                    && this.timeInSignalQualityLevelMs.length > 0) {
                 for (int i = 0; i < this.timeInSignalQualityLevelMs.length; i++) {
                     output.writeInt64(3, this.timeInSignalQualityLevelMs[i]);
                 }
@@ -345,10 +385,12 @@ public interface GnssLogsProto {
             if (this.loggingDurationMs != 0) {
                 size += CodedOutputByteBufferNano.computeInt64Size(1, this.loggingDurationMs);
             }
-            if (Double.doubleToLongBits(this.energyConsumedMah) != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
+            if (Double.doubleToLongBits(this.energyConsumedMah)
+                    != Double.doubleToLongBits(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN)) {
                 size += CodedOutputByteBufferNano.computeDoubleSize(2, this.energyConsumedMah);
             }
-            if (this.timeInSignalQualityLevelMs != null && this.timeInSignalQualityLevelMs.length > 0) {
+            if (this.timeInSignalQualityLevelMs != null
+                    && this.timeInSignalQualityLevelMs.length > 0) {
                 int dataSize = 0;
                 for (int i = 0; i < this.timeInSignalQualityLevelMs.length; i++) {
                     long element = this.timeInSignalQualityLevelMs[i];
@@ -374,7 +416,10 @@ public interface GnssLogsProto {
                         break;
                     case 24:
                         int arrayLength = WireFormatNano.getRepeatedFieldArrayLength(input, 24);
-                        int i = this.timeInSignalQualityLevelMs == null ? 0 : this.timeInSignalQualityLevelMs.length;
+                        int i =
+                                this.timeInSignalQualityLevelMs == null
+                                        ? 0
+                                        : this.timeInSignalQualityLevelMs.length;
                         long[] newArray = new long[i + arrayLength];
                         if (i != 0) {
                             System.arraycopy(this.timeInSignalQualityLevelMs, 0, newArray, 0, i);
@@ -397,7 +442,10 @@ public interface GnssLogsProto {
                             arrayLength2++;
                         }
                         input.rewindToPosition(startPos);
-                        int i2 = this.timeInSignalQualityLevelMs == null ? 0 : this.timeInSignalQualityLevelMs.length;
+                        int i2 =
+                                this.timeInSignalQualityLevelMs == null
+                                        ? 0
+                                        : this.timeInSignalQualityLevelMs.length;
                         long[] newArray2 = new long[i2 + arrayLength2];
                         if (i2 != 0) {
                             System.arraycopy(this.timeInSignalQualityLevelMs, 0, newArray2, 0, i2);
@@ -418,7 +466,8 @@ public interface GnssLogsProto {
             }
         }
 
-        public static PowerMetrics parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+        public static PowerMetrics parseFrom(byte[] data)
+                throws InvalidProtocolBufferNanoException {
             return (PowerMetrics) MessageNano.mergeFrom(new PowerMetrics(), data);
         }
 

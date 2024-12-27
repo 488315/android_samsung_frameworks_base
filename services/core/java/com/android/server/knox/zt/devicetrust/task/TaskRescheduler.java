@@ -1,6 +1,7 @@
 package com.android.server.knox.zt.devicetrust.task;
 
 import com.samsung.android.knox.zt.devicetrust.IEndpointMonitorListener;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringJoiner;
@@ -36,12 +37,20 @@ public final class TaskRescheduler {
         }
     }
 
-    public final ReschedulableMonitoringTask reschedule(int i, int i2, int i3, int i4, int i5, IEndpointMonitorListener iEndpointMonitorListener, Predicate predicate) {
+    public final ReschedulableMonitoringTask reschedule(
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            IEndpointMonitorListener iEndpointMonitorListener,
+            Predicate predicate) {
         ReschedulableMonitoringTask reschedulableMonitoringTask;
         String generateFingerprint = generateFingerprint(i, i2, i3, i4, i5);
         synchronized (this.mLock) {
             try {
-                reschedulableMonitoringTask = (ReschedulableMonitoringTask) this.mTasks.get(generateFingerprint);
+                reschedulableMonitoringTask =
+                        (ReschedulableMonitoringTask) this.mTasks.get(generateFingerprint);
                 if (reschedulableMonitoringTask != null) {
                     reschedulableMonitoringTask.mListener = iEndpointMonitorListener;
                     reschedulableMonitoringTask.setFilter(predicate);

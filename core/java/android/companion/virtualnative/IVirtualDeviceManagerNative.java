@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public interface IVirtualDeviceManagerNative extends IInterface {
-    public static final String DESCRIPTOR = "android.companion.virtualnative.IVirtualDeviceManagerNative";
+    public static final String DESCRIPTOR =
+            "android.companion.virtualnative.IVirtualDeviceManagerNative";
     public static final int DEVICE_POLICY_CUSTOM = 1;
     public static final int DEVICE_POLICY_DEFAULT = 0;
     public static final int POLICY_TYPE_ACTIVITY = 3;
@@ -39,7 +40,7 @@ public interface IVirtualDeviceManagerNative extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVirtualDeviceManagerNative {
+    public abstract static class Stub extends Binder implements IVirtualDeviceManagerNative {
         static final int TRANSACTION_getDeviceIdsForUid = 1;
         static final int TRANSACTION_getDevicePolicy = 2;
 
@@ -80,7 +81,8 @@ public interface IVirtualDeviceManagerNative extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IVirtualDeviceManagerNative.DESCRIPTOR);
             }

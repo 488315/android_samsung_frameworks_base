@@ -9,7 +9,10 @@ import android.view.ContentRecordingSession;
 
 /* loaded from: classes2.dex */
 public interface IMediaProjectionWatcherCallback extends IInterface {
-    void onRecordingSessionSet(MediaProjectionInfo mediaProjectionInfo, ContentRecordingSession contentRecordingSession) throws RemoteException;
+    void onRecordingSessionSet(
+            MediaProjectionInfo mediaProjectionInfo,
+            ContentRecordingSession contentRecordingSession)
+            throws RemoteException;
 
     void onStart(MediaProjectionInfo mediaProjectionInfo) throws RemoteException;
 
@@ -17,16 +20,14 @@ public interface IMediaProjectionWatcherCallback extends IInterface {
 
     public static class Default implements IMediaProjectionWatcherCallback {
         @Override // android.media.projection.IMediaProjectionWatcherCallback
-        public void onStart(MediaProjectionInfo info) throws RemoteException {
-        }
+        public void onStart(MediaProjectionInfo info) throws RemoteException {}
 
         @Override // android.media.projection.IMediaProjectionWatcherCallback
-        public void onStop(MediaProjectionInfo info) throws RemoteException {
-        }
+        public void onStop(MediaProjectionInfo info) throws RemoteException {}
 
         @Override // android.media.projection.IMediaProjectionWatcherCallback
-        public void onRecordingSessionSet(MediaProjectionInfo info, ContentRecordingSession session) throws RemoteException {
-        }
+        public void onRecordingSessionSet(MediaProjectionInfo info, ContentRecordingSession session)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -34,8 +35,9 @@ public interface IMediaProjectionWatcherCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMediaProjectionWatcherCallback {
-        public static final String DESCRIPTOR = "android.media.projection.IMediaProjectionWatcherCallback";
+    public abstract static class Stub extends Binder implements IMediaProjectionWatcherCallback {
+        public static final String DESCRIPTOR =
+                "android.media.projection.IMediaProjectionWatcherCallback";
         static final int TRANSACTION_onRecordingSessionSet = 3;
         static final int TRANSACTION_onStart = 1;
         static final int TRANSACTION_onStop = 2;
@@ -79,7 +81,8 @@ public interface IMediaProjectionWatcherCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -89,18 +92,23 @@ public interface IMediaProjectionWatcherCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    MediaProjectionInfo _arg0 = (MediaProjectionInfo) data.readTypedObject(MediaProjectionInfo.CREATOR);
+                    MediaProjectionInfo _arg0 =
+                            (MediaProjectionInfo) data.readTypedObject(MediaProjectionInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onStart(_arg0);
                     return true;
                 case 2:
-                    MediaProjectionInfo _arg02 = (MediaProjectionInfo) data.readTypedObject(MediaProjectionInfo.CREATOR);
+                    MediaProjectionInfo _arg02 =
+                            (MediaProjectionInfo) data.readTypedObject(MediaProjectionInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onStop(_arg02);
                     return true;
                 case 3:
-                    MediaProjectionInfo _arg03 = (MediaProjectionInfo) data.readTypedObject(MediaProjectionInfo.CREATOR);
-                    ContentRecordingSession _arg1 = (ContentRecordingSession) data.readTypedObject(ContentRecordingSession.CREATOR);
+                    MediaProjectionInfo _arg03 =
+                            (MediaProjectionInfo) data.readTypedObject(MediaProjectionInfo.CREATOR);
+                    ContentRecordingSession _arg1 =
+                            (ContentRecordingSession)
+                                    data.readTypedObject(ContentRecordingSession.CREATOR);
                     data.enforceNoDataAvail();
                     onRecordingSessionSet(_arg03, _arg1);
                     return true;
@@ -150,7 +158,9 @@ public interface IMediaProjectionWatcherCallback extends IInterface {
             }
 
             @Override // android.media.projection.IMediaProjectionWatcherCallback
-            public void onRecordingSessionSet(MediaProjectionInfo info, ContentRecordingSession session) throws RemoteException {
+            public void onRecordingSessionSet(
+                    MediaProjectionInfo info, ContentRecordingSession session)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

@@ -50,12 +50,14 @@ public interface IEmergencyManager extends IInterface {
         }
 
         @Override // com.samsung.android.emergencymode.IEmergencyManager
-        public boolean checkValidPackage(String pkgName, String actName, int allowFlag) throws RemoteException {
+        public boolean checkValidPackage(String pkgName, String actName, int allowFlag)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.emergencymode.IEmergencyManager
-        public boolean checkValidIntentAction(String pkgName, String actName) throws RemoteException {
+        public boolean checkValidIntentAction(String pkgName, String actName)
+                throws RemoteException {
             return false;
         }
 
@@ -80,8 +82,7 @@ public interface IEmergencyManager extends IInterface {
         }
 
         @Override // com.samsung.android.emergencymode.IEmergencyManager
-        public void setUserPackageBlocked(boolean enabled) throws RemoteException {
-        }
+        public void setUserPackageBlocked(boolean enabled) throws RemoteException {}
 
         @Override // com.samsung.android.emergencymode.IEmergencyManager
         public boolean isUserPackageBlocked() throws RemoteException {
@@ -94,8 +95,7 @@ public interface IEmergencyManager extends IInterface {
         }
 
         @Override // com.samsung.android.emergencymode.IEmergencyManager
-        public void setLocationProviderEnabled(boolean enable) throws RemoteException {
-        }
+        public void setLocationProviderEnabled(boolean enable) throws RemoteException {}
 
         @Override // com.samsung.android.emergencymode.IEmergencyManager
         public boolean addAppToLauncher(String pkgName, boolean enabled) throws RemoteException {
@@ -113,7 +113,7 @@ public interface IEmergencyManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IEmergencyManager {
+    public abstract static class Stub extends Binder implements IEmergencyManager {
         static final int TRANSACTION_addAppToLauncher = 13;
         static final int TRANSACTION_checkInvalidBroadcast = 6;
         static final int TRANSACTION_checkInvalidProcess = 5;
@@ -190,7 +190,8 @@ public interface IEmergencyManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IEmergencyManager.DESCRIPTOR);
             }
@@ -342,7 +343,8 @@ public interface IEmergencyManager extends IInterface {
             }
 
             @Override // com.samsung.android.emergencymode.IEmergencyManager
-            public boolean checkValidPackage(String pkgName, String actName, int allowFlag) throws RemoteException {
+            public boolean checkValidPackage(String pkgName, String actName, int allowFlag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -361,7 +363,8 @@ public interface IEmergencyManager extends IInterface {
             }
 
             @Override // com.samsung.android.emergencymode.IEmergencyManager
-            public boolean checkValidIntentAction(String pkgName, String actName) throws RemoteException {
+            public boolean checkValidIntentAction(String pkgName, String actName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -396,7 +399,8 @@ public interface IEmergencyManager extends IInterface {
             }
 
             @Override // com.samsung.android.emergencymode.IEmergencyManager
-            public boolean checkInvalidBroadcast(String pkgName, String action) throws RemoteException {
+            public boolean checkInvalidBroadcast(String pkgName, String action)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -508,7 +512,8 @@ public interface IEmergencyManager extends IInterface {
             }
 
             @Override // com.samsung.android.emergencymode.IEmergencyManager
-            public boolean addAppToLauncher(String pkgName, boolean enabled) throws RemoteException {
+            public boolean addAppToLauncher(String pkgName, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

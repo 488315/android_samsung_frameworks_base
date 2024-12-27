@@ -1,6 +1,7 @@
 package com.samsung.android.camera;
 
 import android.util.Slog;
+
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -44,7 +45,7 @@ public final class Logger {
             CAMERA_APPLICATION_EVENT = id7;
             ID id8 = new ID("DATABASE_EVENT", 7);
             DATABASE_EVENT = id8;
-            $VALUES = new ID[]{id, id2, id3, id4, id5, id6, id7, id8};
+            $VALUES = new ID[] {id, id2, id3, id4, id5, id6, id7, id8};
         }
 
         public static ID valueOf(String str) {
@@ -90,7 +91,8 @@ public final class Logger {
 
     public static void log(ID id, String str) {
         try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS Z", Locale.getDefault());
+            SimpleDateFormat simpleDateFormat =
+                    new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS Z", Locale.getDefault());
             Logger logger = getInstance(id);
             String str2 = simpleDateFormat.format(new Date()) + ", " + str;
             synchronized (logger) {

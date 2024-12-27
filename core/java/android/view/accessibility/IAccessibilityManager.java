@@ -21,9 +21,7 @@ import android.view.IWindow;
 import android.view.InputEvent;
 import android.view.MagnificationSpec;
 import android.view.SurfaceControl;
-import android.view.accessibility.IAccessibilityInteractionConnection;
-import android.view.accessibility.IAccessibilityManagerClient;
-import android.view.accessibility.IMagnificationConnection;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -32,19 +30,28 @@ public interface IAccessibilityManager extends IInterface {
 
     boolean OnStopGestureWakeup() throws RemoteException;
 
-    int addAccessibilityInteractionConnection(IWindow iWindow, IBinder iBinder, IAccessibilityInteractionConnection iAccessibilityInteractionConnection, String str, int i) throws RemoteException;
+    int addAccessibilityInteractionConnection(
+            IWindow iWindow,
+            IBinder iBinder,
+            IAccessibilityInteractionConnection iAccessibilityInteractionConnection,
+            String str,
+            int i)
+            throws RemoteException;
 
-    long addClient(IAccessibilityManagerClient iAccessibilityManagerClient, int i) throws RemoteException;
+    long addClient(IAccessibilityManagerClient iAccessibilityManagerClient, int i)
+            throws RemoteException;
 
     void associateEmbeddedHierarchy(IBinder iBinder, IBinder iBinder2) throws RemoteException;
 
-    void attachAccessibilityOverlayToDisplay(int i, SurfaceControl surfaceControl) throws RemoteException;
+    void attachAccessibilityOverlayToDisplay(int i, SurfaceControl surfaceControl)
+            throws RemoteException;
 
     int convertPixelToDpi(float f) throws RemoteException;
 
     void disassociateEmbeddedHierarchy(IBinder iBinder) throws RemoteException;
 
-    void enableShortcutsForTargets(boolean z, int i, List<String> list, int i2) throws RemoteException;
+    void enableShortcutsForTargets(boolean z, int i, List<String> list, int i2)
+            throws RemoteException;
 
     Bundle getA11yFeatureToTileMap(int i) throws RemoteException;
 
@@ -52,13 +59,15 @@ public interface IAccessibilityManager extends IInterface {
 
     int getAccessibilityWindowId(IBinder iBinder) throws RemoteException;
 
-    List<AccessibilityServiceInfo> getEnabledAccessibilityServiceList(int i, int i2) throws RemoteException;
+    List<AccessibilityServiceInfo> getEnabledAccessibilityServiceList(int i, int i2)
+            throws RemoteException;
 
     int getFocusColor() throws RemoteException;
 
     int getFocusStrokeWidth() throws RemoteException;
 
-    ParceledListSlice<AccessibilityServiceInfo> getInstalledAccessibilityServiceList(int i) throws RemoteException;
+    ParceledListSlice<AccessibilityServiceInfo> getInstalledAccessibilityServiceList(int i)
+            throws RemoteException;
 
     long getRecommendedTimeoutMillis() throws RemoteException;
 
@@ -72,7 +81,8 @@ public interface IAccessibilityManager extends IInterface {
 
     void interrupt(int i) throws RemoteException;
 
-    boolean isAccessibilityServiceWarningRequired(AccessibilityServiceInfo accessibilityServiceInfo) throws RemoteException;
+    boolean isAccessibilityServiceWarningRequired(AccessibilityServiceInfo accessibilityServiceInfo)
+            throws RemoteException;
 
     boolean isAccessibilityTargetAllowed(String str, int i, int i2) throws RemoteException;
 
@@ -98,15 +108,23 @@ public interface IAccessibilityManager extends IInterface {
 
     void performAccessibilityShortcut(String str) throws RemoteException;
 
-    boolean registerProxyForDisplay(IAccessibilityServiceClient iAccessibilityServiceClient, int i) throws RemoteException;
+    boolean registerProxyForDisplay(IAccessibilityServiceClient iAccessibilityServiceClient, int i)
+            throws RemoteException;
 
     void registerSystemAction(RemoteAction remoteAction, int i) throws RemoteException;
 
-    void registerUiTestAutomationService(IBinder iBinder, IAccessibilityServiceClient iAccessibilityServiceClient, AccessibilityServiceInfo accessibilityServiceInfo, int i, int i2) throws RemoteException;
+    void registerUiTestAutomationService(
+            IBinder iBinder,
+            IAccessibilityServiceClient iAccessibilityServiceClient,
+            AccessibilityServiceInfo accessibilityServiceInfo,
+            int i,
+            int i2)
+            throws RemoteException;
 
     void removeAccessibilityInteractionConnection(IWindow iWindow) throws RemoteException;
 
-    boolean removeClient(IAccessibilityManagerClient iAccessibilityManagerClient, int i) throws RemoteException;
+    boolean removeClient(IAccessibilityManagerClient iAccessibilityManagerClient, int i)
+            throws RemoteException;
 
     boolean semCheckMdnieColorBlind(int[] iArr) throws RemoteException;
 
@@ -158,19 +176,25 @@ public interface IAccessibilityManager extends IInterface {
 
     void semUpdateAssitantMenu(Bundle bundle) throws RemoteException;
 
-    void sendAccessibilityEvent(AccessibilityEvent accessibilityEvent, int i) throws RemoteException;
+    void sendAccessibilityEvent(AccessibilityEvent accessibilityEvent, int i)
+            throws RemoteException;
 
     boolean sendFingerprintGesture(int i) throws RemoteException;
 
     boolean sendRestrictedDialogIntent(String str, int i, int i2) throws RemoteException;
 
-    void setAccessibilityWindowAttributes(int i, int i2, int i3, AccessibilityWindowAttributes accessibilityWindowAttributes) throws RemoteException;
+    void setAccessibilityWindowAttributes(
+            int i, int i2, int i3, AccessibilityWindowAttributes accessibilityWindowAttributes)
+            throws RemoteException;
 
-    void setMagnificationConnection(IMagnificationConnection iMagnificationConnection) throws RemoteException;
+    void setMagnificationConnection(IMagnificationConnection iMagnificationConnection)
+            throws RemoteException;
 
     void setMagnificationDisactivate() throws RemoteException;
 
-    void setPictureInPictureActionReplacingConnection(IAccessibilityInteractionConnection iAccessibilityInteractionConnection) throws RemoteException;
+    void setPictureInPictureActionReplacingConnection(
+            IAccessibilityInteractionConnection iAccessibilityInteractionConnection)
+            throws RemoteException;
 
     void setScreenReaderEnabled(boolean z) throws RemoteException;
 
@@ -182,7 +206,8 @@ public interface IAccessibilityManager extends IInterface {
 
     boolean startFlashNotificationEvent(String str, int i, String str2) throws RemoteException;
 
-    boolean startFlashNotificationSequence(String str, int i, IBinder iBinder) throws RemoteException;
+    boolean startFlashNotificationSequence(String str, int i, IBinder iBinder)
+            throws RemoteException;
 
     boolean stopFlashNotificationSequence(String str) throws RemoteException;
 
@@ -190,57 +215,72 @@ public interface IAccessibilityManager extends IInterface {
 
     void unregisterSystemAction(int i) throws RemoteException;
 
-    void unregisterUiTestAutomationService(IAccessibilityServiceClient iAccessibilityServiceClient) throws RemoteException;
+    void unregisterUiTestAutomationService(IAccessibilityServiceClient iAccessibilityServiceClient)
+            throws RemoteException;
 
     public static class Default implements IAccessibilityManager {
         @Override // android.view.accessibility.IAccessibilityManager
-        public void interrupt(int userId) throws RemoteException {
-        }
+        public void interrupt(int userId) throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void sendAccessibilityEvent(AccessibilityEvent uiEvent, int userId) throws RemoteException {
-        }
+        public void sendAccessibilityEvent(AccessibilityEvent uiEvent, int userId)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public long addClient(IAccessibilityManagerClient client, int userId) throws RemoteException {
+        public long addClient(IAccessibilityManagerClient client, int userId)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public boolean removeClient(IAccessibilityManagerClient client, int userId) throws RemoteException {
+        public boolean removeClient(IAccessibilityManagerClient client, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public ParceledListSlice<AccessibilityServiceInfo> getInstalledAccessibilityServiceList(int userId) throws RemoteException {
+        public ParceledListSlice<AccessibilityServiceInfo> getInstalledAccessibilityServiceList(
+                int userId) throws RemoteException {
             return null;
         }
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public List<AccessibilityServiceInfo> getEnabledAccessibilityServiceList(int feedbackType, int userId) throws RemoteException {
+        public List<AccessibilityServiceInfo> getEnabledAccessibilityServiceList(
+                int feedbackType, int userId) throws RemoteException {
             return null;
         }
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public int addAccessibilityInteractionConnection(IWindow windowToken, IBinder leashToken, IAccessibilityInteractionConnection connection, String packageName, int userId) throws RemoteException {
+        public int addAccessibilityInteractionConnection(
+                IWindow windowToken,
+                IBinder leashToken,
+                IAccessibilityInteractionConnection connection,
+                String packageName,
+                int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void removeAccessibilityInteractionConnection(IWindow windowToken) throws RemoteException {
-        }
+        public void removeAccessibilityInteractionConnection(IWindow windowToken)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void setPictureInPictureActionReplacingConnection(IAccessibilityInteractionConnection connection) throws RemoteException {
-        }
+        public void setPictureInPictureActionReplacingConnection(
+                IAccessibilityInteractionConnection connection) throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void registerUiTestAutomationService(IBinder owner, IAccessibilityServiceClient client, AccessibilityServiceInfo info, int userId, int flags) throws RemoteException {
-        }
+        public void registerUiTestAutomationService(
+                IBinder owner,
+                IAccessibilityServiceClient client,
+                AccessibilityServiceInfo info,
+                int userId,
+                int flags)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void unregisterUiTestAutomationService(IAccessibilityServiceClient client) throws RemoteException {
-        }
+        public void unregisterUiTestAutomationService(IAccessibilityServiceClient client)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
         public IBinder getWindowToken(int windowId, int userId) throws RemoteException {
@@ -248,19 +288,19 @@ public interface IAccessibilityManager extends IInterface {
         }
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void notifyAccessibilityButtonClicked(int displayId, String targetName) throws RemoteException {
-        }
+        public void notifyAccessibilityButtonClicked(int displayId, String targetName)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void notifyAccessibilityButtonVisibilityChanged(boolean available) throws RemoteException {
-        }
+        public void notifyAccessibilityButtonVisibilityChanged(boolean available)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void performAccessibilityShortcut(String targetName) throws RemoteException {
-        }
+        public void performAccessibilityShortcut(String targetName) throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public List<String> getAccessibilityShortcutTargets(int shortcutType) throws RemoteException {
+        public List<String> getAccessibilityShortcutTargets(int shortcutType)
+                throws RemoteException {
             return null;
         }
 
@@ -280,24 +320,22 @@ public interface IAccessibilityManager extends IInterface {
         }
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void registerSystemAction(RemoteAction action, int actionId) throws RemoteException {
-        }
+        public void registerSystemAction(RemoteAction action, int actionId)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void unregisterSystemAction(int actionId) throws RemoteException {
-        }
+        public void unregisterSystemAction(int actionId) throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void setMagnificationConnection(IMagnificationConnection connection) throws RemoteException {
-        }
+        public void setMagnificationConnection(IMagnificationConnection connection)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void associateEmbeddedHierarchy(IBinder host, IBinder embedded) throws RemoteException {
-        }
+        public void associateEmbeddedHierarchy(IBinder host, IBinder embedded)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void disassociateEmbeddedHierarchy(IBinder token) throws RemoteException {
-        }
+        public void disassociateEmbeddedHierarchy(IBinder token) throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
         public int getFocusStrokeWidth() throws RemoteException {
@@ -315,8 +353,8 @@ public interface IAccessibilityManager extends IInterface {
         }
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void setSystemAudioCaptioningEnabled(boolean isEnabled, int userId) throws RemoteException {
-        }
+        public void setSystemAudioCaptioningEnabled(boolean isEnabled, int userId)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
         public boolean isSystemAudioCaptioningUiEnabled(int userId) throws RemoteException {
@@ -324,15 +362,17 @@ public interface IAccessibilityManager extends IInterface {
         }
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void setSystemAudioCaptioningUiEnabled(boolean isEnabled, int userId) throws RemoteException {
-        }
+        public void setSystemAudioCaptioningUiEnabled(boolean isEnabled, int userId)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void setAccessibilityWindowAttributes(int displayId, int windowId, int userId, AccessibilityWindowAttributes attributes) throws RemoteException {
-        }
+        public void setAccessibilityWindowAttributes(
+                int displayId, int windowId, int userId, AccessibilityWindowAttributes attributes)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public boolean registerProxyForDisplay(IAccessibilityServiceClient proxy, int displayId) throws RemoteException {
+        public boolean registerProxyForDisplay(IAccessibilityServiceClient proxy, int displayId)
+                throws RemoteException {
             return false;
         }
 
@@ -342,11 +382,11 @@ public interface IAccessibilityManager extends IInterface {
         }
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void injectInputEventToInputFilter(InputEvent event) throws RemoteException {
-        }
+        public void injectInputEventToInputFilter(InputEvent event) throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public boolean startFlashNotificationSequence(String opPkg, int reason, IBinder token) throws RemoteException {
+        public boolean startFlashNotificationSequence(String opPkg, int reason, IBinder token)
+                throws RemoteException {
             return false;
         }
 
@@ -356,41 +396,47 @@ public interface IAccessibilityManager extends IInterface {
         }
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public boolean startFlashNotificationEvent(String opPkg, int reason, String reasonPkg) throws RemoteException {
+        public boolean startFlashNotificationEvent(String opPkg, int reason, String reasonPkg)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public boolean isAccessibilityTargetAllowed(String packageName, int uid, int userId) throws RemoteException {
+        public boolean isAccessibilityTargetAllowed(String packageName, int uid, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public boolean sendRestrictedDialogIntent(String packageName, int uid, int userId) throws RemoteException {
+        public boolean sendRestrictedDialogIntent(String packageName, int uid, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public boolean isAccessibilityServiceWarningRequired(AccessibilityServiceInfo info) throws RemoteException {
+        public boolean isAccessibilityServiceWarningRequired(AccessibilityServiceInfo info)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public WindowTransformationSpec getWindowTransformationSpec(int windowId) throws RemoteException {
+        public WindowTransformationSpec getWindowTransformationSpec(int windowId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void attachAccessibilityOverlayToDisplay(int displayId, SurfaceControl surfaceControl) throws RemoteException {
-        }
+        public void attachAccessibilityOverlayToDisplay(
+                int displayId, SurfaceControl surfaceControl) throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void notifyQuickSettingsTilesChanged(int userId, List<ComponentName> tileComponentNames) throws RemoteException {
-        }
+        public void notifyQuickSettingsTilesChanged(
+                int userId, List<ComponentName> tileComponentNames) throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void enableShortcutsForTargets(boolean enable, int shortcutTypes, List<String> shortcutTargets, int userId) throws RemoteException {
-        }
+        public void enableShortcutsForTargets(
+                boolean enable, int shortcutTypes, List<String> shortcutTargets, int userId)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
         public Bundle getA11yFeatureToTileMap(int userId) throws RemoteException {
@@ -403,15 +449,14 @@ public interface IAccessibilityManager extends IInterface {
         }
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void semTurnOffAccessibilityService(int stateFlags) throws RemoteException {
-        }
+        public void semTurnOffAccessibilityService(int stateFlags) throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void semTurnOnAccessibilityService(int stateFlags) throws RemoteException {
-        }
+        public void semTurnOnAccessibilityService(int stateFlags) throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public boolean semSetColorBlind(boolean enable, float userParameter) throws RemoteException {
+        public boolean semSetColorBlind(boolean enable, float userParameter)
+                throws RemoteException {
             return false;
         }
 
@@ -421,7 +466,8 @@ public interface IAccessibilityManager extends IInterface {
         }
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public boolean semSetMdnieAccessibilityMode(int mode, boolean enable) throws RemoteException {
+        public boolean semSetMdnieAccessibilityMode(int mode, boolean enable)
+                throws RemoteException {
             return false;
         }
 
@@ -441,24 +487,20 @@ public interface IAccessibilityManager extends IInterface {
         }
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void semToggleDarkScreenMode() throws RemoteException {
-        }
+        public void semToggleDarkScreenMode() throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void semUpdateAssitantMenu(Bundle bundle) throws RemoteException {
-        }
+        public void semUpdateAssitantMenu(Bundle bundle) throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void semRegisterAssistantMenu(IBinder iBinder) throws RemoteException {
-        }
+        public void semRegisterAssistantMenu(IBinder iBinder) throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void semOpenDeviceOptions() throws RemoteException {
-        }
+        public void semOpenDeviceOptions() throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void semSetTwoFingerGestureRecognitionEnabled(boolean enable) throws RemoteException {
-        }
+        public void semSetTwoFingerGestureRecognitionEnabled(boolean enable)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
         public boolean isTwoFingerGestureRecognitionEnabled() throws RemoteException {
@@ -476,8 +518,7 @@ public interface IAccessibilityManager extends IInterface {
         }
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void setScreenReaderEnabled(boolean enable) throws RemoteException {
-        }
+        public void setScreenReaderEnabled(boolean enable) throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
         public int convertPixelToDpi(float pixels) throws RemoteException {
@@ -485,12 +526,10 @@ public interface IAccessibilityManager extends IInterface {
         }
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void setTalkbackMode() throws RemoteException {
-        }
+        public void setTalkbackMode() throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void semLockNow() throws RemoteException {
-        }
+        public void semLockNow() throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
         public boolean OnStartGestureWakeup() throws RemoteException {
@@ -508,16 +547,13 @@ public interface IAccessibilityManager extends IInterface {
         }
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void setMagnificationDisactivate() throws RemoteException {
-        }
+        public void setMagnificationDisactivate() throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void semDumpCallStack(String callStack) throws RemoteException {
-        }
+        public void semDumpCallStack(String callStack) throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void performAccessibilityDirectAccess(String targetName) throws RemoteException {
-        }
+        public void performAccessibilityDirectAccess(String targetName) throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
         public Rect semGetWindowMagnificationBounds() throws RemoteException {
@@ -530,16 +566,15 @@ public interface IAccessibilityManager extends IInterface {
         }
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void semEnableWindowMagnification(int center_x, int center_y) throws RemoteException {
-        }
+        public void semEnableWindowMagnification(int center_x, int center_y)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void semDisableWindowMagnification() throws RemoteException {
-        }
+        public void semDisableWindowMagnification() throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void semMoveWindowMagnification(float offsetX, float offsetY) throws RemoteException {
-        }
+        public void semMoveWindowMagnification(float offsetX, float offsetY)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
         public boolean semIsWindowMagnificationEnabled() throws RemoteException {
@@ -552,12 +587,12 @@ public interface IAccessibilityManager extends IInterface {
         }
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void semPerformAccessibilityButtonClick(int displayId, int shortcutType, String targetName) throws RemoteException {
-        }
+        public void semPerformAccessibilityButtonClick(
+                int displayId, int shortcutType, String targetName) throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
-        public void semInjectInputEventToInputFilter(InputEvent event, int policyFlags) throws RemoteException {
-        }
+        public void semInjectInputEventToInputFilter(InputEvent event, int policyFlags)
+                throws RemoteException {}
 
         @Override // android.view.accessibility.IAccessibilityManager
         public boolean isCameraFlashNotificationRunning() throws RemoteException {
@@ -570,9 +605,11 @@ public interface IAccessibilityManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAccessibilityManager {
+    public abstract static class Stub extends Binder implements IAccessibilityManager {
         public static final String DESCRIPTOR = "android.view.accessibility.IAccessibilityManager";
-        static final String[] PERMISSIONS_notifyQuickSettingsTilesChanged = {Manifest.permission.STATUS_BAR_SERVICE, Manifest.permission.MANAGE_ACCESSIBILITY};
+        static final String[] PERMISSIONS_notifyQuickSettingsTilesChanged = {
+            Manifest.permission.STATUS_BAR_SERVICE, Manifest.permission.MANAGE_ACCESSIBILITY
+        };
         static final int TRANSACTION_OnStartGestureWakeup = 67;
         static final int TRANSACTION_OnStopGestureWakeup = 68;
         static final int TRANSACTION_addAccessibilityInteractionConnection = 7;
@@ -667,7 +704,9 @@ public interface IAccessibilityManager extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IAccessibilityManager asInterface(IBinder obj) {
@@ -863,7 +902,8 @@ public interface IAccessibilityManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -878,13 +918,15 @@ public interface IAccessibilityManager extends IInterface {
                     interrupt(_arg0);
                     return true;
                 case 2:
-                    AccessibilityEvent _arg02 = (AccessibilityEvent) data.readTypedObject(AccessibilityEvent.CREATOR);
+                    AccessibilityEvent _arg02 =
+                            (AccessibilityEvent) data.readTypedObject(AccessibilityEvent.CREATOR);
                     int _arg1 = data.readInt();
                     data.enforceNoDataAvail();
                     sendAccessibilityEvent(_arg02, _arg1);
                     return true;
                 case 3:
-                    IAccessibilityManagerClient _arg03 = IAccessibilityManagerClient.Stub.asInterface(data.readStrongBinder());
+                    IAccessibilityManagerClient _arg03 =
+                            IAccessibilityManagerClient.Stub.asInterface(data.readStrongBinder());
                     int _arg12 = data.readInt();
                     data.enforceNoDataAvail();
                     long _result = addClient(_arg03, _arg12);
@@ -892,7 +934,8 @@ public interface IAccessibilityManager extends IInterface {
                     reply.writeLong(_result);
                     return true;
                 case 4:
-                    IAccessibilityManagerClient _arg04 = IAccessibilityManagerClient.Stub.asInterface(data.readStrongBinder());
+                    IAccessibilityManagerClient _arg04 =
+                            IAccessibilityManagerClient.Stub.asInterface(data.readStrongBinder());
                     int _arg13 = data.readInt();
                     data.enforceNoDataAvail();
                     boolean _result2 = removeClient(_arg04, _arg13);
@@ -902,7 +945,8 @@ public interface IAccessibilityManager extends IInterface {
                 case 5:
                     int _arg05 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParceledListSlice<AccessibilityServiceInfo> _result3 = getInstalledAccessibilityServiceList(_arg05);
+                    ParceledListSlice<AccessibilityServiceInfo> _result3 =
+                            getInstalledAccessibilityServiceList(_arg05);
                     reply.writeNoException();
                     reply.writeTypedObject(_result3, 1);
                     return true;
@@ -910,18 +954,23 @@ public interface IAccessibilityManager extends IInterface {
                     int _arg06 = data.readInt();
                     int _arg14 = data.readInt();
                     data.enforceNoDataAvail();
-                    List<AccessibilityServiceInfo> _result4 = getEnabledAccessibilityServiceList(_arg06, _arg14);
+                    List<AccessibilityServiceInfo> _result4 =
+                            getEnabledAccessibilityServiceList(_arg06, _arg14);
                     reply.writeNoException();
                     reply.writeTypedList(_result4, 1);
                     return true;
                 case 7:
                     IWindow _arg07 = IWindow.Stub.asInterface(data.readStrongBinder());
                     IBinder _arg15 = data.readStrongBinder();
-                    IAccessibilityInteractionConnection _arg2 = IAccessibilityInteractionConnection.Stub.asInterface(data.readStrongBinder());
+                    IAccessibilityInteractionConnection _arg2 =
+                            IAccessibilityInteractionConnection.Stub.asInterface(
+                                    data.readStrongBinder());
                     String _arg3 = data.readString();
                     int _arg4 = data.readInt();
                     data.enforceNoDataAvail();
-                    int _result5 = addAccessibilityInteractionConnection(_arg07, _arg15, _arg2, _arg3, _arg4);
+                    int _result5 =
+                            addAccessibilityInteractionConnection(
+                                    _arg07, _arg15, _arg2, _arg3, _arg4);
                     reply.writeNoException();
                     reply.writeInt(_result5);
                     return true;
@@ -932,15 +981,20 @@ public interface IAccessibilityManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 9:
-                    IAccessibilityInteractionConnection _arg09 = IAccessibilityInteractionConnection.Stub.asInterface(data.readStrongBinder());
+                    IAccessibilityInteractionConnection _arg09 =
+                            IAccessibilityInteractionConnection.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setPictureInPictureActionReplacingConnection(_arg09);
                     reply.writeNoException();
                     return true;
                 case 10:
                     IBinder _arg010 = data.readStrongBinder();
-                    IAccessibilityServiceClient _arg16 = IAccessibilityServiceClient.Stub.asInterface(data.readStrongBinder());
-                    AccessibilityServiceInfo _arg22 = (AccessibilityServiceInfo) data.readTypedObject(AccessibilityServiceInfo.CREATOR);
+                    IAccessibilityServiceClient _arg16 =
+                            IAccessibilityServiceClient.Stub.asInterface(data.readStrongBinder());
+                    AccessibilityServiceInfo _arg22 =
+                            (AccessibilityServiceInfo)
+                                    data.readTypedObject(AccessibilityServiceInfo.CREATOR);
                     int _arg32 = data.readInt();
                     int _arg42 = data.readInt();
                     data.enforceNoDataAvail();
@@ -948,7 +1002,8 @@ public interface IAccessibilityManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 11:
-                    IAccessibilityServiceClient _arg011 = IAccessibilityServiceClient.Stub.asInterface(data.readStrongBinder());
+                    IAccessibilityServiceClient _arg011 =
+                            IAccessibilityServiceClient.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterUiTestAutomationService(_arg011);
                     reply.writeNoException();
@@ -1007,7 +1062,8 @@ public interface IAccessibilityManager extends IInterface {
                     reply.writeLong(_result10);
                     return true;
                 case 20:
-                    RemoteAction _arg019 = (RemoteAction) data.readTypedObject(RemoteAction.CREATOR);
+                    RemoteAction _arg019 =
+                            (RemoteAction) data.readTypedObject(RemoteAction.CREATOR);
                     int _arg19 = data.readInt();
                     data.enforceNoDataAvail();
                     registerSystemAction(_arg019, _arg19);
@@ -1019,7 +1075,8 @@ public interface IAccessibilityManager extends IInterface {
                     return true;
                 case 22:
                     IBinder _arg021 = data.readStrongBinder();
-                    IMagnificationConnection _arg022 = IMagnificationConnection.Stub.asInterface(_arg021);
+                    IMagnificationConnection _arg022 =
+                            IMagnificationConnection.Stub.asInterface(_arg021);
                     data.enforceNoDataAvail();
                     setMagnificationConnection(_arg022);
                     return true;
@@ -1076,12 +1133,15 @@ public interface IAccessibilityManager extends IInterface {
                     int _arg028 = data.readInt();
                     int _arg113 = data.readInt();
                     int _arg23 = data.readInt();
-                    AccessibilityWindowAttributes _arg33 = (AccessibilityWindowAttributes) data.readTypedObject(AccessibilityWindowAttributes.CREATOR);
+                    AccessibilityWindowAttributes _arg33 =
+                            (AccessibilityWindowAttributes)
+                                    data.readTypedObject(AccessibilityWindowAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     setAccessibilityWindowAttributes(_arg028, _arg113, _arg23, _arg33);
                     return true;
                 case 32:
-                    IAccessibilityServiceClient _arg029 = IAccessibilityServiceClient.Stub.asInterface(data.readStrongBinder());
+                    IAccessibilityServiceClient _arg029 =
+                            IAccessibilityServiceClient.Stub.asInterface(data.readStrongBinder());
                     int _arg114 = data.readInt();
                     data.enforceNoDataAvail();
                     boolean _result15 = registerProxyForDisplay(_arg029, _arg114);
@@ -1145,7 +1205,9 @@ public interface IAccessibilityManager extends IInterface {
                     reply.writeBoolean(_result21);
                     return true;
                 case 40:
-                    AccessibilityServiceInfo _arg037 = (AccessibilityServiceInfo) data.readTypedObject(AccessibilityServiceInfo.CREATOR);
+                    AccessibilityServiceInfo _arg037 =
+                            (AccessibilityServiceInfo)
+                                    data.readTypedObject(AccessibilityServiceInfo.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result22 = isAccessibilityServiceWarningRequired(_arg037);
                     reply.writeNoException();
@@ -1160,7 +1222,8 @@ public interface IAccessibilityManager extends IInterface {
                     return true;
                 case 42:
                     int _arg039 = data.readInt();
-                    SurfaceControl _arg119 = (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
+                    SurfaceControl _arg119 =
+                            (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
                     data.enforceNoDataAvail();
                     attachAccessibilityOverlayToDisplay(_arg039, _arg119);
                     reply.writeNoException();
@@ -1431,7 +1494,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public void sendAccessibilityEvent(AccessibilityEvent uiEvent, int userId) throws RemoteException {
+            public void sendAccessibilityEvent(AccessibilityEvent uiEvent, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1444,7 +1508,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public long addClient(IAccessibilityManagerClient client, int userId) throws RemoteException {
+            public long addClient(IAccessibilityManagerClient client, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1462,7 +1527,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public boolean removeClient(IAccessibilityManagerClient client, int userId) throws RemoteException {
+            public boolean removeClient(IAccessibilityManagerClient client, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1480,7 +1546,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public ParceledListSlice<AccessibilityServiceInfo> getInstalledAccessibilityServiceList(int userId) throws RemoteException {
+            public ParceledListSlice<AccessibilityServiceInfo> getInstalledAccessibilityServiceList(
+                    int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1488,7 +1555,8 @@ public interface IAccessibilityManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(5, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice<AccessibilityServiceInfo> _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice<AccessibilityServiceInfo> _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1497,7 +1565,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public List<AccessibilityServiceInfo> getEnabledAccessibilityServiceList(int feedbackType, int userId) throws RemoteException {
+            public List<AccessibilityServiceInfo> getEnabledAccessibilityServiceList(
+                    int feedbackType, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1506,7 +1575,8 @@ public interface IAccessibilityManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(6, _data, _reply, 0);
                     _reply.readException();
-                    List<AccessibilityServiceInfo> _result = _reply.createTypedArrayList(AccessibilityServiceInfo.CREATOR);
+                    List<AccessibilityServiceInfo> _result =
+                            _reply.createTypedArrayList(AccessibilityServiceInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1515,7 +1585,13 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public int addAccessibilityInteractionConnection(IWindow windowToken, IBinder leashToken, IAccessibilityInteractionConnection connection, String packageName, int userId) throws RemoteException {
+            public int addAccessibilityInteractionConnection(
+                    IWindow windowToken,
+                    IBinder leashToken,
+                    IAccessibilityInteractionConnection connection,
+                    String packageName,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1536,7 +1612,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public void removeAccessibilityInteractionConnection(IWindow windowToken) throws RemoteException {
+            public void removeAccessibilityInteractionConnection(IWindow windowToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1551,7 +1628,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public void setPictureInPictureActionReplacingConnection(IAccessibilityInteractionConnection connection) throws RemoteException {
+            public void setPictureInPictureActionReplacingConnection(
+                    IAccessibilityInteractionConnection connection) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1566,7 +1644,13 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public void registerUiTestAutomationService(IBinder owner, IAccessibilityServiceClient client, AccessibilityServiceInfo info, int userId, int flags) throws RemoteException {
+            public void registerUiTestAutomationService(
+                    IBinder owner,
+                    IAccessibilityServiceClient client,
+                    AccessibilityServiceInfo info,
+                    int userId,
+                    int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1585,7 +1669,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public void unregisterUiTestAutomationService(IAccessibilityServiceClient client) throws RemoteException {
+            public void unregisterUiTestAutomationService(IAccessibilityServiceClient client)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1618,7 +1703,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public void notifyAccessibilityButtonClicked(int displayId, String targetName) throws RemoteException {
+            public void notifyAccessibilityButtonClicked(int displayId, String targetName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1634,7 +1720,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public void notifyAccessibilityButtonVisibilityChanged(boolean available) throws RemoteException {
+            public void notifyAccessibilityButtonVisibilityChanged(boolean available)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1664,7 +1751,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public List<String> getAccessibilityShortcutTargets(int shortcutType) throws RemoteException {
+            public List<String> getAccessibilityShortcutTargets(int shortcutType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1731,7 +1819,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public void registerSystemAction(RemoteAction action, int actionId) throws RemoteException {
+            public void registerSystemAction(RemoteAction action, int actionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1756,7 +1845,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public void setMagnificationConnection(IMagnificationConnection connection) throws RemoteException {
+            public void setMagnificationConnection(IMagnificationConnection connection)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1768,7 +1858,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public void associateEmbeddedHierarchy(IBinder host, IBinder embedded) throws RemoteException {
+            public void associateEmbeddedHierarchy(IBinder host, IBinder embedded)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1847,7 +1938,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public void setSystemAudioCaptioningEnabled(boolean isEnabled, int userId) throws RemoteException {
+            public void setSystemAudioCaptioningEnabled(boolean isEnabled, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1880,7 +1972,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public void setSystemAudioCaptioningUiEnabled(boolean isEnabled, int userId) throws RemoteException {
+            public void setSystemAudioCaptioningUiEnabled(boolean isEnabled, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1896,7 +1989,12 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public void setAccessibilityWindowAttributes(int displayId, int windowId, int userId, AccessibilityWindowAttributes attributes) throws RemoteException {
+            public void setAccessibilityWindowAttributes(
+                    int displayId,
+                    int windowId,
+                    int userId,
+                    AccessibilityWindowAttributes attributes)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1911,7 +2009,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public boolean registerProxyForDisplay(IAccessibilityServiceClient proxy, int displayId) throws RemoteException {
+            public boolean registerProxyForDisplay(IAccessibilityServiceClient proxy, int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1961,7 +2060,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public boolean startFlashNotificationSequence(String opPkg, int reason, IBinder token) throws RemoteException {
+            public boolean startFlashNotificationSequence(String opPkg, int reason, IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1997,7 +2097,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public boolean startFlashNotificationEvent(String opPkg, int reason, String reasonPkg) throws RemoteException {
+            public boolean startFlashNotificationEvent(String opPkg, int reason, String reasonPkg)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2016,7 +2117,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public boolean isAccessibilityTargetAllowed(String packageName, int uid, int userId) throws RemoteException {
+            public boolean isAccessibilityTargetAllowed(String packageName, int uid, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2035,7 +2137,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public boolean sendRestrictedDialogIntent(String packageName, int uid, int userId) throws RemoteException {
+            public boolean sendRestrictedDialogIntent(String packageName, int uid, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2054,7 +2157,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public boolean isAccessibilityServiceWarningRequired(AccessibilityServiceInfo info) throws RemoteException {
+            public boolean isAccessibilityServiceWarningRequired(AccessibilityServiceInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2071,7 +2175,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public WindowTransformationSpec getWindowTransformationSpec(int windowId) throws RemoteException {
+            public WindowTransformationSpec getWindowTransformationSpec(int windowId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2079,7 +2184,9 @@ public interface IAccessibilityManager extends IInterface {
                     _data.writeInt(windowId);
                     this.mRemote.transact(41, _data, _reply, 0);
                     _reply.readException();
-                    WindowTransformationSpec _result = (WindowTransformationSpec) _reply.readTypedObject(WindowTransformationSpec.CREATOR);
+                    WindowTransformationSpec _result =
+                            (WindowTransformationSpec)
+                                    _reply.readTypedObject(WindowTransformationSpec.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2088,7 +2195,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public void attachAccessibilityOverlayToDisplay(int displayId, SurfaceControl surfaceControl) throws RemoteException {
+            public void attachAccessibilityOverlayToDisplay(
+                    int displayId, SurfaceControl surfaceControl) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2104,7 +2212,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public void notifyQuickSettingsTilesChanged(int userId, List<ComponentName> tileComponentNames) throws RemoteException {
+            public void notifyQuickSettingsTilesChanged(
+                    int userId, List<ComponentName> tileComponentNames) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -2117,7 +2226,9 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public void enableShortcutsForTargets(boolean enable, int shortcutTypes, List<String> shortcutTargets, int userId) throws RemoteException {
+            public void enableShortcutsForTargets(
+                    boolean enable, int shortcutTypes, List<String> shortcutTargets, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -2196,7 +2307,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public boolean semSetColorBlind(boolean enable, float userParameter) throws RemoteException {
+            public boolean semSetColorBlind(boolean enable, float userParameter)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2231,7 +2343,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public boolean semSetMdnieAccessibilityMode(int mode, boolean enable) throws RemoteException {
+            public boolean semSetMdnieAccessibilityMode(int mode, boolean enable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2249,7 +2362,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public boolean semEnableMdnieColorFilter(int color, int opacity) throws RemoteException {
+            public boolean semEnableMdnieColorFilter(int color, int opacity)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2357,7 +2471,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public void semSetTwoFingerGestureRecognitionEnabled(boolean enable) throws RemoteException {
+            public void semSetTwoFingerGestureRecognitionEnabled(boolean enable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2604,7 +2719,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public void semEnableWindowMagnification(int center_x, int center_y) throws RemoteException {
+            public void semEnableWindowMagnification(int center_x, int center_y)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2634,7 +2750,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public void semMoveWindowMagnification(float offsetX, float offsetY) throws RemoteException {
+            public void semMoveWindowMagnification(float offsetX, float offsetY)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2682,7 +2799,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public void semPerformAccessibilityButtonClick(int displayId, int shortcutType, String targetName) throws RemoteException {
+            public void semPerformAccessibilityButtonClick(
+                    int displayId, int shortcutType, String targetName) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2699,7 +2817,8 @@ public interface IAccessibilityManager extends IInterface {
             }
 
             @Override // android.view.accessibility.IAccessibilityManager
-            public void semInjectInputEventToInputFilter(InputEvent event, int policyFlags) throws RemoteException {
+            public void semInjectInputEventToInputFilter(InputEvent event, int policyFlags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2731,144 +2850,195 @@ public interface IAccessibilityManager extends IInterface {
             }
         }
 
-        protected void setPictureInPictureActionReplacingConnection_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_ACCESSIBILITY_DATA, getCallingPid(), getCallingUid());
+        protected void setPictureInPictureActionReplacingConnection_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_ACCESSIBILITY_DATA,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void registerUiTestAutomationService_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.RETRIEVE_WINDOW_CONTENT, getCallingPid(), getCallingUid());
+        protected void registerUiTestAutomationService_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.RETRIEVE_WINDOW_CONTENT, getCallingPid(), getCallingUid());
         }
 
         protected void getWindowToken_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.RETRIEVE_WINDOW_CONTENT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.RETRIEVE_WINDOW_CONTENT, getCallingPid(), getCallingUid());
         }
 
-        protected void notifyAccessibilityButtonClicked_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.STATUS_BAR_SERVICE, getCallingPid(), getCallingUid());
+        protected void notifyAccessibilityButtonClicked_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.STATUS_BAR_SERVICE, getCallingPid(), getCallingUid());
         }
 
-        protected void notifyAccessibilityButtonVisibilityChanged_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.STATUS_BAR_SERVICE, getCallingPid(), getCallingUid());
+        protected void notifyAccessibilityButtonVisibilityChanged_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.STATUS_BAR_SERVICE, getCallingPid(), getCallingUid());
         }
 
         protected void performAccessibilityShortcut_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
         }
 
-        protected void getAccessibilityShortcutTargets_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
+        protected void getAccessibilityShortcutTargets_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
         }
 
         protected void registerSystemAction_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
         }
 
         protected void unregisterSystemAction_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
         }
 
         protected void setMagnificationConnection_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.STATUS_BAR_SERVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.STATUS_BAR_SERVICE, getCallingPid(), getCallingUid());
         }
 
-        protected void setSystemAudioCaptioningEnabled_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.SET_SYSTEM_AUDIO_CAPTION, getCallingPid(), getCallingUid());
+        protected void setSystemAudioCaptioningEnabled_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.SET_SYSTEM_AUDIO_CAPTION, getCallingPid(), getCallingUid());
         }
 
-        protected void setSystemAudioCaptioningUiEnabled_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.SET_SYSTEM_AUDIO_CAPTION, getCallingPid(), getCallingUid());
+        protected void setSystemAudioCaptioningUiEnabled_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.SET_SYSTEM_AUDIO_CAPTION, getCallingPid(), getCallingUid());
         }
 
         protected void registerProxyForDisplay_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void unregisterProxyForDisplay_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CREATE_VIRTUAL_DEVICE, getCallingPid(), getCallingUid());
         }
 
         protected void injectInputEventToInputFilter_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission("android.permission.INJECT_EVENTS", getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    "android.permission.INJECT_EVENTS", getCallingPid(), getCallingUid());
         }
 
-        protected void isAccessibilityServiceWarningRequired_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
+        protected void isAccessibilityServiceWarningRequired_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
         }
 
-        protected void attachAccessibilityOverlayToDisplay_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.INTERNAL_SYSTEM_WINDOW, getCallingPid(), getCallingUid());
+        protected void attachAccessibilityOverlayToDisplay_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.INTERNAL_SYSTEM_WINDOW, getCallingPid(), getCallingUid());
         }
 
-        protected void notifyQuickSettingsTilesChanged_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermissionAllOf(PERMISSIONS_notifyQuickSettingsTilesChanged, getCallingPid(), getCallingUid());
+        protected void notifyQuickSettingsTilesChanged_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermissionAllOf(
+                    PERMISSIONS_notifyQuickSettingsTilesChanged, getCallingPid(), getCallingUid());
         }
 
         protected void enableShortcutsForTargets_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
         }
 
         protected void getA11yFeatureToTileMap_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
         }
 
         protected void semEnableMdnieColorFilter_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CHANGE_DISPLAY_COLOR, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CHANGE_DISPLAY_COLOR, getCallingPid(), getCallingUid());
         }
 
         protected void semDisableMdnieColorFilter_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CHANGE_DISPLAY_COLOR, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CHANGE_DISPLAY_COLOR, getCallingPid(), getCallingUid());
         }
 
         protected void semIsDarkScreenMode_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CHANGE_DISPLAY_COLOR, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CHANGE_DISPLAY_COLOR, getCallingPid(), getCallingUid());
         }
 
         protected void semToggleDarkScreenMode_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CHANGE_DISPLAY_COLOR, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CHANGE_DISPLAY_COLOR, getCallingPid(), getCallingUid());
         }
 
         protected void setScreenReaderEnabled_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
         }
 
         protected void setMagnificationDisactivate_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
         }
 
-        protected void performAccessibilityDirectAccess_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
+        protected void performAccessibilityDirectAccess_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
         }
 
-        protected void semGetWindowMagnificationBounds_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
+        protected void semGetWindowMagnificationBounds_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
         }
 
         protected void semGetWindowMagnificationScale_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
         }
 
         protected void semEnableWindowMagnification_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
         }
 
         protected void semDisableWindowMagnification_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
         }
 
         protected void semMoveWindowMagnification_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
         }
 
-        protected void semIsWindowMagnificationEnabled_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
+        protected void semIsWindowMagnificationEnabled_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
         }
 
         protected void isActivatedMagnification_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_ACCESSIBILITY, getCallingPid(), getCallingUid());
         }
 
-        protected void semInjectInputEventToInputFilter_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission("android.permission.INJECT_EVENTS", getCallingPid(), getCallingUid());
+        protected void semInjectInputEventToInputFilter_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    "android.permission.INJECT_EVENTS", getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder
@@ -2878,21 +3048,24 @@ public interface IAccessibilityManager extends IInterface {
     }
 
     public static class WindowTransformationSpec implements Parcelable {
-        public static final Parcelable.Creator<WindowTransformationSpec> CREATOR = new Parcelable.Creator<WindowTransformationSpec>() { // from class: android.view.accessibility.IAccessibilityManager.WindowTransformationSpec.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public WindowTransformationSpec createFromParcel(Parcel _aidl_source) {
-                WindowTransformationSpec _aidl_out = new WindowTransformationSpec();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<WindowTransformationSpec> CREATOR =
+                new Parcelable.Creator<
+                        WindowTransformationSpec>() { // from class:
+                                                      // android.view.accessibility.IAccessibilityManager.WindowTransformationSpec.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public WindowTransformationSpec createFromParcel(Parcel _aidl_source) {
+                        WindowTransformationSpec _aidl_out = new WindowTransformationSpec();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public WindowTransformationSpec[] newArray(int _aidl_size) {
-                return new WindowTransformationSpec[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public WindowTransformationSpec[] newArray(int _aidl_size) {
+                        return new WindowTransformationSpec[_aidl_size];
+                    }
+                };
         public MagnificationSpec magnificationSpec;
         public float[] transformationMatrix;
 
@@ -2929,7 +3102,9 @@ public interface IAccessibilityManager extends IInterface {
                     }
                     _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 } else {
-                    this.magnificationSpec = (MagnificationSpec) _aidl_parcel.readTypedObject(MagnificationSpec.CREATOR);
+                    this.magnificationSpec =
+                            (MagnificationSpec)
+                                    _aidl_parcel.readTypedObject(MagnificationSpec.CREATOR);
                     if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
                     }

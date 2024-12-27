@@ -8,25 +8,32 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IRadioNetworkIndication extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$radio$network$IRadioNetworkIndication".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$radio$network$IRadioNetworkIndication".replace('$', '.');
     public static final String HASH = "c45c122528c07c449ea08f6eacaace17bb7abc38";
     public static final int VERSION = 3;
 
-    void barringInfoChanged(int i, CellIdentity cellIdentity, BarringInfo[] barringInfoArr) throws RemoteException;
+    void barringInfoChanged(int i, CellIdentity cellIdentity, BarringInfo[] barringInfoArr)
+            throws RemoteException;
 
     void cdmaPrlChanged(int i, int i2) throws RemoteException;
 
     void cellInfoList(int i, CellInfo[] cellInfoArr) throws RemoteException;
 
-    void cellularIdentifierDisclosed(int i, CellularIdentifierDisclosure cellularIdentifierDisclosure) throws RemoteException;
+    void cellularIdentifierDisclosed(
+            int i, CellularIdentifierDisclosure cellularIdentifierDisclosure)
+            throws RemoteException;
 
-    void currentLinkCapacityEstimate(int i, LinkCapacityEstimate linkCapacityEstimate) throws RemoteException;
+    void currentLinkCapacityEstimate(int i, LinkCapacityEstimate linkCapacityEstimate)
+            throws RemoteException;
 
-    void currentPhysicalChannelConfigs(int i, PhysicalChannelConfig[] physicalChannelConfigArr) throws RemoteException;
+    void currentPhysicalChannelConfigs(int i, PhysicalChannelConfig[] physicalChannelConfigArr)
+            throws RemoteException;
 
     void currentSignalStrength(int i, SignalStrength signalStrength) throws RemoteException;
 
-    void emergencyNetworkScanResult(int i, EmergencyRegResult emergencyRegResult) throws RemoteException;
+    void emergencyNetworkScanResult(int i, EmergencyRegResult emergencyRegResult)
+            throws RemoteException;
 
     String getInterfaceHash() throws RemoteException;
 
@@ -40,11 +47,13 @@ public interface IRadioNetworkIndication extends IInterface {
 
     void nitzTimeReceived(int i, String str, long j, long j2) throws RemoteException;
 
-    void registrationFailed(int i, CellIdentity cellIdentity, String str, int i2, int i3, int i4) throws RemoteException;
+    void registrationFailed(int i, CellIdentity cellIdentity, String str, int i2, int i3, int i4)
+            throws RemoteException;
 
     void restrictedStateChanged(int i, int i2) throws RemoteException;
 
-    void securityAlgorithmsUpdated(int i, SecurityAlgorithmUpdate securityAlgorithmUpdate) throws RemoteException;
+    void securityAlgorithmsUpdated(int i, SecurityAlgorithmUpdate securityAlgorithmUpdate)
+            throws RemoteException;
 
     void suppSvcNotify(int i, SuppSvcNotification suppSvcNotification) throws RemoteException;
 
@@ -52,72 +61,71 @@ public interface IRadioNetworkIndication extends IInterface {
 
     public static class Default implements IRadioNetworkIndication {
         @Override // android.hardware.radio.network.IRadioNetworkIndication
-        public void barringInfoChanged(int type, CellIdentity cellIdentity, BarringInfo[] barringInfos) throws RemoteException {
-        }
+        public void barringInfoChanged(
+                int type, CellIdentity cellIdentity, BarringInfo[] barringInfos)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetworkIndication
-        public void cdmaPrlChanged(int type, int version) throws RemoteException {
-        }
+        public void cdmaPrlChanged(int type, int version) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetworkIndication
-        public void cellInfoList(int type, CellInfo[] records) throws RemoteException {
-        }
+        public void cellInfoList(int type, CellInfo[] records) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetworkIndication
-        public void currentLinkCapacityEstimate(int type, LinkCapacityEstimate lce) throws RemoteException {
-        }
+        public void currentLinkCapacityEstimate(int type, LinkCapacityEstimate lce)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetworkIndication
-        public void currentPhysicalChannelConfigs(int type, PhysicalChannelConfig[] configs) throws RemoteException {
-        }
+        public void currentPhysicalChannelConfigs(int type, PhysicalChannelConfig[] configs)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetworkIndication
-        public void currentSignalStrength(int type, SignalStrength signalStrength) throws RemoteException {
-        }
+        public void currentSignalStrength(int type, SignalStrength signalStrength)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetworkIndication
-        public void imsNetworkStateChanged(int type) throws RemoteException {
-        }
+        public void imsNetworkStateChanged(int type) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetworkIndication
-        public void networkScanResult(int type, NetworkScanResult result) throws RemoteException {
-        }
+        public void networkScanResult(int type, NetworkScanResult result) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetworkIndication
-        public void networkStateChanged(int type) throws RemoteException {
-        }
+        public void networkStateChanged(int type) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetworkIndication
-        public void nitzTimeReceived(int type, String nitzTime, long receivedTimeMs, long ageMs) throws RemoteException {
-        }
+        public void nitzTimeReceived(int type, String nitzTime, long receivedTimeMs, long ageMs)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetworkIndication
-        public void registrationFailed(int type, CellIdentity cellIdentity, String chosenPlmn, int domain, int causeCode, int additionalCauseCode) throws RemoteException {
-        }
+        public void registrationFailed(
+                int type,
+                CellIdentity cellIdentity,
+                String chosenPlmn,
+                int domain,
+                int causeCode,
+                int additionalCauseCode)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetworkIndication
-        public void restrictedStateChanged(int type, int state) throws RemoteException {
-        }
+        public void restrictedStateChanged(int type, int state) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetworkIndication
-        public void suppSvcNotify(int type, SuppSvcNotification suppSvc) throws RemoteException {
-        }
+        public void suppSvcNotify(int type, SuppSvcNotification suppSvc) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetworkIndication
-        public void voiceRadioTechChanged(int type, int rat) throws RemoteException {
-        }
+        public void voiceRadioTechChanged(int type, int rat) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetworkIndication
-        public void emergencyNetworkScanResult(int type, EmergencyRegResult result) throws RemoteException {
-        }
+        public void emergencyNetworkScanResult(int type, EmergencyRegResult result)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetworkIndication
-        public void cellularIdentifierDisclosed(int type, CellularIdentifierDisclosure disclosure) throws RemoteException {
-        }
+        public void cellularIdentifierDisclosed(int type, CellularIdentifierDisclosure disclosure)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetworkIndication
-        public void securityAlgorithmsUpdated(int type, SecurityAlgorithmUpdate securityAlgorithmUpdate) throws RemoteException {
-        }
+        public void securityAlgorithmsUpdated(
+                int type, SecurityAlgorithmUpdate securityAlgorithmUpdate) throws RemoteException {}
 
         @Override // android.hardware.radio.network.IRadioNetworkIndication
         public int getInterfaceVersion() {
@@ -135,7 +143,7 @@ public interface IRadioNetworkIndication extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRadioNetworkIndication {
+    public abstract static class Stub extends Binder implements IRadioNetworkIndication {
         static final int TRANSACTION_barringInfoChanged = 1;
         static final int TRANSACTION_cdmaPrlChanged = 2;
         static final int TRANSACTION_cellInfoList = 3;
@@ -178,7 +186,8 @@ public interface IRadioNetworkIndication extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -201,7 +210,8 @@ public interface IRadioNetworkIndication extends IInterface {
                 case 1:
                     int _arg0 = data.readInt();
                     CellIdentity _arg1 = (CellIdentity) data.readTypedObject(CellIdentity.CREATOR);
-                    BarringInfo[] _arg2 = (BarringInfo[]) data.createTypedArray(BarringInfo.CREATOR);
+                    BarringInfo[] _arg2 =
+                            (BarringInfo[]) data.createTypedArray(BarringInfo.CREATOR);
                     data.enforceNoDataAvail();
                     barringInfoChanged(_arg0, _arg1, _arg2);
                     return true;
@@ -219,19 +229,24 @@ public interface IRadioNetworkIndication extends IInterface {
                     return true;
                 case 4:
                     int _arg04 = data.readInt();
-                    LinkCapacityEstimate _arg14 = (LinkCapacityEstimate) data.readTypedObject(LinkCapacityEstimate.CREATOR);
+                    LinkCapacityEstimate _arg14 =
+                            (LinkCapacityEstimate)
+                                    data.readTypedObject(LinkCapacityEstimate.CREATOR);
                     data.enforceNoDataAvail();
                     currentLinkCapacityEstimate(_arg04, _arg14);
                     return true;
                 case 5:
                     int _arg05 = data.readInt();
-                    PhysicalChannelConfig[] _arg15 = (PhysicalChannelConfig[]) data.createTypedArray(PhysicalChannelConfig.CREATOR);
+                    PhysicalChannelConfig[] _arg15 =
+                            (PhysicalChannelConfig[])
+                                    data.createTypedArray(PhysicalChannelConfig.CREATOR);
                     data.enforceNoDataAvail();
                     currentPhysicalChannelConfigs(_arg05, _arg15);
                     return true;
                 case 6:
                     int _arg06 = data.readInt();
-                    SignalStrength _arg16 = (SignalStrength) data.readTypedObject(SignalStrength.CREATOR);
+                    SignalStrength _arg16 =
+                            (SignalStrength) data.readTypedObject(SignalStrength.CREATOR);
                     data.enforceNoDataAvail();
                     currentSignalStrength(_arg06, _arg16);
                     return true;
@@ -242,7 +257,8 @@ public interface IRadioNetworkIndication extends IInterface {
                     return true;
                 case 8:
                     int _arg08 = data.readInt();
-                    NetworkScanResult _arg17 = (NetworkScanResult) data.readTypedObject(NetworkScanResult.CREATOR);
+                    NetworkScanResult _arg17 =
+                            (NetworkScanResult) data.readTypedObject(NetworkScanResult.CREATOR);
                     data.enforceNoDataAvail();
                     networkScanResult(_arg08, _arg17);
                     return true;
@@ -277,7 +293,8 @@ public interface IRadioNetworkIndication extends IInterface {
                     return true;
                 case 13:
                     int _arg013 = data.readInt();
-                    SuppSvcNotification _arg111 = (SuppSvcNotification) data.readTypedObject(SuppSvcNotification.CREATOR);
+                    SuppSvcNotification _arg111 =
+                            (SuppSvcNotification) data.readTypedObject(SuppSvcNotification.CREATOR);
                     data.enforceNoDataAvail();
                     suppSvcNotify(_arg013, _arg111);
                     return true;
@@ -289,19 +306,24 @@ public interface IRadioNetworkIndication extends IInterface {
                     return true;
                 case 15:
                     int _arg015 = data.readInt();
-                    EmergencyRegResult _arg113 = (EmergencyRegResult) data.readTypedObject(EmergencyRegResult.CREATOR);
+                    EmergencyRegResult _arg113 =
+                            (EmergencyRegResult) data.readTypedObject(EmergencyRegResult.CREATOR);
                     data.enforceNoDataAvail();
                     emergencyNetworkScanResult(_arg015, _arg113);
                     return true;
                 case 16:
                     int _arg016 = data.readInt();
-                    CellularIdentifierDisclosure _arg114 = (CellularIdentifierDisclosure) data.readTypedObject(CellularIdentifierDisclosure.CREATOR);
+                    CellularIdentifierDisclosure _arg114 =
+                            (CellularIdentifierDisclosure)
+                                    data.readTypedObject(CellularIdentifierDisclosure.CREATOR);
                     data.enforceNoDataAvail();
                     cellularIdentifierDisclosed(_arg016, _arg114);
                     return true;
                 case 17:
                     int _arg017 = data.readInt();
-                    SecurityAlgorithmUpdate _arg115 = (SecurityAlgorithmUpdate) data.readTypedObject(SecurityAlgorithmUpdate.CREATOR);
+                    SecurityAlgorithmUpdate _arg115 =
+                            (SecurityAlgorithmUpdate)
+                                    data.readTypedObject(SecurityAlgorithmUpdate.CREATOR);
                     data.enforceNoDataAvail();
                     securityAlgorithmsUpdated(_arg017, _arg115);
                     return true;
@@ -329,7 +351,9 @@ public interface IRadioNetworkIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetworkIndication
-            public void barringInfoChanged(int type, CellIdentity cellIdentity, BarringInfo[] barringInfos) throws RemoteException {
+            public void barringInfoChanged(
+                    int type, CellIdentity cellIdentity, BarringInfo[] barringInfos)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -378,7 +402,8 @@ public interface IRadioNetworkIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetworkIndication
-            public void currentLinkCapacityEstimate(int type, LinkCapacityEstimate lce) throws RemoteException {
+            public void currentLinkCapacityEstimate(int type, LinkCapacityEstimate lce)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -386,7 +411,8 @@ public interface IRadioNetworkIndication extends IInterface {
                     _data.writeTypedObject(lce, 0);
                     boolean _status = this.mRemote.transact(4, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method currentLinkCapacityEstimate is unimplemented.");
+                        throw new RemoteException(
+                                "Method currentLinkCapacityEstimate is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -394,7 +420,8 @@ public interface IRadioNetworkIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetworkIndication
-            public void currentPhysicalChannelConfigs(int type, PhysicalChannelConfig[] configs) throws RemoteException {
+            public void currentPhysicalChannelConfigs(int type, PhysicalChannelConfig[] configs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -402,7 +429,8 @@ public interface IRadioNetworkIndication extends IInterface {
                     _data.writeTypedArray(configs, 0);
                     boolean _status = this.mRemote.transact(5, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method currentPhysicalChannelConfigs is unimplemented.");
+                        throw new RemoteException(
+                                "Method currentPhysicalChannelConfigs is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -410,7 +438,8 @@ public interface IRadioNetworkIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetworkIndication
-            public void currentSignalStrength(int type, SignalStrength signalStrength) throws RemoteException {
+            public void currentSignalStrength(int type, SignalStrength signalStrength)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -433,7 +462,8 @@ public interface IRadioNetworkIndication extends IInterface {
                     _data.writeInt(type);
                     boolean _status = this.mRemote.transact(7, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method imsNetworkStateChanged is unimplemented.");
+                        throw new RemoteException(
+                                "Method imsNetworkStateChanged is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -441,7 +471,8 @@ public interface IRadioNetworkIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetworkIndication
-            public void networkScanResult(int type, NetworkScanResult result) throws RemoteException {
+            public void networkScanResult(int type, NetworkScanResult result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -472,7 +503,8 @@ public interface IRadioNetworkIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetworkIndication
-            public void nitzTimeReceived(int type, String nitzTime, long receivedTimeMs, long ageMs) throws RemoteException {
+            public void nitzTimeReceived(int type, String nitzTime, long receivedTimeMs, long ageMs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -490,7 +522,14 @@ public interface IRadioNetworkIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetworkIndication
-            public void registrationFailed(int type, CellIdentity cellIdentity, String chosenPlmn, int domain, int causeCode, int additionalCauseCode) throws RemoteException {
+            public void registrationFailed(
+                    int type,
+                    CellIdentity cellIdentity,
+                    String chosenPlmn,
+                    int domain,
+                    int causeCode,
+                    int additionalCauseCode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -518,7 +557,8 @@ public interface IRadioNetworkIndication extends IInterface {
                     _data.writeInt(state);
                     boolean _status = this.mRemote.transact(12, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method restrictedStateChanged is unimplemented.");
+                        throw new RemoteException(
+                                "Method restrictedStateChanged is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -526,7 +566,8 @@ public interface IRadioNetworkIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetworkIndication
-            public void suppSvcNotify(int type, SuppSvcNotification suppSvc) throws RemoteException {
+            public void suppSvcNotify(int type, SuppSvcNotification suppSvc)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -558,7 +599,8 @@ public interface IRadioNetworkIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetworkIndication
-            public void emergencyNetworkScanResult(int type, EmergencyRegResult result) throws RemoteException {
+            public void emergencyNetworkScanResult(int type, EmergencyRegResult result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -566,7 +608,8 @@ public interface IRadioNetworkIndication extends IInterface {
                     _data.writeTypedObject(result, 0);
                     boolean _status = this.mRemote.transact(15, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method emergencyNetworkScanResult is unimplemented.");
+                        throw new RemoteException(
+                                "Method emergencyNetworkScanResult is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -574,7 +617,8 @@ public interface IRadioNetworkIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetworkIndication
-            public void cellularIdentifierDisclosed(int type, CellularIdentifierDisclosure disclosure) throws RemoteException {
+            public void cellularIdentifierDisclosed(
+                    int type, CellularIdentifierDisclosure disclosure) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -582,7 +626,8 @@ public interface IRadioNetworkIndication extends IInterface {
                     _data.writeTypedObject(disclosure, 0);
                     boolean _status = this.mRemote.transact(16, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method cellularIdentifierDisclosed is unimplemented.");
+                        throw new RemoteException(
+                                "Method cellularIdentifierDisclosed is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -590,7 +635,9 @@ public interface IRadioNetworkIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.network.IRadioNetworkIndication
-            public void securityAlgorithmsUpdated(int type, SecurityAlgorithmUpdate securityAlgorithmUpdate) throws RemoteException {
+            public void securityAlgorithmsUpdated(
+                    int type, SecurityAlgorithmUpdate securityAlgorithmUpdate)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -598,7 +645,8 @@ public interface IRadioNetworkIndication extends IInterface {
                     _data.writeTypedObject(securityAlgorithmUpdate, 0);
                     boolean _status = this.mRemote.transact(17, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method securityAlgorithmsUpdated is unimplemented.");
+                        throw new RemoteException(
+                                "Method securityAlgorithmsUpdated is unimplemented.");
                     }
                 } finally {
                     _data.recycle();

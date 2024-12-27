@@ -12,11 +12,13 @@ public interface IPaymentManager extends IInterface {
 
     byte[] getMeasurementFile() throws RemoteException;
 
-    PaymentTZServiceCommnInfo registerSPayFW(PaymentTZServiceConfig paymentTZServiceConfig) throws RemoteException;
+    PaymentTZServiceCommnInfo registerSPayFW(PaymentTZServiceConfig paymentTZServiceConfig)
+            throws RemoteException;
 
     public static class Default implements IPaymentManager {
         @Override // android.spay.IPaymentManager
-        public PaymentTZServiceCommnInfo registerSPayFW(PaymentTZServiceConfig config) throws RemoteException {
+        public PaymentTZServiceCommnInfo registerSPayFW(PaymentTZServiceConfig config)
+                throws RemoteException {
             return null;
         }
 
@@ -31,7 +33,7 @@ public interface IPaymentManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPaymentManager {
+    public abstract static class Stub extends Binder implements IPaymentManager {
         static final int TRANSACTION_getMeasurementFile = 2;
         static final int TRANSACTION_registerSPayFW = 1;
 
@@ -72,7 +74,8 @@ public interface IPaymentManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IPaymentManager.DESCRIPTOR);
             }
@@ -82,7 +85,9 @@ public interface IPaymentManager extends IInterface {
             }
             switch (code) {
                 case 1:
-                    PaymentTZServiceConfig _arg0 = (PaymentTZServiceConfig) data.readTypedObject(PaymentTZServiceConfig.CREATOR);
+                    PaymentTZServiceConfig _arg0 =
+                            (PaymentTZServiceConfig)
+                                    data.readTypedObject(PaymentTZServiceConfig.CREATOR);
                     data.enforceNoDataAvail();
                     PaymentTZServiceCommnInfo _result = registerSPayFW(_arg0);
                     reply.writeNoException();
@@ -115,7 +120,8 @@ public interface IPaymentManager extends IInterface {
             }
 
             @Override // android.spay.IPaymentManager
-            public PaymentTZServiceCommnInfo registerSPayFW(PaymentTZServiceConfig config) throws RemoteException {
+            public PaymentTZServiceCommnInfo registerSPayFW(PaymentTZServiceConfig config)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -123,7 +129,9 @@ public interface IPaymentManager extends IInterface {
                     _data.writeTypedObject(config, 0);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    PaymentTZServiceCommnInfo _result = (PaymentTZServiceCommnInfo) _reply.readTypedObject(PaymentTZServiceCommnInfo.CREATOR);
+                    PaymentTZServiceCommnInfo _result =
+                            (PaymentTZServiceCommnInfo)
+                                    _reply.readTypedObject(PaymentTZServiceCommnInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

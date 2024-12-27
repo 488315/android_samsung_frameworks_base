@@ -16,7 +16,8 @@ public class WindowTokenClientController {
     private static final String TAG = WindowTokenClientController.class.getSimpleName();
     private static WindowTokenClientController sController;
     private final Object mLock = new Object();
-    private final IApplicationThread mAppThread = ActivityThread.currentActivityThread().getApplicationThread();
+    private final IApplicationThread mAppThread =
+            ActivityThread.currentActivityThread().getApplicationThread();
     private final ArrayMap<IBinder, WindowTokenClient> mWindowTokenClientMap = new ArrayMap<>();
 
     public static WindowTokenClientController getInstance() {
@@ -40,8 +41,7 @@ public class WindowTokenClientController {
         return new WindowTokenClientController();
     }
 
-    private WindowTokenClientController() {
-    }
+    private WindowTokenClientController() {}
 
     public Context getWindowContext(IBinder clientToken) {
         WindowTokenClient windowTokenClient;
@@ -54,9 +54,13 @@ public class WindowTokenClientController {
         return null;
     }
 
-    public boolean attachToDisplayArea(WindowTokenClient client, int type, int displayId, Bundle options) {
+    public boolean attachToDisplayArea(
+            WindowTokenClient client, int type, int displayId, Bundle options) {
         try {
-            WindowContextInfo info = getWindowManagerService().attachWindowContextToDisplayArea(this.mAppThread, client, type, displayId, options);
+            WindowContextInfo info =
+                    getWindowManagerService()
+                            .attachWindowContextToDisplayArea(
+                                    this.mAppThread, client, type, displayId, options);
             if (info == null) {
                 return false;
             }
@@ -73,7 +77,8 @@ public class WindowTokenClientController {
             return false;
         }
         try {
-            WindowContextInfo info = wms.attachWindowContextToDisplayContent(this.mAppThread, client, displayId);
+            WindowContextInfo info =
+                    wms.attachWindowContextToDisplayContent(this.mAppThread, client, displayId);
             if (info == null) {
                 return false;
             }
@@ -86,7 +91,9 @@ public class WindowTokenClientController {
 
     public boolean attachToWindowToken(WindowTokenClient client, IBinder windowToken) {
         try {
-            WindowContextInfo info = getWindowManagerService().attachWindowContextToWindowToken(this.mAppThread, client, windowToken);
+            WindowContextInfo info =
+                    getWindowManagerService()
+                            .attachWindowContextToWindowToken(this.mAppThread, client, windowToken);
             if (info == null) {
                 return false;
             }
@@ -110,7 +117,8 @@ public class WindowTokenClientController {
         }
     }
 
-    private void onWindowContextTokenAttached(WindowTokenClient client, WindowContextInfo info, boolean shouldReportConfigChange) {
+    private void onWindowContextTokenAttached(
+            WindowTokenClient client, WindowContextInfo info, boolean shouldReportConfigChange) {
         synchronized (this.mLock) {
             this.mWindowTokenClientMap.put(client, client);
         }

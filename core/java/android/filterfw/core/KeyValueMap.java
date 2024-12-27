@@ -8,11 +8,18 @@ import java.util.Map;
 public class KeyValueMap extends HashMap<String, Object> {
     public void setKeyValues(Object... keyValues) {
         if (keyValues.length % 2 != 0) {
-            throw new RuntimeException("Key-Value arguments passed into setKeyValues must be an alternating list of keys and values!");
+            throw new RuntimeException(
+                    "Key-Value arguments passed into setKeyValues must be an alternating list of"
+                            + " keys and values!");
         }
         for (int i = 0; i < keyValues.length; i += 2) {
             if (!(keyValues[i] instanceof String)) {
-                throw new RuntimeException("Key-value argument " + i + " must be a key of type String, but found an object of type " + keyValues[i].getClass() + "!");
+                throw new RuntimeException(
+                        "Key-value argument "
+                                + i
+                                + " must be a key of type String, but found an object of type "
+                                + keyValues[i].getClass()
+                                + "!");
             }
             String key = (String) keyValues[i];
             Object value = keyValues[i + 1];

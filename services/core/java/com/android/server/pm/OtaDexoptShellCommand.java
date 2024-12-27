@@ -2,8 +2,10 @@ package com.android.server.pm;
 
 import android.os.RemoteException;
 import android.os.ShellCommand;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.UiModeManagerService$13$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 import java.util.Locale;
 
@@ -99,10 +101,12 @@ public final class OtaDexoptShellCommand extends ShellCommand {
             if (c != 5) {
                 return handleDefaultCommands(str);
             }
-            getOutPrintWriter().format(Locale.ROOT, "%.2f", Float.valueOf(this.mInterface.getProgress()));
+            getOutPrintWriter()
+                    .format(Locale.ROOT, "%.2f", Float.valueOf(this.mInterface.getProgress()));
             return 0;
         } catch (RemoteException e) {
-            UiModeManagerService$13$$ExternalSyntheticOutline0.m("Remote exception: ", e, outPrintWriter);
+            UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                    "Remote exception: ", e, outPrintWriter);
             return -1;
         }
     }
@@ -113,8 +117,18 @@ public final class OtaDexoptShellCommand extends ShellCommand {
         outPrintWriter.println("  help");
         outPrintWriter.println("    Print this help text.");
         outPrintWriter.println("");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  prepare", "    Prepare an OTA dexopt pass, collecting all packages.", "  done", "    Replies whether the OTA is complete or not.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  step", "    OTA dexopt the next package.", "  next", "    Get parameters for OTA dexopt of the next package.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  prepare",
+                "    Prepare an OTA dexopt pass, collecting all packages.",
+                "  done",
+                "    Replies whether the OTA is complete or not.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  step",
+                "    OTA dexopt the next package.",
+                "  next",
+                "    Get parameters for OTA dexopt of the next package.");
         outPrintWriter.println("  cleanup");
         outPrintWriter.println("    Clean up internal states. Ends an OTA session.");
     }

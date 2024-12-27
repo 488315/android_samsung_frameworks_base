@@ -17,8 +17,7 @@ public final class StateControllerProto {
         public static final long APP_STATE_TRACKER = 1146756268033L;
         public static final long TRACKED_JOBS = 2246267895810L;
 
-        public BackgroundJobsController() {
-        }
+        public BackgroundJobsController() {}
 
         public final class TrackedJob {
             public static final long ARE_CONSTRAINTS_SATISFIED = 1133871366151L;
@@ -29,8 +28,7 @@ public final class StateControllerProto {
             public static final long SOURCE_PACKAGE_NAME = 1138166333443L;
             public static final long SOURCE_UID = 1120986464258L;
 
-            public TrackedJob() {
-            }
+            public TrackedJob() {}
         }
     }
 
@@ -41,15 +39,13 @@ public final class StateControllerProto {
         public static final long LAST_BROADCAST_SEQUENCE_NUMBER = 1120986464260L;
         public static final long TRACKED_JOBS = 2246267895813L;
 
-        public BatteryController() {
-        }
+        public BatteryController() {}
 
         public final class TrackedJob {
             public static final long INFO = 1146756268033L;
             public static final long SOURCE_UID = 1120986464258L;
 
-            public TrackedJob() {
-            }
+            public TrackedJob() {}
         }
     }
 
@@ -58,16 +54,14 @@ public final class StateControllerProto {
         public static final long REQUESTED_STANDBY_EXCEPTION_UIDS = 2220498092035L;
         public static final long TRACKED_JOBS = 2246267895810L;
 
-        public ConnectivityController() {
-        }
+        public ConnectivityController() {}
 
         public final class TrackedJob {
             public static final long INFO = 1146756268033L;
             public static final long REQUIRED_NETWORK = 1146756268035L;
             public static final long SOURCE_UID = 1120986464258L;
 
-            public TrackedJob() {
-            }
+            public TrackedJob() {}
         }
     }
 
@@ -75,31 +69,27 @@ public final class StateControllerProto {
         public static final long OBSERVERS = 2246267895810L;
         public static final long TRACKED_JOBS = 2246267895809L;
 
-        public ContentObserverController() {
-        }
+        public ContentObserverController() {}
 
         public final class TrackedJob {
             public static final long INFO = 1146756268033L;
             public static final long SOURCE_UID = 1120986464258L;
 
-            public TrackedJob() {
-            }
+            public TrackedJob() {}
         }
 
         public final class Observer {
             public static final long TRIGGERS = 2246267895810L;
             public static final long USER_ID = 1120986464257L;
 
-            public Observer() {
-            }
+            public Observer() {}
 
             public final class TriggerContentData {
                 public static final long FLAGS = 1120986464258L;
                 public static final long JOBS = 2246267895811L;
                 public static final long URI = 1138166333441L;
 
-                public TriggerContentData() {
-                }
+                public TriggerContentData() {}
 
                 public final class JobInstance {
                     public static final long CHANGED_AUTHORITIES = 2237677961221L;
@@ -109,8 +99,7 @@ public final class StateControllerProto {
                     public static final long TRIGGER_CONTENT_MAX_DELAY_MS = 1112396529668L;
                     public static final long TRIGGER_CONTENT_UPDATE_DELAY_MS = 1112396529667L;
 
-                    public JobInstance() {
-                    }
+                    public JobInstance() {}
                 }
             }
         }
@@ -120,8 +109,7 @@ public final class StateControllerProto {
         public static final long IS_DEVICE_IDLE_MODE = 1133871366145L;
         public static final long TRACKED_JOBS = 2246267895810L;
 
-        public DeviceIdleJobsController() {
-        }
+        public DeviceIdleJobsController() {}
 
         public final class TrackedJob {
             public static final long ARE_CONSTRAINTS_SATISFIED = 1133871366148L;
@@ -131,8 +119,7 @@ public final class StateControllerProto {
             public static final long SOURCE_PACKAGE_NAME = 1138166333443L;
             public static final long SOURCE_UID = 1120986464258L;
 
-            public TrackedJob() {
-            }
+            public TrackedJob() {}
         }
     }
 
@@ -141,30 +128,26 @@ public final class StateControllerProto {
         public static final long IS_IDLE = 1133871366145L;
         public static final long TRACKED_JOBS = 2246267895810L;
 
-        public IdleController() {
-        }
+        public IdleController() {}
 
         public final class TrackedJob {
             public static final long INFO = 1146756268033L;
             public static final long SOURCE_UID = 1120986464258L;
 
-            public TrackedJob() {
-            }
+            public TrackedJob() {}
         }
 
         public final class IdlenessTracker {
             public static final long CAR_IDLENESS_TRACKER = 1146756268034L;
             public static final long DEVICE_IDLENESS_TRACKER = 1146756268033L;
 
-            public IdlenessTracker() {
-            }
+            public IdlenessTracker() {}
 
             public final class CarIdlenessTracker {
                 public static final long IS_GARAGE_MODE_ON = 1133871366146L;
                 public static final long IS_IDLE = 1133871366145L;
 
-                public CarIdlenessTracker() {
-                }
+                public CarIdlenessTracker() {}
             }
 
             public final class DeviceIdlenessTracker {
@@ -173,8 +156,7 @@ public final class StateControllerProto {
                 public static final long IS_SCREEN_ON = 1133871366146L;
                 public static final long PROJECTION_ACTIVE = 1133871366149L;
 
-                public DeviceIdlenessTracker() {
-                }
+                public DeviceIdlenessTracker() {}
             }
         }
     }
@@ -188,8 +170,7 @@ public final class StateControllerProto {
         public static final long TRACKED_JOBS = 2246267895812L;
         public static final long UID_TO_PACKAGE_CACHE = 2246267895815L;
 
-        public QuotaController() {
-        }
+        public QuotaController() {}
 
         public final class TrackedJob {
             public static final long EFFECTIVE_STANDBY_BUCKET = 1159641169923L;
@@ -201,16 +182,14 @@ public final class StateControllerProto {
             public static final long REMAINING_QUOTA_MS = 1112396529670L;
             public static final long SOURCE_UID = 1120986464258L;
 
-            public TrackedJob() {
-            }
+            public TrackedJob() {}
         }
 
         public final class AlarmListener {
             public static final long IS_WAITING = 1133871366145L;
             public static final long TRIGGER_TIME_ELAPSED = 1112396529666L;
 
-            public AlarmListener() {
-            }
+            public AlarmListener() {}
         }
 
         public final class ExecutionStats {
@@ -230,16 +209,14 @@ public final class StateControllerProto {
             public static final long STANDBY_BUCKET = 1159641169921L;
             public static final long WINDOW_SIZE_MS = 1112396529667L;
 
-            public ExecutionStats() {
-            }
+            public ExecutionStats() {}
         }
 
         public final class Package {
             public static final long NAME = 1138166333442L;
             public static final long USER_ID = 1120986464257L;
 
-            public Package() {
-            }
+            public Package() {}
         }
 
         public final class TimingSession {
@@ -247,8 +224,7 @@ public final class StateControllerProto {
             public static final long END_TIME_ELAPSED = 1112396529666L;
             public static final long START_TIME_ELAPSED = 1112396529665L;
 
-            public TimingSession() {
-            }
+            public TimingSession() {}
         }
 
         public final class Timer {
@@ -258,8 +234,7 @@ public final class StateControllerProto {
             public static final long RUNNING_JOBS = 2246267895813L;
             public static final long START_TIME_ELAPSED = 1112396529667L;
 
-            public Timer() {
-            }
+            public Timer() {}
         }
 
         public final class TopAppTimer {
@@ -268,8 +243,7 @@ public final class StateControllerProto {
             public static final long PKG = 1146756268033L;
             public static final long START_TIME_ELAPSED = 1112396529667L;
 
-            public TopAppTimer() {
-            }
+            public TopAppTimer() {}
         }
 
         public final class PackageStats {
@@ -279,31 +253,27 @@ public final class StateControllerProto {
             public static final long SAVED_SESSIONS = 2246267895811L;
             public static final long TIMER = 1146756268034L;
 
-            public PackageStats() {
-            }
+            public PackageStats() {}
         }
 
         public final class UidPackageMapping {
             public static final long PACKAGE_NAMES = 2237677961218L;
             public static final long UID = 1120986464257L;
 
-            public UidPackageMapping() {
-            }
+            public UidPackageMapping() {}
         }
 
         public final class InQuotaAlarmListener {
             public static final long ALARMS = 2246267895810L;
             public static final long TRIGGER_TIME_ELAPSED = 1112396529665L;
 
-            public InQuotaAlarmListener() {
-            }
+            public InQuotaAlarmListener() {}
 
             public final class Alarm {
                 public static final long IN_QUOTA_TIME_ELAPSED = 1112396529666L;
                 public static final long PKG = 1146756268033L;
 
-                public Alarm() {
-                }
+                public Alarm() {}
             }
         }
     }
@@ -313,15 +283,13 @@ public final class StateControllerProto {
         public static final long LAST_BROADCAST_SEQUENCE_NUMBER = 1120986464258L;
         public static final long TRACKED_JOBS = 2246267895811L;
 
-        public StorageController() {
-        }
+        public StorageController() {}
 
         public final class TrackedJob {
             public static final long INFO = 1146756268033L;
             public static final long SOURCE_UID = 1120986464258L;
 
-            public TrackedJob() {
-            }
+            public TrackedJob() {}
         }
     }
 
@@ -331,8 +299,7 @@ public final class StateControllerProto {
         public static final long TIME_UNTIL_NEXT_DELAY_ALARM_MS = 1112396529666L;
         public static final long TRACKED_JOBS = 2246267895812L;
 
-        public TimeController() {
-        }
+        public TimeController() {}
 
         public final class TrackedJob {
             public static final long DELAY_TIME_REMAINING_MS = 1112396529668L;
@@ -342,24 +309,21 @@ public final class StateControllerProto {
             public static final long SOURCE_UID = 1120986464258L;
             public static final long TIME_REMAINING_UNTIL_DEADLINE_MS = 1112396529670L;
 
-            public TrackedJob() {
-            }
+            public TrackedJob() {}
         }
     }
 
     public final class UidRestrictController {
         public static final long TRACKED_JOBS = 2246267895813L;
 
-        public UidRestrictController() {
-        }
+        public UidRestrictController() {}
 
         public final class TrackedJob {
             public static final long INFO = 1146756268033L;
             public static final long IS_RESTRICTED = 1133871366147L;
             public static final long SOURCE_UID = 1120986464258L;
 
-            public TrackedJob() {
-            }
+            public TrackedJob() {}
         }
     }
 }

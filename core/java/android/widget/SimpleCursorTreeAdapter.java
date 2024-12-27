@@ -19,22 +19,56 @@ public abstract class SimpleCursorTreeAdapter extends ResourceCursorTreeAdapter 
         boolean setViewValue(View view, Cursor cursor, int i);
     }
 
-    public SimpleCursorTreeAdapter(Context context, Cursor cursor, int collapsedGroupLayout, int expandedGroupLayout, String[] groupFrom, int[] groupTo, int childLayout, int lastChildLayout, String[] childFrom, int[] childTo) {
-        super(context, cursor, collapsedGroupLayout, expandedGroupLayout, childLayout, lastChildLayout);
+    public SimpleCursorTreeAdapter(
+            Context context,
+            Cursor cursor,
+            int collapsedGroupLayout,
+            int expandedGroupLayout,
+            String[] groupFrom,
+            int[] groupTo,
+            int childLayout,
+            int lastChildLayout,
+            String[] childFrom,
+            int[] childTo) {
+        super(
+                context,
+                cursor,
+                collapsedGroupLayout,
+                expandedGroupLayout,
+                childLayout,
+                lastChildLayout);
         init(groupFrom, groupTo, childFrom, childTo);
     }
 
-    public SimpleCursorTreeAdapter(Context context, Cursor cursor, int collapsedGroupLayout, int expandedGroupLayout, String[] groupFrom, int[] groupTo, int childLayout, String[] childFrom, int[] childTo) {
+    public SimpleCursorTreeAdapter(
+            Context context,
+            Cursor cursor,
+            int collapsedGroupLayout,
+            int expandedGroupLayout,
+            String[] groupFrom,
+            int[] groupTo,
+            int childLayout,
+            String[] childFrom,
+            int[] childTo) {
         super(context, cursor, collapsedGroupLayout, expandedGroupLayout, childLayout);
         init(groupFrom, groupTo, childFrom, childTo);
     }
 
-    public SimpleCursorTreeAdapter(Context context, Cursor cursor, int groupLayout, String[] groupFrom, int[] groupTo, int childLayout, String[] childFrom, int[] childTo) {
+    public SimpleCursorTreeAdapter(
+            Context context,
+            Cursor cursor,
+            int groupLayout,
+            String[] groupFrom,
+            int[] groupTo,
+            int childLayout,
+            String[] childFrom,
+            int[] childTo) {
         super(context, cursor, groupLayout, childLayout);
         init(groupFrom, groupTo, childFrom, childTo);
     }
 
-    private void init(String[] groupFromNames, int[] groupTo, String[] childFromNames, int[] childTo) {
+    private void init(
+            String[] groupFromNames, int[] groupTo, String[] childFromNames, int[] childTo) {
         this.mGroupFromNames = groupFromNames;
         this.mGroupTo = groupTo;
         this.mChildFromNames = childFromNames;
@@ -70,7 +104,9 @@ public abstract class SimpleCursorTreeAdapter extends ResourceCursorTreeAdapter 
                     } else if (v instanceof ImageView) {
                         setViewImage((ImageView) v, text);
                     } else {
-                        throw new IllegalStateException("SimpleCursorTreeAdapter can bind values only to TextView and ImageView!");
+                        throw new IllegalStateException(
+                                "SimpleCursorTreeAdapter can bind values only to TextView and"
+                                    + " ImageView!");
                     }
                 }
             }

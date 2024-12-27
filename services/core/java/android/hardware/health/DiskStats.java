@@ -49,38 +49,57 @@ public final class DiskStats implements Parcelable {
                                             diskStats.writeSectors = parcel.readLong();
                                             if (parcel.dataPosition() - dataPosition < readInt) {
                                                 diskStats.writeTicks = parcel.readLong();
-                                                if (parcel.dataPosition() - dataPosition < readInt) {
+                                                if (parcel.dataPosition() - dataPosition
+                                                        < readInt) {
                                                     diskStats.ioInFlight = parcel.readLong();
-                                                    if (parcel.dataPosition() - dataPosition < readInt) {
+                                                    if (parcel.dataPosition() - dataPosition
+                                                            < readInt) {
                                                         diskStats.ioTicks = parcel.readLong();
-                                                        if (parcel.dataPosition() - dataPosition < readInt) {
+                                                        if (parcel.dataPosition() - dataPosition
+                                                                < readInt) {
                                                             diskStats.ioInQueue = parcel.readLong();
-                                                            if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                                            if (dataPosition
+                                                                    > Integer.MAX_VALUE - readInt) {
+                                                                throw new BadParcelableException(
+                                                                        "Overflow in the size of"
+                                                                            + " parcelable");
                                                             }
-                                                        } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                                        } else if (dataPosition
+                                                                > Integer.MAX_VALUE - readInt) {
+                                                            throw new BadParcelableException(
+                                                                    "Overflow in the size of"
+                                                                        + " parcelable");
                                                         }
-                                                    } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                                    } else if (dataPosition
+                                                            > Integer.MAX_VALUE - readInt) {
+                                                        throw new BadParcelableException(
+                                                                "Overflow in the size of"
+                                                                    + " parcelable");
                                                     }
-                                                } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                                } else if (dataPosition
+                                                        > Integer.MAX_VALUE - readInt) {
+                                                    throw new BadParcelableException(
+                                                            "Overflow in the size of parcelable");
                                                 }
                                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                                throw new BadParcelableException(
+                                                        "Overflow in the size of parcelable");
                                             }
                                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                            throw new BadParcelableException(
+                                                    "Overflow in the size of parcelable");
                                         }
                                     } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                        throw new BadParcelableException(
+                                                "Overflow in the size of parcelable");
                                     }
                                 } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -134,6 +153,7 @@ public final class DiskStats implements Parcelable {
         parcel.writeLong(this.ioInQueue);
         int dataPosition2 = parcel.dataPosition();
         parcel.setDataPosition(dataPosition);
-        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(dataPosition2, dataPosition, parcel, dataPosition2);
+        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                dataPosition2, dataPosition, parcel, dataPosition2);
     }
 }

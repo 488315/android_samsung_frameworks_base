@@ -4,6 +4,7 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.FileUtils;
 import android.text.TextUtils;
 import android.util.Log;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -108,7 +109,13 @@ public final class LsLogFile {
 
     public static boolean saveFile(LsLogType type, Queue<String> logQ) {
         String filePath = getFilePath(type);
-        Log.d(TAG, "Saving file:" + type + "... [Queue : " + logQ.size() + NavigationBarInflaterView.SIZE_MOD_END);
+        Log.d(
+                TAG,
+                "Saving file:"
+                        + type
+                        + "... [Queue : "
+                        + logQ.size()
+                        + NavigationBarInflaterView.SIZE_MOD_END);
         if (!fileLock()) {
             return false;
         }
@@ -133,7 +140,13 @@ public final class LsLogFile {
                 }
                 file.seek(0L);
                 file.writeLong(filePointer);
-                Log.d(TAG, String.format(Locale.US, "Saving success! [FP : %d, FS : %d]", Long.valueOf(filePointer), Long.valueOf(file.length())));
+                Log.d(
+                        TAG,
+                        String.format(
+                                Locale.US,
+                                "Saving success! [FP : %d, FS : %d]",
+                                Long.valueOf(filePointer),
+                                Long.valueOf(file.length())));
                 file.close();
             } finally {
             }
@@ -267,14 +280,15 @@ public final class LsLogFile {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:20:0x005b, code lost:
-    
-        if (r4 != null) goto L34;
-     */
+
+       if (r4 != null) goto L34;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private static void dumpStringLog(java.io.PrintWriter r10, com.samsung.android.lock.LsLogType r11) {
+    private static void dumpStringLog(
+            java.io.PrintWriter r10, com.samsung.android.lock.LsLogType r11) {
         /*
             java.lang.String r0 = getFilePath(r11)
             java.lang.String r1 = r11.getErrorCode()
@@ -365,7 +379,10 @@ public final class LsLogFile {
             fileUnlock()
             throw r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.lock.LsLogFile.dumpStringLog(java.io.PrintWriter, com.samsung.android.lock.LsLogType):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.lock.LsLogFile.dumpStringLog(java.io.PrintWriter,"
+                    + " com.samsung.android.lock.LsLogType):void");
     }
 
     private static String getLegacyFilePath(LsLogType type) {
@@ -373,9 +390,9 @@ public final class LsLogFile {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:23:0x007e, code lost:
-    
-        if (r9 != null) goto L40;
-     */
+
+       if (r9 != null) goto L40;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -385,13 +402,15 @@ public final class LsLogFile {
             Method dump skipped, instructions count: 222
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.lock.LsLogFile.dumpLegacy(java.io.PrintWriter):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.lock.LsLogFile.dumpLegacy(java.io.PrintWriter):void");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:23:0x0091, code lost:
-    
-        if (r9 != null) goto L40;
-     */
+
+       if (r9 != null) goto L40;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -401,7 +420,8 @@ public final class LsLogFile {
             Method dump skipped, instructions count: 241
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.lock.LsLogFile.showLegacy():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: com.samsung.android.lock.LsLogFile.showLegacy():void");
     }
 
     /* JADX WARN: Type inference failed for: r0v0, types: [com.samsung.android.lock.LsLogFile$1] */
@@ -422,9 +442,9 @@ public final class LsLogFile {
 
     /* JADX INFO: Access modifiers changed from: private */
     /* JADX WARN: Code restructure failed: missing block: B:15:0x0067, code lost:
-    
-        if (r5 != null) goto L30;
-     */
+
+       if (r5 != null) goto L30;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -522,7 +542,9 @@ public final class LsLogFile {
             fileUnlock()
             throw r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.lock.LsLogFile.showStringLog(com.samsung.android.lock.LsLogType):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.lock.LsLogFile.showStringLog(com.samsung.android.lock.LsLogType):void");
     }
 
     public static String[] getLog(LsLogType type, int maxLine) {
@@ -666,7 +688,13 @@ public final class LsLogFile {
                 raf.close();
             }
         }
-        Log.d(TAG, String.format(Locale.US, "migrate success! [FP : %d, FS : %d]", Long.valueOf(filePointer), Long.valueOf(fileLength)));
+        Log.d(
+                TAG,
+                String.format(
+                        Locale.US,
+                        "migrate success! [FP : %d, FS : %d]",
+                        Long.valueOf(filePointer),
+                        Long.valueOf(fileLength)));
         setPermission(newFile.getPath());
         fileUnlock();
         return true;
@@ -718,7 +746,8 @@ public final class LsLogFile {
                     for (int i = 0; i < LsLogType.LIST.length; i++) {
                         File logFile = new File(getFilePath(LsLogType.LIST[i]));
                         if (logFile.exists()) {
-                            gout.putNextEntry(new ZipEntry(LsLogType.LIST[i].getErrorCode() + LOG_EXT));
+                            gout.putNextEntry(
+                                    new ZipEntry(LsLogType.LIST[i].getErrorCode() + LOG_EXT));
                             fin = new FileInputStream(logFile);
                             fin.read(buffer, 0, 17);
                             while (true) {

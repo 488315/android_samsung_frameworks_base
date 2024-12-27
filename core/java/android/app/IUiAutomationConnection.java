@@ -15,6 +15,7 @@ import android.view.SurfaceControl;
 import android.view.WindowAnimationFrameStats;
 import android.view.WindowContentFrameStats;
 import android.window.ScreenCapture;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -31,15 +32,25 @@ public interface IUiAutomationConnection extends IInterface {
 
     boolean clearWindowContentFrameStats(int i) throws RemoteException;
 
-    void connect(IAccessibilityServiceClient iAccessibilityServiceClient, int i) throws RemoteException;
+    void connect(IAccessibilityServiceClient iAccessibilityServiceClient, int i)
+            throws RemoteException;
 
     void disconnect() throws RemoteException;
 
     void dropShellPermissionIdentity() throws RemoteException;
 
-    void executeShellCommand(String str, ParcelFileDescriptor parcelFileDescriptor, ParcelFileDescriptor parcelFileDescriptor2) throws RemoteException;
+    void executeShellCommand(
+            String str,
+            ParcelFileDescriptor parcelFileDescriptor,
+            ParcelFileDescriptor parcelFileDescriptor2)
+            throws RemoteException;
 
-    void executeShellCommandWithStderr(String str, ParcelFileDescriptor parcelFileDescriptor, ParcelFileDescriptor parcelFileDescriptor2, ParcelFileDescriptor parcelFileDescriptor3) throws RemoteException;
+    void executeShellCommandWithStderr(
+            String str,
+            ParcelFileDescriptor parcelFileDescriptor,
+            ParcelFileDescriptor parcelFileDescriptor2,
+            ParcelFileDescriptor parcelFileDescriptor3)
+            throws RemoteException;
 
     List<String> getAdoptedShellPermissions() throws RemoteException;
 
@@ -63,31 +74,32 @@ public interface IUiAutomationConnection extends IInterface {
 
     void syncInputTransactions(boolean z) throws RemoteException;
 
-    boolean takeScreenshot(Rect rect, ScreenCapture.ScreenCaptureListener screenCaptureListener) throws RemoteException;
+    boolean takeScreenshot(Rect rect, ScreenCapture.ScreenCaptureListener screenCaptureListener)
+            throws RemoteException;
 
-    boolean takeSurfaceControlScreenshot(SurfaceControl surfaceControl, ScreenCapture.ScreenCaptureListener screenCaptureListener) throws RemoteException;
+    boolean takeSurfaceControlScreenshot(
+            SurfaceControl surfaceControl,
+            ScreenCapture.ScreenCaptureListener screenCaptureListener)
+            throws RemoteException;
 
     public static class Default implements IUiAutomationConnection {
         @Override // android.app.IUiAutomationConnection
-        public void connect(IAccessibilityServiceClient client, int flags) throws RemoteException {
-        }
+        public void connect(IAccessibilityServiceClient client, int flags) throws RemoteException {}
 
         @Override // android.app.IUiAutomationConnection
-        public void disconnect() throws RemoteException {
-        }
+        public void disconnect() throws RemoteException {}
 
         @Override // android.app.IUiAutomationConnection
-        public boolean injectInputEvent(InputEvent event, boolean sync, boolean waitForAnimations) throws RemoteException {
+        public boolean injectInputEvent(InputEvent event, boolean sync, boolean waitForAnimations)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IUiAutomationConnection
-        public void injectInputEventToInputFilter(InputEvent event) throws RemoteException {
-        }
+        public void injectInputEventToInputFilter(InputEvent event) throws RemoteException {}
 
         @Override // android.app.IUiAutomationConnection
-        public void syncInputTransactions(boolean waitForAnimations) throws RemoteException {
-        }
+        public void syncInputTransactions(boolean waitForAnimations) throws RemoteException {}
 
         @Override // android.app.IUiAutomationConnection
         public boolean setRotation(int rotation) throws RemoteException {
@@ -95,12 +107,15 @@ public interface IUiAutomationConnection extends IInterface {
         }
 
         @Override // android.app.IUiAutomationConnection
-        public boolean takeScreenshot(Rect crop, ScreenCapture.ScreenCaptureListener listener) throws RemoteException {
+        public boolean takeScreenshot(Rect crop, ScreenCapture.ScreenCaptureListener listener)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IUiAutomationConnection
-        public boolean takeSurfaceControlScreenshot(SurfaceControl surfaceControl, ScreenCapture.ScreenCaptureListener listener) throws RemoteException {
+        public boolean takeSurfaceControlScreenshot(
+                SurfaceControl surfaceControl, ScreenCapture.ScreenCaptureListener listener)
+                throws RemoteException {
             return false;
         }
 
@@ -110,13 +125,13 @@ public interface IUiAutomationConnection extends IInterface {
         }
 
         @Override // android.app.IUiAutomationConnection
-        public WindowContentFrameStats getWindowContentFrameStats(int windowId) throws RemoteException {
+        public WindowContentFrameStats getWindowContentFrameStats(int windowId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IUiAutomationConnection
-        public void clearWindowAnimationFrameStats() throws RemoteException {
-        }
+        public void clearWindowAnimationFrameStats() throws RemoteException {}
 
         @Override // android.app.IUiAutomationConnection
         public WindowAnimationFrameStats getWindowAnimationFrameStats() throws RemoteException {
@@ -124,32 +139,35 @@ public interface IUiAutomationConnection extends IInterface {
         }
 
         @Override // android.app.IUiAutomationConnection
-        public void executeShellCommand(String command, ParcelFileDescriptor sink, ParcelFileDescriptor source) throws RemoteException {
-        }
+        public void executeShellCommand(
+                String command, ParcelFileDescriptor sink, ParcelFileDescriptor source)
+                throws RemoteException {}
 
         @Override // android.app.IUiAutomationConnection
-        public void grantRuntimePermission(String packageName, String permission, int userId) throws RemoteException {
-        }
+        public void grantRuntimePermission(String packageName, String permission, int userId)
+                throws RemoteException {}
 
         @Override // android.app.IUiAutomationConnection
-        public void revokeRuntimePermission(String packageName, String permission, int userId) throws RemoteException {
-        }
+        public void revokeRuntimePermission(String packageName, String permission, int userId)
+                throws RemoteException {}
 
         @Override // android.app.IUiAutomationConnection
-        public void adoptShellPermissionIdentity(int uid, String[] permissions) throws RemoteException {
-        }
+        public void adoptShellPermissionIdentity(int uid, String[] permissions)
+                throws RemoteException {}
 
         @Override // android.app.IUiAutomationConnection
-        public void dropShellPermissionIdentity() throws RemoteException {
-        }
+        public void dropShellPermissionIdentity() throws RemoteException {}
 
         @Override // android.app.IUiAutomationConnection
-        public void shutdown() throws RemoteException {
-        }
+        public void shutdown() throws RemoteException {}
 
         @Override // android.app.IUiAutomationConnection
-        public void executeShellCommandWithStderr(String command, ParcelFileDescriptor sink, ParcelFileDescriptor source, ParcelFileDescriptor stderrSink) throws RemoteException {
-        }
+        public void executeShellCommandWithStderr(
+                String command,
+                ParcelFileDescriptor sink,
+                ParcelFileDescriptor source,
+                ParcelFileDescriptor stderrSink)
+                throws RemoteException {}
 
         @Override // android.app.IUiAutomationConnection
         public List<String> getAdoptedShellPermissions() throws RemoteException {
@@ -157,20 +175,18 @@ public interface IUiAutomationConnection extends IInterface {
         }
 
         @Override // android.app.IUiAutomationConnection
-        public void addOverridePermissionState(int uid, String permission, int result) throws RemoteException {
-        }
+        public void addOverridePermissionState(int uid, String permission, int result)
+                throws RemoteException {}
 
         @Override // android.app.IUiAutomationConnection
-        public void removeOverridePermissionState(int uid, String permission) throws RemoteException {
-        }
+        public void removeOverridePermissionState(int uid, String permission)
+                throws RemoteException {}
 
         @Override // android.app.IUiAutomationConnection
-        public void clearOverridePermissionStates(int uid) throws RemoteException {
-        }
+        public void clearOverridePermissionStates(int uid) throws RemoteException {}
 
         @Override // android.app.IUiAutomationConnection
-        public void clearAllOverridePermissionStates() throws RemoteException {
-        }
+        public void clearAllOverridePermissionStates() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -178,7 +194,7 @@ public interface IUiAutomationConnection extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUiAutomationConnection {
+    public abstract static class Stub extends Binder implements IUiAutomationConnection {
         public static final String DESCRIPTOR = "android.app.IUiAutomationConnection";
         static final int TRANSACTION_addOverridePermissionState = 21;
         static final int TRANSACTION_adoptShellPermissionIdentity = 16;
@@ -286,7 +302,8 @@ public interface IUiAutomationConnection extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -296,7 +313,8 @@ public interface IUiAutomationConnection extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IAccessibilityServiceClient _arg0 = IAccessibilityServiceClient.Stub.asInterface(data.readStrongBinder());
+                    IAccessibilityServiceClient _arg0 =
+                            IAccessibilityServiceClient.Stub.asInterface(data.readStrongBinder());
                     int _arg1 = data.readInt();
                     data.enforceNoDataAvail();
                     connect(_arg0, _arg1);
@@ -336,15 +354,22 @@ public interface IUiAutomationConnection extends IInterface {
                     return true;
                 case 7:
                     Rect _arg06 = (Rect) data.readTypedObject(Rect.CREATOR);
-                    ScreenCapture.ScreenCaptureListener _arg13 = (ScreenCapture.ScreenCaptureListener) data.readTypedObject(ScreenCapture.ScreenCaptureListener.CREATOR);
+                    ScreenCapture.ScreenCaptureListener _arg13 =
+                            (ScreenCapture.ScreenCaptureListener)
+                                    data.readTypedObject(
+                                            ScreenCapture.ScreenCaptureListener.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result3 = takeScreenshot(_arg06, _arg13);
                     reply.writeNoException();
                     reply.writeBoolean(_result3);
                     return true;
                 case 8:
-                    SurfaceControl _arg07 = (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
-                    ScreenCapture.ScreenCaptureListener _arg14 = (ScreenCapture.ScreenCaptureListener) data.readTypedObject(ScreenCapture.ScreenCaptureListener.CREATOR);
+                    SurfaceControl _arg07 =
+                            (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
+                    ScreenCapture.ScreenCaptureListener _arg14 =
+                            (ScreenCapture.ScreenCaptureListener)
+                                    data.readTypedObject(
+                                            ScreenCapture.ScreenCaptureListener.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result4 = takeSurfaceControlScreenshot(_arg07, _arg14);
                     reply.writeNoException();
@@ -375,8 +400,12 @@ public interface IUiAutomationConnection extends IInterface {
                     return true;
                 case 13:
                     String _arg010 = data.readString();
-                    ParcelFileDescriptor _arg15 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    ParcelFileDescriptor _arg22 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg15 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg22 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     data.enforceNoDataAvail();
                     executeShellCommand(_arg010, _arg15, _arg22);
                     reply.writeNoException();
@@ -413,9 +442,15 @@ public interface IUiAutomationConnection extends IInterface {
                     return true;
                 case 19:
                     String _arg014 = data.readString();
-                    ParcelFileDescriptor _arg19 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    ParcelFileDescriptor _arg25 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    ParcelFileDescriptor _arg3 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg19 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg25 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg3 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     data.enforceNoDataAvail();
                     executeShellCommandWithStderr(_arg014, _arg19, _arg25, _arg3);
                     reply.writeNoException();
@@ -472,7 +507,8 @@ public interface IUiAutomationConnection extends IInterface {
             }
 
             @Override // android.app.IUiAutomationConnection
-            public void connect(IAccessibilityServiceClient client, int flags) throws RemoteException {
+            public void connect(IAccessibilityServiceClient client, int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -502,7 +538,9 @@ public interface IUiAutomationConnection extends IInterface {
             }
 
             @Override // android.app.IUiAutomationConnection
-            public boolean injectInputEvent(InputEvent event, boolean sync, boolean waitForAnimations) throws RemoteException {
+            public boolean injectInputEvent(
+                    InputEvent event, boolean sync, boolean waitForAnimations)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -568,7 +606,8 @@ public interface IUiAutomationConnection extends IInterface {
             }
 
             @Override // android.app.IUiAutomationConnection
-            public boolean takeScreenshot(Rect crop, ScreenCapture.ScreenCaptureListener listener) throws RemoteException {
+            public boolean takeScreenshot(Rect crop, ScreenCapture.ScreenCaptureListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -586,7 +625,9 @@ public interface IUiAutomationConnection extends IInterface {
             }
 
             @Override // android.app.IUiAutomationConnection
-            public boolean takeSurfaceControlScreenshot(SurfaceControl surfaceControl, ScreenCapture.ScreenCaptureListener listener) throws RemoteException {
+            public boolean takeSurfaceControlScreenshot(
+                    SurfaceControl surfaceControl, ScreenCapture.ScreenCaptureListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -621,7 +662,8 @@ public interface IUiAutomationConnection extends IInterface {
             }
 
             @Override // android.app.IUiAutomationConnection
-            public WindowContentFrameStats getWindowContentFrameStats(int windowId) throws RemoteException {
+            public WindowContentFrameStats getWindowContentFrameStats(int windowId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -629,7 +671,9 @@ public interface IUiAutomationConnection extends IInterface {
                     _data.writeInt(windowId);
                     this.mRemote.transact(10, _data, _reply, 0);
                     _reply.readException();
-                    WindowContentFrameStats _result = (WindowContentFrameStats) _reply.readTypedObject(WindowContentFrameStats.CREATOR);
+                    WindowContentFrameStats _result =
+                            (WindowContentFrameStats)
+                                    _reply.readTypedObject(WindowContentFrameStats.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -659,7 +703,9 @@ public interface IUiAutomationConnection extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(12, _data, _reply, 0);
                     _reply.readException();
-                    WindowAnimationFrameStats _result = (WindowAnimationFrameStats) _reply.readTypedObject(WindowAnimationFrameStats.CREATOR);
+                    WindowAnimationFrameStats _result =
+                            (WindowAnimationFrameStats)
+                                    _reply.readTypedObject(WindowAnimationFrameStats.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -668,7 +714,9 @@ public interface IUiAutomationConnection extends IInterface {
             }
 
             @Override // android.app.IUiAutomationConnection
-            public void executeShellCommand(String command, ParcelFileDescriptor sink, ParcelFileDescriptor source) throws RemoteException {
+            public void executeShellCommand(
+                    String command, ParcelFileDescriptor sink, ParcelFileDescriptor source)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -685,7 +733,8 @@ public interface IUiAutomationConnection extends IInterface {
             }
 
             @Override // android.app.IUiAutomationConnection
-            public void grantRuntimePermission(String packageName, String permission, int userId) throws RemoteException {
+            public void grantRuntimePermission(String packageName, String permission, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -702,7 +751,8 @@ public interface IUiAutomationConnection extends IInterface {
             }
 
             @Override // android.app.IUiAutomationConnection
-            public void revokeRuntimePermission(String packageName, String permission, int userId) throws RemoteException {
+            public void revokeRuntimePermission(String packageName, String permission, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -719,7 +769,8 @@ public interface IUiAutomationConnection extends IInterface {
             }
 
             @Override // android.app.IUiAutomationConnection
-            public void adoptShellPermissionIdentity(int uid, String[] permissions) throws RemoteException {
+            public void adoptShellPermissionIdentity(int uid, String[] permissions)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -760,7 +811,12 @@ public interface IUiAutomationConnection extends IInterface {
             }
 
             @Override // android.app.IUiAutomationConnection
-            public void executeShellCommandWithStderr(String command, ParcelFileDescriptor sink, ParcelFileDescriptor source, ParcelFileDescriptor stderrSink) throws RemoteException {
+            public void executeShellCommandWithStderr(
+                    String command,
+                    ParcelFileDescriptor sink,
+                    ParcelFileDescriptor source,
+                    ParcelFileDescriptor stderrSink)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -794,7 +850,8 @@ public interface IUiAutomationConnection extends IInterface {
             }
 
             @Override // android.app.IUiAutomationConnection
-            public void addOverridePermissionState(int uid, String permission, int result) throws RemoteException {
+            public void addOverridePermissionState(int uid, String permission, int result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -811,7 +868,8 @@ public interface IUiAutomationConnection extends IInterface {
             }
 
             @Override // android.app.IUiAutomationConnection
-            public void removeOverridePermissionState(int uid, String permission) throws RemoteException {
+            public void removeOverridePermissionState(int uid, String permission)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

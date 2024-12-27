@@ -37,6 +37,7 @@ import android.util.EventLog;
 import android.util.Log;
 import android.util.proto.ProtoOutputStream;
 import android.widget.RemoteViews;
+
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
@@ -46,11 +47,11 @@ import com.android.server.accessibility.magnification.FullScreenMagnificationGes
 import com.android.server.accessibility.magnification.WindowMagnificationGestureHandler$$ExternalSyntheticOutline0;
 import com.android.server.input.KeyboardMetricsCollector;
 import com.android.server.media.MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0;
-import com.android.server.notification.NotificationRecordLogger;
-import com.android.server.notification.NotificationUsageStats;
 import com.android.server.uri.UriGrantsManagerInternal;
 import com.android.server.uri.UriGrantsManagerService;
+
 import dalvik.annotation.optimization.NeverCompile;
+
 import java.io.PrintWriter;
 import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
@@ -160,7 +161,9 @@ public final class NotificationRecord {
                 return false;
             }
             Light light = (Light) obj;
-            return this.color == light.color && this.onMs == light.onMs && this.offMs == light.offMs;
+            return this.color == light.color
+                    && this.onMs == light.onMs
+                    && this.offMs == light.offMs;
         }
 
         public final int hashCode() {
@@ -173,7 +176,8 @@ public final class NotificationRecord {
             sb.append(", onMs=");
             sb.append(this.onMs);
             sb.append(", offMs=");
-            return WindowMagnificationGestureHandler$$ExternalSyntheticOutline0.m(sb, this.offMs, '}');
+            return WindowMagnificationGestureHandler$$ExternalSyntheticOutline0.m(
+                    sb, this.offMs, '}');
         }
     }
 
@@ -193,15 +197,23 @@ public final class NotificationRecord {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public NotificationRecord(android.content.Context r11, android.service.notification.StatusBarNotification r12, android.app.NotificationChannel r13) {
+    public NotificationRecord(
+            android.content.Context r11,
+            android.service.notification.StatusBarNotification r12,
+            android.app.NotificationChannel r13) {
         /*
             Method dump skipped, instructions count: 596
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.notification.NotificationRecord.<init>(android.content.Context, android.service.notification.StatusBarNotification, android.app.NotificationChannel):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.notification.NotificationRecord.<init>(android.content.Context,"
+                    + " android.service.notification.StatusBarNotification,"
+                    + " android.app.NotificationChannel):void");
     }
 
-    public static void dumpNotification(PrintWriter printWriter, String str, Notification notification, boolean z) {
+    public static void dumpNotification(
+            PrintWriter printWriter, String str, Notification notification, boolean z) {
         if (notification == null) {
             printWriter.println(str + KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG);
             return;
@@ -214,7 +226,9 @@ public final class NotificationRecord {
         StringBuilder sb = new StringBuilder();
         sb.append(str);
         sb.append("number=");
-        StringBuilder m2 = MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(sb, notification.number, printWriter, str, "groupAlertBehavior=");
+        StringBuilder m2 =
+                MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(
+                        sb, notification.number, printWriter, str, "groupAlertBehavior=");
         m2.append(notification.getGroupAlertBehavior());
         printWriter.println(m2.toString());
         printWriter.println(str + "when=" + notification.when + "/" + notification.getWhen());
@@ -233,11 +247,19 @@ public final class NotificationRecord {
                 printWriter.println(charSequence);
             }
         }
-        StringBuilder m3 = MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(Preconditions$$ExternalSyntheticOutline0.m(str, "vis="), notification.visibility, printWriter, str, "contentView=");
+        StringBuilder m3 =
+                MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(
+                        Preconditions$$ExternalSyntheticOutline0.m(str, "vis="),
+                        notification.visibility,
+                        printWriter,
+                        str,
+                        "contentView=");
         m3.append(formatRemoteViews(notification.contentView));
         printWriter.println(m3.toString());
-        printWriter.println(str + "bigContentView=" + formatRemoteViews(notification.bigContentView));
-        printWriter.println(str + "headsUpContentView=" + formatRemoteViews(notification.headsUpContentView));
+        printWriter.println(
+                str + "bigContentView=" + formatRemoteViews(notification.bigContentView));
+        printWriter.println(
+                str + "headsUpContentView=" + formatRemoteViews(notification.headsUpContentView));
         StringBuilder sb3 = new StringBuilder();
         sb3.append(str);
         sb3.append(String.format("color=0x%08x", Integer.valueOf(notification.color)));
@@ -247,7 +269,13 @@ public final class NotificationRecord {
         StringBuilder sb4 = new StringBuilder();
         sb4.append(str);
         sb4.append("parcelDataSize=");
-        StringBuilder m4 = MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(sb4, notification.parcelDataSize, printWriter, str, "mAllowSystemGeneratedContextualActions=");
+        StringBuilder m4 =
+                MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(
+                        sb4,
+                        notification.parcelDataSize,
+                        printWriter,
+                        str,
+                        "mAllowSystemGeneratedContextualActions=");
         m4.append(notification.getAllowSystemGeneratedContextualActions());
         printWriter.println(m4.toString());
         Notification.Action[] actionArr = notification.actions;
@@ -260,7 +288,13 @@ public final class NotificationRecord {
                     Integer valueOf = Integer.valueOf(i);
                     CharSequence charSequence2 = action.title;
                     PendingIntent pendingIntent = action.actionIntent;
-                    printWriter.println(String.format("%s    [%d] \"%s\" -> %s", str, valueOf, charSequence2, pendingIntent == null ? "null" : pendingIntent.toString()));
+                    printWriter.println(
+                            String.format(
+                                    "%s    [%d] \"%s\" -> %s",
+                                    str,
+                                    valueOf,
+                                    charSequence2,
+                                    pendingIntent == null ? "null" : pendingIntent.toString()));
                 }
             }
             printWriter.println(str + "  }");
@@ -283,19 +317,31 @@ public final class NotificationRecord {
                         }
                         printWriter.println();
                     }
-                    printWriter.print(String.format(" [length=%d]", Integer.valueOf(((CharSequence) obj).length())));
+                    printWriter.print(
+                            String.format(
+                                    " [length=%d]",
+                                    Integer.valueOf(((CharSequence) obj).length())));
                     printWriter.println();
                 }
                 if (obj instanceof Bitmap) {
                     Bitmap bitmap = (Bitmap) obj;
-                    printWriter.print(String.format(" (%dx%d)", Integer.valueOf(bitmap.getWidth()), Integer.valueOf(bitmap.getHeight())));
+                    printWriter.print(
+                            String.format(
+                                    " (%dx%d)",
+                                    Integer.valueOf(bitmap.getWidth()),
+                                    Integer.valueOf(bitmap.getHeight())));
                 } else if (obj.getClass().isArray()) {
                     int length2 = Array.getLength(obj);
                     printWriter.print(" (" + length2 + ")");
                     if (!z) {
                         for (int i2 = 0; i2 < length2; i2++) {
                             printWriter.println();
-                            printWriter.print(String.format("%s      [%d] %s", str, Integer.valueOf(i2), String.valueOf(Array.get(obj, i2))));
+                            printWriter.print(
+                                    String.format(
+                                            "%s      [%d] %s",
+                                            str,
+                                            Integer.valueOf(i2),
+                                            String.valueOf(Array.get(obj, i2))));
                         }
                     }
                 } else {
@@ -308,7 +354,14 @@ public final class NotificationRecord {
     }
 
     public static String formatRemoteViews(RemoteViews remoteViews) {
-        return remoteViews == null ? "null" : String.format("%s/0x%08x (%d bytes): %s", remoteViews.getPackage(), Integer.valueOf(remoteViews.getLayoutId()), Integer.valueOf(remoteViews.estimateMemoryUsage()), remoteViews.toString());
+        return remoteViews == null
+                ? "null"
+                : String.format(
+                        "%s/0x%08x (%d bytes): %s",
+                        remoteViews.getPackage(),
+                        Integer.valueOf(remoteViews.getLayoutId()),
+                        Integer.valueOf(remoteViews.estimateMemoryUsage()),
+                        remoteViews.toString());
     }
 
     public final void applyAdjustments() {
@@ -320,52 +373,90 @@ public final class NotificationRecord {
                     Adjustment adjustment = (Adjustment) it.next();
                     Bundle signals = adjustment.getSignals();
                     if (signals.containsKey("key_people")) {
-                        ArrayList<String> stringArrayList = adjustment.getSignals().getStringArrayList("key_people");
+                        ArrayList<String> stringArrayList =
+                                adjustment.getSignals().getStringArrayList("key_people");
                         this.mPeopleOverride = stringArrayList;
-                        EventLogTags.writeNotificationAdjusted(this.sbn.getKey(), "key_people", stringArrayList.toString());
+                        EventLogTags.writeNotificationAdjusted(
+                                this.sbn.getKey(), "key_people", stringArrayList.toString());
                     }
                     if (signals.containsKey("key_snooze_criteria")) {
-                        ArrayList parcelableArrayList = adjustment.getSignals().getParcelableArrayList("key_snooze_criteria", SnoozeCriterion.class);
+                        ArrayList parcelableArrayList =
+                                adjustment
+                                        .getSignals()
+                                        .getParcelableArrayList(
+                                                "key_snooze_criteria", SnoozeCriterion.class);
                         this.mSnoozeCriteria = parcelableArrayList;
-                        EventLogTags.writeNotificationAdjusted(this.sbn.getKey(), "key_snooze_criteria", parcelableArrayList.toString());
+                        EventLogTags.writeNotificationAdjusted(
+                                this.sbn.getKey(),
+                                "key_snooze_criteria",
+                                parcelableArrayList.toString());
                     }
                     if (signals.containsKey("key_group_key")) {
                         String string = adjustment.getSignals().getString("key_group_key");
                         this.sbn.setOverrideGroupKey(string);
-                        EventLogTags.writeNotificationAdjusted(this.sbn.getKey(), "key_group_key", string);
+                        EventLogTags.writeNotificationAdjusted(
+                                this.sbn.getKey(), "key_group_key", string);
                     }
-                    if (signals.containsKey("key_user_sentiment") && !this.mIsAppImportanceLocked && (this.mChannel.getUserLockedFields() & 4) == 0) {
-                        this.mUserSentiment = adjustment.getSignals().getInt("key_user_sentiment", 0);
-                        EventLogTags.writeNotificationAdjusted(this.sbn.getKey(), "key_user_sentiment", Integer.toString(this.mUserSentiment));
+                    if (signals.containsKey("key_user_sentiment")
+                            && !this.mIsAppImportanceLocked
+                            && (this.mChannel.getUserLockedFields() & 4) == 0) {
+                        this.mUserSentiment =
+                                adjustment.getSignals().getInt("key_user_sentiment", 0);
+                        EventLogTags.writeNotificationAdjusted(
+                                this.sbn.getKey(),
+                                "key_user_sentiment",
+                                Integer.toString(this.mUserSentiment));
                     }
                     if (signals.containsKey("key_contextual_actions")) {
-                        this.mSystemGeneratedSmartActions = signals.getParcelableArrayList("key_contextual_actions", Notification.Action.class);
-                        EventLogTags.writeNotificationAdjusted(this.sbn.getKey(), "key_contextual_actions", this.mSystemGeneratedSmartActions.toString());
+                        this.mSystemGeneratedSmartActions =
+                                signals.getParcelableArrayList(
+                                        "key_contextual_actions", Notification.Action.class);
+                        EventLogTags.writeNotificationAdjusted(
+                                this.sbn.getKey(),
+                                "key_contextual_actions",
+                                this.mSystemGeneratedSmartActions.toString());
                     }
                     if (signals.containsKey("key_text_replies")) {
                         this.mSmartReplies = signals.getCharSequenceArrayList("key_text_replies");
-                        EventLogTags.writeNotificationAdjusted(this.sbn.getKey(), "key_text_replies", this.mSmartReplies.toString());
+                        EventLogTags.writeNotificationAdjusted(
+                                this.sbn.getKey(),
+                                "key_text_replies",
+                                this.mSmartReplies.toString());
                     }
                     if (signals.containsKey("key_importance")) {
                         int min = Math.min(4, Math.max(-1000, signals.getInt("key_importance")));
                         this.mAssistantImportance = min;
-                        EventLogTags.writeNotificationAdjusted(this.sbn.getKey(), "key_importance", Integer.toString(min));
+                        EventLogTags.writeNotificationAdjusted(
+                                this.sbn.getKey(), "key_importance", Integer.toString(min));
                     }
                     if (signals.containsKey("key_ranking_score")) {
                         this.mRankingScore = signals.getFloat("key_ranking_score");
-                        EventLogTags.writeNotificationAdjusted(this.sbn.getKey(), "key_ranking_score", Float.toString(this.mRankingScore));
+                        EventLogTags.writeNotificationAdjusted(
+                                this.sbn.getKey(),
+                                "key_ranking_score",
+                                Float.toString(this.mRankingScore));
                     }
                     if (signals.containsKey("key_not_conversation")) {
-                        this.mIsNotConversationOverride = signals.getBoolean("key_not_conversation");
-                        EventLogTags.writeNotificationAdjusted(this.sbn.getKey(), "key_not_conversation", Boolean.toString(this.mIsNotConversationOverride));
+                        this.mIsNotConversationOverride =
+                                signals.getBoolean("key_not_conversation");
+                        EventLogTags.writeNotificationAdjusted(
+                                this.sbn.getKey(),
+                                "key_not_conversation",
+                                Boolean.toString(this.mIsNotConversationOverride));
                     }
                     if (signals.containsKey("key_importance_proposal")) {
                         this.mProposedImportance = signals.getInt("key_importance_proposal");
-                        EventLogTags.writeNotificationAdjusted(this.sbn.getKey(), "key_importance_proposal", Integer.toString(this.mProposedImportance));
+                        EventLogTags.writeNotificationAdjusted(
+                                this.sbn.getKey(),
+                                "key_importance_proposal",
+                                Integer.toString(this.mProposedImportance));
                     }
                     if (signals.containsKey("key_sensitive_content")) {
                         this.mSensitiveContent = signals.getBoolean("key_sensitive_content");
-                        EventLogTags.writeNotificationAdjusted(this.sbn.getKey(), "key_sensitive_content", Boolean.toString(this.mSensitiveContent));
+                        EventLogTags.writeNotificationAdjusted(
+                                this.sbn.getKey(),
+                                "key_sensitive_content",
+                                Boolean.toString(this.mSensitiveContent));
                     }
                     if (!signals.isEmpty() && adjustment.getIssuer() != null) {
                         this.mAdjustmentIssuer = adjustment.getIssuer();
@@ -382,7 +473,9 @@ public final class NotificationRecord {
         int i;
         this.mImportance = calculateInitialImportance();
         this.mImportanceExplanationCode = this.mInitialImportanceExplanationCode;
-        if (!this.mChannel.hasUserSetImportance() && (i = this.mAssistantImportance) != -1000 && !this.mImportanceFixed) {
+        if (!this.mChannel.hasUserSetImportance()
+                && (i = this.mAssistantImportance) != -1000
+                && !this.mImportanceFixed) {
             this.mImportance = i;
             this.mImportanceExplanationCode = 3;
         }
@@ -415,7 +508,8 @@ public final class NotificationRecord {
             z = false;
         }
         singleNotificationStats.isNoisy = z;
-        if (this.mPreChannelsNotification && (importance == -1000 || !this.mChannel.hasUserSetImportance())) {
+        if (this.mPreChannelsNotification
+                && (importance == -1000 || !this.mChannel.hasUserSetImportance())) {
             boolean z2 = singleNotificationStats.isNoisy;
             int i3 = (z2 || i2 <= 2) ? i2 : 2;
             importance = notification.fullScreenIntent != null ? 4 : (!z2 || i3 >= 3) ? i3 : 3;
@@ -432,7 +526,8 @@ public final class NotificationRecord {
             if (j2 != 0 && j2 <= this.sbn.getPostTime()) {
                 return notification.when;
             }
-        } else if (notification.hasAppProvidedWhen() && notification.getWhen() <= this.sbn.getPostTime()) {
+        } else if (notification.hasAppProvidedWhen()
+                && notification.getWhen() <= this.sbn.getPostTime()) {
             return notification.getWhen();
         }
         return j > 0 ? j : this.sbn.getPostTime();
@@ -452,25 +547,47 @@ public final class NotificationRecord {
         Vibrator vibrator = (Vibrator) context.getSystemService(Vibrator.class);
         Resources resources = context.getResources();
         long[] jArr = VibratorHelper.DEFAULT_VIBRATE_PATTERN;
-        long[] longArray = VibratorHelper.getLongArray(resources, R.array.config_smallAreaDetectionAllowlist, jArr);
+        long[] longArray =
+                VibratorHelper.getLongArray(
+                        resources, R.array.config_smallAreaDetectionAllowlist, jArr);
         VibratorHelper.getLongArray(context.getResources(), 17236266, jArr);
-        float[] floatArray = VibratorHelper.getFloatArray(context.getResources(), R.array.config_sms_enabled_locking_shift_tables);
+        float[] floatArray =
+                VibratorHelper.getFloatArray(
+                        context.getResources(), R.array.config_sms_enabled_locking_shift_tables);
         VibratorHelper.getFloatArray(context.getResources(), 17236267);
         context.getResources().getInteger(R.integer.config_dreamOpenAnimationDuration);
         Notification notification = this.sbn.getNotification();
         boolean z = (notification.flags & 4) != 0;
         if (this.mPreChannelsNotification && (this.mChannel.getUserLockedFields() & 16) == 0) {
-            return (notification.defaults & 2) != 0 ? (!vibrator.hasFrequencyControl() || (createPwleWaveformVibration2 = VibratorHelper.createPwleWaveformVibration(floatArray, z)) == null) ? VibratorHelper.createWaveformVibration(longArray, z) : createPwleWaveformVibration2 : VibratorHelper.createWaveformVibration(notification.vibrate, z);
+            return (notification.defaults & 2) != 0
+                    ? (!vibrator.hasFrequencyControl()
+                                    || (createPwleWaveformVibration2 =
+                                                    VibratorHelper.createPwleWaveformVibration(
+                                                            floatArray, z))
+                                            == null)
+                            ? VibratorHelper.createWaveformVibration(longArray, z)
+                            : createPwleWaveformVibration2
+                    : VibratorHelper.createWaveformVibration(notification.vibrate, z);
         }
         NotificationChannel notificationChannel = this.mChannel;
         if (!notificationChannel.shouldVibrate()) {
             return null;
         }
-        if (android.app.Flags.notificationChannelVibrationEffectApi() && (vibrationEffect = notificationChannel.getVibrationEffect()) != null && vibrator.areVibrationFeaturesSupported(vibrationEffect)) {
+        if (android.app.Flags.notificationChannelVibrationEffectApi()
+                && (vibrationEffect = notificationChannel.getVibrationEffect()) != null
+                && vibrator.areVibrationFeaturesSupported(vibrationEffect)) {
             return vibrationEffect.applyRepeatingIndefinitely(z, 0);
         }
         long[] vibrationPattern = notificationChannel.getVibrationPattern();
-        return vibrationPattern == null ? (!vibrator.hasFrequencyControl() || (createPwleWaveformVibration = VibratorHelper.createPwleWaveformVibration(floatArray, z)) == null) ? VibratorHelper.createWaveformVibration(longArray, z) : createPwleWaveformVibration : VibratorHelper.createWaveformVibration(vibrationPattern, z);
+        return vibrationPattern == null
+                ? (!vibrator.hasFrequencyControl()
+                                || (createPwleWaveformVibration =
+                                                VibratorHelper.createPwleWaveformVibration(
+                                                        floatArray, z))
+                                        == null)
+                        ? VibratorHelper.createWaveformVibration(longArray, z)
+                        : createPwleWaveformVibration
+                : VibratorHelper.createWaveformVibration(vibrationPattern, z);
     }
 
     public final void copyRankingInformation(NotificationRecord notificationRecord) {
@@ -528,11 +645,14 @@ public final class NotificationRecord {
         printWriter.println(concat + "opPkg=" + this.sbn.getOpPkg());
         printWriter.println(concat + "icon=" + notification.getSmallIcon());
         printWriter.println(concat + "flags=" + Notification.flagsToString(notification.flags));
-        printWriter.println(concat + "originalFlags=" + Notification.flagsToString(this.mOriginalFlags));
+        printWriter.println(
+                concat + "originalFlags=" + Notification.flagsToString(this.mOriginalFlags));
         StringBuilder sb = new StringBuilder();
         sb.append(concat);
         sb.append("pri=");
-        StringBuilder m2 = MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(sb, notification.priority, printWriter, concat, "key=");
+        StringBuilder m2 =
+                MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(
+                        sb, notification.priority, printWriter, concat, "key=");
         m2.append(this.sbn.getKey());
         printWriter.println(m2.toString());
         printWriter.println(concat + "seen=" + this.mStats.hasSeen());
@@ -541,7 +661,11 @@ public final class NotificationRecord {
         sb2.append(concat);
         sb2.append("notification=");
         printWriter.println(sb2.toString());
-        dumpNotification(printWriter, AudioOffloadInfo$$ExternalSyntheticOutline0.m(new StringBuilder(), concat, concat), notification, z);
+        dumpNotification(
+                printWriter,
+                AudioOffloadInfo$$ExternalSyntheticOutline0.m(new StringBuilder(), concat, concat),
+                notification,
+                z);
         printWriter.println(concat + "publicNotification=");
         dumpNotification(printWriter, concat + concat, notification.publicVersion, z);
         printWriter.println(concat + "stats=" + this.stats.toString());
@@ -549,17 +673,67 @@ public final class NotificationRecord {
         StringBuilder sb3 = new StringBuilder();
         sb3.append(concat);
         sb3.append("mRecentlyIntrusive=");
-        StringBuilder m3 = MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(sb3, this.mRecentlyIntrusive, printWriter, concat, "mPackagePriority="), this.mPackagePriority, printWriter, concat, "mPackageVisibility="), this.mPackageVisibility, printWriter, concat, "mSystemImportance=");
+        StringBuilder m3 =
+                MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(
+                        MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(
+                                MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(
+                                        sb3,
+                                        this.mRecentlyIntrusive,
+                                        printWriter,
+                                        concat,
+                                        "mPackagePriority="),
+                                this.mPackagePriority,
+                                printWriter,
+                                concat,
+                                "mPackageVisibility="),
+                        this.mPackageVisibility,
+                        printWriter,
+                        concat,
+                        "mSystemImportance=");
         m3.append(NotificationListenerService.Ranking.importanceToString(this.mSystemImportance));
         printWriter.println(m3.toString());
-        printWriter.println(concat + "mAsstImportance=" + NotificationListenerService.Ranking.importanceToString(this.mAssistantImportance));
-        printWriter.println(concat + "mImportance=" + NotificationListenerService.Ranking.importanceToString(this.mImportance));
-        printWriter.println(concat + "mImportanceExplanation=" + ((Object) getImportanceExplanation()));
-        printWriter.println(concat + "mProposedImportance=" + NotificationListenerService.Ranking.importanceToString(this.mProposedImportance));
+        printWriter.println(
+                concat
+                        + "mAsstImportance="
+                        + NotificationListenerService.Ranking.importanceToString(
+                                this.mAssistantImportance));
+        printWriter.println(
+                concat
+                        + "mImportance="
+                        + NotificationListenerService.Ranking.importanceToString(this.mImportance));
+        printWriter.println(
+                concat + "mImportanceExplanation=" + ((Object) getImportanceExplanation()));
+        printWriter.println(
+                concat
+                        + "mProposedImportance="
+                        + NotificationListenerService.Ranking.importanceToString(
+                                this.mProposedImportance));
         StringBuilder sb4 = new StringBuilder();
         sb4.append(concat);
         sb4.append("mIsAppImportanceLocked=");
-        StringBuilder m4 = MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(sb4, this.mIsAppImportanceLocked, printWriter, concat, "mSensitiveContent="), this.mSensitiveContent, printWriter, concat, "mIntercept="), this.mIntercept, printWriter, concat, "mHidden=="), this.mHidden, printWriter, concat, "mGlobalSortKey=");
+        StringBuilder m4 =
+                MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(
+                        MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(
+                                MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(
+                                        MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0
+                                                .m(
+                                                        sb4,
+                                                        this.mIsAppImportanceLocked,
+                                                        printWriter,
+                                                        concat,
+                                                        "mSensitiveContent="),
+                                        this.mSensitiveContent,
+                                        printWriter,
+                                        concat,
+                                        "mIntercept="),
+                                this.mIntercept,
+                                printWriter,
+                                concat,
+                                "mHidden=="),
+                        this.mHidden,
+                        printWriter,
+                        concat,
+                        "mGlobalSortKey=");
         m4.append(this.mGlobalSortKey);
         printWriter.println(m4.toString());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss.SSSZ");
@@ -569,14 +743,39 @@ public final class NotificationRecord {
         m5.append(simpleDateFormat.format(new Date(this.mRankingTimeMs)));
         m5.append(")");
         printWriter.println(m5.toString());
-        printWriter.println(concat + "mCreationTimeMs=" + this.mCreationTimeMs + "(" + simpleDateFormat.format(new Date(this.mCreationTimeMs)) + ")");
-        printWriter.println(concat + "mVisibleSinceMs=" + this.mVisibleSinceMs + "(" + simpleDateFormat.format(new Date(this.mVisibleSinceMs)) + ")");
-        printWriter.println(concat + "mUpdateTimeMs=" + this.mUpdateTimeMs + "(" + simpleDateFormat.format(new Date(this.mUpdateTimeMs)) + ")");
-        printWriter.println(concat + "mInterruptionTimeMs=" + this.mInterruptionTimeMs + "(" + simpleDateFormat.format(new Date(this.mInterruptionTimeMs)) + ")");
+        printWriter.println(
+                concat
+                        + "mCreationTimeMs="
+                        + this.mCreationTimeMs
+                        + "("
+                        + simpleDateFormat.format(new Date(this.mCreationTimeMs))
+                        + ")");
+        printWriter.println(
+                concat
+                        + "mVisibleSinceMs="
+                        + this.mVisibleSinceMs
+                        + "("
+                        + simpleDateFormat.format(new Date(this.mVisibleSinceMs))
+                        + ")");
+        printWriter.println(
+                concat
+                        + "mUpdateTimeMs="
+                        + this.mUpdateTimeMs
+                        + "("
+                        + simpleDateFormat.format(new Date(this.mUpdateTimeMs))
+                        + ")");
+        printWriter.println(
+                concat
+                        + "mInterruptionTimeMs="
+                        + this.mInterruptionTimeMs
+                        + "("
+                        + simpleDateFormat.format(new Date(this.mInterruptionTimeMs))
+                        + ")");
         StringBuilder sb5 = new StringBuilder();
         sb5.append(concat);
         sb5.append("mSuppressedVisualEffects= ");
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m(sb5, this.mSuppressedVisualEffects, printWriter);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                sb5, this.mSuppressedVisualEffects, printWriter);
         if (this.mPreChannelsNotification) {
             StringBuilder m6 = Preconditions$$ExternalSyntheticOutline0.m(concat, "defaults=");
             m6.append(Notification.defaultsToString(notification.defaults));
@@ -585,10 +784,22 @@ public final class NotificationRecord {
             StringBuilder sb6 = new StringBuilder();
             sb6.append(concat);
             sb6.append("n.audioStreamType=");
-            StringBuilder m7 = MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(sb6, notification.audioStreamType, printWriter, concat, "n.audioAttributes=");
+            StringBuilder m7 =
+                    MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(
+                            sb6,
+                            notification.audioStreamType,
+                            printWriter,
+                            concat,
+                            "n.audioAttributes=");
             m7.append(notification.audioAttributes);
             printWriter.println(m7.toString());
-            printWriter.println(concat + String.format("  led=0x%08x onMs=%d offMs=%d", Integer.valueOf(notification.ledARGB), Integer.valueOf(notification.ledOnMS), Integer.valueOf(notification.ledOffMS)));
+            printWriter.println(
+                    concat
+                            + String.format(
+                                    "  led=0x%08x onMs=%d offMs=%d",
+                                    Integer.valueOf(notification.ledARGB),
+                                    Integer.valueOf(notification.ledOnMS),
+                                    Integer.valueOf(notification.ledOffMS)));
             printWriter.println(concat + "vibrate=" + Arrays.toString(notification.vibrate));
         }
         StringBuilder m8 = Preconditions$$ExternalSyntheticOutline0.m(concat, "mSound= ");
@@ -600,28 +811,40 @@ public final class NotificationRecord {
         StringBuilder sb7 = new StringBuilder();
         sb7.append(concat);
         sb7.append("mShowBadge=");
-        StringBuilder m9 = MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(sb7, this.mShowBadge, printWriter, concat, "mColorized=");
+        StringBuilder m9 =
+                MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(
+                        sb7, this.mShowBadge, printWriter, concat, "mColorized=");
         m9.append(notification.isColorized());
         printWriter.println(m9.toString());
         StringBuilder sb8 = new StringBuilder();
         sb8.append(concat);
         sb8.append("mAllowBubble=");
-        StringBuilder m10 = MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(sb8, this.mAllowBubble, printWriter, concat, "isBubble=");
+        StringBuilder m10 =
+                MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(
+                        sb8, this.mAllowBubble, printWriter, concat, "isBubble=");
         m10.append(notification.isBubbleNotification());
         printWriter.println(m10.toString());
         StringBuilder sb9 = new StringBuilder();
         sb9.append(concat);
         sb9.append("mIsInterruptive=");
-        StringBuilder m11 = MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(sb9, this.mIsInterruptive, printWriter, concat, "effectiveNotificationChannel=");
+        StringBuilder m11 =
+                MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(
+                        sb9,
+                        this.mIsInterruptive,
+                        printWriter,
+                        concat,
+                        "effectiveNotificationChannel=");
         m11.append(this.mChannel);
         printWriter.println(m11.toString());
         if (this.mPeopleOverride != null) {
-            StringBuilder m12 = Preconditions$$ExternalSyntheticOutline0.m(concat, "overridePeople= ");
+            StringBuilder m12 =
+                    Preconditions$$ExternalSyntheticOutline0.m(concat, "overridePeople= ");
             m12.append(TextUtils.join(",", this.mPeopleOverride));
             printWriter.println(m12.toString());
         }
         if (this.mSnoozeCriteria != null) {
-            StringBuilder m13 = Preconditions$$ExternalSyntheticOutline0.m(concat, "snoozeCriteria=");
+            StringBuilder m13 =
+                    Preconditions$$ExternalSyntheticOutline0.m(concat, "snoozeCriteria=");
             m13.append(TextUtils.join(",", this.mSnoozeCriteria));
             printWriter.println(m13.toString());
         }
@@ -633,13 +856,27 @@ public final class NotificationRecord {
         sb10.append("shortcut=");
         sb10.append(notification.getShortcutId());
         sb10.append(" found valid? ");
-        BinaryTransparencyService$$ExternalSyntheticOutline0.m(MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(sb10, this.mShortcutInfo != null, printWriter, concat, "mUserVisOverride="), this.mPackageVisibility, printWriter, concat, "mSuggestionsGeneratedByAssistant="), this.mSuggestionsGeneratedByAssistant, printWriter);
+        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(
+                        MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(
+                                sb10,
+                                this.mShortcutInfo != null,
+                                printWriter,
+                                concat,
+                                "mUserVisOverride="),
+                        this.mPackageVisibility,
+                        printWriter,
+                        concat,
+                        "mSuggestionsGeneratedByAssistant="),
+                this.mSuggestionsGeneratedByAssistant,
+                printWriter);
         ArrayList arrayList = this.mSystemGeneratedSmartActions;
         int size = arrayList != null ? arrayList.size() : 0;
         if (size != 0) {
             printWriter.println(concat + "mSystemGeneratedSmartActions=");
             for (int i = 0; i < size; i++) {
-                Notification.Action action = (Notification.Action) this.mSystemGeneratedSmartActions.get(i);
+                Notification.Action action =
+                        (Notification.Action) this.mSystemGeneratedSmartActions.get(i);
                 Icon icon = action.getIcon();
                 String valueOf = String.valueOf(icon);
                 Integer valueOf2 = Integer.valueOf(i);
@@ -652,7 +889,10 @@ public final class NotificationRecord {
                 if (pendingIntent != null) {
                     str2 = pendingIntent.toString();
                 }
-                printWriter.println(String.format("%s    [%d] \"%s\" \"%s\"-> %s", concat, valueOf2, charSequence, valueOf, str2));
+                printWriter.println(
+                        String.format(
+                                "%s    [%d] \"%s\" \"%s\"-> %s",
+                                concat, valueOf2, charSequence, valueOf, str2));
             }
         }
         ArrayList arrayList2 = this.mSmartReplies;
@@ -660,7 +900,12 @@ public final class NotificationRecord {
         if (size2 != 0) {
             printWriter.println(concat + "mSmartReplies=");
             for (int i2 = 0; i2 < size2; i2++) {
-                printWriter.println(String.format("%s      [%d] %s", concat, Integer.valueOf(i2), ((CharSequence) this.mSmartReplies.get(i2)).toString()));
+                printWriter.println(
+                        String.format(
+                                "%s      [%d] %s",
+                                concat,
+                                Integer.valueOf(i2),
+                                ((CharSequence) this.mSmartReplies.get(i2)).toString()));
             }
         }
     }
@@ -706,7 +951,16 @@ public final class NotificationRecord {
     }
 
     public final LogMaker getLogMaker(long j) {
-        LogMaker addTaggedData = this.sbn.getLogMaker().addTaggedData(858, Integer.valueOf(this.mImportance)).addTaggedData(793, Integer.valueOf((int) (j - this.mCreationTimeMs))).addTaggedData(795, Integer.valueOf((int) (j - this.mUpdateTimeMs))).addTaggedData(794, Integer.valueOf(getExposureMs(j))).addTaggedData(NetworkConstants.ETHER_MTU, Integer.valueOf((int) (j - this.mInterruptionTimeMs)));
+        LogMaker addTaggedData =
+                this.sbn
+                        .getLogMaker()
+                        .addTaggedData(858, Integer.valueOf(this.mImportance))
+                        .addTaggedData(793, Integer.valueOf((int) (j - this.mCreationTimeMs)))
+                        .addTaggedData(795, Integer.valueOf((int) (j - this.mUpdateTimeMs)))
+                        .addTaggedData(794, Integer.valueOf(getExposureMs(j)))
+                        .addTaggedData(
+                                NetworkConstants.ETHER_MTU,
+                                Integer.valueOf((int) (j - this.mInterruptionTimeMs)));
         int i = this.mImportanceExplanationCode;
         if (i != 0) {
             addTaggedData.addTaggedData(1688, Integer.valueOf(i));
@@ -714,8 +968,10 @@ public final class NotificationRecord {
             if (i2 == 3 || i2 == 4) {
                 NotificationUsageStats.SingleNotificationStats singleNotificationStats = this.stats;
                 if (singleNotificationStats.naturalImportance != -1000) {
-                    addTaggedData.addTaggedData(1690, Integer.valueOf(this.mInitialImportanceExplanationCode));
-                    addTaggedData.addTaggedData(1689, Integer.valueOf(singleNotificationStats.naturalImportance));
+                    addTaggedData.addTaggedData(
+                            1690, Integer.valueOf(this.mInitialImportanceExplanationCode));
+                    addTaggedData.addTaggedData(
+                            1689, Integer.valueOf(singleNotificationStats.naturalImportance));
                 }
             }
         }
@@ -747,13 +1003,17 @@ public final class NotificationRecord {
 
     public final boolean isConversation() {
         Notification notification = this.sbn.getNotification();
-        if (this.mChannel.isDemoted() || this.mAppDemotedFromConvo || this.mIsNotConversationOverride) {
+        if (this.mChannel.isDemoted()
+                || this.mAppDemotedFromConvo
+                || this.mIsNotConversationOverride) {
             return false;
         }
         boolean isStyle = notification.isStyle(Notification.MessagingStyle.class);
         int i = this.mTargetSdkVersion;
         if (!isStyle) {
-            return this.mPkgAllowedAsConvo && i < 30 && "msg".equals(this.sbn.getNotification().category);
+            return this.mPkgAllowedAsConvo
+                    && i < 30
+                    && "msg".equals(this.sbn.getNotification().category);
         }
         if (i >= 30 && notification.isStyle(Notification.MessagingStyle.class)) {
             ShortcutInfo shortcutInfo = this.mShortcutInfo;
@@ -761,8 +1021,7 @@ public final class NotificationRecord {
                 Person[] persons = shortcutInfo.getPersons();
                 if (persons != null && persons.length != 0) {
                     for (Person person : persons) {
-                        if (person.isBot()) {
-                        }
+                        if (person.isBot()) {}
                     }
                 }
             }
@@ -782,30 +1041,70 @@ public final class NotificationRecord {
         long currentTimeMillis = System.currentTimeMillis();
         this.mInterruptionTimeMs = z ? currentTimeMillis : this.mInterruptionTimeMs;
         if (z) {
-            MetricsLogger.action(getLogMaker().setCategory(1501).setType(1).addTaggedData(NetworkConstants.ETHER_MTU, Integer.valueOf((int) (currentTimeMillis - this.mInterruptionTimeMs))));
-            MetricsLogger.histogram(this.mContext, "note_interruptive", (int) (currentTimeMillis - this.mInterruptionTimeMs));
+            MetricsLogger.action(
+                    getLogMaker()
+                            .setCategory(1501)
+                            .setType(1)
+                            .addTaggedData(
+                                    NetworkConstants.ETHER_MTU,
+                                    Integer.valueOf(
+                                            (int) (currentTimeMillis - this.mInterruptionTimeMs))));
+            MetricsLogger.histogram(
+                    this.mContext,
+                    "note_interruptive",
+                    (int) (currentTimeMillis - this.mInterruptionTimeMs));
         }
     }
 
-    public final void setVisibility(boolean z, int i, int i2, NotificationRecordLogger notificationRecordLogger) {
+    public final void setVisibility(
+            boolean z, int i, int i2, NotificationRecordLogger notificationRecordLogger) {
         long currentTimeMillis = System.currentTimeMillis();
         this.mVisibleSinceMs = z ? currentTimeMillis : this.mVisibleSinceMs;
         this.stats.onVisibilityChanged(z);
-        MetricsLogger.action(getLogMaker(currentTimeMillis).setCategory(128).setType(z ? 1 : 2).addTaggedData(798, Integer.valueOf(i)).addTaggedData(1395, Integer.valueOf(i2)));
+        MetricsLogger.action(
+                getLogMaker(currentTimeMillis)
+                        .setCategory(128)
+                        .setType(z ? 1 : 2)
+                        .addTaggedData(798, Integer.valueOf(i))
+                        .addTaggedData(1395, Integer.valueOf(i2)));
         if (z) {
             this.mStats.setSeen();
             if (this.mTextChanged) {
                 setInterruptive(true);
             }
-            MetricsLogger.histogram(this.mContext, "note_freshness", (int) (currentTimeMillis - this.mUpdateTimeMs));
+            MetricsLogger.histogram(
+                    this.mContext,
+                    "note_freshness",
+                    (int) (currentTimeMillis - this.mUpdateTimeMs));
         }
-        EventLog.writeEvent(27531, this.sbn.getKey(), Integer.valueOf(z ? 1 : 0), Integer.valueOf((int) (currentTimeMillis - this.mCreationTimeMs)), Integer.valueOf((int) (currentTimeMillis - this.mUpdateTimeMs)), 0, Integer.valueOf(i));
+        EventLog.writeEvent(
+                27531,
+                this.sbn.getKey(),
+                Integer.valueOf(z ? 1 : 0),
+                Integer.valueOf((int) (currentTimeMillis - this.mCreationTimeMs)),
+                Integer.valueOf((int) (currentTimeMillis - this.mUpdateTimeMs)),
+                0,
+                Integer.valueOf(i));
         notificationRecordLogger.getClass();
-        ((NotificationRecordLoggerImpl) notificationRecordLogger).log(z ? NotificationRecordLogger.NotificationEvent.NOTIFICATION_OPEN : NotificationRecordLogger.NotificationEvent.NOTIFICATION_CLOSE, this);
+        ((NotificationRecordLoggerImpl) notificationRecordLogger)
+                .log(
+                        z
+                                ? NotificationRecordLogger.NotificationEvent.NOTIFICATION_OPEN
+                                : NotificationRecordLogger.NotificationEvent.NOTIFICATION_CLOSE,
+                        this);
     }
 
     public final String toString() {
-        return String.format("NotificationRecord(0x%08x: pkg=%s user=%s id=%d tag=%s importance=%d key=%s: %s)", Integer.valueOf(System.identityHashCode(this)), this.sbn.getPackageName(), this.sbn.getUser(), Integer.valueOf(this.sbn.getId()), this.sbn.getTag(), Integer.valueOf(this.mImportance), this.sbn.getKey(), this.sbn.getNotification());
+        return String.format(
+                "NotificationRecord(0x%08x: pkg=%s user=%s id=%d tag=%s importance=%d key=%s: %s)",
+                Integer.valueOf(System.identityHashCode(this)),
+                this.sbn.getPackageName(),
+                this.sbn.getUser(),
+                Integer.valueOf(this.sbn.getId()),
+                this.sbn.getTag(),
+                Integer.valueOf(this.mImportance),
+                this.sbn.getKey(),
+                this.sbn.getNotification());
     }
 
     public final void updateNotificationChannel(NotificationChannel notificationChannel) {
@@ -814,7 +1113,9 @@ public final class NotificationRecord {
             calculateImportance();
             calculateUserSentiment();
             this.mVibration = calculateVibration();
-            if (android.app.Flags.restrictAudioAttributesCall() || android.app.Flags.restrictAudioAttributesAlarm() || android.app.Flags.restrictAudioAttributesMedia()) {
+            if (android.app.Flags.restrictAudioAttributesCall()
+                    || android.app.Flags.restrictAudioAttributesAlarm()
+                    || android.app.Flags.restrictAudioAttributesMedia()) {
                 if (notificationChannel.getAudioAttributes() != null) {
                     this.mAttributes = notificationChannel.getAudioAttributes();
                 } else {
@@ -834,7 +1135,14 @@ public final class NotificationRecord {
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 try {
-                    ((UriGrantsManagerService.LocalService) this.mUgmInternal).checkGrantUriPermission(uid, null, ContentProvider.getUriWithoutUserId(uri), 1, ContentProvider.getUserIdFromUri(uri, UserHandle.getUserId(uid)));
+                    ((UriGrantsManagerService.LocalService) this.mUgmInternal)
+                            .checkGrantUriPermission(
+                                    uid,
+                                    null,
+                                    ContentProvider.getUriWithoutUserId(uri),
+                                    1,
+                                    ContentProvider.getUserIdFromUri(
+                                            uri, UserHandle.getUserId(uid)));
                     if (this.mGrantableUris == null) {
                         this.mGrantableUris = new ArraySet();
                     }
@@ -843,12 +1151,16 @@ public final class NotificationRecord {
                     if (!z) {
                         if (z2) {
                             this.mSound = Settings.System.DEFAULT_NOTIFICATION_URI;
-                            Log.w("NotificationRecord", "Replacing " + uri + " from " + uid + ": " + e.getMessage());
+                            Log.w(
+                                    "NotificationRecord",
+                                    "Replacing " + uri + " from " + uid + ": " + e.getMessage());
                         } else {
                             if (this.mTargetSdkVersion >= 28) {
                                 throw e;
                             }
-                            Log.w("NotificationRecord", "Ignoring " + uri + " from " + uid + ": " + e.getMessage());
+                            Log.w(
+                                    "NotificationRecord",
+                                    "Ignoring " + uri + " from " + uid + ": " + e.getMessage());
                         }
                     }
                 }

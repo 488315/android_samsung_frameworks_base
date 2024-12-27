@@ -6,12 +6,14 @@ import android.content.pm.PackageManager;
 import android.os.Binder;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.StorageManagerService$$ExternalSyntheticOutline0;
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
+
 import java.util.HashMap;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -74,7 +76,10 @@ public final class ControlWakeKey {
         L52:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.input.ControlWakeKey.writeWakeKeyVolume(java.lang.String, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.input.ControlWakeKey.writeWakeKeyVolume(java.lang.String,"
+                    + " boolean):void");
     }
 
     public final void makeWakeKeyRefCount(String str, boolean z) {
@@ -84,9 +89,14 @@ public final class ControlWakeKey {
             int length = split.length;
             while (i < length) {
                 String trim = split[i].trim();
-                int intValue = this.mWakeKeyRefCount.containsKey(trim) ? ((Integer) this.mWakeKeyRefCount.get(trim)).intValue() + 1 : 1;
+                int intValue =
+                        this.mWakeKeyRefCount.containsKey(trim)
+                                ? ((Integer) this.mWakeKeyRefCount.get(trim)).intValue() + 1
+                                : 1;
                 this.mWakeKeyRefCount.put(trim, Integer.valueOf(intValue));
-                Slog.d("InputManager.ControlWakeKey", "mWakeKeyRefCount(" + trim + ") is increased: " + intValue);
+                Slog.d(
+                        "InputManager.ControlWakeKey",
+                        "mWakeKeyRefCount(" + trim + ") is increased: " + intValue);
                 i++;
             }
             return;
@@ -101,7 +111,9 @@ public final class ControlWakeKey {
                     Slog.i("InputManager.ControlWakeKey", "keyCode is removed: " + trim2);
                 } else {
                     this.mWakeKeyRefCount.put(trim2, Integer.valueOf(intValue2));
-                    Slog.d("InputManager.ControlWakeKey", "mWakeKeyRefCount(" + trim2 + ") is decreased: " + intValue2);
+                    Slog.d(
+                            "InputManager.ControlWakeKey",
+                            "mWakeKeyRefCount(" + trim2 + ") is decreased: " + intValue2);
                 }
             }
             i++;
@@ -121,7 +133,9 @@ public final class ControlWakeKey {
                 stringBuffer.append(",");
             }
             stringBuffer.deleteCharAt(stringBuffer.length() - 1);
-            Slog.d("InputManager.ControlWakeKey", "keyCodes in makeWakeKeyString is " + stringBuffer.toString());
+            Slog.d(
+                    "InputManager.ControlWakeKey",
+                    "keyCodes in makeWakeKeyString is " + stringBuffer.toString());
         }
         return new String(stringBuffer.toString());
     }
@@ -129,15 +143,23 @@ public final class ControlWakeKey {
     public final void setWakeKeyDynamically(String str, boolean z, String str2) {
         boolean z2;
         if (TextUtils.isEmpty(str)) {
-            Slog.i("InputManager.ControlWakeKey", "setWakeKeyDynamically: pkg=".concat(str == null ? "null" : "empty"));
+            Slog.i(
+                    "InputManager.ControlWakeKey",
+                    "setWakeKeyDynamically: pkg=".concat(str == null ? "null" : "empty"));
             return;
         }
         if (TextUtils.isEmpty(str2)) {
-            BootReceiver$$ExternalSyntheticOutline0.m(DumpUtils$$ExternalSyntheticOutline0.m("setWakeKeyDynamically: pkg=", str, ", keyCodes="), str2 == null ? "null" : "empty", "InputManager.ControlWakeKey");
+            BootReceiver$$ExternalSyntheticOutline0.m(
+                    DumpUtils$$ExternalSyntheticOutline0.m(
+                            "setWakeKeyDynamically: pkg=", str, ", keyCodes="),
+                    str2 == null ? "null" : "empty",
+                    "InputManager.ControlWakeKey");
             return;
         }
         int callingUid = Binder.getCallingUid();
-        StringBuilder m = StorageManagerService$$ExternalSyntheticOutline0.m(callingUid, "setWakeKeyDynamically: pkg=", str, ", uid=", ", keyCodes=");
+        StringBuilder m =
+                StorageManagerService$$ExternalSyntheticOutline0.m(
+                        callingUid, "setWakeKeyDynamically: pkg=", str, ", uid=", ", keyCodes=");
         m.append(str2);
         m.append(", put=");
         m.append(z);
@@ -149,7 +171,9 @@ public final class ControlWakeKey {
         }
         String[] packagesForUid = packageManager.getPackagesForUid(callingUid);
         if (packagesForUid == null || packagesForUid.length == 0) {
-            Slog.i("InputManager.ControlWakeKey", "packages: ".concat(packagesForUid == null ? "null" : "empty"));
+            Slog.i(
+                    "InputManager.ControlWakeKey",
+                    "packages: ".concat(packagesForUid == null ? "null" : "empty"));
             return;
         }
         int length = packagesForUid.length;
@@ -173,14 +197,24 @@ public final class ControlWakeKey {
                 return;
             }
             if (!z2 || !applicationInfo.isPrivilegedApp()) {
-                SystemServiceManager$$ExternalSyntheticOutline0.m(BatteryService$$ExternalSyntheticOutline0.m("uidHasPackage is ", ", appinfo.privateFlags is ", z2), applicationInfo.privateFlags, "InputManager.ControlWakeKey");
+                SystemServiceManager$$ExternalSyntheticOutline0.m(
+                        BatteryService$$ExternalSyntheticOutline0.m(
+                                "uidHasPackage is ", ", appinfo.privateFlags is ", z2),
+                        applicationInfo.privateFlags,
+                        "InputManager.ControlWakeKey");
                 if (!z2) {
                     for (String str3 : packagesForUid) {
-                        Slog.d("InputManager.ControlWakeKey", "packages with uid " + callingUid + ": " + str3);
+                        Slog.d(
+                                "InputManager.ControlWakeKey",
+                                "packages with uid " + callingUid + ": " + str3);
                     }
                 }
                 if (Binder.getCallingUid() != 1000) {
-                    throw new SecurityException(XmlUtils$$ExternalSyntheticOutline0.m("only system app can use this method, but ", str, " is not system app"));
+                    throw new SecurityException(
+                            XmlUtils$$ExternalSyntheticOutline0.m(
+                                    "only system app can use this method, but ",
+                                    str,
+                                    " is not system app"));
                 }
             }
             try {
@@ -199,7 +233,8 @@ public final class ControlWakeKey {
             makeWakeKeyRefCount("116,172", true);
         }
         makeWakeKeyRefCount(str, z);
-        if (!this.mWakeKeyRefCount.containsKey("114") && !this.mWakeKeyRefCount.containsKey("115")) {
+        if (!this.mWakeKeyRefCount.containsKey("114")
+                && !this.mWakeKeyRefCount.containsKey("115")) {
             z2 = false;
         }
         writeWakeKeyVolume("/sys/power/volkey_wakeup", z2);
@@ -255,6 +290,8 @@ public final class ControlWakeKey {
         L45:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.input.ControlWakeKey.writeWakeKeyString(java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.input.ControlWakeKey.writeWakeKeyString(java.lang.String):void");
     }
 }

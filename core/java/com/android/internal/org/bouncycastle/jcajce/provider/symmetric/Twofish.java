@@ -8,8 +8,7 @@ import com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.PBES
 
 /* loaded from: classes5.dex */
 public final class Twofish {
-    private Twofish() {
-    }
+    private Twofish() {}
 
     public static class PBEWithSHAKeyFactory extends PBESecretKeyFactory {
         public PBEWithSHAKeyFactory() {
@@ -28,10 +27,13 @@ public final class Twofish {
 
         @Override // com.android.internal.org.bouncycastle.jcajce.provider.util.AlgorithmProvider
         public void configure(ConfigurableProvider provider) {
-            provider.addAlgorithm("Alg.Alias.AlgorithmParameters.PBEWITHSHAANDTWOFISH", "PKCS12PBE");
-            provider.addAlgorithm("Alg.Alias.AlgorithmParameters.PBEWITHSHAANDTWOFISH-CBC", "PKCS12PBE");
+            provider.addAlgorithm(
+                    "Alg.Alias.AlgorithmParameters.PBEWITHSHAANDTWOFISH", "PKCS12PBE");
+            provider.addAlgorithm(
+                    "Alg.Alias.AlgorithmParameters.PBEWITHSHAANDTWOFISH-CBC", "PKCS12PBE");
             provider.addAlgorithm("Cipher.PBEWITHSHAANDTWOFISH-CBC", PREFIX + "$PBEWithSHA");
-            provider.addAlgorithm("SecretKeyFactory.PBEWITHSHAANDTWOFISH-CBC", PREFIX + "$PBEWithSHAKeyFactory");
+            provider.addAlgorithm(
+                    "SecretKeyFactory.PBEWITHSHAANDTWOFISH-CBC", PREFIX + "$PBEWithSHAKeyFactory");
         }
     }
 }

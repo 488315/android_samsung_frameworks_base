@@ -20,16 +20,14 @@ import android.os.ServiceManager;
 import android.os.SharedMemory;
 import android.os.SystemProperties;
 import android.provider.Settings;
-import android.service.voice.AlwaysOnHotwordDetector;
-import android.service.voice.HotwordDetector;
-import android.service.voice.IVoiceInteractionService;
-import android.service.voice.VisualQueryDetector;
 import android.util.ArraySet;
 import android.util.Log;
+
 import com.android.internal.app.IVoiceActionCheckCallback;
 import com.android.internal.app.IVoiceInteractionManagerService;
 import com.android.internal.util.function.TriConsumer;
 import com.android.internal.util.function.pooled.PooledLambda;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -52,117 +50,190 @@ public class VoiceInteractionService extends Service {
     private KeyphraseEnrollmentInfo mKeyphraseEnrollmentInfo;
     IVoiceInteractionManagerService mSystemService;
     static final String TAG = VoiceInteractionService.class.getSimpleName();
-    private static final boolean SYSPROP_VISUAL_QUERY_SERVICE_ENABLED = SystemProperties.getBoolean("ro.hotword.visual_query_service_enabled", false);
+    private static final boolean SYSPROP_VISUAL_QUERY_SERVICE_ENABLED =
+            SystemProperties.getBoolean("ro.hotword.visual_query_service_enabled", false);
     IVoiceInteractionService mInterface = new AnonymousClass1();
     private final Object mLock = new Object();
     private final Set<HotwordDetector> mActiveDetectors = new ArraySet();
     private boolean mTestModuleForAlwaysOnHotwordDetectorEnabled = false;
-    private IBinder.DeathRecipient mDeathRecipient = new IBinder.DeathRecipient() { // from class: android.service.voice.VoiceInteractionService$$ExternalSyntheticLambda2
-        @Override // android.os.IBinder.DeathRecipient
-        public final void binderDied() {
-            VoiceInteractionService.this.lambda$new$1();
-        }
-    };
+    private IBinder.DeathRecipient mDeathRecipient =
+            new IBinder
+                    .DeathRecipient() { // from class:
+                                        // android.service.voice.VoiceInteractionService$$ExternalSyntheticLambda2
+                @Override // android.os.IBinder.DeathRecipient
+                public final void binderDied() {
+                    VoiceInteractionService.this.lambda$new$1();
+                }
+            };
 
     /* renamed from: android.service.voice.VoiceInteractionService$1, reason: invalid class name */
     class AnonymousClass1 extends IVoiceInteractionService.Stub {
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         @Override // android.service.voice.IVoiceInteractionService
         public void ready() {
-            Handler.getMain().executeOrSendMessage(PooledLambda.obtainMessage(new Consumer() { // from class: android.service.voice.VoiceInteractionService$1$$ExternalSyntheticLambda5
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ((VoiceInteractionService) obj).onReady();
-                }
-            }, VoiceInteractionService.this));
+            Handler.getMain()
+                    .executeOrSendMessage(
+                            PooledLambda.obtainMessage(
+                                    new Consumer() { // from class:
+                                                     // android.service.voice.VoiceInteractionService$1$$ExternalSyntheticLambda5
+                                        @Override // java.util.function.Consumer
+                                        public final void accept(Object obj) {
+                                            ((VoiceInteractionService) obj).onReady();
+                                        }
+                                    },
+                                    VoiceInteractionService.this));
         }
 
         @Override // android.service.voice.IVoiceInteractionService
         public void shutdown() {
-            Handler.getMain().executeOrSendMessage(PooledLambda.obtainMessage(new Consumer() { // from class: android.service.voice.VoiceInteractionService$1$$ExternalSyntheticLambda4
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ((VoiceInteractionService) obj).onShutdownInternal();
-                }
-            }, VoiceInteractionService.this));
+            Handler.getMain()
+                    .executeOrSendMessage(
+                            PooledLambda.obtainMessage(
+                                    new Consumer() { // from class:
+                                                     // android.service.voice.VoiceInteractionService$1$$ExternalSyntheticLambda4
+                                        @Override // java.util.function.Consumer
+                                        public final void accept(Object obj) {
+                                            ((VoiceInteractionService) obj).onShutdownInternal();
+                                        }
+                                    },
+                                    VoiceInteractionService.this));
         }
 
         @Override // android.service.voice.IVoiceInteractionService
         public void soundModelsChanged() {
-            Handler.getMain().executeOrSendMessage(PooledLambda.obtainMessage(new Consumer() { // from class: android.service.voice.VoiceInteractionService$1$$ExternalSyntheticLambda7
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ((VoiceInteractionService) obj).onSoundModelsChangedInternal();
-                }
-            }, VoiceInteractionService.this));
+            Handler.getMain()
+                    .executeOrSendMessage(
+                            PooledLambda.obtainMessage(
+                                    new Consumer() { // from class:
+                                                     // android.service.voice.VoiceInteractionService$1$$ExternalSyntheticLambda7
+                                        @Override // java.util.function.Consumer
+                                        public final void accept(Object obj) {
+                                            ((VoiceInteractionService) obj)
+                                                    .onSoundModelsChangedInternal();
+                                        }
+                                    },
+                                    VoiceInteractionService.this));
         }
 
         @Override // android.service.voice.IVoiceInteractionService
         public void launchVoiceAssistFromKeyguard() {
-            Handler.getMain().executeOrSendMessage(PooledLambda.obtainMessage(new Consumer() { // from class: android.service.voice.VoiceInteractionService$1$$ExternalSyntheticLambda1
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ((VoiceInteractionService) obj).onLaunchVoiceAssistFromKeyguard();
-                }
-            }, VoiceInteractionService.this));
+            Handler.getMain()
+                    .executeOrSendMessage(
+                            PooledLambda.obtainMessage(
+                                    new Consumer() { // from class:
+                                                     // android.service.voice.VoiceInteractionService$1$$ExternalSyntheticLambda1
+                                        @Override // java.util.function.Consumer
+                                        public final void accept(Object obj) {
+                                            ((VoiceInteractionService) obj)
+                                                    .onLaunchVoiceAssistFromKeyguard();
+                                        }
+                                    },
+                                    VoiceInteractionService.this));
         }
 
         @Override // android.service.voice.IVoiceInteractionService
-        public void getActiveServiceSupportedActions(List<String> voiceActions, IVoiceActionCheckCallback callback) {
-            Handler.getMain().executeOrSendMessage(PooledLambda.obtainMessage(new TriConsumer() { // from class: android.service.voice.VoiceInteractionService$1$$ExternalSyntheticLambda6
-                @Override // com.android.internal.util.function.TriConsumer
-                public final void accept(Object obj, Object obj2, Object obj3) {
-                    ((VoiceInteractionService) obj).onHandleVoiceActionCheck((List) obj2, (IVoiceActionCheckCallback) obj3);
-                }
-            }, VoiceInteractionService.this, voiceActions, callback));
+        public void getActiveServiceSupportedActions(
+                List<String> voiceActions, IVoiceActionCheckCallback callback) {
+            Handler.getMain()
+                    .executeOrSendMessage(
+                            PooledLambda.obtainMessage(
+                                    new TriConsumer() { // from class:
+                                                        // android.service.voice.VoiceInteractionService$1$$ExternalSyntheticLambda6
+                                        @Override // com.android.internal.util.function.TriConsumer
+                                        public final void accept(
+                                                Object obj, Object obj2, Object obj3) {
+                                            ((VoiceInteractionService) obj)
+                                                    .onHandleVoiceActionCheck(
+                                                            (List) obj2,
+                                                            (IVoiceActionCheckCallback) obj3);
+                                        }
+                                    },
+                                    VoiceInteractionService.this,
+                                    voiceActions,
+                                    callback));
         }
 
         @Override // android.service.voice.IVoiceInteractionService
         public void prepareToShowSession(Bundle args, int flags) {
-            Handler.getMain().executeOrSendMessage(PooledLambda.obtainMessage(new TriConsumer() { // from class: android.service.voice.VoiceInteractionService$1$$ExternalSyntheticLambda3
-                @Override // com.android.internal.util.function.TriConsumer
-                public final void accept(Object obj, Object obj2, Object obj3) {
-                    ((VoiceInteractionService) obj).onPrepareToShowSession((Bundle) obj2, ((Integer) obj3).intValue());
-                }
-            }, VoiceInteractionService.this, args, Integer.valueOf(flags)));
+            Handler.getMain()
+                    .executeOrSendMessage(
+                            PooledLambda.obtainMessage(
+                                    new TriConsumer() { // from class:
+                                                        // android.service.voice.VoiceInteractionService$1$$ExternalSyntheticLambda3
+                                        @Override // com.android.internal.util.function.TriConsumer
+                                        public final void accept(
+                                                Object obj, Object obj2, Object obj3) {
+                                            ((VoiceInteractionService) obj)
+                                                    .onPrepareToShowSession(
+                                                            (Bundle) obj2,
+                                                            ((Integer) obj3).intValue());
+                                        }
+                                    },
+                                    VoiceInteractionService.this,
+                                    args,
+                                    Integer.valueOf(flags)));
         }
 
         @Override // android.service.voice.IVoiceInteractionService
         public void showSessionFailed(Bundle args) {
-            Handler.getMain().executeOrSendMessage(PooledLambda.obtainMessage(new BiConsumer() { // from class: android.service.voice.VoiceInteractionService$1$$ExternalSyntheticLambda2
-                @Override // java.util.function.BiConsumer
-                public final void accept(Object obj, Object obj2) {
-                    ((VoiceInteractionService) obj).onShowSessionFailed((Bundle) obj2);
-                }
-            }, VoiceInteractionService.this, args));
+            Handler.getMain()
+                    .executeOrSendMessage(
+                            PooledLambda.obtainMessage(
+                                    new BiConsumer() { // from class:
+                                                       // android.service.voice.VoiceInteractionService$1$$ExternalSyntheticLambda2
+                                        @Override // java.util.function.BiConsumer
+                                        public final void accept(Object obj, Object obj2) {
+                                            ((VoiceInteractionService) obj)
+                                                    .onShowSessionFailed((Bundle) obj2);
+                                        }
+                                    },
+                                    VoiceInteractionService.this,
+                                    args));
         }
 
         @Override // android.service.voice.IVoiceInteractionService
         public void detectorRemoteExceptionOccurred(IBinder token, int detectorType) {
             Log.d(VoiceInteractionService.TAG, "detectorRemoteExceptionOccurred");
-            Handler.getMain().executeOrSendMessage(PooledLambda.obtainMessage(new TriConsumer() { // from class: android.service.voice.VoiceInteractionService$1$$ExternalSyntheticLambda0
-                @Override // com.android.internal.util.function.TriConsumer
-                public final void accept(Object obj, Object obj2, Object obj3) {
-                    ((VoiceInteractionService) obj).onDetectorRemoteException((IBinder) obj2, ((Integer) obj3).intValue());
-                }
-            }, VoiceInteractionService.this, token, Integer.valueOf(detectorType)));
+            Handler.getMain()
+                    .executeOrSendMessage(
+                            PooledLambda.obtainMessage(
+                                    new TriConsumer() { // from class:
+                                                        // android.service.voice.VoiceInteractionService$1$$ExternalSyntheticLambda0
+                                        @Override // com.android.internal.util.function.TriConsumer
+                                        public final void accept(
+                                                Object obj, Object obj2, Object obj3) {
+                                            ((VoiceInteractionService) obj)
+                                                    .onDetectorRemoteException(
+                                                            (IBinder) obj2,
+                                                            ((Integer) obj3).intValue());
+                                        }
+                                    },
+                                    VoiceInteractionService.this,
+                                    token,
+                                    Integer.valueOf(detectorType)));
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public void onDetectorRemoteException(final IBinder token, final int detectorType) {
-        Log.d(TAG, "onDetectorRemoteException for " + HotwordDetector.detectorTypeToString(detectorType));
-        this.mActiveDetectors.forEach(new Consumer() { // from class: android.service.voice.VoiceInteractionService$$ExternalSyntheticLambda5
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                VoiceInteractionService.lambda$onDetectorRemoteException$0(detectorType, token, (HotwordDetector) obj);
-            }
-        });
+        Log.d(
+                TAG,
+                "onDetectorRemoteException for "
+                        + HotwordDetector.detectorTypeToString(detectorType));
+        this.mActiveDetectors.forEach(
+                new Consumer() { // from class:
+                                 // android.service.voice.VoiceInteractionService$$ExternalSyntheticLambda5
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        VoiceInteractionService.lambda$onDetectorRemoteException$0(
+                                detectorType, token, (HotwordDetector) obj);
+                    }
+                });
     }
 
-    static /* synthetic */ void lambda$onDetectorRemoteException$0(int detectorType, IBinder token, HotwordDetector detector) {
+    static /* synthetic */ void lambda$onDetectorRemoteException$0(
+            int detectorType, IBinder token, HotwordDetector detector) {
         if (detectorType == 1 && (detector instanceof AlwaysOnHotwordDetector)) {
             AlwaysOnHotwordDetector alwaysOnDetector = (AlwaysOnHotwordDetector) detector;
             if (alwaysOnDetector.isSameToken(token)) {
@@ -179,19 +250,20 @@ public class VoiceInteractionService extends Service {
         }
     }
 
-    public void onLaunchVoiceAssistFromKeyguard() {
-    }
+    public void onLaunchVoiceAssistFromKeyguard() {}
 
-    public void onPrepareToShowSession(Bundle args, int flags) {
-    }
+    public void onPrepareToShowSession(Bundle args, int flags) {}
 
-    public void onShowSessionFailed(Bundle args) {
-    }
+    public void onShowSessionFailed(Bundle args) {}
 
     public static boolean isActiveService(Context context, ComponentName service) {
         ComponentName curComp;
-        String cur = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.VOICE_INTERACTION_SERVICE);
-        if (cur == null || cur.isEmpty() || (curComp = ComponentName.unflattenFromString(cur)) == null) {
+        String cur =
+                Settings.Secure.getString(
+                        context.getContentResolver(), Settings.Secure.VOICE_INTERACTION_SERVICE);
+        if (cur == null
+                || cur.isEmpty()
+                || (curComp = ComponentName.unflattenFromString(cur)) == null) {
             return false;
         }
         return curComp.equals(service);
@@ -235,7 +307,9 @@ public class VoiceInteractionService extends Service {
     }
 
     public void onReady() {
-        this.mSystemService = IVoiceInteractionManagerService.Stub.asInterface(ServiceManager.getService(Context.VOICE_INTERACTION_MANAGER_SERVICE));
+        this.mSystemService =
+                IVoiceInteractionManagerService.Stub.asInterface(
+                        ServiceManager.getService(Context.VOICE_INTERACTION_MANAGER_SERVICE));
         Objects.requireNonNull(this.mSystemService);
         try {
             this.mSystemService.asBinder().linkToDeath(this.mDeathRecipient, 0);
@@ -248,12 +322,17 @@ public class VoiceInteractionService extends Service {
     /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$new$1() {
         Log.e(TAG, "system service binder died shutting down");
-        Handler.getMain().executeOrSendMessage(PooledLambda.obtainMessage(new Consumer() { // from class: android.service.voice.VoiceInteractionService$$ExternalSyntheticLambda4
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                ((VoiceInteractionService) obj).onShutdownInternal();
-            }
-        }, this));
+        Handler.getMain()
+                .executeOrSendMessage(
+                        PooledLambda.obtainMessage(
+                                new Consumer() { // from class:
+                                                 // android.service.voice.VoiceInteractionService$$ExternalSyntheticLambda4
+                                    @Override // java.util.function.Consumer
+                                    public final void accept(Object obj) {
+                                        ((VoiceInteractionService) obj).onShutdownInternal();
+                                    }
+                                },
+                                this));
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -262,18 +341,20 @@ public class VoiceInteractionService extends Service {
         safelyShutdownAllHotwordDetectors(true);
     }
 
-    public void onShutdown() {
-    }
+    public void onShutdown() {}
 
     /* JADX INFO: Access modifiers changed from: private */
     public void onSoundModelsChangedInternal() {
         synchronized (this) {
-            this.mActiveDetectors.forEach(new Consumer() { // from class: android.service.voice.VoiceInteractionService$$ExternalSyntheticLambda3
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    VoiceInteractionService.lambda$onSoundModelsChangedInternal$2((HotwordDetector) obj);
-                }
-            });
+            this.mActiveDetectors.forEach(
+                    new Consumer() { // from class:
+                                     // android.service.voice.VoiceInteractionService$$ExternalSyntheticLambda3
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            VoiceInteractionService.lambda$onSoundModelsChangedInternal$2(
+                                    (HotwordDetector) obj);
+                        }
+                    });
         }
     }
 
@@ -284,7 +365,8 @@ public class VoiceInteractionService extends Service {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void onHandleVoiceActionCheck(List<String> voiceActions, IVoiceActionCheckCallback callback) {
+    public void onHandleVoiceActionCheck(
+            List<String> voiceActions, IVoiceActionCheckCallback callback) {
         if (callback != null) {
             try {
                 Set<String> voiceActionsSet = new ArraySet<>(voiceActions);
@@ -307,53 +389,102 @@ public class VoiceInteractionService extends Service {
 
     @SystemApi
     @Deprecated
-    public final AlwaysOnHotwordDetector createAlwaysOnHotwordDetector(String keyphrase, Locale locale, AlwaysOnHotwordDetector.Callback callback) {
-        return createAlwaysOnHotwordDetectorInternal(keyphrase, locale, false, null, null, null, null, callback);
+    public final AlwaysOnHotwordDetector createAlwaysOnHotwordDetector(
+            String keyphrase, Locale locale, AlwaysOnHotwordDetector.Callback callback) {
+        return createAlwaysOnHotwordDetectorInternal(
+                keyphrase, locale, false, null, null, null, null, callback);
     }
 
     @SystemApi
-    public final AlwaysOnHotwordDetector createAlwaysOnHotwordDetector(String keyphrase, Locale locale, Executor executor, AlwaysOnHotwordDetector.Callback callback) {
+    public final AlwaysOnHotwordDetector createAlwaysOnHotwordDetector(
+            String keyphrase,
+            Locale locale,
+            Executor executor,
+            AlwaysOnHotwordDetector.Callback callback) {
         Objects.requireNonNull(keyphrase);
         Objects.requireNonNull(locale);
         Objects.requireNonNull(executor);
         Objects.requireNonNull(callback);
-        return createAlwaysOnHotwordDetectorInternal(keyphrase, locale, false, null, null, null, executor, callback);
+        return createAlwaysOnHotwordDetectorInternal(
+                keyphrase, locale, false, null, null, null, executor, callback);
     }
 
-    public final AlwaysOnHotwordDetector createAlwaysOnHotwordDetectorForTest(String keyphrase, Locale locale, SoundTrigger.ModuleProperties moduleProperties, Executor executor, AlwaysOnHotwordDetector.Callback callback) {
+    public final AlwaysOnHotwordDetector createAlwaysOnHotwordDetectorForTest(
+            String keyphrase,
+            Locale locale,
+            SoundTrigger.ModuleProperties moduleProperties,
+            Executor executor,
+            AlwaysOnHotwordDetector.Callback callback) {
         Objects.requireNonNull(keyphrase);
         Objects.requireNonNull(locale);
         Objects.requireNonNull(moduleProperties);
         Objects.requireNonNull(executor);
         Objects.requireNonNull(callback);
-        return createAlwaysOnHotwordDetectorInternal(keyphrase, locale, false, null, null, moduleProperties, executor, callback);
+        return createAlwaysOnHotwordDetectorInternal(
+                keyphrase, locale, false, null, null, moduleProperties, executor, callback);
     }
 
     @SystemApi
     @Deprecated
-    public final AlwaysOnHotwordDetector createAlwaysOnHotwordDetector(String keyphrase, Locale locale, PersistableBundle options, SharedMemory sharedMemory, AlwaysOnHotwordDetector.Callback callback) {
-        return createAlwaysOnHotwordDetectorInternal(keyphrase, locale, true, options, sharedMemory, null, null, callback);
+    public final AlwaysOnHotwordDetector createAlwaysOnHotwordDetector(
+            String keyphrase,
+            Locale locale,
+            PersistableBundle options,
+            SharedMemory sharedMemory,
+            AlwaysOnHotwordDetector.Callback callback) {
+        return createAlwaysOnHotwordDetectorInternal(
+                keyphrase, locale, true, options, sharedMemory, null, null, callback);
     }
 
     @SystemApi
-    public final AlwaysOnHotwordDetector createAlwaysOnHotwordDetector(String keyphrase, Locale locale, PersistableBundle options, SharedMemory sharedMemory, Executor executor, AlwaysOnHotwordDetector.Callback callback) {
+    public final AlwaysOnHotwordDetector createAlwaysOnHotwordDetector(
+            String keyphrase,
+            Locale locale,
+            PersistableBundle options,
+            SharedMemory sharedMemory,
+            Executor executor,
+            AlwaysOnHotwordDetector.Callback callback) {
         Objects.requireNonNull(keyphrase);
         Objects.requireNonNull(locale);
         Objects.requireNonNull(executor);
         Objects.requireNonNull(callback);
-        return createAlwaysOnHotwordDetectorInternal(keyphrase, locale, true, options, sharedMemory, null, executor, callback);
+        return createAlwaysOnHotwordDetectorInternal(
+                keyphrase, locale, true, options, sharedMemory, null, executor, callback);
     }
 
-    public final AlwaysOnHotwordDetector createAlwaysOnHotwordDetectorForTest(String keyphrase, Locale locale, PersistableBundle options, SharedMemory sharedMemory, SoundTrigger.ModuleProperties moduleProperties, Executor executor, AlwaysOnHotwordDetector.Callback callback) {
+    public final AlwaysOnHotwordDetector createAlwaysOnHotwordDetectorForTest(
+            String keyphrase,
+            Locale locale,
+            PersistableBundle options,
+            SharedMemory sharedMemory,
+            SoundTrigger.ModuleProperties moduleProperties,
+            Executor executor,
+            AlwaysOnHotwordDetector.Callback callback) {
         Objects.requireNonNull(keyphrase);
         Objects.requireNonNull(locale);
         Objects.requireNonNull(moduleProperties);
         Objects.requireNonNull(executor);
         Objects.requireNonNull(callback);
-        return createAlwaysOnHotwordDetectorInternal(keyphrase, locale, true, options, sharedMemory, moduleProperties, executor, callback);
+        return createAlwaysOnHotwordDetectorInternal(
+                keyphrase,
+                locale,
+                true,
+                options,
+                sharedMemory,
+                moduleProperties,
+                executor,
+                callback);
     }
 
-    private AlwaysOnHotwordDetector createAlwaysOnHotwordDetectorInternal(String keyphrase, Locale locale, boolean supportHotwordDetectionService, PersistableBundle options, SharedMemory sharedMemory, SoundTrigger.ModuleProperties moduleProperties, Executor executor, AlwaysOnHotwordDetector.Callback callback) {
+    private AlwaysOnHotwordDetector createAlwaysOnHotwordDetectorInternal(
+            String keyphrase,
+            Locale locale,
+            boolean supportHotwordDetectionService,
+            PersistableBundle options,
+            SharedMemory sharedMemory,
+            SoundTrigger.ModuleProperties moduleProperties,
+            Executor executor,
+            AlwaysOnHotwordDetector.Callback callback) {
         SoundTrigger.ModuleProperties moduleProperties2;
         if (this.mSystemService == null) {
             throw new IllegalStateException("Not available until onReady() is called");
@@ -365,12 +496,17 @@ public class VoiceInteractionService extends Service {
                         safelyShutdownAllHotwordDetectors(false);
                     } else {
                         for (HotwordDetector detector : this.mActiveDetectors) {
-                            if (detector.isUsingSandboxedDetectionService() != supportHotwordDetectionService) {
-                                throw new IllegalStateException("It disallows to create trusted and non-trusted detectors at the same time.");
+                            if (detector.isUsingSandboxedDetectionService()
+                                    != supportHotwordDetectionService) {
+                                throw new IllegalStateException(
+                                        "It disallows to create trusted and non-trusted detectors"
+                                            + " at the same time.");
                             }
                             try {
                                 if (detector instanceof AlwaysOnHotwordDetector) {
-                                    throw new IllegalStateException("There is already an active AlwaysOnHotwordDetector. It must be destroyed to create a new one.");
+                                    throw new IllegalStateException(
+                                            "There is already an active AlwaysOnHotwordDetector. It"
+                                                + " must be destroyed to create a new one.");
                                 }
                             } catch (Throwable th) {
                                 e = th;
@@ -378,10 +514,21 @@ public class VoiceInteractionService extends Service {
                             }
                         }
                     }
-                    AlwaysOnHotwordDetector dspDetector = new AlwaysOnHotwordDetector(keyphrase, locale, executor, callback, this.mKeyphraseEnrollmentInfo, this.mSystemService, getApplicationContext().getApplicationInfo().targetSdkVersion, supportHotwordDetectionService, getAttributionTag());
+                    AlwaysOnHotwordDetector dspDetector =
+                            new AlwaysOnHotwordDetector(
+                                    keyphrase,
+                                    locale,
+                                    executor,
+                                    callback,
+                                    this.mKeyphraseEnrollmentInfo,
+                                    this.mSystemService,
+                                    getApplicationContext().getApplicationInfo().targetSdkVersion,
+                                    supportHotwordDetectionService,
+                                    getAttributionTag());
                     this.mActiveDetectors.add(dspDetector);
                     try {
-                        dspDetector.registerOnDestroyListener(new VoiceInteractionService$$ExternalSyntheticLambda0(this));
+                        dspDetector.registerOnDestroyListener(
+                                new VoiceInteractionService$$ExternalSyntheticLambda0(this));
                         if (!this.mTestModuleForAlwaysOnHotwordDetectorEnabled) {
                             moduleProperties2 = moduleProperties;
                         } else {
@@ -411,18 +558,29 @@ public class VoiceInteractionService extends Service {
 
     @SystemApi
     @Deprecated
-    public final HotwordDetector createHotwordDetector(PersistableBundle options, SharedMemory sharedMemory, HotwordDetector.Callback callback) {
+    public final HotwordDetector createHotwordDetector(
+            PersistableBundle options,
+            SharedMemory sharedMemory,
+            HotwordDetector.Callback callback) {
         return createHotwordDetectorInternal(options, sharedMemory, null, callback);
     }
 
     @SystemApi
-    public final HotwordDetector createHotwordDetector(PersistableBundle options, SharedMemory sharedMemory, Executor executor, HotwordDetector.Callback callback) {
+    public final HotwordDetector createHotwordDetector(
+            PersistableBundle options,
+            SharedMemory sharedMemory,
+            Executor executor,
+            HotwordDetector.Callback callback) {
         Objects.requireNonNull(executor);
         Objects.requireNonNull(callback);
         return createHotwordDetectorInternal(options, sharedMemory, executor, callback);
     }
 
-    private HotwordDetector createHotwordDetectorInternal(PersistableBundle options, SharedMemory sharedMemory, Executor executor, HotwordDetector.Callback callback) {
+    private HotwordDetector createHotwordDetectorInternal(
+            PersistableBundle options,
+            SharedMemory sharedMemory,
+            Executor executor,
+            HotwordDetector.Callback callback) {
         SoftwareHotwordDetector softwareHotwordDetector;
         if (this.mSystemService == null) {
             throw new IllegalStateException("Not available until onReady() is called");
@@ -433,17 +591,24 @@ public class VoiceInteractionService extends Service {
             } else {
                 for (HotwordDetector detector : this.mActiveDetectors) {
                     if (!detector.isUsingSandboxedDetectionService()) {
-                        throw new IllegalStateException("It disallows to create trusted and non-trusted detectors at the same time.");
+                        throw new IllegalStateException(
+                                "It disallows to create trusted and non-trusted detectors at the"
+                                    + " same time.");
                     }
                     if (detector instanceof SoftwareHotwordDetector) {
-                        throw new IllegalStateException("There is already an active SoftwareHotwordDetector. It must be destroyed to create a new one.");
+                        throw new IllegalStateException(
+                                "There is already an active SoftwareHotwordDetector. It must be"
+                                    + " destroyed to create a new one.");
                     }
                 }
             }
-            softwareHotwordDetector = new SoftwareHotwordDetector(this.mSystemService, null, executor, callback, getAttributionTag());
+            softwareHotwordDetector =
+                    new SoftwareHotwordDetector(
+                            this.mSystemService, null, executor, callback, getAttributionTag());
             this.mActiveDetectors.add(softwareHotwordDetector);
             try {
-                softwareHotwordDetector.registerOnDestroyListener(new VoiceInteractionService$$ExternalSyntheticLambda0(this));
+                softwareHotwordDetector.registerOnDestroyListener(
+                        new VoiceInteractionService$$ExternalSyntheticLambda0(this));
                 softwareHotwordDetector.initialize(options, sharedMemory);
             } catch (Exception e) {
                 this.mActiveDetectors.remove(softwareHotwordDetector);
@@ -455,30 +620,44 @@ public class VoiceInteractionService extends Service {
     }
 
     @SystemApi
-    public final VisualQueryDetector createVisualQueryDetector(PersistableBundle options, SharedMemory sharedMemory, Executor executor, VisualQueryDetector.Callback callback) {
+    public final VisualQueryDetector createVisualQueryDetector(
+            PersistableBundle options,
+            SharedMemory sharedMemory,
+            Executor executor,
+            VisualQueryDetector.Callback callback) {
         VisualQueryDetector visualQueryDetector;
         Objects.requireNonNull(executor);
         Objects.requireNonNull(callback);
         if (!SYSPROP_VISUAL_QUERY_SERVICE_ENABLED) {
-            throw new IllegalStateException("VisualQueryDetectionService is not enabled on this system. Please set ro.hotword.visual_query_service_enabled to true.");
+            throw new IllegalStateException(
+                    "VisualQueryDetectionService is not enabled on this system. Please set"
+                        + " ro.hotword.visual_query_service_enabled to true.");
         }
         if (this.mSystemService == null) {
             throw new IllegalStateException("Not available until onReady() is called");
         }
         synchronized (this.mLock) {
             if (this.mActiveVisualQueryDetector != null) {
-                throw new IllegalStateException("There is already an active VisualQueryDetector. It must be destroyed to create a new one.");
+                throw new IllegalStateException(
+                        "There is already an active VisualQueryDetector. It must be destroyed to"
+                            + " create a new one.");
             }
             for (HotwordDetector detector : this.mActiveDetectors) {
                 if (!detector.isUsingSandboxedDetectionService()) {
-                    throw new IllegalStateException("It disallows to create trusted and non-trusted detectors at the same time.");
+                    throw new IllegalStateException(
+                            "It disallows to create trusted and non-trusted detectors at the same"
+                                + " time.");
                 }
             }
-            visualQueryDetector = new VisualQueryDetector(this.mSystemService, executor, callback, this, getAttributionTag());
-            HotwordDetector visualQueryDetectorInitializationDelegate = visualQueryDetector.getInitializationDelegate();
+            visualQueryDetector =
+                    new VisualQueryDetector(
+                            this.mSystemService, executor, callback, this, getAttributionTag());
+            HotwordDetector visualQueryDetectorInitializationDelegate =
+                    visualQueryDetector.getInitializationDelegate();
             this.mActiveDetectors.add(visualQueryDetectorInitializationDelegate);
             try {
-                visualQueryDetector.registerOnDestroyListener(new VoiceInteractionService$$ExternalSyntheticLambda0(this));
+                visualQueryDetector.registerOnDestroyListener(
+                        new VoiceInteractionService$$ExternalSyntheticLambda0(this));
                 visualQueryDetector.initialize(options, sharedMemory);
                 this.mActiveVisualQueryDetector = visualQueryDetector;
             } catch (Exception e) {
@@ -513,14 +692,23 @@ public class VoiceInteractionService extends Service {
     }
 
     private final SoundTrigger.ModuleProperties getTestModuleProperties() {
-        SoundTrigger.ModuleProperties moduleProps = listModuleProperties().stream().filter(new Predicate() { // from class: android.service.voice.VoiceInteractionService$$ExternalSyntheticLambda7
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                boolean equals;
-                equals = ((SoundTrigger.ModuleProperties) obj).getSupportedModelArch().equals("injection");
-                return equals;
-            }
-        }).findFirst().orElse(null);
+        SoundTrigger.ModuleProperties moduleProps =
+                listModuleProperties().stream()
+                        .filter(
+                                new Predicate() { // from class:
+                                                  // android.service.voice.VoiceInteractionService$$ExternalSyntheticLambda7
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        boolean equals;
+                                        equals =
+                                                ((SoundTrigger.ModuleProperties) obj)
+                                                        .getSupportedModelArch()
+                                                        .equals("injection");
+                                        return equals;
+                                    }
+                                })
+                        .findFirst()
+                        .orElse(null);
         if (moduleProps == null) {
             throw new IllegalStateException("Fake ST HAL should always be available");
         }
@@ -528,24 +716,35 @@ public class VoiceInteractionService extends Service {
     }
 
     public final boolean isKeyphraseAndLocaleSupportedForHotword(String keyphrase, Locale locale) {
-        return (this.mKeyphraseEnrollmentInfo == null || this.mKeyphraseEnrollmentInfo.getKeyphraseMetadata(keyphrase, locale) == null) ? false : true;
+        return (this.mKeyphraseEnrollmentInfo == null
+                        || this.mKeyphraseEnrollmentInfo.getKeyphraseMetadata(keyphrase, locale)
+                                == null)
+                ? false
+                : true;
     }
 
-    private void safelyShutdownAllHotwordDetectors(final boolean shouldShutDownVisualQueryDetector) {
+    private void safelyShutdownAllHotwordDetectors(
+            final boolean shouldShutDownVisualQueryDetector) {
         synchronized (this.mLock) {
-            this.mActiveDetectors.forEach(new Consumer() { // from class: android.service.voice.VoiceInteractionService$$ExternalSyntheticLambda6
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    VoiceInteractionService.this.lambda$safelyShutdownAllHotwordDetectors$4(shouldShutDownVisualQueryDetector, (HotwordDetector) obj);
-                }
-            });
+            this.mActiveDetectors.forEach(
+                    new Consumer() { // from class:
+                                     // android.service.voice.VoiceInteractionService$$ExternalSyntheticLambda6
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            VoiceInteractionService.this.lambda$safelyShutdownAllHotwordDetectors$4(
+                                    shouldShutDownVisualQueryDetector, (HotwordDetector) obj);
+                        }
+                    });
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$safelyShutdownAllHotwordDetectors$4(boolean shouldShutDownVisualQueryDetector, HotwordDetector detector) {
+    public /* synthetic */ void lambda$safelyShutdownAllHotwordDetectors$4(
+            boolean shouldShutDownVisualQueryDetector, HotwordDetector detector) {
         try {
-            if (this.mActiveVisualQueryDetector == null || detector != this.mActiveVisualQueryDetector.getInitializationDelegate() || shouldShutDownVisualQueryDetector) {
+            if (this.mActiveVisualQueryDetector == null
+                    || detector != this.mActiveVisualQueryDetector.getInitializationDelegate()
+                    || shouldShutDownVisualQueryDetector) {
                 detector.destroy();
             }
         } catch (Exception ex) {
@@ -556,7 +755,8 @@ public class VoiceInteractionService extends Service {
     /* JADX INFO: Access modifiers changed from: private */
     public void onHotwordDetectorDestroyed(HotwordDetector detector) {
         synchronized (this.mLock) {
-            if (this.mActiveVisualQueryDetector != null && detector == this.mActiveVisualQueryDetector.getInitializationDelegate()) {
+            if (this.mActiveVisualQueryDetector != null
+                    && detector == this.mActiveVisualQueryDetector.getInitializationDelegate()) {
                 this.mActiveVisualQueryDetector = null;
             }
             this.mActiveDetectors.remove(detector);
@@ -582,12 +782,14 @@ public class VoiceInteractionService extends Service {
             if (this.mActiveDetectors.size() == 0) {
                 pw.println("    No detector.");
             } else {
-                this.mActiveDetectors.forEach(new Consumer() { // from class: android.service.voice.VoiceInteractionService$$ExternalSyntheticLambda1
-                    @Override // java.util.function.Consumer
-                    public final void accept(Object obj) {
-                        VoiceInteractionService.lambda$dump$5(pw, (HotwordDetector) obj);
-                    }
-                });
+                this.mActiveDetectors.forEach(
+                        new Consumer() { // from class:
+                                         // android.service.voice.VoiceInteractionService$$ExternalSyntheticLambda1
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                VoiceInteractionService.lambda$dump$5(pw, (HotwordDetector) obj);
+                            }
+                        });
             }
             pw.println("Available Model Enrollment Applications:");
             pw.println("  " + this.mKeyphraseEnrollmentInfo);

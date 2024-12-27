@@ -11,7 +11,9 @@ import android.provider.Downloads;
 import android.view.autofill.AutofillId;
 import android.view.autofill.Helper;
 import android.widget.RemoteViews;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -23,83 +25,113 @@ import java.util.Set;
 
 /* loaded from: classes3.dex */
 public final class FillResponse implements Parcelable {
-    public static final Parcelable.Creator<FillResponse> CREATOR = new Parcelable.Creator<FillResponse>() { // from class: android.service.autofill.FillResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FillResponse createFromParcel(Parcel parcel) {
-            Builder builder = new Builder();
-            ParceledListSlice<Dataset> datasetSlice = (ParceledListSlice) parcel.readParcelable(null, ParceledListSlice.class);
-            List<Dataset> datasets = datasetSlice != null ? datasetSlice.getList() : null;
-            int datasetCount = datasets != null ? datasets.size() : 0;
-            for (int i = 0; i < datasetCount; i++) {
-                builder.addDataset(datasets.get(i));
-            }
-            builder.setSaveInfo((SaveInfo) parcel.readParcelable(null, SaveInfo.class));
-            builder.setClientState((Bundle) parcel.readParcelable(null, Bundle.class));
-            AutofillId[] authenticationIds = (AutofillId[]) parcel.readParcelableArray(null, AutofillId.class);
-            IntentSender authentication = (IntentSender) parcel.readParcelable(null, IntentSender.class);
-            RemoteViews presentation = (RemoteViews) parcel.readParcelable(null, RemoteViews.class);
-            InlinePresentation inlinePresentation = (InlinePresentation) parcel.readParcelable(null, InlinePresentation.class);
-            InlinePresentation inlineTooltipPresentation = (InlinePresentation) parcel.readParcelable(null, InlinePresentation.class);
-            RemoteViews dialogPresentation = (RemoteViews) parcel.readParcelable(null, RemoteViews.class);
-            if (authenticationIds != null) {
-                builder.setAuthentication(authenticationIds, authentication, presentation, inlinePresentation, inlineTooltipPresentation, dialogPresentation);
-            }
-            RemoteViews dialogHeader = (RemoteViews) parcel.readParcelable(null, RemoteViews.class);
-            if (dialogHeader != null) {
-                builder.setDialogHeader(dialogHeader);
-            }
-            PendingIntent dialogPendingIntent = (PendingIntent) parcel.readParcelable(null, PendingIntent.class);
-            if (dialogPendingIntent != null) {
-                builder.setDialogPendingIntent(dialogPendingIntent);
-            }
-            AutofillId[] triggerIds = (AutofillId[]) parcel.readParcelableArray(null, AutofillId.class);
-            if (triggerIds != null) {
-                builder.setFillDialogTriggerIds(triggerIds);
-            }
-            RemoteViews header = (RemoteViews) parcel.readParcelable(null, RemoteViews.class);
-            if (header != null) {
-                builder.setHeader(header);
-            }
-            RemoteViews footer = (RemoteViews) parcel.readParcelable(null, RemoteViews.class);
-            if (footer != null) {
-                builder.setFooter(footer);
-            }
-            UserData userData = (UserData) parcel.readParcelable(null, UserData.class);
-            if (userData != null) {
-                builder.setUserData(userData);
-            }
-            builder.setIgnoredIds((AutofillId[]) parcel.readParcelableArray(null, AutofillId.class));
-            long disableDuration = parcel.readLong();
-            if (disableDuration > 0) {
-                builder.disableAutofill(disableDuration);
-            }
-            AutofillId[] fieldClassifactionIds = (AutofillId[]) parcel.readParcelableArray(null, AutofillId.class);
-            if (fieldClassifactionIds != null) {
-                builder.setFieldClassificationIds(fieldClassifactionIds);
-            }
-            android.service.assist.classification.FieldClassification[] detectedFields = (android.service.assist.classification.FieldClassification[]) parcel.readParcelableArray(null, android.service.assist.classification.FieldClassification.class);
-            if (detectedFields != null) {
-                builder.setDetectedFieldClassifications(Set.of((Object[]) detectedFields));
-            }
-            builder.setIconResourceId(parcel.readInt());
-            builder.setServiceDisplayNameResourceId(parcel.readInt());
-            builder.setShowFillDialogIcon(parcel.readBoolean());
-            builder.setShowSaveDialogIcon(parcel.readBoolean());
-            builder.setFlags(parcel.readInt());
-            int[] cancelIds = parcel.createIntArray();
-            builder.setPresentationCancelIds(cancelIds);
-            FillResponse response = builder.build();
-            response.setRequestId(parcel.readInt());
-            return response;
-        }
+    public static final Parcelable.Creator<FillResponse> CREATOR =
+            new Parcelable.Creator<
+                    FillResponse>() { // from class: android.service.autofill.FillResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FillResponse createFromParcel(Parcel parcel) {
+                    Builder builder = new Builder();
+                    ParceledListSlice<Dataset> datasetSlice =
+                            (ParceledListSlice)
+                                    parcel.readParcelable(null, ParceledListSlice.class);
+                    List<Dataset> datasets = datasetSlice != null ? datasetSlice.getList() : null;
+                    int datasetCount = datasets != null ? datasets.size() : 0;
+                    for (int i = 0; i < datasetCount; i++) {
+                        builder.addDataset(datasets.get(i));
+                    }
+                    builder.setSaveInfo((SaveInfo) parcel.readParcelable(null, SaveInfo.class));
+                    builder.setClientState((Bundle) parcel.readParcelable(null, Bundle.class));
+                    AutofillId[] authenticationIds =
+                            (AutofillId[]) parcel.readParcelableArray(null, AutofillId.class);
+                    IntentSender authentication =
+                            (IntentSender) parcel.readParcelable(null, IntentSender.class);
+                    RemoteViews presentation =
+                            (RemoteViews) parcel.readParcelable(null, RemoteViews.class);
+                    InlinePresentation inlinePresentation =
+                            (InlinePresentation)
+                                    parcel.readParcelable(null, InlinePresentation.class);
+                    InlinePresentation inlineTooltipPresentation =
+                            (InlinePresentation)
+                                    parcel.readParcelable(null, InlinePresentation.class);
+                    RemoteViews dialogPresentation =
+                            (RemoteViews) parcel.readParcelable(null, RemoteViews.class);
+                    if (authenticationIds != null) {
+                        builder.setAuthentication(
+                                authenticationIds,
+                                authentication,
+                                presentation,
+                                inlinePresentation,
+                                inlineTooltipPresentation,
+                                dialogPresentation);
+                    }
+                    RemoteViews dialogHeader =
+                            (RemoteViews) parcel.readParcelable(null, RemoteViews.class);
+                    if (dialogHeader != null) {
+                        builder.setDialogHeader(dialogHeader);
+                    }
+                    PendingIntent dialogPendingIntent =
+                            (PendingIntent) parcel.readParcelable(null, PendingIntent.class);
+                    if (dialogPendingIntent != null) {
+                        builder.setDialogPendingIntent(dialogPendingIntent);
+                    }
+                    AutofillId[] triggerIds =
+                            (AutofillId[]) parcel.readParcelableArray(null, AutofillId.class);
+                    if (triggerIds != null) {
+                        builder.setFillDialogTriggerIds(triggerIds);
+                    }
+                    RemoteViews header =
+                            (RemoteViews) parcel.readParcelable(null, RemoteViews.class);
+                    if (header != null) {
+                        builder.setHeader(header);
+                    }
+                    RemoteViews footer =
+                            (RemoteViews) parcel.readParcelable(null, RemoteViews.class);
+                    if (footer != null) {
+                        builder.setFooter(footer);
+                    }
+                    UserData userData = (UserData) parcel.readParcelable(null, UserData.class);
+                    if (userData != null) {
+                        builder.setUserData(userData);
+                    }
+                    builder.setIgnoredIds(
+                            (AutofillId[]) parcel.readParcelableArray(null, AutofillId.class));
+                    long disableDuration = parcel.readLong();
+                    if (disableDuration > 0) {
+                        builder.disableAutofill(disableDuration);
+                    }
+                    AutofillId[] fieldClassifactionIds =
+                            (AutofillId[]) parcel.readParcelableArray(null, AutofillId.class);
+                    if (fieldClassifactionIds != null) {
+                        builder.setFieldClassificationIds(fieldClassifactionIds);
+                    }
+                    android.service.assist.classification.FieldClassification[] detectedFields =
+                            (android.service.assist.classification.FieldClassification[])
+                                    parcel.readParcelableArray(
+                                            null,
+                                            android.service.assist.classification
+                                                    .FieldClassification.class);
+                    if (detectedFields != null) {
+                        builder.setDetectedFieldClassifications(Set.of((Object[]) detectedFields));
+                    }
+                    builder.setIconResourceId(parcel.readInt());
+                    builder.setServiceDisplayNameResourceId(parcel.readInt());
+                    builder.setShowFillDialogIcon(parcel.readBoolean());
+                    builder.setShowSaveDialogIcon(parcel.readBoolean());
+                    builder.setFlags(parcel.readInt());
+                    int[] cancelIds = parcel.createIntArray();
+                    builder.setPresentationCancelIds(cancelIds);
+                    FillResponse response = builder.build();
+                    response.setRequestId(parcel.readInt());
+                    return response;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FillResponse[] newArray(int size) {
-            return new FillResponse[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FillResponse[] newArray(int size) {
+                    return new FillResponse[size];
+                }
+            };
     public static final int FLAG_CREDENTIAL_MANAGER_RESPONSE = 8;
     public static final int FLAG_DELAY_FILL = 4;
     public static final int FLAG_DISABLE_ACTIVITY_ONLY = 2;
@@ -133,14 +165,68 @@ public final class FillResponse implements Parcelable {
     private final UserData mUserData;
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface FillResponseFlags {
+    @interface FillResponseFlags {}
+
+    public static FillResponse shallowCopy(
+            FillResponse r, List<Dataset> datasets, SaveInfo saveInfo) {
+        return new FillResponse(
+                datasets != null ? new ParceledListSlice(datasets) : null,
+                saveInfo,
+                r.mClientState,
+                r.mPresentation,
+                r.mInlinePresentation,
+                r.mInlineTooltipPresentation,
+                r.mDialogPresentation,
+                r.mDialogHeader,
+                r.mHeader,
+                r.mFooter,
+                r.mAuthentication,
+                r.mAuthenticationIds,
+                r.mIgnoredIds,
+                r.mFillDialogTriggerIds,
+                r.mDisableDuration,
+                r.mFieldClassificationIds,
+                r.mFlags,
+                r.mRequestId,
+                r.mUserData,
+                r.mCancelIds,
+                r.mSupportsInlineSuggestions,
+                r.mIconResourceId,
+                r.mServiceDisplayNameResourceId,
+                r.mShowFillDialogIcon,
+                r.mShowSaveDialogIcon,
+                r.mDetectedFieldTypes,
+                r.mDialogPendingIntent);
     }
 
-    public static FillResponse shallowCopy(FillResponse r, List<Dataset> datasets, SaveInfo saveInfo) {
-        return new FillResponse(datasets != null ? new ParceledListSlice(datasets) : null, saveInfo, r.mClientState, r.mPresentation, r.mInlinePresentation, r.mInlineTooltipPresentation, r.mDialogPresentation, r.mDialogHeader, r.mHeader, r.mFooter, r.mAuthentication, r.mAuthenticationIds, r.mIgnoredIds, r.mFillDialogTriggerIds, r.mDisableDuration, r.mFieldClassificationIds, r.mFlags, r.mRequestId, r.mUserData, r.mCancelIds, r.mSupportsInlineSuggestions, r.mIconResourceId, r.mServiceDisplayNameResourceId, r.mShowFillDialogIcon, r.mShowSaveDialogIcon, r.mDetectedFieldTypes, r.mDialogPendingIntent);
-    }
-
-    private FillResponse(ParceledListSlice<Dataset> datasets, SaveInfo saveInfo, Bundle clientState, RemoteViews presentation, InlinePresentation inlinePresentation, InlinePresentation inlineTooltipPresentation, RemoteViews dialogPresentation, RemoteViews dialogHeader, RemoteViews header, RemoteViews footer, IntentSender authentication, AutofillId[] authenticationIds, AutofillId[] ignoredIds, AutofillId[] fillDialogTriggerIds, long disableDuration, AutofillId[] fieldClassificationIds, int flags, int requestId, UserData userData, int[] cancelIds, boolean supportsInlineSuggestions, int iconResourceId, int serviceDisplayNameResourceId, boolean showFillDialogIcon, boolean showSaveDialogIcon, android.service.assist.classification.FieldClassification[] detectedFieldTypes, PendingIntent dialogPendingIntent) {
+    private FillResponse(
+            ParceledListSlice<Dataset> datasets,
+            SaveInfo saveInfo,
+            Bundle clientState,
+            RemoteViews presentation,
+            InlinePresentation inlinePresentation,
+            InlinePresentation inlineTooltipPresentation,
+            RemoteViews dialogPresentation,
+            RemoteViews dialogHeader,
+            RemoteViews header,
+            RemoteViews footer,
+            IntentSender authentication,
+            AutofillId[] authenticationIds,
+            AutofillId[] ignoredIds,
+            AutofillId[] fillDialogTriggerIds,
+            long disableDuration,
+            AutofillId[] fieldClassificationIds,
+            int flags,
+            int requestId,
+            UserData userData,
+            int[] cancelIds,
+            boolean supportsInlineSuggestions,
+            int iconResourceId,
+            int serviceDisplayNameResourceId,
+            boolean showFillDialogIcon,
+            boolean showSaveDialogIcon,
+            android.service.assist.classification.FieldClassification[] detectedFieldTypes,
+            PendingIntent dialogPendingIntent) {
         this.mDatasets = datasets;
         this.mSaveInfo = saveInfo;
         this.mClientState = clientState;
@@ -171,7 +257,8 @@ public final class FillResponse implements Parcelable {
     }
 
     private FillResponse(Builder builder) {
-        this.mDatasets = builder.mDatasets != null ? new ParceledListSlice<>(builder.mDatasets) : null;
+        this.mDatasets =
+                builder.mDatasets != null ? new ParceledListSlice<>(builder.mDatasets) : null;
         this.mSaveInfo = builder.mSaveInfo;
         this.mClientState = builder.mClientState;
         this.mPresentation = builder.mPresentation;
@@ -200,7 +287,8 @@ public final class FillResponse implements Parcelable {
         this.mDialogPendingIntent = builder.mDialogPendingIntent;
     }
 
-    public Set<android.service.assist.classification.FieldClassification> getDetectedFieldClassifications() {
+    public Set<android.service.assist.classification.FieldClassification>
+            getDetectedFieldClassifications() {
         return Set.of((Object[]) this.mDetectedFieldTypes);
     }
 
@@ -340,22 +428,29 @@ public final class FillResponse implements Parcelable {
         private boolean mSupportsInlineSuggestions;
         private UserData mUserData;
 
-        public Builder setDetectedFieldClassifications(Set<android.service.assist.classification.FieldClassification> fieldInfos) {
+        public Builder setDetectedFieldClassifications(
+                Set<android.service.assist.classification.FieldClassification> fieldInfos) {
             throwIfDestroyed();
             throwIfDisableAutofillCalled();
-            this.mDetectedFieldTypes = (android.service.assist.classification.FieldClassification[]) fieldInfos.toArray(new android.service.assist.classification.FieldClassification[0]);
+            this.mDetectedFieldTypes =
+                    (android.service.assist.classification.FieldClassification[])
+                            fieldInfos.toArray(
+                                    new android.service.assist.classification.FieldClassification
+                                            [0]);
             return this;
         }
 
         @Deprecated
-        public Builder setAuthentication(AutofillId[] ids, IntentSender authentication, RemoteViews presentation) {
+        public Builder setAuthentication(
+                AutofillId[] ids, IntentSender authentication, RemoteViews presentation) {
             throwIfDestroyed();
             throwIfDisableAutofillCalled();
             if (this.mHeader != null || this.mFooter != null) {
                 throw new IllegalStateException("Already called #setHeader() or #setFooter()");
             }
             if ((presentation == null) ^ (authentication == null)) {
-                throw new IllegalArgumentException("authentication and presentation must be both non-null or null");
+                throw new IllegalArgumentException(
+                        "authentication and presentation must be both non-null or null");
             }
             this.mAuthentication = authentication;
             this.mPresentation = presentation;
@@ -364,35 +459,65 @@ public final class FillResponse implements Parcelable {
         }
 
         @Deprecated
-        public Builder setAuthentication(AutofillId[] ids, IntentSender authentication, RemoteViews presentation, InlinePresentation inlinePresentation) {
+        public Builder setAuthentication(
+                AutofillId[] ids,
+                IntentSender authentication,
+                RemoteViews presentation,
+                InlinePresentation inlinePresentation) {
             return setAuthentication(ids, authentication, presentation, inlinePresentation, null);
         }
 
         @Deprecated
-        public Builder setAuthentication(AutofillId[] ids, IntentSender authentication, RemoteViews presentation, InlinePresentation inlinePresentation, InlinePresentation inlineTooltipPresentation) {
+        public Builder setAuthentication(
+                AutofillId[] ids,
+                IntentSender authentication,
+                RemoteViews presentation,
+                InlinePresentation inlinePresentation,
+                InlinePresentation inlineTooltipPresentation) {
             throwIfDestroyed();
             throwIfDisableAutofillCalled();
-            return setAuthentication(ids, authentication, presentation, inlinePresentation, inlineTooltipPresentation, null);
+            return setAuthentication(
+                    ids,
+                    authentication,
+                    presentation,
+                    inlinePresentation,
+                    inlineTooltipPresentation,
+                    null);
         }
 
-        public Builder setAuthentication(AutofillId[] ids, IntentSender authentication, Presentations presentations) {
+        public Builder setAuthentication(
+                AutofillId[] ids, IntentSender authentication, Presentations presentations) {
             throwIfDestroyed();
             throwIfDisableAutofillCalled();
             if (presentations == null) {
                 return setAuthentication(ids, authentication, null, null, null, null);
             }
-            return setAuthentication(ids, authentication, presentations.getMenuPresentation(), presentations.getInlinePresentation(), presentations.getInlineTooltipPresentation(), presentations.getDialogPresentation());
+            return setAuthentication(
+                    ids,
+                    authentication,
+                    presentations.getMenuPresentation(),
+                    presentations.getInlinePresentation(),
+                    presentations.getInlineTooltipPresentation(),
+                    presentations.getDialogPresentation());
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public Builder setAuthentication(AutofillId[] ids, IntentSender authentication, RemoteViews presentation, InlinePresentation inlinePresentation, InlinePresentation inlineTooltipPresentation, RemoteViews dialogPresentation) {
+        public Builder setAuthentication(
+                AutofillId[] ids,
+                IntentSender authentication,
+                RemoteViews presentation,
+                InlinePresentation inlinePresentation,
+                InlinePresentation inlineTooltipPresentation,
+                RemoteViews dialogPresentation) {
             throwIfDestroyed();
             throwIfDisableAutofillCalled();
             if (this.mHeader != null || this.mFooter != null) {
                 throw new IllegalStateException("Already called #setHeader() or #setFooter()");
             }
             if ((presentation == null && inlinePresentation == null) ^ (authentication == null)) {
-                throw new IllegalArgumentException("authentication and presentation (dropdown or inline), must be both non-null or null");
+                throw new IllegalArgumentException(
+                        "authentication and presentation (dropdown or inline), must be both"
+                            + " non-null or null");
             }
             this.mAuthentication = authentication;
             this.mPresentation = presentation;
@@ -445,7 +570,8 @@ public final class FillResponse implements Parcelable {
             throwIfDestroyed();
             throwIfDisableAutofillCalled();
             Preconditions.checkArrayElementsNotNull(ids, Downloads.EXTRA_IDS);
-            Preconditions.checkArgumentInRange(ids.length, 1, UserData.getMaxFieldClassificationIdsSize(), "ids length");
+            Preconditions.checkArgumentInRange(
+                    ids.length, 1, UserData.getMaxFieldClassificationIdsSize(), "ids length");
             this.mFieldClassificationIds = ids;
             this.mFlags |= 1;
             return this;
@@ -462,7 +588,11 @@ public final class FillResponse implements Parcelable {
             if (duration <= 0) {
                 throw new IllegalArgumentException("duration must be greater than 0");
             }
-            if (this.mAuthentication != null || this.mDatasets != null || this.mSaveInfo != null || this.mFieldClassificationIds != null || this.mClientState != null) {
+            if (this.mAuthentication != null
+                    || this.mDatasets != null
+                    || this.mSaveInfo != null
+                    || this.mFieldClassificationIds != null
+                    || this.mClientState != null) {
                 throw new IllegalStateException("disableAutofill() must be the only method called");
             }
             this.mDisableDuration = duration;
@@ -536,18 +666,28 @@ public final class FillResponse implements Parcelable {
 
         public Builder setDialogPendingIntent(PendingIntent pendingIntent) {
             throwIfDestroyed();
-            Preconditions.checkNotNull(pendingIntent, "can't pass a null object to setDialogPendingIntent");
+            Preconditions.checkNotNull(
+                    pendingIntent, "can't pass a null object to setDialogPendingIntent");
             this.mDialogPendingIntent = pendingIntent;
             return this;
         }
 
         public FillResponse build() {
             throwIfDestroyed();
-            if (this.mAuthentication == null && this.mDatasets == null && this.mSaveInfo == null && this.mDisableDuration == 0 && this.mFieldClassificationIds == null && this.mClientState == null) {
-                throw new IllegalStateException("need to provide: at least one DataSet, or a SaveInfo, or an authentication with a presentation, or a FieldsDetection, or a client state, or disable autofill");
+            if (this.mAuthentication == null
+                    && this.mDatasets == null
+                    && this.mSaveInfo == null
+                    && this.mDisableDuration == 0
+                    && this.mFieldClassificationIds == null
+                    && this.mClientState == null) {
+                throw new IllegalStateException(
+                        "need to provide: at least one DataSet, or a SaveInfo, or an authentication"
+                            + " with a presentation, or a FieldsDetection, or a client state, or"
+                            + " disable autofill");
             }
             if (this.mDatasets == null && (this.mHeader != null || this.mFooter != null)) {
-                throw new IllegalStateException("must add at least 1 dataset when using header or footer");
+                throw new IllegalStateException(
+                        "must add at least 1 dataset when using header or footer");
             }
             if (this.mDatasets != null) {
                 Iterator<Dataset> it = this.mDatasets.iterator();
@@ -632,7 +772,8 @@ public final class FillResponse implements Parcelable {
             builder.append(", authenticationIds=").append(Arrays.toString(this.mAuthenticationIds));
         }
         if (this.mFillDialogTriggerIds != null) {
-            builder.append(", fillDialogTriggerIds=").append(Arrays.toString(this.mFillDialogTriggerIds));
+            builder.append(", fillDialogTriggerIds=")
+                    .append(Arrays.toString(this.mFillDialogTriggerIds));
         }
         builder.append(", disableDuration=").append(this.mDisableDuration);
         if (this.mFlags != 0) {

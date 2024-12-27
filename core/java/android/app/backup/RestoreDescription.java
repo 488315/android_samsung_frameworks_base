@@ -12,27 +12,35 @@ public class RestoreDescription implements Parcelable {
     private final int mDataType;
     private final String mPackageName;
     private static final String NO_MORE_PACKAGES_SENTINEL = "NO_MORE_PACKAGES";
-    public static final RestoreDescription NO_MORE_PACKAGES = new RestoreDescription(NO_MORE_PACKAGES_SENTINEL, 0);
-    public static final Parcelable.Creator<RestoreDescription> CREATOR = new Parcelable.Creator<RestoreDescription>() { // from class: android.app.backup.RestoreDescription.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RestoreDescription createFromParcel(Parcel in) {
-            RestoreDescription unparceled = new RestoreDescription(in);
-            if (RestoreDescription.NO_MORE_PACKAGES_SENTINEL.equals(unparceled.mPackageName)) {
-                return RestoreDescription.NO_MORE_PACKAGES;
-            }
-            return unparceled;
-        }
+    public static final RestoreDescription NO_MORE_PACKAGES =
+            new RestoreDescription(NO_MORE_PACKAGES_SENTINEL, 0);
+    public static final Parcelable.Creator<RestoreDescription> CREATOR =
+            new Parcelable.Creator<
+                    RestoreDescription>() { // from class: android.app.backup.RestoreDescription.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RestoreDescription createFromParcel(Parcel in) {
+                    RestoreDescription unparceled = new RestoreDescription(in);
+                    if (RestoreDescription.NO_MORE_PACKAGES_SENTINEL.equals(
+                            unparceled.mPackageName)) {
+                        return RestoreDescription.NO_MORE_PACKAGES;
+                    }
+                    return unparceled;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RestoreDescription[] newArray(int size) {
-            return new RestoreDescription[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RestoreDescription[] newArray(int size) {
+                    return new RestoreDescription[size];
+                }
+            };
 
     public String toString() {
-        return "RestoreDescription{" + this.mPackageName + " : " + (this.mDataType == 1 ? "KEY_VALUE" : "STREAM") + '}';
+        return "RestoreDescription{"
+                + this.mPackageName
+                + " : "
+                + (this.mDataType == 1 ? "KEY_VALUE" : "STREAM")
+                + '}';
     }
 
     public RestoreDescription(String packageName, int dataType) {

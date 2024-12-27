@@ -8,36 +8,38 @@ public abstract class CountDownTimer {
     private long mStopTimeInFuture;
     private boolean mCancelled = false;
     private Handler mHandler = new Handler() { // from class: android.os.CountDownTimer.1
-        @Override // android.os.Handler
-        public void handleMessage(Message msg) {
-            long delay;
-            synchronized (CountDownTimer.this) {
-                if (CountDownTimer.this.mCancelled) {
-                    return;
-                }
-                long millisLeft = CountDownTimer.this.mStopTimeInFuture - SystemClock.elapsedRealtime();
-                if (millisLeft <= 0) {
-                    CountDownTimer.this.onFinish();
-                } else {
-                    long lastTickStart = SystemClock.elapsedRealtime();
-                    CountDownTimer.this.onTick(millisLeft);
-                    long lastTickDuration = SystemClock.elapsedRealtime() - lastTickStart;
-                    if (millisLeft < CountDownTimer.this.mCountdownInterval) {
-                        delay = millisLeft - lastTickDuration;
-                        if (delay < 0) {
-                            delay = 0;
+                @Override // android.os.Handler
+                public void handleMessage(Message msg) {
+                    long delay;
+                    synchronized (CountDownTimer.this) {
+                        if (CountDownTimer.this.mCancelled) {
+                            return;
                         }
-                    } else {
-                        delay = CountDownTimer.this.mCountdownInterval - lastTickDuration;
-                        while (delay < 0) {
-                            delay += CountDownTimer.this.mCountdownInterval;
+                        long millisLeft =
+                                CountDownTimer.this.mStopTimeInFuture
+                                        - SystemClock.elapsedRealtime();
+                        if (millisLeft <= 0) {
+                            CountDownTimer.this.onFinish();
+                        } else {
+                            long lastTickStart = SystemClock.elapsedRealtime();
+                            CountDownTimer.this.onTick(millisLeft);
+                            long lastTickDuration = SystemClock.elapsedRealtime() - lastTickStart;
+                            if (millisLeft < CountDownTimer.this.mCountdownInterval) {
+                                delay = millisLeft - lastTickDuration;
+                                if (delay < 0) {
+                                    delay = 0;
+                                }
+                            } else {
+                                delay = CountDownTimer.this.mCountdownInterval - lastTickDuration;
+                                while (delay < 0) {
+                                    delay += CountDownTimer.this.mCountdownInterval;
+                                }
+                            }
+                            sendMessageDelayed(obtainMessage(1), delay);
                         }
                     }
-                    sendMessageDelayed(obtainMessage(1), delay);
                 }
-            }
-        }
-    };
+            };
 
     public abstract void onFinish();
 

@@ -14,7 +14,13 @@ public final /* synthetic */ class BroadcastHelper$$ExternalSyntheticLambda5 imp
     public final /* synthetic */ Computer f$4;
     public final /* synthetic */ String f$5;
 
-    public /* synthetic */ BroadcastHelper$$ExternalSyntheticLambda5(BroadcastHelper broadcastHelper, boolean z, int i, String[] strArr, Computer computer, String str) {
+    public /* synthetic */ BroadcastHelper$$ExternalSyntheticLambda5(
+            BroadcastHelper broadcastHelper,
+            boolean z,
+            int i,
+            String[] strArr,
+            Computer computer,
+            String str) {
         this.f$0 = broadcastHelper;
         this.f$1 = z;
         this.f$2 = i;
@@ -45,12 +51,18 @@ public final /* synthetic */ class BroadcastHelper$$ExternalSyntheticLambda5 imp
         while (i2 < length) {
             String str2 = strArr[i2];
             Bundle bundle = null;
-            Bundle suspendedPackageAppExtras = z ? SuspendPackageHelper.getSuspendedPackageAppExtras(i, 1000, computer, str2) : null;
+            Bundle suspendedPackageAppExtras =
+                    z
+                            ? SuspendPackageHelper.getSuspendedPackageAppExtras(
+                                    i, 1000, computer, str2)
+                            : null;
             if (suspendedPackageAppExtras != null) {
                 bundle = new Bundle(1);
-                bundle.putBundle("android.intent.extra.SUSPENDED_PACKAGE_EXTRAS", suspendedPackageAppExtras);
+                bundle.putBundle(
+                        "android.intent.extra.SUSPENDED_PACKAGE_EXTRAS", suspendedPackageAppExtras);
             }
-            broadcastHelper.doSendBroadcast(str, null, bundle, 16777216, str2, null, iArr, false, null, null, null);
+            broadcastHelper.doSendBroadcast(
+                    str, null, bundle, 16777216, str2, null, iArr, false, null, null, null);
             i2++;
             length = length;
             str = str;

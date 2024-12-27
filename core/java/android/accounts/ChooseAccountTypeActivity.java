@@ -18,7 +18,9 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.android.internal.R;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -36,10 +38,18 @@ public class ChooseAccountTypeActivity extends Activity {
         super.onCreate(savedInstanceState);
         getWindow().addSystemFlags(524288);
         if (Log.isLoggable(TAG, 2)) {
-            Log.v(TAG, "ChooseAccountTypeActivity.onCreate(savedInstanceState=" + savedInstanceState + NavigationBarInflaterView.KEY_CODE_END);
+            Log.v(
+                    TAG,
+                    "ChooseAccountTypeActivity.onCreate(savedInstanceState="
+                            + savedInstanceState
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         Set<String> setOfAllowableAccountTypes = null;
-        String[] validAccountTypes = getIntent().getStringArrayExtra(ChooseTypeAndAccountActivity.EXTRA_ALLOWABLE_ACCOUNT_TYPES_STRING_ARRAY);
+        String[] validAccountTypes =
+                getIntent()
+                        .getStringArrayExtra(
+                                ChooseTypeAndAccountActivity
+                                        .EXTRA_ALLOWABLE_ACCOUNT_TYPES_STRING_ARRAY);
         if (validAccountTypes != null) {
             setOfAllowableAccountTypes = new HashSet<>(validAccountTypes.length);
             for (String type : validAccountTypes) {
@@ -68,15 +78,24 @@ public class ChooseAccountTypeActivity extends Activity {
         }
         setContentView(R.layout.choose_account_type);
         ListView list = (ListView) findViewById(16908298);
-        list.setAdapter((ListAdapter) new AccountArrayAdapter(this, 17367043, this.mAuthenticatorInfosToDisplay));
+        list.setAdapter(
+                (ListAdapter)
+                        new AccountArrayAdapter(this, 17367043, this.mAuthenticatorInfosToDisplay));
         list.setChoiceMode(0);
         list.setTextFilterEnabled(false);
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() { // from class: android.accounts.ChooseAccountTypeActivity.1
-            @Override // android.widget.AdapterView.OnItemClickListener
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                ChooseAccountTypeActivity.this.setResultAndFinish(((AuthInfo) ChooseAccountTypeActivity.this.mAuthenticatorInfosToDisplay.get(position)).desc.type);
-            }
-        });
+        list.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() { // from class:
+                    // android.accounts.ChooseAccountTypeActivity.1
+                    @Override // android.widget.AdapterView.OnItemClickListener
+                    public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                        ChooseAccountTypeActivity.this.setResultAndFinish(
+                                ((AuthInfo)
+                                                ChooseAccountTypeActivity.this
+                                                        .mAuthenticatorInfosToDisplay.get(position))
+                                        .desc
+                                        .type);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -85,7 +104,9 @@ public class ChooseAccountTypeActivity extends Activity {
         bundle.putString("accountType", type);
         setResult(-1, new Intent().putExtras(bundle));
         if (Log.isLoggable(TAG, 2)) {
-            Log.v(TAG, "ChooseAccountTypeActivity.setResultAndFinish: selected account type " + type);
+            Log.v(
+                    TAG,
+                    "ChooseAccountTypeActivity.setResultAndFinish: selected account type " + type);
         }
         finish();
     }
@@ -131,25 +152,27 @@ public class ChooseAccountTypeActivity extends Activity {
         ImageView icon;
         TextView text;
 
-        private ViewHolder() {
-        }
+        private ViewHolder() {}
     }
 
     private static class AccountArrayAdapter extends ArrayAdapter<AuthInfo> {
         private ArrayList<AuthInfo> mInfos;
         private LayoutInflater mLayoutInflater;
 
-        public AccountArrayAdapter(Context context, int textViewResourceId, ArrayList<AuthInfo> infos) {
+        public AccountArrayAdapter(
+                Context context, int textViewResourceId, ArrayList<AuthInfo> infos) {
             super(context, textViewResourceId, infos);
             this.mInfos = infos;
-            this.mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            this.mLayoutInflater =
+                    (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
         @Override // android.widget.ArrayAdapter, android.widget.Adapter
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder;
             if (convertView == null) {
-                convertView = this.mLayoutInflater.inflate(R.layout.choose_account_row, (ViewGroup) null);
+                convertView =
+                        this.mLayoutInflater.inflate(R.layout.choose_account_row, (ViewGroup) null);
                 holder = new ViewHolder();
                 holder.text = (TextView) convertView.findViewById(R.id.account_row_text);
                 holder.icon = (ImageView) convertView.findViewById(R.id.account_row_icon);

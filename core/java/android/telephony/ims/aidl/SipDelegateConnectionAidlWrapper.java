@@ -9,13 +9,11 @@ import android.telephony.ims.SipDelegateConfiguration;
 import android.telephony.ims.SipDelegateConnection;
 import android.telephony.ims.SipDelegateImsConfiguration;
 import android.telephony.ims.SipMessage;
-import android.telephony.ims.aidl.ISipDelegateConnectionStateCallback;
-import android.telephony.ims.aidl.ISipDelegateMessageCallback;
-import android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper;
 import android.telephony.ims.stub.DelegateConnectionMessageCallback;
 import android.telephony.ims.stub.DelegateConnectionStateCallback;
 import android.util.ArraySet;
 import android.util.Log;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.Executor;
@@ -23,7 +21,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.UnaryOperator;
 
 /* loaded from: classes4.dex */
-public class SipDelegateConnectionAidlWrapper implements SipDelegateConnection, IBinder.DeathRecipient {
+public class SipDelegateConnectionAidlWrapper
+        implements SipDelegateConnection, IBinder.DeathRecipient {
     private static final String LOG_TAG = "SipDelegateCAW";
     private final Executor mExecutor;
     private final DelegateConnectionMessageCallback mMessageCallback;
@@ -34,20 +33,22 @@ public class SipDelegateConnectionAidlWrapper implements SipDelegateConnection, 
 
     /* renamed from: android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper$1, reason: invalid class name */
     class AnonymousClass1 extends ISipDelegateConnectionStateCallback.Stub {
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         @Override // android.telephony.ims.aidl.ISipDelegateConnectionStateCallback
         public void onCreated(ISipDelegate c) {
             SipDelegateConnectionAidlWrapper.this.associateSipDelegate(c);
             long token = Binder.clearCallingIdentity();
             try {
-                SipDelegateConnectionAidlWrapper.this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper$1$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SipDelegateConnectionAidlWrapper.AnonymousClass1.this.lambda$onCreated$0();
-                    }
-                });
+                SipDelegateConnectionAidlWrapper.this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper$1$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SipDelegateConnectionAidlWrapper.AnonymousClass1.this
+                                        .lambda$onCreated$0();
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
@@ -55,67 +56,87 @@ public class SipDelegateConnectionAidlWrapper implements SipDelegateConnection, 
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onCreated$0() {
-            SipDelegateConnectionAidlWrapper.this.mStateCallback.onCreated(SipDelegateConnectionAidlWrapper.this);
+            SipDelegateConnectionAidlWrapper.this.mStateCallback.onCreated(
+                    SipDelegateConnectionAidlWrapper.this);
         }
 
         @Override // android.telephony.ims.aidl.ISipDelegateConnectionStateCallback
-        public void onFeatureTagStatusChanged(final DelegateRegistrationState registrationState, final List<FeatureTagState> deniedFeatureTags) {
+        public void onFeatureTagStatusChanged(
+                final DelegateRegistrationState registrationState,
+                final List<FeatureTagState> deniedFeatureTags) {
             long token = Binder.clearCallingIdentity();
             try {
-                SipDelegateConnectionAidlWrapper.this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper$1$$ExternalSyntheticLambda4
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SipDelegateConnectionAidlWrapper.AnonymousClass1.this.lambda$onFeatureTagStatusChanged$1(registrationState, deniedFeatureTags);
-                    }
-                });
+                SipDelegateConnectionAidlWrapper.this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper$1$$ExternalSyntheticLambda4
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SipDelegateConnectionAidlWrapper.AnonymousClass1.this
+                                        .lambda$onFeatureTagStatusChanged$1(
+                                                registrationState, deniedFeatureTags);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onFeatureTagStatusChanged$1(DelegateRegistrationState registrationState, List deniedFeatureTags) {
-            SipDelegateConnectionAidlWrapper.this.mStateCallback.onFeatureTagStatusChanged(registrationState, new ArraySet(deniedFeatureTags));
+        public /* synthetic */ void lambda$onFeatureTagStatusChanged$1(
+                DelegateRegistrationState registrationState, List deniedFeatureTags) {
+            SipDelegateConnectionAidlWrapper.this.mStateCallback.onFeatureTagStatusChanged(
+                    registrationState, new ArraySet(deniedFeatureTags));
         }
 
         @Override // android.telephony.ims.aidl.ISipDelegateConnectionStateCallback
-        public void onImsConfigurationChanged(final SipDelegateImsConfiguration registeredSipConfig) {
+        public void onImsConfigurationChanged(
+                final SipDelegateImsConfiguration registeredSipConfig) {
             long token = Binder.clearCallingIdentity();
             try {
-                SipDelegateConnectionAidlWrapper.this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper$1$$ExternalSyntheticLambda3
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SipDelegateConnectionAidlWrapper.AnonymousClass1.this.lambda$onImsConfigurationChanged$2(registeredSipConfig);
-                    }
-                });
+                SipDelegateConnectionAidlWrapper.this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper$1$$ExternalSyntheticLambda3
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SipDelegateConnectionAidlWrapper.AnonymousClass1.this
+                                        .lambda$onImsConfigurationChanged$2(registeredSipConfig);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onImsConfigurationChanged$2(SipDelegateImsConfiguration registeredSipConfig) {
-            SipDelegateConnectionAidlWrapper.this.mStateCallback.onImsConfigurationChanged(registeredSipConfig);
+        public /* synthetic */ void lambda$onImsConfigurationChanged$2(
+                SipDelegateImsConfiguration registeredSipConfig) {
+            SipDelegateConnectionAidlWrapper.this.mStateCallback.onImsConfigurationChanged(
+                    registeredSipConfig);
         }
 
         @Override // android.telephony.ims.aidl.ISipDelegateConnectionStateCallback
         public void onConfigurationChanged(final SipDelegateConfiguration registeredSipConfig) {
             long token = Binder.clearCallingIdentity();
             try {
-                SipDelegateConnectionAidlWrapper.this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper$1$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SipDelegateConnectionAidlWrapper.AnonymousClass1.this.lambda$onConfigurationChanged$3(registeredSipConfig);
-                    }
-                });
+                SipDelegateConnectionAidlWrapper.this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper$1$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SipDelegateConnectionAidlWrapper.AnonymousClass1.this
+                                        .lambda$onConfigurationChanged$3(registeredSipConfig);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onConfigurationChanged$3(SipDelegateConfiguration registeredSipConfig) {
-            SipDelegateConnectionAidlWrapper.this.mStateCallback.onConfigurationChanged(registeredSipConfig);
+        public /* synthetic */ void lambda$onConfigurationChanged$3(
+                SipDelegateConfiguration registeredSipConfig) {
+            SipDelegateConnectionAidlWrapper.this.mStateCallback.onConfigurationChanged(
+                    registeredSipConfig);
         }
 
         @Override // android.telephony.ims.aidl.ISipDelegateConnectionStateCallback
@@ -123,12 +144,15 @@ public class SipDelegateConnectionAidlWrapper implements SipDelegateConnection, 
             SipDelegateConnectionAidlWrapper.this.invalidateSipDelegateBinder();
             long token = Binder.clearCallingIdentity();
             try {
-                SipDelegateConnectionAidlWrapper.this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper$1$$ExternalSyntheticLambda2
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SipDelegateConnectionAidlWrapper.AnonymousClass1.this.lambda$onDestroyed$4(reason);
-                    }
-                });
+                SipDelegateConnectionAidlWrapper.this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper$1$$ExternalSyntheticLambda2
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SipDelegateConnectionAidlWrapper.AnonymousClass1.this
+                                        .lambda$onDestroyed$4(reason);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
@@ -142,19 +166,21 @@ public class SipDelegateConnectionAidlWrapper implements SipDelegateConnection, 
 
     /* renamed from: android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper$2, reason: invalid class name */
     class AnonymousClass2 extends ISipDelegateMessageCallback.Stub {
-        AnonymousClass2() {
-        }
+        AnonymousClass2() {}
 
         @Override // android.telephony.ims.aidl.ISipDelegateMessageCallback
         public void onMessageReceived(final SipMessage message) {
             long token = Binder.clearCallingIdentity();
             try {
-                SipDelegateConnectionAidlWrapper.this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper$2$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SipDelegateConnectionAidlWrapper.AnonymousClass2.this.lambda$onMessageReceived$0(message);
-                    }
-                });
+                SipDelegateConnectionAidlWrapper.this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper$2$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SipDelegateConnectionAidlWrapper.AnonymousClass2.this
+                                        .lambda$onMessageReceived$0(message);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
@@ -169,12 +195,15 @@ public class SipDelegateConnectionAidlWrapper implements SipDelegateConnection, 
         public void onMessageSent(final String viaTransactionId) {
             long token = Binder.clearCallingIdentity();
             try {
-                SipDelegateConnectionAidlWrapper.this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper$2$$ExternalSyntheticLambda2
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SipDelegateConnectionAidlWrapper.AnonymousClass2.this.lambda$onMessageSent$1(viaTransactionId);
-                    }
-                });
+                SipDelegateConnectionAidlWrapper.this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper$2$$ExternalSyntheticLambda2
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SipDelegateConnectionAidlWrapper.AnonymousClass2.this
+                                        .lambda$onMessageSent$1(viaTransactionId);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
@@ -189,24 +218,32 @@ public class SipDelegateConnectionAidlWrapper implements SipDelegateConnection, 
         public void onMessageSendFailure(final String viaTransactionId, final int reason) {
             long token = Binder.clearCallingIdentity();
             try {
-                SipDelegateConnectionAidlWrapper.this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper$2$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SipDelegateConnectionAidlWrapper.AnonymousClass2.this.lambda$onMessageSendFailure$2(viaTransactionId, reason);
-                    }
-                });
+                SipDelegateConnectionAidlWrapper.this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper$2$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SipDelegateConnectionAidlWrapper.AnonymousClass2.this
+                                        .lambda$onMessageSendFailure$2(viaTransactionId, reason);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onMessageSendFailure$2(String viaTransactionId, int reason) {
-            SipDelegateConnectionAidlWrapper.this.mMessageCallback.onMessageSendFailure(viaTransactionId, reason);
+        public /* synthetic */ void lambda$onMessageSendFailure$2(
+                String viaTransactionId, int reason) {
+            SipDelegateConnectionAidlWrapper.this.mMessageCallback.onMessageSendFailure(
+                    viaTransactionId, reason);
         }
     }
 
-    public SipDelegateConnectionAidlWrapper(Executor executor, DelegateConnectionStateCallback stateCallback, DelegateConnectionMessageCallback messageCallback) {
+    public SipDelegateConnectionAidlWrapper(
+            Executor executor,
+            DelegateConnectionStateCallback stateCallback,
+            DelegateConnectionMessageCallback messageCallback) {
         this.mExecutor = executor;
         this.mStateCallback = stateCallback;
         this.mMessageCallback = messageCallback;
@@ -265,12 +302,14 @@ public class SipDelegateConnectionAidlWrapper implements SipDelegateConnection, 
     @Override // android.os.IBinder.DeathRecipient
     public void binderDied() {
         invalidateSipDelegateBinder();
-        this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                SipDelegateConnectionAidlWrapper.this.lambda$binderDied$0();
-            }
-        });
+        this.mExecutor.execute(
+                new Runnable() { // from class:
+                                 // android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        SipDelegateConnectionAidlWrapper.this.lambda$binderDied$0();
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -304,12 +343,16 @@ public class SipDelegateConnectionAidlWrapper implements SipDelegateConnection, 
 
     /* JADX INFO: Access modifiers changed from: private */
     public void invalidateSipDelegateBinder() {
-        ISipDelegate oldVal = this.mDelegateBinder.getAndUpdate(new UnaryOperator() { // from class: android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper$$ExternalSyntheticLambda1
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return SipDelegateConnectionAidlWrapper.lambda$invalidateSipDelegateBinder$1((ISipDelegate) obj);
-            }
-        });
+        ISipDelegate oldVal =
+                this.mDelegateBinder.getAndUpdate(
+                        new UnaryOperator() { // from class:
+                                              // android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper$$ExternalSyntheticLambda1
+                            @Override // java.util.function.Function
+                            public final Object apply(Object obj) {
+                                return SipDelegateConnectionAidlWrapper
+                                        .lambda$invalidateSipDelegateBinder$1((ISipDelegate) obj);
+                            }
+                        });
         if (oldVal != null) {
             try {
                 oldVal.asBinder().unlinkToDeath(this, 0);
@@ -325,16 +368,20 @@ public class SipDelegateConnectionAidlWrapper implements SipDelegateConnection, 
 
     private void notifyLocalMessageFailedToSend(SipMessage m, final int reason) {
         final String transactionId = m.getViaBranchParameter();
-        this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper$$ExternalSyntheticLambda2
-            @Override // java.lang.Runnable
-            public final void run() {
-                SipDelegateConnectionAidlWrapper.this.lambda$notifyLocalMessageFailedToSend$2(transactionId, reason);
-            }
-        });
+        this.mExecutor.execute(
+                new Runnable() { // from class:
+                                 // android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper$$ExternalSyntheticLambda2
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        SipDelegateConnectionAidlWrapper.this
+                                .lambda$notifyLocalMessageFailedToSend$2(transactionId, reason);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$notifyLocalMessageFailedToSend$2(String transactionId, int reason) {
+    public /* synthetic */ void lambda$notifyLocalMessageFailedToSend$2(
+            String transactionId, int reason) {
         this.mMessageCallback.onMessageSendFailure(transactionId, reason);
     }
 }

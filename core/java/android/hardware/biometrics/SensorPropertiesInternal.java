@@ -3,24 +3,27 @@ package android.hardware.biometrics;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public class SensorPropertiesInternal implements Parcelable {
-    public static final Parcelable.Creator<SensorPropertiesInternal> CREATOR = new Parcelable.Creator<SensorPropertiesInternal>() { // from class: android.hardware.biometrics.SensorPropertiesInternal.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SensorPropertiesInternal createFromParcel(Parcel in) {
-            return new SensorPropertiesInternal(in);
-        }
+    public static final Parcelable.Creator<SensorPropertiesInternal> CREATOR =
+            new Parcelable.Creator<SensorPropertiesInternal>() { // from class:
+                // android.hardware.biometrics.SensorPropertiesInternal.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SensorPropertiesInternal createFromParcel(Parcel in) {
+                    return new SensorPropertiesInternal(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SensorPropertiesInternal[] newArray(int size) {
-            return new SensorPropertiesInternal[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SensorPropertiesInternal[] newArray(int size) {
+                    return new SensorPropertiesInternal[size];
+                }
+            };
     public final List<ComponentInfoInternal> componentInfo;
     public final int maxEnrollmentsPerUser;
     public final boolean resetLockoutRequiresChallenge;
@@ -29,10 +32,22 @@ public class SensorPropertiesInternal implements Parcelable {
     public int sensorStrength;
 
     public static SensorPropertiesInternal from(SensorPropertiesInternal prop) {
-        return new SensorPropertiesInternal(prop.sensorId, prop.sensorStrength, prop.maxEnrollmentsPerUser, prop.componentInfo, prop.resetLockoutRequiresHardwareAuthToken, prop.resetLockoutRequiresChallenge);
+        return new SensorPropertiesInternal(
+                prop.sensorId,
+                prop.sensorStrength,
+                prop.maxEnrollmentsPerUser,
+                prop.componentInfo,
+                prop.resetLockoutRequiresHardwareAuthToken,
+                prop.resetLockoutRequiresChallenge);
     }
 
-    public SensorPropertiesInternal(int sensorId, int sensorStrength, int maxEnrollmentsPerUser, List<ComponentInfoInternal> componentInfo, boolean resetLockoutRequiresHardwareAuthToken, boolean resetLockoutRequiresChallenge) {
+    public SensorPropertiesInternal(
+            int sensorId,
+            int sensorStrength,
+            int maxEnrollmentsPerUser,
+            List<ComponentInfoInternal> componentInfo,
+            boolean resetLockoutRequiresHardwareAuthToken,
+            boolean resetLockoutRequiresChallenge) {
         this.sensorId = sensorId;
         this.sensorStrength = sensorStrength;
         this.maxEnrollmentsPerUser = maxEnrollmentsPerUser;
@@ -46,7 +61,10 @@ public class SensorPropertiesInternal implements Parcelable {
         this.sensorStrength = in.readInt();
         this.maxEnrollmentsPerUser = in.readInt();
         this.componentInfo = new ArrayList();
-        in.readList(this.componentInfo, ComponentInfoInternal.class.getClassLoader(), ComponentInfoInternal.class);
+        in.readList(
+                this.componentInfo,
+                ComponentInfoInternal.class.getClassLoader(),
+                ComponentInfoInternal.class);
         this.resetLockoutRequiresHardwareAuthToken = in.readBoolean();
         this.resetLockoutRequiresChallenge = in.readBoolean();
     }
@@ -74,6 +92,13 @@ public class SensorPropertiesInternal implements Parcelable {
             sb.append("] ");
         }
         sb.append(NavigationBarInflaterView.SIZE_MOD_END);
-        return "ID: " + this.sensorId + ", Strength: " + this.sensorStrength + ", MaxEnrollmentsPerUser: " + this.maxEnrollmentsPerUser + ", ComponentInfo: " + sb.toString();
+        return "ID: "
+                + this.sensorId
+                + ", Strength: "
+                + this.sensorStrength
+                + ", MaxEnrollmentsPerUser: "
+                + this.maxEnrollmentsPerUser
+                + ", ComponentInfo: "
+                + sb.toString();
     }
 }

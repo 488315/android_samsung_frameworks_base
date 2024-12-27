@@ -3,8 +3,6 @@ package com.samsung.android.multicontrol;
 import android.content.Context;
 import android.os.RemoteException;
 import android.view.IInputFilter;
-import com.samsung.android.multicontrol.IInputFilterInstallListener;
-import com.samsung.android.multicontrol.IMultiControlDeathChecker;
 
 /* loaded from: classes6.dex */
 public final class SemMultiControlManager {
@@ -19,8 +17,7 @@ public final class SemMultiControlManager {
         void onUninstalled();
     }
 
-    public interface MultiControlDeathChecker {
-    }
+    public interface MultiControlDeathChecker {}
 
     public int getProtocolVersion() {
         try {
@@ -122,8 +119,11 @@ public final class SemMultiControlManager {
 
     public void startDeathChecker() {
         try {
-            this.mService.startDeathChecker(new MultiControlDeathCheckerDelegate(new MultiControlDeathChecker() { // from class: com.samsung.android.multicontrol.SemMultiControlManager.1
-            }));
+            this.mService.startDeathChecker(
+                    new MultiControlDeathCheckerDelegate(
+                            new MultiControlDeathChecker() { // from class:
+                                                             // com.samsung.android.multicontrol.SemMultiControlManager.1
+                            }));
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
@@ -161,7 +161,8 @@ public final class SemMultiControlManager {
         }
     }
 
-    private static class InputFilterInstallListenerDelegate extends IInputFilterInstallListener.Stub {
+    private static class InputFilterInstallListenerDelegate
+            extends IInputFilterInstallListener.Stub {
         private InputFilterInstallListener mListener;
 
         InputFilterInstallListenerDelegate(InputFilterInstallListener listener) {

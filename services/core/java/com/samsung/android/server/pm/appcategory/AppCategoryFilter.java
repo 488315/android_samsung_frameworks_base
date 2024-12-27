@@ -1,6 +1,7 @@
 package com.samsung.android.server.pm.appcategory;
 
 import android.util.ArrayMap;
+
 import java.util.ArrayList;
 import java.util.function.BiConsumer;
 
@@ -13,22 +14,34 @@ public final class AppCategoryFilter {
     public AppCategoryListParser mParser;
 
     /* renamed from: -$$Nest$mmakeChangedAppList, reason: not valid java name */
-    public static ArrayList m1231$$Nest$mmakeChangedAppList(AppCategoryFilter appCategoryFilter, final AppCategoryListParserWithScpm appCategoryListParserWithScpm, AppCategoryListParserWithScpm appCategoryListParserWithScpm2) {
+    public static ArrayList m1231$$Nest$mmakeChangedAppList(
+            AppCategoryFilter appCategoryFilter,
+            final AppCategoryListParserWithScpm appCategoryListParserWithScpm,
+            AppCategoryListParserWithScpm appCategoryListParserWithScpm2) {
         final ArrayList arrayList = new ArrayList();
-        ((ArrayMap) appCategoryListParserWithScpm2.mPackageMap).forEach(new BiConsumer() { // from class: com.samsung.android.server.pm.appcategory.AppCategoryFilter$$ExternalSyntheticLambda0
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                AppCategoryListParser appCategoryListParser = appCategoryListParserWithScpm;
-                ArrayList arrayList2 = arrayList;
-                String str = (String) obj;
-                Integer num = (Integer) obj2;
-                Integer num2 = (Integer) ((ArrayMap) appCategoryListParser.mPackageMap).get(str);
-                if ((num2 != null ? num2.intValue() : -1) != num.intValue()) {
-                    arrayList2.add(str);
-                }
-            }
-        });
-        ((ArrayMap) appCategoryListParserWithScpm.mPackageMap).keySet().removeAll(((ArrayMap) appCategoryListParserWithScpm2.mPackageMap).keySet());
+        ((ArrayMap) appCategoryListParserWithScpm2.mPackageMap)
+                .forEach(
+                        new BiConsumer() { // from class:
+                                           // com.samsung.android.server.pm.appcategory.AppCategoryFilter$$ExternalSyntheticLambda0
+                            @Override // java.util.function.BiConsumer
+                            public final void accept(Object obj, Object obj2) {
+                                AppCategoryListParser appCategoryListParser =
+                                        appCategoryListParserWithScpm;
+                                ArrayList arrayList2 = arrayList;
+                                String str = (String) obj;
+                                Integer num = (Integer) obj2;
+                                Integer num2 =
+                                        (Integer)
+                                                ((ArrayMap) appCategoryListParser.mPackageMap)
+                                                        .get(str);
+                                if ((num2 != null ? num2.intValue() : -1) != num.intValue()) {
+                                    arrayList2.add(str);
+                                }
+                            }
+                        });
+        ((ArrayMap) appCategoryListParserWithScpm.mPackageMap)
+                .keySet()
+                .removeAll(((ArrayMap) appCategoryListParserWithScpm2.mPackageMap).keySet());
         arrayList.addAll(((ArrayMap) appCategoryListParserWithScpm.mPackageMap).keySet());
         return arrayList;
     }

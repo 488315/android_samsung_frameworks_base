@@ -30,7 +30,13 @@ public abstract class IdentityCredential {
     public abstract long getCredstoreOperationHandle();
 
     @Deprecated
-    public abstract ResultData getEntries(byte[] bArr, Map<String, Collection<String>> map, byte[] bArr2, byte[] bArr3) throws SessionTranscriptMismatchException, NoAuthenticationKeyAvailableException, InvalidReaderSignatureException, EphemeralPublicKeyNotFoundException, InvalidRequestMessageException;
+    public abstract ResultData getEntries(
+            byte[] bArr, Map<String, Collection<String>> map, byte[] bArr2, byte[] bArr3)
+            throws SessionTranscriptMismatchException,
+                    NoAuthenticationKeyAvailableException,
+                    InvalidReaderSignatureException,
+                    EphemeralPublicKeyNotFoundException,
+                    InvalidRequestMessageException;
 
     @Deprecated
     public abstract void setAllowUsingExhaustedKeys(boolean z);
@@ -39,13 +45,14 @@ public abstract class IdentityCredential {
     public abstract void setAvailableAuthenticationKeys(int i, int i2);
 
     @Deprecated
-    public abstract void setReaderEphemeralPublicKey(PublicKey publicKey) throws InvalidKeyException;
+    public abstract void setReaderEphemeralPublicKey(PublicKey publicKey)
+            throws InvalidKeyException;
 
     @Deprecated
-    public abstract void storeStaticAuthenticationData(X509Certificate x509Certificate, byte[] bArr) throws UnknownAuthenticationKeyException;
+    public abstract void storeStaticAuthenticationData(X509Certificate x509Certificate, byte[] bArr)
+            throws UnknownAuthenticationKeyException;
 
-    protected IdentityCredential() {
-    }
+    protected IdentityCredential() {}
 
     @Deprecated
     public void setAllowUsingExpiredKeys(boolean allowUsingExpiredKeys) {
@@ -56,7 +63,9 @@ public abstract class IdentityCredential {
         throw new UnsupportedOperationException();
     }
 
-    public void storeStaticAuthenticationData(X509Certificate authenticationKey, Instant expirationDate, byte[] staticAuthData) throws UnknownAuthenticationKeyException {
+    public void storeStaticAuthenticationData(
+            X509Certificate authenticationKey, Instant expirationDate, byte[] staticAuthData)
+            throws UnknownAuthenticationKeyException {
         throw new UnsupportedOperationException();
     }
 
@@ -72,7 +81,8 @@ public abstract class IdentityCredential {
         throw new UnsupportedOperationException();
     }
 
-    public void setAvailableAuthenticationKeys(int keyCount, int maxUsesPerKey, long minValidTimeMillis) {
+    public void setAvailableAuthenticationKeys(
+            int keyCount, int maxUsesPerKey, long minValidTimeMillis) {
         throw new UnsupportedOperationException();
     }
 

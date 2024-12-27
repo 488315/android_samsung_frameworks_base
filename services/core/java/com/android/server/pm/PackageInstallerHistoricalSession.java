@@ -2,7 +2,9 @@ package com.android.server.pm;
 
 import android.content.pm.PackageInstaller;
 import android.content.pm.verify.domain.DomainSet;
+
 import com.android.internal.util.IndentingPrintWriter;
+
 import java.io.CharArrayWriter;
 import java.io.File;
 
@@ -44,7 +46,41 @@ public final class PackageInstallerHistoricalSession {
     public final int sessionId;
     public final int userId;
 
-    public PackageInstallerHistoricalSession(int i, int i2, int i3, String str, InstallSource installSource, int i4, long j, long j2, long j3, File file, String str2, float f, float f2, boolean z, boolean z2, boolean z3, boolean z4, boolean z5, boolean z6, int i5, int i6, int i7, String str3, PackageInstaller.SessionParams sessionParams, int i8, int[] iArr, boolean z7, boolean z8, boolean z9, int i9, String str4, PackageInstaller.PreapprovalDetails preapprovalDetails, DomainSet domainSet, String str5) {
+    public PackageInstallerHistoricalSession(
+            int i,
+            int i2,
+            int i3,
+            String str,
+            InstallSource installSource,
+            int i4,
+            long j,
+            long j2,
+            long j3,
+            File file,
+            String str2,
+            float f,
+            float f2,
+            boolean z,
+            boolean z2,
+            boolean z3,
+            boolean z4,
+            boolean z5,
+            boolean z6,
+            int i5,
+            int i6,
+            int i7,
+            String str3,
+            PackageInstaller.SessionParams sessionParams,
+            int i8,
+            int[] iArr,
+            boolean z7,
+            boolean z8,
+            boolean z9,
+            int i9,
+            String str4,
+            PackageInstaller.PreapprovalDetails preapprovalDetails,
+            DomainSet domainSet,
+            String str5) {
         this.sessionId = i;
         this.userId = i2;
         this.mOriginalInstallerUid = i3;
@@ -88,19 +124,26 @@ public final class PackageInstallerHistoricalSession {
         } else {
             this.mPreVerifiedDomains = null;
         }
-        this.mPackageName = preapprovalDetails != null ? preapprovalDetails.getPackageName() : str5 != null ? str5 : sessionParams.appPackageName;
+        this.mPackageName =
+                preapprovalDetails != null
+                        ? preapprovalDetails.getPackageName()
+                        : str5 != null ? str5 : sessionParams.appPackageName;
     }
 
     public final void dump(IndentingPrintWriter indentingPrintWriter) {
         indentingPrintWriter.println("Session " + this.sessionId + ":");
         indentingPrintWriter.increaseIndent();
         indentingPrintWriter.printPair("userId", Integer.valueOf(this.userId));
-        indentingPrintWriter.printPair("mOriginalInstallerUid", Integer.valueOf(this.mOriginalInstallerUid));
-        indentingPrintWriter.printPair("mOriginalInstallerPackageName", this.mOriginalInstallerPackageName);
+        indentingPrintWriter.printPair(
+                "mOriginalInstallerUid", Integer.valueOf(this.mOriginalInstallerUid));
+        indentingPrintWriter.printPair(
+                "mOriginalInstallerPackageName", this.mOriginalInstallerPackageName);
         InstallSource installSource = this.mInstallSource;
         indentingPrintWriter.printPair("installerPackageName", installSource.mInstallerPackageName);
-        indentingPrintWriter.printPair("installInitiatingPackageName", installSource.mInitiatingPackageName);
-        indentingPrintWriter.printPair("installOriginatingPackageName", installSource.mOriginatingPackageName);
+        indentingPrintWriter.printPair(
+                "installInitiatingPackageName", installSource.mInitiatingPackageName);
+        indentingPrintWriter.printPair(
+                "installOriginatingPackageName", installSource.mOriginatingPackageName);
         indentingPrintWriter.printPair("mInstallerUid", Integer.valueOf(this.mInstallerUid));
         indentingPrintWriter.printPair("createdMillis", Long.valueOf(this.mCreatedMillis));
         indentingPrintWriter.printPair("updatedMillis", Long.valueOf(this.mUpdatedMillis));
@@ -112,9 +155,11 @@ public final class PackageInstallerHistoricalSession {
         indentingPrintWriter.printPair("mClientProgress", Float.valueOf(this.mClientProgress));
         indentingPrintWriter.printPair("mProgress", Float.valueOf(this.mProgress));
         indentingPrintWriter.printPair("mCommitted", Boolean.valueOf(this.mCommitted));
-        indentingPrintWriter.printPair("mPreapprovalRequested", Boolean.valueOf(this.mPreapprovalRequested));
+        indentingPrintWriter.printPair(
+                "mPreapprovalRequested", Boolean.valueOf(this.mPreapprovalRequested));
         indentingPrintWriter.printPair("mSealed", Boolean.valueOf(this.mSealed));
-        indentingPrintWriter.printPair("mPermissionsManuallyAccepted", Boolean.valueOf(this.mPermissionsManuallyAccepted));
+        indentingPrintWriter.printPair(
+                "mPermissionsManuallyAccepted", Boolean.valueOf(this.mPermissionsManuallyAccepted));
         indentingPrintWriter.printPair("mStageDirInUse", Boolean.valueOf(this.mStageDirInUse));
         indentingPrintWriter.printPair("mDestroyed", Boolean.valueOf(this.mDestroyed));
         indentingPrintWriter.printPair("mFds", Integer.valueOf(this.mFds));
@@ -126,7 +171,8 @@ public final class PackageInstallerHistoricalSession {
         indentingPrintWriter.printPair("mSessionApplied", Boolean.valueOf(this.mSessionApplied));
         indentingPrintWriter.printPair("mSessionFailed", Boolean.valueOf(this.mSessionFailed));
         indentingPrintWriter.printPair("mSessionReady", Boolean.valueOf(this.mSessionReady));
-        indentingPrintWriter.printPair("mSessionErrorCode", Integer.valueOf(this.mSessionErrorCode));
+        indentingPrintWriter.printPair(
+                "mSessionErrorCode", Integer.valueOf(this.mSessionErrorCode));
         indentingPrintWriter.printPair("mSessionErrorMessage", this.mSessionErrorMessage);
         indentingPrintWriter.printPair("mPreapprovalDetails", this.mPreapprovalDetails);
         indentingPrintWriter.printPair("mPreVerifiedDomains", this.mPreVerifiedDomains);

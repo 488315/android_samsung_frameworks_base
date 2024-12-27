@@ -2,23 +2,26 @@ package android.app.admin;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class IntegerPolicyValue extends PolicyValue<Integer> {
-    public static final Parcelable.Creator<IntegerPolicyValue> CREATOR = new Parcelable.Creator<IntegerPolicyValue>() { // from class: android.app.admin.IntegerPolicyValue.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IntegerPolicyValue createFromParcel(Parcel source) {
-            return new IntegerPolicyValue(source);
-        }
+    public static final Parcelable.Creator<IntegerPolicyValue> CREATOR =
+            new Parcelable.Creator<
+                    IntegerPolicyValue>() { // from class: android.app.admin.IntegerPolicyValue.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IntegerPolicyValue createFromParcel(Parcel source) {
+                    return new IntegerPolicyValue(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IntegerPolicyValue[] newArray(int size) {
-            return new IntegerPolicyValue[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IntegerPolicyValue[] newArray(int size) {
+                    return new IntegerPolicyValue[size];
+                }
+            };
 
     public IntegerPolicyValue(int value) {
         super(Integer.valueOf(value));

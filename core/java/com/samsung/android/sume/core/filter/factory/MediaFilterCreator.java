@@ -6,5 +6,8 @@ import com.samsung.android.sume.core.filter.MediaFilter;
 @FunctionalInterface
 /* loaded from: classes6.dex */
 public interface MediaFilterCreator {
-    MediaFilter newFilter(MediaFilterFactory mediaFilterFactory, MFDescriptor mFDescriptor, MediaFilter mediaFilter);
+    MediaFilter newFilter(
+            MediaFilterFactory mediaFilterFactory,
+            MFDescriptor mFDescriptor,
+            MediaFilter mediaFilter);
 }

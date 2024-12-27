@@ -4,6 +4,7 @@ import android.hardware.camera2.marshal.MarshalQueryable;
 import android.hardware.camera2.marshal.Marshaler;
 import android.hardware.camera2.params.RggbChannelVector;
 import android.hardware.camera2.utils.TypeReference;
+
 import java.nio.ByteBuffer;
 
 /* loaded from: classes2.dex */
@@ -11,7 +12,8 @@ public class MarshalQueryableRggbChannelVector implements MarshalQueryable<RggbC
     private static final int SIZE = 16;
 
     private class MarshalerRggbChannelVector extends Marshaler<RggbChannelVector> {
-        protected MarshalerRggbChannelVector(TypeReference<RggbChannelVector> typeReference, int nativeType) {
+        protected MarshalerRggbChannelVector(
+                TypeReference<RggbChannelVector> typeReference, int nativeType) {
             super(MarshalQueryableRggbChannelVector.this, typeReference, nativeType);
         }
 
@@ -39,12 +41,14 @@ public class MarshalQueryableRggbChannelVector implements MarshalQueryable<RggbC
     }
 
     @Override // android.hardware.camera2.marshal.MarshalQueryable
-    public Marshaler<RggbChannelVector> createMarshaler(TypeReference<RggbChannelVector> managedType, int nativeType) {
+    public Marshaler<RggbChannelVector> createMarshaler(
+            TypeReference<RggbChannelVector> managedType, int nativeType) {
         return new MarshalerRggbChannelVector(managedType, nativeType);
     }
 
     @Override // android.hardware.camera2.marshal.MarshalQueryable
-    public boolean isTypeMappingSupported(TypeReference<RggbChannelVector> managedType, int nativeType) {
+    public boolean isTypeMappingSupported(
+            TypeReference<RggbChannelVector> managedType, int nativeType) {
         return nativeType == 2 && RggbChannelVector.class.equals(managedType.getType());
     }
 }

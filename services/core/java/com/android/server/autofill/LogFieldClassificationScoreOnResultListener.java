@@ -7,12 +7,15 @@ import android.service.autofill.FieldClassification;
 import android.util.ArrayMap;
 import android.util.Slog;
 import android.view.autofill.AutofillId;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class LogFieldClassificationScoreOnResultListener implements RemoteCallback.OnResultListener {
+public final class LogFieldClassificationScoreOnResultListener
+        implements RemoteCallback.OnResultListener {
     public final AutofillId[] mAutofillIds;
     public final String[] mCategoryIds;
     public final int mCommitReason;
@@ -23,7 +26,16 @@ public final class LogFieldClassificationScoreOnResultListener implements Remote
     public final String[] mUserValues;
     public final int mViewsSize;
 
-    public LogFieldClassificationScoreOnResultListener(Session session, int i, int i2, int i3, AutofillId[] autofillIdArr, String[] strArr, String[] strArr2, ArrayList arrayList, ArrayList arrayList2) {
+    public LogFieldClassificationScoreOnResultListener(
+            Session session,
+            int i,
+            int i2,
+            int i3,
+            AutofillId[] autofillIdArr,
+            String[] strArr,
+            String[] strArr2,
+            ArrayList arrayList,
+            ArrayList arrayList2) {
         this.mSession = session;
         this.mSaveDialogNotShowReason = i;
         this.mCommitReason = i2;
@@ -38,10 +50,13 @@ public final class LogFieldClassificationScoreOnResultListener implements Remote
     public final void onResult(Bundle bundle) {
         Session session;
         String[] strArr;
-        LogFieldClassificationScoreOnResultListener logFieldClassificationScoreOnResultListener = this;
+        LogFieldClassificationScoreOnResultListener logFieldClassificationScoreOnResultListener =
+                this;
         Session session2 = logFieldClassificationScoreOnResultListener.mSession;
         if (session2 == null) {
-            Slog.wtf("LogFieldClassificationScoreOnResultListener", "session is null when calling onResult()");
+            Slog.wtf(
+                    "LogFieldClassificationScoreOnResultListener",
+                    "session is null when calling onResult()");
             return;
         }
         int i = logFieldClassificationScoreOnResultListener.mSaveDialogNotShowReason;
@@ -51,7 +66,8 @@ public final class LogFieldClassificationScoreOnResultListener implements Remote
         String[] strArr2 = logFieldClassificationScoreOnResultListener.mUserValues;
         String[] strArr3 = logFieldClassificationScoreOnResultListener.mCategoryIds;
         ArrayList arrayList = logFieldClassificationScoreOnResultListener.mDetectedFieldIds;
-        ArrayList arrayList2 = logFieldClassificationScoreOnResultListener.mDetectedFieldClassifications;
+        ArrayList arrayList2 =
+                logFieldClassificationScoreOnResultListener.mDetectedFieldClassifications;
         ArrayMap arrayMap = null;
         if (bundle == null) {
             if (Helper.sDebug) {
@@ -61,7 +77,10 @@ public final class LogFieldClassificationScoreOnResultListener implements Remote
                 session2.logContextCommittedLocked(null, null, i, i2);
             }
         } else {
-            AutofillFieldClassificationService.Scores scores = (AutofillFieldClassificationService.Scores) bundle.getParcelable("scores", AutofillFieldClassificationService.Scores.class);
+            AutofillFieldClassificationService.Scores scores =
+                    (AutofillFieldClassificationService.Scores)
+                            bundle.getParcelable(
+                                    "scores", AutofillFieldClassificationService.Scores.class);
             if (scores != null) {
                 int i4 = 0;
                 int i5 = 0;
@@ -99,14 +118,24 @@ public final class LogFieldClassificationScoreOnResultListener implements Remote
                                         arrayMap2.put(str, Float.valueOf(f));
                                     } else {
                                         if (Helper.sVerbose) {
-                                            Slog.v("AutofillSession", "skipping score " + f + " because it's less than " + f2);
+                                            Slog.v(
+                                                    "AutofillSession",
+                                                    "skipping score "
+                                                            + f
+                                                            + " because it's less than "
+                                                            + f2);
                                         }
                                         strArr = strArr2;
                                     }
                                 } else {
                                     strArr = strArr2;
                                     if (Helper.sVerbose) {
-                                        Slog.v("AutofillSession", "skipping score 0 at index " + i7 + " and id " + autofillId);
+                                        Slog.v(
+                                                "AutofillSession",
+                                                "skipping score 0 at index "
+                                                        + i7
+                                                        + " and id "
+                                                        + autofillId);
                                     }
                                 }
                                 i7++;
@@ -131,12 +160,21 @@ public final class LogFieldClassificationScoreOnResultListener implements Remote
                             int i8 = 0;
                             while (i8 < arrayMap2.size()) {
                                 try {
-                                    arrayList3.add(new FieldClassification.Match((String) arrayMap2.keyAt(i8), ((Float) arrayMap2.valueAt(i8)).floatValue()));
+                                    arrayList3.add(
+                                            new FieldClassification.Match(
+                                                    (String) arrayMap2.keyAt(i8),
+                                                    ((Float) arrayMap2.valueAt(i8)).floatValue()));
                                     i8++;
                                 } catch (ArrayIndexOutOfBoundsException e2) {
                                     e = e2;
                                     i5 = i8;
-                                    session2.wtf(e, "Error accessing FC score at [%d, %d] (%s): %s", Integer.valueOf(i4), Integer.valueOf(i5), scores, e);
+                                    session2.wtf(
+                                            e,
+                                            "Error accessing FC score at [%d, %d] (%s): %s",
+                                            Integer.valueOf(i4),
+                                            Integer.valueOf(i5),
+                                            scores,
+                                            e);
                                     session = null;
                                     logFieldClassificationScoreOnResultListener = this;
                                     logFieldClassificationScoreOnResultListener.mSession = session;

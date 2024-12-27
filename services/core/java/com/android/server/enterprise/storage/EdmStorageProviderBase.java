@@ -8,11 +8,14 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
+
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
 import com.android.server.am.Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.container.KnoxMUMContainerPolicy$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knox.SemPersonaManager;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +33,8 @@ public class EdmStorageProviderBase {
         synchronized (EdmStorageHelper.class) {
             try {
                 if (EdmStorageHelper.mInstance == null) {
-                    EdmStorageHelper edmStorageHelper3 = new EdmStorageHelper(context, "enterprise.db", null, 9);
+                    EdmStorageHelper edmStorageHelper3 =
+                            new EdmStorageHelper(context, "enterprise.db", null, 9);
                     edmStorageHelper3.mContext = context;
                     EdmStorageHelper.mInstance = edmStorageHelper3;
                 }
@@ -49,7 +53,10 @@ public class EdmStorageProviderBase {
 
     public static void convertAdminIdToLUID(ContentValues contentValues) {
         boolean containsKey = contentValues.containsKey("containerID");
-        if (!contentValues.containsKey("adminUid") || !containsKey || contentValues.getAsInteger("containerID") == null || contentValues.getAsInteger("adminUid") == null) {
+        if (!contentValues.containsKey("adminUid")
+                || !containsKey
+                || contentValues.getAsInteger("containerID") == null
+                || contentValues.getAsInteger("adminUid") == null) {
             return;
         }
         int intValue = contentValues.getAsInteger("containerID").intValue();
@@ -95,7 +102,14 @@ public class EdmStorageProviderBase {
         if (SemPersonaManager.isKnoxId(i)) {
             i = 0;
         }
-        sb.append(new StringBuilder(ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "SELECT adminUid FROM ADMIN WHERE containerID=", " AND userID=")).toString());
+        sb.append(
+                new StringBuilder(
+                                ArrayUtils$$ExternalSyntheticOutline0.m(
+                                        i,
+                                        i2,
+                                        "SELECT adminUid FROM ADMIN WHERE containerID=",
+                                        " AND userID="))
+                        .toString());
         sb.append(")");
         return sb.toString();
     }
@@ -106,7 +120,8 @@ public class EdmStorageProviderBase {
             return;
         }
         convertAdminIdToLUID(contentValues);
-        if (!contentValues.containsKey("containerID") || contentValues.getAsInteger("containerID") == null) {
+        if (!contentValues.containsKey("containerID")
+                || contentValues.getAsInteger("containerID") == null) {
             return;
         }
         int intValue = contentValues.getAsInteger("containerID").intValue();
@@ -129,14 +144,16 @@ public class EdmStorageProviderBase {
 
     public final void addAdmin(int i, String str) {
         ContentValues contentValues = new ContentValues();
-        KnoxMUMContainerPolicy$$ExternalSyntheticOutline0.m(i, contentValues, "adminUid", "adminName", str);
+        KnoxMUMContainerPolicy$$ExternalSyntheticOutline0.m(
+                i, contentValues, "adminUid", "adminName", str);
         contentValues.put("canRemove", Boolean.TRUE);
         insert("ADMIN_INFO", contentValues);
     }
 
     public final boolean addMUMContainer(int i, int i2) {
         ContentValues contentValues = new ContentValues();
-        Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(i, contentValues, "containerID", i2, "adminUid");
+        Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(
+                i, contentValues, "containerID", i2, "adminUid");
         return insert("MUMCONTAINER", contentValues) != -1;
     }
 
@@ -177,7 +194,8 @@ public class EdmStorageProviderBase {
     public final boolean checkPseudoAdminForUid(int i) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("adminUid", Integer.valueOf(i));
-        ArrayList arrayList = (ArrayList) getBooleanList(contentValues, "ADMIN_INFO", "isPseudoAdmin");
+        ArrayList arrayList =
+                (ArrayList) getBooleanList(contentValues, "ADMIN_INFO", "isPseudoAdmin");
         if (arrayList.size() > 0) {
             return ((Boolean) arrayList.get(0)).booleanValue();
         }
@@ -186,7 +204,12 @@ public class EdmStorageProviderBase {
 
     public final int delete(String str, ContentValues contentValues) {
         StringBuilder sb = new StringBuilder();
-        return this.mEdmDbHelper.getWritableDatabase().delete(str, sb.length() > 0 ? sb.toString() : null, formatContentValues(contentValues, sb));
+        return this.mEdmDbHelper
+                .getWritableDatabase()
+                .delete(
+                        str,
+                        sb.length() > 0 ? sb.toString() : null,
+                        formatContentValues(contentValues, sb));
     }
 
     public final ArrayList getAdminUidList() {
@@ -212,7 +235,7 @@ public class EdmStorageProviderBase {
 
     public final List getBlobList(ContentValues contentValues, String str, String str2) {
         ArrayList arrayList = new ArrayList();
-        Cursor cursor = getCursor(str, new String[]{str2}, contentValues);
+        Cursor cursor = getCursor(str, new String[] {str2}, contentValues);
         if (cursor != null) {
             while (cursor.moveToNext()) {
                 try {
@@ -221,7 +244,9 @@ public class EdmStorageProviderBase {
                             arrayList.add(cursor.getBlob(0));
                         }
                     } catch (SQLException e) {
-                        Log.e("EdmStorageProvider", "Exception occurred accessing Enterprise db " + e.getMessage());
+                        Log.e(
+                                "EdmStorageProvider",
+                                "Exception occurred accessing Enterprise db " + e.getMessage());
                     }
                 } finally {
                     cursor.close();
@@ -243,7 +268,7 @@ public class EdmStorageProviderBase {
 
     public final List getBooleanList(ContentValues contentValues, String str, String str2) {
         ArrayList arrayList = new ArrayList();
-        Cursor cursor = getCursor(str, new String[]{str2}, contentValues);
+        Cursor cursor = getCursor(str, new String[] {str2}, contentValues);
         if (cursor != null) {
             while (cursor.moveToNext()) {
                 try {
@@ -252,7 +277,9 @@ public class EdmStorageProviderBase {
                             arrayList.add(Boolean.valueOf(cursor.getInt(0) == 1));
                         }
                     } catch (SQLException e) {
-                        Log.e("EdmStorageProvider", "Exception occurred accessing Enterprise db " + e.getMessage());
+                        Log.e(
+                                "EdmStorageProvider",
+                                "Exception occurred accessing Enterprise db " + e.getMessage());
                     }
                 } finally {
                     cursor.close();
@@ -278,7 +305,16 @@ public class EdmStorageProviderBase {
 
     public final Cursor getCursor(String str, String[] strArr, ContentValues contentValues) {
         StringBuilder sb = new StringBuilder();
-        return this.mEdmDbHelper.getReadableDatabase().query(str, strArr, sb.length() > 0 ? sb.toString() : null, formatContentValues(contentValues, sb), null, null, null);
+        return this.mEdmDbHelper
+                .getReadableDatabase()
+                .query(
+                        str,
+                        strArr,
+                        sb.length() > 0 ? sb.toString() : null,
+                        formatContentValues(contentValues, sb),
+                        null,
+                        null,
+                        null);
     }
 
     public final Cursor getCursorByAdmin(int i, int i2, String str, String[] strArr) {
@@ -295,7 +331,8 @@ public class EdmStorageProviderBase {
 
     public final String getGenericValueAsUser(int i, String str) {
         ContentValues m = AccountManagerService$$ExternalSyntheticOutline0.m("name", str);
-        Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(0, m, "containerID", i, "userID");
+        Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(
+                0, m, "containerID", i, "userID");
         return getString(m, "generic", "value");
     }
 
@@ -319,7 +356,7 @@ public class EdmStorageProviderBase {
 
     public final List getIntList(ContentValues contentValues, String str, String str2) {
         ArrayList arrayList = new ArrayList();
-        Cursor cursor = getCursor(str, new String[]{str2}, contentValues);
+        Cursor cursor = getCursor(str, new String[] {str2}, contentValues);
         if (cursor != null) {
             while (cursor.moveToNext()) {
                 try {
@@ -328,7 +365,9 @@ public class EdmStorageProviderBase {
                             arrayList.add(Integer.valueOf(cursor.getInt(0)));
                         }
                     } catch (SQLException e) {
-                        Log.e("EdmStorageProvider", "Exception occurred accessing Enterprise db " + e.getMessage());
+                        Log.e(
+                                "EdmStorageProvider",
+                                "Exception occurred accessing Enterprise db " + e.getMessage());
                     }
                 } finally {
                     cursor.close();
@@ -346,7 +385,7 @@ public class EdmStorageProviderBase {
 
     public final List getLongList(ContentValues contentValues, String str, String str2) {
         ArrayList arrayList = new ArrayList();
-        Cursor cursor = getCursor(str, new String[]{str2}, contentValues);
+        Cursor cursor = getCursor(str, new String[] {str2}, contentValues);
         if (cursor != null) {
             while (cursor.moveToNext()) {
                 try {
@@ -355,7 +394,9 @@ public class EdmStorageProviderBase {
                             arrayList.add(Long.valueOf(cursor.getLong(0)));
                         }
                     } catch (SQLException e) {
-                        Log.e("EdmStorageProvider", "Exception occurred accessing Enterprise db " + e.getMessage());
+                        Log.e(
+                                "EdmStorageProvider",
+                                "Exception occurred accessing Enterprise db " + e.getMessage());
                     }
                 } finally {
                     cursor.close();
@@ -401,7 +442,7 @@ public class EdmStorageProviderBase {
 
     public final List getStringList(ContentValues contentValues, String str, String str2) {
         ArrayList arrayList = new ArrayList();
-        Cursor cursor = getCursor(str, new String[]{str2}, contentValues);
+        Cursor cursor = getCursor(str, new String[] {str2}, contentValues);
         if (cursor != null) {
             while (cursor.moveToNext()) {
                 try {
@@ -410,7 +451,9 @@ public class EdmStorageProviderBase {
                             arrayList.add(cursor.getString(0));
                         }
                     } catch (SQLException e) {
-                        Log.e("EdmStorageProvider", "Exception occurred accessing Enterprise db " + e.getMessage());
+                        Log.e(
+                                "EdmStorageProvider",
+                                "Exception occurred accessing Enterprise db " + e.getMessage());
                     }
                 } finally {
                     cursor.close();
@@ -427,26 +470,27 @@ public class EdmStorageProviderBase {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:37:0x008b, code lost:
-    
-        if (r1 != null) goto L33;
-     */
+
+       if (r1 != null) goto L33;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:38:0x008d, code lost:
-    
-        r1.close();
-     */
+
+       r1.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:39:0x00ae, code lost:
-    
-        return r0;
-     */
+
+       return r0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:44:0x00ab, code lost:
-    
-        if (r1 == null) goto L37;
-     */
+
+       if (r1 == null) goto L37;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.util.List getValues(java.lang.String r5, java.lang.String[] r6, android.content.ContentValues r7) {
+    public final java.util.List getValues(
+            java.lang.String r5, java.lang.String[] r6, android.content.ContentValues r7) {
         /*
             r4 = this;
             java.util.ArrayList r0 = new java.util.ArrayList
@@ -537,7 +581,10 @@ public class EdmStorageProviderBase {
         Lb4:
             throw r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.storage.EdmStorageProviderBase.getValues(java.lang.String, java.lang.String[], android.content.ContentValues):java.util.List");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.storage.EdmStorageProviderBase.getValues(java.lang.String,"
+                    + " java.lang.String[], android.content.ContentValues):java.util.List");
     }
 
     public final List getValuesListAsUser(int i, int i2, String str, String[] strArr) {
@@ -555,9 +602,15 @@ public class EdmStorageProviderBase {
         }
     }
 
-    public final boolean put(String str, ContentValues contentValues, ContentValues contentValues2) {
+    public final boolean put(
+            String str, ContentValues contentValues, ContentValues contentValues2) {
         StringBuilder sb = new StringBuilder();
-        if (update(str, contentValues, sb.length() > 0 ? sb.toString() : null, formatContentValues(contentValues2, sb)) > 0) {
+        if (update(
+                        str,
+                        contentValues,
+                        sb.length() > 0 ? sb.toString() : null,
+                        formatContentValues(contentValues2, sb))
+                > 0) {
             return true;
         }
         contentValues.putAll(contentValues2);
@@ -623,7 +676,8 @@ public class EdmStorageProviderBase {
 
     public final void removeAdminFromDatabase(int i) {
         ContentValues contentValues = new ContentValues();
-        Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(i, contentValues, "adminUid", 1, "canRemove");
+        Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(
+                i, contentValues, "adminUid", 1, "canRemove");
         delete("ADMIN_INFO", contentValues);
     }
 
@@ -647,7 +701,10 @@ public class EdmStorageProviderBase {
     public final void resetControlStateBits(int i) {
         SQLiteDatabase writableDatabase = this.mEdmDbHelper.getWritableDatabase();
         try {
-            String str = "UPDATE APPLICATION SET controlState = (controlState & -15329266) WHERE adminUid = " + i;
+            String str =
+                    "UPDATE APPLICATION SET controlState = (controlState & -15329266) WHERE"
+                        + " adminUid = "
+                            + i;
             Log.d("EdmStorageProvider", "resetControlStateBits: query -> " + str);
             writableDatabase.execSQL(str);
         } catch (SQLiteException e) {
@@ -657,7 +714,11 @@ public class EdmStorageProviderBase {
 
     public int update(String str, ContentValues contentValues, ContentValues contentValues2) {
         StringBuilder sb = new StringBuilder();
-        return update(str, contentValues, sb.length() > 0 ? sb.toString() : null, formatContentValues(contentValues2, sb));
+        return update(
+                str,
+                contentValues,
+                sb.length() > 0 ? sb.toString() : null,
+                formatContentValues(contentValues2, sb));
     }
 
     public final int update(String str, ContentValues contentValues, String str2, String[] strArr) {

@@ -3,18 +3,21 @@ package com.android.server.backup.restore;
 import android.app.backup.IFullBackupRestoreObserver;
 import android.os.ParcelFileDescriptor;
 import android.util.Slog;
+
 import com.android.server.backup.BackupManagerYuva;
 import com.android.server.backup.OperationStorage;
 import com.android.server.backup.UserBackupManagerService;
 import com.android.server.backup.fullbackup.FullBackupObbConnection;
 import com.android.server.backup.internal.LifecycleOperationStorage;
 import com.android.server.backup.utils.PasswordUtils;
+
 import java.io.InputStream;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
@@ -39,7 +42,16 @@ public final class PerformAdbRestoreTask implements Runnable {
     public final boolean mOperationTypeMIGRATION;
     public final boolean mPrivilegeApp;
 
-    public PerformAdbRestoreTask(UserBackupManagerService userBackupManagerService, LifecycleOperationStorage lifecycleOperationStorage, ParcelFileDescriptor parcelFileDescriptor, String str, String str2, IFullBackupRestoreObserver iFullBackupRestoreObserver, AtomicBoolean atomicBoolean, boolean z, boolean z2) {
+    public PerformAdbRestoreTask(
+            UserBackupManagerService userBackupManagerService,
+            LifecycleOperationStorage lifecycleOperationStorage,
+            ParcelFileDescriptor parcelFileDescriptor,
+            String str,
+            String str2,
+            IFullBackupRestoreObserver iFullBackupRestoreObserver,
+            AtomicBoolean atomicBoolean,
+            boolean z,
+            boolean z2) {
         this.mPrivilegeApp = false;
         this.mOperationTypeMIGRATION = false;
         this.mBackupManagerService = userBackupManagerService;
@@ -58,11 +70,24 @@ public final class PerformAdbRestoreTask implements Runnable {
         }
     }
 
-    public static InputStream attemptEncryptionKeyDecryption(String str, String str2, byte[] bArr, byte[] bArr2, int i, String str3, String str4, InputStream inputStream, boolean z) {
+    public static InputStream attemptEncryptionKeyDecryption(
+            String str,
+            String str2,
+            byte[] bArr,
+            byte[] bArr2,
+            int i,
+            String str3,
+            String str4,
+            InputStream inputStream,
+            boolean z) {
         try {
             Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-            SecretKey buildCharArrayKey = PasswordUtils.buildCharArrayKey(str2, str.toCharArray(), bArr, i);
-            cipher.init(2, new SecretKeySpec(buildCharArrayKey.getEncoded(), "AES"), new IvParameterSpec(PasswordUtils.hexToByteArray(str3)));
+            SecretKey buildCharArrayKey =
+                    PasswordUtils.buildCharArrayKey(str2, str.toCharArray(), bArr, i);
+            cipher.init(
+                    2,
+                    new SecretKeySpec(buildCharArrayKey.getEncoded(), "AES"),
+                    new IvParameterSpec(PasswordUtils.hexToByteArray(str3)));
             byte[] doFinal = cipher.doFinal(PasswordUtils.hexToByteArray(str4));
             byte b = doFinal[0];
             int i2 = 1 + b;
@@ -76,8 +101,13 @@ public final class PerformAdbRestoreTask implements Runnable {
             for (int i6 = 0; i6 < copyOfRange2.length; i6++) {
                 cArr[i6] = (char) copyOfRange2[i6];
             }
-            if (Arrays.equals(PasswordUtils.buildCharArrayKey(str2, cArr, bArr2, i).getEncoded(), copyOfRange3)) {
-                cipher.init(2, new SecretKeySpec(copyOfRange2, "AES"), new IvParameterSpec(copyOfRange));
+            if (Arrays.equals(
+                    PasswordUtils.buildCharArrayKey(str2, cArr, bArr2, i).getEncoded(),
+                    copyOfRange3)) {
+                cipher.init(
+                        2,
+                        new SecretKeySpec(copyOfRange2, "AES"),
+                        new IvParameterSpec(copyOfRange));
                 return new CipherInputStream(inputStream, cipher);
             }
             if (!z) {
@@ -131,12 +161,16 @@ public final class PerformAdbRestoreTask implements Runnable {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.io.InputStream parseBackupFileHeaderAndReturnTarStream(java.io.InputStream r23, java.lang.String r24) throws java.io.IOException {
+    public static java.io.InputStream parseBackupFileHeaderAndReturnTarStream(
+            java.io.InputStream r23, java.lang.String r24) throws java.io.IOException {
         /*
             Method dump skipped, instructions count: 272
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.backup.restore.PerformAdbRestoreTask.parseBackupFileHeaderAndReturnTarStream(java.io.InputStream, java.lang.String):java.io.InputStream");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.backup.restore.PerformAdbRestoreTask.parseBackupFileHeaderAndReturnTarStream(java.io.InputStream,"
+                    + " java.lang.String):java.io.InputStream");
     }
 
     public static String readHeaderLine(InputStream inputStream) {
@@ -163,6 +197,8 @@ public final class PerformAdbRestoreTask implements Runnable {
             Method dump skipped, instructions count: 734
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.backup.restore.PerformAdbRestoreTask.run():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.backup.restore.PerformAdbRestoreTask.run():void");
     }
 }

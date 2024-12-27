@@ -16,12 +16,10 @@ public interface ITransientNotificationCallback extends IInterface {
 
     public static class Default implements ITransientNotificationCallback {
         @Override // android.app.ITransientNotificationCallback
-        public void onToastShown() throws RemoteException {
-        }
+        public void onToastShown() throws RemoteException {}
 
         @Override // android.app.ITransientNotificationCallback
-        public void onToastHidden() throws RemoteException {
-        }
+        public void onToastHidden() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface ITransientNotificationCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITransientNotificationCallback {
+    public abstract static class Stub extends Binder implements ITransientNotificationCallback {
         static final int TRANSACTION_onToastHidden = 2;
         static final int TRANSACTION_onToastShown = 1;
 
@@ -70,7 +68,8 @@ public interface ITransientNotificationCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITransientNotificationCallback.DESCRIPTOR);
             }

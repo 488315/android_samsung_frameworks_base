@@ -14,9 +14,12 @@ import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
+
 import com.android.internal.R;
-import java.io.IOException;
+
 import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 
 /* loaded from: classes.dex */
 public final class AccessibilityShortcutInfo {
@@ -32,30 +35,42 @@ public final class AccessibilityShortcutInfo {
     private final int mSummaryResId;
     private String mTileServiceName;
 
-    public AccessibilityShortcutInfo(Context context, ActivityInfo activityInfo) throws XmlPullParserException, IOException {
+    public AccessibilityShortcutInfo(Context context, ActivityInfo activityInfo)
+            throws XmlPullParserException, IOException {
         PackageManager packageManager = context.getPackageManager();
         this.mComponentName = activityInfo.getComponentName();
         this.mActivityInfo = activityInfo;
         long startTime = SystemClock.elapsedRealtime();
         try {
-            XmlResourceParser parser = this.mActivityInfo.loadXmlMetaData(packageManager, META_DATA);
+            XmlResourceParser parser =
+                    this.mActivityInfo.loadXmlMetaData(packageManager, META_DATA);
             try {
                 long elapsedTime = SystemClock.elapsedRealtime() - startTime;
                 if (elapsedTime > 100) {
-                    Log.i("AccessibilityShortcutInfo", "took more than 100ms mComponentName : " + this.mComponentName + ", elapsedTime : " + elapsedTime);
+                    Log.i(
+                            "AccessibilityShortcutInfo",
+                            "took more than 100ms mComponentName : "
+                                    + this.mComponentName
+                                    + ", elapsedTime : "
+                                    + elapsedTime);
                 }
                 if (parser == null) {
-                    throw new XmlPullParserException("Meta-data accessibility-shortcut-target does not exist");
+                    throw new XmlPullParserException(
+                            "Meta-data accessibility-shortcut-target does not exist");
                 }
-                for (int type = 0; type != 1 && type != 2; type = parser.next()) {
-                }
+                for (int type = 0; type != 1 && type != 2; type = parser.next()) {}
                 String nodeName = parser.getName();
                 if (!TAG_ACCESSIBILITY_SHORTCUT.equals(nodeName)) {
-                    throw new XmlPullParserException("Meta-data does not start withaccessibility-shortcut-target tag");
+                    throw new XmlPullParserException(
+                            "Meta-data does not start withaccessibility-shortcut-target tag");
                 }
                 AttributeSet allAttributes = Xml.asAttributeSet(parser);
-                Resources resources = packageManager.getResourcesForApplication(this.mActivityInfo.applicationInfo);
-                TypedArray asAttributes = resources.obtainAttributes(allAttributes, R.styleable.AccessibilityShortcutTarget);
+                Resources resources =
+                        packageManager.getResourcesForApplication(
+                                this.mActivityInfo.applicationInfo);
+                TypedArray asAttributes =
+                        resources.obtainAttributes(
+                                allAttributes, R.styleable.AccessibilityShortcutTarget);
                 this.mDescriptionResId = asAttributes.getResourceId(0, 0);
                 this.mSummaryResId = asAttributes.getResourceId(1, 0);
                 this.mAnimatedImageRes = asAttributes.getResourceId(3, 0);
@@ -70,7 +85,8 @@ public final class AccessibilityShortcutInfo {
             } finally {
             }
         } catch (PackageManager.NameNotFoundException e) {
-            throw new XmlPullParserException("Unable to create context for: " + this.mActivityInfo.packageName);
+            throw new XmlPullParserException(
+                    "Unable to create context for: " + this.mActivityInfo.packageName);
         }
     }
 
@@ -102,11 +118,13 @@ public final class AccessibilityShortcutInfo {
         if (this.mAnimatedImageRes == 0) {
             return null;
         }
-        return AccessibilityUtils.loadSafeAnimatedImage(context, this.mActivityInfo.applicationInfo, this.mAnimatedImageRes);
+        return AccessibilityUtils.loadSafeAnimatedImage(
+                context, this.mActivityInfo.applicationInfo, this.mAnimatedImageRes);
     }
 
     public String loadHtmlDescription(PackageManager packageManager) {
-        String htmlDescription = loadResourceString(packageManager, this.mActivityInfo, this.mHtmlDescriptionRes);
+        String htmlDescription =
+                loadResourceString(packageManager, this.mActivityInfo, this.mHtmlDescriptionRes);
         if (htmlDescription != null) {
             return AccessibilityUtils.getFilteredHtmlText(htmlDescription);
         }
@@ -121,9 +139,16 @@ public final class AccessibilityShortcutInfo {
         return this.mTileServiceName;
     }
 
-    private String loadResourceString(PackageManager packageManager, ActivityInfo activityInfo, int resId) {
+    private String loadResourceString(
+            PackageManager packageManager, ActivityInfo activityInfo, int resId) {
         CharSequence text;
-        if (resId == 0 || (text = packageManager.getText(activityInfo.packageName, resId, activityInfo.applicationInfo)) == null) {
+        if (resId == 0
+                || (text =
+                                packageManager.getText(
+                                        activityInfo.packageName,
+                                        resId,
+                                        activityInfo.applicationInfo))
+                        == null) {
             return null;
         }
         return text.toString().trim();

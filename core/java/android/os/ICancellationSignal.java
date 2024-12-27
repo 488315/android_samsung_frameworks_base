@@ -6,8 +6,7 @@ public interface ICancellationSignal extends IInterface {
 
     public static class Default implements ICancellationSignal {
         @Override // android.os.ICancellationSignal
-        public void cancel() throws RemoteException {
-        }
+        public void cancel() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -15,7 +14,7 @@ public interface ICancellationSignal extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICancellationSignal {
+    public abstract static class Stub extends Binder implements ICancellationSignal {
         public static final String DESCRIPTOR = "android.os.ICancellationSignal";
         static final int TRANSACTION_cancel = 1;
 
@@ -54,7 +53,8 @@ public interface ICancellationSignal extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

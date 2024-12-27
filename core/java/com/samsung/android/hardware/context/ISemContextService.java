@@ -5,13 +5,16 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.Map;
 
 /* loaded from: classes6.dex */
 public interface ISemContextService extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.hardware.context.ISemContextService";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.hardware.context.ISemContextService";
 
-    boolean changeParameters(IBinder iBinder, int i, SemContextAttribute semContextAttribute) throws RemoteException;
+    boolean changeParameters(IBinder iBinder, int i, SemContextAttribute semContextAttribute)
+            throws RemoteException;
 
     Map getAvailableServiceMap() throws RemoteException;
 
@@ -19,7 +22,9 @@ public interface ISemContextService extends IInterface {
 
     void initializeService(IBinder iBinder, int i) throws RemoteException;
 
-    void registerCallback(IBinder iBinder, int i, SemContextAttribute semContextAttribute, String str) throws RemoteException;
+    void registerCallback(
+            IBinder iBinder, int i, SemContextAttribute semContextAttribute, String str)
+            throws RemoteException;
 
     void requestHistoryData(IBinder iBinder, int i, String str) throws RemoteException;
 
@@ -31,8 +36,9 @@ public interface ISemContextService extends IInterface {
 
     public static class Default implements ISemContextService {
         @Override // com.samsung.android.hardware.context.ISemContextService
-        public void registerCallback(IBinder binder, int service, SemContextAttribute property, String packageName) throws RemoteException {
-        }
+        public void registerCallback(
+                IBinder binder, int service, SemContextAttribute property, String packageName)
+                throws RemoteException {}
 
         @Override // com.samsung.android.hardware.context.ISemContextService
         public boolean unregisterCallback(IBinder binder, int service) throws RemoteException {
@@ -40,11 +46,11 @@ public interface ISemContextService extends IInterface {
         }
 
         @Override // com.samsung.android.hardware.context.ISemContextService
-        public void initializeService(IBinder binder, int service) throws RemoteException {
-        }
+        public void initializeService(IBinder binder, int service) throws RemoteException {}
 
         @Override // com.samsung.android.hardware.context.ISemContextService
-        public boolean changeParameters(IBinder binder, int service, SemContextAttribute attribute) throws RemoteException {
+        public boolean changeParameters(IBinder binder, int service, SemContextAttribute attribute)
+                throws RemoteException {
             return false;
         }
 
@@ -54,17 +60,18 @@ public interface ISemContextService extends IInterface {
         }
 
         @Override // com.samsung.android.hardware.context.ISemContextService
-        public boolean setReferenceData(int service, int data_type, byte[] data) throws RemoteException {
+        public boolean setReferenceData(int service, int data_type, byte[] data)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.hardware.context.ISemContextService
-        public void requestToUpdate(IBinder binder, int service, String packageName) throws RemoteException {
-        }
+        public void requestToUpdate(IBinder binder, int service, String packageName)
+                throws RemoteException {}
 
         @Override // com.samsung.android.hardware.context.ISemContextService
-        public void requestHistoryData(IBinder binder, int service, String packageName) throws RemoteException {
-        }
+        public void requestHistoryData(IBinder binder, int service, String packageName)
+                throws RemoteException {}
 
         @Override // com.samsung.android.hardware.context.ISemContextService
         public String getCurrentServiceList() throws RemoteException {
@@ -77,7 +84,7 @@ public interface ISemContextService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemContextService {
+    public abstract static class Stub extends Binder implements ISemContextService {
         static final int TRANSACTION_changeParameters = 4;
         static final int TRANSACTION_getAvailableServiceMap = 5;
         static final int TRANSACTION_getCurrentServiceList = 9;
@@ -139,7 +146,8 @@ public interface ISemContextService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemContextService.DESCRIPTOR);
             }
@@ -151,7 +159,8 @@ public interface ISemContextService extends IInterface {
                 case 1:
                     IBinder _arg0 = data.readStrongBinder();
                     int _arg1 = data.readInt();
-                    SemContextAttribute _arg2 = (SemContextAttribute) data.readTypedObject(SemContextAttribute.CREATOR);
+                    SemContextAttribute _arg2 =
+                            (SemContextAttribute) data.readTypedObject(SemContextAttribute.CREATOR);
                     String _arg3 = data.readString();
                     data.enforceNoDataAvail();
                     registerCallback(_arg0, _arg1, _arg2, _arg3);
@@ -175,7 +184,8 @@ public interface ISemContextService extends IInterface {
                 case 4:
                     IBinder _arg04 = data.readStrongBinder();
                     int _arg14 = data.readInt();
-                    SemContextAttribute _arg22 = (SemContextAttribute) data.readTypedObject(SemContextAttribute.CREATOR);
+                    SemContextAttribute _arg22 =
+                            (SemContextAttribute) data.readTypedObject(SemContextAttribute.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result2 = changeParameters(_arg04, _arg14, _arg22);
                     reply.writeNoException();
@@ -238,7 +248,9 @@ public interface ISemContextService extends IInterface {
             }
 
             @Override // com.samsung.android.hardware.context.ISemContextService
-            public void registerCallback(IBinder binder, int service, SemContextAttribute property, String packageName) throws RemoteException {
+            public void registerCallback(
+                    IBinder binder, int service, SemContextAttribute property, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -290,7 +302,9 @@ public interface ISemContextService extends IInterface {
             }
 
             @Override // com.samsung.android.hardware.context.ISemContextService
-            public boolean changeParameters(IBinder binder, int service, SemContextAttribute attribute) throws RemoteException {
+            public boolean changeParameters(
+                    IBinder binder, int service, SemContextAttribute attribute)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -326,7 +340,8 @@ public interface ISemContextService extends IInterface {
             }
 
             @Override // com.samsung.android.hardware.context.ISemContextService
-            public boolean setReferenceData(int service, int data_type, byte[] data) throws RemoteException {
+            public boolean setReferenceData(int service, int data_type, byte[] data)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -345,7 +360,8 @@ public interface ISemContextService extends IInterface {
             }
 
             @Override // com.samsung.android.hardware.context.ISemContextService
-            public void requestToUpdate(IBinder binder, int service, String packageName) throws RemoteException {
+            public void requestToUpdate(IBinder binder, int service, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -362,7 +378,8 @@ public interface ISemContextService extends IInterface {
             }
 
             @Override // com.samsung.android.hardware.context.ISemContextService
-            public void requestHistoryData(IBinder binder, int service, String packageName) throws RemoteException {
+            public void requestHistoryData(IBinder binder, int service, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

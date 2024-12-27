@@ -37,6 +37,8 @@ public final class Pin {
             return false;
         }
         Pin other = (Pin) obj;
-        return other.hashCode() == this.mHashCode && Arrays.equals(this.digest, other.digest) && this.digestAlgorithm.equals(other.digestAlgorithm);
+        return other.hashCode() == this.mHashCode
+                && Arrays.equals(this.digest, other.digest)
+                && this.digestAlgorithm.equals(other.digestAlgorithm);
     }
 }

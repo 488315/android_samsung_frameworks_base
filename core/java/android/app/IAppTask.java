@@ -1,7 +1,5 @@
 package android.app;
 
-import android.app.ActivityManager;
-import android.app.IApplicationThread;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.Bundle;
@@ -20,12 +18,13 @@ public interface IAppTask extends IInterface {
 
     void setExcludeFromRecents(boolean z) throws RemoteException;
 
-    int startActivity(IBinder iBinder, String str, String str2, Intent intent, String str3, Bundle bundle) throws RemoteException;
+    int startActivity(
+            IBinder iBinder, String str, String str2, Intent intent, String str3, Bundle bundle)
+            throws RemoteException;
 
     public static class Default implements IAppTask {
         @Override // android.app.IAppTask
-        public void finishAndRemoveTask() throws RemoteException {
-        }
+        public void finishAndRemoveTask() throws RemoteException {}
 
         @Override // android.app.IAppTask
         public ActivityManager.RecentTaskInfo getTaskInfo() throws RemoteException {
@@ -33,17 +32,23 @@ public interface IAppTask extends IInterface {
         }
 
         @Override // android.app.IAppTask
-        public void moveToFront(IApplicationThread appThread, String callingPackage) throws RemoteException {
-        }
+        public void moveToFront(IApplicationThread appThread, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.app.IAppTask
-        public int startActivity(IBinder whoThread, String callingPackage, String callingFeatureId, Intent intent, String resolvedType, Bundle options) throws RemoteException {
+        public int startActivity(
+                IBinder whoThread,
+                String callingPackage,
+                String callingFeatureId,
+                Intent intent,
+                String resolvedType,
+                Bundle options)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IAppTask
-        public void setExcludeFromRecents(boolean exclude) throws RemoteException {
-        }
+        public void setExcludeFromRecents(boolean exclude) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -51,7 +56,7 @@ public interface IAppTask extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAppTask {
+    public abstract static class Stub extends Binder implements IAppTask {
         public static final String DESCRIPTOR = "android.app.IAppTask";
         static final int TRANSACTION_finishAndRemoveTask = 1;
         static final int TRANSACTION_getTaskInfo = 2;
@@ -102,7 +107,8 @@ public interface IAppTask extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -121,7 +127,8 @@ public interface IAppTask extends IInterface {
                     reply.writeTypedObject(_result, 1);
                     return true;
                 case 3:
-                    IApplicationThread _arg0 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    IApplicationThread _arg0 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     String _arg1 = data.readString();
                     data.enforceNoDataAvail();
                     moveToFront(_arg0, _arg1);
@@ -188,7 +195,9 @@ public interface IAppTask extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    ActivityManager.RecentTaskInfo _result = (ActivityManager.RecentTaskInfo) _reply.readTypedObject(ActivityManager.RecentTaskInfo.CREATOR);
+                    ActivityManager.RecentTaskInfo _result =
+                            (ActivityManager.RecentTaskInfo)
+                                    _reply.readTypedObject(ActivityManager.RecentTaskInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -197,7 +206,8 @@ public interface IAppTask extends IInterface {
             }
 
             @Override // android.app.IAppTask
-            public void moveToFront(IApplicationThread appThread, String callingPackage) throws RemoteException {
+            public void moveToFront(IApplicationThread appThread, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -213,7 +223,14 @@ public interface IAppTask extends IInterface {
             }
 
             @Override // android.app.IAppTask
-            public int startActivity(IBinder whoThread, String callingPackage, String callingFeatureId, Intent intent, String resolvedType, Bundle options) throws RemoteException {
+            public int startActivity(
+                    IBinder whoThread,
+                    String callingPackage,
+                    String callingFeatureId,
+                    Intent intent,
+                    String resolvedType,
+                    Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

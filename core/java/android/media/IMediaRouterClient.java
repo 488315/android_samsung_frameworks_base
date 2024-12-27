@@ -16,16 +16,13 @@ public interface IMediaRouterClient extends IInterface {
 
     public static class Default implements IMediaRouterClient {
         @Override // android.media.IMediaRouterClient
-        public void onStateChanged() throws RemoteException {
-        }
+        public void onStateChanged() throws RemoteException {}
 
         @Override // android.media.IMediaRouterClient
-        public void onRestoreRoute() throws RemoteException {
-        }
+        public void onRestoreRoute() throws RemoteException {}
 
         @Override // android.media.IMediaRouterClient
-        public void onGroupRouteSelected(String routeId) throws RemoteException {
-        }
+        public void onGroupRouteSelected(String routeId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -33,7 +30,7 @@ public interface IMediaRouterClient extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMediaRouterClient {
+    public abstract static class Stub extends Binder implements IMediaRouterClient {
         public static final String DESCRIPTOR = "android.media.IMediaRouterClient";
         static final int TRANSACTION_onGroupRouteSelected = 3;
         static final int TRANSACTION_onRestoreRoute = 2;
@@ -78,7 +75,8 @@ public interface IMediaRouterClient extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

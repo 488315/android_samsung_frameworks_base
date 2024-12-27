@@ -6,6 +6,7 @@ import android.app.TaskInfo;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ResolveInfo;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -87,7 +88,15 @@ public interface ActivityInterceptorCallback {
             public ActivityOptions mCheckedOptions = null;
             public Runnable mClearOptionsAnimation = null;
 
-            public Builder(int i, int i2, int i3, int i4, int i5, Intent intent, ResolveInfo resolveInfo, ActivityInfo activityInfo) {
+            public Builder(
+                    int i,
+                    int i2,
+                    int i3,
+                    int i4,
+                    int i5,
+                    Intent intent,
+                    ResolveInfo resolveInfo,
+                    ActivityInfo activityInfo) {
                 this.mCallingUid = i;
                 this.mCallingPid = i2;
                 this.mRealCallingUid = i3;
@@ -199,8 +208,7 @@ public interface ActivityInterceptorCallback {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     @Retention(RetentionPolicy.SOURCE)
-    public @interface OrderedId {
-    }
+    public @interface OrderedId {}
 
     static boolean isValidMainlineOrderId(int i) {
         return i >= 1000 && i <= 1001;
@@ -210,8 +218,11 @@ public interface ActivityInterceptorCallback {
         return isValidMainlineOrderId(i) || (i >= 0 && i <= 6);
     }
 
-    default void onActivityLaunched(TaskInfo taskInfo, ActivityInfo activityInfo, ActivityInterceptorInfo activityInterceptorInfo) {
-    }
+    default void onActivityLaunched(
+            TaskInfo taskInfo,
+            ActivityInfo activityInfo,
+            ActivityInterceptorInfo activityInterceptorInfo) {}
 
-    ActivityInterceptResult onInterceptActivityLaunch(ActivityInterceptorInfo activityInterceptorInfo);
+    ActivityInterceptResult onInterceptActivityLaunch(
+            ActivityInterceptorInfo activityInterceptorInfo);
 }

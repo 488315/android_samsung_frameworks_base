@@ -1,6 +1,7 @@
 package com.samsung.android.vibrator;
 
 import android.os.Build;
+
 import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.feature.SemFloatingFeature;
 
@@ -34,9 +35,14 @@ public class VibRune {
     private static boolean mIsHapticEngineIndexSupported = false;
     private static boolean mIsHybridHapticSupported = false;
     public static final boolean SUPPORT_ACH = "ACH".contains("ACH");
-    public static final boolean SUPPORT_HAPTIC_FEEDBACK_ON_DC_MOTOR = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_AUDIO_SUPPORT_DC_MOTOR_HAPTIC_FEEDBACK");
-    public static final boolean SUPPORT_ALWAYS_VIBRATE = "JP".equalsIgnoreCase(SemCscFeature.getInstance().getString("CountryISO"));
-    public static final String DND_EXCEPTION_PACKAGES = SemCscFeature.getInstance().getString("CscFeature_SystemUI_ConfigDndExceptionPackage", "");
+    public static final boolean SUPPORT_HAPTIC_FEEDBACK_ON_DC_MOTOR =
+            SemFloatingFeature.getInstance()
+                    .getBoolean("SEC_FLOATING_FEATURE_AUDIO_SUPPORT_DC_MOTOR_HAPTIC_FEEDBACK");
+    public static final boolean SUPPORT_ALWAYS_VIBRATE =
+            "JP".equalsIgnoreCase(SemCscFeature.getInstance().getString("CountryISO"));
+    public static final String DND_EXCEPTION_PACKAGES =
+            SemCscFeature.getInstance()
+                    .getString("CscFeature_SystemUI_ConfigDndExceptionPackage", "");
 
     static {
         SUPPORT_SEC_VIBRATION_PICKER = Build.VERSION.SEM_PLATFORM_INT >= 120100;

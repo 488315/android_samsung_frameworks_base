@@ -3,6 +3,7 @@ package android.os.health;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArrayMap;
+
 import java.util.Arrays;
 import java.util.Map;
 
@@ -77,7 +78,8 @@ public class HealthStats {
     public TimerStat getTimer(int key) {
         int index = getIndex(this.mTimerKeys, key);
         if (index < 0) {
-            throw new IndexOutOfBoundsException("Bad timer key dataType=" + this.mDataType + " key=" + key);
+            throw new IndexOutOfBoundsException(
+                    "Bad timer key dataType=" + this.mDataType + " key=" + key);
         }
         return new TimerStat(this.mTimerCounts[index], this.mTimerTimes[index]);
     }
@@ -85,7 +87,8 @@ public class HealthStats {
     public int getTimerCount(int key) {
         int index = getIndex(this.mTimerKeys, key);
         if (index < 0) {
-            throw new IndexOutOfBoundsException("Bad timer key dataType=" + this.mDataType + " key=" + key);
+            throw new IndexOutOfBoundsException(
+                    "Bad timer key dataType=" + this.mDataType + " key=" + key);
         }
         return this.mTimerCounts[index];
     }
@@ -93,7 +96,8 @@ public class HealthStats {
     public long getTimerTime(int key) {
         int index = getIndex(this.mTimerKeys, key);
         if (index < 0) {
-            throw new IndexOutOfBoundsException("Bad timer key dataType=" + this.mDataType + " key=" + key);
+            throw new IndexOutOfBoundsException(
+                    "Bad timer key dataType=" + this.mDataType + " key=" + key);
         }
         return this.mTimerTimes[index];
     }
@@ -113,7 +117,8 @@ public class HealthStats {
     public long getMeasurement(int key) {
         int index = getIndex(this.mMeasurementKeys, key);
         if (index < 0) {
-            throw new IndexOutOfBoundsException("Bad measurement key dataType=" + this.mDataType + " key=" + key);
+            throw new IndexOutOfBoundsException(
+                    "Bad measurement key dataType=" + this.mDataType + " key=" + key);
         }
         return this.mMeasurementValues[index];
     }
@@ -133,7 +138,8 @@ public class HealthStats {
     public Map<String, HealthStats> getStats(int key) {
         int index = getIndex(this.mStatsKeys, key);
         if (index < 0) {
-            throw new IndexOutOfBoundsException("Bad stats key dataType=" + this.mDataType + " key=" + key);
+            throw new IndexOutOfBoundsException(
+                    "Bad stats key dataType=" + this.mDataType + " key=" + key);
         }
         return this.mStatsValues[index];
     }
@@ -153,7 +159,8 @@ public class HealthStats {
     public Map<String, TimerStat> getTimers(int key) {
         int index = getIndex(this.mTimersKeys, key);
         if (index < 0) {
-            throw new IndexOutOfBoundsException("Bad timers key dataType=" + this.mDataType + " key=" + key);
+            throw new IndexOutOfBoundsException(
+                    "Bad timers key dataType=" + this.mDataType + " key=" + key);
         }
         return this.mTimersValues[index];
     }
@@ -173,7 +180,8 @@ public class HealthStats {
     public Map<String, Long> getMeasurements(int key) {
         int index = getIndex(this.mMeasurementsKeys, key);
         if (index < 0) {
-            throw new IndexOutOfBoundsException("Bad measurements key dataType=" + this.mDataType + " key=" + key);
+            throw new IndexOutOfBoundsException(
+                    "Bad measurements key dataType=" + this.mDataType + " key=" + key);
         }
         return this.mMeasurementsValues[index];
     }
@@ -199,7 +207,8 @@ public class HealthStats {
         return result;
     }
 
-    private static <T extends Parcelable> ArrayMap<String, T> createParcelableMap(Parcel in, Parcelable.Creator<T> creator) {
+    private static <T extends Parcelable> ArrayMap<String, T> createParcelableMap(
+            Parcel in, Parcelable.Creator<T> creator) {
         int count = in.readInt();
         ArrayMap<String, T> result = new ArrayMap<>(count);
         for (int i = 0; i < count; i++) {

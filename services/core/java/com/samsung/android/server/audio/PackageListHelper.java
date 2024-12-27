@@ -7,7 +7,9 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Binder;
 import android.util.Log;
+
 import com.samsung.android.server.audio.utils.AudioUtils;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,19 +23,28 @@ public final class PackageListHelper {
 
     public PackageListHelper(Context context) {
         sCategorizer = new AppCategorizer(AudioSettingsHelper.getInstance(context));
-        this.mAllowedPackageList = Arrays.asList(Resources.getSystem().getStringArray(R.array.config_longPressOnPowerDurationSettings));
+        this.mAllowedPackageList =
+                Arrays.asList(
+                        Resources.getSystem()
+                                .getStringArray(R.array.config_longPressOnPowerDurationSettings));
         this.mRestrictedPackageList = Arrays.asList(Resources.getSystem().getStringArray(17236291));
     }
 
     public static void addPackage(Context context, String str) {
         if (context.checkCallingOrSelfPermission("android.permission.MODIFY_PHONE_STATE") == 0) {
             try {
-                ApplicationInfo applicationInfo = context.getPackageManager().getApplicationInfo(str, 128);
+                ApplicationInfo applicationInfo =
+                        context.getPackageManager().getApplicationInfo(str, 128);
                 sCategorizer.putPackage(applicationInfo.uid, applicationInfo.packageName);
             } catch (PackageManager.NameNotFoundException unused) {
             }
         } else {
-            Log.w("PackageListHelper", "MODIFY_PHONE_STATE Permission Denial from pid=" + Binder.getCallingPid() + ", uid=" + Binder.getCallingUid());
+            Log.w(
+                    "PackageListHelper",
+                    "MODIFY_PHONE_STATE Permission Denial from pid="
+                            + Binder.getCallingPid()
+                            + ", uid="
+                            + Binder.getCallingUid());
         }
     }
 
@@ -44,7 +55,12 @@ public final class PackageListHelper {
 
     public static void removePackageForName(Context context, String str) {
         if (context.checkCallingOrSelfPermission("android.permission.MODIFY_AUDIO_SETTINGS") != 0) {
-            Log.w("PackageListHelper", "Audio Settings Permission Denial: removePackageForName from pid=" + Binder.getCallingPid() + ", uid=" + Binder.getCallingUid());
+            Log.w(
+                    "PackageListHelper",
+                    "Audio Settings Permission Denial: removePackageForName from pid="
+                            + Binder.getCallingPid()
+                            + ", uid="
+                            + Binder.getCallingUid());
             return;
         }
         AppCategorizer appCategorizer = sCategorizer;

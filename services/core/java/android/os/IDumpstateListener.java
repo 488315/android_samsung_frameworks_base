@@ -19,24 +19,19 @@ public interface IDumpstateListener extends IInterface {
         }
 
         @Override // android.os.IDumpstateListener
-        public void onError(int i) throws RemoteException {
-        }
+        public void onError(int i) throws RemoteException {}
 
         @Override // android.os.IDumpstateListener
-        public void onFinished(String str) throws RemoteException {
-        }
+        public void onFinished(String str) throws RemoteException {}
 
         @Override // android.os.IDumpstateListener
-        public void onProgress(int i) throws RemoteException {
-        }
+        public void onProgress(int i) throws RemoteException {}
 
         @Override // android.os.IDumpstateListener
-        public void onScreenshotTaken(boolean z) throws RemoteException {
-        }
+        public void onScreenshotTaken(boolean z) throws RemoteException {}
 
         @Override // android.os.IDumpstateListener
-        public void onUiIntensiveBugreportDumpsFinished() throws RemoteException {
-        }
+        public void onUiIntensiveBugreportDumpsFinished() throws RemoteException {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -124,8 +119,10 @@ public interface IDumpstateListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IDumpstateListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IDumpstateListener)) {
+            IInterface queryLocalInterface =
+                    iBinder.queryLocalInterface(IDumpstateListener.DESCRIPTOR);
+            if (queryLocalInterface != null
+                    && (queryLocalInterface instanceof IDumpstateListener)) {
                 return (IDumpstateListener) queryLocalInterface;
             }
             Proxy proxy = new Proxy();
@@ -139,7 +136,8 @@ public interface IDumpstateListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+                throws RemoteException {
             if (i >= 1 && i <= 16777215) {
                 parcel.enforceInterface(IDumpstateListener.DESCRIPTOR);
             }

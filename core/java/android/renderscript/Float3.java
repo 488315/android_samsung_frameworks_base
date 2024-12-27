@@ -7,8 +7,7 @@ public class Float3 {
     public float y;
     public float z;
 
-    public Float3() {
-    }
+    public Float3() {}
 
     public Float3(Float3 data) {
         this.x = data.x;

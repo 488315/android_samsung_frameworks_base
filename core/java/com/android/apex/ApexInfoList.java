@@ -1,11 +1,13 @@
 package com.android.apex;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.datatype.DatatypeConfigurationException;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes4.dex */
 public class ApexInfoList {
@@ -18,7 +20,8 @@ public class ApexInfoList {
         return this.apexInfo;
     }
 
-    static ApexInfoList read(XmlPullParser _parser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static ApexInfoList read(XmlPullParser _parser)
+            throws XmlPullParserException, IOException, DatatypeConfigurationException {
         int type;
         ApexInfoList _instance = new ApexInfoList();
         _parser.getDepth();

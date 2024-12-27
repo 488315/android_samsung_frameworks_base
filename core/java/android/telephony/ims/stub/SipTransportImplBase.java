@@ -12,8 +12,8 @@ import android.telephony.ims.aidl.ISipDelegateMessageCallback;
 import android.telephony.ims.aidl.ISipDelegateStateCallback;
 import android.telephony.ims.aidl.ISipTransport;
 import android.telephony.ims.aidl.SipDelegateAidlWrapper;
-import android.telephony.ims.stub.SipTransportImplBase;
 import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -31,8 +31,7 @@ public class SipTransportImplBase {
 
     /* renamed from: android.telephony.ims.stub.SipTransportImplBase$1, reason: invalid class name */
     class AnonymousClass1 implements IBinder.DeathRecipient {
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$binderDied$0() {
@@ -41,12 +40,14 @@ public class SipTransportImplBase {
 
         @Override // android.os.IBinder.DeathRecipient
         public void binderDied() {
-            SipTransportImplBase.this.mBinderExecutor.execute(new Runnable() { // from class: android.telephony.ims.stub.SipTransportImplBase$1$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SipTransportImplBase.AnonymousClass1.this.lambda$binderDied$0();
-                }
-            });
+            SipTransportImplBase.this.mBinderExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.SipTransportImplBase$1$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SipTransportImplBase.AnonymousClass1.this.lambda$binderDied$0();
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -56,37 +57,49 @@ public class SipTransportImplBase {
 
         @Override // android.os.IBinder.DeathRecipient
         public void binderDied(final IBinder who) {
-            SipTransportImplBase.this.mBinderExecutor.execute(new Runnable() { // from class: android.telephony.ims.stub.SipTransportImplBase$1$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SipTransportImplBase.AnonymousClass1.this.lambda$binderDied$1(who);
-                }
-            });
+            SipTransportImplBase.this.mBinderExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.SipTransportImplBase$1$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SipTransportImplBase.AnonymousClass1.this.lambda$binderDied$1(who);
+                        }
+                    });
         }
     }
 
     /* renamed from: android.telephony.ims.stub.SipTransportImplBase$2, reason: invalid class name */
     class AnonymousClass2 extends ISipTransport.Stub {
-        AnonymousClass2() {
-        }
+        AnonymousClass2() {}
 
         @Override // android.telephony.ims.aidl.ISipTransport
-        public void createSipDelegate(final int subId, final DelegateRequest request, final ISipDelegateStateCallback dc, final ISipDelegateMessageCallback mc) {
+        public void createSipDelegate(
+                final int subId,
+                final DelegateRequest request,
+                final ISipDelegateStateCallback dc,
+                final ISipDelegateMessageCallback mc) {
             long token = Binder.clearCallingIdentity();
             try {
-                SipTransportImplBase.this.mBinderExecutor.execute(new Runnable() { // from class: android.telephony.ims.stub.SipTransportImplBase$2$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SipTransportImplBase.AnonymousClass2.this.lambda$createSipDelegate$0(subId, request, dc, mc);
-                    }
-                });
+                SipTransportImplBase.this.mBinderExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.ims.stub.SipTransportImplBase$2$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SipTransportImplBase.AnonymousClass2.this
+                                        .lambda$createSipDelegate$0(subId, request, dc, mc);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$createSipDelegate$0(int subId, DelegateRequest request, ISipDelegateStateCallback dc, ISipDelegateMessageCallback mc) {
+        public /* synthetic */ void lambda$createSipDelegate$0(
+                int subId,
+                DelegateRequest request,
+                ISipDelegateStateCallback dc,
+                ISipDelegateMessageCallback mc) {
             SipTransportImplBase.this.createSipDelegateInternal(subId, request, dc, mc);
         }
 
@@ -94,12 +107,15 @@ public class SipTransportImplBase {
         public void destroySipDelegate(final ISipDelegate delegate, final int reason) {
             long token = Binder.clearCallingIdentity();
             try {
-                SipTransportImplBase.this.mBinderExecutor.execute(new Runnable() { // from class: android.telephony.ims.stub.SipTransportImplBase$2$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SipTransportImplBase.AnonymousClass2.this.lambda$destroySipDelegate$1(delegate, reason);
-                    }
-                });
+                SipTransportImplBase.this.mBinderExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.ims.stub.SipTransportImplBase$2$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SipTransportImplBase.AnonymousClass2.this
+                                        .lambda$destroySipDelegate$1(delegate, reason);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
@@ -111,8 +127,7 @@ public class SipTransportImplBase {
         }
     }
 
-    public SipTransportImplBase() {
-    }
+    public SipTransportImplBase() {}
 
     public SipTransportImplBase(Executor executor) {
         if (executor == null) {
@@ -121,7 +136,11 @@ public class SipTransportImplBase {
         this.mBinderExecutor = executor;
     }
 
-    public void createSipDelegate(int subscriptionId, DelegateRequest request, DelegateStateCallback dc, DelegateMessageCallback mc) {
+    public void createSipDelegate(
+            int subscriptionId,
+            DelegateRequest request,
+            DelegateStateCallback dc,
+            DelegateMessageCallback mc) {
         throw new UnsupportedOperationException("createSipDelegate not implemented!");
     }
 
@@ -130,7 +149,11 @@ public class SipTransportImplBase {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void createSipDelegateInternal(int subId, DelegateRequest r, ISipDelegateStateCallback cb, ISipDelegateMessageCallback mc) {
+    public void createSipDelegateInternal(
+            int subId,
+            DelegateRequest r,
+            ISipDelegateStateCallback cb,
+            ISipDelegateMessageCallback mc) {
         SipDelegateAidlWrapper wrapper = new SipDelegateAidlWrapper(this.mBinderExecutor, cb, mc);
         this.mDelegates.add(wrapper);
         linkDeathRecipient(wrapper);
@@ -157,7 +180,9 @@ public class SipTransportImplBase {
             destroySipDelegate(result.getDelegate(), reason);
             return;
         }
-        Log.w(LOG_TAG, "destroySipDelegateInternal, could not findSipDelegate corresponding to " + d);
+        Log.w(
+                LOG_TAG,
+                "destroySipDelegateInternal, could not findSipDelegate corresponding to " + d);
     }
 
     private void linkDeathRecipient(SipDelegateAidlWrapper w) {
@@ -182,13 +207,19 @@ public class SipTransportImplBase {
         while (it.hasNext()) {
             SipDelegateAidlWrapper w = it.next();
             if (who == null || w.getStateCallbackBinder().asBinder().equals(who)) {
-                Log.w(LOG_TAG, "Binder death detected for " + w + ", calling destroy and removing.");
+                Log.w(
+                        LOG_TAG,
+                        "Binder death detected for " + w + ", calling destroy and removing.");
                 this.mDelegates.remove(w);
                 destroySipDelegate(w.getDelegate(), 1);
                 return;
             }
         }
-        Log.w(LOG_TAG, "Binder death detected for IBinder " + who + ", but couldn't find matching SipDelegate");
+        Log.w(
+                LOG_TAG,
+                "Binder death detected for IBinder "
+                        + who
+                        + ", but couldn't find matching SipDelegate");
     }
 
     public ISipTransport getBinder() {

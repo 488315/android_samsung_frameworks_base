@@ -3,6 +3,7 @@ package android.database;
 import android.content.ContentResolver;
 import android.net.Uri;
 import android.os.Bundle;
+
 import java.io.Closeable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -18,8 +19,7 @@ public interface Cursor extends Closeable {
     public static final int FIELD_TYPE_STRING = 3;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FieldType {
-    }
+    public @interface FieldType {}
 
     @Override // java.io.Closeable, java.lang.AutoCloseable
     void close();

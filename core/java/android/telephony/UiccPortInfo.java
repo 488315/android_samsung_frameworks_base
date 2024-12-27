@@ -3,23 +3,25 @@ package android.telephony;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class UiccPortInfo implements Parcelable {
-    public static final Parcelable.Creator<UiccPortInfo> CREATOR = new Parcelable.Creator<UiccPortInfo>() { // from class: android.telephony.UiccPortInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UiccPortInfo createFromParcel(Parcel in) {
-            return new UiccPortInfo(in);
-        }
+    public static final Parcelable.Creator<UiccPortInfo> CREATOR =
+            new Parcelable.Creator<UiccPortInfo>() { // from class: android.telephony.UiccPortInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UiccPortInfo createFromParcel(Parcel in) {
+                    return new UiccPortInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UiccPortInfo[] newArray(int size) {
-            return new UiccPortInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UiccPortInfo[] newArray(int size) {
+                    return new UiccPortInfo[size];
+                }
+            };
     public static final String ICCID_REDACTED = "FFFFFFFFFFFFFFFFFFFF";
     private final String mIccId;
     private final boolean mIsActive;
@@ -77,17 +79,32 @@ public final class UiccPortInfo implements Parcelable {
             return false;
         }
         UiccPortInfo that = (UiccPortInfo) obj;
-        if (Objects.equals(this.mIccId, that.mIccId) && this.mPortIndex == that.mPortIndex && this.mLogicalSlotIndex == that.mLogicalSlotIndex && this.mIsActive == that.mIsActive) {
+        if (Objects.equals(this.mIccId, that.mIccId)
+                && this.mPortIndex == that.mPortIndex
+                && this.mLogicalSlotIndex == that.mLogicalSlotIndex
+                && this.mIsActive == that.mIsActive) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(this.mIccId, Integer.valueOf(this.mPortIndex), Integer.valueOf(this.mLogicalSlotIndex), Boolean.valueOf(this.mIsActive));
+        return Objects.hash(
+                this.mIccId,
+                Integer.valueOf(this.mPortIndex),
+                Integer.valueOf(this.mLogicalSlotIndex),
+                Boolean.valueOf(this.mIsActive));
     }
 
     public String toString() {
-        return "UiccPortInfo (isActive=" + this.mIsActive + ", iccId=" + SubscriptionInfo.getPrintableId(this.mIccId) + ", portIndex=" + this.mPortIndex + ", mLogicalSlotIndex=" + this.mLogicalSlotIndex + NavigationBarInflaterView.KEY_CODE_END;
+        return "UiccPortInfo (isActive="
+                + this.mIsActive
+                + ", iccId="
+                + SubscriptionInfo.getPrintableId(this.mIccId)
+                + ", portIndex="
+                + this.mPortIndex
+                + ", mLogicalSlotIndex="
+                + this.mLogicalSlotIndex
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 }

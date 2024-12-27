@@ -21,7 +21,8 @@ public class Signature extends ASN1Object {
         this.signature = signature;
     }
 
-    public Signature(AlgorithmIdentifier signatureAlgorithm, DERBitString signature, ASN1Sequence certs) {
+    public Signature(
+            AlgorithmIdentifier signatureAlgorithm, DERBitString signature, ASN1Sequence certs) {
         this.signatureAlgorithm = signatureAlgorithm;
         this.signature = signature;
         this.certs = certs;
@@ -61,7 +62,8 @@ public class Signature extends ASN1Object {
         return this.certs;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(3);
         v.add(this.signatureAlgorithm);

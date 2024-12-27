@@ -34,11 +34,18 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
+
 import com.android.internal.R;
 import com.android.internal.telephony.vzwavslibrary.VZWAVSLibrary;
+
 import com.google.android.mms.ContentType;
 import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.feature.SemFloatingFeature;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -57,21 +64,21 @@ import java.util.concurrent.TimeoutException;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
 
 /* loaded from: classes5.dex */
 public final class SmsApplication {
-    public static final String ACTION_DEFAULT_SMS_PACKAGE_CHANGED_INTERNAL = "android.provider.action.DEFAULT_SMS_PACKAGE_CHANGED_INTERNAL";
+    public static final String ACTION_DEFAULT_SMS_PACKAGE_CHANGED_INTERNAL =
+            "android.provider.action.DEFAULT_SMS_PACKAGE_CHANGED_INTERNAL";
     private static final String CARRIER_TAG = "Carrier";
     private static final String CODE_UNKNOWN = "NONE";
     private static final String COREAPPS_PACKAGE_NAME = "com.samsung.android.coreapps";
-    private static final String COUNTRYISO_OPENBUYER_CONFIG_XML = "/system/etc/countryISO_openBuyer_config.xml";
+    private static final String COUNTRYISO_OPENBUYER_CONFIG_XML =
+            "/system/etc/countryISO_openBuyer_config.xml";
     private static final boolean DEBUG = false;
     private static final boolean DEBUG_MULTIUSER = false;
     private static final String DEFAULT_MSGAPP_SYSTEMPROPERTY = "persist.ril.config.defaultmsgapp";
-    public static final String DEFAULT_MSG_APP_INFO_LOGGING = "android.provider.action.DEFAULT_MSG_APP_INFO_LOGGING";
+    public static final String DEFAULT_MSG_APP_INFO_LOGGING =
+            "android.provider.action.DEFAULT_MSG_APP_INFO_LOGGING";
     private static final String DEFAULT_MSG_CONFIG_XML = "/system/etc/default_msg_config.xml";
     private static final String DOCOMO_MESSAGES = "com.nttdocomo.android.msg";
     private static final String GOOGLE_MESSAGE_PACKAGE = "com.google.android.apps.messaging";
@@ -81,7 +88,8 @@ public final class SmsApplication {
     private static final String NEW_SEC_SMS_PACKAGE_NAME = "com.samsung.android.messaging";
     private static final String NSRI_PACKAGE_NAME = "com.tion.securitysms";
     private static final String OPEN_TAG = "Open";
-    public static final String PERMISSION_MONITOR_DEFAULT_SMS_PACKAGE = "android.permission.MONITOR_DEFAULT_SMS_PACKAGE";
+    public static final String PERMISSION_MONITOR_DEFAULT_SMS_PACKAGE =
+            "android.permission.MONITOR_DEFAULT_SMS_PACKAGE";
     public static final String PHONE_PACKAGE_NAME = "com.android.phone";
     private static final String SCHEME_MMS = "mms";
     private static final String SCHEME_MMSTO = "mmsto";
@@ -91,7 +99,14 @@ public final class SmsApplication {
     private static final String SM_TAG = "SM";
     private static final String SOFTBANK_MESSAGES = "jp.softbank.mb.mail";
     public static final String TELEPHONY_PROVIDER_PACKAGE_NAME = "com.android.providers.telephony";
-    private static final String[] DEFAULT_APP_EXCLUSIVE_APPOPS = {AppOpsManager.OPSTR_READ_SMS, AppOpsManager.OPSTR_WRITE_SMS, AppOpsManager.OPSTR_RECEIVE_SMS, AppOpsManager.OPSTR_RECEIVE_WAP_PUSH, AppOpsManager.OPSTR_SEND_SMS, AppOpsManager.OPSTR_READ_CELL_BROADCASTS};
+    private static final String[] DEFAULT_APP_EXCLUSIVE_APPOPS = {
+        AppOpsManager.OPSTR_READ_SMS,
+        AppOpsManager.OPSTR_WRITE_SMS,
+        AppOpsManager.OPSTR_RECEIVE_SMS,
+        AppOpsManager.OPSTR_RECEIVE_WAP_PUSH,
+        AppOpsManager.OPSTR_SEND_SMS,
+        AppOpsManager.OPSTR_READ_CELL_BROADCASTS
+    };
     private static SmsPackageMonitor sSmsPackageMonitor = null;
     private static SmsRoleListener sSmsRoleListener = null;
     private static DefaultMessageAppConfig sDefaultMessageAppConfig = null;
@@ -114,7 +129,12 @@ public final class SmsApplication {
         private int mUid;
 
         public boolean isComplete() {
-            return (this.mSmsReceiverClass == null || this.mMmsReceiverClass == null || this.mRespondViaMessageClass == null || this.mSendToClass == null) ? false : true;
+            return (this.mSmsReceiverClass == null
+                            || this.mMmsReceiverClass == null
+                            || this.mRespondViaMessageClass == null
+                            || this.mSendToClass == null)
+                    ? false
+                    : true;
         }
 
         public SmsApplicationData(String packageName, int uid) {
@@ -126,7 +146,11 @@ public final class SmsApplication {
             if (this.mApplicationName == null) {
                 PackageManager pm = context.getPackageManager();
                 try {
-                    ApplicationInfo appInfo = pm.getApplicationInfoAsUser(this.mPackageName, 0, UserHandle.getUserHandleForUid(this.mUid));
+                    ApplicationInfo appInfo =
+                            pm.getApplicationInfoAsUser(
+                                    this.mPackageName,
+                                    0,
+                                    UserHandle.getUserHandleForUid(this.mUid));
                     if (appInfo != null) {
                         CharSequence label = pm.getApplicationLabel(appInfo);
                         this.mApplicationName = label != null ? label.toString() : null;
@@ -139,7 +163,24 @@ public final class SmsApplication {
         }
 
         public String toString() {
-            return " mPackageName: " + this.mPackageName + " mSmsReceiverClass: " + this.mSmsReceiverClass + " mMmsReceiverClass: " + this.mMmsReceiverClass + " mRespondViaMessageClass: " + this.mRespondViaMessageClass + " mSendToClass: " + this.mSendToClass + " mSmsAppChangedClass: " + this.mSmsAppChangedReceiverClass + " mProviderChangedReceiverClass: " + this.mProviderChangedReceiverClass + " mSimFullReceiverClass: " + this.mSimFullReceiverClass + " mUid: " + this.mUid;
+            return " mPackageName: "
+                    + this.mPackageName
+                    + " mSmsReceiverClass: "
+                    + this.mSmsReceiverClass
+                    + " mMmsReceiverClass: "
+                    + this.mMmsReceiverClass
+                    + " mRespondViaMessageClass: "
+                    + this.mRespondViaMessageClass
+                    + " mSendToClass: "
+                    + this.mSendToClass
+                    + " mSmsAppChangedClass: "
+                    + this.mSmsAppChangedReceiverClass
+                    + " mProviderChangedReceiverClass: "
+                    + this.mProviderChangedReceiverClass
+                    + " mSimFullReceiverClass: "
+                    + this.mSimFullReceiverClass
+                    + " mUid: "
+                    + this.mUid;
         }
     }
 
@@ -161,7 +202,8 @@ public final class SmsApplication {
         return getApplicationCollectionAsUser(context, getIncomingUserId());
     }
 
-    public static Collection<SmsApplicationData> getApplicationCollectionAsUser(Context context, int userId) {
+    public static Collection<SmsApplicationData> getApplicationCollectionAsUser(
+            Context context, int userId) {
         long token = Binder.clearCallingIdentity();
         try {
             return getApplicationCollectionInternal(context, userId);
@@ -170,7 +212,8 @@ public final class SmsApplication {
         }
     }
 
-    private static Collection<SmsApplicationData> getApplicationCollectionInternal(Context context, int userId) {
+    private static Collection<SmsApplicationData> getApplicationCollectionInternal(
+            Context context, int userId) {
         String packageName;
         SmsApplicationData smsApplicationData;
         Intent intent;
@@ -180,15 +223,20 @@ public final class SmsApplication {
         SmsApplicationData smsApplicationData5;
         PackageManager packageManager = context.getPackageManager();
         UserHandle userHandle = UserHandle.of(userId);
-        List<ResolveInfo> smsReceivers = packageManager.queryBroadcastReceiversAsUser(new Intent(Telephony.Sms.Intents.SMS_DELIVER_ACTION), 786432, userHandle);
+        List<ResolveInfo> smsReceivers =
+                packageManager.queryBroadcastReceiversAsUser(
+                        new Intent(Telephony.Sms.Intents.SMS_DELIVER_ACTION), 786432, userHandle);
         HashMap<String, SmsApplicationData> receivers = new HashMap<>();
         for (ResolveInfo resolveInfo : smsReceivers) {
             ActivityInfo activityInfo = resolveInfo.activityInfo;
-            if (activityInfo != null && Manifest.permission.BROADCAST_SMS.equals(activityInfo.permission)) {
+            if (activityInfo != null
+                    && Manifest.permission.BROADCAST_SMS.equals(activityInfo.permission)) {
                 String packageName2 = activityInfo.packageName;
                 if (!receivers.containsKey(packageName2)) {
                     try {
-                        SmsApplicationData smsApplicationData6 = new SmsApplicationData(packageName2, activityInfo.applicationInfo.uid);
+                        SmsApplicationData smsApplicationData6 =
+                                new SmsApplicationData(
+                                        packageName2, activityInfo.applicationInfo.uid);
                         smsApplicationData6.mSmsReceiverClass = activityInfo.name;
                         receivers.put(packageName2, smsApplicationData6);
                     } catch (Exception e) {
@@ -199,46 +247,73 @@ public final class SmsApplication {
         }
         Intent intent2 = new Intent(Telephony.Sms.Intents.WAP_PUSH_DELIVER_ACTION);
         intent2.setDataAndType(null, ContentType.MMS_MESSAGE);
-        List<ResolveInfo> mmsReceivers = packageManager.queryBroadcastReceiversAsUser(intent2, 786432, userHandle);
+        List<ResolveInfo> mmsReceivers =
+                packageManager.queryBroadcastReceiversAsUser(intent2, 786432, userHandle);
         for (ResolveInfo resolveInfo2 : mmsReceivers) {
             ActivityInfo activityInfo2 = resolveInfo2.activityInfo;
-            if (activityInfo2 != null && Manifest.permission.BROADCAST_WAP_PUSH.equals(activityInfo2.permission) && (smsApplicationData5 = receivers.get(activityInfo2.packageName)) != null) {
+            if (activityInfo2 != null
+                    && Manifest.permission.BROADCAST_WAP_PUSH.equals(activityInfo2.permission)
+                    && (smsApplicationData5 = receivers.get(activityInfo2.packageName)) != null) {
                 smsApplicationData5.mMmsReceiverClass = activityInfo2.name;
             }
         }
-        List<ResolveInfo> respondServices = packageManager.queryIntentServicesAsUser(new Intent(TelephonyManager.ACTION_RESPOND_VIA_MESSAGE, Uri.fromParts(SCHEME_SMSTO, "", null)), 786432, UserHandle.of(userId));
+        List<ResolveInfo> respondServices =
+                packageManager.queryIntentServicesAsUser(
+                        new Intent(
+                                TelephonyManager.ACTION_RESPOND_VIA_MESSAGE,
+                                Uri.fromParts(SCHEME_SMSTO, "", null)),
+                        786432,
+                        UserHandle.of(userId));
         for (ResolveInfo resolveInfo3 : respondServices) {
             ServiceInfo serviceInfo = resolveInfo3.serviceInfo;
-            if (serviceInfo != null && Manifest.permission.SEND_RESPOND_VIA_MESSAGE.equals(serviceInfo.permission)) {
+            if (serviceInfo != null
+                    && Manifest.permission.SEND_RESPOND_VIA_MESSAGE.equals(
+                            serviceInfo.permission)) {
                 SmsApplicationData smsApplicationData7 = receivers.get(serviceInfo.packageName);
                 if (smsApplicationData7 != null) {
                     smsApplicationData7.mRespondViaMessageClass = serviceInfo.name;
                 }
             }
         }
-        List<ResolveInfo> sendToActivities = packageManager.queryIntentActivitiesAsUser(new Intent(Intent.ACTION_SENDTO, Uri.fromParts(SCHEME_SMSTO, "", null)), 786432, userHandle);
+        List<ResolveInfo> sendToActivities =
+                packageManager.queryIntentActivitiesAsUser(
+                        new Intent(Intent.ACTION_SENDTO, Uri.fromParts(SCHEME_SMSTO, "", null)),
+                        786432,
+                        userHandle);
         for (ResolveInfo resolveInfo4 : sendToActivities) {
             ActivityInfo activityInfo3 = resolveInfo4.activityInfo;
-            if (activityInfo3 != null && (smsApplicationData4 = receivers.get(activityInfo3.packageName)) != null) {
+            if (activityInfo3 != null
+                    && (smsApplicationData4 = receivers.get(activityInfo3.packageName)) != null) {
                 smsApplicationData4.mSendToClass = activityInfo3.name;
             }
         }
-        List<ResolveInfo> smsAppChangedReceivers = packageManager.queryBroadcastReceiversAsUser(new Intent(Telephony.Sms.Intents.ACTION_DEFAULT_SMS_PACKAGE_CHANGED), 786432, userHandle);
+        List<ResolveInfo> smsAppChangedReceivers =
+                packageManager.queryBroadcastReceiversAsUser(
+                        new Intent(Telephony.Sms.Intents.ACTION_DEFAULT_SMS_PACKAGE_CHANGED),
+                        786432,
+                        userHandle);
         for (ResolveInfo resolveInfo5 : smsAppChangedReceivers) {
             ActivityInfo activityInfo4 = resolveInfo5.activityInfo;
-            if (activityInfo4 != null && (smsApplicationData3 = receivers.get(activityInfo4.packageName)) != null) {
+            if (activityInfo4 != null
+                    && (smsApplicationData3 = receivers.get(activityInfo4.packageName)) != null) {
                 smsApplicationData3.mSmsAppChangedReceiverClass = activityInfo4.name;
             }
         }
-        List<ResolveInfo> providerChangedReceivers = packageManager.queryBroadcastReceiversAsUser(new Intent(Telephony.Sms.Intents.ACTION_EXTERNAL_PROVIDER_CHANGE), 786432, userHandle);
+        List<ResolveInfo> providerChangedReceivers =
+                packageManager.queryBroadcastReceiversAsUser(
+                        new Intent(Telephony.Sms.Intents.ACTION_EXTERNAL_PROVIDER_CHANGE),
+                        786432,
+                        userHandle);
         for (ResolveInfo resolveInfo6 : providerChangedReceivers) {
             ActivityInfo activityInfo5 = resolveInfo6.activityInfo;
-            if (activityInfo5 != null && (smsApplicationData2 = receivers.get(activityInfo5.packageName)) != null) {
+            if (activityInfo5 != null
+                    && (smsApplicationData2 = receivers.get(activityInfo5.packageName)) != null) {
                 smsApplicationData2.mProviderChangedReceiverClass = activityInfo5.name;
             }
         }
         Intent intent3 = new Intent(Telephony.Sms.Intents.SIM_FULL_ACTION);
-        List<ResolveInfo> simFullReceivers = packageManager.queryBroadcastReceiversAsUser(intent3, 786432, userHandle);
+        List<ResolveInfo> simFullReceivers =
+                packageManager.queryBroadcastReceiversAsUser(intent3, 786432, userHandle);
         for (ResolveInfo resolveInfo7 : simFullReceivers) {
             ActivityInfo activityInfo6 = resolveInfo7.activityInfo;
             if (activityInfo6 != null) {
@@ -254,14 +329,19 @@ public final class SmsApplication {
         }
         for (ResolveInfo resolveInfo8 : smsReceivers) {
             ActivityInfo activityInfo7 = resolveInfo8.activityInfo;
-            if (activityInfo7 != null && (smsApplicationData = receivers.get((packageName = activityInfo7.packageName))) != null && !smsApplicationData.isComplete()) {
+            if (activityInfo7 != null
+                    && (smsApplicationData =
+                                    receivers.get((packageName = activityInfo7.packageName)))
+                            != null
+                    && !smsApplicationData.isComplete()) {
                 receivers.remove(packageName);
             }
         }
         return receivers.values();
     }
 
-    public static SmsApplicationData getApplicationForPackage(Collection<SmsApplicationData> applications, String packageName) {
+    public static SmsApplicationData getApplicationForPackage(
+            Collection<SmsApplicationData> applications, String packageName) {
         if (packageName == null) {
             return null;
         }
@@ -273,7 +353,8 @@ public final class SmsApplication {
         return null;
     }
 
-    private static SmsApplicationData getApplication(Context context, boolean updateIfNeeded, int userId) {
+    private static SmsApplicationData getApplication(
+            Context context, boolean updateIfNeeded, int userId) {
         String defaultPackage;
         if (context == null) {
             Rlog.e(LOG_TAG, "getApplication: context is null!");
@@ -281,23 +362,33 @@ public final class SmsApplication {
         }
         TelephonyManager tm = (TelephonyManager) context.getSystemService("phone");
         RoleManager roleManager = (RoleManager) context.getSystemService(Context.ROLE_SERVICE);
-        if (!tm.isSmsCapable() && (roleManager == null || !roleManager.isRoleAvailable("android.app.role.SMS"))) {
+        if (!tm.isSmsCapable()
+                && (roleManager == null || !roleManager.isRoleAvailable("android.app.role.SMS"))) {
             if ((!"ATT".equals(SALES_CODE) && !getEnableSecSms(context)) || !updateIfNeeded) {
                 return null;
             }
-            AppOpsManager appOps = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+            AppOpsManager appOps =
+                    (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
             PackageManager packageManager = context.getPackageManager();
             String bluetoothPackageName = context.getResources().getString(17039427);
-            assignExclusiveSmsPermissionsToSystemApp(context, packageManager, appOps, "com.android.phone", true);
-            assignExclusiveSmsPermissionsToSystemApp(context, packageManager, appOps, bluetoothPackageName, true);
-            assignExclusiveSmsPermissionsToSystemApp(context, packageManager, appOps, MMS_SERVICE_PACKAGE_NAME, true);
-            assignExclusiveSmsPermissionsToSystemApp(context, packageManager, appOps, TELEPHONY_PROVIDER_PACKAGE_NAME, true);
+            assignExclusiveSmsPermissionsToSystemApp(
+                    context, packageManager, appOps, "com.android.phone", true);
+            assignExclusiveSmsPermissionsToSystemApp(
+                    context, packageManager, appOps, bluetoothPackageName, true);
+            assignExclusiveSmsPermissionsToSystemApp(
+                    context, packageManager, appOps, MMS_SERVICE_PACKAGE_NAME, true);
+            assignExclusiveSmsPermissionsToSystemApp(
+                    context, packageManager, appOps, TELEPHONY_PROVIDER_PACKAGE_NAME, true);
             assignWriteSmsPermissionToSystemUid(appOps, 1001);
-            assignExclusiveSmsPermissionsToSystemApp(context, packageManager, appOps, NEW_SEC_SMS_PACKAGE_NAME, true);
-            Rlog.d(LOG_TAG, "Assign writesms permission to special system apps for specific tablets");
+            assignExclusiveSmsPermissionsToSystemApp(
+                    context, packageManager, appOps, NEW_SEC_SMS_PACKAGE_NAME, true);
+            Rlog.d(
+                    LOG_TAG,
+                    "Assign writesms permission to special system apps for specific tablets");
             return null;
         }
-        Collection<SmsApplicationData> applications = getApplicationCollectionInternal(context, userId);
+        Collection<SmsApplicationData> applications =
+                getApplicationCollectionInternal(context, userId);
         String defaultApplication = getDefaultSmsPackage(context, userId);
         SmsApplicationData applicationData = null;
         if (defaultApplication != null) {
@@ -305,15 +396,20 @@ public final class SmsApplication {
         }
         if (updateIfNeeded && applicationData == null) {
             Resources r = context.getResources();
-            String configedSmsPackageName = SemSystemProperties.get(DEFAULT_MSGAPP_SYSTEMPROPERTY, SM_TAG);
+            String configedSmsPackageName =
+                    SemSystemProperties.get(DEFAULT_MSGAPP_SYSTEMPROPERTY, SM_TAG);
             if (TextUtils.isEmpty(configedSmsPackageName)) {
-                Log.i(LOG_TAG, "there is no configedPackage, getApplication from default_sms_application");
+                Log.i(
+                        LOG_TAG,
+                        "there is no configedPackage, getApplication from default_sms_application");
                 defaultPackage = r.getString(R.string.default_sms_application);
             } else if (configedSmsPackageName.equals("AM")) {
                 Log.i(LOG_TAG, "AM is configedPackage, getApplication from configedSmsPackageName");
                 defaultPackage = GOOGLE_MESSAGE_PACKAGE;
             } else {
-                Log.i(LOG_TAG, "SM is configedPackage, getApplication from default_sms_application");
+                Log.i(
+                        LOG_TAG,
+                        "SM is configedPackage, getApplication from default_sms_application");
                 defaultPackage = r.getString(R.string.default_sms_application);
             }
             applicationData = getApplicationForPackage(applications, defaultPackage);
@@ -323,7 +419,8 @@ public final class SmsApplication {
                     if (i >= applications.size()) {
                         break;
                     }
-                    if (!NEW_SEC_SMS_PACKAGE_NAME.equals(((SmsApplicationData) applications.toArray()[i]).mPackageName)) {
+                    if (!NEW_SEC_SMS_PACKAGE_NAME.equals(
+                            ((SmsApplicationData) applications.toArray()[i]).mPackageName)) {
                         i++;
                     } else {
                         applicationData = (SmsApplicationData) applications.toArray()[i];
@@ -340,7 +437,8 @@ public final class SmsApplication {
         }
         if (applicationData != null) {
             if (updateIfNeeded || applicationData.mUid == Process.myUid()) {
-                boolean appOpsFixed = tryFixExclusiveSmsAppops(context, applicationData, updateIfNeeded);
+                boolean appOpsFixed =
+                        tryFixExclusiveSmsAppops(context, applicationData, updateIfNeeded);
                 if (!appOpsFixed) {
                     applicationData = null;
                 }
@@ -365,11 +463,20 @@ public final class SmsApplication {
         PackageManager packageManager = context.getPackageManager();
         AppOpsManager appOps = (AppOpsManager) context.getSystemService(AppOpsManager.class);
         String bluetoothPackageName = context.getResources().getString(17039427);
-        assignExclusiveSmsPermissionsToSystemApp(context, packageManager, appOps, "com.android.phone", true);
-        assignExclusiveSmsPermissionsToSystemApp(context, packageManager, appOps, bluetoothPackageName, false);
-        assignExclusiveSmsPermissionsToSystemApp(context, packageManager, appOps, MMS_SERVICE_PACKAGE_NAME, true);
-        assignExclusiveSmsPermissionsToSystemApp(context, packageManager, appOps, TELEPHONY_PROVIDER_PACKAGE_NAME, true);
-        assignExclusiveSmsPermissionsToSystemApp(context, packageManager, appOps, CellBroadcastUtils.getDefaultCellBroadcastReceiverPackageName(context), false);
+        assignExclusiveSmsPermissionsToSystemApp(
+                context, packageManager, appOps, "com.android.phone", true);
+        assignExclusiveSmsPermissionsToSystemApp(
+                context, packageManager, appOps, bluetoothPackageName, false);
+        assignExclusiveSmsPermissionsToSystemApp(
+                context, packageManager, appOps, MMS_SERVICE_PACKAGE_NAME, true);
+        assignExclusiveSmsPermissionsToSystemApp(
+                context, packageManager, appOps, TELEPHONY_PROVIDER_PACKAGE_NAME, true);
+        assignExclusiveSmsPermissionsToSystemApp(
+                context,
+                packageManager,
+                appOps,
+                CellBroadcastUtils.getDefaultCellBroadcastReceiverPackageName(context),
+                false);
         for (String opStr : DEFAULT_APP_EXCLUSIVE_APPOPS) {
             int mode = appOps.unsafeCheckOp(opStr, 1001, "com.android.phone");
             if (mode != 0) {
@@ -378,12 +485,20 @@ public final class SmsApplication {
         }
     }
 
-    private static boolean tryFixExclusiveSmsAppops(Context context, SmsApplicationData applicationData, boolean updateIfNeeded) {
+    private static boolean tryFixExclusiveSmsAppops(
+            Context context, SmsApplicationData applicationData, boolean updateIfNeeded) {
         AppOpsManager appOps = (AppOpsManager) context.getSystemService(AppOpsManager.class);
         for (String opStr : DEFAULT_APP_EXCLUSIVE_APPOPS) {
-            int mode = appOps.unsafeCheckOp(opStr, applicationData.mUid, applicationData.mPackageName);
+            int mode =
+                    appOps.unsafeCheckOp(opStr, applicationData.mUid, applicationData.mPackageName);
             if (mode != 0) {
-                Log.e(LOG_TAG, applicationData.mPackageName + " lost " + opStr + ": " + (updateIfNeeded ? " (fixing)" : " (no permission to fix)"));
+                Log.e(
+                        LOG_TAG,
+                        applicationData.mPackageName
+                                + " lost "
+                                + opStr
+                                + ": "
+                                + (updateIfNeeded ? " (fixing)" : " (no permission to fix)"));
                 if (!updateIfNeeded) {
                     return false;
                 }
@@ -397,7 +512,8 @@ public final class SmsApplication {
         setDefaultApplicationAsUser(packageName, context, getIncomingUserId());
     }
 
-    public static void setDefaultApplicationAsUser(String packageName, Context context, int userId) {
+    public static void setDefaultApplicationAsUser(
+            String packageName, Context context, int userId) {
         if (context == null) {
             Rlog.e(LOG_TAG, "context in DefaultApplication is null");
             return;
@@ -406,11 +522,22 @@ public final class SmsApplication {
         int userHandle = UserHandle.getUserId(Binder.getCallingUid());
         Uri uri = Uri.parse("content://com.sec.knox.provider2/ApplicationPolicy");
         String[] selectionArgs = {packageName, Integer.toString(userHandle)};
-        Cursor cr = context.getContentResolver().query(uri, null, SecContentProviderURI.APPLICATIONPOLICY_DEFAULTSMSAPP_METHOD, selectionArgs, null);
+        Cursor cr =
+                context.getContentResolver()
+                        .query(
+                                uri,
+                                null,
+                                SecContentProviderURI.APPLICATIONPOLICY_DEFAULTSMSAPP_METHOD,
+                                selectionArgs,
+                                null);
         if (cr != null) {
             try {
                 cr.moveToFirst();
-                if (cr.getString(cr.getColumnIndex(SecContentProviderURI.APPLICATIONPOLICY_DEFAULTSMSAPP_METHOD)).equals("true")) {
+                if (cr.getString(
+                                cr.getColumnIndex(
+                                        SecContentProviderURI
+                                                .APPLICATIONPOLICY_DEFAULTSMSAPP_METHOD))
+                        .equals("true")) {
                     ret = 1;
                 } else {
                     ret = 0;
@@ -428,7 +555,8 @@ public final class SmsApplication {
         }
         TelephonyManager tm = (TelephonyManager) context.getSystemService("phone");
         RoleManager roleManager = (RoleManager) context.getSystemService(Context.ROLE_SERVICE);
-        if (!tm.isSmsCapable() && (roleManager == null || !roleManager.isRoleAvailable("android.app.role.SMS"))) {
+        if (!tm.isSmsCapable()
+                && (roleManager == null || !roleManager.isRoleAvailable("android.app.role.SMS"))) {
             return;
         }
         long token = Binder.clearCallingIdentity();
@@ -439,20 +567,24 @@ public final class SmsApplication {
         }
     }
 
-    private static void setDefaultApplicationInternal(String packageName, Context context, int userId) {
+    private static void setDefaultApplicationInternal(
+            String packageName, Context context, int userId) {
         UserHandle userHandle = UserHandle.of(userId);
         String oldPackageName = getDefaultSmsPackage(context, userId);
         if (packageName != null && oldPackageName != null && packageName.equals(oldPackageName)) {
             return;
         }
-        PackageManager packageManager = context.createContextAsUser(userHandle, 0).getPackageManager();
-        Collection<SmsApplicationData> applications = getApplicationCollectionInternal(context, userId);
+        PackageManager packageManager =
+                context.createContextAsUser(userHandle, 0).getPackageManager();
+        Collection<SmsApplicationData> applications =
+                getApplicationCollectionInternal(context, userId);
         if (oldPackageName != null) {
             getApplicationForPackage(applications, oldPackageName);
         }
         SmsApplicationData applicationData = getApplicationForPackage(applications, packageName);
         if (applicationData != null) {
-            AppOpsManager appOps = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+            AppOpsManager appOps =
+                    (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
             if (oldPackageName != null) {
                 try {
                     int uid = packageManager.getPackageInfo(oldPackageName, 0).applicationInfo.uid;
@@ -461,16 +593,32 @@ public final class SmsApplication {
                     Log.w(LOG_TAG, "Old SMS package not found: " + oldPackageName);
                 }
             }
-            Rlog.e(LOG_TAG, "update the default app to : " + applicationData.mPackageName + " oldPackageName: " + oldPackageName);
-            sendBroadcast_SMS_BIG_DATA_INFO(context, oldPackageName, applicationData.mPackageName, null);
+            Rlog.e(
+                    LOG_TAG,
+                    "update the default app to : "
+                            + applicationData.mPackageName
+                            + " oldPackageName: "
+                            + oldPackageName);
+            sendBroadcast_SMS_BIG_DATA_INFO(
+                    context, oldPackageName, applicationData.mPackageName, null);
             final CompletableFuture<Void> future = new CompletableFuture<>();
-            Consumer<Boolean> callback = new Consumer() { // from class: com.android.internal.telephony.SmsApplication$$ExternalSyntheticLambda0
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    SmsApplication.lambda$setDefaultApplicationInternal$0(future, (Boolean) obj);
-                }
-            };
-            ((RoleManager) context.getSystemService(RoleManager.class)).addRoleHolderAsUser("android.app.role.SMS", applicationData.mPackageName, 0, UserHandle.of(userId), AsyncTask.THREAD_POOL_EXECUTOR, callback);
+            Consumer<Boolean> callback =
+                    new Consumer() { // from class:
+                                     // com.android.internal.telephony.SmsApplication$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            SmsApplication.lambda$setDefaultApplicationInternal$0(
+                                    future, (Boolean) obj);
+                        }
+                    };
+            ((RoleManager) context.getSystemService(RoleManager.class))
+                    .addRoleHolderAsUser(
+                            "android.app.role.SMS",
+                            applicationData.mPackageName,
+                            0,
+                            UserHandle.of(userId),
+                            AsyncTask.THREAD_POOL_EXECUTOR,
+                            callback);
             try {
                 future.get(5L, TimeUnit.SECONDS);
                 defaultSmsAppChanged(context);
@@ -480,7 +628,8 @@ public final class SmsApplication {
         }
     }
 
-    static /* synthetic */ void lambda$setDefaultApplicationInternal$0(CompletableFuture future, Boolean successful) {
+    static /* synthetic */ void lambda$setDefaultApplicationInternal$0(
+            CompletableFuture future, Boolean successful) {
         if (successful.booleanValue()) {
             future.complete(null);
         } else {
@@ -488,7 +637,8 @@ public final class SmsApplication {
         }
     }
 
-    public static void sendBroadcast_SMS_BIG_DATA_INFO(Context context, String oldPackageName, String newPackageName, SemDMACdata dmacData) {
+    public static void sendBroadcast_SMS_BIG_DATA_INFO(
+            Context context, String oldPackageName, String newPackageName, SemDMACdata dmacData) {
         try {
             Intent sdacIntent = new Intent("com.samsung.intent.action.SMS_BIG_DATA_INFO");
             sdacIntent.putExtra("feature", "sdac");
@@ -501,37 +651,62 @@ public final class SmsApplication {
             }
             context.sendBroadcast(sdacIntent);
         } catch (IllegalStateException e) {
-            Log.w(LOG_TAG, "IllegalStateException : intent should be broadcast after boot completed");
+            Log.w(
+                    LOG_TAG,
+                    "IllegalStateException : intent should be broadcast after boot completed");
         } catch (SecurityException e2) {
             Log.w(LOG_TAG, "Permission Denial: com.samsung.intent.action.SMS_BIG_DATA_INFO");
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static void broadcastSmsAppChange(Context context, UserHandle userHandle, String oldPackage, String newPackage) {
+    public static void broadcastSmsAppChange(
+            Context context, UserHandle userHandle, String oldPackage, String newPackage) {
         Collection<SmsApplicationData> apps = getApplicationCollection(context);
-        broadcastSmsAppChange(context, userHandle, getApplicationForPackage(apps, oldPackage), getApplicationForPackage(apps, newPackage));
+        broadcastSmsAppChange(
+                context,
+                userHandle,
+                getApplicationForPackage(apps, oldPackage),
+                getApplicationForPackage(apps, newPackage));
     }
 
-    private static void broadcastSmsAppChange(Context context, UserHandle userHandle, SmsApplicationData oldAppData, SmsApplicationData applicationData) {
+    private static void broadcastSmsAppChange(
+            Context context,
+            UserHandle userHandle,
+            SmsApplicationData oldAppData,
+            SmsApplicationData applicationData) {
         if (oldAppData != null && oldAppData.mSmsAppChangedReceiverClass != null) {
-            Intent oldAppIntent = new Intent(Telephony.Sms.Intents.ACTION_DEFAULT_SMS_PACKAGE_CHANGED);
-            ComponentName component = new ComponentName(oldAppData.mPackageName, oldAppData.mSmsAppChangedReceiverClass);
+            Intent oldAppIntent =
+                    new Intent(Telephony.Sms.Intents.ACTION_DEFAULT_SMS_PACKAGE_CHANGED);
+            ComponentName component =
+                    new ComponentName(
+                            oldAppData.mPackageName, oldAppData.mSmsAppChangedReceiverClass);
             oldAppIntent.setComponent(component);
             oldAppIntent.putExtra(Telephony.Sms.Intents.EXTRA_IS_DEFAULT_SMS_APP, false);
             context.sendBroadcastAsUser(oldAppIntent, userHandle);
         }
         if (applicationData != null && applicationData.mSmsAppChangedReceiverClass != null) {
             Intent intent = new Intent(Telephony.Sms.Intents.ACTION_DEFAULT_SMS_PACKAGE_CHANGED);
-            ComponentName component2 = new ComponentName(applicationData.mPackageName, applicationData.mSmsAppChangedReceiverClass);
+            ComponentName component2 =
+                    new ComponentName(
+                            applicationData.mPackageName,
+                            applicationData.mSmsAppChangedReceiverClass);
             intent.setComponent(component2);
             intent.putExtra(Telephony.Sms.Intents.EXTRA_IS_DEFAULT_SMS_APP, true);
             context.sendBroadcastAsUser(intent, userHandle);
         }
-        context.sendBroadcastAsUser(new Intent(ACTION_DEFAULT_SMS_PACKAGE_CHANGED_INTERNAL), userHandle, "android.permission.MONITOR_DEFAULT_SMS_PACKAGE");
+        context.sendBroadcastAsUser(
+                new Intent(ACTION_DEFAULT_SMS_PACKAGE_CHANGED_INTERNAL),
+                userHandle,
+                "android.permission.MONITOR_DEFAULT_SMS_PACKAGE");
     }
 
-    private static void assignExclusiveSmsPermissionsToSystemApp(Context context, PackageManager packageManager, AppOpsManager appOps, String packageName, boolean sigatureMatch) {
+    private static void assignExclusiveSmsPermissionsToSystemApp(
+            Context context,
+            PackageManager packageManager,
+            AppOpsManager appOps,
+            String packageName,
+            boolean sigatureMatch) {
         if (packageName == null) {
             return;
         }
@@ -544,7 +719,9 @@ public final class SmsApplication {
         }
         try {
             PackageInfo info = packageManager.getPackageInfo(packageName, 0);
-            int mode = appOps.unsafeCheckOp(AppOpsManager.OPSTR_WRITE_SMS, info.applicationInfo.uid, packageName);
+            int mode =
+                    appOps.unsafeCheckOp(
+                            AppOpsManager.OPSTR_WRITE_SMS, info.applicationInfo.uid, packageName);
             if (mode != 0) {
                 Log.w(LOG_TAG, packageName + " does not have OP_WRITE_SMS:  (fixing)");
                 setExclusiveAppops(packageName, appOps, info.applicationInfo.uid, 0);
@@ -554,14 +731,16 @@ public final class SmsApplication {
         }
     }
 
-    private static void setExclusiveAppops(String pkg, AppOpsManager appOpsManager, int uid, int mode) {
+    private static void setExclusiveAppops(
+            String pkg, AppOpsManager appOpsManager, int uid, int mode) {
         for (String opStr : DEFAULT_APP_EXCLUSIVE_APPOPS) {
             appOpsManager.setUidMode(opStr, uid, mode);
         }
     }
 
     private static final class SmsPackageMonitor extends PackageChangeReceiver {
-        private static ThreadPoolExecutor threadPool = new ThreadPoolExecutor(1, 30, 60, TimeUnit.MINUTES, new LinkedBlockingQueue());
+        private static ThreadPoolExecutor threadPool =
+                new ThreadPoolExecutor(1, 30, 60, TimeUnit.MINUTES, new LinkedBlockingQueue());
         final Context mContext;
 
         public SmsPackageMonitor(Context context) {
@@ -593,23 +772,29 @@ public final class SmsApplication {
             Context userContext = this.mContext;
             if (userId != UserHandle.SYSTEM.getIdentifier()) {
                 try {
-                    userContext = this.mContext.createPackageContextAsUser(this.mContext.getPackageName(), 0, UserHandle.of(userId));
+                    userContext =
+                            this.mContext.createPackageContextAsUser(
+                                    this.mContext.getPackageName(), 0, UserHandle.of(userId));
                 } catch (PackageManager.NameNotFoundException e2) {
                 }
             }
             final Context threadContext = userContext;
-            threadPool.execute(new Runnable() { // from class: com.android.internal.telephony.SmsApplication.SmsPackageMonitor.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    Rlog.d(SmsApplication.LOG_TAG, "onPackageChanged: run");
-                    PackageManager packageManager = threadContext.getPackageManager();
-                    ComponentName componentName = SmsApplication.getDefaultSendToApplication(threadContext, true);
-                    if (componentName != null) {
-                        SmsApplication.configurePreferredActivity(packageManager, componentName);
-                    }
-                    Rlog.d(SmsApplication.LOG_TAG, "onPackageChanged: end");
-                }
-            });
+            threadPool.execute(
+                    new Runnable() { // from class:
+                                     // com.android.internal.telephony.SmsApplication.SmsPackageMonitor.1
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            Rlog.d(SmsApplication.LOG_TAG, "onPackageChanged: run");
+                            PackageManager packageManager = threadContext.getPackageManager();
+                            ComponentName componentName =
+                                    SmsApplication.getDefaultSendToApplication(threadContext, true);
+                            if (componentName != null) {
+                                SmsApplication.configurePreferredActivity(
+                                        packageManager, componentName);
+                            }
+                            Rlog.d(SmsApplication.LOG_TAG, "onPackageChanged: end");
+                        }
+                    });
         }
     }
 
@@ -621,13 +806,16 @@ public final class SmsApplication {
         public SmsRoleListener(Context context) {
             this.mContext = context;
             this.mRoleManager = (RoleManager) context.getSystemService(RoleManager.class);
-            List<UserHandle> users = ((UserManager) context.getSystemService(UserManager.class)).getUserHandles(true);
+            List<UserHandle> users =
+                    ((UserManager) context.getSystemService(UserManager.class))
+                            .getUserHandles(true);
             int usersSize = users.size();
             for (int i = 0; i < usersSize; i++) {
                 UserHandle user = users.get(i);
                 this.mSmsPackageNames.put(user.getIdentifier(), getSmsPackageName(user));
             }
-            this.mRoleManager.addOnRoleHoldersChangedListenerAsUser(context.getMainExecutor(), this, UserHandle.ALL);
+            this.mRoleManager.addOnRoleHoldersChangedListenerAsUser(
+                    context.getMainExecutor(), this, UserHandle.ALL);
         }
 
         public void onRoleHoldersChanged(String roleName, UserHandle user) {
@@ -636,12 +824,14 @@ public final class SmsApplication {
             }
             int userId = user.getIdentifier();
             String newSmsPackageName = getSmsPackageName(user);
-            SmsApplication.broadcastSmsAppChange(this.mContext, user, this.mSmsPackageNames.get(userId), newSmsPackageName);
+            SmsApplication.broadcastSmsAppChange(
+                    this.mContext, user, this.mSmsPackageNames.get(userId), newSmsPackageName);
             this.mSmsPackageNames.put(userId, newSmsPackageName);
         }
 
         private String getSmsPackageName(UserHandle user) {
-            List<String> roleHolders = this.mRoleManager.getRoleHoldersAsUser("android.app.role.SMS", user);
+            List<String> roleHolders =
+                    this.mRoleManager.getRoleHoldersAsUser("android.app.role.SMS", user);
             if (roleHolders.isEmpty()) {
                 return null;
             }
@@ -656,22 +846,33 @@ public final class SmsApplication {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static void configurePreferredActivity(PackageManager packageManager, ComponentName componentName) {
+    public static void configurePreferredActivity(
+            PackageManager packageManager, ComponentName componentName) {
         replacePreferredActivity(packageManager, componentName, "sms");
         replacePreferredActivity(packageManager, componentName, SCHEME_SMSTO);
         replacePreferredActivity(packageManager, componentName, "mms");
         replacePreferredActivity(packageManager, componentName, SCHEME_MMSTO);
     }
 
-    private static void replacePreferredActivity(PackageManager packageManager, ComponentName componentName, String scheme) {
+    private static void replacePreferredActivity(
+            PackageManager packageManager, ComponentName componentName, String scheme) {
         Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(scheme, "", null));
-        List<ResolveInfo> resolveInfoList = packageManager.queryIntentActivities(intent, Sensor.SEM_TYPE_HALLIC);
-        List<ComponentName> components = (List) resolveInfoList.stream().map(new Function() { // from class: com.android.internal.telephony.SmsApplication$$ExternalSyntheticLambda1
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return SmsApplication.lambda$replacePreferredActivity$1((ResolveInfo) obj);
-            }
-        }).collect(Collectors.toList());
+        List<ResolveInfo> resolveInfoList =
+                packageManager.queryIntentActivities(intent, Sensor.SEM_TYPE_HALLIC);
+        List<ComponentName> components =
+                (List)
+                        resolveInfoList.stream()
+                                .map(
+                                        new Function() { // from class:
+                                                         // com.android.internal.telephony.SmsApplication$$ExternalSyntheticLambda1
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                return SmsApplication
+                                                        .lambda$replacePreferredActivity$1(
+                                                                (ResolveInfo) obj);
+                                            }
+                                        })
+                                .collect(Collectors.toList());
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_SENDTO);
         intentFilter.addCategory(Intent.CATEGORY_DEFAULT);
@@ -692,16 +893,21 @@ public final class SmsApplication {
         return getDefaultSmsApplicationAsUser(context, updateIfNeeded, getIncomingUserHandle());
     }
 
-    public static ComponentName getDefaultSmsApplicationAsUser(Context context, boolean updateIfNeeded, UserHandle userHandle) {
+    public static ComponentName getDefaultSmsApplicationAsUser(
+            Context context, boolean updateIfNeeded, UserHandle userHandle) {
         if (userHandle == null) {
             userHandle = getIncomingUserHandle();
         }
         long token = Binder.clearCallingIdentity();
         ComponentName component = null;
         try {
-            SmsApplicationData smsApplicationData = getApplication(context, updateIfNeeded, userHandle.getIdentifier());
+            SmsApplicationData smsApplicationData =
+                    getApplication(context, updateIfNeeded, userHandle.getIdentifier());
             if (smsApplicationData != null) {
-                component = new ComponentName(smsApplicationData.mPackageName, smsApplicationData.mSmsReceiverClass);
+                component =
+                        new ComponentName(
+                                smsApplicationData.mPackageName,
+                                smsApplicationData.mSmsReceiverClass);
             }
             return component;
         } finally {
@@ -713,16 +919,21 @@ public final class SmsApplication {
         return getDefaultMmsApplicationAsUser(context, updateIfNeeded, getIncomingUserHandle());
     }
 
-    public static ComponentName getDefaultMmsApplicationAsUser(Context context, boolean updateIfNeeded, UserHandle userHandle) {
+    public static ComponentName getDefaultMmsApplicationAsUser(
+            Context context, boolean updateIfNeeded, UserHandle userHandle) {
         if (userHandle == null) {
             userHandle = getIncomingUserHandle();
         }
         long token = Binder.clearCallingIdentity();
         ComponentName component = null;
         try {
-            SmsApplicationData smsApplicationData = getApplication(context, updateIfNeeded, userHandle.getIdentifier());
+            SmsApplicationData smsApplicationData =
+                    getApplication(context, updateIfNeeded, userHandle.getIdentifier());
             if (smsApplicationData != null) {
-                component = new ComponentName(smsApplicationData.mPackageName, smsApplicationData.mMmsReceiverClass);
+                component =
+                        new ComponentName(
+                                smsApplicationData.mPackageName,
+                                smsApplicationData.mMmsReceiverClass);
             }
             return component;
         } finally {
@@ -730,20 +941,27 @@ public final class SmsApplication {
         }
     }
 
-    public static ComponentName getDefaultRespondViaMessageApplication(Context context, boolean updateIfNeeded) {
-        return getDefaultRespondViaMessageApplicationAsUser(context, updateIfNeeded, getIncomingUserHandle());
+    public static ComponentName getDefaultRespondViaMessageApplication(
+            Context context, boolean updateIfNeeded) {
+        return getDefaultRespondViaMessageApplicationAsUser(
+                context, updateIfNeeded, getIncomingUserHandle());
     }
 
-    public static ComponentName getDefaultRespondViaMessageApplicationAsUser(Context context, boolean updateIfNeeded, UserHandle userHandle) {
+    public static ComponentName getDefaultRespondViaMessageApplicationAsUser(
+            Context context, boolean updateIfNeeded, UserHandle userHandle) {
         if (userHandle == null) {
             userHandle = getIncomingUserHandle();
         }
         long token = Binder.clearCallingIdentity();
         ComponentName component = null;
         try {
-            SmsApplicationData smsApplicationData = getApplication(context, updateIfNeeded, userHandle.getIdentifier());
+            SmsApplicationData smsApplicationData =
+                    getApplication(context, updateIfNeeded, userHandle.getIdentifier());
             if (smsApplicationData != null) {
-                component = new ComponentName(smsApplicationData.mPackageName, smsApplicationData.mRespondViaMessageClass);
+                component =
+                        new ComponentName(
+                                smsApplicationData.mPackageName,
+                                smsApplicationData.mRespondViaMessageClass);
             }
             return component;
         } finally {
@@ -751,14 +969,17 @@ public final class SmsApplication {
         }
     }
 
-    public static ComponentName getDefaultSendToApplication(Context context, boolean updateIfNeeded) {
+    public static ComponentName getDefaultSendToApplication(
+            Context context, boolean updateIfNeeded) {
         int userId = getIncomingUserId();
         long token = Binder.clearCallingIdentity();
         ComponentName component = null;
         try {
             SmsApplicationData smsApplicationData = getApplication(context, updateIfNeeded, userId);
             if (smsApplicationData != null) {
-                component = new ComponentName(smsApplicationData.mPackageName, smsApplicationData.mSendToClass);
+                component =
+                        new ComponentName(
+                                smsApplicationData.mPackageName, smsApplicationData.mSendToClass);
             }
             return component;
         } finally {
@@ -766,20 +987,28 @@ public final class SmsApplication {
         }
     }
 
-    public static ComponentName getDefaultExternalTelephonyProviderChangedApplication(Context context, boolean updateIfNeeded) {
-        return getDefaultExternalTelephonyProviderChangedApplicationAsUser(context, updateIfNeeded, getIncomingUserHandle());
+    public static ComponentName getDefaultExternalTelephonyProviderChangedApplication(
+            Context context, boolean updateIfNeeded) {
+        return getDefaultExternalTelephonyProviderChangedApplicationAsUser(
+                context, updateIfNeeded, getIncomingUserHandle());
     }
 
-    public static ComponentName getDefaultExternalTelephonyProviderChangedApplicationAsUser(Context context, boolean updateIfNeeded, UserHandle userHandle) {
+    public static ComponentName getDefaultExternalTelephonyProviderChangedApplicationAsUser(
+            Context context, boolean updateIfNeeded, UserHandle userHandle) {
         if (userHandle == null) {
             userHandle = getIncomingUserHandle();
         }
         long token = Binder.clearCallingIdentity();
         ComponentName component = null;
         try {
-            SmsApplicationData smsApplicationData = getApplication(context, updateIfNeeded, userHandle.getIdentifier());
-            if (smsApplicationData != null && smsApplicationData.mProviderChangedReceiverClass != null) {
-                component = new ComponentName(smsApplicationData.mPackageName, smsApplicationData.mProviderChangedReceiverClass);
+            SmsApplicationData smsApplicationData =
+                    getApplication(context, updateIfNeeded, userHandle.getIdentifier());
+            if (smsApplicationData != null
+                    && smsApplicationData.mProviderChangedReceiverClass != null) {
+                component =
+                        new ComponentName(
+                                smsApplicationData.mPackageName,
+                                smsApplicationData.mProviderChangedReceiverClass);
             }
             return component;
         } finally {
@@ -787,20 +1016,26 @@ public final class SmsApplication {
         }
     }
 
-    public static ComponentName getDefaultSimFullApplication(Context context, boolean updateIfNeeded) {
+    public static ComponentName getDefaultSimFullApplication(
+            Context context, boolean updateIfNeeded) {
         return getDefaultSimFullApplicationAsUser(context, updateIfNeeded, getIncomingUserHandle());
     }
 
-    public static ComponentName getDefaultSimFullApplicationAsUser(Context context, boolean updateIfNeeded, UserHandle userHandle) {
+    public static ComponentName getDefaultSimFullApplicationAsUser(
+            Context context, boolean updateIfNeeded, UserHandle userHandle) {
         if (userHandle == null) {
             userHandle = getIncomingUserHandle();
         }
         long token = Binder.clearCallingIdentity();
         ComponentName component = null;
         try {
-            SmsApplicationData smsApplicationData = getApplication(context, updateIfNeeded, userHandle.getIdentifier());
+            SmsApplicationData smsApplicationData =
+                    getApplication(context, updateIfNeeded, userHandle.getIdentifier());
             if (smsApplicationData != null && smsApplicationData.mSimFullReceiverClass != null) {
-                component = new ComponentName(smsApplicationData.mPackageName, smsApplicationData.mSimFullReceiverClass);
+                component =
+                        new ComponentName(
+                                smsApplicationData.mPackageName,
+                                smsApplicationData.mSimFullReceiverClass);
             }
             return component;
         } finally {
@@ -812,7 +1047,8 @@ public final class SmsApplication {
         return !shouldWriteMessageForPackageAsUser(packageName, context, getIncomingUserHandle());
     }
 
-    public static boolean shouldWriteMessageForPackageAsUser(String packageName, Context context, UserHandle userHandle) {
+    public static boolean shouldWriteMessageForPackageAsUser(
+            String packageName, Context context, UserHandle userHandle) {
         return !isDefaultSmsApplicationAsUser(context, packageName, userHandle);
     }
 
@@ -820,7 +1056,8 @@ public final class SmsApplication {
         return isDefaultSmsApplicationAsUser(context, packageName, getIncomingUserHandle());
     }
 
-    public static boolean isDefaultSmsApplicationAsUser(Context context, String packageName, UserHandle userHandle) {
+    public static boolean isDefaultSmsApplicationAsUser(
+            Context context, String packageName, UserHandle userHandle) {
         boolean z;
         if (packageName == null) {
             return false;
@@ -834,7 +1071,9 @@ public final class SmsApplication {
             defaultSmsPackage = component.getPackageName();
         }
         String bluetoothPackageName = context.getResources().getString(17039427);
-        if ((defaultSmsPackage != null && defaultSmsPackage.equals(packageName)) || bluetoothPackageName.equals(packageName) || packageName.equals(NSRI_PACKAGE_NAME)) {
+        if ((defaultSmsPackage != null && defaultSmsPackage.equals(packageName))
+                || bluetoothPackageName.equals(packageName)
+                || packageName.equals(NSRI_PACKAGE_NAME)) {
             return true;
         }
         if (!getEnableSecSms(context) && packageName.equals(COREAPPS_PACKAGE_NAME)) {
@@ -850,7 +1089,9 @@ public final class SmsApplication {
             }
             isCallingIdItsOn = z;
         }
-        if ((defaultSmsPackage == null || !defaultSmsPackage.equals(packageName)) && !isShouldNotWriteMessage(context, packageName) && isCallingIdItsOn) {
+        if ((defaultSmsPackage == null || !defaultSmsPackage.equals(packageName))
+                && !isShouldNotWriteMessage(context, packageName)
+                && isCallingIdItsOn) {
             return false;
         }
         return true;
@@ -860,7 +1101,8 @@ public final class SmsApplication {
         return isDefaultMmsApplicationAsUser(context, packageName, getIncomingUserHandle());
     }
 
-    public static boolean isDefaultMmsApplicationAsUser(Context context, String packageName, UserHandle userHandle) {
+    public static boolean isDefaultMmsApplicationAsUser(
+            Context context, String packageName, UserHandle userHandle) {
         String defaultMmsPackage;
         if (packageName == null) {
             return false;
@@ -905,11 +1147,17 @@ public final class SmsApplication {
         } catch (PackageManager.NameNotFoundException e) {
             isAMpreload = false;
         }
-        if (defaultSmsPackage != null && !defaultSmsPackage.equals(NEW_SEC_SMS_PACKAGE_NAME) && isAMpreload && NEW_SEC_SMS_PACKAGE_NAME.equals(packageName) && !"KR".equalsIgnoreCase(countryisoCode) && !"KOREA".equalsIgnoreCase(countryisoCode)) {
+        if (defaultSmsPackage != null
+                && !defaultSmsPackage.equals(NEW_SEC_SMS_PACKAGE_NAME)
+                && isAMpreload
+                && NEW_SEC_SMS_PACKAGE_NAME.equals(packageName)
+                && !"KR".equalsIgnoreCase(countryisoCode)
+                && !"KOREA".equalsIgnoreCase(countryisoCode)) {
             return false;
         }
         if (sPackageNamePattern == null) {
-            sPackageNamePattern = context.getResources().getStringArray(R.array.shouldNotWriteMessage);
+            sPackageNamePattern =
+                    context.getResources().getStringArray(R.array.shouldNotWriteMessage);
         }
         for (String name : sPackageNamePattern) {
             if (packageName.equals(name)) {
@@ -956,7 +1204,8 @@ public final class SmsApplication {
         }
     }
 
-    private static void defaultMessageAppConfigInfoDump(Context context, String defaultMsgAppConfigInfo) {
+    private static void defaultMessageAppConfigInfoDump(
+            Context context, String defaultMsgAppConfigInfo) {
         Intent intent = new Intent(DEFAULT_MSG_APP_INFO_LOGGING);
         intent.putExtra("defaultMsgAppConfigInfo", defaultMsgAppConfigInfo);
         intent.setPackage("com.android.phone");
@@ -990,8 +1239,14 @@ public final class SmsApplication {
 
         private boolean isOperatorFixed() {
             boolean isSupportTrueSingleSKU = isTssDevice();
-            boolean isTSSActivated = SemSystemProperties.getBoolean("mdc.singlesku.activated", false);
-            Log.i(SmsApplication.LOG_TAG, "isOperatorFixed()- isSupportTrueSingleSKU : " + isSupportTrueSingleSKU + " isTSSActivated : " + isTSSActivated);
+            boolean isTSSActivated =
+                    SemSystemProperties.getBoolean("mdc.singlesku.activated", false);
+            Log.i(
+                    SmsApplication.LOG_TAG,
+                    "isOperatorFixed()- isSupportTrueSingleSKU : "
+                            + isSupportTrueSingleSKU
+                            + " isTSSActivated : "
+                            + isTSSActivated);
             if (isSupportTrueSingleSKU) {
                 return isTSSActivated;
             }
@@ -1001,7 +1256,9 @@ public final class SmsApplication {
         private String getActiveOperatorIdByCountryiso(String countryIso) {
             String activeOperatorId = "NONE";
             try {
-                FileInputStream stream = new FileInputStream(new File(SmsApplication.COUNTRYISO_OPENBUYER_CONFIG_XML));
+                FileInputStream stream =
+                        new FileInputStream(
+                                new File(SmsApplication.COUNTRYISO_OPENBUYER_CONFIG_XML));
                 boolean bFind = false;
                 try {
                     try {
@@ -1009,7 +1266,9 @@ public final class SmsApplication {
                         if (xpp == null) {
                             Log.e(SmsApplication.LOG_TAG, "XmlPullParser is null");
                         } else {
-                            for (int eventType = xpp.getEventType(); eventType != 1; eventType = xpp.next()) {
+                            for (int eventType = xpp.getEventType();
+                                    eventType != 1;
+                                    eventType = xpp.next()) {
                                 switch (eventType) {
                                     case 2:
                                         if (countryIso.equals(xpp.getName())) {
@@ -1025,11 +1284,12 @@ public final class SmsApplication {
                                         }
                                         break;
                                 }
-                                if ("NONE".equals(activeOperatorId)) {
-                                }
+                                if ("NONE".equals(activeOperatorId)) {}
                             }
                         }
-                        Log.d(SmsApplication.LOG_TAG, "xml parsing result- activeOperatorId: " + activeOperatorId);
+                        Log.d(
+                                SmsApplication.LOG_TAG,
+                                "xml parsing result- activeOperatorId: " + activeOperatorId);
                     } catch (IOException | XmlPullParserException exp) {
                         Log.e(SmsApplication.LOG_TAG, "Error while parsing", exp);
                     }
@@ -1038,7 +1298,9 @@ public final class SmsApplication {
                 closeFileInputStream(stream);
                 return activeOperatorId;
             } catch (FileNotFoundException e) {
-                Log.e(SmsApplication.LOG_TAG, e.getClass().getSimpleName() + "!! " + e.getMessage());
+                Log.e(
+                        SmsApplication.LOG_TAG,
+                        e.getClass().getSimpleName() + "!! " + e.getMessage());
                 return "NONE";
             }
         }
@@ -1056,13 +1318,15 @@ public final class SmsApplication {
 
         private String getActiveOperatorId() {
             boolean isSupportTrueSingleSKU = isTssDevice();
-            boolean isTSSActivated = SemSystemProperties.getBoolean("mdc.singlesku.activated", false);
+            boolean isTSSActivated =
+                    SemSystemProperties.getBoolean("mdc.singlesku.activated", false);
             String activeOperatorId = "NONE";
             if (isSupportTrueSingleSKU) {
                 if (isTSSActivated) {
                     activeOperatorId = SemSystemProperties.get("ro.boot.activatedid", "NONE");
                     if ("EUX".equals(activeOperatorId) || "EUY".equals(activeOperatorId)) {
-                        String countryiso = SemSystemProperties.get("ro.csc.countryiso_code", "NONE");
+                        String countryiso =
+                                SemSystemProperties.get("ro.csc.countryiso_code", "NONE");
                         Log.i(SmsApplication.LOG_TAG, "countryiso : " + countryiso);
                         if ("NONE".equals(countryiso)) {
                             activeOperatorId = "NONE";
@@ -1076,12 +1340,21 @@ public final class SmsApplication {
             } else {
                 activeOperatorId = SystemProperties.get("ro.csc.sales_code", "NONE");
             }
-            SmsApplication.mLogStb.append(" isSupportTrueSingleSKU : ").append(isSupportTrueSingleSKU).append(", isTSSActivated : ").append(isTSSActivated).append(", isWifiSkipCarrier : ").append(isWifiSkipCarrier()).append(", activeOperatorId : ").append(activeOperatorId);
+            SmsApplication.mLogStb
+                    .append(" isSupportTrueSingleSKU : ")
+                    .append(isSupportTrueSingleSKU)
+                    .append(", isTSSActivated : ")
+                    .append(isTSSActivated)
+                    .append(", isWifiSkipCarrier : ")
+                    .append(isWifiSkipCarrier())
+                    .append(", activeOperatorId : ")
+                    .append(activeOperatorId);
             setDMACdataTssInfo(isSupportTrueSingleSKU, isTSSActivated, activeOperatorId);
             return activeOperatorId;
         }
 
-        void setDMACdataTssInfo(boolean isSupportTrueSingleSKU, boolean isTSSActivated, String activeOperatorId) {
+        void setDMACdataTssInfo(
+                boolean isSupportTrueSingleSKU, boolean isTSSActivated, String activeOperatorId) {
             if (!isSupportTrueSingleSKU) {
                 SmsApplication.sDMACdata.setTssActivated("NotSupported");
             } else if (isTSSActivated) {
@@ -1186,7 +1459,9 @@ public final class SmsApplication {
         }
 
         private String getMessagePackageName(Context context) {
-            String packageName = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_MESSAGE_CONFIG_PACKAGE_NAME");
+            String packageName =
+                    SemFloatingFeature.getInstance()
+                            .getString("SEC_FLOATING_FEATURE_MESSAGE_CONFIG_PACKAGE_NAME");
             if (!hasPackage(context, packageName)) {
                 return "com.android.mms";
             }
@@ -1215,42 +1490,65 @@ public final class SmsApplication {
             int userId = SmsApplication.getIncomingUserId();
             String oldPackageName = SmsApplication.getDefaultSmsPackage(this.mContext, userId);
             boolean carrierApp = false;
-            if ("SBM".equals(activeOperatorId) || "DCM".equals(activeOperatorId) || "KDI".equals(activeOperatorId)) {
+            if ("SBM".equals(activeOperatorId)
+                    || "DCM".equals(activeOperatorId)
+                    || "KDI".equals(activeOperatorId)) {
                 carrierApp = true;
             }
             if (!isAMInstalled()) {
-                SemSystemProperties.set(SmsApplication.DEFAULT_MSGAPP_SYSTEMPROPERTY, SmsApplication.SM_TAG);
+                SemSystemProperties.set(
+                        SmsApplication.DEFAULT_MSGAPP_SYSTEMPROPERTY, SmsApplication.SM_TAG);
                 SmsApplication.sDMACdata.setPreInstalledMsgAppError("NoAM");
             } else if (!carrierApp && !isSMInstalled()) {
                 SemSystemProperties.set(SmsApplication.DEFAULT_MSGAPP_SYSTEMPROPERTY, "AM");
                 SmsApplication.sDMACdata.setPreInstalledMsgAppError("NoSM");
                 Log.i(SmsApplication.LOG_TAG, "SM is not installed ");
             } else if ("NONE".equals(activeOperatorId) || carrierApp) {
-                SemSystemProperties.set(SmsApplication.DEFAULT_MSGAPP_SYSTEMPROPERTY, SmsApplication.SM_TAG);
+                SemSystemProperties.set(
+                        SmsApplication.DEFAULT_MSGAPP_SYSTEMPROPERTY, SmsApplication.SM_TAG);
             } else {
                 boolean mChangeToAM = setDefaultMsgApp_File(activeOperatorId);
                 SmsApplication.mLogStb.append(", mChangeToAM : ").append(mChangeToAM);
                 if (mChangeToAM) {
                     SemSystemProperties.set(SmsApplication.DEFAULT_MSGAPP_SYSTEMPROPERTY, "AM");
-                    SmsApplication.setDefaultApplication(SmsApplication.GOOGLE_MESSAGE_PACKAGE, this.mContext);
+                    SmsApplication.setDefaultApplication(
+                            SmsApplication.GOOGLE_MESSAGE_PACKAGE, this.mContext);
                 } else {
-                    SemSystemProperties.set(SmsApplication.DEFAULT_MSGAPP_SYSTEMPROPERTY, SmsApplication.SM_TAG);
+                    SemSystemProperties.set(
+                            SmsApplication.DEFAULT_MSGAPP_SYSTEMPROPERTY, SmsApplication.SM_TAG);
                 }
             }
-            if (SmsApplication.SM_TAG.equals(SemSystemProperties.get(SmsApplication.DEFAULT_MSGAPP_SYSTEMPROPERTY, SmsApplication.SM_TAG))) {
+            if (SmsApplication.SM_TAG.equals(
+                    SemSystemProperties.get(
+                            SmsApplication.DEFAULT_MSGAPP_SYSTEMPROPERTY, SmsApplication.SM_TAG))) {
                 setSMorOperatorMessageApp();
             }
-            SmsApplication.mLogStb.append(", SemSystemProperties - persist.ril.config.defaultmsgapp : ").append(SemSystemProperties.get(SmsApplication.DEFAULT_MSGAPP_SYSTEMPROPERTY, SmsApplication.SM_TAG));
-            Log.i(SmsApplication.LOG_TAG, "Default Msg app is " + SemSystemProperties.get(SmsApplication.DEFAULT_MSGAPP_SYSTEMPROPERTY));
-            Log.i(SmsApplication.LOG_TAG, "Default Msg app parameter: " + SmsApplication.sDMACdata.toString());
-            SmsApplication.sendBroadcast_SMS_BIG_DATA_INFO(this.mContext, oldPackageName, SemSystemProperties.get(SmsApplication.DEFAULT_MSGAPP_SYSTEMPROPERTY), SmsApplication.sDMACdata);
+            SmsApplication.mLogStb
+                    .append(", SemSystemProperties - persist.ril.config.defaultmsgapp : ")
+                    .append(
+                            SemSystemProperties.get(
+                                    SmsApplication.DEFAULT_MSGAPP_SYSTEMPROPERTY,
+                                    SmsApplication.SM_TAG));
+            Log.i(
+                    SmsApplication.LOG_TAG,
+                    "Default Msg app is "
+                            + SemSystemProperties.get(
+                                    SmsApplication.DEFAULT_MSGAPP_SYSTEMPROPERTY));
+            Log.i(
+                    SmsApplication.LOG_TAG,
+                    "Default Msg app parameter: " + SmsApplication.sDMACdata.toString());
+            SmsApplication.sendBroadcast_SMS_BIG_DATA_INFO(
+                    this.mContext,
+                    oldPackageName,
+                    SemSystemProperties.get(SmsApplication.DEFAULT_MSGAPP_SYSTEMPROPERTY),
+                    SmsApplication.sDMACdata);
         }
 
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:34:0x0050, code lost:
-        
-            if (r0.equals("DCM") != false) goto L22;
-         */
+
+           if (r0.equals("DCM") != false) goto L22;
+        */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1356,10 +1654,13 @@ public final class SmsApplication {
             Laf:
                 return
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.internal.telephony.SmsApplication.DefaultMessageAppConfig.setSMorOperatorMessageApp():void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.internal.telephony.SmsApplication.DefaultMessageAppConfig.setSMorOperatorMessageApp():void");
         }
 
-        private String updateChangeByOs(String changedValueByOs, String activeOperatorId, boolean isOpen) {
+        private String updateChangeByOs(
+                String changedValueByOs, String activeOperatorId, boolean isOpen) {
             if (TextUtils.isEmpty(changedValueByOs)) {
                 return "";
             }
@@ -1367,7 +1668,10 @@ public final class SmsApplication {
             for (String split : changeOsSplit) {
                 if (isOpen) {
                     if (split.contains(activeOperatorId)) {
-                        String retVal = split.replace(activeOperatorId + Session.SESSION_SEPARATION_CHAR_CHILD, "");
+                        String retVal =
+                                split.replace(
+                                        activeOperatorId + Session.SESSION_SEPARATION_CHAR_CHILD,
+                                        "");
                         return retVal;
                     }
                 } else if (split.contains("SM_")) {
@@ -1380,10 +1684,31 @@ public final class SmsApplication {
 
         private boolean isNeedToModifyFirstApi() {
             String productModel = SemSystemProperties.get("ro.product.model", "Unknown");
-            String[] model = {"SM-A155F", "SM-A155M", "SM-G556B", "SM-A156E", "SM-A156B", "SM-A156M", "SM-A1560", "SM-A256B", "SM-A256E", "SM-A2560", "SM-A256U", "SM-A256U1", "SM-A256N", "SM-X306B", "SM-X300", "SM-X306N", "SM-X308U", "SM-X308B"};
+            String[] model = {
+                "SM-A155F",
+                "SM-A155M",
+                "SM-G556B",
+                "SM-A156E",
+                "SM-A156B",
+                "SM-A156M",
+                "SM-A1560",
+                "SM-A256B",
+                "SM-A256E",
+                "SM-A2560",
+                "SM-A256U",
+                "SM-A256U1",
+                "SM-A256N",
+                "SM-X306B",
+                "SM-X300",
+                "SM-X306N",
+                "SM-X308U",
+                "SM-X308B"
+            };
             List<String> modelList = Arrays.asList(model);
             if (modelList.contains(productModel)) {
-                Log.d(SmsApplication.LOG_TAG, "isNeedToModifyFirstApi return true : " + productModel);
+                Log.d(
+                        SmsApplication.LOG_TAG,
+                        "isNeedToModifyFirstApi return true : " + productModel);
                 return true;
             }
             return false;
@@ -1391,9 +1716,9 @@ public final class SmsApplication {
 
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:64:0x02c8, code lost:
-        
-            if (r5.equals("111111") != false) goto L99;
-         */
+
+           if (r5.equals("111111") != false) goto L99;
+        */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1403,7 +1728,9 @@ public final class SmsApplication {
                 Method dump skipped, instructions count: 1050
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.internal.telephony.SmsApplication.DefaultMessageAppConfig.setDefaultMsgApp_File(java.lang.String):boolean");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.internal.telephony.SmsApplication.DefaultMessageAppConfig.setDefaultMsgApp_File(java.lang.String):boolean");
         }
     }
 }

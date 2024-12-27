@@ -7,11 +7,6 @@ import android.media.AudioPort$$ExternalSyntheticLambda0;
 import android.os.Binder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.telephony.CarrierConfigManager;
-import android.telephony.SubscriptionManager;
-import android.telephony.TelephonyCallback;
-import android.telephony.TelephonyManager;
-import android.telephony.TelephonyRegistryManager;
 import android.telephony.emergency.EmergencyNumber;
 import android.telephony.ims.ImsReasonInfo;
 import android.telephony.ims.MediaQualityStatus;
@@ -20,12 +15,14 @@ import android.telephony.satellite.SemSatelliteServiceState;
 import android.telephony.satellite.SemSatelliteSignalStrength;
 import android.util.ArraySet;
 import android.util.Log;
+
 import com.android.internal.listeners.ListenerExecutor;
 import com.android.internal.telephony.ICarrierConfigChangeListener;
 import com.android.internal.telephony.ICarrierPrivilegesCallback;
 import com.android.internal.telephony.IOnSubscriptionsChangedListener;
 import com.android.internal.telephony.ITelephonyRegistry;
 import com.android.internal.util.FunctionalUtils;
+
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.List;
@@ -44,21 +41,35 @@ public class TelephonyRegistryManager {
     public static final int SIM_ACTIVATION_TYPE_DATA = 1;
     public static final int SIM_ACTIVATION_TYPE_VOICE = 0;
     private static final String TAG = "TelephonyRegistryManager";
-    private static final WeakHashMap<TelephonyManager.CarrierPrivilegesCallback, WeakReference<CarrierPrivilegesCallbackWrapper>> sCarrierPrivilegeCallbacks = new WeakHashMap<>();
+    private static final WeakHashMap<
+                    TelephonyManager.CarrierPrivilegesCallback,
+                    WeakReference<CarrierPrivilegesCallbackWrapper>>
+            sCarrierPrivilegeCallbacks = new WeakHashMap<>();
     private static ITelephonyRegistry sRegistry;
     private final Context mContext;
-    private final ConcurrentHashMap<SubscriptionManager.OnSubscriptionsChangedListener, IOnSubscriptionsChangedListener> mSubscriptionChangedListenerMap = new ConcurrentHashMap<>();
-    private final ConcurrentHashMap<SubscriptionManager.OnOpportunisticSubscriptionsChangedListener, IOnSubscriptionsChangedListener> mOpportunisticSubscriptionChangedListenerMap = new ConcurrentHashMap<>();
-    private final ConcurrentHashMap<CarrierConfigManager.CarrierConfigChangeListener, ICarrierConfigChangeListener> mCarrierConfigChangeListenerMap = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<
+                    SubscriptionManager.OnSubscriptionsChangedListener,
+                    IOnSubscriptionsChangedListener>
+            mSubscriptionChangedListenerMap = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<
+                    SubscriptionManager.OnOpportunisticSubscriptionsChangedListener,
+                    IOnSubscriptionsChangedListener>
+            mOpportunisticSubscriptionChangedListenerMap = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<
+                    CarrierConfigManager.CarrierConfigChangeListener, ICarrierConfigChangeListener>
+            mCarrierConfigChangeListenerMap = new ConcurrentHashMap<>();
 
     public TelephonyRegistryManager(Context context) {
         this.mContext = context;
         if (sRegistry == null) {
-            sRegistry = ITelephonyRegistry.Stub.asInterface(ServiceManager.getService("telephony.registry"));
+            sRegistry =
+                    ITelephonyRegistry.Stub.asInterface(
+                            ServiceManager.getService("telephony.registry"));
         }
     }
 
-    public void addOnSubscriptionsChangedListener(SubscriptionManager.OnSubscriptionsChangedListener listener, Executor executor) {
+    public void addOnSubscriptionsChangedListener(
+            SubscriptionManager.OnSubscriptionsChangedListener listener, Executor executor) {
         if (this.mSubscriptionChangedListenerMap.get(listener) != null) {
             Log.d(TAG, "addOnSubscriptionsChangedListener listener already present");
             return;
@@ -66,7 +77,8 @@ public class TelephonyRegistryManager {
         IOnSubscriptionsChangedListener callback = new AnonymousClass1(executor, listener);
         this.mSubscriptionChangedListenerMap.put(listener, callback);
         try {
-            sRegistry.addOnSubscriptionsChangedListener(this.mContext.getOpPackageName(), this.mContext.getAttributionTag(), callback);
+            sRegistry.addOnSubscriptionsChangedListener(
+                    this.mContext.getOpPackageName(), this.mContext.getAttributionTag(), callback);
         } catch (RemoteException ex) {
             throw ex.rethrowFromSystemServer();
         }
@@ -77,7 +89,9 @@ public class TelephonyRegistryManager {
         final /* synthetic */ Executor val$executor;
         final /* synthetic */ SubscriptionManager.OnSubscriptionsChangedListener val$listener;
 
-        AnonymousClass1(Executor executor, SubscriptionManager.OnSubscriptionsChangedListener onSubscriptionsChangedListener) {
+        AnonymousClass1(
+                Executor executor,
+                SubscriptionManager.OnSubscriptionsChangedListener onSubscriptionsChangedListener) {
             this.val$executor = executor;
             this.val$listener = onSubscriptionsChangedListener;
         }
@@ -87,32 +101,41 @@ public class TelephonyRegistryManager {
             long identity = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
-                final SubscriptionManager.OnSubscriptionsChangedListener onSubscriptionsChangedListener = this.val$listener;
-                executor.execute(new Runnable() { // from class: android.telephony.TelephonyRegistryManager$1$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SubscriptionManager.OnSubscriptionsChangedListener.this.onSubscriptionsChanged();
-                    }
-                });
+                final SubscriptionManager.OnSubscriptionsChangedListener
+                        onSubscriptionsChangedListener = this.val$listener;
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.TelephonyRegistryManager$1$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SubscriptionManager.OnSubscriptionsChangedListener.this
+                                        .onSubscriptionsChanged();
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(identity);
             }
         }
     }
 
-    public void removeOnSubscriptionsChangedListener(SubscriptionManager.OnSubscriptionsChangedListener listener) {
+    public void removeOnSubscriptionsChangedListener(
+            SubscriptionManager.OnSubscriptionsChangedListener listener) {
         if (this.mSubscriptionChangedListenerMap.get(listener) == null) {
             return;
         }
         try {
-            sRegistry.removeOnSubscriptionsChangedListener(this.mContext.getOpPackageName(), this.mSubscriptionChangedListenerMap.get(listener));
+            sRegistry.removeOnSubscriptionsChangedListener(
+                    this.mContext.getOpPackageName(),
+                    this.mSubscriptionChangedListenerMap.get(listener));
             this.mSubscriptionChangedListenerMap.remove(listener);
         } catch (RemoteException ex) {
             throw ex.rethrowFromSystemServer();
         }
     }
 
-    public void addOnOpportunisticSubscriptionsChangedListener(SubscriptionManager.OnOpportunisticSubscriptionsChangedListener listener, Executor executor) {
+    public void addOnOpportunisticSubscriptionsChangedListener(
+            SubscriptionManager.OnOpportunisticSubscriptionsChangedListener listener,
+            Executor executor) {
         if (this.mOpportunisticSubscriptionChangedListenerMap.get(listener) != null) {
             Log.d(TAG, "addOnOpportunisticSubscriptionsChangedListener listener already present");
             return;
@@ -120,7 +143,8 @@ public class TelephonyRegistryManager {
         IOnSubscriptionsChangedListener callback = new AnonymousClass2(executor, listener);
         this.mOpportunisticSubscriptionChangedListenerMap.put(listener, callback);
         try {
-            sRegistry.addOnOpportunisticSubscriptionsChangedListener(this.mContext.getOpPackageName(), this.mContext.getAttributionTag(), callback);
+            sRegistry.addOnOpportunisticSubscriptionsChangedListener(
+                    this.mContext.getOpPackageName(), this.mContext.getAttributionTag(), callback);
         } catch (RemoteException ex) {
             throw ex.rethrowFromSystemServer();
         }
@@ -129,9 +153,13 @@ public class TelephonyRegistryManager {
     /* renamed from: android.telephony.TelephonyRegistryManager$2, reason: invalid class name */
     class AnonymousClass2 extends IOnSubscriptionsChangedListener.Stub {
         final /* synthetic */ Executor val$executor;
-        final /* synthetic */ SubscriptionManager.OnOpportunisticSubscriptionsChangedListener val$listener;
+        final /* synthetic */ SubscriptionManager.OnOpportunisticSubscriptionsChangedListener
+                val$listener;
 
-        AnonymousClass2(Executor executor, SubscriptionManager.OnOpportunisticSubscriptionsChangedListener onOpportunisticSubscriptionsChangedListener) {
+        AnonymousClass2(
+                Executor executor,
+                SubscriptionManager.OnOpportunisticSubscriptionsChangedListener
+                        onOpportunisticSubscriptionsChangedListener) {
             this.val$executor = executor;
             this.val$listener = onOpportunisticSubscriptionsChangedListener;
         }
@@ -140,48 +168,70 @@ public class TelephonyRegistryManager {
         public void onSubscriptionsChanged() {
             long identity = Binder.clearCallingIdentity();
             try {
-                Log.d(TelephonyRegistryManager.TAG, "onOpportunisticSubscriptionsChanged callback received.");
+                Log.d(
+                        TelephonyRegistryManager.TAG,
+                        "onOpportunisticSubscriptionsChanged callback received.");
                 Executor executor = this.val$executor;
-                final SubscriptionManager.OnOpportunisticSubscriptionsChangedListener onOpportunisticSubscriptionsChangedListener = this.val$listener;
-                executor.execute(new Runnable() { // from class: android.telephony.TelephonyRegistryManager$2$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SubscriptionManager.OnOpportunisticSubscriptionsChangedListener.this.onOpportunisticSubscriptionsChanged();
-                    }
-                });
+                final SubscriptionManager.OnOpportunisticSubscriptionsChangedListener
+                        onOpportunisticSubscriptionsChangedListener = this.val$listener;
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.TelephonyRegistryManager$2$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SubscriptionManager.OnOpportunisticSubscriptionsChangedListener.this
+                                        .onOpportunisticSubscriptionsChanged();
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(identity);
             }
         }
     }
 
-    public void removeOnOpportunisticSubscriptionsChangedListener(SubscriptionManager.OnOpportunisticSubscriptionsChangedListener listener) {
+    public void removeOnOpportunisticSubscriptionsChangedListener(
+            SubscriptionManager.OnOpportunisticSubscriptionsChangedListener listener) {
         if (this.mOpportunisticSubscriptionChangedListenerMap.get(listener) == null) {
             return;
         }
         try {
-            sRegistry.removeOnSubscriptionsChangedListener(this.mContext.getOpPackageName(), this.mOpportunisticSubscriptionChangedListenerMap.get(listener));
+            sRegistry.removeOnSubscriptionsChangedListener(
+                    this.mContext.getOpPackageName(),
+                    this.mOpportunisticSubscriptionChangedListenerMap.get(listener));
             this.mOpportunisticSubscriptionChangedListenerMap.remove(listener);
         } catch (RemoteException ex) {
             throw ex.rethrowFromSystemServer();
         }
     }
 
-    public void listenFromListener(int subId, boolean renounceFineLocationAccess, boolean renounceCoarseLocationAccess, String pkg, String featureId, PhoneStateListener listener, int events, boolean notifyNow) {
+    public void listenFromListener(
+            int subId,
+            boolean renounceFineLocationAccess,
+            boolean renounceCoarseLocationAccess,
+            String pkg,
+            String featureId,
+            PhoneStateListener listener,
+            int events,
+            boolean notifyNow) {
         int[] eventsList;
         int subId2;
         if (listener == null) {
             throw new IllegalStateException("telephony service is null.");
         }
         try {
-            eventsList = getEventsFromBitmask(events).stream().mapToInt(new ToIntFunction() { // from class: android.telephony.TelephonyRegistryManager$$ExternalSyntheticLambda2
-                @Override // java.util.function.ToIntFunction
-                public final int applyAsInt(Object obj) {
-                    int intValue;
-                    intValue = ((Integer) obj).intValue();
-                    return intValue;
-                }
-            }).toArray();
+            eventsList =
+                    getEventsFromBitmask(events).stream()
+                            .mapToInt(
+                                    new ToIntFunction() { // from class:
+                                                          // android.telephony.TelephonyRegistryManager$$ExternalSyntheticLambda2
+                                        @Override // java.util.function.ToIntFunction
+                                        public final int applyAsInt(Object obj) {
+                                            int intValue;
+                                            intValue = ((Integer) obj).intValue();
+                                            return intValue;
+                                        }
+                                    })
+                            .toArray();
         } catch (RemoteException e) {
             e = e;
         }
@@ -190,10 +240,26 @@ public class TelephonyRegistryManager {
                 listener.mSubId = Integer.valueOf(eventsList.length == 0 ? -1 : subId);
             } else if (listener.mSubId != null) {
                 subId2 = listener.mSubId.intValue();
-                sRegistry.listenWithEventList(renounceFineLocationAccess, renounceCoarseLocationAccess, subId2, pkg, featureId, listener.callback, eventsList, notifyNow);
+                sRegistry.listenWithEventList(
+                        renounceFineLocationAccess,
+                        renounceCoarseLocationAccess,
+                        subId2,
+                        pkg,
+                        featureId,
+                        listener.callback,
+                        eventsList,
+                        notifyNow);
                 return;
             }
-            sRegistry.listenWithEventList(renounceFineLocationAccess, renounceCoarseLocationAccess, subId2, pkg, featureId, listener.callback, eventsList, notifyNow);
+            sRegistry.listenWithEventList(
+                    renounceFineLocationAccess,
+                    renounceCoarseLocationAccess,
+                    subId2,
+                    pkg,
+                    featureId,
+                    listener.callback,
+                    eventsList,
+                    notifyNow);
             return;
         } catch (RemoteException e2) {
             e = e2;
@@ -202,13 +268,29 @@ public class TelephonyRegistryManager {
         subId2 = subId;
     }
 
-    private void listenFromCallback(boolean renounceFineLocationAccess, boolean renounceCoarseLocationAccess, int subId, String pkg, String featureId, TelephonyCallback telephonyCallback, int[] events, boolean notifyNow) {
+    private void listenFromCallback(
+            boolean renounceFineLocationAccess,
+            boolean renounceCoarseLocationAccess,
+            int subId,
+            String pkg,
+            String featureId,
+            TelephonyCallback telephonyCallback,
+            int[] events,
+            boolean notifyNow) {
         try {
         } catch (RemoteException e) {
             e = e;
         }
         try {
-            sRegistry.listenWithEventList(renounceFineLocationAccess, renounceCoarseLocationAccess, subId, pkg, featureId, telephonyCallback.callback, events, notifyNow);
+            sRegistry.listenWithEventList(
+                    renounceFineLocationAccess,
+                    renounceCoarseLocationAccess,
+                    subId,
+                    pkg,
+                    featureId,
+                    telephonyCallback.callback,
+                    events,
+                    notifyNow);
         } catch (RemoteException e2) {
             e = e2;
             throw e.rethrowFromSystemServer();
@@ -272,7 +354,8 @@ public class TelephonyRegistryManager {
         }
     }
 
-    public void notifySignalStrengthChanged(int slotIndex, int subId, SignalStrength signalStrength) {
+    public void notifySignalStrengthChanged(
+            int slotIndex, int subId, SignalStrength signalStrength) {
         try {
             sRegistry.notifySignalStrengthForPhoneId(slotIndex, subId, signalStrength);
         } catch (RemoteException ex) {
@@ -312,7 +395,8 @@ public class TelephonyRegistryManager {
         }
     }
 
-    public void notifyDataConnectionForSubscriber(int slotIndex, int subId, PreciseDataConnectionState preciseState) {
+    public void notifyDataConnectionForSubscriber(
+            int slotIndex, int subId, PreciseDataConnectionState preciseState) {
         try {
             sRegistry.notifyDataConnectionForSubscriber(slotIndex, subId, preciseState);
         } catch (RemoteException ex) {
@@ -320,7 +404,8 @@ public class TelephonyRegistryManager {
         }
     }
 
-    public void notifyCallQualityChanged(int slotIndex, int subId, CallQuality callQuality, int networkType) {
+    public void notifyCallQualityChanged(
+            int slotIndex, int subId, CallQuality callQuality, int networkType) {
         try {
             sRegistry.notifyCallQualityChanged(callQuality, slotIndex, subId, networkType);
         } catch (RemoteException ex) {
@@ -328,7 +413,8 @@ public class TelephonyRegistryManager {
         }
     }
 
-    public void notifyMediaQualityStatusChanged(int slotIndex, int subId, MediaQualityStatus status) {
+    public void notifyMediaQualityStatusChanged(
+            int slotIndex, int subId, MediaQualityStatus status) {
         try {
             sRegistry.notifyMediaQualityStatusChanged(slotIndex, subId, status);
         } catch (RemoteException ex) {
@@ -345,7 +431,8 @@ public class TelephonyRegistryManager {
     }
 
     @SystemApi
-    public void notifyOutgoingEmergencyCall(int simSlotIndex, int subscriptionId, EmergencyNumber emergencyNumber) {
+    public void notifyOutgoingEmergencyCall(
+            int simSlotIndex, int subscriptionId, EmergencyNumber emergencyNumber) {
         try {
             sRegistry.notifyOutgoingEmergencyCall(simSlotIndex, subscriptionId, emergencyNumber);
         } catch (RemoteException ex) {
@@ -353,7 +440,8 @@ public class TelephonyRegistryManager {
         }
     }
 
-    public void notifyOutgoingEmergencySms(int phoneId, int subId, EmergencyNumber emergencyNumber) {
+    public void notifyOutgoingEmergencySms(
+            int phoneId, int subId, EmergencyNumber emergencyNumber) {
         try {
             sRegistry.notifyOutgoingEmergencySms(phoneId, subId, emergencyNumber);
         } catch (RemoteException ex) {
@@ -379,7 +467,8 @@ public class TelephonyRegistryManager {
 
     public void notifyDataActivationStateChanged(int slotIndex, int subId, int activationState) {
         try {
-            sRegistry.notifySimActivationStateChangedForPhoneId(slotIndex, subId, 1, activationState);
+            sRegistry.notifySimActivationStateChangedForPhoneId(
+                    slotIndex, subId, 1, activationState);
         } catch (RemoteException ex) {
             throw ex.rethrowFromSystemServer();
         }
@@ -387,7 +476,8 @@ public class TelephonyRegistryManager {
 
     public void notifyVoiceActivationStateChanged(int slotIndex, int subId, int activationState) {
         try {
-            sRegistry.notifySimActivationStateChangedForPhoneId(slotIndex, subId, 0, activationState);
+            sRegistry.notifySimActivationStateChangedForPhoneId(
+                    slotIndex, subId, 0, activationState);
         } catch (RemoteException ex) {
             throw ex.rethrowFromSystemServer();
         }
@@ -401,7 +491,8 @@ public class TelephonyRegistryManager {
         }
     }
 
-    public void notifyDisplayInfoChanged(int slotIndex, int subscriptionId, TelephonyDisplayInfo telephonyDisplayInfo) {
+    public void notifyDisplayInfoChanged(
+            int slotIndex, int subscriptionId, TelephonyDisplayInfo telephonyDisplayInfo) {
         try {
             sRegistry.notifyDisplayInfoChanged(slotIndex, subscriptionId, telephonyDisplayInfo);
         } catch (RemoteException ex) {
@@ -425,9 +516,16 @@ public class TelephonyRegistryManager {
         }
     }
 
-    public void notifyPreciseCallState(int slotIndex, int subId, int[] callStates, String[] imsCallIds, int[] imsServiceTypes, int[] imsCallTypes) {
+    public void notifyPreciseCallState(
+            int slotIndex,
+            int subId,
+            int[] callStates,
+            String[] imsCallIds,
+            int[] imsServiceTypes,
+            int[] imsCallTypes) {
         try {
-            sRegistry.notifyPreciseCallState(slotIndex, subId, callStates, imsCallIds, imsServiceTypes, imsCallTypes);
+            sRegistry.notifyPreciseCallState(
+                    slotIndex, subId, callStates, imsCallIds, imsServiceTypes, imsCallTypes);
         } catch (RemoteException ex) {
             throw ex.rethrowFromSystemServer();
         }
@@ -465,9 +563,23 @@ public class TelephonyRegistryManager {
         }
     }
 
-    public void notifyRegistrationFailed(int slotIndex, int subId, CellIdentity cellIdentity, String chosenPlmn, int domain, int causeCode, int additionalCauseCode) {
+    public void notifyRegistrationFailed(
+            int slotIndex,
+            int subId,
+            CellIdentity cellIdentity,
+            String chosenPlmn,
+            int domain,
+            int causeCode,
+            int additionalCauseCode) {
         try {
-            sRegistry.notifyRegistrationFailed(slotIndex, subId, cellIdentity, chosenPlmn, domain, causeCode, additionalCauseCode);
+            sRegistry.notifyRegistrationFailed(
+                    slotIndex,
+                    subId,
+                    cellIdentity,
+                    chosenPlmn,
+                    domain,
+                    causeCode,
+                    additionalCauseCode);
         } catch (RemoteException ex) {
             throw ex.rethrowFromSystemServer();
         }
@@ -481,7 +593,8 @@ public class TelephonyRegistryManager {
         }
     }
 
-    public void notifyPhysicalChannelConfigForSubscriber(int slotIndex, int subId, List<PhysicalChannelConfig> configs) {
+    public void notifyPhysicalChannelConfigForSubscriber(
+            int slotIndex, int subId, List<PhysicalChannelConfig> configs) {
         try {
             sRegistry.notifyPhysicalChannelConfigForSubscriber(slotIndex, subId, configs);
         } catch (RemoteException ex) {
@@ -497,15 +610,18 @@ public class TelephonyRegistryManager {
         }
     }
 
-    public void notifyAllowedNetworkTypesChanged(int slotIndex, int subId, int reason, long allowedNetworkType) {
+    public void notifyAllowedNetworkTypesChanged(
+            int slotIndex, int subId, int reason, long allowedNetworkType) {
         try {
-            sRegistry.notifyAllowedNetworkTypesChanged(slotIndex, subId, reason, allowedNetworkType);
+            sRegistry.notifyAllowedNetworkTypesChanged(
+                    slotIndex, subId, reason, allowedNetworkType);
         } catch (RemoteException ex) {
             throw ex.rethrowFromSystemServer();
         }
     }
 
-    public void notifyLinkCapacityEstimateChanged(int slotIndex, int subId, List<LinkCapacityEstimate> linkCapacityEstimateList) {
+    public void notifyLinkCapacityEstimateChanged(
+            int slotIndex, int subId, List<LinkCapacityEstimate> linkCapacityEstimateList) {
         try {
             sRegistry.notifyLinkCapacityEstimateChanged(slotIndex, subId, linkCapacityEstimateList);
         } catch (RemoteException ex) {
@@ -515,14 +631,19 @@ public class TelephonyRegistryManager {
 
     public void notifySimultaneousCellularCallingSubscriptionsChanged(Set<Integer> subIds) {
         try {
-            sRegistry.notifySimultaneousCellularCallingSubscriptionsChanged(subIds.stream().mapToInt(new ToIntFunction() { // from class: android.telephony.TelephonyRegistryManager$$ExternalSyntheticLambda1
-                @Override // java.util.function.ToIntFunction
-                public final int applyAsInt(Object obj) {
-                    int intValue;
-                    intValue = ((Integer) obj).intValue();
-                    return intValue;
-                }
-            }).toArray());
+            sRegistry.notifySimultaneousCellularCallingSubscriptionsChanged(
+                    subIds.stream()
+                            .mapToInt(
+                                    new ToIntFunction() { // from class:
+                                                          // android.telephony.TelephonyRegistryManager$$ExternalSyntheticLambda1
+                                        @Override // java.util.function.ToIntFunction
+                                        public final int applyAsInt(Object obj) {
+                                            int intValue;
+                                            intValue = ((Integer) obj).intValue();
+                                            return intValue;
+                                        }
+                                    })
+                            .toArray());
         } catch (RemoteException ex) {
             throw ex.rethrowFromSystemServer();
         }
@@ -544,7 +665,8 @@ public class TelephonyRegistryManager {
         }
     }
 
-    public void notifyCarrierRoamingNtnAvailableServicesChanged(int subId, int[] availableServices) {
+    public void notifyCarrierRoamingNtnAvailableServicesChanged(
+            int subId, int[] availableServices) {
         try {
             sRegistry.notifyCarrierRoamingNtnAvailableServicesChanged(subId, availableServices);
         } catch (RemoteException ex) {
@@ -552,7 +674,8 @@ public class TelephonyRegistryManager {
         }
     }
 
-    public final void notifyCarrierRoamingNtnSignalStrengthChanged(int subId, NtnSignalStrength ntnSignalStrength) {
+    public final void notifyCarrierRoamingNtnSignalStrengthChanged(
+            int subId, NtnSignalStrength ntnSignalStrength) {
         try {
             sRegistry.notifyCarrierRoamingNtnSignalStrengthChanged(subId, ntnSignalStrength);
         } catch (RemoteException ex) {
@@ -560,7 +683,8 @@ public class TelephonyRegistryManager {
         }
     }
 
-    public void notifySemSatelliteServiceStateChanged(int phoneId, int subId, SemSatelliteServiceState serviceState) {
+    public void notifySemSatelliteServiceStateChanged(
+            int phoneId, int subId, SemSatelliteServiceState serviceState) {
         try {
             sRegistry.notifySemSatelliteServiceStateChanged(phoneId, subId, serviceState);
         } catch (RemoteException ex) {
@@ -568,7 +692,8 @@ public class TelephonyRegistryManager {
         }
     }
 
-    public void notifySemSatelliteSignalStrengthChanged(int phoneId, int subId, SemSatelliteSignalStrength signalStrength) {
+    public void notifySemSatelliteSignalStrengthChanged(
+            int phoneId, int subId, SemSatelliteSignalStrength signalStrength) {
         try {
             sRegistry.notifySemSatelliteSignalStrengthChanged(phoneId, subId, signalStrength);
         } catch (RemoteException ex) {
@@ -680,7 +805,8 @@ public class TelephonyRegistryManager {
         if (telephonyCallback instanceof TelephonyCallback.EmergencyCallbackModeListener) {
             eventList.add(40);
         }
-        if (telephonyCallback instanceof TelephonyCallback.SimultaneousCellularCallingSupportListener) {
+        if (telephonyCallback
+                instanceof TelephonyCallback.SimultaneousCellularCallingSupportListener) {
             eventList.add(41);
         }
         if (telephonyCallback instanceof TelephonyCallback.CarrierRoamingNtnModeListener) {
@@ -794,110 +920,179 @@ public class TelephonyRegistryManager {
         return eventList;
     }
 
-    public void registerTelephonyCallback(boolean renounceFineLocationAccess, boolean renounceCoarseLocationAccess, Executor executor, int subId, String pkgName, String attributionTag, TelephonyCallback callback, boolean notifyNow) {
+    public void registerTelephonyCallback(
+            boolean renounceFineLocationAccess,
+            boolean renounceCoarseLocationAccess,
+            Executor executor,
+            int subId,
+            String pkgName,
+            String attributionTag,
+            TelephonyCallback callback,
+            boolean notifyNow) {
         if (callback == null) {
             throw new IllegalStateException("telephony service is null.");
         }
         callback.init(executor);
-        listenFromCallback(renounceFineLocationAccess, renounceCoarseLocationAccess, subId, pkgName, attributionTag, callback, getEventsFromCallback(callback).stream().mapToInt(new ToIntFunction() { // from class: android.telephony.TelephonyRegistryManager$$ExternalSyntheticLambda0
-            @Override // java.util.function.ToIntFunction
-            public final int applyAsInt(Object obj) {
-                int intValue;
-                intValue = ((Integer) obj).intValue();
-                return intValue;
-            }
-        }).toArray(), notifyNow);
+        listenFromCallback(
+                renounceFineLocationAccess,
+                renounceCoarseLocationAccess,
+                subId,
+                pkgName,
+                attributionTag,
+                callback,
+                getEventsFromCallback(callback).stream()
+                        .mapToInt(
+                                new ToIntFunction() { // from class:
+                                                      // android.telephony.TelephonyRegistryManager$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.ToIntFunction
+                                    public final int applyAsInt(Object obj) {
+                                        int intValue;
+                                        intValue = ((Integer) obj).intValue();
+                                        return intValue;
+                                    }
+                                })
+                        .toArray(),
+                notifyNow);
     }
 
-    public void unregisterTelephonyCallback(int subId, String pkgName, String attributionTag, TelephonyCallback callback, boolean notifyNow) {
-        listenFromCallback(false, false, subId, pkgName, attributionTag, callback, new int[0], notifyNow);
+    public void unregisterTelephonyCallback(
+            int subId,
+            String pkgName,
+            String attributionTag,
+            TelephonyCallback callback,
+            boolean notifyNow) {
+        listenFromCallback(
+                false, false, subId, pkgName, attributionTag, callback, new int[0], notifyNow);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    static class CarrierPrivilegesCallbackWrapper extends ICarrierPrivilegesCallback.Stub implements ListenerExecutor {
+    static class CarrierPrivilegesCallbackWrapper extends ICarrierPrivilegesCallback.Stub
+            implements ListenerExecutor {
         private final WeakReference<TelephonyManager.CarrierPrivilegesCallback> mCallback;
         private final Executor mExecutor;
 
-        CarrierPrivilegesCallbackWrapper(TelephonyManager.CarrierPrivilegesCallback callback, Executor executor) {
+        CarrierPrivilegesCallbackWrapper(
+                TelephonyManager.CarrierPrivilegesCallback callback, Executor executor) {
             this.mCallback = new WeakReference<>(callback);
             this.mExecutor = executor;
         }
 
         @Override // com.android.internal.telephony.ICarrierPrivilegesCallback
-        public void onCarrierPrivilegesChanged(List<String> privilegedPackageNames, int[] privilegedUids) {
+        public void onCarrierPrivilegesChanged(
+                List<String> privilegedPackageNames, int[] privilegedUids) {
             final Set<String> privilegedPkgNamesSet = Set.copyOf(privilegedPackageNames);
-            final Set<Integer> privilegedUidsSet = (Set) Arrays.stream(privilegedUids).boxed().collect(Collectors.toSet());
-            Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.TelephonyRegistryManager$CarrierPrivilegesCallbackWrapper$$ExternalSyntheticLambda4
-                @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    TelephonyRegistryManager.CarrierPrivilegesCallbackWrapper.this.lambda$onCarrierPrivilegesChanged$1(privilegedPkgNamesSet, privilegedUidsSet);
-                }
-            });
+            final Set<Integer> privilegedUidsSet =
+                    (Set) Arrays.stream(privilegedUids).boxed().collect(Collectors.toSet());
+            Binder.withCleanCallingIdentity(
+                    new FunctionalUtils
+                            .ThrowingRunnable() { // from class:
+                                                  // android.telephony.TelephonyRegistryManager$CarrierPrivilegesCallbackWrapper$$ExternalSyntheticLambda4
+                        @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
+                        public final void runOrThrow() {
+                            TelephonyRegistryManager.CarrierPrivilegesCallbackWrapper.this
+                                    .lambda$onCarrierPrivilegesChanged$1(
+                                            privilegedPkgNamesSet, privilegedUidsSet);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onCarrierPrivilegesChanged$1(final Set privilegedPkgNamesSet, final Set privilegedUidsSet) throws Exception {
+        public /* synthetic */ void lambda$onCarrierPrivilegesChanged$1(
+                final Set privilegedPkgNamesSet, final Set privilegedUidsSet) throws Exception {
             Executor executor = this.mExecutor;
-            WeakReference<TelephonyManager.CarrierPrivilegesCallback> weakReference = this.mCallback;
+            WeakReference<TelephonyManager.CarrierPrivilegesCallback> weakReference =
+                    this.mCallback;
             Objects.requireNonNull(weakReference);
-            executeSafely(executor, new TelephonyRegistryManager$CarrierPrivilegesCallbackWrapper$$ExternalSyntheticLambda1(weakReference), new ListenerExecutor.ListenerOperation() { // from class: android.telephony.TelephonyRegistryManager$CarrierPrivilegesCallbackWrapper$$ExternalSyntheticLambda3
-                @Override // com.android.internal.listeners.ListenerExecutor.ListenerOperation
-                public final void operate(Object obj) {
-                    ((TelephonyManager.CarrierPrivilegesCallback) obj).onCarrierPrivilegesChanged(privilegedPkgNamesSet, privilegedUidsSet);
-                }
-            });
+            executeSafely(
+                    executor,
+                    new TelephonyRegistryManager$CarrierPrivilegesCallbackWrapper$$ExternalSyntheticLambda1(
+                            weakReference),
+                    new ListenerExecutor
+                            .ListenerOperation() { // from class:
+                                                   // android.telephony.TelephonyRegistryManager$CarrierPrivilegesCallbackWrapper$$ExternalSyntheticLambda3
+                        @Override // com.android.internal.listeners.ListenerExecutor.ListenerOperation
+                        public final void operate(Object obj) {
+                            ((TelephonyManager.CarrierPrivilegesCallback) obj)
+                                    .onCarrierPrivilegesChanged(
+                                            privilegedPkgNamesSet, privilegedUidsSet);
+                        }
+                    });
         }
 
         @Override // com.android.internal.telephony.ICarrierPrivilegesCallback
         public void onCarrierServiceChanged(final String packageName, final int uid) {
-            Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.TelephonyRegistryManager$CarrierPrivilegesCallbackWrapper$$ExternalSyntheticLambda0
-                @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    TelephonyRegistryManager.CarrierPrivilegesCallbackWrapper.this.lambda$onCarrierServiceChanged$3(packageName, uid);
-                }
-            });
+            Binder.withCleanCallingIdentity(
+                    new FunctionalUtils
+                            .ThrowingRunnable() { // from class:
+                                                  // android.telephony.TelephonyRegistryManager$CarrierPrivilegesCallbackWrapper$$ExternalSyntheticLambda0
+                        @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
+                        public final void runOrThrow() {
+                            TelephonyRegistryManager.CarrierPrivilegesCallbackWrapper.this
+                                    .lambda$onCarrierServiceChanged$3(packageName, uid);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onCarrierServiceChanged$3(final String packageName, final int uid) throws Exception {
+        public /* synthetic */ void lambda$onCarrierServiceChanged$3(
+                final String packageName, final int uid) throws Exception {
             Executor executor = this.mExecutor;
-            WeakReference<TelephonyManager.CarrierPrivilegesCallback> weakReference = this.mCallback;
+            WeakReference<TelephonyManager.CarrierPrivilegesCallback> weakReference =
+                    this.mCallback;
             Objects.requireNonNull(weakReference);
-            executeSafely(executor, new TelephonyRegistryManager$CarrierPrivilegesCallbackWrapper$$ExternalSyntheticLambda1(weakReference), new ListenerExecutor.ListenerOperation() { // from class: android.telephony.TelephonyRegistryManager$CarrierPrivilegesCallbackWrapper$$ExternalSyntheticLambda2
-                @Override // com.android.internal.listeners.ListenerExecutor.ListenerOperation
-                public final void operate(Object obj) {
-                    ((TelephonyManager.CarrierPrivilegesCallback) obj).onCarrierServiceChanged(packageName, uid);
-                }
-            });
+            executeSafely(
+                    executor,
+                    new TelephonyRegistryManager$CarrierPrivilegesCallbackWrapper$$ExternalSyntheticLambda1(
+                            weakReference),
+                    new ListenerExecutor
+                            .ListenerOperation() { // from class:
+                                                   // android.telephony.TelephonyRegistryManager$CarrierPrivilegesCallbackWrapper$$ExternalSyntheticLambda2
+                        @Override // com.android.internal.listeners.ListenerExecutor.ListenerOperation
+                        public final void operate(Object obj) {
+                            ((TelephonyManager.CarrierPrivilegesCallback) obj)
+                                    .onCarrierServiceChanged(packageName, uid);
+                        }
+                    });
         }
     }
 
-    public void addCarrierPrivilegesCallback(int logicalSlotIndex, Executor executor, TelephonyManager.CarrierPrivilegesCallback callback) {
+    public void addCarrierPrivilegesCallback(
+            int logicalSlotIndex,
+            Executor executor,
+            TelephonyManager.CarrierPrivilegesCallback callback) {
         if (callback == null || executor == null) {
             throw new IllegalArgumentException("callback and executor must be non-null");
         }
         synchronized (sCarrierPrivilegeCallbacks) {
-            WeakReference<CarrierPrivilegesCallbackWrapper> existing = sCarrierPrivilegeCallbacks.get(callback);
+            WeakReference<CarrierPrivilegesCallbackWrapper> existing =
+                    sCarrierPrivilegeCallbacks.get(callback);
             if (existing != null && existing.get() != null) {
                 Log.d(TAG, "addCarrierPrivilegesCallback: callback already registered");
                 return;
             }
-            CarrierPrivilegesCallbackWrapper wrapper = new CarrierPrivilegesCallbackWrapper(callback, executor);
+            CarrierPrivilegesCallbackWrapper wrapper =
+                    new CarrierPrivilegesCallbackWrapper(callback, executor);
             sCarrierPrivilegeCallbacks.put(callback, new WeakReference<>(wrapper));
             try {
-                sRegistry.addCarrierPrivilegesCallback(logicalSlotIndex, wrapper, this.mContext.getOpPackageName(), this.mContext.getAttributionTag());
+                sRegistry.addCarrierPrivilegesCallback(
+                        logicalSlotIndex,
+                        wrapper,
+                        this.mContext.getOpPackageName(),
+                        this.mContext.getAttributionTag());
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
         }
     }
 
-    public void removeCarrierPrivilegesCallback(TelephonyManager.CarrierPrivilegesCallback callback) {
+    public void removeCarrierPrivilegesCallback(
+            TelephonyManager.CarrierPrivilegesCallback callback) {
         if (callback == null) {
             throw new IllegalArgumentException("listener must be non-null");
         }
         synchronized (sCarrierPrivilegeCallbacks) {
-            WeakReference<CarrierPrivilegesCallbackWrapper> ref = sCarrierPrivilegeCallbacks.remove(callback);
+            WeakReference<CarrierPrivilegesCallbackWrapper> ref =
+                    sCarrierPrivilegeCallbacks.remove(callback);
             if (ref == null) {
                 return;
             }
@@ -906,20 +1101,26 @@ public class TelephonyRegistryManager {
                 return;
             }
             try {
-                sRegistry.removeCarrierPrivilegesCallback(wrapper, this.mContext.getOpPackageName());
+                sRegistry.removeCarrierPrivilegesCallback(
+                        wrapper, this.mContext.getOpPackageName());
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
         }
     }
 
-    public void notifyCarrierPrivilegesChanged(int logicalSlotIndex, Set<String> privilegedPackageNames, Set<Integer> privilegedUids) {
+    public void notifyCarrierPrivilegesChanged(
+            int logicalSlotIndex, Set<String> privilegedPackageNames, Set<Integer> privilegedUids) {
         if (privilegedPackageNames == null || privilegedUids == null) {
-            throw new IllegalArgumentException("privilegedPackageNames and privilegedUids must be non-null");
+            throw new IllegalArgumentException(
+                    "privilegedPackageNames and privilegedUids must be non-null");
         }
         try {
             List<String> pkgList = List.copyOf(privilegedPackageNames);
-            int[] uids = privilegedUids.stream().mapToInt(new AudioPort$$ExternalSyntheticLambda0()).toArray();
+            int[] uids =
+                    privilegedUids.stream()
+                            .mapToInt(new AudioPort$$ExternalSyntheticLambda0())
+                            .toArray();
             sRegistry.notifyCarrierPrivilegesChanged(logicalSlotIndex, pkgList, uids);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
@@ -934,7 +1135,8 @@ public class TelephonyRegistryManager {
         }
     }
 
-    public void addCarrierConfigChangedListener(Executor executor, CarrierConfigManager.CarrierConfigChangeListener listener) {
+    public void addCarrierConfigChangedListener(
+            Executor executor, CarrierConfigManager.CarrierConfigChangeListener listener) {
         Objects.requireNonNull(executor, "Executor should be non-null.");
         Objects.requireNonNull(listener, "Listener should be non-null.");
         if (this.mCarrierConfigChangeListenerMap.get(listener) != null) {
@@ -943,7 +1145,8 @@ public class TelephonyRegistryManager {
         }
         ICarrierConfigChangeListener callback = new AnonymousClass3(executor, listener);
         try {
-            sRegistry.addCarrierConfigChangeListener(callback, this.mContext.getOpPackageName(), this.mContext.getAttributionTag());
+            sRegistry.addCarrierConfigChangeListener(
+                    callback, this.mContext.getOpPackageName(), this.mContext.getAttributionTag());
             this.mCarrierConfigChangeListenerMap.put(listener, callback);
         } catch (RemoteException re) {
             throw re.rethrowFromSystemServer();
@@ -955,45 +1158,62 @@ public class TelephonyRegistryManager {
         final /* synthetic */ Executor val$executor;
         final /* synthetic */ CarrierConfigManager.CarrierConfigChangeListener val$listener;
 
-        AnonymousClass3(Executor executor, CarrierConfigManager.CarrierConfigChangeListener carrierConfigChangeListener) {
+        AnonymousClass3(
+                Executor executor,
+                CarrierConfigManager.CarrierConfigChangeListener carrierConfigChangeListener) {
             this.val$executor = executor;
             this.val$listener = carrierConfigChangeListener;
         }
 
         @Override // com.android.internal.telephony.ICarrierConfigChangeListener
-        public void onCarrierConfigChanged(final int slotIndex, final int subId, final int carrierId, final int specificCarrierId) {
-            Log.d(TelephonyRegistryManager.TAG, "onCarrierConfigChanged call in ICarrierConfigChangeListener callback");
+        public void onCarrierConfigChanged(
+                final int slotIndex,
+                final int subId,
+                final int carrierId,
+                final int specificCarrierId) {
+            Log.d(
+                    TelephonyRegistryManager.TAG,
+                    "onCarrierConfigChanged call in ICarrierConfigChangeListener callback");
             long identify = Binder.clearCallingIdentity();
             try {
                 Executor executor = this.val$executor;
-                final CarrierConfigManager.CarrierConfigChangeListener carrierConfigChangeListener = this.val$listener;
-                executor.execute(new Runnable() { // from class: android.telephony.TelephonyRegistryManager$3$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        CarrierConfigManager.CarrierConfigChangeListener.this.onCarrierConfigChanged(slotIndex, subId, carrierId, specificCarrierId);
-                    }
-                });
+                final CarrierConfigManager.CarrierConfigChangeListener carrierConfigChangeListener =
+                        this.val$listener;
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.TelephonyRegistryManager$3$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                CarrierConfigManager.CarrierConfigChangeListener.this
+                                        .onCarrierConfigChanged(
+                                                slotIndex, subId, carrierId, specificCarrierId);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(identify);
             }
         }
     }
 
-    public void removeCarrierConfigChangedListener(CarrierConfigManager.CarrierConfigChangeListener listener) {
+    public void removeCarrierConfigChangedListener(
+            CarrierConfigManager.CarrierConfigChangeListener listener) {
         Objects.requireNonNull(listener, "Listener should be non-null.");
         if (this.mCarrierConfigChangeListenerMap.get(listener) == null) {
             Log.e(TAG, "removeCarrierConfigChangedListener: listener was not present");
             return;
         }
         try {
-            sRegistry.removeCarrierConfigChangeListener(this.mCarrierConfigChangeListenerMap.get(listener), this.mContext.getOpPackageName());
+            sRegistry.removeCarrierConfigChangeListener(
+                    this.mCarrierConfigChangeListenerMap.get(listener),
+                    this.mContext.getOpPackageName());
             this.mCarrierConfigChangeListenerMap.remove(listener);
         } catch (RemoteException re) {
             throw re.rethrowFromSystemServer();
         }
     }
 
-    public void notifyCarrierConfigChanged(int slotIndex, int subId, int carrierId, int specificCarrierId) {
+    public void notifyCarrierConfigChanged(
+            int slotIndex, int subId, int carrierId, int specificCarrierId) {
         if (!SubscriptionManager.isValidPhoneId(slotIndex)) {
             Log.e(TAG, "notifyCarrierConfigChanged, ignored: invalid slotIndex " + slotIndex);
             return;

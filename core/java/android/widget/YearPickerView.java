@@ -8,8 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
@@ -38,16 +37,20 @@ class YearPickerView extends ListView {
         Resources res = context.getResources();
         this.mViewSize = res.getDimensionPixelOffset(R.dimen.datepicker_view_animator_height);
         this.mChildSize = res.getDimensionPixelOffset(R.dimen.datepicker_year_label_height);
-        setOnItemClickListener(new AdapterView.OnItemClickListener() { // from class: android.widget.YearPickerView.1
-            @Override // android.widget.AdapterView.OnItemClickListener
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                int year = YearPickerView.this.mAdapter.getYearForPosition(position);
-                YearPickerView.this.mAdapter.setSelection(year);
-                if (YearPickerView.this.mOnYearSelectedListener != null) {
-                    YearPickerView.this.mOnYearSelectedListener.onYearChanged(YearPickerView.this, year);
-                }
-            }
-        });
+        setOnItemClickListener(
+                new AdapterView
+                        .OnItemClickListener() { // from class: android.widget.YearPickerView.1
+                    @Override // android.widget.AdapterView.OnItemClickListener
+                    public void onItemClick(
+                            AdapterView<?> parent, View view, int position, long id) {
+                        int year = YearPickerView.this.mAdapter.getYearForPosition(position);
+                        YearPickerView.this.mAdapter.setSelection(year);
+                        if (YearPickerView.this.mOnYearSelectedListener != null) {
+                            YearPickerView.this.mOnYearSelectedListener.onYearChanged(
+                                    YearPickerView.this, year);
+                        }
+                    }
+                });
         this.mAdapter = new YearAdapter(getContext());
         setAdapter((ListAdapter) this.mAdapter);
     }
@@ -58,15 +61,16 @@ class YearPickerView extends ListView {
 
     public void setYear(final int year) {
         this.mAdapter.setSelection(year);
-        post(new Runnable() { // from class: android.widget.YearPickerView.2
-            @Override // java.lang.Runnable
-            public void run() {
-                int position = YearPickerView.this.mAdapter.getPositionForYear(year);
-                if (position >= 0 && position < YearPickerView.this.getCount()) {
-                    YearPickerView.this.setSelectionCentered(position);
-                }
-            }
-        });
+        post(
+                new Runnable() { // from class: android.widget.YearPickerView.2
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        int position = YearPickerView.this.mAdapter.getPositionForYear(year);
+                        if (position >= 0 && position < YearPickerView.this.getCount()) {
+                            YearPickerView.this.setSelectionCentered(position);
+                        }
+                    }
+                });
     }
 
     public void setSelectionCentered(int position) {

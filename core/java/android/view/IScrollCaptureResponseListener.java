@@ -10,12 +10,13 @@ import android.os.RemoteException;
 public interface IScrollCaptureResponseListener extends IInterface {
     public static final String DESCRIPTOR = "android.view.IScrollCaptureResponseListener";
 
-    void onScrollCaptureResponse(ScrollCaptureResponse scrollCaptureResponse) throws RemoteException;
+    void onScrollCaptureResponse(ScrollCaptureResponse scrollCaptureResponse)
+            throws RemoteException;
 
     public static class Default implements IScrollCaptureResponseListener {
         @Override // android.view.IScrollCaptureResponseListener
-        public void onScrollCaptureResponse(ScrollCaptureResponse response) throws RemoteException {
-        }
+        public void onScrollCaptureResponse(ScrollCaptureResponse response)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +24,7 @@ public interface IScrollCaptureResponseListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IScrollCaptureResponseListener {
+    public abstract static class Stub extends Binder implements IScrollCaptureResponseListener {
         static final int TRANSACTION_onScrollCaptureResponse = 1;
 
         public Stub() {
@@ -61,7 +62,8 @@ public interface IScrollCaptureResponseListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IScrollCaptureResponseListener.DESCRIPTOR);
             }
@@ -71,7 +73,9 @@ public interface IScrollCaptureResponseListener extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ScrollCaptureResponse _arg0 = (ScrollCaptureResponse) data.readTypedObject(ScrollCaptureResponse.CREATOR);
+                    ScrollCaptureResponse _arg0 =
+                            (ScrollCaptureResponse)
+                                    data.readTypedObject(ScrollCaptureResponse.CREATOR);
                     data.enforceNoDataAvail();
                     onScrollCaptureResponse(_arg0);
                     return true;
@@ -97,7 +101,8 @@ public interface IScrollCaptureResponseListener extends IInterface {
             }
 
             @Override // android.view.IScrollCaptureResponseListener
-            public void onScrollCaptureResponse(ScrollCaptureResponse response) throws RemoteException {
+            public void onScrollCaptureResponse(ScrollCaptureResponse response)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IScrollCaptureResponseListener.DESCRIPTOR);

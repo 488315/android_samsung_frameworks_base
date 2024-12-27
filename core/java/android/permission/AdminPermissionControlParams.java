@@ -3,34 +3,46 @@ package android.permission;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class AdminPermissionControlParams implements Parcelable {
-    public static final Parcelable.Creator<AdminPermissionControlParams> CREATOR = new Parcelable.Creator<AdminPermissionControlParams>() { // from class: android.permission.AdminPermissionControlParams.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AdminPermissionControlParams createFromParcel(Parcel in) {
-            String granteePackageName = in.readString();
-            String permission = in.readString();
-            int grantState = in.readInt();
-            boolean mayAdminGrantSensorPermissions = in.readBoolean();
-            return new AdminPermissionControlParams(granteePackageName, permission, grantState, mayAdminGrantSensorPermissions);
-        }
+    public static final Parcelable.Creator<AdminPermissionControlParams> CREATOR =
+            new Parcelable.Creator<
+                    AdminPermissionControlParams>() { // from class:
+                                                      // android.permission.AdminPermissionControlParams.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AdminPermissionControlParams createFromParcel(Parcel in) {
+                    String granteePackageName = in.readString();
+                    String permission = in.readString();
+                    int grantState = in.readInt();
+                    boolean mayAdminGrantSensorPermissions = in.readBoolean();
+                    return new AdminPermissionControlParams(
+                            granteePackageName,
+                            permission,
+                            grantState,
+                            mayAdminGrantSensorPermissions);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AdminPermissionControlParams[] newArray(int size) {
-            return new AdminPermissionControlParams[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AdminPermissionControlParams[] newArray(int size) {
+                    return new AdminPermissionControlParams[size];
+                }
+            };
     private final boolean mCanAdminGrantSensorsPermissions;
     private final int mGrantState;
     private final String mGranteePackageName;
     private final String mPermission;
 
-    public AdminPermissionControlParams(String granteePackageName, String permission, int grantState, boolean canAdminGrantSensorsPermissions) {
+    public AdminPermissionControlParams(
+            String granteePackageName,
+            String permission,
+            int grantState,
+            boolean canAdminGrantSensorsPermissions) {
         Preconditions.checkStringNotEmpty(granteePackageName, "Package name must not be empty.");
         Preconditions.checkStringNotEmpty(permission, "Permission must not be empty.");
         boolean z = true;
@@ -74,6 +86,11 @@ public final class AdminPermissionControlParams implements Parcelable {
     }
 
     public String toString() {
-        return String.format("Grantee %s Permission %s state: %d admin grant of sensors permissions: %b", this.mGranteePackageName, this.mPermission, Integer.valueOf(this.mGrantState), Boolean.valueOf(this.mCanAdminGrantSensorsPermissions));
+        return String.format(
+                "Grantee %s Permission %s state: %d admin grant of sensors permissions: %b",
+                this.mGranteePackageName,
+                this.mPermission,
+                Integer.valueOf(this.mGrantState),
+                Boolean.valueOf(this.mCanAdminGrantSensorsPermissions));
     }
 }

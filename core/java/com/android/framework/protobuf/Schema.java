@@ -1,6 +1,5 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.ArrayDecoders;
 import java.io.IOException;
 
 @CheckReturnValue
@@ -16,11 +15,13 @@ interface Schema<T> {
 
     void makeImmutable(T t);
 
-    void mergeFrom(T t, Reader reader, ExtensionRegistryLite extensionRegistryLite) throws IOException;
+    void mergeFrom(T t, Reader reader, ExtensionRegistryLite extensionRegistryLite)
+            throws IOException;
 
     void mergeFrom(T t, T t2);
 
-    void mergeFrom(T t, byte[] bArr, int i, int i2, ArrayDecoders.Registers registers) throws IOException;
+    void mergeFrom(T t, byte[] bArr, int i, int i2, ArrayDecoders.Registers registers)
+            throws IOException;
 
     T newInstance();
 

@@ -17,7 +17,7 @@ public interface ISatelliteGateway extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISatelliteGateway {
+    public abstract static class Stub extends Binder implements ISatelliteGateway {
         public Stub() {
             attachInterface(this, ISatelliteGateway.DESCRIPTOR);
         }
@@ -48,7 +48,8 @@ public interface ISatelliteGateway extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code == 1598968902) {
                 reply.writeString(ISatelliteGateway.DESCRIPTOR);
                 return true;

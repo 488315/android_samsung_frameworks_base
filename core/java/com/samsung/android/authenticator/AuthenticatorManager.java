@@ -2,7 +2,7 @@ package com.samsung.android.authenticator;
 
 import android.content.res.AssetFileDescriptor;
 import android.os.ParcelFileDescriptor;
-import com.samsung.android.authenticator.SemTrustedApplicationExecutor;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
@@ -20,10 +20,13 @@ final class AuthenticatorManager {
     private static final int MAX_TRUSTED_APP_HANDLE = 999999;
     private static final String TAG = "AM";
     private static AuthenticatorManager sAuthenticatorManager;
-    private final ConcurrentMap<SemTrustedApplicationExecutor.TrustedAppType, TrustedApplication> mReservedTrustedApplications = new ConcurrentHashMap(4);
-    private final ConcurrentMap<AssetFileDescriptor, TrustedApplication> mAssetTrustedApplications = new ConcurrentHashMap();
+    private final ConcurrentMap<SemTrustedApplicationExecutor.TrustedAppType, TrustedApplication>
+            mReservedTrustedApplications = new ConcurrentHashMap(4);
+    private final ConcurrentMap<AssetFileDescriptor, TrustedApplication> mAssetTrustedApplications =
+            new ConcurrentHashMap();
     private final AtomicInteger mAssetTrustedApplicationHandle = new AtomicInteger(1000000);
-    private final ConcurrentMap<File, TrustedApplication> mFileTrustedApplications = new ConcurrentHashMap();
+    private final ConcurrentMap<File, TrustedApplication> mFileTrustedApplications =
+            new ConcurrentHashMap();
     private final AtomicInteger mFileTrustedApplicationHandle = new AtomicInteger(2000000);
 
     static synchronized AuthenticatorManager getInstance() {
@@ -37,8 +40,7 @@ final class AuthenticatorManager {
         return authenticatorManager;
     }
 
-    private AuthenticatorManager() {
-    }
+    private AuthenticatorManager() {}
 
     int load(SemTrustedApplicationExecutor.TrustedAppType type) {
         if (type == null) {
@@ -57,14 +59,21 @@ final class AuthenticatorManager {
         return ta.load();
     }
 
-    private TrustedApplication makeReservedTrustedApplication(SemTrustedApplicationExecutor.TrustedAppType type) {
+    private TrustedApplication makeReservedTrustedApplication(
+            SemTrustedApplicationExecutor.TrustedAppType type) {
         switch (type) {
             case FINGERPRINT_TRUSTED_APP:
-                return new FingerprintTrustedApplication(SemTrustedApplicationExecutor.TrustedAppType.FINGERPRINT_TRUSTED_APP.ordinal());
+                return new FingerprintTrustedApplication(
+                        SemTrustedApplicationExecutor.TrustedAppType.FINGERPRINT_TRUSTED_APP
+                                .ordinal());
             case DEVICE_ROOT_KEY_TRUSTED_APP:
-                return new DeviceRootKeyTrustedApplication(SemTrustedApplicationExecutor.TrustedAppType.DEVICE_ROOT_KEY_TRUSTED_APP.ordinal());
+                return new DeviceRootKeyTrustedApplication(
+                        SemTrustedApplicationExecutor.TrustedAppType.DEVICE_ROOT_KEY_TRUSTED_APP
+                                .ordinal());
             case ASSET_DOWNLOADER_TRUSTED_APP:
-                return new TadTrustedApplication(SemTrustedApplicationExecutor.TrustedAppType.ASSET_DOWNLOADER_TRUSTED_APP.ordinal());
+                return new TadTrustedApplication(
+                        SemTrustedApplicationExecutor.TrustedAppType.ASSET_DOWNLOADER_TRUSTED_APP
+                                .ordinal());
             default:
                 AuthenticatorLog.e(TAG, "Not supported type");
                 return null;
@@ -78,14 +87,23 @@ final class AuthenticatorManager {
         }
         TrustedApplication ta = this.mAssetTrustedApplications.get(file);
         if (ta == null) {
-            ta = makeAssetTrustedApplication(SemTrustedApplicationExecutor.TrustedAppAssetType.PASS_AUTHENTICATOR, file);
+            ta =
+                    makeAssetTrustedApplication(
+                            SemTrustedApplicationExecutor.TrustedAppAssetType.PASS_AUTHENTICATOR,
+                            file);
             this.mAssetTrustedApplications.put(file, ta);
         }
         return ta.load();
     }
 
-    private TrustedApplication makeAssetTrustedApplication(SemTrustedApplicationExecutor.TrustedAppAssetType type, AssetFileDescriptor file) {
-        return new DownloadedTrustedApplication(this.mAssetTrustedApplicationHandle.getAndIncrement(), type, file.getParcelFileDescriptor(), file.getStartOffset(), file.getLength());
+    private TrustedApplication makeAssetTrustedApplication(
+            SemTrustedApplicationExecutor.TrustedAppAssetType type, AssetFileDescriptor file) {
+        return new DownloadedTrustedApplication(
+                this.mAssetTrustedApplicationHandle.getAndIncrement(),
+                type,
+                file.getParcelFileDescriptor(),
+                file.getStartOffset(),
+                file.getLength());
     }
 
     int load(File file) {
@@ -108,7 +126,12 @@ final class AuthenticatorManager {
     private TrustedApplication makeFileTrustedApplication(File file) {
         try {
             ParcelFileDescriptor pfd = ParcelFileDescriptor.open(file, 268435456);
-            return new DownloadedTrustedApplication(this.mFileTrustedApplicationHandle.getAndIncrement(), SemTrustedApplicationExecutor.TrustedAppAssetType.PASS_AUTHENTICATOR, pfd, 0L, pfd.getStatSize());
+            return new DownloadedTrustedApplication(
+                    this.mFileTrustedApplicationHandle.getAndIncrement(),
+                    SemTrustedApplicationExecutor.TrustedAppAssetType.PASS_AUTHENTICATOR,
+                    pfd,
+                    0L,
+                    pfd.getStatSize());
         } catch (FileNotFoundException e) {
             AuthenticatorLog.e(TAG, "open failed");
             return null;
@@ -139,7 +162,8 @@ final class AuthenticatorManager {
     }
 
     private TrustedApplication getReservedTrustedApplication(int taHandle) {
-        for (Map.Entry<SemTrustedApplicationExecutor.TrustedAppType, TrustedApplication> entry : this.mReservedTrustedApplications.entrySet()) {
+        for (Map.Entry<SemTrustedApplicationExecutor.TrustedAppType, TrustedApplication> entry :
+                this.mReservedTrustedApplications.entrySet()) {
             TrustedApplication ta = entry.getValue();
             if (ta != null && taHandle == ta.getHandle()) {
                 return ta;
@@ -149,7 +173,8 @@ final class AuthenticatorManager {
     }
 
     private TrustedApplication getAssetTrustedApplication(int taHandle) {
-        for (Map.Entry<AssetFileDescriptor, TrustedApplication> entry : this.mAssetTrustedApplications.entrySet()) {
+        for (Map.Entry<AssetFileDescriptor, TrustedApplication> entry :
+                this.mAssetTrustedApplications.entrySet()) {
             TrustedApplication ta = entry.getValue();
             if (ta != null && taHandle == ta.getHandle()) {
                 return ta;
@@ -169,7 +194,15 @@ final class AuthenticatorManager {
     }
 
     private boolean isReservedTrustedApplication(int taHandle) {
-        return taHandle == SemTrustedApplicationExecutor.TrustedAppType.FINGERPRINT_TRUSTED_APP.ordinal() || taHandle == SemTrustedApplicationExecutor.TrustedAppType.DEVICE_ROOT_KEY_TRUSTED_APP.ordinal() || taHandle == SemTrustedApplicationExecutor.TrustedAppType.ASSET_DOWNLOADER_TRUSTED_APP.ordinal();
+        return taHandle
+                        == SemTrustedApplicationExecutor.TrustedAppType.FINGERPRINT_TRUSTED_APP
+                                .ordinal()
+                || taHandle
+                        == SemTrustedApplicationExecutor.TrustedAppType.DEVICE_ROOT_KEY_TRUSTED_APP
+                                .ordinal()
+                || taHandle
+                        == SemTrustedApplicationExecutor.TrustedAppType.ASSET_DOWNLOADER_TRUSTED_APP
+                                .ordinal();
     }
 
     private boolean isAssetTrustedApplication(int taHandle) {

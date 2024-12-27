@@ -2,6 +2,7 @@ package android.hardware.audio.common.V2_0;
 
 import android.os.HidlSupport;
 import android.os.HwBlob;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -22,15 +23,35 @@ public final class Uuid {
             return false;
         }
         Uuid uuid = (Uuid) obj;
-        return this.timeLow == uuid.timeLow && this.timeMid == uuid.timeMid && this.versionAndTimeHigh == uuid.versionAndTimeHigh && this.variantAndClockSeqHigh == uuid.variantAndClockSeqHigh && HidlSupport.deepEquals(this.node, uuid.node);
+        return this.timeLow == uuid.timeLow
+                && this.timeMid == uuid.timeMid
+                && this.versionAndTimeHigh == uuid.versionAndTimeHigh
+                && this.variantAndClockSeqHigh == uuid.variantAndClockSeqHigh
+                && HidlSupport.deepEquals(this.node, uuid.node);
     }
 
     public final int hashCode() {
-        return Objects.hash(AudioConfig$$ExternalSyntheticOutline0.m(this.timeLow), Integer.valueOf(HidlSupport.deepHashCode(Short.valueOf(this.timeMid))), Integer.valueOf(HidlSupport.deepHashCode(Short.valueOf(this.versionAndTimeHigh))), Integer.valueOf(HidlSupport.deepHashCode(Short.valueOf(this.variantAndClockSeqHigh))), Integer.valueOf(HidlSupport.deepHashCode(this.node)));
+        return Objects.hash(
+                AudioConfig$$ExternalSyntheticOutline0.m(this.timeLow),
+                Integer.valueOf(HidlSupport.deepHashCode(Short.valueOf(this.timeMid))),
+                Integer.valueOf(HidlSupport.deepHashCode(Short.valueOf(this.versionAndTimeHigh))),
+                Integer.valueOf(
+                        HidlSupport.deepHashCode(Short.valueOf(this.variantAndClockSeqHigh))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.node)));
     }
 
     public final String toString() {
-        return "{.timeLow = " + this.timeLow + ", .timeMid = " + ((int) this.timeMid) + ", .versionAndTimeHigh = " + ((int) this.versionAndTimeHigh) + ", .variantAndClockSeqHigh = " + ((int) this.variantAndClockSeqHigh) + ", .node = " + Arrays.toString(this.node) + "}";
+        return "{.timeLow = "
+                + this.timeLow
+                + ", .timeMid = "
+                + ((int) this.timeMid)
+                + ", .versionAndTimeHigh = "
+                + ((int) this.versionAndTimeHigh)
+                + ", .variantAndClockSeqHigh = "
+                + ((int) this.variantAndClockSeqHigh)
+                + ", .node = "
+                + Arrays.toString(this.node)
+                + "}";
     }
 
     public final void writeEmbeddedToBlob(HwBlob hwBlob, long j) {

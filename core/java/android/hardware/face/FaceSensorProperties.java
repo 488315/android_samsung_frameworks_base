@@ -2,6 +2,7 @@ package android.hardware.face;
 
 import android.hardware.biometrics.ComponentInfoInternal;
 import android.hardware.biometrics.SensorProperties;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -15,18 +16,25 @@ public class FaceSensorProperties extends SensorProperties {
     final int mSensorType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SensorType {
-    }
+    public @interface SensorType {}
 
     public static FaceSensorProperties from(FaceSensorPropertiesInternal internalProp) {
         List<SensorProperties.ComponentInfo> componentInfo = new ArrayList<>();
         for (ComponentInfoInternal internalComp : internalProp.componentInfo) {
             componentInfo.add(SensorProperties.ComponentInfo.from(internalComp));
         }
-        return new FaceSensorProperties(internalProp.sensorId, internalProp.sensorStrength, componentInfo, internalProp.sensorType);
+        return new FaceSensorProperties(
+                internalProp.sensorId,
+                internalProp.sensorStrength,
+                componentInfo,
+                internalProp.sensorType);
     }
 
-    public FaceSensorProperties(int sensorId, int sensorStrength, List<SensorProperties.ComponentInfo> componentInfo, int sensorType) {
+    public FaceSensorProperties(
+            int sensorId,
+            int sensorStrength,
+            List<SensorProperties.ComponentInfo> componentInfo,
+            int sensorType) {
         super(sensorId, sensorStrength, componentInfo);
         this.mSensorType = sensorType;
     }

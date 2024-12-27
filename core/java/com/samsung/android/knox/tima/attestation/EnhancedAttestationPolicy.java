@@ -8,37 +8,42 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Process;
 import android.util.Log;
-import com.samsung.android.knox.tima.attestation.IEnhancedAttestation;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /* loaded from: classes6.dex */
 public class EnhancedAttestationPolicy {
-    private static final String EA_BIND_ACTION = "com.samsung.android.knox.intent.action.BIND_KNOX_EA_SERVICE";
-    private static final String EA_PACKAGE_CLASS = "com.samsung.android.knox.attestation.controller.SemEnhancedAttestation";
+    private static final String EA_BIND_ACTION =
+            "com.samsung.android.knox.intent.action.BIND_KNOX_EA_SERVICE";
+    private static final String EA_PACKAGE_CLASS =
+            "com.samsung.android.knox.attestation.controller.SemEnhancedAttestation";
     private static final String EA_PACKAGE_NAME = "com.samsung.android.knox.attestation";
     private static final String TAG = "SEMEAPolicy";
     private static EnhancedAttestationPolicy mEaPolicy;
     private Context mContext;
     private final HashMap<String, RequestInfo> mTrackOpsHash = new HashMap<>();
-    private ServiceConnection conn = new ServiceConnection() { // from class: com.samsung.android.knox.tima.attestation.EnhancedAttestationPolicy.1
-        @Override // android.content.ServiceConnection
-        public void onServiceDisconnected(ComponentName name) {
-            synchronized (EnhancedAttestationPolicy.class) {
-                EnhancedAttestationPolicy.this.mEnhancedAttestation = null;
-                Log.i(EnhancedAttestationPolicy.TAG, "On onServiceDisconnected");
-            }
-        }
+    private ServiceConnection conn =
+            new ServiceConnection() { // from class:
+                                      // com.samsung.android.knox.tima.attestation.EnhancedAttestationPolicy.1
+                @Override // android.content.ServiceConnection
+                public void onServiceDisconnected(ComponentName name) {
+                    synchronized (EnhancedAttestationPolicy.class) {
+                        EnhancedAttestationPolicy.this.mEnhancedAttestation = null;
+                        Log.i(EnhancedAttestationPolicy.TAG, "On onServiceDisconnected");
+                    }
+                }
 
-        @Override // android.content.ServiceConnection
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            synchronized (EnhancedAttestationPolicy.class) {
-                EnhancedAttestationPolicy.this.mEnhancedAttestation = IEnhancedAttestation.Stub.asInterface(service);
-                Log.i(EnhancedAttestationPolicy.TAG, "On onServiceConnected");
-            }
-            EnhancedAttestationPolicy.this.handlePendingRequest();
-        }
-    };
+                @Override // android.content.ServiceConnection
+                public void onServiceConnected(ComponentName name, IBinder service) {
+                    synchronized (EnhancedAttestationPolicy.class) {
+                        EnhancedAttestationPolicy.this.mEnhancedAttestation =
+                                IEnhancedAttestation.Stub.asInterface(service);
+                        Log.i(EnhancedAttestationPolicy.TAG, "On onServiceConnected");
+                    }
+                    EnhancedAttestationPolicy.this.handlePendingRequest();
+                }
+            };
     private IEnhancedAttestation mEnhancedAttestation = null;
     private boolean mProcessPendingRequest = false;
 
@@ -120,7 +125,8 @@ public class EnhancedAttestationPolicy {
         startAttestation(auk, nonce, cb, false);
     }
 
-    private void startAttestation(String auk, String nonce, EnhancedAttestationPolicyCallback cb, boolean onPrem) {
+    private void startAttestation(
+            String auk, String nonce, EnhancedAttestationPolicyCallback cb, boolean onPrem) {
         if (cb == null) {
             Log.e(TAG, "startAttestation: cb == null");
             return;
@@ -136,7 +142,10 @@ public class EnhancedAttestationPolicy {
             return;
         }
         if (nonce == null || nonce.getBytes().length < 16 || nonce.getBytes().length > 128) {
-            Log.e(TAG, "nonce len: " + (nonce == null ? "null" : Integer.valueOf(nonce.getBytes().length)));
+            Log.e(
+                    TAG,
+                    "nonce len: "
+                            + (nonce == null ? "null" : Integer.valueOf(nonce.getBytes().length)));
             cb.onAttestationFinished(getErrorResult(nonce, -5));
             return;
         }
@@ -152,7 +161,11 @@ public class EnhancedAttestationPolicy {
                 return;
             }
             if (this.mEnhancedAttestation != null) {
-                this.mEnhancedAttestation.enhancedAttestation(requestInfo.mNonce, requestInfo.mAuk, requestInfo.mCb.getEaAttestationCb(nonce), requestInfo.mOnPrem);
+                this.mEnhancedAttestation.enhancedAttestation(
+                        requestInfo.mNonce,
+                        requestInfo.mAuk,
+                        requestInfo.mCb.getEaAttestationCb(nonce),
+                        requestInfo.mOnPrem);
             }
             Log.d(TAG, "enhancedAttestation requested");
         } catch (Exception e) {
@@ -187,7 +200,8 @@ public class EnhancedAttestationPolicy {
             Intent i = new Intent();
             i.setClassName(EA_PACKAGE_NAME, EA_PACKAGE_CLASS);
             i.setAction(EA_BIND_ACTION);
-            boolean result = this.mContext.bindServiceAsUser(i, this.conn, 1, Process.myUserHandle());
+            boolean result =
+                    this.mContext.bindServiceAsUser(i, this.conn, 1, Process.myUserHandle());
             Log.i(TAG, "bind service:" + result);
             return result;
         }
@@ -227,7 +241,12 @@ public class EnhancedAttestationPolicy {
 
     synchronized void removeFromTrackMap(String nonce) {
         this.mTrackOpsHash.remove(nonce);
-        Log.d(TAG, "removeFromTrackMap: size: " + this.mTrackOpsHash.size() + ", pending: " + this.mProcessPendingRequest);
+        Log.d(
+                TAG,
+                "removeFromTrackMap: size: "
+                        + this.mTrackOpsHash.size()
+                        + ", pending: "
+                        + this.mProcessPendingRequest);
         if (this.mTrackOpsHash.isEmpty() && !this.mProcessPendingRequest) {
             Log.i(TAG, "Map is empty, call unBindService: ");
             this.mEnhancedAttestation = null;
@@ -249,7 +268,8 @@ public class EnhancedAttestationPolicy {
         private String mNonce;
         private boolean mOnPrem;
 
-        RequestInfo(String auk, String nonce, EnhancedAttestationPolicyCallback cb, boolean onPrem) {
+        RequestInfo(
+                String auk, String nonce, EnhancedAttestationPolicyCallback cb, boolean onPrem) {
             this.mAuk = auk;
             this.mNonce = nonce;
             this.mCb = cb;

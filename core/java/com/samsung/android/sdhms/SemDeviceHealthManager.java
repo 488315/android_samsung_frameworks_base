@@ -5,14 +5,18 @@ import android.content.Context;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+
 import com.sec.android.sdhms.ISamsungDeviceHealthManager;
+
+import vendor.samsung.hardware.thermal.V1_0.SehTempStatus;
+
 import java.util.Collections;
 import java.util.List;
-import vendor.samsung.hardware.thermal.V1_0.SehTempStatus;
 
 /* loaded from: classes6.dex */
 public class SemDeviceHealthManager {
-    public static final String ACTION_THERMAL_THROTTLING_DELTA_CHANGED = "com.sec.android.sdhms.action.THERMAL_THROTTLING_DELTA_CHANGED";
+    public static final String ACTION_THERMAL_THROTTLING_DELTA_CHANGED =
+            "com.sec.android.sdhms.action.THERMAL_THROTTLING_DELTA_CHANGED";
     public static final int DRAIN_TYPE_AMBIENT_DISPLAY = 3;
     public static final int DRAIN_TYPE_BLUETOOTH = 6;
     public static final int DRAIN_TYPE_CELL_STANDBY = 4;
@@ -34,7 +38,8 @@ public class SemDeviceHealthManager {
     public static final int INTERVAL_TYPE_PERIODICALLY = 0;
     private ISamsungDeviceHealthManager mService;
 
-    public List<SemBatteryStats> getBatteryStats(int intervalType, long startTimestamp, long endTimestamp, boolean includeDetails) {
+    public List<SemBatteryStats> getBatteryStats(
+            int intervalType, long startTimestamp, long endTimestamp, boolean includeDetails) {
         if (startTimestamp > endTimestamp) {
             return Collections.emptyList();
         }
@@ -43,7 +48,9 @@ public class SemDeviceHealthManager {
             return null;
         }
         try {
-            List<SemBatteryStats> result = service.getBatteryStats(intervalType, startTimestamp, endTimestamp, includeDetails);
+            List<SemBatteryStats> result =
+                    service.getBatteryStats(
+                            intervalType, startTimestamp, endTimestamp, includeDetails);
             return result;
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -51,7 +58,8 @@ public class SemDeviceHealthManager {
         }
     }
 
-    public List<SemBatteryEventHistory> getBatteryEventHistory(long startTimestamp, long endTimestamp, int historyTypes) {
+    public List<SemBatteryEventHistory> getBatteryEventHistory(
+            long startTimestamp, long endTimestamp, int historyTypes) {
         if (startTimestamp > endTimestamp) {
             return Collections.emptyList();
         }
@@ -60,7 +68,8 @@ public class SemDeviceHealthManager {
             return null;
         }
         try {
-            List<SemBatteryEventHistory> result = service.getBatteryEventHistory(startTimestamp, endTimestamp, historyTypes);
+            List<SemBatteryEventHistory> result =
+                    service.getBatteryEventHistory(startTimestamp, endTimestamp, historyTypes);
             return result;
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -107,7 +116,8 @@ public class SemDeviceHealthManager {
             return null;
         }
         try {
-            List<SemProcessUsageStats> result = service.getProcessUsageStats(startTimestamp, endTimestamp);
+            List<SemProcessUsageStats> result =
+                    service.getProcessUsageStats(startTimestamp, endTimestamp);
             return result;
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -124,7 +134,8 @@ public class SemDeviceHealthManager {
             return null;
         }
         try {
-            List<SemNetworkUsageStats> result = service.getNetworkUsageStats(startTimestamp, endTimestamp);
+            List<SemNetworkUsageStats> result =
+                    service.getNetworkUsageStats(startTimestamp, endTimestamp);
             return result;
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -191,12 +202,16 @@ public class SemDeviceHealthManager {
             this.mService = ISamsungDeviceHealthManager.Stub.asInterface(binder);
             if (this.mService != null) {
                 try {
-                    binder.linkToDeath(new IBinder.DeathRecipient() { // from class: com.samsung.android.sdhms.SemDeviceHealthManager.1
-                        @Override // android.os.IBinder.DeathRecipient
-                        public void binderDied() {
-                            SemDeviceHealthManager.this.mService = null;
-                        }
-                    }, 0);
+                    binder.linkToDeath(
+                            new IBinder
+                                    .DeathRecipient() { // from class:
+                                                        // com.samsung.android.sdhms.SemDeviceHealthManager.1
+                                @Override // android.os.IBinder.DeathRecipient
+                                public void binderDied() {
+                                    SemDeviceHealthManager.this.mService = null;
+                                }
+                            },
+                            0);
                 } catch (RemoteException e) {
                     e.printStackTrace();
                 }

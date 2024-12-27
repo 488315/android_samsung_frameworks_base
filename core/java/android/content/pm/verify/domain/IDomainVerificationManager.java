@@ -6,15 +6,18 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
 public interface IDomainVerificationManager extends IInterface {
-    public static final String DESCRIPTOR = "android.content.pm.verify.domain.IDomainVerificationManager";
+    public static final String DESCRIPTOR =
+            "android.content.pm.verify.domain.IDomainVerificationManager";
 
     DomainVerificationInfo getDomainVerificationInfo(String str) throws RemoteException;
 
-    DomainVerificationUserState getDomainVerificationUserState(String str, int i) throws RemoteException;
+    DomainVerificationUserState getDomainVerificationUserState(String str, int i)
+            throws RemoteException;
 
     List<DomainOwner> getOwnersForDomain(String str, int i) throws RemoteException;
 
@@ -22,11 +25,13 @@ public interface IDomainVerificationManager extends IInterface {
 
     List<String> queryValidVerificationPackageNames() throws RemoteException;
 
-    void setDomainVerificationLinkHandlingAllowed(String str, boolean z, int i) throws RemoteException;
+    void setDomainVerificationLinkHandlingAllowed(String str, boolean z, int i)
+            throws RemoteException;
 
     int setDomainVerificationStatus(String str, DomainSet domainSet, int i) throws RemoteException;
 
-    int setDomainVerificationUserSelection(String str, DomainSet domainSet, boolean z, int i) throws RemoteException;
+    int setDomainVerificationUserSelection(String str, DomainSet domainSet, boolean z, int i)
+            throws RemoteException;
 
     void setUriRelativeFilterGroups(String str, Bundle bundle) throws RemoteException;
 
@@ -37,40 +42,47 @@ public interface IDomainVerificationManager extends IInterface {
         }
 
         @Override // android.content.pm.verify.domain.IDomainVerificationManager
-        public DomainVerificationInfo getDomainVerificationInfo(String packageName) throws RemoteException {
+        public DomainVerificationInfo getDomainVerificationInfo(String packageName)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.verify.domain.IDomainVerificationManager
-        public DomainVerificationUserState getDomainVerificationUserState(String packageName, int userId) throws RemoteException {
+        public DomainVerificationUserState getDomainVerificationUserState(
+                String packageName, int userId) throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.verify.domain.IDomainVerificationManager
-        public List<DomainOwner> getOwnersForDomain(String domain, int userId) throws RemoteException {
+        public List<DomainOwner> getOwnersForDomain(String domain, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.verify.domain.IDomainVerificationManager
-        public int setDomainVerificationStatus(String domainSetId, DomainSet domains, int state) throws RemoteException {
+        public int setDomainVerificationStatus(String domainSetId, DomainSet domains, int state)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.content.pm.verify.domain.IDomainVerificationManager
-        public void setDomainVerificationLinkHandlingAllowed(String packageName, boolean allowed, int userId) throws RemoteException {
-        }
+        public void setDomainVerificationLinkHandlingAllowed(
+                String packageName, boolean allowed, int userId) throws RemoteException {}
 
         @Override // android.content.pm.verify.domain.IDomainVerificationManager
-        public int setDomainVerificationUserSelection(String domainSetId, DomainSet domains, boolean enabled, int userId) throws RemoteException {
+        public int setDomainVerificationUserSelection(
+                String domainSetId, DomainSet domains, boolean enabled, int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.content.pm.verify.domain.IDomainVerificationManager
-        public void setUriRelativeFilterGroups(String packageName, Bundle domainToGroupsBundle) throws RemoteException {
-        }
+        public void setUriRelativeFilterGroups(String packageName, Bundle domainToGroupsBundle)
+                throws RemoteException {}
 
         @Override // android.content.pm.verify.domain.IDomainVerificationManager
-        public Bundle getUriRelativeFilterGroups(String packageName, List<String> domains) throws RemoteException {
+        public Bundle getUriRelativeFilterGroups(String packageName, List<String> domains)
+                throws RemoteException {
             return null;
         }
 
@@ -80,7 +92,7 @@ public interface IDomainVerificationManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDomainVerificationManager {
+    public abstract static class Stub extends Binder implements IDomainVerificationManager {
         static final int TRANSACTION_getDomainVerificationInfo = 2;
         static final int TRANSACTION_getDomainVerificationUserState = 3;
         static final int TRANSACTION_getOwnersForDomain = 4;
@@ -142,7 +154,8 @@ public interface IDomainVerificationManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDomainVerificationManager.DESCRIPTOR);
             }
@@ -167,7 +180,8 @@ public interface IDomainVerificationManager extends IInterface {
                     String _arg02 = data.readString();
                     int _arg1 = data.readInt();
                     data.enforceNoDataAvail();
-                    DomainVerificationUserState _result3 = getDomainVerificationUserState(_arg02, _arg1);
+                    DomainVerificationUserState _result3 =
+                            getDomainVerificationUserState(_arg02, _arg1);
                     reply.writeNoException();
                     reply.writeTypedObject(_result3, 1);
                     return true;
@@ -202,7 +216,8 @@ public interface IDomainVerificationManager extends IInterface {
                     boolean _arg23 = data.readBoolean();
                     int _arg3 = data.readInt();
                     data.enforceNoDataAvail();
-                    int _result6 = setDomainVerificationUserSelection(_arg06, _arg15, _arg23, _arg3);
+                    int _result6 =
+                            setDomainVerificationUserSelection(_arg06, _arg15, _arg23, _arg3);
                     reply.writeNoException();
                     reply.writeInt(_result6);
                     return true;
@@ -259,7 +274,8 @@ public interface IDomainVerificationManager extends IInterface {
             }
 
             @Override // android.content.pm.verify.domain.IDomainVerificationManager
-            public DomainVerificationInfo getDomainVerificationInfo(String packageName) throws RemoteException {
+            public DomainVerificationInfo getDomainVerificationInfo(String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -267,7 +283,9 @@ public interface IDomainVerificationManager extends IInterface {
                     _data.writeString(packageName);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    DomainVerificationInfo _result = (DomainVerificationInfo) _reply.readTypedObject(DomainVerificationInfo.CREATOR);
+                    DomainVerificationInfo _result =
+                            (DomainVerificationInfo)
+                                    _reply.readTypedObject(DomainVerificationInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -276,7 +294,8 @@ public interface IDomainVerificationManager extends IInterface {
             }
 
             @Override // android.content.pm.verify.domain.IDomainVerificationManager
-            public DomainVerificationUserState getDomainVerificationUserState(String packageName, int userId) throws RemoteException {
+            public DomainVerificationUserState getDomainVerificationUserState(
+                    String packageName, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -285,7 +304,9 @@ public interface IDomainVerificationManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    DomainVerificationUserState _result = (DomainVerificationUserState) _reply.readTypedObject(DomainVerificationUserState.CREATOR);
+                    DomainVerificationUserState _result =
+                            (DomainVerificationUserState)
+                                    _reply.readTypedObject(DomainVerificationUserState.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -294,7 +315,8 @@ public interface IDomainVerificationManager extends IInterface {
             }
 
             @Override // android.content.pm.verify.domain.IDomainVerificationManager
-            public List<DomainOwner> getOwnersForDomain(String domain, int userId) throws RemoteException {
+            public List<DomainOwner> getOwnersForDomain(String domain, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -312,7 +334,8 @@ public interface IDomainVerificationManager extends IInterface {
             }
 
             @Override // android.content.pm.verify.domain.IDomainVerificationManager
-            public int setDomainVerificationStatus(String domainSetId, DomainSet domains, int state) throws RemoteException {
+            public int setDomainVerificationStatus(String domainSetId, DomainSet domains, int state)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -331,7 +354,8 @@ public interface IDomainVerificationManager extends IInterface {
             }
 
             @Override // android.content.pm.verify.domain.IDomainVerificationManager
-            public void setDomainVerificationLinkHandlingAllowed(String packageName, boolean allowed, int userId) throws RemoteException {
+            public void setDomainVerificationLinkHandlingAllowed(
+                    String packageName, boolean allowed, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -348,7 +372,9 @@ public interface IDomainVerificationManager extends IInterface {
             }
 
             @Override // android.content.pm.verify.domain.IDomainVerificationManager
-            public int setDomainVerificationUserSelection(String domainSetId, DomainSet domains, boolean enabled, int userId) throws RemoteException {
+            public int setDomainVerificationUserSelection(
+                    String domainSetId, DomainSet domains, boolean enabled, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -368,7 +394,8 @@ public interface IDomainVerificationManager extends IInterface {
             }
 
             @Override // android.content.pm.verify.domain.IDomainVerificationManager
-            public void setUriRelativeFilterGroups(String packageName, Bundle domainToGroupsBundle) throws RemoteException {
+            public void setUriRelativeFilterGroups(String packageName, Bundle domainToGroupsBundle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -384,7 +411,8 @@ public interface IDomainVerificationManager extends IInterface {
             }
 
             @Override // android.content.pm.verify.domain.IDomainVerificationManager
-            public Bundle getUriRelativeFilterGroups(String packageName, List<String> domains) throws RemoteException {
+            public Bundle getUriRelativeFilterGroups(String packageName, List<String> domains)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

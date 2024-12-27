@@ -7,10 +7,12 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.samsung.android.knox.dar.sdp.ISdpListener;
 import com.samsung.android.knox.sdp.core.SdpCreationParam;
 import com.samsung.android.knox.sdp.core.SdpEngineInfo;
 import com.samsung.android.knox.zt.devicetrust.IEndpointMonitorListener;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -19,7 +21,8 @@ public interface IDarManagerService extends IInterface {
 
     void addBlockedClearablePackages(int i, String str) throws RemoteException;
 
-    int addEngine(SdpCreationParam sdpCreationParam, String str, String str2) throws RemoteException;
+    int addEngine(SdpCreationParam sdpCreationParam, String str, String str2)
+            throws RemoteException;
 
     int allow(String str, String str2) throws RemoteException;
 
@@ -87,7 +90,8 @@ public interface IDarManagerService extends IInterface {
 
     int removeEngine(String str) throws RemoteException;
 
-    void reportApplicationBinding(long j, int i, int i2, String str, String str2) throws RemoteException;
+    void reportApplicationBinding(long j, int i, int i2, String str, String str2)
+            throws RemoteException;
 
     int reserveUserIdForSystem() throws RemoteException;
 
@@ -109,9 +113,13 @@ public interface IDarManagerService extends IInterface {
 
     boolean setSensitive(int i, String str) throws RemoteException;
 
-    int startMonitoring(int i, int i2, Bundle bundle, IEndpointMonitorListener iEndpointMonitorListener) throws RemoteException;
+    int startMonitoring(
+            int i, int i2, Bundle bundle, IEndpointMonitorListener iEndpointMonitorListener)
+            throws RemoteException;
 
-    int startTracing(int i, int i2, Bundle bundle, IEndpointMonitorListener iEndpointMonitorListener) throws RemoteException;
+    int startTracing(
+            int i, int i2, Bundle bundle, IEndpointMonitorListener iEndpointMonitorListener)
+            throws RemoteException;
 
     int stopMonitoring(int i, int i2) throws RemoteException;
 
@@ -134,8 +142,7 @@ public interface IDarManagerService extends IInterface {
         }
 
         @Override // com.samsung.android.knox.dar.IDarManagerService
-        public void systemReady() throws RemoteException {
-        }
+        public void systemReady() throws RemoteException {}
 
         @Override // com.samsung.android.knox.dar.IDarManagerService
         public boolean isDeviceRootKeyInstalled() throws RemoteException {
@@ -178,7 +185,8 @@ public interface IDarManagerService extends IInterface {
         }
 
         @Override // com.samsung.android.knox.dar.IDarManagerService
-        public boolean resetPasswordWithToken(String password, byte[] token, int userId) throws RemoteException {
+        public boolean resetPasswordWithToken(String password, byte[] token, int userId)
+                throws RemoteException {
             return false;
         }
 
@@ -213,7 +221,8 @@ public interface IDarManagerService extends IInterface {
         }
 
         @Override // com.samsung.android.knox.dar.IDarManagerService
-        public int resetPassword(String alias, String resetToken, String password) throws RemoteException {
+        public int resetPassword(String alias, String resetToken, String password)
+                throws RemoteException {
             return 0;
         }
 
@@ -258,7 +267,8 @@ public interface IDarManagerService extends IInterface {
         }
 
         @Override // com.samsung.android.knox.dar.IDarManagerService
-        public int addEngine(SdpCreationParam param, String password, String resetToken) throws RemoteException {
+        public int addEngine(SdpCreationParam param, String password, String resetToken)
+                throws RemoteException {
             return 0;
         }
 
@@ -303,20 +313,16 @@ public interface IDarManagerService extends IInterface {
         }
 
         @Override // com.samsung.android.knox.dar.IDarManagerService
-        public void onBiometricsAuthenticated(int userId) throws RemoteException {
-        }
+        public void onBiometricsAuthenticated(int userId) throws RemoteException {}
 
         @Override // com.samsung.android.knox.dar.IDarManagerService
-        public void onDeviceOwnerLocked(int userId) throws RemoteException {
-        }
+        public void onDeviceOwnerLocked(int userId) throws RemoteException {}
 
         @Override // com.samsung.android.knox.dar.IDarManagerService
-        public void registerClient(int engineId, ISdpListener client) throws RemoteException {
-        }
+        public void registerClient(int engineId, ISdpListener client) throws RemoteException {}
 
         @Override // com.samsung.android.knox.dar.IDarManagerService
-        public void unregisterClient(int engineId, ISdpListener client) throws RemoteException {
-        }
+        public void unregisterClient(int engineId, ISdpListener client) throws RemoteException {}
 
         @Override // com.samsung.android.knox.dar.IDarManagerService
         public boolean isDefaultPathUser(int userId) throws RemoteException {
@@ -334,8 +340,7 @@ public interface IDarManagerService extends IInterface {
         }
 
         @Override // com.samsung.android.knox.dar.IDarManagerService
-        public void setInnerAuthUserId(int innerAuthUserId, int userId) throws RemoteException {
-        }
+        public void setInnerAuthUserId(int innerAuthUserId, int userId) throws RemoteException {}
 
         @Override // com.samsung.android.knox.dar.IDarManagerService
         public int getInnerAuthUserId(int userId) throws RemoteException {
@@ -343,8 +348,7 @@ public interface IDarManagerService extends IInterface {
         }
 
         @Override // com.samsung.android.knox.dar.IDarManagerService
-        public void setMainUserId(int mainUserId, int innerAuthUserId) throws RemoteException {
-        }
+        public void setMainUserId(int mainUserId, int innerAuthUserId) throws RemoteException {}
 
         @Override // com.samsung.android.knox.dar.IDarManagerService
         public int getMainUserId(int innerAuthUserId) throws RemoteException {
@@ -352,8 +356,8 @@ public interface IDarManagerService extends IInterface {
         }
 
         @Override // com.samsung.android.knox.dar.IDarManagerService
-        public void addBlockedClearablePackages(int userId, String packageName) throws RemoteException {
-        }
+        public void addBlockedClearablePackages(int userId, String packageName)
+                throws RemoteException {}
 
         @Override // com.samsung.android.knox.dar.IDarManagerService
         public List<String> getBlockedClearablePackages(int userId) throws RemoteException {
@@ -361,7 +365,8 @@ public interface IDarManagerService extends IInterface {
         }
 
         @Override // com.samsung.android.knox.dar.IDarManagerService
-        public List<String> getPackageListForDualDarPolicy(String packageType) throws RemoteException {
+        public List<String> getPackageListForDualDarPolicy(String packageType)
+                throws RemoteException {
             return null;
         }
 
@@ -371,7 +376,9 @@ public interface IDarManagerService extends IInterface {
         }
 
         @Override // com.samsung.android.knox.dar.IDarManagerService
-        public int startTracing(int type, int requestorUid, Bundle options, IEndpointMonitorListener listener) throws RemoteException {
+        public int startTracing(
+                int type, int requestorUid, Bundle options, IEndpointMonitorListener listener)
+                throws RemoteException {
             return 0;
         }
 
@@ -381,7 +388,9 @@ public interface IDarManagerService extends IInterface {
         }
 
         @Override // com.samsung.android.knox.dar.IDarManagerService
-        public int startMonitoring(int type, int requesterUid, Bundle options, IEndpointMonitorListener listener) throws RemoteException {
+        public int startMonitoring(
+                int type, int requesterUid, Bundle options, IEndpointMonitorListener listener)
+                throws RemoteException {
             return 0;
         }
 
@@ -391,8 +400,9 @@ public interface IDarManagerService extends IInterface {
         }
 
         @Override // com.samsung.android.knox.dar.IDarManagerService
-        public void reportApplicationBinding(long bindingTime, int pid, int uid, String procName, String label) throws RemoteException {
-        }
+        public void reportApplicationBinding(
+                long bindingTime, int pid, int uid, String procName, String label)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -400,7 +410,7 @@ public interface IDarManagerService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDarManagerService {
+    public abstract static class Stub extends Binder implements IDarManagerService {
         static final int TRANSACTION_addBlockedClearablePackages = 47;
         static final int TRANSACTION_addEngine = 27;
         static final int TRANSACTION_allow = 24;
@@ -600,7 +610,8 @@ public interface IDarManagerService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDarManagerService.DESCRIPTOR);
             }
@@ -782,7 +793,8 @@ public interface IDarManagerService extends IInterface {
                     reply.writeDouble(_result25);
                     return true;
                 case 27:
-                    SdpCreationParam _arg017 = (SdpCreationParam) data.readTypedObject(SdpCreationParam.CREATOR);
+                    SdpCreationParam _arg017 =
+                            (SdpCreationParam) data.readTypedObject(SdpCreationParam.CREATOR);
                     String _arg110 = data.readString();
                     String _arg23 = data.readString();
                     data.enforceNoDataAvail();
@@ -954,7 +966,8 @@ public interface IDarManagerService extends IInterface {
                     int _arg040 = data.readInt();
                     int _arg121 = data.readInt();
                     Bundle _arg24 = (Bundle) data.readTypedObject(Bundle.CREATOR);
-                    IEndpointMonitorListener _arg3 = IEndpointMonitorListener.Stub.asInterface(data.readStrongBinder());
+                    IEndpointMonitorListener _arg3 =
+                            IEndpointMonitorListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result43 = startTracing(_arg040, _arg121, _arg24, _arg3);
                     reply.writeNoException();
@@ -972,7 +985,8 @@ public interface IDarManagerService extends IInterface {
                     int _arg042 = data.readInt();
                     int _arg123 = data.readInt();
                     Bundle _arg25 = (Bundle) data.readTypedObject(Bundle.CREATOR);
-                    IEndpointMonitorListener _arg32 = IEndpointMonitorListener.Stub.asInterface(data.readStrongBinder());
+                    IEndpointMonitorListener _arg32 =
+                            IEndpointMonitorListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result45 = startMonitoring(_arg042, _arg123, _arg25, _arg32);
                     reply.writeNoException();
@@ -1180,7 +1194,8 @@ public interface IDarManagerService extends IInterface {
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
-            public boolean resetPasswordWithToken(String password, byte[] token, int userId) throws RemoteException {
+            public boolean resetPasswordWithToken(String password, byte[] token, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1302,7 +1317,8 @@ public interface IDarManagerService extends IInterface {
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
-            public int resetPassword(String alias, String resetToken, String password) throws RemoteException {
+            public int resetPassword(String alias, String resetToken, String password)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1338,7 +1354,8 @@ public interface IDarManagerService extends IInterface {
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
-            public int registerListener(String alias, ISdpListener listener) throws RemoteException {
+            public int registerListener(String alias, ISdpListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1356,7 +1373,8 @@ public interface IDarManagerService extends IInterface {
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
-            public int unregisterListener(String alias, ISdpListener listener) throws RemoteException {
+            public int unregisterListener(String alias, ISdpListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1459,7 +1477,8 @@ public interface IDarManagerService extends IInterface {
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
-            public int addEngine(SdpCreationParam param, String password, String resetToken) throws RemoteException {
+            public int addEngine(SdpCreationParam param, String password, String resetToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1503,7 +1522,8 @@ public interface IDarManagerService extends IInterface {
                     _data.writeString(alias);
                     this.mRemote.transact(29, _data, _reply, 0);
                     _reply.readException();
-                    SdpEngineInfo _result = (SdpEngineInfo) _reply.readTypedObject(SdpEngineInfo.CREATOR);
+                    SdpEngineInfo _result =
+                            (SdpEngineInfo) _reply.readTypedObject(SdpEngineInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1565,7 +1585,8 @@ public interface IDarManagerService extends IInterface {
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
-            public int saveTokenIntoTrusted(String nameTag, String resetToken) throws RemoteException {
+            public int saveTokenIntoTrusted(String nameTag, String resetToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1792,7 +1813,8 @@ public interface IDarManagerService extends IInterface {
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
-            public void addBlockedClearablePackages(int userId, String packageName) throws RemoteException {
+            public void addBlockedClearablePackages(int userId, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1825,7 +1847,8 @@ public interface IDarManagerService extends IInterface {
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
-            public List<String> getPackageListForDualDarPolicy(String packageType) throws RemoteException {
+            public List<String> getPackageListForDualDarPolicy(String packageType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1858,7 +1881,9 @@ public interface IDarManagerService extends IInterface {
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
-            public int startTracing(int type, int requestorUid, Bundle options, IEndpointMonitorListener listener) throws RemoteException {
+            public int startTracing(
+                    int type, int requestorUid, Bundle options, IEndpointMonitorListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1896,7 +1921,9 @@ public interface IDarManagerService extends IInterface {
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
-            public int startMonitoring(int type, int requesterUid, Bundle options, IEndpointMonitorListener listener) throws RemoteException {
+            public int startMonitoring(
+                    int type, int requesterUid, Bundle options, IEndpointMonitorListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1934,7 +1961,9 @@ public interface IDarManagerService extends IInterface {
             }
 
             @Override // com.samsung.android.knox.dar.IDarManagerService
-            public void reportApplicationBinding(long bindingTime, int pid, int uid, String procName, String label) throws RemoteException {
+            public void reportApplicationBinding(
+                    long bindingTime, int pid, int uid, String procName, String label)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

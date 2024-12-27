@@ -1,11 +1,11 @@
 package android.apphibernation;
 
-import android.apphibernation.IAppHibernationService;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +19,8 @@ public interface IAppHibernationService extends IInterface {
 
     List<String> getHibernatingPackagesForUser(int i) throws RemoteException;
 
-    Map<String, HibernationStats> getHibernationStatsForUser(List<String> list, int i) throws RemoteException;
+    Map<String, HibernationStats> getHibernationStatsForUser(List<String> list, int i)
+            throws RemoteException;
 
     boolean isHibernatingForUser(String str, int i) throws RemoteException;
 
@@ -38,8 +39,8 @@ public interface IAppHibernationService extends IInterface {
         }
 
         @Override // android.apphibernation.IAppHibernationService
-        public void setHibernatingForUser(String packageName, int userId, boolean isHibernating) throws RemoteException {
-        }
+        public void setHibernatingForUser(String packageName, int userId, boolean isHibernating)
+                throws RemoteException {}
 
         @Override // android.apphibernation.IAppHibernationService
         public boolean isHibernatingGlobally(String packageName) throws RemoteException {
@@ -47,8 +48,8 @@ public interface IAppHibernationService extends IInterface {
         }
 
         @Override // android.apphibernation.IAppHibernationService
-        public void setHibernatingGlobally(String packageName, boolean isHibernating) throws RemoteException {
-        }
+        public void setHibernatingGlobally(String packageName, boolean isHibernating)
+                throws RemoteException {}
 
         @Override // android.apphibernation.IAppHibernationService
         public List<String> getHibernatingPackagesForUser(int userId) throws RemoteException {
@@ -56,7 +57,8 @@ public interface IAppHibernationService extends IInterface {
         }
 
         @Override // android.apphibernation.IAppHibernationService
-        public Map<String, HibernationStats> getHibernationStatsForUser(List<String> packageNames, int userId) throws RemoteException {
+        public Map<String, HibernationStats> getHibernationStatsForUser(
+                List<String> packageNames, int userId) throws RemoteException {
             return null;
         }
 
@@ -71,7 +73,7 @@ public interface IAppHibernationService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAppHibernationService {
+    public abstract static class Stub extends Binder implements IAppHibernationService {
         static final int TRANSACTION_getHibernatingPackagesForUser = 5;
         static final int TRANSACTION_getHibernationStatsForUser = 6;
         static final int TRANSACTION_isHibernatingForUser = 1;
@@ -127,7 +129,8 @@ public interface IAppHibernationService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, final Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, final Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAppHibernationService.DESCRIPTOR);
             }
@@ -177,18 +180,22 @@ public interface IAppHibernationService extends IInterface {
                     List<String> _arg06 = data.createStringArrayList();
                     int _arg14 = data.readInt();
                     data.enforceNoDataAvail();
-                    Map<String, HibernationStats> _result4 = getHibernationStatsForUser(_arg06, _arg14);
+                    Map<String, HibernationStats> _result4 =
+                            getHibernationStatsForUser(_arg06, _arg14);
                     reply.writeNoException();
                     if (_result4 == null) {
                         reply.writeInt(-1);
                     } else {
                         reply.writeInt(_result4.size());
-                        _result4.forEach(new BiConsumer() { // from class: android.apphibernation.IAppHibernationService$Stub$$ExternalSyntheticLambda0
-                            @Override // java.util.function.BiConsumer
-                            public final void accept(Object obj, Object obj2) {
-                                IAppHibernationService.Stub.lambda$onTransact$0(Parcel.this, (String) obj, (HibernationStats) obj2);
-                            }
-                        });
+                        _result4.forEach(
+                                new BiConsumer() { // from class:
+                                    // android.apphibernation.IAppHibernationService$Stub$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.BiConsumer
+                                    public final void accept(Object obj, Object obj2) {
+                                        IAppHibernationService.Stub.lambda$onTransact$0(
+                                                Parcel.this, (String) obj, (HibernationStats) obj2);
+                                    }
+                                });
                     }
                     return true;
                 case 7:
@@ -201,7 +208,8 @@ public interface IAppHibernationService extends IInterface {
             }
         }
 
-        static /* synthetic */ void lambda$onTransact$0(Parcel reply, String k, HibernationStats v) {
+        static /* synthetic */ void lambda$onTransact$0(
+                Parcel reply, String k, HibernationStats v) {
             reply.writeString(k);
             reply.writeTypedObject(v, 1);
         }
@@ -224,7 +232,8 @@ public interface IAppHibernationService extends IInterface {
             }
 
             @Override // android.apphibernation.IAppHibernationService
-            public boolean isHibernatingForUser(String packageName, int userId) throws RemoteException {
+            public boolean isHibernatingForUser(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -242,7 +251,8 @@ public interface IAppHibernationService extends IInterface {
             }
 
             @Override // android.apphibernation.IAppHibernationService
-            public void setHibernatingForUser(String packageName, int userId, boolean isHibernating) throws RemoteException {
+            public void setHibernatingForUser(String packageName, int userId, boolean isHibernating)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -276,7 +286,8 @@ public interface IAppHibernationService extends IInterface {
             }
 
             @Override // android.apphibernation.IAppHibernationService
-            public void setHibernatingGlobally(String packageName, boolean isHibernating) throws RemoteException {
+            public void setHibernatingGlobally(String packageName, boolean isHibernating)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -309,7 +320,8 @@ public interface IAppHibernationService extends IInterface {
             }
 
             @Override // android.apphibernation.IAppHibernationService
-            public Map<String, HibernationStats> getHibernationStatsForUser(List<String> packageNames, int userId) throws RemoteException {
+            public Map<String, HibernationStats> getHibernationStatsForUser(
+                    List<String> packageNames, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 final Parcel _reply = Parcel.obtain();
                 try {
@@ -320,12 +332,17 @@ public interface IAppHibernationService extends IInterface {
                     _reply.readException();
                     int N = _reply.readInt();
                     final Map<String, HibernationStats> _result = N < 0 ? null : new HashMap<>();
-                    IntStream.range(0, N).forEach(new IntConsumer() { // from class: android.apphibernation.IAppHibernationService$Stub$Proxy$$ExternalSyntheticLambda0
-                        @Override // java.util.function.IntConsumer
-                        public final void accept(int i) {
-                            IAppHibernationService.Stub.Proxy.lambda$getHibernationStatsForUser$0(Parcel.this, _result, i);
-                        }
-                    });
+                    IntStream.range(0, N)
+                            .forEach(
+                                    new IntConsumer() { // from class:
+                                        // android.apphibernation.IAppHibernationService$Stub$Proxy$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.IntConsumer
+                                        public final void accept(int i) {
+                                            IAppHibernationService.Stub.Proxy
+                                                    .lambda$getHibernationStatsForUser$0(
+                                                            Parcel.this, _result, i);
+                                        }
+                                    });
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -333,9 +350,11 @@ public interface IAppHibernationService extends IInterface {
                 }
             }
 
-            static /* synthetic */ void lambda$getHibernationStatsForUser$0(Parcel _reply, Map _result, int i) {
+            static /* synthetic */ void lambda$getHibernationStatsForUser$0(
+                    Parcel _reply, Map _result, int i) {
                 String k = _reply.readString();
-                HibernationStats v = (HibernationStats) _reply.readTypedObject(HibernationStats.CREATOR);
+                HibernationStats v =
+                        (HibernationStats) _reply.readTypedObject(HibernationStats.CREATOR);
                 _result.put(k, v);
             }
 

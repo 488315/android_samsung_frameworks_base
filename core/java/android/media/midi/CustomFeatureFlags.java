@@ -18,12 +18,15 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // android.media.midi.FeatureFlags
     public boolean virtualUmp() {
-        return getValue(Flags.FLAG_VIRTUAL_UMP, new Predicate() { // from class: android.media.midi.CustomFeatureFlags$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).virtualUmp();
-            }
-        });
+        return getValue(
+                Flags.FLAG_VIRTUAL_UMP,
+                new Predicate() { // from class:
+                    // android.media.midi.CustomFeatureFlags$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).virtualUmp();
+                    }
+                });
     }
 
     public boolean isFlagReadOnlyOptimized(String flagName) {

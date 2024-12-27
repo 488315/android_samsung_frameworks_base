@@ -13,8 +13,10 @@ import android.view.textservice.SpellCheckerSession;
 import android.view.textservice.SuggestionsInfo;
 import android.view.textservice.TextInfo;
 import android.view.textservice.TextServicesManager;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.GrowingArrayUtils;
+
 import java.text.BreakIterator;
 import java.util.Locale;
 
@@ -55,11 +57,21 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
     void resetSession() {
         closeSession();
         this.mTextServicesManager = this.mTextView.getTextServicesManagerForUser();
-        if (this.mCurrentLocale == null || this.mTextServicesManager == null || this.mTextView.length() == 0 || !this.mTextServicesManager.isSpellCheckerEnabled() || this.mTextServicesManager.getCurrentSpellCheckerSubtype(true) == null) {
+        if (this.mCurrentLocale == null
+                || this.mTextServicesManager == null
+                || this.mTextView.length() == 0
+                || !this.mTextServicesManager.isSpellCheckerEnabled()
+                || this.mTextServicesManager.getCurrentSpellCheckerSubtype(true) == null) {
             this.mSpellCheckerSession = null;
         } else {
-            SpellCheckerSession.SpellCheckerSessionParams params = new SpellCheckerSession.SpellCheckerSessionParams.Builder().setLocale(this.mCurrentLocale).setSupportedAttributes(27).build();
-            this.mSpellCheckerSession = this.mTextServicesManager.newSpellCheckerSession(params, this.mTextView.getContext().getMainExecutor(), this);
+            SpellCheckerSession.SpellCheckerSessionParams params =
+                    new SpellCheckerSession.SpellCheckerSessionParams.Builder()
+                            .setLocale(this.mCurrentLocale)
+                            .setSupportedAttributes(27)
+                            .build();
+            this.mSpellCheckerSession =
+                    this.mTextServicesManager.newSpellCheckerSession(
+                            params, this.mTextView.getContext().getMainExecutor(), this);
         }
         for (int i = 0; i < this.mLength; i++) {
             this.mIds[i] = -1;
@@ -72,7 +84,8 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
         this.mCurrentLocale = locale;
         resetSession();
         if (locale != null) {
-            this.mSentenceIterator = new SentenceIteratorWrapper(BreakIterator.getSentenceInstance(locale));
+            this.mSentenceIterator =
+                    new SentenceIteratorWrapper(BreakIterator.getSentenceInstance(locale));
         }
         this.mTextView.onLocaleChanged();
     }
@@ -101,7 +114,10 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
             }
         }
         this.mIds = GrowingArrayUtils.append(this.mIds, this.mLength, 0);
-        this.mSpellCheckSpans = (SpellCheckSpan[]) GrowingArrayUtils.append(this.mSpellCheckSpans, this.mLength, new SpellCheckSpan());
+        this.mSpellCheckSpans =
+                (SpellCheckSpan[])
+                        GrowingArrayUtils.append(
+                                this.mSpellCheckSpans, this.mLength, new SpellCheckSpan());
         this.mLength++;
         return this.mLength - 1;
     }
@@ -148,7 +164,9 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
             start = 0;
             end = this.mTextView.getText().length();
         } else {
-            boolean spellCheckerActivated = this.mTextServicesManager != null && this.mTextServicesManager.isSpellCheckerEnabled();
+            boolean spellCheckerActivated =
+                    this.mTextServicesManager != null
+                            && this.mTextServicesManager.isSpellCheckerEnabled();
             if (isSessionActive != spellCheckerActivated) {
                 resetSession();
             }
@@ -198,19 +216,25 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
             if (this.mIds[i] >= 0 && !spellCheckSpan.isSpellCheckInProgress()) {
                 int start = editable.getSpanStart(spellCheckSpan);
                 int end = editable.getSpanEnd(spellCheckSpan);
-                if (selectionStart == end + 1 && WordIterator.isMidWordPunctuation(this.mCurrentLocale, Character.codePointBefore(editable, end + 1))) {
+                if (selectionStart == end + 1
+                        && WordIterator.isMidWordPunctuation(
+                                this.mCurrentLocale,
+                                Character.codePointBefore(editable, end + 1))) {
                     isNotEditing = false;
                 } else if (selectionEnd <= start || selectionStart > end) {
                     isNotEditing = true;
                 } else {
-                    if (selectionStart == end && selectionStart > 0 && isSeparator(Character.codePointBefore(editable, selectionStart))) {
+                    if (selectionStart == end
+                            && selectionStart > 0
+                            && isSeparator(Character.codePointBefore(editable, selectionStart))) {
                         z = true;
                     }
                     isNotEditing = z;
                 }
                 if (start >= 0 && end > start && (forceCheckWhenEditingWord || isNotEditing)) {
                     spellCheckSpan.setSpellCheckInProgress(true);
-                    TextInfo textInfo = new TextInfo(editable, start, end, this.mCookie, this.mIds[i]);
+                    TextInfo textInfo =
+                            new TextInfo(editable, start, end, this.mCookie, this.mIds[i]);
                     textInfos[textInfosCount] = textInfo;
                     textInfosCount++;
                 }
@@ -232,7 +256,8 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
         return ((1 << type) & 1634758656) != 0;
     }
 
-    private SpellCheckSpan onGetSuggestionsInternal(SuggestionsInfo suggestionsInfo, int offset, int length) {
+    private SpellCheckSpan onGetSuggestionsInternal(
+            SuggestionsInfo suggestionsInfo, int offset, int length) {
         int start;
         int end;
         if (suggestionsInfo == null || suggestionsInfo.getCookie() != this.mCookie) {
@@ -255,7 +280,8 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
                     return spellCheckSpan;
                 }
                 if (!isInDictionary && (looksLikeTypo || looksLikeGrammarError)) {
-                    createMisspelledSuggestionSpan(editable, suggestionsInfo, spellCheckSpan, offset, length);
+                    createMisspelledSuggestionSpan(
+                            editable, suggestionsInfo, spellCheckSpan, offset, length);
                 } else {
                     int spellCheckSpanEnd = editable.getSpanEnd(spellCheckSpan);
                     if (offset != -1 && length != -1) {
@@ -265,12 +291,18 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
                         start = spellCheckSpanStart;
                         end = spellCheckSpanEnd;
                     }
-                    if (spellCheckSpanStart >= 0 && spellCheckSpanEnd > spellCheckSpanStart && end > start) {
+                    if (spellCheckSpanStart >= 0
+                            && spellCheckSpanEnd > spellCheckSpanStart
+                            && end > start) {
                         boolean visibleToAccessibility = this.mTextView.isVisibleToAccessibility();
-                        CharSequence beforeText = visibleToAccessibility ? new SpannedString(editable) : null;
-                        boolean spanRemoved = removeErrorSuggestionSpan(editable, start, end, RemoveReason.OBSOLETE);
+                        CharSequence beforeText =
+                                visibleToAccessibility ? new SpannedString(editable) : null;
+                        boolean spanRemoved =
+                                removeErrorSuggestionSpan(
+                                        editable, start, end, RemoveReason.OBSOLETE);
                         if (visibleToAccessibility && spanRemoved) {
-                            this.mTextView.sendAccessibilityEventTypeViewTextChanged(beforeText, start, end);
+                            this.mTextView.sendAccessibilityEventTypeViewTextChanged(
+                                    beforeText, start, end);
                         }
                     }
                 }
@@ -280,11 +312,15 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
         return null;
     }
 
-    private static boolean removeErrorSuggestionSpan(Editable editable, int start, int end, RemoveReason reason) {
+    private static boolean removeErrorSuggestionSpan(
+            Editable editable, int start, int end, RemoveReason reason) {
         boolean spanRemoved = false;
-        SuggestionSpan[] spans = (SuggestionSpan[]) editable.getSpans(start, end, SuggestionSpan.class);
+        SuggestionSpan[] spans =
+                (SuggestionSpan[]) editable.getSpans(start, end, SuggestionSpan.class);
         for (SuggestionSpan span : spans) {
-            if (editable.getSpanStart(span) == start && editable.getSpanEnd(span) == end && (span.getFlags() & 10) != 0) {
+            if (editable.getSpanStart(span) == start
+                    && editable.getSpanEnd(span) == end
+                    && (span.getFlags() & 10) != 0) {
                 editable.removeSpan(span);
                 spanRemoved = true;
             }
@@ -315,7 +351,8 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
                     if (suggestionsInfo != null) {
                         int offset = ssi.getOffsetAt(j);
                         int length = ssi.getLengthAt(j);
-                        SpellCheckSpan scs = onGetSuggestionsInternal(suggestionsInfo, offset, length);
+                        SpellCheckSpan scs =
+                                onGetSuggestionsInternal(suggestionsInfo, offset, length);
                         if (spellCheckSpan == null && scs != null) {
                             spellCheckSpan = scs;
                         }
@@ -331,26 +368,32 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
 
     private void scheduleNewSpellCheck() {
         if (this.mSpellRunnable == null) {
-            this.mSpellRunnable = new Runnable() { // from class: android.widget.SpellChecker.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    int length = SpellChecker.this.mSpellParsers.length;
-                    for (int i = 0; i < length; i++) {
-                        SpellParser spellParser = SpellChecker.this.mSpellParsers[i];
-                        if (!spellParser.isFinished()) {
-                            spellParser.parse();
-                            return;
+            this.mSpellRunnable =
+                    new Runnable() { // from class: android.widget.SpellChecker.1
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            int length = SpellChecker.this.mSpellParsers.length;
+                            for (int i = 0; i < length; i++) {
+                                SpellParser spellParser = SpellChecker.this.mSpellParsers[i];
+                                if (!spellParser.isFinished()) {
+                                    spellParser.parse();
+                                    return;
+                                }
+                            }
                         }
-                    }
-                }
-            };
+                    };
         } else {
             this.mTextView.removeCallbacks(this.mSpellRunnable);
         }
         this.mTextView.postDelayed(this.mSpellRunnable, 400L);
     }
 
-    private void createMisspelledSuggestionSpan(Editable editable, SuggestionsInfo suggestionsInfo, SpellCheckSpan spellCheckSpan, int offset, int length) {
+    private void createMisspelledSuggestionSpan(
+            Editable editable,
+            SuggestionsInfo suggestionsInfo,
+            SpellCheckSpan spellCheckSpan,
+            int offset,
+            int length) {
         int start;
         int end;
         String[] suggestions;
@@ -384,9 +427,12 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
             if ((suggestionsAttrs & 8) != 0) {
                 flags |= 8;
             }
-            SuggestionSpan suggestionSpan = new SuggestionSpan(this.mTextView.getContext(), suggestions, flags);
-            boolean spanRemoved = removeErrorSuggestionSpan(editable, start, end, RemoveReason.REPLACE);
-            boolean sendAccessibilityEvent = !spanRemoved && this.mTextView.isVisibleToAccessibility();
+            SuggestionSpan suggestionSpan =
+                    new SuggestionSpan(this.mTextView.getContext(), suggestions, flags);
+            boolean spanRemoved =
+                    removeErrorSuggestionSpan(editable, start, end, RemoveReason.REPLACE);
+            boolean sendAccessibilityEvent =
+                    !spanRemoved && this.mTextView.isVisibleToAccessibility();
             CharSequence beforeText = sendAccessibilityEvent ? new SpannedString(editable) : null;
             editable.setSpan(suggestionSpan, start, end, 33);
             if (sendAccessibilityEvent) {
@@ -408,12 +454,15 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
         public void setCharSequence(CharSequence sequence, int start, int end) {
             this.mStartOffset = Math.max(0, start);
             this.mEndOffset = Math.min(end, sequence.length());
-            this.mSentenceIterator.setText(sequence.subSequence(this.mStartOffset, this.mEndOffset).toString());
+            this.mSentenceIterator.setText(
+                    sequence.subSequence(this.mStartOffset, this.mEndOffset).toString());
         }
 
         public int preceding(int offset) {
             int result;
-            if (offset >= this.mStartOffset && (result = this.mSentenceIterator.preceding(offset - this.mStartOffset)) != -1) {
+            if (offset >= this.mStartOffset
+                    && (result = this.mSentenceIterator.preceding(offset - this.mStartOffset))
+                            != -1) {
                 return this.mStartOffset + result;
             }
             return -1;
@@ -421,7 +470,9 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
 
         public int following(int offset) {
             int result;
-            if (offset <= this.mEndOffset && (result = this.mSentenceIterator.following(offset - this.mStartOffset)) != -1) {
+            if (offset <= this.mEndOffset
+                    && (result = this.mSentenceIterator.following(offset - this.mStartOffset))
+                            != -1) {
                 return this.mStartOffset + result;
             }
             return -1;
@@ -480,7 +531,9 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
             Editable editable = (Editable) SpellChecker.this.mTextView.getText();
             int textChangeStart = editable.getSpanStart(this.mRange);
             int textChangeEnd = editable.getSpanEnd(this.mRange);
-            Range<Integer> sentenceBoundary = SpellChecker.this.detectSentenceBoundary(editable, textChangeStart, textChangeEnd);
+            Range<Integer> sentenceBoundary =
+                    SpellChecker.this.detectSentenceBoundary(
+                            editable, textChangeStart, textChangeEnd);
             int sentenceStart = sentenceBoundary.getLower().intValue();
             int sentenceEnd = sentenceBoundary.getUpper().intValue();
             if (sentenceStart == sentenceEnd) {
@@ -517,12 +570,19 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
                 i++;
             }
             if (spellCheckEnd <= spellCheckStart) {
-                Log.w(SpellChecker.TAG, "Trying to spellcheck invalid region, from " + sentenceStart + " to " + spellCheckEnd);
+                Log.w(
+                        SpellChecker.TAG,
+                        "Trying to spellcheck invalid region, from "
+                                + sentenceStart
+                                + " to "
+                                + spellCheckEnd);
             } else if (createSpellCheckSpan) {
                 SpellChecker.this.addSpellCheckSpan(editable, spellCheckStart, spellCheckEnd);
             }
             int sentenceStart2 = spellCheckEnd;
-            if (scheduleOtherSpellCheck && sentenceStart2 != -1 && sentenceStart2 <= textChangeEnd) {
+            if (scheduleOtherSpellCheck
+                    && sentenceStart2 != -1
+                    && sentenceStart2 <= textChangeEnd) {
                 setRangeSpan(editable, sentenceStart2, textChangeEnd);
             } else {
                 removeRangeSpan(editable);
@@ -544,11 +604,23 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public Range<Integer> detectSentenceBoundary(CharSequence sequence, int textChangeStart, int textChangeEnd) {
-        int iteratorWindowStart = findSeparator(sequence, Math.max(0, textChangeStart - 350), Math.max(0, textChangeStart - 700));
-        int iteratorWindowEnd = findSeparator(sequence, Math.min(textChangeStart + 700, textChangeEnd), Math.min(textChangeStart + 1050, sequence.length()));
+    public Range<Integer> detectSentenceBoundary(
+            CharSequence sequence, int textChangeStart, int textChangeEnd) {
+        int iteratorWindowStart =
+                findSeparator(
+                        sequence,
+                        Math.max(0, textChangeStart - 350),
+                        Math.max(0, textChangeStart - 700));
+        int iteratorWindowEnd =
+                findSeparator(
+                        sequence,
+                        Math.min(textChangeStart + 700, textChangeEnd),
+                        Math.min(textChangeStart + 1050, sequence.length()));
         this.mSentenceIterator.setCharSequence(sequence, iteratorWindowStart, iteratorWindowEnd);
-        int sentenceStart = this.mSentenceIterator.isBoundary(textChangeStart) ? textChangeStart : this.mSentenceIterator.preceding(textChangeStart);
+        int sentenceStart =
+                this.mSentenceIterator.isBoundary(textChangeStart)
+                        ? textChangeStart
+                        : this.mSentenceIterator.preceding(textChangeStart);
         int sentenceEnd = this.mSentenceIterator.following(sentenceStart);
         if (sentenceEnd == -1) {
             sentenceEnd = iteratorWindowEnd;
@@ -570,7 +642,9 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
                 sentenceStart = roundUpToWordStart(sequence, sentenceEnd - 350, sentenceStart);
             }
         }
-        return new Range<>(Integer.valueOf(sentenceStart), Integer.valueOf(Math.max(sentenceStart, sentenceEnd)));
+        return new Range<>(
+                Integer.valueOf(sentenceStart),
+                Integer.valueOf(Math.max(sentenceStart, sentenceEnd)));
     }
 
     private int roundUpToWordStart(CharSequence sequence, int position, int frontBoundary) {
@@ -591,7 +665,8 @@ public class SpellChecker implements SpellCheckerSession.SpellCheckerSessionList
         return end;
     }
 
-    public static boolean haveWordBoundariesChanged(Editable editable, int start, int end, int spanStart, int spanEnd) {
+    public static boolean haveWordBoundariesChanged(
+            Editable editable, int start, int end, int spanStart, int spanEnd) {
         if (spanEnd != start && spanStart != end) {
             return true;
         }

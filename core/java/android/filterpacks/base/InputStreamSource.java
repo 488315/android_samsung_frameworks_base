@@ -9,6 +9,7 @@ import android.filterfw.core.GenerateFinalPort;
 import android.filterfw.core.MutableFrameFormat;
 import android.filterfw.format.PrimitiveFormat;
 import android.provider.Telephony;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -63,7 +64,8 @@ public class InputStreamSource extends Filter {
                 }
             }
         } catch (IOException exception) {
-            throw new RuntimeException("InputStreamSource: Could not read stream: " + exception.getMessage() + "!");
+            throw new RuntimeException(
+                    "InputStreamSource: Could not read stream: " + exception.getMessage() + "!");
         }
     }
 }

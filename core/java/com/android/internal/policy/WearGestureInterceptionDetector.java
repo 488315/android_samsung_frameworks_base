@@ -32,7 +32,7 @@ public class WearGestureInterceptionDetector {
         if (!pm.hasSystemFeature(PackageManager.FEATURE_WATCH)) {
             return false;
         }
-        TypedArray windowAttr = context.obtainStyledAttributes(new int[]{16843763});
+        TypedArray windowAttr = context.obtainStyledAttributes(new int[] {16843763});
         boolean windowSwipeToDismiss = true;
         if (windowAttr.getIndexCount() > 0) {
             windowSwipeToDismiss = windowAttr.getBoolean(0, true);
@@ -56,7 +56,8 @@ public class WearGestureInterceptionDetector {
         float deltaX = ev.getRawX() - this.mDownX;
         float deltaY = ev.getRawY() - this.mDownY;
         if ((deltaX * deltaX) + (deltaY * deltaY) > this.mTouchSlop * this.mTouchSlop) {
-            this.mSwiping = deltaX > this.mSwipingStartThreshold && Math.abs(deltaY) < Math.abs(deltaX);
+            this.mSwiping =
+                    deltaX > this.mSwipingStartThreshold && Math.abs(deltaY) < Math.abs(deltaX);
         }
     }
 
@@ -126,7 +127,16 @@ public class WearGestureInterceptionDetector {
             int count = group.getChildCount();
             for (int i = count - 1; i >= 0; i--) {
                 View child = group.getChildAt(i);
-                if (x + scrollX >= child.getLeft() && x + scrollX < child.getRight() && y + scrollY >= child.getTop() && y + scrollY < child.getBottom() && canScroll(child, true, checkLeft, (x + scrollX) - child.getLeft(), (y + scrollY) - child.getTop())) {
+                if (x + scrollX >= child.getLeft()
+                        && x + scrollX < child.getRight()
+                        && y + scrollY >= child.getTop()
+                        && y + scrollY < child.getBottom()
+                        && canScroll(
+                                child,
+                                true,
+                                checkLeft,
+                                (x + scrollX) - child.getLeft(),
+                                (y + scrollY) - child.getTop())) {
                     return true;
                 }
             }

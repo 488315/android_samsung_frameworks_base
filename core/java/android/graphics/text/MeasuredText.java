@@ -3,14 +3,18 @@ package android.graphics.text;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.Log;
+
 import com.android.internal.util.Preconditions;
+
 import dalvik.annotation.optimization.CriticalNative;
 import dalvik.annotation.optimization.NeverInline;
+
+import libcore.util.NativeAllocationRegistry;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Locale;
 import java.util.Objects;
-import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes.dex */
 public class MeasuredText {
@@ -40,7 +44,14 @@ public class MeasuredText {
     @CriticalNative
     private static native float nGetWidth(long j, int i, int i2);
 
-    private MeasuredText(long ptr, char[] chars, boolean computeHyphenation, boolean computeLayout, boolean computeBounds, int top, int bottom) {
+    private MeasuredText(
+            long ptr,
+            char[] chars,
+            boolean computeHyphenation,
+            boolean computeLayout,
+            boolean computeBounds,
+            int top,
+            int bottom) {
         this.mNativePtr = ptr;
         this.mChars = chars;
         this.mComputeHyphenation = computeHyphenation;
@@ -62,7 +73,13 @@ public class MeasuredText {
 
     @NeverInline
     private void throwRangeError(int start, int end) {
-        throw new IllegalArgumentException(String.format(Locale.US, "start(%d) end(%d) length(%d) out of bounds", Integer.valueOf(start), Integer.valueOf(end), Integer.valueOf(this.mChars.length)));
+        throw new IllegalArgumentException(
+                String.format(
+                        Locale.US,
+                        "start(%d) end(%d) length(%d) out of bounds",
+                        Integer.valueOf(start),
+                        Integer.valueOf(end),
+                        Integer.valueOf(this.mChars.length)));
     }
 
     private void offsetCheck(int offset) {
@@ -73,7 +90,12 @@ public class MeasuredText {
 
     @NeverInline
     private void throwOffsetError(int offset) {
-        throw new IllegalArgumentException(String.format(Locale.US, "offset (%d) length(%d) out of bounds", Integer.valueOf(offset), Integer.valueOf(this.mChars.length)));
+        throw new IllegalArgumentException(
+                String.format(
+                        Locale.US,
+                        "offset (%d) length(%d) out of bounds",
+                        Integer.valueOf(offset),
+                        Integer.valueOf(this.mChars.length)));
     }
 
     public float getWidth(int start, int end) {
@@ -114,7 +136,9 @@ public class MeasuredText {
         public static final int HYPHENATION_MODE_FAST = 2;
         public static final int HYPHENATION_MODE_NONE = 0;
         public static final int HYPHENATION_MODE_NORMAL = 1;
-        private static final NativeAllocationRegistry sRegistry = NativeAllocationRegistry.createMalloced(MeasuredText.class.getClassLoader(), MeasuredText.nGetReleaseFunc());
+        private static final NativeAllocationRegistry sRegistry =
+                NativeAllocationRegistry.createMalloced(
+                        MeasuredText.class.getClassLoader(), MeasuredText.nGetReleaseFunc());
         private int mBottom;
         private Paint.FontMetricsInt mCachedMetrics;
         private boolean mComputeBounds;
@@ -128,14 +152,15 @@ public class MeasuredText {
         private int mTop;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface HyphenationMode {
-        }
+        public @interface HyphenationMode {}
 
         private static native void nAddReplacementRun(long j, long j2, int i, int i2, float f);
 
-        private static native void nAddStyleRun(long j, long j2, int i, int i2, boolean z, int i3, int i4, boolean z2);
+        private static native void nAddStyleRun(
+                long j, long j2, int i, int i2, boolean z, int i3, int i4, boolean z2);
 
-        private static native long nBuildMeasuredText(long j, long j2, char[] cArr, boolean z, boolean z2, boolean z3, boolean z4);
+        private static native long nBuildMeasuredText(
+                long j, long j2, char[] cArr, boolean z, boolean z2, boolean z3, boolean z4);
 
         private static native void nFreeBuilder(long j);
 
@@ -170,7 +195,8 @@ public class MeasuredText {
             this.mText = text.mChars;
             this.mNativePtr = nInitBuilder();
             if (!text.mComputeLayout) {
-                throw new IllegalArgumentException("The input MeasuredText must not be created with setComputeLayout(false).");
+                throw new IllegalArgumentException(
+                        "The input MeasuredText must not be created with setComputeLayout(false).");
             }
             this.mComputeHyphenation = text.mComputeHyphenation;
             this.mComputeLayout = text.mComputeLayout;
@@ -181,7 +207,8 @@ public class MeasuredText {
             return appendStyleRun(paint, null, length, isRtl);
         }
 
-        public Builder appendStyleRun(Paint paint, LineBreakConfig lineBreakConfig, int length, boolean isRtl) {
+        public Builder appendStyleRun(
+                Paint paint, LineBreakConfig lineBreakConfig, int length, boolean isRtl) {
             Preconditions.checkNotNull(paint);
             Preconditions.checkArgument(length > 0, "length can not be negative");
             int end = this.mCurrentOffset + length;
@@ -189,7 +216,15 @@ public class MeasuredText {
             int lbStyle = LineBreakConfig.getResolvedLineBreakStyle(lineBreakConfig);
             int lbWordStyle = LineBreakConfig.getResolvedLineBreakWordStyle(lineBreakConfig);
             boolean hyphenation = LineBreakConfig.getResolvedHyphenation(lineBreakConfig) == 1;
-            nAddStyleRun(this.mNativePtr, paint.getNativeInstance(), lbStyle, lbWordStyle, hyphenation, this.mCurrentOffset, end, isRtl);
+            nAddStyleRun(
+                    this.mNativePtr,
+                    paint.getNativeInstance(),
+                    lbStyle,
+                    lbWordStyle,
+                    hyphenation,
+                    this.mCurrentOffset,
+                    end,
+                    isRtl);
             this.mCurrentOffset = end;
             paint.getFontMetricsInt(this.mCachedMetrics);
             this.mTop = Math.min(this.mTop, this.mCachedMetrics.top);
@@ -200,8 +235,10 @@ public class MeasuredText {
         public Builder appendReplacementRun(Paint paint, int length, float width) {
             Preconditions.checkArgument(length > 0, "length can not be negative");
             int end = this.mCurrentOffset + length;
-            Preconditions.checkArgument(end <= this.mText.length, "Replacement exceeds the text length");
-            nAddReplacementRun(this.mNativePtr, paint.getNativeInstance(), this.mCurrentOffset, end, width);
+            Preconditions.checkArgument(
+                    end <= this.mText.length, "Replacement exceeds the text length");
+            nAddReplacementRun(
+                    this.mNativePtr, paint.getNativeInstance(), this.mCurrentOffset, end, width);
             this.mCurrentOffset = end;
             return this;
         }
@@ -250,8 +287,10 @@ public class MeasuredText {
             if (this.mCurrentOffset != this.mText.length) {
                 throw new IllegalStateException("Style info has not been provided for all text.");
             }
-            if (this.mHintMt != null && this.mHintMt.mComputeHyphenation != this.mComputeHyphenation) {
-                throw new IllegalArgumentException("The hyphenation configuration is different from given hint MeasuredText");
+            if (this.mHintMt != null
+                    && this.mHintMt.mComputeHyphenation != this.mComputeHyphenation) {
+                throw new IllegalArgumentException(
+                        "The hyphenation configuration is different from given hint MeasuredText");
             }
             try {
                 if (this.mHintMt != null) {
@@ -259,8 +298,24 @@ public class MeasuredText {
                 } else {
                     hintPtr = 0;
                 }
-                long ptr = nBuildMeasuredText(this.mNativePtr, hintPtr, this.mText, this.mComputeHyphenation, this.mComputeLayout, this.mComputeBounds, this.mFastHyphenation);
-                MeasuredText res = new MeasuredText(ptr, this.mText, this.mComputeHyphenation, this.mComputeLayout, this.mComputeBounds, this.mTop, this.mBottom);
+                long ptr =
+                        nBuildMeasuredText(
+                                this.mNativePtr,
+                                hintPtr,
+                                this.mText,
+                                this.mComputeHyphenation,
+                                this.mComputeLayout,
+                                this.mComputeBounds,
+                                this.mFastHyphenation);
+                MeasuredText res =
+                        new MeasuredText(
+                                ptr,
+                                this.mText,
+                                this.mComputeHyphenation,
+                                this.mComputeLayout,
+                                this.mComputeBounds,
+                                this.mTop,
+                                this.mBottom);
                 sRegistry.registerNativeAllocation(res, ptr);
                 return res;
             } finally {

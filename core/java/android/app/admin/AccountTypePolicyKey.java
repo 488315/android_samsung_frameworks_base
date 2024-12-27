@@ -5,29 +5,34 @@ import android.app.admin.flags.Flags;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.Objects;
-import org.xmlpull.v1.XmlPullParserException;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class AccountTypePolicyKey extends PolicyKey {
     private static final String ATTR_ACCOUNT_TYPE = "account-type";
-    public static final Parcelable.Creator<AccountTypePolicyKey> CREATOR = new Parcelable.Creator<AccountTypePolicyKey>() { // from class: android.app.admin.AccountTypePolicyKey.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AccountTypePolicyKey createFromParcel(Parcel source) {
-            return new AccountTypePolicyKey(source);
-        }
+    public static final Parcelable.Creator<AccountTypePolicyKey> CREATOR =
+            new Parcelable.Creator<AccountTypePolicyKey>() { // from class:
+                // android.app.admin.AccountTypePolicyKey.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AccountTypePolicyKey createFromParcel(Parcel source) {
+                    return new AccountTypePolicyKey(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AccountTypePolicyKey[] newArray(int size) {
-            return new AccountTypePolicyKey[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AccountTypePolicyKey[] newArray(int size) {
+                    return new AccountTypePolicyKey[size];
+                }
+            };
     private final String mAccountType;
 
     public AccountTypePolicyKey(String key, String accountType) {
@@ -59,7 +64,8 @@ public final class AccountTypePolicyKey extends PolicyKey {
     }
 
     @Override // android.app.admin.PolicyKey
-    public AccountTypePolicyKey readFromXml(TypedXmlPullParser parser) throws XmlPullParserException, IOException {
+    public AccountTypePolicyKey readFromXml(TypedXmlPullParser parser)
+            throws XmlPullParserException, IOException {
         String policyKey = parser.getAttributeValue(null, "policy-identifier");
         String accountType = parser.getAttributeValue(null, ATTR_ACCOUNT_TYPE);
         return new AccountTypePolicyKey(policyKey, accountType);
@@ -82,7 +88,8 @@ public final class AccountTypePolicyKey extends PolicyKey {
             return false;
         }
         AccountTypePolicyKey other = (AccountTypePolicyKey) o;
-        if (Objects.equals(getIdentifier(), other.getIdentifier()) && Objects.equals(this.mAccountType, other.mAccountType)) {
+        if (Objects.equals(getIdentifier(), other.getIdentifier())
+                && Objects.equals(this.mAccountType, other.mAccountType)) {
             return true;
         }
         return false;
@@ -94,7 +101,11 @@ public final class AccountTypePolicyKey extends PolicyKey {
     }
 
     public String toString() {
-        return "AccountTypePolicyKey{mPolicyKey= " + getIdentifier() + "; mAccountType= " + this.mAccountType + "}";
+        return "AccountTypePolicyKey{mPolicyKey= "
+                + getIdentifier()
+                + "; mAccountType= "
+                + this.mAccountType
+                + "}";
     }
 
     @Override // android.os.Parcelable

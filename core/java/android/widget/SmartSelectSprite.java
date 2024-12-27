@@ -15,6 +15,7 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.Shape;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -28,49 +29,59 @@ import java.util.function.ToDoubleFunction;
 /* loaded from: classes4.dex */
 final class SmartSelectSprite {
     private static final int EXPAND_DURATION = 200;
-    static final Comparator<RectF> RECTANGLE_COMPARATOR = Comparator.comparingDouble(new ToDoubleFunction() { // from class: android.widget.SmartSelectSprite$$ExternalSyntheticLambda0
-        /*  JADX ERROR: JadxRuntimeException in pass: ModVisitor
-            jadx.core.utils.exceptions.JadxRuntimeException: Can't remove SSA var: r0v0 double, still in use, count: 1, list:
-              (r0v0 double) from 0x0006: RETURN (r0v0 double)
-            	at jadx.core.utils.InsnRemover.removeSsaVar(InsnRemover.java:162)
-            	at jadx.core.utils.InsnRemover.unbindResult(InsnRemover.java:127)
-            	at jadx.core.utils.InsnRemover.unbindInsn(InsnRemover.java:91)
-            	at jadx.core.utils.InsnRemover.addAndUnbind(InsnRemover.java:57)
-            	at jadx.core.dex.visitors.ModVisitor.removeStep(ModVisitor.java:452)
-            	at jadx.core.dex.visitors.ModVisitor.visit(ModVisitor.java:96)
-            */
-        @Override // java.util.function.ToDoubleFunction
-        public final double applyAsDouble(java.lang.Object r3) {
-            /*
-                r2 = this;
-                android.graphics.RectF r3 = (android.graphics.RectF) r3
-                double r0 = android.widget.SmartSelectSprite.lambda$static$0(r3)
-                return r0
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.widget.SmartSelectSprite$$ExternalSyntheticLambda0.applyAsDouble(java.lang.Object):double");
-        }
-    }).thenComparingDouble(new ToDoubleFunction() { // from class: android.widget.SmartSelectSprite$$ExternalSyntheticLambda1
-        /*  JADX ERROR: JadxRuntimeException in pass: ModVisitor
-            jadx.core.utils.exceptions.JadxRuntimeException: Can't remove SSA var: r0v0 double, still in use, count: 1, list:
-              (r0v0 double) from 0x0006: RETURN (r0v0 double)
-            	at jadx.core.utils.InsnRemover.removeSsaVar(InsnRemover.java:162)
-            	at jadx.core.utils.InsnRemover.unbindResult(InsnRemover.java:127)
-            	at jadx.core.utils.InsnRemover.unbindInsn(InsnRemover.java:91)
-            	at jadx.core.utils.InsnRemover.addAndUnbind(InsnRemover.java:57)
-            	at jadx.core.dex.visitors.ModVisitor.removeStep(ModVisitor.java:452)
-            	at jadx.core.dex.visitors.ModVisitor.visit(ModVisitor.java:96)
-            */
-        @Override // java.util.function.ToDoubleFunction
-        public final double applyAsDouble(java.lang.Object r3) {
-            /*
-                r2 = this;
-                android.graphics.RectF r3 = (android.graphics.RectF) r3
-                double r0 = android.widget.SmartSelectSprite.lambda$static$1(r3)
-                return r0
-            */
-            throw new UnsupportedOperationException("Method not decompiled: android.widget.SmartSelectSprite$$ExternalSyntheticLambda1.applyAsDouble(java.lang.Object):double");
-        }
-    });
+    static final Comparator<RectF> RECTANGLE_COMPARATOR =
+            Comparator.comparingDouble(
+                            new ToDoubleFunction() { // from class:
+                                // android.widget.SmartSelectSprite$$ExternalSyntheticLambda0
+                                /*  JADX ERROR: JadxRuntimeException in pass: ModVisitor
+                                jadx.core.utils.exceptions.JadxRuntimeException: Can't remove SSA var: r0v0 double, still in use, count: 1, list:
+                                  (r0v0 double) from 0x0006: RETURN (r0v0 double)
+                                	at jadx.core.utils.InsnRemover.removeSsaVar(InsnRemover.java:162)
+                                	at jadx.core.utils.InsnRemover.unbindResult(InsnRemover.java:127)
+                                	at jadx.core.utils.InsnRemover.unbindInsn(InsnRemover.java:91)
+                                	at jadx.core.utils.InsnRemover.addAndUnbind(InsnRemover.java:57)
+                                	at jadx.core.dex.visitors.ModVisitor.removeStep(ModVisitor.java:452)
+                                	at jadx.core.dex.visitors.ModVisitor.visit(ModVisitor.java:96)
+                                */
+                                @Override // java.util.function.ToDoubleFunction
+                                public final double applyAsDouble(java.lang.Object r3) {
+                                    /*
+                                        r2 = this;
+                                        android.graphics.RectF r3 = (android.graphics.RectF) r3
+                                        double r0 = android.widget.SmartSelectSprite.lambda$static$0(r3)
+                                        return r0
+                                    */
+                                    throw new UnsupportedOperationException(
+                                            "Method not decompiled:"
+                                                + " android.widget.SmartSelectSprite$$ExternalSyntheticLambda0.applyAsDouble(java.lang.Object):double");
+                                }
+                            })
+                    .thenComparingDouble(
+                            new ToDoubleFunction() { // from class:
+                                // android.widget.SmartSelectSprite$$ExternalSyntheticLambda1
+                                /*  JADX ERROR: JadxRuntimeException in pass: ModVisitor
+                                jadx.core.utils.exceptions.JadxRuntimeException: Can't remove SSA var: r0v0 double, still in use, count: 1, list:
+                                  (r0v0 double) from 0x0006: RETURN (r0v0 double)
+                                	at jadx.core.utils.InsnRemover.removeSsaVar(InsnRemover.java:162)
+                                	at jadx.core.utils.InsnRemover.unbindResult(InsnRemover.java:127)
+                                	at jadx.core.utils.InsnRemover.unbindInsn(InsnRemover.java:91)
+                                	at jadx.core.utils.InsnRemover.addAndUnbind(InsnRemover.java:57)
+                                	at jadx.core.dex.visitors.ModVisitor.removeStep(ModVisitor.java:452)
+                                	at jadx.core.dex.visitors.ModVisitor.visit(ModVisitor.java:96)
+                                */
+                                @Override // java.util.function.ToDoubleFunction
+                                public final double applyAsDouble(java.lang.Object r3) {
+                                    /*
+                                        r2 = this;
+                                        android.graphics.RectF r3 = (android.graphics.RectF) r3
+                                        double r0 = android.widget.SmartSelectSprite.lambda$static$1(r3)
+                                        return r0
+                                    */
+                                    throw new UnsupportedOperationException(
+                                            "Method not decompiled:"
+                                                + " android.widget.SmartSelectSprite$$ExternalSyntheticLambda1.applyAsDouble(java.lang.Object):double");
+                                }
+                            });
     private Animator mActiveAnimator = null;
     private Drawable mExistingDrawable = null;
     private RectangleList mExistingRectangleList = null;
@@ -119,7 +130,8 @@ final class SmartSelectSprite {
             return expansionDirection * (-1);
         }
 
-        private RoundedRectangleShape(RectF boundingRectangle, int expansionDirection, boolean inverted) {
+        private RoundedRectangleShape(
+                RectF boundingRectangle, int expansionDirection, boolean inverted) {
             this.mRoundRatio = 1.0f;
             this.mDrawRect = new RectF();
             this.mClipPath = new Path();
@@ -148,11 +160,14 @@ final class SmartSelectSprite {
             float cornerRadius = getCornerRadius();
             float adjustedCornerRadius = getAdjustedCornerRadius();
             this.mDrawRect.set(this.mBoundingRectangle);
-            this.mDrawRect.left = (this.mBoundingRectangle.left + this.mLeftBoundary) - (cornerRadius / 2.0f);
-            this.mDrawRect.right = this.mBoundingRectangle.left + this.mRightBoundary + (cornerRadius / 2.0f);
+            this.mDrawRect.left =
+                    (this.mBoundingRectangle.left + this.mLeftBoundary) - (cornerRadius / 2.0f);
+            this.mDrawRect.right =
+                    this.mBoundingRectangle.left + this.mRightBoundary + (cornerRadius / 2.0f);
             canvas.save();
             this.mClipPath.reset();
-            this.mClipPath.addRoundRect(this.mDrawRect, adjustedCornerRadius, adjustedCornerRadius, Path.Direction.CW);
+            this.mClipPath.addRoundRect(
+                    this.mDrawRect, adjustedCornerRadius, adjustedCornerRadius, Path.Direction.CW);
             canvas.clipPath(this.mClipPath);
             canvas.drawRect(this.mBoundingRectangle, paint);
             canvas.restore();
@@ -229,7 +244,8 @@ final class SmartSelectSprite {
                 } else if (leftBoundary > boundarySoFar) {
                     rectangle.setStartBoundary(rectangle.getBoundingWidth());
                 } else {
-                    rectangle.setStartBoundary((rectangle.getBoundingWidth() - boundarySoFar) + leftBoundary);
+                    rectangle.setStartBoundary(
+                            (rectangle.getBoundingWidth() - boundarySoFar) + leftBoundary);
                 }
                 boundarySoFar = rectangleLeftBoundary;
             }
@@ -299,15 +315,19 @@ final class SmartSelectSprite {
         this.mInvalidator = (Runnable) Objects.requireNonNull(invalidator);
     }
 
-    public void startAnimation(PointF pointF, List<RectangleWithTextSelectionLayout> list, Runnable runnable) {
+    public void startAnimation(
+            PointF pointF, List<RectangleWithTextSelectionLayout> list, Runnable runnable) {
         RectangleWithTextSelectionLayout rectangleWithTextSelectionLayout;
         cancelAnimation();
-        ValueAnimator.AnimatorUpdateListener animatorUpdateListener = new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.SmartSelectSprite$$ExternalSyntheticLambda2
-            @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-            public final void onAnimationUpdate(ValueAnimator valueAnimator) {
-                SmartSelectSprite.this.lambda$startAnimation$2(valueAnimator);
-            }
-        };
+        ValueAnimator.AnimatorUpdateListener animatorUpdateListener =
+                new ValueAnimator
+                        .AnimatorUpdateListener() { // from class:
+                                                    // android.widget.SmartSelectSprite$$ExternalSyntheticLambda2
+                    @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                    public final void onAnimationUpdate(ValueAnimator valueAnimator) {
+                        SmartSelectSprite.this.lambda$startAnimation$2(valueAnimator);
+                    }
+                };
         int size = list.size();
         ArrayList arrayList = new ArrayList(size);
         int i = 0;
@@ -335,7 +355,11 @@ final class SmartSelectSprite {
             byte b = 0;
             if (i3 < size) {
                 RectangleWithTextSelectionLayout rectangleWithTextSelectionLayout2 = list.get(i3);
-                arrayList.add(new RoundedRectangleShape(rectangleWithTextSelectionLayout2.getRectangle(), generateDirections[i3], rectangleWithTextSelectionLayout2.getTextSelectionLayout() == 0));
+                arrayList.add(
+                        new RoundedRectangleShape(
+                                rectangleWithTextSelectionLayout2.getRectangle(),
+                                generateDirections[i3],
+                                rectangleWithTextSelectionLayout2.getTextSelectionLayout() == 0));
                 i3++;
             } else {
                 RectangleList rectangleList = new RectangleList(arrayList);
@@ -345,7 +369,8 @@ final class SmartSelectSprite {
                 paint.setStyle(Paint.Style.FILL);
                 this.mExistingRectangleList = rectangleList;
                 this.mExistingDrawable = shapeDrawable;
-                this.mActiveAnimator = createAnimator(rectangleList, i2, i2, animatorUpdateListener, runnable);
+                this.mActiveAnimator =
+                        createAnimator(rectangleList, i2, i2, animatorUpdateListener, runnable);
                 this.mActiveAnimator.start();
                 return;
             }
@@ -361,9 +386,20 @@ final class SmartSelectSprite {
         return this.mActiveAnimator != null && this.mActiveAnimator.isRunning();
     }
 
-    private Animator createAnimator(RectangleList rectangleList, float startingOffsetLeft, float startingOffsetRight, ValueAnimator.AnimatorUpdateListener updateListener, Runnable onAnimationEnd) {
-        ObjectAnimator rightBoundaryAnimator = ObjectAnimator.ofFloat(rectangleList, "rightBoundary", startingOffsetRight, rectangleList.getTotalWidth());
-        ObjectAnimator leftBoundaryAnimator = ObjectAnimator.ofFloat(rectangleList, "leftBoundary", startingOffsetLeft, 0.0f);
+    private Animator createAnimator(
+            RectangleList rectangleList,
+            float startingOffsetLeft,
+            float startingOffsetRight,
+            ValueAnimator.AnimatorUpdateListener updateListener,
+            Runnable onAnimationEnd) {
+        ObjectAnimator rightBoundaryAnimator =
+                ObjectAnimator.ofFloat(
+                        rectangleList,
+                        "rightBoundary",
+                        startingOffsetRight,
+                        rectangleList.getTotalWidth());
+        ObjectAnimator leftBoundaryAnimator =
+                ObjectAnimator.ofFloat(rectangleList, "leftBoundary", startingOffsetLeft, 0.0f);
         rightBoundaryAnimator.setDuration(200L);
         leftBoundaryAnimator.setDuration(200L);
         rightBoundaryAnimator.addUpdateListener(updateListener);
@@ -377,29 +413,29 @@ final class SmartSelectSprite {
     }
 
     private void setUpAnimatorListener(Animator animator, final Runnable onAnimationEnd) {
-        animator.addListener(new Animator.AnimatorListener() { // from class: android.widget.SmartSelectSprite.1
-            @Override // android.animation.Animator.AnimatorListener
-            public void onAnimationStart(Animator animator2) {
-            }
+        animator.addListener(
+                new Animator.AnimatorListener() { // from class: android.widget.SmartSelectSprite.1
+                    @Override // android.animation.Animator.AnimatorListener
+                    public void onAnimationStart(Animator animator2) {}
 
-            @Override // android.animation.Animator.AnimatorListener
-            public void onAnimationEnd(Animator animator2) {
-                SmartSelectSprite.this.mExistingRectangleList.setDisplayType(1);
-                SmartSelectSprite.this.mInvalidator.run();
-                onAnimationEnd.run();
-            }
+                    @Override // android.animation.Animator.AnimatorListener
+                    public void onAnimationEnd(Animator animator2) {
+                        SmartSelectSprite.this.mExistingRectangleList.setDisplayType(1);
+                        SmartSelectSprite.this.mInvalidator.run();
+                        onAnimationEnd.run();
+                    }
 
-            @Override // android.animation.Animator.AnimatorListener
-            public void onAnimationCancel(Animator animator2) {
-            }
+                    @Override // android.animation.Animator.AnimatorListener
+                    public void onAnimationCancel(Animator animator2) {}
 
-            @Override // android.animation.Animator.AnimatorListener
-            public void onAnimationRepeat(Animator animator2) {
-            }
-        });
+                    @Override // android.animation.Animator.AnimatorListener
+                    public void onAnimationRepeat(Animator animator2) {}
+                });
     }
 
-    private static int[] generateDirections(RectangleWithTextSelectionLayout centerRectangle, List<RectangleWithTextSelectionLayout> rectangles) {
+    private static int[] generateDirections(
+            RectangleWithTextSelectionLayout centerRectangle,
+            List<RectangleWithTextSelectionLayout> rectangles) {
         int[] result = new int[rectangles.size()];
         int centerRectangleIndex = rectangles.indexOf(centerRectangle);
         for (int i = 0; i < centerRectangleIndex - 1; i++) {
@@ -424,7 +460,10 @@ final class SmartSelectSprite {
     private static boolean contains(RectF rectangle, PointF point) {
         float x = point.x;
         float y = point.y;
-        return x >= rectangle.left && x <= rectangle.right && y >= rectangle.top && y <= rectangle.bottom;
+        return x >= rectangle.left
+                && x <= rectangle.right
+                && y >= rectangle.top
+                && y <= rectangle.bottom;
     }
 
     private void removeExistingDrawables() {

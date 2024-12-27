@@ -13,12 +13,13 @@ import android.view.SurfaceControl;
 import android.view.accessibility.AccessibilityManager;
 import android.window.IGlobalDragListener;
 import android.window.IUnhandledDragCallback;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
-import com.android.server.wm.DragState;
-import com.android.server.wm.WindowManagerInternal;
 import com.android.window.flags.Flags;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -31,31 +32,32 @@ public final class DragDropController {
     public final DragHandler mHandler;
     public final WindowManagerService mService;
     public boolean mUpdateTaskVisibilityAfterDragClosed = false;
-    public final AnonymousClass1 mGlobalDragListenerDeathRecipient = new IBinder.DeathRecipient() { // from class: com.android.server.wm.DragDropController.1
-        @Override // android.os.IBinder.DeathRecipient
-        public final void binderDied() {
-            WindowManagerGlobalLock windowManagerGlobalLock = DragDropController.this.mService.mGlobalLock;
-            WindowManagerService.boostPriorityForLockedSection();
-            synchronized (windowManagerGlobalLock) {
-                try {
-                    if (DragDropController.this.mHandler.hasMessages(4)) {
-                        DragDropController.this.onUnhandledDropCallback(false);
+    public final AnonymousClass1 mGlobalDragListenerDeathRecipient =
+            new IBinder.DeathRecipient() { // from class: com.android.server.wm.DragDropController.1
+                @Override // android.os.IBinder.DeathRecipient
+                public final void binderDied() {
+                    WindowManagerGlobalLock windowManagerGlobalLock =
+                            DragDropController.this.mService.mGlobalLock;
+                    WindowManagerService.boostPriorityForLockedSection();
+                    synchronized (windowManagerGlobalLock) {
+                        try {
+                            if (DragDropController.this.mHandler.hasMessages(4)) {
+                                DragDropController.this.onUnhandledDropCallback(false);
+                            }
+                            DragDropController.this.setGlobalDragListener(null);
+                        } catch (Throwable th) {
+                            WindowManagerService.resetPriorityAfterLockedSection();
+                            throw th;
+                        }
                     }
-                    DragDropController.this.setGlobalDragListener(null);
-                } catch (Throwable th) {
                     WindowManagerService.resetPriorityAfterLockedSection();
-                    throw th;
                 }
-            }
-            WindowManagerService.resetPriorityAfterLockedSection();
-        }
-    };
+            };
     public final AtomicReference mCallback = new AtomicReference(new AnonymousClass2());
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.wm.DragDropController$2, reason: invalid class name */
-    public final class AnonymousClass2 implements WindowManagerInternal.IDragDropCallback {
-    }
+    public final class AnonymousClass2 implements WindowManagerInternal.IDragDropCallback {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DragHandler extends Handler {
@@ -87,7 +89,8 @@ public final class DragDropController {
             }
             if (i == 1) {
                 Slog.d("WindowManager", "Drag ending; tearing down input channel");
-                DragState.InputInterceptor inputInterceptor = (DragState.InputInterceptor) message.obj;
+                DragState.InputInterceptor inputInterceptor =
+                        (DragState.InputInterceptor) message.obj;
                 if (inputInterceptor == null) {
                     return;
                 }
@@ -110,7 +113,9 @@ public final class DragDropController {
                     try {
                         DragState dragState2 = DragDropController.this.mDragState;
                         if (dragState2 == null) {
-                            Slog.wtf("WindowManager", "mDragState unexpectedly became null while playing animation");
+                            Slog.wtf(
+                                    "WindowManager",
+                                    "mDragState unexpectedly became null while playing animation");
                             WindowManagerService.resetPriorityAfterLockedSection();
                             return;
                         } else {
@@ -128,7 +133,9 @@ public final class DragDropController {
                 WindowManagerService.boostPriorityForLockedSection();
                 synchronized (windowManagerGlobalLock4) {
                     try {
-                        ((SurfaceControl.Transaction) this.mService.mTransactionFactory.get()).remove((SurfaceControl) message.obj).apply();
+                        ((SurfaceControl.Transaction) this.mService.mTransactionFactory.get())
+                                .remove((SurfaceControl) message.obj)
+                                .apply();
                     } finally {
                         WindowManagerService.resetPriorityAfterLockedSection();
                     }
@@ -159,8 +166,10 @@ public final class DragDropController {
                     DragDropController dragDropController = DragDropController.this;
                     if (dragDropController.mUpdateTaskVisibilityAfterDragClosed) {
                         dragDropController.mUpdateTaskVisibilityAfterDragClosed = false;
-                        this.mService.mAtmService.mRootWindowContainer.ensureActivitiesVisible(true, null);
-                        this.mService.mAtmService.mTaskSupervisor.activityIdleInternal(null, false, true, null);
+                        this.mService.mAtmService.mRootWindowContainer.ensureActivitiesVisible(
+                                true, null);
+                        this.mService.mAtmService.mTaskSupervisor.activityIdleInternal(
+                                null, false, true, null);
                     }
                 } finally {
                 }
@@ -186,11 +195,13 @@ public final class DragDropController {
                     DragState dragState = this.mDragState;
                     if (dragState == null) {
                         Slog.w("WindowManager", "cancelDragAndDrop() without prepareDrag()");
-                        throw new IllegalStateException("cancelDragAndDrop() without prepareDrag()");
+                        throw new IllegalStateException(
+                                "cancelDragAndDrop() without prepareDrag()");
                     }
                     if (dragState.mToken != iBinder) {
                         Slog.w("WindowManager", "cancelDragAndDrop() does not match prepareDrag()");
-                        throw new IllegalStateException("cancelDragAndDrop() does not match prepareDrag()");
+                        throw new IllegalStateException(
+                                "cancelDragAndDrop() does not match prepareDrag()");
                     }
                     dragState.mDragResult = false;
                     dragState.cancelDragLocked(z);
@@ -224,7 +235,10 @@ public final class DragDropController {
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
-                boolean isEnabled = ((AccessibilityManager) this.mService.mContext.getSystemService("accessibility")).isEnabled();
+                boolean isEnabled =
+                        ((AccessibilityManager)
+                                        this.mService.mContext.getSystemService("accessibility"))
+                                .isEnabled();
                 if (!dragDropActiveLocked()) {
                     WindowManagerService.resetPriorityAfterLockedSection();
                     return false;
@@ -233,12 +247,15 @@ public final class DragDropController {
                     WindowManagerService.resetPriorityAfterLockedSection();
                     return false;
                 }
-                WindowState windowForClientLocked = this.mService.windowForClientLocked((Session) null, iWindow, false);
+                WindowState windowForClientLocked =
+                        this.mService.windowForClientLocked((Session) null, iWindow, false);
                 if (!this.mDragState.isWindowNotified(windowForClientLocked)) {
                     WindowManagerService.resetPriorityAfterLockedSection();
                     return false;
                 }
-                boolean reportDropWindowLock = this.mDragState.reportDropWindowLock(windowForClientLocked.mInputChannelToken, f, f2);
+                boolean reportDropWindowLock =
+                        this.mDragState.reportDropWindowLock(
+                                windowForClientLocked.mInputChannelToken, f, f2);
                 WindowManagerService.resetPriorityAfterLockedSection();
                 return reportDropWindowLock;
             } catch (Throwable th) {
@@ -301,33 +318,40 @@ public final class DragDropController {
             StringBuilder sb = new StringBuilder("Skipping unhandled listener (listener=");
             sb.append(this.mGlobalDragListener);
             sb.append(", flags=");
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb, this.mDragState.mFlags, ")", "WindowManager");
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    sb, this.mDragState.mFlags, ")", "WindowManager");
             return false;
         }
         final int nextInt = new Random().nextInt();
         Trace.asyncTraceBegin(32L, "DragDropController#notifyUnhandledDrop", nextInt);
-        DeviceIdleController$$ExternalSyntheticOutline0.m("Sending DROP to unhandled listener (", str, ")", "WindowManager");
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                "Sending DROP to unhandled listener (", str, ")", "WindowManager");
         try {
             DragHandler dragHandler = this.mHandler;
             dragHandler.removeMessages(4, null);
             dragHandler.sendMessageDelayed(dragHandler.obtainMessage(4, null), 5000L);
-            this.mGlobalDragListener.onUnhandledDrop(dragEvent, new IUnhandledDragCallback.Stub() { // from class: com.android.server.wm.DragDropController.3
-                public final void notifyUnhandledDropComplete(boolean z3) {
-                    Slog.d("WindowManager", "Unhandled listener finished handling DROP");
-                    WindowManagerGlobalLock windowManagerGlobalLock = DragDropController.this.mService.mGlobalLock;
-                    WindowManagerService.boostPriorityForLockedSection();
-                    synchronized (windowManagerGlobalLock) {
-                        try {
-                            DragDropController.this.onUnhandledDropCallback(z3);
-                            Trace.asyncTraceEnd(32L, "DragDropController#notifyUnhandledDrop", nextInt);
-                        } catch (Throwable th) {
+            this.mGlobalDragListener.onUnhandledDrop(
+                    dragEvent,
+                    new IUnhandledDragCallback
+                            .Stub() { // from class: com.android.server.wm.DragDropController.3
+                        public final void notifyUnhandledDropComplete(boolean z3) {
+                            Slog.d("WindowManager", "Unhandled listener finished handling DROP");
+                            WindowManagerGlobalLock windowManagerGlobalLock =
+                                    DragDropController.this.mService.mGlobalLock;
+                            WindowManagerService.boostPriorityForLockedSection();
+                            synchronized (windowManagerGlobalLock) {
+                                try {
+                                    DragDropController.this.onUnhandledDropCallback(z3);
+                                    Trace.asyncTraceEnd(
+                                            32L, "DragDropController#notifyUnhandledDrop", nextInt);
+                                } catch (Throwable th) {
+                                    WindowManagerService.resetPriorityAfterLockedSection();
+                                    throw th;
+                                }
+                            }
                             WindowManagerService.resetPriorityAfterLockedSection();
-                            throw th;
                         }
-                    }
-                    WindowManagerService.resetPriorityAfterLockedSection();
-                }
-            });
+                    });
             return true;
         } catch (RemoteException e) {
             Slog.e("WindowManager", "Failed to call global drag listener for unhandled drop", e);
@@ -349,18 +373,37 @@ public final class DragDropController {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.os.IBinder performDragWithArea(int r23, int r24, android.view.IWindow r25, int r26, android.view.SurfaceControl r27, int r28, int r29, int r30, float r31, float r32, float r33, float r34, android.content.ClipData r35, android.graphics.RectF r36) {
+    public final android.os.IBinder performDragWithArea(
+            int r23,
+            int r24,
+            android.view.IWindow r25,
+            int r26,
+            android.view.SurfaceControl r27,
+            int r28,
+            int r29,
+            int r30,
+            float r31,
+            float r32,
+            float r33,
+            float r34,
+            android.content.ClipData r35,
+            android.graphics.RectF r36) {
         /*
             Method dump skipped, instructions count: 1076
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.DragDropController.performDragWithArea(int, int, android.view.IWindow, int, android.view.SurfaceControl, int, int, int, float, float, float, float, android.content.ClipData, android.graphics.RectF):android.os.IBinder");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.DragDropController.performDragWithArea(int, int,"
+                    + " android.view.IWindow, int, android.view.SurfaceControl, int, int, int,"
+                    + " float, float, float, float, android.content.ClipData,"
+                    + " android.graphics.RectF):android.os.IBinder");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:57:0x00cc, code lost:
-    
-        if (r2.type == 2024) goto L42;
-     */
+
+       if (r2.type == 2024) goto L42;
+    */
     /* JADX WARN: Finally extract failed */
     /* JADX WARN: Removed duplicated region for block: B:32:0x00b2 A[Catch: all -> 0x0051, TryCatch #0 {all -> 0x0051, blocks: (B:6:0x0036, B:8:0x003a, B:9:0x0041, B:13:0x0054, B:15:0x0058, B:17:0x0072, B:18:0x0083, B:21:0x0087, B:23:0x0094, B:27:0x0099, B:30:0x00a7, B:32:0x00b2, B:34:0x00bb, B:37:0x00ce, B:38:0x00d8, B:40:0x00e7, B:46:0x00f1, B:49:0x00fa, B:50:0x0101, B:54:0x00c2, B:56:0x00c8, B:60:0x0113, B:61:0x012c), top: B:5:0x0036, outer: #1, inners: #2 }] */
     /* JADX WARN: Removed duplicated region for block: B:40:0x00e7 A[Catch: all -> 0x0051, TRY_LEAVE, TryCatch #0 {all -> 0x0051, blocks: (B:6:0x0036, B:8:0x003a, B:9:0x0041, B:13:0x0054, B:15:0x0058, B:17:0x0072, B:18:0x0083, B:21:0x0087, B:23:0x0094, B:27:0x0099, B:30:0x00a7, B:32:0x00b2, B:34:0x00bb, B:37:0x00ce, B:38:0x00d8, B:40:0x00e7, B:46:0x00f1, B:49:0x00fa, B:50:0x0101, B:54:0x00c2, B:56:0x00c8, B:60:0x0113, B:61:0x012c), top: B:5:0x0036, outer: #1, inners: #2 }] */
@@ -373,7 +416,10 @@ public final class DragDropController {
             Method dump skipped, instructions count: 318
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.DragDropController.reportDropResult(android.view.IWindow, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.DragDropController.reportDropResult(android.view.IWindow,"
+                    + " boolean):void");
     }
 
     public final void setGlobalDragListener(IGlobalDragListener iGlobalDragListener) {

@@ -2,7 +2,9 @@ package com.android.server.pm;
 
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ShortcutInfo;
+
 import com.android.internal.infra.AndroidFuture;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -17,13 +19,15 @@ public final /* synthetic */ class ShortcutService$$ExternalSyntheticLambda22 im
     public final /* synthetic */ Object f$1;
     public final /* synthetic */ int f$2;
 
-    public /* synthetic */ ShortcutService$$ExternalSyntheticLambda22(int i, List list, AndroidFuture androidFuture) {
+    public /* synthetic */ ShortcutService$$ExternalSyntheticLambda22(
+            int i, List list, AndroidFuture androidFuture) {
         this.f$2 = i;
         this.f$0 = list;
         this.f$1 = androidFuture;
     }
 
-    public /* synthetic */ ShortcutService$$ExternalSyntheticLambda22(ShortcutService shortcutService, ShortcutUser shortcutUser, int i) {
+    public /* synthetic */ ShortcutService$$ExternalSyntheticLambda22(
+            ShortcutService shortcutService, ShortcutUser shortcutUser, int i) {
         this.f$0 = shortcutService;
         this.f$1 = shortcutUser;
         this.f$2 = i;
@@ -40,7 +44,9 @@ public final /* synthetic */ class ShortcutService$$ExternalSyntheticLambda22 im
                 shortcutService.getClass();
                 String str = applicationInfo.packageName;
                 shortcutUser.getClass();
-                shortcutUser.forAllPackageItems(new ShortcutUser$$ExternalSyntheticLambda6(i, str, new ShortcutUser$$ExternalSyntheticLambda0(1)));
+                shortcutUser.forAllPackageItems(
+                        new ShortcutUser$$ExternalSyntheticLambda6(
+                                i, str, new ShortcutUser$$ExternalSyntheticLambda0(1)));
                 shortcutUser.rescanPackageIfNeeded(applicationInfo.packageName, true);
                 break;
             default:
@@ -49,12 +55,16 @@ public final /* synthetic */ class ShortcutService$$ExternalSyntheticLambda22 im
                 AndroidFuture androidFuture = (AndroidFuture) this.f$1;
                 List list2 = (List) obj;
                 if (list2 != null) {
-                    Stream map = list2.stream().map(new Function() { // from class: com.android.server.pm.ShortcutService$LocalService$$ExternalSyntheticLambda7
-                        @Override // java.util.function.Function
-                        public final Object apply(Object obj2) {
-                            return ((ShortcutInfo) obj2).clone(i2);
-                        }
-                    });
+                    Stream map =
+                            list2.stream()
+                                    .map(
+                                            new Function() { // from class:
+                                                             // com.android.server.pm.ShortcutService$LocalService$$ExternalSyntheticLambda7
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj2) {
+                                                    return ((ShortcutInfo) obj2).clone(i2);
+                                                }
+                                            });
                     Objects.requireNonNull(list);
                     map.forEach(new ShortcutPackage$$ExternalSyntheticLambda13(0, list));
                 }

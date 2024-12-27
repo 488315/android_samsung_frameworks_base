@@ -6,8 +6,9 @@ import android.content.pm.UserProperties;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.DebugUtils;
+
 import com.android.server.locksettings.LockSettingsService;
-import com.android.server.pm.PackageManagerShellCommand;
+
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -23,11 +24,9 @@ public abstract class UserManagerInternal {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface UserLifecycleListener {
-        default void onUserCreated(UserInfo userInfo, Object obj) {
-        }
+        default void onUserCreated(UserInfo userInfo, Object obj) {}
 
-        default void onUserRemoved(UserInfo userInfo) {
-        }
+        default void onUserRemoved(UserInfo userInfo) {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -44,11 +43,13 @@ public abstract class UserManagerInternal {
         return DebugUtils.constantToString(UserManagerInternal.class, "USER_START_MODE_", i);
     }
 
-    public abstract void addMaintenanceModeLifecycleListener(LockSettingsService.AnonymousClass1 anonymousClass1);
+    public abstract void addMaintenanceModeLifecycleListener(
+            LockSettingsService.AnonymousClass1 anonymousClass1);
 
     public abstract void addUserLifecycleListener(UserLifecycleListener userLifecycleListener);
 
-    public abstract void addUserRestrictionsListener(UserRestrictionsListener userRestrictionsListener);
+    public abstract void addUserRestrictionsListener(
+            UserRestrictionsListener userRestrictionsListener);
 
     public abstract void addUserVisibilityListener(UserVisibilityListener userVisibilityListener);
 
@@ -56,7 +57,8 @@ public abstract class UserManagerInternal {
 
     public abstract boolean clearAttributes(int i, int i2);
 
-    public abstract UserInfo createUserEvenWhenDisallowed(String str, String str2, int i, String[] strArr, Object obj);
+    public abstract UserInfo createUserEvenWhenDisallowed(
+            String str, String str2, int i, String[] strArr, Object obj);
 
     public abstract boolean exists(int i);
 
@@ -118,7 +120,8 @@ public abstract class UserManagerInternal {
 
     public abstract boolean removeUserEvenWhenDisallowed(int i);
 
-    public abstract void removeUserLifecycleListener(PackageManagerShellCommand.AnonymousClass4 anonymousClass4);
+    public abstract void removeUserLifecycleListener(
+            PackageManagerShellCommand.AnonymousClass4 anonymousClass4);
 
     public abstract void removeUserState(int i);
 
@@ -128,7 +131,8 @@ public abstract class UserManagerInternal {
 
     public abstract void setDeviceManaged(boolean z);
 
-    public abstract void setDevicePolicyUserRestrictions(Bundle bundle, RestrictionsSet restrictionsSet);
+    public abstract void setDevicePolicyUserRestrictions(
+            Bundle bundle, RestrictionsSet restrictionsSet);
 
     public abstract boolean setDualDarInfo(int i, int i2);
 

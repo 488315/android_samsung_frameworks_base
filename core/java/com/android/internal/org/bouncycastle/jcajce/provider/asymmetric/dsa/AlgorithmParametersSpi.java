@@ -3,6 +3,7 @@ package com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.dsa;
 import com.android.internal.org.bouncycastle.asn1.ASN1Encoding;
 import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.x509.DSAParameter;
+
 import java.io.IOException;
 import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.DSAParameterSpec;
@@ -17,7 +18,8 @@ public class AlgorithmParametersSpi extends java.security.AlgorithmParametersSpi
     }
 
     @Override // java.security.AlgorithmParametersSpi
-    protected AlgorithmParameterSpec engineGetParameterSpec(Class paramSpec) throws InvalidParameterSpecException {
+    protected AlgorithmParameterSpec engineGetParameterSpec(Class paramSpec)
+            throws InvalidParameterSpecException {
         if (paramSpec == null) {
             throw new NullPointerException("argument to getParameterSpec must not be null");
         }
@@ -26,7 +28,9 @@ public class AlgorithmParametersSpi extends java.security.AlgorithmParametersSpi
 
     @Override // java.security.AlgorithmParametersSpi
     protected byte[] engineGetEncoded() {
-        DSAParameter dsaP = new DSAParameter(this.currentSpec.getP(), this.currentSpec.getQ(), this.currentSpec.getG());
+        DSAParameter dsaP =
+                new DSAParameter(
+                        this.currentSpec.getP(), this.currentSpec.getQ(), this.currentSpec.getG());
         try {
             return dsaP.getEncoded(ASN1Encoding.DER);
         } catch (IOException e) {
@@ -42,17 +46,21 @@ public class AlgorithmParametersSpi extends java.security.AlgorithmParametersSpi
         return null;
     }
 
-    protected AlgorithmParameterSpec localEngineGetParameterSpec(Class paramSpec) throws InvalidParameterSpecException {
+    protected AlgorithmParameterSpec localEngineGetParameterSpec(Class paramSpec)
+            throws InvalidParameterSpecException {
         if (paramSpec == DSAParameterSpec.class || paramSpec == AlgorithmParameterSpec.class) {
             return this.currentSpec;
         }
-        throw new InvalidParameterSpecException("unknown parameter spec passed to DSA parameters object.");
+        throw new InvalidParameterSpecException(
+                "unknown parameter spec passed to DSA parameters object.");
     }
 
     @Override // java.security.AlgorithmParametersSpi
-    protected void engineInit(AlgorithmParameterSpec paramSpec) throws InvalidParameterSpecException {
+    protected void engineInit(AlgorithmParameterSpec paramSpec)
+            throws InvalidParameterSpecException {
         if (!(paramSpec instanceof DSAParameterSpec)) {
-            throw new InvalidParameterSpecException("DSAParameterSpec required to initialise a DSA algorithm parameters object");
+            throw new InvalidParameterSpecException(
+                    "DSAParameterSpec required to initialise a DSA algorithm parameters object");
         }
         this.currentSpec = (DSAParameterSpec) paramSpec;
     }

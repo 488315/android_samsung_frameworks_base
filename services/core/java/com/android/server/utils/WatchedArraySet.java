@@ -12,24 +12,26 @@ public final class WatchedArraySet extends WatchableImpl implements Snappable {
     /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.utils.WatchedArraySet$1] */
     public WatchedArraySet() {
         this.mWatching = false;
-        this.mObserver = new Watcher() { // from class: com.android.server.utils.WatchedArraySet.1
-            @Override // com.android.server.utils.Watcher
-            public final void onChange(Watchable watchable) {
-                WatchedArraySet.this.dispatchChange(watchable);
-            }
-        };
+        this.mObserver =
+                new Watcher() { // from class: com.android.server.utils.WatchedArraySet.1
+                    @Override // com.android.server.utils.Watcher
+                    public final void onChange(Watchable watchable) {
+                        WatchedArraySet.this.dispatchChange(watchable);
+                    }
+                };
         this.mStorage = new ArraySet(0, false);
     }
 
     /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.utils.WatchedArraySet$1] */
     public WatchedArraySet(WatchedArraySet watchedArraySet) {
         this.mWatching = false;
-        this.mObserver = new Watcher() { // from class: com.android.server.utils.WatchedArraySet.1
-            @Override // com.android.server.utils.Watcher
-            public final void onChange(Watchable watchable) {
-                WatchedArraySet.this.dispatchChange(watchable);
-            }
-        };
+        this.mObserver =
+                new Watcher() { // from class: com.android.server.utils.WatchedArraySet.1
+                    @Override // com.android.server.utils.Watcher
+                    public final void onChange(Watchable watchable) {
+                        WatchedArraySet.this.dispatchChange(watchable);
+                    }
+                };
         this.mStorage = new ArraySet(watchedArraySet.mStorage);
     }
 
@@ -57,7 +59,9 @@ public final class WatchedArraySet extends WatchableImpl implements Snappable {
     }
 
     public final boolean equals(Object obj) {
-        return obj instanceof WatchedArraySet ? this.mStorage.equals(((WatchedArraySet) obj).mStorage) : this.mStorage.equals(obj);
+        return obj instanceof WatchedArraySet
+                ? this.mStorage.equals(((WatchedArraySet) obj).mStorage)
+                : this.mStorage.equals(obj);
     }
 
     public final int hashCode() {

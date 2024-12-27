@@ -6,6 +6,8 @@ import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
 /* loaded from: classes2.dex */
 public class StorageServiceException extends Exception {
     public StorageServiceException(String str) {
-        super(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("StorageServiceException : ", str));
+        super(
+                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                        "StorageServiceException : ", str));
     }
 }

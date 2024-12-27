@@ -38,7 +38,8 @@ public interface CoreSaConstant {
     public static final String DETAIL_FROM_NOTI_SWIPE_DOWN = "From Noti_Swipedown";
     public static final String DETAIL_FROM_POPUP_RESIZING = "From popup resizing";
     public static final String DETAIL_FROM_POPUP_VIEW = "From Popup view";
-    public static final String DETAIL_FROM_POPUP_VIEW_HANDLEGESTURE = "From Popup view_HandleGesture";
+    public static final String DETAIL_FROM_POPUP_VIEW_HANDLEGESTURE =
+            "From Popup view_HandleGesture";
     public static final String DETAIL_FROM_POPUP_VIEW_OPTION = "From popup view option";
     public static final String DETAIL_FROM_RECENT_OPTION = "From recent_option";
     public static final String DETAIL_FROM_RECENT_TASK = "From recent_task";
@@ -46,7 +47,8 @@ public interface CoreSaConstant {
     public static final String DETAIL_FROM_SMART_POPUP = "From Smart Popup";
     public static final String DETAIL_FROM_SPLIT_DISMISS = "From split dismiss";
     public static final String DETAIL_FROM_SPLIT_SCREEN_OPTION = "From split screen option";
-    public static final String DETAIL_FROM_SPLIT_VIEW_HANDLEGESTURE = "From Split view_HandleGesture";
+    public static final String DETAIL_FROM_SPLIT_VIEW_HANDLEGESTURE =
+            "From Split view_HandleGesture";
     public static final String DETAIL_FROM_SPLIT_VIEW_OPTION = "From split view Option";
     public static final String DETAIL_FROM_TASKBAR_DND = "From Taskbar_D&D";
     public static final String DETAIL_FROM_TASK_EDGE_DND = "From Task edge_D&D";
@@ -88,7 +90,17 @@ public interface CoreSaConstant {
     public static final String FOLDABLE_APP_WHEN_FOLDING_ID = "W001";
     public static final String FOLDABLE_APP_WHEN_UNFOLDING_ID = "W004";
     public static final String FREEFORM_APP_PREVIEW_BY_HOVERING_ID = "2204";
-    public static final String[] FREEFORM_DETAIL_MOVE_ICON = {"Top-left", "Top-center", "Top-right", "Middle-left", "Middle-center", "Middle-right", "Bottom-left", "Bottom-center", "Bottom-right"};
+    public static final String[] FREEFORM_DETAIL_MOVE_ICON = {
+        "Top-left",
+        "Top-center",
+        "Top-right",
+        "Middle-left",
+        "Middle-center",
+        "Middle-right",
+        "Bottom-left",
+        "Bottom-center",
+        "Bottom-right"
+    };
     public static final String FREEFORM_EVENT_CLOSE_ID = "2003";
     public static final String FREEFORM_EVENT_MAXIMIZE_ID = "2002";
     public static final String FREEFORM_EVENT_MINIMIZE_ID = "2001";
@@ -187,7 +199,8 @@ public interface CoreSaConstant {
     public static final int MULTI_WINDOW_MODE_CHANGE_SPLIT_TO_FULLSCREEN = 4;
     public static final int MULTI_WINDOW_MODE_CHANGE_SPLIT_TO_PIP = 6;
     public static final int MULTI_WINDOW_MODE_CHANGE_UNDEFINED = 0;
-    public static final String PACKAGE_NAME_EDGE_SERVICE = "com.samsung.android.app.cocktailbarservice";
+    public static final String PACKAGE_NAME_EDGE_SERVICE =
+            "com.samsung.android.app.cocktailbarservice";
     public static final String PACKAGE_NAME_RECENTS = "com.sec.android.app.launcher";
     public static final String PIP_EVENT_SWITCH_TO_PIP_VIEW = "2301";
     public static final String POGOKEYBOARD_CONNECTION_ID = "67260";
@@ -209,10 +222,12 @@ public interface CoreSaConstant {
     public static final String SPLIT_DETAIL_HORIZONTAL_SPLIT = "Horizontal split";
     public static final String SPLIT_DETAIL_LAYOUT_CHANGED = "Layout changed";
     public static final String SPLIT_DETAIL_MOVE_DIVIDER = "Move divider";
-    public static final String SPLIT_DETAIL_OPEN_IN_POPUP_VIEW_BUTTON = "Tap 'Open in Pop-up view' button";
+    public static final String SPLIT_DETAIL_OPEN_IN_POPUP_VIEW_BUTTON =
+            "Tap 'Open in Pop-up view' button";
     public static final String SPLIT_DETAIL_SPLILT_TO_FREEFORM = "Split -> Freeform";
     public static final String SPLIT_DETAIL_SWITCH_FULLSCREEN = "Switch to Full screen";
-    public static final String SPLIT_DETAIL_SWITCH_MW_INCOMPATIBLE_APP = "Switch to MW-incompatible app";
+    public static final String SPLIT_DETAIL_SWITCH_MW_INCOMPATIBLE_APP =
+            "Switch to MW-incompatible app";
     public static final String SPLIT_DETAIL_TAP_BACK_BUTTON = "Tap 'Back' button";
     public static final String SPLIT_DETAIL_TAP_CLOSE_BTN = "Tap 'Close window' button";
     public static final String SPLIT_DETAIL_TAP_HOME_BUTTON = "Tap 'Home' button";
@@ -259,7 +274,8 @@ public interface CoreSaConstant {
     public static final String VALUE_PAY_WITH_SAMSUNG_PAY = "Pay with Samsung Pay";
     public static final String VALUE_POWER_OFF_MENU = "Power off menu";
     public static final String VALUE_QUICK_LAUNCH_CAMERA = "Quick launch camera";
-    public static final String VALUE_QUICK_SWITCH_TO_SECURE_FOLDER = "Quick switch to Secure Folder";
+    public static final String VALUE_QUICK_SWITCH_TO_SECURE_FOLDER =
+            "Quick switch to Secure Folder";
     public static final String VALUE_SAMSUNG_INTERNET = "Samsung internet";
     public static final String VALUE_TORCH = "Torch";
     public static final String VALUE_TV_MODE = "TV mode";

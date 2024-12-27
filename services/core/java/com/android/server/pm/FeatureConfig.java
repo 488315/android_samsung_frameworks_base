@@ -1,6 +1,5 @@
 package com.android.server.pm;
 
-import com.android.server.pm.AppsFilterImpl;
 import com.android.server.pm.pkg.AndroidPackage;
 import com.android.server.pm.pkg.PackageStateInternal;
 

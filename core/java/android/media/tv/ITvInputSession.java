@@ -88,148 +88,114 @@ public interface ITvInputSession extends IInterface {
 
     public static class Default implements ITvInputSession {
         @Override // android.media.tv.ITvInputSession
-        public void release() throws RemoteException {
-        }
+        public void release() throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void setMain(boolean isMain) throws RemoteException {
-        }
+        public void setMain(boolean isMain) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void setSurface(Surface surface) throws RemoteException {
-        }
+        public void setSurface(Surface surface) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void dispatchSurfaceChanged(int format, int width, int height) throws RemoteException {
-        }
+        public void dispatchSurfaceChanged(int format, int width, int height)
+                throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void setVolume(float volume) throws RemoteException {
-        }
+        public void setVolume(float volume) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void tune(Uri channelUri, Bundle params) throws RemoteException {
-        }
+        public void tune(Uri channelUri, Bundle params) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void setCaptionEnabled(boolean enabled) throws RemoteException {
-        }
+        public void setCaptionEnabled(boolean enabled) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void selectAudioPresentation(int presentationId, int programId) throws RemoteException {
-        }
+        public void selectAudioPresentation(int presentationId, int programId)
+                throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void selectTrack(int type, String trackId) throws RemoteException {
-        }
+        public void selectTrack(int type, String trackId) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void setInteractiveAppNotificationEnabled(boolean enable) throws RemoteException {
-        }
+        public void setInteractiveAppNotificationEnabled(boolean enable) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void appPrivateCommand(String action, Bundle data) throws RemoteException {
-        }
+        public void appPrivateCommand(String action, Bundle data) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void createOverlayView(IBinder windowToken, Rect frame) throws RemoteException {
-        }
+        public void createOverlayView(IBinder windowToken, Rect frame) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void relayoutOverlayView(Rect frame) throws RemoteException {
-        }
+        public void relayoutOverlayView(Rect frame) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void removeOverlayView() throws RemoteException {
-        }
+        public void removeOverlayView() throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void unblockContent(String unblockedRating) throws RemoteException {
-        }
+        public void unblockContent(String unblockedRating) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void timeShiftPlay(Uri recordedProgramUri) throws RemoteException {
-        }
+        public void timeShiftPlay(Uri recordedProgramUri) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void timeShiftPause() throws RemoteException {
-        }
+        public void timeShiftPause() throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void timeShiftResume() throws RemoteException {
-        }
+        public void timeShiftResume() throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void timeShiftSeekTo(long timeMs) throws RemoteException {
-        }
+        public void timeShiftSeekTo(long timeMs) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void timeShiftSetPlaybackParams(PlaybackParams params) throws RemoteException {
-        }
+        public void timeShiftSetPlaybackParams(PlaybackParams params) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void timeShiftSetMode(int mode) throws RemoteException {
-        }
+        public void timeShiftSetMode(int mode) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void timeShiftEnablePositionTracking(boolean enable) throws RemoteException {
-        }
+        public void timeShiftEnablePositionTracking(boolean enable) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void resumePlayback() throws RemoteException {
-        }
+        public void resumePlayback() throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void stopPlayback(int mode) throws RemoteException {
-        }
+        public void stopPlayback(int mode) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void startRecording(Uri programUri, Bundle params) throws RemoteException {
-        }
+        public void startRecording(Uri programUri, Bundle params) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void stopRecording() throws RemoteException {
-        }
+        public void stopRecording() throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void pauseRecording(Bundle params) throws RemoteException {
-        }
+        public void pauseRecording(Bundle params) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void resumeRecording(Bundle params) throws RemoteException {
-        }
+        public void resumeRecording(Bundle params) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void requestBroadcastInfo(BroadcastInfoRequest request) throws RemoteException {
-        }
+        public void requestBroadcastInfo(BroadcastInfoRequest request) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void removeBroadcastInfo(int id) throws RemoteException {
-        }
+        public void removeBroadcastInfo(int id) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void requestAd(AdRequest request) throws RemoteException {
-        }
+        public void requestAd(AdRequest request) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void notifyAdBufferReady(AdBuffer buffer) throws RemoteException {
-        }
+        public void notifyAdBufferReady(AdBuffer buffer) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void notifyTvMessage(int type, Bundle data) throws RemoteException {
-        }
+        public void notifyTvMessage(int type, Bundle data) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void setTvMessageEnabled(int type, boolean enabled) throws RemoteException {
-        }
+        public void setTvMessageEnabled(int type, boolean enabled) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void setVideoFrozen(boolean isFrozen) throws RemoteException {
-        }
+        public void setVideoFrozen(boolean isFrozen) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputSession
-        public void notifyTvAdSessionData(String type, Bundle data) throws RemoteException {
-        }
+        public void notifyTvAdSessionData(String type, Bundle data) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -237,7 +203,7 @@ public interface ITvInputSession extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITvInputSession {
+    public abstract static class Stub extends Binder implements ITvInputSession {
         public static final String DESCRIPTOR = "android.media.tv.ITvInputSession";
         static final int TRANSACTION_appPrivateCommand = 11;
         static final int TRANSACTION_createOverlayView = 12;
@@ -381,7 +347,8 @@ public interface ITvInputSession extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -485,7 +452,8 @@ public interface ITvInputSession extends IInterface {
                     timeShiftSeekTo(_arg015);
                     return true;
                 case 20:
-                    PlaybackParams _arg016 = (PlaybackParams) data.readTypedObject(PlaybackParams.CREATOR);
+                    PlaybackParams _arg016 =
+                            (PlaybackParams) data.readTypedObject(PlaybackParams.CREATOR);
                     data.enforceNoDataAvail();
                     timeShiftSetPlaybackParams(_arg016);
                     return true;
@@ -527,7 +495,9 @@ public interface ITvInputSession extends IInterface {
                     resumeRecording(_arg022);
                     return true;
                 case 29:
-                    BroadcastInfoRequest _arg023 = (BroadcastInfoRequest) data.readTypedObject(BroadcastInfoRequest.CREATOR);
+                    BroadcastInfoRequest _arg023 =
+                            (BroadcastInfoRequest)
+                                    data.readTypedObject(BroadcastInfoRequest.CREATOR);
                     data.enforceNoDataAvail();
                     requestBroadcastInfo(_arg023);
                     return true;
@@ -626,7 +596,8 @@ public interface ITvInputSession extends IInterface {
             }
 
             @Override // android.media.tv.ITvInputSession
-            public void dispatchSurfaceChanged(int format, int width, int height) throws RemoteException {
+            public void dispatchSurfaceChanged(int format, int width, int height)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -677,7 +648,8 @@ public interface ITvInputSession extends IInterface {
             }
 
             @Override // android.media.tv.ITvInputSession
-            public void selectAudioPresentation(int presentationId, int programId) throws RemoteException {
+            public void selectAudioPresentation(int presentationId, int programId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -703,7 +675,8 @@ public interface ITvInputSession extends IInterface {
             }
 
             @Override // android.media.tv.ITvInputSession
-            public void setInteractiveAppNotificationEnabled(boolean enable) throws RemoteException {
+            public void setInteractiveAppNotificationEnabled(boolean enable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

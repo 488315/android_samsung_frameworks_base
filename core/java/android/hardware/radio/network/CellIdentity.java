@@ -3,23 +3,26 @@ package android.hardware.radio.network;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public final class CellIdentity implements Parcelable {
-    public static final Parcelable.Creator<CellIdentity> CREATOR = new Parcelable.Creator<CellIdentity>() { // from class: android.hardware.radio.network.CellIdentity.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellIdentity createFromParcel(Parcel _aidl_source) {
-            return new CellIdentity(_aidl_source);
-        }
+    public static final Parcelable.Creator<CellIdentity> CREATOR =
+            new Parcelable.Creator<
+                    CellIdentity>() { // from class: android.hardware.radio.network.CellIdentity.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellIdentity createFromParcel(Parcel _aidl_source) {
+                    return new CellIdentity(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellIdentity[] newArray(int _aidl_size) {
-            return new CellIdentity[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellIdentity[] newArray(int _aidl_size) {
+                    return new CellIdentity[_aidl_size];
+                }
+            };
     public static final int cdma = 4;
     public static final int gsm = 1;
     public static final int lte = 5;
@@ -190,27 +193,34 @@ public final class CellIdentity implements Parcelable {
                 _set(_aidl_tag, Boolean.valueOf(_aidl_value));
                 return;
             case 1:
-                CellIdentityGsm _aidl_value2 = (CellIdentityGsm) _aidl_parcel.readTypedObject(CellIdentityGsm.CREATOR);
+                CellIdentityGsm _aidl_value2 =
+                        (CellIdentityGsm) _aidl_parcel.readTypedObject(CellIdentityGsm.CREATOR);
                 _set(_aidl_tag, _aidl_value2);
                 return;
             case 2:
-                CellIdentityWcdma _aidl_value3 = (CellIdentityWcdma) _aidl_parcel.readTypedObject(CellIdentityWcdma.CREATOR);
+                CellIdentityWcdma _aidl_value3 =
+                        (CellIdentityWcdma) _aidl_parcel.readTypedObject(CellIdentityWcdma.CREATOR);
                 _set(_aidl_tag, _aidl_value3);
                 return;
             case 3:
-                CellIdentityTdscdma _aidl_value4 = (CellIdentityTdscdma) _aidl_parcel.readTypedObject(CellIdentityTdscdma.CREATOR);
+                CellIdentityTdscdma _aidl_value4 =
+                        (CellIdentityTdscdma)
+                                _aidl_parcel.readTypedObject(CellIdentityTdscdma.CREATOR);
                 _set(_aidl_tag, _aidl_value4);
                 return;
             case 4:
-                CellIdentityCdma _aidl_value5 = (CellIdentityCdma) _aidl_parcel.readTypedObject(CellIdentityCdma.CREATOR);
+                CellIdentityCdma _aidl_value5 =
+                        (CellIdentityCdma) _aidl_parcel.readTypedObject(CellIdentityCdma.CREATOR);
                 _set(_aidl_tag, _aidl_value5);
                 return;
             case 5:
-                CellIdentityLte _aidl_value6 = (CellIdentityLte) _aidl_parcel.readTypedObject(CellIdentityLte.CREATOR);
+                CellIdentityLte _aidl_value6 =
+                        (CellIdentityLte) _aidl_parcel.readTypedObject(CellIdentityLte.CREATOR);
                 _set(_aidl_tag, _aidl_value6);
                 return;
             case 6:
-                CellIdentityNr _aidl_value7 = (CellIdentityNr) _aidl_parcel.readTypedObject(CellIdentityNr.CREATOR);
+                CellIdentityNr _aidl_value7 =
+                        (CellIdentityNr) _aidl_parcel.readTypedObject(CellIdentityNr.CREATOR);
                 _set(_aidl_tag, _aidl_value7);
                 return;
             default:
@@ -254,19 +264,33 @@ public final class CellIdentity implements Parcelable {
     public String toString() {
         switch (this._tag) {
             case 0:
-                return "CellIdentity.noinit(" + getNoinit() + NavigationBarInflaterView.KEY_CODE_END;
+                return "CellIdentity.noinit("
+                        + getNoinit()
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 1:
-                return "CellIdentity.gsm(" + Objects.toString(getGsm()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "CellIdentity.gsm("
+                        + Objects.toString(getGsm())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 2:
-                return "CellIdentity.wcdma(" + Objects.toString(getWcdma()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "CellIdentity.wcdma("
+                        + Objects.toString(getWcdma())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 3:
-                return "CellIdentity.tdscdma(" + Objects.toString(getTdscdma()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "CellIdentity.tdscdma("
+                        + Objects.toString(getTdscdma())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 4:
-                return "CellIdentity.cdma(" + Objects.toString(getCdma()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "CellIdentity.cdma("
+                        + Objects.toString(getCdma())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 5:
-                return "CellIdentity.lte(" + Objects.toString(getLte()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "CellIdentity.lte("
+                        + Objects.toString(getLte())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             case 6:
-                return "CellIdentity.nr(" + Objects.toString(getNr()) + NavigationBarInflaterView.KEY_CODE_END;
+                return "CellIdentity.nr("
+                        + Objects.toString(getNr())
+                        + NavigationBarInflaterView.KEY_CODE_END;
             default:
                 throw new IllegalStateException("unknown field: " + this._tag);
         }
@@ -274,7 +298,12 @@ public final class CellIdentity implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

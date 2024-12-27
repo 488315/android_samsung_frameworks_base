@@ -3,27 +3,29 @@ package android.hardware.radio.data;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class NrQos implements Parcelable {
     public static final int AVERAGING_WINDOW_UNKNOWN = -1;
-    public static final Parcelable.Creator<NrQos> CREATOR = new Parcelable.Creator<NrQos>() { // from class: android.hardware.radio.data.NrQos.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NrQos createFromParcel(Parcel _aidl_source) {
-            NrQos _aidl_out = new NrQos();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<NrQos> CREATOR =
+            new Parcelable.Creator<NrQos>() { // from class: android.hardware.radio.data.NrQos.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NrQos createFromParcel(Parcel _aidl_source) {
+                    NrQos _aidl_out = new NrQos();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NrQos[] newArray(int _aidl_size) {
-            return new NrQos[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NrQos[] newArray(int _aidl_size) {
+                    return new NrQos[_aidl_size];
+                }
+            };
     public static final byte FLOW_ID_RANGE_MAX = 63;
     public static final byte FLOW_ID_RANGE_MIN = 1;
     public QosBandwidth downlink;
@@ -31,8 +33,7 @@ public class NrQos implements Parcelable {
     public int fiveQi = 0;
     public byte qfi = 0;
 
-    @Deprecated
-    public char averagingWindowMs = 0;
+    @Deprecated public char averagingWindowMs = 0;
     public int averagingWindowMillis = -1;
 
     @Override // android.os.Parcelable

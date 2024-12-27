@@ -13,15 +13,18 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.util.Base64;
 import android.util.Log;
+
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.KnoxCaptureInputFilter$$ExternalSyntheticOutline0;
 import com.android.server.am.OomAdjuster$$ExternalSyntheticOutline0;
 import com.android.server.audio.AudioDeviceInventory$$ExternalSyntheticOutline0;
+
 import com.samsung.ucm.ucmservice.EFSProperties;
 import com.samsung.ucm.ucmservice.UcmServiceODE;
 import com.samsung.ucm.ucmservice.UcmServiceUtil;
 import com.samsung.ucm.ucmservice.security.UcmSecurityHelper;
 import com.skms.android.agent.CcmInterface;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -39,95 +42,122 @@ public final class UcmServiceAppletHelper {
     public final UcmSecurityHelper mSecurityHelper;
     public boolean mIsLccmScriptRunning = false;
     public final List mConfigAppletRequestIds = new ArrayList();
-    public final AnonymousClass2 mOnLccmConnection = new ServiceConnection() { // from class: com.samsung.ucm.ucmservice.appletmanage.UcmServiceAppletHelper.2
-        @Override // android.content.ServiceConnection
-        public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-            byte[] bArr;
-            int i;
-            if (!new File("/efs/sec_efs", "ucm_delete_applet_lccmscript").exists()) {
-                Log.e("UcmServiceAppletHelper", "onServiceConnected, but file doesn't exist");
-                return;
-            }
-            EFSProperties.log("getAppletDeletionLccmScript");
-            IInterface iInterface = null;
-            if (new File("/efs/sec_efs", "ucm_delete_applet_lccmscript").exists()) {
-                int length = (int) new File("/efs/sec_efs", "ucm_delete_applet_lccmscript").length();
-                bArr = new byte[length];
-                try {
-                    BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(new File("/efs/sec_efs", "ucm_delete_applet_lccmscript")));
-                    try {
-                        EFSProperties.log("getByteArray read: " + bufferedInputStream.read(bArr, 0, length));
-                        bufferedInputStream.close();
-                    } finally {
+    public final AnonymousClass2 mOnLccmConnection =
+            new ServiceConnection() { // from class:
+                                      // com.samsung.ucm.ucmservice.appletmanage.UcmServiceAppletHelper.2
+                @Override // android.content.ServiceConnection
+                public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+                    byte[] bArr;
+                    int i;
+                    if (!new File("/efs/sec_efs", "ucm_delete_applet_lccmscript").exists()) {
+                        Log.e(
+                                "UcmServiceAppletHelper",
+                                "onServiceConnected, but file doesn't exist");
+                        return;
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            } else {
-                bArr = null;
-            }
-            if (bArr == null) {
-                Log.e("UcmServiceAppletHelper", "onServiceConnected, but script is null");
-                return;
-            }
-            try {
-                int i2 = CcmInterface.Stub.$r8$clinit;
-                if (iBinder != null) {
-                    IInterface queryLocalInterface = iBinder.queryLocalInterface("com.skms.android.agent.CcmInterface");
-                    if (queryLocalInterface == null || !(queryLocalInterface instanceof CcmInterface)) {
-                        CcmInterface.Stub.Proxy proxy = new CcmInterface.Stub.Proxy();
-                        proxy.mRemote = iBinder;
-                        iInterface = proxy;
+                    EFSProperties.log("getAppletDeletionLccmScript");
+                    IInterface iInterface = null;
+                    if (new File("/efs/sec_efs", "ucm_delete_applet_lccmscript").exists()) {
+                        int length =
+                                (int)
+                                        new File("/efs/sec_efs", "ucm_delete_applet_lccmscript")
+                                                .length();
+                        bArr = new byte[length];
+                        try {
+                            BufferedInputStream bufferedInputStream =
+                                    new BufferedInputStream(
+                                            new FileInputStream(
+                                                    new File(
+                                                            "/efs/sec_efs",
+                                                            "ucm_delete_applet_lccmscript")));
+                            try {
+                                EFSProperties.log(
+                                        "getByteArray read: "
+                                                + bufferedInputStream.read(bArr, 0, length));
+                                bufferedInputStream.close();
+                            } finally {
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     } else {
-                        iInterface = (CcmInterface) queryLocalInterface;
+                        bArr = null;
+                    }
+                    if (bArr == null) {
+                        Log.e("UcmServiceAppletHelper", "onServiceConnected, but script is null");
+                        return;
+                    }
+                    try {
+                        int i2 = CcmInterface.Stub.$r8$clinit;
+                        if (iBinder != null) {
+                            IInterface queryLocalInterface =
+                                    iBinder.queryLocalInterface(
+                                            "com.skms.android.agent.CcmInterface");
+                            if (queryLocalInterface == null
+                                    || !(queryLocalInterface instanceof CcmInterface)) {
+                                CcmInterface.Stub.Proxy proxy = new CcmInterface.Stub.Proxy();
+                                proxy.mRemote = iBinder;
+                                iInterface = proxy;
+                            } else {
+                                iInterface = (CcmInterface) queryLocalInterface;
+                            }
+                        }
+                        if (iInterface == null) {
+                            Log.e(
+                                    "UcmServiceAppletHelper",
+                                    "onServiceConnected, but CcmInterface is null");
+                            return;
+                        }
+                        try {
+                            i = ((CcmInterface.Stub.Proxy) iInterface).handleCcm(bArr.length, bArr);
+                        } catch (RemoteException e2) {
+                            Log.e(
+                                    "UcmServiceAppletHelper",
+                                    "handleCcm: Exception " + e2.getMessage());
+                            e2.printStackTrace();
+                            i = -1;
+                        }
+                        UcmServiceAppletHelper.this.mContext.unbindService(this);
+                        if (i != 0) {
+                            AudioDeviceInventory$$ExternalSyntheticOutline0.m(
+                                    i, "handleCcmRet. error [", "]", "UcmServiceAppletHelper");
+                            UcmServiceAppletHelper.this.retryRunLccmAfterSleep();
+                        } else {
+                            Log.i("UcmServiceAppletHelper", "handleCcmRet: clearAppletInfo");
+                            EFSProperties.clearAppletInfo();
+                            UcmServiceAppletHelper.this.mIsLccmScriptRunning = false;
+                            Log.i("UcmServiceAppletHelper", "Running Lccm Script Completed");
+                        }
+                    } finally {
+                        UcmServiceAppletHelper.this.mContext.unbindService(this);
+                        Log.e("UcmServiceAppletHelper", "handleCcmRet. error [-1]");
+                        UcmServiceAppletHelper.this.retryRunLccmAfterSleep();
                     }
                 }
-                if (iInterface == null) {
-                    Log.e("UcmServiceAppletHelper", "onServiceConnected, but CcmInterface is null");
-                    return;
-                }
-                try {
-                    i = ((CcmInterface.Stub.Proxy) iInterface).handleCcm(bArr.length, bArr);
-                } catch (RemoteException e2) {
-                    Log.e("UcmServiceAppletHelper", "handleCcm: Exception " + e2.getMessage());
-                    e2.printStackTrace();
-                    i = -1;
-                }
-                UcmServiceAppletHelper.this.mContext.unbindService(this);
-                if (i != 0) {
-                    AudioDeviceInventory$$ExternalSyntheticOutline0.m(i, "handleCcmRet. error [", "]", "UcmServiceAppletHelper");
-                    UcmServiceAppletHelper.this.retryRunLccmAfterSleep();
-                } else {
-                    Log.i("UcmServiceAppletHelper", "handleCcmRet: clearAppletInfo");
-                    EFSProperties.clearAppletInfo();
-                    UcmServiceAppletHelper.this.mIsLccmScriptRunning = false;
-                    Log.i("UcmServiceAppletHelper", "Running Lccm Script Completed");
-                }
-            } finally {
-                UcmServiceAppletHelper.this.mContext.unbindService(this);
-                Log.e("UcmServiceAppletHelper", "handleCcmRet. error [-1]");
-                UcmServiceAppletHelper.this.retryRunLccmAfterSleep();
-            }
-        }
 
-        @Override // android.content.ServiceConnection
-        public final void onServiceDisconnected(ComponentName componentName) {
-        }
-    };
-    public final AnonymousClass1 mHandler = new Handler(KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m("UcmServiceAppletHelperThread").getLooper()) { // from class: com.samsung.ucm.ucmservice.appletmanage.UcmServiceAppletHelper.1
-        @Override // android.os.Handler
-        public final void handleMessage(Message message) {
-            if (message.what != 1) {
-                Log.e("UcmServiceAppletHelper", "handleMessage. wrong msg");
-            } else {
-                UcmServiceAppletHelper.this.runLccmScript();
-            }
-        }
-    };
+                @Override // android.content.ServiceConnection
+                public final void onServiceDisconnected(ComponentName componentName) {}
+            };
+    public final AnonymousClass1 mHandler =
+            new Handler(
+                    KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m(
+                                    "UcmServiceAppletHelperThread")
+                            .getLooper()) { // from class:
+                                            // com.samsung.ucm.ucmservice.appletmanage.UcmServiceAppletHelper.1
+                @Override // android.os.Handler
+                public final void handleMessage(Message message) {
+                    if (message.what != 1) {
+                        Log.e("UcmServiceAppletHelper", "handleMessage. wrong msg");
+                    } else {
+                        UcmServiceAppletHelper.this.runLccmScript();
+                    }
+                }
+            };
 
     /* JADX WARN: Type inference failed for: r0v2, types: [com.samsung.ucm.ucmservice.appletmanage.UcmServiceAppletHelper$2] */
     /* JADX WARN: Type inference failed for: r3v1, types: [com.samsung.ucm.ucmservice.appletmanage.UcmServiceAppletHelper$1] */
-    public UcmServiceAppletHelper(Context context, IPackageManager iPackageManager, UcmSecurityHelper ucmSecurityHelper) {
+    public UcmServiceAppletHelper(
+            Context context, IPackageManager iPackageManager, UcmSecurityHelper ucmSecurityHelper) {
         this.mContext = context;
         this.mPm = iPackageManager;
         this.mSecurityHelper = ucmSecurityHelper;
@@ -154,7 +184,10 @@ public final class UcmServiceAppletHelper {
             if (!this.mSecurityHelper.isSystemCaller()) {
                 this.mSecurityHelper.checkCallerPermissionFor("runLccmScript");
             }
-            if (!this.mIsLccmScriptRunning && !isAppletPluginExist() && UcmServiceODE.getOdeStatus() <= 0 && new File("/efs/sec_efs", "ucm_delete_applet_lccmscript").exists()) {
+            if (!this.mIsLccmScriptRunning
+                    && !isAppletPluginExist()
+                    && UcmServiceODE.getOdeStatus() <= 0
+                    && new File("/efs/sec_efs", "ucm_delete_applet_lccmscript").exists()) {
                 this.mLccmRetryCount = 0;
                 runLccmScript();
                 return;
@@ -189,7 +222,9 @@ public final class UcmServiceAppletHelper {
             Method dump skipped, instructions count: 253
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.ucm.ucmservice.appletmanage.UcmServiceAppletHelper.isAppletPluginExist():boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.ucm.ucmservice.appletmanage.UcmServiceAppletHelper.isAppletPluginExist():boolean");
     }
 
     public final void retryRunLccmAfterSleep() {
@@ -212,10 +247,16 @@ public final class UcmServiceAppletHelper {
         this.mIsLccmScriptRunning = true;
         boolean z = false;
         try {
-            z = this.mContext.bindService(new Intent("com.skms.android.agent.CcmService").setPackage("com.skms.android.agent"), this.mOnLccmConnection, 1);
+            z =
+                    this.mContext.bindService(
+                            new Intent("com.skms.android.agent.CcmService")
+                                    .setPackage("com.skms.android.agent"),
+                            this.mOnLccmConnection,
+                            1);
             Log.i("UcmServiceAppletHelper", "bindCcmService() isConnected : " + z);
         } catch (Exception e) {
-            OomAdjuster$$ExternalSyntheticOutline0.m(e, new StringBuilder("bindCcmService() exception "), "UcmServiceAppletHelper");
+            OomAdjuster$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("bindCcmService() exception "), "UcmServiceAppletHelper");
         }
         if (z) {
             return;

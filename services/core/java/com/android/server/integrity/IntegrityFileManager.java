@@ -4,6 +4,7 @@ import android.content.integrity.AppInstallMetadata;
 import android.os.Environment;
 import android.util.Slog;
 import android.util.Xml;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.integrity.model.BitInputStream;
@@ -16,6 +17,7 @@ import com.android.server.integrity.parser.RuleParseException;
 import com.android.server.integrity.parser.RuleParser;
 import com.android.server.integrity.serializer.RuleBinarySerializer;
 import com.android.server.integrity.serializer.RuleSerializer;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -69,7 +71,8 @@ public final class IntegrityFileManager {
                                 str = resolvePullParser.nextText();
                             } else {
                                 if (!name.equals("V")) {
-                                    throw new IllegalStateException("Unknown tag in metadata: ".concat(name));
+                                    throw new IllegalStateException(
+                                            "Unknown tag in metadata: ".concat(name));
                                 }
                                 str2 = resolvePullParser.nextText();
                             }
@@ -89,7 +92,11 @@ public final class IntegrityFileManager {
         synchronized (IntegrityFileManager.class) {
             try {
                 if (sInstance == null) {
-                    sInstance = new IntegrityFileManager(new RuleBinaryParser(), new RuleBinarySerializer(), Environment.getDataSystemDirectory());
+                    sInstance =
+                            new IntegrityFileManager(
+                                    new RuleBinaryParser(),
+                                    new RuleBinarySerializer(),
+                                    Environment.getDataSystemDirectory());
                 }
                 integrityFileManager = sInstance;
             } catch (Throwable th) {
@@ -108,15 +115,20 @@ public final class IntegrityFileManager {
                     this.mRuleIndexingController.getClass();
                     emptyList = RuleIndexingController.identifyRulesToEvaluate(appInstallMetadata);
                 } catch (Exception e) {
-                    Slog.w("IntegrityFileManager", "Error identifying the rule indexes. Trying unindexed.", e);
+                    Slog.w(
+                            "IntegrityFileManager",
+                            "Error identifying the rule indexes. Trying unindexed.",
+                            e);
                 }
             }
             File file = new File(this.mRulesDir, "rules");
             RuleParser ruleParser = this.mRuleParser;
-            RandomAccessObject$RandomAccessFileObject randomAccessObject$RandomAccessFileObject = new RandomAccessObject$RandomAccessFileObject(file);
+            RandomAccessObject$RandomAccessFileObject randomAccessObject$RandomAccessFileObject =
+                    new RandomAccessObject$RandomAccessFileObject(file);
             ((RuleBinaryParser) ruleParser).getClass();
             try {
-                RandomAccessInputStream randomAccessInputStream = new RandomAccessInputStream(randomAccessObject$RandomAccessFileObject);
+                RandomAccessInputStream randomAccessInputStream =
+                        new RandomAccessInputStream(randomAccessObject$RandomAccessFileObject);
                 try {
                     parseRules = RuleBinaryParser.parseRules(randomAccessInputStream, emptyList);
                     randomAccessInputStream.close();
@@ -143,9 +155,12 @@ public final class IntegrityFileManager {
                 try {
                     RuleIndexingController ruleIndexingController = new RuleIndexingController();
                     BitInputStream bitInputStream = new BitInputStream(fileInputStream);
-                    RuleIndexingController.sPackageNameBasedIndexes = RuleIndexingController.getNextIndexGroup(bitInputStream);
-                    RuleIndexingController.sAppCertificateBasedIndexes = RuleIndexingController.getNextIndexGroup(bitInputStream);
-                    RuleIndexingController.sUnindexedRuleIndexes = RuleIndexingController.getNextIndexGroup(bitInputStream);
+                    RuleIndexingController.sPackageNameBasedIndexes =
+                            RuleIndexingController.getNextIndexGroup(bitInputStream);
+                    RuleIndexingController.sAppCertificateBasedIndexes =
+                            RuleIndexingController.getNextIndexGroup(bitInputStream);
+                    RuleIndexingController.sUnindexedRuleIndexes =
+                            RuleIndexingController.getNextIndexGroup(bitInputStream);
                     this.mRuleIndexingController = ruleIndexingController;
                     fileInputStream.close();
                 } finally {
@@ -188,17 +203,22 @@ public final class IntegrityFileManager {
         } catch (IOException e) {
             Slog.e("IntegrityFileManager", "Error writing metadata.", e);
         }
-        FileOutputStream fileOutputStream = new FileOutputStream(new File(this.mStagingDir, "rules"));
+        FileOutputStream fileOutputStream =
+                new FileOutputStream(new File(this.mStagingDir, "rules"));
         try {
-            FileOutputStream fileOutputStream2 = new FileOutputStream(new File(this.mStagingDir, "indexing"));
+            FileOutputStream fileOutputStream2 =
+                    new FileOutputStream(new File(this.mStagingDir, "indexing"));
             try {
-                ((RuleBinarySerializer) this.mRuleSerializer).serialize(list, Optional.empty(), fileOutputStream, fileOutputStream2);
+                ((RuleBinarySerializer) this.mRuleSerializer)
+                        .serialize(list, Optional.empty(), fileOutputStream, fileOutputStream2);
                 fileOutputStream2.close();
                 fileOutputStream.close();
                 synchronized (RULES_LOCK) {
                     try {
                         File file = new File(this.mDataDir, "temp");
-                        if (!this.mRulesDir.renameTo(file) || !this.mStagingDir.renameTo(this.mRulesDir) || !file.renameTo(this.mStagingDir)) {
+                        if (!this.mRulesDir.renameTo(file)
+                                || !this.mStagingDir.renameTo(this.mRulesDir)
+                                || !file.renameTo(this.mStagingDir)) {
                             throw new IOException("Error switching staging/rules directory");
                         }
                         for (File file2 : this.mStagingDir.listFiles()) {

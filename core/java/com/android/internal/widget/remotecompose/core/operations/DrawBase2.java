@@ -6,16 +6,20 @@ import com.android.internal.widget.remotecompose.core.PaintOperation;
 import com.android.internal.widget.remotecompose.core.RemoteContext;
 import com.android.internal.widget.remotecompose.core.VariableSupport;
 import com.android.internal.widget.remotecompose.core.WireBuffer;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
 public abstract class DrawBase2 extends PaintOperation implements VariableSupport {
-    public static final Companion COMPANION = new Companion(46) { // from class: com.android.internal.widget.remotecompose.core.operations.DrawBase2.1
-        @Override // com.android.internal.widget.remotecompose.core.operations.DrawBase2.Companion
-        public Operation construct(float x1, float y1) {
-            return null;
-        }
-    };
+    public static final Companion COMPANION =
+            new Companion(
+                    46) { // from class:
+                          // com.android.internal.widget.remotecompose.core.operations.DrawBase2.1
+                @Override // com.android.internal.widget.remotecompose.core.operations.DrawBase2.Companion
+                public Operation construct(float x1, float y1) {
+                    return null;
+                }
+            };
     protected String mName = "DrawRectBase";
     float mV1;
     float mV2;
@@ -31,8 +35,14 @@ public abstract class DrawBase2 extends PaintOperation implements VariableSuppor
 
     @Override // com.android.internal.widget.remotecompose.core.VariableSupport
     public void updateVariables(RemoteContext context) {
-        this.mV1 = Float.isNaN(this.mValue1) ? context.getFloat(Utils.idFromNan(this.mValue1)) : this.mValue1;
-        this.mV2 = Float.isNaN(this.mValue2) ? context.getFloat(Utils.idFromNan(this.mValue2)) : this.mValue2;
+        this.mV1 =
+                Float.isNaN(this.mValue1)
+                        ? context.getFloat(Utils.idFromNan(this.mValue1))
+                        : this.mValue1;
+        this.mV2 =
+                Float.isNaN(this.mValue2)
+                        ? context.getFloat(Utils.idFromNan(this.mValue2))
+                        : this.mValue2;
     }
 
     @Override // com.android.internal.widget.remotecompose.core.VariableSupport
@@ -51,7 +61,11 @@ public abstract class DrawBase2 extends PaintOperation implements VariableSuppor
     }
 
     public String toString() {
-        return this.mName + " " + Utils.floatToString(this.mV1) + " " + Utils.floatToString(this.mV2);
+        return this.mName
+                + " "
+                + Utils.floatToString(this.mV1)
+                + " "
+                + Utils.floatToString(this.mV2);
     }
 
     public static class Companion implements CompanionOperation {

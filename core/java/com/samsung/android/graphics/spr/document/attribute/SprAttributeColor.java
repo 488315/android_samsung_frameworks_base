@@ -4,6 +4,7 @@ import com.samsung.android.graphics.spr.document.SprInputStream;
 import com.samsung.android.graphics.spr.document.attribute.impl.SprGradientBase;
 import com.samsung.android.graphics.spr.document.attribute.impl.SprLinearGradient;
 import com.samsung.android.graphics.spr.document.attribute.impl.SprRadialGradient;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 

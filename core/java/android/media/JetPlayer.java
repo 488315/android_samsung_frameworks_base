@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.AndroidRuntimeException;
 import android.util.Log;
+
 import java.io.FileDescriptor;
 import java.lang.ref.WeakReference;
 
@@ -53,15 +54,18 @@ public class JetPlayer {
 
     private final native boolean native_loadJetFromFile(String str);
 
-    private final native boolean native_loadJetFromFileD(FileDescriptor fileDescriptor, long j, long j2);
+    private final native boolean native_loadJetFromFileD(
+            FileDescriptor fileDescriptor, long j, long j2);
 
     private final native boolean native_pauseJet();
 
     private final native boolean native_playJet();
 
-    private final native boolean native_queueJetSegment(int i, int i2, int i3, int i4, int i5, byte b);
+    private final native boolean native_queueJetSegment(
+            int i, int i2, int i3, int i4, int i5, byte b);
 
-    private final native boolean native_queueJetSegmentMuteArray(int i, int i2, int i3, int i4, boolean[] zArr, byte b);
+    private final native boolean native_queueJetSegmentMuteArray(
+            int i, int i2, int i3, int i4, boolean[] zArr, byte b);
 
     private final native void native_release();
 
@@ -99,7 +103,10 @@ public class JetPlayer {
         }
         int buffSizeInBytes = AudioTrack.getMinBufferSize(JET_OUTPUT_RATE, 12, 2);
         if (buffSizeInBytes != -1 && buffSizeInBytes != -2) {
-            native_setup(new WeakReference(this), getMaxTracks(), Math.max(1200, buffSizeInBytes / (AudioFormat.getBytesPerSample(2) * 2)));
+            native_setup(
+                    new WeakReference(this),
+                    getMaxTracks(),
+                    Math.max(1200, buffSizeInBytes / (AudioFormat.getBytesPerSample(2) * 2)));
         }
     }
 
@@ -140,15 +147,29 @@ public class JetPlayer {
         return native_pauseJet();
     }
 
-    public boolean queueJetSegment(int segmentNum, int libNum, int repeatCount, int transpose, int muteFlags, byte userID) {
-        return native_queueJetSegment(segmentNum, libNum, repeatCount, transpose, muteFlags, userID);
+    public boolean queueJetSegment(
+            int segmentNum,
+            int libNum,
+            int repeatCount,
+            int transpose,
+            int muteFlags,
+            byte userID) {
+        return native_queueJetSegment(
+                segmentNum, libNum, repeatCount, transpose, muteFlags, userID);
     }
 
-    public boolean queueJetSegmentMuteArray(int segmentNum, int libNum, int repeatCount, int transpose, boolean[] muteArray, byte userID) {
+    public boolean queueJetSegmentMuteArray(
+            int segmentNum,
+            int libNum,
+            int repeatCount,
+            int transpose,
+            boolean[] muteArray,
+            byte userID) {
         if (muteArray.length != getMaxTracks()) {
             return false;
         }
-        return native_queueJetSegmentMuteArray(segmentNum, libNum, repeatCount, transpose, muteArray, userID);
+        return native_queueJetSegmentMuteArray(
+                segmentNum, libNum, repeatCount, transpose, muteArray, userID);
     }
 
     public boolean setMuteFlags(int muteFlags, boolean sync) {
@@ -191,7 +212,13 @@ public class JetPlayer {
             switch (msg.what) {
                 case 1:
                     if (listener != null) {
-                        JetPlayer.this.mJetEventListener.onJetEvent(this.mJet, (short) ((msg.arg1 & (-16777216)) >> 24), (byte) ((msg.arg1 & JetPlayer.JET_EVENT_TRACK_MASK) >> 18), (byte) (((msg.arg1 & JetPlayer.JET_EVENT_CHAN_MASK) >> 14) + 1), (byte) ((msg.arg1 & JetPlayer.JET_EVENT_CTRL_MASK) >> 7), (byte) (msg.arg1 & 127));
+                        JetPlayer.this.mJetEventListener.onJetEvent(
+                                this.mJet,
+                                (short) ((msg.arg1 & (-16777216)) >> 24),
+                                (byte) ((msg.arg1 & JetPlayer.JET_EVENT_TRACK_MASK) >> 18),
+                                (byte) (((msg.arg1 & JetPlayer.JET_EVENT_CHAN_MASK) >> 14) + 1),
+                                (byte) ((msg.arg1 & JetPlayer.JET_EVENT_CTRL_MASK) >> 7),
+                                (byte) (msg.arg1 & 127));
                         return;
                     }
                     return;

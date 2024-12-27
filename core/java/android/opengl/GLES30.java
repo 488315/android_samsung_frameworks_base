@@ -330,7 +330,8 @@ public class GLES30 extends GLES20 {
 
     public static native void glBindVertexArray(int i);
 
-    public static native void glBlitFramebuffer(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10);
+    public static native void glBlitFramebuffer(
+            int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10);
 
     public static native void glClearBufferfi(int i, int i2, float f, int i3);
 
@@ -348,17 +349,42 @@ public class GLES30 extends GLES20 {
 
     public static native int glClientWaitSync(long j, int i, long j2);
 
-    public static native void glCompressedTexImage3D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9);
+    public static native void glCompressedTexImage3D(
+            int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9);
 
-    public static native void glCompressedTexImage3D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Buffer buffer);
+    public static native void glCompressedTexImage3D(
+            int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, Buffer buffer);
 
-    public static native void glCompressedTexSubImage3D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, int i11);
+    public static native void glCompressedTexSubImage3D(
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8,
+            int i9,
+            int i10,
+            int i11);
 
-    public static native void glCompressedTexSubImage3D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, Buffer buffer);
+    public static native void glCompressedTexSubImage3D(
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8,
+            int i9,
+            int i10,
+            Buffer buffer);
 
     public static native void glCopyBufferSubData(int i, int i2, int i3, int i4, int i5);
 
-    public static native void glCopyTexSubImage3D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9);
+    public static native void glCopyTexSubImage3D(
+            int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9);
 
     public static native void glDeleteQueries(int i, IntBuffer intBuffer);
 
@@ -390,7 +416,8 @@ public class GLES30 extends GLES20 {
 
     public static native void glDrawRangeElements(int i, int i2, int i3, int i4, int i5, int i6);
 
-    public static native void glDrawRangeElements(int i, int i2, int i3, int i4, int i5, Buffer buffer);
+    public static native void glDrawRangeElements(
+            int i, int i2, int i3, int i4, int i5, Buffer buffer);
 
     public static native void glEndQuery(int i);
 
@@ -420,17 +447,21 @@ public class GLES30 extends GLES20 {
 
     public static native String glGetActiveUniformBlockName(int i, int i2);
 
-    public static native void glGetActiveUniformBlockName(int i, int i2, int i3, int[] iArr, int i4, byte[] bArr, int i5);
+    public static native void glGetActiveUniformBlockName(
+            int i, int i2, int i3, int[] iArr, int i4, byte[] bArr, int i5);
 
-    public static native void glGetActiveUniformBlockName(int i, int i2, Buffer buffer, Buffer buffer2);
+    public static native void glGetActiveUniformBlockName(
+            int i, int i2, Buffer buffer, Buffer buffer2);
 
     public static native void glGetActiveUniformBlockiv(int i, int i2, int i3, IntBuffer intBuffer);
 
     public static native void glGetActiveUniformBlockiv(int i, int i2, int i3, int[] iArr, int i4);
 
-    public static native void glGetActiveUniformsiv(int i, int i2, IntBuffer intBuffer, int i3, IntBuffer intBuffer2);
+    public static native void glGetActiveUniformsiv(
+            int i, int i2, IntBuffer intBuffer, int i3, IntBuffer intBuffer2);
 
-    public static native void glGetActiveUniformsiv(int i, int i2, int[] iArr, int i3, int i4, int[] iArr2, int i5);
+    public static native void glGetActiveUniformsiv(
+            int i, int i2, int[] iArr, int i3, int i4, int[] iArr2, int i5);
 
     public static native void glGetBufferParameteri64v(int i, int i2, LongBuffer longBuffer);
 
@@ -452,13 +483,17 @@ public class GLES30 extends GLES20 {
 
     public static native void glGetIntegeri_v(int i, int i2, int[] iArr, int i3);
 
-    public static native void glGetInternalformativ(int i, int i2, int i3, int i4, IntBuffer intBuffer);
+    public static native void glGetInternalformativ(
+            int i, int i2, int i3, int i4, IntBuffer intBuffer);
 
-    public static native void glGetInternalformativ(int i, int i2, int i3, int i4, int[] iArr, int i5);
+    public static native void glGetInternalformativ(
+            int i, int i2, int i3, int i4, int[] iArr, int i5);
 
-    public static native void glGetProgramBinary(int i, int i2, IntBuffer intBuffer, IntBuffer intBuffer2, Buffer buffer);
+    public static native void glGetProgramBinary(
+            int i, int i2, IntBuffer intBuffer, IntBuffer intBuffer2, Buffer buffer);
 
-    public static native void glGetProgramBinary(int i, int i2, int[] iArr, int i3, int[] iArr2, int i4, Buffer buffer);
+    public static native void glGetProgramBinary(
+            int i, int i2, int[] iArr, int i3, int[] iArr2, int i4, Buffer buffer);
 
     public static native void glGetQueryObjectuiv(int i, int i2, IntBuffer intBuffer);
 
@@ -478,19 +513,48 @@ public class GLES30 extends GLES20 {
 
     public static native String glGetStringi(int i, int i2);
 
-    public static native void glGetSynciv(long j, int i, int i2, IntBuffer intBuffer, IntBuffer intBuffer2);
+    public static native void glGetSynciv(
+            long j, int i, int i2, IntBuffer intBuffer, IntBuffer intBuffer2);
 
-    public static native void glGetSynciv(long j, int i, int i2, int[] iArr, int i3, int[] iArr2, int i4);
+    public static native void glGetSynciv(
+            long j, int i, int i2, int[] iArr, int i3, int[] iArr2, int i4);
 
-    public static native String glGetTransformFeedbackVarying(int i, int i2, IntBuffer intBuffer, IntBuffer intBuffer2);
+    public static native String glGetTransformFeedbackVarying(
+            int i, int i2, IntBuffer intBuffer, IntBuffer intBuffer2);
 
-    public static native String glGetTransformFeedbackVarying(int i, int i2, int[] iArr, int i3, int[] iArr2, int i4);
+    public static native String glGetTransformFeedbackVarying(
+            int i, int i2, int[] iArr, int i3, int[] iArr2, int i4);
 
-    public static native void glGetTransformFeedbackVarying(int i, int i2, int i3, IntBuffer intBuffer, IntBuffer intBuffer2, IntBuffer intBuffer3, byte b);
+    public static native void glGetTransformFeedbackVarying(
+            int i,
+            int i2,
+            int i3,
+            IntBuffer intBuffer,
+            IntBuffer intBuffer2,
+            IntBuffer intBuffer3,
+            byte b);
 
-    public static native void glGetTransformFeedbackVarying(int i, int i2, int i3, IntBuffer intBuffer, IntBuffer intBuffer2, IntBuffer intBuffer3, ByteBuffer byteBuffer);
+    public static native void glGetTransformFeedbackVarying(
+            int i,
+            int i2,
+            int i3,
+            IntBuffer intBuffer,
+            IntBuffer intBuffer2,
+            IntBuffer intBuffer3,
+            ByteBuffer byteBuffer);
 
-    public static native void glGetTransformFeedbackVarying(int i, int i2, int i3, int[] iArr, int i4, int[] iArr2, int i5, int[] iArr3, int i6, byte[] bArr, int i7);
+    public static native void glGetTransformFeedbackVarying(
+            int i,
+            int i2,
+            int i3,
+            int[] iArr,
+            int i4,
+            int[] iArr2,
+            int i5,
+            int[] iArr3,
+            int i6,
+            byte[] bArr,
+            int i7);
 
     public static native int glGetUniformBlockIndex(int i, String str);
 
@@ -514,9 +578,11 @@ public class GLES30 extends GLES20 {
 
     public static native void glInvalidateFramebuffer(int i, int i2, int[] iArr, int i3);
 
-    public static native void glInvalidateSubFramebuffer(int i, int i2, IntBuffer intBuffer, int i3, int i4, int i5, int i6);
+    public static native void glInvalidateSubFramebuffer(
+            int i, int i2, IntBuffer intBuffer, int i3, int i4, int i5, int i6);
 
-    public static native void glInvalidateSubFramebuffer(int i, int i2, int[] iArr, int i3, int i4, int i5, int i6, int i7);
+    public static native void glInvalidateSubFramebuffer(
+            int i, int i2, int[] iArr, int i3, int i4, int i5, int i6, int i7);
 
     public static native boolean glIsQuery(int i);
 
@@ -540,7 +606,8 @@ public class GLES30 extends GLES20 {
 
     public static native void glReadPixels(int i, int i2, int i3, int i4, int i5, int i6, int i7);
 
-    public static native void glRenderbufferStorageMultisample(int i, int i2, int i3, int i4, int i5);
+    public static native void glRenderbufferStorageMultisample(
+            int i, int i2, int i3, int i4, int i5);
 
     public static native void glResumeTransformFeedback();
 
@@ -556,17 +623,41 @@ public class GLES30 extends GLES20 {
 
     public static native void glSamplerParameteriv(int i, int i2, int[] iArr, int i3);
 
-    public static native void glTexImage3D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10);
+    public static native void glTexImage3D(
+            int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10);
 
-    public static native void glTexImage3D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, Buffer buffer);
+    public static native void glTexImage3D(
+            int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, Buffer buffer);
 
     public static native void glTexStorage2D(int i, int i2, int i3, int i4, int i5);
 
     public static native void glTexStorage3D(int i, int i2, int i3, int i4, int i5, int i6);
 
-    public static native void glTexSubImage3D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, int i11);
+    public static native void glTexSubImage3D(
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8,
+            int i9,
+            int i10,
+            int i11);
 
-    public static native void glTexSubImage3D(int i, int i2, int i3, int i4, int i5, int i6, int i7, int i8, int i9, int i10, Buffer buffer);
+    public static native void glTexSubImage3D(
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            int i8,
+            int i9,
+            int i10,
+            Buffer buffer);
 
     public static native void glTransformFeedbackVaryings(int i, String[] strArr, int i2);
 
@@ -596,27 +687,33 @@ public class GLES30 extends GLES20 {
 
     public static native void glUniformBlockBinding(int i, int i2, int i3);
 
-    public static native void glUniformMatrix2x3fv(int i, int i2, boolean z, FloatBuffer floatBuffer);
+    public static native void glUniformMatrix2x3fv(
+            int i, int i2, boolean z, FloatBuffer floatBuffer);
 
     public static native void glUniformMatrix2x3fv(int i, int i2, boolean z, float[] fArr, int i3);
 
-    public static native void glUniformMatrix2x4fv(int i, int i2, boolean z, FloatBuffer floatBuffer);
+    public static native void glUniformMatrix2x4fv(
+            int i, int i2, boolean z, FloatBuffer floatBuffer);
 
     public static native void glUniformMatrix2x4fv(int i, int i2, boolean z, float[] fArr, int i3);
 
-    public static native void glUniformMatrix3x2fv(int i, int i2, boolean z, FloatBuffer floatBuffer);
+    public static native void glUniformMatrix3x2fv(
+            int i, int i2, boolean z, FloatBuffer floatBuffer);
 
     public static native void glUniformMatrix3x2fv(int i, int i2, boolean z, float[] fArr, int i3);
 
-    public static native void glUniformMatrix3x4fv(int i, int i2, boolean z, FloatBuffer floatBuffer);
+    public static native void glUniformMatrix3x4fv(
+            int i, int i2, boolean z, FloatBuffer floatBuffer);
 
     public static native void glUniformMatrix3x4fv(int i, int i2, boolean z, float[] fArr, int i3);
 
-    public static native void glUniformMatrix4x2fv(int i, int i2, boolean z, FloatBuffer floatBuffer);
+    public static native void glUniformMatrix4x2fv(
+            int i, int i2, boolean z, FloatBuffer floatBuffer);
 
     public static native void glUniformMatrix4x2fv(int i, int i2, boolean z, float[] fArr, int i3);
 
-    public static native void glUniformMatrix4x3fv(int i, int i2, boolean z, FloatBuffer floatBuffer);
+    public static native void glUniformMatrix4x3fv(
+            int i, int i2, boolean z, FloatBuffer floatBuffer);
 
     public static native void glUniformMatrix4x3fv(int i, int i2, boolean z, float[] fArr, int i3);
 
@@ -638,7 +735,8 @@ public class GLES30 extends GLES20 {
 
     public static native void glVertexAttribIPointer(int i, int i2, int i3, int i4, int i5);
 
-    private static native void glVertexAttribIPointerBounds(int i, int i2, int i3, int i4, Buffer buffer, int i5);
+    private static native void glVertexAttribIPointerBounds(
+            int i, int i2, int i3, int i4, Buffer buffer, int i5);
 
     public static native void glWaitSync(long j, int i, long j2);
 
@@ -646,7 +744,8 @@ public class GLES30 extends GLES20 {
         _nativeClassInit();
     }
 
-    public static void glVertexAttribIPointer(int index, int size, int type, int stride, Buffer pointer) {
+    public static void glVertexAttribIPointer(
+            int index, int size, int type, int stride, Buffer pointer) {
         glVertexAttribIPointerBounds(index, size, type, stride, pointer, pointer.remaining());
     }
 }

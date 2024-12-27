@@ -4,7 +4,7 @@ import android.os.CombinedVibration;
 import android.os.IBinder;
 import android.os.VibrationAttributes;
 import android.util.Slog;
-import com.android.server.vibrator.Vibration;
+
 import com.samsung.android.server.vibrator.VibratorHelper;
 import com.samsung.android.vibrator.SemHapticFeedbackConstants;
 
@@ -57,7 +57,8 @@ public abstract class SemVibration {
     }
 
     public final Vibration.CallerInfo getCallerInfo() {
-        return new Vibration.CallerInfo(this.mAttrs, this.mUid, this.mDeviceId, this.mOpPkg, this.mReason);
+        return new Vibration.CallerInfo(
+                this.mAttrs, this.mUid, this.mDeviceId, this.mOpPkg, this.mReason);
     }
 
     public final String getCommonLog() {

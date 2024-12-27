@@ -38,7 +38,8 @@ public class SContextAutoBrightnessAttribute extends SContextAttribute {
         setAttribute();
     }
 
-    @Override // android.hardware.scontext.SContextAttribute, com.samsung.android.hardware.context.SemContextAttribute
+    @Override // android.hardware.scontext.SContextAttribute,
+    // com.samsung.android.hardware.context.SemContextAttribute
     public boolean checkAttribute() {
         if (this.mMode == MODE_DEVICE_MODE) {
             if (this.mDeviceMode < 0 || this.mDeviceMode > 2) {

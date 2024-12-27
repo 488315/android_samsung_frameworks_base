@@ -18,8 +18,7 @@ public final class AccessibilityNodeIdManager {
         return accessibilityNodeIdManager;
     }
 
-    private AccessibilityNodeIdManager() {
-    }
+    private AccessibilityNodeIdManager() {}
 
     public void registerViewWithId(View view, int id) {
         synchronized (this.mIdsToViews) {

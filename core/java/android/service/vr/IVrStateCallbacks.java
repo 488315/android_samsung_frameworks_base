@@ -12,8 +12,7 @@ public interface IVrStateCallbacks extends IInterface {
 
     public static class Default implements IVrStateCallbacks {
         @Override // android.service.vr.IVrStateCallbacks
-        public void onVrStateChanged(boolean enabled) throws RemoteException {
-        }
+        public void onVrStateChanged(boolean enabled) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface IVrStateCallbacks extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVrStateCallbacks {
+    public abstract static class Stub extends Binder implements IVrStateCallbacks {
         public static final String DESCRIPTOR = "android.service.vr.IVrStateCallbacks";
         static final int TRANSACTION_onVrStateChanged = 1;
 
@@ -60,7 +59,8 @@ public interface IVrStateCallbacks extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

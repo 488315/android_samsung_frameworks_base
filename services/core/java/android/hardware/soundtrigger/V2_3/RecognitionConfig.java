@@ -9,6 +9,10 @@ public final class RecognitionConfig {
     public ISoundTriggerHw.SoundModel base;
 
     public final String toString() {
-        return "{.base = " + this.base + ", .audioCapabilities = " + AudioCapabilities.dumpBitfield(this.audioCapabilities) + "}";
+        return "{.base = "
+                + this.base
+                + ", .audioCapabilities = "
+                + AudioCapabilities.dumpBitfield(this.audioCapabilities)
+                + "}";
     }
 }

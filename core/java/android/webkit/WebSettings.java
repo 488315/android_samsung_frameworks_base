@@ -2,6 +2,7 @@ package android.webkit;
 
 import android.annotation.SystemApi;
 import android.content.Context;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -10,8 +11,7 @@ import java.lang.annotation.Target;
 /* loaded from: classes4.dex */
 public abstract class WebSettings {
 
-    @SystemApi
-    public static final long ENABLE_SIMPLIFIED_DARK_MODE = 214741472;
+    @SystemApi public static final long ENABLE_SIMPLIFIED_DARK_MODE = 214741472;
     public static final int FORCE_DARK_AUTO = 1;
     public static final int FORCE_DARK_OFF = 0;
     public static final int FORCE_DARK_ON = 2;
@@ -19,8 +19,7 @@ public abstract class WebSettings {
     public static final int LOAD_CACHE_ONLY = 3;
     public static final int LOAD_DEFAULT = -1;
 
-    @Deprecated
-    public static final int LOAD_NORMAL = 0;
+    @Deprecated public static final int LOAD_NORMAL = 0;
     public static final int LOAD_NO_CACHE = 2;
     public static final int MENU_ITEM_NONE = 0;
     public static final int MENU_ITEM_PROCESS_TEXT = 4;
@@ -31,12 +30,10 @@ public abstract class WebSettings {
     public static final int MIXED_CONTENT_NEVER_ALLOW = 1;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CacheMode {
-    }
+    public @interface CacheMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ForceDark {
-    }
+    public @interface ForceDark {}
 
     public enum LayoutAlgorithm {
         NORMAL,
@@ -47,8 +44,7 @@ public abstract class WebSettings {
 
     @Target({ElementType.PARAMETER, ElementType.METHOD})
     @Retention(RetentionPolicy.SOURCE)
-    private @interface MenuItemFlags {
-    }
+    private @interface MenuItemFlags {}
 
     public enum PluginState {
         ON,
@@ -365,8 +361,7 @@ public abstract class WebSettings {
     }
 
     @Deprecated
-    public void setUseDoubleTree(boolean use) {
-    }
+    public void setUseDoubleTree(boolean use) {}
 
     @Deprecated
     public boolean getUseDoubleTree() {
@@ -374,20 +369,16 @@ public abstract class WebSettings {
     }
 
     @Deprecated
-    public void setPluginsPath(String pluginsPath) {
-    }
+    public void setPluginsPath(String pluginsPath) {}
 
     @Deprecated
-    public void setAppCacheEnabled(boolean flag) {
-    }
+    public void setAppCacheEnabled(boolean flag) {}
 
     @Deprecated
-    public void setAppCachePath(String appCachePath) {
-    }
+    public void setAppCachePath(String appCachePath) {}
 
     @Deprecated
-    public void setAppCacheMaxSize(long appCacheMaxSize) {
-    }
+    public void setAppCacheMaxSize(long appCacheMaxSize) {}
 
     @Deprecated
     public String getPluginsPath() {
@@ -398,15 +389,13 @@ public abstract class WebSettings {
         return WebViewFactory.getProvider().getStatics().getDefaultUserAgent(context);
     }
 
-    public void setForceDark(int forceDark) {
-    }
+    public void setForceDark(int forceDark) {}
 
     public int getForceDark() {
         return 1;
     }
 
-    public void setAlgorithmicDarkeningAllowed(boolean allow) {
-    }
+    public void setAlgorithmicDarkeningAllowed(boolean allow) {}
 
     public boolean isAlgorithmicDarkeningAllowed() {
         return false;

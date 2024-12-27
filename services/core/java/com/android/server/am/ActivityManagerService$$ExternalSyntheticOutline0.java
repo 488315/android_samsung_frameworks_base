@@ -33,7 +33,8 @@ public abstract /* synthetic */ class ActivityManagerService$$ExternalSyntheticO
         Slog.d(str, sb.toString());
     }
 
-    public static void m(IntentFilter intentFilter, String str, String str2, String str3, String str4) {
+    public static void m(
+            IntentFilter intentFilter, String str, String str2, String str3, String str4) {
         intentFilter.addAction(str);
         intentFilter.addAction(str2);
         intentFilter.addAction(str3);

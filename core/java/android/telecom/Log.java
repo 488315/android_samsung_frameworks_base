@@ -11,7 +11,9 @@ import android.telecom.Logging.SessionManager;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import com.android.internal.util.IndentingPrintWriter;
+
 import java.util.Arrays;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -49,7 +51,8 @@ public class Log {
         ERROR = isLoggable(6);
         USER_BUILD = Build.IS_USER;
         boolean z = true;
-        if (!SystemProperties.getBoolean("ro.product_ship", true) && !SystemProperties.getBoolean("persist.ril.override.product_ship", false)) {
+        if (!SystemProperties.getBoolean("ro.product_ship", true)
+                && !SystemProperties.getBoolean("persist.ril.override.product_ship", false)) {
             z = false;
         }
         SHIP_BUILD = z;
@@ -60,8 +63,7 @@ public class Log {
         sUserExtendedLoggingStopTime = 0L;
     }
 
-    private Log() {
-    }
+    private Log() {}
 
     public static void d(String prefix, String format, Object... args) {
         if (sIsUserExtendedLoggingEnabled) {
@@ -169,7 +171,8 @@ public class Log {
         getSessionManager().startSession(shortMethodName, callerIdentification);
     }
 
-    public static void startSession(Session.Info info, String shortMethodName, String callerIdentification) {
+    public static void startSession(
+            Session.Info info, String shortMethodName, String callerIdentification) {
         getSessionManager().startSession(info, shortMethodName, callerIdentification);
     }
 
@@ -218,7 +221,8 @@ public class Log {
         getEventManager().event(recordEntry, event, data);
     }
 
-    public static void addEvent(EventManager.Loggable recordEntry, String event, String format, Object... args) {
+    public static void addEvent(
+            EventManager.Loggable recordEntry, String event, String format, Object... args) {
         getEventManager().event(recordEntry, event, format, args);
     }
 
@@ -277,12 +281,16 @@ public class Log {
         if (sEventManager == null) {
             synchronized (sSingletonSync) {
                 if (sEventManager == null) {
-                    sEventManager = new EventManager(new SessionManager.ISessionIdQueryHandler() { // from class: android.telecom.Log$$ExternalSyntheticLambda1
-                        @Override // android.telecom.Logging.SessionManager.ISessionIdQueryHandler
-                        public final String getSessionId() {
-                            return Log.getSessionId();
-                        }
-                    });
+                    sEventManager =
+                            new EventManager(
+                                    new SessionManager
+                                            .ISessionIdQueryHandler() { // from class:
+                                                                        // android.telecom.Log$$ExternalSyntheticLambda1
+                                        @Override // android.telecom.Logging.SessionManager.ISessionIdQueryHandler
+                                        public final String getSessionId() {
+                                            return Log.getSessionId();
+                                        }
+                                    });
                     return sEventManager;
                 }
             }
@@ -318,7 +326,8 @@ public class Log {
     }
 
     private static void maybeDisableLogging() {
-        if (sIsUserExtendedLoggingEnabled && sUserExtendedLoggingStopTime < System.currentTimeMillis()) {
+        if (sIsUserExtendedLoggingEnabled
+                && sUserExtendedLoggingStopTime < System.currentTimeMillis()) {
             sUserExtendedLoggingStopTime = 0L;
             sIsUserExtendedLoggingEnabled = false;
         }
@@ -398,7 +407,8 @@ public class Log {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private static java.lang.String buildMessage(java.lang.String r7, java.lang.String r8, java.lang.Object... r9) {
+    private static java.lang.String buildMessage(
+            java.lang.String r7, java.lang.String r8, java.lang.Object... r9) {
         /*
             java.lang.String r0 = getSessionId()
             boolean r1 = android.text.TextUtils.isEmpty(r0)
@@ -458,7 +468,9 @@ public class Log {
             java.lang.String r3 = java.lang.String.format(r3, r5, r6)
             return r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.telecom.Log.buildMessage(java.lang.String, java.lang.String, java.lang.Object[]):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.telecom.Log.buildMessage(java.lang.String,"
+                    + " java.lang.String, java.lang.Object[]):java.lang.String");
     }
 
     public static String getPackageAbbreviation(ComponentName componentName) {
@@ -472,12 +484,17 @@ public class Log {
         if (packageName == null) {
             return "";
         }
-        return (String) Arrays.stream(packageName.split("\\.")).map(new Function() { // from class: android.telecom.Log$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return Log.lambda$getPackageAbbreviation$0((String) obj);
-            }
-        }).collect(Collectors.joining(""));
+        return (String)
+                Arrays.stream(packageName.split("\\."))
+                        .map(
+                                new Function() { // from class:
+                                                 // android.telecom.Log$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Function
+                                    public final Object apply(Object obj) {
+                                        return Log.lambda$getPackageAbbreviation$0((String) obj);
+                                    }
+                                })
+                        .collect(Collectors.joining(""));
     }
 
     static /* synthetic */ String lambda$getPackageAbbreviation$0(String s) {

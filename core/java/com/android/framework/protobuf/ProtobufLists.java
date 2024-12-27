@@ -1,12 +1,10 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.Internal;
 
 @CheckReturnValue
 /* loaded from: classes3.dex */
 final class ProtobufLists {
-    private ProtobufLists() {
-    }
+    private ProtobufLists() {}
 
     public static <E> Internal.ProtobufList<E> emptyProtobufList() {
         return ProtobufArrayList.emptyList();

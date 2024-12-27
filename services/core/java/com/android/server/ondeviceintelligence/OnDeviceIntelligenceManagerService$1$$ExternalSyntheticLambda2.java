@@ -5,15 +5,16 @@ import android.os.Bundle;
 import android.provider.DeviceConfig;
 import android.util.Log;
 import android.util.Slog;
-import com.android.server.ondeviceintelligence.OnDeviceIntelligenceManagerService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class OnDeviceIntelligenceManagerService$1$$ExternalSyntheticLambda2 implements Runnable {
+public final /* synthetic */ class OnDeviceIntelligenceManagerService$1$$ExternalSyntheticLambda2
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
 
-    public /* synthetic */ OnDeviceIntelligenceManagerService$1$$ExternalSyntheticLambda2(int i, Object obj) {
+    public /* synthetic */ OnDeviceIntelligenceManagerService$1$$ExternalSyntheticLambda2(
+            int i, Object obj) {
         this.$r8$classId = i;
         this.f$0 = obj;
     }
@@ -40,23 +41,33 @@ public final /* synthetic */ class OnDeviceIntelligenceManagerService$1$$Externa
                 BundleUtil.tryCloseResource((Bundle) obj);
                 return;
             default:
-                OnDeviceIntelligenceManagerService onDeviceIntelligenceManagerService = ((OnDeviceIntelligenceManagerService.AnonymousClass2) obj).this$0;
+                OnDeviceIntelligenceManagerService onDeviceIntelligenceManagerService =
+                        ((OnDeviceIntelligenceManagerService.AnonymousClass2) obj).this$0;
                 onDeviceIntelligenceManagerService.getClass();
                 Log.d("OnDeviceIntelligenceManagerService", "registerDeviceConfigChangeListener");
                 synchronized (onDeviceIntelligenceManagerService.mLock) {
                     try {
                         str = onDeviceIntelligenceManagerService.mTemporaryConfigNamespace;
                         if (str == null) {
-                            str = onDeviceIntelligenceManagerService.mContext.getResources().getString(R.string.default_browser);
+                            str =
+                                    onDeviceIntelligenceManagerService
+                                            .mContext
+                                            .getResources()
+                                            .getString(R.string.default_browser);
                         }
                     } finally {
                     }
                 }
                 if (str.isEmpty()) {
-                    Slog.e("OnDeviceIntelligenceManagerService", "config_defaultOnDeviceIntelligenceDeviceConfigNamespace is empty");
+                    Slog.e(
+                            "OnDeviceIntelligenceManagerService",
+                            "config_defaultOnDeviceIntelligenceDeviceConfigNamespace is empty");
                     return;
                 } else {
-                    DeviceConfig.addOnPropertiesChangedListener(str, onDeviceIntelligenceManagerService.mConfigExecutor, onDeviceIntelligenceManagerService.mOnPropertiesChangedListener);
+                    DeviceConfig.addOnPropertiesChangedListener(
+                            str,
+                            onDeviceIntelligenceManagerService.mConfigExecutor,
+                            onDeviceIntelligenceManagerService.mOnPropertiesChangedListener);
                     return;
                 }
         }

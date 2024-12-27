@@ -20,6 +20,7 @@ import android.os.RemoteException;
 import android.util.Log;
 import android.util.Slog;
 import android.util.SparseIntArray;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
@@ -27,9 +28,11 @@ import com.android.server.NetworkScoreService$$ExternalSyntheticOutline0;
 import com.android.server.VpnManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.utils.EventLogger;
+
 import com.samsung.android.knoxguard.service.utils.Constants;
 import com.samsung.android.server.audio.FrequentWorker;
 import com.samsung.android.server.audio.GoodCatchManager;
+
 import java.io.PrintWriter;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -46,7 +49,8 @@ import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration.PlayerDeathMonitor, PlayerFocusEnforcer {
+public final class PlaybackActivityMonitor
+        implements AudioPlaybackConfiguration.PlayerDeathMonitor, PlayerFocusEnforcer {
     public static final Set ACTIVE_CHECK_PLAYER_TYPES;
     public static final VolumeShaper.Configuration MUTE_AWAIT_CONNECTION_VSHAPE;
     public static final VolumeShaper.Operation PLAY_CREATE_IF_NEEDED;
@@ -77,10 +81,31 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
     public final SparseIntArray mPortIdToPiid;
     public int mPrivilegedAlarmActiveCount;
     public int mSavedAlarmVolume;
-    public static final VolumeShaper.Configuration DUCK_VSHAPE = new VolumeShaper.Configuration.Builder().setId(1).setCurve(new float[]{FullScreenMagnificationGestureHandler.MAX_SCALE, 1.0f}, new float[]{1.0f, 0.2f}).setOptionFlags(2).setDuration(MediaFocusControl.getFocusRampTimeMs(new AudioAttributes.Builder().setUsage(5).build())).build();
+    public static final VolumeShaper.Configuration DUCK_VSHAPE =
+            new VolumeShaper.Configuration.Builder()
+                    .setId(1)
+                    .setCurve(
+                            new float[] {FullScreenMagnificationGestureHandler.MAX_SCALE, 1.0f},
+                            new float[] {1.0f, 0.2f})
+                    .setOptionFlags(2)
+                    .setDuration(
+                            MediaFocusControl.getFocusRampTimeMs(
+                                    new AudioAttributes.Builder().setUsage(5).build()))
+                    .build();
     public static final VolumeShaper.Configuration DUCK_ID = new VolumeShaper.Configuration(1);
-    public static final VolumeShaper.Configuration STRONG_DUCK_VSHAPE = new VolumeShaper.Configuration.Builder().setId(4).setCurve(new float[]{FullScreenMagnificationGestureHandler.MAX_SCALE, 1.0f}, new float[]{1.0f, 0.017783f}).setOptionFlags(2).setDuration(MediaFocusControl.getFocusRampTimeMs(new AudioAttributes.Builder().setUsage(5).build())).build();
-    public static final VolumeShaper.Configuration STRONG_DUCK_ID = new VolumeShaper.Configuration(4);
+    public static final VolumeShaper.Configuration STRONG_DUCK_VSHAPE =
+            new VolumeShaper.Configuration.Builder()
+                    .setId(4)
+                    .setCurve(
+                            new float[] {FullScreenMagnificationGestureHandler.MAX_SCALE, 1.0f},
+                            new float[] {1.0f, 0.017783f})
+                    .setOptionFlags(2)
+                    .setDuration(
+                            MediaFocusControl.getFocusRampTimeMs(
+                                    new AudioAttributes.Builder().setUsage(5).build()))
+                    .build();
+    public static final VolumeShaper.Configuration STRONG_DUCK_ID =
+            new VolumeShaper.Configuration(4);
     public final ConcurrentLinkedQueue mClients = new ConcurrentLinkedQueue();
     public final Object mPlayerLock = new Object();
     public final HashMap mPlayers = new HashMap();
@@ -105,9 +130,17 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
         public final String eventToString() {
             switch (this.$r8$classId) {
                 case 0:
-                    return new String("player piid:" + this.mPlayerIId + " new AudioAttributes:" + ((AudioAttributes) this.mPlayerAttr));
+                    return new String(
+                            "player piid:"
+                                    + this.mPlayerIId
+                                    + " new AudioAttributes:"
+                                    + ((AudioAttributes) this.mPlayerAttr));
                 default:
-                    return new String("player piid:" + this.mPlayerIId + " format update:" + ((AudioPlaybackConfiguration.FormatInfo) this.mPlayerAttr));
+                    return new String(
+                            "player piid:"
+                                    + this.mPlayerIId
+                                    + " format update:"
+                                    + ((AudioPlaybackConfiguration.FormatInfo) this.mPlayerAttr));
             }
         }
     }
@@ -116,7 +149,12 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
     public final class DuckEvent extends VolumeShaperEvent {
         public final boolean mUseStrongDuck;
 
-        public DuckEvent(AudioPlaybackConfiguration audioPlaybackConfiguration, boolean z, boolean z2, VolumeShaper.Configuration configuration, VolumeShaper.Operation operation) {
+        public DuckEvent(
+                AudioPlaybackConfiguration audioPlaybackConfiguration,
+                boolean z,
+                boolean z2,
+                VolumeShaper.Configuration configuration,
+                VolumeShaper.Operation operation) {
             super(audioPlaybackConfiguration, z, configuration, operation);
             this.mUseStrongDuck = z2;
         }
@@ -142,7 +180,8 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
                 this.mUseStrongDuck = z;
             }
 
-            public final void addDuck(AudioPlaybackConfiguration audioPlaybackConfiguration, boolean z) {
+            public final void addDuck(
+                    AudioPlaybackConfiguration audioPlaybackConfiguration, boolean z) {
                 Integer num = new Integer(audioPlaybackConfiguration.getPlayerInterfaceId());
                 int intValue = num.intValue();
                 if (this.mDuckedPlayers.contains(num)) {
@@ -150,16 +189,32 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
                     return;
                 }
                 try {
-                    VolumeShaper.Configuration configuration = this.mUseStrongDuck ? PlaybackActivityMonitor.STRONG_DUCK_VSHAPE : PlaybackActivityMonitor.DUCK_VSHAPE;
-                    VolumeShaper.Operation operation = z ? PlaybackActivityMonitor.PLAY_SKIP_RAMP : PlaybackActivityMonitor.PLAY_CREATE_IF_NEEDED;
+                    VolumeShaper.Configuration configuration =
+                            this.mUseStrongDuck
+                                    ? PlaybackActivityMonitor.STRONG_DUCK_VSHAPE
+                                    : PlaybackActivityMonitor.DUCK_VSHAPE;
+                    VolumeShaper.Operation operation =
+                            z
+                                    ? PlaybackActivityMonitor.PLAY_SKIP_RAMP
+                                    : PlaybackActivityMonitor.PLAY_CREATE_IF_NEEDED;
                     EventLogger eventLogger = PlaybackActivityMonitor.sEventLogger;
-                    DuckEvent duckEvent = new DuckEvent(audioPlaybackConfiguration, z, this.mUseStrongDuck, configuration, operation);
+                    DuckEvent duckEvent =
+                            new DuckEvent(
+                                    audioPlaybackConfiguration,
+                                    z,
+                                    this.mUseStrongDuck,
+                                    configuration,
+                                    operation);
                     duckEvent.printLog(0, "AS.PlaybackActivityMon");
                     eventLogger.enqueue(duckEvent);
-                    audioPlaybackConfiguration.getPlayerProxy().applyVolumeShaper(configuration, operation);
+                    audioPlaybackConfiguration
+                            .getPlayerProxy()
+                            .applyVolumeShaper(configuration, operation);
                     this.mDuckedPlayers.add(num);
                 } catch (Exception e) {
-                    StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(intValue, "Error ducking player piid:", " uid:");
+                    StringBuilder m =
+                            BatteryService$$ExternalSyntheticOutline0.m(
+                                    intValue, "Error ducking player piid:", " uid:");
                     m.append(this.mUid);
                     Log.e("AS.PlaybackActivityMon", m.toString(), e);
                 }
@@ -179,33 +234,61 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
                 while (it.hasNext()) {
                     Integer num = (Integer) it.next();
                     int intValue = num.intValue();
-                    AudioPlaybackConfiguration audioPlaybackConfiguration = (AudioPlaybackConfiguration) hashMap.get(num);
+                    AudioPlaybackConfiguration audioPlaybackConfiguration =
+                            (AudioPlaybackConfiguration) hashMap.get(num);
                     int i = this.mUid;
                     if (audioPlaybackConfiguration != null) {
                         try {
                             EventLogger eventLogger = PlaybackActivityMonitor.sEventLogger;
-                            EventLogger.StringEvent stringEvent = new EventLogger.StringEvent("unducking piid:" + intValue);
+                            EventLogger.StringEvent stringEvent =
+                                    new EventLogger.StringEvent("unducking piid:" + intValue);
                             stringEvent.printLog(0, "AS.PlaybackActivityMon");
                             eventLogger.enqueue(stringEvent);
-                            audioPlaybackConfiguration.getPlayerProxy().applyVolumeShaper(this.mUseStrongDuck ? PlaybackActivityMonitor.STRONG_DUCK_ID : PlaybackActivityMonitor.DUCK_ID, VolumeShaper.Operation.REVERSE);
+                            audioPlaybackConfiguration
+                                    .getPlayerProxy()
+                                    .applyVolumeShaper(
+                                            this.mUseStrongDuck
+                                                    ? PlaybackActivityMonitor.STRONG_DUCK_ID
+                                                    : PlaybackActivityMonitor.DUCK_ID,
+                                            VolumeShaper.Operation.REVERSE);
                         } catch (Exception e) {
-                            Log.e("AS.PlaybackActivityMon", ArrayUtils$$ExternalSyntheticOutline0.m(intValue, i, "Error unducking player piid:", " uid:"), e);
+                            Log.e(
+                                    "AS.PlaybackActivityMon",
+                                    ArrayUtils$$ExternalSyntheticOutline0.m(
+                                            intValue, i, "Error unducking player piid:", " uid:"),
+                                    e);
                         }
                     } else {
-                        Log.v("AS.PlaybackActivityMon", "Error unducking player piid:" + intValue + ", player not found for uid " + i);
+                        Log.v(
+                                "AS.PlaybackActivityMon",
+                                "Error unducking player piid:"
+                                        + intValue
+                                        + ", player not found for uid "
+                                        + i);
                     }
                 }
                 this.mDuckedPlayers.clear();
             }
         }
 
-        public final synchronized void checkDuck(AudioPlaybackConfiguration audioPlaybackConfiguration) {
-            Log.v("AS.PlaybackActivityMon", "DuckingManager: checkDuck() player piid:" + audioPlaybackConfiguration.getPlayerInterfaceId() + " uid:" + audioPlaybackConfiguration.getClientUid());
-            DuckedApp duckedApp = (DuckedApp) this.mDuckers.get(Integer.valueOf(audioPlaybackConfiguration.getClientUid()));
+        public final synchronized void checkDuck(
+                AudioPlaybackConfiguration audioPlaybackConfiguration) {
+            Log.v(
+                    "AS.PlaybackActivityMon",
+                    "DuckingManager: checkDuck() player piid:"
+                            + audioPlaybackConfiguration.getPlayerInterfaceId()
+                            + " uid:"
+                            + audioPlaybackConfiguration.getClientUid());
+            DuckedApp duckedApp =
+                    (DuckedApp)
+                            this.mDuckers.get(
+                                    Integer.valueOf(audioPlaybackConfiguration.getClientUid()));
             if (duckedApp == null) {
                 return;
             }
-            Log.v("AS.PlaybackActivityMon", "DuckingManager: checkDuck() player piid:" + this.mDuckers.toString() + " )");
+            Log.v(
+                    "AS.PlaybackActivityMon",
+                    "DuckingManager: checkDuck() player piid:" + this.mDuckers.toString() + " )");
             duckedApp.addDuck(audioPlaybackConfiguration, true);
         }
 
@@ -225,14 +308,21 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
             }
         }
 
-        public final synchronized void removeReleased(AudioPlaybackConfiguration audioPlaybackConfiguration) {
+        public final synchronized void removeReleased(
+                AudioPlaybackConfiguration audioPlaybackConfiguration) {
             int clientUid = audioPlaybackConfiguration.getClientUid();
-            Log.v("AS.PlaybackActivityMon", "DuckingManager: removedReleased() player piid: " + audioPlaybackConfiguration.getPlayerInterfaceId() + " uid:" + clientUid);
+            Log.v(
+                    "AS.PlaybackActivityMon",
+                    "DuckingManager: removedReleased() player piid: "
+                            + audioPlaybackConfiguration.getPlayerInterfaceId()
+                            + " uid:"
+                            + clientUid);
             DuckedApp duckedApp = (DuckedApp) this.mDuckers.get(Integer.valueOf(clientUid));
             if (duckedApp == null) {
                 return;
             }
-            duckedApp.mDuckedPlayers.remove(new Integer(audioPlaybackConfiguration.getPlayerInterfaceId()));
+            duckedApp.mDuckedPlayers.remove(
+                    new Integer(audioPlaybackConfiguration.getPlayerInterfaceId()));
         }
 
         public final synchronized void unduckUid(int i, HashMap hashMap) {
@@ -250,7 +340,12 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
         public final /* synthetic */ int $r8$classId;
 
         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-        public /* synthetic */ FadeInEvent(AudioPlaybackConfiguration audioPlaybackConfiguration, boolean z, VolumeShaper.Configuration configuration, VolumeShaper.Operation operation, int i) {
+        public /* synthetic */ FadeInEvent(
+                AudioPlaybackConfiguration audioPlaybackConfiguration,
+                boolean z,
+                VolumeShaper.Configuration configuration,
+                VolumeShaper.Operation operation,
+                int i) {
             super(audioPlaybackConfiguration, z, configuration, operation);
             this.$r8$classId = i;
         }
@@ -302,7 +397,21 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
 
         @Override // com.android.server.utils.EventLogger.Event
         public final String eventToString() {
-            return new String("new player piid:" + this.mPlayerIId + " uid/pid:" + this.mClientUid + "/" + this.mClientPid + " package:" + this.mClientPackageName + " type:" + AudioPlaybackConfiguration.toLogFriendlyPlayerType(this.mPlayerType) + " attr:" + this.mPlayerAttr + " session:" + this.mSessionId);
+            return new String(
+                    "new player piid:"
+                            + this.mPlayerIId
+                            + " uid/pid:"
+                            + this.mClientUid
+                            + "/"
+                            + this.mClientPid
+                            + " package:"
+                            + this.mClientPackageName
+                            + " type:"
+                            + AudioPlaybackConfiguration.toLogFriendlyPlayerType(this.mPlayerType)
+                            + " attr:"
+                            + this.mPlayerAttr
+                            + " session:"
+                            + this.mSessionId);
         }
     }
 
@@ -316,7 +425,8 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
         public boolean mIsReleased = false;
         public int mErrorCount = 0;
 
-        public PlayMonitorClient(IPlaybackConfigDispatcher iPlaybackConfigDispatcher, boolean z, int i, int i2) {
+        public PlayMonitorClient(
+                IPlaybackConfigDispatcher iPlaybackConfigDispatcher, boolean z, int i, int i2) {
             this.mDispatcherCb = iPlaybackConfigDispatcher;
             this.mIsPrivileged = z;
             this.mUid = i;
@@ -340,7 +450,13 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
                     } catch (RemoteException e) {
                         synchronized (this) {
                             this.mErrorCount++;
-                            Log.e("AS.PlaybackActivityMon", "Error (" + this.mErrorCount + ") trying to dispatch playback config change to " + this, e);
+                            Log.e(
+                                    "AS.PlaybackActivityMon",
+                                    "Error ("
+                                            + this.mErrorCount
+                                            + ") trying to dispatch playback config change to "
+                                            + this,
+                                    e);
                         }
                     }
                 } catch (Throwable th) {
@@ -393,7 +509,11 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
                 return sb.toString();
             }
             if (i2 == 6) {
-                return AudioPlaybackConfiguration.toLogFriendlyPlayerState(i2) + " portId:" + i3 + " mapped to player piid:" + i;
+                return AudioPlaybackConfiguration.toLogFriendlyPlayerState(i2)
+                        + " portId:"
+                        + i3
+                        + " mapped to player piid:"
+                        + i;
             }
             if (i2 != 7) {
                 return sb.toString();
@@ -439,7 +559,12 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
 
         @Override // com.android.server.utils.EventLogger.Event
         public final String eventToString() {
-            return "player piid:" + this.mPlayerIId + " has OP_PLAY_AUDIO:" + this.mHasOp + " in uid:" + this.mUid;
+            return "player piid:"
+                    + this.mPlayerIId
+                    + " has OP_PLAY_AUDIO:"
+                    + this.mHasOp
+                    + " in uid:"
+                    + this.mUid;
         }
     }
 
@@ -454,7 +579,11 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
         public final int mPlayerType;
         public final boolean mSkipRamp;
 
-        public VolumeShaperEvent(AudioPlaybackConfiguration audioPlaybackConfiguration, boolean z, VolumeShaper.Configuration configuration, VolumeShaper.Operation operation) {
+        public VolumeShaperEvent(
+                AudioPlaybackConfiguration audioPlaybackConfiguration,
+                boolean z,
+                VolumeShaper.Configuration configuration,
+                VolumeShaper.Operation operation) {
             this.mPlayerIId = audioPlaybackConfiguration.getPlayerInterfaceId();
             this.mSkipRamp = z;
             this.mClientUid = audioPlaybackConfiguration.getClientUid();
@@ -467,17 +596,44 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
 
         @Override // com.android.server.utils.EventLogger.Event
         public final String eventToString() {
-            return getVSAction() + " player piid:" + this.mPlayerIId + " uid/pid:" + this.mClientUid + "/" + this.mClientPid + " skip ramp:" + this.mSkipRamp + " player type:" + AudioPlaybackConfiguration.toLogFriendlyPlayerType(this.mPlayerType) + " attr:" + this.mPlayerAttr + " config:" + this.mConfig + " operation:" + this.mOperation;
+            return getVSAction()
+                    + " player piid:"
+                    + this.mPlayerIId
+                    + " uid/pid:"
+                    + this.mClientUid
+                    + "/"
+                    + this.mClientPid
+                    + " skip ramp:"
+                    + this.mSkipRamp
+                    + " player type:"
+                    + AudioPlaybackConfiguration.toLogFriendlyPlayerType(this.mPlayerType)
+                    + " attr:"
+                    + this.mPlayerAttr
+                    + " config:"
+                    + this.mConfig
+                    + " operation:"
+                    + this.mOperation;
         }
 
         public abstract String getVSAction();
     }
 
     static {
-        VolumeShaper.Operation build = new VolumeShaper.Operation.Builder(VolumeShaper.Operation.PLAY).createIfNeeded().build();
+        VolumeShaper.Operation build =
+                new VolumeShaper.Operation.Builder(VolumeShaper.Operation.PLAY)
+                        .createIfNeeded()
+                        .build();
         PLAY_CREATE_IF_NEEDED = build;
-        MUTE_AWAIT_CONNECTION_VSHAPE = new VolumeShaper.Configuration.Builder().setId(3).setCurve(new float[]{FullScreenMagnificationGestureHandler.MAX_SCALE, 1.0f}, new float[]{1.0f, FullScreenMagnificationGestureHandler.MAX_SCALE}).setOptionFlags(2).setDuration(100L).build();
-        UNDUCKABLE_PLAYER_TYPES = new int[]{13, 3};
+        MUTE_AWAIT_CONNECTION_VSHAPE =
+                new VolumeShaper.Configuration.Builder()
+                        .setId(3)
+                        .setCurve(
+                                new float[] {FullScreenMagnificationGestureHandler.MAX_SCALE, 1.0f},
+                                new float[] {1.0f, FullScreenMagnificationGestureHandler.MAX_SCALE})
+                        .setOptionFlags(2)
+                        .setDuration(100L)
+                        .build();
+        UNDUCKABLE_PLAYER_TYPES = new int[] {13, 3};
         PLAY_SKIP_RAMP = new VolumeShaper.Operation.Builder(build).setXOffset(1.0f).build();
         sEventLogger = new EventLogger(100, "playback activity as reported through PlayerBase");
         new ArrayDeque(50);
@@ -495,7 +651,11 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
 
     /* JADX WARN: Type inference failed for: r0v15, types: [com.android.server.audio.PlaybackActivityMonitor$2] */
     /* JADX WARN: Type inference failed for: r3v2, types: [com.android.server.audio.PlaybackActivityMonitor$1] */
-    public PlaybackActivityMonitor(Context context, int i, AudioService$$ExternalSyntheticLambda16 audioService$$ExternalSyntheticLambda16, AudioService audioService) {
+    public PlaybackActivityMonitor(
+            Context context,
+            int i,
+            AudioService$$ExternalSyntheticLambda16 audioService$$ExternalSyntheticLambda16,
+            AudioService audioService) {
         new SparseIntArray();
         this.mPortIdToPiid = new SparseIntArray();
         this.mSavedAlarmVolume = -1;
@@ -509,23 +669,25 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
         this.mMutedPlayersAwaitingConnection = new ArrayList();
         this.mMutedUsagesAwaitingConnection = null;
         this.mAudioHandler = null;
-        this.mNotifierSoundAliveForDVFS = new FrequentWorker() { // from class: com.android.server.audio.PlaybackActivityMonitor.2
-            {
-                this.mPeriodMs = 5000;
-                this.mCachedValue = null;
-            }
+        this.mNotifierSoundAliveForDVFS =
+                new FrequentWorker() { // from class:
+                                       // com.android.server.audio.PlaybackActivityMonitor.2
+                    {
+                        this.mPeriodMs = 5000;
+                        this.mCachedValue = null;
+                    }
 
-            @Override // com.samsung.android.server.audio.FrequentWorker
-            public final Object func() {
-                Handler handler = PlaybackActivityMonitor.this.mAudioHandler;
-                if (handler == null) {
-                    Log.w("AS.PlaybackActivityMon", "There is no audio handler");
-                    return null;
-                }
-                handler.sendMessage(handler.obtainMessage(2762, 2, 0));
-                return null;
-            }
-        };
+                    @Override // com.samsung.android.server.audio.FrequentWorker
+                    public final Object func() {
+                        Handler handler = PlaybackActivityMonitor.this.mAudioHandler;
+                        if (handler == null) {
+                            Log.w("AS.PlaybackActivityMon", "There is no audio handler");
+                            return null;
+                        }
+                        handler.sendMessage(handler.obtainMessage(2762, 2, 0));
+                        return null;
+                    }
+                };
         this.mPackageTimeMap = new HashMap();
         this.mLastUpdateTime = 0L;
         this.mContext = context;
@@ -536,58 +698,90 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
         HandlerThread handlerThread = new HandlerThread("AS.PlaybackActivityMon");
         this.mEventThread = handlerThread;
         handlerThread.start();
-        this.mEventHandler = new Handler(this.mEventThread.getLooper()) { // from class: com.android.server.audio.PlaybackActivityMonitor.1
-            @Override // android.os.Handler
-            public final void handleMessage(Message message) {
-                AudioPlaybackConfiguration audioPlaybackConfiguration;
-                int i2 = message.what;
-                if (i2 == 1) {
-                    PlaybackActivityMonitor.sEventLogger.enqueueAndLog(0, "Timeout for muting waiting for " + ((AudioDeviceAttributes) message.obj) + ", unmuting", "AS.PlaybackActivityMon");
-                    synchronized (PlaybackActivityMonitor.this.mPlayerLock) {
-                        PlaybackActivityMonitor.this.unmutePlayersExpectingDevice();
-                    }
-                    PlaybackActivityMonitor.this.mMuteAwaitConnectionTimeoutCb.accept((AudioDeviceAttributes) message.obj);
-                    return;
-                }
-                if (i2 == 2) {
-                    PersistableBundle persistableBundle = (PersistableBundle) message.obj;
-                    if (persistableBundle == null) {
-                        Log.w("AS.PlaybackActivityMon", "Received mute event with no extras");
-                        return;
-                    }
-                    int i3 = persistableBundle.getInt("android.media.extra.PLAYER_EVENT_MUTE");
-                    synchronized (PlaybackActivityMonitor.this.mPlayerLock) {
-                        try {
-                            int i4 = message.arg1;
-                            PlaybackActivityMonitor.sEventLogger.enqueue(new PlayerEvent(i4, 7, i3));
-                            AudioPlaybackConfiguration audioPlaybackConfiguration2 = (AudioPlaybackConfiguration) PlaybackActivityMonitor.this.mPlayers.get(Integer.valueOf(i4));
-                            if (audioPlaybackConfiguration2 != null && audioPlaybackConfiguration2.handleMutedEvent(i3)) {
-                                PlaybackActivityMonitor.this.dispatchPlaybackChange(false);
+        this.mEventHandler =
+                new Handler(
+                        this.mEventThread
+                                .getLooper()) { // from class:
+                                                // com.android.server.audio.PlaybackActivityMonitor.1
+                    @Override // android.os.Handler
+                    public final void handleMessage(Message message) {
+                        AudioPlaybackConfiguration audioPlaybackConfiguration;
+                        int i2 = message.what;
+                        if (i2 == 1) {
+                            PlaybackActivityMonitor.sEventLogger.enqueueAndLog(
+                                    0,
+                                    "Timeout for muting waiting for "
+                                            + ((AudioDeviceAttributes) message.obj)
+                                            + ", unmuting",
+                                    "AS.PlaybackActivityMon");
+                            synchronized (PlaybackActivityMonitor.this.mPlayerLock) {
+                                PlaybackActivityMonitor.this.unmutePlayersExpectingDevice();
                             }
-                        } finally {
+                            PlaybackActivityMonitor.this.mMuteAwaitConnectionTimeoutCb.accept(
+                                    (AudioDeviceAttributes) message.obj);
+                            return;
                         }
+                        if (i2 == 2) {
+                            PersistableBundle persistableBundle = (PersistableBundle) message.obj;
+                            if (persistableBundle == null) {
+                                Log.w(
+                                        "AS.PlaybackActivityMon",
+                                        "Received mute event with no extras");
+                                return;
+                            }
+                            int i3 =
+                                    persistableBundle.getInt(
+                                            "android.media.extra.PLAYER_EVENT_MUTE");
+                            synchronized (PlaybackActivityMonitor.this.mPlayerLock) {
+                                try {
+                                    int i4 = message.arg1;
+                                    PlaybackActivityMonitor.sEventLogger.enqueue(
+                                            new PlayerEvent(i4, 7, i3));
+                                    AudioPlaybackConfiguration audioPlaybackConfiguration2 =
+                                            (AudioPlaybackConfiguration)
+                                                    PlaybackActivityMonitor.this.mPlayers.get(
+                                                            Integer.valueOf(i4));
+                                    if (audioPlaybackConfiguration2 != null
+                                            && audioPlaybackConfiguration2.handleMutedEvent(i3)) {
+                                        PlaybackActivityMonitor.this.dispatchPlaybackChange(false);
+                                    }
+                                } finally {
+                                }
+                            }
+                            return;
+                        }
+                        if (i2 != 3) {
+                            return;
+                        }
+                        PersistableBundle persistableBundle2 = (PersistableBundle) message.obj;
+                        if (persistableBundle2 == null) {
+                            Log.w("AS.PlaybackActivityMon", "Received format event with no extras");
+                            return;
+                        }
+                        AudioPlaybackConfiguration.FormatInfo formatInfo =
+                                new AudioPlaybackConfiguration.FormatInfo(
+                                        persistableBundle2.getBoolean(
+                                                "android.media.extra.PLAYER_EVENT_SPATIALIZED",
+                                                false),
+                                        persistableBundle2.getInt(
+                                                "android.media.extra.PLAYER_EVENT_CHANNEL_MASK", 0),
+                                        persistableBundle2.getInt(
+                                                "android.media.extra.PLAYER_EVENT_SAMPLE_RATE", 0));
+                        PlaybackActivityMonitor.sEventLogger.enqueue(
+                                new AudioAttrEvent(message.arg1, formatInfo));
+                        synchronized (PlaybackActivityMonitor.this.mPlayerLock) {
+                            audioPlaybackConfiguration =
+                                    (AudioPlaybackConfiguration)
+                                            PlaybackActivityMonitor.this.mPlayers.get(
+                                                    Integer.valueOf(message.arg1));
+                        }
+                        if (audioPlaybackConfiguration == null
+                                || !audioPlaybackConfiguration.handleFormatEvent(formatInfo)) {
+                            return;
+                        }
+                        PlaybackActivityMonitor.this.dispatchPlaybackChange(false);
                     }
-                    return;
-                }
-                if (i2 != 3) {
-                    return;
-                }
-                PersistableBundle persistableBundle2 = (PersistableBundle) message.obj;
-                if (persistableBundle2 == null) {
-                    Log.w("AS.PlaybackActivityMon", "Received format event with no extras");
-                    return;
-                }
-                AudioPlaybackConfiguration.FormatInfo formatInfo = new AudioPlaybackConfiguration.FormatInfo(persistableBundle2.getBoolean("android.media.extra.PLAYER_EVENT_SPATIALIZED", false), persistableBundle2.getInt("android.media.extra.PLAYER_EVENT_CHANNEL_MASK", 0), persistableBundle2.getInt("android.media.extra.PLAYER_EVENT_SAMPLE_RATE", 0));
-                PlaybackActivityMonitor.sEventLogger.enqueue(new AudioAttrEvent(message.arg1, formatInfo));
-                synchronized (PlaybackActivityMonitor.this.mPlayerLock) {
-                    audioPlaybackConfiguration = (AudioPlaybackConfiguration) PlaybackActivityMonitor.this.mPlayers.get(Integer.valueOf(message.arg1));
-                }
-                if (audioPlaybackConfiguration == null || !audioPlaybackConfiguration.handleFormatEvent(formatInfo)) {
-                    return;
-                }
-                PlaybackActivityMonitor.this.dispatchPlaybackChange(false);
-            }
-        };
+                };
         this.mAudioService = audioService;
     }
 
@@ -595,29 +789,39 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
         ArrayList arrayList = new ArrayList();
         Iterator it = list.iterator();
         while (it.hasNext()) {
-            AudioPlaybackConfiguration audioPlaybackConfiguration = (AudioPlaybackConfiguration) it.next();
+            AudioPlaybackConfiguration audioPlaybackConfiguration =
+                    (AudioPlaybackConfiguration) it.next();
             if (audioPlaybackConfiguration.isActive()) {
-                arrayList.add(AudioPlaybackConfiguration.anonymizedCopy(audioPlaybackConfiguration));
+                arrayList.add(
+                        AudioPlaybackConfiguration.anonymizedCopy(audioPlaybackConfiguration));
             }
         }
         return arrayList;
     }
 
-    public static boolean checkBanPlayer(AudioPlaybackConfiguration audioPlaybackConfiguration, int i) {
+    public static boolean checkBanPlayer(
+            AudioPlaybackConfiguration audioPlaybackConfiguration, int i) {
         boolean z = audioPlaybackConfiguration.getClientUid() == i;
         if (z) {
             int playerInterfaceId = audioPlaybackConfiguration.getPlayerInterfaceId();
             try {
-                Log.v("AS.PlaybackActivityMon", "banning player " + playerInterfaceId + " uid:" + i);
+                Log.v(
+                        "AS.PlaybackActivityMon",
+                        "banning player " + playerInterfaceId + " uid:" + i);
                 audioPlaybackConfiguration.getPlayerProxy().pause();
             } catch (Exception e) {
-                Log.e("AS.PlaybackActivityMon", ArrayUtils$$ExternalSyntheticOutline0.m(playerInterfaceId, i, "error banning player ", " uid:"), e);
+                Log.e(
+                        "AS.PlaybackActivityMon",
+                        ArrayUtils$$ExternalSyntheticOutline0.m(
+                                playerInterfaceId, i, "error banning player ", " uid:"),
+                        e);
             }
         }
         return z;
     }
 
-    public static boolean checkConfigurationCaller(int i, AudioPlaybackConfiguration audioPlaybackConfiguration, int i2) {
+    public static boolean checkConfigurationCaller(
+            int i, AudioPlaybackConfiguration audioPlaybackConfiguration, int i2) {
         if (audioPlaybackConfiguration == null) {
             return false;
         }
@@ -628,32 +832,44 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
         return false;
     }
 
-    public static boolean checkMuteStrategy(AudioPlaybackConfiguration audioPlaybackConfiguration, boolean z) {
+    public static boolean checkMuteStrategy(
+            AudioPlaybackConfiguration audioPlaybackConfiguration, boolean z) {
         Iterator it = audioPlaybackConfiguration.getAudioAttributes().getTags().iterator();
         while (it.hasNext()) {
             if (((HashSet) TAGS_TO_NOT_MUTE_IN_CALL).contains((String) it.next())) {
                 return false;
             }
         }
-        if (!((HashSet) ACTIVE_CHECK_PLAYER_TYPES).contains(Integer.valueOf(audioPlaybackConfiguration.getPlayerType())) || audioPlaybackConfiguration.isActive()) {
+        if (!((HashSet) ACTIVE_CHECK_PLAYER_TYPES)
+                        .contains(Integer.valueOf(audioPlaybackConfiguration.getPlayerType()))
+                || audioPlaybackConfiguration.isActive()) {
             return z;
         }
         return false;
     }
 
     public final void cancelMuteAwaitConnection(String str) {
-        sEventLogger.enqueueAndLog(0, "cancelMuteAwaitConnection() from:" + str, "AS.PlaybackActivityMon");
+        sEventLogger.enqueueAndLog(
+                0, "cancelMuteAwaitConnection() from:" + str, "AS.PlaybackActivityMon");
         synchronized (this.mPlayerLock) {
             removeMessages(1);
             unmutePlayersExpectingDevice();
         }
     }
 
-    public final void checkVolumeForPrivilegedAlarm(AudioPlaybackConfiguration audioPlaybackConfiguration, int i) {
+    public final void checkVolumeForPrivilegedAlarm(
+            AudioPlaybackConfiguration audioPlaybackConfiguration, int i) {
         if (i == 5) {
             return;
         }
-        if ((i == 2 || audioPlaybackConfiguration.getPlayerState() == 2) && (audioPlaybackConfiguration.getAudioAttributes().getAllFlags() & 192) == 192 && audioPlaybackConfiguration.getAudioAttributes().getUsage() == 4 && this.mContext.checkPermission("android.permission.MODIFY_PHONE_STATE", audioPlaybackConfiguration.getClientPid(), audioPlaybackConfiguration.getClientUid()) == 0) {
+        if ((i == 2 || audioPlaybackConfiguration.getPlayerState() == 2)
+                && (audioPlaybackConfiguration.getAudioAttributes().getAllFlags() & 192) == 192
+                && audioPlaybackConfiguration.getAudioAttributes().getUsage() == 4
+                && this.mContext.checkPermission(
+                                "android.permission.MODIFY_PHONE_STATE",
+                                audioPlaybackConfiguration.getClientPid(),
+                                audioPlaybackConfiguration.getClientUid())
+                        == 0) {
             if (i == 2 && audioPlaybackConfiguration.getPlayerState() != 2) {
                 int i2 = this.mPrivilegedAlarmActiveCount;
                 this.mPrivilegedAlarmActiveCount = i2 + 1;
@@ -683,7 +899,8 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
             if (Flags.enableFadeManagerConfiguration()) {
                 synchronized (fadeConfigurations.mLock) {
                     fadeConfigurations.mTransientFadeManagerConfig = null;
-                    fadeConfigurations.mActiveFadeManagerConfig = fadeConfigurations.getActiveFadeMgrConfigLocked();
+                    fadeConfigurations.mActiveFadeManagerConfig =
+                            fadeConfigurations.getActiveFadeMgrConfigLocked();
                 }
             }
         }
@@ -715,13 +932,21 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
     public final void dispatchPlaybackChange(boolean z) {
         boolean z2;
         boolean z3;
-        Log.v("AS.PlaybackActivityMon", "dispatchPlaybackChange to " + this.mClients.size() + " clients");
+        Log.v(
+                "AS.PlaybackActivityMon",
+                "dispatchPlaybackChange to " + this.mClients.size() + " clients");
         synchronized (this.mPlayerLock) {
             try {
                 if (this.mPlayers.isEmpty()) {
                     return;
                 }
-                List list = this.mPlayers.values().stream().sorted(Comparator.comparing(new PlaybackActivityMonitor$$ExternalSyntheticLambda0()).reversed()).toList();
+                List list =
+                        this.mPlayers.values().stream()
+                                .sorted(
+                                        Comparator.comparing(
+                                                        new PlaybackActivityMonitor$$ExternalSyntheticLambda0())
+                                                .reversed())
+                                .toList();
                 Iterator it = this.mClients.iterator();
                 ArrayList arrayList = null;
                 while (it.hasNext()) {
@@ -750,8 +975,14 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
     }
 
     @Override // com.android.server.audio.PlayerFocusEnforcer
-    public final boolean duckPlayers(FocusRequester focusRequester, FocusRequester focusRequester2, boolean z) {
-        Log.v("AS.PlaybackActivityMon", String.format("duckPlayers: uids winner=%d loser=%d", Integer.valueOf(focusRequester.mCallingUid), Integer.valueOf(focusRequester2.mCallingUid)));
+    public final boolean duckPlayers(
+            FocusRequester focusRequester, FocusRequester focusRequester2, boolean z) {
+        Log.v(
+                "AS.PlaybackActivityMon",
+                String.format(
+                        "duckPlayers: uids winner=%d loser=%d",
+                        Integer.valueOf(focusRequester.mCallingUid),
+                        Integer.valueOf(focusRequester2.mCallingUid)));
         synchronized (this.mPlayerLock) {
             try {
                 if (this.mPlayers.isEmpty()) {
@@ -764,24 +995,63 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
                     if (!it.hasNext()) {
                         DuckingManager duckingManager = this.mDuckingManager;
                         int i = focusRequester2.mCallingUid;
-                        if (focusRequester.mFocusGainRequest == 3 && focusRequester.mAttributes.getUsage() == 16) {
+                        if (focusRequester.mFocusGainRequest == 3
+                                && focusRequester.mAttributes.getUsage() == 16) {
                             z2 = true;
                         }
                         duckingManager.duckUid(i, arrayList, z2);
                         return true;
                     }
-                    AudioPlaybackConfiguration audioPlaybackConfiguration = (AudioPlaybackConfiguration) it.next();
-                    if (!focusRequester.hasSameUid(audioPlaybackConfiguration.getClientUid()) && focusRequester2.hasSameUid(audioPlaybackConfiguration.getClientUid()) && audioPlaybackConfiguration.getPlayerState() == 2) {
-                        if (!z && audioPlaybackConfiguration.getAudioAttributes().getContentType() == 1) {
-                            Log.v("AS.PlaybackActivityMon", "not ducking player " + audioPlaybackConfiguration.getPlayerInterfaceId() + " uid:" + audioPlaybackConfiguration.getClientUid() + " pid:" + audioPlaybackConfiguration.getClientPid() + " - SPEECH");
+                    AudioPlaybackConfiguration audioPlaybackConfiguration =
+                            (AudioPlaybackConfiguration) it.next();
+                    if (!focusRequester.hasSameUid(audioPlaybackConfiguration.getClientUid())
+                            && focusRequester2.hasSameUid(audioPlaybackConfiguration.getClientUid())
+                            && audioPlaybackConfiguration.getPlayerState() == 2) {
+                        if (!z
+                                && audioPlaybackConfiguration.getAudioAttributes().getContentType()
+                                        == 1) {
+                            Log.v(
+                                    "AS.PlaybackActivityMon",
+                                    "not ducking player "
+                                            + audioPlaybackConfiguration.getPlayerInterfaceId()
+                                            + " uid:"
+                                            + audioPlaybackConfiguration.getClientUid()
+                                            + " pid:"
+                                            + audioPlaybackConfiguration.getClientPid()
+                                            + " - SPEECH");
                             return false;
                         }
-                        if (ArrayUtils.contains(UNDUCKABLE_PLAYER_TYPES, audioPlaybackConfiguration.getPlayerType())) {
-                            Log.v("AS.PlaybackActivityMon", "not ducking player " + audioPlaybackConfiguration.getPlayerInterfaceId() + " uid:" + audioPlaybackConfiguration.getClientUid() + " pid:" + audioPlaybackConfiguration.getClientPid() + " due to type:" + AudioPlaybackConfiguration.toLogFriendlyPlayerType(audioPlaybackConfiguration.getPlayerType()));
+                        if (ArrayUtils.contains(
+                                UNDUCKABLE_PLAYER_TYPES,
+                                audioPlaybackConfiguration.getPlayerType())) {
+                            Log.v(
+                                    "AS.PlaybackActivityMon",
+                                    "not ducking player "
+                                            + audioPlaybackConfiguration.getPlayerInterfaceId()
+                                            + " uid:"
+                                            + audioPlaybackConfiguration.getClientUid()
+                                            + " pid:"
+                                            + audioPlaybackConfiguration.getClientPid()
+                                            + " due to type:"
+                                            + AudioPlaybackConfiguration.toLogFriendlyPlayerType(
+                                                    audioPlaybackConfiguration.getPlayerType()));
                             return false;
                         }
-                        if (!z && focusRequester.mAttributes.getUsage() == 12 && this.mAudioService.isIgnoreDucking()) {
-                            Log.d("AS.PlaybackActivityMon", "not duckPlayers -  ConnectedAndroidAuto : " + this.mAudioService.isConnectedAndroidAuto() + " , forceDuck : " + z + " , IgnoreDucking : " + this.mAudioService.isIgnoreDucking() + " , winner usage : " + focusRequester.mAttributes.getUsage() + " , loser usage : " + focusRequester2.mAttributes.getUsage());
+                        if (!z
+                                && focusRequester.mAttributes.getUsage() == 12
+                                && this.mAudioService.isIgnoreDucking()) {
+                            Log.d(
+                                    "AS.PlaybackActivityMon",
+                                    "not duckPlayers -  ConnectedAndroidAuto : "
+                                            + this.mAudioService.isConnectedAndroidAuto()
+                                            + " , forceDuck : "
+                                            + z
+                                            + " , IgnoreDucking : "
+                                            + this.mAudioService.isIgnoreDucking()
+                                            + " , winner usage : "
+                                            + focusRequester.mAttributes.getUsage()
+                                            + " , loser usage : "
+                                            + focusRequester2.mAttributes.getUsage());
                             return false;
                         }
                         arrayList.add(audioPlaybackConfiguration);
@@ -794,13 +1064,13 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:83:0x004d, code lost:
-    
-        r5 = move-exception;
-     */
+
+       r5 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:86:0x01d7, code lost:
-    
-        throw r5;
-     */
+
+       throw r5;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -810,13 +1080,21 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
             Method dump skipped, instructions count: 472
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.audio.PlaybackActivityMonitor.dump(java.io.PrintWriter):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.audio.PlaybackActivityMonitor.dump(java.io.PrintWriter):void");
     }
 
     @Override // com.android.server.audio.PlayerFocusEnforcer
-    public final boolean fadeOutPlayers(FocusRequester focusRequester, FocusRequester focusRequester2) {
+    public final boolean fadeOutPlayers(
+            FocusRequester focusRequester, FocusRequester focusRequester2) {
         boolean isFadeable;
-        Log.v("AS.PlaybackActivityMon", "fadeOutPlayers: winner=" + focusRequester.mPackageName + " loser=" + focusRequester2.mPackageName);
+        Log.v(
+                "AS.PlaybackActivityMon",
+                "fadeOutPlayers: winner="
+                        + focusRequester.mPackageName
+                        + " loser="
+                        + focusRequester2.mPackageName);
         synchronized (this.mPlayerLock) {
             try {
                 if (this.mPlayers.isEmpty()) {
@@ -830,14 +1108,39 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
                     if ((focusRequester2.mGrantFlags & 2) == 0) {
                         ArrayList arrayList = new ArrayList();
                         boolean z = false;
-                        for (AudioPlaybackConfiguration audioPlaybackConfiguration : this.mPlayers.values()) {
-                            if (!focusRequester.hasSameUid(audioPlaybackConfiguration.getClientUid()) && focusRequester2.hasSameUid(audioPlaybackConfiguration.getClientUid()) && audioPlaybackConfiguration.getPlayerState() == 2) {
+                        for (AudioPlaybackConfiguration audioPlaybackConfiguration :
+                                this.mPlayers.values()) {
+                            if (!focusRequester.hasSameUid(
+                                            audioPlaybackConfiguration.getClientUid())
+                                    && focusRequester2.hasSameUid(
+                                            audioPlaybackConfiguration.getClientUid())
+                                    && audioPlaybackConfiguration.getPlayerState() == 2) {
                                 FadeOutManager fadeOutManager = this.mFadeOutManager;
                                 synchronized (fadeOutManager.mLock) {
-                                    isFadeable = fadeOutManager.mFadeConfigurations.isFadeable(audioPlaybackConfiguration.getAudioAttributes(), audioPlaybackConfiguration.getClientUid(), audioPlaybackConfiguration.getPlayerType());
+                                    isFadeable =
+                                            fadeOutManager.mFadeConfigurations.isFadeable(
+                                                    audioPlaybackConfiguration.getAudioAttributes(),
+                                                    audioPlaybackConfiguration.getClientUid(),
+                                                    audioPlaybackConfiguration.getPlayerType());
                                 }
                                 if (!isFadeable) {
-                                    Log.v("AS.PlaybackActivityMon", "not fading out player " + audioPlaybackConfiguration.getPlayerInterfaceId() + " uid:" + audioPlaybackConfiguration.getClientUid() + " pid:" + audioPlaybackConfiguration.getClientPid() + " type:" + AudioPlaybackConfiguration.toLogFriendlyPlayerType(audioPlaybackConfiguration.getPlayerType()) + " attr:" + audioPlaybackConfiguration.getAudioAttributes());
+                                    Log.v(
+                                            "AS.PlaybackActivityMon",
+                                            "not fading out player "
+                                                    + audioPlaybackConfiguration
+                                                            .getPlayerInterfaceId()
+                                                    + " uid:"
+                                                    + audioPlaybackConfiguration.getClientUid()
+                                                    + " pid:"
+                                                    + audioPlaybackConfiguration.getClientPid()
+                                                    + " type:"
+                                                    + AudioPlaybackConfiguration
+                                                            .toLogFriendlyPlayerType(
+                                                                    audioPlaybackConfiguration
+                                                                            .getPlayerType())
+                                                    + " attr:"
+                                                    + audioPlaybackConfiguration
+                                                            .getAudioAttributes());
                                     return false;
                                 }
                                 arrayList.add(audioPlaybackConfiguration);
@@ -849,7 +1152,9 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
                         }
                         return z;
                     }
-                    Slog.i("AS.FadeOutManager", "not fading out: loser has PAUSES_ON_DUCKABLE_LOSS");
+                    Slog.i(
+                            "AS.FadeOutManager",
+                            "not fading out: loser has PAUSES_ON_DUCKABLE_LOSS");
                 }
                 return false;
             } catch (Throwable th) {
@@ -899,7 +1204,10 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
             fadeConfigurations.getClass();
             if (Flags.enableFadeManagerConfiguration()) {
                 synchronized (fadeConfigurations.mLock) {
-                    fadeInDelayForOffenders = fadeConfigurations.getUpdatedFadeManagerConfigLocked().getFadeInDelayForOffenders();
+                    fadeInDelayForOffenders =
+                            fadeConfigurations
+                                    .getUpdatedFadeManagerConfigLocked()
+                                    .getFadeInDelayForOffenders();
                 }
                 j = fadeInDelayForOffenders;
             } else {
@@ -920,12 +1228,17 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
                 if (Flags.enableFadeManagerConfiguration()) {
                     synchronized (fadeConfigurations.mLock) {
                         try {
-                            FadeManagerConfiguration updatedFadeManagerConfigLocked = fadeConfigurations.getUpdatedFadeManagerConfigLocked();
-                            long fadeOutDurationForAudioAttributes = updatedFadeManagerConfigLocked.getFadeOutDurationForAudioAttributes(audioAttributes);
+                            FadeManagerConfiguration updatedFadeManagerConfigLocked =
+                                    fadeConfigurations.getUpdatedFadeManagerConfigLocked();
+                            long fadeOutDurationForAudioAttributes =
+                                    updatedFadeManagerConfigLocked
+                                            .getFadeOutDurationForAudioAttributes(audioAttributes);
                             if (fadeOutDurationForAudioAttributes != 0) {
                                 j = fadeOutDurationForAudioAttributes;
                             } else {
-                                j = updatedFadeManagerConfigLocked.getFadeOutDurationForUsage(audioAttributes.getSystemUsage());
+                                j =
+                                        updatedFadeManagerConfigLocked.getFadeOutDurationForUsage(
+                                                audioAttributes.getSystemUsage());
                             }
                         } finally {
                         }
@@ -939,11 +1252,13 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
     }
 
     public final String getPackageNameForPid(int i) {
-        ActivityManager activityManager = (ActivityManager) this.mContext.getSystemService("activity");
+        ActivityManager activityManager =
+                (ActivityManager) this.mContext.getSystemService("activity");
         if (activityManager.getRunningAppProcesses() == null) {
             return null;
         }
-        for (ActivityManager.RunningAppProcessInfo runningAppProcessInfo : activityManager.getRunningAppProcesses()) {
+        for (ActivityManager.RunningAppProcessInfo runningAppProcessInfo :
+                activityManager.getRunningAppProcesses()) {
             if (runningAppProcessInfo.pid == i) {
                 return runningAppProcessInfo.processName;
             }
@@ -957,7 +1272,8 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
         }
     }
 
-    public final void maybeMutePlayerAwaitingConnection(AudioPlaybackConfiguration audioPlaybackConfiguration) {
+    public final void maybeMutePlayerAwaitingConnection(
+            AudioPlaybackConfiguration audioPlaybackConfiguration) {
         int[] iArr = this.mMutedUsagesAwaitingConnection;
         if (iArr == null) {
             return;
@@ -966,25 +1282,42 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
             if (i == audioPlaybackConfiguration.getAudioAttributes().getUsage()) {
                 try {
                     EventLogger eventLogger = sEventLogger;
-                    EventLogger.StringEvent stringEvent = new EventLogger.StringEvent("awaiting connection: muting piid:" + audioPlaybackConfiguration.getPlayerInterfaceId() + " uid:" + audioPlaybackConfiguration.getClientUid());
+                    EventLogger.StringEvent stringEvent =
+                            new EventLogger.StringEvent(
+                                    "awaiting connection: muting piid:"
+                                            + audioPlaybackConfiguration.getPlayerInterfaceId()
+                                            + " uid:"
+                                            + audioPlaybackConfiguration.getClientUid());
                     stringEvent.printLog(0, "AS.PlaybackActivityMon");
                     eventLogger.enqueue(stringEvent);
-                    audioPlaybackConfiguration.getPlayerProxy().applyVolumeShaper(MUTE_AWAIT_CONNECTION_VSHAPE, PLAY_SKIP_RAMP);
-                    this.mMutedPlayersAwaitingConnection.add(Integer.valueOf(audioPlaybackConfiguration.getPlayerInterfaceId()));
+                    audioPlaybackConfiguration
+                            .getPlayerProxy()
+                            .applyVolumeShaper(MUTE_AWAIT_CONNECTION_VSHAPE, PLAY_SKIP_RAMP);
+                    this.mMutedPlayersAwaitingConnection.add(
+                            Integer.valueOf(audioPlaybackConfiguration.getPlayerInterfaceId()));
                 } catch (Exception e) {
-                    Log.e("AS.PlaybackActivityMon", "awaiting connection: error muting player " + audioPlaybackConfiguration.getPlayerInterfaceId(), e);
+                    Log.e(
+                            "AS.PlaybackActivityMon",
+                            "awaiting connection: error muting player "
+                                    + audioPlaybackConfiguration.getPlayerInterfaceId(),
+                            e);
                 }
             }
         }
     }
 
-    public final void muteAwaitConnection(int[] iArr, AudioDeviceAttributes audioDeviceAttributes, long j) {
-        sEventLogger.enqueueAndLog(0, "muteAwaitConnection() dev:" + audioDeviceAttributes + " timeOutMs:" + j, "AS.PlaybackActivityMon");
+    public final void muteAwaitConnection(
+            int[] iArr, AudioDeviceAttributes audioDeviceAttributes, long j) {
+        sEventLogger.enqueueAndLog(
+                0,
+                "muteAwaitConnection() dev:" + audioDeviceAttributes + " timeOutMs:" + j,
+                "AS.PlaybackActivityMon");
         synchronized (this.mPlayerLock) {
             mutePlayersExpectingDevice(iArr);
             removeMessages(1);
             AnonymousClass1 anonymousClass1 = this.mEventHandler;
-            anonymousClass1.sendMessageDelayed(anonymousClass1.obtainMessage(1, audioDeviceAttributes), j);
+            anonymousClass1.sendMessageDelayed(
+                    anonymousClass1.obtainMessage(1, audioDeviceAttributes), j);
         }
     }
 
@@ -993,7 +1326,8 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
         this.mMutedUsagesAwaitingConnection = iArr;
         Iterator it = this.mPlayers.keySet().iterator();
         while (it.hasNext()) {
-            AudioPlaybackConfiguration audioPlaybackConfiguration = (AudioPlaybackConfiguration) this.mPlayers.get((Integer) it.next());
+            AudioPlaybackConfiguration audioPlaybackConfiguration =
+                    (AudioPlaybackConfiguration) this.mPlayers.get((Integer) it.next());
             if (audioPlaybackConfiguration != null) {
                 maybeMutePlayerAwaitingConnection(audioPlaybackConfiguration);
             }
@@ -1011,7 +1345,8 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
         synchronized (this.mPlayerLock) {
             try {
                 for (Integer num : this.mPlayers.keySet()) {
-                    AudioPlaybackConfiguration audioPlaybackConfiguration = (AudioPlaybackConfiguration) this.mPlayers.get(num);
+                    AudioPlaybackConfiguration audioPlaybackConfiguration =
+                            (AudioPlaybackConfiguration) this.mPlayers.get(num);
                     if (audioPlaybackConfiguration != null) {
                         int usage = audioPlaybackConfiguration.getAudioAttributes().getUsage();
                         int length = iArr.length;
@@ -1031,13 +1366,24 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
                         if (checkMuteStrategy(audioPlaybackConfiguration, z)) {
                             try {
                                 EventLogger eventLogger = sEventLogger;
-                                EventLogger.StringEvent stringEvent = new EventLogger.StringEvent("call: muting piid:" + num + " uid:" + audioPlaybackConfiguration.getClientUid());
+                                EventLogger.StringEvent stringEvent =
+                                        new EventLogger.StringEvent(
+                                                "call: muting piid:"
+                                                        + num
+                                                        + " uid:"
+                                                        + audioPlaybackConfiguration
+                                                                .getClientUid());
                                 stringEvent.printLog(0, "AS.PlaybackActivityMon");
                                 eventLogger.enqueue(stringEvent);
-                                audioPlaybackConfiguration.getPlayerProxy().setVolume(FullScreenMagnificationGestureHandler.MAX_SCALE);
+                                audioPlaybackConfiguration
+                                        .getPlayerProxy()
+                                        .setVolume(FullScreenMagnificationGestureHandler.MAX_SCALE);
                                 this.mMutedPlayers.add(new Integer(num.intValue()));
                             } catch (Exception e) {
-                                Log.e("AS.PlaybackActivityMon", "call: error muting player " + num, e);
+                                Log.e(
+                                        "AS.PlaybackActivityMon",
+                                        "call: error muting player " + num,
+                                        e);
                             }
                         }
                     }
@@ -1052,11 +1398,17 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
         releasePlayer(i, 0);
     }
 
-    public final void registerPlaybackCallback(IPlaybackConfigDispatcher iPlaybackConfigDispatcher, boolean z) {
+    public final void registerPlaybackCallback(
+            IPlaybackConfigDispatcher iPlaybackConfigDispatcher, boolean z) {
         if (iPlaybackConfigDispatcher == null) {
             return;
         }
-        PlayMonitorClient playMonitorClient = new PlayMonitorClient(iPlaybackConfigDispatcher, z, Binder.getCallingUid(), Binder.getCallingPid());
+        PlayMonitorClient playMonitorClient =
+                new PlayMonitorClient(
+                        iPlaybackConfigDispatcher,
+                        z,
+                        Binder.getCallingUid(),
+                        Binder.getCallingPid());
         synchronized (playMonitorClient) {
             if (playMonitorClient.mIsReleased) {
                 return;
@@ -1074,16 +1426,23 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
         boolean z;
         Log.v("AS.PlaybackActivityMon", "releasePlayer() for piid=" + i);
         if (i == -1) {
-            NetworkScoreService$$ExternalSyntheticOutline0.m(i, "Received releasePlayer with invalid piid: ", "AS.PlaybackActivityMon");
-            sEventLogger.enqueue(new EventLogger.StringEvent(ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "releasePlayer with invalid piid:", ", uid:")));
+            NetworkScoreService$$ExternalSyntheticOutline0.m(
+                    i, "Received releasePlayer with invalid piid: ", "AS.PlaybackActivityMon");
+            sEventLogger.enqueue(
+                    new EventLogger.StringEvent(
+                            ArrayUtils$$ExternalSyntheticOutline0.m(
+                                    i, i2, "releasePlayer with invalid piid:", ", uid:")));
             return;
         }
         synchronized (this.mPlayerLock) {
             try {
-                AudioPlaybackConfiguration audioPlaybackConfiguration = (AudioPlaybackConfiguration) this.mPlayers.get(new Integer(i));
+                AudioPlaybackConfiguration audioPlaybackConfiguration =
+                        (AudioPlaybackConfiguration) this.mPlayers.get(new Integer(i));
                 z = false;
                 if (checkConfigurationCaller(i, audioPlaybackConfiguration, i2)) {
-                    sEventLogger.enqueue(new EventLogger.StringEvent("releasing player piid:" + i + ", uid:" + i2));
+                    sEventLogger.enqueue(
+                            new EventLogger.StringEvent(
+                                    "releasing player piid:" + i + ", uid:" + i2));
                     this.mPlayers.remove(new Integer(i));
                     this.mDuckingManager.removeReleased(audioPlaybackConfiguration);
                     this.mFadeOutManager.removeReleased(audioPlaybackConfiguration);
@@ -1131,9 +1490,19 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
                 this.mAllowedCapturePolicies.put(Integer.valueOf(i), Integer.valueOf(i2));
                 synchronized (this.mPlayerLock) {
                     try {
-                        for (AudioPlaybackConfiguration audioPlaybackConfiguration : this.mPlayers.values()) {
-                            if (audioPlaybackConfiguration.getClientUid() == i && audioPlaybackConfiguration.getAudioAttributes().getAllowedCapturePolicy() < i2) {
-                                audioPlaybackConfiguration.handleAudioAttributesEvent(new AudioAttributes.Builder(audioPlaybackConfiguration.getAudioAttributes()).setAllowedCapturePolicy(i2).build());
+                        for (AudioPlaybackConfiguration audioPlaybackConfiguration :
+                                this.mPlayers.values()) {
+                            if (audioPlaybackConfiguration.getClientUid() == i
+                                    && audioPlaybackConfiguration
+                                                    .getAudioAttributes()
+                                                    .getAllowedCapturePolicy()
+                                            < i2) {
+                                audioPlaybackConfiguration.handleAudioAttributesEvent(
+                                        new AudioAttributes.Builder(
+                                                        audioPlaybackConfiguration
+                                                                .getAudioAttributes())
+                                                .setAllowedCapturePolicy(i2)
+                                                .build());
                             }
                         }
                     } finally {
@@ -1144,16 +1513,20 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
         }
     }
 
-    public final void setTransientFadeManagerConfiguration(FadeManagerConfiguration fadeManagerConfiguration) {
+    public final void setTransientFadeManagerConfiguration(
+            FadeManagerConfiguration fadeManagerConfiguration) {
         FadeOutManager fadeOutManager = this.mFadeOutManager;
         synchronized (fadeOutManager.mLock) {
             FadeConfigurations fadeConfigurations = fadeOutManager.mFadeConfigurations;
             fadeConfigurations.getClass();
             if (Flags.enableFadeManagerConfiguration()) {
                 synchronized (fadeConfigurations.mLock) {
-                    Objects.requireNonNull(fadeManagerConfiguration, "Transient FadeManagerConfiguration cannot be null");
+                    Objects.requireNonNull(
+                            fadeManagerConfiguration,
+                            "Transient FadeManagerConfiguration cannot be null");
                     fadeConfigurations.mTransientFadeManagerConfig = fadeManagerConfiguration;
-                    fadeConfigurations.mActiveFadeManagerConfig = fadeConfigurations.getActiveFadeMgrConfigLocked();
+                    fadeConfigurations.mActiveFadeManagerConfig =
+                            fadeConfigurations.getActiveFadeMgrConfigLocked();
                 }
             }
         }
@@ -1179,16 +1552,23 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
         while (it.hasNext()) {
             Integer num = (Integer) it.next();
             int intValue = num.intValue();
-            AudioPlaybackConfiguration audioPlaybackConfiguration = (AudioPlaybackConfiguration) this.mPlayers.get(num);
+            AudioPlaybackConfiguration audioPlaybackConfiguration =
+                    (AudioPlaybackConfiguration) this.mPlayers.get(num);
             if (audioPlaybackConfiguration != null) {
                 try {
                     EventLogger eventLogger = sEventLogger;
-                    EventLogger.StringEvent stringEvent = new EventLogger.StringEvent("unmuting piid:" + intValue);
+                    EventLogger.StringEvent stringEvent =
+                            new EventLogger.StringEvent("unmuting piid:" + intValue);
                     stringEvent.printLog(0, "AS.PlaybackActivityMon");
                     eventLogger.enqueue(stringEvent);
-                    audioPlaybackConfiguration.getPlayerProxy().applyVolumeShaper(MUTE_AWAIT_CONNECTION_VSHAPE, VolumeShaper.Operation.REVERSE);
+                    audioPlaybackConfiguration
+                            .getPlayerProxy()
+                            .applyVolumeShaper(
+                                    MUTE_AWAIT_CONNECTION_VSHAPE, VolumeShaper.Operation.REVERSE);
                 } catch (Exception e) {
-                    StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(intValue, "Error unmuting player ", " uid:");
+                    StringBuilder m =
+                            BatteryService$$ExternalSyntheticOutline0.m(
+                                    intValue, "Error unmuting player ", " uid:");
                     m.append(audioPlaybackConfiguration.getClientUid());
                     Log.e("AS.PlaybackActivityMon", m.toString(), e);
                 }
@@ -1209,16 +1589,24 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
                 while (it.hasNext()) {
                     Integer num = (Integer) it.next();
                     int intValue = num.intValue();
-                    AudioPlaybackConfiguration audioPlaybackConfiguration = (AudioPlaybackConfiguration) this.mPlayers.get(num);
+                    AudioPlaybackConfiguration audioPlaybackConfiguration =
+                            (AudioPlaybackConfiguration) this.mPlayers.get(num);
                     if (audioPlaybackConfiguration != null) {
                         try {
                             EventLogger eventLogger = sEventLogger;
-                            EventLogger.StringEvent stringEvent = new EventLogger.StringEvent("call: unmuting piid:" + intValue);
+                            EventLogger.StringEvent stringEvent =
+                                    new EventLogger.StringEvent("call: unmuting piid:" + intValue);
                             stringEvent.printLog(0, "AS.PlaybackActivityMon");
                             eventLogger.enqueue(stringEvent);
                             audioPlaybackConfiguration.getPlayerProxy().setVolume(1.0f);
                         } catch (Exception e) {
-                            Log.e("AS.PlaybackActivityMon", "call: error unmuting player " + intValue + " uid:" + audioPlaybackConfiguration.getClientUid(), e);
+                            Log.e(
+                                    "AS.PlaybackActivityMon",
+                                    "call: error unmuting player "
+                                            + intValue
+                                            + " uid:"
+                                            + audioPlaybackConfiguration.getClientUid(),
+                                    e);
                         }
                     }
                 }
@@ -1229,7 +1617,8 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
         }
     }
 
-    public final void unregisterPlaybackCallback(IPlaybackConfigDispatcher iPlaybackConfigDispatcher) {
+    public final void unregisterPlaybackCallback(
+            IPlaybackConfigDispatcher iPlaybackConfigDispatcher) {
         boolean equals;
         if (iPlaybackConfigDispatcher == null) {
             return;
@@ -1238,7 +1627,10 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
         while (it.hasNext()) {
             PlayMonitorClient playMonitorClient = (PlayMonitorClient) it.next();
             synchronized (playMonitorClient) {
-                equals = iPlaybackConfigDispatcher.asBinder().equals(playMonitorClient.mDispatcherCb.asBinder());
+                equals =
+                        iPlaybackConfigDispatcher
+                                .asBinder()
+                                .equals(playMonitorClient.mDispatcherCb.asBinder());
             }
             if (equals) {
                 synchronized (playMonitorClient) {
@@ -1253,7 +1645,8 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
     public final void updateGoodCatch(AudioPlaybackConfiguration audioPlaybackConfiguration) {
         String packageNameForPid;
         String str;
-        int legacyStreamType = AudioAttributes.toLegacyStreamType(audioPlaybackConfiguration.getAudioAttributes());
+        int legacyStreamType =
+                AudioAttributes.toLegacyStreamType(audioPlaybackConfiguration.getAudioAttributes());
         if (((HashSet) mGoodCatchSkipStream).contains(Integer.valueOf(legacyStreamType))) {
             return;
         }
@@ -1267,7 +1660,8 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
         if (clientUid == 1000) {
             packageNameForPid = getPackageNameForPid(clientPid);
         } else {
-            String[] packagesForUid = this.mContext.getPackageManager().getPackagesForUid(clientUid);
+            String[] packagesForUid =
+                    this.mContext.getPackageManager().getPackagesForUid(clientUid);
             if (packagesForUid == null || packagesForUid.length <= 0) {
                 packageNameForPid = getPackageNameForPid(clientPid);
             } else if (packagesForUid.length == 1) {
@@ -1283,22 +1677,29 @@ public final class PlaybackActivityMonitor implements AudioPlaybackConfiguration
             }
         }
         str = packageNameForPid;
-        if (!this.mPackageTimeMap.containsKey(str) || currentTimeMillis - ((Long) this.mPackageTimeMap.get(str)).longValue() > 10000) {
+        if (!this.mPackageTimeMap.containsKey(str)
+                || currentTimeMillis - ((Long) this.mPackageTimeMap.get(str)).longValue() > 10000) {
             if (Constants.SYSTEMUI_PACKAGE_NAME.equals(str)) {
-                if (((HashSet) mGoodCatchSystemUiStream).contains(Integer.valueOf(legacyStreamType))) {
-                    Log.d("AS.PlaybackActivityMon", "updateGoodCatch systemui sound, so skip updateSoundPlayed");
+                if (((HashSet) mGoodCatchSystemUiStream)
+                        .contains(Integer.valueOf(legacyStreamType))) {
+                    Log.d(
+                            "AS.PlaybackActivityMon",
+                            "updateGoodCatch systemui sound, so skip updateSoundPlayed");
                     return;
                 }
             }
             if (!z && this.mAudioService.isStreamAffectedByRingerMode(legacyStreamType)) {
-                Log.d("AS.PlaybackActivityMon", "updateGoodCatch no ringerModeNormal, so skip updateSoundPlayed");
+                Log.d(
+                        "AS.PlaybackActivityMon",
+                        "updateGoodCatch no ringerModeNormal, so skip updateSoundPlayed");
                 return;
             }
             this.mLastUpdateTime = currentTimeMillis;
             this.mPackageTimeMap.put(str, Long.valueOf(currentTimeMillis));
             GoodCatchManager goodCatchManager = this.mAudioService.mGoodCatchManager;
             if (goodCatchManager != null) {
-                goodCatchManager.mSemGoodCatchManager.update(GoodCatchManager.SOUND_FUNC[3], str, legacyStreamType, "", "");
+                goodCatchManager.mSemGoodCatchManager.update(
+                        GoodCatchManager.SOUND_FUNC[3], str, legacyStreamType, "", "");
             }
         }
     }

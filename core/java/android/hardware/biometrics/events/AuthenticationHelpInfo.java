@@ -5,35 +5,47 @@ import android.hardware.biometrics.BiometricRequestConstants;
 import android.hardware.biometrics.BiometricSourceType;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Annotation;
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public final class AuthenticationHelpInfo implements Parcelable {
-    public static final Parcelable.Creator<AuthenticationHelpInfo> CREATOR = new Parcelable.Creator<AuthenticationHelpInfo>() { // from class: android.hardware.biometrics.events.AuthenticationHelpInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AuthenticationHelpInfo[] newArray(int size) {
-            return new AuthenticationHelpInfo[size];
-        }
+    public static final Parcelable.Creator<AuthenticationHelpInfo> CREATOR =
+            new Parcelable.Creator<AuthenticationHelpInfo>() { // from class:
+                // android.hardware.biometrics.events.AuthenticationHelpInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AuthenticationHelpInfo[] newArray(int size) {
+                    return new AuthenticationHelpInfo[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AuthenticationHelpInfo createFromParcel(Parcel in) {
-            return new AuthenticationHelpInfo(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AuthenticationHelpInfo createFromParcel(Parcel in) {
+                    return new AuthenticationHelpInfo(in);
+                }
+            };
     private final BiometricSourceType mBiometricSourceType;
     private final int mHelpCode;
     private final String mHelpString;
     private final int mRequestReason;
 
-    AuthenticationHelpInfo(BiometricSourceType biometricSourceType, int requestReason, String helpString, int helpCode) {
+    AuthenticationHelpInfo(
+            BiometricSourceType biometricSourceType,
+            int requestReason,
+            String helpString,
+            int helpCode) {
         this.mBiometricSourceType = biometricSourceType;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBiometricSourceType);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBiometricSourceType);
         this.mRequestReason = requestReason;
-        AnnotationValidations.validate((Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class, (Annotation) null, this.mRequestReason);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class,
+                (Annotation) null,
+                this.mRequestReason);
         this.mHelpString = helpString;
         this.mHelpCode = helpCode;
     }
@@ -62,7 +74,10 @@ public final class AuthenticationHelpInfo implements Parcelable {
             return false;
         }
         AuthenticationHelpInfo that = (AuthenticationHelpInfo) o;
-        if (Objects.equals(this.mBiometricSourceType, that.mBiometricSourceType) && this.mRequestReason == that.mRequestReason && Objects.equals(this.mHelpString, that.mHelpString) && this.mHelpCode == that.mHelpCode) {
+        if (Objects.equals(this.mBiometricSourceType, that.mBiometricSourceType)
+                && this.mRequestReason == that.mRequestReason
+                && Objects.equals(this.mHelpString, that.mHelpString)
+                && this.mHelpCode == that.mHelpCode) {
             return true;
         }
         return false;
@@ -70,7 +85,9 @@ public final class AuthenticationHelpInfo implements Parcelable {
 
     public int hashCode() {
         int _hash = (1 * 31) + Objects.hashCode(this.mBiometricSourceType);
-        return (((((_hash * 31) + this.mRequestReason) * 31) + Objects.hashCode(this.mHelpString)) * 31) + this.mHelpCode;
+        return (((((_hash * 31) + this.mRequestReason) * 31) + Objects.hashCode(this.mHelpString))
+                        * 31)
+                + this.mHelpCode;
     }
 
     @Override // android.os.Parcelable
@@ -92,14 +109,19 @@ public final class AuthenticationHelpInfo implements Parcelable {
 
     AuthenticationHelpInfo(Parcel in) {
         byte flg = in.readByte();
-        BiometricSourceType biometricSourceType = (BiometricSourceType) in.readTypedObject(BiometricSourceType.CREATOR);
+        BiometricSourceType biometricSourceType =
+                (BiometricSourceType) in.readTypedObject(BiometricSourceType.CREATOR);
         int requestReason = in.readInt();
         String helpString = (flg & 4) == 0 ? null : in.readString();
         int helpCode = in.readInt();
         this.mBiometricSourceType = biometricSourceType;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBiometricSourceType);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBiometricSourceType);
         this.mRequestReason = requestReason;
-        AnnotationValidations.validate((Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class, (Annotation) null, this.mRequestReason);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class,
+                (Annotation) null,
+                this.mRequestReason);
         this.mHelpString = helpString;
         this.mHelpCode = helpCode;
     }
@@ -111,11 +133,21 @@ public final class AuthenticationHelpInfo implements Parcelable {
         private String mHelpString;
         private int mRequestReason;
 
-        public Builder(BiometricSourceType biometricSourceType, int requestReason, String helpString, int helpCode) {
+        public Builder(
+                BiometricSourceType biometricSourceType,
+                int requestReason,
+                String helpString,
+                int helpCode) {
             this.mBiometricSourceType = biometricSourceType;
-            AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBiometricSourceType);
+            AnnotationValidations.validate(
+                    (Class<NonNull>) NonNull.class,
+                    (NonNull) null,
+                    (Object) this.mBiometricSourceType);
             this.mRequestReason = requestReason;
-            AnnotationValidations.validate((Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class, (Annotation) null, this.mRequestReason);
+            AnnotationValidations.validate(
+                    (Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class,
+                    (Annotation) null,
+                    this.mRequestReason);
             this.mHelpString = helpString;
             this.mHelpCode = helpCode;
         }
@@ -151,18 +183,23 @@ public final class AuthenticationHelpInfo implements Parcelable {
         public AuthenticationHelpInfo build() {
             checkNotUsed();
             this.mBuilderFieldsSet |= 16;
-            AuthenticationHelpInfo o = new AuthenticationHelpInfo(this.mBiometricSourceType, this.mRequestReason, this.mHelpString, this.mHelpCode);
+            AuthenticationHelpInfo o =
+                    new AuthenticationHelpInfo(
+                            this.mBiometricSourceType,
+                            this.mRequestReason,
+                            this.mHelpString,
+                            this.mHelpCode);
             return o;
         }
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 16) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

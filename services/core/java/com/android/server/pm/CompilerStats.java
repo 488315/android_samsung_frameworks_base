@@ -3,8 +3,12 @@ package com.android.server.pm;
 import android.util.ArrayMap;
 import android.util.AtomicFile;
 import android.util.Log;
+
 import com.android.internal.util.FastPrintWriter;
 import com.android.server.utils.WatchedArrayMap;
+
+import libcore.io.IoUtils;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,7 +19,6 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
-import libcore.io.IoUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -76,9 +79,9 @@ public final class CompilerStats extends AbstractStatsBase {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:29:0x007a, code lost:
-    
-        throw new java.lang.IllegalArgumentException("Could not parse data " + r0);
-     */
+
+       throw new java.lang.IllegalArgumentException("Could not parse data " + r0);
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -175,7 +178,9 @@ public final class CompilerStats extends AbstractStatsBase {
             monitor-exit(r2)     // Catch: java.lang.Throwable -> L60
             throw r8
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.CompilerStats.read(java.io.Reader):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.CompilerStats.read(java.io.Reader):void");
     }
 
     /* JADX WARN: Multi-variable type inference failed */
@@ -183,7 +188,8 @@ public final class CompilerStats extends AbstractStatsBase {
     public final void readInternal(WatchedArrayMap watchedArrayMap) {
         BufferedReader bufferedReader = null;
         try {
-            BufferedReader bufferedReader2 = new BufferedReader(new InputStreamReader(getFile().openRead()));
+            BufferedReader bufferedReader2 =
+                    new BufferedReader(new InputStreamReader(getFile().openRead()));
             try {
                 read(bufferedReader2);
                 IoUtils.closeQuietly(bufferedReader2);
@@ -213,8 +219,14 @@ public final class CompilerStats extends AbstractStatsBase {
                         try {
                             if (!((ArrayMap) packageStats.compileTimePerCodePath).isEmpty()) {
                                 fastPrintWriter.println(packageStats.packageName);
-                                for (Map.Entry entry : ((ArrayMap) packageStats.compileTimePerCodePath).entrySet()) {
-                                    fastPrintWriter.println(PackageManagerShellCommandDataLoader.STDIN_PATH + ((String) entry.getKey()) + ":" + entry.getValue());
+                                for (Map.Entry entry :
+                                        ((ArrayMap) packageStats.compileTimePerCodePath)
+                                                .entrySet()) {
+                                    fastPrintWriter.println(
+                                            PackageManagerShellCommandDataLoader.STDIN_PATH
+                                                    + ((String) entry.getKey())
+                                                    + ":"
+                                                    + entry.getValue());
                                 }
                             }
                         } finally {

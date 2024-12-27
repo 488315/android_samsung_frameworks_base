@@ -3,26 +3,29 @@ package android.hardware.radio.messaging;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class CdmaSmsSubaddress implements Parcelable {
-    public static final Parcelable.Creator<CdmaSmsSubaddress> CREATOR = new Parcelable.Creator<CdmaSmsSubaddress>() { // from class: android.hardware.radio.messaging.CdmaSmsSubaddress.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CdmaSmsSubaddress createFromParcel(Parcel _aidl_source) {
-            CdmaSmsSubaddress _aidl_out = new CdmaSmsSubaddress();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CdmaSmsSubaddress> CREATOR =
+            new Parcelable.Creator<CdmaSmsSubaddress>() { // from class:
+                // android.hardware.radio.messaging.CdmaSmsSubaddress.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CdmaSmsSubaddress createFromParcel(Parcel _aidl_source) {
+                    CdmaSmsSubaddress _aidl_out = new CdmaSmsSubaddress();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CdmaSmsSubaddress[] newArray(int _aidl_size) {
-            return new CdmaSmsSubaddress[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CdmaSmsSubaddress[] newArray(int _aidl_size) {
+                    return new CdmaSmsSubaddress[_aidl_size];
+                }
+            };
     public static final int SUBADDRESS_TYPE_NSAP = 0;
     public static final int SUBADDRESS_TYPE_USER_SPECIFIED = 1;
     public byte[] digits;

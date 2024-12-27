@@ -6,7 +6,8 @@ public final /* synthetic */ class DexController$$ExternalSyntheticLambda3 imple
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ DexController f$0;
 
-    public /* synthetic */ DexController$$ExternalSyntheticLambda3(DexController dexController, int i) {
+    public /* synthetic */ DexController$$ExternalSyntheticLambda3(
+            DexController dexController, int i) {
         this.$r8$classId = i;
         this.f$0 = dexController;
     }
@@ -17,7 +18,8 @@ public final /* synthetic */ class DexController$$ExternalSyntheticLambda3 imple
         DexController dexController = this.f$0;
         switch (i) {
             case 0:
-                dexController.mAtm.mMultiTaskingController.mSettingsObserver.readSettings(true, null);
+                dexController.mAtm.mMultiTaskingController.mSettingsObserver.readSettings(
+                        true, null);
                 return;
             case 1:
                 WindowManagerGlobalLock windowManagerGlobalLock = dexController.mAtm.mGlobalLock;
@@ -25,7 +27,16 @@ public final /* synthetic */ class DexController$$ExternalSyntheticLambda3 imple
                 synchronized (windowManagerGlobalLock) {
                     try {
                         int dexModeLocked = dexController.mAtm.mDexController.getDexModeLocked();
-                        DisplayContent displayContent = dexModeLocked == 2 ? dexController.mAtm.mRootWindowContainer.getDisplayContent(2) : dexModeLocked == 1 ? dexController.mAtm.mRootWindowContainer.mDefaultDisplay : null;
+                        DisplayContent displayContent =
+                                dexModeLocked == 2
+                                        ? dexController.mAtm.mRootWindowContainer.getDisplayContent(
+                                                2)
+                                        : dexModeLocked == 1
+                                                ? dexController
+                                                        .mAtm
+                                                        .mRootWindowContainer
+                                                        .mDefaultDisplay
+                                                : null;
                         if (displayContent != null) {
                             displayContent.mDisplayPolicy.mDecorInsets.invalidate();
                             displayContent.reconfigureDisplayLocked();
@@ -45,10 +56,12 @@ public final /* synthetic */ class DexController$$ExternalSyntheticLambda3 imple
                         if (dexModeLocked2 != 2) {
                             i2 = dexModeLocked2 == 1 ? 0 : -1;
                         }
-                        DisplayContent displayContent2 = dexController.mAtm.mRootWindowContainer.getDisplayContent(i2);
+                        DisplayContent displayContent2 =
+                                dexController.mAtm.mRootWindowContainer.getDisplayContent(i2);
                         if (displayContent2 != null) {
                             displayContent2.setLayoutNeeded();
-                            dexController.mAtm.mWindowManager.mWindowPlacerLocked.performSurfacePlacement(false);
+                            dexController.mAtm.mWindowManager.mWindowPlacerLocked
+                                    .performSurfacePlacement(false);
                         }
                     } finally {
                     }

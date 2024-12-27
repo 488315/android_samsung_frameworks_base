@@ -1,11 +1,14 @@
 package com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util;
 
 import android.media.MediaMetrics;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
+
 import java.lang.reflect.Constructor;
 import java.security.InvalidKeyException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
+
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactorySpi;
 import javax.crypto.spec.SecretKeySpec;
@@ -29,7 +32,8 @@ public class BaseSecretKeyFactory extends SecretKeyFactorySpi implements PBE {
     }
 
     @Override // javax.crypto.SecretKeyFactorySpi
-    protected KeySpec engineGetKeySpec(SecretKey key, Class keySpec) throws InvalidKeySpecException {
+    protected KeySpec engineGetKeySpec(SecretKey key, Class keySpec)
+            throws InvalidKeySpecException {
         if (keySpec == null) {
             throw new InvalidKeySpecException("keySpec parameter is null");
         }
@@ -55,7 +59,8 @@ public class BaseSecretKeyFactory extends SecretKeyFactorySpi implements PBE {
             throw new InvalidKeyException("key parameter is null");
         }
         if (!key.getAlgorithm().equalsIgnoreCase(this.algName)) {
-            throw new InvalidKeyException("Key not of type " + this.algName + MediaMetrics.SEPARATOR);
+            throw new InvalidKeyException(
+                    "Key not of type " + this.algName + MediaMetrics.SEPARATOR);
         }
         return new SecretKeySpec(key.getEncoded(), this.algName);
     }

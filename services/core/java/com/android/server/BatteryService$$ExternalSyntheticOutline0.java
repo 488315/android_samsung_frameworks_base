@@ -2,7 +2,9 @@ package com.android.server;
 
 import android.content.Intent;
 import android.content.IntentFilter;
+
 import com.android.server.power.Slog;
+
 import java.io.File;
 import java.io.PrintWriter;
 
@@ -53,7 +55,8 @@ public abstract /* synthetic */ class BatteryService$$ExternalSyntheticOutline0 
         printWriter.println(str3);
     }
 
-    public static void m(PrintWriter printWriter, String str, String str2, String str3, String str4) {
+    public static void m(
+            PrintWriter printWriter, String str, String str2, String str3, String str4) {
         printWriter.println(str);
         printWriter.println(str2);
         printWriter.println(str3);

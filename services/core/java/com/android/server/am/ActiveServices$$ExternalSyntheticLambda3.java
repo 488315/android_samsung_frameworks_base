@@ -1,6 +1,7 @@
 package com.android.server.am;
 
 import android.os.SystemClock;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -27,7 +28,11 @@ public final /* synthetic */ class ActiveServices$$ExternalSyntheticLambda3 impl
                 ActivityManagerService.boostPriorityForLockedSection();
                 synchronized (activityManagerService) {
                     try {
-                        activeServices.rescheduleServiceRestartIfPossibleLocked(activeServices.getExtraRestartTimeInBetweenLocked(), activeServices.mAm.mConstants.SERVICE_MIN_RESTART_TIME_BETWEEN, uptimeMillis, "other");
+                        activeServices.rescheduleServiceRestartIfPossibleLocked(
+                                activeServices.getExtraRestartTimeInBetweenLocked(),
+                                activeServices.mAm.mConstants.SERVICE_MIN_RESTART_TIME_BETWEEN,
+                                uptimeMillis,
+                                "other");
                     } catch (Throwable th) {
                         ActivityManagerService.resetPriorityAfterLockedSection();
                         throw th;
@@ -36,8 +41,10 @@ public final /* synthetic */ class ActiveServices$$ExternalSyntheticLambda3 impl
                 ActivityManagerService.resetPriorityAfterLockedSection();
                 return;
             case 1:
-                ForegroundServiceDelegation foregroundServiceDelegation = ((ServiceRecord) obj).mFgsDelegation;
-                foregroundServiceDelegation.mConnection.onServiceDisconnected(foregroundServiceDelegation.mOptions.getComponentName());
+                ForegroundServiceDelegation foregroundServiceDelegation =
+                        ((ServiceRecord) obj).mFgsDelegation;
+                foregroundServiceDelegation.mConnection.onServiceDisconnected(
+                        foregroundServiceDelegation.mOptions.getComponentName());
                 return;
             default:
                 ArrayList arrayList = (ArrayList) obj;

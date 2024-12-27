@@ -3,10 +3,14 @@ package com.android.server.pm;
 import android.os.FileUtils;
 import android.util.AtomicFile;
 import android.util.Log;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
 import com.android.server.pm.pkg.PackageStateUnserialized;
 import com.android.server.utils.WatchedArrayMap;
+
+import libcore.io.IoUtils;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
@@ -15,7 +19,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
-import libcore.io.IoUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -31,7 +34,9 @@ public final class PackageUsage extends AbstractStatsBase {
         try {
             return Long.parseLong(str);
         } catch (NumberFormatException e) {
-            throw new IOException(XmlUtils$$ExternalSyntheticOutline0.m("Failed to parse ", str, " as a long."), e);
+            throw new IOException(
+                    XmlUtils$$ExternalSyntheticOutline0.m("Failed to parse ", str, " as a long."),
+                    e);
         }
     }
 
@@ -52,11 +57,17 @@ public final class PackageUsage extends AbstractStatsBase {
         }
     }
 
-    public static void readVersion0LP(WatchedArrayMap watchedArrayMap, InputStream inputStream, StringBuilder sb, String str) {
+    public static void readVersion0LP(
+            WatchedArrayMap watchedArrayMap,
+            InputStream inputStream,
+            StringBuilder sb,
+            String str) {
         while (str != null) {
             String[] split = str.split(" ");
             if (split.length != 2) {
-                throw new IOException(XmlUtils$$ExternalSyntheticOutline0.m("Failed to parse ", str, " as package-timestamp pair."));
+                throw new IOException(
+                        XmlUtils$$ExternalSyntheticOutline0.m(
+                                "Failed to parse ", str, " as package-timestamp pair."));
             }
             PackageSetting packageSetting = (PackageSetting) watchedArrayMap.mStorage.get(split[0]);
             if (packageSetting != null) {
@@ -73,7 +84,8 @@ public final class PackageUsage extends AbstractStatsBase {
         }
     }
 
-    public static void readVersion1LP(WatchedArrayMap watchedArrayMap, InputStream inputStream, StringBuilder sb) {
+    public static void readVersion1LP(
+            WatchedArrayMap watchedArrayMap, InputStream inputStream, StringBuilder sb) {
         while (true) {
             String readLine = readLine(inputStream, sb);
             if (readLine == null) {
@@ -81,7 +93,9 @@ public final class PackageUsage extends AbstractStatsBase {
             }
             String[] split = readLine.split(" ");
             if (split.length != 9) {
-                throw new IOException(XmlUtils$$ExternalSyntheticOutline0.m("Failed to parse ", readLine, " as a timestamp array."));
+                throw new IOException(
+                        XmlUtils$$ExternalSyntheticOutline0.m(
+                                "Failed to parse ", readLine, " as a timestamp array."));
             }
             int i = 0;
             PackageSetting packageSetting = (PackageSetting) watchedArrayMap.mStorage.get(split[0]);
@@ -105,7 +119,8 @@ public final class PackageUsage extends AbstractStatsBase {
         BufferedInputStream bufferedInputStream = null;
         try {
             try {
-                BufferedInputStream bufferedInputStream2 = new BufferedInputStream(getFile().openRead());
+                BufferedInputStream bufferedInputStream2 =
+                        new BufferedInputStream(getFile().openRead());
                 try {
                     StringBuilder sb = new StringBuilder();
                     String readLine = readLine(bufferedInputStream2, sb);
@@ -150,14 +165,21 @@ public final class PackageUsage extends AbstractStatsBase {
         try {
             fileOutputStream = file.startWrite();
             try {
-                BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
-                FileUtils.setPermissions(file.getBaseFile().getPath(), FrameworkStatsLog.DISPLAY_HBM_STATE_CHANGED, 1000, 1032);
+                BufferedOutputStream bufferedOutputStream =
+                        new BufferedOutputStream(fileOutputStream);
+                FileUtils.setPermissions(
+                        file.getBaseFile().getPath(),
+                        FrameworkStatsLog.DISPLAY_HBM_STATE_CHANGED,
+                        1000,
+                        1032);
                 StringBuilder sb = new StringBuilder();
                 sb.append("PACKAGE_USAGE__VERSION_1");
                 sb.append('\n');
                 bufferedOutputStream.write(sb.toString().getBytes(StandardCharsets.US_ASCII));
                 for (PackageSetting packageSetting : map.values()) {
-                    if (packageSetting != null && (packageStateUnserialized = packageSetting.pkgState) != null && packageStateUnserialized.getLatestPackageUseTimeInMills() != 0) {
+                    if (packageSetting != null
+                            && (packageStateUnserialized = packageSetting.pkgState) != null
+                            && packageStateUnserialized.getLatestPackageUseTimeInMills() != 0) {
                         sb.setLength(0);
                         sb.append(packageSetting.mName);
                         for (long j : packageStateUnserialized.getLastPackageUsageTimeInMills()) {
@@ -165,7 +187,8 @@ public final class PackageUsage extends AbstractStatsBase {
                             sb.append(j);
                         }
                         sb.append('\n');
-                        bufferedOutputStream.write(sb.toString().getBytes(StandardCharsets.US_ASCII));
+                        bufferedOutputStream.write(
+                                sb.toString().getBytes(StandardCharsets.US_ASCII));
                     }
                 }
                 bufferedOutputStream.flush();

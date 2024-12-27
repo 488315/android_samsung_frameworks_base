@@ -1,8 +1,9 @@
 package com.android.server.enterprise.general.font;
 
-import java.util.ArrayList;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
+
+import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -25,8 +26,7 @@ public final class TypefaceParser extends DefaultHandler {
     }
 
     @Override // org.xml.sax.helpers.DefaultHandler, org.xml.sax.ContentHandler
-    public final void endDocument() {
-    }
+    public final void endDocument() {}
 
     @Override // org.xml.sax.helpers.DefaultHandler, org.xml.sax.ContentHandler
     public final void endElement(String str, String str2, String str3) {

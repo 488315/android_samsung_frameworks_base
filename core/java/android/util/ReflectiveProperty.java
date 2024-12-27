@@ -1,6 +1,7 @@
 package android.util;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -31,17 +32,28 @@ class ReflectiveProperty<T, V> extends Property<T, V> {
                     this.mField = propertyHolder.getField(name);
                     Class fieldType = this.mField.getType();
                     if (!typesMatch(valueType, fieldType)) {
-                        throw new NoSuchPropertyException("Underlying type (" + fieldType + ") does not match Property type (" + valueType + NavigationBarInflaterView.KEY_CODE_END);
+                        throw new NoSuchPropertyException(
+                                "Underlying type ("
+                                        + fieldType
+                                        + ") does not match Property type ("
+                                        + valueType
+                                        + NavigationBarInflaterView.KEY_CODE_END);
                     }
                     return;
                 } catch (NoSuchFieldException e3) {
-                    throw new NoSuchPropertyException("No accessor method or field found for property with name " + name);
+                    throw new NoSuchPropertyException(
+                            "No accessor method or field found for property with name " + name);
                 }
             }
         }
         Class getterType = this.mGetter.getReturnType();
         if (!typesMatch(valueType, getterType)) {
-            throw new NoSuchPropertyException("Underlying type (" + getterType + ") does not match Property type (" + valueType + NavigationBarInflaterView.KEY_CODE_END);
+            throw new NoSuchPropertyException(
+                    "Underlying type ("
+                            + getterType
+                            + ") does not match Property type ("
+                            + valueType
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         String setterName = PREFIX_SET + capitalizedName;
         try {

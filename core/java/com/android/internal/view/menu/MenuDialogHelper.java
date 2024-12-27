@@ -7,11 +7,16 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
 import com.android.internal.R;
-import com.android.internal.view.menu.MenuPresenter;
 
 /* loaded from: classes5.dex */
-public class MenuDialogHelper implements MenuHelper, DialogInterface.OnKeyListener, DialogInterface.OnClickListener, DialogInterface.OnDismissListener, MenuPresenter.Callback {
+public class MenuDialogHelper
+        implements MenuHelper,
+                DialogInterface.OnKeyListener,
+                DialogInterface.OnClickListener,
+                DialogInterface.OnDismissListener,
+                MenuPresenter.Callback {
     private AlertDialog mDialog;
     private MenuBuilder mMenu;
     ListMenuPresenter mPresenter;
@@ -24,7 +29,8 @@ public class MenuDialogHelper implements MenuHelper, DialogInterface.OnKeyListen
     public void show(IBinder windowToken) {
         MenuBuilder menu = this.mMenu;
         AlertDialog.Builder builder = new AlertDialog.Builder(menu.getContext());
-        this.mPresenter = new ListMenuPresenter(builder.getContext(), R.layout.list_menu_item_layout);
+        this.mPresenter =
+                new ListMenuPresenter(builder.getContext(), R.layout.list_menu_item_layout);
         this.mPresenter.setCallback(this);
         this.mMenu.addMenuPresenter(this.mPresenter);
         builder.setAdapter(this.mPresenter.getAdapter(), this);
@@ -56,11 +62,18 @@ public class MenuDialogHelper implements MenuHelper, DialogInterface.OnKeyListen
         if (keyCode == 82 || keyCode == 4) {
             if (event.getAction() == 0 && event.getRepeatCount() == 0) {
                 Window win2 = this.mDialog.getWindow();
-                if (win2 != null && (decor2 = win2.getDecorView()) != null && (ds2 = decor2.getKeyDispatcherState()) != null) {
+                if (win2 != null
+                        && (decor2 = win2.getDecorView()) != null
+                        && (ds2 = decor2.getKeyDispatcherState()) != null) {
                     ds2.startTracking(event, this);
                     return true;
                 }
-            } else if (event.getAction() == 1 && !event.isCanceled() && (win = this.mDialog.getWindow()) != null && (decor = win.getDecorView()) != null && (ds = decor.getKeyDispatcherState()) != null && ds.isTracking(event)) {
+            } else if (event.getAction() == 1
+                    && !event.isCanceled()
+                    && (win = this.mDialog.getWindow()) != null
+                    && (decor = win.getDecorView()) != null
+                    && (ds = decor.getKeyDispatcherState()) != null
+                    && ds.isTracking(event)) {
                 this.mMenu.close(true);
                 dialog.dismiss();
                 return true;

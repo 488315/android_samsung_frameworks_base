@@ -17,7 +17,9 @@ import android.util.MathUtils;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.view.Display;
+
 import com.android.internal.R;
+
 import java.io.PrintWriter;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -44,26 +46,39 @@ public class BrightnessSynchronizer {
     private int mLatestIntBrightness;
     private BrightnessUpdate mPendingUpdate;
     private float mPreferredSettingValue;
-    private static final Uri BRIGHTNESS_URI = Settings.System.getUriFor(Settings.System.SCREEN_BRIGHTNESS);
+    private static final Uri BRIGHTNESS_URI =
+            Settings.System.getUriFor(Settings.System.SCREEN_BRIGHTNESS);
     private static int sBrightnessUpdateCount = 1;
-    private static int sScreenExtendedBrightnessRangeMaximumInt = Math.max(255, Resources.getSystem().getInteger(R.integer.config_screenBrightnessExtendedMaximum));
-    private static float sScreenExtendedBrightnessRangeMaximumFloat = sScreenExtendedBrightnessRangeMaximumInt / 255.0f;
-    private static final Uri SUB_SCREEN_BRIGHTNESS_URI = Settings.System.getUriFor(Settings.System.SUB_SCREEN_BRIGHTNESS);
+    private static int sScreenExtendedBrightnessRangeMaximumInt =
+            Math.max(
+                    255,
+                    Resources.getSystem()
+                            .getInteger(R.integer.config_screenBrightnessExtendedMaximum));
+    private static float sScreenExtendedBrightnessRangeMaximumFloat =
+            sScreenExtendedBrightnessRangeMaximumInt / 255.0f;
+    private static final Uri SUB_SCREEN_BRIGHTNESS_URI =
+            Settings.System.getUriFor(Settings.System.SUB_SCREEN_BRIGHTNESS);
 
     public interface Clock {
         long uptimeMillis();
     }
 
     public BrightnessSynchronizer(Context context, boolean intRangeUserPerceptionEnabled) {
-        this(context, Looper.getMainLooper(), new Clock() { // from class: com.android.internal.display.BrightnessSynchronizer$$ExternalSyntheticLambda0
-            @Override // com.android.internal.display.BrightnessSynchronizer.Clock
-            public final long uptimeMillis() {
-                return SystemClock.uptimeMillis();
-            }
-        }, intRangeUserPerceptionEnabled);
+        this(
+                context,
+                Looper.getMainLooper(),
+                new Clock() { // from class:
+                              // com.android.internal.display.BrightnessSynchronizer$$ExternalSyntheticLambda0
+                    @Override // com.android.internal.display.BrightnessSynchronizer.Clock
+                    public final long uptimeMillis() {
+                        return SystemClock.uptimeMillis();
+                    }
+                },
+                intRangeUserPerceptionEnabled);
     }
 
-    public BrightnessSynchronizer(Context context, Looper looper, Clock clock, boolean intRangeUserPerceptionEnabled) {
+    public BrightnessSynchronizer(
+            Context context, Looper looper, Clock clock, boolean intRangeUserPerceptionEnabled) {
         this.mPreferredSettingValue = Float.NaN;
         this.mDisplaySynchronizers = new SparseArray<>();
         this.mContext = context;
@@ -75,7 +90,8 @@ public class BrightnessSynchronizer {
 
     public void startSynchronizing() {
         if (this.mDisplayManager == null) {
-            this.mDisplayManager = (DisplayManager) this.mContext.getSystemService(DisplayManager.class);
+            this.mDisplayManager =
+                    (DisplayManager) this.mContext.getSystemService(DisplayManager.class);
         }
         if (this.mBrightnessSyncObserver.isObserving()) {
             Slog.wtf(TAG, "Brightness sync observer requesting synchronization a second time.");
@@ -83,29 +99,48 @@ public class BrightnessSynchronizer {
         }
         this.mLatestFloatBrightness = getScreenBrightnessFloat();
         this.mLatestIntBrightness = getScreenBrightnessInt();
-        Slog.i(TAG, "Initial brightness readings: " + this.mLatestIntBrightness + "(int), " + this.mLatestFloatBrightness + "(float)");
+        Slog.i(
+                TAG,
+                "Initial brightness readings: "
+                        + this.mLatestIntBrightness
+                        + "(int), "
+                        + this.mLatestFloatBrightness
+                        + "(float)");
         if (!Float.isNaN(this.mLatestFloatBrightness)) {
             this.mPendingUpdate = new BrightnessUpdate(2, this.mLatestFloatBrightness);
         } else if (this.mLatestIntBrightness != -1) {
             this.mPendingUpdate = new BrightnessUpdate(1, this.mLatestIntBrightness);
         } else {
-            float defaultBrightness = this.mContext.getResources().getFloat(R.dimen.config_screenBrightnessSettingDefaultFloat);
+            float defaultBrightness =
+                    this.mContext
+                            .getResources()
+                            .getFloat(R.dimen.config_screenBrightnessSettingDefaultFloat);
             this.mPendingUpdate = new BrightnessUpdate(2, defaultBrightness);
             Slog.i(TAG, "Setting initial brightness to default value of: " + defaultBrightness);
         }
-        this.mDisplaySynchronizers.append(0, new DisplaySynchronizer(0, this.mDisplayManager, new Supplier() { // from class: com.android.internal.display.BrightnessSynchronizer$$ExternalSyntheticLambda1
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                int screenBrightnessInt;
-                screenBrightnessInt = BrightnessSynchronizer.this.getScreenBrightnessInt();
-                return Integer.valueOf(screenBrightnessInt);
-            }
-        }, new Consumer() { // from class: com.android.internal.display.BrightnessSynchronizer$$ExternalSyntheticLambda2
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                BrightnessSynchronizer.this.setScreenBrightnessInt(((Integer) obj).intValue());
-            }
-        }));
+        this.mDisplaySynchronizers.append(
+                0,
+                new DisplaySynchronizer(
+                        0,
+                        this.mDisplayManager,
+                        new Supplier() { // from class:
+                                         // com.android.internal.display.BrightnessSynchronizer$$ExternalSyntheticLambda1
+                            @Override // java.util.function.Supplier
+                            public final Object get() {
+                                int screenBrightnessInt;
+                                screenBrightnessInt =
+                                        BrightnessSynchronizer.this.getScreenBrightnessInt();
+                                return Integer.valueOf(screenBrightnessInt);
+                            }
+                        },
+                        new Consumer() { // from class:
+                                         // com.android.internal.display.BrightnessSynchronizer$$ExternalSyntheticLambda2
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                BrightnessSynchronizer.this.setScreenBrightnessInt(
+                                        ((Integer) obj).intValue());
+                            }
+                        }));
         this.mBrightnessSyncObserver.startObserving(this.mHandler);
         this.mHandler.sendEmptyMessageAtTime(1, this.mClock.uptimeMillis());
     }
@@ -158,7 +193,8 @@ public class BrightnessSynchronizer {
     }
 
     private void handleBrightnessChange(int type, float brightness) {
-        boolean swallowUpdate = this.mCurrentUpdate != null && this.mCurrentUpdate.swallowUpdate(type, brightness);
+        boolean swallowUpdate =
+                this.mCurrentUpdate != null && this.mCurrentUpdate.swallowUpdate(type, brightness);
         BrightnessUpdate prevUpdate = null;
         if (!swallowUpdate) {
             prevUpdate = this.mPendingUpdate;
@@ -199,30 +235,59 @@ public class BrightnessSynchronizer {
 
     /* JADX INFO: Access modifiers changed from: private */
     public int getScreenBrightnessInt() {
-        return Settings.System.getIntForUser(this.mContext.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, -1, -2);
+        return Settings.System.getIntForUser(
+                this.mContext.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, -1, -2);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public void setScreenBrightnessInt(int brightnessInt) {
-        Settings.System.putIntForUser(this.mContext.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, brightnessInt, -2);
+        Settings.System.putIntForUser(
+                this.mContext.getContentResolver(),
+                Settings.System.SCREEN_BRIGHTNESS,
+                brightnessInt,
+                -2);
     }
 
     private int getSubScreenBrightnessInt() {
-        return Settings.System.getIntForUser(this.mContext.getContentResolver(), Settings.System.SUB_SCREEN_BRIGHTNESS, -1, -2);
+        return Settings.System.getIntForUser(
+                this.mContext.getContentResolver(), Settings.System.SUB_SCREEN_BRIGHTNESS, -1, -2);
     }
 
     private void setSubScreenBrightnessInt(int brightnessInt) {
-        Settings.System.putIntForUser(this.mContext.getContentResolver(), Settings.System.SUB_SCREEN_BRIGHTNESS, brightnessInt, -2);
+        Settings.System.putIntForUser(
+                this.mContext.getContentResolver(),
+                Settings.System.SUB_SCREEN_BRIGHTNESS,
+                brightnessInt,
+                -2);
     }
 
     private void updateScreenBrightness(int type) {
         int currentBrightnessInt = getScreenBrightnessInt();
         float currentBrightnessFloat = getScreenBrightnessFloat();
         int currentBrightnessIntFromFloat = brightnessFloatToInt(currentBrightnessFloat);
-        Slog.d(TAG, "updateScreenBrightness: type=" + type + " mPreferredSettingValue=" + this.mPreferredSettingValue + NavigationBarInflaterView.KEY_CODE_START + brightnessFloatToInt(this.mPreferredSettingValue) + ") currentBrightnessInt=" + currentBrightnessInt + " currentBrightnessIntFromFloat=" + currentBrightnessIntFromFloat + NavigationBarInflaterView.KEY_CODE_START + currentBrightnessFloat + NavigationBarInflaterView.KEY_CODE_END);
+        Slog.d(
+                TAG,
+                "updateScreenBrightness: type="
+                        + type
+                        + " mPreferredSettingValue="
+                        + this.mPreferredSettingValue
+                        + NavigationBarInflaterView.KEY_CODE_START
+                        + brightnessFloatToInt(this.mPreferredSettingValue)
+                        + ") currentBrightnessInt="
+                        + currentBrightnessInt
+                        + " currentBrightnessIntFromFloat="
+                        + currentBrightnessIntFromFloat
+                        + NavigationBarInflaterView.KEY_CODE_START
+                        + currentBrightnessFloat
+                        + NavigationBarInflaterView.KEY_CODE_END);
         if (currentBrightnessInt == currentBrightnessIntFromFloat) {
             if (this.mPreferredSettingValue != currentBrightnessFloat) {
-                Slog.d(TAG, "synced: mPreferredSettingValue: " + this.mPreferredSettingValue + " currentBrightnessFloat: " + currentBrightnessFloat);
+                Slog.d(
+                        TAG,
+                        "synced: mPreferredSettingValue: "
+                                + this.mPreferredSettingValue
+                                + " currentBrightnessFloat: "
+                                + currentBrightnessFloat);
                 this.mPreferredSettingValue = currentBrightnessFloat;
                 return;
             }
@@ -253,13 +318,27 @@ public class BrightnessSynchronizer {
         if (lastFloatChanged) {
             int newBrightnessInt = brightnessFloatToInt(currentBrightnessFloat);
             this.mPreferredSettingValue = currentBrightnessFloat;
-            Slog.d(TAG, "onChange: last float changed: " + currentBrightnessFloat + " -> " + newBrightnessInt);
-            Settings.System.putIntForUser(this.mContext.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, newBrightnessInt, -2);
+            Slog.d(
+                    TAG,
+                    "onChange: last float changed: "
+                            + currentBrightnessFloat
+                            + " -> "
+                            + newBrightnessInt);
+            Settings.System.putIntForUser(
+                    this.mContext.getContentResolver(),
+                    Settings.System.SCREEN_BRIGHTNESS,
+                    newBrightnessInt,
+                    -2);
             return;
         }
         float newBrightnessFloat = brightnessIntToFloat(currentBrightnessInt);
         this.mPreferredSettingValue = newBrightnessFloat;
-        Slog.d(TAG, "onChange: last int changed: " + currentBrightnessInt + " -> " + newBrightnessFloat);
+        Slog.d(
+                TAG,
+                "onChange: last int changed: "
+                        + currentBrightnessInt
+                        + " -> "
+                        + newBrightnessFloat);
         this.mDisplayManager.setBrightness(0, newBrightnessFloat);
     }
 
@@ -293,10 +372,13 @@ public class BrightnessSynchronizer {
         if (floatEquals(brightnessFloat, -1.0f)) {
             return 0;
         }
-        if (Float.isNaN(brightnessFloat) || (display = context.getDisplay()) == null || (info = display.getBrightnessInfo()) == null) {
+        if (Float.isNaN(brightnessFloat)
+                || (display = context.getDisplay()) == null
+                || (info = display.getBrightnessInfo()) == null) {
             return -1;
         }
-        float linearBrightness = MathUtils.norm(info.brightnessMinimum, info.brightnessMaximum, brightnessFloat);
+        float linearBrightness =
+                MathUtils.norm(info.brightnessMinimum, info.brightnessMaximum, brightnessFloat);
         float userPerceptionBrightness = BrightnessUtils.convertLinearToGamma(linearBrightness);
         float intBrightness = MathUtils.lerp(1.0f, 255.0f, userPerceptionBrightness);
         return Math.round(intBrightness);
@@ -329,7 +411,17 @@ public class BrightnessSynchronizer {
         }
 
         public String toString() {
-            return "{[" + this.mId + "] " + toStringLabel(this.mSourceType, this.mBrightness) + ", mUpdatedTypes=" + this.mUpdatedTypes + ", mConfirmedTypes=" + this.mConfirmedTypes + ", mTimeUpdated=" + this.mTimeUpdated + "}";
+            return "{["
+                    + this.mId
+                    + "] "
+                    + toStringLabel(this.mSourceType, this.mBrightness)
+                    + ", mUpdatedTypes="
+                    + this.mUpdatedTypes
+                    + ", mConfirmedTypes="
+                    + this.mConfirmedTypes
+                    + ", mTimeUpdated="
+                    + this.mTimeUpdated
+                    + "}";
         }
 
         void update() {
@@ -337,24 +429,41 @@ public class BrightnessSynchronizer {
                 this.mState = 2;
                 int brightnessInt = getBrightnessAsInt();
                 if (BrightnessSynchronizer.this.mLatestIntBrightness != brightnessInt) {
-                    Settings.System.putIntForUser(BrightnessSynchronizer.this.mContext.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, brightnessInt, -2);
+                    Settings.System.putIntForUser(
+                            BrightnessSynchronizer.this.mContext.getContentResolver(),
+                            Settings.System.SCREEN_BRIGHTNESS,
+                            brightnessInt,
+                            -2);
                     BrightnessSynchronizer.this.mLatestIntBrightness = brightnessInt;
                     this.mUpdatedTypes |= 1;
                 }
                 float brightnessFloat = getBrightnessAsFloat();
-                if (!BrightnessSynchronizer.floatEquals(BrightnessSynchronizer.this.mLatestFloatBrightness, brightnessFloat)) {
+                if (!BrightnessSynchronizer.floatEquals(
+                        BrightnessSynchronizer.this.mLatestFloatBrightness, brightnessFloat)) {
                     BrightnessSynchronizer.this.mDisplayManager.setBrightness(0, brightnessFloat);
                     BrightnessSynchronizer.this.mLatestFloatBrightness = brightnessFloat;
                     this.mUpdatedTypes |= 2;
                 }
                 if (this.mUpdatedTypes != 0) {
-                    Slog.i(BrightnessSynchronizer.TAG, NavigationBarInflaterView.SIZE_MOD_START + this.mId + "] New Update " + toStringLabel(this.mSourceType, this.mBrightness) + " set brightness values: " + toStringLabel(this.mUpdatedTypes & 2, brightnessFloat) + " " + toStringLabel(this.mUpdatedTypes & 1, brightnessInt));
-                    BrightnessSynchronizer.this.mHandler.sendEmptyMessageAtTime(1, BrightnessSynchronizer.this.mClock.uptimeMillis() + 200);
+                    Slog.i(
+                            BrightnessSynchronizer.TAG,
+                            NavigationBarInflaterView.SIZE_MOD_START
+                                    + this.mId
+                                    + "] New Update "
+                                    + toStringLabel(this.mSourceType, this.mBrightness)
+                                    + " set brightness values: "
+                                    + toStringLabel(this.mUpdatedTypes & 2, brightnessFloat)
+                                    + " "
+                                    + toStringLabel(this.mUpdatedTypes & 1, brightnessInt));
+                    BrightnessSynchronizer.this.mHandler.sendEmptyMessageAtTime(
+                            1, BrightnessSynchronizer.this.mClock.uptimeMillis() + 200);
                 }
                 this.mTimeUpdated = BrightnessSynchronizer.this.mClock.uptimeMillis();
             }
             if (this.mState == 2) {
-                if (this.mConfirmedTypes == this.mUpdatedTypes || this.mTimeUpdated + 200 < BrightnessSynchronizer.this.mClock.uptimeMillis()) {
+                if (this.mConfirmedTypes == this.mUpdatedTypes
+                        || this.mTimeUpdated + 200
+                                < BrightnessSynchronizer.this.mClock.uptimeMillis()) {
                     this.mState = 3;
                 }
             }
@@ -364,13 +473,21 @@ public class BrightnessSynchronizer {
             if ((this.mUpdatedTypes & type) != type || (this.mConfirmedTypes & type) != 0) {
                 return false;
             }
-            boolean floatUpdateConfirmed = type == 2 && BrightnessSynchronizer.floatEquals(getBrightnessAsFloat(), brightness);
+            boolean floatUpdateConfirmed =
+                    type == 2
+                            && BrightnessSynchronizer.floatEquals(
+                                    getBrightnessAsFloat(), brightness);
             boolean intUpdateConfirmed = type == 1 && getBrightnessAsInt() == ((int) brightness);
             if (!floatUpdateConfirmed && !intUpdateConfirmed) {
                 return false;
             }
             this.mConfirmedTypes |= type;
-            Slog.i(BrightnessSynchronizer.TAG, "Swallowing update of " + toStringLabel(type, brightness) + " by update: " + this);
+            Slog.i(
+                    BrightnessSynchronizer.TAG,
+                    "Swallowing update of "
+                            + toStringLabel(type, brightness)
+                            + " by update: "
+                            + this);
             return true;
         }
 
@@ -391,7 +508,8 @@ public class BrightnessSynchronizer {
                 return (int) this.mBrightness;
             }
             if (BrightnessSynchronizer.this.mIntRangeUserPerceptionEnabled) {
-                return BrightnessSynchronizer.brightnessFloatToIntSetting(BrightnessSynchronizer.this.mContext, this.mBrightness);
+                return BrightnessSynchronizer.brightnessFloatToIntSetting(
+                        BrightnessSynchronizer.this.mContext, this.mBrightness);
             }
             return BrightnessSynchronizer.brightnessFloatToInt(this.mBrightness);
         }
@@ -401,7 +519,8 @@ public class BrightnessSynchronizer {
                 return this.mBrightness;
             }
             if (BrightnessSynchronizer.this.mIntRangeUserPerceptionEnabled) {
-                return BrightnessSynchronizer.brightnessIntSettingToFloat(BrightnessSynchronizer.this.mContext, (int) this.mBrightness);
+                return BrightnessSynchronizer.brightnessIntSettingToFloat(
+                        BrightnessSynchronizer.this.mContext, (int) this.mBrightness);
             }
             return BrightnessSynchronizer.brightnessIntToFloat((int) this.mBrightness);
         }
@@ -434,27 +553,35 @@ public class BrightnessSynchronizer {
         private final DisplayManager.DisplayListener mListener;
 
         private BrightnessSyncObserver() {
-            this.mListener = new DisplayManager.DisplayListener() { // from class: com.android.internal.display.BrightnessSynchronizer.BrightnessSyncObserver.1
-                @Override // android.hardware.display.DisplayManager.DisplayListener
-                public void onDisplayAdded(int displayId) {
-                }
+            this.mListener =
+                    new DisplayManager
+                            .DisplayListener() { // from class:
+                                                 // com.android.internal.display.BrightnessSynchronizer.BrightnessSyncObserver.1
+                        @Override // android.hardware.display.DisplayManager.DisplayListener
+                        public void onDisplayAdded(int displayId) {}
 
-                @Override // android.hardware.display.DisplayManager.DisplayListener
-                public void onDisplayRemoved(int displayId) {
-                }
+                        @Override // android.hardware.display.DisplayManager.DisplayListener
+                        public void onDisplayRemoved(int displayId) {}
 
-                @Override // android.hardware.display.DisplayManager.DisplayListener
-                public void onDisplayChanged(int displayId) {
-                    Slog.d(BrightnessSynchronizer.TAG, "onDisplayChanged() : displayId=" + displayId);
-                    if (displayId == 0) {
-                        ((DisplaySynchronizer) BrightnessSynchronizer.this.mDisplaySynchronizers.get(displayId)).updateScreenBrightness(2);
-                    }
-                }
-            };
+                        @Override // android.hardware.display.DisplayManager.DisplayListener
+                        public void onDisplayChanged(int displayId) {
+                            Slog.d(
+                                    BrightnessSynchronizer.TAG,
+                                    "onDisplayChanged() : displayId=" + displayId);
+                            if (displayId == 0) {
+                                ((DisplaySynchronizer)
+                                                BrightnessSynchronizer.this.mDisplaySynchronizers
+                                                        .get(displayId))
+                                        .updateScreenBrightness(2);
+                            }
+                        }
+                    };
         }
 
         private ContentObserver createBrightnessContentObserver(Handler handler) {
-            return new ContentObserver(handler) { // from class: com.android.internal.display.BrightnessSynchronizer.BrightnessSyncObserver.2
+            return new ContentObserver(
+                    handler) { // from class:
+                               // com.android.internal.display.BrightnessSynchronizer.BrightnessSyncObserver.2
                 @Override // android.database.ContentObserver
                 public void onChange(boolean selfChange, Uri uri) {
                     if (selfChange) {
@@ -462,7 +589,9 @@ public class BrightnessSynchronizer {
                     }
                     Slog.d(BrightnessSynchronizer.TAG, "onChange : " + uri);
                     if (BrightnessSynchronizer.BRIGHTNESS_URI.equals(uri)) {
-                        ((DisplaySynchronizer) BrightnessSynchronizer.this.mDisplaySynchronizers.get(0)).updateScreenBrightness(1);
+                        ((DisplaySynchronizer)
+                                        BrightnessSynchronizer.this.mDisplaySynchronizers.get(0))
+                                .updateScreenBrightness(1);
                     }
                 }
             };
@@ -475,8 +604,10 @@ public class BrightnessSynchronizer {
         void startObserving(Handler handler) {
             ContentResolver cr = BrightnessSynchronizer.this.mContext.getContentResolver();
             ContentObserver contentObserver = createBrightnessContentObserver(handler);
-            cr.registerContentObserver(BrightnessSynchronizer.BRIGHTNESS_URI, false, contentObserver, -1);
-            BrightnessSynchronizer.this.mDisplayManager.registerDisplayListener(this.mListener, handler, 8L);
+            cr.registerContentObserver(
+                    BrightnessSynchronizer.BRIGHTNESS_URI, false, contentObserver, -1);
+            BrightnessSynchronizer.this.mDisplayManager.registerDisplayListener(
+                    this.mListener, handler, 8L);
             this.mIsObserving = true;
         }
     }
@@ -488,7 +619,11 @@ public class BrightnessSynchronizer {
         private final Supplier<Integer> mScreenBrightnessIntGetter;
         private final Consumer<Integer> mScreenBrightnessIntSetter;
 
-        public DisplaySynchronizer(int displayId, DisplayManager displayManager, Supplier<Integer> supplier, Consumer<Integer> consumer) {
+        public DisplaySynchronizer(
+                int displayId,
+                DisplayManager displayManager,
+                Supplier<Integer> supplier,
+                Consumer<Integer> consumer) {
             this.mDisplayId = displayId;
             this.mDisplayManager = displayManager;
             this.mScreenBrightnessIntGetter = supplier;
@@ -504,34 +639,74 @@ public class BrightnessSynchronizer {
         }
 
         public void updateScreenBrightness(int type) {
-            int currentBrightnessInt = constrainBrightnessInt(this.mScreenBrightnessIntGetter.get().intValue());
+            int currentBrightnessInt =
+                    constrainBrightnessInt(this.mScreenBrightnessIntGetter.get().intValue());
             float currentBrightnessFloat = getScreenBrightnessFloat();
-            int currentBrightnessIntFromFloat = BrightnessSynchronizer.brightnessFloatToInt(currentBrightnessFloat);
-            Slog.d(BrightnessSynchronizer.TAG, "updateScreenBrightness: displayId=" + this.mDisplayId + " type=" + type + " mPreferredSettingValue=" + this.mPreferredSettingValue + NavigationBarInflaterView.KEY_CODE_START + BrightnessSynchronizer.brightnessFloatToInt(this.mPreferredSettingValue) + ") currentBrightnessInt=" + currentBrightnessInt + " currentBrightnessIntFromFloat=" + currentBrightnessIntFromFloat + NavigationBarInflaterView.KEY_CODE_START + currentBrightnessFloat + NavigationBarInflaterView.KEY_CODE_END);
+            int currentBrightnessIntFromFloat =
+                    BrightnessSynchronizer.brightnessFloatToInt(currentBrightnessFloat);
+            Slog.d(
+                    BrightnessSynchronizer.TAG,
+                    "updateScreenBrightness: displayId="
+                            + this.mDisplayId
+                            + " type="
+                            + type
+                            + " mPreferredSettingValue="
+                            + this.mPreferredSettingValue
+                            + NavigationBarInflaterView.KEY_CODE_START
+                            + BrightnessSynchronizer.brightnessFloatToInt(
+                                    this.mPreferredSettingValue)
+                            + ") currentBrightnessInt="
+                            + currentBrightnessInt
+                            + " currentBrightnessIntFromFloat="
+                            + currentBrightnessIntFromFloat
+                            + NavigationBarInflaterView.KEY_CODE_START
+                            + currentBrightnessFloat
+                            + NavigationBarInflaterView.KEY_CODE_END);
             if (currentBrightnessInt != currentBrightnessIntFromFloat) {
-                boolean lastFloatChanged = checkFloatTypeChanged(type, currentBrightnessInt, currentBrightnessIntFromFloat);
+                boolean lastFloatChanged =
+                        checkFloatTypeChanged(
+                                type, currentBrightnessInt, currentBrightnessIntFromFloat);
                 syncBrightnessValue(currentBrightnessInt, currentBrightnessFloat, lastFloatChanged);
             } else if (this.mPreferredSettingValue != currentBrightnessFloat) {
-                Slog.d(BrightnessSynchronizer.TAG, "synced: mPreferredSettingValue: " + this.mPreferredSettingValue + " currentBrightnessFloat: " + currentBrightnessFloat);
+                Slog.d(
+                        BrightnessSynchronizer.TAG,
+                        "synced: mPreferredSettingValue: "
+                                + this.mPreferredSettingValue
+                                + " currentBrightnessFloat: "
+                                + currentBrightnessFloat);
                 this.mPreferredSettingValue = currentBrightnessFloat;
             }
         }
 
-        private void syncBrightnessValue(int currentBrightnessInt, float currentBrightnessFloat, boolean lastFloatChanged) {
+        private void syncBrightnessValue(
+                int currentBrightnessInt, float currentBrightnessFloat, boolean lastFloatChanged) {
             if (lastFloatChanged) {
-                int newBrightnessInt = BrightnessSynchronizer.brightnessFloatToInt(currentBrightnessFloat);
+                int newBrightnessInt =
+                        BrightnessSynchronizer.brightnessFloatToInt(currentBrightnessFloat);
                 this.mPreferredSettingValue = currentBrightnessFloat;
-                Slog.d(BrightnessSynchronizer.TAG, "onChange: last float changed: " + currentBrightnessFloat + " -> " + newBrightnessInt);
+                Slog.d(
+                        BrightnessSynchronizer.TAG,
+                        "onChange: last float changed: "
+                                + currentBrightnessFloat
+                                + " -> "
+                                + newBrightnessInt);
                 this.mScreenBrightnessIntSetter.accept(Integer.valueOf(newBrightnessInt));
                 return;
             }
-            float newBrightnessFloat = BrightnessSynchronizer.brightnessIntToFloat(currentBrightnessInt);
+            float newBrightnessFloat =
+                    BrightnessSynchronizer.brightnessIntToFloat(currentBrightnessInt);
             this.mPreferredSettingValue = newBrightnessFloat;
-            Slog.d(BrightnessSynchronizer.TAG, "onChange: last int changed: " + currentBrightnessInt + " -> " + newBrightnessFloat);
+            Slog.d(
+                    BrightnessSynchronizer.TAG,
+                    "onChange: last int changed: "
+                            + currentBrightnessInt
+                            + " -> "
+                            + newBrightnessFloat);
             setScreenBrightnessFloat(newBrightnessFloat);
         }
 
-        private boolean checkFloatTypeChanged(int type, int currentBrightnessInt, int currentBrightnessIntFromFloat) {
+        private boolean checkFloatTypeChanged(
+                int type, int currentBrightnessInt, int currentBrightnessIntFromFloat) {
             if (currentBrightnessInt == -1) {
                 return true;
             }
@@ -541,7 +716,8 @@ public class BrightnessSynchronizer {
                 }
                 return true;
             }
-            int preferredSettingValueInt = BrightnessSynchronizer.brightnessFloatToInt(this.mPreferredSettingValue);
+            int preferredSettingValueInt =
+                    BrightnessSynchronizer.brightnessFloatToInt(this.mPreferredSettingValue);
             if (currentBrightnessInt == preferredSettingValueInt) {
                 return true;
             }

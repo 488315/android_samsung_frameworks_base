@@ -13,27 +13,32 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.Xml;
+
 import com.android.internal.R;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes3.dex */
 public final class TvAdServiceInfo implements Parcelable {
-    public static final Parcelable.Creator<TvAdServiceInfo> CREATOR = new Parcelable.Creator<TvAdServiceInfo>() { // from class: android.media.tv.ad.TvAdServiceInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TvAdServiceInfo createFromParcel(Parcel in) {
-            return new TvAdServiceInfo(in);
-        }
+    public static final Parcelable.Creator<TvAdServiceInfo> CREATOR =
+            new Parcelable.Creator<
+                    TvAdServiceInfo>() { // from class: android.media.tv.ad.TvAdServiceInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TvAdServiceInfo createFromParcel(Parcel in) {
+                    return new TvAdServiceInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TvAdServiceInfo[] newArray(int size) {
-            return new TvAdServiceInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TvAdServiceInfo[] newArray(int size) {
+                    return new TvAdServiceInfo[size];
+                }
+            };
     private static final boolean DEBUG = false;
     private static final String TAG = "TvAdServiceInfo";
     private static final String XML_START_TAG_NAME = "tv-ad-service";
@@ -51,7 +56,9 @@ public final class TvAdServiceInfo implements Parcelable {
         if (resolveInfo == null) {
             throw new IllegalArgumentException("Invalid component. Can't find the service.");
         }
-        ComponentName componentName = new ComponentName(resolveInfo.serviceInfo.packageName, resolveInfo.serviceInfo.name);
+        ComponentName componentName =
+                new ComponentName(
+                        resolveInfo.serviceInfo.packageName, resolveInfo.serviceInfo.name);
         String id = generateAdServiceId(componentName);
         List<String> types = new ArrayList<>();
         parseServiceMetadata(resolveInfo, context, types);
@@ -79,7 +86,8 @@ public final class TvAdServiceInfo implements Parcelable {
     }
 
     public ComponentName getComponent() {
-        return new ComponentName(this.mService.serviceInfo.packageName, this.mService.serviceInfo.name);
+        return new ComponentName(
+                this.mService.serviceInfo.packageName, this.mService.serviceInfo.name);
     }
 
     public ServiceInfo getServiceInfo() {
@@ -94,18 +102,23 @@ public final class TvAdServiceInfo implements Parcelable {
         return name.flattenToShortString();
     }
 
-    private static void parseServiceMetadata(ResolveInfo resolveInfo, Context context, List<String> types) {
+    private static void parseServiceMetadata(
+            ResolveInfo resolveInfo, Context context, List<String> types) {
         int type;
         ServiceInfo serviceInfo = resolveInfo.serviceInfo;
         PackageManager pm = context.getPackageManager();
         try {
             try {
-                XmlResourceParser parser = serviceInfo.loadXmlMetaData(pm, TvAdService.SERVICE_META_DATA);
+                XmlResourceParser parser =
+                        serviceInfo.loadXmlMetaData(pm, TvAdService.SERVICE_META_DATA);
                 try {
                     if (parser == null) {
-                        throw new IllegalStateException("No android.media.tv.ad.service meta-data found for " + serviceInfo.name);
+                        throw new IllegalStateException(
+                                "No android.media.tv.ad.service meta-data found for "
+                                        + serviceInfo.name);
                     }
-                    Resources resources = pm.getResourcesForApplication(serviceInfo.applicationInfo);
+                    Resources resources =
+                            pm.getResourcesForApplication(serviceInfo.applicationInfo);
                     AttributeSet attrs = Xml.asAttributeSet(parser);
                     do {
                         type = parser.next();
@@ -115,7 +128,9 @@ public final class TvAdServiceInfo implements Parcelable {
                     } while (type != 2);
                     String nodeName = parser.getName();
                     if (!XML_START_TAG_NAME.equals(nodeName)) {
-                        throw new IllegalStateException("Meta-data does not start with tv-ad-service tag for " + serviceInfo.name);
+                        throw new IllegalStateException(
+                                "Meta-data does not start with tv-ad-service tag for "
+                                        + serviceInfo.name);
                     }
                     TypedArray sa = resources.obtainAttributes(attrs, R.styleable.TvAdService);
                     CharSequence[] textArr = sa.getTextArray(0);
@@ -137,10 +152,12 @@ public final class TvAdServiceInfo implements Parcelable {
                     throw th;
                 }
             } catch (IOException | XmlPullParserException e) {
-                throw new IllegalStateException("Failed reading meta-data for " + serviceInfo.packageName, e);
+                throw new IllegalStateException(
+                        "Failed reading meta-data for " + serviceInfo.packageName, e);
             }
         } catch (PackageManager.NameNotFoundException e2) {
-            throw new IllegalStateException("No resources found for " + serviceInfo.packageName, e2);
+            throw new IllegalStateException(
+                    "No resources found for " + serviceInfo.packageName, e2);
         }
     }
 

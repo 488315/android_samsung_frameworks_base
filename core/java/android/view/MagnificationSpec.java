@@ -5,21 +5,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public class MagnificationSpec implements Parcelable {
-    public static final Parcelable.Creator<MagnificationSpec> CREATOR = new Parcelable.Creator<MagnificationSpec>() { // from class: android.view.MagnificationSpec.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MagnificationSpec[] newArray(int size) {
-            return new MagnificationSpec[size];
-        }
+    public static final Parcelable.Creator<MagnificationSpec> CREATOR =
+            new Parcelable.Creator<
+                    MagnificationSpec>() { // from class: android.view.MagnificationSpec.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MagnificationSpec[] newArray(int size) {
+                    return new MagnificationSpec[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MagnificationSpec createFromParcel(Parcel parcel) {
-            MagnificationSpec spec = new MagnificationSpec();
-            spec.initFromParcel(parcel);
-            return spec;
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MagnificationSpec createFromParcel(Parcel parcel) {
+                    MagnificationSpec spec = new MagnificationSpec();
+                    spec.initFromParcel(parcel);
+                    return spec;
+                }
+            };
     public float offsetX;
     public float offsetY;
     public float scale = 1.0f;
@@ -74,11 +76,19 @@ public class MagnificationSpec implements Parcelable {
 
     public int hashCode() {
         int result = this.scale != 0.0f ? Float.floatToIntBits(this.scale) : 0;
-        return (((result * 31) + (this.offsetX != 0.0f ? Float.floatToIntBits(this.offsetX) : 0)) * 31) + (this.offsetY != 0.0f ? Float.floatToIntBits(this.offsetY) : 0);
+        return (((result * 31) + (this.offsetX != 0.0f ? Float.floatToIntBits(this.offsetX) : 0))
+                        * 31)
+                + (this.offsetY != 0.0f ? Float.floatToIntBits(this.offsetY) : 0);
     }
 
     public String toString() {
-        return "<scale:" + Float.toString(this.scale) + ",offsetX:" + Float.toString(this.offsetX) + ",offsetY:" + Float.toString(this.offsetY) + ">";
+        return "<scale:"
+                + Float.toString(this.scale)
+                + ",offsetX:"
+                + Float.toString(this.offsetX)
+                + ",offsetY:"
+                + Float.toString(this.offsetY)
+                + ">";
     }
 
     /* JADX INFO: Access modifiers changed from: private */

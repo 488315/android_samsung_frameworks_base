@@ -14,8 +14,7 @@ public interface INotificationPlayerOnCompletionListener extends IInterface {
 
     public static class Default implements INotificationPlayerOnCompletionListener {
         @Override // android.app.INotificationPlayerOnCompletionListener
-        public void onCompletion() throws RemoteException {
-        }
+        public void onCompletion() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,8 @@ public interface INotificationPlayerOnCompletionListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements INotificationPlayerOnCompletionListener {
+    public abstract static class Stub extends Binder
+            implements INotificationPlayerOnCompletionListener {
         static final int TRANSACTION_onCompletion = 1;
 
         public Stub() {
@@ -34,7 +34,8 @@ public interface INotificationPlayerOnCompletionListener extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(INotificationPlayerOnCompletionListener.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(INotificationPlayerOnCompletionListener.DESCRIPTOR);
             if (iin != null && (iin instanceof INotificationPlayerOnCompletionListener)) {
                 return (INotificationPlayerOnCompletionListener) iin;
             }
@@ -61,7 +62,8 @@ public interface INotificationPlayerOnCompletionListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(INotificationPlayerOnCompletionListener.DESCRIPTOR);
             }

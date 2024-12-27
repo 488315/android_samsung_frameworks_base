@@ -6,7 +6,9 @@ import android.text.TextUtils;
 import android.util.DebugUtils;
 import android.util.Slog;
 import android.view.Display;
+
 import com.android.internal.os.LongMultiStateCounter;
+
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -35,8 +37,7 @@ public class EnergyConsumerStats {
     private long mStateChangeTimestampMs;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StandardPowerBucket {
-    }
+    public @interface StandardPowerBucket {}
 
     public static class Config {
         private final String[] mCustomBucketNames;
@@ -44,20 +45,29 @@ public class EnergyConsumerStats {
         private final boolean[] mSupportedMultiStateBuckets;
         private final boolean[] mSupportedStandardBuckets;
 
-        public Config(boolean[] supportedStandardBuckets, String[] customBucketNames, int[] supportedMultiStateBuckets, String[] stateNames) {
+        public Config(
+                boolean[] supportedStandardBuckets,
+                String[] customBucketNames,
+                int[] supportedMultiStateBuckets,
+                String[] stateNames) {
             this.mSupportedStandardBuckets = supportedStandardBuckets;
             this.mCustomBucketNames = customBucketNames != null ? customBucketNames : new String[0];
-            this.mSupportedMultiStateBuckets = new boolean[supportedStandardBuckets.length + this.mCustomBucketNames.length];
+            this.mSupportedMultiStateBuckets =
+                    new boolean[supportedStandardBuckets.length + this.mCustomBucketNames.length];
             for (int bucket : supportedMultiStateBuckets) {
                 if (this.mSupportedStandardBuckets[bucket]) {
                     this.mSupportedMultiStateBuckets[bucket] = true;
                 }
             }
-            this.mStateNames = stateNames != null ? stateNames : new String[]{""};
+            this.mStateNames = stateNames != null ? stateNames : new String[] {""};
         }
 
         public boolean isCompatible(Config other) {
-            return Arrays.equals(this.mSupportedStandardBuckets, other.mSupportedStandardBuckets) && Arrays.equals(this.mCustomBucketNames, other.mCustomBucketNames) && Arrays.equals(this.mSupportedMultiStateBuckets, other.mSupportedMultiStateBuckets) && Arrays.equals(this.mStateNames, other.mStateNames);
+            return Arrays.equals(this.mSupportedStandardBuckets, other.mSupportedStandardBuckets)
+                    && Arrays.equals(this.mCustomBucketNames, other.mCustomBucketNames)
+                    && Arrays.equals(
+                            this.mSupportedMultiStateBuckets, other.mSupportedMultiStateBuckets)
+                    && Arrays.equals(this.mStateNames, other.mStateNames);
         }
 
         public static void writeToParcel(Config config, Parcel out) {
@@ -100,7 +110,11 @@ public class EnergyConsumerStats {
             int[] supportedMultiStateBuckets = new int[supportedMultiStateBucketCount];
             in.readIntArray(supportedMultiStateBuckets);
             String[] stateNames = in.readStringArray();
-            return new Config(supportedStandardBuckets, customBucketNames, supportedMultiStateBuckets, stateNames);
+            return new Config(
+                    supportedStandardBuckets,
+                    customBucketNames,
+                    supportedMultiStateBuckets,
+                    stateNames);
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -165,7 +179,8 @@ public class EnergyConsumerStats {
             this.mAccumulatedMultiStateChargeMicroCoulomb = new LongMultiStateCounter[size];
             for (int i = 0; i < size; i++) {
                 if (in.readBoolean()) {
-                    this.mAccumulatedMultiStateChargeMicroCoulomb[i] = LongMultiStateCounter.CREATOR.createFromParcel(in);
+                    this.mAccumulatedMultiStateChargeMicroCoulomb[i] =
+                            LongMultiStateCounter.CREATOR.createFromParcel(in);
                 }
             }
             return;
@@ -198,9 +213,12 @@ public class EnergyConsumerStats {
             long chargeUC = in.readLong();
             LongMultiStateCounter multiStateCounter = null;
             if (in.readBoolean()) {
-                LongMultiStateCounter multiStateCounter2 = LongMultiStateCounter.CREATOR.createFromParcel(in);
+                LongMultiStateCounter multiStateCounter2 =
+                        LongMultiStateCounter.CREATOR.createFromParcel(in);
                 multiStateCounter = multiStateCounter2;
-                if (this.mConfig == null || multiStateCounter.getStateCount() != this.mConfig.getStateNames().length) {
+                if (this.mConfig == null
+                        || multiStateCounter.getStateCount()
+                                != this.mConfig.getStateNames().length) {
                     multiStateCounter = null;
                 }
             }
@@ -208,7 +226,9 @@ public class EnergyConsumerStats {
                 setValueIfSupported(index, chargeUC);
                 if (multiStateCounter != null) {
                     if (this.mAccumulatedMultiStateChargeMicroCoulomb == null) {
-                        this.mAccumulatedMultiStateChargeMicroCoulomb = new LongMultiStateCounter[this.mAccumulatedChargeMicroCoulomb.length];
+                        this.mAccumulatedMultiStateChargeMicroCoulomb =
+                                new LongMultiStateCounter
+                                        [this.mAccumulatedChargeMicroCoulomb.length];
                     }
                     this.mAccumulatedMultiStateChargeMicroCoulomb[index] = multiStateCounter;
                 }
@@ -225,7 +245,8 @@ public class EnergyConsumerStats {
             if (charge > 0) {
                 out.writeInt(index);
                 out.writeLong(charge);
-                if (this.mAccumulatedMultiStateChargeMicroCoulomb != null && this.mAccumulatedMultiStateChargeMicroCoulomb[index] != null) {
+                if (this.mAccumulatedMultiStateChargeMicroCoulomb != null
+                        && this.mAccumulatedMultiStateChargeMicroCoulomb[index] != null) {
                     out.writeBoolean(true);
                     this.mAccumulatedMultiStateChargeMicroCoulomb[index].writeToParcel(out, 0);
                 } else {
@@ -268,9 +289,11 @@ public class EnergyConsumerStats {
             jArr[index] = jArr[index] + chargeDeltaUC;
             if (this.mState != -1 && this.mConfig.isSupportedMultiStateBucket(index)) {
                 if (this.mAccumulatedMultiStateChargeMicroCoulomb == null) {
-                    this.mAccumulatedMultiStateChargeMicroCoulomb = new LongMultiStateCounter[this.mAccumulatedChargeMicroCoulomb.length];
+                    this.mAccumulatedMultiStateChargeMicroCoulomb =
+                            new LongMultiStateCounter[this.mAccumulatedChargeMicroCoulomb.length];
                 }
-                LongMultiStateCounter counter = this.mAccumulatedMultiStateChargeMicroCoulomb[index];
+                LongMultiStateCounter counter =
+                        this.mAccumulatedMultiStateChargeMicroCoulomb[index];
                 if (counter == null) {
                     counter = new LongMultiStateCounter(this.mConfig.mStateNames.length);
                     this.mAccumulatedMultiStateChargeMicroCoulomb[index] = counter;
@@ -282,14 +305,22 @@ public class EnergyConsumerStats {
             }
             return;
         }
-        Slog.wtf(TAG, "Attempting to add " + chargeDeltaUC + " to unavailable bucket " + this.mConfig.getBucketName(index) + " whose value was " + this.mAccumulatedChargeMicroCoulomb[index]);
+        Slog.wtf(
+                TAG,
+                "Attempting to add "
+                        + chargeDeltaUC
+                        + " to unavailable bucket "
+                        + this.mConfig.getBucketName(index)
+                        + " whose value was "
+                        + this.mAccumulatedChargeMicroCoulomb[index]);
     }
 
     public void setState(int state, long timestampMs) {
         this.mState = state;
         this.mStateChangeTimestampMs = timestampMs;
         if (this.mAccumulatedMultiStateChargeMicroCoulomb == null) {
-            this.mAccumulatedMultiStateChargeMicroCoulomb = new LongMultiStateCounter[this.mAccumulatedChargeMicroCoulomb.length];
+            this.mAccumulatedMultiStateChargeMicroCoulomb =
+                    new LongMultiStateCounter[this.mAccumulatedChargeMicroCoulomb.length];
         }
         for (int i = 0; i < this.mAccumulatedMultiStateChargeMicroCoulomb.length; i++) {
             LongMultiStateCounter counter = this.mAccumulatedMultiStateChargeMicroCoulomb[i];
@@ -314,7 +345,8 @@ public class EnergyConsumerStats {
         if (!this.mConfig.isSupportedMultiStateBucket(bucket)) {
             return -1L;
         }
-        if (this.mAccumulatedMultiStateChargeMicroCoulomb == null || (counter = this.mAccumulatedMultiStateChargeMicroCoulomb[bucket]) == null) {
+        if (this.mAccumulatedMultiStateChargeMicroCoulomb == null
+                || (counter = this.mAccumulatedMultiStateChargeMicroCoulomb[bucket]) == null) {
             return 0L;
         }
         return counter.getCount(state);
@@ -351,12 +383,21 @@ public class EnergyConsumerStats {
             return null;
         }
         if (config == null) {
-            EnergyConsumerStats mes = new EnergyConsumerStats(new Config(new boolean[arraySize], null, new int[0], new String[]{""}));
+            EnergyConsumerStats mes =
+                    new EnergyConsumerStats(
+                            new Config(
+                                    new boolean[arraySize], null, new int[0], new String[] {""}));
             mes.readSummaryFromParcel(in);
             return null;
         }
         if (arraySize != config.getNumberOfBuckets()) {
-            Slog.wtf(TAG, "Size of MeasuredEnergyStats parcel (" + arraySize + ") does not match config (" + config.getNumberOfBuckets() + ").");
+            Slog.wtf(
+                    TAG,
+                    "Size of MeasuredEnergyStats parcel ("
+                            + arraySize
+                            + ") does not match config ("
+                            + config.getNumberOfBuckets()
+                            + ").");
             EnergyConsumerStats mes2 = new EnergyConsumerStats(config);
             mes2.readSummaryFromParcel(in);
             return null;
@@ -391,7 +432,8 @@ public class EnergyConsumerStats {
         int numIndices = this.mConfig.getNumberOfBuckets();
         for (int index = 0; index < numIndices; index++) {
             setValueIfSupported(index, 0L);
-            if (this.mAccumulatedMultiStateChargeMicroCoulomb != null && this.mAccumulatedMultiStateChargeMicroCoulomb[index] != null) {
+            if (this.mAccumulatedMultiStateChargeMicroCoulomb != null
+                    && this.mAccumulatedMultiStateChargeMicroCoulomb[index] != null) {
                 this.mAccumulatedMultiStateChargeMicroCoulomb[index].reset();
             }
         }
@@ -428,7 +470,8 @@ public class EnergyConsumerStats {
             if (!isIndexSupported(index)) {
                 pw.print(" (unsupported)");
             }
-            if (this.mAccumulatedMultiStateChargeMicroCoulomb != null && (counter = this.mAccumulatedMultiStateChargeMicroCoulomb[index]) != null) {
+            if (this.mAccumulatedMultiStateChargeMicroCoulomb != null
+                    && (counter = this.mAccumulatedMultiStateChargeMicroCoulomb[index]) != null) {
                 pw.print(" [");
                 for (int i = 0; i < this.mConfig.mStateNames.length; i++) {
                     if (i != 0) {
@@ -472,6 +515,7 @@ public class EnergyConsumerStats {
     }
 
     public boolean isValidCustomBucket(int customBucket) {
-        return customBucket >= 0 && customBucketToIndex(customBucket) < this.mAccumulatedChargeMicroCoulomb.length;
+        return customBucket >= 0
+                && customBucketToIndex(customBucket) < this.mAccumulatedChargeMicroCoulomb.length;
     }
 }

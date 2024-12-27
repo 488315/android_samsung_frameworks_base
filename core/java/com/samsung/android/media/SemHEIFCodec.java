@@ -3,6 +3,7 @@ package com.samsung.android.media;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+
 import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
@@ -18,13 +19,17 @@ public class SemHEIFCodec {
     private static final String TAG = "SemHEIFCodec";
     private static boolean mLibraryLoaded = false;
 
-    private static native Bitmap native_decodeByteArray(byte[] bArr, int i, int i2, BitmapFactory.Options options, int i3);
+    private static native Bitmap native_decodeByteArray(
+            byte[] bArr, int i, int i2, BitmapFactory.Options options, int i3);
 
-    private static native Bitmap native_decodeFile(String str, BitmapFactory.Options options, int i);
+    private static native Bitmap native_decodeFile(
+            String str, BitmapFactory.Options options, int i);
 
-    private static native Bitmap native_decodeFileDescriptor(FileDescriptor fileDescriptor, BitmapFactory.Options options, int i);
+    private static native Bitmap native_decodeFileDescriptor(
+            FileDescriptor fileDescriptor, BitmapFactory.Options options, int i);
 
-    private static native Bitmap native_decodeStream(InputStream inputStream, BitmapFactory.Options options, int i);
+    private static native Bitmap native_decodeStream(
+            InputStream inputStream, BitmapFactory.Options options, int i);
 
     private static native byte[] native_getExifData(String str);
 
@@ -127,7 +132,8 @@ public class SemHEIFCodec {
         }
     }
 
-    public static Bitmap decodeByteArray(byte[] data, int offset, int length, BitmapFactory.Options opts) {
+    public static Bitmap decodeByteArray(
+            byte[] data, int offset, int length, BitmapFactory.Options opts) {
         if (!mLibraryLoaded) {
             Log.e(TAG, "decodeByteArray - mLibraryLoaded is false");
             return null;
@@ -213,7 +219,8 @@ public class SemHEIFCodec {
         }
     }
 
-    public static Bitmap getThumbnail(byte[] data, int offset, int length, BitmapFactory.Options opts) {
+    public static Bitmap getThumbnail(
+            byte[] data, int offset, int length, BitmapFactory.Options opts) {
         if (!mLibraryLoaded) {
             Log.e(TAG, "getThumbnail - mLibraryLoaded is false");
             return null;

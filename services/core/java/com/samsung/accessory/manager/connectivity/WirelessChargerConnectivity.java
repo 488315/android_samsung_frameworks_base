@@ -5,12 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.Log;
+
 import com.android.server.UiModeManagerService$13$$ExternalSyntheticOutline0;
 import com.android.server.VpnManagerService$$ExternalSyntheticOutline0;
 import com.android.server.am.mars.MARsFreezeStateRecord$$ExternalSyntheticOutline0;
+
 import com.samsung.accessory.manager.authentication.AuthenticationResult;
 import com.samsung.accessory.manager.authentication.AuthenticationSession;
 import com.samsung.accessory.manager.authentication.msg.MsgHelper;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -25,27 +28,39 @@ public final class WirelessChargerConnectivity extends Connectivity {
     public WirelessChargerConnectivity(Context context) {
         super(context);
         this.msgState = -1;
-        this.readTriggerIntentFilter = new IntentFilter("com.samsung.server.BatteryService.action.SEC_BATTERY_EVENT");
-        this.mReadTriggerReceiver = new BroadcastReceiver() { // from class: com.samsung.accessory.manager.connectivity.WirelessChargerConnectivity.1
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                if ("com.samsung.server.BatteryService.action.SEC_BATTERY_EVENT".equals(intent.getAction())) {
-                    StringBuilder sb = new StringBuilder("onReceive: ");
-                    sb.append(intent.getAction());
-                    sb.append(", misc_event: ");
-                    sb.append(intent.getIntExtra("misc_event", 0));
-                    sb.append(", msg state: ");
-                    UiModeManagerService$13$$ExternalSyntheticOutline0.m(sb, WirelessChargerConnectivity.this.msgState, "SAccessoryManager_WirelessChargerConnectivity");
-                    if ((intent.getIntExtra("misc_event", 0) & 1024) == 1024 && WirelessChargerConnectivity.this.msgState == 1) {
-                        Log.d("SAccessoryManager_WirelessChargerConnectivity", "read bit set");
-                        WirelessChargerConnectivity.this.msgState = 2;
-                    } else if ((intent.getIntExtra("misc_event", 0) & 1024) != 1024) {
-                        Log.d("SAccessoryManager_WirelessChargerConnectivity", "read bit clear");
-                        WirelessChargerConnectivity.this.msgState = 1;
+        this.readTriggerIntentFilter =
+                new IntentFilter("com.samsung.server.BatteryService.action.SEC_BATTERY_EVENT");
+        this.mReadTriggerReceiver =
+                new BroadcastReceiver() { // from class:
+                                          // com.samsung.accessory.manager.connectivity.WirelessChargerConnectivity.1
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        if ("com.samsung.server.BatteryService.action.SEC_BATTERY_EVENT"
+                                .equals(intent.getAction())) {
+                            StringBuilder sb = new StringBuilder("onReceive: ");
+                            sb.append(intent.getAction());
+                            sb.append(", misc_event: ");
+                            sb.append(intent.getIntExtra("misc_event", 0));
+                            sb.append(", msg state: ");
+                            UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                                    sb,
+                                    WirelessChargerConnectivity.this.msgState,
+                                    "SAccessoryManager_WirelessChargerConnectivity");
+                            if ((intent.getIntExtra("misc_event", 0) & 1024) == 1024
+                                    && WirelessChargerConnectivity.this.msgState == 1) {
+                                Log.d(
+                                        "SAccessoryManager_WirelessChargerConnectivity",
+                                        "read bit set");
+                                WirelessChargerConnectivity.this.msgState = 2;
+                            } else if ((intent.getIntExtra("misc_event", 0) & 1024) != 1024) {
+                                Log.d(
+                                        "SAccessoryManager_WirelessChargerConnectivity",
+                                        "read bit clear");
+                                WirelessChargerConnectivity.this.msgState = 1;
+                            }
+                        }
                     }
-                }
-            }
-        };
+                };
         this.mMsgHelper = new MsgHelper();
     }
 
@@ -71,8 +86,7 @@ public final class WirelessChargerConnectivity extends Connectivity {
     }
 
     @Override // com.samsung.accessory.manager.connectivity.Connectivity
-    public final void close() {
-    }
+    public final void close() {}
 
     @Override // com.samsung.accessory.manager.connectivity.Connectivity
     public final void connect() {
@@ -88,12 +102,10 @@ public final class WirelessChargerConnectivity extends Connectivity {
     }
 
     @Override // com.samsung.accessory.manager.connectivity.Connectivity
-    public final void disconnect() {
-    }
+    public final void disconnect() {}
 
     @Override // com.samsung.accessory.manager.connectivity.Connectivity
-    public final void dump(PrintWriter printWriter) {
-    }
+    public final void dump(PrintWriter printWriter) {}
 
     @Override // com.samsung.accessory.manager.connectivity.Connectivity
     public final boolean enable() {
@@ -115,7 +127,9 @@ public final class WirelessChargerConnectivity extends Connectivity {
         int wirelesscharger_open = this.mMsgHelper.wirelesscharger_open();
         Log.d("SAccessoryManager_WirelessChargerConnectivity", "register receiver");
         this.mContext.registerReceiver(this.mReadTriggerReceiver, this.readTriggerIntentFilter);
-        Log.d("SAccessoryManager_WirelessChargerConnectivity", "open batt_misc ret = " + wirelesscharger_open);
+        Log.d(
+                "SAccessoryManager_WirelessChargerConnectivity",
+                "open batt_misc ret = " + wirelesscharger_open);
         if (wirelesscharger_open >= 0) {
             return true;
         }
@@ -138,8 +152,7 @@ public final class WirelessChargerConnectivity extends Connectivity {
     }
 
     @Override // com.samsung.accessory.manager.connectivity.Connectivity
-    public final void sendStopUsbAuth() {
-    }
+    public final void sendStopUsbAuth() {}
 
     @Override // com.samsung.accessory.manager.connectivity.Connectivity
     public final byte[] sendSynchronously(byte[] bArr, AuthenticationResult authenticationResult) {
@@ -148,7 +161,10 @@ public final class WirelessChargerConnectivity extends Connectivity {
             Thread.sleep(15L);
         } catch (InterruptedException unused) {
         }
-        UiModeManagerService$13$$ExternalSyntheticOutline0.m(new StringBuilder("data write msgState: "), this.msgState, "SAccessoryManager_WirelessChargerConnectivity");
+        UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                new StringBuilder("data write msgState: "),
+                this.msgState,
+                "SAccessoryManager_WirelessChargerConnectivity");
         MsgHelper msgHelper = this.mMsgHelper;
         byte[] bArr2 = {-2};
         byte[] bArr3 = {-1};
@@ -156,7 +172,9 @@ public final class WirelessChargerConnectivity extends Connectivity {
             Log.e("SAccessoryManager_WirelessChargerConnectivity", "command write fail");
             return bArr3;
         }
-        Log.i("SAccessoryManager_WirelessChargerConnectivity", "getSessionState: " + convertSessionState(this.mSessionState));
+        Log.i(
+                "SAccessoryManager_WirelessChargerConnectivity",
+                "getSessionState: " + convertSessionState(this.mSessionState));
         do {
             try {
                 Thread.sleep(100L);
@@ -166,7 +184,9 @@ public final class WirelessChargerConnectivity extends Connectivity {
                 break;
             }
         } while (this.mSessionState == 3);
-        Log.i("SAccessoryManager_WirelessChargerConnectivity", "getSessionState: " + convertSessionState(this.mSessionState));
+        Log.i(
+                "SAccessoryManager_WirelessChargerConnectivity",
+                "getSessionState: " + convertSessionState(this.mSessionState));
         if (this.mSessionState == 5) {
             return bArr2;
         }
@@ -174,7 +194,10 @@ public final class WirelessChargerConnectivity extends Connectivity {
             Thread.sleep(50L);
         } catch (InterruptedException unused3) {
         }
-        UiModeManagerService$13$$ExternalSyntheticOutline0.m(new StringBuilder("bit clear, msgState: "), this.msgState, "SAccessoryManager_WirelessChargerConnectivity");
+        UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                new StringBuilder("bit clear, msgState: "),
+                this.msgState,
+                "SAccessoryManager_WirelessChargerConnectivity");
         do {
             try {
                 Thread.sleep(100L);
@@ -184,7 +207,9 @@ public final class WirelessChargerConnectivity extends Connectivity {
                 break;
             }
         } while (this.mSessionState == 3);
-        Log.i("SAccessoryManager_WirelessChargerConnectivity", "getSessionState: " + convertSessionState(this.mSessionState));
+        Log.i(
+                "SAccessoryManager_WirelessChargerConnectivity",
+                "getSessionState: " + convertSessionState(this.mSessionState));
         if (this.mSessionState == 5) {
             return bArr2;
         }
@@ -194,13 +219,21 @@ public final class WirelessChargerConnectivity extends Connectivity {
         sb.append(", receive: ");
         if (ioctl_longDataRead_batt != null) {
             StringBuilder sb2 = new StringBuilder();
-            for (int i = 0; i < ioctl_longDataRead_batt.length; i = MARsFreezeStateRecord$$ExternalSyntheticOutline0.m("%02x", new Object[]{Byte.valueOf(ioctl_longDataRead_batt[i])}, sb2, i, 1)) {
-            }
+            for (int i = 0;
+                    i < ioctl_longDataRead_batt.length;
+                    i =
+                            MARsFreezeStateRecord$$ExternalSyntheticOutline0.m(
+                                    "%02x",
+                                    new Object[] {Byte.valueOf(ioctl_longDataRead_batt[i])},
+                                    sb2,
+                                    i,
+                                    1)) {}
             str = sb2.toString();
         } else {
             str = "null";
         }
-        VpnManagerService$$ExternalSyntheticOutline0.m(sb, str, "SAccessoryManager_WirelessChargerConnectivity");
+        VpnManagerService$$ExternalSyntheticOutline0.m(
+                sb, str, "SAccessoryManager_WirelessChargerConnectivity");
         int length = ioctl_longDataRead_batt.length;
         byte[] bArr4 = new byte[length + 1];
         for (int i2 = 0; i2 < ioctl_longDataRead_batt.length; i2++) {
@@ -211,7 +244,8 @@ public final class WirelessChargerConnectivity extends Connectivity {
     }
 
     @Override // com.samsung.accessory.manager.connectivity.Connectivity
-    public final void setStateChangedCallback(AuthenticationSession.AnonymousClass1 anonymousClass1) {
+    public final void setStateChangedCallback(
+            AuthenticationSession.AnonymousClass1 anonymousClass1) {
         this.mStateChangedCallback = anonymousClass1;
     }
 }

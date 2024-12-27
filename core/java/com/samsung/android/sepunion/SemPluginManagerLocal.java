@@ -3,7 +3,9 @@ package com.samsung.android.sepunion;
 import android.content.ComponentName;
 import android.os.Bundle;
 import android.os.IBinder;
+
 import com.samsung.android.cover.CoverState;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
@@ -15,7 +17,8 @@ public abstract class SemPluginManagerLocal {
 
     public abstract boolean disableLcdOffByCover(IBinder iBinder, ComponentName componentName);
 
-    public abstract void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr, String str);
+    public abstract void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr, String str);
 
     public abstract boolean enableLcdOffByCover(IBinder iBinder, ComponentName componentName);
 
@@ -33,15 +36,19 @@ public abstract class SemPluginManagerLocal {
 
     public abstract void registerCallback(IBinder iBinder, ComponentName componentName);
 
-    public abstract void registerListenerCallback(IBinder iBinder, ComponentName componentName, int i);
+    public abstract void registerListenerCallback(
+            IBinder iBinder, ComponentName componentName, int i);
 
-    public abstract void registerListenerCallbackForExternal(IBinder iBinder, ComponentName componentName, int i);
+    public abstract void registerListenerCallbackForExternal(
+            IBinder iBinder, ComponentName componentName, int i);
 
-    public abstract void registerNfcTouchListenerCallback(int i, IBinder iBinder, ComponentName componentName);
+    public abstract void registerNfcTouchListenerCallback(
+            int i, IBinder iBinder, ComponentName componentName);
 
     public abstract void removeLedNotification(Bundle bundle);
 
-    public abstract boolean requestCoverAuthentication(IBinder iBinder, ComponentName componentName);
+    public abstract boolean requestCoverAuthentication(
+            IBinder iBinder, ComponentName componentName);
 
     public abstract void sendDataToCover(int i, byte[] bArr);
 
@@ -51,7 +58,8 @@ public abstract class SemPluginManagerLocal {
 
     public abstract void sendSystemEvent(Bundle bundle);
 
-    public abstract boolean setFotaInProgress(boolean z, IBinder iBinder, ComponentName componentName);
+    public abstract boolean setFotaInProgress(
+            boolean z, IBinder iBinder, ComponentName componentName);
 
     public abstract boolean unregisterCallback(IBinder iBinder);
 

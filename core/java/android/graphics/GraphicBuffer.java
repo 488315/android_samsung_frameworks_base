@@ -6,27 +6,29 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class GraphicBuffer implements Parcelable {
-    public static final Parcelable.Creator<GraphicBuffer> CREATOR = new Parcelable.Creator<GraphicBuffer>() { // from class: android.graphics.GraphicBuffer.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GraphicBuffer createFromParcel(Parcel in) {
-            int width = in.readInt();
-            int height = in.readInt();
-            int format = in.readInt();
-            int usage = in.readInt();
-            long nativeObject = GraphicBuffer.nReadGraphicBufferFromParcel(in);
-            if (nativeObject != 0) {
-                return new GraphicBuffer(width, height, format, usage, nativeObject);
-            }
-            return null;
-        }
+    public static final Parcelable.Creator<GraphicBuffer> CREATOR =
+            new Parcelable.Creator<
+                    GraphicBuffer>() { // from class: android.graphics.GraphicBuffer.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GraphicBuffer createFromParcel(Parcel in) {
+                    int width = in.readInt();
+                    int height = in.readInt();
+                    int format = in.readInt();
+                    int usage = in.readInt();
+                    long nativeObject = GraphicBuffer.nReadGraphicBufferFromParcel(in);
+                    if (nativeObject != 0) {
+                        return new GraphicBuffer(width, height, format, usage, nativeObject);
+                    }
+                    return null;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GraphicBuffer[] newArray(int size) {
-            return new GraphicBuffer[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GraphicBuffer[] newArray(int size) {
+                    return new GraphicBuffer[size];
+                }
+            };
     public static final int USAGE_HW_2D = 1024;
     public static final int USAGE_HW_COMPOSER = 2048;
     public static final int USAGE_HW_MASK = 466688;
@@ -157,7 +159,8 @@ public class GraphicBuffer implements Parcelable {
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
         if (this.mDestroyed) {
-            throw new IllegalStateException("This GraphicBuffer has been destroyed and cannot be written to a parcel.");
+            throw new IllegalStateException(
+                    "This GraphicBuffer has been destroyed and cannot be written to a parcel.");
         }
         dest.writeInt(this.mWidth);
         dest.writeInt(this.mHeight);

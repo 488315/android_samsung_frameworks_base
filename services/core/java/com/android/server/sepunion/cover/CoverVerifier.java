@@ -6,9 +6,12 @@ import android.graphics.Rect;
 import android.os.SystemProperties;
 import android.view.Display;
 import android.view.WindowManager;
+
 import com.android.server.ServiceKeeper$$ExternalSyntheticOutline0;
+
 import com.samsung.android.cover.CoverState;
 import com.samsung.android.sepunion.Log;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -89,7 +92,8 @@ public final class CoverVerifier {
     }
 
     public final void getScreenSizeForClearCover() {
-        Display defaultDisplay = ((WindowManager) this.mContext.getSystemService("window")).getDefaultDisplay();
+        Display defaultDisplay =
+                ((WindowManager) this.mContext.getSystemService("window")).getDefaultDisplay();
         Point point = new Point();
         defaultDisplay.getRealSize(point);
         int rotation = defaultDisplay.getRotation();
@@ -136,10 +140,17 @@ public final class CoverVerifier {
                 i = 0;
                 i2 = 0;
             } else {
-                int valueFromSysFS = CoverManagerUtils.getValueFromSysFS(getDefaultTypeOfCover(), "/sys/devices/w1_bus_master1/w1_master_check_id");
-                int valueFromSysFS2 = CoverManagerUtils.getValueFromSysFS(0, "/sys/devices/w1_bus_master1/w1_master_check_color");
+                int valueFromSysFS =
+                        CoverManagerUtils.getValueFromSysFS(
+                                getDefaultTypeOfCover(),
+                                "/sys/devices/w1_bus_master1/w1_master_check_id");
+                int valueFromSysFS2 =
+                        CoverManagerUtils.getValueFromSysFS(
+                                0, "/sys/devices/w1_bus_master1/w1_master_check_color");
                 defaultTypeOfCover = valueFromSysFS;
-                i2 = CoverManagerUtils.getValueFromSysFS(0, "/sys/bus/w1/devices/w1_bus_master1/w1_master_check_model");
+                i2 =
+                        CoverManagerUtils.getValueFromSysFS(
+                                0, "/sys/bus/w1/devices/w1_bus_master1/w1_master_check_model");
                 i = valueFromSysFS2;
             }
             int supportSViewCoverWidth = getSupportSViewCoverWidth(defaultTypeOfCover);
@@ -147,7 +158,13 @@ public final class CoverVerifier {
             if ("factory".equals(SystemProperties.get("ro.factory.factory_binary"))) {
                 return;
             }
-            coverState.updateCoverState(defaultTypeOfCover, i, supportSViewCoverWidth, supportSViewCoverHeight, this.mIsCoverAttached, i2);
+            coverState.updateCoverState(
+                    defaultTypeOfCover,
+                    i,
+                    supportSViewCoverWidth,
+                    supportSViewCoverHeight,
+                    this.mIsCoverAttached,
+                    i2);
             return;
         }
         if (coverState2 != null) {
@@ -171,13 +188,21 @@ public final class CoverVerifier {
             int supportSViewCoverWidth2 = getSupportSViewCoverWidth(i4);
             int supportSViewCoverHeight2 = getSupportSViewCoverHeight(i4);
             if (!"factory".equals(SystemProperties.get("ro.factory.factory_binary"))) {
-                coverState.updateCoverState(i4, 0, supportSViewCoverWidth2, supportSViewCoverHeight2, this.mIsCoverAttached, 0);
+                coverState.updateCoverState(
+                        i4,
+                        0,
+                        supportSViewCoverWidth2,
+                        supportSViewCoverHeight2,
+                        this.mIsCoverAttached,
+                        0);
             }
             Rect rect = CoverTestModeUtils.sCurrentTestVisibleRect;
             if (!rect.isEmpty()) {
                 coverState.setVisibleRect(rect);
             }
-            Log.d("CoverManager_CoverVerifier", "[SmartCover] CoverVerify : sview cover test mode enabled");
+            Log.d(
+                    "CoverManager_CoverVerifier",
+                    "[SmartCover] CoverVerify : sview cover test mode enabled");
         }
     }
 
@@ -202,7 +227,10 @@ public final class CoverVerifier {
                 }
                 z = false;
             } else {
-                boolean z2 = CoverManagerUtils.getValueFromSysFS(-1, "/sys/devices/w1_bus_master1/w1_master_verify_mac") == 0;
+                boolean z2 =
+                        CoverManagerUtils.getValueFromSysFS(
+                                        -1, "/sys/devices/w1_bus_master1/w1_master_verify_mac")
+                                == 0;
                 if (this.mIsCoverVerified != z2) {
                     this.mIsCoverVerified = z2;
                 }
@@ -210,7 +238,12 @@ public final class CoverVerifier {
             }
         }
         this.mIsCoverAttached = this.mIsCoverVerified;
-        Log.d("CoverManager_CoverVerifier", "updateCoverVerification : mIsCoverVerified =" + this.mIsCoverVerified + ", change=" + z);
+        Log.d(
+                "CoverManager_CoverVerifier",
+                "updateCoverVerification : mIsCoverVerified ="
+                        + this.mIsCoverVerified
+                        + ", change="
+                        + z);
         return z;
     }
 
@@ -224,7 +257,8 @@ public final class CoverVerifier {
         StringBuilder sb = new StringBuilder("updateCoverWindowSize(): old window = ");
         sb.append(coverState.heightPixel);
         sb.append("x");
-        ServiceKeeper$$ExternalSyntheticOutline0.m(coverState.widthPixel, supportSViewCoverHeight, " new window = ", "x", sb);
+        ServiceKeeper$$ExternalSyntheticOutline0.m(
+                coverState.widthPixel, supportSViewCoverHeight, " new window = ", "x", sb);
         sb.append(supportSViewCoverWidth);
         Log.d("CoverManager_CoverVerifier", sb.toString());
         coverState.setWindowWidth(supportSViewCoverWidth);

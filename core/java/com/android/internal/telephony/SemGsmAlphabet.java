@@ -3,6 +3,7 @@ package com.android.internal.telephony;
 import android.telephony.PhoneNumberUtils;
 import android.text.format.DateFormat;
 import android.util.SparseIntArray;
+
 import com.android.internal.logging.nano.MetricsProto;
 
 /* loaded from: classes5.dex */
@@ -14,7 +15,9 @@ public class SemGsmAlphabet {
     private static final SparseIntArray gsmExtendedToChar = new SparseIntArray();
 
     public static char convertEachCharacter(char c) {
-        if (GsmAlphabet.getEnabledSingleShiftTables().length + GsmAlphabet.getEnabledLockingShiftTables().length != 0) {
+        if (GsmAlphabet.getEnabledSingleShiftTables().length
+                        + GsmAlphabet.getEnabledLockingShiftTables().length
+                != 0) {
             return c;
         }
         if (charToGsm.get(c, -1) != -1) {

@@ -44,7 +44,8 @@ public class SContextWakeUpVoiceAttribute extends SContextAttribute {
         setAttribute();
     }
 
-    @Override // android.hardware.scontext.SContextAttribute, com.samsung.android.hardware.context.SemContextAttribute
+    @Override // android.hardware.scontext.SContextAttribute,
+    // com.samsung.android.hardware.context.SemContextAttribute
     public boolean checkAttribute() {
         if (this.mMode == MODE_REGISTER) {
             return this.mVoiceMode == 1 || this.mVoiceMode == 2;

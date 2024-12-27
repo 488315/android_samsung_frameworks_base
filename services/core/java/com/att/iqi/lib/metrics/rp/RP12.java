@@ -2,7 +2,9 @@ package com.att.iqi.lib.metrics.rp;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.att.iqi.lib.Metric;
+
 import java.nio.BufferOverflowException;
 import java.nio.ByteBuffer;
 
@@ -23,17 +25,18 @@ public class RP12 extends Metric {
     private short m_wMaxJitter;
     private short m_wMeanJitter;
     public static final Metric.ID ID = new Metric.ID("RP12");
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() { // from class: com.att.iqi.lib.metrics.rp.RP12.1
-        @Override // android.os.Parcelable.Creator
-        public RP12 createFromParcel(Parcel parcel) {
-            return new RP12(parcel);
-        }
+    public static final Parcelable.Creator CREATOR =
+            new Parcelable.Creator() { // from class: com.att.iqi.lib.metrics.rp.RP12.1
+                @Override // android.os.Parcelable.Creator
+                public RP12 createFromParcel(Parcel parcel) {
+                    return new RP12(parcel);
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public RP12[] newArray(int i) {
-            return new RP12[i];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public RP12[] newArray(int i) {
+                    return new RP12[i];
+                }
+            };
 
     public RP12() {
         reset();

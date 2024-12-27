@@ -1,8 +1,10 @@
 package com.android.server.biometrics.sensors;
 
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.biometrics.SemBiometricFeature;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -41,7 +43,16 @@ public final class SemTestHalHelper {
         @Override // java.lang.Runnable
         public final void run() {
             StringBuilder sb = new StringBuilder("Run: ");
-            sb.append(this.callbackType.name() + ": " + this.code + ", " + this.vendorCode + ", " + this.value + ", delay = " + this.delay);
+            sb.append(
+                    this.callbackType.name()
+                            + ": "
+                            + this.code
+                            + ", "
+                            + this.vendorCode
+                            + ", "
+                            + this.value
+                            + ", delay = "
+                            + this.delay);
             Slog.d("SemTestHalHelper", sb.toString());
             int ordinal = this.callbackType.ordinal();
             if (ordinal == 0) {
@@ -79,8 +90,7 @@ public final class SemTestHalHelper {
 
         void deliverErrorEvent(int i, int i2);
 
-        default void deliverTspEvent(int i) {
-        }
+        default void deliverTspEvent(int i) {}
     }
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
@@ -107,7 +117,16 @@ public final class SemTestHalHelper {
             CallbackType callbackType6 = new CallbackType("ENUMERATE", 5);
             CallbackType callbackType7 = new CallbackType("TSP_FOD", 6);
             TSP_FOD = callbackType7;
-            $VALUES = new CallbackType[]{callbackType, callbackType2, callbackType3, callbackType4, callbackType5, callbackType6, callbackType7};
+            $VALUES =
+                    new CallbackType[] {
+                        callbackType,
+                        callbackType2,
+                        callbackType3,
+                        callbackType4,
+                        callbackType5,
+                        callbackType6,
+                        callbackType7
+                    };
         }
 
         public static CallbackType valueOf(String str) {
@@ -162,14 +181,14 @@ public final class SemTestHalHelper {
 
     /* JADX WARN: Can't wrap try/catch for region: R(8:96|97|98|99|(5:100|101|(2:103|105)|(2:106|107)|108)|109|110|111) */
     /* JADX WARN: Code restructure failed: missing block: B:113:0x0171, code lost:
-    
-        r0 = move-exception;
-     */
+
+       r0 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:114:0x0172, code lost:
-    
-        r0.printStackTrace();
-        r0 = null;
-     */
+
+       r0.printStackTrace();
+       r0 = null;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:22:0x0179  */
     /* JADX WARN: Removed duplicated region for block: B:55:0x02a2 A[Catch: JSONException -> 0x021b, TryCatch #5 {JSONException -> 0x021b, blocks: (B:40:0x020e, B:41:0x0223, B:43:0x0235, B:55:0x02a2, B:57:0x02a8, B:58:0x02ae, B:62:0x0255, B:63:0x0263, B:65:0x0277, B:66:0x0283, B:67:0x0290), top: B:39:0x020e }] */
@@ -190,6 +209,8 @@ public final class SemTestHalHelper {
             Method dump skipped, instructions count: 738
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.biometrics.sensors.SemTestHalHelper.initActions():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.biometrics.sensors.SemTestHalHelper.initActions():void");
     }
 }

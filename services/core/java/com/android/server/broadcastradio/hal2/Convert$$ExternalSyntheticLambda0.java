@@ -3,6 +3,7 @@ package com.android.server.broadcastradio.hal2;
 import android.hardware.broadcastradio.V2_0.DabTableEntry;
 import android.hardware.broadcastradio.V2_0.ProgramIdentifier;
 import android.hardware.radio.ProgramSelector;
+
 import java.util.Objects;
 import java.util.function.Function;
 
@@ -15,7 +16,8 @@ public final /* synthetic */ class Convert$$ExternalSyntheticLambda0 implements 
     public final Object apply(Object obj) {
         switch (this.$r8$classId) {
             case 0:
-                ProgramSelector.Identifier programIdentifierFromHal = Convert.programIdentifierFromHal((ProgramIdentifier) obj);
+                ProgramSelector.Identifier programIdentifierFromHal =
+                        Convert.programIdentifierFromHal((ProgramIdentifier) obj);
                 Objects.requireNonNull(programIdentifierFromHal);
                 return programIdentifierFromHal;
             case 1:

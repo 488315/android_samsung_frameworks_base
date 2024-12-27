@@ -4,9 +4,11 @@ import android.os.Environment;
 import android.os.FileUtils;
 import android.os.ParcelFileDescriptor;
 import android.os.SELinux;
+
 import com.samsung.android.wallpaper.Rune;
 import com.samsung.android.wallpaper.utils.WhichChecker;
 import com.samsung.server.wallpaper.Log;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -20,7 +22,8 @@ public final class ThumbnailFileManager {
 
     public static boolean copyFile(ParcelFileDescriptor parcelFileDescriptor, File file) {
         try {
-            FileInputStream fileInputStream = new FileInputStream(parcelFileDescriptor.getFileDescriptor());
+            FileInputStream fileInputStream =
+                    new FileInputStream(parcelFileDescriptor.getFileDescriptor());
             try {
                 FileOutputStream fileOutputStream = new FileOutputStream(file);
                 try {
@@ -45,7 +48,9 @@ public final class ThumbnailFileManager {
                 if (sInstance == null) {
                     ThumbnailFileManager thumbnailFileManager2 = new ThumbnailFileManager();
                     if (LegacyThumbnailFileRemover.getThumbnailFile(5, 1).exists()) {
-                        Log.i("LegacyThumbnailFileRemover", "remove: legacy wallpaper thumbnail detected.");
+                        Log.i(
+                                "LegacyThumbnailFileRemover",
+                                "remove: legacy wallpaper thumbnail detected.");
                         LegacyThumbnailFileRemover.removeThumbnailFiles(5);
                         LegacyThumbnailFileRemover.removeThumbnailFiles(6);
                         if (Rune.SUPPORT_SUB_DISPLAY_MODE) {
@@ -66,7 +71,10 @@ public final class ThumbnailFileManager {
     }
 
     public static File getThumbnailFile(int i, int i2, int i3) {
-        File file = new File(new File(Environment.getUserSystemDirectory(i2), "wallpaper_thumbs"), String.valueOf(i));
+        File file =
+                new File(
+                        new File(Environment.getUserSystemDirectory(i2), "wallpaper_thumbs"),
+                        String.valueOf(i));
         String str = "_0";
         if (i3 != 0) {
             if (i3 == 1) {
@@ -87,10 +95,17 @@ public final class ThumbnailFileManager {
             if (SELinux.restorecon(file2)) {
                 return true;
             }
-            Log.w("ThumbnailFileManager", "moveFile : restorecon failed - " + file2.getAbsolutePath());
+            Log.w(
+                    "ThumbnailFileManager",
+                    "moveFile : restorecon failed - " + file2.getAbsolutePath());
             return false;
         }
-        Log.w("ThumbnailFileManager", "moveFile : failed to move file from " + file.getAbsolutePath() + " to " + file2.getAbsolutePath());
+        Log.w(
+                "ThumbnailFileManager",
+                "moveFile : failed to move file from "
+                        + file.getAbsolutePath()
+                        + " to "
+                        + file2.getAbsolutePath());
         return false;
     }
 
@@ -106,7 +121,10 @@ public final class ThumbnailFileManager {
             deleteThumbnailFiles(mode | 2, i2);
             return true;
         }
-        File file = new File(new File(Environment.getUserSystemDirectory(i2), "wallpaper_thumbs"), String.valueOf(i));
+        File file =
+                new File(
+                        new File(Environment.getUserSystemDirectory(i2), "wallpaper_thumbs"),
+                        String.valueOf(i));
         if (!file.exists()) {
             return false;
         }
@@ -116,7 +134,14 @@ public final class ThumbnailFileManager {
             File thumbnailFile = getThumbnailFile(i, i2, i4);
             if (thumbnailFile.exists()) {
                 boolean delete = thumbnailFile.delete();
-                Log.d("ThumbnailFileManager", "deleteThumbnailFile: which=" + i + ", rotation=" + i4 + ", success=" + delete);
+                Log.d(
+                        "ThumbnailFileManager",
+                        "deleteThumbnailFile: which="
+                                + i
+                                + ", rotation="
+                                + i4
+                                + ", success="
+                                + delete);
                 if (!delete) {
                     z = false;
                 }
@@ -126,16 +151,27 @@ public final class ThumbnailFileManager {
         return z;
     }
 
-    public final synchronized boolean writeThumbnailFile(int i, int i2, int i3, ParcelFileDescriptor parcelFileDescriptor) {
+    public final synchronized boolean writeThumbnailFile(
+            int i, int i2, int i3, ParcelFileDescriptor parcelFileDescriptor) {
         File thumbnailFile = getThumbnailFile(i, i2, i3);
-        Log.i("ThumbnailFileManager", "writeThumbnailFile: which=" + i + ", userId=" + i2 + ", rotation=" + i3);
+        Log.i(
+                "ThumbnailFileManager",
+                "writeThumbnailFile: which=" + i + ", userId=" + i2 + ", rotation=" + i3);
         if (thumbnailFile.exists() && thumbnailFile.length() > 0) {
-            Log.i("ThumbnailFileManager", "writeThumbnailFile: thumbnail already exist. skip writing");
+            Log.i(
+                    "ThumbnailFileManager",
+                    "writeThumbnailFile: thumbnail already exist. skip writing");
             return true;
         }
-        File file = new File(new File(Environment.getUserSystemDirectory(i2), "wallpaper_thumbs"), String.valueOf(i));
+        File file =
+                new File(
+                        new File(Environment.getUserSystemDirectory(i2), "wallpaper_thumbs"),
+                        String.valueOf(i));
         if (!file.exists() && !file.mkdirs()) {
-            Log.e("ThumbnailFileManager", "writeThumbnailFile: failed to create thumbnail dir - " + file.getAbsolutePath());
+            Log.e(
+                    "ThumbnailFileManager",
+                    "writeThumbnailFile: failed to create thumbnail dir - "
+                            + file.getAbsolutePath());
             return false;
         }
         File file2 = new File(thumbnailFile.getAbsolutePath() + ".tmp");
@@ -151,7 +187,10 @@ public final class ThumbnailFileManager {
         }
         Log.e("ThumbnailFileManager", "writeThumbnailFile : failed to copy remote thumbnail file");
         if (!file2.delete()) {
-            Log.e("ThumbnailFileManager", "writeThumbnailFile : failed to delete temp thumbnail file - " + file2.getAbsolutePath());
+            Log.e(
+                    "ThumbnailFileManager",
+                    "writeThumbnailFile : failed to delete temp thumbnail file - "
+                            + file2.getAbsolutePath());
         }
         return false;
     }

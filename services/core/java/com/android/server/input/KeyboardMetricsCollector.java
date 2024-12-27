@@ -6,7 +6,9 @@ import android.util.Log;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.view.InputDevice;
+
 import com.android.internal.util.FrameworkStatsLog;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,7 +32,16 @@ public abstract class KeyboardMetricsCollector {
         }
 
         public final String toString() {
-            return "InputDevice = {VendorId = " + Integer.toHexString(this.mInputDevice.getVendorId()) + ", ProductId = " + Integer.toHexString(this.mInputDevice.getProductId()) + ", Device Bus = " + Integer.toHexString(this.mInputDevice.getDeviceBus()) + "}, isFirstConfiguration = " + this.mIsFirstConfiguration + ", LayoutConfigurations = " + this.mLayoutConfigurations;
+            return "InputDevice = {VendorId = "
+                    + Integer.toHexString(this.mInputDevice.getVendorId())
+                    + ", ProductId = "
+                    + Integer.toHexString(this.mInputDevice.getProductId())
+                    + ", Device Bus = "
+                    + Integer.toHexString(this.mInputDevice.getDeviceBus())
+                    + "}, isFirstConfiguration = "
+                    + this.mIsFirstConfiguration
+                    + ", LayoutConfigurations = "
+                    + this.mLayoutConfigurations;
         }
     }
 
@@ -86,7 +97,8 @@ public abstract class KeyboardMetricsCollector {
         LAUNCH_DEFAULT_FILES("LAUNCH_DEFAULT_FILES", "LAUNCH_DEFAULT_FILES"),
         LAUNCH_DEFAULT_WEATHER("LAUNCH_DEFAULT_WEATHER", "LAUNCH_DEFAULT_WEATHER"),
         LAUNCH_DEFAULT_FITNESS("LAUNCH_DEFAULT_FITNESS", "LAUNCH_DEFAULT_FITNESS"),
-        LAUNCH_APPLICATION_BY_PACKAGE_NAME("LAUNCH_APPLICATION_BY_PACKAGE_NAME", "LAUNCH_APPLICATION_BY_PACKAGE_NAME"),
+        LAUNCH_APPLICATION_BY_PACKAGE_NAME(
+                "LAUNCH_APPLICATION_BY_PACKAGE_NAME", "LAUNCH_APPLICATION_BY_PACKAGE_NAME"),
         DESKTOP_MODE("DESKTOP_MODE", "DESKTOP_MODE"),
         MULTI_WINDOW_NAVIGATION("MULTI_WINDOW_NAVIGATION", "MULTIWINDOW_NAVIGATION");
 
@@ -125,12 +137,15 @@ public abstract class KeyboardMetricsCollector {
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public static com.android.server.input.KeyboardMetricsCollector.KeyboardLogEvent getLogEventFromIntent(android.content.Intent r7) {
+        public static com.android.server.input.KeyboardMetricsCollector.KeyboardLogEvent
+                getLogEventFromIntent(android.content.Intent r7) {
             /*
                 Method dump skipped, instructions count: 406
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.input.KeyboardMetricsCollector.KeyboardLogEvent.getLogEventFromIntent(android.content.Intent):com.android.server.input.KeyboardMetricsCollector$KeyboardLogEvent");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.input.KeyboardMetricsCollector.KeyboardLogEvent.getLogEventFromIntent(android.content.Intent):com.android.server.input.KeyboardMetricsCollector$KeyboardLogEvent");
         }
 
         public final int getIntValue() {
@@ -157,21 +172,49 @@ public abstract class KeyboardMetricsCollector {
         }
 
         public final String toString() {
-            return "{keyboardLanguageTag = " + this.keyboardLanguageTag + " keyboardLayoutType = " + KeyboardLayout.LayoutType.getLayoutNameFromValue(this.keyboardLayoutType) + " keyboardLayoutName = " + this.keyboardLayoutName + " layoutSelectionCriteria = " + KeyboardLayoutSelectionResult.layoutSelectionCriteriaToString(this.layoutSelectionCriteria) + " imeLanguageTag = " + this.imeLanguageTag + " imeLayoutType = " + KeyboardLayout.LayoutType.getLayoutNameFromValue(this.imeLayoutType) + "}";
+            return "{keyboardLanguageTag = "
+                    + this.keyboardLanguageTag
+                    + " keyboardLayoutType = "
+                    + KeyboardLayout.LayoutType.getLayoutNameFromValue(this.keyboardLayoutType)
+                    + " keyboardLayoutName = "
+                    + this.keyboardLayoutName
+                    + " layoutSelectionCriteria = "
+                    + KeyboardLayoutSelectionResult.layoutSelectionCriteriaToString(
+                            this.layoutSelectionCriteria)
+                    + " imeLanguageTag = "
+                    + this.imeLanguageTag
+                    + " imeLayoutType = "
+                    + KeyboardLayout.LayoutType.getLayoutNameFromValue(this.imeLayoutType)
+                    + "}";
         }
     }
 
-    public static void logKeyboardSystemsEventReportedAtom(InputDevice inputDevice, KeyboardLogEvent keyboardLogEvent, int i, int... iArr) {
+    public static void logKeyboardSystemsEventReportedAtom(
+            InputDevice inputDevice, KeyboardLogEvent keyboardLogEvent, int i, int... iArr) {
         if (inputDevice == null || inputDevice.isVirtual() || !inputDevice.isFullKeyboard()) {
             return;
         }
         if (keyboardLogEvent == null) {
-            Slog.w("KeyboardMetricCollector", "Invalid keyboard event logging, keycode = " + Arrays.toString(iArr) + ", modifier state = " + i);
+            Slog.w(
+                    "KeyboardMetricCollector",
+                    "Invalid keyboard event logging, keycode = "
+                            + Arrays.toString(iArr)
+                            + ", modifier state = "
+                            + i);
             return;
         }
-        FrameworkStatsLog.write(FrameworkStatsLog.KEYBOARD_SYSTEMS_EVENT_REPORTED, inputDevice.getVendorId(), inputDevice.getProductId(), keyboardLogEvent.getIntValue(), iArr, i, inputDevice.getDeviceBus());
+        FrameworkStatsLog.write(
+                FrameworkStatsLog.KEYBOARD_SYSTEMS_EVENT_REPORTED,
+                inputDevice.getVendorId(),
+                inputDevice.getProductId(),
+                keyboardLogEvent.getIntValue(),
+                iArr,
+                i,
+                inputDevice.getDeviceBus());
         if (DEBUG) {
-            Slog.d("KeyboardMetricCollector", "Logging Keyboard system event: " + keyboardLogEvent.mName);
+            Slog.d(
+                    "KeyboardMetricCollector",
+                    "Logging Keyboard system event: " + keyboardLogEvent.mName);
         }
     }
 }

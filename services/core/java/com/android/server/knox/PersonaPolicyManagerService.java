@@ -7,12 +7,15 @@ import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
 import android.os.Environment;
 import android.util.Log;
 import android.util.SparseArray;
+
 import com.android.internal.util.FastXmlSerializer;
 import com.android.internal.util.JournaledFile;
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.knox.container.KnoxConfigurationType;
 import com.samsung.android.knox.container.KnoxContainerManager;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -35,22 +38,34 @@ public final class PersonaPolicyManagerService {
     }
 
     public PersonaPolicyManagerService(Context context) {
-        new BroadcastReceiver() { // from class: com.android.server.knox.PersonaPolicyManagerService.1
+        new BroadcastReceiver() { // from class:
+                                  // com.android.server.knox.PersonaPolicyManagerService.1
             @Override // android.content.BroadcastReceiver
             public final void onReceive(Context context2, Intent intent) {
                 String action = intent.getAction();
-                int intExtra = intent.getIntExtra("android.intent.extra.user_handle", getSendingUserId());
-                if ("android.intent.action.USER_REMOVED".equals(action) && SemPersonaManager.isKnoxId(intExtra)) {
-                    PersonaPolicyManagerService personaPolicyManagerService = PersonaPolicyManagerService.this;
+                int intExtra =
+                        intent.getIntExtra("android.intent.extra.user_handle", getSendingUserId());
+                if ("android.intent.action.USER_REMOVED".equals(action)
+                        && SemPersonaManager.isKnoxId(intExtra)) {
+                    PersonaPolicyManagerService personaPolicyManagerService =
+                            PersonaPolicyManagerService.this;
                     synchronized (personaPolicyManagerService) {
                         try {
                             personaPolicyManagerService.getPersonaData(intExtra);
                             personaPolicyManagerService.mPersonaData.remove(intExtra);
-                            File file = new File(Environment.getUserSystemDirectory(intExtra), "persona_policies.xml");
+                            File file =
+                                    new File(
+                                            Environment.getUserSystemDirectory(intExtra),
+                                            "persona_policies.xml");
                             if (file.delete()) {
-                                Log.d("PersonaPolicyManagerService", "Removed persona policy file " + file.getAbsolutePath());
+                                Log.d(
+                                        "PersonaPolicyManagerService",
+                                        "Removed persona policy file " + file.getAbsolutePath());
                             } else {
-                                Log.e("PersonaPolicyManagerService", "Failed to delete persona policy file: " + file.getAbsolutePath());
+                                Log.e(
+                                        "PersonaPolicyManagerService",
+                                        "Failed to delete persona policy file: "
+                                                + file.getAbsolutePath());
                             }
                         } finally {
                         }
@@ -66,9 +81,13 @@ public final class PersonaPolicyManagerService {
         KnoxConfigurationType configurationType;
         boolean isKnoxId = SemPersonaManager.isKnoxId(i);
         String str3 = isKnoxId ? "false" : "true";
-        if (isKnoxId && (configurationType = KnoxContainerManager.getConfigurationType(i)) != null) {
+        if (isKnoxId
+                && (configurationType = KnoxContainerManager.getConfigurationType(i)) != null) {
             String dataSyncPolicy = configurationType.getDataSyncPolicy(str, str2);
-            DualAppManagerService$$ExternalSyntheticOutline0.m("configuration value set by MDM : ", dataSyncPolicy, "PersonaPolicyManagerService");
+            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                    "configuration value set by MDM : ",
+                    dataSyncPolicy,
+                    "PersonaPolicyManagerService");
             if (dataSyncPolicy != null) {
                 return dataSyncPolicy;
             }
@@ -82,17 +101,27 @@ public final class PersonaPolicyManagerService {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void loadSettingsLocked(com.android.server.knox.PersonaPolicyManagerService.PersonaPolicyData r11, int r12) {
+    public static void loadSettingsLocked(
+            com.android.server.knox.PersonaPolicyManagerService.PersonaPolicyData r11, int r12) {
         /*
             Method dump skipped, instructions count: 343
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.knox.PersonaPolicyManagerService.loadSettingsLocked(com.android.server.knox.PersonaPolicyManagerService$PersonaPolicyData, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.knox.PersonaPolicyManagerService.loadSettingsLocked(com.android.server.knox.PersonaPolicyManagerService$PersonaPolicyData,"
+                    + " int):void");
     }
 
     public static JournaledFile makeJournaledFile(int i) {
-        String absolutePath = new File(Environment.getUserSystemDirectory(i), "persona_policies.xml").getAbsolutePath();
-        return new JournaledFile(new File(absolutePath), new File(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(absolutePath, ".tmp")));
+        String absolutePath =
+                new File(Environment.getUserSystemDirectory(i), "persona_policies.xml")
+                        .getAbsolutePath();
+        return new JournaledFile(
+                new File(absolutePath),
+                new File(
+                        ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                                absolutePath, ".tmp")));
     }
 
     public final PersonaPolicyData getPersonaData(int i) {
@@ -123,7 +152,8 @@ public final class PersonaPolicyManagerService {
         try {
             try {
                 try {
-                    FileOutputStream fileOutputStream2 = new FileOutputStream(makeJournaledFile.chooseForWrite(), false);
+                    FileOutputStream fileOutputStream2 =
+                            new FileOutputStream(makeJournaledFile.chooseForWrite(), false);
                     try {
                         FastXmlSerializer fastXmlSerializer = new FastXmlSerializer();
                         fastXmlSerializer.setOutput(fileOutputStream2, "UTF-8");
@@ -134,7 +164,8 @@ public final class PersonaPolicyManagerService {
                             fastXmlSerializer.startTag((String) null, "managed-applications");
                             fastXmlSerializer.startTag((String) null, "secure-folder");
                             for (String str : personaData.mSecureFolderPolicies.keySet()) {
-                                for (String str2 : (List) personaData.mSecureFolderPolicies.get(str)) {
+                                for (String str2 :
+                                        (List) personaData.mSecureFolderPolicies.get(str)) {
                                     fastXmlSerializer.startTag((String) null, str);
                                     fastXmlSerializer.attribute((String) null, "name", str2);
                                     fastXmlSerializer.endTag((String) null, str);

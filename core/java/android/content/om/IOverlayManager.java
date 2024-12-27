@@ -1,13 +1,12 @@
 package android.content.om;
 
-import android.content.om.IOverlayManager;
-import android.content.om.ISamsungOverlayCallback;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +17,9 @@ import java.util.stream.IntStream;
 
 /* loaded from: classes.dex */
 public interface IOverlayManager extends IInterface {
-    void addOverlays(List<OverlayInfoExt> list, ISamsungOverlayCallback iSamsungOverlayCallback, int i) throws RemoteException;
+    void addOverlays(
+            List<OverlayInfoExt> list, ISamsungOverlayCallback iSamsungOverlayCallback, int i)
+            throws RemoteException;
 
     void applyThemeParkWallpaperColor(Uri uri) throws RemoteException;
 
@@ -42,7 +43,8 @@ public interface IOverlayManager extends IInterface {
 
     OverlayInfo getOverlayInfo(String str, int i) throws RemoteException;
 
-    OverlayInfo getOverlayInfoByIdentifier(OverlayIdentifier overlayIdentifier, int i) throws RemoteException;
+    OverlayInfo getOverlayInfoByIdentifier(OverlayIdentifier overlayIdentifier, int i)
+            throws RemoteException;
 
     List<OverlayInfo> getOverlayInfosForTarget(String str, int i) throws RemoteException;
 
@@ -60,9 +62,16 @@ public interface IOverlayManager extends IInterface {
 
     List readLastPalette() throws RemoteException;
 
-    void removeOverlays(List<OverlayInfoExt> list, ISamsungOverlayCallback iSamsungOverlayCallback, int i) throws RemoteException;
+    void removeOverlays(
+            List<OverlayInfoExt> list, ISamsungOverlayCallback iSamsungOverlayCallback, int i)
+            throws RemoteException;
 
-    void replaceOverlays(List<OverlayInfoExt> list, List<OverlayInfoExt> list2, ISamsungOverlayCallback iSamsungOverlayCallback, int i) throws RemoteException;
+    void replaceOverlays(
+            List<OverlayInfoExt> list,
+            List<OverlayInfoExt> list2,
+            ISamsungOverlayCallback iSamsungOverlayCallback,
+            int i)
+            throws RemoteException;
 
     boolean setEnabled(String str, boolean z, int i) throws RemoteException;
 
@@ -83,7 +92,8 @@ public interface IOverlayManager extends IInterface {
         }
 
         @Override // android.content.om.IOverlayManager
-        public List<OverlayInfo> getOverlayInfosForTarget(String targetPackageName, int userId) throws RemoteException {
+        public List<OverlayInfo> getOverlayInfosForTarget(String targetPackageName, int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -93,27 +103,32 @@ public interface IOverlayManager extends IInterface {
         }
 
         @Override // android.content.om.IOverlayManager
-        public OverlayInfo getOverlayInfoByIdentifier(OverlayIdentifier packageName, int userId) throws RemoteException {
+        public OverlayInfo getOverlayInfoByIdentifier(OverlayIdentifier packageName, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.om.IOverlayManager
-        public boolean setEnabled(String packageName, boolean enable, int userId) throws RemoteException {
+        public boolean setEnabled(String packageName, boolean enable, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.om.IOverlayManager
-        public boolean setEnabledExclusive(String packageName, boolean enable, int userId) throws RemoteException {
+        public boolean setEnabledExclusive(String packageName, boolean enable, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.om.IOverlayManager
-        public boolean setEnabledExclusiveInCategory(String packageName, int userId) throws RemoteException {
+        public boolean setEnabledExclusiveInCategory(String packageName, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.om.IOverlayManager
-        public boolean setPriority(String packageName, String newParentPackageName, int userId) throws RemoteException {
+        public boolean setPriority(String packageName, String newParentPackageName, int userId)
+                throws RemoteException {
             return false;
         }
 
@@ -133,12 +148,11 @@ public interface IOverlayManager extends IInterface {
         }
 
         @Override // android.content.om.IOverlayManager
-        public void invalidateCachesForOverlay(String packageName, int userId) throws RemoteException {
-        }
+        public void invalidateCachesForOverlay(String packageName, int userId)
+                throws RemoteException {}
 
         @Override // android.content.om.IOverlayManager
-        public void commit(OverlayManagerTransaction transaction) throws RemoteException {
-        }
+        public void commit(OverlayManagerTransaction transaction) throws RemoteException {}
 
         @Override // android.content.om.IOverlayManager
         public String getPartitionOrder() throws RemoteException {
@@ -151,24 +165,32 @@ public interface IOverlayManager extends IInterface {
         }
 
         @Override // android.content.om.IOverlayManager
-        public void replaceOverlays(List<OverlayInfoExt> overlaysToRemove, List<OverlayInfoExt> overlaysToAdd, ISamsungOverlayCallback callback, int ownerId) throws RemoteException {
-        }
+        public void replaceOverlays(
+                List<OverlayInfoExt> overlaysToRemove,
+                List<OverlayInfoExt> overlaysToAdd,
+                ISamsungOverlayCallback callback,
+                int ownerId)
+                throws RemoteException {}
 
         @Override // android.content.om.IOverlayManager
-        public void addOverlays(List<OverlayInfoExt> overlays, ISamsungOverlayCallback callback, int ownerId) throws RemoteException {
-        }
+        public void addOverlays(
+                List<OverlayInfoExt> overlays, ISamsungOverlayCallback callback, int ownerId)
+                throws RemoteException {}
 
         @Override // android.content.om.IOverlayManager
-        public void removeOverlays(List<OverlayInfoExt> overlays, ISamsungOverlayCallback callback, int ownerId) throws RemoteException {
-        }
+        public void removeOverlays(
+                List<OverlayInfoExt> overlays, ISamsungOverlayCallback callback, int ownerId)
+                throws RemoteException {}
 
         @Override // android.content.om.IOverlayManager
-        public boolean changeOverlayState(String packageName, int userId, boolean enabled) throws RemoteException {
+        public boolean changeOverlayState(String packageName, int userId, boolean enabled)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.om.IOverlayManager
-        public OverlayInfoExt[] getAllOverlaysInCategory(int category, int userId) throws RemoteException {
+        public OverlayInfoExt[] getAllOverlaysInCategory(int category, int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -178,17 +200,19 @@ public interface IOverlayManager extends IInterface {
         }
 
         @Override // android.content.om.IOverlayManager
-        public OverlayInfoExt[] getOverlaysForTarget(String packageName, int category, int userId) throws RemoteException {
+        public OverlayInfoExt[] getOverlaysForTarget(String packageName, int category, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.om.IOverlayManager
-        public void applyWallpaperColors(List wallpaperColors, int numColorType, int numLuminence) throws RemoteException {
-        }
+        public void applyWallpaperColors(List wallpaperColors, int numColorType, int numLuminence)
+                throws RemoteException {}
 
         @Override // android.content.om.IOverlayManager
-        public void applyWallpaperColor(List wallpaperColorSS, List wallpaperColorGG, boolean isGray) throws RemoteException {
-        }
+        public void applyWallpaperColor(
+                List wallpaperColorSS, List wallpaperColorGG, boolean isGray)
+                throws RemoteException {}
 
         @Override // android.content.om.IOverlayManager
         public List getWallpaperColors() throws RemoteException {
@@ -201,13 +225,13 @@ public interface IOverlayManager extends IInterface {
         }
 
         @Override // android.content.om.IOverlayManager
-        public boolean getLastPalette(List wallpaperColorSS, List wallpaperColorGG) throws RemoteException {
+        public boolean getLastPalette(List wallpaperColorSS, List wallpaperColorGG)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.om.IOverlayManager
-        public void applyThemeParkWallpaperColor(Uri path) throws RemoteException {
-        }
+        public void applyThemeParkWallpaperColor(Uri path) throws RemoteException {}
 
         @Override // android.content.om.IOverlayManager
         public List<String> getThemeParkOverlayNames(String prefix) throws RemoteException {
@@ -220,7 +244,7 @@ public interface IOverlayManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IOverlayManager {
+    public abstract static class Stub extends Binder implements IOverlayManager {
         public static final String DESCRIPTOR = "android.content.om.IOverlayManager";
         static final int TRANSACTION_addOverlays = 17;
         static final int TRANSACTION_applyThemeParkWallpaperColor = 28;
@@ -343,7 +367,8 @@ public interface IOverlayManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, final Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, final Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -361,12 +386,15 @@ public interface IOverlayManager extends IInterface {
                         reply.writeInt(-1);
                     } else {
                         reply.writeInt(_result.size());
-                        _result.forEach(new BiConsumer() { // from class: android.content.om.IOverlayManager$Stub$$ExternalSyntheticLambda0
-                            @Override // java.util.function.BiConsumer
-                            public final void accept(Object obj, Object obj2) {
-                                IOverlayManager.Stub.lambda$onTransact$0(Parcel.this, (String) obj, (List) obj2);
-                            }
-                        });
+                        _result.forEach(
+                                new BiConsumer() { // from class:
+                                    // android.content.om.IOverlayManager$Stub$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.BiConsumer
+                                    public final void accept(Object obj, Object obj2) {
+                                        IOverlayManager.Stub.lambda$onTransact$0(
+                                                Parcel.this, (String) obj, (List) obj2);
+                                    }
+                                });
                     }
                     return true;
                 case 2:
@@ -386,7 +414,8 @@ public interface IOverlayManager extends IInterface {
                     reply.writeTypedObject(_result3, 1);
                     return true;
                 case 4:
-                    OverlayIdentifier _arg04 = (OverlayIdentifier) data.readTypedObject(OverlayIdentifier.CREATOR);
+                    OverlayIdentifier _arg04 =
+                            (OverlayIdentifier) data.readTypedObject(OverlayIdentifier.CREATOR);
                     int _arg13 = data.readInt();
                     data.enforceNoDataAvail();
                     OverlayInfo _result4 = getOverlayInfoByIdentifier(_arg04, _arg13);
@@ -457,7 +486,9 @@ public interface IOverlayManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 13:
-                    OverlayManagerTransaction _arg012 = (OverlayManagerTransaction) data.readTypedObject(OverlayManagerTransaction.CREATOR);
+                    OverlayManagerTransaction _arg012 =
+                            (OverlayManagerTransaction)
+                                    data.readTypedObject(OverlayManagerTransaction.CREATOR);
                     data.enforceNoDataAvail();
                     commit(_arg012);
                     reply.writeNoException();
@@ -473,25 +504,32 @@ public interface IOverlayManager extends IInterface {
                     reply.writeBoolean(_result13);
                     return true;
                 case 16:
-                    List<OverlayInfoExt> _arg013 = data.createTypedArrayList(OverlayInfoExt.CREATOR);
-                    List<OverlayInfoExt> _arg111 = data.createTypedArrayList(OverlayInfoExt.CREATOR);
-                    ISamsungOverlayCallback _arg24 = ISamsungOverlayCallback.Stub.asInterface(data.readStrongBinder());
+                    List<OverlayInfoExt> _arg013 =
+                            data.createTypedArrayList(OverlayInfoExt.CREATOR);
+                    List<OverlayInfoExt> _arg111 =
+                            data.createTypedArrayList(OverlayInfoExt.CREATOR);
+                    ISamsungOverlayCallback _arg24 =
+                            ISamsungOverlayCallback.Stub.asInterface(data.readStrongBinder());
                     int _arg3 = data.readInt();
                     data.enforceNoDataAvail();
                     replaceOverlays(_arg013, _arg111, _arg24, _arg3);
                     reply.writeNoException();
                     return true;
                 case 17:
-                    List<OverlayInfoExt> _arg014 = data.createTypedArrayList(OverlayInfoExt.CREATOR);
-                    ISamsungOverlayCallback _arg112 = ISamsungOverlayCallback.Stub.asInterface(data.readStrongBinder());
+                    List<OverlayInfoExt> _arg014 =
+                            data.createTypedArrayList(OverlayInfoExt.CREATOR);
+                    ISamsungOverlayCallback _arg112 =
+                            ISamsungOverlayCallback.Stub.asInterface(data.readStrongBinder());
                     int _arg25 = data.readInt();
                     data.enforceNoDataAvail();
                     addOverlays(_arg014, _arg112, _arg25);
                     reply.writeNoException();
                     return true;
                 case 18:
-                    List<OverlayInfoExt> _arg015 = data.createTypedArrayList(OverlayInfoExt.CREATOR);
-                    ISamsungOverlayCallback _arg113 = ISamsungOverlayCallback.Stub.asInterface(data.readStrongBinder());
+                    List<OverlayInfoExt> _arg015 =
+                            data.createTypedArrayList(OverlayInfoExt.CREATOR);
+                    ISamsungOverlayCallback _arg113 =
+                            ISamsungOverlayCallback.Stub.asInterface(data.readStrongBinder());
                     int _arg26 = data.readInt();
                     data.enforceNoDataAvail();
                     removeOverlays(_arg015, _arg113, _arg26);
@@ -609,7 +647,8 @@ public interface IOverlayManager extends IInterface {
             }
 
             @Override // android.content.om.IOverlayManager
-            public Map<String, List<OverlayInfo>> getAllOverlays(int userId) throws RemoteException {
+            public Map<String, List<OverlayInfo>> getAllOverlays(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 final Parcel _reply = Parcel.obtain();
                 try {
@@ -619,12 +658,16 @@ public interface IOverlayManager extends IInterface {
                     _reply.readException();
                     int N = _reply.readInt();
                     final Map<String, List<OverlayInfo>> _result = N < 0 ? null : new HashMap<>();
-                    IntStream.range(0, N).forEach(new IntConsumer() { // from class: android.content.om.IOverlayManager$Stub$Proxy$$ExternalSyntheticLambda0
-                        @Override // java.util.function.IntConsumer
-                        public final void accept(int i) {
-                            IOverlayManager.Stub.Proxy.lambda$getAllOverlays$0(Parcel.this, _result, i);
-                        }
-                    });
+                    IntStream.range(0, N)
+                            .forEach(
+                                    new IntConsumer() { // from class:
+                                        // android.content.om.IOverlayManager$Stub$Proxy$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.IntConsumer
+                                        public final void accept(int i) {
+                                            IOverlayManager.Stub.Proxy.lambda$getAllOverlays$0(
+                                                    Parcel.this, _result, i);
+                                        }
+                                    });
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -638,7 +681,8 @@ public interface IOverlayManager extends IInterface {
             }
 
             @Override // android.content.om.IOverlayManager
-            public List<OverlayInfo> getOverlayInfosForTarget(String targetPackageName, int userId) throws RemoteException {
+            public List<OverlayInfo> getOverlayInfosForTarget(String targetPackageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -656,7 +700,8 @@ public interface IOverlayManager extends IInterface {
             }
 
             @Override // android.content.om.IOverlayManager
-            public OverlayInfo getOverlayInfo(String packageName, int userId) throws RemoteException {
+            public OverlayInfo getOverlayInfo(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -674,7 +719,8 @@ public interface IOverlayManager extends IInterface {
             }
 
             @Override // android.content.om.IOverlayManager
-            public OverlayInfo getOverlayInfoByIdentifier(OverlayIdentifier packageName, int userId) throws RemoteException {
+            public OverlayInfo getOverlayInfoByIdentifier(OverlayIdentifier packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -692,7 +738,8 @@ public interface IOverlayManager extends IInterface {
             }
 
             @Override // android.content.om.IOverlayManager
-            public boolean setEnabled(String packageName, boolean enable, int userId) throws RemoteException {
+            public boolean setEnabled(String packageName, boolean enable, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -711,7 +758,8 @@ public interface IOverlayManager extends IInterface {
             }
 
             @Override // android.content.om.IOverlayManager
-            public boolean setEnabledExclusive(String packageName, boolean enable, int userId) throws RemoteException {
+            public boolean setEnabledExclusive(String packageName, boolean enable, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -730,7 +778,8 @@ public interface IOverlayManager extends IInterface {
             }
 
             @Override // android.content.om.IOverlayManager
-            public boolean setEnabledExclusiveInCategory(String packageName, int userId) throws RemoteException {
+            public boolean setEnabledExclusiveInCategory(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -748,7 +797,8 @@ public interface IOverlayManager extends IInterface {
             }
 
             @Override // android.content.om.IOverlayManager
-            public boolean setPriority(String packageName, String newParentPackageName, int userId) throws RemoteException {
+            public boolean setPriority(String packageName, String newParentPackageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -767,7 +817,8 @@ public interface IOverlayManager extends IInterface {
             }
 
             @Override // android.content.om.IOverlayManager
-            public boolean setHighestPriority(String packageName, int userId) throws RemoteException {
+            public boolean setHighestPriority(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -785,7 +836,8 @@ public interface IOverlayManager extends IInterface {
             }
 
             @Override // android.content.om.IOverlayManager
-            public boolean setLowestPriority(String packageName, int userId) throws RemoteException {
+            public boolean setLowestPriority(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -819,7 +871,8 @@ public interface IOverlayManager extends IInterface {
             }
 
             @Override // android.content.om.IOverlayManager
-            public void invalidateCachesForOverlay(String packageName, int userId) throws RemoteException {
+            public void invalidateCachesForOverlay(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -882,7 +935,12 @@ public interface IOverlayManager extends IInterface {
             }
 
             @Override // android.content.om.IOverlayManager
-            public void replaceOverlays(List<OverlayInfoExt> overlaysToRemove, List<OverlayInfoExt> overlaysToAdd, ISamsungOverlayCallback callback, int ownerId) throws RemoteException {
+            public void replaceOverlays(
+                    List<OverlayInfoExt> overlaysToRemove,
+                    List<OverlayInfoExt> overlaysToAdd,
+                    ISamsungOverlayCallback callback,
+                    int ownerId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -900,7 +958,9 @@ public interface IOverlayManager extends IInterface {
             }
 
             @Override // android.content.om.IOverlayManager
-            public void addOverlays(List<OverlayInfoExt> overlays, ISamsungOverlayCallback callback, int ownerId) throws RemoteException {
+            public void addOverlays(
+                    List<OverlayInfoExt> overlays, ISamsungOverlayCallback callback, int ownerId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -917,7 +977,9 @@ public interface IOverlayManager extends IInterface {
             }
 
             @Override // android.content.om.IOverlayManager
-            public void removeOverlays(List<OverlayInfoExt> overlays, ISamsungOverlayCallback callback, int ownerId) throws RemoteException {
+            public void removeOverlays(
+                    List<OverlayInfoExt> overlays, ISamsungOverlayCallback callback, int ownerId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -934,7 +996,8 @@ public interface IOverlayManager extends IInterface {
             }
 
             @Override // android.content.om.IOverlayManager
-            public boolean changeOverlayState(String packageName, int userId, boolean enabled) throws RemoteException {
+            public boolean changeOverlayState(String packageName, int userId, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -953,7 +1016,8 @@ public interface IOverlayManager extends IInterface {
             }
 
             @Override // android.content.om.IOverlayManager
-            public OverlayInfoExt[] getAllOverlaysInCategory(int category, int userId) throws RemoteException {
+            public OverlayInfoExt[] getAllOverlaysInCategory(int category, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -962,7 +1026,8 @@ public interface IOverlayManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(20, _data, _reply, 0);
                     _reply.readException();
-                    OverlayInfoExt[] _result = (OverlayInfoExt[]) _reply.createTypedArray(OverlayInfoExt.CREATOR);
+                    OverlayInfoExt[] _result =
+                            (OverlayInfoExt[]) _reply.createTypedArray(OverlayInfoExt.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -971,7 +1036,8 @@ public interface IOverlayManager extends IInterface {
             }
 
             @Override // android.content.om.IOverlayManager
-            public OverlayInfoExt getOverlayForPath(String path, int userId) throws RemoteException {
+            public OverlayInfoExt getOverlayForPath(String path, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -980,7 +1046,8 @@ public interface IOverlayManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(21, _data, _reply, 0);
                     _reply.readException();
-                    OverlayInfoExt _result = (OverlayInfoExt) _reply.readTypedObject(OverlayInfoExt.CREATOR);
+                    OverlayInfoExt _result =
+                            (OverlayInfoExt) _reply.readTypedObject(OverlayInfoExt.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -989,7 +1056,8 @@ public interface IOverlayManager extends IInterface {
             }
 
             @Override // android.content.om.IOverlayManager
-            public OverlayInfoExt[] getOverlaysForTarget(String packageName, int category, int userId) throws RemoteException {
+            public OverlayInfoExt[] getOverlaysForTarget(
+                    String packageName, int category, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -999,7 +1067,8 @@ public interface IOverlayManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(22, _data, _reply, 0);
                     _reply.readException();
-                    OverlayInfoExt[] _result = (OverlayInfoExt[]) _reply.createTypedArray(OverlayInfoExt.CREATOR);
+                    OverlayInfoExt[] _result =
+                            (OverlayInfoExt[]) _reply.createTypedArray(OverlayInfoExt.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1008,7 +1077,9 @@ public interface IOverlayManager extends IInterface {
             }
 
             @Override // android.content.om.IOverlayManager
-            public void applyWallpaperColors(List wallpaperColors, int numColorType, int numLuminence) throws RemoteException {
+            public void applyWallpaperColors(
+                    List wallpaperColors, int numColorType, int numLuminence)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1025,7 +1096,9 @@ public interface IOverlayManager extends IInterface {
             }
 
             @Override // android.content.om.IOverlayManager
-            public void applyWallpaperColor(List wallpaperColorSS, List wallpaperColorGG, boolean isGray) throws RemoteException {
+            public void applyWallpaperColor(
+                    List wallpaperColorSS, List wallpaperColorGG, boolean isGray)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1076,7 +1149,8 @@ public interface IOverlayManager extends IInterface {
             }
 
             @Override // android.content.om.IOverlayManager
-            public boolean getLastPalette(List wallpaperColorSS, List wallpaperColorGG) throws RemoteException {
+            public boolean getLastPalette(List wallpaperColorSS, List wallpaperColorGG)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

@@ -8,15 +8,17 @@ import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Outline;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
+
 import com.android.ims.ImsConfig;
 import com.android.internal.R;
-import java.io.IOException;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 
 /* loaded from: classes.dex */
 public class LayerDrawable extends Drawable implements Drawable.Callback {
@@ -54,7 +56,8 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
             r[i].mDrawable = child;
             if (child != null) {
                 child.setCallback(this);
-                this.mLayerState.mChildrenChangingConfigurations |= child.getChangingConfigurations();
+                this.mLayerState.mChildrenChangingConfigurations |=
+                        child.getChangingConfigurations();
             }
         }
         this.mLayerState.mNumChildren = length;
@@ -84,7 +87,9 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
     }
 
     @Override // android.graphics.drawable.Drawable
-    public void inflate(Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
+    public void inflate(
+            Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         super.inflate(r, parser, attrs, theme);
         LayerState state = this.mLayerState;
         int density = Drawable.resolveDensity(r, 0);
@@ -120,7 +125,8 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
             ChildDrawable layer = array[i];
             layer.setDensity(density);
             if (layer.mThemeAttrs != null) {
-                TypedArray a2 = t.resolveAttributes(layer.mThemeAttrs, R.styleable.LayerDrawableItem);
+                TypedArray a2 =
+                        t.resolveAttributes(layer.mThemeAttrs, R.styleable.LayerDrawableItem);
                 updateLayerFromTypedArray(layer, a2);
                 a2.recycle();
             }
@@ -132,7 +138,9 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
         }
     }
 
-    private void inflateLayers(Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
+    private void inflateLayers(
+            Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         int type;
         LayerState state = this.mLayerState;
         int innerDepth = parser.getDepth() + 1;
@@ -141,21 +149,29 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
             if (type2 != 1) {
                 int depth = parser.getDepth();
                 if (depth >= innerDepth || type2 != 3) {
-                    if (type2 == 2 && depth <= innerDepth && parser.getName().equals(ImsConfig.EXTRA_CHANGED_ITEM)) {
+                    if (type2 == 2
+                            && depth <= innerDepth
+                            && parser.getName().equals(ImsConfig.EXTRA_CHANGED_ITEM)) {
                         ChildDrawable layer = new ChildDrawable(state.mDensity);
-                        TypedArray a = obtainAttributes(r, theme, attrs, R.styleable.LayerDrawableItem);
+                        TypedArray a =
+                                obtainAttributes(r, theme, attrs, R.styleable.LayerDrawableItem);
                         updateLayerFromTypedArray(layer, a);
                         a.recycle();
-                        if (layer.mDrawable == null && (layer.mThemeAttrs == null || layer.mThemeAttrs[4] == 0)) {
+                        if (layer.mDrawable == null
+                                && (layer.mThemeAttrs == null || layer.mThemeAttrs[4] == 0)) {
                             do {
                                 type = parser.next();
                             } while (type == 4);
                             if (type != 2) {
-                                throw new XmlPullParserException(parser.getPositionDescription() + ": <item> tag requires a 'drawable' attribute or child tag defining a drawable");
+                                throw new XmlPullParserException(
+                                        parser.getPositionDescription()
+                                                + ": <item> tag requires a 'drawable' attribute or"
+                                                + " child tag defining a drawable");
                             }
                             layer.mDrawable = Drawable.createFromXmlInner(r, parser, attrs, theme);
                             layer.mDrawable.setCallback(this);
-                            state.mChildrenChangingConfigurations |= layer.mDrawable.getChangingConfigurations();
+                            state.mChildrenChangingConfigurations |=
+                                    layer.mDrawable.getChangingConfigurations();
                         }
                         addLayer(layer);
                     }
@@ -296,7 +312,8 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
         return i;
     }
 
-    ChildDrawable addLayer(Drawable dr, int[] themeAttrs, int id, int left, int top, int right, int bottom) {
+    ChildDrawable addLayer(
+            Drawable dr, int[] themeAttrs, int id, int left, int top, int right, int bottom) {
         ChildDrawable childDrawable = createLayer(dr);
         childDrawable.mId = id;
         childDrawable.mThemeAttrs = themeAttrs;
@@ -599,7 +616,9 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
         if (paddingB >= 0) {
             padding.bottom = paddingB;
         }
-        return (padding.left == 0 && padding.top == 0 && padding.right == 0 && padding.bottom == 0) ? false : true;
+        return (padding.left == 0 && padding.top == 0 && padding.right == 0 && padding.bottom == 0)
+                ? false
+                : true;
     }
 
     public void setPadding(int left, int top, int right, int bottom) {
@@ -984,7 +1003,11 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
                 int i4 = insetRtlR + insetT + paddingT;
                 int insetT2 = rect.right;
                 isLayoutRtl = isLayoutRtl2;
-                container.set(insetRtlL + insetL + paddingL, i4, (insetT2 - insetR) - paddingR, (rect.bottom - insetB) - paddingB);
+                container.set(
+                        insetRtlL + insetL + paddingL,
+                        i4,
+                        (insetT2 - insetR) - paddingR,
+                        (rect.bottom - insetB) - paddingB);
                 int intrinsicW = d.getIntrinsicWidth();
                 int intrinsicH = d.getIntrinsicHeight();
                 int layerW = r.mWidth;
@@ -1010,7 +1033,8 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
         }
     }
 
-    private static int resolveGravity(int gravity, int width, int height, int intrinsicWidth, int intrinsicHeight) {
+    private static int resolveGravity(
+            int gravity, int width, int height, int intrinsicWidth, int intrinsicHeight) {
         if (!Gravity.isHorizontal(gravity)) {
             if (width < 0) {
                 gravity |= 7;
@@ -1094,7 +1118,10 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
         if (r.mDrawable != null) {
             Rect rect = this.mTmpRect;
             r.mDrawable.getPadding(rect);
-            if (rect.left != this.mPaddingL[i] || rect.top != this.mPaddingT[i] || rect.right != this.mPaddingR[i] || rect.bottom != this.mPaddingB[i]) {
+            if (rect.left != this.mPaddingL[i]
+                    || rect.top != this.mPaddingT[i]
+                    || rect.right != this.mPaddingR[i]
+                    || rect.bottom != this.mPaddingB[i]) {
                 this.mPaddingL[i] = rect.left;
                 this.mPaddingT[i] = rect.top;
                 this.mPaddingR[i] = rect.right;
@@ -1221,7 +1248,11 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
                 if (cs == null) {
                     clone = dr;
                     if (dr.getCallback() != null) {
-                        Log.w(LayerDrawable.LOG_TAG, "Invalid drawable added to LayerDrawable! Drawable already belongs to another owner but does not expose a constant state.", new RuntimeException());
+                        Log.w(
+                                LayerDrawable.LOG_TAG,
+                                "Invalid drawable added to LayerDrawable! Drawable already belongs"
+                                        + " to another owner but does not expose a constant state.",
+                                new RuntimeException());
                     }
                 } else {
                     clone = res != null ? cs.newDrawable(res) : cs.newDrawable();
@@ -1252,7 +1283,8 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
         }
 
         public boolean canApplyTheme() {
-            return this.mThemeAttrs != null || (this.mDrawable != null && this.mDrawable.canApplyTheme());
+            return this.mThemeAttrs != null
+                    || (this.mDrawable != null && this.mDrawable.canApplyTheme());
         }
 
         public final void setDensity(int targetDensity) {
@@ -1264,21 +1296,31 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
         }
 
         private void applyDensityScaling(int sourceDensity, int targetDensity) {
-            this.mInsetL = Drawable.scaleFromDensity(this.mInsetL, sourceDensity, targetDensity, false);
-            this.mInsetT = Drawable.scaleFromDensity(this.mInsetT, sourceDensity, targetDensity, false);
-            this.mInsetR = Drawable.scaleFromDensity(this.mInsetR, sourceDensity, targetDensity, false);
-            this.mInsetB = Drawable.scaleFromDensity(this.mInsetB, sourceDensity, targetDensity, false);
+            this.mInsetL =
+                    Drawable.scaleFromDensity(this.mInsetL, sourceDensity, targetDensity, false);
+            this.mInsetT =
+                    Drawable.scaleFromDensity(this.mInsetT, sourceDensity, targetDensity, false);
+            this.mInsetR =
+                    Drawable.scaleFromDensity(this.mInsetR, sourceDensity, targetDensity, false);
+            this.mInsetB =
+                    Drawable.scaleFromDensity(this.mInsetB, sourceDensity, targetDensity, false);
             if (this.mInsetS != Integer.MIN_VALUE) {
-                this.mInsetS = Drawable.scaleFromDensity(this.mInsetS, sourceDensity, targetDensity, false);
+                this.mInsetS =
+                        Drawable.scaleFromDensity(
+                                this.mInsetS, sourceDensity, targetDensity, false);
             }
             if (this.mInsetE != Integer.MIN_VALUE) {
-                this.mInsetE = Drawable.scaleFromDensity(this.mInsetE, sourceDensity, targetDensity, false);
+                this.mInsetE =
+                        Drawable.scaleFromDensity(
+                                this.mInsetE, sourceDensity, targetDensity, false);
             }
             if (this.mWidth > 0) {
-                this.mWidth = Drawable.scaleFromDensity(this.mWidth, sourceDensity, targetDensity, true);
+                this.mWidth =
+                        Drawable.scaleFromDensity(this.mWidth, sourceDensity, targetDensity, true);
             }
             if (this.mHeight > 0) {
-                this.mHeight = Drawable.scaleFromDensity(this.mHeight, sourceDensity, targetDensity, true);
+                this.mHeight =
+                        Drawable.scaleFromDensity(this.mHeight, sourceDensity, targetDensity, true);
             }
         }
     }
@@ -1364,22 +1406,34 @@ public class LayerDrawable extends Drawable implements Drawable.Callback {
 
         private void applyDensityScaling(int sourceDensity, int targetDensity) {
             if (this.mPaddingLeft > 0) {
-                this.mPaddingLeft = Drawable.scaleFromDensity(this.mPaddingLeft, sourceDensity, targetDensity, false);
+                this.mPaddingLeft =
+                        Drawable.scaleFromDensity(
+                                this.mPaddingLeft, sourceDensity, targetDensity, false);
             }
             if (this.mPaddingTop > 0) {
-                this.mPaddingTop = Drawable.scaleFromDensity(this.mPaddingTop, sourceDensity, targetDensity, false);
+                this.mPaddingTop =
+                        Drawable.scaleFromDensity(
+                                this.mPaddingTop, sourceDensity, targetDensity, false);
             }
             if (this.mPaddingRight > 0) {
-                this.mPaddingRight = Drawable.scaleFromDensity(this.mPaddingRight, sourceDensity, targetDensity, false);
+                this.mPaddingRight =
+                        Drawable.scaleFromDensity(
+                                this.mPaddingRight, sourceDensity, targetDensity, false);
             }
             if (this.mPaddingBottom > 0) {
-                this.mPaddingBottom = Drawable.scaleFromDensity(this.mPaddingBottom, sourceDensity, targetDensity, false);
+                this.mPaddingBottom =
+                        Drawable.scaleFromDensity(
+                                this.mPaddingBottom, sourceDensity, targetDensity, false);
             }
             if (this.mPaddingStart > 0) {
-                this.mPaddingStart = Drawable.scaleFromDensity(this.mPaddingStart, sourceDensity, targetDensity, false);
+                this.mPaddingStart =
+                        Drawable.scaleFromDensity(
+                                this.mPaddingStart, sourceDensity, targetDensity, false);
             }
             if (this.mPaddingEnd > 0) {
-                this.mPaddingEnd = Drawable.scaleFromDensity(this.mPaddingEnd, sourceDensity, targetDensity, false);
+                this.mPaddingEnd =
+                        Drawable.scaleFromDensity(
+                                this.mPaddingEnd, sourceDensity, targetDensity, false);
             }
         }
 

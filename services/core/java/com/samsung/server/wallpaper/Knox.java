@@ -16,11 +16,25 @@ public final class Knox {
 
     public final boolean isWallpaperChangeAllowed() {
         boolean z = true;
-        Cursor query = this.mContext.getContentResolver().query(Uri.parse("content://com.sec.knox.provider/RestrictionPolicy4"), null, "isWallpaperChangeAllowed", new String[]{"true"}, null);
+        Cursor query =
+                this.mContext
+                        .getContentResolver()
+                        .query(
+                                Uri.parse("content://com.sec.knox.provider/RestrictionPolicy4"),
+                                null,
+                                "isWallpaperChangeAllowed",
+                                new String[] {"true"},
+                                null);
         if (query != null) {
             try {
                 query.moveToFirst();
-                z = true ^ "false".equals(query.getString(query.getColumnIndex("isWallpaperChangeAllowed")));
+                z =
+                        true
+                                ^ "false"
+                                        .equals(
+                                                query.getString(
+                                                        query.getColumnIndex(
+                                                                "isWallpaperChangeAllowed")));
             } catch (Exception unused) {
             } catch (Throwable th) {
                 query.close();

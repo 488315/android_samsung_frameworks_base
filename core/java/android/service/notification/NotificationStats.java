@@ -4,25 +4,29 @@ import android.annotation.SystemApi;
 import android.app.Flags;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class NotificationStats implements Parcelable {
-    public static final Parcelable.Creator<NotificationStats> CREATOR = new Parcelable.Creator<NotificationStats>() { // from class: android.service.notification.NotificationStats.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NotificationStats createFromParcel(Parcel in) {
-            return new NotificationStats(in);
-        }
+    public static final Parcelable.Creator<NotificationStats> CREATOR =
+            new Parcelable.Creator<
+                    NotificationStats>() { // from class:
+                                           // android.service.notification.NotificationStats.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NotificationStats createFromParcel(Parcel in) {
+                    return new NotificationStats(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NotificationStats[] newArray(int size) {
-            return new NotificationStats[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NotificationStats[] newArray(int size) {
+                    return new NotificationStats[size];
+                }
+            };
     public static final int DISMISSAL_AOD = 2;
     public static final int DISMISSAL_BUBBLE = 4;
     public static final int DISMISSAL_LOCKSCREEN = 5;
@@ -45,12 +49,10 @@ public final class NotificationStats implements Parcelable {
     private boolean mViewedSettings;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DismissalSentiment {
-    }
+    public @interface DismissalSentiment {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DismissalSurface {
-    }
+    public @interface DismissalSurface {}
 
     public NotificationStats() {
         this.mDismissalSurface = -1;
@@ -175,21 +177,33 @@ public final class NotificationStats implements Parcelable {
             return false;
         }
         NotificationStats that = (NotificationStats) o;
-        if (this.mSeen != that.mSeen || this.mExpanded != that.mExpanded || this.mDirectReplied != that.mDirectReplied) {
+        if (this.mSeen != that.mSeen
+                || this.mExpanded != that.mExpanded
+                || this.mDirectReplied != that.mDirectReplied) {
             return false;
         }
-        if ((!Flags.lifetimeExtensionRefactor() || this.mSmartReplied == that.mSmartReplied) && this.mSnoozed == that.mSnoozed && this.mViewedSettings == that.mViewedSettings && this.mInteracted == that.mInteracted && this.mDismissalSurface == that.mDismissalSurface) {
+        if ((!Flags.lifetimeExtensionRefactor() || this.mSmartReplied == that.mSmartReplied)
+                && this.mSnoozed == that.mSnoozed
+                && this.mViewedSettings == that.mViewedSettings
+                && this.mInteracted == that.mInteracted
+                && this.mDismissalSurface == that.mDismissalSurface) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        int i = ((((this.mSeen ? 1 : 0) * 31) + (this.mExpanded ? 1 : 0)) * 31) + (this.mDirectReplied ? 1 : 0);
+        int i =
+                ((((this.mSeen ? 1 : 0) * 31) + (this.mExpanded ? 1 : 0)) * 31)
+                        + (this.mDirectReplied ? 1 : 0);
         if (Flags.lifetimeExtensionRefactor()) {
             i = (i * 31) + (this.mSmartReplied ? 1 : 0);
         }
-        return (((((((i * 31) + (this.mSnoozed ? 1 : 0)) * 31) + (this.mViewedSettings ? 1 : 0)) * 31) + (this.mInteracted ? 1 : 0)) * 31) + this.mDismissalSurface;
+        return (((((((i * 31) + (this.mSnoozed ? 1 : 0)) * 31) + (this.mViewedSettings ? 1 : 0))
+                                        * 31)
+                                + (this.mInteracted ? 1 : 0))
+                        * 31)
+                + this.mDismissalSurface;
     }
 
     public String toString() {

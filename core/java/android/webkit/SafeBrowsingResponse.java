@@ -9,6 +9,5 @@ public abstract class SafeBrowsingResponse {
     public abstract void showInterstitial(boolean z);
 
     @Deprecated
-    public SafeBrowsingResponse() {
-    }
+    public SafeBrowsingResponse() {}
 }

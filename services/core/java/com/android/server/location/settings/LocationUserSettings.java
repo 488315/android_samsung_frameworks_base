@@ -15,7 +15,9 @@ public final class LocationUserSettings {
         if (this == obj) {
             return true;
         }
-        return (obj instanceof LocationUserSettings) && this.mAdasGnssLocationEnabled == ((LocationUserSettings) obj).mAdasGnssLocationEnabled;
+        return (obj instanceof LocationUserSettings)
+                && this.mAdasGnssLocationEnabled
+                        == ((LocationUserSettings) obj).mAdasGnssLocationEnabled;
     }
 
     public final int hashCode() {

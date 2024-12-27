@@ -9,7 +9,7 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SimpleMonthView;
+
 import com.android.internal.widget.PagerAdapter;
 
 /* loaded from: classes4.dex */
@@ -31,17 +31,20 @@ class DayPickerPagerAdapter extends PagerAdapter {
     private final Calendar mMaxDate = Calendar.getInstance();
     private final SparseArray<ViewHolder> mItems = new SparseArray<>();
     private Calendar mSelectedDay = null;
-    private final SimpleMonthView.OnDayClickListener mOnDayClickListener = new SimpleMonthView.OnDayClickListener() { // from class: android.widget.DayPickerPagerAdapter.1
-        @Override // android.widget.SimpleMonthView.OnDayClickListener
-        public void onDayClick(SimpleMonthView view, Calendar day) {
-            if (day != null) {
-                DayPickerPagerAdapter.this.setSelectedDay(day);
-                if (DayPickerPagerAdapter.this.mOnDaySelectedListener != null) {
-                    DayPickerPagerAdapter.this.mOnDaySelectedListener.onDaySelected(DayPickerPagerAdapter.this, day);
+    private final SimpleMonthView.OnDayClickListener mOnDayClickListener =
+            new SimpleMonthView
+                    .OnDayClickListener() { // from class: android.widget.DayPickerPagerAdapter.1
+                @Override // android.widget.SimpleMonthView.OnDayClickListener
+                public void onDayClick(SimpleMonthView view, Calendar day) {
+                    if (day != null) {
+                        DayPickerPagerAdapter.this.setSelectedDay(day);
+                        if (DayPickerPagerAdapter.this.mOnDaySelectedListener != null) {
+                            DayPickerPagerAdapter.this.mOnDaySelectedListener.onDaySelected(
+                                    DayPickerPagerAdapter.this, day);
+                        }
+                    }
                 }
-            }
-        }
-    };
+            };
 
     public interface OnDaySelectedListener {
         void onDaySelected(DayPickerPagerAdapter dayPickerPagerAdapter, Calendar calendar);
@@ -51,7 +54,7 @@ class DayPickerPagerAdapter extends PagerAdapter {
         this.mInflater = LayoutInflater.from(context);
         this.mLayoutResId = layoutResId;
         this.mCalendarViewId = calendarViewId;
-        TypedArray ta = context.obtainStyledAttributes(new int[]{16843820});
+        TypedArray ta = context.obtainStyledAttributes(new int[] {16843820});
         this.mDayHighlightColor = ta.getColorStateList(0);
         ta.recycle();
     }
@@ -93,7 +96,9 @@ class DayPickerPagerAdapter extends PagerAdapter {
         ViewHolder oldMonthView;
         int oldPosition = getPositionForDay(this.mSelectedDay);
         int newPosition = getPositionForDay(day);
-        if (oldPosition != newPosition && oldPosition >= 0 && (oldMonthView = this.mItems.get(oldPosition, null)) != null) {
+        if (oldPosition != newPosition
+                && oldPosition >= 0
+                && (oldMonthView = this.mItems.get(oldPosition, null)) != null) {
             oldMonthView.calendar.setSelectedDay(-1);
         }
         if (newPosition >= 0 && (newMonthView = this.mItems.get(newPosition, null)) != null) {
@@ -194,7 +199,9 @@ class DayPickerPagerAdapter extends PagerAdapter {
         }
         int month = getMonthForPosition(position);
         int year = getYearForPosition(position);
-        if (this.mSelectedDay != null && this.mSelectedDay.get(2) == month && this.mSelectedDay.get(1) == year) {
+        if (this.mSelectedDay != null
+                && this.mSelectedDay.get(2) == month
+                && this.mSelectedDay.get(1) == year) {
             selectedDay = this.mSelectedDay.get(5);
         } else {
             selectedDay = -1;
@@ -209,7 +216,13 @@ class DayPickerPagerAdapter extends PagerAdapter {
         } else {
             enabledDayRangeEnd = 31;
         }
-        v.setMonthParams(selectedDay, month, year, this.mFirstDayOfWeek, enabledDayRangeStart, enabledDayRangeEnd);
+        v.setMonthParams(
+                selectedDay,
+                month,
+                year,
+                this.mFirstDayOfWeek,
+                enabledDayRangeStart,
+                enabledDayRangeEnd);
         ViewHolder holder = new ViewHolder(position, itemView, v);
         this.mItems.put(position, holder);
         container.addView(itemView);

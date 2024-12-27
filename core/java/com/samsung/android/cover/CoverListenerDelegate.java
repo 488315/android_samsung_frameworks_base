@@ -6,8 +6,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
 import android.util.Log;
-import com.samsung.android.cover.CoverManager;
-import com.samsung.android.cover.ICoverManagerCallback;
 
 /* loaded from: classes6.dex */
 class CoverListenerDelegate extends ICoverManagerCallback.Stub {

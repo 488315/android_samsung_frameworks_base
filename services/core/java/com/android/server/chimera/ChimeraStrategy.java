@@ -4,12 +4,14 @@ import android.net.util.NetworkConstants;
 import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.RCPManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -28,8 +30,46 @@ public final class ChimeraStrategy {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class DefaultParameters {
-        public static final int[][] sParameters = {new int[]{2, 485, 5, 3, 885, 100, 400, 500, 600}, new int[]{3, 614, 7, 6, 1098, 150, 400, 500, 1000}, new int[]{4, 630, 11, 8, 1406, 300, 400, 500, NetworkConstants.ETHER_MTU}, new int[]{6, 1100, 19, 9, 2034, 350, 600, 500, 2048}, new int[]{8, 2150, 24, 10, 2550, 400, 600, 1024, 2480}, new int[]{12, 2457, 28, 14, 2857, 500, 1024, FrameworkStatsLog.APP_STANDBY_BUCKET_CHANGED__MAIN_REASON__MAIN_FORCED_BY_SYSTEM, 4096}, new int[]{16, 2457, 28, 14, 2857, 600, 1024, FrameworkStatsLog.APP_STANDBY_BUCKET_CHANGED__MAIN_REASON__MAIN_FORCED_BY_SYSTEM, 6144}, new int[]{-1, -1, -1, -1, -1, -1}};
-        public static final float[][] sDynamicParameters = {new float[]{2.0f, 3.0f, 5.0f}, new float[]{3.0f, 3.0f, 7.0f}, new float[]{4.0f, 6.0f, 10.0f}, new float[]{6.0f, 7.0f, 13.0f}, new float[]{8.0f, 8.0f, 16.0f}, new float[]{12.0f, 14.0f, 16.0f}, new float[]{16.0f, 14.0f, 17.0f}, new float[]{-1.0f, -1.0f, -1.0f}};
+        public static final int[][] sParameters = {
+            new int[] {2, 485, 5, 3, 885, 100, 400, 500, 600},
+            new int[] {3, 614, 7, 6, 1098, 150, 400, 500, 1000},
+            new int[] {4, 630, 11, 8, 1406, 300, 400, 500, NetworkConstants.ETHER_MTU},
+            new int[] {6, 1100, 19, 9, 2034, 350, 600, 500, 2048},
+            new int[] {8, 2150, 24, 10, 2550, 400, 600, 1024, 2480},
+            new int[] {
+                12,
+                2457,
+                28,
+                14,
+                2857,
+                500,
+                1024,
+                FrameworkStatsLog.APP_STANDBY_BUCKET_CHANGED__MAIN_REASON__MAIN_FORCED_BY_SYSTEM,
+                4096
+            },
+            new int[] {
+                16,
+                2457,
+                28,
+                14,
+                2857,
+                600,
+                1024,
+                FrameworkStatsLog.APP_STANDBY_BUCKET_CHANGED__MAIN_REASON__MAIN_FORCED_BY_SYSTEM,
+                6144
+            },
+            new int[] {-1, -1, -1, -1, -1, -1}
+        };
+        public static final float[][] sDynamicParameters = {
+            new float[] {2.0f, 3.0f, 5.0f},
+            new float[] {3.0f, 3.0f, 7.0f},
+            new float[] {4.0f, 6.0f, 10.0f},
+            new float[] {6.0f, 7.0f, 13.0f},
+            new float[] {8.0f, 8.0f, 16.0f},
+            new float[] {12.0f, 14.0f, 16.0f},
+            new float[] {16.0f, 14.0f, 17.0f},
+            new float[] {-1.0f, -1.0f, -1.0f}
+        };
     }
 
     public ChimeraStrategy(SystemRepository systemRepository, SettingRepository settingRepository) {
@@ -66,7 +106,8 @@ public final class ChimeraStrategy {
             String format = String.format("ro.slmk.chimera_strategy_%dgb", Integer.valueOf(i));
             String str = SystemProperties.get(format, "");
             systemRepository2.getClass();
-            SystemRepository.logDebug("ChimeraStrategy", "updateDefaultParameters > " + format + " : " + str);
+            SystemRepository.logDebug(
+                    "ChimeraStrategy", "updateDefaultParameters > " + format + " : " + str);
             if (!TextUtils.isEmpty(str)) {
                 String[] split = str.split(",");
                 if (split.length > 3) {
@@ -74,7 +115,10 @@ public final class ChimeraStrategy {
                         try {
                             iArr[i9][i10] = Integer.parseInt(split[i10 - 1].trim());
                         } catch (Exception e) {
-                            RCPManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Error while updating default : "), "ChimeraStrategy");
+                            RCPManagerService$$ExternalSyntheticOutline0.m(
+                                    e,
+                                    new StringBuilder("Error while updating default : "),
+                                    "ChimeraStrategy");
                         }
                     }
                 } else {
@@ -113,7 +157,8 @@ public final class ChimeraStrategy {
                 i13++;
             }
         }
-        this.mProtectedCountOnLmkdTrigger = SystemProperties.getInt("persist.config.chimera.protected_count_on_lmkd", i4);
+        this.mProtectedCountOnLmkdTrigger =
+                SystemProperties.getInt("persist.config.chimera.protected_count_on_lmkd", i4);
         int i15 = 0;
         while (true) {
             int[] iArr4 = iArr[i15];
@@ -214,7 +259,9 @@ public final class ChimeraStrategy {
             i25++;
         }
         this.mAlwaysRunningProcessQuota = i2;
-        StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(ramSizeGb, "ChimeraStrategy() - ramSizeGb: ", " mMemFreeTarget: ");
+        StringBuilder m =
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        ramSizeGb, "ChimeraStrategy() - ramSizeGb: ", " mMemFreeTarget: ");
         m.append(this.mMemFreeTarget);
         m.append(" mProtectedCountOnLmkdTrigger: ");
         m.append(this.mProtectedCountOnLmkdTrigger);
@@ -236,6 +283,17 @@ public final class ChimeraStrategy {
     }
 
     public final void dumpInfo(PrintWriter printWriter) {
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("MemFreeTarget: "), this.mMemFreeTarget, printWriter, "ProtectedCountOnLmkdTrigger: "), this.mProtectedCountOnLmkdTrigger, printWriter, "ProtectedCountOnHomeTrigger: "), this.mProtectedCountOnHomeTrigger, printWriter);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("MemFreeTarget: "),
+                                this.mMemFreeTarget,
+                                printWriter,
+                                "ProtectedCountOnLmkdTrigger: "),
+                        this.mProtectedCountOnLmkdTrigger,
+                        printWriter,
+                        "ProtectedCountOnHomeTrigger: "),
+                this.mProtectedCountOnHomeTrigger,
+                printWriter);
     }
 }

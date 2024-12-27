@@ -17,13 +17,15 @@ import android.view.inputmethod.CursorAnchorInfo;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.ExtractedText;
 import android.view.inputmethod.InputMethodSession;
+
 import com.android.internal.inputmethod.IInputMethodSession;
 import com.android.internal.inputmethod.IRemoteInputConnection;
 import com.android.internal.os.HandlerCaller;
 import com.android.internal.os.SomeArgs;
 
 /* loaded from: classes2.dex */
-class IInputMethodSessionWrapper extends IInputMethodSession.Stub implements HandlerCaller.Callback {
+class IInputMethodSessionWrapper extends IInputMethodSession.Stub
+        implements HandlerCaller.Callback {
     private static final int DO_APP_PRIVATE_COMMAND = 100;
     private static final int DO_DISPLAY_COMPLETIONS = 65;
     private static final int DO_FINISH_INPUT = 140;
@@ -41,7 +43,8 @@ class IInputMethodSessionWrapper extends IInputMethodSession.Stub implements Han
     InputMethodSession mInputMethodSession;
     ImeInputEventReceiver mReceiver;
 
-    public IInputMethodSessionWrapper(Context context, InputMethodSession inputMethodSession, InputChannel channel) {
+    public IInputMethodSessionWrapper(
+            Context context, InputMethodSession inputMethodSession, InputChannel channel) {
         this.mCaller = new HandlerCaller(context, null, this, true);
         this.mInputMethodSession = inputMethodSession;
         this.mChannel = channel;
@@ -76,7 +79,8 @@ class IInputMethodSessionWrapper extends IInputMethodSession.Stub implements Han
                 return;
             case 90:
                 args = (SomeArgs) msg.obj;
-                this.mInputMethodSession.updateSelection(args.argi1, args.argi2, args.argi3, args.argi4, args.argi5, args.argi6);
+                this.mInputMethodSession.updateSelection(
+                        args.argi1, args.argi2, args.argi3, args.argi4, args.argi5, args.argi6);
                 return;
             case 95:
                 this.mInputMethodSession.updateCursor((Rect) msg.obj);
@@ -103,7 +107,8 @@ class IInputMethodSessionWrapper extends IInputMethodSession.Stub implements Han
             case 150:
                 args = (SomeArgs) msg.obj;
                 try {
-                    this.mInputMethodSession.invalidateInputInternal((EditorInfo) args.arg1, (IRemoteInputConnection) args.arg2, msg.arg1);
+                    this.mInputMethodSession.invalidateInputInternal(
+                            (EditorInfo) args.arg1, (IRemoteInputConnection) args.arg2, msg.arg1);
                     return;
                 } finally {
                     args.recycle();
@@ -137,8 +142,22 @@ class IInputMethodSessionWrapper extends IInputMethodSession.Stub implements Han
     }
 
     @Override // com.android.internal.inputmethod.IInputMethodSession
-    public void updateSelection(int oldSelStart, int oldSelEnd, int newSelStart, int newSelEnd, int candidatesStart, int candidatesEnd) {
-        this.mCaller.executeOrSendMessage(this.mCaller.obtainMessageIIIIII(90, oldSelStart, oldSelEnd, newSelStart, newSelEnd, candidatesStart, candidatesEnd));
+    public void updateSelection(
+            int oldSelStart,
+            int oldSelEnd,
+            int newSelStart,
+            int newSelEnd,
+            int candidatesStart,
+            int candidatesEnd) {
+        this.mCaller.executeOrSendMessage(
+                this.mCaller.obtainMessageIIIIII(
+                        90,
+                        oldSelStart,
+                        oldSelEnd,
+                        newSelStart,
+                        newSelEnd,
+                        candidatesStart,
+                        candidatesEnd));
     }
 
     @Override // com.android.internal.inputmethod.IInputMethodSession
@@ -172,8 +191,10 @@ class IInputMethodSessionWrapper extends IInputMethodSession.Stub implements Han
     }
 
     @Override // com.android.internal.inputmethod.IInputMethodSession
-    public void invalidateInput(EditorInfo editorInfo, IRemoteInputConnection inputConnection, int sessionId) {
-        this.mCaller.executeOrSendMessage(this.mCaller.obtainMessageIOO(150, sessionId, editorInfo, inputConnection));
+    public void invalidateInput(
+            EditorInfo editorInfo, IRemoteInputConnection inputConnection, int sessionId) {
+        this.mCaller.executeOrSendMessage(
+                this.mCaller.obtainMessageIOO(150, sessionId, editorInfo, inputConnection));
     }
 
     @Override // com.android.internal.inputmethod.IInputMethodSession
@@ -181,7 +202,8 @@ class IInputMethodSessionWrapper extends IInputMethodSession.Stub implements Han
         this.mCaller.executeOrSendMessage(this.mCaller.obtainMessage(140));
     }
 
-    private final class ImeInputEventReceiver extends InputEventReceiver implements InputMethodSession.EventCallback {
+    private final class ImeInputEventReceiver extends InputEventReceiver
+            implements InputMethodSession.EventCallback {
         private final SparseArray<InputEvent> mPendingEvents;
 
         public ImeInputEventReceiver(InputChannel inputChannel, Looper looper) {
@@ -199,14 +221,17 @@ class IInputMethodSessionWrapper extends IInputMethodSession.Stub implements Han
             this.mPendingEvents.put(seq, event);
             if (event instanceof KeyEvent) {
                 KeyEvent keyEvent = (KeyEvent) event;
-                IInputMethodSessionWrapper.this.mInputMethodSession.dispatchKeyEvent(seq, keyEvent, this);
+                IInputMethodSessionWrapper.this.mInputMethodSession.dispatchKeyEvent(
+                        seq, keyEvent, this);
                 return;
             }
             MotionEvent motionEvent = (MotionEvent) event;
             if (motionEvent.isFromSource(4)) {
-                IInputMethodSessionWrapper.this.mInputMethodSession.dispatchTrackballEvent(seq, motionEvent, this);
+                IInputMethodSessionWrapper.this.mInputMethodSession.dispatchTrackballEvent(
+                        seq, motionEvent, this);
             } else {
-                IInputMethodSessionWrapper.this.mInputMethodSession.dispatchGenericMotionEvent(seq, motionEvent, this);
+                IInputMethodSessionWrapper.this.mInputMethodSession.dispatchGenericMotionEvent(
+                        seq, motionEvent, this);
             }
         }
 

@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.RemoteException;
+
 import com.android.internal.inputmethod.IInputContentUriToken;
 import com.android.server.LocalServices;
 import com.android.server.uri.UriGrantsManagerInternal;
@@ -33,7 +34,7 @@ public final class InputContentUriTokenHandler extends IInputContentUriToken.Stu
         try {
             release();
         } finally {
-            super/*java.lang.Object*/.finalize();
+            super /*java.lang.Object*/.finalize();
         }
     }
 
@@ -43,7 +44,11 @@ public final class InputContentUriTokenHandler extends IInputContentUriToken.Stu
                 return;
             }
             try {
-                ((UriGrantsManagerService.LocalService) ((UriGrantsManagerInternal) LocalServices.getService(UriGrantsManagerInternal.class))).revokeUriPermissionFromOwner(this.mPermissionOwnerToken, this.mUri, 1, this.mSourceUserId);
+                ((UriGrantsManagerService.LocalService)
+                                ((UriGrantsManagerInternal)
+                                        LocalServices.getService(UriGrantsManagerInternal.class)))
+                        .revokeUriPermissionFromOwner(
+                                this.mPermissionOwnerToken, this.mUri, 1, this.mSourceUserId);
             } finally {
                 this.mPermissionOwnerToken = null;
             }
@@ -56,12 +61,25 @@ public final class InputContentUriTokenHandler extends IInputContentUriToken.Stu
                 if (this.mPermissionOwnerToken != null) {
                     return;
                 }
-                IBinder newUriPermissionOwner = ((UriGrantsManagerService.LocalService) ((UriGrantsManagerInternal) LocalServices.getService(UriGrantsManagerInternal.class))).newUriPermissionOwner("InputContentUriTokenHandler");
+                IBinder newUriPermissionOwner =
+                        ((UriGrantsManagerService.LocalService)
+                                        ((UriGrantsManagerInternal)
+                                                LocalServices.getService(
+                                                        UriGrantsManagerInternal.class)))
+                                .newUriPermissionOwner("InputContentUriTokenHandler");
                 this.mPermissionOwnerToken = newUriPermissionOwner;
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     try {
-                        UriGrantsManager.getService().grantUriPermissionFromOwner(newUriPermissionOwner, this.mSourceUid, this.mTargetPackage, this.mUri, 1, this.mSourceUserId, this.mTargetUserId);
+                        UriGrantsManager.getService()
+                                .grantUriPermissionFromOwner(
+                                        newUriPermissionOwner,
+                                        this.mSourceUid,
+                                        this.mTargetPackage,
+                                        this.mUri,
+                                        1,
+                                        this.mSourceUserId,
+                                        this.mTargetUserId);
                     } catch (RemoteException e) {
                         e.rethrowFromSystemServer();
                     }

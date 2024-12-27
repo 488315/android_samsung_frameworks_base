@@ -11,6 +11,7 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -29,7 +30,9 @@ public interface IWeaver extends IBase {
 
         @Override // android.hidl.base.V1_0.IBase
         public final void debug(NativeHandle nativeHandle, ArrayList arrayList) {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IBase.kInterfaceName, nativeHandle, arrayList);
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            IBase.kInterfaceName, nativeHandle, arrayList);
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(256131655, m, hwParcel, 0);
@@ -71,7 +74,8 @@ public interface IWeaver extends IBase {
                 ArrayList arrayList = new ArrayList();
                 HwBlob readBuffer = hwParcel.readBuffer(16L);
                 int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob readEmbeddedBuffer =
+                        hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
@@ -164,7 +168,8 @@ public interface IWeaver extends IBase {
                 HwBlob readBuffer = hwParcel2.readBuffer(24L);
                 weaverReadResponse.timeout = readBuffer.getInt32(0L);
                 int int32 = readBuffer.getInt32(16L);
-                HwBlob readEmbeddedBuffer = hwParcel2.readEmbeddedBuffer(int32, readBuffer.handle(), 8L, true);
+                HwBlob readEmbeddedBuffer =
+                        hwParcel2.readEmbeddedBuffer(int32, readBuffer.handle(), 8L, true);
                 arrayList2.clear();
                 for (int i2 = 0; i2 < int32; i2++) {
                     weaverReadResponse.value.add(Byte.valueOf(readEmbeddedBuffer.getInt8(i2)));
@@ -207,11 +212,13 @@ public interface IWeaver extends IBase {
     }
 
     static IWeaver getService(boolean z) {
-        IHwBinder service = HwBinder.getService("android.hardware.weaver@1.0::IWeaver", "default", z);
+        IHwBinder service =
+                HwBinder.getService("android.hardware.weaver@1.0::IWeaver", "default", z);
         if (service == null) {
             return null;
         }
-        IHwInterface queryLocalInterface = service.queryLocalInterface("android.hardware.weaver@1.0::IWeaver");
+        IHwInterface queryLocalInterface =
+                service.queryLocalInterface("android.hardware.weaver@1.0::IWeaver");
         if (queryLocalInterface != null && (queryLocalInterface instanceof IWeaver)) {
             return (IWeaver) queryLocalInterface;
         }

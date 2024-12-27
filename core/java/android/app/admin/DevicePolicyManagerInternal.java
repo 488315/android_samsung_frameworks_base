@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.UserHandle;
 import android.os.UserManager;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -14,9 +15,12 @@ public abstract class DevicePolicyManagerInternal {
         void onCrossProfileWidgetProvidersChanged(int i, List<String> list);
     }
 
-    public abstract void addOnCrossProfileWidgetProvidersChangeListener(OnCrossProfileWidgetProvidersChangeListener onCrossProfileWidgetProvidersChangeListener);
+    public abstract void addOnCrossProfileWidgetProvidersChangeListener(
+            OnCrossProfileWidgetProvidersChangeListener
+                    onCrossProfileWidgetProvidersChangeListener);
 
-    public abstract void broadcastIntentToManifestReceivers(Intent intent, UserHandle userHandle, boolean z);
+    public abstract void broadcastIntentToManifestReceivers(
+            Intent intent, UserHandle userHandle, boolean z);
 
     public abstract boolean canSilentlyInstallPackage(String str, int i);
 
@@ -51,7 +55,8 @@ public abstract class DevicePolicyManagerInternal {
 
     public abstract ComponentName getProfileOwnerAsUser(int i);
 
-    public abstract ComponentName getProfileOwnerOrDeviceOwnerSupervisionComponent(UserHandle userHandle);
+    public abstract ComponentName getProfileOwnerOrDeviceOwnerSupervisionComponent(
+            UserHandle userHandle);
 
     public abstract List<UserManager.EnforcingUser> getUserRestrictionSources(String str, int i);
 
@@ -75,9 +80,11 @@ public abstract class DevicePolicyManagerInternal {
 
     public abstract void resetOp(int i, String str, int i2);
 
-    public abstract void setMinimumRequiredWifiSecurityLevel(ComponentName componentName, int i, int i2);
+    public abstract void setMinimumRequiredWifiSecurityLevel(
+            ComponentName componentName, int i, int i2);
 
-    public abstract void setWifiSsidPolicy(ComponentName componentName, WifiSsidPolicy wifiSsidPolicy, int i);
+    public abstract void setWifiSsidPolicy(
+            ComponentName componentName, WifiSsidPolicy wifiSsidPolicy, int i);
 
     public abstract boolean supportsResetOp(int i);
 }

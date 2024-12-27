@@ -1,7 +1,9 @@
 package com.samsung.android.knox.dar.ddar.securesession;
 
 import android.security.keystore.KeyProperties;
+
 import com.samsung.android.security.mdf.MdfUtils;
+
 import java.nio.charset.StandardCharsets;
 import java.security.KeyFactory;
 import java.security.KeyPair;
@@ -13,6 +15,7 @@ import java.security.Security;
 import java.security.spec.ECGenParameterSpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Arrays;
+
 import javax.crypto.Cipher;
 import javax.crypto.KeyAgreement;
 import javax.crypto.SecretKey;
@@ -24,8 +27,7 @@ class SecureSessionManager {
     private static final String CRYPTO_PROVIDER = "AndroidOpenSSL";
     private static final SecureRandom sSecureRandom = new SecureRandom();
 
-    SecureSessionManager() {
-    }
+    SecureSessionManager() {}
 
     static class PrivateSessionEndpoint {
         private PrivateKey privateKey;
@@ -64,7 +66,9 @@ class SecureSessionManager {
         }
 
         private KeyPair createKeyPair() throws Exception {
-            KeyPairGenerator generator = KeyPairGenerator.getInstance(KeyProperties.KEY_ALGORITHM_EC, SecureSessionManager.CRYPTO_PROVIDER);
+            KeyPairGenerator generator =
+                    KeyPairGenerator.getInstance(
+                            KeyProperties.KEY_ALGORITHM_EC, SecureSessionManager.CRYPTO_PROVIDER);
             generator.initialize(new ECGenParameterSpec("secp521r1"));
             return generator.generateKeyPair();
         }
@@ -93,7 +97,9 @@ class SecureSessionManager {
         private PublicKey createPublicKey(String publicKeyString) throws Exception {
             byte[] publicKey = Util.fromHexString(publicKeyString);
             X509EncodedKeySpec pubKeySpec = new X509EncodedKeySpec(publicKey);
-            KeyFactory keyFactory = KeyFactory.getInstance(KeyProperties.KEY_ALGORITHM_EC, SecureSessionManager.CRYPTO_PROVIDER);
+            KeyFactory keyFactory =
+                    KeyFactory.getInstance(
+                            KeyProperties.KEY_ALGORITHM_EC, SecureSessionManager.CRYPTO_PROVIDER);
             PublicKey pubKey = keyFactory.generatePublic(pubKeySpec);
             return pubKey;
         }
@@ -105,14 +111,18 @@ class SecureSessionManager {
         private SecretKey sessionKey;
         private byte[] xorMask;
 
-        SecureSession(PrivateSessionEndpoint privSessionEndPoint, PublicSessionEndpoint pubSessionEndPoint) throws Exception {
+        SecureSession(
+                PrivateSessionEndpoint privSessionEndPoint,
+                PublicSessionEndpoint pubSessionEndPoint)
+                throws Exception {
             this.privateSessionEndpoint = privSessionEndPoint;
             this.publicSessionEndpoint = pubSessionEndPoint;
             generateSessionKey();
         }
 
         private void generateSessionKey() throws Exception {
-            KeyAgreement agreement = KeyAgreement.getInstance("ECDH", SecureSessionManager.CRYPTO_PROVIDER);
+            KeyAgreement agreement =
+                    KeyAgreement.getInstance("ECDH", SecureSessionManager.CRYPTO_PROVIDER);
             agreement.init(this.privateSessionEndpoint.getPrivateKey());
             agreement.doPhase(this.publicSessionEndpoint.getPublicKey(), true);
             byte[] fullKey = agreement.generateSecret();
@@ -178,13 +188,19 @@ class SecureSessionManager {
 
         private byte[] encrypt(byte[] iv, byte[] plaintext) throws Exception {
             applyXorMask(plaintext);
-            Cipher cipher = Cipher.getInstance(MdfUtils.MDF_CIPHER_MODE, Security.getProvider(SecureSessionManager.CRYPTO_PROVIDER));
+            Cipher cipher =
+                    Cipher.getInstance(
+                            MdfUtils.MDF_CIPHER_MODE,
+                            Security.getProvider(SecureSessionManager.CRYPTO_PROVIDER));
             cipher.init(1, this.sessionKey, new IvParameterSpec(iv));
             return cipher.doFinal(plaintext);
         }
 
         private byte[] decrypt(byte[] iv, byte[] ciphertext) throws Exception {
-            Cipher cipher = Cipher.getInstance(MdfUtils.MDF_CIPHER_MODE, Security.getProvider(SecureSessionManager.CRYPTO_PROVIDER));
+            Cipher cipher =
+                    Cipher.getInstance(
+                            MdfUtils.MDF_CIPHER_MODE,
+                            Security.getProvider(SecureSessionManager.CRYPTO_PROVIDER));
             cipher.init(2, this.sessionKey, new IvParameterSpec(iv));
             byte[] plaintext = cipher.doFinal(ciphertext);
             applyXorMask(plaintext);

@@ -4,6 +4,7 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Bundle;
 import android.provider.Telephony;
 import android.telephony.CellLocation;
+
 import com.android.internal.telephony.SemTelephonyUtils;
 
 @Deprecated
@@ -60,7 +61,10 @@ public class GsmCellLocation extends CellLocation {
     public boolean equals(Object o) {
         try {
             GsmCellLocation s = (GsmCellLocation) o;
-            return o != null && equalsHandlesNulls(Integer.valueOf(this.mLac), Integer.valueOf(s.mLac)) && equalsHandlesNulls(Integer.valueOf(this.mCid), Integer.valueOf(s.mCid)) && equalsHandlesNulls(Integer.valueOf(this.mPsc), Integer.valueOf(s.mPsc));
+            return o != null
+                    && equalsHandlesNulls(Integer.valueOf(this.mLac), Integer.valueOf(s.mLac))
+                    && equalsHandlesNulls(Integer.valueOf(this.mCid), Integer.valueOf(s.mCid))
+                    && equalsHandlesNulls(Integer.valueOf(this.mPsc), Integer.valueOf(s.mPsc));
         } catch (ClassCastException e) {
             return false;
         }
@@ -70,7 +74,13 @@ public class GsmCellLocation extends CellLocation {
         if (SemTelephonyUtils.SHIP_BUILD) {
             return "[<MASKED>]";
         }
-        return NavigationBarInflaterView.SIZE_MOD_START + this.mLac + "," + this.mCid + "," + this.mPsc + NavigationBarInflaterView.SIZE_MOD_END;
+        return NavigationBarInflaterView.SIZE_MOD_START
+                + this.mLac
+                + ","
+                + this.mCid
+                + ","
+                + this.mPsc
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     private static boolean equalsHandlesNulls(Object a, Object b) {

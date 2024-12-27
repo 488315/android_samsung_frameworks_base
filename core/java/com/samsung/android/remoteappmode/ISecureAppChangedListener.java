@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface ISecureAppChangedListener extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.remoteappmode.ISecureAppChangedListener";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.remoteappmode.ISecureAppChangedListener";
 
     void onSecuredAppLaunched(int i, String str) throws RemoteException;
 
@@ -16,12 +17,10 @@ public interface ISecureAppChangedListener extends IInterface {
 
     public static class Default implements ISecureAppChangedListener {
         @Override // com.samsung.android.remoteappmode.ISecureAppChangedListener
-        public void onSecuredAppLaunched(int taskId, String packageName) throws RemoteException {
-        }
+        public void onSecuredAppLaunched(int taskId, String packageName) throws RemoteException {}
 
         @Override // com.samsung.android.remoteappmode.ISecureAppChangedListener
-        public void onSecuredAppRemoved(int taskId, String packageName) throws RemoteException {
-        }
+        public void onSecuredAppRemoved(int taskId, String packageName) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +28,7 @@ public interface ISecureAppChangedListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISecureAppChangedListener {
+    public abstract static class Stub extends Binder implements ISecureAppChangedListener {
         static final int TRANSACTION_onSecuredAppLaunched = 1;
         static final int TRANSACTION_onSecuredAppRemoved = 2;
 
@@ -70,7 +69,8 @@ public interface ISecureAppChangedListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISecureAppChangedListener.DESCRIPTOR);
             }
@@ -113,7 +113,8 @@ public interface ISecureAppChangedListener extends IInterface {
             }
 
             @Override // com.samsung.android.remoteappmode.ISecureAppChangedListener
-            public void onSecuredAppLaunched(int taskId, String packageName) throws RemoteException {
+            public void onSecuredAppLaunched(int taskId, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISecureAppChangedListener.DESCRIPTOR);

@@ -3,7 +3,9 @@ package android.os;
 import android.annotation.SystemApi;
 import android.os.connectivity.CellularBatteryStats;
 import android.os.connectivity.WifiBatteryStats;
+
 import com.android.internal.app.IBatteryStats;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
@@ -37,12 +39,10 @@ public final class BatteryStatsManager {
     private final IBatteryStats mBatteryStats;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WifiState {
-    }
+    public @interface WifiState {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WifiSupplState {
-    }
+    public @interface WifiSupplState {}
 
     public BatteryStatsManager(IBatteryStats batteryStats) {
         this.mBatteryStats = batteryStats;
@@ -204,7 +204,8 @@ public final class BatteryStatsManager {
 
     public void reportMobileRadioPowerState(boolean isActive, int uid) {
         try {
-            this.mBatteryStats.noteMobileRadioPowerState(getDataConnectionPowerState(isActive), SystemClock.elapsedRealtimeNanos(), uid);
+            this.mBatteryStats.noteMobileRadioPowerState(
+                    getDataConnectionPowerState(isActive), SystemClock.elapsedRealtimeNanos(), uid);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
@@ -212,14 +213,16 @@ public final class BatteryStatsManager {
 
     public void reportWifiRadioPowerState(boolean isActive, int uid) {
         try {
-            this.mBatteryStats.noteWifiRadioPowerState(getDataConnectionPowerState(isActive), SystemClock.elapsedRealtimeNanos(), uid);
+            this.mBatteryStats.noteWifiRadioPowerState(
+                    getDataConnectionPowerState(isActive), SystemClock.elapsedRealtimeNanos(), uid);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
     }
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-    public void reportNetworkInterfaceForTransports(String iface, int[] transportTypes) throws RuntimeException {
+    public void reportNetworkInterfaceForTransports(String iface, int[] transportTypes)
+            throws RuntimeException {
         try {
             this.mBatteryStats.noteNetworkInterfaceForTransports(iface, transportTypes);
         } catch (RemoteException e) {
@@ -228,12 +231,10 @@ public final class BatteryStatsManager {
     }
 
     @Deprecated
-    public void reportBluetoothOn(int uid, int reason, String packageName) {
-    }
+    public void reportBluetoothOn(int uid, int reason, String packageName) {}
 
     @Deprecated
-    public void reportBluetoothOff(int uid, int reason, String packageName) {
-    }
+    public void reportBluetoothOff(int uid, int reason, String packageName) {}
 
     public void reportBleScanStarted(WorkSource ws, boolean isUnoptimized) {
         try {

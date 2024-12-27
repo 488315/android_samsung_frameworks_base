@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IUdfpsRefreshRateRequestCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.hardware.fingerprint.IUdfpsRefreshRateRequestCallback";
+    public static final String DESCRIPTOR =
+            "android.hardware.fingerprint.IUdfpsRefreshRateRequestCallback";
 
     void onAuthenticationPossible(int i, boolean z) throws RemoteException;
 
@@ -18,16 +19,14 @@ public interface IUdfpsRefreshRateRequestCallback extends IInterface {
 
     public static class Default implements IUdfpsRefreshRateRequestCallback {
         @Override // android.hardware.fingerprint.IUdfpsRefreshRateRequestCallback
-        public void onRequestEnabled(int displayId) throws RemoteException {
-        }
+        public void onRequestEnabled(int displayId) throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IUdfpsRefreshRateRequestCallback
-        public void onRequestDisabled(int displayId) throws RemoteException {
-        }
+        public void onRequestDisabled(int displayId) throws RemoteException {}
 
         @Override // android.hardware.fingerprint.IUdfpsRefreshRateRequestCallback
-        public void onAuthenticationPossible(int displayId, boolean isPossible) throws RemoteException {
-        }
+        public void onAuthenticationPossible(int displayId, boolean isPossible)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -35,7 +34,7 @@ public interface IUdfpsRefreshRateRequestCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUdfpsRefreshRateRequestCallback {
+    public abstract static class Stub extends Binder implements IUdfpsRefreshRateRequestCallback {
         static final int TRANSACTION_onAuthenticationPossible = 3;
         static final int TRANSACTION_onRequestDisabled = 2;
         static final int TRANSACTION_onRequestEnabled = 1;
@@ -79,7 +78,8 @@ public interface IUdfpsRefreshRateRequestCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IUdfpsRefreshRateRequestCallback.DESCRIPTOR);
             }
@@ -150,7 +150,8 @@ public interface IUdfpsRefreshRateRequestCallback extends IInterface {
             }
 
             @Override // android.hardware.fingerprint.IUdfpsRefreshRateRequestCallback
-            public void onAuthenticationPossible(int displayId, boolean isPossible) throws RemoteException {
+            public void onAuthenticationPossible(int displayId, boolean isPossible)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IUdfpsRefreshRateRequestCallback.DESCRIPTOR);

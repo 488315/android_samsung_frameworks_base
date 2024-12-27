@@ -3,32 +3,36 @@ package android.telephony;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.security.keystore.KeyProperties;
+
 import com.android.internal.telephony.DctConstants;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class TelephonyDisplayInfo implements Parcelable {
-    public static final Parcelable.Creator<TelephonyDisplayInfo> CREATOR = new Parcelable.Creator<TelephonyDisplayInfo>() { // from class: android.telephony.TelephonyDisplayInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TelephonyDisplayInfo createFromParcel(Parcel source) {
-            return new TelephonyDisplayInfo(source);
-        }
+    public static final Parcelable.Creator<TelephonyDisplayInfo> CREATOR =
+            new Parcelable.Creator<
+                    TelephonyDisplayInfo>() { // from class:
+                                              // android.telephony.TelephonyDisplayInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TelephonyDisplayInfo createFromParcel(Parcel source) {
+                    return new TelephonyDisplayInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TelephonyDisplayInfo[] newArray(int size) {
-            return new TelephonyDisplayInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TelephonyDisplayInfo[] newArray(int size) {
+                    return new TelephonyDisplayInfo[size];
+                }
+            };
     public static final int OVERRIDE_NETWORK_TYPE_LTE_ADVANCED_PRO = 2;
     public static final int OVERRIDE_NETWORK_TYPE_LTE_CA = 1;
     public static final int OVERRIDE_NETWORK_TYPE_NONE = 0;
     public static final int OVERRIDE_NETWORK_TYPE_NR_ADVANCED = 5;
     public static final int OVERRIDE_NETWORK_TYPE_NR_NSA = 3;
 
-    @Deprecated
-    public static final int OVERRIDE_NETWORK_TYPE_NR_NSA_MMWAVE = 4;
+    @Deprecated public static final int OVERRIDE_NETWORK_TYPE_NR_NSA_MMWAVE = 4;
     private boolean m5gAvailable;
     private final boolean mIsRoaming;
     private final int mNetworkType;
@@ -93,14 +97,21 @@ public final class TelephonyDisplayInfo implements Parcelable {
             return false;
         }
         TelephonyDisplayInfo that = (TelephonyDisplayInfo) o;
-        if (this.mNetworkType == that.mNetworkType && this.mOverrideNetworkType == that.mOverrideNetworkType && this.m5gAvailable == that.m5gAvailable && this.mIsRoaming == that.mIsRoaming) {
+        if (this.mNetworkType == that.mNetworkType
+                && this.mOverrideNetworkType == that.mOverrideNetworkType
+                && this.m5gAvailable == that.m5gAvailable
+                && this.mIsRoaming == that.mIsRoaming) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mNetworkType), Integer.valueOf(this.mOverrideNetworkType), Boolean.valueOf(this.mIsRoaming), Boolean.valueOf(this.m5gAvailable));
+        return Objects.hash(
+                Integer.valueOf(this.mNetworkType),
+                Integer.valueOf(this.mOverrideNetworkType),
+                Boolean.valueOf(this.mIsRoaming),
+                Boolean.valueOf(this.m5gAvailable));
     }
 
     public static String overrideNetworkTypeToString(int type) {
@@ -123,6 +134,12 @@ public final class TelephonyDisplayInfo implements Parcelable {
     }
 
     public String toString() {
-        return "TelephonyDisplayInfo {network=" + TelephonyManager.getNetworkTypeName(this.mNetworkType) + ", overrideNetwork=" + overrideNetworkTypeToString(this.mOverrideNetworkType) + ", isRoaming=" + this.mIsRoaming + "}";
+        return "TelephonyDisplayInfo {network="
+                + TelephonyManager.getNetworkTypeName(this.mNetworkType)
+                + ", overrideNetwork="
+                + overrideNetworkTypeToString(this.mOverrideNetworkType)
+                + ", isRoaming="
+                + this.mIsRoaming
+                + "}";
     }
 }

@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.TextView;
+
 import java.util.function.Consumer;
 
 @RemoteViews.RemoteView
@@ -24,7 +25,8 @@ public class ObservableTextView extends TextView {
         super(context, attrs, defStyleAttr);
     }
 
-    public ObservableTextView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public ObservableTextView(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 

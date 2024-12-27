@@ -3,8 +3,9 @@ package com.android.server.power.stats;
 import android.app.AlarmManager;
 import android.os.BatteryUsageStats;
 import android.util.Log;
+
 import com.android.server.clipboard.ClipboardService;
-import com.android.server.power.stats.PowerStatsSpan;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -16,13 +17,15 @@ public final /* synthetic */ class BatteryStatsImpl$$ExternalSyntheticLambda0 im
     public final /* synthetic */ Object f$1;
     public final /* synthetic */ long f$2;
 
-    public /* synthetic */ BatteryStatsImpl$$ExternalSyntheticLambda0(BatteryStatsImpl batteryStatsImpl, long j, BatteryUsageStats batteryUsageStats) {
+    public /* synthetic */ BatteryStatsImpl$$ExternalSyntheticLambda0(
+            BatteryStatsImpl batteryStatsImpl, long j, BatteryUsageStats batteryUsageStats) {
         this.f$0 = batteryStatsImpl;
         this.f$2 = j;
         this.f$1 = batteryUsageStats;
     }
 
-    public /* synthetic */ BatteryStatsImpl$$ExternalSyntheticLambda0(BatteryStatsImpl batteryStatsImpl, AlarmManager alarmManager, long j) {
+    public /* synthetic */ BatteryStatsImpl$$ExternalSyntheticLambda0(
+            BatteryStatsImpl batteryStatsImpl, AlarmManager alarmManager, long j) {
         this.f$0 = batteryStatsImpl;
         this.f$1 = alarmManager;
         this.f$2 = j;
@@ -33,7 +36,14 @@ public final /* synthetic */ class BatteryStatsImpl$$ExternalSyntheticLambda0 im
         switch (this.$r8$classId) {
             case 0:
                 BatteryStatsImpl batteryStatsImpl = this.f$0;
-                ((AlarmManager) this.f$1).setWindow(1, this.f$2, ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS, "BatteryStatsImpl", batteryStatsImpl.mLongPlugInAlarmHandler, batteryStatsImpl.mHandler);
+                ((AlarmManager) this.f$1)
+                        .setWindow(
+                                1,
+                                this.f$2,
+                                ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS,
+                                "BatteryStatsImpl",
+                                batteryStatsImpl.mLongPlugInAlarmHandler,
+                                batteryStatsImpl.mHandler);
                 break;
             default:
                 BatteryStatsImpl batteryStatsImpl2 = this.f$0;
@@ -45,8 +55,10 @@ public final /* synthetic */ class BatteryStatsImpl$$ExternalSyntheticLambda0 im
                 long statsStartTimestamp = batteryUsageStats.getStatsStartTimestamp();
                 long statsDuration = batteryUsageStats.getStatsDuration();
                 PowerStatsSpan.Metadata metadata = powerStatsSpan.mMetadata;
-                ((ArrayList) metadata.mTimeFrames).add(new PowerStatsSpan.TimeFrame(j, statsStartTimestamp, statsDuration));
-                BatteryUsageStatsSection batteryUsageStatsSection = new BatteryUsageStatsSection(batteryUsageStats);
+                ((ArrayList) metadata.mTimeFrames)
+                        .add(new PowerStatsSpan.TimeFrame(j, statsStartTimestamp, statsDuration));
+                BatteryUsageStatsSection batteryUsageStatsSection =
+                        new BatteryUsageStatsSection(batteryUsageStats);
                 if (!((ArrayList) metadata.mSections).contains("battery-usage-stats")) {
                     ((ArrayList) metadata.mSections).add("battery-usage-stats");
                 }

@@ -10,16 +10,19 @@ import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Log;
 import android.util.Xml;
+
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
 import com.android.server.pm.PackageManagerServiceUtils;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicBoolean;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -33,7 +36,9 @@ public final class MonetizationUtils {
     public final ArraySet mPreloadAppsForBadge = new ArraySet();
     public final ArraySet mPreloadAppsLaunched = new ArraySet();
     public final ArraySet mGalaxyStoreAppsForBadge = new ArraySet();
-    public final AtomicBoolean mGalaxyStoreBadgeEnabled = new AtomicBoolean("1".equals(SystemProperties.get("persist.galaxy_store.badge.feature")));
+    public final AtomicBoolean mGalaxyStoreBadgeEnabled =
+            new AtomicBoolean(
+                    "1".equals(SystemProperties.get("persist.galaxy_store.badge.feature")));
     public final Object mBadgeLock = new Object();
     public boolean mIsTruecallerSettingsUpdated = true;
 
@@ -43,7 +48,9 @@ public final class MonetizationUtils {
         String str = SystemProperties.get("ro.csc.sales_code");
         this.mSalesCode = str;
         if ("INS".equals(str) || "INU".equals(str) || "SUP".equals(str)) {
-            this.mPath = XmlUtils$$ExternalSyntheticOutline0.m("/prism/etc/carriers/", str, "/sysconfig/monetization-badge-apps.xml");
+            this.mPath =
+                    XmlUtils$$ExternalSyntheticOutline0.m(
+                            "/prism/etc/carriers/", str, "/sysconfig/monetization-badge-apps.xml");
         }
     }
 
@@ -119,7 +126,9 @@ public final class MonetizationUtils {
             Log.e("Monetization", "Failed to parse monetized packages. IOException " + e2);
             return null;
         } catch (XmlPullParserException e3) {
-            Log.e("Monetization", "Failed to parse monetized packages. XmlPullParserException " + e3);
+            Log.e(
+                    "Monetization",
+                    "Failed to parse monetized packages. XmlPullParserException " + e3);
             return null;
         }
     }
@@ -161,7 +170,8 @@ public final class MonetizationUtils {
                 }
             }
         } catch (Exception e) {
-            PackageManagerServiceUtils.logCriticalInfo(5, "Monetization Exception: " + Log.getStackTraceString(e));
+            PackageManagerServiceUtils.logCriticalInfo(
+                    5, "Monetization Exception: " + Log.getStackTraceString(e));
         }
     }
 
@@ -173,9 +183,13 @@ public final class MonetizationUtils {
             sb.append(";");
         }
         if (z) {
-            Settings.Global.putString(this.mContext.getContentResolver(), "MONETIZATION_PACKAGES", sb.toString());
+            Settings.Global.putString(
+                    this.mContext.getContentResolver(), "MONETIZATION_PACKAGES", sb.toString());
         } else {
-            Settings.System.putString(this.mContext.getContentResolver(), "galaxy_app_store_india_nudge_packages", sb.toString());
+            Settings.System.putString(
+                    this.mContext.getContentResolver(),
+                    "galaxy_app_store_india_nudge_packages",
+                    sb.toString());
         }
     }
 }

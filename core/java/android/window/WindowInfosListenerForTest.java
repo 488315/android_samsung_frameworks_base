@@ -9,7 +9,7 @@ import android.util.Log;
 import android.util.Pair;
 import android.util.SparseArray;
 import android.view.InputWindowHandle;
-import android.window.WindowInfosListener;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -34,7 +34,13 @@ public class WindowInfosListenerForTest {
         public final Matrix transform;
         public final IBinder windowToken;
 
-        WindowInfo(IBinder windowToken, String name, int displayId, Rect bounds, int inputConfig, Matrix transform) {
+        WindowInfo(
+                IBinder windowToken,
+                String name,
+                int displayId,
+                Rect bounds,
+                int inputConfig,
+                Matrix transform) {
             this.windowToken = windowToken;
             this.name = name;
             this.displayId = displayId;
@@ -50,25 +56,46 @@ public class WindowInfosListenerForTest {
         }
 
         public String toString() {
-            return this.name + ", displayId=" + this.displayId + ", frame=" + this.bounds + ", isVisible=" + this.isVisible + ", isTrustedOverlay=" + this.isTrustedOverlay + ", token=" + this.windowToken + ", transform=" + this.transform;
+            return this.name
+                    + ", displayId="
+                    + this.displayId
+                    + ", frame="
+                    + this.bounds
+                    + ", isVisible="
+                    + this.isVisible
+                    + ", isTrustedOverlay="
+                    + this.isTrustedOverlay
+                    + ", token="
+                    + this.windowToken
+                    + ", transform="
+                    + this.transform;
         }
     }
 
     public void addWindowInfosListener(final Consumer<List<WindowInfo>> consumer) {
         final CountDownLatch calledWithInitialState = new CountDownLatch(1);
-        WindowInfosListener windowInfosListener = new WindowInfosListener() { // from class: android.window.WindowInfosListenerForTest.1
-            @Override // android.window.WindowInfosListener
-            public void onWindowInfosChanged(InputWindowHandle[] windowHandles, WindowInfosListener.DisplayInfo[] displayInfos) {
-                try {
-                    calledWithInitialState.await();
-                } catch (InterruptedException e) {
-                    Log.e(WindowInfosListenerForTest.TAG, "Exception thrown while waiting for listener to be called with initial state");
-                }
-                consumer.accept(WindowInfosListenerForTest.buildWindowInfos(windowHandles, displayInfos));
-            }
-        };
+        WindowInfosListener windowInfosListener = new WindowInfosListener() { // from class:
+                    // android.window.WindowInfosListenerForTest.1
+                    @Override // android.window.WindowInfosListener
+                    public void onWindowInfosChanged(
+                            InputWindowHandle[] windowHandles,
+                            WindowInfosListener.DisplayInfo[] displayInfos) {
+                        try {
+                            calledWithInitialState.await();
+                        } catch (InterruptedException e) {
+                            Log.e(
+                                    WindowInfosListenerForTest.TAG,
+                                    "Exception thrown while waiting for listener to be called with"
+                                        + " initial state");
+                        }
+                        consumer.accept(
+                                WindowInfosListenerForTest.buildWindowInfos(
+                                        windowHandles, displayInfos));
+                    }
+                };
         this.mListeners.put(consumer, windowInfosListener);
-        Pair<InputWindowHandle[], WindowInfosListener.DisplayInfo[]> initialState = windowInfosListener.register();
+        Pair<InputWindowHandle[], WindowInfosListener.DisplayInfo[]> initialState =
+                windowInfosListener.register();
         consumer.accept(buildWindowInfos(initialState.first, initialState.second));
         calledWithInitialState.countDown();
     }
@@ -82,10 +109,12 @@ public class WindowInfosListenerForTest {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static List<WindowInfo> buildWindowInfos(InputWindowHandle[] windowHandles, WindowInfosListener.DisplayInfo[] displayInfos) {
+    public static List<WindowInfo> buildWindowInfos(
+            InputWindowHandle[] windowHandles, WindowInfosListener.DisplayInfo[] displayInfos) {
         InputWindowHandle[] inputWindowHandleArr = windowHandles;
         ArrayList<WindowInfo> windowInfos = new ArrayList<>(inputWindowHandleArr.length);
-        SparseArray<WindowInfosListener.DisplayInfo> displayInfoById = new SparseArray<>(displayInfos.length);
+        SparseArray<WindowInfosListener.DisplayInfo> displayInfoById =
+                new SparseArray<>(displayInfos.length);
         int i = 0;
         for (WindowInfosListener.DisplayInfo displayInfo : displayInfos) {
             displayInfoById.put(displayInfo.mDisplayId, displayInfo);
@@ -101,7 +130,14 @@ public class WindowInfosListenerForTest {
                 display.mTransform.mapRect(tmp);
                 tmp.round(bounds);
             }
-            windowInfos.add(new WindowInfo(handle.getWindowToken(), handle.name, handle.displayId, bounds, handle.inputConfig, handle.transform));
+            windowInfos.add(
+                    new WindowInfo(
+                            handle.getWindowToken(),
+                            handle.name,
+                            handle.displayId,
+                            bounds,
+                            handle.inputConfig,
+                            handle.transform));
             i++;
             inputWindowHandleArr = windowHandles;
         }

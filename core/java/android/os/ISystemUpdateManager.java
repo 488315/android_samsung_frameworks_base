@@ -16,8 +16,7 @@ public interface ISystemUpdateManager extends IInterface {
         }
 
         @Override // android.os.ISystemUpdateManager
-        public void updateSystemUpdateInfo(PersistableBundle data) throws RemoteException {
-        }
+        public void updateSystemUpdateInfo(PersistableBundle data) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -25,7 +24,7 @@ public interface ISystemUpdateManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISystemUpdateManager {
+    public abstract static class Stub extends Binder implements ISystemUpdateManager {
         public static final String DESCRIPTOR = "android.os.ISystemUpdateManager";
         static final int TRANSACTION_retrieveSystemUpdateInfo = 1;
         static final int TRANSACTION_updateSystemUpdateInfo = 2;
@@ -41,7 +40,9 @@ public interface ISystemUpdateManager extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static ISystemUpdateManager asInterface(IBinder obj) {
@@ -77,7 +78,8 @@ public interface ISystemUpdateManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -92,7 +94,8 @@ public interface ISystemUpdateManager extends IInterface {
                     reply.writeTypedObject(_result, 1);
                     return true;
                 case 2:
-                    PersistableBundle _arg0 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _arg0 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
                     data.enforceNoDataAvail();
                     updateSystemUpdateInfo(_arg0);
                     reply.writeNoException();
@@ -151,7 +154,8 @@ public interface ISystemUpdateManager extends IInterface {
         }
 
         protected void updateSystemUpdateInfo_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.RECOVERY, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.RECOVERY, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

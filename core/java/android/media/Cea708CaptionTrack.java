@@ -1,6 +1,5 @@
 package android.media;
 
-import android.media.SubtitleTrack;
 import java.util.Vector;
 
 /* compiled from: Cea708CaptionRenderer.java */
@@ -26,6 +25,5 @@ class Cea708CaptionTrack extends SubtitleTrack {
     }
 
     @Override // android.media.SubtitleTrack
-    public void updateView(Vector<SubtitleTrack.Cue> activeCues) {
-    }
+    public void updateView(Vector<SubtitleTrack.Cue> activeCues) {}
 }

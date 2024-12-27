@@ -11,9 +11,10 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
-import android.service.notification.NotificationListenerService;
 import android.util.Log;
+
 import com.android.internal.os.SomeArgs;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
@@ -21,23 +22,26 @@ import java.util.List;
 @SystemApi
 /* loaded from: classes3.dex */
 public abstract class NotificationAssistantService extends NotificationListenerService {
-    public static final String ACTION_NOTIFICATION_ASSISTANT_DETAIL_SETTINGS = "android.service.notification.action.NOTIFICATION_ASSISTANT_DETAIL_SETTINGS";
+    public static final String ACTION_NOTIFICATION_ASSISTANT_DETAIL_SETTINGS =
+            "android.service.notification.action.NOTIFICATION_ASSISTANT_DETAIL_SETTINGS";
     public static final String FEEDBACK_RATING = "feedback.rating";
-    public static final String SERVICE_INTERFACE = "android.service.notification.NotificationAssistantService";
+    public static final String SERVICE_INTERFACE =
+            "android.service.notification.NotificationAssistantService";
     public static final int SOURCE_FROM_APP = 0;
     public static final int SOURCE_FROM_ASSISTANT = 1;
     private static final String TAG = "NotificationAssistants";
     protected Handler mHandler;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Source {
-    }
+    public @interface Source {}
 
     public abstract Adjustment onNotificationEnqueued(StatusBarNotification statusBarNotification);
 
-    public abstract void onNotificationSnoozedUntilContext(StatusBarNotification statusBarNotification, String str);
+    public abstract void onNotificationSnoozedUntilContext(
+            StatusBarNotification statusBarNotification, String str);
 
-    @Override // android.service.notification.NotificationListenerService, android.app.Service, android.content.ContextWrapper
+    @Override // android.service.notification.NotificationListenerService, android.app.Service,
+              // android.content.ContextWrapper
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         this.mHandler = new MyHandler(getContext().getMainLooper());
@@ -51,58 +55,58 @@ public abstract class NotificationAssistantService extends NotificationListenerS
         return this.mWrapper;
     }
 
-    public Adjustment onNotificationEnqueued(StatusBarNotification sbn, NotificationChannel channel) {
+    public Adjustment onNotificationEnqueued(
+            StatusBarNotification sbn, NotificationChannel channel) {
         return onNotificationEnqueued(sbn);
     }
 
-    public Adjustment onNotificationEnqueued(StatusBarNotification sbn, NotificationChannel channel, NotificationListenerService.RankingMap rankingMap) {
+    public Adjustment onNotificationEnqueued(
+            StatusBarNotification sbn,
+            NotificationChannel channel,
+            NotificationListenerService.RankingMap rankingMap) {
         return onNotificationEnqueued(sbn, channel);
     }
 
     @Override // android.service.notification.NotificationListenerService
-    public void onNotificationRemoved(StatusBarNotification sbn, NotificationListenerService.RankingMap rankingMap, NotificationStats stats, int reason) {
+    public void onNotificationRemoved(
+            StatusBarNotification sbn,
+            NotificationListenerService.RankingMap rankingMap,
+            NotificationStats stats,
+            int reason) {
         onNotificationRemoved(sbn, rankingMap, reason);
     }
 
-    public void onNotificationsSeen(List<String> keys) {
-    }
+    public void onNotificationsSeen(List<String> keys) {}
 
-    public void onPanelRevealed(int items) {
-    }
+    public void onPanelRevealed(int items) {}
 
-    public void onPanelHidden() {
-    }
+    public void onPanelHidden() {}
 
-    public void onNotificationVisibilityChanged(String key, boolean isVisible) {
-    }
+    public void onNotificationVisibilityChanged(String key, boolean isVisible) {}
 
-    public void onNotificationExpansionChanged(String key, boolean isUserAction, boolean isExpanded) {
-    }
+    public void onNotificationExpansionChanged(
+            String key, boolean isUserAction, boolean isExpanded) {}
 
-    public void onNotificationDirectReplied(String key) {
-    }
+    public void onNotificationDirectReplied(String key) {}
 
-    public void onSuggestedReplySent(String key, CharSequence reply, int source) {
-    }
+    public void onSuggestedReplySent(String key, CharSequence reply, int source) {}
 
-    public void onActionInvoked(String key, Notification.Action action, int source) {
-    }
+    public void onActionInvoked(String key, Notification.Action action, int source) {}
 
-    public void onNotificationClicked(String key) {
-    }
+    public void onNotificationClicked(String key) {}
 
     @Deprecated
-    public void onAllowedAdjustmentsChanged() {
-    }
+    public void onAllowedAdjustmentsChanged() {}
 
-    public void onNotificationFeedbackReceived(String key, NotificationListenerService.RankingMap rankingMap, Bundle feedback) {
-    }
+    public void onNotificationFeedbackReceived(
+            String key, NotificationListenerService.RankingMap rankingMap, Bundle feedback) {}
 
     public final void adjustNotification(Adjustment adjustment) {
         if (isBound()) {
             try {
                 setAdjustmentIssuer(adjustment);
-                getNotificationInterface().applyEnqueuedAdjustmentFromAssistant(this.mWrapper, adjustment);
+                getNotificationInterface()
+                        .applyEnqueuedAdjustmentFromAssistant(this.mWrapper, adjustment);
             } catch (RemoteException ex) {
                 Log.v(TAG, "Unable to contact notification manager", ex);
                 throw ex.rethrowFromSystemServer();
@@ -116,7 +120,8 @@ public abstract class NotificationAssistantService extends NotificationListenerS
                 for (Adjustment adjustment : adjustments) {
                     setAdjustmentIssuer(adjustment);
                 }
-                getNotificationInterface().applyAdjustmentsFromAssistant(this.mWrapper, adjustments);
+                getNotificationInterface()
+                        .applyAdjustmentsFromAssistant(this.mWrapper, adjustments);
             } catch (RemoteException ex) {
                 Log.v(TAG, "Unable to contact notification manager", ex);
                 throw ex.rethrowFromSystemServer();
@@ -134,17 +139,24 @@ public abstract class NotificationAssistantService extends NotificationListenerS
         }
     }
 
-    private class NotificationAssistantServiceWrapper extends NotificationListenerService.NotificationListenerWrapper {
+    private class NotificationAssistantServiceWrapper
+            extends NotificationListenerService.NotificationListenerWrapper {
         private NotificationAssistantServiceWrapper() {
             super();
         }
 
         @Override // android.service.notification.NotificationListenerService.NotificationListenerWrapper, android.service.notification.INotificationListener
-        public void onNotificationEnqueuedWithChannel(IStatusBarNotificationHolder sbnHolder, NotificationChannel channel, NotificationRankingUpdate update) {
+        public void onNotificationEnqueuedWithChannel(
+                IStatusBarNotificationHolder sbnHolder,
+                NotificationChannel channel,
+                NotificationRankingUpdate update) {
             try {
                 StatusBarNotification sbn = sbnHolder.get();
                 if (sbn == null) {
-                    Log.w(NotificationAssistantService.TAG, "onNotificationEnqueuedWithChannel: Error receiving StatusBarNotification");
+                    Log.w(
+                            NotificationAssistantService.TAG,
+                            "onNotificationEnqueuedWithChannel: Error receiving"
+                                + " StatusBarNotification");
                     return;
                 }
                 NotificationAssistantService.this.applyUpdateLocked(update);
@@ -154,16 +166,22 @@ public abstract class NotificationAssistantService extends NotificationListenerS
                 args.arg3 = NotificationAssistantService.this.getCurrentRanking();
                 NotificationAssistantService.this.mHandler.obtainMessage(1, args).sendToTarget();
             } catch (RemoteException e) {
-                Log.w(NotificationAssistantService.TAG, "onNotificationEnqueued: Error receiving StatusBarNotification", e);
+                Log.w(
+                        NotificationAssistantService.TAG,
+                        "onNotificationEnqueued: Error receiving StatusBarNotification",
+                        e);
             }
         }
 
         @Override // android.service.notification.NotificationListenerService.NotificationListenerWrapper, android.service.notification.INotificationListener
-        public void onNotificationSnoozedUntilContext(IStatusBarNotificationHolder sbnHolder, String snoozeCriterionId) {
+        public void onNotificationSnoozedUntilContext(
+                IStatusBarNotificationHolder sbnHolder, String snoozeCriterionId) {
             try {
                 StatusBarNotification sbn = sbnHolder.get();
                 if (sbn == null) {
-                    Log.w(NotificationAssistantService.TAG, "onNotificationSnoozed: Error receiving StatusBarNotification");
+                    Log.w(
+                            NotificationAssistantService.TAG,
+                            "onNotificationSnoozed: Error receiving StatusBarNotification");
                     return;
                 }
                 SomeArgs args = SomeArgs.obtain();
@@ -171,7 +189,10 @@ public abstract class NotificationAssistantService extends NotificationListenerS
                 args.arg2 = snoozeCriterionId;
                 NotificationAssistantService.this.mHandler.obtainMessage(2, args).sendToTarget();
             } catch (RemoteException e) {
-                Log.w(NotificationAssistantService.TAG, "onNotificationSnoozed: Error receiving StatusBarNotification", e);
+                Log.w(
+                        NotificationAssistantService.TAG,
+                        "onNotificationSnoozed: Error receiving StatusBarNotification",
+                        e);
             }
         }
 
@@ -250,7 +271,8 @@ public abstract class NotificationAssistantService extends NotificationListenerS
         }
 
         @Override // android.service.notification.NotificationListenerService.NotificationListenerWrapper, android.service.notification.INotificationListener
-        public void onNotificationFeedbackReceived(String key, NotificationRankingUpdate update, Bundle feedback) {
+        public void onNotificationFeedbackReceived(
+                String key, NotificationRankingUpdate update, Bundle feedback) {
             NotificationAssistantService.this.applyUpdateLocked(update);
             SomeArgs args = SomeArgs.obtain();
             args.arg1 = key;
@@ -294,23 +316,37 @@ public abstract class NotificationAssistantService extends NotificationListenerS
                     SomeArgs args = (SomeArgs) msg.obj;
                     StatusBarNotification sbn = (StatusBarNotification) args.arg1;
                     NotificationChannel channel = (NotificationChannel) args.arg2;
-                    NotificationListenerService.RankingMap ranking = (NotificationListenerService.RankingMap) args.arg3;
+                    NotificationListenerService.RankingMap ranking =
+                            (NotificationListenerService.RankingMap) args.arg3;
                     args.recycle();
-                    Adjustment adjustment = NotificationAssistantService.this.onNotificationEnqueued(sbn, channel, ranking);
+                    Adjustment adjustment =
+                            NotificationAssistantService.this.onNotificationEnqueued(
+                                    sbn, channel, ranking);
                     NotificationAssistantService.this.setAdjustmentIssuer(adjustment);
                     if (adjustment != null) {
                         if (!NotificationAssistantService.this.isBound()) {
-                            Log.w(NotificationAssistantService.TAG, "MSG_ON_NOTIFICATION_ENQUEUED: service not bound, skip.");
+                            Log.w(
+                                    NotificationAssistantService.TAG,
+                                    "MSG_ON_NOTIFICATION_ENQUEUED: service not bound, skip.");
                             return;
                         }
                         try {
-                            NotificationAssistantService.this.getNotificationInterface().applyEnqueuedAdjustmentFromAssistant(NotificationAssistantService.this.mWrapper, adjustment);
+                            NotificationAssistantService.this
+                                    .getNotificationInterface()
+                                    .applyEnqueuedAdjustmentFromAssistant(
+                                            NotificationAssistantService.this.mWrapper, adjustment);
                             return;
                         } catch (RemoteException ex) {
-                            Log.v(NotificationAssistantService.TAG, "Unable to contact notification manager", ex);
+                            Log.v(
+                                    NotificationAssistantService.TAG,
+                                    "Unable to contact notification manager",
+                                    ex);
                             throw ex.rethrowFromSystemServer();
                         } catch (SecurityException e) {
-                            Log.w(NotificationAssistantService.TAG, "Enqueue adjustment failed; no longer connected", e);
+                            Log.w(
+                                    NotificationAssistantService.TAG,
+                                    "Enqueue adjustment failed; no longer connected",
+                                    e);
                             return;
                         }
                     }
@@ -320,7 +356,8 @@ public abstract class NotificationAssistantService extends NotificationListenerS
                     StatusBarNotification sbn2 = (StatusBarNotification) args2.arg1;
                     String snoozeCriterionId = (String) args2.arg2;
                     args2.recycle();
-                    NotificationAssistantService.this.onNotificationSnoozedUntilContext(sbn2, snoozeCriterionId);
+                    NotificationAssistantService.this.onNotificationSnoozedUntilContext(
+                            sbn2, snoozeCriterionId);
                     return;
                 case 3:
                     SomeArgs args3 = (SomeArgs) msg.obj;
@@ -334,7 +371,8 @@ public abstract class NotificationAssistantService extends NotificationListenerS
                     boolean isUserAction = args4.argi1 == 1;
                     isVisible = args4.argi2 == 1;
                     args4.recycle();
-                    NotificationAssistantService.this.onNotificationExpansionChanged(key, isUserAction, isVisible);
+                    NotificationAssistantService.this.onNotificationExpansionChanged(
+                            key, isUserAction, isVisible);
                     return;
                 case 5:
                     SomeArgs args5 = (SomeArgs) msg.obj;
@@ -375,7 +413,8 @@ public abstract class NotificationAssistantService extends NotificationListenerS
                     String key5 = (String) args9.arg1;
                     isVisible = args9.argi1 == 1;
                     args9.recycle();
-                    NotificationAssistantService.this.onNotificationVisibilityChanged(key5, isVisible);
+                    NotificationAssistantService.this.onNotificationVisibilityChanged(
+                            key5, isVisible);
                     return;
                 case 12:
                     SomeArgs args10 = (SomeArgs) msg.obj;
@@ -386,10 +425,12 @@ public abstract class NotificationAssistantService extends NotificationListenerS
                 case 13:
                     SomeArgs args11 = (SomeArgs) msg.obj;
                     String key7 = (String) args11.arg1;
-                    NotificationListenerService.RankingMap ranking2 = (NotificationListenerService.RankingMap) args11.arg2;
+                    NotificationListenerService.RankingMap ranking2 =
+                            (NotificationListenerService.RankingMap) args11.arg2;
                     Bundle feedback = (Bundle) args11.arg3;
                     args11.recycle();
-                    NotificationAssistantService.this.onNotificationFeedbackReceived(key7, ranking2, feedback);
+                    NotificationAssistantService.this.onNotificationFeedbackReceived(
+                            key7, ranking2, feedback);
                     return;
                 default:
                     return;

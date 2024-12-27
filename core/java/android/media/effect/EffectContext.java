@@ -37,7 +37,8 @@ public class EffectContext {
 
     private void initInCurrentGlContext() {
         if (!GLEnvironment.isAnyContextActive()) {
-            throw new RuntimeException("Attempting to initialize EffectContext with no active GL context!");
+            throw new RuntimeException(
+                    "Attempting to initialize EffectContext with no active GL context!");
         }
         GLEnvironment glEnvironment = new GLEnvironment();
         glEnvironment.initWithCurrentContext();

@@ -1,14 +1,14 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.AbstractMessageLite;
-import com.android.framework.protobuf.MessageLite;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 
 /* loaded from: classes3.dex */
-public abstract class AbstractParser<MessageType extends MessageLite> implements Parser<MessageType> {
-    private static final ExtensionRegistryLite EMPTY_REGISTRY = ExtensionRegistryLite.getEmptyRegistry();
+public abstract class AbstractParser<MessageType extends MessageLite>
+        implements Parser<MessageType> {
+    private static final ExtensionRegistryLite EMPTY_REGISTRY =
+            ExtensionRegistryLite.getEmptyRegistry();
 
     private UninitializedMessageException newUninitializedMessageException(MessageType message) {
         if (message instanceof AbstractMessageLite) {
@@ -17,22 +17,30 @@ public abstract class AbstractParser<MessageType extends MessageLite> implements
         return new UninitializedMessageException(message);
     }
 
-    private MessageType checkMessageInitialized(MessageType message) throws InvalidProtocolBufferException {
+    private MessageType checkMessageInitialized(MessageType message)
+            throws InvalidProtocolBufferException {
         if (message != null && !message.isInitialized()) {
-            throw newUninitializedMessageException(message).asInvalidProtocolBufferException().setUnfinishedMessage(message);
+            throw newUninitializedMessageException(message)
+                    .asInvalidProtocolBufferException()
+                    .setUnfinishedMessage(message);
         }
         return message;
     }
 
     @Override // com.android.framework.protobuf.Parser
-    public MessageType parsePartialFrom(CodedInputStream input) throws InvalidProtocolBufferException {
+    public MessageType parsePartialFrom(CodedInputStream input)
+            throws InvalidProtocolBufferException {
         return (MessageType) parsePartialFrom(input, EMPTY_REGISTRY);
     }
 
     /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.framework.protobuf.Parser
-    public MessageType parseFrom(CodedInputStream codedInputStream, ExtensionRegistryLite extensionRegistryLite) throws InvalidProtocolBufferException {
-        return (MessageType) checkMessageInitialized((MessageLite) parsePartialFrom(codedInputStream, extensionRegistryLite));
+    public MessageType parseFrom(
+            CodedInputStream codedInputStream, ExtensionRegistryLite extensionRegistryLite)
+            throws InvalidProtocolBufferException {
+        return (MessageType)
+                checkMessageInitialized(
+                        (MessageLite) parsePartialFrom(codedInputStream, extensionRegistryLite));
     }
 
     @Override // com.android.framework.protobuf.Parser
@@ -41,7 +49,8 @@ public abstract class AbstractParser<MessageType extends MessageLite> implements
     }
 
     @Override // com.android.framework.protobuf.Parser
-    public MessageType parsePartialFrom(ByteString data, ExtensionRegistryLite extensionRegistry) throws InvalidProtocolBufferException {
+    public MessageType parsePartialFrom(ByteString data, ExtensionRegistryLite extensionRegistry)
+            throws InvalidProtocolBufferException {
         try {
             CodedInputStream input = data.newCodedInput();
             MessageType messagetype = (MessageType) parsePartialFrom(input, extensionRegistry);
@@ -62,7 +71,8 @@ public abstract class AbstractParser<MessageType extends MessageLite> implements
     }
 
     @Override // com.android.framework.protobuf.Parser
-    public MessageType parseFrom(ByteString data, ExtensionRegistryLite extensionRegistry) throws InvalidProtocolBufferException {
+    public MessageType parseFrom(ByteString data, ExtensionRegistryLite extensionRegistry)
+            throws InvalidProtocolBufferException {
         return checkMessageInitialized(parsePartialFrom(data, extensionRegistry));
     }
 
@@ -73,10 +83,12 @@ public abstract class AbstractParser<MessageType extends MessageLite> implements
 
     /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.framework.protobuf.Parser
-    public MessageType parseFrom(ByteBuffer byteBuffer, ExtensionRegistryLite extensionRegistryLite) throws InvalidProtocolBufferException {
+    public MessageType parseFrom(ByteBuffer byteBuffer, ExtensionRegistryLite extensionRegistryLite)
+            throws InvalidProtocolBufferException {
         try {
             CodedInputStream newInstance = CodedInputStream.newInstance(byteBuffer);
-            MessageLite messageLite = (MessageLite) parsePartialFrom(newInstance, extensionRegistryLite);
+            MessageLite messageLite =
+                    (MessageLite) parsePartialFrom(newInstance, extensionRegistryLite);
             try {
                 newInstance.checkLastTagWas(0);
                 return (MessageType) checkMessageInitialized(messageLite);
@@ -94,7 +106,9 @@ public abstract class AbstractParser<MessageType extends MessageLite> implements
     }
 
     @Override // com.android.framework.protobuf.Parser
-    public MessageType parsePartialFrom(byte[] data, int off, int len, ExtensionRegistryLite extensionRegistry) throws InvalidProtocolBufferException {
+    public MessageType parsePartialFrom(
+            byte[] data, int off, int len, ExtensionRegistryLite extensionRegistry)
+            throws InvalidProtocolBufferException {
         try {
             CodedInputStream input = CodedInputStream.newInstance(data, off, len);
             MessageType messagetype = (MessageType) parsePartialFrom(input, extensionRegistry);
@@ -110,12 +124,14 @@ public abstract class AbstractParser<MessageType extends MessageLite> implements
     }
 
     @Override // com.android.framework.protobuf.Parser
-    public MessageType parsePartialFrom(byte[] data, int off, int len) throws InvalidProtocolBufferException {
+    public MessageType parsePartialFrom(byte[] data, int off, int len)
+            throws InvalidProtocolBufferException {
         return parsePartialFrom(data, off, len, EMPTY_REGISTRY);
     }
 
     @Override // com.android.framework.protobuf.Parser
-    public MessageType parsePartialFrom(byte[] data, ExtensionRegistryLite extensionRegistry) throws InvalidProtocolBufferException {
+    public MessageType parsePartialFrom(byte[] data, ExtensionRegistryLite extensionRegistry)
+            throws InvalidProtocolBufferException {
         return parsePartialFrom(data, 0, data.length, extensionRegistry);
     }
 
@@ -125,17 +141,21 @@ public abstract class AbstractParser<MessageType extends MessageLite> implements
     }
 
     @Override // com.android.framework.protobuf.Parser
-    public MessageType parseFrom(byte[] data, int off, int len, ExtensionRegistryLite extensionRegistry) throws InvalidProtocolBufferException {
+    public MessageType parseFrom(
+            byte[] data, int off, int len, ExtensionRegistryLite extensionRegistry)
+            throws InvalidProtocolBufferException {
         return checkMessageInitialized(parsePartialFrom(data, off, len, extensionRegistry));
     }
 
     @Override // com.android.framework.protobuf.Parser
-    public MessageType parseFrom(byte[] data, int off, int len) throws InvalidProtocolBufferException {
+    public MessageType parseFrom(byte[] data, int off, int len)
+            throws InvalidProtocolBufferException {
         return parseFrom(data, off, len, EMPTY_REGISTRY);
     }
 
     @Override // com.android.framework.protobuf.Parser
-    public MessageType parseFrom(byte[] data, ExtensionRegistryLite extensionRegistry) throws InvalidProtocolBufferException {
+    public MessageType parseFrom(byte[] data, ExtensionRegistryLite extensionRegistry)
+            throws InvalidProtocolBufferException {
         return parseFrom(data, 0, data.length, extensionRegistry);
     }
 
@@ -145,7 +165,8 @@ public abstract class AbstractParser<MessageType extends MessageLite> implements
     }
 
     @Override // com.android.framework.protobuf.Parser
-    public MessageType parsePartialFrom(InputStream input, ExtensionRegistryLite extensionRegistry) throws InvalidProtocolBufferException {
+    public MessageType parsePartialFrom(InputStream input, ExtensionRegistryLite extensionRegistry)
+            throws InvalidProtocolBufferException {
         CodedInputStream codedInput = CodedInputStream.newInstance(input);
         MessageType messagetype = (MessageType) parsePartialFrom(codedInput, extensionRegistry);
         try {
@@ -162,7 +183,8 @@ public abstract class AbstractParser<MessageType extends MessageLite> implements
     }
 
     @Override // com.android.framework.protobuf.Parser
-    public MessageType parseFrom(InputStream input, ExtensionRegistryLite extensionRegistry) throws InvalidProtocolBufferException {
+    public MessageType parseFrom(InputStream input, ExtensionRegistryLite extensionRegistry)
+            throws InvalidProtocolBufferException {
         return checkMessageInitialized(parsePartialFrom(input, extensionRegistry));
     }
 
@@ -172,14 +194,17 @@ public abstract class AbstractParser<MessageType extends MessageLite> implements
     }
 
     @Override // com.android.framework.protobuf.Parser
-    public MessageType parsePartialDelimitedFrom(InputStream input, ExtensionRegistryLite extensionRegistry) throws InvalidProtocolBufferException {
+    public MessageType parsePartialDelimitedFrom(
+            InputStream input, ExtensionRegistryLite extensionRegistry)
+            throws InvalidProtocolBufferException {
         try {
             int firstByte = input.read();
             if (firstByte == -1) {
                 return null;
             }
             int size = CodedInputStream.readRawVarint32(firstByte, input);
-            InputStream limitedInput = new AbstractMessageLite.Builder.LimitedInputStream(input, size);
+            InputStream limitedInput =
+                    new AbstractMessageLite.Builder.LimitedInputStream(input, size);
             return parsePartialFrom(limitedInput, extensionRegistry);
         } catch (IOException e) {
             throw new InvalidProtocolBufferException(e);
@@ -187,12 +212,15 @@ public abstract class AbstractParser<MessageType extends MessageLite> implements
     }
 
     @Override // com.android.framework.protobuf.Parser
-    public MessageType parsePartialDelimitedFrom(InputStream input) throws InvalidProtocolBufferException {
+    public MessageType parsePartialDelimitedFrom(InputStream input)
+            throws InvalidProtocolBufferException {
         return parsePartialDelimitedFrom(input, EMPTY_REGISTRY);
     }
 
     @Override // com.android.framework.protobuf.Parser
-    public MessageType parseDelimitedFrom(InputStream input, ExtensionRegistryLite extensionRegistry) throws InvalidProtocolBufferException {
+    public MessageType parseDelimitedFrom(
+            InputStream input, ExtensionRegistryLite extensionRegistry)
+            throws InvalidProtocolBufferException {
         return checkMessageInitialized(parsePartialDelimitedFrom(input, extensionRegistry));
     }
 

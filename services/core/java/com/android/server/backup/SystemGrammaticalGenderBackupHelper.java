@@ -3,49 +3,73 @@ package com.android.server.backup;
 import android.app.backup.BackupDataOutput;
 import android.app.backup.BlobBackupHelper;
 import android.os.ParcelFileDescriptor;
+
 import com.android.server.LocalServices;
 import com.android.server.grammaticalinflection.GrammaticalInflectionBackupHelper;
 import com.android.server.grammaticalinflection.GrammaticalInflectionService;
+
 import java.nio.ByteBuffer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class SystemGrammaticalGenderBackupHelper extends BlobBackupHelper {
-    public final GrammaticalInflectionService.GrammaticalInflectionManagerInternalImpl mGrammarInflectionManagerInternal;
+    public final GrammaticalInflectionService.GrammaticalInflectionManagerInternalImpl
+            mGrammarInflectionManagerInternal;
     public final int mUserId;
 
     public SystemGrammaticalGenderBackupHelper(int i) {
-        super(1, new String[]{"system_gender"});
+        super(1, new String[] {"system_gender"});
         this.mUserId = i;
-        this.mGrammarInflectionManagerInternal = (GrammaticalInflectionService.GrammaticalInflectionManagerInternalImpl) LocalServices.getService(GrammaticalInflectionService.GrammaticalInflectionManagerInternalImpl.class);
+        this.mGrammarInflectionManagerInternal =
+                (GrammaticalInflectionService.GrammaticalInflectionManagerInternalImpl)
+                        LocalServices.getService(
+                                GrammaticalInflectionService
+                                        .GrammaticalInflectionManagerInternalImpl.class);
     }
 
     public final void applyRestoredPayload(String str, byte[] bArr) {
-        GrammaticalInflectionService.GrammaticalInflectionManagerInternalImpl grammaticalInflectionManagerInternalImpl;
-        if (!"system_gender".equals(str) || (grammaticalInflectionManagerInternalImpl = this.mGrammarInflectionManagerInternal) == null) {
+        GrammaticalInflectionService.GrammaticalInflectionManagerInternalImpl
+                grammaticalInflectionManagerInternalImpl;
+        if (!"system_gender".equals(str)
+                || (grammaticalInflectionManagerInternalImpl =
+                                this.mGrammarInflectionManagerInternal)
+                        == null) {
             return;
         }
         int i = this.mUserId;
-        GrammaticalInflectionBackupHelper grammaticalInflectionBackupHelper = GrammaticalInflectionService.this.mBackupHelper;
+        GrammaticalInflectionBackupHelper grammaticalInflectionBackupHelper =
+                GrammaticalInflectionService.this.mBackupHelper;
         grammaticalInflectionBackupHelper.getClass();
-        grammaticalInflectionBackupHelper.mGrammaticalGenderService.setSystemWideGrammaticalGender(ByteBuffer.wrap(bArr).getInt(), i);
+        grammaticalInflectionBackupHelper.mGrammaticalGenderService.setSystemWideGrammaticalGender(
+                ByteBuffer.wrap(bArr).getInt(), i);
     }
 
     public final byte[] getBackupPayload(String str) {
-        GrammaticalInflectionService.GrammaticalInflectionManagerInternalImpl grammaticalInflectionManagerInternalImpl;
-        if (!"system_gender".equals(str) || (grammaticalInflectionManagerInternalImpl = this.mGrammarInflectionManagerInternal) == null) {
+        GrammaticalInflectionService.GrammaticalInflectionManagerInternalImpl
+                grammaticalInflectionManagerInternalImpl;
+        if (!"system_gender".equals(str)
+                || (grammaticalInflectionManagerInternalImpl =
+                                this.mGrammarInflectionManagerInternal)
+                        == null) {
             return null;
         }
         int i = this.mUserId;
-        GrammaticalInflectionService grammaticalInflectionService = GrammaticalInflectionService.this;
-        GrammaticalInflectionService.m569$$Nest$menforceCallerPermissions(grammaticalInflectionService);
-        int systemGrammaticalGender = grammaticalInflectionService.mBackupHelper.mGrammaticalGenderService.getSystemGrammaticalGender(i);
+        GrammaticalInflectionService grammaticalInflectionService =
+                GrammaticalInflectionService.this;
+        GrammaticalInflectionService.m569$$Nest$menforceCallerPermissions(
+                grammaticalInflectionService);
+        int systemGrammaticalGender =
+                grammaticalInflectionService.mBackupHelper.mGrammaticalGenderService
+                        .getSystemGrammaticalGender(i);
         ByteBuffer allocate = ByteBuffer.allocate(4);
         allocate.putInt(systemGrammaticalGender);
         return allocate.array();
     }
 
-    public final void performBackup(ParcelFileDescriptor parcelFileDescriptor, BackupDataOutput backupDataOutput, ParcelFileDescriptor parcelFileDescriptor2) {
+    public final void performBackup(
+            ParcelFileDescriptor parcelFileDescriptor,
+            BackupDataOutput backupDataOutput,
+            ParcelFileDescriptor parcelFileDescriptor2) {
         if ((backupDataOutput.getTransportFlags() & 1) == 0) {
             return;
         }

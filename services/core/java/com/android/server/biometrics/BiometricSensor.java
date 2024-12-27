@@ -30,7 +30,18 @@ public abstract class BiometricSensor {
     }
 
     public final String toString() {
-        return "ID(" + this.id + "), oemStrength: " + this.oemStrength + ", updatedStrength: " + this.mUpdatedStrength + ", modality " + this.modality + ", state: " + this.mSensorState + ", cookie: " + this.mCookie;
+        return "ID("
+                + this.id
+                + "), oemStrength: "
+                + this.oemStrength
+                + ", updatedStrength: "
+                + this.mUpdatedStrength
+                + ", modality "
+                + this.modality
+                + ", state: "
+                + this.mSensorState
+                + ", cookie: "
+                + this.mCookie;
     }
 
     public void updateOemStrengthIfNotCached() {
@@ -39,7 +50,10 @@ public abstract class BiometricSensor {
         }
         int i = this.oemStrength;
         try {
-            i = Utils.propertyStrengthToAuthenticatorStrength(this.impl.getSensorProperties("BiometricService/Sensor").sensorStrength);
+            i =
+                    Utils.propertyStrengthToAuthenticatorStrength(
+                            this.impl.getSensorProperties("BiometricService/Sensor")
+                                    .sensorStrength);
             this.mIsUpdatedOemStrength = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,7 +71,9 @@ public abstract class BiometricSensor {
 
     public final void updateStrength(int i) {
         this.mUpdatedStrength = i;
-        Slog.d("BiometricService/Sensor", ("updateStrength: Before(" + this + ")") + " After(" + this + ")");
+        Slog.d(
+                "BiometricService/Sensor",
+                ("updateStrength: Before(" + this + ")") + " After(" + this + ")");
         this.mIsUpdatedStrengthByDeviceConfig = true;
     }
 }

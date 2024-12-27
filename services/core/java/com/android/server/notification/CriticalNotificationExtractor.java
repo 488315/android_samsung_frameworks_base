@@ -9,12 +9,14 @@ public class CriticalNotificationExtractor implements NotificationSignalExtracto
 
     @Override // com.android.server.notification.NotificationSignalExtractor
     public final void initialize(Context context, NotificationUsageStats notificationUsageStats) {
-        this.mSupportsCriticalNotifications = context.getPackageManager().hasSystemFeature("android.hardware.type.automotive", 0);
+        this.mSupportsCriticalNotifications =
+                context.getPackageManager().hasSystemFeature("android.hardware.type.automotive", 0);
     }
 
     @Override // com.android.server.notification.NotificationSignalExtractor
     public final RankingReconsideration process(NotificationRecord notificationRecord) {
-        if (!this.mSupportsCriticalNotifications || notificationRecord.sbn.getNotification() == null) {
+        if (!this.mSupportsCriticalNotifications
+                || notificationRecord.sbn.getNotification() == null) {
             return null;
         }
         if (notificationRecord.isCategory("car_emergency")) {
@@ -28,10 +30,8 @@ public class CriticalNotificationExtractor implements NotificationSignalExtracto
     }
 
     @Override // com.android.server.notification.NotificationSignalExtractor
-    public final void setConfig(RankingConfig rankingConfig) {
-    }
+    public final void setConfig(RankingConfig rankingConfig) {}
 
     @Override // com.android.server.notification.NotificationSignalExtractor
-    public final void setZenHelper(ZenModeHelper zenModeHelper) {
-    }
+    public final void setZenHelper(ZenModeHelper zenModeHelper) {}
 }

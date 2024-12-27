@@ -2,7 +2,7 @@ package com.android.server.am;
 
 import android.os.SystemClock;
 import android.os.UserHandle;
-import com.android.server.am.BaseAppStateEventsTracker;
+
 import java.io.PrintWriter;
 import java.util.LinkedList;
 
@@ -15,7 +15,11 @@ public abstract class BaseAppStateEvents {
     public final String mPackageName;
     public final int mUid;
 
-    public BaseAppStateEvents(int i, String str, int i2, BaseAppStateEventsTracker.BaseAppStateEventsPolicy baseAppStateEventsPolicy) {
+    public BaseAppStateEvents(
+            int i,
+            String str,
+            int i2,
+            BaseAppStateEventsTracker.BaseAppStateEventsPolicy baseAppStateEventsPolicy) {
         this.mUid = i;
         this.mPackageName = str;
         this.mMaxTrackingDurationConfig = baseAppStateEventsPolicy;
@@ -103,7 +107,11 @@ public abstract class BaseAppStateEvents {
     }
 
     public String toString() {
-        return this.mPackageName + "/" + UserHandle.formatUid(this.mUid) + " totalEvents[0]=" + formatEventSummary(0, SystemClock.elapsedRealtime());
+        return this.mPackageName
+                + "/"
+                + UserHandle.formatUid(this.mUid)
+                + " totalEvents[0]="
+                + formatEventSummary(0, SystemClock.elapsedRealtime());
     }
 
     public abstract void trimEvents(int i, long j);

@@ -3,6 +3,7 @@ package android.hardware.radio.V1_0;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -26,11 +27,17 @@ public final class CdmaSmsAck {
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.errorClass))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.smsCauseCode))));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.errorClass))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.smsCauseCode))));
     }
 
     public final String toString() {
-        return "{.errorClass = " + CdmaSmsErrorClass.toString(this.errorClass) + ", .smsCauseCode = " + this.smsCauseCode + "}";
+        return "{.errorClass = "
+                + CdmaSmsErrorClass.toString(this.errorClass)
+                + ", .smsCauseCode = "
+                + this.smsCauseCode
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -42,7 +49,8 @@ public final class CdmaSmsAck {
         ArrayList<CdmaSmsAck> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 8, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 8, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             CdmaSmsAck _hidl_vec_element = new CdmaSmsAck();
@@ -52,7 +60,8 @@ public final class CdmaSmsAck {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.errorClass = _hidl_blob.getInt32(0 + _hidl_offset);
         this.smsCauseCode = _hidl_blob.getInt32(4 + _hidl_offset);
     }

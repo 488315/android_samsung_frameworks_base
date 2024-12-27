@@ -1,6 +1,7 @@
 package android.view;
 
 import android.graphics.Rect;
+
 import java.util.function.Supplier;
 
 /* loaded from: classes4.dex */
@@ -45,6 +46,13 @@ public final class WindowMetrics {
     }
 
     public String toString() {
-        return WindowMetrics.class.getSimpleName() + ":{bounds=" + this.mBounds + ", windowInsets=" + this.mWindowInsets + ", density=" + this.mDensity + "}";
+        return WindowMetrics.class.getSimpleName()
+                + ":{bounds="
+                + this.mBounds
+                + ", windowInsets="
+                + this.mWindowInsets
+                + ", density="
+                + this.mDensity
+                + "}";
     }
 }

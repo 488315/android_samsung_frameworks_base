@@ -6,19 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SemContextActivityLocationLogging extends SemContextEventContext {
-    public static final Parcelable.Creator<SemContextActivityLocationLogging> CREATOR = new Parcelable.Creator<SemContextActivityLocationLogging>() { // from class: com.samsung.android.hardware.context.SemContextActivityLocationLogging.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextActivityLocationLogging createFromParcel(Parcel in) {
-            return new SemContextActivityLocationLogging(in);
-        }
+    public static final Parcelable.Creator<SemContextActivityLocationLogging> CREATOR =
+            new Parcelable.Creator<
+                    SemContextActivityLocationLogging>() { // from class:
+                                                           // com.samsung.android.hardware.context.SemContextActivityLocationLogging.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextActivityLocationLogging createFromParcel(Parcel in) {
+                    return new SemContextActivityLocationLogging(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextActivityLocationLogging[] newArray(int size) {
-            return new SemContextActivityLocationLogging[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextActivityLocationLogging[] newArray(int size) {
+                    return new SemContextActivityLocationLogging[size];
+                }
+            };
     public static final int LPP_RESOLUTION_HIGH = 2;
     public static final int LPP_RESOLUTION_LOW = 0;
     public static final int LPP_RESOLUTION_MID = 1;

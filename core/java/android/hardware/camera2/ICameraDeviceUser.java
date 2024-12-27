@@ -1,7 +1,5 @@
 package android.hardware.camera2;
 
-import android.hardware.camera2.ICameraDeviceCallbacks;
-import android.hardware.camera2.ICameraOfflineSession;
 import android.hardware.camera2.impl.CameraMetadataNative;
 import android.hardware.camera2.params.OutputConfiguration;
 import android.hardware.camera2.params.SessionConfiguration;
@@ -44,9 +42,11 @@ public interface ICameraDeviceUser extends IInterface {
 
     void disconnect() throws RemoteException;
 
-    int[] endConfigure(int i, CameraMetadataNative cameraMetadataNative, long j) throws RemoteException;
+    int[] endConfigure(int i, CameraMetadataNative cameraMetadataNative, long j)
+            throws RemoteException;
 
-    void finalizeOutputConfigurations(int i, OutputConfiguration outputConfiguration) throws RemoteException;
+    void finalizeOutputConfigurations(int i, OutputConfiguration outputConfiguration)
+            throws RemoteException;
 
     long flush() throws RemoteException;
 
@@ -56,7 +56,8 @@ public interface ICameraDeviceUser extends IInterface {
 
     Surface getInputSurface() throws RemoteException;
 
-    boolean isSessionConfigurationSupported(SessionConfiguration sessionConfiguration) throws RemoteException;
+    boolean isSessionConfigurationSupported(SessionConfiguration sessionConfiguration)
+            throws RemoteException;
 
     void prepare(int i) throws RemoteException;
 
@@ -68,28 +69,32 @@ public interface ICameraDeviceUser extends IInterface {
 
     SubmitInfo submitRequest(CaptureRequest captureRequest, boolean z) throws RemoteException;
 
-    SubmitInfo submitRequestList(CaptureRequest[] captureRequestArr, boolean z) throws RemoteException;
+    SubmitInfo submitRequestList(CaptureRequest[] captureRequestArr, boolean z)
+            throws RemoteException;
 
-    ICameraOfflineSession switchToOffline(ICameraDeviceCallbacks iCameraDeviceCallbacks, int[] iArr) throws RemoteException;
+    ICameraOfflineSession switchToOffline(ICameraDeviceCallbacks iCameraDeviceCallbacks, int[] iArr)
+            throws RemoteException;
 
     void tearDown(int i) throws RemoteException;
 
-    void updateOutputConfiguration(int i, OutputConfiguration outputConfiguration) throws RemoteException;
+    void updateOutputConfiguration(int i, OutputConfiguration outputConfiguration)
+            throws RemoteException;
 
     void waitUntilIdle() throws RemoteException;
 
     public static class Default implements ICameraDeviceUser {
         @Override // android.hardware.camera2.ICameraDeviceUser
-        public void disconnect() throws RemoteException {
-        }
+        public void disconnect() throws RemoteException {}
 
         @Override // android.hardware.camera2.ICameraDeviceUser
-        public SubmitInfo submitRequest(CaptureRequest request, boolean streaming) throws RemoteException {
+        public SubmitInfo submitRequest(CaptureRequest request, boolean streaming)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.camera2.ICameraDeviceUser
-        public SubmitInfo submitRequestList(CaptureRequest[] requestList, boolean streaming) throws RemoteException {
+        public SubmitInfo submitRequestList(CaptureRequest[] requestList, boolean streaming)
+                throws RemoteException {
             return null;
         }
 
@@ -99,22 +104,23 @@ public interface ICameraDeviceUser extends IInterface {
         }
 
         @Override // android.hardware.camera2.ICameraDeviceUser
-        public void beginConfigure() throws RemoteException {
-        }
+        public void beginConfigure() throws RemoteException {}
 
         @Override // android.hardware.camera2.ICameraDeviceUser
-        public int[] endConfigure(int operatingMode, CameraMetadataNative sessionParams, long startTimeMs) throws RemoteException {
+        public int[] endConfigure(
+                int operatingMode, CameraMetadataNative sessionParams, long startTimeMs)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.camera2.ICameraDeviceUser
-        public boolean isSessionConfigurationSupported(SessionConfiguration sessionConfiguration) throws RemoteException {
+        public boolean isSessionConfigurationSupported(SessionConfiguration sessionConfiguration)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.camera2.ICameraDeviceUser
-        public void deleteStream(int streamId) throws RemoteException {
-        }
+        public void deleteStream(int streamId) throws RemoteException {}
 
         @Override // android.hardware.camera2.ICameraDeviceUser
         public int createStream(OutputConfiguration outputConfiguration) throws RemoteException {
@@ -122,13 +128,13 @@ public interface ICameraDeviceUser extends IInterface {
         }
 
         @Override // android.hardware.camera2.ICameraDeviceUser
-        public int createInputStream(int width, int height, int format, boolean isMultiResolution) throws RemoteException {
+        public int createInputStream(int width, int height, int format, boolean isMultiResolution)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.hardware.camera2.ICameraDeviceUser
-        public void setParameters(String params) throws RemoteException {
-        }
+        public void setParameters(String params) throws RemoteException {}
 
         @Override // android.hardware.camera2.ICameraDeviceUser
         public Surface getInputSurface() throws RemoteException {
@@ -146,8 +152,7 @@ public interface ICameraDeviceUser extends IInterface {
         }
 
         @Override // android.hardware.camera2.ICameraDeviceUser
-        public void waitUntilIdle() throws RemoteException {
-        }
+        public void waitUntilIdle() throws RemoteException {}
 
         @Override // android.hardware.camera2.ICameraDeviceUser
         public long flush() throws RemoteException {
@@ -155,28 +160,24 @@ public interface ICameraDeviceUser extends IInterface {
         }
 
         @Override // android.hardware.camera2.ICameraDeviceUser
-        public void prepare(int streamId) throws RemoteException {
-        }
+        public void prepare(int streamId) throws RemoteException {}
 
         @Override // android.hardware.camera2.ICameraDeviceUser
-        public void tearDown(int streamId) throws RemoteException {
-        }
+        public void tearDown(int streamId) throws RemoteException {}
 
         @Override // android.hardware.camera2.ICameraDeviceUser
-        public void prepare2(int maxCount, int streamId) throws RemoteException {
-        }
+        public void prepare2(int maxCount, int streamId) throws RemoteException {}
 
         @Override // android.hardware.camera2.ICameraDeviceUser
-        public void updateOutputConfiguration(int streamId, OutputConfiguration outputConfiguration) throws RemoteException {
-        }
+        public void updateOutputConfiguration(int streamId, OutputConfiguration outputConfiguration)
+                throws RemoteException {}
 
         @Override // android.hardware.camera2.ICameraDeviceUser
-        public void finalizeOutputConfigurations(int streamId, OutputConfiguration outputConfiguration) throws RemoteException {
-        }
+        public void finalizeOutputConfigurations(
+                int streamId, OutputConfiguration outputConfiguration) throws RemoteException {}
 
         @Override // android.hardware.camera2.ICameraDeviceUser
-        public void setCameraAudioRestriction(int mode) throws RemoteException {
-        }
+        public void setCameraAudioRestriction(int mode) throws RemoteException {}
 
         @Override // android.hardware.camera2.ICameraDeviceUser
         public int getGlobalAudioRestriction() throws RemoteException {
@@ -184,7 +185,8 @@ public interface ICameraDeviceUser extends IInterface {
         }
 
         @Override // android.hardware.camera2.ICameraDeviceUser
-        public ICameraOfflineSession switchToOffline(ICameraDeviceCallbacks callbacks, int[] offlineOutputIds) throws RemoteException {
+        public ICameraOfflineSession switchToOffline(
+                ICameraDeviceCallbacks callbacks, int[] offlineOutputIds) throws RemoteException {
             return null;
         }
 
@@ -194,7 +196,7 @@ public interface ICameraDeviceUser extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICameraDeviceUser {
+    public abstract static class Stub extends Binder implements ICameraDeviceUser {
         public static final String DESCRIPTOR = "android.hardware.camera2.ICameraDeviceUser";
         static final int TRANSACTION_beginConfigure = 5;
         static final int TRANSACTION_cancelRequest = 4;
@@ -302,7 +304,8 @@ public interface ICameraDeviceUser extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -316,7 +319,8 @@ public interface ICameraDeviceUser extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 2:
-                    CaptureRequest _arg0 = (CaptureRequest) data.readTypedObject(CaptureRequest.CREATOR);
+                    CaptureRequest _arg0 =
+                            (CaptureRequest) data.readTypedObject(CaptureRequest.CREATOR);
                     boolean _arg1 = data.readBoolean();
                     data.enforceNoDataAvail();
                     SubmitInfo _result = submitRequest(_arg0, _arg1);
@@ -324,7 +328,8 @@ public interface ICameraDeviceUser extends IInterface {
                     reply.writeTypedObject(_result, 1);
                     return true;
                 case 3:
-                    CaptureRequest[] _arg02 = (CaptureRequest[]) data.createTypedArray(CaptureRequest.CREATOR);
+                    CaptureRequest[] _arg02 =
+                            (CaptureRequest[]) data.createTypedArray(CaptureRequest.CREATOR);
                     boolean _arg12 = data.readBoolean();
                     data.enforceNoDataAvail();
                     SubmitInfo _result2 = submitRequestList(_arg02, _arg12);
@@ -344,7 +349,9 @@ public interface ICameraDeviceUser extends IInterface {
                     return true;
                 case 6:
                     int _arg04 = data.readInt();
-                    CameraMetadataNative _arg13 = (CameraMetadataNative) data.readTypedObject(CameraMetadataNative.CREATOR);
+                    CameraMetadataNative _arg13 =
+                            (CameraMetadataNative)
+                                    data.readTypedObject(CameraMetadataNative.CREATOR);
                     long _arg2 = data.readLong();
                     data.enforceNoDataAvail();
                     int[] _result4 = endConfigure(_arg04, _arg13, _arg2);
@@ -352,7 +359,9 @@ public interface ICameraDeviceUser extends IInterface {
                     reply.writeIntArray(_result4);
                     return true;
                 case 7:
-                    SessionConfiguration _arg05 = (SessionConfiguration) data.readTypedObject(SessionConfiguration.CREATOR);
+                    SessionConfiguration _arg05 =
+                            (SessionConfiguration)
+                                    data.readTypedObject(SessionConfiguration.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result5 = isSessionConfigurationSupported(_arg05);
                     reply.writeNoException();
@@ -365,7 +374,8 @@ public interface ICameraDeviceUser extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 9:
-                    OutputConfiguration _arg07 = (OutputConfiguration) data.readTypedObject(OutputConfiguration.CREATOR);
+                    OutputConfiguration _arg07 =
+                            (OutputConfiguration) data.readTypedObject(OutputConfiguration.CREATOR);
                     data.enforceNoDataAvail();
                     int _result6 = createStream(_arg07);
                     reply.writeNoException();
@@ -434,14 +444,16 @@ public interface ICameraDeviceUser extends IInterface {
                     return true;
                 case 20:
                     int _arg014 = data.readInt();
-                    OutputConfiguration _arg16 = (OutputConfiguration) data.readTypedObject(OutputConfiguration.CREATOR);
+                    OutputConfiguration _arg16 =
+                            (OutputConfiguration) data.readTypedObject(OutputConfiguration.CREATOR);
                     data.enforceNoDataAvail();
                     updateOutputConfiguration(_arg014, _arg16);
                     reply.writeNoException();
                     return true;
                 case 21:
                     int _arg015 = data.readInt();
-                    OutputConfiguration _arg17 = (OutputConfiguration) data.readTypedObject(OutputConfiguration.CREATOR);
+                    OutputConfiguration _arg17 =
+                            (OutputConfiguration) data.readTypedObject(OutputConfiguration.CREATOR);
                     data.enforceNoDataAvail();
                     finalizeOutputConfigurations(_arg015, _arg17);
                     reply.writeNoException();
@@ -458,7 +470,8 @@ public interface ICameraDeviceUser extends IInterface {
                     reply.writeInt(_result12);
                     return true;
                 case 24:
-                    ICameraDeviceCallbacks _arg017 = ICameraDeviceCallbacks.Stub.asInterface(data.readStrongBinder());
+                    ICameraDeviceCallbacks _arg017 =
+                            ICameraDeviceCallbacks.Stub.asInterface(data.readStrongBinder());
                     int[] _arg18 = data.createIntArray();
                     data.enforceNoDataAvail();
                     ICameraOfflineSession _result13 = switchToOffline(_arg017, _arg18);
@@ -501,7 +514,8 @@ public interface ICameraDeviceUser extends IInterface {
             }
 
             @Override // android.hardware.camera2.ICameraDeviceUser
-            public SubmitInfo submitRequest(CaptureRequest request, boolean streaming) throws RemoteException {
+            public SubmitInfo submitRequest(CaptureRequest request, boolean streaming)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -519,7 +533,8 @@ public interface ICameraDeviceUser extends IInterface {
             }
 
             @Override // android.hardware.camera2.ICameraDeviceUser
-            public SubmitInfo submitRequestList(CaptureRequest[] requestList, boolean streaming) throws RemoteException {
+            public SubmitInfo submitRequestList(CaptureRequest[] requestList, boolean streaming)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -568,7 +583,9 @@ public interface ICameraDeviceUser extends IInterface {
             }
 
             @Override // android.hardware.camera2.ICameraDeviceUser
-            public int[] endConfigure(int operatingMode, CameraMetadataNative sessionParams, long startTimeMs) throws RemoteException {
+            public int[] endConfigure(
+                    int operatingMode, CameraMetadataNative sessionParams, long startTimeMs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -587,7 +604,8 @@ public interface ICameraDeviceUser extends IInterface {
             }
 
             @Override // android.hardware.camera2.ICameraDeviceUser
-            public boolean isSessionConfigurationSupported(SessionConfiguration sessionConfiguration) throws RemoteException {
+            public boolean isSessionConfigurationSupported(
+                    SessionConfiguration sessionConfiguration) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -619,7 +637,8 @@ public interface ICameraDeviceUser extends IInterface {
             }
 
             @Override // android.hardware.camera2.ICameraDeviceUser
-            public int createStream(OutputConfiguration outputConfiguration) throws RemoteException {
+            public int createStream(OutputConfiguration outputConfiguration)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -636,7 +655,9 @@ public interface ICameraDeviceUser extends IInterface {
             }
 
             @Override // android.hardware.camera2.ICameraDeviceUser
-            public int createInputStream(int width, int height, int format, boolean isMultiResolution) throws RemoteException {
+            public int createInputStream(
+                    int width, int height, int format, boolean isMultiResolution)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -687,7 +708,8 @@ public interface ICameraDeviceUser extends IInterface {
             }
 
             @Override // android.hardware.camera2.ICameraDeviceUser
-            public CameraMetadataNative createDefaultRequest(int templateId) throws RemoteException {
+            public CameraMetadataNative createDefaultRequest(int templateId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -695,7 +717,9 @@ public interface ICameraDeviceUser extends IInterface {
                     _data.writeInt(templateId);
                     this.mRemote.transact(13, _data, _reply, 0);
                     _reply.readException();
-                    CameraMetadataNative _result = (CameraMetadataNative) _reply.readTypedObject(CameraMetadataNative.CREATOR);
+                    CameraMetadataNative _result =
+                            (CameraMetadataNative)
+                                    _reply.readTypedObject(CameraMetadataNative.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -711,7 +735,9 @@ public interface ICameraDeviceUser extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(14, _data, _reply, 0);
                     _reply.readException();
-                    CameraMetadataNative _result = (CameraMetadataNative) _reply.readTypedObject(CameraMetadataNative.CREATOR);
+                    CameraMetadataNative _result =
+                            (CameraMetadataNative)
+                                    _reply.readTypedObject(CameraMetadataNative.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -796,7 +822,8 @@ public interface ICameraDeviceUser extends IInterface {
             }
 
             @Override // android.hardware.camera2.ICameraDeviceUser
-            public void updateOutputConfiguration(int streamId, OutputConfiguration outputConfiguration) throws RemoteException {
+            public void updateOutputConfiguration(
+                    int streamId, OutputConfiguration outputConfiguration) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -812,7 +839,8 @@ public interface ICameraDeviceUser extends IInterface {
             }
 
             @Override // android.hardware.camera2.ICameraDeviceUser
-            public void finalizeOutputConfigurations(int streamId, OutputConfiguration outputConfiguration) throws RemoteException {
+            public void finalizeOutputConfigurations(
+                    int streamId, OutputConfiguration outputConfiguration) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -859,7 +887,9 @@ public interface ICameraDeviceUser extends IInterface {
             }
 
             @Override // android.hardware.camera2.ICameraDeviceUser
-            public ICameraOfflineSession switchToOffline(ICameraDeviceCallbacks callbacks, int[] offlineOutputIds) throws RemoteException {
+            public ICameraOfflineSession switchToOffline(
+                    ICameraDeviceCallbacks callbacks, int[] offlineOutputIds)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -868,7 +898,8 @@ public interface ICameraDeviceUser extends IInterface {
                     _data.writeIntArray(offlineOutputIds);
                     this.mRemote.transact(24, _data, _reply, 0);
                     _reply.readException();
-                    ICameraOfflineSession _result = ICameraOfflineSession.Stub.asInterface(_reply.readStrongBinder());
+                    ICameraOfflineSession _result =
+                            ICameraOfflineSession.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();

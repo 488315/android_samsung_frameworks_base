@@ -50,40 +50,31 @@ public interface IFilter extends IInterface {
 
     public static class Default implements IFilter {
         @Override // android.hardware.tv.tuner.IFilter
-        public void getQueueDesc(MQDescriptor<Byte, Byte> queue) throws RemoteException {
-        }
+        public void getQueueDesc(MQDescriptor<Byte, Byte> queue) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IFilter
-        public void close() throws RemoteException {
-        }
+        public void close() throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IFilter
-        public void configure(DemuxFilterSettings settings) throws RemoteException {
-        }
+        public void configure(DemuxFilterSettings settings) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IFilter
-        public void configureAvStreamType(AvStreamType avStreamType) throws RemoteException {
-        }
+        public void configureAvStreamType(AvStreamType avStreamType) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IFilter
-        public void configureIpCid(int ipCid) throws RemoteException {
-        }
+        public void configureIpCid(int ipCid) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IFilter
-        public void configureMonitorEvent(int monitorEventTypes) throws RemoteException {
-        }
+        public void configureMonitorEvent(int monitorEventTypes) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IFilter
-        public void start() throws RemoteException {
-        }
+        public void start() throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IFilter
-        public void stop() throws RemoteException {
-        }
+        public void stop() throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IFilter
-        public void flush() throws RemoteException {
-        }
+        public void flush() throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IFilter
         public long getAvSharedHandle(NativeHandle avMemory) throws RemoteException {
@@ -101,16 +92,13 @@ public interface IFilter extends IInterface {
         }
 
         @Override // android.hardware.tv.tuner.IFilter
-        public void releaseAvHandle(NativeHandle avMemory, long avDataId) throws RemoteException {
-        }
+        public void releaseAvHandle(NativeHandle avMemory, long avDataId) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IFilter
-        public void setDataSource(IFilter filter) throws RemoteException {
-        }
+        public void setDataSource(IFilter filter) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IFilter
-        public void setDelayHint(FilterDelayHint hint) throws RemoteException {
-        }
+        public void setDelayHint(FilterDelayHint hint) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IFilter
         public int getInterfaceVersion() {
@@ -128,7 +116,7 @@ public interface IFilter extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFilter {
+    public abstract static class Stub extends Binder implements IFilter {
         static final int TRANSACTION_close = 2;
         static final int TRANSACTION_configure = 3;
         static final int TRANSACTION_configureAvStreamType = 4;
@@ -169,7 +157,8 @@ public interface IFilter extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -201,7 +190,8 @@ public interface IFilter extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 3:
-                    DemuxFilterSettings _arg02 = (DemuxFilterSettings) data.readTypedObject(DemuxFilterSettings.CREATOR);
+                    DemuxFilterSettings _arg02 =
+                            (DemuxFilterSettings) data.readTypedObject(DemuxFilterSettings.CREATOR);
                     data.enforceNoDataAvail();
                     configure(_arg02);
                     reply.writeNoException();
@@ -268,7 +258,8 @@ public interface IFilter extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 15:
-                    FilterDelayHint _arg09 = (FilterDelayHint) data.readTypedObject(FilterDelayHint.CREATOR);
+                    FilterDelayHint _arg09 =
+                            (FilterDelayHint) data.readTypedObject(FilterDelayHint.CREATOR);
                     data.enforceNoDataAvail();
                     setDelayHint(_arg09);
                     reply.writeNoException();
@@ -517,7 +508,8 @@ public interface IFilter extends IInterface {
             }
 
             @Override // android.hardware.tv.tuner.IFilter
-            public void releaseAvHandle(NativeHandle avMemory, long avDataId) throws RemoteException {
+            public void releaseAvHandle(NativeHandle avMemory, long avDataId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

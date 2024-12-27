@@ -3,6 +3,7 @@ package com.android.server.notification.sec.timetoleave;
 import android.app.appsearch.AppSearchResult;
 import android.app.appsearch.AppSearchSession;
 import android.util.Log;
+
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
@@ -13,7 +14,8 @@ public final /* synthetic */ class TimeToLeaveHelper$$ExternalSyntheticLambda0 i
     public final /* synthetic */ TimeToLeaveHelper f$0;
     public final /* synthetic */ CompletableFuture f$1;
 
-    public /* synthetic */ TimeToLeaveHelper$$ExternalSyntheticLambda0(TimeToLeaveHelper timeToLeaveHelper, CompletableFuture completableFuture, int i) {
+    public /* synthetic */ TimeToLeaveHelper$$ExternalSyntheticLambda0(
+            TimeToLeaveHelper timeToLeaveHelper, CompletableFuture completableFuture, int i) {
         this.$r8$classId = i;
         this.f$0 = timeToLeaveHelper;
         this.f$1 = completableFuture;
@@ -28,7 +30,8 @@ public final /* synthetic */ class TimeToLeaveHelper$$ExternalSyntheticLambda0 i
                 AppSearchResult appSearchResult = (AppSearchResult) obj;
                 timeToLeaveHelper.getClass();
                 if (!appSearchResult.isSuccess()) {
-                    completableFuture.completeExceptionally(new IllegalStateException(appSearchResult.getErrorMessage()));
+                    completableFuture.completeExceptionally(
+                            new IllegalStateException(appSearchResult.getErrorMessage()));
                     Log.d("TimeToLeaveHelper", "Failed to create AppSearchSession");
                     break;
                 } else if (appSearchResult.getResultValue() != null) {

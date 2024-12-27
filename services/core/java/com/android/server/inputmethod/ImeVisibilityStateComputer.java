@@ -5,9 +5,11 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.PrintWriterPrinter;
 import android.util.Slog;
+
 import com.android.internal.inputmethod.InputMethodDebug;
 import com.android.server.wm.ImeTargetChangeListener;
 import com.android.server.wm.WindowManagerInternal;
+
 import java.io.PrintWriter;
 import java.util.WeakHashMap;
 
@@ -29,8 +31,7 @@ public final class ImeVisibilityStateComputer {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.inputmethod.ImeVisibilityStateComputer$1, reason: invalid class name */
     public final class AnonymousClass1 implements ImeTargetChangeListener {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -64,7 +65,8 @@ public final class ImeVisibilityStateComputer {
             sb.append(" softInputModeState ");
             sb.append(InputMethodDebug.softInputModeToString(this.mSoftInputModeState));
             sb.append(" isStartInputByGainFocus ");
-            return OptionalBool$$ExternalSyntheticOutline0.m("}", sb, this.mIsStartInputByGainFocus);
+            return OptionalBool$$ExternalSyntheticOutline0.m(
+                    "}", sb, this.mIsStartInputByGainFocus);
         }
     }
 
@@ -93,11 +95,21 @@ public final class ImeVisibilityStateComputer {
         WindowManagerInternal getWmService();
     }
 
-    public ImeVisibilityStateComputer(InputMethodManagerService inputMethodManagerService, Injector injector) {
-        this(inputMethodManagerService, injector.getWmService(), injector.getImeValidator(), new ImeVisibilityPolicy());
+    public ImeVisibilityStateComputer(
+            InputMethodManagerService inputMethodManagerService, Injector injector) {
+        this(
+                inputMethodManagerService,
+                injector.getWmService(),
+                injector.getImeValidator(),
+                new ImeVisibilityPolicy());
     }
 
-    public ImeVisibilityStateComputer(InputMethodManagerService inputMethodManagerService, WindowManagerInternal windowManagerInternal, ImeVisibilityStateComputer$$ExternalSyntheticLambda0 imeVisibilityStateComputer$$ExternalSyntheticLambda0, ImeVisibilityPolicy imeVisibilityPolicy) {
+    public ImeVisibilityStateComputer(
+            InputMethodManagerService inputMethodManagerService,
+            WindowManagerInternal windowManagerInternal,
+            ImeVisibilityStateComputer$$ExternalSyntheticLambda0
+                    imeVisibilityStateComputer$$ExternalSyntheticLambda0,
+            ImeVisibilityPolicy imeVisibilityPolicy) {
         this.mRequestWindowStateMap = new WeakHashMap();
         this.mService = inputMethodManagerService;
         this.mWindowManagerInternal = windowManagerInternal;
@@ -108,7 +120,11 @@ public final class ImeVisibilityStateComputer {
 
     public final void dump(PrintWriter printWriter) {
         PrintWriterPrinter printWriterPrinter = new PrintWriterPrinter(printWriter);
-        printWriterPrinter.println("  mRequestedShowExplicitly=" + this.mRequestedShowExplicitly + " mShowForced=" + this.mShowForced);
+        printWriterPrinter.println(
+                "  mRequestedShowExplicitly="
+                        + this.mRequestedShowExplicitly
+                        + " mShowForced="
+                        + this.mShowForced);
         StringBuilder sb = new StringBuilder("  mImeHiddenByDisplayPolicy=");
         sb.append(this.mPolicy.mImeHiddenByDisplayPolicy);
         printWriterPrinter.println(sb.toString());
@@ -117,7 +133,8 @@ public final class ImeVisibilityStateComputer {
 
     public final IBinder getWindowTokenFrom(IBinder iBinder) {
         for (IBinder iBinder2 : this.mRequestWindowStateMap.keySet()) {
-            if (((ImeTargetWindowState) this.mRequestWindowStateMap.get(iBinder2)).mRequestImeToken == iBinder) {
+            if (((ImeTargetWindowState) this.mRequestWindowStateMap.get(iBinder2)).mRequestImeToken
+                    == iBinder) {
                 return iBinder2;
             }
         }
@@ -126,7 +143,8 @@ public final class ImeVisibilityStateComputer {
 
     public final IBinder getWindowTokenFrom(ImeTargetWindowState imeTargetWindowState) {
         for (IBinder iBinder : this.mRequestWindowStateMap.keySet()) {
-            if (((ImeTargetWindowState) this.mRequestWindowStateMap.get(iBinder)) == imeTargetWindowState) {
+            if (((ImeTargetWindowState) this.mRequestWindowStateMap.get(iBinder))
+                    == imeTargetWindowState) {
                 return iBinder;
             }
         }
@@ -134,8 +152,12 @@ public final class ImeVisibilityStateComputer {
     }
 
     public ImeVisibilityResult onInteractiveChanged(IBinder iBinder, boolean z) {
-        ImeTargetWindowState imeTargetWindowState = (ImeTargetWindowState) this.mRequestWindowStateMap.get(iBinder);
-        if (imeTargetWindowState != null && imeTargetWindowState.mRequestedImeVisible && this.mInputShown && !z) {
+        ImeTargetWindowState imeTargetWindowState =
+                (ImeTargetWindowState) this.mRequestWindowStateMap.get(iBinder);
+        if (imeTargetWindowState != null
+                && imeTargetWindowState.mRequestedImeVisible
+                && this.mInputShown
+                && !z) {
             this.mRequestedImeScreenshot = true;
             return new ImeVisibilityResult(4, 34);
         }
@@ -147,7 +169,8 @@ public final class ImeVisibilityStateComputer {
     }
 
     public final void requestImeVisibility(IBinder iBinder, boolean z) {
-        ImeTargetWindowState imeTargetWindowState = (ImeTargetWindowState) this.mRequestWindowStateMap.get(iBinder);
+        ImeTargetWindowState imeTargetWindowState =
+                (ImeTargetWindowState) this.mRequestWindowStateMap.get(iBinder);
         if (imeTargetWindowState == null) {
             imeTargetWindowState = new ImeTargetWindowState(0, 0, 0, false, false, false);
         }
@@ -161,8 +184,11 @@ public final class ImeVisibilityStateComputer {
         setWindowStateInner(iBinder, imeTargetWindowState);
     }
 
-    public final void setWindowStateInner(IBinder iBinder, ImeTargetWindowState imeTargetWindowState) {
-        Slog.d("InputMethodManagerService", "setWindowStateInner, windowToken=" + iBinder + ", state=" + imeTargetWindowState);
+    public final void setWindowStateInner(
+            IBinder iBinder, ImeTargetWindowState imeTargetWindowState) {
+        Slog.d(
+                "InputMethodManagerService",
+                "setWindowStateInner, windowToken=" + iBinder + ", state=" + imeTargetWindowState);
         this.mRequestWindowStateMap.put(iBinder, imeTargetWindowState);
     }
 }

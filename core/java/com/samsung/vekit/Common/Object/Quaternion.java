@@ -1,6 +1,7 @@
 package com.samsung.vekit.Common.Object;
 
 import android.hardware.scontext.SContextConstants;
+
 import com.samsung.vekit.Common.Type.AxisType;
 
 /* loaded from: classes6.dex */
@@ -92,12 +93,24 @@ public class Quaternion {
             x = (float) Math.atan2(x2, matrix1.get(1, 1));
             z = 0.0f;
         }
-        return new Vector3<>(Float.valueOf((float) Math.toDegrees(x)), Float.valueOf((float) Math.toDegrees(y)), Float.valueOf((float) Math.toDegrees(z)));
+        return new Vector3<>(
+                Float.valueOf((float) Math.toDegrees(x)),
+                Float.valueOf((float) Math.toDegrees(y)),
+                Float.valueOf((float) Math.toDegrees(z)));
     }
 
     public void setRotation(Vector3<Float> axis, float degree) {
-        float divider = (float) Math.sqrt((axis.getX().floatValue() * axis.getX().floatValue()) + (axis.getY().floatValue() * axis.getY().floatValue()) + (axis.getZ().floatValue() * axis.getZ().floatValue()));
-        Vector3<Float> normalizeAxis = new Vector3<>(Float.valueOf(axis.getX().floatValue() / divider), Float.valueOf(axis.getY().floatValue() / divider), Float.valueOf(axis.getZ().floatValue() / divider));
+        float divider =
+                (float)
+                        Math.sqrt(
+                                (axis.getX().floatValue() * axis.getX().floatValue())
+                                        + (axis.getY().floatValue() * axis.getY().floatValue())
+                                        + (axis.getZ().floatValue() * axis.getZ().floatValue()));
+        Vector3<Float> normalizeAxis =
+                new Vector3<>(
+                        Float.valueOf(axis.getX().floatValue() / divider),
+                        Float.valueOf(axis.getY().floatValue() / divider),
+                        Float.valueOf(axis.getZ().floatValue() / divider));
         float sinVal = (float) Math.sin(Math.toRadians(degree) * 0.5d);
         float cosVal = (float) Math.cos(Math.toRadians(degree) * 0.5d);
         this.x = normalizeAxis.getX().floatValue() * sinVal;
@@ -108,7 +121,8 @@ public class Quaternion {
 
     /* renamed from: com.samsung.vekit.Common.Object.Quaternion$1, reason: invalid class name */
     static /* synthetic */ class AnonymousClass1 {
-        static final /* synthetic */ int[] $SwitchMap$com$samsung$vekit$Common$Type$AxisType = new int[AxisType.values().length];
+        static final /* synthetic */ int[] $SwitchMap$com$samsung$vekit$Common$Type$AxisType =
+                new int[AxisType.values().length];
 
         static {
             try {
@@ -127,7 +141,9 @@ public class Quaternion {
     }
 
     public void setRotation(AxisType axisType, float degree) {
-        int i = AnonymousClass1.$SwitchMap$com$samsung$vekit$Common$Type$AxisType[axisType.ordinal()];
+        int i =
+                AnonymousClass1.$SwitchMap$com$samsung$vekit$Common$Type$AxisType[
+                        axisType.ordinal()];
         Float valueOf = Float.valueOf(1.0f);
         Float valueOf2 = Float.valueOf(0.0f);
         switch (i) {
@@ -183,7 +199,9 @@ public class Quaternion {
     }
 
     public double getRoll() {
-        return Math.atan2(((this.x * this.y) + (this.w * this.z)) * 2.0d, (((this.w * this.w) + (this.x * this.x)) - (this.y * this.y)) - (this.z * this.z));
+        return Math.atan2(
+                ((this.x * this.y) + (this.w * this.z)) * 2.0d,
+                (((this.w * this.w) + (this.x * this.x)) - (this.y * this.y)) - (this.z * this.z));
     }
 
     public double getPitch() {
@@ -191,11 +209,18 @@ public class Quaternion {
     }
 
     public double getYaw() {
-        return Math.atan2(((this.y * this.z) + (this.w * this.x)) * 2.0d, (((this.w * this.w) - (this.x * this.x)) - (this.y * this.y)) + (this.z * this.z));
+        return Math.atan2(
+                ((this.y * this.z) + (this.w * this.x)) * 2.0d,
+                (((this.w * this.w) - (this.x * this.x)) - (this.y * this.y)) + (this.z * this.z));
     }
 
     public float length() {
-        return (float) Math.sqrt((this.x * this.x) + (this.y * this.y) + (this.z * this.z) + (this.w * this.w));
+        return (float)
+                Math.sqrt(
+                        (this.x * this.x)
+                                + (this.y * this.y)
+                                + (this.z * this.z)
+                                + (this.w * this.w));
     }
 
     public Quaternion divide(float scalar) {
@@ -213,7 +238,16 @@ public class Quaternion {
     }
 
     public Quaternion multiply(Quaternion quaternion) {
-        return new Quaternion((((this.w * quaternion.x) + (this.x * quaternion.w)) + (this.y * quaternion.z)) - (this.z * quaternion.y), ((this.w * quaternion.y) - (this.x * quaternion.z)) + (this.y * quaternion.w) + (this.z * quaternion.x), (((this.w * quaternion.z) + (this.x * quaternion.y)) - (this.y * quaternion.x)) + (this.z * quaternion.w), (((this.w * quaternion.w) - (this.x * quaternion.x)) - (this.y * quaternion.y)) - (this.z * quaternion.z));
+        return new Quaternion(
+                (((this.w * quaternion.x) + (this.x * quaternion.w)) + (this.y * quaternion.z))
+                        - (this.z * quaternion.y),
+                ((this.w * quaternion.y) - (this.x * quaternion.z))
+                        + (this.y * quaternion.w)
+                        + (this.z * quaternion.x),
+                (((this.w * quaternion.z) + (this.x * quaternion.y)) - (this.y * quaternion.x))
+                        + (this.z * quaternion.w),
+                (((this.w * quaternion.w) - (this.x * quaternion.x)) - (this.y * quaternion.y))
+                        - (this.z * quaternion.z));
     }
 
     public Quaternion multiply(float scalar) {
@@ -221,19 +255,32 @@ public class Quaternion {
     }
 
     public float lengthSquared() {
-        return (float) ((this.x * this.x) + (this.y * this.y) + (this.z * this.z) + (this.w * this.w));
+        return (float)
+                ((this.x * this.x) + (this.y * this.y) + (this.z * this.z) + (this.w * this.w));
     }
 
     public Quaternion add(Quaternion quaternion) {
-        return new Quaternion(this.x + quaternion.x, this.y + quaternion.y, this.z + quaternion.z, this.w + quaternion.w);
+        return new Quaternion(
+                this.x + quaternion.x,
+                this.y + quaternion.y,
+                this.z + quaternion.z,
+                this.w + quaternion.w);
     }
 
     public Quaternion substract(Quaternion quaternion) {
-        return new Quaternion(this.x - quaternion.x, this.y - quaternion.y, this.z - quaternion.z, this.w - quaternion.w);
+        return new Quaternion(
+                this.x - quaternion.x,
+                this.y - quaternion.y,
+                this.z - quaternion.z,
+                this.w - quaternion.w);
     }
 
     public float dot(Quaternion quaternion) {
-        return (float) ((this.x * quaternion.x) + (this.y * quaternion.y) + (this.z * quaternion.z) + (this.w * quaternion.w));
+        return (float)
+                ((this.x * quaternion.x)
+                        + (this.y * quaternion.y)
+                        + (this.z * quaternion.z)
+                        + (this.w * quaternion.w));
     }
 
     public void conjugate() {
@@ -299,7 +346,10 @@ public class Quaternion {
     }
 
     public boolean equals(Quaternion quaternion, double delta) {
-        if (Math.abs(this.x - quaternion.x) < delta && Math.abs(this.y - quaternion.y) < delta && Math.abs(this.z - quaternion.z) < delta && Math.abs(this.w - quaternion.w) < delta) {
+        if (Math.abs(this.x - quaternion.x) < delta
+                && Math.abs(this.y - quaternion.y) < delta
+                && Math.abs(this.z - quaternion.z) < delta
+                && Math.abs(this.w - quaternion.w) < delta) {
             return true;
         }
         Quaternion opposite = new Quaternion();
@@ -307,6 +357,9 @@ public class Quaternion {
         opposite.y = -quaternion.y;
         opposite.z = -quaternion.z;
         opposite.w = -quaternion.w;
-        return Math.abs(this.x - opposite.x) < delta && Math.abs(this.y - opposite.y) < delta && Math.abs(this.z - opposite.z) < delta && Math.abs(this.w - opposite.w) < delta;
+        return Math.abs(this.x - opposite.x) < delta
+                && Math.abs(this.y - opposite.y) < delta
+                && Math.abs(this.z - opposite.z) < delta
+                && Math.abs(this.w - opposite.w) < delta;
     }
 }

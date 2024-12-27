@@ -9,8 +9,7 @@ public interface UiTranslationStateCallback {
     void onPaused();
 
     @Deprecated
-    default void onStarted(String sourceLocale, String targetLocale) {
-    }
+    default void onStarted(String sourceLocale, String targetLocale) {}
 
     default void onStarted(ULocale sourceLocale, ULocale targetLocale) {
         onStarted(sourceLocale.getLanguage(), targetLocale.getLanguage());
@@ -24,8 +23,7 @@ public interface UiTranslationStateCallback {
         onPaused();
     }
 
-    default void onResumed(ULocale sourceLocale, ULocale targetLocale) {
-    }
+    default void onResumed(ULocale sourceLocale, ULocale targetLocale) {}
 
     default void onResumed(ULocale sourceLocale, ULocale targetLocale, String packageName) {
         onResumed(sourceLocale, targetLocale);

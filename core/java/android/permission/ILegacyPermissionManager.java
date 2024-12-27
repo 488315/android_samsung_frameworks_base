@@ -10,9 +10,11 @@ import android.os.RemoteException;
 public interface ILegacyPermissionManager extends IInterface {
     public static final String DESCRIPTOR = "android.permission.ILegacyPermissionManager";
 
-    int checkDeviceIdentifierAccess(String str, String str2, String str3, int i, int i2) throws RemoteException;
+    int checkDeviceIdentifierAccess(String str, String str2, String str3, int i, int i2)
+            throws RemoteException;
 
-    int checkPhoneNumberAccess(String str, String str2, String str3, int i, int i2) throws RemoteException;
+    int checkPhoneNumberAccess(String str, String str2, String str3, int i, int i2)
+            throws RemoteException;
 
     void grantDefaultPermissionsToActiveLuiApp(String str, int i) throws RemoteException;
 
@@ -22,50 +24,56 @@ public interface ILegacyPermissionManager extends IInterface {
 
     void grantDefaultPermissionsToEnabledImsServices(String[] strArr, int i) throws RemoteException;
 
-    void grantDefaultPermissionsToEnabledTelephonyDataServices(String[] strArr, int i) throws RemoteException;
+    void grantDefaultPermissionsToEnabledTelephonyDataServices(String[] strArr, int i)
+            throws RemoteException;
 
-    void revokeDefaultPermissionsFromDisabledTelephonyDataServices(String[] strArr, int i) throws RemoteException;
+    void revokeDefaultPermissionsFromDisabledTelephonyDataServices(String[] strArr, int i)
+            throws RemoteException;
 
     void revokeDefaultPermissionsFromLuiApps(String[] strArr, int i) throws RemoteException;
 
     public static class Default implements ILegacyPermissionManager {
         @Override // android.permission.ILegacyPermissionManager
-        public int checkDeviceIdentifierAccess(String packageName, String message, String callingFeatureId, int pid, int uid) throws RemoteException {
+        public int checkDeviceIdentifierAccess(
+                String packageName, String message, String callingFeatureId, int pid, int uid)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.permission.ILegacyPermissionManager
-        public int checkPhoneNumberAccess(String packageName, String message, String callingFeatureId, int pid, int uid) throws RemoteException {
+        public int checkPhoneNumberAccess(
+                String packageName, String message, String callingFeatureId, int pid, int uid)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.permission.ILegacyPermissionManager
-        public void grantDefaultPermissionsToEnabledCarrierApps(String[] packageNames, int userId) throws RemoteException {
-        }
+        public void grantDefaultPermissionsToEnabledCarrierApps(String[] packageNames, int userId)
+                throws RemoteException {}
 
         @Override // android.permission.ILegacyPermissionManager
-        public void grantDefaultPermissionsToEnabledImsServices(String[] packageNames, int userId) throws RemoteException {
-        }
+        public void grantDefaultPermissionsToEnabledImsServices(String[] packageNames, int userId)
+                throws RemoteException {}
 
         @Override // android.permission.ILegacyPermissionManager
-        public void grantDefaultPermissionsToEnabledTelephonyDataServices(String[] packageNames, int userId) throws RemoteException {
-        }
+        public void grantDefaultPermissionsToEnabledTelephonyDataServices(
+                String[] packageNames, int userId) throws RemoteException {}
 
         @Override // android.permission.ILegacyPermissionManager
-        public void revokeDefaultPermissionsFromDisabledTelephonyDataServices(String[] packageNames, int userId) throws RemoteException {
-        }
+        public void revokeDefaultPermissionsFromDisabledTelephonyDataServices(
+                String[] packageNames, int userId) throws RemoteException {}
 
         @Override // android.permission.ILegacyPermissionManager
-        public void grantDefaultPermissionsToActiveLuiApp(String packageName, int userId) throws RemoteException {
-        }
+        public void grantDefaultPermissionsToActiveLuiApp(String packageName, int userId)
+                throws RemoteException {}
 
         @Override // android.permission.ILegacyPermissionManager
-        public void revokeDefaultPermissionsFromLuiApps(String[] packageNames, int userId) throws RemoteException {
-        }
+        public void revokeDefaultPermissionsFromLuiApps(String[] packageNames, int userId)
+                throws RemoteException {}
 
         @Override // android.permission.ILegacyPermissionManager
-        public void grantDefaultPermissionsToCarrierServiceApp(String packageName, int userId) throws RemoteException {
-        }
+        public void grantDefaultPermissionsToCarrierServiceApp(String packageName, int userId)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -73,7 +81,7 @@ public interface ILegacyPermissionManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ILegacyPermissionManager {
+    public abstract static class Stub extends Binder implements ILegacyPermissionManager {
         static final int TRANSACTION_checkDeviceIdentifierAccess = 1;
         static final int TRANSACTION_checkPhoneNumberAccess = 2;
         static final int TRANSACTION_grantDefaultPermissionsToActiveLuiApp = 7;
@@ -135,7 +143,8 @@ public interface ILegacyPermissionManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ILegacyPermissionManager.DESCRIPTOR);
             }
@@ -237,7 +246,9 @@ public interface ILegacyPermissionManager extends IInterface {
             }
 
             @Override // android.permission.ILegacyPermissionManager
-            public int checkDeviceIdentifierAccess(String packageName, String message, String callingFeatureId, int pid, int uid) throws RemoteException {
+            public int checkDeviceIdentifierAccess(
+                    String packageName, String message, String callingFeatureId, int pid, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -258,7 +269,9 @@ public interface ILegacyPermissionManager extends IInterface {
             }
 
             @Override // android.permission.ILegacyPermissionManager
-            public int checkPhoneNumberAccess(String packageName, String message, String callingFeatureId, int pid, int uid) throws RemoteException {
+            public int checkPhoneNumberAccess(
+                    String packageName, String message, String callingFeatureId, int pid, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -279,7 +292,8 @@ public interface ILegacyPermissionManager extends IInterface {
             }
 
             @Override // android.permission.ILegacyPermissionManager
-            public void grantDefaultPermissionsToEnabledCarrierApps(String[] packageNames, int userId) throws RemoteException {
+            public void grantDefaultPermissionsToEnabledCarrierApps(
+                    String[] packageNames, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -295,7 +309,8 @@ public interface ILegacyPermissionManager extends IInterface {
             }
 
             @Override // android.permission.ILegacyPermissionManager
-            public void grantDefaultPermissionsToEnabledImsServices(String[] packageNames, int userId) throws RemoteException {
+            public void grantDefaultPermissionsToEnabledImsServices(
+                    String[] packageNames, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -311,7 +326,8 @@ public interface ILegacyPermissionManager extends IInterface {
             }
 
             @Override // android.permission.ILegacyPermissionManager
-            public void grantDefaultPermissionsToEnabledTelephonyDataServices(String[] packageNames, int userId) throws RemoteException {
+            public void grantDefaultPermissionsToEnabledTelephonyDataServices(
+                    String[] packageNames, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -327,7 +343,8 @@ public interface ILegacyPermissionManager extends IInterface {
             }
 
             @Override // android.permission.ILegacyPermissionManager
-            public void revokeDefaultPermissionsFromDisabledTelephonyDataServices(String[] packageNames, int userId) throws RemoteException {
+            public void revokeDefaultPermissionsFromDisabledTelephonyDataServices(
+                    String[] packageNames, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -343,7 +360,8 @@ public interface ILegacyPermissionManager extends IInterface {
             }
 
             @Override // android.permission.ILegacyPermissionManager
-            public void grantDefaultPermissionsToActiveLuiApp(String packageName, int userId) throws RemoteException {
+            public void grantDefaultPermissionsToActiveLuiApp(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -359,7 +377,8 @@ public interface ILegacyPermissionManager extends IInterface {
             }
 
             @Override // android.permission.ILegacyPermissionManager
-            public void revokeDefaultPermissionsFromLuiApps(String[] packageNames, int userId) throws RemoteException {
+            public void revokeDefaultPermissionsFromLuiApps(String[] packageNames, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -375,7 +394,8 @@ public interface ILegacyPermissionManager extends IInterface {
             }
 
             @Override // android.permission.ILegacyPermissionManager
-            public void grantDefaultPermissionsToCarrierServiceApp(String packageName, int userId) throws RemoteException {
+            public void grantDefaultPermissionsToCarrierServiceApp(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

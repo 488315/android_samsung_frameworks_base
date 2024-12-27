@@ -43,14 +43,11 @@ public interface BiometricConstants {
     public static final int BIOMETRIC_SYSTEM_EVENT_EARLY_USER_CANCEL = 1;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Acquired {
-    }
+    public @interface Acquired {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Errors {
-    }
+    public @interface Errors {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LockoutMode {
-    }
+    public @interface LockoutMode {}
 }

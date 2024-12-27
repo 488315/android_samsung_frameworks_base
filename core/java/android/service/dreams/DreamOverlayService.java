@@ -5,10 +5,9 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.service.dreams.IDreamOverlay;
-import android.service.dreams.IDreamOverlayClient;
 import android.util.Log;
 import android.view.WindowManager;
+
 import java.util.concurrent.Executor;
 
 /* loaded from: classes3.dex */
@@ -16,16 +15,17 @@ public abstract class DreamOverlayService extends Service {
     private static final boolean DEBUG = false;
     private static final String TAG = "DreamOverlayService";
     private OverlayClient mCurrentClient;
-    private IDreamOverlay mDreamOverlay = new IDreamOverlay.Stub() { // from class: android.service.dreams.DreamOverlayService.1
-        @Override // android.service.dreams.IDreamOverlay
-        public void getClient(IDreamOverlayClientCallback callback) {
-            try {
-                callback.onDreamOverlayClient(new OverlayClient(DreamOverlayService.this));
-            } catch (RemoteException e) {
-                Log.e(DreamOverlayService.TAG, "could not send client to callback", e);
-            }
-        }
-    };
+    private IDreamOverlay mDreamOverlay =
+            new IDreamOverlay.Stub() { // from class: android.service.dreams.DreamOverlayService.1
+                @Override // android.service.dreams.IDreamOverlay
+                public void getClient(IDreamOverlayClientCallback callback) {
+                    try {
+                        callback.onDreamOverlayClient(new OverlayClient(DreamOverlayService.this));
+                    } catch (RemoteException e) {
+                        Log.e(DreamOverlayService.TAG, "could not send client to callback", e);
+                    }
+                }
+            };
     private Executor mExecutor;
 
     public abstract void onStartDream(WindowManager.LayoutParams layoutParams);
@@ -42,7 +42,12 @@ public abstract class DreamOverlayService extends Service {
         }
 
         @Override // android.service.dreams.IDreamOverlayClient
-        public void startDream(WindowManager.LayoutParams params, IDreamOverlayCallback callback, String dreamComponent, boolean shouldShowComplications) throws RemoteException {
+        public void startDream(
+                WindowManager.LayoutParams params,
+                IDreamOverlayCallback callback,
+                String dreamComponent,
+                boolean shouldShowComplications)
+                throws RemoteException {
             this.mDreamComponent = ComponentName.unflattenFromString(dreamComponent);
             this.mShowComplications = shouldShowComplications;
             this.mDreamOverlayCallback = callback;
@@ -102,16 +107,19 @@ public abstract class DreamOverlayService extends Service {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void startDream(final OverlayClient client, final WindowManager.LayoutParams params) {
-        this.mExecutor.execute(new Runnable() { // from class: android.service.dreams.DreamOverlayService$$ExternalSyntheticLambda2
-            @Override // java.lang.Runnable
-            public final void run() {
-                DreamOverlayService.this.lambda$startDream$0(client, params);
-            }
-        });
+        this.mExecutor.execute(
+                new Runnable() { // from class:
+                                 // android.service.dreams.DreamOverlayService$$ExternalSyntheticLambda2
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        DreamOverlayService.this.lambda$startDream$0(client, params);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$startDream$0(OverlayClient client, WindowManager.LayoutParams params) {
+    public /* synthetic */ void lambda$startDream$0(
+            OverlayClient client, WindowManager.LayoutParams params) {
         lambda$endDream$1(this.mCurrentClient);
         this.mCurrentClient = client;
         onStartDream(params);
@@ -119,12 +127,14 @@ public abstract class DreamOverlayService extends Service {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void endDream(final OverlayClient client) {
-        this.mExecutor.execute(new Runnable() { // from class: android.service.dreams.DreamOverlayService$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                DreamOverlayService.this.lambda$endDream$1(client);
-            }
-        });
+        this.mExecutor.execute(
+                new Runnable() { // from class:
+                                 // android.service.dreams.DreamOverlayService$$ExternalSyntheticLambda1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        DreamOverlayService.this.lambda$endDream$1(client);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -139,12 +149,14 @@ public abstract class DreamOverlayService extends Service {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void wakeUp(final OverlayClient client) {
-        this.mExecutor.execute(new Runnable() { // from class: android.service.dreams.DreamOverlayService$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                DreamOverlayService.this.lambda$wakeUp$2(client);
-            }
-        });
+        this.mExecutor.execute(
+                new Runnable() { // from class:
+                                 // android.service.dreams.DreamOverlayService$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        DreamOverlayService.this.lambda$wakeUp$2(client);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -157,12 +169,14 @@ public abstract class DreamOverlayService extends Service {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void comeToFront(final OverlayClient client) {
-        this.mExecutor.execute(new Runnable() { // from class: android.service.dreams.DreamOverlayService$$ExternalSyntheticLambda3
-            @Override // java.lang.Runnable
-            public final void run() {
-                DreamOverlayService.this.lambda$comeToFront$3(client);
-            }
-        });
+        this.mExecutor.execute(
+                new Runnable() { // from class:
+                                 // android.service.dreams.DreamOverlayService$$ExternalSyntheticLambda3
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        DreamOverlayService.this.lambda$comeToFront$3(client);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -173,8 +187,7 @@ public abstract class DreamOverlayService extends Service {
         onComeToFront();
     }
 
-    public DreamOverlayService() {
-    }
+    public DreamOverlayService() {}
 
     public DreamOverlayService(Executor executor) {
         this.mExecutor = executor;
@@ -193,14 +206,11 @@ public abstract class DreamOverlayService extends Service {
         return this.mDreamOverlay.asBinder();
     }
 
-    public void onWakeUp() {
-    }
+    public void onWakeUp() {}
 
-    public void onComeToFront() {
-    }
+    public void onComeToFront() {}
 
-    public void onEndDream() {
-    }
+    public void onEndDream() {}
 
     public final void requestExit() {
         if (this.mCurrentClient == null) {
@@ -219,12 +229,12 @@ public abstract class DreamOverlayService extends Service {
         this.mCurrentClient.redirectWake(redirect);
     }
 
-    public void onWakeRequested() {
-    }
+    public void onWakeRequested() {}
 
     public final boolean shouldShowComplications() {
         if (this.mCurrentClient == null) {
-            throw new IllegalStateException("requested if should show complication when no dream active");
+            throw new IllegalStateException(
+                    "requested if should show complication when no dream active");
         }
         return this.mCurrentClient.shouldShowComplications();
     }

@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.view.inspector.InspectionCompanion;
 import android.view.inspector.PropertyMapper;
 import android.view.inspector.PropertyReader;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
@@ -21,7 +22,8 @@ public class ViewAnimator extends FrameLayout {
     Animation mOutAnimation;
     int mWhichChild;
 
-    public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<ViewAnimator> {
+    public final class InspectionCompanion
+            implements android.view.inspector.InspectionCompanion<ViewAnimator> {
         private int mAnimateFirstViewId;
         private int mInAnimationId;
         private int mOutAnimationId;

@@ -7,7 +7,30 @@ import android.view.KeyEvent;
 
 /* loaded from: classes4.dex */
 public class DialerKeyListener extends NumberKeyListener {
-    public static final char[] CHARACTERS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '#', '*', '+', '-', '(', ')', ',', '/', PhoneNumberUtils.WILD, '.', ' ', ';'};
+    public static final char[] CHARACTERS = {
+        '0',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        '#',
+        '*',
+        '+',
+        '-',
+        '(',
+        ')',
+        ',',
+        '/',
+        PhoneNumberUtils.WILD,
+        '.',
+        ' ',
+        ';'
+    };
     private static DialerKeyListener sInstance;
 
     @Override // android.text.method.NumberKeyListener

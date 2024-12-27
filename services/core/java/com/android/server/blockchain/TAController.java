@@ -6,6 +6,7 @@ import android.blockchain.TACommandResponse;
 import android.content.Context;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
+
 import java.io.IOException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -57,7 +58,14 @@ public final class TAController extends ITAController.Stub {
             try {
                 BlockchainTZService.checkCallerPermissionFor("processTACommand");
                 if (DEBUG) {
-                    Log.d("BlockchainTZService", "TAController::processTACommand: request = " + tACommandRequest + "; request.mCommandId = " + tACommandRequest.mCommandId + "; this.mTAId = " + this.mTAId);
+                    Log.d(
+                            "BlockchainTZService",
+                            "TAController::processTACommand: request = "
+                                    + tACommandRequest
+                                    + "; request.mCommandId = "
+                                    + tACommandRequest.mCommandId
+                                    + "; this.mTAId = "
+                                    + this.mTAId);
                 }
                 if (tACommandRequest.mCommandId == 590224) {
                     this.SET_QSEE_SECURE_UI = true;

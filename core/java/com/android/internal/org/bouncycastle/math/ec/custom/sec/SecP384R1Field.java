@@ -4,6 +4,7 @@ import com.android.internal.org.bouncycastle.math.raw.Mod;
 import com.android.internal.org.bouncycastle.math.raw.Nat;
 import com.android.internal.org.bouncycastle.math.raw.Nat384;
 import com.android.internal.org.bouncycastle.util.Pack;
+
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
@@ -13,8 +14,12 @@ public class SecP384R1Field {
     private static final int P11 = -1;
     private static final int PExt23 = -1;
     static final int[] P = {-1, 0, 0, -1, -2, -1, -1, -1, -1, -1, -1, -1};
-    private static final int[] PExt = {1, -2, 0, 2, 0, -2, 0, 2, 1, 0, 0, 0, -2, 1, 0, -2, -3, -1, -1, -1, -1, -1, -1, -1};
-    private static final int[] PExtInv = {-1, 1, -1, -3, -1, 1, -1, -3, -2, -1, -1, -1, 1, -2, -1, 1, 2};
+    private static final int[] PExt = {
+        1, -2, 0, 2, 0, -2, 0, 2, 1, 0, 0, 0, -2, 1, 0, -2, -3, -1, -1, -1, -1, -1, -1, -1
+    };
+    private static final int[] PExtInv = {
+        -1, 1, -1, -3, -1, 1, -1, -3, -2, -1, -1, -1, 1, -2, -1, 1, 2
+    };
 
     public static void add(int[] x, int[] y, int[] z) {
         int c = Nat.add(12, x, y, z);
@@ -25,7 +30,8 @@ public class SecP384R1Field {
 
     public static void addExt(int[] xx, int[] yy, int[] zz) {
         int c = Nat.add(24, xx, yy, zz);
-        if ((c != 0 || (zz[23] == -1 && Nat.gte(24, zz, PExt))) && Nat.addTo(PExtInv.length, PExtInv, zz) != 0) {
+        if ((c != 0 || (zz[23] == -1 && Nat.gte(24, zz, PExt)))
+                && Nat.addTo(PExtInv.length, PExtInv, zz) != 0) {
             Nat.incAt(24, zz, PExtInv.length);
         }
     }

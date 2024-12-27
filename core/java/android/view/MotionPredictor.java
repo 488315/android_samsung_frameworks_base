@@ -1,7 +1,9 @@
 package android.view;
 
 import android.content.Context;
+
 import com.android.internal.R;
+
 import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes4.dex */
@@ -21,14 +23,18 @@ public final class MotionPredictor {
     private static native void nativeRecord(long j, MotionEvent motionEvent);
 
     private static class RegistryHolder {
-        public static final NativeAllocationRegistry REGISTRY = NativeAllocationRegistry.createMalloced(MotionPredictor.class.getClassLoader(), MotionPredictor.nativeGetNativeMotionPredictorFinalizer());
+        public static final NativeAllocationRegistry REGISTRY =
+                NativeAllocationRegistry.createMalloced(
+                        MotionPredictor.class.getClassLoader(),
+                        MotionPredictor.nativeGetNativeMotionPredictorFinalizer());
 
-        private RegistryHolder() {
-        }
+        private RegistryHolder() {}
     }
 
     public MotionPredictor(Context context) {
-        this(context.getResources().getBoolean(R.bool.config_enableMotionPrediction), context.getResources().getInteger(R.integer.config_motionPredictionOffsetNanos));
+        this(
+                context.getResources().getBoolean(R.bool.config_enableMotionPrediction),
+                context.getResources().getInteger(R.integer.config_motionPredictionOffsetNanos));
     }
 
     public MotionPredictor(boolean isPredictionEnabled, int motionPredictionOffsetNanos) {
@@ -52,6 +58,7 @@ public final class MotionPredictor {
     }
 
     public boolean isPredictionAvailable(int deviceId, int source) {
-        return this.mIsPredictionEnabled && nativeIsPredictionAvailable(this.mPtr, deviceId, source);
+        return this.mIsPredictionEnabled
+                && nativeIsPredictionAvailable(this.mPtr, deviceId, source);
     }
 }

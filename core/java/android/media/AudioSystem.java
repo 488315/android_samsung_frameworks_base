@@ -3,8 +3,6 @@ package android.media;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.media.ISoundDose;
-import android.media.ISpatializer;
 import android.media.audio.common.AidlConversion;
 import android.media.audiofx.AudioEffect;
 import android.media.audiopolicy.AudioMixingRule;
@@ -16,8 +14,11 @@ import android.telephony.TelephonyManager;
 import android.util.IntArray;
 import android.util.Log;
 import android.util.Pair;
+
 import com.android.internal.R;
+
 import com.samsung.android.audio.Rune;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -269,26 +270,19 @@ public class AudioSystem {
     public static final int PLATFORM_VOICE = 1;
     public static final int PLAY_SOUND_DELAY = 300;
 
-    @Deprecated
-    public static final int ROUTE_ALL = -1;
+    @Deprecated public static final int ROUTE_ALL = -1;
 
-    @Deprecated
-    public static final int ROUTE_BLUETOOTH = 4;
+    @Deprecated public static final int ROUTE_BLUETOOTH = 4;
 
-    @Deprecated
-    public static final int ROUTE_BLUETOOTH_A2DP = 16;
+    @Deprecated public static final int ROUTE_BLUETOOTH_A2DP = 16;
 
-    @Deprecated
-    public static final int ROUTE_BLUETOOTH_SCO = 4;
+    @Deprecated public static final int ROUTE_BLUETOOTH_SCO = 4;
 
-    @Deprecated
-    public static final int ROUTE_EARPIECE = 1;
+    @Deprecated public static final int ROUTE_EARPIECE = 1;
 
-    @Deprecated
-    public static final int ROUTE_HEADSET = 8;
+    @Deprecated public static final int ROUTE_HEADSET = 8;
 
-    @Deprecated
-    public static final int ROUTE_SPEAKER = 2;
+    @Deprecated public static final int ROUTE_SPEAKER = 2;
     public static final int STREAM_ACCESSIBILITY = 10;
     public static final int STREAM_ALARM = 4;
     public static final int STREAM_ASSISTANT = 11;
@@ -316,28 +310,49 @@ public class AudioSystem {
     public static final int OUT_CHANNEL_COUNT_MAX = native_getMaxChannelCount();
     public static final int SAMPLE_RATE_HZ_MAX = native_getMaxSampleRate();
     public static final int SAMPLE_RATE_HZ_MIN = native_getMinSampleRate();
-    public static final String[] STREAM_NAMES = {"STREAM_VOICE_CALL", "STREAM_SYSTEM", "STREAM_RING", "STREAM_MUSIC", "STREAM_ALARM", "STREAM_NOTIFICATION", "STREAM_BLUETOOTH_SCO", "STREAM_SYSTEM_ENFORCED", "STREAM_DTMF", "STREAM_TTS", "STREAM_ACCESSIBILITY", "STREAM_ASSISTANT"};
+    public static final String[] STREAM_NAMES = {
+        "STREAM_VOICE_CALL",
+        "STREAM_SYSTEM",
+        "STREAM_RING",
+        "STREAM_MUSIC",
+        "STREAM_ALARM",
+        "STREAM_NOTIFICATION",
+        "STREAM_BLUETOOTH_SCO",
+        "STREAM_SYSTEM_ENFORCED",
+        "STREAM_DTMF",
+        "STREAM_TTS",
+        "STREAM_ACCESSIBILITY",
+        "STREAM_ASSISTANT"
+    };
     public static final Set<Integer> DEVICE_OUT_ALL_SET = new HashSet();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AudioFormatNativeEnumForBtCodec {
-    }
+    public @interface AudioFormatNativeEnumForBtCodec {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AudioFormatNativeEnumForBtLeAudioCodec {
-    }
+    public @interface AudioFormatNativeEnumForBtLeAudioCodec {}
 
     public interface AudioRecordingCallback {
-        void onRecordingConfigurationChanged(int i, int i2, int i3, int i4, int i5, int i6, boolean z, int[] iArr, AudioEffect.Descriptor[] descriptorArr, AudioEffect.Descriptor[] descriptorArr2, int i7, String str);
+        void onRecordingConfigurationChanged(
+                int i,
+                int i2,
+                int i3,
+                int i4,
+                int i5,
+                int i6,
+                boolean z,
+                int[] iArr,
+                AudioEffect.Descriptor[] descriptorArr,
+                AudioEffect.Descriptor[] descriptorArr2,
+                int i7,
+                String str);
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AudioSystemError {
-    }
+    public @interface AudioSystemError {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BtOffloadDeviceType {
-    }
+    public @interface BtOffloadDeviceType {}
 
     public interface DynamicPolicyCallback {
         void onDynamicPolicyMixStateUpdate(String str, int i);
@@ -355,9 +370,13 @@ public class AudioSystem {
         void onVolumeRangeInitializationRequested();
     }
 
-    private static native int addDevicesRoleForCapturePreset(int i, int i2, int[] iArr, String[] strArr);
+    private static native int addDevicesRoleForCapturePreset(
+            int i, int i2, int[] iArr, String[] strArr);
 
-    public static native boolean canBeSpatialized(AudioAttributes audioAttributes, AudioFormat audioFormat, AudioDeviceAttributes[] audioDeviceAttributesArr);
+    public static native boolean canBeSpatialized(
+            AudioAttributes audioAttributes,
+            AudioFormat audioFormat,
+            AudioDeviceAttributes[] audioDeviceAttributesArr);
 
     public static native int checkAudioFlinger();
 
@@ -365,27 +384,39 @@ public class AudioSystem {
 
     public static native int clearDevicesRoleForStrategy(int i, int i2);
 
-    public static native int clearPreferredMixerAttributes(AudioAttributes audioAttributes, int i, int i2);
+    public static native int clearPreferredMixerAttributes(
+            AudioAttributes audioAttributes, int i, int i2);
 
-    public static native int createAudioPatch(AudioPatch[] audioPatchArr, AudioPortConfig[] audioPortConfigArr, AudioPortConfig[] audioPortConfigArr2);
+    public static native int createAudioPatch(
+            AudioPatch[] audioPatchArr,
+            AudioPortConfig[] audioPortConfigArr,
+            AudioPortConfig[] audioPortConfigArr2);
 
     public static native int getAudioHwSyncForSession(int i);
 
     public static native int getDeviceConnectionState(int i, String str);
 
-    private static native int getDevicesForAttributes(AudioAttributes audioAttributes, AudioDeviceAttributes[] audioDeviceAttributesArr, boolean z);
+    private static native int getDevicesForAttributes(
+            AudioAttributes audioAttributes,
+            AudioDeviceAttributes[] audioDeviceAttributesArr,
+            boolean z);
 
-    public static native int getDevicesForRoleAndCapturePreset(int i, int i2, List<AudioDeviceAttributes> list);
+    public static native int getDevicesForRoleAndCapturePreset(
+            int i, int i2, List<AudioDeviceAttributes> list);
 
-    public static native int getDevicesForRoleAndStrategy(int i, int i2, List<AudioDeviceAttributes> list);
+    public static native int getDevicesForRoleAndStrategy(
+            int i, int i2, List<AudioDeviceAttributes> list);
 
-    public static native int getDirectPlaybackSupport(AudioFormat audioFormat, AudioAttributes audioAttributes);
+    public static native int getDirectPlaybackSupport(
+            AudioFormat audioFormat, AudioAttributes audioAttributes);
 
-    public static native int getDirectProfilesForAttributes(AudioAttributes audioAttributes, ArrayList<AudioProfile> arrayList);
+    public static native int getDirectProfilesForAttributes(
+            AudioAttributes audioAttributes, ArrayList<AudioProfile> arrayList);
 
     public static native int getForceUse(int i);
 
-    public static native int getHwOffloadFormatsSupportedForBluetoothMedia(int i, ArrayList<Integer> arrayList);
+    public static native int getHwOffloadFormatsSupportedForBluetoothMedia(
+            int i, ArrayList<Integer> arrayList);
 
     public static native float getMasterBalance();
 
@@ -405,13 +436,15 @@ public class AudioSystem {
 
     public static native String getParameters(String str);
 
-    public static native int getPreferredMixerAttributes(AudioAttributes audioAttributes, int i, List<AudioMixerAttributes> list);
+    public static native int getPreferredMixerAttributes(
+            AudioAttributes audioAttributes, int i, List<AudioMixerAttributes> list);
 
     public static native int getPrimaryOutputFrameCount();
 
     public static native int getPrimaryOutputSamplingRate();
 
-    public static native int getRegisteredPolicyMixes(List<android.media.audiopolicy.AudioMix> list);
+    public static native int getRegisteredPolicyMixes(
+            List<android.media.audiopolicy.AudioMix> list);
 
     public static native int getReportedSurroundFormats(ArrayList<Integer> arrayList);
 
@@ -455,7 +488,8 @@ public class AudioSystem {
 
     private static native IBinder nativeGetSoundDose(ISoundDoseCallback iSoundDoseCallback);
 
-    private static native IBinder nativeGetSpatializer(INativeSpatializerCallback iNativeSpatializerCallback);
+    private static native IBinder nativeGetSpatializer(
+            INativeSpatializerCallback iNativeSpatializerCallback);
 
     private static native int native_getMaxChannelCount();
 
@@ -479,13 +513,16 @@ public class AudioSystem {
 
     public static native int newAudioSessionId();
 
-    public static native int registerPolicyMixes(ArrayList<android.media.audiopolicy.AudioMix> arrayList, boolean z);
+    public static native int registerPolicyMixes(
+            ArrayList<android.media.audiopolicy.AudioMix> arrayList, boolean z);
 
     public static native int releaseAudioPatch(AudioPatch audioPatch);
 
-    private static native int removeDevicesRoleForCapturePreset(int i, int i2, int[] iArr, String[] strArr);
+    private static native int removeDevicesRoleForCapturePreset(
+            int i, int i2, int[] iArr, String[] strArr);
 
-    public static native int removeDevicesRoleForStrategy(int i, int i2, int[] iArr, String[] strArr);
+    public static native int removeDevicesRoleForStrategy(
+            int i, int i2, int[] iArr, String[] strArr);
 
     public static native int removeUidDeviceAffinities(int i);
 
@@ -513,7 +550,8 @@ public class AudioSystem {
 
     public static native int setDeviceConnectionState(int i, Parcel parcel, int i2);
 
-    private static native int setDevicesRoleForCapturePreset(int i, int i2, int[] iArr, String[] strArr);
+    private static native int setDevicesRoleForCapturePreset(
+            int i, int i2, int[] iArr, String[] strArr);
 
     private static native int setDevicesRoleForStrategy(int i, int i2, int[] iArr, String[] strArr);
 
@@ -533,7 +571,11 @@ public class AudioSystem {
 
     public static native int setPhoneState(int i, int i2);
 
-    public static native int setPreferredMixerAttributes(AudioAttributes audioAttributes, int i, int i2, AudioMixerAttributes audioMixerAttributes);
+    public static native int setPreferredMixerAttributes(
+            AudioAttributes audioAttributes,
+            int i,
+            int i2,
+            AudioMixerAttributes audioMixerAttributes);
 
     public static native int setRttEnabled(boolean z);
 
@@ -549,9 +591,11 @@ public class AudioSystem {
 
     public static native int setVibratorInfos(List<Vibrator> list);
 
-    public static native int setVolumeIndexForAttributes(AudioAttributes audioAttributes, int i, int i2);
+    public static native int setVolumeIndexForAttributes(
+            AudioAttributes audioAttributes, int i, int i2);
 
-    public static native int startAudioSource(AudioPortConfig audioPortConfig, AudioAttributes audioAttributes);
+    public static native int startAudioSource(
+            AudioPortConfig audioPortConfig, AudioAttributes audioAttributes);
 
     public static native int stopAudioSource(int i);
 
@@ -559,7 +603,8 @@ public class AudioSystem {
 
     public static native int systemReady();
 
-    public static native int updatePolicyMixes(android.media.audiopolicy.AudioMix[] audioMixArr, AudioMixingRule[] audioMixingRuleArr);
+    public static native int updatePolicyMixes(
+            android.media.audiopolicy.AudioMix[] audioMixArr, AudioMixingRule[] audioMixingRuleArr);
 
     private AudioSystem() {
         throw new UnsupportedOperationException("Trying to instantiate AudioSystem");
@@ -665,7 +710,7 @@ public class AudioSystem {
         DEVICE_IN_ALL_USB_SET.add(Integer.valueOf(DEVICE_IN_USB_HEADSET));
         DEVICE_IN_ALL_BLE_SET = new HashSet();
         DEVICE_IN_ALL_BLE_SET.add(-1610612736);
-        DEFAULT_STREAM_VOLUME = new int[]{5, 6, 11, 7, 11, 11, 7, 14, 11, 11, 11, 7};
+        DEFAULT_STREAM_VOLUME = new int[] {5, 6, 11, 7, 11, 11, 7, 14, 11, 11, 11, 7};
     }
 
     public static final int getNumStreamTypes() {
@@ -714,7 +759,11 @@ public class AudioSystem {
             case 721420288:
                 return 5;
             default:
-                Log.e(TAG, "Unknown audio format 0x" + Integer.toHexString(audioFormat) + " for conversion to BT codec");
+                Log.e(
+                        TAG,
+                        "Unknown audio format 0x"
+                                + Integer.toHexString(audioFormat)
+                                + " for conversion to BT codec");
                 return 1000000;
         }
     }
@@ -724,7 +773,11 @@ public class AudioSystem {
             case 721420288:
                 return 0;
             default:
-                Log.e(TAG, "Unknown audio format 0x" + Integer.toHexString(audioFormat) + " for conversion to BT LE audio codec");
+                Log.e(
+                        TAG,
+                        "Unknown audio format 0x"
+                                + Integer.toHexString(audioFormat)
+                                + " for conversion to BT LE audio codec");
                 return 1000000;
         }
     }
@@ -746,7 +799,11 @@ public class AudioSystem {
             case 6:
                 return 134217728;
             default:
-                Log.e(TAG, "Unknown A2DP BT codec 0x" + Integer.toHexString(btCodec) + " for conversion to audio format");
+                Log.e(
+                        TAG,
+                        "Unknown A2DP BT codec 0x"
+                                + Integer.toHexString(btCodec)
+                                + " for conversion to audio format");
                 return 0;
         }
     }
@@ -756,7 +813,11 @@ public class AudioSystem {
             case 0:
                 return 721420288;
             default:
-                Log.e(TAG, "Unknown LE Audio BT codec 0x" + Integer.toHexString(btCodec) + " for conversion to audio format");
+                Log.e(
+                        TAG,
+                        "Unknown LE Audio BT codec 0x"
+                                + Integer.toHexString(btCodec)
+                                + " for conversion to audio format");
                 return 0;
         }
     }
@@ -1000,7 +1061,18 @@ public class AudioSystem {
         }
     }
 
-    private static void recordingCallbackFromNative(int event, int riid, int uid, int session, int source, int portId, boolean silenced, int[] recordingFormat, AudioEffect.Descriptor[] clientEffects, AudioEffect.Descriptor[] effects, int activeSource) {
+    private static void recordingCallbackFromNative(
+            int event,
+            int riid,
+            int uid,
+            int session,
+            int source,
+            int portId,
+            boolean silenced,
+            int[] recordingFormat,
+            AudioEffect.Descriptor[] clientEffects,
+            AudioEffect.Descriptor[] effects,
+            int activeSource) {
         AudioRecordingCallback cb;
         synchronized (AudioSystem.class) {
             cb = sRecordingCallback;
@@ -1027,7 +1099,19 @@ public class AudioSystem {
                     AudioManager.resetAudioPortGeneration();
                 }
             }
-            cb.onRecordingConfigurationChanged(event, riid, uid, session, source, portId, silenced, recordingFormat, clientEffects, effects, activeSource, "");
+            cb.onRecordingConfigurationChanged(
+                    event,
+                    riid,
+                    uid,
+                    session,
+                    source,
+                    portId,
+                    silenced,
+                    recordingFormat,
+                    clientEffects,
+                    effects,
+                    activeSource,
+                    "");
         }
     }
 
@@ -1097,11 +1181,15 @@ public class AudioSystem {
     }
 
     public static boolean isBluetoothDevice(int deviceType) {
-        return isBluetoothA2dpOutDevice(deviceType) || isBluetoothScoDevice(deviceType) || isBluetoothLeDevice(deviceType);
+        return isBluetoothA2dpOutDevice(deviceType)
+                || isBluetoothScoDevice(deviceType)
+                || isBluetoothLeDevice(deviceType);
     }
 
     public static boolean isBluetoothOutDevice(int deviceType) {
-        return isBluetoothA2dpOutDevice(deviceType) || isBluetoothScoOutDevice(deviceType) || isBluetoothLeOutDevice(deviceType);
+        return isBluetoothA2dpOutDevice(deviceType)
+                || isBluetoothScoOutDevice(deviceType)
+                || isBluetoothLeOutDevice(deviceType);
     }
 
     public static boolean isBluetoothInDevice(int deviceType) {
@@ -1364,8 +1452,10 @@ public class AudioSystem {
         return setStreamVolumeIndex(stream, index, device);
     }
 
-    public static int setDeviceConnectionState(AudioDeviceAttributes attributes, int state, int codecFormat) {
-        android.media.audio.common.AudioPort port = AidlConversion.api2aidl_AudioDeviceAttributes_AudioPort(attributes);
+    public static int setDeviceConnectionState(
+            AudioDeviceAttributes attributes, int state, int codecFormat) {
+        android.media.audio.common.AudioPort port =
+                AidlConversion.api2aidl_AudioDeviceAttributes_AudioPort(attributes);
         Parcel parcel = Parcel.obtain();
         port.writeToParcel(parcel, 0);
         parcel.setDataPosition(0);
@@ -1383,15 +1473,19 @@ public class AudioSystem {
 
     @Deprecated
     public static int getDevicesForStream(int stream) {
-        AudioAttributes attr = android.media.audiopolicy.AudioProductStrategy.getAudioAttributesForStrategyWithLegacyStreamType(stream);
-        return getDeviceMaskFromSet(generateAudioDeviceTypesSet(getDevicesForAttributes(attr, true)));
+        AudioAttributes attr =
+                android.media.audiopolicy.AudioProductStrategy
+                        .getAudioAttributesForStrategyWithLegacyStreamType(stream);
+        return getDeviceMaskFromSet(
+                generateAudioDeviceTypesSet(getDevicesForAttributes(attr, true)));
     }
 
     public static int getDeviceMaskFromSet(Set<Integer> deviceSet) {
         int deviceMask = 0;
         int deviceInChecksum = Integer.MIN_VALUE;
         for (Integer device : deviceSet) {
-            if ((device.intValue() & (device.intValue() - 1) & Integer.MAX_VALUE) != 0 && (device.intValue() & (-536870915)) != 0) {
+            if ((device.intValue() & (device.intValue() - 1) & Integer.MAX_VALUE) != 0
+                    && (device.intValue() & (-536870915)) != 0) {
                 Log.v(TAG, "getDeviceMaskFromSet skipping multi-bit device value " + device);
             } else {
                 deviceMask |= device.intValue();
@@ -1413,19 +1507,30 @@ public class AudioSystem {
                 sb.append(", ");
             }
             sb.append(getDeviceName(device.intValue()));
-            sb.append(NavigationBarInflaterView.KEY_CODE_START + Integer.toHexString(device.intValue()) + NavigationBarInflaterView.KEY_CODE_END);
+            sb.append(
+                    NavigationBarInflaterView.KEY_CODE_START
+                            + Integer.toHexString(device.intValue())
+                            + NavigationBarInflaterView.KEY_CODE_END);
             n = n2;
         }
         return sb.toString();
     }
 
-    public static ArrayList<AudioDeviceAttributes> getDevicesForAttributes(AudioAttributes attributes, boolean forVolume) {
+    public static ArrayList<AudioDeviceAttributes> getDevicesForAttributes(
+            AudioAttributes attributes, boolean forVolume) {
         Objects.requireNonNull(attributes);
         AudioDeviceAttributes[] devices = new AudioDeviceAttributes[4];
         int res = getDevicesForAttributes(attributes, devices, forVolume);
         ArrayList<AudioDeviceAttributes> routeDevices = new ArrayList<>();
         if (res != 0) {
-            Log.e(TAG, "error " + res + " in getDevicesForAttributes attributes: " + attributes + " forVolume: " + forVolume);
+            Log.e(
+                    TAG,
+                    "error "
+                            + res
+                            + " in getDevicesForAttributes attributes: "
+                            + attributes
+                            + " forVolume: "
+                            + forVolume);
             return routeDevices;
         }
         for (AudioDeviceAttributes device : devices) {
@@ -1437,10 +1542,16 @@ public class AudioSystem {
     }
 
     static int getOffloadSupport(AudioFormat format, AudioAttributes attr) {
-        return native_get_offload_support(format.getEncoding(), format.getSampleRate(), format.getChannelMask(), format.getChannelIndexMask(), attr.getVolumeControlStream());
+        return native_get_offload_support(
+                format.getEncoding(),
+                format.getSampleRate(),
+                format.getChannelMask(),
+                format.getChannelIndexMask(),
+                attr.getVolumeControlStream());
     }
 
-    public static int setDevicesRoleForStrategy(int strategy, int role, List<AudioDeviceAttributes> devices) {
+    public static int setDevicesRoleForStrategy(
+            int strategy, int role, List<AudioDeviceAttributes> devices) {
         if (devices.isEmpty()) {
             return -2;
         }
@@ -1454,7 +1565,8 @@ public class AudioSystem {
         return i2;
     }
 
-    public static int removeDevicesRoleForStrategy(int strategy, int role, List<AudioDeviceAttributes> devices) {
+    public static int removeDevicesRoleForStrategy(
+            int strategy, int role, List<AudioDeviceAttributes> devices) {
         if (devices.isEmpty()) {
             return -2;
         }
@@ -1468,41 +1580,50 @@ public class AudioSystem {
         return i2;
     }
 
-    private static Pair<int[], String[]> populateInputDevicesTypeAndAddress(List<AudioDeviceAttributes> devices) {
+    private static Pair<int[], String[]> populateInputDevicesTypeAndAddress(
+            List<AudioDeviceAttributes> devices) {
         int[] types = new int[devices.size()];
         String[] addresses = new String[devices.size()];
         for (int i = 0; i < devices.size(); i++) {
             types[i] = devices.get(i).getInternalType();
             if (types[i] == 0) {
-                types[i] = AudioDeviceInfo.convertDeviceTypeToInternalInputDevice(devices.get(i).getType(), devices.get(i).getAddress());
+                types[i] =
+                        AudioDeviceInfo.convertDeviceTypeToInternalInputDevice(
+                                devices.get(i).getType(), devices.get(i).getAddress());
             }
             addresses[i] = devices.get(i).getAddress();
         }
         return new Pair<>(types, addresses);
     }
 
-    public static int setDevicesRoleForCapturePreset(int capturePreset, int role, List<AudioDeviceAttributes> devices) {
+    public static int setDevicesRoleForCapturePreset(
+            int capturePreset, int role, List<AudioDeviceAttributes> devices) {
         if (devices.isEmpty()) {
             return -2;
         }
         Pair<int[], String[]> typeAddresses = populateInputDevicesTypeAndAddress(devices);
-        return setDevicesRoleForCapturePreset(capturePreset, role, typeAddresses.first, typeAddresses.second);
+        return setDevicesRoleForCapturePreset(
+                capturePreset, role, typeAddresses.first, typeAddresses.second);
     }
 
-    public static int addDevicesRoleForCapturePreset(int capturePreset, int role, List<AudioDeviceAttributes> devices) {
+    public static int addDevicesRoleForCapturePreset(
+            int capturePreset, int role, List<AudioDeviceAttributes> devices) {
         if (devices.isEmpty()) {
             return -2;
         }
         Pair<int[], String[]> typeAddresses = populateInputDevicesTypeAndAddress(devices);
-        return addDevicesRoleForCapturePreset(capturePreset, role, typeAddresses.first, typeAddresses.second);
+        return addDevicesRoleForCapturePreset(
+                capturePreset, role, typeAddresses.first, typeAddresses.second);
     }
 
-    public static int removeDevicesRoleForCapturePreset(int capturePreset, int role, List<AudioDeviceAttributes> devices) {
+    public static int removeDevicesRoleForCapturePreset(
+            int capturePreset, int role, List<AudioDeviceAttributes> devices) {
         if (devices.isEmpty()) {
             return -2;
         }
         Pair<int[], String[]> typeAddresses = populateInputDevicesTypeAndAddress(devices);
-        return removeDevicesRoleForCapturePreset(capturePreset, role, typeAddresses.first, typeAddresses.second);
+        return removeDevicesRoleForCapturePreset(
+                capturePreset, role, typeAddresses.first, typeAddresses.second);
     }
 
     public static ISpatializer getSpatializer(INativeSpatializerCallback callback) {
@@ -1513,8 +1634,10 @@ public class AudioSystem {
         return ISoundDose.Stub.asInterface(nativeGetSoundDose(callback));
     }
 
-    public static int getValueForVibrateSetting(int existingValue, int vibrateType, int vibrateSetting) {
-        return (existingValue & (~(3 << (vibrateType * 2)))) | ((vibrateSetting & 3) << (vibrateType * 2));
+    public static int getValueForVibrateSetting(
+            int existingValue, int vibrateType, int vibrateSetting) {
+        return (existingValue & (~(3 << (vibrateType * 2))))
+                | ((vibrateSetting & 3) << (vibrateType * 2));
     }
 
     public static int getDefaultStreamVolume(int streamType) {
@@ -1522,14 +1645,20 @@ public class AudioSystem {
     }
 
     public static String streamToString(int stream) {
-        return (stream < 0 || stream >= STREAM_NAMES.length) ? stream == Integer.MIN_VALUE ? "USE_DEFAULT_STREAM_TYPE" : "UNKNOWN_STREAM_" + stream : STREAM_NAMES[stream];
+        return (stream < 0 || stream >= STREAM_NAMES.length)
+                ? stream == Integer.MIN_VALUE
+                        ? "USE_DEFAULT_STREAM_TYPE"
+                        : "UNKNOWN_STREAM_" + stream
+                : STREAM_NAMES[stream];
     }
 
     public static int getPlatformType(Context context) {
         if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_AUTOMOTIVE)) {
             return 3;
         }
-        if (Rune.SEC_AUDIO_ATT_SOFTPHONE || ((TelephonyManager) context.getSystemService(TelephonyManager.class)).isVoiceCapable()) {
+        if (Rune.SEC_AUDIO_ATT_SOFTPHONE
+                || ((TelephonyManager) context.getSystemService(TelephonyManager.class))
+                        .isVoiceCapable()) {
             return 1;
         }
         if (context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_LEANBACK)) {

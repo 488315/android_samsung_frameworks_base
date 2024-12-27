@@ -13,7 +13,9 @@ import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.samsung.android.feature.SemFloatingFeature;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,8 +64,7 @@ public class SemInfoExtractionManager {
         private static final String DISMISS = "dismiss";
         private static final String POSITION = "position";
 
-        private UIBundleKey() {
-        }
+        private UIBundleKey() {}
     }
 
     public SemInfoExtractionManager(Context context) throws IllegalStateException {
@@ -71,7 +72,8 @@ public class SemInfoExtractionManager {
         Log.d(TAG, "SemInfoExtractionManager setting...");
         if (context == null) {
             Log.d(TAG, "Could not get the SemInfoExtraction service. -> context is NULL");
-            throw new IllegalStateException("Could not get the SemInfoExtraction service. -> context is NULL");
+            throw new IllegalStateException(
+                    "Could not get the SemInfoExtraction service. -> context is NULL");
         }
         this.mContext = context;
         if (isPenFeatureModel(this.mContext)) {
@@ -83,7 +85,9 @@ public class SemInfoExtractionManager {
     }
 
     private boolean isPenFeatureModel(Context context) {
-        int uspLevel = SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_FRAMEWORK_CONFIG_SPEN_VERSION", 0);
+        int uspLevel =
+                SemFloatingFeature.getInstance()
+                        .getInt("SEC_FLOATING_FEATURE_FRAMEWORK_CONFIG_SPEN_VERSION", 0);
         if (uspLevel <= 0) {
             Log.d(TAG, "isPenFeatureModel : Pen is not supported, uspLevel=" + uspLevel);
             return false;
@@ -91,7 +95,8 @@ public class SemInfoExtractionManager {
         return true;
     }
 
-    public void setInfoExtractionListener(InfoExtractionListener infoExtractionListener) throws IllegalArgumentException {
+    public void setInfoExtractionListener(InfoExtractionListener infoExtractionListener)
+            throws IllegalArgumentException {
         if (infoExtractionListener == null) {
             Log.d(TAG, "infoExtractionListener is null");
             throw new IllegalArgumentException("infoExtractionListener is null");
@@ -99,7 +104,9 @@ public class SemInfoExtractionManager {
         this.mInfoExtractionListener = infoExtractionListener;
     }
 
-    public void setOnExtractionCompletedListener(OnExtractionCompletedListener onExtractionCompletedListener) throws IllegalArgumentException {
+    public void setOnExtractionCompletedListener(
+            OnExtractionCompletedListener onExtractionCompletedListener)
+            throws IllegalArgumentException {
         if (onExtractionCompletedListener == null) {
             Log.d(TAG, "onExtractionCompletedListener is null");
             throw new IllegalArgumentException("onExtractionCompletedListener is null");
@@ -107,7 +114,8 @@ public class SemInfoExtractionManager {
         this.mOnExtractionCompletedListener = onExtractionCompletedListener;
     }
 
-    public long extract(String requestString) throws IllegalArgumentException, IllegalStateException {
+    public long extract(String requestString)
+            throws IllegalArgumentException, IllegalStateException {
         if (requestString == null) {
             return -1L;
         }
@@ -125,7 +133,8 @@ public class SemInfoExtractionManager {
         return this.mRequestNumber;
     }
 
-    public long extract(SemStrokeData requestSemStrokeData) throws IllegalArgumentException, IllegalStateException {
+    public long extract(SemStrokeData requestSemStrokeData)
+            throws IllegalArgumentException, IllegalStateException {
         if (requestSemStrokeData == null) {
             return -1L;
         }
@@ -134,7 +143,8 @@ public class SemInfoExtractionManager {
         return this.mRequestNumber;
     }
 
-    public long extract(ArrayList<SemStrokeData> requestSemStrokeDataList) throws IllegalArgumentException, IllegalStateException {
+    public long extract(ArrayList<SemStrokeData> requestSemStrokeDataList)
+            throws IllegalArgumentException, IllegalStateException {
         if (requestSemStrokeDataList == null) {
             return -1L;
         }
@@ -183,7 +193,8 @@ public class SemInfoExtractionManager {
         Log.d(TAG, "training doesn't support in this version");
     }
 
-    public void addResultRule(int type, String source) throws IllegalStateException, IllegalArgumentException {
+    public void addResultRule(int type, String source)
+            throws IllegalStateException, IllegalArgumentException {
         Log.d(TAG, "addResultRule doesn't support in this version");
     }
 
@@ -192,7 +203,8 @@ public class SemInfoExtractionManager {
             Log.d(TAG, "mContext is NULL -> can't try to bind with InfoExtractionService! ");
             return false;
         }
-        Intent intent = new Intent().setAction("com.samsung.android.service.hermes.InfoExtractionService");
+        Intent intent =
+                new Intent().setAction("com.samsung.android.service.hermes.InfoExtractionService");
         intent.setPackage("com.samsung.android.service.airviewdictionary");
         boolean ret = this.mContext.bindService(intent, this.mConnection, 1);
         if (!ret) {
@@ -204,18 +216,21 @@ public class SemInfoExtractionManager {
     private void startExtraction(final int dataType, final Object reqObject) {
         if (this.mConnection == null) {
             Log.d(TAG, "mConnection is NULL");
-            this.mConnection = new ServiceConnection() { // from class: com.samsung.android.infoextraction.SemInfoExtractionManager.1
-                @Override // android.content.ServiceConnection
-                public void onServiceConnected(ComponentName name, IBinder service) {
-                    SemInfoExtractionManager.this.mInfoExtractionService = service;
-                    SemInfoExtractionManager.this.requestInfoExtraction(service, dataType, reqObject);
-                }
+            this.mConnection =
+                    new ServiceConnection() { // from class:
+                                              // com.samsung.android.infoextraction.SemInfoExtractionManager.1
+                        @Override // android.content.ServiceConnection
+                        public void onServiceConnected(ComponentName name, IBinder service) {
+                            SemInfoExtractionManager.this.mInfoExtractionService = service;
+                            SemInfoExtractionManager.this.requestInfoExtraction(
+                                    service, dataType, reqObject);
+                        }
 
-                @Override // android.content.ServiceConnection
-                public void onServiceDisconnected(ComponentName name) {
-                    SemInfoExtractionManager.this.mInfoExtractionService = null;
-                }
-            };
+                        @Override // android.content.ServiceConnection
+                        public void onServiceDisconnected(ComponentName name) {
+                            SemInfoExtractionManager.this.mInfoExtractionService = null;
+                        }
+                    };
             Log.d(TAG, "start : Binding to InfoExtractionService...");
             bindInfoExtractionService();
             return;
@@ -231,7 +246,8 @@ public class SemInfoExtractionManager {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void requestInfoExtraction(IBinder InfoExtractionService, int dataType, Object reqObject) {
+    public void requestInfoExtraction(
+            IBinder InfoExtractionService, int dataType, Object reqObject) {
         Log.d(TAG, "requestInfoExtraction data type = " + dataType);
         Bundle bundle = new Bundle();
         bundle.putLong(EXTRACTION_REQ_TIME, this.mRequestNumber);
@@ -267,24 +283,38 @@ public class SemInfoExtractionManager {
     }
 
     class IncomingHandler extends Handler {
-        IncomingHandler() {
-        }
+        IncomingHandler() {}
 
         @Override // android.os.Handler
         public void handleMessage(Message msg) {
             Log.d(SemInfoExtractionManager.TAG, "received Extraction data : success");
-            long receivedReqTime = msg.getData().getLong(SemInfoExtractionManager.EXTRACTION_REQ_TIME);
+            long receivedReqTime =
+                    msg.getData().getLong(SemInfoExtractionManager.EXTRACTION_REQ_TIME);
             new ArrayList();
-            ArrayList<SemExtractedInfo> semExtractedInfoList = msg.getData().getParcelableArrayList(SemInfoExtractionManager.EXTRACTED_INFO_DATA);
+            ArrayList<SemExtractedInfo> semExtractedInfoList =
+                    msg.getData()
+                            .getParcelableArrayList(SemInfoExtractionManager.EXTRACTED_INFO_DATA);
             if (SemInfoExtractionManager.this.mOnExtractionCompletedListener != null) {
-                Log.d(SemInfoExtractionManager.TAG, "sent to mOnExtractionCompletedListener ReqTime : " + receivedReqTime + " extracted size : " + semExtractedInfoList.size());
-                SemInfoExtractionManager.this.mOnExtractionCompletedListener.onExtractionCompleted(receivedReqTime, semExtractedInfoList);
+                Log.d(
+                        SemInfoExtractionManager.TAG,
+                        "sent to mOnExtractionCompletedListener ReqTime : "
+                                + receivedReqTime
+                                + " extracted size : "
+                                + semExtractedInfoList.size());
+                SemInfoExtractionManager.this.mOnExtractionCompletedListener.onExtractionCompleted(
+                        receivedReqTime, semExtractedInfoList);
                 SemInfoExtractionManager.this.mRequestNumber = -1L;
             } else {
                 Log.d(SemInfoExtractionManager.TAG, "mInfoExtractionResultListener is NULL");
                 if (SemInfoExtractionManager.this.mInfoExtractionListener != null) {
-                    Log.d(SemInfoExtractionManager.TAG, "sent to InfoExtractionListener ReqTime : " + receivedReqTime + " extracted size : " + semExtractedInfoList.size());
-                    SemInfoExtractionManager.this.mInfoExtractionListener.onCompleted((int) receivedReqTime, semExtractedInfoList);
+                    Log.d(
+                            SemInfoExtractionManager.TAG,
+                            "sent to InfoExtractionListener ReqTime : "
+                                    + receivedReqTime
+                                    + " extracted size : "
+                                    + semExtractedInfoList.size());
+                    SemInfoExtractionManager.this.mInfoExtractionListener.onCompleted(
+                            (int) receivedReqTime, semExtractedInfoList);
                 } else {
                     Log.d(SemInfoExtractionManager.TAG, "mInfoExtractionListener is NULL");
                 }

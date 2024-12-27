@@ -15,7 +15,7 @@ import android.view.ScrollCaptureSession;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
-import com.android.internal.view.ScrollCaptureViewHelper;
+
 import java.lang.ref.WeakReference;
 import java.util.function.Consumer;
 
@@ -36,7 +36,9 @@ public class ScrollCaptureViewSupport<V extends View> implements ScrollCaptureCa
         this.mViewHelper = viewHelper;
         Context context = containingView.getContext();
         ContentResolver contentResolver = context.getContentResolver();
-        this.mPostScrollDelayMillis = Settings.Global.getLong(contentResolver, SETTING_CAPTURE_DELAY, SETTING_CAPTURE_DELAY_DEFAULT);
+        this.mPostScrollDelayMillis =
+                Settings.Global.getLong(
+                        contentResolver, SETTING_CAPTURE_DELAY, SETTING_CAPTURE_DELAY_DEFAULT);
         Log.d(TAG, "screenshot.scroll_capture_delay = " + this.mPostScrollDelayMillis);
     }
 
@@ -49,14 +51,16 @@ public class ScrollCaptureViewSupport<V extends View> implements ScrollCaptureCa
         return colorMode;
     }
 
-    public static Rect transformFromRequestToContainer(int scrollY, Rect requestBounds, Rect requestRect) {
+    public static Rect transformFromRequestToContainer(
+            int scrollY, Rect requestBounds, Rect requestRect) {
         Rect requestedContainerBounds = new Rect(requestRect);
         requestedContainerBounds.offset(0, -scrollY);
         requestedContainerBounds.offset(requestBounds.left, requestBounds.top);
         return requestedContainerBounds;
     }
 
-    public static Rect transformFromContainerToRequest(int scrollY, Rect requestBounds, Rect containerRect) {
+    public static Rect transformFromContainerToRequest(
+            int scrollY, Rect requestBounds, Rect containerRect) {
         Rect requestRect = new Rect(containerRect);
         requestRect.offset(-requestBounds.left, -requestBounds.top);
         requestRect.offset(0, scrollY);
@@ -122,7 +126,8 @@ public class ScrollCaptureViewSupport<V extends View> implements ScrollCaptureCa
     }
 
     @Override // android.view.ScrollCaptureCallback
-    public final void onScrollCaptureStart(ScrollCaptureSession session, CancellationSignal signal, Runnable onReady) {
+    public final void onScrollCaptureStart(
+            ScrollCaptureSession session, CancellationSignal signal, Runnable onReady) {
         if (signal.isCanceled()) {
             return;
         }
@@ -137,7 +142,11 @@ public class ScrollCaptureViewSupport<V extends View> implements ScrollCaptureCa
     }
 
     @Override // android.view.ScrollCaptureCallback
-    public final void onScrollCaptureImageRequest(ScrollCaptureSession session, final CancellationSignal signal, Rect requestRect, final Consumer<Rect> onComplete) {
+    public final void onScrollCaptureImageRequest(
+            ScrollCaptureSession session,
+            final CancellationSignal signal,
+            Rect requestRect,
+            final Consumer<Rect> onComplete) {
         if (signal.isCanceled()) {
             Log.w(TAG, "onScrollCaptureImageRequest: cancelled!");
             return;
@@ -146,18 +155,32 @@ public class ScrollCaptureViewSupport<V extends View> implements ScrollCaptureCa
         if (view == null || !view.isVisibleToUser()) {
             onComplete.accept(new Rect());
         } else {
-            this.mViewHelper.onScrollRequested(view, session.getScrollBounds(), requestRect, signal, new Consumer() { // from class: com.android.internal.view.ScrollCaptureViewSupport$$ExternalSyntheticLambda1
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ScrollCaptureViewSupport.this.lambda$onScrollCaptureImageRequest$0(view, signal, onComplete, (ScrollCaptureViewHelper.ScrollResult) obj);
-                }
-            });
+            this.mViewHelper.onScrollRequested(
+                    view,
+                    session.getScrollBounds(),
+                    requestRect,
+                    signal,
+                    new Consumer() { // from class:
+                                     // com.android.internal.view.ScrollCaptureViewSupport$$ExternalSyntheticLambda1
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            ScrollCaptureViewSupport.this.lambda$onScrollCaptureImageRequest$0(
+                                    view,
+                                    signal,
+                                    onComplete,
+                                    (ScrollCaptureViewHelper.ScrollResult) obj);
+                        }
+                    });
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: onScrollResult, reason: merged with bridge method [inline-methods] */
-    public void lambda$onScrollCaptureImageRequest$0(final ScrollCaptureViewHelper.ScrollResult scrollResult, final V view, CancellationSignal signal, final Consumer<Rect> onComplete) {
+    public void lambda$onScrollCaptureImageRequest$0(
+            final ScrollCaptureViewHelper.ScrollResult scrollResult,
+            final V view,
+            CancellationSignal signal,
+            final Consumer<Rect> onComplete) {
         if (signal.isCanceled()) {
             Log.w(TAG, "onScrollCaptureImageRequest: cancelled! skipping render.");
         } else {
@@ -167,18 +190,26 @@ public class ScrollCaptureViewSupport<V extends View> implements ScrollCaptureCa
             }
             final Rect viewCaptureArea = new Rect(scrollResult.availableArea);
             viewCaptureArea.offset(0, -scrollResult.scrollDelta);
-            view.postOnAnimationDelayed(new Runnable() { // from class: com.android.internal.view.ScrollCaptureViewSupport$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ScrollCaptureViewSupport.this.lambda$onScrollResult$1(scrollResult, view, viewCaptureArea, onComplete);
-                }
-            }, this.mPostScrollDelayMillis);
+            view.postOnAnimationDelayed(
+                    new Runnable() { // from class:
+                                     // com.android.internal.view.ScrollCaptureViewSupport$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ScrollCaptureViewSupport.this.lambda$onScrollResult$1(
+                                    scrollResult, view, viewCaptureArea, onComplete);
+                        }
+                    },
+                    this.mPostScrollDelayMillis);
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: doCapture, reason: merged with bridge method [inline-methods] */
-    public void lambda$onScrollResult$1(ScrollCaptureViewHelper.ScrollResult scrollResult, V view, Rect viewCaptureArea, Consumer<Rect> onComplete) {
+    public void lambda$onScrollResult$1(
+            ScrollCaptureViewHelper.ScrollResult scrollResult,
+            V view,
+            Rect viewCaptureArea,
+            Consumer<Rect> onComplete) {
         int result = this.mRenderer.renderView(view, viewCaptureArea);
         if (result == 0 || result == 1) {
             onComplete.accept(new Rect(scrollResult.availableArea));
@@ -250,7 +281,8 @@ public class ScrollCaptureViewSupport<V extends View> implements ScrollCaptureCa
         private void updateRootNode(View source, Rect localSourceRect) {
             View rootView = source.getRootView();
             transformToRoot(source, localSourceRect, this.mTempRect);
-            this.mCaptureRenderNode.setPosition(0, 0, this.mTempRect.width(), this.mTempRect.height());
+            this.mCaptureRenderNode.setPosition(
+                    0, 0, this.mTempRect.width(), this.mTempRect.height());
             RecordingCanvas canvas = this.mCaptureRenderNode.beginRecording();
             canvas.enableZ();
             canvas.translate(-this.mTempRect.left, -this.mTempRect.top);
@@ -293,6 +325,10 @@ public class ScrollCaptureViewSupport<V extends View> implements ScrollCaptureCa
     }
 
     public String toString() {
-        return "ScrollCaptureViewSupport{view=" + this.mWeakView.get() + ", helper=" + this.mViewHelper + '}';
+        return "ScrollCaptureViewSupport{view="
+                + this.mWeakView.get()
+                + ", helper="
+                + this.mViewHelper
+                + '}';
     }
 }

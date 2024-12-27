@@ -24,7 +24,8 @@ public class SContextActivityCalibrationAttribute extends SContextAttribute {
         setAttribute();
     }
 
-    @Override // android.hardware.scontext.SContextAttribute, com.samsung.android.hardware.context.SemContextAttribute
+    @Override // android.hardware.scontext.SContextAttribute,
+    // com.samsung.android.hardware.context.SemContextAttribute
     public boolean checkAttribute() {
         if (this.mStatus < 0 || this.mStatus > 2) {
             Log.e(TAG, "Moving Status is wrong!!");

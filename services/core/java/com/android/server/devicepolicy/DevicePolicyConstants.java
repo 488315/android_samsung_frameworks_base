@@ -2,7 +2,9 @@ package com.android.server.devicepolicy;
 
 import android.util.IndentingPrintWriter;
 import android.util.KeyValueListParser;
+
 import com.android.server.utils.Slogf;
+
 import java.util.concurrent.TimeUnit;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -23,10 +25,17 @@ public final class DevicePolicyConstants {
         } catch (IllegalArgumentException unused) {
             Slogf.e("DevicePolicyManager", "Bad device policy settings: %s", str);
         }
-        long j = keyValueListParser.getLong("das_died_service_reconnect_backoff_sec", TimeUnit.HOURS.toSeconds(1L));
+        long j =
+                keyValueListParser.getLong(
+                        "das_died_service_reconnect_backoff_sec", TimeUnit.HOURS.toSeconds(1L));
         double d = keyValueListParser.getFloat("das_died_service_reconnect_backoff_increase", 2.0f);
-        long j2 = keyValueListParser.getLong("das_died_service_reconnect_max_backoff_sec", TimeUnit.DAYS.toSeconds(1L));
-        long j3 = keyValueListParser.getLong("das_died_service_stable_connection_threshold_sec", TimeUnit.MINUTES.toSeconds(2L));
+        long j2 =
+                keyValueListParser.getLong(
+                        "das_died_service_reconnect_max_backoff_sec", TimeUnit.DAYS.toSeconds(1L));
+        long j3 =
+                keyValueListParser.getLong(
+                        "das_died_service_stable_connection_threshold_sec",
+                        TimeUnit.MINUTES.toSeconds(2L));
         int i = keyValueListParser.getInt("battery_threshold_not_charging", 40);
         int i2 = keyValueListParser.getInt("battery_threshold_charging", 20);
         boolean z = keyValueListParser.getBoolean("use_test_admin_as_supervision_component", false);

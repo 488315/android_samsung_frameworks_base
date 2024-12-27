@@ -8,8 +8,7 @@ public class Double4 {
     public double y;
     public double z;
 
-    public Double4() {
-    }
+    public Double4() {}
 
     public Double4(Double4 data) {
         this.x = data.x;

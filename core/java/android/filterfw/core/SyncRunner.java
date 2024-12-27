@@ -1,8 +1,8 @@
 package android.filterfw.core;
 
-import android.filterfw.core.GraphRunner;
 import android.os.ConditionVariable;
 import android.util.Log;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -46,7 +46,8 @@ public class SyncRunner extends GraphRunner {
             } catch (InstantiationException e2) {
                 throw new RuntimeException("Could not instantiate the Scheduler instance!", e2);
             } catch (NoSuchMethodException e3) {
-                throw new RuntimeException("Scheduler does not have constructor <init>(FilterGraph)!", e3);
+                throw new RuntimeException(
+                        "Scheduler does not have constructor <init>(FilterGraph)!", e3);
             } catch (InvocationTargetException e4) {
                 throw new RuntimeException("Scheduler constructor threw an exception", e4);
             } catch (Exception e5) {
@@ -158,13 +159,16 @@ public class SyncRunner extends GraphRunner {
     protected void scheduleFilterWake(final Filter filter, int delay) {
         this.mWakeCondition.close();
         final ConditionVariable conditionToWake = this.mWakeCondition;
-        this.mWakeExecutor.schedule(new Runnable() { // from class: android.filterfw.core.SyncRunner.1
-            @Override // java.lang.Runnable
-            public void run() {
-                filter.unsetStatus(4);
-                conditionToWake.open();
-            }
-        }, delay, TimeUnit.MILLISECONDS);
+        this.mWakeExecutor.schedule(
+                new Runnable() { // from class: android.filterfw.core.SyncRunner.1
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        filter.unsetStatus(4);
+                        conditionToWake.open();
+                    }
+                },
+                delay,
+                TimeUnit.MILLISECONDS);
     }
 
     protected int determinePostRunState() {

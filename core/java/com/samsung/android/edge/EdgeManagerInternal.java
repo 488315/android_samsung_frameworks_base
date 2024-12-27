@@ -24,7 +24,8 @@ public abstract class EdgeManagerInternal {
 
     public abstract void setSuppressed(int i);
 
-    public abstract boolean showForNotification(StatusBarNotification statusBarNotification, Bundle bundle);
+    public abstract boolean showForNotification(
+            StatusBarNotification statusBarNotification, Bundle bundle);
 
     public abstract void showForResumedActivity(ComponentName componentName);
 

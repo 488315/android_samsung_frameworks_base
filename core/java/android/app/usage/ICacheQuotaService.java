@@ -6,16 +6,18 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteCallback;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
 public interface ICacheQuotaService extends IInterface {
-    void computeCacheQuotaHints(RemoteCallback remoteCallback, List<CacheQuotaHint> list) throws RemoteException;
+    void computeCacheQuotaHints(RemoteCallback remoteCallback, List<CacheQuotaHint> list)
+            throws RemoteException;
 
     public static class Default implements ICacheQuotaService {
         @Override // android.app.usage.ICacheQuotaService
-        public void computeCacheQuotaHints(RemoteCallback callback, List<CacheQuotaHint> requests) throws RemoteException {
-        }
+        public void computeCacheQuotaHints(RemoteCallback callback, List<CacheQuotaHint> requests)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +25,7 @@ public interface ICacheQuotaService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICacheQuotaService {
+    public abstract static class Stub extends Binder implements ICacheQuotaService {
         public static final String DESCRIPTOR = "android.app.usage.ICacheQuotaService";
         static final int TRANSACTION_computeCacheQuotaHints = 1;
 
@@ -62,7 +64,8 @@ public interface ICacheQuotaService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -72,7 +75,8 @@ public interface ICacheQuotaService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    RemoteCallback _arg0 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg0 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     List<CacheQuotaHint> _arg1 = data.createTypedArrayList(CacheQuotaHint.CREATOR);
                     data.enforceNoDataAvail();
                     computeCacheQuotaHints(_arg0, _arg1);
@@ -99,7 +103,8 @@ public interface ICacheQuotaService extends IInterface {
             }
 
             @Override // android.app.usage.ICacheQuotaService
-            public void computeCacheQuotaHints(RemoteCallback callback, List<CacheQuotaHint> requests) throws RemoteException {
+            public void computeCacheQuotaHints(
+                    RemoteCallback callback, List<CacheQuotaHint> requests) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

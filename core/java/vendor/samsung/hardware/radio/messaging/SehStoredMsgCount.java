@@ -6,19 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SehStoredMsgCount implements Parcelable {
-    public static final Parcelable.Creator<SehStoredMsgCount> CREATOR = new Parcelable.Creator<SehStoredMsgCount>() { // from class: vendor.samsung.hardware.radio.messaging.SehStoredMsgCount.1
-        @Override // android.os.Parcelable.Creator
-        public SehStoredMsgCount createFromParcel(Parcel _aidl_source) {
-            SehStoredMsgCount _aidl_out = new SehStoredMsgCount();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SehStoredMsgCount> CREATOR =
+            new Parcelable.Creator<
+                    SehStoredMsgCount>() { // from class:
+                                           // vendor.samsung.hardware.radio.messaging.SehStoredMsgCount.1
+                @Override // android.os.Parcelable.Creator
+                public SehStoredMsgCount createFromParcel(Parcel _aidl_source) {
+                    SehStoredMsgCount _aidl_out = new SehStoredMsgCount();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehStoredMsgCount[] newArray(int _aidl_size) {
-            return new SehStoredMsgCount[_aidl_size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehStoredMsgCount[] newArray(int _aidl_size) {
+                    return new SehStoredMsgCount[_aidl_size];
+                }
+            };
     public int usedCount = 0;
     public int totalCount = 0;
 

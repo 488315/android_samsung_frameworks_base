@@ -24,11 +24,11 @@ public abstract class WebViewDatabase {
     @Deprecated
     public abstract boolean hasUsernamePassword();
 
-    public abstract void setHttpAuthUsernamePassword(String str, String str2, String str3, String str4);
+    public abstract void setHttpAuthUsernamePassword(
+            String str, String str2, String str3, String str4);
 
     @Deprecated
-    public WebViewDatabase() {
-    }
+    public WebViewDatabase() {}
 
     public static WebViewDatabase getInstance(Context context) {
         return WebViewFactory.getProvider().getWebViewDatabase(context);

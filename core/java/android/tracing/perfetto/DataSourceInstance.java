@@ -10,14 +10,11 @@ public abstract class DataSourceInstance implements AutoCloseable {
         this.mInstanceIndex = instanceIndex;
     }
 
-    protected void onStart(StartCallbackArguments args) {
-    }
+    protected void onStart(StartCallbackArguments args) {}
 
-    protected void onFlush(FlushCallbackArguments args) {
-    }
+    protected void onFlush(FlushCallbackArguments args) {}
 
-    protected void onStop(StopCallbackArguments args) {
-    }
+    protected void onStop(StopCallbackArguments args) {}
 
     @Override // java.lang.AutoCloseable
     public final void close() {

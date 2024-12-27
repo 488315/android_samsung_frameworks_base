@@ -9,10 +9,12 @@ import android.util.IndentingPrintWriter;
 import android.util.Log;
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.server.AppSchedulingModuleThread;
 import com.android.server.VcnManagementService$$ExternalSyntheticOutline0;
 import com.android.server.job.JobSchedulerService;
 import com.android.server.job.controllers.IdleController;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -58,8 +60,7 @@ public final class CarIdlenessTracker extends BroadcastReceiver implements Idlen
     }
 
     @Override // com.android.server.job.controllers.idle.IdlenessTracker
-    public final void dumpConstants(IndentingPrintWriter indentingPrintWriter) {
-    }
+    public final void dumpConstants(IndentingPrintWriter indentingPrintWriter) {}
 
     @Override // com.android.server.job.controllers.idle.IdlenessTracker
     public final boolean isIdle() {
@@ -67,8 +68,7 @@ public final class CarIdlenessTracker extends BroadcastReceiver implements Idlen
     }
 
     @Override // com.android.server.job.controllers.idle.IdlenessTracker
-    public final void onBatteryStateChanged(boolean z, boolean z2) {
-    }
+    public final void onBatteryStateChanged(boolean z, boolean z2) {}
 
     @Override // android.content.BroadcastReceiver
     public final void onReceive(Context context, Intent intent) {
@@ -122,7 +122,11 @@ public final class CarIdlenessTracker extends BroadcastReceiver implements Idlen
         }
         if (action.equals("com.android.server.ACTION_TRIGGER_IDLE")) {
             if (this.mGarageModeOn) {
-                logIfDebug("TRIGGER_IDLE received but not changing state; mIdle=" + this.mIdle + " mGarageModeOn=" + this.mGarageModeOn);
+                logIfDebug(
+                        "TRIGGER_IDLE received but not changing state; mIdle="
+                                + this.mIdle
+                                + " mGarageModeOn="
+                                + this.mGarageModeOn);
                 return;
             }
             logIfDebug("Idle trigger fired...");
@@ -135,19 +139,31 @@ public final class CarIdlenessTracker extends BroadcastReceiver implements Idlen
                 this.mIdle = true;
                 this.mIdleListener.reportNewIdleState(true);
             } else {
-                logIfDebug("TRIGGER_IDLE received but not changing state: mIdle = " + this.mIdle + ", mScreenOn = " + this.mScreenOn);
+                logIfDebug(
+                        "TRIGGER_IDLE received but not changing state: mIdle = "
+                                + this.mIdle
+                                + ", mScreenOn = "
+                                + this.mScreenOn);
             }
         }
     }
 
     @Override // com.android.server.job.controllers.idle.IdlenessTracker
-    public final void processConstant(DeviceConfig.Properties properties, String str) {
-    }
+    public final void processConstant(DeviceConfig.Properties properties, String str) {}
 
     @Override // com.android.server.job.controllers.idle.IdlenessTracker
-    public final void startTracking(Context context, JobSchedulerService jobSchedulerService, IdleController idleController) {
+    public final void startTracking(
+            Context context,
+            JobSchedulerService jobSchedulerService,
+            IdleController idleController) {
         this.mIdleListener = idleController;
-        IntentFilter m = VcnManagementService$$ExternalSyntheticOutline0.m("android.intent.action.SCREEN_ON", "android.intent.action.SCREEN_OFF", "com.android.server.jobscheduler.GARAGE_MODE_ON", "com.android.server.jobscheduler.GARAGE_MODE_OFF", "com.android.server.jobscheduler.FORCE_IDLE");
+        IntentFilter m =
+                VcnManagementService$$ExternalSyntheticOutline0.m(
+                        "android.intent.action.SCREEN_ON",
+                        "android.intent.action.SCREEN_OFF",
+                        "com.android.server.jobscheduler.GARAGE_MODE_ON",
+                        "com.android.server.jobscheduler.GARAGE_MODE_OFF",
+                        "com.android.server.jobscheduler.FORCE_IDLE");
         m.addAction("com.android.server.jobscheduler.UNFORCE_IDLE");
         m.addAction("com.android.server.ACTION_TRIGGER_IDLE");
         context.registerReceiver(this, m, null, AppSchedulingModuleThread.getHandler());

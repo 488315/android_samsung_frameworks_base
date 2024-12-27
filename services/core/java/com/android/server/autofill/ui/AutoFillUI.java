@@ -13,6 +13,7 @@ import android.util.Slog;
 import android.view.Display;
 import android.view.View;
 import android.view.autofill.AutofillId;
+
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.util.function.pooled.PooledLambda;
 import com.android.server.LocalServices;
@@ -30,8 +31,7 @@ import com.android.server.autofill.SaveEventLogger$$ExternalSyntheticLambda0;
 import com.android.server.autofill.SaveEventLogger$$ExternalSyntheticLambda3;
 import com.android.server.autofill.Session;
 import com.android.server.autofill.Session$$ExternalSyntheticLambda9;
-import com.android.server.autofill.ui.FillUi;
-import com.android.server.autofill.ui.SaveUi;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -48,7 +48,9 @@ public final class AutoFillUI {
     public AutoFillUiCallback mSaveUiCallback;
     public final Handler mHandler = UiThread.getHandler();
     public final MetricsLogger mMetricsLogger = new MetricsLogger();
-    public final UiModeManagerService.LocalService mUiModeMgr = (UiModeManagerService.LocalService) LocalServices.getService(UiModeManagerService.LocalService.class);
+    public final UiModeManagerService.LocalService mUiModeMgr =
+            (UiModeManagerService.LocalService)
+                    LocalServices.getService(UiModeManagerService.LocalService.class);
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.autofill.ui.AutoFillUI$1, reason: invalid class name */
@@ -59,14 +61,22 @@ public final class AutoFillUI {
         public final /* synthetic */ LogMaker val$log;
         public final /* synthetic */ Object val$response;
 
-        public AnonymousClass1(LogMaker logMaker, SaveEventLogger saveEventLogger, Session session, PendingUi pendingUi) {
+        public AnonymousClass1(
+                LogMaker logMaker,
+                SaveEventLogger saveEventLogger,
+                Session session,
+                PendingUi pendingUi) {
             this.val$log = logMaker;
             this.val$response = saveEventLogger;
             this.val$callback = session;
             this.val$focusedId = pendingUi;
         }
 
-        public AnonymousClass1(LogMaker logMaker, AutoFillUiCallback autoFillUiCallback, FillResponse fillResponse, AutofillId autofillId) {
+        public AnonymousClass1(
+                LogMaker logMaker,
+                AutoFillUiCallback autoFillUiCallback,
+                FillResponse fillResponse,
+                AutofillId autofillId) {
             this.val$log = logMaker;
             this.val$callback = autoFillUiCallback;
             this.val$response = fillResponse;
@@ -78,7 +88,8 @@ public final class AutoFillUI {
             this.val$log.setType(5);
             SaveEventLogger saveEventLogger = (SaveEventLogger) this.val$response;
             if (saveEventLogger != null) {
-                saveEventLogger.mEventInternal.ifPresent(new SaveEventLogger$$ExternalSyntheticLambda3(2));
+                saveEventLogger.mEventInternal.ifPresent(
+                        new SaveEventLogger$$ExternalSyntheticLambda3(2));
             }
             AutoFillUI autoFillUI = AutoFillUI.this;
             AutoFillUiCallback autoFillUiCallback = this.val$callback;
@@ -87,7 +98,10 @@ public final class AutoFillUI {
                 try {
                     intentSender.sendIntent(autoFillUI.mContext, 0, null, null, null);
                 } catch (IntentSender.SendIntentException e) {
-                    Slog.e("AutofillUI", "Error starting negative action listener: " + intentSender, e);
+                    Slog.e(
+                            "AutofillUI",
+                            "Error starting negative action listener: " + intentSender,
+                            e);
                 }
             }
             ((Session) autoFillUiCallback).cancelSave();
@@ -111,7 +125,8 @@ public final class AutoFillUI {
                     AutoFillUI.this.mMetricsLogger.write(this.val$log);
                     SaveEventLogger saveEventLogger = (SaveEventLogger) this.val$response;
                     if (saveEventLogger != null) {
-                        saveEventLogger.mEventInternal.ifPresent(new SaveEventLogger$$ExternalSyntheticLambda3(4));
+                        saveEventLogger.mEventInternal.ifPresent(
+                                new SaveEventLogger$$ExternalSyntheticLambda3(4));
                         break;
                     }
                     break;
@@ -123,19 +138,32 @@ public final class AutoFillUI {
             this.val$log.setType(4);
             SaveEventLogger saveEventLogger = (SaveEventLogger) this.val$response;
             if (saveEventLogger != null) {
-                saveEventLogger.mEventInternal.ifPresent(new SaveEventLogger$$ExternalSyntheticLambda3(3));
+                saveEventLogger.mEventInternal.ifPresent(
+                        new SaveEventLogger$$ExternalSyntheticLambda3(3));
             }
             AutoFillUI.this.hideSaveUiUiThread(this.val$callback);
             Session session = (Session) this.val$callback;
             synchronized (session.mLock) {
                 try {
                     if (session.mDestroyed) {
-                        Slog.w("AutofillSession", "Call to Session#save() rejected - session: " + session.id + " destroyed");
+                        Slog.w(
+                                "AutofillSession",
+                                "Call to Session#save() rejected - session: "
+                                        + session.id
+                                        + " destroyed");
                     } else {
                         SaveEventLogger saveEventLogger2 = session.mSaveEventLogger;
                         saveEventLogger2.getClass();
-                        saveEventLogger2.mEventInternal.ifPresent(new SaveEventLogger$$ExternalSyntheticLambda0(SystemClock.elapsedRealtime() - saveEventLogger2.mSessionStartTimestamp, 1));
-                        session.mHandler.sendMessage(PooledLambda.obtainMessage(new Session$$ExternalSyntheticLambda9(), session.mService, session));
+                        saveEventLogger2.mEventInternal.ifPresent(
+                                new SaveEventLogger$$ExternalSyntheticLambda0(
+                                        SystemClock.elapsedRealtime()
+                                                - saveEventLogger2.mSessionStartTimestamp,
+                                        1));
+                        session.mHandler.sendMessage(
+                                PooledLambda.obtainMessage(
+                                        new Session$$ExternalSyntheticLambda9(),
+                                        session.mService,
+                                        session));
                     }
                 } finally {
                 }
@@ -155,7 +183,8 @@ public final class AutoFillUI {
                         Slog.e("AutofillSession", "Error requesting to hide fill UI", e);
                     }
                     session.mInlineSessionController.hideInlineSuggestionsUiLocked(autofillId);
-                    session.mPresentationStatsEventLogger.mEventInternal.ifPresent(new PresentationStatsEventLogger$$ExternalSyntheticLambda27());
+                    session.mPresentationStatsEventLogger.mEventInternal.ifPresent(
+                            new PresentationStatsEventLogger$$ExternalSyntheticLambda27());
                 }
             }
         }
@@ -176,7 +205,13 @@ public final class AutoFillUI {
         public final /* synthetic */ FillResponse val$response;
         public final /* synthetic */ Object val$sessionLock;
 
-        public AnonymousClass3(AutoFillUiCallback autoFillUiCallback, FillResponse fillResponse, Object obj, PresentationStatsEventLogger presentationStatsEventLogger, AutofillId autofillId, LogMaker logMaker) {
+        public AnonymousClass3(
+                AutoFillUiCallback autoFillUiCallback,
+                FillResponse fillResponse,
+                Object obj,
+                PresentationStatsEventLogger presentationStatsEventLogger,
+                AutofillId autofillId,
+                LogMaker logMaker) {
             this.val$callback = autoFillUiCallback;
             this.val$response = fillResponse;
             this.val$sessionLock = obj;
@@ -193,9 +228,11 @@ public final class AutoFillUI {
         public final void onCanceled() {
             log(2);
             synchronized (this.val$sessionLock) {
-                PresentationStatsEventLogger presentationStatsEventLogger = this.val$presentationStatsEventLogger;
+                PresentationStatsEventLogger presentationStatsEventLogger =
+                        this.val$presentationStatsEventLogger;
                 if (presentationStatsEventLogger != null) {
-                    presentationStatsEventLogger.mEventInternal.ifPresent(new PresentationStatsEventLogger$$ExternalSyntheticLambda0(3));
+                    presentationStatsEventLogger.mEventInternal.ifPresent(
+                            new PresentationStatsEventLogger$$ExternalSyntheticLambda0(3));
                 }
             }
             AutoFillUI.this.hideFillDialogUiThread(this.val$callback);
@@ -210,14 +247,18 @@ public final class AutoFillUI {
             autoFillUI.hideFillDialogUiThread(autoFillUiCallback);
             AutoFillUiCallback autoFillUiCallback2 = autoFillUI.mCallback;
             if (autoFillUiCallback2 != null) {
-                ((Session) autoFillUiCallback2).authenticate(fillResponse.getRequestId(), fillResponse.getAuthentication(), fillResponse.getClientState(), 3);
+                ((Session) autoFillUiCallback2)
+                        .authenticate(
+                                fillResponse.getRequestId(),
+                                fillResponse.getAuthentication(),
+                                fillResponse.getClientState(),
+                                3);
             }
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface AutoFillUiCallback {
-    }
+    public interface AutoFillUiCallback {}
 
     public AutoFillUI(Context context) {
         this.mContext = context;
@@ -228,7 +269,12 @@ public final class AutoFillUI {
     public static Context getContextForResources(Context context, int i) {
         DisplayManager displayManager;
         Display display;
-        return (i == 0 || (displayManager = (DisplayManager) context.getSystemService("display")) == null || (display = displayManager.getDisplay(i)) == null) ? context : context.createDisplayContext(display);
+        return (i == 0
+                        || (displayManager = (DisplayManager) context.getSystemService("display"))
+                                == null
+                        || (display = displayManager.getDisplay(i)) == null)
+                ? context
+                : context.createDisplayContext(display);
     }
 
     public final void destroySaveUiUiThread(PendingUi pendingUi, boolean z) {
@@ -266,7 +312,9 @@ public final class AutoFillUI {
                     }
                     pendingUi.client.setSaveUiState(pendingUi.sessionId, false);
                 } catch (RemoteException e) {
-                    Slog.e("AutofillUI", "Error notifying client to set save UI state to hidden: " + e);
+                    Slog.e(
+                            "AutofillUI",
+                            "Error notifying client to set save UI state to hidden: " + e);
                 }
             }
             if (this.mCreateFillUiRunnable != null) {
@@ -292,8 +340,10 @@ public final class AutoFillUI {
             fillUi.getClass();
             printWriter.print("    ");
             printWriter.print("mCallback: ");
-            AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(printWriter, "    ", "mFullScreen: ", fillUi.mCallback != null);
-            AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(printWriter, "    ", "mVisibleDatasetsMaxCount: ", fillUi.mFullScreen);
+            AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(
+                    printWriter, "    ", "mFullScreen: ", fillUi.mCallback != null);
+            AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(
+                    printWriter, "    ", "mVisibleDatasetsMaxCount: ", fillUi.mFullScreen);
             printWriter.println(fillUi.mVisibleDatasetsMaxCount);
             if (fillUi.mHeader != null) {
                 printWriter.print("    ");
@@ -329,9 +379,12 @@ public final class AutoFillUI {
             }
             printWriter.print("    ");
             printWriter.print("mContentWidth: ");
-            BroadcastStats$$ExternalSyntheticOutline0.m(fillUi.mContentWidth, printWriter, "    ", "mContentHeight: ");
-            BroadcastStats$$ExternalSyntheticOutline0.m(fillUi.mContentHeight, printWriter, "    ", "mDestroyed: ");
-            AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(printWriter, "    ", "mContext: ", fillUi.mDestroyed);
+            BroadcastStats$$ExternalSyntheticOutline0.m(
+                    fillUi.mContentWidth, printWriter, "    ", "mContentHeight: ");
+            BroadcastStats$$ExternalSyntheticOutline0.m(
+                    fillUi.mContentHeight, printWriter, "    ", "mDestroyed: ");
+            AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(
+                    printWriter, "    ", "mContext: ", fillUi.mDestroyed);
             printWriter.println(fillUi.mContext);
             printWriter.print("    ");
             printWriter.print("theme id: ");
@@ -351,7 +404,8 @@ public final class AutoFillUI {
                 printWriter.println();
                 printWriter.print("      ");
                 printWriter.print("showing: ");
-                AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(printWriter, "      ", "view: ", anchoredWindow.mShowing);
+                AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(
+                        printWriter, "      ", "view: ", anchoredWindow.mShowing);
                 printWriter.println(anchoredWindow.mContentView);
                 if (anchoredWindow.mShowParams != null) {
                     printWriter.print("      ");
@@ -390,11 +444,13 @@ public final class AutoFillUI {
             printWriter.println(saveUi.mPendingUi);
             printWriter.print("    ");
             printWriter.print("service: ");
-            ProcessList$$ExternalSyntheticOutline0.m(printWriter, saveUi.mServicePackageName, "    ", "app: ");
+            ProcessList$$ExternalSyntheticOutline0.m(
+                    printWriter, saveUi.mServicePackageName, "    ", "app: ");
             printWriter.println(saveUi.mComponentName.toShortString());
             printWriter.print("    ");
             printWriter.print("compat mode: ");
-            AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(printWriter, "    ", "theme id: ", saveUi.mCompatMode);
+            AppBatteryTracker$AppBatteryPolicy$$ExternalSyntheticOutline0.m(
+                    printWriter, "    ", "theme id: ", saveUi.mCompatMode);
             int i2 = saveUi.mThemeId;
             printWriter.print(i2);
             if (i2 == 16974895) {
@@ -436,7 +492,8 @@ public final class AutoFillUI {
         dialogFillUi.getClass();
         printWriter.print("    ");
         printWriter.print("service: ");
-        ProcessList$$ExternalSyntheticOutline0.m(printWriter, dialogFillUi.mServicePackageName, "    ", "app: ");
+        ProcessList$$ExternalSyntheticOutline0.m(
+                printWriter, dialogFillUi.mServicePackageName, "    ", "app: ");
         printWriter.println(dialogFillUi.mComponentName.toShortString());
         printWriter.print("    ");
         printWriter.print("theme id: ");
@@ -476,7 +533,10 @@ public final class AutoFillUI {
             return;
         }
         if (Helper.sDebug) {
-            Slog.d("AutofillUI", "hideAllUiThread(): destroying Save UI because pending restoration is finished");
+            Slog.d(
+                    "AutofillUI",
+                    "hideAllUiThread(): destroying Save UI because pending restoration is"
+                        + " finished");
         }
         destroySaveUiUiThread(hideSaveUiUiThread, true);
     }
@@ -491,7 +551,8 @@ public final class AutoFillUI {
                         Slog.d("DialogFillUi", "destroy()");
                     }
                     if (dialogFillUi.mDestroyed) {
-                        throw new IllegalStateException("cannot interact with a destroyed instance");
+                        throw new IllegalStateException(
+                                "cannot interact with a destroyed instance");
                     }
                     dialogFillUi.mDialog.dismiss();
                     dialogFillUi.mDestroyed = true;
@@ -525,11 +586,13 @@ public final class AutoFillUI {
                         Session session = (Session) autoFillUiCallback2;
                         synchronized (session.mLock) {
                             try {
-                                session.mClient.requestHideFillUiWhenDestroyed(session.id, autofillId);
+                                session.mClient.requestHideFillUiWhenDestroyed(
+                                        session.id, autofillId);
                             } catch (RemoteException e) {
                                 Slog.e("AutofillSession", "Error requesting to hide fill UI", e);
                             }
-                            session.mInlineSessionController.hideInlineSuggestionsUiLocked(autofillId);
+                            session.mInlineSessionController.hideInlineSuggestionsUiLocked(
+                                    autofillId);
                         }
                     }
                 }
@@ -541,7 +604,14 @@ public final class AutoFillUI {
 
     public final PendingUi hideSaveUiUiThread(AutoFillUiCallback autoFillUiCallback) {
         if (Helper.sVerbose) {
-            Slog.v("AutofillUI", "hideSaveUiUiThread(): mSaveUi=" + this.mSaveUi + ", callback=" + autoFillUiCallback + ", mCallback=" + this.mCallback);
+            Slog.v(
+                    "AutofillUI",
+                    "hideSaveUiUiThread(): mSaveUi="
+                            + this.mSaveUi
+                            + ", callback="
+                            + autoFillUiCallback
+                            + ", mCallback="
+                            + this.mCallback);
         }
         SaveUi saveUi = this.mSaveUi;
         if (saveUi == null || this.mSaveUiCallback != autoFillUiCallback) {
@@ -552,6 +622,7 @@ public final class AutoFillUI {
 
     public final void showError(CharSequence charSequence, AutoFillUiCallback autoFillUiCallback) {
         Slog.w("AutofillUI", "showError(): " + ((Object) charSequence));
-        this.mHandler.post(new AutoFillUI$$ExternalSyntheticLambda8(this, autoFillUiCallback, charSequence));
+        this.mHandler.post(
+                new AutoFillUI$$ExternalSyntheticLambda8(this, autoFillUiCallback, charSequence));
     }
 }

@@ -2,7 +2,9 @@ package com.android.server.vcn.repackaged.util;
 
 import android.os.ParcelUuid;
 import android.os.PersistableBundle;
+
 import com.android.internal.util.HexDump;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -30,30 +32,38 @@ public class PersistableBundleUtils {
     private static final String MAP_VALUE_FORMAT = "MAP_VALUE_%d";
     private static final String PARCEL_UUID_KEY = "PARCEL_UUID";
     private static final String STRING_KEY = "STRING_KEY";
-    public static final Serializer<Integer> INTEGER_SERIALIZER = new Serializer() { // from class: com.android.server.vcn.repackaged.util.PersistableBundleUtils$$ExternalSyntheticLambda0
-        @Override // com.android.server.vcn.repackaged.util.PersistableBundleUtils.Serializer
-        public final PersistableBundle toPersistableBundle(Object obj) {
-            return PersistableBundleUtils.lambda$static$0((Integer) obj);
-        }
-    };
-    public static final Deserializer<Integer> INTEGER_DESERIALIZER = new Deserializer() { // from class: com.android.server.vcn.repackaged.util.PersistableBundleUtils$$ExternalSyntheticLambda1
-        @Override // com.android.server.vcn.repackaged.util.PersistableBundleUtils.Deserializer
-        public final Object fromPersistableBundle(PersistableBundle persistableBundle) {
-            return PersistableBundleUtils.lambda$static$1(persistableBundle);
-        }
-    };
-    public static final Serializer<String> STRING_SERIALIZER = new Serializer() { // from class: com.android.server.vcn.repackaged.util.PersistableBundleUtils$$ExternalSyntheticLambda2
-        @Override // com.android.server.vcn.repackaged.util.PersistableBundleUtils.Serializer
-        public final PersistableBundle toPersistableBundle(Object obj) {
-            return PersistableBundleUtils.lambda$static$2((String) obj);
-        }
-    };
-    public static final Deserializer<String> STRING_DESERIALIZER = new Deserializer() { // from class: com.android.server.vcn.repackaged.util.PersistableBundleUtils$$ExternalSyntheticLambda3
-        @Override // com.android.server.vcn.repackaged.util.PersistableBundleUtils.Deserializer
-        public final Object fromPersistableBundle(PersistableBundle persistableBundle) {
-            return PersistableBundleUtils.lambda$static$3(persistableBundle);
-        }
-    };
+    public static final Serializer<Integer> INTEGER_SERIALIZER =
+            new Serializer() { // from class:
+                               // com.android.server.vcn.repackaged.util.PersistableBundleUtils$$ExternalSyntheticLambda0
+                @Override // com.android.server.vcn.repackaged.util.PersistableBundleUtils.Serializer
+                public final PersistableBundle toPersistableBundle(Object obj) {
+                    return PersistableBundleUtils.lambda$static$0((Integer) obj);
+                }
+            };
+    public static final Deserializer<Integer> INTEGER_DESERIALIZER =
+            new Deserializer() { // from class:
+                                 // com.android.server.vcn.repackaged.util.PersistableBundleUtils$$ExternalSyntheticLambda1
+                @Override // com.android.server.vcn.repackaged.util.PersistableBundleUtils.Deserializer
+                public final Object fromPersistableBundle(PersistableBundle persistableBundle) {
+                    return PersistableBundleUtils.lambda$static$1(persistableBundle);
+                }
+            };
+    public static final Serializer<String> STRING_SERIALIZER =
+            new Serializer() { // from class:
+                               // com.android.server.vcn.repackaged.util.PersistableBundleUtils$$ExternalSyntheticLambda2
+                @Override // com.android.server.vcn.repackaged.util.PersistableBundleUtils.Serializer
+                public final PersistableBundle toPersistableBundle(Object obj) {
+                    return PersistableBundleUtils.lambda$static$2((String) obj);
+                }
+            };
+    public static final Deserializer<String> STRING_DESERIALIZER =
+            new Deserializer() { // from class:
+                                 // com.android.server.vcn.repackaged.util.PersistableBundleUtils$$ExternalSyntheticLambda3
+                @Override // com.android.server.vcn.repackaged.util.PersistableBundleUtils.Deserializer
+                public final Object fromPersistableBundle(PersistableBundle persistableBundle) {
+                    return PersistableBundleUtils.lambda$static$3(persistableBundle);
+                }
+            };
 
     public interface Deserializer<T> {
         T fromPersistableBundle(PersistableBundle persistableBundle);
@@ -131,7 +141,8 @@ public class PersistableBundleUtils {
         return HexDump.hexStringToByteArray(hex);
     }
 
-    public static <K, V> PersistableBundle fromMap(Map<K, V> in, Serializer<K> keySerializer, Serializer<V> valueSerializer) {
+    public static <K, V> PersistableBundle fromMap(
+            Map<K, V> in, Serializer<K> keySerializer, Serializer<V> valueSerializer) {
         PersistableBundle result = new PersistableBundle();
         result.putInt(COLLECTION_SIZE_KEY, in.size());
         int i = 0;
@@ -139,13 +150,17 @@ public class PersistableBundleUtils {
             String keyKey = String.format(MAP_KEY_FORMAT, Integer.valueOf(i));
             String valueKey = String.format(MAP_VALUE_FORMAT, Integer.valueOf(i));
             result.putPersistableBundle(keyKey, keySerializer.toPersistableBundle(entry.getKey()));
-            result.putPersistableBundle(valueKey, valueSerializer.toPersistableBundle(entry.getValue()));
+            result.putPersistableBundle(
+                    valueKey, valueSerializer.toPersistableBundle(entry.getValue()));
             i++;
         }
         return result;
     }
 
-    public static <K, V> LinkedHashMap<K, V> toMap(PersistableBundle in, Deserializer<K> keyDeserializer, Deserializer<V> valueDeserializer) {
+    public static <K, V> LinkedHashMap<K, V> toMap(
+            PersistableBundle in,
+            Deserializer<K> keyDeserializer,
+            Deserializer<V> valueDeserializer) {
         int mapSize = in.getInt(COLLECTION_SIZE_KEY);
         LinkedHashMap<K, V> result = new LinkedHashMap<>(mapSize);
         for (int i = 0; i < mapSize; i++) {
@@ -266,7 +281,11 @@ public class PersistableBundleUtils {
             String key = it.next();
             Object val = bundle.get(key);
             if (val instanceof PersistableBundle) {
-                iterativeHashcode = Objects.hash(Integer.valueOf(iterativeHashcode), key, Integer.valueOf(getHashCode((PersistableBundle) val)));
+                iterativeHashcode =
+                        Objects.hash(
+                                Integer.valueOf(iterativeHashcode),
+                                key,
+                                Integer.valueOf(getHashCode((PersistableBundle) val)));
             } else {
                 iterativeHashcode = Objects.hash(Integer.valueOf(iterativeHashcode), key, val);
             }
@@ -278,14 +297,16 @@ public class PersistableBundleUtils {
         if (Objects.equals(left, right)) {
             return true;
         }
-        if (Objects.isNull(left) != Objects.isNull(right) || !left.keySet().equals(right.keySet())) {
+        if (Objects.isNull(left) != Objects.isNull(right)
+                || !left.keySet().equals(right.keySet())) {
             return false;
         }
         for (String key : left.keySet()) {
             Object leftVal = left.get(key);
             Object rightVal = right.get(key);
             if (!Objects.equals(leftVal, rightVal)) {
-                if (Objects.isNull(leftVal) != Objects.isNull(rightVal) || !Objects.equals(leftVal.getClass(), rightVal.getClass())) {
+                if (Objects.isNull(leftVal) != Objects.isNull(rightVal)
+                        || !Objects.equals(leftVal.getClass(), rightVal.getClass())) {
                     return false;
                 }
                 if (leftVal instanceof PersistableBundle) {

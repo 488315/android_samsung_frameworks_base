@@ -12,8 +12,7 @@ public interface IRemoteDisplayCallback extends IInterface {
 
     public static class Default implements IRemoteDisplayCallback {
         @Override // android.media.IRemoteDisplayCallback
-        public void onStateChanged(RemoteDisplayState state) throws RemoteException {
-        }
+        public void onStateChanged(RemoteDisplayState state) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface IRemoteDisplayCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRemoteDisplayCallback {
+    public abstract static class Stub extends Binder implements IRemoteDisplayCallback {
         public static final String DESCRIPTOR = "android.media.IRemoteDisplayCallback";
         static final int TRANSACTION_onStateChanged = 1;
 
@@ -60,7 +59,8 @@ public interface IRemoteDisplayCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -70,7 +70,8 @@ public interface IRemoteDisplayCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    RemoteDisplayState _arg0 = (RemoteDisplayState) data.readTypedObject(RemoteDisplayState.CREATOR);
+                    RemoteDisplayState _arg0 =
+                            (RemoteDisplayState) data.readTypedObject(RemoteDisplayState.CREATOR);
                     data.enforceNoDataAvail();
                     onStateChanged(_arg0);
                     return true;

@@ -8,7 +8,8 @@ public class AlteredCharSequence implements CharSequence, GetChars {
     private CharSequence mSource;
     private int mStart;
 
-    public static AlteredCharSequence make(CharSequence source, char[] sub, int substart, int subend) {
+    public static AlteredCharSequence make(
+            CharSequence source, char[] sub, int substart, int subend) {
         if (source instanceof Spanned) {
             return new AlteredSpanned(source, sub, substart, subend);
         }
@@ -77,7 +78,11 @@ public class AlteredCharSequence implements CharSequence, GetChars {
 
     @Override // java.lang.CharSequence
     public CharSequence subSequence(int start, int end) {
-        return make(this.mSource.subSequence(start, end), this.mChars, this.mStart - start, this.mEnd - start);
+        return make(
+                this.mSource.subSequence(start, end),
+                this.mChars,
+                this.mStart - start,
+                this.mEnd - start);
     }
 
     @Override // android.text.GetChars

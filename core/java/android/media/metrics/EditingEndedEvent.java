@@ -3,6 +3,7 @@ package android.media.metrics;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -11,19 +12,21 @@ import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public final class EditingEndedEvent extends Event implements Parcelable {
-    public static final Parcelable.Creator<EditingEndedEvent> CREATOR = new Parcelable.Creator<EditingEndedEvent>() { // from class: android.media.metrics.EditingEndedEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EditingEndedEvent[] newArray(int size) {
-            return new EditingEndedEvent[size];
-        }
+    public static final Parcelable.Creator<EditingEndedEvent> CREATOR =
+            new Parcelable.Creator<
+                    EditingEndedEvent>() { // from class: android.media.metrics.EditingEndedEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EditingEndedEvent[] newArray(int size) {
+                    return new EditingEndedEvent[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EditingEndedEvent createFromParcel(Parcel in) {
-            return new EditingEndedEvent(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EditingEndedEvent createFromParcel(Parcel in) {
+                    return new EditingEndedEvent(in);
+                }
+            };
     public static final int ERROR_CODE_AUDIO_PROCESSING_FAILED = 18;
     public static final int ERROR_CODE_DECODER_INIT_FAILED = 11;
     public static final int ERROR_CODE_DECODING_FAILED = 12;
@@ -67,18 +70,25 @@ public final class EditingEndedEvent extends Event implements Parcelable {
     private final long mTimeSinceCreatedMillis;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ErrorCode {
-    }
+    public @interface ErrorCode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FinalState {
-    }
+    public @interface FinalState {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface OperationType {
-    }
+    public @interface OperationType {}
 
-    private EditingEndedEvent(int finalState, float finalProgressPercent, int errorCode, long timeSinceCreatedMillis, String exporterName, String muxerName, ArrayList<MediaItemInfo> inputMediaItemInfos, MediaItemInfo outputMediaItemInfo, long operationTypes, Bundle extras) {
+    private EditingEndedEvent(
+            int finalState,
+            float finalProgressPercent,
+            int errorCode,
+            long timeSinceCreatedMillis,
+            String exporterName,
+            String muxerName,
+            ArrayList<MediaItemInfo> inputMediaItemInfos,
+            MediaItemInfo outputMediaItemInfo,
+            long operationTypes,
+            Bundle extras) {
         this.mFinalState = finalState;
         this.mFinalProgressPercent = finalProgressPercent;
         this.mErrorCode = errorCode;
@@ -134,7 +144,25 @@ public final class EditingEndedEvent extends Event implements Parcelable {
     }
 
     public String toString() {
-        return "EditingEndedEvent { finalState = " + this.mFinalState + ", finalProgressPercent = " + this.mFinalProgressPercent + ", errorCode = " + this.mErrorCode + ", timeSinceCreatedMillis = " + this.mTimeSinceCreatedMillis + ", exporterName = " + this.mExporterName + ", muxerName = " + this.mMuxerName + ", inputMediaItemInfos = " + this.mInputMediaItemInfos + ", outputMediaItemInfo = " + this.mOutputMediaItemInfo + ", operationTypes = " + this.mOperationTypes + " }";
+        return "EditingEndedEvent { finalState = "
+                + this.mFinalState
+                + ", finalProgressPercent = "
+                + this.mFinalProgressPercent
+                + ", errorCode = "
+                + this.mErrorCode
+                + ", timeSinceCreatedMillis = "
+                + this.mTimeSinceCreatedMillis
+                + ", exporterName = "
+                + this.mExporterName
+                + ", muxerName = "
+                + this.mMuxerName
+                + ", inputMediaItemInfos = "
+                + this.mInputMediaItemInfos
+                + ", outputMediaItemInfo = "
+                + this.mOutputMediaItemInfo
+                + ", operationTypes = "
+                + this.mOperationTypes
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -145,14 +173,31 @@ public final class EditingEndedEvent extends Event implements Parcelable {
             return false;
         }
         EditingEndedEvent that = (EditingEndedEvent) o;
-        if (this.mFinalState == that.mFinalState && this.mFinalProgressPercent == that.mFinalProgressPercent && this.mErrorCode == that.mErrorCode && Objects.equals(this.mInputMediaItemInfos, that.mInputMediaItemInfos) && Objects.equals(this.mOutputMediaItemInfo, that.mOutputMediaItemInfo) && this.mOperationTypes == that.mOperationTypes && this.mTimeSinceCreatedMillis == that.mTimeSinceCreatedMillis && Objects.equals(this.mExporterName, that.mExporterName) && Objects.equals(this.mMuxerName, that.mMuxerName)) {
+        if (this.mFinalState == that.mFinalState
+                && this.mFinalProgressPercent == that.mFinalProgressPercent
+                && this.mErrorCode == that.mErrorCode
+                && Objects.equals(this.mInputMediaItemInfos, that.mInputMediaItemInfos)
+                && Objects.equals(this.mOutputMediaItemInfo, that.mOutputMediaItemInfo)
+                && this.mOperationTypes == that.mOperationTypes
+                && this.mTimeSinceCreatedMillis == that.mTimeSinceCreatedMillis
+                && Objects.equals(this.mExporterName, that.mExporterName)
+                && Objects.equals(this.mMuxerName, that.mMuxerName)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mFinalState), Float.valueOf(this.mFinalProgressPercent), Integer.valueOf(this.mErrorCode), this.mInputMediaItemInfos, this.mOutputMediaItemInfo, Long.valueOf(this.mOperationTypes), Long.valueOf(this.mTimeSinceCreatedMillis), this.mExporterName, this.mMuxerName);
+        return Objects.hash(
+                Integer.valueOf(this.mFinalState),
+                Float.valueOf(this.mFinalProgressPercent),
+                Integer.valueOf(this.mErrorCode),
+                this.mInputMediaItemInfos,
+                this.mOutputMediaItemInfo,
+                Long.valueOf(this.mOperationTypes),
+                Long.valueOf(this.mTimeSinceCreatedMillis),
+                this.mExporterName,
+                this.mMuxerName);
     }
 
     @Override // android.os.Parcelable
@@ -250,7 +295,17 @@ public final class EditingEndedEvent extends Event implements Parcelable {
         }
 
         public EditingEndedEvent build() {
-            return new EditingEndedEvent(this.mFinalState, this.mFinalProgressPercent, this.mErrorCode, this.mTimeSinceCreatedMillis, this.mExporterName, this.mMuxerName, this.mInputMediaItemInfos, this.mOutputMediaItemInfo, this.mOperationTypes, this.mMetricsBundle);
+            return new EditingEndedEvent(
+                    this.mFinalState,
+                    this.mFinalProgressPercent,
+                    this.mErrorCode,
+                    this.mTimeSinceCreatedMillis,
+                    this.mExporterName,
+                    this.mMuxerName,
+                    this.mInputMediaItemInfos,
+                    this.mOutputMediaItemInfo,
+                    this.mOperationTypes,
+                    this.mMetricsBundle);
         }
     }
 }

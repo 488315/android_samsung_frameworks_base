@@ -3,7 +3,9 @@ package com.samsung.android.server.audio;
 import android.os.FileUtils;
 import android.os.SystemProperties;
 import android.text.TextUtils;
+
 import com.android.server.audio.AudioServiceExt$ResetSettingsReceiver$$ExternalSyntheticOutline0;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -19,14 +21,18 @@ public abstract class FactoryUtils {
                     FileUtils.stringToFile("/efs/FactoryApp/earjack_count", "1");
                 }
             } else {
-                String readTextFile = FileUtils.readTextFile(new File("/efs/FactoryApp/earjack_count"), 0, null);
+                String readTextFile =
+                        FileUtils.readTextFile(new File("/efs/FactoryApp/earjack_count"), 0, null);
                 if (!TextUtils.isEmpty(readTextFile)) {
                     str = Long.toString(Long.parseLong(readTextFile) + 1);
                 }
                 FileUtils.stringToFile("/efs/FactoryApp/earjack_count", str);
             }
         } catch (IOException | NumberFormatException e) {
-            AudioServiceExt$ResetSettingsReceiver$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception in increaseEarJackCounter : "), "AS.FactoryUtils");
+            AudioServiceExt$ResetSettingsReceiver$$ExternalSyntheticOutline0.m(
+                    e,
+                    new StringBuilder("Exception in increaseEarJackCounter : "),
+                    "AS.FactoryUtils");
         }
     }
 

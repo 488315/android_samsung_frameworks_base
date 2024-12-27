@@ -1,6 +1,7 @@
 package com.android.server.core.jarjar.kotlin.jvm.internal;
 
 import android.net.shared.InitialConfiguration$$ExternalSyntheticOutline0;
+
 import java.util.Arrays;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -18,7 +19,13 @@ public abstract class Intrinsics {
                 i++;
             }
             StackTraceElement stackTraceElement = stackTrace[i];
-            StringBuilder m = InitialConfiguration$$ExternalSyntheticOutline0.m("Parameter specified as non-null is null: method ", stackTraceElement.getClassName(), ".", stackTraceElement.getMethodName(), ", parameter ");
+            StringBuilder m =
+                    InitialConfiguration$$ExternalSyntheticOutline0.m(
+                            "Parameter specified as non-null is null: method ",
+                            stackTraceElement.getClassName(),
+                            ".",
+                            stackTraceElement.getMethodName(),
+                            ", parameter ");
             m.append(str);
             NullPointerException nullPointerException = new NullPointerException(m.toString());
             String name2 = Intrinsics.class.getName();
@@ -30,7 +37,8 @@ public abstract class Intrinsics {
                     i2 = i3;
                 }
             }
-            nullPointerException.setStackTrace((StackTraceElement[]) Arrays.copyOfRange(stackTrace2, i2 + 1, length));
+            nullPointerException.setStackTrace(
+                    (StackTraceElement[]) Arrays.copyOfRange(stackTrace2, i2 + 1, length));
             throw nullPointerException;
         }
     }

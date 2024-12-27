@@ -1,8 +1,8 @@
 package android.media;
 
-import android.media.MediaCodec;
 import android.util.Log;
 import android.view.Surface;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;

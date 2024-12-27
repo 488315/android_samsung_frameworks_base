@@ -6,6 +6,7 @@ import com.android.framework.protobuf.nano.InternalNano;
 import com.android.framework.protobuf.nano.InvalidProtocolBufferNanoException;
 import com.android.framework.protobuf.nano.MessageNano;
 import com.android.framework.protobuf.nano.WireFormatNano;
+
 import java.io.IOException;
 
 /* loaded from: classes5.dex */
@@ -96,11 +97,13 @@ public final class StringListParamProto extends MessageNano {
         }
     }
 
-    public static StringListParamProto parseFrom(byte[] data) throws InvalidProtocolBufferNanoException {
+    public static StringListParamProto parseFrom(byte[] data)
+            throws InvalidProtocolBufferNanoException {
         return (StringListParamProto) MessageNano.mergeFrom(new StringListParamProto(), data);
     }
 
-    public static StringListParamProto parseFrom(CodedInputByteBufferNano input) throws IOException {
+    public static StringListParamProto parseFrom(CodedInputByteBufferNano input)
+            throws IOException {
         return new StringListParamProto().mergeFrom(input);
     }
 }

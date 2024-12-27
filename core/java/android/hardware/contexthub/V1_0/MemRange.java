@@ -3,6 +3,7 @@ package android.hardware.contexthub.V1_0;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -21,18 +22,34 @@ public final class MemRange {
             return false;
         }
         MemRange other = (MemRange) otherObject;
-        if (this.totalBytes == other.totalBytes && this.freeBytes == other.freeBytes && this.type == other.type && HidlSupport.deepEquals(Integer.valueOf(this.flags), Integer.valueOf(other.flags))) {
+        if (this.totalBytes == other.totalBytes
+                && this.freeBytes == other.freeBytes
+                && this.type == other.type
+                && HidlSupport.deepEquals(
+                        Integer.valueOf(this.flags), Integer.valueOf(other.flags))) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.totalBytes))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.freeBytes))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.type))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.flags))));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.totalBytes))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.freeBytes))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.type))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.flags))));
     }
 
     public final String toString() {
-        return "{.totalBytes = " + this.totalBytes + ", .freeBytes = " + this.freeBytes + ", .type = " + HubMemoryType.toString(this.type) + ", .flags = " + HubMemoryFlag.dumpBitfield(this.flags) + "}";
+        return "{.totalBytes = "
+                + this.totalBytes
+                + ", .freeBytes = "
+                + this.freeBytes
+                + ", .type = "
+                + HubMemoryType.toString(this.type)
+                + ", .flags = "
+                + HubMemoryFlag.dumpBitfield(this.flags)
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -44,7 +61,8 @@ public final class MemRange {
         ArrayList<MemRange> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 16, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 16, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             MemRange _hidl_vec_element = new MemRange();
@@ -54,7 +72,8 @@ public final class MemRange {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.totalBytes = _hidl_blob.getInt32(0 + _hidl_offset);
         this.freeBytes = _hidl_blob.getInt32(4 + _hidl_offset);
         this.type = _hidl_blob.getInt32(8 + _hidl_offset);

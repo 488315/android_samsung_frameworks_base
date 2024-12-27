@@ -2,7 +2,9 @@ package com.android.server.chimera.umr;
 
 import android.os.StrictMode;
 import android.util.Slog;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
+
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
@@ -32,7 +34,10 @@ public abstract class KernelMemoryProxy$ReclaimerLog {
         OutputStreamWriter outputStreamWriter = null;
         try {
             try {
-                OutputStreamWriter outputStreamWriter2 = new OutputStreamWriter(new FileOutputStream("/proc/reclaimer_log"), StandardCharsets.UTF_8);
+                OutputStreamWriter outputStreamWriter2 =
+                        new OutputStreamWriter(
+                                new FileOutputStream("/proc/reclaimer_log"),
+                                StandardCharsets.UTF_8);
                 try {
                     outputStreamWriter2.write("UMR: " + str);
                     outputStreamWriter2.close();

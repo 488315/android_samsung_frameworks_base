@@ -5,7 +5,6 @@ import android.media.tv.AdBuffer;
 import android.media.tv.AdRequest;
 import android.media.tv.BroadcastInfoRequest;
 import android.media.tv.TvRecordingInfo;
-import android.media.tv.interactive.ITvInteractiveAppSession;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.Bundle;
@@ -16,7 +15,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes3.dex */
 public interface ITvInteractiveAppSessionCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.media.tv.interactive.ITvInteractiveAppSessionCallback";
+    public static final String DESCRIPTOR =
+            "android.media.tv.interactive.ITvInteractiveAppSessionCallback";
 
     void onAdBufferReady(AdBuffer adBuffer) throws RemoteException;
 
@@ -44,15 +44,19 @@ public interface ITvInteractiveAppSessionCallback extends IInterface {
 
     void onRequestCurrentVideoBounds() throws RemoteException;
 
-    void onRequestScheduleRecording(String str, String str2, Uri uri, Uri uri2, Bundle bundle) throws RemoteException;
+    void onRequestScheduleRecording(String str, String str2, Uri uri, Uri uri2, Bundle bundle)
+            throws RemoteException;
 
-    void onRequestScheduleRecording2(String str, String str2, Uri uri, long j, long j2, int i, Bundle bundle) throws RemoteException;
+    void onRequestScheduleRecording2(
+            String str, String str2, Uri uri, long j, long j2, int i, Bundle bundle)
+            throws RemoteException;
 
     void onRequestSelectedTrackInfo() throws RemoteException;
 
     void onRequestSigning(String str, String str2, String str3, byte[] bArr) throws RemoteException;
 
-    void onRequestSigning2(String str, String str2, String str3, int i, byte[] bArr) throws RemoteException;
+    void onRequestSigning2(String str, String str2, String str3, int i, byte[] bArr)
+            throws RemoteException;
 
     void onRequestStartRecording(String str, Uri uri) throws RemoteException;
 
@@ -82,128 +86,115 @@ public interface ITvInteractiveAppSessionCallback extends IInterface {
 
     public static class Default implements ITvInteractiveAppSessionCallback {
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onSessionCreated(ITvInteractiveAppSession session) throws RemoteException {
-        }
+        public void onSessionCreated(ITvInteractiveAppSession session) throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onLayoutSurface(int left, int top, int right, int bottom) throws RemoteException {
-        }
+        public void onLayoutSurface(int left, int top, int right, int bottom)
+                throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onBroadcastInfoRequest(BroadcastInfoRequest request) throws RemoteException {
-        }
+        public void onBroadcastInfoRequest(BroadcastInfoRequest request) throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onRemoveBroadcastInfo(int id) throws RemoteException {
-        }
+        public void onRemoveBroadcastInfo(int id) throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onSessionStateChanged(int state, int err) throws RemoteException {
-        }
+        public void onSessionStateChanged(int state, int err) throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onBiInteractiveAppCreated(Uri biIAppUri, String biIAppId) throws RemoteException {
-        }
+        public void onBiInteractiveAppCreated(Uri biIAppUri, String biIAppId)
+                throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onTeletextAppStateChanged(int state) throws RemoteException {
-        }
+        public void onTeletextAppStateChanged(int state) throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onAdBufferReady(AdBuffer buffer) throws RemoteException {
-        }
+        public void onAdBufferReady(AdBuffer buffer) throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onCommandRequest(String cmdType, Bundle parameters) throws RemoteException {
-        }
+        public void onCommandRequest(String cmdType, Bundle parameters) throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onTimeShiftCommandRequest(String cmdType, Bundle parameters) throws RemoteException {
-        }
+        public void onTimeShiftCommandRequest(String cmdType, Bundle parameters)
+                throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onSetVideoBounds(Rect rect) throws RemoteException {
-        }
+        public void onSetVideoBounds(Rect rect) throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onRequestCurrentVideoBounds() throws RemoteException {
-        }
+        public void onRequestCurrentVideoBounds() throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onRequestCurrentChannelUri() throws RemoteException {
-        }
+        public void onRequestCurrentChannelUri() throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onRequestCurrentChannelLcn() throws RemoteException {
-        }
+        public void onRequestCurrentChannelLcn() throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onRequestStreamVolume() throws RemoteException {
-        }
+        public void onRequestStreamVolume() throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onRequestTrackInfoList() throws RemoteException {
-        }
+        public void onRequestTrackInfoList() throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onRequestCurrentTvInputId() throws RemoteException {
-        }
+        public void onRequestCurrentTvInputId() throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onRequestTimeShiftMode() throws RemoteException {
-        }
+        public void onRequestTimeShiftMode() throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onRequestAvailableSpeeds() throws RemoteException {
-        }
+        public void onRequestAvailableSpeeds() throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onRequestSelectedTrackInfo() throws RemoteException {
-        }
+        public void onRequestSelectedTrackInfo() throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onRequestStartRecording(String requestId, Uri programUri) throws RemoteException {
-        }
+        public void onRequestStartRecording(String requestId, Uri programUri)
+                throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onRequestStopRecording(String recordingId) throws RemoteException {
-        }
+        public void onRequestStopRecording(String recordingId) throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onRequestScheduleRecording(String requestId, String inputId, Uri channelUri, Uri programUri, Bundle params) throws RemoteException {
-        }
+        public void onRequestScheduleRecording(
+                String requestId, String inputId, Uri channelUri, Uri programUri, Bundle params)
+                throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onRequestScheduleRecording2(String requestId, String inputId, Uri channelUri, long start, long duration, int repeat, Bundle params) throws RemoteException {
-        }
+        public void onRequestScheduleRecording2(
+                String requestId,
+                String inputId,
+                Uri channelUri,
+                long start,
+                long duration,
+                int repeat,
+                Bundle params)
+                throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onSetTvRecordingInfo(String recordingId, TvRecordingInfo recordingInfo) throws RemoteException {
-        }
+        public void onSetTvRecordingInfo(String recordingId, TvRecordingInfo recordingInfo)
+                throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onRequestTvRecordingInfo(String recordingId) throws RemoteException {
-        }
+        public void onRequestTvRecordingInfo(String recordingId) throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onRequestTvRecordingInfoList(int type) throws RemoteException {
-        }
+        public void onRequestTvRecordingInfoList(int type) throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onRequestSigning(String id, String algorithm, String alias, byte[] data) throws RemoteException {
-        }
+        public void onRequestSigning(String id, String algorithm, String alias, byte[] data)
+                throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onRequestSigning2(String id, String algorithm, String host, int port, byte[] data) throws RemoteException {
-        }
+        public void onRequestSigning2(
+                String id, String algorithm, String host, int port, byte[] data)
+                throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onRequestCertificate(String host, int port) throws RemoteException {
-        }
+        public void onRequestCertificate(String host, int port) throws RemoteException {}
 
         @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-        public void onAdRequest(AdRequest request) throws RemoteException {
-        }
+        public void onAdRequest(AdRequest request) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -211,7 +202,7 @@ public interface ITvInteractiveAppSessionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITvInteractiveAppSessionCallback {
+    public abstract static class Stub extends Binder implements ITvInteractiveAppSessionCallback {
         static final int TRANSACTION_onAdBufferReady = 8;
         static final int TRANSACTION_onAdRequest = 31;
         static final int TRANSACTION_onBiInteractiveAppCreated = 6;
@@ -339,7 +330,8 @@ public interface ITvInteractiveAppSessionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITvInteractiveAppSessionCallback.DESCRIPTOR);
             }
@@ -349,7 +341,8 @@ public interface ITvInteractiveAppSessionCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ITvInteractiveAppSession _arg0 = ITvInteractiveAppSession.Stub.asInterface(data.readStrongBinder());
+                    ITvInteractiveAppSession _arg0 =
+                            ITvInteractiveAppSession.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onSessionCreated(_arg0);
                     return true;
@@ -362,7 +355,9 @@ public interface ITvInteractiveAppSessionCallback extends IInterface {
                     onLayoutSurface(_arg02, _arg1, _arg2, _arg3);
                     return true;
                 case 3:
-                    BroadcastInfoRequest _arg03 = (BroadcastInfoRequest) data.readTypedObject(BroadcastInfoRequest.CREATOR);
+                    BroadcastInfoRequest _arg03 =
+                            (BroadcastInfoRequest)
+                                    data.readTypedObject(BroadcastInfoRequest.CREATOR);
                     data.enforceNoDataAvail();
                     onBroadcastInfoRequest(_arg03);
                     return true;
@@ -466,11 +461,13 @@ public interface ITvInteractiveAppSessionCallback extends IInterface {
                     int _arg5 = data.readInt();
                     Bundle _arg6 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
-                    onRequestScheduleRecording2(_arg015, _arg18, _arg23, _arg33, _arg42, _arg5, _arg6);
+                    onRequestScheduleRecording2(
+                            _arg015, _arg18, _arg23, _arg33, _arg42, _arg5, _arg6);
                     return true;
                 case 25:
                     String _arg016 = data.readString();
-                    TvRecordingInfo _arg19 = (TvRecordingInfo) data.readTypedObject(TvRecordingInfo.CREATOR);
+                    TvRecordingInfo _arg19 =
+                            (TvRecordingInfo) data.readTypedObject(TvRecordingInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onSetTvRecordingInfo(_arg016, _arg19);
                     return true;
@@ -546,7 +543,8 @@ public interface ITvInteractiveAppSessionCallback extends IInterface {
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-            public void onLayoutSurface(int left, int top, int right, int bottom) throws RemoteException {
+            public void onLayoutSurface(int left, int top, int right, int bottom)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITvInteractiveAppSessionCallback.DESCRIPTOR);
@@ -561,7 +559,8 @@ public interface ITvInteractiveAppSessionCallback extends IInterface {
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-            public void onBroadcastInfoRequest(BroadcastInfoRequest request) throws RemoteException {
+            public void onBroadcastInfoRequest(BroadcastInfoRequest request)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITvInteractiveAppSessionCallback.DESCRIPTOR);
@@ -598,7 +597,8 @@ public interface ITvInteractiveAppSessionCallback extends IInterface {
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-            public void onBiInteractiveAppCreated(Uri biIAppUri, String biIAppId) throws RemoteException {
+            public void onBiInteractiveAppCreated(Uri biIAppUri, String biIAppId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITvInteractiveAppSessionCallback.DESCRIPTOR);
@@ -648,7 +648,8 @@ public interface ITvInteractiveAppSessionCallback extends IInterface {
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-            public void onTimeShiftCommandRequest(String cmdType, Bundle parameters) throws RemoteException {
+            public void onTimeShiftCommandRequest(String cmdType, Bundle parameters)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITvInteractiveAppSessionCallback.DESCRIPTOR);
@@ -772,7 +773,8 @@ public interface ITvInteractiveAppSessionCallback extends IInterface {
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-            public void onRequestStartRecording(String requestId, Uri programUri) throws RemoteException {
+            public void onRequestStartRecording(String requestId, Uri programUri)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITvInteractiveAppSessionCallback.DESCRIPTOR);
@@ -797,7 +799,9 @@ public interface ITvInteractiveAppSessionCallback extends IInterface {
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-            public void onRequestScheduleRecording(String requestId, String inputId, Uri channelUri, Uri programUri, Bundle params) throws RemoteException {
+            public void onRequestScheduleRecording(
+                    String requestId, String inputId, Uri channelUri, Uri programUri, Bundle params)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITvInteractiveAppSessionCallback.DESCRIPTOR);
@@ -813,7 +817,15 @@ public interface ITvInteractiveAppSessionCallback extends IInterface {
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-            public void onRequestScheduleRecording2(String requestId, String inputId, Uri channelUri, long start, long duration, int repeat, Bundle params) throws RemoteException {
+            public void onRequestScheduleRecording2(
+                    String requestId,
+                    String inputId,
+                    Uri channelUri,
+                    long start,
+                    long duration,
+                    int repeat,
+                    Bundle params)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITvInteractiveAppSessionCallback.DESCRIPTOR);
@@ -831,7 +843,8 @@ public interface ITvInteractiveAppSessionCallback extends IInterface {
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-            public void onSetTvRecordingInfo(String recordingId, TvRecordingInfo recordingInfo) throws RemoteException {
+            public void onSetTvRecordingInfo(String recordingId, TvRecordingInfo recordingInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITvInteractiveAppSessionCallback.DESCRIPTOR);
@@ -868,7 +881,8 @@ public interface ITvInteractiveAppSessionCallback extends IInterface {
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-            public void onRequestSigning(String id, String algorithm, String alias, byte[] data) throws RemoteException {
+            public void onRequestSigning(String id, String algorithm, String alias, byte[] data)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITvInteractiveAppSessionCallback.DESCRIPTOR);
@@ -883,7 +897,9 @@ public interface ITvInteractiveAppSessionCallback extends IInterface {
             }
 
             @Override // android.media.tv.interactive.ITvInteractiveAppSessionCallback
-            public void onRequestSigning2(String id, String algorithm, String host, int port, byte[] data) throws RemoteException {
+            public void onRequestSigning2(
+                    String id, String algorithm, String host, int port, byte[] data)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITvInteractiveAppSessionCallback.DESCRIPTOR);

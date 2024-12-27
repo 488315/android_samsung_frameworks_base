@@ -90,38 +90,29 @@ public interface BiometricFingerprintConstants {
     public static final int SEM_SENSOR_STATUS_WORKING = 100041;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FingerprintAcquired {
-    }
+    public @interface FingerprintAcquired {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FingerprintError {
-    }
+    public @interface FingerprintError {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FingerprintEvent {
-    }
+    public @interface FingerprintEvent {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FingerprintFeature {
-    }
+    public @interface FingerprintFeature {}
 
-    public @interface FingerprintGestureEvent {
-    }
+    public @interface FingerprintGestureEvent {}
 
-    public @interface FingerprintInternalEvent {
-    }
+    public @interface FingerprintInternalEvent {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FingerprintSensorStatus {
-    }
+    public @interface FingerprintSensorStatus {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FingerprintVendorAcquired {
-    }
+    public @interface FingerprintVendorAcquired {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FingerprintVendorError {
-    }
+    public @interface FingerprintVendorError {}
 
     static boolean shouldDisableUdfpsDisplayMode(int acquiredInfo) {
         switch (acquiredInfo) {

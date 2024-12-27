@@ -4,9 +4,11 @@ import com.android.internal.org.bouncycastle.asn1.ASN1OctetString;
 import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.DEROctetString;
 import com.android.internal.org.bouncycastle.util.Arrays;
+
 import java.io.IOException;
 import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.InvalidParameterSpecException;
+
 import javax.crypto.spec.IvParameterSpec;
 
 /* loaded from: classes5.dex */
@@ -30,17 +32,22 @@ public class IvAlgorithmParameters extends BaseAlgorithmParameters {
     }
 
     @Override // com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseAlgorithmParameters
-    protected AlgorithmParameterSpec localEngineGetParameterSpec(Class paramSpec) throws InvalidParameterSpecException {
+    protected AlgorithmParameterSpec localEngineGetParameterSpec(Class paramSpec)
+            throws InvalidParameterSpecException {
         if (paramSpec == IvParameterSpec.class || paramSpec == AlgorithmParameterSpec.class) {
             return new IvParameterSpec(this.iv);
         }
-        throw new InvalidParameterSpecException("unknown parameter spec passed to IV parameters object.");
+        throw new InvalidParameterSpecException(
+                "unknown parameter spec passed to IV parameters object.");
     }
 
     @Override // java.security.AlgorithmParametersSpi
-    protected void engineInit(AlgorithmParameterSpec paramSpec) throws InvalidParameterSpecException {
+    protected void engineInit(AlgorithmParameterSpec paramSpec)
+            throws InvalidParameterSpecException {
         if (!(paramSpec instanceof IvParameterSpec)) {
-            throw new InvalidParameterSpecException("IvParameterSpec required to initialise a IV parameters algorithm parameters object");
+            throw new InvalidParameterSpecException(
+                    "IvParameterSpec required to initialise a IV parameters algorithm parameters"
+                        + " object");
         }
         this.iv = ((IvParameterSpec) paramSpec).getIV();
     }

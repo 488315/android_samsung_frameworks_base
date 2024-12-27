@@ -5,13 +5,16 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+
 import com.android.internal.R;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
 @Deprecated
 /* loaded from: classes.dex */
-public class DialogFragment extends Fragment implements DialogInterface.OnCancelListener, DialogInterface.OnDismissListener {
+public class DialogFragment extends Fragment
+        implements DialogInterface.OnCancelListener, DialogInterface.OnDismissListener {
     private static final String SAVED_BACK_STACK_ID = "android:backStackId";
     private static final String SAVED_CANCELABLE = "android:cancelable";
     private static final String SAVED_DIALOG_STATE_TAG = "android:savedDialogState";
@@ -151,7 +154,8 @@ public class DialogFragment extends Fragment implements DialogInterface.OnCancel
             this.mStyle = savedInstanceState.getInt(SAVED_STYLE, 0);
             this.mTheme = savedInstanceState.getInt(SAVED_THEME, 0);
             this.mCancelable = savedInstanceState.getBoolean(SAVED_CANCELABLE, true);
-            this.mShowsDialog = savedInstanceState.getBoolean(SAVED_SHOWS_DIALOG, this.mShowsDialog);
+            this.mShowsDialog =
+                    savedInstanceState.getBoolean(SAVED_SHOWS_DIALOG, this.mShowsDialog);
             this.mBackStackId = savedInstanceState.getInt(SAVED_BACK_STACK_ID, -1);
         }
     }
@@ -171,9 +175,11 @@ public class DialogFragment extends Fragment implements DialogInterface.OnCancel
                 break;
         }
         if (this.mDialog != null) {
-            return (LayoutInflater) this.mDialog.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            return (LayoutInflater)
+                    this.mDialog.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
-        return (LayoutInflater) this.mHost.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        return (LayoutInflater)
+                this.mHost.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -181,8 +187,7 @@ public class DialogFragment extends Fragment implements DialogInterface.OnCancel
     }
 
     @Override // android.content.DialogInterface.OnCancelListener
-    public void onCancel(DialogInterface dialog) {
-    }
+    public void onCancel(DialogInterface dialog) {}
 
     @Override // android.content.DialogInterface.OnDismissListener
     public void onDismiss(DialogInterface dialog) {
@@ -201,7 +206,8 @@ public class DialogFragment extends Fragment implements DialogInterface.OnCancel
         View view = getView();
         if (view != null) {
             if (view.getParent() != null) {
-                throw new IllegalStateException("DialogFragment can not be attached to a container view");
+                throw new IllegalStateException(
+                        "DialogFragment can not be attached to a container view");
             }
             this.mDialog.setContentView(view);
         }
@@ -211,9 +217,11 @@ public class DialogFragment extends Fragment implements DialogInterface.OnCancel
         }
         this.mDialog.setCancelable(this.mCancelable);
         if (!this.mDialog.takeCancelAndDismissListeners("DialogFragment", this, this)) {
-            throw new IllegalStateException("You can not set Dialog's OnCancelListener or OnDismissListener");
+            throw new IllegalStateException(
+                    "You can not set Dialog's OnCancelListener or OnDismissListener");
         }
-        if (savedInstanceState != null && (dialogState = savedInstanceState.getBundle(SAVED_DIALOG_STATE_TAG)) != null) {
+        if (savedInstanceState != null
+                && (dialogState = savedInstanceState.getBundle(SAVED_DIALOG_STATE_TAG)) != null) {
             this.mDialog.onRestoreInstanceState(dialogState);
         }
     }

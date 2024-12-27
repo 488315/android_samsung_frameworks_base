@@ -1,28 +1,30 @@
 package android.app.smartspace.uitemplatedata;
 
 import android.annotation.SystemApi;
-import android.app.smartspace.uitemplatedata.BaseTemplateData;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.List;
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class SubImageTemplateData extends BaseTemplateData {
-    public static final Parcelable.Creator<SubImageTemplateData> CREATOR = new Parcelable.Creator<SubImageTemplateData>() { // from class: android.app.smartspace.uitemplatedata.SubImageTemplateData.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SubImageTemplateData createFromParcel(Parcel in) {
-            return new SubImageTemplateData(in);
-        }
+    public static final Parcelable.Creator<SubImageTemplateData> CREATOR =
+            new Parcelable.Creator<SubImageTemplateData>() { // from class:
+                // android.app.smartspace.uitemplatedata.SubImageTemplateData.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SubImageTemplateData createFromParcel(Parcel in) {
+                    return new SubImageTemplateData(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SubImageTemplateData[] newArray(int size) {
-            return new SubImageTemplateData[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SubImageTemplateData[] newArray(int size) {
+                    return new SubImageTemplateData[size];
+                }
+            };
     private final TapAction mSubImageAction;
     private final List<Text> mSubImageTexts;
     private final List<Icon> mSubImages;
@@ -34,8 +36,25 @@ public final class SubImageTemplateData extends BaseTemplateData {
         this.mSubImageAction = (TapAction) in.readTypedObject(TapAction.CREATOR);
     }
 
-    private SubImageTemplateData(int templateType, BaseTemplateData.SubItemInfo primaryItem, BaseTemplateData.SubItemInfo subtitleItem, BaseTemplateData.SubItemInfo subtitleSupplementalItem, BaseTemplateData.SubItemInfo supplementalLineItem, BaseTemplateData.SubItemInfo supplementalAlarmItem, int layoutWeight, List<Text> subImageTexts, List<Icon> subImages, TapAction subImageAction) {
-        super(templateType, primaryItem, subtitleItem, subtitleSupplementalItem, supplementalLineItem, supplementalAlarmItem, layoutWeight);
+    private SubImageTemplateData(
+            int templateType,
+            BaseTemplateData.SubItemInfo primaryItem,
+            BaseTemplateData.SubItemInfo subtitleItem,
+            BaseTemplateData.SubItemInfo subtitleSupplementalItem,
+            BaseTemplateData.SubItemInfo supplementalLineItem,
+            BaseTemplateData.SubItemInfo supplementalAlarmItem,
+            int layoutWeight,
+            List<Text> subImageTexts,
+            List<Icon> subImages,
+            TapAction subImageAction) {
+        super(
+                templateType,
+                primaryItem,
+                subtitleItem,
+                subtitleSupplementalItem,
+                supplementalLineItem,
+                supplementalAlarmItem,
+                layoutWeight);
         this.mSubImageTexts = subImageTexts;
         this.mSubImages = subImages;
         this.mSubImageAction = subImageAction;
@@ -75,17 +94,30 @@ public final class SubImageTemplateData extends BaseTemplateData {
             return false;
         }
         SubImageTemplateData that = (SubImageTemplateData) o;
-        return Objects.equals(this.mSubImageTexts, that.mSubImageTexts) && Objects.equals(this.mSubImages, that.mSubImages) && Objects.equals(this.mSubImageAction, that.mSubImageAction);
+        return Objects.equals(this.mSubImageTexts, that.mSubImageTexts)
+                && Objects.equals(this.mSubImages, that.mSubImages)
+                && Objects.equals(this.mSubImageAction, that.mSubImageAction);
     }
 
     @Override // android.app.smartspace.uitemplatedata.BaseTemplateData
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(super.hashCode()), this.mSubImageTexts, this.mSubImages, this.mSubImageAction);
+        return Objects.hash(
+                Integer.valueOf(super.hashCode()),
+                this.mSubImageTexts,
+                this.mSubImages,
+                this.mSubImageAction);
     }
 
     @Override // android.app.smartspace.uitemplatedata.BaseTemplateData
     public String toString() {
-        return super.toString() + " + SmartspaceSubImageUiTemplateData{mSubImageTexts=" + this.mSubImageTexts + ", mSubImages=" + this.mSubImages + ", mSubImageAction=" + this.mSubImageAction + '}';
+        return super.toString()
+                + " + SmartspaceSubImageUiTemplateData{mSubImageTexts="
+                + this.mSubImageTexts
+                + ", mSubImages="
+                + this.mSubImages
+                + ", mSubImageAction="
+                + this.mSubImageAction
+                + '}';
     }
 
     @SystemApi
@@ -107,7 +139,17 @@ public final class SubImageTemplateData extends BaseTemplateData {
 
         @Override // android.app.smartspace.uitemplatedata.BaseTemplateData.Builder
         public SubImageTemplateData build() {
-            return new SubImageTemplateData(getTemplateType(), getPrimaryItem(), getSubtitleItem(), getSubtitleSupplemtnalItem(), getSupplementalLineItem(), getSupplementalAlarmItem(), getLayoutWeight(), this.mSubImageTexts, this.mSubImages, this.mSubImageAction);
+            return new SubImageTemplateData(
+                    getTemplateType(),
+                    getPrimaryItem(),
+                    getSubtitleItem(),
+                    getSubtitleSupplemtnalItem(),
+                    getSupplementalLineItem(),
+                    getSupplementalAlarmItem(),
+                    getLayoutWeight(),
+                    this.mSubImageTexts,
+                    this.mSubImages,
+                    this.mSubImageAction);
         }
     }
 }

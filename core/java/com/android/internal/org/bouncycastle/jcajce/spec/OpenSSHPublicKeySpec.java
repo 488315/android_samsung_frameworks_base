@@ -2,6 +2,7 @@ package com.android.internal.org.bouncycastle.jcajce.spec;
 
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.Strings;
+
 import java.security.spec.EncodedKeySpec;
 
 /* loaded from: classes5.dex */
@@ -20,7 +21,8 @@ public class OpenSSHPublicKeySpec extends EncodedKeySpec {
         int pos4 = pos3 + 1;
         int i4 = i3 | (encodedKey[pos3] & 255);
         if (pos4 + i4 >= encodedKey.length) {
-            throw new IllegalArgumentException("invalid public key blob: type field longer than blob");
+            throw new IllegalArgumentException(
+                    "invalid public key blob: type field longer than blob");
         }
         this.type = Strings.fromByteArray(Arrays.copyOfRange(encodedKey, pos4, pos4 + i4));
         if (this.type.startsWith("ecdsa")) {

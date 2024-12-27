@@ -21,7 +21,8 @@ public class OCSPRequest extends ASN1Object {
     private OCSPRequest(ASN1Sequence seq) {
         this.tbsRequest = TBSRequest.getInstance(seq.getObjectAt(0));
         if (seq.size() == 2) {
-            this.optionalSignature = Signature.getInstance((ASN1TaggedObject) seq.getObjectAt(1), true);
+            this.optionalSignature =
+                    Signature.getInstance((ASN1TaggedObject) seq.getObjectAt(1), true);
         }
     }
 
@@ -47,7 +48,8 @@ public class OCSPRequest extends ASN1Object {
         return this.optionalSignature;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(2);
         v.add(this.tbsRequest);

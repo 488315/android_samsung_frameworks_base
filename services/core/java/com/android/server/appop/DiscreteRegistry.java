@@ -9,11 +9,14 @@ import android.util.ArrayMap;
 import android.util.AtomicFile;
 import android.util.Slog;
 import android.util.Xml;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.XmlUtils;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+
 import com.samsung.android.knox.analytics.util.KnoxAnalyticsDataConverter;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -45,7 +48,8 @@ public final class DiscreteRegistry {
     public final Object mOnDiskLock;
     public static final long DEFAULT_DISCRETE_HISTORY_CUTOFF = Duration.ofDays(7).toMillis();
     public static final long MAXIMUM_DISCRETE_HISTORY_CUTOFF = Duration.ofDays(30).toMillis();
-    public static final long DEFAULT_DISCRETE_HISTORY_QUANTIZATION = Duration.ofMinutes(1).toMillis();
+    public static final long DEFAULT_DISCRETE_HISTORY_QUANTIZATION =
+            Duration.ofMinutes(1).toMillis();
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AttributionChain {
@@ -65,7 +69,9 @@ public final class DiscreteRegistry {
 
         public final OpEvent getStart() {
             OpEvent opEvent;
-            if (this.mChain.isEmpty() || (opEvent = (OpEvent) this.mChain.get(0)) == null || (opEvent.mOpEvent.mAttributionFlags & 4) == 0) {
+            if (this.mChain.isEmpty()
+                    || (opEvent = (OpEvent) this.mChain.get(0)) == null
+                    || (opEvent.mOpEvent.mAttributionFlags & 4) == 0) {
                 return null;
             }
             return (OpEvent) this.mChain.get(0);
@@ -82,13 +88,20 @@ public final class DiscreteRegistry {
             return false;
         }
 
-        public final boolean isStart(String str, int i, String str2, int i2, DiscreteOpEvent discreteOpEvent) {
+        public final boolean isStart(
+                String str, int i, String str2, int i2, DiscreteOpEvent discreteOpEvent) {
             OpEvent opEvent = this.mStartEvent;
-            if (opEvent == null || !Objects.equals(str, opEvent.mPkgName) || opEvent.mUid != i || !Objects.equals(str2, opEvent.mAttributionTag) || opEvent.mOpCode != i2) {
+            if (opEvent == null
+                    || !Objects.equals(str, opEvent.mPkgName)
+                    || opEvent.mUid != i
+                    || !Objects.equals(str2, opEvent.mAttributionTag)
+                    || opEvent.mOpCode != i2) {
                 return false;
             }
             DiscreteOpEvent discreteOpEvent2 = opEvent.mOpEvent;
-            return discreteOpEvent2.mAttributionChainId == discreteOpEvent.mAttributionChainId && discreteOpEvent2.mAttributionFlags == discreteOpEvent.mAttributionFlags && discreteOpEvent2.mNoteTime == discreteOpEvent.mNoteTime;
+            return discreteOpEvent2.mAttributionChainId == discreteOpEvent.mAttributionChainId
+                    && discreteOpEvent2.mAttributionFlags == discreteOpEvent.mAttributionFlags
+                    && discreteOpEvent2.mNoteTime == discreteOpEvent.mNoteTime;
         }
     }
 
@@ -97,8 +110,7 @@ public final class DiscreteRegistry {
         public ArrayMap mAttributedOps = new ArrayMap();
         public final /* synthetic */ DiscreteRegistry this$0;
 
-        public DiscreteOp(DiscreteRegistry discreteRegistry) {
-        }
+        public DiscreteOp(DiscreteRegistry discreteRegistry) {}
 
         public final List getOrCreateDiscreteOpEventsList(String str) {
             List list = (List) this.mAttributedOps.get(str);
@@ -140,14 +152,25 @@ public final class DiscreteRegistry {
         public static void m240$$Nest$mclearHistory(DiscreteOps discreteOps, int i, String str) {
             if (discreteOps.mUids.containsKey(Integer.valueOf(i))) {
                 ((DiscreteUidOps) discreteOps.mUids.get(Integer.valueOf(i))).mPackages.remove(str);
-                if (((DiscreteUidOps) discreteOps.mUids.get(Integer.valueOf(i))).mPackages.isEmpty()) {
+                if (((DiscreteUidOps) discreteOps.mUids.get(Integer.valueOf(i)))
+                        .mPackages.isEmpty()) {
                     discreteOps.mUids.remove(Integer.valueOf(i));
                 }
             }
         }
 
         /* renamed from: -$$Nest$mfilter, reason: not valid java name */
-        public static void m241$$Nest$mfilter(DiscreteOps discreteOps, long j, long j2, int i, int i2, String str, String[] strArr, String str2, int i3, ArrayMap arrayMap) {
+        public static void m241$$Nest$mfilter(
+                DiscreteOps discreteOps,
+                long j,
+                long j2,
+                int i,
+                int i2,
+                String str,
+                String[] strArr,
+                String str2,
+                int i3,
+                ArrayMap arrayMap) {
             int i4;
             int i5;
             int i6;
@@ -179,12 +202,16 @@ public final class DiscreteRegistry {
                 }
                 int size2 = discreteUidOps.mPackages.size() - 1;
                 while (size2 >= 0) {
-                    DiscretePackageOps discretePackageOps = (DiscretePackageOps) discreteUidOps.mPackages.valueAt(size2);
+                    DiscretePackageOps discretePackageOps =
+                            (DiscretePackageOps) discreteUidOps.mPackages.valueAt(size2);
                     String str9 = (String) discreteUidOps.mPackages.keyAt(size2);
                     int size3 = discretePackageOps.mPackageOps.size() - 1;
                     while (size3 >= 0) {
-                        int intValue2 = ((Integer) discretePackageOps.mPackageOps.keyAt(size3)).intValue();
-                        if ((i & 8) != 0 && !ArrayUtils.contains(strArr, AppOpsManager.opToPublicName(intValue2))) {
+                        int intValue2 =
+                                ((Integer) discretePackageOps.mPackageOps.keyAt(size3)).intValue();
+                        if ((i & 8) != 0
+                                && !ArrayUtils.contains(
+                                        strArr, AppOpsManager.opToPublicName(intValue2))) {
                             discretePackageOps.mPackageOps.removeAt(size3);
                             i4 = size;
                             i5 = intValue;
@@ -196,8 +223,10 @@ public final class DiscreteRegistry {
                             str9 = str3;
                             intValue = i5;
                         }
-                        DiscreteOp discreteOp2 = (DiscreteOp) discretePackageOps.mPackageOps.valueAt(size3);
-                        int intValue3 = ((Integer) discretePackageOps.mPackageOps.keyAt(size3)).intValue();
+                        DiscreteOp discreteOp2 =
+                                (DiscreteOp) discretePackageOps.mPackageOps.valueAt(size3);
+                        int intValue3 =
+                                ((Integer) discretePackageOps.mPackageOps.keyAt(size3)).intValue();
                         if ((i & 4) != 0) {
                             discreteOp2.getClass();
                             ArrayMap arrayMap4 = new ArrayMap();
@@ -218,7 +247,12 @@ public final class DiscreteRegistry {
                                 int i12 = size5;
                                 DiscreteOpEvent discreteOpEvent = (DiscreteOpEvent) list.get(i11);
                                 List list2 = list;
-                                AttributionChain attributionChain = (AttributionChain) arrayMap.get(Integer.valueOf(discreteOpEvent.mAttributionChainId));
+                                AttributionChain attributionChain =
+                                        (AttributionChain)
+                                                arrayMap.get(
+                                                        Integer.valueOf(
+                                                                discreteOpEvent
+                                                                        .mAttributionChainId));
                                 if (attributionChain != null) {
                                     str5 = str10;
                                     String str12 = str9;
@@ -230,7 +264,10 @@ public final class DiscreteRegistry {
                                     String str13 = str11;
                                     str4 = str11;
                                     i8 = size3;
-                                    if (!attributionChain.isStart(str12, i13, str13, intValue3, discreteOpEvent) && attributionChain.isComplete() && discreteOpEvent.mAttributionChainId != -1) {
+                                    if (!attributionChain.isStart(
+                                                    str12, i13, str13, intValue3, discreteOpEvent)
+                                            && attributionChain.isComplete()
+                                            && discreteOpEvent.mAttributionChainId != -1) {
                                         i11++;
                                         str10 = str5;
                                         size3 = i8;
@@ -289,7 +326,8 @@ public final class DiscreteRegistry {
                         i5 = intValue;
                         i6 = size3;
                         str3 = str9;
-                        if (((DiscreteOp) discretePackageOps.mPackageOps.valueAt(i6)).mAttributedOps.isEmpty()) {
+                        if (((DiscreteOp) discretePackageOps.mPackageOps.valueAt(i6))
+                                .mAttributedOps.isEmpty()) {
                             discretePackageOps.mPackageOps.removeAt(i6);
                         }
                         size3 = i6 - 1;
@@ -300,7 +338,8 @@ public final class DiscreteRegistry {
                     }
                     int i17 = size;
                     int i18 = intValue;
-                    if (((DiscretePackageOps) discreteUidOps.mPackages.valueAt(size2)).mPackageOps.isEmpty()) {
+                    if (((DiscretePackageOps) discreteUidOps.mPackages.valueAt(size2))
+                            .mPackageOps.isEmpty()) {
                         discreteUidOps.mPackages.removeAt(size2);
                     }
                     size2--;
@@ -327,10 +366,12 @@ public final class DiscreteRegistry {
                 DiscreteUidOps discreteUidOps = (DiscreteUidOps) discreteOps2.mUids.valueAt(i);
                 int size2 = discreteUidOps.mPackages.size();
                 for (int i2 = 0; i2 < size2; i2++) {
-                    DiscretePackageOps discretePackageOps = (DiscretePackageOps) discreteUidOps.mPackages.valueAt(i2);
+                    DiscretePackageOps discretePackageOps =
+                            (DiscretePackageOps) discreteUidOps.mPackages.valueAt(i2);
                     int size3 = discretePackageOps.mPackageOps.size();
                     for (int i3 = 0; i3 < size3; i3++) {
-                        DiscreteOp discreteOp = (DiscreteOp) discretePackageOps.mPackageOps.valueAt(i3);
+                        DiscreteOp discreteOp =
+                                (DiscreteOp) discretePackageOps.mPackageOps.valueAt(i3);
                         int size4 = discreteOp.mAttributedOps.size();
                         for (int i4 = 0; i4 < size4; i4++) {
                             List list = (List) discreteOp.mAttributedOps.valueAt(i4);
@@ -344,7 +385,15 @@ public final class DiscreteRegistry {
                                 int i7 = discreteOpEvent.mAttributionFlags;
                                 int i8 = discreteOpEvent.mAttributionChainId;
                                 DiscretePackageOps discretePackageOps2 = discretePackageOps;
-                                list.set(i5, new DiscreteOpEvent(discreteOpEvent.mUidState, discreteOpEvent.mOpFlag, j2, discreteOpEvent.mNoteDuration, i7, i8));
+                                list.set(
+                                        i5,
+                                        new DiscreteOpEvent(
+                                                discreteOpEvent.mUidState,
+                                                discreteOpEvent.mOpFlag,
+                                                j2,
+                                                discreteOpEvent.mNoteDuration,
+                                                i7,
+                                                i8));
                                 i5++;
                                 discreteUidOps = discreteUidOps2;
                                 size2 = i6;
@@ -379,12 +428,16 @@ public final class DiscreteRegistry {
                     }
                 }
                 if (resolvePullParser.getAttributeInt((String) null, "v") != 1) {
-                    throw new IllegalStateException("Dropping unsupported discrete history " + file);
+                    throw new IllegalStateException(
+                            "Dropping unsupported discrete history " + file);
                 }
                 int depth = resolvePullParser.getDepth();
                 while (XmlUtils.nextElementWithin(resolvePullParser, depth)) {
                     if ("u".equals(resolvePullParser.getName())) {
-                        discreteOps.getOrCreateDiscreteUidOps(resolvePullParser.getAttributeInt((String) null, "ui", -1)).deserialize(resolvePullParser, j);
+                        discreteOps
+                                .getOrCreateDiscreteUidOps(
+                                        resolvePullParser.getAttributeInt((String) null, "ui", -1))
+                                .deserialize(resolvePullParser, j);
                     }
                 }
                 fileInputStream.close();
@@ -393,7 +446,8 @@ public final class DiscreteRegistry {
         }
 
         /* renamed from: -$$Nest$mwriteToStream, reason: not valid java name */
-        public static void m244$$Nest$mwriteToStream(DiscreteOps discreteOps, FileOutputStream fileOutputStream) {
+        public static void m244$$Nest$mwriteToStream(
+                DiscreteOps discreteOps, FileOutputStream fileOutputStream) {
             DiscreteUidOps discreteUidOps;
             int i;
             String str;
@@ -410,19 +464,26 @@ public final class DiscreteRegistry {
             int i2 = 0;
             while (i2 < size) {
                 resolveSerializer.startTag(str2, "u");
-                resolveSerializer.attributeInt(str2, "ui", ((Integer) discreteOps2.mUids.keyAt(i2)).intValue());
+                resolveSerializer.attributeInt(
+                        str2, "ui", ((Integer) discreteOps2.mUids.keyAt(i2)).intValue());
                 DiscreteUidOps discreteUidOps2 = (DiscreteUidOps) discreteOps2.mUids.valueAt(i2);
                 int size2 = discreteUidOps2.mPackages.size();
                 for (int i3 = 0; i3 < size2; i3++) {
                     resolveSerializer.startTag(str2, KnoxAnalyticsDataConverter.PAYLOAD);
-                    resolveSerializer.attribute(str2, "pn", (String) discreteUidOps2.mPackages.keyAt(i3));
-                    DiscretePackageOps discretePackageOps = (DiscretePackageOps) discreteUidOps2.mPackages.valueAt(i3);
+                    resolveSerializer.attribute(
+                            str2, "pn", (String) discreteUidOps2.mPackages.keyAt(i3));
+                    DiscretePackageOps discretePackageOps =
+                            (DiscretePackageOps) discreteUidOps2.mPackages.valueAt(i3);
                     int size3 = discretePackageOps.mPackageOps.size();
                     int i4 = 0;
                     while (i4 < size3) {
                         resolveSerializer.startTag(str2, "o");
-                        resolveSerializer.attributeInt(str2, "op", ((Integer) discretePackageOps.mPackageOps.keyAt(i4)).intValue());
-                        DiscreteOp discreteOp = (DiscreteOp) discretePackageOps.mPackageOps.valueAt(i4);
+                        resolveSerializer.attributeInt(
+                                str2,
+                                "op",
+                                ((Integer) discretePackageOps.mPackageOps.keyAt(i4)).intValue());
+                        DiscreteOp discreteOp =
+                                (DiscreteOp) discretePackageOps.mPackageOps.valueAt(i4);
                         int size4 = discreteOp.mAttributedOps.size();
                         int i5 = 0;
                         while (i5 < size4) {
@@ -432,7 +493,10 @@ public final class DiscreteRegistry {
                             if (((String) discreteOp.mAttributedOps.keyAt(i5)) != null) {
                                 discreteUidOps = discreteUidOps2;
                                 i = size2;
-                                resolveSerializer.attribute((String) null, "at", (String) discreteOp.mAttributedOps.keyAt(i5));
+                                resolveSerializer.attribute(
+                                        (String) null,
+                                        "at",
+                                        (String) discreteOp.mAttributedOps.keyAt(i5));
                             } else {
                                 discreteUidOps = discreteUidOps2;
                                 i = size2;
@@ -443,13 +507,15 @@ public final class DiscreteRegistry {
                             while (i8 < size5) {
                                 DiscreteOp discreteOp2 = discreteOp;
                                 int i9 = size5;
-                                resolveSerializer.startTag((String) null, KnoxAnalyticsDataConverter.EVENT);
+                                resolveSerializer.startTag(
+                                        (String) null, KnoxAnalyticsDataConverter.EVENT);
                                 DiscreteOpEvent discreteOpEvent = (DiscreteOpEvent) list.get(i8);
                                 DiscretePackageOps discretePackageOps2 = discretePackageOps;
                                 int i10 = size3;
                                 List list2 = list;
                                 String str4 = str3;
-                                resolveSerializer.attributeLong((String) null, "nt", discreteOpEvent.mNoteTime);
+                                resolveSerializer.attributeLong(
+                                        (String) null, "nt", discreteOpEvent.mNoteTime);
                                 int i11 = i5;
                                 long j = discreteOpEvent.mNoteDuration;
                                 if (j != -1) {
@@ -466,8 +532,12 @@ public final class DiscreteRegistry {
                                 if (i13 != -1) {
                                     resolveSerializer.attributeInt(str, "ci", i13);
                                 }
-                                resolveSerializer.attributeInt(str, "us", discreteOpEvent.mUidState);
-                                resolveSerializer.attributeInt(str, KnoxAnalyticsDataConverter.FEATURE, discreteOpEvent.mOpFlag);
+                                resolveSerializer.attributeInt(
+                                        str, "us", discreteOpEvent.mUidState);
+                                resolveSerializer.attributeInt(
+                                        str,
+                                        KnoxAnalyticsDataConverter.FEATURE,
+                                        discreteOpEvent.mOpFlag);
                                 resolveSerializer.endTag(str, KnoxAnalyticsDataConverter.EVENT);
                                 i8++;
                                 i5 = i11;
@@ -506,7 +576,17 @@ public final class DiscreteRegistry {
             this.mLargestChainId = i;
         }
 
-        public final void addDiscreteAccess(int i, int i2, int i3, int i4, int i5, int i6, long j, long j2, String str, String str2) {
+        public final void addDiscreteAccess(
+                int i,
+                int i2,
+                int i3,
+                int i4,
+                int i5,
+                int i6,
+                long j,
+                long j2,
+                String str,
+                String str2) {
             int i7;
             if (i6 != -1) {
                 int i8 = this.mChainIdOffset + i6;
@@ -521,20 +601,29 @@ public final class DiscreteRegistry {
             } else {
                 i7 = i6;
             }
-            List orCreateDiscreteOpEventsList = getOrCreateDiscreteUidOps(i2).getOrCreateDiscretePackageOps(str).getOrCreateDiscreteOp(i).getOrCreateDiscreteOpEventsList(str2);
+            List orCreateDiscreteOpEventsList =
+                    getOrCreateDiscreteUidOps(i2)
+                            .getOrCreateDiscretePackageOps(str)
+                            .getOrCreateDiscreteOp(i)
+                            .getOrCreateDiscreteOpEventsList(str2);
             for (int size = orCreateDiscreteOpEventsList.size(); size > 0; size--) {
-                DiscreteOpEvent discreteOpEvent = (DiscreteOpEvent) orCreateDiscreteOpEventsList.get(size - 1);
+                DiscreteOpEvent discreteOpEvent =
+                        (DiscreteOpEvent) orCreateDiscreteOpEventsList.get(size - 1);
                 long j3 = discreteOpEvent.mNoteTime;
                 long j4 = DiscreteRegistry.sDiscreteHistoryQuantization;
                 if ((j3 / j4) * j4 < (j / j4) * j4) {
                     break;
                 }
                 if (discreteOpEvent.mOpFlag == i3 && discreteOpEvent.mUidState == i4) {
-                    if (discreteOpEvent.mAttributionFlags == i5 && discreteOpEvent.mAttributionChainId == i7) {
-                        if (DiscreteRegistry.m239$$Nest$smdiscretizeDuration(j2) == DiscreteRegistry.m239$$Nest$smdiscretizeDuration(discreteOpEvent.mNoteDuration)) {
+                    if (discreteOpEvent.mAttributionFlags == i5
+                            && discreteOpEvent.mAttributionChainId == i7) {
+                        if (DiscreteRegistry.m239$$Nest$smdiscretizeDuration(j2)
+                                == DiscreteRegistry.m239$$Nest$smdiscretizeDuration(
+                                        discreteOpEvent.mNoteDuration)) {
                             return;
                         }
-                        orCreateDiscreteOpEventsList.add(size, new DiscreteOpEvent(i4, i3, j, j2, i5, i7));
+                        orCreateDiscreteOpEventsList.add(
+                                size, new DiscreteOpEvent(i4, i3, j, j2, i5, i7));
                     }
                 }
             }
@@ -554,30 +643,38 @@ public final class DiscreteRegistry {
         public final void merge(DiscreteOps discreteOps) {
             DiscreteOps discreteOps2 = this;
             DiscreteOps discreteOps3 = discreteOps;
-            discreteOps2.mLargestChainId = Math.max(discreteOps2.mLargestChainId, discreteOps3.mLargestChainId);
+            discreteOps2.mLargestChainId =
+                    Math.max(discreteOps2.mLargestChainId, discreteOps3.mLargestChainId);
             int size = discreteOps3.mUids.size();
             int i = 0;
             while (i < size) {
                 int intValue = ((Integer) discreteOps3.mUids.keyAt(i)).intValue();
                 DiscreteUidOps discreteUidOps = (DiscreteUidOps) discreteOps3.mUids.valueAt(i);
-                DiscreteUidOps orCreateDiscreteUidOps = discreteOps2.getOrCreateDiscreteUidOps(intValue);
+                DiscreteUidOps orCreateDiscreteUidOps =
+                        discreteOps2.getOrCreateDiscreteUidOps(intValue);
                 int size2 = discreteUidOps.mPackages.size();
                 for (int i2 = 0; i2 < size2; i2++) {
                     String str = (String) discreteUidOps.mPackages.keyAt(i2);
-                    DiscretePackageOps discretePackageOps = (DiscretePackageOps) discreteUidOps.mPackages.valueAt(i2);
-                    DiscretePackageOps orCreateDiscretePackageOps = orCreateDiscreteUidOps.getOrCreateDiscretePackageOps(str);
+                    DiscretePackageOps discretePackageOps =
+                            (DiscretePackageOps) discreteUidOps.mPackages.valueAt(i2);
+                    DiscretePackageOps orCreateDiscretePackageOps =
+                            orCreateDiscreteUidOps.getOrCreateDiscretePackageOps(str);
                     int size3 = discretePackageOps.mPackageOps.size();
                     for (int i3 = 0; i3 < size3; i3++) {
-                        int intValue2 = ((Integer) discretePackageOps.mPackageOps.keyAt(i3)).intValue();
-                        DiscreteOp discreteOp = (DiscreteOp) discretePackageOps.mPackageOps.valueAt(i3);
-                        DiscreteOp orCreateDiscreteOp = orCreateDiscretePackageOps.getOrCreateDiscreteOp(intValue2);
+                        int intValue2 =
+                                ((Integer) discretePackageOps.mPackageOps.keyAt(i3)).intValue();
+                        DiscreteOp discreteOp =
+                                (DiscreteOp) discretePackageOps.mPackageOps.valueAt(i3);
+                        DiscreteOp orCreateDiscreteOp =
+                                orCreateDiscretePackageOps.getOrCreateDiscreteOp(intValue2);
                         int size4 = discreteOp.mAttributedOps.size();
                         int i4 = 0;
                         while (i4 < size4) {
                             String str2 = (String) discreteOp.mAttributedOps.keyAt(i4);
                             List list = (List) discreteOp.mAttributedOps.valueAt(i4);
                             int i5 = size;
-                            List orCreateDiscreteOpEventsList = orCreateDiscreteOp.getOrCreateDiscreteOpEventsList(str2);
+                            List orCreateDiscreteOpEventsList =
+                                    orCreateDiscreteOp.getOrCreateDiscreteOpEventsList(str2);
                             DiscreteUidOps discreteUidOps2 = orCreateDiscreteUidOps;
                             ArrayMap arrayMap = orCreateDiscreteOp.mAttributedOps;
                             int[] iArr = DiscreteRegistry.sDiscreteOps;
@@ -597,7 +694,9 @@ public final class DiscreteRegistry {
                                         arrayList.add((DiscreteOpEvent) list.get(i9));
                                         i9++;
                                     } else if (i9 == size6) {
-                                        arrayList.add((DiscreteOpEvent) orCreateDiscreteOpEventsList.get(i8));
+                                        arrayList.add(
+                                                (DiscreteOpEvent)
+                                                        orCreateDiscreteOpEventsList.get(i8));
                                         i8++;
                                     } else {
                                         String str3 = str2;
@@ -605,8 +704,12 @@ public final class DiscreteRegistry {
                                         int i10 = size5;
                                         DiscreteOp discreteOp2 = orCreateDiscreteOp;
                                         DiscreteOp discreteOp3 = discreteOp;
-                                        if (((DiscreteOpEvent) orCreateDiscreteOpEventsList.get(i8)).mNoteTime < ((DiscreteOpEvent) list.get(i9)).mNoteTime) {
-                                            arrayList.add((DiscreteOpEvent) orCreateDiscreteOpEventsList.get(i8));
+                                        if (((DiscreteOpEvent) orCreateDiscreteOpEventsList.get(i8))
+                                                        .mNoteTime
+                                                < ((DiscreteOpEvent) list.get(i9)).mNoteTime) {
+                                            arrayList.add(
+                                                    (DiscreteOpEvent)
+                                                            orCreateDiscreteOpEventsList.get(i8));
                                             i8++;
                                         } else {
                                             arrayList.add((DiscreteOpEvent) list.get(i9));
@@ -643,8 +746,7 @@ public final class DiscreteRegistry {
     public final class DiscretePackageOps {
         public final ArrayMap mPackageOps = new ArrayMap();
 
-        public DiscretePackageOps() {
-        }
+        public DiscretePackageOps() {}
 
         public final DiscreteOp getOrCreateDiscreteOp(int i) {
             DiscreteOp discreteOp = (DiscreteOp) this.mPackageOps.get(Integer.valueOf(i));
@@ -661,37 +763,67 @@ public final class DiscreteRegistry {
     public final class DiscreteUidOps {
         public ArrayMap mPackages = new ArrayMap();
 
-        public DiscreteUidOps() {
-        }
+        public DiscreteUidOps() {}
 
         public final void deserialize(TypedXmlPullParser typedXmlPullParser, long j) {
             int depth = typedXmlPullParser.getDepth();
             while (XmlUtils.nextElementWithin(typedXmlPullParser, depth)) {
                 if (KnoxAnalyticsDataConverter.PAYLOAD.equals(typedXmlPullParser.getName())) {
-                    DiscretePackageOps orCreateDiscretePackageOps = getOrCreateDiscretePackageOps(typedXmlPullParser.getAttributeValue((String) null, "pn"));
+                    DiscretePackageOps orCreateDiscretePackageOps =
+                            getOrCreateDiscretePackageOps(
+                                    typedXmlPullParser.getAttributeValue((String) null, "pn"));
                     int depth2 = typedXmlPullParser.getDepth();
                     while (XmlUtils.nextElementWithin(typedXmlPullParser, depth2)) {
                         if ("o".equals(typedXmlPullParser.getName())) {
-                            DiscreteOp orCreateDiscreteOp = orCreateDiscretePackageOps.getOrCreateDiscreteOp(typedXmlPullParser.getAttributeInt((String) null, "op"));
+                            DiscreteOp orCreateDiscreteOp =
+                                    orCreateDiscretePackageOps.getOrCreateDiscreteOp(
+                                            typedXmlPullParser.getAttributeInt(
+                                                    (String) null, "op"));
                             int depth3 = typedXmlPullParser.getDepth();
                             while (XmlUtils.nextElementWithin(typedXmlPullParser, depth3)) {
                                 if ("a".equals(typedXmlPullParser.getName())) {
-                                    List orCreateDiscreteOpEventsList = orCreateDiscreteOp.getOrCreateDiscreteOpEventsList(typedXmlPullParser.getAttributeValue((String) null, "at"));
+                                    List orCreateDiscreteOpEventsList =
+                                            orCreateDiscreteOp.getOrCreateDiscreteOpEventsList(
+                                                    typedXmlPullParser.getAttributeValue(
+                                                            (String) null, "at"));
                                     int depth4 = typedXmlPullParser.getDepth();
                                     while (XmlUtils.nextElementWithin(typedXmlPullParser, depth4)) {
-                                        if (KnoxAnalyticsDataConverter.EVENT.equals(typedXmlPullParser.getName())) {
-                                            long attributeLong = typedXmlPullParser.getAttributeLong((String) null, "nt");
-                                            long attributeLong2 = typedXmlPullParser.getAttributeLong((String) null, "nd", -1L);
-                                            int attributeInt = typedXmlPullParser.getAttributeInt((String) null, "us");
-                                            int attributeInt2 = typedXmlPullParser.getAttributeInt((String) null, KnoxAnalyticsDataConverter.FEATURE);
-                                            int attributeInt3 = typedXmlPullParser.getAttributeInt((String) null, "af", 0);
-                                            int attributeInt4 = typedXmlPullParser.getAttributeInt((String) null, "ci", -1);
+                                        if (KnoxAnalyticsDataConverter.EVENT.equals(
+                                                typedXmlPullParser.getName())) {
+                                            long attributeLong =
+                                                    typedXmlPullParser.getAttributeLong(
+                                                            (String) null, "nt");
+                                            long attributeLong2 =
+                                                    typedXmlPullParser.getAttributeLong(
+                                                            (String) null, "nd", -1L);
+                                            int attributeInt =
+                                                    typedXmlPullParser.getAttributeInt(
+                                                            (String) null, "us");
+                                            int attributeInt2 =
+                                                    typedXmlPullParser.getAttributeInt(
+                                                            (String) null,
+                                                            KnoxAnalyticsDataConverter.FEATURE);
+                                            int attributeInt3 =
+                                                    typedXmlPullParser.getAttributeInt(
+                                                            (String) null, "af", 0);
+                                            int attributeInt4 =
+                                                    typedXmlPullParser.getAttributeInt(
+                                                            (String) null, "ci", -1);
                                             if (attributeLong + attributeLong2 >= j) {
-                                                orCreateDiscreteOpEventsList.add(new DiscreteOpEvent(attributeInt, attributeInt2, attributeLong, attributeLong2, attributeInt3, attributeInt4));
+                                                orCreateDiscreteOpEventsList.add(
+                                                        new DiscreteOpEvent(
+                                                                attributeInt,
+                                                                attributeInt2,
+                                                                attributeLong,
+                                                                attributeLong2,
+                                                                attributeInt3,
+                                                                attributeInt4));
                                             }
                                         }
                                     }
-                                    Collections.sort(orCreateDiscreteOpEventsList, new DiscreteRegistry$DiscreteOp$$ExternalSyntheticLambda0());
+                                    Collections.sort(
+                                            orCreateDiscreteOpEventsList,
+                                            new DiscreteRegistry$DiscreteOp$$ExternalSyntheticLambda0());
                                 }
                             }
                         }
@@ -727,7 +859,8 @@ public final class DiscreteRegistry {
         this.mDebugMode = false;
         this.mInMemoryLock = obj;
         synchronized (obj2) {
-            File file = new File(new File(Environment.getDataSystemDirectory(), "appops"), "discrete");
+            File file =
+                    new File(new File(Environment.getDataSystemDirectory(), "appops"), "discrete");
             this.mDiscreteAccessDir = file;
             if (!file.exists()) {
                 if (!file.mkdirs()) {
@@ -764,12 +897,26 @@ public final class DiscreteRegistry {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void addFilteredDiscreteOpsToHistoricalOps(android.app.AppOpsManager.HistoricalOps r33, long r34, long r36, int r38, int r39, java.lang.String r40, java.lang.String[] r41, java.lang.String r42, int r43, java.util.Set r44) {
+    public final void addFilteredDiscreteOpsToHistoricalOps(
+            android.app.AppOpsManager.HistoricalOps r33,
+            long r34,
+            long r36,
+            int r38,
+            int r39,
+            java.lang.String r40,
+            java.lang.String[] r41,
+            java.lang.String r42,
+            int r43,
+            java.util.Set r44) {
         /*
             Method dump skipped, instructions count: 1096
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.appop.DiscreteRegistry.addFilteredDiscreteOpsToHistoricalOps(android.app.AppOpsManager$HistoricalOps, long, long, int, int, java.lang.String, java.lang.String[], java.lang.String, int, java.util.Set):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.appop.DiscreteRegistry.addFilteredDiscreteOpsToHistoricalOps(android.app.AppOpsManager$HistoricalOps,"
+                    + " long, long, int, int, java.lang.String, java.lang.String[],"
+                    + " java.lang.String, int, java.util.Set):void");
     }
 
     public final void clearHistory() {
@@ -797,7 +944,10 @@ public final class DiscreteRegistry {
             String name = file.getName();
             if (name.endsWith("tl")) {
                 try {
-                    if (Instant.now().minus(sDiscreteHistoryCutoff, (TemporalUnit) ChronoUnit.MILLIS).toEpochMilli() > Long.valueOf(name.substring(0, name.length() - 2)).longValue()) {
+                    if (Instant.now()
+                                    .minus(sDiscreteHistoryCutoff, (TemporalUnit) ChronoUnit.MILLIS)
+                                    .toEpochMilli()
+                            > Long.valueOf(name.substring(0, name.length() - 2)).longValue()) {
                         file.delete();
                         Slog.e("DiscreteRegistry", "Deleting file " + name);
                     }
@@ -831,7 +981,8 @@ public final class DiscreteRegistry {
     public final void persistDiscreteOpsLocked(DiscreteOps discreteOps) {
         FileOutputStream fileOutputStream;
         long epochMilli = Instant.now().toEpochMilli();
-        AtomicFile atomicFile = new AtomicFile(new File(this.mDiscreteAccessDir, epochMilli + "tl"));
+        AtomicFile atomicFile =
+                new AtomicFile(new File(this.mDiscreteAccessDir, epochMilli + "tl"));
         try {
             fileOutputStream = atomicFile.startWrite();
         } catch (Throwable th) {
@@ -843,7 +994,12 @@ public final class DiscreteRegistry {
             atomicFile.finishWrite(fileOutputStream);
         } catch (Throwable th2) {
             th = th2;
-            Slog.e("DiscreteRegistry", "Error writing timeline state: " + th.getMessage() + " " + Arrays.toString(th.getStackTrace()));
+            Slog.e(
+                    "DiscreteRegistry",
+                    "Error writing timeline state: "
+                            + th.getMessage()
+                            + " "
+                            + Arrays.toString(th.getStackTrace()));
             if (fileOutputStream != null) {
                 atomicFile.failWrite(fileOutputStream);
             }
@@ -853,12 +1009,17 @@ public final class DiscreteRegistry {
     public final void readDiscreteOpsFromDisk(DiscreteOps discreteOps) {
         synchronized (this.mOnDiskLock) {
             try {
-                long epochMilli = Instant.now().minus(sDiscreteHistoryCutoff, (TemporalUnit) ChronoUnit.MILLIS).toEpochMilli();
+                long epochMilli =
+                        Instant.now()
+                                .minus(sDiscreteHistoryCutoff, (TemporalUnit) ChronoUnit.MILLIS)
+                                .toEpochMilli();
                 File[] listFiles = this.mDiscreteAccessDir.listFiles();
                 if (listFiles != null && listFiles.length > 0) {
                     for (File file : listFiles) {
                         String name = file.getName();
-                        if (name.endsWith("tl") && Long.valueOf(name.substring(0, name.length() - 2)).longValue() >= epochMilli) {
+                        if (name.endsWith("tl")
+                                && Long.valueOf(name.substring(0, name.length() - 2)).longValue()
+                                        >= epochMilli) {
                             DiscreteOps.m243$$Nest$mreadFromFile(discreteOps, file, epochMilli);
                         }
                     }
@@ -907,7 +1068,17 @@ public final class DiscreteRegistry {
         return 0;
     }
 
-    public final void recordDiscreteAccess(int i, int i2, int i3, int i4, int i5, int i6, long j, long j2, String str, String str2) {
+    public final void recordDiscreteAccess(
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            long j,
+            long j2,
+            String str,
+            String str2) {
         if (ArrayUtils.contains(sDiscreteOps, i2) && (i3 & sDiscreteFlags) != 0) {
             synchronized (this.mInMemoryLock) {
                 this.mDiscreteOps.addDiscreteAccess(i2, i, i3, i4, i5, i6, j, j2, str, str2);
@@ -921,7 +1092,8 @@ public final class DiscreteRegistry {
         if (contains) {
             sDiscreteHistoryCutoff = properties.getLong("discrete_history_cutoff_millis", j);
             if (!Build.IS_DEBUGGABLE && !this.mDebugMode) {
-                sDiscreteHistoryCutoff = Long.min(MAXIMUM_DISCRETE_HISTORY_CUTOFF, sDiscreteHistoryCutoff);
+                sDiscreteHistoryCutoff =
+                        Long.min(MAXIMUM_DISCRETE_HISTORY_CUTOFF, sDiscreteHistoryCutoff);
             }
         } else {
             sDiscreteHistoryCutoff = j;
@@ -929,7 +1101,8 @@ public final class DiscreteRegistry {
         boolean contains2 = properties.getKeyset().contains("discrete_history_quantization_millis");
         long j2 = DEFAULT_DISCRETE_HISTORY_QUANTIZATION;
         if (contains2) {
-            sDiscreteHistoryQuantization = properties.getLong("discrete_history_quantization_millis", j2);
+            sDiscreteHistoryQuantization =
+                    properties.getLong("discrete_history_quantization_millis", j2);
             if (!Build.IS_DEBUGGABLE && !this.mDebugMode) {
                 sDiscreteHistoryQuantization = Math.max(j2, sDiscreteHistoryQuantization);
             }
@@ -942,7 +1115,13 @@ public final class DiscreteRegistry {
             sDiscreteFlags = i;
         }
         sDiscreteFlags = i;
-        sDiscreteOps = properties.getKeyset().contains("discrete_history_ops_cslist") ? parseOpsList(properties.getString("discrete_history_ops_cslist", "1,0,26,27,100,101,120,136,141")) : parseOpsList("1,0,26,27,100,101,120,136,141");
+        sDiscreteOps =
+                properties.getKeyset().contains("discrete_history_ops_cslist")
+                        ? parseOpsList(
+                                properties.getString(
+                                        "discrete_history_ops_cslist",
+                                        "1,0,26,27,100,101,120,136,141"))
+                        : parseOpsList("1,0,26,27,100,101,120,136,141");
     }
 
     public final void writeAndClearAccessHistory() {

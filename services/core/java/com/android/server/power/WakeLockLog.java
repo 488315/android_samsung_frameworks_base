@@ -6,9 +6,11 @@ import android.hardware.audio.common.V2_0.AudioOffloadInfo$$ExternalSyntheticOut
 import android.net.resolv.aidl.IDnsResolverUnsolicitedEventListener;
 import android.text.TextUtils;
 import android.util.SparseArray;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.StorageManagerService$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,13 +30,14 @@ public final class WakeLockLog {
     public final Object mLock = new Object();
     public final TheLog mLog;
     public final TagDatabase mTagDatabase;
-    public static final String[] LEVEL_TO_STRING = {"override", "partial", "full", "screen-dim", "screen-bright", "prox", "doze", "draw"};
+    public static final String[] LEVEL_TO_STRING = {
+        "override", "partial", "full", "screen-dim", "screen-bright", "prox", "doze", "draw"
+    };
     public static final String[] REDUCED_TAG_PREFIXES = {"*job*/", "*gms_scheduler*/", "IntentOp:"};
     public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("MM-dd HH:mm:ss.SSS");
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class Injector {
-    }
+    public final class Injector {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LogEntry {
@@ -91,7 +94,8 @@ public final class WakeLockLog {
             return sb.toString();
         }
 
-        public final void updatePackageName(SparseArray sparseArray, PackageManager packageManager) {
+        public final void updatePackageName(
+                SparseArray sparseArray, PackageManager packageManager) {
             String[] strArr;
             TagData tagData = this.tag;
             if (tagData == null) {
@@ -109,7 +113,9 @@ public final class WakeLockLog {
             }
             this.packageName = strArr[0];
             if (strArr.length > 1) {
-                this.packageName = AudioOffloadInfo$$ExternalSyntheticOutline0.m(new StringBuilder(), this.packageName, ",...");
+                this.packageName =
+                        AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                                new StringBuilder(), this.packageName, ",...");
             }
         }
     }
@@ -180,7 +186,10 @@ public final class WakeLockLog {
                                 }
                                 LogEntry readEntryAt = theLog.readEntryAt(i6, j, logEntry);
                                 if (readEntryAt == null) {
-                                    DeviceIdleController$$ExternalSyntheticOutline0.m(i6, "Entry is unreadable - Unexpected @ ", "PowerManagerService.WLLog");
+                                    DeviceIdleController$$ExternalSyntheticOutline0.m(
+                                            i6,
+                                            "Entry is unreadable - Unexpected @ ",
+                                            "PowerManagerService.WLLog");
                                     break;
                                 }
                                 TagData tagData3 = readEntryAt.tag;
@@ -197,7 +206,9 @@ public final class WakeLockLog {
                                     }
                                 }
                                 long j2 = readEntryAt.time;
-                                i6 = (anonymousClass12.toBytes(readEntryAt, null, 0L) + i6) % bArr.length;
+                                i6 =
+                                        (anonymousClass12.toBytes(readEntryAt, null, 0L) + i6)
+                                                % bArr.length;
                                 j = j2;
                             }
                         }
@@ -327,7 +338,11 @@ public final class WakeLockLog {
                         i = tagData.index;
                     }
                     bArr[1] = (byte) i;
-                    bArr[2] = (byte) (i4 & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
+                    bArr[2] =
+                            (byte)
+                                    (i4
+                                            & IDnsResolverUnsolicitedEventListener
+                                                    .DNS_HEALTH_RESULT_TIMEOUT);
                     return 3;
                 }
                 if (i3 != 2) {
@@ -354,7 +369,11 @@ public final class WakeLockLog {
                         i2 = tagData2.index;
                     }
                     bArr[0] = (byte) (i2 | 128);
-                    bArr[1] = (byte) (i4 & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
+                    bArr[1] =
+                            (byte)
+                                    (i4
+                                            & IDnsResolverUnsolicitedEventListener
+                                                    .DNS_HEALTH_RESULT_TIMEOUT);
                 }
                 return 2;
             }
@@ -388,7 +407,10 @@ public final class WakeLockLog {
                 bytes = anonymousClass1.toBytes(logEntry, bArr, this.mLatestTime);
             }
             if (bytes > 9 || bytes <= 0) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m(bytes, "Log entry size is out of expected range: ", "PowerManagerService.WLLog");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        bytes,
+                        "Log entry size is out of expected range: ",
+                        "PowerManagerService.WLLog");
                 return;
             }
             byte[] bArr2 = this.mBuffer;
@@ -413,14 +435,20 @@ public final class WakeLockLog {
                             if (i2 >= ((ArrayList) this.mSavedAcquisitions).size()) {
                                 break;
                             }
-                            if (Objects.equals(((LogEntry) ((ArrayList) this.mSavedAcquisitions).get(i2)).tag, readEntryAt.tag)) {
+                            if (Objects.equals(
+                                    ((LogEntry) ((ArrayList) this.mSavedAcquisitions).get(i2)).tag,
+                                    readEntryAt.tag)) {
                                 ((ArrayList) this.mSavedAcquisitions).remove(i2);
                                 break;
                             }
                             i2++;
                         }
                     }
-                    this.mStart = (this.mStart + anonymousClass1.toBytes(readEntryAt, null, this.mStartTime)) % bArr2.length;
+                    this.mStart =
+                            (this.mStart
+                                            + anonymousClass1.toBytes(
+                                                    readEntryAt, null, this.mStartTime))
+                                    % bArr2.length;
                     this.mStartTime = readEntryAt.time;
                     this.mChangeCount++;
                 }
@@ -474,7 +502,11 @@ public final class WakeLockLog {
                 TagDatabase tagDatabase = (TagDatabase) anonymousClass1.this$0;
                 if (i4 != 1) {
                     if (i4 != 2) {
-                        android.util.Slog.w("PowerManagerService.WLLog", BinaryTransparencyService$$ExternalSyntheticOutline0.m(i4, "Type not recognized [", "]"), new Exception());
+                        android.util.Slog.w(
+                                "PowerManagerService.WLLog",
+                                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                        i4, "Type not recognized [", "]"),
+                                new Exception());
                         return null;
                     }
                     if (bArr.length < 2) {
@@ -516,7 +548,15 @@ public final class WakeLockLog {
                 if (bArr.length < 9) {
                     return null;
                 }
-                logEntry.time = ((bArr[1] & 255) << 56) | ((bArr[2] & 255) << 48) | ((bArr[3] & 255) << 40) | ((bArr[4] & 255) << 32) | ((bArr[5] & 255) << 24) | ((bArr[6] & 255) << 16) | ((bArr[7] & 255) << 8) | (bArr[8] & 255);
+                logEntry.time =
+                        ((bArr[1] & 255) << 56)
+                                | ((bArr[2] & 255) << 48)
+                                | ((bArr[3] & 255) << 40)
+                                | ((bArr[4] & 255) << 32)
+                                | ((bArr[5] & 255) << 24)
+                                | ((bArr[6] & 255) << 16)
+                                | ((bArr[7] & 255) << 8)
+                                | (bArr[8] & 255);
                 logEntry.type = 0;
                 logEntry.tag = null;
                 logEntry.flags = 0;
@@ -544,64 +584,85 @@ public final class WakeLockLog {
                     int i2 = 0;
                     for (int i3 = 0; i3 < ((ArrayList) this.mLog.mSavedAcquisitions).size(); i3++) {
                         i2++;
-                        LogEntry logEntry = (LogEntry) ((ArrayList) this.mLog.mSavedAcquisitions).get(i3);
+                        LogEntry logEntry =
+                                (LogEntry) ((ArrayList) this.mLog.mSavedAcquisitions).get(i3);
                         logEntry.updatePackageName(sparseArray, this.mContext.getPackageManager());
-                        printWriter.println("  " + logEntry.toStringInternal(this.mDumpsysDateFormat));
+                        printWriter.println(
+                                "  " + logEntry.toStringInternal(this.mDumpsysDateFormat));
                     }
                     LogEntry logEntry2 = new LogEntry();
                     TheLog theLog = this.mLog;
                     theLog.getClass();
-                    Iterator it = new Iterator(logEntry2) { // from class: com.android.server.power.WakeLockLog.TheLog.2
-                        public final long mChangeValue;
-                        public int mCurrent;
-                        public long mCurrentTimeReference;
-                        public final /* synthetic */ LogEntry val$tempEntry;
+                    Iterator it =
+                            new Iterator(
+                                    logEntry2) { // from class:
+                                                 // com.android.server.power.WakeLockLog.TheLog.2
+                                public final long mChangeValue;
+                                public int mCurrent;
+                                public long mCurrentTimeReference;
+                                public final /* synthetic */ LogEntry val$tempEntry;
 
-                        {
-                            this.val$tempEntry = logEntry2;
-                            this.mCurrent = TheLog.this.mStart;
-                            this.mCurrentTimeReference = TheLog.this.mStartTime;
-                            this.mChangeValue = TheLog.this.mChangeCount;
-                        }
+                                {
+                                    this.val$tempEntry = logEntry2;
+                                    this.mCurrent = TheLog.this.mStart;
+                                    this.mCurrentTimeReference = TheLog.this.mStartTime;
+                                    this.mChangeValue = TheLog.this.mChangeCount;
+                                }
 
-                        public final void checkState() {
-                            if (this.mChangeValue == TheLog.this.mChangeCount) {
-                                return;
-                            }
-                            throw new ConcurrentModificationException("Buffer modified, old change: " + this.mChangeValue + ", new change: " + TheLog.this.mChangeCount);
-                        }
+                                public final void checkState() {
+                                    if (this.mChangeValue == TheLog.this.mChangeCount) {
+                                        return;
+                                    }
+                                    throw new ConcurrentModificationException(
+                                            "Buffer modified, old change: "
+                                                    + this.mChangeValue
+                                                    + ", new change: "
+                                                    + TheLog.this.mChangeCount);
+                                }
 
-                        @Override // java.util.Iterator
-                        public final boolean hasNext() {
-                            checkState();
-                            return this.mCurrent != TheLog.this.mEnd;
-                        }
+                                @Override // java.util.Iterator
+                                public final boolean hasNext() {
+                                    checkState();
+                                    return this.mCurrent != TheLog.this.mEnd;
+                                }
 
-                        @Override // java.util.Iterator
-                        public final Object next() {
-                            checkState();
-                            if (!hasNext()) {
-                                throw new NoSuchElementException("No more entries left.");
-                            }
-                            LogEntry readEntryAt = TheLog.this.readEntryAt(this.mCurrent, this.mCurrentTimeReference, this.val$tempEntry);
-                            TheLog theLog2 = TheLog.this;
-                            this.mCurrent = (this.mCurrent + theLog2.mTranslator.toBytes(readEntryAt, null, theLog2.mStartTime)) % TheLog.this.mBuffer.length;
-                            this.mCurrentTimeReference = readEntryAt.time;
-                            return readEntryAt;
-                        }
+                                @Override // java.util.Iterator
+                                public final Object next() {
+                                    checkState();
+                                    if (!hasNext()) {
+                                        throw new NoSuchElementException("No more entries left.");
+                                    }
+                                    LogEntry readEntryAt =
+                                            TheLog.this.readEntryAt(
+                                                    this.mCurrent,
+                                                    this.mCurrentTimeReference,
+                                                    this.val$tempEntry);
+                                    TheLog theLog2 = TheLog.this;
+                                    this.mCurrent =
+                                            (this.mCurrent
+                                                            + theLog2.mTranslator.toBytes(
+                                                                    readEntryAt,
+                                                                    null,
+                                                                    theLog2.mStartTime))
+                                                    % TheLog.this.mBuffer.length;
+                                    this.mCurrentTimeReference = readEntryAt.time;
+                                    return readEntryAt;
+                                }
 
-                        public final String toString() {
-                            return "@" + this.mCurrent;
-                        }
-                    };
+                                public final String toString() {
+                                    return "@" + this.mCurrent;
+                                }
+                            };
                     while (it.hasNext()) {
                         LogEntry logEntry3 = (LogEntry) it.next();
                         if (logEntry3.type == 0) {
                             i++;
                         } else {
                             i2++;
-                            logEntry3.updatePackageName(sparseArray, this.mContext.getPackageManager());
-                            printWriter.println("  " + logEntry3.toStringInternal(this.mDumpsysDateFormat));
+                            logEntry3.updatePackageName(
+                                    sparseArray, this.mContext.getPackageManager());
+                            printWriter.println(
+                                    "  " + logEntry3.toStringInternal(this.mDumpsysDateFormat));
                         }
                     }
                     printWriter.println("  -");
@@ -613,7 +674,11 @@ public final class WakeLockLog {
                     int length = bArr.length;
                     int i4 = theLog2.mEnd;
                     int i5 = theLog2.mStart;
-                    sb.append(length - (i4 > i5 ? bArr.length - (i4 - i5) : i4 < i5 ? i5 - i4 : bArr.length));
+                    sb.append(
+                            length
+                                    - (i4 > i5
+                                            ? bArr.length - (i4 - i5)
+                                            : i4 < i5 ? i5 - i4 : bArr.length));
                     printWriter.println(sb.toString());
                     if (z) {
                         printWriter.println("  " + this.mTagDatabase);
@@ -631,7 +696,13 @@ public final class WakeLockLog {
         String str2;
         int i5;
         if (str == null) {
-            StringBuilder m = StorageManagerService$$ExternalSyntheticOutline0.m(i2, "Insufficient data to log wakelock [tag: ", str, ", ownerUid: ", ", flags: 0x");
+            StringBuilder m =
+                    StorageManagerService$$ExternalSyntheticOutline0.m(
+                            i2,
+                            "Insufficient data to log wakelock [tag: ",
+                            str,
+                            ", ownerUid: ",
+                            ", flags: 0x");
             m.append(Integer.toHexString(i3));
             android.util.Slog.w("PowerManagerService.WLLog", m.toString());
             return;
@@ -656,7 +727,10 @@ public final class WakeLockLog {
                 } else if (i6 != 64) {
                     if (i6 != 128) {
                         if (i6 != 256) {
-                            DeviceIdleController$$ExternalSyntheticOutline0.m(i3, "Unsupported lock level for logging, flags: ", "PowerManagerService.WLLog");
+                            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                                    i3,
+                                    "Unsupported lock level for logging, flags: ",
+                                    "PowerManagerService.WLLog");
                         }
                         i5 = 0;
                     } else {

@@ -3,7 +3,9 @@ package com.android.server.wm;
 import android.os.IBinder;
 import android.util.ArraySet;
 import android.view.flags.Flags;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.Objects;
@@ -33,7 +35,9 @@ public final class SensitiveContentPackages {
                 return false;
             }
             PackageInfo packageInfo = (PackageInfo) obj;
-            return this.mUid == packageInfo.mUid && Objects.equals(this.mPkg, packageInfo.mPkg) && Objects.equals(this.mWindowToken, packageInfo.mWindowToken);
+            return this.mUid == packageInfo.mUid
+                    && Objects.equals(this.mPkg, packageInfo.mPkg)
+                    && Objects.equals(this.mWindowToken, packageInfo.mWindowToken);
         }
 
         public final int hashCode() {
@@ -41,24 +45,41 @@ public final class SensitiveContentPackages {
         }
 
         public final String toString() {
-            return "package=" + this.mPkg + "  uid=" + this.mUid + " windowToken=" + this.mWindowToken;
+            return "package="
+                    + this.mPkg
+                    + "  uid="
+                    + this.mUid
+                    + " windowToken="
+                    + this.mWindowToken;
         }
     }
 
     public final void dump(PrintWriter printWriter) {
-        StringBuilder m$1 = BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "SensitiveContentPackages:", "  Packages that should block screen capture (");
+        StringBuilder m$1 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                        printWriter,
+                        "SensitiveContentPackages:",
+                        "  Packages that should block screen capture (");
         m$1.append(this.mProtectedPackages.size());
         m$1.append("):");
         printWriter.println(m$1.toString());
         Iterator it = this.mProtectedPackages.iterator();
         while (it.hasNext()) {
             PackageInfo packageInfo = (PackageInfo) it.next();
-            printWriter.println("    package=" + packageInfo.mPkg + "  uid=" + packageInfo.mUid + " windowToken=" + packageInfo.mWindowToken);
+            printWriter.println(
+                    "    package="
+                            + packageInfo.mPkg
+                            + "  uid="
+                            + packageInfo.mUid
+                            + " windowToken="
+                            + packageInfo.mWindowToken);
         }
     }
 
     public final boolean shouldBlockScreenCaptureForApp(int i, IBinder iBinder, String str) {
-        if (!Flags.sensitiveContentAppProtection() && !com.android.internal.hidden_from_bootclasspath.android.permission.flags.Flags.sensitiveNotificationAppProtection()) {
+        if (!Flags.sensitiveContentAppProtection()
+                && !com.android.internal.hidden_from_bootclasspath.android.permission.flags.Flags
+                        .sensitiveNotificationAppProtection()) {
             return false;
         }
         for (int i2 = 0; i2 < this.mProtectedPackages.size(); i2++) {
@@ -67,7 +88,9 @@ public final class SensitiveContentPackages {
                 if (Flags.sensitiveContentAppProtection() && iBinder == packageInfo.mWindowToken) {
                     return true;
                 }
-                if (com.android.internal.hidden_from_bootclasspath.android.permission.flags.Flags.sensitiveNotificationAppProtection() && packageInfo.mWindowToken == null) {
+                if (com.android.internal.hidden_from_bootclasspath.android.permission.flags.Flags
+                                .sensitiveNotificationAppProtection()
+                        && packageInfo.mWindowToken == null) {
                     return true;
                 }
             }

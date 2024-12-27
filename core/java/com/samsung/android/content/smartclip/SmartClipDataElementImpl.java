@@ -139,7 +139,8 @@ public class SmartClipDataElementImpl implements SemSmartClipDataElement {
         this.mRectOnScreen = new Rect(screenRect);
     }
 
-    public SmartClipDataElementImpl(SemSmartClipDataRepository repository, View view, Rect screenRect) {
+    public SmartClipDataElementImpl(
+            SemSmartClipDataRepository repository, View view, Rect screenRect) {
         this(repository, view);
         this.mRectOnScreen = new Rect(screenRect);
     }
@@ -169,7 +170,9 @@ public class SmartClipDataElementImpl implements SemSmartClipDataElement {
     @Override // com.samsung.android.content.smartclip.SemSmartClipDataElement
     public int getExtractionMode() {
         SmartClipDataCropperImpl cropper;
-        if (this.mRepository == null || (cropper = (SmartClipDataCropperImpl) this.mRepository.getSmartClipDataCropper()) == null) {
+        if (this.mRepository == null
+                || (cropper = (SmartClipDataCropperImpl) this.mRepository.getSmartClipDataCropper())
+                        == null) {
             return 0;
         }
         return cropper.getExtractionMode();
@@ -177,7 +180,9 @@ public class SmartClipDataElementImpl implements SemSmartClipDataElement {
 
     public int getExtractionLevel() {
         SmartClipDataCropperImpl cropper;
-        if (this.mRepository == null || (cropper = (SmartClipDataCropperImpl) this.mRepository.getSmartClipDataCropper()) == null) {
+        if (this.mRepository == null
+                || (cropper = (SmartClipDataCropperImpl) this.mRepository.getSmartClipDataCropper())
+                        == null) {
             return 0;
         }
         return cropper.getExtractionLevel();
@@ -250,7 +255,9 @@ public class SmartClipDataElementImpl implements SemSmartClipDataElement {
         }
         SmartClipDataElementImpl child = (SmartClipDataElementImpl) childToRemove;
         if (child.getParent() != this) {
-            Log.e(TAG, "removeChild : Incorrect parent of SemSmartClipDataElement. element=" + child);
+            Log.e(
+                    TAG,
+                    "removeChild : Incorrect parent of SemSmartClipDataElement. element=" + child);
             child.dump();
             return false;
         }
@@ -304,7 +311,9 @@ public class SmartClipDataElementImpl implements SemSmartClipDataElement {
 
     public int getChildCount() {
         int childCount = 0;
-        for (SmartClipDataElementImpl element = this.mFirstChild; element != null; element = element.getNextSibling()) {
+        for (SmartClipDataElementImpl element = this.mFirstChild;
+                element != null;
+                element = element.getNextSibling()) {
             childCount++;
         }
         return childCount;
@@ -312,21 +321,24 @@ public class SmartClipDataElementImpl implements SemSmartClipDataElement {
 
     public int getParentCount() {
         int parentCount = 0;
-        for (SmartClipDataElementImpl element = getParent(); element != null; element = element.getParent()) {
+        for (SmartClipDataElementImpl element = getParent();
+                element != null;
+                element = element.getParent()) {
             parentCount++;
         }
         return parentCount;
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:23:0x0026, code lost:
-    
-        return r1.mNextSibling;
-     */
+
+       return r1.mNextSibling;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public com.samsung.android.content.smartclip.SmartClipDataElementImpl traverseNextElement(com.samsung.android.content.smartclip.SmartClipDataElementImpl r4) {
+    public com.samsung.android.content.smartclip.SmartClipDataElementImpl traverseNextElement(
+            com.samsung.android.content.smartclip.SmartClipDataElementImpl r4) {
         /*
             r3 = this;
             com.samsung.android.content.smartclip.SmartClipDataElementImpl r0 = r3.mFirstChild
@@ -361,7 +373,9 @@ public class SmartClipDataElementImpl implements SemSmartClipDataElement {
         L27:
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.content.smartclip.SmartClipDataElementImpl.traverseNextElement(com.samsung.android.content.smartclip.SmartClipDataElementImpl):com.samsung.android.content.smartclip.SmartClipDataElementImpl");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.content.smartclip.SmartClipDataElementImpl.traverseNextElement(com.samsung.android.content.smartclip.SmartClipDataElementImpl):com.samsung.android.content.smartclip.SmartClipDataElementImpl");
     }
 
     public String getDumpString(boolean addIndent, boolean showValue) {
@@ -373,7 +387,16 @@ public class SmartClipDataElementImpl implements SemSmartClipDataElement {
             }
         }
         if (this.mRectOnScreen != null) {
-            result.append("Rect(" + this.mRectOnScreen.left + ", " + this.mRectOnScreen.top + ", " + this.mRectOnScreen.right + ", " + this.mRectOnScreen.bottom + ")\t");
+            result.append(
+                    "Rect("
+                            + this.mRectOnScreen.left
+                            + ", "
+                            + this.mRectOnScreen.top
+                            + ", "
+                            + this.mRectOnScreen.right
+                            + ", "
+                            + this.mRectOnScreen.bottom
+                            + ")\t");
         } else {
             result.append("mRectOnScreen(NULL)\t");
         }
@@ -387,7 +410,9 @@ public class SmartClipDataElementImpl implements SemSmartClipDataElement {
                     String viewResName = this.mView.getResources().getResourceEntryName(resId);
                     result.append("/").append(viewResName).append("\t");
                 } catch (Exception e) {
-                    result.append("@").append(Integer.toHexString(this.mView.hashCode())).append("\t");
+                    result.append("@")
+                            .append(Integer.toHexString(this.mView.hashCode()))
+                            .append("\t");
                 }
             }
             Drawable background = this.mView.getBackground();
@@ -418,7 +443,11 @@ public class SmartClipDataElementImpl implements SemSmartClipDataElement {
                 if (!showValue) {
                     result.append(type).append("\t");
                 } else {
-                    result.append(type).append(NavigationBarInflaterView.KEY_CODE_START).append(value).append(extra).append(")\t");
+                    result.append(type)
+                            .append(NavigationBarInflaterView.KEY_CODE_START)
+                            .append(value)
+                            .append(extra)
+                            .append(")\t");
                 }
             }
         } else {
@@ -430,7 +459,9 @@ public class SmartClipDataElementImpl implements SemSmartClipDataElement {
     public boolean dump() {
         String dumpStr = getDumpString(true, true);
         Log.e(TAG, dumpStr);
-        for (SmartClipDataElementImpl element = getFirstChild(); element != null; element = element.getNextSibling()) {
+        for (SmartClipDataElementImpl element = getFirstChild();
+                element != null;
+                element = element.getNextSibling()) {
             element.dump();
         }
         return true;

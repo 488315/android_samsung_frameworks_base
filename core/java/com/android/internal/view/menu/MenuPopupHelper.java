@@ -7,8 +7,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
+
 import com.android.internal.R;
-import com.android.internal.view.menu.MenuPresenter;
 
 /* loaded from: classes5.dex */
 public class MenuPopupHelper implements MenuHelper {
@@ -36,18 +36,32 @@ public class MenuPopupHelper implements MenuHelper {
         this(context, menu, anchorView, false, 16843520, 0);
     }
 
-    public MenuPopupHelper(Context context, MenuBuilder menu, View anchorView, boolean overflowOnly, int popupStyleAttr) {
+    public MenuPopupHelper(
+            Context context,
+            MenuBuilder menu,
+            View anchorView,
+            boolean overflowOnly,
+            int popupStyleAttr) {
         this(context, menu, anchorView, overflowOnly, popupStyleAttr, 0);
     }
 
-    public MenuPopupHelper(Context context, MenuBuilder menu, View anchorView, boolean overflowOnly, int popupStyleAttr, int popupStyleRes) {
+    public MenuPopupHelper(
+            Context context,
+            MenuBuilder menu,
+            View anchorView,
+            boolean overflowOnly,
+            int popupStyleAttr,
+            int popupStyleRes) {
         this.mDropDownGravity = Gravity.START;
-        this.mInternalOnDismissListener = new PopupWindow.OnDismissListener() { // from class: com.android.internal.view.menu.MenuPopupHelper.1
-            @Override // android.widget.PopupWindow.OnDismissListener
-            public void onDismiss() {
-                MenuPopupHelper.this.onDismiss();
-            }
-        };
+        this.mInternalOnDismissListener =
+                new PopupWindow
+                        .OnDismissListener() { // from class:
+                                               // com.android.internal.view.menu.MenuPopupHelper.1
+                    @Override // android.widget.PopupWindow.OnDismissListener
+                    public void onDismiss() {
+                        MenuPopupHelper.this.onDismiss();
+                    }
+                };
         this.mContext = context;
         this.mMenu = menu;
         this.mAnchorView = anchorView;
@@ -125,15 +139,32 @@ public class MenuPopupHelper implements MenuHelper {
 
     private MenuPopup createPopup() {
         MenuPopup popup;
-        WindowManager windowManager = (WindowManager) this.mContext.getSystemService(WindowManager.class);
+        WindowManager windowManager =
+                (WindowManager) this.mContext.getSystemService(WindowManager.class);
         Rect maxWindowBounds = windowManager.getMaximumWindowMetrics().getBounds();
         int smallestWidth = Math.min(maxWindowBounds.width(), maxWindowBounds.height());
-        int minSmallestWidthCascading = this.mContext.getResources().getDimensionPixelSize(R.dimen.cascading_menus_min_smallest_width);
+        int minSmallestWidthCascading =
+                this.mContext
+                        .getResources()
+                        .getDimensionPixelSize(R.dimen.cascading_menus_min_smallest_width);
         boolean enableCascadingSubmenus = smallestWidth >= minSmallestWidthCascading;
         if (enableCascadingSubmenus) {
-            popup = new CascadingMenuPopup(this.mContext, this.mAnchorView, this.mPopupStyleAttr, this.mPopupStyleRes, this.mOverflowOnly);
+            popup =
+                    new CascadingMenuPopup(
+                            this.mContext,
+                            this.mAnchorView,
+                            this.mPopupStyleAttr,
+                            this.mPopupStyleRes,
+                            this.mOverflowOnly);
         } else {
-            popup = new StandardMenuPopup(this.mContext, this.mMenu, this.mAnchorView, this.mPopupStyleAttr, this.mPopupStyleRes, this.mOverflowOnly);
+            popup =
+                    new StandardMenuPopup(
+                            this.mContext,
+                            this.mMenu,
+                            this.mAnchorView,
+                            this.mPopupStyleAttr,
+                            this.mPopupStyleRes,
+                            this.mOverflowOnly);
         }
         popup.addMenu(this.mMenu);
         popup.setOnDismissListener(this.mInternalOnDismissListener);
@@ -148,10 +179,16 @@ public class MenuPopupHelper implements MenuHelper {
         MenuPopup popup = getPopup();
         popup.setShowTitle(showTitle);
         if (useOffsets) {
-            int hgrav = Gravity.getAbsoluteGravity(this.mDropDownGravity, this.mAnchorView.getLayoutDirection()) & 7;
+            int hgrav =
+                    Gravity.getAbsoluteGravity(
+                                    this.mDropDownGravity, this.mAnchorView.getLayoutDirection())
+                            & 7;
             if (this.mIsThemeDeviceDefaultFamily && !this.mIsContextMenu) {
                 boolean isRtl = this.mAnchorView.getLayoutDirection() == 1;
-                xOffset -= this.mContext.getResources().getDimensionPixelOffset(R.dimen.sem_menu_popup_horizontal_offset);
+                xOffset -=
+                        this.mContext
+                                .getResources()
+                                .getDimensionPixelOffset(R.dimen.sem_menu_popup_horizontal_offset);
                 popup.setHorizontalOffset(isRtl ? -xOffset : xOffset);
             } else {
                 if (hgrav == 5) {
@@ -162,7 +199,12 @@ public class MenuPopupHelper implements MenuHelper {
             popup.setVerticalOffset(yOffset);
             float density = this.mContext.getResources().getDisplayMetrics().density;
             int halfSize = (int) ((48.0f * density) / 2.0f);
-            Rect epicenter = new Rect(xOffset - halfSize, yOffset - halfSize, xOffset + halfSize, yOffset + halfSize);
+            Rect epicenter =
+                    new Rect(
+                            xOffset - halfSize,
+                            yOffset - halfSize,
+                            xOffset + halfSize,
+                            yOffset + halfSize);
             popup.setEpicenterBounds(epicenter);
         }
         popup.show();

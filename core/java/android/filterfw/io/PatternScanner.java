@@ -75,7 +75,13 @@ public class PatternScanner {
 
     public String unexpectedTokenMessage(String tokenName) {
         String line = this.mInput.substring(this.mStartOfLine, this.mOffset);
-        return "Unexpected token on line " + (this.mLineNo + 1) + " after '" + line + "' <- Expected " + tokenName + "!";
+        return "Unexpected token on line "
+                + (this.mLineNo + 1)
+                + " after '"
+                + line
+                + "' <- Expected "
+                + tokenName
+                + "!";
     }
 
     public void updateLineCount(int start, int end) {

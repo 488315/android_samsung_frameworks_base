@@ -7,17 +7,16 @@ import android.view.AccessibilityIterators;
 
 /* loaded from: classes4.dex */
 final class AccessibilityIterators {
-    AccessibilityIterators() {
-    }
+    AccessibilityIterators() {}
 
-    static class LineTextSegmentIterator extends AccessibilityIterators.AbstractTextSegmentIterator {
+    static class LineTextSegmentIterator
+            extends AccessibilityIterators.AbstractTextSegmentIterator {
         protected static final int DIRECTION_END = 1;
         protected static final int DIRECTION_START = -1;
         private static LineTextSegmentIterator sLineInstance;
         protected Layout mLayout;
 
-        LineTextSegmentIterator() {
-        }
+        LineTextSegmentIterator() {}
 
         public static LineTextSegmentIterator getInstance() {
             if (sLineInstance == null) {
@@ -93,8 +92,7 @@ final class AccessibilityIterators {
         private final Rect mTempRect = new Rect();
         private TextView mView;
 
-        PageTextSegmentIterator() {
-        }
+        PageTextSegmentIterator() {}
 
         public static PageTextSegmentIterator getInstance() {
             if (sPageInstance == null) {
@@ -108,35 +106,50 @@ final class AccessibilityIterators {
             this.mView = view;
         }
 
-        @Override // android.widget.AccessibilityIterators.LineTextSegmentIterator, android.view.AccessibilityIterators.TextSegmentIterator
+        @Override // android.widget.AccessibilityIterators.LineTextSegmentIterator,
+                  // android.view.AccessibilityIterators.TextSegmentIterator
         public int[] following(int offset) {
             int textLength = this.mText.length();
-            if (textLength <= 0 || offset >= this.mText.length() || !this.mView.getGlobalVisibleRect(this.mTempRect)) {
+            if (textLength <= 0
+                    || offset >= this.mText.length()
+                    || !this.mView.getGlobalVisibleRect(this.mTempRect)) {
                 return null;
             }
             int start = Math.max(0, offset);
             int currentLine = this.mLayout.getLineForOffset(start);
             int currentLineTop = this.mLayout.getLineTop(currentLine);
-            int pageHeight = (this.mTempRect.height() - this.mView.getTotalPaddingTop()) - this.mView.getTotalPaddingBottom();
+            int pageHeight =
+                    (this.mTempRect.height() - this.mView.getTotalPaddingTop())
+                            - this.mView.getTotalPaddingBottom();
             int nextPageStartY = currentLineTop + pageHeight;
             int lastLineTop = this.mLayout.getLineTop(this.mLayout.getLineCount() - 1);
-            int currentPageEndLine = (nextPageStartY < lastLineTop ? this.mLayout.getLineForVertical(nextPageStartY) : this.mLayout.getLineCount()) - 1;
+            int currentPageEndLine =
+                    (nextPageStartY < lastLineTop
+                                    ? this.mLayout.getLineForVertical(nextPageStartY)
+                                    : this.mLayout.getLineCount())
+                            - 1;
             int end = getLineEdgeIndex(currentPageEndLine, 1) + 1;
             return getRange(start, end);
         }
 
-        @Override // android.widget.AccessibilityIterators.LineTextSegmentIterator, android.view.AccessibilityIterators.TextSegmentIterator
+        @Override // android.widget.AccessibilityIterators.LineTextSegmentIterator,
+                  // android.view.AccessibilityIterators.TextSegmentIterator
         public int[] preceding(int offset) {
             int textLength = this.mText.length();
-            if (textLength <= 0 || offset <= 0 || !this.mView.getGlobalVisibleRect(this.mTempRect)) {
+            if (textLength <= 0
+                    || offset <= 0
+                    || !this.mView.getGlobalVisibleRect(this.mTempRect)) {
                 return null;
             }
             int end = Math.min(this.mText.length(), offset);
             int currentLine = this.mLayout.getLineForOffset(end);
             int currentLineTop = this.mLayout.getLineTop(currentLine);
-            int pageHeight = (this.mTempRect.height() - this.mView.getTotalPaddingTop()) - this.mView.getTotalPaddingBottom();
+            int pageHeight =
+                    (this.mTempRect.height() - this.mView.getTotalPaddingTop())
+                            - this.mView.getTotalPaddingBottom();
             int previousPageEndY = currentLineTop - pageHeight;
-            int currentPageStartLine = previousPageEndY > 0 ? this.mLayout.getLineForVertical(previousPageEndY) : 0;
+            int currentPageStartLine =
+                    previousPageEndY > 0 ? this.mLayout.getLineForVertical(previousPageEndY) : 0;
             if (end == this.mText.length() && currentPageStartLine < currentLine) {
                 currentPageStartLine++;
             }

@@ -2,6 +2,7 @@ package com.android.internal.pm.pkg.component;
 
 import android.content.pm.PathPermission;
 import android.os.PatternMatcher;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */

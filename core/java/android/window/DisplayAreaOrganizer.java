@@ -2,8 +2,7 @@ package android.window;
 
 import android.os.RemoteException;
 import android.view.SurfaceControl;
-import android.window.DisplayAreaOrganizer;
-import android.window.IDisplayAreaOrganizer;
+
 import java.util.List;
 import java.util.concurrent.Executor;
 
@@ -54,9 +53,11 @@ public class DisplayAreaOrganizer extends WindowOrganizer {
         }
     }
 
-    public DisplayAreaAppearedInfo createTaskDisplayArea(int displayId, int parentFeatureId, String name) {
+    public DisplayAreaAppearedInfo createTaskDisplayArea(
+            int displayId, int parentFeatureId, String name) {
         try {
-            return getController().createTaskDisplayArea(this.mInterface, displayId, parentFeatureId, name);
+            return getController()
+                    .createTaskDisplayArea(this.mInterface, displayId, parentFeatureId, name);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -70,62 +71,71 @@ public class DisplayAreaOrganizer extends WindowOrganizer {
         }
     }
 
-    public void onDisplayAreaAppeared(DisplayAreaInfo displayAreaInfo, SurfaceControl leash) {
-    }
+    public void onDisplayAreaAppeared(DisplayAreaInfo displayAreaInfo, SurfaceControl leash) {}
 
-    public void onDisplayAreaVanished(DisplayAreaInfo displayAreaInfo) {
-    }
+    public void onDisplayAreaVanished(DisplayAreaInfo displayAreaInfo) {}
 
-    public void onDisplayAreaInfoChanged(DisplayAreaInfo displayAreaInfo) {
-    }
+    public void onDisplayAreaInfoChanged(DisplayAreaInfo displayAreaInfo) {}
 
     /* renamed from: android.window.DisplayAreaOrganizer$1, reason: invalid class name */
     class AnonymousClass1 extends IDisplayAreaOrganizer.Stub {
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         @Override // android.window.IDisplayAreaOrganizer
-        public void onDisplayAreaAppeared(final DisplayAreaInfo displayAreaInfo, final SurfaceControl leash) {
-            DisplayAreaOrganizer.this.mExecutor.execute(new Runnable() { // from class: android.window.DisplayAreaOrganizer$1$$ExternalSyntheticLambda2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    DisplayAreaOrganizer.AnonymousClass1.this.lambda$onDisplayAreaAppeared$0(displayAreaInfo, leash);
-                }
-            });
+        public void onDisplayAreaAppeared(
+                final DisplayAreaInfo displayAreaInfo, final SurfaceControl leash) {
+            DisplayAreaOrganizer.this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.window.DisplayAreaOrganizer$1$$ExternalSyntheticLambda2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            DisplayAreaOrganizer.AnonymousClass1.this
+                                    .lambda$onDisplayAreaAppeared$0(displayAreaInfo, leash);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onDisplayAreaAppeared$0(DisplayAreaInfo displayAreaInfo, SurfaceControl leash) {
+        public /* synthetic */ void lambda$onDisplayAreaAppeared$0(
+                DisplayAreaInfo displayAreaInfo, SurfaceControl leash) {
             DisplayAreaOrganizer.this.onDisplayAreaAppeared(displayAreaInfo, leash);
         }
 
         @Override // android.window.IDisplayAreaOrganizer
         public void onDisplayAreaVanished(final DisplayAreaInfo displayAreaInfo) {
-            DisplayAreaOrganizer.this.mExecutor.execute(new Runnable() { // from class: android.window.DisplayAreaOrganizer$1$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    DisplayAreaOrganizer.AnonymousClass1.this.lambda$onDisplayAreaVanished$1(displayAreaInfo);
-                }
-            });
+            DisplayAreaOrganizer.this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.window.DisplayAreaOrganizer$1$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            DisplayAreaOrganizer.AnonymousClass1.this
+                                    .lambda$onDisplayAreaVanished$1(displayAreaInfo);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onDisplayAreaVanished$1(DisplayAreaInfo displayAreaInfo) {
+        public /* synthetic */ void lambda$onDisplayAreaVanished$1(
+                DisplayAreaInfo displayAreaInfo) {
             DisplayAreaOrganizer.this.onDisplayAreaVanished(displayAreaInfo);
         }
 
         @Override // android.window.IDisplayAreaOrganizer
         public void onDisplayAreaInfoChanged(final DisplayAreaInfo displayAreaInfo) {
-            DisplayAreaOrganizer.this.mExecutor.execute(new Runnable() { // from class: android.window.DisplayAreaOrganizer$1$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    DisplayAreaOrganizer.AnonymousClass1.this.lambda$onDisplayAreaInfoChanged$2(displayAreaInfo);
-                }
-            });
+            DisplayAreaOrganizer.this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.window.DisplayAreaOrganizer$1$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            DisplayAreaOrganizer.AnonymousClass1.this
+                                    .lambda$onDisplayAreaInfoChanged$2(displayAreaInfo);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onDisplayAreaInfoChanged$2(DisplayAreaInfo displayAreaInfo) {
+        public /* synthetic */ void lambda$onDisplayAreaInfoChanged$2(
+                DisplayAreaInfo displayAreaInfo) {
             DisplayAreaOrganizer.this.onDisplayAreaInfoChanged(displayAreaInfo);
         }
     }

@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class ExportResult implements Parcelable {
-    public static final Parcelable.Creator<ExportResult> CREATOR = new Parcelable.Creator<ExportResult>() { // from class: android.security.keymaster.ExportResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ExportResult createFromParcel(Parcel in) {
-            return new ExportResult(in);
-        }
+    public static final Parcelable.Creator<ExportResult> CREATOR =
+            new Parcelable.Creator<
+                    ExportResult>() { // from class: android.security.keymaster.ExportResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ExportResult createFromParcel(Parcel in) {
+                    return new ExportResult(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ExportResult[] newArray(int length) {
-            return new ExportResult[length];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ExportResult[] newArray(int length) {
+                    return new ExportResult[length];
+                }
+            };
     public final byte[] exportData;
     public final int resultCode;
 

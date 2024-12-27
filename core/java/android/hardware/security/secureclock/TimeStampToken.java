@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class TimeStampToken implements Parcelable {
-    public static final Parcelable.Creator<TimeStampToken> CREATOR = new Parcelable.Creator<TimeStampToken>() { // from class: android.hardware.security.secureclock.TimeStampToken.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TimeStampToken createFromParcel(Parcel _aidl_source) {
-            TimeStampToken _aidl_out = new TimeStampToken();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<TimeStampToken> CREATOR =
+            new Parcelable.Creator<TimeStampToken>() { // from class:
+                // android.hardware.security.secureclock.TimeStampToken.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TimeStampToken createFromParcel(Parcel _aidl_source) {
+                    TimeStampToken _aidl_out = new TimeStampToken();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TimeStampToken[] newArray(int _aidl_size) {
-            return new TimeStampToken[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TimeStampToken[] newArray(int _aidl_size) {
+                    return new TimeStampToken[_aidl_size];
+                }
+            };
     public long challenge = 0;
     public byte[] mac;
     public Timestamp timestamp;

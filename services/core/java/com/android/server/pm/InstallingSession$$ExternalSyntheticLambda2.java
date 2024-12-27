@@ -1,6 +1,7 @@
 package com.android.server.pm;
 
 import android.os.Trace;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -11,7 +12,8 @@ public final /* synthetic */ class InstallingSession$$ExternalSyntheticLambda2 i
     public final /* synthetic */ InstallingSession f$0;
     public final /* synthetic */ Object f$1;
 
-    public /* synthetic */ InstallingSession$$ExternalSyntheticLambda2(InstallingSession installingSession, Object obj, int i) {
+    public /* synthetic */ InstallingSession$$ExternalSyntheticLambda2(
+            InstallingSession installingSession, Object obj, int i) {
         this.$r8$classId = i;
         this.f$0 = installingSession;
         this.f$1 = obj;
@@ -36,7 +38,9 @@ public final /* synthetic */ class InstallingSession$$ExternalSyntheticLambda2 i
                 return;
             default:
                 InstallingSession installingSession2 = this.f$0;
-                installingSession2.processInstallRequests(Collections.singletonList((InstallRequest) this.f$1), installingSession2.mRet == 1);
+                installingSession2.processInstallRequests(
+                        Collections.singletonList((InstallRequest) this.f$1),
+                        installingSession2.mRet == 1);
                 return;
         }
     }

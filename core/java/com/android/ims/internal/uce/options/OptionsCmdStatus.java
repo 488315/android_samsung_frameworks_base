@@ -2,24 +2,28 @@ package com.android.ims.internal.uce.options;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.ims.internal.uce.common.CapInfo;
 import com.android.ims.internal.uce.common.StatusCode;
 
 /* loaded from: classes5.dex */
 public class OptionsCmdStatus implements Parcelable {
-    public static final Parcelable.Creator<OptionsCmdStatus> CREATOR = new Parcelable.Creator<OptionsCmdStatus>() { // from class: com.android.ims.internal.uce.options.OptionsCmdStatus.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OptionsCmdStatus createFromParcel(Parcel source) {
-            return new OptionsCmdStatus(source);
-        }
+    public static final Parcelable.Creator<OptionsCmdStatus> CREATOR =
+            new Parcelable.Creator<
+                    OptionsCmdStatus>() { // from class:
+                                          // com.android.ims.internal.uce.options.OptionsCmdStatus.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OptionsCmdStatus createFromParcel(Parcel source) {
+                    return new OptionsCmdStatus(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OptionsCmdStatus[] newArray(int size) {
-            return new OptionsCmdStatus[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OptionsCmdStatus[] newArray(int size) {
+                    return new OptionsCmdStatus[size];
+                }
+            };
     private CapInfo mCapInfo;
     private OptionsCmdId mCmdId;
     private StatusCode mStatus;
@@ -87,8 +91,14 @@ public class OptionsCmdStatus implements Parcelable {
 
     public void readFromParcel(Parcel source) {
         this.mUserData = source.readInt();
-        this.mCmdId = (OptionsCmdId) source.readParcelable(OptionsCmdId.class.getClassLoader(), OptionsCmdId.class);
-        this.mStatus = (StatusCode) source.readParcelable(StatusCode.class.getClassLoader(), StatusCode.class);
-        this.mCapInfo = (CapInfo) source.readParcelable(CapInfo.class.getClassLoader(), CapInfo.class);
+        this.mCmdId =
+                (OptionsCmdId)
+                        source.readParcelable(
+                                OptionsCmdId.class.getClassLoader(), OptionsCmdId.class);
+        this.mStatus =
+                (StatusCode)
+                        source.readParcelable(StatusCode.class.getClassLoader(), StatusCode.class);
+        this.mCapInfo =
+                (CapInfo) source.readParcelable(CapInfo.class.getClassLoader(), CapInfo.class);
     }
 }

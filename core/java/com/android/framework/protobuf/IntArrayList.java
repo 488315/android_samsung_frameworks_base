@@ -1,12 +1,12 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.Internal;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.RandomAccess;
 
 /* loaded from: classes3.dex */
-final class IntArrayList extends AbstractProtobufList<Integer> implements Internal.IntList, RandomAccess, PrimitiveNonBoxingCollection {
+final class IntArrayList extends AbstractProtobufList<Integer>
+        implements Internal.IntList, RandomAccess, PrimitiveNonBoxingCollection {
     private static final IntArrayList EMPTY_LIST = new IntArrayList(new int[0], 0);
     private int[] array;
     private int size;
@@ -39,7 +39,8 @@ final class IntArrayList extends AbstractProtobufList<Integer> implements Intern
         this.modCount++;
     }
 
-    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.Collection, java.util.List
+    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList,
+              // java.util.Collection, java.util.List
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -60,7 +61,8 @@ final class IntArrayList extends AbstractProtobufList<Integer> implements Intern
         return true;
     }
 
-    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.Collection, java.util.List
+    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList,
+              // java.util.Collection, java.util.List
     public int hashCode() {
         int result = 1;
         for (int i = 0; i < this.size; i++) {
@@ -69,7 +71,8 @@ final class IntArrayList extends AbstractProtobufList<Integer> implements Intern
         return result;
     }
 
-    @Override // com.android.framework.protobuf.Internal.ProtobufList, com.android.framework.protobuf.Internal.BooleanList
+    @Override // com.android.framework.protobuf.Internal.ProtobufList,
+              // com.android.framework.protobuf.Internal.BooleanList
     /* renamed from: mutableCopyWithCapacity */
     public Internal.ProtobufList<Integer> mutableCopyWithCapacity2(int capacity) {
         if (capacity < this.size) {
@@ -114,7 +117,8 @@ final class IntArrayList extends AbstractProtobufList<Integer> implements Intern
         return this.size;
     }
 
-    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.List
+    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList,
+              // java.util.List
     public Integer set(int index, Integer element) {
         return Integer.valueOf(setInt(index, element.intValue()));
     }
@@ -128,13 +132,15 @@ final class IntArrayList extends AbstractProtobufList<Integer> implements Intern
         return previousValue;
     }
 
-    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.AbstractCollection, java.util.Collection, java.util.List
+    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList,
+              // java.util.AbstractCollection, java.util.Collection, java.util.List
     public boolean add(Integer element) {
         addInt(element.intValue());
         return true;
     }
 
-    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.List
+    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList,
+              // java.util.List
     public void add(int index, Integer element) {
         addInt(index, element.intValue());
     }
@@ -173,7 +179,8 @@ final class IntArrayList extends AbstractProtobufList<Integer> implements Intern
         this.modCount++;
     }
 
-    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractCollection, java.util.Collection, java.util.List
+    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractCollection,
+              // java.util.Collection, java.util.List
     public boolean addAll(Collection<? extends Integer> collection) {
         ensureIsMutable();
         Internal.checkNotNull(collection);
@@ -198,7 +205,8 @@ final class IntArrayList extends AbstractProtobufList<Integer> implements Intern
         return true;
     }
 
-    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.List
+    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList,
+              // java.util.List
     public Integer remove(int index) {
         ensureIsMutable();
         ensureIndexInRange(index);

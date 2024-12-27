@@ -14,7 +14,8 @@ public final class KsmbdConfigUtil {
     public KsmbdConfigUtil() {
         int indexOf;
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("/data/misc/hwrs/ksmbd/ksmbd.conf"));
+            BufferedReader bufferedReader =
+                    new BufferedReader(new FileReader("/data/misc/hwrs/ksmbd/ksmbd.conf"));
             String str = null;
             while (true) {
                 try {
@@ -27,8 +28,13 @@ public final class KsmbdConfigUtil {
                     if (trim.startsWith("[")) {
                         str = trim.substring(1, trim.length() - 1).trim();
                         ((HashMap) this.sections).put(str, new HashMap());
-                    } else if (!trim.isEmpty() && !trim.startsWith(";") && (indexOf = trim.indexOf(61)) != -1) {
-                        ((Map) ((HashMap) this.sections).get(str)).put(trim.substring(0, indexOf).trim(), trim.substring(indexOf + 1).trim());
+                    } else if (!trim.isEmpty()
+                            && !trim.startsWith(";")
+                            && (indexOf = trim.indexOf(61)) != -1) {
+                        ((Map) ((HashMap) this.sections).get(str))
+                                .put(
+                                        trim.substring(0, indexOf).trim(),
+                                        trim.substring(indexOf + 1).trim());
                     }
                 } finally {
                 }

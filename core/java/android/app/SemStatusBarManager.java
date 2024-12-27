@@ -9,6 +9,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.widget.RemoteViews;
+
 import com.android.internal.statusbar.IStatusBarService;
 
 /* loaded from: classes.dex */
@@ -41,13 +42,16 @@ public class SemStatusBarManager {
 
     private synchronized IStatusBarService getService() {
         if (this.mService == null) {
-            this.mService = IStatusBarService.Stub.asInterface(ServiceManager.getService(Context.STATUS_BAR_SERVICE));
+            this.mService =
+                    IStatusBarService.Stub.asInterface(
+                            ServiceManager.getService(Context.STATUS_BAR_SERVICE));
         }
         return this.mService;
     }
 
     private void enforceStatusBarService() {
-        this.mContext.enforceCallingOrSelfPermission(Manifest.permission.STATUS_BAR_SERVICE, "StatusBarManagerService");
+        this.mContext.enforceCallingOrSelfPermission(
+                Manifest.permission.STATUS_BAR_SERVICE, "StatusBarManagerService");
     }
 
     private int getBarTypeFromContext() {
@@ -63,8 +67,7 @@ public class SemStatusBarManager {
             return null;
         }
         String[] st = stack.split("[.]");
-        for (int i = 0; i < st.length; i++) {
-        }
+        for (int i = 0; i < st.length; i++) {}
         int i2 = st.length;
         if (i2 <= 0) {
             return null;
@@ -77,7 +80,11 @@ public class SemStatusBarManager {
         try {
             IStatusBarService svc = getService();
             if (svc != null) {
-                svc.disableToType(what, this.mToken, this.mContext.getPackageName() + getTag(), getBarTypeFromContext());
+                svc.disableToType(
+                        what,
+                        this.mToken,
+                        this.mContext.getPackageName() + getTag(),
+                        getBarTypeFromContext());
             }
         } catch (RemoteException ex) {
             throw new RuntimeException(ex);
@@ -88,7 +95,11 @@ public class SemStatusBarManager {
         try {
             IStatusBarService svc = getService();
             if (svc != null) {
-                svc.disable2ToType(what, this.mToken, this.mContext.getPackageName() + getTag(), getBarTypeFromContext());
+                svc.disable2ToType(
+                        what,
+                        this.mToken,
+                        this.mContext.getPackageName() + getTag(),
+                        getBarTypeFromContext());
             }
         } catch (RemoteException ex) {
             throw new RuntimeException(ex);
@@ -174,11 +185,13 @@ public class SemStatusBarManager {
         }
     }
 
-    public void setNavigationBarShortcut(String requestClass, RemoteViews remoteViews, int position) {
+    public void setNavigationBarShortcut(
+            String requestClass, RemoteViews remoteViews, int position) {
         setNavigationBarShortcut(requestClass, remoteViews, position, 5);
     }
 
-    public void setNavigationBarShortcut(String requestClass, RemoteViews remoteViews, int position, int priority) {
+    public void setNavigationBarShortcut(
+            String requestClass, RemoteViews remoteViews, int position, int priority) {
         enforceStatusBarService();
         IStatusBarService svc = getService();
         if (svc != null) {

@@ -6,21 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class Rect implements Parcelable {
-    public static final Parcelable.Creator<Rect> CREATOR = new Parcelable.Creator<Rect>() { // from class: android.hardware.graphics.common.Rect.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Rect createFromParcel(Parcel _aidl_source) {
-            Rect _aidl_out = new Rect();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<Rect> CREATOR =
+            new Parcelable.Creator<Rect>() { // from class: android.hardware.graphics.common.Rect.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Rect createFromParcel(Parcel _aidl_source) {
+                    Rect _aidl_out = new Rect();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Rect[] newArray(int _aidl_size) {
-            return new Rect[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Rect[] newArray(int _aidl_size) {
+                    return new Rect[_aidl_size];
+                }
+            };
     public int left = 0;
     public int top = 0;
     public int right = 0;

@@ -3,6 +3,7 @@ package android.hardware;
 import android.annotation.SystemApi;
 import android.hardware.input.InputSensorInfo;
 import android.os.SystemProperties;
+
 import java.util.UUID;
 
 /* loaded from: classes.dex */
@@ -86,36 +87,49 @@ public final class Sensor {
     public static final int SENSOR_TYPE_BLOODGLUCOSE = 65567;
     public static final int SENSOR_TYPE_DEVICE_PRIVATE_BASE = 65536;
     public static final String STRING_TYPE_ACCELEROMETER = "android.sensor.accelerometer";
-    public static final String STRING_TYPE_ACCELEROMETER_LIMITED_AXES = "android.sensor.accelerometer_limited_axes";
-    public static final String STRING_TYPE_ACCELEROMETER_LIMITED_AXES_UNCALIBRATED = "android.sensor.accelerometer_limited_axes_uncalibrated";
-    public static final String STRING_TYPE_ACCELEROMETER_UNCALIBRATED = "android.sensor.accelerometer_uncalibrated";
-    public static final String STRING_TYPE_AMBIENT_TEMPERATURE = "android.sensor.ambient_temperature";
+    public static final String STRING_TYPE_ACCELEROMETER_LIMITED_AXES =
+            "android.sensor.accelerometer_limited_axes";
+    public static final String STRING_TYPE_ACCELEROMETER_LIMITED_AXES_UNCALIBRATED =
+            "android.sensor.accelerometer_limited_axes_uncalibrated";
+    public static final String STRING_TYPE_ACCELEROMETER_UNCALIBRATED =
+            "android.sensor.accelerometer_uncalibrated";
+    public static final String STRING_TYPE_AMBIENT_TEMPERATURE =
+            "android.sensor.ambient_temperature";
     public static final String STRING_TYPE_DEVICE_ORIENTATION = "android.sensor.device_orientation";
 
     @SystemApi
-    public static final String STRING_TYPE_DYNAMIC_SENSOR_META = "android.sensor.dynamic_sensor_meta";
-    public static final String STRING_TYPE_GAME_ROTATION_VECTOR = "android.sensor.game_rotation_vector";
-    public static final String STRING_TYPE_GEOMAGNETIC_ROTATION_VECTOR = "android.sensor.geomagnetic_rotation_vector";
+    public static final String STRING_TYPE_DYNAMIC_SENSOR_META =
+            "android.sensor.dynamic_sensor_meta";
+
+    public static final String STRING_TYPE_GAME_ROTATION_VECTOR =
+            "android.sensor.game_rotation_vector";
+    public static final String STRING_TYPE_GEOMAGNETIC_ROTATION_VECTOR =
+            "android.sensor.geomagnetic_rotation_vector";
     public static final String STRING_TYPE_GLANCE_GESTURE = "android.sensor.glance_gesture";
     public static final String STRING_TYPE_GRAVITY = "android.sensor.gravity";
     public static final String STRING_TYPE_GYROSCOPE = "android.sensor.gyroscope";
-    public static final String STRING_TYPE_GYROSCOPE_LIMITED_AXES = "android.sensor.gyroscope_limited_axes";
-    public static final String STRING_TYPE_GYROSCOPE_LIMITED_AXES_UNCALIBRATED = "android.sensor.gyroscope_limited_axes_uncalibrated";
-    public static final String STRING_TYPE_GYROSCOPE_UNCALIBRATED = "android.sensor.gyroscope_uncalibrated";
+    public static final String STRING_TYPE_GYROSCOPE_LIMITED_AXES =
+            "android.sensor.gyroscope_limited_axes";
+    public static final String STRING_TYPE_GYROSCOPE_LIMITED_AXES_UNCALIBRATED =
+            "android.sensor.gyroscope_limited_axes_uncalibrated";
+    public static final String STRING_TYPE_GYROSCOPE_UNCALIBRATED =
+            "android.sensor.gyroscope_uncalibrated";
     public static final String STRING_TYPE_HEADING = "android.sensor.heading";
     public static final String STRING_TYPE_HEAD_TRACKER = "android.sensor.head_tracker";
     public static final String STRING_TYPE_HEART_BEAT = "android.sensor.heart_beat";
     public static final String STRING_TYPE_HEART_RATE = "android.sensor.heart_rate";
     public static final String STRING_TYPE_HINGE_ANGLE = "android.sensor.hinge_angle";
     public static final String STRING_TYPE_LIGHT = "android.sensor.light";
-    public static final String STRING_TYPE_LINEAR_ACCELERATION = "android.sensor.linear_acceleration";
-    public static final String STRING_TYPE_LOW_LATENCY_OFFBODY_DETECT = "android.sensor.low_latency_offbody_detect";
+    public static final String STRING_TYPE_LINEAR_ACCELERATION =
+            "android.sensor.linear_acceleration";
+    public static final String STRING_TYPE_LOW_LATENCY_OFFBODY_DETECT =
+            "android.sensor.low_latency_offbody_detect";
     public static final String STRING_TYPE_MAGNETIC_FIELD = "android.sensor.magnetic_field";
-    public static final String STRING_TYPE_MAGNETIC_FIELD_UNCALIBRATED = "android.sensor.magnetic_field_uncalibrated";
+    public static final String STRING_TYPE_MAGNETIC_FIELD_UNCALIBRATED =
+            "android.sensor.magnetic_field_uncalibrated";
     public static final String STRING_TYPE_MOTION_DETECT = "android.sensor.motion_detect";
 
-    @Deprecated
-    public static final String STRING_TYPE_ORIENTATION = "android.sensor.orientation";
+    @Deprecated public static final String STRING_TYPE_ORIENTATION = "android.sensor.orientation";
     public static final String STRING_TYPE_PICK_UP_GESTURE = "android.sensor.pick_up_gesture";
     public static final String STRING_TYPE_POSE_6DOF = "android.sensor.pose_6dof";
     public static final String STRING_TYPE_PRESSURE = "android.sensor.pressure";
@@ -127,12 +141,12 @@ public final class Sensor {
     public static final String STRING_TYPE_STEP_COUNTER = "android.sensor.step_counter";
     public static final String STRING_TYPE_STEP_DETECTOR = "android.sensor.step_detector";
 
-    @Deprecated
-    public static final String STRING_TYPE_TEMPERATURE = "android.sensor.temperature";
+    @Deprecated public static final String STRING_TYPE_TEMPERATURE = "android.sensor.temperature";
     public static final String STRING_TYPE_WAKE_GESTURE = "android.sensor.wake_gesture";
 
     @SystemApi
     public static final String STRING_TYPE_WRIST_TILT_GESTURE = "android.sensor.wrist_tilt_gesture";
+
     public static final int TYPE_ACCELEROMETER = 1;
     public static final int TYPE_ACCELEROMETER_LIMITED_AXES = 38;
     public static final int TYPE_ACCELEROMETER_LIMITED_AXES_UNCALIBRATED = 40;
@@ -150,8 +164,7 @@ public final class Sensor {
     public static final int TYPE_DEVICE_ORIENTATION = 27;
     public static final int TYPE_DEVICE_PRIVATE_BASE = 65536;
 
-    @SystemApi
-    public static final int TYPE_DYNAMIC_SENSOR_META = 32;
+    @SystemApi public static final int TYPE_DYNAMIC_SENSOR_META = 32;
     public static final int TYPE_ELECTROCARDIOGRAM = 65570;
     public static final int TYPE_GAME_ROTATION_VECTOR = 15;
     public static final int TYPE_GEOMAGNETIC_ROTATION_VECTOR = 20;
@@ -180,8 +193,7 @@ public final class Sensor {
     public static final int TYPE_MOTION_DETECT = 30;
     public static final int TYPE_MOTOR_TEST = 65581;
 
-    @Deprecated
-    public static final int TYPE_ORIENTATION = 3;
+    @Deprecated public static final int TYPE_ORIENTATION = 3;
     public static final int TYPE_PEDOMETER_LOGGING = 65569;
     public static final int TYPE_PEDOMETER_NORMAL = 65568;
     public static final int TYPE_PICK_UP_GESTURE = 25;
@@ -205,16 +217,14 @@ public final class Sensor {
     public static final int TYPE_STEP_DETECTOR = 18;
     public static final int TYPE_TABLE_ROTATION = 65564;
 
-    @Deprecated
-    public static final int TYPE_TEMPERATURE = 7;
+    @Deprecated public static final int TYPE_TEMPERATURE = 7;
     public static final int TYPE_THERMISTOR = 65588;
     public static final int TYPE_TILT_DETECTOR = 22;
     public static final int TYPE_ULTRAVIOLET = 65557;
     public static final int TYPE_UV_RAY = 65565;
     public static final int TYPE_WAKE_GESTURE = 23;
 
-    @SystemApi
-    public static final int TYPE_WRIST_TILT_GESTURE = 26;
+    @SystemApi public static final int TYPE_WRIST_TILT_GESTURE = 26;
     private int mFifoMaxEventCount;
     private int mFifoReservedEventCount;
     private int mFlags;
@@ -232,8 +242,14 @@ public final class Sensor {
     private UUID mUuid;
     private String mVendor;
     private int mVersion;
-    private static final int[] sSensorReportingModes = {0, 3, 3, 3, 3, 1, 1, 1, 1, 3, 3, 5, 1, 1, 6, 4, 6, 1, 1, 1, 5, 1, 1, 1, 1, 1, 1, 1, 16, 1, 1, 1, 2, 16, 1, 6, 1, 6, 6, 6, 9, 9, 2};
-    private static final int[] sSamsungSensorReportingModes = {3, 2, 3, 16, 3, 5, 3, 1, 3, 5, 5, 2, 13, 16, 3, 3, 3, 3, 16, 16, 16, 16, 3, 16, 16, 16, 16, 16, 16, 16, 10, 16, 16, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    private static final int[] sSensorReportingModes = {
+        0, 3, 3, 3, 3, 1, 1, 1, 1, 3, 3, 5, 1, 1, 6, 4, 6, 1, 1, 1, 5, 1, 1, 1, 1, 1, 1, 1, 16, 1,
+        1, 1, 2, 16, 1, 6, 1, 6, 6, 6, 9, 9, 2
+    };
+    private static final int[] sSamsungSensorReportingModes = {
+        3, 2, 3, 16, 3, 5, 3, 1, 3, 5, 5, 2, 13, 16, 3, 3, 3, 3, 16, 16, 16, 16, 3, 16, 16, 16, 16,
+        16, 16, 16, 10, 16, 16, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+    };
     private static final int[] sSamsungDualSensorReportingModes = {1, 3, 6, 3, 6};
 
     public int getReportingMode() {
@@ -283,8 +299,7 @@ public final class Sensor {
         return 16;
     }
 
-    Sensor() {
-    }
+    Sensor() {}
 
     public Sensor(InputSensorInfo sensorInfo) {
         this.mName = sensorInfo.getName();
@@ -397,12 +412,30 @@ public final class Sensor {
     }
 
     public String toString() {
-        return "{Sensor name=\"" + this.mName + "\", vendor=\"" + this.mVendor + "\", version=" + this.mVersion + ", type=" + this.mType + ", maxRange=" + this.mMaxRange + ", resolution=" + this.mResolution + ", power=" + this.mPower + ", minDelay=" + this.mMinDelay + "}";
+        return "{Sensor name=\""
+                + this.mName
+                + "\", vendor=\""
+                + this.mVendor
+                + "\", version="
+                + this.mVersion
+                + ", type="
+                + this.mType
+                + ", maxRange="
+                + this.mMaxRange
+                + ", resolution="
+                + this.mResolution
+                + ", power="
+                + this.mPower
+                + ", minDelay="
+                + this.mMinDelay
+                + "}";
     }
 
     public boolean semIsOnFoldingSide() {
         String model;
-        return (this.mType == 8 || this.mType == 5 || this.mType == 65601) && (model = SystemProperties.get("ro.product.vendor.device")) != null && (model.contains("bloom") || model.contains("b2q"));
+        return (this.mType == 8 || this.mType == 5 || this.mType == 65601)
+                && (model = SystemProperties.get("ro.product.vendor.device")) != null
+                && (model.contains("bloom") || model.contains("b2q"));
     }
 
     private boolean setType(int value) {

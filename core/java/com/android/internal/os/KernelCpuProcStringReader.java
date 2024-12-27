@@ -2,6 +2,7 @@ package com.android.internal.os;
 
 import android.os.StrictMode;
 import android.util.Slog;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -29,13 +30,17 @@ public class KernelCpuProcStringReader {
     private final ReentrantReadWriteLock.WriteLock mWriteLock;
     private static final String TAG = KernelCpuProcStringReader.class.getSimpleName();
     private static final String PROC_UID_FREQ_TIME = "/proc/uid_time_in_state";
-    private static final KernelCpuProcStringReader FREQ_TIME_READER = new KernelCpuProcStringReader(PROC_UID_FREQ_TIME);
+    private static final KernelCpuProcStringReader FREQ_TIME_READER =
+            new KernelCpuProcStringReader(PROC_UID_FREQ_TIME);
     private static final String PROC_UID_ACTIVE_TIME = "/proc/uid_concurrent_active_time";
-    private static final KernelCpuProcStringReader ACTIVE_TIME_READER = new KernelCpuProcStringReader(PROC_UID_ACTIVE_TIME);
+    private static final KernelCpuProcStringReader ACTIVE_TIME_READER =
+            new KernelCpuProcStringReader(PROC_UID_ACTIVE_TIME);
     private static final String PROC_UID_CLUSTER_TIME = "/proc/uid_concurrent_policy_time";
-    private static final KernelCpuProcStringReader CLUSTER_TIME_READER = new KernelCpuProcStringReader(PROC_UID_CLUSTER_TIME);
+    private static final KernelCpuProcStringReader CLUSTER_TIME_READER =
+            new KernelCpuProcStringReader(PROC_UID_CLUSTER_TIME);
     private static final String PROC_UID_USER_SYS_TIME = "/proc/uid_cputime/show_uid_stat";
-    private static final KernelCpuProcStringReader USER_SYS_TIME_READER = new KernelCpuProcStringReader(PROC_UID_USER_SYS_TIME);
+    private static final KernelCpuProcStringReader USER_SYS_TIME_READER =
+            new KernelCpuProcStringReader(PROC_UID_USER_SYS_TIME);
 
     static KernelCpuProcStringReader getFreqTimeReaderInstance() {
         return FREQ_TIME_READER;
@@ -123,7 +128,10 @@ public class KernelCpuProcStringReader {
                                     }
                                     return null;
                                 }
-                                this.mBuf = Arrays.copyOf(this.mBuf, Math.min(this.mBuf.length << 1, 1048576));
+                                this.mBuf =
+                                        Arrays.copyOf(
+                                                this.mBuf,
+                                                Math.min(this.mBuf.length << 1, 1048576));
                             }
                         }
                     } catch (Throwable th) {

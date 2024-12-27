@@ -18,8 +18,7 @@ public final class RavenwoodEnvironment {
         return sInstance;
     }
 
-    public static void ensureRavenwoodInitialized() {
-    }
+    public static void ensureRavenwoodInitialized() {}
 
     public boolean isRunningOnRavenwood() {
         return false;
@@ -37,8 +36,7 @@ public final class RavenwoodEnvironment {
     }
 
     public static class Workaround {
-        Workaround() {
-        }
+        Workaround() {}
 
         public boolean isTargetSdkAtLeastQ() {
             return true;

@@ -31,8 +31,7 @@ public interface IWebViewUpdateService extends IInterface {
 
     public static class Default implements IWebViewUpdateService {
         @Override // android.webkit.IWebViewUpdateService
-        public void notifyRelroCreationCompleted() throws RemoteException {
-        }
+        public void notifyRelroCreationCompleted() throws RemoteException {}
 
         @Override // android.webkit.IWebViewUpdateService
         public WebViewProviderResponse waitForAndGetProvider() throws RemoteException {
@@ -70,8 +69,7 @@ public interface IWebViewUpdateService extends IInterface {
         }
 
         @Override // android.webkit.IWebViewUpdateService
-        public void enableMultiProcess(boolean enable) throws RemoteException {
-        }
+        public void enableMultiProcess(boolean enable) throws RemoteException {}
 
         @Override // android.webkit.IWebViewUpdateService
         public WebViewProviderInfo getDefaultWebViewPackage() throws RemoteException {
@@ -84,7 +82,7 @@ public interface IWebViewUpdateService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWebViewUpdateService {
+    public abstract static class Stub extends Binder implements IWebViewUpdateService {
         public static final String DESCRIPTOR = "android.webkit.IWebViewUpdateService";
         static final int TRANSACTION_changeProviderAndSetting = 3;
         static final int TRANSACTION_enableMultiProcess = 9;
@@ -150,7 +148,8 @@ public interface IWebViewUpdateService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -254,7 +253,9 @@ public interface IWebViewUpdateService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    WebViewProviderResponse _result = (WebViewProviderResponse) _reply.readTypedObject(WebViewProviderResponse.CREATOR);
+                    WebViewProviderResponse _result =
+                            (WebViewProviderResponse)
+                                    _reply.readTypedObject(WebViewProviderResponse.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -287,7 +288,9 @@ public interface IWebViewUpdateService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    WebViewProviderInfo[] _result = (WebViewProviderInfo[]) _reply.createTypedArray(WebViewProviderInfo.CREATOR);
+                    WebViewProviderInfo[] _result =
+                            (WebViewProviderInfo[])
+                                    _reply.createTypedArray(WebViewProviderInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -303,7 +306,9 @@ public interface IWebViewUpdateService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(5, _data, _reply, 0);
                     _reply.readException();
-                    WebViewProviderInfo[] _result = (WebViewProviderInfo[]) _reply.createTypedArray(WebViewProviderInfo.CREATOR);
+                    WebViewProviderInfo[] _result =
+                            (WebViewProviderInfo[])
+                                    _reply.createTypedArray(WebViewProviderInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -382,7 +387,9 @@ public interface IWebViewUpdateService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(10, _data, _reply, 0);
                     _reply.readException();
-                    WebViewProviderInfo _result = (WebViewProviderInfo) _reply.readTypedObject(WebViewProviderInfo.CREATOR);
+                    WebViewProviderInfo _result =
+                            (WebViewProviderInfo)
+                                    _reply.readTypedObject(WebViewProviderInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

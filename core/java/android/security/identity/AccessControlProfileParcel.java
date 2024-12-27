@@ -6,21 +6,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class AccessControlProfileParcel implements Parcelable {
-    public static final Parcelable.Creator<AccessControlProfileParcel> CREATOR = new Parcelable.Creator<AccessControlProfileParcel>() { // from class: android.security.identity.AccessControlProfileParcel.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AccessControlProfileParcel createFromParcel(Parcel _aidl_source) {
-            AccessControlProfileParcel _aidl_out = new AccessControlProfileParcel();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AccessControlProfileParcel> CREATOR =
+            new Parcelable.Creator<
+                    AccessControlProfileParcel>() { // from class:
+                                                    // android.security.identity.AccessControlProfileParcel.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AccessControlProfileParcel createFromParcel(Parcel _aidl_source) {
+                    AccessControlProfileParcel _aidl_out = new AccessControlProfileParcel();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AccessControlProfileParcel[] newArray(int _aidl_size) {
-            return new AccessControlProfileParcel[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AccessControlProfileParcel[] newArray(int _aidl_size) {
+                    return new AccessControlProfileParcel[_aidl_size];
+                }
+            };
     public byte[] readerCertificate;
     public int id = 0;
     public boolean userAuthenticationRequired = false;

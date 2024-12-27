@@ -3,10 +3,13 @@ package com.android.server.permission.access.permission;
 import android.content.pm.PermissionInfo;
 import android.hardware.biometrics.face.V1_0.OptionalBool$$ExternalSyntheticOutline0;
 import android.os.UserHandle;
+
 import com.android.server.alarm.AlarmManagerService$DeliveryTracker$$ExternalSyntheticOutline0;
 import com.android.server.permission.jarjar.kotlin.jvm.internal.Intrinsics;
-import java.util.Arrays;
+
 import libcore.util.EmptyArray;
+
+import java.util.Arrays;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -22,7 +25,8 @@ public final class Permission {
         this(permissionInfo, z, i, i2, EmptyArray.INT, false);
     }
 
-    public Permission(PermissionInfo permissionInfo, boolean z, int i, int i2, int[] iArr, boolean z2) {
+    public Permission(
+            PermissionInfo permissionInfo, boolean z, int i, int i2, int[] iArr, boolean z2) {
         this.permissionInfo = permissionInfo;
         this.isReconciled = z;
         this.type = i;
@@ -31,8 +35,10 @@ public final class Permission {
         this.areGidsPerUser = z2;
     }
 
-    public static Permission copy$default(Permission permission, PermissionInfo permissionInfo, boolean z, int i) {
-        return new Permission(permissionInfo, z, permission.type, i, permission.gids, permission.areGidsPerUser);
+    public static Permission copy$default(
+            Permission permission, PermissionInfo permissionInfo, boolean z, int i) {
+        return new Permission(
+                permissionInfo, z, permission.type, i, permission.gids, permission.areGidsPerUser);
     }
 
     public final boolean equals(Object obj) {
@@ -43,7 +49,12 @@ public final class Permission {
             return false;
         }
         Permission permission = (Permission) obj;
-        return Intrinsics.areEqual(this.permissionInfo, permission.permissionInfo) && this.isReconciled == permission.isReconciled && this.type == permission.type && this.appId == permission.appId && Intrinsics.areEqual(this.gids, permission.gids) && this.areGidsPerUser == permission.areGidsPerUser;
+        return Intrinsics.areEqual(this.permissionInfo, permission.permissionInfo)
+                && this.isReconciled == permission.isReconciled
+                && this.type == permission.type
+                && this.appId == permission.appId
+                && Intrinsics.areEqual(this.gids, permission.gids)
+                && this.areGidsPerUser == permission.areGidsPerUser;
     }
 
     public final int[] getGidsForUser(int i) {
@@ -63,7 +74,21 @@ public final class Permission {
     }
 
     public final int hashCode() {
-        return Boolean.hashCode(this.areGidsPerUser) + ((Arrays.hashCode(this.gids) + ((Integer.hashCode(this.appId) + ((Integer.hashCode(this.type) + ((Boolean.hashCode(this.isReconciled) + (this.permissionInfo.hashCode() * 31)) * 31)) * 31)) * 31)) * 31);
+        return Boolean.hashCode(this.areGidsPerUser)
+                + ((Arrays.hashCode(this.gids)
+                                + ((Integer.hashCode(this.appId)
+                                                + ((Integer.hashCode(this.type)
+                                                                + ((Boolean.hashCode(
+                                                                                        this
+                                                                                                .isReconciled)
+                                                                                + (this
+                                                                                                .permissionInfo
+                                                                                                .hashCode()
+                                                                                        * 31))
+                                                                        * 31))
+                                                        * 31))
+                                        * 31))
+                        * 31);
     }
 
     public final String toString() {
@@ -76,7 +101,8 @@ public final class Permission {
         sb.append(", type=");
         sb.append(this.type);
         sb.append(", appId=");
-        AlarmManagerService$DeliveryTracker$$ExternalSyntheticOutline0.m(this.appId, ", gids=", arrays, ", areGidsPerUser=", sb);
+        AlarmManagerService$DeliveryTracker$$ExternalSyntheticOutline0.m(
+                this.appId, ", gids=", arrays, ", areGidsPerUser=", sb);
         return OptionalBool$$ExternalSyntheticOutline0.m(")", sb, this.areGidsPerUser);
     }
 }

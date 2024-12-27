@@ -4,26 +4,31 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.format.Time;
+
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.TimeZone;
-import org.json.JSONObject;
 
 /* loaded from: classes6.dex */
 public class KnoxAnalyticsData implements Parcelable {
-    public static final Parcelable.Creator<KnoxAnalyticsData> CREATOR = new Parcelable.Creator<KnoxAnalyticsData>() { // from class: com.samsung.android.knox.knoxanalyticsproxy.KnoxAnalyticsData.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KnoxAnalyticsData createFromParcel(Parcel in) {
-            return new KnoxAnalyticsData(in);
-        }
+    public static final Parcelable.Creator<KnoxAnalyticsData> CREATOR =
+            new Parcelable.Creator<
+                    KnoxAnalyticsData>() { // from class:
+                                           // com.samsung.android.knox.knoxanalyticsproxy.KnoxAnalyticsData.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KnoxAnalyticsData createFromParcel(Parcel in) {
+                    return new KnoxAnalyticsData(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KnoxAnalyticsData[] newArray(int size) {
-            return new KnoxAnalyticsData[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KnoxAnalyticsData[] newArray(int size) {
+                    return new KnoxAnalyticsData[size];
+                }
+            };
     private static final String PACKAGE_NAME_FLAG_PROPERTY_NAME = "ReservedKey_Pid_PackageNameFlag";
     private static final String USER_TYPE_FLAG_PROPERTY_NAME = "ReservedKey_UserId_UserTypeFlag";
     private String event;
@@ -42,7 +47,9 @@ public class KnoxAnalyticsData implements Parcelable {
     }
 
     private long generateTimestamp() {
-        return (Calendar.getInstance(TimeZone.getTimeZone(Time.TIMEZONE_UTC)).getTimeInMillis() / 3600000) * 3600000;
+        return (Calendar.getInstance(TimeZone.getTimeZone(Time.TIMEZONE_UTC)).getTimeInMillis()
+                        / 3600000)
+                * 3600000;
     }
 
     public void setProperty(String key, String value) {
@@ -134,6 +141,23 @@ public class KnoxAnalyticsData implements Parcelable {
     }
 
     public String toString() {
-        return "feature = " + this.feature + System.lineSeparator() + "schemaVersion = " + this.schemaVersion + System.lineSeparator() + "event = " + this.event + System.lineSeparator() + "payload = " + (this.payload != null ? this.payload.toString() : "null") + System.lineSeparator() + "timestamp = " + this.timestamp + System.lineSeparator() + "eventId = " + this.eventId + System.lineSeparator();
+        return "feature = "
+                + this.feature
+                + System.lineSeparator()
+                + "schemaVersion = "
+                + this.schemaVersion
+                + System.lineSeparator()
+                + "event = "
+                + this.event
+                + System.lineSeparator()
+                + "payload = "
+                + (this.payload != null ? this.payload.toString() : "null")
+                + System.lineSeparator()
+                + "timestamp = "
+                + this.timestamp
+                + System.lineSeparator()
+                + "eventId = "
+                + this.eventId
+                + System.lineSeparator();
     }
 }

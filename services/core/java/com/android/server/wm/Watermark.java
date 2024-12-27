@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.util.DisplayMetrics;
 import android.view.Surface;
 import android.view.SurfaceControl;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -26,13 +27,30 @@ public final class Watermark {
     public final Paint mTextPaint;
     public final int mTextWidth;
 
-    public Watermark(DisplayContent displayContent, DisplayMetrics displayMetrics, String[] strArr, SurfaceControl.Transaction transaction) {
+    public Watermark(
+            DisplayContent displayContent,
+            DisplayMetrics displayMetrics,
+            String[] strArr,
+            SurfaceControl.Transaction transaction) {
         StringBuilder sb = new StringBuilder(32);
         int length = strArr[0].length() & (-2);
         for (int i = 0; i < length; i += 2) {
             char charAt = strArr[0].charAt(i);
             char charAt2 = strArr[0].charAt(i + 1);
-            sb.append((char) (255 - ((((charAt < 'a' || charAt > 'f') ? (charAt < 'A' || charAt > 'F') ? charAt - '0' : charAt - '7' : charAt - 'W') * 16) + ((charAt2 < 'a' || charAt2 > 'f') ? (charAt2 < 'A' || charAt2 > 'F') ? charAt2 - '0' : charAt2 - '7' : charAt2 - 'W'))));
+            sb.append(
+                    (char)
+                            (255
+                                    - ((((charAt < 'a' || charAt > 'f')
+                                                            ? (charAt < 'A' || charAt > 'F')
+                                                                    ? charAt - '0'
+                                                                    : charAt - '7'
+                                                            : charAt - 'W')
+                                                    * 16)
+                                            + ((charAt2 < 'a' || charAt2 > 'f')
+                                                    ? (charAt2 < 'A' || charAt2 > 'F')
+                                                            ? charAt2 - '0'
+                                                            : charAt2 - '7'
+                                                    : charAt2 - 'W'))));
         }
         String sb2 = sb.toString();
         this.mText = sb2;
@@ -46,10 +64,13 @@ public final class Watermark {
         this.mTextWidth = measureText;
         int i2 = fontMetricsInt.descent - fontMetricsInt.ascent;
         this.mTextHeight = i2;
-        this.mDeltaX = WindowManagerService.getPropertyInt(strArr, 2, 0, measureText * 2, displayMetrics);
+        this.mDeltaX =
+                WindowManagerService.getPropertyInt(strArr, 2, 0, measureText * 2, displayMetrics);
         this.mDeltaY = WindowManagerService.getPropertyInt(strArr, 3, 0, i2 * 3, displayMetrics);
-        int propertyInt2 = WindowManagerService.getPropertyInt(strArr, 4, 0, -1342177280, displayMetrics);
-        int propertyInt3 = WindowManagerService.getPropertyInt(strArr, 5, 0, 1627389951, displayMetrics);
+        int propertyInt2 =
+                WindowManagerService.getPropertyInt(strArr, 4, 0, -1342177280, displayMetrics);
+        int propertyInt3 =
+                WindowManagerService.getPropertyInt(strArr, 5, 0, 1627389951, displayMetrics);
         int propertyInt4 = WindowManagerService.getPropertyInt(strArr, 6, 0, 7, displayMetrics);
         int propertyInt5 = WindowManagerService.getPropertyInt(strArr, 8, 0, 0, displayMetrics);
         int propertyInt6 = WindowManagerService.getPropertyInt(strArr, 9, 0, 0, displayMetrics);
@@ -57,14 +78,29 @@ public final class Watermark {
         paint.setShadowLayer(propertyInt4, propertyInt5, propertyInt6, propertyInt2);
         SurfaceControl surfaceControl = null;
         try {
-            surfaceControl = displayContent.makeOverlay().setName("WatermarkSurface").setBLASTLayer().setFormat(-3).setCallsite("WatermarkSurface").build();
-            transaction.setLayer(surfaceControl, 1000000).setPosition(surfaceControl, FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE).show(surfaceControl);
-            InputMonitor.setTrustedOverlayInputInfo(surfaceControl, transaction, displayContent.mDisplayId, "WatermarkSurface");
+            surfaceControl =
+                    displayContent
+                            .makeOverlay()
+                            .setName("WatermarkSurface")
+                            .setBLASTLayer()
+                            .setFormat(-3)
+                            .setCallsite("WatermarkSurface")
+                            .build();
+            transaction
+                    .setLayer(surfaceControl, 1000000)
+                    .setPosition(
+                            surfaceControl,
+                            FullScreenMagnificationGestureHandler.MAX_SCALE,
+                            FullScreenMagnificationGestureHandler.MAX_SCALE)
+                    .show(surfaceControl);
+            InputMonitor.setTrustedOverlayInputInfo(
+                    surfaceControl, transaction, displayContent.mDisplayId, "WatermarkSurface");
         } catch (Surface.OutOfResourcesException unused) {
         }
         SurfaceControl surfaceControl2 = surfaceControl;
         this.mSurfaceControl = surfaceControl2;
-        BLASTBufferQueue bLASTBufferQueue = new BLASTBufferQueue("WatermarkSurface", surfaceControl2, 1, 1, 1);
+        BLASTBufferQueue bLASTBufferQueue =
+                new BLASTBufferQueue("WatermarkSurface", surfaceControl2, 1, 1, 1);
         this.mBlastBufferQueue = bLASTBufferQueue;
         this.mSurface = bLASTBufferQueue.createSurface();
     }

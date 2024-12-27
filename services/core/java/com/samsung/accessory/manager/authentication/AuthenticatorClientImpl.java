@@ -3,13 +3,16 @@ package com.samsung.accessory.manager.authentication;
 import android.content.Context;
 import android.os.Debug;
 import android.util.Slog;
+
 import com.android.server.HermesService$3$$ExternalSyntheticOutline0;
 import com.android.server.am.mars.MARsFreezeStateRecord$$ExternalSyntheticOutline0;
+
 import com.att.iqi.lib.metrics.hw.HwConstants;
 import com.samsung.accessory.manager.authentication.msg.Message;
 import com.samsung.accessory.manager.authentication.msg.MsgBuilder;
 import com.samsung.accessory.manager.authentication.msg.MsgHelper;
 import com.samsung.accessory.manager.authentication.msg.MsgParser;
+
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -31,10 +34,10 @@ public final class AuthenticatorClientImpl extends Authenticator {
 
     public AuthenticatorClientImpl(Context context, int i) {
         this.mContext = context;
-        this.SW_SUCCESS = new byte[]{-112, 0};
-        this.SW_SUCCESS_UBIVELOX = new byte[]{-112, HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED};
-        this.SW_FAIL = new byte[]{105, -127};
-        this.SW_SECURITY_ATTACK = new byte[]{105, -126};
+        this.SW_SUCCESS = new byte[] {-112, 0};
+        this.SW_SUCCESS_UBIVELOX = new byte[] {-112, HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED};
+        this.SW_FAIL = new byte[] {105, -127};
+        this.SW_SECURITY_ATTACK = new byte[] {105, -126};
         this.mMsgBuilder = null;
         this.mMsgParser = null;
         this.statusWord = new byte[2];
@@ -56,13 +59,17 @@ public final class AuthenticatorClientImpl extends Authenticator {
         StringBuilder sb = new StringBuilder();
         int i = 0;
         while (i < bArr.length) {
-            i = MARsFreezeStateRecord$$ExternalSyntheticOutline0.m("%02x", new Object[]{Byte.valueOf(bArr[i])}, sb, i, 1);
+            i =
+                    MARsFreezeStateRecord$$ExternalSyntheticOutline0.m(
+                            "%02x", new Object[] {Byte.valueOf(bArr[i])}, sb, i, 1);
         }
         return sb.toString();
     }
 
     public final boolean checkError(int i, byte[] bArr, AuthenticationResult authenticationResult) {
-        Slog.e("SAccessoryManager_AuthenticatorClientImpl", "checkError: " + byteArrayToString(bArr));
+        Slog.e(
+                "SAccessoryManager_AuthenticatorClientImpl",
+                "checkError: " + byteArrayToString(bArr));
         if (bArr == null || bArr.length == 0) {
             authenticationResult.setReason(12);
             return false;
@@ -74,7 +81,9 @@ public final class AuthenticatorClientImpl extends Authenticator {
             int length = bArr.length - 3;
             byte[] bArr2 = this.statusWord;
             System.arraycopy(bArr, length, bArr2, 0, 2);
-            Slog.i("SAccessoryManager_AuthenticatorClientImpl", "Status Word: " + byteArrayToString(bArr2));
+            Slog.i(
+                    "SAccessoryManager_AuthenticatorClientImpl",
+                    "Status Word: " + byteArrayToString(bArr2));
             boolean equals = Arrays.equals(bArr2, this.SW_SUCCESS);
             byte[] bArr3 = this.SW_SUCCESS_UBIVELOX;
             if (equals || Arrays.equals(bArr2, bArr3)) {
@@ -160,10 +169,18 @@ public final class AuthenticatorClientImpl extends Authenticator {
         switch (i) {
             case 2:
                 this.mMsgBuilder.getClass();
-                byte[] bArr = (byte[]) new Message((byte) 0, (byte) 22, (byte) 0, (byte) 82).getApdu().clone();
+                byte[] bArr =
+                        (byte[])
+                                new Message((byte) 0, (byte) 22, (byte) 0, (byte) 82)
+                                        .getApdu()
+                                        .clone();
                 try {
                     Slog.i("SAccessoryManager_AuthenticatorClientImpl", "Send Command " + i);
-                    checkError2 = checkError(i, sendSynchronously(bArr, authenticationResult), authenticationResult);
+                    checkError2 =
+                            checkError(
+                                    i,
+                                    sendSynchronously(bArr, authenticationResult),
+                                    authenticationResult);
                     if (checkError2) {
                         String str = this.mMsgParser.publicKey;
                         if (str == null) {
@@ -171,7 +188,8 @@ public final class AuthenticatorClientImpl extends Authenticator {
                         }
                         authenticationResult.publicKey = str;
                         z = checkError2;
-                        HermesService$3$$ExternalSyntheticOutline0.m(i, "Receive Command ", "SAccessoryManager_AuthenticatorClientImpl");
+                        HermesService$3$$ExternalSyntheticOutline0.m(
+                                i, "Receive Command ", "SAccessoryManager_AuthenticatorClientImpl");
                         break;
                     }
                 } catch (IOException unused) {
@@ -190,11 +208,15 @@ public final class AuthenticatorClientImpl extends Authenticator {
                     msgParser.randNum = (byte[]) bArr2.clone();
                     byte[] dataVerification = this.mMsgBuilder.getDataVerification();
                     Slog.i("SAccessoryManager_AuthenticatorClientImpl", "Send Command " + i);
-                    checkError = checkError(i, sendSynchronously(dataVerification, authenticationResult), authenticationResult);
-                    if (!checkError) {
-                    }
+                    checkError =
+                            checkError(
+                                    i,
+                                    sendSynchronously(dataVerification, authenticationResult),
+                                    authenticationResult);
+                    if (!checkError) {}
                     z = checkError;
-                    HermesService$3$$ExternalSyntheticOutline0.m(i, "Receive Command ", "SAccessoryManager_AuthenticatorClientImpl");
+                    HermesService$3$$ExternalSyntheticOutline0.m(
+                            i, "Receive Command ", "SAccessoryManager_AuthenticatorClientImpl");
                     break;
                 } catch (IOException unused2) {
                     authenticationResult.setReason(14);
@@ -203,10 +225,17 @@ public final class AuthenticatorClientImpl extends Authenticator {
                 break;
             case 5:
                 this.mMsgBuilder.getClass();
-                byte[] bArr3 = (byte[]) new Message((byte) 84, (byte) 34, (byte) 31, (byte) 18).getApdu().clone();
+                byte[] bArr3 =
+                        (byte[])
+                                new Message((byte) 84, (byte) 34, (byte) 31, (byte) 18)
+                                        .getApdu()
+                                        .clone();
                 try {
                     Slog.i("SAccessoryManager_AuthenticatorClientImpl", "Send Command " + i);
-                    if (checkError(i, sendSynchronously(bArr3, authenticationResult), authenticationResult)) {
+                    if (checkError(
+                            i,
+                            sendSynchronously(bArr3, authenticationResult),
+                            authenticationResult)) {
                         byte[] bArr4 = this.mMsgParser.serialNumber;
                         if (bArr4 != null) {
                             byte[] bArr5 = new byte[bArr4.length];
@@ -223,7 +252,10 @@ public final class AuthenticatorClientImpl extends Authenticator {
                                     authenticationResult.isUrlExist = 3;
                                 }
                                 z = checkError2;
-                                HermesService$3$$ExternalSyntheticOutline0.m(i, "Receive Command ", "SAccessoryManager_AuthenticatorClientImpl");
+                                HermesService$3$$ExternalSyntheticOutline0.m(
+                                        i,
+                                        "Receive Command ",
+                                        "SAccessoryManager_AuthenticatorClientImpl");
                                 break;
                             }
                         }
@@ -236,16 +268,26 @@ public final class AuthenticatorClientImpl extends Authenticator {
             case 4:
                 checkError2 = true;
                 z = checkError2;
-                HermesService$3$$ExternalSyntheticOutline0.m(i, "Receive Command ", "SAccessoryManager_AuthenticatorClientImpl");
+                HermesService$3$$ExternalSyntheticOutline0.m(
+                        i, "Receive Command ", "SAccessoryManager_AuthenticatorClientImpl");
                 break;
             case 6:
                 this.mMsgBuilder.getClass();
-                byte[] bArr6 = (byte[]) new Message((byte) 0, HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED, (byte) 0, (byte) 8).getApdu().clone();
+                byte[] bArr6 =
+                        (byte[])
+                                new Message(
+                                                (byte) 0,
+                                                HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED,
+                                                (byte) 0,
+                                                (byte) 8)
+                                        .getApdu()
+                                        .clone();
                 try {
                     Slog.i("SAccessoryManager_AuthenticatorClientImpl", "Send Command " + i);
                     sendSynchronously(bArr6, authenticationResult);
                     z = true;
-                    HermesService$3$$ExternalSyntheticOutline0.m(i, "Receive Command ", "SAccessoryManager_AuthenticatorClientImpl");
+                    HermesService$3$$ExternalSyntheticOutline0.m(
+                            i, "Receive Command ", "SAccessoryManager_AuthenticatorClientImpl");
                     break;
                 } catch (IOException unused4) {
                     authenticationResult.setReason(14);
@@ -253,13 +295,20 @@ public final class AuthenticatorClientImpl extends Authenticator {
                 }
             case 7:
                 this.mMsgBuilder.getClass();
-                byte[] bArr7 = (byte[]) new Message((byte) 0, (byte) 66, (byte) 0, (byte) 0).getApdu().clone();
+                byte[] bArr7 =
+                        (byte[])
+                                new Message((byte) 0, (byte) 66, (byte) 0, (byte) 0)
+                                        .getApdu()
+                                        .clone();
                 try {
                     Slog.i("SAccessoryManager_AuthenticatorClientImpl", "Send Command " + i);
-                    if (!checkError(i, sendSynchronously(bArr7, authenticationResult), authenticationResult)) {
-                    }
+                    if (!checkError(
+                            i,
+                            sendSynchronously(bArr7, authenticationResult),
+                            authenticationResult)) {}
                     z = true;
-                    HermesService$3$$ExternalSyntheticOutline0.m(i, "Receive Command ", "SAccessoryManager_AuthenticatorClientImpl");
+                    HermesService$3$$ExternalSyntheticOutline0.m(
+                            i, "Receive Command ", "SAccessoryManager_AuthenticatorClientImpl");
                     break;
                 } catch (IOException unused5) {
                     authenticationResult.setReason(14);
@@ -268,14 +317,22 @@ public final class AuthenticatorClientImpl extends Authenticator {
                 break;
             case 8:
                 this.mMsgBuilder.getClass();
-                byte[] bArr8 = (byte[]) new Message((byte) 0, (byte) 22, (byte) 0, (byte) 82).getApdu().clone();
+                byte[] bArr8 =
+                        (byte[])
+                                new Message((byte) 0, (byte) 22, (byte) 0, (byte) 82)
+                                        .getApdu()
+                                        .clone();
                 try {
                     Slog.i("SAccessoryManager_AuthenticatorClientImpl", "Send Command " + i);
-                    checkError = checkError(i, sendSynchronously(bArr8, authenticationResult), authenticationResult);
-                    if (!checkError) {
-                    }
+                    checkError =
+                            checkError(
+                                    i,
+                                    sendSynchronously(bArr8, authenticationResult),
+                                    authenticationResult);
+                    if (!checkError) {}
                     z = checkError;
-                    HermesService$3$$ExternalSyntheticOutline0.m(i, "Receive Command ", "SAccessoryManager_AuthenticatorClientImpl");
+                    HermesService$3$$ExternalSyntheticOutline0.m(
+                            i, "Receive Command ", "SAccessoryManager_AuthenticatorClientImpl");
                     break;
                 } catch (IOException unused6) {
                     authenticationResult.setReason(14);
@@ -284,10 +341,22 @@ public final class AuthenticatorClientImpl extends Authenticator {
                 break;
             case 9:
                 this.mMsgBuilder.getClass();
-                byte[] bArr9 = (byte[]) new Message((byte) 84, (byte) 34, HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED, (byte) 0).getApdu().clone();
+                byte[] bArr9 =
+                        (byte[])
+                                new Message(
+                                                (byte) 84,
+                                                (byte) 34,
+                                                HwConstants.IQ_CONFIG_POS_NETWORK_ENABLED,
+                                                (byte) 0)
+                                        .getApdu()
+                                        .clone();
                 try {
                     Slog.i("SAccessoryManager_AuthenticatorClientImpl", "Send Command " + i);
-                    checkError2 = checkError(i, sendSynchronously(bArr9, authenticationResult), authenticationResult);
+                    checkError2 =
+                            checkError(
+                                    i,
+                                    sendSynchronously(bArr9, authenticationResult),
+                                    authenticationResult);
                     if (!checkError2) {
                         authenticationResult.setReason(94);
                         break;
@@ -300,7 +369,10 @@ public final class AuthenticatorClientImpl extends Authenticator {
                         } else {
                             authenticationResult.setManagerURI(bArr10);
                             z = checkError2;
-                            HermesService$3$$ExternalSyntheticOutline0.m(i, "Receive Command ", "SAccessoryManager_AuthenticatorClientImpl");
+                            HermesService$3$$ExternalSyntheticOutline0.m(
+                                    i,
+                                    "Receive Command ",
+                                    "SAccessoryManager_AuthenticatorClientImpl");
                             break;
                         }
                     }
@@ -310,23 +382,36 @@ public final class AuthenticatorClientImpl extends Authenticator {
                 }
             case 10:
                 this.mMsgBuilder.getClass();
-                byte[] bArr11 = (byte[]) new Message((byte) 84, (byte) 34, (byte) 17, (byte) 0).getApdu().clone();
+                byte[] bArr11 =
+                        (byte[])
+                                new Message((byte) 84, (byte) 34, (byte) 17, (byte) 0)
+                                        .getApdu()
+                                        .clone();
                 try {
                     Slog.i("SAccessoryManager_AuthenticatorClientImpl", "Send Command " + i);
-                    checkError2 = checkError(i, sendSynchronously(bArr11, authenticationResult), authenticationResult);
+                    checkError2 =
+                            checkError(
+                                    i,
+                                    sendSynchronously(bArr11, authenticationResult),
+                                    authenticationResult);
                     if (!checkError2) {
                         authenticationResult.setReason(95);
                         break;
                     } else {
                         byte[] bArr12 = this.mMsgParser.extraData;
                         if (bArr12 == null) {
-                            Slog.e("SAccessoryManager_AuthenticatorClientImpl", "ExtraData is NULL");
+                            Slog.e(
+                                    "SAccessoryManager_AuthenticatorClientImpl",
+                                    "ExtraData is NULL");
                             authenticationResult.setReason(95);
                             break;
                         } else {
                             authenticationResult.setExtraData(bArr12);
                             z = checkError2;
-                            HermesService$3$$ExternalSyntheticOutline0.m(i, "Receive Command ", "SAccessoryManager_AuthenticatorClientImpl");
+                            HermesService$3$$ExternalSyntheticOutline0.m(
+                                    i,
+                                    "Receive Command ",
+                                    "SAccessoryManager_AuthenticatorClientImpl");
                             break;
                         }
                     }
@@ -336,10 +421,18 @@ public final class AuthenticatorClientImpl extends Authenticator {
                 }
             case 11:
                 this.mMsgBuilder.getClass();
-                byte[] bArr13 = (byte[]) new Message((byte) 84, (byte) 36, (byte) 0, (byte) 0).getApdu().clone();
+                byte[] bArr13 =
+                        (byte[])
+                                new Message((byte) 84, (byte) 36, (byte) 0, (byte) 0)
+                                        .getApdu()
+                                        .clone();
                 try {
                     Slog.i("SAccessoryManager_AuthenticatorClientImpl", "Send Command " + i);
-                    checkError2 = checkError(i, sendSynchronously(bArr13, authenticationResult), authenticationResult);
+                    checkError2 =
+                            checkError(
+                                    i,
+                                    sendSynchronously(bArr13, authenticationResult),
+                                    authenticationResult);
                     if (!checkError2) {
                         authenticationResult.setReason(94);
                         break;
@@ -353,13 +446,18 @@ public final class AuthenticatorClientImpl extends Authenticator {
                             authenticationResult.setManagerURI(bArr14);
                             byte[] bArr15 = this.mMsgParser.extraData;
                             if (bArr15 == null) {
-                                Slog.e("SAccessoryManager_AuthenticatorClientImpl", "ExtraData is NULL");
+                                Slog.e(
+                                        "SAccessoryManager_AuthenticatorClientImpl",
+                                        "ExtraData is NULL");
                                 authenticationResult.setReason(95);
                                 break;
                             } else {
                                 authenticationResult.setExtraData(bArr15);
                                 z = checkError2;
-                                HermesService$3$$ExternalSyntheticOutline0.m(i, "Receive Command ", "SAccessoryManager_AuthenticatorClientImpl");
+                                HermesService$3$$ExternalSyntheticOutline0.m(
+                                        i,
+                                        "Receive Command ",
+                                        "SAccessoryManager_AuthenticatorClientImpl");
                                 break;
                             }
                         }
@@ -369,7 +467,8 @@ public final class AuthenticatorClientImpl extends Authenticator {
                     return false;
                 }
             default:
-                HermesService$3$$ExternalSyntheticOutline0.m(i, "Receive Command ", "SAccessoryManager_AuthenticatorClientImpl");
+                HermesService$3$$ExternalSyntheticOutline0.m(
+                        i, "Receive Command ", "SAccessoryManager_AuthenticatorClientImpl");
                 break;
         }
         return false;

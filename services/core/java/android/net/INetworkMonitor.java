@@ -33,8 +33,7 @@ public interface INetworkMonitor extends IInterface {
         }
 
         @Override // android.net.INetworkMonitor
-        public void forceReevaluation(int i) throws RemoteException {
-        }
+        public void forceReevaluation(int i) throws RemoteException {}
 
         @Override // android.net.INetworkMonitor
         public String getInterfaceHash() {
@@ -47,48 +46,43 @@ public interface INetworkMonitor extends IInterface {
         }
 
         @Override // android.net.INetworkMonitor
-        public void launchCaptivePortalApp() throws RemoteException {
-        }
+        public void launchCaptivePortalApp() throws RemoteException {}
 
         @Override // android.net.INetworkMonitor
-        public void notifyCaptivePortalAppFinished(int i) throws RemoteException {
-        }
+        public void notifyCaptivePortalAppFinished(int i) throws RemoteException {}
 
         @Override // android.net.INetworkMonitor
-        public void notifyDnsResponse(int i) throws RemoteException {
-        }
+        public void notifyDnsResponse(int i) throws RemoteException {}
 
         @Override // android.net.INetworkMonitor
-        public void notifyLinkPropertiesChanged(LinkProperties linkProperties) throws RemoteException {
-        }
+        public void notifyLinkPropertiesChanged(LinkProperties linkProperties)
+                throws RemoteException {}
 
         @Override // android.net.INetworkMonitor
-        public void notifyNetworkCapabilitiesChanged(NetworkCapabilities networkCapabilities) throws RemoteException {
-        }
+        public void notifyNetworkCapabilitiesChanged(NetworkCapabilities networkCapabilities)
+                throws RemoteException {}
 
         @Override // android.net.INetworkMonitor
-        public void notifyNetworkConnected(LinkProperties linkProperties, NetworkCapabilities networkCapabilities) throws RemoteException {
-        }
+        public void notifyNetworkConnected(
+                LinkProperties linkProperties, NetworkCapabilities networkCapabilities)
+                throws RemoteException {}
 
         @Override // android.net.INetworkMonitor
-        public void notifyNetworkConnectedParcel(NetworkMonitorParameters networkMonitorParameters) throws RemoteException {
-        }
+        public void notifyNetworkConnectedParcel(NetworkMonitorParameters networkMonitorParameters)
+                throws RemoteException {}
 
         @Override // android.net.INetworkMonitor
-        public void notifyNetworkDisconnected() throws RemoteException {
-        }
+        public void notifyNetworkDisconnected() throws RemoteException {}
 
         @Override // android.net.INetworkMonitor
-        public void notifyPrivateDnsChanged(PrivateDnsConfigParcel privateDnsConfigParcel) throws RemoteException {
-        }
+        public void notifyPrivateDnsChanged(PrivateDnsConfigParcel privateDnsConfigParcel)
+                throws RemoteException {}
 
         @Override // android.net.INetworkMonitor
-        public void setAcceptPartialConnectivity() throws RemoteException {
-        }
+        public void setAcceptPartialConnectivity() throws RemoteException {}
 
         @Override // android.net.INetworkMonitor
-        public void start() throws RemoteException {
-        }
+        public void start() throws RemoteException {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -142,7 +136,8 @@ public interface INetworkMonitor extends IInterface {
                         Parcel obtain2 = Parcel.obtain();
                         try {
                             obtain.writeInterfaceToken(INetworkMonitor.DESCRIPTOR);
-                            this.mRemote.transact(Stub.TRANSACTION_getInterfaceHash, obtain, obtain2, 0);
+                            this.mRemote.transact(
+                                    Stub.TRANSACTION_getInterfaceHash, obtain, obtain2, 0);
                             obtain2.readException();
                             this.mCachedHash = obtain2.readString();
                             obtain2.recycle();
@@ -166,7 +161,8 @@ public interface INetworkMonitor extends IInterface {
                     Parcel obtain2 = Parcel.obtain();
                     try {
                         obtain.writeInterfaceToken(INetworkMonitor.DESCRIPTOR);
-                        this.mRemote.transact(Stub.TRANSACTION_getInterfaceVersion, obtain, obtain2, 0);
+                        this.mRemote.transact(
+                                Stub.TRANSACTION_getInterfaceVersion, obtain, obtain2, 0);
                         obtain2.readException();
                         this.mCachedVersion = obtain2.readInt();
                     } finally {
@@ -184,7 +180,8 @@ public interface INetworkMonitor extends IInterface {
                     obtain.writeInterfaceToken(INetworkMonitor.DESCRIPTOR);
                     if (this.mRemote.transact(2, obtain, null, 1)) {
                     } else {
-                        throw new RemoteException("Method launchCaptivePortalApp is unimplemented.");
+                        throw new RemoteException(
+                                "Method launchCaptivePortalApp is unimplemented.");
                     }
                 } finally {
                     obtain.recycle();
@@ -199,7 +196,8 @@ public interface INetworkMonitor extends IInterface {
                     obtain.writeInt(i);
                     if (this.mRemote.transact(3, obtain, null, 1)) {
                     } else {
-                        throw new RemoteException("Method notifyCaptivePortalAppFinished is unimplemented.");
+                        throw new RemoteException(
+                                "Method notifyCaptivePortalAppFinished is unimplemented.");
                     }
                 } finally {
                     obtain.recycle();
@@ -229,7 +227,8 @@ public interface INetworkMonitor extends IInterface {
                     obtain.writeTypedObject(linkProperties, 0);
                     if (this.mRemote.transact(10, obtain, null, 1)) {
                     } else {
-                        throw new RemoteException("Method notifyLinkPropertiesChanged is unimplemented.");
+                        throw new RemoteException(
+                                "Method notifyLinkPropertiesChanged is unimplemented.");
                     }
                 } finally {
                     obtain.recycle();
@@ -237,14 +236,16 @@ public interface INetworkMonitor extends IInterface {
             }
 
             @Override // android.net.INetworkMonitor
-            public final void notifyNetworkCapabilitiesChanged(NetworkCapabilities networkCapabilities) {
+            public final void notifyNetworkCapabilitiesChanged(
+                    NetworkCapabilities networkCapabilities) {
                 Parcel obtain = Parcel.obtain();
                 try {
                     obtain.writeInterfaceToken(INetworkMonitor.DESCRIPTOR);
                     obtain.writeTypedObject(networkCapabilities, 0);
                     if (this.mRemote.transact(11, obtain, null, 1)) {
                     } else {
-                        throw new RemoteException("Method notifyNetworkCapabilitiesChanged is unimplemented.");
+                        throw new RemoteException(
+                                "Method notifyNetworkCapabilitiesChanged is unimplemented.");
                     }
                 } finally {
                     obtain.recycle();
@@ -252,7 +253,8 @@ public interface INetworkMonitor extends IInterface {
             }
 
             @Override // android.net.INetworkMonitor
-            public final void notifyNetworkConnected(LinkProperties linkProperties, NetworkCapabilities networkCapabilities) {
+            public final void notifyNetworkConnected(
+                    LinkProperties linkProperties, NetworkCapabilities networkCapabilities) {
                 Parcel obtain = Parcel.obtain();
                 try {
                     obtain.writeInterfaceToken(INetworkMonitor.DESCRIPTOR);
@@ -260,7 +262,8 @@ public interface INetworkMonitor extends IInterface {
                     obtain.writeTypedObject(networkCapabilities, 0);
                     if (this.mRemote.transact(8, obtain, null, 1)) {
                     } else {
-                        throw new RemoteException("Method notifyNetworkConnected is unimplemented.");
+                        throw new RemoteException(
+                                "Method notifyNetworkConnected is unimplemented.");
                     }
                 } finally {
                     obtain.recycle();
@@ -268,14 +271,16 @@ public interface INetworkMonitor extends IInterface {
             }
 
             @Override // android.net.INetworkMonitor
-            public final void notifyNetworkConnectedParcel(NetworkMonitorParameters networkMonitorParameters) {
+            public final void notifyNetworkConnectedParcel(
+                    NetworkMonitorParameters networkMonitorParameters) {
                 Parcel obtain = Parcel.obtain();
                 try {
                     obtain.writeInterfaceToken(INetworkMonitor.DESCRIPTOR);
                     obtain.writeTypedObject(networkMonitorParameters, 0);
                     if (this.mRemote.transact(12, obtain, null, 1)) {
                     } else {
-                        throw new RemoteException("Method notifyNetworkConnectedParcel is unimplemented.");
+                        throw new RemoteException(
+                                "Method notifyNetworkConnectedParcel is unimplemented.");
                     }
                 } finally {
                     obtain.recycle();
@@ -289,7 +294,8 @@ public interface INetworkMonitor extends IInterface {
                     obtain.writeInterfaceToken(INetworkMonitor.DESCRIPTOR);
                     if (this.mRemote.transact(9, obtain, null, 1)) {
                     } else {
-                        throw new RemoteException("Method notifyNetworkDisconnected is unimplemented.");
+                        throw new RemoteException(
+                                "Method notifyNetworkDisconnected is unimplemented.");
                     }
                 } finally {
                     obtain.recycle();
@@ -297,14 +303,16 @@ public interface INetworkMonitor extends IInterface {
             }
 
             @Override // android.net.INetworkMonitor
-            public final void notifyPrivateDnsChanged(PrivateDnsConfigParcel privateDnsConfigParcel) {
+            public final void notifyPrivateDnsChanged(
+                    PrivateDnsConfigParcel privateDnsConfigParcel) {
                 Parcel obtain = Parcel.obtain();
                 try {
                     obtain.writeInterfaceToken(INetworkMonitor.DESCRIPTOR);
                     obtain.writeTypedObject(privateDnsConfigParcel, 0);
                     if (this.mRemote.transact(6, obtain, null, 1)) {
                     } else {
-                        throw new RemoteException("Method notifyPrivateDnsChanged is unimplemented.");
+                        throw new RemoteException(
+                                "Method notifyPrivateDnsChanged is unimplemented.");
                     }
                 } finally {
                     obtain.recycle();
@@ -318,7 +326,8 @@ public interface INetworkMonitor extends IInterface {
                     obtain.writeInterfaceToken(INetworkMonitor.DESCRIPTOR);
                     if (this.mRemote.transact(4, obtain, null, 1)) {
                     } else {
-                        throw new RemoteException("Method setAcceptPartialConnectivity is unimplemented.");
+                        throw new RemoteException(
+                                "Method setAcceptPartialConnectivity is unimplemented.");
                     }
                 } finally {
                     obtain.recycle();
@@ -348,7 +357,8 @@ public interface INetworkMonitor extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(INetworkMonitor.DESCRIPTOR);
+            IInterface queryLocalInterface =
+                    iBinder.queryLocalInterface(INetworkMonitor.DESCRIPTOR);
             if (queryLocalInterface != null && (queryLocalInterface instanceof INetworkMonitor)) {
                 return (INetworkMonitor) queryLocalInterface;
             }
@@ -365,7 +375,8 @@ public interface INetworkMonitor extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+                throws RemoteException {
             String str = INetworkMonitor.DESCRIPTOR;
             if (i >= 1 && i <= TRANSACTION_getInterfaceVersion) {
                 parcel.enforceInterface(str);
@@ -401,25 +412,35 @@ public interface INetworkMonitor extends IInterface {
                     forceReevaluation(parcel.readInt());
                     return true;
                 case 6:
-                    notifyPrivateDnsChanged((PrivateDnsConfigParcel) parcel.readTypedObject(PrivateDnsConfigParcel.CREATOR));
+                    notifyPrivateDnsChanged(
+                            (PrivateDnsConfigParcel)
+                                    parcel.readTypedObject(PrivateDnsConfigParcel.CREATOR));
                     return true;
                 case 7:
                     notifyDnsResponse(parcel.readInt());
                     return true;
                 case 8:
-                    notifyNetworkConnected((LinkProperties) parcel.readTypedObject(LinkProperties.CREATOR), (NetworkCapabilities) parcel.readTypedObject(NetworkCapabilities.CREATOR));
+                    notifyNetworkConnected(
+                            (LinkProperties) parcel.readTypedObject(LinkProperties.CREATOR),
+                            (NetworkCapabilities)
+                                    parcel.readTypedObject(NetworkCapabilities.CREATOR));
                     return true;
                 case 9:
                     notifyNetworkDisconnected();
                     return true;
                 case 10:
-                    notifyLinkPropertiesChanged((LinkProperties) parcel.readTypedObject(LinkProperties.CREATOR));
+                    notifyLinkPropertiesChanged(
+                            (LinkProperties) parcel.readTypedObject(LinkProperties.CREATOR));
                     return true;
                 case 11:
-                    notifyNetworkCapabilitiesChanged((NetworkCapabilities) parcel.readTypedObject(NetworkCapabilities.CREATOR));
+                    notifyNetworkCapabilitiesChanged(
+                            (NetworkCapabilities)
+                                    parcel.readTypedObject(NetworkCapabilities.CREATOR));
                     return true;
                 case 12:
-                    notifyNetworkConnectedParcel((NetworkMonitorParameters) parcel.readTypedObject(NetworkMonitorParameters.CREATOR));
+                    notifyNetworkConnectedParcel(
+                            (NetworkMonitorParameters)
+                                    parcel.readTypedObject(NetworkMonitorParameters.CREATOR));
                     return true;
                 default:
                     return super.onTransact(i, parcel, parcel2, i2);
@@ -441,15 +462,20 @@ public interface INetworkMonitor extends IInterface {
 
     void notifyLinkPropertiesChanged(LinkProperties linkProperties) throws RemoteException;
 
-    void notifyNetworkCapabilitiesChanged(NetworkCapabilities networkCapabilities) throws RemoteException;
+    void notifyNetworkCapabilitiesChanged(NetworkCapabilities networkCapabilities)
+            throws RemoteException;
 
-    void notifyNetworkConnected(LinkProperties linkProperties, NetworkCapabilities networkCapabilities) throws RemoteException;
+    void notifyNetworkConnected(
+            LinkProperties linkProperties, NetworkCapabilities networkCapabilities)
+            throws RemoteException;
 
-    void notifyNetworkConnectedParcel(NetworkMonitorParameters networkMonitorParameters) throws RemoteException;
+    void notifyNetworkConnectedParcel(NetworkMonitorParameters networkMonitorParameters)
+            throws RemoteException;
 
     void notifyNetworkDisconnected() throws RemoteException;
 
-    void notifyPrivateDnsChanged(PrivateDnsConfigParcel privateDnsConfigParcel) throws RemoteException;
+    void notifyPrivateDnsChanged(PrivateDnsConfigParcel privateDnsConfigParcel)
+            throws RemoteException;
 
     void setAcceptPartialConnectivity() throws RemoteException;
 

@@ -26,7 +26,8 @@ public class BlacklistedFeature {
                 return true;
             }
             String[] wildcardSplit = current.split("\\*");
-            if ((current.endsWith("*") && event.startsWith(wildcardSplit[0])) || current.equals(event)) {
+            if ((current.endsWith("*") && event.startsWith(wildcardSplit[0]))
+                    || current.equals(event)) {
                 return true;
             }
         }

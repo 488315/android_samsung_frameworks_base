@@ -1,13 +1,12 @@
 package android.hardware.camera2.extension;
 
-import android.hardware.camera2.extension.IAdvancedExtenderImpl;
-import android.hardware.camera2.extension.ISessionProcessorImpl;
 import android.hardware.camera2.impl.CameraMetadataNative;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +16,8 @@ import java.util.stream.IntStream;
 
 /* loaded from: classes2.dex */
 public interface IAdvancedExtenderImpl extends IInterface {
-    public static final String DESCRIPTOR = "android.hardware.camera2.extension.IAdvancedExtenderImpl";
+    public static final String DESCRIPTOR =
+            "android.hardware.camera2.extension.IAdvancedExtenderImpl";
 
     CameraMetadataNative getAvailableCaptureRequestKeys(String str) throws RemoteException;
 
@@ -25,7 +25,8 @@ public interface IAdvancedExtenderImpl extends IInterface {
 
     CameraMetadataNative getAvailableCharacteristicsKeyValues(String str) throws RemoteException;
 
-    LatencyRange getEstimatedCaptureLatencyRange(String str, Size size, int i) throws RemoteException;
+    LatencyRange getEstimatedCaptureLatencyRange(String str, Size size, int i)
+            throws RemoteException;
 
     ISessionProcessorImpl getSessionProcessor() throws RemoteException;
 
@@ -39,37 +40,44 @@ public interface IAdvancedExtenderImpl extends IInterface {
 
     boolean isCaptureProcessProgressAvailable() throws RemoteException;
 
-    boolean isExtensionAvailable(String str, Map<String, CameraMetadataNative> map) throws RemoteException;
+    boolean isExtensionAvailable(String str, Map<String, CameraMetadataNative> map)
+            throws RemoteException;
 
     boolean isPostviewAvailable() throws RemoteException;
 
     public static class Default implements IAdvancedExtenderImpl {
         @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
-        public boolean isExtensionAvailable(String cameraId, Map<String, CameraMetadataNative> charsMap) throws RemoteException {
+        public boolean isExtensionAvailable(
+                String cameraId, Map<String, CameraMetadataNative> charsMap)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
-        public void init(String cameraId, Map<String, CameraMetadataNative> charsMap) throws RemoteException {
-        }
+        public void init(String cameraId, Map<String, CameraMetadataNative> charsMap)
+                throws RemoteException {}
 
         @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
-        public LatencyRange getEstimatedCaptureLatencyRange(String cameraId, Size outputSize, int format) throws RemoteException {
+        public LatencyRange getEstimatedCaptureLatencyRange(
+                String cameraId, Size outputSize, int format) throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
-        public List<SizeList> getSupportedPreviewOutputResolutions(String cameraId) throws RemoteException {
+        public List<SizeList> getSupportedPreviewOutputResolutions(String cameraId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
-        public List<SizeList> getSupportedCaptureOutputResolutions(String cameraId) throws RemoteException {
+        public List<SizeList> getSupportedCaptureOutputResolutions(String cameraId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
-        public List<SizeList> getSupportedPostviewResolutions(Size captureSize) throws RemoteException {
+        public List<SizeList> getSupportedPostviewResolutions(Size captureSize)
+                throws RemoteException {
             return null;
         }
 
@@ -79,12 +87,14 @@ public interface IAdvancedExtenderImpl extends IInterface {
         }
 
         @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
-        public CameraMetadataNative getAvailableCaptureRequestKeys(String cameraId) throws RemoteException {
+        public CameraMetadataNative getAvailableCaptureRequestKeys(String cameraId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
-        public CameraMetadataNative getAvailableCaptureResultKeys(String cameraId) throws RemoteException {
+        public CameraMetadataNative getAvailableCaptureResultKeys(String cameraId)
+                throws RemoteException {
             return null;
         }
 
@@ -99,7 +109,8 @@ public interface IAdvancedExtenderImpl extends IInterface {
         }
 
         @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
-        public CameraMetadataNative getAvailableCharacteristicsKeyValues(String cameraId) throws RemoteException {
+        public CameraMetadataNative getAvailableCharacteristicsKeyValues(String cameraId)
+                throws RemoteException {
             return null;
         }
 
@@ -109,7 +120,7 @@ public interface IAdvancedExtenderImpl extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAdvancedExtenderImpl {
+    public abstract static class Stub extends Binder implements IAdvancedExtenderImpl {
         static final int TRANSACTION_getAvailableCaptureRequestKeys = 8;
         static final int TRANSACTION_getAvailableCaptureResultKeys = 9;
         static final int TRANSACTION_getAvailableCharacteristicsKeyValues = 12;
@@ -180,7 +191,8 @@ public interface IAdvancedExtenderImpl extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, final Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, final Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             final Map<String, CameraMetadataNative> _arg1;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAdvancedExtenderImpl.DESCRIPTOR);
@@ -194,12 +206,16 @@ public interface IAdvancedExtenderImpl extends IInterface {
                     String _arg0 = data.readString();
                     int N = data.readInt();
                     _arg1 = N >= 0 ? new HashMap<>() : null;
-                    IntStream.range(0, N).forEach(new IntConsumer() { // from class: android.hardware.camera2.extension.IAdvancedExtenderImpl$Stub$$ExternalSyntheticLambda0
-                        @Override // java.util.function.IntConsumer
-                        public final void accept(int i) {
-                            IAdvancedExtenderImpl.Stub.lambda$onTransact$0(Parcel.this, _arg1, i);
-                        }
-                    });
+                    IntStream.range(0, N)
+                            .forEach(
+                                    new IntConsumer() { // from class:
+                                        // android.hardware.camera2.extension.IAdvancedExtenderImpl$Stub$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.IntConsumer
+                                        public final void accept(int i) {
+                                            IAdvancedExtenderImpl.Stub.lambda$onTransact$0(
+                                                    Parcel.this, _arg1, i);
+                                        }
+                                    });
                     data.enforceNoDataAvail();
                     boolean _result = isExtensionAvailable(_arg0, _arg1);
                     reply.writeNoException();
@@ -209,12 +225,16 @@ public interface IAdvancedExtenderImpl extends IInterface {
                     String _arg02 = data.readString();
                     int N2 = data.readInt();
                     _arg1 = N2 >= 0 ? new HashMap<>() : null;
-                    IntStream.range(0, N2).forEach(new IntConsumer() { // from class: android.hardware.camera2.extension.IAdvancedExtenderImpl$Stub$$ExternalSyntheticLambda1
-                        @Override // java.util.function.IntConsumer
-                        public final void accept(int i) {
-                            IAdvancedExtenderImpl.Stub.lambda$onTransact$1(Parcel.this, _arg1, i);
-                        }
-                    });
+                    IntStream.range(0, N2)
+                            .forEach(
+                                    new IntConsumer() { // from class:
+                                        // android.hardware.camera2.extension.IAdvancedExtenderImpl$Stub$$ExternalSyntheticLambda1
+                                        @Override // java.util.function.IntConsumer
+                                        public final void accept(int i) {
+                                            IAdvancedExtenderImpl.Stub.lambda$onTransact$1(
+                                                    Parcel.this, _arg1, i);
+                                        }
+                                    });
                     data.enforceNoDataAvail();
                     init(_arg02, _arg1);
                     reply.writeNoException();
@@ -292,13 +312,15 @@ public interface IAdvancedExtenderImpl extends IInterface {
 
         static /* synthetic */ void lambda$onTransact$0(Parcel data, Map _arg1, int i) {
             String k = data.readString();
-            CameraMetadataNative v = (CameraMetadataNative) data.readTypedObject(CameraMetadataNative.CREATOR);
+            CameraMetadataNative v =
+                    (CameraMetadataNative) data.readTypedObject(CameraMetadataNative.CREATOR);
             _arg1.put(k, v);
         }
 
         static /* synthetic */ void lambda$onTransact$1(Parcel data, Map _arg1, int i) {
             String k = data.readString();
-            CameraMetadataNative v = (CameraMetadataNative) data.readTypedObject(CameraMetadataNative.CREATOR);
+            CameraMetadataNative v =
+                    (CameraMetadataNative) data.readTypedObject(CameraMetadataNative.CREATOR);
             _arg1.put(k, v);
         }
 
@@ -320,7 +342,9 @@ public interface IAdvancedExtenderImpl extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
-            public boolean isExtensionAvailable(String cameraId, Map<String, CameraMetadataNative> charsMap) throws RemoteException {
+            public boolean isExtensionAvailable(
+                    String cameraId, Map<String, CameraMetadataNative> charsMap)
+                    throws RemoteException {
                 final Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -330,12 +354,18 @@ public interface IAdvancedExtenderImpl extends IInterface {
                         _data.writeInt(-1);
                     } else {
                         _data.writeInt(charsMap.size());
-                        charsMap.forEach(new BiConsumer() { // from class: android.hardware.camera2.extension.IAdvancedExtenderImpl$Stub$Proxy$$ExternalSyntheticLambda0
-                            @Override // java.util.function.BiConsumer
-                            public final void accept(Object obj, Object obj2) {
-                                IAdvancedExtenderImpl.Stub.Proxy.lambda$isExtensionAvailable$0(Parcel.this, (String) obj, (CameraMetadataNative) obj2);
-                            }
-                        });
+                        charsMap.forEach(
+                                new BiConsumer() { // from class:
+                                    // android.hardware.camera2.extension.IAdvancedExtenderImpl$Stub$Proxy$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.BiConsumer
+                                    public final void accept(Object obj, Object obj2) {
+                                        IAdvancedExtenderImpl.Stub.Proxy
+                                                .lambda$isExtensionAvailable$0(
+                                                        Parcel.this,
+                                                        (String) obj,
+                                                        (CameraMetadataNative) obj2);
+                                    }
+                                });
                     }
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
@@ -347,13 +377,15 @@ public interface IAdvancedExtenderImpl extends IInterface {
                 }
             }
 
-            static /* synthetic */ void lambda$isExtensionAvailable$0(Parcel _data, String k, CameraMetadataNative v) {
+            static /* synthetic */ void lambda$isExtensionAvailable$0(
+                    Parcel _data, String k, CameraMetadataNative v) {
                 _data.writeString(k);
                 _data.writeTypedObject(v, 0);
             }
 
             @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
-            public void init(String cameraId, Map<String, CameraMetadataNative> charsMap) throws RemoteException {
+            public void init(String cameraId, Map<String, CameraMetadataNative> charsMap)
+                    throws RemoteException {
                 final Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -363,12 +395,17 @@ public interface IAdvancedExtenderImpl extends IInterface {
                         _data.writeInt(-1);
                     } else {
                         _data.writeInt(charsMap.size());
-                        charsMap.forEach(new BiConsumer() { // from class: android.hardware.camera2.extension.IAdvancedExtenderImpl$Stub$Proxy$$ExternalSyntheticLambda1
-                            @Override // java.util.function.BiConsumer
-                            public final void accept(Object obj, Object obj2) {
-                                IAdvancedExtenderImpl.Stub.Proxy.lambda$init$1(Parcel.this, (String) obj, (CameraMetadataNative) obj2);
-                            }
-                        });
+                        charsMap.forEach(
+                                new BiConsumer() { // from class:
+                                    // android.hardware.camera2.extension.IAdvancedExtenderImpl$Stub$Proxy$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.BiConsumer
+                                    public final void accept(Object obj, Object obj2) {
+                                        IAdvancedExtenderImpl.Stub.Proxy.lambda$init$1(
+                                                Parcel.this,
+                                                (String) obj,
+                                                (CameraMetadataNative) obj2);
+                                    }
+                                });
                     }
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
@@ -378,13 +415,15 @@ public interface IAdvancedExtenderImpl extends IInterface {
                 }
             }
 
-            static /* synthetic */ void lambda$init$1(Parcel _data, String k, CameraMetadataNative v) {
+            static /* synthetic */ void lambda$init$1(
+                    Parcel _data, String k, CameraMetadataNative v) {
                 _data.writeString(k);
                 _data.writeTypedObject(v, 0);
             }
 
             @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
-            public LatencyRange getEstimatedCaptureLatencyRange(String cameraId, Size outputSize, int format) throws RemoteException {
+            public LatencyRange getEstimatedCaptureLatencyRange(
+                    String cameraId, Size outputSize, int format) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -394,7 +433,8 @@ public interface IAdvancedExtenderImpl extends IInterface {
                     _data.writeInt(format);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    LatencyRange _result = (LatencyRange) _reply.readTypedObject(LatencyRange.CREATOR);
+                    LatencyRange _result =
+                            (LatencyRange) _reply.readTypedObject(LatencyRange.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -403,7 +443,8 @@ public interface IAdvancedExtenderImpl extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
-            public List<SizeList> getSupportedPreviewOutputResolutions(String cameraId) throws RemoteException {
+            public List<SizeList> getSupportedPreviewOutputResolutions(String cameraId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -420,7 +461,8 @@ public interface IAdvancedExtenderImpl extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
-            public List<SizeList> getSupportedCaptureOutputResolutions(String cameraId) throws RemoteException {
+            public List<SizeList> getSupportedCaptureOutputResolutions(String cameraId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -437,7 +479,8 @@ public interface IAdvancedExtenderImpl extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
-            public List<SizeList> getSupportedPostviewResolutions(Size captureSize) throws RemoteException {
+            public List<SizeList> getSupportedPostviewResolutions(Size captureSize)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -461,7 +504,8 @@ public interface IAdvancedExtenderImpl extends IInterface {
                     _data.writeInterfaceToken(IAdvancedExtenderImpl.DESCRIPTOR);
                     this.mRemote.transact(7, _data, _reply, 0);
                     _reply.readException();
-                    ISessionProcessorImpl _result = ISessionProcessorImpl.Stub.asInterface(_reply.readStrongBinder());
+                    ISessionProcessorImpl _result =
+                            ISessionProcessorImpl.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -470,7 +514,8 @@ public interface IAdvancedExtenderImpl extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
-            public CameraMetadataNative getAvailableCaptureRequestKeys(String cameraId) throws RemoteException {
+            public CameraMetadataNative getAvailableCaptureRequestKeys(String cameraId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -478,7 +523,9 @@ public interface IAdvancedExtenderImpl extends IInterface {
                     _data.writeString(cameraId);
                     this.mRemote.transact(8, _data, _reply, 0);
                     _reply.readException();
-                    CameraMetadataNative _result = (CameraMetadataNative) _reply.readTypedObject(CameraMetadataNative.CREATOR);
+                    CameraMetadataNative _result =
+                            (CameraMetadataNative)
+                                    _reply.readTypedObject(CameraMetadataNative.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -487,7 +534,8 @@ public interface IAdvancedExtenderImpl extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
-            public CameraMetadataNative getAvailableCaptureResultKeys(String cameraId) throws RemoteException {
+            public CameraMetadataNative getAvailableCaptureResultKeys(String cameraId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -495,7 +543,9 @@ public interface IAdvancedExtenderImpl extends IInterface {
                     _data.writeString(cameraId);
                     this.mRemote.transact(9, _data, _reply, 0);
                     _reply.readException();
-                    CameraMetadataNative _result = (CameraMetadataNative) _reply.readTypedObject(CameraMetadataNative.CREATOR);
+                    CameraMetadataNative _result =
+                            (CameraMetadataNative)
+                                    _reply.readTypedObject(CameraMetadataNative.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -536,7 +586,8 @@ public interface IAdvancedExtenderImpl extends IInterface {
             }
 
             @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
-            public CameraMetadataNative getAvailableCharacteristicsKeyValues(String cameraId) throws RemoteException {
+            public CameraMetadataNative getAvailableCharacteristicsKeyValues(String cameraId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -544,7 +595,9 @@ public interface IAdvancedExtenderImpl extends IInterface {
                     _data.writeString(cameraId);
                     this.mRemote.transact(12, _data, _reply, 0);
                     _reply.readException();
-                    CameraMetadataNative _result = (CameraMetadataNative) _reply.readTypedObject(CameraMetadataNative.CREATOR);
+                    CameraMetadataNative _result =
+                            (CameraMetadataNative)
+                                    _reply.readTypedObject(CameraMetadataNative.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

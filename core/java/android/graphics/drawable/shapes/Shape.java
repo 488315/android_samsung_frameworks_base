@@ -3,6 +3,7 @@ package android.graphics.drawable.shapes;
 import android.graphics.Canvas;
 import android.graphics.Outline;
 import android.graphics.Paint;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
@@ -38,13 +39,11 @@ public abstract class Shape implements Cloneable {
         return true;
     }
 
-    protected void onResize(float width, float height) {
-    }
+    protected void onResize(float width, float height) {}
 
-    public void getOutline(Outline outline) {
-    }
+    public void getOutline(Outline outline) {}
 
-    @Override // 
+    @Override //
     /* renamed from: clone */
     public Shape mo1387clone() throws CloneNotSupportedException {
         return (Shape) super.clone();
@@ -58,7 +57,8 @@ public abstract class Shape implements Cloneable {
             return false;
         }
         Shape shape = (Shape) o;
-        if (Float.compare(shape.mWidth, this.mWidth) == 0 && Float.compare(shape.mHeight, this.mHeight) == 0) {
+        if (Float.compare(shape.mWidth, this.mWidth) == 0
+                && Float.compare(shape.mHeight, this.mHeight) == 0) {
             return true;
         }
         return false;

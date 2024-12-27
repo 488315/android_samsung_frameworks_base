@@ -3,6 +3,7 @@ package com.samsung.android.multiwindow.splitactivity;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArraySet;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,19 +15,22 @@ import java.util.stream.Collectors;
 
 /* loaded from: classes6.dex */
 public class SplitActivityPackageInfo implements Parcelable {
-    public static final Parcelable.Creator<SplitActivityPackageInfo> CREATOR = new Parcelable.Creator<SplitActivityPackageInfo>() { // from class: com.samsung.android.multiwindow.splitactivity.SplitActivityPackageInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SplitActivityPackageInfo createFromParcel(Parcel in) {
-            return new SplitActivityPackageInfo(in);
-        }
+    public static final Parcelable.Creator<SplitActivityPackageInfo> CREATOR =
+            new Parcelable.Creator<
+                    SplitActivityPackageInfo>() { // from class:
+                                                  // com.samsung.android.multiwindow.splitactivity.SplitActivityPackageInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SplitActivityPackageInfo createFromParcel(Parcel in) {
+                    return new SplitActivityPackageInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SplitActivityPackageInfo[] newArray(int size) {
-            return new SplitActivityPackageInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SplitActivityPackageInfo[] newArray(int size) {
+                    return new SplitActivityPackageInfo[size];
+                }
+            };
     private final String mPackageName;
     private final List<SplitActivityInfo> mInfos = new ArrayList();
     private final Set<String> mFullscreenActivities = new ArraySet();
@@ -49,14 +53,16 @@ public class SplitActivityPackageInfo implements Parcelable {
     }
 
     public void remove(final String sourceName, final String targetName) {
-        this.mInfos.removeIf(new Predicate() { // from class: com.samsung.android.multiwindow.splitactivity.SplitActivityPackageInfo$$ExternalSyntheticLambda1
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                boolean match;
-                match = ((SplitActivityInfo) obj).match(sourceName, targetName);
-                return match;
-            }
-        });
+        this.mInfos.removeIf(
+                new Predicate() { // from class:
+                                  // com.samsung.android.multiwindow.splitactivity.SplitActivityPackageInfo$$ExternalSyntheticLambda1
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        boolean match;
+                        match = ((SplitActivityInfo) obj).match(sourceName, targetName);
+                        return match;
+                    }
+                });
     }
 
     public boolean isEmpty() {
@@ -64,14 +70,20 @@ public class SplitActivityPackageInfo implements Parcelable {
     }
 
     public SplitActivityInfo getInfo(final String source, final String target) {
-        return this.mInfos.stream().filter(new Predicate() { // from class: com.samsung.android.multiwindow.splitactivity.SplitActivityPackageInfo$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                boolean matchWithWildcard;
-                matchWithWildcard = ((SplitActivityInfo) obj).matchWithWildcard(source, target);
-                return matchWithWildcard;
-            }
-        }).findFirst().orElse(null);
+        return this.mInfos.stream()
+                .filter(
+                        new Predicate() { // from class:
+                                          // com.samsung.android.multiwindow.splitactivity.SplitActivityPackageInfo$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Predicate
+                            public final boolean test(Object obj) {
+                                boolean matchWithWildcard;
+                                matchWithWildcard =
+                                        ((SplitActivityInfo) obj).matchWithWildcard(source, target);
+                                return matchWithWildcard;
+                            }
+                        })
+                .findFirst()
+                .orElse(null);
     }
 
     public boolean equals(Object o) {
@@ -82,7 +94,9 @@ public class SplitActivityPackageInfo implements Parcelable {
             return false;
         }
         SplitActivityPackageInfo that = (SplitActivityPackageInfo) o;
-        if (Objects.equals(this.mPackageName, that.mPackageName) && Objects.equals(this.mInfos, that.mInfos) && Objects.equals(this.mFullscreenActivities, that.mFullscreenActivities)) {
+        if (Objects.equals(this.mPackageName, that.mPackageName)
+                && Objects.equals(this.mInfos, that.mInfos)
+                && Objects.equals(this.mFullscreenActivities, that.mFullscreenActivities)) {
             return true;
         }
         return false;
@@ -107,11 +121,18 @@ public class SplitActivityPackageInfo implements Parcelable {
     }
 
     public String toShortString() {
-        return this.mPackageName + " : " + ((String) this.mInfos.stream().map(new Function() { // from class: com.samsung.android.multiwindow.splitactivity.SplitActivityPackageInfo$$ExternalSyntheticLambda2
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return ((SplitActivityInfo) obj).toShortString();
-            }
-        }).collect(Collectors.joining(", ")));
+        return this.mPackageName
+                + " : "
+                + ((String)
+                        this.mInfos.stream()
+                                .map(
+                                        new Function() { // from class:
+                                                         // com.samsung.android.multiwindow.splitactivity.SplitActivityPackageInfo$$ExternalSyntheticLambda2
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                return ((SplitActivityInfo) obj).toShortString();
+                                            }
+                                        })
+                                .collect(Collectors.joining(", ")));
     }
 }

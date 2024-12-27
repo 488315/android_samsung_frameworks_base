@@ -6,6 +6,7 @@ import android.os.IBinder;
 import android.os.Trace;
 import android.util.IntArray;
 import android.util.Slog;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -33,7 +34,11 @@ public class TransactionExecutor {
                 Trace.traceEnd(32L);
                 this.mPendingActions.clear();
             } catch (Exception e) {
-                Slog.e(TAG, "Failed to execute the transaction: " + TransactionExecutorHelper.transactionToString(transaction, this.mTransactionHandler));
+                Slog.e(
+                        TAG,
+                        "Failed to execute the transaction: "
+                                + TransactionExecutorHelper.transactionToString(
+                                        transaction, this.mTransactionHandler));
                 throw e;
             }
         } catch (Throwable th) {
@@ -50,7 +55,10 @@ public class TransactionExecutor {
             if (item.isActivityLifecycleItem()) {
                 executeLifecycleItem(transaction, (ActivityLifecycleItem) item);
             } else {
-                executeNonLifecycleItem(transaction, item, TransactionExecutorHelper.shouldExcludeLastLifecycleState(items, i));
+                executeNonLifecycleItem(
+                        transaction,
+                        item,
+                        TransactionExecutorHelper.shouldExcludeLastLifecycleState(items, i));
             }
         }
     }
@@ -63,28 +71,40 @@ public class TransactionExecutor {
         }
         ActivityLifecycleItem finalStateRequest = transaction.getLifecycleStateRequest();
         int finalState = finalStateRequest != null ? finalStateRequest.getTargetState() : -1;
-        int lastCallbackRequestingState = TransactionExecutorHelper.lastCallbackRequestingState(transaction);
+        int lastCallbackRequestingState =
+                TransactionExecutorHelper.lastCallbackRequestingState(transaction);
         int size = callbacks.size();
         int i = 0;
         while (i < size) {
             ClientTransactionItem item = callbacks.get(i);
             int postExecutionState = item.getPostExecutionState();
-            boolean shouldExcludeLastLifecycleState = postExecutionState != -1 && i == lastCallbackRequestingState && finalState == postExecutionState;
+            boolean shouldExcludeLastLifecycleState =
+                    postExecutionState != -1
+                            && i == lastCallbackRequestingState
+                            && finalState == postExecutionState;
             executeNonLifecycleItem(transaction, item, shouldExcludeLastLifecycleState);
             i++;
         }
     }
 
-    private void executeNonLifecycleItem(ClientTransaction transaction, ClientTransactionItem item, boolean shouldExcludeLastLifecycleState) {
+    private void executeNonLifecycleItem(
+            ClientTransaction transaction,
+            ClientTransactionItem item,
+            boolean shouldExcludeLastLifecycleState) {
         int closestPreExecutionState;
         IBinder token = item.getActivityToken();
         ActivityThread.ActivityClientRecord r = this.mTransactionHandler.getActivityClient(token);
-        if (token != null && r == null && this.mTransactionHandler.getActivitiesToBeDestroyed().containsKey(token)) {
+        if (token != null
+                && r == null
+                && this.mTransactionHandler.getActivitiesToBeDestroyed().containsKey(token)) {
             Slog.w(TAG, "Skip pre-destroyed transaction item:\n" + item);
             return;
         }
         int postExecutionState = item.getPostExecutionState();
-        if (item.shouldHaveDefinedPreExecutionState() && (closestPreExecutionState = this.mHelper.getClosestPreExecutionState(r, postExecutionState)) != -1) {
+        if (item.shouldHaveDefinedPreExecutionState()
+                && (closestPreExecutionState =
+                                this.mHelper.getClosestPreExecutionState(r, postExecutionState))
+                        != -1) {
             cycleToPath(r, closestPreExecutionState, transaction);
         }
         item.execute(this.mTransactionHandler, this.mPendingActions);
@@ -106,7 +126,8 @@ public class TransactionExecutor {
         executeLifecycleItem(transaction, lifecycleItem);
     }
 
-    private void executeLifecycleItem(ClientTransaction transaction, ActivityLifecycleItem lifecycleItem) {
+    private void executeLifecycleItem(
+            ClientTransaction transaction, ActivityLifecycleItem lifecycleItem) {
         IBinder token = lifecycleItem.getActivityToken();
         ActivityThread.ActivityClientRecord r = this.mTransactionHandler.getActivityClient(token);
         if (r == null) {
@@ -120,38 +141,57 @@ public class TransactionExecutor {
         }
     }
 
-    public void cycleToPath(ActivityThread.ActivityClientRecord r, int finish, ClientTransaction transaction) {
+    public void cycleToPath(
+            ActivityThread.ActivityClientRecord r, int finish, ClientTransaction transaction) {
         cycleToPath(r, finish, false, transaction);
     }
 
-    private void cycleToPath(ActivityThread.ActivityClientRecord r, int finish, boolean excludeLastState, ClientTransaction transaction) {
+    private void cycleToPath(
+            ActivityThread.ActivityClientRecord r,
+            int finish,
+            boolean excludeLastState,
+            ClientTransaction transaction) {
         int start = r.getLifecycleState();
         IntArray path = this.mHelper.getLifecyclePath(start, finish, excludeLastState);
         performLifecycleSequence(r, path, transaction);
     }
 
-    private void performLifecycleSequence(ActivityThread.ActivityClientRecord r, IntArray path, ClientTransaction transaction) {
+    private void performLifecycleSequence(
+            ActivityThread.ActivityClientRecord r, IntArray path, ClientTransaction transaction) {
         int size = path.size();
         for (int i = 0; i < size; i++) {
             int state = path.get(i);
             switch (state) {
                 case 1:
-                    this.mTransactionHandler.handleLaunchActivity(r, this.mPendingActions, -1, null);
+                    this.mTransactionHandler.handleLaunchActivity(
+                            r, this.mPendingActions, -1, null);
                     break;
                 case 2:
                     this.mTransactionHandler.handleStartActivity(r, this.mPendingActions, null);
                     break;
                 case 3:
-                    this.mTransactionHandler.handleResumeActivity(r, false, r.isForward, false, "LIFECYCLER_RESUME_ACTIVITY");
+                    this.mTransactionHandler.handleResumeActivity(
+                            r, false, r.isForward, false, "LIFECYCLER_RESUME_ACTIVITY");
                     break;
                 case 4:
-                    this.mTransactionHandler.handlePauseActivity(r, false, false, false, this.mPendingActions, "LIFECYCLER_PAUSE_ACTIVITY");
+                    this.mTransactionHandler.handlePauseActivity(
+                            r,
+                            false,
+                            false,
+                            false,
+                            this.mPendingActions,
+                            "LIFECYCLER_PAUSE_ACTIVITY");
                     break;
                 case 5:
-                    this.mTransactionHandler.handleStopActivity(r, this.mPendingActions, false, "LIFECYCLER_STOP_ACTIVITY");
+                    this.mTransactionHandler.handleStopActivity(
+                            r, this.mPendingActions, false, "LIFECYCLER_STOP_ACTIVITY");
                     break;
                 case 6:
-                    this.mTransactionHandler.handleDestroyActivity(r, false, false, "performLifecycleSequence. cycling to:" + path.get(size - 1));
+                    this.mTransactionHandler.handleDestroyActivity(
+                            r,
+                            false,
+                            false,
+                            "performLifecycleSequence. cycling to:" + path.get(size - 1));
                     break;
                 case 7:
                     this.mTransactionHandler.performRestartActivity(r, false);

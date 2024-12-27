@@ -14,6 +14,5 @@ final class NavigationBarConstants {
     static final float NAV_KEY_BUTTON_SHADOW_OFFSET_Y = 1.0f;
     static final float NAV_KEY_BUTTON_SHADOW_RADIUS = 0.5f;
 
-    private NavigationBarConstants() {
-    }
+    private NavigationBarConstants() {}
 }

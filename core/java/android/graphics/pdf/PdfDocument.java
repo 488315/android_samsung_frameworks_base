@@ -3,7 +3,9 @@ package android.graphics.pdf;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+
 import dalvik.system.CloseGuard;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -24,7 +26,8 @@ public class PdfDocument {
 
     private native void nativeFinishPage(long j);
 
-    private static native long nativeStartPage(long j, int i, int i2, int i3, int i4, int i5, int i6);
+    private static native long nativeStartPage(
+            long j, int i, int i2, int i3, int i4, int i5, int i6);
 
     private native void nativeWriteTo(long j, OutputStream outputStream, byte[] bArr);
 
@@ -38,7 +41,16 @@ public class PdfDocument {
         if (pageInfo == null) {
             throw new IllegalArgumentException("page cannot be null");
         }
-        Canvas canvas = new PdfCanvas(nativeStartPage(this.mNativeDocument, pageInfo.mPageWidth, pageInfo.mPageHeight, pageInfo.mContentRect.left, pageInfo.mContentRect.top, pageInfo.mContentRect.right, pageInfo.mContentRect.bottom));
+        Canvas canvas =
+                new PdfCanvas(
+                        nativeStartPage(
+                                this.mNativeDocument,
+                                pageInfo.mPageWidth,
+                                pageInfo.mPageHeight,
+                                pageInfo.mContentRect.left,
+                                pageInfo.mContentRect.top,
+                                pageInfo.mContentRect.right,
+                                pageInfo.mContentRect.bottom));
         this.mCurrentPage = new Page(canvas, pageInfo);
         return this.mCurrentPage;
     }
@@ -126,8 +138,7 @@ public class PdfDocument {
         private int mPageNumber;
         private int mPageWidth;
 
-        private PageInfo() {
-        }
+        private PageInfo() {}
 
         public int getPageWidth() {
             return this.mPageWidth;
@@ -164,7 +175,11 @@ public class PdfDocument {
             }
 
             public Builder setContentRect(Rect contentRect) {
-                if (contentRect != null && (contentRect.left < 0 || contentRect.top < 0 || contentRect.right > this.mPageInfo.mPageWidth || contentRect.bottom > this.mPageInfo.mPageHeight)) {
+                if (contentRect != null
+                        && (contentRect.left < 0
+                                || contentRect.top < 0
+                                || contentRect.right > this.mPageInfo.mPageWidth
+                                || contentRect.bottom > this.mPageInfo.mPageHeight)) {
                     throw new IllegalArgumentException("contentRect does not fit the page");
                 }
                 this.mPageInfo.mContentRect = contentRect;
@@ -173,7 +188,8 @@ public class PdfDocument {
 
             public PageInfo create() {
                 if (this.mPageInfo.mContentRect == null) {
-                    this.mPageInfo.mContentRect = new Rect(0, 0, this.mPageInfo.mPageWidth, this.mPageInfo.mPageHeight);
+                    this.mPageInfo.mContentRect =
+                            new Rect(0, 0, this.mPageInfo.mPageWidth, this.mPageInfo.mPageHeight);
                 }
                 return this.mPageInfo;
             }

@@ -6,19 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SehSimMsgArgs implements Parcelable {
-    public static final Parcelable.Creator<SehSimMsgArgs> CREATOR = new Parcelable.Creator<SehSimMsgArgs>() { // from class: vendor.samsung.hardware.radio.messaging.SehSimMsgArgs.1
-        @Override // android.os.Parcelable.Creator
-        public SehSimMsgArgs createFromParcel(Parcel _aidl_source) {
-            SehSimMsgArgs _aidl_out = new SehSimMsgArgs();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SehSimMsgArgs> CREATOR =
+            new Parcelable.Creator<
+                    SehSimMsgArgs>() { // from class:
+                                       // vendor.samsung.hardware.radio.messaging.SehSimMsgArgs.1
+                @Override // android.os.Parcelable.Creator
+                public SehSimMsgArgs createFromParcel(Parcel _aidl_source) {
+                    SehSimMsgArgs _aidl_out = new SehSimMsgArgs();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehSimMsgArgs[] newArray(int _aidl_size) {
-            return new SehSimMsgArgs[_aidl_size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehSimMsgArgs[] newArray(int _aidl_size) {
+                    return new SehSimMsgArgs[_aidl_size];
+                }
+            };
     public static final int STATUS_REC_READ = 1;
     public static final int STATUS_REC_UNREAD = 0;
     public static final int STATUS_STO_SENT = 3;

@@ -5,7 +5,8 @@ import android.text.style.CharacterStyle;
 /* loaded from: classes4.dex */
 public class SpanColors {
     public static final int NO_COLOR_FOUND = 0;
-    private final SpanSet<CharacterStyle> mCharacterStyleSpanSet = new SpanSet<>(CharacterStyle.class);
+    private final SpanSet<CharacterStyle> mCharacterStyleSpanSet =
+            new SpanSet<>(CharacterStyle.class);
     private TextPaint mWorkPaint;
 
     public void init(TextPaint workPaint, Spanned spanned, int start, int end) {
@@ -22,7 +23,8 @@ public class SpanColors {
         int finalColor = 0;
         this.mWorkPaint.setColor(0);
         for (int k = 0; k < this.mCharacterStyleSpanSet.numberOfSpans; k++) {
-            if (index >= this.mCharacterStyleSpanSet.spanStarts[k] && index <= this.mCharacterStyleSpanSet.spanEnds[k]) {
+            if (index >= this.mCharacterStyleSpanSet.spanStarts[k]
+                    && index <= this.mCharacterStyleSpanSet.spanEnds[k]) {
                 CharacterStyle span = this.mCharacterStyleSpanSet.spans[k];
                 span.updateDrawState(this.mWorkPaint);
                 finalColor = calculateFinalColor(this.mWorkPaint);

@@ -32,7 +32,8 @@ public interface IDreamManager extends IInterface {
 
     void registerDreamOverlayService(ComponentName componentName) throws RemoteException;
 
-    void semStartDozing(IBinder iBinder, int i, int i2, int i3, int i4, boolean z) throws RemoteException;
+    void semStartDozing(IBinder iBinder, int i, int i2, int i3, int i4, boolean z)
+            throws RemoteException;
 
     void setDreamComponents(ComponentName[] componentNameArr) throws RemoteException;
 
@@ -52,16 +53,13 @@ public interface IDreamManager extends IInterface {
 
     public static class Default implements IDreamManager {
         @Override // android.service.dreams.IDreamManager
-        public void dream() throws RemoteException {
-        }
+        public void dream() throws RemoteException {}
 
         @Override // android.service.dreams.IDreamManager
-        public void awaken() throws RemoteException {
-        }
+        public void awaken() throws RemoteException {}
 
         @Override // android.service.dreams.IDreamManager
-        public void setDreamComponents(ComponentName[] componentNames) throws RemoteException {
-        }
+        public void setDreamComponents(ComponentName[] componentNames) throws RemoteException {}
 
         @Override // android.service.dreams.IDreamManager
         public ComponentName[] getDreamComponents() throws RemoteException {
@@ -74,8 +72,7 @@ public interface IDreamManager extends IInterface {
         }
 
         @Override // android.service.dreams.IDreamManager
-        public void testDream(int userId, ComponentName componentName) throws RemoteException {
-        }
+        public void testDream(int userId, ComponentName componentName) throws RemoteException {}
 
         @Override // android.service.dreams.IDreamManager
         public boolean isDreaming() throws RemoteException {
@@ -93,20 +90,17 @@ public interface IDreamManager extends IInterface {
         }
 
         @Override // android.service.dreams.IDreamManager
-        public void finishSelf(IBinder token, boolean immediate) throws RemoteException {
-        }
+        public void finishSelf(IBinder token, boolean immediate) throws RemoteException {}
 
         @Override // android.service.dreams.IDreamManager
-        public void startDozing(IBinder token, int screenState, int reason, int screenBrightness) throws RemoteException {
-        }
+        public void startDozing(IBinder token, int screenState, int reason, int screenBrightness)
+                throws RemoteException {}
 
         @Override // android.service.dreams.IDreamManager
-        public void stopDozing(IBinder token) throws RemoteException {
-        }
+        public void stopDozing(IBinder token) throws RemoteException {}
 
         @Override // android.service.dreams.IDreamManager
-        public void forceAmbientDisplayEnabled(boolean enabled) throws RemoteException {
-        }
+        public void forceAmbientDisplayEnabled(boolean enabled) throws RemoteException {}
 
         @Override // android.service.dreams.IDreamManager
         public ComponentName[] getDreamComponentsForUser(int userId) throws RemoteException {
@@ -114,28 +108,31 @@ public interface IDreamManager extends IInterface {
         }
 
         @Override // android.service.dreams.IDreamManager
-        public void setDreamComponentsForUser(int userId, ComponentName[] componentNames) throws RemoteException {
-        }
+        public void setDreamComponentsForUser(int userId, ComponentName[] componentNames)
+                throws RemoteException {}
 
         @Override // android.service.dreams.IDreamManager
-        public void setSystemDreamComponent(ComponentName componentName) throws RemoteException {
-        }
+        public void setSystemDreamComponent(ComponentName componentName) throws RemoteException {}
 
         @Override // android.service.dreams.IDreamManager
-        public void registerDreamOverlayService(ComponentName componentName) throws RemoteException {
-        }
+        public void registerDreamOverlayService(ComponentName componentName)
+                throws RemoteException {}
 
         @Override // android.service.dreams.IDreamManager
-        public void startDreamActivity(Intent intent) throws RemoteException {
-        }
+        public void startDreamActivity(Intent intent) throws RemoteException {}
 
         @Override // android.service.dreams.IDreamManager
-        public void setDreamIsObscured(boolean isObscured) throws RemoteException {
-        }
+        public void setDreamIsObscured(boolean isObscured) throws RemoteException {}
 
         @Override // android.service.dreams.IDreamManager
-        public void semStartDozing(IBinder token, int screenState, int reason, int screenBrightness, int dozeMode, boolean shouldWaitForTransitionToAodUi) throws RemoteException {
-        }
+        public void semStartDozing(
+                IBinder token,
+                int screenState,
+                int reason,
+                int screenBrightness,
+                int dozeMode,
+                boolean shouldWaitForTransitionToAodUi)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -143,7 +140,7 @@ public interface IDreamManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDreamManager {
+    public abstract static class Stub extends Binder implements IDreamManager {
         public static final String DESCRIPTOR = "android.service.dreams.IDreamManager";
         static final int TRANSACTION_awaken = 2;
         static final int TRANSACTION_canStartDreaming = 9;
@@ -239,7 +236,8 @@ public interface IDreamManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -257,7 +255,8 @@ public interface IDreamManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 3:
-                    ComponentName[] _arg0 = (ComponentName[]) data.createTypedArray(ComponentName.CREATOR);
+                    ComponentName[] _arg0 =
+                            (ComponentName[]) data.createTypedArray(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     setDreamComponents(_arg0);
                     reply.writeNoException();
@@ -276,7 +275,8 @@ public interface IDreamManager extends IInterface {
                     return true;
                 case 6:
                     int _arg03 = data.readInt();
-                    ComponentName _arg1 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg1 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     testDream(_arg03, _arg1);
                     reply.writeNoException();
@@ -335,19 +335,22 @@ public interface IDreamManager extends IInterface {
                     return true;
                 case 15:
                     int _arg010 = data.readInt();
-                    ComponentName[] _arg14 = (ComponentName[]) data.createTypedArray(ComponentName.CREATOR);
+                    ComponentName[] _arg14 =
+                            (ComponentName[]) data.createTypedArray(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     setDreamComponentsForUser(_arg010, _arg14);
                     reply.writeNoException();
                     return true;
                 case 16:
-                    ComponentName _arg011 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg011 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     setSystemDreamComponent(_arg011);
                     reply.writeNoException();
                     return true;
                 case 17:
-                    ComponentName _arg012 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg012 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     registerDreamOverlayService(_arg012);
                     reply.writeNoException();
@@ -446,7 +449,8 @@ public interface IDreamManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName[] _result = (ComponentName[]) _reply.createTypedArray(ComponentName.CREATOR);
+                    ComponentName[] _result =
+                            (ComponentName[]) _reply.createTypedArray(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -455,7 +459,8 @@ public interface IDreamManager extends IInterface {
             }
 
             @Override // android.service.dreams.IDreamManager
-            public ComponentName getDefaultDreamComponentForUser(int userId) throws RemoteException {
+            public ComponentName getDefaultDreamComponentForUser(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -463,7 +468,8 @@ public interface IDreamManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(5, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName _result = (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _result =
+                            (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -553,7 +559,9 @@ public interface IDreamManager extends IInterface {
             }
 
             @Override // android.service.dreams.IDreamManager
-            public void startDozing(IBinder token, int screenState, int reason, int screenBrightness) throws RemoteException {
+            public void startDozing(
+                    IBinder token, int screenState, int reason, int screenBrightness)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -609,7 +617,8 @@ public interface IDreamManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(14, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName[] _result = (ComponentName[]) _reply.createTypedArray(ComponentName.CREATOR);
+                    ComponentName[] _result =
+                            (ComponentName[]) _reply.createTypedArray(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -618,7 +627,8 @@ public interface IDreamManager extends IInterface {
             }
 
             @Override // android.service.dreams.IDreamManager
-            public void setDreamComponentsForUser(int userId, ComponentName[] componentNames) throws RemoteException {
+            public void setDreamComponentsForUser(int userId, ComponentName[] componentNames)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -634,7 +644,8 @@ public interface IDreamManager extends IInterface {
             }
 
             @Override // android.service.dreams.IDreamManager
-            public void setSystemDreamComponent(ComponentName componentName) throws RemoteException {
+            public void setSystemDreamComponent(ComponentName componentName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -649,7 +660,8 @@ public interface IDreamManager extends IInterface {
             }
 
             @Override // android.service.dreams.IDreamManager
-            public void registerDreamOverlayService(ComponentName componentName) throws RemoteException {
+            public void registerDreamOverlayService(ComponentName componentName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -691,7 +703,14 @@ public interface IDreamManager extends IInterface {
             }
 
             @Override // android.service.dreams.IDreamManager
-            public void semStartDozing(IBinder token, int screenState, int reason, int screenBrightness, int dozeMode, boolean shouldWaitForTransitionToAodUi) throws RemoteException {
+            public void semStartDozing(
+                    IBinder token,
+                    int screenState,
+                    int reason,
+                    int screenBrightness,
+                    int dozeMode,
+                    boolean shouldWaitForTransitionToAodUi)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

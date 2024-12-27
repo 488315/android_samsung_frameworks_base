@@ -15,7 +15,13 @@ public final class Face {
     private Point mRightEye;
     private int mScore;
 
-    public Face(Rect bounds, int score, int id, Point leftEyePosition, Point rightEyePosition, Point mouthPosition) {
+    public Face(
+            Rect bounds,
+            int score,
+            int id,
+            Point leftEyePosition,
+            Point rightEyePosition,
+            Point mouthPosition) {
         init(bounds, score, id, leftEyePosition, rightEyePosition, mouthPosition);
     }
 
@@ -23,7 +29,13 @@ public final class Face {
         init(bounds, score, -1, null, null, null);
     }
 
-    private void init(Rect bounds, int score, int id, Point leftEyePosition, Point rightEyePosition, Point mouthPosition) {
+    private void init(
+            Rect bounds,
+            int score,
+            int id,
+            Point leftEyePosition,
+            Point rightEyePosition,
+            Point mouthPosition) {
         checkNotNull("bounds", bounds);
         checkScore(score);
         checkId(id);
@@ -66,7 +78,15 @@ public final class Face {
     }
 
     public String toString() {
-        return String.format("{ bounds: %s, score: %s, id: %d, leftEyePosition: %s, rightEyePosition: %s, mouthPosition: %s }", this.mBounds, Integer.valueOf(this.mScore), Integer.valueOf(this.mId), this.mLeftEye, this.mRightEye, this.mMouth);
+        return String.format(
+                "{ bounds: %s, score: %s, id: %d, leftEyePosition: %s, rightEyePosition: %s,"
+                        + " mouthPosition: %s }",
+                this.mBounds,
+                Integer.valueOf(this.mScore),
+                Integer.valueOf(this.mId),
+                this.mLeftEye,
+                this.mRightEye,
+                this.mMouth);
     }
 
     private static void checkNotNull(String name, Object obj) {
@@ -96,10 +116,13 @@ public final class Face {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static void checkFace(Point leftEyePosition, Point rightEyePosition, Point mouthPosition) {
+    public static void checkFace(
+            Point leftEyePosition, Point rightEyePosition, Point mouthPosition) {
         if (leftEyePosition != null || rightEyePosition != null || mouthPosition != null) {
             if (leftEyePosition == null || rightEyePosition == null || mouthPosition == null) {
-                throw new IllegalArgumentException("If any of leftEyePosition, rightEyePosition, or mouthPosition are non-null, all three must be non-null.");
+                throw new IllegalArgumentException(
+                        "If any of leftEyePosition, rightEyePosition, or mouthPosition are"
+                                + " non-null, all three must be non-null.");
             }
         }
     }
@@ -206,24 +229,35 @@ public final class Face {
             }
             Face.checkFace(this.mLeftEye, this.mRightEye, this.mMouth);
             this.mBuilderFieldsSet |= 1;
-            return new Face(this.mBounds, this.mScore, this.mId, this.mLeftEye, this.mRightEye, this.mMouth);
+            return new Face(
+                    this.mBounds,
+                    this.mScore,
+                    this.mId,
+                    this.mLeftEye,
+                    this.mRightEye,
+                    this.mMouth);
         }
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 1) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
 
         private void checkFieldSet(long field, String fieldName) {
             if ((this.mBuilderFieldsSet & field) == 0) {
-                throw new IllegalStateException("Field \"" + fieldName + "\" must be set before building.");
+                throw new IllegalStateException(
+                        "Field \"" + fieldName + "\" must be set before building.");
             }
         }
 
         private void checkIdUnsupportedThenNull(Object obj, String fieldName) {
             if (obj != null) {
-                throw new IllegalArgumentException("Field \"" + fieldName + "\" must be unset or null if id is ID_UNSUPPORTED.");
+                throw new IllegalArgumentException(
+                        "Field \""
+                                + fieldName
+                                + "\" must be unset or null if id is ID_UNSUPPORTED.");
             }
         }
     }

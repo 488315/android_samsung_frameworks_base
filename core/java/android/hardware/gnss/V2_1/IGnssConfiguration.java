@@ -12,9 +12,12 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import com.android.internal.midi.MidiConstants;
+
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -24,39 +27,72 @@ import java.util.Objects;
 public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConfiguration {
     public static final String kInterfaceName = "android.hardware.gnss@2.1::IGnssConfiguration";
 
-    @Override // android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+    @Override // android.hardware.gnss.V2_0.IGnssConfiguration,
+    // android.hardware.gnss.V1_1.IGnssConfiguration,
+    // android.hardware.gnss.V1_0.IGnssConfiguration,
+    // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
     IHwBinder asBinder();
 
-    @Override // android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.gnss.V2_0.IGnssConfiguration,
+    // android.hardware.gnss.V1_1.IGnssConfiguration,
+    // android.hardware.gnss.V1_0.IGnssConfiguration,
+    // android.internal.hidl.base.V1_0.IBase
     void debug(NativeHandle nativeHandle, ArrayList<String> arrayList) throws RemoteException;
 
-    @Override // android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.gnss.V2_0.IGnssConfiguration,
+    // android.hardware.gnss.V1_1.IGnssConfiguration,
+    // android.hardware.gnss.V1_0.IGnssConfiguration,
+    // android.internal.hidl.base.V1_0.IBase
     DebugInfo getDebugInfo() throws RemoteException;
 
-    @Override // android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.gnss.V2_0.IGnssConfiguration,
+    // android.hardware.gnss.V1_1.IGnssConfiguration,
+    // android.hardware.gnss.V1_0.IGnssConfiguration,
+    // android.internal.hidl.base.V1_0.IBase
     ArrayList<byte[]> getHashChain() throws RemoteException;
 
-    @Override // android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.gnss.V2_0.IGnssConfiguration,
+    // android.hardware.gnss.V1_1.IGnssConfiguration,
+    // android.hardware.gnss.V1_0.IGnssConfiguration,
+    // android.internal.hidl.base.V1_0.IBase
     ArrayList<String> interfaceChain() throws RemoteException;
 
-    @Override // android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.gnss.V2_0.IGnssConfiguration,
+    // android.hardware.gnss.V1_1.IGnssConfiguration,
+    // android.hardware.gnss.V1_0.IGnssConfiguration,
+    // android.internal.hidl.base.V1_0.IBase
     String interfaceDescriptor() throws RemoteException;
 
-    @Override // android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.gnss.V2_0.IGnssConfiguration,
+    // android.hardware.gnss.V1_1.IGnssConfiguration,
+    // android.hardware.gnss.V1_0.IGnssConfiguration,
+    // android.internal.hidl.base.V1_0.IBase
     boolean linkToDeath(IHwBinder.DeathRecipient deathRecipient, long j) throws RemoteException;
 
-    @Override // android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.gnss.V2_0.IGnssConfiguration,
+    // android.hardware.gnss.V1_1.IGnssConfiguration,
+    // android.hardware.gnss.V1_0.IGnssConfiguration,
+    // android.internal.hidl.base.V1_0.IBase
     void notifySyspropsChanged() throws RemoteException;
 
-    @Override // android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.gnss.V2_0.IGnssConfiguration,
+    // android.hardware.gnss.V1_1.IGnssConfiguration,
+    // android.hardware.gnss.V1_0.IGnssConfiguration,
+    // android.internal.hidl.base.V1_0.IBase
     void ping() throws RemoteException;
 
     boolean setBlacklist_2_1(ArrayList<BlacklistedSource> arrayList) throws RemoteException;
 
-    @Override // android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.gnss.V2_0.IGnssConfiguration,
+    // android.hardware.gnss.V1_1.IGnssConfiguration,
+    // android.hardware.gnss.V1_0.IGnssConfiguration,
+    // android.internal.hidl.base.V1_0.IBase
     void setHALInstrumentation() throws RemoteException;
 
-    @Override // android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.gnss.V2_0.IGnssConfiguration,
+    // android.hardware.gnss.V1_1.IGnssConfiguration,
+    // android.hardware.gnss.V1_0.IGnssConfiguration,
+    // android.internal.hidl.base.V1_0.IBase
     boolean unlinkToDeath(IHwBinder.DeathRecipient deathRecipient) throws RemoteException;
 
     static IGnssConfiguration asInterface(IHwBinder binder) {
@@ -125,11 +161,17 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
         }
 
         public final int hashCode() {
-            return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.constellation))), Integer.valueOf(HidlSupport.deepHashCode(Short.valueOf(this.svid))));
+            return Objects.hash(
+                    Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.constellation))),
+                    Integer.valueOf(HidlSupport.deepHashCode(Short.valueOf(this.svid))));
         }
 
         public final String toString() {
-            return "{.constellation = " + GnssConstellationType.toString(this.constellation) + ", .svid = " + ((int) this.svid) + "}";
+            return "{.constellation = "
+                    + GnssConstellationType.toString(this.constellation)
+                    + ", .svid = "
+                    + ((int) this.svid)
+                    + "}";
         }
 
         public final void readFromParcel(HwParcel parcel) {
@@ -141,7 +183,8 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
             ArrayList<BlacklistedSource> _hidl_vec = new ArrayList<>();
             HwBlob _hidl_blob = parcel.readBuffer(16L);
             int _hidl_vec_size = _hidl_blob.getInt32(8L);
-            HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 4, _hidl_blob.handle(), 0L, true);
+            HwBlob childBlob =
+                    parcel.readEmbeddedBuffer(_hidl_vec_size * 4, _hidl_blob.handle(), 0L, true);
             _hidl_vec.clear();
             for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                 BlacklistedSource _hidl_vec_element = new BlacklistedSource();
@@ -151,7 +194,8 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
             return _hidl_vec;
         }
 
-        public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+        public final void readEmbeddedFromParcel(
+                HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
             this.constellation = _hidl_blob.getInt8(0 + _hidl_offset);
             this.svid = _hidl_blob.getInt16(2 + _hidl_offset);
         }
@@ -162,7 +206,8 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
             parcel.writeBuffer(_hidl_blob);
         }
 
-        public static final void writeVectorToParcel(HwParcel parcel, ArrayList<BlacklistedSource> _hidl_vec) {
+        public static final void writeVectorToParcel(
+                HwParcel parcel, ArrayList<BlacklistedSource> _hidl_vec) {
             HwBlob _hidl_blob = new HwBlob(16);
             int _hidl_vec_size = _hidl_vec.size();
             _hidl_blob.putInt32(8L, _hidl_vec_size);
@@ -188,7 +233,11 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
             this.mRemote = (IHwBinder) Objects.requireNonNull(remote);
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssConfiguration, android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+        @Override // android.hardware.gnss.V2_1.IGnssConfiguration,
+        // android.hardware.gnss.V2_0.IGnssConfiguration,
+        // android.hardware.gnss.V1_1.IGnssConfiguration,
+        // android.hardware.gnss.V1_0.IGnssConfiguration,
+        // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
         public IHwBinder asBinder() {
             return this.mRemote;
         }
@@ -212,7 +261,8 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
         @Override // android.hardware.gnss.V1_0.IGnssConfiguration
         public boolean setSuplEs(boolean enabled) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
-            _hidl_request.writeInterfaceToken(android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
+            _hidl_request.writeInterfaceToken(
+                    android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
             _hidl_request.writeBool(enabled);
             HwParcel _hidl_reply = new HwParcel();
             try {
@@ -229,7 +279,8 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
         @Override // android.hardware.gnss.V1_0.IGnssConfiguration
         public boolean setSuplVersion(int version) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
-            _hidl_request.writeInterfaceToken(android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
+            _hidl_request.writeInterfaceToken(
+                    android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
             _hidl_request.writeInt32(version);
             HwParcel _hidl_reply = new HwParcel();
             try {
@@ -246,7 +297,8 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
         @Override // android.hardware.gnss.V1_0.IGnssConfiguration
         public boolean setSuplMode(byte mode) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
-            _hidl_request.writeInterfaceToken(android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
+            _hidl_request.writeInterfaceToken(
+                    android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
             _hidl_request.writeInt8(mode);
             HwParcel _hidl_reply = new HwParcel();
             try {
@@ -263,7 +315,8 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
         @Override // android.hardware.gnss.V1_0.IGnssConfiguration
         public boolean setGpsLock(byte lock) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
-            _hidl_request.writeInterfaceToken(android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
+            _hidl_request.writeInterfaceToken(
+                    android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
             _hidl_request.writeInt8(lock);
             HwParcel _hidl_reply = new HwParcel();
             try {
@@ -280,7 +333,8 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
         @Override // android.hardware.gnss.V1_0.IGnssConfiguration
         public boolean setLppProfile(byte lppProfile) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
-            _hidl_request.writeInterfaceToken(android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
+            _hidl_request.writeInterfaceToken(
+                    android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
             _hidl_request.writeInt8(lppProfile);
             HwParcel _hidl_reply = new HwParcel();
             try {
@@ -297,7 +351,8 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
         @Override // android.hardware.gnss.V1_0.IGnssConfiguration
         public boolean setGlonassPositioningProtocol(byte protocol) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
-            _hidl_request.writeInterfaceToken(android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
+            _hidl_request.writeInterfaceToken(
+                    android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
             _hidl_request.writeInt8(protocol);
             HwParcel _hidl_reply = new HwParcel();
             try {
@@ -314,7 +369,8 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
         @Override // android.hardware.gnss.V1_0.IGnssConfiguration
         public boolean setEmergencySuplPdn(boolean enable) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
-            _hidl_request.writeInterfaceToken(android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
+            _hidl_request.writeInterfaceToken(
+                    android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
             _hidl_request.writeBool(enable);
             HwParcel _hidl_reply = new HwParcel();
             try {
@@ -329,9 +385,11 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
         }
 
         @Override // android.hardware.gnss.V1_1.IGnssConfiguration
-        public boolean setBlacklist(ArrayList<IGnssConfiguration.BlacklistedSource> blacklist) throws RemoteException {
+        public boolean setBlacklist(ArrayList<IGnssConfiguration.BlacklistedSource> blacklist)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
-            _hidl_request.writeInterfaceToken(android.hardware.gnss.V1_1.IGnssConfiguration.kInterfaceName);
+            _hidl_request.writeInterfaceToken(
+                    android.hardware.gnss.V1_1.IGnssConfiguration.kInterfaceName);
             IGnssConfiguration.BlacklistedSource.writeVectorToParcel(_hidl_request, blacklist);
             HwParcel _hidl_reply = new HwParcel();
             try {
@@ -348,7 +406,8 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
         @Override // android.hardware.gnss.V2_0.IGnssConfiguration
         public boolean setEsExtensionSec(int emergencyExtensionSeconds) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
-            _hidl_request.writeInterfaceToken(android.hardware.gnss.V2_0.IGnssConfiguration.kInterfaceName);
+            _hidl_request.writeInterfaceToken(
+                    android.hardware.gnss.V2_0.IGnssConfiguration.kInterfaceName);
             _hidl_request.writeInt32(emergencyExtensionSeconds);
             HwParcel _hidl_reply = new HwParcel();
             try {
@@ -363,7 +422,8 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
         }
 
         @Override // android.hardware.gnss.V2_1.IGnssConfiguration
-        public boolean setBlacklist_2_1(ArrayList<BlacklistedSource> blacklist) throws RemoteException {
+        public boolean setBlacklist_2_1(ArrayList<BlacklistedSource> blacklist)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IGnssConfiguration.kInterfaceName);
             BlacklistedSource.writeVectorToParcel(_hidl_request, blacklist);
@@ -379,7 +439,11 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
             }
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssConfiguration, android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssConfiguration,
+        // android.hardware.gnss.V2_0.IGnssConfiguration,
+        // android.hardware.gnss.V1_1.IGnssConfiguration,
+        // android.hardware.gnss.V1_0.IGnssConfiguration,
+        // android.internal.hidl.base.V1_0.IBase
         public ArrayList<String> interfaceChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -395,7 +459,11 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
             }
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssConfiguration, android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssConfiguration,
+        // android.hardware.gnss.V2_0.IGnssConfiguration,
+        // android.hardware.gnss.V1_1.IGnssConfiguration,
+        // android.hardware.gnss.V1_0.IGnssConfiguration,
+        // android.internal.hidl.base.V1_0.IBase
         public void debug(NativeHandle fd, ArrayList<String> options) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -411,7 +479,11 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
             }
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssConfiguration, android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssConfiguration,
+        // android.hardware.gnss.V2_0.IGnssConfiguration,
+        // android.hardware.gnss.V1_1.IGnssConfiguration,
+        // android.hardware.gnss.V1_0.IGnssConfiguration,
+        // android.internal.hidl.base.V1_0.IBase
         public String interfaceDescriptor() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -427,7 +499,11 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
             }
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssConfiguration, android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssConfiguration,
+        // android.hardware.gnss.V2_0.IGnssConfiguration,
+        // android.hardware.gnss.V1_1.IGnssConfiguration,
+        // android.hardware.gnss.V1_0.IGnssConfiguration,
+        // android.internal.hidl.base.V1_0.IBase
         public ArrayList<byte[]> getHashChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -439,7 +515,9 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
                 ArrayList<byte[]> _hidl_out_hashchain = new ArrayList<>();
                 HwBlob _hidl_blob = _hidl_reply.readBuffer(16L);
                 int _hidl_vec_size = _hidl_blob.getInt32(8L);
-                HwBlob childBlob = _hidl_reply.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
+                HwBlob childBlob =
+                        _hidl_reply.readEmbeddedBuffer(
+                                _hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
                 _hidl_out_hashchain.clear();
                 for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                     byte[] _hidl_vec_element = new byte[32];
@@ -453,7 +531,11 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
             }
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssConfiguration, android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssConfiguration,
+        // android.hardware.gnss.V2_0.IGnssConfiguration,
+        // android.hardware.gnss.V1_1.IGnssConfiguration,
+        // android.hardware.gnss.V1_0.IGnssConfiguration,
+        // android.internal.hidl.base.V1_0.IBase
         public void setHALInstrumentation() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -466,12 +548,21 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
             }
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssConfiguration, android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
-        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) throws RemoteException {
+        @Override // android.hardware.gnss.V2_1.IGnssConfiguration,
+        // android.hardware.gnss.V2_0.IGnssConfiguration,
+        // android.hardware.gnss.V1_1.IGnssConfiguration,
+        // android.hardware.gnss.V1_0.IGnssConfiguration,
+        // android.internal.hidl.base.V1_0.IBase
+        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie)
+                throws RemoteException {
             return this.mRemote.linkToDeath(recipient, cookie);
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssConfiguration, android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssConfiguration,
+        // android.hardware.gnss.V2_0.IGnssConfiguration,
+        // android.hardware.gnss.V1_1.IGnssConfiguration,
+        // android.hardware.gnss.V1_0.IGnssConfiguration,
+        // android.internal.hidl.base.V1_0.IBase
         public void ping() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -485,7 +576,11 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
             }
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssConfiguration, android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssConfiguration,
+        // android.hardware.gnss.V2_0.IGnssConfiguration,
+        // android.hardware.gnss.V1_1.IGnssConfiguration,
+        // android.hardware.gnss.V1_0.IGnssConfiguration,
+        // android.internal.hidl.base.V1_0.IBase
         public DebugInfo getDebugInfo() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -502,7 +597,11 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
             }
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssConfiguration, android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssConfiguration,
+        // android.hardware.gnss.V2_0.IGnssConfiguration,
+        // android.hardware.gnss.V1_1.IGnssConfiguration,
+        // android.hardware.gnss.V1_0.IGnssConfiguration,
+        // android.internal.hidl.base.V1_0.IBase
         public void notifySyspropsChanged() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -515,51 +614,233 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
             }
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssConfiguration, android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssConfiguration,
+        // android.hardware.gnss.V2_0.IGnssConfiguration,
+        // android.hardware.gnss.V1_1.IGnssConfiguration,
+        // android.hardware.gnss.V1_0.IGnssConfiguration,
+        // android.internal.hidl.base.V1_0.IBase
         public boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) throws RemoteException {
             return this.mRemote.unlinkToDeath(recipient);
         }
     }
 
-    public static abstract class Stub extends HwBinder implements IGnssConfiguration {
-        @Override // android.hardware.gnss.V2_1.IGnssConfiguration, android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+    public abstract static class Stub extends HwBinder implements IGnssConfiguration {
+        @Override // android.hardware.gnss.V2_1.IGnssConfiguration,
+        // android.hardware.gnss.V2_0.IGnssConfiguration,
+        // android.hardware.gnss.V1_1.IGnssConfiguration,
+        // android.hardware.gnss.V1_0.IGnssConfiguration,
+        // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
         public IHwBinder asBinder() {
             return this;
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssConfiguration, android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssConfiguration,
+        // android.hardware.gnss.V2_0.IGnssConfiguration,
+        // android.hardware.gnss.V1_1.IGnssConfiguration,
+        // android.hardware.gnss.V1_0.IGnssConfiguration,
+        // android.internal.hidl.base.V1_0.IBase
         public final ArrayList<String> interfaceChain() {
-            return new ArrayList<>(Arrays.asList(IGnssConfiguration.kInterfaceName, android.hardware.gnss.V2_0.IGnssConfiguration.kInterfaceName, android.hardware.gnss.V1_1.IGnssConfiguration.kInterfaceName, android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName, IBase.kInterfaceName));
+            return new ArrayList<>(
+                    Arrays.asList(
+                            IGnssConfiguration.kInterfaceName,
+                            android.hardware.gnss.V2_0.IGnssConfiguration.kInterfaceName,
+                            android.hardware.gnss.V1_1.IGnssConfiguration.kInterfaceName,
+                            android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName,
+                            IBase.kInterfaceName));
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssConfiguration, android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
-        public void debug(NativeHandle fd, ArrayList<String> options) {
-        }
+        @Override // android.hardware.gnss.V2_1.IGnssConfiguration,
+        // android.hardware.gnss.V2_0.IGnssConfiguration,
+        // android.hardware.gnss.V1_1.IGnssConfiguration,
+        // android.hardware.gnss.V1_0.IGnssConfiguration,
+        // android.internal.hidl.base.V1_0.IBase
+        public void debug(NativeHandle fd, ArrayList<String> options) {}
 
-        @Override // android.hardware.gnss.V2_1.IGnssConfiguration, android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssConfiguration,
+        // android.hardware.gnss.V2_0.IGnssConfiguration,
+        // android.hardware.gnss.V1_1.IGnssConfiguration,
+        // android.hardware.gnss.V1_0.IGnssConfiguration,
+        // android.internal.hidl.base.V1_0.IBase
         public final String interfaceDescriptor() {
             return IGnssConfiguration.kInterfaceName;
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssConfiguration, android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssConfiguration,
+        // android.hardware.gnss.V2_0.IGnssConfiguration,
+        // android.hardware.gnss.V1_1.IGnssConfiguration,
+        // android.hardware.gnss.V1_0.IGnssConfiguration,
+        // android.internal.hidl.base.V1_0.IBase
         public final ArrayList<byte[]> getHashChain() {
-            return new ArrayList<>(Arrays.asList(new byte[]{115, 125, 117, 0, 23, 115, -113, 7, 83, -47, 59, MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH, 26, 51, 16, MidiConstants.STATUS_PITCH_BEND, 22, SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEIN, 41, 75, -118, -24, 11, 63, -42, 62, -86, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEIN, 126, -99, -100, 102}, new byte[]{-20, -55, 102, -58, -117, -35, -67, -107, -56, -38, -25, -126, -72, 66, 4, -49, 1, -57, 87, 52, 103, 94, -121, 105, -106, 63, 59, 81, 6, -20, 18, -117}, new byte[]{60, 81, -125, -41, 80, SprAttributeBase.TYPE_DURATION, 16, -66, 87, MidiConstants.STATUS_PITCH_BEND, -9, 72, -29, 100, 15, -62, -34, -47, -70, -107, 87, -124, -74, 37, 107, -92, SprAnimatorBase.INTERPOLATOR_TYPE_SINEEASEINOUT, -12, -61, -103, 89, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN}, new byte[]{-5, -110, -30, -76, 15, -114, -99, 73, 78, -113, -45, -76, -84, 24, 73, -102, 50, 22, 52, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT70, 124, -1, 22, 7, 20, -61, -69, MidiConstants.STATUS_SONG_SELECT, 102, 11, 110, 121}, new byte[]{-20, Byte.MAX_VALUE, -41, -98, MidiConstants.STATUS_CHANNEL_PRESSURE, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60, -6, -123, -68, 73, -108, 38, -83, -82, 62, -66, 35, -17, 5, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, MidiConstants.STATUS_SONG_SELECT, -51, 105, 87, 19, -109, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, -72, 59, 24, -54, 76}));
+            return new ArrayList<>(
+                    Arrays.asList(
+                            new byte[] {
+                                115,
+                                125,
+                                117,
+                                0,
+                                23,
+                                115,
+                                -113,
+                                7,
+                                83,
+                                -47,
+                                59,
+                                MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH,
+                                26,
+                                51,
+                                16,
+                                MidiConstants.STATUS_PITCH_BEND,
+                                22,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEIN,
+                                41,
+                                75,
+                                -118,
+                                -24,
+                                11,
+                                63,
+                                -42,
+                                62,
+                                -86,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEIN,
+                                126,
+                                -99,
+                                -100,
+                                102
+                            },
+                            new byte[] {
+                                -20, -55, 102, -58, -117, -35, -67, -107, -56, -38, -25, -126, -72,
+                                66, 4, -49, 1, -57, 87, 52, 103, 94, -121, 105, -106, 63, 59, 81, 6,
+                                -20, 18, -117
+                            },
+                            new byte[] {
+                                60,
+                                81,
+                                -125,
+                                -41,
+                                80,
+                                SprAttributeBase.TYPE_DURATION,
+                                16,
+                                -66,
+                                87,
+                                MidiConstants.STATUS_PITCH_BEND,
+                                -9,
+                                72,
+                                -29,
+                                100,
+                                15,
+                                -62,
+                                -34,
+                                -47,
+                                -70,
+                                -107,
+                                87,
+                                -124,
+                                -74,
+                                37,
+                                107,
+                                -92,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEEASEINOUT,
+                                -12,
+                                -61,
+                                -103,
+                                89,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN
+                            },
+                            new byte[] {
+                                -5,
+                                -110,
+                                -30,
+                                -76,
+                                15,
+                                -114,
+                                -99,
+                                73,
+                                78,
+                                -113,
+                                -45,
+                                -76,
+                                -84,
+                                24,
+                                73,
+                                -102,
+                                50,
+                                22,
+                                52,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT70,
+                                124,
+                                -1,
+                                22,
+                                7,
+                                20,
+                                -61,
+                                -69,
+                                MidiConstants.STATUS_SONG_SELECT,
+                                102,
+                                11,
+                                110,
+                                121
+                            },
+                            new byte[] {
+                                -20,
+                                Byte.MAX_VALUE,
+                                -41,
+                                -98,
+                                MidiConstants.STATUS_CHANNEL_PRESSURE,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60,
+                                -6,
+                                -123,
+                                -68,
+                                73,
+                                -108,
+                                38,
+                                -83,
+                                -82,
+                                62,
+                                -66,
+                                35,
+                                -17,
+                                5,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                MidiConstants.STATUS_SONG_SELECT,
+                                -51,
+                                105,
+                                87,
+                                19,
+                                -109,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                -72,
+                                59,
+                                24,
+                                -54,
+                                76
+                            }));
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssConfiguration, android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
-        public final void setHALInstrumentation() {
-        }
+        @Override // android.hardware.gnss.V2_1.IGnssConfiguration,
+        // android.hardware.gnss.V2_0.IGnssConfiguration,
+        // android.hardware.gnss.V1_1.IGnssConfiguration,
+        // android.hardware.gnss.V1_0.IGnssConfiguration,
+        // android.internal.hidl.base.V1_0.IBase
+        public final void setHALInstrumentation() {}
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) {
             return true;
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssConfiguration, android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
-        public final void ping() {
-        }
+        @Override // android.hardware.gnss.V2_1.IGnssConfiguration,
+        // android.hardware.gnss.V2_0.IGnssConfiguration,
+        // android.hardware.gnss.V1_1.IGnssConfiguration,
+        // android.hardware.gnss.V1_0.IGnssConfiguration,
+        // android.internal.hidl.base.V1_0.IBase
+        public final void ping() {}
 
-        @Override // android.hardware.gnss.V2_1.IGnssConfiguration, android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssConfiguration,
+        // android.hardware.gnss.V2_0.IGnssConfiguration,
+        // android.hardware.gnss.V1_1.IGnssConfiguration,
+        // android.hardware.gnss.V1_0.IGnssConfiguration,
+        // android.internal.hidl.base.V1_0.IBase
         public final DebugInfo getDebugInfo() {
             DebugInfo info = new DebugInfo();
             info.pid = HidlSupport.getPidIfSharable();
@@ -568,12 +849,17 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
             return info;
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssConfiguration, android.hardware.gnss.V2_0.IGnssConfiguration, android.hardware.gnss.V1_1.IGnssConfiguration, android.hardware.gnss.V1_0.IGnssConfiguration, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssConfiguration,
+        // android.hardware.gnss.V2_0.IGnssConfiguration,
+        // android.hardware.gnss.V1_1.IGnssConfiguration,
+        // android.hardware.gnss.V1_0.IGnssConfiguration,
+        // android.internal.hidl.base.V1_0.IBase
         public final void notifySyspropsChanged() {
             HwBinder.enableInstrumentation();
         }
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) {
             return true;
         }
@@ -595,10 +881,13 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
         }
 
         @Override // android.os.HwBinder
-        public void onTransact(int _hidl_code, HwParcel _hidl_request, HwParcel _hidl_reply, int _hidl_flags) throws RemoteException {
+        public void onTransact(
+                int _hidl_code, HwParcel _hidl_request, HwParcel _hidl_reply, int _hidl_flags)
+                throws RemoteException {
             switch (_hidl_code) {
                 case 1:
-                    _hidl_request.enforceInterface(android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
                     boolean enabled = _hidl_request.readBool();
                     boolean _hidl_out_success = setSuplEs(enabled);
                     _hidl_reply.writeStatus(0);
@@ -606,7 +895,8 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
                     _hidl_reply.send();
                     return;
                 case 2:
-                    _hidl_request.enforceInterface(android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
                     int version = _hidl_request.readInt32();
                     boolean _hidl_out_success2 = setSuplVersion(version);
                     _hidl_reply.writeStatus(0);
@@ -614,7 +904,8 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
                     _hidl_reply.send();
                     return;
                 case 3:
-                    _hidl_request.enforceInterface(android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
                     byte mode = _hidl_request.readInt8();
                     boolean _hidl_out_success3 = setSuplMode(mode);
                     _hidl_reply.writeStatus(0);
@@ -622,7 +913,8 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
                     _hidl_reply.send();
                     return;
                 case 4:
-                    _hidl_request.enforceInterface(android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
                     byte lock = _hidl_request.readInt8();
                     boolean _hidl_out_success4 = setGpsLock(lock);
                     _hidl_reply.writeStatus(0);
@@ -630,7 +922,8 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
                     _hidl_reply.send();
                     return;
                 case 5:
-                    _hidl_request.enforceInterface(android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
                     byte lppProfile = _hidl_request.readInt8();
                     boolean _hidl_out_success5 = setLppProfile(lppProfile);
                     _hidl_reply.writeStatus(0);
@@ -638,7 +931,8 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
                     _hidl_reply.send();
                     return;
                 case 6:
-                    _hidl_request.enforceInterface(android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
                     byte protocol = _hidl_request.readInt8();
                     boolean _hidl_out_success6 = setGlonassPositioningProtocol(protocol);
                     _hidl_reply.writeStatus(0);
@@ -646,7 +940,8 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
                     _hidl_reply.send();
                     return;
                 case 7:
-                    _hidl_request.enforceInterface(android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.gnss.V1_0.IGnssConfiguration.kInterfaceName);
                     boolean enable = _hidl_request.readBool();
                     boolean _hidl_out_success7 = setEmergencySuplPdn(enable);
                     _hidl_reply.writeStatus(0);
@@ -654,15 +949,19 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
                     _hidl_reply.send();
                     return;
                 case 8:
-                    _hidl_request.enforceInterface(android.hardware.gnss.V1_1.IGnssConfiguration.kInterfaceName);
-                    ArrayList<IGnssConfiguration.BlacklistedSource> blacklist = IGnssConfiguration.BlacklistedSource.readVectorFromParcel(_hidl_request);
+                    _hidl_request.enforceInterface(
+                            android.hardware.gnss.V1_1.IGnssConfiguration.kInterfaceName);
+                    ArrayList<IGnssConfiguration.BlacklistedSource> blacklist =
+                            IGnssConfiguration.BlacklistedSource.readVectorFromParcel(
+                                    _hidl_request);
                     boolean _hidl_out_success8 = setBlacklist(blacklist);
                     _hidl_reply.writeStatus(0);
                     _hidl_reply.writeBool(_hidl_out_success8);
                     _hidl_reply.send();
                     return;
                 case 9:
-                    _hidl_request.enforceInterface(android.hardware.gnss.V2_0.IGnssConfiguration.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.gnss.V2_0.IGnssConfiguration.kInterfaceName);
                     int emergencyExtensionSeconds = _hidl_request.readInt32();
                     boolean _hidl_out_success9 = setEsExtensionSec(emergencyExtensionSeconds);
                     _hidl_reply.writeStatus(0);
@@ -671,7 +970,8 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
                     return;
                 case 10:
                     _hidl_request.enforceInterface(IGnssConfiguration.kInterfaceName);
-                    ArrayList<BlacklistedSource> blacklist2 = BlacklistedSource.readVectorFromParcel(_hidl_request);
+                    ArrayList<BlacklistedSource> blacklist2 =
+                            BlacklistedSource.readVectorFromParcel(_hidl_request);
                     boolean _hidl_out_success10 = setBlacklist_2_1(blacklist2);
                     _hidl_reply.writeStatus(0);
                     _hidl_reply.writeBool(_hidl_out_success10);
@@ -712,7 +1012,8 @@ public interface IGnssConfiguration extends android.hardware.gnss.V2_0.IGnssConf
                         long _hidl_array_offset_1 = _hidl_index_0 * 32;
                         byte[] _hidl_array_item_1 = _hidl_out_hashchain.get(_hidl_index_0);
                         if (_hidl_array_item_1 == null || _hidl_array_item_1.length != 32) {
-                            throw new IllegalArgumentException("Array element is not of the expected length");
+                            throw new IllegalArgumentException(
+                                    "Array element is not of the expected length");
                         }
                         childBlob.putInt8Array(_hidl_array_offset_1, _hidl_array_item_1);
                     }

@@ -10,6 +10,7 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.MotionEvent;
 import android.view.SurfaceControl;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -22,7 +23,8 @@ public interface IWallpaperEngine extends IInterface {
 
     void dispatchPointer(MotionEvent motionEvent) throws RemoteException;
 
-    void dispatchWallpaperCommand(String str, int i, int i2, int i3, Bundle bundle) throws RemoteException;
+    void dispatchWallpaperCommand(String str, int i, int i2, int i3, Bundle bundle)
+            throws RemoteException;
 
     SurfaceControl mirrorSurfaceControl() throws RemoteException;
 
@@ -52,64 +54,51 @@ public interface IWallpaperEngine extends IInterface {
 
     public static class Default implements IWallpaperEngine {
         @Override // android.service.wallpaper.IWallpaperEngine
-        public void setDesiredSize(int width, int height) throws RemoteException {
-        }
+        public void setDesiredSize(int width, int height) throws RemoteException {}
 
         @Override // android.service.wallpaper.IWallpaperEngine
-        public void setDisplayPadding(Rect padding) throws RemoteException {
-        }
+        public void setDisplayPadding(Rect padding) throws RemoteException {}
 
         @Override // android.service.wallpaper.IWallpaperEngine
-        public void setVisibility(boolean visible) throws RemoteException {
-        }
+        public void setVisibility(boolean visible) throws RemoteException {}
 
         @Override // android.service.wallpaper.IWallpaperEngine
-        public void onScreenTurningOn() throws RemoteException {
-        }
+        public void onScreenTurningOn() throws RemoteException {}
 
         @Override // android.service.wallpaper.IWallpaperEngine
-        public void onScreenTurnedOn() throws RemoteException {
-        }
+        public void onScreenTurnedOn() throws RemoteException {}
 
         @Override // android.service.wallpaper.IWallpaperEngine
-        public void setInAmbientMode(boolean inAmbientDisplay, long animationDuration) throws RemoteException {
-        }
+        public void setInAmbientMode(boolean inAmbientDisplay, long animationDuration)
+                throws RemoteException {}
 
         @Override // android.service.wallpaper.IWallpaperEngine
-        public void dispatchPointer(MotionEvent event) throws RemoteException {
-        }
+        public void dispatchPointer(MotionEvent event) throws RemoteException {}
 
         @Override // android.service.wallpaper.IWallpaperEngine
-        public void dispatchWallpaperCommand(String action, int x, int y, int z, Bundle extras) throws RemoteException {
-        }
+        public void dispatchWallpaperCommand(String action, int x, int y, int z, Bundle extras)
+                throws RemoteException {}
 
         @Override // android.service.wallpaper.IWallpaperEngine
-        public void setSurfaceAlpha(float alpha) throws RemoteException {
-        }
+        public void setSurfaceAlpha(float alpha) throws RemoteException {}
 
         @Override // android.service.wallpaper.IWallpaperEngine
-        public void requestWallpaperColors() throws RemoteException {
-        }
+        public void requestWallpaperColors() throws RemoteException {}
 
         @Override // android.service.wallpaper.IWallpaperEngine
-        public void destroy() throws RemoteException {
-        }
+        public void destroy() throws RemoteException {}
 
         @Override // android.service.wallpaper.IWallpaperEngine
-        public void setZoomOut(float scale) throws RemoteException {
-        }
+        public void setZoomOut(float scale) throws RemoteException {}
 
         @Override // android.service.wallpaper.IWallpaperEngine
-        public void resizePreview(Rect positionInWindow) throws RemoteException {
-        }
+        public void resizePreview(Rect positionInWindow) throws RemoteException {}
 
         @Override // android.service.wallpaper.IWallpaperEngine
-        public void removeLocalColorsAreas(List<RectF> regions) throws RemoteException {
-        }
+        public void removeLocalColorsAreas(List<RectF> regions) throws RemoteException {}
 
         @Override // android.service.wallpaper.IWallpaperEngine
-        public void addLocalColorsAreas(List<RectF> regions) throws RemoteException {
-        }
+        public void addLocalColorsAreas(List<RectF> regions) throws RemoteException {}
 
         @Override // android.service.wallpaper.IWallpaperEngine
         public SurfaceControl mirrorSurfaceControl() throws RemoteException {
@@ -117,12 +106,10 @@ public interface IWallpaperEngine extends IInterface {
         }
 
         @Override // android.service.wallpaper.IWallpaperEngine
-        public void applyDimming(float dimAmount) throws RemoteException {
-        }
+        public void applyDimming(float dimAmount) throws RemoteException {}
 
         @Override // android.service.wallpaper.IWallpaperEngine
-        public void setWallpaperFlags(int which) throws RemoteException {
-        }
+        public void setWallpaperFlags(int which) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -130,7 +117,7 @@ public interface IWallpaperEngine extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWallpaperEngine {
+    public abstract static class Stub extends Binder implements IWallpaperEngine {
         public static final String DESCRIPTOR = "android.service.wallpaper.IWallpaperEngine";
         static final int TRANSACTION_addLocalColorsAreas = 15;
         static final int TRANSACTION_applyDimming = 17;
@@ -220,7 +207,8 @@ public interface IWallpaperEngine extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -398,7 +386,8 @@ public interface IWallpaperEngine extends IInterface {
             }
 
             @Override // android.service.wallpaper.IWallpaperEngine
-            public void setInAmbientMode(boolean inAmbientDisplay, long animationDuration) throws RemoteException {
+            public void setInAmbientMode(boolean inAmbientDisplay, long animationDuration)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -423,7 +412,8 @@ public interface IWallpaperEngine extends IInterface {
             }
 
             @Override // android.service.wallpaper.IWallpaperEngine
-            public void dispatchWallpaperCommand(String action, int x, int y, int z, Bundle extras) throws RemoteException {
+            public void dispatchWallpaperCommand(String action, int x, int y, int z, Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -528,7 +518,8 @@ public interface IWallpaperEngine extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(16, _data, _reply, 0);
                     _reply.readException();
-                    SurfaceControl _result = (SurfaceControl) _reply.readTypedObject(SurfaceControl.CREATOR);
+                    SurfaceControl _result =
+                            (SurfaceControl) _reply.readTypedObject(SurfaceControl.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

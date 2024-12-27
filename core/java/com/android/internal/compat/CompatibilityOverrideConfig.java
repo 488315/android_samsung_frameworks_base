@@ -3,24 +3,28 @@ package com.android.internal.compat;
 import android.app.compat.PackageOverride;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /* loaded from: classes5.dex */
 public final class CompatibilityOverrideConfig implements Parcelable {
-    public static final Parcelable.Creator<CompatibilityOverrideConfig> CREATOR = new Parcelable.Creator<CompatibilityOverrideConfig>() { // from class: com.android.internal.compat.CompatibilityOverrideConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CompatibilityOverrideConfig createFromParcel(Parcel in) {
-            return new CompatibilityOverrideConfig(in);
-        }
+    public static final Parcelable.Creator<CompatibilityOverrideConfig> CREATOR =
+            new Parcelable.Creator<
+                    CompatibilityOverrideConfig>() { // from class:
+                                                     // com.android.internal.compat.CompatibilityOverrideConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CompatibilityOverrideConfig createFromParcel(Parcel in) {
+                    return new CompatibilityOverrideConfig(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CompatibilityOverrideConfig[] newArray(int size) {
-            return new CompatibilityOverrideConfig[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CompatibilityOverrideConfig[] newArray(int size) {
+                    return new CompatibilityOverrideConfig[size];
+                }
+            };
     public final Map<Long, PackageOverride> overrides;
 
     public CompatibilityOverrideConfig(Map<Long, PackageOverride> overrides) {

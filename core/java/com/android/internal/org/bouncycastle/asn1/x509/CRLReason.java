@@ -4,6 +4,7 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Enumerated;
 import com.android.internal.org.bouncycastle.asn1.ASN1Object;
 import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.util.Integers;
+
 import java.math.BigInteger;
 import java.util.Hashtable;
 
@@ -30,7 +31,19 @@ public class CRLReason extends ASN1Object {
     public static final int superseded = 4;
     public static final int unspecified = 0;
     private ASN1Enumerated value;
-    private static final String[] reasonString = {"unspecified", "keyCompromise", "cACompromise", "affiliationChanged", "superseded", "cessationOfOperation", "certificateHold", "unknown", "removeFromCRL", "privilegeWithdrawn", "aACompromise"};
+    private static final String[] reasonString = {
+        "unspecified",
+        "keyCompromise",
+        "cACompromise",
+        "affiliationChanged",
+        "superseded",
+        "cessationOfOperation",
+        "certificateHold",
+        "unknown",
+        "removeFromCRL",
+        "privilegeWithdrawn",
+        "aACompromise"
+    };
     private static final Hashtable table = new Hashtable();
 
     public static CRLReason getInstance(Object o) {
@@ -62,7 +75,8 @@ public class CRLReason extends ASN1Object {
         return this.value.getValue();
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         return this.value;
     }

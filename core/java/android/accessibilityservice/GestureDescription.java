@@ -5,7 +5,9 @@ import android.graphics.PathMeasure;
 import android.graphics.RectF;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,9 +80,13 @@ public final class GestureDescription {
             StrokeDescription strokeDescription = this.mStrokes.get(i);
             if (strokeDescription.hasPointForTime(time)) {
                 touchPoints[numPointsFound].mStrokeId = strokeDescription.getId();
-                touchPoints[numPointsFound].mContinuedStrokeId = strokeDescription.getContinuedStrokeId();
-                touchPoints[numPointsFound].mIsStartOfPath = strokeDescription.getContinuedStrokeId() < 0 && time == strokeDescription.mStartTime;
-                touchPoints[numPointsFound].mIsEndOfPath = !strokeDescription.willContinue() && time == strokeDescription.mEndTime;
+                touchPoints[numPointsFound].mContinuedStrokeId =
+                        strokeDescription.getContinuedStrokeId();
+                touchPoints[numPointsFound].mIsStartOfPath =
+                        strokeDescription.getContinuedStrokeId() < 0
+                                && time == strokeDescription.mStartTime;
+                touchPoints[numPointsFound].mIsEndOfPath =
+                        !strokeDescription.willContinue() && time == strokeDescription.mEndTime;
                 strokeDescription.getPosForTime(time, this.mTempPos);
                 touchPoints[numPointsFound].mX = Math.round(this.mTempPos[0]);
                 touchPoints[numPointsFound].mY = Math.round(this.mTempPos[1]);
@@ -106,12 +112,15 @@ public final class GestureDescription {
 
         public Builder addStroke(StrokeDescription strokeDescription) {
             if (this.mStrokes.size() >= 20) {
-                throw new IllegalStateException("Attempting to add too many strokes to a gesture. Maximum is 20, got " + this.mStrokes.size());
+                throw new IllegalStateException(
+                        "Attempting to add too many strokes to a gesture. Maximum is 20, got "
+                                + this.mStrokes.size());
             }
             this.mStrokes.add(strokeDescription);
             if (GestureDescription.getTotalDuration(this.mStrokes) > 60000) {
                 this.mStrokes.remove(strokeDescription);
-                throw new IllegalStateException("Gesture would exceed maximum duration with new stroke");
+                throw new IllegalStateException(
+                        "Gesture would exceed maximum duration with new stroke");
             }
             return this;
         }
@@ -154,7 +163,12 @@ public final class GestureDescription {
             Preconditions.checkArgument(!path.isEmpty(), "Path is empty");
             RectF bounds = new RectF();
             path.computeBounds(bounds, false);
-            Preconditions.checkArgument(bounds.bottom >= 0.0f && bounds.top >= 0.0f && bounds.right >= 0.0f && bounds.left >= 0.0f, "Path bounds must not be negative");
+            Preconditions.checkArgument(
+                    bounds.bottom >= 0.0f
+                            && bounds.top >= 0.0f
+                            && bounds.right >= 0.0f
+                            && bounds.left >= 0.0f,
+                    "Path bounds must not be negative");
             this.mPath = new Path(path);
             this.mPathMeasure = new PathMeasure(path, false);
             if (this.mPathMeasure.getLength() == 0.0f) {
@@ -192,11 +206,14 @@ public final class GestureDescription {
             return this.mId;
         }
 
-        public StrokeDescription continueStroke(Path path, long startTime, long duration, boolean willContinue) {
+        public StrokeDescription continueStroke(
+                Path path, long startTime, long duration, boolean willContinue) {
             if (!this.mContinued) {
-                throw new IllegalStateException("Only strokes marked willContinue can be continued");
+                throw new IllegalStateException(
+                        "Only strokes marked willContinue can be continued");
             }
-            StrokeDescription strokeDescription = new StrokeDescription(path, startTime, duration, willContinue);
+            StrokeDescription strokeDescription =
+                    new StrokeDescription(path, startTime, duration, willContinue);
             strokeDescription.mContinuedStrokeId = this.mId;
             return strokeDescription;
         }
@@ -232,19 +249,21 @@ public final class GestureDescription {
     }
 
     public static class TouchPoint implements Parcelable {
-        public static final Parcelable.Creator<TouchPoint> CREATOR = new Parcelable.Creator<TouchPoint>() { // from class: android.accessibilityservice.GestureDescription.TouchPoint.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public TouchPoint createFromParcel(Parcel in) {
-                return new TouchPoint(in);
-            }
+        public static final Parcelable.Creator<TouchPoint> CREATOR =
+                new Parcelable.Creator<TouchPoint>() { // from class:
+                    // android.accessibilityservice.GestureDescription.TouchPoint.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public TouchPoint createFromParcel(Parcel in) {
+                        return new TouchPoint(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public TouchPoint[] newArray(int size) {
-                return new TouchPoint[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public TouchPoint[] newArray(int size) {
+                        return new TouchPoint[size];
+                    }
+                };
         private static final int FLAG_IS_END_OF_PATH = 2;
         private static final int FLAG_IS_START_OF_PATH = 1;
         public int mContinuedStrokeId;
@@ -254,8 +273,7 @@ public final class GestureDescription {
         public float mX;
         public float mY;
 
-        public TouchPoint() {
-        }
+        public TouchPoint() {}
 
         public TouchPoint(TouchPoint pointToCopy) {
             copyFrom(pointToCopy);
@@ -281,7 +299,19 @@ public final class GestureDescription {
         }
 
         public String toString() {
-            return "TouchPoint{mStrokeId=" + this.mStrokeId + ", mContinuedStrokeId=" + this.mContinuedStrokeId + ", mIsStartOfPath=" + this.mIsStartOfPath + ", mIsEndOfPath=" + this.mIsEndOfPath + ", mX=" + this.mX + ", mY=" + this.mY + '}';
+            return "TouchPoint{mStrokeId="
+                    + this.mStrokeId
+                    + ", mContinuedStrokeId="
+                    + this.mContinuedStrokeId
+                    + ", mIsStartOfPath="
+                    + this.mIsStartOfPath
+                    + ", mIsEndOfPath="
+                    + this.mIsEndOfPath
+                    + ", mX="
+                    + this.mX
+                    + ", mY="
+                    + this.mY
+                    + '}';
         }
 
         @Override // android.os.Parcelable
@@ -300,24 +330,27 @@ public final class GestureDescription {
     }
 
     public static class GestureStep implements Parcelable {
-        public static final Parcelable.Creator<GestureStep> CREATOR = new Parcelable.Creator<GestureStep>() { // from class: android.accessibilityservice.GestureDescription.GestureStep.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public GestureStep createFromParcel(Parcel in) {
-                return new GestureStep(in);
-            }
+        public static final Parcelable.Creator<GestureStep> CREATOR =
+                new Parcelable.Creator<GestureStep>() { // from class:
+                    // android.accessibilityservice.GestureDescription.GestureStep.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public GestureStep createFromParcel(Parcel in) {
+                        return new GestureStep(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public GestureStep[] newArray(int size) {
-                return new GestureStep[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public GestureStep[] newArray(int size) {
+                        return new GestureStep[size];
+                    }
+                };
         public int numTouchPoints;
         public long timeSinceGestureStart;
         public TouchPoint[] touchPoints;
 
-        public GestureStep(long timeSinceGestureStart, int numTouchPoints, TouchPoint[] touchPointsToCopy) {
+        public GestureStep(
+                long timeSinceGestureStart, int numTouchPoints, TouchPoint[] touchPointsToCopy) {
             this.timeSinceGestureStart = timeSinceGestureStart;
             this.numTouchPoints = numTouchPoints;
             this.touchPoints = new TouchPoint[numTouchPoints];
@@ -328,7 +361,10 @@ public final class GestureDescription {
 
         public GestureStep(Parcel parcel) {
             this.timeSinceGestureStart = parcel.readLong();
-            Parcelable[] parcelables = (Parcelable[]) parcel.readParcelableArray(TouchPoint.class.getClassLoader(), TouchPoint.class);
+            Parcelable[] parcelables =
+                    (Parcelable[])
+                            parcel.readParcelableArray(
+                                    TouchPoint.class.getClassLoader(), TouchPoint.class);
             this.numTouchPoints = parcelables == null ? 0 : parcelables.length;
             this.touchPoints = new TouchPoint[this.numTouchPoints];
             for (int i = 0; i < this.numTouchPoints; i++) {
@@ -351,16 +387,23 @@ public final class GestureDescription {
     public static class MotionEventGenerator {
         private static TouchPoint[] sCurrentTouchPoints;
 
-        public static List<GestureStep> getGestureStepsFromGestureDescription(GestureDescription description, int sampleTimeMs) {
+        public static List<GestureStep> getGestureStepsFromGestureDescription(
+                GestureDescription description, int sampleTimeMs) {
             List<GestureStep> gestureSteps = new ArrayList<>();
             TouchPoint[] currentTouchPoints = getCurrentTouchPoints(description.getStrokeCount());
             int currentTouchPointSize = 0;
             long timeSinceGestureStart = 0;
             long nextKeyPointTime = description.getNextKeyPointAtLeast(0L);
             while (nextKeyPointTime >= 0) {
-                timeSinceGestureStart = currentTouchPointSize == 0 ? nextKeyPointTime : Math.min(nextKeyPointTime, sampleTimeMs + timeSinceGestureStart);
-                currentTouchPointSize = description.getPointsForTime(timeSinceGestureStart, currentTouchPoints);
-                gestureSteps.add(new GestureStep(timeSinceGestureStart, currentTouchPointSize, currentTouchPoints));
+                timeSinceGestureStart =
+                        currentTouchPointSize == 0
+                                ? nextKeyPointTime
+                                : Math.min(nextKeyPointTime, sampleTimeMs + timeSinceGestureStart);
+                currentTouchPointSize =
+                        description.getPointsForTime(timeSinceGestureStart, currentTouchPoints);
+                gestureSteps.add(
+                        new GestureStep(
+                                timeSinceGestureStart, currentTouchPointSize, currentTouchPoints));
                 nextKeyPointTime = description.getNextKeyPointAtLeast(1 + timeSinceGestureStart);
             }
             return gestureSteps;

@@ -7,19 +7,21 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes2.dex */
 public class SContextApproach extends SContextEventContext {
-    public static final Parcelable.Creator<SContextApproach> CREATOR = new Parcelable.Creator<SContextApproach>() { // from class: android.hardware.scontext.SContextApproach.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextApproach createFromParcel(Parcel in) {
-            return new SContextApproach(in);
-        }
+    public static final Parcelable.Creator<SContextApproach> CREATOR =
+            new Parcelable.Creator<SContextApproach>() { // from class:
+                // android.hardware.scontext.SContextApproach.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextApproach createFromParcel(Parcel in) {
+                    return new SContextApproach(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextApproach[] newArray(int size) {
-            return new SContextApproach[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextApproach[] newArray(int size) {
+                    return new SContextApproach[size];
+                }
+            };
     private Bundle mContext;
 
     SContextApproach() {
@@ -38,7 +40,8 @@ public class SContextApproach extends SContextEventContext {
         return this.mContext.getInt("UserID");
     }
 
-    @Override // android.hardware.scontext.SContextEventContext, com.samsung.android.hardware.context.SemContextEventContext
+    @Override // android.hardware.scontext.SContextEventContext,
+    // com.samsung.android.hardware.context.SemContextEventContext
     public void setValues(Bundle context) {
         this.mContext = context;
     }

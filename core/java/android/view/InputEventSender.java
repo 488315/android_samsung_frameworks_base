@@ -4,7 +4,9 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.MessageQueue;
 import android.util.Log;
+
 import dalvik.system.CloseGuard;
+
 import java.lang.ref.WeakReference;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -21,7 +23,10 @@ public abstract class InputEventSender {
 
     private static native void nativeDispose(long j);
 
-    private static native long nativeInit(WeakReference<InputEventSender> weakReference, InputChannel inputChannel, MessageQueue messageQueue);
+    private static native long nativeInit(
+            WeakReference<InputEventSender> weakReference,
+            InputChannel inputChannel,
+            MessageQueue messageQueue);
 
     private static native boolean nativeSendKeyEvent(long j, int i, KeyEvent keyEvent);
 
@@ -36,7 +41,8 @@ public abstract class InputEventSender {
         }
         this.mInputChannel = inputChannel;
         this.mHandler = new Handler(looper);
-        this.mSenderPtr = nativeInit(new WeakReference(this), this.mInputChannel, looper.getQueue());
+        this.mSenderPtr =
+                nativeInit(new WeakReference(this), this.mInputChannel, looper.getQueue());
         this.mCloseGuard.open("InputEventSender.dispose");
     }
 
@@ -67,30 +73,34 @@ public abstract class InputEventSender {
         this.mInputChannel = null;
     }
 
-    public void onInputEventFinished(int seq, boolean handled) {
-    }
+    public void onInputEventFinished(int seq, boolean handled) {}
 
-    public void onTimelineReported(int inputEventId, long gpuCompletedTime, long presentTime) {
-    }
+    public void onTimelineReported(int inputEventId, long gpuCompletedTime, long presentTime) {}
 
     public final boolean sendInputEvent(final int seq, final InputEvent event) {
         if (event == null) {
             throw new IllegalArgumentException("event must not be null");
         }
         if (this.mSenderPtr == 0) {
-            Log.w(TAG, "Attempted to send an input event but the input event sender has already been disposed.");
+            Log.w(
+                    TAG,
+                    "Attempted to send an input event but the input event sender has already been"
+                        + " disposed.");
             return false;
         }
         if (this.mHandler.getLooper().isCurrentThread()) {
             return sendInputEventInternal(seq, event);
         }
-        RunnableFuture<Boolean> task = new FutureTask<>(new Callable<Boolean>() { // from class: android.view.InputEventSender.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // java.util.concurrent.Callable
-            public Boolean call() throws Exception {
-                return Boolean.valueOf(InputEventSender.this.sendInputEventInternal(seq, event));
-            }
-        });
+        RunnableFuture<Boolean> task =
+                new FutureTask<>(
+                        new Callable<Boolean>() { // from class: android.view.InputEventSender.1
+                            /* JADX WARN: Can't rename method to resolve collision */
+                            @Override // java.util.concurrent.Callable
+                            public Boolean call() throws Exception {
+                                return Boolean.valueOf(
+                                        InputEventSender.this.sendInputEventInternal(seq, event));
+                            }
+                        });
         this.mHandler.post(task);
         try {
             return task.get().booleanValue();
@@ -113,7 +123,8 @@ public abstract class InputEventSender {
         onInputEventFinished(seq, handled);
     }
 
-    private void dispatchTimelineReported(int inputEventId, long gpuCompletedTime, long presentTime) {
+    private void dispatchTimelineReported(
+            int inputEventId, long gpuCompletedTime, long presentTime) {
         onTimelineReported(inputEventId, gpuCompletedTime, presentTime);
     }
 }

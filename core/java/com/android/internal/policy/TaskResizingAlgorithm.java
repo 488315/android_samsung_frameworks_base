@@ -2,6 +2,7 @@ package com.android.internal.policy;
 
 import android.graphics.Point;
 import android.graphics.Rect;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -15,10 +16,20 @@ public class TaskResizingAlgorithm {
     public static final float MIN_ASPECT = 1.2f;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CtrlType {
-    }
+    public @interface CtrlType {}
 
-    public static Rect resizeDrag(float x, float y, float startDragX, float startDragY, Rect originalBounds, int ctrlType, int minVisibleWidth, int minVisibleHeight, Point maxVisibleSize, boolean preserveOrientation, boolean startOrientationWasLandscape) {
+    public static Rect resizeDrag(
+            float x,
+            float y,
+            float startDragX,
+            float startDragY,
+            Rect originalBounds,
+            int ctrlType,
+            int minVisibleWidth,
+            int minVisibleHeight,
+            Point maxVisibleSize,
+            boolean preserveOrientation,
+            boolean startOrientationWasLandscape) {
         int width1;
         int height1;
         int height2;
@@ -42,19 +53,27 @@ public class TaskResizingAlgorithm {
             height = Math.max(minVisibleHeight, Math.min(height + deltaY, maxVisibleSize.y));
         }
         float aspect = width / height;
-        if (preserveOrientation && ((startOrientationWasLandscape && aspect < 1.2f) || (!startOrientationWasLandscape && aspect > 0.8333333002196431d))) {
+        if (preserveOrientation
+                && ((startOrientationWasLandscape && aspect < 1.2f)
+                        || (!startOrientationWasLandscape && aspect > 0.8333333002196431d))) {
             if (startOrientationWasLandscape) {
                 width1 = Math.max(minVisibleWidth, Math.min(maxVisibleSize.x, width));
                 height1 = Math.min(height, Math.round(width1 / 1.2f));
                 if (height1 < minVisibleHeight) {
                     height1 = minVisibleHeight;
-                    width1 = Math.max(minVisibleWidth, Math.min(maxVisibleSize.x, Math.round(height1 * 1.2f)));
+                    width1 =
+                            Math.max(
+                                    minVisibleWidth,
+                                    Math.min(maxVisibleSize.x, Math.round(height1 * 1.2f)));
                 }
                 height2 = Math.max(minVisibleHeight, Math.min(maxVisibleSize.y, height));
                 width2 = Math.max(width, Math.round(height2 * 1.2f));
                 if (width2 < minVisibleWidth) {
                     width2 = minVisibleWidth;
-                    height2 = Math.max(minVisibleHeight, Math.min(maxVisibleSize.y, Math.round(width2 / 1.2f)));
+                    height2 =
+                            Math.max(
+                                    minVisibleHeight,
+                                    Math.min(maxVisibleSize.y, Math.round(width2 / 1.2f)));
                 }
             } else {
                 int width12 = Math.max(minVisibleWidth, Math.min(maxVisibleSize.x, width));
@@ -63,14 +82,21 @@ public class TaskResizingAlgorithm {
                     width1 = width12;
                     height1 = height12;
                 } else {
-                    width1 = Math.max(minVisibleWidth, Math.min(maxVisibleSize.x, Math.round(minVisibleHeight / 1.2f)));
+                    width1 =
+                            Math.max(
+                                    minVisibleWidth,
+                                    Math.min(
+                                            maxVisibleSize.x, Math.round(minVisibleHeight / 1.2f)));
                     height1 = minVisibleHeight;
                 }
                 height2 = Math.max(minVisibleHeight, Math.min(maxVisibleSize.y, height));
                 width2 = Math.min(width, Math.round(height2 / 1.2f));
                 if (width2 < minVisibleWidth) {
                     width2 = minVisibleWidth;
-                    height2 = Math.max(minVisibleHeight, Math.min(maxVisibleSize.y, Math.round(width2 * 1.2f)));
+                    height2 =
+                            Math.max(
+                                    minVisibleHeight,
+                                    Math.min(maxVisibleSize.y, Math.round(width2 * 1.2f)));
                 }
             }
             boolean grows = width > right - left || height > bottom - top;

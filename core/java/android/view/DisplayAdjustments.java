@@ -2,6 +2,7 @@ package android.view;
 
 import android.content.res.CompatibilityInfo;
 import android.content.res.Configuration;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
@@ -10,8 +11,7 @@ public class DisplayAdjustments {
     private volatile CompatibilityInfo mCompatInfo = CompatibilityInfo.DEFAULT_COMPATIBILITY_INFO;
     private final Configuration mConfiguration = new Configuration(Configuration.EMPTY);
 
-    public DisplayAdjustments() {
-    }
+    public DisplayAdjustments() {}
 
     public DisplayAdjustments(Configuration configuration) {
         if (configuration != null) {
@@ -26,9 +26,11 @@ public class DisplayAdjustments {
 
     public void setCompatibilityInfo(CompatibilityInfo compatInfo) {
         if (this == DEFAULT_DISPLAY_ADJUSTMENTS) {
-            throw new IllegalArgumentException("setCompatbilityInfo: Cannot modify DEFAULT_DISPLAY_ADJUSTMENTS");
+            throw new IllegalArgumentException(
+                    "setCompatbilityInfo: Cannot modify DEFAULT_DISPLAY_ADJUSTMENTS");
         }
-        if (compatInfo != null && (compatInfo.isScalingRequired() || !compatInfo.supportsScreen())) {
+        if (compatInfo != null
+                && (compatInfo.isScalingRequired() || !compatInfo.supportsScreen())) {
             this.mCompatInfo = compatInfo;
         } else {
             this.mCompatInfo = CompatibilityInfo.DEFAULT_COMPATIBILITY_INFO;
@@ -41,7 +43,8 @@ public class DisplayAdjustments {
 
     public void setConfiguration(Configuration configuration) {
         if (this == DEFAULT_DISPLAY_ADJUSTMENTS) {
-            throw new IllegalArgumentException("setConfiguration: Cannot modify DEFAULT_DISPLAY_ADJUSTMENTS");
+            throw new IllegalArgumentException(
+                    "setConfiguration: Cannot modify DEFAULT_DISPLAY_ADJUSTMENTS");
         }
         this.mConfiguration.setTo(configuration != null ? configuration : Configuration.EMPTY);
     }
@@ -60,6 +63,7 @@ public class DisplayAdjustments {
             return false;
         }
         DisplayAdjustments daj = (DisplayAdjustments) o;
-        return Objects.equals(daj.mCompatInfo, this.mCompatInfo) && Objects.equals(daj.mConfiguration, this.mConfiguration);
+        return Objects.equals(daj.mCompatInfo, this.mCompatInfo)
+                && Objects.equals(daj.mConfiguration, this.mConfiguration);
     }
 }

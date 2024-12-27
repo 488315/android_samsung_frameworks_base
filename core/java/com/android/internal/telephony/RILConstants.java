@@ -165,17 +165,27 @@ public interface RILConstants {
     public static final int OP_NOT_ALLOWED_BEFORE_REG_NW = 9;
     public static final int OP_NOT_ALLOWED_DURING_VOICE_CALL = 8;
     public static final int PASSWORD_INCORRECT = 3;
-    public static final int PREFERRED_NETWORK_MODE = ((Integer) Optional.of(android.sysprop.TelephonyProperties.default_network()).filter(new Predicate() { // from class: com.android.internal.telephony.RILConstants$$ExternalSyntheticLambda0
-        @Override // java.util.function.Predicate
-        public final boolean test(Object obj) {
-            return RILConstants.lambda$static$0((List) obj);
-        }
-    }).map(new Function() { // from class: com.android.internal.telephony.RILConstants$$ExternalSyntheticLambda1
-        @Override // java.util.function.Function
-        public final Object apply(Object obj) {
-            return RILConstants.lambda$static$1((List) obj);
-        }
-    }).orElse(9)).intValue();
+    public static final int PREFERRED_NETWORK_MODE =
+            ((Integer)
+                            Optional.of(android.sysprop.TelephonyProperties.default_network())
+                                    .filter(
+                                            new Predicate() { // from class:
+                                                              // com.android.internal.telephony.RILConstants$$ExternalSyntheticLambda0
+                                                @Override // java.util.function.Predicate
+                                                public final boolean test(Object obj) {
+                                                    return RILConstants.lambda$static$0((List) obj);
+                                                }
+                                            })
+                                    .map(
+                                            new Function() { // from class:
+                                                             // com.android.internal.telephony.RILConstants$$ExternalSyntheticLambda1
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    return RILConstants.lambda$static$1((List) obj);
+                                                }
+                                            })
+                                    .orElse(9))
+                    .intValue();
     public static final int RADIO_NOT_AVAILABLE = 1;
     public static final int REQUEST_CANCELLED = 7;
     public static final int REQUEST_NOT_SUPPORTED = 6;

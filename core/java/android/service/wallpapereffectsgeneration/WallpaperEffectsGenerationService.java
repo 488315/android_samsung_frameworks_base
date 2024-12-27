@@ -12,29 +12,41 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.service.wallpapereffectsgeneration.IWallpaperEffectsGenerationService;
 import android.util.Slog;
+
 import com.android.internal.util.function.pooled.PooledLambda;
+
 import java.util.function.BiConsumer;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public abstract class WallpaperEffectsGenerationService extends Service {
     private static final boolean DEBUG = false;
-    public static final String SERVICE_INTERFACE = "android.service.wallpapereffectsgeneration.WallpaperEffectsGenerationService";
+    public static final String SERVICE_INTERFACE =
+            "android.service.wallpapereffectsgeneration.WallpaperEffectsGenerationService";
     private static final String TAG = "WallpaperEffectsGenerationService";
     private Handler mHandler;
-    private final IWallpaperEffectsGenerationService mInterface = new IWallpaperEffectsGenerationService.Stub() { // from class: android.service.wallpapereffectsgeneration.WallpaperEffectsGenerationService.1
-        @Override // android.service.wallpapereffectsgeneration.IWallpaperEffectsGenerationService
-        public void onGenerateCinematicEffect(CinematicEffectRequest request) {
-            WallpaperEffectsGenerationService.this.mHandler.sendMessage(PooledLambda.obtainMessage(new BiConsumer() { // from class: android.service.wallpapereffectsgeneration.WallpaperEffectsGenerationService$1$$ExternalSyntheticLambda0
-                @Override // java.util.function.BiConsumer
-                public final void accept(Object obj, Object obj2) {
-                    ((WallpaperEffectsGenerationService) obj).onGenerateCinematicEffect((CinematicEffectRequest) obj2);
+    private final IWallpaperEffectsGenerationService mInterface =
+            new IWallpaperEffectsGenerationService
+                    .Stub() { // from class:
+                              // android.service.wallpapereffectsgeneration.WallpaperEffectsGenerationService.1
+                @Override // android.service.wallpapereffectsgeneration.IWallpaperEffectsGenerationService
+                public void onGenerateCinematicEffect(CinematicEffectRequest request) {
+                    WallpaperEffectsGenerationService.this.mHandler.sendMessage(
+                            PooledLambda.obtainMessage(
+                                    new BiConsumer() { // from class:
+                                                       // android.service.wallpapereffectsgeneration.WallpaperEffectsGenerationService$1$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.BiConsumer
+                                        public final void accept(Object obj, Object obj2) {
+                                            ((WallpaperEffectsGenerationService) obj)
+                                                    .onGenerateCinematicEffect(
+                                                            (CinematicEffectRequest) obj2);
+                                        }
+                                    },
+                                    WallpaperEffectsGenerationService.this,
+                                    request));
                 }
-            }, WallpaperEffectsGenerationService.this, request));
-        }
-    };
+            };
     private IWallpaperEffectsGenerationManager mService;
 
     public abstract void onGenerateCinematicEffect(CinematicEffectRequest cinematicEffectRequest);
@@ -60,7 +72,12 @@ public abstract class WallpaperEffectsGenerationService extends Service {
         if (SERVICE_INTERFACE.equals(intent.getAction())) {
             return this.mInterface.asBinder();
         }
-        Slog.w(TAG, "Tried to bind to wrong intent (should be android.service.wallpapereffectsgeneration.WallpaperEffectsGenerationService: " + intent);
+        Slog.w(
+                TAG,
+                "Tried to bind to wrong intent (should be"
+                    + " android.service.wallpapereffectsgeneration.WallpaperEffectsGenerationService:"
+                    + " "
+                        + intent);
         return null;
     }
 }

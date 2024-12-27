@@ -15,7 +15,9 @@ public final class AppCompatCameraPolicy {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public AppCompatCameraPolicy(com.android.server.wm.WindowManagerService r7, com.android.server.wm.DisplayContent r8) {
+    public AppCompatCameraPolicy(
+            com.android.server.wm.WindowManagerService r7,
+            com.android.server.wm.DisplayContent r8) {
         /*
             r6 = this;
             r6.<init>()
@@ -74,6 +76,9 @@ public final class AppCompatCameraPolicy {
         L61:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.AppCompatCameraPolicy.<init>(com.android.server.wm.WindowManagerService, com.android.server.wm.DisplayContent):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.AppCompatCameraPolicy.<init>(com.android.server.wm.WindowManagerService,"
+                    + " com.android.server.wm.DisplayContent):void");
     }
 }

@@ -9,7 +9,9 @@ import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
+
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.rune.InputRune;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -57,9 +59,21 @@ public final class BixbyService {
     public BixbyService(Context context, PhoneWindowManagerExt phoneWindowManagerExt) {
         this.mPolicyExt = phoneWindowManagerExt;
         this.mContext = context;
-        this.mDefaultComponentName = !TextUtils.isEmpty("com.samsung.android.bixby.agent/com.samsung.android.bixby.WinkService") ? ComponentName.unflattenFromString("com.samsung.android.bixby.agent/com.samsung.android.bixby.WinkService") : null;
-        this.mOnboardingComponentName = TextUtils.isEmpty("com.samsung.android.bixby.agent/com.samsung.android.bixby.BixbyKeyLService") ? null : ComponentName.unflattenFromString("com.samsung.android.bixby.agent/com.samsung.android.bixby.BixbyKeyLService");
-        this.mWakeLock = phoneWindowManagerExt.mPolicy.mPowerManager.newWakeLock(1, "PhoneWindowManager.BixbyService.WakeLock");
+        this.mDefaultComponentName =
+                !TextUtils.isEmpty(
+                                "com.samsung.android.bixby.agent/com.samsung.android.bixby.WinkService")
+                        ? ComponentName.unflattenFromString(
+                                "com.samsung.android.bixby.agent/com.samsung.android.bixby.WinkService")
+                        : null;
+        this.mOnboardingComponentName =
+                TextUtils.isEmpty(
+                                "com.samsung.android.bixby.agent/com.samsung.android.bixby.BixbyKeyLService")
+                        ? null
+                        : ComponentName.unflattenFromString(
+                                "com.samsung.android.bixby.agent/com.samsung.android.bixby.BixbyKeyLService");
+        this.mWakeLock =
+                phoneWindowManagerExt.mPolicy.mPowerManager.newWakeLock(
+                        1, "PhoneWindowManager.BixbyService.WakeLock");
     }
 
     public final Intent getIntent(Params params) {
@@ -83,9 +97,23 @@ public final class BixbyService {
         intent.putExtra("BIXBY_KEY_FW_VERSION", 2);
         boolean z5 = params.interactive;
         intent.putExtra("INTERACTIVE", z5);
-        int i = (InputRune.PWM_SIDE_KEY_WAKE_UP_BIXBY && z2) ? 1 : (InputRune.PWM_SIDE_KEY_DOUBLE_PRESS && z3) ? 2 : -1;
+        int i =
+                (InputRune.PWM_SIDE_KEY_WAKE_UP_BIXBY && z2)
+                        ? 1
+                        : (InputRune.PWM_SIDE_KEY_DOUBLE_PRESS && z3) ? 2 : -1;
         intent.putExtra("RESULT_BY_POWER", i);
-        Log.d("BixbyService", "startBixbyService, keyPressType=" + i + " interactive=" + z5 + " longPress=" + z2 + " doublePress=" + z3 + " isUnlockFP=false isPowerCombination=" + z4);
+        Log.d(
+                "BixbyService",
+                "startBixbyService, keyPressType="
+                        + i
+                        + " interactive="
+                        + z5
+                        + " longPress="
+                        + z2
+                        + " doublePress="
+                        + z3
+                        + " isUnlockFP=false isPowerCombination="
+                        + z4);
         return intent;
     }
 
@@ -99,7 +127,9 @@ public final class BixbyService {
             phoneWindowManagerExt.showToast(this.mContext, null);
         }
         if (InputRune.PWM_KEY_FACTORY_MODE_POLICY) {
-            Log.d("BixbyService", "Do nothing regarding key event of bixby service. Factory Binary");
+            Log.d(
+                    "BixbyService",
+                    "Do nothing regarding key event of bixby service. Factory Binary");
             return;
         }
         if (!phoneWindowManagerExt.mPolicy.isUserSetupComplete()) {
@@ -114,7 +144,10 @@ public final class BixbyService {
             str = "DomesticOtaStart";
         }
         if (!TextUtils.isEmpty(str)) {
-            DualAppManagerService$$ExternalSyntheticOutline0.m("Do nothing regarding key event of bixby service. reason=", str, "BixbyService");
+            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                    "Do nothing regarding key event of bixby service. reason=",
+                    str,
+                    "BixbyService");
             return;
         }
         this.mWakeLock.acquire();

@@ -5,8 +5,10 @@ import android.hardware.HardwareBuffer;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.util.Log;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.format.MediaFormat;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -72,7 +74,8 @@ abstract class MediaBufferBase implements MediaBuffer {
         this.align = new Align();
         this.format = (MediaFormat) in.readSerializable();
         this.flags = in.readInt();
-        this.align.setShape(this.format.getCols() * this.format.getChannels(), this.format.getRows());
+        this.align.setShape(
+                this.format.getCols() * this.format.getChannels(), this.format.getRows());
         in.readMap(this.extra, null);
     }
 
@@ -137,12 +140,15 @@ abstract class MediaBufferBase implements MediaBuffer {
 
     @Override // com.samsung.android.sume.core.buffer.MediaBuffer
     public boolean containFlags(int... flagsToCheck) {
-        return Arrays.stream(flagsToCheck).allMatch(new IntPredicate() { // from class: com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda5
-            @Override // java.util.function.IntPredicate
-            public final boolean test(int i) {
-                return MediaBufferBase.this.m9109x14a22c8(i);
-            }
-        });
+        return Arrays.stream(flagsToCheck)
+                .allMatch(
+                        new IntPredicate() { // from class:
+                                             // com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda5
+                            @Override // java.util.function.IntPredicate
+                            public final boolean test(int i) {
+                                return MediaBufferBase.this.m9109x14a22c8(i);
+                            }
+                        });
     }
 
     /* renamed from: lambda$containFlags$0$com-samsung-android-sume-core-buffer-MediaBufferBase, reason: not valid java name */
@@ -180,12 +186,22 @@ abstract class MediaBufferBase implements MediaBuffer {
         if (this.extra == other) {
             return;
         }
-        this.extra.putAll((Map) other.entrySet().stream().filter(new Predicate() { // from class: com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda2
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return MediaBufferBase.this.m9108x2f0e598b((Map.Entry) obj);
-            }
-        }).collect(Collectors.toMap(new MediaBufferBase$$ExternalSyntheticLambda3(), new MediaBufferBase$$ExternalSyntheticLambda4())));
+        this.extra.putAll(
+                (Map)
+                        other.entrySet().stream()
+                                .filter(
+                                        new Predicate() { // from class:
+                                                          // com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda2
+                                            @Override // java.util.function.Predicate
+                                            public final boolean test(Object obj) {
+                                                return MediaBufferBase.this.m9108x2f0e598b(
+                                                        (Map.Entry) obj);
+                                            }
+                                        })
+                                .collect(
+                                        Collectors.toMap(
+                                                new MediaBufferBase$$ExternalSyntheticLambda3(),
+                                                new MediaBufferBase$$ExternalSyntheticLambda4())));
     }
 
     /* renamed from: lambda$addExtra$1$com-samsung-android-sume-core-buffer-MediaBufferBase, reason: not valid java name */
@@ -195,7 +211,9 @@ abstract class MediaBufferBase implements MediaBuffer {
 
     @Override // com.samsung.android.sume.core.buffer.MediaBuffer
     public Map<String, Object> getExtra() {
-        return (Map) Optional.ofNullable(this.extra).orElseGet(new MediaBufferBase$$ExternalSyntheticLambda8());
+        return (Map)
+                Optional.ofNullable(this.extra)
+                        .orElseGet(new MediaBufferBase$$ExternalSyntheticLambda8());
     }
 
     @Override // com.samsung.android.sume.core.buffer.MediaBuffer
@@ -215,31 +233,56 @@ abstract class MediaBufferBase implements MediaBuffer {
 
     @Override // com.samsung.android.sume.core.buffer.MediaBuffer
     public boolean containsExtra(final String key) {
-        return ((Boolean) Optional.ofNullable(this.extra).map(new Function() { // from class: com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda7
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                Boolean valueOf;
-                valueOf = Boolean.valueOf(((HashMap) obj).containsKey(key));
-                return valueOf;
-            }
-        }).orElse(false)).booleanValue();
+        return ((Boolean)
+                        Optional.ofNullable(this.extra)
+                                .map(
+                                        new Function() { // from class:
+                                                         // com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda7
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                Boolean valueOf;
+                                                valueOf =
+                                                        Boolean.valueOf(
+                                                                ((HashMap) obj).containsKey(key));
+                                                return valueOf;
+                                            }
+                                        })
+                                .orElse(false))
+                .booleanValue();
     }
 
     @Override // com.samsung.android.sume.core.buffer.MediaBuffer
     public boolean containsAnyExtra(final String... keys) {
-        return ((Boolean) Optional.ofNullable(this.extra).map(new Function() { // from class: com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                Boolean valueOf;
-                valueOf = Boolean.valueOf(Arrays.stream(keys).anyMatch(new Predicate() { // from class: com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda1
-                    @Override // java.util.function.Predicate
-                    public final boolean test(Object obj2) {
-                        return MediaBufferBase.lambda$containsAnyExtra$3(r1, (String) obj2);
-                    }
-                }));
-                return valueOf;
-            }
-        }).orElse(false)).booleanValue();
+        return ((Boolean)
+                        Optional.ofNullable(this.extra)
+                                .map(
+                                        new Function() { // from class:
+                                                         // com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda0
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                Boolean valueOf;
+                                                valueOf =
+                                                        Boolean.valueOf(
+                                                                Arrays.stream(keys)
+                                                                        .anyMatch(
+                                                                                new Predicate() { // from class: com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda1
+                                                                                    @Override // java.util.function.Predicate
+                                                                                    public final
+                                                                                    boolean test(
+                                                                                            Object
+                                                                                                    obj2) {
+                                                                                        return MediaBufferBase
+                                                                                                .lambda$containsAnyExtra$3(
+                                                                                                        r1,
+                                                                                                        (String)
+                                                                                                                obj2);
+                                                                                    }
+                                                                                }));
+                                                return valueOf;
+                                            }
+                                        })
+                                .orElse(false))
+                .booleanValue();
     }
 
     static /* synthetic */ boolean lambda$containsAnyExtra$3(HashMap e, String it) {
@@ -250,19 +293,36 @@ abstract class MediaBufferBase implements MediaBuffer {
 
     @Override // com.samsung.android.sume.core.buffer.MediaBuffer
     public boolean containsAllExtra(final String... keys) {
-        return ((Boolean) Optional.ofNullable(this.extra).map(new Function() { // from class: com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda10
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                Boolean valueOf;
-                valueOf = Boolean.valueOf(Arrays.stream(keys).allMatch(new Predicate() { // from class: com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda9
-                    @Override // java.util.function.Predicate
-                    public final boolean test(Object obj2) {
-                        return MediaBufferBase.lambda$containsAllExtra$5(r1, (String) obj2);
-                    }
-                }));
-                return valueOf;
-            }
-        }).orElse(false)).booleanValue();
+        return ((Boolean)
+                        Optional.ofNullable(this.extra)
+                                .map(
+                                        new Function() { // from class:
+                                                         // com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda10
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                Boolean valueOf;
+                                                valueOf =
+                                                        Boolean.valueOf(
+                                                                Arrays.stream(keys)
+                                                                        .allMatch(
+                                                                                new Predicate() { // from class: com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda9
+                                                                                    @Override // java.util.function.Predicate
+                                                                                    public final
+                                                                                    boolean test(
+                                                                                            Object
+                                                                                                    obj2) {
+                                                                                        return MediaBufferBase
+                                                                                                .lambda$containsAllExtra$5(
+                                                                                                        r1,
+                                                                                                        (String)
+                                                                                                                obj2);
+                                                                                    }
+                                                                                }));
+                                                return valueOf;
+                                            }
+                                        })
+                                .orElse(false))
+                .booleanValue();
     }
 
     static /* synthetic */ boolean lambda$containsAllExtra$5(HashMap e, String it) {
@@ -278,12 +338,14 @@ abstract class MediaBufferBase implements MediaBuffer {
 
     protected <T, V> V transformDataTo(T t, Class<V> cls) {
         try {
-            BufferExtension.putInternalBufferHandler(new Consumer() { // from class: com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda12
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    MediaBufferBase.this.m9110x9603d8fd(obj);
-                }
-            });
+            BufferExtension.putInternalBufferHandler(
+                    new Consumer() { // from class:
+                                     // com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda12
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            MediaBufferBase.this.m9110x9603d8fd(obj);
+                        }
+                    });
             return (V) BufferExtension.transform(getFormat(), t, cls);
         } catch (UnsupportedOperationException e) {
             if ((t instanceof HardwareBuffer) || cls == HardwareBuffer.class) {
@@ -294,14 +356,23 @@ abstract class MediaBufferBase implements MediaBuffer {
     }
 
     protected boolean isDataShared() {
-        return ((Boolean) Optional.ofNullable(getDataClass()).map(new Function() { // from class: com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda11
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                Boolean valueOf;
-                valueOf = Boolean.valueOf(BufferExtension.isRequiredToRelease((Class) obj));
-                return valueOf;
-            }
-        }).orElse(false)).booleanValue();
+        return ((Boolean)
+                        Optional.ofNullable(getDataClass())
+                                .map(
+                                        new Function() { // from class:
+                                                         // com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda11
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                Boolean valueOf;
+                                                valueOf =
+                                                        Boolean.valueOf(
+                                                                BufferExtension.isRequiredToRelease(
+                                                                        (Class) obj));
+                                                return valueOf;
+                                            }
+                                        })
+                                .orElse(false))
+                .booleanValue();
     }
 
     protected synchronized boolean isDataRequireToRelease() {
@@ -319,12 +390,14 @@ abstract class MediaBufferBase implements MediaBuffer {
         }
         this.format = null;
         this.extra = null;
-        this.internalBuffers.forEach(new Consumer() { // from class: com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda6
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                MediaBufferBase.lambda$release$9(obj);
-            }
-        });
+        this.internalBuffers.forEach(
+                new Consumer() { // from class:
+                                 // com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda6
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        MediaBufferBase.lambda$release$9(obj);
+                    }
+                });
         this.internalBuffers.clear();
     }
 
@@ -340,7 +413,13 @@ abstract class MediaBufferBase implements MediaBuffer {
             MediaBuffer copied = (MediaBuffer) clone();
             if (isDataShared()) {
                 int use_count = this.sharedCount.incrementAndGet();
-                Log.d(TAG, "shared count increased: " + use_count + NavigationBarInflaterView.KEY_CODE_START + hashCode() + NavigationBarInflaterView.KEY_CODE_END);
+                Log.d(
+                        TAG,
+                        "shared count increased: "
+                                + use_count
+                                + NavigationBarInflaterView.KEY_CODE_START
+                                + hashCode()
+                                + NavigationBarInflaterView.KEY_CODE_END);
             }
             return copied;
         } catch (CloneNotSupportedException e) {

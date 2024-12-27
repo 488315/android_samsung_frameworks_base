@@ -1,26 +1,27 @@
 package android.hardware.input;
 
 import android.annotation.SystemApi;
-import android.hardware.input.VirtualInputDeviceConfig;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 @SystemApi
 /* loaded from: classes2.dex */
 public final class VirtualDpadConfig extends VirtualInputDeviceConfig implements Parcelable {
-    public static final Parcelable.Creator<VirtualDpadConfig> CREATOR = new Parcelable.Creator<VirtualDpadConfig>() { // from class: android.hardware.input.VirtualDpadConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualDpadConfig createFromParcel(Parcel in) {
-            return new VirtualDpadConfig(in);
-        }
+    public static final Parcelable.Creator<VirtualDpadConfig> CREATOR =
+            new Parcelable.Creator<
+                    VirtualDpadConfig>() { // from class: android.hardware.input.VirtualDpadConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualDpadConfig createFromParcel(Parcel in) {
+                    return new VirtualDpadConfig(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualDpadConfig[] newArray(int size) {
-            return new VirtualDpadConfig[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualDpadConfig[] newArray(int size) {
+                    return new VirtualDpadConfig[size];
+                }
+            };
 
     private VirtualDpadConfig(Builder builder) {
         super(builder);

@@ -7,19 +7,21 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes2.dex */
 public class SContextExercise extends SContextEventContext {
-    public static final Parcelable.Creator<SContextExercise> CREATOR = new Parcelable.Creator<SContextExercise>() { // from class: android.hardware.scontext.SContextExercise.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextExercise createFromParcel(Parcel in) {
-            return new SContextExercise(in);
-        }
+    public static final Parcelable.Creator<SContextExercise> CREATOR =
+            new Parcelable.Creator<SContextExercise>() { // from class:
+                // android.hardware.scontext.SContextExercise.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextExercise createFromParcel(Parcel in) {
+                    return new SContextExercise(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextExercise[] newArray(int size) {
-            return new SContextExercise[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextExercise[] newArray(int size) {
+                    return new SContextExercise[size];
+                }
+            };
     private Bundle mContext;
     private int mMode;
 
@@ -124,7 +126,8 @@ public class SContextExercise extends SContextEventContext {
         return res;
     }
 
-    @Override // android.hardware.scontext.SContextEventContext, com.samsung.android.hardware.context.SemContextEventContext
+    @Override // android.hardware.scontext.SContextEventContext,
+    // com.samsung.android.hardware.context.SemContextEventContext
     public void setValues(Bundle context) {
         this.mContext = context;
         this.mMode = context.getInt("Mode");

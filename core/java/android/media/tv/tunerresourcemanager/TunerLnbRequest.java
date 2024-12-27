@@ -6,21 +6,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class TunerLnbRequest implements Parcelable {
-    public static final Parcelable.Creator<TunerLnbRequest> CREATOR = new Parcelable.Creator<TunerLnbRequest>() { // from class: android.media.tv.tunerresourcemanager.TunerLnbRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TunerLnbRequest createFromParcel(Parcel _aidl_source) {
-            TunerLnbRequest _aidl_out = new TunerLnbRequest();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<TunerLnbRequest> CREATOR =
+            new Parcelable.Creator<
+                    TunerLnbRequest>() { // from class:
+                                         // android.media.tv.tunerresourcemanager.TunerLnbRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TunerLnbRequest createFromParcel(Parcel _aidl_source) {
+                    TunerLnbRequest _aidl_out = new TunerLnbRequest();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TunerLnbRequest[] newArray(int _aidl_size) {
-            return new TunerLnbRequest[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TunerLnbRequest[] newArray(int _aidl_size) {
+                    return new TunerLnbRequest[_aidl_size];
+                }
+            };
     public int clientId = 0;
 
     @Override // android.os.Parcelable

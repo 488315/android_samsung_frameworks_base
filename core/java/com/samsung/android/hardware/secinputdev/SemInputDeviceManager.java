@@ -2,7 +2,6 @@ package com.samsung.android.hardware.secinputdev;
 
 import android.os.IBinder;
 import android.util.Log;
-import com.samsung.android.hardware.secinputdev.SemInputConstants;
 
 /* loaded from: classes6.dex */
 public class SemInputDeviceManager {
@@ -133,7 +132,8 @@ public class SemInputDeviceManager {
         }
     }
 
-    private int activate(SemInputConstants.Device device, SemInputConstants.DisplayState mode, boolean state) {
+    private int activate(
+            SemInputConstants.Device device, SemInputConstants.DisplayState mode, boolean state) {
         if (this.service == null) {
             Log.e(TAG, "activate: service is not enabled");
             return -1;
@@ -148,12 +148,22 @@ public class SemInputDeviceManager {
         }
     }
 
-    private int setProperty(SemInputConstants.Device device, SemInputConstants.Command command, String mode) {
+    private int setProperty(
+            SemInputConstants.Device device, SemInputConstants.Command command, String mode) {
         if (this.service == null) {
             Log.e(TAG, "setProperty: service is not enabled");
             return -1;
         }
-        Log.d(TAG, "setProperty: " + device + " " + SemInputConstants.Property.CMD + "," + command + "," + mode);
+        Log.d(
+                TAG,
+                "setProperty: "
+                        + device
+                        + " "
+                        + SemInputConstants.Property.CMD
+                        + ","
+                        + command
+                        + ","
+                        + mode);
         try {
             int ret = this.service.setCommand(device, command, mode);
             return ret;
@@ -167,7 +177,8 @@ public class SemInputDeviceManager {
         return setProperty(SemInputConstants.Device.NOT_SPECIFIED, command, mode);
     }
 
-    private int setProperty(SemInputConstants.Device device, SemInputConstants.Property property, String mode) {
+    private int setProperty(
+            SemInputConstants.Device device, SemInputConstants.Property property, String mode) {
         if (this.service == null) {
             Log.e(TAG, "setProperty: service is not enabled");
             return -1;
@@ -182,7 +193,8 @@ public class SemInputDeviceManager {
         }
     }
 
-    private String getProperty(SemInputConstants.Device device, SemInputConstants.Property property) {
+    private String getProperty(
+            SemInputConstants.Device device, SemInputConstants.Property property) {
         if (this.service == null) {
             Log.e(TAG, "getProperty: service is not enabled");
             return RESULT_STR_NG;
@@ -263,11 +275,15 @@ public class SemInputDeviceManager {
     }
 
     public int setTspEnabled(int devid, int mode, boolean state) {
-        return activate(SemInputConstants.Device.getFromInt(devid), SemInputConstants.DisplayState.getFromInt(mode), state);
+        return activate(
+                SemInputConstants.Device.getFromInt(devid),
+                SemInputConstants.DisplayState.getFromInt(mode),
+                state);
     }
 
     public int setGripData(String mode) {
-        return setProperty(SemInputConstants.Device.CURRENT_TSP, SemInputConstants.Command.GRIP_DATA, mode);
+        return setProperty(
+                SemInputConstants.Device.CURRENT_TSP, SemInputConstants.Command.GRIP_DATA, mode);
     }
 
     public int setSipMode(int mode) {
@@ -301,7 +317,8 @@ public class SemInputDeviceManager {
     }
 
     public int setAodNotiRect(int w, int h, int x, int y) {
-        return setProperty(SemInputConstants.Command.AOD_NOTI_RECT, w + "," + h + "," + x + "," + y);
+        return setProperty(
+                SemInputConstants.Command.AOD_NOTI_RECT, w + "," + h + "," + x + "," + y);
     }
 
     public int setAodEnable(int mode) {
@@ -325,7 +342,9 @@ public class SemInputDeviceManager {
 
     public int setFodEnable(int mode, int pressFast, int strictMode, int control) {
         if (mode == 1) {
-            return setProperty(SemInputConstants.Command.FOD, mode + "," + pressFast + "," + strictMode + "," + control);
+            return setProperty(
+                    SemInputConstants.Command.FOD,
+                    mode + "," + pressFast + "," + strictMode + "," + control);
         }
         return setProperty(SemInputConstants.Command.FOD, mode + "");
     }
@@ -336,7 +355,8 @@ public class SemInputDeviceManager {
 
     public int setFodRect(int left, int top, int right, int bottom) {
         String mode = left + "," + top + "," + right + "," + bottom;
-        return setProperty(SemInputConstants.Device.CURRENT_TSP, SemInputConstants.Command.FOD_RECT, mode);
+        return setProperty(
+                SemInputConstants.Device.CURRENT_TSP, SemInputConstants.Command.FOD_RECT, mode);
     }
 
     public int setFodLpMode(int mode) {
@@ -368,7 +388,10 @@ public class SemInputDeviceManager {
     }
 
     public int setAlwaysLowPowerMode(int devid, int enable) {
-        return setProperty(SemInputConstants.Device.getFromInt(devid), SemInputConstants.Command.ALWAYS_LOW_POWER_MODE, enable + "");
+        return setProperty(
+                SemInputConstants.Device.getFromInt(devid),
+                SemInputConstants.Command.ALWAYS_LOW_POWER_MODE,
+                enable + "");
     }
 
     public int getTspSupportFeature(int devid) {
@@ -386,48 +409,80 @@ public class SemInputDeviceManager {
     }
 
     public String getScrubPosition(int devid) {
-        return getProperty(SemInputConstants.Device.getFromInt(devid), SemInputConstants.Property.SCRUB_POS);
+        return getProperty(
+                SemInputConstants.Device.getFromInt(devid), SemInputConstants.Property.SCRUB_POS);
     }
 
     public int setProxPowerOff(int devid, int mode) {
-        return setProperty(SemInputConstants.Device.getFromInt(devid), SemInputConstants.Property.PROX_OFF, mode + "");
+        return setProperty(
+                SemInputConstants.Device.getFromInt(devid),
+                SemInputConstants.Property.PROX_OFF,
+                mode + "");
     }
 
     public int setWirelessChargingMode(int devid, int mode) {
         if (devid == 1) {
-            return setProperty(SemInputConstants.Device.NOT_SPECIFIED, SemInputConstants.Command.WIRELESS_CHARGER, mode + "");
+            return setProperty(
+                    SemInputConstants.Device.NOT_SPECIFIED,
+                    SemInputConstants.Command.WIRELESS_CHARGER,
+                    mode + "");
         }
-        return setProperty(SemInputConstants.Device.getFromInt(devid), SemInputConstants.Command.WIRELESS_CHARGER, mode + "");
+        return setProperty(
+                SemInputConstants.Device.getFromInt(devid),
+                SemInputConstants.Command.WIRELESS_CHARGER,
+                mode + "");
     }
 
     public void setCoverMode(boolean switchState, int coverType) {
         if (switchState) {
-            setProperty(SemInputConstants.Device.DEFAULT_TSP, SemInputConstants.Command.CLEAR_COVER, gloveMode + "");
-            setProperty(SemInputConstants.Device.EXTRA_TSP, SemInputConstants.Command.CLEAR_COVER, gloveMode + "");
-            setProperty(SemInputConstants.Device.SPEN, SemInputConstants.Command.CLEAR_COVER, "0," + coverType);
+            setProperty(
+                    SemInputConstants.Device.DEFAULT_TSP,
+                    SemInputConstants.Command.CLEAR_COVER,
+                    gloveMode + "");
+            setProperty(
+                    SemInputConstants.Device.EXTRA_TSP,
+                    SemInputConstants.Command.CLEAR_COVER,
+                    gloveMode + "");
+            setProperty(
+                    SemInputConstants.Device.SPEN,
+                    SemInputConstants.Command.CLEAR_COVER,
+                    "0," + coverType);
             return;
         }
-        setProperty(SemInputConstants.Device.NOT_SPECIFIED, SemInputConstants.Command.CLEAR_COVER, "3," + coverType);
+        setProperty(
+                SemInputConstants.Device.NOT_SPECIFIED,
+                SemInputConstants.Command.CLEAR_COVER,
+                "3," + coverType);
     }
 
     public String getFodInfo(int devid) {
-        return getProperty(SemInputConstants.Device.getFromInt(devid), SemInputConstants.Property.FOD_INFO);
+        return getProperty(
+                SemInputConstants.Device.getFromInt(devid), SemInputConstants.Property.FOD_INFO);
     }
 
     public String getFodPosition(int devid) {
-        return getProperty(SemInputConstants.Device.getFromInt(devid), SemInputConstants.Property.FOD_POS);
+        return getProperty(
+                SemInputConstants.Device.getFromInt(devid), SemInputConstants.Property.FOD_POS);
     }
 
     public String getAodActiveArea(int devid) {
-        return getProperty(SemInputConstants.Device.getFromInt(devid), SemInputConstants.Property.AOD_ACTIVE_AREA);
+        return getProperty(
+                SemInputConstants.Device.getFromInt(devid),
+                SemInputConstants.Property.AOD_ACTIVE_AREA);
     }
 
     public int setSpenEnabled(int devid, int mode, boolean state) {
-        return activate(SemInputConstants.Device.getFromInt(devid), SemInputConstants.DisplayState.getFromInt(mode), state);
+        return activate(
+                SemInputConstants.Device.getFromInt(devid),
+                SemInputConstants.DisplayState.getFromInt(mode),
+                state);
     }
 
     public int setSpenCoverType(int type) {
-        return setProperty(SemInputConstants.Device.SPEN, SemInputConstants.Command.SPEN_COVER_TYPE, type + "");
+        return setProperty(
+                SemInputConstants.Device.SPEN,
+                SemInputConstants.Command.SPEN_COVER_TYPE,
+                type + "");
     }
 
     public String getSpenPosition() {
@@ -435,23 +490,36 @@ public class SemInputDeviceManager {
     }
 
     public int setSpenPower(int mode) {
-        return setProperty(SemInputConstants.Device.SPEN, SemInputConstants.Command.SPEN_POWER, mode + "");
+        return setProperty(
+                SemInputConstants.Device.SPEN, SemInputConstants.Command.SPEN_POWER, mode + "");
     }
 
     public int setSpenBleChargeMode(int mode) {
-        return setProperty(SemInputConstants.Device.SPEN, SemInputConstants.Command.SPEN_BLE_CHARGING, mode + "");
+        return setProperty(
+                SemInputConstants.Device.SPEN,
+                SemInputConstants.Command.SPEN_BLE_CHARGING,
+                mode + "");
     }
 
     public int setSpenPdctLowSensitivityEnable(int mode) {
-        return setProperty(SemInputConstants.Device.SPEN, SemInputConstants.Command.SPEN_PDCT_LOWSENSITIVITY, mode + "");
+        return setProperty(
+                SemInputConstants.Device.SPEN,
+                SemInputConstants.Command.SPEN_PDCT_LOWSENSITIVITY,
+                mode + "");
     }
 
     public int setSpenLowCurrentMode(int mode) {
-        return setProperty(SemInputConstants.Device.SPEN, SemInputConstants.Command.SPEN_LOWCURRENT, mode + "");
+        return setProperty(
+                SemInputConstants.Device.SPEN,
+                SemInputConstants.Command.SPEN_LOWCURRENT,
+                mode + "");
     }
 
     public int setSpenPowerSavingMode(int mode) {
-        return setProperty(SemInputConstants.Device.SPEN, SemInputConstants.Command.SPEN_SAVING_MODE, mode + "");
+        return setProperty(
+                SemInputConstants.Device.SPEN,
+                SemInputConstants.Command.SPEN_SAVING_MODE,
+                mode + "");
     }
 
     public int getDeviceEnabled(int devid) {
@@ -570,7 +638,8 @@ public class SemInputDeviceManager {
         }
     }
 
-    public int enableMotion(SemInputConstants.MotionType motionType, boolean enable, String client) {
+    public int enableMotion(
+            SemInputConstants.MotionType motionType, boolean enable, String client) {
         return enableMotion(motionType.getName(), enable, client);
     }
 

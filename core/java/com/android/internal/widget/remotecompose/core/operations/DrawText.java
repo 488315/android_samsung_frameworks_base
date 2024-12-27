@@ -5,6 +5,7 @@ import com.android.internal.widget.remotecompose.core.Operation;
 import com.android.internal.widget.remotecompose.core.PaintContext;
 import com.android.internal.widget.remotecompose.core.PaintOperation;
 import com.android.internal.widget.remotecompose.core.WireBuffer;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -19,7 +20,15 @@ public class DrawText extends PaintOperation {
     float mX;
     float mY;
 
-    public DrawText(int textID, int start, int end, int contextStart, int contextEnd, float x, float y, boolean rtl) {
+    public DrawText(
+            int textID,
+            int start,
+            int end,
+            int contextStart,
+            int contextEnd,
+            float x,
+            float y,
+            boolean rtl) {
         this.mStart = 0;
         this.mEnd = 0;
         this.mContextStart = 0;
@@ -39,16 +48,33 @@ public class DrawText extends PaintOperation {
 
     @Override // com.android.internal.widget.remotecompose.core.Operation
     public void write(WireBuffer buffer) {
-        COMPANION.apply(buffer, this.mTextID, this.mStart, this.mEnd, this.mContextStart, this.mContextEnd, this.mX, this.mY, this.mRtl);
+        COMPANION.apply(
+                buffer,
+                this.mTextID,
+                this.mStart,
+                this.mEnd,
+                this.mContextStart,
+                this.mContextEnd,
+                this.mX,
+                this.mY,
+                this.mRtl);
     }
 
     public String toString() {
-        return "DrawTextRun [" + this.mTextID + "] " + this.mStart + ", " + this.mEnd + ", " + this.mX + ", " + this.mY;
+        return "DrawTextRun ["
+                + this.mTextID
+                + "] "
+                + this.mStart
+                + ", "
+                + this.mEnd
+                + ", "
+                + this.mX
+                + ", "
+                + this.mY;
     }
 
     public static class Companion implements CompanionOperation {
-        private Companion() {
-        }
+        private Companion() {}
 
         @Override // com.android.internal.widget.remotecompose.core.CompanionOperation
         public void read(WireBuffer buffer, List<Operation> operations) {
@@ -74,7 +100,16 @@ public class DrawText extends PaintOperation {
             return 0;
         }
 
-        public void apply(WireBuffer buffer, int textID, int start, int end, int contextStart, int contextEnd, float x, float y, boolean rtl) {
+        public void apply(
+                WireBuffer buffer,
+                int textID,
+                int start,
+                int end,
+                int contextStart,
+                int contextEnd,
+                float x,
+                float y,
+                boolean rtl) {
             buffer.start(43);
             buffer.writeInt(textID);
             buffer.writeInt(start);
@@ -89,6 +124,14 @@ public class DrawText extends PaintOperation {
 
     @Override // com.android.internal.widget.remotecompose.core.PaintOperation
     public void paint(PaintContext context) {
-        context.drawTextRun(this.mTextID, this.mStart, this.mEnd, this.mContextStart, this.mContextEnd, this.mX, this.mY, this.mRtl);
+        context.drawTextRun(
+                this.mTextID,
+                this.mStart,
+                this.mEnd,
+                this.mContextStart,
+                this.mContextEnd,
+                this.mX,
+                this.mY,
+                this.mRtl);
     }
 }

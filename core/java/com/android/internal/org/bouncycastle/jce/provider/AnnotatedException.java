@@ -19,7 +19,8 @@ public class AnnotatedException extends Exception implements ExtException {
         return this._underlyingException;
     }
 
-    @Override // java.lang.Throwable, com.android.internal.org.bouncycastle.jce.exception.ExtException
+    @Override // java.lang.Throwable,
+              // com.android.internal.org.bouncycastle.jce.exception.ExtException
     public Throwable getCause() {
         return this._underlyingException;
     }

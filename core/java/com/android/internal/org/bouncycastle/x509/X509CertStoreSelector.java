@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.x509;
 
 import com.android.internal.org.bouncycastle.util.Selector;
+
 import java.io.IOException;
 import java.security.cert.Certificate;
 import java.security.cert.X509CertSelector;
@@ -22,7 +23,8 @@ public class X509CertStoreSelector extends X509CertSelector implements Selector 
         return match((Object) cert);
     }
 
-    @Override // java.security.cert.X509CertSelector, java.security.cert.CertSelector, com.android.internal.org.bouncycastle.util.Selector
+    @Override // java.security.cert.X509CertSelector, java.security.cert.CertSelector,
+              // com.android.internal.org.bouncycastle.util.Selector
     public Object clone() {
         X509CertStoreSelector selector = (X509CertStoreSelector) super.clone();
         return selector;

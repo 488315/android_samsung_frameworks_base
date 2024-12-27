@@ -5,6 +5,7 @@ import android.net.MacAddress;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -32,39 +33,41 @@ public final class NativeScanResult implements Parcelable {
     public static final int BSS_CAPABILITY_SHORT_PREAMBLE = 32;
     public static final int BSS_CAPABILITY_SHORT_SLOT_TIME = 1024;
     public static final int BSS_CAPABILITY_SPECTRUM_MANAGEMENT = 256;
-    public static final Parcelable.Creator<NativeScanResult> CREATOR = new Parcelable.Creator<NativeScanResult>() { // from class: android.net.wifi.nl80211.NativeScanResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NativeScanResult createFromParcel(Parcel in) {
-            NativeScanResult result = new NativeScanResult();
-            result.ssid = in.createByteArray();
-            if (result.ssid == null) {
-                result.ssid = new byte[0];
-            }
-            result.bssid = in.createByteArray();
-            if (result.bssid == null) {
-                result.bssid = new byte[0];
-            }
-            result.infoElement = in.createByteArray();
-            if (result.infoElement == null) {
-                result.infoElement = new byte[0];
-            }
-            result.frequency = in.readInt();
-            result.signalMbm = in.readInt();
-            result.tsf = in.readLong();
-            result.capability = in.readInt();
-            result.associated = in.readInt() != 0;
-            result.radioChainInfos = new ArrayList();
-            in.readTypedList(result.radioChainInfos, RadioChainInfo.CREATOR);
-            return result;
-        }
+    public static final Parcelable.Creator<NativeScanResult> CREATOR =
+            new Parcelable.Creator<
+                    NativeScanResult>() { // from class: android.net.wifi.nl80211.NativeScanResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NativeScanResult createFromParcel(Parcel in) {
+                    NativeScanResult result = new NativeScanResult();
+                    result.ssid = in.createByteArray();
+                    if (result.ssid == null) {
+                        result.ssid = new byte[0];
+                    }
+                    result.bssid = in.createByteArray();
+                    if (result.bssid == null) {
+                        result.bssid = new byte[0];
+                    }
+                    result.infoElement = in.createByteArray();
+                    if (result.infoElement == null) {
+                        result.infoElement = new byte[0];
+                    }
+                    result.frequency = in.readInt();
+                    result.signalMbm = in.readInt();
+                    result.tsf = in.readLong();
+                    result.capability = in.readInt();
+                    result.associated = in.readInt() != 0;
+                    result.radioChainInfos = new ArrayList();
+                    in.readTypedList(result.radioChainInfos, RadioChainInfo.CREATOR);
+                    return result;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NativeScanResult[] newArray(int size) {
-            return new NativeScanResult[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NativeScanResult[] newArray(int size) {
+                    return new NativeScanResult[size];
+                }
+            };
     private static final String TAG = "NativeScanResult";
     public boolean associated;
     public byte[] bssid;
@@ -77,8 +80,7 @@ public final class NativeScanResult implements Parcelable {
     public long tsf;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BssCapabilityBits {
-    }
+    public @interface BssCapabilityBits {}
 
     public byte[] getSsid() {
         return this.ssid;

@@ -5,19 +5,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public final class SemSatelliteState implements Parcelable {
-    public static final Parcelable.Creator<SemSatelliteState> CREATOR = new Parcelable.Creator<SemSatelliteState>() { // from class: android.telephony.satellite.SemSatelliteState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemSatelliteState createFromParcel(Parcel source) {
-            return new SemSatelliteState(source);
-        }
+    public static final Parcelable.Creator<SemSatelliteState> CREATOR =
+            new Parcelable.Creator<
+                    SemSatelliteState>() { // from class:
+                                           // android.telephony.satellite.SemSatelliteState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemSatelliteState createFromParcel(Parcel source) {
+                    return new SemSatelliteState(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemSatelliteState[] newArray(int size) {
-            return new SemSatelliteState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemSatelliteState[] newArray(int size) {
+                    return new SemSatelliteState[size];
+                }
+            };
     static final boolean DBG = true;
     static final String LOG_TAG = "SatelliteState";
     private SemSatelliteServiceState mSatelliteServiceState;
@@ -38,8 +41,16 @@ public final class SemSatelliteState implements Parcelable {
     }
 
     private SemSatelliteState(Parcel in) {
-        this.mSatelliteServiceState = (SemSatelliteServiceState) in.readParcelable(SemSatelliteServiceState.class.getClassLoader(), SemSatelliteServiceState.class);
-        this.mSatelliteSignalStrength = (SemSatelliteSignalStrength) in.readParcelable(SemSatelliteSignalStrength.class.getClassLoader(), SemSatelliteSignalStrength.class);
+        this.mSatelliteServiceState =
+                (SemSatelliteServiceState)
+                        in.readParcelable(
+                                SemSatelliteServiceState.class.getClassLoader(),
+                                SemSatelliteServiceState.class);
+        this.mSatelliteSignalStrength =
+                (SemSatelliteSignalStrength)
+                        in.readParcelable(
+                                SemSatelliteSignalStrength.class.getClassLoader(),
+                                SemSatelliteSignalStrength.class);
     }
 
     public SemSatelliteServiceState getSatelliteServiceState() {
@@ -76,6 +87,10 @@ public final class SemSatelliteState implements Parcelable {
     }
 
     public String toString() {
-        return "SatelliteState {serviceState=" + this.mSatelliteServiceState + " signalStrength=" + this.mSatelliteSignalStrength + "}";
+        return "SatelliteState {serviceState="
+                + this.mSatelliteServiceState
+                + " signalStrength="
+                + this.mSatelliteSignalStrength
+                + "}";
     }
 }

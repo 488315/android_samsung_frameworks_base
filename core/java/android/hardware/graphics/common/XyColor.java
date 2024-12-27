@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class XyColor implements Parcelable {
-    public static final Parcelable.Creator<XyColor> CREATOR = new Parcelable.Creator<XyColor>() { // from class: android.hardware.graphics.common.XyColor.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public XyColor createFromParcel(Parcel _aidl_source) {
-            XyColor _aidl_out = new XyColor();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<XyColor> CREATOR =
+            new Parcelable.Creator<
+                    XyColor>() { // from class: android.hardware.graphics.common.XyColor.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public XyColor createFromParcel(Parcel _aidl_source) {
+                    XyColor _aidl_out = new XyColor();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public XyColor[] newArray(int _aidl_size) {
-            return new XyColor[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public XyColor[] newArray(int _aidl_size) {
+                    return new XyColor[_aidl_size];
+                }
+            };
     public float x = 0.0f;
     public float y = 0.0f;
 

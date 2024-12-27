@@ -14,13 +14,16 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
 import android.view.WindowManager;
+
 import com.android.internal.R;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.internal.telephony.SemRILConstants;
 import com.android.internal.telephony.gsm.SmsCbConstants;
 import com.android.internal.util.Preconditions;
+
 import com.samsung.android.media.SemMediaPlayer;
 import com.samsung.android.transcode.constants.EncodeConstants;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
@@ -29,19 +32,21 @@ import java.util.Map;
 public final class PrintAttributes implements Parcelable {
     public static final int COLOR_MODE_COLOR = 2;
     public static final int COLOR_MODE_MONOCHROME = 1;
-    public static final Parcelable.Creator<PrintAttributes> CREATOR = new Parcelable.Creator<PrintAttributes>() { // from class: android.print.PrintAttributes.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PrintAttributes createFromParcel(Parcel parcel) {
-            return new PrintAttributes(parcel);
-        }
+    public static final Parcelable.Creator<PrintAttributes> CREATOR =
+            new Parcelable.Creator<
+                    PrintAttributes>() { // from class: android.print.PrintAttributes.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PrintAttributes createFromParcel(Parcel parcel) {
+                    return new PrintAttributes(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PrintAttributes[] newArray(int size) {
-            return new PrintAttributes[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PrintAttributes[] newArray(int size) {
+                    return new PrintAttributes[size];
+                }
+            };
     public static final int DUPLEX_MODE_LONG_EDGE = 2;
     public static final int DUPLEX_MODE_NONE = 1;
     public static final int DUPLEX_MODE_SHORT_EDGE = 4;
@@ -54,15 +59,12 @@ public final class PrintAttributes implements Parcelable {
     private Resolution mResolution;
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface ColorMode {
-    }
+    @interface ColorMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface DuplexMode {
-    }
+    @interface DuplexMode {}
 
-    PrintAttributes() {
-    }
+    PrintAttributes() {}
 
     private PrintAttributes(Parcel parcel) {
         this.mMediaSize = parcel.readInt() == 1 ? MediaSize.createFromParcel(parcel) : null;
@@ -131,7 +133,12 @@ public final class PrintAttributes implements Parcelable {
         PrintAttributes attributes = new PrintAttributes();
         attributes.setMediaSize(getMediaSize().asPortrait());
         Resolution oldResolution = getResolution();
-        Resolution newResolution = new Resolution(oldResolution.getId(), oldResolution.getLabel(), oldResolution.getVerticalDpi(), oldResolution.getHorizontalDpi());
+        Resolution newResolution =
+                new Resolution(
+                        oldResolution.getId(),
+                        oldResolution.getLabel(),
+                        oldResolution.getVerticalDpi(),
+                        oldResolution.getHorizontalDpi());
         attributes.setResolution(newResolution);
         attributes.setMinMargins(getMinMargins());
         attributes.setColorMode(getColorMode());
@@ -146,7 +153,12 @@ public final class PrintAttributes implements Parcelable {
         PrintAttributes attributes = new PrintAttributes();
         attributes.setMediaSize(getMediaSize().asLandscape());
         Resolution oldResolution = getResolution();
-        Resolution newResolution = new Resolution(oldResolution.getId(), oldResolution.getLabel(), oldResolution.getVerticalDpi(), oldResolution.getHorizontalDpi());
+        Resolution newResolution =
+                new Resolution(
+                        oldResolution.getId(),
+                        oldResolution.getLabel(),
+                        oldResolution.getVerticalDpi(),
+                        oldResolution.getHorizontalDpi());
         attributes.setResolution(newResolution);
         attributes.setMinMargins(getMinMargins());
         attributes.setColorMode(getColorMode());
@@ -185,7 +197,14 @@ public final class PrintAttributes implements Parcelable {
 
     public int hashCode() {
         int result = (1 * 31) + this.mColorMode;
-        return (((((((result * 31) + this.mDuplexMode) * 31) + (this.mMinMargins == null ? 0 : this.mMinMargins.hashCode())) * 31) + (this.mMediaSize == null ? 0 : this.mMediaSize.hashCode())) * 31) + (this.mResolution != null ? this.mResolution.hashCode() : 0);
+        return (((((((result * 31) + this.mDuplexMode) * 31)
+                                                + (this.mMinMargins == null
+                                                        ? 0
+                                                        : this.mMinMargins.hashCode()))
+                                        * 31)
+                                + (this.mMediaSize == null ? 0 : this.mMediaSize.hashCode()))
+                        * 31)
+                + (this.mResolution != null ? this.mResolution.hashCode() : 0);
     }
 
     public boolean equals(Object obj) {
@@ -228,7 +247,8 @@ public final class PrintAttributes implements Parcelable {
         builder.append("PrintAttributes{");
         builder.append("mediaSize: ").append(this.mMediaSize);
         if (this.mMediaSize != null) {
-            builder.append(", orientation: ").append(this.mMediaSize.isPortrait() ? "portrait" : "landscape");
+            builder.append(", orientation: ")
+                    .append(this.mMediaSize.isPortrait() ? "portrait" : "landscape");
         } else {
             builder.append(", orientation: ").append("null");
         }
@@ -265,103 +285,376 @@ public final class PrintAttributes implements Parcelable {
         public final String mPackageName;
         private final int mWidthMils;
         private static final Map<String, MediaSize> sIdToMediaSizeMap = new ArrayMap();
-        public static final MediaSize UNKNOWN_PORTRAIT = new MediaSize("UNKNOWN_PORTRAIT", "android", R.string.mediasize_unknown_portrait, 1, Integer.MAX_VALUE);
-        public static final MediaSize UNKNOWN_LANDSCAPE = new MediaSize("UNKNOWN_LANDSCAPE", "android", R.string.mediasize_unknown_landscape, Integer.MAX_VALUE, 1);
-        public static final MediaSize ISO_A0 = new MediaSize("ISO_A0", "android", R.string.mediasize_iso_a0, 33110, 46810);
-        public static final MediaSize ISO_A1 = new MediaSize("ISO_A1", "android", R.string.mediasize_iso_a1, 23390, 33110);
-        public static final MediaSize ISO_A2 = new MediaSize("ISO_A2", "android", R.string.mediasize_iso_a2, 16540, 23390);
-        public static final MediaSize ISO_A3 = new MediaSize("ISO_A3", "android", R.string.mediasize_iso_a3, 11690, 16540);
-        public static final MediaSize ISO_A4 = new MediaSize("ISO_A4", "android", R.string.mediasize_iso_a4, BluetoothHciProtoEnums.CMD_BLE_SET_PRIVACY_MODE, 11690);
-        public static final MediaSize ISO_A5 = new MediaSize("ISO_A5", "android", R.string.mediasize_iso_a5, 5830, BluetoothHciProtoEnums.CMD_BLE_SET_PRIVACY_MODE);
-        public static final MediaSize ISO_A6 = new MediaSize("ISO_A6", "android", R.string.mediasize_iso_a6, 4130, 5830);
-        public static final MediaSize ISO_A7 = new MediaSize("ISO_A7", "android", R.string.mediasize_iso_a7, Process.EUICC_SERVICE_UID, 4130);
-        public static final MediaSize ISO_A8 = new MediaSize("ISO_A8", "android", R.string.mediasize_iso_a8, 2050, Process.EUICC_SERVICE_UID);
-        public static final MediaSize ISO_A9 = new MediaSize("ISO_A9", "android", R.string.mediasize_iso_a9, 1460, 2050);
-        public static final MediaSize ISO_A10 = new MediaSize("ISO_A10", "android", R.string.mediasize_iso_a10, 1020, 1460);
-        public static final MediaSize ISO_B0 = new MediaSize("ISO_B0", "android", R.string.mediasize_iso_b0, 39370, 55670);
-        public static final MediaSize ISO_B1 = new MediaSize("ISO_B1", "android", R.string.mediasize_iso_b1, 27830, 39370);
-        public static final MediaSize ISO_B2 = new MediaSize("ISO_B2", "android", R.string.mediasize_iso_b2, 19690, 27830);
-        public static final MediaSize ISO_B3 = new MediaSize("ISO_B3", "android", R.string.mediasize_iso_b3, 13900, 19690);
-        public static final MediaSize ISO_B4 = new MediaSize("ISO_B4", "android", R.string.mediasize_iso_b4, 9840, 13900);
-        public static final MediaSize ISO_B5 = new MediaSize("ISO_B5", "android", R.string.mediasize_iso_b5, 6930, 9840);
-        public static final MediaSize ISO_B6 = new MediaSize("ISO_B6", "android", R.string.mediasize_iso_b6, 4920, 6930);
-        public static final MediaSize ISO_B7 = new MediaSize("ISO_B7", "android", R.string.mediasize_iso_b7, 3460, 4920);
-        public static final MediaSize ISO_B8 = new MediaSize("ISO_B8", "android", R.string.mediasize_iso_b8, WindowManager.LayoutParams.SEM_TYPE_SMART_SELECT, 3460);
-        public static final MediaSize ISO_B9 = new MediaSize("ISO_B9", "android", R.string.mediasize_iso_b9, 1730, WindowManager.LayoutParams.SEM_TYPE_SMART_SELECT);
-        public static final MediaSize ISO_B10 = new MediaSize("ISO_B10", "android", R.string.mediasize_iso_b10, 1220, 1730);
-        public static final MediaSize ISO_C0 = new MediaSize("ISO_C0", "android", R.string.mediasize_iso_c0, EventLogTags.DISMISS_SCREEN, 51060);
-        public static final MediaSize ISO_C1 = new MediaSize("ISO_C1", "android", R.string.mediasize_iso_c1, 25510, EventLogTags.DISMISS_SCREEN);
-        public static final MediaSize ISO_C2 = new MediaSize("ISO_C2", "android", R.string.mediasize_iso_c2, 18030, 25510);
-        public static final MediaSize ISO_C3 = new MediaSize("ISO_C3", "android", R.string.mediasize_iso_c3, 12760, 18030);
-        public static final MediaSize ISO_C4 = new MediaSize("ISO_C4", "android", R.string.mediasize_iso_c4, 9020, 12760);
-        public static final MediaSize ISO_C5 = new MediaSize("ISO_C5", "android", R.string.mediasize_iso_c5, 6380, 9020);
-        public static final MediaSize ISO_C6 = new MediaSize("ISO_C6", "android", R.string.mediasize_iso_c6, 4490, 6380);
-        public static final MediaSize ISO_C7 = new MediaSize("ISO_C7", "android", R.string.mediasize_iso_c7, BluetoothHciProtoEnums.CMD_WRITE_CLB_DATA, 4490);
-        public static final MediaSize ISO_C8 = new MediaSize("ISO_C8", "android", R.string.mediasize_iso_c8, 2240, BluetoothHciProtoEnums.CMD_WRITE_CLB_DATA);
-        public static final MediaSize ISO_C9 = new MediaSize("ISO_C9", "android", R.string.mediasize_iso_c9, 1570, 2240);
-        public static final MediaSize ISO_C10 = new MediaSize("ISO_C10", "android", R.string.mediasize_iso_c10, 1100, 1570);
-        public static final MediaSize NA_LETTER = new MediaSize("NA_LETTER", "android", R.string.mediasize_na_letter, 8500, SemRILConstants.UnsolResponse.RIL_OEM_UNSOL_RESPONSE_BASE);
-        public static final MediaSize NA_GOVT_LETTER = new MediaSize("NA_GOVT_LETTER", "android", R.string.mediasize_na_gvrnmt_letter, 8000, 10500);
-        public static final MediaSize NA_LEGAL = new MediaSize("NA_LEGAL", "android", R.string.mediasize_na_legal, 8500, 14000);
-        public static final MediaSize NA_JUNIOR_LEGAL = new MediaSize("NA_JUNIOR_LEGAL", "android", R.string.mediasize_na_junior_legal, 8000, 5000);
-        public static final MediaSize NA_LEDGER = new MediaSize("NA_LEDGER", "android", R.string.mediasize_na_ledger, EncodeConstants.BitRate.MM_BITRATE_AVC_FHD_30, SemRILConstants.UnsolResponse.RIL_OEM_UNSOL_RESPONSE_BASE);
-        public static final MediaSize NA_TABLOID = new MediaSize("NA_TABLOID", "android", R.string.mediasize_na_tabloid, SemRILConstants.UnsolResponse.RIL_OEM_UNSOL_RESPONSE_BASE, EncodeConstants.BitRate.MM_BITRATE_AVC_FHD_30);
-        public static final MediaSize NA_INDEX_3X5 = new MediaSize("NA_INDEX_3X5", "android", R.string.mediasize_na_index_3x5, 3000, 5000);
-        public static final MediaSize NA_INDEX_4X6 = new MediaSize("NA_INDEX_4X6", "android", R.string.mediasize_na_index_4x6, 4000, 6000);
-        public static final MediaSize NA_INDEX_5X8 = new MediaSize("NA_INDEX_5X8", "android", R.string.mediasize_na_index_5x8, 5000, 8000);
-        public static final MediaSize NA_MONARCH = new MediaSize("NA_MONARCH", "android", R.string.mediasize_na_monarch, 7250, 10500);
-        public static final MediaSize NA_QUARTO = new MediaSize("NA_QUARTO", "android", R.string.mediasize_na_quarto, 8000, 10000);
-        public static final MediaSize NA_FOOLSCAP = new MediaSize("NA_FOOLSCAP", "android", R.string.mediasize_na_foolscap, 8000, EncodeConstants.BitRate.MM_AVG_FHD_DATARATE);
-        public static final MediaSize ANSI_C = new MediaSize("ANSI_C", "android", R.string.mediasize_na_ansi_c, EncodeConstants.BitRate.MM_BITRATE_AVC_FHD_30, 22000);
-        public static final MediaSize ANSI_D = new MediaSize("ANSI_D", "android", R.string.mediasize_na_ansi_d, 22000, 34000);
-        public static final MediaSize ANSI_E = new MediaSize("ANSI_E", "android", R.string.mediasize_na_ansi_e, 34000, 44000);
-        public static final MediaSize ANSI_F = new MediaSize("ANSI_F", "android", R.string.mediasize_na_ansi_f, EncodeConstants.BitRate.MM_BITRATE_AVC_FHD_60, 40000);
-        public static final MediaSize NA_ARCH_A = new MediaSize("NA_ARCH_A", "android", R.string.mediasize_na_arch_a, 9000, 12000);
-        public static final MediaSize NA_ARCH_B = new MediaSize("NA_ARCH_B", "android", R.string.mediasize_na_arch_b, 12000, EncodeConstants.BitRate.MM_AVG_QHD_DATARATE);
-        public static final MediaSize NA_ARCH_C = new MediaSize("NA_ARCH_C", "android", R.string.mediasize_na_arch_c, EncodeConstants.BitRate.MM_AVG_QHD_DATARATE, 24000);
-        public static final MediaSize NA_ARCH_D = new MediaSize("NA_ARCH_D", "android", R.string.mediasize_na_arch_d, 24000, SemMediaPlayer.KEY_PARAMETER_ENABLE_ALL_SUPER_SLOW_REGION);
-        public static final MediaSize NA_ARCH_E = new MediaSize("NA_ARCH_E", "android", R.string.mediasize_na_arch_e, SemMediaPlayer.KEY_PARAMETER_ENABLE_ALL_SUPER_SLOW_REGION, 48000);
-        public static final MediaSize NA_ARCH_E1 = new MediaSize("NA_ARCH_E1", "android", R.string.mediasize_na_arch_e1, 30000, 42000);
-        public static final MediaSize NA_SUPER_B = new MediaSize("NA_SUPER_B", "android", R.string.mediasize_na_super_b, EncodeConstants.BitRate.MM_AVG_FHD_DATARATE, 19000);
-        public static final MediaSize ROC_8K = new MediaSize("ROC_8K", "android", R.string.mediasize_chinese_roc_8k, 10629, 15354);
-        public static final MediaSize ROC_16K = new MediaSize("ROC_16K", "android", R.string.mediasize_chinese_roc_16k, 7677, 10629);
-        public static final MediaSize PRC_1 = new MediaSize("PRC_1", "android", R.string.mediasize_chinese_prc_1, AdservicesProtoEnums.RESERVED_ERROR_CODE_4015, 6496);
-        public static final MediaSize PRC_2 = new MediaSize("PRC_2", "android", R.string.mediasize_chinese_prc_2, AdservicesProtoEnums.RESERVED_ERROR_CODE_4015, 6929);
-        public static final MediaSize PRC_3 = new MediaSize("PRC_3", "android", R.string.mediasize_chinese_prc_3, 4921, 6929);
-        public static final MediaSize PRC_4 = new MediaSize("PRC_4", "android", R.string.mediasize_chinese_prc_4, 4330, 8189);
-        public static final MediaSize PRC_5 = new MediaSize("PRC_5", "android", R.string.mediasize_chinese_prc_5, 4330, 8661);
-        public static final MediaSize PRC_6 = new MediaSize("PRC_6", "android", R.string.mediasize_chinese_prc_6, 4724, 12599);
-        public static final MediaSize PRC_7 = new MediaSize("PRC_7", "android", R.string.mediasize_chinese_prc_7, 6299, 9055);
-        public static final MediaSize PRC_8 = new MediaSize("PRC_8", "android", R.string.mediasize_chinese_prc_8, 4724, 12165);
-        public static final MediaSize PRC_9 = new MediaSize("PRC_9", "android", R.string.mediasize_chinese_prc_9, 9016, 12756);
-        public static final MediaSize PRC_10 = new MediaSize("PRC_10", "android", R.string.mediasize_chinese_prc_10, 12756, 18032);
-        public static final MediaSize PRC_16K = new MediaSize("PRC_16K", "android", R.string.mediasize_chinese_prc_16k, 5749, 8465);
-        public static final MediaSize OM_PA_KAI = new MediaSize("OM_PA_KAI", "android", R.string.mediasize_chinese_om_pa_kai, 10512, 15315);
-        public static final MediaSize OM_DAI_PA_KAI = new MediaSize("OM_DAI_PA_KAI", "android", R.string.mediasize_chinese_om_dai_pa_kai, 10827, 15551);
-        public static final MediaSize OM_JUURO_KU_KAI = new MediaSize("OM_JUURO_KU_KAI", "android", R.string.mediasize_chinese_om_jurro_ku_kai, 7796, 10827);
-        public static final MediaSize JIS_B10 = new MediaSize("JIS_B10", "android", R.string.mediasize_japanese_jis_b10, MetricsProto.MetricsEvent.NOTIFICATION_ZEN_MODE_TOGGLE_ON_FOREVER, SettingsEnums.ACTION_BATTERY_DEFENDER_TIP);
-        public static final MediaSize JIS_B9 = new MediaSize("JIS_B9", "android", R.string.mediasize_japanese_jis_b9, SettingsEnums.ACTION_BATTERY_DEFENDER_TIP, 2520);
-        public static final MediaSize JIS_B8 = new MediaSize("JIS_B8", "android", R.string.mediasize_japanese_jis_b8, 2520, 3583);
-        public static final MediaSize JIS_B7 = new MediaSize("JIS_B7", "android", R.string.mediasize_japanese_jis_b7, 3583, 5049);
-        public static final MediaSize JIS_B6 = new MediaSize("JIS_B6", "android", R.string.mediasize_japanese_jis_b6, 5049, 7165);
-        public static final MediaSize JIS_B5 = new MediaSize("JIS_B5", "android", R.string.mediasize_japanese_jis_b5, 7165, 10118);
-        public static final MediaSize JIS_B4 = new MediaSize("JIS_B4", "android", R.string.mediasize_japanese_jis_b4, 10118, 14331);
-        public static final MediaSize JIS_B3 = new MediaSize("JIS_B3", "android", R.string.mediasize_japanese_jis_b3, 14331, 20276);
-        public static final MediaSize JIS_B2 = new MediaSize("JIS_B2", "android", R.string.mediasize_japanese_jis_b2, 20276, 28661);
-        public static final MediaSize JIS_B1 = new MediaSize("JIS_B1", "android", R.string.mediasize_japanese_jis_b1, 28661, 40551);
-        public static final MediaSize JIS_B0 = new MediaSize("JIS_B0", "android", R.string.mediasize_japanese_jis_b0, 40551, 57323);
-        public static final MediaSize JIS_EXEC = new MediaSize("JIS_EXEC", "android", R.string.mediasize_japanese_jis_exec, 8504, 12992);
-        public static final MediaSize JPN_CHOU4 = new MediaSize("JPN_CHOU4", "android", R.string.mediasize_japanese_chou4, 3543, 8071);
-        public static final MediaSize JPN_CHOU3 = new MediaSize("JPN_CHOU3", "android", R.string.mediasize_japanese_chou3, 4724, 9252);
-        public static final MediaSize JPN_CHOU2 = new MediaSize("JPN_CHOU2", "android", R.string.mediasize_japanese_chou2, SmsCbConstants.MESSAGE_ID_CMAS_ALERT_EXTREME_EXPECTED_LIKELY, 5748);
-        public static final MediaSize JPN_HAGAKI = new MediaSize("JPN_HAGAKI", "android", R.string.mediasize_japanese_hagaki, 3937, 5827);
-        public static final MediaSize JPN_OUFUKU = new MediaSize("JPN_OUFUKU", "android", R.string.mediasize_japanese_oufuku, 5827, 7874);
-        public static final MediaSize JPN_KAHU = new MediaSize("JPN_KAHU", "android", R.string.mediasize_japanese_kahu, 9449, 12681);
-        public static final MediaSize JPN_KAKU2 = new MediaSize("JPN_KAKU2", "android", R.string.mediasize_japanese_kaku2, 9449, 13071);
-        public static final MediaSize JPN_YOU4 = new MediaSize("JPN_YOU4", "android", R.string.mediasize_japanese_you4, 4134, 9252);
-        public static final MediaSize JPN_OE_PHOTO_L = new MediaSize("JPN_OE_PHOTO_L", "android", R.string.mediasize_japanese_l, 3500, 5000);
+        public static final MediaSize UNKNOWN_PORTRAIT =
+                new MediaSize(
+                        "UNKNOWN_PORTRAIT",
+                        "android",
+                        R.string.mediasize_unknown_portrait,
+                        1,
+                        Integer.MAX_VALUE);
+        public static final MediaSize UNKNOWN_LANDSCAPE =
+                new MediaSize(
+                        "UNKNOWN_LANDSCAPE",
+                        "android",
+                        R.string.mediasize_unknown_landscape,
+                        Integer.MAX_VALUE,
+                        1);
+        public static final MediaSize ISO_A0 =
+                new MediaSize("ISO_A0", "android", R.string.mediasize_iso_a0, 33110, 46810);
+        public static final MediaSize ISO_A1 =
+                new MediaSize("ISO_A1", "android", R.string.mediasize_iso_a1, 23390, 33110);
+        public static final MediaSize ISO_A2 =
+                new MediaSize("ISO_A2", "android", R.string.mediasize_iso_a2, 16540, 23390);
+        public static final MediaSize ISO_A3 =
+                new MediaSize("ISO_A3", "android", R.string.mediasize_iso_a3, 11690, 16540);
+        public static final MediaSize ISO_A4 =
+                new MediaSize(
+                        "ISO_A4",
+                        "android",
+                        R.string.mediasize_iso_a4,
+                        BluetoothHciProtoEnums.CMD_BLE_SET_PRIVACY_MODE,
+                        11690);
+        public static final MediaSize ISO_A5 =
+                new MediaSize(
+                        "ISO_A5",
+                        "android",
+                        R.string.mediasize_iso_a5,
+                        5830,
+                        BluetoothHciProtoEnums.CMD_BLE_SET_PRIVACY_MODE);
+        public static final MediaSize ISO_A6 =
+                new MediaSize("ISO_A6", "android", R.string.mediasize_iso_a6, 4130, 5830);
+        public static final MediaSize ISO_A7 =
+                new MediaSize(
+                        "ISO_A7",
+                        "android",
+                        R.string.mediasize_iso_a7,
+                        Process.EUICC_SERVICE_UID,
+                        4130);
+        public static final MediaSize ISO_A8 =
+                new MediaSize(
+                        "ISO_A8",
+                        "android",
+                        R.string.mediasize_iso_a8,
+                        2050,
+                        Process.EUICC_SERVICE_UID);
+        public static final MediaSize ISO_A9 =
+                new MediaSize("ISO_A9", "android", R.string.mediasize_iso_a9, 1460, 2050);
+        public static final MediaSize ISO_A10 =
+                new MediaSize("ISO_A10", "android", R.string.mediasize_iso_a10, 1020, 1460);
+        public static final MediaSize ISO_B0 =
+                new MediaSize("ISO_B0", "android", R.string.mediasize_iso_b0, 39370, 55670);
+        public static final MediaSize ISO_B1 =
+                new MediaSize("ISO_B1", "android", R.string.mediasize_iso_b1, 27830, 39370);
+        public static final MediaSize ISO_B2 =
+                new MediaSize("ISO_B2", "android", R.string.mediasize_iso_b2, 19690, 27830);
+        public static final MediaSize ISO_B3 =
+                new MediaSize("ISO_B3", "android", R.string.mediasize_iso_b3, 13900, 19690);
+        public static final MediaSize ISO_B4 =
+                new MediaSize("ISO_B4", "android", R.string.mediasize_iso_b4, 9840, 13900);
+        public static final MediaSize ISO_B5 =
+                new MediaSize("ISO_B5", "android", R.string.mediasize_iso_b5, 6930, 9840);
+        public static final MediaSize ISO_B6 =
+                new MediaSize("ISO_B6", "android", R.string.mediasize_iso_b6, 4920, 6930);
+        public static final MediaSize ISO_B7 =
+                new MediaSize("ISO_B7", "android", R.string.mediasize_iso_b7, 3460, 4920);
+        public static final MediaSize ISO_B8 =
+                new MediaSize(
+                        "ISO_B8",
+                        "android",
+                        R.string.mediasize_iso_b8,
+                        WindowManager.LayoutParams.SEM_TYPE_SMART_SELECT,
+                        3460);
+        public static final MediaSize ISO_B9 =
+                new MediaSize(
+                        "ISO_B9",
+                        "android",
+                        R.string.mediasize_iso_b9,
+                        1730,
+                        WindowManager.LayoutParams.SEM_TYPE_SMART_SELECT);
+        public static final MediaSize ISO_B10 =
+                new MediaSize("ISO_B10", "android", R.string.mediasize_iso_b10, 1220, 1730);
+        public static final MediaSize ISO_C0 =
+                new MediaSize(
+                        "ISO_C0",
+                        "android",
+                        R.string.mediasize_iso_c0,
+                        EventLogTags.DISMISS_SCREEN,
+                        51060);
+        public static final MediaSize ISO_C1 =
+                new MediaSize(
+                        "ISO_C1",
+                        "android",
+                        R.string.mediasize_iso_c1,
+                        25510,
+                        EventLogTags.DISMISS_SCREEN);
+        public static final MediaSize ISO_C2 =
+                new MediaSize("ISO_C2", "android", R.string.mediasize_iso_c2, 18030, 25510);
+        public static final MediaSize ISO_C3 =
+                new MediaSize("ISO_C3", "android", R.string.mediasize_iso_c3, 12760, 18030);
+        public static final MediaSize ISO_C4 =
+                new MediaSize("ISO_C4", "android", R.string.mediasize_iso_c4, 9020, 12760);
+        public static final MediaSize ISO_C5 =
+                new MediaSize("ISO_C5", "android", R.string.mediasize_iso_c5, 6380, 9020);
+        public static final MediaSize ISO_C6 =
+                new MediaSize("ISO_C6", "android", R.string.mediasize_iso_c6, 4490, 6380);
+        public static final MediaSize ISO_C7 =
+                new MediaSize(
+                        "ISO_C7",
+                        "android",
+                        R.string.mediasize_iso_c7,
+                        BluetoothHciProtoEnums.CMD_WRITE_CLB_DATA,
+                        4490);
+        public static final MediaSize ISO_C8 =
+                new MediaSize(
+                        "ISO_C8",
+                        "android",
+                        R.string.mediasize_iso_c8,
+                        2240,
+                        BluetoothHciProtoEnums.CMD_WRITE_CLB_DATA);
+        public static final MediaSize ISO_C9 =
+                new MediaSize("ISO_C9", "android", R.string.mediasize_iso_c9, 1570, 2240);
+        public static final MediaSize ISO_C10 =
+                new MediaSize("ISO_C10", "android", R.string.mediasize_iso_c10, 1100, 1570);
+        public static final MediaSize NA_LETTER =
+                new MediaSize(
+                        "NA_LETTER",
+                        "android",
+                        R.string.mediasize_na_letter,
+                        8500,
+                        SemRILConstants.UnsolResponse.RIL_OEM_UNSOL_RESPONSE_BASE);
+        public static final MediaSize NA_GOVT_LETTER =
+                new MediaSize(
+                        "NA_GOVT_LETTER",
+                        "android",
+                        R.string.mediasize_na_gvrnmt_letter,
+                        8000,
+                        10500);
+        public static final MediaSize NA_LEGAL =
+                new MediaSize("NA_LEGAL", "android", R.string.mediasize_na_legal, 8500, 14000);
+        public static final MediaSize NA_JUNIOR_LEGAL =
+                new MediaSize(
+                        "NA_JUNIOR_LEGAL",
+                        "android",
+                        R.string.mediasize_na_junior_legal,
+                        8000,
+                        5000);
+        public static final MediaSize NA_LEDGER =
+                new MediaSize(
+                        "NA_LEDGER",
+                        "android",
+                        R.string.mediasize_na_ledger,
+                        EncodeConstants.BitRate.MM_BITRATE_AVC_FHD_30,
+                        SemRILConstants.UnsolResponse.RIL_OEM_UNSOL_RESPONSE_BASE);
+        public static final MediaSize NA_TABLOID =
+                new MediaSize(
+                        "NA_TABLOID",
+                        "android",
+                        R.string.mediasize_na_tabloid,
+                        SemRILConstants.UnsolResponse.RIL_OEM_UNSOL_RESPONSE_BASE,
+                        EncodeConstants.BitRate.MM_BITRATE_AVC_FHD_30);
+        public static final MediaSize NA_INDEX_3X5 =
+                new MediaSize(
+                        "NA_INDEX_3X5", "android", R.string.mediasize_na_index_3x5, 3000, 5000);
+        public static final MediaSize NA_INDEX_4X6 =
+                new MediaSize(
+                        "NA_INDEX_4X6", "android", R.string.mediasize_na_index_4x6, 4000, 6000);
+        public static final MediaSize NA_INDEX_5X8 =
+                new MediaSize(
+                        "NA_INDEX_5X8", "android", R.string.mediasize_na_index_5x8, 5000, 8000);
+        public static final MediaSize NA_MONARCH =
+                new MediaSize("NA_MONARCH", "android", R.string.mediasize_na_monarch, 7250, 10500);
+        public static final MediaSize NA_QUARTO =
+                new MediaSize("NA_QUARTO", "android", R.string.mediasize_na_quarto, 8000, 10000);
+        public static final MediaSize NA_FOOLSCAP =
+                new MediaSize(
+                        "NA_FOOLSCAP",
+                        "android",
+                        R.string.mediasize_na_foolscap,
+                        8000,
+                        EncodeConstants.BitRate.MM_AVG_FHD_DATARATE);
+        public static final MediaSize ANSI_C =
+                new MediaSize(
+                        "ANSI_C",
+                        "android",
+                        R.string.mediasize_na_ansi_c,
+                        EncodeConstants.BitRate.MM_BITRATE_AVC_FHD_30,
+                        22000);
+        public static final MediaSize ANSI_D =
+                new MediaSize("ANSI_D", "android", R.string.mediasize_na_ansi_d, 22000, 34000);
+        public static final MediaSize ANSI_E =
+                new MediaSize("ANSI_E", "android", R.string.mediasize_na_ansi_e, 34000, 44000);
+        public static final MediaSize ANSI_F =
+                new MediaSize(
+                        "ANSI_F",
+                        "android",
+                        R.string.mediasize_na_ansi_f,
+                        EncodeConstants.BitRate.MM_BITRATE_AVC_FHD_60,
+                        40000);
+        public static final MediaSize NA_ARCH_A =
+                new MediaSize("NA_ARCH_A", "android", R.string.mediasize_na_arch_a, 9000, 12000);
+        public static final MediaSize NA_ARCH_B =
+                new MediaSize(
+                        "NA_ARCH_B",
+                        "android",
+                        R.string.mediasize_na_arch_b,
+                        12000,
+                        EncodeConstants.BitRate.MM_AVG_QHD_DATARATE);
+        public static final MediaSize NA_ARCH_C =
+                new MediaSize(
+                        "NA_ARCH_C",
+                        "android",
+                        R.string.mediasize_na_arch_c,
+                        EncodeConstants.BitRate.MM_AVG_QHD_DATARATE,
+                        24000);
+        public static final MediaSize NA_ARCH_D =
+                new MediaSize(
+                        "NA_ARCH_D",
+                        "android",
+                        R.string.mediasize_na_arch_d,
+                        24000,
+                        SemMediaPlayer.KEY_PARAMETER_ENABLE_ALL_SUPER_SLOW_REGION);
+        public static final MediaSize NA_ARCH_E =
+                new MediaSize(
+                        "NA_ARCH_E",
+                        "android",
+                        R.string.mediasize_na_arch_e,
+                        SemMediaPlayer.KEY_PARAMETER_ENABLE_ALL_SUPER_SLOW_REGION,
+                        48000);
+        public static final MediaSize NA_ARCH_E1 =
+                new MediaSize("NA_ARCH_E1", "android", R.string.mediasize_na_arch_e1, 30000, 42000);
+        public static final MediaSize NA_SUPER_B =
+                new MediaSize(
+                        "NA_SUPER_B",
+                        "android",
+                        R.string.mediasize_na_super_b,
+                        EncodeConstants.BitRate.MM_AVG_FHD_DATARATE,
+                        19000);
+        public static final MediaSize ROC_8K =
+                new MediaSize("ROC_8K", "android", R.string.mediasize_chinese_roc_8k, 10629, 15354);
+        public static final MediaSize ROC_16K =
+                new MediaSize(
+                        "ROC_16K", "android", R.string.mediasize_chinese_roc_16k, 7677, 10629);
+        public static final MediaSize PRC_1 =
+                new MediaSize(
+                        "PRC_1",
+                        "android",
+                        R.string.mediasize_chinese_prc_1,
+                        AdservicesProtoEnums.RESERVED_ERROR_CODE_4015,
+                        6496);
+        public static final MediaSize PRC_2 =
+                new MediaSize(
+                        "PRC_2",
+                        "android",
+                        R.string.mediasize_chinese_prc_2,
+                        AdservicesProtoEnums.RESERVED_ERROR_CODE_4015,
+                        6929);
+        public static final MediaSize PRC_3 =
+                new MediaSize("PRC_3", "android", R.string.mediasize_chinese_prc_3, 4921, 6929);
+        public static final MediaSize PRC_4 =
+                new MediaSize("PRC_4", "android", R.string.mediasize_chinese_prc_4, 4330, 8189);
+        public static final MediaSize PRC_5 =
+                new MediaSize("PRC_5", "android", R.string.mediasize_chinese_prc_5, 4330, 8661);
+        public static final MediaSize PRC_6 =
+                new MediaSize("PRC_6", "android", R.string.mediasize_chinese_prc_6, 4724, 12599);
+        public static final MediaSize PRC_7 =
+                new MediaSize("PRC_7", "android", R.string.mediasize_chinese_prc_7, 6299, 9055);
+        public static final MediaSize PRC_8 =
+                new MediaSize("PRC_8", "android", R.string.mediasize_chinese_prc_8, 4724, 12165);
+        public static final MediaSize PRC_9 =
+                new MediaSize("PRC_9", "android", R.string.mediasize_chinese_prc_9, 9016, 12756);
+        public static final MediaSize PRC_10 =
+                new MediaSize("PRC_10", "android", R.string.mediasize_chinese_prc_10, 12756, 18032);
+        public static final MediaSize PRC_16K =
+                new MediaSize("PRC_16K", "android", R.string.mediasize_chinese_prc_16k, 5749, 8465);
+        public static final MediaSize OM_PA_KAI =
+                new MediaSize(
+                        "OM_PA_KAI", "android", R.string.mediasize_chinese_om_pa_kai, 10512, 15315);
+        public static final MediaSize OM_DAI_PA_KAI =
+                new MediaSize(
+                        "OM_DAI_PA_KAI",
+                        "android",
+                        R.string.mediasize_chinese_om_dai_pa_kai,
+                        10827,
+                        15551);
+        public static final MediaSize OM_JUURO_KU_KAI =
+                new MediaSize(
+                        "OM_JUURO_KU_KAI",
+                        "android",
+                        R.string.mediasize_chinese_om_jurro_ku_kai,
+                        7796,
+                        10827);
+        public static final MediaSize JIS_B10 =
+                new MediaSize(
+                        "JIS_B10",
+                        "android",
+                        R.string.mediasize_japanese_jis_b10,
+                        MetricsProto.MetricsEvent.NOTIFICATION_ZEN_MODE_TOGGLE_ON_FOREVER,
+                        SettingsEnums.ACTION_BATTERY_DEFENDER_TIP);
+        public static final MediaSize JIS_B9 =
+                new MediaSize(
+                        "JIS_B9",
+                        "android",
+                        R.string.mediasize_japanese_jis_b9,
+                        SettingsEnums.ACTION_BATTERY_DEFENDER_TIP,
+                        2520);
+        public static final MediaSize JIS_B8 =
+                new MediaSize("JIS_B8", "android", R.string.mediasize_japanese_jis_b8, 2520, 3583);
+        public static final MediaSize JIS_B7 =
+                new MediaSize("JIS_B7", "android", R.string.mediasize_japanese_jis_b7, 3583, 5049);
+        public static final MediaSize JIS_B6 =
+                new MediaSize("JIS_B6", "android", R.string.mediasize_japanese_jis_b6, 5049, 7165);
+        public static final MediaSize JIS_B5 =
+                new MediaSize("JIS_B5", "android", R.string.mediasize_japanese_jis_b5, 7165, 10118);
+        public static final MediaSize JIS_B4 =
+                new MediaSize(
+                        "JIS_B4", "android", R.string.mediasize_japanese_jis_b4, 10118, 14331);
+        public static final MediaSize JIS_B3 =
+                new MediaSize(
+                        "JIS_B3", "android", R.string.mediasize_japanese_jis_b3, 14331, 20276);
+        public static final MediaSize JIS_B2 =
+                new MediaSize(
+                        "JIS_B2", "android", R.string.mediasize_japanese_jis_b2, 20276, 28661);
+        public static final MediaSize JIS_B1 =
+                new MediaSize(
+                        "JIS_B1", "android", R.string.mediasize_japanese_jis_b1, 28661, 40551);
+        public static final MediaSize JIS_B0 =
+                new MediaSize(
+                        "JIS_B0", "android", R.string.mediasize_japanese_jis_b0, 40551, 57323);
+        public static final MediaSize JIS_EXEC =
+                new MediaSize(
+                        "JIS_EXEC", "android", R.string.mediasize_japanese_jis_exec, 8504, 12992);
+        public static final MediaSize JPN_CHOU4 =
+                new MediaSize(
+                        "JPN_CHOU4", "android", R.string.mediasize_japanese_chou4, 3543, 8071);
+        public static final MediaSize JPN_CHOU3 =
+                new MediaSize(
+                        "JPN_CHOU3", "android", R.string.mediasize_japanese_chou3, 4724, 9252);
+        public static final MediaSize JPN_CHOU2 =
+                new MediaSize(
+                        "JPN_CHOU2",
+                        "android",
+                        R.string.mediasize_japanese_chou2,
+                        SmsCbConstants.MESSAGE_ID_CMAS_ALERT_EXTREME_EXPECTED_LIKELY,
+                        5748);
+        public static final MediaSize JPN_HAGAKI =
+                new MediaSize(
+                        "JPN_HAGAKI", "android", R.string.mediasize_japanese_hagaki, 3937, 5827);
+        public static final MediaSize JPN_OUFUKU =
+                new MediaSize(
+                        "JPN_OUFUKU", "android", R.string.mediasize_japanese_oufuku, 5827, 7874);
+        public static final MediaSize JPN_KAHU =
+                new MediaSize("JPN_KAHU", "android", R.string.mediasize_japanese_kahu, 9449, 12681);
+        public static final MediaSize JPN_KAKU2 =
+                new MediaSize(
+                        "JPN_KAKU2", "android", R.string.mediasize_japanese_kaku2, 9449, 13071);
+        public static final MediaSize JPN_YOU4 =
+                new MediaSize("JPN_YOU4", "android", R.string.mediasize_japanese_you4, 4134, 9252);
+        public static final MediaSize JPN_OE_PHOTO_L =
+                new MediaSize(
+                        "JPN_OE_PHOTO_L", "android", R.string.mediasize_japanese_l, 3500, 5000);
 
-        public MediaSize(String id, String packageName, int labelResId, int widthMils, int heightMils) {
+        public MediaSize(
+                String id, String packageName, int labelResId, int widthMils, int heightMils) {
             this(id, null, packageName, widthMils, heightMils, labelResId);
             sIdToMediaSizeMap.put(this.mId, this);
         }
@@ -377,14 +670,27 @@ public final class PrintAttributes implements Parcelable {
             return definedMediaSizes;
         }
 
-        public MediaSize(String id, String label, String packageName, int widthMils, int heightMils, int labelResId) {
+        public MediaSize(
+                String id,
+                String label,
+                String packageName,
+                int widthMils,
+                int heightMils,
+                int labelResId) {
             this.mPackageName = packageName;
             this.mId = (String) Preconditions.checkStringNotEmpty(id, "id cannot be empty.");
             this.mLabelResId = labelResId;
-            this.mWidthMils = Preconditions.checkArgumentPositive(widthMils, "widthMils cannot be less than or equal to zero.");
-            this.mHeightMils = Preconditions.checkArgumentPositive(heightMils, "heightMils cannot be less than or equal to zero.");
+            this.mWidthMils =
+                    Preconditions.checkArgumentPositive(
+                            widthMils, "widthMils cannot be less than or equal to zero.");
+            this.mHeightMils =
+                    Preconditions.checkArgumentPositive(
+                            heightMils, "heightMils cannot be less than or equal to zero.");
             this.mLabel = label;
-            Preconditions.checkArgument((TextUtils.isEmpty(label) ^ true) != (!TextUtils.isEmpty(packageName) && labelResId != 0), "label cannot be empty.");
+            Preconditions.checkArgument(
+                    (TextUtils.isEmpty(label) ^ true)
+                            != (!TextUtils.isEmpty(packageName) && labelResId != 0),
+                    "label cannot be empty.");
         }
 
         public String getId() {
@@ -394,9 +700,16 @@ public final class PrintAttributes implements Parcelable {
         public String getLabel(PackageManager packageManager) {
             if (!TextUtils.isEmpty(this.mPackageName) && this.mLabelResId > 0) {
                 try {
-                    return packageManager.getResourcesForApplication(this.mPackageName).getString(this.mLabelResId);
+                    return packageManager
+                            .getResourcesForApplication(this.mPackageName)
+                            .getString(this.mLabelResId);
                 } catch (PackageManager.NameNotFoundException | Resources.NotFoundException e) {
-                    Log.w(LOG_TAG, "Could not load resouce" + this.mLabelResId + " from package " + this.mPackageName);
+                    Log.w(
+                            LOG_TAG,
+                            "Could not load resouce"
+                                    + this.mLabelResId
+                                    + " from package "
+                                    + this.mPackageName);
                 }
             }
             return this.mLabel;
@@ -418,14 +731,26 @@ public final class PrintAttributes implements Parcelable {
             if (isPortrait()) {
                 return this;
             }
-            return new MediaSize(this.mId, this.mLabel, this.mPackageName, Math.min(this.mWidthMils, this.mHeightMils), Math.max(this.mWidthMils, this.mHeightMils), this.mLabelResId);
+            return new MediaSize(
+                    this.mId,
+                    this.mLabel,
+                    this.mPackageName,
+                    Math.min(this.mWidthMils, this.mHeightMils),
+                    Math.max(this.mWidthMils, this.mHeightMils),
+                    this.mLabelResId);
         }
 
         public MediaSize asLandscape() {
             if (!isPortrait()) {
                 return this;
             }
-            return new MediaSize(this.mId, this.mLabel, this.mPackageName, Math.max(this.mWidthMils, this.mHeightMils), Math.min(this.mWidthMils, this.mHeightMils), this.mLabelResId);
+            return new MediaSize(
+                    this.mId,
+                    this.mLabel,
+                    this.mPackageName,
+                    Math.max(this.mWidthMils, this.mHeightMils),
+                    Math.min(this.mWidthMils, this.mHeightMils),
+                    this.mLabelResId);
         }
 
         void writeToParcel(Parcel parcel) {
@@ -438,7 +763,13 @@ public final class PrintAttributes implements Parcelable {
         }
 
         static MediaSize createFromParcel(Parcel parcel) {
-            return new MediaSize(parcel.readString(), parcel.readString(), parcel.readString(), parcel.readInt(), parcel.readInt(), parcel.readInt());
+            return new MediaSize(
+                    parcel.readString(),
+                    parcel.readString(),
+                    parcel.readString(),
+                    parcel.readInt(),
+                    parcel.readInt(),
+                    parcel.readInt());
         }
 
         public int hashCode() {
@@ -492,10 +823,12 @@ public final class PrintAttributes implements Parcelable {
                 throw new IllegalArgumentException("label cannot be empty.");
             }
             if (horizontalDpi <= 0) {
-                throw new IllegalArgumentException("horizontalDpi cannot be less than or equal to zero.");
+                throw new IllegalArgumentException(
+                        "horizontalDpi cannot be less than or equal to zero.");
             }
             if (verticalDpi <= 0) {
-                throw new IllegalArgumentException("verticalDpi cannot be less than or equal to zero.");
+                throw new IllegalArgumentException(
+                        "verticalDpi cannot be less than or equal to zero.");
             }
             this.mId = id;
             this.mLabel = label;
@@ -527,7 +860,8 @@ public final class PrintAttributes implements Parcelable {
         }
 
         static Resolution createFromParcel(Parcel parcel) {
-            return new Resolution(parcel.readString(), parcel.readString(), parcel.readInt(), parcel.readInt());
+            return new Resolution(
+                    parcel.readString(), parcel.readString(), parcel.readInt(), parcel.readInt());
         }
 
         public int hashCode() {
@@ -543,7 +877,8 @@ public final class PrintAttributes implements Parcelable {
                 return false;
             }
             Resolution other = (Resolution) obj;
-            if (this.mHorizontalDpi == other.mHorizontalDpi && this.mVerticalDpi == other.mVerticalDpi) {
+            if (this.mHorizontalDpi == other.mHorizontalDpi
+                    && this.mVerticalDpi == other.mVerticalDpi) {
                 return true;
             }
             return false;
@@ -599,12 +934,14 @@ public final class PrintAttributes implements Parcelable {
         }
 
         static Margins createFromParcel(Parcel parcel) {
-            return new Margins(parcel.readInt(), parcel.readInt(), parcel.readInt(), parcel.readInt());
+            return new Margins(
+                    parcel.readInt(), parcel.readInt(), parcel.readInt(), parcel.readInt());
         }
 
         public int hashCode() {
             int result = (1 * 31) + this.mBottomMils;
-            return (((((result * 31) + this.mLeftMils) * 31) + this.mRightMils) * 31) + this.mTopMils;
+            return (((((result * 31) + this.mLeftMils) * 31) + this.mRightMils) * 31)
+                    + this.mTopMils;
         }
 
         public boolean equals(Object obj) {
@@ -615,7 +952,10 @@ public final class PrintAttributes implements Parcelable {
                 return false;
             }
             Margins other = (Margins) obj;
-            if (this.mBottomMils == other.mBottomMils && this.mLeftMils == other.mLeftMils && this.mRightMils == other.mRightMils && this.mTopMils == other.mTopMils) {
+            if (this.mBottomMils == other.mBottomMils
+                    && this.mLeftMils == other.mLeftMils
+                    && this.mRightMils == other.mRightMils
+                    && this.mTopMils == other.mTopMils) {
                 return true;
             }
             return false;

@@ -16,18 +16,21 @@ import android.os.Process;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.util.Log;
+
 import com.android.internal.pm.parsing.pkg.AndroidPackageInternal;
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
 import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
 import com.android.server.StorageManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.pm.parsing.PackageInfoUtils;
+
 import com.samsung.android.knox.AppIdentity;
 import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.knox.application.IApplicationPolicy;
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
 import com.samsung.android.knox.dar.ddar.DualDarManager;
 import com.samsung.android.knox.ddar.IDualDARPolicy;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -41,65 +44,106 @@ import java.util.Optional;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public class PersonaServiceHelper {
-    public static final List ALLOWED_BLUETOOTH_TARGET = new ArrayList(Arrays.asList("com.android.bluetooth/com.android.bluetooth.hfp.HeadsetService", "com.android.bluetooth/com.android.bluetooth.a2dp.A2dpService", "com.android.bluetooth/com.android.bluetooth.a2dp.A2dpSinkService", "com.android.bluetooth/com.android.bluetooth.hfpclient.HeadsetClientService"));
+    public static final List ALLOWED_BLUETOOTH_TARGET =
+            new ArrayList(
+                    Arrays.asList(
+                            "com.android.bluetooth/com.android.bluetooth.hfp.HeadsetService",
+                            "com.android.bluetooth/com.android.bluetooth.a2dp.A2dpService",
+                            "com.android.bluetooth/com.android.bluetooth.a2dp.A2dpSinkService",
+                            "com.android.bluetooth/com.android.bluetooth.hfpclient.HeadsetClientService"));
     public static IApplicationPolicy mApplicationPolicyService = null;
     public static IDualDARPolicy mDualDARPolicyService = null;
     public static UserManagerService mUserManager = null;
-    public static final Map packagesForPOP = new HashMap() { // from class: com.android.server.pm.PersonaServiceHelper.1
-        {
-            Boolean bool = Boolean.TRUE;
-            put("com.google.android.providers.media.module", bool);
-            put("com.android.providers.media.module", bool);
-            put(KnoxCustomManagerService.SAMSUNG_HONEYBOARD_PKG_NAME, bool);
-            put("com.samsung.android.secsoundpicker", bool);
-            put("com.google.android.overlay.gmsconfig.geotz", bool);
-            put("android.auto_generated_rro_product__", bool);
-            put("com.google.android.overlay.modules.modulemetadata.forframework", bool);
-            put("com.android.permissioncontroller", bool);
-        }
-    };
-    public static final Map packagesForSF = new HashMap() { // from class: com.android.server.pm.PersonaServiceHelper.2
-        {
-            Boolean bool = Boolean.TRUE;
-            put("com.google.android.providers.media.module", bool);
-            put("com.samsung.knox.securefolder", bool);
-            Boolean bool2 = Boolean.FALSE;
-            put("com.samsung.android.forest", bool2);
-            put("com.samsung.android.secsoundpicker", bool);
-            put("com.samsung.advp.imssettings", bool2);
-            put("com.sec.epdgtestapp", bool2);
-            put("com.android.permissioncontroller", bool);
-        }
-    };
-    public static final Map packagesForDual = new HashMap() { // from class: com.android.server.pm.PersonaServiceHelper.3
-        {
-            Boolean bool = Boolean.FALSE;
-            put("com.android.providers.media.module", bool);
-            put("com.google.android.providers.media.module", bool);
-            Boolean bool2 = Boolean.TRUE;
-            put("com.android.phone", bool2);
-            put("com.android.permissioncontroller", bool2);
-            put("com.samsung.android.secsoundpicker", bool);
-            put("com.google.android.gms", bool2);
-            put("com.android.nfc", bool2);
-            put("com.google.android.gsf", bool2);
-            put("com.google.android.gsf.login", bool2);
-            put("com.samsung.android.voc", bool);
-            put("com.samsung.android.providers.media", bool);
-            put("com.google.android.overlay.gmsconfig.geotz", bool2);
-            put("android.auto_generated_rro_product__", bool2);
-            put("com.google.android.overlay.modules.modulemetadata.forframework", bool2);
-            put("com.google.android.overlay.modules.permissioncontroller", bool2);
-            put("com.google.android.overlay.modules.permissioncontroller.forframework", bool2);
-            put("com.google.android.packageinstaller", bool2);
-            put("com.samsung.android.packageinstaller", bool2);
-            put("com.android.intentresolver", bool2);
-            put("com.facebook.appmanager", bool2);
-            put("com.google.android.apps.restore", bool2);
-            put("com.android.credentialmanager", bool2);
-        }
-    };
-    public static final ArrayList DTI_PACKAGES = new ArrayList(Arrays.asList("com.dti.samsung", "com.smg.rt", "com.aura.oobe.samsung.gl", "com.aura.oobe.samsung", "com.dti.telefonica", "com.dti.tracfone", "com.dti.att", "com.aura.oobe.att", "com.aura.jet.att", "com.LogiaGroup.LogiaDeck", "com.dti.attmx", "com.dti.millicom", "com.dti.cricket", "com.dti.globe", "com.dti.bouygues", "com.dti.uscc", "com.dti.amx", "com.dti.wiko", "com.dti.sliide", "com.dti.karbonn", "com.dti.intex", "com.dti.itel", "com.dti.gionee", "com.at.tg.rt", "com.applovin.array.apphub.samsung", "com.dish.wireless.installer", "com.dti.aon", "com.tims.rt"));
+    public static final Map packagesForPOP =
+            new HashMap() { // from class: com.android.server.pm.PersonaServiceHelper.1
+                {
+                    Boolean bool = Boolean.TRUE;
+                    put("com.google.android.providers.media.module", bool);
+                    put("com.android.providers.media.module", bool);
+                    put(KnoxCustomManagerService.SAMSUNG_HONEYBOARD_PKG_NAME, bool);
+                    put("com.samsung.android.secsoundpicker", bool);
+                    put("com.google.android.overlay.gmsconfig.geotz", bool);
+                    put("android.auto_generated_rro_product__", bool);
+                    put("com.google.android.overlay.modules.modulemetadata.forframework", bool);
+                    put("com.android.permissioncontroller", bool);
+                }
+            };
+    public static final Map packagesForSF =
+            new HashMap() { // from class: com.android.server.pm.PersonaServiceHelper.2
+                {
+                    Boolean bool = Boolean.TRUE;
+                    put("com.google.android.providers.media.module", bool);
+                    put("com.samsung.knox.securefolder", bool);
+                    Boolean bool2 = Boolean.FALSE;
+                    put("com.samsung.android.forest", bool2);
+                    put("com.samsung.android.secsoundpicker", bool);
+                    put("com.samsung.advp.imssettings", bool2);
+                    put("com.sec.epdgtestapp", bool2);
+                    put("com.android.permissioncontroller", bool);
+                }
+            };
+    public static final Map packagesForDual =
+            new HashMap() { // from class: com.android.server.pm.PersonaServiceHelper.3
+                {
+                    Boolean bool = Boolean.FALSE;
+                    put("com.android.providers.media.module", bool);
+                    put("com.google.android.providers.media.module", bool);
+                    Boolean bool2 = Boolean.TRUE;
+                    put("com.android.phone", bool2);
+                    put("com.android.permissioncontroller", bool2);
+                    put("com.samsung.android.secsoundpicker", bool);
+                    put("com.google.android.gms", bool2);
+                    put("com.android.nfc", bool2);
+                    put("com.google.android.gsf", bool2);
+                    put("com.google.android.gsf.login", bool2);
+                    put("com.samsung.android.voc", bool);
+                    put("com.samsung.android.providers.media", bool);
+                    put("com.google.android.overlay.gmsconfig.geotz", bool2);
+                    put("android.auto_generated_rro_product__", bool2);
+                    put("com.google.android.overlay.modules.modulemetadata.forframework", bool2);
+                    put("com.google.android.overlay.modules.permissioncontroller", bool2);
+                    put(
+                            "com.google.android.overlay.modules.permissioncontroller.forframework",
+                            bool2);
+                    put("com.google.android.packageinstaller", bool2);
+                    put("com.samsung.android.packageinstaller", bool2);
+                    put("com.android.intentresolver", bool2);
+                    put("com.facebook.appmanager", bool2);
+                    put("com.google.android.apps.restore", bool2);
+                    put("com.android.credentialmanager", bool2);
+                }
+            };
+    public static final ArrayList DTI_PACKAGES =
+            new ArrayList(
+                    Arrays.asList(
+                            "com.dti.samsung",
+                            "com.smg.rt",
+                            "com.aura.oobe.samsung.gl",
+                            "com.aura.oobe.samsung",
+                            "com.dti.telefonica",
+                            "com.dti.tracfone",
+                            "com.dti.att",
+                            "com.aura.oobe.att",
+                            "com.aura.jet.att",
+                            "com.LogiaGroup.LogiaDeck",
+                            "com.dti.attmx",
+                            "com.dti.millicom",
+                            "com.dti.cricket",
+                            "com.dti.globe",
+                            "com.dti.bouygues",
+                            "com.dti.uscc",
+                            "com.dti.amx",
+                            "com.dti.wiko",
+                            "com.dti.sliide",
+                            "com.dti.karbonn",
+                            "com.dti.intex",
+                            "com.dti.itel",
+                            "com.dti.gionee",
+                            "com.at.tg.rt",
+                            "com.applovin.array.apphub.samsung",
+                            "com.dish.wireless.installer",
+                            "com.dti.aon",
+                            "com.tims.rt"));
 
     public static boolean canAddMoreManagedProfiles(int i, boolean z, List list) {
         Iterator it = list.iterator();
@@ -118,7 +162,9 @@ public class PersonaServiceHelper {
         if ((i & 131072) != 0) {
             Log.d("PersonaServiceHelper", "creating user owned container");
             if (i3 >= 1) {
-                Log.e("PersonaServiceHelper", "creation failed when already exists user-owned container");
+                Log.e(
+                        "PersonaServiceHelper",
+                        "creation failed when already exists user-owned container");
                 return false;
             }
         } else {
@@ -150,7 +196,15 @@ public class PersonaServiceHelper {
         }
         try {
             AndroidPackageInternal androidPackageInternal = packageSetting.pkg;
-            if (androidPackageInternal != null && (generateApplicationInfo = PackageInfoUtils.generateApplicationInfo(androidPackageInternal, 128L, packageSetting.readUserState(-1), -1, packageSetting)) != null) {
+            if (androidPackageInternal != null
+                    && (generateApplicationInfo =
+                                    PackageInfoUtils.generateApplicationInfo(
+                                            androidPackageInternal,
+                                            128L,
+                                            packageSetting.readUserState(-1),
+                                            -1,
+                                            packageSetting))
+                            != null) {
                 return generateApplicationInfo.metaData;
             }
             return null;
@@ -161,14 +215,17 @@ public class PersonaServiceHelper {
 
     public static IApplicationPolicy getApplicationPolicyService() {
         if (mApplicationPolicyService == null) {
-            mApplicationPolicyService = IApplicationPolicy.Stub.asInterface(ServiceManager.getService("application_policy"));
+            mApplicationPolicyService =
+                    IApplicationPolicy.Stub.asInterface(
+                            ServiceManager.getService("application_policy"));
         }
         return mApplicationPolicyService;
     }
 
     public static Optional getDualDARPolicyService() {
         if (mDualDARPolicyService == null) {
-            mDualDARPolicyService = IDualDARPolicy.Stub.asInterface(ServiceManager.getService("DualDARPolicy"));
+            mDualDARPolicyService =
+                    IDualDARPolicy.Stub.asInterface(ServiceManager.getService("DualDARPolicy"));
         }
         return Optional.ofNullable(mDualDARPolicyService);
     }
@@ -178,7 +235,8 @@ public class PersonaServiceHelper {
             return -1;
         }
         int i2 = SemPersonaManager.isDoEnabled(0) ? i == 0 ? 2 : 1 : 0;
-        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i2, "DualDAR Container Type : ", "PersonaServiceHelper");
+        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                i2, "DualDAR Container Type : ", "PersonaServiceHelper");
         return i2;
     }
 
@@ -201,14 +259,20 @@ public class PersonaServiceHelper {
     }
 
     public static boolean isCallerApprovedToInstall(int i, int i2) {
-        Log.i("PersonaServiceHelper", DualAppManagerService$$ExternalSyntheticOutline0.m(i, i2, "isCallerApprovedToInstall(uid:", " userHandle:", ")"));
-        if (Binder.getCallingUid() == Process.myUid() && Binder.getCallingPid() == Process.myPid()) {
+        Log.i(
+                "PersonaServiceHelper",
+                DualAppManagerService$$ExternalSyntheticOutline0.m(
+                        i, i2, "isCallerApprovedToInstall(uid:", " userHandle:", ")"));
+        if (Binder.getCallingUid() == Process.myUid()
+                && Binder.getCallingPid() == Process.myPid()) {
             Log.i("PersonaServiceHelper", "caller is system_service process....");
             return true;
         }
         if (SemPersonaManager.isKnoxId(i2)) {
             if (SemPersonaManager.isSecureFolderId(i2)) {
-                Log.i("PersonaServiceHelper", "Secure folder or BBD has no Knox app install enforcement");
+                Log.i(
+                        "PersonaServiceHelper",
+                        "Secure folder or BBD has no Knox app install enforcement");
                 return true;
             }
         } else {
@@ -240,14 +304,31 @@ public class PersonaServiceHelper {
             return false;
         }
         try {
-            if (SemPersonaManager.isKnoxId(i) && bundle.getBoolean("com.samsung.android.multiuser.disallowed_managed_profile", false)) {
-                Log.d("PersonaServiceHelper", "isDisallowedAppForKnox - METADATA_DISALLOWED_MANAGED_PROFILE is defined. " + str + " / " + i);
+            if (SemPersonaManager.isKnoxId(i)
+                    && bundle.getBoolean(
+                            "com.samsung.android.multiuser.disallowed_managed_profile", false)) {
+                Log.d(
+                        "PersonaServiceHelper",
+                        "isDisallowedAppForKnox - METADATA_DISALLOWED_MANAGED_PROFILE is defined. "
+                                + str
+                                + " / "
+                                + i);
                 return true;
             }
             if (SemPersonaManager.isDoEnabled(i)) {
                 try {
-                    if (!SystemProperties.getBoolean("persist.sys.knox.leave_all_system_apps_enabled", false) && (packageManager = ActivityThread.getPackageManager()) != null && (installerPackageName = packageManager.getInstallerPackageName(str)) != null && DTI_PACKAGES.contains(installerPackageName)) {
-                        Log.d("PersonaServiceHelper", "isDisallowedAppForKnox - DTI package : " + str + " / installer : " + installerPackageName);
+                    if (!SystemProperties.getBoolean(
+                                    "persist.sys.knox.leave_all_system_apps_enabled", false)
+                            && (packageManager = ActivityThread.getPackageManager()) != null
+                            && (installerPackageName = packageManager.getInstallerPackageName(str))
+                                    != null
+                            && DTI_PACKAGES.contains(installerPackageName)) {
+                        Log.d(
+                                "PersonaServiceHelper",
+                                "isDisallowedAppForKnox - DTI package : "
+                                        + str
+                                        + " / installer : "
+                                        + installerPackageName);
                         return true;
                     }
                 } catch (Exception e) {
@@ -274,21 +355,30 @@ public class PersonaServiceHelper {
                 break;
             }
         }
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("isDualDAREnabled result : ", "PersonaServiceHelper", z);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "isDualDAREnabled result : ", "PersonaServiceHelper", z);
         return z;
     }
 
-    public static boolean isPackageAllowlistedForDEAccessForDualDAR(Context context, String str, int i) {
+    public static boolean isPackageAllowlistedForDEAccessForDualDAR(
+            Context context, String str, int i) {
         if (isSystemApp(i, str)) {
-            DualAppManagerService$$ExternalSyntheticOutline0.m("system app allowed - ", str, "PersonaServiceHelper");
+            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                    "system app allowed - ", str, "PersonaServiceHelper");
             return true;
         }
-        Bundle bundle = (Bundle) getDualDARPolicyService().map(new PersonaServiceHelper$$ExternalSyntheticLambda0(i, 1)).orElseGet(new PersonaServiceHelper$$ExternalSyntheticLambda2(i, 0));
+        Bundle bundle =
+                (Bundle)
+                        getDualDARPolicyService()
+                                .map(new PersonaServiceHelper$$ExternalSyntheticLambda0(i, 1))
+                                .orElseGet(
+                                        new PersonaServiceHelper$$ExternalSyntheticLambda2(i, 0));
         if (bundle == null) {
             return false;
         }
         ArrayList arrayList = new ArrayList();
-        for (AppIdentity appIdentity : bundle.getParcelableArray("dualdar-config-datalock-whitelistpackages")) {
+        for (AppIdentity appIdentity :
+                bundle.getParcelableArray("dualdar-config-datalock-whitelistpackages")) {
             arrayList.add(appIdentity);
         }
         return verifyPackageForDualDAR(context, i, str, arrayList);
@@ -299,10 +389,17 @@ public class PersonaServiceHelper {
             return false;
         }
         try {
-            if (!SemPersonaManager.isKnoxId(i) || !bundle.getBoolean("com.samsung.android.multiuser.required_managed_profile", false)) {
+            if (!SemPersonaManager.isKnoxId(i)
+                    || !bundle.getBoolean(
+                            "com.samsung.android.multiuser.required_managed_profile", false)) {
                 return false;
             }
-            Log.d("PersonaServiceHelper", "isRequiredAppForKnox - METADATA_REQUIRED_MANAGED_PROFILE is defined. " + str + " / " + i);
+            Log.d(
+                    "PersonaServiceHelper",
+                    "isRequiredAppForKnox - METADATA_REQUIRED_MANAGED_PROFILE is defined. "
+                            + str
+                            + " / "
+                            + i);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -312,13 +409,16 @@ public class PersonaServiceHelper {
 
     public static boolean isSystemApp(int i, String str) {
         try {
-            ApplicationInfo applicationInfo = AppGlobals.getPackageManager().getApplicationInfo(str, 128L, i);
+            ApplicationInfo applicationInfo =
+                    AppGlobals.getPackageManager().getApplicationInfo(str, 128L, i);
             if (applicationInfo == null) {
                 return false;
             }
             return (applicationInfo.flags & 129) != 0;
         } catch (Exception e) {
-            Log.e("PersonaServiceHelper", "Unable to check is System App for: " + str + " in user: " + i);
+            Log.e(
+                    "PersonaServiceHelper",
+                    "Unable to check is System App for: " + str + " in user: " + i);
             e.printStackTrace();
             return false;
         }
@@ -366,7 +466,10 @@ public class PersonaServiceHelper {
         L3c:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.PersonaServiceHelper.shouldBlockBluetooth(android.content.Context, int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.PersonaServiceHelper.shouldBlockBluetooth(android.content.Context,"
+                    + " int):boolean");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:12:0x003e A[RETURN] */
@@ -375,7 +478,8 @@ public class PersonaServiceHelper {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean shouldBlockBluetoothHeadset(android.content.Context r1, java.lang.String r2, int r3, int r4) {
+    public static boolean shouldBlockBluetoothHeadset(
+            android.content.Context r1, java.lang.String r2, int r3, int r4) {
         /*
             java.util.List r0 = com.android.server.pm.PersonaServiceHelper.ALLOWED_BLUETOOTH_TARGET
             java.util.ArrayList r0 = (java.util.ArrayList) r0
@@ -409,7 +513,10 @@ public class PersonaServiceHelper {
             r1 = 1
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.PersonaServiceHelper.shouldBlockBluetoothHeadset(android.content.Context, java.lang.String, int, int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.PersonaServiceHelper.shouldBlockBluetoothHeadset(android.content.Context,"
+                    + " java.lang.String, int, int):boolean");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:13:0x0084 A[RETURN] */
@@ -487,7 +594,9 @@ public class PersonaServiceHelper {
         L8a:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.PersonaServiceHelper.shouldBlockUsbHostMode(android.content.Context):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.PersonaServiceHelper.shouldBlockUsbHostMode(android.content.Context):boolean");
     }
 
     public static boolean verifyPackageForDualDAR(Context context, int i, String str, List list) {
@@ -495,7 +604,8 @@ public class PersonaServiceHelper {
         PackageInfo packageInfo;
         SigningInfo signingInfo;
         byte[] bArr;
-        DualAppManagerService$$ExternalSyntheticOutline0.m("verifyPackageForDualDAR package: ", str, "PersonaServiceHelper");
+        DualAppManagerService$$ExternalSyntheticOutline0.m(
+                "verifyPackageForDualDAR package: ", str, "PersonaServiceHelper");
         Iterator it = ((ArrayList) list).iterator();
         while (true) {
             if (!it.hasNext()) {
@@ -508,7 +618,8 @@ public class PersonaServiceHelper {
             }
         }
         if (appIdentity == null) {
-            StorageManagerService$$ExternalSyntheticOutline0.m("Package not whitelisted: ", str, "PersonaServiceHelper");
+            StorageManagerService$$ExternalSyntheticOutline0.m(
+                    "Package not whitelisted: ", str, "PersonaServiceHelper");
             return false;
         }
         if (appIdentity.getSignature() == null || appIdentity.getSignature().length() <= 0) {
@@ -516,14 +627,17 @@ public class PersonaServiceHelper {
         }
         String packageName = appIdentity.getPackageName();
         String signature = appIdentity.getSignature();
-        if (signature == null || packageName == null || (i == 0 && !DualDarManager.isOnDeviceOwnerEnabled())) {
+        if (signature == null
+                || packageName == null
+                || (i == 0 && !DualDarManager.isOnDeviceOwnerEnabled())) {
             Log.d("PersonaServiceHelper", "Invalid arguments");
             return false;
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                packageInfo = context.getPackageManager().getPackageInfoAsUser(packageName, 134217728, i);
+                packageInfo =
+                        context.getPackageManager().getPackageInfoAsUser(packageName, 134217728, i);
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
                 Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -544,7 +658,8 @@ public class PersonaServiceHelper {
                         for (byte b : bArr) {
                             stringBuffer.append(Integer.toString((b & 255) + 256, 16).substring(1));
                         }
-                        if (signature.equals(stringBuffer.toString()) || signature.equals(signature2.toCharsString())) {
+                        if (signature.equals(stringBuffer.toString())
+                                || signature.equals(signature2.toCharsString())) {
                             return true;
                         }
                     }

@@ -4,7 +4,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
-import com.samsung.android.knox.IContainerService;
 
 /* loaded from: classes6.dex */
 public abstract class ContainerCoreService extends Service {
@@ -22,8 +21,7 @@ public abstract class ContainerCoreService extends Service {
     }
 
     private final class ServiceImpl extends IContainerService.Stub {
-        private ServiceImpl() {
-        }
+        private ServiceImpl() {}
 
         @Override // com.samsung.android.knox.IContainerService
         public Bundle onMessage(String action, Bundle args) {

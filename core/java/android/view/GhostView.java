@@ -4,8 +4,8 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.RecordingCanvas;
 import android.graphics.RenderNode;
-import android.view.ViewOverlay;
 import android.widget.FrameLayout;
+
 import java.util.ArrayList;
 
 /* loaded from: classes4.dex */
@@ -171,7 +171,12 @@ public class GhostView extends View {
         return firstGhost2;
     }
 
-    private static void insertIntoOverlay(ViewGroup viewGroup, ViewGroup wrapper, GhostView ghostView, ArrayList<View> tempParents, int firstGhost) {
+    private static void insertIntoOverlay(
+            ViewGroup viewGroup,
+            ViewGroup wrapper,
+            GhostView ghostView,
+            ArrayList<View> tempParents,
+            int firstGhost) {
         if (firstGhost == -1) {
             viewGroup.addView(wrapper);
             return;
@@ -186,7 +191,11 @@ public class GhostView extends View {
         }
     }
 
-    private static int getInsertIndex(ViewGroup overlayViewGroup, ArrayList<View> viewParents, ArrayList<View> tempParents, int firstGhost) {
+    private static int getInsertIndex(
+            ViewGroup overlayViewGroup,
+            ArrayList<View> viewParents,
+            ArrayList<View> tempParents,
+            int firstGhost) {
         int low = firstGhost;
         int high = overlayViewGroup.getChildCount() - 1;
         while (low <= high) {
@@ -216,7 +225,9 @@ public class GhostView extends View {
     }
 
     private static boolean isOnTop(ArrayList<View> viewParents, ArrayList<View> comparedWith) {
-        if (viewParents.isEmpty() || comparedWith.isEmpty() || viewParents.get(0) != comparedWith.get(0)) {
+        if (viewParents.isEmpty()
+                || comparedWith.isEmpty()
+                || viewParents.get(0) != comparedWith.get(0)) {
             return true;
         }
         int depth = Math.min(viewParents.size(), comparedWith.size());
@@ -252,7 +263,10 @@ public class GhostView extends View {
                 break;
             }
             int childIndex = customOrder ? parent.getChildDrawingOrder(childrenCount, i) : i;
-            View child = preorderedList == null ? parent.getChildAt(childIndex) : preorderedList.get(childIndex);
+            View child =
+                    preorderedList == null
+                            ? parent.getChildAt(childIndex)
+                            : preorderedList.get(childIndex);
             if (child == view) {
                 isOnTop = false;
                 break;

@@ -15,6 +15,7 @@ import com.android.internal.org.bouncycastle.jce.X509Principal;
 import com.android.internal.org.bouncycastle.jce.provider.BouncyCastleProvider;
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.Selector;
+
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -26,6 +27,7 @@ import java.security.cert.CertificateParsingException;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.security.auth.x500.X500Principal;
 
 /* loaded from: classes5.dex */
@@ -37,7 +39,12 @@ public class AttributeCertificateHolder implements CertSelector, Selector {
     }
 
     public AttributeCertificateHolder(X509Principal issuerName, BigInteger serialNumber) {
-        this.holder = new Holder(new IssuerSerial(GeneralNames.getInstance(new DERSequence(new GeneralName(issuerName))), new ASN1Integer(serialNumber)));
+        this.holder =
+                new Holder(
+                        new IssuerSerial(
+                                GeneralNames.getInstance(
+                                        new DERSequence(new GeneralName(issuerName))),
+                                new ASN1Integer(serialNumber)));
     }
 
     public AttributeCertificateHolder(X500Principal issuerName, BigInteger serialNumber) {
@@ -47,7 +54,11 @@ public class AttributeCertificateHolder implements CertSelector, Selector {
     public AttributeCertificateHolder(X509Certificate cert) throws CertificateParsingException {
         try {
             X509Principal name = PrincipalUtil.getIssuerX509Principal(cert);
-            this.holder = new Holder(new IssuerSerial(generateGeneralNames(name), new ASN1Integer(cert.getSerialNumber())));
+            this.holder =
+                    new Holder(
+                            new IssuerSerial(
+                                    generateGeneralNames(name),
+                                    new ASN1Integer(cert.getSerialNumber())));
         } catch (Exception e) {
             throw new CertificateParsingException(e.getMessage());
         }
@@ -61,8 +72,18 @@ public class AttributeCertificateHolder implements CertSelector, Selector {
         this(X509Util.convertPrincipal(principal));
     }
 
-    public AttributeCertificateHolder(int digestedObjectType, String digestAlgorithm, String otherObjectTypeID, byte[] objectDigest) {
-        this.holder = new Holder(new ObjectDigestInfo(digestedObjectType, new ASN1ObjectIdentifier(otherObjectTypeID), new AlgorithmIdentifier(new ASN1ObjectIdentifier(digestAlgorithm)), Arrays.clone(objectDigest)));
+    public AttributeCertificateHolder(
+            int digestedObjectType,
+            String digestAlgorithm,
+            String otherObjectTypeID,
+            byte[] objectDigest) {
+        this.holder =
+                new Holder(
+                        new ObjectDigestInfo(
+                                digestedObjectType,
+                                new ASN1ObjectIdentifier(otherObjectTypeID),
+                                new AlgorithmIdentifier(new ASN1ObjectIdentifier(digestAlgorithm)),
+                                Arrays.clone(objectDigest)));
     }
 
     public int getDigestedObjectType() {
@@ -104,7 +125,8 @@ public class AttributeCertificateHolder implements CertSelector, Selector {
             GeneralName gn = names[i];
             if (gn.getTagNo() == 4) {
                 try {
-                    if (new X509Principal(gn.getName().toASN1Primitive().getEncoded()).equals(subject)) {
+                    if (new X509Principal(gn.getName().toASN1Primitive().getEncoded())
+                            .equals(subject)) {
                         return true;
                     }
                 } catch (IOException e) {
@@ -162,7 +184,8 @@ public class AttributeCertificateHolder implements CertSelector, Selector {
         return null;
     }
 
-    @Override // java.security.cert.CertSelector, com.android.internal.org.bouncycastle.util.Selector
+    @Override // java.security.cert.CertSelector,
+              // com.android.internal.org.bouncycastle.util.Selector
     public Object clone() {
         return new AttributeCertificateHolder((ASN1Sequence) this.holder.toASN1Primitive());
     }
@@ -175,16 +198,27 @@ public class AttributeCertificateHolder implements CertSelector, Selector {
         X509Certificate x509Cert = (X509Certificate) cert;
         try {
             if (this.holder.getBaseCertificateID() != null) {
-                return this.holder.getBaseCertificateID().getSerial().hasValue(x509Cert.getSerialNumber()) && matchesDN(PrincipalUtil.getIssuerX509Principal(x509Cert), this.holder.getBaseCertificateID().getIssuer());
+                return this.holder
+                                .getBaseCertificateID()
+                                .getSerial()
+                                .hasValue(x509Cert.getSerialNumber())
+                        && matchesDN(
+                                PrincipalUtil.getIssuerX509Principal(x509Cert),
+                                this.holder.getBaseCertificateID().getIssuer());
             }
-            if (this.holder.getEntityName() != null && matchesDN(PrincipalUtil.getSubjectX509Principal(x509Cert), this.holder.getEntityName())) {
+            if (this.holder.getEntityName() != null
+                    && matchesDN(
+                            PrincipalUtil.getSubjectX509Principal(x509Cert),
+                            this.holder.getEntityName())) {
                 return true;
             }
             if (this.holder.getObjectDigestInfo() == null) {
                 return false;
             }
             try {
-                MessageDigest md = MessageDigest.getInstance(getDigestAlgorithm(), BouncyCastleProvider.PROVIDER_NAME);
+                MessageDigest md =
+                        MessageDigest.getInstance(
+                                getDigestAlgorithm(), BouncyCastleProvider.PROVIDER_NAME);
                 switch (getDigestedObjectType()) {
                     case 0:
                         md.update(cert.getPublicKey().getEncoded());

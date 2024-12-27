@@ -12,7 +12,8 @@ public final /* synthetic */ class RescueParty$$ExternalSyntheticLambda0 impleme
     public final /* synthetic */ String f$1;
     public final /* synthetic */ int f$2;
 
-    public /* synthetic */ RescueParty$$ExternalSyntheticLambda0(Context context, String str, int i, int i2) {
+    public /* synthetic */ RescueParty$$ExternalSyntheticLambda0(
+            Context context, String str, int i, int i2) {
         this.$r8$classId = i2;
         this.f$0 = context;
         this.f$1 = str;
@@ -27,7 +28,8 @@ public final /* synthetic */ class RescueParty$$ExternalSyntheticLambda0 impleme
                 String str = this.f$1;
                 int i = this.f$2;
                 try {
-                    PowerManager powerManager = (PowerManager) context.getSystemService(PowerManager.class);
+                    PowerManager powerManager =
+                            (PowerManager) context.getSystemService(PowerManager.class);
                     String str2 = "";
                     if (powerManager == null) {
                         StringBuilder sb = new StringBuilder("reboot,RescueParty");
@@ -55,7 +57,8 @@ public final /* synthetic */ class RescueParty$$ExternalSyntheticLambda0 impleme
                 String str3 = this.f$1;
                 int i2 = this.f$2;
                 try {
-                    PowerManager powerManager2 = (PowerManager) context2.getSystemService(PowerManager.class);
+                    PowerManager powerManager2 =
+                            (PowerManager) context2.getSystemService(PowerManager.class);
                     String str4 = "";
                     if (powerManager2 == null) {
                         StringBuilder sb3 = new StringBuilder("reboot,RescueParty");

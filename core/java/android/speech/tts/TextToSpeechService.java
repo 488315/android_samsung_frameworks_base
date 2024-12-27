@@ -18,10 +18,9 @@ import android.os.ParcelFileDescriptor;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.provider.Settings;
-import android.speech.tts.ITextToSpeechService;
-import android.speech.tts.TextToSpeech;
 import android.text.TextUtils;
 import android.util.Log;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,154 +44,233 @@ public abstract class TextToSpeechService extends Service {
     private IActivityManager mIActivityManager = ActivityManager.getService();
     private ArrayList<Integer> mTTSList = new ArrayList<>();
     private final Object mVoicesInfoLock = new Object();
-    private final ITextToSpeechService.Stub mBinder = new ITextToSpeechService.Stub() { // from class: android.speech.tts.TextToSpeechService.1
-        @Override // android.speech.tts.ITextToSpeechService
-        public int speak(IBinder caller, CharSequence text, int queueMode, Bundle params, String utteranceId) {
-            if (!checkNonNull(caller, text, params)) {
-                return -1;
-            }
-            SpeechItem item = TextToSpeechService.this.new SynthesisSpeechItem(caller, Binder.getCallingUid(), Binder.getCallingPid(), params, utteranceId, text);
-            return TextToSpeechService.this.mSynthHandler.enqueueSpeechItem(queueMode, item);
-        }
-
-        @Override // android.speech.tts.ITextToSpeechService
-        public int synthesizeToFileDescriptor(IBinder caller, CharSequence text, ParcelFileDescriptor fileDescriptor, Bundle params, String utteranceId) {
-            if (!checkNonNull(caller, text, fileDescriptor, params)) {
-                return -1;
-            }
-            ParcelFileDescriptor sameFileDescriptor = ParcelFileDescriptor.adoptFd(fileDescriptor.detachFd());
-            SpeechItem item = TextToSpeechService.this.new SynthesisToFileOutputStreamSpeechItem(caller, Binder.getCallingUid(), Binder.getCallingPid(), params, utteranceId, text, new ParcelFileDescriptor.AutoCloseOutputStream(sameFileDescriptor));
-            return TextToSpeechService.this.mSynthHandler.enqueueSpeechItem(1, item);
-        }
-
-        @Override // android.speech.tts.ITextToSpeechService
-        public int playAudio(IBinder caller, Uri audioUri, int queueMode, Bundle params, String utteranceId) {
-            if (!checkNonNull(caller, audioUri, params)) {
-                return -1;
-            }
-            SpeechItem item = TextToSpeechService.this.new AudioSpeechItem(caller, Binder.getCallingUid(), Binder.getCallingPid(), params, utteranceId, audioUri);
-            return TextToSpeechService.this.mSynthHandler.enqueueSpeechItem(queueMode, item);
-        }
-
-        @Override // android.speech.tts.ITextToSpeechService
-        public int playSilence(IBinder caller, long duration, int queueMode, String utteranceId) {
-            if (!checkNonNull(caller)) {
-                return -1;
-            }
-            SpeechItem item = TextToSpeechService.this.new SilenceSpeechItem(caller, Binder.getCallingUid(), Binder.getCallingPid(), utteranceId, duration);
-            return TextToSpeechService.this.mSynthHandler.enqueueSpeechItem(queueMode, item);
-        }
-
-        @Override // android.speech.tts.ITextToSpeechService
-        public boolean isSpeaking() {
-            return TextToSpeechService.this.mSynthHandler.isSpeaking() || TextToSpeechService.this.mAudioPlaybackHandler.isSpeaking();
-        }
-
-        @Override // android.speech.tts.ITextToSpeechService
-        public int stop(IBinder caller) {
-            if (!checkNonNull(caller)) {
-                return -1;
-            }
-            return TextToSpeechService.this.mSynthHandler.stopForApp(caller);
-        }
-
-        @Override // android.speech.tts.ITextToSpeechService
-        public String[] getLanguage() {
-            return TextToSpeechService.this.onGetLanguage();
-        }
-
-        @Override // android.speech.tts.ITextToSpeechService
-        public String[] getClientDefaultLanguage() {
-            return TextToSpeechService.this.getSettingsLocale();
-        }
-
-        @Override // android.speech.tts.ITextToSpeechService
-        public int isLanguageAvailable(String lang, String country, String variant) {
-            if (!checkNonNull(lang)) {
-                return -1;
-            }
-            return TextToSpeechService.this.onIsLanguageAvailable(lang, country, variant);
-        }
-
-        @Override // android.speech.tts.ITextToSpeechService
-        public String[] getFeaturesForLanguage(String lang, String country, String variant) {
-            Set<String> features = TextToSpeechService.this.onGetFeaturesForLanguage(lang, country, variant);
-            if (features != null) {
-                String[] featuresArray = new String[features.size()];
-                features.toArray(featuresArray);
-                return featuresArray;
-            }
-            return new String[0];
-        }
-
-        @Override // android.speech.tts.ITextToSpeechService
-        public int loadLanguage(IBinder caller, String lang, String country, String variant) {
-            if (!checkNonNull(lang)) {
-                return -1;
-            }
-            int retVal = TextToSpeechService.this.onIsLanguageAvailable(lang, country, variant);
-            if (retVal == 0 || retVal == 1 || retVal == 2) {
-                SpeechItem item = TextToSpeechService.this.new LoadLanguageItem(caller, Binder.getCallingUid(), Binder.getCallingPid(), lang, country, variant);
-                if (TextToSpeechService.this.mSynthHandler.enqueueSpeechItem(1, item) != 0) {
-                    return -1;
+    private final ITextToSpeechService.Stub mBinder =
+            new ITextToSpeechService
+                    .Stub() { // from class: android.speech.tts.TextToSpeechService.1
+                @Override // android.speech.tts.ITextToSpeechService
+                public int speak(
+                        IBinder caller,
+                        CharSequence text,
+                        int queueMode,
+                        Bundle params,
+                        String utteranceId) {
+                    if (!checkNonNull(caller, text, params)) {
+                        return -1;
+                    }
+                    SpeechItem item =
+                            TextToSpeechService.this
+                            .new SynthesisSpeechItem(
+                                    caller,
+                                    Binder.getCallingUid(),
+                                    Binder.getCallingPid(),
+                                    params,
+                                    utteranceId,
+                                    text);
+                    return TextToSpeechService.this.mSynthHandler.enqueueSpeechItem(
+                            queueMode, item);
                 }
-            }
-            return retVal;
-        }
 
-        @Override // android.speech.tts.ITextToSpeechService
-        public List<Voice> getVoices() {
-            return TextToSpeechService.this.onGetVoices();
-        }
-
-        @Override // android.speech.tts.ITextToSpeechService
-        public int loadVoice(IBinder caller, String voiceName) {
-            if (!checkNonNull(voiceName)) {
-                return -1;
-            }
-            int retVal = TextToSpeechService.this.onIsValidVoiceName(voiceName);
-            if (retVal == 0) {
-                SpeechItem item = TextToSpeechService.this.new LoadVoiceItem(caller, Binder.getCallingUid(), Binder.getCallingPid(), voiceName);
-                if (TextToSpeechService.this.mSynthHandler.enqueueSpeechItem(1, item) != 0) {
-                    return -1;
+                @Override // android.speech.tts.ITextToSpeechService
+                public int synthesizeToFileDescriptor(
+                        IBinder caller,
+                        CharSequence text,
+                        ParcelFileDescriptor fileDescriptor,
+                        Bundle params,
+                        String utteranceId) {
+                    if (!checkNonNull(caller, text, fileDescriptor, params)) {
+                        return -1;
+                    }
+                    ParcelFileDescriptor sameFileDescriptor =
+                            ParcelFileDescriptor.adoptFd(fileDescriptor.detachFd());
+                    SpeechItem item =
+                            TextToSpeechService.this
+                            .new SynthesisToFileOutputStreamSpeechItem(
+                                    caller,
+                                    Binder.getCallingUid(),
+                                    Binder.getCallingPid(),
+                                    params,
+                                    utteranceId,
+                                    text,
+                                    new ParcelFileDescriptor.AutoCloseOutputStream(
+                                            sameFileDescriptor));
+                    return TextToSpeechService.this.mSynthHandler.enqueueSpeechItem(1, item);
                 }
-            }
-            return retVal;
-        }
 
-        @Override // android.speech.tts.ITextToSpeechService
-        public String getDefaultVoiceNameFor(String lang, String country, String variant) {
-            if (!checkNonNull(lang)) {
-                return null;
-            }
-            int retVal = TextToSpeechService.this.onIsLanguageAvailable(lang, country, variant);
-            if (retVal == 0 || retVal == 1 || retVal == 2) {
-                return TextToSpeechService.this.onGetDefaultVoiceNameFor(lang, country, variant);
-            }
-            return null;
-        }
-
-        @Override // android.speech.tts.ITextToSpeechService
-        public void setCallback(IBinder caller, ITextToSpeechCallback cb) {
-            if (!checkNonNull(caller)) {
-                return;
-            }
-            TextToSpeechService.this.mCallbacks.setCallback(caller, cb);
-        }
-
-        private String intern(String in) {
-            return in.intern();
-        }
-
-        private boolean checkNonNull(Object... args) {
-            for (Object o : args) {
-                if (o == null) {
-                    return false;
+                @Override // android.speech.tts.ITextToSpeechService
+                public int playAudio(
+                        IBinder caller,
+                        Uri audioUri,
+                        int queueMode,
+                        Bundle params,
+                        String utteranceId) {
+                    if (!checkNonNull(caller, audioUri, params)) {
+                        return -1;
+                    }
+                    SpeechItem item =
+                            TextToSpeechService.this
+                            .new AudioSpeechItem(
+                                    caller,
+                                    Binder.getCallingUid(),
+                                    Binder.getCallingPid(),
+                                    params,
+                                    utteranceId,
+                                    audioUri);
+                    return TextToSpeechService.this.mSynthHandler.enqueueSpeechItem(
+                            queueMode, item);
                 }
-            }
-            return true;
-        }
-    };
+
+                @Override // android.speech.tts.ITextToSpeechService
+                public int playSilence(
+                        IBinder caller, long duration, int queueMode, String utteranceId) {
+                    if (!checkNonNull(caller)) {
+                        return -1;
+                    }
+                    SpeechItem item =
+                            TextToSpeechService.this
+                            .new SilenceSpeechItem(
+                                    caller,
+                                    Binder.getCallingUid(),
+                                    Binder.getCallingPid(),
+                                    utteranceId,
+                                    duration);
+                    return TextToSpeechService.this.mSynthHandler.enqueueSpeechItem(
+                            queueMode, item);
+                }
+
+                @Override // android.speech.tts.ITextToSpeechService
+                public boolean isSpeaking() {
+                    return TextToSpeechService.this.mSynthHandler.isSpeaking()
+                            || TextToSpeechService.this.mAudioPlaybackHandler.isSpeaking();
+                }
+
+                @Override // android.speech.tts.ITextToSpeechService
+                public int stop(IBinder caller) {
+                    if (!checkNonNull(caller)) {
+                        return -1;
+                    }
+                    return TextToSpeechService.this.mSynthHandler.stopForApp(caller);
+                }
+
+                @Override // android.speech.tts.ITextToSpeechService
+                public String[] getLanguage() {
+                    return TextToSpeechService.this.onGetLanguage();
+                }
+
+                @Override // android.speech.tts.ITextToSpeechService
+                public String[] getClientDefaultLanguage() {
+                    return TextToSpeechService.this.getSettingsLocale();
+                }
+
+                @Override // android.speech.tts.ITextToSpeechService
+                public int isLanguageAvailable(String lang, String country, String variant) {
+                    if (!checkNonNull(lang)) {
+                        return -1;
+                    }
+                    return TextToSpeechService.this.onIsLanguageAvailable(lang, country, variant);
+                }
+
+                @Override // android.speech.tts.ITextToSpeechService
+                public String[] getFeaturesForLanguage(
+                        String lang, String country, String variant) {
+                    Set<String> features =
+                            TextToSpeechService.this.onGetFeaturesForLanguage(
+                                    lang, country, variant);
+                    if (features != null) {
+                        String[] featuresArray = new String[features.size()];
+                        features.toArray(featuresArray);
+                        return featuresArray;
+                    }
+                    return new String[0];
+                }
+
+                @Override // android.speech.tts.ITextToSpeechService
+                public int loadLanguage(
+                        IBinder caller, String lang, String country, String variant) {
+                    if (!checkNonNull(lang)) {
+                        return -1;
+                    }
+                    int retVal =
+                            TextToSpeechService.this.onIsLanguageAvailable(lang, country, variant);
+                    if (retVal == 0 || retVal == 1 || retVal == 2) {
+                        SpeechItem item =
+                                TextToSpeechService.this
+                                .new LoadLanguageItem(
+                                        caller,
+                                        Binder.getCallingUid(),
+                                        Binder.getCallingPid(),
+                                        lang,
+                                        country,
+                                        variant);
+                        if (TextToSpeechService.this.mSynthHandler.enqueueSpeechItem(1, item)
+                                != 0) {
+                            return -1;
+                        }
+                    }
+                    return retVal;
+                }
+
+                @Override // android.speech.tts.ITextToSpeechService
+                public List<Voice> getVoices() {
+                    return TextToSpeechService.this.onGetVoices();
+                }
+
+                @Override // android.speech.tts.ITextToSpeechService
+                public int loadVoice(IBinder caller, String voiceName) {
+                    if (!checkNonNull(voiceName)) {
+                        return -1;
+                    }
+                    int retVal = TextToSpeechService.this.onIsValidVoiceName(voiceName);
+                    if (retVal == 0) {
+                        SpeechItem item =
+                                TextToSpeechService.this
+                                .new LoadVoiceItem(
+                                        caller,
+                                        Binder.getCallingUid(),
+                                        Binder.getCallingPid(),
+                                        voiceName);
+                        if (TextToSpeechService.this.mSynthHandler.enqueueSpeechItem(1, item)
+                                != 0) {
+                            return -1;
+                        }
+                    }
+                    return retVal;
+                }
+
+                @Override // android.speech.tts.ITextToSpeechService
+                public String getDefaultVoiceNameFor(String lang, String country, String variant) {
+                    if (!checkNonNull(lang)) {
+                        return null;
+                    }
+                    int retVal =
+                            TextToSpeechService.this.onIsLanguageAvailable(lang, country, variant);
+                    if (retVal == 0 || retVal == 1 || retVal == 2) {
+                        return TextToSpeechService.this.onGetDefaultVoiceNameFor(
+                                lang, country, variant);
+                    }
+                    return null;
+                }
+
+                @Override // android.speech.tts.ITextToSpeechService
+                public void setCallback(IBinder caller, ITextToSpeechCallback cb) {
+                    if (!checkNonNull(caller)) {
+                        return;
+                    }
+                    TextToSpeechService.this.mCallbacks.setCallback(caller, cb);
+                }
+
+                private String intern(String in) {
+                    return in.intern();
+                }
+
+                private boolean checkNonNull(Object... args) {
+                    for (Object o : args) {
+                        if (o == null) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            };
 
     interface UtteranceProgressDispatcher {
         void dispatchOnAudioAvailable(byte[] bArr);
@@ -218,7 +296,8 @@ public abstract class TextToSpeechService extends Service {
 
     protected abstract void onStop();
 
-    protected abstract void onSynthesizeText(SynthesisRequest synthesisRequest, SynthesisCallback synthesisCallback);
+    protected abstract void onSynthesizeText(
+            SynthesisRequest synthesisRequest, SynthesisCallback synthesisCallback);
 
     @Override // android.app.Service
     public void onCreate() {
@@ -273,10 +352,22 @@ public abstract class TextToSpeechService extends Service {
             Locale locale = availableLocales[i];
             int expectedStatus = textToSpeechService.getExpectedLanguageAvailableStatus(locale);
             try {
-                int localeStatus = textToSpeechService.onIsLanguageAvailable(locale.getISO3Language(), locale.getISO3Country(), locale.getVariant());
+                int localeStatus =
+                        textToSpeechService.onIsLanguageAvailable(
+                                locale.getISO3Language(),
+                                locale.getISO3Country(),
+                                locale.getVariant());
                 if (localeStatus == expectedStatus) {
-                    Set<String> features = textToSpeechService.onGetFeaturesForLanguage(locale.getISO3Language(), locale.getISO3Country(), locale.getVariant());
-                    String voiceName = textToSpeechService.onGetDefaultVoiceNameFor(locale.getISO3Language(), locale.getISO3Country(), locale.getVariant());
+                    Set<String> features =
+                            textToSpeechService.onGetFeaturesForLanguage(
+                                    locale.getISO3Language(),
+                                    locale.getISO3Country(),
+                                    locale.getVariant());
+                    String voiceName =
+                            textToSpeechService.onGetDefaultVoiceNameFor(
+                                    locale.getISO3Language(),
+                                    locale.getISO3Country(),
+                                    locale.getVariant());
                     voices.add(new Voice(voiceName, locale, 300, 300, false, features));
                 }
             } catch (MissingResourceException e) {
@@ -318,7 +409,9 @@ public abstract class TextToSpeechService extends Service {
         }
         int expectedStatus = getExpectedLanguageAvailableStatus(locale);
         try {
-            int localeStatus = onIsLanguageAvailable(locale.getISO3Language(), locale.getISO3Country(), locale.getVariant());
+            int localeStatus =
+                    onIsLanguageAvailable(
+                            locale.getISO3Language(), locale.getISO3Country(), locale.getVariant());
             if (localeStatus != expectedStatus) {
                 return -1;
             }
@@ -336,7 +429,9 @@ public abstract class TextToSpeechService extends Service {
         }
         int expectedStatus = getExpectedLanguageAvailableStatus(locale);
         try {
-            int localeStatus = onIsLanguageAvailable(locale.getISO3Language(), locale.getISO3Country(), locale.getVariant());
+            int localeStatus =
+                    onIsLanguageAvailable(
+                            locale.getISO3Language(), locale.getISO3Country(), locale.getVariant());
             if (localeStatus != expectedStatus) {
                 return -1;
             }
@@ -431,7 +526,9 @@ public abstract class TextToSpeechService extends Service {
         private boolean isFlushed(SpeechItem speechItem) {
             boolean z;
             synchronized (this.mFlushedObjects) {
-                z = this.mFlushAll > 0 || this.mFlushedObjects.contains(speechItem.getCallerIdentity());
+                z =
+                        this.mFlushAll > 0
+                                || this.mFlushedObjects.contains(speechItem.getCallerIdentity());
             }
             return z;
         }
@@ -460,7 +557,8 @@ public abstract class TextToSpeechService extends Service {
         }
 
         private synchronized SpeechItem maybeRemoveCurrentSpeechItem(Object callerIdentity) {
-            if (this.mCurrentSpeechItem == null || this.mCurrentSpeechItem.getCallerIdentity() != callerIdentity) {
+            if (this.mCurrentSpeechItem == null
+                    || this.mCurrentSpeechItem.getCallerIdentity() != callerIdentity) {
                 return null;
             }
             SpeechItem current = this.mCurrentSpeechItem;
@@ -497,17 +595,19 @@ public abstract class TextToSpeechService extends Service {
             } else if (queueMode == 2) {
                 stopAll();
             }
-            Runnable runnable = new Runnable() { // from class: android.speech.tts.TextToSpeechService.SynthHandler.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    if (SynthHandler.this.setCurrentSpeechItem(speechItem)) {
-                        speechItem.play();
-                        SynthHandler.this.removeCurrentSpeechItem();
-                    } else {
-                        speechItem.stop();
-                    }
-                }
-            };
+            Runnable runnable =
+                    new Runnable() { // from class:
+                                     // android.speech.tts.TextToSpeechService.SynthHandler.1
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            if (SynthHandler.this.setCurrentSpeechItem(speechItem)) {
+                                speechItem.play();
+                                SynthHandler.this.removeCurrentSpeechItem();
+                            } else {
+                                speechItem.stop();
+                            }
+                        }
+                    };
             Message msg = Message.obtain(this, runnable);
             msg.obj = speechItem.getCallerIdentity();
             if (sendMessage(msg)) {
@@ -541,12 +641,14 @@ public abstract class TextToSpeechService extends Service {
                 current.stop();
             }
             TextToSpeechService.this.mAudioPlaybackHandler.stopForApp(callerIdentity);
-            Runnable runnable = new Runnable() { // from class: android.speech.tts.TextToSpeechService.SynthHandler.2
-                @Override // java.lang.Runnable
-                public void run() {
-                    SynthHandler.this.endFlushingSpeechItems(callerIdentity);
-                }
-            };
+            Runnable runnable =
+                    new Runnable() { // from class:
+                                     // android.speech.tts.TextToSpeechService.SynthHandler.2
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SynthHandler.this.endFlushingSpeechItems(callerIdentity);
+                        }
+                    };
             sendMessage(Message.obtain(this, runnable));
             return 0;
         }
@@ -558,12 +660,14 @@ public abstract class TextToSpeechService extends Service {
                 current.stop();
             }
             TextToSpeechService.this.mAudioPlaybackHandler.stop();
-            Runnable runnable = new Runnable() { // from class: android.speech.tts.TextToSpeechService.SynthHandler.3
-                @Override // java.lang.Runnable
-                public void run() {
-                    SynthHandler.this.endFlushingSpeechItems(null);
-                }
-            };
+            Runnable runnable =
+                    new Runnable() { // from class:
+                                     // android.speech.tts.TextToSpeechService.SynthHandler.3
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SynthHandler.this.endFlushingSpeechItems(null);
+                        }
+                    };
             sendMessage(Message.obtain(this, runnable));
             return 0;
         }
@@ -594,10 +698,15 @@ public abstract class TextToSpeechService extends Service {
             if (paramsBundle == null) {
                 return new AudioOutputParams();
             }
-            AudioAttributes audioAttributes = (AudioAttributes) paramsBundle.getParcelable(TextToSpeech.Engine.KEY_PARAM_AUDIO_ATTRIBUTES, AudioAttributes.class);
+            AudioAttributes audioAttributes =
+                    (AudioAttributes)
+                            paramsBundle.getParcelable(
+                                    TextToSpeech.Engine.KEY_PARAM_AUDIO_ATTRIBUTES,
+                                    AudioAttributes.class);
             if (audioAttributes == null) {
                 int streamType = paramsBundle.getInt(TextToSpeech.Engine.KEY_PARAM_STREAM, 3);
-                AudioAttributes.Builder legacyStreamType = new AudioAttributes.Builder().setLegacyStreamType(streamType);
+                AudioAttributes.Builder legacyStreamType =
+                        new AudioAttributes.Builder().setLegacyStreamType(streamType);
                 if (isSpeech) {
                     i = 1;
                 } else {
@@ -605,7 +714,11 @@ public abstract class TextToSpeechService extends Service {
                 }
                 audioAttributes = legacyStreamType.setContentType(i).build();
             }
-            return new AudioOutputParams(paramsBundle.getInt("sessionId", 0), paramsBundle.getFloat("volume", 1.0f), paramsBundle.getFloat(TextToSpeech.Engine.KEY_PARAM_PAN, 0.0f), audioAttributes);
+            return new AudioOutputParams(
+                    paramsBundle.getInt("sessionId", 0),
+                    paramsBundle.getFloat("volume", 1.0f),
+                    paramsBundle.getFloat(TextToSpeech.Engine.KEY_PARAM_PAN, 0.0f),
+                    audioAttributes);
         }
     }
 
@@ -669,7 +782,8 @@ public abstract class TextToSpeechService extends Service {
         }
     }
 
-    private abstract class UtteranceSpeechItem extends SpeechItem implements UtteranceProgressDispatcher {
+    private abstract class UtteranceSpeechItem extends SpeechItem
+            implements UtteranceProgressDispatcher {
         public abstract String getUtteranceId();
 
         public UtteranceSpeechItem(Object caller, int callerUid, int callerPid) {
@@ -680,7 +794,8 @@ public abstract class TextToSpeechService extends Service {
         public void dispatchOnSuccess() {
             String utteranceId = getUtteranceId();
             if (utteranceId != null) {
-                TextToSpeechService.this.mCallbacks.dispatchOnSuccess(getCallerIdentity(), utteranceId);
+                TextToSpeechService.this.mCallbacks.dispatchOnSuccess(
+                        getCallerIdentity(), utteranceId);
             }
         }
 
@@ -688,7 +803,8 @@ public abstract class TextToSpeechService extends Service {
         public void dispatchOnStop() {
             String utteranceId = getUtteranceId();
             if (utteranceId != null) {
-                TextToSpeechService.this.mCallbacks.dispatchOnStop(getCallerIdentity(), utteranceId, isStarted());
+                TextToSpeechService.this.mCallbacks.dispatchOnStop(
+                        getCallerIdentity(), utteranceId, isStarted());
             }
         }
 
@@ -696,7 +812,8 @@ public abstract class TextToSpeechService extends Service {
         public void dispatchOnStart() {
             String utteranceId = getUtteranceId();
             if (utteranceId != null) {
-                TextToSpeechService.this.mCallbacks.dispatchOnStart(getCallerIdentity(), utteranceId);
+                TextToSpeechService.this.mCallbacks.dispatchOnStart(
+                        getCallerIdentity(), utteranceId);
             }
         }
 
@@ -704,15 +821,22 @@ public abstract class TextToSpeechService extends Service {
         public void dispatchOnError(int errorCode) {
             String utteranceId = getUtteranceId();
             if (utteranceId != null) {
-                TextToSpeechService.this.mCallbacks.dispatchOnError(getCallerIdentity(), utteranceId, errorCode);
+                TextToSpeechService.this.mCallbacks.dispatchOnError(
+                        getCallerIdentity(), utteranceId, errorCode);
             }
         }
 
         @Override // android.speech.tts.TextToSpeechService.UtteranceProgressDispatcher
-        public void dispatchOnBeginSynthesis(int sampleRateInHz, int audioFormat, int channelCount) {
+        public void dispatchOnBeginSynthesis(
+                int sampleRateInHz, int audioFormat, int channelCount) {
             String utteranceId = getUtteranceId();
             if (utteranceId != null) {
-                TextToSpeechService.this.mCallbacks.dispatchOnBeginSynthesis(getCallerIdentity(), utteranceId, sampleRateInHz, audioFormat, channelCount);
+                TextToSpeechService.this.mCallbacks.dispatchOnBeginSynthesis(
+                        getCallerIdentity(),
+                        utteranceId,
+                        sampleRateInHz,
+                        audioFormat,
+                        channelCount);
             }
         }
 
@@ -720,7 +844,8 @@ public abstract class TextToSpeechService extends Service {
         public void dispatchOnAudioAvailable(byte[] audio) {
             String utteranceId = getUtteranceId();
             if (utteranceId != null) {
-                TextToSpeechService.this.mCallbacks.dispatchOnAudioAvailable(getCallerIdentity(), utteranceId, audio);
+                TextToSpeechService.this.mCallbacks.dispatchOnAudioAvailable(
+                        getCallerIdentity(), utteranceId, audio);
             }
         }
 
@@ -728,7 +853,8 @@ public abstract class TextToSpeechService extends Service {
         public void dispatchOnRangeStart(int start, int end, int frame) {
             String utteranceId = getUtteranceId();
             if (utteranceId != null) {
-                TextToSpeechService.this.mCallbacks.dispatchOnRangeStart(getCallerIdentity(), utteranceId, start, end, frame);
+                TextToSpeechService.this.mCallbacks.dispatchOnRangeStart(
+                        getCallerIdentity(), utteranceId, start, end, frame);
             }
         }
 
@@ -749,7 +875,12 @@ public abstract class TextToSpeechService extends Service {
         protected final Bundle mParams;
         protected final String mUtteranceId;
 
-        UtteranceSpeechItemWithParams(Object callerIdentity, int callerUid, int callerPid, Bundle params, String utteranceId) {
+        UtteranceSpeechItemWithParams(
+                Object callerIdentity,
+                int callerUid,
+                int callerPid,
+                Bundle params,
+                String utteranceId) {
             super(callerIdentity, callerUid, callerPid);
             this.mParams = params;
             this.mUtteranceId = utteranceId;
@@ -760,11 +891,17 @@ public abstract class TextToSpeechService extends Service {
         }
 
         int getSpeechRate() {
-            return getIntParam(this.mParams, TextToSpeech.Engine.KEY_PARAM_RATE, TextToSpeechService.this.getDefaultSpeechRate());
+            return getIntParam(
+                    this.mParams,
+                    TextToSpeech.Engine.KEY_PARAM_RATE,
+                    TextToSpeechService.this.getDefaultSpeechRate());
         }
 
         int getPitch() {
-            return getIntParam(this.mParams, TextToSpeech.Engine.KEY_PARAM_PITCH, TextToSpeechService.this.getDefaultPitch());
+            return getIntParam(
+                    this.mParams,
+                    TextToSpeech.Engine.KEY_PARAM_PITCH,
+                    TextToSpeechService.this.getDefaultPitch());
         }
 
         @Override // android.speech.tts.TextToSpeechService.UtteranceSpeechItem
@@ -785,14 +922,25 @@ public abstract class TextToSpeechService extends Service {
         private final SynthesisRequest mSynthesisRequest;
         private final CharSequence mText;
 
-        public SynthesisSpeechItem(Object callerIdentity, int callerUid, int callerPid, Bundle params, String utteranceId, CharSequence text) {
+        public SynthesisSpeechItem(
+                Object callerIdentity,
+                int callerUid,
+                int callerPid,
+                Bundle params,
+                String utteranceId,
+                CharSequence text) {
             super(callerIdentity, callerUid, callerPid, params, utteranceId);
             this.mText = text;
             this.mCallerUid = callerUid;
             this.mSynthesisRequest = new SynthesisRequest(this.mText, this.mParams);
             this.mDefaultLocale = TextToSpeechService.this.getSettingsLocale();
             setRequestParams(this.mSynthesisRequest);
-            this.mEventLogger = new EventLogger(this.mSynthesisRequest, callerUid, callerPid, TextToSpeechService.this.mPackageName);
+            this.mEventLogger =
+                    new EventLogger(
+                            this.mSynthesisRequest,
+                            callerUid,
+                            callerPid,
+                            TextToSpeechService.this.mPackageName);
         }
 
         public CharSequence getText() {
@@ -821,7 +969,8 @@ public abstract class TextToSpeechService extends Service {
                 }
                 this.mSynthesisCallback = createSynthesisCallback();
                 AbstractSynthesisCallback synthesisCallback = this.mSynthesisCallback;
-                TextToSpeechService.this.onSynthesizeText(this.mSynthesisRequest, synthesisCallback);
+                TextToSpeechService.this.onSynthesizeText(
+                        this.mSynthesisRequest, synthesisCallback);
                 if (synthesisCallback.hasStarted() && !synthesisCallback.hasFinished()) {
                     synthesisCallback.done();
                 }
@@ -829,7 +978,13 @@ public abstract class TextToSpeechService extends Service {
         }
 
         protected AbstractSynthesisCallback createSynthesisCallback() {
-            return new PlaybackSynthesisCallback(getAudioParams(), TextToSpeechService.this.mAudioPlaybackHandler, this, getCallerIdentity(), this.mEventLogger, false);
+            return new PlaybackSynthesisCallback(
+                    getAudioParams(),
+                    TextToSpeechService.this.mAudioPlaybackHandler,
+                    this,
+                    getCallerIdentity(),
+                    this.mEventLogger,
+                    false);
         }
 
         private void setRequestParams(SynthesisRequest request) {
@@ -858,11 +1013,15 @@ public abstract class TextToSpeechService extends Service {
         }
 
         private String getCountry() {
-            return !hasLanguage() ? this.mDefaultLocale[1] : getStringParam(this.mParams, TextToSpeech.Engine.KEY_PARAM_COUNTRY, "");
+            return !hasLanguage()
+                    ? this.mDefaultLocale[1]
+                    : getStringParam(this.mParams, TextToSpeech.Engine.KEY_PARAM_COUNTRY, "");
         }
 
         private String getVariant() {
-            return !hasLanguage() ? this.mDefaultLocale[2] : getStringParam(this.mParams, TextToSpeech.Engine.KEY_PARAM_VARIANT, "");
+            return !hasLanguage()
+                    ? this.mDefaultLocale[2]
+                    : getStringParam(this.mParams, TextToSpeech.Engine.KEY_PARAM_VARIANT, "");
         }
 
         public String getLanguage() {
@@ -877,7 +1036,14 @@ public abstract class TextToSpeechService extends Service {
     private class SynthesisToFileOutputStreamSpeechItem extends SynthesisSpeechItem {
         private final FileOutputStream mFileOutputStream;
 
-        public SynthesisToFileOutputStreamSpeechItem(Object callerIdentity, int callerUid, int callerPid, Bundle params, String utteranceId, CharSequence text, FileOutputStream fileOutputStream) {
+        public SynthesisToFileOutputStreamSpeechItem(
+                Object callerIdentity,
+                int callerUid,
+                int callerPid,
+                Bundle params,
+                String utteranceId,
+                CharSequence text,
+                FileOutputStream fileOutputStream) {
             super(callerIdentity, callerUid, callerPid, params, utteranceId, text);
             this.mFileOutputStream = fileOutputStream;
         }
@@ -887,7 +1053,8 @@ public abstract class TextToSpeechService extends Service {
             return new FileSynthesisCallback(this.mFileOutputStream.getChannel(), this, false);
         }
 
-        @Override // android.speech.tts.TextToSpeechService.SynthesisSpeechItem, android.speech.tts.TextToSpeechService.SpeechItem
+        @Override // android.speech.tts.TextToSpeechService.SynthesisSpeechItem,
+                  // android.speech.tts.TextToSpeechService.SpeechItem
         protected void playImpl() {
             super.playImpl();
             try {
@@ -901,9 +1068,21 @@ public abstract class TextToSpeechService extends Service {
     private class AudioSpeechItem extends UtteranceSpeechItemWithParams {
         private final AudioPlaybackQueueItem mItem;
 
-        public AudioSpeechItem(Object callerIdentity, int callerUid, int callerPid, Bundle params, String utteranceId, Uri uri) {
+        public AudioSpeechItem(
+                Object callerIdentity,
+                int callerUid,
+                int callerPid,
+                Bundle params,
+                String utteranceId,
+                Uri uri) {
             super(callerIdentity, callerUid, callerPid, params, utteranceId);
-            this.mItem = new AudioPlaybackQueueItem(this, getCallerIdentity(), TextToSpeechService.this, uri, getAudioParams());
+            this.mItem =
+                    new AudioPlaybackQueueItem(
+                            this,
+                            getCallerIdentity(),
+                            TextToSpeechService.this,
+                            uri,
+                            getAudioParams());
         }
 
         @Override // android.speech.tts.TextToSpeechService.SpeechItem
@@ -917,10 +1096,10 @@ public abstract class TextToSpeechService extends Service {
         }
 
         @Override // android.speech.tts.TextToSpeechService.SpeechItem
-        protected void stopImpl() {
-        }
+        protected void stopImpl() {}
 
-        @Override // android.speech.tts.TextToSpeechService.UtteranceSpeechItemWithParams, android.speech.tts.TextToSpeechService.UtteranceSpeechItem
+        @Override // android.speech.tts.TextToSpeechService.UtteranceSpeechItemWithParams,
+                  // android.speech.tts.TextToSpeechService.UtteranceSpeechItem
         public String getUtteranceId() {
             return getStringParam(this.mParams, TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, null);
         }
@@ -935,7 +1114,12 @@ public abstract class TextToSpeechService extends Service {
         private final long mDuration;
         private final String mUtteranceId;
 
-        public SilenceSpeechItem(Object callerIdentity, int callerUid, int callerPid, String utteranceId, long duration) {
+        public SilenceSpeechItem(
+                Object callerIdentity,
+                int callerUid,
+                int callerPid,
+                String utteranceId,
+                long duration) {
             super(callerIdentity, callerUid, callerPid);
             this.mUtteranceId = utteranceId;
             this.mDuration = duration;
@@ -948,12 +1132,12 @@ public abstract class TextToSpeechService extends Service {
 
         @Override // android.speech.tts.TextToSpeechService.SpeechItem
         protected void playImpl() {
-            TextToSpeechService.this.mAudioPlaybackHandler.enqueue(new SilencePlaybackQueueItem(this, getCallerIdentity(), this.mDuration));
+            TextToSpeechService.this.mAudioPlaybackHandler.enqueue(
+                    new SilencePlaybackQueueItem(this, getCallerIdentity(), this.mDuration));
         }
 
         @Override // android.speech.tts.TextToSpeechService.SpeechItem
-        protected void stopImpl() {
-        }
+        protected void stopImpl() {}
 
         @Override // android.speech.tts.TextToSpeechService.UtteranceSpeechItem
         public String getUtteranceId() {
@@ -966,7 +1150,13 @@ public abstract class TextToSpeechService extends Service {
         private final String mLanguage;
         private final String mVariant;
 
-        public LoadLanguageItem(Object callerIdentity, int callerUid, int callerPid, String language, String country, String variant) {
+        public LoadLanguageItem(
+                Object callerIdentity,
+                int callerUid,
+                int callerPid,
+                String language,
+                String country,
+                String variant) {
             super(callerIdentity, callerUid, callerPid);
             this.mLanguage = language;
             this.mCountry = country;
@@ -984,14 +1174,14 @@ public abstract class TextToSpeechService extends Service {
         }
 
         @Override // android.speech.tts.TextToSpeechService.SpeechItem
-        protected void stopImpl() {
-        }
+        protected void stopImpl() {}
     }
 
     private class LoadVoiceItem extends SpeechItem {
         private final String mVoiceName;
 
-        public LoadVoiceItem(Object callerIdentity, int callerUid, int callerPid, String voiceName) {
+        public LoadVoiceItem(
+                Object callerIdentity, int callerUid, int callerPid, String voiceName) {
             super(callerIdentity, callerUid, callerPid);
             this.mVoiceName = voiceName;
         }
@@ -1007,8 +1197,7 @@ public abstract class TextToSpeechService extends Service {
         }
 
         @Override // android.speech.tts.TextToSpeechService.SpeechItem
-        protected void stopImpl() {
-        }
+        protected void stopImpl() {}
     }
 
     @Override // android.app.Service
@@ -1090,7 +1279,12 @@ public abstract class TextToSpeechService extends Service {
             }
         }
 
-        public void dispatchOnBeginSynthesis(Object callerIdentity, String utteranceId, int sampleRateInHz, int audioFormat, int channelCount) {
+        public void dispatchOnBeginSynthesis(
+                Object callerIdentity,
+                String utteranceId,
+                int sampleRateInHz,
+                int audioFormat,
+                int channelCount) {
             ITextToSpeechCallback cb = getCallbackFor(callerIdentity);
             if (cb == null) {
                 return;
@@ -1098,11 +1292,14 @@ public abstract class TextToSpeechService extends Service {
             try {
                 cb.onBeginSynthesis(utteranceId, sampleRateInHz, audioFormat, channelCount);
             } catch (RemoteException e) {
-                Log.e(TextToSpeechService.TAG, "Callback dispatchOnBeginSynthesis(String, int, int, int) failed: " + e);
+                Log.e(
+                        TextToSpeechService.TAG,
+                        "Callback dispatchOnBeginSynthesis(String, int, int, int) failed: " + e);
             }
         }
 
-        public void dispatchOnAudioAvailable(Object callerIdentity, String utteranceId, byte[] buffer) {
+        public void dispatchOnAudioAvailable(
+                Object callerIdentity, String utteranceId, byte[] buffer) {
             ITextToSpeechCallback cb = getCallbackFor(callerIdentity);
             if (cb == null) {
                 return;
@@ -1110,11 +1307,14 @@ public abstract class TextToSpeechService extends Service {
             try {
                 cb.onAudioAvailable(utteranceId, buffer);
             } catch (RemoteException e) {
-                Log.e(TextToSpeechService.TAG, "Callback dispatchOnAudioAvailable(String, byte[]) failed: " + e);
+                Log.e(
+                        TextToSpeechService.TAG,
+                        "Callback dispatchOnAudioAvailable(String, byte[]) failed: " + e);
             }
         }
 
-        public void dispatchOnRangeStart(Object callerIdentity, String utteranceId, int start, int end, int frame) {
+        public void dispatchOnRangeStart(
+                Object callerIdentity, String utteranceId, int start, int end, int frame) {
             ITextToSpeechCallback cb = getCallbackFor(callerIdentity);
             if (cb == null) {
                 return;
@@ -1122,7 +1322,9 @@ public abstract class TextToSpeechService extends Service {
             try {
                 cb.onRangeStart(utteranceId, start, end, frame);
             } catch (RemoteException e) {
-                Log.e(TextToSpeechService.TAG, "Callback dispatchOnRangeStart(String, int, int, int) failed: " + e);
+                Log.e(
+                        TextToSpeechService.TAG,
+                        "Callback dispatchOnRangeStart(String, int, int, int) failed: " + e);
             }
         }
 

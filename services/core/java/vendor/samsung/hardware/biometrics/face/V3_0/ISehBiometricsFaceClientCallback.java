@@ -9,11 +9,13 @@ import android.os.HwParcel;
 import android.os.IHwBinder;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public interface ISehBiometricsFaceClientCallback extends vendor.samsung.hardware.biometrics.face.V2_0.ISehBiometricsFaceClientCallback {
+public interface ISehBiometricsFaceClientCallback
+        extends vendor.samsung.hardware.biometrics.face.V2_0.ISehBiometricsFaceClientCallback {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Proxy implements ISehBiometricsFaceClientCallback {
@@ -26,7 +28,9 @@ public interface ISehBiometricsFaceClientCallback extends vendor.samsung.hardwar
 
         @Override // android.hidl.base.V1_0.IBase
         public final void debug(NativeHandle nativeHandle, ArrayList arrayList) {
-            HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IBase.kInterfaceName, nativeHandle, arrayList);
+            HwParcel m =
+                    IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                            IBase.kInterfaceName, nativeHandle, arrayList);
             HwParcel hwParcel = new HwParcel();
             try {
                 this.mRemote.transact(256131655, m, hwParcel, 0);
@@ -68,7 +72,8 @@ public interface ISehBiometricsFaceClientCallback extends vendor.samsung.hardwar
                 ArrayList arrayList = new ArrayList();
                 HwBlob readBuffer = hwParcel.readBuffer(16L);
                 int int32 = readBuffer.getInt32(8L);
-                HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+                HwBlob readEmbeddedBuffer =
+                        hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
                 arrayList.clear();
                 for (int i = 0; i < int32; i++) {
                     byte[] bArr = new byte[32];
@@ -133,7 +138,8 @@ public interface ISehBiometricsFaceClientCallback extends vendor.samsung.hardwar
         @Override // android.hardware.biometrics.face.V1_0.IBiometricsFaceClientCallback
         public final void onAcquired(int i, int i2, int i3, long j) {
             HwParcel hwParcel = new HwParcel();
-            hwParcel.writeInterfaceToken("android.hardware.biometrics.face@1.0::IBiometricsFaceClientCallback");
+            hwParcel.writeInterfaceToken(
+                    "android.hardware.biometrics.face@1.0::IBiometricsFaceClientCallback");
             hwParcel.writeInt64(j);
             hwParcel.writeInt32(i);
             hwParcel.writeInt32(i2);
@@ -150,7 +156,8 @@ public interface ISehBiometricsFaceClientCallback extends vendor.samsung.hardwar
         @Override // android.hardware.biometrics.face.V1_0.IBiometricsFaceClientCallback
         public final void onAuthenticated(long j, int i, int i2, ArrayList arrayList) {
             HwParcel hwParcel = new HwParcel();
-            hwParcel.writeInterfaceToken("android.hardware.biometrics.face@1.0::IBiometricsFaceClientCallback");
+            hwParcel.writeInterfaceToken(
+                    "android.hardware.biometrics.face@1.0::IBiometricsFaceClientCallback");
             hwParcel.writeInt64(j);
             hwParcel.writeInt32(i);
             hwParcel.writeInt32(i2);
@@ -167,7 +174,8 @@ public interface ISehBiometricsFaceClientCallback extends vendor.samsung.hardwar
         @Override // android.hardware.biometrics.face.V1_0.IBiometricsFaceClientCallback
         public final void onEnrollResult(int i, int i2, int i3, long j) {
             HwParcel hwParcel = new HwParcel();
-            hwParcel.writeInterfaceToken("android.hardware.biometrics.face@1.0::IBiometricsFaceClientCallback");
+            hwParcel.writeInterfaceToken(
+                    "android.hardware.biometrics.face@1.0::IBiometricsFaceClientCallback");
             hwParcel.writeInt64(j);
             hwParcel.writeInt32(i);
             hwParcel.writeInt32(i2);
@@ -184,7 +192,8 @@ public interface ISehBiometricsFaceClientCallback extends vendor.samsung.hardwar
         @Override // android.hardware.biometrics.face.V1_0.IBiometricsFaceClientCallback
         public final void onEnumerate(int i, long j, ArrayList arrayList) {
             HwParcel hwParcel = new HwParcel();
-            hwParcel.writeInterfaceToken("android.hardware.biometrics.face@1.0::IBiometricsFaceClientCallback");
+            hwParcel.writeInterfaceToken(
+                    "android.hardware.biometrics.face@1.0::IBiometricsFaceClientCallback");
             hwParcel.writeInt64(j);
             hwParcel.writeInt32Vector(arrayList);
             hwParcel.writeInt32(i);
@@ -200,7 +209,8 @@ public interface ISehBiometricsFaceClientCallback extends vendor.samsung.hardwar
         @Override // android.hardware.biometrics.face.V1_0.IBiometricsFaceClientCallback
         public final void onError(int i, int i2, int i3, long j) {
             HwParcel hwParcel = new HwParcel();
-            hwParcel.writeInterfaceToken("android.hardware.biometrics.face@1.0::IBiometricsFaceClientCallback");
+            hwParcel.writeInterfaceToken(
+                    "android.hardware.biometrics.face@1.0::IBiometricsFaceClientCallback");
             hwParcel.writeInt64(j);
             hwParcel.writeInt32(i);
             hwParcel.writeInt32(i2);
@@ -217,7 +227,8 @@ public interface ISehBiometricsFaceClientCallback extends vendor.samsung.hardwar
         @Override // android.hardware.biometrics.face.V1_0.IBiometricsFaceClientCallback
         public final void onRemoved(int i, long j, ArrayList arrayList) {
             HwParcel hwParcel = new HwParcel();
-            hwParcel.writeInterfaceToken("android.hardware.biometrics.face@1.0::IBiometricsFaceClientCallback");
+            hwParcel.writeInterfaceToken(
+                    "android.hardware.biometrics.face@1.0::IBiometricsFaceClientCallback");
             hwParcel.writeInt64(j);
             hwParcel.writeInt32Vector(arrayList);
             hwParcel.writeInt32(i);
@@ -259,7 +270,8 @@ public interface ISehBiometricsFaceClientCallback extends vendor.samsung.hardwar
             try {
                 return interfaceDescriptor() + "@Proxy";
             } catch (RemoteException unused) {
-                return "[class or subclass of vendor.samsung.hardware.biometrics.face@3.0::ISehBiometricsFaceClientCallback]@Proxy";
+                return "[class or subclass of"
+                           + " vendor.samsung.hardware.biometrics.face@3.0::ISehBiometricsFaceClientCallback]@Proxy";
             }
         }
 

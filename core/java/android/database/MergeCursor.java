@@ -4,17 +4,18 @@ package android.database;
 public class MergeCursor extends AbstractCursor {
     private Cursor mCursor;
     private Cursor[] mCursors;
-    private DataSetObserver mObserver = new DataSetObserver() { // from class: android.database.MergeCursor.1
-        @Override // android.database.DataSetObserver
-        public void onChanged() {
-            MergeCursor.this.mPos = -1;
-        }
+    private DataSetObserver mObserver =
+            new DataSetObserver() { // from class: android.database.MergeCursor.1
+                @Override // android.database.DataSetObserver
+                public void onChanged() {
+                    MergeCursor.this.mPos = -1;
+                }
 
-        @Override // android.database.DataSetObserver
-        public void onInvalidated() {
-            MergeCursor.this.mPos = -1;
-        }
-    };
+                @Override // android.database.DataSetObserver
+                public void onInvalidated() {
+                    MergeCursor.this.mPos = -1;
+                }
+            };
 
     public MergeCursor(Cursor[] cursors) {
         this.mCursors = cursors;
@@ -128,7 +129,8 @@ public class MergeCursor extends AbstractCursor {
         super.deactivate();
     }
 
-    @Override // android.database.AbstractCursor, android.database.Cursor, java.io.Closeable, java.lang.AutoCloseable
+    @Override // android.database.AbstractCursor, android.database.Cursor, java.io.Closeable,
+    // java.lang.AutoCloseable
     public void close() {
         int length = this.mCursors.length;
         for (int i = 0; i < length; i++) {

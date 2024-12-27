@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface IOnUserChangedListener extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.content.clipboard.IOnUserChangedListener";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.content.clipboard.IOnUserChangedListener";
 
     void onUserChanged(int i) throws RemoteException;
 
     public static class Default implements IOnUserChangedListener {
         @Override // com.samsung.android.content.clipboard.IOnUserChangedListener
-        public void onUserChanged(int userId) throws RemoteException {
-        }
+        public void onUserChanged(int userId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IOnUserChangedListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IOnUserChangedListener {
+    public abstract static class Stub extends Binder implements IOnUserChangedListener {
         static final int TRANSACTION_onUserChanged = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface IOnUserChangedListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IOnUserChangedListener.DESCRIPTOR);
             }

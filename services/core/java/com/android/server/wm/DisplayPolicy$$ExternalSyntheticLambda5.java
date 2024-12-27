@@ -8,7 +8,8 @@ public final /* synthetic */ class DisplayPolicy$$ExternalSyntheticLambda5 imple
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ ForceShowNavBarSettingsObserver f$0;
 
-    public /* synthetic */ DisplayPolicy$$ExternalSyntheticLambda5(ForceShowNavBarSettingsObserver forceShowNavBarSettingsObserver, int i) {
+    public /* synthetic */ DisplayPolicy$$ExternalSyntheticLambda5(
+            ForceShowNavBarSettingsObserver forceShowNavBarSettingsObserver, int i) {
         this.$r8$classId = i;
         this.f$0 = forceShowNavBarSettingsObserver;
     }

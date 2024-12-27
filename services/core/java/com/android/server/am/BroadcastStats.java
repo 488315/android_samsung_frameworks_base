@@ -3,7 +3,9 @@ package com.android.server.am;
 import android.os.SystemClock;
 import android.util.ArrayMap;
 import android.util.TimeUtils;
+
 import dalvik.annotation.optimization.NeverCompile;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -96,10 +98,13 @@ public final class BroadcastStats {
                     printWriter.print(packageEntry.mSendCount);
                     printWriter.println();
                 }
-                for (int size3 = actionEntry.mBackgroundCheckViolations.size() - 1; size3 >= 0; size3--) {
+                for (int size3 = actionEntry.mBackgroundCheckViolations.size() - 1;
+                        size3 >= 0;
+                        size3--) {
                     printWriter.print("v,");
                     printWriter.print((String) actionEntry.mBackgroundCheckViolations.keyAt(size3));
-                    ViolationEntry violationEntry = (ViolationEntry) actionEntry.mBackgroundCheckViolations.valueAt(size3);
+                    ViolationEntry violationEntry =
+                            (ViolationEntry) actionEntry.mBackgroundCheckViolations.valueAt(size3);
                     printWriter.print(",");
                     printWriter.print(violationEntry.mCount);
                     printWriter.println();
@@ -126,7 +131,8 @@ public final class BroadcastStats {
                 printWriter.print("  Number received: ");
                 printWriter.print(actionEntry.mReceiveCount);
                 printWriter.print(", skipped: ");
-                BroadcastStats$$ExternalSyntheticOutline0.m(actionEntry.mSkipCount, printWriter, "    ", "  Total dispatch time: ");
+                BroadcastStats$$ExternalSyntheticOutline0.m(
+                        actionEntry.mSkipCount, printWriter, "    ", "  Total dispatch time: ");
                 TimeUtils.formatDuration(actionEntry.mTotalDispatchTime, printWriter);
                 printWriter.print(", max: ");
                 TimeUtils.formatDuration(actionEntry.mMaxDispatchTime, printWriter);
@@ -136,15 +142,20 @@ public final class BroadcastStats {
                     printWriter.print("  Package ");
                     printWriter.print((String) actionEntry.mPackages.keyAt(size3));
                     printWriter.print(": ");
-                    printWriter.print(((PackageEntry) actionEntry.mPackages.valueAt(size3)).mSendCount);
+                    printWriter.print(
+                            ((PackageEntry) actionEntry.mPackages.valueAt(size3)).mSendCount);
                     printWriter.println(" times");
                 }
-                for (int size4 = actionEntry.mBackgroundCheckViolations.size() - 1; size4 >= 0; size4--) {
+                for (int size4 = actionEntry.mBackgroundCheckViolations.size() - 1;
+                        size4 >= 0;
+                        size4--) {
                     printWriter.print("    ");
                     printWriter.print("  Bg Check Violation ");
                     printWriter.print((String) actionEntry.mBackgroundCheckViolations.keyAt(size4));
                     printWriter.print(": ");
-                    printWriter.print(((ViolationEntry) actionEntry.mBackgroundCheckViolations.valueAt(size4)).mCount);
+                    printWriter.print(
+                            ((ViolationEntry) actionEntry.mBackgroundCheckViolations.valueAt(size4))
+                                    .mCount);
                     printWriter.println(" times");
                 }
                 z = true;

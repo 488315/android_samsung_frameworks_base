@@ -2,7 +2,9 @@ package com.android.server.biometrics.sensors.fingerprint.hidl;
 
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.server.biometrics.sensors.SemTestHalHelper;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -48,10 +50,15 @@ public final /* synthetic */ class SehTestHal$$ExternalSyntheticLambda1 implemen
                                     e.printStackTrace();
                                 }
                                 action.run();
-                                if (action.callbackType == SemTestHalHelper.CallbackType.ENROLL_RESULT && action.value == 0) {
-                                    ((HashSet) sehTestHal.mEnrollmentIds).add(Integer.valueOf(sehTestHal.mCurrentEnrollmentId));
+                                if (action.callbackType
+                                                == SemTestHalHelper.CallbackType.ENROLL_RESULT
+                                        && action.value == 0) {
+                                    ((HashSet) sehTestHal.mEnrollmentIds)
+                                            .add(Integer.valueOf(sehTestHal.mCurrentEnrollmentId));
                                     sehTestHal.mCurrentEnrollmentId = 0;
-                                    sehTestHal.mAuthenticatorID.put(sehTestHal.mCurrentUserID, sehTestHal.mRandom.nextLong());
+                                    sehTestHal.mAuthenticatorID.put(
+                                            sehTestHal.mCurrentUserID,
+                                            sehTestHal.mRandom.nextLong());
                                 }
                             }
                         }

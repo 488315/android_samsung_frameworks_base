@@ -21,20 +21,17 @@ public interface ISipDelegate extends IInterface {
 
     public static class Default implements ISipDelegate {
         @Override // android.telephony.ims.aidl.ISipDelegate
-        public void sendMessage(SipMessage sipMessage, long configVersion) throws RemoteException {
-        }
+        public void sendMessage(SipMessage sipMessage, long configVersion) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.ISipDelegate
-        public void notifyMessageReceived(String viaTransactionId) throws RemoteException {
-        }
+        public void notifyMessageReceived(String viaTransactionId) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.ISipDelegate
-        public void notifyMessageReceiveError(String viaTransactionId, int reason) throws RemoteException {
-        }
+        public void notifyMessageReceiveError(String viaTransactionId, int reason)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.ISipDelegate
-        public void cleanupSession(String callId) throws RemoteException {
-        }
+        public void cleanupSession(String callId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -42,7 +39,7 @@ public interface ISipDelegate extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISipDelegate {
+    public abstract static class Stub extends Binder implements ISipDelegate {
         static final int TRANSACTION_cleanupSession = 4;
         static final int TRANSACTION_notifyMessageReceiveError = 3;
         static final int TRANSACTION_notifyMessageReceived = 2;
@@ -89,7 +86,8 @@ public interface ISipDelegate extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISipDelegate.DESCRIPTOR);
             }
@@ -142,7 +140,8 @@ public interface ISipDelegate extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.ISipDelegate
-            public void sendMessage(SipMessage sipMessage, long configVersion) throws RemoteException {
+            public void sendMessage(SipMessage sipMessage, long configVersion)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISipDelegate.DESCRIPTOR);
@@ -167,7 +166,8 @@ public interface ISipDelegate extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.ISipDelegate
-            public void notifyMessageReceiveError(String viaTransactionId, int reason) throws RemoteException {
+            public void notifyMessageReceiveError(String viaTransactionId, int reason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISipDelegate.DESCRIPTOR);

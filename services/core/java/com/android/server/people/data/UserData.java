@@ -3,9 +3,9 @@ package com.android.server.people.data;
 import android.os.Environment;
 import android.os.FileUtils;
 import android.util.ArrayMap;
+
 import com.android.server.cpu.CpuInfoReader$$ExternalSyntheticLambda0;
-import com.android.server.people.data.ConversationStore;
-import com.android.server.people.data.EventHistoryImpl;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -52,9 +52,12 @@ public final class UserData {
                 ((ArrayMap) conversationStore.mNotifChannelIdToShortcutIdMap).clear();
                 ((ArrayMap) conversationStore.mPhoneNumberToShortcutIdMap).clear();
             }
-            ConversationStore.ConversationInfosProtoDiskReadWriter conversationInfosProtoDiskReadWriter = conversationStore.getConversationInfosProtoDiskReadWriter();
+            ConversationStore.ConversationInfosProtoDiskReadWriter
+                    conversationInfosProtoDiskReadWriter =
+                            conversationStore.getConversationInfosProtoDiskReadWriter();
             if (conversationInfosProtoDiskReadWriter != null) {
-                conversationInfosProtoDiskReadWriter.delete(conversationInfosProtoDiskReadWriter.mConversationInfoFileName);
+                conversationInfosProtoDiskReadWriter.delete(
+                        conversationInfosProtoDiskReadWriter.mConversationInfoFileName);
             }
             FileUtils.deleteContentsAndDir(packageData.mPackageDataDir);
         }
@@ -71,8 +74,10 @@ public final class UserData {
         List list;
         this.mPerUserPeopleDataDir.mkdir();
         int i = this.mUserId;
-        UserData$$ExternalSyntheticLambda1 userData$$ExternalSyntheticLambda1 = new UserData$$ExternalSyntheticLambda1(this, 0);
-        UserData$$ExternalSyntheticLambda1 userData$$ExternalSyntheticLambda12 = new UserData$$ExternalSyntheticLambda1(this, 1);
+        UserData$$ExternalSyntheticLambda1 userData$$ExternalSyntheticLambda1 =
+                new UserData$$ExternalSyntheticLambda1(this, 0);
+        UserData$$ExternalSyntheticLambda1 userData$$ExternalSyntheticLambda12 =
+                new UserData$$ExternalSyntheticLambda1(this, 1);
         ScheduledExecutorService scheduledExecutorService = this.mScheduledExecutorService;
         File file = this.mPerUserPeopleDataDir;
         ArrayMap arrayMap = new ArrayMap();
@@ -84,10 +89,24 @@ public final class UserData {
                 File file2 = listFiles[i2];
                 int i3 = i;
                 int i4 = i2;
-                PackageData packageData = new PackageData(file2.getName(), i, userData$$ExternalSyntheticLambda1, userData$$ExternalSyntheticLambda12, scheduledExecutorService, file);
+                PackageData packageData =
+                        new PackageData(
+                                file2.getName(),
+                                i,
+                                userData$$ExternalSyntheticLambda1,
+                                userData$$ExternalSyntheticLambda12,
+                                scheduledExecutorService,
+                                file);
                 ConversationStore conversationStore = packageData.mConversationStore;
-                ConversationStore.ConversationInfosProtoDiskReadWriter conversationInfosProtoDiskReadWriter = conversationStore.getConversationInfosProtoDiskReadWriter();
-                if (conversationInfosProtoDiskReadWriter != null && (list = (List) conversationInfosProtoDiskReadWriter.read("conversations")) != null) {
+                ConversationStore.ConversationInfosProtoDiskReadWriter
+                        conversationInfosProtoDiskReadWriter =
+                                conversationStore.getConversationInfosProtoDiskReadWriter();
+                if (conversationInfosProtoDiskReadWriter != null
+                        && (list =
+                                        (List)
+                                                conversationInfosProtoDiskReadWriter.read(
+                                                        "conversations"))
+                                != null) {
                     Iterator it = list.iterator();
                     while (it.hasNext()) {
                         conversationStore.updateConversationsInMemory((ConversationInfo) it.next());
@@ -95,8 +114,17 @@ public final class UserData {
                 }
                 EventStore eventStore = packageData.mEventStore;
                 synchronized (eventStore) {
-                    for (int i5 = 0; i5 < ((ArrayList) eventStore.mEventsCategoryDirs).size(); i5++) {
-                        ((Map) ((ArrayList) eventStore.mEventHistoryMaps).get(i5)).putAll(EventHistoryImpl.eventHistoriesImplFromDisk(new EventHistoryImpl.Injector(), (File) ((ArrayList) eventStore.mEventsCategoryDirs).get(i5), eventStore.mScheduledExecutorService));
+                    for (int i5 = 0;
+                            i5 < ((ArrayList) eventStore.mEventsCategoryDirs).size();
+                            i5++) {
+                        ((Map) ((ArrayList) eventStore.mEventHistoryMaps).get(i5))
+                                .putAll(
+                                        EventHistoryImpl.eventHistoriesImplFromDisk(
+                                                new EventHistoryImpl.Injector(),
+                                                (File)
+                                                        ((ArrayList) eventStore.mEventsCategoryDirs)
+                                                                .get(i5),
+                                                eventStore.mScheduledExecutorService));
                     }
                 }
                 arrayMap.put(file2.getName(), packageData);

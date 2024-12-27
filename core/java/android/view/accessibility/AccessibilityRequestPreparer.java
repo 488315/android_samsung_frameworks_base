@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Message;
 import android.view.View;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
@@ -16,8 +17,7 @@ public abstract class AccessibilityRequestPreparer {
     private final WeakReference<View> mViewRef;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RequestTypes {
-    }
+    public @interface RequestTypes {}
 
     public abstract void onPrepareExtraData(int i, String str, Bundle bundle, Message message);
 
@@ -36,18 +36,17 @@ public abstract class AccessibilityRequestPreparer {
     }
 
     private class ViewAttachStateListener implements View.OnAttachStateChangeListener {
-        private ViewAttachStateListener() {
-        }
+        private ViewAttachStateListener() {}
 
         @Override // android.view.View.OnAttachStateChangeListener
-        public void onViewAttachedToWindow(View v) {
-        }
+        public void onViewAttachedToWindow(View v) {}
 
         @Override // android.view.View.OnAttachStateChangeListener
         public void onViewDetachedFromWindow(View v) {
             Context context = v.getContext();
             if (context != null) {
-                ((AccessibilityManager) context.getSystemService(AccessibilityManager.class)).removeAccessibilityRequestPreparer(AccessibilityRequestPreparer.this);
+                ((AccessibilityManager) context.getSystemService(AccessibilityManager.class))
+                        .removeAccessibilityRequestPreparer(AccessibilityRequestPreparer.this);
             }
             v.removeOnAttachStateChangeListener(this);
         }

@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,10 @@ public class SemRemoteContentManager {
                 Log.d(TAG, "registerRCPInterface(): My Context is " + this);
                 this.mService.registerRCPInterface(rcpInterface, userId);
             } catch (RemoteException e) {
-                Log.e(TAG, "registerRCPInterface: RemoteException trying to register rcpInterface", e);
+                Log.e(
+                        TAG,
+                        "registerRCPInterface: RemoteException trying to register rcpInterface",
+                        e);
                 e.printStackTrace();
             }
         }
@@ -44,16 +48,22 @@ public class SemRemoteContentManager {
         return null;
     }
 
-    public int copyFileInternal(int srcContainerId, String srcFilePath, int destContainerId, String destFilePath) throws RemoteException {
+    public int copyFileInternal(
+            int srcContainerId, String srcFilePath, int destContainerId, String destFilePath)
+            throws RemoteException {
         if (this.mService != null) {
-            return this.mService.copyFileInternal(srcContainerId, srcFilePath, destContainerId, destFilePath);
+            return this.mService.copyFileInternal(
+                    srcContainerId, srcFilePath, destContainerId, destFilePath);
         }
         return -1;
     }
 
-    public int moveFile(int srcContainerId, String srcFilePath, int destContainerId, String destFilePath) throws RemoteException {
+    public int moveFile(
+            int srcContainerId, String srcFilePath, int destContainerId, String destFilePath)
+            throws RemoteException {
         if (this.mService != null) {
-            return this.mService.moveFile(srcContainerId, srcFilePath, destContainerId, destFilePath);
+            return this.mService.moveFile(
+                    srcContainerId, srcFilePath, destContainerId, destFilePath);
         }
         return -1;
     }
@@ -79,9 +89,26 @@ public class SemRemoteContentManager {
         return new Bundle();
     }
 
-    public int copyChunks(int srcContainerId, String srcFilePath, int destContainerId, String destFilePath, long offset, int length, long sessionId, boolean deleteSrc) throws RemoteException {
+    public int copyChunks(
+            int srcContainerId,
+            String srcFilePath,
+            int destContainerId,
+            String destFilePath,
+            long offset,
+            int length,
+            long sessionId,
+            boolean deleteSrc)
+            throws RemoteException {
         if (this.mService != null) {
-            return this.mService.copyChunks(srcContainerId, srcFilePath, destContainerId, destFilePath, offset, length, sessionId, deleteSrc);
+            return this.mService.copyChunks(
+                    srcContainerId,
+                    srcFilePath,
+                    destContainerId,
+                    destFilePath,
+                    offset,
+                    length,
+                    sessionId,
+                    deleteSrc);
         }
         return ERROR;
     }
@@ -107,15 +134,28 @@ public class SemRemoteContentManager {
         return new Bundle();
     }
 
-    public int copyFile(int srcContainerId, String srcFilePath, int destContainerId, String destFilePath) throws RemoteException {
+    public int copyFile(
+            int srcContainerId, String srcFilePath, int destContainerId, String destFilePath)
+            throws RemoteException {
         if (this.mService != null) {
-            Log.d(TAG, "copyFile: srcContainerId" + srcContainerId + " srcFilePath" + srcFilePath + " destContainerId" + destContainerId + " destFilePath" + destFilePath);
-            return this.mService.copyFile(srcContainerId, srcFilePath, destContainerId, destFilePath);
+            Log.d(
+                    TAG,
+                    "copyFile: srcContainerId"
+                            + srcContainerId
+                            + " srcFilePath"
+                            + srcFilePath
+                            + " destContainerId"
+                            + destContainerId
+                            + " destFilePath"
+                            + destFilePath);
+            return this.mService.copyFile(
+                    srcContainerId, srcFilePath, destContainerId, destFilePath);
         }
         return -1;
     }
 
-    public long moveFiles(int requestApp, Uri uri, int fileCount, int containerID) throws RemoteException {
+    public long moveFiles(int requestApp, Uri uri, int fileCount, int containerID)
+            throws RemoteException {
         if (uri == null) {
             Log.d(TAG, "moveFiles uri is null");
             return -1L;
@@ -130,7 +170,9 @@ public class SemRemoteContentManager {
         return -1L;
     }
 
-    public long moveFiles(int requestApp, List<String> srcFilePaths, List<String> destFilePaths, int containerId) throws RemoteException {
+    public long moveFiles(
+            int requestApp, List<String> srcFilePaths, List<String> destFilePaths, int containerId)
+            throws RemoteException {
         if (requestApp < 0) {
             Log.d(TAG, "Invalid App Id : " + requestApp);
             return -1L;
@@ -144,7 +186,8 @@ public class SemRemoteContentManager {
             return -1L;
         }
         if (this.mService != null) {
-            return this.mService.moveFilesForAppEx(requestApp, srcFilePaths, destFilePaths, containerId);
+            return this.mService.moveFilesForAppEx(
+                    requestApp, srcFilePaths, destFilePaths, containerId);
         }
         return -1L;
     }

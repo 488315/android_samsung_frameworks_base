@@ -7,7 +7,8 @@ import com.android.server.am.ProcessStateRecord;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class WindowProcessController$$ExternalSyntheticLambda10 implements QuintConsumer {
+public final /* synthetic */ class WindowProcessController$$ExternalSyntheticLambda10
+        implements QuintConsumer {
     public final void accept(Object obj, Object obj2, Object obj3, Object obj4, Object obj5) {
         ProcessRecord processRecord = (ProcessRecord) obj;
         int intValue = ((Integer) obj2).intValue();
@@ -22,7 +23,8 @@ public final /* synthetic */ class WindowProcessController$$ExternalSyntheticLam
                 processRecord.mClearedWaitingToKill = false;
                 if (booleanValue) {
                     synchronized (processRecord.mService.mAppProfiler.mProfilerLock) {
-                        processRecord.mService.mAppProfiler.mProfileData.setProfileProc(processRecord);
+                        processRecord.mService.mAppProfiler.mProfileData.setProfileProc(
+                                processRecord);
                     }
                 }
                 if (str != null) {

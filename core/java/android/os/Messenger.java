@@ -1,27 +1,26 @@
 package android.os;
 
-import android.os.IMessenger;
-import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public final class Messenger implements Parcelable {
-    public static final Parcelable.Creator<Messenger> CREATOR = new Parcelable.Creator<Messenger>() { // from class: android.os.Messenger.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Messenger createFromParcel(Parcel in) {
-            IBinder target = in.readStrongBinder();
-            if (target != null) {
-                return new Messenger(target);
-            }
-            return null;
-        }
+    public static final Parcelable.Creator<Messenger> CREATOR =
+            new Parcelable.Creator<Messenger>() { // from class: android.os.Messenger.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Messenger createFromParcel(Parcel in) {
+                    IBinder target = in.readStrongBinder();
+                    if (target != null) {
+                        return new Messenger(target);
+                    }
+                    return null;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Messenger[] newArray(int size) {
-            return new Messenger[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Messenger[] newArray(int size) {
+                    return new Messenger[size];
+                }
+            };
     private final IMessenger mTarget;
 
     public Messenger(Handler target) {

@@ -11,7 +11,8 @@ public class SamsungThemeUtils {
         if (overlayPaths != null && overlayPaths.length > 0) {
             ArrayList<String> filteredOverlayPaths = new ArrayList<>();
             for (String overlay : overlayPaths) {
-                if (overlay != null && !overlay.startsWith(SamsungThemeConstants.PATH_OVERLAY_CURRENT_STYLE)) {
+                if (overlay != null
+                        && !overlay.startsWith(SamsungThemeConstants.PATH_OVERLAY_CURRENT_STYLE)) {
                     filteredOverlayPaths.add(overlay);
                 }
             }
@@ -25,7 +26,8 @@ public class SamsungThemeUtils {
             ArrayList<String> filteredOverlayPaths = new ArrayList<>();
             for (String overlay : overlayPaths) {
                 if (overlay != null) {
-                    boolean hasPrefix = overlay.startsWith(SamsungThemeConstants.PATH_OVERLAY_CURRENT_STYLE);
+                    boolean hasPrefix =
+                            overlay.startsWith(SamsungThemeConstants.PATH_OVERLAY_CURRENT_STYLE);
                     if (hasPrefix && hasAllowPostfixforCover(overlay)) {
                         return overlayPaths;
                     }
@@ -67,7 +69,10 @@ public class SamsungThemeUtils {
     private static String[] removeOnlySystemUIOverlay(String[] overlayPaths) {
         ArrayList<String> filteredOverlayPaths = new ArrayList<>();
         for (String overlay : overlayPaths) {
-            if (overlay != null && (!overlay.startsWith(SamsungThemeConstants.PATH_OVERLAY_CURRENT_STYLE) || !overlay.endsWith(SamsungThemeConstants.THEME_OVERLAY_SYSTEMUI_POSTFIX))) {
+            if (overlay != null
+                    && (!overlay.startsWith(SamsungThemeConstants.PATH_OVERLAY_CURRENT_STYLE)
+                            || !overlay.endsWith(
+                                    SamsungThemeConstants.THEME_OVERLAY_SYSTEMUI_POSTFIX))) {
                 filteredOverlayPaths.add(overlay);
             }
         }

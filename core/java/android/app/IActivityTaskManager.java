@@ -1,14 +1,5 @@
 package android.app;
 
-import android.app.ActivityManager;
-import android.app.ActivityTaskManager;
-import android.app.IActivityClientController;
-import android.app.IActivityController;
-import android.app.IActivityTaskManager;
-import android.app.IApplicationThread;
-import android.app.IAssistDataReceiver;
-import android.app.IScreenCaptureObserver;
-import android.app.ITaskStackListener;
 import android.app.assist.AssistContent;
 import android.app.assist.AssistStructure;
 import android.content.ComponentName;
@@ -38,11 +29,14 @@ import android.window.IWindowOrganizerController;
 import android.window.RemoteTransition;
 import android.window.SplashScreenView;
 import android.window.TaskSnapshot;
+
 import com.android.internal.app.IVoiceInteractor;
+
 import com.samsung.android.core.CompatChangeablePackageInfo;
 import com.samsung.android.core.IFoldStarManager;
 import com.samsung.android.multiwindow.IKeyEventListener;
 import com.samsung.android.multiwindow.IMultiTaskingBinder;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +48,12 @@ import java.util.stream.IntStream;
 public interface IActivityTaskManager extends IInterface {
     public static final String DESCRIPTOR = "android.app.IActivityTaskManager";
 
-    int addAppTask(IBinder iBinder, Intent intent, ActivityManager.TaskDescription taskDescription, Bitmap bitmap) throws RemoteException;
+    int addAppTask(
+            IBinder iBinder,
+            Intent intent,
+            ActivityManager.TaskDescription taskDescription,
+            Bitmap bitmap)
+            throws RemoteException;
 
     void alwaysShowUnsupportedCompileSdkWarning(ComponentName componentName) throws RemoteException;
 
@@ -78,7 +77,8 @@ public interface IActivityTaskManager extends IInterface {
 
     List<ActivityTaskManager.RootTaskInfo> getAllRootTaskInfos() throws RemoteException;
 
-    List<ActivityTaskManager.RootTaskInfo> getAllRootTaskInfosOnDisplay(int i) throws RemoteException;
+    List<ActivityTaskManager.RootTaskInfo> getAllRootTaskInfosOnDisplay(int i)
+            throws RemoteException;
 
     String getAppLockedCheckAction() throws RemoteException;
 
@@ -98,7 +98,8 @@ public interface IActivityTaskManager extends IInterface {
 
     Bundle getAssistContextExtras(int i) throws RemoteException;
 
-    ParceledListSlice<CompatChangeablePackageInfo> getCompatChangeablePackageInfoList(String str, int i) throws RemoteException;
+    ParceledListSlice<CompatChangeablePackageInfo> getCompatChangeablePackageInfoList(
+            String str, int i) throws RemoteException;
 
     List<String> getCoverLauncherAvailableAppList(int i) throws RemoteException;
 
@@ -128,13 +129,15 @@ public interface IActivityTaskManager extends IInterface {
 
     int getPackageScreenCompatMode(String str) throws RemoteException;
 
-    ParceledListSlice<ActivityManager.RecentTaskInfo> getRecentTasks(int i, int i2, int i3) throws RemoteException;
+    ParceledListSlice<ActivityManager.RecentTaskInfo> getRecentTasks(int i, int i2, int i3)
+            throws RemoteException;
 
     Bitmap getResumedTaskThumbnail(int i) throws RemoteException;
 
     ActivityTaskManager.RootTaskInfo getRootTaskInfo(int i, int i2) throws RemoteException;
 
-    ActivityTaskManager.RootTaskInfo getRootTaskInfoOnDisplay(int i, int i2, int i3) throws RemoteException;
+    ActivityTaskManager.RootTaskInfo getRootTaskInfoOnDisplay(int i, int i2, int i3)
+            throws RemoteException;
 
     String getScpmVersion() throws RemoteException;
 
@@ -148,7 +151,8 @@ public interface IActivityTaskManager extends IInterface {
 
     TaskSnapshot getTaskSnapshotLowResolution(int i) throws RemoteException;
 
-    List<ActivityManager.RunningTaskInfo> getTasks(int i, boolean z, boolean z2, int i2) throws RemoteException;
+    List<ActivityManager.RunningTaskInfo> getTasks(int i, boolean z, boolean z2, int i2)
+            throws RemoteException;
 
     int getUserOrSystemMinAspectRatioOverrideCode(String str, int i) throws RemoteException;
 
@@ -156,7 +160,8 @@ public interface IActivityTaskManager extends IInterface {
 
     IWindowOrganizerController getWindowOrganizerController() throws RemoteException;
 
-    boolean isActivityStartAllowedOnDisplay(int i, Intent intent, String str, int i2) throws RemoteException;
+    boolean isActivityStartAllowedOnDisplay(int i, Intent intent, String str, int i2)
+            throws RemoteException;
 
     boolean isAppLockedPackage(String str) throws RemoteException;
 
@@ -170,7 +175,8 @@ public interface IActivityTaskManager extends IInterface {
 
     boolean isPackageEnabledForCoverLauncher(String str, int i) throws RemoteException;
 
-    boolean isPackageSettingsEnabledForCoverLauncher(String str, int i, int i2) throws RemoteException;
+    boolean isPackageSettingsEnabledForCoverLauncher(String str, int i, int i2)
+            throws RemoteException;
 
     boolean isTopActivityImmersive() throws RemoteException;
 
@@ -178,23 +184,37 @@ public interface IActivityTaskManager extends IInterface {
 
     void moveRootTaskToDisplay(int i, int i2) throws RemoteException;
 
-    void moveTaskToFront(IApplicationThread iApplicationThread, String str, int i, int i2, Bundle bundle) throws RemoteException;
+    void moveTaskToFront(
+            IApplicationThread iApplicationThread, String str, int i, int i2, Bundle bundle)
+            throws RemoteException;
 
     void moveTaskToRootTask(int i, int i2, boolean z) throws RemoteException;
 
-    void onPictureInPictureUiStateChanged(PictureInPictureUiState pictureInPictureUiState) throws RemoteException;
+    void onPictureInPictureUiStateChanged(PictureInPictureUiState pictureInPictureUiState)
+            throws RemoteException;
 
-    void onSplashScreenViewCopyFinished(int i, SplashScreenView.SplashScreenViewParcelable splashScreenViewParcelable) throws RemoteException;
+    void onSplashScreenViewCopyFinished(
+            int i, SplashScreenView.SplashScreenViewParcelable splashScreenViewParcelable)
+            throws RemoteException;
 
     void registKeyEventListener(IKeyEventListener iKeyEventListener) throws RemoteException;
 
-    void registerRemoteAnimationForNextActivityStart(String str, RemoteAnimationAdapter remoteAnimationAdapter, IBinder iBinder) throws RemoteException;
+    void registerRemoteAnimationForNextActivityStart(
+            String str, RemoteAnimationAdapter remoteAnimationAdapter, IBinder iBinder)
+            throws RemoteException;
 
-    void registerRemoteAnimationsForDisplay(int i, RemoteAnimationDefinition remoteAnimationDefinition) throws RemoteException;
+    void registerRemoteAnimationsForDisplay(
+            int i, RemoteAnimationDefinition remoteAnimationDefinition) throws RemoteException;
 
-    void registerRemoteTransitionForNextActivityStart(String str, RemoteAnimationAdapter remoteAnimationAdapter, IBinder iBinder, RemoteTransition remoteTransition) throws RemoteException;
+    void registerRemoteTransitionForNextActivityStart(
+            String str,
+            RemoteAnimationAdapter remoteAnimationAdapter,
+            IBinder iBinder,
+            RemoteTransition remoteTransition)
+            throws RemoteException;
 
-    void registerScreenCaptureObserver(IBinder iBinder, IScreenCaptureObserver iScreenCaptureObserver) throws RemoteException;
+    void registerScreenCaptureObserver(
+            IBinder iBinder, IScreenCaptureObserver iScreenCaptureObserver) throws RemoteException;
 
     void registerTaskStackListener(ITaskStackListener iTaskStackListener) throws RemoteException;
 
@@ -210,13 +230,30 @@ public interface IActivityTaskManager extends IInterface {
 
     boolean removeTaskWithFlags(int i, int i2) throws RemoteException;
 
-    void reportAssistContextExtras(IBinder iBinder, Bundle bundle, AssistStructure assistStructure, AssistContent assistContent, Uri uri) throws RemoteException;
+    void reportAssistContextExtras(
+            IBinder iBinder,
+            Bundle bundle,
+            AssistStructure assistStructure,
+            AssistContent assistContent,
+            Uri uri)
+            throws RemoteException;
 
-    boolean requestAssistContextExtras(int i, IAssistDataReceiver iAssistDataReceiver, Bundle bundle, IBinder iBinder, boolean z, boolean z2) throws RemoteException;
+    boolean requestAssistContextExtras(
+            int i,
+            IAssistDataReceiver iAssistDataReceiver,
+            Bundle bundle,
+            IBinder iBinder,
+            boolean z,
+            boolean z2)
+            throws RemoteException;
 
-    boolean requestAssistDataForTask(IAssistDataReceiver iAssistDataReceiver, int i, String str, String str2) throws RemoteException;
+    boolean requestAssistDataForTask(
+            IAssistDataReceiver iAssistDataReceiver, int i, String str, String str2)
+            throws RemoteException;
 
-    boolean requestAutofillData(IAssistDataReceiver iAssistDataReceiver, Bundle bundle, IBinder iBinder, int i) throws RemoteException;
+    boolean requestAutofillData(
+            IAssistDataReceiver iAssistDataReceiver, Bundle bundle, IBinder iBinder, int i)
+            throws RemoteException;
 
     void resetUserPackageSettings(int i, int i2) throws RemoteException;
 
@@ -224,11 +261,15 @@ public interface IActivityTaskManager extends IInterface {
 
     void resumeAppSwitches() throws RemoteException;
 
-    void sendSaLoggingBroadcast(String str, String str2, String str3, long j, Map<String, String> map) throws RemoteException;
+    void sendSaLoggingBroadcast(
+            String str, String str2, String str3, long j, Map<String, String> map)
+            throws RemoteException;
 
-    void sendSaLoggingBroadcastForSetting(String str, String str2, String str3) throws RemoteException;
+    void sendSaLoggingBroadcastForSetting(String str, String str2, String str3)
+            throws RemoteException;
 
-    void setActivityController(IActivityController iActivityController, boolean z) throws RemoteException;
+    void setActivityController(IActivityController iActivityController, boolean z)
+            throws RemoteException;
 
     void setAppLockedUnLockPackage(String str) throws RemoteException;
 
@@ -268,7 +309,8 @@ public interface IActivityTaskManager extends IInterface {
 
     void setPersistentVrThread(int i) throws RemoteException;
 
-    void setRunningRemoteTransitionDelegate(IApplicationThread iApplicationThread) throws RemoteException;
+    void setRunningRemoteTransitionDelegate(IApplicationThread iApplicationThread)
+            throws RemoteException;
 
     void setSsecureHiddenAppsPackages(String str) throws RemoteException;
 
@@ -276,47 +318,171 @@ public interface IActivityTaskManager extends IInterface {
 
     void setUseLetterbox(boolean z) throws RemoteException;
 
-    void setVoiceKeepAwake(IVoiceInteractionSession iVoiceInteractionSession, boolean z) throws RemoteException;
+    void setVoiceKeepAwake(IVoiceInteractionSession iVoiceInteractionSession, boolean z)
+            throws RemoteException;
 
     void setVrThread(int i) throws RemoteException;
 
-    int startActivities(IApplicationThread iApplicationThread, String str, String str2, Intent[] intentArr, String[] strArr, IBinder iBinder, Bundle bundle, int i) throws RemoteException;
+    int startActivities(
+            IApplicationThread iApplicationThread,
+            String str,
+            String str2,
+            Intent[] intentArr,
+            String[] strArr,
+            IBinder iBinder,
+            Bundle bundle,
+            int i)
+            throws RemoteException;
 
-    int startActivity(IApplicationThread iApplicationThread, String str, String str2, Intent intent, String str3, IBinder iBinder, String str4, int i, int i2, ProfilerInfo profilerInfo, Bundle bundle) throws RemoteException;
+    int startActivity(
+            IApplicationThread iApplicationThread,
+            String str,
+            String str2,
+            Intent intent,
+            String str3,
+            IBinder iBinder,
+            String str4,
+            int i,
+            int i2,
+            ProfilerInfo profilerInfo,
+            Bundle bundle)
+            throws RemoteException;
 
-    WaitResult startActivityAndWait(IApplicationThread iApplicationThread, String str, String str2, Intent intent, String str3, IBinder iBinder, String str4, int i, int i2, ProfilerInfo profilerInfo, Bundle bundle, int i3) throws RemoteException;
+    WaitResult startActivityAndWait(
+            IApplicationThread iApplicationThread,
+            String str,
+            String str2,
+            Intent intent,
+            String str3,
+            IBinder iBinder,
+            String str4,
+            int i,
+            int i2,
+            ProfilerInfo profilerInfo,
+            Bundle bundle,
+            int i3)
+            throws RemoteException;
 
-    int startActivityAsCaller(IApplicationThread iApplicationThread, String str, Intent intent, String str2, IBinder iBinder, String str3, int i, int i2, ProfilerInfo profilerInfo, Bundle bundle, boolean z, int i3) throws RemoteException;
+    int startActivityAsCaller(
+            IApplicationThread iApplicationThread,
+            String str,
+            Intent intent,
+            String str2,
+            IBinder iBinder,
+            String str3,
+            int i,
+            int i2,
+            ProfilerInfo profilerInfo,
+            Bundle bundle,
+            boolean z,
+            int i3)
+            throws RemoteException;
 
-    int startActivityAsUser(IApplicationThread iApplicationThread, String str, String str2, Intent intent, String str3, IBinder iBinder, String str4, int i, int i2, ProfilerInfo profilerInfo, Bundle bundle, int i3) throws RemoteException;
+    int startActivityAsUser(
+            IApplicationThread iApplicationThread,
+            String str,
+            String str2,
+            Intent intent,
+            String str3,
+            IBinder iBinder,
+            String str4,
+            int i,
+            int i2,
+            ProfilerInfo profilerInfo,
+            Bundle bundle,
+            int i3)
+            throws RemoteException;
 
     void startActivityForCoverLauncher(Intent intent, String str) throws RemoteException;
 
-    void startActivityForCoverLauncherAsUser(Intent intent, String str, int i) throws RemoteException;
+    void startActivityForCoverLauncherAsUser(Intent intent, String str, int i)
+            throws RemoteException;
 
     void startActivityForDexRestart(int i) throws RemoteException;
 
-    int startActivityFromGameSession(IApplicationThread iApplicationThread, String str, String str2, int i, int i2, Intent intent, int i3, int i4) throws RemoteException;
+    int startActivityFromGameSession(
+            IApplicationThread iApplicationThread,
+            String str,
+            String str2,
+            int i,
+            int i2,
+            Intent intent,
+            int i3,
+            int i4)
+            throws RemoteException;
 
     int startActivityFromRecents(int i, Bundle bundle) throws RemoteException;
 
-    int startActivityIntentSender(IApplicationThread iApplicationThread, IIntentSender iIntentSender, IBinder iBinder, Intent intent, String str, IBinder iBinder2, String str2, int i, int i2, int i3, Bundle bundle) throws RemoteException;
+    int startActivityIntentSender(
+            IApplicationThread iApplicationThread,
+            IIntentSender iIntentSender,
+            IBinder iBinder,
+            Intent intent,
+            String str,
+            IBinder iBinder2,
+            String str2,
+            int i,
+            int i2,
+            int i3,
+            Bundle bundle)
+            throws RemoteException;
 
-    int startActivityWithConfig(IApplicationThread iApplicationThread, String str, String str2, Intent intent, String str3, IBinder iBinder, String str4, int i, int i2, Configuration configuration, Bundle bundle, int i3) throws RemoteException;
+    int startActivityWithConfig(
+            IApplicationThread iApplicationThread,
+            String str,
+            String str2,
+            Intent intent,
+            String str3,
+            IBinder iBinder,
+            String str4,
+            int i,
+            int i2,
+            Configuration configuration,
+            Bundle bundle,
+            int i3)
+            throws RemoteException;
 
-    void startAppLockService(IBinder iBinder, Intent intent, boolean z, String str) throws RemoteException;
+    void startAppLockService(IBinder iBinder, Intent intent, boolean z, String str)
+            throws RemoteException;
 
-    int startAssistantActivity(String str, String str2, int i, int i2, Intent intent, String str3, Bundle bundle, int i3) throws RemoteException;
+    int startAssistantActivity(
+            String str,
+            String str2,
+            int i,
+            int i2,
+            Intent intent,
+            String str3,
+            Bundle bundle,
+            int i3)
+            throws RemoteException;
 
-    BackNavigationInfo startBackNavigation(RemoteCallback remoteCallback, BackAnimationAdapter backAnimationAdapter) throws RemoteException;
+    BackNavigationInfo startBackNavigation(
+            RemoteCallback remoteCallback, BackAnimationAdapter backAnimationAdapter)
+            throws RemoteException;
 
-    boolean startNextMatchingActivity(IBinder iBinder, Intent intent, Bundle bundle) throws RemoteException;
+    boolean startNextMatchingActivity(IBinder iBinder, Intent intent, Bundle bundle)
+            throws RemoteException;
 
-    void startRecentsActivity(Intent intent, long j, IRecentsAnimationRunner iRecentsAnimationRunner) throws RemoteException;
+    void startRecentsActivity(
+            Intent intent, long j, IRecentsAnimationRunner iRecentsAnimationRunner)
+            throws RemoteException;
 
     void startSystemLockTaskMode(int i) throws RemoteException;
 
-    int startVoiceActivity(String str, String str2, int i, int i2, Intent intent, String str3, IVoiceInteractionSession iVoiceInteractionSession, IVoiceInteractor iVoiceInteractor, int i3, ProfilerInfo profilerInfo, Bundle bundle, int i4) throws RemoteException;
+    int startVoiceActivity(
+            String str,
+            String str2,
+            int i,
+            int i2,
+            Intent intent,
+            String str3,
+            IVoiceInteractionSession iVoiceInteractionSession,
+            IVoiceInteractor iVoiceInteractor,
+            int i3,
+            ProfilerInfo profilerInfo,
+            Bundle bundle,
+            int i4)
+            throws RemoteException;
 
     void stopAppSwitches() throws RemoteException;
 
@@ -330,7 +496,8 @@ public interface IActivityTaskManager extends IInterface {
 
     void unhandledBack() throws RemoteException;
 
-    void unregisterScreenCaptureObserver(IBinder iBinder, IScreenCaptureObserver iScreenCaptureObserver) throws RemoteException;
+    void unregisterScreenCaptureObserver(
+            IBinder iBinder, IScreenCaptureObserver iScreenCaptureObserver) throws RemoteException;
 
     void unregisterTaskStackListener(ITaskStackListener iTaskStackListener) throws RemoteException;
 
@@ -344,63 +511,169 @@ public interface IActivityTaskManager extends IInterface {
 
     public static class Default implements IActivityTaskManager {
         @Override // android.app.IActivityTaskManager
-        public int startActivity(IApplicationThread caller, String callingPackage, String callingFeatureId, Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode, int flags, ProfilerInfo profilerInfo, Bundle options) throws RemoteException {
+        public int startActivity(
+                IApplicationThread caller,
+                String callingPackage,
+                String callingFeatureId,
+                Intent intent,
+                String resolvedType,
+                IBinder resultTo,
+                String resultWho,
+                int requestCode,
+                int flags,
+                ProfilerInfo profilerInfo,
+                Bundle options)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityTaskManager
-        public int startActivities(IApplicationThread caller, String callingPackage, String callingFeatureId, Intent[] intents, String[] resolvedTypes, IBinder resultTo, Bundle options, int userId) throws RemoteException {
+        public int startActivities(
+                IApplicationThread caller,
+                String callingPackage,
+                String callingFeatureId,
+                Intent[] intents,
+                String[] resolvedTypes,
+                IBinder resultTo,
+                Bundle options,
+                int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityTaskManager
-        public int startActivityAsUser(IApplicationThread caller, String callingPackage, String callingFeatureId, Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode, int flags, ProfilerInfo profilerInfo, Bundle options, int userId) throws RemoteException {
+        public int startActivityAsUser(
+                IApplicationThread caller,
+                String callingPackage,
+                String callingFeatureId,
+                Intent intent,
+                String resolvedType,
+                IBinder resultTo,
+                String resultWho,
+                int requestCode,
+                int flags,
+                ProfilerInfo profilerInfo,
+                Bundle options,
+                int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityTaskManager
-        public boolean startNextMatchingActivity(IBinder callingActivity, Intent intent, Bundle options) throws RemoteException {
+        public boolean startNextMatchingActivity(
+                IBinder callingActivity, Intent intent, Bundle options) throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityTaskManager
-        public int startActivityIntentSender(IApplicationThread caller, IIntentSender target, IBinder whitelistToken, Intent fillInIntent, String resolvedType, IBinder resultTo, String resultWho, int requestCode, int flagsMask, int flagsValues, Bundle options) throws RemoteException {
+        public int startActivityIntentSender(
+                IApplicationThread caller,
+                IIntentSender target,
+                IBinder whitelistToken,
+                Intent fillInIntent,
+                String resolvedType,
+                IBinder resultTo,
+                String resultWho,
+                int requestCode,
+                int flagsMask,
+                int flagsValues,
+                Bundle options)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityTaskManager
-        public WaitResult startActivityAndWait(IApplicationThread caller, String callingPackage, String callingFeatureId, Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode, int flags, ProfilerInfo profilerInfo, Bundle options, int userId) throws RemoteException {
+        public WaitResult startActivityAndWait(
+                IApplicationThread caller,
+                String callingPackage,
+                String callingFeatureId,
+                Intent intent,
+                String resolvedType,
+                IBinder resultTo,
+                String resultWho,
+                int requestCode,
+                int flags,
+                ProfilerInfo profilerInfo,
+                Bundle options,
+                int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityTaskManager
-        public int startActivityWithConfig(IApplicationThread caller, String callingPackage, String callingFeatureId, Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode, int startFlags, Configuration newConfig, Bundle options, int userId) throws RemoteException {
+        public int startActivityWithConfig(
+                IApplicationThread caller,
+                String callingPackage,
+                String callingFeatureId,
+                Intent intent,
+                String resolvedType,
+                IBinder resultTo,
+                String resultWho,
+                int requestCode,
+                int startFlags,
+                Configuration newConfig,
+                Bundle options,
+                int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityTaskManager
-        public int startVoiceActivity(String callingPackage, String callingFeatureId, int callingPid, int callingUid, Intent intent, String resolvedType, IVoiceInteractionSession session, IVoiceInteractor interactor, int flags, ProfilerInfo profilerInfo, Bundle options, int userId) throws RemoteException {
+        public int startVoiceActivity(
+                String callingPackage,
+                String callingFeatureId,
+                int callingPid,
+                int callingUid,
+                Intent intent,
+                String resolvedType,
+                IVoiceInteractionSession session,
+                IVoiceInteractor interactor,
+                int flags,
+                ProfilerInfo profilerInfo,
+                Bundle options,
+                int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityTaskManager
-        public String getVoiceInteractorPackageName(IBinder callingVoiceInteractor) throws RemoteException {
+        public String getVoiceInteractorPackageName(IBinder callingVoiceInteractor)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityTaskManager
-        public int startAssistantActivity(String callingPackage, String callingFeatureId, int callingPid, int callingUid, Intent intent, String resolvedType, Bundle options, int userId) throws RemoteException {
+        public int startAssistantActivity(
+                String callingPackage,
+                String callingFeatureId,
+                int callingPid,
+                int callingUid,
+                Intent intent,
+                String resolvedType,
+                Bundle options,
+                int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityTaskManager
-        public int startActivityFromGameSession(IApplicationThread caller, String callingPackage, String callingFeatureId, int callingPid, int callingUid, Intent intent, int taskId, int userId) throws RemoteException {
+        public int startActivityFromGameSession(
+                IApplicationThread caller,
+                String callingPackage,
+                String callingFeatureId,
+                int callingPid,
+                int callingUid,
+                Intent intent,
+                int taskId,
+                int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityTaskManager
-        public void startRecentsActivity(Intent intent, long eventTime, IRecentsAnimationRunner recentsAnimationRunner) throws RemoteException {
-        }
+        public void startRecentsActivity(
+                Intent intent, long eventTime, IRecentsAnimationRunner recentsAnimationRunner)
+                throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
         public int startActivityFromRecents(int taskId, Bundle options) throws RemoteException {
@@ -408,18 +681,32 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.app.IActivityTaskManager
-        public int startActivityAsCaller(IApplicationThread caller, String callingPackage, Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode, int flags, ProfilerInfo profilerInfo, Bundle options, boolean ignoreTargetSecurity, int userId) throws RemoteException {
+        public int startActivityAsCaller(
+                IApplicationThread caller,
+                String callingPackage,
+                Intent intent,
+                String resolvedType,
+                IBinder resultTo,
+                String resultWho,
+                int requestCode,
+                int flags,
+                ProfilerInfo profilerInfo,
+                Bundle options,
+                boolean ignoreTargetSecurity,
+                int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityTaskManager
-        public boolean isActivityStartAllowedOnDisplay(int displayId, Intent intent, String resolvedType, int userId) throws RemoteException {
+        public boolean isActivityStartAllowedOnDisplay(
+                int displayId, Intent intent, String resolvedType, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityTaskManager
-        public void unhandledBack() throws RemoteException {
-        }
+        public void unhandledBack() throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
         public IActivityClientController getActivityClientController() throws RemoteException {
@@ -432,12 +719,10 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.app.IActivityTaskManager
-        public void setFrontActivityScreenCompatMode(int mode) throws RemoteException {
-        }
+        public void setFrontActivityScreenCompatMode(int mode) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void setFocusedTask(int taskId) throws RemoteException {
-        }
+        public void setFocusedTask(int taskId) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
         public boolean removeTask(int taskId) throws RemoteException {
@@ -445,8 +730,7 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.app.IActivityTaskManager
-        public void updateActiveRecents(int topNonRecentsTaskId) throws RemoteException {
-        }
+        public void updateActiveRecents(int topNonRecentsTaskId) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
         public boolean removeTaskWithFlags(int taskId, int flags) throws RemoteException {
@@ -454,20 +738,26 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.app.IActivityTaskManager
-        public void removeAllVisibleRecentTasks() throws RemoteException {
-        }
+        public void removeAllVisibleRecentTasks() throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public List<ActivityManager.RunningTaskInfo> getTasks(int maxNum, boolean filterOnlyVisibleRecents, boolean keepIntentExtra, int displayId) throws RemoteException {
+        public List<ActivityManager.RunningTaskInfo> getTasks(
+                int maxNum,
+                boolean filterOnlyVisibleRecents,
+                boolean keepIntentExtra,
+                int displayId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityTaskManager
-        public void moveTaskToFront(IApplicationThread app, String callingPackage, int task, int flags, Bundle options) throws RemoteException {
-        }
+        public void moveTaskToFront(
+                IApplicationThread app, String callingPackage, int task, int flags, Bundle options)
+                throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public ParceledListSlice<ActivityManager.RecentTaskInfo> getRecentTasks(int maxNum, int flags, int userId) throws RemoteException {
+        public ParceledListSlice<ActivityManager.RecentTaskInfo> getRecentTasks(
+                int maxNum, int flags, int userId) throws RemoteException {
             return null;
         }
 
@@ -477,12 +767,16 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.app.IActivityTaskManager
-        public void reportAssistContextExtras(IBinder assistToken, Bundle extras, AssistStructure structure, AssistContent content, Uri referrer) throws RemoteException {
-        }
+        public void reportAssistContextExtras(
+                IBinder assistToken,
+                Bundle extras,
+                AssistStructure structure,
+                AssistContent content,
+                Uri referrer)
+                throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void setFocusedRootTask(int taskId) throws RemoteException {
-        }
+        public void setFocusedRootTask(int taskId) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
         public ActivityTaskManager.RootTaskInfo getFocusedRootTaskInfo() throws RemoteException {
@@ -495,16 +789,14 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.app.IActivityTaskManager
-        public void focusTopTask(int displayId) throws RemoteException {
-        }
+        public void focusTopTask(int displayId) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void cancelRecentsAnimation(boolean restoreHomeRootTaskPosition) throws RemoteException {
-        }
+        public void cancelRecentsAnimation(boolean restoreHomeRootTaskPosition)
+                throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void updateLockTaskPackages(int userId, String[] packages) throws RemoteException {
-        }
+        public void updateLockTaskPackages(int userId, String[] packages) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
         public boolean isInLockTaskMode() throws RemoteException {
@@ -522,19 +814,21 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.app.IActivityTaskManager
-        public void startSystemLockTaskMode(int taskId) throws RemoteException {
-        }
+        public void startSystemLockTaskMode(int taskId) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void stopSystemLockTaskMode() throws RemoteException {
-        }
+        public void stopSystemLockTaskMode() throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void finishVoiceTask(IVoiceInteractionSession session) throws RemoteException {
-        }
+        public void finishVoiceTask(IVoiceInteractionSession session) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public int addAppTask(IBinder activityToken, Intent intent, ActivityManager.TaskDescription description, Bitmap thumbnail) throws RemoteException {
+        public int addAppTask(
+                IBinder activityToken,
+                Intent intent,
+                ActivityManager.TaskDescription description,
+                Bitmap thumbnail)
+                throws RemoteException {
             return 0;
         }
 
@@ -544,8 +838,7 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.app.IActivityTaskManager
-        public void releaseSomeActivities(IApplicationThread app) throws RemoteException {
-        }
+        public void releaseSomeActivities(IApplicationThread app) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
         public Bitmap getTaskDescriptionIcon(String filename, int userId) throws RemoteException {
@@ -553,36 +846,30 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.app.IActivityTaskManager
-        public void registerTaskStackListener(ITaskStackListener listener) throws RemoteException {
-        }
+        public void registerTaskStackListener(ITaskStackListener listener) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void unregisterTaskStackListener(ITaskStackListener listener) throws RemoteException {
-        }
+        public void unregisterTaskStackListener(ITaskStackListener listener)
+                throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void setTaskResizeable(int taskId, int resizeableMode) throws RemoteException {
-        }
+        public void setTaskResizeable(int taskId, int resizeableMode) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void resizeTask(int taskId, Rect bounds, int resizeMode) throws RemoteException {
-        }
+        public void resizeTask(int taskId, Rect bounds, int resizeMode) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void moveRootTaskToDisplay(int taskId, int displayId) throws RemoteException {
-        }
+        public void moveRootTaskToDisplay(int taskId, int displayId) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void moveTaskToRootTask(int taskId, int rootTaskId, boolean toTop) throws RemoteException {
-        }
+        public void moveTaskToRootTask(int taskId, int rootTaskId, boolean toTop)
+                throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void removeRootTasksInWindowingModes(int[] windowingModes) throws RemoteException {
-        }
+        public void removeRootTasksInWindowingModes(int[] windowingModes) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void removeRootTasksWithActivityTypes(int[] activityTypes) throws RemoteException {
-        }
+        public void removeRootTasksWithActivityTypes(int[] activityTypes) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
         public List<ActivityTaskManager.RootTaskInfo> getAllRootTaskInfos() throws RemoteException {
@@ -590,23 +877,26 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.app.IActivityTaskManager
-        public ActivityTaskManager.RootTaskInfo getRootTaskInfo(int windowingMode, int activityType) throws RemoteException {
+        public ActivityTaskManager.RootTaskInfo getRootTaskInfo(int windowingMode, int activityType)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityTaskManager
-        public List<ActivityTaskManager.RootTaskInfo> getAllRootTaskInfosOnDisplay(int displayId) throws RemoteException {
+        public List<ActivityTaskManager.RootTaskInfo> getAllRootTaskInfosOnDisplay(int displayId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityTaskManager
-        public ActivityTaskManager.RootTaskInfo getRootTaskInfoOnDisplay(int windowingMode, int activityType, int displayId) throws RemoteException {
+        public ActivityTaskManager.RootTaskInfo getRootTaskInfoOnDisplay(
+                int windowingMode, int activityType, int displayId) throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityTaskManager
-        public void setLockScreenShown(boolean showingKeyguard, boolean showingAod) throws RemoteException {
-        }
+        public void setLockScreenShown(boolean showingKeyguard, boolean showingAod)
+                throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
         public Bundle getAssistContextExtras(int requestType) throws RemoteException {
@@ -614,12 +904,24 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.app.IActivityTaskManager
-        public boolean requestAssistContextExtras(int requestType, IAssistDataReceiver receiver, Bundle receiverExtras, IBinder activityToken, boolean focused, boolean newSessionId) throws RemoteException {
+        public boolean requestAssistContextExtras(
+                int requestType,
+                IAssistDataReceiver receiver,
+                Bundle receiverExtras,
+                IBinder activityToken,
+                boolean focused,
+                boolean newSessionId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityTaskManager
-        public boolean requestAutofillData(IAssistDataReceiver receiver, Bundle receiverExtras, IBinder activityToken, int flags) throws RemoteException {
+        public boolean requestAutofillData(
+                IAssistDataReceiver receiver,
+                Bundle receiverExtras,
+                IBinder activityToken,
+                int flags)
+                throws RemoteException {
             return false;
         }
 
@@ -629,17 +931,20 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.app.IActivityTaskManager
-        public boolean requestAssistDataForTask(IAssistDataReceiver receiver, int taskId, String callingPackageName, String callingAttributionTag) throws RemoteException {
+        public boolean requestAssistDataForTask(
+                IAssistDataReceiver receiver,
+                int taskId,
+                String callingPackageName,
+                String callingAttributionTag)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityTaskManager
-        public void keyguardGoingAway(int flags) throws RemoteException {
-        }
+        public void keyguardGoingAway(int flags) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void suppressResizeConfigChanges(boolean suppress) throws RemoteException {
-        }
+        public void suppressResizeConfigChanges(boolean suppress) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
         public IWindowOrganizerController getWindowOrganizerController() throws RemoteException {
@@ -657,16 +962,17 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.app.IActivityTaskManager
-        public void cancelTaskWindowTransition(int taskId) throws RemoteException {
-        }
+        public void cancelTaskWindowTransition(int taskId) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public TaskSnapshot getTaskSnapshot(int taskId, boolean isLowResolution) throws RemoteException {
+        public TaskSnapshot getTaskSnapshot(int taskId, boolean isLowResolution)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityTaskManager
-        public TaskSnapshot takeTaskSnapshot(int taskId, boolean updateCache) throws RemoteException {
+        public TaskSnapshot takeTaskSnapshot(int taskId, boolean updateCache)
+                throws RemoteException {
             return null;
         }
 
@@ -681,48 +987,48 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.app.IActivityTaskManager
-        public void updateLockTaskFeatures(int userId, int flags) throws RemoteException {
-        }
+        public void updateLockTaskFeatures(int userId, int flags) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void registerRemoteAnimationForNextActivityStart(String packageName, RemoteAnimationAdapter adapter, IBinder launchCookie) throws RemoteException {
-        }
+        public void registerRemoteAnimationForNextActivityStart(
+                String packageName, RemoteAnimationAdapter adapter, IBinder launchCookie)
+                throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void registerRemoteTransitionForNextActivityStart(String packageName, RemoteAnimationAdapter adapter, IBinder launchCookie, RemoteTransition remoteTransiton) throws RemoteException {
-        }
+        public void registerRemoteTransitionForNextActivityStart(
+                String packageName,
+                RemoteAnimationAdapter adapter,
+                IBinder launchCookie,
+                RemoteTransition remoteTransiton)
+                throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void registerRemoteAnimationsForDisplay(int displayId, RemoteAnimationDefinition definition) throws RemoteException {
-        }
+        public void registerRemoteAnimationsForDisplay(
+                int displayId, RemoteAnimationDefinition definition) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void alwaysShowUnsupportedCompileSdkWarning(ComponentName activity) throws RemoteException {
-        }
+        public void alwaysShowUnsupportedCompileSdkWarning(ComponentName activity)
+                throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void setVrThread(int tid) throws RemoteException {
-        }
+        public void setVrThread(int tid) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void setPersistentVrThread(int tid) throws RemoteException {
-        }
+        public void setPersistentVrThread(int tid) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void stopAppSwitches() throws RemoteException {
-        }
+        public void stopAppSwitches() throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void resumeAppSwitches() throws RemoteException {
-        }
+        public void resumeAppSwitches() throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void setActivityController(IActivityController watcher, boolean imAMonkey) throws RemoteException {
-        }
+        public void setActivityController(IActivityController watcher, boolean imAMonkey)
+                throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void setVoiceKeepAwake(IVoiceInteractionSession session, boolean keepAwake) throws RemoteException {
-        }
+        public void setVoiceKeepAwake(IVoiceInteractionSession session, boolean keepAwake)
+                throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
         public int getPackageScreenCompatMode(String packageName) throws RemoteException {
@@ -730,8 +1036,8 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.app.IActivityTaskManager
-        public void setPackageScreenCompatMode(String packageName, int mode) throws RemoteException {
-        }
+        public void setPackageScreenCompatMode(String packageName, int mode)
+                throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
         public boolean getPackageAskScreenCompat(String packageName) throws RemoteException {
@@ -739,24 +1045,24 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.app.IActivityTaskManager
-        public void setPackageAskScreenCompat(String packageName, boolean ask) throws RemoteException {
-        }
+        public void setPackageAskScreenCompat(String packageName, boolean ask)
+                throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void clearLaunchParamsForPackages(List<String> packageNames) throws RemoteException {
-        }
+        public void clearLaunchParamsForPackages(List<String> packageNames)
+                throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void onSplashScreenViewCopyFinished(int taskId, SplashScreenView.SplashScreenViewParcelable material) throws RemoteException {
-        }
+        public void onSplashScreenViewCopyFinished(
+                int taskId, SplashScreenView.SplashScreenViewParcelable material)
+                throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void onPictureInPictureUiStateChanged(PictureInPictureUiState pipState) throws RemoteException {
-        }
+        public void onPictureInPictureUiStateChanged(PictureInPictureUiState pipState)
+                throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void detachNavigationBarFromApp(IBinder transition) throws RemoteException {
-        }
+        public void detachNavigationBarFromApp(IBinder transition) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
         public boolean clearRecentTasks(int userId) throws RemoteException {
@@ -764,21 +1070,23 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.app.IActivityTaskManager
-        public void setRunningRemoteTransitionDelegate(IApplicationThread caller) throws RemoteException {
-        }
+        public void setRunningRemoteTransitionDelegate(IApplicationThread caller)
+                throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public BackNavigationInfo startBackNavigation(RemoteCallback navigationObserver, BackAnimationAdapter adaptor) throws RemoteException {
+        public BackNavigationInfo startBackNavigation(
+                RemoteCallback navigationObserver, BackAnimationAdapter adaptor)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityTaskManager
-        public void registerScreenCaptureObserver(IBinder activityToken, IScreenCaptureObserver observer) throws RemoteException {
-        }
+        public void registerScreenCaptureObserver(
+                IBinder activityToken, IScreenCaptureObserver observer) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void unregisterScreenCaptureObserver(IBinder activityToken, IScreenCaptureObserver observer) throws RemoteException {
-        }
+        public void unregisterScreenCaptureObserver(
+                IBinder activityToken, IScreenCaptureObserver observer) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
         public IMultiTaskingBinder getMultiTaskingBinder() throws RemoteException {
@@ -791,13 +1099,13 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.app.IActivityTaskManager
-        public ParceledListSlice<CompatChangeablePackageInfo> getCompatChangeablePackageInfoList(String packageName, int userId) throws RemoteException {
+        public ParceledListSlice<CompatChangeablePackageInfo> getCompatChangeablePackageInfoList(
+                String packageName, int userId) throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityTaskManager
-        public void resetUserPackageSettings(int userId, int flags) throws RemoteException {
-        }
+        public void resetUserPackageSettings(int userId, int flags) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
         public String getScpmVersion() throws RemoteException {
@@ -805,38 +1113,42 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.app.IActivityTaskManager
-        public void setUseLetterbox(boolean useBlackLetterbox) throws RemoteException {
-        }
+        public void setUseLetterbox(boolean useBlackLetterbox) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void setOrientationControlPolicy(int userId, String packageName, int policy) throws RemoteException {
-        }
+        public void setOrientationControlPolicy(int userId, String packageName, int policy)
+                throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public int getOrientationControlPolicy(int userId, String packageName) throws RemoteException {
+        public int getOrientationControlPolicy(int userId, String packageName)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityTaskManager
-        public void setOrientationControlDefault(boolean enabled) throws RemoteException {
-        }
+        public void setOrientationControlDefault(boolean enabled) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void setDisallowWhenLandscape(boolean disallow) throws RemoteException {
-        }
+        public void setDisallowWhenLandscape(boolean disallow) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public int getUserOrSystemMinAspectRatioOverrideCode(String packageName, int userId) throws RemoteException {
+        public int getUserOrSystemMinAspectRatioOverrideCode(String packageName, int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityTaskManager
-        public void sendSaLoggingBroadcast(String trackingId, String eventId, String detail, long value, Map<String, String> customDimension) throws RemoteException {
-        }
+        public void sendSaLoggingBroadcast(
+                String trackingId,
+                String eventId,
+                String detail,
+                long value,
+                Map<String, String> customDimension)
+                throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void sendSaLoggingBroadcastForSetting(String trackingId, String settingId, String value) throws RemoteException {
-        }
+        public void sendSaLoggingBroadcastForSetting(
+                String trackingId, String settingId, String value) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
         public Bitmap getResumedTaskThumbnail(int taskId) throws RemoteException {
@@ -844,8 +1156,8 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.app.IActivityTaskManager
-        public void setCutoutPolicy(int userId, String packageName, int policy) throws RemoteException {
-        }
+        public void setCutoutPolicy(int userId, String packageName, int policy)
+                throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
         public int getCutoutPolicy(int userId, String packageName) throws RemoteException {
@@ -853,16 +1165,15 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.app.IActivityTaskManager
-        public void startActivityForDexRestart(int taskId) throws RemoteException {
-        }
+        public void startActivityForDexRestart(int taskId) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void registKeyEventListener(IKeyEventListener listener) throws RemoteException {
-        }
+        public void registKeyEventListener(IKeyEventListener listener) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void startAppLockService(IBinder token, Intent intent, boolean showWhenLocked, String pkgName) throws RemoteException {
-        }
+        public void startAppLockService(
+                IBinder token, Intent intent, boolean showWhenLocked, String pkgName)
+                throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
         public List<String> getAppLockedPackageList() throws RemoteException {
@@ -870,8 +1181,7 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.app.IActivityTaskManager
-        public void setAppLockedUnLockPackage(String packageName) throws RemoteException {
-        }
+        public void setAppLockedUnLockPackage(String packageName) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
         public boolean isAppLockedPackage(String packageName) throws RemoteException {
@@ -879,8 +1189,7 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.app.IActivityTaskManager
-        public void clearAppLockedUnLockedApp() throws RemoteException {
-        }
+        public void clearAppLockedUnLockedApp() throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
         public String getAppLockedLockType() throws RemoteException {
@@ -893,8 +1202,8 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.app.IActivityTaskManager
-        public void setAppLockedVerifying(String pkgName, boolean verifying) throws RemoteException {
-        }
+        public void setAppLockedVerifying(String pkgName, boolean verifying)
+                throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
         public boolean isAppLockedVerifying(String pkgName) throws RemoteException {
@@ -902,24 +1211,19 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.app.IActivityTaskManager
-        public void setApplockLockedAppsPackage(String packages) throws RemoteException {
-        }
+        public void setApplockLockedAppsPackage(String packages) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void setApplockLockedAppsClass(String classes) throws RemoteException {
-        }
+        public void setApplockLockedAppsClass(String classes) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void setApplockType(int type) throws RemoteException {
-        }
+        public void setApplockType(int type) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void setApplockEnabled(boolean enable) throws RemoteException {
-        }
+        public void setApplockEnabled(boolean enable) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void setSsecureHiddenAppsPackages(String packages) throws RemoteException {
-        }
+        public void setSsecureHiddenAppsPackages(String packages) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
         public String getApplockLockedAppsPackage() throws RemoteException {
@@ -957,37 +1261,42 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.app.IActivityTaskManager
-        public Map getCoverLauncherEnabledAppListByType(int userId, int type) throws RemoteException {
+        public Map getCoverLauncherEnabledAppListByType(int userId, int type)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.IActivityTaskManager
-        public boolean isPackageEnabledForCoverLauncher(String packageName, int userId) throws RemoteException {
+        public boolean isPackageEnabledForCoverLauncher(String packageName, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityTaskManager
-        public boolean isPackageSettingsEnabledForCoverLauncher(String packageName, int userId, int type) throws RemoteException {
+        public boolean isPackageSettingsEnabledForCoverLauncher(
+                String packageName, int userId, int type) throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityTaskManager
-        public int setCoverLauncherPackageEnabled(String packageName, int userId) throws RemoteException {
+        public int setCoverLauncherPackageEnabled(String packageName, int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityTaskManager
-        public int setCoverLauncherPackageDisabled(String packageName, int userId) throws RemoteException {
+        public int setCoverLauncherPackageDisabled(String packageName, int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityTaskManager
-        public void startActivityForCoverLauncher(Intent intent, String requestReason) throws RemoteException {
-        }
+        public void startActivityForCoverLauncher(Intent intent, String requestReason)
+                throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
-        public void startActivityForCoverLauncherAsUser(Intent intent, String requestReason, int userId) throws RemoteException {
-        }
+        public void startActivityForCoverLauncherAsUser(
+                Intent intent, String requestReason, int userId) throws RemoteException {}
 
         @Override // android.app.IActivityTaskManager
         public TaskSnapshot getTaskSnapshotLowResolution(int taskId) throws RemoteException {
@@ -1000,7 +1309,7 @@ public interface IActivityTaskManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IActivityTaskManager {
+    public abstract static class Stub extends Binder implements IActivityTaskManager {
         static final int TRANSACTION_addAppTask = 42;
         static final int TRANSACTION_alwaysShowUnsupportedCompileSdkWarning = 78;
         static final int TRANSACTION_cancelRecentsAnimation = 34;
@@ -1467,7 +1776,8 @@ public interface IActivityTaskManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, final Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, final Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IActivityTaskManager.DESCRIPTOR);
             }
@@ -1477,7 +1787,8 @@ public interface IActivityTaskManager extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IApplicationThread _arg0 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    IApplicationThread _arg0 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     String _arg1 = data.readString();
                     String _arg2 = data.readString();
                     Intent _arg3 = (Intent) data.readTypedObject(Intent.CREATOR);
@@ -1489,12 +1800,16 @@ public interface IActivityTaskManager extends IInterface {
                     ProfilerInfo _arg9 = (ProfilerInfo) data.readTypedObject(ProfilerInfo.CREATOR);
                     Bundle _arg10 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
-                    int _result = startActivity(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9, _arg10);
+                    int _result =
+                            startActivity(
+                                    _arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8,
+                                    _arg9, _arg10);
                     reply.writeNoException();
                     reply.writeInt(_result);
                     return true;
                 case 2:
-                    IApplicationThread _arg02 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    IApplicationThread _arg02 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     String _arg12 = data.readString();
                     String _arg22 = data.readString();
                     Intent[] _arg32 = (Intent[]) data.createTypedArray(Intent.CREATOR);
@@ -1503,12 +1818,15 @@ public interface IActivityTaskManager extends IInterface {
                     Bundle _arg62 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     int _arg72 = data.readInt();
                     data.enforceNoDataAvail();
-                    int _result2 = startActivities(_arg02, _arg12, _arg22, _arg32, _arg42, _arg52, _arg62, _arg72);
+                    int _result2 =
+                            startActivities(
+                                    _arg02, _arg12, _arg22, _arg32, _arg42, _arg52, _arg62, _arg72);
                     reply.writeNoException();
                     reply.writeInt(_result2);
                     return true;
                 case 3:
-                    IApplicationThread _arg03 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    IApplicationThread _arg03 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     String _arg13 = data.readString();
                     String _arg23 = data.readString();
                     Intent _arg33 = (Intent) data.readTypedObject(Intent.CREATOR);
@@ -1521,7 +1839,10 @@ public interface IActivityTaskManager extends IInterface {
                     Bundle _arg102 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     int _arg11 = data.readInt();
                     data.enforceNoDataAvail();
-                    int _result3 = startActivityAsUser(_arg03, _arg13, _arg23, _arg33, _arg43, _arg53, _arg63, _arg73, _arg82, _arg92, _arg102, _arg11);
+                    int _result3 =
+                            startActivityAsUser(
+                                    _arg03, _arg13, _arg23, _arg33, _arg43, _arg53, _arg63, _arg73,
+                                    _arg82, _arg92, _arg102, _arg11);
                     reply.writeNoException();
                     reply.writeInt(_result3);
                     return true;
@@ -1535,7 +1856,8 @@ public interface IActivityTaskManager extends IInterface {
                     reply.writeBoolean(_result4);
                     return true;
                 case 5:
-                    IApplicationThread _arg05 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    IApplicationThread _arg05 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     IIntentSender _arg15 = IIntentSender.Stub.asInterface(data.readStrongBinder());
                     IBinder _arg25 = data.readStrongBinder();
                     Intent _arg34 = (Intent) data.readTypedObject(Intent.CREATOR);
@@ -1547,12 +1869,16 @@ public interface IActivityTaskManager extends IInterface {
                     int _arg93 = data.readInt();
                     Bundle _arg103 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
-                    int _result5 = startActivityIntentSender(_arg05, _arg15, _arg25, _arg34, _arg44, _arg54, _arg64, _arg74, _arg83, _arg93, _arg103);
+                    int _result5 =
+                            startActivityIntentSender(
+                                    _arg05, _arg15, _arg25, _arg34, _arg44, _arg54, _arg64, _arg74,
+                                    _arg83, _arg93, _arg103);
                     reply.writeNoException();
                     reply.writeInt(_result5);
                     return true;
                 case 6:
-                    IApplicationThread _arg06 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    IApplicationThread _arg06 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     String _arg16 = data.readString();
                     String _arg26 = data.readString();
                     Intent _arg35 = (Intent) data.readTypedObject(Intent.CREATOR);
@@ -1565,12 +1891,16 @@ public interface IActivityTaskManager extends IInterface {
                     Bundle _arg104 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     int _arg112 = data.readInt();
                     data.enforceNoDataAvail();
-                    WaitResult _result6 = startActivityAndWait(_arg06, _arg16, _arg26, _arg35, _arg45, _arg55, _arg65, _arg75, _arg84, _arg94, _arg104, _arg112);
+                    WaitResult _result6 =
+                            startActivityAndWait(
+                                    _arg06, _arg16, _arg26, _arg35, _arg45, _arg55, _arg65, _arg75,
+                                    _arg84, _arg94, _arg104, _arg112);
                     reply.writeNoException();
                     reply.writeTypedObject(_result6, 1);
                     return true;
                 case 7:
-                    IApplicationThread _arg07 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    IApplicationThread _arg07 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     String _arg17 = data.readString();
                     String _arg27 = data.readString();
                     Intent _arg36 = (Intent) data.readTypedObject(Intent.CREATOR);
@@ -1579,11 +1909,15 @@ public interface IActivityTaskManager extends IInterface {
                     String _arg66 = data.readString();
                     int _arg76 = data.readInt();
                     int _arg85 = data.readInt();
-                    Configuration _arg95 = (Configuration) data.readTypedObject(Configuration.CREATOR);
+                    Configuration _arg95 =
+                            (Configuration) data.readTypedObject(Configuration.CREATOR);
                     Bundle _arg105 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     int _arg113 = data.readInt();
                     data.enforceNoDataAvail();
-                    int _result7 = startActivityWithConfig(_arg07, _arg17, _arg27, _arg36, _arg46, _arg56, _arg66, _arg76, _arg85, _arg95, _arg105, _arg113);
+                    int _result7 =
+                            startActivityWithConfig(
+                                    _arg07, _arg17, _arg27, _arg36, _arg46, _arg56, _arg66, _arg76,
+                                    _arg85, _arg95, _arg105, _arg113);
                     reply.writeNoException();
                     reply.writeInt(_result7);
                     return true;
@@ -1594,14 +1928,19 @@ public interface IActivityTaskManager extends IInterface {
                     int _arg37 = data.readInt();
                     Intent _arg47 = (Intent) data.readTypedObject(Intent.CREATOR);
                     String _arg57 = data.readString();
-                    IVoiceInteractionSession _arg67 = IVoiceInteractionSession.Stub.asInterface(data.readStrongBinder());
-                    IVoiceInteractor _arg77 = IVoiceInteractor.Stub.asInterface(data.readStrongBinder());
+                    IVoiceInteractionSession _arg67 =
+                            IVoiceInteractionSession.Stub.asInterface(data.readStrongBinder());
+                    IVoiceInteractor _arg77 =
+                            IVoiceInteractor.Stub.asInterface(data.readStrongBinder());
                     int _arg86 = data.readInt();
                     ProfilerInfo _arg96 = (ProfilerInfo) data.readTypedObject(ProfilerInfo.CREATOR);
                     Bundle _arg106 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     int _arg114 = data.readInt();
                     data.enforceNoDataAvail();
-                    int _result8 = startVoiceActivity(_arg08, _arg18, _arg28, _arg37, _arg47, _arg57, _arg67, _arg77, _arg86, _arg96, _arg106, _arg114);
+                    int _result8 =
+                            startVoiceActivity(
+                                    _arg08, _arg18, _arg28, _arg37, _arg47, _arg57, _arg67, _arg77,
+                                    _arg86, _arg96, _arg106, _arg114);
                     reply.writeNoException();
                     reply.writeInt(_result8);
                     return true;
@@ -1622,12 +1961,16 @@ public interface IActivityTaskManager extends IInterface {
                     Bundle _arg68 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     int _arg78 = data.readInt();
                     data.enforceNoDataAvail();
-                    int _result10 = startAssistantActivity(_arg010, _arg19, _arg29, _arg38, _arg48, _arg58, _arg68, _arg78);
+                    int _result10 =
+                            startAssistantActivity(
+                                    _arg010, _arg19, _arg29, _arg38, _arg48, _arg58, _arg68,
+                                    _arg78);
                     reply.writeNoException();
                     reply.writeInt(_result10);
                     return true;
                 case 11:
-                    IApplicationThread _arg011 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    IApplicationThread _arg011 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     String _arg110 = data.readString();
                     String _arg210 = data.readString();
                     int _arg39 = data.readInt();
@@ -1636,14 +1979,18 @@ public interface IActivityTaskManager extends IInterface {
                     int _arg69 = data.readInt();
                     int _arg79 = data.readInt();
                     data.enforceNoDataAvail();
-                    int _result11 = startActivityFromGameSession(_arg011, _arg110, _arg210, _arg39, _arg49, _arg59, _arg69, _arg79);
+                    int _result11 =
+                            startActivityFromGameSession(
+                                    _arg011, _arg110, _arg210, _arg39, _arg49, _arg59, _arg69,
+                                    _arg79);
                     reply.writeNoException();
                     reply.writeInt(_result11);
                     return true;
                 case 12:
                     Intent _arg012 = (Intent) data.readTypedObject(Intent.CREATOR);
                     long _arg111 = data.readLong();
-                    IRecentsAnimationRunner _arg211 = IRecentsAnimationRunner.Stub.asInterface(data.readStrongBinder());
+                    IRecentsAnimationRunner _arg211 =
+                            IRecentsAnimationRunner.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     startRecentsActivity(_arg012, _arg111, _arg211);
                     reply.writeNoException();
@@ -1657,7 +2004,8 @@ public interface IActivityTaskManager extends IInterface {
                     reply.writeInt(_result12);
                     return true;
                 case 14:
-                    IApplicationThread _arg014 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    IApplicationThread _arg014 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     String _arg116 = data.readString();
                     Intent _arg212 = (Intent) data.readTypedObject(Intent.CREATOR);
                     String _arg310 = data.readString();
@@ -1670,7 +2018,10 @@ public interface IActivityTaskManager extends IInterface {
                     boolean _arg107 = data.readBoolean();
                     int _arg117 = data.readInt();
                     data.enforceNoDataAvail();
-                    int _result13 = startActivityAsCaller(_arg014, _arg116, _arg212, _arg310, _arg410, _arg510, _arg610, _arg710, _arg87, _arg97, _arg107, _arg117);
+                    int _result13 =
+                            startActivityAsCaller(
+                                    _arg014, _arg116, _arg212, _arg310, _arg410, _arg510, _arg610,
+                                    _arg710, _arg87, _arg97, _arg107, _arg117);
                     reply.writeNoException();
                     reply.writeInt(_result13);
                     return true;
@@ -1680,7 +2031,8 @@ public interface IActivityTaskManager extends IInterface {
                     String _arg213 = data.readString();
                     int _arg311 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result14 = isActivityStartAllowedOnDisplay(_arg015, _arg118, _arg213, _arg311);
+                    boolean _result14 =
+                            isActivityStartAllowedOnDisplay(_arg015, _arg118, _arg213, _arg311);
                     reply.writeNoException();
                     reply.writeBoolean(_result14);
                     return true;
@@ -1741,12 +2093,14 @@ public interface IActivityTaskManager extends IInterface {
                     boolean _arg214 = data.readBoolean();
                     int _arg312 = data.readInt();
                     data.enforceNoDataAvail();
-                    List<ActivityManager.RunningTaskInfo> _result19 = getTasks(_arg021, _arg120, _arg214, _arg312);
+                    List<ActivityManager.RunningTaskInfo> _result19 =
+                            getTasks(_arg021, _arg120, _arg214, _arg312);
                     reply.writeNoException();
                     reply.writeTypedList(_result19, 1);
                     return true;
                 case 26:
-                    IApplicationThread _arg022 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    IApplicationThread _arg022 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     String _arg121 = data.readString();
                     int _arg215 = data.readInt();
                     int _arg313 = data.readInt();
@@ -1760,7 +2114,8 @@ public interface IActivityTaskManager extends IInterface {
                     int _arg122 = data.readInt();
                     int _arg216 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParceledListSlice<ActivityManager.RecentTaskInfo> _result20 = getRecentTasks(_arg023, _arg122, _arg216);
+                    ParceledListSlice<ActivityManager.RecentTaskInfo> _result20 =
+                            getRecentTasks(_arg023, _arg122, _arg216);
                     reply.writeNoException();
                     reply.writeTypedObject(_result20, 1);
                     return true;
@@ -1772,8 +2127,10 @@ public interface IActivityTaskManager extends IInterface {
                 case 29:
                     IBinder _arg024 = data.readStrongBinder();
                     Bundle _arg123 = (Bundle) data.readTypedObject(Bundle.CREATOR);
-                    AssistStructure _arg217 = (AssistStructure) data.readTypedObject(AssistStructure.CREATOR);
-                    AssistContent _arg314 = (AssistContent) data.readTypedObject(AssistContent.CREATOR);
+                    AssistStructure _arg217 =
+                            (AssistStructure) data.readTypedObject(AssistStructure.CREATOR);
+                    AssistContent _arg314 =
+                            (AssistContent) data.readTypedObject(AssistContent.CREATOR);
                     Uri _arg412 = (Uri) data.readTypedObject(Uri.CREATOR);
                     data.enforceNoDataAvail();
                     reportAssistContextExtras(_arg024, _arg123, _arg217, _arg314, _arg412);
@@ -1845,7 +2202,8 @@ public interface IActivityTaskManager extends IInterface {
                     return true;
                 case 41:
                     IBinder _arg032 = data.readStrongBinder();
-                    IVoiceInteractionSession _arg033 = IVoiceInteractionSession.Stub.asInterface(_arg032);
+                    IVoiceInteractionSession _arg033 =
+                            IVoiceInteractionSession.Stub.asInterface(_arg032);
                     data.enforceNoDataAvail();
                     finishVoiceTask(_arg033);
                     reply.writeNoException();
@@ -1853,7 +2211,9 @@ public interface IActivityTaskManager extends IInterface {
                 case 42:
                     IBinder _arg034 = data.readStrongBinder();
                     Intent _arg125 = (Intent) data.readTypedObject(Intent.CREATOR);
-                    ActivityManager.TaskDescription _arg218 = (ActivityManager.TaskDescription) data.readTypedObject(ActivityManager.TaskDescription.CREATOR);
+                    ActivityManager.TaskDescription _arg218 =
+                            (ActivityManager.TaskDescription)
+                                    data.readTypedObject(ActivityManager.TaskDescription.CREATOR);
                     Bitmap _arg315 = (Bitmap) data.readTypedObject(Bitmap.CREATOR);
                     data.enforceNoDataAvail();
                     int _result27 = addAppTask(_arg034, _arg125, _arg218, _arg315);
@@ -1866,7 +2226,8 @@ public interface IActivityTaskManager extends IInterface {
                     reply.writeTypedObject(_result28, 1);
                     return true;
                 case 44:
-                    IApplicationThread _arg035 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    IApplicationThread _arg035 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     releaseSomeActivities(_arg035);
                     return true;
@@ -1879,13 +2240,15 @@ public interface IActivityTaskManager extends IInterface {
                     reply.writeTypedObject(_result29, 1);
                     return true;
                 case 46:
-                    ITaskStackListener _arg037 = ITaskStackListener.Stub.asInterface(data.readStrongBinder());
+                    ITaskStackListener _arg037 =
+                            ITaskStackListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerTaskStackListener(_arg037);
                     reply.writeNoException();
                     return true;
                 case 47:
-                    ITaskStackListener _arg038 = ITaskStackListener.Stub.asInterface(data.readStrongBinder());
+                    ITaskStackListener _arg038 =
+                            ITaskStackListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterTaskStackListener(_arg038);
                     reply.writeNoException();
@@ -1948,7 +2311,8 @@ public interface IActivityTaskManager extends IInterface {
                 case 56:
                     int _arg046 = data.readInt();
                     data.enforceNoDataAvail();
-                    List<ActivityTaskManager.RootTaskInfo> _result32 = getAllRootTaskInfosOnDisplay(_arg046);
+                    List<ActivityTaskManager.RootTaskInfo> _result32 =
+                            getAllRootTaskInfosOnDisplay(_arg046);
                     reply.writeNoException();
                     reply.writeTypedList(_result32, 1);
                     return true;
@@ -1957,7 +2321,8 @@ public interface IActivityTaskManager extends IInterface {
                     int _arg132 = data.readInt();
                     int _arg221 = data.readInt();
                     data.enforceNoDataAvail();
-                    ActivityTaskManager.RootTaskInfo _result33 = getRootTaskInfoOnDisplay(_arg047, _arg132, _arg221);
+                    ActivityTaskManager.RootTaskInfo _result33 =
+                            getRootTaskInfoOnDisplay(_arg047, _arg132, _arg221);
                     reply.writeNoException();
                     reply.writeTypedObject(_result33, 1);
                     return true;
@@ -1977,18 +2342,22 @@ public interface IActivityTaskManager extends IInterface {
                     return true;
                 case 60:
                     int _arg050 = data.readInt();
-                    IAssistDataReceiver _arg134 = IAssistDataReceiver.Stub.asInterface(data.readStrongBinder());
+                    IAssistDataReceiver _arg134 =
+                            IAssistDataReceiver.Stub.asInterface(data.readStrongBinder());
                     Bundle _arg222 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     IBinder _arg316 = data.readStrongBinder();
                     boolean _arg413 = data.readBoolean();
                     boolean _arg511 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    boolean _result35 = requestAssistContextExtras(_arg050, _arg134, _arg222, _arg316, _arg413, _arg511);
+                    boolean _result35 =
+                            requestAssistContextExtras(
+                                    _arg050, _arg134, _arg222, _arg316, _arg413, _arg511);
                     reply.writeNoException();
                     reply.writeBoolean(_result35);
                     return true;
                 case 61:
-                    IAssistDataReceiver _arg051 = IAssistDataReceiver.Stub.asInterface(data.readStrongBinder());
+                    IAssistDataReceiver _arg051 =
+                            IAssistDataReceiver.Stub.asInterface(data.readStrongBinder());
                     Bundle _arg135 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     IBinder _arg223 = data.readStrongBinder();
                     int _arg317 = data.readInt();
@@ -2003,12 +2372,14 @@ public interface IActivityTaskManager extends IInterface {
                     reply.writeBoolean(_result37);
                     return true;
                 case 63:
-                    IAssistDataReceiver _arg052 = IAssistDataReceiver.Stub.asInterface(data.readStrongBinder());
+                    IAssistDataReceiver _arg052 =
+                            IAssistDataReceiver.Stub.asInterface(data.readStrongBinder());
                     int _arg136 = data.readInt();
                     String _arg224 = data.readString();
                     String _arg318 = data.readString();
                     data.enforceNoDataAvail();
-                    boolean _result38 = requestAssistDataForTask(_arg052, _arg136, _arg224, _arg318);
+                    boolean _result38 =
+                            requestAssistDataForTask(_arg052, _arg136, _arg224, _arg318);
                     reply.writeNoException();
                     reply.writeBoolean(_result38);
                     return true;
@@ -2067,7 +2438,8 @@ public interface IActivityTaskManager extends IInterface {
                     reply.writeInt(_result44);
                     return true;
                 case 73:
-                    Configuration _arg058 = (Configuration) data.readTypedObject(Configuration.CREATOR);
+                    Configuration _arg058 =
+                            (Configuration) data.readTypedObject(Configuration.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result45 = updateConfiguration(_arg058);
                     reply.writeNoException();
@@ -2082,7 +2454,9 @@ public interface IActivityTaskManager extends IInterface {
                     return true;
                 case 75:
                     String _arg060 = data.readString();
-                    RemoteAnimationAdapter _arg140 = (RemoteAnimationAdapter) data.readTypedObject(RemoteAnimationAdapter.CREATOR);
+                    RemoteAnimationAdapter _arg140 =
+                            (RemoteAnimationAdapter)
+                                    data.readTypedObject(RemoteAnimationAdapter.CREATOR);
                     IBinder _arg225 = data.readStrongBinder();
                     data.enforceNoDataAvail();
                     registerRemoteAnimationForNextActivityStart(_arg060, _arg140, _arg225);
@@ -2090,22 +2464,29 @@ public interface IActivityTaskManager extends IInterface {
                     return true;
                 case 76:
                     String _arg061 = data.readString();
-                    RemoteAnimationAdapter _arg141 = (RemoteAnimationAdapter) data.readTypedObject(RemoteAnimationAdapter.CREATOR);
+                    RemoteAnimationAdapter _arg141 =
+                            (RemoteAnimationAdapter)
+                                    data.readTypedObject(RemoteAnimationAdapter.CREATOR);
                     IBinder _arg226 = data.readStrongBinder();
-                    RemoteTransition _arg319 = (RemoteTransition) data.readTypedObject(RemoteTransition.CREATOR);
+                    RemoteTransition _arg319 =
+                            (RemoteTransition) data.readTypedObject(RemoteTransition.CREATOR);
                     data.enforceNoDataAvail();
-                    registerRemoteTransitionForNextActivityStart(_arg061, _arg141, _arg226, _arg319);
+                    registerRemoteTransitionForNextActivityStart(
+                            _arg061, _arg141, _arg226, _arg319);
                     reply.writeNoException();
                     return true;
                 case 77:
                     int _arg062 = data.readInt();
-                    RemoteAnimationDefinition _arg142 = (RemoteAnimationDefinition) data.readTypedObject(RemoteAnimationDefinition.CREATOR);
+                    RemoteAnimationDefinition _arg142 =
+                            (RemoteAnimationDefinition)
+                                    data.readTypedObject(RemoteAnimationDefinition.CREATOR);
                     data.enforceNoDataAvail();
                     registerRemoteAnimationsForDisplay(_arg062, _arg142);
                     reply.writeNoException();
                     return true;
                 case 78:
-                    ComponentName _arg063 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg063 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     alwaysShowUnsupportedCompileSdkWarning(_arg063);
                     reply.writeNoException();
@@ -2131,14 +2512,16 @@ public interface IActivityTaskManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 83:
-                    IActivityController _arg066 = IActivityController.Stub.asInterface(data.readStrongBinder());
+                    IActivityController _arg066 =
+                            IActivityController.Stub.asInterface(data.readStrongBinder());
                     boolean _arg143 = data.readBoolean();
                     data.enforceNoDataAvail();
                     setActivityController(_arg066, _arg143);
                     reply.writeNoException();
                     return true;
                 case 84:
-                    IVoiceInteractionSession _arg067 = IVoiceInteractionSession.Stub.asInterface(data.readStrongBinder());
+                    IVoiceInteractionSession _arg067 =
+                            IVoiceInteractionSession.Stub.asInterface(data.readStrongBinder());
                     boolean _arg144 = data.readBoolean();
                     data.enforceNoDataAvail();
                     setVoiceKeepAwake(_arg067, _arg144);
@@ -2180,13 +2563,18 @@ public interface IActivityTaskManager extends IInterface {
                     return true;
                 case 90:
                     int _arg073 = data.readInt();
-                    SplashScreenView.SplashScreenViewParcelable _arg147 = (SplashScreenView.SplashScreenViewParcelable) data.readTypedObject(SplashScreenView.SplashScreenViewParcelable.CREATOR);
+                    SplashScreenView.SplashScreenViewParcelable _arg147 =
+                            (SplashScreenView.SplashScreenViewParcelable)
+                                    data.readTypedObject(
+                                            SplashScreenView.SplashScreenViewParcelable.CREATOR);
                     data.enforceNoDataAvail();
                     onSplashScreenViewCopyFinished(_arg073, _arg147);
                     reply.writeNoException();
                     return true;
                 case 91:
-                    PictureInPictureUiState _arg074 = (PictureInPictureUiState) data.readTypedObject(PictureInPictureUiState.CREATOR);
+                    PictureInPictureUiState _arg074 =
+                            (PictureInPictureUiState)
+                                    data.readTypedObject(PictureInPictureUiState.CREATOR);
                     data.enforceNoDataAvail();
                     onPictureInPictureUiStateChanged(_arg074);
                     reply.writeNoException();
@@ -2205,14 +2593,18 @@ public interface IActivityTaskManager extends IInterface {
                     reply.writeBoolean(_result48);
                     return true;
                 case 94:
-                    IApplicationThread _arg077 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    IApplicationThread _arg077 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setRunningRemoteTransitionDelegate(_arg077);
                     reply.writeNoException();
                     return true;
                 case 95:
-                    RemoteCallback _arg078 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
-                    BackAnimationAdapter _arg148 = (BackAnimationAdapter) data.readTypedObject(BackAnimationAdapter.CREATOR);
+                    RemoteCallback _arg078 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    BackAnimationAdapter _arg148 =
+                            (BackAnimationAdapter)
+                                    data.readTypedObject(BackAnimationAdapter.CREATOR);
                     data.enforceNoDataAvail();
                     BackNavigationInfo _result49 = startBackNavigation(_arg078, _arg148);
                     reply.writeNoException();
@@ -2220,14 +2612,16 @@ public interface IActivityTaskManager extends IInterface {
                     return true;
                 case 96:
                     IBinder _arg079 = data.readStrongBinder();
-                    IScreenCaptureObserver _arg149 = IScreenCaptureObserver.Stub.asInterface(data.readStrongBinder());
+                    IScreenCaptureObserver _arg149 =
+                            IScreenCaptureObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerScreenCaptureObserver(_arg079, _arg149);
                     reply.writeNoException();
                     return true;
                 case 97:
                     IBinder _arg080 = data.readStrongBinder();
-                    IScreenCaptureObserver _arg150 = IScreenCaptureObserver.Stub.asInterface(data.readStrongBinder());
+                    IScreenCaptureObserver _arg150 =
+                            IScreenCaptureObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterScreenCaptureObserver(_arg080, _arg150);
                     reply.writeNoException();
@@ -2246,7 +2640,8 @@ public interface IActivityTaskManager extends IInterface {
                     String _arg081 = data.readString();
                     int _arg151 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParceledListSlice<CompatChangeablePackageInfo> _result52 = getCompatChangeablePackageInfoList(_arg081, _arg151);
+                    ParceledListSlice<CompatChangeablePackageInfo> _result52 =
+                            getCompatChangeablePackageInfoList(_arg081, _arg151);
                     reply.writeNoException();
                     reply.writeTypedObject(_result52, 1);
                     return true;
@@ -2311,12 +2706,16 @@ public interface IActivityTaskManager extends IInterface {
                     long _arg320 = data.readLong();
                     int N = data.readInt();
                     final Map<String, String> _arg414 = N < 0 ? null : new HashMap<>();
-                    IntStream.range(0, N).forEach(new IntConsumer() { // from class: android.app.IActivityTaskManager$Stub$$ExternalSyntheticLambda0
-                        @Override // java.util.function.IntConsumer
-                        public final void accept(int i) {
-                            IActivityTaskManager.Stub.lambda$onTransact$0(Parcel.this, _arg414, i);
-                        }
-                    });
+                    IntStream.range(0, N)
+                            .forEach(
+                                    new IntConsumer() { // from class:
+                                        // android.app.IActivityTaskManager$Stub$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.IntConsumer
+                                        public final void accept(int i) {
+                                            IActivityTaskManager.Stub.lambda$onTransact$0(
+                                                    Parcel.this, _arg414, i);
+                                        }
+                                    });
                     data.enforceNoDataAvail();
                     sendSaLoggingBroadcast(_arg089, _arg156, _arg228, _arg320, _arg414);
                     return true;
@@ -2507,7 +2906,8 @@ public interface IActivityTaskManager extends IInterface {
                     int _arg164 = data.readInt();
                     int _arg232 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result72 = isPackageSettingsEnabledForCoverLauncher(_arg0111, _arg164, _arg232);
+                    boolean _result72 =
+                            isPackageSettingsEnabledForCoverLauncher(_arg0111, _arg164, _arg232);
                     reply.writeNoException();
                     reply.writeBoolean(_result72);
                     return true;
@@ -2576,7 +2976,19 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public int startActivity(IApplicationThread caller, String callingPackage, String callingFeatureId, Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode, int flags, ProfilerInfo profilerInfo, Bundle options) throws RemoteException {
+            public int startActivity(
+                    IApplicationThread caller,
+                    String callingPackage,
+                    String callingFeatureId,
+                    Intent intent,
+                    String resolvedType,
+                    IBinder resultTo,
+                    String resultWho,
+                    int requestCode,
+                    int flags,
+                    ProfilerInfo profilerInfo,
+                    Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2678,7 +3090,16 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public int startActivities(IApplicationThread caller, String callingPackage, String callingFeatureId, Intent[] intents, String[] resolvedTypes, IBinder resultTo, Bundle options, int userId) throws RemoteException {
+            public int startActivities(
+                    IApplicationThread caller,
+                    String callingPackage,
+                    String callingFeatureId,
+                    Intent[] intents,
+                    String[] resolvedTypes,
+                    IBinder resultTo,
+                    Bundle options,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2702,7 +3123,20 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public int startActivityAsUser(IApplicationThread caller, String callingPackage, String callingFeatureId, Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode, int flags, ProfilerInfo profilerInfo, Bundle options, int userId) throws RemoteException {
+            public int startActivityAsUser(
+                    IApplicationThread caller,
+                    String callingPackage,
+                    String callingFeatureId,
+                    Intent intent,
+                    String resolvedType,
+                    IBinder resultTo,
+                    String resultWho,
+                    int requestCode,
+                    int flags,
+                    ProfilerInfo profilerInfo,
+                    Bundle options,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2805,7 +3239,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public boolean startNextMatchingActivity(IBinder callingActivity, Intent intent, Bundle options) throws RemoteException {
+            public boolean startNextMatchingActivity(
+                    IBinder callingActivity, Intent intent, Bundle options) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2824,7 +3259,19 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public int startActivityIntentSender(IApplicationThread caller, IIntentSender target, IBinder whitelistToken, Intent fillInIntent, String resolvedType, IBinder resultTo, String resultWho, int requestCode, int flagsMask, int flagsValues, Bundle options) throws RemoteException {
+            public int startActivityIntentSender(
+                    IApplicationThread caller,
+                    IIntentSender target,
+                    IBinder whitelistToken,
+                    Intent fillInIntent,
+                    String resolvedType,
+                    IBinder resultTo,
+                    String resultWho,
+                    int requestCode,
+                    int flagsMask,
+                    int flagsValues,
+                    Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2926,7 +3373,20 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public WaitResult startActivityAndWait(IApplicationThread caller, String callingPackage, String callingFeatureId, Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode, int flags, ProfilerInfo profilerInfo, Bundle options, int userId) throws RemoteException {
+            public WaitResult startActivityAndWait(
+                    IApplicationThread caller,
+                    String callingPackage,
+                    String callingFeatureId,
+                    Intent intent,
+                    String resolvedType,
+                    IBinder resultTo,
+                    String resultWho,
+                    int requestCode,
+                    int flags,
+                    ProfilerInfo profilerInfo,
+                    Bundle options,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3010,7 +3470,8 @@ public interface IActivityTaskManager extends IInterface {
                     try {
                         this.mRemote.transact(6, _data, _reply, 0);
                         _reply.readException();
-                        WaitResult _result = (WaitResult) _reply.readTypedObject(WaitResult.CREATOR);
+                        WaitResult _result =
+                                (WaitResult) _reply.readTypedObject(WaitResult.CREATOR);
                         _reply.recycle();
                         _data.recycle();
                         return _result;
@@ -3029,7 +3490,20 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public int startActivityWithConfig(IApplicationThread caller, String callingPackage, String callingFeatureId, Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode, int startFlags, Configuration newConfig, Bundle options, int userId) throws RemoteException {
+            public int startActivityWithConfig(
+                    IApplicationThread caller,
+                    String callingPackage,
+                    String callingFeatureId,
+                    Intent intent,
+                    String resolvedType,
+                    IBinder resultTo,
+                    String resultWho,
+                    int requestCode,
+                    int startFlags,
+                    Configuration newConfig,
+                    Bundle options,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3132,7 +3606,20 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public int startVoiceActivity(String callingPackage, String callingFeatureId, int callingPid, int callingUid, Intent intent, String resolvedType, IVoiceInteractionSession session, IVoiceInteractor interactor, int flags, ProfilerInfo profilerInfo, Bundle options, int userId) throws RemoteException {
+            public int startVoiceActivity(
+                    String callingPackage,
+                    String callingFeatureId,
+                    int callingPid,
+                    int callingUid,
+                    Intent intent,
+                    String resolvedType,
+                    IVoiceInteractionSession session,
+                    IVoiceInteractor interactor,
+                    int flags,
+                    ProfilerInfo profilerInfo,
+                    Bundle options,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3235,7 +3722,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public String getVoiceInteractorPackageName(IBinder callingVoiceInteractor) throws RemoteException {
+            public String getVoiceInteractorPackageName(IBinder callingVoiceInteractor)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3252,7 +3740,16 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public int startAssistantActivity(String callingPackage, String callingFeatureId, int callingPid, int callingUid, Intent intent, String resolvedType, Bundle options, int userId) throws RemoteException {
+            public int startAssistantActivity(
+                    String callingPackage,
+                    String callingFeatureId,
+                    int callingPid,
+                    int callingUid,
+                    Intent intent,
+                    String resolvedType,
+                    Bundle options,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3276,7 +3773,16 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public int startActivityFromGameSession(IApplicationThread caller, String callingPackage, String callingFeatureId, int callingPid, int callingUid, Intent intent, int taskId, int userId) throws RemoteException {
+            public int startActivityFromGameSession(
+                    IApplicationThread caller,
+                    String callingPackage,
+                    String callingFeatureId,
+                    int callingPid,
+                    int callingUid,
+                    Intent intent,
+                    int taskId,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3300,7 +3806,9 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void startRecentsActivity(Intent intent, long eventTime, IRecentsAnimationRunner recentsAnimationRunner) throws RemoteException {
+            public void startRecentsActivity(
+                    Intent intent, long eventTime, IRecentsAnimationRunner recentsAnimationRunner)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3335,7 +3843,20 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public int startActivityAsCaller(IApplicationThread caller, String callingPackage, Intent intent, String resolvedType, IBinder resultTo, String resultWho, int requestCode, int flags, ProfilerInfo profilerInfo, Bundle options, boolean ignoreTargetSecurity, int userId) throws RemoteException {
+            public int startActivityAsCaller(
+                    IApplicationThread caller,
+                    String callingPackage,
+                    Intent intent,
+                    String resolvedType,
+                    IBinder resultTo,
+                    String resultWho,
+                    int requestCode,
+                    int flags,
+                    ProfilerInfo profilerInfo,
+                    Bundle options,
+                    boolean ignoreTargetSecurity,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3438,7 +3959,9 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public boolean isActivityStartAllowedOnDisplay(int displayId, Intent intent, String resolvedType, int userId) throws RemoteException {
+            public boolean isActivityStartAllowedOnDisplay(
+                    int displayId, Intent intent, String resolvedType, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3479,7 +4002,8 @@ public interface IActivityTaskManager extends IInterface {
                     _data.writeInterfaceToken(IActivityTaskManager.DESCRIPTOR);
                     this.mRemote.transact(17, _data, _reply, 0);
                     _reply.readException();
-                    IActivityClientController _result = IActivityClientController.Stub.asInterface(_reply.readStrongBinder());
+                    IActivityClientController _result =
+                            IActivityClientController.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3598,7 +4122,12 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public List<ActivityManager.RunningTaskInfo> getTasks(int maxNum, boolean filterOnlyVisibleRecents, boolean keepIntentExtra, int displayId) throws RemoteException {
+            public List<ActivityManager.RunningTaskInfo> getTasks(
+                    int maxNum,
+                    boolean filterOnlyVisibleRecents,
+                    boolean keepIntentExtra,
+                    int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3609,7 +4138,8 @@ public interface IActivityTaskManager extends IInterface {
                     _data.writeInt(displayId);
                     this.mRemote.transact(25, _data, _reply, 0);
                     _reply.readException();
-                    List<ActivityManager.RunningTaskInfo> _result = _reply.createTypedArrayList(ActivityManager.RunningTaskInfo.CREATOR);
+                    List<ActivityManager.RunningTaskInfo> _result =
+                            _reply.createTypedArrayList(ActivityManager.RunningTaskInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3618,7 +4148,13 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void moveTaskToFront(IApplicationThread app, String callingPackage, int task, int flags, Bundle options) throws RemoteException {
+            public void moveTaskToFront(
+                    IApplicationThread app,
+                    String callingPackage,
+                    int task,
+                    int flags,
+                    Bundle options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3637,7 +4173,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public ParceledListSlice<ActivityManager.RecentTaskInfo> getRecentTasks(int maxNum, int flags, int userId) throws RemoteException {
+            public ParceledListSlice<ActivityManager.RecentTaskInfo> getRecentTasks(
+                    int maxNum, int flags, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3647,7 +4184,8 @@ public interface IActivityTaskManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(27, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice<ActivityManager.RecentTaskInfo> _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice<ActivityManager.RecentTaskInfo> _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3672,7 +4210,13 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void reportAssistContextExtras(IBinder assistToken, Bundle extras, AssistStructure structure, AssistContent content, Uri referrer) throws RemoteException {
+            public void reportAssistContextExtras(
+                    IBinder assistToken,
+                    Bundle extras,
+                    AssistStructure structure,
+                    AssistContent content,
+                    Uri referrer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3706,14 +4250,18 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public ActivityTaskManager.RootTaskInfo getFocusedRootTaskInfo() throws RemoteException {
+            public ActivityTaskManager.RootTaskInfo getFocusedRootTaskInfo()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(IActivityTaskManager.DESCRIPTOR);
                     this.mRemote.transact(31, _data, _reply, 0);
                     _reply.readException();
-                    ActivityTaskManager.RootTaskInfo _result = (ActivityTaskManager.RootTaskInfo) _reply.readTypedObject(ActivityTaskManager.RootTaskInfo.CREATOR);
+                    ActivityTaskManager.RootTaskInfo _result =
+                            (ActivityTaskManager.RootTaskInfo)
+                                    _reply.readTypedObject(
+                                            ActivityTaskManager.RootTaskInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3754,7 +4302,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void cancelRecentsAnimation(boolean restoreHomeRootTaskPosition) throws RemoteException {
+            public void cancelRecentsAnimation(boolean restoreHomeRootTaskPosition)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3769,7 +4318,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void updateLockTaskPackages(int userId, String[] packages) throws RemoteException {
+            public void updateLockTaskPackages(int userId, String[] packages)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3878,7 +4428,12 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public int addAppTask(IBinder activityToken, Intent intent, ActivityManager.TaskDescription description, Bitmap thumbnail) throws RemoteException {
+            public int addAppTask(
+                    IBinder activityToken,
+                    Intent intent,
+                    ActivityManager.TaskDescription description,
+                    Bitmap thumbnail)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3926,7 +4481,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public Bitmap getTaskDescriptionIcon(String filename, int userId) throws RemoteException {
+            public Bitmap getTaskDescriptionIcon(String filename, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3944,7 +4500,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void registerTaskStackListener(ITaskStackListener listener) throws RemoteException {
+            public void registerTaskStackListener(ITaskStackListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3959,7 +4516,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void unregisterTaskStackListener(ITaskStackListener listener) throws RemoteException {
+            public void unregisterTaskStackListener(ITaskStackListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4023,7 +4581,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void moveTaskToRootTask(int taskId, int rootTaskId, boolean toTop) throws RemoteException {
+            public void moveTaskToRootTask(int taskId, int rootTaskId, boolean toTop)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4040,7 +4599,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void removeRootTasksInWindowingModes(int[] windowingModes) throws RemoteException {
+            public void removeRootTasksInWindowingModes(int[] windowingModes)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4055,7 +4615,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void removeRootTasksWithActivityTypes(int[] activityTypes) throws RemoteException {
+            public void removeRootTasksWithActivityTypes(int[] activityTypes)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4070,14 +4631,16 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public List<ActivityTaskManager.RootTaskInfo> getAllRootTaskInfos() throws RemoteException {
+            public List<ActivityTaskManager.RootTaskInfo> getAllRootTaskInfos()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(IActivityTaskManager.DESCRIPTOR);
                     this.mRemote.transact(54, _data, _reply, 0);
                     _reply.readException();
-                    List<ActivityTaskManager.RootTaskInfo> _result = _reply.createTypedArrayList(ActivityTaskManager.RootTaskInfo.CREATOR);
+                    List<ActivityTaskManager.RootTaskInfo> _result =
+                            _reply.createTypedArrayList(ActivityTaskManager.RootTaskInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4086,7 +4649,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public ActivityTaskManager.RootTaskInfo getRootTaskInfo(int windowingMode, int activityType) throws RemoteException {
+            public ActivityTaskManager.RootTaskInfo getRootTaskInfo(
+                    int windowingMode, int activityType) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4095,7 +4659,10 @@ public interface IActivityTaskManager extends IInterface {
                     _data.writeInt(activityType);
                     this.mRemote.transact(55, _data, _reply, 0);
                     _reply.readException();
-                    ActivityTaskManager.RootTaskInfo _result = (ActivityTaskManager.RootTaskInfo) _reply.readTypedObject(ActivityTaskManager.RootTaskInfo.CREATOR);
+                    ActivityTaskManager.RootTaskInfo _result =
+                            (ActivityTaskManager.RootTaskInfo)
+                                    _reply.readTypedObject(
+                                            ActivityTaskManager.RootTaskInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4104,7 +4671,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public List<ActivityTaskManager.RootTaskInfo> getAllRootTaskInfosOnDisplay(int displayId) throws RemoteException {
+            public List<ActivityTaskManager.RootTaskInfo> getAllRootTaskInfosOnDisplay(
+                    int displayId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4112,7 +4680,8 @@ public interface IActivityTaskManager extends IInterface {
                     _data.writeInt(displayId);
                     this.mRemote.transact(56, _data, _reply, 0);
                     _reply.readException();
-                    List<ActivityTaskManager.RootTaskInfo> _result = _reply.createTypedArrayList(ActivityTaskManager.RootTaskInfo.CREATOR);
+                    List<ActivityTaskManager.RootTaskInfo> _result =
+                            _reply.createTypedArrayList(ActivityTaskManager.RootTaskInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4121,7 +4690,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public ActivityTaskManager.RootTaskInfo getRootTaskInfoOnDisplay(int windowingMode, int activityType, int displayId) throws RemoteException {
+            public ActivityTaskManager.RootTaskInfo getRootTaskInfoOnDisplay(
+                    int windowingMode, int activityType, int displayId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4131,7 +4701,10 @@ public interface IActivityTaskManager extends IInterface {
                     _data.writeInt(displayId);
                     this.mRemote.transact(57, _data, _reply, 0);
                     _reply.readException();
-                    ActivityTaskManager.RootTaskInfo _result = (ActivityTaskManager.RootTaskInfo) _reply.readTypedObject(ActivityTaskManager.RootTaskInfo.CREATOR);
+                    ActivityTaskManager.RootTaskInfo _result =
+                            (ActivityTaskManager.RootTaskInfo)
+                                    _reply.readTypedObject(
+                                            ActivityTaskManager.RootTaskInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4140,7 +4713,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void setLockScreenShown(boolean showingKeyguard, boolean showingAod) throws RemoteException {
+            public void setLockScreenShown(boolean showingKeyguard, boolean showingAod)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4173,7 +4747,14 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public boolean requestAssistContextExtras(int requestType, IAssistDataReceiver receiver, Bundle receiverExtras, IBinder activityToken, boolean focused, boolean newSessionId) throws RemoteException {
+            public boolean requestAssistContextExtras(
+                    int requestType,
+                    IAssistDataReceiver receiver,
+                    Bundle receiverExtras,
+                    IBinder activityToken,
+                    boolean focused,
+                    boolean newSessionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4195,7 +4776,12 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public boolean requestAutofillData(IAssistDataReceiver receiver, Bundle receiverExtras, IBinder activityToken, int flags) throws RemoteException {
+            public boolean requestAutofillData(
+                    IAssistDataReceiver receiver,
+                    Bundle receiverExtras,
+                    IBinder activityToken,
+                    int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4231,7 +4817,12 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public boolean requestAssistDataForTask(IAssistDataReceiver receiver, int taskId, String callingPackageName, String callingAttributionTag) throws RemoteException {
+            public boolean requestAssistDataForTask(
+                    IAssistDataReceiver receiver,
+                    int taskId,
+                    String callingPackageName,
+                    String callingAttributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4281,14 +4872,16 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public IWindowOrganizerController getWindowOrganizerController() throws RemoteException {
+            public IWindowOrganizerController getWindowOrganizerController()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(IActivityTaskManager.DESCRIPTOR);
                     this.mRemote.transact(66, _data, _reply, 0);
                     _reply.readException();
-                    IWindowOrganizerController _result = IWindowOrganizerController.Stub.asInterface(_reply.readStrongBinder());
+                    IWindowOrganizerController _result =
+                            IWindowOrganizerController.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4320,7 +4913,8 @@ public interface IActivityTaskManager extends IInterface {
                     _data.writeInterfaceToken(IActivityTaskManager.DESCRIPTOR);
                     this.mRemote.transact(68, _data, _reply, 0);
                     _reply.readException();
-                    ConfigurationInfo _result = (ConfigurationInfo) _reply.readTypedObject(ConfigurationInfo.CREATOR);
+                    ConfigurationInfo _result =
+                            (ConfigurationInfo) _reply.readTypedObject(ConfigurationInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4344,7 +4938,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public TaskSnapshot getTaskSnapshot(int taskId, boolean isLowResolution) throws RemoteException {
+            public TaskSnapshot getTaskSnapshot(int taskId, boolean isLowResolution)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4353,7 +4948,8 @@ public interface IActivityTaskManager extends IInterface {
                     _data.writeBoolean(isLowResolution);
                     this.mRemote.transact(70, _data, _reply, 0);
                     _reply.readException();
-                    TaskSnapshot _result = (TaskSnapshot) _reply.readTypedObject(TaskSnapshot.CREATOR);
+                    TaskSnapshot _result =
+                            (TaskSnapshot) _reply.readTypedObject(TaskSnapshot.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4362,7 +4958,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public TaskSnapshot takeTaskSnapshot(int taskId, boolean updateCache) throws RemoteException {
+            public TaskSnapshot takeTaskSnapshot(int taskId, boolean updateCache)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4371,7 +4968,8 @@ public interface IActivityTaskManager extends IInterface {
                     _data.writeBoolean(updateCache);
                     this.mRemote.transact(71, _data, _reply, 0);
                     _reply.readException();
-                    TaskSnapshot _result = (TaskSnapshot) _reply.readTypedObject(TaskSnapshot.CREATOR);
+                    TaskSnapshot _result =
+                            (TaskSnapshot) _reply.readTypedObject(TaskSnapshot.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4429,7 +5027,9 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void registerRemoteAnimationForNextActivityStart(String packageName, RemoteAnimationAdapter adapter, IBinder launchCookie) throws RemoteException {
+            public void registerRemoteAnimationForNextActivityStart(
+                    String packageName, RemoteAnimationAdapter adapter, IBinder launchCookie)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4446,7 +5046,12 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void registerRemoteTransitionForNextActivityStart(String packageName, RemoteAnimationAdapter adapter, IBinder launchCookie, RemoteTransition remoteTransiton) throws RemoteException {
+            public void registerRemoteTransitionForNextActivityStart(
+                    String packageName,
+                    RemoteAnimationAdapter adapter,
+                    IBinder launchCookie,
+                    RemoteTransition remoteTransiton)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4464,7 +5069,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void registerRemoteAnimationsForDisplay(int displayId, RemoteAnimationDefinition definition) throws RemoteException {
+            public void registerRemoteAnimationsForDisplay(
+                    int displayId, RemoteAnimationDefinition definition) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4480,7 +5086,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void alwaysShowUnsupportedCompileSdkWarning(ComponentName activity) throws RemoteException {
+            public void alwaysShowUnsupportedCompileSdkWarning(ComponentName activity)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4553,7 +5160,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void setActivityController(IActivityController watcher, boolean imAMonkey) throws RemoteException {
+            public void setActivityController(IActivityController watcher, boolean imAMonkey)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4569,7 +5177,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void setVoiceKeepAwake(IVoiceInteractionSession session, boolean keepAwake) throws RemoteException {
+            public void setVoiceKeepAwake(IVoiceInteractionSession session, boolean keepAwake)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4602,7 +5211,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void setPackageScreenCompatMode(String packageName, int mode) throws RemoteException {
+            public void setPackageScreenCompatMode(String packageName, int mode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4635,7 +5245,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void setPackageAskScreenCompat(String packageName, boolean ask) throws RemoteException {
+            public void setPackageAskScreenCompat(String packageName, boolean ask)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4651,7 +5262,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void clearLaunchParamsForPackages(List<String> packageNames) throws RemoteException {
+            public void clearLaunchParamsForPackages(List<String> packageNames)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4666,7 +5278,9 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void onSplashScreenViewCopyFinished(int taskId, SplashScreenView.SplashScreenViewParcelable material) throws RemoteException {
+            public void onSplashScreenViewCopyFinished(
+                    int taskId, SplashScreenView.SplashScreenViewParcelable material)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4682,7 +5296,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void onPictureInPictureUiStateChanged(PictureInPictureUiState pipState) throws RemoteException {
+            public void onPictureInPictureUiStateChanged(PictureInPictureUiState pipState)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4729,7 +5344,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void setRunningRemoteTransitionDelegate(IApplicationThread caller) throws RemoteException {
+            public void setRunningRemoteTransitionDelegate(IApplicationThread caller)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4744,7 +5360,9 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public BackNavigationInfo startBackNavigation(RemoteCallback navigationObserver, BackAnimationAdapter adaptor) throws RemoteException {
+            public BackNavigationInfo startBackNavigation(
+                    RemoteCallback navigationObserver, BackAnimationAdapter adaptor)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4753,7 +5371,8 @@ public interface IActivityTaskManager extends IInterface {
                     _data.writeTypedObject(adaptor, 0);
                     this.mRemote.transact(95, _data, _reply, 0);
                     _reply.readException();
-                    BackNavigationInfo _result = (BackNavigationInfo) _reply.readTypedObject(BackNavigationInfo.CREATOR);
+                    BackNavigationInfo _result =
+                            (BackNavigationInfo) _reply.readTypedObject(BackNavigationInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4762,7 +5381,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void registerScreenCaptureObserver(IBinder activityToken, IScreenCaptureObserver observer) throws RemoteException {
+            public void registerScreenCaptureObserver(
+                    IBinder activityToken, IScreenCaptureObserver observer) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4778,7 +5398,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void unregisterScreenCaptureObserver(IBinder activityToken, IScreenCaptureObserver observer) throws RemoteException {
+            public void unregisterScreenCaptureObserver(
+                    IBinder activityToken, IScreenCaptureObserver observer) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4801,7 +5422,8 @@ public interface IActivityTaskManager extends IInterface {
                     _data.writeInterfaceToken(IActivityTaskManager.DESCRIPTOR);
                     this.mRemote.transact(98, _data, _reply, 0);
                     _reply.readException();
-                    IMultiTaskingBinder _result = IMultiTaskingBinder.Stub.asInterface(_reply.readStrongBinder());
+                    IMultiTaskingBinder _result =
+                            IMultiTaskingBinder.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4817,7 +5439,8 @@ public interface IActivityTaskManager extends IInterface {
                     _data.writeInterfaceToken(IActivityTaskManager.DESCRIPTOR);
                     this.mRemote.transact(99, _data, _reply, 0);
                     _reply.readException();
-                    IFoldStarManager _result = IFoldStarManager.Stub.asInterface(_reply.readStrongBinder());
+                    IFoldStarManager _result =
+                            IFoldStarManager.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4826,7 +5449,9 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public ParceledListSlice<CompatChangeablePackageInfo> getCompatChangeablePackageInfoList(String packageName, int userId) throws RemoteException {
+            public ParceledListSlice<CompatChangeablePackageInfo>
+                    getCompatChangeablePackageInfoList(String packageName, int userId)
+                            throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4835,7 +5460,8 @@ public interface IActivityTaskManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(100, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice<CompatChangeablePackageInfo> _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice<CompatChangeablePackageInfo> _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4891,7 +5517,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void setOrientationControlPolicy(int userId, String packageName, int policy) throws RemoteException {
+            public void setOrientationControlPolicy(int userId, String packageName, int policy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4908,7 +5535,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public int getOrientationControlPolicy(int userId, String packageName) throws RemoteException {
+            public int getOrientationControlPolicy(int userId, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4956,7 +5584,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public int getUserOrSystemMinAspectRatioOverrideCode(String packageName, int userId) throws RemoteException {
+            public int getUserOrSystemMinAspectRatioOverrideCode(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4974,7 +5603,13 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void sendSaLoggingBroadcast(String trackingId, String eventId, String detail, long value, Map<String, String> customDimension) throws RemoteException {
+            public void sendSaLoggingBroadcast(
+                    String trackingId,
+                    String eventId,
+                    String detail,
+                    long value,
+                    Map<String, String> customDimension)
+                    throws RemoteException {
                 final Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IActivityTaskManager.DESCRIPTOR);
@@ -4986,12 +5621,16 @@ public interface IActivityTaskManager extends IInterface {
                         _data.writeInt(-1);
                     } else {
                         _data.writeInt(customDimension.size());
-                        customDimension.forEach(new BiConsumer() { // from class: android.app.IActivityTaskManager$Stub$Proxy$$ExternalSyntheticLambda0
-                            @Override // java.util.function.BiConsumer
-                            public final void accept(Object obj, Object obj2) {
-                                IActivityTaskManager.Stub.Proxy.lambda$sendSaLoggingBroadcast$0(Parcel.this, (String) obj, (String) obj2);
-                            }
-                        });
+                        customDimension.forEach(
+                                new BiConsumer() { // from class:
+                                    // android.app.IActivityTaskManager$Stub$Proxy$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.BiConsumer
+                                    public final void accept(Object obj, Object obj2) {
+                                        IActivityTaskManager.Stub.Proxy
+                                                .lambda$sendSaLoggingBroadcast$0(
+                                                        Parcel.this, (String) obj, (String) obj2);
+                                    }
+                                });
                     }
                     this.mRemote.transact(109, _data, null, 1);
                 } finally {
@@ -4999,13 +5638,15 @@ public interface IActivityTaskManager extends IInterface {
                 }
             }
 
-            static /* synthetic */ void lambda$sendSaLoggingBroadcast$0(Parcel _data, String k, String v) {
+            static /* synthetic */ void lambda$sendSaLoggingBroadcast$0(
+                    Parcel _data, String k, String v) {
                 _data.writeString(k);
                 _data.writeString(v);
             }
 
             @Override // android.app.IActivityTaskManager
-            public void sendSaLoggingBroadcastForSetting(String trackingId, String settingId, String value) throws RemoteException {
+            public void sendSaLoggingBroadcastForSetting(
+                    String trackingId, String settingId, String value) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IActivityTaskManager.DESCRIPTOR);
@@ -5036,7 +5677,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void setCutoutPolicy(int userId, String packageName, int policy) throws RemoteException {
+            public void setCutoutPolicy(int userId, String packageName, int policy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5098,7 +5740,9 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void startAppLockService(IBinder token, Intent intent, boolean showWhenLocked, String pkgName) throws RemoteException {
+            public void startAppLockService(
+                    IBinder token, Intent intent, boolean showWhenLocked, String pkgName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5210,7 +5854,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void setAppLockedVerifying(String pkgName, boolean verifying) throws RemoteException {
+            public void setAppLockedVerifying(String pkgName, boolean verifying)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5398,7 +6043,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public List<String> getCoverLauncherAvailableAppList(int userId) throws RemoteException {
+            public List<String> getCoverLauncherAvailableAppList(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5433,7 +6079,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public Map getCoverLauncherEnabledAppListByType(int userId, int type) throws RemoteException {
+            public Map getCoverLauncherEnabledAppListByType(int userId, int type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5452,7 +6099,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public boolean isPackageEnabledForCoverLauncher(String packageName, int userId) throws RemoteException {
+            public boolean isPackageEnabledForCoverLauncher(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5470,7 +6118,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public boolean isPackageSettingsEnabledForCoverLauncher(String packageName, int userId, int type) throws RemoteException {
+            public boolean isPackageSettingsEnabledForCoverLauncher(
+                    String packageName, int userId, int type) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5489,7 +6138,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public int setCoverLauncherPackageEnabled(String packageName, int userId) throws RemoteException {
+            public int setCoverLauncherPackageEnabled(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5507,7 +6157,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public int setCoverLauncherPackageDisabled(String packageName, int userId) throws RemoteException {
+            public int setCoverLauncherPackageDisabled(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5525,7 +6176,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void startActivityForCoverLauncher(Intent intent, String requestReason) throws RemoteException {
+            public void startActivityForCoverLauncher(Intent intent, String requestReason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IActivityTaskManager.DESCRIPTOR);
@@ -5538,7 +6190,8 @@ public interface IActivityTaskManager extends IInterface {
             }
 
             @Override // android.app.IActivityTaskManager
-            public void startActivityForCoverLauncherAsUser(Intent intent, String requestReason, int userId) throws RemoteException {
+            public void startActivityForCoverLauncherAsUser(
+                    Intent intent, String requestReason, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IActivityTaskManager.DESCRIPTOR);
@@ -5560,7 +6213,8 @@ public interface IActivityTaskManager extends IInterface {
                     _data.writeInt(taskId);
                     this.mRemote.transact(144, _data, _reply, 0);
                     _reply.readException();
-                    TaskSnapshot _result = (TaskSnapshot) _reply.readTypedObject(TaskSnapshot.CREATOR);
+                    TaskSnapshot _result =
+                            (TaskSnapshot) _reply.readTypedObject(TaskSnapshot.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

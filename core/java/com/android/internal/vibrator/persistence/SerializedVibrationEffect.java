@@ -1,8 +1,10 @@
 package com.android.internal.vibrator.persistence;
 
 import android.os.VibrationEffect;
+
 import com.android.internal.util.Preconditions;
 import com.android.modules.utils.TypedXmlSerializer;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
@@ -19,7 +21,7 @@ final class SerializedVibrationEffect implements XmlSerializedVibration<Vibratio
 
     SerializedVibrationEffect(SerializedSegment segment) {
         Objects.requireNonNull(segment);
-        this.mSegments = new SerializedSegment[]{segment};
+        this.mSegments = new SerializedSegment[] {segment};
     }
 
     SerializedVibrationEffect(SerializedSegment[] segments) {

@@ -2,9 +2,10 @@ package com.android.server.display.color;
 
 import android.util.ArrayMap;
 import android.util.SparseArray;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
-import com.android.server.display.color.ColorDisplayService;
 import com.android.server.wm.ActivityRecord$$ExternalSyntheticLambda22;
+
 import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -16,7 +17,11 @@ import java.util.Map;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class AppSaturationController {
-    static final float[] TRANSLATION_VECTOR = {FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE};
+    static final float[] TRANSLATION_VECTOR = {
+        FullScreenMagnificationGestureHandler.MAX_SCALE,
+        FullScreenMagnificationGestureHandler.MAX_SCALE,
+        FullScreenMagnificationGestureHandler.MAX_SCALE
+    };
     public final Object mLock = new Object();
     public final Map mAppsMap = new HashMap();
 
@@ -27,10 +32,13 @@ public final class AppSaturationController {
         public final float[] mTransformMatrix = new float[9];
 
         /* renamed from: -$$Nest$maddColorTransformController, reason: not valid java name */
-        public static boolean m473$$Nest$maddColorTransformController(SaturationController saturationController, WeakReference weakReference) {
+        public static boolean m473$$Nest$maddColorTransformController(
+                SaturationController saturationController, WeakReference weakReference) {
             Iterator it = ((ArrayList) saturationController.mControllerRefs).iterator();
             while (it.hasNext()) {
-                if (((ColorDisplayService.ColorTransformController) ((WeakReference) it.next()).get()) == null) {
+                if (((ColorDisplayService.ColorTransformController)
+                                ((WeakReference) it.next()).get())
+                        == null) {
                     it.remove();
                 }
             }
@@ -42,9 +50,13 @@ public final class AppSaturationController {
         }
 
         /* renamed from: -$$Nest$mdump, reason: not valid java name */
-        public static void m474$$Nest$mdump(SaturationController saturationController, PrintWriter printWriter) {
-            printWriter.println("            mSaturationLevels: " + saturationController.mSaturationLevels);
-            printWriter.println("            mControllerRefs count: " + ((ArrayList) saturationController.mControllerRefs).size());
+        public static void m474$$Nest$mdump(
+                SaturationController saturationController, PrintWriter printWriter) {
+            printWriter.println(
+                    "            mSaturationLevels: " + saturationController.mSaturationLevels);
+            printWriter.println(
+                    "            mControllerRefs count: "
+                            + ((ArrayList) saturationController.mControllerRefs).size());
         }
 
         public final boolean updateState() {
@@ -60,9 +72,12 @@ public final class AppSaturationController {
             AppSaturationController.computeGrayscaleTransformMatrix(i / 100.0f, fArr);
             Iterator it = ((ArrayList) this.mControllerRefs).iterator();
             while (it.hasNext()) {
-                ColorDisplayService.ColorTransformController colorTransformController = (ColorDisplayService.ColorTransformController) ((WeakReference) it.next()).get();
+                ColorDisplayService.ColorTransformController colorTransformController =
+                        (ColorDisplayService.ColorTransformController)
+                                ((WeakReference) it.next()).get();
                 if (colorTransformController != null) {
-                    ((ActivityRecord$$ExternalSyntheticLambda22) colorTransformController).applyAppSaturation(fArr, AppSaturationController.TRANSLATION_VECTOR);
+                    ((ActivityRecord$$ExternalSyntheticLambda22) colorTransformController)
+                            .applyAppSaturation(fArr, AppSaturationController.TRANSLATION_VECTOR);
                     z = true;
                 } else {
                     it.remove();

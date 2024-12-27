@@ -1,6 +1,7 @@
 package com.android.internal.pm.parsing.pkg;
 
 import android.content.pm.SigningDetails;
+
 import com.android.server.pm.pkg.AndroidPackage;
 
 /* loaded from: classes5.dex */

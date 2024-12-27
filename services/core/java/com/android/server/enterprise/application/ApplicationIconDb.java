@@ -33,7 +33,10 @@ public final class ApplicationIconDb extends SQLiteOpenHelper {
     public final void onCreate(SQLiteDatabase sQLiteDatabase) {
         if (!isTableExists(sQLiteDatabase)) {
             try {
-                sQLiteDatabase.execSQL("create table ApplicationIcon (_id integer primary key autoincrement, pkgname text, imagedata BLOB, newname text, userid int, nameowner int);");
+                sQLiteDatabase.execSQL(
+                        "create table ApplicationIcon (_id integer primary key autoincrement,"
+                            + " pkgname text, imagedata BLOB, newname text, userid int, nameowner"
+                            + " int);");
                 Log.i("ApplicationIconDb", "::onCreate: Table is Created ");
                 return;
             } catch (SQLException e) {
@@ -45,10 +48,15 @@ public final class ApplicationIconDb extends SQLiteOpenHelper {
         if (isTableExists(sQLiteDatabase)) {
             try {
                 sQLiteDatabase.execSQL("ALTER TABLE ApplicationIcon ADD COLUMN newname TEXT;");
-                sQLiteDatabase.execSQL("ALTER TABLE ApplicationIcon ADD COLUMN " + "userid INT".concat(" DEFAULT 0") + ";");
+                sQLiteDatabase.execSQL(
+                        "ALTER TABLE ApplicationIcon ADD COLUMN "
+                                + "userid INT".concat(" DEFAULT 0")
+                                + ";");
                 sQLiteDatabase.execSQL("ALTER TABLE ApplicationIcon ADD COLUMN nameowner INT;");
             } catch (SQLException e2) {
-                Log.i("ApplicationIconDb", "::insertNewColumns: Exception while table is upgrading ");
+                Log.i(
+                        "ApplicationIconDb",
+                        "::insertNewColumns: Exception while table is upgrading ");
                 e2.printStackTrace();
             }
         }
@@ -58,9 +66,17 @@ public final class ApplicationIconDb extends SQLiteOpenHelper {
     public final void onUpgrade(SQLiteDatabase sQLiteDatabase, int i, int i2) {
         if (i2 == 3) {
             try {
-                int packageUid = this.mContext.getPackageManager().getPackageUid("com.samsung.knox.securefolder", 0);
-                sQLiteDatabase.execSQL("update ApplicationIcon set nameowner=" + packageUid + " where pkgname='com.samsung.knox.securefolder' and nameowner=1000");
-                StringBuilder sb = new StringBuilder("securefolder customizedinfo owner updated to ");
+                int packageUid =
+                        this.mContext
+                                .getPackageManager()
+                                .getPackageUid("com.samsung.knox.securefolder", 0);
+                sQLiteDatabase.execSQL(
+                        "update ApplicationIcon set nameowner="
+                                + packageUid
+                                + " where pkgname='com.samsung.knox.securefolder' and"
+                                + " nameowner=1000");
+                StringBuilder sb =
+                        new StringBuilder("securefolder customizedinfo owner updated to ");
                 sb.append(packageUid);
                 Log.d("ApplicationIconDb", sb.toString());
             } catch (Exception e) {

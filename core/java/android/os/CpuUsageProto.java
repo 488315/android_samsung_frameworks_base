@@ -24,8 +24,7 @@ public final class CpuUsageProto {
         public static final long LOAD15 = 1108101562371L;
         public static final long LOAD5 = 1108101562370L;
 
-        public Load() {
-        }
+        public Load() {}
     }
 
     public final class Stat {
@@ -41,7 +40,6 @@ public final class CpuUsageProto {
         public static final long UPTIME = 1120986464262L;
         public static final long USER_TIME = 1120986464263L;
 
-        public Stat() {
-        }
+        public Stat() {}
     }
 }

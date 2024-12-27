@@ -19,23 +19,31 @@ public final class CrossProfileIntentFilter extends WatchedIntentFilter {
     public final class AnonymousClass1 extends SnapshotCache {
         @Override // com.android.server.utils.SnapshotCache
         public final Object createSnapshot() {
-            CrossProfileIntentFilter crossProfileIntentFilter = new CrossProfileIntentFilter((CrossProfileIntentFilter) this.mSource);
+            CrossProfileIntentFilter crossProfileIntentFilter =
+                    new CrossProfileIntentFilter((CrossProfileIntentFilter) this.mSource);
             crossProfileIntentFilter.seal();
             return crossProfileIntentFilter;
         }
     }
 
     public CrossProfileIntentFilter(TypedXmlPullParser typedXmlPullParser) {
-        this.mTargetUserId = typedXmlPullParser.getAttributeInt((String) null, "targetUserId", -10000);
+        this.mTargetUserId =
+                typedXmlPullParser.getAttributeInt((String) null, "targetUserId", -10000);
         String attributeValue = typedXmlPullParser.getAttributeValue((String) null, "ownerPackage");
         if (attributeValue == null) {
-            String m = CrossProfileIntentFilter$$ExternalSyntheticOutline0.m(typedXmlPullParser, new StringBuilder("Missing element under CrossProfileIntentFilter: ownerPackage at "));
+            String m =
+                    CrossProfileIntentFilter$$ExternalSyntheticOutline0.m(
+                            typedXmlPullParser,
+                            new StringBuilder(
+                                    "Missing element under CrossProfileIntentFilter: ownerPackage"
+                                        + " at "));
             boolean z = PackageManagerService.DEBUG_COMPRESSION;
             PackageManagerServiceUtils.logCriticalInfo(5, m);
             attributeValue = "";
         }
         this.mOwnerPackage = attributeValue;
-        this.mAccessControlLevel = typedXmlPullParser.getAttributeInt((String) null, "accessControl", 0);
+        this.mAccessControlLevel =
+                typedXmlPullParser.getAttributeInt((String) null, "accessControl", 0);
         this.mFlags = typedXmlPullParser.getAttributeInt((String) null, "flags", 0);
         this.mSnapshot = new AnonymousClass1(this, this, null);
         int depth = typedXmlPullParser.getDepth();
@@ -50,7 +58,13 @@ public final class CrossProfileIntentFilter extends WatchedIntentFilter {
                 if (name.equals("filter")) {
                     break;
                 }
-                String m2 = CrossProfileIntentFilter$$ExternalSyntheticOutline0.m(typedXmlPullParser, DumpUtils$$ExternalSyntheticOutline0.m("Unknown element under crossProfile-intent-filters: ", name, " at "));
+                String m2 =
+                        CrossProfileIntentFilter$$ExternalSyntheticOutline0.m(
+                                typedXmlPullParser,
+                                DumpUtils$$ExternalSyntheticOutline0.m(
+                                        "Unknown element under crossProfile-intent-filters: ",
+                                        name,
+                                        " at "));
                 boolean z2 = PackageManagerService.DEBUG_COMPRESSION;
                 PackageManagerServiceUtils.logCriticalInfo(5, m2);
                 XmlUtils.skipCurrentTag(typedXmlPullParser);
@@ -60,7 +74,11 @@ public final class CrossProfileIntentFilter extends WatchedIntentFilter {
             this.mFilter.readFromXml(typedXmlPullParser);
             return;
         }
-        String m3 = CrossProfileIntentFilter$$ExternalSyntheticOutline0.m(typedXmlPullParser, new StringBuilder("Missing element under CrossProfileIntentFilter: filter at "));
+        String m3 =
+                CrossProfileIntentFilter$$ExternalSyntheticOutline0.m(
+                        typedXmlPullParser,
+                        new StringBuilder(
+                                "Missing element under CrossProfileIntentFilter: filter at "));
         boolean z3 = PackageManagerService.DEBUG_COMPRESSION;
         PackageManagerServiceUtils.logCriticalInfo(5, m3);
         XmlUtils.skipCurrentTag(typedXmlPullParser);
@@ -75,7 +93,8 @@ public final class CrossProfileIntentFilter extends WatchedIntentFilter {
         this.mSnapshot = new SnapshotCache.Auto();
     }
 
-    public CrossProfileIntentFilter(WatchedIntentFilter watchedIntentFilter, String str, int i, int i2, int i3) {
+    public CrossProfileIntentFilter(
+            WatchedIntentFilter watchedIntentFilter, String str, int i, int i2, int i3) {
         super(watchedIntentFilter.mFilter);
         this.mTargetUserId = i;
         this.mOwnerPackage = str;
@@ -95,6 +114,10 @@ public final class CrossProfileIntentFilter extends WatchedIntentFilter {
     }
 
     public final String toString() {
-        return "CrossProfileIntentFilter{0x" + Integer.toHexString(System.identityHashCode(this)) + " " + Integer.toString(this.mTargetUserId) + "}";
+        return "CrossProfileIntentFilter{0x"
+                + Integer.toHexString(System.identityHashCode(this))
+                + " "
+                + Integer.toString(this.mTargetUserId)
+                + "}";
     }
 }

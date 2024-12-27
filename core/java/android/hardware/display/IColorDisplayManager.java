@@ -75,7 +75,8 @@ public interface IColorDisplayManager extends IInterface {
         }
 
         @Override // android.hardware.display.IColorDisplayManager
-        public boolean setAppSaturationLevel(String packageName, int saturationLevel) throws RemoteException {
+        public boolean setAppSaturationLevel(String packageName, int saturationLevel)
+                throws RemoteException {
             return false;
         }
 
@@ -150,8 +151,7 @@ public interface IColorDisplayManager extends IInterface {
         }
 
         @Override // android.hardware.display.IColorDisplayManager
-        public void setColorMode(int colorMode) throws RemoteException {
-        }
+        public void setColorMode(int colorMode) throws RemoteException {}
 
         @Override // android.hardware.display.IColorDisplayManager
         public boolean isDisplayWhiteBalanceEnabled() throws RemoteException {
@@ -194,7 +194,7 @@ public interface IColorDisplayManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IColorDisplayManager {
+    public abstract static class Stub extends Binder implements IColorDisplayManager {
         static final int TRANSACTION_getColorMode = 17;
         static final int TRANSACTION_getNightDisplayAutoMode = 10;
         static final int TRANSACTION_getNightDisplayAutoModeRaw = 11;
@@ -232,7 +232,9 @@ public interface IColorDisplayManager extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IColorDisplayManager asInterface(IBinder obj) {
@@ -314,7 +316,8 @@ public interface IColorDisplayManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IColorDisplayManager.DESCRIPTOR);
             }
@@ -525,7 +528,8 @@ public interface IColorDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IColorDisplayManager
-            public boolean setAppSaturationLevel(String packageName, int saturationLevel) throws RemoteException {
+            public boolean setAppSaturationLevel(String packageName, int saturationLevel)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -836,7 +840,8 @@ public interface IColorDisplayManager extends IInterface {
             }
 
             @Override // android.hardware.display.IColorDisplayManager
-            public boolean setReduceBrightColorsActivated(boolean activated) throws RemoteException {
+            public boolean setReduceBrightColorsActivated(boolean activated)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -903,55 +908,95 @@ public interface IColorDisplayManager extends IInterface {
         }
 
         protected void setAppSaturationLevel_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void isSaturationActivated_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void getTransformCapabilities_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setNightDisplayActivated_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void setNightDisplayColorTemperature_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS, getCallingPid(), getCallingUid());
+        protected void setNightDisplayColorTemperature_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void getNightDisplayAutoMode_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setNightDisplayAutoMode_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setNightDisplayCustomStartTime_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setNightDisplayCustomEndTime_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setColorMode_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setDisplayWhiteBalanceEnabled_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setReduceBrightColorsActivated_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         protected void setReduceBrightColorsStrength_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.CONTROL_DISPLAY_COLOR_TRANSFORMS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         @Override // android.os.Binder

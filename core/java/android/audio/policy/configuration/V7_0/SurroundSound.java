@@ -1,9 +1,11 @@
 package android.audio.policy.configuration.V7_0;
 
-import java.io.IOException;
-import javax.xml.datatype.DatatypeConfigurationException;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+
+import javax.xml.datatype.DatatypeConfigurationException;
 
 /* loaded from: classes.dex */
 public class SurroundSound {
@@ -24,7 +26,8 @@ public class SurroundSound {
         this.formats = formats;
     }
 
-    static SurroundSound read(XmlPullParser _parser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static SurroundSound read(XmlPullParser _parser)
+            throws XmlPullParserException, IOException, DatatypeConfigurationException {
         int type;
         SurroundSound _instance = new SurroundSound();
         _parser.getDepth();

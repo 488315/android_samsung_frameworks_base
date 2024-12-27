@@ -1,9 +1,6 @@
 package android.renderscript;
 
 import android.hardware.gnss.GnssSignalType;
-import android.renderscript.Element;
-import android.renderscript.Program;
-import android.renderscript.Type;
 
 @Deprecated
 /* loaded from: classes3.dex */
@@ -38,7 +35,13 @@ public class ProgramVertexFixedFunction extends ProgramVertex {
 
         public ProgramVertexFixedFunction create() {
             this.mRS.validate();
-            long[] tmp = new long[(this.mInputCount + this.mOutputCount + this.mConstantCount + this.mTextureCount) * 2];
+            long[] tmp =
+                    new long
+                            [(this.mInputCount
+                                            + this.mOutputCount
+                                            + this.mConstantCount
+                                            + this.mTextureCount)
+                                    * 2];
             String[] texNames = new String[this.mTextureCount];
             int idx = 0;
             for (int i = 0; i < this.mInputCount; i++) {
@@ -107,7 +110,8 @@ public class ProgramVertexFixedFunction extends ProgramVertex {
             this.mShader += "  gl_PointSize = 1.0;\n";
             this.mShader += "  varColor = ATTRIB_color;\n";
             if (this.mTextureMatrixEnable) {
-                this.mShader += "  varTex0 = (UNI_TexMatrix * vec4(ATTRIB_texture0, 0.0, 1.0)).xy;\n";
+                this.mShader +=
+                        "  varTex0 = (UNI_TexMatrix * vec4(ATTRIB_texture0, 0.0, 1.0)).xy;\n";
             } else {
                 this.mShader += "  varTex0 = ATTRIB_texture0;\n";
             }

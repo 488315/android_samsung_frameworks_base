@@ -2,6 +2,7 @@ package com.samsung.android.graphics.spr.document.attribute;
 
 import android.animation.Animator;
 import android.animation.TimeInterpolator;
+
 import com.samsung.android.graphics.spr.document.SprInputStream;
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorAlpha;
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
@@ -10,6 +11,7 @@ import com.samsung.android.graphics.spr.document.animator.SprAnimatorRotate;
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorScale;
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorStrokeColor;
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorTranslate;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;

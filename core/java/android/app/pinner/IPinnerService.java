@@ -8,6 +8,7 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -28,7 +29,7 @@ public interface IPinnerService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPinnerService {
+    public abstract static class Stub extends Binder implements IPinnerService {
         static final int TRANSACTION_getPinnerStats = 1;
         private final PermissionEnforcer mEnforcer;
 
@@ -42,7 +43,9 @@ public interface IPinnerService extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IPinnerService asInterface(IBinder obj) {
@@ -76,7 +79,8 @@ public interface IPinnerService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IPinnerService.DESCRIPTOR);
             }
@@ -119,7 +123,8 @@ public interface IPinnerService extends IInterface {
                     _data.writeInterfaceToken(IPinnerService.DESCRIPTOR);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    List<PinnedFileStat> _result = _reply.createTypedArrayList(PinnedFileStat.CREATOR);
+                    List<PinnedFileStat> _result =
+                            _reply.createTypedArrayList(PinnedFileStat.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -129,7 +134,8 @@ public interface IPinnerService extends IInterface {
         }
 
         protected void getPinnerStats_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.DUMP, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.DUMP, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

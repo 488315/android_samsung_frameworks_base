@@ -2,7 +2,9 @@ package com.samsung.android.transcode.core;
 
 import android.media.MediaCodec;
 import android.media.MediaMuxer;
+
 import com.samsung.android.transcode.util.LogS;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -115,7 +117,12 @@ public abstract class Encode {
             LogS.d("TranscodeLib", "starting encoder preparation  - SlowMo");
             prepareForRewrite();
         } else {
-            LogS.e("TranscodeLib", "starting encoder preparation  mSMEncode  : " + this.mSMEncode + " mConvert : " + this.mConvert);
+            LogS.e(
+                    "TranscodeLib",
+                    "starting encoder preparation  mSMEncode  : "
+                            + this.mSMEncode
+                            + " mConvert : "
+                            + this.mConvert);
             prepare();
         }
         LogS.d("TranscodeLib", "encoder preparation done.");
@@ -138,12 +145,25 @@ public abstract class Encode {
             File file = new File(this.mOutputFilePath);
             long size = file.length();
             LogS.d("TranscodeLib", "generated output file size : " + size);
-            if (!this.mSMConvert && !this.mConvert && !this.mUserStop && this.mOutputMaxSizeKB != -1 && size / 1024.0d > this.mOutputMaxSizeKB && (this instanceof EncodeVideo)) {
+            if (!this.mSMConvert
+                    && !this.mConvert
+                    && !this.mUserStop
+                    && this.mOutputMaxSizeKB != -1
+                    && size / 1024.0d > this.mOutputMaxSizeKB
+                    && (this instanceof EncodeVideo)) {
                 if (!file.delete()) {
                     LogS.e("TranscodeLib", "Could not clean up file: " + file.getAbsolutePath());
                 }
-                this.mSizeFraction = (((this.mSizeFraction * this.mOutputMaxSizeKB) * 1024.0f) / size) - 0.05f;
-                LogS.d("TranscodeLib", "file size(" + size + ") exceeded the expected(" + (this.mOutputMaxSizeKB * 1024) + ") size limit. new fraction :" + this.mSizeFraction);
+                this.mSizeFraction =
+                        (((this.mSizeFraction * this.mOutputMaxSizeKB) * 1024.0f) / size) - 0.05f;
+                LogS.d(
+                        "TranscodeLib",
+                        "file size("
+                                + size
+                                + ") exceeded the expected("
+                                + (this.mOutputMaxSizeKB * 1024)
+                                + ") size limit. new fraction :"
+                                + this.mSizeFraction);
                 this.mOutputVideoBitRate = -1;
                 this.mSkipFrames = true;
                 if (this.mFramesSkipInterval < 2) {
@@ -172,7 +192,10 @@ public abstract class Encode {
                     }
                     LogS.d("TranscodeLib", "2nd time encoding finished.");
                     release();
-                    LogS.e("TranscodeLib", "2nd generated output size : " + new File(this.mOutputFilePath).length());
+                    LogS.e(
+                            "TranscodeLib",
+                            "2nd generated output size : "
+                                    + new File(this.mOutputFilePath).length());
                     this.m2ndTimeEncoding = false;
                 } finally {
                 }

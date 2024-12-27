@@ -3,8 +3,11 @@ package android.hardware.usb;
 import android.annotation.SystemApi;
 import android.content.Context;
 import android.os.ParcelFileDescriptor;
+
 import com.android.internal.util.Preconditions;
+
 import dalvik.system.CloseGuard;
+
 import java.io.FileDescriptor;
 import java.nio.ByteBuffer;
 import java.util.concurrent.TimeoutException;
@@ -24,7 +27,8 @@ public class UsbDeviceConnection {
 
     private native void native_close();
 
-    private native int native_control_request(int i, int i2, int i3, int i4, byte[] bArr, int i5, int i6, int i7);
+    private native int native_control_request(
+            int i, int i2, int i3, int i4, byte[] bArr, int i5, int i6, int i7);
 
     private native byte[] native_get_desc();
 
@@ -128,20 +132,37 @@ public class UsbDeviceConnection {
         return native_set_configuration(configuration.getId());
     }
 
-    public int controlTransfer(int requestType, int request, int value, int index, byte[] buffer, int length, int timeout) {
+    public int controlTransfer(
+            int requestType,
+            int request,
+            int value,
+            int index,
+            byte[] buffer,
+            int length,
+            int timeout) {
         return controlTransfer(requestType, request, value, index, buffer, 0, length, timeout);
     }
 
-    public int controlTransfer(int requestType, int request, int value, int index, byte[] buffer, int offset, int length, int timeout) {
+    public int controlTransfer(
+            int requestType,
+            int request,
+            int value,
+            int index,
+            byte[] buffer,
+            int offset,
+            int length,
+            int timeout) {
         checkBounds(buffer, offset, length);
-        return native_control_request(requestType, request, value, index, buffer, offset, length, timeout);
+        return native_control_request(
+                requestType, request, value, index, buffer, offset, length, timeout);
     }
 
     public int bulkTransfer(UsbEndpoint endpoint, byte[] buffer, int length, int timeout) {
         return bulkTransfer(endpoint, buffer, 0, length, timeout);
     }
 
-    public int bulkTransfer(UsbEndpoint endpoint, byte[] buffer, int offset, int length, int timeout) {
+    public int bulkTransfer(
+            UsbEndpoint endpoint, byte[] buffer, int offset, int length, int timeout) {
         checkBounds(buffer, offset, length);
         if (this.mContext.getApplicationInfo().targetSdkVersion < 28 && length > 16384) {
             length = 16384;
@@ -167,7 +188,8 @@ public class UsbDeviceConnection {
     }
 
     public UsbRequest requestWait(long timeout) throws TimeoutException {
-        UsbRequest request = native_request_wait(Preconditions.checkArgumentNonnegative(timeout, "timeout"));
+        UsbRequest request =
+                native_request_wait(Preconditions.checkArgumentNonnegative(timeout, "timeout"));
         if (request != null) {
             request.dequeue(true);
         }

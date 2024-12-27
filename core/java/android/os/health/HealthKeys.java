@@ -45,12 +45,14 @@ public class HealthKeys {
                 if (constant != null) {
                     int type = constant.type();
                     if (type >= keys.length) {
-                        throw new RuntimeException("Unknown Constant type " + type + " on " + field);
+                        throw new RuntimeException(
+                                "Unknown Constant type " + type + " on " + field);
                     }
                     try {
                         keys[type].addValue(field.getInt(null));
                     } catch (IllegalAccessException ex) {
-                        throw new RuntimeException("Can't read constant value type=" + type + " field=" + field, ex);
+                        throw new RuntimeException(
+                                "Can't read constant value type=" + type + " field=" + field, ex);
                     }
                 }
             }

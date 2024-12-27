@@ -3,26 +3,29 @@ package android.hardware.biometrics.fingerprint;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public class PointerContext implements Parcelable {
-    public static final Parcelable.Creator<PointerContext> CREATOR = new Parcelable.Creator<PointerContext>() { // from class: android.hardware.biometrics.fingerprint.PointerContext.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PointerContext createFromParcel(Parcel _aidl_source) {
-            PointerContext _aidl_out = new PointerContext();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<PointerContext> CREATOR =
+            new Parcelable.Creator<PointerContext>() { // from class:
+                // android.hardware.biometrics.fingerprint.PointerContext.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PointerContext createFromParcel(Parcel _aidl_source) {
+                    PointerContext _aidl_out = new PointerContext();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PointerContext[] newArray(int _aidl_size) {
-            return new PointerContext[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PointerContext[] newArray(int _aidl_size) {
+                    return new PointerContext[_aidl_size];
+                }
+            };
     public int pointerId = -1;
     public float x = 0.0f;
     public float y = 0.0f;
@@ -157,14 +160,35 @@ public class PointerContext implements Parcelable {
             return false;
         }
         PointerContext that = (PointerContext) other;
-        if (Objects.deepEquals(Integer.valueOf(this.pointerId), Integer.valueOf(that.pointerId)) && Objects.deepEquals(Float.valueOf(this.x), Float.valueOf(that.x)) && Objects.deepEquals(Float.valueOf(this.y), Float.valueOf(that.y)) && Objects.deepEquals(Float.valueOf(this.minor), Float.valueOf(that.minor)) && Objects.deepEquals(Float.valueOf(this.major), Float.valueOf(that.major)) && Objects.deepEquals(Float.valueOf(this.orientation), Float.valueOf(that.orientation)) && Objects.deepEquals(Boolean.valueOf(this.isAod), Boolean.valueOf(that.isAod)) && Objects.deepEquals(Long.valueOf(this.time), Long.valueOf(that.time)) && Objects.deepEquals(Long.valueOf(this.gestureStart), Long.valueOf(that.gestureStart))) {
+        if (Objects.deepEquals(Integer.valueOf(this.pointerId), Integer.valueOf(that.pointerId))
+                && Objects.deepEquals(Float.valueOf(this.x), Float.valueOf(that.x))
+                && Objects.deepEquals(Float.valueOf(this.y), Float.valueOf(that.y))
+                && Objects.deepEquals(Float.valueOf(this.minor), Float.valueOf(that.minor))
+                && Objects.deepEquals(Float.valueOf(this.major), Float.valueOf(that.major))
+                && Objects.deepEquals(
+                        Float.valueOf(this.orientation), Float.valueOf(that.orientation))
+                && Objects.deepEquals(Boolean.valueOf(this.isAod), Boolean.valueOf(that.isAod))
+                && Objects.deepEquals(Long.valueOf(this.time), Long.valueOf(that.time))
+                && Objects.deepEquals(
+                        Long.valueOf(this.gestureStart), Long.valueOf(that.gestureStart))) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.pointerId), Float.valueOf(this.x), Float.valueOf(this.y), Float.valueOf(this.minor), Float.valueOf(this.major), Float.valueOf(this.orientation), Boolean.valueOf(this.isAod), Long.valueOf(this.time), Long.valueOf(this.gestureStart)).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                Integer.valueOf(this.pointerId),
+                                Float.valueOf(this.x),
+                                Float.valueOf(this.y),
+                                Float.valueOf(this.minor),
+                                Float.valueOf(this.major),
+                                Float.valueOf(this.orientation),
+                                Boolean.valueOf(this.isAod),
+                                Long.valueOf(this.time),
+                                Long.valueOf(this.gestureStart))
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

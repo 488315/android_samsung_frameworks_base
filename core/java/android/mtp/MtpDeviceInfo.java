@@ -10,8 +10,7 @@ public class MtpDeviceInfo {
     private String mSerialNumber;
     private String mVersion;
 
-    private MtpDeviceInfo() {
-    }
+    private MtpDeviceInfo() {}
 
     public final String getManufacturer() {
         return this.mManufacturer;

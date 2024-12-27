@@ -7,7 +7,6 @@ public final class ProfileCommon {
         public static final long IID = 1116691496961L;
         public static final long STR = 1151051235330L;
 
-        public InternedString() {
-        }
+        public InternedString() {}
     }
 }

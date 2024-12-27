@@ -1,7 +1,5 @@
 package android.app.appfunctions;
 
-import android.app.appfunctions.IAppFunctionEnabledCallback;
-import android.app.appfunctions.IExecuteAppFunctionCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.ICancellationSignal;
@@ -14,19 +12,35 @@ import android.os.UserHandle;
 public interface IAppFunctionManager extends IInterface {
     public static final String DESCRIPTOR = "android.app.appfunctions.IAppFunctionManager";
 
-    ICancellationSignal executeAppFunction(ExecuteAppFunctionAidlRequest executeAppFunctionAidlRequest, IExecuteAppFunctionCallback iExecuteAppFunctionCallback) throws RemoteException;
+    ICancellationSignal executeAppFunction(
+            ExecuteAppFunctionAidlRequest executeAppFunctionAidlRequest,
+            IExecuteAppFunctionCallback iExecuteAppFunctionCallback)
+            throws RemoteException;
 
-    void setAppFunctionEnabled(String str, String str2, UserHandle userHandle, int i, IAppFunctionEnabledCallback iAppFunctionEnabledCallback) throws RemoteException;
+    void setAppFunctionEnabled(
+            String str,
+            String str2,
+            UserHandle userHandle,
+            int i,
+            IAppFunctionEnabledCallback iAppFunctionEnabledCallback)
+            throws RemoteException;
 
     public static class Default implements IAppFunctionManager {
         @Override // android.app.appfunctions.IAppFunctionManager
-        public ICancellationSignal executeAppFunction(ExecuteAppFunctionAidlRequest request, IExecuteAppFunctionCallback callback) throws RemoteException {
+        public ICancellationSignal executeAppFunction(
+                ExecuteAppFunctionAidlRequest request, IExecuteAppFunctionCallback callback)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.appfunctions.IAppFunctionManager
-        public void setAppFunctionEnabled(String callingPackage, String functionIdentifier, UserHandle userHandle, int enabledState, IAppFunctionEnabledCallback callback) throws RemoteException {
-        }
+        public void setAppFunctionEnabled(
+                String callingPackage,
+                String functionIdentifier,
+                UserHandle userHandle,
+                int enabledState,
+                IAppFunctionEnabledCallback callback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -34,7 +48,7 @@ public interface IAppFunctionManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAppFunctionManager {
+    public abstract static class Stub extends Binder implements IAppFunctionManager {
         static final int TRANSACTION_executeAppFunction = 1;
         static final int TRANSACTION_setAppFunctionEnabled = 2;
 
@@ -75,7 +89,8 @@ public interface IAppFunctionManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAppFunctionManager.DESCRIPTOR);
             }
@@ -85,8 +100,11 @@ public interface IAppFunctionManager extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ExecuteAppFunctionAidlRequest _arg0 = (ExecuteAppFunctionAidlRequest) data.readTypedObject(ExecuteAppFunctionAidlRequest.CREATOR);
-                    IExecuteAppFunctionCallback _arg1 = IExecuteAppFunctionCallback.Stub.asInterface(data.readStrongBinder());
+                    ExecuteAppFunctionAidlRequest _arg0 =
+                            (ExecuteAppFunctionAidlRequest)
+                                    data.readTypedObject(ExecuteAppFunctionAidlRequest.CREATOR);
+                    IExecuteAppFunctionCallback _arg1 =
+                            IExecuteAppFunctionCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     ICancellationSignal _result = executeAppFunction(_arg0, _arg1);
                     reply.writeNoException();
@@ -97,7 +115,8 @@ public interface IAppFunctionManager extends IInterface {
                     String _arg12 = data.readString();
                     UserHandle _arg2 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     int _arg3 = data.readInt();
-                    IAppFunctionEnabledCallback _arg4 = IAppFunctionEnabledCallback.Stub.asInterface(data.readStrongBinder());
+                    IAppFunctionEnabledCallback _arg4 =
+                            IAppFunctionEnabledCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setAppFunctionEnabled(_arg02, _arg12, _arg2, _arg3, _arg4);
                     reply.writeNoException();
@@ -124,7 +143,9 @@ public interface IAppFunctionManager extends IInterface {
             }
 
             @Override // android.app.appfunctions.IAppFunctionManager
-            public ICancellationSignal executeAppFunction(ExecuteAppFunctionAidlRequest request, IExecuteAppFunctionCallback callback) throws RemoteException {
+            public ICancellationSignal executeAppFunction(
+                    ExecuteAppFunctionAidlRequest request, IExecuteAppFunctionCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -133,7 +154,8 @@ public interface IAppFunctionManager extends IInterface {
                     _data.writeStrongInterface(callback);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    ICancellationSignal _result = ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
+                    ICancellationSignal _result =
+                            ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -142,7 +164,13 @@ public interface IAppFunctionManager extends IInterface {
             }
 
             @Override // android.app.appfunctions.IAppFunctionManager
-            public void setAppFunctionEnabled(String callingPackage, String functionIdentifier, UserHandle userHandle, int enabledState, IAppFunctionEnabledCallback callback) throws RemoteException {
+            public void setAppFunctionEnabled(
+                    String callingPackage,
+                    String functionIdentifier,
+                    UserHandle userHandle,
+                    int enabledState,
+                    IAppFunctionEnabledCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

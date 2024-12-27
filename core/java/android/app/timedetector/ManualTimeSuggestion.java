@@ -4,30 +4,36 @@ import android.app.time.UnixEpochTime;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.ShellCommand;
+
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class ManualTimeSuggestion implements Parcelable {
-    public static final Parcelable.Creator<ManualTimeSuggestion> CREATOR = new Parcelable.Creator<ManualTimeSuggestion>() { // from class: android.app.timedetector.ManualTimeSuggestion.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ManualTimeSuggestion createFromParcel(Parcel in) {
-            TimeSuggestionHelper helper = TimeSuggestionHelper.handleCreateFromParcel(ManualTimeSuggestion.class, in);
-            return new ManualTimeSuggestion(helper);
-        }
+    public static final Parcelable.Creator<ManualTimeSuggestion> CREATOR =
+            new Parcelable.Creator<ManualTimeSuggestion>() { // from class:
+                // android.app.timedetector.ManualTimeSuggestion.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ManualTimeSuggestion createFromParcel(Parcel in) {
+                    TimeSuggestionHelper helper =
+                            TimeSuggestionHelper.handleCreateFromParcel(
+                                    ManualTimeSuggestion.class, in);
+                    return new ManualTimeSuggestion(helper);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ManualTimeSuggestion[] newArray(int size) {
-            return new ManualTimeSuggestion[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ManualTimeSuggestion[] newArray(int size) {
+                    return new ManualTimeSuggestion[size];
+                }
+            };
     private final TimeSuggestionHelper mTimeSuggestionHelper;
 
     public ManualTimeSuggestion(UnixEpochTime unixEpochTime) {
-        this.mTimeSuggestionHelper = new TimeSuggestionHelper(ManualTimeSuggestion.class, unixEpochTime);
+        this.mTimeSuggestionHelper =
+                new TimeSuggestionHelper(ManualTimeSuggestion.class, unixEpochTime);
     }
 
     private ManualTimeSuggestion(TimeSuggestionHelper helper) {
@@ -75,8 +81,10 @@ public final class ManualTimeSuggestion implements Parcelable {
         return this.mTimeSuggestionHelper.handleToString();
     }
 
-    public static ManualTimeSuggestion parseCommandLineArg(ShellCommand cmd) throws IllegalArgumentException {
-        return new ManualTimeSuggestion(TimeSuggestionHelper.handleParseCommandLineArg(ManualTimeSuggestion.class, cmd));
+    public static ManualTimeSuggestion parseCommandLineArg(ShellCommand cmd)
+            throws IllegalArgumentException {
+        return new ManualTimeSuggestion(
+                TimeSuggestionHelper.handleParseCommandLineArg(ManualTimeSuggestion.class, cmd));
     }
 
     public static void printCommandLineOpts(PrintWriter pw) {

@@ -2,6 +2,7 @@ package android.view;
 
 import android.graphics.Point;
 import android.graphics.Rect;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */

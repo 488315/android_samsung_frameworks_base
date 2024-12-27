@@ -1,12 +1,15 @@
 package android.os;
 
 import android.annotation.SystemApi;
+
 import dalvik.annotation.optimization.FastNative;
+
+import libcore.util.NativeAllocationRegistry;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.Arrays;
-import libcore.util.NativeAllocationRegistry;
 
 @SystemApi
 /* loaded from: classes3.dex */
@@ -17,8 +20,7 @@ public class HwParcel {
     private long mNativeContext;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Status {
-    }
+    public @interface Status {}
 
     private static final native long native_init();
 
@@ -305,6 +307,7 @@ public class HwParcel {
 
     static {
         long freeFunction = native_init();
-        sNativeRegistry = new NativeAllocationRegistry(HwParcel.class.getClassLoader(), freeFunction, 128L);
+        sNativeRegistry =
+                new NativeAllocationRegistry(HwParcel.class.getClassLoader(), freeFunction, 128L);
     }
 }

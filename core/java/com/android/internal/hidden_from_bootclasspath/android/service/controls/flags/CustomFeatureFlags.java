@@ -10,7 +10,8 @@ import java.util.function.Predicate;
 /* loaded from: classes5.dex */
 public class CustomFeatureFlags implements FeatureFlags {
     private BiPredicate<String, Predicate<FeatureFlags>> mGetValueImpl;
-    private Set<String> mReadOnlyFlagsSet = new HashSet(Arrays.asList(Flags.FLAG_HOME_PANEL_DREAM, ""));
+    private Set<String> mReadOnlyFlagsSet =
+            new HashSet(Arrays.asList(Flags.FLAG_HOME_PANEL_DREAM, ""));
 
     public CustomFeatureFlags(BiPredicate<String, Predicate<FeatureFlags>> getValueImpl) {
         this.mGetValueImpl = getValueImpl;
@@ -18,12 +19,15 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.internal.hidden_from_bootclasspath.android.service.controls.flags.FeatureFlags
     public boolean homePanelDream() {
-        return getValue(Flags.FLAG_HOME_PANEL_DREAM, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.android.service.controls.flags.CustomFeatureFlags$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).homePanelDream();
-            }
-        });
+        return getValue(
+                Flags.FLAG_HOME_PANEL_DREAM,
+                new Predicate() { // from class:
+                                  // com.android.internal.hidden_from_bootclasspath.android.service.controls.flags.CustomFeatureFlags$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).homePanelDream();
+                    }
+                });
     }
 
     public boolean isFlagReadOnlyOptimized(String flagName) {

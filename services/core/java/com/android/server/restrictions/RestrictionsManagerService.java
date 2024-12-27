@@ -15,8 +15,10 @@ import android.os.IUserManager;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
 import android.os.UserHandle;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.server.SystemService;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,11 +34,15 @@ public final class RestrictionsManagerService extends SystemService {
         public final DevicePolicyManagerInternal mDpmInternal;
         public final IUserManager mUm;
 
-        public RestrictionsManagerImpl(RestrictionsManagerService restrictionsManagerService, Context context) {
+        public RestrictionsManagerImpl(
+                RestrictionsManagerService restrictionsManagerService, Context context) {
             this.mContext = context;
             this.mUm = restrictionsManagerService.getBinderService("user");
             this.mDpm = restrictionsManagerService.getBinderService("device_policy");
-            this.mDpmInternal = (DevicePolicyManagerInternal) restrictionsManagerService.getLocalService(DevicePolicyManagerInternal.class);
+            this.mDpmInternal =
+                    (DevicePolicyManagerInternal)
+                            restrictionsManagerService.getLocalService(
+                                    DevicePolicyManagerInternal.class);
         }
 
         public static void enforceCallerMatchesPackage(int i, String str, String str2) {
@@ -57,19 +63,26 @@ public final class RestrictionsManagerService extends SystemService {
             }
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                ComponentName restrictionsProvider = this.mDpm.getRestrictionsProvider(callingUserId);
+                ComponentName restrictionsProvider =
+                        this.mDpm.getRestrictionsProvider(callingUserId);
                 if (restrictionsProvider == null) {
-                    throw new IllegalStateException("Cannot request permission without a restrictions provider registered");
+                    throw new IllegalStateException(
+                            "Cannot request permission without a restrictions provider registered");
                 }
                 String packageName = restrictionsProvider.getPackageName();
                 Intent intent = new Intent("android.content.action.REQUEST_LOCAL_APPROVAL");
                 intent.setPackage(packageName);
-                ResolveInfo resolveIntent = AppGlobals.getPackageManager().resolveIntent(intent, (String) null, 0L, callingUserId);
-                if (resolveIntent == null || (activityInfo = resolveIntent.activityInfo) == null || !activityInfo.exported) {
+                ResolveInfo resolveIntent =
+                        AppGlobals.getPackageManager()
+                                .resolveIntent(intent, (String) null, 0L, callingUserId);
+                if (resolveIntent == null
+                        || (activityInfo = resolveIntent.activityInfo) == null
+                        || !activityInfo.exported) {
                     return null;
                 }
                 ActivityInfo activityInfo2 = resolveIntent.activityInfo;
-                intent.setComponent(new ComponentName(activityInfo2.packageName, activityInfo2.name));
+                intent.setComponent(
+                        new ComponentName(activityInfo2.packageName, activityInfo2.name));
                 return intent;
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -82,7 +95,9 @@ public final class RestrictionsManagerService extends SystemService {
 
         public final List getApplicationRestrictionsPerAdminForUser(int i, String str) {
             DevicePolicyManagerInternal devicePolicyManagerInternal = this.mDpmInternal;
-            return devicePolicyManagerInternal != null ? devicePolicyManagerInternal.getApplicationRestrictionsPerAdminForUser(str, i) : new ArrayList();
+            return devicePolicyManagerInternal != null
+                    ? devicePolicyManagerInternal.getApplicationRestrictionsPerAdminForUser(str, i)
+                    : new ArrayList();
         }
 
         public final boolean hasRestrictionsProvider() {
@@ -98,7 +113,8 @@ public final class RestrictionsManagerService extends SystemService {
             }
         }
 
-        public final void notifyPermissionResponse(String str, PersistableBundle persistableBundle) {
+        public final void notifyPermissionResponse(
+                String str, PersistableBundle persistableBundle) {
             int callingUid = Binder.getCallingUid();
             int userId = UserHandle.getUserId(callingUid);
             if (this.mDpm != null) {
@@ -108,8 +124,12 @@ public final class RestrictionsManagerService extends SystemService {
                     if (restrictionsProvider == null) {
                         throw new SecurityException("No restrictions provider registered for user");
                     }
-                    enforceCallerMatchesPackage(callingUid, restrictionsProvider.getPackageName(), "Restrictions provider does not match caller ");
-                    Intent intent = new Intent("android.content.action.PERMISSION_RESPONSE_RECEIVED");
+                    enforceCallerMatchesPackage(
+                            callingUid,
+                            restrictionsProvider.getPackageName(),
+                            "Restrictions provider does not match caller ");
+                    Intent intent =
+                            new Intent("android.content.action.PERMISSION_RESPONSE_RECEIVED");
                     intent.setPackage(str);
                     intent.putExtra("android.content.extra.RESPONSE_BUNDLE", persistableBundle);
                     this.mContext.sendBroadcastAsUser(intent, new UserHandle(userId));
@@ -119,7 +139,8 @@ public final class RestrictionsManagerService extends SystemService {
             }
         }
 
-        public final void requestPermission(String str, String str2, String str3, PersistableBundle persistableBundle) {
+        public final void requestPermission(
+                String str, String str2, String str3, PersistableBundle persistableBundle) {
             int callingUid = Binder.getCallingUid();
             int userId = UserHandle.getUserId(callingUid);
             if (this.mDpm != null) {
@@ -127,9 +148,12 @@ public final class RestrictionsManagerService extends SystemService {
                 try {
                     ComponentName restrictionsProvider = this.mDpm.getRestrictionsProvider(userId);
                     if (restrictionsProvider == null) {
-                        throw new IllegalStateException("Cannot request permission without a restrictions provider registered");
+                        throw new IllegalStateException(
+                                "Cannot request permission without a restrictions provider"
+                                    + " registered");
                     }
-                    enforceCallerMatchesPackage(callingUid, str, "Package name does not match caller ");
+                    enforceCallerMatchesPackage(
+                            callingUid, str, "Package name does not match caller ");
                     Intent intent = new Intent("android.content.action.REQUEST_PERMISSION");
                     intent.setComponent(restrictionsProvider);
                     intent.putExtra("android.content.extra.PACKAGE_NAME", str);

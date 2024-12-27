@@ -3,15 +3,17 @@ package com.android.server.wm;
 import android.os.Process;
 import android.os.SystemClock;
 import android.util.Slog;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
-import com.android.server.wm.PersisterQueue;
+
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class PersisterQueue {
-    public static final PersisterQueue$$ExternalSyntheticLambda0 EMPTY_ITEM = new PersisterQueue$$ExternalSyntheticLambda0();
+    public static final PersisterQueue$$ExternalSyntheticLambda0 EMPTY_ITEM =
+            new PersisterQueue$$ExternalSyntheticLambda0();
     public final long mInterWriteDelayMs;
     public final LazyTaskWriterThread mLazyTaskWriterThread;
     public final ArrayList mListeners;
@@ -35,11 +37,15 @@ public final class PersisterQueue {
                         isEmpty = PersisterQueue.this.mWriteQueue.isEmpty();
                     }
                     for (int size = PersisterQueue.this.mListeners.size() - 1; size >= 0; size--) {
-                        ((TaskPersister) ((Listener) PersisterQueue.this.mListeners.get(size))).onPreProcessItem(isEmpty);
+                        ((TaskPersister) ((Listener) PersisterQueue.this.mListeners.get(size)))
+                                .onPreProcessItem(isEmpty);
                     }
                     PersisterQueue.m1066$$Nest$mprocessNextItem(PersisterQueue.this);
                 } catch (InterruptedException unused) {
-                    Slog.e("PersisterQueue", "Persister thread is exiting. Should never happen in prod, butit's OK in tests.");
+                    Slog.e(
+                            "PersisterQueue",
+                            "Persister thread is exiting. Should never happen in prod, butit's OK"
+                                + " in tests.");
                     return;
                 }
             }
@@ -47,8 +53,7 @@ public final class PersisterQueue {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface Listener {
-    }
+    public interface Listener {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface WriteQueueItem {
@@ -58,8 +63,7 @@ public final class PersisterQueue {
 
         void process();
 
-        default void updateFrom(WriteQueueItem writeQueueItem) {
-        }
+        default void updateFrom(WriteQueueItem writeQueueItem) {}
     }
 
     /* renamed from: -$$Nest$mprocessNextItem, reason: not valid java name */
@@ -68,7 +72,8 @@ public final class PersisterQueue {
         synchronized (persisterQueue) {
             try {
                 if (persisterQueue.mNextWriteTime != -1) {
-                    persisterQueue.mNextWriteTime = SystemClock.uptimeMillis() + persisterQueue.mInterWriteDelayMs;
+                    persisterQueue.mNextWriteTime =
+                            SystemClock.uptimeMillis() + persisterQueue.mInterWriteDelayMs;
                 }
                 while (persisterQueue.mWriteQueue.isEmpty()) {
                     if (persisterQueue.mNextWriteTime != 0) {
@@ -105,7 +110,12 @@ public final class PersisterQueue {
         this.mListeners = new ArrayList();
         this.mNextWriteTime = 0L;
         if (j < 0 || j2 < 0) {
-            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m("Both inter-write delay and pre-task delay need tobe non-negative. inter-write delay: ", j, "ms pre-task delay: ");
+            StringBuilder m =
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            "Both inter-write delay and pre-task delay need tobe non-negative."
+                                + " inter-write delay: ",
+                            j,
+                            "ms pre-task delay: ");
             m.append(j2);
             throw new IllegalArgumentException(m.toString());
         }
@@ -146,7 +156,8 @@ public final class PersisterQueue {
     public final synchronized void removeItems(Predicate predicate, Class cls) {
         for (int size = this.mWriteQueue.size() - 1; size >= 0; size--) {
             WriteQueueItem writeQueueItem = (WriteQueueItem) this.mWriteQueue.get(size);
-            if (cls.isInstance(writeQueueItem) && predicate.test((WriteQueueItem) cls.cast(writeQueueItem))) {
+            if (cls.isInstance(writeQueueItem)
+                    && predicate.test((WriteQueueItem) cls.cast(writeQueueItem))) {
                 this.mWriteQueue.remove(size);
             }
         }
@@ -167,12 +178,17 @@ public final class PersisterQueue {
 
     public final synchronized void updateLastOrAddItem(final WriteQueueItem writeQueueItem) {
         try {
-            WriteQueueItem findLastItem = findLastItem(new Predicate() { // from class: com.android.server.wm.PersisterQueue$$ExternalSyntheticLambda1
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    return PersisterQueue.WriteQueueItem.this.matches((PersisterQueue.WriteQueueItem) obj);
-                }
-            }, writeQueueItem.getClass());
+            WriteQueueItem findLastItem =
+                    findLastItem(
+                            new Predicate() { // from class:
+                                              // com.android.server.wm.PersisterQueue$$ExternalSyntheticLambda1
+                                @Override // java.util.function.Predicate
+                                public final boolean test(Object obj) {
+                                    return PersisterQueue.WriteQueueItem.this.matches(
+                                            (PersisterQueue.WriteQueueItem) obj);
+                                }
+                            },
+                            writeQueueItem.getClass());
             if (findLastItem == null) {
                 addItem(writeQueueItem, false);
             } else {

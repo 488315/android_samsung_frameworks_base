@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.util.Log;
+
 import com.android.internal.util.MemInfoReader;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
@@ -16,7 +17,9 @@ import com.android.server.ServiceThread;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.am.SecLmkdStats;
 import com.android.server.chimera.SystemRepository;
+
 import com.samsung.android.chimera.genie.MemRequest;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -49,15 +52,15 @@ public final class GenieMemoryManager {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ModelEventReceiver extends BroadcastReceiver {
-        public ModelEventReceiver() {
-        }
+        public ModelEventReceiver() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             int intExtra = intent.getIntExtra("size", 0);
             if (action != null) {
-                NetworkScoreService$$ExternalSyntheticOutline0.m(intExtra, "Receive broadcast: ", action, " size : ", "GenieMemoryManager");
+                NetworkScoreService$$ExternalSyntheticOutline0.m(
+                        intExtra, "Receive broadcast: ", action, " size : ", "GenieMemoryManager");
             }
             if ("com.samsung.GEN_AI_RECLAIM".equals(action)) {
                 if (intExtra == 0) {
@@ -65,11 +68,13 @@ public final class GenieMemoryManager {
                 }
                 Log.d("GenieMemoryManager", "Calling reclaimer through Broadcast " + intExtra);
                 GenieMemoryManager.this.prepareMemory(new MemRequest(1, intExtra), action);
-                GenieMemoryManager.this.startUnloadTimerLocked("com.samsung.android.offline.languagemodel");
+                GenieMemoryManager.this.startUnloadTimerLocked(
+                        "com.samsung.android.offline.languagemodel");
                 return;
             }
             if (!"AICORE_BROADCAST_ACTION_MODEL_LOADING".equals(action)) {
-                if ("com.samsung.GEN_AI_RECLAIM_END".equals(action) || "AICORE_BROADCAST_ACTION_MODEL_UNLOADED".equals(action)) {
+                if ("com.samsung.GEN_AI_RECLAIM_END".equals(action)
+                        || "AICORE_BROADCAST_ACTION_MODEL_UNLOADED".equals(action)) {
                     Log.d("GenieMemoryManager", "Stopping Reclaimer through Broadcast ");
                     GenieMemoryManager.this.mMemoryReclaimer.getClass();
                     GenieMemoryManager.this.setGenieSessionEnd();
@@ -102,10 +107,18 @@ public final class GenieMemoryManager {
             }
             if (i != 1) {
                 if (i == 2) {
-                    int killCountFromSlotRange = SecLmkdStats.getKillCountFromSlotRange(0, 15, false, false) - message.arg1;
-                    int totalCriticalKillCount = SecLmkdStats.getTotalCriticalKillCount() - message.arg2;
+                    int killCountFromSlotRange =
+                            SecLmkdStats.getKillCountFromSlotRange(0, 15, false, false)
+                                    - message.arg1;
+                    int totalCriticalKillCount =
+                            SecLmkdStats.getTotalCriticalKillCount() - message.arg2;
                     ArrayList arrayList = (ArrayList) message.obj;
-                    arrayList.add(GenieMemoryManager.DATE_FORMAT.format(Calendar.getInstance().getTime()) + " lmkdKill : " + killCountFromSlotRange + " lmkdCriticalKill : " + totalCriticalKillCount);
+                    arrayList.add(
+                            GenieMemoryManager.DATE_FORMAT.format(Calendar.getInstance().getTime())
+                                    + " lmkdKill : "
+                                    + killCountFromSlotRange
+                                    + " lmkdCriticalKill : "
+                                    + totalCriticalKillCount);
                     synchronized (GenieLogger.sLock) {
                         try {
                             if (GenieLogger.sDump == null) {
@@ -124,7 +137,12 @@ public final class GenieMemoryManager {
                         } finally {
                         }
                     }
-                    AccessibilityManagerService$$ExternalSyntheticOutline0.m(killCountFromSlotRange, totalCriticalKillCount, "Aft GenAI LMKD Kill ", " LMKD Critical ", "GenieMemoryManager");
+                    AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                            killCountFromSlotRange,
+                            totalCriticalKillCount,
+                            "Aft GenAI LMKD Kill ",
+                            " LMKD Critical ",
+                            "GenieMemoryManager");
                     return;
                 }
                 if (i != 3) {
@@ -133,13 +151,16 @@ public final class GenieMemoryManager {
                     }
                     Log.d("GenieMemoryManager", "UNLOAD_S_LLM_MODEL message handler");
                     String str = (String) message.obj;
-                    if (GenieMemoryManager.this.mSystemRepository.killGenieProcess(GenieConfigurations.GENAI_UNLOAD_OOMADJ_THRESHOLD, str)) {
+                    if (GenieMemoryManager.this.mSystemRepository.killGenieProcess(
+                            GenieConfigurations.GENAI_UNLOAD_OOMADJ_THRESHOLD, str)) {
                         Log.d("GenieMemoryManager", "process killed, remove from LRU list");
                         GenieLRUList.getInstance().remove(str);
                         return;
                     } else {
                         Log.d("GenieMemoryManager", "resetting timer to unload S.LLM");
-                        sendMessageDelayed(GenieMemoryManager.this.mReclaimerHandler.obtainMessage(4, str), GenieConfigurations.GENAI_UNLOAD_MODEL_TIMEOUT);
+                        sendMessageDelayed(
+                                GenieMemoryManager.this.mReclaimerHandler.obtainMessage(4, str),
+                                GenieConfigurations.GENAI_UNLOAD_MODEL_TIMEOUT);
                         return;
                     }
                 }
@@ -153,7 +174,10 @@ public final class GenieMemoryManager {
                                 rbinManager.mCount = i3;
                                 if (i3 <= 0) {
                                     try {
-                                        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("/sys/kernel/rbin/refill_mode"));
+                                        BufferedWriter bufferedWriter =
+                                                new BufferedWriter(
+                                                        new FileWriter(
+                                                                "/sys/kernel/rbin/refill_mode"));
                                         try {
                                             bufferedWriter.write(48);
                                             bufferedWriter.flush();
@@ -194,8 +218,15 @@ public final class GenieMemoryManager {
                 j = j8;
                 j2 = 0;
             }
-            arrayList2.add(GenieMemoryManager.DATE_FORMAT.format(Calendar.getInstance().getTime()) + " curAvailable : " + j11 + " toReclaim : " + j2);
-            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m("reclaimTarget: ", j2, " = targetSize ");
+            arrayList2.add(
+                    GenieMemoryManager.DATE_FORMAT.format(Calendar.getInstance().getTime())
+                            + " curAvailable : "
+                            + j11
+                            + " toReclaim : "
+                            + j2);
+            StringBuilder m =
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            "reclaimTarget: ", j2, " = targetSize ");
             m.append(j3);
             BootReceiver$$ExternalSyntheticOutline0.m(m, " - ", j7, " (");
             m.append(j4);
@@ -207,9 +238,16 @@ public final class GenieMemoryManager {
             m.append(j9);
             m.append(")");
             Log.i("GenieMemoryManager", m.toString());
-            sendMessageDelayed(obtainMessage(2, SecLmkdStats.getKillCountFromSlotRange(0, 15, false, false), SecLmkdStats.getTotalCriticalKillCount(), arrayList2), 5000L);
+            sendMessageDelayed(
+                    obtainMessage(
+                            2,
+                            SecLmkdStats.getKillCountFromSlotRange(0, 15, false, false),
+                            SecLmkdStats.getTotalCriticalKillCount(),
+                            arrayList2),
+                    5000L);
             if (j2 <= 0) {
-                GenieMemoryManager$ReclaimerHandler$$ExternalSyntheticOutline0.m("Memory to Reclaim is less, so skipping GenIE: ", j2, "GenieMemoryManager");
+                GenieMemoryManager$ReclaimerHandler$$ExternalSyntheticOutline0.m(
+                        "Memory to Reclaim is less, so skipping GenIE: ", j2, "GenieMemoryManager");
                 GenieMemoryManager.this.setGenieSessionEnd();
                 return;
             }
@@ -235,7 +273,10 @@ public final class GenieMemoryManager {
             Log.d("GenieConfigurations", "No models are used on this phone");
         }
         DEFAULT_GOOGLE_MODEL_SIZE = num == null ? 0 : num.intValue();
-        Integer num2 = (Integer) ((HashMap) GenieConfigurations.sAIVersionSepModelSize).get(Integer.valueOf(i));
+        Integer num2 =
+                (Integer)
+                        ((HashMap) GenieConfigurations.sAIVersionSepModelSize)
+                                .get(Integer.valueOf(i));
         if (num2 == null) {
             Log.d("GenieConfigurations", "No models are used on this phone");
         }
@@ -259,7 +300,8 @@ public final class GenieMemoryManager {
                 rbinManager.mCount++;
             }
             try {
-                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("/sys/kernel/rbin/refill_mode"));
+                BufferedWriter bufferedWriter =
+                        new BufferedWriter(new FileWriter("/sys/kernel/rbin/refill_mode"));
                 try {
                     bufferedWriter.write(49);
                     bufferedWriter.flush();
@@ -285,7 +327,8 @@ public final class GenieMemoryManager {
                     this.mName = this.mContext.getPackageManager().getPackagesForUid(callingUid)[0];
                 }
                 Log.i("GenieMemoryManager", "PrepareMemory Calling Package " + this.mName);
-                String str2 = (String) ((HashMap) GenieConfigurations.sGenAIPackageMap).get(this.mName);
+                String str2 =
+                        (String) ((HashMap) GenieConfigurations.sGenAIPackageMap).get(this.mName);
                 if (str2 != null) {
                     Log.d("GenieMemoryManager", "AIPackage:".concat(str2));
                     if (GenieLRUList.getInstance().get(str2) == null) {
@@ -298,7 +341,9 @@ public final class GenieMemoryManager {
                     Log.d("GenieMemoryManager", "AI package is null for " + this.mName);
                 }
                 if (size <= 0) {
-                    Log.e("GenieMemoryManager", "Invalid Memory Request; No reclaimer triggered " + size);
+                    Log.e(
+                            "GenieMemoryManager",
+                            "Invalid Memory Request; No reclaimer triggered " + size);
                 } else {
                     j = size + 524288;
                     if (SystemClock.uptimeMillis() - this.mLastReclaimTime < 600000) {
@@ -309,10 +354,24 @@ public final class GenieMemoryManager {
                         GenieConfigurations genieConfigurations = this.mGenieConfigurations;
                         String str3 = this.mName;
                         genieConfigurations.getClass();
-                        if (callingUid != 1000 && !((ArrayList) GenieConfigurations.sAllowedPackages).contains(str3) && !((ArrayList) GenieConfigurations.sAllowedBroadcastActions).contains(str3)) {
-                            Log.e("GenieMemoryManager", "Contact Memory Team for permissions to access these APIs");
+                        if (callingUid != 1000
+                                && !((ArrayList) GenieConfigurations.sAllowedPackages)
+                                        .contains(str3)
+                                && !((ArrayList) GenieConfigurations.sAllowedBroadcastActions)
+                                        .contains(str3)) {
+                            Log.e(
+                                    "GenieMemoryManager",
+                                    "Contact Memory Team for permissions to access these APIs");
                         }
-                        arrayList.add(DATE_FORMAT.format(Calendar.getInstance().getTime()) + " Package: " + this.mName + " Uid : " + callingUid + " ReclaimRequest : " + j + " kB");
+                        arrayList.add(
+                                DATE_FORMAT.format(Calendar.getInstance().getTime())
+                                        + " Package: "
+                                        + this.mName
+                                        + " Uid : "
+                                        + callingUid
+                                        + " ReclaimRequest : "
+                                        + j
+                                        + " kB");
                         this.mSessionStatus = 1;
                         Log.d("GenieMemoryManager", "prepareMemoryInternalLocked exit: " + j);
                     }
@@ -393,7 +452,8 @@ public final class GenieMemoryManager {
                 if (reclaimerHandler != null) {
                     reclaimerHandler.removeMessages(4);
                     ReclaimerHandler reclaimerHandler2 = this.mReclaimerHandler;
-                    reclaimerHandler2.sendMessageDelayed(reclaimerHandler2.obtainMessage(4, str), i);
+                    reclaimerHandler2.sendMessageDelayed(
+                            reclaimerHandler2.obtainMessage(4, str), i);
                 }
             } catch (Throwable th) {
                 throw th;

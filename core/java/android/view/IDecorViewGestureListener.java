@@ -14,8 +14,8 @@ public interface IDecorViewGestureListener extends IInterface {
 
     public static class Default implements IDecorViewGestureListener {
         @Override // android.view.IDecorViewGestureListener
-        public void onInterceptionChanged(IBinder windowToken, boolean intercepted) throws RemoteException {
-        }
+        public void onInterceptionChanged(IBinder windowToken, boolean intercepted)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IDecorViewGestureListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDecorViewGestureListener {
+    public abstract static class Stub extends Binder implements IDecorViewGestureListener {
         static final int TRANSACTION_onInterceptionChanged = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface IDecorViewGestureListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDecorViewGestureListener.DESCRIPTOR);
             }
@@ -98,7 +99,8 @@ public interface IDecorViewGestureListener extends IInterface {
             }
 
             @Override // android.view.IDecorViewGestureListener
-            public void onInterceptionChanged(IBinder windowToken, boolean intercepted) throws RemoteException {
+            public void onInterceptionChanged(IBinder windowToken, boolean intercepted)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDecorViewGestureListener.DESCRIPTOR);

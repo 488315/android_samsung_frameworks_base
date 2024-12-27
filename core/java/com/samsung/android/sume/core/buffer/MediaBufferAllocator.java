@@ -1,6 +1,7 @@
 package com.samsung.android.sume.core.buffer;
 
 import android.util.Log;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.format.MediaFormat;
 import com.samsung.android.sume.core.format.MutableMediaFormat;
@@ -36,7 +37,8 @@ abstract class MediaBufferAllocator {
             format = ((MutableMediaFormat) format).toMediaFormat();
         }
         MediaFormat fmt = format;
-        if ((format instanceof UpdatableMediaFormat) && format.contains(UpdatableMediaFormat.UPDATE_AT_ALLOC)) {
+        if ((format instanceof UpdatableMediaFormat)
+                && format.contains(UpdatableMediaFormat.UPDATE_AT_ALLOC)) {
             fmt = ((UpdatableMediaFormat) format).update();
         }
         Align align = Align.setByFormat(fmt);
@@ -56,7 +58,6 @@ abstract class MediaBufferAllocator {
     }
 
     protected static final class Nothing {
-        protected Nothing() {
-        }
+        protected Nothing() {}
     }
 }

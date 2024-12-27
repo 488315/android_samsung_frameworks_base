@@ -12,8 +12,7 @@ public class DrmStore {
         public static final String MAX_REPEAT_COUNT = "max_repeat_count";
         public static final String REMAINING_REPEAT_COUNT = "remaining_repeat_count";
 
-        @Deprecated
-        public static final String SEM_LICENSE_CATEGORY = "license_category";
+        @Deprecated public static final String SEM_LICENSE_CATEGORY = "license_category";
 
         @Deprecated
         public static final String SEM_LICENSE_ORIGINAL_INTERVAL = "license_original_interval";
@@ -35,123 +34,88 @@ public class DrmStore {
 
     public static class SemDrmFileType {
 
-        @Deprecated
-        public static final int DRM2_TYPE_CD = 1;
+        @Deprecated public static final int DRM2_TYPE_CD = 1;
 
-        @Deprecated
-        public static final int DRM2_TYPE_FL = 0;
+        @Deprecated public static final int DRM2_TYPE_FL = 0;
         public static final int DRM2_TYPE_SD = 3;
 
-        @Deprecated
-        public static final int DRM2_TYPE_SSD = 2;
+        @Deprecated public static final int DRM2_TYPE_SSD = 2;
 
-        @Deprecated
-        public static final int DRM2_TYPE_UNDEFINE = -1;
+        @Deprecated public static final int DRM2_TYPE_UNDEFINE = -1;
     }
 
     public static class SemDrmPermissionType {
 
-        @Deprecated
-        public static final int DRM_PERMISSION_ANY = 0;
+        @Deprecated public static final int DRM_PERMISSION_ANY = 0;
 
-        @Deprecated
-        public static final int DRM_PERMISSION_DISPLAY = 2;
+        @Deprecated public static final int DRM_PERMISSION_DISPLAY = 2;
 
-        @Deprecated
-        public static final int DRM_PERMISSION_EXECUTE = 4;
+        @Deprecated public static final int DRM_PERMISSION_EXECUTE = 4;
 
-        @Deprecated
-        public static final int DRM_PERMISSION_EXPORT_COPY = 16;
+        @Deprecated public static final int DRM_PERMISSION_EXPORT_COPY = 16;
 
-        @Deprecated
-        public static final int DRM_PERMISSION_EXPORT_MOVE = 32;
+        @Deprecated public static final int DRM_PERMISSION_EXPORT_MOVE = 32;
 
-        @Deprecated
-        public static final int DRM_PERMISSION_PLAY = 1;
+        @Deprecated public static final int DRM_PERMISSION_PLAY = 1;
 
-        @Deprecated
-        public static final int DRM_PERMISSION_PRINT = 8;
+        @Deprecated public static final int DRM_PERMISSION_PRINT = 8;
     }
 
     public static class SemDrmVersionType {
 
-        @Deprecated
-        public static final int OMA_DRM_PDCF = 3;
+        @Deprecated public static final int OMA_DRM_PDCF = 3;
 
-        @Deprecated
-        public static final int OMA_DRM_V1 = 1;
+        @Deprecated public static final int OMA_DRM_V1 = 1;
 
-        @Deprecated
-        public static final int OMA_DRM_V2 = 2;
+        @Deprecated public static final int OMA_DRM_V2 = 2;
 
-        @Deprecated
-        public static final int UNDEFINE_FORMAT = 0;
+        @Deprecated public static final int UNDEFINE_FORMAT = 0;
     }
 
     public static class SemLicenseCategory {
 
-        @Deprecated
-        public static final int DRM2_ACCUMULATED = 16;
+        @Deprecated public static final int DRM2_ACCUMULATED = 16;
 
-        @Deprecated
-        public static final int DRM2_COUNT = 1;
+        @Deprecated public static final int DRM2_COUNT = 1;
 
-        @Deprecated
-        public static final int DRM2_DATETIME = 2;
+        @Deprecated public static final int DRM2_DATETIME = 2;
 
-        @Deprecated
-        public static final int DRM2_INDIVIDUAL = 32;
+        @Deprecated public static final int DRM2_INDIVIDUAL = 32;
 
-        @Deprecated
-        public static final int DRM2_INTERVAL = 4;
+        @Deprecated public static final int DRM2_INTERVAL = 4;
 
-        @Deprecated
-        public static final int DRM2_NOT_FOUND = -1;
+        @Deprecated public static final int DRM2_NOT_FOUND = -1;
 
-        @Deprecated
-        public static final int DRM2_SYSTEM = 64;
+        @Deprecated public static final int DRM2_SYSTEM = 64;
 
-        @Deprecated
-        public static final int DRM2_TIMED_COUNT = 8;
+        @Deprecated public static final int DRM2_TIMED_COUNT = 8;
 
-        @Deprecated
-        public static final int DRM2_UNLIMITED = 0;
+        @Deprecated public static final int DRM2_UNLIMITED = 0;
     }
 
     public static class SemPlayReadyLicenseCategory {
 
-        @Deprecated
-        public static final int DRM_LICENSE_STATE_COUNT = 2;
+        @Deprecated public static final int DRM_LICENSE_STATE_COUNT = 2;
 
-        @Deprecated
-        public static final int DRM_LICENSE_STATE_COUNT_FROM = 6;
+        @Deprecated public static final int DRM_LICENSE_STATE_COUNT_FROM = 6;
 
-        @Deprecated
-        public static final int DRM_LICENSE_STATE_COUNT_FROM_UNTIL = 8;
+        @Deprecated public static final int DRM_LICENSE_STATE_COUNT_FROM_UNTIL = 8;
 
-        @Deprecated
-        public static final int DRM_LICENSE_STATE_COUNT_UNTIL = 7;
+        @Deprecated public static final int DRM_LICENSE_STATE_COUNT_UNTIL = 7;
 
-        @Deprecated
-        public static final int DRM_LICENSE_STATE_EXPIRATION_AFTER_FIRSTUSE = 9;
+        @Deprecated public static final int DRM_LICENSE_STATE_EXPIRATION_AFTER_FIRSTUSE = 9;
 
-        @Deprecated
-        public static final int DRM_LICENSE_STATE_FORCE_SYNC = 10;
+        @Deprecated public static final int DRM_LICENSE_STATE_FORCE_SYNC = 10;
 
-        @Deprecated
-        public static final int DRM_LICENSE_STATE_FROM = 3;
+        @Deprecated public static final int DRM_LICENSE_STATE_FROM = 3;
 
-        @Deprecated
-        public static final int DRM_LICENSE_STATE_FROM_UNTIL = 5;
+        @Deprecated public static final int DRM_LICENSE_STATE_FROM_UNTIL = 5;
 
-        @Deprecated
-        public static final int DRM_LICENSE_STATE_NORIGHT = 0;
+        @Deprecated public static final int DRM_LICENSE_STATE_NORIGHT = 0;
 
-        @Deprecated
-        public static final int DRM_LICENSE_STATE_UNLIM = 1;
+        @Deprecated public static final int DRM_LICENSE_STATE_UNLIM = 1;
 
-        @Deprecated
-        public static final int DRM_LICENSE_STATE_UNTIL = 4;
+        @Deprecated public static final int DRM_LICENSE_STATE_UNTIL = 4;
     }
 
     public static class Playback {
@@ -182,8 +146,7 @@ public class DrmStore {
         public static final int PREVIEW = 5;
         public static final int RINGTONE = 2;
 
-        @Deprecated
-        public static final int SEM_COLLABORATIVE_PLAY = 8;
+        @Deprecated public static final int SEM_COLLABORATIVE_PLAY = 8;
         public static final int TRANSFER = 3;
 
         static boolean isValid(int action) {

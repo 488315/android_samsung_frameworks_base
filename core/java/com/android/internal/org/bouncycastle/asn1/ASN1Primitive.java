@@ -16,8 +16,7 @@ public abstract class ASN1Primitive extends ASN1Object {
 
     abstract boolean isConstructed();
 
-    ASN1Primitive() {
-    }
+    ASN1Primitive() {}
 
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object
     public void encodeTo(OutputStream output) throws IOException {
@@ -58,7 +57,8 @@ public abstract class ASN1Primitive extends ASN1Object {
         return this == other || asn1Equals(other);
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public final ASN1Primitive toASN1Primitive() {
         return this;
     }

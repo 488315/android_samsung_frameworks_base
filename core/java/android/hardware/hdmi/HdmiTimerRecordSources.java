@@ -1,7 +1,6 @@
 package android.hardware.hdmi;
 
 import android.annotation.SystemApi;
-import android.hardware.hdmi.HdmiRecordSources;
 import android.util.Log;
 
 @SystemApi
@@ -20,30 +19,36 @@ public class HdmiTimerRecordSources {
     public static final int RECORDING_SEQUENCE_REPEAT_WEDNESDAY = 8;
     private static final String TAG = "HdmiTimerRecordingSources";
 
-    private HdmiTimerRecordSources() {
-    }
+    private HdmiTimerRecordSources() {}
 
-    public static TimerRecordSource ofDigitalSource(TimerInfo timerInfo, HdmiRecordSources.DigitalServiceSource source) {
+    public static TimerRecordSource ofDigitalSource(
+            TimerInfo timerInfo, HdmiRecordSources.DigitalServiceSource source) {
         checkTimerRecordSourceInputs(timerInfo, source);
         return new TimerRecordSource(timerInfo, source);
     }
 
-    public static TimerRecordSource ofAnalogueSource(TimerInfo timerInfo, HdmiRecordSources.AnalogueServiceSource source) {
+    public static TimerRecordSource ofAnalogueSource(
+            TimerInfo timerInfo, HdmiRecordSources.AnalogueServiceSource source) {
         checkTimerRecordSourceInputs(timerInfo, source);
         return new TimerRecordSource(timerInfo, source);
     }
 
-    public static TimerRecordSource ofExternalPlug(TimerInfo timerInfo, HdmiRecordSources.ExternalPlugData externalPlugData) {
+    public static TimerRecordSource ofExternalPlug(
+            TimerInfo timerInfo, HdmiRecordSources.ExternalPlugData externalPlugData) {
         checkTimerRecordSourceInputs(timerInfo, externalPlugData);
         return new TimerRecordSource(timerInfo, new ExternalSourceDecorator(externalPlugData, 4));
     }
 
-    public static TimerRecordSource ofExternalPhysicalAddress(TimerInfo timerInfo, HdmiRecordSources.ExternalPhysicalAddress externalPhysicalAddress) {
+    public static TimerRecordSource ofExternalPhysicalAddress(
+            TimerInfo timerInfo,
+            HdmiRecordSources.ExternalPhysicalAddress externalPhysicalAddress) {
         checkTimerRecordSourceInputs(timerInfo, externalPhysicalAddress);
-        return new TimerRecordSource(timerInfo, new ExternalSourceDecorator(externalPhysicalAddress, 5));
+        return new TimerRecordSource(
+                timerInfo, new ExternalSourceDecorator(externalPhysicalAddress, 5));
     }
 
-    private static void checkTimerRecordSourceInputs(TimerInfo timerInfo, HdmiRecordSources.RecordSource source) {
+    private static void checkTimerRecordSourceInputs(
+            TimerInfo timerInfo, HdmiRecordSources.RecordSource source) {
         if (timerInfo == null) {
             Log.w(TAG, "TimerInfo should not be null.");
             throw new IllegalArgumentException("TimerInfo should not be null.");
@@ -118,17 +123,25 @@ public class HdmiTimerRecordSources {
         }
     }
 
-    public static TimerInfo timerInfoOf(int dayOfMonth, int monthOfYear, Time startTime, Duration duration, int recordingSequence) {
+    public static TimerInfo timerInfoOf(
+            int dayOfMonth,
+            int monthOfYear,
+            Time startTime,
+            Duration duration,
+            int recordingSequence) {
         if (dayOfMonth < 0 || dayOfMonth > 31) {
-            throw new IllegalArgumentException("Day of month should be in range of [0, 31]:" + dayOfMonth);
+            throw new IllegalArgumentException(
+                    "Day of month should be in range of [0, 31]:" + dayOfMonth);
         }
         if (monthOfYear < 1 || monthOfYear > 12) {
-            throw new IllegalArgumentException("Month of year should be in range of [1, 12]:" + monthOfYear);
+            throw new IllegalArgumentException(
+                    "Month of year should be in range of [1, 12]:" + monthOfYear);
         }
         checkTimeValue(startTime.mHour, startTime.mMinute);
         checkDurationValue(duration.mHour, duration.mMinute);
         if (recordingSequence != 0 && (recordingSequence & (-128)) != 0) {
-            throw new IllegalArgumentException("Invalid reecording sequence value:" + recordingSequence);
+            throw new IllegalArgumentException(
+                    "Invalid reecording sequence value:" + recordingSequence);
         }
         return new TimerInfo(dayOfMonth, monthOfYear, startTime, duration, recordingSequence);
     }
@@ -147,7 +160,12 @@ public class HdmiTimerRecordSources {
         private final int mRecordingSequence;
         private final Time mStartTime;
 
-        private TimerInfo(int dayOfMonth, int monthOfYear, Time startTime, Duration duration, int recordingSequence) {
+        private TimerInfo(
+                int dayOfMonth,
+                int monthOfYear,
+                Time startTime,
+                Duration duration,
+                int recordingSequence) {
             this.mDayOfMonth = dayOfMonth;
             this.mMonthOfYear = monthOfYear;
             this.mStartTime = startTime;
@@ -161,7 +179,8 @@ public class HdmiTimerRecordSources {
             data[index2] = (byte) this.mMonthOfYear;
             int index3 = index2 + 1;
             int index4 = index3 + this.mStartTime.toByteArray(data, index3);
-            data[index4 + this.mDuration.toByteArray(data, index4)] = (byte) this.mRecordingSequence;
+            data[index4 + this.mDuration.toByteArray(data, index4)] =
+                    (byte) this.mRecordingSequence;
             return getDataSize();
         }
 
@@ -175,7 +194,8 @@ public class HdmiTimerRecordSources {
         private final HdmiRecordSources.RecordSource mRecordSource;
         private final TimerInfo mTimerInfo;
 
-        private TimerRecordSource(TimerInfo timerInfo, HdmiRecordSources.RecordSource recordSource) {
+        private TimerRecordSource(
+                TimerInfo timerInfo, HdmiRecordSources.RecordSource recordSource) {
             this.mTimerInfo = timerInfo;
             this.mRecordSource = recordSource;
         }
@@ -185,7 +205,8 @@ public class HdmiTimerRecordSources {
         }
 
         int toByteArray(byte[] data, int index) {
-            this.mRecordSource.toByteArray(false, data, index + this.mTimerInfo.toByteArray(data, index));
+            this.mRecordSource.toByteArray(
+                    false, data, index + this.mTimerInfo.toByteArray(data, index));
             return getDataSize();
         }
     }
@@ -194,7 +215,8 @@ public class HdmiTimerRecordSources {
         private final int mExternalSourceSpecifier;
         private final HdmiRecordSources.RecordSource mRecordSource;
 
-        private ExternalSourceDecorator(HdmiRecordSources.RecordSource recordSource, int externalSourceSpecifier) {
+        private ExternalSourceDecorator(
+                HdmiRecordSources.RecordSource recordSource, int externalSourceSpecifier) {
             super(recordSource.mSourceType, recordSource.getDataSize(false) + 1);
             this.mRecordSource = recordSource;
             this.mExternalSourceSpecifier = externalSourceSpecifier;

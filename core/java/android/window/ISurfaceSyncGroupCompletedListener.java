@@ -14,8 +14,7 @@ public interface ISurfaceSyncGroupCompletedListener extends IInterface {
 
     public static class Default implements ISurfaceSyncGroupCompletedListener {
         @Override // android.window.ISurfaceSyncGroupCompletedListener
-        public void onSurfaceSyncGroupComplete() throws RemoteException {
-        }
+        public void onSurfaceSyncGroupComplete() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface ISurfaceSyncGroupCompletedListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISurfaceSyncGroupCompletedListener {
+    public abstract static class Stub extends Binder implements ISurfaceSyncGroupCompletedListener {
         static final int TRANSACTION_onSurfaceSyncGroupComplete = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface ISurfaceSyncGroupCompletedListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISurfaceSyncGroupCompletedListener.DESCRIPTOR);
             }

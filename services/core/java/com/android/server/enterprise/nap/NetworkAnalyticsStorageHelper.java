@@ -1,6 +1,7 @@
 package com.android.server.enterprise.nap;
 
 import android.content.Context;
+
 import com.android.server.enterprise.storage.EdmStorageProvider;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -14,7 +15,8 @@ public final class NetworkAnalyticsStorageHelper {
         NetworkAnalyticsStorageHelper networkAnalyticsStorageHelper;
         synchronized (NetworkAnalyticsStorageHelper.class) {
             if (mDefaultHelper == null) {
-                NetworkAnalyticsStorageHelper networkAnalyticsStorageHelper2 = new NetworkAnalyticsStorageHelper();
+                NetworkAnalyticsStorageHelper networkAnalyticsStorageHelper2 =
+                        new NetworkAnalyticsStorageHelper();
                 synchronized (mSynObj) {
                     try {
                         if (mEDM == null) {

@@ -20,7 +20,9 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyFrameworkInitializer;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.internal.telephony.ITelephony;
+
 import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.List;
@@ -45,7 +47,14 @@ public final class TelephonyUtils {
 
     public static boolean checkDumpPermission(Context context, String tag, PrintWriter pw) {
         if (context.checkCallingOrSelfPermission(Manifest.permission.DUMP) != 0) {
-            pw.println("Permission Denial: can't dump " + tag + " from from pid=" + Binder.getCallingPid() + ", uid=" + Binder.getCallingUid() + " due to missing android.permission.DUMP permission");
+            pw.println(
+                    "Permission Denial: can't dump "
+                            + tag
+                            + " from from pid="
+                            + Binder.getCallingPid()
+                            + ", uid="
+                            + Binder.getCallingUid()
+                            + " due to missing android.permission.DUMP permission");
             return false;
         }
         return true;
@@ -84,12 +93,14 @@ public final class TelephonyUtils {
     public static void runWithCleanCallingIdentity(final Runnable action, Executor executor) {
         if (action != null) {
             if (executor != null) {
-                executor.execute(new Runnable() { // from class: com.android.internal.telephony.util.TelephonyUtils$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        TelephonyUtils.runWithCleanCallingIdentity(action);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // com.android.internal.telephony.util.TelephonyUtils$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                TelephonyUtils.runWithCleanCallingIdentity(action);
+                            }
+                        });
             } else {
                 runWithCleanCallingIdentity(action);
             }
@@ -109,7 +120,18 @@ public final class TelephonyUtils {
         Bundle ret = new Bundle(bundle);
         for (String key : bundle.keySet()) {
             Object value = bundle.get(key);
-            if (!(value instanceof Integer) && !(value instanceof Long) && !(value instanceof Double) && !(value instanceof String) && !(value instanceof int[]) && !(value instanceof long[]) && !(value instanceof double[]) && !(value instanceof String[]) && !(value instanceof PersistableBundle) && value != null && !(value instanceof Boolean) && !(value instanceof boolean[])) {
+            if (!(value instanceof Integer)
+                    && !(value instanceof Long)
+                    && !(value instanceof Double)
+                    && !(value instanceof String)
+                    && !(value instanceof int[])
+                    && !(value instanceof long[])
+                    && !(value instanceof double[])
+                    && !(value instanceof String[])
+                    && !(value instanceof PersistableBundle)
+                    && value != null
+                    && !(value instanceof Boolean)
+                    && !(value instanceof boolean[])) {
                 if (value instanceof Bundle) {
                     ret.putBundle(key, filterValues((Bundle) value));
                 } else if (!value.getClass().getName().startsWith("android.")) {
@@ -180,7 +202,8 @@ public final class TelephonyUtils {
     }
 
     public static UserHandle getSubscriptionUserHandle(Context context, int subId) {
-        SubscriptionManager subManager = (SubscriptionManager) context.getSystemService(SubscriptionManager.class);
+        SubscriptionManager subManager =
+                (SubscriptionManager) context.getSystemService(SubscriptionManager.class);
         if (subManager == null || !SubscriptionManager.isValidSubscriptionId(subId)) {
             return null;
         }
@@ -188,20 +211,32 @@ public final class TelephonyUtils {
         return userHandle;
     }
 
-    public static void showSwitchToManagedProfileDialogIfAppropriate(Context context, int subId, int callingUid, String callingPackage) {
+    public static void showSwitchToManagedProfileDialogIfAppropriate(
+            Context context, int subId, int callingUid, String callingPackage) {
         ITelephony iTelephony;
         long token = Binder.clearCallingIdentity();
         try {
             UserHandle callingUserHandle = UserHandle.getUserHandleForUid(callingUid);
-            if (isUidForeground(context, callingUid) && isPackageSMSRoleHolderForUser(context, callingPackage, callingUserHandle)) {
-                SubscriptionManager subscriptionManager = (SubscriptionManager) context.getSystemService(SubscriptionManager.class);
+            if (isUidForeground(context, callingUid)
+                    && isPackageSMSRoleHolderForUser(context, callingPackage, callingUserHandle)) {
+                SubscriptionManager subscriptionManager =
+                        (SubscriptionManager) context.getSystemService(SubscriptionManager.class);
                 if (!subscriptionManager.isActiveSubscriptionId(subId)) {
                     Log.e(LOG_TAG, "Tried to send message with an inactive subscription " + subId);
                     return;
                 }
-                UserHandle associatedUserHandle = subscriptionManager.getSubscriptionUserHandle(subId);
+                UserHandle associatedUserHandle =
+                        subscriptionManager.getSubscriptionUserHandle(subId);
                 UserManager um = (UserManager) context.getSystemService(UserManager.class);
-                if (associatedUserHandle != null && um.isManagedProfile(associatedUserHandle.getIdentifier()) && (iTelephony = ITelephony.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getTelephonyServiceRegisterer().get())) != null) {
+                if (associatedUserHandle != null
+                        && um.isManagedProfile(associatedUserHandle.getIdentifier())
+                        && (iTelephony =
+                                        ITelephony.Stub.asInterface(
+                                                TelephonyFrameworkInitializer
+                                                        .getTelephonyServiceManager()
+                                                        .getTelephonyServiceRegisterer()
+                                                        .get()))
+                                != null) {
                     try {
                         iTelephony.showSwitchToManagedProfileDialog();
                     } catch (RemoteException e) {
@@ -219,7 +254,8 @@ public final class TelephonyUtils {
         return am != null && am.getUidImportance(uid) == 100;
     }
 
-    private static boolean isPackageSMSRoleHolderForUser(Context context, String callingPackage, UserHandle user) {
+    private static boolean isPackageSMSRoleHolderForUser(
+            Context context, String callingPackage, UserHandle user) {
         RoleManager roleManager = (RoleManager) context.getSystemService(RoleManager.class);
         List<String> smsRoleHolder = roleManager.getRoleHoldersAsUser("android.app.role.SMS", user);
         return !smsRoleHolder.isEmpty() && callingPackage.equals(smsRoleHolder.get(0));

@@ -11,12 +11,12 @@ import android.os.Message;
 import android.os.UserHandle;
 import android.util.ArrayMap;
 import android.util.SparseBooleanArray;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.ServiceThread;
-import com.android.server.desktopmode.HardwareManager;
-import com.android.server.desktopmode.StateManager;
+
 import com.samsung.android.desktopmode.DesktopModeFeature;
 import com.samsung.android.lib.dexcontrol.NotSupportDexFeatureException;
 import com.samsung.android.lib.dexcontrol.SDCDeviceController;
@@ -100,7 +100,8 @@ public final class DockManager {
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
             DockManager dockManager = DockManager.this;
-            StateManager.InternalState state = ((StateManager) dockManager.mStateManager).getState();
+            StateManager.InternalState state =
+                    ((StateManager) dockManager.mStateManager).getState();
             int i = message.what;
             if (i == 150) {
                 boolean z = DesktopModeFeature.DEBUG;
@@ -108,7 +109,20 @@ public final class DockManager {
                     Log.d("[DMS]DockManager", "MSG_DOCK_REQUEST_UPDATE_DOCK_LIB_STATUS");
                 }
                 if (z) {
-                    Log.d("[DMS]DockManager", "updateDockLibStatus(), isDesktopDockConnected=" + state.mDockState.isDexStation() + ", isDexPadConnected=" + state.mDockState.isDexPad() + ", mDockState=" + state.mDockState.mType + ", mPrevDockState=" + state.mPreviousDockState.mType + ", mDockChargerPower=" + dockManager.mDockChargerPower + ", mDockChargerSupport=" + dockManager.mDockChargerSupport);
+                    Log.d(
+                            "[DMS]DockManager",
+                            "updateDockLibStatus(), isDesktopDockConnected="
+                                    + state.mDockState.isDexStation()
+                                    + ", isDexPadConnected="
+                                    + state.mDockState.isDexPad()
+                                    + ", mDockState="
+                                    + state.mDockState.mType
+                                    + ", mPrevDockState="
+                                    + state.mPreviousDockState.mType
+                                    + ", mDockChargerPower="
+                                    + dockManager.mDockChargerPower
+                                    + ", mDockChargerSupport="
+                                    + dockManager.mDockChargerSupport);
                 }
                 HardwareManager.DockState dockState = state.mDockState;
                 if (dockState.mType == 10001) {
@@ -122,7 +136,8 @@ public final class DockManager {
                     dockHandler2.removeMessages(201);
                     dockHandler2.sendMessage(dockHandler2.obtainMessage(201, 41001));
                     return;
-                } else if (state.mDockState.isUndocked() && state.mPreviousDockState.isDexStation()) {
+                } else if (state.mDockState.isUndocked()
+                        && state.mPreviousDockState.isDexStation()) {
                     DockHandler dockHandler3 = dockManager.mHandler;
                     dockHandler3.removeMessages(203);
                     dockHandler3.sendMessage(dockHandler3.obtainMessage(203, 40992));
@@ -143,7 +158,12 @@ public final class DockManager {
                 int i3 = message.arg2;
                 boolean z2 = DesktopModeFeature.DEBUG;
                 if (z2) {
-                    StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i2, "MSG_DOCK_RESPONSE_POWER_INFO onConnectedPowerChargerInfoUpdated, power=", " previous power=");
+                    StringBuilder m =
+                            BatteryService$$ExternalSyntheticOutline0.m(
+                                    i2,
+                                    "MSG_DOCK_RESPONSE_POWER_INFO"
+                                        + " onConnectedPowerChargerInfoUpdated, power=",
+                                    " previous power=");
                     m.append(dockManager.mDockChargerPower);
                     m.append(" support=");
                     m.append(i3);
@@ -171,7 +191,8 @@ public final class DockManager {
                     }
                     dockManager.mDockChargerPower = i2;
                     dockManager.mDockChargerSupport = i3;
-                    DockManager.m405$$Nest$mrequestUpdateDockLibStatus(dockManager, "dockLowChargerPowerUpdated");
+                    DockManager.m405$$Nest$mrequestUpdateDockLibStatus(
+                            dockManager, "dockLowChargerPowerUpdated");
                     return;
                 }
                 return;
@@ -179,24 +200,39 @@ public final class DockManager {
             if (i == 221) {
                 int intValue = ((Integer) message.obj).intValue();
                 if (DesktopModeFeature.DEBUG) {
-                    Log.d("[DMS]DockManager", "MSG_DOCK_ERROR onError, error=" + DockManager.m407$$Nest$smdockControlErrorToString(intValue));
+                    Log.d(
+                            "[DMS]DockManager",
+                            "MSG_DOCK_ERROR onError, error="
+                                    + DockManager.m407$$Nest$smdockControlErrorToString(intValue));
                 }
-                dockManager.mLastDockControlLibMsgState.setLast(102, message.what, DockManager.m407$$Nest$smdockControlErrorToString(intValue));
+                dockManager.mLastDockControlLibMsgState.setLast(
+                        102,
+                        message.what,
+                        DockManager.m407$$Nest$smdockControlErrorToString(intValue));
                 dockManager.mDockControlLibError.put(intValue, true);
                 StringBuilder sb = new StringBuilder();
                 for (int i5 = 0; i5 < dockManager.mDockControlLibError.size(); i5++) {
-                    sb.append(DockManager.m407$$Nest$smdockControlErrorToString(dockManager.mDockControlLibError.keyAt(i5)));
+                    sb.append(
+                            DockManager.m407$$Nest$smdockControlErrorToString(
+                                    dockManager.mDockControlLibError.keyAt(i5)));
                     sb.append(" = ");
                     sb.append(dockManager.mDockControlLibError.valueAt(i5));
                     sb.append(",");
                 }
-                dockManager.mLastDockControlLibMsgState.setLast(104, FrameworkStatsLog.CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_HYBRID_NNHDR_MERGE_QZ, sb.toString());
+                dockManager.mLastDockControlLibMsgState.setLast(
+                        104,
+                        FrameworkStatsLog
+                                .CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_HYBRID_NNHDR_MERGE_QZ,
+                        sb.toString());
                 return;
             }
             if (i == 231) {
                 String str = (String) message.obj;
                 if (DesktopModeFeature.DEBUG) {
-                    Log.d("[DMS]DockManager", "MSG_DOCK_VERSION_DSVERSION_UPDATED onDSVersionUpdated, version=" + str);
+                    Log.d(
+                            "[DMS]DockManager",
+                            "MSG_DOCK_VERSION_DSVERSION_UPDATED onDSVersionUpdated, version="
+                                    + str);
                 }
                 dockManager.mLastDockControlLibMsgState.setLast(103, message.what, str);
                 if (str != null) {
@@ -212,7 +248,8 @@ public final class DockManager {
                     int intValue2 = ((Integer) message.obj).intValue();
                     boolean z3 = DesktopModeFeature.DEBUG;
                     if (z3) {
-                        DesktopModeService$$ExternalSyntheticOutline0.m(intValue2, "MSG_DOCK_REQUEST_CREATE dockType=", "[DMS]DockManager");
+                        DesktopModeService$$ExternalSyntheticOutline0.m(
+                                intValue2, "MSG_DOCK_REQUEST_CREATE dockType=", "[DMS]DockManager");
                     }
                     if (intValue2 != 40992 && intValue2 != 41001) {
                         if (z3) {
@@ -228,7 +265,10 @@ public final class DockManager {
                     }
                     if (dockManager.mISDCDeviceController == null) {
                         if (z3) {
-                            DesktopModeService$$ExternalSyntheticOutline0.m(intValue2, "createDockControlLib dockType=", "[DMS]DockManager");
+                            DesktopModeService$$ExternalSyntheticOutline0.m(
+                                    intValue2,
+                                    "createDockControlLib dockType=",
+                                    "[DMS]DockManager");
                         }
                         dockManager.mLastDockControlLibMsgState.setLast(100, 201, null);
                         Context context = dockManager.mContext;
@@ -237,14 +277,18 @@ public final class DockManager {
                         sDCDeviceController.mDexStation = null;
                         sDCDeviceController.mDexPad = null;
                         sDCDeviceController.mDexDevicePID = intValue2;
-                        SLog.i("SDCDeviceController", "Model : " + intValue2 + ", DexControlLib Version : ");
+                        SLog.i(
+                                "SDCDeviceController",
+                                "Model : " + intValue2 + ", DexControlLib Version : ");
                         int i6 = sDCDeviceController.mDexDevicePID;
                         if (i6 == 40992) {
                             sDCDeviceController.mDexStation = new DexStation(context);
                         } else if (i6 == 41001) {
                             sDCDeviceController.mDexPad = new DexPad(context, anonymousClass32);
                         } else {
-                            SLog.e("SDCDeviceController", "SDCDeviceController unknown pid = " + intValue2);
+                            SLog.e(
+                                    "SDCDeviceController",
+                                    "SDCDeviceController unknown pid = " + intValue2);
                         }
                         dockManager.mISDCDeviceController = sDCDeviceController;
                         if (intValue2 == 41001) {
@@ -258,15 +302,21 @@ public final class DockManager {
                     return;
                 case 202:
                     if (DesktopModeFeature.DEBUG) {
-                        Log.d("[DMS]DockManager", "MSG_DOCK_REQUEST_POWER_INFO requestConnectedPowerChargerInfoUpdate");
+                        Log.d(
+                                "[DMS]DockManager",
+                                "MSG_DOCK_REQUEST_POWER_INFO"
+                                    + " requestConnectedPowerChargerInfoUpdate");
                     }
                     if (dockManager.mISDCDeviceController != null) {
                         try {
-                            dockManager.mLastDockControlLibMsgState.setLast(100, message.what, null);
-                            SDCDeviceController sDCDeviceController2 = dockManager.mISDCDeviceController;
+                            dockManager.mLastDockControlLibMsgState.setLast(
+                                    100, message.what, null);
+                            SDCDeviceController sDCDeviceController2 =
+                                    dockManager.mISDCDeviceController;
                             DexPad dexPad = sDCDeviceController2.mDexPad;
                             if (dexPad == null) {
-                                throw new NotSupportDexFeatureException(sDCDeviceController2.mDexDevicePID);
+                                throw new NotSupportDexFeatureException(
+                                        sDCDeviceController2.mDexDevicePID);
                             }
                             dexPad.requestConnectedPowerChargerInfoUpdate();
                             return;
@@ -280,7 +330,10 @@ public final class DockManager {
                     int intValue3 = ((Integer) message.obj).intValue();
                     boolean z4 = DesktopModeFeature.DEBUG;
                     if (z4) {
-                        DesktopModeService$$ExternalSyntheticOutline0.m(intValue3, "MSG_DOCK_REQUEST_DESTROY dockType=", "[DMS]DockManager");
+                        DesktopModeService$$ExternalSyntheticOutline0.m(
+                                intValue3,
+                                "MSG_DOCK_REQUEST_DESTROY dockType=",
+                                "[DMS]DockManager");
                     }
                     if (dockManager.mControlResponseListener != null) {
                         dockManager.mControlResponseListener = null;
@@ -290,7 +343,8 @@ public final class DockManager {
                             Log.d("[DMS]DockManager", "destroyDockControlLib");
                         }
                         dockManager.mLastDockControlLibMsgState.setLast(100, 203, null);
-                        SDCDeviceController sDCDeviceController3 = dockManager.mISDCDeviceController;
+                        SDCDeviceController sDCDeviceController3 =
+                                dockManager.mISDCDeviceController;
                         sDCDeviceController3.getClass();
                         SLog.i("SDCDeviceController", "destroy");
                         DexStation dexStation = sDCDeviceController3.mDexStation;
@@ -333,7 +387,10 @@ public final class DockManager {
     public static void m406$$Nest$mupdateDockVersionToSettings(DockManager dockManager, boolean z) {
         if (z) {
             dockManager.getClass();
-            dockManager.mDockVersion = Utils.readFile("/sys/class/dp_sec/dex_ver", "") + "." + Utils.readFile("/sys/class/sec/ccic/acc_device_version", "");
+            dockManager.mDockVersion =
+                    Utils.readFile("/sys/class/dp_sec/dex_ver", "")
+                            + "."
+                            + Utils.readFile("/sys/class/sec/ccic/acc_device_version", "");
             if (dockManager.mDockVersionExtra != null) {
                 dockManager.mDockVersion += "." + dockManager.mDockVersionExtra;
             }
@@ -342,9 +399,12 @@ public final class DockManager {
             dockManager.mDockVersion = null;
         }
         if (DesktopModeFeature.DEBUG) {
-            Log.d("[DMS]DockManager", "updateDockVersionToSettings(), mDockVersion = " + dockManager.mDockVersion);
+            Log.d(
+                    "[DMS]DockManager",
+                    "updateDockVersionToSettings(), mDockVersion = " + dockManager.mDockVersion);
         }
-        DesktopModeSettings.setSettings(dockManager.mResolver, "dock_version", dockManager.mDockVersion);
+        DesktopModeSettings.setSettings(
+                dockManager.mResolver, "dock_version", dockManager.mDockVersion);
     }
 
     /* renamed from: -$$Nest$smdockControlErrorToString, reason: not valid java name */
@@ -369,40 +429,55 @@ public final class DockManager {
 
     public DockManager(Context context, ServiceThread serviceThread, IStateManager iStateManager) {
         this.mHandler = null;
-        StateManager.StateListener stateListener = new StateManager.StateListener() { // from class: com.android.server.desktopmode.DockManager.1
-            @Override // com.android.server.desktopmode.StateManager.StateListener
-            public final void onDockStateChanged(StateManager.InternalState internalState) {
-                boolean z = DesktopModeFeature.DEBUG;
-                if (z) {
-                    Log.d("[DMS]DockManager", "onDockStateChanged n=" + internalState.mDockState + ", p=" + internalState.mPreviousDockState);
-                }
-                boolean isUndocked = internalState.mDockState.isUndocked();
-                DockManager dockManager = DockManager.this;
-                if (isUndocked && (internalState.mPreviousDockState.isDexStation() || internalState.mPreviousDockState.isDexPad())) {
-                    dockManager.getClass();
-                    if (z) {
-                        Log.d("[DMS]DockManager", "DockManager initialize()");
+        StateManager.StateListener stateListener =
+                new StateManager
+                        .StateListener() { // from class:
+                                           // com.android.server.desktopmode.DockManager.1
+                    @Override // com.android.server.desktopmode.StateManager.StateListener
+                    public final void onDockStateChanged(StateManager.InternalState internalState) {
+                        boolean z = DesktopModeFeature.DEBUG;
+                        if (z) {
+                            Log.d(
+                                    "[DMS]DockManager",
+                                    "onDockStateChanged n="
+                                            + internalState.mDockState
+                                            + ", p="
+                                            + internalState.mPreviousDockState);
+                        }
+                        boolean isUndocked = internalState.mDockState.isUndocked();
+                        DockManager dockManager = DockManager.this;
+                        if (isUndocked
+                                && (internalState.mPreviousDockState.isDexStation()
+                                        || internalState.mPreviousDockState.isDexPad())) {
+                            dockManager.getClass();
+                            if (z) {
+                                Log.d("[DMS]DockManager", "DockManager initialize()");
+                            }
+                            dockManager.mDockVersion = null;
+                            dockManager.mDockVersionExtra = null;
+                            dockManager.mDockChargerPower = 0;
+                            dockManager.mDockChargerSupport = 0;
+                        }
+                        DockManager.m405$$Nest$mrequestUpdateDockLibStatus(
+                                dockManager, "onDockStateChanged");
                     }
-                    dockManager.mDockVersion = null;
-                    dockManager.mDockVersionExtra = null;
-                    dockManager.mDockChargerPower = 0;
-                    dockManager.mDockChargerSupport = 0;
-                }
-                DockManager.m405$$Nest$mrequestUpdateDockLibStatus(dockManager, "onDockStateChanged");
-            }
 
-            @Override // com.android.server.desktopmode.StateManager.StateListener
-            public final void onExternalDisplayConnectionChanged(StateManager.InternalState internalState) {
-                boolean isHdmiConnected = internalState.isHdmiConnected();
-                DockManager dockManager = DockManager.this;
-                if (!isHdmiConnected) {
-                    DockManager.m406$$Nest$mupdateDockVersionToSettings(dockManager, false);
-                } else if (HardwareManager.resolveDockType(internalState.mDockState.mRawDockUsbpdIds) != -1) {
-                    DockManager.m406$$Nest$mupdateDockVersionToSettings(dockManager, true);
-                }
-                DockManager.m405$$Nest$mrequestUpdateDockLibStatus(dockManager, "onDisplayChanged");
-            }
-        };
+                    @Override // com.android.server.desktopmode.StateManager.StateListener
+                    public final void onExternalDisplayConnectionChanged(
+                            StateManager.InternalState internalState) {
+                        boolean isHdmiConnected = internalState.isHdmiConnected();
+                        DockManager dockManager = DockManager.this;
+                        if (!isHdmiConnected) {
+                            DockManager.m406$$Nest$mupdateDockVersionToSettings(dockManager, false);
+                        } else if (HardwareManager.resolveDockType(
+                                        internalState.mDockState.mRawDockUsbpdIds)
+                                != -1) {
+                            DockManager.m406$$Nest$mupdateDockVersionToSettings(dockManager, true);
+                        }
+                        DockManager.m405$$Nest$mrequestUpdateDockLibStatus(
+                                dockManager, "onDisplayChanged");
+                    }
+                };
         this.mContext = context;
         this.mResolver = context.getContentResolver();
         this.mStateManager = iStateManager;
@@ -418,22 +493,34 @@ public final class DockManager {
         arrayMap.put(104, "MSG_DOCK_EXTRA_UNDEFINED");
         this.mLastDockControlLibMsgState = anonymousClass3;
         this.mDockControlLibError = new SparseBooleanArray();
-        context.registerReceiverAsUser(new BroadcastReceiver() { // from class: com.android.server.desktopmode.DockManager.2
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                StateManager.InternalState state = ((StateManager) DockManager.this.mStateManager).getState();
-                String action = intent.getAction();
-                if ("android.intent.action.ACTION_POWER_CONNECTED".equals(action) || "android.intent.action.ACTION_POWER_DISCONNECTED".equals(action)) {
-                    if (DesktopModeFeature.DEBUG) {
-                        Log.d("[DMS]DockManager", "onReceive(), action=" + action);
+        context.registerReceiverAsUser(
+                new BroadcastReceiver() { // from class:
+                                          // com.android.server.desktopmode.DockManager.2
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        StateManager.InternalState state =
+                                ((StateManager) DockManager.this.mStateManager).getState();
+                        String action = intent.getAction();
+                        if ("android.intent.action.ACTION_POWER_CONNECTED".equals(action)
+                                || "android.intent.action.ACTION_POWER_DISCONNECTED"
+                                        .equals(action)) {
+                            if (DesktopModeFeature.DEBUG) {
+                                Log.d("[DMS]DockManager", "onReceive(), action=" + action);
+                            }
+                            if (state.mDockState.isDexPad()) {
+                                DockHandler dockHandler = DockManager.this.mHandler;
+                                dockHandler.removeMessages(202);
+                                dockHandler.obtainMessage(202).sendToTarget();
+                            }
+                        }
                     }
-                    if (state.mDockState.isDexPad()) {
-                        DockHandler dockHandler = DockManager.this.mHandler;
-                        dockHandler.removeMessages(202);
-                        dockHandler.obtainMessage(202).sendToTarget();
-                    }
-                }
-            }
-        }, UserHandle.ALL, DirEncryptServiceHelper$$ExternalSyntheticOutline0.m("android.intent.action.ACTION_POWER_CONNECTED", "android.intent.action.ACTION_POWER_DISCONNECTED"), null, null, 2);
+                },
+                UserHandle.ALL,
+                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                        "android.intent.action.ACTION_POWER_CONNECTED",
+                        "android.intent.action.ACTION_POWER_DISCONNECTED"),
+                null,
+                null,
+                2);
     }
 }

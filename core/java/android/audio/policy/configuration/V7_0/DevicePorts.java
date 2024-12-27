@@ -1,12 +1,15 @@
 package android.audio.policy.configuration.V7_0;
 
 import android.content.Context;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.datatype.DatatypeConfigurationException;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public class DevicePorts {
@@ -140,7 +143,8 @@ public class DevicePorts {
             this.encodedFormats = encodedFormats;
         }
 
-        static DevicePort read(XmlPullParser _parser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+        static DevicePort read(XmlPullParser _parser)
+                throws XmlPullParserException, IOException, DatatypeConfigurationException {
             int type;
             DevicePort _instance = new DevicePort();
             String _raw = _parser.getAttributeValue(null, "tagName");
@@ -206,7 +210,8 @@ public class DevicePorts {
         return this.devicePort;
     }
 
-    static DevicePorts read(XmlPullParser _parser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static DevicePorts read(XmlPullParser _parser)
+            throws XmlPullParserException, IOException, DatatypeConfigurationException {
         int type;
         DevicePorts _instance = new DevicePorts();
         _parser.getDepth();

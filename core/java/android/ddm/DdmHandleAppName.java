@@ -1,9 +1,10 @@
 package android.ddm;
 
-import java.nio.ByteBuffer;
 import org.apache.harmony.dalvik.ddmc.Chunk;
 import org.apache.harmony.dalvik.ddmc.ChunkHandler;
 import org.apache.harmony.dalvik.ddmc.DdmServer;
+
+import java.nio.ByteBuffer;
 
 /* loaded from: classes.dex */
 public class DdmHandleAppName extends DdmHandle {
@@ -16,17 +17,13 @@ public class DdmHandleAppName extends DdmHandle {
         sNames = new Names(str, str);
     }
 
-    private DdmHandleAppName() {
-    }
+    private DdmHandleAppName() {}
 
-    public static void register() {
-    }
+    public static void register() {}
 
-    public void onConnected() {
-    }
+    public void onConnected() {}
 
-    public void onDisconnected() {
-    }
+    public void onDisconnected() {}
 
     public Chunk handleChunk(Chunk request) {
         return null;
@@ -49,7 +46,8 @@ public class DdmHandleAppName extends DdmHandle {
     }
 
     private static void sendAPNM(String appName, String pkgName, int userId) {
-        ByteBuffer out = ByteBuffer.allocate((appName.length() * 2) + 4 + 4 + 4 + (pkgName.length() * 2));
+        ByteBuffer out =
+                ByteBuffer.allocate((appName.length() * 2) + 4 + 4 + 4 + (pkgName.length() * 2));
         out.order(ChunkHandler.CHUNK_ORDER);
         out.putInt(appName.length());
         putString(out, appName);

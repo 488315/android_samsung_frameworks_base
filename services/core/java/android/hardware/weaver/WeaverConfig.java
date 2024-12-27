@@ -32,7 +32,8 @@ public final class WeaverConfig implements Parcelable {
                         if (parcel.dataPosition() - dataPosition < readInt) {
                             weaverConfig.valueSize = parcel.readInt();
                             if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -75,7 +76,9 @@ public final class WeaverConfig implements Parcelable {
         parcel.writeInt(0);
         parcel.writeInt(this.slots);
         parcel.writeInt(this.keySize);
-        int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.valueSize, dataPosition);
+        int m =
+                SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                        parcel, this.valueSize, dataPosition);
         SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
     }
 }

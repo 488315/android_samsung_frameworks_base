@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.MotionEvent;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -15,19 +16,21 @@ public final class VirtualTouchEvent implements Parcelable {
     public static final int ACTION_MOVE = 2;
     public static final int ACTION_UNKNOWN = -1;
     public static final int ACTION_UP = 1;
-    public static final Parcelable.Creator<VirtualTouchEvent> CREATOR = new Parcelable.Creator<VirtualTouchEvent>() { // from class: android.hardware.input.VirtualTouchEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualTouchEvent createFromParcel(Parcel source) {
-            return new VirtualTouchEvent(source);
-        }
+    public static final Parcelable.Creator<VirtualTouchEvent> CREATOR =
+            new Parcelable.Creator<
+                    VirtualTouchEvent>() { // from class: android.hardware.input.VirtualTouchEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualTouchEvent createFromParcel(Parcel source) {
+                    return new VirtualTouchEvent(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualTouchEvent[] newArray(int size) {
-            return new VirtualTouchEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualTouchEvent[] newArray(int size) {
+                    return new VirtualTouchEvent[size];
+                }
+            };
     private static final int MAX_POINTERS = 16;
     public static final int TOOL_TYPE_FINGER = 1;
     public static final int TOOL_TYPE_PALM = 5;
@@ -42,14 +45,20 @@ public final class VirtualTouchEvent implements Parcelable {
     private final float mY;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Action {
-    }
+    public @interface Action {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ToolType {
-    }
+    public @interface ToolType {}
 
-    private VirtualTouchEvent(int pointerId, int toolType, int action, float x, float y, float pressure, float majorAxisSize, long eventTimeNanos) {
+    private VirtualTouchEvent(
+            int pointerId,
+            int toolType,
+            int action,
+            float x,
+            float y,
+            float pressure,
+            float majorAxisSize,
+            long eventTimeNanos) {
         this.mPointerId = pointerId;
         this.mToolType = toolType;
         this.mAction = action;
@@ -89,7 +98,22 @@ public final class VirtualTouchEvent implements Parcelable {
     }
 
     public String toString() {
-        return "VirtualTouchEvent( pointerId=" + this.mPointerId + " toolType=" + MotionEvent.toolTypeToString(this.mToolType) + " action=" + MotionEvent.actionToString(this.mAction) + " x=" + this.mX + " y=" + this.mY + " pressure=" + this.mPressure + " majorAxisSize=" + this.mMajorAxisSize + " eventTime(ns)=" + this.mEventTimeNanos;
+        return "VirtualTouchEvent( pointerId="
+                + this.mPointerId
+                + " toolType="
+                + MotionEvent.toolTypeToString(this.mToolType)
+                + " action="
+                + MotionEvent.actionToString(this.mAction)
+                + " x="
+                + this.mX
+                + " y="
+                + this.mY
+                + " pressure="
+                + this.mPressure
+                + " majorAxisSize="
+                + this.mMajorAxisSize
+                + " eventTime(ns)="
+                + this.mEventTimeNanos;
     }
 
     public int getPointerId() {
@@ -135,18 +159,35 @@ public final class VirtualTouchEvent implements Parcelable {
         private long mEventTimeNanos = 0;
 
         public VirtualTouchEvent build() {
-            if (this.mToolType == 0 || this.mPointerId == -1 || this.mAction == -1 || Float.isNaN(this.mX) || Float.isNaN(this.mY)) {
-                throw new IllegalArgumentException("Cannot build virtual touch event with unset required fields");
+            if (this.mToolType == 0
+                    || this.mPointerId == -1
+                    || this.mAction == -1
+                    || Float.isNaN(this.mX)
+                    || Float.isNaN(this.mY)) {
+                throw new IllegalArgumentException(
+                        "Cannot build virtual touch event with unset required fields");
             }
-            if ((this.mToolType == 5 && this.mAction != 3) || (this.mAction == 3 && this.mToolType != 5)) {
-                throw new IllegalArgumentException("ACTION_CANCEL and TOOL_TYPE_PALM must always appear together");
+            if ((this.mToolType == 5 && this.mAction != 3)
+                    || (this.mAction == 3 && this.mToolType != 5)) {
+                throw new IllegalArgumentException(
+                        "ACTION_CANCEL and TOOL_TYPE_PALM must always appear together");
             }
-            return new VirtualTouchEvent(this.mPointerId, this.mToolType, this.mAction, this.mX, this.mY, this.mPressure, this.mMajorAxisSize, this.mEventTimeNanos);
+            return new VirtualTouchEvent(
+                    this.mPointerId,
+                    this.mToolType,
+                    this.mAction,
+                    this.mX,
+                    this.mY,
+                    this.mPressure,
+                    this.mMajorAxisSize,
+                    this.mEventTimeNanos);
         }
 
         public Builder setPointerId(int pointerId) {
             if (pointerId < 0 || pointerId > 15) {
-                throw new IllegalArgumentException("The pointer id must be in the range 0 - 15inclusive, but was: " + pointerId);
+                throw new IllegalArgumentException(
+                        "The pointer id must be in the range 0 - 15inclusive, but was: "
+                                + pointerId);
             }
             this.mPointerId = pointerId;
             return this;
@@ -162,7 +203,8 @@ public final class VirtualTouchEvent implements Parcelable {
 
         public Builder setAction(int action) {
             if (action != 0 && action != 1 && action != 2 && action != 3) {
-                throw new IllegalArgumentException("Unsupported touch event action type: " + action);
+                throw new IllegalArgumentException(
+                        "Unsupported touch event action type: " + action);
             }
             this.mAction = action;
             return this;
@@ -188,7 +230,8 @@ public final class VirtualTouchEvent implements Parcelable {
 
         public Builder setMajorAxisSize(float majorAxisSize) {
             if (majorAxisSize < 0.0f) {
-                throw new IllegalArgumentException("Touch event major axis size cannot be negative");
+                throw new IllegalArgumentException(
+                        "Touch event major axis size cannot be negative");
             }
             this.mMajorAxisSize = majorAxisSize;
             return this;

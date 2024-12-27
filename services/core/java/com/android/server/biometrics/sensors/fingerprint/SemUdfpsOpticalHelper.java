@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.ServiceManager;
 import android.util.Slog;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.LocalServices;
 import com.android.server.ServiceThread;
@@ -14,7 +15,9 @@ import com.android.server.biometrics.BiometricHandlerProvider;
 import com.android.server.biometrics.Utils;
 import com.android.server.biometrics.sensors.SemBioSysFsProvider;
 import com.android.server.display.color.ColorDisplayService;
+
 import com.samsung.android.displaysolution.ISemDisplaySolutionManager;
+
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -43,8 +46,10 @@ public final class SemUdfpsOpticalHelper {
     public final Supplier mGetDisplayStateMonitor;
     public boolean mIsLimitedDisplayOn;
     public final boolean mIsSupportHwLightSource;
-    public final SemUdfpsOpticalHelper$$ExternalSyntheticLambda1 mRunnableDisableFunctionForLightSource;
-    public final SemUdfpsOpticalHelper$$ExternalSyntheticLambda1 mRunnableRestoreFunctionForLightSource;
+    public final SemUdfpsOpticalHelper$$ExternalSyntheticLambda1
+            mRunnableDisableFunctionForLightSource;
+    public final SemUdfpsOpticalHelper$$ExternalSyntheticLambda1
+            mRunnableRestoreFunctionForLightSource;
     public final SemBioSysFsProvider mSysFsProvider;
     public float mMaxBrightness = FullScreenMagnificationGestureHandler.MAX_SCALE;
     public int mNits = 0;
@@ -58,15 +63,18 @@ public final class SemUdfpsOpticalHelper {
         public boolean mIsDisabled;
     }
 
-    public SemUdfpsOpticalHelper(SemBioSysFsProvider semBioSysFsProvider, Supplier supplier, boolean z) {
+    public SemUdfpsOpticalHelper(
+            SemBioSysFsProvider semBioSysFsProvider, Supplier supplier, boolean z) {
         this.mIsSupportHwLightSource = z;
         this.mSysFsProvider = semBioSysFsProvider;
         this.mGetDisplayStateMonitor = supplier;
         if (z) {
             return;
         }
-        this.mRunnableDisableFunctionForLightSource = new SemUdfpsOpticalHelper$$ExternalSyntheticLambda1(this, 0);
-        this.mRunnableRestoreFunctionForLightSource = new SemUdfpsOpticalHelper$$ExternalSyntheticLambda1(this, 1);
+        this.mRunnableDisableFunctionForLightSource =
+                new SemUdfpsOpticalHelper$$ExternalSyntheticLambda1(this, 0);
+        this.mRunnableRestoreFunctionForLightSource =
+                new SemUdfpsOpticalHelper$$ExternalSyntheticLambda1(this, 1);
     }
 
     public Handler getBgHandler() {
@@ -74,22 +82,35 @@ public final class SemUdfpsOpticalHelper {
     }
 
     public ISemDisplaySolutionManager getDisplaySolutionManager() {
-        final AtomicReference atomicReference = new AtomicReference(ISemDisplaySolutionManager.Stub.asInterface(ServiceManager.getService("DisplaySolution")));
+        final AtomicReference atomicReference =
+                new AtomicReference(
+                        ISemDisplaySolutionManager.Stub.asInterface(
+                                ServiceManager.getService("DisplaySolution")));
         if (atomicReference.get() == null) {
             ServiceThread serviceThread = new ServiceThread(10, "FingerprintService", true);
             final CountDownLatch countDownLatch = new CountDownLatch(1);
             serviceThread.start();
-            serviceThread.getThreadHandler().post(new Runnable() { // from class: com.android.server.biometrics.sensors.fingerprint.SemUdfpsOpticalHelper$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AtomicReference atomicReference2 = atomicReference;
-                    CountDownLatch countDownLatch2 = countDownLatch;
-                    atomicReference2.set(ISemDisplaySolutionManager.Stub.asInterface(ServiceManager.waitForService("DisplaySolution")));
-                    countDownLatch2.countDown();
-                }
-            });
+            serviceThread
+                    .getThreadHandler()
+                    .post(
+                            new Runnable() { // from class:
+                                             // com.android.server.biometrics.sensors.fingerprint.SemUdfpsOpticalHelper$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    AtomicReference atomicReference2 = atomicReference;
+                                    CountDownLatch countDownLatch2 = countDownLatch;
+                                    atomicReference2.set(
+                                            ISemDisplaySolutionManager.Stub.asInterface(
+                                                    ServiceManager.waitForService(
+                                                            "DisplaySolution")));
+                                    countDownLatch2.countDown();
+                                }
+                            });
             try {
-                Slog.d("FingerprintService", "getDisplaySolutionManager: wait for service result = " + countDownLatch.await(3L, TimeUnit.SECONDS));
+                Slog.d(
+                        "FingerprintService",
+                        "getDisplaySolutionManager: wait for service result = "
+                                + countDownLatch.await(3L, TimeUnit.SECONDS));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -101,9 +122,12 @@ public final class SemUdfpsOpticalHelper {
     public final void removeMaskView(IBinder iBinder) {
         synchronized (this.mMaskClientList) {
             try {
-                SemFpOpticalClient semFpOpticalClient = (SemFpOpticalClient) ((HashMap) this.mMaskClientList).get(iBinder);
+                SemFpOpticalClient semFpOpticalClient =
+                        (SemFpOpticalClient) ((HashMap) this.mMaskClientList).get(iBinder);
                 if (semFpOpticalClient == null) {
-                    Slog.i("FingerprintService", "removeMaskView: No registered client:  " + iBinder);
+                    Slog.i(
+                            "FingerprintService",
+                            "removeMaskView: No registered client:  " + iBinder);
                 } else {
                     ((HashMap) this.mMaskClientList).remove(iBinder);
                     semFpOpticalClient.stop();
@@ -119,16 +143,20 @@ public final class SemUdfpsOpticalHelper {
             try {
                 try {
                     if (this.mDisplayManagerInternal == null) {
-                        this.mDisplayManagerInternal = (DisplayManagerInternal) LocalServices.getService(DisplayManagerInternal.class);
+                        this.mDisplayManagerInternal =
+                                (DisplayManagerInternal)
+                                        LocalServices.getService(DisplayManagerInternal.class);
                     }
                     if (z) {
                         if (!this.mIsLimitedDisplayOn) {
                             this.mIsLimitedDisplayOn = true;
-                            this.mDisplayManagerInternal.setDisplayStateOverride(this.mBinderForDisplayStateLimit, 2);
+                            this.mDisplayManagerInternal.setDisplayStateOverride(
+                                    this.mBinderForDisplayStateLimit, 2);
                         }
                     } else if (this.mIsLimitedDisplayOn) {
                         this.mIsLimitedDisplayOn = false;
-                        this.mDisplayManagerInternal.setDisplayStateOverride(this.mBinderForDisplayStateLimit, 0);
+                        this.mDisplayManagerInternal.setDisplayStateOverride(
+                                this.mBinderForDisplayStateLimit, 0);
                     }
                 } catch (Exception e) {
                     Slog.e("FingerprintService", "setDisplayStateLimit: ", e);
@@ -147,7 +175,8 @@ public final class SemUdfpsOpticalHelper {
         this.mSysFsProvider.getClass();
         Utils.writeFile(new File(HW_LIGHT_SOURCE_PATH), bytes);
         if (Utils.DEBUG) {
-            BootReceiver$$ExternalSyntheticOutline0.m58m("setHwLightMode: [", str, "] done", "FingerprintService");
+            BootReceiver$$ExternalSyntheticOutline0.m58m(
+                    "setHwLightMode: [", str, "] done", "FingerprintService");
         }
         this.mLatestHwLightMode = str;
     }

@@ -2,6 +2,7 @@ package com.android.server.wm;
 
 import android.os.IBinder;
 import android.view.InputWindowHandle;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -44,7 +45,9 @@ public final class InputWindowHandleWrapper {
 
     public final void setOneHandSpecs(float f, float f2, float f3) {
         InputWindowHandle inputWindowHandle = this.mHandle;
-        if (inputWindowHandle.oneHandOffsetX == f && inputWindowHandle.oneHandOffsetY == f2 && inputWindowHandle.oneHandScale == f3) {
+        if (inputWindowHandle.oneHandOffsetX == f
+                && inputWindowHandle.oneHandOffsetY == f2
+                && inputWindowHandle.oneHandScale == f3) {
             return;
         }
         inputWindowHandle.oneHandOffsetX = f;

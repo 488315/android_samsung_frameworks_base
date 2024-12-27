@@ -2,7 +2,6 @@ package android.app.trust;
 
 import android.Manifest;
 import android.app.ActivityThread;
-import android.app.trust.ITrustListener;
 import android.hardware.biometrics.BiometricSourceType;
 import android.os.Binder;
 import android.os.IBinder;
@@ -13,7 +12,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public interface ITrustManager extends IInterface {
-    void clearAllBiometricRecognized(BiometricSourceType biometricSourceType, int i) throws RemoteException;
+    void clearAllBiometricRecognized(BiometricSourceType biometricSourceType, int i)
+            throws RemoteException;
 
     boolean isActiveUnlockRunning(int i) throws RemoteException;
 
@@ -41,46 +41,39 @@ public interface ITrustManager extends IInterface {
 
     void setDeviceLockedForUser(int i, boolean z) throws RemoteException;
 
-    void unlockedByBiometricForUser(int i, BiometricSourceType biometricSourceType) throws RemoteException;
+    void unlockedByBiometricForUser(int i, BiometricSourceType biometricSourceType)
+            throws RemoteException;
 
     void unregisterTrustListener(ITrustListener iTrustListener) throws RemoteException;
 
     public static class Default implements ITrustManager {
         @Override // android.app.trust.ITrustManager
-        public void reportUnlockAttempt(boolean successful, int userId) throws RemoteException {
-        }
+        public void reportUnlockAttempt(boolean successful, int userId) throws RemoteException {}
 
         @Override // android.app.trust.ITrustManager
-        public void reportUserRequestedUnlock(int userId, boolean dismissKeyguard) throws RemoteException {
-        }
+        public void reportUserRequestedUnlock(int userId, boolean dismissKeyguard)
+                throws RemoteException {}
 
         @Override // android.app.trust.ITrustManager
-        public void reportUserMayRequestUnlock(int userId) throws RemoteException {
-        }
+        public void reportUserMayRequestUnlock(int userId) throws RemoteException {}
 
         @Override // android.app.trust.ITrustManager
-        public void reportUnlockLockout(int timeoutMs, int userId) throws RemoteException {
-        }
+        public void reportUnlockLockout(int timeoutMs, int userId) throws RemoteException {}
 
         @Override // android.app.trust.ITrustManager
-        public void reportEnabledTrustAgentsChanged(int userId) throws RemoteException {
-        }
+        public void reportEnabledTrustAgentsChanged(int userId) throws RemoteException {}
 
         @Override // android.app.trust.ITrustManager
-        public void registerTrustListener(ITrustListener trustListener) throws RemoteException {
-        }
+        public void registerTrustListener(ITrustListener trustListener) throws RemoteException {}
 
         @Override // android.app.trust.ITrustManager
-        public void unregisterTrustListener(ITrustListener trustListener) throws RemoteException {
-        }
+        public void unregisterTrustListener(ITrustListener trustListener) throws RemoteException {}
 
         @Override // android.app.trust.ITrustManager
-        public void reportKeyguardShowingChanged() throws RemoteException {
-        }
+        public void reportKeyguardShowingChanged() throws RemoteException {}
 
         @Override // android.app.trust.ITrustManager
-        public void setDeviceLockedForUser(int userId, boolean locked) throws RemoteException {
-        }
+        public void setDeviceLockedForUser(int userId, boolean locked) throws RemoteException {}
 
         @Override // android.app.trust.ITrustManager
         public boolean isDeviceLocked(int userId, int deviceId) throws RemoteException {
@@ -98,12 +91,12 @@ public interface ITrustManager extends IInterface {
         }
 
         @Override // android.app.trust.ITrustManager
-        public void unlockedByBiometricForUser(int userId, BiometricSourceType source) throws RemoteException {
-        }
+        public void unlockedByBiometricForUser(int userId, BiometricSourceType source)
+                throws RemoteException {}
 
         @Override // android.app.trust.ITrustManager
-        public void clearAllBiometricRecognized(BiometricSourceType target, int unlockedUser) throws RemoteException {
-        }
+        public void clearAllBiometricRecognized(BiometricSourceType target, int unlockedUser)
+                throws RemoteException {}
 
         @Override // android.app.trust.ITrustManager
         public boolean isActiveUnlockRunning(int userId) throws RemoteException {
@@ -121,7 +114,7 @@ public interface ITrustManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITrustManager {
+    public abstract static class Stub extends Binder implements ITrustManager {
         public static final String DESCRIPTOR = "android.app.trust.ITrustManager";
         static final int TRANSACTION_clearAllBiometricRecognized = 14;
         static final int TRANSACTION_isActiveUnlockRunning = 15;
@@ -151,7 +144,9 @@ public interface ITrustManager extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static ITrustManager asInterface(IBinder obj) {
@@ -215,7 +210,8 @@ public interface ITrustManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -258,13 +254,15 @@ public interface ITrustManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 6:
-                    ITrustListener _arg06 = ITrustListener.Stub.asInterface(data.readStrongBinder());
+                    ITrustListener _arg06 =
+                            ITrustListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerTrustListener(_arg06);
                     reply.writeNoException();
                     return true;
                 case 7:
-                    ITrustListener _arg07 = ITrustListener.Stub.asInterface(data.readStrongBinder());
+                    ITrustListener _arg07 =
+                            ITrustListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterTrustListener(_arg07);
                     reply.writeNoException();
@@ -305,13 +303,15 @@ public interface ITrustManager extends IInterface {
                     return true;
                 case 13:
                     int _arg012 = data.readInt();
-                    BiometricSourceType _arg17 = (BiometricSourceType) data.readTypedObject(BiometricSourceType.CREATOR);
+                    BiometricSourceType _arg17 =
+                            (BiometricSourceType) data.readTypedObject(BiometricSourceType.CREATOR);
                     data.enforceNoDataAvail();
                     unlockedByBiometricForUser(_arg012, _arg17);
                     reply.writeNoException();
                     return true;
                 case 14:
-                    BiometricSourceType _arg013 = (BiometricSourceType) data.readTypedObject(BiometricSourceType.CREATOR);
+                    BiometricSourceType _arg013 =
+                            (BiometricSourceType) data.readTypedObject(BiometricSourceType.CREATOR);
                     int _arg18 = data.readInt();
                     data.enforceNoDataAvail();
                     clearAllBiometricRecognized(_arg013, _arg18);
@@ -367,7 +367,8 @@ public interface ITrustManager extends IInterface {
             }
 
             @Override // android.app.trust.ITrustManager
-            public void reportUserRequestedUnlock(int userId, boolean dismissKeyguard) throws RemoteException {
+            public void reportUserRequestedUnlock(int userId, boolean dismissKeyguard)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -444,7 +445,8 @@ public interface ITrustManager extends IInterface {
             }
 
             @Override // android.app.trust.ITrustManager
-            public void unregisterTrustListener(ITrustListener trustListener) throws RemoteException {
+            public void unregisterTrustListener(ITrustListener trustListener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -542,7 +544,8 @@ public interface ITrustManager extends IInterface {
             }
 
             @Override // android.app.trust.ITrustManager
-            public void unlockedByBiometricForUser(int userId, BiometricSourceType source) throws RemoteException {
+            public void unlockedByBiometricForUser(int userId, BiometricSourceType source)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -558,7 +561,8 @@ public interface ITrustManager extends IInterface {
             }
 
             @Override // android.app.trust.ITrustManager
-            public void clearAllBiometricRecognized(BiometricSourceType target, int unlockedUser) throws RemoteException {
+            public void clearAllBiometricRecognized(BiometricSourceType target, int unlockedUser)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -608,7 +612,8 @@ public interface ITrustManager extends IInterface {
         }
 
         protected void isTrustUsuallyManaged_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.TRUST_LISTENER, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.TRUST_LISTENER, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

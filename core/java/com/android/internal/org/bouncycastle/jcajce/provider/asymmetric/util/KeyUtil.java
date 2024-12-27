@@ -8,7 +8,8 @@ import com.android.internal.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 
 /* loaded from: classes5.dex */
 public class KeyUtil {
-    public static byte[] getEncodedSubjectPublicKeyInfo(AlgorithmIdentifier algId, ASN1Encodable keyData) {
+    public static byte[] getEncodedSubjectPublicKeyInfo(
+            AlgorithmIdentifier algId, ASN1Encodable keyData) {
         try {
             return getEncodedSubjectPublicKeyInfo(new SubjectPublicKeyInfo(algId, keyData));
         } catch (Exception e) {
@@ -32,7 +33,8 @@ public class KeyUtil {
         }
     }
 
-    public static byte[] getEncodedPrivateKeyInfo(AlgorithmIdentifier algId, ASN1Encodable privKey) {
+    public static byte[] getEncodedPrivateKeyInfo(
+            AlgorithmIdentifier algId, ASN1Encodable privKey) {
         try {
             PrivateKeyInfo info = new PrivateKeyInfo(algId, privKey.toASN1Primitive());
             return getEncodedPrivateKeyInfo(info);

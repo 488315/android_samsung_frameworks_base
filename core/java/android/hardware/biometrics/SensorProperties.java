@@ -15,8 +15,7 @@ public class SensorProperties {
     private final int mSensorStrength;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Strength {
-    }
+    public @interface Strength {}
 
     public static final class ComponentInfo {
         private final String mComponentId;
@@ -25,7 +24,12 @@ public class SensorProperties {
         private final String mSerialNumber;
         private final String mSoftwareVersion;
 
-        public ComponentInfo(String componentId, String hardwareVersion, String firmwareVersion, String serialNumber, String softwareVersion) {
+        public ComponentInfo(
+                String componentId,
+                String hardwareVersion,
+                String firmwareVersion,
+                String serialNumber,
+                String softwareVersion) {
             this.mComponentId = componentId;
             this.mHardwareVersion = hardwareVersion;
             this.mFirmwareVersion = firmwareVersion;
@@ -54,7 +58,12 @@ public class SensorProperties {
         }
 
         public static ComponentInfo from(ComponentInfoInternal internalComp) {
-            return new ComponentInfo(internalComp.componentId, internalComp.hardwareVersion, internalComp.firmwareVersion, internalComp.serialNumber, internalComp.softwareVersion);
+            return new ComponentInfo(
+                    internalComp.componentId,
+                    internalComp.hardwareVersion,
+                    internalComp.firmwareVersion,
+                    internalComp.serialNumber,
+                    internalComp.softwareVersion);
         }
     }
 
@@ -81,6 +90,7 @@ public class SensorProperties {
         for (ComponentInfoInternal internalComp : internalProp.componentInfo) {
             componentInfo.add(ComponentInfo.from(internalComp));
         }
-        return new SensorProperties(internalProp.sensorId, internalProp.sensorStrength, componentInfo);
+        return new SensorProperties(
+                internalProp.sensorId, internalProp.sensorStrength, componentInfo);
     }
 }

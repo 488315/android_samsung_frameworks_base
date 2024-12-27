@@ -5,9 +5,9 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.SystemClock;
 import android.util.SparseArray;
+
 import com.android.internal.logging.nano.MetricsProto;
-import com.android.internal.os.BinderCallsStats;
-import com.android.internal.os.CachedDeviceState;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -27,7 +27,8 @@ public class LooperStats implements Looper.Observer {
     private final Object mLock = new Object();
     private final Entry mOverflowEntry = new Entry("OVERFLOW");
     private final Entry mHashCollisionEntry = new Entry("HASH_COLLISION");
-    private final ConcurrentLinkedQueue<DispatchSession> mSessionPool = new ConcurrentLinkedQueue<>();
+    private final ConcurrentLinkedQueue<DispatchSession> mSessionPool =
+            new ConcurrentLinkedQueue<>();
     private long mStartCurrentTime = System.currentTimeMillis();
     private long mStartElapsedTime = SystemClock.elapsedRealtime();
     private boolean mAddDebugEntries = false;
@@ -133,8 +134,12 @@ public class LooperStats implements Looper.Observer {
         if (this.mAddDebugEntries && this.mBatteryStopwatch != null) {
             exportedEntries.add(createDebugEntry("start_time_millis", this.mStartElapsedTime));
             exportedEntries.add(createDebugEntry("end_time_millis", SystemClock.elapsedRealtime()));
-            exportedEntries.add(createDebugEntry("battery_time_millis", this.mBatteryStopwatch.getMillis()));
-            exportedEntries.add(createDebugEntry(BinderCallsStats.SettingsObserver.SETTINGS_SAMPLING_INTERVAL_KEY, this.mSamplingInterval));
+            exportedEntries.add(
+                    createDebugEntry("battery_time_millis", this.mBatteryStopwatch.getMillis()));
+            exportedEntries.add(
+                    createDebugEntry(
+                            BinderCallsStats.SettingsObserver.SETTINGS_SAMPLING_INTERVAL_KEY,
+                            this.mSamplingInterval));
         }
         return exportedEntries;
     }
@@ -219,7 +224,11 @@ public class LooperStats implements Looper.Observer {
                 entry = new Entry(msg, isInteractive);
                 this.mEntries.put(id, entry);
             }
-            if (entry.workSourceUid != msg.workSourceUid || entry.handler.getClass() != msg.getTarget().getClass() || entry.handler.getLooper().getThread() != msg.getTarget().getLooper().getThread() || entry.isInteractive != isInteractive) {
+            if (entry.workSourceUid != msg.workSourceUid
+                    || entry.handler.getClass() != msg.getTarget().getClass()
+                    || entry.handler.getLooper().getThread()
+                            != msg.getTarget().getLooper().getThread()
+                    || entry.isInteractive != isInteractive) {
                 return this.mHashCollisionEntry;
             }
             return entry;
@@ -254,8 +263,7 @@ public class LooperStats implements Looper.Observer {
         public long startTimeMicro;
         public long systemUptimeMillis;
 
-        private DispatchSession() {
-        }
+        private DispatchSession() {}
     }
 
     private static class Entry {
@@ -302,7 +310,18 @@ public class LooperStats implements Looper.Observer {
         }
 
         static int idFor(Message msg, boolean isInteractive) {
-            int result = (((((((7 * 31) + msg.workSourceUid) * 31) + msg.getTarget().getLooper().getThread().hashCode()) * 31) + msg.getTarget().getClass().hashCode()) * 31) + (isInteractive ? MetricsProto.MetricsEvent.AUTOFILL_SERVICE_DISABLED_APP : MetricsProto.MetricsEvent.ANOMALY_TYPE_UNOPTIMIZED_BT);
+            int result =
+                    (((((((7 * 31) + msg.workSourceUid) * 31)
+                                                            + msg.getTarget()
+                                                                    .getLooper()
+                                                                    .getThread()
+                                                                    .hashCode())
+                                                    * 31)
+                                            + msg.getTarget().getClass().hashCode())
+                                    * 31)
+                            + (isInteractive
+                                    ? MetricsProto.MetricsEvent.AUTOFILL_SERVICE_DISABLED_APP
+                                    : MetricsProto.MetricsEvent.ANOMALY_TYPE_UNOPTIMIZED_BT);
             if (msg.getCallback() != null) {
                 return (result * 31) + msg.getCallback().getClass().hashCode();
             }

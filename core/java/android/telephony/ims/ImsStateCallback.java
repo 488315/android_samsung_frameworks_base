@@ -1,9 +1,10 @@
 package android.telephony.ims;
 
 import android.os.Binder;
-import android.telephony.ims.ImsStateCallback;
+
 import com.android.internal.telephony.IImsStateCallback;
 import com.android.internal.util.FunctionalUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
@@ -20,8 +21,7 @@ public abstract class ImsStateCallback {
     private IImsStateCallbackStub mCallback;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DisconnectedReason {
-    }
+    public @interface DisconnectedReason {}
 
     public abstract void onAvailable();
 
@@ -57,22 +57,29 @@ public abstract class ImsStateCallback {
             if (callback == null) {
                 return;
             }
-            Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.ims.ImsStateCallback$IImsStateCallbackStub$$ExternalSyntheticLambda3
-                @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    ImsStateCallback.IImsStateCallbackStub.this.lambda$onAvailable$1(callback);
-                }
-            });
+            Binder.withCleanCallingIdentity(
+                    new FunctionalUtils
+                            .ThrowingRunnable() { // from class:
+                                                  // android.telephony.ims.ImsStateCallback$IImsStateCallbackStub$$ExternalSyntheticLambda3
+                        @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
+                        public final void runOrThrow() {
+                            ImsStateCallback.IImsStateCallbackStub.this.lambda$onAvailable$1(
+                                    callback);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onAvailable$1(final ImsStateCallback callback) throws Exception {
-            this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.ImsStateCallback$IImsStateCallbackStub$$ExternalSyntheticLambda2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsStateCallback.this.onAvailable();
-                }
-            });
+        public /* synthetic */ void lambda$onAvailable$1(final ImsStateCallback callback)
+                throws Exception {
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.ImsStateCallback$IImsStateCallbackStub$$ExternalSyntheticLambda2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsStateCallback.this.onAvailable();
+                        }
+                    });
         }
 
         @Override // com.android.internal.telephony.IImsStateCallback
@@ -81,33 +88,44 @@ public abstract class ImsStateCallback {
             if (callback == null) {
                 return;
             }
-            Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingRunnable() { // from class: android.telephony.ims.ImsStateCallback$IImsStateCallbackStub$$ExternalSyntheticLambda1
-                @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
-                public final void runOrThrow() {
-                    ImsStateCallback.IImsStateCallbackStub.this.lambda$onUnavailable$3(callback, reason);
-                }
-            });
+            Binder.withCleanCallingIdentity(
+                    new FunctionalUtils
+                            .ThrowingRunnable() { // from class:
+                                                  // android.telephony.ims.ImsStateCallback$IImsStateCallbackStub$$ExternalSyntheticLambda1
+                        @Override // com.android.internal.util.FunctionalUtils.ThrowingRunnable
+                        public final void runOrThrow() {
+                            ImsStateCallback.IImsStateCallbackStub.this.lambda$onUnavailable$3(
+                                    callback, reason);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onUnavailable$3(final ImsStateCallback callback, final int reason) throws Exception {
-            this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.ImsStateCallback$IImsStateCallbackStub$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsStateCallback.this.onUnavailable(reason);
-                }
-            });
+        public /* synthetic */ void lambda$onUnavailable$3(
+                final ImsStateCallback callback, final int reason) throws Exception {
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.ImsStateCallback$IImsStateCallbackStub$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsStateCallback.this.onUnavailable(reason);
+                        }
+                    });
         }
     }
 
     public final void binderDied() {
         if (this.mCallback != null) {
-            this.mCallback.getExecutor().execute(new Runnable() { // from class: android.telephony.ims.ImsStateCallback$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsStateCallback.this.lambda$binderDied$0();
-                }
-            });
+            this.mCallback
+                    .getExecutor()
+                    .execute(
+                            new Runnable() { // from class:
+                                             // android.telephony.ims.ImsStateCallback$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    ImsStateCallback.this.lambda$binderDied$0();
+                                }
+                            });
         }
     }
 

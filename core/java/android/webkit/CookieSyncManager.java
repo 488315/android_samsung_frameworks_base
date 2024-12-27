@@ -60,18 +60,15 @@ public final class CookieSyncManager extends WebSyncManager {
 
     @Override // android.webkit.WebSyncManager
     @Deprecated
-    public void resetSync() {
-    }
+    public void resetSync() {}
 
     @Override // android.webkit.WebSyncManager
     @Deprecated
-    public void startSync() {
-    }
+    public void startSync() {}
 
     @Override // android.webkit.WebSyncManager
     @Deprecated
-    public void stopSync() {
-    }
+    public void stopSync() {}
 
     static void setGetInstanceIsAllowed() {
         sGetInstanceAllowed = true;
@@ -79,7 +76,9 @@ public final class CookieSyncManager extends WebSyncManager {
 
     private static void checkInstanceIsAllowed() {
         if (!sGetInstanceAllowed) {
-            throw new IllegalStateException("CookieSyncManager::createInstance() needs to be called before CookieSyncManager::getInstance()");
+            throw new IllegalStateException(
+                    "CookieSyncManager::createInstance() needs to be called before"
+                        + " CookieSyncManager::getInstance()");
         }
     }
 }

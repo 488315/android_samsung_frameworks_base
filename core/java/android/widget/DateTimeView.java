@@ -19,9 +19,11 @@ import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.inspector.InspectionCompanion;
 import android.view.inspector.PropertyMapper;
 import android.view.inspector.PropertyReader;
-import android.widget.RemoteViews;
+
 import com.android.internal.R;
+
 import com.samsung.android.knox.analytics.database.Contract;
+
 import java.text.DateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -50,7 +52,8 @@ public class DateTimeView extends TextView {
     private long mTimeMillis;
     private long mUpdateTimeMillis;
 
-    public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<DateTimeView> {
+    public final class InspectionCompanion
+            implements android.view.inspector.InspectionCompanion<DateTimeView> {
         private boolean mPropertiesMapped = false;
         private int mShowReleativeId;
 
@@ -154,7 +157,8 @@ public class DateTimeView extends TextView {
         }
         ZoneId zoneId = ZoneId.systemDefault();
         LocalDateTime localTime = this.mLocalTime;
-        LocalDateTime localStartOfDay = LocalDateTime.of(localTime.toLocalDate(), LocalTime.MIDNIGHT);
+        LocalDateTime localStartOfDay =
+                LocalDateTime.of(localTime.toLocalDate(), LocalTime.MIDNIGHT);
         LocalDateTime localTomorrowStartOfDay = localStartOfDay.plusDays(1L);
         LocalDateTime localNow = LocalDateTime.now(zoneId).withSecond(0);
         long twelveHoursBefore = toEpochMillis(localTime.minusHours(12L), zoneId);
@@ -163,7 +167,8 @@ public class DateTimeView extends TextView {
         long midnightAfter = toEpochMillis(localTomorrowStartOfDay, zoneId);
         long time = toEpochMillis(localTime, zoneId);
         long now = toEpochMillis(localNow, zoneId);
-        if ((now >= midnightBefore && now < midnightAfter) || (now >= twelveHoursBefore && now < twelveHoursAfter)) {
+        if ((now >= midnightBefore && now < midnightAfter)
+                || (now >= twelveHoursBefore && now < twelveHoursAfter)) {
             display = 0;
         } else {
             display = 1;
@@ -192,11 +197,13 @@ public class DateTimeView extends TextView {
         String text = format.format(new Date(time));
         maybeSetText(text);
         if (display == 0) {
-            this.mUpdateTimeMillis = twelveHoursAfter > midnightAfter ? twelveHoursAfter : midnightAfter;
+            this.mUpdateTimeMillis =
+                    twelveHoursAfter > midnightAfter ? twelveHoursAfter : midnightAfter;
         } else if (this.mTimeMillis < now) {
             this.mUpdateTimeMillis = 0L;
         } else {
-            this.mUpdateTimeMillis = twelveHoursBefore < midnightBefore ? twelveHoursBefore : midnightBefore;
+            this.mUpdateTimeMillis =
+                    twelveHoursBefore < midnightBefore ? twelveHoursBefore : midnightBefore;
         }
     }
 
@@ -306,7 +313,8 @@ public class DateTimeView extends TextView {
     }
 
     private static int dayDistance(LocalDateTime start, LocalDateTime end) {
-        return (int) (end.getLong(JulianFields.JULIAN_DAY) - start.getLong(JulianFields.JULIAN_DAY));
+        return (int)
+                (end.getLong(JulianFields.JULIAN_DAY) - start.getLong(JulianFields.JULIAN_DAY));
     }
 
     private DateFormat getTimeFormat() {
@@ -334,23 +342,47 @@ public class DateTimeView extends TextView {
             } else if (duration < 3600000) {
                 int count = (int) (duration / 60000);
                 arguments.put(Contract.Events.Projection.COUNT_ONLY, Integer.valueOf(count));
-                result = PluralsMessageFormatter.format(getContext().getResources(), arguments, past ? R.string.duration_minutes_relative : R.string.duration_minutes_relative_future);
+                result =
+                        PluralsMessageFormatter.format(
+                                getContext().getResources(),
+                                arguments,
+                                past
+                                        ? R.string.duration_minutes_relative
+                                        : R.string.duration_minutes_relative_future);
             } else if (duration < 86400000) {
                 int count2 = (int) (duration / 3600000);
                 arguments.put(Contract.Events.Projection.COUNT_ONLY, Integer.valueOf(count2));
-                result = PluralsMessageFormatter.format(getContext().getResources(), arguments, past ? R.string.duration_hours_relative : R.string.duration_hours_relative_future);
+                result =
+                        PluralsMessageFormatter.format(
+                                getContext().getResources(),
+                                arguments,
+                                past
+                                        ? R.string.duration_hours_relative
+                                        : R.string.duration_hours_relative_future);
             } else if (duration < 31449600000L) {
                 LocalDateTime localDateTime = this.mLocalTime;
                 ZoneId zoneId = ZoneId.systemDefault();
                 LocalDateTime localNow = toLocalDateTime(now, zoneId);
                 int count3 = Math.max(Math.abs(dayDistance(localDateTime, localNow)), 1);
                 arguments.put(Contract.Events.Projection.COUNT_ONLY, Integer.valueOf(count3));
-                String result2 = PluralsMessageFormatter.format(getContext().getResources(), arguments, past ? R.string.duration_days_relative : R.string.duration_days_relative_future);
+                String result2 =
+                        PluralsMessageFormatter.format(
+                                getContext().getResources(),
+                                arguments,
+                                past
+                                        ? R.string.duration_days_relative
+                                        : R.string.duration_days_relative_future);
                 result = result2;
             } else {
                 int count4 = (int) (duration / 31449600000L);
                 arguments.put(Contract.Events.Projection.COUNT_ONLY, Integer.valueOf(count4));
-                result = PluralsMessageFormatter.format(getContext().getResources(), arguments, past ? R.string.duration_years_relative : R.string.duration_years_relative_future);
+                result =
+                        PluralsMessageFormatter.format(
+                                getContext().getResources(),
+                                arguments,
+                                past
+                                        ? R.string.duration_years_relative
+                                        : R.string.duration_years_relative_future);
             }
             info.setText(result);
         }
@@ -374,22 +406,29 @@ public class DateTimeView extends TextView {
 
         private ReceiverInfo() {
             this.mAttachedViews = new ArrayList<>();
-            this.mReceiver = new BroadcastReceiver() { // from class: android.widget.DateTimeView.ReceiverInfo.1
-                @Override // android.content.BroadcastReceiver
-                public void onReceive(Context context, Intent intent) {
-                    String action = intent.getAction();
-                    if (Intent.ACTION_TIME_TICK.equals(action) && System.currentTimeMillis() < ReceiverInfo.this.getSoonestUpdateTime()) {
-                        return;
-                    }
-                    ReceiverInfo.this.updateAll();
-                }
-            };
-            this.mObserver = new ContentObserver(new Handler()) { // from class: android.widget.DateTimeView.ReceiverInfo.2
-                @Override // android.database.ContentObserver
-                public void onChange(boolean selfChange) {
-                    ReceiverInfo.this.updateAll();
-                }
-            };
+            this.mReceiver =
+                    new BroadcastReceiver() { // from class:
+                                              // android.widget.DateTimeView.ReceiverInfo.1
+                        @Override // android.content.BroadcastReceiver
+                        public void onReceive(Context context, Intent intent) {
+                            String action = intent.getAction();
+                            if (Intent.ACTION_TIME_TICK.equals(action)
+                                    && System.currentTimeMillis()
+                                            < ReceiverInfo.this.getSoonestUpdateTime()) {
+                                return;
+                            }
+                            ReceiverInfo.this.updateAll();
+                        }
+                    };
+            this.mObserver =
+                    new ContentObserver(
+                            new Handler()) { // from class:
+                                             // android.widget.DateTimeView.ReceiverInfo.2
+                        @Override // android.database.ContentObserver
+                        public void onChange(boolean selfChange) {
+                            ReceiverInfo.this.updateAll();
+                        }
+                    };
             this.mHandler = new Handler();
         }
 
@@ -422,12 +461,14 @@ public class DateTimeView extends TextView {
                 }
                 for (int i = 0; i < count; i++) {
                     final DateTimeView view = this.mAttachedViews.get(i);
-                    view.post(new Runnable() { // from class: android.widget.DateTimeView$ReceiverInfo$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            DateTimeView.this.clearFormatAndUpdate();
-                        }
-                    });
+                    view.post(
+                            new Runnable() { // from class:
+                                             // android.widget.DateTimeView$ReceiverInfo$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    DateTimeView.this.clearFormatAndUpdate();
+                                }
+                            });
                 }
             }
         }

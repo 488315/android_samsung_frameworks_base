@@ -9,29 +9,37 @@ import android.provider.Settings;
 
 /* loaded from: classes2.dex */
 public class ParentalControlsUtilsInternal {
-    private static final String TEST_ALWAYS_REQUIRE_CONSENT_CLASS = "android.hardware.biometrics.ParentalControlsUtilsInternal.require_consent_class";
-    private static final String TEST_ALWAYS_REQUIRE_CONSENT_PACKAGE = "android.hardware.biometrics.ParentalControlsUtilsInternal.require_consent_package";
+    private static final String TEST_ALWAYS_REQUIRE_CONSENT_CLASS =
+            "android.hardware.biometrics.ParentalControlsUtilsInternal.require_consent_class";
+    private static final String TEST_ALWAYS_REQUIRE_CONSENT_PACKAGE =
+            "android.hardware.biometrics.ParentalControlsUtilsInternal.require_consent_package";
 
     public static ComponentName getTestComponentName(Context context, int userId) {
         if (!Build.IS_USERDEBUG && !Build.IS_ENG) {
             return null;
         }
-        String pkg = Settings.Secure.getStringForUser(context.getContentResolver(), TEST_ALWAYS_REQUIRE_CONSENT_PACKAGE, userId);
-        String cls = Settings.Secure.getStringForUser(context.getContentResolver(), TEST_ALWAYS_REQUIRE_CONSENT_CLASS, userId);
+        String pkg =
+                Settings.Secure.getStringForUser(
+                        context.getContentResolver(), TEST_ALWAYS_REQUIRE_CONSENT_PACKAGE, userId);
+        String cls =
+                Settings.Secure.getStringForUser(
+                        context.getContentResolver(), TEST_ALWAYS_REQUIRE_CONSENT_CLASS, userId);
         if (pkg == null || cls == null) {
             return null;
         }
         return new ComponentName(pkg, cls);
     }
 
-    public static boolean parentConsentRequired(Context context, DevicePolicyManager dpm, int modality, UserHandle userHandle) {
+    public static boolean parentConsentRequired(
+            Context context, DevicePolicyManager dpm, int modality, UserHandle userHandle) {
         if (getTestComponentName(context, userHandle.getIdentifier()) != null) {
             return true;
         }
         return parentConsentRequired(dpm, modality, userHandle);
     }
 
-    public static boolean parentConsentRequired(DevicePolicyManager dpm, int modality, UserHandle userHandle) {
+    public static boolean parentConsentRequired(
+            DevicePolicyManager dpm, int modality, UserHandle userHandle) {
         ComponentName cn = getSupervisionComponentName(dpm, userHandle);
         if (cn == null) {
             return false;
@@ -52,7 +60,8 @@ public class ParentalControlsUtilsInternal {
         return false;
     }
 
-    public static ComponentName getSupervisionComponentName(DevicePolicyManager dpm, UserHandle userHandle) {
+    public static ComponentName getSupervisionComponentName(
+            DevicePolicyManager dpm, UserHandle userHandle) {
         return dpm.getProfileOwnerOrDeviceOwnerSupervisionComponent(userHandle);
     }
 

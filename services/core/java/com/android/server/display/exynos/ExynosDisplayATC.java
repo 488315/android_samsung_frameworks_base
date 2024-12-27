@@ -15,6 +15,7 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.util.Log;
+
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
@@ -22,6 +23,7 @@ import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.GestureWakeup$$ExternalSyntheticOutline0;
 import com.android.server.audio.AudioService$$ExternalSyntheticOutline0;
+
 import java.lang.reflect.Array;
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -57,7 +59,9 @@ public final class ExynosDisplayATC {
     public final String ATC_XML_FILE_PATH = "/vendor/etc/dqe/calib_data_atc.xml";
     public final Object mDataCollectionLock = new Object();
     public final Deque mLastSensorReadings = new ArrayDeque();
-    public int[] mAmbientLight = {0, 3000, 4000, 5000, 6000, 8000, 10000, 15000, 20000, 25000, 30000, 40000, 50000};
+    public int[] mAmbientLight = {
+        0, 3000, 4000, 5000, 6000, 8000, 10000, 15000, 20000, 25000, 30000, 40000, 50000
+    };
     public String[] mApsTable = null;
     public String[] mQueSizeTable = null;
     public String[] mQueCoeffTable = null;
@@ -86,164 +90,190 @@ public final class ExynosDisplayATC {
     public int[] mBrightnessLux = {0};
     public int[] mBrightnessSetting = {0};
     public final Object mLock = new Object();
-    public final AnonymousClass1 mHandler = new Handler() { // from class: com.android.server.display.exynos.ExynosDisplayATC.1
-        @Override // android.os.Handler
-        public final void handleMessage(Message message) {
-            String[] strArr;
-            super.handleMessage(message);
-            int i = message.what;
-            ExynosDisplayATC exynosDisplayATC = ExynosDisplayATC.this;
-            switch (i) {
-                case 1:
-                    ExynosDisplayUtils.sendEmptyUpdate();
-                    break;
-                case 2:
-                    int i2 = message.arg1;
-                    if (exynosDisplayATC.mLightSensorEnabled && ExynosDisplayATC.TUNE_MODE && exynosDisplayATC.mPrevLuminance != i2) {
-                        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i2, "lux: ", "ExynosDisplayATC");
-                        ExynosDisplayUtils.sysfsWrite(i2, exynosDisplayATC.ATC_LUX_SYSFS_PATH);
-                        exynosDisplayATC.mPrevLuminance = i2;
-                        break;
-                    }
-                    break;
-                case 3:
-                    String obj = message.obj.toString();
-                    int i3 = message.arg1;
-                    if (exynosDisplayATC.mLightSensorEnabled) {
-                        String str = exynosDisplayATC.mPrevAps;
-                        if (str != null && obj.equals(str)) {
-                            if (ExynosDisplayATC.TUNE_MODE) {
-                                Log.d("ExynosDisplayATC", "aps skip : ".concat(obj));
+    public final AnonymousClass1 mHandler =
+            new Handler() { // from class: com.android.server.display.exynos.ExynosDisplayATC.1
+                @Override // android.os.Handler
+                public final void handleMessage(Message message) {
+                    String[] strArr;
+                    super.handleMessage(message);
+                    int i = message.what;
+                    ExynosDisplayATC exynosDisplayATC = ExynosDisplayATC.this;
+                    switch (i) {
+                        case 1:
+                            ExynosDisplayUtils.sendEmptyUpdate();
+                            break;
+                        case 2:
+                            int i2 = message.arg1;
+                            if (exynosDisplayATC.mLightSensorEnabled
+                                    && ExynosDisplayATC.TUNE_MODE
+                                    && exynosDisplayATC.mPrevLuminance != i2) {
+                                NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                                        i2, "lux: ", "ExynosDisplayATC");
+                                ExynosDisplayUtils.sysfsWrite(
+                                        i2, exynosDisplayATC.ATC_LUX_SYSFS_PATH);
+                                exynosDisplayATC.mPrevLuminance = i2;
                                 break;
                             }
-                        } else {
-                            if (ExynosDisplayATC.TUNE_MODE) {
-                                DualAppManagerService$$ExternalSyntheticOutline0.m("aps: ", obj, "ExynosDisplayATC");
-                            }
-                            exynosDisplayATC.sysfsWriteOnOff(true);
-                            ExynosDisplayUtils.sysfsWriteSting(exynosDisplayATC.ATC_SFR_SYSFS_PATH, obj);
-                            exynosDisplayATC.mPrevAps = obj;
-                            exynosDisplayATC.mApsDelayedOffRequired = i3 != 0;
-                            exynosDisplayATC.startCountDownTimer();
                             break;
-                        }
-                    }
-                    break;
-                case 4:
-                    String obj2 = message.obj.toString();
-                    if (exynosDisplayATC.mLightSensorEnabled) {
-                        String str2 = exynosDisplayATC.mPrevHsv;
-                        if (str2 != null && obj2.equals(str2)) {
-                            if (ExynosDisplayATC.TUNE_MODE) {
-                                Log.d("ExynosDisplayATC", "hsv skip as same");
-                                break;
-                            }
-                        } else {
-                            if (ExynosDisplayATC.TUNE_MODE) {
-                                DualAppManagerService$$ExternalSyntheticOutline0.m("hsv: ", obj2, "ExynosDisplayATC");
-                            }
-                            ExynosDisplayUtils.sysfsWriteSting(exynosDisplayATC.HSC_SYSFS_PATH, obj2);
-                            exynosDisplayATC.mPrevHsv = obj2;
-                            exynosDisplayATC.startCountDownTimer();
-                            break;
-                        }
-                    }
-                    break;
-                case 5:
-                    String obj3 = message.obj.toString();
-                    int i4 = message.arg1;
-                    if (exynosDisplayATC.mLightSensorEnabled) {
-                        if (i4 < 3 && (strArr = exynosDisplayATC.mPrevHsvLcg) != null) {
-                            String str3 = strArr[i4];
-                            if (str3 != null && obj3.equals(str3)) {
-                                if (ExynosDisplayATC.TUNE_MODE) {
-                                    Log.d("ExynosDisplayATC", "hsvlcg skip as same");
+                        case 3:
+                            String obj = message.obj.toString();
+                            int i3 = message.arg1;
+                            if (exynosDisplayATC.mLightSensorEnabled) {
+                                String str = exynosDisplayATC.mPrevAps;
+                                if (str != null && obj.equals(str)) {
+                                    if (ExynosDisplayATC.TUNE_MODE) {
+                                        Log.d("ExynosDisplayATC", "aps skip : ".concat(obj));
+                                        break;
+                                    }
+                                } else {
+                                    if (ExynosDisplayATC.TUNE_MODE) {
+                                        DualAppManagerService$$ExternalSyntheticOutline0.m(
+                                                "aps: ", obj, "ExynosDisplayATC");
+                                    }
+                                    exynosDisplayATC.sysfsWriteOnOff(true);
+                                    ExynosDisplayUtils.sysfsWriteSting(
+                                            exynosDisplayATC.ATC_SFR_SYSFS_PATH, obj);
+                                    exynosDisplayATC.mPrevAps = obj;
+                                    exynosDisplayATC.mApsDelayedOffRequired = i3 != 0;
+                                    exynosDisplayATC.startCountDownTimer();
                                     break;
                                 }
-                            } else {
-                                if (ExynosDisplayATC.TUNE_MODE) {
-                                    DualAppManagerService$$ExternalSyntheticOutline0.m("hsv lcg: ", obj3, "ExynosDisplayATC");
-                                }
-                                ExynosDisplayUtils.sysfsWriteSting(exynosDisplayATC.HSC48_IDX_SYSFS_PATH, Integer.toString(i4));
-                                ExynosDisplayUtils.sysfsWriteSting(exynosDisplayATC.HSC48_LCG_SYSFS_PATH, obj3);
-                                exynosDisplayATC.mPrevHsvLcg[i4] = obj3;
-                                exynosDisplayATC.startCountDownTimer();
-                                break;
                             }
-                        } else if (ExynosDisplayATC.TUNE_MODE) {
-                            Log.d("ExynosDisplayATC", "hsvlcg skip as invalid");
                             break;
-                        }
+                        case 4:
+                            String obj2 = message.obj.toString();
+                            if (exynosDisplayATC.mLightSensorEnabled) {
+                                String str2 = exynosDisplayATC.mPrevHsv;
+                                if (str2 != null && obj2.equals(str2)) {
+                                    if (ExynosDisplayATC.TUNE_MODE) {
+                                        Log.d("ExynosDisplayATC", "hsv skip as same");
+                                        break;
+                                    }
+                                } else {
+                                    if (ExynosDisplayATC.TUNE_MODE) {
+                                        DualAppManagerService$$ExternalSyntheticOutline0.m(
+                                                "hsv: ", obj2, "ExynosDisplayATC");
+                                    }
+                                    ExynosDisplayUtils.sysfsWriteSting(
+                                            exynosDisplayATC.HSC_SYSFS_PATH, obj2);
+                                    exynosDisplayATC.mPrevHsv = obj2;
+                                    exynosDisplayATC.startCountDownTimer();
+                                    break;
+                                }
+                            }
+                            break;
+                        case 5:
+                            String obj3 = message.obj.toString();
+                            int i4 = message.arg1;
+                            if (exynosDisplayATC.mLightSensorEnabled) {
+                                if (i4 < 3 && (strArr = exynosDisplayATC.mPrevHsvLcg) != null) {
+                                    String str3 = strArr[i4];
+                                    if (str3 != null && obj3.equals(str3)) {
+                                        if (ExynosDisplayATC.TUNE_MODE) {
+                                            Log.d("ExynosDisplayATC", "hsvlcg skip as same");
+                                            break;
+                                        }
+                                    } else {
+                                        if (ExynosDisplayATC.TUNE_MODE) {
+                                            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                                                    "hsv lcg: ", obj3, "ExynosDisplayATC");
+                                        }
+                                        ExynosDisplayUtils.sysfsWriteSting(
+                                                exynosDisplayATC.HSC48_IDX_SYSFS_PATH,
+                                                Integer.toString(i4));
+                                        ExynosDisplayUtils.sysfsWriteSting(
+                                                exynosDisplayATC.HSC48_LCG_SYSFS_PATH, obj3);
+                                        exynosDisplayATC.mPrevHsvLcg[i4] = obj3;
+                                        exynosDisplayATC.startCountDownTimer();
+                                        break;
+                                    }
+                                } else if (ExynosDisplayATC.TUNE_MODE) {
+                                    Log.d("ExynosDisplayATC", "hsvlcg skip as invalid");
+                                    break;
+                                }
+                            }
+                            break;
+                        case 6:
+                            if (exynosDisplayATC.mApsDelayedOffRequired) {
+                                exynosDisplayATC.sysfsWriteOnOff(false);
+                            }
+                            exynosDisplayATC.mApsDelayedOffRequired = false;
+                            break;
                     }
-                    break;
-                case 6:
-                    if (exynosDisplayATC.mApsDelayedOffRequired) {
-                        exynosDisplayATC.sysfsWriteOnOff(false);
-                    }
-                    exynosDisplayATC.mApsDelayedOffRequired = false;
-                    break;
-            }
-        }
-    };
-    public final AnonymousClass3 sensorListener = new SensorEventListener() { // from class: com.android.server.display.exynos.ExynosDisplayATC.3
-        @Override // android.hardware.SensorEventListener
-        public final void onAccuracyChanged(Sensor sensor, int i) {
-        }
+                }
+            };
+    public final AnonymousClass3 sensorListener =
+            new SensorEventListener() { // from class:
+                                        // com.android.server.display.exynos.ExynosDisplayATC.3
+                @Override // android.hardware.SensorEventListener
+                public final void onAccuracyChanged(Sensor sensor, int i) {}
 
-        @Override // android.hardware.SensorEventListener
-        public final void onSensorChanged(SensorEvent sensorEvent) {
-            ExynosDisplayATC exynosDisplayATC = ExynosDisplayATC.this;
-            exynosDisplayATC.getClass();
-            SystemClock.elapsedRealtimeNanos();
-            synchronized (exynosDisplayATC.mDataCollectionLock) {
-                try {
-                    if (((ArrayDeque) exynosDisplayATC.mLastSensorReadings).isEmpty() || sensorEvent.timestamp >= ((LightData) ((ArrayDeque) exynosDisplayATC.mLastSensorReadings).getLast()).timestamp) {
-                        String[] split = exynosDisplayATC.mQsize.split("\\s*,\\s*");
-                        exynosDisplayATC.mItem = split;
-                        int parseInt = Integer.parseInt(split[0]);
-                        while (!((ArrayDeque) exynosDisplayATC.mLastSensorReadings).isEmpty() && ((ArrayDeque) exynosDisplayATC.mLastSensorReadings).size() >= parseInt) {
+                @Override // android.hardware.SensorEventListener
+                public final void onSensorChanged(SensorEvent sensorEvent) {
+                    ExynosDisplayATC exynosDisplayATC = ExynosDisplayATC.this;
+                    exynosDisplayATC.getClass();
+                    SystemClock.elapsedRealtimeNanos();
+                    synchronized (exynosDisplayATC.mDataCollectionLock) {
+                        try {
+                            if (((ArrayDeque) exynosDisplayATC.mLastSensorReadings).isEmpty()
+                                    || sensorEvent.timestamp
+                                            >= ((LightData)
+                                                            ((ArrayDeque)
+                                                                            exynosDisplayATC
+                                                                                    .mLastSensorReadings)
+                                                                    .getLast())
+                                                    .timestamp) {
+                                String[] split = exynosDisplayATC.mQsize.split("\\s*,\\s*");
+                                exynosDisplayATC.mItem = split;
+                                int parseInt = Integer.parseInt(split[0]);
+                                while (!((ArrayDeque) exynosDisplayATC.mLastSensorReadings)
+                                                .isEmpty()
+                                        && ((ArrayDeque) exynosDisplayATC.mLastSensorReadings)
+                                                        .size()
+                                                >= parseInt) {}
+                                LightData lightData = new LightData();
+                                lightData.timestamp = sensorEvent.timestamp;
+                                lightData.lux = sensorEvent.values[0];
+                                ((ArrayDeque) exynosDisplayATC.mLastSensorReadings)
+                                        .addLast(lightData);
+                            } else {
+                                Log.d("ExynosDisplayATC", "Ignore event " + sensorEvent.values[0]);
+                            }
+                        } finally {
                         }
-                        LightData lightData = new LightData();
-                        lightData.timestamp = sensorEvent.timestamp;
-                        lightData.lux = sensorEvent.values[0];
-                        ((ArrayDeque) exynosDisplayATC.mLastSensorReadings).addLast(lightData);
-                    } else {
-                        Log.d("ExynosDisplayATC", "Ignore event " + sensorEvent.values[0]);
                     }
-                } finally {
+                    if (ExynosDisplayATC.TUNE_MODE) {
+                        ExynosDisplayATC.this.printSensorDeque();
+                    }
+                    int i = (int) sensorEvent.values[0];
+                    ExynosDisplayATC.this.caculateLuminance();
+                    ExynosDisplayATC.this.loadLuminanceATCTable();
+                    ExynosDisplayATC exynosDisplayATC2 = ExynosDisplayATC.this;
+                    String[] split2 = exynosDisplayATC2.mQdelay.split("\\s*,\\s*");
+                    exynosDisplayATC2.mItem = split2;
+                    int parseInt2 = Integer.parseInt(split2[0]);
+                    if (ExynosDisplayATC.TUNE_MODE) {
+                        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                                parseInt2, "qdelay: ", "ExynosDisplayATC");
+                    }
+                    if (parseInt2 > 0) {
+                        ExynosDisplayATC exynosDisplayATC3 = ExynosDisplayATC.this;
+                        int i2 = exynosDisplayATC3.mEventCount;
+                        int i3 = i2 + 1;
+                        exynosDisplayATC3.mEventCount = i3;
+                        if (i2 < parseInt2) {
+                            return;
+                        }
+                        if (i3 >= parseInt2) {
+                            exynosDisplayATC3.mEventCount = 0;
+                        }
+                    }
+                    ExynosDisplayATC.this.sendMessage();
+                    if (ExynosDisplayATC.TUNE_MODE) {
+                        ExynosDisplayATC.this.setBrightnessAdjustment(i);
+                    }
                 }
-            }
-            if (ExynosDisplayATC.TUNE_MODE) {
-                ExynosDisplayATC.this.printSensorDeque();
-            }
-            int i = (int) sensorEvent.values[0];
-            ExynosDisplayATC.this.caculateLuminance();
-            ExynosDisplayATC.this.loadLuminanceATCTable();
-            ExynosDisplayATC exynosDisplayATC2 = ExynosDisplayATC.this;
-            String[] split2 = exynosDisplayATC2.mQdelay.split("\\s*,\\s*");
-            exynosDisplayATC2.mItem = split2;
-            int parseInt2 = Integer.parseInt(split2[0]);
-            if (ExynosDisplayATC.TUNE_MODE) {
-                NetworkScorerAppManager$$ExternalSyntheticOutline0.m(parseInt2, "qdelay: ", "ExynosDisplayATC");
-            }
-            if (parseInt2 > 0) {
-                ExynosDisplayATC exynosDisplayATC3 = ExynosDisplayATC.this;
-                int i2 = exynosDisplayATC3.mEventCount;
-                int i3 = i2 + 1;
-                exynosDisplayATC3.mEventCount = i3;
-                if (i2 < parseInt2) {
-                    return;
-                }
-                if (i3 >= parseInt2) {
-                    exynosDisplayATC3.mEventCount = 0;
-                }
-            }
-            ExynosDisplayATC.this.sendMessage();
-            if (ExynosDisplayATC.TUNE_MODE) {
-                ExynosDisplayATC.this.setBrightnessAdjustment(i);
-            }
-        }
-    };
+            };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.display.exynos.ExynosDisplayATC$2, reason: invalid class name */
@@ -260,7 +290,9 @@ public final class ExynosDisplayATC {
             }
             ExynosDisplayATC exynosDisplayATC = ExynosDisplayATC.this;
             exynosDisplayATC.getClass();
-            String stringFromFile = ExynosDisplayUtils.getStringFromFile(exynosDisplayATC.ATC_DIM_STATUS_SYSFS_PATH);
+            String stringFromFile =
+                    ExynosDisplayUtils.getStringFromFile(
+                            exynosDisplayATC.ATC_DIM_STATUS_SYSFS_PATH);
             if (stringFromFile == null) {
                 exynosDisplayATC.mDimOperating = 0;
             } else {
@@ -283,7 +315,8 @@ public final class ExynosDisplayATC {
                 StringBuilder sb = new StringBuilder("Finished Refresh Timer interval: ");
                 sb.append(ExynosDisplayATC.this.mIntervalMs);
                 sb.append(", timeout: ");
-                GestureWakeup$$ExternalSyntheticOutline0.m(sb, ExynosDisplayATC.this.mTimeoutMs, "ExynosDisplayATC");
+                GestureWakeup$$ExternalSyntheticOutline0.m(
+                        sb, ExynosDisplayATC.this.mTimeoutMs, "ExynosDisplayATC");
             }
         }
 
@@ -320,7 +353,9 @@ public final class ExynosDisplayATC {
         this.mSensorManager = sensorManager;
         this.mLightSensor = sensorManager.getDefaultSensor(5);
         this.mLocalHandler = new Handler(context.getMainLooper());
-        String[] parserXMLALText = ExynosDisplayUtils.parserXMLALText(0, "/vendor/etc/dqe/calib_data_bypass.xml", "aps");
+        String[] parserXMLALText =
+                ExynosDisplayUtils.parserXMLALText(
+                        0, "/vendor/etc/dqe/calib_data_bypass.xml", "aps");
         if (parserXMLALText == null || parserXMLALText.length <= 0) {
             Log.d("ExynosDisplayATC", "xml aps not found");
             this.mApsInit = "0,0,128,128,128,0,10,14,2,0,25,230,140,250,0,3,3,2,3,128,1";
@@ -332,7 +367,8 @@ public final class ExynosDisplayATC {
 
     public static void enableATCTuneMode(boolean z) {
         if (z != TUNE_MODE) {
-            AccessibilityManagerService$$ExternalSyntheticOutline0.m("enableATCTuneMode: TUNE_MODE=", "ExynosDisplayATC", z);
+            AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                    "enableATCTuneMode: TUNE_MODE=", "ExynosDisplayATC", z);
         }
         TUNE_MODE = z;
     }
@@ -401,20 +437,30 @@ public final class ExynosDisplayATC {
     public final void enableATC(boolean z) {
         resetATC();
         if (z) {
-            String pathWithPanel = !TUNE_MODE ? ExynosDisplayUtils.getPathWithPanel(this.ATC_XML_FILE_PATH) : ExynosDisplayUtils.getPathWithPanel(this.ATC_CAL_FILE_PATH);
+            String pathWithPanel =
+                    !TUNE_MODE
+                            ? ExynosDisplayUtils.getPathWithPanel(this.ATC_XML_FILE_PATH)
+                            : ExynosDisplayUtils.getPathWithPanel(this.ATC_CAL_FILE_PATH);
             if (pathWithPanel != null) {
                 try {
-                    String[] parserFactoryXMLAttribute = ExynosDisplayUtils.parserFactoryXMLAttribute(pathWithPanel, "tune", "atc", "al");
+                    String[] parserFactoryXMLAttribute =
+                            ExynosDisplayUtils.parserFactoryXMLAttribute(
+                                    pathWithPanel, "tune", "atc", "al");
                     if (parserFactoryXMLAttribute != null) {
                         if (parserFactoryXMLAttribute.length <= 0) {
-                            Log.e("ExynosDisplayATC", "xml array size wrong: " + parserFactoryXMLAttribute.length);
+                            Log.e(
+                                    "ExynosDisplayATC",
+                                    "xml array size wrong: " + parserFactoryXMLAttribute.length);
                         } else {
                             synchronized (this.mLock) {
                                 try {
-                                    Log.d("ExynosDisplayATC", "array_length: " + parserFactoryXMLAttribute.length);
+                                    Log.d(
+                                            "ExynosDisplayATC",
+                                            "array_length: " + parserFactoryXMLAttribute.length);
                                     this.mAmbientLight = new int[parserFactoryXMLAttribute.length];
                                     for (int i = 0; i < parserFactoryXMLAttribute.length; i++) {
-                                        this.mAmbientLight[i] = Integer.parseInt(parserFactoryXMLAttribute[i]);
+                                        this.mAmbientLight[i] =
+                                                Integer.parseInt(parserFactoryXMLAttribute[i]);
                                         Log.d("ExynosDisplayATC", "al: " + this.mAmbientLight[i]);
                                     }
                                     int[] iArr = this.mAmbientLight;
@@ -425,48 +471,92 @@ public final class ExynosDisplayATC {
                                     this.mQueDelayTable = new String[iArr.length];
                                     this.mQueAlCoeffTable = new String[iArr.length];
                                     this.mHsvTable = new String[iArr.length];
-                                    this.mHsvLcgTable = (String[][]) Array.newInstance((Class<?>) String.class, iArr.length, 3);
+                                    this.mHsvLcgTable =
+                                            (String[][])
+                                                    Array.newInstance(
+                                                            (Class<?>) String.class,
+                                                            iArr.length,
+                                                            3);
                                     int i2 = 0;
                                     while (true) {
                                         int[] iArr2 = this.mAmbientLight;
                                         if (i2 >= iArr2.length) {
                                             break;
                                         }
-                                        String[] parserFactoryXMLALText = ExynosDisplayUtils.parserFactoryXMLALText(iArr2[i2], 0, pathWithPanel, "aps");
+                                        String[] parserFactoryXMLALText =
+                                                ExynosDisplayUtils.parserFactoryXMLALText(
+                                                        iArr2[i2], 0, pathWithPanel, "aps");
                                         if (parserFactoryXMLALText != null) {
                                             this.mApsTable[i2] = parserFactoryXMLALText[0];
                                         }
-                                        String[] parserFactoryXMLALText2 = ExynosDisplayUtils.parserFactoryXMLALText(this.mAmbientLight[i2], 0, pathWithPanel, "apsdoff");
+                                        String[] parserFactoryXMLALText2 =
+                                                ExynosDisplayUtils.parserFactoryXMLALText(
+                                                        this.mAmbientLight[i2],
+                                                        0,
+                                                        pathWithPanel,
+                                                        "apsdoff");
                                         if (parserFactoryXMLALText2 != null) {
-                                            this.mApsDelayedOffTable[i2] = Integer.parseInt(parserFactoryXMLALText2[0]);
+                                            this.mApsDelayedOffTable[i2] =
+                                                    Integer.parseInt(parserFactoryXMLALText2[0]);
                                         } else {
                                             this.mApsDelayedOffTable[i2] = 0;
                                         }
-                                        String[] parserFactoryXMLALText3 = ExynosDisplayUtils.parserFactoryXMLALText(this.mAmbientLight[i2], 0, pathWithPanel, "qsize");
+                                        String[] parserFactoryXMLALText3 =
+                                                ExynosDisplayUtils.parserFactoryXMLALText(
+                                                        this.mAmbientLight[i2],
+                                                        0,
+                                                        pathWithPanel,
+                                                        "qsize");
                                         if (parserFactoryXMLALText3 != null) {
                                             this.mQueSizeTable[i2] = parserFactoryXMLALText3[0];
                                         }
-                                        String[] parserFactoryXMLALText4 = ExynosDisplayUtils.parserFactoryXMLALText(this.mAmbientLight[i2], 0, pathWithPanel, "qcoeff");
+                                        String[] parserFactoryXMLALText4 =
+                                                ExynosDisplayUtils.parserFactoryXMLALText(
+                                                        this.mAmbientLight[i2],
+                                                        0,
+                                                        pathWithPanel,
+                                                        "qcoeff");
                                         if (parserFactoryXMLALText4 != null) {
                                             this.mQueCoeffTable[i2] = parserFactoryXMLALText4[0];
                                         }
-                                        String[] parserFactoryXMLALText5 = ExynosDisplayUtils.parserFactoryXMLALText(this.mAmbientLight[i2], 0, pathWithPanel, "qdelay");
+                                        String[] parserFactoryXMLALText5 =
+                                                ExynosDisplayUtils.parserFactoryXMLALText(
+                                                        this.mAmbientLight[i2],
+                                                        0,
+                                                        pathWithPanel,
+                                                        "qdelay");
                                         if (parserFactoryXMLALText5 != null) {
                                             this.mQueDelayTable[i2] = parserFactoryXMLALText5[0];
                                         }
-                                        String[] parserFactoryXMLALText6 = ExynosDisplayUtils.parserFactoryXMLALText(this.mAmbientLight[i2], 0, pathWithPanel, "qalcoeff");
+                                        String[] parserFactoryXMLALText6 =
+                                                ExynosDisplayUtils.parserFactoryXMLALText(
+                                                        this.mAmbientLight[i2],
+                                                        0,
+                                                        pathWithPanel,
+                                                        "qalcoeff");
                                         if (parserFactoryXMLALText6 != null) {
                                             this.mQueAlCoeffTable[i2] = parserFactoryXMLALText6[0];
                                         }
                                         for (int i3 = 0; i3 < 3; i3++) {
-                                            String[] parserFactoryXMLALText7 = ExynosDisplayUtils.parserFactoryXMLALText(this.mAmbientLight[i2], i3, pathWithPanel, "hsc48_lcg");
+                                            String[] parserFactoryXMLALText7 =
+                                                    ExynosDisplayUtils.parserFactoryXMLALText(
+                                                            this.mAmbientLight[i2],
+                                                            i3,
+                                                            pathWithPanel,
+                                                            "hsc48_lcg");
                                             if (parserFactoryXMLALText7 != null) {
-                                                this.mHsvLcgTable[i2][i3] = parserFactoryXMLALText7[0];
+                                                this.mHsvLcgTable[i2][i3] =
+                                                        parserFactoryXMLALText7[0];
                                             } else {
                                                 this.mHsvLcgTable[i2][i3] = null;
                                             }
                                         }
-                                        String[] parserFactoryXMLALText8 = ExynosDisplayUtils.parserFactoryXMLALText(this.mAmbientLight[i2], 0, pathWithPanel, "hsc");
+                                        String[] parserFactoryXMLALText8 =
+                                                ExynosDisplayUtils.parserFactoryXMLALText(
+                                                        this.mAmbientLight[i2],
+                                                        0,
+                                                        pathWithPanel,
+                                                        "hsc");
                                         if (parserFactoryXMLALText8 != null) {
                                             this.mHsvTable[i2] = parserFactoryXMLALText8[0];
                                         } else {
@@ -476,11 +566,21 @@ public final class ExynosDisplayATC {
                                     }
                                     for (int i4 = 0; i4 < this.mAmbientLight.length; i4++) {
                                         Log.d("ExynosDisplayATC", "<aps>" + this.mApsTable[i4]);
-                                        Log.d("ExynosDisplayATC", "<apsdoff>" + this.mApsDelayedOffTable[i4]);
-                                        Log.d("ExynosDisplayATC", "<qsize>" + this.mQueSizeTable[i4]);
-                                        Log.d("ExynosDisplayATC", "<qcoeff>" + this.mQueCoeffTable[i4]);
-                                        Log.d("ExynosDisplayATC", "<qdelay>" + this.mQueDelayTable[i4]);
-                                        Log.d("ExynosDisplayATC", "<qalcoeff>" + this.mQueAlCoeffTable[i4]);
+                                        Log.d(
+                                                "ExynosDisplayATC",
+                                                "<apsdoff>" + this.mApsDelayedOffTable[i4]);
+                                        Log.d(
+                                                "ExynosDisplayATC",
+                                                "<qsize>" + this.mQueSizeTable[i4]);
+                                        Log.d(
+                                                "ExynosDisplayATC",
+                                                "<qcoeff>" + this.mQueCoeffTable[i4]);
+                                        Log.d(
+                                                "ExynosDisplayATC",
+                                                "<qdelay>" + this.mQueDelayTable[i4]);
+                                        Log.d(
+                                                "ExynosDisplayATC",
+                                                "<qalcoeff>" + this.mQueAlCoeffTable[i4]);
                                         Log.d("ExynosDisplayATC", "<hsc>" + this.mHsvTable[i4]);
                                     }
                                 } finally {
@@ -506,11 +606,15 @@ public final class ExynosDisplayATC {
     }
 
     public final void enableLightSensor(boolean z) {
-        int integer = this.mContext.getResources().getInteger(R.integer.config_displayWhiteBalanceBrightnessSensorRate);
+        int integer =
+                this.mContext
+                        .getResources()
+                        .getInteger(R.integer.config_displayWhiteBalanceBrightnessSensorRate);
         if (integer == 1 || integer == 3) {
             return;
         }
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("enableLightSensor: enable=", "ExynosDisplayATC", z);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "enableLightSensor: enable=", "ExynosDisplayATC", z);
         AnonymousClass1 anonymousClass1 = this.mHandler;
         if (z) {
             if (anonymousClass1 != null) {
@@ -570,11 +674,18 @@ public final class ExynosDisplayATC {
         }
         if (strArr[i4] != null) {
             if (TUNE_MODE) {
-                AudioService$$ExternalSyntheticOutline0.m(ArrayUtils$$ExternalSyntheticOutline0.m(i4, i3, "adjusted pos: ", " at (", "~"), i2, ")", "ExynosDisplayATC");
+                AudioService$$ExternalSyntheticOutline0.m(
+                        ArrayUtils$$ExternalSyntheticOutline0.m(
+                                i4, i3, "adjusted pos: ", " at (", "~"),
+                        i2,
+                        ")",
+                        "ExynosDisplayATC");
             }
             return i4;
         }
-        Log.e("ExynosDisplayATC", "unable to find proper ATC table, return prev pos: " + this.mPrevPos);
+        Log.e(
+                "ExynosDisplayATC",
+                "unable to find proper ATC table, return prev pos: " + this.mPrevPos);
         return this.mPrevPos;
     }
 
@@ -607,7 +718,12 @@ public final class ExynosDisplayATC {
                     return;
                 }
                 if (TUNE_MODE || this.mPrevPos != findBestATCTable) {
-                    Log.d("ExynosDisplayATC", "mLastLuminance: " + this.mLastLuminance + ", mAmbientLight: " + this.mAmbientLight[findBestATCTable]);
+                    Log.d(
+                            "ExynosDisplayATC",
+                            "mLastLuminance: "
+                                    + this.mLastLuminance
+                                    + ", mAmbientLight: "
+                                    + this.mAmbientLight[findBestATCTable]);
                 }
                 this.mLastAps = this.mApsTable[findBestATCTable];
                 this.mLastApsDelayedOff = this.mApsDelayedOffTable[findBestATCTable];
@@ -650,7 +766,9 @@ public final class ExynosDisplayATC {
                 if (i2 >= iArr.length) {
                     break;
                 }
-                this.mBrightnessSetting[i2] = Integer.parseInt(ExynosDisplayUtils.parserXMLALText(iArr[i2], str, "bl")[0]);
+                this.mBrightnessSetting[i2] =
+                        Integer.parseInt(
+                                ExynosDisplayUtils.parserXMLALText(iArr[i2], str, "bl")[0]);
                 i2++;
             }
             for (int i3 = 0; i3 < this.mBrightnessLux.length; i3++) {
@@ -674,7 +792,10 @@ public final class ExynosDisplayATC {
         String str = null;
         while (it.hasNext()) {
             String str2 = Integer.toString((int) ((LightData) it.next()).lux) + ", ";
-            str = str == null ? str2 : ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, str2);
+            str =
+                    str == null
+                            ? str2
+                            : ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str, str2);
         }
         if (TUNE_MODE) {
             DualAppManagerService$$ExternalSyntheticOutline0.m("que: ", str, "ExynosDisplayATC");
@@ -746,11 +867,18 @@ public final class ExynosDisplayATC {
                     }
                 }
                 int i3 = i2 - 1;
-                StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "lux: ", ", mBrightnessLux: ");
+                StringBuilder m =
+                        BatteryService$$ExternalSyntheticOutline0.m(
+                                i, "lux: ", ", mBrightnessLux: ");
                 m.append(this.mBrightnessLux[i3]);
                 m.append(", mBrightnessSetting: ");
-                GestureWakeup$$ExternalSyntheticOutline0.m(m, this.mBrightnessSetting[i3], "ExynosDisplayATC");
-                Settings.System.putIntForUser(this.mContext.getContentResolver(), "screen_brightness", this.mBrightnessSetting[i3], -2);
+                GestureWakeup$$ExternalSyntheticOutline0.m(
+                        m, this.mBrightnessSetting[i3], "ExynosDisplayATC");
+                Settings.System.putIntForUser(
+                        this.mContext.getContentResolver(),
+                        "screen_brightness",
+                        this.mBrightnessSetting[i3],
+                        -2);
             }
         }
     }
@@ -769,14 +897,19 @@ public final class ExynosDisplayATC {
         if (anonymousClass2 != null) {
             anonymousClass2.cancel();
         }
-        this.mLocalHandler.postDelayed(new Runnable() { // from class: com.android.server.display.exynos.ExynosDisplayATC.4
-            @Override // java.lang.Runnable
-            public final void run() {
-                ExynosDisplayATC exynosDisplayATC = ExynosDisplayATC.this;
-                exynosDisplayATC.getClass();
-                exynosDisplayATC.mCountdownTimer = exynosDisplayATC.new AnonymousClass2(exynosDisplayATC.mTimeoutMs, exynosDisplayATC.mIntervalMs);
-            }
-        }, 0L);
+        this.mLocalHandler.postDelayed(
+                new Runnable() { // from class: com.android.server.display.exynos.ExynosDisplayATC.4
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        ExynosDisplayATC exynosDisplayATC = ExynosDisplayATC.this;
+                        exynosDisplayATC.getClass();
+                        exynosDisplayATC.mCountdownTimer =
+                                exynosDisplayATC
+                                .new AnonymousClass2(
+                                        exynosDisplayATC.mTimeoutMs, exynosDisplayATC.mIntervalMs);
+                    }
+                },
+                0L);
     }
 
     public final void setLastLuminance(int i) {
@@ -786,8 +919,8 @@ public final class ExynosDisplayATC {
         String[] split = this.mQsize.split("\\s*,\\s*");
         this.mItem = split;
         int parseInt = Integer.parseInt(split[0]);
-        while (!((ArrayDeque) this.mLastSensorReadings).isEmpty() && ((ArrayDeque) this.mLastSensorReadings).size() >= parseInt) {
-        }
+        while (!((ArrayDeque) this.mLastSensorReadings).isEmpty()
+                && ((ArrayDeque) this.mLastSensorReadings).size() >= parseInt) {}
         LightData lightData = new LightData();
         lightData.timestamp = System.currentTimeMillis() / 1000;
         lightData.lux = i;
@@ -796,7 +929,9 @@ public final class ExynosDisplayATC {
         caculateLuminance();
         this.mLightSensorEnabled = true;
         sendMessage();
-        if ((this.mBrightnessLux.length <= 1 || this.mBrightnessSetting.length <= 1) && TUNE_MODE && ExynosDisplayUtils.existFile(this.ATC_BL_FILE_PATH)) {
+        if ((this.mBrightnessLux.length <= 1 || this.mBrightnessSetting.length <= 1)
+                && TUNE_MODE
+                && ExynosDisplayUtils.existFile(this.ATC_BL_FILE_PATH)) {
             parserTuneATCBLXML();
         }
         setBrightnessAdjustment(i);

@@ -22,7 +22,8 @@ public class SContextActivityLocationLoggingAttribute extends SContextAttribute 
         setAttribute();
     }
 
-    public SContextActivityLocationLoggingAttribute(int stopPeriod, int waitPeriod, int statyingRadius, int areaRadius, int lppResolution) {
+    public SContextActivityLocationLoggingAttribute(
+            int stopPeriod, int waitPeriod, int statyingRadius, int areaRadius, int lppResolution) {
         this.mStopPeriod = 60;
         this.mWaitPeriod = 120;
         this.mStayingRadius = 50;
@@ -36,7 +37,8 @@ public class SContextActivityLocationLoggingAttribute extends SContextAttribute 
         setAttribute();
     }
 
-    @Override // android.hardware.scontext.SContextAttribute, com.samsung.android.hardware.context.SemContextAttribute
+    @Override // android.hardware.scontext.SContextAttribute,
+    // com.samsung.android.hardware.context.SemContextAttribute
     public boolean checkAttribute() {
         if (this.mStopPeriod < 0) {
             Log.e(TAG, "The stop period is wrong.");

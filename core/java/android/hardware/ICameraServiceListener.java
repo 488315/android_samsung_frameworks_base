@@ -22,11 +22,13 @@ public interface ICameraServiceListener extends IInterface {
 
     void onCameraClosed(String str, int i) throws RemoteException;
 
-    void onCameraDeviceStateChanged(String str, int i, int i2, String str2, int i3, int i4, int i5) throws RemoteException;
+    void onCameraDeviceStateChanged(String str, int i, int i2, String str2, int i3, int i4, int i5)
+            throws RemoteException;
 
     void onCameraOpened(String str, String str2, int i) throws RemoteException;
 
-    void onPhysicalCameraStatusChanged(int i, String str, String str2, int i2) throws RemoteException;
+    void onPhysicalCameraStatusChanged(int i, String str, String str2, int i2)
+            throws RemoteException;
 
     void onStatusChanged(int i, String str, int i2) throws RemoteException;
 
@@ -36,36 +38,42 @@ public interface ICameraServiceListener extends IInterface {
 
     public static class Default implements ICameraServiceListener {
         @Override // android.hardware.ICameraServiceListener
-        public void onStatusChanged(int status, String cameraId, int deviceId) throws RemoteException {
-        }
+        public void onStatusChanged(int status, String cameraId, int deviceId)
+                throws RemoteException {}
 
         @Override // android.hardware.ICameraServiceListener
-        public void onPhysicalCameraStatusChanged(int status, String cameraId, String physicalCameraId, int deviceId) throws RemoteException {
-        }
+        public void onPhysicalCameraStatusChanged(
+                int status, String cameraId, String physicalCameraId, int deviceId)
+                throws RemoteException {}
 
         @Override // android.hardware.ICameraServiceListener
-        public void onTorchStatusChanged(int status, String cameraId, int deviceId) throws RemoteException {
-        }
+        public void onTorchStatusChanged(int status, String cameraId, int deviceId)
+                throws RemoteException {}
 
         @Override // android.hardware.ICameraServiceListener
-        public void onTorchStrengthLevelChanged(String cameraId, int newTorchStrength, int deviceId) throws RemoteException {
-        }
+        public void onTorchStrengthLevelChanged(String cameraId, int newTorchStrength, int deviceId)
+                throws RemoteException {}
 
         @Override // android.hardware.ICameraServiceListener
-        public void onCameraAccessPrioritiesChanged() throws RemoteException {
-        }
+        public void onCameraAccessPrioritiesChanged() throws RemoteException {}
 
         @Override // android.hardware.ICameraServiceListener
-        public void onCameraOpened(String cameraId, String clientPackageId, int deviceId) throws RemoteException {
-        }
+        public void onCameraOpened(String cameraId, String clientPackageId, int deviceId)
+                throws RemoteException {}
 
         @Override // android.hardware.ICameraServiceListener
-        public void onCameraClosed(String cameraId, int deviceId) throws RemoteException {
-        }
+        public void onCameraClosed(String cameraId, int deviceId) throws RemoteException {}
 
         @Override // android.hardware.ICameraServiceListener
-        public void onCameraDeviceStateChanged(String cameraId, int facing, int newCameraState, String clientName, int apiLevel, int userId, int deviceId) throws RemoteException {
-        }
+        public void onCameraDeviceStateChanged(
+                String cameraId,
+                int facing,
+                int newCameraState,
+                String clientName,
+                int apiLevel,
+                int userId,
+                int deviceId)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -73,7 +81,7 @@ public interface ICameraServiceListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICameraServiceListener {
+    public abstract static class Stub extends Binder implements ICameraServiceListener {
         public static final String DESCRIPTOR = "android.hardware.ICameraServiceListener";
         static final int TRANSACTION_onCameraAccessPrioritiesChanged = 5;
         static final int TRANSACTION_onCameraClosed = 7;
@@ -133,7 +141,8 @@ public interface ICameraServiceListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -220,7 +229,8 @@ public interface ICameraServiceListener extends IInterface {
             }
 
             @Override // android.hardware.ICameraServiceListener
-            public void onStatusChanged(int status, String cameraId, int deviceId) throws RemoteException {
+            public void onStatusChanged(int status, String cameraId, int deviceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -234,7 +244,9 @@ public interface ICameraServiceListener extends IInterface {
             }
 
             @Override // android.hardware.ICameraServiceListener
-            public void onPhysicalCameraStatusChanged(int status, String cameraId, String physicalCameraId, int deviceId) throws RemoteException {
+            public void onPhysicalCameraStatusChanged(
+                    int status, String cameraId, String physicalCameraId, int deviceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -249,7 +261,8 @@ public interface ICameraServiceListener extends IInterface {
             }
 
             @Override // android.hardware.ICameraServiceListener
-            public void onTorchStatusChanged(int status, String cameraId, int deviceId) throws RemoteException {
+            public void onTorchStatusChanged(int status, String cameraId, int deviceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -263,7 +276,8 @@ public interface ICameraServiceListener extends IInterface {
             }
 
             @Override // android.hardware.ICameraServiceListener
-            public void onTorchStrengthLevelChanged(String cameraId, int newTorchStrength, int deviceId) throws RemoteException {
+            public void onTorchStrengthLevelChanged(
+                    String cameraId, int newTorchStrength, int deviceId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -288,7 +302,8 @@ public interface ICameraServiceListener extends IInterface {
             }
 
             @Override // android.hardware.ICameraServiceListener
-            public void onCameraOpened(String cameraId, String clientPackageId, int deviceId) throws RemoteException {
+            public void onCameraOpened(String cameraId, String clientPackageId, int deviceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -315,7 +330,15 @@ public interface ICameraServiceListener extends IInterface {
             }
 
             @Override // android.hardware.ICameraServiceListener
-            public void onCameraDeviceStateChanged(String cameraId, int facing, int newCameraState, String clientName, int apiLevel, int userId, int deviceId) throws RemoteException {
+            public void onCameraDeviceStateChanged(
+                    String cameraId,
+                    int facing,
+                    int newCameraState,
+                    String clientName,
+                    int apiLevel,
+                    int userId,
+                    int deviceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

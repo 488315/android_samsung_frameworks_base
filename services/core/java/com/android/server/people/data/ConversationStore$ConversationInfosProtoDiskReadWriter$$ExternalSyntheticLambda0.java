@@ -4,15 +4,19 @@ import android.net.Uri;
 import android.util.Slog;
 import android.util.proto.ProtoInputStream;
 import android.util.proto.ProtoOutputStream;
-import com.android.server.people.data.AbstractProtoDiskReadWriter;
+
 import com.google.android.collect.Lists;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class ConversationStore$ConversationInfosProtoDiskReadWriter$$ExternalSyntheticLambda0 implements AbstractProtoDiskReadWriter.ProtoStreamWriter, AbstractProtoDiskReadWriter.ProtoStreamReader {
+public final /* synthetic */
+class ConversationStore$ConversationInfosProtoDiskReadWriter$$ExternalSyntheticLambda0
+        implements AbstractProtoDiskReadWriter.ProtoStreamWriter,
+                AbstractProtoDiskReadWriter.ProtoStreamReader {
     @Override // com.android.server.people.data.AbstractProtoDiskReadWriter.ProtoStreamReader
     public Object read(ProtoInputStream protoInputStream) {
         ArrayList newArrayList = Lists.newArrayList();
@@ -20,7 +24,8 @@ public final /* synthetic */ class ConversationStore$ConversationInfosProtoDiskR
             try {
                 if (protoInputStream.getFieldNumber() == 1) {
                     long start = protoInputStream.start(2246267895809L);
-                    ConversationInfo readFromProto = ConversationInfo.readFromProto(protoInputStream);
+                    ConversationInfo readFromProto =
+                            ConversationInfo.readFromProto(protoInputStream);
                     protoInputStream.end(start);
                     newArrayList.add(readFromProto);
                 }

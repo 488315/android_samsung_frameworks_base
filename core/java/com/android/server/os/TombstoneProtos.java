@@ -13,8 +13,7 @@ public final class TombstoneProtos {
         public static final long DATA = 1151051235330L;
         public static final long NAME = 1151051235329L;
 
-        public CrashDetail() {
-        }
+        public CrashDetail() {}
     }
 
     public final class Tombstone {
@@ -41,23 +40,20 @@ public final class TombstoneProtos {
         public static final long TIMESTAMP = 1138166333444L;
         public static final long UID = 1155346202631L;
 
-        public Tombstone() {
-        }
+        public Tombstone() {}
 
         public final class ThreadsEntry {
             public static final long KEY = 1155346202625L;
             public static final long VALUE = 1146756268034L;
 
-            public ThreadsEntry() {
-            }
+            public ThreadsEntry() {}
         }
 
         public final class GuestThreadsEntry {
             public static final long KEY = 1155346202625L;
             public static final long VALUE = 1146756268034L;
 
-            public GuestThreadsEntry() {
-            }
+            public GuestThreadsEntry() {}
         }
     }
 
@@ -73,8 +69,7 @@ public final class TombstoneProtos {
         public static final long SENDER_PID = 1120986464263L;
         public static final long SENDER_UID = 1120986464262L;
 
-        public Signal() {
-        }
+        public Signal() {}
     }
 
     public final class HeapObject {
@@ -85,8 +80,7 @@ public final class TombstoneProtos {
         public static final long DEALLOCATION_TID = 1116691496965L;
         public static final long SIZE = 1116691496962L;
 
-        public HeapObject() {
-        }
+        public HeapObject() {}
     }
 
     public final class MemoryError {
@@ -102,24 +96,21 @@ public final class TombstoneProtos {
         public static final int UNKNOWN = 0;
         public static final int USE_AFTER_FREE = 1;
 
-        public MemoryError() {
-        }
+        public MemoryError() {}
     }
 
     public final class Cause {
         public static final long HUMAN_READABLE = 1138166333441L;
         public static final long MEMORY_ERROR = 1146756268034L;
 
-        public Cause() {
-        }
+        public Cause() {}
     }
 
     public final class Register {
         public static final long NAME = 1138166333441L;
         public static final long U64 = 1116691496962L;
 
-        public Register() {
-        }
+        public Register() {}
     }
 
     public final class Thread {
@@ -133,8 +124,7 @@ public final class TombstoneProtos {
         public static final long TAGGED_ADDR_CTRL = 1112396529670L;
         public static final long UNREADABLE_ELF_FILES = 2237677961225L;
 
-        public Thread() {
-        }
+        public Thread() {}
     }
 
     public final class BacktraceFrame {
@@ -147,15 +137,13 @@ public final class TombstoneProtos {
         public static final long REL_PC = 1116691496961L;
         public static final long SP = 1116691496963L;
 
-        public BacktraceFrame() {
-        }
+        public BacktraceFrame() {}
     }
 
     public final class ArmMTEMetadata {
         public static final long MEMORY_TAGS = 1151051235329L;
 
-        public ArmMTEMetadata() {
-        }
+        public ArmMTEMetadata() {}
     }
 
     public final class MemoryDump {
@@ -165,8 +153,7 @@ public final class TombstoneProtos {
         public static final long MEMORY = 1151051235332L;
         public static final long REGISTER_NAME = 1138166333441L;
 
-        public MemoryDump() {
-        }
+        public MemoryDump() {}
     }
 
     public final class MemoryMapping {
@@ -180,8 +167,7 @@ public final class TombstoneProtos {
         public static final long READ = 1133871366148L;
         public static final long WRITE = 1133871366149L;
 
-        public MemoryMapping() {
-        }
+        public MemoryMapping() {}
     }
 
     public final class FD {
@@ -190,16 +176,14 @@ public final class TombstoneProtos {
         public static final long PATH = 1138166333442L;
         public static final long TAG = 1116691496964L;
 
-        public FD() {
-        }
+        public FD() {}
     }
 
     public final class LogBuffer {
         public static final long LOGS = 2246267895810L;
         public static final long NAME = 1138166333441L;
 
-        public LogBuffer() {
-        }
+        public LogBuffer() {}
     }
 
     public final class LogMessage {
@@ -210,7 +194,6 @@ public final class TombstoneProtos {
         public static final long TID = 1155346202627L;
         public static final long TIMESTAMP = 1138166333441L;
 
-        public LogMessage() {
-        }
+        public LogMessage() {}
     }
 }

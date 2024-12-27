@@ -2,8 +2,11 @@ package com.android.internal.telephony.gsm;
 
 import android.telephony.SmsCbCmasInfo;
 import android.telephony.SmsCbEtwsInfo;
+
 import com.android.internal.midi.MidiConstants;
+
 import com.samsung.android.ims.settings.SemImsProfile;
+
 import java.util.Arrays;
 import java.util.Locale;
 
@@ -12,8 +15,42 @@ public class SmsCbHeader {
     public static final int FORMAT_ETWS_PRIMARY = 3;
     public static final int FORMAT_GSM = 1;
     public static final int FORMAT_UMTS = 2;
-    private static final String[] LANGUAGE_CODES_GROUP_0 = {Locale.GERMAN.getLanguage(), Locale.ENGLISH.getLanguage(), Locale.ITALIAN.getLanguage(), Locale.FRENCH.getLanguage(), new Locale("es").getLanguage(), new Locale("nl").getLanguage(), new Locale("sv").getLanguage(), new Locale("da").getLanguage(), new Locale("pt").getLanguage(), new Locale("fi").getLanguage(), new Locale("nb").getLanguage(), new Locale("el").getLanguage(), new Locale("tr").getLanguage(), new Locale("hu").getLanguage(), new Locale("pl").getLanguage(), null};
-    private static final String[] LANGUAGE_CODES_GROUP_2 = {new Locale("cs").getLanguage(), new Locale("he").getLanguage(), new Locale("ar").getLanguage(), new Locale("ru").getLanguage(), new Locale(SemImsProfile.ImsFeature.IS).getLanguage(), null, null, null, null, null, null, null, null, null, null, null};
+    private static final String[] LANGUAGE_CODES_GROUP_0 = {
+        Locale.GERMAN.getLanguage(),
+        Locale.ENGLISH.getLanguage(),
+        Locale.ITALIAN.getLanguage(),
+        Locale.FRENCH.getLanguage(),
+        new Locale("es").getLanguage(),
+        new Locale("nl").getLanguage(),
+        new Locale("sv").getLanguage(),
+        new Locale("da").getLanguage(),
+        new Locale("pt").getLanguage(),
+        new Locale("fi").getLanguage(),
+        new Locale("nb").getLanguage(),
+        new Locale("el").getLanguage(),
+        new Locale("tr").getLanguage(),
+        new Locale("hu").getLanguage(),
+        new Locale("pl").getLanguage(),
+        null
+    };
+    private static final String[] LANGUAGE_CODES_GROUP_2 = {
+        new Locale("cs").getLanguage(),
+        new Locale("he").getLanguage(),
+        new Locale("ar").getLanguage(),
+        new Locale("ru").getLanguage(),
+        new Locale(SemImsProfile.ImsFeature.IS).getLanguage(),
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+    };
     private static final int MESSAGE_TYPE_CBS_MESSAGE = 1;
     public static final int PDU_HEADER_LENGTH = 6;
     private static final int PDU_LENGTH_ETWS = 56;
@@ -51,7 +88,13 @@ public class SmsCbHeader {
                 } else {
                     warningSecurityInfo = null;
                 }
-                this.mEtwsInfo = new SmsCbEtwsInfo(warningType, emergencyUserAlert, activatePopup, true, warningSecurityInfo);
+                this.mEtwsInfo =
+                        new SmsCbEtwsInfo(
+                                warningType,
+                                emergencyUserAlert,
+                                activatePopup,
+                                true,
+                                warningSecurityInfo);
                 this.mCmasInfo = null;
                 return;
             }
@@ -86,7 +129,9 @@ public class SmsCbHeader {
             boolean emergencyUserAlert2 = isEtwsEmergencyUserAlert();
             boolean activatePopup2 = isEtwsPopupAlert();
             int warningType2 = getEtwsWarningType();
-            this.mEtwsInfo = new SmsCbEtwsInfo(warningType2, emergencyUserAlert2, activatePopup2, false, null);
+            this.mEtwsInfo =
+                    new SmsCbEtwsInfo(
+                            warningType2, emergencyUserAlert2, activatePopup2, false, null);
             this.mCmasInfo = null;
             return;
         }
@@ -178,7 +223,8 @@ public class SmsCbHeader {
                 return 0;
             case SmsCbConstants.MESSAGE_ID_CMAS_ALERT_EXTREME_IMMEDIATE_OBSERVED /* 4371 */:
             case SmsCbConstants.MESSAGE_ID_CMAS_ALERT_EXTREME_IMMEDIATE_LIKELY /* 4372 */:
-            case SmsCbConstants.MESSAGE_ID_CMAS_ALERT_EXTREME_IMMEDIATE_OBSERVED_LANGUAGE /* 4384 */:
+            case SmsCbConstants
+                    .MESSAGE_ID_CMAS_ALERT_EXTREME_IMMEDIATE_OBSERVED_LANGUAGE /* 4384 */:
             case SmsCbConstants.MESSAGE_ID_CMAS_ALERT_EXTREME_IMMEDIATE_LIKELY_LANGUAGE /* 4385 */:
                 return 1;
             case SmsCbConstants.MESSAGE_ID_CMAS_ALERT_EXTREME_EXPECTED_OBSERVED /* 4373 */:
@@ -217,7 +263,8 @@ public class SmsCbHeader {
             case SmsCbConstants.MESSAGE_ID_CMAS_ALERT_EXTREME_IMMEDIATE_LIKELY /* 4372 */:
             case SmsCbConstants.MESSAGE_ID_CMAS_ALERT_EXTREME_EXPECTED_OBSERVED /* 4373 */:
             case SmsCbConstants.MESSAGE_ID_CMAS_ALERT_EXTREME_EXPECTED_LIKELY /* 4374 */:
-            case SmsCbConstants.MESSAGE_ID_CMAS_ALERT_EXTREME_IMMEDIATE_OBSERVED_LANGUAGE /* 4384 */:
+            case SmsCbConstants
+                    .MESSAGE_ID_CMAS_ALERT_EXTREME_IMMEDIATE_OBSERVED_LANGUAGE /* 4384 */:
             case SmsCbConstants.MESSAGE_ID_CMAS_ALERT_EXTREME_IMMEDIATE_LIKELY_LANGUAGE /* 4385 */:
             case SmsCbConstants.MESSAGE_ID_CMAS_ALERT_EXTREME_EXPECTED_OBSERVED_LANGUAGE /* 4386 */:
             case SmsCbConstants.MESSAGE_ID_CMAS_ALERT_EXTREME_EXPECTED_LIKELY_LANGUAGE /* 4387 */:
@@ -247,7 +294,8 @@ public class SmsCbHeader {
             case SmsCbConstants.MESSAGE_ID_CMAS_ALERT_EXTREME_IMMEDIATE_LIKELY /* 4372 */:
             case SmsCbConstants.MESSAGE_ID_CMAS_ALERT_SEVERE_IMMEDIATE_OBSERVED /* 4375 */:
             case SmsCbConstants.MESSAGE_ID_CMAS_ALERT_SEVERE_IMMEDIATE_LIKELY /* 4376 */:
-            case SmsCbConstants.MESSAGE_ID_CMAS_ALERT_EXTREME_IMMEDIATE_OBSERVED_LANGUAGE /* 4384 */:
+            case SmsCbConstants
+                    .MESSAGE_ID_CMAS_ALERT_EXTREME_IMMEDIATE_OBSERVED_LANGUAGE /* 4384 */:
             case SmsCbConstants.MESSAGE_ID_CMAS_ALERT_EXTREME_IMMEDIATE_LIKELY_LANGUAGE /* 4385 */:
             case SmsCbConstants.MESSAGE_ID_CMAS_ALERT_SEVERE_IMMEDIATE_OBSERVED_LANGUAGE /* 4388 */:
             case SmsCbConstants.MESSAGE_ID_CMAS_ALERT_SEVERE_IMMEDIATE_LIKELY_LANGUAGE /* 4389 */:
@@ -277,7 +325,8 @@ public class SmsCbHeader {
             case SmsCbConstants.MESSAGE_ID_CMAS_ALERT_EXTREME_EXPECTED_OBSERVED /* 4373 */:
             case SmsCbConstants.MESSAGE_ID_CMAS_ALERT_SEVERE_IMMEDIATE_OBSERVED /* 4375 */:
             case SmsCbConstants.MESSAGE_ID_CMAS_ALERT_SEVERE_EXPECTED_OBSERVED /* 4377 */:
-            case SmsCbConstants.MESSAGE_ID_CMAS_ALERT_EXTREME_IMMEDIATE_OBSERVED_LANGUAGE /* 4384 */:
+            case SmsCbConstants
+                    .MESSAGE_ID_CMAS_ALERT_EXTREME_IMMEDIATE_OBSERVED_LANGUAGE /* 4384 */:
             case SmsCbConstants.MESSAGE_ID_CMAS_ALERT_EXTREME_EXPECTED_OBSERVED_LANGUAGE /* 4386 */:
             case SmsCbConstants.MESSAGE_ID_CMAS_ALERT_SEVERE_IMMEDIATE_OBSERVED_LANGUAGE /* 4388 */:
             case SmsCbConstants.MESSAGE_ID_CMAS_ALERT_SEVERE_EXPECTED_OBSERVED_LANGUAGE /* 4390 */:
@@ -302,7 +351,21 @@ public class SmsCbHeader {
     }
 
     public String toString() {
-        return "SmsCbHeader{GS=" + this.mGeographicalScope + ", serialNumber=0x" + Integer.toHexString(this.mSerialNumber) + ", messageIdentifier=0x" + Integer.toHexString(this.mMessageIdentifier) + ", format=" + this.mFormat + ", DCS=0x" + Integer.toHexString(this.mDataCodingScheme) + ", page " + this.mPageIndex + " of " + this.mNrOfPages + '}';
+        return "SmsCbHeader{GS="
+                + this.mGeographicalScope
+                + ", serialNumber=0x"
+                + Integer.toHexString(this.mSerialNumber)
+                + ", messageIdentifier=0x"
+                + Integer.toHexString(this.mMessageIdentifier)
+                + ", format="
+                + this.mFormat
+                + ", DCS=0x"
+                + Integer.toHexString(this.mDataCodingScheme)
+                + ", page "
+                + this.mPageIndex
+                + " of "
+                + this.mNrOfPages
+                + '}';
     }
 
     public static final class DataCodingScheme {
@@ -352,7 +415,8 @@ public class SmsCbHeader {
                 case 7:
                 case 9:
                 case 14:
-                    throw new IllegalArgumentException("Unsupported GSM dataCodingScheme " + dataCodingScheme);
+                    throw new IllegalArgumentException(
+                            "Unsupported GSM dataCodingScheme " + dataCodingScheme);
                 case 8:
                 case 10:
                 case 11:

@@ -4,6 +4,7 @@ import android.os.RemoteException;
 import android.telephony.MbmsGroupCallSession;
 import android.telephony.mbms.vendor.IMbmsGroupCallService;
 import android.util.Log;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
@@ -27,14 +28,17 @@ public class GroupCall implements AutoCloseable {
     private final long mTmgi;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface GroupCallState {
-    }
+    public @interface GroupCallState {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface GroupCallStateChangeReason {
-    }
+    public @interface GroupCallStateChangeReason {}
 
-    public GroupCall(int subscriptionId, IMbmsGroupCallService service, MbmsGroupCallSession session, long tmgi, InternalGroupCallCallback callback) {
+    public GroupCall(
+            int subscriptionId,
+            IMbmsGroupCallService service,
+            MbmsGroupCallSession session,
+            long tmgi,
+            InternalGroupCallCallback callback) {
         this.mSubscriptionId = subscriptionId;
         this.mParentSession = session;
         this.mService = service;
@@ -52,7 +56,8 @@ public class GroupCall implements AutoCloseable {
                 throw new IllegalStateException("No group call service attached");
             }
             try {
-                this.mService.updateGroupCall(this.mSubscriptionId, this.mTmgi, saiList, frequencyList);
+                this.mService.updateGroupCall(
+                        this.mSubscriptionId, this.mTmgi, saiList, frequencyList);
             } catch (RemoteException e) {
                 Log.w(LOG_TAG, "Remote process died");
                 this.mService = null;

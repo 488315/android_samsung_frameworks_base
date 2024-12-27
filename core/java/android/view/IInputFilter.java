@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.view.IInputFilterHost;
 
 /* loaded from: classes4.dex */
 public interface IInputFilter extends IInterface {
@@ -17,16 +16,13 @@ public interface IInputFilter extends IInterface {
 
     public static class Default implements IInputFilter {
         @Override // android.view.IInputFilter
-        public void install(IInputFilterHost host) throws RemoteException {
-        }
+        public void install(IInputFilterHost host) throws RemoteException {}
 
         @Override // android.view.IInputFilter
-        public void uninstall() throws RemoteException {
-        }
+        public void uninstall() throws RemoteException {}
 
         @Override // android.view.IInputFilter
-        public void filterInputEvent(InputEvent event, int policyFlags) throws RemoteException {
-        }
+        public void filterInputEvent(InputEvent event, int policyFlags) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -34,7 +30,7 @@ public interface IInputFilter extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInputFilter {
+    public abstract static class Stub extends Binder implements IInputFilter {
         public static final String DESCRIPTOR = "android.view.IInputFilter";
         static final int TRANSACTION_filterInputEvent = 3;
         static final int TRANSACTION_install = 1;
@@ -79,7 +75,8 @@ public interface IInputFilter extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -89,7 +86,8 @@ public interface IInputFilter extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IInputFilterHost _arg0 = IInputFilterHost.Stub.asInterface(data.readStrongBinder());
+                    IInputFilterHost _arg0 =
+                            IInputFilterHost.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     install(_arg0);
                     return true;

@@ -4,16 +4,19 @@ import android.content.pm.SharedLibraryInfo;
 import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.os.ClassLoaderFactory;
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
+
 import java.util.Iterator;
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public abstract class DexoptUtils {
-    public static final String SHARED_LIBRARY_LOADER_TYPE = ClassLoaderFactory.getPathClassLoaderName();
+    public static final String SHARED_LIBRARY_LOADER_TYPE =
+            ClassLoaderFactory.getPathClassLoaderName();
 
     public static String encodeClassLoader(String str, String str2) {
         str.getClass();
@@ -28,7 +31,11 @@ public abstract class DexoptUtils {
     }
 
     public static String encodeClassLoaderChain(String str, String str2) {
-        return str.isEmpty() ? str2 : str2.isEmpty() ? str : AnyMotionDetector$$ExternalSyntheticOutline0.m(str, ";", str2);
+        return str.isEmpty()
+                ? str2
+                : str2.isEmpty()
+                        ? str
+                        : AnyMotionDetector$$ExternalSyntheticOutline0.m(str, ";", str2);
     }
 
     public static String encodeSharedLibraries(List list) {
@@ -69,7 +76,8 @@ public abstract class DexoptUtils {
         return ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(str2, "}");
     }
 
-    public static String getParentDependencies(int i, String[] strArr, SparseArray sparseArray, String[] strArr2, String str) {
+    public static String getParentDependencies(
+            int i, String[] strArr, SparseArray sparseArray, String[] strArr2, String str) {
         if (i == 0) {
             return str;
         }

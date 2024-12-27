@@ -3,25 +3,28 @@ package android.companion;
 import android.os.Parcel;
 import android.os.ParcelUuid;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class DevicePresenceEvent implements Parcelable {
-    public static final Parcelable.Creator<DevicePresenceEvent> CREATOR = new Parcelable.Creator<DevicePresenceEvent>() { // from class: android.companion.DevicePresenceEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DevicePresenceEvent[] newArray(int size) {
-            return new DevicePresenceEvent[size];
-        }
+    public static final Parcelable.Creator<DevicePresenceEvent> CREATOR =
+            new Parcelable.Creator<
+                    DevicePresenceEvent>() { // from class: android.companion.DevicePresenceEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DevicePresenceEvent[] newArray(int size) {
+                    return new DevicePresenceEvent[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DevicePresenceEvent createFromParcel(Parcel in) {
-            return new DevicePresenceEvent(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DevicePresenceEvent createFromParcel(Parcel in) {
+                    return new DevicePresenceEvent(in);
+                }
+            };
     public static final int EVENT_BLE_APPEARED = 0;
     public static final int EVENT_BLE_DISAPPEARED = 1;
     public static final int EVENT_BT_CONNECTED = 2;
@@ -36,8 +39,7 @@ public final class DevicePresenceEvent implements Parcelable {
     private final ParcelUuid mUuid;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Event {
-    }
+    public @interface Event {}
 
     public DevicePresenceEvent(int associationId, int event, ParcelUuid uuid) {
         this.mAssociationId = associationId;
@@ -82,15 +84,24 @@ public final class DevicePresenceEvent implements Parcelable {
             return false;
         }
         DevicePresenceEvent that = (DevicePresenceEvent) o;
-        return Objects.equals(this.mUuid, that.mUuid) && this.mAssociationId == that.mAssociationId && this.mEvent == that.mEvent;
+        return Objects.equals(this.mUuid, that.mUuid)
+                && this.mAssociationId == that.mAssociationId
+                && this.mEvent == that.mEvent;
     }
 
     public String toString() {
-        return "ObservingDevicePresenceResult { Association Id= " + this.mAssociationId + ",ParcelUuid= " + this.mUuid + ",Event= " + this.mEvent + "}";
+        return "ObservingDevicePresenceResult { Association Id= "
+                + this.mAssociationId
+                + ",ParcelUuid= "
+                + this.mUuid
+                + ",Event= "
+                + this.mEvent
+                + "}";
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mAssociationId), Integer.valueOf(this.mEvent), this.mUuid);
+        return Objects.hash(
+                Integer.valueOf(this.mAssociationId), Integer.valueOf(this.mEvent), this.mUuid);
     }
 
     private DevicePresenceEvent(Parcel in) {

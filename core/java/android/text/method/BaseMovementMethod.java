@@ -14,8 +14,7 @@ public class BaseMovementMethod implements MovementMethod {
     }
 
     @Override // android.text.method.MovementMethod
-    public void initialize(TextView widget, Spannable text) {
-    }
+    public void initialize(TextView widget, Spannable text) {}
 
     @Override // android.text.method.MovementMethod
     public boolean onKeyDown(TextView widget, Spannable text, int keyCode, KeyEvent event) {
@@ -35,7 +34,10 @@ public class BaseMovementMethod implements MovementMethod {
         if (keyCode != 0 && event.getAction() == 2) {
             int repeat = event.getRepeatCount();
             boolean handled = false;
-            for (int i = 0; i < repeat && handleMovementKey(widget, text, keyCode, movementMetaState, event); i++) {
+            for (int i = 0;
+                    i < repeat
+                            && handleMovementKey(widget, text, keyCode, movementMetaState, event);
+                    i++) {
                 handled = true;
             }
             if (handled) {
@@ -53,8 +55,7 @@ public class BaseMovementMethod implements MovementMethod {
     }
 
     @Override // android.text.method.MovementMethod
-    public void onTakeFocus(TextView widget, Spannable text, int direction) {
-    }
+    public void onTakeFocus(TextView widget, Spannable text, int direction) {}
 
     @Override // android.text.method.MovementMethod
     public boolean onTouchEvent(TextView widget, Spannable text, MotionEvent event) {
@@ -106,7 +107,8 @@ public class BaseMovementMethod implements MovementMethod {
         return KeyEvent.normalizeMetaState(metaState) & (-194);
     }
 
-    protected boolean handleMovementKey(TextView widget, Spannable buffer, int keyCode, int movementMetaState, KeyEvent event) {
+    protected boolean handleMovementKey(
+            TextView widget, Spannable buffer, int keyCode, int movementMetaState, KeyEvent event) {
         switch (keyCode) {
             case 19:
                 if (KeyEvent.metaStateHasNoModifiers(movementMetaState)) {
@@ -311,7 +313,9 @@ public class BaseMovementMethod implements MovementMethod {
         int minScrollX = getScrollBoundsLeft(widget);
         int scrollX = widget.getScrollX();
         if (scrollX > minScrollX) {
-            widget.scrollTo(Math.max(scrollX - (getCharacterWidth(widget) * amount), minScrollX), widget.getScrollY());
+            widget.scrollTo(
+                    Math.max(scrollX - (getCharacterWidth(widget) * amount), minScrollX),
+                    widget.getScrollY());
             return true;
         }
         return false;
@@ -321,7 +325,9 @@ public class BaseMovementMethod implements MovementMethod {
         int maxScrollX = getScrollBoundsRight(widget) - getInnerWidth(widget);
         int scrollX = widget.getScrollX();
         if (scrollX < maxScrollX) {
-            widget.scrollTo(Math.min((getCharacterWidth(widget) * amount) + scrollX, maxScrollX), widget.getScrollY());
+            widget.scrollTo(
+                    Math.min((getCharacterWidth(widget) * amount) + scrollX, maxScrollX),
+                    widget.getScrollY());
             return true;
         }
         return false;
@@ -335,7 +341,11 @@ public class BaseMovementMethod implements MovementMethod {
             topLine--;
         }
         if (topLine >= 0) {
-            Touch.scrollTo(widget, layout, widget.getScrollX(), layout.getLineTop(Math.max((topLine - amount) + 1, 0)));
+            Touch.scrollTo(
+                    widget,
+                    layout,
+                    widget.getScrollX(),
+                    layout.getLineTop(Math.max((topLine - amount) + 1, 0)));
             return true;
         }
         return false;
@@ -351,7 +361,12 @@ public class BaseMovementMethod implements MovementMethod {
         }
         int limit = layout.getLineCount() - 1;
         if (bottomLine <= limit) {
-            Touch.scrollTo(widget, layout, widget.getScrollX(), layout.getLineTop(Math.min((bottomLine + amount) - 1, limit) + 1) - innerHeight);
+            Touch.scrollTo(
+                    widget,
+                    layout,
+                    widget.getScrollX(),
+                    layout.getLineTop(Math.min((bottomLine + amount) - 1, limit) + 1)
+                            - innerHeight);
             return true;
         }
         return false;
@@ -374,7 +389,11 @@ public class BaseMovementMethod implements MovementMethod {
         int bottom = widget.getScrollY() + innerHeight + innerHeight;
         int bottomLine = layout.getLineForVertical(bottom);
         if (bottomLine <= layout.getLineCount() - 1) {
-            Touch.scrollTo(widget, layout, widget.getScrollX(), layout.getLineTop(bottomLine + 1) - innerHeight);
+            Touch.scrollTo(
+                    widget,
+                    layout,
+                    widget.getScrollX(),
+                    layout.getLineTop(bottomLine + 1) - innerHeight);
             return true;
         }
         return false;
@@ -393,7 +412,11 @@ public class BaseMovementMethod implements MovementMethod {
         Layout layout = widget.getLayout();
         int lineCount = layout.getLineCount();
         if (getBottomLine(widget) <= lineCount - 1) {
-            Touch.scrollTo(widget, layout, widget.getScrollX(), layout.getLineTop(lineCount) - getInnerHeight(widget));
+            Touch.scrollTo(
+                    widget,
+                    layout,
+                    widget.getScrollX(),
+                    layout.getLineTop(lineCount) - getInnerHeight(widget));
             return true;
         }
         return false;

@@ -29,6 +29,7 @@ import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.util.EventLog;
 import android.util.Slog;
+
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
@@ -39,9 +40,11 @@ import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.backup.BackupManagerConstants;
 import com.android.server.clipboard.ClipboardService;
+
 import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.knox.analytics.activation.ActivationMonitor;
 import com.samsung.android.knoxguard.service.utils.Constants;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -75,7 +78,8 @@ public final class GmsAlarmManager {
     public final int mVendingUid;
     public NetWorkStats noAvaStats;
     public NetWorkStats vpnStats;
-    public static final Uri SMART_MGR_SETTINGS_URI = Uri.parse("content://com.samsung.android.sm/settings");
+    public static final Uri SMART_MGR_SETTINGS_URI =
+            Uri.parse("content://com.samsung.android.sm/settings");
     public static final HandlerThread sHandlerThread = new HandlerThread("GmsAlarmManager", 1);
     public static final boolean DEBUG_SCPM = true;
     public static final StringBuilder sb = new StringBuilder();
@@ -92,10 +96,14 @@ public final class GmsAlarmManager {
     public int mTimeoutcountDef = 0;
     public PendingIntent mPendingIntent = null;
     public PendingIntent mInsertLogPendingIntent = null;
-    public final boolean mBigdataEnable = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_CONTEXTSERVICE_ENABLE_SURVEY_MODE");
+    public final boolean mBigdataEnable =
+            SemFloatingFeature.getInstance()
+                    .getBoolean("SEC_FLOATING_FEATURE_CONTEXTSERVICE_ENABLE_SURVEY_MODE");
     public int mPolicyControlSwitch = 7;
-    public final Uri SCPM_URI_GNET = Uri.parse("content://com.samsung.android.sm.policy/policy_item/gmsnet");
-    public final Uri SCPM_URI_POLICY = Uri.parse("content://com.samsung.android.sm.policy/policy_item/policy_list");
+    public final Uri SCPM_URI_GNET =
+            Uri.parse("content://com.samsung.android.sm.policy/policy_item/gmsnet");
+    public final Uri SCPM_URI_POLICY =
+            Uri.parse("content://com.samsung.android.sm.policy/policy_item/policy_list");
     public final AnonymousClass1 mIntentReceiver = new AnonymousClass1(this, 0);
     public final ArrayList mGmsUidOfMultiUser = new ArrayList();
 
@@ -117,9 +125,12 @@ public final class GmsAlarmManager {
             switch (this.$r8$classId) {
                 case 0:
                     if (intent.getAction() != null) {
-                        if (!"com.samsung.android.server.action_check_gms_network".equals(intent.getAction())) {
-                            if (!"com.samsung.android.server.action_insert_log".equals(intent.getAction())) {
-                                if ("android.intent.action.BOOT_COMPLETED".equals(intent.getAction())) {
+                        if (!"com.samsung.android.server.action_check_gms_network"
+                                .equals(intent.getAction())) {
+                            if (!"com.samsung.android.server.action_insert_log"
+                                    .equals(intent.getAction())) {
+                                if ("android.intent.action.BOOT_COMPLETED"
+                                        .equals(intent.getAction())) {
                                     GmsAlarmManager.m161$$Nest$msendInsertLogDelay(this.this$0);
                                     break;
                                 }
@@ -147,29 +158,42 @@ public final class GmsAlarmManager {
                     }
                     break;
                 case 2:
-                    if (intent.getAction() != null && "android.net.conn.CONNECTIVITY_CHANGE".equals(intent.getAction())) {
+                    if (intent.getAction() != null
+                            && "android.net.conn.CONNECTIVITY_CHANGE".equals(intent.getAction())) {
                         Slog.v("GmsAlarmManager", "CONNECTIVITY RECEIVER");
-                        this.this$0.mNetworkInfo = (NetworkInfo) intent.getParcelableExtra("networkInfo");
+                        this.this$0.mNetworkInfo =
+                                (NetworkInfo) intent.getParcelableExtra("networkInfo");
                         NetworkInfo networkInfo = this.this$0.mNetworkInfo;
                         if (networkInfo != null) {
                             int type = networkInfo.getType();
                             EventLog.writeEvent(40200, type);
-                            Slog.v("GmsAlarmManager", "NetworkInfo type = " + type + "  -- isConnected = " + this.this$0.mNetworkInfo.isConnected());
+                            Slog.v(
+                                    "GmsAlarmManager",
+                                    "NetworkInfo type = "
+                                            + type
+                                            + "  -- isConnected = "
+                                            + this.this$0.mNetworkInfo.isConnected());
                             if (type == -1 || type == 1 || type == 0 || type == 17 || type == 16) {
                                 if (type == 17) {
                                     if (this.this$0.mNetworkInfo.isConnected()) {
-                                        this.this$0.vpnStats.addStartTime(SystemClock.elapsedRealtime());
+                                        this.this$0.vpnStats.addStartTime(
+                                                SystemClock.elapsedRealtime());
                                     } else {
-                                        this.this$0.vpnStats.setEndTime(SystemClock.elapsedRealtime());
+                                        this.this$0.vpnStats.setEndTime(
+                                                SystemClock.elapsedRealtime());
                                     }
                                 }
                                 GmsAlarmManager gmsAlarmManager = this.this$0;
-                                if (!gmsAlarmManager.mScreenOn && !gmsAlarmManager.mWaitCheckNetWork && !gmsAlarmManager.mGoogleNetWork) {
+                                if (!gmsAlarmManager.mScreenOn
+                                        && !gmsAlarmManager.mWaitCheckNetWork
+                                        && !gmsAlarmManager.mGoogleNetWork) {
                                     gmsAlarmManager.mScreenOffChange = true;
                                     break;
                                 } else {
                                     AlarmManager alarmManager = gmsAlarmManager.mAlarmManager;
-                                    if (alarmManager != null && (pendingIntent = gmsAlarmManager.mPendingIntent) != null) {
+                                    if (alarmManager != null
+                                            && (pendingIntent = gmsAlarmManager.mPendingIntent)
+                                                    != null) {
                                         alarmManager.cancel(pendingIntent);
                                     }
                                     GmsAlarmManager.m160$$Nest$msendCheckNetWorkDelay(this.this$0);
@@ -180,7 +204,8 @@ public final class GmsAlarmManager {
                     }
                     break;
                 case 3:
-                    if (intent.getAction() != null && "sec.app.policy.UPDATE.gmsnet".equals(intent.getAction())) {
+                    if (intent.getAction() != null
+                            && "sec.app.policy.UPDATE.gmsnet".equals(intent.getAction())) {
                         Slog.v("GmsAlarmManager", "ACTION***" + intent.getAction());
                         this.this$0.mHandler.sendEmptyMessage(7);
                         break;
@@ -198,12 +223,15 @@ public final class GmsAlarmManager {
                             gmsAlarmManager3.mScreenOn = true;
                             if (!gmsAlarmManager3.mScreenOffChange) {
                                 if (!gmsAlarmManager3.mHandler.hasMessages(1)) {
-                                    this.this$0.mHandler.sendEmptyMessageDelayed(1, ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS);
+                                    this.this$0.mHandler.sendEmptyMessageDelayed(
+                                            1, ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS);
                                     break;
                                 }
                             } else {
                                 AlarmManager alarmManager2 = gmsAlarmManager3.mAlarmManager;
-                                if (alarmManager2 != null && (pendingIntent2 = gmsAlarmManager3.mPendingIntent) != null) {
+                                if (alarmManager2 != null
+                                        && (pendingIntent2 = gmsAlarmManager3.mPendingIntent)
+                                                != null) {
                                     alarmManager2.cancel(pendingIntent2);
                                 }
                                 GmsAlarmManager.m160$$Nest$msendCheckNetWorkDelay(this.this$0);
@@ -269,46 +297,46 @@ public final class GmsAlarmManager {
 
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         /* JADX WARN: Code restructure failed: missing block: B:329:0x0657, code lost:
-        
-            if (r0 == false) goto L271;
-         */
+
+           if (r0 == false) goto L271;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:331:0x0682, code lost:
-        
-            if (com.android.server.alarm.GmsAlarmManager.m157$$Nest$mcheckActiveNet(r13) == false) goto L295;
-         */
+
+           if (com.android.server.alarm.GmsAlarmManager.m157$$Nest$mcheckActiveNet(r13) == false) goto L295;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:332:0x0684, code lost:
-        
-            r0 = com.android.server.alarm.GmsAlarmManager.m158$$Nest$mcheckGoogleNetwork(r13);
-            com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0.m(r0, "[GMS-CORE] China or hongkong mode and google network return: ", "GmsAlarmManager");
-         */
+
+           r0 = com.android.server.alarm.GmsAlarmManager.m158$$Nest$mcheckGoogleNetwork(r13);
+           com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0.m(r0, "[GMS-CORE] China or hongkong mode and google network return: ", "GmsAlarmManager");
+        */
         /* JADX WARN: Code restructure failed: missing block: B:333:0x068f, code lost:
-        
-            if (r0 == 200) goto L294;
-         */
+
+           if (r0 == 200) goto L294;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:335:0x0693, code lost:
-        
-            if (r0 == 204) goto L294;
-         */
+
+           if (r0 == 204) goto L294;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:337:0x0697, code lost:
-        
-            if (r0 != 302) goto L293;
-         */
+
+           if (r0 != 302) goto L293;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:338:0x069a, code lost:
-        
-            r13.mGoogleNetWork = false;
-         */
+
+           r13.mGoogleNetWork = false;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:381:0x069d, code lost:
-        
-            r13.mGoogleNetWork = true;
-         */
+
+           r13.mGoogleNetWork = true;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:382:0x06a0, code lost:
-        
-            r13.mGoogleNetWork = false;
-         */
+
+           r13.mGoogleNetWork = false;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:399:0x067c, code lost:
-        
-            if (r0 != false) goto L284;
-         */
+
+           if (r0 != false) goto L284;
+        */
         @Override // android.os.Handler
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -319,7 +347,9 @@ public final class GmsAlarmManager {
                 Method dump skipped, instructions count: 1980
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.alarm.GmsAlarmManager.GmsHandler.handleMessage(android.os.Message):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.alarm.GmsAlarmManager.GmsHandler.handleMessage(android.os.Message):void");
         }
     }
 
@@ -368,15 +398,38 @@ public final class GmsAlarmManager {
                     } else {
                         long j4 = 0;
                         for (int i2 = 0; i2 < this.data.size(); i2++) {
-                            if (((NetWorkData) this.data.get(i2)).totalTime != 0 && ((NetWorkData) this.data.get(i2)).endTime - j3 > 0) {
+                            if (((NetWorkData) this.data.get(i2)).totalTime != 0
+                                    && ((NetWorkData) this.data.get(i2)).endTime - j3 > 0) {
                                 this.mCount++;
-                                j4 = j4 == 0 ? j4 + (((NetWorkData) this.data.get(i2)).startTime < j3 ? ((NetWorkData) this.data.get(i2)).endTime - j3 : ((NetWorkData) this.data.get(i2)).endTime - ((NetWorkData) this.data.get(i2)).startTime) : j4 + ((NetWorkData) this.data.get(i2)).totalTime;
+                                j4 =
+                                        j4 == 0
+                                                ? j4
+                                                        + (((NetWorkData) this.data.get(i2))
+                                                                                .startTime
+                                                                        < j3
+                                                                ? ((NetWorkData) this.data.get(i2))
+                                                                                .endTime
+                                                                        - j3
+                                                                : ((NetWorkData) this.data.get(i2))
+                                                                                .endTime
+                                                                        - ((NetWorkData)
+                                                                                        this.data
+                                                                                                .get(
+                                                                                                        i2))
+                                                                                .startTime)
+                                                : j4 + ((NetWorkData) this.data.get(i2)).totalTime;
                             }
                         }
                         if (this.data.size() > 0) {
                             if (((NetWorkData) this.data.get(r10.size() - 1)).totalTime == 0) {
                                 if (((NetWorkData) this.data.get(r5.size() - 1)).startTime >= j3) {
-                                    j2 = (j - ((NetWorkData) this.data.get(r1.size() - 1)).startTime) + j4;
+                                    j2 =
+                                            (j
+                                                            - ((NetWorkData)
+                                                                            this.data.get(
+                                                                                    r1.size() - 1))
+                                                                    .startTime)
+                                                    + j4;
                                 }
                                 this.mCount++;
                             }
@@ -409,7 +462,8 @@ public final class GmsAlarmManager {
                         if (i >= this.data.size()) {
                             i = -1;
                             break;
-                        } else if (((NetWorkData) this.data.get(i)).endTime == 0 || ((NetWorkData) this.data.get(i)).endTime <= j) {
+                        } else if (((NetWorkData) this.data.get(i)).endTime == 0
+                                || ((NetWorkData) this.data.get(i)).endTime <= j) {
                             i++;
                         }
                     } finally {
@@ -445,7 +499,9 @@ public final class GmsAlarmManager {
 
         @Override // android.database.ContentObserver
         public final void onChange(boolean z) {
-            Slog.d("GmsAlarmManager", "onChange - mSmartManagerSettingsObserver for GmsAlarmManger!");
+            Slog.d(
+                    "GmsAlarmManager",
+                    "onChange - mSmartManagerSettingsObserver for GmsAlarmManger!");
             GmsAlarmManager.this.getSettingsValueFromDB();
         }
     }
@@ -454,10 +510,12 @@ public final class GmsAlarmManager {
     public static boolean m157$$Nest$mcheckActiveNet(GmsAlarmManager gmsAlarmManager) {
         NetworkInfo activeNetworkInfo;
         if (gmsAlarmManager.cm == null) {
-            gmsAlarmManager.cm = (ConnectivityManager) gmsAlarmManager.mContext.getSystemService("connectivity");
+            gmsAlarmManager.cm =
+                    (ConnectivityManager) gmsAlarmManager.mContext.getSystemService("connectivity");
         }
         ConnectivityManager connectivityManager = gmsAlarmManager.cm;
-        if (connectivityManager != null && (activeNetworkInfo = connectivityManager.getActiveNetworkInfo()) != null) {
+        if (connectivityManager != null
+                && (activeNetworkInfo = connectivityManager.getActiveNetworkInfo()) != null) {
             Slog.v("GmsAlarmManager", "networkInfo:" + activeNetworkInfo);
             if (activeNetworkInfo.isAvailable()) {
                 return true;
@@ -467,17 +525,17 @@ public final class GmsAlarmManager {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:105:0x01a1, code lost:
-    
-        if (r11 == null) goto L99;
-     */
+
+       if (r11 == null) goto L99;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:98:0x01db, code lost:
-    
-        if (r11 != null) goto L87;
-     */
+
+       if (r11 != null) goto L87;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:99:0x01a3, code lost:
-    
-        r11.disconnect();
-     */
+
+       r11.disconnect();
+    */
     /* renamed from: -$$Nest$mcheckGoogleNetwork, reason: not valid java name */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -488,7 +546,9 @@ public final class GmsAlarmManager {
             Method dump skipped, instructions count: 486
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.alarm.GmsAlarmManager.m158$$Nest$mcheckGoogleNetwork(com.android.server.alarm.GmsAlarmManager):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.alarm.GmsAlarmManager.m158$$Nest$mcheckGoogleNetwork(com.android.server.alarm.GmsAlarmManager):int");
     }
 
     /* renamed from: -$$Nest$mrestoreGcmAlarm, reason: not valid java name */
@@ -509,8 +569,14 @@ public final class GmsAlarmManager {
                         break;
                     }
                     alarm = (Alarm) it.next();
-                    if (alarm != null && (pendingIntent = alarm.operation) != null && "com.google.android.gms".equals(pendingIntent.getCreatorPackage()) && alarm.operation.getIntent() != null && "com.google.android.intent.action.GCM_RECONNECT".equals(alarm.operation.getIntent().getAction())) {
-                        alarmManagerService.mAlarmStore.remove(new AlarmManagerService$$ExternalSyntheticLambda8());
+                    if (alarm != null
+                            && (pendingIntent = alarm.operation) != null
+                            && "com.google.android.gms".equals(pendingIntent.getCreatorPackage())
+                            && alarm.operation.getIntent() != null
+                            && "com.google.android.intent.action.GCM_RECONNECT"
+                                    .equals(alarm.operation.getIntent().getAction())) {
+                        alarmManagerService.mAlarmStore.remove(
+                                new AlarmManagerService$$ExternalSyntheticLambda8());
                     }
                 }
             } finally {
@@ -529,7 +595,8 @@ public final class GmsAlarmManager {
     /* renamed from: -$$Nest$msendCheckNetWorkDelay, reason: not valid java name */
     public static void m160$$Nest$msendCheckNetWorkDelay(GmsAlarmManager gmsAlarmManager) {
         if (gmsAlarmManager.mAlarmManager == null) {
-            gmsAlarmManager.mAlarmManager = (AlarmManager) gmsAlarmManager.mContext.getSystemService("alarm");
+            gmsAlarmManager.mAlarmManager =
+                    (AlarmManager) gmsAlarmManager.mContext.getSystemService("alarm");
         }
         AlarmManager alarmManager = gmsAlarmManager.mAlarmManager;
         if (alarmManager == null || gmsAlarmManager.mPendingIntent == null) {
@@ -542,22 +609,36 @@ public final class GmsAlarmManager {
     /* renamed from: -$$Nest$msendInsertLogDelay, reason: not valid java name */
     public static void m161$$Nest$msendInsertLogDelay(GmsAlarmManager gmsAlarmManager) {
         if (gmsAlarmManager.mAlarmManager == null) {
-            gmsAlarmManager.mAlarmManager = (AlarmManager) gmsAlarmManager.mContext.getSystemService("alarm");
+            gmsAlarmManager.mAlarmManager =
+                    (AlarmManager) gmsAlarmManager.mContext.getSystemService("alarm");
         }
         AlarmManager alarmManager = gmsAlarmManager.mAlarmManager;
         if (alarmManager == null || gmsAlarmManager.mInsertLogPendingIntent == null) {
             return;
         }
-        alarmManager.set(3, SystemClock.elapsedRealtime() + BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS, gmsAlarmManager.mInsertLogPendingIntent);
+        alarmManager.set(
+                3,
+                SystemClock.elapsedRealtime()
+                        + BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS,
+                gmsAlarmManager.mInsertLogPendingIntent);
     }
 
     /* renamed from: -$$Nest$msetGMSLocationProviderChangeReceiverState, reason: not valid java name */
-    public static void m162$$Nest$msetGMSLocationProviderChangeReceiverState(GmsAlarmManager gmsAlarmManager, int i) {
+    public static void m162$$Nest$msetGMSLocationProviderChangeReceiverState(
+            GmsAlarmManager gmsAlarmManager, int i) {
         if (gmsAlarmManager.isHongKongMode) {
             return;
         }
         try {
-            gmsAlarmManager.mContext.getPackageManager().setComponentEnabledSetting(new ComponentName("com.google.android.gms", "com.google.android.location.network.LocationProviderChangeReceiver"), i, 1);
+            gmsAlarmManager
+                    .mContext
+                    .getPackageManager()
+                    .setComponentEnabledSetting(
+                            new ComponentName(
+                                    "com.google.android.gms",
+                                    "com.google.android.location.network.LocationProviderChangeReceiver"),
+                            i,
+                            1);
             Slog.i("GmsAlarmManager", "setGMSLocationProviderChangeReceiverState:" + i);
         } catch (Exception e) {
             e.printStackTrace();
@@ -571,7 +652,8 @@ public final class GmsAlarmManager {
         if ((gmsAlarmManager.mPolicyControlSwitch & 2) == 0) {
             return;
         }
-        if (gmsAlarmManager.mNetworkService == null && gmsAlarmManager.getNetworkManagementService() == null) {
+        if (gmsAlarmManager.mNetworkService == null
+                && gmsAlarmManager.getNetworkManagementService() == null) {
             return;
         }
         try {
@@ -595,8 +677,14 @@ public final class GmsAlarmManager {
         this.isChinaMode = false;
         this.isHongKongMode = false;
         this.mContext = context;
-        this.isChinaMode = "CHINA".equalsIgnoreCase(SystemProperties.get(ActivationMonitor.COUNTRY_CODE_PROPERTY));
-        this.isHongKongMode = "HONG KONG".equalsIgnoreCase(SystemProperties.get(ActivationMonitor.COUNTRY_CODE_PROPERTY));
+        this.isChinaMode =
+                "CHINA"
+                        .equalsIgnoreCase(
+                                SystemProperties.get(ActivationMonitor.COUNTRY_CODE_PROPERTY));
+        this.isHongKongMode =
+                "HONG KONG"
+                        .equalsIgnoreCase(
+                                SystemProperties.get(ActivationMonitor.COUNTRY_CODE_PROPERTY));
         PackageManager packageManager = context.getPackageManager();
         this.mCurrentIpList = new ArrayList();
         this.mCheckinServerUrl = new ArrayList();
@@ -604,7 +692,8 @@ public final class GmsAlarmManager {
             int packageUid = packageManager.getPackageUid("com.google.android.gms", 0);
             this.mGmsPkgUid = packageUid;
             this.mVendingUid = packageManager.getPackageUid("com.android.vending", 0);
-            this.mConfigupdaterUid = packageManager.getPackageUid("com.google.android.configupdater", 0);
+            this.mConfigupdaterUid =
+                    packageManager.getPackageUid("com.google.android.configupdater", 0);
             this.mGmsPkgAppid = UserHandle.getAppId(packageUid);
         } catch (PackageManager.NameNotFoundException e) {
             Slog.e("GmsAlarmManager", "NameNotFoundException" + e);
@@ -617,7 +706,8 @@ public final class GmsAlarmManager {
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            return ActivityManagerNative.getDefault().getIntentForIntentSender(pendingIntent.getTarget());
+            return ActivityManagerNative.getDefault()
+                    .getIntentForIntentSender(pendingIntent.getTarget());
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -627,39 +717,97 @@ public final class GmsAlarmManager {
     }
 
     public final void doDump(PrintWriter printWriter) {
-        StringBuilder m$1 = BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "  <GmsAlarmManager>", "isChinaMode:");
+        StringBuilder m$1 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                        printWriter, "  <GmsAlarmManager>", "isChinaMode:");
         boolean z = this.isChinaMode;
-        StringBuilder m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(m$1, z, printWriter, "isHongKongMode:");
+        StringBuilder m =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        m$1, z, printWriter, "isHongKongMode:");
         boolean z2 = this.isHongKongMode;
-        StringBuilder m2 = BinaryTransparencyService$$ExternalSyntheticOutline0.m(m, z2, printWriter, "mGmsPkgUid:");
+        StringBuilder m2 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        m, z2, printWriter, "mGmsPkgUid:");
         int i = this.mGmsPkgUid;
         AccessibilityManagerService$$ExternalSyntheticOutline0.m(m2, i, printWriter);
         if ((z || z2) && i != -1) {
-            AccessibilityManagerService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("mVendingUid:"), this.mVendingUid, printWriter, "mConfigupdaterUid:"), this.mConfigupdaterUid, printWriter);
+            AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("mVendingUid:"),
+                            this.mVendingUid,
+                            printWriter,
+                            "mConfigupdaterUid:"),
+                    this.mConfigupdaterUid,
+                    printWriter);
             Iterator it = this.mGmsUidOfMultiUser.iterator();
             while (it.hasNext()) {
                 printWriter.println("MultiUidList: " + ((Integer) it.next()).intValue());
             }
-            StringBuilder m3 = BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("mUserEnable:"), this.mUserEnable, printWriter, "mWaitCheckNetWork:"), this.mWaitCheckNetWork, printWriter, "mGoogleNetWork:"), this.mGoogleNetWork, printWriter, "isGmsNetWorkLimt:"), this.isGmsNetWorkLimt, printWriter, "mScreenOn:"), this.mScreenOn, printWriter, "mScreenOffChange:"), this.mScreenOffChange, printWriter, "isCharging:"), this.isCharging, printWriter, "mPolicyControlSwitch:");
+            StringBuilder m3 =
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                                    BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                            .m(
+                                                                    BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                                            .m(
+                                                                                    BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                                                            .m(
+                                                                                                    new StringBuilder(
+                                                                                                            "mUserEnable:"),
+                                                                                                    this
+                                                                                                            .mUserEnable,
+                                                                                                    printWriter,
+                                                                                                    "mWaitCheckNetWork:"),
+                                                                                    this
+                                                                                            .mWaitCheckNetWork,
+                                                                                    printWriter,
+                                                                                    "mGoogleNetWork:"),
+                                                                    this.mGoogleNetWork,
+                                                                    printWriter,
+                                                                    "isGmsNetWorkLimt:"),
+                                                    this.isGmsNetWorkLimt,
+                                                    printWriter,
+                                                    "mScreenOn:"),
+                                            this.mScreenOn,
+                                            printWriter,
+                                            "mScreenOffChange:"),
+                                    this.mScreenOffChange,
+                                    printWriter,
+                                    "isCharging:"),
+                            this.isCharging,
+                            printWriter,
+                            "mPolicyControlSwitch:");
             m3.append(Integer.toBinaryString(this.mPolicyControlSwitch));
             printWriter.println(m3.toString());
             long elapsedRealtime = SystemClock.elapsedRealtime();
-            StringBuilder m4 = Preconditions$$ExternalSyntheticOutline0.m("Since last 24 hours\nTotal time and # of event Google access is available   : " + this.avaStats.dump(elapsedRealtime) + "\n", "Total time and # of event Google access is not possible : ");
+            StringBuilder m4 =
+                    Preconditions$$ExternalSyntheticOutline0.m(
+                            "Since last 24 hours\n"
+                                + "Total time and # of event Google access is available   : "
+                                    + this.avaStats.dump(elapsedRealtime)
+                                    + "\n",
+                            "Total time and # of event Google access is not possible : ");
             m4.append(this.noAvaStats.dump(elapsedRealtime));
             m4.append("\n");
-            StringBuilder m5 = Preconditions$$ExternalSyntheticOutline0.m(m4.toString(), "Total time and # of event VPN is connected :");
+            StringBuilder m5 =
+                    Preconditions$$ExternalSyntheticOutline0.m(
+                            m4.toString(), "Total time and # of event VPN is connected :");
             m5.append(this.vpnStats.dump(elapsedRealtime));
             printWriter.println(m5.toString());
             Iterator it2 = this.mCheckinServerUrl.iterator();
             while (it2.hasNext()) {
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m50m(printWriter, "mCheckinServerUrl:", (String) it2.next());
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m50m(
+                        printWriter, "mCheckinServerUrl:", (String) it2.next());
             }
         }
     }
 
     public final INetworkManagementService getNetworkManagementService() {
         IBinder service;
-        if (this.mNetworkService == null && (service = ServiceManager.getService("network_management")) != null) {
+        if (this.mNetworkService == null
+                && (service = ServiceManager.getService("network_management")) != null) {
             this.mNetworkService = INetworkManagementService.Stub.asInterface(service);
         }
         return this.mNetworkService;
@@ -668,7 +816,15 @@ public final class GmsAlarmManager {
     public final void getSettingsValueFromDB() {
         Cursor cursor;
         try {
-            cursor = this.mContext.getContentResolver().query(SMART_MGR_SETTINGS_URI, new String[]{"key", "value"}, null, null, null);
+            cursor =
+                    this.mContext
+                            .getContentResolver()
+                            .query(
+                                    SMART_MGR_SETTINGS_URI,
+                                    new String[] {"key", "value"},
+                                    null,
+                                    null,
+                                    null);
         } catch (Exception e) {
             Slog.e("GmsAlarmManager", "Exception with contentResolver : " + e.getMessage());
             e.printStackTrace();
@@ -686,7 +842,8 @@ public final class GmsAlarmManager {
                         }
                     }
                 } catch (Exception e2) {
-                    NandswapManager$$ExternalSyntheticOutline0.m(e2, new StringBuilder("Exception with parseInt : "), "GmsAlarmManager");
+                    NandswapManager$$ExternalSyntheticOutline0.m(
+                            e2, new StringBuilder("Exception with parseInt : "), "GmsAlarmManager");
                 }
             }
             cursor.close();
@@ -706,24 +863,66 @@ public final class GmsAlarmManager {
             this.mAlarmService = alarmManagerService;
             this.mCheckinServerUrl.add("checkin.gstatic.com");
             this.mNetworkReceiver = new AnonymousClass1(this, 2);
-            this.mContext.registerReceiver(this.mNetworkReceiver, BatteryService$$ExternalSyntheticOutline0.m("android.net.conn.CONNECTIVITY_CHANGE"), 2);
+            this.mContext.registerReceiver(
+                    this.mNetworkReceiver,
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            "android.net.conn.CONNECTIVITY_CHANGE"),
+                    2);
             this.mScreenReceiver = new AnonymousClass1(this, 4);
-            this.mContext.registerReceiver(this.mScreenReceiver, DirEncryptServiceHelper$$ExternalSyntheticOutline0.m("android.intent.action.SCREEN_OFF", "android.intent.action.SCREEN_ON"), 2);
+            this.mContext.registerReceiver(
+                    this.mScreenReceiver,
+                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                            "android.intent.action.SCREEN_OFF", "android.intent.action.SCREEN_ON"),
+                    2);
             this.mUserAddRemoveReceiver = new AnonymousClass1(this, 6);
-            this.mContext.registerReceiver(this.mUserAddRemoveReceiver, DirEncryptServiceHelper$$ExternalSyntheticOutline0.m("android.intent.action.USER_ADDED", "android.intent.action.USER_REMOVED"), 2);
+            this.mContext.registerReceiver(
+                    this.mUserAddRemoveReceiver,
+                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                            "android.intent.action.USER_ADDED",
+                            "android.intent.action.USER_REMOVED"),
+                    2);
             this.mSetupWizardCompleteOrBootCompleteReceiver = new AnonymousClass1(this, 5);
-            this.mContext.registerReceiver(this.mSetupWizardCompleteOrBootCompleteReceiver, DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(Constants.INTENT_SECSETUPWIZARD_COMPLETE, "android.intent.action.BOOT_COMPLETED"), 2);
+            this.mContext.registerReceiver(
+                    this.mSetupWizardCompleteOrBootCompleteReceiver,
+                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                            Constants.INTENT_SECSETUPWIZARD_COMPLETE,
+                            "android.intent.action.BOOT_COMPLETED"),
+                    2);
             this.mSCPMReceiver = new AnonymousClass1(this, 3);
-            this.mContext.registerReceiver(this.mSCPMReceiver, BatteryService$$ExternalSyntheticOutline0.m("sec.app.policy.UPDATE.gmsnet"), 2);
+            this.mContext.registerReceiver(
+                    this.mSCPMReceiver,
+                    BatteryService$$ExternalSyntheticOutline0.m("sec.app.policy.UPDATE.gmsnet"),
+                    2);
             this.mBatteryChargingReceiver = new AnonymousClass1(this, 1);
-            this.mContext.registerReceiver(this.mBatteryChargingReceiver, DirEncryptServiceHelper$$ExternalSyntheticOutline0.m("android.os.action.CHARGING", "android.os.action.DISCHARGING"), 2);
-            this.mLocalPowerManager = (PowerManagerInternal) LocalServices.getService(PowerManagerInternal.class);
-            this.mContext.registerReceiver(this.mIntentReceiver, GmsAlarmManager$$ExternalSyntheticOutline0.m("com.samsung.android.server.action_check_gms_network", "com.samsung.android.server.action_insert_log", "android.intent.action.BOOT_COMPLETED"), 2);
+            this.mContext.registerReceiver(
+                    this.mBatteryChargingReceiver,
+                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                            "android.os.action.CHARGING", "android.os.action.DISCHARGING"),
+                    2);
+            this.mLocalPowerManager =
+                    (PowerManagerInternal) LocalServices.getService(PowerManagerInternal.class);
+            this.mContext.registerReceiver(
+                    this.mIntentReceiver,
+                    GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                            "com.samsung.android.server.action_check_gms_network",
+                            "com.samsung.android.server.action_insert_log",
+                            "android.intent.action.BOOT_COMPLETED"),
+                    2);
             this.mWaitCheckNetWork = false;
             this.mGoogleNetWork = false;
             this.isCharging = false;
-            this.mPendingIntent = PendingIntent.getBroadcast(this.mContext, 0, new Intent("com.samsung.android.server.action_check_gms_network"), 67108864);
-            this.mInsertLogPendingIntent = PendingIntent.getBroadcast(this.mContext, 0, new Intent("com.samsung.android.server.action_insert_log"), 67108864);
+            this.mPendingIntent =
+                    PendingIntent.getBroadcast(
+                            this.mContext,
+                            0,
+                            new Intent("com.samsung.android.server.action_check_gms_network"),
+                            67108864);
+            this.mInsertLogPendingIntent =
+                    PendingIntent.getBroadcast(
+                            this.mContext,
+                            0,
+                            new Intent("com.samsung.android.server.action_insert_log"),
+                            67108864);
             this.avaStats = new NetWorkStats();
             this.noAvaStats = new NetWorkStats();
             this.vpnStats = new NetWorkStats();
@@ -731,7 +930,9 @@ public final class GmsAlarmManager {
     }
 
     public final boolean isVPNConnected() {
-        NetworkInfo networkInfo = ((ConnectivityManager) this.mContext.getSystemService("connectivity")).getNetworkInfo(17);
+        NetworkInfo networkInfo =
+                ((ConnectivityManager) this.mContext.getSystemService("connectivity"))
+                        .getNetworkInfo(17);
         return networkInfo != null && networkInfo.isConnected();
     }
 
@@ -762,7 +963,14 @@ public final class GmsAlarmManager {
             Iterator it = arrayList.iterator();
             while (it.hasNext()) {
                 String str = (String) it.next();
-                Slog.d("GmsAlarmManager", "[GMS-CORE] setUrlFirewallRule, ip = " + str + " isDeleteRule = " + z + " mGmsPkgUid = " + i);
+                Slog.d(
+                        "GmsAlarmManager",
+                        "[GMS-CORE] setUrlFirewallRule, ip = "
+                                + str
+                                + " isDeleteRule = "
+                                + z
+                                + " mGmsPkgUid = "
+                                + i);
                 this.mNetworkService.setUrlFirewallRuleMobileData(i, str, z);
                 this.mNetworkService.setUrlFirewallRuleWifi(i, str, z);
             }
@@ -778,12 +986,23 @@ public final class GmsAlarmManager {
         AnyMotionDetector$$ExternalSyntheticOutline0.m(i, "get Multi userId: ", "GmsAlarmManager");
         if (i > -1) {
             try {
-                int packageUidAsUser = packageManager.getPackageUidAsUser("com.google.android.gms", 0, i);
-                int packageUidAsUser2 = packageManager.getPackageUidAsUser("com.android.vending", 0, i);
-                int packageUidAsUser3 = packageManager.getPackageUidAsUser("com.google.android.configupdater", 0, i);
+                int packageUidAsUser =
+                        packageManager.getPackageUidAsUser("com.google.android.gms", 0, i);
+                int packageUidAsUser2 =
+                        packageManager.getPackageUidAsUser("com.android.vending", 0, i);
+                int packageUidAsUser3 =
+                        packageManager.getPackageUidAsUser(
+                                "com.google.android.configupdater", 0, i);
                 arrayList.add(Integer.valueOf(packageUidAsUser));
                 arrayList.add(Integer.valueOf(packageUidAsUser3));
-                Slog.v("GmsAlarmManager", "gmsuid = " + packageUidAsUser + " vendinguid = " + packageUidAsUser2 + " configupdate = " + packageUidAsUser3);
+                Slog.v(
+                        "GmsAlarmManager",
+                        "gmsuid = "
+                                + packageUidAsUser
+                                + " vendinguid = "
+                                + packageUidAsUser2
+                                + " configupdate = "
+                                + packageUidAsUser3);
             } catch (PackageManager.NameNotFoundException e) {
                 Slog.v("GmsAlarmManager", "NameNotFoundException" + e);
             }

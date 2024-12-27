@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.content.Context;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.VpnManager;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Collections;
@@ -47,8 +48,7 @@ public class PowerExemptionManager {
     public static final int REASON_KEY_CHAIN = 304;
     public static final int REASON_LOCALE_CHANGED = 206;
 
-    @SystemApi
-    public static final int REASON_LOCATION_PROVIDER = 312;
+    @SystemApi public static final int REASON_LOCATION_PROVIDER = 312;
     public static final int REASON_LOCKED_BOOT_COMPLETED = 202;
     public static final int REASON_MARS_MANAGED_APP = 350;
     public static final int REASON_MEDIA_BUTTON = 313;
@@ -102,20 +102,19 @@ public class PowerExemptionManager {
     private final IDeviceIdleController mService;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AllowListEvent {
-    }
+    public @interface AllowListEvent {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ReasonCode {
-    }
+    public @interface ReasonCode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TempAllowListType {
-    }
+    public @interface TempAllowListType {}
 
     public PowerExemptionManager(Context context) {
         this.mContext = context;
-        this.mService = ((DeviceIdleManager) context.getSystemService(DeviceIdleManager.class)).getService();
+        this.mService =
+                ((DeviceIdleManager) context.getSystemService(DeviceIdleManager.class))
+                        .getService();
     }
 
     public void addToPermanentAllowList(String packageName) {
@@ -160,23 +159,29 @@ public class PowerExemptionManager {
         }
     }
 
-    public void addToTemporaryAllowList(String packageName, int reasonCode, String reason, long durationMs) {
+    public void addToTemporaryAllowList(
+            String packageName, int reasonCode, String reason, long durationMs) {
         try {
-            this.mService.addPowerSaveTempWhitelistApp(packageName, durationMs, this.mContext.getUserId(), reasonCode, reason);
+            this.mService.addPowerSaveTempWhitelistApp(
+                    packageName, durationMs, this.mContext.getUserId(), reasonCode, reason);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public long addToTemporaryAllowListForEvent(String packageName, int reasonCode, String reason, int event) {
+    public long addToTemporaryAllowListForEvent(
+            String packageName, int reasonCode, String reason, int event) {
         try {
             switch (event) {
                 case 1:
-                    return this.mService.addPowerSaveTempWhitelistAppForSms(packageName, this.mContext.getUserId(), reasonCode, reason);
+                    return this.mService.addPowerSaveTempWhitelistAppForSms(
+                            packageName, this.mContext.getUserId(), reasonCode, reason);
                 case 2:
-                    return this.mService.addPowerSaveTempWhitelistAppForMms(packageName, this.mContext.getUserId(), reasonCode, reason);
+                    return this.mService.addPowerSaveTempWhitelistAppForMms(
+                            packageName, this.mContext.getUserId(), reasonCode, reason);
                 default:
-                    return this.mService.whitelistAppTemporarily(packageName, this.mContext.getUserId(), reasonCode, reason);
+                    return this.mService.whitelistAppTemporarily(
+                            packageName, this.mContext.getUserId(), reasonCode, reason);
             }
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();

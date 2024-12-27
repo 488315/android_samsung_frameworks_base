@@ -20,11 +20,12 @@ import android.print.PrinterInfo;
 import android.printservice.IPrintService;
 import android.printservice.IPrintServiceClient;
 import android.util.Slog;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.util.dump.DualDumpOutputStream;
 import com.android.internal.util.dump.DumpUtils;
 import com.android.internal.util.function.pooled.PooledLambda;
-import com.android.server.print.UserState;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +89,8 @@ public final class RemotePrintService implements IBinder.DeathRecipient {
         public final /* synthetic */ RemotePrintService this$0;
         public final /* synthetic */ PrintJobInfo val$printJob;
 
-        public /* synthetic */ AnonymousClass2(RemotePrintService remotePrintService, PrintJobInfo printJobInfo, int i) {
+        public /* synthetic */ AnonymousClass2(
+                RemotePrintService remotePrintService, PrintJobInfo printJobInfo, int i) {
             this.$r8$classId = i;
             this.this$0 = remotePrintService;
             this.val$printJob = printJobInfo;
@@ -114,7 +116,8 @@ public final class RemotePrintService implements IBinder.DeathRecipient {
         public final /* synthetic */ RemotePrintService this$0;
         public final /* synthetic */ List val$priorityList;
 
-        public /* synthetic */ AnonymousClass6(RemotePrintService remotePrintService, List list, int i) {
+        public /* synthetic */ AnonymousClass6(
+                RemotePrintService remotePrintService, List list, int i) {
             this.$r8$classId = i;
             this.this$0 = remotePrintService;
             this.val$priorityList = list;
@@ -140,7 +143,8 @@ public final class RemotePrintService implements IBinder.DeathRecipient {
         public final /* synthetic */ RemotePrintService this$0;
         public final /* synthetic */ PrinterId val$printerId;
 
-        public /* synthetic */ AnonymousClass9(RemotePrintService remotePrintService, PrinterId printerId, int i) {
+        public /* synthetic */ AnonymousClass9(
+                RemotePrintService remotePrintService, PrinterId printerId, int i) {
             this.$r8$classId = i;
             this.this$0 = remotePrintService;
             this.val$printerId = printerId;
@@ -167,7 +171,8 @@ public final class RemotePrintService implements IBinder.DeathRecipient {
             this.mWeakService = new WeakReference(remotePrintService);
         }
 
-        public static void throwIfPrinterIdTampered(ComponentName componentName, PrinterId printerId) {
+        public static void throwIfPrinterIdTampered(
+                ComponentName componentName, PrinterId printerId) {
             if (printerId == null || !printerId.getServiceName().equals(componentName)) {
                 throw new IllegalArgumentException("Invalid printer id: " + printerId);
             }
@@ -193,7 +198,8 @@ public final class RemotePrintService implements IBinder.DeathRecipient {
             }
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                return remotePrintService.mSpooler.getPrintJobInfos(-4, -2, remotePrintService.mComponentName);
+                return remotePrintService.mSpooler.getPrintJobInfos(
+                        -4, -2, remotePrintService.mComponentName);
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
@@ -209,7 +215,8 @@ public final class RemotePrintService implements IBinder.DeathRecipient {
                     synchronized (userState.mLock) {
                         try {
                             userState.throwIfDestroyedLocked();
-                            UserState.AnonymousClass1 anonymousClass1 = userState.mPrinterDiscoverySession;
+                            UserState.AnonymousClass1 anonymousClass1 =
+                                    userState.mPrinterDiscoverySession;
                             if (anonymousClass1 != null) {
                                 anonymousClass1.onCustomPrinterIconLoadedLocked(printerId);
                             }
@@ -238,7 +245,8 @@ public final class RemotePrintService implements IBinder.DeathRecipient {
                         try {
                             userState.throwIfDestroyedLocked();
                             if (!userState.mActiveServices.isEmpty()) {
-                                UserState.AnonymousClass1 anonymousClass1 = userState.mPrinterDiscoverySession;
+                                UserState.AnonymousClass1 anonymousClass1 =
+                                        userState.mPrinterDiscoverySession;
                                 if (anonymousClass1 != null) {
                                     anonymousClass1.onPrintersAddedLocked(list);
                                 }
@@ -268,7 +276,8 @@ public final class RemotePrintService implements IBinder.DeathRecipient {
                         try {
                             userState.throwIfDestroyedLocked();
                             if (!userState.mActiveServices.isEmpty()) {
-                                UserState.AnonymousClass1 anonymousClass1 = userState.mPrinterDiscoverySession;
+                                UserState.AnonymousClass1 anonymousClass1 =
+                                        userState.mPrinterDiscoverySession;
                                 if (anonymousClass1 != null) {
                                     anonymousClass1.onPrintersRemovedLocked(list);
                                 }
@@ -344,7 +353,8 @@ public final class RemotePrintService implements IBinder.DeathRecipient {
             }
         }
 
-        public final void writePrintJobData(ParcelFileDescriptor parcelFileDescriptor, PrintJobId printJobId) {
+        public final void writePrintJobData(
+                ParcelFileDescriptor parcelFileDescriptor, PrintJobId printJobId) {
             RemotePrintService remotePrintService = (RemotePrintService) this.mWeakService.get();
             if (remotePrintService != null) {
                 long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -359,8 +369,7 @@ public final class RemotePrintService implements IBinder.DeathRecipient {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RemoteServiceConneciton implements ServiceConnection {
-        public RemoteServiceConneciton() {
-        }
+        public RemoteServiceConneciton() {}
 
         @Override // android.content.ServiceConnection
         public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
@@ -377,23 +386,33 @@ public final class RemotePrintService implements IBinder.DeathRecipient {
                 iBinder.linkToDeath(RemotePrintService.this, 0);
                 try {
                     RemotePrintService remotePrintService2 = RemotePrintService.this;
-                    remotePrintService2.mPrintService.setClient(remotePrintService2.mPrintServiceClient);
+                    remotePrintService2.mPrintService.setClient(
+                            remotePrintService2.mPrintServiceClient);
                     RemotePrintService remotePrintService3 = RemotePrintService.this;
-                    if (remotePrintService3.mServiceDied && remotePrintService3.mHasPrinterDiscoverySession) {
+                    if (remotePrintService3.mServiceDied
+                            && remotePrintService3.mHasPrinterDiscoverySession) {
                         remotePrintService3.handleCreatePrinterDiscoverySession();
                     }
                     RemotePrintService remotePrintService4 = RemotePrintService.this;
-                    if (remotePrintService4.mServiceDied && (list2 = remotePrintService4.mDiscoveryPriorityList) != null) {
+                    if (remotePrintService4.mServiceDied
+                            && (list2 = remotePrintService4.mDiscoveryPriorityList) != null) {
                         remotePrintService4.handleStartPrinterDiscovery(list2);
                     }
                     synchronized (RemotePrintService.this.mLock) {
                         try {
                             RemotePrintService remotePrintService5 = RemotePrintService.this;
-                            if (remotePrintService5.mServiceDied && (list = remotePrintService5.mTrackedPrinterList) != null) {
+                            if (remotePrintService5.mServiceDied
+                                    && (list = remotePrintService5.mTrackedPrinterList) != null) {
                                 int size = ((ArrayList) list).size();
                                 for (int i = 0; i < size; i++) {
-                                    RemotePrintService remotePrintService6 = RemotePrintService.this;
-                                    remotePrintService6.handleStartPrinterStateTracking((PrinterId) ((ArrayList) remotePrintService6.mTrackedPrinterList).get(i));
+                                    RemotePrintService remotePrintService6 =
+                                            RemotePrintService.this;
+                                    remotePrintService6.handleStartPrinterStateTracking(
+                                            (PrinterId)
+                                                    ((ArrayList)
+                                                                    remotePrintService6
+                                                                            .mTrackedPrinterList)
+                                                            .get(i));
                                 }
                             }
                         } catch (Throwable th) {
@@ -401,10 +420,14 @@ public final class RemotePrintService implements IBinder.DeathRecipient {
                         }
                     }
                     while (!((ArrayList) RemotePrintService.this.mPendingCommands).isEmpty()) {
-                        ((Runnable) ((ArrayList) RemotePrintService.this.mPendingCommands).remove(0)).run();
+                        ((Runnable)
+                                        ((ArrayList) RemotePrintService.this.mPendingCommands)
+                                                .remove(0))
+                                .run();
                     }
                     RemotePrintService remotePrintService7 = RemotePrintService.this;
-                    if (!remotePrintService7.mHasPrinterDiscoverySession && !remotePrintService7.mHasActivePrintJobs) {
+                    if (!remotePrintService7.mHasPrinterDiscoverySession
+                            && !remotePrintService7.mHasActivePrintJobs) {
                         remotePrintService7.ensureUnbound();
                     }
                     RemotePrintService.this.mServiceDied = false;
@@ -423,7 +446,12 @@ public final class RemotePrintService implements IBinder.DeathRecipient {
         }
     }
 
-    public RemotePrintService(Context context, ComponentName componentName, int i, RemotePrintSpooler remotePrintSpooler, UserState userState) {
+    public RemotePrintService(
+            Context context,
+            ComponentName componentName,
+            int i,
+            RemotePrintSpooler remotePrintSpooler,
+            UserState userState) {
         this.mContext = context;
         this.mCallbacks = userState;
         this.mComponentName = componentName;
@@ -434,23 +462,34 @@ public final class RemotePrintService implements IBinder.DeathRecipient {
 
     @Override // android.os.IBinder.DeathRecipient
     public final void binderDied() {
-        Handler.getMain().sendMessage(PooledLambda.obtainMessage(new RemotePrintService$$ExternalSyntheticLambda0(0), this));
+        Handler.getMain()
+                .sendMessage(
+                        PooledLambda.obtainMessage(
+                                new RemotePrintService$$ExternalSyntheticLambda0(0), this));
     }
 
     public final void dump(DualDumpOutputStream dualDumpOutputStream) {
-        DumpUtils.writeComponentName(dualDumpOutputStream, "component_name", 1146756268033L, this.mComponentName);
+        DumpUtils.writeComponentName(
+                dualDumpOutputStream, "component_name", 1146756268033L, this.mComponentName);
         dualDumpOutputStream.write("is_destroyed", 1133871366146L, this.mDestroyed);
         dualDumpOutputStream.write("is_bound", 1133871366147L, isBound());
-        dualDumpOutputStream.write("has_discovery_session", 1133871366148L, this.mHasPrinterDiscoverySession);
-        dualDumpOutputStream.write("has_active_print_jobs", 1133871366149L, this.mHasActivePrintJobs);
-        dualDumpOutputStream.write("is_discovering_printers", 1133871366150L, this.mDiscoveryPriorityList != null);
+        dualDumpOutputStream.write(
+                "has_discovery_session", 1133871366148L, this.mHasPrinterDiscoverySession);
+        dualDumpOutputStream.write(
+                "has_active_print_jobs", 1133871366149L, this.mHasActivePrintJobs);
+        dualDumpOutputStream.write(
+                "is_discovering_printers", 1133871366150L, this.mDiscoveryPriorityList != null);
         synchronized (this.mLock) {
             try {
                 List list = this.mTrackedPrinterList;
                 if (list != null) {
                     int size = ((ArrayList) list).size();
                     for (int i = 0; i < size; i++) {
-                        com.android.internal.print.DumpUtils.writePrinterId(dualDumpOutputStream, "tracked_printers", 2246267895815L, (PrinterId) ((ArrayList) this.mTrackedPrinterList).get(i));
+                        com.android.internal.print.DumpUtils.writePrinterId(
+                                dualDumpOutputStream,
+                                "tracked_printers",
+                                2246267895815L,
+                                (PrinterId) ((ArrayList) this.mTrackedPrinterList).get(i));
                     }
                 }
             } catch (Throwable th) {
@@ -464,7 +503,8 @@ public final class RemotePrintService implements IBinder.DeathRecipient {
             return;
         }
         this.mBinding = true;
-        if (this.mContext.bindServiceAsUser(this.mIntent, this.mServiceConnection, 71307265, new UserHandle(this.mUserId))) {
+        if (this.mContext.bindServiceAsUser(
+                this.mIntent, this.mServiceConnection, 71307265, new UserHandle(this.mUserId))) {
             return;
         }
         this.mBinding = false;
@@ -512,13 +552,25 @@ public final class RemotePrintService implements IBinder.DeathRecipient {
                 }
                 ComponentName componentName = this.mComponentName;
                 if (Looper.getMainLooper().isCurrentThread()) {
-                    BackgroundThread.getHandler().sendMessage(PooledLambda.obtainMessage(new UserState$$ExternalSyntheticLambda1(0), userState, componentName));
+                    BackgroundThread.getHandler()
+                            .sendMessage(
+                                    PooledLambda.obtainMessage(
+                                            new UserState$$ExternalSyntheticLambda1(0),
+                                            userState,
+                                            componentName));
                 } else {
                     userState.failScheduledPrintJobsForServiceInternal(componentName);
                 }
-                Handler.getMain().sendMessage(PooledLambda.obtainMessage(new RemotePrintService$$ExternalSyntheticLambda0(2), this));
+                Handler.getMain()
+                        .sendMessage(
+                                PooledLambda.obtainMessage(
+                                        new RemotePrintService$$ExternalSyntheticLambda0(2), this));
                 userState.mActiveServices.remove(this.mComponentName);
-                Handler.getMain().sendMessageDelayed(PooledLambda.obtainMessage(new UserState$$ExternalSyntheticLambda0(1), userState), 500L);
+                Handler.getMain()
+                        .sendMessageDelayed(
+                                PooledLambda.obtainMessage(
+                                        new UserState$$ExternalSyntheticLambda0(1), userState),
+                                500L);
                 UserState.AnonymousClass1 anonymousClass1 = userState.mPrinterDiscoverySession;
                 if (anonymousClass1 == null) {
                     return;
@@ -615,12 +667,16 @@ public final class RemotePrintService implements IBinder.DeathRecipient {
     public final void handleRequestCustomPrinterIcon(final PrinterId printerId) {
         if (!isBound()) {
             ensureBound();
-            ((ArrayList) this.mPendingCommands).add(new Runnable() { // from class: com.android.server.print.RemotePrintService$$ExternalSyntheticLambda9
-                @Override // java.lang.Runnable
-                public final void run() {
-                    RemotePrintService.this.handleRequestCustomPrinterIcon(printerId);
-                }
-            });
+            ((ArrayList) this.mPendingCommands)
+                    .add(
+                            new Runnable() { // from class:
+                                             // com.android.server.print.RemotePrintService$$ExternalSyntheticLambda9
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    RemotePrintService.this.handleRequestCustomPrinterIcon(
+                                            printerId);
+                                }
+                            });
             return;
         }
         try {
@@ -701,12 +757,16 @@ public final class RemotePrintService implements IBinder.DeathRecipient {
                             this.mPrintService.stopPrinterStateTracking(printerId);
                             return;
                         } catch (RemoteException e) {
-                            Slog.e("RemotePrintService", "Error requesting stop printer tracking.", e);
+                            Slog.e(
+                                    "RemotePrintService",
+                                    "Error requesting stop printer tracking.",
+                                    e);
                             return;
                         }
                     }
                     ensureBound();
-                    ((ArrayList) this.mPendingCommands).add(new AnonymousClass9(this, printerId, 1));
+                    ((ArrayList) this.mPendingCommands)
+                            .add(new AnonymousClass9(this, printerId, 1));
                 }
             } finally {
             }
@@ -739,7 +799,8 @@ public final class RemotePrintService implements IBinder.DeathRecipient {
                     return;
                 }
                 for (int size = ((ArrayList) list).size() - 1; size >= 0; size--) {
-                    PrinterId printerId = (PrinterId) ((ArrayList) this.mTrackedPrinterList).get(size);
+                    PrinterId printerId =
+                            (PrinterId) ((ArrayList) this.mTrackedPrinterList).get(size);
                     if (printerId.getServiceName().equals(this.mComponentName)) {
                         handleStopPrinterStateTracking(printerId);
                     }

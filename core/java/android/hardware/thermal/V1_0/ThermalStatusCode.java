@@ -1,6 +1,7 @@
 package android.hardware.thermal.V1_0;
 
 import android.service.timezone.TimeZoneProviderService;
+
 import java.util.ArrayList;
 
 /* loaded from: classes2.dex */

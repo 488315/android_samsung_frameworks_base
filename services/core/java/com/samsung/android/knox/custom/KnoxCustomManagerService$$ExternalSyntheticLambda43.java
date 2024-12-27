@@ -4,7 +4,8 @@ import com.android.internal.util.FunctionalUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class KnoxCustomManagerService$$ExternalSyntheticLambda43 implements FunctionalUtils.ThrowingSupplier {
+public final /* synthetic */ class KnoxCustomManagerService$$ExternalSyntheticLambda43
+        implements FunctionalUtils.ThrowingSupplier {
     public final /* synthetic */ int $r8$classId = 1;
     public final /* synthetic */ KnoxCustomManagerService f$0;
     public final /* synthetic */ String f$1;
@@ -12,7 +13,8 @@ public final /* synthetic */ class KnoxCustomManagerService$$ExternalSyntheticLa
     public final /* synthetic */ int f$3;
     public final /* synthetic */ int f$4;
 
-    public /* synthetic */ KnoxCustomManagerService$$ExternalSyntheticLambda43(KnoxCustomManagerService knoxCustomManagerService, int i, int i2, int i3, String str) {
+    public /* synthetic */ KnoxCustomManagerService$$ExternalSyntheticLambda43(
+            KnoxCustomManagerService knoxCustomManagerService, int i, int i2, int i3, String str) {
         this.f$0 = knoxCustomManagerService;
         this.f$2 = i;
         this.f$3 = i2;
@@ -20,7 +22,8 @@ public final /* synthetic */ class KnoxCustomManagerService$$ExternalSyntheticLa
         this.f$1 = str;
     }
 
-    public /* synthetic */ KnoxCustomManagerService$$ExternalSyntheticLambda43(KnoxCustomManagerService knoxCustomManagerService, String str, int i, int i2, int i3) {
+    public /* synthetic */ KnoxCustomManagerService$$ExternalSyntheticLambda43(
+            KnoxCustomManagerService knoxCustomManagerService, String str, int i, int i2, int i3) {
         this.f$0 = knoxCustomManagerService;
         this.f$1 = str;
         this.f$2 = i;

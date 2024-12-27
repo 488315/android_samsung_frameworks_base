@@ -1,12 +1,11 @@
 package android.app;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentManagerImpl;
 import android.util.Log;
 import android.util.LogWriter;
 import android.view.View;
+
 import com.android.internal.util.FastPrintWriter;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.io.Writer;
@@ -14,7 +13,8 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 
 /* loaded from: classes.dex */
-final class BackStackRecord extends FragmentTransaction implements FragmentManager.BackStackEntry, FragmentManagerImpl.OpGenerator {
+final class BackStackRecord extends FragmentTransaction
+        implements FragmentManager.BackStackEntry, FragmentManagerImpl.OpGenerator {
     static final int OP_ADD = 1;
     static final int OP_ATTACH = 7;
     static final int OP_DETACH = 6;
@@ -56,8 +56,7 @@ final class BackStackRecord extends FragmentTransaction implements FragmentManag
         int popEnterAnim;
         int popExitAnim;
 
-        Op() {
-        }
+        Op() {}
 
         Op(int cmd, Fragment fragment) {
             this.cmd = cmd;
@@ -266,23 +265,46 @@ final class BackStackRecord extends FragmentTransaction implements FragmentManag
         if (this.mManager.getTargetSdk() > 25) {
             Class fragmentClass = fragment.getClass();
             int modifiers = fragmentClass.getModifiers();
-            if (fragmentClass.isAnonymousClass() || !Modifier.isPublic(modifiers) || (fragmentClass.isMemberClass() && !Modifier.isStatic(modifiers))) {
-                throw new IllegalStateException("Fragment " + fragmentClass.getCanonicalName() + " must be a public static class to be  properly recreated from instance state.");
+            if (fragmentClass.isAnonymousClass()
+                    || !Modifier.isPublic(modifiers)
+                    || (fragmentClass.isMemberClass() && !Modifier.isStatic(modifiers))) {
+                throw new IllegalStateException(
+                        "Fragment "
+                                + fragmentClass.getCanonicalName()
+                                + " must be a public static class to be  properly recreated from"
+                                + " instance state.");
             }
         }
         fragment.mFragmentManager = this.mManager;
         if (tag != null) {
             if (fragment.mTag != null && !tag.equals(fragment.mTag)) {
-                throw new IllegalStateException("Can't change tag of fragment " + fragment + ": was " + fragment.mTag + " now " + tag);
+                throw new IllegalStateException(
+                        "Can't change tag of fragment "
+                                + fragment
+                                + ": was "
+                                + fragment.mTag
+                                + " now "
+                                + tag);
             }
             fragment.mTag = tag;
         }
         if (containerViewId != 0) {
             if (containerViewId == -1) {
-                throw new IllegalArgumentException("Can't add fragment " + fragment + " with tag " + tag + " to container view with no id");
+                throw new IllegalArgumentException(
+                        "Can't add fragment "
+                                + fragment
+                                + " with tag "
+                                + tag
+                                + " to container view with no id");
             }
             if (fragment.mFragmentId != 0 && fragment.mFragmentId != containerViewId) {
-                throw new IllegalStateException("Can't change container ID of fragment " + fragment + ": was " + fragment.mFragmentId + " now " + containerViewId);
+                throw new IllegalStateException(
+                        "Can't change container ID of fragment "
+                                + fragment
+                                + ": was "
+                                + fragment.mFragmentId
+                                + " now "
+                                + containerViewId);
             }
             fragment.mFragmentId = containerViewId;
             fragment.mContainerId = containerViewId;
@@ -364,17 +386,24 @@ final class BackStackRecord extends FragmentTransaction implements FragmentManag
     public FragmentTransaction addSharedElement(View sharedElement, String name) {
         String transitionName = sharedElement.getTransitionName();
         if (transitionName == null) {
-            throw new IllegalArgumentException("Unique transitionNames are required for all sharedElements");
+            throw new IllegalArgumentException(
+                    "Unique transitionNames are required for all sharedElements");
         }
         if (this.mSharedElementSourceNames == null) {
             this.mSharedElementSourceNames = new ArrayList<>();
             this.mSharedElementTargetNames = new ArrayList<>();
         } else {
             if (this.mSharedElementTargetNames.contains(name)) {
-                throw new IllegalArgumentException("A shared element with the target name '" + name + "' has already been added to the transaction.");
+                throw new IllegalArgumentException(
+                        "A shared element with the target name '"
+                                + name
+                                + "' has already been added to the transaction.");
             }
             if (this.mSharedElementSourceNames.contains(transitionName)) {
-                throw new IllegalArgumentException("A shared element with the source name '" + transitionName + " has already been added to the transaction.");
+                throw new IllegalArgumentException(
+                        "A shared element with the source name '"
+                                + transitionName
+                                + " has already been added to the transaction.");
             }
         }
         this.mSharedElementSourceNames.add(transitionName);
@@ -391,7 +420,8 @@ final class BackStackRecord extends FragmentTransaction implements FragmentManag
     @Override // android.app.FragmentTransaction
     public FragmentTransaction addToBackStack(String name) {
         if (!this.mAllowAddToBackStack) {
-            throw new IllegalStateException("This FragmentTransaction is not allowed to be added to the back stack.");
+            throw new IllegalStateException(
+                    "This FragmentTransaction is not allowed to be added to the back stack.");
         }
         this.mAddToBackStack = true;
         this.mName = name;
@@ -406,7 +436,8 @@ final class BackStackRecord extends FragmentTransaction implements FragmentManag
     @Override // android.app.FragmentTransaction
     public FragmentTransaction disallowAddToBackStack() {
         if (this.mAddToBackStack) {
-            throw new IllegalStateException("This transaction is already being added to the back stack");
+            throw new IllegalStateException(
+                    "This transaction is already being added to the back stack");
         }
         this.mAllowAddToBackStack = false;
         return this;
@@ -453,7 +484,12 @@ final class BackStackRecord extends FragmentTransaction implements FragmentManag
             if (op.fragment != null) {
                 op.fragment.mBackStackNesting += amt;
                 if (FragmentManagerImpl.DEBUG) {
-                    Log.v(TAG, "Bump nesting of " + op.fragment + " to " + op.fragment.mBackStackNesting);
+                    Log.v(
+                            TAG,
+                            "Bump nesting of "
+                                    + op.fragment
+                                    + " to "
+                                    + op.fragment.mBackStackNesting);
                 }
             }
         }
@@ -651,7 +687,9 @@ final class BackStackRecord extends FragmentTransaction implements FragmentManag
             Op op = this.mOps.get(opNum);
             Fragment f = op.fragment;
             if (f != null) {
-                f.setNextTransition(FragmentManagerImpl.reverseTransit(this.mTransition), this.mTransitionStyle);
+                f.setNextTransition(
+                        FragmentManagerImpl.reverseTransit(this.mTransition),
+                        this.mTransitionStyle);
             }
             switch (op.cmd) {
                 case 1:
@@ -800,7 +838,14 @@ final class BackStackRecord extends FragmentTransaction implements FragmentManag
 
     private static boolean isFragmentPostponed(Op op) {
         Fragment fragment = op.fragment;
-        return (fragment == null || !fragment.mAdded || fragment.mView == null || fragment.mDetached || fragment.mHidden || !fragment.isPostponed()) ? false : true;
+        return (fragment == null
+                        || !fragment.mAdded
+                        || fragment.mView == null
+                        || fragment.mDetached
+                        || fragment.mHidden
+                        || !fragment.isPostponed())
+                ? false
+                : true;
     }
 
     @Override // android.app.FragmentManager.BackStackEntry

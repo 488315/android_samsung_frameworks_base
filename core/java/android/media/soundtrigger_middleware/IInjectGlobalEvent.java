@@ -1,6 +1,5 @@
 package android.media.soundtrigger_middleware;
 
-import android.media.soundtrigger_middleware.IAcknowledgeEvent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -9,9 +8,11 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IInjectGlobalEvent extends IInterface {
-    public static final String DESCRIPTOR = "android.media.soundtrigger_middleware.IInjectGlobalEvent";
+    public static final String DESCRIPTOR =
+            "android.media.soundtrigger_middleware.IInjectGlobalEvent";
 
-    void setResourceContention(boolean z, IAcknowledgeEvent iAcknowledgeEvent) throws RemoteException;
+    void setResourceContention(boolean z, IAcknowledgeEvent iAcknowledgeEvent)
+            throws RemoteException;
 
     void triggerOnResourcesAvailable() throws RemoteException;
 
@@ -19,16 +20,14 @@ public interface IInjectGlobalEvent extends IInterface {
 
     public static class Default implements IInjectGlobalEvent {
         @Override // android.media.soundtrigger_middleware.IInjectGlobalEvent
-        public void triggerRestart() throws RemoteException {
-        }
+        public void triggerRestart() throws RemoteException {}
 
         @Override // android.media.soundtrigger_middleware.IInjectGlobalEvent
-        public void setResourceContention(boolean isContended, IAcknowledgeEvent callback) throws RemoteException {
-        }
+        public void setResourceContention(boolean isContended, IAcknowledgeEvent callback)
+                throws RemoteException {}
 
         @Override // android.media.soundtrigger_middleware.IInjectGlobalEvent
-        public void triggerOnResourcesAvailable() throws RemoteException {
-        }
+        public void triggerOnResourcesAvailable() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -36,7 +35,7 @@ public interface IInjectGlobalEvent extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInjectGlobalEvent {
+    public abstract static class Stub extends Binder implements IInjectGlobalEvent {
         static final int TRANSACTION_setResourceContention = 2;
         static final int TRANSACTION_triggerOnResourcesAvailable = 3;
         static final int TRANSACTION_triggerRestart = 1;
@@ -62,7 +61,8 @@ public interface IInjectGlobalEvent extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IInjectGlobalEvent.DESCRIPTOR);
             }
@@ -76,7 +76,8 @@ public interface IInjectGlobalEvent extends IInterface {
                     return true;
                 case 2:
                     boolean _arg0 = data.readBoolean();
-                    IAcknowledgeEvent _arg1 = IAcknowledgeEvent.Stub.asInterface(data.readStrongBinder());
+                    IAcknowledgeEvent _arg1 =
+                            IAcknowledgeEvent.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setResourceContention(_arg0, _arg1);
                     return true;
@@ -116,7 +117,8 @@ public interface IInjectGlobalEvent extends IInterface {
             }
 
             @Override // android.media.soundtrigger_middleware.IInjectGlobalEvent
-            public void setResourceContention(boolean isContended, IAcknowledgeEvent callback) throws RemoteException {
+            public void setResourceContention(boolean isContended, IAcknowledgeEvent callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInjectGlobalEvent.DESCRIPTOR);

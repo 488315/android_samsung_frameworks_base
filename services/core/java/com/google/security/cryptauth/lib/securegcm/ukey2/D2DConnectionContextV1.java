@@ -18,12 +18,14 @@ public class D2DConnectionContextV1 {
         List of = List.of((Object[]) property.split(";"));
         final PrintStream printStream = System.out;
         Objects.requireNonNull(printStream);
-        of.forEach(new Consumer() { // from class: com.google.security.cryptauth.lib.securegcm.ukey2.D2DConnectionContextV1$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                printStream.println((String) obj);
-            }
-        });
+        of.forEach(
+                new Consumer() { // from class:
+                                 // com.google.security.cryptauth.lib.securegcm.ukey2.D2DConnectionContextV1$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        printStream.println((String) obj);
+                    }
+                });
         System.loadLibrary("ukey2_jni");
     }
 
@@ -31,9 +33,11 @@ public class D2DConnectionContextV1 {
         this.contextPtr = j;
     }
 
-    private static native byte[] decode_message_from_peer(long j, byte[] bArr, byte[] bArr2) throws CryptoException;
+    private static native byte[] decode_message_from_peer(long j, byte[] bArr, byte[] bArr2)
+            throws CryptoException;
 
-    private static native byte[] encode_message_to_peer(long j, byte[] bArr, byte[] bArr2) throws BadHandleException;
+    private static native byte[] encode_message_to_peer(long j, byte[] bArr, byte[] bArr2)
+            throws BadHandleException;
 
     private static native byte[] get_session_unique(long j) throws BadHandleException;
 

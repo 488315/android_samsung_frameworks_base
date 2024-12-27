@@ -11,26 +11,31 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.UserHandle;
+
 import com.android.internal.app.ResolverActivity;
 import com.android.internal.app.ResolverListAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes5.dex */
 public class DisplayResolveInfo implements TargetInfo, Parcelable {
-    public static final Parcelable.Creator<DisplayResolveInfo> CREATOR = new Parcelable.Creator<DisplayResolveInfo>() { // from class: com.android.internal.app.chooser.DisplayResolveInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DisplayResolveInfo createFromParcel(Parcel in) {
-            return new DisplayResolveInfo(in);
-        }
+    public static final Parcelable.Creator<DisplayResolveInfo> CREATOR =
+            new Parcelable.Creator<
+                    DisplayResolveInfo>() { // from class:
+                                            // com.android.internal.app.chooser.DisplayResolveInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DisplayResolveInfo createFromParcel(Parcel in) {
+                    return new DisplayResolveInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DisplayResolveInfo[] newArray(int size) {
-            return new DisplayResolveInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DisplayResolveInfo[] newArray(int size) {
+                    return new DisplayResolveInfo[size];
+                }
+            };
     private Drawable mDisplayIcon;
     private CharSequence mDisplayLabel;
     private CharSequence mExtendedInfo;
@@ -43,11 +48,21 @@ public class DisplayResolveInfo implements TargetInfo, Parcelable {
     private ArrayList<DisplayResolveInfo> mSimilarList;
     private final List<Intent> mSourceIntents;
 
-    public DisplayResolveInfo(Intent originalIntent, ResolveInfo pri, Intent pOrigIntent, ResolverListAdapter.ResolveInfoPresentationGetter resolveInfoPresentationGetter) {
+    public DisplayResolveInfo(
+            Intent originalIntent,
+            ResolveInfo pri,
+            Intent pOrigIntent,
+            ResolverListAdapter.ResolveInfoPresentationGetter resolveInfoPresentationGetter) {
         this(originalIntent, pri, null, null, pOrigIntent, resolveInfoPresentationGetter);
     }
 
-    public DisplayResolveInfo(Intent originalIntent, ResolveInfo pri, CharSequence pLabel, CharSequence pInfo, Intent resolvedIntent, ResolverListAdapter.ResolveInfoPresentationGetter resolveInfoPresentationGetter) {
+    public DisplayResolveInfo(
+            Intent originalIntent,
+            ResolveInfo pri,
+            CharSequence pLabel,
+            CharSequence pInfo,
+            Intent resolvedIntent,
+            ResolverListAdapter.ResolveInfoPresentationGetter resolveInfoPresentationGetter) {
         this.mSourceIntents = new ArrayList();
         this.mPinned = false;
         this.mSimilarList = new ArrayList<>();
@@ -65,7 +80,11 @@ public class DisplayResolveInfo implements TargetInfo, Parcelable {
         this.mResolvedIntent = intent;
     }
 
-    private DisplayResolveInfo(DisplayResolveInfo other, Intent fillInIntent, int flags, ResolverListAdapter.ResolveInfoPresentationGetter resolveInfoPresentationGetter) {
+    private DisplayResolveInfo(
+            DisplayResolveInfo other,
+            Intent fillInIntent,
+            int flags,
+            ResolverListAdapter.ResolveInfoPresentationGetter resolveInfoPresentationGetter) {
         this.mSourceIntents = new ArrayList();
         this.mPinned = false;
         this.mSimilarList = new ArrayList<>();
@@ -127,7 +146,8 @@ public class DisplayResolveInfo implements TargetInfo, Parcelable {
 
     @Override // com.android.internal.app.chooser.TargetInfo
     public TargetInfo cloneFilledIn(Intent fillInIntent, int flags) {
-        return new DisplayResolveInfo(this, fillInIntent, flags, this.mResolveInfoPresentationGetter);
+        return new DisplayResolveInfo(
+                this, fillInIntent, flags, this.mResolveInfoPresentationGetter);
     }
 
     @Override // com.android.internal.app.chooser.TargetInfo
@@ -163,7 +183,8 @@ public class DisplayResolveInfo implements TargetInfo, Parcelable {
 
     @Override // com.android.internal.app.chooser.TargetInfo
     public ComponentName getResolvedComponentName() {
-        return new ComponentName(this.mResolveInfo.activityInfo.packageName, this.mResolveInfo.activityInfo.name);
+        return new ComponentName(
+                this.mResolveInfo.activityInfo.packageName, this.mResolveInfo.activityInfo.name);
     }
 
     @Override // com.android.internal.app.chooser.TargetInfo
@@ -184,7 +205,8 @@ public class DisplayResolveInfo implements TargetInfo, Parcelable {
     @Override // com.android.internal.app.chooser.TargetInfo
     public boolean startAsUser(Activity activity, Bundle options, UserHandle user) {
         if (!this.mIsSkipFixUris) {
-            TargetInfo.prepareIntentForCrossProfileLaunch(this.mResolvedIntent, user.getIdentifier());
+            TargetInfo.prepareIntentForCrossProfileLaunch(
+                    this.mResolvedIntent, user.getIdentifier());
         }
         activity.startActivityAsUser(this.mResolvedIntent, options, user);
         return false;

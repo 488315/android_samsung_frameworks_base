@@ -4,7 +4,8 @@ import java.io.IOException;
 
 /* loaded from: classes3.dex */
 public class LazyFieldLite {
-    private static final ExtensionRegistryLite EMPTY_REGISTRY = ExtensionRegistryLite.getEmptyRegistry();
+    private static final ExtensionRegistryLite EMPTY_REGISTRY =
+            ExtensionRegistryLite.getEmptyRegistry();
     private ByteString delayedBytes;
     private ExtensionRegistryLite extensionRegistry;
     private volatile ByteString memoizedBytes;
@@ -16,8 +17,7 @@ public class LazyFieldLite {
         this.delayedBytes = bytes;
     }
 
-    public LazyFieldLite() {
-    }
+    public LazyFieldLite() {}
 
     public static LazyFieldLite fromValue(MessageLite value) {
         LazyFieldLite lf = new LazyFieldLite();
@@ -52,7 +52,9 @@ public class LazyFieldLite {
     }
 
     public boolean containsDefaultInstance() {
-        return this.memoizedBytes == ByteString.EMPTY || (this.value == null && (this.delayedBytes == null || this.delayedBytes == ByteString.EMPTY));
+        return this.memoizedBytes == ByteString.EMPTY
+                || (this.value == null
+                        && (this.delayedBytes == null || this.delayedBytes == ByteString.EMPTY));
     }
 
     public void clear() {
@@ -107,7 +109,8 @@ public class LazyFieldLite {
         }
     }
 
-    public void mergeFrom(CodedInputStream input, ExtensionRegistryLite extensionRegistry) throws IOException {
+    public void mergeFrom(CodedInputStream input, ExtensionRegistryLite extensionRegistry)
+            throws IOException {
         if (containsDefaultInstance()) {
             setByteString(input.readBytes(), extensionRegistry);
             return;
@@ -125,7 +128,8 @@ public class LazyFieldLite {
         }
     }
 
-    private static MessageLite mergeValueAndBytes(MessageLite value, ByteString otherBytes, ExtensionRegistryLite extensionRegistry) {
+    private static MessageLite mergeValueAndBytes(
+            MessageLite value, ByteString otherBytes, ExtensionRegistryLite extensionRegistry) {
         try {
             return value.toBuilder().mergeFrom(otherBytes, extensionRegistry).build();
         } catch (InvalidProtocolBufferException e) {
@@ -198,7 +202,10 @@ public class LazyFieldLite {
             }
             try {
                 if (this.delayedBytes != null) {
-                    MessageLite parsedValue = defaultInstance.getParserForType().parseFrom(this.delayedBytes, this.extensionRegistry);
+                    MessageLite parsedValue =
+                            defaultInstance
+                                    .getParserForType()
+                                    .parseFrom(this.delayedBytes, this.extensionRegistry);
                     this.value = parsedValue;
                     this.memoizedBytes = this.delayedBytes;
                 } else {

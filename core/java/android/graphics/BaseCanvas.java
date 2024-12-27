@@ -1,8 +1,5 @@
 package android.graphics;
 
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.PorterDuff;
 import android.graphics.fonts.Font;
 import android.graphics.text.MeasuredText;
 import android.text.GraphicsOperations;
@@ -11,8 +8,11 @@ import android.text.PrecomputedText;
 import android.text.SpannableString;
 import android.text.SpannedString;
 import android.text.TextUtils;
+
 import com.android.internal.util.Preconditions;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
@@ -22,17 +22,43 @@ public abstract class BaseCanvas {
     protected int mDensity = 0;
     private boolean mAllowHwFeaturesInSwMode = CoreRune.GFW_DEBUG_DISABLE_HWRENDERING;
 
-    private static native void nDrawArc(long j, float f, float f2, float f3, float f4, float f5, float f6, boolean z, long j2);
+    private static native void nDrawArc(
+            long j, float f, float f2, float f3, float f4, float f5, float f6, boolean z, long j2);
 
-    private static native void nDrawBitmap(long j, long j2, float f, float f2, float f3, float f4, float f5, float f6, float f7, float f8, long j3, int i, int i2);
+    private static native void nDrawBitmap(
+            long j,
+            long j2,
+            float f,
+            float f2,
+            float f3,
+            float f4,
+            float f5,
+            float f6,
+            float f7,
+            float f8,
+            long j3,
+            int i,
+            int i2);
 
-    private static native void nDrawBitmap(long j, long j2, float f, float f2, long j3, int i, int i2, int i3);
+    private static native void nDrawBitmap(
+            long j, long j2, float f, float f2, long j3, int i, int i2, int i3);
 
-    private static native void nDrawBitmap(long j, int[] iArr, int i, int i2, float f, float f2, int i3, int i4, boolean z, long j2);
+    private static native void nDrawBitmap(
+            long j,
+            int[] iArr,
+            int i,
+            int i2,
+            float f,
+            float f2,
+            int i3,
+            int i4,
+            boolean z,
+            long j2);
 
     private static native void nDrawBitmapMatrix(long j, long j2, long j3, long j4);
 
-    private static native void nDrawBitmapMesh(long j, long j2, int i, int i2, float[] fArr, int i3, int[] iArr, int i4, long j3);
+    private static native void nDrawBitmapMesh(
+            long j, long j2, int i, int i2, float[] fArr, int i3, int[] iArr, int i4, long j3);
 
     private static native void nDrawCircle(long j, float f, float f2, float f3, long j2);
 
@@ -40,11 +66,38 @@ public abstract class BaseCanvas {
 
     private static native void nDrawColor(long j, long j2, long j3, int i);
 
-    private static native void nDrawDoubleRoundRect(long j, float f, float f2, float f3, float f4, float f5, float f6, float f7, float f8, float f9, float f10, float f11, float f12, long j2);
+    private static native void nDrawDoubleRoundRect(
+            long j,
+            float f,
+            float f2,
+            float f3,
+            float f4,
+            float f5,
+            float f6,
+            float f7,
+            float f8,
+            float f9,
+            float f10,
+            float f11,
+            float f12,
+            long j2);
 
-    private static native void nDrawDoubleRoundRect(long j, float f, float f2, float f3, float f4, float[] fArr, float f5, float f6, float f7, float f8, float[] fArr2, long j2);
+    private static native void nDrawDoubleRoundRect(
+            long j,
+            float f,
+            float f2,
+            float f3,
+            float f4,
+            float[] fArr,
+            float f5,
+            float f6,
+            float f7,
+            float f8,
+            float[] fArr2,
+            long j2);
 
-    private static native void nDrawGlyphs(long j, int[] iArr, float[] fArr, int i, int i2, int i3, long j2, long j3);
+    private static native void nDrawGlyphs(
+            long j, int[] iArr, float[] fArr, int i, int i2, int i3, long j2, long j3);
 
     private static native void nDrawLine(long j, float f, float f2, float f3, float f4, long j2);
 
@@ -52,7 +105,17 @@ public abstract class BaseCanvas {
 
     private static native void nDrawMesh(long j, long j2, int i, long j3);
 
-    private static native void nDrawNinePatch(long j, long j2, long j3, float f, float f2, float f3, float f4, long j4, int i, int i2);
+    private static native void nDrawNinePatch(
+            long j,
+            long j2,
+            long j3,
+            float f,
+            float f2,
+            float f3,
+            float f4,
+            long j4,
+            int i,
+            int i2);
 
     private static native void nDrawOval(long j, float f, float f2, float f3, float f4, long j2);
 
@@ -68,30 +131,73 @@ public abstract class BaseCanvas {
 
     private static native void nDrawRegion(long j, long j2, long j3);
 
-    private static native void nDrawRoundRect(long j, float f, float f2, float f3, float f4, float f5, float f6, long j2);
+    private static native void nDrawRoundRect(
+            long j, float f, float f2, float f3, float f4, float f5, float f6, long j2);
 
-    private static native void nDrawText(long j, String str, int i, int i2, float f, float f2, int i3, long j2);
+    private static native void nDrawText(
+            long j, String str, int i, int i2, float f, float f2, int i3, long j2);
 
-    private static native void nDrawText(long j, char[] cArr, int i, int i2, float f, float f2, int i3, long j2);
+    private static native void nDrawText(
+            long j, char[] cArr, int i, int i2, float f, float f2, int i3, long j2);
 
-    private static native void nDrawTextOnPath(long j, String str, long j2, float f, float f2, int i, long j3);
+    private static native void nDrawTextOnPath(
+            long j, String str, long j2, float f, float f2, int i, long j3);
 
-    private static native void nDrawTextOnPath(long j, char[] cArr, int i, int i2, long j2, float f, float f2, int i3, long j3);
+    private static native void nDrawTextOnPath(
+            long j, char[] cArr, int i, int i2, long j2, float f, float f2, int i3, long j3);
 
-    private static native void nDrawTextRun(long j, String str, int i, int i2, int i3, int i4, float f, float f2, boolean z, long j2);
+    private static native void nDrawTextRun(
+            long j,
+            String str,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            float f,
+            float f2,
+            boolean z,
+            long j2);
 
-    private static native void nDrawTextRun(long j, char[] cArr, int i, int i2, int i3, int i4, float f, float f2, boolean z, long j2, long j3);
+    private static native void nDrawTextRun(
+            long j,
+            char[] cArr,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            float f,
+            float f2,
+            boolean z,
+            long j2,
+            long j3);
 
-    private static native void nDrawVertices(long j, int i, int i2, float[] fArr, int i3, float[] fArr2, int i4, int[] iArr, int i5, short[] sArr, int i6, int i7, long j2);
+    private static native void nDrawVertices(
+            long j,
+            int i,
+            int i2,
+            float[] fArr,
+            int i3,
+            float[] fArr2,
+            int i4,
+            int[] iArr,
+            int i5,
+            short[] sArr,
+            int i6,
+            int i7,
+            long j2);
 
-    private static native void nPunchHole(long j, float f, float f2, float f3, float f4, float f5, float f6, float f7);
+    private static native void nPunchHole(
+            long j, float f, float f2, float f3, float f4, float f5, float f6, float f7);
 
     protected void throwIfCannotDraw(Bitmap bitmap) {
         if (bitmap.isRecycled()) {
             throw new RuntimeException("Canvas: trying to use a recycled bitmap " + bitmap);
         }
-        if (!bitmap.isPremultiplied() && bitmap.getConfig() == Bitmap.Config.ARGB_8888 && bitmap.hasAlpha()) {
-            throw new RuntimeException("Canvas: trying to use a non-premultiplied bitmap " + bitmap);
+        if (!bitmap.isPremultiplied()
+                && bitmap.getConfig() == Bitmap.Config.ARGB_8888
+                && bitmap.hasAlpha()) {
+            throw new RuntimeException(
+                    "Canvas: trying to use a non-premultiplied bitmap " + bitmap);
         }
         throwIfHwBitmapInSwMode(bitmap);
     }
@@ -106,14 +212,40 @@ public abstract class BaseCanvas {
         return false;
     }
 
-    public void drawArc(float left, float top, float right, float bottom, float startAngle, float sweepAngle, boolean useCenter, Paint paint) {
+    public void drawArc(
+            float left,
+            float top,
+            float right,
+            float bottom,
+            float startAngle,
+            float sweepAngle,
+            boolean useCenter,
+            Paint paint) {
         throwIfHasHwFeaturesInSwMode(paint);
-        nDrawArc(this.mNativeCanvasWrapper, left, top, right, bottom, startAngle, sweepAngle, useCenter, paint.getNativeInstance());
+        nDrawArc(
+                this.mNativeCanvasWrapper,
+                left,
+                top,
+                right,
+                bottom,
+                startAngle,
+                sweepAngle,
+                useCenter,
+                paint.getNativeInstance());
     }
 
-    public void drawArc(RectF oval, float startAngle, float sweepAngle, boolean useCenter, Paint paint) {
+    public void drawArc(
+            RectF oval, float startAngle, float sweepAngle, boolean useCenter, Paint paint) {
         throwIfHasHwFeaturesInSwMode(paint);
-        drawArc(oval.left, oval.top, oval.right, oval.bottom, startAngle, sweepAngle, useCenter, paint);
+        drawArc(
+                oval.left,
+                oval.top,
+                oval.right,
+                oval.bottom,
+                startAngle,
+                sweepAngle,
+                useCenter,
+                paint);
     }
 
     public void drawARGB(int a, int r, int g, int b) {
@@ -123,12 +255,24 @@ public abstract class BaseCanvas {
     public void drawBitmap(Bitmap bitmap, float left, float top, Paint paint) {
         throwIfCannotDraw(bitmap);
         throwIfHasHwFeaturesInSwMode(paint);
-        nDrawBitmap(this.mNativeCanvasWrapper, bitmap.getNativeInstance(), left, top, paint != null ? paint.getNativeInstance() : 0L, this.mDensity, this.mScreenDensity, bitmap.mDensity);
+        nDrawBitmap(
+                this.mNativeCanvasWrapper,
+                bitmap.getNativeInstance(),
+                left,
+                top,
+                paint != null ? paint.getNativeInstance() : 0L,
+                this.mDensity,
+                this.mScreenDensity,
+                bitmap.mDensity);
     }
 
     public void drawBitmap(Bitmap bitmap, Matrix matrix, Paint paint) {
         throwIfHasHwFeaturesInSwMode(paint);
-        nDrawBitmapMatrix(this.mNativeCanvasWrapper, bitmap.getNativeInstance(), matrix.ni(), paint != null ? paint.getNativeInstance() : 0L);
+        nDrawBitmapMatrix(
+                this.mNativeCanvasWrapper,
+                bitmap.getNativeInstance(),
+                matrix.ni(),
+                paint != null ? paint.getNativeInstance() : 0L);
     }
 
     public void drawBitmap(Bitmap bitmap, Rect src, Rect dst, Paint paint) {
@@ -159,7 +303,20 @@ public abstract class BaseCanvas {
         float f2 = dst.top;
         int left2 = dst.right;
         int top2 = dst.bottom;
-        nDrawBitmap(this.mNativeCanvasWrapper, bitmap.getNativeInstance(), left, top, right, bottom, f, f2, left2, top2, nativePaint, this.mScreenDensity, bitmap.mDensity);
+        nDrawBitmap(
+                this.mNativeCanvasWrapper,
+                bitmap.getNativeInstance(),
+                left,
+                top,
+                right,
+                bottom,
+                f,
+                f2,
+                left2,
+                top2,
+                nativePaint,
+                this.mScreenDensity,
+                bitmap.mDensity);
     }
 
     public void drawBitmap(Bitmap bitmap, Rect src, RectF dst, Paint paint) {
@@ -186,11 +343,33 @@ public abstract class BaseCanvas {
             right = right3;
             bottom = src.bottom;
         }
-        nDrawBitmap(this.mNativeCanvasWrapper, bitmap.getNativeInstance(), left, top, right, bottom, dst.left, dst.top, dst.right, dst.bottom, nativePaint, this.mScreenDensity, bitmap.mDensity);
+        nDrawBitmap(
+                this.mNativeCanvasWrapper,
+                bitmap.getNativeInstance(),
+                left,
+                top,
+                right,
+                bottom,
+                dst.left,
+                dst.top,
+                dst.right,
+                dst.bottom,
+                nativePaint,
+                this.mScreenDensity,
+                bitmap.mDensity);
     }
 
     @Deprecated
-    public void drawBitmap(int[] colors, int offset, int stride, float x, float y, int width, int height, boolean hasAlpha, Paint paint) {
+    public void drawBitmap(
+            int[] colors,
+            int offset,
+            int stride,
+            float x,
+            float y,
+            int width,
+            int height,
+            boolean hasAlpha,
+            Paint paint) {
         if (width < 0) {
             throw new IllegalArgumentException("width must be >= 0");
         }
@@ -202,21 +381,51 @@ public abstract class BaseCanvas {
         }
         int lastScanline = offset + ((height - 1) * stride);
         int length = colors.length;
-        if (offset < 0 || offset + width > length || lastScanline < 0 || lastScanline + width > length) {
+        if (offset < 0
+                || offset + width > length
+                || lastScanline < 0
+                || lastScanline + width > length) {
             throw new ArrayIndexOutOfBoundsException();
         }
         throwIfHasHwFeaturesInSwMode(paint);
         if (width != 0 && height != 0) {
-            nDrawBitmap(this.mNativeCanvasWrapper, colors, offset, stride, x, y, width, height, hasAlpha, paint != null ? paint.getNativeInstance() : 0L);
+            nDrawBitmap(
+                    this.mNativeCanvasWrapper,
+                    colors,
+                    offset,
+                    stride,
+                    x,
+                    y,
+                    width,
+                    height,
+                    hasAlpha,
+                    paint != null ? paint.getNativeInstance() : 0L);
         }
     }
 
     @Deprecated
-    public void drawBitmap(int[] colors, int offset, int stride, int x, int y, int width, int height, boolean hasAlpha, Paint paint) {
+    public void drawBitmap(
+            int[] colors,
+            int offset,
+            int stride,
+            int x,
+            int y,
+            int width,
+            int height,
+            boolean hasAlpha,
+            Paint paint) {
         drawBitmap(colors, offset, stride, x, y, width, height, hasAlpha, paint);
     }
 
-    public void drawBitmapMesh(Bitmap bitmap, int meshWidth, int meshHeight, float[] verts, int vertOffset, int[] colors, int colorOffset, Paint paint) {
+    public void drawBitmapMesh(
+            Bitmap bitmap,
+            int meshWidth,
+            int meshHeight,
+            float[] verts,
+            int vertOffset,
+            int[] colors,
+            int colorOffset,
+            Paint paint) {
         if ((meshWidth | meshHeight | vertOffset | colorOffset) < 0) {
             throw new ArrayIndexOutOfBoundsException();
         }
@@ -229,7 +438,16 @@ public abstract class BaseCanvas {
         if (colors != null) {
             checkRange(colors.length, colorOffset, count);
         }
-        nDrawBitmapMesh(this.mNativeCanvasWrapper, bitmap.getNativeInstance(), meshWidth, meshHeight, verts, vertOffset, colors, colorOffset, paint != null ? paint.getNativeInstance() : 0L);
+        nDrawBitmapMesh(
+                this.mNativeCanvasWrapper,
+                bitmap.getNativeInstance(),
+                meshWidth,
+                meshHeight,
+                verts,
+                vertOffset,
+                colors,
+                colorOffset,
+                paint != null ? paint.getNativeInstance() : 0L);
     }
 
     public void drawCircle(float cx, float cy, float radius, Paint paint) {
@@ -238,7 +456,8 @@ public abstract class BaseCanvas {
     }
 
     public void drawColor(int color) {
-        nDrawColor(this.mNativeCanvasWrapper, color, BlendMode.SRC_OVER.getXfermode().porterDuffMode);
+        nDrawColor(
+                this.mNativeCanvasWrapper, color, BlendMode.SRC_OVER.getXfermode().porterDuffMode);
     }
 
     public void drawColor(int color, PorterDuff.Mode mode) {
@@ -251,12 +470,17 @@ public abstract class BaseCanvas {
 
     public void drawColor(long color, BlendMode mode) {
         ColorSpace cs = Color.colorSpace(color);
-        nDrawColor(this.mNativeCanvasWrapper, cs.getNativeInstance(), color, mode.getXfermode().porterDuffMode);
+        nDrawColor(
+                this.mNativeCanvasWrapper,
+                cs.getNativeInstance(),
+                color,
+                mode.getXfermode().porterDuffMode);
     }
 
     public void drawLine(float startX, float startY, float stopX, float stopY, Paint paint) {
         throwIfHasHwFeaturesInSwMode(paint);
-        nDrawLine(this.mNativeCanvasWrapper, startX, startY, stopX, stopY, paint.getNativeInstance());
+        nDrawLine(
+                this.mNativeCanvasWrapper, startX, startY, stopX, stopY, paint.getNativeInstance());
     }
 
     public void drawLines(float[] pts, int offset, int count, Paint paint) {
@@ -292,7 +516,17 @@ public abstract class BaseCanvas {
         throwIfCannotDraw(bitmap);
         throwIfHasHwFeaturesInSwMode(paint);
         long nativePaint = paint == null ? 0L : paint.getNativeInstance();
-        nDrawNinePatch(this.mNativeCanvasWrapper, bitmap.getNativeInstance(), patch.mNativeChunk, dst.left, dst.top, dst.right, dst.bottom, nativePaint, this.mDensity, patch.getDensity());
+        nDrawNinePatch(
+                this.mNativeCanvasWrapper,
+                bitmap.getNativeInstance(),
+                patch.mNativeChunk,
+                dst.left,
+                dst.top,
+                dst.right,
+                dst.bottom,
+                nativePaint,
+                this.mDensity,
+                patch.getDensity());
     }
 
     public void drawPatch(NinePatch patch, RectF dst, Paint paint) {
@@ -300,7 +534,17 @@ public abstract class BaseCanvas {
         throwIfCannotDraw(bitmap);
         throwIfHasHwFeaturesInSwMode(paint);
         long nativePaint = paint == null ? 0L : paint.getNativeInstance();
-        nDrawNinePatch(this.mNativeCanvasWrapper, bitmap.getNativeInstance(), patch.mNativeChunk, dst.left, dst.top, dst.right, dst.bottom, nativePaint, this.mDensity, patch.getDensity());
+        nDrawNinePatch(
+                this.mNativeCanvasWrapper,
+                bitmap.getNativeInstance(),
+                patch.mNativeChunk,
+                dst.left,
+                dst.top,
+                dst.right,
+                dst.bottom,
+                nativePaint,
+                this.mDensity,
+                patch.getDensity());
     }
 
     public void drawPath(Path path, Paint paint) {
@@ -359,16 +603,31 @@ public abstract class BaseCanvas {
 
     public void drawRect(RectF rect, Paint paint) {
         throwIfHasHwFeaturesInSwMode(paint);
-        nDrawRect(this.mNativeCanvasWrapper, rect.left, rect.top, rect.right, rect.bottom, paint.getNativeInstance());
+        nDrawRect(
+                this.mNativeCanvasWrapper,
+                rect.left,
+                rect.top,
+                rect.right,
+                rect.bottom,
+                paint.getNativeInstance());
     }
 
     public void drawRGB(int r, int g, int b) {
         drawColor(Color.rgb(r, g, b));
     }
 
-    public void drawRoundRect(float left, float top, float right, float bottom, float rx, float ry, Paint paint) {
+    public void drawRoundRect(
+            float left, float top, float right, float bottom, float rx, float ry, Paint paint) {
         throwIfHasHwFeaturesInSwMode(paint);
-        nDrawRoundRect(this.mNativeCanvasWrapper, left, top, right, bottom, rx, ry, paint.getNativeInstance());
+        nDrawRoundRect(
+                this.mNativeCanvasWrapper,
+                left,
+                top,
+                right,
+                bottom,
+                rx,
+                ry,
+                paint.getNativeInstance());
     }
 
     public void drawRoundRect(RectF rect, float rx, float ry, Paint paint) {
@@ -376,7 +635,14 @@ public abstract class BaseCanvas {
         drawRoundRect(rect.left, rect.top, rect.right, rect.bottom, rx, ry, paint);
     }
 
-    public void drawDoubleRoundRect(RectF outer, float outerRx, float outerRy, RectF inner, float innerRx, float innerRy, Paint paint) {
+    public void drawDoubleRoundRect(
+            RectF outer,
+            float outerRx,
+            float outerRy,
+            RectF inner,
+            float innerRx,
+            float innerRy,
+            Paint paint) {
         throwIfHasHwFeaturesInSwMode(paint);
         float outerLeft = outer.left;
         float outerTop = outer.top;
@@ -386,13 +652,32 @@ public abstract class BaseCanvas {
         float innerTop = inner.top;
         float innerRight = inner.right;
         float innerBottom = inner.bottom;
-        nDrawDoubleRoundRect(this.mNativeCanvasWrapper, outerLeft, outerTop, outerRight, outerBottom, outerRx, outerRy, innerLeft, innerTop, innerRight, innerBottom, innerRx, innerRy, paint.getNativeInstance());
+        nDrawDoubleRoundRect(
+                this.mNativeCanvasWrapper,
+                outerLeft,
+                outerTop,
+                outerRight,
+                outerBottom,
+                outerRx,
+                outerRy,
+                innerLeft,
+                innerTop,
+                innerRight,
+                innerBottom,
+                innerRx,
+                innerRy,
+                paint.getNativeInstance());
     }
 
-    public void drawDoubleRoundRect(RectF outer, float[] outerRadii, RectF inner, float[] innerRadii, Paint paint) {
+    public void drawDoubleRoundRect(
+            RectF outer, float[] outerRadii, RectF inner, float[] innerRadii, Paint paint) {
         throwIfHasHwFeaturesInSwMode(paint);
-        if (innerRadii == null || outerRadii == null || innerRadii.length != 8 || outerRadii.length != 8) {
-            throw new IllegalArgumentException("Both inner and outer radii arrays must contain exactly 8 values");
+        if (innerRadii == null
+                || outerRadii == null
+                || innerRadii.length != 8
+                || outerRadii.length != 8) {
+            throw new IllegalArgumentException(
+                    "Both inner and outer radii arrays must contain exactly 8 values");
         }
         float outerLeft = outer.left;
         float outerTop = outer.top;
@@ -402,22 +687,53 @@ public abstract class BaseCanvas {
         float innerTop = inner.top;
         float innerRight = inner.right;
         float innerBottom = inner.bottom;
-        nDrawDoubleRoundRect(this.mNativeCanvasWrapper, outerLeft, outerTop, outerRight, outerBottom, outerRadii, innerLeft, innerTop, innerRight, innerBottom, innerRadii, paint.getNativeInstance());
+        nDrawDoubleRoundRect(
+                this.mNativeCanvasWrapper,
+                outerLeft,
+                outerTop,
+                outerRight,
+                outerBottom,
+                outerRadii,
+                innerLeft,
+                innerTop,
+                innerRight,
+                innerBottom,
+                innerRadii,
+                paint.getNativeInstance());
     }
 
-    public void drawGlyphs(int[] glyphIds, int glyphIdOffset, float[] positions, int positionOffset, int glyphCount, Font font, Paint paint) {
+    public void drawGlyphs(
+            int[] glyphIds,
+            int glyphIdOffset,
+            float[] positions,
+            int positionOffset,
+            int glyphCount,
+            Font font,
+            Paint paint) {
         Objects.requireNonNull(glyphIds, "glyphIds must not be null.");
         Objects.requireNonNull(positions, "positions must not be null.");
         Objects.requireNonNull(font, "font must not be null.");
         Objects.requireNonNull(paint, "paint must not be null.");
         Preconditions.checkArgumentNonnegative(glyphCount);
         if (glyphIdOffset < 0 || glyphIdOffset + glyphCount > glyphIds.length) {
-            throw new IndexOutOfBoundsException("glyphIds must have at least " + (glyphIdOffset + glyphCount) + " of elements");
+            throw new IndexOutOfBoundsException(
+                    "glyphIds must have at least " + (glyphIdOffset + glyphCount) + " of elements");
         }
         if (positionOffset < 0 || positionOffset + (glyphCount * 2) > positions.length) {
-            throw new IndexOutOfBoundsException("positions must have at least " + (positionOffset + (glyphCount * 2)) + " of elements");
+            throw new IndexOutOfBoundsException(
+                    "positions must have at least "
+                            + (positionOffset + (glyphCount * 2))
+                            + " of elements");
         }
-        nDrawGlyphs(this.mNativeCanvasWrapper, glyphIds, positions, glyphIdOffset, positionOffset, glyphCount, font.getNativePtr(), paint.getNativeInstance());
+        nDrawGlyphs(
+                this.mNativeCanvasWrapper,
+                glyphIds,
+                positions,
+                glyphIdOffset,
+                positionOffset,
+                glyphCount,
+                font.getNativePtr(),
+                paint.getNativeInstance());
     }
 
     public void drawText(char[] text, int index, int count, float x, float y, Paint paint) {
@@ -426,7 +742,15 @@ public abstract class BaseCanvas {
         }
         throwIfHasHwFeaturesInSwMode(paint);
         paint.set(paint);
-        nDrawText(this.mNativeCanvasWrapper, text, index, count, x, y, paint.mBidiFlags, paint.getNativeInstance());
+        nDrawText(
+                this.mNativeCanvasWrapper,
+                text,
+                index,
+                count,
+                x,
+                y,
+                paint.mBidiFlags,
+                paint.getNativeInstance());
     }
 
     public void drawText(CharSequence text, int start, int end, float x, float y, Paint paint) {
@@ -435,8 +759,18 @@ public abstract class BaseCanvas {
         }
         throwIfHasHwFeaturesInSwMode(paint);
         paint.set(paint);
-        if ((text instanceof String) || (text instanceof SpannedString) || (text instanceof SpannableString)) {
-            nDrawText(this.mNativeCanvasWrapper, text.toString(), start, end, x, y, paint.mBidiFlags, paint.getNativeInstance());
+        if ((text instanceof String)
+                || (text instanceof SpannedString)
+                || (text instanceof SpannableString)) {
+            nDrawText(
+                    this.mNativeCanvasWrapper,
+                    text.toString(),
+                    start,
+                    end,
+                    x,
+                    y,
+                    paint.mBidiFlags,
+                    paint.getNativeInstance());
             return;
         }
         if (text instanceof GraphicsOperations) {
@@ -445,14 +779,30 @@ public abstract class BaseCanvas {
         }
         char[] buf = TemporaryBuffer.obtain(end - start);
         TextUtils.getChars(text, start, end, buf, 0);
-        nDrawText(this.mNativeCanvasWrapper, buf, 0, end - start, x, y, paint.mBidiFlags, paint.getNativeInstance());
+        nDrawText(
+                this.mNativeCanvasWrapper,
+                buf,
+                0,
+                end - start,
+                x,
+                y,
+                paint.mBidiFlags,
+                paint.getNativeInstance());
         TemporaryBuffer.recycle(buf);
     }
 
     public void drawText(String text, float x, float y, Paint paint) {
         throwIfHasHwFeaturesInSwMode(paint);
         paint.set(paint);
-        nDrawText(this.mNativeCanvasWrapper, text, 0, text.length(), x, y, paint.mBidiFlags, paint.getNativeInstance());
+        nDrawText(
+                this.mNativeCanvasWrapper,
+                text,
+                0,
+                text.length(),
+                x,
+                y,
+                paint.mBidiFlags,
+                paint.getNativeInstance());
     }
 
     public void drawText(String text, int start, int end, float x, float y, Paint paint) {
@@ -461,14 +811,38 @@ public abstract class BaseCanvas {
         }
         throwIfHasHwFeaturesInSwMode(paint);
         paint.set(paint);
-        nDrawText(this.mNativeCanvasWrapper, text, start, end, x, y, paint.mBidiFlags, paint.getNativeInstance());
+        nDrawText(
+                this.mNativeCanvasWrapper,
+                text,
+                start,
+                end,
+                x,
+                y,
+                paint.mBidiFlags,
+                paint.getNativeInstance());
     }
 
-    public void drawTextOnPath(char[] text, int index, int count, Path path, float hOffset, float vOffset, Paint paint) {
+    public void drawTextOnPath(
+            char[] text,
+            int index,
+            int count,
+            Path path,
+            float hOffset,
+            float vOffset,
+            Paint paint) {
         if (index >= 0 && index + count <= text.length) {
             throwIfHasHwFeaturesInSwMode(paint);
             paint.set(paint);
-            nDrawTextOnPath(this.mNativeCanvasWrapper, text, index, count, path.readOnlyNI(), hOffset, vOffset, paint.mBidiFlags, paint.getNativeInstance());
+            nDrawTextOnPath(
+                    this.mNativeCanvasWrapper,
+                    text,
+                    index,
+                    count,
+                    path.readOnlyNI(),
+                    hOffset,
+                    vOffset,
+                    paint.mBidiFlags,
+                    paint.getNativeInstance());
             return;
         }
         throw new ArrayIndexOutOfBoundsException();
@@ -478,43 +852,107 @@ public abstract class BaseCanvas {
         if (text.length() > 0) {
             throwIfHasHwFeaturesInSwMode(paint);
             paint.set(paint);
-            nDrawTextOnPath(this.mNativeCanvasWrapper, text, path.readOnlyNI(), hOffset, vOffset, paint.mBidiFlags, paint.getNativeInstance());
+            nDrawTextOnPath(
+                    this.mNativeCanvasWrapper,
+                    text,
+                    path.readOnlyNI(),
+                    hOffset,
+                    vOffset,
+                    paint.mBidiFlags,
+                    paint.getNativeInstance());
         }
     }
 
-    public void drawTextRun(char[] text, int index, int count, int contextIndex, int contextCount, float x, float y, boolean isRtl, Paint paint) {
+    public void drawTextRun(
+            char[] text,
+            int index,
+            int count,
+            int contextIndex,
+            int contextCount,
+            float x,
+            float y,
+            boolean isRtl,
+            Paint paint) {
         if (text == null) {
             throw new NullPointerException("text is null");
         }
         if (paint == null) {
             throw new NullPointerException("paint is null");
         }
-        if ((index | count | contextIndex | contextCount | (index - contextIndex) | ((contextIndex + contextCount) - (index + count)) | (text.length - (contextIndex + contextCount))) < 0) {
+        if ((index
+                        | count
+                        | contextIndex
+                        | contextCount
+                        | (index - contextIndex)
+                        | ((contextIndex + contextCount) - (index + count))
+                        | (text.length - (contextIndex + contextCount)))
+                < 0) {
             throw new IndexOutOfBoundsException();
         }
         throwIfHasHwFeaturesInSwMode(paint);
         paint.set(paint);
-        nDrawTextRun(this.mNativeCanvasWrapper, text, index, count, contextIndex, contextCount, x, y, isRtl, paint.getNativeInstance(), 0L);
+        nDrawTextRun(
+                this.mNativeCanvasWrapper,
+                text,
+                index,
+                count,
+                contextIndex,
+                contextCount,
+                x,
+                y,
+                isRtl,
+                paint.getNativeInstance(),
+                0L);
     }
 
-    public void drawTextRun(CharSequence text, int start, int end, int contextStart, int contextEnd, float x, float y, boolean isRtl, Paint paint) {
+    public void drawTextRun(
+            CharSequence text,
+            int start,
+            int end,
+            int contextStart,
+            int contextEnd,
+            float x,
+            float y,
+            boolean isRtl,
+            Paint paint) {
         if (text == null) {
             throw new NullPointerException("text is null");
         }
         if (paint == null) {
             throw new NullPointerException("paint is null");
         }
-        if ((start | end | contextStart | contextEnd | (start - contextStart) | (end - start) | (contextEnd - end) | (text.length() - contextEnd)) < 0) {
+        if ((start
+                        | end
+                        | contextStart
+                        | contextEnd
+                        | (start - contextStart)
+                        | (end - start)
+                        | (contextEnd - end)
+                        | (text.length() - contextEnd))
+                < 0) {
             throw new IndexOutOfBoundsException();
         }
         throwIfHasHwFeaturesInSwMode(paint);
         paint.set(paint);
-        if ((text instanceof String) || (text instanceof SpannedString) || (text instanceof SpannableString)) {
-            nDrawTextRun(this.mNativeCanvasWrapper, text.toString(), start, end, contextStart, contextEnd, x, y, isRtl, paint.getNativeInstance());
+        if ((text instanceof String)
+                || (text instanceof SpannedString)
+                || (text instanceof SpannableString)) {
+            nDrawTextRun(
+                    this.mNativeCanvasWrapper,
+                    text.toString(),
+                    start,
+                    end,
+                    contextStart,
+                    contextEnd,
+                    x,
+                    y,
+                    isRtl,
+                    paint.getNativeInstance());
             return;
         }
         if (text instanceof GraphicsOperations) {
-            ((GraphicsOperations) text).drawTextRun(this, start, end, contextStart, contextEnd, x, y, isRtl, paint);
+            ((GraphicsOperations) text)
+                    .drawTextRun(this, start, end, contextStart, contextEnd, x, y, isRtl, paint);
             return;
         }
         if (text instanceof PrecomputedText) {
@@ -523,7 +961,16 @@ public abstract class BaseCanvas {
             if (end <= pt.getParagraphEnd(paraIndex)) {
                 int paraStart = pt.getParagraphStart(paraIndex);
                 MeasuredParagraph mp = pt.getMeasuredParagraph(paraIndex);
-                drawTextRun(mp.getMeasuredText(), start - paraStart, end - paraStart, contextStart - paraStart, contextEnd - paraStart, x, y, isRtl, paint);
+                drawTextRun(
+                        mp.getMeasuredText(),
+                        start - paraStart,
+                        end - paraStart,
+                        contextStart - paraStart,
+                        contextEnd - paraStart,
+                        x,
+                        y,
+                        isRtl,
+                        paint);
                 return;
             }
         }
@@ -531,15 +978,58 @@ public abstract class BaseCanvas {
         int len = end - start;
         char[] buf = TemporaryBuffer.obtain(contextLen);
         TextUtils.getChars(text, contextStart, contextEnd, buf, 0);
-        nDrawTextRun(this.mNativeCanvasWrapper, buf, start - contextStart, len, 0, contextLen, x, y, isRtl, paint.getNativeInstance(), 0L);
+        nDrawTextRun(
+                this.mNativeCanvasWrapper,
+                buf,
+                start - contextStart,
+                len,
+                0,
+                contextLen,
+                x,
+                y,
+                isRtl,
+                paint.getNativeInstance(),
+                0L);
         TemporaryBuffer.recycle(buf);
     }
 
-    public void drawTextRun(MeasuredText measuredText, int start, int end, int contextStart, int contextEnd, float x, float y, boolean isRtl, Paint paint) {
-        nDrawTextRun(this.mNativeCanvasWrapper, measuredText.getChars(), start, end - start, contextStart, contextEnd - contextStart, x, y, isRtl, paint.getNativeInstance(), measuredText.getNativePtr());
+    public void drawTextRun(
+            MeasuredText measuredText,
+            int start,
+            int end,
+            int contextStart,
+            int contextEnd,
+            float x,
+            float y,
+            boolean isRtl,
+            Paint paint) {
+        nDrawTextRun(
+                this.mNativeCanvasWrapper,
+                measuredText.getChars(),
+                start,
+                end - start,
+                contextStart,
+                contextEnd - contextStart,
+                x,
+                y,
+                isRtl,
+                paint.getNativeInstance(),
+                measuredText.getNativePtr());
     }
 
-    public void drawVertices(Canvas.VertexMode mode, int vertexCount, float[] verts, int vertOffset, float[] texs, int texOffset, int[] colors, int colorOffset, short[] indices, int indexOffset, int indexCount, Paint paint) {
+    public void drawVertices(
+            Canvas.VertexMode mode,
+            int vertexCount,
+            float[] verts,
+            int vertOffset,
+            float[] texs,
+            int texOffset,
+            int[] colors,
+            int colorOffset,
+            short[] indices,
+            int indexOffset,
+            int indexCount,
+            Paint paint) {
         checkRange(verts.length, vertOffset, vertexCount);
         if (texs != null) {
             checkRange(texs.length, texOffset, vertexCount);
@@ -551,7 +1041,20 @@ public abstract class BaseCanvas {
             checkRange(indices.length, indexOffset, indexCount);
         }
         throwIfHasHwFeaturesInSwMode(paint);
-        nDrawVertices(this.mNativeCanvasWrapper, mode.nativeInt, vertexCount, verts, vertOffset, texs, texOffset, colors, colorOffset, indices, indexOffset, indexCount, paint.getNativeInstance());
+        nDrawVertices(
+                this.mNativeCanvasWrapper,
+                mode.nativeInt,
+                vertexCount,
+                verts,
+                vertOffset,
+                texs,
+                texOffset,
+                colors,
+                colorOffset,
+                indices,
+                indexOffset,
+                indexCount,
+                paint.getNativeInstance());
     }
 
     public void drawMesh(Mesh mesh, BlendMode blendMode, Paint paint) {
@@ -561,10 +1064,15 @@ public abstract class BaseCanvas {
         if (blendMode == null) {
             blendMode = BlendMode.MODULATE;
         }
-        nDrawMesh(this.mNativeCanvasWrapper, mesh.getNativeWrapperInstance(), blendMode.getXfermode().porterDuffMode, paint.getNativeInstance());
+        nDrawMesh(
+                this.mNativeCanvasWrapper,
+                mesh.getNativeWrapperInstance(),
+                blendMode.getXfermode().porterDuffMode,
+                paint.getNativeInstance());
     }
 
-    public void punchHole(float left, float top, float right, float bottom, float rx, float ry, float alpha) {
+    public void punchHole(
+            float left, float top, float right, float bottom, float rx, float ry, float alpha) {
         nPunchHole(this.mNativeCanvasWrapper, left, top, right, bottom, rx, ry, alpha);
     }
 
@@ -581,8 +1089,11 @@ public abstract class BaseCanvas {
     }
 
     private void throwIfHwBitmapInSwMode(Bitmap bitmap) {
-        if (!isHardwareAccelerated() && bitmap.getConfig() == Bitmap.Config.HARDWARE && onHwFeatureInSwMode()) {
-            throw new IllegalArgumentException("Software rendering doesn't support hardware bitmaps");
+        if (!isHardwareAccelerated()
+                && bitmap.getConfig() == Bitmap.Config.HARDWARE
+                && onHwFeatureInSwMode()) {
+            throw new IllegalArgumentException(
+                    "Software rendering doesn't support hardware bitmaps");
         }
     }
 

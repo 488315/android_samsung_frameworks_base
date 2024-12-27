@@ -3,16 +3,21 @@ package com.android.internal.os;
 import android.os.SystemClock;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /* loaded from: classes5.dex */
 public abstract class KernelCpuUidBpfMapReader {
     private static final int ERROR_THRESHOLD = 5;
     private static final long FRESHNESS_MS = 500;
-    private static final KernelCpuUidBpfMapReader FREQ_TIME_READER = new KernelCpuUidFreqTimeBpfMapReader();
-    private static final KernelCpuUidBpfMapReader FULL_TIME_READER = new KernelCpuUidFullTimeBpfMapReader();
-    private static final KernelCpuUidBpfMapReader ACTIVE_TIME_READER = new KernelCpuUidActiveTimeBpfMapReader();
-    private static final KernelCpuUidBpfMapReader CLUSTER_TIME_READER = new KernelCpuUidClusterTimeBpfMapReader();
+    private static final KernelCpuUidBpfMapReader FREQ_TIME_READER =
+            new KernelCpuUidFreqTimeBpfMapReader();
+    private static final KernelCpuUidBpfMapReader FULL_TIME_READER =
+            new KernelCpuUidFullTimeBpfMapReader();
+    private static final KernelCpuUidBpfMapReader ACTIVE_TIME_READER =
+            new KernelCpuUidActiveTimeBpfMapReader();
+    private static final KernelCpuUidBpfMapReader CLUSTER_TIME_READER =
+            new KernelCpuUidClusterTimeBpfMapReader();
     final String mTag = getClass().getSimpleName();
     private int mErrors = 0;
     protected SparseArray<long[]> mData = new SparseArray<>();
@@ -129,21 +134,26 @@ public abstract class KernelCpuUidBpfMapReader {
     }
 
     private boolean dataValid() {
-        return this.mData.size() > 0 && SystemClock.elapsedRealtime() - this.mLastReadTime < FRESHNESS_MS;
+        return this.mData.size() > 0
+                && SystemClock.elapsedRealtime() - this.mLastReadTime < FRESHNESS_MS;
     }
 
     public class BpfMapIterator implements AutoCloseable {
         private int mPos;
 
-        public BpfMapIterator() {
-        }
+        public BpfMapIterator() {}
 
         public boolean getNextUid(long[] buf) {
             if (this.mPos >= KernelCpuUidBpfMapReader.this.mData.size()) {
                 return false;
             }
             buf[0] = KernelCpuUidBpfMapReader.this.mData.keyAt(this.mPos);
-            System.arraycopy(KernelCpuUidBpfMapReader.this.mData.valueAt(this.mPos), 0, buf, 1, KernelCpuUidBpfMapReader.this.mData.valueAt(this.mPos).length);
+            System.arraycopy(
+                    KernelCpuUidBpfMapReader.this.mData.valueAt(this.mPos),
+                    0,
+                    buf,
+                    1,
+                    KernelCpuUidBpfMapReader.this.mData.valueAt(this.mPos).length);
             this.mPos++;
             return true;
         }

@@ -4,13 +4,15 @@ import android.app.AppOpsManager;
 import android.os.Bundle;
 import android.os.SynchronousResultReceiver;
 import android.uwb.UwbActivityEnergyInfo;
+
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class StatsPullAtomService$$ExternalSyntheticLambda11 implements Consumer {
+public final /* synthetic */ class StatsPullAtomService$$ExternalSyntheticLambda11
+        implements Consumer {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
 

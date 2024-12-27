@@ -1,6 +1,7 @@
 package com.android.server.wm;
 
 import android.os.Process;
+
 import com.android.server.AnimationThread;
 import com.android.server.ThreadPriorityBooster;
 

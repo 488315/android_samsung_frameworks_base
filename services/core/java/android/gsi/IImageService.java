@@ -1,11 +1,11 @@
 package android.gsi;
 
-import android.gsi.IProgressCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -31,16 +31,15 @@ public interface IImageService extends IInterface {
         }
 
         @Override // android.gsi.IImageService
-        public void createBackingImage(String str, long j, int i, IProgressCallback iProgressCallback) throws RemoteException {
-        }
+        public void createBackingImage(
+                String str, long j, int i, IProgressCallback iProgressCallback)
+                throws RemoteException {}
 
         @Override // android.gsi.IImageService
-        public void deleteBackingImage(String str) throws RemoteException {
-        }
+        public void deleteBackingImage(String str) throws RemoteException {}
 
         @Override // android.gsi.IImageService
-        public void disableImage(String str) throws RemoteException {
-        }
+        public void disableImage(String str) throws RemoteException {}
 
         @Override // android.gsi.IImageService
         public List getAllBackingImages() throws RemoteException {
@@ -68,24 +67,20 @@ public interface IImageService extends IInterface {
         }
 
         @Override // android.gsi.IImageService
-        public void mapImageDevice(String str, int i, MappedImage mappedImage) throws RemoteException {
-        }
+        public void mapImageDevice(String str, int i, MappedImage mappedImage)
+                throws RemoteException {}
 
         @Override // android.gsi.IImageService
-        public void removeAllImages() throws RemoteException {
-        }
+        public void removeAllImages() throws RemoteException {}
 
         @Override // android.gsi.IImageService
-        public void removeDisabledImages() throws RemoteException {
-        }
+        public void removeDisabledImages() throws RemoteException {}
 
         @Override // android.gsi.IImageService
-        public void unmapImageDevice(String str) throws RemoteException {
-        }
+        public void unmapImageDevice(String str) throws RemoteException {}
 
         @Override // android.gsi.IImageService
-        public void zeroFillNewImage(String str, long j) throws RemoteException {
-        }
+        public void zeroFillNewImage(String str, long j) throws RemoteException {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -131,7 +126,8 @@ public interface IImageService extends IInterface {
             }
 
             @Override // android.gsi.IImageService
-            public final void createBackingImage(String str, long j, int i, IProgressCallback iProgressCallback) {
+            public final void createBackingImage(
+                    String str, long j, int i, IProgressCallback iProgressCallback) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -363,7 +359,8 @@ public interface IImageService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+                throws RemoteException {
             if (i >= 1 && i <= 16777215) {
                 parcel.enforceInterface(IImageService.DESCRIPTOR);
             }
@@ -376,7 +373,8 @@ public interface IImageService extends IInterface {
                     String readString = parcel.readString();
                     long readLong = parcel.readLong();
                     int readInt = parcel.readInt();
-                    IProgressCallback asInterface = IProgressCallback.Stub.asInterface(parcel.readStrongBinder());
+                    IProgressCallback asInterface =
+                            IProgressCallback.Stub.asInterface(parcel.readStrongBinder());
                     parcel.enforceNoDataAvail();
                     createBackingImage(readString, readLong, readInt, asInterface);
                     parcel2.writeNoException();
@@ -473,7 +471,8 @@ public interface IImageService extends IInterface {
 
     boolean backingImageExists(String str) throws RemoteException;
 
-    void createBackingImage(String str, long j, int i, IProgressCallback iProgressCallback) throws RemoteException;
+    void createBackingImage(String str, long j, int i, IProgressCallback iProgressCallback)
+            throws RemoteException;
 
     void deleteBackingImage(String str) throws RemoteException;
 

@@ -204,7 +204,8 @@ public class GLES11Ext {
 
     public static native void glFramebufferTexture2DOES(int i, int i2, int i3, int i4, int i5);
 
-    public static native void glFrustumfOES(float f, float f2, float f3, float f4, float f5, float f6);
+    public static native void glFrustumfOES(
+            float f, float f2, float f3, float f4, float f5, float f6);
 
     public static native void glFrustumxOES(int i, int i2, int i3, int i4, int i5, int i6);
 
@@ -230,9 +231,11 @@ public class GLES11Ext {
 
     public static native void glGetFixedvOES(int i, int[] iArr, int i2);
 
-    public static native void glGetFramebufferAttachmentParameterivOES(int i, int i2, int i3, IntBuffer intBuffer);
+    public static native void glGetFramebufferAttachmentParameterivOES(
+            int i, int i2, int i3, IntBuffer intBuffer);
 
-    public static native void glGetFramebufferAttachmentParameterivOES(int i, int i2, int i3, int[] iArr, int i4);
+    public static native void glGetFramebufferAttachmentParameterivOES(
+            int i, int i2, int i3, int[] iArr, int i4);
 
     public static native void glGetLightxvOES(int i, int i2, IntBuffer intBuffer);
 
@@ -296,7 +299,8 @@ public class GLES11Ext {
 
     public static native void glMaterialxvOES(int i, int i2, int[] iArr, int i3);
 
-    private static native void glMatrixIndexPointerOESBounds(int i, int i2, int i3, Buffer buffer, int i4);
+    private static native void glMatrixIndexPointerOESBounds(
+            int i, int i2, int i3, Buffer buffer, int i4);
 
     public static native void glMultMatrixxOES(IntBuffer intBuffer);
 
@@ -306,7 +310,8 @@ public class GLES11Ext {
 
     public static native void glNormal3xOES(int i, int i2, int i3);
 
-    public static native void glOrthofOES(float f, float f2, float f3, float f4, float f5, float f6);
+    public static native void glOrthofOES(
+            float f, float f2, float f3, float f4, float f5, float f6);
 
     public static native void glOrthoxOES(int i, int i2, int i3, int i4, int i5, int i6);
 
@@ -360,7 +365,8 @@ public class GLES11Ext {
 
     public static native void glTranslatexOES(int i, int i2, int i3);
 
-    private static native void glWeightPointerOESBounds(int i, int i2, int i3, Buffer buffer, int i4);
+    private static native void glWeightPointerOESBounds(
+            int i, int i2, int i3, Buffer buffer, int i4);
 
     static {
         _nativeClassInit();

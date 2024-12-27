@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.os.Binder;
 import android.os.ServiceSpecificException;
 import android.util.Log;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,11 +16,11 @@ public final class WifiKeystore {
     private static final String sPrimaryDbName;
 
     static {
-        sPrimaryDbName = WifiBlobStore.supplicantCanAccessBlobstore() ? "WifiBlobstore" : "LegacyKeystore";
+        sPrimaryDbName =
+                WifiBlobStore.supplicantCanAccessBlobstore() ? "WifiBlobstore" : "LegacyKeystore";
     }
 
-    WifiKeystore() {
-    }
+    WifiKeystore() {}
 
     @SystemApi
     public static boolean put(String alias, byte[] blob) {
@@ -92,7 +93,12 @@ public final class WifiKeystore {
                 }
             }
             Binder.restoreCallingIdentity(identity);
-            Log.i(TAG, "Removal status: wifiBlobStore=" + blobStoreSuccess + ", legacyKeystore=" + legacyKsSuccess);
+            Log.i(
+                    TAG,
+                    "Removal status: wifiBlobStore="
+                            + blobStoreSuccess
+                            + ", legacyKeystore="
+                            + legacyKsSuccess);
             return blobStoreSuccess || legacyKsSuccess;
         } catch (Throwable th) {
             Binder.restoreCallingIdentity(identity);

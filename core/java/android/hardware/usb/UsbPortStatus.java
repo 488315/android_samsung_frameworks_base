@@ -3,6 +3,7 @@ package android.hardware.usb;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -27,32 +28,49 @@ public final class UsbPortStatus implements Parcelable {
     public static final int CONTAMINANT_PROTECTION_NONE = 0;
     public static final int CONTAMINANT_PROTECTION_SINK = 1;
     public static final int CONTAMINANT_PROTECTION_SOURCE = 2;
-    public static final Parcelable.Creator<UsbPortStatus> CREATOR = new Parcelable.Creator<UsbPortStatus>() { // from class: android.hardware.usb.UsbPortStatus.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UsbPortStatus createFromParcel(Parcel in) {
-            int currentMode = in.readInt();
-            int currentPowerRole = in.readInt();
-            int currentDataRole = in.readInt();
-            int supportedRoleCombinations = in.readInt();
-            int contaminantProtectionStatus = in.readInt();
-            int contaminantDetectionStatus = in.readInt();
-            int usbDataStatus = in.readInt();
-            boolean powerTransferLimited = in.readBoolean();
-            int powerBrickConnectionStatus = in.readInt();
-            int[] complianceWarnings = in.createIntArray();
-            int plugState = in.readInt();
-            boolean supportsDisplayPortAltMode = in.readBoolean();
-            DisplayPortAltModeInfo displayPortAltModeInfo = supportsDisplayPortAltMode ? DisplayPortAltModeInfo.CREATOR.createFromParcel(in) : null;
-            return new UsbPortStatus(currentMode, currentPowerRole, currentDataRole, supportedRoleCombinations, contaminantProtectionStatus, contaminantDetectionStatus, usbDataStatus, powerTransferLimited, powerBrickConnectionStatus, complianceWarnings, plugState, displayPortAltModeInfo);
-        }
+    public static final Parcelable.Creator<UsbPortStatus> CREATOR =
+            new Parcelable.Creator<
+                    UsbPortStatus>() { // from class: android.hardware.usb.UsbPortStatus.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UsbPortStatus createFromParcel(Parcel in) {
+                    int currentMode = in.readInt();
+                    int currentPowerRole = in.readInt();
+                    int currentDataRole = in.readInt();
+                    int supportedRoleCombinations = in.readInt();
+                    int contaminantProtectionStatus = in.readInt();
+                    int contaminantDetectionStatus = in.readInt();
+                    int usbDataStatus = in.readInt();
+                    boolean powerTransferLimited = in.readBoolean();
+                    int powerBrickConnectionStatus = in.readInt();
+                    int[] complianceWarnings = in.createIntArray();
+                    int plugState = in.readInt();
+                    boolean supportsDisplayPortAltMode = in.readBoolean();
+                    DisplayPortAltModeInfo displayPortAltModeInfo =
+                            supportsDisplayPortAltMode
+                                    ? DisplayPortAltModeInfo.CREATOR.createFromParcel(in)
+                                    : null;
+                    return new UsbPortStatus(
+                            currentMode,
+                            currentPowerRole,
+                            currentDataRole,
+                            supportedRoleCombinations,
+                            contaminantProtectionStatus,
+                            contaminantDetectionStatus,
+                            usbDataStatus,
+                            powerTransferLimited,
+                            powerBrickConnectionStatus,
+                            complianceWarnings,
+                            plugState,
+                            displayPortAltModeInfo);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UsbPortStatus[] newArray(int size) {
-            return new UsbPortStatus[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UsbPortStatus[] newArray(int size) {
+                    return new UsbPortStatus[size];
+                }
+            };
     public static final int DATA_ROLE_DEVICE = 2;
     public static final int DATA_ROLE_HOST = 1;
     public static final int DATA_ROLE_NONE = 0;
@@ -97,42 +115,45 @@ public final class UsbPortStatus implements Parcelable {
     private final int mUsbDataStatus;
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface ComplianceWarning {
-    }
+    @interface ComplianceWarning {}
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface ContaminantDetectionStatus {
-    }
+    @interface ContaminantDetectionStatus {}
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface ContaminantProtectionStatus {
-    }
+    @interface ContaminantProtectionStatus {}
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface PlugState {
-    }
+    @interface PlugState {}
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface PowerBrickConnectionStatus {
-    }
+    @interface PowerBrickConnectionStatus {}
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface UsbDataRole {
-    }
+    @interface UsbDataRole {}
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface UsbDataStatus {
-    }
+    @interface UsbDataStatus {}
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface UsbPortMode {
-    }
+    @interface UsbPortMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface UsbPowerRole {
-    }
+    @interface UsbPowerRole {}
 
-    public UsbPortStatus(int currentMode, int currentPowerRole, int currentDataRole, int supportedRoleCombinations, int contaminantProtectionStatus, int contaminantDetectionStatus, int usbDataStatus, boolean powerTransferLimited, int powerBrickConnectionStatus, int[] complianceWarnings, int plugState, DisplayPortAltModeInfo displayPortAltModeInfo) {
+    public UsbPortStatus(
+            int currentMode,
+            int currentPowerRole,
+            int currentDataRole,
+            int supportedRoleCombinations,
+            int contaminantProtectionStatus,
+            int contaminantDetectionStatus,
+            int usbDataStatus,
+            boolean powerTransferLimited,
+            int powerBrickConnectionStatus,
+            int[] complianceWarnings,
+            int plugState,
+            DisplayPortAltModeInfo displayPortAltModeInfo) {
         int usbDataStatus2;
         this.mCurrentMode = currentMode;
         this.mCurrentPowerRole = currentPowerRole;
@@ -154,12 +175,51 @@ public final class UsbPortStatus implements Parcelable {
         this.mDisplayPortAltModeInfo = displayPortAltModeInfo;
     }
 
-    public UsbPortStatus(int currentMode, int currentPowerRole, int currentDataRole, int supportedRoleCombinations, int contaminantProtectionStatus, int contaminantDetectionStatus, int usbDataStatus, boolean powerTransferLimited, int powerBrickConnectionStatus) {
-        this(currentMode, currentPowerRole, currentDataRole, supportedRoleCombinations, contaminantProtectionStatus, contaminantDetectionStatus, usbDataStatus, powerTransferLimited, powerBrickConnectionStatus, new int[0], 0, null);
+    public UsbPortStatus(
+            int currentMode,
+            int currentPowerRole,
+            int currentDataRole,
+            int supportedRoleCombinations,
+            int contaminantProtectionStatus,
+            int contaminantDetectionStatus,
+            int usbDataStatus,
+            boolean powerTransferLimited,
+            int powerBrickConnectionStatus) {
+        this(
+                currentMode,
+                currentPowerRole,
+                currentDataRole,
+                supportedRoleCombinations,
+                contaminantProtectionStatus,
+                contaminantDetectionStatus,
+                usbDataStatus,
+                powerTransferLimited,
+                powerBrickConnectionStatus,
+                new int[0],
+                0,
+                null);
     }
 
-    public UsbPortStatus(int currentMode, int currentPowerRole, int currentDataRole, int supportedRoleCombinations, int contaminantProtectionStatus, int contaminantDetectionStatus) {
-        this(currentMode, currentPowerRole, currentDataRole, supportedRoleCombinations, contaminantProtectionStatus, contaminantDetectionStatus, 0, false, 0, new int[0], 0, null);
+    public UsbPortStatus(
+            int currentMode,
+            int currentPowerRole,
+            int currentDataRole,
+            int supportedRoleCombinations,
+            int contaminantProtectionStatus,
+            int contaminantDetectionStatus) {
+        this(
+                currentMode,
+                currentPowerRole,
+                currentDataRole,
+                supportedRoleCombinations,
+                contaminantProtectionStatus,
+                contaminantDetectionStatus,
+                0,
+                false,
+                0,
+                new int[0],
+                0,
+                null);
     }
 
     public boolean isConnected() {
@@ -179,11 +239,15 @@ public final class UsbPortStatus implements Parcelable {
     }
 
     public boolean isRoleCombinationSupported(int powerRole, int dataRole) {
-        return (this.mSupportedRoleCombinations & UsbPort.combineRolesAsBit(powerRole, dataRole)) != 0;
+        return (this.mSupportedRoleCombinations & UsbPort.combineRolesAsBit(powerRole, dataRole))
+                != 0;
     }
 
     public boolean isPdCompliant() {
-        return isRoleCombinationSupported(2, 2) && isRoleCombinationSupported(2, 1) && isRoleCombinationSupported(1, 2) && isRoleCombinationSupported(1, 1);
+        return isRoleCombinationSupported(2, 2)
+                && isRoleCombinationSupported(2, 1)
+                && isRoleCombinationSupported(1, 2)
+                && isRoleCombinationSupported(1, 1);
     }
 
     public int getSupportedRoleCombinations() {
@@ -226,7 +290,36 @@ public final class UsbPortStatus implements Parcelable {
     }
 
     public String toString() {
-        StringBuilder mString = new StringBuilder("UsbPortStatus{connected=" + isConnected() + ", currentMode=" + UsbPort.modeToString(this.mCurrentMode) + ", currentPowerRole=" + UsbPort.powerRoleToString(this.mCurrentPowerRole) + ", currentDataRole=" + UsbPort.dataRoleToString(this.mCurrentDataRole) + ", supportedRoleCombinations=" + UsbPort.roleCombinationsToString(this.mSupportedRoleCombinations) + ", contaminantDetectionStatus=" + getContaminantDetectionStatus() + ", contaminantProtectionStatus=" + getContaminantProtectionStatus() + ", usbDataStatus=" + UsbPort.usbDataStatusToString(getUsbDataStatus()) + ", isPowerTransferLimited=" + isPowerTransferLimited() + ", powerBrickConnectionStatus=" + UsbPort.powerBrickConnectionStatusToString(getPowerBrickConnectionStatus()) + ", complianceWarnings=" + UsbPort.complianceWarningsToString(getComplianceWarnings()) + ", plugState=" + getPlugState() + ", displayPortAltModeInfo=" + this.mDisplayPortAltModeInfo + "}");
+        StringBuilder mString =
+                new StringBuilder(
+                        "UsbPortStatus{connected="
+                                + isConnected()
+                                + ", currentMode="
+                                + UsbPort.modeToString(this.mCurrentMode)
+                                + ", currentPowerRole="
+                                + UsbPort.powerRoleToString(this.mCurrentPowerRole)
+                                + ", currentDataRole="
+                                + UsbPort.dataRoleToString(this.mCurrentDataRole)
+                                + ", supportedRoleCombinations="
+                                + UsbPort.roleCombinationsToString(this.mSupportedRoleCombinations)
+                                + ", contaminantDetectionStatus="
+                                + getContaminantDetectionStatus()
+                                + ", contaminantProtectionStatus="
+                                + getContaminantProtectionStatus()
+                                + ", usbDataStatus="
+                                + UsbPort.usbDataStatusToString(getUsbDataStatus())
+                                + ", isPowerTransferLimited="
+                                + isPowerTransferLimited()
+                                + ", powerBrickConnectionStatus="
+                                + UsbPort.powerBrickConnectionStatusToString(
+                                        getPowerBrickConnectionStatus())
+                                + ", complianceWarnings="
+                                + UsbPort.complianceWarningsToString(getComplianceWarnings())
+                                + ", plugState="
+                                + getPlugState()
+                                + ", displayPortAltModeInfo="
+                                + this.mDisplayPortAltModeInfo
+                                + "}");
         return mString.toString();
     }
 
@@ -286,7 +379,8 @@ public final class UsbPortStatus implements Parcelable {
             return this;
         }
 
-        public Builder setContaminantStatus(int contaminantProtectionStatus, int contaminantDetectionStatus) {
+        public Builder setContaminantStatus(
+                int contaminantProtectionStatus, int contaminantDetectionStatus) {
             this.mContaminantProtectionStatus = contaminantProtectionStatus;
             this.mContaminantDetectionStatus = contaminantDetectionStatus;
             return this;
@@ -323,7 +417,20 @@ public final class UsbPortStatus implements Parcelable {
         }
 
         public UsbPortStatus build() {
-            UsbPortStatus status = new UsbPortStatus(this.mCurrentMode, this.mCurrentPowerRole, this.mCurrentDataRole, this.mSupportedRoleCombinations, this.mContaminantProtectionStatus, this.mContaminantDetectionStatus, this.mUsbDataStatus, this.mPowerTransferLimited, this.mPowerBrickConnectionStatus, this.mComplianceWarnings, this.mPlugState, this.mDisplayPortAltModeInfo);
+            UsbPortStatus status =
+                    new UsbPortStatus(
+                            this.mCurrentMode,
+                            this.mCurrentPowerRole,
+                            this.mCurrentDataRole,
+                            this.mSupportedRoleCombinations,
+                            this.mContaminantProtectionStatus,
+                            this.mContaminantDetectionStatus,
+                            this.mUsbDataStatus,
+                            this.mPowerTransferLimited,
+                            this.mPowerBrickConnectionStatus,
+                            this.mComplianceWarnings,
+                            this.mPlugState,
+                            this.mDisplayPortAltModeInfo);
             return status;
         }
     }

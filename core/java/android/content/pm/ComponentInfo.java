@@ -11,7 +11,9 @@ import android.os.UserHandle;
 import android.sec.enterprise.ApplicationPolicy;
 import android.sec.enterprise.EnterpriseDeviceManager;
 import android.util.Printer;
+
 import com.samsung.android.knox.SemPersonaManager;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -53,31 +55,46 @@ public class ComponentInfo extends PackageItemInfo {
         String label3;
         boolean check = SystemProperties.getBoolean("sys.knox.app_name_change", false);
         if (check) {
-            ApplicationPolicy appPolicy = EnterpriseDeviceManager.getInstance().getApplicationPolicy();
-            String newName = appPolicy.getApplicationNameForComponent(this.packageName + "/" + this.name, this.packageName, UserHandle.getUserId(this.applicationInfo.uid));
+            ApplicationPolicy appPolicy =
+                    EnterpriseDeviceManager.getInstance().getApplicationPolicy();
+            String newName =
+                    appPolicy.getApplicationNameForComponent(
+                            this.packageName + "/" + this.name,
+                            this.packageName,
+                            UserHandle.getUserId(this.applicationInfo.uid));
             if (newName != null) {
                 Intent launchIntent = new Intent(Intent.ACTION_MAIN, (Uri) null);
                 launchIntent.addCategory(Intent.CATEGORY_LAUNCHER);
-                List<ResolveInfo> resolveInfos = pm.queryIntentActivitiesAsUser(launchIntent, 0, UserHandle.getUserId(this.applicationInfo.uid));
+                List<ResolveInfo> resolveInfos =
+                        pm.queryIntentActivitiesAsUser(
+                                launchIntent, 0, UserHandle.getUserId(this.applicationInfo.uid));
                 String currentActivity = this.packageName + "/" + this.name;
                 int size = resolveInfos.size();
                 for (int i = 0; i < size; i++) {
                     ResolveInfo resolveInfo = resolveInfos.get(i);
-                    String launcherActivity = resolveInfo.activityInfo.getComponentName().flattenToString();
+                    String launcherActivity =
+                            resolveInfo.activityInfo.getComponentName().flattenToString();
                     if (currentActivity.equals(launcherActivity)) {
                         return newName;
                     }
                 }
             }
         }
-        if (SemPersonaManager.isKnoxIcon(this.packageName, this.name) && (label3 = SemPersonaManager.getContainerName(this.packageName, this.name, UserHandle.getUserId(this.applicationInfo.uid))) != null) {
+        if (SemPersonaManager.isKnoxIcon(this.packageName, this.name)
+                && (label3 =
+                                SemPersonaManager.getContainerName(
+                                        this.packageName,
+                                        this.name,
+                                        UserHandle.getUserId(this.applicationInfo.uid)))
+                        != null) {
             return label3;
         }
         if (this.nonLocalizedLabel != null) {
             return this.nonLocalizedLabel;
         }
         ApplicationInfo ai = this.applicationInfo;
-        if (this.labelRes != 0 && (label2 = pm.getText(this.packageName, this.labelRes, ai)) != null) {
+        if (this.labelRes != 0
+                && (label2 = pm.getText(this.packageName, this.labelRes, ai)) != null) {
             return label2;
         }
         CharSequence label4 = ai.nonLocalizedLabel;
@@ -127,9 +144,20 @@ public class ComponentInfo extends PackageItemInfo {
                 tags.append(", ");
                 tags.append(this.attributionTags[i]);
             }
-            pw.println(prefix + "attributionTags=[" + ((Object) tags) + NavigationBarInflaterView.SIZE_MOD_END);
+            pw.println(
+                    prefix
+                            + "attributionTags=["
+                            + ((Object) tags)
+                            + NavigationBarInflaterView.SIZE_MOD_END);
         }
-        pw.println(prefix + "enabled=" + this.enabled + " exported=" + this.exported + " directBootAware=" + this.directBootAware);
+        pw.println(
+                prefix
+                        + "enabled="
+                        + this.enabled
+                        + " exported="
+                        + this.exported
+                        + " directBootAware="
+                        + this.directBootAware);
         if (this.descriptionRes != 0) {
             pw.println(prefix + "description=" + this.descriptionRes);
         }

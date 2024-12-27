@@ -6,16 +6,19 @@ import android.os.RemoteException;
 import android.security.IKeyChainService;
 import android.security.KeyChain;
 import android.util.IndentingPrintWriter;
+
 import com.android.server.utils.Slogf;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class DevicePolicyManagerService$$ExternalSyntheticLambda27 implements Runnable {
+public final /* synthetic */ class DevicePolicyManagerService$$ExternalSyntheticLambda27
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ DevicePolicyManagerService f$0;
     public final /* synthetic */ Object f$1;
 
-    public /* synthetic */ DevicePolicyManagerService$$ExternalSyntheticLambda27(DevicePolicyManagerService devicePolicyManagerService, Object obj, int i) {
+    public /* synthetic */ DevicePolicyManagerService$$ExternalSyntheticLambda27(
+            DevicePolicyManagerService devicePolicyManagerService, Object obj, int i) {
         this.$r8$classId = i;
         this.f$0 = devicePolicyManagerService;
         this.f$1 = obj;
@@ -35,10 +38,12 @@ public final /* synthetic */ class DevicePolicyManagerService$$ExternalSynthetic
                 String str = (String) this.f$1;
                 devicePolicyManagerService.getClass();
                 try {
-                    KeyChain.KeyChainConnection bind = KeyChain.bind(devicePolicyManagerService.mInjector.mContext);
+                    KeyChain.KeyChainConnection bind =
+                            KeyChain.bind(devicePolicyManagerService.mInjector.mContext);
                     try {
                         IKeyChainService service = bind.getService();
-                        if (service.hasCredentialManagementApp() && str.equals(service.getCredentialManagementAppPackageName())) {
+                        if (service.hasCredentialManagementApp()
+                                && str.equals(service.getCredentialManagementAppPackageName())) {
                             service.removeCredentialManagementApp();
                         }
                         bind.close();
@@ -53,15 +58,24 @@ public final /* synthetic */ class DevicePolicyManagerService$$ExternalSynthetic
                         }
                         throw th;
                     }
-                } catch (RemoteException | AssertionError | IllegalStateException | InterruptedException e) {
-                    Slogf.e("DevicePolicyManager", "Unable to remove the credential management app", e);
+                } catch (RemoteException
+                        | AssertionError
+                        | IllegalStateException
+                        | InterruptedException e) {
+                    Slogf.e(
+                            "DevicePolicyManager",
+                            "Unable to remove the credential management app",
+                            e);
                     return;
                 }
             default:
                 DevicePolicyManagerService devicePolicyManagerService2 = this.f$0;
                 IndentingPrintWriter indentingPrintWriter = (IndentingPrintWriter) this.f$1;
                 if (devicePolicyManagerService2.mNetworkLoggingNotificationUserId != -10000) {
-                    indentingPrintWriter.println("mNetworkLoggingNotificationUserId:  " + devicePolicyManagerService2.mNetworkLoggingNotificationUserId);
+                    indentingPrintWriter.println(
+                            "mNetworkLoggingNotificationUserId:  "
+                                    + devicePolicyManagerService2
+                                            .mNetworkLoggingNotificationUserId);
                     return;
                 }
                 return;

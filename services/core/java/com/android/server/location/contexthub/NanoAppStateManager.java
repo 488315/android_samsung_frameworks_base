@@ -2,6 +2,7 @@ package com.android.server.location.contexthub;
 
 import android.hardware.location.NanoAppInstanceInfo;
 import android.util.Log;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.function.Consumer;
@@ -38,7 +39,16 @@ public final class NanoAppStateManager {
                 this.mNextHandle = i3;
             }
         }
-        Log.v("NanoAppStateManager", "Added app instance with handle " + i4 + " to hub " + i + ": ID=0x" + Long.toHexString(j) + ", version=0x" + Integer.toHexString(i2));
+        Log.v(
+                "NanoAppStateManager",
+                "Added app instance with handle "
+                        + i4
+                        + " to hub "
+                        + i
+                        + ": ID=0x"
+                        + Long.toHexString(j)
+                        + ", version=0x"
+                        + Integer.toHexString(i2));
     }
 
     public final synchronized void foreachNanoAppInstanceInfo(Consumer consumer) {
@@ -63,9 +73,22 @@ public final class NanoAppStateManager {
             addNanoAppInstance(i, i2, j);
             return;
         }
-        if (((NanoAppInstanceInfo) this.mNanoAppHash.get(Integer.valueOf(nanoAppHandle))).getAppVersion() != i2) {
-            this.mNanoAppHash.put(Integer.valueOf(nanoAppHandle), new NanoAppInstanceInfo(nanoAppHandle, j, i2, i));
-            Log.v("NanoAppStateManager", "Updated app instance with handle " + nanoAppHandle + " at hub " + i + ": ID=0x" + Long.toHexString(j) + ", version=0x" + Integer.toHexString(i2));
+        if (((NanoAppInstanceInfo) this.mNanoAppHash.get(Integer.valueOf(nanoAppHandle)))
+                        .getAppVersion()
+                != i2) {
+            this.mNanoAppHash.put(
+                    Integer.valueOf(nanoAppHandle),
+                    new NanoAppInstanceInfo(nanoAppHandle, j, i2, i));
+            Log.v(
+                    "NanoAppStateManager",
+                    "Updated app instance with handle "
+                            + nanoAppHandle
+                            + " at hub "
+                            + i
+                            + ": ID=0x"
+                            + Long.toHexString(j)
+                            + ", version=0x"
+                            + Integer.toHexString(i2));
         }
     }
 }

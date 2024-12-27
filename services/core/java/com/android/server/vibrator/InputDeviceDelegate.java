@@ -83,7 +83,8 @@ public final class InputDeviceDelegate implements InputManager.InputDeviceListen
                         if (inputDevice != null) {
                             VibratorManager vibratorManager = inputDevice.getVibratorManager();
                             if (vibratorManager.getVibratorIds().length > 0) {
-                                this.mInputDeviceVibrators.put(inputDevice.getId(), vibratorManager);
+                                this.mInputDeviceVibrators.put(
+                                        inputDevice.getId(), vibratorManager);
                             }
                         }
                     }

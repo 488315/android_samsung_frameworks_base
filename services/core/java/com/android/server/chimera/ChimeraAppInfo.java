@@ -1,8 +1,10 @@
 package com.android.server.chimera;
 
 import android.hardware.audio.common.V2_0.AudioOffloadInfo$$ExternalSyntheticOutline0;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.pm.PackageManagerShellCommandDataLoader;
+
 import java.io.FileDescriptor;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -39,7 +41,11 @@ public final class ChimeraAppInfo {
         public long pss;
 
         public final String toString() {
-            return this.pid + PackageManagerShellCommandDataLoader.STDIN_PATH + this.pss + "/" + this.avgPss;
+            return this.pid
+                    + PackageManagerShellCommandDataLoader.STDIN_PATH
+                    + this.pss
+                    + "/"
+                    + this.avgPss;
         }
     }
 
@@ -68,8 +74,24 @@ public final class ChimeraAppInfo {
             }
         }
         sb.append("]");
-        StringBuilder m = BootReceiver$$ExternalSyntheticOutline0.m(z ? AudioOffloadInfo$$ExternalSyntheticOutline0.m(new StringBuilder(), this.packageName, ":") : "");
-        m.append(String.format("%d%s:G%d(0x%x) score=%3.1f(%d %d/%d %d)", Integer.valueOf(this.uid), sb.toString(), Integer.valueOf(this.group), Integer.valueOf(this.appType), Float.valueOf(this.score), Integer.valueOf(this.lruIdx), Integer.valueOf(this.cacStandbyBucket), Integer.valueOf(this.curStandbyBucket), Long.valueOf(this.reclaimGain)));
+        StringBuilder m =
+                BootReceiver$$ExternalSyntheticOutline0.m(
+                        z
+                                ? AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                                        new StringBuilder(), this.packageName, ":")
+                                : "");
+        m.append(
+                String.format(
+                        "%d%s:G%d(0x%x) score=%3.1f(%d %d/%d %d)",
+                        Integer.valueOf(this.uid),
+                        sb.toString(),
+                        Integer.valueOf(this.group),
+                        Integer.valueOf(this.appType),
+                        Float.valueOf(this.score),
+                        Integer.valueOf(this.lruIdx),
+                        Integer.valueOf(this.cacStandbyBucket),
+                        Integer.valueOf(this.curStandbyBucket),
+                        Long.valueOf(this.reclaimGain)));
         return m.toString();
     }
 }

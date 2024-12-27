@@ -1,6 +1,7 @@
 package com.android.internal.os;
 
 import android.os.Process;
+
 import java.io.IOException;
 import java.nio.file.Path;
 
@@ -19,7 +20,13 @@ public class ProcTimeInStateReader {
 
     public long[] getUsageTimesMillis(Path timeInStatePath) {
         long[] readLongs = new long[this.mFrequenciesKhz.length];
-        boolean readSuccess = Process.readProcFile(timeInStatePath.toString(), this.mTimeInStateTimeFormat, null, readLongs, null);
+        boolean readSuccess =
+                Process.readProcFile(
+                        timeInStatePath.toString(),
+                        this.mTimeInStateTimeFormat,
+                        null,
+                        readLongs,
+                        null);
         if (!readSuccess) {
             return null;
         }
@@ -106,6 +113,8 @@ public class ProcTimeInStateReader {
             r0.<init>(r1)
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.os.ProcTimeInStateReader.initializeTimeInStateFormat(java.nio.file.Path):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.os.ProcTimeInStateReader.initializeTimeInStateFormat(java.nio.file.Path):void");
     }
 }

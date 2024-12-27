@@ -1,6 +1,7 @@
 package android.os;
 
 import android.os.storage.CrateMetadata;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,27 +30,24 @@ public interface IInstalld extends IInterface {
         }
 
         @Override // android.os.IInstalld
-        public void cleanupInvalidPackageDirs(String str, int i, int i2) throws RemoteException {
-        }
+        public void cleanupInvalidPackageDirs(String str, int i, int i2) throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public void clearAppData(String str, String str2, int i, int i2, long j) throws RemoteException {
-        }
+        public void clearAppData(String str, String str2, int i, int i2, long j)
+                throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public void clearAppProfiles(String str, String str2) throws RemoteException {
-        }
+        public void clearAppProfiles(String str, String str2) throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public void compressFile(String str, boolean z) throws RemoteException {
-        }
+        public void compressFile(String str, boolean z) throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public void controlDexOptBlocking(boolean z) throws RemoteException {
-        }
+        public void controlDexOptBlocking(boolean z) throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public boolean copyKnoxAppData(String str, int i, String str2, int i2, int i3) throws RemoteException {
+        public boolean copyKnoxAppData(String str, int i, String str2, int i2, int i3)
+                throws RemoteException {
             return false;
         }
 
@@ -59,22 +57,27 @@ public interface IInstalld extends IInterface {
         }
 
         @Override // android.os.IInstalld
-        public int copyKnoxChunks(String str, int i, String str2, int i2, int i3, long j, long j2, long j3) throws RemoteException {
+        public int copyKnoxChunks(
+                String str, int i, String str2, int i2, int i3, long j, long j2, long j3)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.os.IInstalld
-        public boolean copySystemProfile(String str, int i, String str2, String str3) throws RemoteException {
+        public boolean copySystemProfile(String str, int i, String str2, String str3)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.os.IInstalld
-        public CreateAppDataResult createAppData(CreateAppDataArgs createAppDataArgs) throws RemoteException {
+        public CreateAppDataResult createAppData(CreateAppDataArgs createAppDataArgs)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.os.IInstalld
-        public CreateAppDataResult[] createAppDataBatched(CreateAppDataArgs[] createAppDataArgsArr) throws RemoteException {
+        public CreateAppDataResult[] createAppDataBatched(CreateAppDataArgs[] createAppDataArgsArr)
+                throws RemoteException {
             return null;
         }
 
@@ -84,22 +87,22 @@ public interface IInstalld extends IInterface {
         }
 
         @Override // android.os.IInstalld
-        public IFsveritySetupAuthToken createFsveritySetupAuthToken(ParcelFileDescriptor parcelFileDescriptor, int i) throws RemoteException {
+        public IFsveritySetupAuthToken createFsveritySetupAuthToken(
+                ParcelFileDescriptor parcelFileDescriptor, int i) throws RemoteException {
             return null;
         }
 
         @Override // android.os.IInstalld
-        public void createOatDir(String str, String str2, String str3) throws RemoteException {
-        }
+        public void createOatDir(String str, String str2, String str3) throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public boolean createProfileSnapshot(int i, String str, String str2, String str3) throws RemoteException {
+        public boolean createProfileSnapshot(int i, String str, String str2, String str3)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.os.IInstalld
-        public void createUserData(String str, int i, int i2, int i3) throws RemoteException {
-        }
+        public void createUserData(String str, int i, int i2, int i3) throws RemoteException {}
 
         @Override // android.os.IInstalld
         public boolean deleteKnoxFile(String str) throws RemoteException {
@@ -107,68 +110,86 @@ public interface IInstalld extends IInterface {
         }
 
         @Override // android.os.IInstalld
-        public long deleteOdex(String str, String str2, String str3, String str4) throws RemoteException {
+        public long deleteOdex(String str, String str2, String str3, String str4)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.os.IInstalld
-        public void deleteReferenceProfile(String str, String str2) throws RemoteException {
-        }
+        public void deleteReferenceProfile(String str, String str2) throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public void destroyAppData(String str, String str2, int i, int i2, long j) throws RemoteException {
-        }
+        public void destroyAppData(String str, String str2, int i, int i2, long j)
+                throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public void destroyAppDataSnapshot(String str, String str2, int i, long j, int i2, int i3) throws RemoteException {
-        }
+        public void destroyAppDataSnapshot(String str, String str2, int i, long j, int i2, int i3)
+                throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public void destroyAppProfiles(String str) throws RemoteException {
-        }
+        public void destroyAppProfiles(String str) throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public void destroyCeSnapshotsNotSpecified(String str, int i, int[] iArr) throws RemoteException {
-        }
+        public void destroyCeSnapshotsNotSpecified(String str, int i, int[] iArr)
+                throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public void destroyProfileSnapshot(String str, String str2) throws RemoteException {
-        }
+        public void destroyProfileSnapshot(String str, String str2) throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public void destroyUserData(String str, int i, int i2) throws RemoteException {
-        }
+        public void destroyUserData(String str, int i, int i2) throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public boolean dexopt(String str, int i, String str2, String str3, int i2, String str4, int i3, String str5, String str6, String str7, String str8, boolean z, int i4, String str9, String str10, String str11) throws RemoteException {
+        public boolean dexopt(
+                String str,
+                int i,
+                String str2,
+                String str3,
+                int i2,
+                String str4,
+                int i3,
+                String str5,
+                String str6,
+                String str7,
+                String str8,
+                boolean z,
+                int i4,
+                String str9,
+                String str10,
+                String str11)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.os.IInstalld
-        public boolean dumpProfiles(int i, String str, String str2, String str3, boolean z) throws RemoteException {
+        public boolean dumpProfiles(int i, String str, String str2, String str3, boolean z)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.os.IInstalld
-        public int enableFsverity(IFsveritySetupAuthToken iFsveritySetupAuthToken, String str, String str2) throws RemoteException {
+        public int enableFsverity(
+                IFsveritySetupAuthToken iFsveritySetupAuthToken, String str, String str2)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.os.IInstalld
-        public void fixupAppData(String str, int i) throws RemoteException {
-        }
+        public void fixupAppData(String str, int i) throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public void freeCache(String str, long j, int i) throws RemoteException {
-        }
+        public void freeCache(String str, long j, int i) throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public CrateMetadata[] getAppCrates(String str, String[] strArr, int i) throws RemoteException {
+        public CrateMetadata[] getAppCrates(String str, String[] strArr, int i)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.os.IInstalld
-        public long[] getAppSize(String str, String[] strArr, int i, int i2, int i3, long[] jArr, String[] strArr2) throws RemoteException {
+        public long[] getAppSize(
+                String str, String[] strArr, int i, int i2, int i3, long[] jArr, String[] strArr2)
+                throws RemoteException {
             return null;
         }
 
@@ -183,7 +204,8 @@ public interface IInstalld extends IInterface {
         }
 
         @Override // android.os.IInstalld
-        public long[] getExternalSize(String str, int i, int i2, int[] iArr) throws RemoteException {
+        public long[] getExternalSize(String str, int i, int i2, int[] iArr)
+                throws RemoteException {
             return null;
         }
 
@@ -198,7 +220,8 @@ public interface IInstalld extends IInterface {
         }
 
         @Override // android.os.IInstalld
-        public int getOdexVisibility(String str, String str2, String str3, String str4) throws RemoteException {
+        public int getOdexVisibility(String str, String str2, String str3, String str4)
+                throws RemoteException {
             return 0;
         }
 
@@ -223,13 +246,13 @@ public interface IInstalld extends IInterface {
         }
 
         @Override // android.os.IInstalld
-        public byte[] hashSecondaryDexFile(String str, String str2, int i, String str3, int i2) throws RemoteException {
+        public byte[] hashSecondaryDexFile(String str, String str2, int i, String str3, int i2)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.os.IInstalld
-        public void invalidateMounts() throws RemoteException {
-        }
+        public void invalidateMounts() throws RemoteException {}
 
         @Override // android.os.IInstalld
         public boolean isQuotaSupported(String str) throws RemoteException {
@@ -237,12 +260,12 @@ public interface IInstalld extends IInterface {
         }
 
         @Override // android.os.IInstalld
-        public void linkFile(String str, String str2, String str3, String str4) throws RemoteException {
-        }
+        public void linkFile(String str, String str2, String str3, String str4)
+                throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public void linkNativeLibraryDirectory(String str, String str2, String str3, int i) throws RemoteException {
-        }
+        public void linkNativeLibraryDirectory(String str, String str2, String str3, int i)
+                throws RemoteException {}
 
         @Override // android.os.IInstalld
         public int mergeProfiles(int i, String str, String str2) throws RemoteException {
@@ -250,12 +273,10 @@ public interface IInstalld extends IInterface {
         }
 
         @Override // android.os.IInstalld
-        public void migrateAppData(String str, String str2, int i, int i2) throws RemoteException {
-        }
+        public void migrateAppData(String str, String str2, int i, int i2) throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public void migrateLegacyObbData() throws RemoteException {
-        }
+        public void migrateLegacyObbData() throws RemoteException {}
 
         @Override // android.os.IInstalld
         public boolean migrateSdpDb(String str, int i) throws RemoteException {
@@ -263,28 +284,32 @@ public interface IInstalld extends IInterface {
         }
 
         @Override // android.os.IInstalld
-        public void moveAb(String str, String str2, String str3, String str4) throws RemoteException {
-        }
+        public void moveAb(String str, String str2, String str3, String str4)
+                throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public void moveCompleteApp(String str, String str2, String str3, int i, String str4, int i2, String str5) throws RemoteException {
-        }
+        public void moveCompleteApp(
+                String str, String str2, String str3, int i, String str4, int i2, String str5)
+                throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public void onPrivateVolumeRemoved(String str) throws RemoteException {
-        }
+        public void onPrivateVolumeRemoved(String str) throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public boolean prepareAppProfile(String str, int i, int i2, String str2, String str3, String str4) throws RemoteException {
+        public boolean prepareAppProfile(
+                String str, int i, int i2, String str2, String str3, String str4)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.os.IInstalld
-        public void reconcileSdkData(ReconcileSdkDataArgs reconcileSdkDataArgs) throws RemoteException {
-        }
+        public void reconcileSdkData(ReconcileSdkDataArgs reconcileSdkDataArgs)
+                throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public boolean reconcileSecondaryDexFile(String str, String str2, int i, String[] strArr, String str3, int i2) throws RemoteException {
+        public boolean reconcileSecondaryDexFile(
+                String str, String str2, int i, String[] strArr, String str3, int i2)
+                throws RemoteException {
             return false;
         }
 
@@ -304,28 +329,25 @@ public interface IInstalld extends IInterface {
         }
 
         @Override // android.os.IInstalld
-        public void restoreAppDataSnapshot(String str, String str2, int i, String str3, int i2, int i3, int i4) throws RemoteException {
-        }
+        public void restoreAppDataSnapshot(
+                String str, String str2, int i, String str3, int i2, int i3, int i4)
+                throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public void restoreconAppData(String str, String str2, int i, int i2, int i3, String str3) throws RemoteException {
-        }
+        public void restoreconAppData(String str, String str2, int i, int i2, int i3, String str3)
+                throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public void rmPackageDir(String str, String str2) throws RemoteException {
-        }
+        public void rmPackageDir(String str, String str2) throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public void rmdex(String str, String str2) throws RemoteException {
-        }
+        public void rmdex(String str, String str2) throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public void scanApkStats(String str, int i) throws RemoteException {
-        }
+        public void scanApkStats(String str, int i) throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public void setAppQuota(String str, int i, int i2, long j) throws RemoteException {
-        }
+        public void setAppQuota(String str, int i, int i2, long j) throws RemoteException {}
 
         @Override // android.os.IInstalld
         public boolean setDualDARPolicyDir(int i, int i2, String str) throws RemoteException {
@@ -333,7 +355,8 @@ public interface IInstalld extends IInterface {
         }
 
         @Override // android.os.IInstalld
-        public boolean setDualDARPolicyDirRecursively(int i, int i2, String str) throws RemoteException {
+        public boolean setDualDARPolicyDirRecursively(int i, int i2, String str)
+                throws RemoteException {
             return false;
         }
 
@@ -343,17 +366,16 @@ public interface IInstalld extends IInterface {
         }
 
         @Override // android.os.IInstalld
-        public void setFirstBoot() throws RemoteException {
-        }
+        public void setFirstBoot() throws RemoteException {}
 
         @Override // android.os.IInstalld
-        public long snapshotAppData(String str, String str2, int i, int i2, int i3) throws RemoteException {
+        public long snapshotAppData(String str, String str2, int i, int i2, int i3)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.os.IInstalld
-        public void tryMountDataMirror(String str) throws RemoteException {
-        }
+        public void tryMountDataMirror(String str) throws RemoteException {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -389,8 +411,10 @@ public interface IInstalld extends IInterface {
                 if (iBinder == null) {
                     return null;
                 }
-                IInterface queryLocalInterface = iBinder.queryLocalInterface(IFsveritySetupAuthToken.DESCRIPTOR);
-                if (queryLocalInterface != null && (queryLocalInterface instanceof IFsveritySetupAuthToken)) {
+                IInterface queryLocalInterface =
+                        iBinder.queryLocalInterface(IFsveritySetupAuthToken.DESCRIPTOR);
+                if (queryLocalInterface != null
+                        && (queryLocalInterface instanceof IFsveritySetupAuthToken)) {
                     return (IFsveritySetupAuthToken) queryLocalInterface;
                 }
                 Proxy proxy = new Proxy();
@@ -404,7 +428,8 @@ public interface IInstalld extends IInterface {
             }
 
             @Override // android.os.Binder
-            public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+            public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+                    throws RemoteException {
                 if (i != 1598968902) {
                     return super.onTransact(i, parcel, parcel2, i2);
                 }
@@ -620,7 +645,8 @@ public interface IInstalld extends IInterface {
             }
 
             @Override // android.os.IInstalld
-            public final int copyKnoxChunks(String str, int i, String str2, int i2, int i3, long j, long j2, long j3) {
+            public final int copyKnoxChunks(
+                    String str, int i, String str2, int i2, int i3, long j, long j2, long j3) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -670,7 +696,8 @@ public interface IInstalld extends IInterface {
                     obtain.writeTypedObject(createAppDataArgs, 0);
                     this.mRemote.transact(4, obtain, obtain2, 0);
                     obtain2.readException();
-                    return (CreateAppDataResult) obtain2.readTypedObject(CreateAppDataResult.CREATOR);
+                    return (CreateAppDataResult)
+                            obtain2.readTypedObject(CreateAppDataResult.CREATOR);
                 } finally {
                     obtain2.recycle();
                     obtain.recycle();
@@ -678,7 +705,8 @@ public interface IInstalld extends IInterface {
             }
 
             @Override // android.os.IInstalld
-            public final CreateAppDataResult[] createAppDataBatched(CreateAppDataArgs[] createAppDataArgsArr) {
+            public final CreateAppDataResult[] createAppDataBatched(
+                    CreateAppDataArgs[] createAppDataArgsArr) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -686,7 +714,8 @@ public interface IInstalld extends IInterface {
                     obtain.writeTypedArray(createAppDataArgsArr, 0);
                     this.mRemote.transact(5, obtain, obtain2, 0);
                     obtain2.readException();
-                    return (CreateAppDataResult[]) obtain2.createTypedArray(CreateAppDataResult.CREATOR);
+                    return (CreateAppDataResult[])
+                            obtain2.createTypedArray(CreateAppDataResult.CREATOR);
                 } finally {
                     obtain2.recycle();
                     obtain.recycle();
@@ -713,7 +742,8 @@ public interface IInstalld extends IInterface {
             }
 
             @Override // android.os.IInstalld
-            public final IFsveritySetupAuthToken createFsveritySetupAuthToken(ParcelFileDescriptor parcelFileDescriptor, int i) {
+            public final IFsveritySetupAuthToken createFsveritySetupAuthToken(
+                    ParcelFileDescriptor parcelFileDescriptor, int i) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -747,7 +777,8 @@ public interface IInstalld extends IInterface {
             }
 
             @Override // android.os.IInstalld
-            public final boolean createProfileSnapshot(int i, String str, String str2, String str3) {
+            public final boolean createProfileSnapshot(
+                    int i, String str, String str2, String str3) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -854,7 +885,8 @@ public interface IInstalld extends IInterface {
             }
 
             @Override // android.os.IInstalld
-            public final void destroyAppDataSnapshot(String str, String str2, int i, long j, int i2, int i3) {
+            public final void destroyAppDataSnapshot(
+                    String str, String str2, int i, long j, int i2, int i3) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -939,7 +971,23 @@ public interface IInstalld extends IInterface {
             }
 
             @Override // android.os.IInstalld
-            public final boolean dexopt(String str, int i, String str2, String str3, int i2, String str4, int i3, String str5, String str6, String str7, String str8, boolean z, int i4, String str9, String str10, String str11) {
+            public final boolean dexopt(
+                    String str,
+                    int i,
+                    String str2,
+                    String str3,
+                    int i2,
+                    String str4,
+                    int i3,
+                    String str5,
+                    String str6,
+                    String str7,
+                    String str8,
+                    boolean z,
+                    int i4,
+                    String str9,
+                    String str10,
+                    String str11) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -970,7 +1018,8 @@ public interface IInstalld extends IInterface {
             }
 
             @Override // android.os.IInstalld
-            public final boolean dumpProfiles(int i, String str, String str2, String str3, boolean z) {
+            public final boolean dumpProfiles(
+                    int i, String str, String str2, String str3, boolean z) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -990,7 +1039,8 @@ public interface IInstalld extends IInterface {
             }
 
             @Override // android.os.IInstalld
-            public final int enableFsverity(IFsveritySetupAuthToken iFsveritySetupAuthToken, String str, String str2) {
+            public final int enableFsverity(
+                    IFsveritySetupAuthToken iFsveritySetupAuthToken, String str, String str2) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -1059,7 +1109,14 @@ public interface IInstalld extends IInterface {
             }
 
             @Override // android.os.IInstalld
-            public final long[] getAppSize(String str, String[] strArr, int i, int i2, int i3, long[] jArr, String[] strArr2) {
+            public final long[] getAppSize(
+                    String str,
+                    String[] strArr,
+                    int i,
+                    int i2,
+                    int i3,
+                    long[] jArr,
+                    String[] strArr2) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -1258,7 +1315,8 @@ public interface IInstalld extends IInterface {
             }
 
             @Override // android.os.IInstalld
-            public final byte[] hashSecondaryDexFile(String str, String str2, int i, String str3, int i2) {
+            public final byte[] hashSecondaryDexFile(
+                    String str, String str2, int i, String str3, int i2) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -1326,7 +1384,8 @@ public interface IInstalld extends IInterface {
             }
 
             @Override // android.os.IInstalld
-            public final void linkNativeLibraryDirectory(String str, String str2, String str3, int i) {
+            public final void linkNativeLibraryDirectory(
+                    String str, String str2, String str3, int i) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -1429,7 +1488,8 @@ public interface IInstalld extends IInterface {
             }
 
             @Override // android.os.IInstalld
-            public final void moveCompleteApp(String str, String str2, String str3, int i, String str4, int i2, String str5) {
+            public final void moveCompleteApp(
+                    String str, String str2, String str3, int i, String str4, int i2, String str5) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -1465,7 +1525,8 @@ public interface IInstalld extends IInterface {
             }
 
             @Override // android.os.IInstalld
-            public final boolean prepareAppProfile(String str, int i, int i2, String str2, String str3, String str4) {
+            public final boolean prepareAppProfile(
+                    String str, int i, int i2, String str2, String str3, String str4) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -1501,7 +1562,8 @@ public interface IInstalld extends IInterface {
             }
 
             @Override // android.os.IInstalld
-            public final boolean reconcileSecondaryDexFile(String str, String str2, int i, String[] strArr, String str3, int i2) {
+            public final boolean reconcileSecondaryDexFile(
+                    String str, String str2, int i, String[] strArr, String str3, int i2) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -1570,7 +1632,8 @@ public interface IInstalld extends IInterface {
             }
 
             @Override // android.os.IInstalld
-            public final void restoreAppDataSnapshot(String str, String str2, int i, String str3, int i2, int i3, int i4) {
+            public final void restoreAppDataSnapshot(
+                    String str, String str2, int i, String str3, int i2, int i3, int i4) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -1591,7 +1654,8 @@ public interface IInstalld extends IInterface {
             }
 
             @Override // android.os.IInstalld
-            public final void restoreconAppData(String str, String str2, int i, int i2, int i3, String str3) {
+            public final void restoreconAppData(
+                    String str, String str2, int i, int i2, int i3, String str3) {
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
                 try {
@@ -1802,7 +1866,8 @@ public interface IInstalld extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+                throws RemoteException {
             if (i >= 1 && i <= 16777215) {
                 parcel.enforceInterface(DESCRIPTOR);
             }
@@ -1833,21 +1898,27 @@ public interface IInstalld extends IInterface {
                     parcel2.writeNoException();
                     return true;
                 case 4:
-                    CreateAppDataArgs createAppDataArgs = (CreateAppDataArgs) parcel.readTypedObject(CreateAppDataArgs.CREATOR);
+                    CreateAppDataArgs createAppDataArgs =
+                            (CreateAppDataArgs) parcel.readTypedObject(CreateAppDataArgs.CREATOR);
                     parcel.enforceNoDataAvail();
                     CreateAppDataResult createAppData = createAppData(createAppDataArgs);
                     parcel2.writeNoException();
                     parcel2.writeTypedObject(createAppData, 1);
                     return true;
                 case 5:
-                    CreateAppDataArgs[] createAppDataArgsArr = (CreateAppDataArgs[]) parcel.createTypedArray(CreateAppDataArgs.CREATOR);
+                    CreateAppDataArgs[] createAppDataArgsArr =
+                            (CreateAppDataArgs[])
+                                    parcel.createTypedArray(CreateAppDataArgs.CREATOR);
                     parcel.enforceNoDataAvail();
-                    CreateAppDataResult[] createAppDataBatched = createAppDataBatched(createAppDataArgsArr);
+                    CreateAppDataResult[] createAppDataBatched =
+                            createAppDataBatched(createAppDataArgsArr);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(createAppDataBatched, 1);
                     return true;
                 case 6:
-                    ReconcileSdkDataArgs reconcileSdkDataArgs = (ReconcileSdkDataArgs) parcel.readTypedObject(ReconcileSdkDataArgs.CREATOR);
+                    ReconcileSdkDataArgs reconcileSdkDataArgs =
+                            (ReconcileSdkDataArgs)
+                                    parcel.readTypedObject(ReconcileSdkDataArgs.CREATOR);
                     parcel.enforceNoDataAvail();
                     reconcileSdkData(reconcileSdkDataArgs);
                     parcel2.writeNoException();
@@ -1860,7 +1931,8 @@ public interface IInstalld extends IInterface {
                     int readInt8 = parcel.readInt();
                     String readString5 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    restoreconAppData(readString3, readString4, readInt6, readInt7, readInt8, readString5);
+                    restoreconAppData(
+                            readString3, readString4, readInt6, readInt7, readInt8, readString5);
                     parcel2.writeNoException();
                     return true;
                 case 8:
@@ -1908,7 +1980,15 @@ public interface IInstalld extends IInterface {
                     long[] createLongArray = parcel.createLongArray();
                     String[] createStringArray2 = parcel.createStringArray();
                     parcel.enforceNoDataAvail();
-                    long[] appSize = getAppSize(readString13, createStringArray, readInt16, readInt17, readInt18, createLongArray, createStringArray2);
+                    long[] appSize =
+                            getAppSize(
+                                    readString13,
+                                    createStringArray,
+                                    readInt16,
+                                    readInt17,
+                                    readInt18,
+                                    createLongArray,
+                                    createStringArray2);
                     parcel2.writeNoException();
                     parcel2.writeLongArray(appSize);
                     return true;
@@ -1918,7 +1998,8 @@ public interface IInstalld extends IInterface {
                     int readInt20 = parcel.readInt();
                     int[] createIntArray = parcel.createIntArray();
                     parcel.enforceNoDataAvail();
-                    long[] userSize = getUserSize(readString14, readInt19, readInt20, createIntArray);
+                    long[] userSize =
+                            getUserSize(readString14, readInt19, readInt20, createIntArray);
                     parcel2.writeNoException();
                     parcel2.writeLongArray(userSize);
                     return true;
@@ -1928,7 +2009,8 @@ public interface IInstalld extends IInterface {
                     int readInt22 = parcel.readInt();
                     int[] createIntArray2 = parcel.createIntArray();
                     parcel.enforceNoDataAvail();
-                    long[] externalSize = getExternalSize(readString15, readInt21, readInt22, createIntArray2);
+                    long[] externalSize =
+                            getExternalSize(readString15, readInt21, readInt22, createIntArray2);
                     parcel2.writeNoException();
                     parcel2.writeLongArray(externalSize);
                     return true;
@@ -1937,7 +2019,8 @@ public interface IInstalld extends IInterface {
                     String[] createStringArray3 = parcel.createStringArray();
                     int readInt23 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    CrateMetadata[] appCrates = getAppCrates(readString16, createStringArray3, readInt23);
+                    CrateMetadata[] appCrates =
+                            getAppCrates(readString16, createStringArray3, readInt23);
                     parcel2.writeNoException();
                     parcel2.writeTypedArray(appCrates, 1);
                     return true;
@@ -1967,7 +2050,14 @@ public interface IInstalld extends IInterface {
                     int readInt28 = parcel.readInt();
                     String readString23 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    moveCompleteApp(readString19, readString20, readString21, readInt27, readString22, readInt28, readString23);
+                    moveCompleteApp(
+                            readString19,
+                            readString20,
+                            readString21,
+                            readInt27,
+                            readString22,
+                            readInt28,
+                            readString23);
                     parcel2.writeNoException();
                     return true;
                 case 19:
@@ -1988,7 +2078,24 @@ public interface IInstalld extends IInterface {
                     String readString33 = parcel.readString();
                     String readString34 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean dexopt = dexopt(readString24, readInt29, readString25, readString26, readInt30, readString27, readInt31, readString28, readString29, readString30, readString31, readBoolean, readInt32, readString32, readString33, readString34);
+                    boolean dexopt =
+                            dexopt(
+                                    readString24,
+                                    readInt29,
+                                    readString25,
+                                    readString26,
+                                    readInt30,
+                                    readString27,
+                                    readInt31,
+                                    readString28,
+                                    readString29,
+                                    readString30,
+                                    readString31,
+                                    readBoolean,
+                                    readInt32,
+                                    readString32,
+                                    readString33,
+                                    readString34);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(dexopt);
                     return true;
@@ -2021,7 +2128,13 @@ public interface IInstalld extends IInterface {
                     String readString41 = parcel.readString();
                     boolean readBoolean3 = parcel.readBoolean();
                     parcel.enforceNoDataAvail();
-                    boolean dumpProfiles = dumpProfiles(readInt34, readString39, readString40, readString41, readBoolean3);
+                    boolean dumpProfiles =
+                            dumpProfiles(
+                                    readInt34,
+                                    readString39,
+                                    readString40,
+                                    readString41,
+                                    readBoolean3);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(dumpProfiles);
                     return true;
@@ -2031,7 +2144,8 @@ public interface IInstalld extends IInterface {
                     String readString43 = parcel.readString();
                     String readString44 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean copySystemProfile = copySystemProfile(readString42, readInt35, readString43, readString44);
+                    boolean copySystemProfile =
+                            copySystemProfile(readString42, readInt35, readString43, readString44);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(copySystemProfile);
                     return true;
@@ -2061,7 +2175,9 @@ public interface IInstalld extends IInterface {
                     String readString51 = parcel.readString();
                     String readString52 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean createProfileSnapshot = createProfileSnapshot(readInt36, readString50, readString51, readString52);
+                    boolean createProfileSnapshot =
+                            createProfileSnapshot(
+                                    readInt36, readString50, readString51, readString52);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(createProfileSnapshot);
                     return true;
@@ -2128,7 +2244,8 @@ public interface IInstalld extends IInterface {
                     String readString74 = parcel.readString();
                     String readString75 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    long deleteOdex = deleteOdex(readString72, readString73, readString74, readString75);
+                    long deleteOdex =
+                            deleteOdex(readString72, readString73, readString74, readString75);
                     parcel2.writeNoException();
                     parcel2.writeLong(deleteOdex);
                     return true;
@@ -2140,7 +2257,14 @@ public interface IInstalld extends IInterface {
                     String readString78 = parcel.readString();
                     int readInt40 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean reconcileSecondaryDexFile = reconcileSecondaryDexFile(readString76, readString77, readInt39, createStringArray4, readString78, readInt40);
+                    boolean reconcileSecondaryDexFile =
+                            reconcileSecondaryDexFile(
+                                    readString76,
+                                    readString77,
+                                    readInt39,
+                                    createStringArray4,
+                                    readString78,
+                                    readInt40);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(reconcileSecondaryDexFile);
                     return true;
@@ -2151,7 +2275,9 @@ public interface IInstalld extends IInterface {
                     String readString81 = parcel.readString();
                     int readInt42 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    byte[] hashSecondaryDexFile = hashSecondaryDexFile(readString79, readString80, readInt41, readString81, readInt42);
+                    byte[] hashSecondaryDexFile =
+                            hashSecondaryDexFile(
+                                    readString79, readString80, readInt41, readString81, readInt42);
                     parcel2.writeNoException();
                     parcel2.writeByteArray(hashSecondaryDexFile);
                     return true;
@@ -2174,7 +2300,14 @@ public interface IInstalld extends IInterface {
                     String readString85 = parcel.readString();
                     String readString86 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean prepareAppProfile = prepareAppProfile(readString83, readInt43, readInt44, readString84, readString85, readString86);
+                    boolean prepareAppProfile =
+                            prepareAppProfile(
+                                    readString83,
+                                    readInt43,
+                                    readInt44,
+                                    readString84,
+                                    readString85,
+                                    readString86);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(prepareAppProfile);
                     return true;
@@ -2185,7 +2318,9 @@ public interface IInstalld extends IInterface {
                     int readInt46 = parcel.readInt();
                     int readInt47 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    long snapshotAppData = snapshotAppData(readString87, readString88, readInt45, readInt46, readInt47);
+                    long snapshotAppData =
+                            snapshotAppData(
+                                    readString87, readString88, readInt45, readInt46, readInt47);
                     parcel2.writeNoException();
                     parcel2.writeLong(snapshotAppData);
                     return true;
@@ -2198,7 +2333,14 @@ public interface IInstalld extends IInterface {
                     int readInt50 = parcel.readInt();
                     int readInt51 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    restoreAppDataSnapshot(readString89, readString90, readInt48, readString91, readInt49, readInt50, readInt51);
+                    restoreAppDataSnapshot(
+                            readString89,
+                            readString90,
+                            readInt48,
+                            readString91,
+                            readInt49,
+                            readInt50,
+                            readInt51);
                     parcel2.writeNoException();
                     return true;
                 case 44:
@@ -2209,7 +2351,8 @@ public interface IInstalld extends IInterface {
                     int readInt53 = parcel.readInt();
                     int readInt54 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    destroyAppDataSnapshot(readString92, readString93, readInt52, readLong5, readInt53, readInt54);
+                    destroyAppDataSnapshot(
+                            readString92, readString93, readInt52, readLong5, readInt53, readInt54);
                     parcel2.writeNoException();
                     return true;
                 case 45:
@@ -2250,25 +2393,32 @@ public interface IInstalld extends IInterface {
                     String readString100 = parcel.readString();
                     String readString101 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    int odexVisibility = getOdexVisibility(readString98, readString99, readString100, readString101);
+                    int odexVisibility =
+                            getOdexVisibility(
+                                    readString98, readString99, readString100, readString101);
                     parcel2.writeNoException();
                     parcel2.writeInt(odexVisibility);
                     return true;
                 case 51:
-                    boolean removeNotTargetedPreloadApksIfNeeded = removeNotTargetedPreloadApksIfNeeded();
+                    boolean removeNotTargetedPreloadApksIfNeeded =
+                            removeNotTargetedPreloadApksIfNeeded();
                     parcel2.writeNoException();
                     parcel2.writeBoolean(removeNotTargetedPreloadApksIfNeeded);
                     return true;
                 case 52:
-                    ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor parcelFileDescriptor =
+                            (ParcelFileDescriptor)
+                                    parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
                     int readInt58 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    IFsveritySetupAuthToken createFsveritySetupAuthToken = createFsveritySetupAuthToken(parcelFileDescriptor, readInt58);
+                    IFsveritySetupAuthToken createFsveritySetupAuthToken =
+                            createFsveritySetupAuthToken(parcelFileDescriptor, readInt58);
                     parcel2.writeNoException();
                     parcel2.writeStrongInterface(createFsveritySetupAuthToken);
                     return true;
                 case 53:
-                    IFsveritySetupAuthToken asInterface = IFsveritySetupAuthToken.Stub.asInterface(parcel.readStrongBinder());
+                    IFsveritySetupAuthToken asInterface =
+                            IFsveritySetupAuthToken.Stub.asInterface(parcel.readStrongBinder());
                     String readString102 = parcel.readString();
                     String readString103 = parcel.readString();
                     parcel.enforceNoDataAvail();
@@ -2283,7 +2433,9 @@ public interface IInstalld extends IInterface {
                     int readInt60 = parcel.readInt();
                     int readInt61 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean copyKnoxAppData = copyKnoxAppData(readString104, readInt59, readString105, readInt60, readInt61);
+                    boolean copyKnoxAppData =
+                            copyKnoxAppData(
+                                    readString104, readInt59, readString105, readInt60, readInt61);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(copyKnoxAppData);
                     return true;
@@ -2297,7 +2449,16 @@ public interface IInstalld extends IInterface {
                     long readLong7 = parcel.readLong();
                     long readLong8 = parcel.readLong();
                     parcel.enforceNoDataAvail();
-                    int copyKnoxChunks = copyKnoxChunks(readString106, readInt62, readString107, readInt63, readInt64, readLong6, readLong7, readLong8);
+                    int copyKnoxChunks =
+                            copyKnoxChunks(
+                                    readString106,
+                                    readInt62,
+                                    readString107,
+                                    readInt63,
+                                    readInt64,
+                                    readLong6,
+                                    readLong7,
+                                    readLong8);
                     parcel2.writeNoException();
                     parcel2.writeInt(copyKnoxChunks);
                     return true;
@@ -2339,7 +2500,8 @@ public interface IInstalld extends IInterface {
                     int readInt66 = parcel.readInt();
                     int readInt67 = parcel.readInt();
                     parcel.enforceNoDataAvail();
-                    boolean createEncAppData = createEncAppData(readString112, readInt65, readInt66, readInt67);
+                    boolean createEncAppData =
+                            createEncAppData(readString112, readInt65, readInt66, readInt67);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(createEncAppData);
                     return true;
@@ -2379,7 +2541,8 @@ public interface IInstalld extends IInterface {
                     int readInt73 = parcel.readInt();
                     String readString115 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean dualDARPolicyDir = setDualDARPolicyDir(readInt72, readInt73, readString115);
+                    boolean dualDARPolicyDir =
+                            setDualDARPolicyDir(readInt72, readInt73, readString115);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(dualDARPolicyDir);
                     return true;
@@ -2388,7 +2551,8 @@ public interface IInstalld extends IInterface {
                     int readInt75 = parcel.readInt();
                     String readString116 = parcel.readString();
                     parcel.enforceNoDataAvail();
-                    boolean dualDARPolicyDirRecursively = setDualDARPolicyDirRecursively(readInt74, readInt75, readString116);
+                    boolean dualDARPolicyDirRecursively =
+                            setDualDARPolicyDirRecursively(readInt74, readInt75, readString116);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(dualDARPolicyDirRecursively);
                     return true;
@@ -2403,7 +2567,8 @@ public interface IInstalld extends IInterface {
                     String readString118 = parcel.readString();
                     ArrayList arrayList2 = new ArrayList();
                     parcel.enforceNoDataAvail();
-                    boolean hasDualDARPolicyRecursively = hasDualDARPolicyRecursively(readString118, arrayList2);
+                    boolean hasDualDARPolicyRecursively =
+                            hasDualDARPolicyRecursively(readString118, arrayList2);
                     parcel2.writeNoException();
                     parcel2.writeBoolean(hasDualDARPolicyRecursively);
                     parcel2.writeStringList(arrayList2);
@@ -2457,21 +2622,25 @@ public interface IInstalld extends IInterface {
 
     boolean copyKnoxCancel(String str, long j) throws RemoteException;
 
-    int copyKnoxChunks(String str, int i, String str2, int i2, int i3, long j, long j2, long j3) throws RemoteException;
+    int copyKnoxChunks(String str, int i, String str2, int i2, int i3, long j, long j2, long j3)
+            throws RemoteException;
 
     boolean copySystemProfile(String str, int i, String str2, String str3) throws RemoteException;
 
     CreateAppDataResult createAppData(CreateAppDataArgs createAppDataArgs) throws RemoteException;
 
-    CreateAppDataResult[] createAppDataBatched(CreateAppDataArgs[] createAppDataArgsArr) throws RemoteException;
+    CreateAppDataResult[] createAppDataBatched(CreateAppDataArgs[] createAppDataArgsArr)
+            throws RemoteException;
 
     boolean createEncAppData(String str, int i, int i2, int i3) throws RemoteException;
 
-    IFsveritySetupAuthToken createFsveritySetupAuthToken(ParcelFileDescriptor parcelFileDescriptor, int i) throws RemoteException;
+    IFsveritySetupAuthToken createFsveritySetupAuthToken(
+            ParcelFileDescriptor parcelFileDescriptor, int i) throws RemoteException;
 
     void createOatDir(String str, String str2, String str3) throws RemoteException;
 
-    boolean createProfileSnapshot(int i, String str, String str2, String str3) throws RemoteException;
+    boolean createProfileSnapshot(int i, String str, String str2, String str3)
+            throws RemoteException;
 
     void createUserData(String str, int i, int i2, int i3) throws RemoteException;
 
@@ -2483,7 +2652,8 @@ public interface IInstalld extends IInterface {
 
     void destroyAppData(String str, String str2, int i, int i2, long j) throws RemoteException;
 
-    void destroyAppDataSnapshot(String str, String str2, int i, long j, int i2, int i3) throws RemoteException;
+    void destroyAppDataSnapshot(String str, String str2, int i, long j, int i2, int i3)
+            throws RemoteException;
 
     void destroyAppProfiles(String str) throws RemoteException;
 
@@ -2493,11 +2663,30 @@ public interface IInstalld extends IInterface {
 
     void destroyUserData(String str, int i, int i2) throws RemoteException;
 
-    boolean dexopt(String str, int i, String str2, String str3, int i2, String str4, int i3, String str5, String str6, String str7, String str8, boolean z, int i4, String str9, String str10, String str11) throws RemoteException;
+    boolean dexopt(
+            String str,
+            int i,
+            String str2,
+            String str3,
+            int i2,
+            String str4,
+            int i3,
+            String str5,
+            String str6,
+            String str7,
+            String str8,
+            boolean z,
+            int i4,
+            String str9,
+            String str10,
+            String str11)
+            throws RemoteException;
 
-    boolean dumpProfiles(int i, String str, String str2, String str3, boolean z) throws RemoteException;
+    boolean dumpProfiles(int i, String str, String str2, String str3, boolean z)
+            throws RemoteException;
 
-    int enableFsverity(IFsveritySetupAuthToken iFsveritySetupAuthToken, String str, String str2) throws RemoteException;
+    int enableFsverity(IFsveritySetupAuthToken iFsveritySetupAuthToken, String str, String str2)
+            throws RemoteException;
 
     void fixupAppData(String str, int i) throws RemoteException;
 
@@ -2505,7 +2694,9 @@ public interface IInstalld extends IInterface {
 
     CrateMetadata[] getAppCrates(String str, String[] strArr, int i) throws RemoteException;
 
-    long[] getAppSize(String str, String[] strArr, int i, int i2, int i3, long[] jArr, String[] strArr2) throws RemoteException;
+    long[] getAppSize(
+            String str, String[] strArr, int i, int i2, int i3, long[] jArr, String[] strArr2)
+            throws RemoteException;
 
     boolean getCompressedStats(String str, long[] jArr) throws RemoteException;
 
@@ -2527,7 +2718,8 @@ public interface IInstalld extends IInterface {
 
     boolean hasDualDARPolicyRecursively(String str, List list) throws RemoteException;
 
-    byte[] hashSecondaryDexFile(String str, String str2, int i, String str3, int i2) throws RemoteException;
+    byte[] hashSecondaryDexFile(String str, String str2, int i, String str3, int i2)
+            throws RemoteException;
 
     void invalidateMounts() throws RemoteException;
 
@@ -2535,7 +2727,8 @@ public interface IInstalld extends IInterface {
 
     void linkFile(String str, String str2, String str3, String str4) throws RemoteException;
 
-    void linkNativeLibraryDirectory(String str, String str2, String str3, int i) throws RemoteException;
+    void linkNativeLibraryDirectory(String str, String str2, String str3, int i)
+            throws RemoteException;
 
     int mergeProfiles(int i, String str, String str2) throws RemoteException;
 
@@ -2547,15 +2740,20 @@ public interface IInstalld extends IInterface {
 
     void moveAb(String str, String str2, String str3, String str4) throws RemoteException;
 
-    void moveCompleteApp(String str, String str2, String str3, int i, String str4, int i2, String str5) throws RemoteException;
+    void moveCompleteApp(
+            String str, String str2, String str3, int i, String str4, int i2, String str5)
+            throws RemoteException;
 
     void onPrivateVolumeRemoved(String str) throws RemoteException;
 
-    boolean prepareAppProfile(String str, int i, int i2, String str2, String str3, String str4) throws RemoteException;
+    boolean prepareAppProfile(String str, int i, int i2, String str2, String str3, String str4)
+            throws RemoteException;
 
     void reconcileSdkData(ReconcileSdkDataArgs reconcileSdkDataArgs) throws RemoteException;
 
-    boolean reconcileSecondaryDexFile(String str, String str2, int i, String[] strArr, String str3, int i2) throws RemoteException;
+    boolean reconcileSecondaryDexFile(
+            String str, String str2, int i, String[] strArr, String str3, int i2)
+            throws RemoteException;
 
     boolean removeEncPkgDir(int i, String str) throws RemoteException;
 
@@ -2563,9 +2761,11 @@ public interface IInstalld extends IInterface {
 
     boolean removeNotTargetedPreloadApksIfNeeded() throws RemoteException;
 
-    void restoreAppDataSnapshot(String str, String str2, int i, String str3, int i2, int i3, int i4) throws RemoteException;
+    void restoreAppDataSnapshot(String str, String str2, int i, String str3, int i2, int i3, int i4)
+            throws RemoteException;
 
-    void restoreconAppData(String str, String str2, int i, int i2, int i3, String str3) throws RemoteException;
+    void restoreconAppData(String str, String str2, int i, int i2, int i3, String str3)
+            throws RemoteException;
 
     void rmPackageDir(String str, String str2) throws RemoteException;
 

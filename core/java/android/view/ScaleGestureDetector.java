@@ -3,7 +3,6 @@ package android.view;
 import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
-import android.view.GestureDetector;
 
 /* loaded from: classes4.dex */
 public class ScaleGestureDetector {
@@ -64,8 +63,7 @@ public class ScaleGestureDetector {
         }
 
         @Override // android.view.ScaleGestureDetector.OnScaleGestureListener
-        public void onScaleEnd(ScaleGestureDetector detector) {
-        }
+        public void onScaleEnd(ScaleGestureDetector detector) {}
     }
 
     static class SaveState {
@@ -97,10 +95,20 @@ public class ScaleGestureDetector {
     }
 
     public ScaleGestureDetector(Context context, OnScaleGestureListener listener, Handler handler) {
-        this(context, ViewConfiguration.get(context).getScaledTouchSlop() * 2, ViewConfiguration.get(context).getScaledMinimumScalingSpan(), handler, listener);
+        this(
+                context,
+                ViewConfiguration.get(context).getScaledTouchSlop() * 2,
+                ViewConfiguration.get(context).getScaledMinimumScalingSpan(),
+                handler,
+                listener);
     }
 
-    public ScaleGestureDetector(Context context, int spanSlop, int minSpan, Handler handler, OnScaleGestureListener listener) {
+    public ScaleGestureDetector(
+            Context context,
+            int spanSlop,
+            int minSpan,
+            Handler handler,
+            OnScaleGestureListener listener) {
         this.mUpdatePrevious = true;
         this.mAreaRateCalculating = false;
         this.mUseTwoFingerSweep = false;
@@ -150,13 +158,17 @@ public class ScaleGestureDetector {
             if (action == 1 || action == 3 || event.getPointerCount() == 4) {
                 reset();
             } else {
-                if (this.mStylusScaleEnabled && !inAnchoredScaleMode() && !streamComplete && isStylusButtonDown) {
+                if (this.mStylusScaleEnabled
+                        && !inAnchoredScaleMode()
+                        && !streamComplete
+                        && isStylusButtonDown) {
                     this.mAnchoredScaleStartX = event.getX();
                     this.mAnchoredScaleStartY = event.getY();
                     this.mAnchoredScaleMode = 2;
                 }
                 getArea(event);
-                boolean configChanged = action == 0 || action == 6 || action == 5 || anchoredScaleCancelled;
+                boolean configChanged =
+                        action == 0 || action == 6 || action == 5 || anchoredScaleCancelled;
                 if (configChanged) {
                     this.mCurrSpanX = this.mStateCurrent.mSpanX;
                     this.mCurrSpanY = this.mStateCurrent.mSpanY;
@@ -184,7 +196,8 @@ public class ScaleGestureDetector {
                     if (this.mUseTwoFingerSweep) {
                         scaleDecision = areaRate >= this.mAreaRateThreshold;
                     } else {
-                        scaleDecision = this.mAreaRateCalculating && areaRate > this.mAreaRateThreshold;
+                        scaleDecision =
+                                this.mAreaRateCalculating && areaRate > this.mAreaRateThreshold;
                     }
                     if (scaleDecision) {
                         float f = this.mStateCurrent.mSpanX;
@@ -246,7 +259,8 @@ public class ScaleGestureDetector {
             focusY = this.mAnchoredScaleStartY;
             this.mStateCurrent.mSpanX = focusX > x ? focusX - x : x - focusX;
             this.mStateCurrent.mSpanY = focusY > y ? focusY - y : y - focusY;
-            this.mStateCurrent.mLenBeforeSqrt = this.mStateCurrent.mSpanY * this.mStateCurrent.mSpanY;
+            this.mStateCurrent.mLenBeforeSqrt =
+                    this.mStateCurrent.mSpanY * this.mStateCurrent.mSpanY;
             this.mEventBeforeOrAboveStartingGestureEvent = y < focusY;
         } else {
             int count = event.getPointerCount();
@@ -280,7 +294,9 @@ public class ScaleGestureDetector {
             focusY = focusY2 / count;
             this.mStateCurrent.mSpanX = this.mStateCurrent.maxX - this.mStateCurrent.minX;
             this.mStateCurrent.mSpanY = this.mStateCurrent.maxY - this.mStateCurrent.minY;
-            this.mStateCurrent.mLenBeforeSqrt = (this.mStateCurrent.mSpanX * this.mStateCurrent.mSpanX) + (this.mStateCurrent.mSpanY * this.mStateCurrent.mSpanY);
+            this.mStateCurrent.mLenBeforeSqrt =
+                    (this.mStateCurrent.mSpanX * this.mStateCurrent.mSpanX)
+                            + (this.mStateCurrent.mSpanY * this.mStateCurrent.mSpanY);
         }
         this.mFocusX = focusX;
         this.mFocusY = focusY;
@@ -300,32 +316,40 @@ public class ScaleGestureDetector {
     public void setQuickScaleEnabled(boolean scales) {
         this.mQuickScaleEnabled = scales;
         if (this.mQuickScaleEnabled && this.mGestureDetector == null) {
-            GestureDetector.SimpleOnGestureListener gestureListener = new GestureDetector.SimpleOnGestureListener() { // from class: android.view.ScaleGestureDetector.1
-                int mQuickScaleDoubleTapY;
-                int mQuickScaleSpanSlop;
+            GestureDetector.SimpleOnGestureListener gestureListener =
+                    new GestureDetector
+                            .SimpleOnGestureListener() { // from class:
+                                                         // android.view.ScaleGestureDetector.1
+                        int mQuickScaleDoubleTapY;
+                        int mQuickScaleSpanSlop;
 
-                {
-                    this.mQuickScaleSpanSlop = ViewConfiguration.get(ScaleGestureDetector.this.mContext).getScaledTouchSlop();
-                }
+                        {
+                            this.mQuickScaleSpanSlop =
+                                    ViewConfiguration.get(ScaleGestureDetector.this.mContext)
+                                            .getScaledTouchSlop();
+                        }
 
-                @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnDoubleTapListener
-                public boolean onDoubleTap(MotionEvent e) {
-                    ScaleGestureDetector.this.mAnchoredScaleStartX = e.getX();
-                    ScaleGestureDetector.this.mAnchoredScaleStartY = e.getY();
-                    this.mQuickScaleDoubleTapY = (int) e.getY();
-                    return true;
-                }
+                        @Override // android.view.GestureDetector.SimpleOnGestureListener,
+                                  // android.view.GestureDetector.OnDoubleTapListener
+                        public boolean onDoubleTap(MotionEvent e) {
+                            ScaleGestureDetector.this.mAnchoredScaleStartX = e.getX();
+                            ScaleGestureDetector.this.mAnchoredScaleStartY = e.getY();
+                            this.mQuickScaleDoubleTapY = (int) e.getY();
+                            return true;
+                        }
 
-                @Override // android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnDoubleTapListener
-                public boolean onDoubleTapEvent(MotionEvent e) {
-                    int delta = (int) Math.abs(this.mQuickScaleDoubleTapY - e.getY());
-                    if (delta > this.mQuickScaleSpanSlop) {
-                        ScaleGestureDetector.this.mAnchoredScaleMode = 1;
-                    }
-                    return true;
-                }
-            };
-            this.mGestureDetector = new GestureDetector(this.mContext, gestureListener, this.mHandler);
+                        @Override // android.view.GestureDetector.SimpleOnGestureListener,
+                                  // android.view.GestureDetector.OnDoubleTapListener
+                        public boolean onDoubleTapEvent(MotionEvent e) {
+                            int delta = (int) Math.abs(this.mQuickScaleDoubleTapY - e.getY());
+                            if (delta > this.mQuickScaleSpanSlop) {
+                                ScaleGestureDetector.this.mAnchoredScaleMode = 1;
+                            }
+                            return true;
+                        }
+                    };
+            this.mGestureDetector =
+                    new GestureDetector(this.mContext, gestureListener, this.mHandler);
             this.mGestureDetector.setIsLongpressEnabled(false);
         }
     }
@@ -380,8 +404,19 @@ public class ScaleGestureDetector {
 
     public float getScaleFactor() {
         if (inAnchoredScaleMode()) {
-            boolean scaleUp = (this.mEventBeforeOrAboveStartingGestureEvent && this.mCurrLenBeforeSqrt < this.mPrevLenBeforeSqrt) || (!this.mEventBeforeOrAboveStartingGestureEvent && this.mCurrLenBeforeSqrt > this.mPrevLenBeforeSqrt);
-            float spanDiff = Math.abs(1.0f - ((float) Math.sqrt(this.mCurrLenBeforeSqrt / this.mPrevLenBeforeSqrt))) * 0.5f;
+            boolean scaleUp =
+                    (this.mEventBeforeOrAboveStartingGestureEvent
+                                    && this.mCurrLenBeforeSqrt < this.mPrevLenBeforeSqrt)
+                            || (!this.mEventBeforeOrAboveStartingGestureEvent
+                                    && this.mCurrLenBeforeSqrt > this.mPrevLenBeforeSqrt);
+            float spanDiff =
+                    Math.abs(
+                                    1.0f
+                                            - ((float)
+                                                    Math.sqrt(
+                                                            this.mCurrLenBeforeSqrt
+                                                                    / this.mPrevLenBeforeSqrt)))
+                            * 0.5f;
             if (this.mPrevLenBeforeSqrt <= 0.0f) {
                 return 1.0f;
             }
@@ -389,7 +424,12 @@ public class ScaleGestureDetector {
         }
         float sqrtValue = (float) Math.sqrt(this.mCurrLenBeforeSqrt / this.mPrevLenBeforeSqrt);
         if (Float.isNaN(sqrtValue)) {
-            Log.e(TAG, "getScaleFactor: Cannot getScaleFactor, sqrtValue is NaN, mCurrLenBeforeSqrt = " + this.mCurrLenBeforeSqrt + ", mPrevLenBeforeSqrt = " + this.mPrevLenBeforeSqrt);
+            Log.e(
+                    TAG,
+                    "getScaleFactor: Cannot getScaleFactor, sqrtValue is NaN, mCurrLenBeforeSqrt = "
+                            + this.mCurrLenBeforeSqrt
+                            + ", mPrevLenBeforeSqrt = "
+                            + this.mPrevLenBeforeSqrt);
             return 1.0f;
         }
         if (this.mPrevLenBeforeSqrt > 0.0f) {

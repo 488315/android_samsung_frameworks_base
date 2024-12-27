@@ -16,16 +16,13 @@ public interface ITvInputServiceCallback extends IInterface {
 
     public static class Default implements ITvInputServiceCallback {
         @Override // android.media.tv.ITvInputServiceCallback
-        public void addHardwareInput(int deviceId, TvInputInfo inputInfo) throws RemoteException {
-        }
+        public void addHardwareInput(int deviceId, TvInputInfo inputInfo) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputServiceCallback
-        public void addHdmiInput(int id, TvInputInfo inputInfo) throws RemoteException {
-        }
+        public void addHdmiInput(int id, TvInputInfo inputInfo) throws RemoteException {}
 
         @Override // android.media.tv.ITvInputServiceCallback
-        public void removeHardwareInput(String inputId) throws RemoteException {
-        }
+        public void removeHardwareInput(String inputId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -33,7 +30,7 @@ public interface ITvInputServiceCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITvInputServiceCallback {
+    public abstract static class Stub extends Binder implements ITvInputServiceCallback {
         public static final String DESCRIPTOR = "android.media.tv.ITvInputServiceCallback";
         static final int TRANSACTION_addHardwareInput = 1;
         static final int TRANSACTION_addHdmiInput = 2;
@@ -78,7 +75,8 @@ public interface ITvInputServiceCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -126,7 +124,8 @@ public interface ITvInputServiceCallback extends IInterface {
             }
 
             @Override // android.media.tv.ITvInputServiceCallback
-            public void addHardwareInput(int deviceId, TvInputInfo inputInfo) throws RemoteException {
+            public void addHardwareInput(int deviceId, TvInputInfo inputInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

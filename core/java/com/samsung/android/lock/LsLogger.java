@@ -2,7 +2,9 @@ package com.samsung.android.lock;
 
 import android.util.Log;
 import android.util.SparseArray;
+
 import com.android.internal.util.ArrayUtils;
+
 import java.util.LinkedList;
 import java.util.Queue;
 

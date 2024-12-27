@@ -5,27 +5,32 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.view.WindowManager;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class AccessibilityWindowAttributes implements Parcelable {
-    public static final Parcelable.Creator<AccessibilityWindowAttributes> CREATOR = new Parcelable.Creator<AccessibilityWindowAttributes>() { // from class: android.view.accessibility.AccessibilityWindowAttributes.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AccessibilityWindowAttributes createFromParcel(Parcel in) {
-            return new AccessibilityWindowAttributes(in);
-        }
+    public static final Parcelable.Creator<AccessibilityWindowAttributes> CREATOR =
+            new Parcelable.Creator<
+                    AccessibilityWindowAttributes>() { // from class:
+                                                       // android.view.accessibility.AccessibilityWindowAttributes.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AccessibilityWindowAttributes createFromParcel(Parcel in) {
+                    return new AccessibilityWindowAttributes(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AccessibilityWindowAttributes[] newArray(int size) {
-            return new AccessibilityWindowAttributes[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AccessibilityWindowAttributes[] newArray(int size) {
+                    return new AccessibilityWindowAttributes[size];
+                }
+            };
     private final LocaleList mLocales;
     private final CharSequence mWindowTitle;
 
-    public AccessibilityWindowAttributes(WindowManager.LayoutParams layoutParams, LocaleList locales) {
+    public AccessibilityWindowAttributes(
+            WindowManager.LayoutParams layoutParams, LocaleList locales) {
         this.mWindowTitle = populateWindowTitle(layoutParams);
         this.mLocales = locales;
     }
@@ -69,7 +74,8 @@ public final class AccessibilityWindowAttributes implements Parcelable {
             return false;
         }
         AccessibilityWindowAttributes that = (AccessibilityWindowAttributes) o;
-        return TextUtils.equals(this.mWindowTitle, that.mWindowTitle) && Objects.equals(this.mLocales, that.mLocales);
+        return TextUtils.equals(this.mWindowTitle, that.mWindowTitle)
+                && Objects.equals(this.mLocales, that.mLocales);
     }
 
     public int hashCode() {
@@ -88,6 +94,10 @@ public final class AccessibilityWindowAttributes implements Parcelable {
     }
 
     public String toString() {
-        return "AccessibilityWindowAttributes{mAccessibilityWindowTitle=" + ((Object) this.mWindowTitle) + "mLocales=" + this.mLocales + '}';
+        return "AccessibilityWindowAttributes{mAccessibilityWindowTitle="
+                + ((Object) this.mWindowTitle)
+                + "mLocales="
+                + this.mLocales
+                + '}';
     }
 }

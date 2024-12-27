@@ -1,7 +1,6 @@
 package android.os;
 
 import android.content.Context;
-import android.os.IUpdateLock;
 import android.util.Log;
 
 /* loaded from: classes3.dex */
@@ -20,7 +19,9 @@ public class UpdateLock {
 
     private static void checkService() {
         if (sService == null) {
-            sService = IUpdateLock.Stub.asInterface(ServiceManager.getService(Context.UPDATE_LOCK_SERVICE));
+            sService =
+                    IUpdateLock.Stub.asInterface(
+                            ServiceManager.getService(Context.UPDATE_LOCK_SERVICE));
         }
     }
 
@@ -73,9 +74,9 @@ public class UpdateLock {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:4:0x000a, code lost:
-    
-        if (r0 == 0) goto L6;
-     */
+
+       if (r0 == 0) goto L6;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -114,7 +115,8 @@ public class UpdateLock {
             r0.<init>(r1)
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.UpdateLock.releaseLocked():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.os.UpdateLock.releaseLocked():void");
     }
 
     protected void finalize() throws Throwable {

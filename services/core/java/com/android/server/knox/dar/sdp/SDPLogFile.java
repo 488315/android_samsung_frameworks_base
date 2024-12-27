@@ -2,6 +2,7 @@ package com.android.server.knox.dar.sdp;
 
 import android.os.SystemProperties;
 import android.util.Log;
+
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.charset.Charset;
@@ -47,7 +48,8 @@ public abstract class SDPLogFile {
             check(randomAccessFile);
             bArr = null;
         } catch (SecurityException e) {
-            byte[] bytes = SDPLogUtil.makeDebugMessage(e.getMessage()).getBytes(Charset.forName("UTF-8"));
+            byte[] bytes =
+                    SDPLogUtil.makeDebugMessage(e.getMessage()).getBytes(Charset.forName("UTF-8"));
             String str = "Reset reason : " + e.getMessage();
             if (DEBUG && str != null) {
                 Log.d("SDPLogFile", str);

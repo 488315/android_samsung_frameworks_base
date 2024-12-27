@@ -2,6 +2,7 @@ package com.samsung.ucm.ucmservice;
 
 import android.net.resolv.aidl.IDnsResolverUnsolicitedEventListener;
 import android.util.Log;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -10,7 +11,9 @@ import java.io.IOException;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public abstract class EFSProperties {
-    public static final String[] STORAGE_TYPES = {"eSE", "SIM", "SD", "eSE1", "SIM1", "SD1", "eSE2", "SIM2", "SD2", "ETC"};
+    public static final String[] STORAGE_TYPES = {
+        "eSE", "SIM", "SD", "eSE1", "SIM1", "SD1", "eSE2", "SIM2", "SD2", "ETC"
+    };
     public static final String[] SCP_TYPES = {"NONE", "SCP11a", "SCP11b", "SCPCustom"};
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -84,7 +87,8 @@ public abstract class EFSProperties {
         log("deletePluginPackageNameFile");
         boolean deleteFile2 = deleteFile(new File("/efs/sec_efs", "ucm_applet_pluginpackagename"));
         log("deletePluginSigHash");
-        boolean deleteFile3 = deleteFile(new File("/efs/sec_efs", "ucm_applet_plugin_hash_of_signature"));
+        boolean deleteFile3 =
+                deleteFile(new File("/efs/sec_efs", "ucm_applet_plugin_hash_of_signature"));
         log("deleteLccmScript: " + deleteFile);
         log("deletePluginPackageNameFileResult: " + deleteFile2);
         log("deletePluginSigHashResult: " + deleteFile3);
@@ -133,7 +137,12 @@ public abstract class EFSProperties {
                     oDEProperties.AID = bArr;
                     int read3 = fileInputStream.read(bArr, 0, read2);
                     if (read3 != read2) {
-                        Log.d("EFSProperties", "read side mismatched, lengthAID : " + read2 + ", readByteSize : " + read3);
+                        Log.d(
+                                "EFSProperties",
+                                "read side mismatched, lengthAID : "
+                                        + read2
+                                        + ", readByteSize : "
+                                        + read3);
                     }
                 }
                 oDEProperties.storageType = fileInputStream.read();
@@ -151,7 +160,12 @@ public abstract class EFSProperties {
                     oDEProperties.csName = bArr2;
                     int read5 = fileInputStream.read(bArr2, 0, read4);
                     if (read5 != read4) {
-                        Log.d("EFSProperties", "read side mismatched, lengthCsName : " + read4 + ", readByteSize : " + read5);
+                        Log.d(
+                                "EFSProperties",
+                                "read side mismatched, lengthCsName : "
+                                        + read4
+                                        + ", readByteSize : "
+                                        + read5);
                     }
                 }
                 oDEProperties.CertAdminID = fileInputStream.read();
@@ -162,7 +176,12 @@ public abstract class EFSProperties {
                     oDEProperties.CertAlias = bArr3;
                     int read7 = fileInputStream.read(bArr3, 0, read6);
                     if (read7 != read6) {
-                        Log.d("EFSProperties", "read side mismatched, lenCertAlias : " + read6 + ", readByteSize : " + read7);
+                        Log.d(
+                                "EFSProperties",
+                                "read side mismatched, lenCertAlias : "
+                                        + read6
+                                        + ", readByteSize : "
+                                        + read7);
                     }
                 }
                 int read8 = fileInputStream.read();
@@ -171,7 +190,12 @@ public abstract class EFSProperties {
                     oDEProperties.CertLocation = bArr4;
                     int read9 = fileInputStream.read(bArr4, 0, read8);
                     if (read9 != read8) {
-                        Log.d("EFSProperties", "read side mismatched, lenCertLocation : " + read8 + ", readByteSize : " + read9);
+                        Log.d(
+                                "EFSProperties",
+                                "read side mismatched, lenCertLocation : "
+                                        + read8
+                                        + ", readByteSize : "
+                                        + read9);
                     }
                 }
                 int read10 = fileInputStream.read();
@@ -180,7 +204,12 @@ public abstract class EFSProperties {
                     oDEProperties.cofiguratorPkg = bArr5;
                     int read11 = fileInputStream.read(bArr5, 0, read10);
                     if (read11 != read10) {
-                        Log.d("EFSProperties", "read side mismatched, lenConfiguratorPkgLen : " + read10 + ", readByteSize : " + read11);
+                        Log.d(
+                                "EFSProperties",
+                                "read side mismatched, lenConfiguratorPkgLen : "
+                                        + read10
+                                        + ", readByteSize : "
+                                        + read11);
                     }
                 }
                 int read12 = fileInputStream.read();
@@ -189,20 +218,35 @@ public abstract class EFSProperties {
                     oDEProperties.cofiguratorSign = bArr6;
                     int read13 = fileInputStream.read(bArr6, 0, read12);
                     if (read13 != read12) {
-                        Log.d("EFSProperties", "read side mismatched, lenConfiguratorDigestLen : " + read12 + ", readByteSize : " + read13);
+                        Log.d(
+                                "EFSProperties",
+                                "read side mismatched, lenConfiguratorDigestLen : "
+                                        + read12
+                                        + ", readByteSize : "
+                                        + read13);
                     }
                 }
                 byte[] bArr7 = new byte[2];
                 if (fileInputStream.read(bArr7, 0, 2) < 2) {
                     throw new IOException();
                 }
-                int i = ((bArr7[0] & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT) << 8) | (bArr7[1] & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
+                int i =
+                        ((bArr7[0] & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT)
+                                        << 8)
+                                | (bArr7[1]
+                                        & IDnsResolverUnsolicitedEventListener
+                                                .DNS_HEALTH_RESULT_TIMEOUT);
                 if (i != 0) {
                     byte[] bArr8 = new byte[i];
                     oDEProperties.scpCreationParam = bArr8;
                     int read14 = fileInputStream.read(bArr8, 0, i);
                     if (read14 != i) {
-                        Log.d("EFSProperties", "read side mismatched, lenScpParamLen : " + i + ", readByteSize : " + read14);
+                        Log.d(
+                                "EFSProperties",
+                                "read side mismatched, lenScpParamLen : "
+                                        + i
+                                        + ", readByteSize : "
+                                        + read14);
                     }
                 }
                 int read15 = fileInputStream.read();
@@ -211,7 +255,12 @@ public abstract class EFSProperties {
                     oDEProperties.pluginSignatureHash = bArr9;
                     int read16 = fileInputStream.read(bArr9, 0, read15);
                     if (read16 != read15) {
-                        Log.d("EFSProperties", "read side mismatched, lenPluginSignatureHash : " + read15 + ", readByteSize : " + read16);
+                        Log.d(
+                                "EFSProperties",
+                                "read side mismatched, lenPluginSignatureHash : "
+                                        + read15
+                                        + ", readByteSize : "
+                                        + read16);
                     }
                 }
                 int read17 = fileInputStream.read();
@@ -224,7 +273,12 @@ public abstract class EFSProperties {
                         oDEProperties.defaultLanguage = bArr10;
                         int read18 = fileInputStream.read(bArr10, 0, read);
                         if (read18 != read) {
-                            Log.d("EFSProperties", "read side mismatched, lenDefaultLanguage : " + read + ", readByteSize : " + read18);
+                            Log.d(
+                                    "EFSProperties",
+                                    "read side mismatched, lenDefaultLanguage : "
+                                            + read
+                                            + ", readByteSize : "
+                                            + read18);
                         }
                     }
                 }
@@ -360,6 +414,8 @@ public abstract class EFSProperties {
             Method dump skipped, instructions count: 346
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.ucm.ucmservice.EFSProperties.saveODEConfig(com.samsung.ucm.ucmservice.EFSProperties$ODEProperties):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.ucm.ucmservice.EFSProperties.saveODEConfig(com.samsung.ucm.ucmservice.EFSProperties$ODEProperties):boolean");
     }
 }

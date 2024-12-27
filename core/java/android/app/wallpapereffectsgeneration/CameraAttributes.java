@@ -7,19 +7,21 @@ import android.os.Parcelable;
 @SystemApi
 /* loaded from: classes.dex */
 public final class CameraAttributes implements Parcelable {
-    public static final Parcelable.Creator<CameraAttributes> CREATOR = new Parcelable.Creator<CameraAttributes>() { // from class: android.app.wallpapereffectsgeneration.CameraAttributes.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CameraAttributes createFromParcel(Parcel in) {
-            return new CameraAttributes(in);
-        }
+    public static final Parcelable.Creator<CameraAttributes> CREATOR =
+            new Parcelable.Creator<CameraAttributes>() { // from class:
+                // android.app.wallpapereffectsgeneration.CameraAttributes.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CameraAttributes createFromParcel(Parcel in) {
+                    return new CameraAttributes(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CameraAttributes[] newArray(int size) {
-            return new CameraAttributes[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CameraAttributes[] newArray(int size) {
+                    return new CameraAttributes[size];
+                }
+            };
     private float[] mAnchorPointInOutputUvSpace;
     private float[] mAnchorPointInWorldSpace;
     private float mCameraOrbitPitchDegrees;
@@ -40,7 +42,15 @@ public final class CameraAttributes implements Parcelable {
         this.mAnchorPointInOutputUvSpace = in.createFloatArray();
     }
 
-    private CameraAttributes(float[] anchorPointInWorldSpace, float[] anchorPointInOutputUvSpace, float cameraOrbitYawDegrees, float cameraOrbitPitchDegrees, float dollyDistanceInWorldSpace, float verticalFovDegrees, float frustumNearInWorldSpace, float frustumFarInWorldSpace) {
+    private CameraAttributes(
+            float[] anchorPointInWorldSpace,
+            float[] anchorPointInOutputUvSpace,
+            float cameraOrbitYawDegrees,
+            float cameraOrbitPitchDegrees,
+            float dollyDistanceInWorldSpace,
+            float verticalFovDegrees,
+            float frustumNearInWorldSpace,
+            float frustumFarInWorldSpace) {
         this.mAnchorPointInWorldSpace = anchorPointInWorldSpace;
         this.mAnchorPointInOutputUvSpace = anchorPointInOutputUvSpace;
         this.mCameraOrbitYawDegrees = cameraOrbitYawDegrees;
@@ -148,7 +158,15 @@ public final class CameraAttributes implements Parcelable {
         }
 
         public CameraAttributes build() {
-            return new CameraAttributes(this.mAnchorPointInWorldSpace, this.mAnchorPointInOutputUvSpace, this.mCameraOrbitYawDegrees, this.mCameraOrbitPitchDegrees, this.mDollyDistanceInWorldSpace, this.mVerticalFovDegrees, this.mFrustumNearInWorldSpace, this.mFrustumFarInWorldSpace);
+            return new CameraAttributes(
+                    this.mAnchorPointInWorldSpace,
+                    this.mAnchorPointInOutputUvSpace,
+                    this.mCameraOrbitYawDegrees,
+                    this.mCameraOrbitPitchDegrees,
+                    this.mDollyDistanceInWorldSpace,
+                    this.mVerticalFovDegrees,
+                    this.mFrustumNearInWorldSpace,
+                    this.mFrustumFarInWorldSpace);
         }
     }
 }

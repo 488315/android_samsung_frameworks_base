@@ -1,6 +1,7 @@
 package com.samsung.android.sdk.scs.base.feature;
 
 import android.util.Log;
+
 import java.util.HashMap;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -41,6 +42,8 @@ public abstract class FeatureStatusCache {
 
     public static void setStatus(int i) {
         statusMap.put("FEATURE_TEXT_GET_DOCUMENT_CATEGORY", Integer.valueOf(i));
-        Log.i(com.samsung.android.sdk.scs.base.utils.Log.concatPrefixTag("ScsApi@FeatureHolder"), "setStatus() : FEATURE_TEXT_GET_DOCUMENT_CATEGORY : " + i);
+        Log.i(
+                com.samsung.android.sdk.scs.base.utils.Log.concatPrefixTag("ScsApi@FeatureHolder"),
+                "setStatus() : FEATURE_TEXT_GET_DOCUMENT_CATEGORY : " + i);
     }
 }

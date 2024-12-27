@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface IRotationChangeListener extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.remoteappmode.IRotationChangeListener";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.remoteappmode.IRotationChangeListener";
 
     void onRotationChanged(int i, int i2) throws RemoteException;
 
     public static class Default implements IRotationChangeListener {
         @Override // com.samsung.android.remoteappmode.IRotationChangeListener
-        public void onRotationChanged(int displayId, int rotation) throws RemoteException {
-        }
+        public void onRotationChanged(int displayId, int rotation) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IRotationChangeListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRotationChangeListener {
+    public abstract static class Stub extends Binder implements IRotationChangeListener {
         static final int TRANSACTION_onRotationChanged = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface IRotationChangeListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRotationChangeListener.DESCRIPTOR);
             }

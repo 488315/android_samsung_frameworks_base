@@ -119,7 +119,8 @@ public final class FieldArray implements Cloneable {
         if (size() != other.size()) {
             return false;
         }
-        return arrayEquals(this.mFieldNumbers, other.mFieldNumbers, this.mSize) && arrayEquals(this.mData, other.mData, this.mSize);
+        return arrayEquals(this.mFieldNumbers, other.mFieldNumbers, this.mSize)
+                && arrayEquals(this.mData, other.mData, this.mSize);
     }
 
     public int hashCode() {

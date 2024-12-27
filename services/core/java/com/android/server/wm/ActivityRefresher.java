@@ -2,6 +2,7 @@ package com.android.server.wm;
 
 import android.content.res.Configuration;
 import android.os.Handler;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -13,7 +14,10 @@ public final class ActivityRefresher {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface Evaluator {
-        boolean shouldRefreshActivity(ActivityRecord activityRecord, Configuration configuration, Configuration configuration2);
+        boolean shouldRefreshActivity(
+                ActivityRecord activityRecord,
+                Configuration configuration,
+                Configuration configuration2);
     }
 
     public ActivityRefresher(WindowManagerService windowManagerService, Handler handler) {

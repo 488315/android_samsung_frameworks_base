@@ -3,6 +3,7 @@ package com.android.internal.util;
 import android.os.SystemClock;
 import android.util.SparseBooleanArray;
 import android.util.SparseLongArray;
+
 import java.io.PrintWriter;
 import java.util.function.Supplier;
 
@@ -20,20 +21,22 @@ public class ProviderAccessStats {
     private final SparseLongArray mUpdateInBatchStats = new SparseLongArray(0);
     private final SparseLongArray mDeleteInBatchStats = new SparseLongArray(0);
     private final SparseLongArray mOperationDurationMillis = new SparseLongArray(16);
-    private final ThreadLocal<PerThreadData> mThreadLocal = ThreadLocal.withInitial(new Supplier() { // from class: com.android.internal.util.ProviderAccessStats$$ExternalSyntheticLambda0
-        @Override // java.util.function.Supplier
-        public final Object get() {
-            return ProviderAccessStats.lambda$new$0();
-        }
-    });
+    private final ThreadLocal<PerThreadData> mThreadLocal =
+            ThreadLocal.withInitial(
+                    new Supplier() { // from class:
+                                     // com.android.internal.util.ProviderAccessStats$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Supplier
+                        public final Object get() {
+                            return ProviderAccessStats.lambda$new$0();
+                        }
+                    });
 
     /* JADX INFO: Access modifiers changed from: private */
     static class PerThreadData {
         public int nestCount;
         public long startUptimeMillis;
 
-        private PerThreadData() {
-        }
+        private PerThreadData() {}
     }
 
     static /* synthetic */ PerThreadData lambda$new$0() {
@@ -52,7 +55,11 @@ public class ProviderAccessStats {
         }
     }
 
-    private void incrementStats(int callingUid, boolean inBatch, SparseLongArray statsNonBatch, SparseLongArray statsInBatch) {
+    private void incrementStats(
+            int callingUid,
+            boolean inBatch,
+            SparseLongArray statsNonBatch,
+            SparseLongArray statsInBatch) {
         incrementStats(callingUid, inBatch ? statsInBatch : statsNonBatch);
     }
 
@@ -82,7 +89,8 @@ public class ProviderAccessStats {
         if (data.nestCount == 0) {
             long duration = Math.max(1L, SystemClock.uptimeMillis() - data.startUptimeMillis);
             synchronized (this.mLock) {
-                this.mOperationDurationMillis.put(callingUid, this.mOperationDurationMillis.get(callingUid) + duration);
+                this.mOperationDurationMillis.put(
+                        callingUid, this.mOperationDurationMillis.get(callingUid) + duration);
             }
         }
     }
@@ -97,12 +105,28 @@ public class ProviderAccessStats {
             pw.print(prefix);
             pw.println("Client activities:");
             pw.print(prefix);
-            pw.println("  UID        Query  Insert Update Delete   Batch Insert Update Delete          Sec");
+            pw.println(
+                    "  UID        Query  Insert Update Delete   Batch Insert Update Delete         "
+                        + " Sec");
             int i = 0;
             while (i < providerAccessStats.mAllCallingUids.size()) {
                 int uid = providerAccessStats.mAllCallingUids.keyAt(i);
                 pw.print(prefix);
-                pw.println(String.format("  %-9d %6d  %6d %6d %6d  %6d %6d %6d %6d %12.3f", Integer.valueOf(uid), Long.valueOf(providerAccessStats.mQueryStats.get(uid)), Long.valueOf(providerAccessStats.mInsertStats.get(uid)), Long.valueOf(providerAccessStats.mUpdateStats.get(uid)), Long.valueOf(providerAccessStats.mDeleteStats.get(uid)), Long.valueOf(providerAccessStats.mBatchStats.get(uid)), Long.valueOf(providerAccessStats.mInsertInBatchStats.get(uid)), Long.valueOf(providerAccessStats.mUpdateInBatchStats.get(uid)), Long.valueOf(providerAccessStats.mDeleteInBatchStats.get(uid)), Double.valueOf(providerAccessStats.mOperationDurationMillis.get(uid) / 1000.0d)));
+                pw.println(
+                        String.format(
+                                "  %-9d %6d  %6d %6d %6d  %6d %6d %6d %6d %12.3f",
+                                Integer.valueOf(uid),
+                                Long.valueOf(providerAccessStats.mQueryStats.get(uid)),
+                                Long.valueOf(providerAccessStats.mInsertStats.get(uid)),
+                                Long.valueOf(providerAccessStats.mUpdateStats.get(uid)),
+                                Long.valueOf(providerAccessStats.mDeleteStats.get(uid)),
+                                Long.valueOf(providerAccessStats.mBatchStats.get(uid)),
+                                Long.valueOf(providerAccessStats.mInsertInBatchStats.get(uid)),
+                                Long.valueOf(providerAccessStats.mUpdateInBatchStats.get(uid)),
+                                Long.valueOf(providerAccessStats.mDeleteInBatchStats.get(uid)),
+                                Double.valueOf(
+                                        providerAccessStats.mOperationDurationMillis.get(uid)
+                                                / 1000.0d)));
                 i++;
                 providerAccessStats = this;
             }

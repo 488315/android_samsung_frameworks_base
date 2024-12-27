@@ -2,6 +2,7 @@ package com.android.server.wm;
 
 import android.service.vr.IPersistentVrStateCallbacks;
 import android.util.Slog;
+
 import com.android.server.am.ActivityManagerService;
 import com.android.server.vr.VrManagerService;
 
@@ -14,26 +15,28 @@ public final class VrController {
     public VrManagerService.LocalService mVrService;
     public volatile int mVrState = 0;
     public int mVrRenderThreadTid = 0;
-    public final AnonymousClass1 mPersistentVrModeListener = new IPersistentVrStateCallbacks.Stub() { // from class: com.android.server.wm.VrController.1
-        public final void onPersistentVrStateChanged(boolean z) {
-            synchronized (VrController.this.mGlobalAmLock) {
-                try {
-                    if (z) {
-                        VrController.this.setVrRenderThreadLocked(0, 3, true);
-                        VrController.this.mVrState |= 2;
-                    } else {
-                        VrController vrController = VrController.this;
-                        if ((vrController.mVrState & 2) != 0) {
-                            vrController.updateVrRenderThreadLocked(0, true);
+    public final AnonymousClass1 mPersistentVrModeListener =
+            new IPersistentVrStateCallbacks
+                    .Stub() { // from class: com.android.server.wm.VrController.1
+                public final void onPersistentVrStateChanged(boolean z) {
+                    synchronized (VrController.this.mGlobalAmLock) {
+                        try {
+                            if (z) {
+                                VrController.this.setVrRenderThreadLocked(0, 3, true);
+                                VrController.this.mVrState |= 2;
+                            } else {
+                                VrController vrController = VrController.this;
+                                if ((vrController.mVrState & 2) != 0) {
+                                    vrController.updateVrRenderThreadLocked(0, true);
+                                }
+                                VrController.this.mVrState &= -3;
+                            }
+                        } catch (Throwable th) {
+                            throw th;
                         }
-                        VrController.this.mVrState &= -3;
                     }
-                } catch (Throwable th) {
-                    throw th;
                 }
-            }
-        }
-    };
+            };
 
     /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.wm.VrController$1] */
     public VrController(Object obj) {
@@ -47,13 +50,24 @@ public final class VrController {
             return updateVrRenderThreadLocked(i, z);
         }
         if (!z) {
-            Slog.w("VrController", "Failed to set VR thread, ".concat(!z2 ? "system not in VR mode." : z3 ? "system in persistent VR mode." : "caller is not the current top application."));
+            Slog.w(
+                    "VrController",
+                    "Failed to set VR thread, "
+                            .concat(
+                                    !z2
+                                            ? "system not in VR mode."
+                                            : z3
+                                                    ? "system in persistent VR mode."
+                                                    : "caller is not the current top"
+                                                          + " application."));
         }
         return this.mVrRenderThreadTid;
     }
 
     public final String toString() {
-        return String.format("[VrState=0x%x,VrRenderThreadTid=%d]", Integer.valueOf(this.mVrState), Integer.valueOf(this.mVrRenderThreadTid));
+        return String.format(
+                "[VrState=0x%x,VrRenderThreadTid=%d]",
+                Integer.valueOf(this.mVrState), Integer.valueOf(this.mVrRenderThreadTid));
     }
 
     public final int updateVrRenderThreadLocked(int i, boolean z) {

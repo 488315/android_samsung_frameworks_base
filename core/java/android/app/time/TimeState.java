@@ -4,25 +4,27 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.ShellCommand;
+
 import java.io.PrintWriter;
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class TimeState implements Parcelable {
-    public static final Parcelable.Creator<TimeState> CREATOR = new Parcelable.Creator<TimeState>() { // from class: android.app.time.TimeState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TimeState createFromParcel(Parcel in) {
-            return TimeState.createFromParcel(in);
-        }
+    public static final Parcelable.Creator<TimeState> CREATOR =
+            new Parcelable.Creator<TimeState>() { // from class: android.app.time.TimeState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TimeState createFromParcel(Parcel in) {
+                    return TimeState.createFromParcel(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TimeState[] newArray(int size) {
-            return new TimeState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TimeState[] newArray(int size) {
+                    return new TimeState[size];
+                }
+            };
     private final UnixEpochTime mUnixEpochTime;
     private final boolean mUserShouldConfirmTime;
 
@@ -81,13 +83,16 @@ public final class TimeState implements Parcelable {
                 }
                 switch (c) {
                     case 0:
-                        elapsedRealtimeMillis = Long.valueOf(Long.parseLong(cmd.getNextArgRequired()));
+                        elapsedRealtimeMillis =
+                                Long.valueOf(Long.parseLong(cmd.getNextArgRequired()));
                         break;
                     case 1:
-                        unixEpochTimeMillis = Long.valueOf(Long.parseLong(cmd.getNextArgRequired()));
+                        unixEpochTimeMillis =
+                                Long.valueOf(Long.parseLong(cmd.getNextArgRequired()));
                         break;
                     case 2:
-                        userShouldConfirmTime = Boolean.valueOf(Boolean.parseBoolean(cmd.getNextArgRequired()));
+                        userShouldConfirmTime =
+                                Boolean.valueOf(Boolean.parseBoolean(cmd.getNextArgRequired()));
                         break;
                     default:
                         throw new IllegalArgumentException("Unknown option: " + opt);
@@ -102,7 +107,9 @@ public final class TimeState implements Parcelable {
                 if (userShouldConfirmTime == null) {
                     throw new IllegalArgumentException("No userShouldConfirmTime specified.");
                 }
-                UnixEpochTime unixEpochTime = new UnixEpochTime(elapsedRealtimeMillis.longValue(), unixEpochTimeMillis.longValue());
+                UnixEpochTime unixEpochTime =
+                        new UnixEpochTime(
+                                elapsedRealtimeMillis.longValue(), unixEpochTimeMillis.longValue());
                 return new TimeState(unixEpochTime, userShouldConfirmTime.booleanValue());
             }
         }
@@ -138,7 +145,8 @@ public final class TimeState implements Parcelable {
             return false;
         }
         TimeState that = (TimeState) o;
-        if (Objects.equals(this.mUnixEpochTime, that.mUnixEpochTime) && this.mUserShouldConfirmTime == that.mUserShouldConfirmTime) {
+        if (Objects.equals(this.mUnixEpochTime, that.mUnixEpochTime)
+                && this.mUserShouldConfirmTime == that.mUserShouldConfirmTime) {
             return true;
         }
         return false;
@@ -149,6 +157,10 @@ public final class TimeState implements Parcelable {
     }
 
     public String toString() {
-        return "TimeState{mUnixEpochTime=" + this.mUnixEpochTime + ", mUserShouldConfirmTime=" + this.mUserShouldConfirmTime + '}';
+        return "TimeState{mUnixEpochTime="
+                + this.mUnixEpochTime
+                + ", mUserShouldConfirmTime="
+                + this.mUserShouldConfirmTime
+                + '}';
     }
 }

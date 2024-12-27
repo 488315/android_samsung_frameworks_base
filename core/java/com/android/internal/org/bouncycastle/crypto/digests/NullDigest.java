@@ -2,6 +2,7 @@ package com.android.internal.org.bouncycastle.crypto.digests;
 
 import com.android.internal.org.bouncycastle.crypto.Digest;
 import com.android.internal.org.bouncycastle.util.Arrays;
+
 import java.io.ByteArrayOutputStream;
 
 /* loaded from: classes5.dex */
@@ -42,8 +43,7 @@ public class NullDigest implements Digest {
     }
 
     private static class OpenByteArrayOutputStream extends ByteArrayOutputStream {
-        private OpenByteArrayOutputStream() {
-        }
+        private OpenByteArrayOutputStream() {}
 
         @Override // java.io.ByteArrayOutputStream
         public void reset() {

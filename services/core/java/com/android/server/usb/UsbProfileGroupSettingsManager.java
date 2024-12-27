@@ -30,6 +30,7 @@ import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.util.Xml;
 import android.util.sysfwutil.Slog;
+
 import com.android.internal.app.IntentForwarderActivity;
 import com.android.internal.content.PackageMonitor;
 import com.android.internal.util.XmlUtils;
@@ -37,10 +38,16 @@ import com.android.internal.util.dump.DualDumpOutputStream;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.pm.PersonaServiceHelper;
-import com.android.server.usb.UsbProfileGroupSettingsManager;
 import com.android.server.utils.EventLogger;
+
+import libcore.io.IoUtils;
+
 import com.samsung.android.knoxguard.service.SystemIntentProcessor;
 import com.samsung.android.rune.CoreRune;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -53,15 +60,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import libcore.io.IoUtils;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class UsbProfileGroupSettingsManager {
     public static EventLogger sEventLogger;
-    public static final File sSingleUserSettingsFile = new File("/data/system/usb_device_manager.xml");
+    public static final File sSingleUserSettingsFile =
+            new File("/data/system/usb_device_manager.xml");
     public final Context mContext;
     public final boolean mDisablePermissionDialogs;
     public boolean mIsWriteSettingsScheduled;
@@ -80,28 +85,41 @@ public final class UsbProfileGroupSettingsManager {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyPackageMonitor extends PackageMonitor {
-        public MyPackageMonitor() {
-        }
+        public MyPackageMonitor() {}
 
         public final void onPackageAdded(String str, int i) {
-            UsbProfileGroupSettingsManager usbProfileGroupSettingsManager = UsbProfileGroupSettingsManager.this;
-            if (usbProfileGroupSettingsManager.mUserManager.isSameProfileGroup(usbProfileGroupSettingsManager.mParentUser.getIdentifier(), UserHandle.getUserId(i))) {
-                UsbProfileGroupSettingsManager usbProfileGroupSettingsManager2 = UsbProfileGroupSettingsManager.this;
+            UsbProfileGroupSettingsManager usbProfileGroupSettingsManager =
+                    UsbProfileGroupSettingsManager.this;
+            if (usbProfileGroupSettingsManager.mUserManager.isSameProfileGroup(
+                    usbProfileGroupSettingsManager.mParentUser.getIdentifier(),
+                    UserHandle.getUserId(i))) {
+                UsbProfileGroupSettingsManager usbProfileGroupSettingsManager2 =
+                        UsbProfileGroupSettingsManager.this;
                 UserHandle userHandleForUid = UserHandle.getUserHandleForUid(i);
                 UserPackage userPackage = new UserPackage(str, userHandleForUid);
                 synchronized (usbProfileGroupSettingsManager2.mLock) {
                     try {
                         try {
-                            ActivityInfo[] activityInfoArr = usbProfileGroupSettingsManager2.mPackageManager.getPackageInfoAsUser(str, 129, userHandleForUid.getIdentifier()).activities;
+                            ActivityInfo[] activityInfoArr =
+                                    usbProfileGroupSettingsManager2.mPackageManager
+                                            .getPackageInfoAsUser(
+                                                    str, 129, userHandleForUid.getIdentifier())
+                                            .activities;
                             if (activityInfoArr == null) {
                                 return;
                             }
                             boolean z = false;
                             for (int i2 = 0; i2 < activityInfoArr.length; i2++) {
-                                if (usbProfileGroupSettingsManager2.handlePackageAddedLocked(userPackage, activityInfoArr[i2], "android.hardware.usb.action.USB_DEVICE_ATTACHED")) {
+                                if (usbProfileGroupSettingsManager2.handlePackageAddedLocked(
+                                        userPackage,
+                                        activityInfoArr[i2],
+                                        "android.hardware.usb.action.USB_DEVICE_ATTACHED")) {
                                     z = true;
                                 }
-                                if (usbProfileGroupSettingsManager2.handlePackageAddedLocked(userPackage, activityInfoArr[i2], "android.hardware.usb.action.USB_ACCESSORY_ATTACHED")) {
+                                if (usbProfileGroupSettingsManager2.handlePackageAddedLocked(
+                                        userPackage,
+                                        activityInfoArr[i2],
+                                        "android.hardware.usb.action.USB_ACCESSORY_ATTACHED")) {
                                     z = true;
                                 }
                             }
@@ -109,7 +127,10 @@ public final class UsbProfileGroupSettingsManager {
                                 usbProfileGroupSettingsManager2.scheduleWriteSettingsLocked();
                             }
                         } catch (PackageManager.NameNotFoundException e) {
-                            Slog.e("UsbProfileGroupSettingsManager", "handlePackageUpdate could not find package " + userPackage, e);
+                            Slog.e(
+                                    "UsbProfileGroupSettingsManager",
+                                    "handlePackageUpdate could not find package " + userPackage,
+                                    e);
                         }
                     } finally {
                     }
@@ -118,9 +139,13 @@ public final class UsbProfileGroupSettingsManager {
         }
 
         public final void onPackageRemoved(String str, int i) {
-            UsbProfileGroupSettingsManager usbProfileGroupSettingsManager = UsbProfileGroupSettingsManager.this;
-            if (usbProfileGroupSettingsManager.mUserManager.isSameProfileGroup(usbProfileGroupSettingsManager.mParentUser.getIdentifier(), UserHandle.getUserId(i))) {
-                UsbProfileGroupSettingsManager.this.clearDefaults(str, UserHandle.getUserHandleForUid(i));
+            UsbProfileGroupSettingsManager usbProfileGroupSettingsManager =
+                    UsbProfileGroupSettingsManager.this;
+            if (usbProfileGroupSettingsManager.mUserManager.isSameProfileGroup(
+                    usbProfileGroupSettingsManager.mParentUser.getIdentifier(),
+                    UserHandle.getUserId(i))) {
+                UsbProfileGroupSettingsManager.this.clearDefaults(
+                        str, UserHandle.getUserHandleForUid(i));
             }
         }
     }
@@ -140,7 +165,8 @@ public final class UsbProfileGroupSettingsManager {
                 return false;
             }
             UserPackage userPackage = (UserPackage) obj;
-            return this.user.equals(userPackage.user) && this.packageName.equals(userPackage.packageName);
+            return this.user.equals(userPackage.user)
+                    && this.packageName.equals(userPackage.packageName);
         }
 
         public final int hashCode() {
@@ -152,7 +178,11 @@ public final class UsbProfileGroupSettingsManager {
         }
     }
 
-    public UsbProfileGroupSettingsManager(Context context, UserHandle userHandle, UsbSettingsManager usbSettingsManager, UsbHandlerManager usbHandlerManager) {
+    public UsbProfileGroupSettingsManager(
+            Context context,
+            UserHandle userHandle,
+            UsbSettingsManager usbSettingsManager,
+            UsbHandlerManager usbHandlerManager) {
         Object obj = new Object();
         this.mLock = obj;
         MyPackageMonitor myPackageMonitor = new MyPackageMonitor();
@@ -165,8 +195,14 @@ public final class UsbProfileGroupSettingsManager {
             this.mSettingsManager = usbSettingsManager;
             this.mUserManager = (UserManager) context.getSystemService("user");
             this.mParentUser = userHandle;
-            this.mSettingsFile = new AtomicFile(new File(Environment.getUserSystemDirectory(userHandle.getIdentifier()), "usb_device_manager.xml"), "usb-state");
-            this.mDisablePermissionDialogs = context.getResources().getBoolean(R.bool.config_displayColorFadeDisabled);
+            this.mSettingsFile =
+                    new AtomicFile(
+                            new File(
+                                    Environment.getUserSystemDirectory(userHandle.getIdentifier()),
+                                    "usb_device_manager.xml"),
+                            "usb-state");
+            this.mDisablePermissionDialogs =
+                    context.getResources().getBoolean(R.bool.config_displayColorFadeDisabled);
             synchronized (obj) {
                 try {
                     if (UserHandle.SYSTEM.equals(userHandle)) {
@@ -185,14 +221,18 @@ public final class UsbProfileGroupSettingsManager {
         }
     }
 
-    public static ArrayList getAccessoryFilters(PackageManager packageManager, ResolveInfo resolveInfo) {
+    public static ArrayList getAccessoryFilters(
+            PackageManager packageManager, ResolveInfo resolveInfo) {
         ArrayList arrayList;
         XmlResourceParser xmlResourceParser = null;
         ArrayList arrayList2 = null;
         xmlResourceParser = null;
         try {
             try {
-                XmlResourceParser loadXmlMetaData = resolveInfo.activityInfo.loadXmlMetaData(packageManager, "android.hardware.usb.action.USB_ACCESSORY_ATTACHED");
+                XmlResourceParser loadXmlMetaData =
+                        resolveInfo.activityInfo.loadXmlMetaData(
+                                packageManager,
+                                "android.hardware.usb.action.USB_ACCESSORY_ATTACHED");
                 try {
                     if (loadXmlMetaData == null) {
                         Slog.w("UsbProfileGroupSettingsManager", "no meta-data for " + resolveInfo);
@@ -217,7 +257,10 @@ public final class UsbProfileGroupSettingsManager {
                     e = e;
                     xmlResourceParser = loadXmlMetaData;
                     arrayList = null;
-                    Slog.w("UsbProfileGroupSettingsManager", "Unable to load component info " + resolveInfo.toString(), e);
+                    Slog.w(
+                            "UsbProfileGroupSettingsManager",
+                            "Unable to load component info " + resolveInfo.toString(),
+                            e);
                     if (xmlResourceParser != null) {
                         xmlResourceParser.close();
                     }
@@ -239,14 +282,17 @@ public final class UsbProfileGroupSettingsManager {
         }
     }
 
-    public static ArrayList getDeviceFilters(PackageManager packageManager, ResolveInfo resolveInfo) {
+    public static ArrayList getDeviceFilters(
+            PackageManager packageManager, ResolveInfo resolveInfo) {
         ArrayList arrayList;
         XmlResourceParser xmlResourceParser = null;
         ArrayList arrayList2 = null;
         xmlResourceParser = null;
         try {
             try {
-                XmlResourceParser loadXmlMetaData = resolveInfo.activityInfo.loadXmlMetaData(packageManager, "android.hardware.usb.action.USB_DEVICE_ATTACHED");
+                XmlResourceParser loadXmlMetaData =
+                        resolveInfo.activityInfo.loadXmlMetaData(
+                                packageManager, "android.hardware.usb.action.USB_DEVICE_ATTACHED");
                 try {
                     if (loadXmlMetaData == null) {
                         Slog.w("UsbProfileGroupSettingsManager", "no meta-data for " + resolveInfo);
@@ -271,7 +317,10 @@ public final class UsbProfileGroupSettingsManager {
                     e = e;
                     xmlResourceParser = loadXmlMetaData;
                     arrayList = null;
-                    Slog.w("UsbProfileGroupSettingsManager", "Unable to load component info " + resolveInfo.toString(), e);
+                    Slog.w(
+                            "UsbProfileGroupSettingsManager",
+                            "Unable to load component info " + resolveInfo.toString(),
+                            e);
                     if (xmlResourceParser != null) {
                         xmlResourceParser.close();
                     }
@@ -300,7 +349,10 @@ public final class UsbProfileGroupSettingsManager {
         int size = arrayList.size();
         for (int i = 0; i < size; i++) {
             ResolveInfo resolveInfo = (ResolveInfo) arrayList.get(i);
-            if (resolveInfo.getComponentInfo().name.equals(IntentForwarderActivity.FORWARD_INTENT_TO_MANAGED_PROFILE)) {
+            if (resolveInfo
+                    .getComponentInfo()
+                    .name
+                    .equals(IntentForwarderActivity.FORWARD_INTENT_TO_MANAGED_PROFILE)) {
                 arrayList2.add(resolveInfo);
             } else {
                 if (sparseIntArray.indexOfKey(resolveInfo.targetUserId) < 0) {
@@ -335,7 +387,8 @@ public final class UsbProfileGroupSettingsManager {
         intent.addFlags(285212672);
         synchronized (this.mLock) {
             ArrayList arrayList = new ArrayList();
-            ArrayList queryIntentActivitiesForAllProfiles = queryIntentActivitiesForAllProfiles(intent);
+            ArrayList queryIntentActivitiesForAllProfiles =
+                    queryIntentActivitiesForAllProfiles(intent);
             int size = queryIntentActivitiesForAllProfiles.size();
             for (int i = 0; i < size; i++) {
                 ResolveInfo resolveInfo = (ResolveInfo) queryIntentActivitiesForAllProfiles.get(i);
@@ -343,14 +396,22 @@ public final class UsbProfileGroupSettingsManager {
                     arrayList.add(resolveInfo);
                 }
             }
-            removeForwardIntentIfNotNeeded = removeForwardIntentIfNotNeeded(preferHighPriority(arrayList));
-            defaultActivityLocked = getDefaultActivityLocked(removeForwardIntentIfNotNeeded, (UserPackage) this.mAccessoryPreferenceMap.get(new AccessoryFilter(usbAccessory)));
+            removeForwardIntentIfNotNeeded =
+                    removeForwardIntentIfNotNeeded(preferHighPriority(arrayList));
+            defaultActivityLocked =
+                    getDefaultActivityLocked(
+                            removeForwardIntentIfNotNeeded,
+                            (UserPackage)
+                                    this.mAccessoryPreferenceMap.get(
+                                            new AccessoryFilter(usbAccessory)));
         }
         sEventLogger.enqueue(new EventLogger.StringEvent("accessoryAttached: " + intent));
-        resolveActivity(intent, removeForwardIntentIfNotNeeded, defaultActivityLocked, null, usbAccessory);
+        resolveActivity(
+                intent, removeForwardIntentIfNotNeeded, defaultActivityLocked, null, usbAccessory);
     }
 
-    public final void addAccessoryPackagesToDenied(UsbAccessory usbAccessory, String[] strArr, UserHandle userHandle) {
+    public final void addAccessoryPackagesToDenied(
+            UsbAccessory usbAccessory, String[] strArr, UserHandle userHandle) {
         ArraySet arraySet;
         if (strArr.length == 0) {
             return;
@@ -382,7 +443,8 @@ public final class UsbProfileGroupSettingsManager {
         }
     }
 
-    public final void addDevicePackagesToDenied(UsbDevice usbDevice, String[] strArr, UserHandle userHandle) {
+    public final void addDevicePackagesToDenied(
+            UsbDevice usbDevice, String[] strArr, UserHandle userHandle) {
         ArraySet arraySet;
         if (strArr.length == 0) {
             return;
@@ -414,10 +476,13 @@ public final class UsbProfileGroupSettingsManager {
         }
     }
 
-    public final boolean clearCompatibleMatchesLocked(UserPackage userPackage, AccessoryFilter accessoryFilter) {
+    public final boolean clearCompatibleMatchesLocked(
+            UserPackage userPackage, AccessoryFilter accessoryFilter) {
         ArrayList arrayList = new ArrayList();
         for (AccessoryFilter accessoryFilter2 : this.mAccessoryPreferenceMap.keySet()) {
-            if (accessoryFilter.contains(accessoryFilter2) && !((UserPackage) this.mAccessoryPreferenceMap.get(accessoryFilter2)).equals(userPackage)) {
+            if (accessoryFilter.contains(accessoryFilter2)
+                    && !((UserPackage) this.mAccessoryPreferenceMap.get(accessoryFilter2))
+                            .equals(userPackage)) {
                 arrayList.add(accessoryFilter2);
             }
         }
@@ -430,10 +495,13 @@ public final class UsbProfileGroupSettingsManager {
         return !arrayList.isEmpty();
     }
 
-    public final boolean clearCompatibleMatchesLocked(UserPackage userPackage, DeviceFilter deviceFilter) {
+    public final boolean clearCompatibleMatchesLocked(
+            UserPackage userPackage, DeviceFilter deviceFilter) {
         ArrayList arrayList = new ArrayList();
         for (DeviceFilter deviceFilter2 : this.mDevicePreferenceMap.keySet()) {
-            if (deviceFilter.contains(deviceFilter2) && !((UserPackage) this.mDevicePreferenceMap.get(deviceFilter2)).equals(userPackage)) {
+            if (deviceFilter.contains(deviceFilter2)
+                    && !((UserPackage) this.mDevicePreferenceMap.get(deviceFilter2))
+                            .equals(userPackage)) {
                 arrayList.add(deviceFilter2);
             }
         }
@@ -468,7 +536,11 @@ public final class UsbProfileGroupSettingsManager {
             try {
                 if (this.mDevicePreferenceMap.containsValue(userPackage)) {
                     z = false;
-                    for (DeviceFilter deviceFilter : (DeviceFilter[]) this.mDevicePreferenceMap.keySet().toArray(new DeviceFilter[0])) {
+                    for (DeviceFilter deviceFilter :
+                            (DeviceFilter[])
+                                    this.mDevicePreferenceMap
+                                            .keySet()
+                                            .toArray(new DeviceFilter[0])) {
                         if (userPackage.equals(this.mDevicePreferenceMap.get(deviceFilter))) {
                             this.mDevicePreferenceMap.remove(deviceFilter);
                             z = true;
@@ -478,7 +550,11 @@ public final class UsbProfileGroupSettingsManager {
                     z = false;
                 }
                 if (this.mAccessoryPreferenceMap.containsValue(userPackage)) {
-                    for (AccessoryFilter accessoryFilter : (AccessoryFilter[]) this.mAccessoryPreferenceMap.keySet().toArray(new AccessoryFilter[0])) {
+                    for (AccessoryFilter accessoryFilter :
+                            (AccessoryFilter[])
+                                    this.mAccessoryPreferenceMap
+                                            .keySet()
+                                            .toArray(new AccessoryFilter[0])) {
                         if (userPackage.equals(this.mAccessoryPreferenceMap.get(accessoryFilter))) {
                             this.mAccessoryPreferenceMap.remove(accessoryFilter);
                             z = true;
@@ -493,8 +569,11 @@ public final class UsbProfileGroupSettingsManager {
     }
 
     public final void deviceAttached(UsbDevice usbDevice) {
-        if (usbDevice.getVendorId() == 3034 && (usbDevice.getProductId() == 33106 || usbDevice.getProductId() == 33107)) {
-            Slog.d("UsbProfileGroupSettingsManager", "Do not send ACTION_USB_DEVICE_ATTACHED intent, because of Dex");
+        if (usbDevice.getVendorId() == 3034
+                && (usbDevice.getProductId() == 33106 || usbDevice.getProductId() == 33107)) {
+            Slog.d(
+                    "UsbProfileGroupSettingsManager",
+                    "Do not send ACTION_USB_DEVICE_ATTACHED intent, because of Dex");
             return;
         }
         Intent intent = new Intent("android.hardware.usb.action.USB_DEVICE_ATTACHED");
@@ -506,37 +585,67 @@ public final class UsbProfileGroupSettingsManager {
                 Slog.d("UsbProfileGroupSettingsManager", "usbDeviceAttached, sending " + intent);
                 this.mContext.sendBroadcastAsUser(intent, UserHandle.ALL);
                 ArrayList arrayList = new ArrayList();
-                ArrayList queryIntentActivitiesForAllProfiles = queryIntentActivitiesForAllProfiles(intent);
+                ArrayList queryIntentActivitiesForAllProfiles =
+                        queryIntentActivitiesForAllProfiles(intent);
                 int size = queryIntentActivitiesForAllProfiles.size();
                 for (int i = 0; i < size; i++) {
-                    ResolveInfo resolveInfo = (ResolveInfo) queryIntentActivitiesForAllProfiles.get(i);
+                    ResolveInfo resolveInfo =
+                            (ResolveInfo) queryIntentActivitiesForAllProfiles.get(i);
                     if (packageMatchesLocked(resolveInfo, usbDevice, null)) {
                         arrayList.add(resolveInfo);
                     }
                 }
-                ArrayList removeForwardIntentIfNotNeeded = removeForwardIntentIfNotNeeded(preferHighPriority(arrayList));
-                ActivityInfo smartSwitchActivityInfo = getSmartSwitchActivityInfo(removeForwardIntentIfNotNeeded);
-                ActivityInfo defaultActivityLocked = smartSwitchActivityInfo != null ? smartSwitchActivityInfo : getDefaultActivityLocked(removeForwardIntentIfNotNeeded, (UserPackage) this.mDevicePreferenceMap.get(new DeviceFilter(usbDevice)));
-                if (Settings.Secure.getInt(this.mContext.getContentResolver(), "user_setup_complete", 1) != 1 && smartSwitchActivityInfo == null) {
+                ArrayList removeForwardIntentIfNotNeeded =
+                        removeForwardIntentIfNotNeeded(preferHighPriority(arrayList));
+                ActivityInfo smartSwitchActivityInfo =
+                        getSmartSwitchActivityInfo(removeForwardIntentIfNotNeeded);
+                ActivityInfo defaultActivityLocked =
+                        smartSwitchActivityInfo != null
+                                ? smartSwitchActivityInfo
+                                : getDefaultActivityLocked(
+                                        removeForwardIntentIfNotNeeded,
+                                        (UserPackage)
+                                                this.mDevicePreferenceMap.get(
+                                                        new DeviceFilter(usbDevice)));
+                if (Settings.Secure.getInt(
+                                        this.mContext.getContentResolver(),
+                                        "user_setup_complete",
+                                        1)
+                                != 1
+                        && smartSwitchActivityInfo == null) {
                     Slog.d("UsbProfileGroupSettingsManager", "Setup wizard is not finished");
                 } else {
-                    resolveActivity(intent, removeForwardIntentIfNotNeeded, defaultActivityLocked, usbDevice, null);
-                    Slog.d("UsbProfileGroupSettingsManager", "resolveActivity(Intent, UsbDevice) - end");
+                    resolveActivity(
+                            intent,
+                            removeForwardIntentIfNotNeeded,
+                            defaultActivityLocked,
+                            usbDevice,
+                            null);
+                    Slog.d(
+                            "UsbProfileGroupSettingsManager",
+                            "resolveActivity(Intent, UsbDevice) - end");
                 }
             } finally {
             }
         }
     }
 
-    public final void deviceAttachedForFixedHandler(UsbDevice usbDevice, ComponentName componentName) {
+    public final void deviceAttachedForFixedHandler(
+            UsbDevice usbDevice, ComponentName componentName) {
         Slog.d("UsbProfileGroupSettingsManager", "deviceAttachedForFixedHandler()");
         Intent intent = new Intent("android.hardware.usb.action.USB_DEVICE_ATTACHED");
         intent.putExtra("device", usbDevice);
         intent.addFlags(285212672);
         this.mContext.sendBroadcastAsUser(intent, UserHandle.of(ActivityManager.getCurrentUser()));
         try {
-            ApplicationInfo applicationInfoAsUser = this.mPackageManager.getApplicationInfoAsUser(componentName.getPackageName(), 0, this.mParentUser.getIdentifier());
-            this.mSettingsManager.mUsbService.mPermissionManager.getPermissionsForUser(UserHandle.getUserId(applicationInfoAsUser.uid)).grantDevicePermission(usbDevice, applicationInfoAsUser.uid);
+            ApplicationInfo applicationInfoAsUser =
+                    this.mPackageManager.getApplicationInfoAsUser(
+                            componentName.getPackageName(), 0, this.mParentUser.getIdentifier());
+            this.mSettingsManager
+                    .mUsbService
+                    .mPermissionManager
+                    .getPermissionsForUser(UserHandle.getUserId(applicationInfoAsUser.uid))
+                    .grantDevicePermission(usbDevice, applicationInfoAsUser.uid);
             Intent intent2 = new Intent(intent);
             intent2.setComponent(componentName);
             try {
@@ -545,7 +654,12 @@ public final class UsbProfileGroupSettingsManager {
                 Slog.e("UsbProfileGroupSettingsManager", "unable to start activity " + intent2);
             }
         } catch (PackageManager.NameNotFoundException unused2) {
-            Slog.e("UsbProfileGroupSettingsManager", "Default USB handling package (" + componentName.getPackageName() + ") not found  for user " + this.mParentUser);
+            Slog.e(
+                    "UsbProfileGroupSettingsManager",
+                    "Default USB handling package ("
+                            + componentName.getPackageName()
+                            + ") not found  for user "
+                            + this.mParentUser);
         }
     }
 
@@ -556,7 +670,8 @@ public final class UsbProfileGroupSettingsManager {
         long start = dualDumpOutputStream.start("profile_group_settings", 2246267895810L);
         synchronized (this.mLock) {
             try {
-                dualDumpOutputStream.write("parent_user_id", 1120986464257L, this.mParentUser.getIdentifier());
+                dualDumpOutputStream.write(
+                        "parent_user_id", 1120986464257L, this.mParentUser.getIdentifier());
                 Iterator it = this.mDevicePreferenceMap.keySet().iterator();
                 while (true) {
                     j = 1146756268034L;
@@ -567,23 +682,30 @@ public final class UsbProfileGroupSettingsManager {
                     DeviceFilter deviceFilter = (DeviceFilter) it.next();
                     long start2 = dualDumpOutputStream.start("device_preferences", j3);
                     deviceFilter.dump(dualDumpOutputStream, "filter", 1146756268033L);
-                    UserPackage userPackage = (UserPackage) this.mDevicePreferenceMap.get(deviceFilter);
+                    UserPackage userPackage =
+                            (UserPackage) this.mDevicePreferenceMap.get(deviceFilter);
                     userPackage.getClass();
                     long start3 = dualDumpOutputStream.start("user_package", 1146756268034L);
-                    dualDumpOutputStream.write("user_id", 1120986464257L, userPackage.user.getIdentifier());
-                    dualDumpOutputStream.write("package_name", 1138166333442L, userPackage.packageName);
+                    dualDumpOutputStream.write(
+                            "user_id", 1120986464257L, userPackage.user.getIdentifier());
+                    dualDumpOutputStream.write(
+                            "package_name", 1138166333442L, userPackage.packageName);
                     dualDumpOutputStream.end(start3);
                     dualDumpOutputStream.end(start2);
                     j3 = 2246267895810L;
                 }
                 for (AccessoryFilter accessoryFilter : this.mAccessoryPreferenceMap.keySet()) {
-                    long start4 = dualDumpOutputStream.start("accessory_preferences", 2246267895811L);
+                    long start4 =
+                            dualDumpOutputStream.start("accessory_preferences", 2246267895811L);
                     accessoryFilter.dump(dualDumpOutputStream, "filter", j2);
-                    UserPackage userPackage2 = (UserPackage) this.mAccessoryPreferenceMap.get(accessoryFilter);
+                    UserPackage userPackage2 =
+                            (UserPackage) this.mAccessoryPreferenceMap.get(accessoryFilter);
                     userPackage2.getClass();
                     long start5 = dualDumpOutputStream.start("user_package", j);
-                    dualDumpOutputStream.write("user_id", 1120986464257L, userPackage2.user.getIdentifier());
-                    dualDumpOutputStream.write("package_name", 1138166333442L, userPackage2.packageName);
+                    dualDumpOutputStream.write(
+                            "user_id", 1120986464257L, userPackage2.user.getIdentifier());
+                    dualDumpOutputStream.write(
+                            "package_name", 1138166333442L, userPackage2.packageName);
                     dualDumpOutputStream.end(start5);
                     dualDumpOutputStream.end(start4);
                     j2 = 1146756268033L;
@@ -597,7 +719,8 @@ public final class UsbProfileGroupSettingsManager {
         dualDumpOutputStream.end(start);
     }
 
-    public final ActivityInfo getDefaultActivityLocked(ArrayList arrayList, UserPackage userPackage) {
+    public final ActivityInfo getDefaultActivityLocked(
+            ArrayList arrayList, UserPackage userPackage) {
         ActivityInfo activityInfo;
         if (CoreRune.BAIDU_CARLIFE && arrayList.size() >= 1) {
             Iterator it = arrayList.iterator();
@@ -617,12 +740,18 @@ public final class UsbProfileGroupSettingsManager {
             while (it2.hasNext()) {
                 ResolveInfo resolveInfo2 = (ResolveInfo) it2.next();
                 ActivityInfo activityInfo3 = resolveInfo2.activityInfo;
-                if (activityInfo3 != null && userPackage.equals(new UserPackage(activityInfo3.packageName, UserHandle.getUserHandleForUid(activityInfo3.applicationInfo.uid)))) {
+                if (activityInfo3 != null
+                        && userPackage.equals(
+                                new UserPackage(
+                                        activityInfo3.packageName,
+                                        UserHandle.getUserHandleForUid(
+                                                activityInfo3.applicationInfo.uid)))) {
                     return resolveInfo2.activityInfo;
                 }
             }
         }
-        if (arrayList.size() != 1 || (activityInfo = ((ResolveInfo) arrayList.get(0)).activityInfo) == null) {
+        if (arrayList.size() != 1
+                || (activityInfo = ((ResolveInfo) arrayList.get(0)).activityInfo) == null) {
             return null;
         }
         if (this.mDisablePermissionDialogs) {
@@ -636,26 +765,35 @@ public final class UsbProfileGroupSettingsManager {
     }
 
     public final ActivityInfo getSmartSwitchActivityInfo(ArrayList arrayList) {
-        List<ActivityManager.RunningTaskInfo> runningTasks = ((ActivityManager) this.mContext.getSystemService("activity")).getRunningTasks(Integer.MAX_VALUE);
+        List<ActivityManager.RunningTaskInfo> runningTasks =
+                ((ActivityManager) this.mContext.getSystemService("activity"))
+                        .getRunningTasks(Integer.MAX_VALUE);
         if (runningTasks.size() == 0) {
             return null;
         }
         Iterator<ActivityManager.RunningTaskInfo> it = runningTasks.iterator();
         while (it.hasNext()) {
-            Slog.d("UsbProfileGroupSettingsManager", "task.topActivity.getPackageName()=" + it.next().topActivity.getPackageName());
+            Slog.d(
+                    "UsbProfileGroupSettingsManager",
+                    "task.topActivity.getPackageName()=" + it.next().topActivity.getPackageName());
         }
         String str = runningTasks.get(0).topActivity.getPackageName().toString();
         Slog.d("UsbProfileGroupSettingsManager", "foregroundApp=" + str);
         if (str.equals("com.sec.android.easyMover")) {
-            boolean z = this.mPackageManager.checkSignatures("android", "com.sec.android.easyMover") == 0;
+            boolean z =
+                    this.mPackageManager.checkSignatures("android", "com.sec.android.easyMover")
+                            == 0;
             Slog.d("UsbProfileGroupSettingsManager", "isPreinstalledPackage: ret=" + z);
             if (z) {
                 for (int i = 0; i < arrayList.size(); i++) {
                     ResolveInfo resolveInfo = (ResolveInfo) arrayList.get(i);
                     Slog.d("UsbProfileGroupSettingsManager", "rInfo=" + resolveInfo);
                     ActivityInfo activityInfo = resolveInfo.activityInfo;
-                    if (activityInfo != null && "com.sec.android.easyMover".equals(activityInfo.packageName)) {
-                        Slog.d("UsbProfileGroupSettingsManager", "activityInfo=" + resolveInfo.activityInfo);
+                    if (activityInfo != null
+                            && "com.sec.android.easyMover".equals(activityInfo.packageName)) {
+                        Slog.d(
+                                "UsbProfileGroupSettingsManager",
+                                "activityInfo=" + resolveInfo.activityInfo);
                         return resolveInfo.activityInfo;
                     }
                 }
@@ -665,14 +803,17 @@ public final class UsbProfileGroupSettingsManager {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:39:0x006c, code lost:
-    
-        if (0 == 0) goto L31;
-     */
+
+       if (0 == 0) goto L31;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean handlePackageAddedLocked(com.android.server.usb.UsbProfileGroupSettingsManager.UserPackage r5, android.content.pm.ActivityInfo r6, java.lang.String r7) {
+    public final boolean handlePackageAddedLocked(
+            com.android.server.usb.UsbProfileGroupSettingsManager.UserPackage r5,
+            android.content.pm.ActivityInfo r6,
+            java.lang.String r7) {
         /*
             r4 = this;
             r0 = 0
@@ -739,7 +880,10 @@ public final class UsbProfileGroupSettingsManager {
         L75:
             throw r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.usb.UsbProfileGroupSettingsManager.handlePackageAddedLocked(com.android.server.usb.UsbProfileGroupSettingsManager$UserPackage, android.content.pm.ActivityInfo, java.lang.String):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.usb.UsbProfileGroupSettingsManager.handlePackageAddedLocked(com.android.server.usb.UsbProfileGroupSettingsManager$UserPackage,"
+                    + " android.content.pm.ActivityInfo, java.lang.String):boolean");
     }
 
     public final boolean hasDefaults(String str, UserHandle userHandle) {
@@ -759,29 +903,49 @@ public final class UsbProfileGroupSettingsManager {
         }
     }
 
-    public final boolean packageMatchesLocked(ResolveInfo resolveInfo, UsbDevice usbDevice, UsbAccessory usbAccessory) {
+    public final boolean packageMatchesLocked(
+            ResolveInfo resolveInfo, UsbDevice usbDevice, UsbAccessory usbAccessory) {
         ArrayList accessoryFilters;
         ArrayList deviceFilters;
-        if (resolveInfo.getComponentInfo().name.equals(IntentForwarderActivity.FORWARD_INTENT_TO_MANAGED_PROFILE)) {
+        if (resolveInfo
+                .getComponentInfo()
+                .name
+                .equals(IntentForwarderActivity.FORWARD_INTENT_TO_MANAGED_PROFILE)) {
             return true;
         }
-        if (usbDevice != null && (deviceFilters = getDeviceFilters(this.mPackageManager, resolveInfo)) != null) {
+        if (usbDevice != null
+                && (deviceFilters = getDeviceFilters(this.mPackageManager, resolveInfo)) != null) {
             int size = deviceFilters.size();
-            Slog.d("UsbProfileGroupSettingsManager", "packageMatchesLocked num of DeviceFilters [" + size + "]");
+            Slog.d(
+                    "UsbProfileGroupSettingsManager",
+                    "packageMatchesLocked num of DeviceFilters [" + size + "]");
             for (int i = 0; i < size; i++) {
                 try {
                     if (((DeviceFilter) deviceFilters.get(i)).matches(usbDevice)) {
                         return true;
                     }
                 } catch (NullPointerException unused) {
-                    Slog.d("UsbProfileGroupSettingsManager", "packageMatchesLocked delivered UsbDevice=" + usbDevice);
-                    Slog.d("UsbProfileGroupSettingsManager", "packageMatchesLocked NPE at deviceFilter(" + i + ") = [" + ((DeviceFilter) deviceFilters.get(i)).toString() + "]");
+                    Slog.d(
+                            "UsbProfileGroupSettingsManager",
+                            "packageMatchesLocked delivered UsbDevice=" + usbDevice);
+                    Slog.d(
+                            "UsbProfileGroupSettingsManager",
+                            "packageMatchesLocked NPE at deviceFilter("
+                                    + i
+                                    + ") = ["
+                                    + ((DeviceFilter) deviceFilters.get(i)).toString()
+                                    + "]");
                 } catch (Exception e) {
-                    Slog.w("UsbProfileGroupSettingsManager", "packageMatchesLocked got Exception ", e);
+                    Slog.w(
+                            "UsbProfileGroupSettingsManager",
+                            "packageMatchesLocked got Exception ",
+                            e);
                 }
             }
         }
-        if (usbAccessory != null && (accessoryFilters = getAccessoryFilters(this.mPackageManager, resolveInfo)) != null) {
+        if (usbAccessory != null
+                && (accessoryFilters = getAccessoryFilters(this.mPackageManager, resolveInfo))
+                        != null) {
             int size2 = accessoryFilters.size();
             for (int i2 = 0; i2 < size2; i2++) {
                 if (((AccessoryFilter) accessoryFilters.get(i2)).matches(usbAccessory)) {
@@ -793,12 +957,17 @@ public final class UsbProfileGroupSettingsManager {
     }
 
     public final ArrayList queryIntentActivitiesForAllProfiles(Intent intent) {
-        List enabledProfiles = this.mUserManager.getEnabledProfiles(this.mParentUser.getIdentifier());
+        List enabledProfiles =
+                this.mUserManager.getEnabledProfiles(this.mParentUser.getIdentifier());
         ArrayList arrayList = new ArrayList();
         int size = enabledProfiles.size();
         for (int i = 0; i < size; i++) {
-            UsbUserSettingsManager settingsForUser = this.mSettingsManager.getSettingsForUser(((UserInfo) enabledProfiles.get(i)).id);
-            arrayList.addAll(settingsForUser.mPackageManager.queryIntentActivitiesAsUser(intent, 128, settingsForUser.mUser.getIdentifier()));
+            UsbUserSettingsManager settingsForUser =
+                    this.mSettingsManager.getSettingsForUser(
+                            ((UserInfo) enabledProfiles.get(i)).id);
+            arrayList.addAll(
+                    settingsForUser.mPackageManager.queryIntentActivitiesAsUser(
+                            intent, 128, settingsForUser.mUser.getIdentifier()));
         }
         return arrayList;
     }
@@ -812,7 +981,9 @@ public final class UsbProfileGroupSettingsManager {
                 str = xmlPullParser.getAttributeValue(i);
             }
             if ("user".equals(xmlPullParser.getAttributeName(i))) {
-                userHandle = this.mUserManager.getUserForSerialNumber(Integer.parseInt(xmlPullParser.getAttributeValue(i)));
+                userHandle =
+                        this.mUserManager.getUserForSerialNumber(
+                                Integer.parseInt(xmlPullParser.getAttributeValue(i)));
             }
         }
         XmlUtils.nextElement(xmlPullParser);
@@ -839,16 +1010,22 @@ public final class UsbProfileGroupSettingsManager {
                     if ("user-package".equals(xmlPullParser.getName())) {
                         try {
                             int readIntAttribute = XmlUtils.readIntAttribute(xmlPullParser, "user");
-                            String readStringAttribute = XmlUtils.readStringAttribute(xmlPullParser, "package");
+                            String readStringAttribute =
+                                    XmlUtils.readStringAttribute(xmlPullParser, "package");
                             if (readStringAttribute == null) {
-                                Slog.e("UsbProfileGroupSettingsManager", "Unable to parse package name");
+                                Slog.e(
+                                        "UsbProfileGroupSettingsManager",
+                                        "Unable to parse package name");
                             }
-                            ArraySet arraySet = (ArraySet) this.mDevicePreferenceDeniedMap.get(read);
+                            ArraySet arraySet =
+                                    (ArraySet) this.mDevicePreferenceDeniedMap.get(read);
                             if (arraySet == null) {
                                 arraySet = new ArraySet();
                                 this.mDevicePreferenceDeniedMap.put(read, arraySet);
                             }
-                            arraySet.add(new UserPackage(readStringAttribute, UserHandle.of(readIntAttribute)));
+                            arraySet.add(
+                                    new UserPackage(
+                                            readStringAttribute, UserHandle.of(readIntAttribute)));
                         } catch (ProtocolException e) {
                             Slog.e("UsbProfileGroupSettingsManager", "Unable to parse user id", e);
                         }
@@ -859,17 +1036,25 @@ public final class UsbProfileGroupSettingsManager {
                 while (XmlUtils.nextElementWithin(xmlPullParser, depth)) {
                     if ("user-package".equals(xmlPullParser.getName())) {
                         try {
-                            int readIntAttribute2 = XmlUtils.readIntAttribute(xmlPullParser, "user");
-                            String readStringAttribute2 = XmlUtils.readStringAttribute(xmlPullParser, "package");
+                            int readIntAttribute2 =
+                                    XmlUtils.readIntAttribute(xmlPullParser, "user");
+                            String readStringAttribute2 =
+                                    XmlUtils.readStringAttribute(xmlPullParser, "package");
                             if (readStringAttribute2 == null) {
-                                Slog.e("UsbProfileGroupSettingsManager", "Unable to parse package name");
+                                Slog.e(
+                                        "UsbProfileGroupSettingsManager",
+                                        "Unable to parse package name");
                             }
-                            ArraySet arraySet2 = (ArraySet) this.mAccessoryPreferenceDeniedMap.get(read2);
+                            ArraySet arraySet2 =
+                                    (ArraySet) this.mAccessoryPreferenceDeniedMap.get(read2);
                             if (arraySet2 == null) {
                                 arraySet2 = new ArraySet();
                                 this.mAccessoryPreferenceDeniedMap.put(read2, arraySet2);
                             }
-                            arraySet2.add(new UserPackage(readStringAttribute2, UserHandle.of(readIntAttribute2)));
+                            arraySet2.add(
+                                    new UserPackage(
+                                            readStringAttribute2,
+                                            UserHandle.of(readIntAttribute2)));
                         } catch (ProtocolException e2) {
                             Slog.e("UsbProfileGroupSettingsManager", "Unable to parse user id", e2);
                         }
@@ -905,7 +1090,10 @@ public final class UsbProfileGroupSettingsManager {
             } catch (FileNotFoundException unused) {
                 Slog.d("UsbProfileGroupSettingsManager", "settings file not found");
             } catch (Exception e) {
-                Slog.e("UsbProfileGroupSettingsManager", "error reading settings file, deleting to start fresh", e);
+                Slog.e(
+                        "UsbProfileGroupSettingsManager",
+                        "error reading settings file, deleting to start fresh",
+                        e);
                 this.mSettingsFile.delete();
             }
             IoUtils.closeQuietly(fileInputStream);
@@ -915,11 +1103,13 @@ public final class UsbProfileGroupSettingsManager {
         }
     }
 
-    public final void removeAccessoryPackagesFromDenied(UsbAccessory usbAccessory, String[] strArr, UserHandle userHandle) {
+    public final void removeAccessoryPackagesFromDenied(
+            UsbAccessory usbAccessory, String[] strArr, UserHandle userHandle) {
         AccessoryFilter accessoryFilter = new AccessoryFilter(usbAccessory);
         synchronized (this.mLock) {
             try {
-                ArraySet arraySet = (ArraySet) this.mAccessoryPreferenceDeniedMap.get(accessoryFilter);
+                ArraySet arraySet =
+                        (ArraySet) this.mAccessoryPreferenceDeniedMap.get(accessoryFilter);
                 if (arraySet != null) {
                     int length = strArr.length;
                     int i = 0;
@@ -950,7 +1140,8 @@ public final class UsbProfileGroupSettingsManager {
         }
     }
 
-    public final void removeDevicePackagesFromDenied(UsbDevice usbDevice, String[] strArr, UserHandle userHandle) {
+    public final void removeDevicePackagesFromDenied(
+            UsbDevice usbDevice, String[] strArr, UserHandle userHandle) {
         DeviceFilter deviceFilter = new DeviceFilter(usbDevice);
         synchronized (this.mLock) {
             try {
@@ -991,8 +1182,12 @@ public final class UsbProfileGroupSettingsManager {
         int i2 = 0;
         for (int i3 = 0; i3 < size; i3++) {
             ResolveInfo resolveInfo = (ResolveInfo) arrayList.get(i3);
-            if (!resolveInfo.getComponentInfo().name.equals(IntentForwarderActivity.FORWARD_INTENT_TO_MANAGED_PROFILE)) {
-                if (UserHandle.getUserHandleForUid(resolveInfo.activityInfo.applicationInfo.uid).equals(this.mParentUser)) {
+            if (!resolveInfo
+                    .getComponentInfo()
+                    .name
+                    .equals(IntentForwarderActivity.FORWARD_INTENT_TO_MANAGED_PROFILE)) {
+                if (UserHandle.getUserHandleForUid(resolveInfo.activityInfo.applicationInfo.uid)
+                        .equals(this.mParentUser)) {
                     i++;
                 } else {
                     i2++;
@@ -1005,7 +1200,10 @@ public final class UsbProfileGroupSettingsManager {
         ArrayList arrayList2 = new ArrayList(i + i2);
         for (int i4 = 0; i4 < size; i4++) {
             ResolveInfo resolveInfo2 = (ResolveInfo) arrayList.get(i4);
-            if (!resolveInfo2.getComponentInfo().name.equals(IntentForwarderActivity.FORWARD_INTENT_TO_MANAGED_PROFILE)) {
+            if (!resolveInfo2
+                    .getComponentInfo()
+                    .name
+                    .equals(IntentForwarderActivity.FORWARD_INTENT_TO_MANAGED_PROFILE)) {
                 arrayList2.add(resolveInfo2);
             }
         }
@@ -1018,14 +1216,16 @@ public final class UsbProfileGroupSettingsManager {
                 Iterator it = this.mDevicePreferenceMap.entrySet().iterator();
                 boolean z = false;
                 while (it.hasNext()) {
-                    if (((UserPackage) ((Map.Entry) it.next()).getValue()).user.equals(userHandle)) {
+                    if (((UserPackage) ((Map.Entry) it.next()).getValue())
+                            .user.equals(userHandle)) {
                         it.remove();
                         z = true;
                     }
                 }
                 Iterator it2 = this.mAccessoryPreferenceMap.entrySet().iterator();
                 while (it2.hasNext()) {
-                    if (((UserPackage) ((Map.Entry) it2.next()).getValue()).user.equals(userHandle)) {
+                    if (((UserPackage) ((Map.Entry) it2.next()).getValue())
+                            .user.equals(userHandle)) {
                         it2.remove();
                         z = true;
                     }
@@ -1059,17 +1259,36 @@ public final class UsbProfileGroupSettingsManager {
         }
     }
 
-    public final void resolveActivity(Intent intent, ArrayList arrayList, ActivityInfo activityInfo, UsbDevice usbDevice, UsbAccessory usbAccessory) {
-        ArraySet arraySet = usbDevice != null ? (ArraySet) this.mDevicePreferenceDeniedMap.get(new DeviceFilter(usbDevice)) : usbAccessory != null ? (ArraySet) this.mAccessoryPreferenceDeniedMap.get(new AccessoryFilter(usbAccessory)) : null;
+    public final void resolveActivity(
+            Intent intent,
+            ArrayList arrayList,
+            ActivityInfo activityInfo,
+            UsbDevice usbDevice,
+            UsbAccessory usbAccessory) {
+        ArraySet arraySet =
+                usbDevice != null
+                        ? (ArraySet)
+                                this.mDevicePreferenceDeniedMap.get(new DeviceFilter(usbDevice))
+                        : usbAccessory != null
+                                ? (ArraySet)
+                                        this.mAccessoryPreferenceDeniedMap.get(
+                                                new AccessoryFilter(usbAccessory))
+                                : null;
         if (arraySet != null) {
             for (int size = arrayList.size() - 1; size >= 0; size--) {
                 ActivityInfo activityInfo2 = ((ResolveInfo) arrayList.get(size)).activityInfo;
-                if (arraySet.contains(new UserPackage(activityInfo2.packageName, UserHandle.getUserHandleForUid(activityInfo2.applicationInfo.uid)))) {
+                if (arraySet.contains(
+                        new UserPackage(
+                                activityInfo2.packageName,
+                                UserHandle.getUserHandleForUid(
+                                        activityInfo2.applicationInfo.uid)))) {
                     arrayList.remove(size);
                 }
             }
         }
-        Slog.d("UsbProfileGroupSettingsManager", "resolveActivity: intent=" + intent + " defaultActivity=" + activityInfo);
+        Slog.d(
+                "UsbProfileGroupSettingsManager",
+                "resolveActivity: intent=" + intent + " defaultActivity=" + activityInfo);
         Iterator it = arrayList.iterator();
         while (it.hasNext()) {
             Slog.d("UsbProfileGroupSettingsManager", ((ResolveInfo) it.next()).toString());
@@ -1086,7 +1305,12 @@ public final class UsbProfileGroupSettingsManager {
                 }
                 Intent intent2 = new Intent();
                 intent2.addFlags(268435456);
-                intent2.setComponent(ComponentName.unflattenFromString(usbHandlerManager.mContext.getResources().getString(R.string.face_dangling_notification_msg)));
+                intent2.setComponent(
+                        ComponentName.unflattenFromString(
+                                usbHandlerManager
+                                        .mContext
+                                        .getResources()
+                                        .getString(R.string.face_dangling_notification_msg)));
                 intent2.putExtra("accessory", usbAccessory);
                 intent2.putExtra(SystemIntentProcessor.KEY_URI, uri);
                 try {
@@ -1100,15 +1324,20 @@ public final class UsbProfileGroupSettingsManager {
             return;
         }
         if (activityInfo != null) {
-            UsbUserPermissionManager permissionsForUser = this.mSettingsManager.mUsbService.mPermissionManager.getPermissionsForUser(UserHandle.getUserId(activityInfo.applicationInfo.uid));
+            UsbUserPermissionManager permissionsForUser =
+                    this.mSettingsManager.mUsbService.mPermissionManager.getPermissionsForUser(
+                            UserHandle.getUserId(activityInfo.applicationInfo.uid));
             if (usbDevice != null) {
-                permissionsForUser.grantDevicePermission(usbDevice, activityInfo.applicationInfo.uid);
+                permissionsForUser.grantDevicePermission(
+                        usbDevice, activityInfo.applicationInfo.uid);
             } else if (usbAccessory != null) {
-                permissionsForUser.grantAccessoryPermission(usbAccessory, activityInfo.applicationInfo.uid);
+                permissionsForUser.grantAccessoryPermission(
+                        usbAccessory, activityInfo.applicationInfo.uid);
             }
             try {
                 intent.setComponent(new ComponentName(activityInfo.packageName, activityInfo.name));
-                this.mContext.startActivityAsUser(intent, UserHandle.getUserHandleForUid(activityInfo.applicationInfo.uid));
+                this.mContext.startActivityAsUser(
+                        intent, UserHandle.getUserHandleForUid(activityInfo.applicationInfo.uid));
                 return;
             } catch (ActivityNotFoundException e) {
                 Slog.e("UsbProfileGroupSettingsManager", "startActivity failed", e);
@@ -1120,7 +1349,12 @@ public final class UsbProfileGroupSettingsManager {
             usbHandlerManager.getClass();
             Intent intent3 = new Intent();
             intent3.addFlags(268435456);
-            intent3.setComponent(ComponentName.unflattenFromString(usbHandlerManager.mContext.getResources().getString(R.string.face_error_hw_not_available)));
+            intent3.setComponent(
+                    ComponentName.unflattenFromString(
+                            usbHandlerManager
+                                    .mContext
+                                    .getResources()
+                                    .getString(R.string.face_error_hw_not_available)));
             intent3.putParcelableArrayListExtra("rlist", arrayList);
             intent3.putExtra("android.intent.extra.INTENT", intent);
             try {
@@ -1135,9 +1369,15 @@ public final class UsbProfileGroupSettingsManager {
         usbHandlerManager.getClass();
         Intent intent4 = new Intent();
         intent4.addFlags(268435456);
-        intent4.setComponent(ComponentName.unflattenFromString(usbHandlerManager.mContext.getResources().getString(R.string.face_dangling_notification_title)));
+        intent4.setComponent(
+                ComponentName.unflattenFromString(
+                        usbHandlerManager
+                                .mContext
+                                .getResources()
+                                .getString(R.string.face_dangling_notification_title)));
         intent4.putExtra("rinfo", resolveInfo);
-        UserHandle userHandleForUid = UserHandle.getUserHandleForUid(resolveInfo.activityInfo.applicationInfo.uid);
+        UserHandle userHandleForUid =
+                UserHandle.getUserHandleForUid(resolveInfo.activityInfo.applicationInfo.uid);
         if (usbDevice != null) {
             intent4.putExtra("device", usbDevice);
         } else {
@@ -1155,92 +1395,192 @@ public final class UsbProfileGroupSettingsManager {
             return;
         }
         this.mIsWriteSettingsScheduled = true;
-        AsyncTask.execute(new Runnable() { // from class: com.android.server.usb.UsbProfileGroupSettingsManager$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                FileOutputStream fileOutputStream;
-                IOException e;
-                UsbProfileGroupSettingsManager usbProfileGroupSettingsManager = UsbProfileGroupSettingsManager.this;
-                synchronized (usbProfileGroupSettingsManager.mLock) {
-                    try {
-                        try {
-                            fileOutputStream = usbProfileGroupSettingsManager.mSettingsFile.startWrite();
-                        } catch (Throwable th) {
-                            throw th;
-                        }
-                    } catch (IOException e2) {
-                        fileOutputStream = null;
-                        e = e2;
-                    }
-                    try {
-                        TypedXmlSerializer resolveSerializer = Xml.resolveSerializer(fileOutputStream);
-                        resolveSerializer.startDocument((String) null, Boolean.TRUE);
-                        resolveSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
-                        resolveSerializer.startTag((String) null, "settings");
-                        for (DeviceFilter deviceFilter : usbProfileGroupSettingsManager.mDevicePreferenceMap.keySet()) {
-                            resolveSerializer.startTag((String) null, "preference");
-                            resolveSerializer.attribute((String) null, "package", ((UsbProfileGroupSettingsManager.UserPackage) usbProfileGroupSettingsManager.mDevicePreferenceMap.get(deviceFilter)).packageName);
-                            resolveSerializer.attribute((String) null, "user", String.valueOf(usbProfileGroupSettingsManager.mUserManager.getUserSerialNumber(((UsbProfileGroupSettingsManager.UserPackage) usbProfileGroupSettingsManager.mDevicePreferenceMap.get(deviceFilter)).user.getIdentifier())));
-                            deviceFilter.write(resolveSerializer);
-                            resolveSerializer.endTag((String) null, "preference");
-                        }
-                        for (AccessoryFilter accessoryFilter : usbProfileGroupSettingsManager.mAccessoryPreferenceMap.keySet()) {
-                            resolveSerializer.startTag((String) null, "preference");
-                            resolveSerializer.attribute((String) null, "package", ((UsbProfileGroupSettingsManager.UserPackage) usbProfileGroupSettingsManager.mAccessoryPreferenceMap.get(accessoryFilter)).packageName);
-                            resolveSerializer.attribute((String) null, "user", String.valueOf(usbProfileGroupSettingsManager.mUserManager.getUserSerialNumber(((UsbProfileGroupSettingsManager.UserPackage) usbProfileGroupSettingsManager.mAccessoryPreferenceMap.get(accessoryFilter)).user.getIdentifier())));
-                            accessoryFilter.write(resolveSerializer);
-                            resolveSerializer.endTag((String) null, "preference");
-                        }
-                        int size = usbProfileGroupSettingsManager.mDevicePreferenceDeniedMap.size();
-                        for (int i = 0; i < size; i++) {
-                            DeviceFilter deviceFilter2 = (DeviceFilter) usbProfileGroupSettingsManager.mDevicePreferenceDeniedMap.keyAt(i);
-                            ArraySet arraySet = (ArraySet) usbProfileGroupSettingsManager.mDevicePreferenceDeniedMap.valueAt(i);
-                            resolveSerializer.startTag((String) null, "preference-denied-list");
-                            deviceFilter2.write(resolveSerializer);
-                            int size2 = arraySet.size();
-                            for (int i2 = 0; i2 < size2; i2++) {
-                                UsbProfileGroupSettingsManager.UserPackage userPackage = (UsbProfileGroupSettingsManager.UserPackage) arraySet.valueAt(i2);
-                                resolveSerializer.startTag((String) null, "user-package");
-                                resolveSerializer.attribute((String) null, "user", String.valueOf(usbProfileGroupSettingsManager.mUserManager.getUserSerialNumber(userPackage.user.getIdentifier())));
-                                resolveSerializer.attribute((String) null, "package", userPackage.packageName);
-                                resolveSerializer.endTag((String) null, "user-package");
+        AsyncTask.execute(
+                new Runnable() { // from class:
+                                 // com.android.server.usb.UsbProfileGroupSettingsManager$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        FileOutputStream fileOutputStream;
+                        IOException e;
+                        UsbProfileGroupSettingsManager usbProfileGroupSettingsManager =
+                                UsbProfileGroupSettingsManager.this;
+                        synchronized (usbProfileGroupSettingsManager.mLock) {
+                            try {
+                                try {
+                                    fileOutputStream =
+                                            usbProfileGroupSettingsManager.mSettingsFile
+                                                    .startWrite();
+                                } catch (Throwable th) {
+                                    throw th;
+                                }
+                            } catch (IOException e2) {
+                                fileOutputStream = null;
+                                e = e2;
                             }
-                            resolveSerializer.endTag((String) null, "preference-denied-list");
-                        }
-                        int size3 = usbProfileGroupSettingsManager.mAccessoryPreferenceDeniedMap.size();
-                        for (int i3 = 0; i3 < size3; i3++) {
-                            AccessoryFilter accessoryFilter2 = (AccessoryFilter) usbProfileGroupSettingsManager.mAccessoryPreferenceDeniedMap.keyAt(i3);
-                            ArraySet arraySet2 = (ArraySet) usbProfileGroupSettingsManager.mAccessoryPreferenceDeniedMap.valueAt(i3);
-                            resolveSerializer.startTag((String) null, "preference-denied-list");
-                            accessoryFilter2.write(resolveSerializer);
-                            int size4 = arraySet2.size();
-                            for (int i4 = 0; i4 < size4; i4++) {
-                                UsbProfileGroupSettingsManager.UserPackage userPackage2 = (UsbProfileGroupSettingsManager.UserPackage) arraySet2.valueAt(i4);
-                                resolveSerializer.startTag((String) null, "user-package");
-                                resolveSerializer.attribute((String) null, "user", String.valueOf(usbProfileGroupSettingsManager.mUserManager.getUserSerialNumber(userPackage2.user.getIdentifier())));
-                                resolveSerializer.attribute((String) null, "package", userPackage2.packageName);
-                                resolveSerializer.endTag((String) null, "user-package");
+                            try {
+                                TypedXmlSerializer resolveSerializer =
+                                        Xml.resolveSerializer(fileOutputStream);
+                                resolveSerializer.startDocument((String) null, Boolean.TRUE);
+                                resolveSerializer.setFeature(
+                                        "http://xmlpull.org/v1/doc/features.html#indent-output",
+                                        true);
+                                resolveSerializer.startTag((String) null, "settings");
+                                for (DeviceFilter deviceFilter :
+                                        usbProfileGroupSettingsManager.mDevicePreferenceMap
+                                                .keySet()) {
+                                    resolveSerializer.startTag((String) null, "preference");
+                                    resolveSerializer.attribute(
+                                            (String) null,
+                                            "package",
+                                            ((UsbProfileGroupSettingsManager.UserPackage)
+                                                            usbProfileGroupSettingsManager
+                                                                    .mDevicePreferenceMap.get(
+                                                                    deviceFilter))
+                                                    .packageName);
+                                    resolveSerializer.attribute(
+                                            (String) null,
+                                            "user",
+                                            String.valueOf(
+                                                    usbProfileGroupSettingsManager.mUserManager
+                                                            .getUserSerialNumber(
+                                                                    ((UsbProfileGroupSettingsManager
+                                                                                            .UserPackage)
+                                                                                    usbProfileGroupSettingsManager
+                                                                                            .mDevicePreferenceMap
+                                                                                            .get(
+                                                                                                    deviceFilter))
+                                                                            .user
+                                                                                    .getIdentifier())));
+                                    deviceFilter.write(resolveSerializer);
+                                    resolveSerializer.endTag((String) null, "preference");
+                                }
+                                for (AccessoryFilter accessoryFilter :
+                                        usbProfileGroupSettingsManager.mAccessoryPreferenceMap
+                                                .keySet()) {
+                                    resolveSerializer.startTag((String) null, "preference");
+                                    resolveSerializer.attribute(
+                                            (String) null,
+                                            "package",
+                                            ((UsbProfileGroupSettingsManager.UserPackage)
+                                                            usbProfileGroupSettingsManager
+                                                                    .mAccessoryPreferenceMap.get(
+                                                                    accessoryFilter))
+                                                    .packageName);
+                                    resolveSerializer.attribute(
+                                            (String) null,
+                                            "user",
+                                            String.valueOf(
+                                                    usbProfileGroupSettingsManager.mUserManager
+                                                            .getUserSerialNumber(
+                                                                    ((UsbProfileGroupSettingsManager
+                                                                                            .UserPackage)
+                                                                                    usbProfileGroupSettingsManager
+                                                                                            .mAccessoryPreferenceMap
+                                                                                            .get(
+                                                                                                    accessoryFilter))
+                                                                            .user
+                                                                                    .getIdentifier())));
+                                    accessoryFilter.write(resolveSerializer);
+                                    resolveSerializer.endTag((String) null, "preference");
+                                }
+                                int size =
+                                        usbProfileGroupSettingsManager.mDevicePreferenceDeniedMap
+                                                .size();
+                                for (int i = 0; i < size; i++) {
+                                    DeviceFilter deviceFilter2 =
+                                            (DeviceFilter)
+                                                    usbProfileGroupSettingsManager
+                                                            .mDevicePreferenceDeniedMap.keyAt(i);
+                                    ArraySet arraySet =
+                                            (ArraySet)
+                                                    usbProfileGroupSettingsManager
+                                                            .mDevicePreferenceDeniedMap.valueAt(i);
+                                    resolveSerializer.startTag(
+                                            (String) null, "preference-denied-list");
+                                    deviceFilter2.write(resolveSerializer);
+                                    int size2 = arraySet.size();
+                                    for (int i2 = 0; i2 < size2; i2++) {
+                                        UsbProfileGroupSettingsManager.UserPackage userPackage =
+                                                (UsbProfileGroupSettingsManager.UserPackage)
+                                                        arraySet.valueAt(i2);
+                                        resolveSerializer.startTag((String) null, "user-package");
+                                        resolveSerializer.attribute(
+                                                (String) null,
+                                                "user",
+                                                String.valueOf(
+                                                        usbProfileGroupSettingsManager.mUserManager
+                                                                .getUserSerialNumber(
+                                                                        userPackage.user
+                                                                                .getIdentifier())));
+                                        resolveSerializer.attribute(
+                                                (String) null, "package", userPackage.packageName);
+                                        resolveSerializer.endTag((String) null, "user-package");
+                                    }
+                                    resolveSerializer.endTag(
+                                            (String) null, "preference-denied-list");
+                                }
+                                int size3 =
+                                        usbProfileGroupSettingsManager.mAccessoryPreferenceDeniedMap
+                                                .size();
+                                for (int i3 = 0; i3 < size3; i3++) {
+                                    AccessoryFilter accessoryFilter2 =
+                                            (AccessoryFilter)
+                                                    usbProfileGroupSettingsManager
+                                                            .mAccessoryPreferenceDeniedMap.keyAt(
+                                                            i3);
+                                    ArraySet arraySet2 =
+                                            (ArraySet)
+                                                    usbProfileGroupSettingsManager
+                                                            .mAccessoryPreferenceDeniedMap.valueAt(
+                                                            i3);
+                                    resolveSerializer.startTag(
+                                            (String) null, "preference-denied-list");
+                                    accessoryFilter2.write(resolveSerializer);
+                                    int size4 = arraySet2.size();
+                                    for (int i4 = 0; i4 < size4; i4++) {
+                                        UsbProfileGroupSettingsManager.UserPackage userPackage2 =
+                                                (UsbProfileGroupSettingsManager.UserPackage)
+                                                        arraySet2.valueAt(i4);
+                                        resolveSerializer.startTag((String) null, "user-package");
+                                        resolveSerializer.attribute(
+                                                (String) null,
+                                                "user",
+                                                String.valueOf(
+                                                        usbProfileGroupSettingsManager.mUserManager
+                                                                .getUserSerialNumber(
+                                                                        userPackage2.user
+                                                                                .getIdentifier())));
+                                        resolveSerializer.attribute(
+                                                (String) null, "package", userPackage2.packageName);
+                                        resolveSerializer.endTag((String) null, "user-package");
+                                    }
+                                    resolveSerializer.endTag(
+                                            (String) null, "preference-denied-list");
+                                }
+                                resolveSerializer.endTag((String) null, "settings");
+                                resolveSerializer.endDocument();
+                                usbProfileGroupSettingsManager.mSettingsFile.finishWrite(
+                                        fileOutputStream);
+                            } catch (IOException e3) {
+                                e = e3;
+                                Slog.e(
+                                        "UsbProfileGroupSettingsManager",
+                                        "Failed to write settings",
+                                        e);
+                                if (fileOutputStream != null) {
+                                    usbProfileGroupSettingsManager.mSettingsFile.failWrite(
+                                            fileOutputStream);
+                                }
+                                usbProfileGroupSettingsManager.mIsWriteSettingsScheduled = false;
                             }
-                            resolveSerializer.endTag((String) null, "preference-denied-list");
+                            usbProfileGroupSettingsManager.mIsWriteSettingsScheduled = false;
                         }
-                        resolveSerializer.endTag((String) null, "settings");
-                        resolveSerializer.endDocument();
-                        usbProfileGroupSettingsManager.mSettingsFile.finishWrite(fileOutputStream);
-                    } catch (IOException e3) {
-                        e = e3;
-                        Slog.e("UsbProfileGroupSettingsManager", "Failed to write settings", e);
-                        if (fileOutputStream != null) {
-                            usbProfileGroupSettingsManager.mSettingsFile.failWrite(fileOutputStream);
-                        }
-                        usbProfileGroupSettingsManager.mIsWriteSettingsScheduled = false;
                     }
-                    usbProfileGroupSettingsManager.mIsWriteSettingsScheduled = false;
-                }
-            }
-        });
+                });
     }
 
-    public final void setAccessoryPackage(UsbAccessory usbAccessory, String str, UserHandle userHandle) {
+    public final void setAccessoryPackage(
+            UsbAccessory usbAccessory, String str, UserHandle userHandle) {
         if (PersonaServiceHelper.shouldBlockUsbHostMode(this.mContext)) {
             return;
         }
@@ -1250,7 +1590,10 @@ public final class UsbProfileGroupSettingsManager {
             try {
                 if (str != null) {
                     UserPackage userPackage = new UserPackage(str, userHandle);
-                    z = true ^ userPackage.equals(this.mAccessoryPreferenceMap.get(accessoryFilter));
+                    z =
+                            true
+                                    ^ userPackage.equals(
+                                            this.mAccessoryPreferenceMap.get(accessoryFilter));
                     if (z) {
                         this.mAccessoryPreferenceMap.put(accessoryFilter, userPackage);
                     }
@@ -1322,7 +1665,10 @@ public final class UsbProfileGroupSettingsManager {
                 } catch (IOException | XmlPullParserException e) {
                     e = e;
                     fileInputStream2 = fileInputStream3;
-                    Log.wtf("UsbProfileGroupSettingsManager", "Failed to read single-user settings", e);
+                    Log.wtf(
+                            "UsbProfileGroupSettingsManager",
+                            "Failed to read single-user settings",
+                            e);
                     IoUtils.closeQuietly(fileInputStream2);
                     fileInputStream = fileInputStream2;
                     scheduleWriteSettingsLocked();

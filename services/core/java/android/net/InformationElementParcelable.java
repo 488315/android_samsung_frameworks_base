@@ -5,6 +5,7 @@ import android.hardware.broadcastradio.AmFmBandRange$$ExternalSyntheticOutline0;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
@@ -20,7 +21,8 @@ public class InformationElementParcelable implements Parcelable {
     public final class AnonymousClass1 implements Parcelable.Creator {
         @Override // android.os.Parcelable.Creator
         public final Object createFromParcel(Parcel parcel) {
-            InformationElementParcelable informationElementParcelable = new InformationElementParcelable();
+            InformationElementParcelable informationElementParcelable =
+                    new InformationElementParcelable();
             informationElementParcelable.readFromParcel(parcel);
             return informationElementParcelable;
         }
@@ -71,10 +73,13 @@ public class InformationElementParcelable implements Parcelable {
 
     public String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
-        StringBuilder m = AmFmBandRange$$ExternalSyntheticOutline0.m(new StringBuilder("id: "), this.id, stringJoiner, "payload: ");
+        StringBuilder m =
+                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("id: "), this.id, stringJoiner, "payload: ");
         m.append(Arrays.toString(this.payload));
         stringJoiner.add(m.toString());
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, new StringBuilder("InformationElementParcelable"));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner, new StringBuilder("InformationElementParcelable"));
     }
 
     @Override // android.os.Parcelable
@@ -85,6 +90,7 @@ public class InformationElementParcelable implements Parcelable {
         parcel.writeByteArray(this.payload);
         int dataPosition2 = parcel.dataPosition();
         parcel.setDataPosition(dataPosition);
-        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(dataPosition2, dataPosition, parcel, dataPosition2);
+        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                dataPosition2, dataPosition, parcel, dataPosition2);
     }
 }

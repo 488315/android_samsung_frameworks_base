@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
+
 import com.android.internal.R;
 
 @Deprecated
@@ -22,7 +23,8 @@ public class ZoomControls extends LinearLayout {
     public ZoomControls(Context context, AttributeSet attrs) {
         super(context, attrs);
         setFocusable(false);
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater =
+                (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.zoom_controls, (ViewGroup) this, true);
         this.mZoomIn = (ZoomButton) findViewById(R.id.zoomIn);
         this.mZoomOut = (ZoomButton) findViewById(R.id.zoomOut);

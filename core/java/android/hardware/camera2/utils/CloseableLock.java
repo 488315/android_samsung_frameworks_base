@@ -2,6 +2,7 @@ package android.hardware.camera2.utils;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.util.Log;
+
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -18,8 +19,7 @@ public class CloseableLock implements AutoCloseable {
     private int mSharedLocks;
 
     public class ScopedLock implements AutoCloseable {
-        private ScopedLock() {
-        }
+        private ScopedLock() {}
 
         @Override // java.lang.AutoCloseable
         public void close() {
@@ -34,14 +34,16 @@ public class CloseableLock implements AutoCloseable {
         this.mSharedLocks = 0;
         this.mLock = new ReentrantLock();
         this.mCondition = this.mLock.newCondition();
-        this.mLockCount = new ThreadLocal<Integer>() { // from class: android.hardware.camera2.utils.CloseableLock.1
-            /* JADX INFO: Access modifiers changed from: protected */
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // java.lang.ThreadLocal
-            public Integer initialValue() {
-                return 0;
-            }
-        };
+        this.mLockCount =
+                new ThreadLocal<
+                        Integer>() { // from class: android.hardware.camera2.utils.CloseableLock.1
+                    /* JADX INFO: Access modifiers changed from: protected */
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // java.lang.ThreadLocal
+                    public Integer initialValue() {
+                        return 0;
+                    }
+                };
         this.mName = "";
     }
 
@@ -52,14 +54,16 @@ public class CloseableLock implements AutoCloseable {
         this.mSharedLocks = 0;
         this.mLock = new ReentrantLock();
         this.mCondition = this.mLock.newCondition();
-        this.mLockCount = new ThreadLocal<Integer>() { // from class: android.hardware.camera2.utils.CloseableLock.1
-            /* JADX INFO: Access modifiers changed from: protected */
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // java.lang.ThreadLocal
-            public Integer initialValue() {
-                return 0;
-            }
-        };
+        this.mLockCount =
+                new ThreadLocal<
+                        Integer>() { // from class: android.hardware.camera2.utils.CloseableLock.1
+                    /* JADX INFO: Access modifiers changed from: protected */
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // java.lang.ThreadLocal
+                    public Integer initialValue() {
+                        return 0;
+                    }
+                };
         this.mName = name;
     }
 
@@ -73,7 +77,9 @@ public class CloseableLock implements AutoCloseable {
             return;
         }
         if (this.mLockCount.get().intValue() != 1) {
-            throw new IllegalStateException("Cannot close while one or more acquired locks are being held by this thread; release all other locks first");
+            throw new IllegalStateException(
+                    "Cannot close while one or more acquired locks are being held by this thread;"
+                            + " release all other locks first");
         }
         try {
             this.mLock.lock();
@@ -95,7 +101,8 @@ public class CloseableLock implements AutoCloseable {
             }
             int ownedLocks = this.mLockCount.get().intValue();
             if (this.mExclusive && ownedLocks > 0) {
-                throw new IllegalStateException("Cannot acquire shared lock while holding exclusive lock");
+                throw new IllegalStateException(
+                        "Cannot acquire shared lock while holding exclusive lock");
             }
             while (this.mExclusive) {
                 this.mCondition.awaitUninterruptibly();
@@ -121,7 +128,8 @@ public class CloseableLock implements AutoCloseable {
             }
             int ownedLocks = this.mLockCount.get().intValue();
             if (!this.mExclusive && ownedLocks > 0) {
-                throw new IllegalStateException("Cannot acquire exclusive lock while holding shared lock");
+                throw new IllegalStateException(
+                        "Cannot acquire exclusive lock while holding shared lock");
             }
             while (ownedLocks == 0 && (this.mExclusive || this.mSharedLocks > 0)) {
                 this.mCondition.awaitUninterruptibly();
@@ -140,7 +148,8 @@ public class CloseableLock implements AutoCloseable {
 
     public void releaseLock() {
         if (this.mLockCount.get().intValue() <= 0) {
-            throw new IllegalStateException("Cannot release lock that was not acquired by this thread");
+            throw new IllegalStateException(
+                    "Cannot release lock that was not acquired by this thread");
         }
         try {
             this.mLock.lock();

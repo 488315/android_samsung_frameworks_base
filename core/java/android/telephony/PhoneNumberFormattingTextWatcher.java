@@ -4,8 +4,10 @@ import android.text.Editable;
 import android.text.Selection;
 import android.text.TextWatcher;
 import android.text.style.TtsSpan;
+
 import com.android.i18n.phonenumbers.AsYouTypeFormatter;
 import com.android.i18n.phonenumbers.PhoneNumberUtil;
+
 import java.util.Locale;
 
 /* loaded from: classes4.dex */
@@ -28,14 +30,20 @@ public class PhoneNumberFormattingTextWatcher implements TextWatcher {
 
     @Override // android.text.TextWatcher
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        if (!this.mSelfChange && !this.mStopFormatting && count > 0 && hasSeparator(s, start, count)) {
+        if (!this.mSelfChange
+                && !this.mStopFormatting
+                && count > 0
+                && hasSeparator(s, start, count)) {
             stopFormatting();
         }
     }
 
     @Override // android.text.TextWatcher
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        if (!this.mSelfChange && !this.mStopFormatting && count > 0 && hasSeparator(s, start, count)) {
+        if (!this.mSelfChange
+                && !this.mStopFormatting
+                && count > 0
+                && hasSeparator(s, start, count)) {
             stopFormatting();
         }
     }
@@ -103,7 +111,9 @@ public class PhoneNumberFormattingTextWatcher implements TextWatcher {
     }
 
     private String getFormattedNumber(char lastNonSeparator, boolean hasCursor) {
-        return hasCursor ? this.mFormatter.inputDigitAndRememberPosition(lastNonSeparator) : this.mFormatter.inputDigit(lastNonSeparator);
+        return hasCursor
+                ? this.mFormatter.inputDigitAndRememberPosition(lastNonSeparator)
+                : this.mFormatter.inputDigit(lastNonSeparator);
     }
 
     private void stopFormatting() {

@@ -1,9 +1,10 @@
 package android.net.vcn.persistablebundleutils;
 
 import android.net.ipsec.ike.ChildSaProposal;
-import android.net.vcn.persistablebundleutils.SaProposalUtilsBase;
 import android.os.PersistableBundle;
+
 import com.android.server.vcn.repackaged.util.PersistableBundleUtils;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -18,7 +19,9 @@ public final class ChildSaProposalUtils extends SaProposalUtilsBase {
         ChildSaProposal.Builder builder = new ChildSaProposal.Builder();
         PersistableBundle encryptionBundle = in.getPersistableBundle("ENCRYPT_ALGO_KEY");
         Objects.requireNonNull(encryptionBundle, "Encryption algo bundle was null");
-        List<SaProposalUtilsBase.EncryptionAlgoKeyLenPair> encryptList = PersistableBundleUtils.toList(encryptionBundle, new ChildSaProposalUtils$$ExternalSyntheticLambda0());
+        List<SaProposalUtilsBase.EncryptionAlgoKeyLenPair> encryptList =
+                PersistableBundleUtils.toList(
+                        encryptionBundle, new ChildSaProposalUtils$$ExternalSyntheticLambda0());
         for (SaProposalUtilsBase.EncryptionAlgoKeyLenPair t : encryptList) {
             builder.addEncryptionAlgorithm(t.encryptionAlgo, t.keyLen);
         }

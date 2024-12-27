@@ -8,19 +8,22 @@ import android.util.Log;
 
 /* loaded from: classes6.dex */
 public class SemContextPedometerAttribute extends SemContextAttribute {
-    public static final Parcelable.Creator<SemContextPedometerAttribute> CREATOR = new Parcelable.Creator<SemContextPedometerAttribute>() { // from class: com.samsung.android.hardware.context.SemContextPedometerAttribute.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextPedometerAttribute createFromParcel(Parcel in) {
-            return new SemContextPedometerAttribute(in);
-        }
+    public static final Parcelable.Creator<SemContextPedometerAttribute> CREATOR =
+            new Parcelable.Creator<
+                    SemContextPedometerAttribute>() { // from class:
+                                                      // com.samsung.android.hardware.context.SemContextPedometerAttribute.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextPedometerAttribute createFromParcel(Parcel in) {
+                    return new SemContextPedometerAttribute(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextPedometerAttribute[] newArray(int size) {
-            return new SemContextPedometerAttribute[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextPedometerAttribute[] newArray(int size) {
+                    return new SemContextPedometerAttribute[size];
+                }
+            };
     private static final int MODE_EXERCISE = 1;
     private static final int MODE_USER_INFO = 0;
     private static final String TAG = "SemContextPedometerAttribute";

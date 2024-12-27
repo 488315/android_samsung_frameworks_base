@@ -4,6 +4,7 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -15,26 +16,26 @@ public final class CallException extends RuntimeException implements Parcelable 
     public static final int CODE_CANNOT_HOLD_CURRENT_ACTIVE_CALL = 2;
     public static final int CODE_ERROR_UNKNOWN = 1;
     public static final int CODE_OPERATION_TIMED_OUT = 6;
-    public static final Parcelable.Creator<CallException> CREATOR = new Parcelable.Creator<CallException>() { // from class: android.telecom.CallException.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CallException createFromParcel(Parcel source) {
-            return new CallException(source.readString8(), source.readInt());
-        }
+    public static final Parcelable.Creator<CallException> CREATOR =
+            new Parcelable.Creator<CallException>() { // from class: android.telecom.CallException.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CallException createFromParcel(Parcel source) {
+                    return new CallException(source.readString8(), source.readInt());
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CallException[] newArray(int size) {
-            return new CallException[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CallException[] newArray(int size) {
+                    return new CallException[size];
+                }
+            };
     public static final String TRANSACTION_EXCEPTION_KEY = "TelecomTransactionalExceptionKey";
     private int mCode;
     private final String mMessage;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CallErrorCode {
-    }
+    public @interface CallErrorCode {}
 
     @Override // android.os.Parcelable
     public int describeContents() {

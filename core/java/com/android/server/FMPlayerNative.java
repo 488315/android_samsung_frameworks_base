@@ -2,7 +2,6 @@ package com.android.server;
 
 import android.os.SystemProperties;
 import android.util.Log;
-import com.android.server.FMPlayerNativeBase;
 
 /* loaded from: classes5.dex */
 public class FMPlayerNative extends FMPlayerNativeBase {
@@ -371,8 +370,7 @@ public class FMPlayerNative extends FMPlayerNativeBase {
         mService.notifyEvent(16, ob);
     }
 
-    public static void notifyPIECCEvent(FMPlayerNativeBase.PIECCData ob) {
-    }
+    public static void notifyPIECCEvent(FMPlayerNativeBase.PIECCData ob) {}
 
     public static void notifyAFStarted() {
         if (!mService.isAFEnable()) {
@@ -393,6 +391,5 @@ public class FMPlayerNative extends FMPlayerNativeBase {
     }
 
     @Override // com.android.server.FMPlayerNativeBase
-    public void offFMService() {
-    }
+    public void offFMService() {}
 }

@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.android.ims.internal.IImsEcbmListener;
 
 /* loaded from: classes5.dex */
 public interface IImsEcbm extends IInterface {
@@ -15,12 +14,10 @@ public interface IImsEcbm extends IInterface {
 
     public static class Default implements IImsEcbm {
         @Override // com.android.ims.internal.IImsEcbm
-        public void setListener(IImsEcbmListener listener) throws RemoteException {
-        }
+        public void setListener(IImsEcbmListener listener) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsEcbm
-        public void exitEmergencyCallbackMode() throws RemoteException {
-        }
+        public void exitEmergencyCallbackMode() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -28,7 +25,7 @@ public interface IImsEcbm extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImsEcbm {
+    public abstract static class Stub extends Binder implements IImsEcbm {
         public static final String DESCRIPTOR = "com.android.ims.internal.IImsEcbm";
         static final int TRANSACTION_exitEmergencyCallbackMode = 2;
         static final int TRANSACTION_setListener = 1;
@@ -70,7 +67,8 @@ public interface IImsEcbm extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -80,7 +78,8 @@ public interface IImsEcbm extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IImsEcbmListener _arg0 = IImsEcbmListener.Stub.asInterface(data.readStrongBinder());
+                    IImsEcbmListener _arg0 =
+                            IImsEcbmListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setListener(_arg0);
                     reply.writeNoException();

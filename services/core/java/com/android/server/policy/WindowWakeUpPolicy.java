@@ -12,9 +12,10 @@ import android.provider.Settings;
 import android.util.Slog;
 import android.view.Display;
 import android.view.WindowManager;
+
 import com.android.internal.os.Clock;
 import com.android.server.LocalServices;
-import com.android.server.policy.WindowWakeUpPolicyInternal;
+
 import com.samsung.android.os.SemDvfsManager;
 import com.sec.android.sdhms.ISamsungDeviceHealthManager;
 
@@ -39,11 +40,11 @@ public final class WindowWakeUpPolicy {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService implements WindowWakeUpPolicyInternal {
-        public LocalService() {
-        }
+        public LocalService() {}
 
         @Override // com.android.server.policy.WindowWakeUpPolicyInternal
-        public final void setInputWakeUpDelegate(WindowWakeUpPolicyInternal.InputWakeUpDelegate inputWakeUpDelegate) {
+        public final void setInputWakeUpDelegate(
+                WindowWakeUpPolicyInternal.InputWakeUpDelegate inputWakeUpDelegate) {
             Flags.supportInputWakeupDelegate();
             WindowWakeUpPolicy.this.mInputWakeUpDelegate = inputWakeUpDelegate;
         }
@@ -55,13 +56,19 @@ public final class WindowWakeUpPolicy {
         this.mWindowManager = (WindowManager) context.getSystemService(WindowManager.class);
         this.mClock = clock;
         Resources resources = context.getResources();
-        boolean z = resources.getBoolean(R.bool.config_allowTheaterModeWakeFromMotionWhenNotDreaming);
+        boolean z =
+                resources.getBoolean(R.bool.config_allowTheaterModeWakeFromMotionWhenNotDreaming);
         this.mAllowTheaterModeWakeFromKey = z;
-        this.mAllowTheaterModeWakeFromPowerKey = z || resources.getBoolean(R.bool.config_allow_pin_storage_for_unattended_reboot);
-        this.mAllowTheaterModeWakeFromMotion = resources.getBoolean(R.bool.config_allowTheaterModeWakeFromUnplug);
-        this.mAllowTheaterModeWakeFromCameraLens = resources.getBoolean(R.bool.config_allowTheaterModeWakeFromKey);
-        this.mAllowTheaterModeWakeFromLidSwitch = resources.getBoolean(R.bool.config_allowTheaterModeWakeFromPowerKey);
-        this.mAllowTheaterModeWakeFromWakeGesture = resources.getBoolean(R.bool.config_allowTheaterModeWakeFromMotion);
+        this.mAllowTheaterModeWakeFromPowerKey =
+                z || resources.getBoolean(R.bool.config_allow_pin_storage_for_unattended_reboot);
+        this.mAllowTheaterModeWakeFromMotion =
+                resources.getBoolean(R.bool.config_allowTheaterModeWakeFromUnplug);
+        this.mAllowTheaterModeWakeFromCameraLens =
+                resources.getBoolean(R.bool.config_allowTheaterModeWakeFromKey);
+        this.mAllowTheaterModeWakeFromLidSwitch =
+                resources.getBoolean(R.bool.config_allowTheaterModeWakeFromPowerKey);
+        this.mAllowTheaterModeWakeFromWakeGesture =
+                resources.getBoolean(R.bool.config_allowTheaterModeWakeFromMotion);
         Flags.supportInputWakeupDelegate();
         LocalServices.addService(WindowWakeUpPolicyInternal.class, new LocalService());
         initSdhmsService();
@@ -96,14 +103,18 @@ public final class WindowWakeUpPolicy {
         if (Display.isOnState(this.mWindowManager.getDefaultDisplay().getState())) {
             return true;
         }
-        return z || !(Settings.Global.getInt(this.mContext.getContentResolver(), "theater_mode_on", 0) == 1);
+        return z
+                || !(Settings.Global.getInt(
+                                this.mContext.getContentResolver(), "theater_mode_on", 0)
+                        == 1);
     }
 
     public final void wakeUp(long j, int i, String str) {
         synchronized (this.mBoosterLock) {
             try {
                 if (this.mSemWakeUpBooster == null) {
-                    SemDvfsManager createInstance = SemDvfsManager.createInstance(this.mContext, "DEVICE_WAKEUP");
+                    SemDvfsManager createInstance =
+                            SemDvfsManager.createInstance(this.mContext, "DEVICE_WAKEUP");
                     this.mSemWakeUpBooster = createInstance;
                     if (createInstance != null) {
                         createInstance.setHint(19);
@@ -132,6 +143,9 @@ public final class WindowWakeUpPolicy {
                 e2.printStackTrace();
             }
         }
-        this.mPowerManager.wakeUp(j, i, ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("android.policy:", str));
+        this.mPowerManager.wakeUp(
+                j,
+                i,
+                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("android.policy:", str));
     }
 }

@@ -7,23 +7,36 @@ import android.os.RemoteCallback;
 import android.os.RemoteException;
 import android.util.ArraySet;
 import android.util.Slog;
+
 import com.android.internal.os.AtomicDirectory;
 import com.android.internal.util.function.DodecConsumer;
-import com.android.server.appop.AppOpsService;
-import com.android.server.appop.HistoricalRegistry;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class AppOpsService$$ExternalSyntheticLambda0 implements DodecConsumer {
+public final /* synthetic */ class AppOpsService$$ExternalSyntheticLambda0
+        implements DodecConsumer {
     public final /* synthetic */ int $r8$classId;
 
     public /* synthetic */ AppOpsService$$ExternalSyntheticLambda0(int i) {
         this.$r8$classId = i;
     }
 
-    public final void accept(Object obj, Object obj2, Object obj3, Object obj4, Object obj5, Object obj6, Object obj7, Object obj8, Object obj9, Object obj10, Object obj11, Object obj12) {
+    public final void accept(
+            Object obj,
+            Object obj2,
+            Object obj3,
+            Object obj4,
+            Object obj5,
+            Object obj6,
+            Object obj7,
+            Object obj8,
+            Object obj9,
+            Object obj10,
+            Object obj11,
+            Object obj12) {
         int i;
         String[] strArr;
         RemoteCallback remoteCallback;
@@ -48,28 +61,45 @@ public final /* synthetic */ class AppOpsService$$ExternalSyntheticLambda0 imple
                 String[] strArr3 = (String[]) obj11;
                 RemoteCallback remoteCallback3 = (RemoteCallback) obj12;
                 historicalRegistry.getClass();
-                AppOpsManager.HistoricalOps historicalOps = new AppOpsManager.HistoricalOps(longValue, longValue2);
+                AppOpsManager.HistoricalOps historicalOps =
+                        new AppOpsManager.HistoricalOps(longValue, longValue2);
                 if ((intValue2 & 1) != 0) {
                     synchronized (historicalRegistry.mOnDiskLock) {
                         strArr = strArr3;
                         synchronized (historicalRegistry.mInMemoryLock) {
                             if (!historicalRegistry.isPersistenceInitializedMLocked()) {
-                                Slog.e(HistoricalRegistry.LOG_TAG, "Interaction before persistence initialized");
+                                Slog.e(
+                                        HistoricalRegistry.LOG_TAG,
+                                        "Interaction before persistence initialized");
                                 remoteCallback3.sendResult(new Bundle());
                                 return;
                             }
-                            HistoricalRegistry.Persistence persistence = historicalRegistry.mPersistence;
-                            AtomicDirectory atomicDirectory = HistoricalRegistry.Persistence.sHistoricalAppOpsDir;
-                            LinkedList collectHistoricalOpsBaseDLocked = persistence.collectHistoricalOpsBaseDLocked(intValue, str, str2, strArr2, intValue3, longValue, longValue2, intValue4);
+                            HistoricalRegistry.Persistence persistence =
+                                    historicalRegistry.mPersistence;
+                            AtomicDirectory atomicDirectory =
+                                    HistoricalRegistry.Persistence.sHistoricalAppOpsDir;
+                            LinkedList collectHistoricalOpsBaseDLocked =
+                                    persistence.collectHistoricalOpsBaseDLocked(
+                                            intValue,
+                                            str,
+                                            str2,
+                                            strArr2,
+                                            intValue3,
+                                            longValue,
+                                            longValue2,
+                                            intValue4);
                             if (collectHistoricalOpsBaseDLocked != null) {
                                 remoteCallback = remoteCallback3;
                                 int size = collectHistoricalOpsBaseDLocked.size();
                                 i = intValue4;
                                 int i2 = 0;
                                 while (i2 < size) {
-                                    historicalOps.merge((AppOpsManager.HistoricalOps) collectHistoricalOpsBaseDLocked.get(i2));
+                                    historicalOps.merge(
+                                            (AppOpsManager.HistoricalOps)
+                                                    collectHistoricalOpsBaseDLocked.get(i2));
                                     i2++;
-                                    collectHistoricalOpsBaseDLocked = collectHistoricalOpsBaseDLocked;
+                                    collectHistoricalOpsBaseDLocked =
+                                            collectHistoricalOpsBaseDLocked;
                                 }
                             } else {
                                 i = intValue4;
@@ -83,7 +113,17 @@ public final /* synthetic */ class AppOpsService$$ExternalSyntheticLambda0 imple
                     remoteCallback = remoteCallback3;
                 }
                 if ((intValue2 & 2) != 0) {
-                    historicalRegistry.mDiscreteRegistry.addFilteredDiscreteOpsToHistoricalOps(historicalOps, longValue, longValue2, intValue3, intValue, str, strArr2, str2, i, new ArraySet(strArr));
+                    historicalRegistry.mDiscreteRegistry.addFilteredDiscreteOpsToHistoricalOps(
+                            historicalOps,
+                            longValue,
+                            longValue2,
+                            intValue3,
+                            intValue,
+                            str,
+                            strArr2,
+                            str2,
+                            i,
+                            new ArraySet(strArr));
                 }
                 Bundle bundle2 = new Bundle();
                 bundle2.putParcelable("historical_ops", historicalOps);
@@ -114,10 +154,21 @@ public final /* synthetic */ class AppOpsService$$ExternalSyntheticLambda0 imple
                 long max = Math.max(currentTimeMillis - longValue4, 0L);
                 long j5 = longValue4;
                 long max2 = Math.max(currentTimeMillis - longValue3, 0L);
-                AppOpsManager.HistoricalOps historicalOps2 = new AppOpsManager.HistoricalOps(max, max2);
+                AppOpsManager.HistoricalOps historicalOps2 =
+                        new AppOpsManager.HistoricalOps(max, max2);
                 if ((intValue6 & 2) != 0) {
                     bundle = bundle3;
-                    historicalRegistry2.mDiscreteRegistry.addFilteredDiscreteOpsToHistoricalOps(historicalOps2, longValue3, j5, intValue7, intValue5, str3, strArr4, str4, intValue8, new ArraySet(strArr5));
+                    historicalRegistry2.mDiscreteRegistry.addFilteredDiscreteOpsToHistoricalOps(
+                            historicalOps2,
+                            longValue3,
+                            j5,
+                            intValue7,
+                            intValue5,
+                            str3,
+                            strArr4,
+                            str4,
+                            intValue8,
+                            new ArraySet(strArr5));
                 } else {
                     bundle = bundle3;
                 }
@@ -125,34 +176,57 @@ public final /* synthetic */ class AppOpsService$$ExternalSyntheticLambda0 imple
                     synchronized (historicalRegistry2.mOnDiskLock) {
                         synchronized (historicalRegistry2.mInMemoryLock) {
                             if (!historicalRegistry2.isPersistenceInitializedMLocked()) {
-                                Slog.e(HistoricalRegistry.LOG_TAG, "Interaction before persistence initialized");
+                                Slog.e(
+                                        HistoricalRegistry.LOG_TAG,
+                                        "Interaction before persistence initialized");
                                 remoteCallback2.sendResult(new Bundle());
                                 return;
                             }
-                            AppOpsManager.HistoricalOps updatedPendingHistoricalOpsMLocked = historicalRegistry2.getUpdatedPendingHistoricalOpsMLocked(currentTimeMillis);
-                            if (max >= updatedPendingHistoricalOpsMLocked.getEndTimeMillis() || max2 <= updatedPendingHistoricalOpsMLocked.getBeginTimeMillis()) {
+                            AppOpsManager.HistoricalOps updatedPendingHistoricalOpsMLocked =
+                                    historicalRegistry2.getUpdatedPendingHistoricalOpsMLocked(
+                                            currentTimeMillis);
+                            if (max >= updatedPendingHistoricalOpsMLocked.getEndTimeMillis()
+                                    || max2
+                                            <= updatedPendingHistoricalOpsMLocked
+                                                    .getBeginTimeMillis()) {
                                 j3 = longValue3;
                             } else {
                                 j3 = longValue3;
-                                AppOpsManager.HistoricalOps historicalOps3 = new AppOpsManager.HistoricalOps(updatedPendingHistoricalOpsMLocked);
-                                historicalOps3.filter(intValue5, str3, str4, strArr4, intValue6, intValue7, max, max2);
+                                AppOpsManager.HistoricalOps historicalOps3 =
+                                        new AppOpsManager.HistoricalOps(
+                                                updatedPendingHistoricalOpsMLocked);
+                                historicalOps3.filter(
+                                        intValue5, str3, str4, strArr4, intValue6, intValue7, max,
+                                        max2);
                                 historicalOps2.merge(historicalOps3);
                             }
                             ArrayList arrayList = new ArrayList(historicalRegistry2.mPendingWrites);
                             historicalRegistry2.mPendingWrites.clear();
-                            boolean z = max2 > updatedPendingHistoricalOpsMLocked.getEndTimeMillis();
+                            boolean z =
+                                    max2 > updatedPendingHistoricalOpsMLocked.getEndTimeMillis();
                             if (z) {
                                 historicalRegistry2.persistPendingHistory(arrayList);
-                                long j6 = (currentTimeMillis - historicalRegistry2.mNextPersistDueTimeMillis) + historicalRegistry2.mBaseSnapshotInterval;
+                                long j6 =
+                                        (currentTimeMillis
+                                                        - historicalRegistry2
+                                                                .mNextPersistDueTimeMillis)
+                                                + historicalRegistry2.mBaseSnapshotInterval;
                                 long max3 = Math.max(max - j6, 0L);
                                 long max4 = Math.max(max2 - j6, 0L);
-                                HistoricalRegistry.Persistence persistence2 = historicalRegistry2.mPersistence;
-                                AtomicDirectory atomicDirectory2 = HistoricalRegistry.Persistence.sHistoricalAppOpsDir;
-                                LinkedList collectHistoricalOpsBaseDLocked2 = persistence2.collectHistoricalOpsBaseDLocked(intValue5, str3, str4, strArr4, intValue7, max3, max4, intValue8);
+                                HistoricalRegistry.Persistence persistence2 =
+                                        historicalRegistry2.mPersistence;
+                                AtomicDirectory atomicDirectory2 =
+                                        HistoricalRegistry.Persistence.sHistoricalAppOpsDir;
+                                LinkedList collectHistoricalOpsBaseDLocked2 =
+                                        persistence2.collectHistoricalOpsBaseDLocked(
+                                                intValue5, str3, str4, strArr4, intValue7, max3,
+                                                max4, intValue8);
                                 if (collectHistoricalOpsBaseDLocked2 != null) {
                                     int size2 = collectHistoricalOpsBaseDLocked2.size();
                                     for (int i3 = 0; i3 < size2; i3++) {
-                                        historicalOps2.merge((AppOpsManager.HistoricalOps) collectHistoricalOpsBaseDLocked2.get(i3));
+                                        historicalOps2.merge(
+                                                (AppOpsManager.HistoricalOps)
+                                                        collectHistoricalOpsBaseDLocked2.get(i3));
                                     }
                                 }
                             }
@@ -189,13 +263,27 @@ public final /* synthetic */ class AppOpsService$$ExternalSyntheticLambda0 imple
                     int i4 = 0;
                     while (i4 < size3) {
                         int i5 = size3;
-                        AppOpsService.StartedCallback startedCallback = (AppOpsService.StartedCallback) arraySet.valueAt(i4);
+                        AppOpsService.StartedCallback startedCallback =
+                                (AppOpsService.StartedCallback) arraySet.valueAt(i4);
                         ArraySet arraySet2 = arraySet;
                         try {
                             j4 = clearCallingIdentity;
                             try {
-                                if (!appOpsService.shouldIgnoreCallback(intValue9, startedCallback.mCallingPid, startedCallback.mCallingUid)) {
-                                    startedCallback.mCallback.opStarted(intValue9, intValue10, str5, str6, intValue11, intValue12, intValue13, intValue14, intValue15, intValue16);
+                                if (!appOpsService.shouldIgnoreCallback(
+                                        intValue9,
+                                        startedCallback.mCallingPid,
+                                        startedCallback.mCallingUid)) {
+                                    startedCallback.mCallback.opStarted(
+                                            intValue9,
+                                            intValue10,
+                                            str5,
+                                            str6,
+                                            intValue11,
+                                            intValue12,
+                                            intValue13,
+                                            intValue14,
+                                            intValue15,
+                                            intValue16);
                                 }
                             } catch (RemoteException unused) {
                             } catch (Throwable th) {

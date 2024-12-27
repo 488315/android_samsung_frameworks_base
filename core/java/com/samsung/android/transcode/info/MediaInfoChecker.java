@@ -3,10 +3,11 @@ package com.samsung.android.transcode.info;
 import android.media.MediaCodecInfo;
 import android.media.MediaCodecList;
 import android.media.MediaFormat;
+
 import com.samsung.android.media.SemMediaResourceHelper;
 import com.samsung.android.transcode.constants.EncodeConstants;
-import com.samsung.android.transcode.info.MediaInfo;
 import com.samsung.android.transcode.util.LogS;
+
 import java.nio.ByteBuffer;
 
 /* loaded from: classes6.dex */
@@ -33,19 +34,35 @@ public class MediaInfoChecker {
         boolean bSupportedAudioType = false;
         String mimeAudio = audioformat.getString("mime");
         String mimeVideo = videoformat.getString("mime");
-        if (mimeVideo != null && (mimeVideo.contains("video/avc") || mimeVideo.contains("video/mp4v-es") || mimeVideo.contains("video/3gpp") || mimeVideo.contains("video/hevc"))) {
+        if (mimeVideo != null
+                && (mimeVideo.contains("video/avc")
+                        || mimeVideo.contains("video/mp4v-es")
+                        || mimeVideo.contains("video/3gpp")
+                        || mimeVideo.contains("video/hevc"))) {
             bSupportedVideoType = true;
         } else {
             LogS.d("TranscodeLib", "Unsupported mime type: video");
         }
-        if (mimeAudio != null && (mimeAudio.contains("audio/mp4a-latm") || mimeAudio.contains("audio/3gpp") || mimeAudio.contains("audio/amr-wb"))) {
+        if (mimeAudio != null
+                && (mimeAudio.contains("audio/mp4a-latm")
+                        || mimeAudio.contains("audio/3gpp")
+                        || mimeAudio.contains("audio/amr-wb"))) {
             bSupportedAudioType = true;
         } else {
             LogS.d("TranscodeLib", "Unsuppported mime type: audio");
         }
-        if (mimeVideo != null && mimeVideo.contains("video/mp4v-es") && videoformat.containsKey("csd-0")) {
+        if (mimeVideo != null
+                && mimeVideo.contains("video/mp4v-es")
+                && videoformat.containsKey("csd-0")) {
             ByteBuffer csd = videoformat.getByteBuffer("csd-0");
-            LogS.d("TranscodeLib", "mime : " + mimeVideo + ", csd.capacity(): " + csd.capacity() + ", csd.limit()" + csd.limit());
+            LogS.d(
+                    "TranscodeLib",
+                    "mime : "
+                            + mimeVideo
+                            + ", csd.capacity(): "
+                            + csd.capacity()
+                            + ", csd.limit()"
+                            + csd.limit());
             if (csd.limit() > mp4v_esds_size) {
                 bSupportedVideoType = false;
             }
@@ -58,7 +75,8 @@ public class MediaInfoChecker {
     }
 
     public static int getHDRMode(MediaInfo.MediaFileInfo info) {
-        if ((info.Author == 0 || info.Author == 8) && (info.RecordingMode == 10 || info.RecordingMode == 25)) {
+        if ((info.Author == 0 || info.Author == 8)
+                && (info.RecordingMode == 10 || info.RecordingMode == 25)) {
             return 2;
         }
         if (!info.HDR10) {
@@ -67,21 +85,39 @@ public class MediaInfoChecker {
         return 1;
     }
 
-    public static boolean isSupportedResolution(MediaFormat inputformat, int inputwidth, int inputheight, int outputwidth, int outputheight) {
+    public static boolean isSupportedResolution(
+            MediaFormat inputformat,
+            int inputwidth,
+            int inputheight,
+            int outputwidth,
+            int outputheight) {
         int codecSize;
-        LogS.d("TranscodeLib", "isSupportedResolution\tinputwidth: " + inputwidth + ", inputheight: " + inputheight + ", outputwidth: " + outputwidth + ", outputheight : " + outputheight);
+        LogS.d(
+                "TranscodeLib",
+                "isSupportedResolution\tinputwidth: "
+                        + inputwidth
+                        + ", inputheight: "
+                        + inputheight
+                        + ", outputwidth: "
+                        + outputwidth
+                        + ", outputheight : "
+                        + outputheight);
         if (inputwidth < 0 || inputheight < 0 || outputwidth < 0 || outputheight < 0) {
             return false;
         }
         SemMediaResourceHelper resourceHelper = SemMediaResourceHelper.createInstance(2, false);
         int remainedCapacity = resourceHelper.getRemainedVideoCapacity();
-        int requiredResolutionSizeWithInputAndOutput = (inputwidth * inputheight) + (outputwidth * outputheight);
+        int requiredResolutionSizeWithInputAndOutput =
+                (inputwidth * inputheight) + (outputwidth * outputheight);
         if (remainedCapacity != NOT_SUPPORT_VC) {
             codecSize = remainedCapacity;
         } else {
             codecSize = resourceHelper.getMaxVideoCapacity();
             if (codecSize <= requiredResolutionSizeWithInputAndOutput) {
-                codecSize = codecSize > FOUR_K_VIDEO_RESOULTION_SIZE ? FOUR_K_VIDEO_RESOULTION_SIZE + codecSize : codecSize * 2;
+                codecSize =
+                        codecSize > FOUR_K_VIDEO_RESOULTION_SIZE
+                                ? FOUR_K_VIDEO_RESOULTION_SIZE + codecSize
+                                : codecSize * 2;
             }
         }
         return codecSize >= requiredResolutionSizeWithInputAndOutput;
@@ -120,7 +156,9 @@ public class MediaInfoChecker {
                 return false;
             }
         }
-        LogS.e("TranscodeLib", "isSupportedCodecType support codec  : " + codec + ", mime : " + mime);
+        LogS.e(
+                "TranscodeLib",
+                "isSupportedCodecType support codec  : " + codec + ", mime : " + mime);
         return true;
     }
 

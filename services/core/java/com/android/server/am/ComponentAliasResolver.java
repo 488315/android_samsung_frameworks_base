@@ -5,8 +5,10 @@ import android.content.Context;
 import android.os.ServiceManager;
 import android.util.ArrayMap;
 import android.util.Slog;
+
 import com.android.internal.content.PackageMonitor;
 import com.android.server.compat.PlatformCompat;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -34,7 +36,9 @@ public final class ComponentAliasResolver {
     /* renamed from: -$$Nest$mrefresh, reason: not valid java name */
     public static void m187$$Nest$mrefresh(ComponentAliasResolver componentAliasResolver) {
         synchronized (componentAliasResolver.mLock) {
-            componentAliasResolver.update(componentAliasResolver.mOverrideString, componentAliasResolver.mEnabledByDeviceConfig);
+            componentAliasResolver.update(
+                    componentAliasResolver.mOverrideString,
+                    componentAliasResolver.mEnabledByDeviceConfig);
         }
     }
 
@@ -58,7 +62,8 @@ public final class ComponentAliasResolver {
     public final void dump(PrintWriter printWriter) {
         synchronized (this.mLock) {
             try {
-                printWriter.println("ACTIVITY MANAGER COMPONENT-ALIAS (dumpsys activity component-alias)");
+                printWriter.println(
+                        "ACTIVITY MANAGER COMPONENT-ALIAS (dumpsys activity component-alias)");
                 printWriter.print("  Enabled: ");
                 printWriter.println(false);
                 printWriter.println("  Aliases:");

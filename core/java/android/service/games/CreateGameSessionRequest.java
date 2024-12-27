@@ -3,24 +3,28 @@ package android.service.games;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class CreateGameSessionRequest implements Parcelable {
-    public static final Parcelable.Creator<CreateGameSessionRequest> CREATOR = new Parcelable.Creator<CreateGameSessionRequest>() { // from class: android.service.games.CreateGameSessionRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CreateGameSessionRequest createFromParcel(Parcel source) {
-            return new CreateGameSessionRequest(source.readInt(), source.readString8());
-        }
+    public static final Parcelable.Creator<CreateGameSessionRequest> CREATOR =
+            new Parcelable.Creator<
+                    CreateGameSessionRequest>() { // from class:
+                                                  // android.service.games.CreateGameSessionRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CreateGameSessionRequest createFromParcel(Parcel source) {
+                    return new CreateGameSessionRequest(source.readInt(), source.readString8());
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CreateGameSessionRequest[] newArray(int size) {
-            return new CreateGameSessionRequest[0];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CreateGameSessionRequest[] newArray(int size) {
+                    return new CreateGameSessionRequest[0];
+                }
+            };
     private final String mGamePackageName;
     private final int mTaskId;
 
@@ -49,7 +53,11 @@ public final class CreateGameSessionRequest implements Parcelable {
     }
 
     public String toString() {
-        return "GameSessionRequest{mTaskId=" + this.mTaskId + ", mGamePackageName='" + this.mGamePackageName + "'}";
+        return "GameSessionRequest{mTaskId="
+                + this.mTaskId
+                + ", mGamePackageName='"
+                + this.mGamePackageName
+                + "'}";
     }
 
     public boolean equals(Object o) {
@@ -60,7 +68,8 @@ public final class CreateGameSessionRequest implements Parcelable {
             return false;
         }
         CreateGameSessionRequest that = (CreateGameSessionRequest) o;
-        return this.mTaskId == that.mTaskId && Objects.equals(this.mGamePackageName, that.mGamePackageName);
+        return this.mTaskId == that.mTaskId
+                && Objects.equals(this.mGamePackageName, that.mGamePackageName);
     }
 
     public int hashCode() {

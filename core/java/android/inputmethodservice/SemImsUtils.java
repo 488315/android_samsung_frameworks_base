@@ -15,16 +15,17 @@ import android.view.inputmethod.InputMethodManager;
 
 /* loaded from: classes2.dex */
 final class SemImsUtils {
-    private static final String ACTION_INPUTMETHOD_STARTING_SSRM = "com.samsung.android.intent.action.INPUTMETHOD_STARTING";
+    private static final String ACTION_INPUTMETHOD_STARTING_SSRM =
+            "com.samsung.android.intent.action.INPUTMETHOD_STARTING";
     private static final String IS_VISIBLE_CANDIDATE = "AxT9IME.isVisibleCandidate";
     private static final String IS_VISIBLE_WINDOW = "AxT9IME.isVisibleWindow";
     private static final String IS_VISIBLE_WINDOW_SSRM = "visible";
-    private static final String METHOD_ID_BIXBY_DICTATION = "com.samsung.android.bixby.service/.dictation.DictationInputMethodService";
+    private static final String METHOD_ID_BIXBY_DICTATION =
+            "com.samsung.android.bixby.service/.dictation.DictationInputMethodService";
     private static final String RESPONSE_AXT9INFO = "ResponseAxT9Info";
     static final String TAG = "InputMethodService";
 
-    SemImsUtils() {
-    }
+    SemImsUtils() {}
 
     static int getNavigationBarHeight(Resources resources) {
         int resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
@@ -43,12 +44,19 @@ final class SemImsUtils {
     }
 
     static boolean isBixbyDictationId(String id) {
-        return "com.samsung.android.bixby.service/.dictation.DictationInputMethodService".equals(id);
+        return "com.samsung.android.bixby.service/.dictation.DictationInputMethodService"
+                .equals(id);
     }
 
-    static Context createDisplayContextAndSetTheme(Context context, int theme, InputMethodManager mImm) {
+    static Context createDisplayContextAndSetTheme(
+            Context context, int theme, InputMethodManager mImm) {
         int curTokenDisplayId = mImm.getCurTokenDisplayId();
-        Log.d(TAG, "onCreate: FocusDisplayId=" + mImm.getCurrentFocusDisplayID() + ", CurTokenDisplayId " + curTokenDisplayId);
+        Log.d(
+                TAG,
+                "onCreate: FocusDisplayId="
+                        + mImm.getCurrentFocusDisplayID()
+                        + ", CurTokenDisplayId "
+                        + curTokenDisplayId);
         if (isHoneyboard(context.getPackageName())) {
             DisplayManager dm = (DisplayManager) context.getSystemService(Context.DISPLAY_SERVICE);
             Display[] displays = dm.getDisplays(null);
@@ -64,8 +72,17 @@ final class SemImsUtils {
         return context;
     }
 
-    static void sendBroadcastShownState(Context context, EditorInfo editorInfo, boolean isInputViewShown, int candidatesVisibility) {
-        Log.d(TAG, "sendBroadcastImeShownState: isInputViewShown=" + isInputViewShown + " candidatesVisibility=" + candidatesVisibility);
+    static void sendBroadcastShownState(
+            Context context,
+            EditorInfo editorInfo,
+            boolean isInputViewShown,
+            int candidatesVisibility) {
+        Log.d(
+                TAG,
+                "sendBroadcastImeShownState: isInputViewShown="
+                        + isInputViewShown
+                        + " candidatesVisibility="
+                        + candidatesVisibility);
         Intent respInt = new Intent();
         respInt.setAction(RESPONSE_AXT9INFO);
         respInt.putExtra(IS_VISIBLE_WINDOW, isInputViewShown);
@@ -75,7 +92,10 @@ final class SemImsUtils {
             respInt.putExtra("inputType", editorInfo.inputType);
             respInt.putExtra("imeOptions", editorInfo.imeOptions);
         }
-        if (context.checkCallingOrSelfPermission(Manifest.permission.INTERACT_ACROSS_USERS_FULL) == 0 || context.checkCallingOrSelfPermission(Manifest.permission.INTERACT_ACROSS_USERS) == 0) {
+        if (context.checkCallingOrSelfPermission(Manifest.permission.INTERACT_ACROSS_USERS_FULL)
+                        == 0
+                || context.checkCallingOrSelfPermission(Manifest.permission.INTERACT_ACROSS_USERS)
+                        == 0) {
             context.sendBroadcastAsUser(respInt, UserHandle.ALL);
         } else {
             context.sendBroadcast(respInt);

@@ -1,9 +1,9 @@
 package com.samsung.android.sume.core.exception;
 
 /* loaded from: classes6.dex */
-public class ContentFilterOutException extends IllegalArgumentException implements WarningException {
-    public ContentFilterOutException() {
-    }
+public class ContentFilterOutException extends IllegalArgumentException
+        implements WarningException {
+    public ContentFilterOutException() {}
 
     public ContentFilterOutException(String s) {
         super(s);

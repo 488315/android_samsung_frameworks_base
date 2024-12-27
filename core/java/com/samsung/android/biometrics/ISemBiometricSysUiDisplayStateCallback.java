@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface ISemBiometricSysUiDisplayStateCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.biometrics.ISemBiometricSysUiDisplayStateCallback";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.biometrics.ISemBiometricSysUiDisplayStateCallback";
 
     void onFinish(int i, int i2, int i3) throws RemoteException;
 
@@ -16,12 +17,12 @@ public interface ISemBiometricSysUiDisplayStateCallback extends IInterface {
 
     public static class Default implements ISemBiometricSysUiDisplayStateCallback {
         @Override // com.samsung.android.biometrics.ISemBiometricSysUiDisplayStateCallback
-        public void onStart(int stateLogical, int statePhysical, int displayType) throws RemoteException {
-        }
+        public void onStart(int stateLogical, int statePhysical, int displayType)
+                throws RemoteException {}
 
         @Override // com.samsung.android.biometrics.ISemBiometricSysUiDisplayStateCallback
-        public void onFinish(int stateLogical, int statePhysical, int displayType) throws RemoteException {
-        }
+        public void onFinish(int stateLogical, int statePhysical, int displayType)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +30,8 @@ public interface ISemBiometricSysUiDisplayStateCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemBiometricSysUiDisplayStateCallback {
+    public abstract static class Stub extends Binder
+            implements ISemBiometricSysUiDisplayStateCallback {
         static final int TRANSACTION_onFinish = 2;
         static final int TRANSACTION_onStart = 1;
 
@@ -41,7 +43,8 @@ public interface ISemBiometricSysUiDisplayStateCallback extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(ISemBiometricSysUiDisplayStateCallback.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(ISemBiometricSysUiDisplayStateCallback.DESCRIPTOR);
             if (iin != null && (iin instanceof ISemBiometricSysUiDisplayStateCallback)) {
                 return (ISemBiometricSysUiDisplayStateCallback) iin;
             }
@@ -70,7 +73,8 @@ public interface ISemBiometricSysUiDisplayStateCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemBiometricSysUiDisplayStateCallback.DESCRIPTOR);
             }
@@ -115,7 +119,8 @@ public interface ISemBiometricSysUiDisplayStateCallback extends IInterface {
             }
 
             @Override // com.samsung.android.biometrics.ISemBiometricSysUiDisplayStateCallback
-            public void onStart(int stateLogical, int statePhysical, int displayType) throws RemoteException {
+            public void onStart(int stateLogical, int statePhysical, int displayType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemBiometricSysUiDisplayStateCallback.DESCRIPTOR);
@@ -129,7 +134,8 @@ public interface ISemBiometricSysUiDisplayStateCallback extends IInterface {
             }
 
             @Override // com.samsung.android.biometrics.ISemBiometricSysUiDisplayStateCallback
-            public void onFinish(int stateLogical, int statePhysical, int displayType) throws RemoteException {
+            public void onFinish(int stateLogical, int statePhysical, int displayType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemBiometricSysUiDisplayStateCallback.DESCRIPTOR);

@@ -8,8 +8,11 @@ import android.os.UserHandle;
 import android.sec.enterprise.email.EnterpriseEmailAccount;
 import android.sec.enterprise.email.EnterpriseExchangeAccount;
 import android.util.Log;
+
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knox.ContextInfo;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +21,13 @@ import java.util.Map;
 public abstract class EmailProviderHelper {
     public static final Map mAccountObjectMap = new HashMap();
 
-    public static Cursor createEmailContentProviderCursor(Context context, ContextInfo contextInfo, Uri uri, String[] strArr, String str, String[] strArr2) {
+    public static Cursor createEmailContentProviderCursor(
+            Context context,
+            ContextInfo contextInfo,
+            Uri uri,
+            String[] strArr,
+            String str,
+            String[] strArr2) {
         if (context == null) {
             return null;
         }
@@ -27,11 +36,25 @@ public abstract class EmailProviderHelper {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                Cursor query = (SettingsUtils.isPersona(i) ? context.createPackageContextAsUser("com.samsung.android.email.provider", 0, new UserHandle(i)) : context.createPackageContextAsUser("com.samsung.android.email.provider", 0, new UserHandle(userId))).getContentResolver().query(uri, strArr, str, strArr2, null);
+                Cursor query =
+                        (SettingsUtils.isPersona(i)
+                                        ? context.createPackageContextAsUser(
+                                                "com.samsung.android.email.provider",
+                                                0,
+                                                new UserHandle(i))
+                                        : context.createPackageContextAsUser(
+                                                "com.samsung.android.email.provider",
+                                                0,
+                                                new UserHandle(userId)))
+                                .getContentResolver()
+                                .query(uri, strArr, str, strArr2, null);
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 return query;
             } catch (Exception e) {
-                Log.e("EmailProviderHelperService", "createEmailContentProviderCursor() : Failed, Exception occurs. ", e);
+                Log.e(
+                        "EmailProviderHelperService",
+                        "createEmailContentProviderCursor() : Failed, Exception occurs. ",
+                        e);
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 return null;
             }
@@ -42,22 +65,23 @@ public abstract class EmailProviderHelper {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:11:0x0058, code lost:
-    
-        if (r3.isClosed() == false) goto L16;
-     */
+
+       if (r3.isClosed() == false) goto L16;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:12:0x005a, code lost:
-    
-        r3.close();
-     */
+
+       r3.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:21:0x006a, code lost:
-    
-        if (r3.isClosed() == false) goto L16;
-     */
+
+       if (r3.isClosed() == false) goto L16;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean deleteLDAPAccount(long r11, android.content.Context r13, com.samsung.android.knox.ContextInfo r14) {
+    public static boolean deleteLDAPAccount(
+            long r11, android.content.Context r13, com.samsung.android.knox.ContextInfo r14) {
         /*
             java.lang.String r0 = "EmailProviderHelperService"
             java.lang.String r1 = "deleteLDAPAccount() : ret = "
@@ -119,27 +143,31 @@ public abstract class EmailProviderHelper {
         L79:
             throw r11
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.email.EmailProviderHelper.deleteLDAPAccount(long, android.content.Context, com.samsung.android.knox.ContextInfo):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.email.EmailProviderHelper.deleteLDAPAccount(long,"
+                    + " android.content.Context, com.samsung.android.knox.ContextInfo):boolean");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:10:0x004a, code lost:
-    
-        r9.close();
-     */
+
+       r9.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:28:0x0069, code lost:
-    
-        if (r9.isClosed() == false) goto L21;
-     */
+
+       if (r9.isClosed() == false) goto L21;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:9:0x0048, code lost:
-    
-        if (r9.isClosed() == false) goto L21;
-     */
+
+       if (r9.isClosed() == false) goto L21;
+    */
     /* JADX WARN: Removed duplicated region for block: B:27:0x0065  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static long[] getAllAccountIDS(android.content.Context r9, com.samsung.android.knox.ContextInfo r10) {
+    public static long[] getAllAccountIDS(
+            android.content.Context r9, com.samsung.android.knox.ContextInfo r10) {
         /*
             java.lang.String r0 = "_id"
             r1 = 0
@@ -222,21 +250,24 @@ public abstract class EmailProviderHelper {
         L78:
             throw r10
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.email.EmailProviderHelper.getAllAccountIDS(android.content.Context, com.samsung.android.knox.ContextInfo):long[]");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.email.EmailProviderHelper.getAllAccountIDS(android.content.Context,"
+                    + " com.samsung.android.knox.ContextInfo):long[]");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:16:0x0045, code lost:
-    
-        if (r9.isClosed() == false) goto L21;
-     */
+
+       if (r9.isClosed() == false) goto L21;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:17:0x0047, code lost:
-    
-        r9.close();
-     */
+
+       r9.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:27:0x0064, code lost:
-    
-        if (r9.isClosed() == false) goto L21;
-     */
+
+       if (r9.isClosed() == false) goto L21;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:26:0x0060  */
     /* JADX WARN: Type inference failed for: r1v0 */
@@ -247,7 +278,8 @@ public abstract class EmailProviderHelper {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.util.List getAllLDAPAccount(android.content.Context r9, com.samsung.android.knox.ContextInfo r10) {
+    public static java.util.List getAllLDAPAccount(
+            android.content.Context r9, com.samsung.android.knox.ContextInfo r10) {
         /*
             java.lang.String r0 = "EmailProviderHelperService"
             r1 = 0
@@ -328,7 +360,10 @@ public abstract class EmailProviderHelper {
         L73:
             throw r10
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.email.EmailProviderHelper.getAllLDAPAccount(android.content.Context, com.samsung.android.knox.ContextInfo):java.util.List");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.email.EmailProviderHelper.getAllLDAPAccount(android.content.Context,"
+                    + " com.samsung.android.knox.ContextInfo):java.util.List");
     }
 
     public static EnterpriseEmailAccount getEmailAccountObject(long j) {
@@ -343,17 +378,17 @@ public abstract class EmailProviderHelper {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:23:0x0066, code lost:
-    
-        if (r11.isClosed() == false) goto L25;
-     */
+
+       if (r11.isClosed() == false) goto L25;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:24:0x0068, code lost:
-    
-        r11.close();
-     */
+
+       r11.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:37:0x0081, code lost:
-    
-        if (r11.isClosed() == false) goto L25;
-     */
+
+       if (r11.isClosed() == false) goto L25;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:26:0x0086  */
     /* JADX WARN: Removed duplicated region for block: B:28:0x0099  */
@@ -365,7 +400,8 @@ public abstract class EmailProviderHelper {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.sec.enterprise.email.EnterpriseEmailAccount getEnterpriseEmailAccount(long r9, android.content.Context r11, com.samsung.android.knox.ContextInfo r12) {
+    public static android.sec.enterprise.email.EnterpriseEmailAccount getEnterpriseEmailAccount(
+            long r9, android.content.Context r11, com.samsung.android.knox.ContextInfo r12) {
         /*
             r0 = 0
             int r0 = (r9 > r0 ? 1 : (r9 == r0 ? 0 : -1))
@@ -468,21 +504,25 @@ public abstract class EmailProviderHelper {
         Lb7:
             throw r9
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.email.EmailProviderHelper.getEnterpriseEmailAccount(long, android.content.Context, com.samsung.android.knox.ContextInfo):android.sec.enterprise.email.EnterpriseEmailAccount");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.email.EmailProviderHelper.getEnterpriseEmailAccount(long,"
+                    + " android.content.Context,"
+                    + " com.samsung.android.knox.ContextInfo):android.sec.enterprise.email.EnterpriseEmailAccount");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:23:0x0066, code lost:
-    
-        if (r11.isClosed() == false) goto L25;
-     */
+
+       if (r11.isClosed() == false) goto L25;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:24:0x0068, code lost:
-    
-        r11.close();
-     */
+
+       r11.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:37:0x0081, code lost:
-    
-        if (r11.isClosed() == false) goto L25;
-     */
+
+       if (r11.isClosed() == false) goto L25;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:26:0x0086  */
     /* JADX WARN: Removed duplicated region for block: B:28:0x0099  */
@@ -494,7 +534,11 @@ public abstract class EmailProviderHelper {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.sec.enterprise.email.EnterpriseExchangeAccount getEnterpriseExchangeAccount(long r9, android.content.Context r11, com.samsung.android.knox.ContextInfo r12) {
+    public static android.sec.enterprise.email.EnterpriseExchangeAccount
+            getEnterpriseExchangeAccount(
+                    long r9,
+                    android.content.Context r11,
+                    com.samsung.android.knox.ContextInfo r12) {
         /*
             r0 = 0
             int r0 = (r9 > r0 ? 1 : (r9 == r0 ? 0 : -1))
@@ -597,21 +641,25 @@ public abstract class EmailProviderHelper {
         Lb7:
             throw r9
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.email.EmailProviderHelper.getEnterpriseExchangeAccount(long, android.content.Context, com.samsung.android.knox.ContextInfo):android.sec.enterprise.email.EnterpriseExchangeAccount");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.email.EmailProviderHelper.getEnterpriseExchangeAccount(long,"
+                    + " android.content.Context,"
+                    + " com.samsung.android.knox.ContextInfo):android.sec.enterprise.email.EnterpriseExchangeAccount");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:18:0x0053, code lost:
-    
-        if (r10 == false) goto L22;
-     */
+
+       if (r10 == false) goto L22;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:19:0x0055, code lost:
-    
-        r9.close();
-     */
+
+       r9.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:30:0x0072, code lost:
-    
-        if (r10 == false) goto L22;
-     */
+
+       if (r10 == false) goto L22;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:29:0x006e  */
     /* JADX WARN: Type inference failed for: r9v0, types: [long] */
@@ -623,7 +671,8 @@ public abstract class EmailProviderHelper {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.sec.enterprise.email.EnterpriseLDAPAccount getEnterpriseLDAPAccount(long r9, android.content.Context r11, com.samsung.android.knox.ContextInfo r12) {
+    public static android.sec.enterprise.email.EnterpriseLDAPAccount getEnterpriseLDAPAccount(
+            long r9, android.content.Context r11, com.samsung.android.knox.ContextInfo r12) {
         /*
             java.lang.String r0 = "EmailProviderHelperService"
             r1 = 0
@@ -707,7 +756,11 @@ public abstract class EmailProviderHelper {
         L81:
             throw r10
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.email.EmailProviderHelper.getEnterpriseLDAPAccount(long, android.content.Context, com.samsung.android.knox.ContextInfo):android.sec.enterprise.email.EnterpriseLDAPAccount");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.email.EmailProviderHelper.getEnterpriseLDAPAccount(long,"
+                    + " android.content.Context,"
+                    + " com.samsung.android.knox.ContextInfo):android.sec.enterprise.email.EnterpriseLDAPAccount");
     }
 
     public static EnterpriseExchangeAccount getExchangeAccountObject(long j) {
@@ -722,22 +775,25 @@ public abstract class EmailProviderHelper {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:13:0x0061, code lost:
-    
-        if (r4.isClosed() == false) goto L19;
-     */
+
+       if (r4.isClosed() == false) goto L19;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:14:0x0063, code lost:
-    
-        r4.close();
-     */
+
+       r4.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:31:0x0073, code lost:
-    
-        if (r4.isClosed() == false) goto L19;
-     */
+
+       if (r4.isClosed() == false) goto L19;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean updateEnterpriseEmailAccount(android.content.Context r12, com.samsung.android.knox.ContextInfo r13, android.sec.enterprise.email.EnterpriseEmailAccount r14) {
+    public static boolean updateEnterpriseEmailAccount(
+            android.content.Context r12,
+            com.samsung.android.knox.ContextInfo r13,
+            android.sec.enterprise.email.EnterpriseEmailAccount r14) {
         /*
             java.lang.String r0 = "EmailProviderHelperService"
             long r1 = java.lang.System.currentTimeMillis()
@@ -807,26 +863,33 @@ public abstract class EmailProviderHelper {
         L88:
             throw r12
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.email.EmailProviderHelper.updateEnterpriseEmailAccount(android.content.Context, com.samsung.android.knox.ContextInfo, android.sec.enterprise.email.EnterpriseEmailAccount):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.email.EmailProviderHelper.updateEnterpriseEmailAccount(android.content.Context,"
+                    + " com.samsung.android.knox.ContextInfo,"
+                    + " android.sec.enterprise.email.EnterpriseEmailAccount):boolean");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:13:0x0062, code lost:
-    
-        if (r3.isClosed() == false) goto L19;
-     */
+
+       if (r3.isClosed() == false) goto L19;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:14:0x0064, code lost:
-    
-        r3.close();
-     */
+
+       r3.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:31:0x0074, code lost:
-    
-        if (r3.isClosed() == false) goto L19;
-     */
+
+       if (r3.isClosed() == false) goto L19;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean updateEnterpriseExchangeAccount(android.content.Context r11, com.samsung.android.knox.ContextInfo r12, android.sec.enterprise.email.EnterpriseExchangeAccount r13) {
+    public static boolean updateEnterpriseExchangeAccount(
+            android.content.Context r11,
+            com.samsung.android.knox.ContextInfo r12,
+            android.sec.enterprise.email.EnterpriseExchangeAccount r13) {
         /*
             java.lang.String r0 = "EmailProviderHelperService"
             long r1 = java.lang.System.currentTimeMillis()
@@ -896,6 +959,10 @@ public abstract class EmailProviderHelper {
         L89:
             throw r11
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.email.EmailProviderHelper.updateEnterpriseExchangeAccount(android.content.Context, com.samsung.android.knox.ContextInfo, android.sec.enterprise.email.EnterpriseExchangeAccount):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.email.EmailProviderHelper.updateEnterpriseExchangeAccount(android.content.Context,"
+                    + " com.samsung.android.knox.ContextInfo,"
+                    + " android.sec.enterprise.email.EnterpriseExchangeAccount):boolean");
     }
 }

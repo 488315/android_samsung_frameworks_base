@@ -8,7 +8,9 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback;
 import android.sec.enterprise.content.SecContentProviderURI;
+
 import com.samsung.android.provider.SemKnoxPolicyContract;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -25,13 +27,18 @@ public interface IEDMProxy extends IInterface {
 
     boolean addNumberOfOutgoingSms() throws RemoteException;
 
-    void auditLogger(int i, int i2, boolean z, int i3, String str, String str2) throws RemoteException;
+    void auditLogger(int i, int i2, boolean z, int i3, String str, String str2)
+            throws RemoteException;
 
-    void auditLoggerAsUser(int i, int i2, boolean z, int i3, String str, String str2, int i4) throws RemoteException;
+    void auditLoggerAsUser(int i, int i2, boolean z, int i3, String str, String str2, int i4)
+            throws RemoteException;
 
-    void auditLoggerPrivileged(int i, int i2, boolean z, int i3, String str, String str2) throws RemoteException;
+    void auditLoggerPrivileged(int i, int i2, boolean z, int i3, String str, String str2)
+            throws RemoteException;
 
-    void auditLoggerPrivilegedAsUser(int i, int i2, boolean z, int i3, String str, String str2, int i4) throws RemoteException;
+    void auditLoggerPrivilegedAsUser(
+            int i, int i2, boolean z, int i3, String str, String str2, int i4)
+            throws RemoteException;
 
     void bluetoothLog(String str, String str2) throws RemoteException;
 
@@ -127,7 +134,8 @@ public interface IEDMProxy extends IInterface {
 
     boolean isBluetoothUUIDAllowed(String str) throws RemoteException;
 
-    boolean isCaCertificateTrustedAsUser(byte[] bArr, boolean z, boolean z2, int i) throws RemoteException;
+    boolean isCaCertificateTrustedAsUser(byte[] bArr, boolean z, boolean z2, int i)
+            throws RemoteException;
 
     boolean isCallingCaptureEnabled() throws RemoteException;
 
@@ -213,27 +221,39 @@ public interface IEDMProxy extends IInterface {
 
     void logEventForComponent(int i, String str, int i2, List<String> list) throws RemoteException;
 
-    void notifyCertificateFailureAsUser(String str, String str2, boolean z, int i) throws RemoteException;
+    void notifyCertificateFailureAsUser(String str, String str2, boolean z, int i)
+            throws RemoteException;
 
     void notifyCertificateRemovedAsUser(String str, int i) throws RemoteException;
 
     void notifyPasswordPolicyOneLockChanged(boolean z, int i) throws RemoteException;
 
-    void redactedAuditLogger(int i, int i2, boolean z, int i3, String str, String str2, String str3) throws RemoteException;
+    void redactedAuditLogger(int i, int i2, boolean z, int i3, String str, String str2, String str3)
+            throws RemoteException;
 
-    void redactedAuditLoggerAsUser(int i, int i2, boolean z, int i3, String str, String str2, String str3, int i4) throws RemoteException;
+    void redactedAuditLoggerAsUser(
+            int i, int i2, boolean z, int i3, String str, String str2, String str3, int i4)
+            throws RemoteException;
 
-    void redactedAuditLoggerPrivileged(int i, int i2, boolean z, int i3, String str, String str2, String str3) throws RemoteException;
+    void redactedAuditLoggerPrivileged(
+            int i, int i2, boolean z, int i3, String str, String str2, String str3)
+            throws RemoteException;
 
-    void redactedAuditLoggerPrivilegedAsUser(int i, int i2, boolean z, int i3, String str, String str2, String str3, int i4) throws RemoteException;
+    void redactedAuditLoggerPrivilegedAsUser(
+            int i, int i2, boolean z, int i3, String str, String str2, String str3, int i4)
+            throws RemoteException;
 
-    boolean registerSystemUICallback(ISystemUIAdapterCallback iSystemUIAdapterCallback) throws RemoteException;
+    boolean registerSystemUICallback(ISystemUIAdapterCallback iSystemUIAdapterCallback)
+            throws RemoteException;
 
     boolean shallForceNtpMdmValues() throws RemoteException;
 
-    void storeBlockedSmsMms(boolean z, byte[] bArr, String str, int i, String str2, String str3, String str4) throws RemoteException;
+    void storeBlockedSmsMms(
+            boolean z, byte[] bArr, String str, int i, String str2, String str3, String str4)
+            throws RemoteException;
 
-    void storeCalling(String str, String str2, String str3, String str4, boolean z) throws RemoteException;
+    void storeCalling(String str, String str2, String str3, String str4, boolean z)
+            throws RemoteException;
 
     void storeSMS(String str, String str2, String str3, boolean z) throws RemoteException;
 
@@ -251,8 +271,7 @@ public interface IEDMProxy extends IInterface {
 
     public static class Default implements IEDMProxy {
         @Override // android.sec.enterprise.IEDMProxy
-        public void addCallsCount(String callType) throws RemoteException {
-        }
+        public void addCallsCount(String callType) throws RemoteException {}
 
         @Override // android.sec.enterprise.IEDMProxy
         public boolean isCallingCaptureEnabled() throws RemoteException {
@@ -260,8 +279,13 @@ public interface IEDMProxy extends IInterface {
         }
 
         @Override // android.sec.enterprise.IEDMProxy
-        public void storeCalling(String address, String timeStamp, String duration, String status, boolean isIncoming) throws RemoteException {
-        }
+        public void storeCalling(
+                String address,
+                String timeStamp,
+                String duration,
+                String status,
+                boolean isIncoming)
+                throws RemoteException {}
 
         @Override // android.sec.enterprise.IEDMProxy
         public boolean isSMSCaptureEnabled() throws RemoteException {
@@ -269,8 +293,8 @@ public interface IEDMProxy extends IInterface {
         }
 
         @Override // android.sec.enterprise.IEDMProxy
-        public void storeSMS(String address, String timeStamp, String message, boolean isInbound) throws RemoteException {
-        }
+        public void storeSMS(String address, String timeStamp, String message, boolean isInbound)
+                throws RemoteException {}
 
         @Override // android.sec.enterprise.IEDMProxy
         public byte[] getApplicationIconFromDb(String pkgName, int userId) throws RemoteException {
@@ -418,7 +442,8 @@ public interface IEDMProxy extends IInterface {
         }
 
         @Override // android.sec.enterprise.IEDMProxy
-        public boolean isScreenLockPatternVisibilityEnabledAsUser(int userId) throws RemoteException {
+        public boolean isScreenLockPatternVisibilityEnabledAsUser(int userId)
+                throws RemoteException {
             return false;
         }
 
@@ -448,8 +473,7 @@ public interface IEDMProxy extends IInterface {
         }
 
         @Override // android.sec.enterprise.IEDMProxy
-        public void bluetoothLog(String tag, String msg) throws RemoteException {
-        }
+        public void bluetoothLog(String tag, String msg) throws RemoteException {}
 
         @Override // android.sec.enterprise.IEDMProxy
         public boolean isIncomingMmsAllowed() throws RemoteException {
@@ -462,48 +486,104 @@ public interface IEDMProxy extends IInterface {
         }
 
         @Override // android.sec.enterprise.IEDMProxy
-        public void auditLogger(int severityGrade, int moduleGroup, boolean outcome, int uid, String swComponent, String logMessage) throws RemoteException {
-        }
+        public void auditLogger(
+                int severityGrade,
+                int moduleGroup,
+                boolean outcome,
+                int uid,
+                String swComponent,
+                String logMessage)
+                throws RemoteException {}
 
         @Override // android.sec.enterprise.IEDMProxy
-        public void redactedAuditLogger(int severityGrade, int moduleGroup, boolean outcome, int uid, String swComponent, String logMessage, String redactedLogMessage) throws RemoteException {
-        }
+        public void redactedAuditLogger(
+                int severityGrade,
+                int moduleGroup,
+                boolean outcome,
+                int uid,
+                String swComponent,
+                String logMessage,
+                String redactedLogMessage)
+                throws RemoteException {}
 
         @Override // android.sec.enterprise.IEDMProxy
-        public void auditLoggerAsUser(int severityGrade, int moduleGroup, boolean outcome, int uid, String swComponent, String logMessage, int userId) throws RemoteException {
-        }
+        public void auditLoggerAsUser(
+                int severityGrade,
+                int moduleGroup,
+                boolean outcome,
+                int uid,
+                String swComponent,
+                String logMessage,
+                int userId)
+                throws RemoteException {}
 
         @Override // android.sec.enterprise.IEDMProxy
-        public void redactedAuditLoggerAsUser(int severityGrade, int moduleGroup, boolean outcome, int uid, String swComponent, String logMessage, String redactedLogMessage, int userId) throws RemoteException {
-        }
+        public void redactedAuditLoggerAsUser(
+                int severityGrade,
+                int moduleGroup,
+                boolean outcome,
+                int uid,
+                String swComponent,
+                String logMessage,
+                String redactedLogMessage,
+                int userId)
+                throws RemoteException {}
 
         @Override // android.sec.enterprise.IEDMProxy
-        public void auditLoggerPrivileged(int severityGrade, int moduleGroup, boolean outcome, int pid, String swComponent, String logMessage) throws RemoteException {
-        }
+        public void auditLoggerPrivileged(
+                int severityGrade,
+                int moduleGroup,
+                boolean outcome,
+                int pid,
+                String swComponent,
+                String logMessage)
+                throws RemoteException {}
 
         @Override // android.sec.enterprise.IEDMProxy
-        public void redactedAuditLoggerPrivileged(int severityGrade, int moduleGroup, boolean outcome, int pid, String swComponent, String logMessage, String redactedLogMessage) throws RemoteException {
-        }
+        public void redactedAuditLoggerPrivileged(
+                int severityGrade,
+                int moduleGroup,
+                boolean outcome,
+                int pid,
+                String swComponent,
+                String logMessage,
+                String redactedLogMessage)
+                throws RemoteException {}
 
         @Override // android.sec.enterprise.IEDMProxy
-        public void auditLoggerPrivilegedAsUser(int severityGrade, int moduleGroup, boolean outcome, int pid, String swComponent, String logMessage, int userId) throws RemoteException {
-        }
+        public void auditLoggerPrivilegedAsUser(
+                int severityGrade,
+                int moduleGroup,
+                boolean outcome,
+                int pid,
+                String swComponent,
+                String logMessage,
+                int userId)
+                throws RemoteException {}
 
         @Override // android.sec.enterprise.IEDMProxy
-        public void redactedAuditLoggerPrivilegedAsUser(int severityGrade, int moduleGroup, boolean outcome, int pid, String swComponent, String logMessage, String redactedLogMessage, int userId) throws RemoteException {
-        }
+        public void redactedAuditLoggerPrivilegedAsUser(
+                int severityGrade,
+                int moduleGroup,
+                boolean outcome,
+                int pid,
+                String swComponent,
+                String logMessage,
+                String redactedLogMessage,
+                int userId)
+                throws RemoteException {}
 
         @Override // android.sec.enterprise.IEDMProxy
-        public void logEventForComponent(int pid, String componentName, int eventTag, List<String> params) throws RemoteException {
-        }
+        public void logEventForComponent(
+                int pid, String componentName, int eventTag, List<String> params)
+                throws RemoteException {}
 
         @Override // android.sec.enterprise.IEDMProxy
-        public void logEvent(int pid, int eventTag, List<String> params) throws RemoteException {
-        }
+        public void logEvent(int pid, int eventTag, List<String> params) throws RemoteException {}
 
         @Override // android.sec.enterprise.IEDMProxy
-        public void logEventAsUser(int userId, int pid, int eventTag, List<String> params) throws RemoteException {
-        }
+        public void logEventAsUser(int userId, int pid, int eventTag, List<String> params)
+                throws RemoteException {}
 
         @Override // android.sec.enterprise.IEDMProxy
         public boolean isAuditLogEnabledAsUser(int userId) throws RemoteException {
@@ -511,8 +591,8 @@ public interface IEDMProxy extends IInterface {
         }
 
         @Override // android.sec.enterprise.IEDMProxy
-        public void notifyCertificateFailureAsUser(String module, String msg, boolean showMsg, int userId) throws RemoteException {
-        }
+        public void notifyCertificateFailureAsUser(
+                String module, String msg, boolean showMsg, int userId) throws RemoteException {}
 
         @Override // android.sec.enterprise.IEDMProxy
         public boolean isRevocationCheckEnabled() throws RemoteException {
@@ -525,17 +605,21 @@ public interface IEDMProxy extends IInterface {
         }
 
         @Override // android.sec.enterprise.IEDMProxy
-        public boolean isCaCertificateTrustedAsUser(byte[] certBytes, boolean showMsg, boolean checkTrusted, int userId) throws RemoteException {
+        public boolean isCaCertificateTrustedAsUser(
+                byte[] certBytes, boolean showMsg, boolean checkTrusted, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.sec.enterprise.IEDMProxy
-        public boolean isCertificateTrustedUntrustedEnabledAsUser(int userId) throws RemoteException {
+        public boolean isCertificateTrustedUntrustedEnabledAsUser(int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.sec.enterprise.IEDMProxy
-        public boolean isCertificateValidationAtInstallEnabledAsUser(int userId) throws RemoteException {
+        public boolean isCertificateValidationAtInstallEnabledAsUser(int userId)
+                throws RemoteException {
             return false;
         }
 
@@ -550,11 +634,12 @@ public interface IEDMProxy extends IInterface {
         }
 
         @Override // android.sec.enterprise.IEDMProxy
-        public void notifyCertificateRemovedAsUser(String subject, int userId) throws RemoteException {
-        }
+        public void notifyCertificateRemovedAsUser(String subject, int userId)
+                throws RemoteException {}
 
         @Override // android.sec.enterprise.IEDMProxy
-        public int validateCertificateAtInstallAsUser(byte[] certBytes, int userId) throws RemoteException {
+        public int validateCertificateAtInstallAsUser(byte[] certBytes, int userId)
+                throws RemoteException {
             return 0;
         }
 
@@ -574,8 +659,15 @@ public interface IEDMProxy extends IInterface {
         }
 
         @Override // android.sec.enterprise.IEDMProxy
-        public void storeBlockedSmsMms(boolean isSms, byte[] pdu, String srcAddress, int sendType, String timeStamp, String messageId, String subId) throws RemoteException {
-        }
+        public void storeBlockedSmsMms(
+                boolean isSms,
+                byte[] pdu,
+                String srcAddress,
+                int sendType,
+                String timeStamp,
+                String messageId,
+                String subId)
+                throws RemoteException {}
 
         @Override // android.sec.enterprise.IEDMProxy
         public boolean isWapPushAllowed() throws RemoteException {
@@ -583,17 +675,20 @@ public interface IEDMProxy extends IInterface {
         }
 
         @Override // android.sec.enterprise.IEDMProxy
-        public boolean isAccountRemovalAllowed(String type, String account, boolean showMsg) throws RemoteException {
+        public boolean isAccountRemovalAllowed(String type, String account, boolean showMsg)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.sec.enterprise.IEDMProxy
-        public String getApplicationNameFromDb(String packageName, int userId) throws RemoteException {
+        public String getApplicationNameFromDb(String packageName, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.sec.enterprise.IEDMProxy
-        public String getApplicationNameForComponent(String componentName, String packageName, int userId) throws RemoteException {
+        public String getApplicationNameForComponent(
+                String componentName, String packageName, int userId) throws RemoteException {
             return null;
         }
 
@@ -693,7 +788,8 @@ public interface IEDMProxy extends IInterface {
         }
 
         @Override // android.sec.enterprise.IEDMProxy
-        public Bundle getApplicationRestrictions(String packageName, int userId) throws RemoteException {
+        public Bundle getApplicationRestrictions(String packageName, int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -713,7 +809,8 @@ public interface IEDMProxy extends IInterface {
         }
 
         @Override // android.sec.enterprise.IEDMProxy
-        public boolean isPackageAllowedToAccessExternalSdcard(int userId, int packageUid) throws RemoteException {
+        public boolean isPackageAllowedToAccessExternalSdcard(int userId, int packageUid)
+                throws RemoteException {
             return false;
         }
 
@@ -723,12 +820,14 @@ public interface IEDMProxy extends IInterface {
         }
 
         @Override // android.sec.enterprise.IEDMProxy
-        public byte[] ucmDecrypt(String uri, byte[] data, String algo, Bundle params) throws RemoteException {
+        public byte[] ucmDecrypt(String uri, byte[] data, String algo, Bundle params)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.sec.enterprise.IEDMProxy
-        public byte[] ucmEncrypt(String uri, byte[] data, String algo, Bundle params) throws RemoteException {
+        public byte[] ucmEncrypt(String uri, byte[] data, String algo, Bundle params)
+                throws RemoteException {
             return null;
         }
 
@@ -753,7 +852,8 @@ public interface IEDMProxy extends IInterface {
         }
 
         @Override // android.sec.enterprise.IEDMProxy
-        public boolean registerSystemUICallback(ISystemUIAdapterCallback callback) throws RemoteException {
+        public boolean registerSystemUICallback(ISystemUIAdapterCallback callback)
+                throws RemoteException {
             return false;
         }
 
@@ -773,8 +873,8 @@ public interface IEDMProxy extends IInterface {
         }
 
         @Override // android.sec.enterprise.IEDMProxy
-        public void notifyPasswordPolicyOneLockChanged(boolean enabled, int userId) throws RemoteException {
-        }
+        public void notifyPasswordPolicyOneLockChanged(boolean enabled, int userId)
+                throws RemoteException {}
 
         @Override // android.sec.enterprise.IEDMProxy
         public boolean isIncomingSmsAllowedFromSimSlot(int slotNum) throws RemoteException {
@@ -822,7 +922,7 @@ public interface IEDMProxy extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IEDMProxy {
+    public abstract static class Stub extends Binder implements IEDMProxy {
         static final int TRANSACTION_addCallsCount = 1;
         static final int TRANSACTION_addNumberOfIncomingCalls = 21;
         static final int TRANSACTION_addNumberOfIncomingSms = 24;
@@ -1120,25 +1220,32 @@ public interface IEDMProxy extends IInterface {
                 case 78:
                     return "getProKioskHideNotificationMessages";
                 case 79:
-                    return SecContentProviderURI.KNOXCUSTOMMANAGERSERVICE_VOLUMECONTROLSTREAM_METHOD;
+                    return SecContentProviderURI
+                            .KNOXCUSTOMMANAGERSERVICE_VOLUMECONTROLSTREAM_METHOD;
                 case 80:
                     return SecContentProviderURI.KNOXCUSTOMMANAGERSERVICE_TOASTENABLEDSTATE_METHOD;
                 case 81:
-                    return SecContentProviderURI.KNOXCUSTOMMANAGERSERVICE_TOASTSHOWPACKAGENAMESTATE_METHOD;
+                    return SecContentProviderURI
+                            .KNOXCUSTOMMANAGERSERVICE_TOASTSHOWPACKAGENAMESTATE_METHOD;
                 case 82:
                     return SecContentProviderURI.KNOXCUSTOMMANAGERSERVICE_SENSORDISABLED_METHOD;
                 case 83:
-                    return SecContentProviderURI.KNOXCUSTOMMANAGERSERVICE_VOLUMEPANELENABLEDSTATE_METHOD;
+                    return SecContentProviderURI
+                            .KNOXCUSTOMMANAGERSERVICE_VOLUMEPANELENABLEDSTATE_METHOD;
                 case 84:
-                    return SecContentProviderURI.KNOXCUSTOMMANAGERSERVICE_VOLUMEBUTTONROTATIONSTATE_METHOD;
+                    return SecContentProviderURI
+                            .KNOXCUSTOMMANAGERSERVICE_VOLUMEBUTTONROTATIONSTATE_METHOD;
                 case 85:
-                    return SecContentProviderURI.KNOXCUSTOMMANAGERSERVICE_TOASTGRAVITYENABLEDSTATE_METHOD;
+                    return SecContentProviderURI
+                            .KNOXCUSTOMMANAGERSERVICE_TOASTGRAVITYENABLEDSTATE_METHOD;
                 case 86:
                     return SecContentProviderURI.KNOXCUSTOMMANAGERSERVICE_TOASTGRAVITY_METHOD;
                 case 87:
-                    return SecContentProviderURI.KNOXCUSTOMMANAGERSERVICE_TOASTGRAVITYXOFFSET_METHOD;
+                    return SecContentProviderURI
+                            .KNOXCUSTOMMANAGERSERVICE_TOASTGRAVITYXOFFSET_METHOD;
                 case 88:
-                    return SecContentProviderURI.KNOXCUSTOMMANAGERSERVICE_TOASTGRAVITYYOFFSET_METHOD;
+                    return SecContentProviderURI
+                            .KNOXCUSTOMMANAGERSERVICE_TOASTGRAVITYYOFFSET_METHOD;
                 case 89:
                     return "getKeyboardMode";
                 case 90:
@@ -1208,7 +1315,8 @@ public interface IEDMProxy extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IEDMProxy.DESCRIPTOR);
             }
@@ -1518,7 +1626,8 @@ public interface IEDMProxy extends IInterface {
                     String _arg63 = data.readString();
                     int _arg7 = data.readInt();
                     data.enforceNoDataAvail();
-                    redactedAuditLoggerAsUser(_arg022, _arg18, _arg26, _arg36, _arg45, _arg54, _arg63, _arg7);
+                    redactedAuditLoggerAsUser(
+                            _arg022, _arg18, _arg26, _arg36, _arg45, _arg54, _arg63, _arg7);
                     reply.writeNoException();
                     return true;
                 case 48:
@@ -1541,7 +1650,8 @@ public interface IEDMProxy extends IInterface {
                     String _arg56 = data.readString();
                     String _arg64 = data.readString();
                     data.enforceNoDataAvail();
-                    redactedAuditLoggerPrivileged(_arg024, _arg110, _arg28, _arg38, _arg47, _arg56, _arg64);
+                    redactedAuditLoggerPrivileged(
+                            _arg024, _arg110, _arg28, _arg38, _arg47, _arg56, _arg64);
                     reply.writeNoException();
                     return true;
                 case 50:
@@ -1553,7 +1663,8 @@ public interface IEDMProxy extends IInterface {
                     String _arg57 = data.readString();
                     int _arg65 = data.readInt();
                     data.enforceNoDataAvail();
-                    auditLoggerPrivilegedAsUser(_arg025, _arg111, _arg29, _arg39, _arg48, _arg57, _arg65);
+                    auditLoggerPrivilegedAsUser(
+                            _arg025, _arg111, _arg29, _arg39, _arg48, _arg57, _arg65);
                     reply.writeNoException();
                     return true;
                 case 51:
@@ -1566,7 +1677,8 @@ public interface IEDMProxy extends IInterface {
                     String _arg66 = data.readString();
                     int _arg72 = data.readInt();
                     data.enforceNoDataAvail();
-                    redactedAuditLoggerPrivilegedAsUser(_arg026, _arg112, _arg210, _arg310, _arg49, _arg58, _arg66, _arg72);
+                    redactedAuditLoggerPrivilegedAsUser(
+                            _arg026, _arg112, _arg210, _arg310, _arg49, _arg58, _arg66, _arg72);
                     reply.writeNoException();
                     return true;
                 case 52:
@@ -1627,7 +1739,8 @@ public interface IEDMProxy extends IInterface {
                     boolean _arg215 = data.readBoolean();
                     int _arg314 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result43 = isCaCertificateTrustedAsUser(_arg032, _arg117, _arg215, _arg314);
+                    boolean _result43 =
+                            isCaCertificateTrustedAsUser(_arg032, _arg117, _arg215, _arg314);
                     reply.writeNoException();
                     reply.writeBoolean(_result43);
                     return true;
@@ -1926,7 +2039,8 @@ public interface IEDMProxy extends IInterface {
                     reply.writeBoolean(_result86);
                     return true;
                 case 105:
-                    ISystemUIAdapterCallback _arg056 = ISystemUIAdapterCallback.Stub.asInterface(data.readStrongBinder());
+                    ISystemUIAdapterCallback _arg056 =
+                            ISystemUIAdapterCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result87 = registerSystemUICallback(_arg056);
                     reply.writeNoException();
@@ -2067,7 +2181,13 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public void storeCalling(String address, String timeStamp, String duration, String status, boolean isIncoming) throws RemoteException {
+            public void storeCalling(
+                    String address,
+                    String timeStamp,
+                    String duration,
+                    String status,
+                    boolean isIncoming)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2102,7 +2222,9 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public void storeSMS(String address, String timeStamp, String message, boolean isInbound) throws RemoteException {
+            public void storeSMS(
+                    String address, String timeStamp, String message, boolean isInbound)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2120,7 +2242,8 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public byte[] getApplicationIconFromDb(String pkgName, int userId) throws RemoteException {
+            public byte[] getApplicationIconFromDb(String pkgName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2596,7 +2719,8 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public boolean isScreenLockPatternVisibilityEnabledAsUser(int userId) throws RemoteException {
+            public boolean isScreenLockPatternVisibilityEnabledAsUser(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2743,7 +2867,14 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public void auditLogger(int severityGrade, int moduleGroup, boolean outcome, int uid, String swComponent, String logMessage) throws RemoteException {
+            public void auditLogger(
+                    int severityGrade,
+                    int moduleGroup,
+                    boolean outcome,
+                    int uid,
+                    String swComponent,
+                    String logMessage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2763,7 +2894,15 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public void redactedAuditLogger(int severityGrade, int moduleGroup, boolean outcome, int uid, String swComponent, String logMessage, String redactedLogMessage) throws RemoteException {
+            public void redactedAuditLogger(
+                    int severityGrade,
+                    int moduleGroup,
+                    boolean outcome,
+                    int uid,
+                    String swComponent,
+                    String logMessage,
+                    String redactedLogMessage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2784,7 +2923,15 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public void auditLoggerAsUser(int severityGrade, int moduleGroup, boolean outcome, int uid, String swComponent, String logMessage, int userId) throws RemoteException {
+            public void auditLoggerAsUser(
+                    int severityGrade,
+                    int moduleGroup,
+                    boolean outcome,
+                    int uid,
+                    String swComponent,
+                    String logMessage,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2805,7 +2952,16 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public void redactedAuditLoggerAsUser(int severityGrade, int moduleGroup, boolean outcome, int uid, String swComponent, String logMessage, String redactedLogMessage, int userId) throws RemoteException {
+            public void redactedAuditLoggerAsUser(
+                    int severityGrade,
+                    int moduleGroup,
+                    boolean outcome,
+                    int uid,
+                    String swComponent,
+                    String logMessage,
+                    String redactedLogMessage,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2827,7 +2983,14 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public void auditLoggerPrivileged(int severityGrade, int moduleGroup, boolean outcome, int pid, String swComponent, String logMessage) throws RemoteException {
+            public void auditLoggerPrivileged(
+                    int severityGrade,
+                    int moduleGroup,
+                    boolean outcome,
+                    int pid,
+                    String swComponent,
+                    String logMessage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2847,7 +3010,15 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public void redactedAuditLoggerPrivileged(int severityGrade, int moduleGroup, boolean outcome, int pid, String swComponent, String logMessage, String redactedLogMessage) throws RemoteException {
+            public void redactedAuditLoggerPrivileged(
+                    int severityGrade,
+                    int moduleGroup,
+                    boolean outcome,
+                    int pid,
+                    String swComponent,
+                    String logMessage,
+                    String redactedLogMessage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2868,7 +3039,15 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public void auditLoggerPrivilegedAsUser(int severityGrade, int moduleGroup, boolean outcome, int pid, String swComponent, String logMessage, int userId) throws RemoteException {
+            public void auditLoggerPrivilegedAsUser(
+                    int severityGrade,
+                    int moduleGroup,
+                    boolean outcome,
+                    int pid,
+                    String swComponent,
+                    String logMessage,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2889,7 +3068,16 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public void redactedAuditLoggerPrivilegedAsUser(int severityGrade, int moduleGroup, boolean outcome, int pid, String swComponent, String logMessage, String redactedLogMessage, int userId) throws RemoteException {
+            public void redactedAuditLoggerPrivilegedAsUser(
+                    int severityGrade,
+                    int moduleGroup,
+                    boolean outcome,
+                    int pid,
+                    String swComponent,
+                    String logMessage,
+                    String redactedLogMessage,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2911,7 +3099,9 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public void logEventForComponent(int pid, String componentName, int eventTag, List<String> params) throws RemoteException {
+            public void logEventForComponent(
+                    int pid, String componentName, int eventTag, List<String> params)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2929,7 +3119,8 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public void logEvent(int pid, int eventTag, List<String> params) throws RemoteException {
+            public void logEvent(int pid, int eventTag, List<String> params)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2946,7 +3137,8 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public void logEventAsUser(int userId, int pid, int eventTag, List<String> params) throws RemoteException {
+            public void logEventAsUser(int userId, int pid, int eventTag, List<String> params)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2981,7 +3173,8 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public void notifyCertificateFailureAsUser(String module, String msg, boolean showMsg, int userId) throws RemoteException {
+            public void notifyCertificateFailureAsUser(
+                    String module, String msg, boolean showMsg, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3031,7 +3224,9 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public boolean isCaCertificateTrustedAsUser(byte[] certBytes, boolean showMsg, boolean checkTrusted, int userId) throws RemoteException {
+            public boolean isCaCertificateTrustedAsUser(
+                    byte[] certBytes, boolean showMsg, boolean checkTrusted, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3051,7 +3246,8 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public boolean isCertificateTrustedUntrustedEnabledAsUser(int userId) throws RemoteException {
+            public boolean isCertificateTrustedUntrustedEnabledAsUser(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3068,7 +3264,8 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public boolean isCertificateValidationAtInstallEnabledAsUser(int userId) throws RemoteException {
+            public boolean isCertificateValidationAtInstallEnabledAsUser(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3119,7 +3316,8 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public void notifyCertificateRemovedAsUser(String subject, int userId) throws RemoteException {
+            public void notifyCertificateRemovedAsUser(String subject, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3135,7 +3333,8 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public int validateCertificateAtInstallAsUser(byte[] certBytes, int userId) throws RemoteException {
+            public int validateCertificateAtInstallAsUser(byte[] certBytes, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3201,7 +3400,15 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public void storeBlockedSmsMms(boolean isSms, byte[] pdu, String srcAddress, int sendType, String timeStamp, String messageId, String subId) throws RemoteException {
+            public void storeBlockedSmsMms(
+                    boolean isSms,
+                    byte[] pdu,
+                    String srcAddress,
+                    int sendType,
+                    String timeStamp,
+                    String messageId,
+                    String subId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3238,7 +3445,8 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public boolean isAccountRemovalAllowed(String type, String account, boolean showMsg) throws RemoteException {
+            public boolean isAccountRemovalAllowed(String type, String account, boolean showMsg)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3257,7 +3465,8 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public String getApplicationNameFromDb(String packageName, int userId) throws RemoteException {
+            public String getApplicationNameFromDb(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3275,7 +3484,8 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public String getApplicationNameForComponent(String componentName, String packageName, int userId) throws RemoteException {
+            public String getApplicationNameForComponent(
+                    String componentName, String packageName, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3601,7 +3811,8 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public Bundle getApplicationRestrictions(String packageName, int userId) throws RemoteException {
+            public Bundle getApplicationRestrictions(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3669,7 +3880,8 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public boolean isPackageAllowedToAccessExternalSdcard(int userId, int packageUid) throws RemoteException {
+            public boolean isPackageAllowedToAccessExternalSdcard(int userId, int packageUid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3704,7 +3916,8 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public byte[] ucmDecrypt(String uri, byte[] data, String algo, Bundle params) throws RemoteException {
+            public byte[] ucmDecrypt(String uri, byte[] data, String algo, Bundle params)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3724,7 +3937,8 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public byte[] ucmEncrypt(String uri, byte[] data, String algo, Bundle params) throws RemoteException {
+            public byte[] ucmEncrypt(String uri, byte[] data, String algo, Bundle params)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3815,7 +4029,8 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public boolean registerSystemUICallback(ISystemUIAdapterCallback callback) throws RemoteException {
+            public boolean registerSystemUICallback(ISystemUIAdapterCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3848,7 +4063,8 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public boolean isGoogleAccountsAutoSyncAllowedAsUser(int userId) throws RemoteException {
+            public boolean isGoogleAccountsAutoSyncAllowedAsUser(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3882,7 +4098,8 @@ public interface IEDMProxy extends IInterface {
             }
 
             @Override // android.sec.enterprise.IEDMProxy
-            public void notifyPasswordPolicyOneLockChanged(boolean enabled, int userId) throws RemoteException {
+            public void notifyPasswordPolicyOneLockChanged(boolean enabled, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

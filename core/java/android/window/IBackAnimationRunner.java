@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.RemoteAnimationTarget;
-import android.window.IBackAnimationFinishedCallback;
 
 /* loaded from: classes4.dex */
 public interface IBackAnimationRunner extends IInterface {
@@ -14,16 +13,24 @@ public interface IBackAnimationRunner extends IInterface {
 
     void onAnimationCancelled() throws RemoteException;
 
-    void onAnimationStart(RemoteAnimationTarget[] remoteAnimationTargetArr, RemoteAnimationTarget[] remoteAnimationTargetArr2, RemoteAnimationTarget[] remoteAnimationTargetArr3, IBackAnimationFinishedCallback iBackAnimationFinishedCallback) throws RemoteException;
+    void onAnimationStart(
+            RemoteAnimationTarget[] remoteAnimationTargetArr,
+            RemoteAnimationTarget[] remoteAnimationTargetArr2,
+            RemoteAnimationTarget[] remoteAnimationTargetArr3,
+            IBackAnimationFinishedCallback iBackAnimationFinishedCallback)
+            throws RemoteException;
 
     public static class Default implements IBackAnimationRunner {
         @Override // android.window.IBackAnimationRunner
-        public void onAnimationCancelled() throws RemoteException {
-        }
+        public void onAnimationCancelled() throws RemoteException {}
 
         @Override // android.window.IBackAnimationRunner
-        public void onAnimationStart(RemoteAnimationTarget[] apps, RemoteAnimationTarget[] wallpapers, RemoteAnimationTarget[] nonApps, IBackAnimationFinishedCallback finishedCallback) throws RemoteException {
-        }
+        public void onAnimationStart(
+                RemoteAnimationTarget[] apps,
+                RemoteAnimationTarget[] wallpapers,
+                RemoteAnimationTarget[] nonApps,
+                IBackAnimationFinishedCallback finishedCallback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -31,7 +38,7 @@ public interface IBackAnimationRunner extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBackAnimationRunner {
+    public abstract static class Stub extends Binder implements IBackAnimationRunner {
         static final int TRANSACTION_onAnimationCancelled = 2;
         static final int TRANSACTION_onAnimationStart = 3;
 
@@ -72,7 +79,8 @@ public interface IBackAnimationRunner extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IBackAnimationRunner.DESCRIPTOR);
             }
@@ -85,10 +93,18 @@ public interface IBackAnimationRunner extends IInterface {
                     onAnimationCancelled();
                     return true;
                 case 3:
-                    RemoteAnimationTarget[] _arg0 = (RemoteAnimationTarget[]) data.createTypedArray(RemoteAnimationTarget.CREATOR);
-                    RemoteAnimationTarget[] _arg1 = (RemoteAnimationTarget[]) data.createTypedArray(RemoteAnimationTarget.CREATOR);
-                    RemoteAnimationTarget[] _arg2 = (RemoteAnimationTarget[]) data.createTypedArray(RemoteAnimationTarget.CREATOR);
-                    IBackAnimationFinishedCallback _arg3 = IBackAnimationFinishedCallback.Stub.asInterface(data.readStrongBinder());
+                    RemoteAnimationTarget[] _arg0 =
+                            (RemoteAnimationTarget[])
+                                    data.createTypedArray(RemoteAnimationTarget.CREATOR);
+                    RemoteAnimationTarget[] _arg1 =
+                            (RemoteAnimationTarget[])
+                                    data.createTypedArray(RemoteAnimationTarget.CREATOR);
+                    RemoteAnimationTarget[] _arg2 =
+                            (RemoteAnimationTarget[])
+                                    data.createTypedArray(RemoteAnimationTarget.CREATOR);
+                    IBackAnimationFinishedCallback _arg3 =
+                            IBackAnimationFinishedCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onAnimationStart(_arg0, _arg1, _arg2, _arg3);
                     return true;
@@ -125,7 +141,12 @@ public interface IBackAnimationRunner extends IInterface {
             }
 
             @Override // android.window.IBackAnimationRunner
-            public void onAnimationStart(RemoteAnimationTarget[] apps, RemoteAnimationTarget[] wallpapers, RemoteAnimationTarget[] nonApps, IBackAnimationFinishedCallback finishedCallback) throws RemoteException {
+            public void onAnimationStart(
+                    RemoteAnimationTarget[] apps,
+                    RemoteAnimationTarget[] wallpapers,
+                    RemoteAnimationTarget[] nonApps,
+                    IBackAnimationFinishedCallback finishedCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IBackAnimationRunner.DESCRIPTOR);

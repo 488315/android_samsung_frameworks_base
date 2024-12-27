@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.rsa;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.DERNull;
 import com.android.internal.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
@@ -9,6 +10,7 @@ import com.android.internal.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 import com.android.internal.org.bouncycastle.crypto.params.RSAKeyParameters;
 import com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.KeyUtil;
 import com.android.internal.org.bouncycastle.util.Strings;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -18,7 +20,8 @@ import java.security.spec.RSAPublicKeySpec;
 
 /* loaded from: classes5.dex */
 public class BCRSAPublicKey implements RSAPublicKey {
-    static final AlgorithmIdentifier DEFAULT_ALGORITHM_IDENTIFIER = new AlgorithmIdentifier(PKCSObjectIdentifiers.rsaEncryption, DERNull.INSTANCE);
+    static final AlgorithmIdentifier DEFAULT_ALGORITHM_IDENTIFIER =
+            new AlgorithmIdentifier(PKCSObjectIdentifiers.rsaEncryption, DERNull.INSTANCE);
     static final long serialVersionUID = 2675817738516720772L;
     private transient AlgorithmIdentifier algorithmIdentifier;
     private BigInteger modulus;
@@ -56,7 +59,9 @@ public class BCRSAPublicKey implements RSAPublicKey {
 
     private void populateFromPublicKeyInfo(SubjectPublicKeyInfo info) {
         try {
-            com.android.internal.org.bouncycastle.asn1.pkcs.RSAPublicKey pubKey = com.android.internal.org.bouncycastle.asn1.pkcs.RSAPublicKey.getInstance(info.parsePublicKey());
+            com.android.internal.org.bouncycastle.asn1.pkcs.RSAPublicKey pubKey =
+                    com.android.internal.org.bouncycastle.asn1.pkcs.RSAPublicKey.getInstance(
+                            info.parsePublicKey());
             this.algorithmIdentifier = info.getAlgorithm();
             this.modulus = pubKey.getModulus();
             this.publicExponent = pubKey.getPublicExponent();
@@ -78,7 +83,9 @@ public class BCRSAPublicKey implements RSAPublicKey {
 
     @Override // java.security.Key
     public String getAlgorithm() {
-        if (this.algorithmIdentifier.getAlgorithm().equals((ASN1Primitive) PKCSObjectIdentifiers.id_RSASSA_PSS)) {
+        if (this.algorithmIdentifier
+                .getAlgorithm()
+                .equals((ASN1Primitive) PKCSObjectIdentifiers.id_RSASSA_PSS)) {
             return "RSASSA-PSS";
         }
         return "RSA";
@@ -91,7 +98,10 @@ public class BCRSAPublicKey implements RSAPublicKey {
 
     @Override // java.security.Key
     public byte[] getEncoded() {
-        return KeyUtil.getEncodedSubjectPublicKeyInfo(this.algorithmIdentifier, new com.android.internal.org.bouncycastle.asn1.pkcs.RSAPublicKey(getModulus(), getPublicExponent()));
+        return KeyUtil.getEncodedSubjectPublicKeyInfo(
+                this.algorithmIdentifier,
+                new com.android.internal.org.bouncycastle.asn1.pkcs.RSAPublicKey(
+                        getModulus(), getPublicExponent()));
     }
 
     RSAKeyParameters engineGetKeyParameters() {
@@ -110,13 +120,20 @@ public class BCRSAPublicKey implements RSAPublicKey {
             return false;
         }
         RSAPublicKey key = (RSAPublicKey) o;
-        return getModulus().equals(key.getModulus()) && getPublicExponent().equals(key.getPublicExponent());
+        return getModulus().equals(key.getModulus())
+                && getPublicExponent().equals(key.getPublicExponent());
     }
 
     public String toString() {
         StringBuffer buf = new StringBuffer();
         String nl = Strings.lineSeparator();
-        buf.append("RSA Public Key [").append(RSAUtil.generateKeyFingerprint(getModulus())).append(NavigationBarInflaterView.SIZE_MOD_END).append(",[").append(RSAUtil.generateExponentFingerprint(getPublicExponent())).append(NavigationBarInflaterView.SIZE_MOD_END).append(nl);
+        buf.append("RSA Public Key [")
+                .append(RSAUtil.generateKeyFingerprint(getModulus()))
+                .append(NavigationBarInflaterView.SIZE_MOD_END)
+                .append(",[")
+                .append(RSAUtil.generateExponentFingerprint(getPublicExponent()))
+                .append(NavigationBarInflaterView.SIZE_MOD_END)
+                .append(nl);
         buf.append("        modulus: ").append(getModulus().toString(16)).append(nl);
         buf.append("public exponent: ").append(getPublicExponent().toString(16)).append(nl);
         return buf.toString();

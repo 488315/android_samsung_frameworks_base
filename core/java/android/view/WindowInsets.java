@@ -4,7 +4,9 @@ import android.content.pm.PackageManager;
 import android.graphics.Insets;
 import android.graphics.Rect;
 import android.util.Size;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -15,7 +17,25 @@ import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class WindowInsets {
-    public static final WindowInsets CONSUMED = new WindowInsets(createCompatTypeMap(null), createCompatTypeMap(null), createCompatVisibilityMap(createCompatTypeMap(null)), false, 0, false, 0, null, null, null, null, Type.systemBars(), false, null, null, 0, 0);
+    public static final WindowInsets CONSUMED =
+            new WindowInsets(
+                    createCompatTypeMap(null),
+                    createCompatTypeMap(null),
+                    createCompatVisibilityMap(createCompatTypeMap(null)),
+                    false,
+                    0,
+                    false,
+                    0,
+                    null,
+                    null,
+                    null,
+                    null,
+                    Type.systemBars(),
+                    false,
+                    null,
+                    null,
+                    0,
+                    0);
     private final boolean mCompatIgnoreVisibility;
     private int mCompatInsetsTypes;
     private final DisplayCutout mDisplayCutout;
@@ -38,7 +58,24 @@ public final class WindowInsets {
     private final Insets[] mTypeMaxInsetsMap;
     private final boolean[] mTypeVisibilityMap;
 
-    public WindowInsets(Insets[] typeInsetsMap, Insets[] typeMaxInsetsMap, boolean[] typeVisibilityMap, boolean isRound, int forceConsumingTypes, boolean forceConsumingOpaqueCaptionBar, int suppressScrimTypes, DisplayCutout displayCutout, RoundedCorners roundedCorners, PrivacyIndicatorBounds privacyIndicatorBounds, DisplayShape displayShape, int compatInsetsTypes, boolean compatIgnoreVisibility, Rect[][] typeBoundingRectsMap, Rect[][] typeMaxBoundingRectsMap, int frameWidth, int frameHeight) {
+    public WindowInsets(
+            Insets[] typeInsetsMap,
+            Insets[] typeMaxInsetsMap,
+            boolean[] typeVisibilityMap,
+            boolean isRound,
+            int forceConsumingTypes,
+            boolean forceConsumingOpaqueCaptionBar,
+            int suppressScrimTypes,
+            DisplayCutout displayCutout,
+            RoundedCorners roundedCorners,
+            PrivacyIndicatorBounds privacyIndicatorBounds,
+            DisplayShape displayShape,
+            int compatInsetsTypes,
+            boolean compatIgnoreVisibility,
+            Rect[][] typeBoundingRectsMap,
+            Rect[][] typeMaxBoundingRectsMap,
+            int frameWidth,
+            int frameHeight) {
         Insets[] insetsArr;
         Insets[] insetsArr2;
         Rect[][] rectArr;
@@ -65,7 +102,8 @@ public final class WindowInsets {
         this.mCompatInsetsTypes = compatInsetsTypes;
         this.mCompatIgnoreVisibility = compatIgnoreVisibility;
         this.mDisplayCutoutConsumed = displayCutout == null;
-        this.mDisplayCutout = (this.mDisplayCutoutConsumed || displayCutout.isEmpty()) ? null : displayCutout;
+        this.mDisplayCutout =
+                (this.mDisplayCutoutConsumed || displayCutout.isEmpty()) ? null : displayCutout;
         this.mRoundedCorners = roundedCorners;
         this.mPrivacyIndicatorBounds = privacyIndicatorBounds;
         this.mDisplayShape = displayShape;
@@ -86,7 +124,24 @@ public final class WindowInsets {
     }
 
     public WindowInsets(WindowInsets src) {
-        this(src.mSystemWindowInsetsConsumed ? null : src.mTypeInsetsMap, src.mStableInsetsConsumed ? null : src.mTypeMaxInsetsMap, src.mTypeVisibilityMap, src.mIsRound, src.mForceConsumingTypes, src.mForceConsumingOpaqueCaptionBar, src.mSuppressScrimTypes, displayCutoutCopyConstructorArgument(src), src.mRoundedCorners, src.mPrivacyIndicatorBounds, src.mDisplayShape, src.mCompatInsetsTypes, src.mCompatIgnoreVisibility, src.mSystemWindowInsetsConsumed ? null : src.mTypeBoundingRectsMap, src.mStableInsetsConsumed ? null : src.mTypeMaxBoundingRectsMap, src.mFrameWidth, src.mFrameHeight);
+        this(
+                src.mSystemWindowInsetsConsumed ? null : src.mTypeInsetsMap,
+                src.mStableInsetsConsumed ? null : src.mTypeMaxInsetsMap,
+                src.mTypeVisibilityMap,
+                src.mIsRound,
+                src.mForceConsumingTypes,
+                src.mForceConsumingOpaqueCaptionBar,
+                src.mSuppressScrimTypes,
+                displayCutoutCopyConstructorArgument(src),
+                src.mRoundedCorners,
+                src.mPrivacyIndicatorBounds,
+                src.mDisplayShape,
+                src.mCompatInsetsTypes,
+                src.mCompatIgnoreVisibility,
+                src.mSystemWindowInsetsConsumed ? null : src.mTypeBoundingRectsMap,
+                src.mStableInsetsConsumed ? null : src.mTypeMaxBoundingRectsMap,
+                src.mFrameWidth,
+                src.mFrameHeight);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -125,7 +180,24 @@ public final class WindowInsets {
     }
 
     public WindowInsets(Rect systemWindowInsets) {
-        this(createCompatTypeMap(systemWindowInsets), null, new boolean[10], false, 0, false, 0, null, null, null, null, Type.systemBars(), false, new Rect[10][], null, 0, 0);
+        this(
+                createCompatTypeMap(systemWindowInsets),
+                null,
+                new boolean[10],
+                false,
+                0,
+                false,
+                0,
+                null,
+                null,
+                null,
+                null,
+                Type.systemBars(),
+                false,
+                new Rect[10][],
+                null,
+                0,
+                0);
     }
 
     public static Insets[] createCompatTypeMap(Rect insets) {
@@ -226,7 +298,12 @@ public final class WindowInsets {
     }
 
     public boolean hasInsets() {
-        return (getInsets(this.mTypeInsetsMap, Type.all()).equals(Insets.NONE) && getInsets(this.mTypeMaxInsetsMap, Type.all()).equals(Insets.NONE) && this.mDisplayCutout == null && this.mRoundedCorners == null) ? false : true;
+        return (getInsets(this.mTypeInsetsMap, Type.all()).equals(Insets.NONE)
+                        && getInsets(this.mTypeMaxInsetsMap, Type.all()).equals(Insets.NONE)
+                        && this.mDisplayCutout == null
+                        && this.mRoundedCorners == null)
+                ? false
+                : true;
     }
 
     public List<Rect> getBoundingRects(int typeMask) {
@@ -285,11 +362,30 @@ public final class WindowInsets {
 
     @Deprecated
     public WindowInsets consumeDisplayCutout() {
-        return new WindowInsets(this.mSystemWindowInsetsConsumed ? null : this.mTypeInsetsMap, this.mStableInsetsConsumed ? null : this.mTypeMaxInsetsMap, this.mTypeVisibilityMap, this.mIsRound, this.mForceConsumingTypes, this.mForceConsumingOpaqueCaptionBar, this.mSuppressScrimTypes, null, this.mRoundedCorners, this.mPrivacyIndicatorBounds, this.mDisplayShape, this.mCompatInsetsTypes, this.mCompatIgnoreVisibility, this.mSystemWindowInsetsConsumed ? null : this.mTypeBoundingRectsMap, this.mStableInsetsConsumed ? null : this.mTypeMaxBoundingRectsMap, this.mFrameWidth, this.mFrameHeight);
+        return new WindowInsets(
+                this.mSystemWindowInsetsConsumed ? null : this.mTypeInsetsMap,
+                this.mStableInsetsConsumed ? null : this.mTypeMaxInsetsMap,
+                this.mTypeVisibilityMap,
+                this.mIsRound,
+                this.mForceConsumingTypes,
+                this.mForceConsumingOpaqueCaptionBar,
+                this.mSuppressScrimTypes,
+                null,
+                this.mRoundedCorners,
+                this.mPrivacyIndicatorBounds,
+                this.mDisplayShape,
+                this.mCompatInsetsTypes,
+                this.mCompatIgnoreVisibility,
+                this.mSystemWindowInsetsConsumed ? null : this.mTypeBoundingRectsMap,
+                this.mStableInsetsConsumed ? null : this.mTypeMaxBoundingRectsMap,
+                this.mFrameWidth,
+                this.mFrameHeight);
     }
 
     public boolean isConsumed() {
-        return this.mSystemWindowInsetsConsumed && this.mStableInsetsConsumed && this.mDisplayCutoutConsumed;
+        return this.mSystemWindowInsetsConsumed
+                && this.mStableInsetsConsumed
+                && this.mDisplayCutoutConsumed;
     }
 
     public boolean isRound() {
@@ -298,7 +394,26 @@ public final class WindowInsets {
 
     @Deprecated
     public WindowInsets consumeSystemWindowInsets() {
-        return new WindowInsets(null, null, this.mTypeVisibilityMap, this.mIsRound, this.mForceConsumingTypes, this.mForceConsumingOpaqueCaptionBar, this.mSuppressScrimTypes, (this.mCompatInsetsTypes & Type.displayCutout()) != 0 ? null : displayCutoutCopyConstructorArgument(this), this.mRoundedCorners, this.mPrivacyIndicatorBounds, this.mDisplayShape, this.mCompatInsetsTypes, this.mCompatIgnoreVisibility, null, null, this.mFrameWidth, this.mFrameHeight);
+        return new WindowInsets(
+                null,
+                null,
+                this.mTypeVisibilityMap,
+                this.mIsRound,
+                this.mForceConsumingTypes,
+                this.mForceConsumingOpaqueCaptionBar,
+                this.mSuppressScrimTypes,
+                (this.mCompatInsetsTypes & Type.displayCutout()) != 0
+                        ? null
+                        : displayCutoutCopyConstructorArgument(this),
+                this.mRoundedCorners,
+                this.mPrivacyIndicatorBounds,
+                this.mDisplayShape,
+                this.mCompatInsetsTypes,
+                this.mCompatIgnoreVisibility,
+                null,
+                null,
+                this.mFrameWidth,
+                this.mFrameHeight);
     }
 
     @Deprecated
@@ -311,7 +426,11 @@ public final class WindowInsets {
 
     @Deprecated
     public WindowInsets replaceSystemWindowInsets(Rect systemWindowInsets) {
-        return replaceSystemWindowInsets(systemWindowInsets.left, systemWindowInsets.top, systemWindowInsets.right, systemWindowInsets.bottom);
+        return replaceSystemWindowInsets(
+                systemWindowInsets.left,
+                systemWindowInsets.top,
+                systemWindowInsets.right,
+                systemWindowInsets.bottom);
     }
 
     @Deprecated
@@ -383,14 +502,28 @@ public final class WindowInsets {
             Insets maxInsets = this.mTypeMaxInsetsMap[i];
             boolean visible = this.mTypeVisibilityMap[i];
             if (!Insets.NONE.equals(insets) || !Insets.NONE.equals(maxInsets) || visible) {
-                result.append(Type.toString(1 << i)).append("=").append(insets).append(" max=").append(maxInsets).append(" vis=").append(visible).append(" boundingRects=").append(Arrays.toString(this.mTypeBoundingRectsMap[i])).append(" maxBoundingRects=").append(Arrays.toString(this.mTypeMaxBoundingRectsMap[i])).append("\n    ");
+                result.append(Type.toString(1 << i))
+                        .append("=")
+                        .append(insets)
+                        .append(" max=")
+                        .append(maxInsets)
+                        .append(" vis=")
+                        .append(visible)
+                        .append(" boundingRects=")
+                        .append(Arrays.toString(this.mTypeBoundingRectsMap[i]))
+                        .append(" maxBoundingRects=")
+                        .append(Arrays.toString(this.mTypeMaxBoundingRectsMap[i]))
+                        .append("\n    ");
             }
         }
         result.append(this.mDisplayCutout != null ? "cutout=" + this.mDisplayCutout : "");
         result.append("\n    ");
         result.append(this.mRoundedCorners != null ? "roundedCorners=" + this.mRoundedCorners : "");
         result.append("\n    ");
-        result.append(this.mPrivacyIndicatorBounds != null ? "privacyIndicatorBounds=" + this.mPrivacyIndicatorBounds : "");
+        result.append(
+                this.mPrivacyIndicatorBounds != null
+                        ? "privacyIndicatorBounds=" + this.mPrivacyIndicatorBounds
+                        : "");
         result.append("\n    ");
         result.append(this.mDisplayShape != null ? "displayShape=" + this.mDisplayShape : "");
         result.append("\n    ");
@@ -500,7 +633,15 @@ public final class WindowInsets {
             displayShape = displayShape2;
             i3 = i5;
             z3 = z5;
-            insetBoundingRects = insetBoundingRects(this.mTypeBoundingRectsMap, left, top, right, bottom, this.mFrameWidth, this.mFrameHeight);
+            insetBoundingRects =
+                    insetBoundingRects(
+                            this.mTypeBoundingRectsMap,
+                            left,
+                            top,
+                            right,
+                            bottom,
+                            this.mFrameWidth,
+                            this.mFrameHeight);
         } else {
             z2 = z6;
             i2 = i6;
@@ -512,11 +653,36 @@ public final class WindowInsets {
             insetBoundingRects = null;
         }
         if (!this.mStableInsetsConsumed) {
-            insetBoundingRects2 = insetBoundingRects(this.mTypeMaxBoundingRectsMap, left, top, right, bottom, this.mFrameWidth, this.mFrameHeight);
+            insetBoundingRects2 =
+                    insetBoundingRects(
+                            this.mTypeMaxBoundingRectsMap,
+                            left,
+                            top,
+                            right,
+                            bottom,
+                            this.mFrameWidth,
+                            this.mFrameHeight);
         } else {
             insetBoundingRects2 = null;
         }
-        return new WindowInsets(insetInsets, insetInsets2, zArr, z, i, z3, i3, inset, inset2, inset3, displayShape, i2, z2, insetBoundingRects, insetBoundingRects2, Math.max(0, (this.mFrameWidth - left) - right), Math.max(0, (this.mFrameHeight - top) - bottom));
+        return new WindowInsets(
+                insetInsets,
+                insetInsets2,
+                zArr,
+                z,
+                i,
+                z3,
+                i3,
+                inset,
+                inset2,
+                inset3,
+                displayShape,
+                i2,
+                z2,
+                insetBoundingRects,
+                insetBoundingRects2,
+                Math.max(0, (this.mFrameWidth - left) - right),
+                Math.max(0, (this.mFrameHeight - top) - bottom));
     }
 
     public boolean equals(Object o) {
@@ -527,22 +693,59 @@ public final class WindowInsets {
             return false;
         }
         WindowInsets that = (WindowInsets) o;
-        if (this.mIsRound == that.mIsRound && this.mForceConsumingTypes == that.mForceConsumingTypes && this.mForceConsumingOpaqueCaptionBar == that.mForceConsumingOpaqueCaptionBar && this.mSuppressScrimTypes == that.mSuppressScrimTypes && this.mSystemWindowInsetsConsumed == that.mSystemWindowInsetsConsumed && this.mStableInsetsConsumed == that.mStableInsetsConsumed && this.mDisplayCutoutConsumed == that.mDisplayCutoutConsumed && Arrays.equals(this.mTypeInsetsMap, that.mTypeInsetsMap) && Arrays.equals(this.mTypeMaxInsetsMap, that.mTypeMaxInsetsMap) && Arrays.equals(this.mTypeVisibilityMap, that.mTypeVisibilityMap) && Objects.equals(this.mDisplayCutout, that.mDisplayCutout) && Objects.equals(this.mRoundedCorners, that.mRoundedCorners) && Objects.equals(this.mPrivacyIndicatorBounds, that.mPrivacyIndicatorBounds) && Objects.equals(this.mDisplayShape, that.mDisplayShape) && Arrays.deepEquals(this.mTypeBoundingRectsMap, that.mTypeBoundingRectsMap) && Arrays.deepEquals(this.mTypeMaxBoundingRectsMap, that.mTypeMaxBoundingRectsMap) && this.mFrameWidth == that.mFrameWidth && this.mFrameHeight == that.mFrameHeight) {
+        if (this.mIsRound == that.mIsRound
+                && this.mForceConsumingTypes == that.mForceConsumingTypes
+                && this.mForceConsumingOpaqueCaptionBar == that.mForceConsumingOpaqueCaptionBar
+                && this.mSuppressScrimTypes == that.mSuppressScrimTypes
+                && this.mSystemWindowInsetsConsumed == that.mSystemWindowInsetsConsumed
+                && this.mStableInsetsConsumed == that.mStableInsetsConsumed
+                && this.mDisplayCutoutConsumed == that.mDisplayCutoutConsumed
+                && Arrays.equals(this.mTypeInsetsMap, that.mTypeInsetsMap)
+                && Arrays.equals(this.mTypeMaxInsetsMap, that.mTypeMaxInsetsMap)
+                && Arrays.equals(this.mTypeVisibilityMap, that.mTypeVisibilityMap)
+                && Objects.equals(this.mDisplayCutout, that.mDisplayCutout)
+                && Objects.equals(this.mRoundedCorners, that.mRoundedCorners)
+                && Objects.equals(this.mPrivacyIndicatorBounds, that.mPrivacyIndicatorBounds)
+                && Objects.equals(this.mDisplayShape, that.mDisplayShape)
+                && Arrays.deepEquals(this.mTypeBoundingRectsMap, that.mTypeBoundingRectsMap)
+                && Arrays.deepEquals(this.mTypeMaxBoundingRectsMap, that.mTypeMaxBoundingRectsMap)
+                && this.mFrameWidth == that.mFrameWidth
+                && this.mFrameHeight == that.mFrameHeight) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(Arrays.hashCode(this.mTypeInsetsMap)), Integer.valueOf(Arrays.hashCode(this.mTypeMaxInsetsMap)), Integer.valueOf(Arrays.hashCode(this.mTypeVisibilityMap)), Boolean.valueOf(this.mIsRound), this.mDisplayCutout, this.mRoundedCorners, Integer.valueOf(this.mForceConsumingTypes), Boolean.valueOf(this.mForceConsumingOpaqueCaptionBar), Integer.valueOf(this.mSuppressScrimTypes), Boolean.valueOf(this.mSystemWindowInsetsConsumed), Boolean.valueOf(this.mStableInsetsConsumed), Boolean.valueOf(this.mDisplayCutoutConsumed), this.mPrivacyIndicatorBounds, this.mDisplayShape, Integer.valueOf(Arrays.deepHashCode(this.mTypeBoundingRectsMap)), Integer.valueOf(Arrays.deepHashCode(this.mTypeMaxBoundingRectsMap)), Integer.valueOf(this.mFrameWidth), Integer.valueOf(this.mFrameHeight));
+        return Objects.hash(
+                Integer.valueOf(Arrays.hashCode(this.mTypeInsetsMap)),
+                Integer.valueOf(Arrays.hashCode(this.mTypeMaxInsetsMap)),
+                Integer.valueOf(Arrays.hashCode(this.mTypeVisibilityMap)),
+                Boolean.valueOf(this.mIsRound),
+                this.mDisplayCutout,
+                this.mRoundedCorners,
+                Integer.valueOf(this.mForceConsumingTypes),
+                Boolean.valueOf(this.mForceConsumingOpaqueCaptionBar),
+                Integer.valueOf(this.mSuppressScrimTypes),
+                Boolean.valueOf(this.mSystemWindowInsetsConsumed),
+                Boolean.valueOf(this.mStableInsetsConsumed),
+                Boolean.valueOf(this.mDisplayCutoutConsumed),
+                this.mPrivacyIndicatorBounds,
+                this.mDisplayShape,
+                Integer.valueOf(Arrays.deepHashCode(this.mTypeBoundingRectsMap)),
+                Integer.valueOf(Arrays.deepHashCode(this.mTypeMaxBoundingRectsMap)),
+                Integer.valueOf(this.mFrameWidth),
+                Integer.valueOf(this.mFrameHeight));
     }
 
-    private static Insets[] insetInsets(Insets[] typeInsetsMap, int left, int top, int right, int bottom) {
+    private static Insets[] insetInsets(
+            Insets[] typeInsetsMap, int left, int top, int right, int bottom) {
         Insets insetInsets;
         boolean cloned = false;
         for (int i = 0; i < 10; i++) {
             Insets insets = typeInsetsMap[i];
-            if (insets != null && (insetInsets = insetInsets(insets, left, top, right, bottom)) != insets) {
+            if (insets != null
+                    && (insetInsets = insetInsets(insets, left, top, right, bottom)) != insets) {
                 if (!cloned) {
                     typeInsetsMap = (Insets[]) typeInsetsMap.clone();
                     cloned = true;
@@ -564,7 +767,14 @@ public final class WindowInsets {
         return Insets.of(newLeft, newTop, newRight, newBottom);
     }
 
-    static Rect[][] insetBoundingRects(Rect[][] typeBoundingRectsMap, int insetLeft, int insetTop, int insetRight, int insetBottom, int frameWidth, int frameHeight) {
+    static Rect[][] insetBoundingRects(
+            Rect[][] typeBoundingRectsMap,
+            int insetLeft,
+            int insetTop,
+            int insetRight,
+            int insetBottom,
+            int frameWidth,
+            int frameHeight) {
         if (insetLeft == 0 && insetTop == 0 && insetRight == 0 && insetBottom == 0) {
             return typeBoundingRectsMap;
         }
@@ -573,7 +783,15 @@ public final class WindowInsets {
         for (int i = 0; i < 10; i++) {
             Rect[] boundingRects = typeBoundingRectsMap2[i];
             if (boundingRects != null) {
-                Rect[] insetBoundingRects = insetBoundingRects(boundingRects, insetLeft, insetTop, insetRight, insetBottom, frameWidth, frameHeight);
+                Rect[] insetBoundingRects =
+                        insetBoundingRects(
+                                boundingRects,
+                                insetLeft,
+                                insetTop,
+                                insetRight,
+                                insetBottom,
+                                frameWidth,
+                                frameHeight);
                 if (!Arrays.equals(insetBoundingRects, boundingRects)) {
                     if (!cloned) {
                         typeBoundingRectsMap2 = (Rect[][]) typeBoundingRectsMap2.clone();
@@ -586,7 +804,14 @@ public final class WindowInsets {
         return typeBoundingRectsMap2;
     }
 
-    static Rect[] insetBoundingRects(Rect[] boundingRects, int left, int top, int right, int bottom, int frameWidth, int frameHeight) {
+    static Rect[] insetBoundingRects(
+            Rect[] boundingRects,
+            int left,
+            int top,
+            int right,
+            int bottom,
+            int frameWidth,
+            int frameHeight) {
         List<Rect> insetBoundingRectsList = new ArrayList<>();
         for (Rect rect : boundingRects) {
             Rect insetRect = insetRect(rect, left, top, right, bottom, frameWidth, frameHeight);
@@ -597,11 +822,19 @@ public final class WindowInsets {
         return (Rect[]) insetBoundingRectsList.toArray(new Rect[0]);
     }
 
-    private static Rect insetRect(Rect orig, int insetLeft, int insetTop, int insetRight, int insetBottom, int frameWidth, int frameHeight) {
+    private static Rect insetRect(
+            Rect orig,
+            int insetLeft,
+            int insetTop,
+            int insetRight,
+            int insetBottom,
+            int frameWidth,
+            int frameHeight) {
         if (orig == null) {
             return null;
         }
-        Rect insetFrame = new Rect(insetLeft, insetTop, frameWidth - insetRight, frameHeight - insetBottom);
+        Rect insetFrame =
+                new Rect(insetLeft, insetTop, frameWidth - insetRight, frameHeight - insetBottom);
         Rect insetRect = new Rect();
         if (!insetRect.setIntersect(insetFrame, orig)) {
             return null;
@@ -704,7 +937,8 @@ public final class WindowInsets {
             return this;
         }
 
-        public Builder setInsetsIgnoringVisibility(int typeMask, Insets insets) throws IllegalArgumentException {
+        public Builder setInsetsIgnoringVisibility(int typeMask, Insets insets)
+                throws IllegalArgumentException {
             if (typeMask == 8) {
                 throw new IllegalArgumentException("Maximum inset not available for IME");
             }
@@ -744,7 +978,8 @@ public final class WindowInsets {
         }
 
         public Builder setRoundedCorners(RoundedCorners roundedCorners) {
-            this.mRoundedCorners = roundedCorners != null ? roundedCorners : RoundedCorners.NO_ROUNDED_CORNERS;
+            this.mRoundedCorners =
+                    roundedCorners != null ? roundedCorners : RoundedCorners.NO_ROUNDED_CORNERS;
             return this;
         }
 
@@ -796,7 +1031,8 @@ public final class WindowInsets {
         public Builder setBoundingRects(int typeMask, List<Rect> rects) {
             for (int i = 1; i <= 512; i <<= 1) {
                 if ((typeMask & i) != 0) {
-                    this.mTypeBoundingRectsMap[Type.indexOf(i)] = (Rect[]) rects.toArray(new Rect[0]);
+                    this.mTypeBoundingRectsMap[Type.indexOf(i)] =
+                            (Rect[]) rects.toArray(new Rect[0]);
                 }
             }
             return this;
@@ -808,7 +1044,8 @@ public final class WindowInsets {
             }
             for (int i = 1; i <= 512; i <<= 1) {
                 if ((typeMask & i) != 0) {
-                    this.mTypeMaxBoundingRectsMap[Type.indexOf(i)] = (Rect[]) rects.toArray(new Rect[0]);
+                    this.mTypeMaxBoundingRectsMap[Type.indexOf(i)] =
+                            (Rect[]) rects.toArray(new Rect[0]);
                 }
             }
             return this;
@@ -821,7 +1058,24 @@ public final class WindowInsets {
         }
 
         public WindowInsets build() {
-            return new WindowInsets(this.mSystemInsetsConsumed ? null : this.mTypeInsetsMap, this.mStableInsetsConsumed ? null : this.mTypeMaxInsetsMap, this.mTypeVisibilityMap, this.mIsRound, this.mForceConsumingTypes, this.mForceConsumingOpaqueCaptionBar, this.mSuppressScrimTypes, this.mDisplayCutout, this.mRoundedCorners, this.mPrivacyIndicatorBounds, this.mDisplayShape, Type.systemBars(), false, this.mSystemInsetsConsumed ? null : this.mTypeBoundingRectsMap, this.mStableInsetsConsumed ? null : this.mTypeMaxBoundingRectsMap, this.mFrameWidth, this.mFrameHeight);
+            return new WindowInsets(
+                    this.mSystemInsetsConsumed ? null : this.mTypeInsetsMap,
+                    this.mStableInsetsConsumed ? null : this.mTypeMaxInsetsMap,
+                    this.mTypeVisibilityMap,
+                    this.mIsRound,
+                    this.mForceConsumingTypes,
+                    this.mForceConsumingOpaqueCaptionBar,
+                    this.mSuppressScrimTypes,
+                    this.mDisplayCutout,
+                    this.mRoundedCorners,
+                    this.mPrivacyIndicatorBounds,
+                    this.mDisplayShape,
+                    Type.systemBars(),
+                    false,
+                    this.mSystemInsetsConsumed ? null : this.mTypeBoundingRectsMap,
+                    this.mStableInsetsConsumed ? null : this.mTypeMaxBoundingRectsMap,
+                    this.mFrameWidth,
+                    this.mFrameHeight);
         }
     }
 
@@ -842,8 +1096,7 @@ public final class WindowInsets {
         static final int WINDOW_DECOR = 256;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface InsetsType {
-        }
+        public @interface InsetsType {}
 
         static int indexOf(int type) {
             switch (type) {
@@ -868,7 +1121,8 @@ public final class WindowInsets {
                 case 512:
                     return 9;
                 default:
-                    throw new IllegalArgumentException("type needs to be >= FIRST and <= LAST, type=" + type);
+                    throw new IllegalArgumentException(
+                            "type needs to be >= FIRST and <= LAST, type=" + type);
             }
         }
 
@@ -910,8 +1164,7 @@ public final class WindowInsets {
             return result.toString();
         }
 
-        private Type() {
-        }
+        private Type() {}
 
         public static int statusBars() {
             return 1;
@@ -977,11 +1230,9 @@ public final class WindowInsets {
         public static final int TOP = 2;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface InsetsSide {
-        }
+        public @interface InsetsSide {}
 
-        private Side() {
-        }
+        private Side() {}
 
         public static int all() {
             return 15;
@@ -990,7 +1241,25 @@ public final class WindowInsets {
 
     public WindowInsets removeCutoutInsets() {
         this.mCompatInsetsTypes &= PackageManager.INSTALL_FAILED_PRE_APPROVAL_NOT_AVAILABLE;
-        WindowInsets insets = new WindowInsets(this.mSystemWindowInsetsConsumed ? null : this.mTypeInsetsMap, this.mStableInsetsConsumed ? null : this.mTypeMaxInsetsMap, this.mTypeVisibilityMap, this.mIsRound, this.mForceConsumingTypes, this.mForceConsumingOpaqueCaptionBar, this.mSuppressScrimTypes, DisplayCutout.NO_CUTOUT, this.mRoundedCorners, this.mPrivacyIndicatorBounds, this.mDisplayShape, this.mCompatInsetsTypes, this.mCompatIgnoreVisibility, this.mTypeBoundingRectsMap, this.mTypeMaxBoundingRectsMap, this.mFrameWidth, this.mFrameHeight);
+        WindowInsets insets =
+                new WindowInsets(
+                        this.mSystemWindowInsetsConsumed ? null : this.mTypeInsetsMap,
+                        this.mStableInsetsConsumed ? null : this.mTypeMaxInsetsMap,
+                        this.mTypeVisibilityMap,
+                        this.mIsRound,
+                        this.mForceConsumingTypes,
+                        this.mForceConsumingOpaqueCaptionBar,
+                        this.mSuppressScrimTypes,
+                        DisplayCutout.NO_CUTOUT,
+                        this.mRoundedCorners,
+                        this.mPrivacyIndicatorBounds,
+                        this.mDisplayShape,
+                        this.mCompatInsetsTypes,
+                        this.mCompatIgnoreVisibility,
+                        this.mTypeBoundingRectsMap,
+                        this.mTypeMaxBoundingRectsMap,
+                        this.mFrameWidth,
+                        this.mFrameHeight);
         int index = Type.indexOf(128);
         insets.mTypeInsetsMap[index] = null;
         insets.mTypeMaxInsetsMap[index] = null;
@@ -1000,7 +1269,25 @@ public final class WindowInsets {
 
     public WindowInsets consumeCaptionInsets() {
         this.mCompatInsetsTypes &= -5;
-        WindowInsets insets = new WindowInsets(this.mSystemWindowInsetsConsumed ? null : this.mTypeInsetsMap, this.mStableInsetsConsumed ? null : this.mTypeMaxInsetsMap, this.mTypeVisibilityMap, this.mIsRound, this.mForceConsumingTypes, this.mForceConsumingOpaqueCaptionBar, this.mSuppressScrimTypes, this.mDisplayCutout, this.mRoundedCorners, this.mPrivacyIndicatorBounds, this.mDisplayShape, this.mCompatInsetsTypes, this.mCompatIgnoreVisibility, this.mTypeBoundingRectsMap, this.mTypeMaxBoundingRectsMap, this.mFrameWidth, this.mFrameHeight);
+        WindowInsets insets =
+                new WindowInsets(
+                        this.mSystemWindowInsetsConsumed ? null : this.mTypeInsetsMap,
+                        this.mStableInsetsConsumed ? null : this.mTypeMaxInsetsMap,
+                        this.mTypeVisibilityMap,
+                        this.mIsRound,
+                        this.mForceConsumingTypes,
+                        this.mForceConsumingOpaqueCaptionBar,
+                        this.mSuppressScrimTypes,
+                        this.mDisplayCutout,
+                        this.mRoundedCorners,
+                        this.mPrivacyIndicatorBounds,
+                        this.mDisplayShape,
+                        this.mCompatInsetsTypes,
+                        this.mCompatIgnoreVisibility,
+                        this.mTypeBoundingRectsMap,
+                        this.mTypeMaxBoundingRectsMap,
+                        this.mFrameWidth,
+                        this.mFrameHeight);
         int index = Type.indexOf(4);
         insets.mTypeInsetsMap[index] = null;
         insets.mTypeMaxInsetsMap[index] = null;

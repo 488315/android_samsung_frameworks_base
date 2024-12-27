@@ -1,6 +1,5 @@
 package android.media.midi;
 
-import android.media.midi.IMidiDeviceServer;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -9,12 +8,13 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IMidiDeviceOpenCallback extends IInterface {
-    void onDeviceOpened(IMidiDeviceServer iMidiDeviceServer, IBinder iBinder) throws RemoteException;
+    void onDeviceOpened(IMidiDeviceServer iMidiDeviceServer, IBinder iBinder)
+            throws RemoteException;
 
     public static class Default implements IMidiDeviceOpenCallback {
         @Override // android.media.midi.IMidiDeviceOpenCallback
-        public void onDeviceOpened(IMidiDeviceServer server, IBinder token) throws RemoteException {
-        }
+        public void onDeviceOpened(IMidiDeviceServer server, IBinder token)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -22,7 +22,7 @@ public interface IMidiDeviceOpenCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMidiDeviceOpenCallback {
+    public abstract static class Stub extends Binder implements IMidiDeviceOpenCallback {
         public static final String DESCRIPTOR = "android.media.midi.IMidiDeviceOpenCallback";
         static final int TRANSACTION_onDeviceOpened = 1;
 
@@ -61,7 +61,8 @@ public interface IMidiDeviceOpenCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -71,7 +72,8 @@ public interface IMidiDeviceOpenCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IMidiDeviceServer _arg0 = IMidiDeviceServer.Stub.asInterface(data.readStrongBinder());
+                    IMidiDeviceServer _arg0 =
+                            IMidiDeviceServer.Stub.asInterface(data.readStrongBinder());
                     IBinder _arg1 = data.readStrongBinder();
                     data.enforceNoDataAvail();
                     onDeviceOpened(_arg0, _arg1);
@@ -98,7 +100,8 @@ public interface IMidiDeviceOpenCallback extends IInterface {
             }
 
             @Override // android.media.midi.IMidiDeviceOpenCallback
-            public void onDeviceOpened(IMidiDeviceServer server, IBinder token) throws RemoteException {
+            public void onDeviceOpened(IMidiDeviceServer server, IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

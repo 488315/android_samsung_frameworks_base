@@ -10,8 +10,7 @@ public @interface ResponseCode {
     public static final int LOCKED = 2;
     public static final int OPERATION_BUSY = 19;
 
-    @Deprecated
-    public static final int OUT_OF_KEYS = 22;
+    @Deprecated public static final int OUT_OF_KEYS = 22;
     public static final int OUT_OF_KEYS_PENDING_INTERNET_CONNECTIVITY = 24;
     public static final int OUT_OF_KEYS_PERMANENT_ERROR = 26;
     public static final int OUT_OF_KEYS_REQUIRES_SYSTEM_UPGRADE = 23;

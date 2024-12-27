@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.view.animation.Animation;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
@@ -92,7 +92,8 @@ public class ClipRectAnimation extends Animation {
         this.mToBottomValue = toClip.bottom;
     }
 
-    public ClipRectAnimation(int fromL, int fromT, int fromR, int fromB, int toL, int toT, int toR, int toB) {
+    public ClipRectAnimation(
+            int fromL, int fromT, int fromR, int fromB, int toL, int toT, int toR, int toB) {
         this(new Rect(fromL, fromT, fromR, fromB), new Rect(toL, toT, toR, toB));
     }
 
@@ -101,7 +102,9 @@ public class ClipRectAnimation extends Animation {
         int l = this.mFromRect.left + ((int) ((this.mToRect.left - this.mFromRect.left) * it));
         int t = this.mFromRect.top + ((int) ((this.mToRect.top - this.mFromRect.top) * it));
         int r = this.mFromRect.right + ((int) ((this.mToRect.right - this.mFromRect.right) * it));
-        int b = this.mFromRect.bottom + ((int) ((this.mToRect.bottom - this.mFromRect.bottom) * it));
+        int b =
+                this.mFromRect.bottom
+                        + ((int) ((this.mToRect.bottom - this.mFromRect.bottom) * it));
         tr.setClipRect(l, t, r, b);
     }
 
@@ -113,7 +116,17 @@ public class ClipRectAnimation extends Animation {
     @Override // android.view.animation.Animation
     public void initialize(int width, int height, int parentWidth, int parentHeight) {
         super.initialize(width, height, parentWidth, parentHeight);
-        this.mFromRect.set((int) resolveSize(this.mFromLeftType, this.mFromLeftValue, width, parentWidth), (int) resolveSize(this.mFromTopType, this.mFromTopValue, height, parentHeight), (int) resolveSize(this.mFromRightType, this.mFromRightValue, width, parentWidth), (int) resolveSize(this.mFromBottomType, this.mFromBottomValue, height, parentHeight));
-        this.mToRect.set((int) resolveSize(this.mToLeftType, this.mToLeftValue, width, parentWidth), (int) resolveSize(this.mToTopType, this.mToTopValue, height, parentHeight), (int) resolveSize(this.mToRightType, this.mToRightValue, width, parentWidth), (int) resolveSize(this.mToBottomType, this.mToBottomValue, height, parentHeight));
+        this.mFromRect.set(
+                (int) resolveSize(this.mFromLeftType, this.mFromLeftValue, width, parentWidth),
+                (int) resolveSize(this.mFromTopType, this.mFromTopValue, height, parentHeight),
+                (int) resolveSize(this.mFromRightType, this.mFromRightValue, width, parentWidth),
+                (int)
+                        resolveSize(
+                                this.mFromBottomType, this.mFromBottomValue, height, parentHeight));
+        this.mToRect.set(
+                (int) resolveSize(this.mToLeftType, this.mToLeftValue, width, parentWidth),
+                (int) resolveSize(this.mToTopType, this.mToTopValue, height, parentHeight),
+                (int) resolveSize(this.mToRightType, this.mToRightValue, width, parentWidth),
+                (int) resolveSize(this.mToBottomType, this.mToBottomValue, height, parentHeight));
     }
 }

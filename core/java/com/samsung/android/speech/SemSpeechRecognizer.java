@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -60,8 +61,10 @@ public class SemSpeechRecognizer {
             this.isEnableExtraSpanish = true;
             this.isEnableExtraRussian = true;
         } else {
-            this.isEnableExtraSpanish = isBargeInFile("/system/voicecommanddata/include/bargein_language_extra_es");
-            this.isEnableExtraRussian = isBargeInFile("/system/voicecommanddata/include/bargein_language_extra_ru");
+            this.isEnableExtraSpanish =
+                    isBargeInFile("/system/voicecommanddata/include/bargein_language_extra_es");
+            this.isEnableExtraRussian =
+                    isBargeInFile("/system/voicecommanddata/include/bargein_language_extra_ru");
         }
         setLanguage();
         this.mState = 0;
@@ -109,23 +112,34 @@ public class SemSpeechRecognizer {
             this.mState = 1;
             Log.d(TAG, "mState change to : " + this.mState);
             if (this.mStopHandler == null) {
-                this.mStopHandler = new Handler(Looper.getMainLooper()) { // from class: com.samsung.android.speech.SemSpeechRecognizer.1
-                    @Override // android.os.Handler
-                    public void handleMessage(Message msg) {
-                        Log.e(SemSpeechRecognizer.TAG, "audio is halt without stopRecognition()");
-                        SemSpeechRecognizer.this.stopRecognition();
-                    }
-                };
+                this.mStopHandler =
+                        new Handler(
+                                Looper
+                                        .getMainLooper()) { // from class:
+                                                            // com.samsung.android.speech.SemSpeechRecognizer.1
+                            @Override // android.os.Handler
+                            public void handleMessage(Message msg) {
+                                Log.e(
+                                        SemSpeechRecognizer.TAG,
+                                        "audio is halt without stopRecognition()");
+                                SemSpeechRecognizer.this.stopRecognition();
+                            }
+                        };
                 Log.d(TAG, "StopHandler create");
             }
             if (this.handler == null) {
-                this.handler = new Handler(Looper.getMainLooper()) { // from class: com.samsung.android.speech.SemSpeechRecognizer.2
-                    @Override // android.os.Handler
-                    public void handleMessage(Message msg) {
-                        int result = msg.getData().getInt("commandType");
-                        SemSpeechRecognizer.this.delayedStartBargeIn(result, SemSpeechRecognizer.this.mStopHandler);
-                    }
-                };
+                this.handler =
+                        new Handler(
+                                Looper
+                                        .getMainLooper()) { // from class:
+                                                            // com.samsung.android.speech.SemSpeechRecognizer.2
+                            @Override // android.os.Handler
+                            public void handleMessage(Message msg) {
+                                int result = msg.getData().getInt("commandType");
+                                SemSpeechRecognizer.this.delayedStartBargeIn(
+                                        result, SemSpeechRecognizer.this.mStopHandler);
+                            }
+                        };
                 Log.d(TAG, "handler create");
             }
             this.isCallStopRecognition = false;
@@ -166,7 +180,13 @@ public class SemSpeechRecognizer {
             } else {
                 if (isPDTModel()) {
                     Log.i(TAG, "Load PDTAudioTask");
-                    this.audio = new PDTAudioTask(this.mListener, Config.DEFAULT_PATH, commandType, this.uselanguage, this.samsungOOVResult);
+                    this.audio =
+                            new PDTAudioTask(
+                                    this.mListener,
+                                    Config.DEFAULT_PATH,
+                                    commandType,
+                                    this.uselanguage,
+                                    this.samsungOOVResult);
                 } else {
                     Log.i(TAG, "Load OEMAudioTask");
                 }
@@ -254,7 +274,9 @@ public class SemSpeechRecognizer {
     }
 
     private static boolean isSamsungModel() {
-        return isBargeInFile(Config.SAMSUNG_SO_FILE_PATH) && isBargeInFile(Config.GetSamsungModels(1)) && isBargeInFile(Config.GetSamsungModels(0));
+        return isBargeInFile(Config.SAMSUNG_SO_FILE_PATH)
+                && isBargeInFile(Config.GetSamsungModels(1))
+                && isBargeInFile(Config.GetSamsungModels(0));
     }
 
     private static boolean isPDTModel() {
@@ -286,7 +308,13 @@ public class SemSpeechRecognizer {
     }
 
     public String[] getCommandStringArray(int CommandType, int Language) {
-        Log.i(TAG, "getCommandStringArray : CommandType ( " + CommandType + " ) Language ( " + Language + " )");
+        Log.i(
+                TAG,
+                "getCommandStringArray : CommandType ( "
+                        + CommandType
+                        + " ) Language ( "
+                        + Language
+                        + " )");
         if (Language >= 15) {
             Language = 1;
         }
@@ -415,7 +443,13 @@ public class SemSpeechRecognizer {
                 }
             }
             if (this.isEnableExtraRussian) {
-                if (defaultLanguage.contains("az_AZ") || defaultLanguage.contains("kk_KZ") || defaultLanguage.contains("uz_UZ") || defaultLanguage.equals("ky_KZ") || defaultLanguage.equals("tg_TJ") || defaultLanguage.equals("tk_TM") || defaultLanguage.equals("be_BY")) {
+                if (defaultLanguage.contains("az_AZ")
+                        || defaultLanguage.contains("kk_KZ")
+                        || defaultLanguage.contains("uz_UZ")
+                        || defaultLanguage.equals("ky_KZ")
+                        || defaultLanguage.equals("tg_TJ")
+                        || defaultLanguage.equals("tk_TM")
+                        || defaultLanguage.equals("be_BY")) {
                     this.uselanguage = 8;
                     Log.i(TAG, "Extra Russian is enabled : " + defaultLanguage);
                     return;
@@ -480,7 +514,13 @@ public class SemSpeechRecognizer {
 
     public boolean isEnabled(int commandType, int language) {
         if (isPDTModel() && commandType == 7 && language < 15) {
-            Log.i(TAG, "isEnabled: PDTBargeIn is available in commandType (" + commandType + ") uselanguage(" + language + NavigationBarInflaterView.KEY_CODE_END);
+            Log.i(
+                    TAG,
+                    "isEnabled: PDTBargeIn is available in commandType ("
+                            + commandType
+                            + ") uselanguage("
+                            + language
+                            + NavigationBarInflaterView.KEY_CODE_END);
             return true;
         }
         return false;

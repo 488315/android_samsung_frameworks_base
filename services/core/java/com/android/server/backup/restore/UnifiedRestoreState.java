@@ -26,7 +26,15 @@ public final class UnifiedRestoreState {
         RESTORE_FINISHED = unifiedRestoreState5;
         UnifiedRestoreState unifiedRestoreState6 = new UnifiedRestoreState("FINAL", 5);
         FINAL = unifiedRestoreState6;
-        $VALUES = new UnifiedRestoreState[]{unifiedRestoreState, unifiedRestoreState2, unifiedRestoreState3, unifiedRestoreState4, unifiedRestoreState5, unifiedRestoreState6};
+        $VALUES =
+                new UnifiedRestoreState[] {
+                    unifiedRestoreState,
+                    unifiedRestoreState2,
+                    unifiedRestoreState3,
+                    unifiedRestoreState4,
+                    unifiedRestoreState5,
+                    unifiedRestoreState6
+                };
     }
 
     public static UnifiedRestoreState valueOf(String str) {

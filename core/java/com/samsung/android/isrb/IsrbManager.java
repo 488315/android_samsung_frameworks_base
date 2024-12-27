@@ -6,20 +6,20 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
 import android.util.Singleton;
-import com.samsung.android.isrb.IIsrbManager;
 
 /* loaded from: classes6.dex */
 public class IsrbManager {
-    private static final Singleton<IIsrbManager> IIsrbManagerSingleton = new Singleton<IIsrbManager>() { // from class: com.samsung.android.isrb.IsrbManager.1
-        /* JADX INFO: Access modifiers changed from: protected */
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.util.Singleton
-        public IIsrbManager create() {
-            IBinder b = ServiceManager.getService(Context.ISRB_MANAGER_SERVICE);
-            IIsrbManager im = IIsrbManager.Stub.asInterface(b);
-            return im;
-        }
-    };
+    private static final Singleton<IIsrbManager> IIsrbManagerSingleton =
+            new Singleton<IIsrbManager>() { // from class: com.samsung.android.isrb.IsrbManager.1
+                /* JADX INFO: Access modifiers changed from: protected */
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.util.Singleton
+                public IIsrbManager create() {
+                    IBinder b = ServiceManager.getService(Context.ISRB_MANAGER_SERVICE);
+                    IIsrbManager im = IIsrbManager.Stub.asInterface(b);
+                    return im;
+                }
+            };
     private static final String TAG = "IsrbManager";
     private Context mContext;
 

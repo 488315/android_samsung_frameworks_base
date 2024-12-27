@@ -2,12 +2,15 @@ package com.android.server.companion.transport;
 
 import android.companion.AssociationInfo;
 import android.util.Slog;
+
 import com.android.server.VaultKeeperService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.WindowMagnificationGestureHandler$$ExternalSyntheticOutline0;
-import java.io.IOException;
-import java.nio.ByteBuffer;
+
 import libcore.io.IoUtils;
 import libcore.io.Streams;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -31,13 +34,19 @@ public class RawTransport extends Transport {
                 }
                 IoUtils.closeQuietly(rawTransport.mRemoteIn);
                 IoUtils.closeQuietly(rawTransport.mRemoteOut);
-                CompanionTransportManager$$ExternalSyntheticLambda2 companionTransportManager$$ExternalSyntheticLambda2 = rawTransport.mOnTransportClosed;
+                CompanionTransportManager$$ExternalSyntheticLambda2
+                        companionTransportManager$$ExternalSyntheticLambda2 =
+                                rawTransport.mOnTransportClosed;
                 if (companionTransportManager$$ExternalSyntheticLambda2 != null) {
-                    CompanionTransportManager companionTransportManager = companionTransportManager$$ExternalSyntheticLambda2.f$0;
+                    CompanionTransportManager companionTransportManager =
+                            companionTransportManager$$ExternalSyntheticLambda2.f$0;
                     companionTransportManager.getClass();
-                    AssociationInfo associationById = companionTransportManager.mAssociationStore.getAssociationById(rawTransport.mAssociationId);
+                    AssociationInfo associationById =
+                            companionTransportManager.mAssociationStore.getAssociationById(
+                                    rawTransport.mAssociationId);
                     if (associationById != null) {
-                        companionTransportManager.detachSystemDataTransport(associationById.getId());
+                        companionTransportManager.detachSystemDataTransport(
+                                associationById.getId());
                         return;
                     }
                     return;
@@ -70,10 +79,12 @@ public class RawTransport extends Transport {
             sb.append(" length ");
             sb.append(bArr.length);
             sb.append(" to association ");
-            VaultKeeperService$$ExternalSyntheticOutline0.m(sb, this.mAssociationId, "CDM_CompanionTransport");
+            VaultKeeperService$$ExternalSyntheticOutline0.m(
+                    sb, this.mAssociationId, "CDM_CompanionTransport");
         }
         synchronized (this.mRemoteOut) {
-            this.mRemoteOut.write(ByteBuffer.allocate(12).putInt(i).putInt(i2).putInt(bArr.length).array());
+            this.mRemoteOut.write(
+                    ByteBuffer.allocate(12).putInt(i).putInt(i2).putInt(bArr.length).array());
             this.mRemoteOut.write(bArr);
             this.mRemoteOut.flush();
         }
@@ -84,12 +95,16 @@ public class RawTransport extends Transport {
         if (Transport.DEBUG) {
             Slog.d("CDM_CompanionTransport", "Starting raw transport.");
         }
-        new Thread(new Runnable() { // from class: com.android.server.companion.transport.RawTransport$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                RawTransport.m349$r8$lambda$kOck5G0Ky7AcKXjGkOrtQvK6ss(RawTransport.this);
-            }
-        }).start();
+        new Thread(
+                        new Runnable() { // from class:
+                                         // com.android.server.companion.transport.RawTransport$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                RawTransport.m349$r8$lambda$kOck5G0Ky7AcKXjGkOrtQvK6ss(
+                                        RawTransport.this);
+                            }
+                        })
+                .start();
     }
 
     @Override // com.android.server.companion.transport.Transport
@@ -101,6 +116,7 @@ public class RawTransport extends Transport {
     }
 
     public final String toString() {
-        return WindowMagnificationGestureHandler$$ExternalSyntheticOutline0.m(new StringBuilder("RawTransport{mAssociationId="), this.mAssociationId, '}');
+        return WindowMagnificationGestureHandler$$ExternalSyntheticOutline0.m(
+                new StringBuilder("RawTransport{mAssociationId="), this.mAssociationId, '}');
     }
 }

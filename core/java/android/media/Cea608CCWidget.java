@@ -6,8 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
-import android.media.Cea608CCParser;
-import android.media.ClosedCaptionWidget;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextPaint;
@@ -18,6 +16,7 @@ import android.view.View;
 import android.view.accessibility.CaptioningManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.android.internal.R;
 
 /* compiled from: ClosedCaptionRenderer.java */
@@ -97,7 +96,11 @@ class Cea608CCWidget extends ClosedCaptionWidget implements Cea608CCParser.Displ
             this.mEdgeColor = captionStyle.edgeColor;
             setTextColor(this.mTextColor);
             if (this.mEdgeType == 2) {
-                setShadowLayer(this.mShadowRadius, this.mShadowOffset, this.mShadowOffset, this.mEdgeColor);
+                setShadowLayer(
+                        this.mShadowRadius,
+                        this.mShadowOffset,
+                        this.mShadowOffset,
+                        this.mEdgeColor);
             } else {
                 setShadowLayer(0.0f, 0.0f, 0.0f, 0);
             }
@@ -112,13 +115,25 @@ class Cea608CCWidget extends ClosedCaptionWidget implements Cea608CCParser.Displ
             this.mShadowRadius = (EDGE_SHADOW_RATIO * fontSize) + 1.0f;
             this.mShadowOffset = this.mShadowRadius;
             setScaleX(1.0f);
-            getPaint().getTextBounds(Cea608CCWidget.mDummyText, 0, Cea608CCWidget.mDummyText.length(), Cea608CCWidget.mTextBounds);
+            getPaint()
+                    .getTextBounds(
+                            Cea608CCWidget.mDummyText,
+                            0,
+                            Cea608CCWidget.mDummyText.length(),
+                            Cea608CCWidget.mTextBounds);
             float actualTextWidth = Cea608CCWidget.mTextBounds.width();
             float requiredTextWidth = View.MeasureSpec.getSize(widthMeasureSpec);
             try {
                 setScaleX(requiredTextWidth / actualTextWidth);
             } catch (IllegalArgumentException e) {
-                Log.w("CCLineBox", "setScaleX(" + requiredTextWidth + ", " + actualTextWidth + ") : " + e.getMessage());
+                Log.w(
+                        "CCLineBox",
+                        "setScaleX("
+                                + requiredTextWidth
+                                + ", "
+                                + actualTextWidth
+                                + ") : "
+                                + e.getMessage());
             }
             super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         }
@@ -174,8 +189,14 @@ class Cea608CCWidget extends ClosedCaptionWidget implements Cea608CCParser.Displ
             CharSequence text = getText();
             if (text instanceof Spannable) {
                 Spannable spannable = (Spannable) text;
-                Cea608CCParser.MutableBackgroundColorSpan[] bgSpans = (Cea608CCParser.MutableBackgroundColorSpan[]) spannable.getSpans(0, spannable.length(), Cea608CCParser.MutableBackgroundColorSpan.class);
-                for (Cea608CCParser.MutableBackgroundColorSpan mutableBackgroundColorSpan : bgSpans) {
+                Cea608CCParser.MutableBackgroundColorSpan[] bgSpans =
+                        (Cea608CCParser.MutableBackgroundColorSpan[])
+                                spannable.getSpans(
+                                        0,
+                                        spannable.length(),
+                                        Cea608CCParser.MutableBackgroundColorSpan.class);
+                for (Cea608CCParser.MutableBackgroundColorSpan mutableBackgroundColorSpan :
+                        bgSpans) {
                     mutableBackgroundColorSpan.setBackgroundColor(color);
                 }
             }
@@ -183,7 +204,8 @@ class Cea608CCWidget extends ClosedCaptionWidget implements Cea608CCParser.Displ
     }
 
     /* compiled from: ClosedCaptionRenderer.java */
-    private static class CCLayout extends LinearLayout implements ClosedCaptionWidget.ClosedCaptionLayout {
+    private static class CCLayout extends LinearLayout
+            implements ClosedCaptionWidget.ClosedCaptionLayout {
         private static final int MAX_ROWS = 15;
         private static final float SAFE_AREA_RATIO = 0.9f;
         private final CCLineBox[] mLineBoxes;
@@ -207,8 +229,7 @@ class Cea608CCWidget extends ClosedCaptionWidget implements Cea608CCParser.Displ
         }
 
         @Override // android.media.ClosedCaptionWidget.ClosedCaptionLayout
-        public void setFontScale(float fontScale) {
-        }
+        public void setFontScale(float fontScale) {}
 
         void update(SpannableStringBuilder[] textBuffer) {
             for (int i = 0; i < 15; i++) {
@@ -258,7 +279,11 @@ class Cea608CCWidget extends ClosedCaptionWidget implements Cea608CCParser.Displ
             int left = (viewPortWidth - safeWidth2) / 2;
             int top = (viewPortHeight - safeHeight2) / 2;
             for (int i = 0; i < 15; i++) {
-                this.mLineBoxes[i].layout(left, ((safeHeight2 * i) / 15) + top, left + safeWidth2, (((i + 1) * safeHeight2) / 15) + top);
+                this.mLineBoxes[i].layout(
+                        left,
+                        ((safeHeight2 * i) / 15) + top,
+                        left + safeWidth2,
+                        (((i + 1) * safeHeight2) / 15) + top);
             }
         }
     }

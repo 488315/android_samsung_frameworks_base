@@ -2,28 +2,31 @@ package android.window;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.window.IOnBackInvokedCallback;
 
 /* loaded from: classes4.dex */
 public final class OnBackInvokedCallbackInfo implements Parcelable {
-    public static final Parcelable.Creator<OnBackInvokedCallbackInfo> CREATOR = new Parcelable.Creator<OnBackInvokedCallbackInfo>() { // from class: android.window.OnBackInvokedCallbackInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OnBackInvokedCallbackInfo createFromParcel(Parcel in) {
-            return new OnBackInvokedCallbackInfo(in);
-        }
+    public static final Parcelable.Creator<OnBackInvokedCallbackInfo> CREATOR =
+            new Parcelable.Creator<
+                    OnBackInvokedCallbackInfo>() { // from class:
+                                                   // android.window.OnBackInvokedCallbackInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OnBackInvokedCallbackInfo createFromParcel(Parcel in) {
+                    return new OnBackInvokedCallbackInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OnBackInvokedCallbackInfo[] newArray(int size) {
-            return new OnBackInvokedCallbackInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OnBackInvokedCallbackInfo[] newArray(int size) {
+                    return new OnBackInvokedCallbackInfo[size];
+                }
+            };
     private final IOnBackInvokedCallback mCallback;
     private final boolean mIsAnimationCallback;
     private int mPriority;
 
-    public OnBackInvokedCallbackInfo(IOnBackInvokedCallback callback, int priority, boolean isAnimationCallback) {
+    public OnBackInvokedCallbackInfo(
+            IOnBackInvokedCallback callback, int priority, boolean isAnimationCallback) {
         this.mCallback = callback;
         this.mPriority = priority;
         this.mIsAnimationCallback = isAnimationCallback;
@@ -64,6 +67,12 @@ public final class OnBackInvokedCallbackInfo implements Parcelable {
     }
 
     public String toString() {
-        return "OnBackInvokedCallbackInfo{mCallback=" + this.mCallback + ", mPriority=" + this.mPriority + ", mIsAnimationCallback=" + this.mIsAnimationCallback + '}';
+        return "OnBackInvokedCallbackInfo{mCallback="
+                + this.mCallback
+                + ", mPriority="
+                + this.mPriority
+                + ", mIsAnimationCallback="
+                + this.mIsAnimationCallback
+                + '}';
     }
 }

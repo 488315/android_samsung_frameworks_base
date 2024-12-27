@@ -26,7 +26,8 @@ public class Picture {
 
     private static native int nativeGetWidth(long j);
 
-    private static native boolean nativeWriteToStream(long j, OutputStream outputStream, byte[] bArr);
+    private static native boolean nativeWriteToStream(
+            long j, OutputStream outputStream, byte[] bArr);
 
     public Picture() {
         this(nativeConstructor(0L));
@@ -104,8 +105,12 @@ public class Picture {
         if (this.mRecordingCanvas != null) {
             endRecording();
         }
-        if (this.mRequiresHwAcceleration && !canvas.isHardwareAccelerated() && canvas.onHwFeatureInSwMode()) {
-            throw new IllegalArgumentException("Software rendering not supported for Pictures that require hardware acceleration");
+        if (this.mRequiresHwAcceleration
+                && !canvas.isHardwareAccelerated()
+                && canvas.onHwFeatureInSwMode()) {
+            throw new IllegalArgumentException(
+                    "Software rendering not supported for Pictures that require hardware"
+                            + " acceleration");
         }
         nativeDraw(canvas.getNativeCanvasWrapper(), this.mNativePicture);
     }

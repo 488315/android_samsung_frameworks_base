@@ -1,6 +1,7 @@
 package android.security.keystore2;
 
 import android.hardware.security.keymint.KeyParameter;
+
 import java.security.InvalidKeyException;
 import java.util.List;
 
@@ -9,7 +10,7 @@ abstract class AndroidKeyStoreRSASignatureSpi extends AndroidKeyStoreSignatureSp
     private final int mKeymasterDigest;
     private final int mKeymasterPadding;
 
-    static abstract class PKCS1Padding extends AndroidKeyStoreRSASignatureSpi {
+    abstract static class PKCS1Padding extends AndroidKeyStoreRSASignatureSpi {
         PKCS1Padding(int keymasterDigest) {
             super(keymasterDigest, 5);
         }
@@ -97,7 +98,7 @@ abstract class AndroidKeyStoreRSASignatureSpi extends AndroidKeyStoreSignatureSp
         }
     }
 
-    static abstract class PSSPadding extends AndroidKeyStoreRSASignatureSpi {
+    abstract static class PSSPadding extends AndroidKeyStoreRSASignatureSpi {
         private static final int SALT_LENGTH_BYTES = 20;
 
         PSSPadding(int keymasterDigest) {
@@ -173,7 +174,8 @@ abstract class AndroidKeyStoreRSASignatureSpi extends AndroidKeyStoreSignatureSp
     @Override // android.security.keystore2.AndroidKeyStoreSignatureSpiBase
     protected final void initKey(AndroidKeyStoreKey key) throws InvalidKeyException {
         if (!"RSA".equalsIgnoreCase(key.getAlgorithm())) {
-            throw new InvalidKeyException("Unsupported key algorithm: " + key.getAlgorithm() + ". Only RSA supported");
+            throw new InvalidKeyException(
+                    "Unsupported key algorithm: " + key.getAlgorithm() + ". Only RSA supported");
         }
         super.initKey(key);
     }

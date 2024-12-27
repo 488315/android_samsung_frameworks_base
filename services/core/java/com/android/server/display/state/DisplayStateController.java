@@ -4,6 +4,7 @@ import android.hardware.Sensor;
 import android.hardware.display.DisplayManagerInternal;
 import android.util.Pair;
 import android.view.Display;
+
 import com.android.server.display.DisplayPowerProximityStateController;
 import com.android.server.display.WakelockController;
 import com.android.server.display.WakelockController$$ExternalSyntheticLambda0;
@@ -17,7 +18,8 @@ public final class DisplayStateController {
     public int mDozeStateOverride = 0;
     public int mDozeStateOverrideReason = 0;
 
-    public DisplayStateController(DisplayPowerProximityStateController displayPowerProximityStateController, int i) {
+    public DisplayStateController(
+            DisplayPowerProximityStateController displayPowerProximityStateController, int i) {
         this.mDisplayId = i;
         this.mDisplayPowerProximityStateController = displayPowerProximityStateController;
     }
@@ -30,7 +32,8 @@ public final class DisplayStateController {
         return this.mPerformScreenOffTransition;
     }
 
-    public final Pair updateDisplayState(DisplayManagerInternal.DisplayPowerRequest displayPowerRequest, boolean z, boolean z2) {
+    public final Pair updateDisplayState(
+            DisplayManagerInternal.DisplayPowerRequest displayPowerRequest, boolean z, boolean z2) {
         int i;
         int i2;
         this.mPerformScreenOffTransition = false;
@@ -57,34 +60,55 @@ public final class DisplayStateController {
             i = 1;
             i2 = 1;
         }
-        DisplayPowerProximityStateController displayPowerProximityStateController = this.mDisplayPowerProximityStateController;
+        DisplayPowerProximityStateController displayPowerProximityStateController =
+                this.mDisplayPowerProximityStateController;
         displayPowerProximityStateController.mSkipRampBecauseOfProximityChangeToNegative = false;
-        displayPowerProximityStateController.mSensorPositiveDebounceDelay = displayPowerRequest.proximityPositiveDebounce;
-        displayPowerProximityStateController.mSensorNegativeDebounceDelay = displayPowerRequest.proximityNegativeDebounce;
+        displayPowerProximityStateController.mSensorPositiveDebounceDelay =
+                displayPowerRequest.proximityPositiveDebounce;
+        displayPowerProximityStateController.mSensorNegativeDebounceDelay =
+                displayPowerRequest.proximityNegativeDebounce;
         int i4 = displayPowerRequest.coverType;
-        displayPowerProximityStateController.mIsViewTypeCover = i4 == 8 || i4 == 15 || i4 == 16 || i4 == 17;
+        displayPowerProximityStateController.mIsViewTypeCover =
+                i4 == 8 || i4 == 15 || i4 == 16 || i4 == 17;
         Sensor sensor = displayPowerProximityStateController.mProximitySensor;
-        DisplayPowerProximityStateController.DisplayPowerProximityStateHandler displayPowerProximityStateHandler = displayPowerProximityStateController.mHandler;
-        WakelockController wakelockController = displayPowerProximityStateController.mWakelockController;
+        DisplayPowerProximityStateController.DisplayPowerProximityStateHandler
+                displayPowerProximityStateHandler = displayPowerProximityStateController.mHandler;
+        WakelockController wakelockController =
+                displayPowerProximityStateController.mWakelockController;
         if (sensor != null) {
-            if (displayPowerRequest.useProximitySensor && displayPowerProximityStateController.isProximitySensorValidState(displayPowerRequest)) {
+            if (displayPowerRequest.useProximitySensor
+                    && displayPowerProximityStateController.isProximitySensorValidState(
+                            displayPowerRequest)) {
                 displayPowerProximityStateController.setProximitySensorEnabled(true);
-                if (!displayPowerProximityStateController.mScreenOffBecauseOfProximity && displayPowerProximityStateController.mProximity == 1 && !displayPowerProximityStateController.mIgnoreProximityUntilChanged) {
+                if (!displayPowerProximityStateController.mScreenOffBecauseOfProximity
+                        && displayPowerProximityStateController.mProximity == 1
+                        && !displayPowerProximityStateController.mIgnoreProximityUntilChanged) {
                     displayPowerProximityStateController.mScreenOffBecauseOfProximity = true;
                     wakelockController.acquireWakelock(1);
-                    displayPowerProximityStateHandler.post(new WakelockController$$ExternalSyntheticLambda0(wakelockController, 2));
+                    displayPowerProximityStateHandler.post(
+                            new WakelockController$$ExternalSyntheticLambda0(
+                                    wakelockController, 2));
                 }
-            } else if (displayPowerProximityStateController.mWaitingForNegativeProximity && displayPowerProximityStateController.mScreenOffBecauseOfProximity && displayPowerProximityStateController.mProximity == 1 && i != 1 && displayPowerProximityStateController.isProximitySensorValidState(displayPowerRequest)) {
+            } else if (displayPowerProximityStateController.mWaitingForNegativeProximity
+                    && displayPowerProximityStateController.mScreenOffBecauseOfProximity
+                    && displayPowerProximityStateController.mProximity == 1
+                    && i != 1
+                    && displayPowerProximityStateController.isProximitySensorValidState(
+                            displayPowerRequest)) {
                 displayPowerProximityStateController.setProximitySensorEnabled(true);
             } else {
                 displayPowerProximityStateController.setProximitySensorEnabled(false);
                 displayPowerProximityStateController.mWaitingForNegativeProximity = false;
             }
-            if (displayPowerProximityStateController.mScreenOffBecauseOfProximity && (displayPowerProximityStateController.mProximity != 1 || displayPowerProximityStateController.mIgnoreProximityUntilChanged)) {
+            if (displayPowerProximityStateController.mScreenOffBecauseOfProximity
+                    && (displayPowerProximityStateController.mProximity != 1
+                            || displayPowerProximityStateController.mIgnoreProximityUntilChanged)) {
                 displayPowerProximityStateController.mScreenOffBecauseOfProximity = false;
-                displayPowerProximityStateController.mSkipRampBecauseOfProximityChangeToNegative = true;
+                displayPowerProximityStateController.mSkipRampBecauseOfProximityChangeToNegative =
+                        true;
                 wakelockController.acquireWakelock(2);
-                displayPowerProximityStateHandler.post(new WakelockController$$ExternalSyntheticLambda0(wakelockController, 1));
+                displayPowerProximityStateHandler.post(
+                        new WakelockController$$ExternalSyntheticLambda0(wakelockController, 1));
             }
         } else {
             displayPowerProximityStateController.setProximitySensorEnabled(false);
@@ -92,9 +116,11 @@ public final class DisplayStateController {
             displayPowerProximityStateController.mIgnoreProximityUntilChanged = false;
             if (displayPowerProximityStateController.mScreenOffBecauseOfProximity) {
                 displayPowerProximityStateController.mScreenOffBecauseOfProximity = false;
-                displayPowerProximityStateController.mSkipRampBecauseOfProximityChangeToNegative = true;
+                displayPowerProximityStateController.mSkipRampBecauseOfProximityChangeToNegative =
+                        true;
                 wakelockController.acquireWakelock(2);
-                displayPowerProximityStateHandler.post(new WakelockController$$ExternalSyntheticLambda0(wakelockController, 1));
+                displayPowerProximityStateHandler.post(
+                        new WakelockController$$ExternalSyntheticLambda0(wakelockController, 1));
             }
         }
         if (!z || z2 || displayPowerProximityStateController.mScreenOffBecauseOfProximity) {

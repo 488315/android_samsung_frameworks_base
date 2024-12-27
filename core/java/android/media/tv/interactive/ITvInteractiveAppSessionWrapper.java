@@ -9,8 +9,6 @@ import android.media.tv.BroadcastInfoResponse;
 import android.media.tv.TvContentRating;
 import android.media.tv.TvRecordingInfo;
 import android.media.tv.TvTrackInfo;
-import android.media.tv.interactive.ITvInteractiveAppSession;
-import android.media.tv.interactive.TvInteractiveAppService;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -21,12 +19,15 @@ import android.view.InputChannel;
 import android.view.InputEvent;
 import android.view.InputEventReceiver;
 import android.view.Surface;
+
 import com.android.internal.os.HandlerCaller;
 import com.android.internal.os.SomeArgs;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
-public class ITvInteractiveAppSessionWrapper extends ITvInteractiveAppSession.Stub implements HandlerCaller.Callback {
+public class ITvInteractiveAppSessionWrapper extends ITvInteractiveAppSession.Stub
+        implements HandlerCaller.Callback {
     private static final int DO_CREATE_BI_INTERACTIVE_APP = 5;
     private static final int DO_CREATE_MEDIA_VIEW = 27;
     private static final int DO_DESTROY_BI_INTERACTIVE_APP = 6;
@@ -85,7 +86,8 @@ public class ITvInteractiveAppSessionWrapper extends ITvInteractiveAppSession.St
     private TvInteractiveAppEventReceiver mReceiver;
     private TvInteractiveAppService.Session mSessionImpl;
 
-    public ITvInteractiveAppSessionWrapper(Context context, TvInteractiveAppService.Session mSessionImpl, InputChannel channel) {
+    public ITvInteractiveAppSessionWrapper(
+            Context context, TvInteractiveAppService.Session mSessionImpl, InputChannel channel) {
         this.mSessionImpl = mSessionImpl;
         this.mCaller = new HandlerCaller(context, null, this, true);
         this.mChannel = channel;
@@ -164,7 +166,8 @@ public class ITvInteractiveAppSessionWrapper extends ITvInteractiveAppSession.St
                 break;
             case 16:
                 SomeArgs args4 = (SomeArgs) msg.obj;
-                this.mSessionImpl.notifyTrackSelected(((Integer) args4.arg1).intValue(), (String) args4.arg2);
+                this.mSessionImpl.notifyTrackSelected(
+                        ((Integer) args4.arg1).intValue(), (String) args4.arg2);
                 args4.recycle();
                 break;
             case 17:
@@ -190,7 +193,10 @@ public class ITvInteractiveAppSessionWrapper extends ITvInteractiveAppSession.St
                 break;
             case 24:
                 SomeArgs args5 = (SomeArgs) msg.obj;
-                this.mSessionImpl.dispatchSurfaceChanged(Integer.valueOf(args5.argi1).intValue(), Integer.valueOf(args5.argi2).intValue(), Integer.valueOf(args5.argi3).intValue());
+                this.mSessionImpl.dispatchSurfaceChanged(
+                        Integer.valueOf(args5.argi1).intValue(),
+                        Integer.valueOf(args5.argi2).intValue(),
+                        Integer.valueOf(args5.argi3).intValue());
                 args5.recycle();
                 break;
             case 25:
@@ -223,7 +229,8 @@ public class ITvInteractiveAppSessionWrapper extends ITvInteractiveAppSession.St
                 break;
             case 33:
                 SomeArgs args8 = (SomeArgs) msg.obj;
-                this.mSessionImpl.notifyTvMessage(((Integer) args8.arg1).intValue(), (Bundle) args8.arg2);
+                this.mSessionImpl.notifyTvMessage(
+                        ((Integer) args8.arg1).intValue(), (Bundle) args8.arg2);
                 args8.recycle();
                 break;
             case 34:
@@ -237,17 +244,20 @@ public class ITvInteractiveAppSessionWrapper extends ITvInteractiveAppSession.St
                 break;
             case 37:
                 SomeArgs args9 = (SomeArgs) msg.obj;
-                this.mSessionImpl.notifyTimeShiftStatusChanged((String) args9.arg1, ((Integer) args9.arg2).intValue());
+                this.mSessionImpl.notifyTimeShiftStatusChanged(
+                        (String) args9.arg1, ((Integer) args9.arg2).intValue());
                 args9.recycle();
                 break;
             case 38:
                 SomeArgs args10 = (SomeArgs) msg.obj;
-                this.mSessionImpl.notifyTimeShiftStartPositionChanged((String) args10.arg1, ((Long) args10.arg2).longValue());
+                this.mSessionImpl.notifyTimeShiftStartPositionChanged(
+                        (String) args10.arg1, ((Long) args10.arg2).longValue());
                 args10.recycle();
                 break;
             case 39:
                 SomeArgs args11 = (SomeArgs) msg.obj;
-                this.mSessionImpl.notifyTimeShiftCurrentPositionChanged((String) args11.arg1, ((Long) args11.arg2).longValue());
+                this.mSessionImpl.notifyTimeShiftCurrentPositionChanged(
+                        (String) args11.arg1, ((Long) args11.arg2).longValue());
                 args11.recycle();
                 break;
             case 40:
@@ -255,12 +265,14 @@ public class ITvInteractiveAppSessionWrapper extends ITvInteractiveAppSession.St
                 break;
             case 41:
                 SomeArgs args12 = (SomeArgs) msg.obj;
-                this.mSessionImpl.notifyRecordingConnectionFailed((String) args12.arg1, (String) args12.arg2);
+                this.mSessionImpl.notifyRecordingConnectionFailed(
+                        (String) args12.arg1, (String) args12.arg2);
                 args12.recycle();
                 break;
             case 42:
                 SomeArgs args13 = (SomeArgs) msg.obj;
-                this.mSessionImpl.notifyRecordingDisconnected((String) args13.arg1, (String) args13.arg2);
+                this.mSessionImpl.notifyRecordingDisconnected(
+                        (String) args13.arg1, (String) args13.arg2);
                 args13.recycle();
                 break;
             case 43:
@@ -270,12 +282,14 @@ public class ITvInteractiveAppSessionWrapper extends ITvInteractiveAppSession.St
                 break;
             case 44:
                 SomeArgs args15 = (SomeArgs) msg.obj;
-                this.mSessionImpl.notifyRecordingError((String) args15.arg1, ((Integer) args15.arg2).intValue());
+                this.mSessionImpl.notifyRecordingError(
+                        (String) args15.arg1, ((Integer) args15.arg2).intValue());
                 args15.recycle();
                 break;
             case 45:
                 SomeArgs args16 = (SomeArgs) msg.obj;
-                this.mSessionImpl.notifyRecordingScheduled((String) args16.arg1, (String) args16.arg2);
+                this.mSessionImpl.notifyRecordingScheduled(
+                        (String) args16.arg1, (String) args16.arg2);
                 args16.recycle();
                 break;
             case 46:
@@ -292,7 +306,10 @@ public class ITvInteractiveAppSessionWrapper extends ITvInteractiveAppSession.St
                 break;
             case 50:
                 SomeArgs args17 = (SomeArgs) msg.obj;
-                this.mSessionImpl.sendCertificate((String) args17.arg1, ((Integer) args17.arg2).intValue(), (Bundle) args17.arg3);
+                this.mSessionImpl.sendCertificate(
+                        (String) args17.arg1,
+                        ((Integer) args17.arg2).intValue(),
+                        (Bundle) args17.arg3);
                 args17.recycle();
                 break;
             default:
@@ -301,7 +318,13 @@ public class ITvInteractiveAppSessionWrapper extends ITvInteractiveAppSession.St
         }
         long durationMs = (System.nanoTime() - startTime) / 1000000;
         if (durationMs > 1000) {
-            Log.w(TAG, "Handling message (" + msg.what + ") took too long time (duration=" + durationMs + "ms)");
+            Log.w(
+                    TAG,
+                    "Handling message ("
+                            + msg.what
+                            + ") took too long time (duration="
+                            + durationMs
+                            + "ms)");
         }
     }
 
@@ -392,7 +415,8 @@ public class ITvInteractiveAppSessionWrapper extends ITvInteractiveAppSession.St
 
     @Override // android.media.tv.interactive.ITvInteractiveAppSession
     public void sendCertificate(String host, int port, Bundle certBundle) {
-        this.mCaller.executeOrSendMessage(this.mCaller.obtainMessageOOO(50, host, Integer.valueOf(port), certBundle));
+        this.mCaller.executeOrSendMessage(
+                this.mCaller.obtainMessageOOO(50, host, Integer.valueOf(port), certBundle));
     }
 
     @Override // android.media.tv.interactive.ITvInteractiveAppSession
@@ -407,17 +431,20 @@ public class ITvInteractiveAppSessionWrapper extends ITvInteractiveAppSession.St
 
     @Override // android.media.tv.interactive.ITvInteractiveAppSession
     public void notifyTimeShiftStatusChanged(String inputId, int status) {
-        this.mCaller.executeOrSendMessage(this.mCaller.obtainMessageOO(37, inputId, Integer.valueOf(status)));
+        this.mCaller.executeOrSendMessage(
+                this.mCaller.obtainMessageOO(37, inputId, Integer.valueOf(status)));
     }
 
     @Override // android.media.tv.interactive.ITvInteractiveAppSession
     public void notifyTimeShiftStartPositionChanged(String inputId, long timeMs) {
-        this.mCaller.executeOrSendMessage(this.mCaller.obtainMessageOO(38, inputId, Long.valueOf(timeMs)));
+        this.mCaller.executeOrSendMessage(
+                this.mCaller.obtainMessageOO(38, inputId, Long.valueOf(timeMs)));
     }
 
     @Override // android.media.tv.interactive.ITvInteractiveAppSession
     public void notifyTimeShiftCurrentPositionChanged(String inputId, long timeMs) {
-        this.mCaller.executeOrSendMessage(this.mCaller.obtainMessageOO(39, inputId, Long.valueOf(timeMs)));
+        this.mCaller.executeOrSendMessage(
+                this.mCaller.obtainMessageOO(39, inputId, Long.valueOf(timeMs)));
     }
 
     @Override // android.media.tv.interactive.ITvInteractiveAppSession
@@ -433,12 +460,14 @@ public class ITvInteractiveAppSessionWrapper extends ITvInteractiveAppSession.St
 
     @Override // android.media.tv.interactive.ITvInteractiveAppSession
     public void notifyTrackSelected(int type, String trackId) {
-        this.mCaller.executeOrSendMessage(this.mCaller.obtainMessageOO(16, Integer.valueOf(type), trackId));
+        this.mCaller.executeOrSendMessage(
+                this.mCaller.obtainMessageOO(16, Integer.valueOf(type), trackId));
     }
 
     @Override // android.media.tv.interactive.ITvInteractiveAppSession
     public void notifyTvMessage(int type, Bundle data) {
-        this.mCaller.executeOrSendMessage(this.mCaller.obtainMessageOO(33, Integer.valueOf(type), data));
+        this.mCaller.executeOrSendMessage(
+                this.mCaller.obtainMessageOO(33, Integer.valueOf(type), data));
     }
 
     @Override // android.media.tv.interactive.ITvInteractiveAppSession
@@ -463,7 +492,8 @@ public class ITvInteractiveAppSessionWrapper extends ITvInteractiveAppSession.St
 
     @Override // android.media.tv.interactive.ITvInteractiveAppSession
     public void notifyVideoFreezeUpdated(boolean isFrozen) {
-        this.mCaller.executeOrSendMessage(this.mCaller.obtainMessageO(49, Boolean.valueOf(isFrozen)));
+        this.mCaller.executeOrSendMessage(
+                this.mCaller.obtainMessageO(49, Boolean.valueOf(isFrozen)));
     }
 
     @Override // android.media.tv.interactive.ITvInteractiveAppSession
@@ -478,7 +508,8 @@ public class ITvInteractiveAppSessionWrapper extends ITvInteractiveAppSession.St
 
     @Override // android.media.tv.interactive.ITvInteractiveAppSession
     public void notifySignalStrength(int strength) {
-        this.mCaller.executeOrSendMessage(this.mCaller.obtainMessageO(22, Integer.valueOf(strength)));
+        this.mCaller.executeOrSendMessage(
+                this.mCaller.obtainMessageO(22, Integer.valueOf(strength)));
     }
 
     @Override // android.media.tv.interactive.ITvInteractiveAppSession
@@ -503,12 +534,14 @@ public class ITvInteractiveAppSessionWrapper extends ITvInteractiveAppSession.St
 
     @Override // android.media.tv.interactive.ITvInteractiveAppSession
     public void notifyRecordingTuned(String recordingId, Uri channelUri) {
-        this.mCaller.executeOrSendMessage(this.mCaller.obtainMessageOO(43, recordingId, channelUri));
+        this.mCaller.executeOrSendMessage(
+                this.mCaller.obtainMessageOO(43, recordingId, channelUri));
     }
 
     @Override // android.media.tv.interactive.ITvInteractiveAppSession
     public void notifyRecordingError(String recordingId, int err) {
-        this.mCaller.executeOrSendMessage(this.mCaller.obtainMessageOO(44, recordingId, Integer.valueOf(err)));
+        this.mCaller.executeOrSendMessage(
+                this.mCaller.obtainMessageOO(44, recordingId, Integer.valueOf(err)));
     }
 
     @Override // android.media.tv.interactive.ITvInteractiveAppSession
@@ -523,7 +556,8 @@ public class ITvInteractiveAppSessionWrapper extends ITvInteractiveAppSession.St
 
     @Override // android.media.tv.interactive.ITvInteractiveAppSession
     public void dispatchSurfaceChanged(int format, int width, int height) {
-        this.mCaller.executeOrSendMessage(this.mCaller.obtainMessageIIII(24, format, width, height, 0));
+        this.mCaller.executeOrSendMessage(
+                this.mCaller.obtainMessageIIII(24, format, width, height, 0));
     }
 
     @Override // android.media.tv.interactive.ITvInteractiveAppSession
@@ -567,7 +601,9 @@ public class ITvInteractiveAppSessionWrapper extends ITvInteractiveAppSession.St
                 finishInputEvent(event, false);
                 return;
             }
-            int handled = ITvInteractiveAppSessionWrapper.this.mSessionImpl.dispatchInputEvent(event, this);
+            int handled =
+                    ITvInteractiveAppSessionWrapper.this.mSessionImpl.dispatchInputEvent(
+                            event, this);
             if (handled != -1) {
                 finishInputEvent(event, handled == 1);
             }

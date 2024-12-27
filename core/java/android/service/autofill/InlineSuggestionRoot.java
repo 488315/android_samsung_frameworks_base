@@ -80,6 +80,8 @@ public class InlineSuggestionRoot extends FrameLayout {
             boolean r0 = super.dispatchTouchEvent(r6)
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.service.autofill.InlineSuggestionRoot.dispatchTouchEvent(android.view.MotionEvent):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.service.autofill.InlineSuggestionRoot.dispatchTouchEvent(android.view.MotionEvent):boolean");
     }
 }

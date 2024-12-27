@@ -4,6 +4,7 @@ import android.app.ActivityThread;
 import android.app.ClientTransactionHandler;
 import android.os.IBinder;
 import android.os.Parcel;
+
 import java.io.PrintWriter;
 import java.util.Objects;
 
@@ -11,24 +12,30 @@ import java.util.Objects;
 public abstract class ActivityTransactionItem extends ClientTransactionItem {
     private IBinder mActivityToken;
 
-    public abstract void execute(ClientTransactionHandler clientTransactionHandler, ActivityThread.ActivityClientRecord activityClientRecord, PendingTransactionActions pendingTransactionActions);
+    public abstract void execute(
+            ClientTransactionHandler clientTransactionHandler,
+            ActivityThread.ActivityClientRecord activityClientRecord,
+            PendingTransactionActions pendingTransactionActions);
 
-    ActivityTransactionItem() {
-    }
+    ActivityTransactionItem() {}
 
     @Override // android.app.servertransaction.BaseClientRequest
-    public final void execute(ClientTransactionHandler client, PendingTransactionActions pendingActions) {
+    public final void execute(
+            ClientTransactionHandler client, PendingTransactionActions pendingActions) {
         ActivityThread.ActivityClientRecord r = getActivityClientRecord(client);
         execute(client, r, pendingActions);
     }
 
-    final ActivityThread.ActivityClientRecord getActivityClientRecord(ClientTransactionHandler client) {
+    final ActivityThread.ActivityClientRecord getActivityClientRecord(
+            ClientTransactionHandler client) {
         ActivityThread.ActivityClientRecord r = client.getActivityClient(getActivityToken());
         if (r == null) {
-            throw new IllegalArgumentException("Activity client record must not be null to execute transaction item: " + this);
+            throw new IllegalArgumentException(
+                    "Activity client record must not be null to execute transaction item: " + this);
         }
         if (client.getActivity(getActivityToken()) == null) {
-            throw new IllegalArgumentException("Activity must not be null to execute transaction item: " + this);
+            throw new IllegalArgumentException(
+                    "Activity must not be null to execute transaction item: " + this);
         }
         return r;
     }
@@ -58,7 +65,11 @@ public abstract class ActivityTransactionItem extends ClientTransactionItem {
     @Override // android.app.servertransaction.ClientTransactionItem
     void dump(String prefix, PrintWriter pw, ClientTransactionHandler transactionHandler) {
         super.dump(prefix, pw, transactionHandler);
-        pw.append((CharSequence) prefix).append("Target activity: ").println(TransactionExecutorHelper.getActivityName(this.mActivityToken, transactionHandler));
+        pw.append((CharSequence) prefix)
+                .append("Target activity: ")
+                .println(
+                        TransactionExecutorHelper.getActivityName(
+                                this.mActivityToken, transactionHandler));
     }
 
     public boolean equals(Object o) {

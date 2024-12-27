@@ -9,7 +9,8 @@ public class InputMethodManagerWrapper {
     private final InputMethodManager mInputMethodManager;
 
     public InputMethodManagerWrapper(Context context) {
-        this.mInputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        this.mInputMethodManager =
+                (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
     }
 
     public void hideSoftInputFromWindow(IBinder view) {

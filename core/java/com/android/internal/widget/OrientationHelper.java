@@ -2,7 +2,6 @@ package com.android.internal.widget;
 
 import android.graphics.Rect;
 import android.view.View;
-import com.android.internal.widget.RecyclerView;
 
 /* loaded from: classes5.dex */
 public abstract class OrientationHelper {
@@ -60,7 +59,8 @@ public abstract class OrientationHelper {
         return getTotalSpace() - this.mLastTotalSpace;
     }
 
-    public static OrientationHelper createOrientationHelper(RecyclerView.LayoutManager layoutManager, int orientation) {
+    public static OrientationHelper createOrientationHelper(
+            RecyclerView.LayoutManager layoutManager, int orientation) {
         switch (orientation) {
             case 0:
                 return createHorizontalHelper(layoutManager);
@@ -71,8 +71,10 @@ public abstract class OrientationHelper {
         }
     }
 
-    public static OrientationHelper createHorizontalHelper(RecyclerView.LayoutManager layoutManager) {
-        return new OrientationHelper(layoutManager) { // from class: com.android.internal.widget.OrientationHelper.1
+    public static OrientationHelper createHorizontalHelper(
+            RecyclerView.LayoutManager layoutManager) {
+        return new OrientationHelper(
+                layoutManager) { // from class: com.android.internal.widget.OrientationHelper.1
             @Override // com.android.internal.widget.OrientationHelper
             public int getEndAfterPadding() {
                 return this.mLayoutManager.getWidth() - this.mLayoutManager.getPaddingRight();
@@ -95,25 +97,33 @@ public abstract class OrientationHelper {
 
             @Override // com.android.internal.widget.OrientationHelper
             public int getDecoratedMeasurement(View view) {
-                RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) view.getLayoutParams();
-                return this.mLayoutManager.getDecoratedMeasuredWidth(view) + params.leftMargin + params.rightMargin;
+                RecyclerView.LayoutParams params =
+                        (RecyclerView.LayoutParams) view.getLayoutParams();
+                return this.mLayoutManager.getDecoratedMeasuredWidth(view)
+                        + params.leftMargin
+                        + params.rightMargin;
             }
 
             @Override // com.android.internal.widget.OrientationHelper
             public int getDecoratedMeasurementInOther(View view) {
-                RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) view.getLayoutParams();
-                return this.mLayoutManager.getDecoratedMeasuredHeight(view) + params.topMargin + params.bottomMargin;
+                RecyclerView.LayoutParams params =
+                        (RecyclerView.LayoutParams) view.getLayoutParams();
+                return this.mLayoutManager.getDecoratedMeasuredHeight(view)
+                        + params.topMargin
+                        + params.bottomMargin;
             }
 
             @Override // com.android.internal.widget.OrientationHelper
             public int getDecoratedEnd(View view) {
-                RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) view.getLayoutParams();
+                RecyclerView.LayoutParams params =
+                        (RecyclerView.LayoutParams) view.getLayoutParams();
                 return this.mLayoutManager.getDecoratedRight(view) + params.rightMargin;
             }
 
             @Override // com.android.internal.widget.OrientationHelper
             public int getDecoratedStart(View view) {
-                RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) view.getLayoutParams();
+                RecyclerView.LayoutParams params =
+                        (RecyclerView.LayoutParams) view.getLayoutParams();
                 return this.mLayoutManager.getDecoratedLeft(view) - params.leftMargin;
             }
 
@@ -131,7 +141,8 @@ public abstract class OrientationHelper {
 
             @Override // com.android.internal.widget.OrientationHelper
             public int getTotalSpace() {
-                return (this.mLayoutManager.getWidth() - this.mLayoutManager.getPaddingLeft()) - this.mLayoutManager.getPaddingRight();
+                return (this.mLayoutManager.getWidth() - this.mLayoutManager.getPaddingLeft())
+                        - this.mLayoutManager.getPaddingRight();
             }
 
             @Override // com.android.internal.widget.OrientationHelper
@@ -157,7 +168,8 @@ public abstract class OrientationHelper {
     }
 
     public static OrientationHelper createVerticalHelper(RecyclerView.LayoutManager layoutManager) {
-        return new OrientationHelper(layoutManager) { // from class: com.android.internal.widget.OrientationHelper.2
+        return new OrientationHelper(
+                layoutManager) { // from class: com.android.internal.widget.OrientationHelper.2
             @Override // com.android.internal.widget.OrientationHelper
             public int getEndAfterPadding() {
                 return this.mLayoutManager.getHeight() - this.mLayoutManager.getPaddingBottom();
@@ -180,25 +192,33 @@ public abstract class OrientationHelper {
 
             @Override // com.android.internal.widget.OrientationHelper
             public int getDecoratedMeasurement(View view) {
-                RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) view.getLayoutParams();
-                return this.mLayoutManager.getDecoratedMeasuredHeight(view) + params.topMargin + params.bottomMargin;
+                RecyclerView.LayoutParams params =
+                        (RecyclerView.LayoutParams) view.getLayoutParams();
+                return this.mLayoutManager.getDecoratedMeasuredHeight(view)
+                        + params.topMargin
+                        + params.bottomMargin;
             }
 
             @Override // com.android.internal.widget.OrientationHelper
             public int getDecoratedMeasurementInOther(View view) {
-                RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) view.getLayoutParams();
-                return this.mLayoutManager.getDecoratedMeasuredWidth(view) + params.leftMargin + params.rightMargin;
+                RecyclerView.LayoutParams params =
+                        (RecyclerView.LayoutParams) view.getLayoutParams();
+                return this.mLayoutManager.getDecoratedMeasuredWidth(view)
+                        + params.leftMargin
+                        + params.rightMargin;
             }
 
             @Override // com.android.internal.widget.OrientationHelper
             public int getDecoratedEnd(View view) {
-                RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) view.getLayoutParams();
+                RecyclerView.LayoutParams params =
+                        (RecyclerView.LayoutParams) view.getLayoutParams();
                 return this.mLayoutManager.getDecoratedBottom(view) + params.bottomMargin;
             }
 
             @Override // com.android.internal.widget.OrientationHelper
             public int getDecoratedStart(View view) {
-                RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) view.getLayoutParams();
+                RecyclerView.LayoutParams params =
+                        (RecyclerView.LayoutParams) view.getLayoutParams();
                 return this.mLayoutManager.getDecoratedTop(view) - params.topMargin;
             }
 
@@ -216,7 +236,8 @@ public abstract class OrientationHelper {
 
             @Override // com.android.internal.widget.OrientationHelper
             public int getTotalSpace() {
-                return (this.mLayoutManager.getHeight() - this.mLayoutManager.getPaddingTop()) - this.mLayoutManager.getPaddingBottom();
+                return (this.mLayoutManager.getHeight() - this.mLayoutManager.getPaddingTop())
+                        - this.mLayoutManager.getPaddingBottom();
             }
 
             @Override // com.android.internal.widget.OrientationHelper

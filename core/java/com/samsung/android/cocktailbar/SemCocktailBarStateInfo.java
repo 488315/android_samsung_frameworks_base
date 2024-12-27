@@ -3,17 +3,13 @@ package com.samsung.android.cocktailbar;
 /* loaded from: classes5.dex */
 public class SemCocktailBarStateInfo {
 
-    @Deprecated
-    public static final int BACKGROUND_DIM = 2;
+    @Deprecated public static final int BACKGROUND_DIM = 2;
 
-    @Deprecated
-    public static final int BACKGROUND_OPAQUE = 1;
+    @Deprecated public static final int BACKGROUND_OPAQUE = 1;
 
-    @Deprecated
-    public static final int BACKGROUND_TRANSPARENT = 3;
+    @Deprecated public static final int BACKGROUND_TRANSPARENT = 3;
 
-    @Deprecated
-    public static final int BACKGROUND_UNKNOWN = 0;
+    @Deprecated public static final int BACKGROUND_UNKNOWN = 0;
     public static final int POSITION_BOTTOM = 4;
     public static final int POSITION_LEFT = 1;
     public static final int POSITION_RIGHT = 2;

@@ -22,8 +22,7 @@ public final class ShellTransitionOuterClass {
         public static final long TYPE = 1120986464269L;
         public static final long WM_ABORT_TIME_NS = 1112396529672L;
 
-        public ShellTransition() {
-        }
+        public ShellTransition() {}
 
         public final class Target {
             public static final long FLAGS = 1120986464260L;
@@ -31,23 +30,20 @@ public final class ShellTransitionOuterClass {
             public static final long MODE = 1120986464257L;
             public static final long WINDOW_ID = 1120986464259L;
 
-            public Target() {
-            }
+            public Target() {}
         }
     }
 
     public final class ShellHandlerMappings {
         public static final long MAPPING = 2246267895809L;
 
-        public ShellHandlerMappings() {
-        }
+        public ShellHandlerMappings() {}
     }
 
     public final class ShellHandlerMapping {
         public static final long ID = 1120986464257L;
         public static final long NAME = 1138166333442L;
 
-        public ShellHandlerMapping() {
-        }
+        public ShellHandlerMapping() {}
     }
 }

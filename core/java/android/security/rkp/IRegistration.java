@@ -5,8 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.security.rkp.IGetKeyCallback;
-import android.security.rkp.IStoreUpgradedKeyCallback;
 
 /* loaded from: classes3.dex */
 public interface IRegistration extends IInterface {
@@ -16,20 +14,21 @@ public interface IRegistration extends IInterface {
 
     void getKey(int i, IGetKeyCallback iGetKeyCallback) throws RemoteException;
 
-    void storeUpgradedKeyAsync(byte[] bArr, byte[] bArr2, IStoreUpgradedKeyCallback iStoreUpgradedKeyCallback) throws RemoteException;
+    void storeUpgradedKeyAsync(
+            byte[] bArr, byte[] bArr2, IStoreUpgradedKeyCallback iStoreUpgradedKeyCallback)
+            throws RemoteException;
 
     public static class Default implements IRegistration {
         @Override // android.security.rkp.IRegistration
-        public void getKey(int keyId, IGetKeyCallback callback) throws RemoteException {
-        }
+        public void getKey(int keyId, IGetKeyCallback callback) throws RemoteException {}
 
         @Override // android.security.rkp.IRegistration
-        public void cancelGetKey(IGetKeyCallback callback) throws RemoteException {
-        }
+        public void cancelGetKey(IGetKeyCallback callback) throws RemoteException {}
 
         @Override // android.security.rkp.IRegistration
-        public void storeUpgradedKeyAsync(byte[] oldKeyBlob, byte[] newKeyBlob, IStoreUpgradedKeyCallback callback) throws RemoteException {
-        }
+        public void storeUpgradedKeyAsync(
+                byte[] oldKeyBlob, byte[] newKeyBlob, IStoreUpgradedKeyCallback callback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -37,7 +36,7 @@ public interface IRegistration extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRegistration {
+    public abstract static class Stub extends Binder implements IRegistration {
         static final int TRANSACTION_cancelGetKey = 2;
         static final int TRANSACTION_getKey = 1;
         static final int TRANSACTION_storeUpgradedKeyAsync = 3;
@@ -81,7 +80,8 @@ public interface IRegistration extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRegistration.DESCRIPTOR);
             }
@@ -92,19 +92,22 @@ public interface IRegistration extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    IGetKeyCallback _arg1 = IGetKeyCallback.Stub.asInterface(data.readStrongBinder());
+                    IGetKeyCallback _arg1 =
+                            IGetKeyCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getKey(_arg0, _arg1);
                     return true;
                 case 2:
-                    IGetKeyCallback _arg02 = IGetKeyCallback.Stub.asInterface(data.readStrongBinder());
+                    IGetKeyCallback _arg02 =
+                            IGetKeyCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     cancelGetKey(_arg02);
                     return true;
                 case 3:
                     byte[] _arg03 = data.createByteArray();
                     byte[] _arg12 = data.createByteArray();
-                    IStoreUpgradedKeyCallback _arg2 = IStoreUpgradedKeyCallback.Stub.asInterface(data.readStrongBinder());
+                    IStoreUpgradedKeyCallback _arg2 =
+                            IStoreUpgradedKeyCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     storeUpgradedKeyAsync(_arg03, _arg12, _arg2);
                     return true;
@@ -155,7 +158,9 @@ public interface IRegistration extends IInterface {
             }
 
             @Override // android.security.rkp.IRegistration
-            public void storeUpgradedKeyAsync(byte[] oldKeyBlob, byte[] newKeyBlob, IStoreUpgradedKeyCallback callback) throws RemoteException {
+            public void storeUpgradedKeyAsync(
+                    byte[] oldKeyBlob, byte[] newKeyBlob, IStoreUpgradedKeyCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRegistration.DESCRIPTOR);

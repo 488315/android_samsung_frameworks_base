@@ -3,10 +3,13 @@ package com.android.internal.telephony;
 import android.content.Context;
 import android.telephony.SmsManager;
 import android.telephony.SubscriptionManager;
+
 import com.android.internal.telephony.uicc.IccUtils;
 import com.android.internal.util.HexDump;
 import com.android.telephony.Rlog;
+
 import com.samsung.android.feature.SemCscFeature;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -96,14 +99,25 @@ public class SmsHeader {
             return false;
         }
         SmsHeader smsHeader = (SmsHeader) o;
-        if (this.languageTable == smsHeader.languageTable && this.languageShiftTable == smsHeader.languageShiftTable && Objects.equals(this.portAddrs, smsHeader.portAddrs) && Objects.equals(this.concatRef, smsHeader.concatRef) && Objects.equals(this.specialSmsMsgList, smsHeader.specialSmsMsgList) && Objects.equals(this.miscEltList, smsHeader.miscEltList)) {
+        if (this.languageTable == smsHeader.languageTable
+                && this.languageShiftTable == smsHeader.languageShiftTable
+                && Objects.equals(this.portAddrs, smsHeader.portAddrs)
+                && Objects.equals(this.concatRef, smsHeader.concatRef)
+                && Objects.equals(this.specialSmsMsgList, smsHeader.specialSmsMsgList)
+                && Objects.equals(this.miscEltList, smsHeader.miscEltList)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(this.portAddrs, this.concatRef, this.specialSmsMsgList, this.miscEltList, Integer.valueOf(this.languageTable), Integer.valueOf(this.languageShiftTable));
+        return Objects.hash(
+                this.portAddrs,
+                this.concatRef,
+                this.specialSmsMsgList,
+                this.miscEltList,
+                Integer.valueOf(this.languageTable),
+                Integer.valueOf(this.languageShiftTable));
     }
 
     public static class PortAddrs {
@@ -119,14 +133,19 @@ public class SmsHeader {
                 return false;
             }
             PortAddrs portAddrs = (PortAddrs) o;
-            if (this.destPort == portAddrs.destPort && this.origPort == portAddrs.origPort && this.areEightBits == portAddrs.areEightBits) {
+            if (this.destPort == portAddrs.destPort
+                    && this.origPort == portAddrs.origPort
+                    && this.areEightBits == portAddrs.areEightBits) {
                 return true;
             }
             return false;
         }
 
         public int hashCode() {
-            return Objects.hash(Integer.valueOf(this.destPort), Integer.valueOf(this.origPort), Boolean.valueOf(this.areEightBits));
+            return Objects.hash(
+                    Integer.valueOf(this.destPort),
+                    Integer.valueOf(this.origPort),
+                    Boolean.valueOf(this.areEightBits));
         }
     }
 
@@ -144,14 +163,21 @@ public class SmsHeader {
                 return false;
             }
             ConcatRef concatRef = (ConcatRef) o;
-            if (this.refNumber == concatRef.refNumber && this.seqNumber == concatRef.seqNumber && this.msgCount == concatRef.msgCount && this.isEightBits == concatRef.isEightBits) {
+            if (this.refNumber == concatRef.refNumber
+                    && this.seqNumber == concatRef.seqNumber
+                    && this.msgCount == concatRef.msgCount
+                    && this.isEightBits == concatRef.isEightBits) {
                 return true;
             }
             return false;
         }
 
         public int hashCode() {
-            return Objects.hash(Integer.valueOf(this.refNumber), Integer.valueOf(this.seqNumber), Integer.valueOf(this.msgCount), Boolean.valueOf(this.isEightBits));
+            return Objects.hash(
+                    Integer.valueOf(this.refNumber),
+                    Integer.valueOf(this.seqNumber),
+                    Integer.valueOf(this.msgCount),
+                    Boolean.valueOf(this.isEightBits));
         }
     }
 
@@ -207,7 +233,13 @@ public class SmsHeader {
     }
 
     public static byte[] toByteArray(SmsHeader smsHeader) {
-        if (smsHeader.portAddrs == null && smsHeader.concatRef == null && smsHeader.specialSmsMsgList.isEmpty() && smsHeader.miscEltList.isEmpty() && smsHeader.languageShiftTable == 0 && smsHeader.ktReadConfirm == null && smsHeader.languageTable == 0) {
+        if (smsHeader.portAddrs == null
+                && smsHeader.concatRef == null
+                && smsHeader.specialSmsMsgList.isEmpty()
+                && smsHeader.miscEltList.isEmpty()
+                && smsHeader.languageShiftTable == 0
+                && smsHeader.ktReadConfirm == null
+                && smsHeader.languageTable == 0) {
             return null;
         }
         ByteArrayOutputStream outStream = new ByteArrayOutputStream(140);
@@ -327,9 +359,17 @@ public class SmsHeader {
 
     public static SmsHeader semFromByteArray(int subId, byte[] data) {
         Context context = null;
-        String mnoName = SmsManager.getSmsManagerForContextAndSubscriptionId(null, subId).getMnoName().toUpperCase();
+        String mnoName =
+                SmsManager.getSmsManagerForContextAndSubscriptionId(null, subId)
+                        .getMnoName()
+                        .toUpperCase();
         if (data != null) {
-            Rlog.i("SmsHeader", "semFromByteArray: Mno = " + mnoName + " UDH = " + IccUtils.bytesToHexString(data));
+            Rlog.i(
+                    "SmsHeader",
+                    "semFromByteArray: Mno = "
+                            + mnoName
+                            + " UDH = "
+                            + IccUtils.bytesToHexString(data));
         } else {
             Rlog.i("SmsHeader", "semFromByteArray: Mno = " + mnoName + " No UDH Info");
         }
@@ -347,13 +387,15 @@ public class SmsHeader {
                     concatRef.isEightBits = true;
                     if (concatRef.msgCount == 0) {
                         continue;
-                    } else if (concatRef.seqNumber != 0 && concatRef.seqNumber <= concatRef.msgCount) {
+                    } else if (concatRef.seqNumber != 0
+                            && concatRef.seqNumber <= concatRef.msgCount) {
                         smsHeader.concatRef = concatRef;
                         break;
                     }
                     break;
                 case 1:
-                    if (TelephonyFeatures.isCountrySpecific(SubscriptionManager.getPhoneId(subId), "KOR")) {
+                    if (TelephonyFeatures.isCountrySpecific(
+                            SubscriptionManager.getPhoneId(subId), "KOR")) {
                         MiscElt miscElt = new MiscElt();
                         miscElt.id = id;
                         miscElt.data = new byte[length];
@@ -389,7 +431,8 @@ public class SmsHeader {
                     concatRef2.isEightBits = false;
                     if (concatRef2.msgCount == 0) {
                         continue;
-                    } else if (concatRef2.seqNumber != 0 && concatRef2.seqNumber <= concatRef2.msgCount) {
+                    } else if (concatRef2.seqNumber != 0
+                            && concatRef2.seqNumber <= concatRef2.msgCount) {
                         smsHeader.concatRef = concatRef2;
                         break;
                     }
@@ -405,34 +448,60 @@ public class SmsHeader {
                     ktReadConfirm.id = id;
                     ktReadConfirm.readConfirmID = inStream.read();
                     smsHeader.ktReadConfirm = ktReadConfirm;
-                    Rlog.i("SmsHeader", "id:" + ktReadConfirm.id + "readConfirmID" + ktReadConfirm.readConfirmID);
+                    Rlog.i(
+                            "SmsHeader",
+                            "id:"
+                                    + ktReadConfirm.id
+                                    + "readConfirmID"
+                                    + ktReadConfirm.readConfirmID);
                     continue;
                 case 192:
-                    if (mnoName.contains("SKT_KR") || mnoName.contains("KT_KR") || mnoName.contains("LGU+_KR")) {
+                    if (mnoName.contains("SKT_KR")
+                            || mnoName.contains("KT_KR")
+                            || mnoName.contains("LGU+_KR")) {
                         int operatorControlElementValue = inStream.read();
                         int phoneId = SubscriptionManager.getPhoneId(subId);
-                        String simType = SemTelephonyUtils.getTelephonyProperty(phoneId, "ril.simtype", "0");
-                        if (SmsManager.getSmsManagerForContextAndSubscriptionId(context, subId).getSmsSetting(SmsConstants.SMS_SAFE_MESSAGE_INDICATION)) {
-                            if ((simType.equals("4") || simType.equals("3")) && operatorControlElementValue == 1) {
+                        String simType =
+                                SemTelephonyUtils.getTelephonyProperty(phoneId, "ril.simtype", "0");
+                        if (SmsManager.getSmsManagerForContextAndSubscriptionId(context, subId)
+                                .getSmsSetting(SmsConstants.SMS_SAFE_MESSAGE_INDICATION)) {
+                            if ((simType.equals("4") || simType.equals("3"))
+                                    && operatorControlElementValue == 1) {
                                 smsHeader.safeMessageIndication = true;
-                            } else if (simType.equals("2") && (operatorControlElementValue & 2) == 2) {
+                            } else if (simType.equals("2")
+                                    && (operatorControlElementValue & 2) == 2) {
                                 smsHeader.safeMessageIndication = true;
                             }
-                            Rlog.i("SafeMessageIndication", "Received smsHeader.safeMessageIndication: " + smsHeader.safeMessageIndication + " simType: " + simType);
+                            Rlog.i(
+                                    "SafeMessageIndication",
+                                    "Received smsHeader.safeMessageIndication: "
+                                            + smsHeader.safeMessageIndication
+                                            + " simType: "
+                                            + simType);
                         }
-                        if (SmsManager.getSmsManagerForContextAndSubscriptionId(null, subId).getSmsSetting(SmsConstants.SMS_LINK_WARNING_INDICATION)) {
+                        if (SmsManager.getSmsManagerForContextAndSubscriptionId(null, subId)
+                                .getSmsSetting(SmsConstants.SMS_LINK_WARNING_INDICATION)) {
                             if (simType.equals("2") && (operatorControlElementValue & 4) == 4) {
                                 smsHeader.linkWarningIndication = true;
                             }
-                            Rlog.i("LinkWarningIndication", "Received smsHeader.linkWarningIndication: " + smsHeader.linkWarningIndication + " simType: " + simType);
+                            Rlog.i(
+                                    "LinkWarningIndication",
+                                    "Received smsHeader.linkWarningIndication: "
+                                            + smsHeader.linkWarningIndication
+                                            + " simType: "
+                                            + simType);
                         }
-                        if (!SemCscFeature.getInstance().getBoolean("CscFeature_Common_SupportTwoPhoneService")) {
+                        if (!SemCscFeature.getInstance()
+                                .getBoolean("CscFeature_Common_SupportTwoPhoneService")) {
                             break;
                         } else {
                             if ((operatorControlElementValue & 1) == 1) {
                                 smsHeader.twoPhoneIndication = true;
                             }
-                            Rlog.i("TwoPhoneIndication", "Received smsHeader.twoPhoneIndication: " + smsHeader.twoPhoneIndication);
+                            Rlog.i(
+                                    "TwoPhoneIndication",
+                                    "Received smsHeader.twoPhoneIndication: "
+                                            + smsHeader.twoPhoneIndication);
                             break;
                         }
                     }

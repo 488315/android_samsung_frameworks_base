@@ -1,6 +1,7 @@
 package android.filterfw.core;
 
 import android.graphics.Bitmap;
+
 import java.nio.ByteBuffer;
 
 /* loaded from: classes.dex */

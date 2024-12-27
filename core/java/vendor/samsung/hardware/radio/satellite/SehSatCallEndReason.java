@@ -3,23 +3,27 @@ package vendor.samsung.hardware.radio.satellite;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes6.dex */
 public class SehSatCallEndReason implements Parcelable {
-    public static final Parcelable.Creator<SehSatCallEndReason> CREATOR = new Parcelable.Creator<SehSatCallEndReason>() { // from class: vendor.samsung.hardware.radio.satellite.SehSatCallEndReason.1
-        @Override // android.os.Parcelable.Creator
-        public SehSatCallEndReason createFromParcel(Parcel _aidl_source) {
-            SehSatCallEndReason _aidl_out = new SehSatCallEndReason();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SehSatCallEndReason> CREATOR =
+            new Parcelable.Creator<
+                    SehSatCallEndReason>() { // from class:
+                                             // vendor.samsung.hardware.radio.satellite.SehSatCallEndReason.1
+                @Override // android.os.Parcelable.Creator
+                public SehSatCallEndReason createFromParcel(Parcel _aidl_source) {
+                    SehSatCallEndReason _aidl_out = new SehSatCallEndReason();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehSatCallEndReason[] newArray(int _aidl_size) {
-            return new SehSatCallEndReason[_aidl_size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehSatCallEndReason[] newArray(int _aidl_size) {
+                    return new SehSatCallEndReason[_aidl_size];
+                }
+            };
     public int index = 0;
     public int endStatus = 0;
     public int ccCause = 0;

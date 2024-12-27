@@ -20,6 +20,7 @@ import android.util.IntArray;
 import android.util.Pair;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.app.procstats.ProcessState;
 import com.android.internal.os.BinderfsStatsReader;
 import com.android.internal.os.ProcLocksReader;
@@ -37,12 +38,13 @@ import com.android.server.ServiceThread;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
 import com.android.server.am.CachedAppOptimizer.FreezeHandler;
-import com.android.server.am.FreecessController;
 import com.android.server.chimera.FCAPolicyManager;
 import com.android.server.chimera.ppn.PerProcessNandswap;
 import com.android.server.chimera.umr.KernelMemoryProxy$ReclaimerLog;
 import com.android.server.chimera.umr.UnifiedMemoryReclaimer;
+
 import dalvik.annotation.optimization.NeverCompile;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -83,7 +85,8 @@ public final class CachedAppOptimizer {
     static final boolean DEFAULT_USE_COMPACTION = false;
     static final boolean DEFAULT_USE_FREEZER = true;
     static final boolean ENABLE_SHARED_AND_CODE_COMPACT = false;
-    static final String KEY_COMPACT_FULL_DELTA_RSS_THROTTLE_KB = "compact_full_delta_rss_throttle_kb";
+    static final String KEY_COMPACT_FULL_DELTA_RSS_THROTTLE_KB =
+            "compact_full_delta_rss_throttle_kb";
     static final String KEY_COMPACT_FULL_RSS_THROTTLE_KB = "compact_full_rss_throttle_kb";
     static final String KEY_COMPACT_PROC_STATE_THROTTLE = "compact_proc_state_throttle";
     static final String KEY_COMPACT_STATSD_SAMPLE_RATE = "compact_statsd_sample_rate";
@@ -158,7 +161,8 @@ public final class CachedAppOptimizer {
     public volatile boolean mUseCompaction;
     public volatile boolean mUseFreezer;
     static final String DEFAULT_COMPACT_PROC_STATE_THROTTLE = String.valueOf(11);
-    static final Uri CACHED_APP_FREEZER_ENABLED_URI = Settings.Global.getUriFor("cached_apps_freezer");
+    static final Uri CACHED_APP_FREEZER_ENABLED_URI =
+            Settings.Global.getUriFor("cached_apps_freezer");
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class AggregatedCompactionStats {
@@ -194,13 +198,20 @@ public final class CachedAppOptimizer {
         public final void dump(PrintWriter printWriter) {
             long j = this.mSomeCompactRequested + this.mFullCompactRequested;
             long j2 = this.mSomeCompactPerformed + this.mFullCompactPerformed;
-            StringBuilder m$1 = BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "    Performed / Requested:", "      Some: (");
+            StringBuilder m$1 =
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                            printWriter, "    Performed / Requested:", "      Some: (");
             m$1.append(this.mSomeCompactPerformed);
             m$1.append("/");
             m$1.append(this.mSomeCompactRequested);
             m$1.append(")");
             printWriter.println(m$1.toString());
-            printWriter.println("      Full: (" + this.mFullCompactPerformed + "/" + this.mFullCompactRequested + ")");
+            printWriter.println(
+                    "      Full: ("
+                            + this.mFullCompactPerformed
+                            + "/"
+                            + this.mFullCompactRequested
+                            + ")");
             long j3 = this.mSomeCompactRequested - this.mSomeCompactPerformed;
             long j4 = this.mFullCompactRequested - this.mFullCompactPerformed;
             if (j3 > 0 || j4 > 0) {
@@ -208,22 +219,67 @@ public final class CachedAppOptimizer {
                 printWriter.println("       Some: " + j3 + " Full: " + j4);
                 printWriter.println("    Throttled by Type:");
                 long j5 = j - j2;
-                printWriter.println("       NoPid: " + this.mProcCompactionsNoPidThrottled + " OomAdj: " + this.mProcCompactionsOomAdjThrottled + " Time: " + this.mProcCompactionsTimeThrottled + " RSS: " + this.mProcCompactionsRSSThrottled + " Misc: " + this.mProcCompactionsMiscThrottled + " Unaccounted: " + (((((j5 - this.mProcCompactionsNoPidThrottled) - this.mProcCompactionsOomAdjThrottled) - this.mProcCompactionsTimeThrottled) - this.mProcCompactionsRSSThrottled) - this.mProcCompactionsMiscThrottled));
+                printWriter.println(
+                        "       NoPid: "
+                                + this.mProcCompactionsNoPidThrottled
+                                + " OomAdj: "
+                                + this.mProcCompactionsOomAdjThrottled
+                                + " Time: "
+                                + this.mProcCompactionsTimeThrottled
+                                + " RSS: "
+                                + this.mProcCompactionsRSSThrottled
+                                + " Misc: "
+                                + this.mProcCompactionsMiscThrottled
+                                + " Unaccounted: "
+                                + (((((j5 - this.mProcCompactionsNoPidThrottled)
+                                                                - this
+                                                                        .mProcCompactionsOomAdjThrottled)
+                                                        - this.mProcCompactionsTimeThrottled)
+                                                - this.mProcCompactionsRSSThrottled)
+                                        - this.mProcCompactionsMiscThrottled));
                 double d = (((double) j5) / ((double) j)) * 100.0d;
                 StringBuilder sb = new StringBuilder("    Throttle Percentage: ");
                 sb.append(d);
                 printWriter.println(sb.toString());
             }
             if (this.mFullCompactPerformed > 0) {
-                StringBuilder m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "    -----Memory Stats----", "    Total Delta Anon RSS (KB) : "), this.mTotalDeltaAnonRssKBs, printWriter, "    Total Physical ZRAM Consumed (KB): "), this.mTotalZramConsumedKBs, printWriter, "    Total Anon Memory Freed (KB): "), this.mTotalAnonMemFreedKBs, printWriter, "    Avg Compaction Efficiency (Anon Freed/Anon RSS): ");
+                StringBuilder m =
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                                BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                        .m$1(
+                                                                printWriter,
+                                                                "    -----Memory Stats----",
+                                                                "    Total Delta Anon RSS (KB) : "),
+                                                this.mTotalDeltaAnonRssKBs,
+                                                printWriter,
+                                                "    Total Physical ZRAM Consumed (KB): "),
+                                        this.mTotalZramConsumedKBs,
+                                        printWriter,
+                                        "    Total Anon Memory Freed (KB): "),
+                                this.mTotalAnonMemFreedKBs,
+                                printWriter,
+                                "    Avg Compaction Efficiency (Anon Freed/Anon RSS): ");
                 m.append(this.mTotalAnonMemFreedKBs / this.mSumOrigAnonRss);
-                StringBuilder m$12 = BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, m.toString(), "    Max Compaction Efficiency: ");
+                StringBuilder m$12 =
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                                printWriter, m.toString(), "    Max Compaction Efficiency: ");
                 m$12.append(this.mMaxCompactEfficiency);
                 printWriter.println(m$12.toString());
-                printWriter.println("    Avg Compression Ratio (1 - ZRAM Consumed/DeltaAnonRSS): " + (1.0d - (this.mTotalZramConsumedKBs / this.mTotalDeltaAnonRssKBs)));
+                printWriter.println(
+                        "    Avg Compression Ratio (1 - ZRAM Consumed/DeltaAnonRSS): "
+                                + (1.0d
+                                        - (this.mTotalZramConsumedKBs
+                                                / this.mTotalDeltaAnonRssKBs)));
                 long j6 = this.mFullCompactPerformed;
-                printWriter.println("    Avg Anon Mem Freed/Compaction (KB) : " + (j6 > 0 ? this.mTotalAnonMemFreedKBs / j6 : 0L));
-                printWriter.println("    Compaction Cost (ms/MB): " + (((double) this.mTotalCpuTimeMillis) / (((double) this.mTotalAnonMemFreedKBs) / 1024.0d)));
+                printWriter.println(
+                        "    Avg Anon Mem Freed/Compaction (KB) : "
+                                + (j6 > 0 ? this.mTotalAnonMemFreedKBs / j6 : 0L));
+                printWriter.println(
+                        "    Compaction Cost (ms/MB): "
+                                + (((double) this.mTotalCpuTimeMillis)
+                                        / (((double) this.mTotalAnonMemFreedKBs) / 1024.0d)));
             }
         }
     }
@@ -247,8 +303,7 @@ public final class CachedAppOptimizer {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class CachedAppOptimizerReclaimer extends UnifiedMemoryReclaimer.Reclaimer {
-    }
+    public final class CachedAppOptimizerReclaimer extends UnifiedMemoryReclaimer.Reclaimer {}
 
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
     /* JADX WARN: Unknown enum class pattern. Please report as an issue! */
@@ -261,9 +316,10 @@ public final class CachedAppOptimizer {
         static {
             CancelCompactReason cancelCompactReason = new CancelCompactReason("SCREEN_ON", 0);
             SCREEN_ON = cancelCompactReason;
-            CancelCompactReason cancelCompactReason2 = new CancelCompactReason("OOM_IMPROVEMENT", 1);
+            CancelCompactReason cancelCompactReason2 =
+                    new CancelCompactReason("OOM_IMPROVEMENT", 1);
             OOM_IMPROVEMENT = cancelCompactReason2;
-            $VALUES = new CancelCompactReason[]{cancelCompactReason, cancelCompactReason2};
+            $VALUES = new CancelCompactReason[] {cancelCompactReason, cancelCompactReason2};
         }
 
         public static CancelCompactReason valueOf(String str) {
@@ -294,7 +350,10 @@ public final class CachedAppOptimizer {
             ANON = compactProfile3;
             CompactProfile compactProfile4 = new CompactProfile("FULL", 3);
             FULL = compactProfile4;
-            $VALUES = new CompactProfile[]{compactProfile, compactProfile2, compactProfile3, compactProfile4};
+            $VALUES =
+                    new CompactProfile[] {
+                        compactProfile, compactProfile2, compactProfile3, compactProfile4
+                    };
         }
 
         public static CompactProfile valueOf(String str) {
@@ -319,7 +378,7 @@ public final class CachedAppOptimizer {
             APP = compactSource;
             CompactSource compactSource2 = new CompactSource("SHELL", 1);
             SHELL = compactSource2;
-            $VALUES = new CompactSource[]{compactSource, compactSource2};
+            $VALUES = new CompactSource[] {compactSource, compactSource2};
         }
 
         public static CompactSource valueOf(String str) {
@@ -355,7 +414,8 @@ public final class CachedAppOptimizer {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class FreezeHandler extends Handler implements ProcLocksReader.ProcLocksReaderCallback {
+    public final class FreezeHandler extends Handler
+            implements ProcLocksReader.ProcLocksReaderCallback {
         public FreezeHandler() {
             super(CachedAppOptimizer.this.mCachedAppOptimizerThread.getLooper());
         }
@@ -372,7 +432,15 @@ public final class CachedAppOptimizer {
                         int i = processRecord.mPid;
                         if (CachedAppOptimizer.this.mFreezerOverride) {
                             processCachedOptimizerRecord.mFreezerOverride = true;
-                            Slog.d("ActivityManager", "Skipping freeze for process " + i + " " + str + " curAdj = " + processRecord.mState.mCurAdj + "(override)");
+                            Slog.d(
+                                    "ActivityManager",
+                                    "Skipping freeze for process "
+                                            + i
+                                            + " "
+                                            + str
+                                            + " curAdj = "
+                                            + processRecord.mState.mCurAdj
+                                            + "(override)");
                             ActivityManagerService.resetPriorityAfterProcLockedSection();
                             return;
                         }
@@ -389,14 +457,19 @@ public final class CachedAppOptimizer {
                                     return;
                                 }
                             } catch (RuntimeException unused) {
-                                Slog.e("ActivityManager", "Unable to freeze binder for " + i + " " + str);
-                                CachedAppOptimizer.this.mFreezeHandler.post(new CachedAppOptimizer$FreezeHandler$$ExternalSyntheticLambda0(this, processRecord, 0));
+                                Slog.e(
+                                        "ActivityManager",
+                                        "Unable to freeze binder for " + i + " " + str);
+                                CachedAppOptimizer.this.mFreezeHandler.post(
+                                        new CachedAppOptimizer$FreezeHandler$$ExternalSyntheticLambda0(
+                                                this, processRecord, 0));
                             }
                             long j = processCachedOptimizerRecord.mFreezeUnfreezeTime;
                             try {
                                 CachedAppOptimizer.traceAppFreeze(i, -1, processRecord.processName);
                                 Process.setProcessFrozen(i, processRecord.uid, true);
-                                processCachedOptimizerRecord.mFreezeUnfreezeTime = SystemClock.uptimeMillis();
+                                processCachedOptimizerRecord.mFreezeUnfreezeTime =
+                                        SystemClock.uptimeMillis();
                                 processCachedOptimizerRecord.mFrozen = true;
                                 processCachedOptimizerRecord.mHasCollectedFrozenPSS = false;
                                 CachedAppOptimizer.this.mFrozenProcesses.put(i, processRecord);
@@ -413,26 +486,41 @@ public final class CachedAppOptimizer {
                             ActivityManagerService.resetPriorityAfterProcLockedSection();
                             if (z) {
                                 EventLog.writeEvent(30068, Integer.valueOf(i), str);
-                                if (CachedAppOptimizer.this.mRandom.nextFloat() < CachedAppOptimizer.this.mFreezerStatsdSampleRate) {
-                                    FrameworkStatsLog.write(FrameworkStatsLog.APP_FREEZE_CHANGED, 1, i, str, j2, 0, 0);
+                                if (CachedAppOptimizer.this.mRandom.nextFloat()
+                                        < CachedAppOptimizer.this.mFreezerStatsdSampleRate) {
+                                    FrameworkStatsLog.write(
+                                            FrameworkStatsLog.APP_FREEZE_CHANGED,
+                                            1,
+                                            i,
+                                            str,
+                                            j2,
+                                            0,
+                                            0);
                                 }
                                 try {
                                     if ((CachedAppOptimizer.getBinderFreezeInfo(i) & 4) != 0) {
-                                        ActivityManagerGlobalLock activityManagerGlobalLock2 = CachedAppOptimizer.this.mProcLock;
+                                        ActivityManagerGlobalLock activityManagerGlobalLock2 =
+                                                CachedAppOptimizer.this.mProcLock;
                                         ActivityManagerService.boostPriorityForProcLockedSection();
                                         synchronized (activityManagerGlobalLock2) {
                                             try {
-                                                handleBinderFreezerFailure(processRecord, "new pending txns");
+                                                handleBinderFreezerFailure(
+                                                        processRecord, "new pending txns");
                                             } finally {
                                             }
                                         }
-                                        ActivityManagerService.resetPriorityAfterProcLockedSection();
+                                        ActivityManagerService
+                                                .resetPriorityAfterProcLockedSection();
                                         return;
                                     }
                                     return;
                                 } catch (RuntimeException unused3) {
-                                    Slog.e("ActivityManager", "Unable to freeze binder for " + i + " " + str);
-                                    CachedAppOptimizer.this.mFreezeHandler.post(new CachedAppOptimizer$FreezeHandler$$ExternalSyntheticLambda0(this, processRecord, 1));
+                                    Slog.e(
+                                            "ActivityManager",
+                                            "Unable to freeze binder for " + i + " " + str);
+                                    CachedAppOptimizer.this.mFreezeHandler.post(
+                                            new CachedAppOptimizer$FreezeHandler$$ExternalSyntheticLambda0(
+                                                    this, processRecord, 1));
                                     return;
                                 }
                             }
@@ -450,24 +538,42 @@ public final class CachedAppOptimizer {
             if (!CachedAppOptimizer.this.mFreezerBinderEnabled) {
                 CachedAppOptimizer.this.unfreezeAppLSP(18, processRecord);
                 CachedAppOptimizer cachedAppOptimizer = CachedAppOptimizer.this;
-                cachedAppOptimizer.freezeAppAsyncInternalLSP(CachedAppOptimizer.updateEarliestFreezableTime(processRecord, cachedAppOptimizer.mFreezerDebounceTimeout), processRecord, false);
+                cachedAppOptimizer.freezeAppAsyncInternalLSP(
+                        CachedAppOptimizer.updateEarliestFreezableTime(
+                                processRecord, cachedAppOptimizer.mFreezerDebounceTimeout),
+                        processRecord,
+                        false);
                 return;
             }
-            if (processRecord.mOptRecord.mLastUsedTimeout <= CachedAppOptimizer.this.mFreezerBinderThreshold) {
-                StringBuilder sb = new StringBuilder("Kill app due to repeated failure to freeze binder: ");
+            if (processRecord.mOptRecord.mLastUsedTimeout
+                    <= CachedAppOptimizer.this.mFreezerBinderThreshold) {
+                StringBuilder sb =
+                        new StringBuilder("Kill app due to repeated failure to freeze binder: ");
                 sb.append(processRecord.mPid);
                 sb.append(" ");
-                BootReceiver$$ExternalSyntheticOutline0.m(sb, processRecord.processName, "ActivityManager");
-                CachedAppOptimizer.this.mAm.mHandler.post(new CachedAppOptimizer$FreezeHandler$$ExternalSyntheticLambda0(this, processRecord, 2));
+                BootReceiver$$ExternalSyntheticOutline0.m(
+                        sb, processRecord.processName, "ActivityManager");
+                CachedAppOptimizer.this.mAm.mHandler.post(
+                        new CachedAppOptimizer$FreezeHandler$$ExternalSyntheticLambda0(
+                                this, processRecord, 2));
                 return;
             }
-            long j = processRecord.mOptRecord.mLastUsedTimeout / CachedAppOptimizer.this.mFreezerBinderDivisor;
+            long j =
+                    processRecord.mOptRecord.mLastUsedTimeout
+                            / CachedAppOptimizer.this.mFreezerBinderDivisor;
             CachedAppOptimizer cachedAppOptimizer2 = CachedAppOptimizer.this;
-            long max = Math.max(j + (cachedAppOptimizer2.mRandom.nextInt(cachedAppOptimizer2.mFreezerBinderOffset * 2) - CachedAppOptimizer.this.mFreezerBinderOffset), CachedAppOptimizer.this.mFreezerBinderThreshold);
+            long max =
+                    Math.max(
+                            j
+                                    + (cachedAppOptimizer2.mRandom.nextInt(
+                                                    cachedAppOptimizer2.mFreezerBinderOffset * 2)
+                                            - CachedAppOptimizer.this.mFreezerBinderOffset),
+                            CachedAppOptimizer.this.mFreezerBinderThreshold);
             StringBuilder sb2 = new StringBuilder("Reschedule freeze for process ");
             sb2.append(processRecord.mPid);
             sb2.append(" ");
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(sb2, processRecord.processName, " (", str, "), timeout=");
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    sb2, processRecord.processName, " (", str, "), timeout=");
             sb2.append(max);
             Slog.d("ActivityManager", sb2.toString());
             StringBuilder sb3 = new StringBuilder("Reschedule freeze ");
@@ -476,7 +582,10 @@ public final class CachedAppOptimizer {
             sb3.append(processRecord.mPid);
             sb3.append(" timeout=");
             sb3.append(max);
-            Trace.instantForTrack(64L, "Freezer", AudioOffloadInfo$$ExternalSyntheticOutline0.m(sb3, ", reason=", str));
+            Trace.instantForTrack(
+                    64L,
+                    "Freezer",
+                    AudioOffloadInfo$$ExternalSyntheticOutline0.m(sb3, ", reason=", str));
             CachedAppOptimizer.this.unfreezeAppLSP(18, processRecord);
             CachedAppOptimizer.this.freezeAppAsyncInternalLSP(max, processRecord, false);
         }
@@ -496,12 +605,14 @@ public final class CachedAppOptimizer {
                             if (processRecord.mOptRecord.mFrozen) {
                                 CachedAppOptimizer.this.onProcessFrozen(processRecord);
                                 removeMessages(7);
-                                sendEmptyMessageDelayed(7, CachedAppOptimizer.DEFAULT_FREEZER_BINDER_THRESHOLD);
+                                sendEmptyMessageDelayed(
+                                        7, CachedAppOptimizer.DEFAULT_FREEZER_BINDER_THRESHOLD);
                                 return;
                             }
                             CachedAppOptimizer.this.getClass();
                             ProcessServiceRecord processServiceRecord = processRecord.mServices;
-                            ActivityManagerService activityManagerService2 = processServiceRecord.mService;
+                            ActivityManagerService activityManagerService2 =
+                                    processServiceRecord.mService;
                             ActivityManagerService.boostPriorityForLockedSection();
                             synchronized (activityManagerService2) {
                                 try {
@@ -523,7 +634,12 @@ public final class CachedAppOptimizer {
                 int i3 = message.arg2;
                 Pair pair = (Pair) message.obj;
                 ProcessRecord processRecord2 = (ProcessRecord) pair.first;
-                reportUnfreeze(processRecord2, i2, i3, processRecord2.processName, ((Integer) pair.second).intValue());
+                reportUnfreeze(
+                        processRecord2,
+                        i2,
+                        i3,
+                        processRecord2.processName,
+                        ((Integer) pair.second).intValue());
                 return;
             }
             int i4 = 0;
@@ -537,10 +653,15 @@ public final class CachedAppOptimizer {
                 int[] iArr2 = {z ? 1 : 2};
                 ActivityManagerService activityManagerService3 = cachedAppOptimizer.mAm;
                 synchronized (activityManagerService3.mUidFrozenStateChangedCallbackList) {
-                    int beginBroadcast = activityManagerService3.mUidFrozenStateChangedCallbackList.beginBroadcast();
+                    int beginBroadcast =
+                            activityManagerService3.mUidFrozenStateChangedCallbackList
+                                    .beginBroadcast();
                     while (i4 < beginBroadcast) {
                         try {
-                            activityManagerService3.mUidFrozenStateChangedCallbackList.getBroadcastItem(i4).onUidFrozenStateChanged(iArr, iArr2);
+                            activityManagerService3
+                                    .mUidFrozenStateChangedCallbackList
+                                    .getBroadcastItem(i4)
+                                    .onUidFrozenStateChanged(iArr, iArr2);
                         } catch (RemoteException unused) {
                         }
                         i4++;
@@ -586,12 +707,14 @@ public final class CachedAppOptimizer {
             ActivityManagerService.boostPriorityForLockedSection();
             synchronized (activityManagerService) {
                 try {
-                    ActivityManagerGlobalLock activityManagerGlobalLock = CachedAppOptimizer.this.mProcLock;
+                    ActivityManagerGlobalLock activityManagerGlobalLock =
+                            CachedAppOptimizer.this.mProcLock;
                     ActivityManagerService.boostPriorityForProcLockedSection();
                     synchronized (activityManagerGlobalLock) {
                         try {
                             int i = intArray.get(0);
-                            ProcessRecord processRecord2 = (ProcessRecord) CachedAppOptimizer.this.mFrozenProcesses.get(i);
+                            ProcessRecord processRecord2 =
+                                    (ProcessRecord) CachedAppOptimizer.this.mFrozenProcesses.get(i);
                             if (processRecord2 != null) {
                                 int i2 = 1;
                                 while (true) {
@@ -600,10 +723,21 @@ public final class CachedAppOptimizer {
                                     }
                                     int i3 = intArray.get(i2);
                                     synchronized (CachedAppOptimizer.this.mAm.mPidsSelfLocked) {
-                                        processRecord = CachedAppOptimizer.this.mAm.mPidsSelfLocked.get(i3);
+                                        processRecord =
+                                                CachedAppOptimizer.this.mAm.mPidsSelfLocked.get(i3);
                                     }
-                                    if (processRecord != null && processRecord.mState.mCurAdj < 850) {
-                                        Slog.d("ActivityManager", processRecord2.processName + " (" + i + ") blocks " + processRecord.processName + " (" + i3 + ")");
+                                    if (processRecord != null
+                                            && processRecord.mState.mCurAdj < 850) {
+                                        Slog.d(
+                                                "ActivityManager",
+                                                processRecord2.processName
+                                                        + " ("
+                                                        + i
+                                                        + ") blocks "
+                                                        + processRecord.processName
+                                                        + " ("
+                                                        + i3
+                                                        + ")");
                                         CachedAppOptimizer.this.unfreezeAppLSP(16, processRecord2);
                                         break;
                                     }
@@ -624,7 +758,8 @@ public final class CachedAppOptimizer {
             ActivityManagerService.resetPriorityAfterLockedSection();
         }
 
-        public final void reportUnfreeze(ProcessRecord processRecord, int i, int i2, String str, int i3) {
+        public final void reportUnfreeze(
+                ProcessRecord processRecord, int i, int i2, String str, int i3) {
             EventLog.writeEvent(30069, Integer.valueOf(i), str, Integer.valueOf(i3));
             ProcessProfileRecord processProfileRecord = processRecord.mProfile;
             synchronized (processProfileRecord.mService.mProcessStats.mLock) {
@@ -653,7 +788,8 @@ public final class CachedAppOptimizer {
                 }
             }
             ActivityManagerService.resetPriorityAfterLockedSection();
-            if (CachedAppOptimizer.this.mRandom.nextFloat() < CachedAppOptimizer.this.mFreezerStatsdSampleRate) {
+            if (CachedAppOptimizer.this.mRandom.nextFloat()
+                    < CachedAppOptimizer.this.mFreezerStatsdSampleRate) {
                 FrameworkStatsLog.write(FrameworkStatsLog.APP_FREEZE_CHANGED, 2, i, str, i2, 0, i3);
             }
         }
@@ -666,35 +802,35 @@ public final class CachedAppOptimizer {
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:102:0x0248, code lost:
-        
-            if ((r15 - r8) >= r69.this$0.mCompactThrottleSomeSome) goto L100;
-         */
+
+           if ((r15 - r8) >= r69.this$0.mCompactThrottleSomeSome) goto L100;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:103:0x0259, code lost:
-        
-            r23 = "Compact ";
-            r47 = r10;
-            r48 = r11;
-         */
+
+           r23 = "Compact ";
+           r47 = r10;
+           r48 = r11;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:104:0x025f, code lost:
-        
-            r2 = true;
-         */
+
+           r2 = true;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:196:0x034f, code lost:
-        
-            if ((java.lang.Math.abs(r2[3] - r3[3]) + (java.lang.Math.abs(r2[2] - r3[2]) + java.lang.Math.abs(r2[1] - r3[1]))) <= r69.this$0.mFullDeltaRssThrottleKb) goto L135;
-         */
+
+           if ((java.lang.Math.abs(r2[3] - r3[3]) + (java.lang.Math.abs(r2[2] - r3[2]) + java.lang.Math.abs(r2[1] - r3[1]))) <= r69.this$0.mFullDeltaRssThrottleKb) goto L135;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:200:0x0257, code lost:
-        
-            if ((r15 - r8) < r69.this$0.mCompactThrottleSomeFull) goto L103;
-         */
+
+           if ((r15 - r8) < r69.this$0.mCompactThrottleSomeFull) goto L103;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:208:0x027c, code lost:
-        
-            if ((r15 - r8) >= r69.this$0.mCompactThrottleFullSome) goto L113;
-         */
+
+           if ((r15 - r8) >= r69.this$0.mCompactThrottleFullSome) goto L113;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:211:0x028f, code lost:
-        
-            if ((r15 - r8) < r69.this$0.mCompactThrottleFullFull) goto L104;
-         */
+
+           if ((r15 - r8) < r69.this$0.mCompactThrottleFullFull) goto L104;
+        */
         /* JADX WARN: Finally extract failed */
         /* JADX WARN: Removed duplicated region for block: B:123:0x0355  */
         /* JADX WARN: Removed duplicated region for block: B:125:0x0362  */
@@ -708,7 +844,9 @@ public final class CachedAppOptimizer {
                 Method dump skipped, instructions count: 1525
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.CachedAppOptimizer.MemCompactionHandler.handleMessage(android.os.Message):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.am.CachedAppOptimizer.MemCompactionHandler.handleMessage(android.os.Message):void");
         }
     }
 
@@ -756,7 +894,19 @@ public final class CachedAppOptimizer {
         public final int mUid;
         public final long mZramConsumedKBs;
 
-        public SingleCompactionStats(long[] jArr, CompactSource compactSource, String str, long j, long j2, long j3, long j4, long j5, int i, int i2, int i3, int i4) {
+        public SingleCompactionStats(
+                long[] jArr,
+                CompactSource compactSource,
+                String str,
+                long j,
+                long j2,
+                long j3,
+                long j4,
+                long j5,
+                int i,
+                int i2,
+                int i3,
+                int i4) {
             this.mRssAfterCompaction = jArr;
             this.mSourceType = compactSource;
             this.mProcessName = str;
@@ -800,61 +950,112 @@ public final class CachedAppOptimizer {
 
         public final void sendStat() {
             if (mRandom.nextFloat() < CachedAppOptimizer.DEFAULT_STATSD_SAMPLE_RATE) {
-                FrameworkStatsLog.write(FrameworkStatsLog.APP_COMPACTED_V2, this.mUid, this.mProcState, this.mOomAdj, this.mDeltaAnonRssKBs, this.mZramConsumedKBs, this.mCpuTimeMillis, this.mOrigAnonRss, this.mOomAdjReason);
+                FrameworkStatsLog.write(
+                        FrameworkStatsLog.APP_COMPACTED_V2,
+                        this.mUid,
+                        this.mProcState,
+                        this.mOomAdj,
+                        this.mDeltaAnonRssKBs,
+                        this.mZramConsumedKBs,
+                        this.mCpuTimeMillis,
+                        this.mOrigAnonRss,
+                        this.mOomAdjReason);
             }
         }
     }
 
     /* renamed from: -$$Nest$mbinderErrorInternal, reason: not valid java name */
-    public static void m181$$Nest$mbinderErrorInternal(final CachedAppOptimizer cachedAppOptimizer, IntArray intArray) {
-        final ArraySet arraySet = cachedAppOptimizer.mFreezerBinderAsyncThreshold < 0 ? null : new ArraySet();
+    public static void m181$$Nest$mbinderErrorInternal(
+            final CachedAppOptimizer cachedAppOptimizer, IntArray intArray) {
+        final ArraySet arraySet =
+                cachedAppOptimizer.mFreezerBinderAsyncThreshold < 0 ? null : new ArraySet();
         for (int i = 0; i < intArray.size(); i++) {
             int i2 = intArray.get(i);
             try {
                 int binderFreezeInfo = getBinderFreezeInfo(i2);
                 if ((binderFreezeInfo & 1) != 0) {
-                    cachedAppOptimizer.mAm.mHandler.post(new CachedAppOptimizer$$ExternalSyntheticLambda5(cachedAppOptimizer, i2, "Sync transaction while frozen", 20));
+                    cachedAppOptimizer.mAm.mHandler.post(
+                            new CachedAppOptimizer$$ExternalSyntheticLambda5(
+                                    cachedAppOptimizer, i2, "Sync transaction while frozen", 20));
                 } else if ((binderFreezeInfo & 2) != 0 && arraySet != null) {
                     arraySet.add(Integer.valueOf(i2));
                 }
             } catch (Exception unused) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m(i2, "Unable to query binder frozen stats for pid ", "ActivityManager");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        i2, "Unable to query binder frozen stats for pid ", "ActivityManager");
             }
         }
         if (arraySet == null || arraySet.size() == 0) {
             return;
         }
-        new BinderfsStatsReader().handleFreeAsyncSpace(new Predicate() { // from class: com.android.server.am.CachedAppOptimizer$$ExternalSyntheticLambda2
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return arraySet.contains((Integer) obj);
-            }
-        }, new BiConsumer() { // from class: com.android.server.am.CachedAppOptimizer$$ExternalSyntheticLambda3
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                CachedAppOptimizer cachedAppOptimizer2 = CachedAppOptimizer.this;
-                Integer num = (Integer) obj;
-                Integer num2 = (Integer) obj2;
-                String str = CachedAppOptimizer.KEY_USE_COMPACTION;
-                cachedAppOptimizer2.getClass();
-                if (num2.intValue() < cachedAppOptimizer2.mFreezerBinderAsyncThreshold) {
-                    Slog.w("ActivityManager", "pid " + num + " has " + num2 + " free async space, killing");
-                    cachedAppOptimizer2.mAm.mHandler.post(new CachedAppOptimizer$$ExternalSyntheticLambda5(cachedAppOptimizer2, num.intValue(), "Async binder space running out while frozen", 31));
-                }
-            }
-        }, new CachedAppOptimizer$$ExternalSyntheticLambda4());
+        new BinderfsStatsReader()
+                .handleFreeAsyncSpace(
+                        new Predicate() { // from class:
+                                          // com.android.server.am.CachedAppOptimizer$$ExternalSyntheticLambda2
+                            @Override // java.util.function.Predicate
+                            public final boolean test(Object obj) {
+                                return arraySet.contains((Integer) obj);
+                            }
+                        },
+                        new BiConsumer() { // from class:
+                                           // com.android.server.am.CachedAppOptimizer$$ExternalSyntheticLambda3
+                            @Override // java.util.function.BiConsumer
+                            public final void accept(Object obj, Object obj2) {
+                                CachedAppOptimizer cachedAppOptimizer2 = CachedAppOptimizer.this;
+                                Integer num = (Integer) obj;
+                                Integer num2 = (Integer) obj2;
+                                String str = CachedAppOptimizer.KEY_USE_COMPACTION;
+                                cachedAppOptimizer2.getClass();
+                                if (num2.intValue()
+                                        < cachedAppOptimizer2.mFreezerBinderAsyncThreshold) {
+                                    Slog.w(
+                                            "ActivityManager",
+                                            "pid "
+                                                    + num
+                                                    + " has "
+                                                    + num2
+                                                    + " free async space, killing");
+                                    cachedAppOptimizer2.mAm.mHandler.post(
+                                            new CachedAppOptimizer$$ExternalSyntheticLambda5(
+                                                    cachedAppOptimizer2,
+                                                    num.intValue(),
+                                                    "Async binder space running out while frozen",
+                                                    31));
+                                }
+                            }
+                        },
+                        new CachedAppOptimizer$$ExternalSyntheticLambda4());
     }
 
     /* renamed from: -$$Nest$mupdateFreezerBinderState, reason: not valid java name */
     public static void m182$$Nest$mupdateFreezerBinderState(CachedAppOptimizer cachedAppOptimizer) {
         cachedAppOptimizer.getClass();
-        cachedAppOptimizer.mFreezerBinderEnabled = DeviceConfig.getBoolean("activity_manager_native_boot", KEY_FREEZER_BINDER_ENABLED, true);
-        cachedAppOptimizer.mFreezerBinderDivisor = DeviceConfig.getLong("activity_manager_native_boot", KEY_FREEZER_BINDER_DIVISOR, DEFAULT_FREEZER_BINDER_DIVISOR);
-        cachedAppOptimizer.mFreezerBinderOffset = DeviceConfig.getInt("activity_manager_native_boot", KEY_FREEZER_BINDER_OFFSET, 500);
-        cachedAppOptimizer.mFreezerBinderThreshold = DeviceConfig.getLong("activity_manager_native_boot", KEY_FREEZER_BINDER_THRESHOLD, DEFAULT_FREEZER_BINDER_THRESHOLD);
-        cachedAppOptimizer.mFreezerBinderCallbackEnabled = DeviceConfig.getBoolean("activity_manager_native_boot", KEY_FREEZER_BINDER_CALLBACK_ENABLED, true);
-        cachedAppOptimizer.mFreezerBinderCallbackThrottle = DeviceConfig.getLong("activity_manager_native_boot", KEY_FREEZER_BINDER_CALLBACK_THROTTLE, 10000L);
-        cachedAppOptimizer.mFreezerBinderAsyncThreshold = DeviceConfig.getInt("activity_manager_native_boot", KEY_FREEZER_BINDER_ASYNC_THRESHOLD, 1024);
+        cachedAppOptimizer.mFreezerBinderEnabled =
+                DeviceConfig.getBoolean(
+                        "activity_manager_native_boot", KEY_FREEZER_BINDER_ENABLED, true);
+        cachedAppOptimizer.mFreezerBinderDivisor =
+                DeviceConfig.getLong(
+                        "activity_manager_native_boot",
+                        KEY_FREEZER_BINDER_DIVISOR,
+                        DEFAULT_FREEZER_BINDER_DIVISOR);
+        cachedAppOptimizer.mFreezerBinderOffset =
+                DeviceConfig.getInt("activity_manager_native_boot", KEY_FREEZER_BINDER_OFFSET, 500);
+        cachedAppOptimizer.mFreezerBinderThreshold =
+                DeviceConfig.getLong(
+                        "activity_manager_native_boot",
+                        KEY_FREEZER_BINDER_THRESHOLD,
+                        DEFAULT_FREEZER_BINDER_THRESHOLD);
+        cachedAppOptimizer.mFreezerBinderCallbackEnabled =
+                DeviceConfig.getBoolean(
+                        "activity_manager_native_boot", KEY_FREEZER_BINDER_CALLBACK_ENABLED, true);
+        cachedAppOptimizer.mFreezerBinderCallbackThrottle =
+                DeviceConfig.getLong(
+                        "activity_manager_native_boot",
+                        KEY_FREEZER_BINDER_CALLBACK_THROTTLE,
+                        10000L);
+        cachedAppOptimizer.mFreezerBinderAsyncThreshold =
+                DeviceConfig.getInt(
+                        "activity_manager_native_boot", KEY_FREEZER_BINDER_ASYNC_THRESHOLD, 1024);
         StringBuilder sb = new StringBuilder("Freezer binder state set to enabled=");
         sb.append(cachedAppOptimizer.mFreezerBinderEnabled);
         sb.append(", divisor=");
@@ -868,208 +1069,494 @@ public final class CachedAppOptimizer {
         sb.append(", callback throttle=");
         sb.append(cachedAppOptimizer.mFreezerBinderCallbackThrottle);
         sb.append(", async threshold=");
-        DeviceIdleController$$ExternalSyntheticOutline0.m(sb, cachedAppOptimizer.mFreezerBinderAsyncThreshold, "ActivityManager");
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                sb, cachedAppOptimizer.mFreezerBinderAsyncThreshold, "ActivityManager");
     }
 
     /* JADX WARN: Type inference failed for: r0v7, types: [com.android.server.am.CachedAppOptimizer$1] */
     /* JADX WARN: Type inference failed for: r0v8, types: [com.android.server.am.CachedAppOptimizer$1] */
-    public CachedAppOptimizer(ActivityManagerService activityManagerService, PropertyChangedCallbackForTest propertyChangedCallbackForTest, ProcessDependencies processDependencies) {
+    public CachedAppOptimizer(
+            ActivityManagerService activityManagerService,
+            PropertyChangedCallbackForTest propertyChangedCallbackForTest,
+            ProcessDependencies processDependencies) {
         final int i = 0;
         final int i2 = 1;
         this.isDebuggable = SemSystemProperties.getInt("ro.debuggable", 0) == 1;
         this.mPendingCompactionProcesses = new ArrayList();
         this.mFrozenProcesses = new SparseArray();
         this.mFreezerLock = new Object();
-        this.mOnFlagsChangedListener = new DeviceConfig.OnPropertiesChangedListener(this) { // from class: com.android.server.am.CachedAppOptimizer.1
-            public final /* synthetic */ CachedAppOptimizer this$0;
+        this.mOnFlagsChangedListener =
+                new DeviceConfig.OnPropertiesChangedListener(
+                        this) { // from class: com.android.server.am.CachedAppOptimizer.1
+                    public final /* synthetic */ CachedAppOptimizer this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            public final void onPropertiesChanged(DeviceConfig.Properties properties) {
-                switch (i) {
-                    case 0:
-                        synchronized (this.this$0.mPhenotypeFlagLock) {
-                            try {
-                                for (String str : properties.getKeyset()) {
-                                    if (CachedAppOptimizer.KEY_USE_COMPACTION.equals(str)) {
-                                        this.this$0.updateUseCompaction();
-                                    } else {
-                                        if (!CachedAppOptimizer.KEY_COMPACT_THROTTLE_1.equals(str) && !CachedAppOptimizer.KEY_COMPACT_THROTTLE_2.equals(str) && !CachedAppOptimizer.KEY_COMPACT_THROTTLE_3.equals(str) && !CachedAppOptimizer.KEY_COMPACT_THROTTLE_4.equals(str) && !CachedAppOptimizer.KEY_COMPACT_THROTTLE_5.equals(str) && !CachedAppOptimizer.KEY_COMPACT_THROTTLE_6.equals(str)) {
-                                            if (CachedAppOptimizer.KEY_COMPACT_STATSD_SAMPLE_RATE.equals(str)) {
-                                                CachedAppOptimizer cachedAppOptimizer = this.this$0;
-                                                cachedAppOptimizer.getClass();
-                                                cachedAppOptimizer.mCompactStatsdSampleRate = DeviceConfig.getFloat("activity_manager", CachedAppOptimizer.KEY_COMPACT_STATSD_SAMPLE_RATE, CachedAppOptimizer.DEFAULT_STATSD_SAMPLE_RATE);
-                                                cachedAppOptimizer.mCompactStatsdSampleRate = Math.min(1.0f, Math.max(FullScreenMagnificationGestureHandler.MAX_SCALE, cachedAppOptimizer.mCompactStatsdSampleRate));
-                                            } else if (CachedAppOptimizer.KEY_FREEZER_STATSD_SAMPLE_RATE.equals(str)) {
-                                                CachedAppOptimizer cachedAppOptimizer2 = this.this$0;
-                                                cachedAppOptimizer2.getClass();
-                                                cachedAppOptimizer2.mFreezerStatsdSampleRate = DeviceConfig.getFloat("activity_manager", CachedAppOptimizer.KEY_FREEZER_STATSD_SAMPLE_RATE, CachedAppOptimizer.DEFAULT_STATSD_SAMPLE_RATE);
-                                                cachedAppOptimizer2.mFreezerStatsdSampleRate = Math.min(1.0f, Math.max(FullScreenMagnificationGestureHandler.MAX_SCALE, cachedAppOptimizer2.mFreezerStatsdSampleRate));
-                                            } else if (CachedAppOptimizer.KEY_COMPACT_FULL_RSS_THROTTLE_KB.equals(str)) {
-                                                CachedAppOptimizer cachedAppOptimizer3 = this.this$0;
-                                                cachedAppOptimizer3.getClass();
-                                                cachedAppOptimizer3.mFullAnonRssThrottleKb = DeviceConfig.getLong("activity_manager", CachedAppOptimizer.KEY_COMPACT_FULL_RSS_THROTTLE_KB, CachedAppOptimizer.DEFAULT_COMPACT_FULL_RSS_THROTTLE_KB);
-                                                if (cachedAppOptimizer3.mFullAnonRssThrottleKb < 0) {
-                                                    cachedAppOptimizer3.mFullAnonRssThrottleKb = CachedAppOptimizer.DEFAULT_COMPACT_FULL_RSS_THROTTLE_KB;
+                    public final void onPropertiesChanged(DeviceConfig.Properties properties) {
+                        switch (i) {
+                            case 0:
+                                synchronized (this.this$0.mPhenotypeFlagLock) {
+                                    try {
+                                        for (String str : properties.getKeyset()) {
+                                            if (CachedAppOptimizer.KEY_USE_COMPACTION.equals(str)) {
+                                                this.this$0.updateUseCompaction();
+                                            } else {
+                                                if (!CachedAppOptimizer.KEY_COMPACT_THROTTLE_1
+                                                                .equals(str)
+                                                        && !CachedAppOptimizer
+                                                                .KEY_COMPACT_THROTTLE_2
+                                                                .equals(str)
+                                                        && !CachedAppOptimizer
+                                                                .KEY_COMPACT_THROTTLE_3
+                                                                .equals(str)
+                                                        && !CachedAppOptimizer
+                                                                .KEY_COMPACT_THROTTLE_4
+                                                                .equals(str)
+                                                        && !CachedAppOptimizer
+                                                                .KEY_COMPACT_THROTTLE_5
+                                                                .equals(str)
+                                                        && !CachedAppOptimizer
+                                                                .KEY_COMPACT_THROTTLE_6
+                                                                .equals(str)) {
+                                                    if (CachedAppOptimizer
+                                                            .KEY_COMPACT_STATSD_SAMPLE_RATE
+                                                            .equals(str)) {
+                                                        CachedAppOptimizer cachedAppOptimizer =
+                                                                this.this$0;
+                                                        cachedAppOptimizer.getClass();
+                                                        cachedAppOptimizer
+                                                                        .mCompactStatsdSampleRate =
+                                                                DeviceConfig.getFloat(
+                                                                        "activity_manager",
+                                                                        CachedAppOptimizer
+                                                                                .KEY_COMPACT_STATSD_SAMPLE_RATE,
+                                                                        CachedAppOptimizer
+                                                                                .DEFAULT_STATSD_SAMPLE_RATE);
+                                                        cachedAppOptimizer
+                                                                        .mCompactStatsdSampleRate =
+                                                                Math.min(
+                                                                        1.0f,
+                                                                        Math.max(
+                                                                                FullScreenMagnificationGestureHandler
+                                                                                        .MAX_SCALE,
+                                                                                cachedAppOptimizer
+                                                                                        .mCompactStatsdSampleRate));
+                                                    } else if (CachedAppOptimizer
+                                                            .KEY_FREEZER_STATSD_SAMPLE_RATE
+                                                            .equals(str)) {
+                                                        CachedAppOptimizer cachedAppOptimizer2 =
+                                                                this.this$0;
+                                                        cachedAppOptimizer2.getClass();
+                                                        cachedAppOptimizer2
+                                                                        .mFreezerStatsdSampleRate =
+                                                                DeviceConfig.getFloat(
+                                                                        "activity_manager",
+                                                                        CachedAppOptimizer
+                                                                                .KEY_FREEZER_STATSD_SAMPLE_RATE,
+                                                                        CachedAppOptimizer
+                                                                                .DEFAULT_STATSD_SAMPLE_RATE);
+                                                        cachedAppOptimizer2
+                                                                        .mFreezerStatsdSampleRate =
+                                                                Math.min(
+                                                                        1.0f,
+                                                                        Math.max(
+                                                                                FullScreenMagnificationGestureHandler
+                                                                                        .MAX_SCALE,
+                                                                                cachedAppOptimizer2
+                                                                                        .mFreezerStatsdSampleRate));
+                                                    } else if (CachedAppOptimizer
+                                                            .KEY_COMPACT_FULL_RSS_THROTTLE_KB
+                                                            .equals(str)) {
+                                                        CachedAppOptimizer cachedAppOptimizer3 =
+                                                                this.this$0;
+                                                        cachedAppOptimizer3.getClass();
+                                                        cachedAppOptimizer3.mFullAnonRssThrottleKb =
+                                                                DeviceConfig.getLong(
+                                                                        "activity_manager",
+                                                                        CachedAppOptimizer
+                                                                                .KEY_COMPACT_FULL_RSS_THROTTLE_KB,
+                                                                        CachedAppOptimizer
+                                                                                .DEFAULT_COMPACT_FULL_RSS_THROTTLE_KB);
+                                                        if (cachedAppOptimizer3
+                                                                        .mFullAnonRssThrottleKb
+                                                                < 0) {
+                                                            cachedAppOptimizer3
+                                                                            .mFullAnonRssThrottleKb =
+                                                                    CachedAppOptimizer
+                                                                            .DEFAULT_COMPACT_FULL_RSS_THROTTLE_KB;
+                                                        }
+                                                    } else if (CachedAppOptimizer
+                                                            .KEY_COMPACT_FULL_DELTA_RSS_THROTTLE_KB
+                                                            .equals(str)) {
+                                                        CachedAppOptimizer cachedAppOptimizer4 =
+                                                                this.this$0;
+                                                        cachedAppOptimizer4.getClass();
+                                                        cachedAppOptimizer4
+                                                                        .mFullDeltaRssThrottleKb =
+                                                                DeviceConfig.getLong(
+                                                                        "activity_manager",
+                                                                        CachedAppOptimizer
+                                                                                .KEY_COMPACT_FULL_DELTA_RSS_THROTTLE_KB,
+                                                                        CachedAppOptimizer
+                                                                                .DEFAULT_COMPACT_FULL_DELTA_RSS_THROTTLE_KB);
+                                                        if (cachedAppOptimizer4
+                                                                        .mFullDeltaRssThrottleKb
+                                                                < 0) {
+                                                            cachedAppOptimizer4
+                                                                            .mFullDeltaRssThrottleKb =
+                                                                    CachedAppOptimizer
+                                                                            .DEFAULT_COMPACT_FULL_DELTA_RSS_THROTTLE_KB;
+                                                        }
+                                                    } else if (CachedAppOptimizer
+                                                            .KEY_COMPACT_PROC_STATE_THROTTLE
+                                                            .equals(str)) {
+                                                        this.this$0.updateProcStateThrottle();
+                                                    } else if (CachedAppOptimizer
+                                                            .KEY_COMPACT_THROTTLE_MIN_OOM_ADJ
+                                                            .equals(str)) {
+                                                        CachedAppOptimizer cachedAppOptimizer5 =
+                                                                this.this$0;
+                                                        cachedAppOptimizer5.getClass();
+                                                        cachedAppOptimizer5
+                                                                        .mCompactThrottleMinOomAdj =
+                                                                DeviceConfig.getLong(
+                                                                        "activity_manager",
+                                                                        CachedAppOptimizer
+                                                                                .KEY_COMPACT_THROTTLE_MIN_OOM_ADJ,
+                                                                        CachedAppOptimizer
+                                                                                .DEFAULT_COMPACT_THROTTLE_MIN_OOM_ADJ);
+                                                        if (cachedAppOptimizer5
+                                                                        .mCompactThrottleMinOomAdj
+                                                                < CachedAppOptimizer
+                                                                        .DEFAULT_COMPACT_THROTTLE_MIN_OOM_ADJ) {
+                                                            cachedAppOptimizer5
+                                                                            .mCompactThrottleMinOomAdj =
+                                                                    CachedAppOptimizer
+                                                                            .DEFAULT_COMPACT_THROTTLE_MIN_OOM_ADJ;
+                                                        }
+                                                    } else if (CachedAppOptimizer
+                                                            .KEY_COMPACT_THROTTLE_MAX_OOM_ADJ
+                                                            .equals(str)) {
+                                                        CachedAppOptimizer cachedAppOptimizer6 =
+                                                                this.this$0;
+                                                        cachedAppOptimizer6.getClass();
+                                                        cachedAppOptimizer6
+                                                                        .mCompactThrottleMaxOomAdj =
+                                                                DeviceConfig.getLong(
+                                                                        "activity_manager",
+                                                                        CachedAppOptimizer
+                                                                                .KEY_COMPACT_THROTTLE_MAX_OOM_ADJ,
+                                                                        CachedAppOptimizer
+                                                                                .DEFAULT_COMPACT_THROTTLE_MAX_OOM_ADJ);
+                                                        if (cachedAppOptimizer6
+                                                                        .mCompactThrottleMaxOomAdj
+                                                                > CachedAppOptimizer
+                                                                        .DEFAULT_COMPACT_THROTTLE_MAX_OOM_ADJ) {
+                                                            cachedAppOptimizer6
+                                                                            .mCompactThrottleMaxOomAdj =
+                                                                    CachedAppOptimizer
+                                                                            .DEFAULT_COMPACT_THROTTLE_MAX_OOM_ADJ;
+                                                        }
+                                                    }
                                                 }
-                                            } else if (CachedAppOptimizer.KEY_COMPACT_FULL_DELTA_RSS_THROTTLE_KB.equals(str)) {
-                                                CachedAppOptimizer cachedAppOptimizer4 = this.this$0;
-                                                cachedAppOptimizer4.getClass();
-                                                cachedAppOptimizer4.mFullDeltaRssThrottleKb = DeviceConfig.getLong("activity_manager", CachedAppOptimizer.KEY_COMPACT_FULL_DELTA_RSS_THROTTLE_KB, CachedAppOptimizer.DEFAULT_COMPACT_FULL_DELTA_RSS_THROTTLE_KB);
-                                                if (cachedAppOptimizer4.mFullDeltaRssThrottleKb < 0) {
-                                                    cachedAppOptimizer4.mFullDeltaRssThrottleKb = CachedAppOptimizer.DEFAULT_COMPACT_FULL_DELTA_RSS_THROTTLE_KB;
-                                                }
-                                            } else if (CachedAppOptimizer.KEY_COMPACT_PROC_STATE_THROTTLE.equals(str)) {
-                                                this.this$0.updateProcStateThrottle();
-                                            } else if (CachedAppOptimizer.KEY_COMPACT_THROTTLE_MIN_OOM_ADJ.equals(str)) {
-                                                CachedAppOptimizer cachedAppOptimizer5 = this.this$0;
-                                                cachedAppOptimizer5.getClass();
-                                                cachedAppOptimizer5.mCompactThrottleMinOomAdj = DeviceConfig.getLong("activity_manager", CachedAppOptimizer.KEY_COMPACT_THROTTLE_MIN_OOM_ADJ, CachedAppOptimizer.DEFAULT_COMPACT_THROTTLE_MIN_OOM_ADJ);
-                                                if (cachedAppOptimizer5.mCompactThrottleMinOomAdj < CachedAppOptimizer.DEFAULT_COMPACT_THROTTLE_MIN_OOM_ADJ) {
-                                                    cachedAppOptimizer5.mCompactThrottleMinOomAdj = CachedAppOptimizer.DEFAULT_COMPACT_THROTTLE_MIN_OOM_ADJ;
-                                                }
-                                            } else if (CachedAppOptimizer.KEY_COMPACT_THROTTLE_MAX_OOM_ADJ.equals(str)) {
-                                                CachedAppOptimizer cachedAppOptimizer6 = this.this$0;
-                                                cachedAppOptimizer6.getClass();
-                                                cachedAppOptimizer6.mCompactThrottleMaxOomAdj = DeviceConfig.getLong("activity_manager", CachedAppOptimizer.KEY_COMPACT_THROTTLE_MAX_OOM_ADJ, CachedAppOptimizer.DEFAULT_COMPACT_THROTTLE_MAX_OOM_ADJ);
-                                                if (cachedAppOptimizer6.mCompactThrottleMaxOomAdj > CachedAppOptimizer.DEFAULT_COMPACT_THROTTLE_MAX_OOM_ADJ) {
-                                                    cachedAppOptimizer6.mCompactThrottleMaxOomAdj = CachedAppOptimizer.DEFAULT_COMPACT_THROTTLE_MAX_OOM_ADJ;
-                                                }
+                                                this.this$0.updateCompactionThrottles();
                                             }
                                         }
-                                        this.this$0.updateCompactionThrottles();
+                                    } finally {
                                     }
                                 }
-                            } finally {
-                            }
-                        }
-                        PropertyChangedCallbackForTest propertyChangedCallbackForTest2 = this.this$0.mTestCallback;
-                        if (propertyChangedCallbackForTest2 != null) {
-                            propertyChangedCallbackForTest2.onPropertyChanged();
-                            return;
-                        }
-                        return;
-                    default:
-                        synchronized (this.this$0.mPhenotypeFlagLock) {
-                            try {
-                                for (String str2 : properties.getKeyset()) {
-                                    if (CachedAppOptimizer.KEY_FREEZER_DEBOUNCE_TIMEOUT.equals(str2)) {
-                                        this.this$0.updateFreezerDebounceTimeout();
-                                    } else if (CachedAppOptimizer.KEY_FREEZER_EXEMPT_INST_PKG.equals(str2)) {
-                                        this.this$0.updateFreezerExemptInstPkg();
-                                    } else if (CachedAppOptimizer.KEY_FREEZER_BINDER_ENABLED.equals(str2) || CachedAppOptimizer.KEY_FREEZER_BINDER_DIVISOR.equals(str2) || CachedAppOptimizer.KEY_FREEZER_BINDER_THRESHOLD.equals(str2) || CachedAppOptimizer.KEY_FREEZER_BINDER_OFFSET.equals(str2) || CachedAppOptimizer.KEY_FREEZER_BINDER_CALLBACK_ENABLED.equals(str2) || CachedAppOptimizer.KEY_FREEZER_BINDER_CALLBACK_THROTTLE.equals(str2) || CachedAppOptimizer.KEY_FREEZER_BINDER_ASYNC_THRESHOLD.equals(str2)) {
-                                        CachedAppOptimizer.m182$$Nest$mupdateFreezerBinderState(this.this$0);
-                                    }
+                                PropertyChangedCallbackForTest propertyChangedCallbackForTest2 =
+                                        this.this$0.mTestCallback;
+                                if (propertyChangedCallbackForTest2 != null) {
+                                    propertyChangedCallbackForTest2.onPropertyChanged();
+                                    return;
                                 }
-                            } finally {
-                            }
-                        }
-                        PropertyChangedCallbackForTest propertyChangedCallbackForTest3 = this.this$0.mTestCallback;
-                        if (propertyChangedCallbackForTest3 != null) {
-                            propertyChangedCallbackForTest3.onPropertyChanged();
-                            return;
-                        }
-                        return;
-                }
-            }
-        };
-        this.mOnNativeBootFlagsChangedListener = new DeviceConfig.OnPropertiesChangedListener(this) { // from class: com.android.server.am.CachedAppOptimizer.1
-            public final /* synthetic */ CachedAppOptimizer this$0;
-
-            {
-                this.this$0 = this;
-            }
-
-            public final void onPropertiesChanged(DeviceConfig.Properties properties) {
-                switch (i2) {
-                    case 0:
-                        synchronized (this.this$0.mPhenotypeFlagLock) {
-                            try {
-                                for (String str : properties.getKeyset()) {
-                                    if (CachedAppOptimizer.KEY_USE_COMPACTION.equals(str)) {
-                                        this.this$0.updateUseCompaction();
-                                    } else {
-                                        if (!CachedAppOptimizer.KEY_COMPACT_THROTTLE_1.equals(str) && !CachedAppOptimizer.KEY_COMPACT_THROTTLE_2.equals(str) && !CachedAppOptimizer.KEY_COMPACT_THROTTLE_3.equals(str) && !CachedAppOptimizer.KEY_COMPACT_THROTTLE_4.equals(str) && !CachedAppOptimizer.KEY_COMPACT_THROTTLE_5.equals(str) && !CachedAppOptimizer.KEY_COMPACT_THROTTLE_6.equals(str)) {
-                                            if (CachedAppOptimizer.KEY_COMPACT_STATSD_SAMPLE_RATE.equals(str)) {
-                                                CachedAppOptimizer cachedAppOptimizer = this.this$0;
-                                                cachedAppOptimizer.getClass();
-                                                cachedAppOptimizer.mCompactStatsdSampleRate = DeviceConfig.getFloat("activity_manager", CachedAppOptimizer.KEY_COMPACT_STATSD_SAMPLE_RATE, CachedAppOptimizer.DEFAULT_STATSD_SAMPLE_RATE);
-                                                cachedAppOptimizer.mCompactStatsdSampleRate = Math.min(1.0f, Math.max(FullScreenMagnificationGestureHandler.MAX_SCALE, cachedAppOptimizer.mCompactStatsdSampleRate));
-                                            } else if (CachedAppOptimizer.KEY_FREEZER_STATSD_SAMPLE_RATE.equals(str)) {
-                                                CachedAppOptimizer cachedAppOptimizer2 = this.this$0;
-                                                cachedAppOptimizer2.getClass();
-                                                cachedAppOptimizer2.mFreezerStatsdSampleRate = DeviceConfig.getFloat("activity_manager", CachedAppOptimizer.KEY_FREEZER_STATSD_SAMPLE_RATE, CachedAppOptimizer.DEFAULT_STATSD_SAMPLE_RATE);
-                                                cachedAppOptimizer2.mFreezerStatsdSampleRate = Math.min(1.0f, Math.max(FullScreenMagnificationGestureHandler.MAX_SCALE, cachedAppOptimizer2.mFreezerStatsdSampleRate));
-                                            } else if (CachedAppOptimizer.KEY_COMPACT_FULL_RSS_THROTTLE_KB.equals(str)) {
-                                                CachedAppOptimizer cachedAppOptimizer3 = this.this$0;
-                                                cachedAppOptimizer3.getClass();
-                                                cachedAppOptimizer3.mFullAnonRssThrottleKb = DeviceConfig.getLong("activity_manager", CachedAppOptimizer.KEY_COMPACT_FULL_RSS_THROTTLE_KB, CachedAppOptimizer.DEFAULT_COMPACT_FULL_RSS_THROTTLE_KB);
-                                                if (cachedAppOptimizer3.mFullAnonRssThrottleKb < 0) {
-                                                    cachedAppOptimizer3.mFullAnonRssThrottleKb = CachedAppOptimizer.DEFAULT_COMPACT_FULL_RSS_THROTTLE_KB;
-                                                }
-                                            } else if (CachedAppOptimizer.KEY_COMPACT_FULL_DELTA_RSS_THROTTLE_KB.equals(str)) {
-                                                CachedAppOptimizer cachedAppOptimizer4 = this.this$0;
-                                                cachedAppOptimizer4.getClass();
-                                                cachedAppOptimizer4.mFullDeltaRssThrottleKb = DeviceConfig.getLong("activity_manager", CachedAppOptimizer.KEY_COMPACT_FULL_DELTA_RSS_THROTTLE_KB, CachedAppOptimizer.DEFAULT_COMPACT_FULL_DELTA_RSS_THROTTLE_KB);
-                                                if (cachedAppOptimizer4.mFullDeltaRssThrottleKb < 0) {
-                                                    cachedAppOptimizer4.mFullDeltaRssThrottleKb = CachedAppOptimizer.DEFAULT_COMPACT_FULL_DELTA_RSS_THROTTLE_KB;
-                                                }
-                                            } else if (CachedAppOptimizer.KEY_COMPACT_PROC_STATE_THROTTLE.equals(str)) {
-                                                this.this$0.updateProcStateThrottle();
-                                            } else if (CachedAppOptimizer.KEY_COMPACT_THROTTLE_MIN_OOM_ADJ.equals(str)) {
-                                                CachedAppOptimizer cachedAppOptimizer5 = this.this$0;
-                                                cachedAppOptimizer5.getClass();
-                                                cachedAppOptimizer5.mCompactThrottleMinOomAdj = DeviceConfig.getLong("activity_manager", CachedAppOptimizer.KEY_COMPACT_THROTTLE_MIN_OOM_ADJ, CachedAppOptimizer.DEFAULT_COMPACT_THROTTLE_MIN_OOM_ADJ);
-                                                if (cachedAppOptimizer5.mCompactThrottleMinOomAdj < CachedAppOptimizer.DEFAULT_COMPACT_THROTTLE_MIN_OOM_ADJ) {
-                                                    cachedAppOptimizer5.mCompactThrottleMinOomAdj = CachedAppOptimizer.DEFAULT_COMPACT_THROTTLE_MIN_OOM_ADJ;
-                                                }
-                                            } else if (CachedAppOptimizer.KEY_COMPACT_THROTTLE_MAX_OOM_ADJ.equals(str)) {
-                                                CachedAppOptimizer cachedAppOptimizer6 = this.this$0;
-                                                cachedAppOptimizer6.getClass();
-                                                cachedAppOptimizer6.mCompactThrottleMaxOomAdj = DeviceConfig.getLong("activity_manager", CachedAppOptimizer.KEY_COMPACT_THROTTLE_MAX_OOM_ADJ, CachedAppOptimizer.DEFAULT_COMPACT_THROTTLE_MAX_OOM_ADJ);
-                                                if (cachedAppOptimizer6.mCompactThrottleMaxOomAdj > CachedAppOptimizer.DEFAULT_COMPACT_THROTTLE_MAX_OOM_ADJ) {
-                                                    cachedAppOptimizer6.mCompactThrottleMaxOomAdj = CachedAppOptimizer.DEFAULT_COMPACT_THROTTLE_MAX_OOM_ADJ;
-                                                }
+                                return;
+                            default:
+                                synchronized (this.this$0.mPhenotypeFlagLock) {
+                                    try {
+                                        for (String str2 : properties.getKeyset()) {
+                                            if (CachedAppOptimizer.KEY_FREEZER_DEBOUNCE_TIMEOUT
+                                                    .equals(str2)) {
+                                                this.this$0.updateFreezerDebounceTimeout();
+                                            } else if (CachedAppOptimizer
+                                                    .KEY_FREEZER_EXEMPT_INST_PKG
+                                                    .equals(str2)) {
+                                                this.this$0.updateFreezerExemptInstPkg();
+                                            } else if (CachedAppOptimizer.KEY_FREEZER_BINDER_ENABLED
+                                                            .equals(str2)
+                                                    || CachedAppOptimizer.KEY_FREEZER_BINDER_DIVISOR
+                                                            .equals(str2)
+                                                    || CachedAppOptimizer
+                                                            .KEY_FREEZER_BINDER_THRESHOLD
+                                                            .equals(str2)
+                                                    || CachedAppOptimizer.KEY_FREEZER_BINDER_OFFSET
+                                                            .equals(str2)
+                                                    || CachedAppOptimizer
+                                                            .KEY_FREEZER_BINDER_CALLBACK_ENABLED
+                                                            .equals(str2)
+                                                    || CachedAppOptimizer
+                                                            .KEY_FREEZER_BINDER_CALLBACK_THROTTLE
+                                                            .equals(str2)
+                                                    || CachedAppOptimizer
+                                                            .KEY_FREEZER_BINDER_ASYNC_THRESHOLD
+                                                            .equals(str2)) {
+                                                CachedAppOptimizer
+                                                        .m182$$Nest$mupdateFreezerBinderState(
+                                                                this.this$0);
                                             }
                                         }
-                                        this.this$0.updateCompactionThrottles();
+                                    } finally {
                                     }
                                 }
-                            } finally {
-                            }
+                                PropertyChangedCallbackForTest propertyChangedCallbackForTest3 =
+                                        this.this$0.mTestCallback;
+                                if (propertyChangedCallbackForTest3 != null) {
+                                    propertyChangedCallbackForTest3.onPropertyChanged();
+                                    return;
+                                }
+                                return;
                         }
-                        PropertyChangedCallbackForTest propertyChangedCallbackForTest2 = this.this$0.mTestCallback;
-                        if (propertyChangedCallbackForTest2 != null) {
-                            propertyChangedCallbackForTest2.onPropertyChanged();
-                            return;
-                        }
-                        return;
-                    default:
-                        synchronized (this.this$0.mPhenotypeFlagLock) {
-                            try {
-                                for (String str2 : properties.getKeyset()) {
-                                    if (CachedAppOptimizer.KEY_FREEZER_DEBOUNCE_TIMEOUT.equals(str2)) {
-                                        this.this$0.updateFreezerDebounceTimeout();
-                                    } else if (CachedAppOptimizer.KEY_FREEZER_EXEMPT_INST_PKG.equals(str2)) {
-                                        this.this$0.updateFreezerExemptInstPkg();
-                                    } else if (CachedAppOptimizer.KEY_FREEZER_BINDER_ENABLED.equals(str2) || CachedAppOptimizer.KEY_FREEZER_BINDER_DIVISOR.equals(str2) || CachedAppOptimizer.KEY_FREEZER_BINDER_THRESHOLD.equals(str2) || CachedAppOptimizer.KEY_FREEZER_BINDER_OFFSET.equals(str2) || CachedAppOptimizer.KEY_FREEZER_BINDER_CALLBACK_ENABLED.equals(str2) || CachedAppOptimizer.KEY_FREEZER_BINDER_CALLBACK_THROTTLE.equals(str2) || CachedAppOptimizer.KEY_FREEZER_BINDER_ASYNC_THRESHOLD.equals(str2)) {
-                                        CachedAppOptimizer.m182$$Nest$mupdateFreezerBinderState(this.this$0);
+                    }
+                };
+        this.mOnNativeBootFlagsChangedListener =
+                new DeviceConfig.OnPropertiesChangedListener(
+                        this) { // from class: com.android.server.am.CachedAppOptimizer.1
+                    public final /* synthetic */ CachedAppOptimizer this$0;
+
+                    {
+                        this.this$0 = this;
+                    }
+
+                    public final void onPropertiesChanged(DeviceConfig.Properties properties) {
+                        switch (i2) {
+                            case 0:
+                                synchronized (this.this$0.mPhenotypeFlagLock) {
+                                    try {
+                                        for (String str : properties.getKeyset()) {
+                                            if (CachedAppOptimizer.KEY_USE_COMPACTION.equals(str)) {
+                                                this.this$0.updateUseCompaction();
+                                            } else {
+                                                if (!CachedAppOptimizer.KEY_COMPACT_THROTTLE_1
+                                                                .equals(str)
+                                                        && !CachedAppOptimizer
+                                                                .KEY_COMPACT_THROTTLE_2
+                                                                .equals(str)
+                                                        && !CachedAppOptimizer
+                                                                .KEY_COMPACT_THROTTLE_3
+                                                                .equals(str)
+                                                        && !CachedAppOptimizer
+                                                                .KEY_COMPACT_THROTTLE_4
+                                                                .equals(str)
+                                                        && !CachedAppOptimizer
+                                                                .KEY_COMPACT_THROTTLE_5
+                                                                .equals(str)
+                                                        && !CachedAppOptimizer
+                                                                .KEY_COMPACT_THROTTLE_6
+                                                                .equals(str)) {
+                                                    if (CachedAppOptimizer
+                                                            .KEY_COMPACT_STATSD_SAMPLE_RATE
+                                                            .equals(str)) {
+                                                        CachedAppOptimizer cachedAppOptimizer =
+                                                                this.this$0;
+                                                        cachedAppOptimizer.getClass();
+                                                        cachedAppOptimizer
+                                                                        .mCompactStatsdSampleRate =
+                                                                DeviceConfig.getFloat(
+                                                                        "activity_manager",
+                                                                        CachedAppOptimizer
+                                                                                .KEY_COMPACT_STATSD_SAMPLE_RATE,
+                                                                        CachedAppOptimizer
+                                                                                .DEFAULT_STATSD_SAMPLE_RATE);
+                                                        cachedAppOptimizer
+                                                                        .mCompactStatsdSampleRate =
+                                                                Math.min(
+                                                                        1.0f,
+                                                                        Math.max(
+                                                                                FullScreenMagnificationGestureHandler
+                                                                                        .MAX_SCALE,
+                                                                                cachedAppOptimizer
+                                                                                        .mCompactStatsdSampleRate));
+                                                    } else if (CachedAppOptimizer
+                                                            .KEY_FREEZER_STATSD_SAMPLE_RATE
+                                                            .equals(str)) {
+                                                        CachedAppOptimizer cachedAppOptimizer2 =
+                                                                this.this$0;
+                                                        cachedAppOptimizer2.getClass();
+                                                        cachedAppOptimizer2
+                                                                        .mFreezerStatsdSampleRate =
+                                                                DeviceConfig.getFloat(
+                                                                        "activity_manager",
+                                                                        CachedAppOptimizer
+                                                                                .KEY_FREEZER_STATSD_SAMPLE_RATE,
+                                                                        CachedAppOptimizer
+                                                                                .DEFAULT_STATSD_SAMPLE_RATE);
+                                                        cachedAppOptimizer2
+                                                                        .mFreezerStatsdSampleRate =
+                                                                Math.min(
+                                                                        1.0f,
+                                                                        Math.max(
+                                                                                FullScreenMagnificationGestureHandler
+                                                                                        .MAX_SCALE,
+                                                                                cachedAppOptimizer2
+                                                                                        .mFreezerStatsdSampleRate));
+                                                    } else if (CachedAppOptimizer
+                                                            .KEY_COMPACT_FULL_RSS_THROTTLE_KB
+                                                            .equals(str)) {
+                                                        CachedAppOptimizer cachedAppOptimizer3 =
+                                                                this.this$0;
+                                                        cachedAppOptimizer3.getClass();
+                                                        cachedAppOptimizer3.mFullAnonRssThrottleKb =
+                                                                DeviceConfig.getLong(
+                                                                        "activity_manager",
+                                                                        CachedAppOptimizer
+                                                                                .KEY_COMPACT_FULL_RSS_THROTTLE_KB,
+                                                                        CachedAppOptimizer
+                                                                                .DEFAULT_COMPACT_FULL_RSS_THROTTLE_KB);
+                                                        if (cachedAppOptimizer3
+                                                                        .mFullAnonRssThrottleKb
+                                                                < 0) {
+                                                            cachedAppOptimizer3
+                                                                            .mFullAnonRssThrottleKb =
+                                                                    CachedAppOptimizer
+                                                                            .DEFAULT_COMPACT_FULL_RSS_THROTTLE_KB;
+                                                        }
+                                                    } else if (CachedAppOptimizer
+                                                            .KEY_COMPACT_FULL_DELTA_RSS_THROTTLE_KB
+                                                            .equals(str)) {
+                                                        CachedAppOptimizer cachedAppOptimizer4 =
+                                                                this.this$0;
+                                                        cachedAppOptimizer4.getClass();
+                                                        cachedAppOptimizer4
+                                                                        .mFullDeltaRssThrottleKb =
+                                                                DeviceConfig.getLong(
+                                                                        "activity_manager",
+                                                                        CachedAppOptimizer
+                                                                                .KEY_COMPACT_FULL_DELTA_RSS_THROTTLE_KB,
+                                                                        CachedAppOptimizer
+                                                                                .DEFAULT_COMPACT_FULL_DELTA_RSS_THROTTLE_KB);
+                                                        if (cachedAppOptimizer4
+                                                                        .mFullDeltaRssThrottleKb
+                                                                < 0) {
+                                                            cachedAppOptimizer4
+                                                                            .mFullDeltaRssThrottleKb =
+                                                                    CachedAppOptimizer
+                                                                            .DEFAULT_COMPACT_FULL_DELTA_RSS_THROTTLE_KB;
+                                                        }
+                                                    } else if (CachedAppOptimizer
+                                                            .KEY_COMPACT_PROC_STATE_THROTTLE
+                                                            .equals(str)) {
+                                                        this.this$0.updateProcStateThrottle();
+                                                    } else if (CachedAppOptimizer
+                                                            .KEY_COMPACT_THROTTLE_MIN_OOM_ADJ
+                                                            .equals(str)) {
+                                                        CachedAppOptimizer cachedAppOptimizer5 =
+                                                                this.this$0;
+                                                        cachedAppOptimizer5.getClass();
+                                                        cachedAppOptimizer5
+                                                                        .mCompactThrottleMinOomAdj =
+                                                                DeviceConfig.getLong(
+                                                                        "activity_manager",
+                                                                        CachedAppOptimizer
+                                                                                .KEY_COMPACT_THROTTLE_MIN_OOM_ADJ,
+                                                                        CachedAppOptimizer
+                                                                                .DEFAULT_COMPACT_THROTTLE_MIN_OOM_ADJ);
+                                                        if (cachedAppOptimizer5
+                                                                        .mCompactThrottleMinOomAdj
+                                                                < CachedAppOptimizer
+                                                                        .DEFAULT_COMPACT_THROTTLE_MIN_OOM_ADJ) {
+                                                            cachedAppOptimizer5
+                                                                            .mCompactThrottleMinOomAdj =
+                                                                    CachedAppOptimizer
+                                                                            .DEFAULT_COMPACT_THROTTLE_MIN_OOM_ADJ;
+                                                        }
+                                                    } else if (CachedAppOptimizer
+                                                            .KEY_COMPACT_THROTTLE_MAX_OOM_ADJ
+                                                            .equals(str)) {
+                                                        CachedAppOptimizer cachedAppOptimizer6 =
+                                                                this.this$0;
+                                                        cachedAppOptimizer6.getClass();
+                                                        cachedAppOptimizer6
+                                                                        .mCompactThrottleMaxOomAdj =
+                                                                DeviceConfig.getLong(
+                                                                        "activity_manager",
+                                                                        CachedAppOptimizer
+                                                                                .KEY_COMPACT_THROTTLE_MAX_OOM_ADJ,
+                                                                        CachedAppOptimizer
+                                                                                .DEFAULT_COMPACT_THROTTLE_MAX_OOM_ADJ);
+                                                        if (cachedAppOptimizer6
+                                                                        .mCompactThrottleMaxOomAdj
+                                                                > CachedAppOptimizer
+                                                                        .DEFAULT_COMPACT_THROTTLE_MAX_OOM_ADJ) {
+                                                            cachedAppOptimizer6
+                                                                            .mCompactThrottleMaxOomAdj =
+                                                                    CachedAppOptimizer
+                                                                            .DEFAULT_COMPACT_THROTTLE_MAX_OOM_ADJ;
+                                                        }
+                                                    }
+                                                }
+                                                this.this$0.updateCompactionThrottles();
+                                            }
+                                        }
+                                    } finally {
                                     }
                                 }
-                            } finally {
-                            }
+                                PropertyChangedCallbackForTest propertyChangedCallbackForTest2 =
+                                        this.this$0.mTestCallback;
+                                if (propertyChangedCallbackForTest2 != null) {
+                                    propertyChangedCallbackForTest2.onPropertyChanged();
+                                    return;
+                                }
+                                return;
+                            default:
+                                synchronized (this.this$0.mPhenotypeFlagLock) {
+                                    try {
+                                        for (String str2 : properties.getKeyset()) {
+                                            if (CachedAppOptimizer.KEY_FREEZER_DEBOUNCE_TIMEOUT
+                                                    .equals(str2)) {
+                                                this.this$0.updateFreezerDebounceTimeout();
+                                            } else if (CachedAppOptimizer
+                                                    .KEY_FREEZER_EXEMPT_INST_PKG
+                                                    .equals(str2)) {
+                                                this.this$0.updateFreezerExemptInstPkg();
+                                            } else if (CachedAppOptimizer.KEY_FREEZER_BINDER_ENABLED
+                                                            .equals(str2)
+                                                    || CachedAppOptimizer.KEY_FREEZER_BINDER_DIVISOR
+                                                            .equals(str2)
+                                                    || CachedAppOptimizer
+                                                            .KEY_FREEZER_BINDER_THRESHOLD
+                                                            .equals(str2)
+                                                    || CachedAppOptimizer.KEY_FREEZER_BINDER_OFFSET
+                                                            .equals(str2)
+                                                    || CachedAppOptimizer
+                                                            .KEY_FREEZER_BINDER_CALLBACK_ENABLED
+                                                            .equals(str2)
+                                                    || CachedAppOptimizer
+                                                            .KEY_FREEZER_BINDER_CALLBACK_THROTTLE
+                                                            .equals(str2)
+                                                    || CachedAppOptimizer
+                                                            .KEY_FREEZER_BINDER_ASYNC_THRESHOLD
+                                                            .equals(str2)) {
+                                                CachedAppOptimizer
+                                                        .m182$$Nest$mupdateFreezerBinderState(
+                                                                this.this$0);
+                                            }
+                                        }
+                                    } finally {
+                                    }
+                                }
+                                PropertyChangedCallbackForTest propertyChangedCallbackForTest3 =
+                                        this.this$0.mTestCallback;
+                                if (propertyChangedCallbackForTest3 != null) {
+                                    propertyChangedCallbackForTest3.onPropertyChanged();
+                                    return;
+                                }
+                                return;
                         }
-                        PropertyChangedCallbackForTest propertyChangedCallbackForTest3 = this.this$0.mTestCallback;
-                        if (propertyChangedCallbackForTest3 != null) {
-                            propertyChangedCallbackForTest3.onPropertyChanged();
-                            return;
-                        }
-                        return;
-                }
-            }
-        };
+                    }
+                };
         this.mPhenotypeFlagLock = new Object();
         this.mCompactThrottleSomeSome = DEFAULT_COMPACT_THROTTLE_1;
         this.mCompactThrottleSomeFull = 10000L;
@@ -1096,22 +1583,26 @@ public final class CachedAppOptimizer {
         this.mFreezerBinderCallbackLast = -1L;
         this.mFreezerDebounceTimeout = 10000L;
         this.mFreezerExemptInstPkg = false;
-        this.mLastCompactionStats = new LinkedHashMap() { // from class: com.android.server.am.CachedAppOptimizer.3
-            @Override // java.util.LinkedHashMap
-            public final boolean removeEldestEntry(Map.Entry entry) {
-                return size() > 256;
-            }
-        };
-        this.mCompactionStatsHistory = new LinkedList() { // from class: com.android.server.am.CachedAppOptimizer.4
-            @Override // java.util.LinkedList, java.util.AbstractList, java.util.AbstractCollection, java.util.Collection, java.util.List, java.util.Deque, java.util.Queue
-            public final boolean add(Object obj) {
-                SingleCompactionStats singleCompactionStats = (SingleCompactionStats) obj;
-                if (size() >= 20) {
-                    remove();
-                }
-                return super.add(singleCompactionStats);
-            }
-        };
+        this.mLastCompactionStats =
+                new LinkedHashMap() { // from class: com.android.server.am.CachedAppOptimizer.3
+                    @Override // java.util.LinkedHashMap
+                    public final boolean removeEldestEntry(Map.Entry entry) {
+                        return size() > 256;
+                    }
+                };
+        this.mCompactionStatsHistory =
+                new LinkedList() { // from class: com.android.server.am.CachedAppOptimizer.4
+                    @Override // java.util.LinkedList, java.util.AbstractList,
+                              // java.util.AbstractCollection, java.util.Collection, java.util.List,
+                              // java.util.Deque, java.util.Queue
+                    public final boolean add(Object obj) {
+                        SingleCompactionStats singleCompactionStats = (SingleCompactionStats) obj;
+                        if (size() >= 20) {
+                            remove();
+                        }
+                        return super.add(singleCompactionStats);
+                    }
+                };
         this.mPerProcessCompactStats = new LinkedHashMap(256);
         this.mPerSourceCompactStats = new EnumMap(CompactSource.class);
         this.mTotalCompactionsCancelled = new EnumMap(CancelCompactReason.class);
@@ -1292,7 +1783,9 @@ public final class CachedAppOptimizer {
             com.android.server.DeviceIdleController$$ExternalSyntheticOutline0.m(r1, r0, r2)
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.CachedAppOptimizer.isFreezerSupported():boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.CachedAppOptimizer.isFreezerSupported():boolean");
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -1312,11 +1805,15 @@ public final class CachedAppOptimizer {
     public static long updateEarliestFreezableTime(ProcessRecord processRecord, long j) {
         long uptimeMillis = SystemClock.uptimeMillis();
         ProcessCachedOptimizerRecord processCachedOptimizerRecord = processRecord.mOptRecord;
-        processCachedOptimizerRecord.mEarliestFreezableTimeMillis = Math.max(processCachedOptimizerRecord.mEarliestFreezableTimeMillis, j + uptimeMillis);
+        processCachedOptimizerRecord.mEarliestFreezableTimeMillis =
+                Math.max(
+                        processCachedOptimizerRecord.mEarliestFreezableTimeMillis,
+                        j + uptimeMillis);
         return processRecord.mOptRecord.mEarliestFreezableTimeMillis - uptimeMillis;
     }
 
-    public final void cancelCompactionForProcess(ProcessRecord processRecord, CancelCompactReason cancelCompactReason) {
+    public final void cancelCompactionForProcess(
+            ProcessRecord processRecord, CancelCompactReason cancelCompactReason) {
         boolean z = false;
         if (this.mPendingCompactionProcesses.contains(processRecord)) {
             processRecord.mOptRecord.mPendingCompact = false;
@@ -1329,27 +1826,43 @@ public final class CachedAppOptimizer {
         }
         if (z) {
             if (!this.mTotalCompactionsCancelled.containsKey(cancelCompactReason)) {
-                this.mTotalCompactionsCancelled.put((EnumMap) cancelCompactReason, (CancelCompactReason) 1);
+                this.mTotalCompactionsCancelled.put(
+                        (EnumMap) cancelCompactReason, (CancelCompactReason) 1);
             } else {
-                this.mTotalCompactionsCancelled.put((EnumMap) cancelCompactReason, (CancelCompactReason) Integer.valueOf(((Integer) this.mTotalCompactionsCancelled.get(cancelCompactReason)).intValue() + 1));
+                this.mTotalCompactionsCancelled.put(
+                        (EnumMap) cancelCompactReason,
+                        (CancelCompactReason)
+                                Integer.valueOf(
+                                        ((Integer)
+                                                                this.mTotalCompactionsCancelled.get(
+                                                                        cancelCompactReason))
+                                                        .intValue()
+                                                + 1));
             }
         }
     }
 
-    public final void compactApp(ProcessRecord processRecord, CompactProfile compactProfile, CompactSource compactSource, boolean z) {
+    public final void compactApp(
+            ProcessRecord processRecord,
+            CompactProfile compactProfile,
+            CompactSource compactSource,
+            boolean z) {
         ProcessCachedOptimizerRecord processCachedOptimizerRecord = processRecord.mOptRecord;
         processCachedOptimizerRecord.mReqCompactSource = compactSource;
         processCachedOptimizerRecord.mReqCompactProfile = compactProfile;
-        AggregatedSourceCompactionStats aggregatedSourceCompactionStats = (AggregatedSourceCompactionStats) this.mPerSourceCompactStats.get(compactSource);
+        AggregatedSourceCompactionStats aggregatedSourceCompactionStats =
+                (AggregatedSourceCompactionStats) this.mPerSourceCompactStats.get(compactSource);
         if (aggregatedSourceCompactionStats == null) {
             aggregatedSourceCompactionStats = new AggregatedSourceCompactionStats(compactSource);
-            this.mPerSourceCompactStats.put((EnumMap) compactSource, (CompactSource) aggregatedSourceCompactionStats);
+            this.mPerSourceCompactStats.put(
+                    (EnumMap) compactSource, (CompactSource) aggregatedSourceCompactionStats);
         }
         String str = processRecord.processName;
         if (str == null) {
             str = "";
         }
-        AggregatedProcessCompactionStats aggregatedProcessCompactionStats = (AggregatedProcessCompactionStats) this.mPerProcessCompactStats.get(str);
+        AggregatedProcessCompactionStats aggregatedProcessCompactionStats =
+                (AggregatedProcessCompactionStats) this.mPerProcessCompactStats.get(str);
         if (aggregatedProcessCompactionStats == null) {
             aggregatedProcessCompactionStats = new AggregatedProcessCompactionStats(str);
             this.mPerProcessCompactStats.put(str, aggregatedProcessCompactionStats);
@@ -1373,7 +1886,9 @@ public final class CachedAppOptimizer {
         this.mPendingCompactionProcesses.add(processRecord);
         Handler handler = this.mCompactionHandler;
         ProcessStateRecord processStateRecord = processRecord.mState;
-        handler.sendMessage(handler.obtainMessage(1, processStateRecord.mCurAdj, processStateRecord.mSetProcState));
+        handler.sendMessage(
+                handler.obtainMessage(
+                        1, processStateRecord.mCurAdj, processStateRecord.mSetProcState));
     }
 
     public final void delayCompactProcess(ProcessRecord processRecord) {
@@ -1382,7 +1897,13 @@ public final class CachedAppOptimizer {
         synchronized (activityManagerGlobalLock) {
             try {
                 if (!this.mDelayedCompactionProcesses.contains(processRecord)) {
-                    KernelMemoryProxy$ReclaimerLog.write("skip compaction for " + processRecord.processName + "(" + processRecord.mPid + ")", true);
+                    KernelMemoryProxy$ReclaimerLog.write(
+                            "skip compaction for "
+                                    + processRecord.processName
+                                    + "("
+                                    + processRecord.mPid
+                                    + ")",
+                            true);
                     this.mDelayedCompactionProcesses.add(processRecord);
                 }
             } catch (Throwable th) {
@@ -1424,30 +1945,43 @@ public final class CachedAppOptimizer {
                 synchronized (activityManagerGlobalLock) {
                     try {
                         this.mFreezerOverride = !z;
-                        Slog.d("ActivityManager", "freezer override set to " + this.mFreezerOverride);
-                        this.mAm.mProcessList.forEachLruProcessesLOSP(new Consumer() { // from class: com.android.server.am.CachedAppOptimizer$$ExternalSyntheticLambda0
-                            @Override // java.util.function.Consumer
-                            public final void accept(Object obj) {
-                                CachedAppOptimizer cachedAppOptimizer = CachedAppOptimizer.this;
-                                boolean z2 = z;
-                                ProcessRecord processRecord = (ProcessRecord) obj;
-                                String str = CachedAppOptimizer.KEY_USE_COMPACTION;
-                                cachedAppOptimizer.getClass();
-                                if (processRecord == null) {
-                                    return;
-                                }
-                                ProcessCachedOptimizerRecord processCachedOptimizerRecord = processRecord.mOptRecord;
-                                if (z2 && processCachedOptimizerRecord.mFreezerOverride) {
-                                    cachedAppOptimizer.freezeAppAsyncInternalLSP(CachedAppOptimizer.updateEarliestFreezableTime(processRecord, cachedAppOptimizer.mFreezerDebounceTimeout), processRecord, false);
-                                    processCachedOptimizerRecord.mFreezerOverride = false;
-                                }
-                                if (z2 || !processCachedOptimizerRecord.mFrozen) {
-                                    return;
-                                }
-                                cachedAppOptimizer.unfreezeAppLSP(19, processRecord);
-                                processCachedOptimizerRecord.mFreezerOverride = true;
-                            }
-                        }, true);
+                        Slog.d(
+                                "ActivityManager",
+                                "freezer override set to " + this.mFreezerOverride);
+                        this.mAm.mProcessList.forEachLruProcessesLOSP(
+                                new Consumer() { // from class:
+                                                 // com.android.server.am.CachedAppOptimizer$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Consumer
+                                    public final void accept(Object obj) {
+                                        CachedAppOptimizer cachedAppOptimizer =
+                                                CachedAppOptimizer.this;
+                                        boolean z2 = z;
+                                        ProcessRecord processRecord = (ProcessRecord) obj;
+                                        String str = CachedAppOptimizer.KEY_USE_COMPACTION;
+                                        cachedAppOptimizer.getClass();
+                                        if (processRecord == null) {
+                                            return;
+                                        }
+                                        ProcessCachedOptimizerRecord processCachedOptimizerRecord =
+                                                processRecord.mOptRecord;
+                                        if (z2 && processCachedOptimizerRecord.mFreezerOverride) {
+                                            cachedAppOptimizer.freezeAppAsyncInternalLSP(
+                                                    CachedAppOptimizer.updateEarliestFreezableTime(
+                                                            processRecord,
+                                                            cachedAppOptimizer
+                                                                    .mFreezerDebounceTimeout),
+                                                    processRecord,
+                                                    false);
+                                            processCachedOptimizerRecord.mFreezerOverride = false;
+                                        }
+                                        if (z2 || !processCachedOptimizerRecord.mFrozen) {
+                                            return;
+                                        }
+                                        cachedAppOptimizer.unfreezeAppLSP(19, processRecord);
+                                        processCachedOptimizerRecord.mFreezerOverride = true;
+                                    }
+                                },
+                                true);
                     } catch (Throwable th) {
                         ActivityManagerService.resetPriorityAfterProcLockedSection();
                         throw th;
@@ -1493,7 +2027,8 @@ public final class CachedAppOptimizer {
                 }
             }
             boolean z2 = FreecessController.IS_MINIMIZE_OLAF_LOCK;
-            FreecessController freecessController = FreecessController.FreecessControllerHolder.INSTANCE;
+            FreecessController freecessController =
+                    FreecessController.FreecessControllerHolder.INSTANCE;
             String str = processRecord.info != null ? processRecord.info.packageName : null;
             int i2 = processRecord.uid;
             freecessController.getClass();
@@ -1503,7 +2038,8 @@ public final class CachedAppOptimizer {
                 handler.obtainMessage(6, processRecord).sendToTarget();
                 processRecord.mOptRecord.mLastUsedTimeout = j;
                 FreezeHandler freezeHandler2 = this.mFreezeHandler;
-                freezeHandler2.sendMessageDelayed(freezeHandler2.obtainMessage(3, 1, 0, processRecord), j);
+                freezeHandler2.sendMessageDelayed(
+                        freezeHandler2.obtainMessage(3, 1, 0, processRecord), j);
                 processCachedOptimizerRecord.mPendingFreeze = true;
             }
         }
@@ -1535,7 +2071,8 @@ public final class CachedAppOptimizer {
             }
             UidRecord uidRecord = processRecord.mUidRecord;
             if (uidRecord != null) {
-                if (uidRecord.mProcRecords.size() > 1 && uidRecord.areAllProcessesFrozen(processRecord)) {
+                if (uidRecord.mProcRecords.size() > 1
+                        && uidRecord.areAllProcessesFrozen(processRecord)) {
                     z = true;
                 }
                 if (z != uidRecord.mUidIsFrozen) {
@@ -1565,7 +2102,13 @@ public final class CachedAppOptimizer {
             ActivityManagerService.boostPriorityForProcLockedSection();
             synchronized (activityManagerGlobalLock2) {
                 try {
-                    PerProcessNandswap.getInstance().onProcessFrozen(processRecord.uid, processRecord.mPid, processRecord.processName, processRecord.mState.mCurAdj, processRecord.mWindowProcessController.mHasActivities);
+                    PerProcessNandswap.getInstance()
+                            .onProcessFrozen(
+                                    processRecord.uid,
+                                    processRecord.mPid,
+                                    processRecord.processName,
+                                    processRecord.mState.mCurAdj,
+                                    processRecord.mWindowProcessController.mHasActivities);
                 } finally {
                 }
             }
@@ -1590,7 +2133,10 @@ public final class CachedAppOptimizer {
             try {
                 this.mProcStateThrottle.add(Integer.valueOf(Integer.parseInt(str2)));
             } catch (NumberFormatException unused) {
-                BootReceiver$$ExternalSyntheticOutline0.m("Failed to parse default app compaction proc state: ", str2, "ActivityManager");
+                BootReceiver$$ExternalSyntheticOutline0.m(
+                        "Failed to parse default app compaction proc state: ",
+                        str2,
+                        "ActivityManager");
                 return false;
             }
         }
@@ -1617,17 +2163,26 @@ public final class CachedAppOptimizer {
             str = "";
         }
         if (ArrayUtils.contains(FCAPolicyManager.mFCASkiplistPackages, str)) {
-            DeviceIdleController$$ExternalSyntheticOutline0.m("FCA:Skip FCA for Skiplist package (", str, ")", "ActivityManager");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    "FCA:Skip FCA for Skiplist package (", str, ")", "ActivityManager");
             return;
         }
         ProcessRecord processRecordFromPidLocked = this.mAm.getProcessRecordFromPidLocked(i);
         if (processRecordFromPidLocked == null) {
-            AnyMotionDetector$$ExternalSyntheticOutline0.m(i, "FCA:process record failed for pid:", "ActivityManager");
+            AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                    i, "FCA:process record failed for pid:", "ActivityManager");
             return;
         }
-        long j = this.mProcessDependencies.getRss(i)[1] - processRecordFromPidLocked.mRSSresiduePostFCA;
+        long j =
+                this.mProcessDependencies.getRss(i)[1]
+                        - processRecordFromPidLocked.mRSSresiduePostFCA;
         if ((j >> 10) >= 1) {
-            Slog.d("ActivityManager", "FCA:FCA recordedFileRss = " + processRecordFromPidLocked.mRSSresiduePostFCA + ", and changeinRss = " + j);
+            Slog.d(
+                    "ActivityManager",
+                    "FCA:FCA recordedFileRss = "
+                            + processRecordFromPidLocked.mRSSresiduePostFCA
+                            + ", and changeinRss = "
+                            + j);
             Handler handler = this.mCompactionHandler;
             handler.sendMessageDelayed(handler.obtainMessage(107, i, 0), 2000L);
         }
@@ -1662,8 +2217,20 @@ public final class CachedAppOptimizer {
             }
             try {
                 if ((1 & getBinderFreezeInfo(i2)) != 0) {
-                    Slog.d("ActivityManager", "pid " + i2 + " " + str + " received sync transactions while frozen, killing");
-                    processRecord.killLocked(14, 20, "Sync transaction while in frozen state", "Sync transaction while in frozen state", true, true);
+                    Slog.d(
+                            "ActivityManager",
+                            "pid "
+                                    + i2
+                                    + " "
+                                    + str
+                                    + " received sync transactions while frozen, killing");
+                    processRecord.killLocked(
+                            14,
+                            20,
+                            "Sync transaction while in frozen state",
+                            "Sync transaction while in frozen state",
+                            true,
+                            true);
                     return;
                 }
                 if (!z2) {
@@ -1677,27 +2244,68 @@ public final class CachedAppOptimizer {
                     try {
                         traceAppFreeze(i2, i, str);
                         Process.setProcessFrozen(i2, processRecord.uid, false);
-                        processCachedOptimizerRecord.mFreezeUnfreezeTime = SystemClock.uptimeMillis();
+                        processCachedOptimizerRecord.mFreezeUnfreezeTime =
+                                SystemClock.uptimeMillis();
                         processCachedOptimizerRecord.mFrozen = false;
                         this.mFrozenProcesses.delete(i2);
                     } catch (Exception unused) {
-                        Slog.e("ActivityManager", AccountManagerService$$ExternalSyntheticOutline0.m(i2, "Unable to unfreeze ", " ", str, ". This might cause inconsistency or UI hangs."));
+                        Slog.e(
+                                "ActivityManager",
+                                AccountManagerService$$ExternalSyntheticOutline0.m(
+                                        i2,
+                                        "Unable to unfreeze ",
+                                        " ",
+                                        str,
+                                        ". This might cause inconsistency or UI hangs."));
                     }
                     if (processCachedOptimizerRecord.mFrozen) {
                         return;
                     }
-                    DeviceIdleController$$ExternalSyntheticOutline0.m(DirEncryptService$$ExternalSyntheticOutline0.m(i2, "sync unfroze ", " ", str, " for "), i, "ActivityManager");
+                    DeviceIdleController$$ExternalSyntheticOutline0.m(
+                            DirEncryptService$$ExternalSyntheticOutline0.m(
+                                    i2, "sync unfroze ", " ", str, " for "),
+                            i,
+                            "ActivityManager");
                     FreezeHandler freezeHandler = this.mFreezeHandler;
-                    freezeHandler.sendMessage(freezeHandler.obtainMessage(4, i2, (int) Math.min(processCachedOptimizerRecord.mFreezeUnfreezeTime - j, 2147483647L), new Pair(processRecord, Integer.valueOf(i))));
+                    freezeHandler.sendMessage(
+                            freezeHandler.obtainMessage(
+                                    4,
+                                    i2,
+                                    (int)
+                                            Math.min(
+                                                    processCachedOptimizerRecord.mFreezeUnfreezeTime
+                                                            - j,
+                                                    2147483647L),
+                                    new Pair(processRecord, Integer.valueOf(i))));
                 } catch (RuntimeException unused2) {
-                    Slog.e("ActivityManager", AccountManagerService$$ExternalSyntheticOutline0.m(i2, "Unable to unfreeze binder for ", " ", str, ". Killing it"));
-                    processRecord.killLocked(14, 19, "Unable to unfreeze", "Unable to unfreeze", true, true);
+                    Slog.e(
+                            "ActivityManager",
+                            AccountManagerService$$ExternalSyntheticOutline0.m(
+                                    i2,
+                                    "Unable to unfreeze binder for ",
+                                    " ",
+                                    str,
+                                    ". Killing it"));
+                    processRecord.killLocked(
+                            14, 19, "Unable to unfreeze", "Unable to unfreeze", true, true);
                 }
             } catch (Exception e) {
-                StringBuilder m = DirEncryptService$$ExternalSyntheticOutline0.m(i2, "Unable to query binder frozen info for pid ", " ", str, ". Killing it. Exception: ");
+                StringBuilder m =
+                        DirEncryptService$$ExternalSyntheticOutline0.m(
+                                i2,
+                                "Unable to query binder frozen info for pid ",
+                                " ",
+                                str,
+                                ". Killing it. Exception: ");
                 m.append(e);
                 Slog.d("ActivityManager", m.toString());
-                processRecord.killLocked(14, 19, "Unable to query binder frozen stats", "Unable to query binder frozen stats", true, true);
+                processRecord.killLocked(
+                        14,
+                        19,
+                        "Unable to query binder frozen stats",
+                        "Unable to query binder frozen stats",
+                        true,
+                        true);
             }
         }
     }
@@ -1740,11 +2348,15 @@ public final class CachedAppOptimizer {
             ActivityManagerService.boostPriorityForProcLockedSection();
             synchronized (activityManagerGlobalLock) {
                 try {
-                    long updateEarliestFreezableTime = updateEarliestFreezableTime(processRecord, j);
-                    ProcessCachedOptimizerRecord processCachedOptimizerRecord = processRecord.mOptRecord;
-                    if (processCachedOptimizerRecord.mFrozen || processCachedOptimizerRecord.mPendingFreeze) {
+                    long updateEarliestFreezableTime =
+                            updateEarliestFreezableTime(processRecord, j);
+                    ProcessCachedOptimizerRecord processCachedOptimizerRecord =
+                            processRecord.mOptRecord;
+                    if (processCachedOptimizerRecord.mFrozen
+                            || processCachedOptimizerRecord.mPendingFreeze) {
                         unfreezeAppLSP(i, processRecord);
-                        freezeAppAsyncInternalLSP(updateEarliestFreezableTime, processRecord, false);
+                        freezeAppAsyncInternalLSP(
+                                updateEarliestFreezableTime, processRecord, false);
                     }
                 } catch (Throwable th) {
                     ActivityManagerService.resetPriorityAfterProcLockedSection();
@@ -1762,9 +2374,18 @@ public final class CachedAppOptimizer {
         String property4 = DeviceConfig.getProperty("activity_manager", KEY_COMPACT_THROTTLE_4);
         String property5 = DeviceConfig.getProperty("activity_manager", KEY_COMPACT_THROTTLE_5);
         String property6 = DeviceConfig.getProperty("activity_manager", KEY_COMPACT_THROTTLE_6);
-        String property7 = DeviceConfig.getProperty("activity_manager", KEY_COMPACT_THROTTLE_MIN_OOM_ADJ);
-        String property8 = DeviceConfig.getProperty("activity_manager", KEY_COMPACT_THROTTLE_MAX_OOM_ADJ);
-        if (!TextUtils.isEmpty(property) && !TextUtils.isEmpty(property2) && !TextUtils.isEmpty(property3) && !TextUtils.isEmpty(property4) && !TextUtils.isEmpty(property5) && !TextUtils.isEmpty(property6) && !TextUtils.isEmpty(property7) && !TextUtils.isEmpty(property8)) {
+        String property7 =
+                DeviceConfig.getProperty("activity_manager", KEY_COMPACT_THROTTLE_MIN_OOM_ADJ);
+        String property8 =
+                DeviceConfig.getProperty("activity_manager", KEY_COMPACT_THROTTLE_MAX_OOM_ADJ);
+        if (!TextUtils.isEmpty(property)
+                && !TextUtils.isEmpty(property2)
+                && !TextUtils.isEmpty(property3)
+                && !TextUtils.isEmpty(property4)
+                && !TextUtils.isEmpty(property5)
+                && !TextUtils.isEmpty(property6)
+                && !TextUtils.isEmpty(property7)
+                && !TextUtils.isEmpty(property8)) {
             try {
                 this.mCompactThrottleSomeSome = Integer.parseInt(property);
                 this.mCompactThrottleSomeFull = Integer.parseInt(property2);
@@ -1785,33 +2406,51 @@ public final class CachedAppOptimizer {
     }
 
     public final void updateFreezerDebounceTimeout() {
-        this.mFreezerDebounceTimeout = DeviceConfig.getLong("activity_manager_native_boot", KEY_FREEZER_DEBOUNCE_TIMEOUT, 10000L);
+        this.mFreezerDebounceTimeout =
+                DeviceConfig.getLong(
+                        "activity_manager_native_boot", KEY_FREEZER_DEBOUNCE_TIMEOUT, 10000L);
         if (this.mFreezerDebounceTimeout < 0) {
             this.mFreezerDebounceTimeout = 10000L;
         }
-        BatteryService$$ExternalSyntheticOutline0.m(new StringBuilder("Freezer timeout set to "), this.mFreezerDebounceTimeout, "ActivityManager");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                new StringBuilder("Freezer timeout set to "),
+                this.mFreezerDebounceTimeout,
+                "ActivityManager");
     }
 
     public final void updateFreezerExemptInstPkg() {
-        this.mFreezerExemptInstPkg = DeviceConfig.getBoolean("activity_manager_native_boot", KEY_FREEZER_EXEMPT_INST_PKG, false);
-        AnyMotionDetector$$ExternalSyntheticOutline0.m("ActivityManager", new StringBuilder("Freezer exemption set to "), this.mFreezerExemptInstPkg);
+        this.mFreezerExemptInstPkg =
+                DeviceConfig.getBoolean(
+                        "activity_manager_native_boot", KEY_FREEZER_EXEMPT_INST_PKG, false);
+        AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                "ActivityManager",
+                new StringBuilder("Freezer exemption set to "),
+                this.mFreezerExemptInstPkg);
     }
 
     public final void updateProcStateThrottle() {
         String str = DEFAULT_COMPACT_PROC_STATE_THROTTLE;
-        String string = DeviceConfig.getString("activity_manager", KEY_COMPACT_PROC_STATE_THROTTLE, str);
+        String string =
+                DeviceConfig.getString("activity_manager", KEY_COMPACT_PROC_STATE_THROTTLE, str);
         if (parseProcStateThrottle(string)) {
             return;
         }
-        PinnerService$$ExternalSyntheticOutline0.m("Unable to parse app compact proc state throttle \"", string, "\" falling back to default.", "ActivityManager");
+        PinnerService$$ExternalSyntheticOutline0.m(
+                "Unable to parse app compact proc state throttle \"",
+                string,
+                "\" falling back to default.",
+                "ActivityManager");
         if (parseProcStateThrottle(str)) {
             return;
         }
-        Slog.wtf("ActivityManager", "Unable to parse default app compact proc state throttle " + str);
+        Slog.wtf(
+                "ActivityManager",
+                "Unable to parse default app compact proc state throttle " + str);
     }
 
     public final void updateUseCompaction() {
-        this.mUseCompaction = DeviceConfig.getBoolean("activity_manager", KEY_USE_COMPACTION, false);
+        this.mUseCompaction =
+                DeviceConfig.getBoolean("activity_manager", KEY_USE_COMPACTION, false);
         if (this.mUseCompaction && this.mCompactionHandler == null) {
             if (!this.mCachedAppOptimizerThread.isAlive()) {
                 this.mCachedAppOptimizerThread.start();
@@ -1822,10 +2461,13 @@ public final class CachedAppOptimizer {
     }
 
     public final void updateUseFreezer() {
-        String string = Settings.Global.getString(this.mAm.mContext.getContentResolver(), "cached_apps_freezer");
+        String string =
+                Settings.Global.getString(
+                        this.mAm.mContext.getContentResolver(), "cached_apps_freezer");
         if ("disabled".equals(string)) {
             this.mUseFreezer = false;
-        } else if ("enabled".equals(string) || DeviceConfig.getBoolean("activity_manager_native_boot", KEY_USE_FREEZER, true)) {
+        } else if ("enabled".equals(string)
+                || DeviceConfig.getBoolean("activity_manager_native_boot", KEY_USE_FREEZER, true)) {
             this.mUseFreezer = isFreezerSupported();
             updateFreezerDebounceTimeout();
             updateFreezerExemptInstPkg();
@@ -1833,30 +2475,33 @@ public final class CachedAppOptimizer {
             this.mUseFreezer = false;
         }
         final boolean z = this.mUseFreezer;
-        this.mAm.mHandler.post(new Runnable() { // from class: com.android.server.am.CachedAppOptimizer$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                CachedAppOptimizer cachedAppOptimizer = CachedAppOptimizer.this;
-                boolean z2 = z;
-                String str = CachedAppOptimizer.KEY_USE_COMPACTION;
-                cachedAppOptimizer.getClass();
-                if (!z2) {
-                    Slog.d("ActivityManager", "Freezer disabled");
-                    cachedAppOptimizer.enableFreezer(false);
-                    return;
-                }
-                Slog.d("ActivityManager", "Freezer enabled");
-                cachedAppOptimizer.enableFreezer(true);
-                ServiceThread serviceThread = cachedAppOptimizer.mCachedAppOptimizerThread;
-                if (!serviceThread.isAlive()) {
-                    serviceThread.start();
-                }
-                if (cachedAppOptimizer.mFreezeHandler == null) {
-                    cachedAppOptimizer.mFreezeHandler = cachedAppOptimizer.new FreezeHandler();
-                }
-                Process.setThreadGroupAndCpuset(serviceThread.getThreadId(), 2);
-            }
-        });
+        this.mAm.mHandler.post(
+                new Runnable() { // from class:
+                                 // com.android.server.am.CachedAppOptimizer$$ExternalSyntheticLambda1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        CachedAppOptimizer cachedAppOptimizer = CachedAppOptimizer.this;
+                        boolean z2 = z;
+                        String str = CachedAppOptimizer.KEY_USE_COMPACTION;
+                        cachedAppOptimizer.getClass();
+                        if (!z2) {
+                            Slog.d("ActivityManager", "Freezer disabled");
+                            cachedAppOptimizer.enableFreezer(false);
+                            return;
+                        }
+                        Slog.d("ActivityManager", "Freezer enabled");
+                        cachedAppOptimizer.enableFreezer(true);
+                        ServiceThread serviceThread = cachedAppOptimizer.mCachedAppOptimizerThread;
+                        if (!serviceThread.isAlive()) {
+                            serviceThread.start();
+                        }
+                        if (cachedAppOptimizer.mFreezeHandler == null) {
+                            cachedAppOptimizer.mFreezeHandler =
+                                    cachedAppOptimizer.new FreezeHandler();
+                        }
+                        Process.setThreadGroupAndCpuset(serviceThread.getThreadId(), 2);
+                    }
+                });
     }
 
     public final boolean useCompaction() {

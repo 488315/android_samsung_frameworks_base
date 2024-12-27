@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes3.dex */
 public interface IVisualQueryDetectionVoiceInteractionCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.service.voice.IVisualQueryDetectionVoiceInteractionCallback";
+    public static final String DESCRIPTOR =
+            "android.service.voice.IVisualQueryDetectionVoiceInteractionCallback";
 
     void onQueryDetected(String str) throws RemoteException;
 
@@ -16,30 +17,31 @@ public interface IVisualQueryDetectionVoiceInteractionCallback extends IInterfac
 
     void onQueryRejected() throws RemoteException;
 
-    void onResultDetected(VisualQueryDetectedResult visualQueryDetectedResult) throws RemoteException;
+    void onResultDetected(VisualQueryDetectedResult visualQueryDetectedResult)
+            throws RemoteException;
 
-    void onVisualQueryDetectionServiceFailure(VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure) throws RemoteException;
+    void onVisualQueryDetectionServiceFailure(
+            VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure)
+            throws RemoteException;
 
     public static class Default implements IVisualQueryDetectionVoiceInteractionCallback {
         @Override // android.service.voice.IVisualQueryDetectionVoiceInteractionCallback
-        public void onQueryDetected(String partialQuery) throws RemoteException {
-        }
+        public void onQueryDetected(String partialQuery) throws RemoteException {}
 
         @Override // android.service.voice.IVisualQueryDetectionVoiceInteractionCallback
-        public void onResultDetected(VisualQueryDetectedResult partialResult) throws RemoteException {
-        }
+        public void onResultDetected(VisualQueryDetectedResult partialResult)
+                throws RemoteException {}
 
         @Override // android.service.voice.IVisualQueryDetectionVoiceInteractionCallback
-        public void onQueryFinished() throws RemoteException {
-        }
+        public void onQueryFinished() throws RemoteException {}
 
         @Override // android.service.voice.IVisualQueryDetectionVoiceInteractionCallback
-        public void onQueryRejected() throws RemoteException {
-        }
+        public void onQueryRejected() throws RemoteException {}
 
         @Override // android.service.voice.IVisualQueryDetectionVoiceInteractionCallback
-        public void onVisualQueryDetectionServiceFailure(VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure) throws RemoteException {
-        }
+        public void onVisualQueryDetectionServiceFailure(
+                VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -47,7 +49,8 @@ public interface IVisualQueryDetectionVoiceInteractionCallback extends IInterfac
         }
     }
 
-    public static abstract class Stub extends Binder implements IVisualQueryDetectionVoiceInteractionCallback {
+    public abstract static class Stub extends Binder
+            implements IVisualQueryDetectionVoiceInteractionCallback {
         static final int TRANSACTION_onQueryDetected = 1;
         static final int TRANSACTION_onQueryFinished = 3;
         static final int TRANSACTION_onQueryRejected = 4;
@@ -62,7 +65,9 @@ public interface IVisualQueryDetectionVoiceInteractionCallback extends IInterfac
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(IVisualQueryDetectionVoiceInteractionCallback.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(
+                            IVisualQueryDetectionVoiceInteractionCallback.DESCRIPTOR);
             if (iin != null && (iin instanceof IVisualQueryDetectionVoiceInteractionCallback)) {
                 return (IVisualQueryDetectionVoiceInteractionCallback) iin;
             }
@@ -97,7 +102,8 @@ public interface IVisualQueryDetectionVoiceInteractionCallback extends IInterfac
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IVisualQueryDetectionVoiceInteractionCallback.DESCRIPTOR);
             }
@@ -112,7 +118,9 @@ public interface IVisualQueryDetectionVoiceInteractionCallback extends IInterfac
                     onQueryDetected(_arg0);
                     return true;
                 case 2:
-                    VisualQueryDetectedResult _arg02 = (VisualQueryDetectedResult) data.readTypedObject(VisualQueryDetectedResult.CREATOR);
+                    VisualQueryDetectedResult _arg02 =
+                            (VisualQueryDetectedResult)
+                                    data.readTypedObject(VisualQueryDetectedResult.CREATOR);
                     data.enforceNoDataAvail();
                     onResultDetected(_arg02);
                     return true;
@@ -123,7 +131,10 @@ public interface IVisualQueryDetectionVoiceInteractionCallback extends IInterfac
                     onQueryRejected();
                     return true;
                 case 5:
-                    VisualQueryDetectionServiceFailure _arg03 = (VisualQueryDetectionServiceFailure) data.readTypedObject(VisualQueryDetectionServiceFailure.CREATOR);
+                    VisualQueryDetectionServiceFailure _arg03 =
+                            (VisualQueryDetectionServiceFailure)
+                                    data.readTypedObject(
+                                            VisualQueryDetectionServiceFailure.CREATOR);
                     data.enforceNoDataAvail();
                     onVisualQueryDetectionServiceFailure(_arg03);
                     return true;
@@ -152,7 +163,8 @@ public interface IVisualQueryDetectionVoiceInteractionCallback extends IInterfac
             public void onQueryDetected(String partialQuery) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
-                    _data.writeInterfaceToken(IVisualQueryDetectionVoiceInteractionCallback.DESCRIPTOR);
+                    _data.writeInterfaceToken(
+                            IVisualQueryDetectionVoiceInteractionCallback.DESCRIPTOR);
                     _data.writeString(partialQuery);
                     this.mRemote.transact(1, _data, null, 1);
                 } finally {
@@ -161,10 +173,12 @@ public interface IVisualQueryDetectionVoiceInteractionCallback extends IInterfac
             }
 
             @Override // android.service.voice.IVisualQueryDetectionVoiceInteractionCallback
-            public void onResultDetected(VisualQueryDetectedResult partialResult) throws RemoteException {
+            public void onResultDetected(VisualQueryDetectedResult partialResult)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
-                    _data.writeInterfaceToken(IVisualQueryDetectionVoiceInteractionCallback.DESCRIPTOR);
+                    _data.writeInterfaceToken(
+                            IVisualQueryDetectionVoiceInteractionCallback.DESCRIPTOR);
                     _data.writeTypedObject(partialResult, 0);
                     this.mRemote.transact(2, _data, null, 1);
                 } finally {
@@ -176,7 +190,8 @@ public interface IVisualQueryDetectionVoiceInteractionCallback extends IInterfac
             public void onQueryFinished() throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
-                    _data.writeInterfaceToken(IVisualQueryDetectionVoiceInteractionCallback.DESCRIPTOR);
+                    _data.writeInterfaceToken(
+                            IVisualQueryDetectionVoiceInteractionCallback.DESCRIPTOR);
                     this.mRemote.transact(3, _data, null, 1);
                 } finally {
                     _data.recycle();
@@ -187,7 +202,8 @@ public interface IVisualQueryDetectionVoiceInteractionCallback extends IInterfac
             public void onQueryRejected() throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
-                    _data.writeInterfaceToken(IVisualQueryDetectionVoiceInteractionCallback.DESCRIPTOR);
+                    _data.writeInterfaceToken(
+                            IVisualQueryDetectionVoiceInteractionCallback.DESCRIPTOR);
                     this.mRemote.transact(4, _data, null, 1);
                 } finally {
                     _data.recycle();
@@ -195,10 +211,13 @@ public interface IVisualQueryDetectionVoiceInteractionCallback extends IInterfac
             }
 
             @Override // android.service.voice.IVisualQueryDetectionVoiceInteractionCallback
-            public void onVisualQueryDetectionServiceFailure(VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure) throws RemoteException {
+            public void onVisualQueryDetectionServiceFailure(
+                    VisualQueryDetectionServiceFailure visualQueryDetectionServiceFailure)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
-                    _data.writeInterfaceToken(IVisualQueryDetectionVoiceInteractionCallback.DESCRIPTOR);
+                    _data.writeInterfaceToken(
+                            IVisualQueryDetectionVoiceInteractionCallback.DESCRIPTOR);
                     _data.writeTypedObject(visualQueryDetectionServiceFailure, 0);
                     this.mRemote.transact(5, _data, null, 1);
                 } finally {

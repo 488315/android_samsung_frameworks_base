@@ -12,6 +12,16 @@ public final class WmScreenshotInfo {
     public int mType;
 
     public final String toString() {
-        return "ScreenshotInfo{type=" + this.mType + ", sweepDirection=" + this.mSweepDirection + ", display=" + this.mDisplayId + ", origin=" + this.mOrigin + ", bundle=" + this.mBundle + "}";
+        return "ScreenshotInfo{type="
+                + this.mType
+                + ", sweepDirection="
+                + this.mSweepDirection
+                + ", display="
+                + this.mDisplayId
+                + ", origin="
+                + this.mOrigin
+                + ", bundle="
+                + this.mBundle
+                + "}";
     }
 }

@@ -4,8 +4,10 @@ import android.os.Bundle;
 
 /* loaded from: classes.dex */
 public class ComponentOptions {
-    public static final String KEY_PENDING_INTENT_BACKGROUND_ACTIVITY_ALLOWED = "android.pendingIntent.backgroundActivityAllowed";
-    public static final String KEY_PENDING_INTENT_BACKGROUND_ACTIVITY_ALLOWED_BY_PERMISSION = "android.pendingIntent.backgroundActivityAllowedByPermission";
+    public static final String KEY_PENDING_INTENT_BACKGROUND_ACTIVITY_ALLOWED =
+            "android.pendingIntent.backgroundActivityAllowed";
+    public static final String KEY_PENDING_INTENT_BACKGROUND_ACTIVITY_ALLOWED_BY_PERMISSION =
+            "android.pendingIntent.backgroundActivityAllowedByPermission";
     private Integer mPendingIntentBalAllowed;
     private boolean mPendingIntentBalAllowedByPermission;
 
@@ -18,8 +20,11 @@ public class ComponentOptions {
         this.mPendingIntentBalAllowed = 0;
         this.mPendingIntentBalAllowedByPermission = false;
         opts.setDefusable(true);
-        this.mPendingIntentBalAllowed = Integer.valueOf(opts.getInt(KEY_PENDING_INTENT_BACKGROUND_ACTIVITY_ALLOWED, 0));
-        setPendingIntentBackgroundActivityLaunchAllowedByPermission(opts.getBoolean(KEY_PENDING_INTENT_BACKGROUND_ACTIVITY_ALLOWED_BY_PERMISSION, false));
+        this.mPendingIntentBalAllowed =
+                Integer.valueOf(opts.getInt(KEY_PENDING_INTENT_BACKGROUND_ACTIVITY_ALLOWED, 0));
+        setPendingIntentBackgroundActivityLaunchAllowedByPermission(
+                opts.getBoolean(
+                        KEY_PENDING_INTENT_BACKGROUND_ACTIVITY_ALLOWED_BY_PERMISSION, false));
     }
 
     @Deprecated
@@ -61,10 +66,14 @@ public class ComponentOptions {
     public Bundle toBundle() {
         Bundle b = new Bundle();
         if (this.mPendingIntentBalAllowed.intValue() != 0) {
-            b.putInt(KEY_PENDING_INTENT_BACKGROUND_ACTIVITY_ALLOWED, this.mPendingIntentBalAllowed.intValue());
+            b.putInt(
+                    KEY_PENDING_INTENT_BACKGROUND_ACTIVITY_ALLOWED,
+                    this.mPendingIntentBalAllowed.intValue());
         }
         if (this.mPendingIntentBalAllowedByPermission) {
-            b.putBoolean(KEY_PENDING_INTENT_BACKGROUND_ACTIVITY_ALLOWED_BY_PERMISSION, this.mPendingIntentBalAllowedByPermission);
+            b.putBoolean(
+                    KEY_PENDING_INTENT_BACKGROUND_ACTIVITY_ALLOWED_BY_PERMISSION,
+                    this.mPendingIntentBalAllowedByPermission);
         }
         return b;
     }

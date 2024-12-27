@@ -14,12 +14,12 @@ public interface IAudioFocusDispatcher extends IInterface {
 
     public static class Default implements IAudioFocusDispatcher {
         @Override // android.media.IAudioFocusDispatcher
-        public void dispatchAudioFocusChange(int focusChange, String clientId) throws RemoteException {
-        }
+        public void dispatchAudioFocusChange(int focusChange, String clientId)
+                throws RemoteException {}
 
         @Override // android.media.IAudioFocusDispatcher
-        public void dispatchFocusResultFromExtPolicy(int requestResult, String clientId) throws RemoteException {
-        }
+        public void dispatchFocusResultFromExtPolicy(int requestResult, String clientId)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -27,7 +27,7 @@ public interface IAudioFocusDispatcher extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAudioFocusDispatcher {
+    public abstract static class Stub extends Binder implements IAudioFocusDispatcher {
         public static final String DESCRIPTOR = "android.media.IAudioFocusDispatcher";
         static final int TRANSACTION_dispatchAudioFocusChange = 1;
         static final int TRANSACTION_dispatchFocusResultFromExtPolicy = 2;
@@ -69,7 +69,8 @@ public interface IAudioFocusDispatcher extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -112,7 +113,8 @@ public interface IAudioFocusDispatcher extends IInterface {
             }
 
             @Override // android.media.IAudioFocusDispatcher
-            public void dispatchAudioFocusChange(int focusChange, String clientId) throws RemoteException {
+            public void dispatchAudioFocusChange(int focusChange, String clientId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -125,7 +127,8 @@ public interface IAudioFocusDispatcher extends IInterface {
             }
 
             @Override // android.media.IAudioFocusDispatcher
-            public void dispatchFocusResultFromExtPolicy(int requestResult, String clientId) throws RemoteException {
+            public void dispatchFocusResultFromExtPolicy(int requestResult, String clientId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

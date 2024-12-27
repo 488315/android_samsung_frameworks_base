@@ -1,6 +1,5 @@
 package com.android.server.blob;
 
-import com.android.server.blob.BlobMetadata;
 import java.util.function.Predicate;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -23,15 +22,13 @@ public final /* synthetic */ class BlobMetadata$$ExternalSyntheticLambda3 implem
                 int i = this.f$0;
                 String str = this.f$1;
                 BlobMetadata.Leasee leasee = (BlobMetadata.Leasee) obj;
-                if (leasee.uid != i || !leasee.packageName.equals(str)) {
-                }
+                if (leasee.uid != i || !leasee.packageName.equals(str)) {}
                 break;
             default:
                 int i2 = this.f$0;
                 String str2 = this.f$1;
                 BlobMetadata.Committer committer = (BlobMetadata.Committer) obj;
-                if (committer.uid != i2 || !committer.packageName.equals(str2)) {
-                }
+                if (committer.uid != i2 || !committer.packageName.equals(str2)) {}
                 break;
         }
         return false;

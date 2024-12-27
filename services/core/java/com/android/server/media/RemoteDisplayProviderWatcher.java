@@ -10,8 +10,9 @@ import android.content.pm.ServiceInfo;
 import android.os.Handler;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
-import com.android.server.media.MediaRouterService;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -27,28 +28,35 @@ public final class RemoteDisplayProviderWatcher {
     public boolean mRunning;
     public final int mUserId;
     public final ArrayList mProviders = new ArrayList();
-    public final AnonymousClass1 mScanPackagesReceiver = new BroadcastReceiver() { // from class: com.android.server.media.RemoteDisplayProviderWatcher.1
-        @Override // android.content.BroadcastReceiver
-        public final void onReceive(Context context, Intent intent) {
-            if (RemoteDisplayProviderWatcher.DEBUG) {
-                Slog.d("RemoteDisplayProvider", "Received package manager broadcast: " + intent);
-            }
-            RemoteDisplayProviderWatcher.m671$$Nest$mscanPackages(RemoteDisplayProviderWatcher.this);
-        }
-    };
-    public final AnonymousClass2 mScanPackagesRunnable = new Runnable() { // from class: com.android.server.media.RemoteDisplayProviderWatcher.2
-        @Override // java.lang.Runnable
-        public final void run() {
-            RemoteDisplayProviderWatcher.m671$$Nest$mscanPackages(RemoteDisplayProviderWatcher.this);
-        }
-    };
+    public final AnonymousClass1 mScanPackagesReceiver =
+            new BroadcastReceiver() { // from class:
+                                      // com.android.server.media.RemoteDisplayProviderWatcher.1
+                @Override // android.content.BroadcastReceiver
+                public final void onReceive(Context context, Intent intent) {
+                    if (RemoteDisplayProviderWatcher.DEBUG) {
+                        Slog.d(
+                                "RemoteDisplayProvider",
+                                "Received package manager broadcast: " + intent);
+                    }
+                    RemoteDisplayProviderWatcher.m671$$Nest$mscanPackages(
+                            RemoteDisplayProviderWatcher.this);
+                }
+            };
+    public final AnonymousClass2 mScanPackagesRunnable =
+            new Runnable() { // from class: com.android.server.media.RemoteDisplayProviderWatcher.2
+                @Override // java.lang.Runnable
+                public final void run() {
+                    RemoteDisplayProviderWatcher.m671$$Nest$mscanPackages(
+                            RemoteDisplayProviderWatcher.this);
+                }
+            };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface Callback {
-    }
+    public interface Callback {}
 
     /* renamed from: -$$Nest$mscanPackages, reason: not valid java name */
-    public static void m671$$Nest$mscanPackages(RemoteDisplayProviderWatcher remoteDisplayProviderWatcher) {
+    public static void m671$$Nest$mscanPackages(
+            RemoteDisplayProviderWatcher remoteDisplayProviderWatcher) {
         Callback callback;
         if (remoteDisplayProviderWatcher.mRunning) {
             Intent intent = new Intent("com.android.media.remotedisplay.RemoteDisplayProvider");
@@ -67,15 +75,27 @@ public final class RemoteDisplayProviderWatcher {
                 if (serviceInfo != null) {
                     String str = serviceInfo.permission;
                     if (str == null || !str.equals("android.permission.BIND_REMOTE_DISPLAY")) {
-                        StringBuilder sb = new StringBuilder("Ignoring remote display provider service because it did not require the BIND_REMOTE_DISPLAY permission in its manifest: ");
+                        StringBuilder sb =
+                                new StringBuilder(
+                                        "Ignoring remote display provider service because it did"
+                                            + " not require the BIND_REMOTE_DISPLAY permission in"
+                                            + " its manifest: ");
                         sb.append(serviceInfo.packageName);
                         sb.append("/");
-                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb, serviceInfo.name, "RemoteDisplayProvider");
-                    } else if (remoteDisplayProviderWatcher.mPackageManager.checkPermission("android.permission.REMOTE_DISPLAY_PROVIDER", serviceInfo.packageName) != 0) {
-                        StringBuilder sb2 = new StringBuilder("Ignoring remote display provider service because it does not have the REMOTE_DISPLAY_PROVIDER permission: ");
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                sb, serviceInfo.name, "RemoteDisplayProvider");
+                    } else if (remoteDisplayProviderWatcher.mPackageManager.checkPermission(
+                                    "android.permission.REMOTE_DISPLAY_PROVIDER",
+                                    serviceInfo.packageName)
+                            != 0) {
+                        StringBuilder sb2 =
+                                new StringBuilder(
+                                        "Ignoring remote display provider service because it does"
+                                            + " not have the REMOTE_DISPLAY_PROVIDER permission: ");
                         sb2.append(serviceInfo.packageName);
                         sb2.append("/");
-                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb2, serviceInfo.name, "RemoteDisplayProvider");
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                sb2, serviceInfo.name, "RemoteDisplayProvider");
                     } else {
                         String str2 = serviceInfo.packageName;
                         String str3 = serviceInfo.name;
@@ -85,32 +105,58 @@ public final class RemoteDisplayProviderWatcher {
                             if (i4 >= size) {
                                 break;
                             }
-                            RemoteDisplayProviderProxy remoteDisplayProviderProxy = (RemoteDisplayProviderProxy) remoteDisplayProviderWatcher.mProviders.get(i4);
-                            if (remoteDisplayProviderProxy.mComponentName.getPackageName().equals(str2) && remoteDisplayProviderProxy.mComponentName.getClassName().equals(str3)) {
+                            RemoteDisplayProviderProxy remoteDisplayProviderProxy =
+                                    (RemoteDisplayProviderProxy)
+                                            remoteDisplayProviderWatcher.mProviders.get(i4);
+                            if (remoteDisplayProviderProxy
+                                            .mComponentName
+                                            .getPackageName()
+                                            .equals(str2)
+                                    && remoteDisplayProviderProxy
+                                            .mComponentName
+                                            .getClassName()
+                                            .equals(str3)) {
                                 i3 = i4;
                                 break;
                             }
                             i4++;
                         }
                         if (i3 < 0) {
-                            RemoteDisplayProviderProxy remoteDisplayProviderProxy2 = new RemoteDisplayProviderProxy(remoteDisplayProviderWatcher.mContext, new ComponentName(serviceInfo.packageName, serviceInfo.name), i);
+                            RemoteDisplayProviderProxy remoteDisplayProviderProxy2 =
+                                    new RemoteDisplayProviderProxy(
+                                            remoteDisplayProviderWatcher.mContext,
+                                            new ComponentName(
+                                                    serviceInfo.packageName, serviceInfo.name),
+                                            i);
                             remoteDisplayProviderProxy2.start();
                             int i5 = i2 + 1;
-                            remoteDisplayProviderWatcher.mProviders.add(i2, remoteDisplayProviderProxy2);
-                            MediaRouterService.UserHandler userHandler = (MediaRouterService.UserHandler) callback;
+                            remoteDisplayProviderWatcher.mProviders.add(
+                                    i2, remoteDisplayProviderProxy2);
+                            MediaRouterService.UserHandler userHandler =
+                                    (MediaRouterService.UserHandler) callback;
                             userHandler.getClass();
                             remoteDisplayProviderProxy2.mDisplayStateCallback = userHandler;
-                            remoteDisplayProviderProxy2.setDiscoveryMode(userHandler.mDiscoveryMode);
+                            remoteDisplayProviderProxy2.setDiscoveryMode(
+                                    userHandler.mDiscoveryMode);
                             remoteDisplayProviderProxy2.setSelectedDisplay(null);
-                            MediaRouterService.UserHandler.ProviderRecord providerRecord = new MediaRouterService.UserHandler.ProviderRecord(remoteDisplayProviderProxy2);
+                            MediaRouterService.UserHandler.ProviderRecord providerRecord =
+                                    new MediaRouterService.UserHandler.ProviderRecord(
+                                            remoteDisplayProviderProxy2);
                             userHandler.mProviderRecords.add(providerRecord);
-                            providerRecord.updateDescriptor(remoteDisplayProviderProxy2.mDisplayState);
+                            providerRecord.updateDescriptor(
+                                    remoteDisplayProviderProxy2.mDisplayState);
                             userHandler.scheduleUpdateClientState();
                             i2 = i5;
                         } else if (i3 >= i2) {
-                            RemoteDisplayProviderProxy remoteDisplayProviderProxy3 = (RemoteDisplayProviderProxy) remoteDisplayProviderWatcher.mProviders.get(i3);
+                            RemoteDisplayProviderProxy remoteDisplayProviderProxy3 =
+                                    (RemoteDisplayProviderProxy)
+                                            remoteDisplayProviderWatcher.mProviders.get(i3);
                             remoteDisplayProviderProxy3.start();
-                            if (remoteDisplayProviderProxy3.mActiveConnection == null && remoteDisplayProviderProxy3.mRunning && (remoteDisplayProviderProxy3.mDiscoveryMode != 0 || remoteDisplayProviderProxy3.mSelectedDisplayId != null)) {
+                            if (remoteDisplayProviderProxy3.mActiveConnection == null
+                                    && remoteDisplayProviderProxy3.mRunning
+                                    && (remoteDisplayProviderProxy3.mDiscoveryMode != 0
+                                            || remoteDisplayProviderProxy3.mSelectedDisplayId
+                                                    != null)) {
                                 remoteDisplayProviderProxy3.unbind();
                                 remoteDisplayProviderProxy3.bind();
                             }
@@ -121,23 +167,33 @@ public final class RemoteDisplayProviderWatcher {
                 }
             }
             if (i2 < remoteDisplayProviderWatcher.mProviders.size()) {
-                for (int size2 = remoteDisplayProviderWatcher.mProviders.size() - 1; size2 >= i2; size2--) {
-                    RemoteDisplayProviderProxy remoteDisplayProviderProxy4 = (RemoteDisplayProviderProxy) remoteDisplayProviderWatcher.mProviders.get(size2);
-                    MediaRouterService.UserHandler userHandler2 = (MediaRouterService.UserHandler) callback;
+                for (int size2 = remoteDisplayProviderWatcher.mProviders.size() - 1;
+                        size2 >= i2;
+                        size2--) {
+                    RemoteDisplayProviderProxy remoteDisplayProviderProxy4 =
+                            (RemoteDisplayProviderProxy)
+                                    remoteDisplayProviderWatcher.mProviders.get(size2);
+                    MediaRouterService.UserHandler userHandler2 =
+                            (MediaRouterService.UserHandler) callback;
                     int size3 = userHandler2.mProviderRecords.size();
                     int i6 = 0;
                     while (true) {
                         if (i6 >= size3) {
                             i6 = -1;
                             break;
-                        } else if (((MediaRouterService.UserHandler.ProviderRecord) userHandler2.mProviderRecords.get(i6)).mProvider == remoteDisplayProviderProxy4) {
+                        } else if (((MediaRouterService.UserHandler.ProviderRecord)
+                                                userHandler2.mProviderRecords.get(i6))
+                                        .mProvider
+                                == remoteDisplayProviderProxy4) {
                             break;
                         } else {
                             i6++;
                         }
                     }
                     if (i6 >= 0) {
-                        ((MediaRouterService.UserHandler.ProviderRecord) userHandler2.mProviderRecords.remove(i6)).updateDescriptor(null);
+                        ((MediaRouterService.UserHandler.ProviderRecord)
+                                        userHandler2.mProviderRecords.remove(i6))
+                                .updateDescriptor(null);
                         remoteDisplayProviderProxy4.mDisplayStateCallback = null;
                         remoteDisplayProviderProxy4.setDiscoveryMode(0);
                         userHandler2.checkSelectedRouteState();
@@ -152,7 +208,8 @@ public final class RemoteDisplayProviderWatcher {
 
     /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.media.RemoteDisplayProviderWatcher$1] */
     /* JADX WARN: Type inference failed for: r0v2, types: [com.android.server.media.RemoteDisplayProviderWatcher$2] */
-    public RemoteDisplayProviderWatcher(Context context, Callback callback, Handler handler, int i) {
+    public RemoteDisplayProviderWatcher(
+            Context context, Callback callback, Handler handler, int i) {
         this.mContext = context;
         this.mCallback = callback;
         this.mHandler = handler;

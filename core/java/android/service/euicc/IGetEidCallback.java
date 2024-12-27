@@ -12,8 +12,7 @@ public interface IGetEidCallback extends IInterface {
 
     public static class Default implements IGetEidCallback {
         @Override // android.service.euicc.IGetEidCallback
-        public void onSuccess(String eid) throws RemoteException {
-        }
+        public void onSuccess(String eid) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface IGetEidCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGetEidCallback {
+    public abstract static class Stub extends Binder implements IGetEidCallback {
         public static final String DESCRIPTOR = "android.service.euicc.IGetEidCallback";
         static final int TRANSACTION_onSuccess = 1;
 
@@ -60,7 +59,8 @@ public interface IGetEidCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

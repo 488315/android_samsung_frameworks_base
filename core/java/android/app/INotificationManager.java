@@ -1,11 +1,6 @@
 package android.app;
 
 import android.Manifest;
-import android.app.ICallNotificationEventCallback;
-import android.app.INotificationManager;
-import android.app.ITransientNotification;
-import android.app.ITransientNotificationCallback;
-import android.app.NotificationManager;
 import android.content.AttributionSource;
 import android.content.ComponentName;
 import android.content.pm.ParceledListSlice;
@@ -32,8 +27,10 @@ import android.service.notification.ZenModeConfig;
 import android.service.notification.ZenModeDiff;
 import android.service.notification.ZenPolicy;
 import android.text.TextUtils;
+
 import com.samsung.android.edge.EdgeLightingPolicy;
 import com.samsung.android.edge.SemEdgeLightingInfo;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,17 +41,25 @@ import java.util.stream.IntStream;
 
 /* loaded from: classes.dex */
 public interface INotificationManager extends IInterface {
-    String addAutomaticZenRule(AutomaticZenRule automaticZenRule, String str, boolean z) throws RemoteException;
+    String addAutomaticZenRule(AutomaticZenRule automaticZenRule, String str, boolean z)
+            throws RemoteException;
 
-    void addReplyHistory(int i, String str, String str2, int i2, String str3, String str4) throws RemoteException;
+    void addReplyHistory(int i, String str, String str2, int i2, String str3, String str4)
+            throws RemoteException;
 
     boolean addWearableAppToList(int i, String str) throws RemoteException;
 
-    void applyAdjustmentFromAssistant(INotificationListener iNotificationListener, Adjustment adjustment) throws RemoteException;
+    void applyAdjustmentFromAssistant(
+            INotificationListener iNotificationListener, Adjustment adjustment)
+            throws RemoteException;
 
-    void applyAdjustmentsFromAssistant(INotificationListener iNotificationListener, List<Adjustment> list) throws RemoteException;
+    void applyAdjustmentsFromAssistant(
+            INotificationListener iNotificationListener, List<Adjustment> list)
+            throws RemoteException;
 
-    void applyEnqueuedAdjustmentFromAssistant(INotificationListener iNotificationListener, Adjustment adjustment) throws RemoteException;
+    void applyEnqueuedAdjustmentFromAssistant(
+            INotificationListener iNotificationListener, Adjustment adjustment)
+            throws RemoteException;
 
     void applyRestore(byte[] bArr, int i) throws RemoteException;
 
@@ -68,7 +73,8 @@ public interface INotificationManager extends IInterface {
 
     boolean areNotificationsEnabledForPackage(String str, int i) throws RemoteException;
 
-    void bindEdgeLightingService(IBinder iBinder, int i, ComponentName componentName) throws RemoteException;
+    void bindEdgeLightingService(IBinder iBinder, int i, ComponentName componentName)
+            throws RemoteException;
 
     boolean canAppBypassDnd(String str, int i) throws RemoteException;
 
@@ -80,15 +86,22 @@ public interface INotificationManager extends IInterface {
 
     void cancelAllNotifications(String str, int i) throws RemoteException;
 
-    void cancelNotificationByEdge(String str, String str2, int i, int i2, String str3) throws RemoteException;
+    void cancelNotificationByEdge(String str, String str2, int i, int i2, String str3)
+            throws RemoteException;
 
-    void cancelNotificationByGroupKey(String str, String str2, int i, int i2, String str3, String str4) throws RemoteException;
+    void cancelNotificationByGroupKey(
+            String str, String str2, int i, int i2, String str3, String str4)
+            throws RemoteException;
 
-    void cancelNotificationFromListener(INotificationListener iNotificationListener, String str, String str2, int i) throws RemoteException;
+    void cancelNotificationFromListener(
+            INotificationListener iNotificationListener, String str, String str2, int i)
+            throws RemoteException;
 
-    void cancelNotificationWithTag(String str, String str2, String str3, int i, int i2) throws RemoteException;
+    void cancelNotificationWithTag(String str, String str2, String str3, int i, int i2)
+            throws RemoteException;
 
-    void cancelNotificationsFromListener(INotificationListener iNotificationListener, String[] strArr) throws RemoteException;
+    void cancelNotificationsFromListener(
+            INotificationListener iNotificationListener, String[] strArr) throws RemoteException;
 
     void cancelToast(String str, IBinder iBinder) throws RemoteException;
 
@@ -96,15 +109,21 @@ public interface INotificationManager extends IInterface {
 
     void clearData(String str, int i, boolean z) throws RemoteException;
 
-    void clearRequestedListenerHints(INotificationListener iNotificationListener) throws RemoteException;
+    void clearRequestedListenerHints(INotificationListener iNotificationListener)
+            throws RemoteException;
 
-    void createConversationNotificationChannelForPackage(String str, int i, NotificationChannel notificationChannel, String str2) throws RemoteException;
+    void createConversationNotificationChannelForPackage(
+            String str, int i, NotificationChannel notificationChannel, String str2)
+            throws RemoteException;
 
-    void createNotificationChannelGroups(String str, ParceledListSlice parceledListSlice) throws RemoteException;
+    void createNotificationChannelGroups(String str, ParceledListSlice parceledListSlice)
+            throws RemoteException;
 
-    void createNotificationChannels(String str, ParceledListSlice parceledListSlice) throws RemoteException;
+    void createNotificationChannels(String str, ParceledListSlice parceledListSlice)
+            throws RemoteException;
 
-    void createNotificationChannelsForPackage(String str, int i, ParceledListSlice parceledListSlice) throws RemoteException;
+    void createNotificationChannelsForPackage(
+            String str, int i, ParceledListSlice parceledListSlice) throws RemoteException;
 
     void deleteNotificationChannel(String str, String str2) throws RemoteException;
 
@@ -118,27 +137,68 @@ public interface INotificationManager extends IInterface {
 
     boolean dispatchDelayedWakeUpAndBlocked(int i, String str, String str2) throws RemoteException;
 
-    boolean dispatchDelayedWakelockAndBlocked(int i, String str, String str2, int i2) throws RemoteException;
+    boolean dispatchDelayedWakelockAndBlocked(int i, String str, String str2, int i2)
+            throws RemoteException;
 
-    void enqueueEdgeNotification(String str, String str2, int i, Bundle bundle, int i2) throws RemoteException;
+    void enqueueEdgeNotification(String str, String str2, int i, Bundle bundle, int i2)
+            throws RemoteException;
 
-    void enqueueNotificationWithTag(String str, String str2, String str3, int i, Notification notification, int i2) throws RemoteException;
+    void enqueueNotificationWithTag(
+            String str, String str2, String str3, int i, Notification notification, int i2)
+            throws RemoteException;
 
-    boolean enqueueTextToast(String str, IBinder iBinder, CharSequence charSequence, int i, boolean z, int i2, ITransientNotificationCallback iTransientNotificationCallback) throws RemoteException;
+    boolean enqueueTextToast(
+            String str,
+            IBinder iBinder,
+            CharSequence charSequence,
+            int i,
+            boolean z,
+            int i2,
+            ITransientNotificationCallback iTransientNotificationCallback)
+            throws RemoteException;
 
-    void enqueueTextToastForDex(String str, IBinder iBinder, CharSequence charSequence, int i, boolean z, int i2, ITransientNotificationCallback iTransientNotificationCallback, String str2, int i3) throws RemoteException;
+    void enqueueTextToastForDex(
+            String str,
+            IBinder iBinder,
+            CharSequence charSequence,
+            int i,
+            boolean z,
+            int i2,
+            ITransientNotificationCallback iTransientNotificationCallback,
+            String str2,
+            int i3)
+            throws RemoteException;
 
-    boolean enqueueToast(String str, IBinder iBinder, ITransientNotification iTransientNotification, int i, boolean z, int i2) throws RemoteException;
+    boolean enqueueToast(
+            String str,
+            IBinder iBinder,
+            ITransientNotification iTransientNotification,
+            int i,
+            boolean z,
+            int i2)
+            throws RemoteException;
 
-    void enqueueToastForDex(String str, IBinder iBinder, ITransientNotification iTransientNotification, int i, boolean z, int i2, String str2, int i3) throws RemoteException;
+    void enqueueToastForDex(
+            String str,
+            IBinder iBinder,
+            ITransientNotification iTransientNotification,
+            int i,
+            boolean z,
+            int i2,
+            String str2,
+            int i3)
+            throws RemoteException;
 
     void finishToken(String str, IBinder iBinder) throws RemoteException;
 
     StatusBarNotification[] getActiveNotifications(String str) throws RemoteException;
 
-    ParceledListSlice getActiveNotificationsFromListener(INotificationListener iNotificationListener, String[] strArr, int i) throws RemoteException;
+    ParceledListSlice getActiveNotificationsFromListener(
+            INotificationListener iNotificationListener, String[] strArr, int i)
+            throws RemoteException;
 
-    StatusBarNotification[] getActiveNotificationsWithAttribution(String str, String str2) throws RemoteException;
+    StatusBarNotification[] getActiveNotificationsWithAttribution(String str, String str2)
+            throws RemoteException;
 
     int getAllNotificationListenersCount() throws RemoteException;
 
@@ -174,7 +234,9 @@ public interface INotificationManager extends IInterface {
 
     NotificationManager.Policy getConsolidatedNotificationPolicy() throws RemoteException;
 
-    NotificationChannel getConversationNotificationChannel(String str, int i, String str2, String str3, boolean z, String str4) throws RemoteException;
+    NotificationChannel getConversationNotificationChannel(
+            String str, int i, String str2, String str3, boolean z, String str4)
+            throws RemoteException;
 
     ParceledListSlice getConversations(boolean z) throws RemoteException;
 
@@ -198,47 +260,66 @@ public interface INotificationManager extends IInterface {
 
     int getHintsFromListenerNoToken() throws RemoteException;
 
-    StatusBarNotification[] getHistoricalNotifications(String str, int i, boolean z) throws RemoteException;
+    StatusBarNotification[] getHistoricalNotifications(String str, int i, boolean z)
+            throws RemoteException;
 
-    StatusBarNotification[] getHistoricalNotificationsWithAttribution(String str, String str2, int i, boolean z) throws RemoteException;
+    StatusBarNotification[] getHistoricalNotificationsWithAttribution(
+            String str, String str2, int i, boolean z) throws RemoteException;
 
-    int getInterruptionFilterFromListener(INotificationListener iNotificationListener) throws RemoteException;
+    int getInterruptionFilterFromListener(INotificationListener iNotificationListener)
+            throws RemoteException;
 
-    NotificationListenerFilter getListenerFilter(ComponentName componentName, int i) throws RemoteException;
+    NotificationListenerFilter getListenerFilter(ComponentName componentName, int i)
+            throws RemoteException;
 
     int getLockScreenNotificationVisibilityForPackage(String str, int i) throws RemoteException;
 
     boolean getNotificationAlertsEnabledForPackage(String str, int i) throws RemoteException;
 
-    NotificationChannel getNotificationChannel(String str, int i, String str2, String str3) throws RemoteException;
+    NotificationChannel getNotificationChannel(String str, int i, String str2, String str3)
+            throws RemoteException;
 
-    NotificationChannel getNotificationChannelForPackage(String str, int i, String str2, String str3, boolean z) throws RemoteException;
+    NotificationChannel getNotificationChannelForPackage(
+            String str, int i, String str2, String str3, boolean z) throws RemoteException;
 
-    NotificationChannelGroup getNotificationChannelGroup(String str, String str2) throws RemoteException;
+    NotificationChannelGroup getNotificationChannelGroup(String str, String str2)
+            throws RemoteException;
 
-    NotificationChannelGroup getNotificationChannelGroupForPackage(String str, String str2, int i) throws RemoteException;
+    NotificationChannelGroup getNotificationChannelGroupForPackage(String str, String str2, int i)
+            throws RemoteException;
 
     ParceledListSlice getNotificationChannelGroups(String str) throws RemoteException;
 
-    ParceledListSlice getNotificationChannelGroupsForPackage(String str, int i, boolean z) throws RemoteException;
+    ParceledListSlice getNotificationChannelGroupsForPackage(String str, int i, boolean z)
+            throws RemoteException;
 
-    ParceledListSlice getNotificationChannelGroupsFromPrivilegedListener(INotificationListener iNotificationListener, String str, UserHandle userHandle) throws RemoteException;
+    ParceledListSlice getNotificationChannelGroupsFromPrivilegedListener(
+            INotificationListener iNotificationListener, String str, UserHandle userHandle)
+            throws RemoteException;
 
-    ParceledListSlice getNotificationChannels(String str, String str2, int i) throws RemoteException;
+    ParceledListSlice getNotificationChannels(String str, String str2, int i)
+            throws RemoteException;
 
     ParceledListSlice getNotificationChannelsBypassingDnd(String str, int i) throws RemoteException;
 
-    ParceledListSlice getNotificationChannelsForPackage(String str, int i, boolean z) throws RemoteException;
+    ParceledListSlice getNotificationChannelsForPackage(String str, int i, boolean z)
+            throws RemoteException;
 
-    ParceledListSlice getNotificationChannelsFromPrivilegedListener(INotificationListener iNotificationListener, String str, UserHandle userHandle) throws RemoteException;
+    ParceledListSlice getNotificationChannelsFromPrivilegedListener(
+            INotificationListener iNotificationListener, String str, UserHandle userHandle)
+            throws RemoteException;
 
     String getNotificationDelegate(String str) throws RemoteException;
 
     NotificationHistory getNotificationHistory(String str, String str2) throws RemoteException;
 
-    List<Bundle> getNotificationHistoryDataForPackage(String str, String str2, int i, String str3, String str4, int i2) throws RemoteException;
+    List<Bundle> getNotificationHistoryDataForPackage(
+            String str, String str2, int i, String str3, String str4, int i2)
+            throws RemoteException;
 
-    NotificationHistory getNotificationHistoryForPackage(String str, String str2, int i, String str3, String str4, int i2) throws RemoteException;
+    NotificationHistory getNotificationHistoryForPackage(
+            String str, String str2, int i, String str3, String str4, int i2)
+            throws RemoteException;
 
     NotificationManager.Policy getNotificationPolicy(String str) throws RemoteException;
 
@@ -252,15 +333,18 @@ public interface INotificationManager extends IInterface {
 
     List<String> getPackagesBypassingDnd(int i, boolean z) throws RemoteException;
 
-    NotificationChannelGroup getPopulatedNotificationChannelGroupForPackage(String str, int i, String str2, boolean z) throws RemoteException;
+    NotificationChannelGroup getPopulatedNotificationChannelGroupForPackage(
+            String str, int i, String str2, boolean z) throws RemoteException;
 
     boolean getPrivateNotificationsAllowed() throws RemoteException;
 
-    ParceledListSlice getRecentBlockedNotificationChannelGroupsForPackage(String str, int i) throws RemoteException;
+    ParceledListSlice getRecentBlockedNotificationChannelGroupsForPackage(String str, int i)
+            throws RemoteException;
 
     int getRuleInstanceCount(ComponentName componentName) throws RemoteException;
 
-    ParceledListSlice getSnoozedNotificationsFromListener(INotificationListener iNotificationListener, int i) throws RemoteException;
+    ParceledListSlice getSnoozedNotificationsFromListener(
+            INotificationListener iNotificationListener, int i) throws RemoteException;
 
     List<String> getWearableAppList(int i) throws RemoteException;
 
@@ -292,11 +376,13 @@ public interface INotificationManager extends IInterface {
 
     boolean isInInvalidMsgState(String str, int i) throws RemoteException;
 
-    boolean isNotificationAssistantAccessGranted(ComponentName componentName) throws RemoteException;
+    boolean isNotificationAssistantAccessGranted(ComponentName componentName)
+            throws RemoteException;
 
     boolean isNotificationListenerAccessGranted(ComponentName componentName) throws RemoteException;
 
-    boolean isNotificationListenerAccessGrantedForUser(ComponentName componentName, int i) throws RemoteException;
+    boolean isNotificationListenerAccessGrantedForUser(ComponentName componentName, int i)
+            throws RemoteException;
 
     boolean isNotificationPolicyAccessGranted(String str) throws RemoteException;
 
@@ -320,21 +406,34 @@ public interface INotificationManager extends IInterface {
 
     boolean matchesCallFilter(Bundle bundle) throws RemoteException;
 
-    void migrateNotificationFilter(INotificationListener iNotificationListener, int i, List<String> list) throws RemoteException;
+    void migrateNotificationFilter(
+            INotificationListener iNotificationListener, int i, List<String> list)
+            throws RemoteException;
 
-    void notifyConditions(String str, IConditionProvider iConditionProvider, Condition[] conditionArr) throws RemoteException;
+    void notifyConditions(
+            String str, IConditionProvider iConditionProvider, Condition[] conditionArr)
+            throws RemoteException;
 
     boolean onlyHasDefaultChannel(String str, int i) throws RemoteException;
 
-    long pullStats(long j, int i, boolean z, List<ParcelFileDescriptor> list) throws RemoteException;
+    long pullStats(long j, int i, boolean z, List<ParcelFileDescriptor> list)
+            throws RemoteException;
 
-    void registerCallNotificationEventListener(String str, UserHandle userHandle, ICallNotificationEventCallback iCallNotificationEventCallback) throws RemoteException;
+    void registerCallNotificationEventListener(
+            String str,
+            UserHandle userHandle,
+            ICallNotificationEventCallback iCallNotificationEventCallback)
+            throws RemoteException;
 
-    void registerEdgeLightingListener(IBinder iBinder, ComponentName componentName) throws RemoteException;
+    void registerEdgeLightingListener(IBinder iBinder, ComponentName componentName)
+            throws RemoteException;
 
-    void registerListener(INotificationListener iNotificationListener, ComponentName componentName, int i) throws RemoteException;
+    void registerListener(
+            INotificationListener iNotificationListener, ComponentName componentName, int i)
+            throws RemoteException;
 
-    void registerNotificationListener(ComponentName componentName, int i, boolean z) throws RemoteException;
+    void registerNotificationListener(ComponentName componentName, int i, boolean z)
+            throws RemoteException;
 
     boolean removeAutomaticZenRule(String str, boolean z) throws RemoteException;
 
@@ -348,9 +447,11 @@ public interface INotificationManager extends IInterface {
 
     void requestBindProvider(ComponentName componentName) throws RemoteException;
 
-    void requestHintsFromListener(INotificationListener iNotificationListener, int i) throws RemoteException;
+    void requestHintsFromListener(INotificationListener iNotificationListener, int i)
+            throws RemoteException;
 
-    void requestInterruptionFilterFromListener(INotificationListener iNotificationListener, int i) throws RemoteException;
+    void requestInterruptionFilterFromListener(INotificationListener iNotificationListener, int i)
+            throws RemoteException;
 
     boolean requestListenerHintsForWearable(int i) throws RemoteException;
 
@@ -384,41 +485,56 @@ public interface INotificationManager extends IInterface {
 
     void setInvalidMsgAppDemoted(String str, int i, boolean z) throws RemoteException;
 
-    void setListenerFilter(ComponentName componentName, int i, NotificationListenerFilter notificationListenerFilter) throws RemoteException;
+    void setListenerFilter(
+            ComponentName componentName,
+            int i,
+            NotificationListenerFilter notificationListenerFilter)
+            throws RemoteException;
 
-    void setLockScreenNotificationVisibilityForPackage(String str, int i, int i2) throws RemoteException;
+    void setLockScreenNotificationVisibilityForPackage(String str, int i, int i2)
+            throws RemoteException;
 
     void setManualZenRuleDeviceEffects(ZenDeviceEffects zenDeviceEffects) throws RemoteException;
 
     void setNASMigrationDoneAndResetDefault(int i, boolean z) throws RemoteException;
 
-    void setNotificationAlertsEnabledForPackage(String str, int i, boolean z) throws RemoteException;
+    void setNotificationAlertsEnabledForPackage(String str, int i, boolean z)
+            throws RemoteException;
 
-    void setNotificationAssistantAccessGranted(ComponentName componentName, boolean z) throws RemoteException;
+    void setNotificationAssistantAccessGranted(ComponentName componentName, boolean z)
+            throws RemoteException;
 
-    void setNotificationAssistantAccessGrantedForUser(ComponentName componentName, int i, boolean z) throws RemoteException;
+    void setNotificationAssistantAccessGrantedForUser(ComponentName componentName, int i, boolean z)
+            throws RemoteException;
 
     void setNotificationDelegate(String str, String str2) throws RemoteException;
 
-    void setNotificationListenerAccessGranted(ComponentName componentName, boolean z, boolean z2) throws RemoteException;
+    void setNotificationListenerAccessGranted(ComponentName componentName, boolean z, boolean z2)
+            throws RemoteException;
 
-    void setNotificationListenerAccessGrantedForUser(ComponentName componentName, int i, boolean z, boolean z2) throws RemoteException;
+    void setNotificationListenerAccessGrantedForUser(
+            ComponentName componentName, int i, boolean z, boolean z2) throws RemoteException;
 
-    void setNotificationPolicy(String str, NotificationManager.Policy policy, boolean z) throws RemoteException;
+    void setNotificationPolicy(String str, NotificationManager.Policy policy, boolean z)
+            throws RemoteException;
 
     void setNotificationPolicyAccessGranted(String str, boolean z) throws RemoteException;
 
-    void setNotificationPolicyAccessGrantedForUser(String str, int i, boolean z) throws RemoteException;
+    void setNotificationPolicyAccessGrantedForUser(String str, int i, boolean z)
+            throws RemoteException;
 
     boolean setNotificationTurnOff(String str, int i) throws RemoteException;
 
     void setNotificationsEnabledForPackage(String str, int i, boolean z) throws RemoteException;
 
-    void setNotificationsEnabledWithImportanceLockForPackage(String str, int i, boolean z) throws RemoteException;
+    void setNotificationsEnabledWithImportanceLockForPackage(String str, int i, boolean z)
+            throws RemoteException;
 
-    void setNotificationsShownFromListener(INotificationListener iNotificationListener, String[] strArr) throws RemoteException;
+    void setNotificationsShownFromListener(
+            INotificationListener iNotificationListener, String[] strArr) throws RemoteException;
 
-    void setOnNotificationPostedTrimFromListener(INotificationListener iNotificationListener, int i) throws RemoteException;
+    void setOnNotificationPostedTrimFromListener(INotificationListener iNotificationListener, int i)
+            throws RemoteException;
 
     void setPrivateNotificationsAllowed(boolean z) throws RemoteException;
 
@@ -440,11 +556,15 @@ public interface INotificationManager extends IInterface {
 
     void silenceNotificationSound() throws RemoteException;
 
-    void snoozeNotificationUntilContextFromListener(INotificationListener iNotificationListener, String str, String str2) throws RemoteException;
+    void snoozeNotificationUntilContextFromListener(
+            INotificationListener iNotificationListener, String str, String str2)
+            throws RemoteException;
 
-    void snoozeNotificationUntilFromListener(INotificationListener iNotificationListener, String str, long j) throws RemoteException;
+    void snoozeNotificationUntilFromListener(
+            INotificationListener iNotificationListener, String str, long j) throws RemoteException;
 
-    void startEdgeLighting(String str, SemEdgeLightingInfo semEdgeLightingInfo, IBinder iBinder) throws RemoteException;
+    void startEdgeLighting(String str, SemEdgeLightingInfo semEdgeLightingInfo, IBinder iBinder)
+            throws RemoteException;
 
     void stopEdgeLighting(String str, IBinder iBinder) throws RemoteException;
 
@@ -454,68 +574,103 @@ public interface INotificationManager extends IInterface {
 
     void unlockNotificationChannel(String str, int i, String str2) throws RemoteException;
 
-    void unregisterCallNotificationEventListener(String str, UserHandle userHandle, ICallNotificationEventCallback iCallNotificationEventCallback) throws RemoteException;
+    void unregisterCallNotificationEventListener(
+            String str,
+            UserHandle userHandle,
+            ICallNotificationEventCallback iCallNotificationEventCallback)
+            throws RemoteException;
 
     void unregisterEdgeLightingListener(IBinder iBinder, String str) throws RemoteException;
 
-    void unregisterListener(INotificationListener iNotificationListener, int i) throws RemoteException;
+    void unregisterListener(INotificationListener iNotificationListener, int i)
+            throws RemoteException;
 
-    void unsnoozeNotificationFromAssistant(INotificationListener iNotificationListener, String str) throws RemoteException;
+    void unsnoozeNotificationFromAssistant(INotificationListener iNotificationListener, String str)
+            throws RemoteException;
 
-    void unsnoozeNotificationFromSystemListener(INotificationListener iNotificationListener, String str) throws RemoteException;
+    void unsnoozeNotificationFromSystemListener(
+            INotificationListener iNotificationListener, String str) throws RemoteException;
 
-    boolean updateAutomaticZenRule(String str, AutomaticZenRule automaticZenRule, boolean z) throws RemoteException;
+    boolean updateAutomaticZenRule(String str, AutomaticZenRule automaticZenRule, boolean z)
+            throws RemoteException;
 
     void updateCancelEvent(int i, String str, boolean z) throws RemoteException;
 
     void updateEdgeLightingPackageList(String str, List<String> list) throws RemoteException;
 
-    void updateEdgeLightingPolicy(String str, EdgeLightingPolicy edgeLightingPolicy) throws RemoteException;
+    void updateEdgeLightingPolicy(String str, EdgeLightingPolicy edgeLightingPolicy)
+            throws RemoteException;
 
-    void updateNotificationChannelForPackage(String str, int i, NotificationChannel notificationChannel) throws RemoteException;
+    void updateNotificationChannelForPackage(
+            String str, int i, NotificationChannel notificationChannel) throws RemoteException;
 
-    void updateNotificationChannelFromPrivilegedListener(INotificationListener iNotificationListener, String str, UserHandle userHandle, NotificationChannel notificationChannel) throws RemoteException;
+    void updateNotificationChannelFromPrivilegedListener(
+            INotificationListener iNotificationListener,
+            String str,
+            UserHandle userHandle,
+            NotificationChannel notificationChannel)
+            throws RemoteException;
 
-    void updateNotificationChannelGroupForPackage(String str, int i, NotificationChannelGroup notificationChannelGroup) throws RemoteException;
+    void updateNotificationChannelGroupForPackage(
+            String str, int i, NotificationChannelGroup notificationChannelGroup)
+            throws RemoteException;
 
-    void updateNotificationChannelGroupFromPrivilegedListener(INotificationListener iNotificationListener, String str, UserHandle userHandle, NotificationChannelGroup notificationChannelGroup) throws RemoteException;
+    void updateNotificationChannelGroupFromPrivilegedListener(
+            INotificationListener iNotificationListener,
+            String str,
+            UserHandle userHandle,
+            NotificationChannelGroup notificationChannelGroup)
+            throws RemoteException;
 
-    void updateNotificationChannels(String str, ParceledListSlice parceledListSlice) throws RemoteException;
+    void updateNotificationChannels(String str, ParceledListSlice parceledListSlice)
+            throws RemoteException;
 
     public static class Default implements INotificationManager {
         @Override // android.app.INotificationManager
-        public void cancelAllNotifications(String pkg, int userId) throws RemoteException {
-        }
+        public void cancelAllNotifications(String pkg, int userId) throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void clearData(String pkg, int uid, boolean fromApp) throws RemoteException {
-        }
+        public void clearData(String pkg, int uid, boolean fromApp) throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public boolean enqueueTextToast(String pkg, IBinder token, CharSequence text, int duration, boolean isUiContext, int displayId, ITransientNotificationCallback callback) throws RemoteException {
+        public boolean enqueueTextToast(
+                String pkg,
+                IBinder token,
+                CharSequence text,
+                int duration,
+                boolean isUiContext,
+                int displayId,
+                ITransientNotificationCallback callback)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.INotificationManager
-        public boolean enqueueToast(String pkg, IBinder token, ITransientNotification callback, int duration, boolean isUiContext, int displayId) throws RemoteException {
+        public boolean enqueueToast(
+                String pkg,
+                IBinder token,
+                ITransientNotification callback,
+                int duration,
+                boolean isUiContext,
+                int displayId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.INotificationManager
-        public void cancelToast(String pkg, IBinder token) throws RemoteException {
-        }
+        public void cancelToast(String pkg, IBinder token) throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void finishToken(String pkg, IBinder token) throws RemoteException {
-        }
+        public void finishToken(String pkg, IBinder token) throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void enqueueNotificationWithTag(String pkg, String opPkg, String tag, int id, Notification notification, int userId) throws RemoteException {
-        }
+        public void enqueueNotificationWithTag(
+                String pkg, String opPkg, String tag, int id, Notification notification, int userId)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void cancelNotificationWithTag(String pkg, String opPkg, String tag, int id, int userId) throws RemoteException {
-        }
+        public void cancelNotificationWithTag(
+                String pkg, String opPkg, String tag, int id, int userId) throws RemoteException {}
 
         @Override // android.app.INotificationManager
         public boolean isInCall(String pkg, int uid) throws RemoteException {
@@ -523,8 +678,7 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public void setShowBadge(String pkg, int uid, boolean showBadge) throws RemoteException {
-        }
+        public void setShowBadge(String pkg, int uid, boolean showBadge) throws RemoteException {}
 
         @Override // android.app.INotificationManager
         public boolean canShowBadge(String pkg, int uid) throws RemoteException {
@@ -547,8 +701,8 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public void setInvalidMsgAppDemoted(String pkg, int uid, boolean isDemoted) throws RemoteException {
-        }
+        public void setInvalidMsgAppDemoted(String pkg, int uid, boolean isDemoted)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
         public boolean hasSentValidBubble(String pkg, int uid) throws RemoteException {
@@ -556,15 +710,16 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public void setNotificationsEnabledForPackage(String pkg, int uid, boolean enabled) throws RemoteException {
-        }
+        public void setNotificationsEnabledForPackage(String pkg, int uid, boolean enabled)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void setNotificationsEnabledWithImportanceLockForPackage(String pkg, int uid, boolean enabled) throws RemoteException {
-        }
+        public void setNotificationsEnabledWithImportanceLockForPackage(
+                String pkg, int uid, boolean enabled) throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public boolean areNotificationsEnabledForPackage(String pkg, int uid) throws RemoteException {
+        public boolean areNotificationsEnabledForPackage(String pkg, int uid)
+                throws RemoteException {
             return false;
         }
 
@@ -594,12 +749,11 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public void setHideSilentStatusIcons(boolean hide) throws RemoteException {
-        }
+        public void setHideSilentStatusIcons(boolean hide) throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void setBubblesAllowed(String pkg, int uid, int bubblePreference) throws RemoteException {
-        }
+        public void setBubblesAllowed(String pkg, int uid, int bubblePreference)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
         public boolean areBubblesAllowed(String pkg) throws RemoteException {
@@ -617,16 +771,16 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public void createNotificationChannelGroups(String pkg, ParceledListSlice channelGroupList) throws RemoteException {
-        }
+        public void createNotificationChannelGroups(String pkg, ParceledListSlice channelGroupList)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void createNotificationChannels(String pkg, ParceledListSlice channelsList) throws RemoteException {
-        }
+        public void createNotificationChannels(String pkg, ParceledListSlice channelsList)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void createNotificationChannelsForPackage(String pkg, int uid, ParceledListSlice channelsList) throws RemoteException {
-        }
+        public void createNotificationChannelsForPackage(
+                String pkg, int uid, ParceledListSlice channelsList) throws RemoteException {}
 
         @Override // android.app.INotificationManager
         public ParceledListSlice getConversations(boolean onlyImportant) throws RemoteException {
@@ -634,81 +788,105 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public ParceledListSlice getConversationsForPackage(String pkg, int uid) throws RemoteException {
+        public ParceledListSlice getConversationsForPackage(String pkg, int uid)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public ParceledListSlice getNotificationChannelGroupsForPackage(String pkg, int uid, boolean includeDeleted) throws RemoteException {
+        public ParceledListSlice getNotificationChannelGroupsForPackage(
+                String pkg, int uid, boolean includeDeleted) throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public NotificationChannelGroup getNotificationChannelGroupForPackage(String groupId, String pkg, int uid) throws RemoteException {
+        public NotificationChannelGroup getNotificationChannelGroupForPackage(
+                String groupId, String pkg, int uid) throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public NotificationChannelGroup getPopulatedNotificationChannelGroupForPackage(String pkg, int uid, String groupId, boolean includeDeleted) throws RemoteException {
+        public NotificationChannelGroup getPopulatedNotificationChannelGroupForPackage(
+                String pkg, int uid, String groupId, boolean includeDeleted)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public ParceledListSlice getRecentBlockedNotificationChannelGroupsForPackage(String pkg, int uid) throws RemoteException {
+        public ParceledListSlice getRecentBlockedNotificationChannelGroupsForPackage(
+                String pkg, int uid) throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public void updateNotificationChannelGroupForPackage(String pkg, int uid, NotificationChannelGroup group) throws RemoteException {
-        }
+        public void updateNotificationChannelGroupForPackage(
+                String pkg, int uid, NotificationChannelGroup group) throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void updateNotificationChannelForPackage(String pkg, int uid, NotificationChannel channel) throws RemoteException {
-        }
+        public void updateNotificationChannelForPackage(
+                String pkg, int uid, NotificationChannel channel) throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void unlockNotificationChannel(String pkg, int uid, String channelId) throws RemoteException {
-        }
+        public void unlockNotificationChannel(String pkg, int uid, String channelId)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void unlockAllNotificationChannels() throws RemoteException {
-        }
+        public void unlockAllNotificationChannels() throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public NotificationChannel getNotificationChannel(String callingPkg, int userId, String pkg, String channelId) throws RemoteException {
+        public NotificationChannel getNotificationChannel(
+                String callingPkg, int userId, String pkg, String channelId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public NotificationChannel getConversationNotificationChannel(String callingPkg, int userId, String pkg, String channelId, boolean returnParentIfNoConversationChannel, String conversationId) throws RemoteException {
+        public NotificationChannel getConversationNotificationChannel(
+                String callingPkg,
+                int userId,
+                String pkg,
+                String channelId,
+                boolean returnParentIfNoConversationChannel,
+                String conversationId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public void createConversationNotificationChannelForPackage(String pkg, int uid, NotificationChannel parentChannel, String conversationId) throws RemoteException {
-        }
+        public void createConversationNotificationChannelForPackage(
+                String pkg, int uid, NotificationChannel parentChannel, String conversationId)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public NotificationChannel getNotificationChannelForPackage(String pkg, int uid, String channelId, String conversationId, boolean includeDeleted) throws RemoteException {
+        public NotificationChannel getNotificationChannelForPackage(
+                String pkg,
+                int uid,
+                String channelId,
+                String conversationId,
+                boolean includeDeleted)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public void deleteNotificationChannel(String pkg, String channelId) throws RemoteException {
-        }
+        public void deleteNotificationChannel(String pkg, String channelId)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public ParceledListSlice getNotificationChannels(String callingPkg, String targetPkg, int userId) throws RemoteException {
+        public ParceledListSlice getNotificationChannels(
+                String callingPkg, String targetPkg, int userId) throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public ParceledListSlice getNotificationChannelsForPackage(String pkg, int uid, boolean includeDeleted) throws RemoteException {
+        public ParceledListSlice getNotificationChannelsForPackage(
+                String pkg, int uid, boolean includeDeleted) throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public int getNumNotificationChannelsForPackage(String pkg, int uid, boolean includeDeleted) throws RemoteException {
+        public int getNumNotificationChannelsForPackage(String pkg, int uid, boolean includeDeleted)
+                throws RemoteException {
             return 0;
         }
 
@@ -723,11 +901,12 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public void deleteNotificationChannelGroup(String pkg, String channelGroupId) throws RemoteException {
-        }
+        public void deleteNotificationChannelGroup(String pkg, String channelGroupId)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public NotificationChannelGroup getNotificationChannelGroup(String pkg, String channelGroupId) throws RemoteException {
+        public NotificationChannelGroup getNotificationChannelGroup(
+                String pkg, String channelGroupId) throws RemoteException {
             return null;
         }
 
@@ -747,12 +926,14 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public ParceledListSlice getNotificationChannelsBypassingDnd(String pkg, int uid) throws RemoteException {
+        public ParceledListSlice getNotificationChannelsBypassingDnd(String pkg, int uid)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public List<String> getPackagesBypassingDnd(int userId, boolean includeConversationChannels) throws RemoteException {
+        public List<String> getPackagesBypassingDnd(int userId, boolean includeConversationChannels)
+                throws RemoteException {
             return null;
         }
 
@@ -762,8 +943,8 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public void deleteNotificationHistoryItem(String pkg, int uid, long postedTime) throws RemoteException {
-        }
+        public void deleteNotificationHistoryItem(String pkg, int uid, long postedTime)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
         public boolean isPermissionFixed(String pkg, int userId) throws RemoteException {
@@ -771,99 +952,105 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public void silenceNotificationSound() throws RemoteException {
-        }
+        public void silenceNotificationSound() throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public StatusBarNotification[] getActiveNotifications(String callingPkg) throws RemoteException {
+        public StatusBarNotification[] getActiveNotifications(String callingPkg)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public StatusBarNotification[] getActiveNotificationsWithAttribution(String callingPkg, String callingAttributionTag) throws RemoteException {
+        public StatusBarNotification[] getActiveNotificationsWithAttribution(
+                String callingPkg, String callingAttributionTag) throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public StatusBarNotification[] getHistoricalNotifications(String callingPkg, int count, boolean includeSnoozed) throws RemoteException {
+        public StatusBarNotification[] getHistoricalNotifications(
+                String callingPkg, int count, boolean includeSnoozed) throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public StatusBarNotification[] getHistoricalNotificationsWithAttribution(String callingPkg, String callingAttributionTag, int count, boolean includeSnoozed) throws RemoteException {
+        public StatusBarNotification[] getHistoricalNotificationsWithAttribution(
+                String callingPkg, String callingAttributionTag, int count, boolean includeSnoozed)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public NotificationHistory getNotificationHistory(String callingPkg, String callingAttributionTag) throws RemoteException {
+        public NotificationHistory getNotificationHistory(
+                String callingPkg, String callingAttributionTag) throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public void registerListener(INotificationListener listener, ComponentName component, int userid) throws RemoteException {
-        }
+        public void registerListener(
+                INotificationListener listener, ComponentName component, int userid)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void unregisterListener(INotificationListener listener, int userid) throws RemoteException {
-        }
+        public void unregisterListener(INotificationListener listener, int userid)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void cancelNotificationFromListener(INotificationListener token, String pkg, String tag, int id) throws RemoteException {
-        }
+        public void cancelNotificationFromListener(
+                INotificationListener token, String pkg, String tag, int id)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void cancelNotificationsFromListener(INotificationListener token, String[] keys) throws RemoteException {
-        }
+        public void cancelNotificationsFromListener(INotificationListener token, String[] keys)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void snoozeNotificationUntilContextFromListener(INotificationListener token, String key, String snoozeCriterionId) throws RemoteException {
-        }
+        public void snoozeNotificationUntilContextFromListener(
+                INotificationListener token, String key, String snoozeCriterionId)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void snoozeNotificationUntilFromListener(INotificationListener token, String key, long until) throws RemoteException {
-        }
+        public void snoozeNotificationUntilFromListener(
+                INotificationListener token, String key, long until) throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void requestBindListener(ComponentName component) throws RemoteException {
-        }
+        public void requestBindListener(ComponentName component) throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void requestUnbindListener(INotificationListener token) throws RemoteException {
-        }
+        public void requestUnbindListener(INotificationListener token) throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void requestUnbindListenerComponent(ComponentName component) throws RemoteException {
-        }
+        public void requestUnbindListenerComponent(ComponentName component)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void requestBindProvider(ComponentName component) throws RemoteException {
-        }
+        public void requestBindProvider(ComponentName component) throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void requestUnbindProvider(IConditionProvider token) throws RemoteException {
-        }
+        public void requestUnbindProvider(IConditionProvider token) throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void setNotificationsShownFromListener(INotificationListener token, String[] keys) throws RemoteException {
-        }
+        public void setNotificationsShownFromListener(INotificationListener token, String[] keys)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public ParceledListSlice getActiveNotificationsFromListener(INotificationListener token, String[] keys, int trim) throws RemoteException {
+        public ParceledListSlice getActiveNotificationsFromListener(
+                INotificationListener token, String[] keys, int trim) throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public ParceledListSlice getSnoozedNotificationsFromListener(INotificationListener token, int trim) throws RemoteException {
+        public ParceledListSlice getSnoozedNotificationsFromListener(
+                INotificationListener token, int trim) throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public void clearRequestedListenerHints(INotificationListener token) throws RemoteException {
-        }
+        public void clearRequestedListenerHints(INotificationListener token)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void requestHintsFromListener(INotificationListener token, int hints) throws RemoteException {
-        }
+        public void requestHintsFromListener(INotificationListener token, int hints)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
         public int getHintsFromListener(INotificationListener token) throws RemoteException {
@@ -876,59 +1063,70 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public void requestInterruptionFilterFromListener(INotificationListener token, int interruptionFilter) throws RemoteException {
-        }
+        public void requestInterruptionFilterFromListener(
+                INotificationListener token, int interruptionFilter) throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public int getInterruptionFilterFromListener(INotificationListener token) throws RemoteException {
+        public int getInterruptionFilterFromListener(INotificationListener token)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.INotificationManager
-        public void setOnNotificationPostedTrimFromListener(INotificationListener token, int trim) throws RemoteException {
-        }
+        public void setOnNotificationPostedTrimFromListener(INotificationListener token, int trim)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void setInterruptionFilter(String pkg, int interruptionFilter, boolean fromUser) throws RemoteException {
-        }
+        public void setInterruptionFilter(String pkg, int interruptionFilter, boolean fromUser)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void updateNotificationChannelGroupFromPrivilegedListener(INotificationListener token, String pkg, UserHandle user, NotificationChannelGroup group) throws RemoteException {
-        }
+        public void updateNotificationChannelGroupFromPrivilegedListener(
+                INotificationListener token,
+                String pkg,
+                UserHandle user,
+                NotificationChannelGroup group)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void updateNotificationChannelFromPrivilegedListener(INotificationListener token, String pkg, UserHandle user, NotificationChannel channel) throws RemoteException {
-        }
+        public void updateNotificationChannelFromPrivilegedListener(
+                INotificationListener token,
+                String pkg,
+                UserHandle user,
+                NotificationChannel channel)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public ParceledListSlice getNotificationChannelsFromPrivilegedListener(INotificationListener token, String pkg, UserHandle user) throws RemoteException {
+        public ParceledListSlice getNotificationChannelsFromPrivilegedListener(
+                INotificationListener token, String pkg, UserHandle user) throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public ParceledListSlice getNotificationChannelGroupsFromPrivilegedListener(INotificationListener token, String pkg, UserHandle user) throws RemoteException {
+        public ParceledListSlice getNotificationChannelGroupsFromPrivilegedListener(
+                INotificationListener token, String pkg, UserHandle user) throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public void applyEnqueuedAdjustmentFromAssistant(INotificationListener token, Adjustment adjustment) throws RemoteException {
-        }
+        public void applyEnqueuedAdjustmentFromAssistant(
+                INotificationListener token, Adjustment adjustment) throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void applyAdjustmentFromAssistant(INotificationListener token, Adjustment adjustment) throws RemoteException {
-        }
+        public void applyAdjustmentFromAssistant(INotificationListener token, Adjustment adjustment)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void applyAdjustmentsFromAssistant(INotificationListener token, List<Adjustment> adjustments) throws RemoteException {
-        }
+        public void applyAdjustmentsFromAssistant(
+                INotificationListener token, List<Adjustment> adjustments) throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void unsnoozeNotificationFromAssistant(INotificationListener token, String key) throws RemoteException {
-        }
+        public void unsnoozeNotificationFromAssistant(INotificationListener token, String key)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void unsnoozeNotificationFromSystemListener(INotificationListener token, String key) throws RemoteException {
-        }
+        public void unsnoozeNotificationFromSystemListener(INotificationListener token, String key)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
         public ComponentName getEffectsSuppressor() throws RemoteException {
@@ -941,8 +1139,7 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public void cleanUpCallersAfter(long timeThreshold) throws RemoteException {
-        }
+        public void cleanUpCallersAfter(long timeThreshold) throws RemoteException {}
 
         @Override // android.app.INotificationManager
         public boolean isSystemConditionProviderEnabled(String path) throws RemoteException {
@@ -950,35 +1147,39 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public boolean isNotificationListenerAccessGranted(ComponentName listener) throws RemoteException {
+        public boolean isNotificationListenerAccessGranted(ComponentName listener)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.INotificationManager
-        public boolean isNotificationListenerAccessGrantedForUser(ComponentName listener, int userId) throws RemoteException {
+        public boolean isNotificationListenerAccessGrantedForUser(
+                ComponentName listener, int userId) throws RemoteException {
             return false;
         }
 
         @Override // android.app.INotificationManager
-        public boolean isNotificationAssistantAccessGranted(ComponentName assistant) throws RemoteException {
+        public boolean isNotificationAssistantAccessGranted(ComponentName assistant)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.INotificationManager
-        public void setNotificationListenerAccessGranted(ComponentName listener, boolean enabled, boolean userSet) throws RemoteException {
-        }
+        public void setNotificationListenerAccessGranted(
+                ComponentName listener, boolean enabled, boolean userSet) throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void setNotificationAssistantAccessGranted(ComponentName assistant, boolean enabled) throws RemoteException {
-        }
+        public void setNotificationAssistantAccessGranted(ComponentName assistant, boolean enabled)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void setNotificationListenerAccessGrantedForUser(ComponentName listener, int userId, boolean enabled, boolean userSet) throws RemoteException {
-        }
+        public void setNotificationListenerAccessGrantedForUser(
+                ComponentName listener, int userId, boolean enabled, boolean userSet)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void setNotificationAssistantAccessGrantedForUser(ComponentName assistant, int userId, boolean enabled) throws RemoteException {
-        }
+        public void setNotificationAssistantAccessGrantedForUser(
+                ComponentName assistant, int userId, boolean enabled) throws RemoteException {}
 
         @Override // android.app.INotificationManager
         public List<String> getEnabledNotificationListenerPackages() throws RemoteException {
@@ -986,12 +1187,14 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public List<ComponentName> getEnabledNotificationListeners(int userId) throws RemoteException {
+        public List<ComponentName> getEnabledNotificationListeners(int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public ComponentName getAllowedNotificationAssistantForUser(int userId) throws RemoteException {
+        public ComponentName getAllowedNotificationAssistantForUser(int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -1006,11 +1209,12 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public void setNASMigrationDoneAndResetDefault(int userId, boolean loadFromConfig) throws RemoteException {
-        }
+        public void setNASMigrationDoneAndResetDefault(int userId, boolean loadFromConfig)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public boolean hasEnabledNotificationListener(String packageName, int userId) throws RemoteException {
+        public boolean hasEnabledNotificationListener(String packageName, int userId)
+                throws RemoteException {
             return false;
         }
 
@@ -1025,17 +1229,19 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public NotificationManager.Policy getConsolidatedNotificationPolicy() throws RemoteException {
+        public NotificationManager.Policy getConsolidatedNotificationPolicy()
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public void setZenMode(int mode, Uri conditionId, String reason, boolean fromUser) throws RemoteException {
-        }
+        public void setZenMode(int mode, Uri conditionId, String reason, boolean fromUser)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void notifyConditions(String pkg, IConditionProvider provider, Condition[] conditions) throws RemoteException {
-        }
+        public void notifyConditions(
+                String pkg, IConditionProvider provider, Condition[] conditions)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
         public boolean isNotificationPolicyAccessGranted(String pkg) throws RemoteException {
@@ -1048,21 +1254,23 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public void setNotificationPolicy(String pkg, NotificationManager.Policy policy, boolean fromUser) throws RemoteException {
-        }
+        public void setNotificationPolicy(
+                String pkg, NotificationManager.Policy policy, boolean fromUser)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public boolean isNotificationPolicyAccessGrantedForPackage(String pkg) throws RemoteException {
+        public boolean isNotificationPolicyAccessGrantedForPackage(String pkg)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.INotificationManager
-        public void setNotificationPolicyAccessGranted(String pkg, boolean granted) throws RemoteException {
-        }
+        public void setNotificationPolicyAccessGranted(String pkg, boolean granted)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void setNotificationPolicyAccessGrantedForUser(String pkg, int userId, boolean granted) throws RemoteException {
-        }
+        public void setNotificationPolicyAccessGrantedForUser(
+                String pkg, int userId, boolean granted) throws RemoteException {}
 
         @Override // android.app.INotificationManager
         public ZenPolicy getDefaultZenPolicy() throws RemoteException {
@@ -1085,12 +1293,16 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public String addAutomaticZenRule(AutomaticZenRule automaticZenRule, String pkg, boolean fromUser) throws RemoteException {
+        public String addAutomaticZenRule(
+                AutomaticZenRule automaticZenRule, String pkg, boolean fromUser)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public boolean updateAutomaticZenRule(String id, AutomaticZenRule automaticZenRule, boolean fromUser) throws RemoteException {
+        public boolean updateAutomaticZenRule(
+                String id, AutomaticZenRule automaticZenRule, boolean fromUser)
+                throws RemoteException {
             return false;
         }
 
@@ -1100,7 +1312,8 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public boolean removeAutomaticZenRules(String packageName, boolean fromUser) throws RemoteException {
+        public boolean removeAutomaticZenRules(String packageName, boolean fromUser)
+                throws RemoteException {
             return false;
         }
 
@@ -1115,12 +1328,12 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public void setAutomaticZenRuleState(String id, Condition condition) throws RemoteException {
-        }
+        public void setAutomaticZenRuleState(String id, Condition condition)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void setManualZenRuleDeviceEffects(ZenDeviceEffects effects) throws RemoteException {
-        }
+        public void setManualZenRuleDeviceEffects(ZenDeviceEffects effects)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
         public byte[] getBackupPayload(int user) throws RemoteException {
@@ -1128,17 +1341,17 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public void applyRestore(byte[] payload, int user) throws RemoteException {
-        }
+        public void applyRestore(byte[] payload, int user) throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public ParceledListSlice getAppActiveNotifications(String callingPkg, int userId) throws RemoteException {
+        public ParceledListSlice getAppActiveNotifications(String callingPkg, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public void setNotificationDelegate(String callingPkg, String delegate) throws RemoteException {
-        }
+        public void setNotificationDelegate(String callingPkg, String delegate)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
         public String getNotificationDelegate(String callingPkg) throws RemoteException {
@@ -1146,18 +1359,19 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public boolean canNotifyAsPackage(String callingPkg, String targetPkg, int userId) throws RemoteException {
+        public boolean canNotifyAsPackage(String callingPkg, String targetPkg, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.INotificationManager
-        public boolean canUseFullScreenIntent(AttributionSource attributionSource) throws RemoteException {
+        public boolean canUseFullScreenIntent(AttributionSource attributionSource)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.INotificationManager
-        public void setPrivateNotificationsAllowed(boolean allow) throws RemoteException {
-        }
+        public void setPrivateNotificationsAllowed(boolean allow) throws RemoteException {}
 
         @Override // android.app.INotificationManager
         public boolean getPrivateNotificationsAllowed() throws RemoteException {
@@ -1165,74 +1379,78 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public long pullStats(long startNs, int report, boolean doAgg, List<ParcelFileDescriptor> stats) throws RemoteException {
+        public long pullStats(
+                long startNs, int report, boolean doAgg, List<ParcelFileDescriptor> stats)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.app.INotificationManager
-        public NotificationListenerFilter getListenerFilter(ComponentName cn, int userId) throws RemoteException {
+        public NotificationListenerFilter getListenerFilter(ComponentName cn, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public void setListenerFilter(ComponentName cn, int userId, NotificationListenerFilter nlf) throws RemoteException {
-        }
+        public void setListenerFilter(ComponentName cn, int userId, NotificationListenerFilter nlf)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void migrateNotificationFilter(INotificationListener token, int defaultTypes, List<String> disallowedPkgs) throws RemoteException {
-        }
+        public void migrateNotificationFilter(
+                INotificationListener token, int defaultTypes, List<String> disallowedPkgs)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void setToastRateLimitingEnabled(boolean enable) throws RemoteException {
-        }
+        public void setToastRateLimitingEnabled(boolean enable) throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void registerCallNotificationEventListener(String packageName, UserHandle userHandle, ICallNotificationEventCallback listener) throws RemoteException {
-        }
+        public void registerCallNotificationEventListener(
+                String packageName, UserHandle userHandle, ICallNotificationEventCallback listener)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void unregisterCallNotificationEventListener(String packageName, UserHandle userHandle, ICallNotificationEventCallback listener) throws RemoteException {
-        }
+        public void unregisterCallNotificationEventListener(
+                String packageName, UserHandle userHandle, ICallNotificationEventCallback listener)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void registerNotificationListener(ComponentName listener, int userId, boolean enabled) throws RemoteException {
-        }
+        public void registerNotificationListener(
+                ComponentName listener, int userId, boolean enabled) throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void updateNotificationChannels(String pkg, ParceledListSlice channelsList) throws RemoteException {
-        }
+        public void updateNotificationChannels(String pkg, ParceledListSlice channelsList)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void bindEdgeLightingService(IBinder binder, int condition, ComponentName component) throws RemoteException {
-        }
+        public void bindEdgeLightingService(IBinder binder, int condition, ComponentName component)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void unbindEdgeLightingService(IBinder binder, String packageName) throws RemoteException {
-        }
+        public void unbindEdgeLightingService(IBinder binder, String packageName)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void updateEdgeLightingPackageList(String callingPackage, List<String> list) throws RemoteException {
-        }
+        public void updateEdgeLightingPackageList(String callingPackage, List<String> list)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void updateEdgeLightingPolicy(String callingPackage, EdgeLightingPolicy policy) throws RemoteException {
-        }
+        public void updateEdgeLightingPolicy(String callingPackage, EdgeLightingPolicy policy)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void registerEdgeLightingListener(IBinder binder, ComponentName component) throws RemoteException {
-        }
+        public void registerEdgeLightingListener(IBinder binder, ComponentName component)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void unregisterEdgeLightingListener(IBinder binder, String packageName) throws RemoteException {
-        }
+        public void unregisterEdgeLightingListener(IBinder binder, String packageName)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void startEdgeLighting(String packageName, SemEdgeLightingInfo info, IBinder token) throws RemoteException {
-        }
+        public void startEdgeLighting(String packageName, SemEdgeLightingInfo info, IBinder token)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void stopEdgeLighting(String packageName, IBinder token) throws RemoteException {
-        }
+        public void stopEdgeLighting(String packageName, IBinder token) throws RemoteException {}
 
         @Override // android.app.INotificationManager
         public int getEdgeLightingState() throws RemoteException {
@@ -1240,17 +1458,18 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public boolean isEdgeLightingNotificationAllowed(String packageName) throws RemoteException {
+        public boolean isEdgeLightingNotificationAllowed(String packageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.INotificationManager
-        public void disable(int what, String callingPackage, IBinder binder) throws RemoteException {
-        }
+        public void disable(int what, String callingPackage, IBinder binder)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void disableEdgeLightingNotification(String callingPackage, boolean disable) throws RemoteException {
-        }
+        public void disableEdgeLightingNotification(String callingPackage, boolean disable)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
         public boolean isPackageEnabled(String packageName, int userId) throws RemoteException {
@@ -1258,20 +1477,22 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public void cancelNotificationByEdge(String pkg, String tag, int id, int userId, String key) throws RemoteException {
-        }
+        public void cancelNotificationByEdge(String pkg, String tag, int id, int userId, String key)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void cancelNotificationByGroupKey(String pkg, String tag, int id, int userId, String key, String groupKey) throws RemoteException {
-        }
+        public void cancelNotificationByGroupKey(
+                String pkg, String tag, int id, int userId, String key, String groupKey)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void enqueueEdgeNotification(String pkg, String opPkg, int id, Bundle extras, int userId) throws RemoteException {
-        }
+        public void enqueueEdgeNotification(
+                String pkg, String opPkg, int id, Bundle extras, int userId)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void removeEdgeNotification(String pkg, int id, Bundle extras, int userId) throws RemoteException {
-        }
+        public void removeEdgeNotification(String pkg, int id, Bundle extras, int userId)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
         public boolean isEdgeLightingAllowed(String pkg, int uid) throws RemoteException {
@@ -1279,20 +1500,21 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public void setAllowEdgeLighting(String pkg, int uid, boolean allowEdgeLighting) throws RemoteException {
-        }
+        public void setAllowEdgeLighting(String pkg, int uid, boolean allowEdgeLighting)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void resetDefaultAllowEdgeLighting() throws RemoteException {
-        }
+        public void resetDefaultAllowEdgeLighting() throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public boolean dispatchDelayedWakelockAndBlocked(int flags, String tag, String packageName, int uid) throws RemoteException {
+        public boolean dispatchDelayedWakelockAndBlocked(
+                int flags, String tag, String packageName, int uid) throws RemoteException {
             return false;
         }
 
         @Override // android.app.INotificationManager
-        public boolean dispatchDelayedWakeUpAndBlocked(int reason, String details, String packageName) throws RemoteException {
+        public boolean dispatchDelayedWakeUpAndBlocked(
+                int reason, String details, String packageName) throws RemoteException {
             return false;
         }
 
@@ -1302,8 +1524,8 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public void setAllowSubDisplayNotification(String pkg, int uid, boolean allowSubDisplayNoti) throws RemoteException {
-        }
+        public void setAllowSubDisplayNotification(String pkg, int uid, boolean allowSubDisplayNoti)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
         public boolean isOngoingActivityAllowed(String pkg, int uid) throws RemoteException {
@@ -1311,12 +1533,11 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public void setAllowOngoingActivity(String pkg, int uid, boolean allowOngoingActivity) throws RemoteException {
-        }
+        public void setAllowOngoingActivity(String pkg, int uid, boolean allowOngoingActivity)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void resetDefaultAllowOngoingActivity() throws RemoteException {
-        }
+        public void resetDefaultAllowOngoingActivity() throws RemoteException {}
 
         @Override // android.app.INotificationManager
         public List<String> getAllowedOngoingActivityAppList() throws RemoteException {
@@ -1324,16 +1545,18 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public boolean getNotificationAlertsEnabledForPackage(String pkg, int uid) throws RemoteException {
+        public boolean getNotificationAlertsEnabledForPackage(String pkg, int uid)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.INotificationManager
-        public void setNotificationAlertsEnabledForPackage(String pkg, int uid, boolean enabled) throws RemoteException {
-        }
+        public void setNotificationAlertsEnabledForPackage(String pkg, int uid, boolean enabled)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public boolean setWearableAppList(int userId, List<String> packages) throws RemoteException {
+        public boolean setWearableAppList(int userId, List<String> packages)
+                throws RemoteException {
             return false;
         }
 
@@ -1343,7 +1566,8 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public boolean removeWearableAppFromList(int userId, String PackageName) throws RemoteException {
+        public boolean removeWearableAppFromList(int userId, String PackageName)
+                throws RemoteException {
             return false;
         }
 
@@ -1358,25 +1582,28 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public int getLockScreenNotificationVisibilityForPackage(String pkg, int uid) throws RemoteException {
+        public int getLockScreenNotificationVisibilityForPackage(String pkg, int uid)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.INotificationManager
-        public void setLockScreenNotificationVisibilityForPackage(String pkg, int uid, int lockscreenVisibility) throws RemoteException {
-        }
+        public void setLockScreenNotificationVisibilityForPackage(
+                String pkg, int uid, int lockscreenVisibility) throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public boolean isAllowNotificationPopUpForPackage(String pkg, int uid) throws RemoteException {
+        public boolean isAllowNotificationPopUpForPackage(String pkg, int uid)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.INotificationManager
-        public void setAllowNotificationPopUpForPackage(String pkg, int uid, boolean allow) throws RemoteException {
-        }
+        public void setAllowNotificationPopUpForPackage(String pkg, int uid, boolean allow)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public boolean isAlertsAllowed(String pkg, int uid, String tags, int flags) throws RemoteException {
+        public boolean isAlertsAllowed(String pkg, int uid, String tags, int flags)
+                throws RemoteException {
             return false;
         }
 
@@ -1386,34 +1613,48 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public void setReminderEnabledForPackage(String pkg, int uid, boolean enabled) throws RemoteException {
-        }
+        public void setReminderEnabledForPackage(String pkg, int uid, boolean enabled)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void setReminderEnabled(int userId, boolean enabled, List<String> packages) throws RemoteException {
-        }
+        public void setReminderEnabled(int userId, boolean enabled, List<String> packages)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void addReplyHistory(int type, String key, String pkg, int userId, String title, String text) throws RemoteException {
-        }
+        public void addReplyHistory(
+                int type, String key, String pkg, int userId, String title, String text)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public List<Bundle> getNotificationHistoryDataForPackage(String callingPkg, String callingAttributionTag, int userId, String pkg, String key, int maxNotifications) throws RemoteException {
+        public List<Bundle> getNotificationHistoryDataForPackage(
+                String callingPkg,
+                String callingAttributionTag,
+                int userId,
+                String pkg,
+                String key,
+                int maxNotifications)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public NotificationHistory getNotificationHistoryForPackage(String callingPkg, String callingAttributionTag, int userId, String pkg, String key, int maxNotifications) throws RemoteException {
+        public NotificationHistory getNotificationHistoryForPackage(
+                String callingPkg,
+                String callingAttributionTag,
+                int userId,
+                String pkg,
+                String key,
+                int maxNotifications)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.INotificationManager
-        public void updateCancelEvent(int userId, String key, boolean isPackage) throws RemoteException {
-        }
+        public void updateCancelEvent(int userId, String key, boolean isPackage)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void setRestoreBlockListForSS(List<String> list) throws RemoteException {
-        }
+        public void setRestoreBlockListForSS(List<String> list) throws RemoteException {}
 
         @Override // android.app.INotificationManager
         public int getAllNotificationListenersCount() throws RemoteException {
@@ -1431,8 +1672,7 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public void setAppBypassDnd(String pkg, int uid, boolean allow) throws RemoteException {
-        }
+        public void setAppBypassDnd(String pkg, int uid, boolean allow) throws RemoteException {}
 
         @Override // android.app.INotificationManager
         public int getAppsBypassingDndCount(int uid) throws RemoteException {
@@ -1440,12 +1680,29 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public void enqueueTextToastForDex(String pkg, IBinder token, CharSequence text, int duration, boolean isUiContext, int displayId, ITransientNotificationCallback callback, String message, int uid) throws RemoteException {
-        }
+        public void enqueueTextToastForDex(
+                String pkg,
+                IBinder token,
+                CharSequence text,
+                int duration,
+                boolean isUiContext,
+                int displayId,
+                ITransientNotificationCallback callback,
+                String message,
+                int uid)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
-        public void enqueueToastForDex(String pkg, IBinder token, ITransientNotification callback, int duration, boolean isUiContext, int displayId, String message, int uid) throws RemoteException {
-        }
+        public void enqueueToastForDex(
+                String pkg,
+                IBinder token,
+                ITransientNotification callback,
+                int duration,
+                boolean isUiContext,
+                int displayId,
+                String message,
+                int uid)
+                throws RemoteException {}
 
         @Override // android.app.INotificationManager
         public int isNotificationTurnedOff(String pkg, int uid) throws RemoteException {
@@ -1473,7 +1730,8 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.app.INotificationManager
-        public List<String> getBlockInfoOfNotificationsForOverflow(String pkg) throws RemoteException {
+        public List<String> getBlockInfoOfNotificationsForOverflow(String pkg)
+                throws RemoteException {
             return null;
         }
 
@@ -1483,10 +1741,14 @@ public interface INotificationManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements INotificationManager {
+    public abstract static class Stub extends Binder implements INotificationManager {
         public static final String DESCRIPTOR = "android.app.INotificationManager";
-        static final String[] PERMISSIONS_registerCallNotificationEventListener = {Manifest.permission.INTERACT_ACROSS_USERS, Manifest.permission.ACCESS_NOTIFICATIONS};
-        static final String[] PERMISSIONS_unregisterCallNotificationEventListener = {Manifest.permission.INTERACT_ACROSS_USERS, Manifest.permission.ACCESS_NOTIFICATIONS};
+        static final String[] PERMISSIONS_registerCallNotificationEventListener = {
+            Manifest.permission.INTERACT_ACROSS_USERS, Manifest.permission.ACCESS_NOTIFICATIONS
+        };
+        static final String[] PERMISSIONS_unregisterCallNotificationEventListener = {
+            Manifest.permission.INTERACT_ACROSS_USERS, Manifest.permission.ACCESS_NOTIFICATIONS
+        };
         static final int TRANSACTION_addAutomaticZenRule = 133;
         static final int TRANSACTION_addReplyHistory = 202;
         static final int TRANSACTION_addWearableAppToList = 190;
@@ -1718,7 +1980,9 @@ public interface INotificationManager extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static INotificationManager asInterface(IBinder obj) {
@@ -2188,7 +2452,8 @@ public interface INotificationManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, final Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, final Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -2215,20 +2480,25 @@ public interface INotificationManager extends IInterface {
                 case 3:
                     String _arg03 = data.readString();
                     IBinder _arg13 = data.readStrongBinder();
-                    CharSequence _arg22 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg22 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     int _arg3 = data.readInt();
                     boolean _arg4 = data.readBoolean();
                     int _arg5 = data.readInt();
-                    ITransientNotificationCallback _arg6 = ITransientNotificationCallback.Stub.asInterface(data.readStrongBinder());
+                    ITransientNotificationCallback _arg6 =
+                            ITransientNotificationCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
-                    boolean _result = enqueueTextToast(_arg03, _arg13, _arg22, _arg3, _arg4, _arg5, _arg6);
+                    boolean _result =
+                            enqueueTextToast(_arg03, _arg13, _arg22, _arg3, _arg4, _arg5, _arg6);
                     reply.writeNoException();
                     reply.writeBoolean(_result);
                     return true;
                 case 4:
                     String _arg04 = data.readString();
                     IBinder _arg14 = data.readStrongBinder();
-                    ITransientNotification _arg23 = ITransientNotification.Stub.asInterface(data.readStrongBinder());
+                    ITransientNotification _arg23 =
+                            ITransientNotification.Stub.asInterface(data.readStrongBinder());
                     int _arg32 = data.readInt();
                     boolean _arg42 = data.readBoolean();
                     int _arg52 = data.readInt();
@@ -2434,14 +2704,16 @@ public interface INotificationManager extends IInterface {
                     return true;
                 case 30:
                     String _arg030 = data.readString();
-                    ParceledListSlice _arg123 = (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _arg123 =
+                            (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
                     data.enforceNoDataAvail();
                     createNotificationChannelGroups(_arg030, _arg123);
                     reply.writeNoException();
                     return true;
                 case 31:
                     String _arg031 = data.readString();
-                    ParceledListSlice _arg124 = (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _arg124 =
+                            (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
                     data.enforceNoDataAvail();
                     createNotificationChannels(_arg031, _arg124);
                     reply.writeNoException();
@@ -2449,7 +2721,8 @@ public interface INotificationManager extends IInterface {
                 case 32:
                     String _arg032 = data.readString();
                     int _arg125 = data.readInt();
-                    ParceledListSlice _arg211 = (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _arg211 =
+                            (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
                     data.enforceNoDataAvail();
                     createNotificationChannelsForPackage(_arg032, _arg125, _arg211);
                     reply.writeNoException();
@@ -2474,7 +2747,8 @@ public interface INotificationManager extends IInterface {
                     int _arg127 = data.readInt();
                     boolean _arg212 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    ParceledListSlice _result20 = getNotificationChannelGroupsForPackage(_arg035, _arg127, _arg212);
+                    ParceledListSlice _result20 =
+                            getNotificationChannelGroupsForPackage(_arg035, _arg127, _arg212);
                     reply.writeNoException();
                     reply.writeTypedObject(_result20, 1);
                     return true;
@@ -2483,7 +2757,8 @@ public interface INotificationManager extends IInterface {
                     String _arg128 = data.readString();
                     int _arg213 = data.readInt();
                     data.enforceNoDataAvail();
-                    NotificationChannelGroup _result21 = getNotificationChannelGroupForPackage(_arg036, _arg128, _arg213);
+                    NotificationChannelGroup _result21 =
+                            getNotificationChannelGroupForPackage(_arg036, _arg128, _arg213);
                     reply.writeNoException();
                     reply.writeTypedObject(_result21, 1);
                     return true;
@@ -2493,7 +2768,9 @@ public interface INotificationManager extends IInterface {
                     String _arg214 = data.readString();
                     boolean _arg35 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    NotificationChannelGroup _result22 = getPopulatedNotificationChannelGroupForPackage(_arg037, _arg129, _arg214, _arg35);
+                    NotificationChannelGroup _result22 =
+                            getPopulatedNotificationChannelGroupForPackage(
+                                    _arg037, _arg129, _arg214, _arg35);
                     reply.writeNoException();
                     reply.writeTypedObject(_result22, 1);
                     return true;
@@ -2501,14 +2778,17 @@ public interface INotificationManager extends IInterface {
                     String _arg038 = data.readString();
                     int _arg130 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParceledListSlice _result23 = getRecentBlockedNotificationChannelGroupsForPackage(_arg038, _arg130);
+                    ParceledListSlice _result23 =
+                            getRecentBlockedNotificationChannelGroupsForPackage(_arg038, _arg130);
                     reply.writeNoException();
                     reply.writeTypedObject(_result23, 1);
                     return true;
                 case 39:
                     String _arg039 = data.readString();
                     int _arg131 = data.readInt();
-                    NotificationChannelGroup _arg215 = (NotificationChannelGroup) data.readTypedObject(NotificationChannelGroup.CREATOR);
+                    NotificationChannelGroup _arg215 =
+                            (NotificationChannelGroup)
+                                    data.readTypedObject(NotificationChannelGroup.CREATOR);
                     data.enforceNoDataAvail();
                     updateNotificationChannelGroupForPackage(_arg039, _arg131, _arg215);
                     reply.writeNoException();
@@ -2516,7 +2796,8 @@ public interface INotificationManager extends IInterface {
                 case 40:
                     String _arg040 = data.readString();
                     int _arg132 = data.readInt();
-                    NotificationChannel _arg216 = (NotificationChannel) data.readTypedObject(NotificationChannel.CREATOR);
+                    NotificationChannel _arg216 =
+                            (NotificationChannel) data.readTypedObject(NotificationChannel.CREATOR);
                     data.enforceNoDataAvail();
                     updateNotificationChannelForPackage(_arg040, _arg132, _arg216);
                     reply.writeNoException();
@@ -2539,7 +2820,8 @@ public interface INotificationManager extends IInterface {
                     String _arg218 = data.readString();
                     String _arg36 = data.readString();
                     data.enforceNoDataAvail();
-                    NotificationChannel _result24 = getNotificationChannel(_arg042, _arg134, _arg218, _arg36);
+                    NotificationChannel _result24 =
+                            getNotificationChannel(_arg042, _arg134, _arg218, _arg36);
                     reply.writeNoException();
                     reply.writeTypedObject(_result24, 1);
                     return true;
@@ -2551,17 +2833,21 @@ public interface INotificationManager extends IInterface {
                     boolean _arg45 = data.readBoolean();
                     String _arg54 = data.readString();
                     data.enforceNoDataAvail();
-                    NotificationChannel _result25 = getConversationNotificationChannel(_arg043, _arg135, _arg219, _arg37, _arg45, _arg54);
+                    NotificationChannel _result25 =
+                            getConversationNotificationChannel(
+                                    _arg043, _arg135, _arg219, _arg37, _arg45, _arg54);
                     reply.writeNoException();
                     reply.writeTypedObject(_result25, 1);
                     return true;
                 case 45:
                     String _arg044 = data.readString();
                     int _arg136 = data.readInt();
-                    NotificationChannel _arg220 = (NotificationChannel) data.readTypedObject(NotificationChannel.CREATOR);
+                    NotificationChannel _arg220 =
+                            (NotificationChannel) data.readTypedObject(NotificationChannel.CREATOR);
                     String _arg38 = data.readString();
                     data.enforceNoDataAvail();
-                    createConversationNotificationChannelForPackage(_arg044, _arg136, _arg220, _arg38);
+                    createConversationNotificationChannelForPackage(
+                            _arg044, _arg136, _arg220, _arg38);
                     reply.writeNoException();
                     return true;
                 case 46:
@@ -2571,7 +2857,9 @@ public interface INotificationManager extends IInterface {
                     String _arg39 = data.readString();
                     boolean _arg46 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    NotificationChannel _result26 = getNotificationChannelForPackage(_arg045, _arg137, _arg221, _arg39, _arg46);
+                    NotificationChannel _result26 =
+                            getNotificationChannelForPackage(
+                                    _arg045, _arg137, _arg221, _arg39, _arg46);
                     reply.writeNoException();
                     reply.writeTypedObject(_result26, 1);
                     return true;
@@ -2587,7 +2875,8 @@ public interface INotificationManager extends IInterface {
                     String _arg139 = data.readString();
                     int _arg222 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParceledListSlice _result27 = getNotificationChannels(_arg047, _arg139, _arg222);
+                    ParceledListSlice _result27 =
+                            getNotificationChannels(_arg047, _arg139, _arg222);
                     reply.writeNoException();
                     reply.writeTypedObject(_result27, 1);
                     return true;
@@ -2596,7 +2885,8 @@ public interface INotificationManager extends IInterface {
                     int _arg140 = data.readInt();
                     boolean _arg223 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    ParceledListSlice _result28 = getNotificationChannelsForPackage(_arg048, _arg140, _arg223);
+                    ParceledListSlice _result28 =
+                            getNotificationChannelsForPackage(_arg048, _arg140, _arg223);
                     reply.writeNoException();
                     reply.writeTypedObject(_result28, 1);
                     return true;
@@ -2636,7 +2926,8 @@ public interface INotificationManager extends IInterface {
                     String _arg053 = data.readString();
                     String _arg145 = data.readString();
                     data.enforceNoDataAvail();
-                    NotificationChannelGroup _result32 = getNotificationChannelGroup(_arg053, _arg145);
+                    NotificationChannelGroup _result32 =
+                            getNotificationChannelGroup(_arg053, _arg145);
                     reply.writeNoException();
                     reply.writeTypedObject(_result32, 1);
                     return true;
@@ -2664,7 +2955,8 @@ public interface INotificationManager extends IInterface {
                     String _arg056 = data.readString();
                     int _arg147 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParceledListSlice _result36 = getNotificationChannelsBypassingDnd(_arg056, _arg147);
+                    ParceledListSlice _result36 =
+                            getNotificationChannelsBypassingDnd(_arg056, _arg147);
                     reply.writeNoException();
                     reply.writeTypedObject(_result36, 1);
                     return true;
@@ -2714,7 +3006,8 @@ public interface INotificationManager extends IInterface {
                     String _arg062 = data.readString();
                     String _arg151 = data.readString();
                     data.enforceNoDataAvail();
-                    StatusBarNotification[] _result41 = getActiveNotificationsWithAttribution(_arg062, _arg151);
+                    StatusBarNotification[] _result41 =
+                            getActiveNotificationsWithAttribution(_arg062, _arg151);
                     reply.writeNoException();
                     reply.writeTypedArray(_result41, 1);
                     return true;
@@ -2723,7 +3016,8 @@ public interface INotificationManager extends IInterface {
                     int _arg152 = data.readInt();
                     boolean _arg226 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    StatusBarNotification[] _result42 = getHistoricalNotifications(_arg063, _arg152, _arg226);
+                    StatusBarNotification[] _result42 =
+                            getHistoricalNotifications(_arg063, _arg152, _arg226);
                     reply.writeNoException();
                     reply.writeTypedArray(_result42, 1);
                     return true;
@@ -2733,7 +3027,9 @@ public interface INotificationManager extends IInterface {
                     int _arg227 = data.readInt();
                     boolean _arg310 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    StatusBarNotification[] _result43 = getHistoricalNotificationsWithAttribution(_arg064, _arg153, _arg227, _arg310);
+                    StatusBarNotification[] _result43 =
+                            getHistoricalNotificationsWithAttribution(
+                                    _arg064, _arg153, _arg227, _arg310);
                     reply.writeNoException();
                     reply.writeTypedArray(_result43, 1);
                     return true;
@@ -2746,22 +3042,26 @@ public interface INotificationManager extends IInterface {
                     reply.writeTypedObject(_result44, 1);
                     return true;
                 case 69:
-                    INotificationListener _arg066 = INotificationListener.Stub.asInterface(data.readStrongBinder());
-                    ComponentName _arg155 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    INotificationListener _arg066 =
+                            INotificationListener.Stub.asInterface(data.readStrongBinder());
+                    ComponentName _arg155 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg228 = data.readInt();
                     data.enforceNoDataAvail();
                     registerListener(_arg066, _arg155, _arg228);
                     reply.writeNoException();
                     return true;
                 case 70:
-                    INotificationListener _arg067 = INotificationListener.Stub.asInterface(data.readStrongBinder());
+                    INotificationListener _arg067 =
+                            INotificationListener.Stub.asInterface(data.readStrongBinder());
                     int _arg156 = data.readInt();
                     data.enforceNoDataAvail();
                     unregisterListener(_arg067, _arg156);
                     reply.writeNoException();
                     return true;
                 case 71:
-                    INotificationListener _arg068 = INotificationListener.Stub.asInterface(data.readStrongBinder());
+                    INotificationListener _arg068 =
+                            INotificationListener.Stub.asInterface(data.readStrongBinder());
                     String _arg157 = data.readString();
                     String _arg229 = data.readString();
                     int _arg311 = data.readInt();
@@ -2770,14 +3070,16 @@ public interface INotificationManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 72:
-                    INotificationListener _arg069 = INotificationListener.Stub.asInterface(data.readStrongBinder());
+                    INotificationListener _arg069 =
+                            INotificationListener.Stub.asInterface(data.readStrongBinder());
                     String[] _arg158 = data.createStringArray();
                     data.enforceNoDataAvail();
                     cancelNotificationsFromListener(_arg069, _arg158);
                     reply.writeNoException();
                     return true;
                 case 73:
-                    INotificationListener _arg070 = INotificationListener.Stub.asInterface(data.readStrongBinder());
+                    INotificationListener _arg070 =
+                            INotificationListener.Stub.asInterface(data.readStrongBinder());
                     String _arg159 = data.readString();
                     String _arg230 = data.readString();
                     data.enforceNoDataAvail();
@@ -2785,7 +3087,8 @@ public interface INotificationManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 74:
-                    INotificationListener _arg071 = INotificationListener.Stub.asInterface(data.readStrongBinder());
+                    INotificationListener _arg071 =
+                            INotificationListener.Stub.asInterface(data.readStrongBinder());
                     String _arg160 = data.readString();
                     long _arg231 = data.readLong();
                     data.enforceNoDataAvail();
@@ -2793,74 +3096,87 @@ public interface INotificationManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 75:
-                    ComponentName _arg072 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg072 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     requestBindListener(_arg072);
                     reply.writeNoException();
                     return true;
                 case 76:
-                    INotificationListener _arg073 = INotificationListener.Stub.asInterface(data.readStrongBinder());
+                    INotificationListener _arg073 =
+                            INotificationListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestUnbindListener(_arg073);
                     reply.writeNoException();
                     return true;
                 case 77:
-                    ComponentName _arg074 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg074 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     requestUnbindListenerComponent(_arg074);
                     reply.writeNoException();
                     return true;
                 case 78:
-                    ComponentName _arg075 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg075 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     requestBindProvider(_arg075);
                     reply.writeNoException();
                     return true;
                 case 79:
-                    IConditionProvider _arg076 = IConditionProvider.Stub.asInterface(data.readStrongBinder());
+                    IConditionProvider _arg076 =
+                            IConditionProvider.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestUnbindProvider(_arg076);
                     reply.writeNoException();
                     return true;
                 case 80:
-                    INotificationListener _arg077 = INotificationListener.Stub.asInterface(data.readStrongBinder());
+                    INotificationListener _arg077 =
+                            INotificationListener.Stub.asInterface(data.readStrongBinder());
                     String[] _arg161 = data.createStringArray();
                     data.enforceNoDataAvail();
                     setNotificationsShownFromListener(_arg077, _arg161);
                     reply.writeNoException();
                     return true;
                 case 81:
-                    INotificationListener _arg078 = INotificationListener.Stub.asInterface(data.readStrongBinder());
+                    INotificationListener _arg078 =
+                            INotificationListener.Stub.asInterface(data.readStrongBinder());
                     String[] _arg162 = data.createStringArray();
                     int _arg232 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParceledListSlice _result45 = getActiveNotificationsFromListener(_arg078, _arg162, _arg232);
+                    ParceledListSlice _result45 =
+                            getActiveNotificationsFromListener(_arg078, _arg162, _arg232);
                     reply.writeNoException();
                     reply.writeTypedObject(_result45, 1);
                     return true;
                 case 82:
-                    INotificationListener _arg079 = INotificationListener.Stub.asInterface(data.readStrongBinder());
+                    INotificationListener _arg079 =
+                            INotificationListener.Stub.asInterface(data.readStrongBinder());
                     int _arg163 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParceledListSlice _result46 = getSnoozedNotificationsFromListener(_arg079, _arg163);
+                    ParceledListSlice _result46 =
+                            getSnoozedNotificationsFromListener(_arg079, _arg163);
                     reply.writeNoException();
                     reply.writeTypedObject(_result46, 1);
                     return true;
                 case 83:
-                    INotificationListener _arg080 = INotificationListener.Stub.asInterface(data.readStrongBinder());
+                    INotificationListener _arg080 =
+                            INotificationListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     clearRequestedListenerHints(_arg080);
                     reply.writeNoException();
                     return true;
                 case 84:
-                    INotificationListener _arg081 = INotificationListener.Stub.asInterface(data.readStrongBinder());
+                    INotificationListener _arg081 =
+                            INotificationListener.Stub.asInterface(data.readStrongBinder());
                     int _arg164 = data.readInt();
                     data.enforceNoDataAvail();
                     requestHintsFromListener(_arg081, _arg164);
                     reply.writeNoException();
                     return true;
                 case 85:
-                    INotificationListener _arg082 = INotificationListener.Stub.asInterface(data.readStrongBinder());
+                    INotificationListener _arg082 =
+                            INotificationListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result47 = getHintsFromListener(_arg082);
                     reply.writeNoException();
@@ -2872,21 +3188,24 @@ public interface INotificationManager extends IInterface {
                     reply.writeInt(_result48);
                     return true;
                 case 87:
-                    INotificationListener _arg083 = INotificationListener.Stub.asInterface(data.readStrongBinder());
+                    INotificationListener _arg083 =
+                            INotificationListener.Stub.asInterface(data.readStrongBinder());
                     int _arg165 = data.readInt();
                     data.enforceNoDataAvail();
                     requestInterruptionFilterFromListener(_arg083, _arg165);
                     reply.writeNoException();
                     return true;
                 case 88:
-                    INotificationListener _arg084 = INotificationListener.Stub.asInterface(data.readStrongBinder());
+                    INotificationListener _arg084 =
+                            INotificationListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result49 = getInterruptionFilterFromListener(_arg084);
                     reply.writeNoException();
                     reply.writeInt(_result49);
                     return true;
                 case 89:
-                    INotificationListener _arg085 = INotificationListener.Stub.asInterface(data.readStrongBinder());
+                    INotificationListener _arg085 =
+                            INotificationListener.Stub.asInterface(data.readStrongBinder());
                     int _arg166 = data.readInt();
                     data.enforceNoDataAvail();
                     setOnNotificationPostedTrimFromListener(_arg085, _arg166);
@@ -2901,71 +3220,89 @@ public interface INotificationManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 91:
-                    INotificationListener _arg087 = INotificationListener.Stub.asInterface(data.readStrongBinder());
+                    INotificationListener _arg087 =
+                            INotificationListener.Stub.asInterface(data.readStrongBinder());
                     String _arg168 = data.readString();
                     UserHandle _arg234 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
-                    NotificationChannelGroup _arg312 = (NotificationChannelGroup) data.readTypedObject(NotificationChannelGroup.CREATOR);
+                    NotificationChannelGroup _arg312 =
+                            (NotificationChannelGroup)
+                                    data.readTypedObject(NotificationChannelGroup.CREATOR);
                     data.enforceNoDataAvail();
-                    updateNotificationChannelGroupFromPrivilegedListener(_arg087, _arg168, _arg234, _arg312);
+                    updateNotificationChannelGroupFromPrivilegedListener(
+                            _arg087, _arg168, _arg234, _arg312);
                     reply.writeNoException();
                     return true;
                 case 92:
-                    INotificationListener _arg088 = INotificationListener.Stub.asInterface(data.readStrongBinder());
+                    INotificationListener _arg088 =
+                            INotificationListener.Stub.asInterface(data.readStrongBinder());
                     String _arg169 = data.readString();
                     UserHandle _arg235 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
-                    NotificationChannel _arg313 = (NotificationChannel) data.readTypedObject(NotificationChannel.CREATOR);
+                    NotificationChannel _arg313 =
+                            (NotificationChannel) data.readTypedObject(NotificationChannel.CREATOR);
                     data.enforceNoDataAvail();
-                    updateNotificationChannelFromPrivilegedListener(_arg088, _arg169, _arg235, _arg313);
+                    updateNotificationChannelFromPrivilegedListener(
+                            _arg088, _arg169, _arg235, _arg313);
                     reply.writeNoException();
                     return true;
                 case 93:
-                    INotificationListener _arg089 = INotificationListener.Stub.asInterface(data.readStrongBinder());
+                    INotificationListener _arg089 =
+                            INotificationListener.Stub.asInterface(data.readStrongBinder());
                     String _arg170 = data.readString();
                     UserHandle _arg236 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     data.enforceNoDataAvail();
-                    ParceledListSlice _result50 = getNotificationChannelsFromPrivilegedListener(_arg089, _arg170, _arg236);
+                    ParceledListSlice _result50 =
+                            getNotificationChannelsFromPrivilegedListener(
+                                    _arg089, _arg170, _arg236);
                     reply.writeNoException();
                     reply.writeTypedObject(_result50, 1);
                     return true;
                 case 94:
-                    INotificationListener _arg090 = INotificationListener.Stub.asInterface(data.readStrongBinder());
+                    INotificationListener _arg090 =
+                            INotificationListener.Stub.asInterface(data.readStrongBinder());
                     String _arg171 = data.readString();
                     UserHandle _arg237 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     data.enforceNoDataAvail();
-                    ParceledListSlice _result51 = getNotificationChannelGroupsFromPrivilegedListener(_arg090, _arg171, _arg237);
+                    ParceledListSlice _result51 =
+                            getNotificationChannelGroupsFromPrivilegedListener(
+                                    _arg090, _arg171, _arg237);
                     reply.writeNoException();
                     reply.writeTypedObject(_result51, 1);
                     return true;
                 case 95:
-                    INotificationListener _arg091 = INotificationListener.Stub.asInterface(data.readStrongBinder());
+                    INotificationListener _arg091 =
+                            INotificationListener.Stub.asInterface(data.readStrongBinder());
                     Adjustment _arg172 = (Adjustment) data.readTypedObject(Adjustment.CREATOR);
                     data.enforceNoDataAvail();
                     applyEnqueuedAdjustmentFromAssistant(_arg091, _arg172);
                     reply.writeNoException();
                     return true;
                 case 96:
-                    INotificationListener _arg092 = INotificationListener.Stub.asInterface(data.readStrongBinder());
+                    INotificationListener _arg092 =
+                            INotificationListener.Stub.asInterface(data.readStrongBinder());
                     Adjustment _arg173 = (Adjustment) data.readTypedObject(Adjustment.CREATOR);
                     data.enforceNoDataAvail();
                     applyAdjustmentFromAssistant(_arg092, _arg173);
                     reply.writeNoException();
                     return true;
                 case 97:
-                    INotificationListener _arg093 = INotificationListener.Stub.asInterface(data.readStrongBinder());
+                    INotificationListener _arg093 =
+                            INotificationListener.Stub.asInterface(data.readStrongBinder());
                     List<Adjustment> _arg174 = data.createTypedArrayList(Adjustment.CREATOR);
                     data.enforceNoDataAvail();
                     applyAdjustmentsFromAssistant(_arg093, _arg174);
                     reply.writeNoException();
                     return true;
                 case 98:
-                    INotificationListener _arg094 = INotificationListener.Stub.asInterface(data.readStrongBinder());
+                    INotificationListener _arg094 =
+                            INotificationListener.Stub.asInterface(data.readStrongBinder());
                     String _arg175 = data.readString();
                     data.enforceNoDataAvail();
                     unsnoozeNotificationFromAssistant(_arg094, _arg175);
                     reply.writeNoException();
                     return true;
                 case 99:
-                    INotificationListener _arg095 = INotificationListener.Stub.asInterface(data.readStrongBinder());
+                    INotificationListener _arg095 =
+                            INotificationListener.Stub.asInterface(data.readStrongBinder());
                     String _arg176 = data.readString();
                     data.enforceNoDataAvail();
                     unsnoozeNotificationFromSystemListener(_arg095, _arg176);
@@ -2997,29 +3334,34 @@ public interface INotificationManager extends IInterface {
                     reply.writeBoolean(_result54);
                     return true;
                 case 104:
-                    ComponentName _arg099 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg099 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result55 = isNotificationListenerAccessGranted(_arg099);
                     reply.writeNoException();
                     reply.writeBoolean(_result55);
                     return true;
                 case 105:
-                    ComponentName _arg0100 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0100 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg177 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result56 = isNotificationListenerAccessGrantedForUser(_arg0100, _arg177);
+                    boolean _result56 =
+                            isNotificationListenerAccessGrantedForUser(_arg0100, _arg177);
                     reply.writeNoException();
                     reply.writeBoolean(_result56);
                     return true;
                 case 106:
-                    ComponentName _arg0101 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0101 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result57 = isNotificationAssistantAccessGranted(_arg0101);
                     reply.writeNoException();
                     reply.writeBoolean(_result57);
                     return true;
                 case 107:
-                    ComponentName _arg0102 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0102 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     boolean _arg178 = data.readBoolean();
                     boolean _arg238 = data.readBoolean();
                     data.enforceNoDataAvail();
@@ -3027,23 +3369,27 @@ public interface INotificationManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 108:
-                    ComponentName _arg0103 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0103 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     boolean _arg179 = data.readBoolean();
                     data.enforceNoDataAvail();
                     setNotificationAssistantAccessGranted(_arg0103, _arg179);
                     reply.writeNoException();
                     return true;
                 case 109:
-                    ComponentName _arg0104 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0104 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg180 = data.readInt();
                     boolean _arg239 = data.readBoolean();
                     boolean _arg314 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    setNotificationListenerAccessGrantedForUser(_arg0104, _arg180, _arg239, _arg314);
+                    setNotificationListenerAccessGrantedForUser(
+                            _arg0104, _arg180, _arg239, _arg314);
                     reply.writeNoException();
                     return true;
                 case 110:
-                    ComponentName _arg0105 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0105 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg181 = data.readInt();
                     boolean _arg240 = data.readBoolean();
                     data.enforceNoDataAvail();
@@ -3119,7 +3465,8 @@ public interface INotificationManager extends IInterface {
                     return true;
                 case 122:
                     String _arg0111 = data.readString();
-                    IConditionProvider _arg185 = IConditionProvider.Stub.asInterface(data.readStrongBinder());
+                    IConditionProvider _arg185 =
+                            IConditionProvider.Stub.asInterface(data.readStrongBinder());
                     Condition[] _arg242 = (Condition[]) data.createTypedArray(Condition.CREATOR);
                     data.enforceNoDataAvail();
                     notifyConditions(_arg0111, _arg185, _arg242);
@@ -3140,7 +3487,9 @@ public interface INotificationManager extends IInterface {
                     return true;
                 case 125:
                     String _arg0114 = data.readString();
-                    NotificationManager.Policy _arg186 = (NotificationManager.Policy) data.readTypedObject(NotificationManager.Policy.CREATOR);
+                    NotificationManager.Policy _arg186 =
+                            (NotificationManager.Policy)
+                                    data.readTypedObject(NotificationManager.Policy.CREATOR);
                     boolean _arg243 = data.readBoolean();
                     data.enforceNoDataAvail();
                     setNotificationPolicy(_arg0114, _arg186, _arg243);
@@ -3187,12 +3536,15 @@ public interface INotificationManager extends IInterface {
                         reply.writeInt(-1);
                     } else {
                         reply.writeInt(_result72.size());
-                        _result72.forEach(new BiConsumer() { // from class: android.app.INotificationManager$Stub$$ExternalSyntheticLambda0
-                            @Override // java.util.function.BiConsumer
-                            public final void accept(Object obj, Object obj2) {
-                                INotificationManager.Stub.lambda$onTransact$0(Parcel.this, (String) obj, (AutomaticZenRule) obj2);
-                            }
-                        });
+                        _result72.forEach(
+                                new BiConsumer() { // from class:
+                                    // android.app.INotificationManager$Stub$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.BiConsumer
+                                    public final void accept(Object obj, Object obj2) {
+                                        INotificationManager.Stub.lambda$onTransact$0(
+                                                Parcel.this, (String) obj, (AutomaticZenRule) obj2);
+                                    }
+                                });
                     }
                     return true;
                 case 132:
@@ -3201,7 +3553,8 @@ public interface INotificationManager extends IInterface {
                     reply.writeTypedList(_result73, 1);
                     return true;
                 case 133:
-                    AutomaticZenRule _arg0119 = (AutomaticZenRule) data.readTypedObject(AutomaticZenRule.CREATOR);
+                    AutomaticZenRule _arg0119 =
+                            (AutomaticZenRule) data.readTypedObject(AutomaticZenRule.CREATOR);
                     String _arg189 = data.readString();
                     boolean _arg245 = data.readBoolean();
                     data.enforceNoDataAvail();
@@ -3211,7 +3564,8 @@ public interface INotificationManager extends IInterface {
                     return true;
                 case 134:
                     String _arg0120 = data.readString();
-                    AutomaticZenRule _arg190 = (AutomaticZenRule) data.readTypedObject(AutomaticZenRule.CREATOR);
+                    AutomaticZenRule _arg190 =
+                            (AutomaticZenRule) data.readTypedObject(AutomaticZenRule.CREATOR);
                     boolean _arg246 = data.readBoolean();
                     data.enforceNoDataAvail();
                     boolean _result75 = updateAutomaticZenRule(_arg0120, _arg190, _arg246);
@@ -3235,7 +3589,8 @@ public interface INotificationManager extends IInterface {
                     reply.writeBoolean(_result77);
                     return true;
                 case 137:
-                    ComponentName _arg0123 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0123 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     int _result78 = getRuleInstanceCount(_arg0123);
                     reply.writeNoException();
@@ -3256,7 +3611,8 @@ public interface INotificationManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 140:
-                    ZenDeviceEffects _arg0126 = (ZenDeviceEffects) data.readTypedObject(ZenDeviceEffects.CREATOR);
+                    ZenDeviceEffects _arg0126 =
+                            (ZenDeviceEffects) data.readTypedObject(ZenDeviceEffects.CREATOR);
                     data.enforceNoDataAvail();
                     setManualZenRuleDeviceEffects(_arg0126);
                     reply.writeNoException();
@@ -3307,7 +3663,8 @@ public interface INotificationManager extends IInterface {
                     reply.writeBoolean(_result83);
                     return true;
                 case 147:
-                    AttributionSource _arg0133 = (AttributionSource) data.readTypedObject(AttributionSource.CREATOR);
+                    AttributionSource _arg0133 =
+                            (AttributionSource) data.readTypedObject(AttributionSource.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result84 = canUseFullScreenIntent(_arg0133);
                     reply.writeNoException();
@@ -3336,7 +3693,8 @@ public interface INotificationManager extends IInterface {
                     reply.writeTypedList(arrayList, 1);
                     return true;
                 case 151:
-                    ComponentName _arg0136 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0136 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg199 = data.readInt();
                     data.enforceNoDataAvail();
                     NotificationListenerFilter _result87 = getListenerFilter(_arg0136, _arg199);
@@ -3344,15 +3702,19 @@ public interface INotificationManager extends IInterface {
                     reply.writeTypedObject(_result87, 1);
                     return true;
                 case 152:
-                    ComponentName _arg0137 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0137 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg1100 = data.readInt();
-                    NotificationListenerFilter _arg249 = (NotificationListenerFilter) data.readTypedObject(NotificationListenerFilter.CREATOR);
+                    NotificationListenerFilter _arg249 =
+                            (NotificationListenerFilter)
+                                    data.readTypedObject(NotificationListenerFilter.CREATOR);
                     data.enforceNoDataAvail();
                     setListenerFilter(_arg0137, _arg1100, _arg249);
                     reply.writeNoException();
                     return true;
                 case 153:
-                    INotificationListener _arg0138 = INotificationListener.Stub.asInterface(data.readStrongBinder());
+                    INotificationListener _arg0138 =
+                            INotificationListener.Stub.asInterface(data.readStrongBinder());
                     int _arg1101 = data.readInt();
                     List<String> _arg250 = data.createStringArrayList();
                     data.enforceNoDataAvail();
@@ -3368,7 +3730,9 @@ public interface INotificationManager extends IInterface {
                 case 155:
                     String _arg0140 = data.readString();
                     UserHandle _arg1102 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
-                    ICallNotificationEventCallback _arg251 = ICallNotificationEventCallback.Stub.asInterface(data.readStrongBinder());
+                    ICallNotificationEventCallback _arg251 =
+                            ICallNotificationEventCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerCallNotificationEventListener(_arg0140, _arg1102, _arg251);
                     reply.writeNoException();
@@ -3376,13 +3740,16 @@ public interface INotificationManager extends IInterface {
                 case 156:
                     String _arg0141 = data.readString();
                     UserHandle _arg1103 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
-                    ICallNotificationEventCallback _arg252 = ICallNotificationEventCallback.Stub.asInterface(data.readStrongBinder());
+                    ICallNotificationEventCallback _arg252 =
+                            ICallNotificationEventCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterCallNotificationEventListener(_arg0141, _arg1103, _arg252);
                     reply.writeNoException();
                     return true;
                 case 157:
-                    ComponentName _arg0142 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0142 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg1104 = data.readInt();
                     boolean _arg253 = data.readBoolean();
                     data.enforceNoDataAvail();
@@ -3391,7 +3758,8 @@ public interface INotificationManager extends IInterface {
                     return true;
                 case 158:
                     String _arg0143 = data.readString();
-                    ParceledListSlice _arg1105 = (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _arg1105 =
+                            (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
                     data.enforceNoDataAvail();
                     updateNotificationChannels(_arg0143, _arg1105);
                     reply.writeNoException();
@@ -3399,7 +3767,8 @@ public interface INotificationManager extends IInterface {
                 case 159:
                     IBinder _arg0144 = data.readStrongBinder();
                     int _arg1106 = data.readInt();
-                    ComponentName _arg254 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg254 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     bindEdgeLightingService(_arg0144, _arg1106, _arg254);
                     reply.writeNoException();
@@ -3420,14 +3789,16 @@ public interface INotificationManager extends IInterface {
                     return true;
                 case 162:
                     String _arg0147 = data.readString();
-                    EdgeLightingPolicy _arg1109 = (EdgeLightingPolicy) data.readTypedObject(EdgeLightingPolicy.CREATOR);
+                    EdgeLightingPolicy _arg1109 =
+                            (EdgeLightingPolicy) data.readTypedObject(EdgeLightingPolicy.CREATOR);
                     data.enforceNoDataAvail();
                     updateEdgeLightingPolicy(_arg0147, _arg1109);
                     reply.writeNoException();
                     return true;
                 case 163:
                     IBinder _arg0148 = data.readStrongBinder();
-                    ComponentName _arg1110 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg1110 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     registerEdgeLightingListener(_arg0148, _arg1110);
                     reply.writeNoException();
@@ -3441,7 +3812,8 @@ public interface INotificationManager extends IInterface {
                     return true;
                 case 165:
                     String _arg0150 = data.readString();
-                    SemEdgeLightingInfo _arg1112 = (SemEdgeLightingInfo) data.readTypedObject(SemEdgeLightingInfo.CREATOR);
+                    SemEdgeLightingInfo _arg1112 =
+                            (SemEdgeLightingInfo) data.readTypedObject(SemEdgeLightingInfo.CREATOR);
                     IBinder _arg255 = data.readStrongBinder();
                     data.enforceNoDataAvail();
                     startEdgeLighting(_arg0150, _arg1112, _arg255);
@@ -3507,7 +3879,8 @@ public interface INotificationManager extends IInterface {
                     String _arg48 = data.readString();
                     String _arg55 = data.readString();
                     data.enforceNoDataAvail();
-                    cancelNotificationByGroupKey(_arg0157, _arg1118, _arg258, _arg317, _arg48, _arg55);
+                    cancelNotificationByGroupKey(
+                            _arg0157, _arg1118, _arg258, _arg317, _arg48, _arg55);
                     reply.writeNoException();
                     return true;
                 case 174:
@@ -3555,7 +3928,8 @@ public interface INotificationManager extends IInterface {
                     String _arg262 = data.readString();
                     int _arg320 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result92 = dispatchDelayedWakelockAndBlocked(_arg0162, _arg1123, _arg262, _arg320);
+                    boolean _result92 =
+                            dispatchDelayedWakelockAndBlocked(_arg0162, _arg1123, _arg262, _arg320);
                     reply.writeNoException();
                     reply.writeBoolean(_result92);
                     return true;
@@ -3564,7 +3938,8 @@ public interface INotificationManager extends IInterface {
                     String _arg1124 = data.readString();
                     String _arg263 = data.readString();
                     data.enforceNoDataAvail();
-                    boolean _result93 = dispatchDelayedWakeUpAndBlocked(_arg0163, _arg1124, _arg263);
+                    boolean _result93 =
+                            dispatchDelayedWakeUpAndBlocked(_arg0163, _arg1124, _arg263);
                     reply.writeNoException();
                     reply.writeBoolean(_result93);
                     return true;
@@ -3667,7 +4042,8 @@ public interface INotificationManager extends IInterface {
                     String _arg0175 = data.readString();
                     int _arg1134 = data.readInt();
                     data.enforceNoDataAvail();
-                    int _result103 = getLockScreenNotificationVisibilityForPackage(_arg0175, _arg1134);
+                    int _result103 =
+                            getLockScreenNotificationVisibilityForPackage(_arg0175, _arg1134);
                     reply.writeNoException();
                     reply.writeInt(_result103);
                     return true;
@@ -3748,7 +4124,9 @@ public interface INotificationManager extends IInterface {
                     String _arg411 = data.readString();
                     int _arg57 = data.readInt();
                     data.enforceNoDataAvail();
-                    List<Bundle> _result107 = getNotificationHistoryDataForPackage(_arg0184, _arg1143, _arg273, _arg323, _arg411, _arg57);
+                    List<Bundle> _result107 =
+                            getNotificationHistoryDataForPackage(
+                                    _arg0184, _arg1143, _arg273, _arg323, _arg411, _arg57);
                     reply.writeNoException();
                     reply.writeTypedList(_result107, 1);
                     return true;
@@ -3760,7 +4138,9 @@ public interface INotificationManager extends IInterface {
                     String _arg412 = data.readString();
                     int _arg58 = data.readInt();
                     data.enforceNoDataAvail();
-                    NotificationHistory _result108 = getNotificationHistoryForPackage(_arg0185, _arg1144, _arg274, _arg324, _arg412, _arg58);
+                    NotificationHistory _result108 =
+                            getNotificationHistoryForPackage(
+                                    _arg0185, _arg1144, _arg274, _arg324, _arg412, _arg58);
                     reply.writeNoException();
                     reply.writeTypedObject(_result108, 1);
                     return true;
@@ -3816,28 +4196,35 @@ public interface INotificationManager extends IInterface {
                 case 212:
                     String _arg0192 = data.readString();
                     IBinder _arg1148 = data.readStrongBinder();
-                    CharSequence _arg277 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg277 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     int _arg325 = data.readInt();
                     boolean _arg413 = data.readBoolean();
                     int _arg59 = data.readInt();
-                    ITransientNotificationCallback _arg62 = ITransientNotificationCallback.Stub.asInterface(data.readStrongBinder());
+                    ITransientNotificationCallback _arg62 =
+                            ITransientNotificationCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     String _arg7 = data.readString();
                     int _arg8 = data.readInt();
                     data.enforceNoDataAvail();
-                    enqueueTextToastForDex(_arg0192, _arg1148, _arg277, _arg325, _arg413, _arg59, _arg62, _arg7, _arg8);
+                    enqueueTextToastForDex(
+                            _arg0192, _arg1148, _arg277, _arg325, _arg413, _arg59, _arg62, _arg7,
+                            _arg8);
                     reply.writeNoException();
                     return true;
                 case 213:
                     String _arg0193 = data.readString();
                     IBinder _arg1149 = data.readStrongBinder();
-                    ITransientNotification _arg278 = ITransientNotification.Stub.asInterface(data.readStrongBinder());
+                    ITransientNotification _arg278 =
+                            ITransientNotification.Stub.asInterface(data.readStrongBinder());
                     int _arg326 = data.readInt();
                     boolean _arg414 = data.readBoolean();
                     int _arg510 = data.readInt();
                     String _arg63 = data.readString();
                     int _arg72 = data.readInt();
                     data.enforceNoDataAvail();
-                    enqueueToastForDex(_arg0193, _arg1149, _arg278, _arg326, _arg414, _arg510, _arg63, _arg72);
+                    enqueueToastForDex(
+                            _arg0193, _arg1149, _arg278, _arg326, _arg414, _arg510, _arg63, _arg72);
                     reply.writeNoException();
                     return true;
                 case 214:
@@ -3889,7 +4276,8 @@ public interface INotificationManager extends IInterface {
             }
         }
 
-        static /* synthetic */ void lambda$onTransact$0(Parcel reply, String k, AutomaticZenRule v) {
+        static /* synthetic */ void lambda$onTransact$0(
+                Parcel reply, String k, AutomaticZenRule v) {
             reply.writeString(k);
             reply.writeTypedObject(v, 1);
         }
@@ -3945,7 +4333,15 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public boolean enqueueTextToast(String pkg, IBinder token, CharSequence text, int duration, boolean isUiContext, int displayId, ITransientNotificationCallback callback) throws RemoteException {
+            public boolean enqueueTextToast(
+                    String pkg,
+                    IBinder token,
+                    CharSequence text,
+                    int duration,
+                    boolean isUiContext,
+                    int displayId,
+                    ITransientNotificationCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3973,7 +4369,14 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public boolean enqueueToast(String pkg, IBinder token, ITransientNotification callback, int duration, boolean isUiContext, int displayId) throws RemoteException {
+            public boolean enqueueToast(
+                    String pkg,
+                    IBinder token,
+                    ITransientNotification callback,
+                    int duration,
+                    boolean isUiContext,
+                    int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4027,7 +4430,14 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void enqueueNotificationWithTag(String pkg, String opPkg, String tag, int id, Notification notification, int userId) throws RemoteException {
+            public void enqueueNotificationWithTag(
+                    String pkg,
+                    String opPkg,
+                    String tag,
+                    int id,
+                    Notification notification,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4047,7 +4457,9 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void cancelNotificationWithTag(String pkg, String opPkg, String tag, int id, int userId) throws RemoteException {
+            public void cancelNotificationWithTag(
+                    String pkg, String opPkg, String tag, int id, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4084,7 +4496,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setShowBadge(String pkg, int uid, boolean showBadge) throws RemoteException {
+            public void setShowBadge(String pkg, int uid, boolean showBadge)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4173,7 +4586,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setInvalidMsgAppDemoted(String pkg, int uid, boolean isDemoted) throws RemoteException {
+            public void setInvalidMsgAppDemoted(String pkg, int uid, boolean isDemoted)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4208,7 +4622,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setNotificationsEnabledForPackage(String pkg, int uid, boolean enabled) throws RemoteException {
+            public void setNotificationsEnabledForPackage(String pkg, int uid, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4225,7 +4640,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setNotificationsEnabledWithImportanceLockForPackage(String pkg, int uid, boolean enabled) throws RemoteException {
+            public void setNotificationsEnabledWithImportanceLockForPackage(
+                    String pkg, int uid, boolean enabled) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4242,7 +4658,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public boolean areNotificationsEnabledForPackage(String pkg, int uid) throws RemoteException {
+            public boolean areNotificationsEnabledForPackage(String pkg, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4361,7 +4778,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setBubblesAllowed(String pkg, int uid, int bubblePreference) throws RemoteException {
+            public void setBubblesAllowed(String pkg, int uid, int bubblePreference)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4430,7 +4848,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void createNotificationChannelGroups(String pkg, ParceledListSlice channelGroupList) throws RemoteException {
+            public void createNotificationChannelGroups(
+                    String pkg, ParceledListSlice channelGroupList) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4446,7 +4865,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void createNotificationChannels(String pkg, ParceledListSlice channelsList) throws RemoteException {
+            public void createNotificationChannels(String pkg, ParceledListSlice channelsList)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4462,7 +4882,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void createNotificationChannelsForPackage(String pkg, int uid, ParceledListSlice channelsList) throws RemoteException {
+            public void createNotificationChannelsForPackage(
+                    String pkg, int uid, ParceledListSlice channelsList) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4479,7 +4900,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public ParceledListSlice getConversations(boolean onlyImportant) throws RemoteException {
+            public ParceledListSlice getConversations(boolean onlyImportant)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4487,7 +4909,8 @@ public interface INotificationManager extends IInterface {
                     _data.writeBoolean(onlyImportant);
                     this.mRemote.transact(33, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4496,7 +4919,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public ParceledListSlice getConversationsForPackage(String pkg, int uid) throws RemoteException {
+            public ParceledListSlice getConversationsForPackage(String pkg, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4505,7 +4929,8 @@ public interface INotificationManager extends IInterface {
                     _data.writeInt(uid);
                     this.mRemote.transact(34, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4514,7 +4939,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public ParceledListSlice getNotificationChannelGroupsForPackage(String pkg, int uid, boolean includeDeleted) throws RemoteException {
+            public ParceledListSlice getNotificationChannelGroupsForPackage(
+                    String pkg, int uid, boolean includeDeleted) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4524,7 +4950,8 @@ public interface INotificationManager extends IInterface {
                     _data.writeBoolean(includeDeleted);
                     this.mRemote.transact(35, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4533,7 +4960,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public NotificationChannelGroup getNotificationChannelGroupForPackage(String groupId, String pkg, int uid) throws RemoteException {
+            public NotificationChannelGroup getNotificationChannelGroupForPackage(
+                    String groupId, String pkg, int uid) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4543,7 +4971,9 @@ public interface INotificationManager extends IInterface {
                     _data.writeInt(uid);
                     this.mRemote.transact(36, _data, _reply, 0);
                     _reply.readException();
-                    NotificationChannelGroup _result = (NotificationChannelGroup) _reply.readTypedObject(NotificationChannelGroup.CREATOR);
+                    NotificationChannelGroup _result =
+                            (NotificationChannelGroup)
+                                    _reply.readTypedObject(NotificationChannelGroup.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4552,7 +4982,9 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public NotificationChannelGroup getPopulatedNotificationChannelGroupForPackage(String pkg, int uid, String groupId, boolean includeDeleted) throws RemoteException {
+            public NotificationChannelGroup getPopulatedNotificationChannelGroupForPackage(
+                    String pkg, int uid, String groupId, boolean includeDeleted)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4563,7 +4995,9 @@ public interface INotificationManager extends IInterface {
                     _data.writeBoolean(includeDeleted);
                     this.mRemote.transact(37, _data, _reply, 0);
                     _reply.readException();
-                    NotificationChannelGroup _result = (NotificationChannelGroup) _reply.readTypedObject(NotificationChannelGroup.CREATOR);
+                    NotificationChannelGroup _result =
+                            (NotificationChannelGroup)
+                                    _reply.readTypedObject(NotificationChannelGroup.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4572,7 +5006,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public ParceledListSlice getRecentBlockedNotificationChannelGroupsForPackage(String pkg, int uid) throws RemoteException {
+            public ParceledListSlice getRecentBlockedNotificationChannelGroupsForPackage(
+                    String pkg, int uid) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4581,7 +5016,8 @@ public interface INotificationManager extends IInterface {
                     _data.writeInt(uid);
                     this.mRemote.transact(38, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4590,7 +5026,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void updateNotificationChannelGroupForPackage(String pkg, int uid, NotificationChannelGroup group) throws RemoteException {
+            public void updateNotificationChannelGroupForPackage(
+                    String pkg, int uid, NotificationChannelGroup group) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4607,7 +5044,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void updateNotificationChannelForPackage(String pkg, int uid, NotificationChannel channel) throws RemoteException {
+            public void updateNotificationChannelForPackage(
+                    String pkg, int uid, NotificationChannel channel) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4624,7 +5062,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void unlockNotificationChannel(String pkg, int uid, String channelId) throws RemoteException {
+            public void unlockNotificationChannel(String pkg, int uid, String channelId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4655,7 +5094,9 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public NotificationChannel getNotificationChannel(String callingPkg, int userId, String pkg, String channelId) throws RemoteException {
+            public NotificationChannel getNotificationChannel(
+                    String callingPkg, int userId, String pkg, String channelId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4666,7 +5107,9 @@ public interface INotificationManager extends IInterface {
                     _data.writeString(channelId);
                     this.mRemote.transact(43, _data, _reply, 0);
                     _reply.readException();
-                    NotificationChannel _result = (NotificationChannel) _reply.readTypedObject(NotificationChannel.CREATOR);
+                    NotificationChannel _result =
+                            (NotificationChannel)
+                                    _reply.readTypedObject(NotificationChannel.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4675,7 +5118,14 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public NotificationChannel getConversationNotificationChannel(String callingPkg, int userId, String pkg, String channelId, boolean returnParentIfNoConversationChannel, String conversationId) throws RemoteException {
+            public NotificationChannel getConversationNotificationChannel(
+                    String callingPkg,
+                    int userId,
+                    String pkg,
+                    String channelId,
+                    boolean returnParentIfNoConversationChannel,
+                    String conversationId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4688,7 +5138,9 @@ public interface INotificationManager extends IInterface {
                     _data.writeString(conversationId);
                     this.mRemote.transact(44, _data, _reply, 0);
                     _reply.readException();
-                    NotificationChannel _result = (NotificationChannel) _reply.readTypedObject(NotificationChannel.CREATOR);
+                    NotificationChannel _result =
+                            (NotificationChannel)
+                                    _reply.readTypedObject(NotificationChannel.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4697,7 +5149,9 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void createConversationNotificationChannelForPackage(String pkg, int uid, NotificationChannel parentChannel, String conversationId) throws RemoteException {
+            public void createConversationNotificationChannelForPackage(
+                    String pkg, int uid, NotificationChannel parentChannel, String conversationId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4715,7 +5169,13 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public NotificationChannel getNotificationChannelForPackage(String pkg, int uid, String channelId, String conversationId, boolean includeDeleted) throws RemoteException {
+            public NotificationChannel getNotificationChannelForPackage(
+                    String pkg,
+                    int uid,
+                    String channelId,
+                    String conversationId,
+                    boolean includeDeleted)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4727,7 +5187,9 @@ public interface INotificationManager extends IInterface {
                     _data.writeBoolean(includeDeleted);
                     this.mRemote.transact(46, _data, _reply, 0);
                     _reply.readException();
-                    NotificationChannel _result = (NotificationChannel) _reply.readTypedObject(NotificationChannel.CREATOR);
+                    NotificationChannel _result =
+                            (NotificationChannel)
+                                    _reply.readTypedObject(NotificationChannel.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4736,7 +5198,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void deleteNotificationChannel(String pkg, String channelId) throws RemoteException {
+            public void deleteNotificationChannel(String pkg, String channelId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4752,7 +5215,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public ParceledListSlice getNotificationChannels(String callingPkg, String targetPkg, int userId) throws RemoteException {
+            public ParceledListSlice getNotificationChannels(
+                    String callingPkg, String targetPkg, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4762,7 +5226,8 @@ public interface INotificationManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(48, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4771,7 +5236,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public ParceledListSlice getNotificationChannelsForPackage(String pkg, int uid, boolean includeDeleted) throws RemoteException {
+            public ParceledListSlice getNotificationChannelsForPackage(
+                    String pkg, int uid, boolean includeDeleted) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4781,7 +5247,8 @@ public interface INotificationManager extends IInterface {
                     _data.writeBoolean(includeDeleted);
                     this.mRemote.transact(49, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4790,7 +5257,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public int getNumNotificationChannelsForPackage(String pkg, int uid, boolean includeDeleted) throws RemoteException {
+            public int getNumNotificationChannelsForPackage(
+                    String pkg, int uid, boolean includeDeleted) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4845,7 +5313,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void deleteNotificationChannelGroup(String pkg, String channelGroupId) throws RemoteException {
+            public void deleteNotificationChannelGroup(String pkg, String channelGroupId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4861,7 +5330,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public NotificationChannelGroup getNotificationChannelGroup(String pkg, String channelGroupId) throws RemoteException {
+            public NotificationChannelGroup getNotificationChannelGroup(
+                    String pkg, String channelGroupId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4870,7 +5340,9 @@ public interface INotificationManager extends IInterface {
                     _data.writeString(channelGroupId);
                     this.mRemote.transact(54, _data, _reply, 0);
                     _reply.readException();
-                    NotificationChannelGroup _result = (NotificationChannelGroup) _reply.readTypedObject(NotificationChannelGroup.CREATOR);
+                    NotificationChannelGroup _result =
+                            (NotificationChannelGroup)
+                                    _reply.readTypedObject(NotificationChannelGroup.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4879,7 +5351,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public ParceledListSlice getNotificationChannelGroups(String pkg) throws RemoteException {
+            public ParceledListSlice getNotificationChannelGroups(String pkg)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4887,7 +5360,8 @@ public interface INotificationManager extends IInterface {
                     _data.writeString(pkg);
                     this.mRemote.transact(55, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4930,7 +5404,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public ParceledListSlice getNotificationChannelsBypassingDnd(String pkg, int uid) throws RemoteException {
+            public ParceledListSlice getNotificationChannelsBypassingDnd(String pkg, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4939,7 +5414,8 @@ public interface INotificationManager extends IInterface {
                     _data.writeInt(uid);
                     this.mRemote.transact(58, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -4948,7 +5424,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public List<String> getPackagesBypassingDnd(int userId, boolean includeConversationChannels) throws RemoteException {
+            public List<String> getPackagesBypassingDnd(
+                    int userId, boolean includeConversationChannels) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -4983,7 +5460,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void deleteNotificationHistoryItem(String pkg, int uid, long postedTime) throws RemoteException {
+            public void deleteNotificationHistoryItem(String pkg, int uid, long postedTime)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5032,7 +5510,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public StatusBarNotification[] getActiveNotifications(String callingPkg) throws RemoteException {
+            public StatusBarNotification[] getActiveNotifications(String callingPkg)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5040,7 +5519,9 @@ public interface INotificationManager extends IInterface {
                     _data.writeString(callingPkg);
                     this.mRemote.transact(64, _data, _reply, 0);
                     _reply.readException();
-                    StatusBarNotification[] _result = (StatusBarNotification[]) _reply.createTypedArray(StatusBarNotification.CREATOR);
+                    StatusBarNotification[] _result =
+                            (StatusBarNotification[])
+                                    _reply.createTypedArray(StatusBarNotification.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5049,7 +5530,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public StatusBarNotification[] getActiveNotificationsWithAttribution(String callingPkg, String callingAttributionTag) throws RemoteException {
+            public StatusBarNotification[] getActiveNotificationsWithAttribution(
+                    String callingPkg, String callingAttributionTag) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5058,7 +5540,9 @@ public interface INotificationManager extends IInterface {
                     _data.writeString(callingAttributionTag);
                     this.mRemote.transact(65, _data, _reply, 0);
                     _reply.readException();
-                    StatusBarNotification[] _result = (StatusBarNotification[]) _reply.createTypedArray(StatusBarNotification.CREATOR);
+                    StatusBarNotification[] _result =
+                            (StatusBarNotification[])
+                                    _reply.createTypedArray(StatusBarNotification.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5067,7 +5551,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public StatusBarNotification[] getHistoricalNotifications(String callingPkg, int count, boolean includeSnoozed) throws RemoteException {
+            public StatusBarNotification[] getHistoricalNotifications(
+                    String callingPkg, int count, boolean includeSnoozed) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5077,7 +5562,9 @@ public interface INotificationManager extends IInterface {
                     _data.writeBoolean(includeSnoozed);
                     this.mRemote.transact(66, _data, _reply, 0);
                     _reply.readException();
-                    StatusBarNotification[] _result = (StatusBarNotification[]) _reply.createTypedArray(StatusBarNotification.CREATOR);
+                    StatusBarNotification[] _result =
+                            (StatusBarNotification[])
+                                    _reply.createTypedArray(StatusBarNotification.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5086,7 +5573,12 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public StatusBarNotification[] getHistoricalNotificationsWithAttribution(String callingPkg, String callingAttributionTag, int count, boolean includeSnoozed) throws RemoteException {
+            public StatusBarNotification[] getHistoricalNotificationsWithAttribution(
+                    String callingPkg,
+                    String callingAttributionTag,
+                    int count,
+                    boolean includeSnoozed)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5097,7 +5589,9 @@ public interface INotificationManager extends IInterface {
                     _data.writeBoolean(includeSnoozed);
                     this.mRemote.transact(67, _data, _reply, 0);
                     _reply.readException();
-                    StatusBarNotification[] _result = (StatusBarNotification[]) _reply.createTypedArray(StatusBarNotification.CREATOR);
+                    StatusBarNotification[] _result =
+                            (StatusBarNotification[])
+                                    _reply.createTypedArray(StatusBarNotification.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5106,7 +5600,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public NotificationHistory getNotificationHistory(String callingPkg, String callingAttributionTag) throws RemoteException {
+            public NotificationHistory getNotificationHistory(
+                    String callingPkg, String callingAttributionTag) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5115,7 +5610,9 @@ public interface INotificationManager extends IInterface {
                     _data.writeString(callingAttributionTag);
                     this.mRemote.transact(68, _data, _reply, 0);
                     _reply.readException();
-                    NotificationHistory _result = (NotificationHistory) _reply.readTypedObject(NotificationHistory.CREATOR);
+                    NotificationHistory _result =
+                            (NotificationHistory)
+                                    _reply.readTypedObject(NotificationHistory.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5124,7 +5621,9 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void registerListener(INotificationListener listener, ComponentName component, int userid) throws RemoteException {
+            public void registerListener(
+                    INotificationListener listener, ComponentName component, int userid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5141,7 +5640,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void unregisterListener(INotificationListener listener, int userid) throws RemoteException {
+            public void unregisterListener(INotificationListener listener, int userid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5157,7 +5657,9 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void cancelNotificationFromListener(INotificationListener token, String pkg, String tag, int id) throws RemoteException {
+            public void cancelNotificationFromListener(
+                    INotificationListener token, String pkg, String tag, int id)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5175,7 +5677,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void cancelNotificationsFromListener(INotificationListener token, String[] keys) throws RemoteException {
+            public void cancelNotificationsFromListener(INotificationListener token, String[] keys)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5191,7 +5694,9 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void snoozeNotificationUntilContextFromListener(INotificationListener token, String key, String snoozeCriterionId) throws RemoteException {
+            public void snoozeNotificationUntilContextFromListener(
+                    INotificationListener token, String key, String snoozeCriterionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5208,7 +5713,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void snoozeNotificationUntilFromListener(INotificationListener token, String key, long until) throws RemoteException {
+            public void snoozeNotificationUntilFromListener(
+                    INotificationListener token, String key, long until) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5255,7 +5761,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void requestUnbindListenerComponent(ComponentName component) throws RemoteException {
+            public void requestUnbindListenerComponent(ComponentName component)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5300,7 +5807,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setNotificationsShownFromListener(INotificationListener token, String[] keys) throws RemoteException {
+            public void setNotificationsShownFromListener(
+                    INotificationListener token, String[] keys) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5316,7 +5824,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public ParceledListSlice getActiveNotificationsFromListener(INotificationListener token, String[] keys, int trim) throws RemoteException {
+            public ParceledListSlice getActiveNotificationsFromListener(
+                    INotificationListener token, String[] keys, int trim) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5326,7 +5835,8 @@ public interface INotificationManager extends IInterface {
                     _data.writeInt(trim);
                     this.mRemote.transact(81, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5335,7 +5845,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public ParceledListSlice getSnoozedNotificationsFromListener(INotificationListener token, int trim) throws RemoteException {
+            public ParceledListSlice getSnoozedNotificationsFromListener(
+                    INotificationListener token, int trim) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5344,7 +5855,8 @@ public interface INotificationManager extends IInterface {
                     _data.writeInt(trim);
                     this.mRemote.transact(82, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5353,7 +5865,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void clearRequestedListenerHints(INotificationListener token) throws RemoteException {
+            public void clearRequestedListenerHints(INotificationListener token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5368,7 +5881,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void requestHintsFromListener(INotificationListener token, int hints) throws RemoteException {
+            public void requestHintsFromListener(INotificationListener token, int hints)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5417,7 +5931,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void requestInterruptionFilterFromListener(INotificationListener token, int interruptionFilter) throws RemoteException {
+            public void requestInterruptionFilterFromListener(
+                    INotificationListener token, int interruptionFilter) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5433,7 +5948,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public int getInterruptionFilterFromListener(INotificationListener token) throws RemoteException {
+            public int getInterruptionFilterFromListener(INotificationListener token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5450,7 +5966,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setOnNotificationPostedTrimFromListener(INotificationListener token, int trim) throws RemoteException {
+            public void setOnNotificationPostedTrimFromListener(
+                    INotificationListener token, int trim) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5466,7 +5983,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setInterruptionFilter(String pkg, int interruptionFilter, boolean fromUser) throws RemoteException {
+            public void setInterruptionFilter(String pkg, int interruptionFilter, boolean fromUser)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5483,7 +6001,12 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void updateNotificationChannelGroupFromPrivilegedListener(INotificationListener token, String pkg, UserHandle user, NotificationChannelGroup group) throws RemoteException {
+            public void updateNotificationChannelGroupFromPrivilegedListener(
+                    INotificationListener token,
+                    String pkg,
+                    UserHandle user,
+                    NotificationChannelGroup group)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5501,7 +6024,12 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void updateNotificationChannelFromPrivilegedListener(INotificationListener token, String pkg, UserHandle user, NotificationChannel channel) throws RemoteException {
+            public void updateNotificationChannelFromPrivilegedListener(
+                    INotificationListener token,
+                    String pkg,
+                    UserHandle user,
+                    NotificationChannel channel)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5519,7 +6047,9 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public ParceledListSlice getNotificationChannelsFromPrivilegedListener(INotificationListener token, String pkg, UserHandle user) throws RemoteException {
+            public ParceledListSlice getNotificationChannelsFromPrivilegedListener(
+                    INotificationListener token, String pkg, UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5529,7 +6059,8 @@ public interface INotificationManager extends IInterface {
                     _data.writeTypedObject(user, 0);
                     this.mRemote.transact(93, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5538,7 +6069,9 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public ParceledListSlice getNotificationChannelGroupsFromPrivilegedListener(INotificationListener token, String pkg, UserHandle user) throws RemoteException {
+            public ParceledListSlice getNotificationChannelGroupsFromPrivilegedListener(
+                    INotificationListener token, String pkg, UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5548,7 +6081,8 @@ public interface INotificationManager extends IInterface {
                     _data.writeTypedObject(user, 0);
                     this.mRemote.transact(94, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5557,7 +6091,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void applyEnqueuedAdjustmentFromAssistant(INotificationListener token, Adjustment adjustment) throws RemoteException {
+            public void applyEnqueuedAdjustmentFromAssistant(
+                    INotificationListener token, Adjustment adjustment) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5573,7 +6108,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void applyAdjustmentFromAssistant(INotificationListener token, Adjustment adjustment) throws RemoteException {
+            public void applyAdjustmentFromAssistant(
+                    INotificationListener token, Adjustment adjustment) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5589,7 +6125,9 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void applyAdjustmentsFromAssistant(INotificationListener token, List<Adjustment> adjustments) throws RemoteException {
+            public void applyAdjustmentsFromAssistant(
+                    INotificationListener token, List<Adjustment> adjustments)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5605,7 +6143,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void unsnoozeNotificationFromAssistant(INotificationListener token, String key) throws RemoteException {
+            public void unsnoozeNotificationFromAssistant(INotificationListener token, String key)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5621,7 +6160,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void unsnoozeNotificationFromSystemListener(INotificationListener token, String key) throws RemoteException {
+            public void unsnoozeNotificationFromSystemListener(
+                    INotificationListener token, String key) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5644,7 +6184,8 @@ public interface INotificationManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(100, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName _result = (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _result =
+                            (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5702,7 +6243,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public boolean isNotificationListenerAccessGranted(ComponentName listener) throws RemoteException {
+            public boolean isNotificationListenerAccessGranted(ComponentName listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5719,7 +6261,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public boolean isNotificationListenerAccessGrantedForUser(ComponentName listener, int userId) throws RemoteException {
+            public boolean isNotificationListenerAccessGrantedForUser(
+                    ComponentName listener, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5737,7 +6280,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public boolean isNotificationAssistantAccessGranted(ComponentName assistant) throws RemoteException {
+            public boolean isNotificationAssistantAccessGranted(ComponentName assistant)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5754,7 +6298,9 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setNotificationListenerAccessGranted(ComponentName listener, boolean enabled, boolean userSet) throws RemoteException {
+            public void setNotificationListenerAccessGranted(
+                    ComponentName listener, boolean enabled, boolean userSet)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5771,7 +6317,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setNotificationAssistantAccessGranted(ComponentName assistant, boolean enabled) throws RemoteException {
+            public void setNotificationAssistantAccessGranted(
+                    ComponentName assistant, boolean enabled) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5787,7 +6334,9 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setNotificationListenerAccessGrantedForUser(ComponentName listener, int userId, boolean enabled, boolean userSet) throws RemoteException {
+            public void setNotificationListenerAccessGrantedForUser(
+                    ComponentName listener, int userId, boolean enabled, boolean userSet)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5805,7 +6354,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setNotificationAssistantAccessGrantedForUser(ComponentName assistant, int userId, boolean enabled) throws RemoteException {
+            public void setNotificationAssistantAccessGrantedForUser(
+                    ComponentName assistant, int userId, boolean enabled) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5838,7 +6388,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public List<ComponentName> getEnabledNotificationListeners(int userId) throws RemoteException {
+            public List<ComponentName> getEnabledNotificationListeners(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5846,7 +6397,8 @@ public interface INotificationManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(112, _data, _reply, 0);
                     _reply.readException();
-                    List<ComponentName> _result = _reply.createTypedArrayList(ComponentName.CREATOR);
+                    List<ComponentName> _result =
+                            _reply.createTypedArrayList(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5855,7 +6407,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public ComponentName getAllowedNotificationAssistantForUser(int userId) throws RemoteException {
+            public ComponentName getAllowedNotificationAssistantForUser(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5863,7 +6416,8 @@ public interface INotificationManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(113, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName _result = (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _result =
+                            (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5879,7 +6433,8 @@ public interface INotificationManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(114, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName _result = (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _result =
+                            (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5895,7 +6450,8 @@ public interface INotificationManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(115, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName _result = (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _result =
+                            (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5904,7 +6460,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setNASMigrationDoneAndResetDefault(int userId, boolean loadFromConfig) throws RemoteException {
+            public void setNASMigrationDoneAndResetDefault(int userId, boolean loadFromConfig)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5920,7 +6477,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public boolean hasEnabledNotificationListener(String packageName, int userId) throws RemoteException {
+            public boolean hasEnabledNotificationListener(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -5961,7 +6519,8 @@ public interface INotificationManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(119, _data, _reply, 0);
                     _reply.readException();
-                    ZenModeConfig _result = (ZenModeConfig) _reply.readTypedObject(ZenModeConfig.CREATOR);
+                    ZenModeConfig _result =
+                            (ZenModeConfig) _reply.readTypedObject(ZenModeConfig.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5970,14 +6529,17 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public NotificationManager.Policy getConsolidatedNotificationPolicy() throws RemoteException {
+            public NotificationManager.Policy getConsolidatedNotificationPolicy()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(120, _data, _reply, 0);
                     _reply.readException();
-                    NotificationManager.Policy _result = (NotificationManager.Policy) _reply.readTypedObject(NotificationManager.Policy.CREATOR);
+                    NotificationManager.Policy _result =
+                            (NotificationManager.Policy)
+                                    _reply.readTypedObject(NotificationManager.Policy.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -5986,7 +6548,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setZenMode(int mode, Uri conditionId, String reason, boolean fromUser) throws RemoteException {
+            public void setZenMode(int mode, Uri conditionId, String reason, boolean fromUser)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -6001,7 +6564,9 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void notifyConditions(String pkg, IConditionProvider provider, Condition[] conditions) throws RemoteException {
+            public void notifyConditions(
+                    String pkg, IConditionProvider provider, Condition[] conditions)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -6032,7 +6597,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public NotificationManager.Policy getNotificationPolicy(String pkg) throws RemoteException {
+            public NotificationManager.Policy getNotificationPolicy(String pkg)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6040,7 +6606,9 @@ public interface INotificationManager extends IInterface {
                     _data.writeString(pkg);
                     this.mRemote.transact(124, _data, _reply, 0);
                     _reply.readException();
-                    NotificationManager.Policy _result = (NotificationManager.Policy) _reply.readTypedObject(NotificationManager.Policy.CREATOR);
+                    NotificationManager.Policy _result =
+                            (NotificationManager.Policy)
+                                    _reply.readTypedObject(NotificationManager.Policy.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6049,7 +6617,9 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setNotificationPolicy(String pkg, NotificationManager.Policy policy, boolean fromUser) throws RemoteException {
+            public void setNotificationPolicy(
+                    String pkg, NotificationManager.Policy policy, boolean fromUser)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6066,7 +6636,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public boolean isNotificationPolicyAccessGrantedForPackage(String pkg) throws RemoteException {
+            public boolean isNotificationPolicyAccessGrantedForPackage(String pkg)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6083,7 +6654,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setNotificationPolicyAccessGranted(String pkg, boolean granted) throws RemoteException {
+            public void setNotificationPolicyAccessGranted(String pkg, boolean granted)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6099,7 +6671,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setNotificationPolicyAccessGrantedForUser(String pkg, int userId, boolean granted) throws RemoteException {
+            public void setNotificationPolicyAccessGrantedForUser(
+                    String pkg, int userId, boolean granted) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6140,7 +6713,8 @@ public interface INotificationManager extends IInterface {
                     _data.writeString(id);
                     this.mRemote.transact(130, _data, _reply, 0);
                     _reply.readException();
-                    AutomaticZenRule _result = (AutomaticZenRule) _reply.readTypedObject(AutomaticZenRule.CREATOR);
+                    AutomaticZenRule _result =
+                            (AutomaticZenRule) _reply.readTypedObject(AutomaticZenRule.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6158,12 +6732,17 @@ public interface INotificationManager extends IInterface {
                     _reply.readException();
                     int N = _reply.readInt();
                     final Map<String, AutomaticZenRule> _result = N < 0 ? null : new HashMap<>();
-                    IntStream.range(0, N).forEach(new IntConsumer() { // from class: android.app.INotificationManager$Stub$Proxy$$ExternalSyntheticLambda0
-                        @Override // java.util.function.IntConsumer
-                        public final void accept(int i) {
-                            INotificationManager.Stub.Proxy.lambda$getAutomaticZenRules$0(Parcel.this, _result, i);
-                        }
-                    });
+                    IntStream.range(0, N)
+                            .forEach(
+                                    new IntConsumer() { // from class:
+                                        // android.app.INotificationManager$Stub$Proxy$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.IntConsumer
+                                        public final void accept(int i) {
+                                            INotificationManager.Stub.Proxy
+                                                    .lambda$getAutomaticZenRules$0(
+                                                            Parcel.this, _result, i);
+                                        }
+                                    });
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6171,9 +6750,11 @@ public interface INotificationManager extends IInterface {
                 }
             }
 
-            static /* synthetic */ void lambda$getAutomaticZenRules$0(Parcel _reply, Map _result, int i) {
+            static /* synthetic */ void lambda$getAutomaticZenRules$0(
+                    Parcel _reply, Map _result, int i) {
                 String k = _reply.readString();
-                AutomaticZenRule v = (AutomaticZenRule) _reply.readTypedObject(AutomaticZenRule.CREATOR);
+                AutomaticZenRule v =
+                        (AutomaticZenRule) _reply.readTypedObject(AutomaticZenRule.CREATOR);
                 _result.put(k, v);
             }
 
@@ -6185,7 +6766,8 @@ public interface INotificationManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(132, _data, _reply, 0);
                     _reply.readException();
-                    List<ZenModeConfig.ZenRule> _result = _reply.createTypedArrayList(ZenModeConfig.ZenRule.CREATOR);
+                    List<ZenModeConfig.ZenRule> _result =
+                            _reply.createTypedArrayList(ZenModeConfig.ZenRule.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6194,7 +6776,9 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public String addAutomaticZenRule(AutomaticZenRule automaticZenRule, String pkg, boolean fromUser) throws RemoteException {
+            public String addAutomaticZenRule(
+                    AutomaticZenRule automaticZenRule, String pkg, boolean fromUser)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6213,7 +6797,9 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public boolean updateAutomaticZenRule(String id, AutomaticZenRule automaticZenRule, boolean fromUser) throws RemoteException {
+            public boolean updateAutomaticZenRule(
+                    String id, AutomaticZenRule automaticZenRule, boolean fromUser)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6232,7 +6818,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public boolean removeAutomaticZenRule(String id, boolean fromUser) throws RemoteException {
+            public boolean removeAutomaticZenRule(String id, boolean fromUser)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6250,7 +6837,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public boolean removeAutomaticZenRules(String packageName, boolean fromUser) throws RemoteException {
+            public boolean removeAutomaticZenRules(String packageName, boolean fromUser)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6302,7 +6890,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setAutomaticZenRuleState(String id, Condition condition) throws RemoteException {
+            public void setAutomaticZenRuleState(String id, Condition condition)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6318,7 +6907,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setManualZenRuleDeviceEffects(ZenDeviceEffects effects) throws RemoteException {
+            public void setManualZenRuleDeviceEffects(ZenDeviceEffects effects)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6366,7 +6956,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public ParceledListSlice getAppActiveNotifications(String callingPkg, int userId) throws RemoteException {
+            public ParceledListSlice getAppActiveNotifications(String callingPkg, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6375,7 +6966,8 @@ public interface INotificationManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(143, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6384,7 +6976,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setNotificationDelegate(String callingPkg, String delegate) throws RemoteException {
+            public void setNotificationDelegate(String callingPkg, String delegate)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6417,7 +7010,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public boolean canNotifyAsPackage(String callingPkg, String targetPkg, int userId) throws RemoteException {
+            public boolean canNotifyAsPackage(String callingPkg, String targetPkg, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6436,7 +7030,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public boolean canUseFullScreenIntent(AttributionSource attributionSource) throws RemoteException {
+            public boolean canUseFullScreenIntent(AttributionSource attributionSource)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6484,7 +7079,9 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public long pullStats(long startNs, int report, boolean doAgg, List<ParcelFileDescriptor> stats) throws RemoteException {
+            public long pullStats(
+                    long startNs, int report, boolean doAgg, List<ParcelFileDescriptor> stats)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6504,7 +7101,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public NotificationListenerFilter getListenerFilter(ComponentName cn, int userId) throws RemoteException {
+            public NotificationListenerFilter getListenerFilter(ComponentName cn, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6513,7 +7111,9 @@ public interface INotificationManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(151, _data, _reply, 0);
                     _reply.readException();
-                    NotificationListenerFilter _result = (NotificationListenerFilter) _reply.readTypedObject(NotificationListenerFilter.CREATOR);
+                    NotificationListenerFilter _result =
+                            (NotificationListenerFilter)
+                                    _reply.readTypedObject(NotificationListenerFilter.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -6522,7 +7122,9 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setListenerFilter(ComponentName cn, int userId, NotificationListenerFilter nlf) throws RemoteException {
+            public void setListenerFilter(
+                    ComponentName cn, int userId, NotificationListenerFilter nlf)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6539,7 +7141,9 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void migrateNotificationFilter(INotificationListener token, int defaultTypes, List<String> disallowedPkgs) throws RemoteException {
+            public void migrateNotificationFilter(
+                    INotificationListener token, int defaultTypes, List<String> disallowedPkgs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6571,7 +7175,11 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void registerCallNotificationEventListener(String packageName, UserHandle userHandle, ICallNotificationEventCallback listener) throws RemoteException {
+            public void registerCallNotificationEventListener(
+                    String packageName,
+                    UserHandle userHandle,
+                    ICallNotificationEventCallback listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6588,7 +7196,11 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void unregisterCallNotificationEventListener(String packageName, UserHandle userHandle, ICallNotificationEventCallback listener) throws RemoteException {
+            public void unregisterCallNotificationEventListener(
+                    String packageName,
+                    UserHandle userHandle,
+                    ICallNotificationEventCallback listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6605,7 +7217,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void registerNotificationListener(ComponentName listener, int userId, boolean enabled) throws RemoteException {
+            public void registerNotificationListener(
+                    ComponentName listener, int userId, boolean enabled) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6622,7 +7235,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void updateNotificationChannels(String pkg, ParceledListSlice channelsList) throws RemoteException {
+            public void updateNotificationChannels(String pkg, ParceledListSlice channelsList)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6638,7 +7252,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void bindEdgeLightingService(IBinder binder, int condition, ComponentName component) throws RemoteException {
+            public void bindEdgeLightingService(
+                    IBinder binder, int condition, ComponentName component) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6655,7 +7270,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void unbindEdgeLightingService(IBinder binder, String packageName) throws RemoteException {
+            public void unbindEdgeLightingService(IBinder binder, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6671,7 +7287,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void updateEdgeLightingPackageList(String callingPackage, List<String> list) throws RemoteException {
+            public void updateEdgeLightingPackageList(String callingPackage, List<String> list)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6687,7 +7304,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void updateEdgeLightingPolicy(String callingPackage, EdgeLightingPolicy policy) throws RemoteException {
+            public void updateEdgeLightingPolicy(String callingPackage, EdgeLightingPolicy policy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6703,7 +7321,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void registerEdgeLightingListener(IBinder binder, ComponentName component) throws RemoteException {
+            public void registerEdgeLightingListener(IBinder binder, ComponentName component)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6719,7 +7338,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void unregisterEdgeLightingListener(IBinder binder, String packageName) throws RemoteException {
+            public void unregisterEdgeLightingListener(IBinder binder, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6735,7 +7355,9 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void startEdgeLighting(String packageName, SemEdgeLightingInfo info, IBinder token) throws RemoteException {
+            public void startEdgeLighting(
+                    String packageName, SemEdgeLightingInfo info, IBinder token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6784,7 +7406,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public boolean isEdgeLightingNotificationAllowed(String packageName) throws RemoteException {
+            public boolean isEdgeLightingNotificationAllowed(String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6801,7 +7424,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void disable(int what, String callingPackage, IBinder binder) throws RemoteException {
+            public void disable(int what, String callingPackage, IBinder binder)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6818,7 +7442,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void disableEdgeLightingNotification(String callingPackage, boolean disable) throws RemoteException {
+            public void disableEdgeLightingNotification(String callingPackage, boolean disable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6852,7 +7477,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void cancelNotificationByEdge(String pkg, String tag, int id, int userId, String key) throws RemoteException {
+            public void cancelNotificationByEdge(
+                    String pkg, String tag, int id, int userId, String key) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6871,7 +7497,9 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void cancelNotificationByGroupKey(String pkg, String tag, int id, int userId, String key, String groupKey) throws RemoteException {
+            public void cancelNotificationByGroupKey(
+                    String pkg, String tag, int id, int userId, String key, String groupKey)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6891,7 +7519,9 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void enqueueEdgeNotification(String pkg, String opPkg, int id, Bundle extras, int userId) throws RemoteException {
+            public void enqueueEdgeNotification(
+                    String pkg, String opPkg, int id, Bundle extras, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6910,7 +7540,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void removeEdgeNotification(String pkg, int id, Bundle extras, int userId) throws RemoteException {
+            public void removeEdgeNotification(String pkg, int id, Bundle extras, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6946,7 +7577,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setAllowEdgeLighting(String pkg, int uid, boolean allowEdgeLighting) throws RemoteException {
+            public void setAllowEdgeLighting(String pkg, int uid, boolean allowEdgeLighting)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6977,7 +7609,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public boolean dispatchDelayedWakelockAndBlocked(int flags, String tag, String packageName, int uid) throws RemoteException {
+            public boolean dispatchDelayedWakelockAndBlocked(
+                    int flags, String tag, String packageName, int uid) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6997,7 +7630,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public boolean dispatchDelayedWakeUpAndBlocked(int reason, String details, String packageName) throws RemoteException {
+            public boolean dispatchDelayedWakeUpAndBlocked(
+                    int reason, String details, String packageName) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7016,7 +7650,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public boolean isSubDisplayNotificationAllowed(String pkg, int uid) throws RemoteException {
+            public boolean isSubDisplayNotificationAllowed(String pkg, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7034,7 +7669,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setAllowSubDisplayNotification(String pkg, int uid, boolean allowSubDisplayNoti) throws RemoteException {
+            public void setAllowSubDisplayNotification(
+                    String pkg, int uid, boolean allowSubDisplayNoti) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7069,7 +7705,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setAllowOngoingActivity(String pkg, int uid, boolean allowOngoingActivity) throws RemoteException {
+            public void setAllowOngoingActivity(String pkg, int uid, boolean allowOngoingActivity)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7116,7 +7753,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public boolean getNotificationAlertsEnabledForPackage(String pkg, int uid) throws RemoteException {
+            public boolean getNotificationAlertsEnabledForPackage(String pkg, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7134,7 +7772,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setNotificationAlertsEnabledForPackage(String pkg, int uid, boolean enabled) throws RemoteException {
+            public void setNotificationAlertsEnabledForPackage(String pkg, int uid, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7151,7 +7790,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public boolean setWearableAppList(int userId, List<String> packages) throws RemoteException {
+            public boolean setWearableAppList(int userId, List<String> packages)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7169,7 +7809,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public boolean addWearableAppToList(int userId, String PackageName) throws RemoteException {
+            public boolean addWearableAppToList(int userId, String PackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7187,7 +7828,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public boolean removeWearableAppFromList(int userId, String PackageName) throws RemoteException {
+            public boolean removeWearableAppFromList(int userId, String PackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7239,7 +7881,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public int getLockScreenNotificationVisibilityForPackage(String pkg, int uid) throws RemoteException {
+            public int getLockScreenNotificationVisibilityForPackage(String pkg, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7257,7 +7900,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setLockScreenNotificationVisibilityForPackage(String pkg, int uid, int lockscreenVisibility) throws RemoteException {
+            public void setLockScreenNotificationVisibilityForPackage(
+                    String pkg, int uid, int lockscreenVisibility) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7274,7 +7918,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public boolean isAllowNotificationPopUpForPackage(String pkg, int uid) throws RemoteException {
+            public boolean isAllowNotificationPopUpForPackage(String pkg, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7292,7 +7937,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setAllowNotificationPopUpForPackage(String pkg, int uid, boolean allow) throws RemoteException {
+            public void setAllowNotificationPopUpForPackage(String pkg, int uid, boolean allow)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7309,7 +7955,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public boolean isAlertsAllowed(String pkg, int uid, String tags, int flags) throws RemoteException {
+            public boolean isAlertsAllowed(String pkg, int uid, String tags, int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7347,7 +7994,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setReminderEnabledForPackage(String pkg, int uid, boolean enabled) throws RemoteException {
+            public void setReminderEnabledForPackage(String pkg, int uid, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7364,7 +8012,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void setReminderEnabled(int userId, boolean enabled, List<String> packages) throws RemoteException {
+            public void setReminderEnabled(int userId, boolean enabled, List<String> packages)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7381,7 +8030,9 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void addReplyHistory(int type, String key, String pkg, int userId, String title, String text) throws RemoteException {
+            public void addReplyHistory(
+                    int type, String key, String pkg, int userId, String title, String text)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7401,7 +8052,14 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public List<Bundle> getNotificationHistoryDataForPackage(String callingPkg, String callingAttributionTag, int userId, String pkg, String key, int maxNotifications) throws RemoteException {
+            public List<Bundle> getNotificationHistoryDataForPackage(
+                    String callingPkg,
+                    String callingAttributionTag,
+                    int userId,
+                    String pkg,
+                    String key,
+                    int maxNotifications)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7423,7 +8081,14 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public NotificationHistory getNotificationHistoryForPackage(String callingPkg, String callingAttributionTag, int userId, String pkg, String key, int maxNotifications) throws RemoteException {
+            public NotificationHistory getNotificationHistoryForPackage(
+                    String callingPkg,
+                    String callingAttributionTag,
+                    int userId,
+                    String pkg,
+                    String key,
+                    int maxNotifications)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7436,7 +8101,9 @@ public interface INotificationManager extends IInterface {
                     _data.writeInt(maxNotifications);
                     this.mRemote.transact(204, _data, _reply, 0);
                     _reply.readException();
-                    NotificationHistory _result = (NotificationHistory) _reply.readTypedObject(NotificationHistory.CREATOR);
+                    NotificationHistory _result =
+                            (NotificationHistory)
+                                    _reply.readTypedObject(NotificationHistory.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7445,7 +8112,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void updateCancelEvent(int userId, String key, boolean isPackage) throws RemoteException {
+            public void updateCancelEvent(int userId, String key, boolean isPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7562,7 +8230,17 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void enqueueTextToastForDex(String pkg, IBinder token, CharSequence text, int duration, boolean isUiContext, int displayId, ITransientNotificationCallback callback, String message, int uid) throws RemoteException {
+            public void enqueueTextToastForDex(
+                    String pkg,
+                    IBinder token,
+                    CharSequence text,
+                    int duration,
+                    boolean isUiContext,
+                    int displayId,
+                    ITransientNotificationCallback callback,
+                    String message,
+                    int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7590,7 +8268,16 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public void enqueueToastForDex(String pkg, IBinder token, ITransientNotification callback, int duration, boolean isUiContext, int displayId, String message, int uid) throws RemoteException {
+            public void enqueueToastForDex(
+                    String pkg,
+                    IBinder token,
+                    ITransientNotification callback,
+                    int duration,
+                    boolean isUiContext,
+                    int displayId,
+                    String message,
+                    int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7699,7 +8386,8 @@ public interface INotificationManager extends IInterface {
             }
 
             @Override // android.app.INotificationManager
-            public List<String> getBlockInfoOfNotificationsForOverflow(String pkg) throws RemoteException {
+            public List<String> getBlockInfoOfNotificationsForOverflow(String pkg)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7716,28 +8404,44 @@ public interface INotificationManager extends IInterface {
             }
         }
 
-        protected void getActiveNotificationsWithAttribution_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_NOTIFICATIONS, getCallingPid(), getCallingUid());
+        protected void getActiveNotificationsWithAttribution_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_NOTIFICATIONS, getCallingPid(), getCallingUid());
         }
 
-        protected void getHistoricalNotificationsWithAttribution_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_NOTIFICATIONS, getCallingPid(), getCallingUid());
+        protected void getHistoricalNotificationsWithAttribution_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_NOTIFICATIONS, getCallingPid(), getCallingUid());
         }
 
         protected void getNotificationHistory_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.ACCESS_NOTIFICATIONS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.ACCESS_NOTIFICATIONS, getCallingPid(), getCallingUid());
         }
 
         protected void setToastRateLimitingEnabled_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_TOAST_RATE_LIMITING, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_TOAST_RATE_LIMITING,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void registerCallNotificationEventListener_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermissionAllOf(PERMISSIONS_registerCallNotificationEventListener, getCallingPid(), getCallingUid());
+        protected void registerCallNotificationEventListener_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermissionAllOf(
+                    PERMISSIONS_registerCallNotificationEventListener,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
-        protected void unregisterCallNotificationEventListener_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermissionAllOf(PERMISSIONS_unregisterCallNotificationEventListener, getCallingPid(), getCallingUid());
+        protected void unregisterCallNotificationEventListener_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermissionAllOf(
+                    PERMISSIONS_unregisterCallNotificationEventListener,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         @Override // android.os.Binder

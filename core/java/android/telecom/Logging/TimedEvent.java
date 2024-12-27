@@ -15,15 +15,22 @@ public abstract class TimedEvent<T> {
         HashMap<T, Double> result = new HashMap<>();
         for (TimedEvent<T> entry : events) {
             if (counts.containsKey(entry.getKey())) {
-                counts.put(entry.getKey(), Integer.valueOf(counts.get(entry.getKey()).intValue() + 1));
-                result.put(entry.getKey(), Double.valueOf(result.get(entry.getKey()).doubleValue() + entry.getTime()));
+                counts.put(
+                        entry.getKey(), Integer.valueOf(counts.get(entry.getKey()).intValue() + 1));
+                result.put(
+                        entry.getKey(),
+                        Double.valueOf(result.get(entry.getKey()).doubleValue() + entry.getTime()));
             } else {
                 counts.put(entry.getKey(), 1);
                 result.put(entry.getKey(), Double.valueOf(entry.getTime()));
             }
         }
         for (Map.Entry<T, Double> entry2 : result.entrySet()) {
-            result.put(entry2.getKey(), Double.valueOf(entry2.getValue().doubleValue() / counts.get(entry2.getKey()).intValue()));
+            result.put(
+                    entry2.getKey(),
+                    Double.valueOf(
+                            entry2.getValue().doubleValue()
+                                    / counts.get(entry2.getKey()).intValue()));
         }
         return result;
     }

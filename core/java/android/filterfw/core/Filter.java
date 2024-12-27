@@ -5,6 +5,7 @@ import android.filterfw.io.GraphIOException;
 import android.filterfw.io.TextGraphReader;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.util.Log;
+
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -112,11 +113,9 @@ public abstract class Filter {
         setInputFrame(inputName, wrapInputValue(inputName, value));
     }
 
-    protected void prepare(FilterContext context) {
-    }
+    protected void prepare(FilterContext context) {}
 
-    protected void parametersUpdated(Set<String> updated) {
-    }
+    protected void parametersUpdated(Set<String> updated) {}
 
     protected void delayNextProcess(int millisecs) {
         this.mSleepDelay = millisecs;
@@ -132,18 +131,15 @@ public abstract class Filter {
         return inputPort.getSourceFormat();
     }
 
-    public void open(FilterContext context) {
-    }
+    public void open(FilterContext context) {}
 
     public final int getSleepDelay() {
         return 250;
     }
 
-    public void close(FilterContext context) {
-    }
+    public void close(FilterContext context) {}
 
-    public void tearDown(FilterContext context) {
-    }
+    public void tearDown(FilterContext context) {}
 
     public final int getNumberOfConnectedInputs() {
         int c = 0;
@@ -181,22 +177,34 @@ public abstract class Filter {
 
     public final InputPort getInputPort(String portName) {
         if (this.mInputPorts == null) {
-            throw new NullPointerException("Attempting to access input port '" + portName + "' of " + this + " before Filter has been initialized!");
+            throw new NullPointerException(
+                    "Attempting to access input port '"
+                            + portName
+                            + "' of "
+                            + this
+                            + " before Filter has been initialized!");
         }
         InputPort result = this.mInputPorts.get(portName);
         if (result == null) {
-            throw new IllegalArgumentException("Unknown input port '" + portName + "' on filter " + this + "!");
+            throw new IllegalArgumentException(
+                    "Unknown input port '" + portName + "' on filter " + this + "!");
         }
         return result;
     }
 
     public final OutputPort getOutputPort(String portName) {
         if (this.mInputPorts == null) {
-            throw new NullPointerException("Attempting to access output port '" + portName + "' of " + this + " before Filter has been initialized!");
+            throw new NullPointerException(
+                    "Attempting to access output port '"
+                            + portName
+                            + "' of "
+                            + this
+                            + " before Filter has been initialized!");
         }
         OutputPort result = this.mOutputPorts.get(portName);
         if (result == null) {
-            throw new IllegalArgumentException("Unknown output port '" + portName + "' on filter " + this + "!");
+            throw new IllegalArgumentException(
+                    "Unknown output port '" + portName + "' on filter " + this + "!");
         }
         return result;
     }
@@ -204,7 +212,12 @@ public abstract class Filter {
     protected final void pushOutput(String name, Frame frame) {
         if (frame.getTimestamp() == -2) {
             if (this.mLogVerbose) {
-                Log.v(TAG, "Default-setting output Frame timestamp on port " + name + " to " + this.mCurrentTimestamp);
+                Log.v(
+                        TAG,
+                        "Default-setting output Frame timestamp on port "
+                                + name
+                                + " to "
+                                + this.mCurrentTimestamp);
             }
             frame.setTimestamp(this.mCurrentTimestamp);
         }
@@ -216,15 +229,19 @@ public abstract class Filter {
         if (this.mCurrentTimestamp == -1) {
             this.mCurrentTimestamp = result.getTimestamp();
             if (this.mLogVerbose) {
-                Log.v(TAG, "Default-setting current timestamp from input port " + name + " to " + this.mCurrentTimestamp);
+                Log.v(
+                        TAG,
+                        "Default-setting current timestamp from input port "
+                                + name
+                                + " to "
+                                + this.mCurrentTimestamp);
             }
         }
         this.mFramesToRelease.add(result);
         return result;
     }
 
-    public void fieldPortValueUpdated(String name, FilterContext context) {
-    }
+    public void fieldPortValueUpdated(String name, FilterContext context) {}
 
     protected void transferInputPortFrame(String name, FilterContext context) {
         getInputPort(name).transfer(context);
@@ -287,7 +304,8 @@ public abstract class Filter {
         this.mInputPorts.put(name, fieldPort);
     }
 
-    protected void addProgramPort(String name, String varName, Field field, Class varType, boolean hasDefault) {
+    protected void addProgramPort(
+            String name, String varName, Field field, Class varType, boolean hasDefault) {
         field.setAccessible(true);
         InputPort programPort = new ProgramPort(this, name, varName, field, hasDefault);
         if (this.mLogVerbose) {
@@ -311,7 +329,11 @@ public abstract class Filter {
     }
 
     public String toString() {
-        return "'" + getName() + "' (" + getFilterClassName() + NavigationBarInflaterView.KEY_CODE_END;
+        return "'"
+                + getName()
+                + "' ("
+                + getFilterClassName()
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 
     final Collection<InputPort> getInputPorts() {
@@ -347,7 +369,12 @@ public abstract class Filter {
                 this.mStatus = 3;
             }
             if (this.mStatus != 3) {
-                throw new RuntimeException("Filter " + this + " was brought into invalid state during opening (state: " + this.mStatus + ")!");
+                throw new RuntimeException(
+                        "Filter "
+                                + this
+                                + " was brought into invalid state during opening (state: "
+                                + this.mStatus
+                                + ")!");
             }
             this.mIsOpen = true;
         }
@@ -474,7 +501,12 @@ public abstract class Filter {
                     setImmediateInputValue(name, values.get(name));
                     values.remove(name);
                 } else if (!generator.hasDefault()) {
-                    throw new RuntimeException("No value specified for final input port '" + name + "' of filter " + this + "!");
+                    throw new RuntimeException(
+                            "No value specified for final input port '"
+                                    + name
+                                    + "' of filter "
+                                    + this
+                                    + "!");
                 }
             }
         }
@@ -548,7 +580,13 @@ public abstract class Filter {
             Class portClass = portFormat == null ? null : portFormat.getObjectClass();
             inputFormat.setObjectClass(portClass);
         }
-        boolean shouldSerialize = ((value instanceof Number) || (value instanceof Boolean) || (value instanceof String) || !(value instanceof Serializable)) ? false : true;
+        boolean shouldSerialize =
+                ((value instanceof Number)
+                                || (value instanceof Boolean)
+                                || (value instanceof String)
+                                || !(value instanceof Serializable))
+                        ? false
+                        : true;
         if (shouldSerialize) {
             simpleFrame = new SerializedFrame(inputFormat, null);
         } else {

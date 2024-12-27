@@ -5,7 +5,8 @@ import java.util.RandomAccess;
 
 /* loaded from: classes3.dex */
 final class ProtobufArrayList<E> extends AbstractProtobufList<E> implements RandomAccess {
-    private static final ProtobufArrayList<Object> EMPTY_LIST = new ProtobufArrayList<>(new Object[0], 0);
+    private static final ProtobufArrayList<Object> EMPTY_LIST =
+            new ProtobufArrayList<>(new Object[0], 0);
     private E[] array;
     private int size;
 
@@ -26,7 +27,8 @@ final class ProtobufArrayList<E> extends AbstractProtobufList<E> implements Rand
         this.size = size;
     }
 
-    @Override // com.android.framework.protobuf.Internal.ProtobufList, com.android.framework.protobuf.Internal.BooleanList
+    @Override // com.android.framework.protobuf.Internal.ProtobufList,
+              // com.android.framework.protobuf.Internal.BooleanList
     /* renamed from: mutableCopyWithCapacity */
     public ProtobufArrayList<E> mutableCopyWithCapacity2(int capacity) {
         if (capacity < this.size) {
@@ -35,7 +37,8 @@ final class ProtobufArrayList<E> extends AbstractProtobufList<E> implements Rand
         return new ProtobufArrayList<>(Arrays.copyOf(this.array, capacity), this.size);
     }
 
-    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.AbstractCollection, java.util.Collection, java.util.List
+    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList,
+              // java.util.AbstractCollection, java.util.Collection, java.util.List
     public boolean add(E e) {
         ensureIsMutable();
         if (this.size == this.array.length) {
@@ -49,7 +52,8 @@ final class ProtobufArrayList<E> extends AbstractProtobufList<E> implements Rand
         return true;
     }
 
-    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.List
+    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList,
+              // java.util.List
     public void add(int i, E e) {
         ensureIsMutable();
         if (i < 0 || i > this.size) {
@@ -74,7 +78,8 @@ final class ProtobufArrayList<E> extends AbstractProtobufList<E> implements Rand
         return this.array[index];
     }
 
-    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.List
+    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList,
+              // java.util.List
     public E remove(int index) {
         ensureIsMutable();
         ensureIndexInRange(index);
@@ -87,7 +92,8 @@ final class ProtobufArrayList<E> extends AbstractProtobufList<E> implements Rand
         return value;
     }
 
-    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList, java.util.List
+    @Override // com.android.framework.protobuf.AbstractProtobufList, java.util.AbstractList,
+              // java.util.List
     public E set(int index, E element) {
         ensureIsMutable();
         ensureIndexInRange(index);

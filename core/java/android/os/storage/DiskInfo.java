@@ -5,29 +5,33 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.DebugUtils;
+
 import com.android.internal.R;
 import com.android.internal.util.IndentingPrintWriter;
 import com.android.internal.util.Preconditions;
+
 import com.samsung.android.knox.analytics.database.Contract;
+
 import java.io.CharArrayWriter;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public class DiskInfo implements Parcelable {
     public static final String ACTION_DISK_SCANNED = "android.os.storage.action.DISK_SCANNED";
-    public static final Parcelable.Creator<DiskInfo> CREATOR = new Parcelable.Creator<DiskInfo>() { // from class: android.os.storage.DiskInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DiskInfo createFromParcel(Parcel in) {
-            return new DiskInfo(in);
-        }
+    public static final Parcelable.Creator<DiskInfo> CREATOR =
+            new Parcelable.Creator<DiskInfo>() { // from class: android.os.storage.DiskInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DiskInfo createFromParcel(Parcel in) {
+                    return new DiskInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DiskInfo[] newArray(int size) {
-            return new DiskInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DiskInfo[] newArray(int size) {
+                    return new DiskInfo[size];
+                }
+            };
     public static final String EXTRA_DISK_ID = "android.os.storage.extra.DISK_ID";
     public static final String EXTRA_VOLUME_COUNT = "android.os.storage.extra.VOLUME_COUNT";
     public static final int FLAG_ADOPTABLE = 1;
@@ -61,7 +65,13 @@ public class DiskInfo implements Parcelable {
     }
 
     private boolean isInteresting(String label) {
-        return (TextUtils.isEmpty(label) || label.equalsIgnoreCase("ata") || label.toLowerCase().contains("generic") || label.toLowerCase().startsWith("usb") || label.toLowerCase().startsWith("multiple")) ? false : true;
+        return (TextUtils.isEmpty(label)
+                        || label.equalsIgnoreCase("ata")
+                        || label.toLowerCase().contains("generic")
+                        || label.toLowerCase().startsWith("usb")
+                        || label.toLowerCase().startsWith("multiple"))
+                ? false
+                : true;
     }
 
     public String getDescription() {

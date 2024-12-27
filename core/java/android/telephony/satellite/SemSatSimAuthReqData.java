@@ -2,23 +2,27 @@ package android.telephony.satellite;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.telephony.util.TelephonyUtils;
 
 /* loaded from: classes4.dex */
 public final class SemSatSimAuthReqData implements Parcelable {
-    public static final Parcelable.Creator<SemSatSimAuthReqData> CREATOR = new Parcelable.Creator<SemSatSimAuthReqData>() { // from class: android.telephony.satellite.SemSatSimAuthReqData.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemSatSimAuthReqData createFromParcel(Parcel source) {
-            return new SemSatSimAuthReqData(source);
-        }
+    public static final Parcelable.Creator<SemSatSimAuthReqData> CREATOR =
+            new Parcelable.Creator<
+                    SemSatSimAuthReqData>() { // from class:
+                                              // android.telephony.satellite.SemSatSimAuthReqData.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemSatSimAuthReqData createFromParcel(Parcel source) {
+                    return new SemSatSimAuthReqData(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemSatSimAuthReqData[] newArray(int size) {
-            return new SemSatSimAuthReqData[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemSatSimAuthReqData[] newArray(int size) {
+                    return new SemSatSimAuthReqData[size];
+                }
+            };
     private static final String LOG_TAG = "SemSatSimAuthReqData";
     private String mAuth;
     private int mAuthLen;
@@ -71,7 +75,10 @@ public final class SemSatSimAuthReqData implements Parcelable {
         }
         byte[] data = new byte[len / 2];
         for (int i = 0; i < len; i += 2) {
-            data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4) + Character.digit(s.charAt(i + 1), 16));
+            data[i / 2] =
+                    (byte)
+                            ((Character.digit(s.charAt(i), 16) << 4)
+                                    + Character.digit(s.charAt(i + 1), 16));
         }
         return data;
     }
@@ -91,7 +98,14 @@ public final class SemSatSimAuthReqData implements Parcelable {
 
     public String toString() {
         if (TelephonyUtils.IS_DEBUGGABLE) {
-            return "SemSatSimAuthReqData randlen: " + this.mRandLen + " rand: " + this.mRand + " authlen: " + this.mAuthLen + " auth: " + this.mAuth;
+            return "SemSatSimAuthReqData randlen: "
+                    + this.mRandLen
+                    + " rand: "
+                    + this.mRand
+                    + " authlen: "
+                    + this.mAuthLen
+                    + " auth: "
+                    + this.mAuth;
         }
         return LOG_TAG;
     }

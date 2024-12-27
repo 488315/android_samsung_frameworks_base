@@ -3,7 +3,9 @@ package com.android.server.desktopmode;
 import android.graphics.Point;
 import android.view.Display;
 import android.view.Surface;
+
 import com.samsung.android.desktopmode.DesktopModeFeature;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -38,11 +40,18 @@ public final class DisplayInfo {
             return false;
         }
         DisplayInfo displayInfo = (DisplayInfo) obj;
-        return this.mDisplayId == displayInfo.mDisplayId && this.mType == displayInfo.mType && this.mRotation == displayInfo.mRotation && this.mRealSize.equals(displayInfo.mRealSize);
+        return this.mDisplayId == displayInfo.mDisplayId
+                && this.mType == displayInfo.mType
+                && this.mRotation == displayInfo.mRotation
+                && this.mRealSize.equals(displayInfo.mRealSize);
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mDisplayId), Integer.valueOf(this.mType), this.mRealSize, Integer.valueOf(this.mRotation));
+        return Objects.hash(
+                Integer.valueOf(this.mDisplayId),
+                Integer.valueOf(this.mType),
+                this.mRealSize,
+                Integer.valueOf(this.mRotation));
     }
 
     public final String toString() {

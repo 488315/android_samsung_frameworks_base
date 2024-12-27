@@ -11,23 +11,28 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface ISession extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$biometrics$fingerprint$ISession".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$biometrics$fingerprint$ISession".replace('$', '.');
     public static final String HASH = "41a730a7a6b5aa9cebebce70ee5b5e509b0af6fb";
     public static final int VERSION = 4;
 
     ICancellationSignal authenticate(long j) throws RemoteException;
 
-    ICancellationSignal authenticateWithContext(long j, OperationContext operationContext) throws RemoteException;
+    ICancellationSignal authenticateWithContext(long j, OperationContext operationContext)
+            throws RemoteException;
 
     void close() throws RemoteException;
 
     ICancellationSignal detectInteraction() throws RemoteException;
 
-    ICancellationSignal detectInteractionWithContext(OperationContext operationContext) throws RemoteException;
+    ICancellationSignal detectInteractionWithContext(OperationContext operationContext)
+            throws RemoteException;
 
     ICancellationSignal enroll(HardwareAuthToken hardwareAuthToken) throws RemoteException;
 
-    ICancellationSignal enrollWithContext(HardwareAuthToken hardwareAuthToken, OperationContext operationContext) throws RemoteException;
+    ICancellationSignal enrollWithContext(
+            HardwareAuthToken hardwareAuthToken, OperationContext operationContext)
+            throws RemoteException;
 
     void enumerateEnrollments() throws RemoteException;
 
@@ -68,12 +73,10 @@ public interface ISession extends IInterface {
 
     public static class Default implements ISession {
         @Override // android.hardware.biometrics.fingerprint.ISession
-        public void generateChallenge() throws RemoteException {
-        }
+        public void generateChallenge() throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISession
-        public void revokeChallenge(long challenge) throws RemoteException {
-        }
+        public void revokeChallenge(long challenge) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISession
         public ICancellationSignal enroll(HardwareAuthToken hat) throws RemoteException {
@@ -91,75 +94,65 @@ public interface ISession extends IInterface {
         }
 
         @Override // android.hardware.biometrics.fingerprint.ISession
-        public void enumerateEnrollments() throws RemoteException {
-        }
+        public void enumerateEnrollments() throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISession
-        public void removeEnrollments(int[] enrollmentIds) throws RemoteException {
-        }
+        public void removeEnrollments(int[] enrollmentIds) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISession
-        public void getAuthenticatorId() throws RemoteException {
-        }
+        public void getAuthenticatorId() throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISession
-        public void invalidateAuthenticatorId() throws RemoteException {
-        }
+        public void invalidateAuthenticatorId() throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISession
-        public void resetLockout(HardwareAuthToken hat) throws RemoteException {
-        }
+        public void resetLockout(HardwareAuthToken hat) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISession
-        public void close() throws RemoteException {
-        }
+        public void close() throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISession
-        public void onPointerDown(int pointerId, int x, int y, float minor, float major) throws RemoteException {
-        }
+        public void onPointerDown(int pointerId, int x, int y, float minor, float major)
+                throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISession
-        public void onPointerUp(int pointerId) throws RemoteException {
-        }
+        public void onPointerUp(int pointerId) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISession
-        public void onUiReady() throws RemoteException {
-        }
+        public void onUiReady() throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISession
-        public ICancellationSignal authenticateWithContext(long operationId, OperationContext context) throws RemoteException {
+        public ICancellationSignal authenticateWithContext(
+                long operationId, OperationContext context) throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.biometrics.fingerprint.ISession
-        public ICancellationSignal enrollWithContext(HardwareAuthToken hat, OperationContext context) throws RemoteException {
+        public ICancellationSignal enrollWithContext(
+                HardwareAuthToken hat, OperationContext context) throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.biometrics.fingerprint.ISession
-        public ICancellationSignal detectInteractionWithContext(OperationContext context) throws RemoteException {
+        public ICancellationSignal detectInteractionWithContext(OperationContext context)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.biometrics.fingerprint.ISession
-        public void onPointerDownWithContext(PointerContext context) throws RemoteException {
-        }
+        public void onPointerDownWithContext(PointerContext context) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISession
-        public void onPointerUpWithContext(PointerContext context) throws RemoteException {
-        }
+        public void onPointerUpWithContext(PointerContext context) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISession
-        public void onContextChanged(OperationContext context) throws RemoteException {
-        }
+        public void onContextChanged(OperationContext context) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISession
-        public void onPointerCancelWithContext(PointerContext context) throws RemoteException {
-        }
+        public void onPointerCancelWithContext(PointerContext context) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISession
-        public void setIgnoreDisplayTouches(boolean shouldIgnore) throws RemoteException {
-        }
+        public void setIgnoreDisplayTouches(boolean shouldIgnore) throws RemoteException {}
 
         @Override // android.hardware.biometrics.fingerprint.ISession
         public int getInterfaceVersion() {
@@ -177,7 +170,7 @@ public interface ISession extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISession {
+    public abstract static class Stub extends Binder implements ISession {
         static final int TRANSACTION_authenticate = 4;
         static final int TRANSACTION_authenticateWithContext = 15;
         static final int TRANSACTION_close = 11;
@@ -285,7 +278,8 @@ public interface ISession extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -316,7 +310,8 @@ public interface ISession extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 3:
-                    HardwareAuthToken _arg02 = (HardwareAuthToken) data.readTypedObject(HardwareAuthToken.CREATOR);
+                    HardwareAuthToken _arg02 =
+                            (HardwareAuthToken) data.readTypedObject(HardwareAuthToken.CREATOR);
                     data.enforceNoDataAvail();
                     ICancellationSignal _result = enroll(_arg02);
                     reply.writeNoException();
@@ -353,7 +348,8 @@ public interface ISession extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 10:
-                    HardwareAuthToken _arg05 = (HardwareAuthToken) data.readTypedObject(HardwareAuthToken.CREATOR);
+                    HardwareAuthToken _arg05 =
+                            (HardwareAuthToken) data.readTypedObject(HardwareAuthToken.CREATOR);
                     data.enforceNoDataAvail();
                     resetLockout(_arg05);
                     reply.writeNoException();
@@ -384,47 +380,55 @@ public interface ISession extends IInterface {
                     return true;
                 case 15:
                     long _arg08 = data.readLong();
-                    OperationContext _arg12 = (OperationContext) data.readTypedObject(OperationContext.CREATOR);
+                    OperationContext _arg12 =
+                            (OperationContext) data.readTypedObject(OperationContext.CREATOR);
                     data.enforceNoDataAvail();
                     ICancellationSignal _result4 = authenticateWithContext(_arg08, _arg12);
                     reply.writeNoException();
                     reply.writeStrongInterface(_result4);
                     return true;
                 case 16:
-                    HardwareAuthToken _arg09 = (HardwareAuthToken) data.readTypedObject(HardwareAuthToken.CREATOR);
-                    OperationContext _arg13 = (OperationContext) data.readTypedObject(OperationContext.CREATOR);
+                    HardwareAuthToken _arg09 =
+                            (HardwareAuthToken) data.readTypedObject(HardwareAuthToken.CREATOR);
+                    OperationContext _arg13 =
+                            (OperationContext) data.readTypedObject(OperationContext.CREATOR);
                     data.enforceNoDataAvail();
                     ICancellationSignal _result5 = enrollWithContext(_arg09, _arg13);
                     reply.writeNoException();
                     reply.writeStrongInterface(_result5);
                     return true;
                 case 17:
-                    OperationContext _arg010 = (OperationContext) data.readTypedObject(OperationContext.CREATOR);
+                    OperationContext _arg010 =
+                            (OperationContext) data.readTypedObject(OperationContext.CREATOR);
                     data.enforceNoDataAvail();
                     ICancellationSignal _result6 = detectInteractionWithContext(_arg010);
                     reply.writeNoException();
                     reply.writeStrongInterface(_result6);
                     return true;
                 case 18:
-                    PointerContext _arg011 = (PointerContext) data.readTypedObject(PointerContext.CREATOR);
+                    PointerContext _arg011 =
+                            (PointerContext) data.readTypedObject(PointerContext.CREATOR);
                     data.enforceNoDataAvail();
                     onPointerDownWithContext(_arg011);
                     reply.writeNoException();
                     return true;
                 case 19:
-                    PointerContext _arg012 = (PointerContext) data.readTypedObject(PointerContext.CREATOR);
+                    PointerContext _arg012 =
+                            (PointerContext) data.readTypedObject(PointerContext.CREATOR);
                     data.enforceNoDataAvail();
                     onPointerUpWithContext(_arg012);
                     reply.writeNoException();
                     return true;
                 case 20:
-                    OperationContext _arg013 = (OperationContext) data.readTypedObject(OperationContext.CREATOR);
+                    OperationContext _arg013 =
+                            (OperationContext) data.readTypedObject(OperationContext.CREATOR);
                     data.enforceNoDataAvail();
                     onContextChanged(_arg013);
                     reply.writeNoException();
                     return true;
                 case 21:
-                    PointerContext _arg014 = (PointerContext) data.readTypedObject(PointerContext.CREATOR);
+                    PointerContext _arg014 =
+                            (PointerContext) data.readTypedObject(PointerContext.CREATOR);
                     data.enforceNoDataAvail();
                     onPointerCancelWithContext(_arg014);
                     reply.writeNoException();
@@ -505,7 +509,8 @@ public interface ISession extends IInterface {
                         throw new RemoteException("Method enroll is unimplemented.");
                     }
                     _reply.readException();
-                    ICancellationSignal _result = ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
+                    ICancellationSignal _result =
+                            ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -525,7 +530,8 @@ public interface ISession extends IInterface {
                         throw new RemoteException("Method authenticate is unimplemented.");
                     }
                     _reply.readException();
-                    ICancellationSignal _result = ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
+                    ICancellationSignal _result =
+                            ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -544,7 +550,8 @@ public interface ISession extends IInterface {
                         throw new RemoteException("Method detectInteraction is unimplemented.");
                     }
                     _reply.readException();
-                    ICancellationSignal _result = ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
+                    ICancellationSignal _result =
+                            ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -612,7 +619,8 @@ public interface ISession extends IInterface {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(9, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method invalidateAuthenticatorId is unimplemented.");
+                        throw new RemoteException(
+                                "Method invalidateAuthenticatorId is unimplemented.");
                     }
                     _reply.readException();
                 } finally {
@@ -657,7 +665,8 @@ public interface ISession extends IInterface {
             }
 
             @Override // android.hardware.biometrics.fingerprint.ISession
-            public void onPointerDown(int pointerId, int x, int y, float minor, float major) throws RemoteException {
+            public void onPointerDown(int pointerId, int x, int y, float minor, float major)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -714,7 +723,8 @@ public interface ISession extends IInterface {
             }
 
             @Override // android.hardware.biometrics.fingerprint.ISession
-            public ICancellationSignal authenticateWithContext(long operationId, OperationContext context) throws RemoteException {
+            public ICancellationSignal authenticateWithContext(
+                    long operationId, OperationContext context) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -723,10 +733,12 @@ public interface ISession extends IInterface {
                     _data.writeTypedObject(context, 0);
                     boolean _status = this.mRemote.transact(15, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method authenticateWithContext is unimplemented.");
+                        throw new RemoteException(
+                                "Method authenticateWithContext is unimplemented.");
                     }
                     _reply.readException();
-                    ICancellationSignal _result = ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
+                    ICancellationSignal _result =
+                            ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -735,7 +747,8 @@ public interface ISession extends IInterface {
             }
 
             @Override // android.hardware.biometrics.fingerprint.ISession
-            public ICancellationSignal enrollWithContext(HardwareAuthToken hat, OperationContext context) throws RemoteException {
+            public ICancellationSignal enrollWithContext(
+                    HardwareAuthToken hat, OperationContext context) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -747,7 +760,8 @@ public interface ISession extends IInterface {
                         throw new RemoteException("Method enrollWithContext is unimplemented.");
                     }
                     _reply.readException();
-                    ICancellationSignal _result = ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
+                    ICancellationSignal _result =
+                            ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -756,7 +770,8 @@ public interface ISession extends IInterface {
             }
 
             @Override // android.hardware.biometrics.fingerprint.ISession
-            public ICancellationSignal detectInteractionWithContext(OperationContext context) throws RemoteException {
+            public ICancellationSignal detectInteractionWithContext(OperationContext context)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -764,10 +779,12 @@ public interface ISession extends IInterface {
                     _data.writeTypedObject(context, 0);
                     boolean _status = this.mRemote.transact(17, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method detectInteractionWithContext is unimplemented.");
+                        throw new RemoteException(
+                                "Method detectInteractionWithContext is unimplemented.");
                     }
                     _reply.readException();
-                    ICancellationSignal _result = ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
+                    ICancellationSignal _result =
+                            ICancellationSignal.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -784,7 +801,8 @@ public interface ISession extends IInterface {
                     _data.writeTypedObject(context, 0);
                     boolean _status = this.mRemote.transact(18, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method onPointerDownWithContext is unimplemented.");
+                        throw new RemoteException(
+                                "Method onPointerDownWithContext is unimplemented.");
                     }
                     _reply.readException();
                 } finally {
@@ -802,7 +820,8 @@ public interface ISession extends IInterface {
                     _data.writeTypedObject(context, 0);
                     boolean _status = this.mRemote.transact(19, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method onPointerUpWithContext is unimplemented.");
+                        throw new RemoteException(
+                                "Method onPointerUpWithContext is unimplemented.");
                     }
                     _reply.readException();
                 } finally {
@@ -838,7 +857,8 @@ public interface ISession extends IInterface {
                     _data.writeTypedObject(context, 0);
                     boolean _status = this.mRemote.transact(21, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method onPointerCancelWithContext is unimplemented.");
+                        throw new RemoteException(
+                                "Method onPointerCancelWithContext is unimplemented.");
                     }
                     _reply.readException();
                 } finally {
@@ -856,7 +876,8 @@ public interface ISession extends IInterface {
                     _data.writeBoolean(shouldIgnore);
                     boolean _status = this.mRemote.transact(22, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method setIgnoreDisplayTouches is unimplemented.");
+                        throw new RemoteException(
+                                "Method setIgnoreDisplayTouches is unimplemented.");
                     }
                     _reply.readException();
                 } finally {

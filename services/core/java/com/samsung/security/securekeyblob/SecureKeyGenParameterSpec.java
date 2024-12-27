@@ -1,8 +1,10 @@
 package com.samsung.security.securekeyblob;
 
 import android.security.keystore.ArrayUtils;
+
 import java.util.Collections;
 import java.util.Set;
+
 import javax.security.auth.x500.X500Principal;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -23,7 +25,15 @@ public final class SecureKeyGenParameterSpec {
     public final byte[] mDNQualifier = null;
     public final int mPurposes = 12;
 
-    public SecureKeyGenParameterSpec(byte[] bArr, int i, String[] strArr, Set set, String[] strArr2, String[] strArr3, String[] strArr4, byte[] bArr2) {
+    public SecureKeyGenParameterSpec(
+            byte[] bArr,
+            int i,
+            String[] strArr,
+            Set set,
+            String[] strArr2,
+            String[] strArr3,
+            String[] strArr4,
+            byte[] bArr2) {
         this.mServiceTAName = bArr;
         this.mKeySize = i;
         this.mDigests = ArrayUtils.cloneIfNotEmpty(strArr);

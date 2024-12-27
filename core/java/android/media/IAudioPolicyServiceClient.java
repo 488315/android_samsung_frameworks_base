@@ -19,7 +19,16 @@ public interface IAudioPolicyServiceClient extends IInterface {
 
     void onDynamicPolicyMixStateUpdate(String str, int i) throws RemoteException;
 
-    void onRecordingConfigurationUpdate(int i, RecordClientInfo recordClientInfo, AudioConfigBase audioConfigBase, EffectDescriptor[] effectDescriptorArr, AudioConfigBase audioConfigBase2, EffectDescriptor[] effectDescriptorArr2, int i2, int i3) throws RemoteException;
+    void onRecordingConfigurationUpdate(
+            int i,
+            RecordClientInfo recordClientInfo,
+            AudioConfigBase audioConfigBase,
+            EffectDescriptor[] effectDescriptorArr,
+            AudioConfigBase audioConfigBase2,
+            EffectDescriptor[] effectDescriptorArr2,
+            int i2,
+            int i3)
+            throws RemoteException;
 
     void onRoutingUpdated() throws RemoteException;
 
@@ -27,32 +36,34 @@ public interface IAudioPolicyServiceClient extends IInterface {
 
     public static class Default implements IAudioPolicyServiceClient {
         @Override // android.media.IAudioPolicyServiceClient
-        public void onAudioVolumeGroupChanged(int group, int flags) throws RemoteException {
-        }
+        public void onAudioVolumeGroupChanged(int group, int flags) throws RemoteException {}
 
         @Override // android.media.IAudioPolicyServiceClient
-        public void onAudioPortListUpdate() throws RemoteException {
-        }
+        public void onAudioPortListUpdate() throws RemoteException {}
 
         @Override // android.media.IAudioPolicyServiceClient
-        public void onAudioPatchListUpdate() throws RemoteException {
-        }
+        public void onAudioPatchListUpdate() throws RemoteException {}
 
         @Override // android.media.IAudioPolicyServiceClient
-        public void onDynamicPolicyMixStateUpdate(String regId, int state) throws RemoteException {
-        }
+        public void onDynamicPolicyMixStateUpdate(String regId, int state) throws RemoteException {}
 
         @Override // android.media.IAudioPolicyServiceClient
-        public void onRecordingConfigurationUpdate(int event, RecordClientInfo clientInfo, AudioConfigBase clientConfig, EffectDescriptor[] clientEffects, AudioConfigBase deviceConfig, EffectDescriptor[] effects, int patchHandle, int source) throws RemoteException {
-        }
+        public void onRecordingConfigurationUpdate(
+                int event,
+                RecordClientInfo clientInfo,
+                AudioConfigBase clientConfig,
+                EffectDescriptor[] clientEffects,
+                AudioConfigBase deviceConfig,
+                EffectDescriptor[] effects,
+                int patchHandle,
+                int source)
+                throws RemoteException {}
 
         @Override // android.media.IAudioPolicyServiceClient
-        public void onRoutingUpdated() throws RemoteException {
-        }
+        public void onRoutingUpdated() throws RemoteException {}
 
         @Override // android.media.IAudioPolicyServiceClient
-        public void onVolumeRangeInitRequest() throws RemoteException {
-        }
+        public void onVolumeRangeInitRequest() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -60,7 +71,7 @@ public interface IAudioPolicyServiceClient extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAudioPolicyServiceClient {
+    public abstract static class Stub extends Binder implements IAudioPolicyServiceClient {
         static final int TRANSACTION_onAudioPatchListUpdate = 3;
         static final int TRANSACTION_onAudioPortListUpdate = 2;
         static final int TRANSACTION_onAudioVolumeGroupChanged = 1;
@@ -90,7 +101,8 @@ public interface IAudioPolicyServiceClient extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAudioPolicyServiceClient.DESCRIPTOR);
             }
@@ -119,15 +131,21 @@ public interface IAudioPolicyServiceClient extends IInterface {
                     return true;
                 case 5:
                     int _arg03 = data.readInt();
-                    RecordClientInfo _arg13 = (RecordClientInfo) data.readTypedObject(RecordClientInfo.CREATOR);
-                    AudioConfigBase _arg2 = (AudioConfigBase) data.readTypedObject(AudioConfigBase.CREATOR);
-                    EffectDescriptor[] _arg3 = (EffectDescriptor[]) data.createTypedArray(EffectDescriptor.CREATOR);
-                    AudioConfigBase _arg4 = (AudioConfigBase) data.readTypedObject(AudioConfigBase.CREATOR);
-                    EffectDescriptor[] _arg5 = (EffectDescriptor[]) data.createTypedArray(EffectDescriptor.CREATOR);
+                    RecordClientInfo _arg13 =
+                            (RecordClientInfo) data.readTypedObject(RecordClientInfo.CREATOR);
+                    AudioConfigBase _arg2 =
+                            (AudioConfigBase) data.readTypedObject(AudioConfigBase.CREATOR);
+                    EffectDescriptor[] _arg3 =
+                            (EffectDescriptor[]) data.createTypedArray(EffectDescriptor.CREATOR);
+                    AudioConfigBase _arg4 =
+                            (AudioConfigBase) data.readTypedObject(AudioConfigBase.CREATOR);
+                    EffectDescriptor[] _arg5 =
+                            (EffectDescriptor[]) data.createTypedArray(EffectDescriptor.CREATOR);
                     int _arg6 = data.readInt();
                     int _arg7 = data.readInt();
                     data.enforceNoDataAvail();
-                    onRecordingConfigurationUpdate(_arg03, _arg13, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7);
+                    onRecordingConfigurationUpdate(
+                            _arg03, _arg13, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7);
                     return true;
                 case 6:
                     onRoutingUpdated();
@@ -192,7 +210,8 @@ public interface IAudioPolicyServiceClient extends IInterface {
             }
 
             @Override // android.media.IAudioPolicyServiceClient
-            public void onDynamicPolicyMixStateUpdate(String regId, int state) throws RemoteException {
+            public void onDynamicPolicyMixStateUpdate(String regId, int state)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IAudioPolicyServiceClient.DESCRIPTOR);
@@ -205,7 +224,16 @@ public interface IAudioPolicyServiceClient extends IInterface {
             }
 
             @Override // android.media.IAudioPolicyServiceClient
-            public void onRecordingConfigurationUpdate(int event, RecordClientInfo clientInfo, AudioConfigBase clientConfig, EffectDescriptor[] clientEffects, AudioConfigBase deviceConfig, EffectDescriptor[] effects, int patchHandle, int source) throws RemoteException {
+            public void onRecordingConfigurationUpdate(
+                    int event,
+                    RecordClientInfo clientInfo,
+                    AudioConfigBase clientConfig,
+                    EffectDescriptor[] clientEffects,
+                    AudioConfigBase deviceConfig,
+                    EffectDescriptor[] effects,
+                    int patchHandle,
+                    int source)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IAudioPolicyServiceClient.DESCRIPTOR);

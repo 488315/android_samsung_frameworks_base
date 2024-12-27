@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.android.server.am.AssistDataRequester;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class AssistDataReceiverProxy implements AssistDataRequester.AssistDataRequesterCallbacks, IBinder.DeathRecipient {
+public final class AssistDataReceiverProxy
+        implements AssistDataRequester.AssistDataRequesterCallbacks, IBinder.DeathRecipient {
     public String mCallerPackage;
     public IAssistDataReceiver mReceiver;
 
@@ -35,7 +37,10 @@ public final class AssistDataReceiverProxy implements AssistDataRequester.Assist
             try {
                 iAssistDataReceiver.onHandleAssistData(bundle);
             } catch (RemoteException e) {
-                Log.w("ActivityTaskManager", "Failed to proxy assist data to receiver in package=" + this.mCallerPackage, e);
+                Log.w(
+                        "ActivityTaskManager",
+                        "Failed to proxy assist data to receiver in package=" + this.mCallerPackage,
+                        e);
             }
         }
     }
@@ -56,7 +61,11 @@ public final class AssistDataReceiverProxy implements AssistDataRequester.Assist
             try {
                 iAssistDataReceiver.onHandleAssistScreenshot(bitmap);
             } catch (RemoteException e) {
-                Log.w("ActivityTaskManager", "Failed to proxy assist screenshot to receiver in package=" + this.mCallerPackage, e);
+                Log.w(
+                        "ActivityTaskManager",
+                        "Failed to proxy assist screenshot to receiver in package="
+                                + this.mCallerPackage,
+                        e);
             }
         }
     }

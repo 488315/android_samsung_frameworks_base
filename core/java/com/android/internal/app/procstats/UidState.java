@@ -5,6 +5,7 @@ import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.TimeUtils;
+
 import java.io.PrintWriter;
 import java.util.function.Predicate;
 
@@ -97,12 +98,14 @@ public final class UidState {
     public void resetSafely(long now) {
         this.mDurations.resetTable();
         this.mStartTime = now;
-        this.mProcesses.removeIf(new Predicate() { // from class: com.android.internal.app.procstats.UidState$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return UidState.lambda$resetSafely$0((ProcessState) obj);
-            }
-        });
+        this.mProcesses.removeIf(
+                new Predicate() { // from class:
+                                  // com.android.internal.app.procstats.UidState$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return UidState.lambda$resetSafely$0((ProcessState) obj);
+                    }
+                });
     }
 
     static /* synthetic */ boolean lambda$resetSafely$0(ProcessState p) {
@@ -123,7 +126,8 @@ public final class UidState {
         int size = this.mProcesses.size();
         for (int i = 0; i < size; i++) {
             ProcessState proc = this.mProcesses.valueAt(i);
-            if (TextUtils.equals(packageName, proc.getName()) && TextUtils.equals(packageName, proc.getPackage())) {
+            if (TextUtils.equals(packageName, proc.getName())
+                    && TextUtils.equals(packageName, proc.getPackage())) {
                 return true;
             }
         }
@@ -154,7 +158,8 @@ public final class UidState {
     }
 
     public long getTotalRunningDuration(long now) {
-        return this.mTotalRunningDuration + (this.mTotalRunningStartTime != 0 ? now - this.mTotalRunningStartTime : 0L);
+        return this.mTotalRunningDuration
+                + (this.mTotalRunningStartTime != 0 ? now - this.mTotalRunningStartTime : 0L);
     }
 
     public long getDuration(int state, long now) {
@@ -192,11 +197,21 @@ public final class UidState {
 
     public String toString() {
         StringBuilder sb = new StringBuilder(128);
-        sb.append("UidState{").append(Integer.toHexString(System.identityHashCode(this))).append(" ").append(UserHandle.formatUid(this.mUid)).append("}");
+        sb.append("UidState{")
+                .append(Integer.toHexString(System.identityHashCode(this)))
+                .append(" ")
+                .append(UserHandle.formatUid(this.mUid))
+                .append("}");
         return sb.toString();
     }
 
-    void dumpState(PrintWriter pw, String prefix, int[] screenStates, int[] memStates, int[] procStates, long now) {
+    void dumpState(
+            PrintWriter pw,
+            String prefix,
+            int[] screenStates,
+            int[] memStates,
+            int[] procStates,
+            long now) {
         int i;
         long time;
         UidState uidState = this;

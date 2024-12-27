@@ -12,7 +12,7 @@ public class CallbackRegistry<C, T, A> implements Cloneable {
     private final NotifierCallback<C, T, A> mNotifier;
     private long[] mRemainderRemoved;
 
-    public static abstract class NotifierCallback<C, T, A> {
+    public abstract static class NotifierCallback<C, T, A> {
         public abstract void onNotifyCallback(C c, T t, int i, A a);
     }
 
@@ -48,7 +48,8 @@ public class CallbackRegistry<C, T, A> implements Cloneable {
 
     private void notifyRecurseLocked(T sender, int arg, A arg2) {
         int callbackCount = this.mCallbacks.size();
-        int remainderIndex = this.mRemainderRemoved == null ? -1 : this.mRemainderRemoved.length - 1;
+        int remainderIndex =
+                this.mRemainderRemoved == null ? -1 : this.mRemainderRemoved.length - 1;
         notifyRemainderLocked(sender, arg, arg2, remainderIndex);
         int startCallbackIndex = (remainderIndex + 2) * 64;
         notifyCallbacksLocked(sender, arg, arg2, startCallbackIndex, callbackCount, 0L);
@@ -89,7 +90,8 @@ public class CallbackRegistry<C, T, A> implements Cloneable {
             long bitMask = 1 << index;
             return (this.mFirst64Removed & bitMask) != 0;
         }
-        if (this.mRemainderRemoved == null || (maskIndex = (index / 64) - 1) >= this.mRemainderRemoved.length) {
+        if (this.mRemainderRemoved == null
+                || (maskIndex = (index / 64) - 1) >= this.mRemainderRemoved.length) {
             return false;
         }
         long bits = this.mRemainderRemoved[maskIndex];
@@ -130,7 +132,8 @@ public class CallbackRegistry<C, T, A> implements Cloneable {
             this.mRemainderRemoved = new long[this.mCallbacks.size() / 64];
         } else if (this.mRemainderRemoved.length < remainderIndex) {
             long[] newRemainders = new long[this.mCallbacks.size() / 64];
-            System.arraycopy(this.mRemainderRemoved, 0, newRemainders, 0, this.mRemainderRemoved.length);
+            System.arraycopy(
+                    this.mRemainderRemoved, 0, newRemainders, 0, this.mRemainderRemoved.length);
             this.mRemainderRemoved = newRemainders;
         }
         long bitMask2 = 1 << (index % 64);

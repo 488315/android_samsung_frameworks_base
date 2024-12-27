@@ -6,26 +6,26 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes3.dex */
 public class NetworkQuotaInfo implements Parcelable {
-    public static final Parcelable.Creator<NetworkQuotaInfo> CREATOR = new Parcelable.Creator<NetworkQuotaInfo>() { // from class: android.net.NetworkQuotaInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NetworkQuotaInfo createFromParcel(Parcel in) {
-            return new NetworkQuotaInfo(in);
-        }
+    public static final Parcelable.Creator<NetworkQuotaInfo> CREATOR =
+            new Parcelable.Creator<
+                    NetworkQuotaInfo>() { // from class: android.net.NetworkQuotaInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NetworkQuotaInfo createFromParcel(Parcel in) {
+                    return new NetworkQuotaInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NetworkQuotaInfo[] newArray(int size) {
-            return new NetworkQuotaInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NetworkQuotaInfo[] newArray(int size) {
+                    return new NetworkQuotaInfo[size];
+                }
+            };
     public static final long NO_LIMIT = -1;
 
-    public NetworkQuotaInfo() {
-    }
+    public NetworkQuotaInfo() {}
 
-    public NetworkQuotaInfo(Parcel in) {
-    }
+    public NetworkQuotaInfo(Parcel in) {}
 
     public long getEstimatedBytes() {
         return 0L;
@@ -45,6 +45,5 @@ public class NetworkQuotaInfo implements Parcelable {
     }
 
     @Override // android.os.Parcelable
-    public void writeToParcel(Parcel out, int flags) {
-    }
+    public void writeToParcel(Parcel out, int flags) {}
 }

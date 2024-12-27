@@ -5,16 +5,16 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import vendor.samsung.hardware.radio.sim.ISehRadioSimIndication;
-import vendor.samsung.hardware.radio.sim.ISehRadioSimResponse;
 
 /* loaded from: classes6.dex */
 public interface ISehRadioSim extends IInterface {
-    public static final String DESCRIPTOR = "vendor$samsung$hardware$radio$sim$ISehRadioSim".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "vendor$samsung$hardware$radio$sim$ISehRadioSim".replace('$', '.');
     public static final String HASH = "e94363ef2041c98feabe84e756d983ad196394e8";
     public static final int VERSION = 1;
 
-    void accessPhonebookEntry(int i, int i2, int i3, int i4, SehAdnRecord sehAdnRecord, String str) throws RemoteException;
+    void accessPhonebookEntry(int i, int i2, int i3, int i4, SehAdnRecord sehAdnRecord, String str)
+            throws RemoteException;
 
     void changeIccPersonalization(int i, String str, String str2) throws RemoteException;
 
@@ -34,7 +34,10 @@ public interface ISehRadioSim extends IInterface {
 
     void getUsimPhonebookCapability(int i) throws RemoteException;
 
-    void setResponseFunctions(ISehRadioSimResponse iSehRadioSimResponse, ISehRadioSimIndication iSehRadioSimIndication) throws RemoteException;
+    void setResponseFunctions(
+            ISehRadioSimResponse iSehRadioSimResponse,
+            ISehRadioSimIndication iSehRadioSimIndication)
+            throws RemoteException;
 
     void setSimInitEvent(int i) throws RemoteException;
 
@@ -46,56 +49,50 @@ public interface ISehRadioSim extends IInterface {
 
     public static class Default implements ISehRadioSim {
         @Override // vendor.samsung.hardware.radio.sim.ISehRadioSim
-        public void getIccCardStatus(int serial) throws RemoteException {
-        }
+        public void getIccCardStatus(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.sim.ISehRadioSim
-        public void supplyNetworkDepersonalization(int serial, String netPin, int subState) throws RemoteException {
-        }
+        public void supplyNetworkDepersonalization(int serial, String netPin, int subState)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.sim.ISehRadioSim
-        public void getPhonebookStorageInfo(int serial, int fileId) throws RemoteException {
-        }
+        public void getPhonebookStorageInfo(int serial, int fileId) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.sim.ISehRadioSim
-        public void getUsimPhonebookCapability(int serial) throws RemoteException {
-        }
+        public void getUsimPhonebookCapability(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.sim.ISehRadioSim
-        public void setSimOnOff(int serial, int mode) throws RemoteException {
-        }
+        public void setSimOnOff(int serial, int mode) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.sim.ISehRadioSim
-        public void setSimInitEvent(int serial) throws RemoteException {
-        }
+        public void setSimInitEvent(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.sim.ISehRadioSim
-        public void getSimLockInfo(int serial, int numOfLockType, int lockType) throws RemoteException {
-        }
+        public void getSimLockInfo(int serial, int numOfLockType, int lockType)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.sim.ISehRadioSim
-        public void supplyIccPersonalization(int serial, String pin) throws RemoteException {
-        }
+        public void supplyIccPersonalization(int serial, String pin) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.sim.ISehRadioSim
-        public void changeIccPersonalization(int serial, String oldPass, String newPass) throws RemoteException {
-        }
+        public void changeIccPersonalization(int serial, String oldPass, String newPass)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.sim.ISehRadioSim
-        public void getPhonebookEntry(int serial, int fileId, int index) throws RemoteException {
-        }
+        public void getPhonebookEntry(int serial, int fileId, int index) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.sim.ISehRadioSim
-        public void accessPhonebookEntry(int serial, int command, int fileId, int index, SehAdnRecord adnRecord, String pin2) throws RemoteException {
-        }
+        public void accessPhonebookEntry(
+                int serial, int command, int fileId, int index, SehAdnRecord adnRecord, String pin2)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.sim.ISehRadioSim
-        public void getAtr(int serial) throws RemoteException {
-        }
+        public void getAtr(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.sim.ISehRadioSim
-        public void setResponseFunctions(ISehRadioSimResponse radioResponse, ISehRadioSimIndication radioIndication) throws RemoteException {
-        }
+        public void setResponseFunctions(
+                ISehRadioSimResponse radioResponse, ISehRadioSimIndication radioIndication)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.sim.ISehRadioSim
         public int getInterfaceVersion() {
@@ -113,7 +110,7 @@ public interface ISehRadioSim extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISehRadioSim {
+    public abstract static class Stub extends Binder implements ISehRadioSim {
         static final int TRANSACTION_accessPhonebookEntry = 11;
         static final int TRANSACTION_changeIccPersonalization = 9;
         static final int TRANSACTION_getAtr = 12;
@@ -152,7 +149,8 @@ public interface ISehRadioSim extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -249,8 +247,10 @@ public interface ISehRadioSim extends IInterface {
                     getAtr(_arg012);
                     return true;
                 case 13:
-                    ISehRadioSimResponse _arg013 = ISehRadioSimResponse.Stub.asInterface(data.readStrongBinder());
-                    ISehRadioSimIndication _arg19 = ISehRadioSimIndication.Stub.asInterface(data.readStrongBinder());
+                    ISehRadioSimResponse _arg013 =
+                            ISehRadioSimResponse.Stub.asInterface(data.readStrongBinder());
+                    ISehRadioSimIndication _arg19 =
+                            ISehRadioSimIndication.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setResponseFunctions(_arg013, _arg19);
                     reply.writeNoException();
@@ -294,7 +294,8 @@ public interface ISehRadioSim extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.sim.ISehRadioSim
-            public void supplyNetworkDepersonalization(int serial, String netPin, int subState) throws RemoteException {
+            public void supplyNetworkDepersonalization(int serial, String netPin, int subState)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -303,7 +304,8 @@ public interface ISehRadioSim extends IInterface {
                     _data.writeInt(subState);
                     boolean _status = this.mRemote.transact(2, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method supplyNetworkDepersonalization is unimplemented.");
+                        throw new RemoteException(
+                                "Method supplyNetworkDepersonalization is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -319,7 +321,8 @@ public interface ISehRadioSim extends IInterface {
                     _data.writeInt(fileId);
                     boolean _status = this.mRemote.transact(3, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getPhonebookStorageInfo is unimplemented.");
+                        throw new RemoteException(
+                                "Method getPhonebookStorageInfo is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -334,7 +337,8 @@ public interface ISehRadioSim extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(4, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getUsimPhonebookCapability is unimplemented.");
+                        throw new RemoteException(
+                                "Method getUsimPhonebookCapability is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -373,7 +377,8 @@ public interface ISehRadioSim extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.sim.ISehRadioSim
-            public void getSimLockInfo(int serial, int numOfLockType, int lockType) throws RemoteException {
+            public void getSimLockInfo(int serial, int numOfLockType, int lockType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -398,7 +403,8 @@ public interface ISehRadioSim extends IInterface {
                     _data.writeString(pin);
                     boolean _status = this.mRemote.transact(8, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method supplyIccPersonalization is unimplemented.");
+                        throw new RemoteException(
+                                "Method supplyIccPersonalization is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -406,7 +412,8 @@ public interface ISehRadioSim extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.sim.ISehRadioSim
-            public void changeIccPersonalization(int serial, String oldPass, String newPass) throws RemoteException {
+            public void changeIccPersonalization(int serial, String oldPass, String newPass)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -415,7 +422,8 @@ public interface ISehRadioSim extends IInterface {
                     _data.writeString(newPass);
                     boolean _status = this.mRemote.transact(9, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method changeIccPersonalization is unimplemented.");
+                        throw new RemoteException(
+                                "Method changeIccPersonalization is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -423,7 +431,8 @@ public interface ISehRadioSim extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.sim.ISehRadioSim
-            public void getPhonebookEntry(int serial, int fileId, int index) throws RemoteException {
+            public void getPhonebookEntry(int serial, int fileId, int index)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -440,7 +449,14 @@ public interface ISehRadioSim extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.sim.ISehRadioSim
-            public void accessPhonebookEntry(int serial, int command, int fileId, int index, SehAdnRecord adnRecord, String pin2) throws RemoteException {
+            public void accessPhonebookEntry(
+                    int serial,
+                    int command,
+                    int fileId,
+                    int index,
+                    SehAdnRecord adnRecord,
+                    String pin2)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -475,7 +491,9 @@ public interface ISehRadioSim extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.sim.ISehRadioSim
-            public void setResponseFunctions(ISehRadioSimResponse radioResponse, ISehRadioSimIndication radioIndication) throws RemoteException {
+            public void setResponseFunctions(
+                    ISehRadioSimResponse radioResponse, ISehRadioSimIndication radioIndication)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

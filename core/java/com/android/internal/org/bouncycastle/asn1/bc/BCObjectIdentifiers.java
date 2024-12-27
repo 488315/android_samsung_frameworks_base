@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.asn1.bc;
 
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
+
 import com.samsung.android.media.AudioParameter;
 
 /* loaded from: classes5.dex */
@@ -16,12 +17,18 @@ public interface BCObjectIdentifiers {
     public static final ASN1ObjectIdentifier bc_pbe_sha1_pkcs12 = bc_pbe_sha1.branch("2");
     public static final ASN1ObjectIdentifier bc_pbe_sha256_pkcs5 = bc_pbe_sha256.branch("1");
     public static final ASN1ObjectIdentifier bc_pbe_sha256_pkcs12 = bc_pbe_sha256.branch("2");
-    public static final ASN1ObjectIdentifier bc_pbe_sha1_pkcs12_aes128_cbc = bc_pbe_sha1_pkcs12.branch("1.2");
-    public static final ASN1ObjectIdentifier bc_pbe_sha1_pkcs12_aes192_cbc = bc_pbe_sha1_pkcs12.branch("1.22");
-    public static final ASN1ObjectIdentifier bc_pbe_sha1_pkcs12_aes256_cbc = bc_pbe_sha1_pkcs12.branch("1.42");
-    public static final ASN1ObjectIdentifier bc_pbe_sha256_pkcs12_aes128_cbc = bc_pbe_sha256_pkcs12.branch("1.2");
-    public static final ASN1ObjectIdentifier bc_pbe_sha256_pkcs12_aes192_cbc = bc_pbe_sha256_pkcs12.branch("1.22");
-    public static final ASN1ObjectIdentifier bc_pbe_sha256_pkcs12_aes256_cbc = bc_pbe_sha256_pkcs12.branch("1.42");
+    public static final ASN1ObjectIdentifier bc_pbe_sha1_pkcs12_aes128_cbc =
+            bc_pbe_sha1_pkcs12.branch("1.2");
+    public static final ASN1ObjectIdentifier bc_pbe_sha1_pkcs12_aes192_cbc =
+            bc_pbe_sha1_pkcs12.branch("1.22");
+    public static final ASN1ObjectIdentifier bc_pbe_sha1_pkcs12_aes256_cbc =
+            bc_pbe_sha1_pkcs12.branch("1.42");
+    public static final ASN1ObjectIdentifier bc_pbe_sha256_pkcs12_aes128_cbc =
+            bc_pbe_sha256_pkcs12.branch("1.2");
+    public static final ASN1ObjectIdentifier bc_pbe_sha256_pkcs12_aes192_cbc =
+            bc_pbe_sha256_pkcs12.branch("1.22");
+    public static final ASN1ObjectIdentifier bc_pbe_sha256_pkcs12_aes256_cbc =
+            bc_pbe_sha256_pkcs12.branch("1.42");
     public static final ASN1ObjectIdentifier bc_sig = bc.branch("2");
     public static final ASN1ObjectIdentifier xmss = bc_sig.branch("2");
     public static final ASN1ObjectIdentifier xmss_SHA256ph = xmss.branch("1");
@@ -56,7 +63,8 @@ public interface BCObjectIdentifiers {
     public static final ASN1ObjectIdentifier qTESLA_Rnd1_p_I = qTESLA.branch("4");
     public static final ASN1ObjectIdentifier qTESLA_Rnd1_p_III = qTESLA.branch("5");
     public static final ASN1ObjectIdentifier qTESLA_p_I = qTESLA.branch("11");
-    public static final ASN1ObjectIdentifier qTESLA_p_III = qTESLA.branch(AudioParameter.VALUE_VM_CSD_500_WARNING);
+    public static final ASN1ObjectIdentifier qTESLA_p_III =
+            qTESLA.branch(AudioParameter.VALUE_VM_CSD_500_WARNING);
     public static final ASN1ObjectIdentifier bc_ext = bc.branch("4");
     public static final ASN1ObjectIdentifier linkedCertificate = bc_ext.branch("1");
 }

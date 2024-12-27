@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
+
 import com.android.internal.net.INetworkWatchlistManager;
 import com.android.internal.util.Preconditions;
 
@@ -23,7 +24,9 @@ public class NetworkWatchlistManager {
 
     public NetworkWatchlistManager(Context context) {
         this.mContext = (Context) Preconditions.checkNotNull(context, "missing context");
-        this.mNetworkWatchlistManager = INetworkWatchlistManager.Stub.asInterface(ServiceManager.getService(Context.NETWORK_WATCHLIST_SERVICE));
+        this.mNetworkWatchlistManager =
+                INetworkWatchlistManager.Stub.asInterface(
+                        ServiceManager.getService(Context.NETWORK_WATCHLIST_SERVICE));
     }
 
     public void reportWatchlistIfNecessary() {

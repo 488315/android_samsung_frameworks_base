@@ -4,8 +4,7 @@ import java.util.Date;
 
 /* loaded from: classes3.dex */
 abstract class Utils {
-    private Utils() {
-    }
+    private Utils() {}
 
     static Date cloneIfNotNull(Date value) {
         if (value != null) {

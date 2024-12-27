@@ -2,6 +2,7 @@ package android.media;
 
 import android.app.compat.CompatChanges;
 import android.hardware.Camera;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -65,12 +66,12 @@ public class CamcorderProfile {
     public int videoFrameWidth;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Quality {
-    }
+    public @interface Quality {}
 
     private static final native CamcorderProfile native_get_camcorder_profile(int i, int i2);
 
-    private static final native EncoderProfiles native_get_camcorder_profiles(int i, int i2, boolean z);
+    private static final native EncoderProfiles native_get_camcorder_profiles(
+            int i, int i2, boolean z);
 
     private static final native boolean native_has_camcorder_profile(int i, int i2);
 
@@ -89,7 +90,8 @@ public class CamcorderProfile {
     }
 
     public static CamcorderProfile get(int cameraId, int quality) {
-        if ((quality < 0 || quality > 13) && ((quality < 1000 || quality > 1013) && (quality < 2000 || quality > 2008))) {
+        if ((quality < 0 || quality > 13)
+                && ((quality < 1000 || quality > 1013) && (quality < 2000 || quality > 2008))) {
             String errMessage = "Unsupported quality level: " + quality;
             throw new IllegalArgumentException(errMessage);
         }
@@ -97,13 +99,15 @@ public class CamcorderProfile {
     }
 
     public static EncoderProfiles getAll(String cameraId, int quality) {
-        if ((quality < 0 || quality > 13) && ((quality < 1000 || quality > 1013) && (quality < 2000 || quality > 2008))) {
+        if ((quality < 0 || quality > 13)
+                && ((quality < 1000 || quality > 1013) && (quality < 2000 || quality > 2008))) {
             String errMessage = "Unsupported quality level: " + quality;
             throw new IllegalArgumentException(errMessage);
         }
         try {
             int id = Integer.valueOf(cameraId).intValue();
-            return native_get_camcorder_profiles(id, quality, CompatChanges.isChangeEnabled(RETURN_ADVANCED_VIDEO_PROFILES));
+            return native_get_camcorder_profiles(
+                    id, quality, CompatChanges.isChangeEnabled(RETURN_ADVANCED_VIDEO_PROFILES));
         } catch (NumberFormatException e) {
             return null;
         }
@@ -130,7 +134,19 @@ public class CamcorderProfile {
         native_init();
     }
 
-    private CamcorderProfile(int duration, int quality, int fileFormat, int videoCodec, int videoBitRate, int videoFrameRate, int videoWidth, int videoHeight, int audioCodec, int audioBitRate, int audioSampleRate, int audioChannels) {
+    private CamcorderProfile(
+            int duration,
+            int quality,
+            int fileFormat,
+            int videoCodec,
+            int videoBitRate,
+            int videoFrameRate,
+            int videoWidth,
+            int videoHeight,
+            int audioCodec,
+            int audioBitRate,
+            int audioSampleRate,
+            int audioChannels) {
         this.duration = duration;
         this.quality = quality;
         this.fileFormat = fileFormat;

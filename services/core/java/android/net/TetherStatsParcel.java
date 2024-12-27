@@ -57,16 +57,19 @@ public class TetherStatsParcel implements Parcelable {
                                 if (parcel.dataPosition() - dataPosition < readInt) {
                                     this.ifIndex = parcel.readInt();
                                     if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                        throw new BadParcelableException(
+                                                "Overflow in the size of parcelable");
                                     }
                                     parcel.setDataPosition(dataPosition + readInt);
                                     return;
                                 }
                                 if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -99,7 +102,9 @@ public class TetherStatsParcel implements Parcelable {
         parcel.writeLong(this.rxPackets);
         parcel.writeLong(this.txBytes);
         parcel.writeLong(this.txPackets);
-        int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.ifIndex, dataPosition);
+        int m =
+                SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                        parcel, this.ifIndex, dataPosition);
         SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
     }
 }

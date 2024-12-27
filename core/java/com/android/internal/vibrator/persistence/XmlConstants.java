@@ -1,6 +1,7 @@
 package com.android.internal.vibrator.persistence;
 
 import android.os.VibrationEffect;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Locale;
@@ -25,8 +26,7 @@ public final class XmlConstants {
     public static final String VALUE_AMPLITUDE_DEFAULT = "default";
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Flags {
-    }
+    public @interface Flags {}
 
     public enum PrimitiveEffectName {
         LOW_TICK(8),

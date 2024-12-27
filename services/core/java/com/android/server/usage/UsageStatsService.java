@@ -55,6 +55,7 @@ import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.util.SparseSetArray;
 import android.util.proto.ProtoInputStream;
+
 import com.android.internal.content.PackageMonitor;
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.os.SomeArgs;
@@ -76,15 +77,15 @@ import com.android.server.job.controllers.PrefetchController;
 import com.android.server.location.gnss.hal.GnssNative;
 import com.android.server.pm.PackageManagerService;
 import com.android.server.pm.PackageManagerShellCommandDataLoader;
-import com.android.server.usage.AppStandbyInternal;
-import com.android.server.usage.AppTimeLimitController;
 import com.android.server.usage.AppTimeLimitController.AppUsageGroup;
 import com.android.server.usage.AppTimeLimitController.AppUsageLimitGroup;
 import com.android.server.usage.AppTimeLimitController.SessionUsageGroup;
-import com.android.server.usage.UsageStatsService;
-import com.android.server.usage.UserUsageStatsService;
 import com.android.server.utils.AlarmQueue;
+
+import libcore.util.EmptyArray;
+
 import com.samsung.android.app.usage.IUsageStatsWatcher;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -108,11 +109,11 @@ import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
-import libcore.util.EmptyArray;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class UsageStatsService extends SystemService implements UserUsageStatsService.StatsUpdatedListener {
+public final class UsageStatsService extends SystemService
+        implements UserUsageStatsService.StatsUpdatedListener {
     public static final File COMMON_USAGE_STATS_DIR;
     public static final File LEGACY_COMMON_USAGE_STATS_DIR;
     public static final File LEGACY_USER_USAGE_STATS_DIR;
@@ -149,16 +150,19 @@ public final class UsageStatsService extends SystemService implements UserUsageS
     public final SparseArray mUserState;
     public final CopyOnWriteArraySet mUserUnlockedStates;
     public final SparseArray mVisibleActivities;
-    public static final boolean ENABLE_TIME_CHANGE_CORRECTION = SystemProperties.getBoolean("persist.debug.time_correction", true);
-    public static final boolean USE_DEDICATED_HANDLER_THREAD = SystemProperties.getBoolean("persist.debug.use_dedicated_handler_thread", android.app.usage.Flags.useDedicatedHandlerThread());
+    public static final boolean ENABLE_TIME_CHANGE_CORRECTION =
+            SystemProperties.getBoolean("persist.debug.time_correction", true);
+    public static final boolean USE_DEDICATED_HANDLER_THREAD =
+            SystemProperties.getBoolean(
+                    "persist.debug.use_dedicated_handler_thread",
+                    android.app.usage.Flags.useDedicatedHandlerThread());
     public static final boolean DEBUG_RESPONSE_STATS = Log.isLoggable("UsageStatsService", 3);
     public static final File KERNEL_COUNTER_FILE = new File("/proc/uid_procstat/set");
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.usage.UsageStatsService$2, reason: invalid class name */
     public final class AnonymousClass2 {
-        public AnonymousClass2() {
-        }
+        public AnonymousClass2() {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -177,25 +181,47 @@ public final class UsageStatsService extends SystemService implements UserUsageS
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BinderService extends IUsageStatsManager.Stub {
-        public BinderService() {
-        }
+        public BinderService() {}
 
         public final void checkCallerIsSameApp(String str) {
             int callingUid = Binder.getCallingUid();
-            if (UsageStatsService.this.mPackageManagerInternal.getPackageUid(str, 0L, UserHandle.getUserId(callingUid)) != callingUid) {
-                throw new SecurityException(AccessibilityManagerService$$ExternalSyntheticOutline0.m(callingUid, "Calling uid ", " cannot query eventsfor package ", str));
+            if (UsageStatsService.this.mPackageManagerInternal.getPackageUid(
+                            str, 0L, UserHandle.getUserId(callingUid))
+                    != callingUid) {
+                throw new SecurityException(
+                        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                                callingUid,
+                                "Calling uid ",
+                                " cannot query eventsfor package ",
+                                str));
             }
         }
 
         public final void clearBroadcastEvents(String str, int i) {
             Objects.requireNonNull(str);
-            UsageStatsService.this.getContext().enforceCallingOrSelfPermission("android.permission.ACCESS_BROADCAST_RESPONSE_STATS", "clearBroadcastEvents");
+            UsageStatsService.this
+                    .getContext()
+                    .enforceCallingOrSelfPermission(
+                            "android.permission.ACCESS_BROADCAST_RESPONSE_STATS",
+                            "clearBroadcastEvents");
             int callingUid = Binder.getCallingUid();
-            int handleIncomingUser = ActivityManager.handleIncomingUser(Binder.getCallingPid(), callingUid, i, false, false, "clearBroadcastResponseStats", str);
-            BroadcastResponseStatsTracker broadcastResponseStatsTracker = UsageStatsService.this.mResponseStatsTracker;
+            int handleIncomingUser =
+                    ActivityManager.handleIncomingUser(
+                            Binder.getCallingPid(),
+                            callingUid,
+                            i,
+                            false,
+                            false,
+                            "clearBroadcastResponseStats",
+                            str);
+            BroadcastResponseStatsTracker broadcastResponseStatsTracker =
+                    UsageStatsService.this.mResponseStatsTracker;
             synchronized (broadcastResponseStatsTracker.mLock) {
                 try {
-                    UserBroadcastEvents userBroadcastEvents = (UserBroadcastEvents) broadcastResponseStatsTracker.mUserBroadcastEvents.get(handleIncomingUser);
+                    UserBroadcastEvents userBroadcastEvents =
+                            (UserBroadcastEvents)
+                                    broadcastResponseStatsTracker.mUserBroadcastEvents.get(
+                                            handleIncomingUser);
                     if (userBroadcastEvents == null) {
                         return;
                     }
@@ -210,23 +236,45 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             if (j < 0) {
                 throw new IllegalArgumentException("id needs to be >=0");
             }
-            UsageStatsService.this.getContext().enforceCallingOrSelfPermission("android.permission.ACCESS_BROADCAST_RESPONSE_STATS", "clearBroadcastResponseStats");
+            UsageStatsService.this
+                    .getContext()
+                    .enforceCallingOrSelfPermission(
+                            "android.permission.ACCESS_BROADCAST_RESPONSE_STATS",
+                            "clearBroadcastResponseStats");
             int callingUid = Binder.getCallingUid();
-            int handleIncomingUser = ActivityManager.handleIncomingUser(Binder.getCallingPid(), callingUid, i, false, false, "clearBroadcastResponseStats", str2);
-            BroadcastResponseStatsTracker broadcastResponseStatsTracker = UsageStatsService.this.mResponseStatsTracker;
+            int handleIncomingUser =
+                    ActivityManager.handleIncomingUser(
+                            Binder.getCallingPid(),
+                            callingUid,
+                            i,
+                            false,
+                            false,
+                            "clearBroadcastResponseStats",
+                            str2);
+            BroadcastResponseStatsTracker broadcastResponseStatsTracker =
+                    UsageStatsService.this.mResponseStatsTracker;
             synchronized (broadcastResponseStatsTracker.mLock) {
                 try {
-                    SparseArray sparseArray = (SparseArray) broadcastResponseStatsTracker.mUserResponseStats.get(callingUid);
+                    SparseArray sparseArray =
+                            (SparseArray)
+                                    broadcastResponseStatsTracker.mUserResponseStats.get(
+                                            callingUid);
                     if (sparseArray == null) {
                         return;
                     }
-                    UserBroadcastResponseStats userBroadcastResponseStats = (UserBroadcastResponseStats) sparseArray.get(handleIncomingUser);
+                    UserBroadcastResponseStats userBroadcastResponseStats =
+                            (UserBroadcastResponseStats) sparseArray.get(handleIncomingUser);
                     if (userBroadcastResponseStats == null) {
                         return;
                     }
-                    for (int size = userBroadcastResponseStats.mResponseStats.size() - 1; size >= 0; size--) {
-                        BroadcastEvent broadcastEvent = (BroadcastEvent) userBroadcastResponseStats.mResponseStats.keyAt(size);
-                        if ((j == 0 || j == broadcastEvent.mIdForResponseEvent) && (str == null || str.equals(broadcastEvent.mTargetPackage))) {
+                    for (int size = userBroadcastResponseStats.mResponseStats.size() - 1;
+                            size >= 0;
+                            size--) {
+                        BroadcastEvent broadcastEvent =
+                                (BroadcastEvent)
+                                        userBroadcastResponseStats.mResponseStats.keyAt(size);
+                        if ((j == 0 || j == broadcastEvent.mIdForResponseEvent)
+                                && (str == null || str.equals(broadcastEvent.mTargetPackage))) {
                             userBroadcastResponseStats.mResponseStats.removeAt(size);
                         }
                     }
@@ -239,15 +287,19 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             if (UserHandle.getAppId(Binder.getCallingUid()) == 1000) {
                 UsageStatsService usageStatsService = UsageStatsService.this;
                 synchronized (usageStatsService.mLock) {
-                    UserUsageStatsService userUsageStatsServiceLocked = usageStatsService.getUserUsageStatsServiceLocked(0);
+                    UserUsageStatsService userUsageStatsServiceLocked =
+                            usageStatsService.getUserUsageStatsServiceLocked(0);
                     HashMap installedPackages = usageStatsService.getInstalledPackages(0);
-                    long checkAndGetTimeLocked = userUsageStatsServiceLocked.checkAndGetTimeLocked();
+                    long checkAndGetTimeLocked =
+                            userUsageStatsServiceLocked.checkAndGetTimeLocked();
                     try {
-                        UsageStatsDatabase usageStatsDatabase = userUsageStatsServiceLocked.mDatabase;
+                        UsageStatsDatabase usageStatsDatabase =
+                                userUsageStatsServiceLocked.mDatabase;
                         usageStatsDatabase.prune(checkAndGetTimeLocked, true);
                         int i = 0;
                         while (true) {
-                            LongSparseArray[] longSparseArrayArr = usageStatsDatabase.mSortedStatFiles;
+                            LongSparseArray[] longSparseArrayArr =
+                                    usageStatsDatabase.mSortedStatFiles;
                             if (i >= longSparseArrayArr.length) {
                                 break;
                             }
@@ -257,24 +309,29 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                             }
                             i++;
                         }
-                        userUsageStatsServiceLocked.init(checkAndGetTimeLocked, installedPackages, true);
+                        userUsageStatsServiceLocked.init(
+                                checkAndGetTimeLocked, installedPackages, true);
                     } catch (Exception e) {
-                        WallpaperUpdateReceiver$$ExternalSyntheticOutline0.m(e, "deleteUsageData fail: ", "UsageStatsService");
+                        WallpaperUpdateReceiver$$ExternalSyntheticOutline0.m(
+                                e, "deleteUsageData fail: ", "UsageStatsService");
                     }
                 }
             }
         }
 
-        public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+        public final void dump(
+                FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
             boolean z;
             boolean z2;
             int[] iArr;
             boolean z3;
             boolean z4;
-            if (DumpUtils.checkDumpAndUsageStatsPermission(UsageStatsService.this.getContext(), "UsageStatsService", printWriter)) {
+            if (DumpUtils.checkDumpAndUsageStatsPermission(
+                    UsageStatsService.this.getContext(), "UsageStatsService", printWriter)) {
                 UsageStatsService usageStatsService = UsageStatsService.this;
                 usageStatsService.getClass();
-                IndentingPrintWriter indentingPrintWriter = new IndentingPrintWriter(printWriter, "  ");
+                IndentingPrintWriter indentingPrintWriter =
+                        new IndentingPrintWriter(printWriter, "  ");
                 ArrayList arrayList = new ArrayList();
                 boolean z5 = true;
                 if (strArr != null) {
@@ -296,7 +353,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                                 return;
                             }
                             if ("is-app-standby-enabled".equals(str)) {
-                                printWriter.println(usageStatsService.mAppStandby.isAppIdleEnabled());
+                                printWriter.println(
+                                        usageStatsService.mAppStandby.isAppIdleEnabled());
                                 return;
                             }
                             if ("apptimelimit".equals(str)) {
@@ -306,7 +364,11 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                                         if (i2 >= strArr.length) {
                                             usageStatsService.mAppTimeLimit.dump(printWriter, null);
                                         } else {
-                                            usageStatsService.mAppTimeLimit.dump(printWriter, (String[]) Arrays.copyOfRange(strArr, i2, strArr.length));
+                                            usageStatsService.mAppTimeLimit.dump(
+                                                    printWriter,
+                                                    (String[])
+                                                            Arrays.copyOfRange(
+                                                                    strArr, i2, strArr.length));
                                         }
                                     } finally {
                                     }
@@ -314,24 +376,40 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                                 return;
                             }
                             if ("file".equals(str)) {
-                                IndentingPrintWriter indentingPrintWriter2 = new IndentingPrintWriter(printWriter, "  ");
+                                IndentingPrintWriter indentingPrintWriter2 =
+                                        new IndentingPrintWriter(printWriter, "  ");
                                 synchronized (usageStatsService.mLock) {
                                     try {
                                         if (i + 1 >= strArr.length) {
                                             int size = usageStatsService.mUserState.size();
                                             for (int i3 = 0; i3 < size; i3++) {
                                                 int keyAt = usageStatsService.mUserState.keyAt(i3);
-                                                if (usageStatsService.mUserUnlockedStates.contains(Integer.valueOf(keyAt))) {
+                                                if (usageStatsService.mUserUnlockedStates.contains(
+                                                        Integer.valueOf(keyAt))) {
                                                     indentingPrintWriter2.println("user=" + keyAt);
                                                     indentingPrintWriter2.increaseIndent();
-                                                    ((UserUsageStatsService) usageStatsService.mUserState.valueAt(i3)).dumpFile(indentingPrintWriter2, null);
+                                                    ((UserUsageStatsService)
+                                                                    usageStatsService.mUserState
+                                                                            .valueAt(i3))
+                                                            .dumpFile(indentingPrintWriter2, null);
                                                     indentingPrintWriter2.decreaseIndent();
                                                 }
                                             }
                                         } else {
-                                            int parseUserIdFromArgs = usageStatsService.parseUserIdFromArgs(strArr, i, indentingPrintWriter2);
+                                            int parseUserIdFromArgs =
+                                                    usageStatsService.parseUserIdFromArgs(
+                                                            strArr, i, indentingPrintWriter2);
                                             if (parseUserIdFromArgs != -10000) {
-                                                ((UserUsageStatsService) usageStatsService.mUserState.get(parseUserIdFromArgs)).dumpFile(indentingPrintWriter2, (String[]) Arrays.copyOfRange(strArr, i + 2, strArr.length));
+                                                ((UserUsageStatsService)
+                                                                usageStatsService.mUserState.get(
+                                                                        parseUserIdFromArgs))
+                                                        .dumpFile(
+                                                                indentingPrintWriter2,
+                                                                (String[])
+                                                                        Arrays.copyOfRange(
+                                                                                strArr,
+                                                                                i + 2,
+                                                                                strArr.length));
                                             }
                                         }
                                     } finally {
@@ -340,24 +418,36 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                                 return;
                             }
                             if ("database-info".equals(str)) {
-                                IndentingPrintWriter indentingPrintWriter3 = new IndentingPrintWriter(printWriter, "  ");
+                                IndentingPrintWriter indentingPrintWriter3 =
+                                        new IndentingPrintWriter(printWriter, "  ");
                                 synchronized (usageStatsService.mLock) {
                                     try {
                                         if (i + 1 >= strArr.length) {
                                             int size2 = usageStatsService.mUserState.size();
                                             for (int i4 = 0; i4 < size2; i4++) {
                                                 int keyAt2 = usageStatsService.mUserState.keyAt(i4);
-                                                if (usageStatsService.mUserUnlockedStates.contains(Integer.valueOf(keyAt2))) {
+                                                if (usageStatsService.mUserUnlockedStates.contains(
+                                                        Integer.valueOf(keyAt2))) {
                                                     indentingPrintWriter3.println("user=" + keyAt2);
                                                     indentingPrintWriter3.increaseIndent();
-                                                    ((UserUsageStatsService) usageStatsService.mUserState.valueAt(i4)).mDatabase.dump(indentingPrintWriter3, false);
+                                                    ((UserUsageStatsService)
+                                                                    usageStatsService.mUserState
+                                                                            .valueAt(i4))
+                                                            .mDatabase.dump(
+                                                                    indentingPrintWriter3, false);
                                                     indentingPrintWriter3.decreaseIndent();
                                                 }
                                             }
                                         } else {
-                                            int parseUserIdFromArgs2 = usageStatsService.parseUserIdFromArgs(strArr, i, indentingPrintWriter3);
+                                            int parseUserIdFromArgs2 =
+                                                    usageStatsService.parseUserIdFromArgs(
+                                                            strArr, i, indentingPrintWriter3);
                                             if (parseUserIdFromArgs2 != -10000) {
-                                                ((UserUsageStatsService) usageStatsService.mUserState.get(parseUserIdFromArgs2)).mDatabase.dump(indentingPrintWriter3, false);
+                                                ((UserUsageStatsService)
+                                                                usageStatsService.mUserState.get(
+                                                                        parseUserIdFromArgs2))
+                                                        .mDatabase.dump(
+                                                                indentingPrintWriter3, false);
                                             }
                                         }
                                     } finally {
@@ -370,12 +460,21 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                                 return;
                             }
                             if ("stats-directory".equals(str)) {
-                                IndentingPrintWriter indentingPrintWriter4 = new IndentingPrintWriter(printWriter, "  ");
+                                IndentingPrintWriter indentingPrintWriter4 =
+                                        new IndentingPrintWriter(printWriter, "  ");
                                 synchronized (usageStatsService.mLock) {
                                     try {
-                                        int parseUserIdFromArgs3 = usageStatsService.parseUserIdFromArgs(strArr, i, indentingPrintWriter4);
+                                        int parseUserIdFromArgs3 =
+                                                usageStatsService.parseUserIdFromArgs(
+                                                        strArr, i, indentingPrintWriter4);
                                         if (parseUserIdFromArgs3 != -10000) {
-                                            indentingPrintWriter4.println(new File(Environment.getDataSystemCeDirectory(parseUserIdFromArgs3), "usagestats").getAbsolutePath());
+                                            indentingPrintWriter4.println(
+                                                    new File(
+                                                                    Environment
+                                                                            .getDataSystemCeDirectory(
+                                                                                    parseUserIdFromArgs3),
+                                                                    "usagestats")
+                                                            .getAbsolutePath());
                                         }
                                     } finally {
                                     }
@@ -383,12 +482,18 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                                 return;
                             }
                             if ("mappings".equals(str)) {
-                                IndentingPrintWriter indentingPrintWriter5 = new IndentingPrintWriter(printWriter, "  ");
+                                IndentingPrintWriter indentingPrintWriter5 =
+                                        new IndentingPrintWriter(printWriter, "  ");
                                 synchronized (usageStatsService.mLock) {
                                     try {
-                                        int parseUserIdFromArgs4 = usageStatsService.parseUserIdFromArgs(strArr, i, indentingPrintWriter5);
+                                        int parseUserIdFromArgs4 =
+                                                usageStatsService.parseUserIdFromArgs(
+                                                        strArr, i, indentingPrintWriter5);
                                         if (parseUserIdFromArgs4 != -10000) {
-                                            ((UserUsageStatsService) usageStatsService.mUserState.get(parseUserIdFromArgs4)).mDatabase.dumpMappings(indentingPrintWriter5);
+                                            ((UserUsageStatsService)
+                                                            usageStatsService.mUserState.get(
+                                                                    parseUserIdFromArgs4))
+                                                    .mDatabase.dumpMappings(indentingPrintWriter5);
                                         }
                                     } finally {
                                     }
@@ -397,19 +502,41 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                             }
                             if ("broadcast-response-stats".equals(str)) {
                                 synchronized (usageStatsService.mLock) {
-                                    usageStatsService.mResponseStatsTracker.dump(indentingPrintWriter);
+                                    usageStatsService.mResponseStatsTracker.dump(
+                                            indentingPrintWriter);
                                 }
                                 return;
                             }
                             if ("app-component-usage".equals(str)) {
-                                IndentingPrintWriter indentingPrintWriter6 = new IndentingPrintWriter(printWriter, "  ");
+                                IndentingPrintWriter indentingPrintWriter6 =
+                                        new IndentingPrintWriter(printWriter, "  ");
                                 synchronized (usageStatsService.mLock) {
                                     try {
-                                        if (!((ArrayMap) usageStatsService.mLastTimeComponentUsedGlobal).isEmpty()) {
+                                        if (!((ArrayMap)
+                                                        usageStatsService
+                                                                .mLastTimeComponentUsedGlobal)
+                                                .isEmpty()) {
                                             indentingPrintWriter6.println("App Component Usages:");
                                             indentingPrintWriter6.increaseIndent();
-                                            for (String str2 : ((ArrayMap) usageStatsService.mLastTimeComponentUsedGlobal).keySet()) {
-                                                indentingPrintWriter6.println("package=" + str2 + " lastUsed=" + UserUsageStatsService.formatDateTime(((Long) ((ArrayMap) usageStatsService.mLastTimeComponentUsedGlobal).get(str2)).longValue(), true));
+                                            for (String str2 :
+                                                    ((ArrayMap)
+                                                                    usageStatsService
+                                                                            .mLastTimeComponentUsedGlobal)
+                                                            .keySet()) {
+                                                indentingPrintWriter6.println(
+                                                        "package="
+                                                                + str2
+                                                                + " lastUsed="
+                                                                + UserUsageStatsService
+                                                                        .formatDateTime(
+                                                                                ((Long)
+                                                                                                ((ArrayMap)
+                                                                                                                usageStatsService
+                                                                                                                        .mLastTimeComponentUsedGlobal)
+                                                                                                        .get(
+                                                                                                                str2))
+                                                                                        .longValue(),
+                                                                                true));
                                             }
                                             indentingPrintWriter6.decreaseIndent();
                                         }
@@ -418,7 +545,9 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                                 }
                                 return;
                             }
-                            if (str != null && !str.startsWith(PackageManagerShellCommandDataLoader.STDIN_PATH)) {
+                            if (str != null
+                                    && !str.startsWith(
+                                            PackageManagerShellCommandDataLoader.STDIN_PATH)) {
                                 arrayList.add(str);
                             }
                         }
@@ -427,12 +556,22 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                     z = false;
                     z2 = false;
                 }
-                StringBuilder m$1 = BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "Flags:", "    android.app.usage.user_interaction_type_api: ");
+                StringBuilder m$1 =
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                                printWriter,
+                                "Flags:",
+                                "    android.app.usage.user_interaction_type_api: ");
                 m$1.append(android.app.usage.Flags.userInteractionTypeApi());
                 printWriter.println(m$1.toString());
-                printWriter.println("    android.app.usage.use_parceled_list: " + android.app.usage.Flags.useParceledList());
-                printWriter.println("    android.app.usage.filter_based_event_query_api: " + android.app.usage.Flags.filterBasedEventQueryApi());
-                printWriter.println("    android.app.usage.disable_idle_check: " + android.app.usage.Flags.disableIdleCheck());
+                printWriter.println(
+                        "    android.app.usage.use_parceled_list: "
+                                + android.app.usage.Flags.useParceledList());
+                printWriter.println(
+                        "    android.app.usage.filter_based_event_query_api: "
+                                + android.app.usage.Flags.filterBasedEventQueryApi());
+                printWriter.println(
+                        "    android.app.usage.disable_idle_check: "
+                                + android.app.usage.Flags.disableIdleCheck());
                 synchronized (usageStatsService.mLock) {
                     try {
                         int size3 = usageStatsService.mUserState.size();
@@ -444,28 +583,39 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                             indentingPrintWriter.printPair("user", Integer.valueOf(keyAt3));
                             indentingPrintWriter.println();
                             indentingPrintWriter.increaseIndent();
-                            if (usageStatsService.mUserUnlockedStates.contains(Integer.valueOf(keyAt3))) {
+                            if (usageStatsService.mUserUnlockedStates.contains(
+                                    Integer.valueOf(keyAt3))) {
                                 if (z) {
-                                    ((UserUsageStatsService) usageStatsService.mUserState.valueAt(i5)).checkin(indentingPrintWriter);
+                                    ((UserUsageStatsService)
+                                                    usageStatsService.mUserState.valueAt(i5))
+                                            .checkin(indentingPrintWriter);
                                 } else {
-                                    ((UserUsageStatsService) usageStatsService.mUserState.valueAt(i5)).dump(indentingPrintWriter, arrayList, z2);
+                                    ((UserUsageStatsService)
+                                                    usageStatsService.mUserState.valueAt(i5))
+                                            .dump(indentingPrintWriter, arrayList, z2);
                                     indentingPrintWriter.println();
                                 }
                                 z3 = z;
                                 z4 = z5;
                             } else {
                                 synchronized (usageStatsService.mReportedEvents) {
-                                    LinkedList linkedList = (LinkedList) usageStatsService.mReportedEvents.get(keyAt3);
+                                    LinkedList linkedList =
+                                            (LinkedList)
+                                                    usageStatsService.mReportedEvents.get(keyAt3);
                                     if (linkedList == null || linkedList.isEmpty()) {
                                         z3 = z;
                                         z4 = z5;
                                     } else {
                                         int size4 = linkedList.size();
-                                        indentingPrintWriter.println("Pending events: count=" + size4);
+                                        indentingPrintWriter.println(
+                                                "Pending events: count=" + size4);
                                         indentingPrintWriter.increaseIndent();
                                         int i6 = 0;
                                         while (i6 < size4) {
-                                            UserUsageStatsService.printEvent(indentingPrintWriter, (UsageEvents.Event) linkedList.get(i6), true);
+                                            UserUsageStatsService.printEvent(
+                                                    indentingPrintWriter,
+                                                    (UsageEvents.Event) linkedList.get(i6),
+                                                    true);
                                             i6++;
                                             z = z;
                                         }
@@ -482,7 +632,10 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                             z = z3;
                         }
                         indentingPrintWriter.println();
-                        indentingPrintWriter.printPair("Usage Source", UsageStatsManager.usageSourceToString(usageStatsService.mUsageSource));
+                        indentingPrintWriter.printPair(
+                                "Usage Source",
+                                UsageStatsManager.usageSourceToString(
+                                        usageStatsService.mUsageSource));
                         indentingPrintWriter.println();
                         usageStatsService.mAppTimeLimit.dump(printWriter, null);
                         indentingPrintWriter.println();
@@ -502,7 +655,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                         indentingPrintWriter.println("mUsageStatsWatchers = [");
                         Iterator it = usageStatsService.mUsageStatsWatchers.entrySet().iterator();
                         while (it.hasNext()) {
-                            IUsageStatsWatcher iUsageStatsWatcher = (IUsageStatsWatcher) ((Map.Entry) it.next()).getValue();
+                            IUsageStatsWatcher iUsageStatsWatcher =
+                                    (IUsageStatsWatcher) ((Map.Entry) it.next()).getValue();
                             indentingPrintWriter.print("  ");
                             indentingPrintWriter.println(iUsageStatsWatcher);
                         }
@@ -520,19 +674,42 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         public final int getAppMinStandbyBucket(String str, String str2, int i) {
             int callingUid = Binder.getCallingUid();
             try {
-                int handleIncomingUser = ActivityManager.getService().handleIncomingUser(Binder.getCallingPid(), callingUid, i, false, false, "getAppStandbyBucket", (String) null);
-                int packageUid = UsageStatsService.this.mPackageManagerInternal.getPackageUid(str, 0L, handleIncomingUser);
+                int handleIncomingUser =
+                        ActivityManager.getService()
+                                .handleIncomingUser(
+                                        Binder.getCallingPid(),
+                                        callingUid,
+                                        i,
+                                        false,
+                                        false,
+                                        "getAppStandbyBucket",
+                                        (String) null);
+                int packageUid =
+                        UsageStatsService.this.mPackageManagerInternal.getPackageUid(
+                                str, 0L, handleIncomingUser);
                 if (packageUid != callingUid && !hasQueryPermission(str2)) {
-                    throw new SecurityException("Don't have permission to query min app standby bucket");
+                    throw new SecurityException(
+                            "Don't have permission to query min app standby bucket");
                 }
-                boolean isPackageEphemeral = UsageStatsService.this.mPackageManagerInternal.isPackageEphemeral(handleIncomingUser, str);
-                boolean m1013$$Nest$mshouldObfuscateInstantAppsForCaller = UsageStatsService.m1013$$Nest$mshouldObfuscateInstantAppsForCaller(UsageStatsService.this, callingUid, handleIncomingUser);
-                if (packageUid < 0 || (isPackageEphemeral && m1013$$Nest$mshouldObfuscateInstantAppsForCaller)) {
-                    throw new IllegalArgumentException(XmlUtils$$ExternalSyntheticOutline0.m("Cannot get min standby bucket for non existent package (", str, ")"));
+                boolean isPackageEphemeral =
+                        UsageStatsService.this.mPackageManagerInternal.isPackageEphemeral(
+                                handleIncomingUser, str);
+                boolean m1013$$Nest$mshouldObfuscateInstantAppsForCaller =
+                        UsageStatsService.m1013$$Nest$mshouldObfuscateInstantAppsForCaller(
+                                UsageStatsService.this, callingUid, handleIncomingUser);
+                if (packageUid < 0
+                        || (isPackageEphemeral
+                                && m1013$$Nest$mshouldObfuscateInstantAppsForCaller)) {
+                    throw new IllegalArgumentException(
+                            XmlUtils$$ExternalSyntheticOutline0.m(
+                                    "Cannot get min standby bucket for non existent package (",
+                                    str,
+                                    ")"));
                 }
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    return UsageStatsService.this.mAppStandby.getAppMinStandbyBucket(str, UserHandle.getAppId(packageUid), handleIncomingUser, false);
+                    return UsageStatsService.this.mAppStandby.getAppMinStandbyBucket(
+                            str, UserHandle.getAppId(packageUid), handleIncomingUser, false);
                 } finally {
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                 }
@@ -544,20 +721,44 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         public final int getAppStandbyBucket(String str, String str2, int i) {
             int callingUid = Binder.getCallingUid();
             try {
-                int handleIncomingUser = ActivityManager.getService().handleIncomingUser(Binder.getCallingPid(), callingUid, i, false, false, "getAppStandbyBucket", (String) null);
-                int packageUid = UsageStatsService.this.mPackageManagerInternal.getPackageUid(str, 0L, handleIncomingUser);
+                int handleIncomingUser =
+                        ActivityManager.getService()
+                                .handleIncomingUser(
+                                        Binder.getCallingPid(),
+                                        callingUid,
+                                        i,
+                                        false,
+                                        false,
+                                        "getAppStandbyBucket",
+                                        (String) null);
+                int packageUid =
+                        UsageStatsService.this.mPackageManagerInternal.getPackageUid(
+                                str, 0L, handleIncomingUser);
                 boolean z = packageUid == callingUid;
                 if (!z && !hasQueryPermission(str2)) {
-                    throw new SecurityException("Don't have permission to query app standby bucket");
+                    throw new SecurityException(
+                            "Don't have permission to query app standby bucket");
                 }
-                boolean isPackageEphemeral = UsageStatsService.this.mPackageManagerInternal.isPackageEphemeral(handleIncomingUser, str);
-                boolean m1013$$Nest$mshouldObfuscateInstantAppsForCaller = UsageStatsService.m1013$$Nest$mshouldObfuscateInstantAppsForCaller(UsageStatsService.this, callingUid, handleIncomingUser);
-                if (packageUid < 0 || (!z && isPackageEphemeral && m1013$$Nest$mshouldObfuscateInstantAppsForCaller)) {
-                    throw new IllegalArgumentException(XmlUtils$$ExternalSyntheticOutline0.m("Cannot get standby bucket for non existent package (", str, ")"));
+                boolean isPackageEphemeral =
+                        UsageStatsService.this.mPackageManagerInternal.isPackageEphemeral(
+                                handleIncomingUser, str);
+                boolean m1013$$Nest$mshouldObfuscateInstantAppsForCaller =
+                        UsageStatsService.m1013$$Nest$mshouldObfuscateInstantAppsForCaller(
+                                UsageStatsService.this, callingUid, handleIncomingUser);
+                if (packageUid < 0
+                        || (!z
+                                && isPackageEphemeral
+                                && m1013$$Nest$mshouldObfuscateInstantAppsForCaller)) {
+                    throw new IllegalArgumentException(
+                            XmlUtils$$ExternalSyntheticOutline0.m(
+                                    "Cannot get standby bucket for non existent package (",
+                                    str,
+                                    ")"));
                 }
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    return UsageStatsService.this.mAppStandby.getAppStandbyBucket(str, handleIncomingUser, SystemClock.elapsedRealtime(), false);
+                    return UsageStatsService.this.mAppStandby.getAppStandbyBucket(
+                            str, handleIncomingUser, SystemClock.elapsedRealtime(), false);
                 } finally {
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                 }
@@ -569,35 +770,58 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         public final ParceledListSlice getAppStandbyBuckets(String str, int i) {
             final int callingUid = Binder.getCallingUid();
             try {
-                final int handleIncomingUser = ActivityManager.getService().handleIncomingUser(Binder.getCallingPid(), callingUid, i, false, false, "getAppStandbyBucket", (String) null);
+                final int handleIncomingUser =
+                        ActivityManager.getService()
+                                .handleIncomingUser(
+                                        Binder.getCallingPid(),
+                                        callingUid,
+                                        i,
+                                        false,
+                                        false,
+                                        "getAppStandbyBucket",
+                                        (String) null);
                 if (!hasQueryPermission(str)) {
-                    throw new SecurityException("Don't have permission to query app standby bucket");
+                    throw new SecurityException(
+                            "Don't have permission to query app standby bucket");
                 }
-                final boolean m1013$$Nest$mshouldObfuscateInstantAppsForCaller = UsageStatsService.m1013$$Nest$mshouldObfuscateInstantAppsForCaller(UsageStatsService.this, callingUid, handleIncomingUser);
+                final boolean m1013$$Nest$mshouldObfuscateInstantAppsForCaller =
+                        UsageStatsService.m1013$$Nest$mshouldObfuscateInstantAppsForCaller(
+                                UsageStatsService.this, callingUid, handleIncomingUser);
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    List appStandbyBuckets = UsageStatsService.this.mAppStandby.getAppStandbyBuckets(handleIncomingUser);
+                    List appStandbyBuckets =
+                            UsageStatsService.this.mAppStandby.getAppStandbyBuckets(
+                                    handleIncomingUser);
                     if (appStandbyBuckets == null) {
                         return ParceledListSlice.emptyList();
                     }
-                    appStandbyBuckets.removeIf(new Predicate() { // from class: com.android.server.usage.UsageStatsService$BinderService$$ExternalSyntheticLambda0
-                        @Override // java.util.function.Predicate
-                        public final boolean test(Object obj) {
-                            UsageStatsService.BinderService binderService = UsageStatsService.BinderService.this;
-                            int i2 = callingUid;
-                            int i3 = handleIncomingUser;
-                            boolean z = m1013$$Nest$mshouldObfuscateInstantAppsForCaller;
-                            AppStandbyInfo appStandbyInfo = (AppStandbyInfo) obj;
-                            UsageStatsService usageStatsService = UsageStatsService.this;
-                            if (usageStatsService.mPackageManagerInternal.getPackageUid(appStandbyInfo.mPackageName, 0L, i3) != i2) {
-                                UsageStatsService usageStatsService2 = UsageStatsService.this;
-                                if (usageStatsService2.mPackageManagerInternal.isPackageEphemeral(i3, appStandbyInfo.mPackageName) && z) {
-                                    return true;
+                    appStandbyBuckets.removeIf(
+                            new Predicate() { // from class:
+                                              // com.android.server.usage.UsageStatsService$BinderService$$ExternalSyntheticLambda0
+                                @Override // java.util.function.Predicate
+                                public final boolean test(Object obj) {
+                                    UsageStatsService.BinderService binderService =
+                                            UsageStatsService.BinderService.this;
+                                    int i2 = callingUid;
+                                    int i3 = handleIncomingUser;
+                                    boolean z = m1013$$Nest$mshouldObfuscateInstantAppsForCaller;
+                                    AppStandbyInfo appStandbyInfo = (AppStandbyInfo) obj;
+                                    UsageStatsService usageStatsService = UsageStatsService.this;
+                                    if (usageStatsService.mPackageManagerInternal.getPackageUid(
+                                                    appStandbyInfo.mPackageName, 0L, i3)
+                                            != i2) {
+                                        UsageStatsService usageStatsService2 =
+                                                UsageStatsService.this;
+                                        if (usageStatsService2.mPackageManagerInternal
+                                                        .isPackageEphemeral(
+                                                                i3, appStandbyInfo.mPackageName)
+                                                && z) {
+                                            return true;
+                                        }
+                                    }
+                                    return false;
                                 }
-                            }
-                            return false;
-                        }
-                    });
+                            });
                     return new ParceledListSlice(appStandbyBuckets);
                 } finally {
                     Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -624,7 +848,11 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                 throw new SecurityException("Don't have permission to query usage stats");
             }
             synchronized (UsageStatsService.this.mLock) {
-                long longValue = ((Long) UsageStatsService.this.mLastTimeComponentUsedGlobal.getOrDefault(str, 0L)).longValue();
+                long longValue =
+                        ((Long)
+                                        UsageStatsService.this.mLastTimeComponentUsedGlobal
+                                                .getOrDefault(str, 0L))
+                                .longValue();
                 TimeUnit timeUnit = TimeUnit.DAYS;
                 millis = (longValue / timeUnit.toMillis(1L)) * timeUnit.toMillis(1L);
             }
@@ -643,15 +871,32 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         }
 
         /* JADX WARN: Multi-variable type inference failed */
-        public final int handleShellCommand(ParcelFileDescriptor parcelFileDescriptor, ParcelFileDescriptor parcelFileDescriptor2, ParcelFileDescriptor parcelFileDescriptor3, String[] strArr) {
-            return new UsageStatsShellCommand(UsageStatsService.this).exec(this, parcelFileDescriptor.getFileDescriptor(), parcelFileDescriptor2.getFileDescriptor(), parcelFileDescriptor3.getFileDescriptor(), strArr);
+        public final int handleShellCommand(
+                ParcelFileDescriptor parcelFileDescriptor,
+                ParcelFileDescriptor parcelFileDescriptor2,
+                ParcelFileDescriptor parcelFileDescriptor3,
+                String[] strArr) {
+            return new UsageStatsShellCommand(UsageStatsService.this)
+                    .exec(
+                            this,
+                            parcelFileDescriptor.getFileDescriptor(),
+                            parcelFileDescriptor2.getFileDescriptor(),
+                            parcelFileDescriptor3.getFileDescriptor(),
+                            strArr);
         }
 
         public final boolean hasObserverPermission() {
             int callingUid = Binder.getCallingUid();
             DevicePolicyManagerInternal dpmInternal = UsageStatsService.this.getDpmInternal();
             if (callingUid != 1000) {
-                return (dpmInternal != null && (dpmInternal.isActiveProfileOwner(callingUid) || dpmInternal.isActiveDeviceOwner(callingUid))) || UsageStatsService.this.getContext().checkCallingPermission("android.permission.OBSERVE_APP_USAGE") == 0;
+                return (dpmInternal != null
+                                && (dpmInternal.isActiveProfileOwner(callingUid)
+                                        || dpmInternal.isActiveDeviceOwner(callingUid)))
+                        || UsageStatsService.this
+                                        .getContext()
+                                        .checkCallingPermission(
+                                                "android.permission.OBSERVE_APP_USAGE")
+                                == 0;
             }
             return true;
         }
@@ -674,24 +919,47 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                 return true;
             }
             int noteOp = UsageStatsService.this.mAppOps.noteOp(43, callingUid, str);
-            return noteOp == 3 ? UsageStatsService.this.getContext().checkCallingPermission("android.permission.PACKAGE_USAGE_STATS") == 0 : noteOp == 0;
+            return noteOp == 3
+                    ? UsageStatsService.this
+                                    .getContext()
+                                    .checkCallingPermission(
+                                            "android.permission.PACKAGE_USAGE_STATS")
+                            == 0
+                    : noteOp == 0;
         }
 
         public final boolean isAppInactive(String str, int i, String str2) {
             int callingUid = Binder.getCallingUid();
             try {
-                int handleIncomingUser = ActivityManager.getService().handleIncomingUser(Binder.getCallingPid(), callingUid, i, false, false, "isAppInactive", (String) null);
+                int handleIncomingUser =
+                        ActivityManager.getService()
+                                .handleIncomingUser(
+                                        Binder.getCallingPid(),
+                                        callingUid,
+                                        i,
+                                        false,
+                                        false,
+                                        "isAppInactive",
+                                        (String) null);
                 if (str.equals(str2)) {
-                    if (UsageStatsService.this.mPackageManagerInternal.getPackageUid(str2, 0L, handleIncomingUser) != callingUid) {
+                    if (UsageStatsService.this.mPackageManagerInternal.getPackageUid(
+                                    str2, 0L, handleIncomingUser)
+                            != callingUid) {
                         return false;
                     }
                 } else if (!hasQueryPermission(str2)) {
                     return false;
                 }
-                boolean m1013$$Nest$mshouldObfuscateInstantAppsForCaller = UsageStatsService.m1013$$Nest$mshouldObfuscateInstantAppsForCaller(UsageStatsService.this, callingUid, handleIncomingUser);
+                boolean m1013$$Nest$mshouldObfuscateInstantAppsForCaller =
+                        UsageStatsService.m1013$$Nest$mshouldObfuscateInstantAppsForCaller(
+                                UsageStatsService.this, callingUid, handleIncomingUser);
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
-                    return UsageStatsService.this.mAppStandby.isAppIdleFiltered(str, handleIncomingUser, SystemClock.elapsedRealtime(), m1013$$Nest$mshouldObfuscateInstantAppsForCaller);
+                    return UsageStatsService.this.mAppStandby.isAppIdleFiltered(
+                            str,
+                            handleIncomingUser,
+                            SystemClock.elapsedRealtime(),
+                            m1013$$Nest$mshouldObfuscateInstantAppsForCaller);
                 } finally {
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                 }
@@ -706,8 +974,13 @@ public final class UsageStatsService extends SystemService implements UserUsageS
 
         public final boolean isPackageExemptedFromBroadcastResponseStats(String str, int i) {
             Objects.requireNonNull(str);
-            UsageStatsService.this.getContext().enforceCallingOrSelfPermission("android.permission.DUMP", "isPackageExemptedFromBroadcastResponseStats");
-            BroadcastResponseStatsTracker broadcastResponseStatsTracker = UsageStatsService.this.mResponseStatsTracker;
+            UsageStatsService.this
+                    .getContext()
+                    .enforceCallingOrSelfPermission(
+                            "android.permission.DUMP",
+                            "isPackageExemptedFromBroadcastResponseStats");
+            BroadcastResponseStatsTracker broadcastResponseStatsTracker =
+                    UsageStatsService.this.mResponseStatsTracker;
             UserHandle of = UserHandle.of(i);
             synchronized (broadcastResponseStatsTracker.mLock) {
                 try {
@@ -721,31 +994,64 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         }
 
         public final void onCarrierPrivilegedAppsChanged() {
-            UsageStatsService.this.getContext().enforceCallingOrSelfPermission("android.permission.BIND_CARRIER_SERVICES", "onCarrierPrivilegedAppsChanged can only be called by privileged apps.");
+            UsageStatsService.this
+                    .getContext()
+                    .enforceCallingOrSelfPermission(
+                            "android.permission.BIND_CARRIER_SERVICES",
+                            "onCarrierPrivilegedAppsChanged can only be called by privileged"
+                                + " apps.");
             UsageStatsService.this.mAppStandby.clearCarrierPrivilegedApps();
         }
 
-        public final BroadcastResponseStatsList queryBroadcastResponseStats(String str, long j, String str2, int i) {
+        public final BroadcastResponseStatsList queryBroadcastResponseStats(
+                String str, long j, String str2, int i) {
             Objects.requireNonNull(str2);
             if (j < 0) {
                 throw new IllegalArgumentException("id needs to be >=0");
             }
-            UsageStatsService.this.getContext().enforceCallingOrSelfPermission("android.permission.ACCESS_BROADCAST_RESPONSE_STATS", "queryBroadcastResponseStats");
+            UsageStatsService.this
+                    .getContext()
+                    .enforceCallingOrSelfPermission(
+                            "android.permission.ACCESS_BROADCAST_RESPONSE_STATS",
+                            "queryBroadcastResponseStats");
             int callingUid = Binder.getCallingUid();
-            int handleIncomingUser = ActivityManager.handleIncomingUser(Binder.getCallingPid(), callingUid, i, false, false, "queryBroadcastResponseStats", str2);
-            BroadcastResponseStatsTracker broadcastResponseStatsTracker = UsageStatsService.this.mResponseStatsTracker;
+            int handleIncomingUser =
+                    ActivityManager.handleIncomingUser(
+                            Binder.getCallingPid(),
+                            callingUid,
+                            i,
+                            false,
+                            false,
+                            "queryBroadcastResponseStats",
+                            str2);
+            BroadcastResponseStatsTracker broadcastResponseStatsTracker =
+                    UsageStatsService.this.mResponseStatsTracker;
             broadcastResponseStatsTracker.getClass();
             ArrayList arrayList = new ArrayList();
             synchronized (broadcastResponseStatsTracker.mLock) {
                 try {
-                    SparseArray sparseArray = (SparseArray) broadcastResponseStatsTracker.mUserResponseStats.get(callingUid);
+                    SparseArray sparseArray =
+                            (SparseArray)
+                                    broadcastResponseStatsTracker.mUserResponseStats.get(
+                                            callingUid);
                     if (sparseArray != null) {
-                        UserBroadcastResponseStats userBroadcastResponseStats = (UserBroadcastResponseStats) sparseArray.get(handleIncomingUser);
+                        UserBroadcastResponseStats userBroadcastResponseStats =
+                                (UserBroadcastResponseStats) sparseArray.get(handleIncomingUser);
                         if (userBroadcastResponseStats != null) {
-                            for (int size = userBroadcastResponseStats.mResponseStats.size() - 1; size >= 0; size--) {
-                                BroadcastEvent broadcastEvent = (BroadcastEvent) userBroadcastResponseStats.mResponseStats.keyAt(size);
-                                if ((j == 0 || j == broadcastEvent.mIdForResponseEvent) && (str == null || str.equals(broadcastEvent.mTargetPackage))) {
-                                    arrayList.add((BroadcastResponseStats) userBroadcastResponseStats.mResponseStats.valueAt(size));
+                            for (int size = userBroadcastResponseStats.mResponseStats.size() - 1;
+                                    size >= 0;
+                                    size--) {
+                                BroadcastEvent broadcastEvent =
+                                        (BroadcastEvent)
+                                                userBroadcastResponseStats.mResponseStats.keyAt(
+                                                        size);
+                                if ((j == 0 || j == broadcastEvent.mIdForResponseEvent)
+                                        && (str == null
+                                                || str.equals(broadcastEvent.mTargetPackage))) {
+                                    arrayList.add(
+                                            (BroadcastResponseStats)
+                                                    userBroadcastResponseStats.mResponseStats
+                                                            .valueAt(size));
                                 }
                             }
                         }
@@ -763,7 +1069,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             int callingUserId = UserHandle.getCallingUserId();
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                List queryConfigurationStats = UsageStatsService.this.queryConfigurationStats(callingUserId, i, j, j2);
+                List queryConfigurationStats =
+                        UsageStatsService.this.queryConfigurationStats(callingUserId, i, j, j2);
                 if (queryConfigurationStats != null) {
                     return new ParceledListSlice(queryConfigurationStats);
                 }
@@ -780,7 +1087,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             int callingUserId = UserHandle.getCallingUserId();
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                List queryEventStats = UsageStatsService.this.queryEventStats(callingUserId, i, j, j2);
+                List queryEventStats =
+                        UsageStatsService.this.queryEventStats(callingUserId, i, j, j2);
                 if (queryEventStats != null) {
                     return new ParceledListSlice(queryEventStats);
                 }
@@ -792,7 +1100,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
 
         public final UsageEvents queryEvents(long j, long j2, String str) {
             if (hasQueryPermission(str)) {
-                return queryEventsHelper(UserHandle.getCallingUserId(), j, j2, str, EmptyArray.INT, null);
+                return queryEventsHelper(
+                        UserHandle.getCallingUserId(), j, j2, str, EmptyArray.INT, null);
             }
             return null;
         }
@@ -803,18 +1112,24 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             boolean hasQueryPermission = hasQueryPermission(str);
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                return UsageStatsService.this.queryEventsForPackage(userId, str, j, j2, hasQueryPermission);
+                return UsageStatsService.this.queryEventsForPackage(
+                        userId, str, j, j2, hasQueryPermission);
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
         }
 
-        public final UsageEvents queryEventsForPackageForUser(long j, long j2, int i, String str, String str2) {
+        public final UsageEvents queryEventsForPackageForUser(
+                long j, long j2, int i, String str, String str2) {
             if (!hasQueryPermission(str2)) {
                 return null;
             }
             if (i != UserHandle.getCallingUserId()) {
-                UsageStatsService.this.getContext().enforceCallingPermission("android.permission.INTERACT_ACROSS_USERS_FULL", "No permission to query usage stats for this user");
+                UsageStatsService.this
+                        .getContext()
+                        .enforceCallingPermission(
+                                "android.permission.INTERACT_ACROSS_USERS_FULL",
+                                "No permission to query usage stats for this user");
             }
             if (UserHandle.getAppId(Binder.getCallingUid()) != 1000) {
                 checkCallerIsSameApp(str);
@@ -832,7 +1147,11 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                 return null;
             }
             if (i != UserHandle.getCallingUserId()) {
-                UsageStatsService.this.getContext().enforceCallingPermission("android.permission.INTERACT_ACROSS_USERS_FULL", "No permission to query usage stats for this user");
+                UsageStatsService.this
+                        .getContext()
+                        .enforceCallingPermission(
+                                "android.permission.INTERACT_ACROSS_USERS_FULL",
+                                "No permission to query usage stats for this user");
             }
             return queryEventsHelper(i, j, j2, str, EmptyArray.INT, null);
         }
@@ -858,7 +1177,13 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final android.app.usage.UsageEvents queryEventsHelper(int r18, long r19, long r21, java.lang.String r23, int[] r24, android.util.ArraySet r25) {
+        public final android.app.usage.UsageEvents queryEventsHelper(
+                int r18,
+                long r19,
+                long r21,
+                java.lang.String r23,
+                int[] r24,
+                android.util.ArraySet r25) {
             /*
                 r17 = this;
                 r0 = r17
@@ -945,10 +1270,15 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                 android.os.Binder.restoreCallingIdentity(r4)
                 throw r0
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.usage.UsageStatsService.BinderService.queryEventsHelper(int, long, long, java.lang.String, int[], android.util.ArraySet):android.app.usage.UsageEvents");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.usage.UsageStatsService.BinderService.queryEventsHelper(int,"
+                        + " long, long, java.lang.String, int[],"
+                        + " android.util.ArraySet):android.app.usage.UsageEvents");
         }
 
-        public final UsageEvents queryEventsWithFilter(UsageEventsQuery usageEventsQuery, String str) {
+        public final UsageEvents queryEventsWithFilter(
+                UsageEventsQuery usageEventsQuery, String str) {
             Objects.requireNonNull(usageEventsQuery);
             Objects.requireNonNull(str);
             if (!hasQueryPermission(str)) {
@@ -958,9 +1288,19 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             int userId = usageEventsQuery.getUserId();
             int i = userId == -10000 ? callingUserId : userId;
             if (i != callingUserId) {
-                UsageStatsService.this.getContext().enforceCallingPermission("android.permission.INTERACT_ACROSS_USERS_FULL", "No permission to query usage stats for user " + i);
+                UsageStatsService.this
+                        .getContext()
+                        .enforceCallingPermission(
+                                "android.permission.INTERACT_ACROSS_USERS_FULL",
+                                "No permission to query usage stats for user " + i);
             }
-            return queryEventsHelper(i, usageEventsQuery.getBeginTimeMillis(), usageEventsQuery.getEndTimeMillis(), str, usageEventsQuery.getEventTypes(), new ArraySet(usageEventsQuery.getPackageNames()));
+            return queryEventsHelper(
+                    i,
+                    usageEventsQuery.getBeginTimeMillis(),
+                    usageEventsQuery.getEndTimeMillis(),
+                    str,
+                    usageEventsQuery.getEventTypes(),
+                    new ArraySet(usageEventsQuery.getPackageNames()));
         }
 
         public final ParceledListSlice queryUsageStats(int i, long j, long j2, String str, int i2) {
@@ -968,11 +1308,27 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                 return null;
             }
             int callingUid = Binder.getCallingUid();
-            int handleIncomingUser = ActivityManager.handleIncomingUser(Binder.getCallingPid(), callingUid, i2, false, true, "queryUsageStats", str);
-            boolean m1013$$Nest$mshouldObfuscateInstantAppsForCaller = UsageStatsService.m1013$$Nest$mshouldObfuscateInstantAppsForCaller(UsageStatsService.this, callingUid, UserHandle.getCallingUserId());
+            int handleIncomingUser =
+                    ActivityManager.handleIncomingUser(
+                            Binder.getCallingPid(),
+                            callingUid,
+                            i2,
+                            false,
+                            true,
+                            "queryUsageStats",
+                            str);
+            boolean m1013$$Nest$mshouldObfuscateInstantAppsForCaller =
+                    UsageStatsService.m1013$$Nest$mshouldObfuscateInstantAppsForCaller(
+                            UsageStatsService.this, callingUid, UserHandle.getCallingUserId());
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                List queryUsageStats = UsageStatsService.this.queryUsageStats(handleIncomingUser, j, j2, i, m1013$$Nest$mshouldObfuscateInstantAppsForCaller);
+                List queryUsageStats =
+                        UsageStatsService.this.queryUsageStats(
+                                handleIncomingUser,
+                                j,
+                                j2,
+                                i,
+                                m1013$$Nest$mshouldObfuscateInstantAppsForCaller);
                 if (queryUsageStats != null) {
                     return new ParceledListSlice(queryUsageStats);
                 }
@@ -982,11 +1338,17 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             }
         }
 
-        public final void registerAppUsageLimitObserver(int i, String[] strArr, long j, long j2, PendingIntent pendingIntent, String str) {
+        public final void registerAppUsageLimitObserver(
+                int i, String[] strArr, long j, long j2, PendingIntent pendingIntent, String str) {
             int callingUid = Binder.getCallingUid();
             DevicePolicyManagerInternal dpmInternal = UsageStatsService.this.getDpmInternal();
-            if (!hasPermissions("android.permission.SUSPEND_APPS", "android.permission.OBSERVE_APP_USAGE") && (dpmInternal == null || !dpmInternal.isActiveSupervisionApp(callingUid))) {
-                throw new SecurityException("Caller must be the active supervision app or it must have both SUSPEND_APPS and OBSERVE_APP_USAGE permissions");
+            if (!hasPermissions(
+                            "android.permission.SUSPEND_APPS",
+                            "android.permission.OBSERVE_APP_USAGE")
+                    && (dpmInternal == null || !dpmInternal.isActiveSupervisionApp(callingUid))) {
+                throw new SecurityException(
+                        "Caller must be the active supervision app or it must have both"
+                            + " SUSPEND_APPS and OBSERVE_APP_USAGE permissions");
             }
             if (strArr == null || strArr.length == 0) {
                 throw new IllegalArgumentException("Must specify at least one package");
@@ -997,13 +1359,15 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             int userId = UserHandle.getUserId(callingUid);
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                UsageStatsService.this.registerAppUsageLimitObserver(callingUid, i, strArr, j, j2, pendingIntent, userId);
+                UsageStatsService.this.registerAppUsageLimitObserver(
+                        callingUid, i, strArr, j, j2, pendingIntent, userId);
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
         }
 
-        public final void registerAppUsageObserver(int i, String[] strArr, long j, PendingIntent pendingIntent, String str) {
+        public final void registerAppUsageObserver(
+                int i, String[] strArr, long j, PendingIntent pendingIntent, String str) {
             if (!hasObserverPermission()) {
                 throw new SecurityException("Caller doesn't have OBSERVE_APP_USAGE permission");
             }
@@ -1017,13 +1381,21 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             int userId = UserHandle.getUserId(callingUid);
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                UsageStatsService.this.registerAppUsageObserver(callingUid, i, strArr, j, pendingIntent, userId);
+                UsageStatsService.this.registerAppUsageObserver(
+                        callingUid, i, strArr, j, pendingIntent, userId);
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
         }
 
-        public final void registerUsageSessionObserver(int i, String[] strArr, long j, long j2, PendingIntent pendingIntent, PendingIntent pendingIntent2, String str) {
+        public final void registerUsageSessionObserver(
+                int i,
+                String[] strArr,
+                long j,
+                long j2,
+                PendingIntent pendingIntent,
+                PendingIntent pendingIntent2,
+                String str) {
             if (!hasObserverPermission()) {
                 throw new SecurityException("Caller doesn't have OBSERVE_APP_USAGE permission");
             }
@@ -1037,18 +1409,23 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             int userId = UserHandle.getUserId(callingUid);
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                UsageStatsService.this.registerUsageSessionObserver(callingUid, i, strArr, j, j2, pendingIntent, pendingIntent2, userId);
+                UsageStatsService.this.registerUsageSessionObserver(
+                        callingUid, i, strArr, j, j2, pendingIntent, pendingIntent2, userId);
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
         }
 
         public final void registerUsageStatsWatcher(IUsageStatsWatcher iUsageStatsWatcher) {
-            UsageStatsService.this.getContext().enforceCallingOrSelfPermission("android.permission.PACKAGE_USAGE_STATS", null);
+            UsageStatsService.this
+                    .getContext()
+                    .enforceCallingOrSelfPermission("android.permission.PACKAGE_USAGE_STATS", null);
             synchronized (UsageStatsService.this.mUsageStatsWatchers) {
                 try {
-                    if (!UsageStatsService.this.mUsageStatsWatchers.containsKey(iUsageStatsWatcher.asBinder())) {
-                        UsageStatsService.this.mUsageStatsWatchers.put(iUsageStatsWatcher.asBinder(), iUsageStatsWatcher);
+                    if (!UsageStatsService.this.mUsageStatsWatchers.containsKey(
+                            iUsageStatsWatcher.asBinder())) {
+                        UsageStatsService.this.mUsageStatsWatchers.put(
+                                iUsageStatsWatcher.asBinder(), iUsageStatsWatcher);
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -1056,14 +1433,20 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             }
         }
 
-        public final void registerUsageStatsWatcherWithComponent(IUsageStatsWatcher iUsageStatsWatcher, List list) {
-            UsageStatsService.this.getContext().enforceCallingOrSelfPermission("android.permission.PACKAGE_USAGE_STATS", null);
+        public final void registerUsageStatsWatcherWithComponent(
+                IUsageStatsWatcher iUsageStatsWatcher, List list) {
+            UsageStatsService.this
+                    .getContext()
+                    .enforceCallingOrSelfPermission("android.permission.PACKAGE_USAGE_STATS", null);
             synchronized (UsageStatsService.this.mUsageStatsWatchers) {
                 try {
-                    if (!UsageStatsService.this.mUsageStatsWatchers.containsKey(iUsageStatsWatcher.asBinder())) {
-                        UsageStatsService.this.mUsageStatsWatchers.put(iUsageStatsWatcher.asBinder(), iUsageStatsWatcher);
+                    if (!UsageStatsService.this.mUsageStatsWatchers.containsKey(
+                            iUsageStatsWatcher.asBinder())) {
+                        UsageStatsService.this.mUsageStatsWatchers.put(
+                                iUsageStatsWatcher.asBinder(), iUsageStatsWatcher);
                         if (list != null) {
-                            UsageStatsService.this.mUsageStatsWatchersComponent.put(iUsageStatsWatcher.asBinder(), list);
+                            UsageStatsService.this.mUsageStatsWatchersComponent.put(
+                                    iUsageStatsWatcher.asBinder(), list);
                         }
                     }
                 } catch (Throwable th) {
@@ -1072,15 +1455,23 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             }
         }
 
-        public final void reportChooserSelection(String str, int i, String str2, String[] strArr, String str3) {
+        public final void reportChooserSelection(
+                String str, int i, String str2, String[] strArr, String str3) {
             if (str == null) {
                 throw new IllegalArgumentException("Package selection must not be null.");
             }
             if (str2 == null || str2.isBlank() || str3 == null || str3.isBlank()) {
                 return;
             }
-            if (android.app.usage.Flags.reportUsageStatsPermission() && UserHandle.getAppId(Binder.getCallingUid()) != 1000 && UsageStatsService.this.getContext().checkCallingPermission("android.permission.REPORT_USAGE_STATS") != 0) {
-                throw new SecurityException("Only the system or holders of the REPORT_USAGE_STATS permission are allowed to call reportChooserSelection");
+            if (android.app.usage.Flags.reportUsageStatsPermission()
+                    && UserHandle.getAppId(Binder.getCallingUid()) != 1000
+                    && UsageStatsService.this
+                                    .getContext()
+                                    .checkCallingPermission("android.permission.REPORT_USAGE_STATS")
+                            != 0) {
+                throw new SecurityException(
+                        "Only the system or holders of the REPORT_USAGE_STATS permission are"
+                            + " allowed to call reportChooserSelection");
             }
             if (UsageStatsService.this.mPackageManagerInternal.getPackageUid(str, 0L, i) < 0) {
                 Slog.w("UsageStatsService", "Event report user selecting an invalid package");
@@ -1101,10 +1492,14 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             try {
                 synchronized (UsageStatsService.this.mUsageReporters) {
                     try {
-                        arraySet = (ArraySet) UsageStatsService.this.mUsageReporters.get(iBinder.hashCode());
+                        arraySet =
+                                (ArraySet)
+                                        UsageStatsService.this.mUsageReporters.get(
+                                                iBinder.hashCode());
                         if (arraySet == null) {
                             arraySet = new ArraySet();
-                            UsageStatsService.this.mUsageReporters.put(iBinder.hashCode(), arraySet);
+                            UsageStatsService.this.mUsageReporters.put(
+                                    iBinder.hashCode(), arraySet);
                         }
                     } catch (Throwable th) {
                         throw th;
@@ -1112,10 +1507,15 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                 }
                 synchronized (arraySet) {
                     if (!arraySet.add(str)) {
-                        throw new IllegalArgumentException(str + " for " + str2 + " is already reported as started for this activity");
+                        throw new IllegalArgumentException(
+                                str
+                                        + " for "
+                                        + str2
+                                        + " is already reported as started for this activity");
                     }
                 }
-                UsageStatsService.this.mAppTimeLimit.noteUsageStart(userId, UsageStatsService.buildFullToken(str2, str), j);
+                UsageStatsService.this.mAppTimeLimit.noteUsageStart(
+                        userId, UsageStatsService.buildFullToken(str2, str), j);
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
@@ -1131,17 +1531,25 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 synchronized (UsageStatsService.this.mUsageReporters) {
-                    arraySet = (ArraySet) UsageStatsService.this.mUsageReporters.get(iBinder.hashCode());
+                    arraySet =
+                            (ArraySet)
+                                    UsageStatsService.this.mUsageReporters.get(iBinder.hashCode());
                     if (arraySet == null) {
-                        throw new IllegalArgumentException("Unknown reporter trying to stop token " + str + " for " + str2);
+                        throw new IllegalArgumentException(
+                                "Unknown reporter trying to stop token " + str + " for " + str2);
                     }
                 }
                 synchronized (arraySet) {
                     if (!arraySet.remove(str)) {
-                        throw new IllegalArgumentException(str + " for " + str2 + " is already reported as stopped for this activity");
+                        throw new IllegalArgumentException(
+                                str
+                                        + " for "
+                                        + str2
+                                        + " is already reported as stopped for this activity");
                     }
                 }
-                UsageStatsService.this.mAppTimeLimit.noteUsageStop(userId, UsageStatsService.buildFullToken(str2, str));
+                UsageStatsService.this.mAppTimeLimit.noteUsageStop(
+                        userId, UsageStatsService.buildFullToken(str2, str));
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
@@ -1151,19 +1559,32 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             reportUserInteractionInnerHelper(str, i, null);
         }
 
-        public final void reportUserInteractionInnerHelper(String str, int i, PersistableBundle persistableBundle) {
+        public final void reportUserInteractionInnerHelper(
+                String str, int i, PersistableBundle persistableBundle) {
             if (android.app.usage.Flags.reportUsageStatsPermission()) {
-                if (UserHandle.getAppId(Binder.getCallingUid()) != 1000 && UsageStatsService.this.getContext().checkCallingPermission("android.permission.REPORT_USAGE_STATS") != 0) {
-                    throw new SecurityException("Only the system or holders of the REPORT_USAGE_STATS permission are allowed to call reportUserInteraction");
+                if (UserHandle.getAppId(Binder.getCallingUid()) != 1000
+                        && UsageStatsService.this
+                                        .getContext()
+                                        .checkCallingPermission(
+                                                "android.permission.REPORT_USAGE_STATS")
+                                != 0) {
+                    throw new SecurityException(
+                            "Only the system or holders of the REPORT_USAGE_STATS permission are"
+                                + " allowed to call reportUserInteraction");
                 }
                 if (i != UserHandle.getCallingUserId()) {
-                    UsageStatsService.this.getContext().enforceCallingPermission("android.permission.INTERACT_ACROSS_USERS_FULL", "Caller doesn't have INTERACT_ACROSS_USERS_FULL permission");
+                    UsageStatsService.this
+                            .getContext()
+                            .enforceCallingPermission(
+                                    "android.permission.INTERACT_ACROSS_USERS_FULL",
+                                    "Caller doesn't have INTERACT_ACROSS_USERS_FULL permission");
                 }
             } else if (UserHandle.getAppId(Binder.getCallingUid()) != 1000) {
                 throw new SecurityException("Only system is allowed to call reportUserInteraction");
             }
             if (UsageStatsService.this.mPackageManagerInternal.getPackageUid(str, 0L, i) < 0) {
-                throw new IllegalArgumentException(XmlUtils$$ExternalSyntheticOutline0.m("Package ", str, " does not exist!"));
+                throw new IllegalArgumentException(
+                        XmlUtils$$ExternalSyntheticOutline0.m("Package ", str, " does not exist!"));
             }
             UsageEvents.Event event = new UsageEvents.Event(7, SystemClock.elapsedRealtime());
             event.mPackage = str;
@@ -1171,7 +1592,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             UsageStatsService.this.reportEventOrAddToQueue(i, event);
         }
 
-        public final void reportUserInteractionWithBundle(String str, int i, PersistableBundle persistableBundle) {
+        public final void reportUserInteractionWithBundle(
+                String str, int i, PersistableBundle persistableBundle) {
             Objects.requireNonNull(str);
             if (persistableBundle == null || persistableBundle.size() == 0) {
                 throw new IllegalArgumentException("Emtry extras!");
@@ -1185,15 +1607,34 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                 throw new IllegalArgumentException("Empty android.app.usage.extra.EVENT_ACTION");
             }
             PersistableBundle persistableBundle2 = new PersistableBundle();
-            persistableBundle2.putString("android.app.usage.extra.EVENT_CATEGORY", UsageStatsService.m1008$$Nest$mgetTrimmedString(UsageStatsService.this, string));
-            persistableBundle2.putString("android.app.usage.extra.EVENT_ACTION", UsageStatsService.m1008$$Nest$mgetTrimmedString(UsageStatsService.this, string2));
+            persistableBundle2.putString(
+                    "android.app.usage.extra.EVENT_CATEGORY",
+                    UsageStatsService.m1008$$Nest$mgetTrimmedString(
+                            UsageStatsService.this, string));
+            persistableBundle2.putString(
+                    "android.app.usage.extra.EVENT_ACTION",
+                    UsageStatsService.m1008$$Nest$mgetTrimmedString(
+                            UsageStatsService.this, string2));
             reportUserInteractionInnerHelper(str, i, persistableBundle2);
         }
 
         public final void setAppInactive(String str, boolean z, int i) {
             try {
-                int handleIncomingUser = ActivityManager.getService().handleIncomingUser(Binder.getCallingPid(), Binder.getCallingUid(), i, false, true, "setAppInactive", (String) null);
-                UsageStatsService.this.getContext().enforceCallingPermission("android.permission.CHANGE_APP_IDLE_STATE", "No permission to change app idle state");
+                int handleIncomingUser =
+                        ActivityManager.getService()
+                                .handleIncomingUser(
+                                        Binder.getCallingPid(),
+                                        Binder.getCallingUid(),
+                                        i,
+                                        false,
+                                        true,
+                                        "setAppInactive",
+                                        (String) null);
+                UsageStatsService.this
+                        .getContext()
+                        .enforceCallingPermission(
+                                "android.permission.CHANGE_APP_IDLE_STATE",
+                                "No permission to change app idle state");
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     if (UsageStatsService.this.mAppStandby.getAppId(str) < 0) {
@@ -1214,7 +1655,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             int callingPid = Binder.getCallingPid();
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                UsageStatsService.this.mAppStandby.setAppStandbyBucket(str, i, i2, callingUid, callingPid);
+                UsageStatsService.this.mAppStandby.setAppStandbyBucket(
+                        str, i, i2, callingUid, callingPid);
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
@@ -1226,7 +1668,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             int callingPid = Binder.getCallingPid();
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                UsageStatsService.this.mAppStandby.setAppStandbyBuckets(parceledListSlice.getList(), i, callingUid, callingPid);
+                UsageStatsService.this.mAppStandby.setAppStandbyBuckets(
+                        parceledListSlice.getList(), i, callingUid, callingPid);
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
@@ -1238,7 +1681,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             try {
                 UsageStatsService usageStatsService = UsageStatsService.this;
                 usageStatsService.getClass();
-                if (j > System.currentTimeMillis() && j != usageStatsService.mAppStandby.getEstimatedLaunchTime(str, i)) {
+                if (j > System.currentTimeMillis()
+                        && j != usageStatsService.mAppStandby.getEstimatedLaunchTime(str, i)) {
                     usageStatsService.mAppStandby.setEstimatedLaunchTime(str, i, j);
                     if (usageStatsService.stageChangedEstimatedLaunchTime(i, str)) {
                         usageStatsService.mHandler.sendEmptyMessage(9);
@@ -1253,7 +1697,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             setEstimatedLaunchTimes_enforcePermission();
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                UsageStatsService.m1012$$Nest$msetEstimatedLaunchTimes(UsageStatsService.this, i, parceledListSlice.getList());
+                UsageStatsService.m1012$$Nest$msetEstimatedLaunchTimes(
+                        UsageStatsService.this, i, parceledListSlice.getList());
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
@@ -1262,16 +1707,27 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         public final void unregisterAppUsageLimitObserver(int i, String str) {
             int callingUid = Binder.getCallingUid();
             DevicePolicyManagerInternal dpmInternal = UsageStatsService.this.getDpmInternal();
-            if (!hasPermissions("android.permission.SUSPEND_APPS", "android.permission.OBSERVE_APP_USAGE") && (dpmInternal == null || !dpmInternal.isActiveSupervisionApp(callingUid))) {
-                throw new SecurityException("Caller must be the active supervision app or it must have both SUSPEND_APPS and OBSERVE_APP_USAGE permissions");
+            if (!hasPermissions(
+                            "android.permission.SUSPEND_APPS",
+                            "android.permission.OBSERVE_APP_USAGE")
+                    && (dpmInternal == null || !dpmInternal.isActiveSupervisionApp(callingUid))) {
+                throw new SecurityException(
+                        "Caller must be the active supervision app or it must have both"
+                            + " SUSPEND_APPS and OBSERVE_APP_USAGE permissions");
             }
             UserHandle.getUserId(callingUid);
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                AppTimeLimitController appTimeLimitController = UsageStatsService.this.mAppTimeLimit;
+                AppTimeLimitController appTimeLimitController =
+                        UsageStatsService.this.mAppTimeLimit;
                 synchronized (appTimeLimitController.mLock) {
                     try {
-                        AppTimeLimitController.AppUsageLimitGroup appUsageLimitGroup = (AppTimeLimitController.AppUsageLimitGroup) appTimeLimitController.getOrCreateObserverAppDataLocked(callingUid).appUsageLimitGroups.get(i);
+                        AppTimeLimitController.AppUsageLimitGroup appUsageLimitGroup =
+                                (AppTimeLimitController.AppUsageLimitGroup)
+                                        appTimeLimitController
+                                                .getOrCreateObserverAppDataLocked(callingUid)
+                                                .appUsageLimitGroups
+                                                .get(i);
                         if (appUsageLimitGroup != null) {
                             appUsageLimitGroup.remove();
                         }
@@ -1292,10 +1748,16 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             UserHandle.getUserId(callingUid);
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                AppTimeLimitController appTimeLimitController = UsageStatsService.this.mAppTimeLimit;
+                AppTimeLimitController appTimeLimitController =
+                        UsageStatsService.this.mAppTimeLimit;
                 synchronized (appTimeLimitController.mLock) {
                     try {
-                        AppTimeLimitController.AppUsageGroup appUsageGroup = (AppTimeLimitController.AppUsageGroup) appTimeLimitController.getOrCreateObserverAppDataLocked(callingUid).appUsageGroups.get(i);
+                        AppTimeLimitController.AppUsageGroup appUsageGroup =
+                                (AppTimeLimitController.AppUsageGroup)
+                                        appTimeLimitController
+                                                .getOrCreateObserverAppDataLocked(callingUid)
+                                                .appUsageGroups
+                                                .get(i);
                         if (appUsageGroup != null) {
                             appUsageGroup.remove();
                         }
@@ -1316,10 +1778,16 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             UserHandle.getUserId(callingUid);
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                AppTimeLimitController appTimeLimitController = UsageStatsService.this.mAppTimeLimit;
+                AppTimeLimitController appTimeLimitController =
+                        UsageStatsService.this.mAppTimeLimit;
                 synchronized (appTimeLimitController.mLock) {
                     try {
-                        AppTimeLimitController.SessionUsageGroup sessionUsageGroup = (AppTimeLimitController.SessionUsageGroup) appTimeLimitController.getOrCreateObserverAppDataLocked(callingUid).sessionUsageGroups.get(i);
+                        AppTimeLimitController.SessionUsageGroup sessionUsageGroup =
+                                (AppTimeLimitController.SessionUsageGroup)
+                                        appTimeLimitController
+                                                .getOrCreateObserverAppDataLocked(callingUid)
+                                                .sessionUsageGroups
+                                                .get(i);
                         if (sessionUsageGroup != null) {
                             sessionUsageGroup.remove();
                         }
@@ -1333,12 +1801,17 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         }
 
         public final void unregisterUsageStatsWatcher(IUsageStatsWatcher iUsageStatsWatcher) {
-            UsageStatsService.this.getContext().enforceCallingOrSelfPermission("android.permission.PACKAGE_USAGE_STATS", null);
+            UsageStatsService.this
+                    .getContext()
+                    .enforceCallingOrSelfPermission("android.permission.PACKAGE_USAGE_STATS", null);
             synchronized (UsageStatsService.this.mUsageStatsWatchers) {
                 try {
-                    if (UsageStatsService.this.mUsageStatsWatchers.containsKey(iUsageStatsWatcher.asBinder())) {
-                        UsageStatsService.this.mUsageStatsWatchers.remove(iUsageStatsWatcher.asBinder());
-                        UsageStatsService.this.mUsageStatsWatchersComponent.remove(iUsageStatsWatcher.asBinder());
+                    if (UsageStatsService.this.mUsageStatsWatchers.containsKey(
+                            iUsageStatsWatcher.asBinder())) {
+                        UsageStatsService.this.mUsageStatsWatchers.remove(
+                                iUsageStatsWatcher.asBinder());
+                        UsageStatsService.this.mUsageStatsWatchersComponent.remove(
+                                iUsageStatsWatcher.asBinder());
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -1359,7 +1832,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             int keyAt;
             switch (message.what) {
                 case 0:
-                    UsageStatsService.this.reportEvent(message.arg1, (UsageEvents.Event) message.obj);
+                    UsageStatsService.this.reportEvent(
+                            message.arg1, (UsageEvents.Event) message.obj);
                     return;
                 case 1:
                     UsageStatsService.this.flushToDisk();
@@ -1380,23 +1854,28 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                     try {
                         try {
                             Trace.traceBegin(524288L, "usageStatsHandleUserUnlocked(" + i + ")");
-                            UsageStatsService.m1011$$Nest$monUserUnlocked(UsageStatsService.this, i);
+                            UsageStatsService.m1011$$Nest$monUserUnlocked(
+                                    UsageStatsService.this, i);
                         } catch (Exception e) {
                             if (UsageStatsService.this.mUserManager.isUserUnlocked(i)) {
                                 throw e;
                             }
-                            Slog.w("UsageStatsService", "Attempted to unlock stopped or removed user " + message.arg1);
+                            Slog.w(
+                                    "UsageStatsService",
+                                    "Attempted to unlock stopped or removed user " + message.arg1);
                         }
                         return;
                     } finally {
                         Trace.traceEnd(524288L);
                     }
                 case 6:
-                    UsageStatsService.m1010$$Nest$monPackageRemoved(UsageStatsService.this, message.arg1, (String) message.obj);
+                    UsageStatsService.m1010$$Nest$monPackageRemoved(
+                            UsageStatsService.this, message.arg1, (String) message.obj);
                     return;
                 case 7:
                     synchronized (UsageStatsService.this.mLock) {
-                        UsageStatsService.m1009$$Nest$mloadGlobalComponentUsageLocked(UsageStatsService.this);
+                        UsageStatsService.m1009$$Nest$mloadGlobalComponentUsageLocked(
+                                UsageStatsService.this);
                     }
                     return;
                 case 9:
@@ -1408,33 +1887,54 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                     for (int i2 = size - 1; i2 >= 0; i2--) {
                         arraySet.clear();
                         synchronized (UsageStatsService.this.mPendingLaunchTimeChangePackages) {
-                            keyAt = UsageStatsService.this.mPendingLaunchTimeChangePackages.keyAt(i2);
-                            arraySet.addAll(UsageStatsService.this.mPendingLaunchTimeChangePackages.get(keyAt));
+                            keyAt =
+                                    UsageStatsService.this.mPendingLaunchTimeChangePackages.keyAt(
+                                            i2);
+                            arraySet.addAll(
+                                    UsageStatsService.this.mPendingLaunchTimeChangePackages.get(
+                                            keyAt));
                             UsageStatsService.this.mPendingLaunchTimeChangePackages.remove(keyAt);
                         }
                         for (int size2 = arraySet.size() - 1; size2 >= 0; size2--) {
                             String str = (String) arraySet.valueAt(size2);
-                            long estimatedPackageLaunchTime = UsageStatsService.this.getEstimatedPackageLaunchTime(keyAt, str);
-                            Iterator it = UsageStatsService.this.mEstimatedLaunchTimeChangedListeners.iterator();
+                            long estimatedPackageLaunchTime =
+                                    UsageStatsService.this.getEstimatedPackageLaunchTime(
+                                            keyAt, str);
+                            Iterator it =
+                                    UsageStatsService.this.mEstimatedLaunchTimeChangedListeners
+                                            .iterator();
                             while (it.hasNext()) {
-                                PrefetchController.AnonymousClass1 anonymousClass1 = (PrefetchController.AnonymousClass1) it.next();
+                                PrefetchController.AnonymousClass1 anonymousClass1 =
+                                        (PrefetchController.AnonymousClass1) it.next();
                                 anonymousClass1.getClass();
                                 SomeArgs obtain = SomeArgs.obtain();
                                 obtain.arg1 = str;
                                 obtain.argi1 = keyAt;
                                 obtain.argl1 = estimatedPackageLaunchTime;
-                                PrefetchController.this.mHandler.obtainMessage(1, obtain).sendToTarget();
+                                PrefetchController.this
+                                        .mHandler
+                                        .obtainMessage(1, obtain)
+                                        .sendToTarget();
                             }
                         }
                     }
                     return;
                 case 10:
-                    BroadcastResponseStatsTracker broadcastResponseStatsTracker = UsageStatsService.this.mResponseStatsTracker;
+                    BroadcastResponseStatsTracker broadcastResponseStatsTracker =
+                            UsageStatsService.this.mResponseStatsTracker;
                     int i3 = message.arg1;
                     synchronized (broadcastResponseStatsTracker.mLock) {
                         try {
-                            for (int size3 = broadcastResponseStatsTracker.mUserBroadcastEvents.size() - 1; size3 >= 0; size3--) {
-                                ((UserBroadcastEvents) broadcastResponseStatsTracker.mUserBroadcastEvents.valueAt(size3)).clear(i3);
+                            for (int size3 =
+                                            broadcastResponseStatsTracker.mUserBroadcastEvents
+                                                            .size()
+                                                    - 1;
+                                    size3 >= 0;
+                                    size3--) {
+                                ((UserBroadcastEvents)
+                                                broadcastResponseStatsTracker.mUserBroadcastEvents
+                                                        .valueAt(size3))
+                                        .clear(i3);
                             }
                             broadcastResponseStatsTracker.mUserResponseStats.remove(i3);
                         } finally {
@@ -1449,8 +1949,7 @@ public final class UsageStatsService extends SystemService implements UserUsageS
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    class Injector {
-    }
+    class Injector {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LaunchTimeAlarmQueue extends AlarmQueue {
@@ -1470,7 +1969,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         public final void processExpiredAlarms(ArraySet arraySet) {
             if (arraySet.size() > 0) {
                 synchronized (UsageStatsService.this.mPendingLaunchTimeChangePackages) {
-                    UsageStatsService.this.mPendingLaunchTimeChangePackages.addAll(this.mUserId, arraySet);
+                    UsageStatsService.this.mPendingLaunchTimeChangePackages.addAll(
+                            this.mUserId, arraySet);
                 }
                 UsageStatsService.this.mHandler.sendEmptyMessage(9);
             }
@@ -1479,22 +1979,27 @@ public final class UsageStatsService extends SystemService implements UserUsageS
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LocalService extends UsageStatsManagerInternal {
-        public LocalService() {
-        }
+        public LocalService() {}
 
         @Override // android.app.usage.UsageStatsManagerInternal
         public final void applyRestoredPayload(int i, String str, byte[] bArr) {
             synchronized (UsageStatsService.this.mLock) {
                 try {
                     if (!UsageStatsService.this.mUserUnlockedStates.contains(Integer.valueOf(i))) {
-                        Slog.w("UsageStatsService", "Failed to apply restored payload for locked user " + i);
+                        Slog.w(
+                                "UsageStatsService",
+                                "Failed to apply restored payload for locked user " + i);
                     } else {
-                        UserUsageStatsService userUsageStatsServiceLocked = UsageStatsService.this.getUserUsageStatsServiceLocked(i);
+                        UserUsageStatsService userUsageStatsServiceLocked =
+                                UsageStatsService.this.getUserUsageStatsServiceLocked(i);
                         if (userUsageStatsServiceLocked == null) {
                             return;
                         }
                         userUsageStatsServiceLocked.checkAndGetTimeLocked();
-                        UsageStatsService.this.mAppStandby.restoreAppsToRare(userUsageStatsServiceLocked.mDatabase.applyRestoredPayload(str, bArr), i);
+                        UsageStatsService.this.mAppStandby.restoreAppsToRare(
+                                userUsageStatsServiceLocked.mDatabase.applyRestoredPayload(
+                                        str, bArr),
+                                i);
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -1510,12 +2015,14 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         @Override // android.app.usage.UsageStatsManagerInternal
         public final byte[] getBackupPayload(int i, String str) {
             if (!UsageStatsService.this.mUserUnlockedStates.contains(Integer.valueOf(i))) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m(i, "Failed to get backup payload for locked user ", "UsageStatsService");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        i, "Failed to get backup payload for locked user ", "UsageStatsService");
                 return null;
             }
             synchronized (UsageStatsService.this.mLock) {
                 try {
-                    UserUsageStatsService userUsageStatsServiceLocked = UsageStatsService.this.getUserUsageStatsServiceLocked(i);
+                    UserUsageStatsService userUsageStatsServiceLocked =
+                            UsageStatsService.this.getUserUsageStatsServiceLocked(i);
                     if (userUsageStatsServiceLocked == null) {
                         return null;
                     }
@@ -1530,7 +2037,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         }
 
         @Override // android.app.usage.UsageStatsManagerInternal
-        public final void registerListener(UsageStatsManagerInternal.UsageEventListener usageEventListener) {
+        public final void registerListener(
+                UsageStatsManagerInternal.UsageEventListener usageEventListener) {
             UsageStatsService usageStatsService = UsageStatsService.this;
             synchronized (usageStatsService.mUsageEventListeners) {
                 usageStatsService.mUsageEventListeners.add(usageEventListener);
@@ -1540,7 +2048,10 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         @Override // android.app.usage.UsageStatsManagerInternal
         public final void reportEvent(int i, int i2, String str) {
             if (str == null) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m(i2, "Event reported without a package name, eventType:", "UsageStatsService");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        i2,
+                        "Event reported without a package name, eventType:",
+                        "UsageStatsService");
                 return;
             }
             UsageEvents.Event event = new UsageEvents.Event(i2, SystemClock.elapsedRealtime());
@@ -1550,23 +2061,33 @@ public final class UsageStatsService extends SystemService implements UserUsageS
 
         @Override // android.app.usage.UsageStatsManagerInternal
         public final void reportNotificationPosted(String str, UserHandle userHandle, long j) {
-            UsageStatsService.this.mResponseStatsTracker.reportNotificationEvent(0, str, userHandle, j);
+            UsageStatsService.this.mResponseStatsTracker.reportNotificationEvent(
+                    0, str, userHandle, j);
         }
 
         @Override // android.app.usage.UsageStatsManagerInternal
         public final void reportNotificationUpdated(String str, UserHandle userHandle, long j) {
-            UsageStatsService.this.mResponseStatsTracker.reportNotificationEvent(1, str, userHandle, j);
+            UsageStatsService.this.mResponseStatsTracker.reportNotificationEvent(
+                    1, str, userHandle, j);
         }
 
         @Override // android.app.usage.UsageStatsManagerInternal
-        public final void reportUserInteractionEvent(String str, int i, PersistableBundle persistableBundle) {
+        public final void reportUserInteractionEvent(
+                String str, int i, PersistableBundle persistableBundle) {
             int size = persistableBundle.size();
             UsageStatsService usageStatsService = UsageStatsService.this;
             if (size != 0) {
-                String string = persistableBundle.getString("android.app.usage.extra.EVENT_CATEGORY");
-                String string2 = persistableBundle.getString("android.app.usage.extra.EVENT_ACTION");
-                persistableBundle.putString("android.app.usage.extra.EVENT_CATEGORY", UsageStatsService.m1008$$Nest$mgetTrimmedString(usageStatsService, string));
-                persistableBundle.putString("android.app.usage.extra.EVENT_ACTION", UsageStatsService.m1008$$Nest$mgetTrimmedString(usageStatsService, string2));
+                String string =
+                        persistableBundle.getString("android.app.usage.extra.EVENT_CATEGORY");
+                String string2 =
+                        persistableBundle.getString("android.app.usage.extra.EVENT_ACTION");
+                persistableBundle.putString(
+                        "android.app.usage.extra.EVENT_CATEGORY",
+                        UsageStatsService.m1008$$Nest$mgetTrimmedString(usageStatsService, string));
+                persistableBundle.putString(
+                        "android.app.usage.extra.EVENT_ACTION",
+                        UsageStatsService.m1008$$Nest$mgetTrimmedString(
+                                usageStatsService, string2));
             }
             UsageEvents.Event event = new UsageEvents.Event(7, SystemClock.elapsedRealtime());
             event.mPackage = str;
@@ -1577,30 +2098,48 @@ public final class UsageStatsService extends SystemService implements UserUsageS
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MyPackageMonitor extends PackageMonitor {
-        public MyPackageMonitor() {
-        }
+        public MyPackageMonitor() {}
 
         public final void onPackageRemoved(String str, int i) {
             int changingUserId = getChangingUserId();
             UsageStatsService usageStatsService = UsageStatsService.this;
             UserHandle of = UserHandle.of(changingUserId);
             DevicePolicyManagerInternal dpmInternal = usageStatsService.getDpmInternal();
-            if (dpmInternal == null || dpmInternal.getProfileOwnerOrDeviceOwnerSupervisionComponent(of) == null) {
-                UsageStatsService.this.mHandler.obtainMessage(6, changingUserId, 0, str).sendToTarget();
+            if (dpmInternal == null
+                    || dpmInternal.getProfileOwnerOrDeviceOwnerSupervisionComponent(of) == null) {
+                UsageStatsService.this
+                        .mHandler
+                        .obtainMessage(6, changingUserId, 0, str)
+                        .sendToTarget();
             }
-            BroadcastResponseStatsTracker broadcastResponseStatsTracker = UsageStatsService.this.mResponseStatsTracker;
+            BroadcastResponseStatsTracker broadcastResponseStatsTracker =
+                    UsageStatsService.this.mResponseStatsTracker;
             int userId = UserHandle.getUserId(i);
             synchronized (broadcastResponseStatsTracker.mLock) {
                 try {
-                    UserBroadcastEvents userBroadcastEvents = (UserBroadcastEvents) broadcastResponseStatsTracker.mUserBroadcastEvents.get(userId);
+                    UserBroadcastEvents userBroadcastEvents =
+                            (UserBroadcastEvents)
+                                    broadcastResponseStatsTracker.mUserBroadcastEvents.get(userId);
                     if (userBroadcastEvents != null) {
                         userBroadcastEvents.mBroadcastEvents.remove(str);
                     }
-                    for (int size = broadcastResponseStatsTracker.mUserResponseStats.size() - 1; size >= 0; size--) {
-                        UserBroadcastResponseStats userBroadcastResponseStats = (UserBroadcastResponseStats) ((SparseArray) broadcastResponseStatsTracker.mUserResponseStats.valueAt(size)).get(userId);
+                    for (int size = broadcastResponseStatsTracker.mUserResponseStats.size() - 1;
+                            size >= 0;
+                            size--) {
+                        UserBroadcastResponseStats userBroadcastResponseStats =
+                                (UserBroadcastResponseStats)
+                                        ((SparseArray)
+                                                        broadcastResponseStatsTracker
+                                                                .mUserResponseStats.valueAt(size))
+                                                .get(userId);
                         if (userBroadcastResponseStats != null) {
-                            for (int size2 = userBroadcastResponseStats.mResponseStats.size() - 1; size2 >= 0; size2--) {
-                                if (((BroadcastEvent) userBroadcastResponseStats.mResponseStats.keyAt(size2)).mTargetPackage.equals(str)) {
+                            for (int size2 = userBroadcastResponseStats.mResponseStats.size() - 1;
+                                    size2 >= 0;
+                                    size2--) {
+                                if (((BroadcastEvent)
+                                                userBroadcastResponseStats.mResponseStats.keyAt(
+                                                        size2))
+                                        .mTargetPackage.equals(str)) {
                                     userBroadcastResponseStats.mResponseStats.removeAt(size2);
                                 }
                             }
@@ -1654,17 +2193,21 @@ public final class UsageStatsService extends SystemService implements UserUsageS
     }
 
     /* renamed from: -$$Nest$mgetTrimmedString, reason: not valid java name */
-    public static String m1008$$Nest$mgetTrimmedString(UsageStatsService usageStatsService, String str) {
+    public static String m1008$$Nest$mgetTrimmedString(
+            UsageStatsService usageStatsService, String str) {
         usageStatsService.getClass();
         return (str == null || str.length() <= 127) ? str : str.substring(0, 127);
     }
 
     /* renamed from: -$$Nest$mloadGlobalComponentUsageLocked, reason: not valid java name */
-    public static void m1009$$Nest$mloadGlobalComponentUsageLocked(UsageStatsService usageStatsService) {
+    public static void m1009$$Nest$mloadGlobalComponentUsageLocked(
+            UsageStatsService usageStatsService) {
         usageStatsService.getClass();
-        AtomicFile atomicFile = new AtomicFile(new File(COMMON_USAGE_STATS_DIR, "globalcomponentusage"));
+        AtomicFile atomicFile =
+                new AtomicFile(new File(COMMON_USAGE_STATS_DIR, "globalcomponentusage"));
         if (!atomicFile.exists()) {
-            atomicFile = new AtomicFile(new File(LEGACY_COMMON_USAGE_STATS_DIR, "globalcomponentusage"));
+            atomicFile =
+                    new AtomicFile(new File(LEGACY_COMMON_USAGE_STATS_DIR, "globalcomponentusage"));
             if (!atomicFile.exists()) {
                 return;
             } else {
@@ -1682,7 +2225,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                 Map.Entry[] entryArr = (Map.Entry[]) arrayMap.entrySet().toArray();
                 int length = entryArr.length;
                 for (int i = 0; i < length; i++) {
-                    usageStatsService.mLastTimeComponentUsedGlobal.putIfAbsent((String) entryArr[i].getKey(), (Long) entryArr[i].getValue());
+                    usageStatsService.mLastTimeComponentUsedGlobal.putIfAbsent(
+                            (String) entryArr[i].getKey(), (Long) entryArr[i].getValue());
                 }
             } finally {
             }
@@ -1692,7 +2236,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
     }
 
     /* renamed from: -$$Nest$monPackageRemoved, reason: not valid java name */
-    public static void m1010$$Nest$monPackageRemoved(UsageStatsService usageStatsService, int i, String str) {
+    public static void m1010$$Nest$monPackageRemoved(
+            UsageStatsService usageStatsService, int i, String str) {
         synchronized (usageStatsService.mPendingLaunchTimeChangePackages) {
             try {
                 ArraySet arraySet = usageStatsService.mPendingLaunchTimeChangePackages.get(i);
@@ -1704,7 +2249,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         }
         synchronized (usageStatsService.mLaunchTimeAlarmQueues) {
             try {
-                LaunchTimeAlarmQueue launchTimeAlarmQueue = (LaunchTimeAlarmQueue) usageStatsService.mLaunchTimeAlarmQueues.get(i);
+                LaunchTimeAlarmQueue launchTimeAlarmQueue =
+                        (LaunchTimeAlarmQueue) usageStatsService.mLaunchTimeAlarmQueues.get(i);
                 if (launchTimeAlarmQueue != null) {
                     launchTimeAlarmQueue.removeAlarmForKey(str);
                 }
@@ -1715,19 +2261,31 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             try {
                 long currentTimeMillis = System.currentTimeMillis();
                 if (usageStatsService.mUserUnlockedStates.contains(Integer.valueOf(i))) {
-                    UserUsageStatsService userUsageStatsService = (UserUsageStatsService) usageStatsService.mUserState.get(i);
+                    UserUsageStatsService userUsageStatsService =
+                            (UserUsageStatsService) usageStatsService.mUserState.get(i);
                     if (userUsageStatsService == null) {
                         return;
                     }
-                    int onPackageRemoved = userUsageStatsService.onPackageRemoved(currentTimeMillis, str);
+                    int onPackageRemoved =
+                            userUsageStatsService.onPackageRemoved(currentTimeMillis, str);
                     if (onPackageRemoved != -1) {
                         Context context = usageStatsService.getContext();
                         int i2 = UsageStatsIdleService.$r8$clinit;
-                        ComponentName componentName = new ComponentName(context.getPackageName(), UsageStatsIdleService.class.getName());
+                        ComponentName componentName =
+                                new ComponentName(
+                                        context.getPackageName(),
+                                        UsageStatsIdleService.class.getName());
                         PersistableBundle persistableBundle = new PersistableBundle();
                         persistableBundle.putInt("user_id", i);
-                        JobInfo build = new JobInfo.Builder(i, componentName).setRequiresDeviceIdle(true).setExtras(persistableBundle).setPersisted(true).build();
-                        JobScheduler forNamespace = ((JobScheduler) context.getSystemService(JobScheduler.class)).forNamespace("usagestats_prune");
+                        JobInfo build =
+                                new JobInfo.Builder(i, componentName)
+                                        .setRequiresDeviceIdle(true)
+                                        .setExtras(persistableBundle)
+                                        .setPersisted(true)
+                                        .build();
+                        JobScheduler forNamespace =
+                                ((JobScheduler) context.getSystemService(JobScheduler.class))
+                                        .forNamespace("usagestats_prune");
                         if (build.equals(forNamespace.getPendingJob(i))) {
                             return;
                         }
@@ -1745,20 +2303,30 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         HashMap installedPackages = usageStatsService.getInstalledPackages(i);
         Context context = usageStatsService.getContext();
         int i2 = UsageStatsIdleService.$r8$clinit;
-        ComponentName componentName = new ComponentName(context.getPackageName(), UsageStatsIdleService.class.getName());
+        ComponentName componentName =
+                new ComponentName(context.getPackageName(), UsageStatsIdleService.class.getName());
         PersistableBundle persistableBundle = new PersistableBundle();
         persistableBundle.putInt("user_id", i);
         JobInfo.Builder persisted = new JobInfo.Builder(i, componentName).setPersisted(true);
         TimeUnit timeUnit = TimeUnit.DAYS;
-        JobInfo build = persisted.setMinimumLatency(timeUnit.toMillis(1L)).setOverrideDeadline(timeUnit.toMillis(2L)).setExtras(persistableBundle).build();
-        JobScheduler forNamespace = ((JobScheduler) context.getSystemService(JobScheduler.class)).forNamespace("usagestats_mapping");
+        JobInfo build =
+                persisted
+                        .setMinimumLatency(timeUnit.toMillis(1L))
+                        .setOverrideDeadline(timeUnit.toMillis(2L))
+                        .setExtras(persistableBundle)
+                        .build();
+        JobScheduler forNamespace =
+                ((JobScheduler) context.getSystemService(JobScheduler.class))
+                        .forNamespace("usagestats_mapping");
         if (!build.equals(forNamespace.getPendingJob(i))) {
             forNamespace.cancel(i);
             forNamespace.schedule(build);
         }
         UserHandle of = UserHandle.of(i);
         DevicePolicyManagerInternal dpmInternal = usageStatsService.getDpmInternal();
-        boolean z = dpmInternal == null || dpmInternal.getProfileOwnerOrDeviceOwnerSupervisionComponent(of) == null;
+        boolean z =
+                dpmInternal == null
+                        || dpmInternal.getProfileOwnerOrDeviceOwnerSupervisionComponent(of) == null;
         synchronized (usageStatsService.mLock) {
             try {
                 usageStatsService.mUserUnlockedStates.add(Integer.valueOf(i));
@@ -1777,8 +2345,10 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                     }
                 }
                 boolean z2 = !linkedList.isEmpty();
-                usageStatsService.initializeUserUsageStatsServiceLocked(i, System.currentTimeMillis(), installedPackages, z);
-                UserUsageStatsService userUsageStatsServiceLocked = usageStatsService.getUserUsageStatsServiceLocked(i);
+                usageStatsService.initializeUserUsageStatsServiceLocked(
+                        i, System.currentTimeMillis(), installedPackages, z);
+                UserUsageStatsService userUsageStatsServiceLocked =
+                        usageStatsService.getUserUsageStatsServiceLocked(i);
                 if (userUsageStatsServiceLocked == null) {
                     Slog.i("UsageStatsService", "Attempted to unlock stopped or removed user " + i);
                     return;
@@ -1800,18 +2370,24 @@ public final class UsageStatsService extends SystemService implements UserUsageS
     }
 
     /* renamed from: -$$Nest$msetEstimatedLaunchTimes, reason: not valid java name */
-    public static void m1012$$Nest$msetEstimatedLaunchTimes(UsageStatsService usageStatsService, int i, List list) {
+    public static void m1012$$Nest$msetEstimatedLaunchTimes(
+            UsageStatsService usageStatsService, int i, List list) {
         usageStatsService.getClass();
         long currentTimeMillis = System.currentTimeMillis();
         boolean z = false;
         for (int size = list.size() - 1; size >= 0; size--) {
             AppLaunchEstimateInfo appLaunchEstimateInfo = (AppLaunchEstimateInfo) list.get(size);
             if (appLaunchEstimateInfo.estimatedLaunchTime > currentTimeMillis) {
-                long estimatedLaunchTime = usageStatsService.mAppStandby.getEstimatedLaunchTime(appLaunchEstimateInfo.packageName, i);
+                long estimatedLaunchTime =
+                        usageStatsService.mAppStandby.getEstimatedLaunchTime(
+                                appLaunchEstimateInfo.packageName, i);
                 long j = appLaunchEstimateInfo.estimatedLaunchTime;
                 if (j != estimatedLaunchTime) {
-                    usageStatsService.mAppStandby.setEstimatedLaunchTime(appLaunchEstimateInfo.packageName, i, j);
-                    z |= usageStatsService.stageChangedEstimatedLaunchTime(i, appLaunchEstimateInfo.packageName);
+                    usageStatsService.mAppStandby.setEstimatedLaunchTime(
+                            appLaunchEstimateInfo.packageName, i, j);
+                    z |=
+                            usageStatsService.stageChangedEstimatedLaunchTime(
+                                    i, appLaunchEstimateInfo.packageName);
                 }
             }
         }
@@ -1821,15 +2397,21 @@ public final class UsageStatsService extends SystemService implements UserUsageS
     }
 
     /* renamed from: -$$Nest$mshouldObfuscateInstantAppsForCaller, reason: not valid java name */
-    public static boolean m1013$$Nest$mshouldObfuscateInstantAppsForCaller(UsageStatsService usageStatsService, int i, int i2) {
-        return !((PackageManagerService.PackageManagerInternalImpl) usageStatsService.mPackageManagerInternal).mService.snapshotComputer().canViewInstantApps(i, i2);
+    public static boolean m1013$$Nest$mshouldObfuscateInstantAppsForCaller(
+            UsageStatsService usageStatsService, int i, int i2) {
+        return !((PackageManagerService.PackageManagerInternalImpl)
+                        usageStatsService.mPackageManagerInternal)
+                .mService
+                .snapshotComputer()
+                .canViewInstantApps(i, i2);
     }
 
     static {
         File file = new File(Environment.getDataSystemDirectory(), "usagestats");
         COMMON_USAGE_STATS_DIR = file;
         LEGACY_USER_USAGE_STATS_DIR = file;
-        LEGACY_COMMON_USAGE_STATS_DIR = new File(Environment.getDataSystemDeDirectory(), "usagestats");
+        LEGACY_COMMON_USAGE_STATS_DIR =
+                new File(Environment.getDataSystemDeDirectory(), "usagestats");
     }
 
     public UsageStatsService(Context context) {
@@ -1856,126 +2438,181 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         this.mUsageEventListeners = new ArraySet();
         this.mEstimatedLaunchTimeChangedListeners = new CopyOnWriteArraySet();
         this.mPendingLaunchTimeChangePackages = new SparseSetArray();
-        this.mStandbyChangeListener = new AppStandbyInternal.AppIdleStateChangeListener() { // from class: com.android.server.usage.UsageStatsService.1
-            public final void onAppIdleStateChanged(String str, int i, boolean z, int i2, int i3) {
-                UsageEvents.Event event = new UsageEvents.Event(11, SystemClock.elapsedRealtime());
-                event.mBucketAndReason = (i2 << 16) | (i3 & GnssNative.GNSS_AIDING_TYPE_ALL);
-                event.mPackage = str;
-                UsageStatsService.this.reportEventOrAddToQueue(i, event);
-            }
-        };
-        this.mIoHandlerCallback = new Handler.Callback() { // from class: com.android.server.usage.UsageStatsService$$ExternalSyntheticLambda0
-            /* JADX WARN: Multi-variable type inference failed */
-            @Override // android.os.Handler.Callback
-            public final boolean handleMessage(Message message) {
-                UsageEvents usageEvents;
-                ArrayMap arrayMap;
-                UsageStatsService usageStatsService = UsageStatsService.this;
-                usageStatsService.getClass();
-                int i = message.what;
-                int i2 = 1;
-                if (i == 3) {
-                    int i3 = message.arg1;
-                    int i4 = message.arg2 <= 2 ? 0 : 1;
-                    synchronized (usageStatsService.mUidToKernelCounter) {
-                        if (i4 != usageStatsService.mUidToKernelCounter.get(i3, 0)) {
-                            usageStatsService.mUidToKernelCounter.put(i3, i4);
-                            try {
-                                FileUtils.stringToFile(UsageStatsService.KERNEL_COUNTER_FILE, i3 + " " + i4);
-                            } catch (IOException e) {
-                                Slog.w("UsageStatsService", "Failed to update counter set: " + e);
-                            }
-                        }
+        this.mStandbyChangeListener =
+                new AppStandbyInternal
+                        .AppIdleStateChangeListener() { // from class:
+                                                        // com.android.server.usage.UsageStatsService.1
+                    public final void onAppIdleStateChanged(
+                            String str, int i, boolean z, int i2, int i3) {
+                        UsageEvents.Event event =
+                                new UsageEvents.Event(11, SystemClock.elapsedRealtime());
+                        event.mBucketAndReason =
+                                (i2 << 16) | (i3 & GnssNative.GNSS_AIDING_TYPE_ALL);
+                        event.mPackage = str;
+                        UsageStatsService.this.reportEventOrAddToQueue(i, event);
                     }
-                } else {
-                    if (i != 8) {
-                        if (i != 12) {
-                            return false;
-                        }
-                        int i5 = message.arg1;
-                        UsageEvents.Event event = (UsageEvents.Event) message.obj;
-                        synchronized (usageStatsService.mUsageEventListeners) {
-                            try {
-                                int size = usageStatsService.mUsageEventListeners.size();
-                                for (int i6 = 0; i6 < size; i6++) {
-                                    ((UsageStatsManagerInternal.UsageEventListener) usageStatsService.mUsageEventListeners.valueAt(i6)).onUsageEvent(i5, event);
+                };
+        this.mIoHandlerCallback =
+                new Handler
+                        .Callback() { // from class:
+                                      // com.android.server.usage.UsageStatsService$$ExternalSyntheticLambda0
+                    /* JADX WARN: Multi-variable type inference failed */
+                    @Override // android.os.Handler.Callback
+                    public final boolean handleMessage(Message message) {
+                        UsageEvents usageEvents;
+                        ArrayMap arrayMap;
+                        UsageStatsService usageStatsService = UsageStatsService.this;
+                        usageStatsService.getClass();
+                        int i = message.what;
+                        int i2 = 1;
+                        if (i == 3) {
+                            int i3 = message.arg1;
+                            int i4 = message.arg2 <= 2 ? 0 : 1;
+                            synchronized (usageStatsService.mUidToKernelCounter) {
+                                if (i4 != usageStatsService.mUidToKernelCounter.get(i3, 0)) {
+                                    usageStatsService.mUidToKernelCounter.put(i3, i4);
+                                    try {
+                                        FileUtils.stringToFile(
+                                                UsageStatsService.KERNEL_COUNTER_FILE,
+                                                i3 + " " + i4);
+                                    } catch (IOException e) {
+                                        Slog.w(
+                                                "UsageStatsService",
+                                                "Failed to update counter set: " + e);
+                                    }
                                 }
-                            } finally {
                             }
+                        } else {
+                            if (i != 8) {
+                                if (i != 12) {
+                                    return false;
+                                }
+                                int i5 = message.arg1;
+                                UsageEvents.Event event = (UsageEvents.Event) message.obj;
+                                synchronized (usageStatsService.mUsageEventListeners) {
+                                    try {
+                                        int size = usageStatsService.mUsageEventListeners.size();
+                                        for (int i6 = 0; i6 < size; i6++) {
+                                            ((UsageStatsManagerInternal.UsageEventListener)
+                                                            usageStatsService.mUsageEventListeners
+                                                                    .valueAt(i6))
+                                                    .onUsageEvent(i5, event);
+                                        }
+                                    } finally {
+                                    }
+                                }
+                                return true;
+                            }
+                            int i7 = message.arg1;
+                            Trace.traceBegin(
+                                    524288L,
+                                    "usageStatsHandleEstimatedLaunchTimesOnUser(" + i7 + ")");
+                            long elapsedRealtime = SystemClock.elapsedRealtime();
+                            long currentTimeMillis = System.currentTimeMillis();
+                            long j = currentTimeMillis - 604800000;
+                            synchronized (usageStatsService.mLock) {
+                                try {
+                                    usageEvents = null;
+                                    if (usageStatsService.mUserUnlockedStates.contains(
+                                            Integer.valueOf(i7))) {
+                                        UserUsageStatsService userUsageStatsServiceLocked =
+                                                usageStatsService.getUserUsageStatsServiceLocked(
+                                                        i7);
+                                        if (userUsageStatsServiceLocked != null) {
+                                            usageEvents =
+                                                    userUsageStatsServiceLocked
+                                                            .queryEarliestAppEvents(
+                                                                    j, currentTimeMillis);
+                                        }
+                                    } else {
+                                        Slog.w(
+                                                "UsageStatsService",
+                                                "Failed to query earliest events for locked user "
+                                                        + i7);
+                                    }
+                                } finally {
+                                }
+                            }
+                            if (usageEvents != null) {
+                                ArrayMap arrayMap2 = new ArrayMap();
+                                UsageEvents.Event event2 = new UsageEvents.Event();
+                                UsageStatsService.LaunchTimeAlarmQueue
+                                        orCreateLaunchTimeAlarmQueue =
+                                                usageStatsService.getOrCreateLaunchTimeAlarmQueue(
+                                                        i7);
+                                boolean nextEvent = usageEvents.getNextEvent(event2);
+                                boolean z = false;
+                                while (nextEvent) {
+                                    String packageName = event2.getPackageName();
+                                    if (!arrayMap2.containsKey(packageName)) {
+                                        arrayMap2.put(
+                                                packageName,
+                                                Boolean.valueOf(
+                                                        currentTimeMillis - event2.getTimeStamp()
+                                                                        > BackupManagerConstants
+                                                                                .DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS
+                                                                ? i2
+                                                                : 0));
+                                    }
+                                    if (event2.getEventType() == i2) {
+                                        long estimatedLaunchTime =
+                                                usageStatsService.mAppStandby
+                                                        .getEstimatedLaunchTime(packageName, i7);
+                                        if (estimatedLaunchTime < currentTimeMillis
+                                                || estimatedLaunchTime == Long.MAX_VALUE) {
+                                            boolean booleanValue =
+                                                    ((Boolean) arrayMap2.get(packageName))
+                                                            .booleanValue();
+                                            long timeStamp = event2.getTimeStamp();
+                                            arrayMap = arrayMap2;
+                                            long j2 =
+                                                    booleanValue
+                                                            ? timeStamp + 604800000
+                                                            : timeStamp
+                                                                    + BackupManagerConstants
+                                                                            .DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS;
+                                            usageStatsService.mAppStandby.setEstimatedLaunchTime(
+                                                    packageName, i7, j2);
+                                            estimatedLaunchTime = j2;
+                                        } else {
+                                            arrayMap = arrayMap2;
+                                        }
+                                        if (estimatedLaunchTime < currentTimeMillis + 604800000) {
+                                            z |=
+                                                    usageStatsService
+                                                            .stageChangedEstimatedLaunchTime(
+                                                                    i7, packageName);
+                                        }
+                                        orCreateLaunchTimeAlarmQueue.addAlarm(
+                                                (estimatedLaunchTime - currentTimeMillis)
+                                                        + elapsedRealtime,
+                                                packageName);
+                                    } else {
+                                        arrayMap = arrayMap2;
+                                    }
+                                    nextEvent = usageEvents.getNextEvent(event2);
+                                    arrayMap2 = arrayMap;
+                                    i2 = 1;
+                                }
+                                if (z) {
+                                    usageStatsService.mHandler.sendEmptyMessage(9);
+                                }
+                            }
+                            Trace.traceEnd(524288L);
                         }
                         return true;
                     }
-                    int i7 = message.arg1;
-                    Trace.traceBegin(524288L, "usageStatsHandleEstimatedLaunchTimesOnUser(" + i7 + ")");
-                    long elapsedRealtime = SystemClock.elapsedRealtime();
-                    long currentTimeMillis = System.currentTimeMillis();
-                    long j = currentTimeMillis - 604800000;
-                    synchronized (usageStatsService.mLock) {
-                        try {
-                            usageEvents = null;
-                            if (usageStatsService.mUserUnlockedStates.contains(Integer.valueOf(i7))) {
-                                UserUsageStatsService userUsageStatsServiceLocked = usageStatsService.getUserUsageStatsServiceLocked(i7);
-                                if (userUsageStatsServiceLocked != null) {
-                                    usageEvents = userUsageStatsServiceLocked.queryEarliestAppEvents(j, currentTimeMillis);
-                                }
-                            } else {
-                                Slog.w("UsageStatsService", "Failed to query earliest events for locked user " + i7);
-                            }
-                        } finally {
-                        }
+                };
+        this.mUidObserver =
+                new UidObserver() { // from class: com.android.server.usage.UsageStatsService.3
+                    public final void onUidGone(int i, boolean z) {
+                        onUidStateChanged(i, 20, 0L, 0);
                     }
-                    if (usageEvents != null) {
-                        ArrayMap arrayMap2 = new ArrayMap();
-                        UsageEvents.Event event2 = new UsageEvents.Event();
-                        UsageStatsService.LaunchTimeAlarmQueue orCreateLaunchTimeAlarmQueue = usageStatsService.getOrCreateLaunchTimeAlarmQueue(i7);
-                        boolean nextEvent = usageEvents.getNextEvent(event2);
-                        boolean z = false;
-                        while (nextEvent) {
-                            String packageName = event2.getPackageName();
-                            if (!arrayMap2.containsKey(packageName)) {
-                                arrayMap2.put(packageName, Boolean.valueOf(currentTimeMillis - event2.getTimeStamp() > BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS ? i2 : 0));
-                            }
-                            if (event2.getEventType() == i2) {
-                                long estimatedLaunchTime = usageStatsService.mAppStandby.getEstimatedLaunchTime(packageName, i7);
-                                if (estimatedLaunchTime < currentTimeMillis || estimatedLaunchTime == Long.MAX_VALUE) {
-                                    boolean booleanValue = ((Boolean) arrayMap2.get(packageName)).booleanValue();
-                                    long timeStamp = event2.getTimeStamp();
-                                    arrayMap = arrayMap2;
-                                    long j2 = booleanValue ? timeStamp + 604800000 : timeStamp + BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS;
-                                    usageStatsService.mAppStandby.setEstimatedLaunchTime(packageName, i7, j2);
-                                    estimatedLaunchTime = j2;
-                                } else {
-                                    arrayMap = arrayMap2;
-                                }
-                                if (estimatedLaunchTime < currentTimeMillis + 604800000) {
-                                    z |= usageStatsService.stageChangedEstimatedLaunchTime(i7, packageName);
-                                }
-                                orCreateLaunchTimeAlarmQueue.addAlarm((estimatedLaunchTime - currentTimeMillis) + elapsedRealtime, packageName);
-                            } else {
-                                arrayMap = arrayMap2;
-                            }
-                            nextEvent = usageEvents.getNextEvent(event2);
-                            arrayMap2 = arrayMap;
-                            i2 = 1;
-                        }
-                        if (z) {
-                            usageStatsService.mHandler.sendEmptyMessage(9);
-                        }
-                    }
-                    Trace.traceEnd(524288L);
-                }
-                return true;
-            }
-        };
-        this.mUidObserver = new UidObserver() { // from class: com.android.server.usage.UsageStatsService.3
-            public final void onUidGone(int i, boolean z) {
-                onUidStateChanged(i, 20, 0L, 0);
-            }
 
-            public final void onUidStateChanged(int i, int i2, long j, int i3) {
-                UsageStatsService.this.mIoHandler.obtainMessage(3, i, i2).sendToTarget();
-            }
-        };
+                    public final void onUidStateChanged(int i, int i2, long j, int i3) {
+                        UsageStatsService.this.mIoHandler.obtainMessage(3, i, i2).sendToTarget();
+                    }
+                };
         this.mInjector = injector;
     }
 
@@ -1992,10 +2629,15 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         File[] listFiles = file2.listFiles();
         if (listFiles == null) {
             try {
-                Files.copy(file2.toPath(), new File(file, file2.getName()).toPath(), StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(
+                        file2.toPath(),
+                        new File(file, file2.getName()).toPath(),
+                        StandardCopyOption.REPLACE_EXISTING);
                 return;
             } catch (IOException e) {
-                Slog.e("UsageStatsService", "Failed to move usage stats file : " + file2.toString());
+                Slog.e(
+                        "UsageStatsService",
+                        "Failed to move usage stats file : " + file2.toString());
                 throw new RuntimeException(e);
             }
         }
@@ -2003,7 +2645,9 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             if (listFiles[length].isDirectory()) {
                 file3 = new File(file, listFiles[length].getName());
                 if (!file3.mkdirs() && !file3.exists()) {
-                    throw new IllegalStateException("Failed to create usage stats directory during migration: " + file3.getAbsolutePath());
+                    throw new IllegalStateException(
+                            "Failed to create usage stats directory during migration: "
+                                    + file3.getAbsolutePath());
                 }
             } else {
                 file3 = file;
@@ -2017,7 +2661,11 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         if (file.exists()) {
             deleteRecursively(file);
             if (file.exists()) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m(i, "Error occurred while attempting to delete legacy usage stats dir for user ", "UsageStatsService");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        i,
+                        "Error occurred while attempting to delete legacy usage stats dir for user"
+                            + " ",
+                        "UsageStatsService");
             }
         }
     }
@@ -2037,7 +2685,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
 
     public static void loadPendingEventsLocked(int i, LinkedList linkedList) {
         FileInputStream openRead;
-        File[] listFiles = new File(Environment.getDataSystemDeDirectory(i), "usagestats").listFiles();
+        File[] listFiles =
+                new File(Environment.getDataSystemDeDirectory(i), "usagestats").listFiles();
         if (listFiles == null || listFiles.length == 0) {
             return;
         }
@@ -2062,13 +2711,17 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                     if (nextField == 23) {
                         try {
                             long start = protoInputStream.start(2246267895831L);
-                            UsageEvents.Event parsePendingEvent = UsageStatsProtoV2.parsePendingEvent(protoInputStream);
+                            UsageEvents.Event parsePendingEvent =
+                                    UsageStatsProtoV2.parsePendingEvent(protoInputStream);
                             protoInputStream.end(start);
                             if (parsePendingEvent != null) {
                                 linkedList2.add(parsePendingEvent);
                             }
                         } catch (IOException e) {
-                            Slog.e("UsageStatsProtoV2", "Unable to parse some pending events from proto.", e);
+                            Slog.e(
+                                    "UsageStatsProtoV2",
+                                    "Unable to parse some pending events from proto.",
+                                    e);
                         }
                     }
                 }
@@ -2106,7 +2759,10 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                                 if (i != 19) {
                                     i3 = 20;
                                     if (i != 20) {
-                                        DeviceIdleController$$ExternalSyntheticOutline0.m(i, "Unsupported usage event logging: ", "UsageStatsService");
+                                        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                                                i,
+                                                "Unsupported usage event logging: ",
+                                                "UsageStatsService");
                                         i3 = -1;
                                     }
                                 }
@@ -2122,7 +2778,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
     public static void migrateStatsToSystemCeIfNeededLocked(int i) {
         File file = new File(Environment.getDataSystemCeDirectory(i), "usagestats");
         if (!file.mkdirs() && !file.exists()) {
-            throw new IllegalStateException("Usage stats directory does not exist: " + file.getAbsolutePath());
+            throw new IllegalStateException(
+                    "Usage stats directory does not exist: " + file.getAbsolutePath());
         }
         File file2 = new File(file, "migrated");
         if (file2.exists()) {
@@ -2144,14 +2801,17 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                     throw th;
                 }
             } catch (IOException | NumberFormatException e) {
-                Slog.e("UsageStatsService", "Failed to read migration status file, possibly corrupted.");
+                Slog.e(
+                        "UsageStatsService",
+                        "Failed to read migration status file, possibly corrupted.");
                 deleteRecursively(file);
                 if (file.exists()) {
                     Slog.e("UsageStatsService", "Unable to delete usage stats CE directory.");
                     throw new RuntimeException(e);
                 }
                 if (!file.mkdirs() && !file.exists()) {
-                    throw new IllegalStateException("Usage stats directory does not exist: " + file.getAbsolutePath());
+                    throw new IllegalStateException(
+                            "Usage stats directory does not exist: " + file.getAbsolutePath());
                 }
             }
         }
@@ -2181,14 +2841,18 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         long currentTimeMillis = System.currentTimeMillis();
         if (ENABLE_TIME_CHANGE_CORRECTION) {
             long elapsedRealtime = SystemClock.elapsedRealtime();
-            long j = currentTimeMillis - ((elapsedRealtime - this.mRealTimeSnapshot) + this.mSystemTimeSnapshot);
+            long j =
+                    currentTimeMillis
+                            - ((elapsedRealtime - this.mRealTimeSnapshot)
+                                    + this.mSystemTimeSnapshot);
             if (Math.abs(j) > 2000) {
                 Slog.i("UsageStatsService", "Time changed in by " + (j / 1000) + " seconds");
                 this.mRealTimeSnapshot = elapsedRealtime;
                 this.mSystemTimeSnapshot = currentTimeMillis;
             }
         }
-        event.mTimeStamp = Math.max(0L, event.mTimeStamp - this.mRealTimeSnapshot) + this.mSystemTimeSnapshot;
+        event.mTimeStamp =
+                Math.max(0L, event.mTimeStamp - this.mRealTimeSnapshot) + this.mSystemTimeSnapshot;
     }
 
     public final void flushToDisk() {
@@ -2206,7 +2870,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         for (int i = 0; i < size; i++) {
             int keyAt = this.mUserState.keyAt(i);
             if (this.mUserUnlockedStates.contains(Integer.valueOf(keyAt))) {
-                UserUsageStatsService userUsageStatsService = (UserUsageStatsService) this.mUserState.get(keyAt);
+                UserUsageStatsService userUsageStatsService =
+                        (UserUsageStatsService) this.mUserState.get(keyAt);
                 if (userUsageStatsService != null) {
                     userUsageStatsService.persistActiveStats();
                 }
@@ -2219,7 +2884,9 @@ public final class UsageStatsService extends SystemService implements UserUsageS
 
     public final DevicePolicyManagerInternal getDpmInternal() {
         if (this.mDpmInternal == null) {
-            this.mDpmInternal = (DevicePolicyManagerInternal) LocalServices.getService(DevicePolicyManagerInternal.class);
+            this.mDpmInternal =
+                    (DevicePolicyManagerInternal)
+                            LocalServices.getService(DevicePolicyManagerInternal.class);
         }
         return this.mDpmInternal;
     }
@@ -2239,21 +2906,34 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                 try {
                     UsageEvents usageEvents = null;
                     if (this.mUserUnlockedStates.contains(Integer.valueOf(i))) {
-                        UserUsageStatsService userUsageStatsServiceLocked = getUserUsageStatsServiceLocked(i);
+                        UserUsageStatsService userUsageStatsServiceLocked =
+                                getUserUsageStatsServiceLocked(i);
                         if (userUsageStatsServiceLocked != null) {
-                            usageEvents = userUsageStatsServiceLocked.queryEarliestEventsForPackage(j, currentTimeMillis2, str);
+                            usageEvents =
+                                    userUsageStatsServiceLocked.queryEarliestEventsForPackage(
+                                            j, currentTimeMillis2, str);
                         }
                     } else {
-                        Slog.w("UsageStatsService", "Failed to query earliest package events for locked user " + i);
+                        Slog.w(
+                                "UsageStatsService",
+                                "Failed to query earliest package events for locked user " + i);
                     }
                     if (usageEvents != null) {
                         UsageEvents.Event event = new UsageEvents.Event();
                         if (usageEvents.getNextEvent(event)) {
-                            boolean z = currentTimeMillis2 - event.getTimeStamp() > BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS;
+                            boolean z =
+                                    currentTimeMillis2 - event.getTimeStamp()
+                                            > BackupManagerConstants
+                                                    .DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS;
                             do {
                                 if (event.getEventType() == 1) {
                                     long timeStamp = event.getTimeStamp();
-                                    long j3 = z ? timeStamp + 604800000 : timeStamp + BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS;
+                                    long j3 =
+                                            z
+                                                    ? timeStamp + 604800000
+                                                    : timeStamp
+                                                            + BackupManagerConstants
+                                                                    .DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS;
                                     if (j3 > currentTimeMillis2) {
                                         estimatedLaunchTime = j3;
                                         break;
@@ -2264,7 +2944,11 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                     }
                     estimatedLaunchTime = j2;
                     this.mAppStandby.setEstimatedLaunchTime(str, i, estimatedLaunchTime);
-                    getOrCreateLaunchTimeAlarmQueue(i).addAlarm((estimatedLaunchTime - currentTimeMillis) + SystemClock.elapsedRealtime(), str);
+                    getOrCreateLaunchTimeAlarmQueue(i)
+                            .addAlarm(
+                                    (estimatedLaunchTime - currentTimeMillis)
+                                            + SystemClock.elapsedRealtime(),
+                                    str);
                 } catch (Throwable th2) {
                     th = th2;
                     throw th;
@@ -2294,7 +2978,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             try {
                 launchTimeAlarmQueue = (LaunchTimeAlarmQueue) this.mLaunchTimeAlarmQueues.get(i);
                 if (launchTimeAlarmQueue == null) {
-                    launchTimeAlarmQueue = new LaunchTimeAlarmQueue(i, getContext(), this.mHandler.getLooper());
+                    launchTimeAlarmQueue =
+                            new LaunchTimeAlarmQueue(i, getContext(), this.mHandler.getLooper());
                     this.mLaunchTimeAlarmQueues.put(i, launchTimeAlarmQueue);
                 }
             } catch (Throwable th) {
@@ -2305,24 +2990,39 @@ public final class UsageStatsService extends SystemService implements UserUsageS
     }
 
     public final UserUsageStatsService getUserUsageStatsServiceLocked(int i) {
-        UserUsageStatsService userUsageStatsService = (UserUsageStatsService) this.mUserState.get(i);
+        UserUsageStatsService userUsageStatsService =
+                (UserUsageStatsService) this.mUserState.get(i);
         if (userUsageStatsService == null) {
-            Slog.wtf("UsageStatsService", "Failed to fetch usage stats service for user " + i + ". The user might not have been initialized yet.");
+            Slog.wtf(
+                    "UsageStatsService",
+                    "Failed to fetch usage stats service for user "
+                            + i
+                            + ". The user might not have been initialized yet.");
         }
         return userUsageStatsService;
     }
 
-    public final void initializeUserUsageStatsServiceLocked(int i, long j, HashMap hashMap, boolean z) {
-        UserUsageStatsService userUsageStatsService = new UserUsageStatsService(getContext(), i, new File(Environment.getDataSystemCeDirectory(i), "usagestats"), this);
+    public final void initializeUserUsageStatsServiceLocked(
+            int i, long j, HashMap hashMap, boolean z) {
+        UserUsageStatsService userUsageStatsService =
+                new UserUsageStatsService(
+                        getContext(),
+                        i,
+                        new File(Environment.getDataSystemCeDirectory(i), "usagestats"),
+                        this);
         try {
             userUsageStatsService.init(j, hashMap, z);
             this.mUserState.put(i, userUsageStatsService);
         } catch (Exception e) {
             if (this.mUserManager.isUserUnlocked(i)) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m(i, "Failed to initialized unlocked user ", "UsageStatsService");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        i, "Failed to initialized unlocked user ", "UsageStatsService");
                 throw e;
             }
-            DeviceIdleController$$ExternalSyntheticOutline0.m(i, "Attempted to initialize service for stopped or removed user ", "UsageStatsService");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    i,
+                    "Attempted to initialize service for stopped or removed user ",
+                    "UsageStatsService");
         }
     }
 
@@ -2332,18 +3032,25 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         if (i == 500) {
             getDpmInternal();
             if (this.mShortcutServiceInternal == null) {
-                this.mShortcutServiceInternal = (ShortcutServiceInternal) LocalServices.getService(ShortcutServiceInternal.class);
+                this.mShortcutServiceInternal =
+                        (ShortcutServiceInternal)
+                                LocalServices.getService(ShortcutServiceInternal.class);
             }
-            BroadcastResponseStatsTracker broadcastResponseStatsTracker = this.mResponseStatsTracker;
+            BroadcastResponseStatsTracker broadcastResponseStatsTracker =
+                    this.mResponseStatsTracker;
             Context context = getContext();
             broadcastResponseStatsTracker.getClass();
             RoleManager roleManager = (RoleManager) context.getSystemService(RoleManager.class);
             broadcastResponseStatsTracker.mRoleManager = roleManager;
-            roleManager.addOnRoleHoldersChangedListenerAsUser(BackgroundThread.getExecutor(), broadcastResponseStatsTracker.mRoleHoldersChangedListener, UserHandle.ALL);
+            roleManager.addOnRoleHoldersChangedListenerAsUser(
+                    BackgroundThread.getExecutor(),
+                    broadcastResponseStatsTracker.mRoleHoldersChangedListener,
+                    UserHandle.ALL);
             File file = KERNEL_COUNTER_FILE;
             if (file.exists()) {
                 try {
-                    ActivityManager.getService().registerUidObserver(this.mUidObserver, 3, -1, (String) null);
+                    ActivityManager.getService()
+                            .registerUidObserver(this.mUidObserver, 3, -1, (String) null);
                 } catch (RemoteException e) {
                     throw new RuntimeException(e);
                 }
@@ -2361,12 +3068,14 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         this.mAppOps = (AppOpsManager) getContext().getSystemService("appops");
         this.mUserManager = (UserManager) getContext().getSystemService("user");
         this.mPackageManager = getContext().getPackageManager();
-        this.mPackageManagerInternal = (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
+        this.mPackageManagerInternal =
+                (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
         boolean z = USE_DEDICATED_HANDLER_THREAD;
         if (z) {
             synchronized (UsageStatsHandlerThread.sLock) {
                 if (UsageStatsHandlerThread.sInstance == null) {
-                    UsageStatsHandlerThread usageStatsHandlerThread2 = new UsageStatsHandlerThread(0, "android.usagestats", true);
+                    UsageStatsHandlerThread usageStatsHandlerThread2 =
+                            new UsageStatsHandlerThread(0, "android.usagestats", true);
                     UsageStatsHandlerThread.sInstance = usageStatsHandlerThread2;
                     usageStatsHandlerThread2.start();
                     Looper looper = UsageStatsHandlerThread.sInstance.getLooper();
@@ -2384,10 +3093,15 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         Injector injector = this.mInjector;
         Context context = getContext();
         injector.getClass();
-        AppStandbyInternal newAppStandbyController = AppStandbyInternal.newAppStandbyController(UsageStatsService.class.getClassLoader(), context);
+        AppStandbyInternal newAppStandbyController =
+                AppStandbyInternal.newAppStandbyController(
+                        UsageStatsService.class.getClassLoader(), context);
         this.mAppStandby = newAppStandbyController;
-        this.mResponseStatsTracker = new BroadcastResponseStatsTracker(newAppStandbyController, getContext());
-        this.mAppTimeLimit = new AppTimeLimitController(getContext(), new AnonymousClass2(), this.mHandler.getLooper());
+        this.mResponseStatsTracker =
+                new BroadcastResponseStatsTracker(newAppStandbyController, getContext());
+        this.mAppTimeLimit =
+                new AppTimeLimitController(
+                        getContext(), new AnonymousClass2(), this.mHandler.getLooper());
         this.mAppStandby.addListener(this.mStandbyChangeListener);
         MyPackageMonitor myPackageMonitor = this.mPackageMonitor;
         Context context2 = getContext();
@@ -2396,8 +3110,20 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         myPackageMonitor.register(context2, looper2, userHandle, true);
         IntentFilter intentFilter = new IntentFilter("android.intent.action.USER_REMOVED");
         intentFilter.addAction("android.intent.action.USER_STARTED");
-        getContext().registerReceiverAsUser(new UidRemovedReceiver(this, 1), userHandle, intentFilter, null, z ? this.mHandler : null);
-        getContext().registerReceiverAsUser(new UidRemovedReceiver(this, 0), userHandle, new IntentFilter("android.intent.action.UID_REMOVED"), null, z ? this.mHandler : null);
+        getContext()
+                .registerReceiverAsUser(
+                        new UidRemovedReceiver(this, 1),
+                        userHandle,
+                        intentFilter,
+                        null,
+                        z ? this.mHandler : null);
+        getContext()
+                .registerReceiverAsUser(
+                        new UidRemovedReceiver(this, 0),
+                        userHandle,
+                        new IntentFilter("android.intent.action.UID_REMOVED"),
+                        null,
+                        z ? this.mHandler : null);
         this.mRealTimeSnapshot = SystemClock.elapsedRealtime();
         this.mSystemTimeSnapshot = System.currentTimeMillis();
         publishLocalService(UsageStatsManagerInternal.class, new LocalService());
@@ -2417,7 +3143,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         }
         synchronized (this.mLaunchTimeAlarmQueues) {
             try {
-                LaunchTimeAlarmQueue launchTimeAlarmQueue = (LaunchTimeAlarmQueue) this.mLaunchTimeAlarmQueues.get(i);
+                LaunchTimeAlarmQueue launchTimeAlarmQueue =
+                        (LaunchTimeAlarmQueue) this.mLaunchTimeAlarmQueues.get(i);
                 if (launchTimeAlarmQueue != null) {
                     launchTimeAlarmQueue.removeAllAlarms();
                     this.mLaunchTimeAlarmQueues.remove(i);
@@ -2437,7 +3164,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         if (jobScheduler != null) {
             jobScheduler.forNamespace("usagestats_prune").cancel(i);
         }
-        JobScheduler jobScheduler2 = (JobScheduler) getContext().getSystemService(JobScheduler.class);
+        JobScheduler jobScheduler2 =
+                (JobScheduler) getContext().getSystemService(JobScheduler.class);
         if (jobScheduler2 != null) {
             jobScheduler2.forNamespace("usagestats_mapping").cancel(i);
         }
@@ -2460,7 +3188,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                 UsageEvents.Event event = new UsageEvents.Event(29, SystemClock.elapsedRealtime());
                 event.mPackage = "android";
                 reportEvent(userIdentifier, event);
-                UserUsageStatsService userUsageStatsService = (UserUsageStatsService) this.mUserState.get(userIdentifier);
+                UserUsageStatsService userUsageStatsService =
+                        (UserUsageStatsService) this.mUserState.get(userIdentifier);
                 if (userUsageStatsService != null) {
                     userUsageStatsService.persistActiveStats();
                     userUsageStatsService.mCachedEarlyEvents.clear();
@@ -2469,7 +3198,9 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                 this.mUserState.put(userIdentifier, null);
                 synchronized (this.mLaunchTimeAlarmQueues) {
                     try {
-                        LaunchTimeAlarmQueue launchTimeAlarmQueue = (LaunchTimeAlarmQueue) this.mLaunchTimeAlarmQueues.get(userIdentifier);
+                        LaunchTimeAlarmQueue launchTimeAlarmQueue =
+                                (LaunchTimeAlarmQueue)
+                                        this.mLaunchTimeAlarmQueues.get(userIdentifier);
                         if (launchTimeAlarmQueue != null) {
                             launchTimeAlarmQueue.removeAllAlarms();
                             this.mLaunchTimeAlarmQueues.remove(userIdentifier);
@@ -2487,7 +3218,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         this.mHandler.obtainMessage(5, targetUser.getUserIdentifier(), 0).sendToTarget();
     }
 
-    public final int parseUserIdFromArgs(String[] strArr, int i, IndentingPrintWriter indentingPrintWriter) {
+    public final int parseUserIdFromArgs(
+            String[] strArr, int i, IndentingPrintWriter indentingPrintWriter) {
         try {
             int parseInt = Integer.parseInt(strArr[i + 1]);
             if (this.mUserState.indexOfKey(parseInt) < 0) {
@@ -2511,7 +3243,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         }
         File file = COMMON_USAGE_STATS_DIR;
         if (!file.mkdirs() && !file.exists()) {
-            throw new IllegalStateException("Common usage stats directory does not exist: " + file.getAbsolutePath());
+            throw new IllegalStateException(
+                    "Common usage stats directory does not exist: " + file.getAbsolutePath());
         }
         File file2 = new File(file, "globalcomponentusage");
         AtomicFile atomicFile = new AtomicFile(file2);
@@ -2520,7 +3253,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             try {
                 FileOutputStream startWrite = atomicFile.startWrite();
                 try {
-                    UsageStatsProtoV2.writeGlobalComponentUsage(this.mLastTimeComponentUsedGlobal, startWrite);
+                    UsageStatsProtoV2.writeGlobalComponentUsage(
+                            this.mLastTimeComponentUsedGlobal, startWrite);
                     atomicFile.finishWrite(startWrite);
                 } catch (Exception unused) {
                     fileOutputStream = startWrite;
@@ -2552,7 +3286,9 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                 Slog.e("UsageStatsService", "Failed to create " + file);
                 return;
             } else {
-                Slog.w("UsageStatsService", "User " + i + " was already removed! Discarding pending events");
+                Slog.w(
+                        "UsageStatsService",
+                        "User " + i + " was already removed! Discarding pending events");
                 linkedList.clear();
                 return;
             }
@@ -2569,7 +3305,9 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                     linkedList.clear();
                 } catch (Exception unused) {
                     fileOutputStream = startWrite;
-                    Slog.e("UsageStatsService", "Failed to write " + file2.getAbsolutePath() + " for user " + i);
+                    Slog.e(
+                            "UsageStatsService",
+                            "Failed to write " + file2.getAbsolutePath() + " for user " + i);
                     atomicFile.failWrite(fileOutputStream);
                 } catch (Throwable th) {
                     th = th;
@@ -2594,15 +3332,21 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             try {
                 List list = null;
                 if (!this.mUserUnlockedStates.contains(Integer.valueOf(i))) {
-                    Slog.w("UsageStatsService", "Failed to query configuration stats for locked user " + i);
+                    Slog.w(
+                            "UsageStatsService",
+                            "Failed to query configuration stats for locked user " + i);
                     return null;
                 }
-                UserUsageStatsService userUsageStatsServiceLocked = getUserUsageStatsServiceLocked(i);
+                UserUsageStatsService userUsageStatsServiceLocked =
+                        getUserUsageStatsServiceLocked(i);
                 if (userUsageStatsServiceLocked == null) {
                     return null;
                 }
-                if (UserUsageStatsService.validRange(userUsageStatsServiceLocked.checkAndGetTimeLocked(), j, j2)) {
-                    list = userUsageStatsServiceLocked.queryStats(i2, j, j2, UserUsageStatsService.sConfigStatsCombiner, true);
+                if (UserUsageStatsService.validRange(
+                        userUsageStatsServiceLocked.checkAndGetTimeLocked(), j, j2)) {
+                    list =
+                            userUsageStatsServiceLocked.queryStats(
+                                    i2, j, j2, UserUsageStatsService.sConfigStatsCombiner, true);
                 }
                 return list;
             } finally {
@@ -2618,12 +3362,16 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                     Slog.w("UsageStatsService", "Failed to query event stats for locked user " + i);
                     return null;
                 }
-                UserUsageStatsService userUsageStatsServiceLocked = getUserUsageStatsServiceLocked(i);
+                UserUsageStatsService userUsageStatsServiceLocked =
+                        getUserUsageStatsServiceLocked(i);
                 if (userUsageStatsServiceLocked == null) {
                     return null;
                 }
-                if (UserUsageStatsService.validRange(userUsageStatsServiceLocked.checkAndGetTimeLocked(), j, j2)) {
-                    list = userUsageStatsServiceLocked.queryStats(i2, j, j2, UserUsageStatsService.sEventStatsCombiner, true);
+                if (UserUsageStatsService.validRange(
+                        userUsageStatsServiceLocked.checkAndGetTimeLocked(), j, j2)) {
+                    list =
+                            userUsageStatsServiceLocked.queryStats(
+                                    i2, j, j2, UserUsageStatsService.sEventStatsCombiner, true);
                 }
                 return list;
             } finally {
@@ -2635,10 +3383,13 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         synchronized (this.mLock) {
             try {
                 if (!this.mUserUnlockedStates.contains(Integer.valueOf(i))) {
-                    Slog.w("UsageStatsService", "Failed to query package events for locked user " + i);
+                    Slog.w(
+                            "UsageStatsService",
+                            "Failed to query package events for locked user " + i);
                     return null;
                 }
-                UserUsageStatsService userUsageStatsServiceLocked = getUserUsageStatsServiceLocked(i);
+                UserUsageStatsService userUsageStatsServiceLocked =
+                        getUserUsageStatsServiceLocked(i);
                 if (userUsageStatsServiceLocked == null) {
                     return null;
                 }
@@ -2649,14 +3400,16 @@ public final class UsageStatsService extends SystemService implements UserUsageS
         }
     }
 
-    public final UsageEvents queryEventsWithQueryFilters(int i, long j, long j2, int i2, int[] iArr, ArraySet arraySet) {
+    public final UsageEvents queryEventsWithQueryFilters(
+            int i, long j, long j2, int i2, int[] iArr, ArraySet arraySet) {
         synchronized (this.mLock) {
             try {
                 if (!this.mUserUnlockedStates.contains(Integer.valueOf(i))) {
                     Slog.w("UsageStatsService", "Failed to query events for locked user " + i);
                     return null;
                 }
-                UserUsageStatsService userUsageStatsServiceLocked = getUserUsageStatsServiceLocked(i);
+                UserUsageStatsService userUsageStatsServiceLocked =
+                        getUserUsageStatsServiceLocked(i);
                 if (userUsageStatsServiceLocked == null) {
                     return null;
                 }
@@ -2674,18 +3427,25 @@ public final class UsageStatsService extends SystemService implements UserUsageS
                     Slog.w("UsageStatsService", "Failed to query usage stats for locked user " + i);
                     return null;
                 }
-                UserUsageStatsService userUsageStatsServiceLocked = getUserUsageStatsServiceLocked(i);
+                UserUsageStatsService userUsageStatsServiceLocked =
+                        getUserUsageStatsServiceLocked(i);
                 if (userUsageStatsServiceLocked == null) {
                     return null;
                 }
-                List queryStats = !UserUsageStatsService.validRange(userUsageStatsServiceLocked.checkAndGetTimeLocked(), j, j2) ? null : userUsageStatsServiceLocked.queryStats(i2, j, j2, UserUsageStatsService.sUsageStatsCombiner, true);
+                List queryStats =
+                        !UserUsageStatsService.validRange(
+                                        userUsageStatsServiceLocked.checkAndGetTimeLocked(), j, j2)
+                                ? null
+                                : userUsageStatsServiceLocked.queryStats(
+                                        i2, j, j2, UserUsageStatsService.sUsageStatsCombiner, true);
                 if (queryStats == null) {
                     return null;
                 }
                 if (z) {
                     for (int size = queryStats.size() - 1; size >= 0; size--) {
                         UsageStats usageStats = (UsageStats) queryStats.get(size);
-                        if (this.mPackageManagerInternal.isPackageEphemeral(i, usageStats.mPackageName)) {
+                        if (this.mPackageManagerInternal.isPackageEphemeral(
+                                i, usageStats.mPackageName)) {
                             queryStats.set(size, usageStats.getObfuscatedForInstantApp());
                         }
                     }
@@ -2698,82 +3458,151 @@ public final class UsageStatsService extends SystemService implements UserUsageS
 
     public final void readUsageSourceSetting() {
         synchronized (this.mLock) {
-            this.mUsageSource = Settings.Global.getInt(getContext().getContentResolver(), "app_time_limit_usage_source", 2);
+            this.mUsageSource =
+                    Settings.Global.getInt(
+                            getContext().getContentResolver(), "app_time_limit_usage_source", 2);
         }
     }
 
-    public final void registerAppUsageLimitObserver(int i, int i2, String[] strArr, long j, long j2, PendingIntent pendingIntent, int i3) {
+    public final void registerAppUsageLimitObserver(
+            int i, int i2, String[] strArr, long j, long j2, PendingIntent pendingIntent, int i3) {
         AppTimeLimitController appTimeLimitController = this.mAppTimeLimit;
         if (j < appTimeLimitController.getMinTimeLimit()) {
-            throw new IllegalArgumentException("Time limit must be >= " + appTimeLimitController.getMinTimeLimit());
+            throw new IllegalArgumentException(
+                    "Time limit must be >= " + appTimeLimitController.getMinTimeLimit());
         }
         synchronized (appTimeLimitController.mLock) {
             try {
-                AppTimeLimitController.UserData orCreateUserDataLocked = appTimeLimitController.getOrCreateUserDataLocked(i3);
-                AppTimeLimitController.ObserverAppData orCreateObserverAppDataLocked = appTimeLimitController.getOrCreateObserverAppDataLocked(i);
-                AppTimeLimitController.AppUsageLimitGroup appUsageLimitGroup = (AppTimeLimitController.AppUsageLimitGroup) orCreateObserverAppDataLocked.appUsageLimitGroups.get(i2);
+                AppTimeLimitController.UserData orCreateUserDataLocked =
+                        appTimeLimitController.getOrCreateUserDataLocked(i3);
+                AppTimeLimitController.ObserverAppData orCreateObserverAppDataLocked =
+                        appTimeLimitController.getOrCreateObserverAppDataLocked(i);
+                AppTimeLimitController.AppUsageLimitGroup appUsageLimitGroup =
+                        (AppTimeLimitController.AppUsageLimitGroup)
+                                orCreateObserverAppDataLocked.appUsageLimitGroups.get(i2);
                 if (appUsageLimitGroup != null) {
                     appUsageLimitGroup.remove();
                 }
-                if (orCreateObserverAppDataLocked.appUsageLimitGroups.size() >= appTimeLimitController.getAppUsageLimitObserverPerUidLimit()) {
-                    throw new IllegalStateException("Too many app usage observers added by uid " + i);
+                if (orCreateObserverAppDataLocked.appUsageLimitGroups.size()
+                        >= appTimeLimitController.getAppUsageLimitObserverPerUidLimit()) {
+                    throw new IllegalStateException(
+                            "Too many app usage observers added by uid " + i);
                 }
-                AppTimeLimitController.AppUsageLimitGroup appUsageLimitGroup2 = appTimeLimitController.new AppUsageLimitGroup(orCreateUserDataLocked, orCreateObserverAppDataLocked, i2, strArr, j, j2, j2 >= j ? null : pendingIntent);
+                AppTimeLimitController.AppUsageLimitGroup appUsageLimitGroup2 =
+                        appTimeLimitController
+                        .new AppUsageLimitGroup(
+                                orCreateUserDataLocked,
+                                orCreateObserverAppDataLocked,
+                                i2,
+                                strArr,
+                                j,
+                                j2,
+                                j2 >= j ? null : pendingIntent);
                 orCreateObserverAppDataLocked.appUsageLimitGroups.append(i2, appUsageLimitGroup2);
                 orCreateUserDataLocked.addUsageGroup(appUsageLimitGroup2);
-                AppTimeLimitController.noteActiveLocked(orCreateUserDataLocked, appUsageLimitGroup2, appTimeLimitController.getElapsedRealtime());
+                AppTimeLimitController.noteActiveLocked(
+                        orCreateUserDataLocked,
+                        appUsageLimitGroup2,
+                        appTimeLimitController.getElapsedRealtime());
             } catch (Throwable th) {
                 throw th;
             }
         }
     }
 
-    public final void registerAppUsageObserver(int i, int i2, String[] strArr, long j, PendingIntent pendingIntent, int i3) {
+    public final void registerAppUsageObserver(
+            int i, int i2, String[] strArr, long j, PendingIntent pendingIntent, int i3) {
         AppTimeLimitController appTimeLimitController = this.mAppTimeLimit;
         if (j < appTimeLimitController.getMinTimeLimit()) {
-            throw new IllegalArgumentException("Time limit must be >= " + appTimeLimitController.getMinTimeLimit());
+            throw new IllegalArgumentException(
+                    "Time limit must be >= " + appTimeLimitController.getMinTimeLimit());
         }
         synchronized (appTimeLimitController.mLock) {
             try {
-                AppTimeLimitController.UserData orCreateUserDataLocked = appTimeLimitController.getOrCreateUserDataLocked(i3);
-                AppTimeLimitController.ObserverAppData orCreateObserverAppDataLocked = appTimeLimitController.getOrCreateObserverAppDataLocked(i);
-                AppTimeLimitController.AppUsageGroup appUsageGroup = (AppTimeLimitController.AppUsageGroup) orCreateObserverAppDataLocked.appUsageGroups.get(i2);
+                AppTimeLimitController.UserData orCreateUserDataLocked =
+                        appTimeLimitController.getOrCreateUserDataLocked(i3);
+                AppTimeLimitController.ObserverAppData orCreateObserverAppDataLocked =
+                        appTimeLimitController.getOrCreateObserverAppDataLocked(i);
+                AppTimeLimitController.AppUsageGroup appUsageGroup =
+                        (AppTimeLimitController.AppUsageGroup)
+                                orCreateObserverAppDataLocked.appUsageGroups.get(i2);
                 if (appUsageGroup != null) {
                     appUsageGroup.remove();
                 }
-                if (orCreateObserverAppDataLocked.appUsageGroups.size() >= appTimeLimitController.getAppUsageObserverPerUidLimit()) {
-                    throw new IllegalStateException("Too many app usage observers added by uid " + i);
+                if (orCreateObserverAppDataLocked.appUsageGroups.size()
+                        >= appTimeLimitController.getAppUsageObserverPerUidLimit()) {
+                    throw new IllegalStateException(
+                            "Too many app usage observers added by uid " + i);
                 }
-                AppTimeLimitController.AppUsageGroup appUsageGroup2 = appTimeLimitController.new AppUsageGroup(orCreateUserDataLocked, orCreateObserverAppDataLocked, i2, strArr, j, pendingIntent);
+                AppTimeLimitController.AppUsageGroup appUsageGroup2 =
+                        appTimeLimitController
+                        .new AppUsageGroup(
+                                orCreateUserDataLocked,
+                                orCreateObserverAppDataLocked,
+                                i2,
+                                strArr,
+                                j,
+                                pendingIntent);
                 orCreateObserverAppDataLocked.appUsageGroups.append(i2, appUsageGroup2);
                 orCreateUserDataLocked.addUsageGroup(appUsageGroup2);
-                AppTimeLimitController.noteActiveLocked(orCreateUserDataLocked, appUsageGroup2, appTimeLimitController.getElapsedRealtime());
+                AppTimeLimitController.noteActiveLocked(
+                        orCreateUserDataLocked,
+                        appUsageGroup2,
+                        appTimeLimitController.getElapsedRealtime());
             } catch (Throwable th) {
                 throw th;
             }
         }
     }
 
-    public final void registerUsageSessionObserver(int i, int i2, String[] strArr, long j, long j2, PendingIntent pendingIntent, PendingIntent pendingIntent2, int i3) {
+    public final void registerUsageSessionObserver(
+            int i,
+            int i2,
+            String[] strArr,
+            long j,
+            long j2,
+            PendingIntent pendingIntent,
+            PendingIntent pendingIntent2,
+            int i3) {
         AppTimeLimitController appTimeLimitController = this.mAppTimeLimit;
         if (j < appTimeLimitController.getMinTimeLimit()) {
-            throw new IllegalArgumentException("Time limit must be >= " + appTimeLimitController.getMinTimeLimit());
+            throw new IllegalArgumentException(
+                    "Time limit must be >= " + appTimeLimitController.getMinTimeLimit());
         }
         synchronized (appTimeLimitController.mLock) {
             try {
-                AppTimeLimitController.UserData orCreateUserDataLocked = appTimeLimitController.getOrCreateUserDataLocked(i3);
-                AppTimeLimitController.ObserverAppData orCreateObserverAppDataLocked = appTimeLimitController.getOrCreateObserverAppDataLocked(i);
-                AppTimeLimitController.SessionUsageGroup sessionUsageGroup = (AppTimeLimitController.SessionUsageGroup) orCreateObserverAppDataLocked.sessionUsageGroups.get(i2);
+                AppTimeLimitController.UserData orCreateUserDataLocked =
+                        appTimeLimitController.getOrCreateUserDataLocked(i3);
+                AppTimeLimitController.ObserverAppData orCreateObserverAppDataLocked =
+                        appTimeLimitController.getOrCreateObserverAppDataLocked(i);
+                AppTimeLimitController.SessionUsageGroup sessionUsageGroup =
+                        (AppTimeLimitController.SessionUsageGroup)
+                                orCreateObserverAppDataLocked.sessionUsageGroups.get(i2);
                 if (sessionUsageGroup != null) {
                     sessionUsageGroup.remove();
                 }
-                if (orCreateObserverAppDataLocked.sessionUsageGroups.size() >= appTimeLimitController.getUsageSessionObserverPerUidLimit()) {
-                    throw new IllegalStateException("Too many app usage observers added by uid " + i);
+                if (orCreateObserverAppDataLocked.sessionUsageGroups.size()
+                        >= appTimeLimitController.getUsageSessionObserverPerUidLimit()) {
+                    throw new IllegalStateException(
+                            "Too many app usage observers added by uid " + i);
                 }
-                AppTimeLimitController.SessionUsageGroup sessionUsageGroup2 = appTimeLimitController.new SessionUsageGroup(orCreateUserDataLocked, orCreateObserverAppDataLocked, i2, strArr, j, pendingIntent, j2, pendingIntent2);
+                AppTimeLimitController.SessionUsageGroup sessionUsageGroup2 =
+                        appTimeLimitController
+                        .new SessionUsageGroup(
+                                orCreateUserDataLocked,
+                                orCreateObserverAppDataLocked,
+                                i2,
+                                strArr,
+                                j,
+                                pendingIntent,
+                                j2,
+                                pendingIntent2);
                 orCreateObserverAppDataLocked.sessionUsageGroups.append(i2, sessionUsageGroup2);
                 orCreateUserDataLocked.addUsageGroup(sessionUsageGroup2);
-                AppTimeLimitController.noteActiveLocked(orCreateUserDataLocked, sessionUsageGroup2, appTimeLimitController.getElapsedRealtime());
+                AppTimeLimitController.noteActiveLocked(
+                        orCreateUserDataLocked,
+                        sessionUsageGroup2,
+                        appTimeLimitController.getElapsedRealtime());
             } catch (Throwable th) {
                 throw th;
             }
@@ -2791,7 +3620,9 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             Method dump skipped, instructions count: 607
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.usage.UsageStatsService.reportEvent(int, android.app.usage.UsageEvents$Event):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: com.android.server.usage.UsageStatsService.reportEvent(int,"
+                    + " android.app.usage.UsageEvents$Event):void");
     }
 
     public final void reportEventOrAddToQueue(int i, UsageEvents.Event event) {
@@ -2800,7 +3631,8 @@ public final class UsageStatsService extends SystemService implements UserUsageS
             return;
         }
         if (Trace.isTagEnabled(524288L)) {
-            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "usageStatsQueueEvent(", ") #");
+            StringBuilder m =
+                    BatteryService$$ExternalSyntheticOutline0.m(i, "usageStatsQueueEvent(", ") #");
             m.append(UserUsageStatsService.eventToString(event.mEventType));
             Trace.traceBegin(524288L, m.toString());
         }

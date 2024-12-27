@@ -3,6 +3,7 @@ package com.android.server.pm;
 import android.app.appsearch.AppSearchResult;
 import android.content.pm.ShortcutInfo;
 import android.util.Slog;
+
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -36,14 +37,20 @@ public final /* synthetic */ class ShortcutPackage$$ExternalSyntheticLambda14 im
             case 4:
                 AppSearchResult appSearchResult = (AppSearchResult) obj;
                 if (!appSearchResult.isSuccess()) {
-                    Slog.e("ShortcutService", "Failed to report usage via AppSearch. " + appSearchResult.getErrorMessage());
+                    Slog.e(
+                            "ShortcutService",
+                            "Failed to report usage via AppSearch. "
+                                    + appSearchResult.getErrorMessage());
                     break;
                 }
                 break;
             default:
                 AppSearchResult appSearchResult2 = (AppSearchResult) obj;
                 if (!appSearchResult2.isSuccess()) {
-                    Slog.e("ShortcutService", "Failed to remove shortcuts from AppSearch. " + appSearchResult2.getErrorMessage());
+                    Slog.e(
+                            "ShortcutService",
+                            "Failed to remove shortcuts from AppSearch. "
+                                    + appSearchResult2.getErrorMessage());
                     break;
                 }
                 break;

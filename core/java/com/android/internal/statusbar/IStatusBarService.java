@@ -22,13 +22,12 @@ import android.os.UserHandle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.widget.RemoteViews;
+
 import com.android.internal.carlife.IStatusBarCarLife;
 import com.android.internal.logging.InstanceId;
-import com.android.internal.statusbar.IAddTileResultCallback;
-import com.android.internal.statusbar.ISessionListener;
-import com.android.internal.statusbar.IStatusBar;
-import com.android.internal.statusbar.IUndoMediaTransferCallback;
+
 import com.samsung.android.globalactions.presentation.viewmodel.DefaultActionNames;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -53,13 +52,15 @@ public interface IStatusBarService extends IInterface {
 
     void disable2ForUser(int i, IBinder iBinder, String str, int i2) throws RemoteException;
 
-    void disable2ForUserToType(int i, IBinder iBinder, String str, int i2, int i3) throws RemoteException;
+    void disable2ForUserToType(int i, IBinder iBinder, String str, int i2, int i3)
+            throws RemoteException;
 
     void disable2ToType(int i, IBinder iBinder, String str, int i2) throws RemoteException;
 
     void disableForUser(int i, IBinder iBinder, String str, int i2) throws RemoteException;
 
-    void disableForUserToType(int i, IBinder iBinder, String str, int i2, int i3) throws RemoteException;
+    void disableForUserToType(int i, IBinder iBinder, String str, int i2, int i3)
+            throws RemoteException;
 
     void disableToType(int i, IBinder iBinder, String str, int i2) throws RemoteException;
 
@@ -85,7 +86,8 @@ public interface IStatusBarService extends IInterface {
 
     boolean getQuickSettingPanelExpandStateToType(int i) throws RemoteException;
 
-    void grantInlineReplyUriPermission(String str, Uri uri, UserHandle userHandle, String str2) throws RemoteException;
+    void grantInlineReplyUriPermission(String str, Uri uri, UserHandle userHandle, String str2)
+            throws RemoteException;
 
     void handleSystemKey(KeyEvent keyEvent) throws RemoteException;
 
@@ -113,31 +115,52 @@ public interface IStatusBarService extends IInterface {
 
     void onGlobalActionsShown() throws RemoteException;
 
-    void onNotificationActionClick(String str, int i, Notification.Action action, NotificationVisibility notificationVisibility, boolean z) throws RemoteException;
+    void onNotificationActionClick(
+            String str,
+            int i,
+            Notification.Action action,
+            NotificationVisibility notificationVisibility,
+            boolean z)
+            throws RemoteException;
 
     void onNotificationBubbleChanged(String str, boolean z, int i) throws RemoteException;
 
-    void onNotificationClear(String str, int i, String str2, int i2, int i3, NotificationVisibility notificationVisibility) throws RemoteException;
+    void onNotificationClear(
+            String str,
+            int i,
+            String str2,
+            int i2,
+            int i3,
+            NotificationVisibility notificationVisibility)
+            throws RemoteException;
 
-    void onNotificationClick(String str, NotificationVisibility notificationVisibility) throws RemoteException;
+    void onNotificationClick(String str, NotificationVisibility notificationVisibility)
+            throws RemoteException;
 
     void onNotificationDataUpdateFromPDC(List<String> list) throws RemoteException;
 
     void onNotificationDirectReplied(String str) throws RemoteException;
 
-    void onNotificationError(String str, String str2, int i, int i2, int i3, String str3, int i4) throws RemoteException;
+    void onNotificationError(String str, String str2, int i, int i2, int i3, String str3, int i4)
+            throws RemoteException;
 
-    void onNotificationExpansionChanged(String str, boolean z, boolean z2, int i) throws RemoteException;
+    void onNotificationExpansionChanged(String str, boolean z, boolean z2, int i)
+            throws RemoteException;
 
     void onNotificationFeedbackReceived(String str, Bundle bundle) throws RemoteException;
 
     void onNotificationSettingsViewed(String str) throws RemoteException;
 
-    void onNotificationSmartReplySent(String str, int i, CharSequence charSequence, int i2, boolean z) throws RemoteException;
+    void onNotificationSmartReplySent(
+            String str, int i, CharSequence charSequence, int i2, boolean z) throws RemoteException;
 
-    void onNotificationSmartSuggestionsAdded(String str, int i, int i2, boolean z, boolean z2) throws RemoteException;
+    void onNotificationSmartSuggestionsAdded(String str, int i, int i2, boolean z, boolean z2)
+            throws RemoteException;
 
-    void onNotificationVisibilityChanged(NotificationVisibility[] notificationVisibilityArr, NotificationVisibility[] notificationVisibilityArr2) throws RemoteException;
+    void onNotificationVisibilityChanged(
+            NotificationVisibility[] notificationVisibilityArr,
+            NotificationVisibility[] notificationVisibilityArr2)
+            throws RemoteException;
 
     void onPanelHidden() throws RemoteException;
 
@@ -151,13 +174,15 @@ public interface IStatusBarService extends IInterface {
 
     void rebootByBixby(boolean z) throws RemoteException;
 
-    void registerNearbyMediaDevicesProvider(INearbyMediaDevicesProvider iNearbyMediaDevicesProvider) throws RemoteException;
+    void registerNearbyMediaDevicesProvider(INearbyMediaDevicesProvider iNearbyMediaDevicesProvider)
+            throws RemoteException;
 
     void registerSessionListener(int i, ISessionListener iSessionListener) throws RemoteException;
 
     RegisterStatusBarResult registerStatusBar(IStatusBar iStatusBar) throws RemoteException;
 
-    RegisterStatusBarResult registerStatusBarAsType(IStatusBar iStatusBar, int i) throws RemoteException;
+    RegisterStatusBarResult registerStatusBarAsType(IStatusBar iStatusBar, int i)
+            throws RemoteException;
 
     void registerStatusBarForCarLife(IStatusBarCarLife iStatusBarCarLife) throws RemoteException;
 
@@ -165,9 +190,16 @@ public interface IStatusBarService extends IInterface {
 
     void removeIcon(String str) throws RemoteException;
 
-    void requestAddTile(ComponentName componentName, CharSequence charSequence, Icon icon, int i, IAddTileResultCallback iAddTileResultCallback) throws RemoteException;
+    void requestAddTile(
+            ComponentName componentName,
+            CharSequence charSequence,
+            Icon icon,
+            int i,
+            IAddTileResultCallback iAddTileResultCallback)
+            throws RemoteException;
 
-    void requestTileServiceListeningState(ComponentName componentName, int i) throws RemoteException;
+    void requestTileServiceListeningState(ComponentName componentName, int i)
+            throws RemoteException;
 
     void resetScheduleAutoHide() throws RemoteException;
 
@@ -175,7 +207,8 @@ public interface IStatusBarService extends IInterface {
 
     void sendKeyEventToDesktopTaskbar(KeyEvent keyEvent) throws RemoteException;
 
-    void setBiometicContextListener(IBiometricContextListener iBiometricContextListener) throws RemoteException;
+    void setBiometicContextListener(IBiometricContextListener iBiometricContextListener)
+            throws RemoteException;
 
     void setBlueLightFilter(boolean z, int i) throws RemoteException;
 
@@ -183,19 +216,33 @@ public interface IStatusBarService extends IInterface {
 
     void setIconVisibility(String str, boolean z) throws RemoteException;
 
-    void setImeWindowStatus(int i, IBinder iBinder, int i2, int i3, boolean z) throws RemoteException;
+    void setImeWindowStatus(int i, IBinder iBinder, int i2, int i3, boolean z)
+            throws RemoteException;
 
     void setIndicatorBgColor(int i) throws RemoteException;
 
     void setNavBarMode(int i) throws RemoteException;
 
-    void setNavigationBarShortcut(String str, RemoteViews remoteViews, int i, int i2) throws RemoteException;
+    void setNavigationBarShortcut(String str, RemoteViews remoteViews, int i, int i2)
+            throws RemoteException;
 
     void setPanelExpandStateToType(boolean z, int i) throws RemoteException;
 
-    void setUdfpsRefreshRateCallback(IUdfpsRefreshRateRequestCallback iUdfpsRefreshRateRequestCallback) throws RemoteException;
+    void setUdfpsRefreshRateCallback(
+            IUdfpsRefreshRateRequestCallback iUdfpsRefreshRateRequestCallback)
+            throws RemoteException;
 
-    void showAuthenticationDialog(PromptInfo promptInfo, IBiometricSysuiReceiver iBiometricSysuiReceiver, int[] iArr, boolean z, boolean z2, int i, long j, String str, long j2) throws RemoteException;
+    void showAuthenticationDialog(
+            PromptInfo promptInfo,
+            IBiometricSysuiReceiver iBiometricSysuiReceiver,
+            int[] iArr,
+            boolean z,
+            boolean z2,
+            int i,
+            long j,
+            String str,
+            long j2)
+            throws RemoteException;
 
     void showInattentiveSleepWarning() throws RemoteException;
 
@@ -217,42 +264,44 @@ public interface IStatusBarService extends IInterface {
 
     void togglePanel() throws RemoteException;
 
-    void unregisterNearbyMediaDevicesProvider(INearbyMediaDevicesProvider iNearbyMediaDevicesProvider) throws RemoteException;
+    void unregisterNearbyMediaDevicesProvider(
+            INearbyMediaDevicesProvider iNearbyMediaDevicesProvider) throws RemoteException;
 
     void unregisterSessionListener(int i, ISessionListener iSessionListener) throws RemoteException;
 
-    void updateMediaTapToTransferReceiverDisplay(int i, MediaRoute2Info mediaRoute2Info, Icon icon, CharSequence charSequence) throws RemoteException;
+    void updateMediaTapToTransferReceiverDisplay(
+            int i, MediaRoute2Info mediaRoute2Info, Icon icon, CharSequence charSequence)
+            throws RemoteException;
 
-    void updateMediaTapToTransferSenderDisplay(int i, MediaRoute2Info mediaRoute2Info, IUndoMediaTransferCallback iUndoMediaTransferCallback) throws RemoteException;
+    void updateMediaTapToTransferSenderDisplay(
+            int i,
+            MediaRoute2Info mediaRoute2Info,
+            IUndoMediaTransferCallback iUndoMediaTransferCallback)
+            throws RemoteException;
 
     public static class Default implements IStatusBarService {
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void expandNotificationsPanel() throws RemoteException {
-        }
+        public void expandNotificationsPanel() throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void collapsePanels() throws RemoteException {
-        }
+        public void collapsePanels() throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void togglePanel() throws RemoteException {
-        }
+        public void togglePanel() throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void disable(int what, IBinder token, String pkg) throws RemoteException {
-        }
+        public void disable(int what, IBinder token, String pkg) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void disableForUser(int what, IBinder token, String pkg, int userId) throws RemoteException {
-        }
+        public void disableForUser(int what, IBinder token, String pkg, int userId)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void disable2(int what, IBinder token, String pkg) throws RemoteException {
-        }
+        public void disable2(int what, IBinder token, String pkg) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void disable2ForUser(int what, IBinder token, String pkg, int userId) throws RemoteException {
-        }
+        public void disable2ForUser(int what, IBinder token, String pkg, int userId)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
         public int[] getDisableFlags(IBinder token, int userId) throws RemoteException {
@@ -260,125 +309,142 @@ public interface IStatusBarService extends IInterface {
         }
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void setIcon(String slot, String iconPackage, int iconId, int iconLevel, String contentDescription) throws RemoteException {
-        }
+        public void setIcon(
+                String slot,
+                String iconPackage,
+                int iconId,
+                int iconLevel,
+                String contentDescription)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void setIconVisibility(String slot, boolean visible) throws RemoteException {
-        }
+        public void setIconVisibility(String slot, boolean visible) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void removeIcon(String slot) throws RemoteException {
-        }
+        public void removeIcon(String slot) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void setImeWindowStatus(int displayId, IBinder token, int vis, int backDisposition, boolean showImeSwitcher) throws RemoteException {
-        }
+        public void setImeWindowStatus(
+                int displayId, IBinder token, int vis, int backDisposition, boolean showImeSwitcher)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void expandSettingsPanel(String subPanel) throws RemoteException {
-        }
+        public void expandSettingsPanel(String subPanel) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public RegisterStatusBarResult registerStatusBar(IStatusBar callbacks) throws RemoteException {
+        public RegisterStatusBarResult registerStatusBar(IStatusBar callbacks)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void onPanelRevealed(boolean clearNotificationEffects, int numItems) throws RemoteException {
-        }
+        public void onPanelRevealed(boolean clearNotificationEffects, int numItems)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void onPanelHidden() throws RemoteException {
-        }
+        public void onPanelHidden() throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void clearNotificationEffects() throws RemoteException {
-        }
+        public void clearNotificationEffects() throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void onNotificationClick(String key, NotificationVisibility nv) throws RemoteException {
-        }
+        public void onNotificationClick(String key, NotificationVisibility nv)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void onNotificationActionClick(String key, int actionIndex, Notification.Action action, NotificationVisibility nv, boolean generatedByAssistant) throws RemoteException {
-        }
+        public void onNotificationActionClick(
+                String key,
+                int actionIndex,
+                Notification.Action action,
+                NotificationVisibility nv,
+                boolean generatedByAssistant)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void onNotificationError(String pkg, String tag, int id, int uid, int initialPid, String message, int userId) throws RemoteException {
-        }
+        public void onNotificationError(
+                String pkg, String tag, int id, int uid, int initialPid, String message, int userId)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void onClearAllNotifications(int userId) throws RemoteException {
-        }
+        public void onClearAllNotifications(int userId) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void onNotificationClear(String pkg, int userId, String key, int dismissalSurface, int dismissalSentiment, NotificationVisibility nv) throws RemoteException {
-        }
+        public void onNotificationClear(
+                String pkg,
+                int userId,
+                String key,
+                int dismissalSurface,
+                int dismissalSentiment,
+                NotificationVisibility nv)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void onNotificationVisibilityChanged(NotificationVisibility[] newlyVisibleKeys, NotificationVisibility[] noLongerVisibleKeys) throws RemoteException {
-        }
+        public void onNotificationVisibilityChanged(
+                NotificationVisibility[] newlyVisibleKeys,
+                NotificationVisibility[] noLongerVisibleKeys)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void onNotificationExpansionChanged(String key, boolean userAction, boolean expanded, int notificationLocation) throws RemoteException {
-        }
+        public void onNotificationExpansionChanged(
+                String key, boolean userAction, boolean expanded, int notificationLocation)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void onNotificationDirectReplied(String key) throws RemoteException {
-        }
+        public void onNotificationDirectReplied(String key) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void onNotificationSmartSuggestionsAdded(String key, int smartReplyCount, int smartActionCount, boolean generatedByAsssistant, boolean editBeforeSending) throws RemoteException {
-        }
+        public void onNotificationSmartSuggestionsAdded(
+                String key,
+                int smartReplyCount,
+                int smartActionCount,
+                boolean generatedByAsssistant,
+                boolean editBeforeSending)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void onNotificationSmartReplySent(String key, int replyIndex, CharSequence reply, int notificationLocation, boolean modifiedBeforeSending) throws RemoteException {
-        }
+        public void onNotificationSmartReplySent(
+                String key,
+                int replyIndex,
+                CharSequence reply,
+                int notificationLocation,
+                boolean modifiedBeforeSending)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void onNotificationSettingsViewed(String key) throws RemoteException {
-        }
+        public void onNotificationSettingsViewed(String key) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void onNotificationBubbleChanged(String key, boolean isBubble, int flags) throws RemoteException {
-        }
+        public void onNotificationBubbleChanged(String key, boolean isBubble, int flags)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void onBubbleMetadataFlagChanged(String key, int flags) throws RemoteException {
-        }
+        public void onBubbleMetadataFlagChanged(String key, int flags) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void hideCurrentInputMethodForBubbles(int displayId) throws RemoteException {
-        }
+        public void hideCurrentInputMethodForBubbles(int displayId) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void grantInlineReplyUriPermission(String key, Uri uri, UserHandle user, String packageName) throws RemoteException {
-        }
+        public void grantInlineReplyUriPermission(
+                String key, Uri uri, UserHandle user, String packageName) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void clearInlineReplyUriPermissions(String key) throws RemoteException {
-        }
+        public void clearInlineReplyUriPermissions(String key) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void onNotificationFeedbackReceived(String key, Bundle feedback) throws RemoteException {
-        }
+        public void onNotificationFeedbackReceived(String key, Bundle feedback)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void onGlobalActionsShown() throws RemoteException {
-        }
+        public void onGlobalActionsShown() throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void onGlobalActionsHidden() throws RemoteException {
-        }
+        public void onGlobalActionsHidden() throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void shutdown() throws RemoteException {
-        }
+        public void shutdown() throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void reboot(boolean safeMode) throws RemoteException {
-        }
+        public void reboot(boolean safeMode) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
         public boolean isFOTAAvailableForGlobalActions() throws RemoteException {
@@ -386,24 +452,19 @@ public interface IStatusBarService extends IInterface {
         }
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void restart() throws RemoteException {
-        }
+        public void restart() throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void addTile(ComponentName tile) throws RemoteException {
-        }
+        public void addTile(ComponentName tile) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void remTile(ComponentName tile) throws RemoteException {
-        }
+        public void remTile(ComponentName tile) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void clickTile(ComponentName tile) throws RemoteException {
-        }
+        public void clickTile(ComponentName tile) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void handleSystemKey(KeyEvent key) throws RemoteException {
-        }
+        public void handleSystemKey(KeyEvent key) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
         public int getLastSystemKey() throws RemoteException {
@@ -411,56 +472,56 @@ public interface IStatusBarService extends IInterface {
         }
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void showPinningEnterExitToast(boolean entering) throws RemoteException {
-        }
+        public void showPinningEnterExitToast(boolean entering) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void showPinningEscapeToast() throws RemoteException {
-        }
+        public void showPinningEscapeToast() throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void showAuthenticationDialog(PromptInfo promptInfo, IBiometricSysuiReceiver sysuiReceiver, int[] sensorIds, boolean credentialAllowed, boolean requireConfirmation, int userId, long operationId, String opPackageName, long requestId) throws RemoteException {
-        }
+        public void showAuthenticationDialog(
+                PromptInfo promptInfo,
+                IBiometricSysuiReceiver sysuiReceiver,
+                int[] sensorIds,
+                boolean credentialAllowed,
+                boolean requireConfirmation,
+                int userId,
+                long operationId,
+                String opPackageName,
+                long requestId)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void onBiometricAuthenticated(int modality) throws RemoteException {
-        }
+        public void onBiometricAuthenticated(int modality) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void onBiometricHelp(int modality, String message) throws RemoteException {
-        }
+        public void onBiometricHelp(int modality, String message) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void onBiometricError(int modality, int error, int vendorCode) throws RemoteException {
-        }
+        public void onBiometricError(int modality, int error, int vendorCode)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void hideAuthenticationDialog(long requestId) throws RemoteException {
-        }
+        public void hideAuthenticationDialog(long requestId) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void setBiometicContextListener(IBiometricContextListener listener) throws RemoteException {
-        }
+        public void setBiometicContextListener(IBiometricContextListener listener)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void setUdfpsRefreshRateCallback(IUdfpsRefreshRateRequestCallback callback) throws RemoteException {
-        }
+        public void setUdfpsRefreshRateCallback(IUdfpsRefreshRateRequestCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void showInattentiveSleepWarning() throws RemoteException {
-        }
+        public void showInattentiveSleepWarning() throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void dismissInattentiveSleepWarning(boolean animated) throws RemoteException {
-        }
+        public void dismissInattentiveSleepWarning(boolean animated) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void startTracing() throws RemoteException {
-        }
+        public void startTracing() throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void stopTracing() throws RemoteException {
-        }
+        public void stopTracing() throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
         public boolean isTracing() throws RemoteException {
@@ -468,24 +529,26 @@ public interface IStatusBarService extends IInterface {
         }
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void suppressAmbientDisplay(boolean suppress) throws RemoteException {
-        }
+        public void suppressAmbientDisplay(boolean suppress) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void requestTileServiceListeningState(ComponentName componentName, int userId) throws RemoteException {
-        }
+        public void requestTileServiceListeningState(ComponentName componentName, int userId)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void requestAddTile(ComponentName componentName, CharSequence label, Icon icon, int userId, IAddTileResultCallback callback) throws RemoteException {
-        }
+        public void requestAddTile(
+                ComponentName componentName,
+                CharSequence label,
+                Icon icon,
+                int userId,
+                IAddTileResultCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void cancelRequestAddTile(String packageName) throws RemoteException {
-        }
+        public void cancelRequestAddTile(String packageName) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void setNavBarMode(int navBarMode) throws RemoteException {
-        }
+        public void setNavBarMode(int navBarMode) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
         public int getNavBarMode() throws RemoteException {
@@ -493,70 +556,75 @@ public interface IStatusBarService extends IInterface {
         }
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void registerSessionListener(int sessionFlags, ISessionListener listener) throws RemoteException {
-        }
+        public void registerSessionListener(int sessionFlags, ISessionListener listener)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void unregisterSessionListener(int sessionFlags, ISessionListener listener) throws RemoteException {
-        }
+        public void unregisterSessionListener(int sessionFlags, ISessionListener listener)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void onSessionStarted(int sessionType, InstanceId instanceId) throws RemoteException {
-        }
+        public void onSessionStarted(int sessionType, InstanceId instanceId)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void onSessionEnded(int sessionType, InstanceId instanceId) throws RemoteException {
-        }
+        public void onSessionEnded(int sessionType, InstanceId instanceId) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void updateMediaTapToTransferSenderDisplay(int displayState, MediaRoute2Info routeInfo, IUndoMediaTransferCallback undoCallback) throws RemoteException {
-        }
+        public void updateMediaTapToTransferSenderDisplay(
+                int displayState,
+                MediaRoute2Info routeInfo,
+                IUndoMediaTransferCallback undoCallback)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void updateMediaTapToTransferReceiverDisplay(int displayState, MediaRoute2Info routeInfo, Icon appIcon, CharSequence appName) throws RemoteException {
-        }
+        public void updateMediaTapToTransferReceiverDisplay(
+                int displayState, MediaRoute2Info routeInfo, Icon appIcon, CharSequence appName)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void registerNearbyMediaDevicesProvider(INearbyMediaDevicesProvider provider) throws RemoteException {
-        }
+        public void registerNearbyMediaDevicesProvider(INearbyMediaDevicesProvider provider)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void unregisterNearbyMediaDevicesProvider(INearbyMediaDevicesProvider provider) throws RemoteException {
-        }
+        public void unregisterNearbyMediaDevicesProvider(INearbyMediaDevicesProvider provider)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void showRearDisplayDialog(int currentBaseState) throws RemoteException {
-        }
+        public void showRearDisplayDialog(int currentBaseState) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void disableToType(int what, IBinder token, String pkg, int barType) throws RemoteException {
-        }
+        public void disableToType(int what, IBinder token, String pkg, int barType)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void disableForUserToType(int what, IBinder token, String pkg, int userId, int barType) throws RemoteException {
-        }
+        public void disableForUserToType(
+                int what, IBinder token, String pkg, int userId, int barType)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void disable2ToType(int what, IBinder token, String pkg, int barType) throws RemoteException {
-        }
+        public void disable2ToType(int what, IBinder token, String pkg, int barType)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void disable2ForUserToType(int what, IBinder token, String pkg, int userId, int barType) throws RemoteException {
-        }
+        public void disable2ForUserToType(
+                int what, IBinder token, String pkg, int userId, int barType)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public int[] getDisableFlagsToType(IBinder token, int userId, int barType) throws RemoteException {
+        public int[] getDisableFlagsToType(IBinder token, int userId, int barType)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public RegisterStatusBarResult registerStatusBarAsType(IStatusBar callbacks, int barType) throws RemoteException {
+        public RegisterStatusBarResult registerStatusBarAsType(IStatusBar callbacks, int barType)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void setPanelExpandStateToType(boolean state, int barType) throws RemoteException {
-        }
+        public void setPanelExpandStateToType(boolean state, int barType) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
         public boolean getPanelExpandStateToType(int barType) throws RemoteException {
@@ -569,32 +637,28 @@ public interface IStatusBarService extends IInterface {
         }
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void expandNotificationsPanelToType(int barType) throws RemoteException {
-        }
+        public void expandNotificationsPanelToType(int barType) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void collapsePanelsToType(int barType) throws RemoteException {
-        }
+        public void collapsePanelsToType(int barType) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void expandSettingsPanelToType(String subPanel, int barType) throws RemoteException {
-        }
+        public void expandSettingsPanelToType(String subPanel, int barType)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void setNavigationBarShortcut(String requestClass, RemoteViews remoteViews, int position, int priority) throws RemoteException {
-        }
+        public void setNavigationBarShortcut(
+                String requestClass, RemoteViews remoteViews, int position, int priority)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void resetScheduleAutoHide() throws RemoteException {
-        }
+        public void resetScheduleAutoHide() throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void setIndicatorBgColor(int color) throws RemoteException {
-        }
+        public void setIndicatorBgColor(int color) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void setBlueLightFilter(boolean on, int intensity) throws RemoteException {
-        }
+        public void setBlueLightFilter(boolean on, int intensity) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
         public boolean isSysUiSafeModeEnabled() throws RemoteException {
@@ -602,24 +666,21 @@ public interface IStatusBarService extends IInterface {
         }
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void shutdownByBixby() throws RemoteException {
-        }
+        public void shutdownByBixby() throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void rebootByBixby(boolean safeMode) throws RemoteException {
-        }
+        public void rebootByBixby(boolean safeMode) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void registerStatusBarForCarLife(IStatusBarCarLife callbacks) throws RemoteException {
-        }
+        public void registerStatusBarForCarLife(IStatusBarCarLife callbacks)
+                throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void sendKeyEventToDesktopTaskbar(KeyEvent event) throws RemoteException {
-        }
+        public void sendKeyEventToDesktopTaskbar(KeyEvent event) throws RemoteException {}
 
         @Override // com.android.internal.statusbar.IStatusBarService
-        public void onNotificationDataUpdateFromPDC(List<String> importantContacts) throws RemoteException {
-        }
+        public void onNotificationDataUpdateFromPDC(List<String> importantContacts)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -627,7 +688,7 @@ public interface IStatusBarService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IStatusBarService {
+    public abstract static class Stub extends Binder implements IStatusBarService {
         public static final String DESCRIPTOR = "com.android.internal.statusbar.IStatusBarService";
         static final int TRANSACTION_addTile = 41;
         static final int TRANSACTION_cancelRequestAddTile = 63;
@@ -951,7 +1012,8 @@ public interface IStatusBarService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -1076,7 +1138,9 @@ public interface IStatusBarService extends IInterface {
                     return true;
                 case 18:
                     String _arg013 = data.readString();
-                    NotificationVisibility _arg110 = (NotificationVisibility) data.readTypedObject(NotificationVisibility.CREATOR);
+                    NotificationVisibility _arg110 =
+                            (NotificationVisibility)
+                                    data.readTypedObject(NotificationVisibility.CREATOR);
                     data.enforceNoDataAvail();
                     onNotificationClick(_arg013, _arg110);
                     reply.writeNoException();
@@ -1084,8 +1148,11 @@ public interface IStatusBarService extends IInterface {
                 case 19:
                     String _arg014 = data.readString();
                     int _arg111 = data.readInt();
-                    Notification.Action _arg27 = (Notification.Action) data.readTypedObject(Notification.Action.CREATOR);
-                    NotificationVisibility _arg35 = (NotificationVisibility) data.readTypedObject(NotificationVisibility.CREATOR);
+                    Notification.Action _arg27 =
+                            (Notification.Action) data.readTypedObject(Notification.Action.CREATOR);
+                    NotificationVisibility _arg35 =
+                            (NotificationVisibility)
+                                    data.readTypedObject(NotificationVisibility.CREATOR);
                     boolean _arg43 = data.readBoolean();
                     data.enforceNoDataAvail();
                     onNotificationActionClick(_arg014, _arg111, _arg27, _arg35, _arg43);
@@ -1115,14 +1182,20 @@ public interface IStatusBarService extends IInterface {
                     String _arg29 = data.readString();
                     int _arg37 = data.readInt();
                     int _arg45 = data.readInt();
-                    NotificationVisibility _arg52 = (NotificationVisibility) data.readTypedObject(NotificationVisibility.CREATOR);
+                    NotificationVisibility _arg52 =
+                            (NotificationVisibility)
+                                    data.readTypedObject(NotificationVisibility.CREATOR);
                     data.enforceNoDataAvail();
                     onNotificationClear(_arg017, _arg113, _arg29, _arg37, _arg45, _arg52);
                     reply.writeNoException();
                     return true;
                 case 23:
-                    NotificationVisibility[] _arg018 = (NotificationVisibility[]) data.createTypedArray(NotificationVisibility.CREATOR);
-                    NotificationVisibility[] _arg114 = (NotificationVisibility[]) data.createTypedArray(NotificationVisibility.CREATOR);
+                    NotificationVisibility[] _arg018 =
+                            (NotificationVisibility[])
+                                    data.createTypedArray(NotificationVisibility.CREATOR);
+                    NotificationVisibility[] _arg114 =
+                            (NotificationVisibility[])
+                                    data.createTypedArray(NotificationVisibility.CREATOR);
                     data.enforceNoDataAvail();
                     onNotificationVisibilityChanged(_arg018, _arg114);
                     reply.writeNoException();
@@ -1155,7 +1228,8 @@ public interface IStatusBarService extends IInterface {
                 case 27:
                     String _arg022 = data.readString();
                     int _arg117 = data.readInt();
-                    CharSequence _arg212 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg212 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     int _arg310 = data.readInt();
                     boolean _arg47 = data.readBoolean();
                     data.enforceNoDataAvail();
@@ -1238,19 +1312,22 @@ public interface IStatusBarService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 41:
-                    ComponentName _arg031 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg031 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     addTile(_arg031);
                     reply.writeNoException();
                     return true;
                 case 42:
-                    ComponentName _arg032 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg032 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     remTile(_arg032);
                     reply.writeNoException();
                     return true;
                 case 43:
-                    ComponentName _arg033 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg033 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     clickTile(_arg033);
                     reply.writeNoException();
@@ -1278,7 +1355,8 @@ public interface IStatusBarService extends IInterface {
                     return true;
                 case 48:
                     PromptInfo _arg036 = (PromptInfo) data.readTypedObject(PromptInfo.CREATOR);
-                    IBiometricSysuiReceiver _arg122 = IBiometricSysuiReceiver.Stub.asInterface(data.readStrongBinder());
+                    IBiometricSysuiReceiver _arg122 =
+                            IBiometricSysuiReceiver.Stub.asInterface(data.readStrongBinder());
                     int[] _arg215 = data.createIntArray();
                     boolean _arg312 = data.readBoolean();
                     boolean _arg48 = data.readBoolean();
@@ -1287,7 +1365,9 @@ public interface IStatusBarService extends IInterface {
                     String _arg7 = data.readString();
                     long _arg8 = data.readLong();
                     data.enforceNoDataAvail();
-                    showAuthenticationDialog(_arg036, _arg122, _arg215, _arg312, _arg48, _arg53, _arg62, _arg7, _arg8);
+                    showAuthenticationDialog(
+                            _arg036, _arg122, _arg215, _arg312, _arg48, _arg53, _arg62, _arg7,
+                            _arg8);
                     reply.writeNoException();
                     return true;
                 case 49:
@@ -1318,13 +1398,16 @@ public interface IStatusBarService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 53:
-                    IBiometricContextListener _arg041 = IBiometricContextListener.Stub.asInterface(data.readStrongBinder());
+                    IBiometricContextListener _arg041 =
+                            IBiometricContextListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setBiometicContextListener(_arg041);
                     reply.writeNoException();
                     return true;
                 case 54:
-                    IUdfpsRefreshRateRequestCallback _arg042 = IUdfpsRefreshRateRequestCallback.Stub.asInterface(data.readStrongBinder());
+                    IUdfpsRefreshRateRequestCallback _arg042 =
+                            IUdfpsRefreshRateRequestCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setUdfpsRefreshRateCallback(_arg042);
                     reply.writeNoException();
@@ -1359,18 +1442,22 @@ public interface IStatusBarService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 61:
-                    ComponentName _arg045 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg045 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg125 = data.readInt();
                     data.enforceNoDataAvail();
                     requestTileServiceListeningState(_arg045, _arg125);
                     reply.writeNoException();
                     return true;
                 case 62:
-                    ComponentName _arg046 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
-                    CharSequence _arg126 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    ComponentName _arg046 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    CharSequence _arg126 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     Icon _arg217 = (Icon) data.readTypedObject(Icon.CREATOR);
                     int _arg313 = data.readInt();
-                    IAddTileResultCallback _arg49 = IAddTileResultCallback.Stub.asInterface(data.readStrongBinder());
+                    IAddTileResultCallback _arg49 =
+                            IAddTileResultCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestAddTile(_arg046, _arg126, _arg217, _arg313, _arg49);
                     reply.writeNoException();
@@ -1394,14 +1481,16 @@ public interface IStatusBarService extends IInterface {
                     return true;
                 case 66:
                     int _arg049 = data.readInt();
-                    ISessionListener _arg127 = ISessionListener.Stub.asInterface(data.readStrongBinder());
+                    ISessionListener _arg127 =
+                            ISessionListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerSessionListener(_arg049, _arg127);
                     reply.writeNoException();
                     return true;
                 case 67:
                     int _arg050 = data.readInt();
-                    ISessionListener _arg128 = ISessionListener.Stub.asInterface(data.readStrongBinder());
+                    ISessionListener _arg128 =
+                            ISessionListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterSessionListener(_arg050, _arg128);
                     reply.writeNoException();
@@ -1422,29 +1511,35 @@ public interface IStatusBarService extends IInterface {
                     return true;
                 case 70:
                     int _arg053 = data.readInt();
-                    MediaRoute2Info _arg131 = (MediaRoute2Info) data.readTypedObject(MediaRoute2Info.CREATOR);
-                    IUndoMediaTransferCallback _arg218 = IUndoMediaTransferCallback.Stub.asInterface(data.readStrongBinder());
+                    MediaRoute2Info _arg131 =
+                            (MediaRoute2Info) data.readTypedObject(MediaRoute2Info.CREATOR);
+                    IUndoMediaTransferCallback _arg218 =
+                            IUndoMediaTransferCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     updateMediaTapToTransferSenderDisplay(_arg053, _arg131, _arg218);
                     reply.writeNoException();
                     return true;
                 case 71:
                     int _arg054 = data.readInt();
-                    MediaRoute2Info _arg132 = (MediaRoute2Info) data.readTypedObject(MediaRoute2Info.CREATOR);
+                    MediaRoute2Info _arg132 =
+                            (MediaRoute2Info) data.readTypedObject(MediaRoute2Info.CREATOR);
                     Icon _arg219 = (Icon) data.readTypedObject(Icon.CREATOR);
-                    CharSequence _arg314 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg314 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     updateMediaTapToTransferReceiverDisplay(_arg054, _arg132, _arg219, _arg314);
                     reply.writeNoException();
                     return true;
                 case 72:
-                    INearbyMediaDevicesProvider _arg055 = INearbyMediaDevicesProvider.Stub.asInterface(data.readStrongBinder());
+                    INearbyMediaDevicesProvider _arg055 =
+                            INearbyMediaDevicesProvider.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerNearbyMediaDevicesProvider(_arg055);
                     reply.writeNoException();
                     return true;
                 case 73:
-                    INearbyMediaDevicesProvider _arg056 = INearbyMediaDevicesProvider.Stub.asInterface(data.readStrongBinder());
+                    INearbyMediaDevicesProvider _arg056 =
+                            INearbyMediaDevicesProvider.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterNearbyMediaDevicesProvider(_arg056);
                     reply.writeNoException();
@@ -1592,7 +1687,8 @@ public interface IStatusBarService extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 94:
-                    IStatusBarCarLife _arg074 = IStatusBarCarLife.Stub.asInterface(data.readStrongBinder());
+                    IStatusBarCarLife _arg074 =
+                            IStatusBarCarLife.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerStatusBarForCarLife(_arg074);
                     reply.writeNoException();
@@ -1690,7 +1786,8 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void disableForUser(int what, IBinder token, String pkg, int userId) throws RemoteException {
+            public void disableForUser(int what, IBinder token, String pkg, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1725,7 +1822,8 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void disable2ForUser(int what, IBinder token, String pkg, int userId) throws RemoteException {
+            public void disable2ForUser(int what, IBinder token, String pkg, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1761,7 +1859,13 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void setIcon(String slot, String iconPackage, int iconId, int iconLevel, String contentDescription) throws RemoteException {
+            public void setIcon(
+                    String slot,
+                    String iconPackage,
+                    int iconId,
+                    int iconLevel,
+                    String contentDescription)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1811,7 +1915,13 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void setImeWindowStatus(int displayId, IBinder token, int vis, int backDisposition, boolean showImeSwitcher) throws RemoteException {
+            public void setImeWindowStatus(
+                    int displayId,
+                    IBinder token,
+                    int vis,
+                    int backDisposition,
+                    boolean showImeSwitcher)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1845,7 +1955,8 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public RegisterStatusBarResult registerStatusBar(IStatusBar callbacks) throws RemoteException {
+            public RegisterStatusBarResult registerStatusBar(IStatusBar callbacks)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1853,7 +1964,9 @@ public interface IStatusBarService extends IInterface {
                     _data.writeStrongInterface(callbacks);
                     this.mRemote.transact(14, _data, _reply, 0);
                     _reply.readException();
-                    RegisterStatusBarResult _result = (RegisterStatusBarResult) _reply.readTypedObject(RegisterStatusBarResult.CREATOR);
+                    RegisterStatusBarResult _result =
+                            (RegisterStatusBarResult)
+                                    _reply.readTypedObject(RegisterStatusBarResult.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1862,7 +1975,8 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void onPanelRevealed(boolean clearNotificationEffects, int numItems) throws RemoteException {
+            public void onPanelRevealed(boolean clearNotificationEffects, int numItems)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1903,7 +2017,8 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void onNotificationClick(String key, NotificationVisibility nv) throws RemoteException {
+            public void onNotificationClick(String key, NotificationVisibility nv)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1919,7 +2034,13 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void onNotificationActionClick(String key, int actionIndex, Notification.Action action, NotificationVisibility nv, boolean generatedByAssistant) throws RemoteException {
+            public void onNotificationActionClick(
+                    String key,
+                    int actionIndex,
+                    Notification.Action action,
+                    NotificationVisibility nv,
+                    boolean generatedByAssistant)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1938,7 +2059,15 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void onNotificationError(String pkg, String tag, int id, int uid, int initialPid, String message, int userId) throws RemoteException {
+            public void onNotificationError(
+                    String pkg,
+                    String tag,
+                    int id,
+                    int uid,
+                    int initialPid,
+                    String message,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1974,7 +2103,14 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void onNotificationClear(String pkg, int userId, String key, int dismissalSurface, int dismissalSentiment, NotificationVisibility nv) throws RemoteException {
+            public void onNotificationClear(
+                    String pkg,
+                    int userId,
+                    String key,
+                    int dismissalSurface,
+                    int dismissalSentiment,
+                    NotificationVisibility nv)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1994,7 +2130,10 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void onNotificationVisibilityChanged(NotificationVisibility[] newlyVisibleKeys, NotificationVisibility[] noLongerVisibleKeys) throws RemoteException {
+            public void onNotificationVisibilityChanged(
+                    NotificationVisibility[] newlyVisibleKeys,
+                    NotificationVisibility[] noLongerVisibleKeys)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2010,7 +2149,9 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void onNotificationExpansionChanged(String key, boolean userAction, boolean expanded, int notificationLocation) throws RemoteException {
+            public void onNotificationExpansionChanged(
+                    String key, boolean userAction, boolean expanded, int notificationLocation)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2043,7 +2184,13 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void onNotificationSmartSuggestionsAdded(String key, int smartReplyCount, int smartActionCount, boolean generatedByAsssistant, boolean editBeforeSending) throws RemoteException {
+            public void onNotificationSmartSuggestionsAdded(
+                    String key,
+                    int smartReplyCount,
+                    int smartActionCount,
+                    boolean generatedByAsssistant,
+                    boolean editBeforeSending)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2062,7 +2209,13 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void onNotificationSmartReplySent(String key, int replyIndex, CharSequence reply, int notificationLocation, boolean modifiedBeforeSending) throws RemoteException {
+            public void onNotificationSmartReplySent(
+                    String key,
+                    int replyIndex,
+                    CharSequence reply,
+                    int notificationLocation,
+                    boolean modifiedBeforeSending)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2101,7 +2254,8 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void onNotificationBubbleChanged(String key, boolean isBubble, int flags) throws RemoteException {
+            public void onNotificationBubbleChanged(String key, boolean isBubble, int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2149,7 +2303,9 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void grantInlineReplyUriPermission(String key, Uri uri, UserHandle user, String packageName) throws RemoteException {
+            public void grantInlineReplyUriPermission(
+                    String key, Uri uri, UserHandle user, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2179,7 +2335,8 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void onNotificationFeedbackReceived(String key, Bundle feedback) throws RemoteException {
+            public void onNotificationFeedbackReceived(String key, Bundle feedback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2387,7 +2544,17 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void showAuthenticationDialog(PromptInfo promptInfo, IBiometricSysuiReceiver sysuiReceiver, int[] sensorIds, boolean credentialAllowed, boolean requireConfirmation, int userId, long operationId, String opPackageName, long requestId) throws RemoteException {
+            public void showAuthenticationDialog(
+                    PromptInfo promptInfo,
+                    IBiometricSysuiReceiver sysuiReceiver,
+                    int[] sensorIds,
+                    boolean credentialAllowed,
+                    boolean requireConfirmation,
+                    int userId,
+                    long operationId,
+                    String opPackageName,
+                    long requestId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2502,7 +2669,8 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void onBiometricError(int modality, int error, int vendorCode) throws RemoteException {
+            public void onBiometricError(int modality, int error, int vendorCode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2534,7 +2702,8 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void setBiometicContextListener(IBiometricContextListener listener) throws RemoteException {
+            public void setBiometicContextListener(IBiometricContextListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2549,7 +2718,8 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void setUdfpsRefreshRateCallback(IUdfpsRefreshRateRequestCallback callback) throws RemoteException {
+            public void setUdfpsRefreshRateCallback(IUdfpsRefreshRateRequestCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2652,7 +2822,8 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void requestTileServiceListeningState(ComponentName componentName, int userId) throws RemoteException {
+            public void requestTileServiceListeningState(ComponentName componentName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2668,7 +2839,13 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void requestAddTile(ComponentName componentName, CharSequence label, Icon icon, int userId, IAddTileResultCallback callback) throws RemoteException {
+            public void requestAddTile(
+                    ComponentName componentName,
+                    CharSequence label,
+                    Icon icon,
+                    int userId,
+                    IAddTileResultCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2738,7 +2915,8 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void registerSessionListener(int sessionFlags, ISessionListener listener) throws RemoteException {
+            public void registerSessionListener(int sessionFlags, ISessionListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2754,7 +2932,8 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void unregisterSessionListener(int sessionFlags, ISessionListener listener) throws RemoteException {
+            public void unregisterSessionListener(int sessionFlags, ISessionListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2770,7 +2949,8 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void onSessionStarted(int sessionType, InstanceId instanceId) throws RemoteException {
+            public void onSessionStarted(int sessionType, InstanceId instanceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2786,7 +2966,8 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void onSessionEnded(int sessionType, InstanceId instanceId) throws RemoteException {
+            public void onSessionEnded(int sessionType, InstanceId instanceId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2802,7 +2983,11 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void updateMediaTapToTransferSenderDisplay(int displayState, MediaRoute2Info routeInfo, IUndoMediaTransferCallback undoCallback) throws RemoteException {
+            public void updateMediaTapToTransferSenderDisplay(
+                    int displayState,
+                    MediaRoute2Info routeInfo,
+                    IUndoMediaTransferCallback undoCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2819,7 +3004,9 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void updateMediaTapToTransferReceiverDisplay(int displayState, MediaRoute2Info routeInfo, Icon appIcon, CharSequence appName) throws RemoteException {
+            public void updateMediaTapToTransferReceiverDisplay(
+                    int displayState, MediaRoute2Info routeInfo, Icon appIcon, CharSequence appName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2842,7 +3029,8 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void registerNearbyMediaDevicesProvider(INearbyMediaDevicesProvider provider) throws RemoteException {
+            public void registerNearbyMediaDevicesProvider(INearbyMediaDevicesProvider provider)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2857,7 +3045,8 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void unregisterNearbyMediaDevicesProvider(INearbyMediaDevicesProvider provider) throws RemoteException {
+            public void unregisterNearbyMediaDevicesProvider(INearbyMediaDevicesProvider provider)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2887,7 +3076,8 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void disableToType(int what, IBinder token, String pkg, int barType) throws RemoteException {
+            public void disableToType(int what, IBinder token, String pkg, int barType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2905,7 +3095,9 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void disableForUserToType(int what, IBinder token, String pkg, int userId, int barType) throws RemoteException {
+            public void disableForUserToType(
+                    int what, IBinder token, String pkg, int userId, int barType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2924,7 +3116,8 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void disable2ToType(int what, IBinder token, String pkg, int barType) throws RemoteException {
+            public void disable2ToType(int what, IBinder token, String pkg, int barType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2942,7 +3135,9 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void disable2ForUserToType(int what, IBinder token, String pkg, int userId, int barType) throws RemoteException {
+            public void disable2ForUserToType(
+                    int what, IBinder token, String pkg, int userId, int barType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2961,7 +3156,8 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public int[] getDisableFlagsToType(IBinder token, int userId, int barType) throws RemoteException {
+            public int[] getDisableFlagsToType(IBinder token, int userId, int barType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2980,7 +3176,8 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public RegisterStatusBarResult registerStatusBarAsType(IStatusBar callbacks, int barType) throws RemoteException {
+            public RegisterStatusBarResult registerStatusBarAsType(
+                    IStatusBar callbacks, int barType) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2989,7 +3186,9 @@ public interface IStatusBarService extends IInterface {
                     _data.writeInt(barType);
                     this.mRemote.transact(80, _data, _reply, 0);
                     _reply.readException();
-                    RegisterStatusBarResult _result = (RegisterStatusBarResult) _reply.readTypedObject(RegisterStatusBarResult.CREATOR);
+                    RegisterStatusBarResult _result =
+                            (RegisterStatusBarResult)
+                                    _reply.readTypedObject(RegisterStatusBarResult.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2998,7 +3197,8 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void setPanelExpandStateToType(boolean state, int barType) throws RemoteException {
+            public void setPanelExpandStateToType(boolean state, int barType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3031,7 +3231,8 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public boolean getQuickSettingPanelExpandStateToType(int barType) throws RemoteException {
+            public boolean getQuickSettingPanelExpandStateToType(int barType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3078,7 +3279,8 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void expandSettingsPanelToType(String subPanel, int barType) throws RemoteException {
+            public void expandSettingsPanelToType(String subPanel, int barType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3094,7 +3296,9 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void setNavigationBarShortcut(String requestClass, RemoteViews remoteViews, int position, int priority) throws RemoteException {
+            public void setNavigationBarShortcut(
+                    String requestClass, RemoteViews remoteViews, int position, int priority)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3202,7 +3406,8 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void registerStatusBarForCarLife(IStatusBarCarLife callbacks) throws RemoteException {
+            public void registerStatusBarForCarLife(IStatusBarCarLife callbacks)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -3232,7 +3437,8 @@ public interface IStatusBarService extends IInterface {
             }
 
             @Override // com.android.internal.statusbar.IStatusBarService
-            public void onNotificationDataUpdateFromPDC(List<String> importantContacts) throws RemoteException {
+            public void onNotificationDataUpdateFromPDC(List<String> importantContacts)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

@@ -4,6 +4,7 @@ import android.frameworks.vibrator.VibrationParam$1$$ExternalSyntheticOutline0;
 import android.util.ArrayMap;
 import android.util.SparseArray;
 import android.util.SparseBooleanArray;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -44,11 +45,18 @@ public final class LegacyPermissionState {
                 return false;
             }
             PermissionState permissionState = (PermissionState) obj;
-            return this.mRuntime == permissionState.mRuntime && this.mGranted == permissionState.mGranted && this.mFlags == permissionState.mFlags && Objects.equals(this.mName, permissionState.mName);
+            return this.mRuntime == permissionState.mRuntime
+                    && this.mGranted == permissionState.mGranted
+                    && this.mFlags == permissionState.mFlags
+                    && Objects.equals(this.mName, permissionState.mName);
         }
 
         public final int hashCode() {
-            return Objects.hash(this.mName, Boolean.valueOf(this.mRuntime), Boolean.valueOf(this.mGranted), Integer.valueOf(this.mFlags));
+            return Objects.hash(
+                    this.mName,
+                    Boolean.valueOf(this.mRuntime),
+                    Boolean.valueOf(this.mGranted),
+                    Integer.valueOf(this.mFlags));
         }
     }
 
@@ -56,20 +64,23 @@ public final class LegacyPermissionState {
     public final class UserState {
         public final ArrayMap mPermissionStates = new ArrayMap();
 
-        public UserState() {
-        }
+        public UserState() {}
 
         public UserState(UserState userState) {
             int size = userState.mPermissionStates.size();
             for (int i = 0; i < size; i++) {
-                this.mPermissionStates.put((String) userState.mPermissionStates.keyAt(i), new PermissionState((PermissionState) userState.mPermissionStates.valueAt(i)));
+                this.mPermissionStates.put(
+                        (String) userState.mPermissionStates.keyAt(i),
+                        new PermissionState(
+                                (PermissionState) userState.mPermissionStates.valueAt(i)));
             }
         }
     }
 
     public static void checkUserId(int i) {
         if (i < 0) {
-            throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Invalid user ID "));
+            throw new IllegalArgumentException(
+                    VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Invalid user ID "));
         }
     }
 
@@ -80,12 +91,16 @@ public final class LegacyPermissionState {
         this.mUserStates.clear();
         int size = legacyPermissionState.mUserStates.size();
         for (int i = 0; i < size; i++) {
-            this.mUserStates.put(legacyPermissionState.mUserStates.keyAt(i), new UserState((UserState) legacyPermissionState.mUserStates.valueAt(i)));
+            this.mUserStates.put(
+                    legacyPermissionState.mUserStates.keyAt(i),
+                    new UserState((UserState) legacyPermissionState.mUserStates.valueAt(i)));
         }
         this.mMissing.clear();
         int size2 = legacyPermissionState.mMissing.size();
         for (int i2 = 0; i2 < size2; i2++) {
-            this.mMissing.put(legacyPermissionState.mMissing.keyAt(i2), legacyPermissionState.mMissing.valueAt(i2));
+            this.mMissing.put(
+                    legacyPermissionState.mMissing.keyAt(i2),
+                    legacyPermissionState.mMissing.valueAt(i2));
         }
     }
 
@@ -103,7 +118,8 @@ public final class LegacyPermissionState {
         }
         for (int i = 0; i < size; i++) {
             int keyAt = this.mUserStates.keyAt(i);
-            if (!Objects.equals(this.mUserStates.get(keyAt), legacyPermissionState.mUserStates.get(keyAt))) {
+            if (!Objects.equals(
+                    this.mUserStates.get(keyAt), legacyPermissionState.mUserStates.get(keyAt))) {
                 return false;
             }
         }
@@ -113,7 +129,9 @@ public final class LegacyPermissionState {
     public final Collection getPermissionStates(int i) {
         checkUserId(i);
         UserState userState = (UserState) this.mUserStates.get(i);
-        return userState == null ? Collections.emptyList() : Collections.unmodifiableCollection(userState.mPermissionStates.values());
+        return userState == null
+                ? Collections.emptyList()
+                : Collections.unmodifiableCollection(userState.mPermissionStates.values());
     }
 
     public final boolean hasPermissionState(Collection collection) {
@@ -122,7 +140,8 @@ public final class LegacyPermissionState {
             UserState userState = (UserState) this.mUserStates.valueAt(i);
             Iterator it = collection.iterator();
             while (it.hasNext()) {
-                if (((PermissionState) userState.mPermissionStates.get((String) it.next())) != null) {
+                if (((PermissionState) userState.mPermissionStates.get((String) it.next()))
+                        != null) {
                     return true;
                 }
             }

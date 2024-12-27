@@ -8,6 +8,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Pools;
 import android.view.accessibility.AccessibilityNodeInfo;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,22 +25,24 @@ public class WindowInfo implements Parcelable {
     public CharSequence title;
     public IBinder token;
     public int type;
-    private static final Pools.SynchronizedPool<WindowInfo> sPool = new Pools.SynchronizedPool<>(10);
-    public static final Parcelable.Creator<WindowInfo> CREATOR = new Parcelable.Creator<WindowInfo>() { // from class: android.view.WindowInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WindowInfo createFromParcel(Parcel parcel) {
-            WindowInfo window = WindowInfo.obtain();
-            window.initFromParcel(parcel);
-            return window;
-        }
+    private static final Pools.SynchronizedPool<WindowInfo> sPool =
+            new Pools.SynchronizedPool<>(10);
+    public static final Parcelable.Creator<WindowInfo> CREATOR =
+            new Parcelable.Creator<WindowInfo>() { // from class: android.view.WindowInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WindowInfo createFromParcel(Parcel parcel) {
+                    WindowInfo window = WindowInfo.obtain();
+                    window.initFromParcel(parcel);
+                    return window;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WindowInfo[] newArray(int size) {
-            return new WindowInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WindowInfo[] newArray(int size) {
+                    return new WindowInfo[size];
+                }
+            };
     public Region regionInScreen = new Region();
     public long accessibilityIdOfAnchor = AccessibilityNodeInfo.UNDEFINED_NODE_ID;
     public int displayId = -1;
@@ -48,8 +51,7 @@ public class WindowInfo implements Parcelable {
     public MagnificationSpec mMagnificationSpec = new MagnificationSpec();
     public LocaleList locales = LocaleList.getEmptyLocaleList();
 
-    private WindowInfo() {
-    }
+    private WindowInfo() {}
 
     public static WindowInfo obtain() {
         WindowInfo window = sPool.acquire();

@@ -3,23 +3,26 @@ package android.util;
 import android.content.res.Configuration;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.io.PrintWriter;
 
 /* loaded from: classes4.dex */
 public class MergedConfiguration implements Parcelable {
-    public static final Parcelable.Creator<MergedConfiguration> CREATOR = new Parcelable.Creator<MergedConfiguration>() { // from class: android.util.MergedConfiguration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MergedConfiguration createFromParcel(Parcel in) {
-            return new MergedConfiguration(in);
-        }
+    public static final Parcelable.Creator<MergedConfiguration> CREATOR =
+            new Parcelable.Creator<
+                    MergedConfiguration>() { // from class: android.util.MergedConfiguration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MergedConfiguration createFromParcel(Parcel in) {
+                    return new MergedConfiguration(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MergedConfiguration[] newArray(int size) {
-            return new MergedConfiguration[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MergedConfiguration[] newArray(int size) {
+                    return new MergedConfiguration[size];
+                }
+            };
     private final Configuration mGlobalConfig;
     private final Configuration mMergedConfig;
     private final Configuration mOverrideConfig;
@@ -48,7 +51,9 @@ public class MergedConfiguration implements Parcelable {
         this.mGlobalConfig = new Configuration();
         this.mOverrideConfig = new Configuration();
         this.mMergedConfig = new Configuration();
-        setConfiguration(mergedConfiguration.getGlobalConfiguration(), mergedConfiguration.getOverrideConfiguration());
+        setConfiguration(
+                mergedConfiguration.getGlobalConfiguration(),
+                mergedConfiguration.getOverrideConfiguration());
     }
 
     private MergedConfiguration(Parcel in) {
@@ -120,7 +125,11 @@ public class MergedConfiguration implements Parcelable {
     }
 
     public String toString() {
-        return "{mGlobalConfig=" + this.mGlobalConfig + " mOverrideConfig=" + this.mOverrideConfig + "}";
+        return "{mGlobalConfig="
+                + this.mGlobalConfig
+                + " mOverrideConfig="
+                + this.mOverrideConfig
+                + "}";
     }
 
     public int hashCode() {

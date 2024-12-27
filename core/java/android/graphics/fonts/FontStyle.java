@@ -1,6 +1,7 @@
 package android.graphics.fonts;
 
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -26,8 +27,7 @@ public final class FontStyle {
     private final int mWeight;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FontSlant {
-    }
+    public @interface FontSlant {}
 
     public FontStyle() {
         this.mWeight = 400;
@@ -35,8 +35,11 @@ public final class FontStyle {
     }
 
     public FontStyle(int weight, int slant) {
-        Preconditions.checkArgument(1 <= weight && weight <= 1000, "weight value must be [1, 1000]");
-        Preconditions.checkArgument(slant == 0 || slant == 1, "slant value must be FONT_SLANT_UPRIGHT or FONT_SLANT_UPRIGHT");
+        Preconditions.checkArgument(
+                1 <= weight && weight <= 1000, "weight value must be [1, 1000]");
+        Preconditions.checkArgument(
+                slant == 0 || slant == 1,
+                "slant value must be FONT_SLANT_UPRIGHT or FONT_SLANT_UPRIGHT");
         this.mWeight = weight;
         this.mSlant = slant;
     }

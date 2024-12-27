@@ -4,6 +4,7 @@ import android.companion.virtualcamera.SupportedStreamConfiguration$$ExternalSyn
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -70,7 +71,8 @@ public final class VendorKeyValue implements Parcelable {
             return false;
         }
         VendorKeyValue vendorKeyValue = (VendorKeyValue) obj;
-        return Objects.deepEquals(this.key, vendorKeyValue.key) && Objects.deepEquals(this.value, vendorKeyValue.value);
+        return Objects.deepEquals(this.key, vendorKeyValue.key)
+                && Objects.deepEquals(this.value, vendorKeyValue.value);
     }
 
     public final int getStability() {
@@ -83,7 +85,14 @@ public final class VendorKeyValue implements Parcelable {
 
     public final String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, DabTableEntry$$ExternalSyntheticOutline0.m(this.value, "VendorKeyValue", DabTableEntry$$ExternalSyntheticOutline0.m(this.key, "value: ", new StringBuilder("key: "), stringJoiner), stringJoiner));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner,
+                DabTableEntry$$ExternalSyntheticOutline0.m(
+                        this.value,
+                        "VendorKeyValue",
+                        DabTableEntry$$ExternalSyntheticOutline0.m(
+                                this.key, "value: ", new StringBuilder("key: "), stringJoiner),
+                        stringJoiner));
     }
 
     @Override // android.os.Parcelable
@@ -94,6 +103,7 @@ public final class VendorKeyValue implements Parcelable {
         parcel.writeString(this.value);
         int dataPosition2 = parcel.dataPosition();
         parcel.setDataPosition(dataPosition);
-        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(dataPosition2, dataPosition, parcel, dataPosition2);
+        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                dataPosition2, dataPosition, parcel, dataPosition2);
     }
 }

@@ -14,47 +14,36 @@ public final class RemoteAppTaskWatcher extends ITaskStackListener.Stub {
     public boolean mNeedToNotifyRecentTaskListUpdated;
     public boolean mNeedToNotifyTaskDisplayChanged;
 
-    public final void onActivityDismissingDockedTask() {
-    }
+    public final void onActivityDismissingDockedTask() {}
 
-    public final void onActivityDismissingSplitTask(String str) {
-    }
+    public final void onActivityDismissingSplitTask(String str) {}
 
-    public final void onActivityForcedResizable(String str, int i, int i2) {
-    }
+    public final void onActivityForcedResizable(String str, int i, int i2) {}
 
-    public final void onActivityLaunchOnSecondaryDisplayFailed(ActivityManager.RunningTaskInfo runningTaskInfo, int i) {
-    }
+    public final void onActivityLaunchOnSecondaryDisplayFailed(
+            ActivityManager.RunningTaskInfo runningTaskInfo, int i) {}
 
-    public final void onActivityLaunchOnSecondaryDisplayRerouted(ActivityManager.RunningTaskInfo runningTaskInfo, int i) {
-    }
+    public final void onActivityLaunchOnSecondaryDisplayRerouted(
+            ActivityManager.RunningTaskInfo runningTaskInfo, int i) {}
 
-    public final void onActivityPinned(String str, int i, int i2, int i3) {
-    }
+    public final void onActivityPinned(String str, int i, int i2, int i3) {}
 
-    public final void onActivityRequestedOrientationChanged(int i, int i2) {
-    }
+    public final void onActivityRequestedOrientationChanged(int i, int i2) {}
 
-    public final void onActivityRestartAttempt(ActivityManager.RunningTaskInfo runningTaskInfo, boolean z, boolean z2, boolean z3) {
-    }
+    public final void onActivityRestartAttempt(
+            ActivityManager.RunningTaskInfo runningTaskInfo, boolean z, boolean z2, boolean z3) {}
 
-    public final void onActivityRotation(int i) {
-    }
+    public final void onActivityRotation(int i) {}
 
-    public final void onActivityUnpinned() {
-    }
+    public final void onActivityUnpinned() {}
 
-    public final void onBackPressedOnTaskRoot(ActivityManager.RunningTaskInfo runningTaskInfo) {
-    }
+    public final void onBackPressedOnTaskRoot(ActivityManager.RunningTaskInfo runningTaskInfo) {}
 
-    public final void onLockTaskModeChanged(int i) {
-    }
+    public final void onLockTaskModeChanged(int i) {}
 
-    public final void onRecentTaskListFrozenChanged(boolean z) {
-    }
+    public final void onRecentTaskListFrozenChanged(boolean z) {}
 
-    public final void onRecentTaskListUpdated() {
-    }
+    public final void onRecentTaskListUpdated() {}
 
     public final void onTaskCreated(int i, ComponentName componentName) {
         Message message = new Message();
@@ -63,8 +52,7 @@ public final class RemoteAppTaskWatcher extends ITaskStackListener.Stub {
         sendMessage(message);
     }
 
-    public final void onTaskDescriptionChanged(ActivityManager.RunningTaskInfo runningTaskInfo) {
-    }
+    public final void onTaskDescriptionChanged(ActivityManager.RunningTaskInfo runningTaskInfo) {}
 
     public final void onTaskDisplayChanged(int i, int i2) {
         if (this.mNeedToNotifyTaskDisplayChanged) {
@@ -76,20 +64,15 @@ public final class RemoteAppTaskWatcher extends ITaskStackListener.Stub {
         }
     }
 
-    public final void onTaskFocusChanged(int i, boolean z) {
-    }
+    public final void onTaskFocusChanged(int i, boolean z) {}
 
-    public final void onTaskMovedToBack(ActivityManager.RunningTaskInfo runningTaskInfo) {
-    }
+    public final void onTaskMovedToBack(ActivityManager.RunningTaskInfo runningTaskInfo) {}
 
-    public final void onTaskMovedToFront(ActivityManager.RunningTaskInfo runningTaskInfo) {
-    }
+    public final void onTaskMovedToFront(ActivityManager.RunningTaskInfo runningTaskInfo) {}
 
-    public final void onTaskProfileLocked(ActivityManager.RunningTaskInfo runningTaskInfo, int i) {
-    }
+    public final void onTaskProfileLocked(ActivityManager.RunningTaskInfo runningTaskInfo, int i) {}
 
-    public final void onTaskRemovalStarted(ActivityManager.RunningTaskInfo runningTaskInfo) {
-    }
+    public final void onTaskRemovalStarted(ActivityManager.RunningTaskInfo runningTaskInfo) {}
 
     public final void onTaskRemoved(int i) {
         Message message = new Message();
@@ -98,8 +81,7 @@ public final class RemoteAppTaskWatcher extends ITaskStackListener.Stub {
         sendMessage(message);
     }
 
-    public final void onTaskRequestedOrientationChanged(int i, int i2) {
-    }
+    public final void onTaskRequestedOrientationChanged(int i, int i2) {}
 
     public final void onTaskSnapshotChanged(int i, TaskSnapshot taskSnapshot) {
         if (this.mNeedToNotifyRecentTaskListUpdated) {
@@ -109,8 +91,7 @@ public final class RemoteAppTaskWatcher extends ITaskStackListener.Stub {
         }
     }
 
-    public final void onTaskSnapshotInvalidated(int i) {
-    }
+    public final void onTaskSnapshotInvalidated(int i) {}
 
     public final void onTaskStackChanged() {
         if (this.mNeedToNotifyRecentTaskListUpdated) {
@@ -120,9 +101,7 @@ public final class RemoteAppTaskWatcher extends ITaskStackListener.Stub {
         }
     }
 
-    public final void onTaskWindowingModeChanged(int i) {
-    }
+    public final void onTaskWindowingModeChanged(int i) {}
 
-    public final void onTaskbarIconVisibleChangeRequest(ComponentName componentName, boolean z) {
-    }
+    public final void onTaskbarIconVisibleChangeRequest(ComponentName componentName, boolean z) {}
 }

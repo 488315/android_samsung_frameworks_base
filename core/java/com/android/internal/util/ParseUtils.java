@@ -2,8 +2,7 @@ package com.android.internal.util;
 
 /* loaded from: classes5.dex */
 public final class ParseUtils {
-    private ParseUtils() {
-    }
+    private ParseUtils() {}
 
     public static int parseInt(String value, int defValue) {
         return parseIntWithBase(value, 10, defValue);

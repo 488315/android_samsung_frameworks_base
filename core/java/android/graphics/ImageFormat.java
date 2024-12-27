@@ -34,8 +34,7 @@ public class ImageFormat {
     public static final int YV12 = 842094169;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Format {
-    }
+    public @interface Format {}
 
     public static int getBitsPerPixel(int format) {
         switch (format) {

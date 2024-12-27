@@ -6,19 +6,22 @@ import android.os.Parcelable;
 /* loaded from: classes6.dex */
 public class VibrationDebugInfo implements Parcelable {
     public static final int CHANGE_SEP_INDEX_DURATION = 2;
-    public static final Parcelable.Creator<VibrationDebugInfo> CREATOR = new Parcelable.Creator<VibrationDebugInfo>() { // from class: com.samsung.android.vibrator.VibrationDebugInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VibrationDebugInfo createFromParcel(Parcel source) {
-            return new VibrationDebugInfo(source);
-        }
+    public static final Parcelable.Creator<VibrationDebugInfo> CREATOR =
+            new Parcelable.Creator<
+                    VibrationDebugInfo>() { // from class:
+                                            // com.samsung.android.vibrator.VibrationDebugInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VibrationDebugInfo createFromParcel(Parcel source) {
+                    return new VibrationDebugInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VibrationDebugInfo[] newArray(int size) {
-            return new VibrationDebugInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VibrationDebugInfo[] newArray(int size) {
+                    return new VibrationDebugInfo[size];
+                }
+            };
     public static final String FAIL = "fail";
     public static final int GET_DEVICE_INFORMATION = 0;
     public static final int RESET_INDEX = 3;

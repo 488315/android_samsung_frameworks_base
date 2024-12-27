@@ -3,7 +3,9 @@ package com.android.server.voiceinteraction;
 import android.os.RemoteException;
 import android.service.voice.HotwordRejectedResult;
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
+
 import java.io.PrintWriter;
 import java.util.concurrent.ScheduledFuture;
 
@@ -30,7 +32,8 @@ public final class DspTrustedHotwordDetectorSession extends DetectorSession {
         if (z) {
             try {
                 this.mCallback.onRejected(new HotwordRejectedResult.Builder().build());
-                FrameworkStatsLog.write(FrameworkStatsLog.HOTWORD_DETECTOR_KEYPHRASE_TRIGGERED, 1, 10, i);
+                FrameworkStatsLog.write(
+                        FrameworkStatsLog.HOTWORD_DETECTOR_KEYPHRASE_TRIGGERED, 1, 10, i);
             } catch (RemoteException unused) {
                 Slog.w("DspTrustedHotwordDetectorSession", "Failed to call #rejected");
                 FrameworkStatsLog.write(FrameworkStatsLog.HOTWORD_DETECTOR_EVENTS, 1, 16, i);
@@ -42,7 +45,10 @@ public final class DspTrustedHotwordDetectorSession extends DetectorSession {
         try {
             this.mCallback.onProcessRestarted();
         } catch (RemoteException e) {
-            Slog.w("DspTrustedHotwordDetectorSession", "Failed to communicate #onProcessRestarted", e);
+            Slog.w(
+                    "DspTrustedHotwordDetectorSession",
+                    "Failed to communicate #onProcessRestarted",
+                    e);
             FrameworkStatsLog.write(FrameworkStatsLog.HOTWORD_DETECTOR_EVENTS, 1, 18, i);
             notifyOnDetectorRemoteException();
         }

@@ -124,17 +124,17 @@ public interface ISemMdnieManager extends IInterface {
         }
 
         @Override // com.samsung.android.hardware.display.ISemMdnieManager
-        public boolean setWhiteRGB(int red, int green, int blue, int red_sub, int green_sub, int blue_sub) throws RemoteException {
+        public boolean setWhiteRGB(
+                int red, int green, int blue, int red_sub, int green_sub, int blue_sub)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.hardware.display.ISemMdnieManager
-        public void setEadMode(int index, int[] arr) throws RemoteException {
-        }
+        public void setEadMode(int index, int[] arr) throws RemoteException {}
 
         @Override // com.samsung.android.hardware.display.ISemMdnieManager
-        public void setEadModeSub(int index, int[] arr) throws RemoteException {
-        }
+        public void setEadModeSub(int index, int[] arr) throws RemoteException {}
 
         @Override // com.samsung.android.hardware.display.ISemMdnieManager
         public boolean isNightModeSupported() throws RemoteException {
@@ -177,12 +177,10 @@ public interface ISemMdnieManager extends IInterface {
         }
 
         @Override // com.samsung.android.hardware.display.ISemMdnieManager
-        public void setExtraDimMode(int opacity) throws RemoteException {
-        }
+        public void setExtraDimMode(int opacity) throws RemoteException {}
 
         @Override // com.samsung.android.hardware.display.ISemMdnieManager
-        public void setHighBrightnessMode(int id, int lux, int index) throws RemoteException {
-        }
+        public void setHighBrightnessMode(int id, int lux, int index) throws RemoteException {}
 
         @Override // com.samsung.android.hardware.display.ISemMdnieManager
         public boolean setHighDynamicRangeMode(boolean enable) throws RemoteException {
@@ -230,8 +228,8 @@ public interface ISemMdnieManager extends IInterface {
         }
 
         @Override // com.samsung.android.hardware.display.ISemMdnieManager
-        public void updateAlwaysOnDisplay(boolean enable, int aodbrightness) throws RemoteException {
-        }
+        public void updateAlwaysOnDisplay(boolean enable, int aodbrightness)
+                throws RemoteException {}
 
         @Override // com.samsung.android.hardware.display.ISemMdnieManager
         public boolean afpcDataVerify() throws RemoteException {
@@ -264,7 +262,7 @@ public interface ISemMdnieManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemMdnieManager {
+    public abstract static class Stub extends Binder implements ISemMdnieManager {
         static final int TRANSACTION_afpcDataApply = 34;
         static final int TRANSACTION_afpcDataOff = 35;
         static final int TRANSACTION_afpcDataVerify = 32;
@@ -407,7 +405,8 @@ public interface ISemMdnieManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemMdnieManager.DESCRIPTOR);
             }
@@ -800,7 +799,9 @@ public interface ISemMdnieManager extends IInterface {
             }
 
             @Override // com.samsung.android.hardware.display.ISemMdnieManager
-            public boolean setWhiteRGB(int red, int green, int blue, int red_sub, int green_sub, int blue_sub) throws RemoteException {
+            public boolean setWhiteRGB(
+                    int red, int green, int blue, int red_sub, int green_sub, int blue_sub)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1053,7 +1054,8 @@ public interface ISemMdnieManager extends IInterface {
             }
 
             @Override // com.samsung.android.hardware.display.ISemMdnieManager
-            public boolean setColorVision(boolean enable, int color, int level) throws RemoteException {
+            public boolean setColorVision(boolean enable, int color, int level)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1141,7 +1143,8 @@ public interface ISemMdnieManager extends IInterface {
             }
 
             @Override // com.samsung.android.hardware.display.ISemMdnieManager
-            public boolean setmDNIeAccessibilityMode(int mode, boolean enable) throws RemoteException {
+            public boolean setmDNIeAccessibilityMode(int mode, boolean enable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1176,7 +1179,8 @@ public interface ISemMdnieManager extends IInterface {
             }
 
             @Override // com.samsung.android.hardware.display.ISemMdnieManager
-            public void updateAlwaysOnDisplay(boolean enable, int aodbrightness) throws RemoteException {
+            public void updateAlwaysOnDisplay(boolean enable, int aodbrightness)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

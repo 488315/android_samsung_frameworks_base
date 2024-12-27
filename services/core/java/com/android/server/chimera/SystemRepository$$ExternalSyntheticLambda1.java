@@ -4,7 +4,9 @@ import android.accessibilityservice.AccessibilityServiceInfo;
 import android.os.IDeviceIdleController;
 import android.os.PowerManager;
 import android.os.RemoteException;
+
 import com.android.server.am.mars.filter.filter.DefaultAppFilter;
+
 import java.util.Arrays;
 import java.util.function.Function;
 

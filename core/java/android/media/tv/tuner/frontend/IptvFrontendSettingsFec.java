@@ -1,6 +1,7 @@
 package android.media.tv.tuner.frontend;
 
 import android.annotation.SystemApi;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -16,8 +17,7 @@ public final class IptvFrontendSettingsFec {
     private final int mFecType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FecType {
-    }
+    public @interface FecType {}
 
     private IptvFrontendSettingsFec(int fecType, int fecRowNum, int fecColNum) {
         this.mFecType = fecType;

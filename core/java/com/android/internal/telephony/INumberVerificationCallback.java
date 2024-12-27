@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface INumberVerificationCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.telephony.INumberVerificationCallback";
+    public static final String DESCRIPTOR =
+            "com.android.internal.telephony.INumberVerificationCallback";
 
     void onCallReceived(String str) throws RemoteException;
 
@@ -16,12 +17,10 @@ public interface INumberVerificationCallback extends IInterface {
 
     public static class Default implements INumberVerificationCallback {
         @Override // com.android.internal.telephony.INumberVerificationCallback
-        public void onCallReceived(String phoneNumber) throws RemoteException {
-        }
+        public void onCallReceived(String phoneNumber) throws RemoteException {}
 
         @Override // com.android.internal.telephony.INumberVerificationCallback
-        public void onVerificationFailed(int reason) throws RemoteException {
-        }
+        public void onVerificationFailed(int reason) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +28,7 @@ public interface INumberVerificationCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements INumberVerificationCallback {
+    public abstract static class Stub extends Binder implements INumberVerificationCallback {
         static final int TRANSACTION_onCallReceived = 1;
         static final int TRANSACTION_onVerificationFailed = 2;
 
@@ -70,7 +69,8 @@ public interface INumberVerificationCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(INumberVerificationCallback.DESCRIPTOR);
             }

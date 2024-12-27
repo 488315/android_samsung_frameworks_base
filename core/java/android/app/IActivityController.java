@@ -13,7 +13,8 @@ public interface IActivityController extends IInterface {
 
     boolean activityStarting(Intent intent, String str) throws RemoteException;
 
-    boolean appCrashed(String str, int i, String str2, String str3, long j, String str4) throws RemoteException;
+    boolean appCrashed(String str, int i, String str2, String str3, long j, String str4)
+            throws RemoteException;
 
     int appEarlyNotResponding(String str, int i, String str2) throws RemoteException;
 
@@ -33,17 +34,26 @@ public interface IActivityController extends IInterface {
         }
 
         @Override // android.app.IActivityController
-        public boolean appCrashed(String processName, int pid, String shortMsg, String longMsg, long timeMillis, String stackTrace) throws RemoteException {
+        public boolean appCrashed(
+                String processName,
+                int pid,
+                String shortMsg,
+                String longMsg,
+                long timeMillis,
+                String stackTrace)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IActivityController
-        public int appEarlyNotResponding(String processName, int pid, String annotation) throws RemoteException {
+        public int appEarlyNotResponding(String processName, int pid, String annotation)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.IActivityController
-        public int appNotResponding(String processName, int pid, String processStats) throws RemoteException {
+        public int appNotResponding(String processName, int pid, String processStats)
+                throws RemoteException {
             return 0;
         }
 
@@ -58,7 +68,7 @@ public interface IActivityController extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IActivityController {
+    public abstract static class Stub extends Binder implements IActivityController {
         public static final String DESCRIPTOR = "android.app.IActivityController";
         static final int TRANSACTION_activityResuming = 2;
         static final int TRANSACTION_activityStarting = 1;
@@ -112,7 +122,8 @@ public interface IActivityController extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -230,7 +241,14 @@ public interface IActivityController extends IInterface {
             }
 
             @Override // android.app.IActivityController
-            public boolean appCrashed(String processName, int pid, String shortMsg, String longMsg, long timeMillis, String stackTrace) throws RemoteException {
+            public boolean appCrashed(
+                    String processName,
+                    int pid,
+                    String shortMsg,
+                    String longMsg,
+                    long timeMillis,
+                    String stackTrace)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -252,7 +270,8 @@ public interface IActivityController extends IInterface {
             }
 
             @Override // android.app.IActivityController
-            public int appEarlyNotResponding(String processName, int pid, String annotation) throws RemoteException {
+            public int appEarlyNotResponding(String processName, int pid, String annotation)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -271,7 +290,8 @@ public interface IActivityController extends IInterface {
             }
 
             @Override // android.app.IActivityController
-            public int appNotResponding(String processName, int pid, String processStats) throws RemoteException {
+            public int appNotResponding(String processName, int pid, String processStats)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

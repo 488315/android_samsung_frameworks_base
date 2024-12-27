@@ -11,13 +11,14 @@ import android.telephony.ims.ImsStreamMediaProfile;
 import android.telephony.ims.ImsVideoCallProvider;
 import android.telephony.ims.RtpHeaderExtension;
 import android.telephony.ims.aidl.IImsCallSessionListener;
-import android.telephony.ims.stub.ImsCallSessionImplBase;
 import android.util.ArraySet;
 import android.util.Log;
+
 import com.android.ims.internal.IImsCallSession;
 import com.android.ims.internal.IImsVideoCallProvider;
 import com.android.internal.telephony.SemRILConstants;
 import com.android.internal.telephony.util.TelephonyUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
@@ -43,12 +44,10 @@ public class ImsCallSessionImplBase implements AutoCloseable {
     private IImsCallSession mServiceImpl = new AnonymousClass1();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MediaStreamDirection {
-    }
+    public @interface MediaStreamDirection {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MediaStreamType {
-    }
+    public @interface MediaStreamType {}
 
     public static class State {
         public static final int ESTABLISHED = 4;
@@ -87,14 +86,12 @@ public class ImsCallSessionImplBase implements AutoCloseable {
             }
         }
 
-        private State() {
-        }
+        private State() {}
     }
 
     /* renamed from: android.telephony.ims.stub.ImsCallSessionImplBase$1, reason: invalid class name */
     class AnonymousClass1 extends IImsCallSession.Stub {
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$close$0() {
@@ -103,12 +100,15 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public void close() {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda8
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$close$0();
-                }
-            }, "close");
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda8
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this.lambda$close$0();
+                        }
+                    },
+                    "close");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -118,14 +118,20 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public String getCallId() {
-            return (String) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda7
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    String lambda$getCallId$1;
-                    lambda$getCallId$1 = ImsCallSessionImplBase.AnonymousClass1.this.lambda$getCallId$1();
-                    return lambda$getCallId$1;
-                }
-            }, "getCallId");
+            return (String)
+                    executeMethodAsyncForResult(
+                            new Supplier() { // from class:
+                                             // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda7
+                                @Override // java.util.function.Supplier
+                                public final Object get() {
+                                    String lambda$getCallId$1;
+                                    lambda$getCallId$1 =
+                                            ImsCallSessionImplBase.AnonymousClass1.this
+                                                    .lambda$getCallId$1();
+                                    return lambda$getCallId$1;
+                                }
+                            },
+                            "getCallId");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -135,14 +141,20 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public ImsCallProfile getCallProfile() {
-            return (ImsCallProfile) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda9
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    ImsCallProfile lambda$getCallProfile$2;
-                    lambda$getCallProfile$2 = ImsCallSessionImplBase.AnonymousClass1.this.lambda$getCallProfile$2();
-                    return lambda$getCallProfile$2;
-                }
-            }, "getCallProfile");
+            return (ImsCallProfile)
+                    executeMethodAsyncForResult(
+                            new Supplier() { // from class:
+                                             // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda9
+                                @Override // java.util.function.Supplier
+                                public final Object get() {
+                                    ImsCallProfile lambda$getCallProfile$2;
+                                    lambda$getCallProfile$2 =
+                                            ImsCallSessionImplBase.AnonymousClass1.this
+                                                    .lambda$getCallProfile$2();
+                                    return lambda$getCallProfile$2;
+                                }
+                            },
+                            "getCallProfile");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -152,14 +164,20 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public ImsCallProfile getLocalCallProfile() {
-            return (ImsCallProfile) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda4
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    ImsCallProfile lambda$getLocalCallProfile$3;
-                    lambda$getLocalCallProfile$3 = ImsCallSessionImplBase.AnonymousClass1.this.lambda$getLocalCallProfile$3();
-                    return lambda$getLocalCallProfile$3;
-                }
-            }, "getLocalCallProfile");
+            return (ImsCallProfile)
+                    executeMethodAsyncForResult(
+                            new Supplier() { // from class:
+                                             // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda4
+                                @Override // java.util.function.Supplier
+                                public final Object get() {
+                                    ImsCallProfile lambda$getLocalCallProfile$3;
+                                    lambda$getLocalCallProfile$3 =
+                                            ImsCallSessionImplBase.AnonymousClass1.this
+                                                    .lambda$getLocalCallProfile$3();
+                                    return lambda$getLocalCallProfile$3;
+                                }
+                            },
+                            "getLocalCallProfile");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -169,14 +187,20 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public ImsCallProfile getRemoteCallProfile() {
-            return (ImsCallProfile) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda27
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    ImsCallProfile lambda$getRemoteCallProfile$4;
-                    lambda$getRemoteCallProfile$4 = ImsCallSessionImplBase.AnonymousClass1.this.lambda$getRemoteCallProfile$4();
-                    return lambda$getRemoteCallProfile$4;
-                }
-            }, "getRemoteCallProfile");
+            return (ImsCallProfile)
+                    executeMethodAsyncForResult(
+                            new Supplier() { // from class:
+                                             // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda27
+                                @Override // java.util.function.Supplier
+                                public final Object get() {
+                                    ImsCallProfile lambda$getRemoteCallProfile$4;
+                                    lambda$getRemoteCallProfile$4 =
+                                            ImsCallSessionImplBase.AnonymousClass1.this
+                                                    .lambda$getRemoteCallProfile$4();
+                                    return lambda$getRemoteCallProfile$4;
+                                }
+                            },
+                            "getRemoteCallProfile");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -186,14 +210,20 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public String getProperty(final String name) {
-            return (String) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda32
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    String lambda$getProperty$5;
-                    lambda$getProperty$5 = ImsCallSessionImplBase.AnonymousClass1.this.lambda$getProperty$5(name);
-                    return lambda$getProperty$5;
-                }
-            }, "getProperty");
+            return (String)
+                    executeMethodAsyncForResult(
+                            new Supplier() { // from class:
+                                             // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda32
+                                @Override // java.util.function.Supplier
+                                public final Object get() {
+                                    String lambda$getProperty$5;
+                                    lambda$getProperty$5 =
+                                            ImsCallSessionImplBase.AnonymousClass1.this
+                                                    .lambda$getProperty$5(name);
+                                    return lambda$getProperty$5;
+                                }
+                            },
+                            "getProperty");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -203,14 +233,21 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public int getState() {
-            return ((Integer) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda25
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    Integer lambda$getState$6;
-                    lambda$getState$6 = ImsCallSessionImplBase.AnonymousClass1.this.lambda$getState$6();
-                    return lambda$getState$6;
-                }
-            }, "getState")).intValue();
+            return ((Integer)
+                            executeMethodAsyncForResult(
+                                    new Supplier() { // from class:
+                                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda25
+                                        @Override // java.util.function.Supplier
+                                        public final Object get() {
+                                            Integer lambda$getState$6;
+                                            lambda$getState$6 =
+                                                    ImsCallSessionImplBase.AnonymousClass1.this
+                                                            .lambda$getState$6();
+                                            return lambda$getState$6;
+                                        }
+                                    },
+                                    "getState"))
+                    .intValue();
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -220,26 +257,36 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public boolean isInCall() {
-            return ((Boolean) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda33
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    Boolean lambda$isInCall$7;
-                    lambda$isInCall$7 = ImsCallSessionImplBase.AnonymousClass1.this.lambda$isInCall$7();
-                    return lambda$isInCall$7;
-                }
-            }, "isInCall")).booleanValue();
+            return ((Boolean)
+                            executeMethodAsyncForResult(
+                                    new Supplier() { // from class:
+                                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda33
+                                        @Override // java.util.function.Supplier
+                                        public final Object get() {
+                                            Boolean lambda$isInCall$7;
+                                            lambda$isInCall$7 =
+                                                    ImsCallSessionImplBase.AnonymousClass1.this
+                                                            .lambda$isInCall$7();
+                                            return lambda$isInCall$7;
+                                        }
+                                    },
+                                    "isInCall"))
+                    .booleanValue();
         }
 
         @Override // com.android.ims.internal.IImsCallSession
         public void setListener(IImsCallSessionListener listener) {
             final ImsCallSessionListener iCSL = new ImsCallSessionListener(listener);
             iCSL.setDefaultExecutor(ImsCallSessionImplBase.this.mExecutor);
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda37
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$setListener$8(iCSL);
-                }
-            }, "setListener");
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda37
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this.lambda$setListener$8(iCSL);
+                        }
+                    },
+                    "setListener");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -254,12 +301,15 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public void setMute(final boolean muted) {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda23
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$setMute$9(muted);
-                }
-            }, "setMute");
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda23
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this.lambda$setMute$9(muted);
+                        }
+                    },
+                    "setMute");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -269,27 +319,37 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public void start(final String callee, final ImsCallProfile profile) {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda31
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$start$10(callee, profile);
-                }
-            }, "start");
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda31
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this.lambda$start$10(
+                                    callee, profile);
+                        }
+                    },
+                    "start");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$startConference$11(String[] participants, ImsCallProfile profile) {
+        public /* synthetic */ void lambda$startConference$11(
+                String[] participants, ImsCallProfile profile) {
             ImsCallSessionImplBase.this.startConference(participants, profile);
         }
 
         @Override // com.android.ims.internal.IImsCallSession
-        public void startConference(final String[] participants, final ImsCallProfile profile) throws RemoteException {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda5
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$startConference$11(participants, profile);
-                }
-            }, "startConference");
+        public void startConference(final String[] participants, final ImsCallProfile profile)
+                throws RemoteException {
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda5
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this.lambda$startConference$11(
+                                    participants, profile);
+                        }
+                    },
+                    "startConference");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -299,12 +359,16 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public void accept(final int callType, final ImsStreamMediaProfile profile) {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda10
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$accept$12(callType, profile);
-                }
-            }, "accept");
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda10
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this.lambda$accept$12(
+                                    callType, profile);
+                        }
+                    },
+                    "accept");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -314,12 +378,16 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public void deflect(final String deflectNumber) {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda28
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$deflect$13(deflectNumber);
-                }
-            }, "deflect");
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda28
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this.lambda$deflect$13(
+                                    deflectNumber);
+                        }
+                    },
+                    "deflect");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -329,41 +397,54 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public void reject(final int reason) {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda24
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$reject$14(reason);
-                }
-            }, SemRILConstants.CmcCall.CMC_CALL_SD_REJECT);
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda24
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this.lambda$reject$14(reason);
+                        }
+                    },
+                    SemRILConstants.CmcCall.CMC_CALL_SD_REJECT);
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$transfer$15(String number, boolean isConfirmationRequired) {
+        public /* synthetic */ void lambda$transfer$15(
+                String number, boolean isConfirmationRequired) {
             ImsCallSessionImplBase.this.transfer(number, isConfirmationRequired);
         }
 
         @Override // com.android.ims.internal.IImsCallSession
         public void transfer(final String number, final boolean isConfirmationRequired) {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda29
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$transfer$15(number, isConfirmationRequired);
-                }
-            }, "transfer");
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda29
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this.lambda$transfer$15(
+                                    number, isConfirmationRequired);
+                        }
+                    },
+                    "transfer");
         }
 
         @Override // com.android.ims.internal.IImsCallSession
         public void consultativeTransfer(final IImsCallSession transferToSession) {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda6
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$consultativeTransfer$16(transferToSession);
-                }
-            }, "consultativeTransfer");
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda6
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this
+                                    .lambda$consultativeTransfer$16(transferToSession);
+                        }
+                    },
+                    "consultativeTransfer");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$consultativeTransfer$16(IImsCallSession transferToSession) {
+        public /* synthetic */ void lambda$consultativeTransfer$16(
+                IImsCallSession transferToSession) {
             ImsCallSessionImplBase otherSession = new ImsCallSessionImplBase();
             otherSession.setServiceImpl(transferToSession);
             ImsCallSessionImplBase.this.transfer(otherSession);
@@ -376,12 +457,15 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public void terminate(final int reason) {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda35
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$terminate$17(reason);
-                }
-            }, "terminate");
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda35
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this.lambda$terminate$17(reason);
+                        }
+                    },
+                    "terminate");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -391,12 +475,15 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public void hold(final ImsStreamMediaProfile profile) {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$hold$18(profile);
-                }
-            }, SemRILConstants.CmcCall.CMC_CALL_SD_HOLD);
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this.lambda$hold$18(profile);
+                        }
+                    },
+                    SemRILConstants.CmcCall.CMC_CALL_SD_HOLD);
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -406,12 +493,15 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public void resume(final ImsStreamMediaProfile profile) {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda20
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$resume$19(profile);
-                }
-            }, "resume");
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda20
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this.lambda$resume$19(profile);
+                        }
+                    },
+                    "resume");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -421,12 +511,15 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public void merge() {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda21
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$merge$20();
-                }
-            }, "merge");
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda21
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this.lambda$merge$20();
+                        }
+                    },
+                    "merge");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -436,12 +529,16 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public void update(final int callType, final ImsStreamMediaProfile profile) {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda34
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$update$21(callType, profile);
-                }
-            }, "update");
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda34
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this.lambda$update$21(
+                                    callType, profile);
+                        }
+                    },
+                    "update");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -451,12 +548,16 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public void extendToConference(final String[] participants) {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda18
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$extendToConference$22(participants);
-                }
-            }, "extendToConference");
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda18
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this
+                                    .lambda$extendToConference$22(participants);
+                        }
+                    },
+                    "extendToConference");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -466,12 +567,16 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public void inviteParticipants(final String[] participants) {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda16
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$inviteParticipants$23(participants);
-                }
-            }, "inviteParticipants");
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda16
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this
+                                    .lambda$inviteParticipants$23(participants);
+                        }
+                    },
+                    "inviteParticipants");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -481,12 +586,16 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public void removeParticipants(final String[] participants) {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda17
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$removeParticipants$24(participants);
-                }
-            }, "removeParticipants");
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda17
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this
+                                    .lambda$removeParticipants$24(participants);
+                        }
+                    },
+                    "removeParticipants");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -496,12 +605,16 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public void sendDtmf(final char c, final Message result) {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda14
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$sendDtmf$25(c, result);
-                }
-            }, "sendDtmf");
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda14
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this.lambda$sendDtmf$25(
+                                    c, result);
+                        }
+                    },
+                    "sendDtmf");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -511,12 +624,15 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public void startDtmf(final char c) {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda19
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$startDtmf$26(c);
-                }
-            }, "startDtmf");
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda19
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this.lambda$startDtmf$26(c);
+                        }
+                    },
+                    "startDtmf");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -526,12 +642,15 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public void stopDtmf() {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda11
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$stopDtmf$27();
-                }
-            }, "stopDtmf");
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda11
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this.lambda$stopDtmf$27();
+                        }
+                    },
+                    "stopDtmf");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -541,12 +660,16 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public void sendUssd(final String ussdMessage) {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda3
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$sendUssd$28(ussdMessage);
-                }
-            }, "sendUssd");
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda3
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this.lambda$sendUssd$28(
+                                    ussdMessage);
+                        }
+                    },
+                    "sendUssd");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -556,14 +679,20 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public IImsVideoCallProvider getVideoCallProvider() {
-            return (IImsVideoCallProvider) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda0
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    IImsVideoCallProvider lambda$getVideoCallProvider$29;
-                    lambda$getVideoCallProvider$29 = ImsCallSessionImplBase.AnonymousClass1.this.lambda$getVideoCallProvider$29();
-                    return lambda$getVideoCallProvider$29;
-                }
-            }, "getVideoCallProvider");
+            return (IImsVideoCallProvider)
+                    executeMethodAsyncForResult(
+                            new Supplier() { // from class:
+                                             // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda0
+                                @Override // java.util.function.Supplier
+                                public final Object get() {
+                                    IImsVideoCallProvider lambda$getVideoCallProvider$29;
+                                    lambda$getVideoCallProvider$29 =
+                                            ImsCallSessionImplBase.AnonymousClass1.this
+                                                    .lambda$getVideoCallProvider$29();
+                                    return lambda$getVideoCallProvider$29;
+                                }
+                            },
+                            "getVideoCallProvider");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -573,14 +702,21 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public boolean isMultiparty() {
-            return ((Boolean) executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda26
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    Boolean lambda$isMultiparty$30;
-                    lambda$isMultiparty$30 = ImsCallSessionImplBase.AnonymousClass1.this.lambda$isMultiparty$30();
-                    return lambda$isMultiparty$30;
-                }
-            }, "isMultiparty")).booleanValue();
+            return ((Boolean)
+                            executeMethodAsyncForResult(
+                                    new Supplier() { // from class:
+                                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda26
+                                        @Override // java.util.function.Supplier
+                                        public final Object get() {
+                                            Boolean lambda$isMultiparty$30;
+                                            lambda$isMultiparty$30 =
+                                                    ImsCallSessionImplBase.AnonymousClass1.this
+                                                            .lambda$isMultiparty$30();
+                                            return lambda$isMultiparty$30;
+                                        }
+                                    },
+                                    "isMultiparty"))
+                    .booleanValue();
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -590,12 +726,16 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public void sendRttModifyRequest(final ImsCallProfile toProfile) {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda13
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$sendRttModifyRequest$31(toProfile);
-                }
-            }, "sendRttModifyRequest");
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda13
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this
+                                    .lambda$sendRttModifyRequest$31(toProfile);
+                        }
+                    },
+                    "sendRttModifyRequest");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -605,12 +745,16 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public void sendRttModifyResponse(final boolean status) {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda12
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$sendRttModifyResponse$32(status);
-                }
-            }, "sendRttModifyResponse");
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda12
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this
+                                    .lambda$sendRttModifyResponse$32(status);
+                        }
+                    },
+                    "sendRttModifyResponse");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -620,12 +764,16 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public void sendRttMessage(final String rttMessage) {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda30
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$sendRttMessage$33(rttMessage);
-                }
-            }, "sendRttMessage");
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda30
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this.lambda$sendRttMessage$33(
+                                    rttMessage);
+                        }
+                    },
+                    "sendRttMessage");
         }
 
         @Override // com.android.ims.internal.IImsCallSession
@@ -650,55 +798,86 @@ public class ImsCallSessionImplBase implements AutoCloseable {
 
         @Override // com.android.ims.internal.IImsCallSession
         public void sendRtpHeaderExtensions(final List<RtpHeaderExtension> extensions) {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda15
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$sendRtpHeaderExtensions$34(extensions);
-                }
-            }, "sendRtpHeaderExtensions");
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda15
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this
+                                    .lambda$sendRtpHeaderExtensions$34(extensions);
+                        }
+                    },
+                    "sendRtpHeaderExtensions");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$callSessionNotifyAnbr$35(int mediaType, int direction, int bitsPerSecond) {
+        public /* synthetic */ void lambda$callSessionNotifyAnbr$35(
+                int mediaType, int direction, int bitsPerSecond) {
             ImsCallSessionImplBase.this.callSessionNotifyAnbr(mediaType, direction, bitsPerSecond);
         }
 
         @Override // com.android.ims.internal.IImsCallSession
-        public void callSessionNotifyAnbr(final int mediaType, final int direction, final int bitsPerSecond) {
-            executeMethodAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsCallSessionImplBase.AnonymousClass1.this.lambda$callSessionNotifyAnbr$35(mediaType, direction, bitsPerSecond);
-                }
-            }, "callSessionNotifyAnbr");
+        public void callSessionNotifyAnbr(
+                final int mediaType, final int direction, final int bitsPerSecond) {
+            executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsCallSessionImplBase.AnonymousClass1.this
+                                    .lambda$callSessionNotifyAnbr$35(
+                                            mediaType, direction, bitsPerSecond);
+                        }
+                    },
+                    "callSessionNotifyAnbr");
         }
 
         private void executeMethodAsync(final Runnable r, String errorLogName) {
             try {
-                CompletableFuture.runAsync(new Runnable() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda36
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        TelephonyUtils.runWithCleanCallingIdentity(r);
-                    }
-                }, ImsCallSessionImplBase.this.mExecutor).join();
+                CompletableFuture.runAsync(
+                                new Runnable() { // from class:
+                                                 // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda36
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        TelephonyUtils.runWithCleanCallingIdentity(r);
+                                    }
+                                },
+                                ImsCallSessionImplBase.this.mExecutor)
+                        .join();
             } catch (CancellationException | CompletionException e) {
-                Log.w(ImsCallSessionImplBase.LOG_TAG, "ImsCallSessionImplBase Binder - " + errorLogName + " exception: " + e.getMessage());
+                Log.w(
+                        ImsCallSessionImplBase.LOG_TAG,
+                        "ImsCallSessionImplBase Binder - "
+                                + errorLogName
+                                + " exception: "
+                                + e.getMessage());
             }
         }
 
         private <T> T executeMethodAsyncForResult(final Supplier<T> r, String errorLogName) {
-            CompletableFuture<T> future = CompletableFuture.supplyAsync(new Supplier() { // from class: android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda22
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    Object runWithCleanCallingIdentity;
-                    runWithCleanCallingIdentity = TelephonyUtils.runWithCleanCallingIdentity((Supplier<Object>) r);
-                    return runWithCleanCallingIdentity;
-                }
-            }, ImsCallSessionImplBase.this.mExecutor);
+            CompletableFuture<T> future =
+                    CompletableFuture.supplyAsync(
+                            new Supplier() { // from class:
+                                             // android.telephony.ims.stub.ImsCallSessionImplBase$1$$ExternalSyntheticLambda22
+                                @Override // java.util.function.Supplier
+                                public final Object get() {
+                                    Object runWithCleanCallingIdentity;
+                                    runWithCleanCallingIdentity =
+                                            TelephonyUtils.runWithCleanCallingIdentity(
+                                                    (Supplier<Object>) r);
+                                    return runWithCleanCallingIdentity;
+                                }
+                            },
+                            ImsCallSessionImplBase.this.mExecutor);
             try {
                 return future.get();
             } catch (InterruptedException | ExecutionException e) {
-                Log.w(ImsCallSessionImplBase.LOG_TAG, "ImsCallSessionImplBase Binder - " + errorLogName + " exception: " + e.getMessage());
+                Log.w(
+                        ImsCallSessionImplBase.LOG_TAG,
+                        "ImsCallSessionImplBase Binder - "
+                                + errorLogName
+                                + " exception: "
+                                + e.getMessage());
                 return null;
             }
         }
@@ -709,12 +888,10 @@ public class ImsCallSessionImplBase implements AutoCloseable {
     }
 
     @Deprecated
-    public void setListener(ImsCallSessionListener listener) {
-    }
+    public void setListener(ImsCallSessionListener listener) {}
 
     @Override // java.lang.AutoCloseable
-    public void close() {
-    }
+    public void close() {}
 
     public String getCallId() {
         return null;
@@ -744,65 +921,45 @@ public class ImsCallSessionImplBase implements AutoCloseable {
         return false;
     }
 
-    public void setMute(boolean muted) {
-    }
+    public void setMute(boolean muted) {}
 
-    public void start(String callee, ImsCallProfile profile) {
-    }
+    public void start(String callee, ImsCallProfile profile) {}
 
-    public void startConference(String[] participants, ImsCallProfile profile) {
-    }
+    public void startConference(String[] participants, ImsCallProfile profile) {}
 
-    public void accept(int callType, ImsStreamMediaProfile profile) {
-    }
+    public void accept(int callType, ImsStreamMediaProfile profile) {}
 
-    public void deflect(String deflectNumber) {
-    }
+    public void deflect(String deflectNumber) {}
 
-    public void reject(int reason) {
-    }
+    public void reject(int reason) {}
 
-    public void transfer(String number, boolean isConfirmationRequired) {
-    }
+    public void transfer(String number, boolean isConfirmationRequired) {}
 
-    public void transfer(ImsCallSessionImplBase otherSession) {
-    }
+    public void transfer(ImsCallSessionImplBase otherSession) {}
 
-    public void terminate(int reason) {
-    }
+    public void terminate(int reason) {}
 
-    public void hold(ImsStreamMediaProfile profile) {
-    }
+    public void hold(ImsStreamMediaProfile profile) {}
 
-    public void resume(ImsStreamMediaProfile profile) {
-    }
+    public void resume(ImsStreamMediaProfile profile) {}
 
-    public void merge() {
-    }
+    public void merge() {}
 
-    public void update(int callType, ImsStreamMediaProfile profile) {
-    }
+    public void update(int callType, ImsStreamMediaProfile profile) {}
 
-    public void extendToConference(String[] participants) {
-    }
+    public void extendToConference(String[] participants) {}
 
-    public void inviteParticipants(String[] participants) {
-    }
+    public void inviteParticipants(String[] participants) {}
 
-    public void removeParticipants(String[] participants) {
-    }
+    public void removeParticipants(String[] participants) {}
 
-    public void sendDtmf(char c, Message result) {
-    }
+    public void sendDtmf(char c, Message result) {}
 
-    public void startDtmf(char c) {
-    }
+    public void startDtmf(char c) {}
 
-    public void stopDtmf() {
-    }
+    public void stopDtmf() {}
 
-    public void sendUssd(String ussdMessage) {
-    }
+    public void sendUssd(String ussdMessage) {}
 
     public IImsVideoCallProvider getVideoCallProvider() {
         ImsVideoCallProvider provider = getImsVideoCallProvider();
@@ -820,26 +977,19 @@ public class ImsCallSessionImplBase implements AutoCloseable {
         return false;
     }
 
-    public void sendRttModifyRequest(ImsCallProfile toProfile) {
-    }
+    public void sendRttModifyRequest(ImsCallProfile toProfile) {}
 
-    public void sendRttModifyResponse(boolean status) {
-    }
+    public void sendRttModifyResponse(boolean status) {}
 
-    public void sendRttMessage(String rttMessage) {
-    }
+    public void sendRttMessage(String rttMessage) {}
 
-    public void cancelTransferCall() {
-    }
+    public void cancelTransferCall() {}
 
-    public void sendImsCallEvent(String event, Bundle extras) {
-    }
+    public void sendImsCallEvent(String event, Bundle extras) {}
 
-    public void notifyReadyToHandleImsCallbacks() {
-    }
+    public void notifyReadyToHandleImsCallbacks() {}
 
-    public void sendRtpHeaderExtensions(Set<RtpHeaderExtension> rtpHeaderExtensions) {
-    }
+    public void sendRtpHeaderExtensions(Set<RtpHeaderExtension> rtpHeaderExtensions) {}
 
     public void callSessionNotifyAnbr(int mediaType, int direction, int bitsPerSecond) {
         Log.i(LOG_TAG, "ImsCallSessionImplBase callSessionNotifyAnbr - mediaType: " + mediaType);

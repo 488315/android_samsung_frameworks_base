@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.UserHandle;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -15,19 +16,21 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes.dex */
 public final class SearchTarget implements Parcelable {
-    public static final Parcelable.Creator<SearchTarget> CREATOR = new Parcelable.Creator<SearchTarget>() { // from class: android.app.search.SearchTarget.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SearchTarget createFromParcel(Parcel parcel) {
-            return new SearchTarget(parcel);
-        }
+    public static final Parcelable.Creator<SearchTarget> CREATOR =
+            new Parcelable.Creator<
+                    SearchTarget>() { // from class: android.app.search.SearchTarget.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SearchTarget createFromParcel(Parcel parcel) {
+                    return new SearchTarget(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SearchTarget[] newArray(int size) {
-            return new SearchTarget[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SearchTarget[] newArray(int size) {
+                    return new SearchTarget[size];
+                }
+            };
     public static final String LAYOUT_TYPE_ICON = "icon";
     public static final String LAYOUT_TYPE_ICON_ROW = "icon_row";
     public static final String LAYOUT_TYPE_SHORT_ICON_ROW = "short_icon_row";
@@ -50,12 +53,10 @@ public final class SearchTarget implements Parcelable {
     private final UserHandle mUserHandle;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SearchLayoutType {
-    }
+    public @interface SearchLayoutType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SearchResultType {
-    }
+    public @interface SearchResultType {}
 
     private SearchTarget(Parcel parcel) {
         this.mResultType = parcel.readInt();
@@ -68,12 +69,26 @@ public final class SearchTarget implements Parcelable {
         this.mUserHandle = UserHandle.of(parcel.readInt());
         this.mSearchAction = (SearchAction) parcel.readTypedObject(SearchAction.CREATOR);
         this.mShortcutInfo = (ShortcutInfo) parcel.readTypedObject(ShortcutInfo.CREATOR);
-        this.mAppWidgetProviderInfo = (AppWidgetProviderInfo) parcel.readTypedObject(AppWidgetProviderInfo.CREATOR);
+        this.mAppWidgetProviderInfo =
+                (AppWidgetProviderInfo) parcel.readTypedObject(AppWidgetProviderInfo.CREATOR);
         this.mSliceUri = (Uri) parcel.readTypedObject(Uri.CREATOR);
         this.mExtras = parcel.readBundle(getClass().getClassLoader());
     }
 
-    private SearchTarget(int resultType, String layoutType, String id, String parentId, float score, boolean hidden, String packageName, UserHandle userHandle, SearchAction action, ShortcutInfo shortcutInfo, Uri sliceUri, AppWidgetProviderInfo appWidgetProviderInfo, Bundle extras) {
+    private SearchTarget(
+            int resultType,
+            String layoutType,
+            String id,
+            String parentId,
+            float score,
+            boolean hidden,
+            String packageName,
+            UserHandle userHandle,
+            SearchAction action,
+            ShortcutInfo shortcutInfo,
+            Uri sliceUri,
+            AppWidgetProviderInfo appWidgetProviderInfo,
+            Bundle extras) {
         this.mResultType = resultType;
         this.mLayoutType = (String) Objects.requireNonNull(layoutType);
         this.mId = (String) Objects.requireNonNull(id);
@@ -208,16 +223,21 @@ public final class SearchTarget implements Parcelable {
         public Builder setShortcutInfo(ShortcutInfo shortcutInfo) {
             this.mShortcutInfo = (ShortcutInfo) Objects.requireNonNull(shortcutInfo);
             if (this.mPackageName != null && !this.mPackageName.equals(shortcutInfo.getPackage())) {
-                throw new IllegalStateException("SearchTarget packageName is different from shortcut's packageName");
+                throw new IllegalStateException(
+                        "SearchTarget packageName is different from shortcut's packageName");
             }
             this.mPackageName = shortcutInfo.getPackage();
             return this;
         }
 
         public Builder setAppWidgetProviderInfo(AppWidgetProviderInfo appWidgetProviderInfo) {
-            this.mAppWidgetProviderInfo = (AppWidgetProviderInfo) Objects.requireNonNull(appWidgetProviderInfo);
-            if (this.mPackageName != null && !this.mPackageName.equals(appWidgetProviderInfo.provider.getPackageName())) {
-                throw new IllegalStateException("SearchTarget packageName is different from appWidgetProviderInfo's packageName");
+            this.mAppWidgetProviderInfo =
+                    (AppWidgetProviderInfo) Objects.requireNonNull(appWidgetProviderInfo);
+            if (this.mPackageName != null
+                    && !this.mPackageName.equals(appWidgetProviderInfo.provider.getPackageName())) {
+                throw new IllegalStateException(
+                        "SearchTarget packageName is different from appWidgetProviderInfo's"
+                                + " packageName");
             }
             return this;
         }
@@ -254,7 +274,20 @@ public final class SearchTarget implements Parcelable {
         }
 
         public SearchTarget build() {
-            return new SearchTarget(this.mResultType, this.mLayoutType, this.mId, this.mParentId, this.mScore, this.mHidden, this.mPackageName, this.mUserHandle, this.mSearchAction, this.mShortcutInfo, this.mSliceUri, this.mAppWidgetProviderInfo, this.mExtras);
+            return new SearchTarget(
+                    this.mResultType,
+                    this.mLayoutType,
+                    this.mId,
+                    this.mParentId,
+                    this.mScore,
+                    this.mHidden,
+                    this.mPackageName,
+                    this.mUserHandle,
+                    this.mSearchAction,
+                    this.mShortcutInfo,
+                    this.mSliceUri,
+                    this.mAppWidgetProviderInfo,
+                    this.mExtras);
         }
     }
 }

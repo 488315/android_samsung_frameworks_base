@@ -10,6 +10,9 @@ import android.os.UserHandle;
 /* loaded from: classes2.dex */
 public final class StatsHelper {
     public static void sendStatsdReadyBroadcast(Context context) {
-        context.sendBroadcastAsUser(new Intent("android.app.action.STATSD_STARTED").addFlags(16777216), UserHandle.SYSTEM, "android.permission.DUMP");
+        context.sendBroadcastAsUser(
+                new Intent("android.app.action.STATSD_STARTED").addFlags(16777216),
+                UserHandle.SYSTEM,
+                "android.permission.DUMP");
     }
 }

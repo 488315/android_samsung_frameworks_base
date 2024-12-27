@@ -5,24 +5,26 @@ import android.content.pm.ShortcutInfo;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.UserHandle;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class AppTarget implements Parcelable {
-    public static final Parcelable.Creator<AppTarget> CREATOR = new Parcelable.Creator<AppTarget>() { // from class: android.app.prediction.AppTarget.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppTarget createFromParcel(Parcel parcel) {
-            return new AppTarget(parcel);
-        }
+    public static final Parcelable.Creator<AppTarget> CREATOR =
+            new Parcelable.Creator<AppTarget>() { // from class: android.app.prediction.AppTarget.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppTarget createFromParcel(Parcel parcel) {
+                    return new AppTarget(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppTarget[] newArray(int size) {
-            return new AppTarget[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppTarget[] newArray(int size) {
+                    return new AppTarget[size];
+                }
+            };
     private final String mClassName;
     private final AppTargetId mId;
     private final String mPackageName;
@@ -50,7 +52,13 @@ public final class AppTarget implements Parcelable {
         this.mRank = 0;
     }
 
-    private AppTarget(AppTargetId id, String packageName, UserHandle user, ShortcutInfo shortcutInfo, String className, int rank) {
+    private AppTarget(
+            AppTargetId id,
+            String packageName,
+            UserHandle user,
+            ShortcutInfo shortcutInfo,
+            String className,
+            int rank) {
         this.mId = id;
         this.mShortcutInfo = shortcutInfo;
         this.mPackageName = packageName;
@@ -102,9 +110,20 @@ public final class AppTarget implements Parcelable {
             return false;
         }
         AppTarget other = (AppTarget) o;
-        boolean sameClassName = (this.mClassName == null && other.mClassName == null) || (this.mClassName != null && this.mClassName.equals(other.mClassName));
-        boolean sameShortcutInfo = (this.mShortcutInfo == null && other.mShortcutInfo == null) || !(this.mShortcutInfo == null || other.mShortcutInfo == null || this.mShortcutInfo.getId() != other.mShortcutInfo.getId());
-        return this.mId.equals(other.mId) && this.mPackageName.equals(other.mPackageName) && sameClassName && this.mUser.equals(other.mUser) && sameShortcutInfo && this.mRank == other.mRank;
+        boolean sameClassName =
+                (this.mClassName == null && other.mClassName == null)
+                        || (this.mClassName != null && this.mClassName.equals(other.mClassName));
+        boolean sameShortcutInfo =
+                (this.mShortcutInfo == null && other.mShortcutInfo == null)
+                        || !(this.mShortcutInfo == null
+                                || other.mShortcutInfo == null
+                                || this.mShortcutInfo.getId() != other.mShortcutInfo.getId());
+        return this.mId.equals(other.mId)
+                && this.mPackageName.equals(other.mPackageName)
+                && sameClassName
+                && this.mUser.equals(other.mUser)
+                && sameShortcutInfo
+                && this.mRank == other.mRank;
     }
 
     public int hashCode() {
@@ -196,7 +215,13 @@ public final class AppTarget implements Parcelable {
             if (this.mPackageName == null) {
                 throw new IllegalStateException("No target is set");
             }
-            return new AppTarget(this.mId, this.mPackageName, this.mUser, this.mShortcutInfo, this.mClassName, this.mRank);
+            return new AppTarget(
+                    this.mId,
+                    this.mPackageName,
+                    this.mUser,
+                    this.mShortcutInfo,
+                    this.mClassName,
+                    this.mRank);
         }
     }
 }

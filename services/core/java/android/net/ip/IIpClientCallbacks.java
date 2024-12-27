@@ -3,7 +3,6 @@ package android.net.ip;
 import android.net.DhcpResultsParcelable;
 import android.net.Layer2PacketParcelable;
 import android.net.LinkProperties;
-import android.net.ip.IIpClient;
 import android.net.networkstack.aidl.ip.ReachabilityLossInfoParcelable;
 import android.os.Binder;
 import android.os.IBinder;
@@ -11,6 +10,7 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -39,68 +39,55 @@ public interface IIpClientCallbacks extends IInterface {
         }
 
         @Override // android.net.ip.IIpClientCallbacks
-        public void installPacketFilter(byte[] bArr) throws RemoteException {
-        }
+        public void installPacketFilter(byte[] bArr) throws RemoteException {}
 
         @Override // android.net.ip.IIpClientCallbacks
-        public void onIpClientCreated(IIpClient iIpClient) throws RemoteException {
-        }
+        public void onIpClientCreated(IIpClient iIpClient) throws RemoteException {}
 
         @Override // android.net.ip.IIpClientCallbacks
-        public void onLinkPropertiesChange(LinkProperties linkProperties) throws RemoteException {
-        }
+        public void onLinkPropertiesChange(LinkProperties linkProperties) throws RemoteException {}
 
         @Override // android.net.ip.IIpClientCallbacks
-        public void onNewDhcpResults(DhcpResultsParcelable dhcpResultsParcelable) throws RemoteException {
-        }
+        public void onNewDhcpResults(DhcpResultsParcelable dhcpResultsParcelable)
+                throws RemoteException {}
 
         @Override // android.net.ip.IIpClientCallbacks
-        public void onPostDhcpAction() throws RemoteException {
-        }
+        public void onPostDhcpAction() throws RemoteException {}
 
         @Override // android.net.ip.IIpClientCallbacks
-        public void onPreDhcpAction() throws RemoteException {
-        }
+        public void onPreDhcpAction() throws RemoteException {}
 
         @Override // android.net.ip.IIpClientCallbacks
-        public void onPreconnectionStart(List list) throws RemoteException {
-        }
+        public void onPreconnectionStart(List list) throws RemoteException {}
 
         @Override // android.net.ip.IIpClientCallbacks
-        public void onProvisioningFailure(LinkProperties linkProperties) throws RemoteException {
-        }
+        public void onProvisioningFailure(LinkProperties linkProperties) throws RemoteException {}
 
         @Override // android.net.ip.IIpClientCallbacks
-        public void onProvisioningSuccess(LinkProperties linkProperties) throws RemoteException {
-        }
+        public void onProvisioningSuccess(LinkProperties linkProperties) throws RemoteException {}
 
         @Override // android.net.ip.IIpClientCallbacks
-        public void onQuit() throws RemoteException {
-        }
+        public void onQuit() throws RemoteException {}
 
         @Override // android.net.ip.IIpClientCallbacks
-        public void onReachabilityFailure(ReachabilityLossInfoParcelable reachabilityLossInfoParcelable) throws RemoteException {
-        }
+        public void onReachabilityFailure(
+                ReachabilityLossInfoParcelable reachabilityLossInfoParcelable)
+                throws RemoteException {}
 
         @Override // android.net.ip.IIpClientCallbacks
-        public void onReachabilityLost(String str) throws RemoteException {
-        }
+        public void onReachabilityLost(String str) throws RemoteException {}
 
         @Override // android.net.ip.IIpClientCallbacks
-        public void setFallbackMulticastFilter(boolean z) throws RemoteException {
-        }
+        public void setFallbackMulticastFilter(boolean z) throws RemoteException {}
 
         @Override // android.net.ip.IIpClientCallbacks
-        public void setMaxDtimMultiplier(int i) throws RemoteException {
-        }
+        public void setMaxDtimMultiplier(int i) throws RemoteException {}
 
         @Override // android.net.ip.IIpClientCallbacks
-        public void setNeighborDiscoveryOffload(boolean z) throws RemoteException {
-        }
+        public void setNeighborDiscoveryOffload(boolean z) throws RemoteException {}
 
         @Override // android.net.ip.IIpClientCallbacks
-        public void startReadPacketFilter() throws RemoteException {
-        }
+        public void startReadPacketFilter() throws RemoteException {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -143,7 +130,8 @@ public interface IIpClientCallbacks extends IInterface {
                         Parcel obtain2 = Parcel.obtain();
                         try {
                             obtain.writeInterfaceToken(IIpClientCallbacks.DESCRIPTOR);
-                            this.mRemote.transact(Stub.TRANSACTION_getInterfaceHash, obtain, obtain2, 0);
+                            this.mRemote.transact(
+                                    Stub.TRANSACTION_getInterfaceHash, obtain, obtain2, 0);
                             obtain2.readException();
                             this.mCachedHash = obtain2.readString();
                             obtain2.recycle();
@@ -167,7 +155,8 @@ public interface IIpClientCallbacks extends IInterface {
                     Parcel obtain2 = Parcel.obtain();
                     try {
                         obtain.writeInterfaceToken(IIpClientCallbacks.DESCRIPTOR);
-                        this.mRemote.transact(Stub.TRANSACTION_getInterfaceVersion, obtain, obtain2, 0);
+                        this.mRemote.transact(
+                                Stub.TRANSACTION_getInterfaceVersion, obtain, obtain2, 0);
                         obtain2.readException();
                         this.mCachedVersion = obtain2.readInt();
                     } finally {
@@ -216,7 +205,8 @@ public interface IIpClientCallbacks extends IInterface {
                     obtain.writeTypedObject(linkProperties, 0);
                     if (this.mRemote.transact(7, obtain, null, 1)) {
                     } else {
-                        throw new RemoteException("Method onLinkPropertiesChange is unimplemented.");
+                        throw new RemoteException(
+                                "Method onLinkPropertiesChange is unimplemented.");
                     }
                 } finally {
                     obtain.recycle();
@@ -326,7 +316,8 @@ public interface IIpClientCallbacks extends IInterface {
             }
 
             @Override // android.net.ip.IIpClientCallbacks
-            public final void onReachabilityFailure(ReachabilityLossInfoParcelable reachabilityLossInfoParcelable) {
+            public final void onReachabilityFailure(
+                    ReachabilityLossInfoParcelable reachabilityLossInfoParcelable) {
                 Parcel obtain = Parcel.obtain();
                 try {
                     obtain.writeInterfaceToken(IIpClientCallbacks.DESCRIPTOR);
@@ -363,7 +354,8 @@ public interface IIpClientCallbacks extends IInterface {
                     obtain.writeBoolean(z);
                     if (this.mRemote.transact(12, obtain, null, 1)) {
                     } else {
-                        throw new RemoteException("Method setFallbackMulticastFilter is unimplemented.");
+                        throw new RemoteException(
+                                "Method setFallbackMulticastFilter is unimplemented.");
                     }
                 } finally {
                     obtain.recycle();
@@ -393,7 +385,8 @@ public interface IIpClientCallbacks extends IInterface {
                     obtain.writeBoolean(z);
                     if (this.mRemote.transact(13, obtain, null, 1)) {
                     } else {
-                        throw new RemoteException("Method setNeighborDiscoveryOffload is unimplemented.");
+                        throw new RemoteException(
+                                "Method setNeighborDiscoveryOffload is unimplemented.");
                     }
                 } finally {
                     obtain.recycle();
@@ -423,8 +416,10 @@ public interface IIpClientCallbacks extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IIpClientCallbacks.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IIpClientCallbacks)) {
+            IInterface queryLocalInterface =
+                    iBinder.queryLocalInterface(IIpClientCallbacks.DESCRIPTOR);
+            if (queryLocalInterface != null
+                    && (queryLocalInterface instanceof IIpClientCallbacks)) {
                 return (IIpClientCallbacks) queryLocalInterface;
             }
             Proxy proxy = new Proxy();
@@ -440,7 +435,8 @@ public interface IIpClientCallbacks extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+                throws RemoteException {
             String str = IIpClientCallbacks.DESCRIPTOR;
             if (i >= 1 && i <= TRANSACTION_getInterfaceVersion) {
                 parcel.enforceInterface(str);
@@ -470,16 +466,21 @@ public interface IIpClientCallbacks extends IInterface {
                     onPostDhcpAction();
                     return true;
                 case 4:
-                    onNewDhcpResults((DhcpResultsParcelable) parcel.readTypedObject(DhcpResultsParcelable.CREATOR));
+                    onNewDhcpResults(
+                            (DhcpResultsParcelable)
+                                    parcel.readTypedObject(DhcpResultsParcelable.CREATOR));
                     return true;
                 case 5:
-                    onProvisioningSuccess((LinkProperties) parcel.readTypedObject(LinkProperties.CREATOR));
+                    onProvisioningSuccess(
+                            (LinkProperties) parcel.readTypedObject(LinkProperties.CREATOR));
                     return true;
                 case 6:
-                    onProvisioningFailure((LinkProperties) parcel.readTypedObject(LinkProperties.CREATOR));
+                    onProvisioningFailure(
+                            (LinkProperties) parcel.readTypedObject(LinkProperties.CREATOR));
                     return true;
                 case 7:
-                    onLinkPropertiesChange((LinkProperties) parcel.readTypedObject(LinkProperties.CREATOR));
+                    onLinkPropertiesChange(
+                            (LinkProperties) parcel.readTypedObject(LinkProperties.CREATOR));
                     return true;
                 case 8:
                     onReachabilityLost(parcel.readString());
@@ -500,10 +501,13 @@ public interface IIpClientCallbacks extends IInterface {
                     setNeighborDiscoveryOffload(parcel.readBoolean());
                     return true;
                 case 14:
-                    onPreconnectionStart(parcel.createTypedArrayList(Layer2PacketParcelable.CREATOR));
+                    onPreconnectionStart(
+                            parcel.createTypedArrayList(Layer2PacketParcelable.CREATOR));
                     return true;
                 case 15:
-                    onReachabilityFailure((ReachabilityLossInfoParcelable) parcel.readTypedObject(ReachabilityLossInfoParcelable.CREATOR));
+                    onReachabilityFailure(
+                            (ReachabilityLossInfoParcelable)
+                                    parcel.readTypedObject(ReachabilityLossInfoParcelable.CREATOR));
                     return true;
                 case 16:
                     setMaxDtimMultiplier(parcel.readInt());
@@ -554,7 +558,8 @@ public interface IIpClientCallbacks extends IInterface {
 
     void onQuit() throws RemoteException;
 
-    void onReachabilityFailure(ReachabilityLossInfoParcelable reachabilityLossInfoParcelable) throws RemoteException;
+    void onReachabilityFailure(ReachabilityLossInfoParcelable reachabilityLossInfoParcelable)
+            throws RemoteException;
 
     void onReachabilityLost(String str) throws RemoteException;
 

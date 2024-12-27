@@ -8,8 +8,7 @@ public final class Inputmethodeditor {
         public static final long ELAPSED_REALTIME_NANOS = 1125281431553L;
         public static final long WHERE = 1138166333442L;
 
-        public InputMethodClientsTraceProto() {
-        }
+        public InputMethodClientsTraceProto() {}
 
         public final class ClientSideProto {
             public static final long DISPLAY_ID = 1120986464257L;
@@ -22,8 +21,7 @@ public final class Inputmethodeditor {
             public static final long INSETS_CONTROLLER = 1146756268036L;
             public static final long VIEW_ROOT_IMPL = 1146756268035L;
 
-            public ClientSideProto() {
-            }
+            public ClientSideProto() {}
         }
     }
 
@@ -32,8 +30,7 @@ public final class Inputmethodeditor {
         public static final long INPUT_METHOD_SERVICE = 1146756268035L;
         public static final long WHERE = 1138166333442L;
 
-        public InputMethodServiceTraceProto() {
-        }
+        public InputMethodServiceTraceProto() {}
     }
 
     public final class InputMethodManagerServiceTraceProto {
@@ -41,7 +38,6 @@ public final class Inputmethodeditor {
         public static final long INPUT_METHOD_MANAGER_SERVICE = 1146756268035L;
         public static final long WHERE = 1138166333442L;
 
-        public InputMethodManagerServiceTraceProto() {
-        }
+        public InputMethodManagerServiceTraceProto() {}
     }
 }

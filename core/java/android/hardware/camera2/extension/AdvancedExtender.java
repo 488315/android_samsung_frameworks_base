@@ -6,10 +6,10 @@ import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
 import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.CaptureResult;
-import android.hardware.camera2.extension.IAdvancedExtenderImpl;
 import android.hardware.camera2.impl.CameraMetadataNative;
 import android.util.Log;
 import android.util.Pair;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,13 +27,16 @@ public abstract class AdvancedExtender {
 
     public abstract List<CaptureResult.Key> getAvailableCaptureResultKeys(String str);
 
-    public abstract List<Pair<CameraCharacteristics.Key, Object>> getAvailableCharacteristicsKeyValues();
+    public abstract List<Pair<CameraCharacteristics.Key, Object>>
+            getAvailableCharacteristicsKeyValues();
 
     public abstract SessionProcessor getSessionProcessor();
 
-    public abstract Map<Integer, List<android.util.Size>> getSupportedCaptureOutputResolutions(String str);
+    public abstract Map<Integer, List<android.util.Size>> getSupportedCaptureOutputResolutions(
+            String str);
 
-    public abstract Map<Integer, List<android.util.Size>> getSupportedPreviewOutputResolutions(String str);
+    public abstract Map<Integer, List<android.util.Size>> getSupportedPreviewOutputResolutions(
+            String str);
 
     public abstract void initialize(String str, CharacteristicsMap characteristicsMap);
 
@@ -45,10 +48,13 @@ public abstract class AdvancedExtender {
             String[] cameraIds = this.mCameraManager.getCameraIdListNoLazy();
             if (cameraIds != null) {
                 for (String cameraId : cameraIds) {
-                    CameraCharacteristics chars = this.mCameraManager.getCameraCharacteristics(cameraId);
-                    ArrayList<CameraCharacteristics.Key<?>> vendorKeys = chars.getNativeMetadata().getAllVendorKeys(keyClass);
+                    CameraCharacteristics chars =
+                            this.mCameraManager.getCameraCharacteristics(cameraId);
+                    ArrayList<CameraCharacteristics.Key<?>> vendorKeys =
+                            chars.getNativeMetadata().getAllVendorKeys(keyClass);
                     if (vendorKeys != null && !vendorKeys.isEmpty()) {
-                        this.mMetadataVendorIdMap.put(cameraId, Long.valueOf(vendorKeys.get(0).getVendorId()));
+                        this.mMetadataVendorIdMap.put(
+                                cameraId, Long.valueOf(vendorKeys.get(0).getVendorId()));
                     }
                 }
             }
@@ -70,12 +76,13 @@ public abstract class AdvancedExtender {
     }
 
     private final class AdvancedExtenderImpl extends IAdvancedExtenderImpl.Stub {
-        private AdvancedExtenderImpl() {
-        }
+        private AdvancedExtenderImpl() {}
 
         @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
-        public boolean isExtensionAvailable(String cameraId, Map<String, CameraMetadataNative> charsMapNative) {
-            return AdvancedExtender.this.isExtensionAvailable(cameraId, new CharacteristicsMap(charsMapNative));
+        public boolean isExtensionAvailable(
+                String cameraId, Map<String, CameraMetadataNative> charsMapNative) {
+            return AdvancedExtender.this.isExtensionAvailable(
+                    cameraId, new CharacteristicsMap(charsMapNative));
         }
 
         @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
@@ -90,16 +97,19 @@ public abstract class AdvancedExtender {
 
         @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
         public List<SizeList> getSupportedPreviewOutputResolutions(String cameraId) {
-            return AdvancedExtender.initializeParcelable(AdvancedExtender.this.getSupportedPreviewOutputResolutions(cameraId));
+            return AdvancedExtender.initializeParcelable(
+                    AdvancedExtender.this.getSupportedPreviewOutputResolutions(cameraId));
         }
 
         @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
         public List<SizeList> getSupportedCaptureOutputResolutions(String cameraId) {
-            return AdvancedExtender.initializeParcelable(AdvancedExtender.this.getSupportedCaptureOutputResolutions(cameraId));
+            return AdvancedExtender.initializeParcelable(
+                    AdvancedExtender.this.getSupportedCaptureOutputResolutions(cameraId));
         }
 
         @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
-        public LatencyRange getEstimatedCaptureLatencyRange(String cameraId, Size outputSize, int format) {
+        public LatencyRange getEstimatedCaptureLatencyRange(
+                String cameraId, Size outputSize, int format) {
             return null;
         }
 
@@ -112,7 +122,8 @@ public abstract class AdvancedExtender {
 
         @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
         public CameraMetadataNative getAvailableCaptureRequestKeys(String cameraId) {
-            List<CaptureRequest.Key> supportedCaptureKeys = AdvancedExtender.this.getAvailableCaptureRequestKeys(cameraId);
+            List<CaptureRequest.Key> supportedCaptureKeys =
+                    AdvancedExtender.this.getAvailableCaptureRequestKeys(cameraId);
             if (!supportedCaptureKeys.isEmpty()) {
                 CameraMetadataNative ret = new CameraMetadataNative();
                 long vendorId = AdvancedExtender.this.getMetadataVendorId(cameraId);
@@ -123,7 +134,10 @@ public abstract class AdvancedExtender {
                     requestKeyTags[i] = CameraMetadataNative.getTag(key.getName(), vendorId);
                     i++;
                 }
-                ret.set((CameraCharacteristics.Key<CameraCharacteristics.Key<int[]>>) CameraCharacteristics.REQUEST_AVAILABLE_REQUEST_KEYS, (CameraCharacteristics.Key<int[]>) requestKeyTags);
+                ret.set(
+                        (CameraCharacteristics.Key<CameraCharacteristics.Key<int[]>>)
+                                CameraCharacteristics.REQUEST_AVAILABLE_REQUEST_KEYS,
+                        (CameraCharacteristics.Key<int[]>) requestKeyTags);
                 return ret;
             }
             return null;
@@ -131,7 +145,8 @@ public abstract class AdvancedExtender {
 
         @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
         public CameraMetadataNative getAvailableCaptureResultKeys(String cameraId) {
-            List<CaptureResult.Key> supportedResultKeys = AdvancedExtender.this.getAvailableCaptureResultKeys(cameraId);
+            List<CaptureResult.Key> supportedResultKeys =
+                    AdvancedExtender.this.getAvailableCaptureResultKeys(cameraId);
             if (!supportedResultKeys.isEmpty()) {
                 CameraMetadataNative ret = new CameraMetadataNative();
                 long vendorId = AdvancedExtender.this.getMetadataVendorId(cameraId);
@@ -142,7 +157,10 @@ public abstract class AdvancedExtender {
                     resultKeyTags[i] = CameraMetadataNative.getTag(key.getName(), vendorId);
                     i++;
                 }
-                ret.set((CameraCharacteristics.Key<CameraCharacteristics.Key<int[]>>) CameraCharacteristics.REQUEST_AVAILABLE_RESULT_KEYS, (CameraCharacteristics.Key<int[]>) resultKeyTags);
+                ret.set(
+                        (CameraCharacteristics.Key<CameraCharacteristics.Key<int[]>>)
+                                CameraCharacteristics.REQUEST_AVAILABLE_RESULT_KEYS,
+                        (CameraCharacteristics.Key<int[]>) resultKeyTags);
                 return ret;
             }
             return null;
@@ -160,20 +178,30 @@ public abstract class AdvancedExtender {
 
         @Override // android.hardware.camera2.extension.IAdvancedExtenderImpl
         public CameraMetadataNative getAvailableCharacteristicsKeyValues(String cameraId) {
-            List<Pair<CameraCharacteristics.Key, Object>> entries = AdvancedExtender.this.getAvailableCharacteristicsKeyValues();
+            List<Pair<CameraCharacteristics.Key, Object>> entries =
+                    AdvancedExtender.this.getAvailableCharacteristicsKeyValues();
             if (entries != null && !entries.isEmpty()) {
                 CameraMetadataNative ret = new CameraMetadataNative();
-                long vendorId = AdvancedExtender.this.mMetadataVendorIdMap.containsKey(cameraId) ? ((Long) AdvancedExtender.this.mMetadataVendorIdMap.get(cameraId)).longValue() : Long.MAX_VALUE;
+                long vendorId =
+                        AdvancedExtender.this.mMetadataVendorIdMap.containsKey(cameraId)
+                                ? ((Long) AdvancedExtender.this.mMetadataVendorIdMap.get(cameraId))
+                                        .longValue()
+                                : Long.MAX_VALUE;
                 ret.setVendorId(vendorId);
                 int[] characteristicsKeyTags = new int[entries.size()];
                 int i = 0;
                 for (Pair<CameraCharacteristics.Key, Object> entry : entries) {
                     int tag = CameraMetadataNative.getTag(entry.first.getName(), vendorId);
                     characteristicsKeyTags[i] = tag;
-                    ret.set((CameraCharacteristics.Key<CameraCharacteristics.Key>) entry.first, (CameraCharacteristics.Key) entry.second);
+                    ret.set(
+                            (CameraCharacteristics.Key<CameraCharacteristics.Key>) entry.first,
+                            (CameraCharacteristics.Key) entry.second);
                     i++;
                 }
-                ret.set((CameraCharacteristics.Key<CameraCharacteristics.Key<int[]>>) CameraCharacteristics.REQUEST_AVAILABLE_CHARACTERISTICS_KEYS, (CameraCharacteristics.Key<int[]>) characteristicsKeyTags);
+                ret.set(
+                        (CameraCharacteristics.Key<CameraCharacteristics.Key<int[]>>)
+                                CameraCharacteristics.REQUEST_AVAILABLE_CHARACTERISTICS_KEYS,
+                        (CameraCharacteristics.Key<int[]>) characteristicsKeyTags);
                 return ret;
             }
             return null;

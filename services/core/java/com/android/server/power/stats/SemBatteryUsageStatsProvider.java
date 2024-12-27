@@ -12,6 +12,7 @@ import android.os.UidBatteryConsumer;
 import android.telephony.CellSignalStrength;
 import android.util.ArrayMap;
 import android.util.SparseArray;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -26,12 +27,18 @@ public final class SemBatteryUsageStatsProvider {
     public final Map mLastKWakelockMap = new HashMap();
     public final Map mLastScreenWakeMap = new HashMap();
 
-    public SemBatteryUsageStatsProvider(BatteryStats batteryStats, BatteryUsageStatsProvider batteryUsageStatsProvider) {
+    public SemBatteryUsageStatsProvider(
+            BatteryStats batteryStats, BatteryUsageStatsProvider batteryUsageStatsProvider) {
         this.mStats = batteryStats;
         this.mBatteryUsageStatsProvider = batteryUsageStatsProvider;
     }
 
-    public final void updateBatteryUsage(BatteryUsageStats batteryUsageStats, long j, long j2, SemDevicePowerInfo semDevicePowerInfo, ArrayList arrayList) {
+    public final void updateBatteryUsage(
+            BatteryUsageStats batteryUsageStats,
+            long j,
+            long j2,
+            SemDevicePowerInfo semDevicePowerInfo,
+            ArrayList arrayList) {
         HashMap hashMap;
         SparseArray sparseArray;
         int i;
@@ -58,7 +65,8 @@ public final class SemBatteryUsageStatsProvider {
                 sparseArray = uidStats;
                 i = size;
             } else {
-                UidBatteryConsumer uidBatteryConsumer2 = (UidBatteryConsumer) hashMap2.get(Integer.valueOf(uid.getUid()));
+                UidBatteryConsumer uidBatteryConsumer2 =
+                        (UidBatteryConsumer) hashMap2.get(Integer.valueOf(uid.getUid()));
                 SemUidPowerInfo semUidPowerInfo = new SemUidPowerInfo(uid.getUid());
                 HashMap hashMap3 = hashMap2;
                 sparseArray = uidStats;
@@ -73,8 +81,14 @@ public final class SemBatteryUsageStatsProvider {
                 }
                 long min = Math.min(processStateTime, j4);
                 hashMap = hashMap3;
-                long processStateTime2 = ((uid.getProcessStateTime(2, j, 0) + uid.getProcessStateTime(1, j, 0)) / j3) + processStateTime;
-                long processStateTime3 = (uid.getProcessStateTime(5, j, 0) + (uid.getProcessStateTime(4, j, 0) + uid.getProcessStateTime(3, j, 0))) / j3;
+                long processStateTime2 =
+                        ((uid.getProcessStateTime(2, j, 0) + uid.getProcessStateTime(1, j, 0)) / j3)
+                                + processStateTime;
+                long processStateTime3 =
+                        (uid.getProcessStateTime(5, j, 0)
+                                        + (uid.getProcessStateTime(4, j, 0)
+                                                + uid.getProcessStateTime(3, j, 0)))
+                                / j3;
                 long j7 = 0;
                 long j8 = 0;
                 for (int i5 = 0; i5 < 16; i5++) {
@@ -85,37 +99,49 @@ public final class SemBatteryUsageStatsProvider {
                     }
                 }
                 long j9 = j7;
-                semUidPowerInfo.screenPower = Math.max(0.0d, uidBatteryConsumer2.getConsumedPower(0));
-                semUidPowerInfo.smearedPower = semUidPowerInfo.shouldHide ? 0.0d : uidBatteryConsumer2.getConsumedPower();
+                semUidPowerInfo.screenPower =
+                        Math.max(0.0d, uidBatteryConsumer2.getConsumedPower(0));
+                semUidPowerInfo.smearedPower =
+                        semUidPowerInfo.shouldHide ? 0.0d : uidBatteryConsumer2.getConsumedPower();
                 double consumedPower = uidBatteryConsumer2.getConsumedPower();
                 i = size;
                 long j10 = j8;
                 semUidPowerInfo.power = Math.max(0.0d, consumedPower - semUidPowerInfo.screenPower);
-                semUidPowerInfo.cpuTime = (uid.getSystemCpuTimeUs(0) + uid.getUserCpuTimeUs(0)) / 1000;
+                semUidPowerInfo.cpuTime =
+                        (uid.getSystemCpuTimeUs(0) + uid.getUserCpuTimeUs(0)) / 1000;
                 ArrayMap wakelockStats = uid.getWakelockStats();
                 int size2 = wakelockStats.size();
                 long j11 = 0;
                 for (int i6 = 0; i6 < size2; i6++) {
-                    BatteryStats.Timer wakeTime = ((BatteryStats.Uid.Wakelock) wakelockStats.valueAt(i6)).getWakeTime(0);
+                    BatteryStats.Timer wakeTime =
+                            ((BatteryStats.Uid.Wakelock) wakelockStats.valueAt(i6)).getWakeTime(0);
                     if (wakeTime != null) {
                         j11 = wakeTime.getTotalTimeLocked(j, 0) + j11;
                     }
                 }
                 semUidPowerInfo.wakelockTime = j11 / 1000;
                 semUidPowerInfo.mobileActive = uid.getMobileRadioActiveTime(0) / 1000;
-                semUidPowerInfo.mobileData = uid.getNetworkActivityBytes(1, 0) + uid.getNetworkActivityBytes(0, 0);
-                semUidPowerInfo.mobilePackets = uid.getNetworkActivityPackets(1, 0) + uid.getNetworkActivityPackets(0, 0);
-                semUidPowerInfo.wifiPackets = uid.getNetworkActivityPackets(3, 0) + uid.getNetworkActivityPackets(2, 0);
-                semUidPowerInfo.wifiData = uid.getNetworkActivityBytes(3, 0) + uid.getNetworkActivityBytes(2, 0);
+                semUidPowerInfo.mobileData =
+                        uid.getNetworkActivityBytes(1, 0) + uid.getNetworkActivityBytes(0, 0);
+                semUidPowerInfo.mobilePackets =
+                        uid.getNetworkActivityPackets(1, 0) + uid.getNetworkActivityPackets(0, 0);
+                semUidPowerInfo.wifiPackets =
+                        uid.getNetworkActivityPackets(3, 0) + uid.getNetworkActivityPackets(2, 0);
+                semUidPowerInfo.wifiData =
+                        uid.getNetworkActivityBytes(3, 0) + uid.getNetworkActivityBytes(2, 0);
                 ArrayMap packageStats = uid.getPackageStats();
                 int i7 = 1;
                 int size3 = packageStats.size() - 1;
                 int i8 = 0;
                 while (size3 >= 0) {
-                    ArrayMap wakeupAlarmStats = ((BatteryStats.Uid.Pkg) packageStats.valueAt(size3)).getWakeupAlarmStats();
+                    ArrayMap wakeupAlarmStats =
+                            ((BatteryStats.Uid.Pkg) packageStats.valueAt(size3))
+                                    .getWakeupAlarmStats();
                     if (((String) packageStats.keyAt(size3)) != null) {
                         for (int size4 = wakeupAlarmStats.size() - i7; size4 >= 0; size4--) {
-                            i8 += ((BatteryStats.Counter) wakeupAlarmStats.valueAt(size4)).getCountLocked(0);
+                            i8 +=
+                                    ((BatteryStats.Counter) wakeupAlarmStats.valueAt(size4))
+                                            .getCountLocked(0);
                         }
                     }
                     size3--;
@@ -123,8 +149,15 @@ public final class SemBatteryUsageStatsProvider {
                 }
                 semUidPowerInfo.wakeupAlarm = i8;
                 BatteryStats.Timer bluetoothScanTimer = uid.getBluetoothScanTimer();
-                semUidPowerInfo.btScan = (bluetoothScanTimer == null || (bluetoothScanTimer.getTotalTimeLocked(j, 0) + 500) / 1000 == 0) ? 0 : bluetoothScanTimer.getCountLocked(0);
-                semUidPowerInfo.btData = uid.getNetworkActivityBytes(5, 0) + uid.getNetworkActivityBytes(4, 0);
+                semUidPowerInfo.btScan =
+                        (bluetoothScanTimer == null
+                                        || (bluetoothScanTimer.getTotalTimeLocked(j, 0) + 500)
+                                                        / 1000
+                                                == 0)
+                                ? 0
+                                : bluetoothScanTimer.getCountLocked(0);
+                semUidPowerInfo.btData =
+                        uid.getNetworkActivityBytes(5, 0) + uid.getNetworkActivityBytes(4, 0);
                 SparseArray sensorStats = uid.getSensorStats();
                 BatteryStats.Uid.Sensor sensor = (BatteryStats.Uid.Sensor) sensorStats.get(-10000);
                 BatteryStats.Uid.Sensor sensor2 = (BatteryStats.Uid.Sensor) sensorStats.get(-10001);
@@ -136,19 +169,26 @@ public final class SemBatteryUsageStatsProvider {
                 } else {
                     i2 = 0;
                     j5 = 1000;
-                    semUidPowerInfo.gpsTime = sensor.getSensorTime().getTotalTimeLocked(j, 0) / 1000;
+                    semUidPowerInfo.gpsTime =
+                            sensor.getSensorTime().getTotalTimeLocked(j, 0) / 1000;
                 }
                 if (sensor2 != null && sensor2.getSensorTime() != null) {
-                    semUidPowerInfo.actualGpsTime = sensor2.getSensorTime().getTotalTimeLocked(j, i2) / j5;
+                    semUidPowerInfo.actualGpsTime =
+                            sensor2.getSensorTime().getTotalTimeLocked(j, i2) / j5;
                 }
                 BatteryStats.Timer cameraTurnedOnTimer = uid.getCameraTurnedOnTimer();
-                semUidPowerInfo.cameraRunTime = cameraTurnedOnTimer != null ? (cameraTurnedOnTimer.getTotalTimeLocked(j, i2) + 500) / j5 : 0L;
+                semUidPowerInfo.cameraRunTime =
+                        cameraTurnedOnTimer != null
+                                ? (cameraTurnedOnTimer.getTotalTimeLocked(j, i2) + 500) / j5
+                                : 0L;
                 ArrayMap processStats = uid.getProcessStats();
                 if (processStats != null) {
                     int size5 = processStats.size();
                     int i9 = 0;
                     for (int i10 = 0; i10 < size5; i10++) {
-                        i9 += ((BatteryStats.Uid.Proc) processStats.valueAt(i10)).countExcessivePowers();
+                        i9 +=
+                                ((BatteryStats.Uid.Proc) processStats.valueAt(i10))
+                                        .countExcessivePowers();
                     }
                     i3 = i9;
                 } else {
@@ -183,13 +223,16 @@ public final class SemBatteryUsageStatsProvider {
                 }
                 semUidPowerInfo.syncTime = j12;
                 for (int i11 = 0; i11 < this.mStats.getDisplayCount(); i11++) {
-                    semUidPowerInfo.displayTopActivityTime[i11] = (uid.getDisplayTopActivityTime(i11, j, 0) + 500) / 1000;
+                    semUidPowerInfo.displayTopActivityTime[i11] =
+                            (uid.getDisplayTopActivityTime(i11, j, 0) + 500) / 1000;
                 }
                 semDevicePowerInfo2.btScanCount += semUidPowerInfo.btScan;
                 semDevicePowerInfo2.gpsTime += semUidPowerInfo.gpsTime;
                 semDevicePowerInfo2.actualGpsTime += semUidPowerInfo.actualGpsTime;
-                semDevicePowerInfo2.wifiScanTime = (uid.getWifiScanTime(j, 0) / 1000) + semDevicePowerInfo2.wifiScanTime;
-                semDevicePowerInfo2.wifiScanCount = uid.getWifiScanCount(0) + semDevicePowerInfo2.wifiScanCount;
+                semDevicePowerInfo2.wifiScanTime =
+                        (uid.getWifiScanTime(j, 0) / 1000) + semDevicePowerInfo2.wifiScanTime;
+                semDevicePowerInfo2.wifiScanCount =
+                        uid.getWifiScanCount(0) + semDevicePowerInfo2.wifiScanCount;
                 semDevicePowerInfo2.pwlTime += semUidPowerInfo.wakelockTime;
                 arrayList.add(semUidPowerInfo);
             }
@@ -197,11 +240,13 @@ public final class SemBatteryUsageStatsProvider {
             uidStats = sparseArray;
             hashMap2 = hashMap;
         }
-        AggregateBatteryConsumer aggregateBatteryConsumer = batteryUsageStats.getAggregateBatteryConsumer(0);
+        AggregateBatteryConsumer aggregateBatteryConsumer =
+                batteryUsageStats.getAggregateBatteryConsumer(0);
         for (int i12 = 0; i12 < 19; i12++) {
             if (i12 == 0) {
                 semDevicePowerInfo2.screenPower = aggregateBatteryConsumer.getConsumedPower(i12);
-                semDevicePowerInfo2.screenOnTime = aggregateBatteryConsumer.getUsageDurationMillis(i12);
+                semDevicePowerInfo2.screenOnTime =
+                        aggregateBatteryConsumer.getUsageDurationMillis(i12);
             } else if (i12 == 8) {
                 semDevicePowerInfo2.radioPower = aggregateBatteryConsumer.getConsumedPower(i12);
             } else if (i12 == 11) {
@@ -209,32 +254,46 @@ public final class SemBatteryUsageStatsProvider {
             } else if (i12 != 18) {
                 switch (i12) {
                     case 14:
-                        semDevicePowerInfo2.phonePower = aggregateBatteryConsumer.getConsumedPower(i12);
-                        semDevicePowerInfo2.phoneOnTime = aggregateBatteryConsumer.getUsageDurationMillis(i12);
+                        semDevicePowerInfo2.phonePower =
+                                aggregateBatteryConsumer.getConsumedPower(i12);
+                        semDevicePowerInfo2.phoneOnTime =
+                                aggregateBatteryConsumer.getUsageDurationMillis(i12);
                         break;
                     case 15:
-                        semDevicePowerInfo2.aodPower = aggregateBatteryConsumer.getConsumedPower(i12);
-                        semDevicePowerInfo2.aodTime = aggregateBatteryConsumer.getUsageDurationMillis(i12);
+                        semDevicePowerInfo2.aodPower =
+                                aggregateBatteryConsumer.getConsumedPower(i12);
+                        semDevicePowerInfo2.aodTime =
+                                aggregateBatteryConsumer.getUsageDurationMillis(i12);
                         break;
                     case 16:
-                        semDevicePowerInfo2.idlePower = aggregateBatteryConsumer.getConsumedPower(i12);
-                        semDevicePowerInfo2.idleTime = aggregateBatteryConsumer.getUsageDurationMillis(i12);
+                        semDevicePowerInfo2.idlePower =
+                                aggregateBatteryConsumer.getConsumedPower(i12);
+                        semDevicePowerInfo2.idleTime =
+                                aggregateBatteryConsumer.getUsageDurationMillis(i12);
                         break;
                 }
             } else {
-                semDevicePowerInfo2.powersharePower = (long) aggregateBatteryConsumer.getConsumedPower(i12);
-                semDevicePowerInfo2.powershareTime = aggregateBatteryConsumer.getUsageDurationMillis(i12);
+                semDevicePowerInfo2.powersharePower =
+                        (long) aggregateBatteryConsumer.getConsumedPower(i12);
+                semDevicePowerInfo2.powershareTime =
+                        aggregateBatteryConsumer.getUsageDurationMillis(i12);
             }
         }
         for (int i13 = 0; i13 < 5; i13++) {
-            semDevicePowerInfo2.screenBrightnessTime[i13] = this.mStats.getScreenBrightnessTime(i13, j, 0) / 1000;
-            semDevicePowerInfo2.screenAutoBrightnessTime[i13] = this.mStats.getScreenAutoBrightnessTime(i13, j, 0) / 1000;
-            semDevicePowerInfo2.subScreenBrightnessTime[i13] = this.mStats.getSubScreenBrightnessTime(i13, j, 0) / 1000;
-            semDevicePowerInfo2.subScreenAutoBrightnessTime[i13] = this.mStats.getSubScreenAutoBrightnessTime(i13, j, 0) / 1000;
+            semDevicePowerInfo2.screenBrightnessTime[i13] =
+                    this.mStats.getScreenBrightnessTime(i13, j, 0) / 1000;
+            semDevicePowerInfo2.screenAutoBrightnessTime[i13] =
+                    this.mStats.getScreenAutoBrightnessTime(i13, j, 0) / 1000;
+            semDevicePowerInfo2.subScreenBrightnessTime[i13] =
+                    this.mStats.getSubScreenBrightnessTime(i13, j, 0) / 1000;
+            semDevicePowerInfo2.subScreenAutoBrightnessTime[i13] =
+                    this.mStats.getSubScreenAutoBrightnessTime(i13, j, 0) / 1000;
         }
         int i14 = 0;
-        semDevicePowerInfo2.screenHighBrightnessTime = this.mStats.getScreenHighBrightnessTime(j, 0) / 1000;
-        semDevicePowerInfo2.subScreenHighBrightnessTime = this.mStats.getSubScreenHighBrightnessTime(j, 0) / 1000;
+        semDevicePowerInfo2.screenHighBrightnessTime =
+                this.mStats.getScreenHighBrightnessTime(j, 0) / 1000;
+        semDevicePowerInfo2.subScreenHighBrightnessTime =
+                this.mStats.getSubScreenHighBrightnessTime(j, 0) / 1000;
         int i15 = 0;
         long j13 = 0;
         long j14 = 0;
@@ -260,26 +319,45 @@ public final class SemBatteryUsageStatsProvider {
         semDevicePowerInfo3.spkMediaLevel = j16;
         int numSignalStrengthLevels = CellSignalStrength.getNumSignalStrengthLevels();
         for (int i16 = 0; i16 < numSignalStrengthLevels; i16++) {
-            semDevicePowerInfo3.signalStrengthTime[i16] = this.mStats.getPhoneSignalStrengthTime(i16, j, 0) / 1000;
+            semDevicePowerInfo3.signalStrengthTime[i16] =
+                    this.mStats.getPhoneSignalStrengthTime(i16, j, 0) / 1000;
         }
         int i17 = 0;
         semDevicePowerInfo3.mobileActiveTime = this.mStats.getMobileRadioActiveTime(j, 0) / 1000;
         semDevicePowerInfo3.mobileActiveCount = this.mStats.getMobileRadioActiveCount(0);
         semDevicePowerInfo3.mobileActiveTime5G = this.mStats.getMobileActive5GTime(j, 0) / 1000;
         semDevicePowerInfo3.wifiOnTime = this.mStats.getWifiOnTime(j, 0) / 1000;
-        BatteryStats.ControllerActivityCounter bluetoothControllerActivity = this.mStats.getBluetoothControllerActivity();
-        semDevicePowerInfo3.btOnTime = bluetoothControllerActivity.getIdleTimeCounter().getCountLocked(0) + bluetoothControllerActivity.getRxTimeCounter().getCountLocked(0) + bluetoothControllerActivity.getTxTimeCounters()[0].getCountLocked(0);
+        BatteryStats.ControllerActivityCounter bluetoothControllerActivity =
+                this.mStats.getBluetoothControllerActivity();
+        semDevicePowerInfo3.btOnTime =
+                bluetoothControllerActivity.getIdleTimeCounter().getCountLocked(0)
+                        + bluetoothControllerActivity.getRxTimeCounter().getCountLocked(0)
+                        + bluetoothControllerActivity.getTxTimeCounters()[0].getCountLocked(0);
         semDevicePowerInfo3.btScanTime = this.mStats.getBluetoothScanTime(j, 0) / 1000;
-        semDevicePowerInfo3.btTotalBytes = this.mStats.getNetworkActivityBytes(5, 0) + this.mStats.getNetworkActivityBytes(4, 0);
-        semDevicePowerInfo3.mobileTotalBytes = this.mStats.getNetworkActivityBytes(1, 0) + this.mStats.getNetworkActivityBytes(0, 0);
-        semDevicePowerInfo3.wifiTotalBytes = this.mStats.getNetworkActivityBytes(3, 0) + this.mStats.getNetworkActivityBytes(2, 0);
-        semDevicePowerInfo3.mobileTotalPackets = this.mStats.getNetworkActivityPackets(1, 0) + this.mStats.getNetworkActivityPackets(0, 0);
-        semDevicePowerInfo3.wifiTotalPackets = this.mStats.getNetworkActivityPackets(3, 0) + this.mStats.getNetworkActivityPackets(2, 0);
-        BatteryStats.ModemActivityCounter networkModemControllerActivity = this.mStats.getNetworkModemControllerActivity();
-        semDevicePowerInfo3.cpSleepTime = networkModemControllerActivity.getSleepTimeCounter().getCountLocked(0);
-        semDevicePowerInfo3.cpIdleTime = networkModemControllerActivity.getIdleTimeCounter().getCountLocked(0);
+        semDevicePowerInfo3.btTotalBytes =
+                this.mStats.getNetworkActivityBytes(5, 0)
+                        + this.mStats.getNetworkActivityBytes(4, 0);
+        semDevicePowerInfo3.mobileTotalBytes =
+                this.mStats.getNetworkActivityBytes(1, 0)
+                        + this.mStats.getNetworkActivityBytes(0, 0);
+        semDevicePowerInfo3.wifiTotalBytes =
+                this.mStats.getNetworkActivityBytes(3, 0)
+                        + this.mStats.getNetworkActivityBytes(2, 0);
+        semDevicePowerInfo3.mobileTotalPackets =
+                this.mStats.getNetworkActivityPackets(1, 0)
+                        + this.mStats.getNetworkActivityPackets(0, 0);
+        semDevicePowerInfo3.wifiTotalPackets =
+                this.mStats.getNetworkActivityPackets(3, 0)
+                        + this.mStats.getNetworkActivityPackets(2, 0);
+        BatteryStats.ModemActivityCounter networkModemControllerActivity =
+                this.mStats.getNetworkModemControllerActivity();
+        semDevicePowerInfo3.cpSleepTime =
+                networkModemControllerActivity.getSleepTimeCounter().getCountLocked(0);
+        semDevicePowerInfo3.cpIdleTime =
+                networkModemControllerActivity.getIdleTimeCounter().getCountLocked(0);
         long[] jArr = new long[5];
-        BatteryStats.LongCounter[] txTimeCounters = networkModemControllerActivity.getNrModemActivityInfo().getTxTimeCounters();
+        BatteryStats.LongCounter[] txTimeCounters =
+                networkModemControllerActivity.getNrModemActivityInfo().getTxTimeCounters();
         int length = txTimeCounters.length;
         int i18 = 0;
         int i19 = 0;
@@ -299,11 +377,24 @@ public final class SemBatteryUsageStatsProvider {
             semDevicePowerInfo3.nrTxLevel /= j18;
         }
         int i20 = 0;
-        semDevicePowerInfo3.nrRxTime = networkModemControllerActivity.getNrModemActivityInfo().getRxTimeCounter().getCountLocked(0);
-        semDevicePowerInfo3.nrTxByte = networkModemControllerActivity.getNrModemActivityInfo().getTxByteCounter().getCountLocked(0);
-        semDevicePowerInfo3.nrRxByte = networkModemControllerActivity.getNrModemActivityInfo().getRxByteCounter().getCountLocked(0);
+        semDevicePowerInfo3.nrRxTime =
+                networkModemControllerActivity
+                        .getNrModemActivityInfo()
+                        .getRxTimeCounter()
+                        .getCountLocked(0);
+        semDevicePowerInfo3.nrTxByte =
+                networkModemControllerActivity
+                        .getNrModemActivityInfo()
+                        .getTxByteCounter()
+                        .getCountLocked(0);
+        semDevicePowerInfo3.nrRxByte =
+                networkModemControllerActivity
+                        .getNrModemActivityInfo()
+                        .getRxByteCounter()
+                        .getCountLocked(0);
         long[] jArr2 = new long[5];
-        BatteryStats.LongCounter[] txTimeCounters2 = networkModemControllerActivity.getLcModemActivityInfo().getTxTimeCounters();
+        BatteryStats.LongCounter[] txTimeCounters2 =
+                networkModemControllerActivity.getLcModemActivityInfo().getTxTimeCounters();
         int length2 = txTimeCounters2.length;
         int i21 = 0;
         int i22 = 0;
@@ -322,33 +413,62 @@ public final class SemBatteryUsageStatsProvider {
         if (j19 != 0) {
             semDevicePowerInfo3.lcTxLevel /= j19;
         }
-        semDevicePowerInfo3.lcRxTime = networkModemControllerActivity.getLcModemActivityInfo().getRxTimeCounter().getCountLocked(0);
-        semDevicePowerInfo3.lcTxByte = networkModemControllerActivity.getLcModemActivityInfo().getTxByteCounter().getCountLocked(0);
-        semDevicePowerInfo3.lcRxByte = networkModemControllerActivity.getLcModemActivityInfo().getRxByteCounter().getCountLocked(0);
+        semDevicePowerInfo3.lcRxTime =
+                networkModemControllerActivity
+                        .getLcModemActivityInfo()
+                        .getRxTimeCounter()
+                        .getCountLocked(0);
+        semDevicePowerInfo3.lcTxByte =
+                networkModemControllerActivity
+                        .getLcModemActivityInfo()
+                        .getTxByteCounter()
+                        .getCountLocked(0);
+        semDevicePowerInfo3.lcRxByte =
+                networkModemControllerActivity
+                        .getLcModemActivityInfo()
+                        .getRxByteCounter()
+                        .getCountLocked(0);
         semDevicePowerInfo3.totalPower = batteryUsageStats.getConsumedPower();
         semDevicePowerInfo3.batteryPerc = this.mStats.getHighDischargeAmountSinceCharge();
-        semDevicePowerInfo3.screenOffTime = this.mStats.computeBatteryScreenOffRealtime(j, 0) / 1000;
-        semDevicePowerInfo3.screenOnTime = (this.mStats.computeBatteryRealtime(j, 0) / 1000) - semDevicePowerInfo3.screenOffTime;
+        semDevicePowerInfo3.screenOffTime =
+                this.mStats.computeBatteryScreenOffRealtime(j, 0) / 1000;
+        semDevicePowerInfo3.screenOnTime =
+                (this.mStats.computeBatteryRealtime(j, 0) / 1000)
+                        - semDevicePowerInfo3.screenOffTime;
         semDevicePowerInfo3.screenOnCount = this.mStats.getScreenOnCount(0);
         semDevicePowerInfo3.subScreenOnTime = this.mStats.getSubScreenOnTime(j, 0) / 1000;
         semDevicePowerInfo3.uptime = this.mStats.computeBatteryUptime(j2, 0) / 1000;
-        semDevicePowerInfo3.screenOffUptime = this.mStats.computeBatteryScreenOffUptime(j2, 0) / 1000;
+        semDevicePowerInfo3.screenOffUptime =
+                this.mStats.computeBatteryScreenOffUptime(j2, 0) / 1000;
         semDevicePowerInfo3.psmTime = this.mStats.getPowerSaveModeEnabledTime(j, 0) / 1000;
-        semDevicePowerInfo3.screenOffDischarge = this.mStats.getDischargeAmountScreenDozeSinceChargePermil() + this.mStats.getDischargeAmountScreenOffSinceChargePermil();
-        semDevicePowerInfo3.screenOnDischarge = this.mStats.getDischargeAmountScreenOnSinceChargePermil();
+        semDevicePowerInfo3.screenOffDischarge =
+                this.mStats.getDischargeAmountScreenDozeSinceChargePermil()
+                        + this.mStats.getDischargeAmountScreenOffSinceChargePermil();
+        semDevicePowerInfo3.screenOnDischarge =
+                this.mStats.getDischargeAmountScreenOnSinceChargePermil();
         semDevicePowerInfo3.subScreenOffDischarge = semDevicePowerInfo3.screenOffDischarge;
-        semDevicePowerInfo3.subScreenOnDischarge = this.mStats.getDischargeAmountSubScreenOnSinceChargePermil();
+        semDevicePowerInfo3.subScreenOnDischarge =
+                this.mStats.getDischargeAmountSubScreenOnSinceChargePermil();
         semDevicePowerInfo3.subAodTime = this.mStats.getSubScreenDozeTime(j, 0) / 1000;
-        semDevicePowerInfo3.screenOffCoulombCounter = this.mStats.getDischargeAmountScreenOffSinceChargeCoulombCounter();
-        semDevicePowerInfo3.screenOnCoulombCounter = this.mStats.getDischargeAmountScreenOnSinceChargeCoulombCounter();
+        semDevicePowerInfo3.screenOffCoulombCounter =
+                this.mStats.getDischargeAmountScreenOffSinceChargeCoulombCounter();
+        semDevicePowerInfo3.screenOnCoulombCounter =
+                this.mStats.getDischargeAmountScreenOnSinceChargeCoulombCounter();
         semDevicePowerInfo3.powershareTime = this.mStats.getTxPowerSharingTime(j, 0) / 1000;
         semDevicePowerInfo3.powersharePower = this.mStats.getTxSharingDischargeAmount();
-        semDevicePowerInfo3.hrrAlwaysTime = (this.mStats.getDisplayHighRefreshRateTime(1, j, 0) + this.mStats.getDisplayHighRefreshRateTime(2, j, 0)) / 1000;
-        semDevicePowerInfo3.subHrrAlwaysTime = (this.mStats.getSubDisplayHighRefreshRateTime(1, j, 0) + this.mStats.getSubDisplayHighRefreshRateTime(2, j, 0)) / 1000;
+        semDevicePowerInfo3.hrrAlwaysTime =
+                (this.mStats.getDisplayHighRefreshRateTime(1, j, 0)
+                                + this.mStats.getDisplayHighRefreshRateTime(2, j, 0))
+                        / 1000;
+        semDevicePowerInfo3.subHrrAlwaysTime =
+                (this.mStats.getSubDisplayHighRefreshRateTime(1, j, 0)
+                                + this.mStats.getSubDisplayHighRefreshRateTime(2, j, 0))
+                        / 1000;
         semDevicePowerInfo3.screenOnGpsTime = this.mStats.getScreenOnGpsRunningTime(j, 0) / 1000;
     }
 
-    public final void updateKernelWakelockInfoToList(BatteryStats batteryStats, ArrayList arrayList) {
+    public final void updateKernelWakelockInfoToList(
+            BatteryStats batteryStats, ArrayList arrayList) {
         Map kernelWakelockStats = batteryStats.getKernelWakelockStats();
         ArrayList arrayList2 = new ArrayList();
         if (kernelWakelockStats != null && kernelWakelockStats.size() > 0) {
@@ -358,16 +478,25 @@ public final class SemBatteryUsageStatsProvider {
                 if (str != null) {
                     BatteryStats.Timer timer = (BatteryStats.Timer) kernelWakelockStats.get(str);
                     if (timer != null) {
-                        long totalTimeLocked = (timer.getTotalTimeLocked(elapsedRealtime, 0) + 500) / j;
+                        long totalTimeLocked =
+                                (timer.getTotalTimeLocked(elapsedRealtime, 0) + 500) / j;
                         int countLocked = timer.getCountLocked(0);
                         if (totalTimeLocked > 0 && countLocked > 0) {
                             if (!((HashMap) this.mLastKWakelockMap).containsKey(str)) {
-                                ((HashMap) this.mLastKWakelockMap).put(str, new SemKernelWakelockInfo(str, 0, 0L));
+                                ((HashMap) this.mLastKWakelockMap)
+                                        .put(str, new SemKernelWakelockInfo(str, 0, 0L));
                             }
-                            SemKernelWakelockInfo semKernelWakelockInfo = (SemKernelWakelockInfo) ((HashMap) this.mLastKWakelockMap).get(str);
-                            long max = Math.max(0L, totalTimeLocked - semKernelWakelockInfo.getTime());
+                            SemKernelWakelockInfo semKernelWakelockInfo =
+                                    (SemKernelWakelockInfo)
+                                            ((HashMap) this.mLastKWakelockMap).get(str);
+                            long max =
+                                    Math.max(0L, totalTimeLocked - semKernelWakelockInfo.getTime());
                             int max2 = Math.max(0, countLocked - semKernelWakelockInfo.getCount());
-                            ((HashMap) this.mLastKWakelockMap).put(str, new SemKernelWakelockInfo(str, countLocked, totalTimeLocked));
+                            ((HashMap) this.mLastKWakelockMap)
+                                    .put(
+                                            str,
+                                            new SemKernelWakelockInfo(
+                                                    str, countLocked, totalTimeLocked));
                             if (max != 0 || max2 != 0) {
                                 arrayList2.add(new SemKernelWakelockInfo(str, max2, max));
                             }
@@ -391,7 +520,14 @@ public final class SemBatteryUsageStatsProvider {
                     if (!((HashMap) this.mLastScreenWakeMap).containsKey(str)) {
                         ((HashMap) this.mLastScreenWakeMap).put(str, 0);
                     }
-                    int max = Math.max(0, countLocked - ((Integer) ((HashMap) this.mLastScreenWakeMap).get(str)).intValue());
+                    int max =
+                            Math.max(
+                                    0,
+                                    countLocked
+                                            - ((Integer)
+                                                            ((HashMap) this.mLastScreenWakeMap)
+                                                                    .get(str))
+                                                    .intValue());
                     ((HashMap) this.mLastScreenWakeMap).put(str, Integer.valueOf(countLocked));
                     if (max != 0) {
                         arrayList.add(new SemScreenWakeInfo(str, max));
@@ -406,7 +542,8 @@ public final class SemBatteryUsageStatsProvider {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void updateWakeupReasonInfoToList(android.os.BatteryStats r18, java.util.ArrayList r19) {
+    public final void updateWakeupReasonInfoToList(
+            android.os.BatteryStats r18, java.util.ArrayList r19) {
         /*
             r17 = this;
             r0 = r17
@@ -514,6 +651,9 @@ public final class SemBatteryUsageStatsProvider {
         Ld6:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.power.stats.SemBatteryUsageStatsProvider.updateWakeupReasonInfoToList(android.os.BatteryStats, java.util.ArrayList):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.power.stats.SemBatteryUsageStatsProvider.updateWakeupReasonInfoToList(android.os.BatteryStats,"
+                    + " java.util.ArrayList):void");
     }
 }

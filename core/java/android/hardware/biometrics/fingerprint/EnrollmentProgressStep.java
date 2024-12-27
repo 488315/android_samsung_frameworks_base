@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class EnrollmentProgressStep implements Parcelable {
-    public static final Parcelable.Creator<EnrollmentProgressStep> CREATOR = new Parcelable.Creator<EnrollmentProgressStep>() { // from class: android.hardware.biometrics.fingerprint.EnrollmentProgressStep.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EnrollmentProgressStep createFromParcel(Parcel _aidl_source) {
-            EnrollmentProgressStep _aidl_out = new EnrollmentProgressStep();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<EnrollmentProgressStep> CREATOR =
+            new Parcelable.Creator<EnrollmentProgressStep>() { // from class:
+                // android.hardware.biometrics.fingerprint.EnrollmentProgressStep.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EnrollmentProgressStep createFromParcel(Parcel _aidl_source) {
+                    EnrollmentProgressStep _aidl_out = new EnrollmentProgressStep();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EnrollmentProgressStep[] newArray(int _aidl_size) {
-            return new EnrollmentProgressStep[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EnrollmentProgressStep[] newArray(int _aidl_size) {
+                    return new EnrollmentProgressStep[_aidl_size];
+                }
+            };
     public AcquiredInfoAndVendorCode[] acquiredInfoAndVendorCodes;
     public int durationMs = 0;
 
@@ -62,7 +64,9 @@ public class EnrollmentProgressStep implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.acquiredInfoAndVendorCodes = (AcquiredInfoAndVendorCode[]) _aidl_parcel.createTypedArray(AcquiredInfoAndVendorCode.CREATOR);
+                this.acquiredInfoAndVendorCodes =
+                        (AcquiredInfoAndVendorCode[])
+                                _aidl_parcel.createTypedArray(AcquiredInfoAndVendorCode.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

@@ -16,12 +16,10 @@ public interface IBootstrapAuthenticationCallback extends IInterface {
 
     public static class Default implements IBootstrapAuthenticationCallback {
         @Override // android.telephony.IBootstrapAuthenticationCallback
-        public void onKeysAvailable(int token, byte[] gbaKey, String btId) throws RemoteException {
-        }
+        public void onKeysAvailable(int token, byte[] gbaKey, String btId) throws RemoteException {}
 
         @Override // android.telephony.IBootstrapAuthenticationCallback
-        public void onAuthenticationFailure(int token, int reason) throws RemoteException {
-        }
+        public void onAuthenticationFailure(int token, int reason) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface IBootstrapAuthenticationCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBootstrapAuthenticationCallback {
+    public abstract static class Stub extends Binder implements IBootstrapAuthenticationCallback {
         static final int TRANSACTION_onAuthenticationFailure = 2;
         static final int TRANSACTION_onKeysAvailable = 1;
 
@@ -70,7 +68,8 @@ public interface IBootstrapAuthenticationCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IBootstrapAuthenticationCallback.DESCRIPTOR);
             }
@@ -114,7 +113,8 @@ public interface IBootstrapAuthenticationCallback extends IInterface {
             }
 
             @Override // android.telephony.IBootstrapAuthenticationCallback
-            public void onKeysAvailable(int token, byte[] gbaKey, String btId) throws RemoteException {
+            public void onKeysAvailable(int token, byte[] gbaKey, String btId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IBootstrapAuthenticationCallback.DESCRIPTOR);

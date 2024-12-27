@@ -13,15 +13,15 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.RemoteException;
 import android.os.UserHandle;
-import android.service.games.GameSession;
-import android.service.games.IGameSession;
 import android.util.Slog;
 import android.view.SurfaceControlViewHost;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+
 import com.android.internal.infra.AndroidFuture;
 import com.android.internal.util.function.pooled.PooledLambda;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -55,8 +55,7 @@ public abstract class GameSession {
         public static final int ERROR_TAKE_SCREENSHOT_INTERNAL_ERROR = 0;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface ScreenshotFailureStatus {
-        }
+        public @interface ScreenshotFailureStatus {}
 
         void onFailure(int i);
 
@@ -65,41 +64,69 @@ public abstract class GameSession {
 
     /* renamed from: android.service.games.GameSession$1, reason: invalid class name */
     class AnonymousClass1 extends IGameSession.Stub {
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         @Override // android.service.games.IGameSession
         public void onDestroyed() {
-            Handler.getMain().executeOrSendMessage(PooledLambda.obtainMessage(new Consumer() { // from class: android.service.games.GameSession$1$$ExternalSyntheticLambda1
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ((GameSession) obj).doDestroy();
-                }
-            }, GameSession.this));
+            Handler.getMain()
+                    .executeOrSendMessage(
+                            PooledLambda.obtainMessage(
+                                    new Consumer() { // from class:
+                                                     // android.service.games.GameSession$1$$ExternalSyntheticLambda1
+                                        @Override // java.util.function.Consumer
+                                        public final void accept(Object obj) {
+                                            ((GameSession) obj).doDestroy();
+                                        }
+                                    },
+                                    GameSession.this));
         }
 
         @Override // android.service.games.IGameSession
-        public void onTransientSystemBarVisibilityFromRevealGestureChanged(boolean visibleDueToGesture) {
-            Handler.getMain().executeOrSendMessage(PooledLambda.obtainMessage(new BiConsumer() { // from class: android.service.games.GameSession$1$$ExternalSyntheticLambda2
-                @Override // java.util.function.BiConsumer
-                public final void accept(Object obj, Object obj2) {
-                    ((GameSession) obj).dispatchTransientSystemBarVisibilityFromRevealGestureChanged(((Boolean) obj2).booleanValue());
-                }
-            }, GameSession.this, Boolean.valueOf(visibleDueToGesture)));
+        public void onTransientSystemBarVisibilityFromRevealGestureChanged(
+                boolean visibleDueToGesture) {
+            Handler.getMain()
+                    .executeOrSendMessage(
+                            PooledLambda.obtainMessage(
+                                    new BiConsumer() { // from class:
+                                                       // android.service.games.GameSession$1$$ExternalSyntheticLambda2
+                                        @Override // java.util.function.BiConsumer
+                                        public final void accept(Object obj, Object obj2) {
+                                            ((GameSession) obj)
+                                                    .dispatchTransientSystemBarVisibilityFromRevealGestureChanged(
+                                                            ((Boolean) obj2).booleanValue());
+                                        }
+                                    },
+                                    GameSession.this,
+                                    Boolean.valueOf(visibleDueToGesture)));
         }
 
         @Override // android.service.games.IGameSession
         public void onTaskFocusChanged(boolean focused) {
-            Handler.getMain().executeOrSendMessage(PooledLambda.obtainMessage(new BiConsumer() { // from class: android.service.games.GameSession$1$$ExternalSyntheticLambda0
-                @Override // java.util.function.BiConsumer
-                public final void accept(Object obj, Object obj2) {
-                    ((GameSession) obj).moveToState((GameSession.LifecycleState) obj2);
-                }
-            }, GameSession.this, focused ? LifecycleState.TASK_FOCUSED : LifecycleState.TASK_UNFOCUSED));
+            Handler.getMain()
+                    .executeOrSendMessage(
+                            PooledLambda.obtainMessage(
+                                    new BiConsumer() { // from class:
+                                                       // android.service.games.GameSession$1$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.BiConsumer
+                                        public final void accept(Object obj, Object obj2) {
+                                            ((GameSession) obj)
+                                                    .moveToState((GameSession.LifecycleState) obj2);
+                                        }
+                                    },
+                                    GameSession.this,
+                                    focused
+                                            ? LifecycleState.TASK_FOCUSED
+                                            : LifecycleState.TASK_UNFOCUSED));
         }
     }
 
-    public void attach(IGameSessionController gameSessionController, int taskId, Context context, SurfaceControlViewHost surfaceControlViewHost, int widthPx, int heightPx) {
+    public void attach(
+            IGameSessionController gameSessionController,
+            int taskId,
+            Context context,
+            SurfaceControlViewHost surfaceControlViewHost,
+            int widthPx,
+            int heightPx) {
         this.mGameSessionController = gameSessionController;
         this.mTaskId = taskId;
         this.mContext = context;
@@ -118,7 +145,8 @@ public abstract class GameSession {
         moveToState(LifecycleState.DESTROYED);
     }
 
-    public void dispatchTransientSystemBarVisibilityFromRevealGestureChanged(boolean visibleDueToGesture) {
+    public void dispatchTransientSystemBarVisibilityFromRevealGestureChanged(
+            boolean visibleDueToGesture) {
         boolean didValueChange = this.mAreTransientInsetsVisibleDueToGesture != visibleDueToGesture;
         this.mAreTransientInsetsVisibleDueToGesture = visibleDueToGesture;
         if (didValueChange) {
@@ -182,17 +210,14 @@ public abstract class GameSession {
         this.mLifecycleState = newLifecycleState;
     }
 
-    public void onCreate() {
-    }
+    public void onCreate() {}
 
-    public void onDestroy() {
-    }
+    public void onDestroy() {}
 
-    public void onGameTaskFocusChanged(boolean focused) {
-    }
+    public void onGameTaskFocusChanged(boolean focused) {}
 
-    public void onTransientSystemBarVisibilityFromRevealGestureChanged(boolean visibleDueToGesture) {
-    }
+    public void onTransientSystemBarVisibilityFromRevealGestureChanged(
+            boolean visibleDueToGesture) {}
 
     public void setTaskOverlayView(View view, ViewGroup.LayoutParams layoutParams) {
         this.mGameSessionRootView.removeAllViews();
@@ -229,12 +254,20 @@ public abstract class GameSession {
         if (this.mGameSessionController == null) {
             throw new IllegalStateException("Can not call before onCreate()");
         }
-        AndroidFuture<GameScreenshotResult> takeScreenshotResult = new AndroidFuture().whenCompleteAsync(new BiConsumer() { // from class: android.service.games.GameSession$$ExternalSyntheticLambda2
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                GameSession.this.lambda$takeScreenshot$0(callback, (GameScreenshotResult) obj, (Throwable) obj2);
-            }
-        }, executor);
+        AndroidFuture<GameScreenshotResult> takeScreenshotResult =
+                new AndroidFuture()
+                        .whenCompleteAsync(
+                                new BiConsumer() { // from class:
+                                                   // android.service.games.GameSession$$ExternalSyntheticLambda2
+                                    @Override // java.util.function.BiConsumer
+                                    public final void accept(Object obj, Object obj2) {
+                                        GameSession.this.lambda$takeScreenshot$0(
+                                                callback,
+                                                (GameScreenshotResult) obj,
+                                                (Throwable) obj2);
+                                    }
+                                },
+                                executor);
         try {
             this.mGameSessionController.takeScreenshot(this.mTaskId, takeScreenshotResult);
         } catch (RemoteException ex) {
@@ -244,7 +277,8 @@ public abstract class GameSession {
 
     /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: handleScreenshotResult, reason: merged with bridge method [inline-methods] */
-    public void lambda$takeScreenshot$0(ScreenshotCallback callback, GameScreenshotResult result, Throwable error) {
+    public void lambda$takeScreenshot$0(
+            ScreenshotCallback callback, GameScreenshotResult result, Throwable error) {
         if (error != null) {
             Slog.w(TAG, error.getMessage(), error.getCause());
             callback.onFailure(0);
@@ -261,31 +295,57 @@ public abstract class GameSession {
         }
     }
 
-    public final void startActivityFromGameSessionForResult(Intent intent, Bundle options, Executor executor, final GameSessionActivityCallback callback) {
+    public final void startActivityFromGameSessionForResult(
+            Intent intent,
+            Bundle options,
+            Executor executor,
+            final GameSessionActivityCallback callback) {
         Objects.requireNonNull(intent);
         Objects.requireNonNull(executor);
         Objects.requireNonNull(callback);
-        AndroidFuture<GameSessionActivityResult> future = new AndroidFuture().whenCompleteAsync(new BiConsumer() { // from class: android.service.games.GameSession$$ExternalSyntheticLambda0
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                GameSession.lambda$startActivityFromGameSessionForResult$1(GameSessionActivityCallback.this, (GameSessionActivityResult) obj, (Throwable) obj2);
-            }
-        }, executor);
-        Intent trampolineIntent = GameSessionTrampolineActivity.createIntent(intent, options, future);
+        AndroidFuture<GameSessionActivityResult> future =
+                new AndroidFuture()
+                        .whenCompleteAsync(
+                                new BiConsumer() { // from class:
+                                                   // android.service.games.GameSession$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.BiConsumer
+                                    public final void accept(Object obj, Object obj2) {
+                                        GameSession.lambda$startActivityFromGameSessionForResult$1(
+                                                GameSessionActivityCallback.this,
+                                                (GameSessionActivityResult) obj,
+                                                (Throwable) obj2);
+                                    }
+                                },
+                                executor);
+        Intent trampolineIntent =
+                GameSessionTrampolineActivity.createIntent(intent, options, future);
         try {
-            int result = ActivityTaskManager.getService().startActivityFromGameSession(this.mContext.getIApplicationThread(), this.mContext.getPackageName(), TAG, Binder.getCallingPid(), Binder.getCallingUid(), trampolineIntent, this.mTaskId, UserHandle.myUserId());
+            int result =
+                    ActivityTaskManager.getService()
+                            .startActivityFromGameSession(
+                                    this.mContext.getIApplicationThread(),
+                                    this.mContext.getPackageName(),
+                                    TAG,
+                                    Binder.getCallingPid(),
+                                    Binder.getCallingUid(),
+                                    trampolineIntent,
+                                    this.mTaskId,
+                                    UserHandle.myUserId());
             Instrumentation.checkStartActivityResult(result, trampolineIntent);
         } catch (Throwable t) {
-            executor.execute(new Runnable() { // from class: android.service.games.GameSession$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    GameSessionActivityCallback.this.onActivityStartFailed(t);
-                }
-            });
+            executor.execute(
+                    new Runnable() { // from class:
+                                     // android.service.games.GameSession$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            GameSessionActivityCallback.this.onActivityStartFailed(t);
+                        }
+                    });
         }
     }
 
-    static /* synthetic */ void lambda$startActivityFromGameSessionForResult$1(GameSessionActivityCallback callback, GameSessionActivityResult result, Throwable ex) {
+    static /* synthetic */ void lambda$startActivityFromGameSessionForResult$1(
+            GameSessionActivityCallback callback, GameSessionActivityResult result, Throwable ex) {
         if (ex != null) {
             callback.onActivityStartFailed(ex);
         } else {

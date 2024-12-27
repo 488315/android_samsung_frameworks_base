@@ -15,8 +15,10 @@ import android.os.HwParcel;
 import android.os.IHwBinder;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import com.android.server.soundtrigger_middleware.SoundTriggerHw2Compat;
 import com.android.server.soundtrigger_middleware.SoundTriggerHw2Compat$$ExternalSyntheticLambda1;
+
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
@@ -33,7 +35,9 @@ public final class ISoundTriggerHw$Proxy implements ISoundTriggerHw {
 
     @Override // android.hidl.base.V1_0.IBase
     public final void debug(NativeHandle nativeHandle, ArrayList arrayList) {
-        HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(IBase.kInterfaceName, nativeHandle, arrayList);
+        HwParcel m =
+                IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                        IBase.kInterfaceName, nativeHandle, arrayList);
         HwParcel hwParcel = new HwParcel();
         try {
             this.mRemote.transact(256131655, m, hwParcel, 0);
@@ -75,7 +79,8 @@ public final class ISoundTriggerHw$Proxy implements ISoundTriggerHw {
             ArrayList arrayList = new ArrayList();
             HwBlob readBuffer = hwParcel.readBuffer(16L);
             int int32 = readBuffer.getInt32(8L);
-            HwBlob readEmbeddedBuffer = hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
+            HwBlob readEmbeddedBuffer =
+                    hwParcel.readEmbeddedBuffer(int32 * 32, readBuffer.handle(), 0L, true);
             arrayList.clear();
             for (int i = 0; i < int32; i++) {
                 byte[] bArr = new byte[32];
@@ -90,7 +95,9 @@ public final class ISoundTriggerHw$Proxy implements ISoundTriggerHw {
 
     @Override // android.hardware.soundtrigger.V2_2.ISoundTriggerHw
     public final int getModelState(int i) {
-        HwParcel m = ITunerSession$Proxy$$ExternalSyntheticOutline0.m(i, "android.hardware.soundtrigger@2.2::ISoundTriggerHw");
+        HwParcel m =
+                ITunerSession$Proxy$$ExternalSyntheticOutline0.m(
+                        i, "android.hardware.soundtrigger@2.2::ISoundTriggerHw");
         HwParcel hwParcel = new HwParcel();
         try {
             this.mRemote.transact(11, m, hwParcel, 0);
@@ -102,7 +109,11 @@ public final class ISoundTriggerHw$Proxy implements ISoundTriggerHw {
         }
     }
 
-    public final void getParameter(int i, int i2, SoundTriggerHw2Compat$$ExternalSyntheticLambda1 soundTriggerHw2Compat$$ExternalSyntheticLambda1) {
+    public final void getParameter(
+            int i,
+            int i2,
+            SoundTriggerHw2Compat$$ExternalSyntheticLambda1
+                    soundTriggerHw2Compat$$ExternalSyntheticLambda1) {
         HwParcel hwParcel = new HwParcel();
         hwParcel.writeInterfaceToken("android.hardware.soundtrigger@2.3::ISoundTriggerHw");
         hwParcel.writeInt32(i);
@@ -115,7 +126,8 @@ public final class ISoundTriggerHw$Proxy implements ISoundTriggerHw {
             int readInt32 = hwParcel2.readInt32();
             int readInt322 = hwParcel2.readInt32();
             AtomicInteger atomicInteger = soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$0;
-            AtomicInteger atomicInteger2 = (AtomicInteger) soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$1;
+            AtomicInteger atomicInteger2 =
+                    (AtomicInteger) soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$1;
             atomicInteger.set(readInt32);
             atomicInteger2.set(readInt322);
         } finally {
@@ -124,8 +136,12 @@ public final class ISoundTriggerHw$Proxy implements ISoundTriggerHw {
     }
 
     @Override // android.hardware.soundtrigger.V2_0.ISoundTriggerHw
-    public final void getProperties(SoundTriggerHw2Compat$$ExternalSyntheticLambda1 soundTriggerHw2Compat$$ExternalSyntheticLambda1) {
-        HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.soundtrigger@2.0::ISoundTriggerHw");
+    public final void getProperties(
+            SoundTriggerHw2Compat$$ExternalSyntheticLambda1
+                    soundTriggerHw2Compat$$ExternalSyntheticLambda1) {
+        HwParcel m =
+                IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                        "android.hardware.soundtrigger@2.0::ISoundTriggerHw");
         HwParcel hwParcel = new HwParcel();
         try {
             this.mRemote.transact(1, m, hwParcel, 0);
@@ -135,7 +151,8 @@ public final class ISoundTriggerHw$Proxy implements ISoundTriggerHw {
             ISoundTriggerHw.Properties properties = new ISoundTriggerHw.Properties();
             properties.readEmbeddedFromParcel(hwParcel, hwParcel.readBuffer(88L));
             AtomicInteger atomicInteger = soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$0;
-            AtomicReference atomicReference = (AtomicReference) soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$1;
+            AtomicReference atomicReference =
+                    (AtomicReference) soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$1;
             atomicInteger.set(readInt32);
             atomicReference.set(properties);
         } finally {
@@ -143,8 +160,12 @@ public final class ISoundTriggerHw$Proxy implements ISoundTriggerHw {
         }
     }
 
-    public final void getProperties_2_3(SoundTriggerHw2Compat$$ExternalSyntheticLambda1 soundTriggerHw2Compat$$ExternalSyntheticLambda1) {
-        HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.soundtrigger@2.3::ISoundTriggerHw");
+    public final void getProperties_2_3(
+            SoundTriggerHw2Compat$$ExternalSyntheticLambda1
+                    soundTriggerHw2Compat$$ExternalSyntheticLambda1) {
+        HwParcel m =
+                IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                        "android.hardware.soundtrigger@2.3::ISoundTriggerHw");
         HwParcel hwParcel = new HwParcel();
         try {
             this.mRemote.transact(12, m, hwParcel, 0);
@@ -158,7 +179,8 @@ public final class ISoundTriggerHw$Proxy implements ISoundTriggerHw {
             hwParcel.readEmbeddedBuffer(r1.getBytes().length + 1, readBuffer.handle(), 88L, false);
             properties.audioCapabilities = readBuffer.getInt32(104L);
             AtomicInteger atomicInteger = soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$0;
-            AtomicReference atomicReference = (AtomicReference) soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$1;
+            AtomicReference atomicReference =
+                    (AtomicReference) soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$1;
             atomicInteger.set(readInt32);
             atomicReference.set(properties);
         } finally {
@@ -204,7 +226,11 @@ public final class ISoundTriggerHw$Proxy implements ISoundTriggerHw {
     }
 
     @Override // android.hardware.soundtrigger.V2_0.ISoundTriggerHw
-    public final void loadPhraseSoundModel(ISoundTriggerHw.PhraseSoundModel phraseSoundModel, SoundTriggerHw2Compat.ModelCallbackWrapper modelCallbackWrapper, SoundTriggerHw2Compat$$ExternalSyntheticLambda1 soundTriggerHw2Compat$$ExternalSyntheticLambda1) {
+    public final void loadPhraseSoundModel(
+            ISoundTriggerHw.PhraseSoundModel phraseSoundModel,
+            SoundTriggerHw2Compat.ModelCallbackWrapper modelCallbackWrapper,
+            SoundTriggerHw2Compat$$ExternalSyntheticLambda1
+                    soundTriggerHw2Compat$$ExternalSyntheticLambda1) {
         HwParcel hwParcel = new HwParcel();
         hwParcel.writeInterfaceToken("android.hardware.soundtrigger@2.0::ISoundTriggerHw");
         phraseSoundModel.writeToParcel(hwParcel);
@@ -218,7 +244,8 @@ public final class ISoundTriggerHw$Proxy implements ISoundTriggerHw {
             int readInt32 = hwParcel2.readInt32();
             int readInt322 = hwParcel2.readInt32();
             AtomicInteger atomicInteger = soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$0;
-            AtomicInteger atomicInteger2 = (AtomicInteger) soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$1;
+            AtomicInteger atomicInteger2 =
+                    (AtomicInteger) soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$1;
             atomicInteger.set(readInt32);
             atomicInteger2.set(readInt322);
         } finally {
@@ -227,7 +254,11 @@ public final class ISoundTriggerHw$Proxy implements ISoundTriggerHw {
     }
 
     @Override // android.hardware.soundtrigger.V2_1.ISoundTriggerHw
-    public final void loadPhraseSoundModel_2_1(ISoundTriggerHw.SoundModel soundModel, SoundTriggerHw2Compat.ModelCallbackWrapper modelCallbackWrapper, SoundTriggerHw2Compat$$ExternalSyntheticLambda1 soundTriggerHw2Compat$$ExternalSyntheticLambda1) {
+    public final void loadPhraseSoundModel_2_1(
+            ISoundTriggerHw.SoundModel soundModel,
+            SoundTriggerHw2Compat.ModelCallbackWrapper modelCallbackWrapper,
+            SoundTriggerHw2Compat$$ExternalSyntheticLambda1
+                    soundTriggerHw2Compat$$ExternalSyntheticLambda1) {
         HwParcel hwParcel = new HwParcel();
         hwParcel.writeInterfaceToken("android.hardware.soundtrigger@2.1::ISoundTriggerHw");
         soundModel.writeToParcel(hwParcel);
@@ -241,7 +272,8 @@ public final class ISoundTriggerHw$Proxy implements ISoundTriggerHw {
             int readInt32 = hwParcel2.readInt32();
             int readInt322 = hwParcel2.readInt32();
             AtomicInteger atomicInteger = soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$0;
-            AtomicInteger atomicInteger2 = (AtomicInteger) soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$1;
+            AtomicInteger atomicInteger2 =
+                    (AtomicInteger) soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$1;
             atomicInteger.set(readInt32);
             atomicInteger2.set(readInt322);
         } finally {
@@ -250,7 +282,11 @@ public final class ISoundTriggerHw$Proxy implements ISoundTriggerHw {
     }
 
     @Override // android.hardware.soundtrigger.V2_0.ISoundTriggerHw
-    public final void loadSoundModel(ISoundTriggerHw.SoundModel soundModel, SoundTriggerHw2Compat.ModelCallbackWrapper modelCallbackWrapper, SoundTriggerHw2Compat$$ExternalSyntheticLambda1 soundTriggerHw2Compat$$ExternalSyntheticLambda1) {
+    public final void loadSoundModel(
+            ISoundTriggerHw.SoundModel soundModel,
+            SoundTriggerHw2Compat.ModelCallbackWrapper modelCallbackWrapper,
+            SoundTriggerHw2Compat$$ExternalSyntheticLambda1
+                    soundTriggerHw2Compat$$ExternalSyntheticLambda1) {
         HwParcel hwParcel = new HwParcel();
         hwParcel.writeInterfaceToken("android.hardware.soundtrigger@2.0::ISoundTriggerHw");
         soundModel.writeToParcel(hwParcel);
@@ -264,7 +300,8 @@ public final class ISoundTriggerHw$Proxy implements ISoundTriggerHw {
             int readInt32 = hwParcel2.readInt32();
             int readInt322 = hwParcel2.readInt32();
             AtomicInteger atomicInteger = soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$0;
-            AtomicInteger atomicInteger2 = (AtomicInteger) soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$1;
+            AtomicInteger atomicInteger2 =
+                    (AtomicInteger) soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$1;
             atomicInteger.set(readInt32);
             atomicInteger2.set(readInt322);
         } finally {
@@ -273,8 +310,14 @@ public final class ISoundTriggerHw$Proxy implements ISoundTriggerHw {
     }
 
     @Override // android.hardware.soundtrigger.V2_1.ISoundTriggerHw
-    public final void loadSoundModel_2_1(ISoundTriggerHw.SoundModel soundModel, SoundTriggerHw2Compat.ModelCallbackWrapper modelCallbackWrapper, SoundTriggerHw2Compat$$ExternalSyntheticLambda1 soundTriggerHw2Compat$$ExternalSyntheticLambda1) {
-        HwParcel m = IAuthSecret$Proxy$$ExternalSyntheticOutline0.m("android.hardware.soundtrigger@2.1::ISoundTriggerHw");
+    public final void loadSoundModel_2_1(
+            ISoundTriggerHw.SoundModel soundModel,
+            SoundTriggerHw2Compat.ModelCallbackWrapper modelCallbackWrapper,
+            SoundTriggerHw2Compat$$ExternalSyntheticLambda1
+                    soundTriggerHw2Compat$$ExternalSyntheticLambda1) {
+        HwParcel m =
+                IAuthSecret$Proxy$$ExternalSyntheticOutline0.m(
+                        "android.hardware.soundtrigger@2.1::ISoundTriggerHw");
         HwBlob hwBlob = new HwBlob(96);
         ((ISoundTriggerHw.SoundModel) soundModel.header).writeEmbeddedToBlob(hwBlob);
         hwBlob.putHidlMemory(56L, (HidlMemory) soundModel.data);
@@ -289,7 +332,8 @@ public final class ISoundTriggerHw$Proxy implements ISoundTriggerHw {
             int readInt32 = hwParcel.readInt32();
             int readInt322 = hwParcel.readInt32();
             AtomicInteger atomicInteger = soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$0;
-            AtomicInteger atomicInteger2 = (AtomicInteger) soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$1;
+            AtomicInteger atomicInteger2 =
+                    (AtomicInteger) soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$1;
             atomicInteger.set(readInt32);
             atomicInteger2.set(readInt322);
         } finally {
@@ -322,7 +366,11 @@ public final class ISoundTriggerHw$Proxy implements ISoundTriggerHw {
         }
     }
 
-    public final void queryParameter(int i, int i2, SoundTriggerHw2Compat$$ExternalSyntheticLambda1 soundTriggerHw2Compat$$ExternalSyntheticLambda1) {
+    public final void queryParameter(
+            int i,
+            int i2,
+            SoundTriggerHw2Compat$$ExternalSyntheticLambda1
+                    soundTriggerHw2Compat$$ExternalSyntheticLambda1) {
         HwParcel hwParcel = new HwParcel();
         hwParcel.writeInterfaceToken("android.hardware.soundtrigger@2.3::ISoundTriggerHw");
         hwParcel.writeInt32(i);
@@ -333,12 +381,14 @@ public final class ISoundTriggerHw$Proxy implements ISoundTriggerHw {
             hwParcel2.verifySuccess();
             hwParcel.releaseTemporaryStorage();
             int readInt32 = hwParcel2.readInt32();
-            OptionalModelParameterRange optionalModelParameterRange = new OptionalModelParameterRange();
+            OptionalModelParameterRange optionalModelParameterRange =
+                    new OptionalModelParameterRange();
             optionalModelParameterRange.hidl_d = (byte) 0;
             optionalModelParameterRange.hidl_o = new Monostate();
             optionalModelParameterRange.readFromParcel(hwParcel2);
             AtomicInteger atomicInteger = soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$0;
-            AtomicReference atomicReference = (AtomicReference) soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$1;
+            AtomicReference atomicReference =
+                    (AtomicReference) soundTriggerHw2Compat$$ExternalSyntheticLambda1.f$1;
             atomicInteger.set(readInt32);
             atomicReference.set(optionalModelParameterRange);
         } finally {
@@ -376,7 +426,10 @@ public final class ISoundTriggerHw$Proxy implements ISoundTriggerHw {
     }
 
     @Override // android.hardware.soundtrigger.V2_0.ISoundTriggerHw
-    public final int startRecognition(int i, ISoundTriggerHw.RecognitionConfig recognitionConfig, SoundTriggerHw2Compat.ModelCallbackWrapper modelCallbackWrapper) {
+    public final int startRecognition(
+            int i,
+            ISoundTriggerHw.RecognitionConfig recognitionConfig,
+            SoundTriggerHw2Compat.ModelCallbackWrapper modelCallbackWrapper) {
         HwParcel hwParcel = new HwParcel();
         hwParcel.writeInterfaceToken("android.hardware.soundtrigger@2.0::ISoundTriggerHw");
         hwParcel.writeInt32(i);
@@ -395,7 +448,10 @@ public final class ISoundTriggerHw$Proxy implements ISoundTriggerHw {
     }
 
     @Override // android.hardware.soundtrigger.V2_1.ISoundTriggerHw
-    public final int startRecognition_2_1(int i, ISoundTriggerHw.SoundModel soundModel, SoundTriggerHw2Compat.ModelCallbackWrapper modelCallbackWrapper) {
+    public final int startRecognition_2_1(
+            int i,
+            ISoundTriggerHw.SoundModel soundModel,
+            SoundTriggerHw2Compat.ModelCallbackWrapper modelCallbackWrapper) {
         HwParcel hwParcel = new HwParcel();
         hwParcel.writeInterfaceToken("android.hardware.soundtrigger@2.1::ISoundTriggerHw");
         hwParcel.writeInt32(i);
@@ -418,7 +474,9 @@ public final class ISoundTriggerHw$Proxy implements ISoundTriggerHw {
     }
 
     public final int startRecognition_2_3(int i, RecognitionConfig recognitionConfig) {
-        HwParcel m = ITunerSession$Proxy$$ExternalSyntheticOutline0.m(i, "android.hardware.soundtrigger@2.3::ISoundTriggerHw");
+        HwParcel m =
+                ITunerSession$Proxy$$ExternalSyntheticOutline0.m(
+                        i, "android.hardware.soundtrigger@2.3::ISoundTriggerHw");
         HwBlob hwBlob = new HwBlob(96);
         ISoundTriggerHw.SoundModel soundModel = recognitionConfig.base;
         ((ISoundTriggerHw.RecognitionConfig) soundModel.header).writeEmbeddedToBlob(hwBlob);
@@ -438,7 +496,9 @@ public final class ISoundTriggerHw$Proxy implements ISoundTriggerHw {
 
     @Override // android.hardware.soundtrigger.V2_0.ISoundTriggerHw
     public final int stopRecognition(int i) {
-        HwParcel m = ITunerSession$Proxy$$ExternalSyntheticOutline0.m(i, "android.hardware.soundtrigger@2.0::ISoundTriggerHw");
+        HwParcel m =
+                ITunerSession$Proxy$$ExternalSyntheticOutline0.m(
+                        i, "android.hardware.soundtrigger@2.0::ISoundTriggerHw");
         HwParcel hwParcel = new HwParcel();
         try {
             this.mRemote.transact(6, m, hwParcel, 0);
@@ -454,7 +514,8 @@ public final class ISoundTriggerHw$Proxy implements ISoundTriggerHw {
         try {
             return interfaceDescriptor() + "@Proxy";
         } catch (RemoteException unused) {
-            return "[class or subclass of android.hardware.soundtrigger@2.3::ISoundTriggerHw]@Proxy";
+            return "[class or subclass of"
+                       + " android.hardware.soundtrigger@2.3::ISoundTriggerHw]@Proxy";
         }
     }
 
@@ -465,7 +526,9 @@ public final class ISoundTriggerHw$Proxy implements ISoundTriggerHw {
 
     @Override // android.hardware.soundtrigger.V2_0.ISoundTriggerHw
     public final int unloadSoundModel(int i) {
-        HwParcel m = ITunerSession$Proxy$$ExternalSyntheticOutline0.m(i, "android.hardware.soundtrigger@2.0::ISoundTriggerHw");
+        HwParcel m =
+                ITunerSession$Proxy$$ExternalSyntheticOutline0.m(
+                        i, "android.hardware.soundtrigger@2.0::ISoundTriggerHw");
         HwParcel hwParcel = new HwParcel();
         try {
             this.mRemote.transact(4, m, hwParcel, 0);

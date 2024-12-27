@@ -23,19 +23,24 @@ import android.os.Bundle;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.Slog;
+
 import com.android.internal.R;
-import com.android.internal.app.AlertController;
 import com.android.internal.util.ArrayUtils;
 
 /* loaded from: classes5.dex */
 public class SuspendedAppActivity extends AlertActivity implements DialogInterface.OnClickListener {
     private static final String DIGITAL_WELLBEING_PACKAGE = "com.samsung.android.forest";
-    public static final String EXTRA_ACTIVITY_OPTIONS = "com.android.internal.app.extra.ACTIVITY_OPTIONS";
+    public static final String EXTRA_ACTIVITY_OPTIONS =
+            "com.android.internal.app.extra.ACTIVITY_OPTIONS";
     public static final String EXTRA_DIALOG_INFO = "com.android.internal.app.extra.DIALOG_INFO";
-    public static final String EXTRA_SUSPENDED_PACKAGE = "com.android.internal.app.extra.SUSPENDED_PACKAGE";
-    public static final String EXTRA_SUSPENDING_PACKAGE = "com.android.internal.app.extra.SUSPENDING_PACKAGE";
-    public static final String EXTRA_SUSPENDING_USER = "com.android.internal.app.extra.SUSPENDING_USER";
-    public static final String EXTRA_UNSUSPEND_INTENT = "com.android.internal.app.extra.UNSUSPEND_INTENT";
+    public static final String EXTRA_SUSPENDED_PACKAGE =
+            "com.android.internal.app.extra.SUSPENDED_PACKAGE";
+    public static final String EXTRA_SUSPENDING_PACKAGE =
+            "com.android.internal.app.extra.SUSPENDING_PACKAGE";
+    public static final String EXTRA_SUSPENDING_USER =
+            "com.android.internal.app.extra.SUSPENDING_USER";
+    public static final String EXTRA_UNSUSPEND_INTENT =
+            "com.android.internal.app.extra.UNSUSPEND_INTENT";
     private static final String PACKAGE_NAME = "com.android.internal.app";
     private static final String TAG = SuspendedAppActivity.class.getSimpleName();
     private Intent mMoreDetailsIntent;
@@ -44,18 +49,29 @@ public class SuspendedAppActivity extends AlertActivity implements DialogInterfa
     private Bundle mOptions;
     private PackageManager mPm;
     private SuspendDialogInfo mSuppliedDialogInfo;
-    private BroadcastReceiver mSuspendModifiedReceiver = new BroadcastReceiver() { // from class: com.android.internal.app.SuspendedAppActivity.1
-        @Override // android.content.BroadcastReceiver
-        public void onReceive(Context context, Intent intent) {
-            if (Intent.ACTION_PACKAGES_SUSPENSION_CHANGED.equals(intent.getAction())) {
-                String[] modified = intent.getStringArrayExtra(Intent.EXTRA_CHANGED_PACKAGE_LIST);
-                if (ArrayUtils.contains(modified, SuspendedAppActivity.this.mSuspendedPackage) && !SuspendedAppActivity.this.isPackageSuspended(SuspendedAppActivity.this.mSuspendedPackage) && !SuspendedAppActivity.this.isFinishing()) {
-                    Slog.w(SuspendedAppActivity.TAG, "Package " + SuspendedAppActivity.this.mSuspendedPackage + " has modified suspension conditions while dialog was visible. Finishing.");
-                    SuspendedAppActivity.this.finish();
+    private BroadcastReceiver mSuspendModifiedReceiver =
+            new BroadcastReceiver() { // from class: com.android.internal.app.SuspendedAppActivity.1
+                @Override // android.content.BroadcastReceiver
+                public void onReceive(Context context, Intent intent) {
+                    if (Intent.ACTION_PACKAGES_SUSPENSION_CHANGED.equals(intent.getAction())) {
+                        String[] modified =
+                                intent.getStringArrayExtra(Intent.EXTRA_CHANGED_PACKAGE_LIST);
+                        if (ArrayUtils.contains(
+                                        modified, SuspendedAppActivity.this.mSuspendedPackage)
+                                && !SuspendedAppActivity.this.isPackageSuspended(
+                                        SuspendedAppActivity.this.mSuspendedPackage)
+                                && !SuspendedAppActivity.this.isFinishing()) {
+                            Slog.w(
+                                    SuspendedAppActivity.TAG,
+                                    "Package "
+                                            + SuspendedAppActivity.this.mSuspendedPackage
+                                            + " has modified suspension conditions while dialog was"
+                                            + " visible. Finishing.");
+                            SuspendedAppActivity.this.finish();
+                        }
+                    }
                 }
-            }
-        }
-    };
+            };
     private String mSuspendedPackage;
     private Resources mSuspendingAppResources;
     private String mSuspendingPackage;
@@ -75,7 +91,9 @@ public class SuspendedAppActivity extends AlertActivity implements DialogInterfa
 
     private CharSequence getAppLabel(String packageName) {
         try {
-            return this.mPm.getApplicationInfoAsUser(packageName, 0, this.mUserId).loadLabel(this.mPm);
+            return this.mPm
+                    .getApplicationInfoAsUser(packageName, 0, this.mUserId)
+                    .loadLabel(this.mPm);
         } catch (PackageManager.NameNotFoundException ne) {
             Slog.e(TAG, "Package " + packageName + " not found", ne);
             return packageName;
@@ -83,13 +101,23 @@ public class SuspendedAppActivity extends AlertActivity implements DialogInterfa
     }
 
     private Intent getMoreDetailsActivity() {
-        Intent moreDetailsIntent = new Intent(Intent.ACTION_SHOW_SUSPENDED_APP_DETAILS).setPackage(this.mSuspendingPackage);
-        ResolveInfo resolvedInfo = this.mPm.resolveActivityAsUser(moreDetailsIntent, 786432, this.mSuspendingUserId);
-        if (resolvedInfo != null && resolvedInfo.activityInfo != null && Manifest.permission.SEND_SHOW_SUSPENDED_APP_DETAILS.equals(resolvedInfo.activityInfo.permission)) {
+        Intent moreDetailsIntent =
+                new Intent(Intent.ACTION_SHOW_SUSPENDED_APP_DETAILS)
+                        .setPackage(this.mSuspendingPackage);
+        ResolveInfo resolvedInfo =
+                this.mPm.resolveActivityAsUser(moreDetailsIntent, 786432, this.mSuspendingUserId);
+        if (resolvedInfo != null
+                && resolvedInfo.activityInfo != null
+                && Manifest.permission.SEND_SHOW_SUSPENDED_APP_DETAILS.equals(
+                        resolvedInfo.activityInfo.permission)) {
             if (isDigitalWellbingPackage(this.mSuspendingPackage)) {
-                moreDetailsIntent.putExtra("android.intent.extra.PACKAGE_NAME", this.mSuspendedPackage).setFlags(335577088);
+                moreDetailsIntent
+                        .putExtra("android.intent.extra.PACKAGE_NAME", this.mSuspendedPackage)
+                        .setFlags(335577088);
             } else {
-                moreDetailsIntent.putExtra("android.intent.extra.PACKAGE_NAME", this.mSuspendedPackage).setFlags(335544320);
+                moreDetailsIntent
+                        .putExtra("android.intent.extra.PACKAGE_NAME", this.mSuspendedPackage)
+                        .setFlags(335544320);
             }
             return moreDetailsIntent;
         }
@@ -138,10 +166,16 @@ public class SuspendedAppActivity extends AlertActivity implements DialogInterfa
                     Slog.e(TAG, "Could not resolve string resource id " + messageId);
                 }
             } else if (message != null) {
-                return String.format(getResources().getConfiguration().getLocales().get(0), message, suspendedAppLabel);
+                return String.format(
+                        getResources().getConfiguration().getLocales().get(0),
+                        message,
+                        suspendedAppLabel);
             }
         }
-        return getString(R.string.app_suspended_default_message, suspendedAppLabel, getAppLabel(this.mSuspendingPackage));
+        return getString(
+                R.string.app_suspended_default_message,
+                suspendedAppLabel,
+                getAppLabel(this.mSuspendingPackage));
     }
 
     private String resolveNeutralButtonText() {
@@ -198,19 +232,30 @@ public class SuspendedAppActivity extends AlertActivity implements DialogInterfa
         } else {
             this.mSuspendingUserId = this.mUserId;
         }
-        this.mSuppliedDialogInfo = (SuspendDialogInfo) intent.getParcelableExtra(EXTRA_DIALOG_INFO, SuspendDialogInfo.class);
-        this.mOnUnsuspend = (IntentSender) intent.getParcelableExtra(EXTRA_UNSUSPEND_INTENT, IntentSender.class);
-        if (isDigitalWellbingPackage(this.mSuspendingPackage) && (getResources().getConfiguration().uiMode & 32) != 0) {
+        this.mSuppliedDialogInfo =
+                (SuspendDialogInfo)
+                        intent.getParcelableExtra(EXTRA_DIALOG_INFO, SuspendDialogInfo.class);
+        this.mOnUnsuspend =
+                (IntentSender)
+                        intent.getParcelableExtra(EXTRA_UNSUSPEND_INTENT, IntentSender.class);
+        if (isDigitalWellbingPackage(this.mSuspendingPackage)
+                && (getResources().getConfiguration().uiMode & 32) != 0) {
             setTheme(16974545);
         }
         if (this.mSuppliedDialogInfo != null) {
             try {
-                this.mSuspendingAppResources = createContextAsUser(UserHandle.of(this.mSuspendingUserId), 0).getPackageManager().getResourcesForApplication(this.mSuspendingPackage);
+                this.mSuspendingAppResources =
+                        createContextAsUser(UserHandle.of(this.mSuspendingUserId), 0)
+                                .getPackageManager()
+                                .getResourcesForApplication(this.mSuspendingPackage);
             } catch (PackageManager.NameNotFoundException ne) {
                 Slog.e(TAG, "Could not find resources for " + this.mSuspendingPackage, ne);
             }
         }
-        this.mNeutralButtonAction = this.mSuppliedDialogInfo != null ? this.mSuppliedDialogInfo.getNeutralButtonAction() : 0;
+        this.mNeutralButtonAction =
+                this.mSuppliedDialogInfo != null
+                        ? this.mSuppliedDialogInfo.getNeutralButtonAction()
+                        : 0;
         this.mMoreDetailsIntent = this.mNeutralButtonAction == 0 ? getMoreDetailsActivity() : null;
         AlertController.AlertParams ap = this.mAlertParams;
         ap.mIcon = resolveIcon();
@@ -223,8 +268,14 @@ public class SuspendedAppActivity extends AlertActivity implements DialogInterfa
         getWindow().setGravity(80);
         requestDismissKeyguardIfNeeded(ap.mMessage);
         setupAlert();
-        IntentFilter suspendModifiedFilter = new IntentFilter(Intent.ACTION_PACKAGES_SUSPENSION_CHANGED);
-        registerReceiverAsUser(this.mSuspendModifiedReceiver, UserHandle.of(this.mUserId), suspendModifiedFilter, null, null);
+        IntentFilter suspendModifiedFilter =
+                new IntentFilter(Intent.ACTION_PACKAGES_SUSPENSION_CHANGED);
+        registerReceiverAsUser(
+                this.mSuspendModifiedReceiver,
+                UserHandle.of(this.mUserId),
+                suspendModifiedFilter,
+                null,
+                null);
     }
 
     @Override // android.app.Activity
@@ -236,18 +287,27 @@ public class SuspendedAppActivity extends AlertActivity implements DialogInterfa
     private void requestDismissKeyguardIfNeeded(CharSequence dismissMessage) {
         KeyguardManager km = (KeyguardManager) getSystemService(KeyguardManager.class);
         if (km.isKeyguardLocked()) {
-            km.requestDismissKeyguard(this, dismissMessage, new KeyguardManager.KeyguardDismissCallback() { // from class: com.android.internal.app.SuspendedAppActivity.2
-                @Override // android.app.KeyguardManager.KeyguardDismissCallback
-                public void onDismissError() {
-                    Slog.e(SuspendedAppActivity.TAG, "Error while dismissing keyguard. Keeping the dialog visible.");
-                }
+            km.requestDismissKeyguard(
+                    this,
+                    dismissMessage,
+                    new KeyguardManager
+                            .KeyguardDismissCallback() { // from class:
+                                                         // com.android.internal.app.SuspendedAppActivity.2
+                        @Override // android.app.KeyguardManager.KeyguardDismissCallback
+                        public void onDismissError() {
+                            Slog.e(
+                                    SuspendedAppActivity.TAG,
+                                    "Error while dismissing keyguard. Keeping the dialog visible.");
+                        }
 
-                @Override // android.app.KeyguardManager.KeyguardDismissCallback
-                public void onDismissCancelled() {
-                    Slog.w(SuspendedAppActivity.TAG, "Keyguard dismiss was cancelled. Finishing.");
-                    SuspendedAppActivity.this.finish();
-                }
-            });
+                        @Override // android.app.KeyguardManager.KeyguardDismissCallback
+                        public void onDismissCancelled() {
+                            Slog.w(
+                                    SuspendedAppActivity.TAG,
+                                    "Keyguard dismiss was cancelled. Finishing.");
+                            SuspendedAppActivity.this.finish();
+                        }
+                    });
         }
     }
 
@@ -258,7 +318,10 @@ public class SuspendedAppActivity extends AlertActivity implements DialogInterfa
                 switch (this.mNeutralButtonAction) {
                     case 0:
                         if (this.mMoreDetailsIntent != null) {
-                            startActivityAsUser(this.mMoreDetailsIntent, this.mOptions, UserHandle.of(this.mSuspendingUserId));
+                            startActivityAsUser(
+                                    this.mMoreDetailsIntent,
+                                    this.mOptions,
+                                    UserHandle.of(this.mSuspendingUserId));
                             break;
                         } else {
                             Slog.wtf(TAG, "Neutral button should not have existed!");
@@ -267,20 +330,46 @@ public class SuspendedAppActivity extends AlertActivity implements DialogInterfa
                     case 1:
                         IPackageManager ipm = AppGlobals.getPackageManager();
                         try {
-                            String[] errored = ipm.setPackagesSuspendedAsUser(new String[]{this.mSuspendedPackage}, false, null, null, null, 0, this.mSuspendingPackage, this.mUserId, this.mUserId);
+                            String[] errored =
+                                    ipm.setPackagesSuspendedAsUser(
+                                            new String[] {this.mSuspendedPackage},
+                                            false,
+                                            null,
+                                            null,
+                                            null,
+                                            0,
+                                            this.mSuspendingPackage,
+                                            this.mUserId,
+                                            this.mUserId);
                             if (ArrayUtils.contains(errored, this.mSuspendedPackage)) {
                                 Slog.e(TAG, "Could not unsuspend " + this.mSuspendedPackage);
                                 break;
                             } else {
-                                Intent reportUnsuspend = new Intent().setAction(Intent.ACTION_PACKAGE_UNSUSPENDED_MANUALLY).putExtra("android.intent.extra.PACKAGE_NAME", this.mSuspendedPackage).setPackage(this.mSuspendingPackage).addFlags(16777216);
-                                sendBroadcastAsUser(reportUnsuspend, UserHandle.of(this.mSuspendingUserId));
+                                Intent reportUnsuspend =
+                                        new Intent()
+                                                .setAction(
+                                                        Intent.ACTION_PACKAGE_UNSUSPENDED_MANUALLY)
+                                                .putExtra(
+                                                        "android.intent.extra.PACKAGE_NAME",
+                                                        this.mSuspendedPackage)
+                                                .setPackage(this.mSuspendingPackage)
+                                                .addFlags(16777216);
+                                sendBroadcastAsUser(
+                                        reportUnsuspend, UserHandle.of(this.mSuspendingUserId));
                                 if (this.mOnUnsuspend != null) {
-                                    Bundle activityOptions = ActivityOptions.makeBasic().setPendingIntentBackgroundActivityStartMode(1).toBundle();
+                                    Bundle activityOptions =
+                                            ActivityOptions.makeBasic()
+                                                    .setPendingIntentBackgroundActivityStartMode(1)
+                                                    .toBundle();
                                     try {
-                                        this.mOnUnsuspend.sendIntent(this, 0, null, null, null, null, activityOptions);
+                                        this.mOnUnsuspend.sendIntent(
+                                                this, 0, null, null, null, null, activityOptions);
                                         break;
                                     } catch (IntentSender.SendIntentException e) {
-                                        Slog.e(TAG, "Error while starting intent " + this.mOnUnsuspend, e);
+                                        Slog.e(
+                                                TAG,
+                                                "Error while starting intent " + this.mOnUnsuspend,
+                                                e);
                                         break;
                                     }
                                 }
@@ -291,7 +380,10 @@ public class SuspendedAppActivity extends AlertActivity implements DialogInterfa
                         }
                         break;
                     default:
-                        Slog.e(TAG, "Unexpected action on neutral button: " + this.mNeutralButtonAction);
+                        Slog.e(
+                                TAG,
+                                "Unexpected action on neutral button: "
+                                        + this.mNeutralButtonAction);
                         break;
                 }
         }
@@ -305,15 +397,41 @@ public class SuspendedAppActivity extends AlertActivity implements DialogInterfa
         finish();
     }
 
-    public static Intent createSuspendedAppInterceptIntent(String suspendedPackage, UserPackage suspendingPackage, SuspendDialogInfo dialogInfo, Bundle options, IntentSender onUnsuspend, int userId) {
+    public static Intent createSuspendedAppInterceptIntent(
+            String suspendedPackage,
+            UserPackage suspendingPackage,
+            SuspendDialogInfo dialogInfo,
+            Bundle options,
+            IntentSender onUnsuspend,
+            int userId) {
         if (suspendingPackage != null && isDigitalWellbingPackage(suspendingPackage.packageName)) {
-            Intent intent = new Intent().setClassName("android", SuspendedAppActivity.class.getName()).putExtra(EXTRA_SUSPENDED_PACKAGE, suspendedPackage).putExtra(EXTRA_DIALOG_INFO, dialogInfo).putExtra(EXTRA_SUSPENDING_PACKAGE, suspendingPackage.packageName).putExtra(EXTRA_UNSUSPEND_INTENT, onUnsuspend).putExtra(EXTRA_ACTIVITY_OPTIONS, options).putExtra("android.intent.extra.USER_ID", userId).setFlags(276889600);
+            Intent intent =
+                    new Intent()
+                            .setClassName("android", SuspendedAppActivity.class.getName())
+                            .putExtra(EXTRA_SUSPENDED_PACKAGE, suspendedPackage)
+                            .putExtra(EXTRA_DIALOG_INFO, dialogInfo)
+                            .putExtra(EXTRA_SUSPENDING_PACKAGE, suspendingPackage.packageName)
+                            .putExtra(EXTRA_UNSUSPEND_INTENT, onUnsuspend)
+                            .putExtra(EXTRA_ACTIVITY_OPTIONS, options)
+                            .putExtra("android.intent.extra.USER_ID", userId)
+                            .setFlags(276889600);
             if (Flags.crossUserSuspensionEnabledRo()) {
                 intent.putExtra(EXTRA_SUSPENDING_USER, suspendingPackage.userId);
             }
             return intent;
         }
-        Intent intent2 = new Intent().setClassName("android", SuspendedAppActivity.class.getName()).putExtra(EXTRA_SUSPENDED_PACKAGE, suspendedPackage).putExtra(EXTRA_DIALOG_INFO, dialogInfo).putExtra(EXTRA_SUSPENDING_PACKAGE, suspendingPackage != null ? suspendingPackage.packageName : null).putExtra(EXTRA_UNSUSPEND_INTENT, onUnsuspend).putExtra(EXTRA_ACTIVITY_OPTIONS, options).putExtra("android.intent.extra.USER_ID", userId).setFlags(276824064);
+        Intent intent2 =
+                new Intent()
+                        .setClassName("android", SuspendedAppActivity.class.getName())
+                        .putExtra(EXTRA_SUSPENDED_PACKAGE, suspendedPackage)
+                        .putExtra(EXTRA_DIALOG_INFO, dialogInfo)
+                        .putExtra(
+                                EXTRA_SUSPENDING_PACKAGE,
+                                suspendingPackage != null ? suspendingPackage.packageName : null)
+                        .putExtra(EXTRA_UNSUSPEND_INTENT, onUnsuspend)
+                        .putExtra(EXTRA_ACTIVITY_OPTIONS, options)
+                        .putExtra("android.intent.extra.USER_ID", userId)
+                        .setFlags(276824064);
         if (Flags.crossUserSuspensionEnabledRo() && suspendingPackage != null) {
             intent2.putExtra(EXTRA_SUSPENDING_USER, suspendingPackage.userId);
         }

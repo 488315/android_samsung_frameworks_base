@@ -1,6 +1,5 @@
 package android.app;
 
-import android.app.SharedPreferencesImpl;
 import android.compat.Compatibility;
 import android.content.SharedPreferences;
 import android.os.FileUtils;
@@ -10,9 +9,16 @@ import android.system.Os;
 import android.system.StructStat;
 import android.system.StructTimespec;
 import android.util.Log;
+
 import com.android.internal.util.ExponentiallyBucketedHistogram;
 import com.android.internal.util.XmlUtils;
+
 import dalvik.system.BlockGuard;
+
+import libcore.io.IoUtils;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,8 +37,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-import libcore.io.IoUtils;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 final class SharedPreferencesImpl implements SharedPreferences {
@@ -49,12 +53,21 @@ final class SharedPreferencesImpl implements SharedPreferences {
     private long mStatSize;
     private StructTimespec mStatTimestamp;
     private static final Object CONTENT = new Object();
-    private static final ThreadPoolExecutor sLoadExecutor = new ThreadPoolExecutor(0, 1, 10, TimeUnit.SECONDS, new LinkedBlockingQueue(), new SharedPreferencesThreadFactory());
+    private static final ThreadPoolExecutor sLoadExecutor =
+            new ThreadPoolExecutor(
+                    0,
+                    1,
+                    10,
+                    TimeUnit.SECONDS,
+                    new LinkedBlockingQueue(),
+                    new SharedPreferencesThreadFactory());
     private final Object mLock = new Object();
     private final Object mWritingToDiskLock = new Object();
     private int mDiskWritesInFlight = 0;
-    private final WeakHashMap<SharedPreferences.OnSharedPreferenceChangeListener, Object> mListeners = new WeakHashMap<>();
-    private final ExponentiallyBucketedHistogram mSyncTimes = new ExponentiallyBucketedHistogram(16);
+    private final WeakHashMap<SharedPreferences.OnSharedPreferenceChangeListener, Object>
+            mListeners = new WeakHashMap<>();
+    private final ExponentiallyBucketedHistogram mSyncTimes =
+            new ExponentiallyBucketedHistogram(16);
     private int mNumSync = 0;
     private Map<String, Object> mMap = null;
     private Throwable mThrowable = null;
@@ -72,12 +85,14 @@ final class SharedPreferencesImpl implements SharedPreferences {
         synchronized (this.mLock) {
             this.mLoaded = false;
         }
-        sLoadExecutor.execute(new Runnable() { // from class: android.app.SharedPreferencesImpl$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                SharedPreferencesImpl.this.lambda$startLoadFromDisk$0();
-            }
-        });
+        sLoadExecutor.execute(
+                new Runnable() { // from class:
+                    // android.app.SharedPreferencesImpl$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        SharedPreferencesImpl.this.lambda$startLoadFromDisk$0();
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -95,7 +110,9 @@ final class SharedPreferencesImpl implements SharedPreferences {
                 this.mBackupFile.renameTo(this.mFile);
             }
             if (this.mFile.exists() && !this.mFile.canRead()) {
-                Log.w(TAG, "Attempt to read preferences file " + this.mFile + " without permission");
+                Log.w(
+                        TAG,
+                        "Attempt to read preferences file " + this.mFile + " without permission");
             }
             Map<String, Object> map2 = null;
             StructStat stat2 = null;
@@ -173,7 +190,11 @@ final class SharedPreferencesImpl implements SharedPreferences {
                 BlockGuard.getThreadPolicy().onReadFromDisk();
                 StructStat stat = Os.stat(this.mFile.getPath());
                 synchronized (this.mLock) {
-                    z = (stat.st_mtim.equals(this.mStatTimestamp) && this.mStatSize == stat.st_size) ? false : true;
+                    z =
+                            (stat.st_mtim.equals(this.mStatTimestamp)
+                                            && this.mStatSize == stat.st_size)
+                                    ? false
+                                    : true;
                 }
                 return z;
             } catch (ErrnoException e) {
@@ -183,14 +204,16 @@ final class SharedPreferencesImpl implements SharedPreferences {
     }
 
     @Override // android.content.SharedPreferences
-    public void registerOnSharedPreferenceChangeListener(SharedPreferences.OnSharedPreferenceChangeListener listener) {
+    public void registerOnSharedPreferenceChangeListener(
+            SharedPreferences.OnSharedPreferenceChangeListener listener) {
         synchronized (this.mLock) {
             this.mListeners.put(listener, CONTENT);
         }
     }
 
     @Override // android.content.SharedPreferences
-    public void unregisterOnSharedPreferenceChangeListener(SharedPreferences.OnSharedPreferenceChangeListener listener) {
+    public void unregisterOnSharedPreferenceChangeListener(
+            SharedPreferences.OnSharedPreferenceChangeListener listener) {
         synchronized (this.mLock) {
             this.mListeners.remove(listener);
         }
@@ -316,7 +339,12 @@ final class SharedPreferencesImpl implements SharedPreferences {
         volatile boolean writeToDiskResult;
         final CountDownLatch writtenToDiskLatch;
 
-        private MemoryCommitResult(long memoryStateGeneration, boolean keysCleared, List<String> keysModified, Set<SharedPreferences.OnSharedPreferenceChangeListener> listeners, Map<String, Object> mapToWriteToDisk) {
+        private MemoryCommitResult(
+                long memoryStateGeneration,
+                boolean keysCleared,
+                List<String> keysModified,
+                Set<SharedPreferences.OnSharedPreferenceChangeListener> listeners,
+                Map<String, Object> mapToWriteToDisk) {
             this.writtenToDiskLatch = new CountDownLatch(1);
             this.writeToDiskResult = false;
             this.wasWritten = false;
@@ -339,8 +367,7 @@ final class SharedPreferencesImpl implements SharedPreferences {
         private final Map<String, Object> mModified = new HashMap();
         private boolean mClear = false;
 
-        public EditorImpl() {
-        }
+        public EditorImpl() {}
 
         @Override // android.content.SharedPreferences.Editor
         public SharedPreferences.Editor putString(String key, String value) {
@@ -410,23 +437,25 @@ final class SharedPreferencesImpl implements SharedPreferences {
         public void apply() {
             final long startTime = System.currentTimeMillis();
             final MemoryCommitResult mcr = commitToMemory();
-            final Runnable awaitCommit = new Runnable() { // from class: android.app.SharedPreferencesImpl.EditorImpl.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    try {
-                        mcr.writtenToDiskLatch.await();
-                    } catch (InterruptedException e) {
-                    }
-                }
-            };
+            final Runnable awaitCommit =
+                    new Runnable() { // from class: android.app.SharedPreferencesImpl.EditorImpl.1
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            try {
+                                mcr.writtenToDiskLatch.await();
+                            } catch (InterruptedException e) {
+                            }
+                        }
+                    };
             QueuedWork.addFinisher(awaitCommit);
-            Runnable postWriteRunnable = new Runnable() { // from class: android.app.SharedPreferencesImpl.EditorImpl.2
-                @Override // java.lang.Runnable
-                public void run() {
-                    awaitCommit.run();
-                    QueuedWork.removeFinisher(awaitCommit);
-                }
-            };
+            Runnable postWriteRunnable =
+                    new Runnable() { // from class: android.app.SharedPreferencesImpl.EditorImpl.2
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            awaitCommit.run();
+                            QueuedWork.removeFinisher(awaitCommit);
+                        }
+                    };
             SharedPreferencesImpl.this.enqueueDiskWrite(mcr, postWriteRunnable);
             lambda$notifyListeners$0(mcr);
         }
@@ -441,7 +470,9 @@ final class SharedPreferencesImpl implements SharedPreferences {
                 Method dump skipped, instructions count: 235
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: android.app.SharedPreferencesImpl.EditorImpl.commitToMemory():android.app.SharedPreferencesImpl$MemoryCommitResult");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " android.app.SharedPreferencesImpl.EditorImpl.commitToMemory():android.app.SharedPreferencesImpl$MemoryCommitResult");
         }
 
         @Override // android.content.SharedPreferences.Editor
@@ -465,29 +496,37 @@ final class SharedPreferencesImpl implements SharedPreferences {
                     return;
                 }
                 if (Looper.myLooper() == Looper.getMainLooper()) {
-                    if (mcr.keysCleared && Compatibility.isChangeEnabled(SharedPreferencesImpl.CALLBACK_ON_CLEAR_CHANGE)) {
-                        for (SharedPreferences.OnSharedPreferenceChangeListener listener : mcr.listeners) {
+                    if (mcr.keysCleared
+                            && Compatibility.isChangeEnabled(
+                                    SharedPreferencesImpl.CALLBACK_ON_CLEAR_CHANGE)) {
+                        for (SharedPreferences.OnSharedPreferenceChangeListener listener :
+                                mcr.listeners) {
                             if (listener != null) {
-                                listener.onSharedPreferenceChanged(SharedPreferencesImpl.this, null);
+                                listener.onSharedPreferenceChanged(
+                                        SharedPreferencesImpl.this, null);
                             }
                         }
                     }
                     for (int i = mcr.keysModified.size() - 1; i >= 0; i--) {
                         String key = mcr.keysModified.get(i);
-                        for (SharedPreferences.OnSharedPreferenceChangeListener listener2 : mcr.listeners) {
+                        for (SharedPreferences.OnSharedPreferenceChangeListener listener2 :
+                                mcr.listeners) {
                             if (listener2 != null) {
-                                listener2.onSharedPreferenceChanged(SharedPreferencesImpl.this, key);
+                                listener2.onSharedPreferenceChanged(
+                                        SharedPreferencesImpl.this, key);
                             }
                         }
                     }
                     return;
                 }
-                ActivityThread.sMainThreadHandler.post(new Runnable() { // from class: android.app.SharedPreferencesImpl$EditorImpl$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SharedPreferencesImpl.EditorImpl.this.lambda$notifyListeners$0(mcr);
-                    }
-                });
+                ActivityThread.sMainThreadHandler.post(
+                        new Runnable() { // from class:
+                            // android.app.SharedPreferencesImpl$EditorImpl$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SharedPreferencesImpl.EditorImpl.this.lambda$notifyListeners$0(mcr);
+                            }
+                        });
             }
         }
     }
@@ -496,21 +535,23 @@ final class SharedPreferencesImpl implements SharedPreferences {
     public void enqueueDiskWrite(final MemoryCommitResult mcr, final Runnable postWriteRunnable) {
         boolean wasEmpty;
         final boolean isFromSyncCommit = postWriteRunnable == null;
-        Runnable writeToDiskRunnable = new Runnable() { // from class: android.app.SharedPreferencesImpl.1
-            @Override // java.lang.Runnable
-            public void run() {
-                synchronized (SharedPreferencesImpl.this.mWritingToDiskLock) {
-                    SharedPreferencesImpl.this.writeToFile(mcr, isFromSyncCommit);
-                }
-                synchronized (SharedPreferencesImpl.this.mLock) {
-                    SharedPreferencesImpl sharedPreferencesImpl = SharedPreferencesImpl.this;
-                    sharedPreferencesImpl.mDiskWritesInFlight--;
-                }
-                if (postWriteRunnable != null) {
-                    postWriteRunnable.run();
-                }
-            }
-        };
+        Runnable writeToDiskRunnable =
+                new Runnable() { // from class: android.app.SharedPreferencesImpl.1
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        synchronized (SharedPreferencesImpl.this.mWritingToDiskLock) {
+                            SharedPreferencesImpl.this.writeToFile(mcr, isFromSyncCommit);
+                        }
+                        synchronized (SharedPreferencesImpl.this.mLock) {
+                            SharedPreferencesImpl sharedPreferencesImpl =
+                                    SharedPreferencesImpl.this;
+                            sharedPreferencesImpl.mDiskWritesInFlight--;
+                        }
+                        if (postWriteRunnable != null) {
+                            postWriteRunnable.run();
+                        }
+                    }
+                };
         if (isFromSyncCommit) {
             synchronized (this.mLock) {
                 wasEmpty = this.mDiskWritesInFlight == 1;
@@ -558,7 +599,8 @@ final class SharedPreferencesImpl implements SharedPreferences {
                     synchronized (this.mLock) {
                         try {
                             try {
-                                if (this.mCurrentMemoryStateGeneration == mcr.memoryStateGeneration) {
+                                if (this.mCurrentMemoryStateGeneration
+                                        == mcr.memoryStateGeneration) {
                                     needsWrite = true;
                                 }
                             } catch (Throwable th) {
@@ -579,7 +621,12 @@ final class SharedPreferencesImpl implements SharedPreferences {
             boolean backupFileExists = this.mBackupFile.exists();
             if (!backupFileExists) {
                 if (!this.mFile.renameTo(this.mBackupFile)) {
-                    Log.e(TAG, "Couldn't rename file " + this.mFile + " to backup file " + this.mBackupFile);
+                    Log.e(
+                            TAG,
+                            "Couldn't rename file "
+                                    + this.mFile
+                                    + " to backup file "
+                                    + this.mBackupFile);
                     mcr.setDiskWriteResult(false, false);
                     return;
                 }
@@ -632,8 +679,7 @@ final class SharedPreferencesImpl implements SharedPreferences {
     }
 
     private static final class SharedPreferencesThreadFactory implements ThreadFactory {
-        private SharedPreferencesThreadFactory() {
-        }
+        private SharedPreferencesThreadFactory() {}
 
         @Override // java.util.concurrent.ThreadFactory
         public Thread newThread(Runnable runnable) {

@@ -2,6 +2,7 @@ package com.android.server.am;
 
 import android.os.SystemClock;
 import android.util.ArraySet;
+
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.am.mars.MARsDebugConfig;
 import com.android.server.am.mars.MARsFreezeStateRecord;
@@ -34,8 +35,10 @@ public final class FreecessPkgStatus {
         this.userId = i2;
         this.targetSdkVersion = i3;
         MARsFreezeStateRecord mARsFreezeStateRecord = new MARsFreezeStateRecord();
-        mARsFreezeStateRecord.mFreezeCounts = new int[MARsFreezeStateRecord.FreezeReasonType.values().length];
-        mARsFreezeStateRecord.mUnfreezeCounts = new int[MARsFreezeStateRecord.UnfreezeReasonType.values().length];
+        mARsFreezeStateRecord.mFreezeCounts =
+                new int[MARsFreezeStateRecord.FreezeReasonType.values().length];
+        mARsFreezeStateRecord.mUnfreezeCounts =
+                new int[MARsFreezeStateRecord.UnfreezeReasonType.values().length];
         mARsFreezeStateRecord.mFreecessParent = this;
         mARsFreezeStateRecord.isFrozen = false;
         mARsFreezeStateRecord.isLcdOnFreezed = false;
@@ -45,7 +48,8 @@ public final class FreecessPkgStatus {
         mARsFreezeStateRecord.unfreezedTime = 0L;
         mARsFreezeStateRecord.unfreezedReason = null;
         if (MARsDebugConfig.DEBUG_FREECESS) {
-            DeviceIdleController$$ExternalSyntheticOutline0.m("initRealtimeDetection ", str, " rate:12", "MARsFreezeStateRecord");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    "initRealtimeDetection ", str, " rate:12", "MARsFreezeStateRecord");
         }
         mARsFreezeStateRecord.mAvailableTokens = 512L;
         mARsFreezeStateRecord.mDetectionVer = 0;

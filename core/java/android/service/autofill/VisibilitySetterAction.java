@@ -8,37 +8,42 @@ import android.util.SparseIntArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.autofill.Helper;
+
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes3.dex */
-public final class VisibilitySetterAction extends InternalOnClickAction implements OnClickAction, Parcelable {
-    public static final Parcelable.Creator<VisibilitySetterAction> CREATOR = new Parcelable.Creator<VisibilitySetterAction>() { // from class: android.service.autofill.VisibilitySetterAction.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VisibilitySetterAction createFromParcel(Parcel parcel) {
-            SparseIntArray visibilities = parcel.readSparseIntArray();
-            Builder builder = null;
-            for (int i = 0; i < visibilities.size(); i++) {
-                int id = visibilities.keyAt(i);
-                int visibility = visibilities.valueAt(i);
-                if (builder == null) {
-                    builder = new Builder(id, visibility);
-                } else {
-                    builder.setVisibility(id, visibility);
+public final class VisibilitySetterAction extends InternalOnClickAction
+        implements OnClickAction, Parcelable {
+    public static final Parcelable.Creator<VisibilitySetterAction> CREATOR =
+            new Parcelable.Creator<
+                    VisibilitySetterAction>() { // from class:
+                                                // android.service.autofill.VisibilitySetterAction.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VisibilitySetterAction createFromParcel(Parcel parcel) {
+                    SparseIntArray visibilities = parcel.readSparseIntArray();
+                    Builder builder = null;
+                    for (int i = 0; i < visibilities.size(); i++) {
+                        int id = visibilities.keyAt(i);
+                        int visibility = visibilities.valueAt(i);
+                        if (builder == null) {
+                            builder = new Builder(id, visibility);
+                        } else {
+                            builder.setVisibility(id, visibility);
+                        }
+                    }
+                    if (builder == null) {
+                        return null;
+                    }
+                    return builder.build();
                 }
-            }
-            if (builder == null) {
-                return null;
-            }
-            return builder.build();
-        }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VisibilitySetterAction[] newArray(int size) {
-            return new VisibilitySetterAction[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VisibilitySetterAction[] newArray(int size) {
+                    return new VisibilitySetterAction[size];
+                }
+            };
     private static final String TAG = "VisibilitySetterAction";
     private final SparseIntArray mVisibilities;
 
@@ -56,7 +61,14 @@ public final class VisibilitySetterAction extends InternalOnClickAction implemen
             } else {
                 int visibility = this.mVisibilities.valueAt(i);
                 if (Helper.sVerbose) {
-                    Slog.v(TAG, "Changing visibility of view " + child + " from " + child.getVisibility() + " to  " + visibility);
+                    Slog.v(
+                            TAG,
+                            "Changing visibility of view "
+                                    + child
+                                    + " from "
+                                    + child.getVisibility()
+                                    + " to  "
+                                    + visibility);
                 }
                 child.setVisibility(visibility);
             }
@@ -96,7 +108,11 @@ public final class VisibilitySetterAction extends InternalOnClickAction implemen
     }
 
     public String toString() {
-        return !Helper.sDebug ? super.toString() : "VisibilitySetterAction: [" + this.mVisibilities + NavigationBarInflaterView.SIZE_MOD_END;
+        return !Helper.sDebug
+                ? super.toString()
+                : "VisibilitySetterAction: ["
+                        + this.mVisibilities
+                        + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     @Override // android.os.Parcelable

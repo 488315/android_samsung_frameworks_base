@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes3.dex */
 public interface IKeystoreOperation extends IInterface {
-    public static final String DESCRIPTOR = "android$system$keystore2$IKeystoreOperation".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$system$keystore2$IKeystoreOperation".replace('$', '.');
     public static final String HASH = "5648acc9b43590ef0a775b6f5c553831c20cccc4";
     public static final int VERSION = 4;
 
@@ -26,8 +27,7 @@ public interface IKeystoreOperation extends IInterface {
 
     public static class Default implements IKeystoreOperation {
         @Override // android.system.keystore2.IKeystoreOperation
-        public void updateAad(byte[] aadInput) throws RemoteException {
-        }
+        public void updateAad(byte[] aadInput) throws RemoteException {}
 
         @Override // android.system.keystore2.IKeystoreOperation
         public byte[] update(byte[] input) throws RemoteException {
@@ -40,8 +40,7 @@ public interface IKeystoreOperation extends IInterface {
         }
 
         @Override // android.system.keystore2.IKeystoreOperation
-        public void abort() throws RemoteException {
-        }
+        public void abort() throws RemoteException {}
 
         @Override // android.system.keystore2.IKeystoreOperation
         public int getInterfaceVersion() {
@@ -59,7 +58,7 @@ public interface IKeystoreOperation extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IKeystoreOperation {
+    public abstract static class Stub extends Binder implements IKeystoreOperation {
         static final int TRANSACTION_abort = 4;
         static final int TRANSACTION_finish = 3;
         static final int TRANSACTION_getInterfaceHash = 16777214;
@@ -113,7 +112,8 @@ public interface IKeystoreOperation extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);

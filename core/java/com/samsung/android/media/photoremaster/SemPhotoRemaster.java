@@ -5,10 +5,14 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.util.Pair;
-import com.samsung.android.media.photoremaster.SemPhotoRemaster;
+
 import com.samsung.android.photoremaster.IDirector;
 import com.samsung.android.photoremaster.util.LogUtil;
 import com.samsung.android.photoremasterservice.ClientRemasterDirector;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -17,8 +21,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* loaded from: classes6.dex */
 public class SemPhotoRemaster {
@@ -62,12 +64,10 @@ public class SemPhotoRemaster {
         private boolean mRequestFocusRoi = false;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface setLongParamaterIds {
-        }
+        public @interface setLongParamaterIds {}
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface setStringParameterIds {
-        }
+        public @interface setStringParameterIds {}
 
         private Builder(Uri inputUri) {
             LogUtil.i(TAG, new Throwable().getStackTrace()[0].getMethodName() + " is called");
@@ -105,7 +105,8 @@ public class SemPhotoRemaster {
 
         public Builder setRequestFocusRoi() {
             if (this.mInputUri == null) {
-                throw new IllegalArgumentException("FocusView does not support Bitmap-Object-Input");
+                throw new IllegalArgumentException(
+                        "FocusView does not support Bitmap-Object-Input");
             }
             this.mRequestFocusRoi = true;
             return this;
@@ -144,7 +145,9 @@ public class SemPhotoRemaster {
                 return;
             }
             String[] projection = {"_data"};
-            Cursor cursor = context.getContentResolver().query(this.mInputUri, projection, null, null, null);
+            Cursor cursor =
+                    context.getContentResolver()
+                            .query(this.mInputUri, projection, null, null, null);
             try {
                 if (cursor == null) {
                     LogUtil.d(TAG, "InputPath is set as inputUri.getPath()");
@@ -192,29 +195,35 @@ public class SemPhotoRemaster {
             this.mServiceClient.setStringParam(stringPair.first.intValue(), stringPair.second);
         }
         for (Pair<Integer, Long> mLongParams : this.mBuilder.mLongParams) {
-            this.mServiceClient.setLongParam(mLongParams.first.intValue(), mLongParams.second.longValue());
+            this.mServiceClient.setLongParam(
+                    mLongParams.first.intValue(), mLongParams.second.longValue());
         }
         if (this.mBuilder.mBitmap != null) {
             this.mServiceClient.setBitmapParam(1014, this.mBuilder.mBitmap);
         }
         if (this.mBuilder.mListener != null) {
-            this.mServiceClient.setProgressUpdateListener(new IDirector.ProgressUpdateListener() { // from class: com.samsung.android.media.photoremaster.SemPhotoRemaster.1
-                private final ProgressUpdateListener mListener;
+            this.mServiceClient.setProgressUpdateListener(
+                    new IDirector
+                            .ProgressUpdateListener() { // from class:
+                                                        // com.samsung.android.media.photoremaster.SemPhotoRemaster.1
+                        private final ProgressUpdateListener mListener;
 
-                {
-                    this.mListener = SemPhotoRemaster.this.mBuilder.mListener;
-                }
+                        {
+                            this.mListener = SemPhotoRemaster.this.mBuilder.mListener;
+                        }
 
-                @Override // com.samsung.android.photoremaster.IDirector.ProgressUpdateListener
-                public void onUpdateProgress(double percent, int currentImageIndex, int totalImageCount) {
-                    this.mListener.onUpdateProgress(percent, currentImageIndex, totalImageCount);
-                }
+                        @Override // com.samsung.android.photoremaster.IDirector.ProgressUpdateListener
+                        public void onUpdateProgress(
+                                double percent, int currentImageIndex, int totalImageCount) {
+                            this.mListener.onUpdateProgress(
+                                    percent, currentImageIndex, totalImageCount);
+                        }
 
-                @Override // com.samsung.android.photoremaster.IDirector.ProgressUpdateListener
-                public void onUpdateMetadata(String metadata) {
-                    this.mListener.onUpdateMetadata(metadata);
-                }
-            });
+                        @Override // com.samsung.android.photoremaster.IDirector.ProgressUpdateListener
+                        public void onUpdateMetadata(String metadata) {
+                            this.mListener.onUpdateMetadata(metadata);
+                        }
+                    });
         }
     }
 
@@ -267,8 +276,7 @@ public class SemPhotoRemaster {
         private final JSONObject mResultJson;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface getParameterIds {
-        }
+        public @interface getParameterIds {}
 
         private Result(Bitmap remasteredBitmap) {
             this.mResultJson = new JSONObject();
@@ -309,43 +317,74 @@ public class SemPhotoRemaster {
 
     private Result getParameters() {
         LogUtil.i(TAG, new Throwable().getStackTrace()[0].getMethodName() + " is called");
-        final Result result = new Result(this.mBuilder.mBitmap == null ? null : this.mServiceClient.getBitmapParam(ResultParam.OUTPUT_BITMAP.ID));
+        final Result result =
+                new Result(
+                        this.mBuilder.mBitmap == null
+                                ? null
+                                : this.mServiceClient.getBitmapParam(ResultParam.OUTPUT_BITMAP.ID));
         String remasteredPathName = this.mServiceClient.getStringParam(1003);
         if (this.mBuilder.mRequestFocusRoi && remasteredPathName != null) {
-            result.setParameter(ResultParam.FOCUS_ROI.ID, this.mServiceClient.getFocusRoi(this.mBuilder.mInputPathName, remasteredPathName));
+            result.setParameter(
+                    ResultParam.FOCUS_ROI.ID,
+                    this.mServiceClient.getFocusRoi(
+                            this.mBuilder.mInputPathName, remasteredPathName));
         }
-        Arrays.stream(ResultParam.values()).filter(new Predicate() { // from class: com.samsung.android.media.photoremaster.SemPhotoRemaster$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return SemPhotoRemaster.lambda$getParameters$0((SemPhotoRemaster.ResultParam) obj);
-            }
-        }).filter(new Predicate() { // from class: com.samsung.android.media.photoremaster.SemPhotoRemaster$$ExternalSyntheticLambda1
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return SemPhotoRemaster.lambda$getParameters$1((SemPhotoRemaster.ResultParam) obj);
-            }
-        }).forEach(new Consumer() { // from class: com.samsung.android.media.photoremaster.SemPhotoRemaster$$ExternalSyntheticLambda2
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                SemPhotoRemaster.this.lambda$getParameters$2(result, (SemPhotoRemaster.ResultParam) obj);
-            }
-        });
-        Arrays.stream(ResultParam.values()).filter(new Predicate() { // from class: com.samsung.android.media.photoremaster.SemPhotoRemaster$$ExternalSyntheticLambda3
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return SemPhotoRemaster.lambda$getParameters$3((SemPhotoRemaster.ResultParam) obj);
-            }
-        }).filter(new Predicate() { // from class: com.samsung.android.media.photoremaster.SemPhotoRemaster$$ExternalSyntheticLambda4
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return SemPhotoRemaster.lambda$getParameters$4((SemPhotoRemaster.ResultParam) obj);
-            }
-        }).forEach(new Consumer() { // from class: com.samsung.android.media.photoremaster.SemPhotoRemaster$$ExternalSyntheticLambda5
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                SemPhotoRemaster.this.lambda$getParameters$5(result, (SemPhotoRemaster.ResultParam) obj);
-            }
-        });
+        Arrays.stream(ResultParam.values())
+                .filter(
+                        new Predicate() { // from class:
+                                          // com.samsung.android.media.photoremaster.SemPhotoRemaster$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Predicate
+                            public final boolean test(Object obj) {
+                                return SemPhotoRemaster.lambda$getParameters$0(
+                                        (SemPhotoRemaster.ResultParam) obj);
+                            }
+                        })
+                .filter(
+                        new Predicate() { // from class:
+                                          // com.samsung.android.media.photoremaster.SemPhotoRemaster$$ExternalSyntheticLambda1
+                            @Override // java.util.function.Predicate
+                            public final boolean test(Object obj) {
+                                return SemPhotoRemaster.lambda$getParameters$1(
+                                        (SemPhotoRemaster.ResultParam) obj);
+                            }
+                        })
+                .forEach(
+                        new Consumer() { // from class:
+                                         // com.samsung.android.media.photoremaster.SemPhotoRemaster$$ExternalSyntheticLambda2
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                SemPhotoRemaster.this.lambda$getParameters$2(
+                                        result, (SemPhotoRemaster.ResultParam) obj);
+                            }
+                        });
+        Arrays.stream(ResultParam.values())
+                .filter(
+                        new Predicate() { // from class:
+                                          // com.samsung.android.media.photoremaster.SemPhotoRemaster$$ExternalSyntheticLambda3
+                            @Override // java.util.function.Predicate
+                            public final boolean test(Object obj) {
+                                return SemPhotoRemaster.lambda$getParameters$3(
+                                        (SemPhotoRemaster.ResultParam) obj);
+                            }
+                        })
+                .filter(
+                        new Predicate() { // from class:
+                                          // com.samsung.android.media.photoremaster.SemPhotoRemaster$$ExternalSyntheticLambda4
+                            @Override // java.util.function.Predicate
+                            public final boolean test(Object obj) {
+                                return SemPhotoRemaster.lambda$getParameters$4(
+                                        (SemPhotoRemaster.ResultParam) obj);
+                            }
+                        })
+                .forEach(
+                        new Consumer() { // from class:
+                                         // com.samsung.android.media.photoremaster.SemPhotoRemaster$$ExternalSyntheticLambda5
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                SemPhotoRemaster.this.lambda$getParameters$5(
+                                        result, (SemPhotoRemaster.ResultParam) obj);
+                            }
+                        });
         return result;
     }
 
@@ -398,7 +437,8 @@ public class SemPhotoRemaster {
                     this.mServiceClient.init(context);
                 }
                 setParameters(context);
-                boolean processingSuccess = this.mServiceClient.processImage(processMode, enhanceModes);
+                boolean processingSuccess =
+                        this.mServiceClient.processImage(processMode, enhanceModes);
                 Result result = processingSuccess ? getParameters() : null;
                 if (processingSuccess) {
                     LogUtil.d(TAG, "Raw Result: " + result.mResultJson);

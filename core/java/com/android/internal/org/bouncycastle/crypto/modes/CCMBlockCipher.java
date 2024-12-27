@@ -8,6 +8,7 @@ import com.android.internal.org.bouncycastle.crypto.Mac;
 import com.android.internal.org.bouncycastle.crypto.macs.CBCBlockCipherMac;
 import com.android.internal.org.bouncycastle.crypto.params.AEADParameters;
 import com.android.internal.org.bouncycastle.crypto.params.ParametersWithIV;
+
 import java.io.ByteArrayOutputStream;
 
 /* loaded from: classes5.dex */
@@ -38,7 +39,8 @@ public class CCMBlockCipher implements AEADBlockCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.modes.AEADCipher
-    public void init(boolean forEncryption, CipherParameters params) throws IllegalArgumentException {
+    public void init(boolean forEncryption, CipherParameters params)
+            throws IllegalArgumentException {
         CipherParameters cipherParameters;
         this.forEncryption = forEncryption;
         if (params instanceof AEADParameters) {
@@ -54,7 +56,8 @@ public class CCMBlockCipher implements AEADBlockCipher {
             this.macSize = getMacSize(forEncryption, 64);
             cipherParameters = param2.getParameters();
         } else {
-            throw new IllegalArgumentException("invalid parameters passed to CCM: " + params.getClass().getName());
+            throw new IllegalArgumentException(
+                    "invalid parameters passed to CCM: " + params.getClass().getName());
         }
         if (cipherParameters != null) {
             this.keyParam = cipherParameters;
@@ -81,13 +84,15 @@ public class CCMBlockCipher implements AEADBlockCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.modes.AEADCipher
-    public int processByte(byte in, byte[] out, int outOff) throws DataLengthException, IllegalStateException {
+    public int processByte(byte in, byte[] out, int outOff)
+            throws DataLengthException, IllegalStateException {
         this.data.write(in);
         return 0;
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.modes.AEADCipher
-    public int processBytes(byte[] in, int inOff, int inLen, byte[] out, int outOff) throws DataLengthException, IllegalStateException {
+    public int processBytes(byte[] in, int inOff, int inLen, byte[] out, int outOff)
+            throws DataLengthException, IllegalStateException {
         if (in.length < inOff + inLen) {
             throw new DataLengthException("Input buffer too short");
         }
@@ -96,7 +101,8 @@ public class CCMBlockCipher implements AEADBlockCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.modes.AEADCipher
-    public int doFinal(byte[] out, int outOff) throws IllegalStateException, InvalidCipherTextException {
+    public int doFinal(byte[] out, int outOff)
+            throws IllegalStateException, InvalidCipherTextException {
         int len = processPacket(this.data.getBuffer(), 0, this.data.size(), out, outOff);
         reset();
         return len;
@@ -133,7 +139,8 @@ public class CCMBlockCipher implements AEADBlockCipher {
         return totalData - this.macSize;
     }
 
-    public byte[] processPacket(byte[] in, int inOff, int inLen) throws IllegalStateException, InvalidCipherTextException {
+    public byte[] processPacket(byte[] in, int inOff, int inLen)
+            throws IllegalStateException, InvalidCipherTextException {
         byte[] output;
         if (this.forEncryption) {
             output = new byte[this.macSize + inLen];
@@ -152,12 +159,18 @@ public class CCMBlockCipher implements AEADBlockCipher {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public int processPacket(byte[] r19, int r20, int r21, byte[] r22, int r23) throws java.lang.IllegalStateException, com.android.internal.org.bouncycastle.crypto.InvalidCipherTextException, com.android.internal.org.bouncycastle.crypto.DataLengthException {
+    public int processPacket(byte[] r19, int r20, int r21, byte[] r22, int r23)
+            throws java.lang.IllegalStateException,
+                    com.android.internal.org.bouncycastle.crypto.InvalidCipherTextException,
+                    com.android.internal.org.bouncycastle.crypto.DataLengthException {
         /*
             Method dump skipped, instructions count: 304
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.org.bouncycastle.crypto.modes.CCMBlockCipher.processPacket(byte[], int, int, byte[], int):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.org.bouncycastle.crypto.modes.CCMBlockCipher.processPacket(byte[],"
+                    + " int, int, byte[], int):int");
     }
 
     private int calculateMac(byte[] data, int dataOff, int dataLen, byte[] macBlock) {
@@ -212,14 +225,19 @@ public class CCMBlockCipher implements AEADBlockCipher {
     }
 
     private int getMacSize(boolean forEncryption, int requestedMacBits) {
-        if (forEncryption && (requestedMacBits < 32 || requestedMacBits > 128 || (requestedMacBits & 15) != 0)) {
-            throw new IllegalArgumentException("tag length in octets must be one of {4,6,8,10,12,14,16}");
+        if (forEncryption
+                && (requestedMacBits < 32
+                        || requestedMacBits > 128
+                        || (requestedMacBits & 15) != 0)) {
+            throw new IllegalArgumentException(
+                    "tag length in octets must be one of {4,6,8,10,12,14,16}");
         }
         return requestedMacBits >>> 3;
     }
 
     private int getAssociatedTextLength() {
-        return this.associatedText.size() + (this.initialAssociatedText == null ? 0 : this.initialAssociatedText.length);
+        return this.associatedText.size()
+                + (this.initialAssociatedText == null ? 0 : this.initialAssociatedText.length);
     }
 
     private boolean hasAssociatedText() {
@@ -227,8 +245,7 @@ public class CCMBlockCipher implements AEADBlockCipher {
     }
 
     private class ExposedByteArrayOutputStream extends ByteArrayOutputStream {
-        public ExposedByteArrayOutputStream() {
-        }
+        public ExposedByteArrayOutputStream() {}
 
         public byte[] getBuffer() {
             return this.buf;

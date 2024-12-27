@@ -3,25 +3,28 @@ package android.app;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class RemoteLockscreenValidationResult implements Parcelable {
-    public static final Parcelable.Creator<RemoteLockscreenValidationResult> CREATOR = new Parcelable.Creator<RemoteLockscreenValidationResult>() { // from class: android.app.RemoteLockscreenValidationResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RemoteLockscreenValidationResult createFromParcel(Parcel source) {
-            return new RemoteLockscreenValidationResult(source);
-        }
+    public static final Parcelable.Creator<RemoteLockscreenValidationResult> CREATOR =
+            new Parcelable.Creator<RemoteLockscreenValidationResult>() { // from class:
+                // android.app.RemoteLockscreenValidationResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RemoteLockscreenValidationResult createFromParcel(Parcel source) {
+                    return new RemoteLockscreenValidationResult(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RemoteLockscreenValidationResult[] newArray(int size) {
-            return new RemoteLockscreenValidationResult[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RemoteLockscreenValidationResult[] newArray(int size) {
+                    return new RemoteLockscreenValidationResult[size];
+                }
+            };
     public static final int RESULT_GUESS_INVALID = 2;
     public static final int RESULT_GUESS_VALID = 1;
     public static final int RESULT_LOCKOUT = 3;
@@ -31,8 +34,7 @@ public final class RemoteLockscreenValidationResult implements Parcelable {
     private long mTimeoutMillis;
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface ResultCode {
-    }
+    @interface ResultCode {}
 
     public static final class Builder {
         private RemoteLockscreenValidationResult mInstance = new RemoteLockscreenValidationResult();
@@ -69,8 +71,7 @@ public final class RemoteLockscreenValidationResult implements Parcelable {
         out.writeLong(this.mTimeoutMillis);
     }
 
-    private RemoteLockscreenValidationResult() {
-    }
+    private RemoteLockscreenValidationResult() {}
 
     private RemoteLockscreenValidationResult(Parcel in) {
         this.mResultCode = in.readInt();

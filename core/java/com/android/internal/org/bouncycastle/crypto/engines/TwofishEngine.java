@@ -6,6 +6,7 @@ import com.android.internal.org.bouncycastle.crypto.CipherParameters;
 import com.android.internal.org.bouncycastle.crypto.DataLengthException;
 import com.android.internal.org.bouncycastle.crypto.OutputLengthException;
 import com.android.internal.org.bouncycastle.crypto.params.KeyParameter;
+
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
 
@@ -19,7 +20,524 @@ public final class TwofishEngine implements BlockCipher {
     private static final int MAX_KEY_BITS = 256;
     private static final int MAX_ROUNDS = 16;
     private static final int OUTPUT_WHITEN = 4;
-    private static final byte[][] P = {new byte[]{-87, 103, -77, -24, 4, -3, -93, 118, -102, -110, Byte.MIN_VALUE, 120, -28, -35, -47, 56, 13, -58, 53, -104, 24, -9, -20, 108, 67, 117, 55, 38, -6, 19, -108, 72, MidiConstants.STATUS_SONG_POSITION, MidiConstants.STATUS_CHANNEL_PRESSURE, -117, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90, -124, 84, -33, 35, 25, 91, 61, 89, MidiConstants.STATUS_SONG_SELECT, -82, -94, -126, 99, 1, -125, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT70, -39, 81, -101, 124, -90, -21, -91, -66, 22, 12, -29, SprAttributeBase.TYPE_ANIMATOR_SET, MidiConstants.STATUS_PROGRAM_CHANGE, -116, 58, -11, 115, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT50, 37, 11, -69, 78, -119, 107, 83, 106, -76, MidiConstants.STATUS_MIDI_TIME_CODE, -31, -26, -67, 69, -30, -12, -74, 102, -52, -107, 3, 86, -44, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEINOUT, -41, -5, -61, -114, -75, -23, -49, -65, -70, -22, 119, 57, -81, 51, -55, 98, 113, -127, 121, 9, -83, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, -51, -7, -40, -27, -59, -71, 77, 68, 8, -122, -25, -95, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEOUT, -86, -19, 6, SprAttributeBase.TYPE_SHADOW, -78, -46, 65, 123, MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH, 17, SprAnimatorBase.INTERPOLATOR_TYPE_SINEOUT33, -62, SprAnimatorBase.INTERPOLATOR_TYPE_SINEEASEINOUT, MidiConstants.STATUS_NOTE_ON, 32, -10, SprAttributeBase.TYPE_DURATION, -1, -106, 92, -79, -85, -98, -100, 82, 27, 95, -109, 10, -17, -111, -123, 73, -18, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60, 79, -113, 59, 71, -121, 109, 70, -42, 62, 105, 100, SprAnimatorBase.INTERPOLATOR_TYPE_SINEIN33, -50, -53, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT80, -4, -105, 5, 122, -84, Byte.MAX_VALUE, -43, 26, 75, 14, -89, 90, 40, 20, 63, 41, -120, 60, 76, 2, -72, -38, MidiConstants.STATUS_CONTROL_CHANGE, 23, 85, SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEIN, -118, 125, 87, -57, -115, 116, -73, -60, -97, 114, 126, 21, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEIN, 18, 88, 7, -103, 52, 110, 80, -34, 104, 101, -68, -37, -8, -56, -88, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33, 64, -36, -2, 50, -92, -54, 16, SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEINOUT, -16, -45, 93, 15, 0, 111, -99, 54, 66, 74, 94, -63, MidiConstants.STATUS_PITCH_BEND}, new byte[]{117, MidiConstants.STATUS_SONG_SELECT, -58, -12, -37, 123, -5, -56, 74, -45, -26, 107, 69, 125, -24, 75, -42, 50, -40, -3, 55, 113, MidiConstants.STATUS_MIDI_TIME_CODE, -31, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90, 15, -8, 27, -121, -6, 6, 63, 94, -70, -82, 91, -118, 0, -68, -99, 109, -63, -79, 14, Byte.MIN_VALUE, 93, -46, -43, MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH, -124, 7, 20, -75, MidiConstants.STATUS_NOTE_ON, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT50, -93, -78, 115, 76, 84, -110, 116, 54, 81, 56, MidiConstants.STATUS_CONTROL_CHANGE, -67, 90, -4, SprAttributeBase.TYPE_DURATION, 98, -106, 108, 66, -9, 16, 124, 40, SprAnimatorBase.INTERPOLATOR_TYPE_SINEEASEINOUT, -116, 19, -107, -100, -57, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, 70, 59, SprAttributeBase.TYPE_SHADOW, -54, -29, -123, -53, 17, MidiConstants.STATUS_CHANNEL_PRESSURE, -109, -72, -90, -125, 32, -1, -97, 119, -61, -52, 3, 111, 8, -65, 64, -25, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33, -30, 121, 12, -86, -126, 65, 58, -22, -71, -28, -102, -92, -105, 126, -38, 122, 23, 102, -108, -95, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEOUT, 61, -16, -34, -77, 11, 114, -89, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN, -17, -47, 83, 62, -113, 51, 38, 95, -20, 118, SprAnimatorBase.INTERPOLATOR_TYPE_SINEIN33, 73, -127, -120, -18, SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEINOUT, -60, 26, -21, -39, -59, 57, -103, -51, -83, SprAnimatorBase.INTERPOLATOR_TYPE_SINEOUT33, -117, 1, 24, 35, -35, SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEIN, 78, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60, -7, 72, 79, MidiConstants.STATUS_SONG_POSITION, 101, -114, 120, 92, 88, 25, -115, -27, -104, 87, 103, Byte.MAX_VALUE, 5, 100, -81, 99, -74, -2, -11, -73, 60, -91, -50, -23, 104, 68, MidiConstants.STATUS_PITCH_BEND, 77, 67, 105, 41, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT70, -84, 21, 89, -88, 10, -98, 110, 71, -33, 52, 53, 106, -49, -36, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEIN, -55, MidiConstants.STATUS_PROGRAM_CHANGE, -101, -119, -44, -19, -85, 18, -94, 13, 82, -69, 2, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT80, -87, -41, SprAttributeBase.TYPE_ANIMATOR_SET, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEINOUT, -76, 80, 4, -10, -62, 22, 37, -122, 86, 85, 9, -66, -111}};
+    private static final byte[][] P = {
+        new byte[] {
+            -87,
+            103,
+            -77,
+            -24,
+            4,
+            -3,
+            -93,
+            118,
+            -102,
+            -110,
+            Byte.MIN_VALUE,
+            120,
+            -28,
+            -35,
+            -47,
+            56,
+            13,
+            -58,
+            53,
+            -104,
+            24,
+            -9,
+            -20,
+            108,
+            67,
+            117,
+            55,
+            38,
+            -6,
+            19,
+            -108,
+            72,
+            MidiConstants.STATUS_SONG_POSITION,
+            MidiConstants.STATUS_CHANNEL_PRESSURE,
+            -117,
+            SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90,
+            -124,
+            84,
+            -33,
+            35,
+            25,
+            91,
+            61,
+            89,
+            MidiConstants.STATUS_SONG_SELECT,
+            -82,
+            -94,
+            -126,
+            99,
+            1,
+            -125,
+            SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT70,
+            -39,
+            81,
+            -101,
+            124,
+            -90,
+            -21,
+            -91,
+            -66,
+            22,
+            12,
+            -29,
+            SprAttributeBase.TYPE_ANIMATOR_SET,
+            MidiConstants.STATUS_PROGRAM_CHANGE,
+            -116,
+            58,
+            -11,
+            115,
+            SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT50,
+            37,
+            11,
+            -69,
+            78,
+            -119,
+            107,
+            83,
+            106,
+            -76,
+            MidiConstants.STATUS_MIDI_TIME_CODE,
+            -31,
+            -26,
+            -67,
+            69,
+            -30,
+            -12,
+            -74,
+            102,
+            -52,
+            -107,
+            3,
+            86,
+            -44,
+            SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN,
+            SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEINOUT,
+            -41,
+            -5,
+            -61,
+            -114,
+            -75,
+            -23,
+            -49,
+            -65,
+            -70,
+            -22,
+            119,
+            57,
+            -81,
+            51,
+            -55,
+            98,
+            113,
+            -127,
+            121,
+            9,
+            -83,
+            SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+            -51,
+            -7,
+            -40,
+            -27,
+            -59,
+            -71,
+            77,
+            68,
+            8,
+            -122,
+            -25,
+            -95,
+            SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEOUT,
+            -86,
+            -19,
+            6,
+            SprAttributeBase.TYPE_SHADOW,
+            -78,
+            -46,
+            65,
+            123,
+            MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH,
+            17,
+            SprAnimatorBase.INTERPOLATOR_TYPE_SINEOUT33,
+            -62,
+            SprAnimatorBase.INTERPOLATOR_TYPE_SINEEASEINOUT,
+            MidiConstants.STATUS_NOTE_ON,
+            32,
+            -10,
+            SprAttributeBase.TYPE_DURATION,
+            -1,
+            -106,
+            92,
+            -79,
+            -85,
+            -98,
+            -100,
+            82,
+            27,
+            95,
+            -109,
+            10,
+            -17,
+            -111,
+            -123,
+            73,
+            -18,
+            SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60,
+            79,
+            -113,
+            59,
+            71,
+            -121,
+            109,
+            70,
+            -42,
+            62,
+            105,
+            100,
+            SprAnimatorBase.INTERPOLATOR_TYPE_SINEIN33,
+            -50,
+            -53,
+            SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT80,
+            -4,
+            -105,
+            5,
+            122,
+            -84,
+            Byte.MAX_VALUE,
+            -43,
+            26,
+            75,
+            14,
+            -89,
+            90,
+            40,
+            20,
+            63,
+            41,
+            -120,
+            60,
+            76,
+            2,
+            -72,
+            -38,
+            MidiConstants.STATUS_CONTROL_CHANGE,
+            23,
+            85,
+            SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEIN,
+            -118,
+            125,
+            87,
+            -57,
+            -115,
+            116,
+            -73,
+            -60,
+            -97,
+            114,
+            126,
+            21,
+            SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEIN,
+            18,
+            88,
+            7,
+            -103,
+            52,
+            110,
+            80,
+            -34,
+            104,
+            101,
+            -68,
+            -37,
+            -8,
+            -56,
+            -88,
+            SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33,
+            64,
+            -36,
+            -2,
+            50,
+            -92,
+            -54,
+            16,
+            SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEINOUT,
+            -16,
+            -45,
+            93,
+            15,
+            0,
+            111,
+            -99,
+            54,
+            66,
+            74,
+            94,
+            -63,
+            MidiConstants.STATUS_PITCH_BEND
+        },
+        new byte[] {
+            117,
+            MidiConstants.STATUS_SONG_SELECT,
+            -58,
+            -12,
+            -37,
+            123,
+            -5,
+            -56,
+            74,
+            -45,
+            -26,
+            107,
+            69,
+            125,
+            -24,
+            75,
+            -42,
+            50,
+            -40,
+            -3,
+            55,
+            113,
+            MidiConstants.STATUS_MIDI_TIME_CODE,
+            -31,
+            SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT90,
+            15,
+            -8,
+            27,
+            -121,
+            -6,
+            6,
+            63,
+            94,
+            -70,
+            -82,
+            91,
+            -118,
+            0,
+            -68,
+            -99,
+            109,
+            -63,
+            -79,
+            14,
+            Byte.MIN_VALUE,
+            93,
+            -46,
+            -43,
+            MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH,
+            -124,
+            7,
+            20,
+            -75,
+            MidiConstants.STATUS_NOTE_ON,
+            SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT50,
+            -93,
+            -78,
+            115,
+            76,
+            84,
+            -110,
+            116,
+            54,
+            81,
+            56,
+            MidiConstants.STATUS_CONTROL_CHANGE,
+            -67,
+            90,
+            -4,
+            SprAttributeBase.TYPE_DURATION,
+            98,
+            -106,
+            108,
+            66,
+            -9,
+            16,
+            124,
+            40,
+            SprAnimatorBase.INTERPOLATOR_TYPE_SINEEASEINOUT,
+            -116,
+            19,
+            -107,
+            -100,
+            -57,
+            SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+            70,
+            59,
+            SprAttributeBase.TYPE_SHADOW,
+            -54,
+            -29,
+            -123,
+            -53,
+            17,
+            MidiConstants.STATUS_CHANNEL_PRESSURE,
+            -109,
+            -72,
+            -90,
+            -125,
+            32,
+            -1,
+            -97,
+            119,
+            -61,
+            -52,
+            3,
+            111,
+            8,
+            -65,
+            64,
+            -25,
+            SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33,
+            -30,
+            121,
+            12,
+            -86,
+            -126,
+            65,
+            58,
+            -22,
+            -71,
+            -28,
+            -102,
+            -92,
+            -105,
+            126,
+            -38,
+            122,
+            23,
+            102,
+            -108,
+            -95,
+            SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEOUT,
+            61,
+            -16,
+            -34,
+            -77,
+            11,
+            114,
+            -89,
+            SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN,
+            -17,
+            -47,
+            83,
+            62,
+            -113,
+            51,
+            38,
+            95,
+            -20,
+            118,
+            SprAnimatorBase.INTERPOLATOR_TYPE_SINEIN33,
+            73,
+            -127,
+            -120,
+            -18,
+            SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEINOUT,
+            -60,
+            26,
+            -21,
+            -39,
+            -59,
+            57,
+            -103,
+            -51,
+            -83,
+            SprAnimatorBase.INTERPOLATOR_TYPE_SINEOUT33,
+            -117,
+            1,
+            24,
+            35,
+            -35,
+            SprAnimatorBase.INTERPOLATOR_TYPE_QUARTEASEIN,
+            78,
+            SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60,
+            -7,
+            72,
+            79,
+            MidiConstants.STATUS_SONG_POSITION,
+            101,
+            -114,
+            120,
+            92,
+            88,
+            25,
+            -115,
+            -27,
+            -104,
+            87,
+            103,
+            Byte.MAX_VALUE,
+            5,
+            100,
+            -81,
+            99,
+            -74,
+            -2,
+            -11,
+            -73,
+            60,
+            -91,
+            -50,
+            -23,
+            104,
+            68,
+            MidiConstants.STATUS_PITCH_BEND,
+            77,
+            67,
+            105,
+            41,
+            SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT70,
+            -84,
+            21,
+            89,
+            -88,
+            10,
+            -98,
+            110,
+            71,
+            -33,
+            52,
+            53,
+            106,
+            -49,
+            -36,
+            SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEIN,
+            -55,
+            MidiConstants.STATUS_PROGRAM_CHANGE,
+            -101,
+            -119,
+            -44,
+            -19,
+            -85,
+            18,
+            -94,
+            13,
+            82,
+            -69,
+            2,
+            SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT80,
+            -87,
+            -41,
+            SprAttributeBase.TYPE_ANIMATOR_SET,
+            SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEINOUT,
+            -76,
+            80,
+            4,
+            -10,
+            -62,
+            22,
+            37,
+            -122,
+            86,
+            85,
+            9,
+            -66,
+            -111
+        }
+    };
     private static final int P_00 = 1;
     private static final int P_01 = 0;
     private static final int P_02 = 0;
@@ -86,7 +604,8 @@ public final class TwofishEngine implements BlockCipher {
             setKey(this.workingKey);
             return;
         }
-        throw new IllegalArgumentException("invalid parameter passed to Twofish init - " + params.getClass().getName());
+        throw new IllegalArgumentException(
+                "invalid parameter passed to Twofish init - " + params.getClass().getName());
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.BlockCipher
@@ -186,11 +705,15 @@ public final class TwofishEngine implements BlockCipher {
                     continue;
                 case 2:
                     k32e = k32e2;
-                    this.gSBox[i6 * 2] = this.gMDS0[(P[0][(P[0][b0] & 255) ^ b0(k1)] & 255) ^ b0(k0)];
-                    this.gSBox[(i6 * 2) + 1] = this.gMDS1[(P[0][(P[1][b1] & 255) ^ b1(k1)] & 255) ^ b1(k0)];
+                    this.gSBox[i6 * 2] =
+                            this.gMDS0[(P[0][(P[0][b0] & 255) ^ b0(k1)] & 255) ^ b0(k0)];
+                    this.gSBox[(i6 * 2) + 1] =
+                            this.gMDS1[(P[0][(P[1][b1] & 255) ^ b1(k1)] & 255) ^ b1(k0)];
                     i = 0;
-                    this.gSBox[(i6 * 2) + 512] = this.gMDS2[(P[1][(P[0][b2] & 255) ^ b2(k1)] & 255) ^ b2(k0)];
-                    this.gSBox[(i6 * 2) + 513] = this.gMDS3[(P[1][(P[1][b3] & 255) ^ b3(k1)] & 255) ^ b3(k0)];
+                    this.gSBox[(i6 * 2) + 512] =
+                            this.gMDS2[(P[1][(P[0][b2] & 255) ^ b2(k1)] & 255) ^ b2(k0)];
+                    this.gSBox[(i6 * 2) + 513] =
+                            this.gMDS3[(P[1][(P[1][b3] & 255) ^ b3(k1)] & 255) ^ b3(k0)];
                     continue;
                 case 3:
                     c = 1;
@@ -208,8 +731,10 @@ public final class TwofishEngine implements BlockCipher {
             this.gSBox[i6 * 2] = this.gMDS0[(P[0][(P[0][b0] & 255) ^ b0(k1)] & 255) ^ b0(k0)];
             this.gSBox[(i6 * 2) + 1] = this.gMDS1[(P[0][(P[1][b1] & 255) ^ b1(k1)] & 255) ^ b1(k0)];
             i = 0;
-            this.gSBox[(i6 * 2) + 512] = this.gMDS2[(P[1][(P[0][b2] & 255) ^ b2(k1)] & 255) ^ b2(k0)];
-            this.gSBox[(i6 * 2) + 513] = this.gMDS3[(P[1][(P[1][b3] & 255) ^ b3(k1)] & 255) ^ b3(k0)];
+            this.gSBox[(i6 * 2) + 512] =
+                    this.gMDS2[(P[1][(P[0][b2] & 255) ^ b2(k1)] & 255) ^ b2(k0)];
+            this.gSBox[(i6 * 2) + 513] =
+                    this.gMDS3[(P[1][(P[1][b3] & 255) ^ b3(k1)] & 255) ^ b3(k0)];
             continue;
             i6++;
             k32e2 = k32e;
@@ -295,12 +820,24 @@ public final class TwofishEngine implements BlockCipher {
                 b3 = (P[1][b3] & 255) ^ b3(k3);
                 break;
             case 1:
-                int result = ((this.gMDS1[(P[0][b1] & 255) ^ b1(k0)] ^ this.gMDS0[(P[0][b0] & 255) ^ b0(k0)]) ^ this.gMDS2[(P[1][b2] & 255) ^ b2(k0)]) ^ this.gMDS3[(P[1][b3] & 255) ^ b3(k0)];
+                int result =
+                        ((this.gMDS1[(P[0][b1] & 255) ^ b1(k0)]
+                                                ^ this.gMDS0[(P[0][b0] & 255) ^ b0(k0)])
+                                        ^ this.gMDS2[(P[1][b2] & 255) ^ b2(k0)])
+                                ^ this.gMDS3[(P[1][b3] & 255) ^ b3(k0)];
                 return result;
             case 3:
                 break;
             case 2:
-                int result2 = (this.gMDS2[(P[1][(P[0][b2] & 255) ^ b2(k1)] & 255) ^ b2(k0)] ^ (this.gMDS0[(P[0][(P[0][b0] & 255) ^ b0(k1)] & 255) ^ b0(k0)] ^ this.gMDS1[(P[0][(P[1][b1] & 255) ^ b1(k1)] & 255) ^ b1(k0)])) ^ this.gMDS3[(P[1][(P[1][b3] & 255) ^ b3(k1)] & 255) ^ b3(k0)];
+                int result2 =
+                        (this.gMDS2[(P[1][(P[0][b2] & 255) ^ b2(k1)] & 255) ^ b2(k0)]
+                                        ^ (this.gMDS0[
+                                                        (P[0][(P[0][b0] & 255) ^ b0(k1)] & 255)
+                                                                ^ b0(k0)]
+                                                ^ this.gMDS1[
+                                                        (P[0][(P[1][b1] & 255) ^ b1(k1)] & 255)
+                                                                ^ b1(k0)]))
+                                ^ this.gMDS3[(P[1][(P[1][b3] & 255) ^ b3(k1)] & 255) ^ b3(k0)];
                 return result2;
             default:
                 return 0;
@@ -309,7 +846,12 @@ public final class TwofishEngine implements BlockCipher {
         b1 = (P[1][b1] & 255) ^ b1(k2);
         b2 = (P[0][b2] & 255) ^ b2(k2);
         b3 = (P[0][b3] & 255) ^ b3(k2);
-        int result22 = (this.gMDS2[(P[1][(P[0][b2] & 255) ^ b2(k1)] & 255) ^ b2(k0)] ^ (this.gMDS0[(P[0][(P[0][b0] & 255) ^ b0(k1)] & 255) ^ b0(k0)] ^ this.gMDS1[(P[0][(P[1][b1] & 255) ^ b1(k1)] & 255) ^ b1(k0)])) ^ this.gMDS3[(P[1][(P[1][b3] & 255) ^ b3(k1)] & 255) ^ b3(k0)];
+        int result22 =
+                (this.gMDS2[(P[1][(P[0][b2] & 255) ^ b2(k1)] & 255) ^ b2(k0)]
+                                ^ (this.gMDS0[(P[0][(P[0][b0] & 255) ^ b0(k1)] & 255) ^ b0(k0)]
+                                        ^ this.gMDS1[
+                                                (P[0][(P[1][b1] & 255) ^ b1(k1)] & 255) ^ b1(k0)]))
+                        ^ this.gMDS3[(P[1][(P[1][b3] & 255) ^ b3(k1)] & 255) ^ b3(k0)];
         return result22;
     }
 
@@ -365,15 +907,22 @@ public final class TwofishEngine implements BlockCipher {
     }
 
     private int Fe32_0(int x) {
-        return ((this.gSBox[((x & 255) * 2) + 0] ^ this.gSBox[(((x >>> 8) & 255) * 2) + 1]) ^ this.gSBox[(((x >>> 16) & 255) * 2) + 512]) ^ this.gSBox[(((x >>> 24) & 255) * 2) + 513];
+        return ((this.gSBox[((x & 255) * 2) + 0] ^ this.gSBox[(((x >>> 8) & 255) * 2) + 1])
+                        ^ this.gSBox[(((x >>> 16) & 255) * 2) + 512])
+                ^ this.gSBox[(((x >>> 24) & 255) * 2) + 513];
     }
 
     private int Fe32_3(int x) {
-        return ((this.gSBox[(((x >>> 24) & 255) * 2) + 0] ^ this.gSBox[((x & 255) * 2) + 1]) ^ this.gSBox[(((x >>> 8) & 255) * 2) + 512]) ^ this.gSBox[(((x >>> 16) & 255) * 2) + 513];
+        return ((this.gSBox[(((x >>> 24) & 255) * 2) + 0] ^ this.gSBox[((x & 255) * 2) + 1])
+                        ^ this.gSBox[(((x >>> 8) & 255) * 2) + 512])
+                ^ this.gSBox[(((x >>> 16) & 255) * 2) + 513];
     }
 
     private int BytesTo32Bits(byte[] b, int p) {
-        return (b[p] & 255) | ((b[p + 1] & 255) << 8) | ((b[p + 2] & 255) << 16) | ((b[p + 3] & 255) << 24);
+        return (b[p] & 255)
+                | ((b[p + 1] & 255) << 8)
+                | ((b[p + 2] & 255) << 16)
+                | ((b[p + 3] & 255) << 24);
     }
 
     private void Bits32ToBytes(int in, byte[] b, int offset) {

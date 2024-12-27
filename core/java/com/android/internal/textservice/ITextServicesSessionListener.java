@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.android.internal.textservice.ISpellCheckerSession;
 
 /* loaded from: classes5.dex */
 public interface ITextServicesSessionListener extends IInterface {
@@ -13,8 +12,8 @@ public interface ITextServicesSessionListener extends IInterface {
 
     public static class Default implements ITextServicesSessionListener {
         @Override // com.android.internal.textservice.ITextServicesSessionListener
-        public void onServiceConnected(ISpellCheckerSession spellCheckerSession) throws RemoteException {
-        }
+        public void onServiceConnected(ISpellCheckerSession spellCheckerSession)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -22,8 +21,9 @@ public interface ITextServicesSessionListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITextServicesSessionListener {
-        public static final String DESCRIPTOR = "com.android.internal.textservice.ITextServicesSessionListener";
+    public abstract static class Stub extends Binder implements ITextServicesSessionListener {
+        public static final String DESCRIPTOR =
+                "com.android.internal.textservice.ITextServicesSessionListener";
         static final int TRANSACTION_onServiceConnected = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface ITextServicesSessionListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -71,7 +72,8 @@ public interface ITextServicesSessionListener extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ISpellCheckerSession _arg0 = ISpellCheckerSession.Stub.asInterface(data.readStrongBinder());
+                    ISpellCheckerSession _arg0 =
+                            ISpellCheckerSession.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onServiceConnected(_arg0);
                     return true;
@@ -97,7 +99,8 @@ public interface ITextServicesSessionListener extends IInterface {
             }
 
             @Override // com.android.internal.textservice.ITextServicesSessionListener
-            public void onServiceConnected(ISpellCheckerSession spellCheckerSession) throws RemoteException {
+            public void onServiceConnected(ISpellCheckerSession spellCheckerSession)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

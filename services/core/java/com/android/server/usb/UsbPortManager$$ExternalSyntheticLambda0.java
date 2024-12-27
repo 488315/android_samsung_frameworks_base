@@ -10,7 +10,8 @@ public final /* synthetic */ class UsbPortManager$$ExternalSyntheticLambda0 impl
     public final /* synthetic */ UsbPortManager f$0;
     public final /* synthetic */ Intent f$1;
 
-    public /* synthetic */ UsbPortManager$$ExternalSyntheticLambda0(UsbPortManager usbPortManager, Intent intent, int i) {
+    public /* synthetic */ UsbPortManager$$ExternalSyntheticLambda0(
+            UsbPortManager usbPortManager, Intent intent, int i) {
         this.$r8$classId = i;
         this.f$0 = usbPortManager;
         this.f$1 = intent;
@@ -21,11 +22,13 @@ public final /* synthetic */ class UsbPortManager$$ExternalSyntheticLambda0 impl
         switch (this.$r8$classId) {
             case 0:
                 UsbPortManager usbPortManager = this.f$0;
-                usbPortManager.mContext.sendBroadcastAsUser(this.f$1, UserHandle.ALL, "android.permission.MANAGE_USB");
+                usbPortManager.mContext.sendBroadcastAsUser(
+                        this.f$1, UserHandle.ALL, "android.permission.MANAGE_USB");
                 break;
             default:
                 UsbPortManager usbPortManager2 = this.f$0;
-                usbPortManager2.mContext.sendBroadcastAsUser(this.f$1, UserHandle.ALL, "android.permission.MANAGE_USB");
+                usbPortManager2.mContext.sendBroadcastAsUser(
+                        this.f$1, UserHandle.ALL, "android.permission.MANAGE_USB");
                 break;
         }
     }

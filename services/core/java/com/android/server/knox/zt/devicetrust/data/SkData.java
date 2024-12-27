@@ -1,15 +1,18 @@
 package com.android.server.knox.zt.devicetrust.data;
 
 import android.os.Bundle;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -25,7 +28,22 @@ public final class SkData extends TracepointData {
     public final String srcAddrV6;
     public final int srcPort;
 
-    public SkData(int i, int i2, int i3, int i4, int i5, int i6, int i7, String str, String str2, String str3, String str4, long j, long j2, long j3, String str5) {
+    public SkData(
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            int i7,
+            String str,
+            String str2,
+            String str3,
+            String str4,
+            long j,
+            long j2,
+            long j3,
+            String str5) {
         super(i, j, j2, j3, str5);
         this.oldState = i2;
         this.newState = i3;
@@ -105,19 +123,24 @@ public final class SkData extends TracepointData {
         String str4 = this.srcAddrV6;
         String str5 = this.dstAddrV6;
         String readExtras = readExtras(true);
-        StringBuilder m = SystemServiceManager$$ExternalSyntheticOutline0.m(i, "when : ", j, " | what : ");
-        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(pid, i2, " | pid : ", " | uid : ", m);
+        StringBuilder m =
+                SystemServiceManager$$ExternalSyntheticOutline0.m(i, "when : ", j, " | what : ");
+        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(
+                pid, i2, " | pid : ", " | uid : ", m);
         m.append(" | comm : ");
         m.append(str);
         m.append(" | oldstate : ");
         m.append(i3);
-        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(i4, i5, " | newstate : ", " | sport : ", m);
-        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(i6, i7, " | dport : ", " | family : ", m);
+        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(
+                i4, i5, " | newstate : ", " | sport : ", m);
+        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(
+                i6, i7, " | dport : ", " | family : ", m);
         m.append(" | protocol : ");
         m.append(i8);
         m.append(" | saddr : ");
         m.append(str2);
-        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(m, " | daddr : ", str3, " | saddr_v6 : ", str4);
+        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                m, " | daddr : ", str3, " | saddr_v6 : ", str4);
         return BootReceiver$$ExternalSyntheticOutline0.m(m, " | daddr_v6 : ", str5, readExtras);
     }
 

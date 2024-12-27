@@ -6,8 +6,10 @@ import android.os.Handler;
 import android.os.HandlerExecutor;
 import android.text.TextUtils;
 import android.util.ArrayMap;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.server.am.mars.MARsFreezeStateRecord$$ExternalSyntheticOutline0;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -35,7 +37,16 @@ public final class ProcessLoggingHandler extends Handler {
         long j = bundle.getLong("startTimestamp");
         String string = bundle.getString("processName");
         int i = bundle.getInt("uid");
-        SecurityLog.writeEvent(210005, new Object[]{string, Long.valueOf(j), Integer.valueOf(i), Integer.valueOf(bundle.getInt("pid")), bundle.getString("seinfo"), str});
+        SecurityLog.writeEvent(
+                210005,
+                new Object[] {
+                    string,
+                    Long.valueOf(j),
+                    Integer.valueOf(i),
+                    Integer.valueOf(bundle.getInt("pid")),
+                    bundle.getString("seinfo"),
+                    str
+                });
     }
 
     public static void processChecksum(LoggingInfo loggingInfo, byte[] bArr) {
@@ -44,7 +55,9 @@ public final class ProcessLoggingHandler extends Handler {
             StringBuilder sb = new StringBuilder();
             int i = 0;
             while (i < bArr.length) {
-                i = MARsFreezeStateRecord$$ExternalSyntheticOutline0.m("%02x", new Object[]{Byte.valueOf(bArr[i])}, sb, i, 1);
+                i =
+                        MARsFreezeStateRecord$$ExternalSyntheticOutline0.m(
+                                "%02x", new Object[] {Byte.valueOf(bArr[i])}, sb, i, 1);
             }
             str = sb.toString();
         } else {

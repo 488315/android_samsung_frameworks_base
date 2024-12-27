@@ -7,9 +7,6 @@ import android.content.pm.ParceledListSlice;
 import android.media.AudioAttributes;
 import android.media.MediaMetadata;
 import android.media.Rating;
-import android.media.session.ISessionControllerCallback;
-import android.media.session.MediaSession;
-import android.media.session.PlaybackState;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,6 +19,7 @@ import android.os.ResultReceiver;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
@@ -167,7 +165,8 @@ public final class MediaController {
 
     public void setVolumeTo(int value, int flags) {
         try {
-            this.mSessionBinder.setVolumeTo(this.mContext.getPackageName(), this.mContext.getOpPackageName(), value, flags);
+            this.mSessionBinder.setVolumeTo(
+                    this.mContext.getPackageName(), this.mContext.getOpPackageName(), value, flags);
         } catch (RemoteException ex) {
             throw ex.rethrowFromSystemServer();
         }
@@ -175,7 +174,11 @@ public final class MediaController {
 
     public void adjustVolume(int direction, int flags) {
         try {
-            this.mSessionBinder.adjustVolume(this.mContext.getPackageName(), this.mContext.getOpPackageName(), direction, flags);
+            this.mSessionBinder.adjustVolume(
+                    this.mContext.getPackageName(),
+                    this.mContext.getOpPackageName(),
+                    direction,
+                    flags);
         } catch (RemoteException ex) {
             throw ex.rethrowFromSystemServer();
         }
@@ -342,41 +345,33 @@ public final class MediaController {
         }
     }
 
-    public static abstract class Callback {
-        public void onSessionDestroyed() {
-        }
+    public abstract static class Callback {
+        public void onSessionDestroyed() {}
 
-        public void onSessionEvent(String event, Bundle extras) {
-        }
+        public void onSessionEvent(String event, Bundle extras) {}
 
-        public void onPlaybackStateChanged(PlaybackState state) {
-        }
+        public void onPlaybackStateChanged(PlaybackState state) {}
 
-        public void onMetadataChanged(MediaMetadata metadata) {
-        }
+        public void onMetadataChanged(MediaMetadata metadata) {}
 
-        public void onQueueChanged(List<MediaSession.QueueItem> queue) {
-        }
+        public void onQueueChanged(List<MediaSession.QueueItem> queue) {}
 
-        public void onQueueTitleChanged(CharSequence title) {
-        }
+        public void onQueueTitleChanged(CharSequence title) {}
 
-        public void onExtrasChanged(Bundle extras) {
-        }
+        public void onExtrasChanged(Bundle extras) {}
 
-        public void onAudioInfoChanged(PlaybackInfo playbackInfo) {
-        }
+        public void onAudioInfoChanged(PlaybackInfo playbackInfo) {}
     }
 
     public final class TransportControls {
         private static final String TAG = "TransportController";
 
-        private TransportControls() {
-        }
+        private TransportControls() {}
 
         public void prepare() {
             try {
-                MediaController.this.mSessionBinder.prepare(MediaController.this.mContext.getPackageName());
+                MediaController.this.mSessionBinder.prepare(
+                        MediaController.this.mContext.getPackageName());
             } catch (RemoteException ex) {
                 throw ex.rethrowFromSystemServer();
             }
@@ -384,10 +379,12 @@ public final class MediaController {
 
         public void prepareFromMediaId(String mediaId, Bundle extras) {
             if (TextUtils.isEmpty(mediaId)) {
-                throw new IllegalArgumentException("You must specify a non-empty String for prepareFromMediaId.");
+                throw new IllegalArgumentException(
+                        "You must specify a non-empty String for prepareFromMediaId.");
             }
             try {
-                MediaController.this.mSessionBinder.prepareFromMediaId(MediaController.this.mContext.getPackageName(), mediaId, extras);
+                MediaController.this.mSessionBinder.prepareFromMediaId(
+                        MediaController.this.mContext.getPackageName(), mediaId, extras);
             } catch (RemoteException ex) {
                 throw ex.rethrowFromSystemServer();
             }
@@ -398,7 +395,8 @@ public final class MediaController {
                 query = "";
             }
             try {
-                MediaController.this.mSessionBinder.prepareFromSearch(MediaController.this.mContext.getPackageName(), query, extras);
+                MediaController.this.mSessionBinder.prepareFromSearch(
+                        MediaController.this.mContext.getPackageName(), query, extras);
             } catch (RemoteException ex) {
                 throw ex.rethrowFromSystemServer();
             }
@@ -406,10 +404,12 @@ public final class MediaController {
 
         public void prepareFromUri(Uri uri, Bundle extras) {
             if (uri == null || Uri.EMPTY.equals(uri)) {
-                throw new IllegalArgumentException("You must specify a non-empty Uri for prepareFromUri.");
+                throw new IllegalArgumentException(
+                        "You must specify a non-empty Uri for prepareFromUri.");
             }
             try {
-                MediaController.this.mSessionBinder.prepareFromUri(MediaController.this.mContext.getPackageName(), uri, extras);
+                MediaController.this.mSessionBinder.prepareFromUri(
+                        MediaController.this.mContext.getPackageName(), uri, extras);
             } catch (RemoteException ex) {
                 throw ex.rethrowFromSystemServer();
             }
@@ -417,7 +417,8 @@ public final class MediaController {
 
         public void play() {
             try {
-                MediaController.this.mSessionBinder.play(MediaController.this.mContext.getPackageName());
+                MediaController.this.mSessionBinder.play(
+                        MediaController.this.mContext.getPackageName());
             } catch (RemoteException ex) {
                 throw ex.rethrowFromSystemServer();
             }
@@ -425,10 +426,12 @@ public final class MediaController {
 
         public void playFromMediaId(String mediaId, Bundle extras) {
             if (TextUtils.isEmpty(mediaId)) {
-                throw new IllegalArgumentException("You must specify a non-empty String for playFromMediaId.");
+                throw new IllegalArgumentException(
+                        "You must specify a non-empty String for playFromMediaId.");
             }
             try {
-                MediaController.this.mSessionBinder.playFromMediaId(MediaController.this.mContext.getPackageName(), mediaId, extras);
+                MediaController.this.mSessionBinder.playFromMediaId(
+                        MediaController.this.mContext.getPackageName(), mediaId, extras);
             } catch (RemoteException ex) {
                 throw ex.rethrowFromSystemServer();
             }
@@ -439,7 +442,8 @@ public final class MediaController {
                 query = "";
             }
             try {
-                MediaController.this.mSessionBinder.playFromSearch(MediaController.this.mContext.getPackageName(), query, extras);
+                MediaController.this.mSessionBinder.playFromSearch(
+                        MediaController.this.mContext.getPackageName(), query, extras);
             } catch (RemoteException ex) {
                 throw ex.rethrowFromSystemServer();
             }
@@ -447,10 +451,12 @@ public final class MediaController {
 
         public void playFromUri(Uri uri, Bundle extras) {
             if (uri == null || Uri.EMPTY.equals(uri)) {
-                throw new IllegalArgumentException("You must specify a non-empty Uri for playFromUri.");
+                throw new IllegalArgumentException(
+                        "You must specify a non-empty Uri for playFromUri.");
             }
             try {
-                MediaController.this.mSessionBinder.playFromUri(MediaController.this.mContext.getPackageName(), uri, extras);
+                MediaController.this.mSessionBinder.playFromUri(
+                        MediaController.this.mContext.getPackageName(), uri, extras);
             } catch (RemoteException ex) {
                 throw ex.rethrowFromSystemServer();
             }
@@ -458,7 +464,8 @@ public final class MediaController {
 
         public void skipToQueueItem(long id) {
             try {
-                MediaController.this.mSessionBinder.skipToQueueItem(MediaController.this.mContext.getPackageName(), id);
+                MediaController.this.mSessionBinder.skipToQueueItem(
+                        MediaController.this.mContext.getPackageName(), id);
             } catch (RemoteException ex) {
                 throw ex.rethrowFromSystemServer();
             }
@@ -466,7 +473,8 @@ public final class MediaController {
 
         public void pause() {
             try {
-                MediaController.this.mSessionBinder.pause(MediaController.this.mContext.getPackageName());
+                MediaController.this.mSessionBinder.pause(
+                        MediaController.this.mContext.getPackageName());
             } catch (RemoteException ex) {
                 throw ex.rethrowFromSystemServer();
             }
@@ -474,7 +482,8 @@ public final class MediaController {
 
         public void stop() {
             try {
-                MediaController.this.mSessionBinder.stop(MediaController.this.mContext.getPackageName());
+                MediaController.this.mSessionBinder.stop(
+                        MediaController.this.mContext.getPackageName());
             } catch (RemoteException ex) {
                 throw ex.rethrowFromSystemServer();
             }
@@ -482,7 +491,8 @@ public final class MediaController {
 
         public void seekTo(long pos) {
             try {
-                MediaController.this.mSessionBinder.seekTo(MediaController.this.mContext.getPackageName(), pos);
+                MediaController.this.mSessionBinder.seekTo(
+                        MediaController.this.mContext.getPackageName(), pos);
             } catch (RemoteException ex) {
                 throw ex.rethrowFromSystemServer();
             }
@@ -490,7 +500,8 @@ public final class MediaController {
 
         public void fastForward() {
             try {
-                MediaController.this.mSessionBinder.fastForward(MediaController.this.mContext.getPackageName());
+                MediaController.this.mSessionBinder.fastForward(
+                        MediaController.this.mContext.getPackageName());
             } catch (RemoteException ex) {
                 throw ex.rethrowFromSystemServer();
             }
@@ -498,7 +509,8 @@ public final class MediaController {
 
         public void skipToNext() {
             try {
-                MediaController.this.mSessionBinder.next(MediaController.this.mContext.getPackageName());
+                MediaController.this.mSessionBinder.next(
+                        MediaController.this.mContext.getPackageName());
             } catch (RemoteException ex) {
                 throw ex.rethrowFromSystemServer();
             }
@@ -506,7 +518,8 @@ public final class MediaController {
 
         public void rewind() {
             try {
-                MediaController.this.mSessionBinder.rewind(MediaController.this.mContext.getPackageName());
+                MediaController.this.mSessionBinder.rewind(
+                        MediaController.this.mContext.getPackageName());
             } catch (RemoteException ex) {
                 throw ex.rethrowFromSystemServer();
             }
@@ -514,7 +527,8 @@ public final class MediaController {
 
         public void skipToPrevious() {
             try {
-                MediaController.this.mSessionBinder.previous(MediaController.this.mContext.getPackageName());
+                MediaController.this.mSessionBinder.previous(
+                        MediaController.this.mContext.getPackageName());
             } catch (RemoteException ex) {
                 throw ex.rethrowFromSystemServer();
             }
@@ -522,7 +536,8 @@ public final class MediaController {
 
         public void setRating(Rating rating) {
             try {
-                MediaController.this.mSessionBinder.rate(MediaController.this.mContext.getPackageName(), rating);
+                MediaController.this.mSessionBinder.rate(
+                        MediaController.this.mContext.getPackageName(), rating);
             } catch (RemoteException ex) {
                 throw ex.rethrowFromSystemServer();
             }
@@ -533,7 +548,8 @@ public final class MediaController {
                 throw new IllegalArgumentException("speed must not be zero");
             }
             try {
-                MediaController.this.mSessionBinder.setPlaybackSpeed(MediaController.this.mContext.getPackageName(), speed);
+                MediaController.this.mSessionBinder.setPlaybackSpeed(
+                        MediaController.this.mContext.getPackageName(), speed);
             } catch (RemoteException ex) {
                 throw ex.rethrowFromSystemServer();
             }
@@ -551,7 +567,8 @@ public final class MediaController {
                 throw new IllegalArgumentException("CustomAction cannot be null.");
             }
             try {
-                MediaController.this.mSessionBinder.sendCustomAction(MediaController.this.mContext.getPackageName(), action, args);
+                MediaController.this.mSessionBinder.sendCustomAction(
+                        MediaController.this.mContext.getPackageName(), action, args);
             } catch (RemoteException ex) {
                 throw ex.rethrowFromSystemServer();
             }
@@ -559,19 +576,21 @@ public final class MediaController {
     }
 
     public static final class PlaybackInfo implements Parcelable {
-        public static final Parcelable.Creator<PlaybackInfo> CREATOR = new Parcelable.Creator<PlaybackInfo>() { // from class: android.media.session.MediaController.PlaybackInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public PlaybackInfo createFromParcel(Parcel in) {
-                return new PlaybackInfo(in);
-            }
+        public static final Parcelable.Creator<PlaybackInfo> CREATOR =
+                new Parcelable.Creator<PlaybackInfo>() { // from class:
+                    // android.media.session.MediaController.PlaybackInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public PlaybackInfo createFromParcel(Parcel in) {
+                        return new PlaybackInfo(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public PlaybackInfo[] newArray(int size) {
-                return new PlaybackInfo[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public PlaybackInfo[] newArray(int size) {
+                        return new PlaybackInfo[size];
+                    }
+                };
         public static final int PLAYBACK_TYPE_LOCAL = 1;
         public static final int PLAYBACK_TYPE_REMOTE = 2;
         private final AudioAttributes mAudioAttrs;
@@ -582,11 +601,16 @@ public final class MediaController {
         private final String mVolumeControlId;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface PlaybackType {
-        }
+        public @interface PlaybackType {}
 
         @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
-        public PlaybackInfo(int playbackType, int volumeControl, int maxVolume, int currentVolume, AudioAttributes audioAttrs, String volumeControlId) {
+        public PlaybackInfo(
+                int playbackType,
+                int volumeControl,
+                int maxVolume,
+                int currentVolume,
+                AudioAttributes audioAttrs,
+                String volumeControlId) {
             this.mPlaybackType = playbackType;
             this.mVolumeControl = volumeControl;
             this.mMaxVolume = maxVolume;
@@ -629,7 +653,18 @@ public final class MediaController {
         }
 
         public String toString() {
-            return "playbackType=" + this.mPlaybackType + ", volumeControlType=" + this.mVolumeControl + ", maxVolume=" + this.mMaxVolume + ", currentVolume=" + this.mCurrentVolume + ", audioAttrs=" + this.mAudioAttrs + ", volumeControlId=" + this.mVolumeControlId;
+            return "playbackType="
+                    + this.mPlaybackType
+                    + ", volumeControlType="
+                    + this.mVolumeControl
+                    + ", maxVolume="
+                    + this.mMaxVolume
+                    + ", currentVolume="
+                    + this.mCurrentVolume
+                    + ", audioAttrs="
+                    + this.mAudioAttrs
+                    + ", volumeControlId="
+                    + this.mVolumeControlId;
         }
 
         @Override // android.os.Parcelable
@@ -732,8 +767,7 @@ public final class MediaController {
 
         @Override // android.os.Handler
         public void handleMessage(Message msg) {
-            if (!this.mRegistered) {
-            }
+            if (!this.mRegistered) {}
             switch (msg.what) {
                 case 1:
                     this.mCallback.onSessionEvent((String) msg.obj, msg.getData());
@@ -748,7 +782,8 @@ public final class MediaController {
                     this.mCallback.onAudioInfoChanged((PlaybackInfo) msg.obj);
                     break;
                 case 5:
-                    this.mCallback.onQueueChanged(msg.obj == null ? null : ((ParceledListSlice) msg.obj).getList());
+                    this.mCallback.onQueueChanged(
+                            msg.obj == null ? null : ((ParceledListSlice) msg.obj).getList());
                     break;
                 case 6:
                     this.mCallback.onQueueTitleChanged((CharSequence) msg.obj);

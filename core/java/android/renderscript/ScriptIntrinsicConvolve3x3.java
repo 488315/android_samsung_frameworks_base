@@ -1,6 +1,5 @@
 package android.renderscript;
 
-import android.renderscript.Script;
 import com.samsung.epic.Request;
 
 @Deprecated
@@ -18,7 +17,14 @@ public final class ScriptIntrinsicConvolve3x3 extends ScriptIntrinsic {
 
     public static ScriptIntrinsicConvolve3x3 create(RenderScript rs, Element e) {
         float[] f = {0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f};
-        if (!e.isCompatible(Element.U8(rs)) && !e.isCompatible(Element.U8_2(rs)) && !e.isCompatible(Element.U8_3(rs)) && !e.isCompatible(Element.U8_4(rs)) && !e.isCompatible(Element.F32(rs)) && !e.isCompatible(Element.F32_2(rs)) && !e.isCompatible(Element.F32_3(rs)) && !e.isCompatible(Element.F32_4(rs))) {
+        if (!e.isCompatible(Element.U8(rs))
+                && !e.isCompatible(Element.U8_2(rs))
+                && !e.isCompatible(Element.U8_3(rs))
+                && !e.isCompatible(Element.U8_4(rs))
+                && !e.isCompatible(Element.F32(rs))
+                && !e.isCompatible(Element.F32_2(rs))
+                && !e.isCompatible(Element.F32_3(rs))
+                && !e.isCompatible(Element.F32_4(rs))) {
             throw new RSIllegalArgumentException("Unsupported element type.");
         }
         long id = rs.nScriptIntrinsicCreate(1, e.getID(rs));

@@ -11,8 +11,7 @@ public interface ContentFilterRegister {
     public static final int FILTER_MEDIA_TYPE = 3;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FilterType {
-    }
+    public @interface FilterType {}
 
     void registerFilter(ContentFilterRegistry contentFilterRegistry);
 }

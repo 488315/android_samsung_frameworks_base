@@ -63,8 +63,15 @@ public class V1TBSCertificateGenerator {
     }
 
     public TBSCertificate generateTBSCertificate() {
-        if (this.serialNumber == null || this.signature == null || this.issuer == null || this.startDate == null || this.endDate == null || this.subject == null || this.subjectPublicKeyInfo == null) {
-            throw new IllegalStateException("not all mandatory fields set in V1 TBScertificate generator");
+        if (this.serialNumber == null
+                || this.signature == null
+                || this.issuer == null
+                || this.startDate == null
+                || this.endDate == null
+                || this.subject == null
+                || this.subjectPublicKeyInfo == null) {
+            throw new IllegalStateException(
+                    "not all mandatory fields set in V1 TBScertificate generator");
         }
         ASN1EncodableVector seq = new ASN1EncodableVector(6);
         seq.add(this.serialNumber);

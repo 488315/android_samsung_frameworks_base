@@ -1,7 +1,9 @@
 package android.hardware.camera2.params;
 
 import android.hardware.camera2.utils.HashCodeHelpers;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.Collection;
 
 /* loaded from: classes2.dex */
@@ -18,8 +20,10 @@ public final class InputConfiguration {
         this.mIsMultiResolution = false;
     }
 
-    public InputConfiguration(Collection<MultiResolutionStreamInfo> multiResolutionInputs, int format) {
-        Preconditions.checkCollectionNotEmpty(multiResolutionInputs, "Input multi-resolution stream info");
+    public InputConfiguration(
+            Collection<MultiResolutionStreamInfo> multiResolutionInputs, int format) {
+        Preconditions.checkCollectionNotEmpty(
+                multiResolutionInputs, "Input multi-resolution stream info");
         MultiResolutionStreamInfo info = multiResolutionInputs.iterator().next();
         this.mWidth = info.getWidth();
         this.mHeight = info.getHeight();
@@ -55,14 +59,23 @@ public final class InputConfiguration {
             return false;
         }
         InputConfiguration otherInputConfig = (InputConfiguration) obj;
-        return otherInputConfig.getWidth() == this.mWidth && otherInputConfig.getHeight() == this.mHeight && otherInputConfig.getFormat() == this.mFormat && otherInputConfig.isMultiResolution() == this.mIsMultiResolution;
+        return otherInputConfig.getWidth() == this.mWidth
+                && otherInputConfig.getHeight() == this.mHeight
+                && otherInputConfig.getFormat() == this.mFormat
+                && otherInputConfig.isMultiResolution() == this.mIsMultiResolution;
     }
 
     public int hashCode() {
-        return HashCodeHelpers.hashCode(this.mWidth, this.mHeight, this.mFormat, this.mIsMultiResolution);
+        return HashCodeHelpers.hashCode(
+                this.mWidth, this.mHeight, this.mFormat, this.mIsMultiResolution);
     }
 
     public String toString() {
-        return String.format("InputConfiguration(w:%d, h:%d, format:%d, isMultiResolution %b)", Integer.valueOf(this.mWidth), Integer.valueOf(this.mHeight), Integer.valueOf(this.mFormat), Boolean.valueOf(this.mIsMultiResolution));
+        return String.format(
+                "InputConfiguration(w:%d, h:%d, format:%d, isMultiResolution %b)",
+                Integer.valueOf(this.mWidth),
+                Integer.valueOf(this.mHeight),
+                Integer.valueOf(this.mFormat),
+                Boolean.valueOf(this.mIsMultiResolution));
     }
 }

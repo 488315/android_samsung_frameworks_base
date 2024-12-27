@@ -116,7 +116,8 @@ public class Request {
             if (mHasLoad) {
                 return;
             }
-            mEpicManager = IEpicManager.Stub.asInterface(ServiceManager.getService(Context.EPIC_SERVICE));
+            mEpicManager =
+                    IEpicManager.Stub.asInterface(ServiceManager.getService(Context.EPIC_SERVICE));
             mHasLoad = true;
         }
     }

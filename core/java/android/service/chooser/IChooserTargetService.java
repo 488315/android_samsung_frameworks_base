@@ -7,16 +7,22 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.service.chooser.IChooserTargetResult;
 
 /* loaded from: classes3.dex */
 public interface IChooserTargetService extends IInterface {
-    void getChooserTargets(ComponentName componentName, IntentFilter intentFilter, IChooserTargetResult iChooserTargetResult) throws RemoteException;
+    void getChooserTargets(
+            ComponentName componentName,
+            IntentFilter intentFilter,
+            IChooserTargetResult iChooserTargetResult)
+            throws RemoteException;
 
     public static class Default implements IChooserTargetService {
         @Override // android.service.chooser.IChooserTargetService
-        public void getChooserTargets(ComponentName targetComponentName, IntentFilter matchedFilter, IChooserTargetResult result) throws RemoteException {
-        }
+        public void getChooserTargets(
+                ComponentName targetComponentName,
+                IntentFilter matchedFilter,
+                IChooserTargetResult result)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +30,7 @@ public interface IChooserTargetService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IChooserTargetService {
+    public abstract static class Stub extends Binder implements IChooserTargetService {
         public static final String DESCRIPTOR = "android.service.chooser.IChooserTargetService";
         static final int TRANSACTION_getChooserTargets = 1;
 
@@ -63,7 +69,8 @@ public interface IChooserTargetService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -73,9 +80,11 @@ public interface IChooserTargetService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     IntentFilter _arg1 = (IntentFilter) data.readTypedObject(IntentFilter.CREATOR);
-                    IChooserTargetResult _arg2 = IChooserTargetResult.Stub.asInterface(data.readStrongBinder());
+                    IChooserTargetResult _arg2 =
+                            IChooserTargetResult.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getChooserTargets(_arg0, _arg1, _arg2);
                     return true;
@@ -101,7 +110,11 @@ public interface IChooserTargetService extends IInterface {
             }
 
             @Override // android.service.chooser.IChooserTargetService
-            public void getChooserTargets(ComponentName targetComponentName, IntentFilter matchedFilter, IChooserTargetResult result) throws RemoteException {
+            public void getChooserTargets(
+                    ComponentName targetComponentName,
+                    IntentFilter matchedFilter,
+                    IChooserTargetResult result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

@@ -1,6 +1,5 @@
 package com.android.server.hdmi;
 
-import com.android.server.hdmi.HdmiControlService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -20,7 +19,8 @@ public final class RequestArcTerminationAction extends RequestArcAction {
                 }
                 if ((hdmiCecMessage.mParams[0] & 255) == 196) {
                     HdmiCecLocalDevice hdmiCecLocalDevice = this.mSource;
-                    hdmiCecLocalDevice.addAndStartAction(new SetArcTransmissionStateAction(hdmiCecLocalDevice, i, false));
+                    hdmiCecLocalDevice.addAndStartAction(
+                            new SetArcTransmissionStateAction(hdmiCecLocalDevice, i, false));
                     finishWithCallback(3);
                     return true;
                 }
@@ -33,17 +33,25 @@ public final class RequestArcTerminationAction extends RequestArcAction {
     public final void start() {
         this.mState = 1;
         addTimer(1, 2000);
-        this.mService.sendCecCommand(HdmiCecMessage.build(getSourceAddress(), this.mAvrAddress, 196), new HdmiControlService.SendMessageCallback() { // from class: com.android.server.hdmi.RequestArcTerminationAction.1
-            @Override // com.android.server.hdmi.HdmiControlService.SendMessageCallback
-            public final void onSendCompleted(int i) {
-                if (i != 0) {
-                    RequestArcTerminationAction requestArcTerminationAction = RequestArcTerminationAction.this;
-                    int i2 = requestArcTerminationAction.mAvrAddress;
-                    HdmiCecLocalDevice hdmiCecLocalDevice = requestArcTerminationAction.mSource;
-                    hdmiCecLocalDevice.addAndStartAction(new SetArcTransmissionStateAction(hdmiCecLocalDevice, i2, false));
-                    requestArcTerminationAction.finishWithCallback(3);
-                }
-            }
-        });
+        this.mService.sendCecCommand(
+                HdmiCecMessage.build(getSourceAddress(), this.mAvrAddress, 196),
+                new HdmiControlService
+                        .SendMessageCallback() { // from class:
+                                                 // com.android.server.hdmi.RequestArcTerminationAction.1
+                    @Override // com.android.server.hdmi.HdmiControlService.SendMessageCallback
+                    public final void onSendCompleted(int i) {
+                        if (i != 0) {
+                            RequestArcTerminationAction requestArcTerminationAction =
+                                    RequestArcTerminationAction.this;
+                            int i2 = requestArcTerminationAction.mAvrAddress;
+                            HdmiCecLocalDevice hdmiCecLocalDevice =
+                                    requestArcTerminationAction.mSource;
+                            hdmiCecLocalDevice.addAndStartAction(
+                                    new SetArcTransmissionStateAction(
+                                            hdmiCecLocalDevice, i2, false));
+                            requestArcTerminationAction.finishWithCallback(3);
+                        }
+                    }
+                });
     }
 }

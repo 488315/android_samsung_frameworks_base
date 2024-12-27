@@ -10,7 +10,7 @@ import android.os.Trace;
 import android.telephony.BinderCacheManager$BinderDeathTracker$$ExternalSyntheticLambda0;
 import android.util.CloseGuard;
 import android.util.Log;
-import android.view.IScrollCaptureConnection;
+
 import java.lang.ref.Reference;
 import java.util.Objects;
 import java.util.concurrent.Executor;
@@ -18,7 +18,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 
 /* loaded from: classes4.dex */
-public class ScrollCaptureConnection extends IScrollCaptureConnection.Stub implements IBinder.DeathRecipient {
+public class ScrollCaptureConnection extends IScrollCaptureConnection.Stub
+        implements IBinder.DeathRecipient {
     private static final String END_CAPTURE = "endCapture";
     private static final String REQUEST_IMAGE = "requestImage";
     private static final String SESSION = "Session";
@@ -41,13 +42,18 @@ public class ScrollCaptureConnection extends IScrollCaptureConnection.Stub imple
     public ScrollCaptureConnection(Executor uiThread, ScrollCaptureTarget selectedTarget) {
         this.mUiThread = (Executor) Objects.requireNonNull(uiThread, "<uiThread> must non-null");
         Objects.requireNonNull(selectedTarget, "<selectedTarget> must non-null");
-        this.mScrollBounds = (Rect) Objects.requireNonNull(Rect.copyOrNull(selectedTarget.getScrollBounds()), "target.getScrollBounds() must be non-null to construct a client");
+        this.mScrollBounds =
+                (Rect)
+                        Objects.requireNonNull(
+                                Rect.copyOrNull(selectedTarget.getScrollBounds()),
+                                "target.getScrollBounds() must be non-null to construct a client");
         this.mLocal = selectedTarget.getCallback();
         this.mPositionInWindow = new Point(selectedTarget.getPositionInWindow());
     }
 
     @Override // android.view.IScrollCaptureConnection
-    public ICancellationSignal startCapture(Surface surface, IScrollCaptureCallbacks remote) throws RemoteException {
+    public ICancellationSignal startCapture(Surface surface, IScrollCaptureCallbacks remote)
+            throws RemoteException {
         this.mTraceId = System.identityHashCode(surface);
         Trace.asyncTraceForTrackBegin(2L, TRACE_TRACK, "Session", this.mTraceId);
         Trace.asyncTraceForTrackBegin(2L, TRACE_TRACK, START_CAPTURE, this.mTraceId);
@@ -55,24 +61,34 @@ public class ScrollCaptureConnection extends IScrollCaptureConnection.Stub imple
         if (!surface.isValid()) {
             throw new RemoteException(new IllegalArgumentException("surface must be valid"));
         }
-        this.mRemote = (IScrollCaptureCallbacks) Objects.requireNonNull(remote, "<callbacks> must non-null");
+        this.mRemote =
+                (IScrollCaptureCallbacks)
+                        Objects.requireNonNull(remote, "<callbacks> must non-null");
         this.mRemote.asBinder().linkToDeath(this, 0);
         this.mConnected = true;
         ICancellationSignal cancellation = CancellationSignal.createTransport();
         this.mCancellation = CancellationSignal.fromTransport(cancellation);
-        this.mSession = new ScrollCaptureSession(surface, this.mScrollBounds, this.mPositionInWindow);
-        final Runnable listener = SafeCallback.create(this.mCancellation, this.mUiThread, new Runnable() { // from class: android.view.ScrollCaptureConnection$$ExternalSyntheticLambda5
-            @Override // java.lang.Runnable
-            public final void run() {
-                ScrollCaptureConnection.this.onStartCaptureCompleted();
-            }
-        });
-        this.mUiThread.execute(new Runnable() { // from class: android.view.ScrollCaptureConnection$$ExternalSyntheticLambda6
-            @Override // java.lang.Runnable
-            public final void run() {
-                ScrollCaptureConnection.this.lambda$startCapture$0(listener);
-            }
-        });
+        this.mSession =
+                new ScrollCaptureSession(surface, this.mScrollBounds, this.mPositionInWindow);
+        final Runnable listener =
+                SafeCallback.create(
+                        this.mCancellation,
+                        this.mUiThread,
+                        new Runnable() { // from class:
+                                         // android.view.ScrollCaptureConnection$$ExternalSyntheticLambda5
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                ScrollCaptureConnection.this.onStartCaptureCompleted();
+                            }
+                        });
+        this.mUiThread.execute(
+                new Runnable() { // from class:
+                                 // android.view.ScrollCaptureConnection$$ExternalSyntheticLambda6
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        ScrollCaptureConnection.this.lambda$startCapture$0(listener);
+                    }
+                });
         return cancellation;
     }
 
@@ -101,25 +117,33 @@ public class ScrollCaptureConnection extends IScrollCaptureConnection.Stub imple
         cancelPendingAction();
         ICancellationSignal cancellation = CancellationSignal.createTransport();
         this.mCancellation = CancellationSignal.fromTransport(cancellation);
-        final Consumer<Rect> listener = SafeCallback.create(this.mCancellation, this.mUiThread, new Consumer() { // from class: android.view.ScrollCaptureConnection$$ExternalSyntheticLambda3
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                ScrollCaptureConnection.this.onImageRequestCompleted((Rect) obj);
-            }
-        });
-        this.mUiThread.execute(new Runnable() { // from class: android.view.ScrollCaptureConnection$$ExternalSyntheticLambda4
-            @Override // java.lang.Runnable
-            public final void run() {
-                ScrollCaptureConnection.this.lambda$requestImage$1(requestRect, listener);
-            }
-        });
+        final Consumer<Rect> listener =
+                SafeCallback.create(
+                        this.mCancellation,
+                        this.mUiThread,
+                        new Consumer() { // from class:
+                                         // android.view.ScrollCaptureConnection$$ExternalSyntheticLambda3
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                ScrollCaptureConnection.this.onImageRequestCompleted((Rect) obj);
+                            }
+                        });
+        this.mUiThread.execute(
+                new Runnable() { // from class:
+                                 // android.view.ScrollCaptureConnection$$ExternalSyntheticLambda4
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        ScrollCaptureConnection.this.lambda$requestImage$1(requestRect, listener);
+                    }
+                });
         return cancellation;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$requestImage$1(Rect requestRect, Consumer listener) {
         if (this.mLocal != null) {
-            this.mLocal.onScrollCaptureImageRequest(this.mSession, this.mCancellation, new Rect(requestRect), listener);
+            this.mLocal.onScrollCaptureImageRequest(
+                    this.mSession, this.mCancellation, new Rect(requestRect), listener);
         }
     }
 
@@ -144,18 +168,25 @@ public class ScrollCaptureConnection extends IScrollCaptureConnection.Stub imple
         cancelPendingAction();
         ICancellationSignal cancellation = CancellationSignal.createTransport();
         this.mCancellation = CancellationSignal.fromTransport(cancellation);
-        final Runnable listener = SafeCallback.create(this.mCancellation, this.mUiThread, new Runnable() { // from class: android.view.ScrollCaptureConnection$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                ScrollCaptureConnection.this.onEndCaptureCompleted();
-            }
-        });
-        this.mUiThread.execute(new Runnable() { // from class: android.view.ScrollCaptureConnection$$ExternalSyntheticLambda2
-            @Override // java.lang.Runnable
-            public final void run() {
-                ScrollCaptureConnection.this.lambda$endCapture$2(listener);
-            }
-        });
+        final Runnable listener =
+                SafeCallback.create(
+                        this.mCancellation,
+                        this.mUiThread,
+                        new Runnable() { // from class:
+                                         // android.view.ScrollCaptureConnection$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                ScrollCaptureConnection.this.onEndCaptureCompleted();
+                            }
+                        });
+        this.mUiThread.execute(
+                new Runnable() { // from class:
+                                 // android.view.ScrollCaptureConnection$$ExternalSyntheticLambda2
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        ScrollCaptureConnection.this.lambda$endCapture$2(listener);
+                    }
+                });
         return cancellation;
     }
 
@@ -199,17 +230,21 @@ public class ScrollCaptureConnection extends IScrollCaptureConnection.Stub imple
             Log.w(TAG, "close(): capture session still active! Ending now.");
             cancelPendingAction();
             final ScrollCaptureCallback callback = this.mLocal;
-            this.mUiThread.execute(new Runnable() { // from class: android.view.ScrollCaptureConnection$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ScrollCaptureCallback.this.onScrollCaptureEnd(new Runnable() { // from class: android.view.ScrollCaptureConnection$$ExternalSyntheticLambda7
+            this.mUiThread.execute(
+                    new Runnable() { // from class:
+                                     // android.view.ScrollCaptureConnection$$ExternalSyntheticLambda0
                         @Override // java.lang.Runnable
                         public final void run() {
-                            ScrollCaptureConnection.lambda$close$3();
+                            ScrollCaptureCallback.this.onScrollCaptureEnd(
+                                    new Runnable() { // from class:
+                                                     // android.view.ScrollCaptureConnection$$ExternalSyntheticLambda7
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            ScrollCaptureConnection.lambda$close$3();
+                                        }
+                                    });
                         }
                     });
-                }
-            });
             this.mActive = false;
         }
         if (this.mRemote != null) {
@@ -225,8 +260,7 @@ public class ScrollCaptureConnection extends IScrollCaptureConnection.Stub imple
         Reference.reachabilityFence(this);
     }
 
-    static /* synthetic */ void lambda$close$3() {
-    }
+    static /* synthetic */ void lambda$close$3() {}
 
     private void cancelPendingAction() {
         if (this.mCancellation != null) {
@@ -254,7 +288,15 @@ public class ScrollCaptureConnection extends IScrollCaptureConnection.Stub imple
     }
 
     public String toString() {
-        return "ScrollCaptureConnection{active=" + this.mActive + ", session=" + this.mSession + ", remote=" + this.mRemote + ", local=" + this.mLocal + "}";
+        return "ScrollCaptureConnection{active="
+                + this.mActive
+                + ", session="
+                + this.mSession
+                + ", remote="
+                + this.mRemote
+                + ", local="
+                + this.mLocal
+                + "}";
     }
 
     protected void finalize() throws Throwable {
@@ -281,12 +323,14 @@ public class ScrollCaptureConnection extends IScrollCaptureConnection.Stub imple
         protected final void maybeAccept(final Consumer<T> consumer) {
             final T value = this.mValue.getAndSet(null);
             if (!this.mSignal.isCanceled() && value != null) {
-                this.mExecutor.execute(new Runnable() { // from class: android.view.ScrollCaptureConnection$SafeCallback$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        consumer.accept(value);
-                    }
-                });
+                this.mExecutor.execute(
+                        new Runnable() { // from class:
+                                         // android.view.ScrollCaptureConnection$SafeCallback$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                consumer.accept(value);
+                            }
+                        });
             }
         }
 
@@ -294,7 +338,8 @@ public class ScrollCaptureConnection extends IScrollCaptureConnection.Stub imple
             return new RunnableCallback(signal, executor, target);
         }
 
-        static <T> Consumer<T> create(CancellationSignal signal, Executor executor, Consumer<T> target) {
+        static <T> Consumer<T> create(
+                CancellationSignal signal, Executor executor, Consumer<T> target) {
             return new ConsumerCallback(signal, executor, target);
         }
     }
@@ -311,19 +356,22 @@ public class ScrollCaptureConnection extends IScrollCaptureConnection.Stub imple
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    static final class ConsumerCallback<T> extends SafeCallback<Consumer<T>> implements Consumer<T> {
+    static final class ConsumerCallback<T> extends SafeCallback<Consumer<T>>
+            implements Consumer<T> {
         ConsumerCallback(CancellationSignal signal, Executor executor, Consumer<T> target) {
             super(signal, executor, target);
         }
 
         @Override // java.util.function.Consumer
         public void accept(final T value) {
-            maybeAccept(new Consumer() { // from class: android.view.ScrollCaptureConnection$ConsumerCallback$$ExternalSyntheticLambda0
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ((Consumer) obj).accept(value);
-                }
-            });
+            maybeAccept(
+                    new Consumer() { // from class:
+                                     // android.view.ScrollCaptureConnection$ConsumerCallback$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            ((Consumer) obj).accept(value);
+                        }
+                    });
         }
     }
 }

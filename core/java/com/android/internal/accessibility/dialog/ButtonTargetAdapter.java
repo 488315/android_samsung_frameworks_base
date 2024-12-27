@@ -6,7 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.android.internal.R;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -35,7 +37,9 @@ class ButtonTargetAdapter extends TargetAdapter {
     @Override // android.widget.Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
         Context context = parent.getContext();
-        View root = LayoutInflater.from(context).inflate(R.layout.accessibility_button_chooser_item, parent, false);
+        View root =
+                LayoutInflater.from(context)
+                        .inflate(R.layout.accessibility_button_chooser_item, parent, false);
         AccessibilityTarget target = this.mTargets.get(position);
         ImageView iconView = (ImageView) root.findViewById(R.id.accessibility_button_target_icon);
         TextView labelView = (TextView) root.findViewById(R.id.accessibility_button_target_label);

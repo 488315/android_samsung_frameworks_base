@@ -4,8 +4,10 @@ import android.content.Context;
 import android.hardware.biometrics.IInvalidationCallback;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.server.biometrics.log.BiometricContext;
 import com.android.server.biometrics.log.BiometricLogger;
+
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -15,8 +17,27 @@ public abstract class InvalidationClient extends HalClientMonitor implements Err
     public final Map mAuthenticatorIds;
     public final IInvalidationCallback mInvalidationCallback;
 
-    public InvalidationClient(Context context, Supplier supplier, int i, int i2, BiometricLogger biometricLogger, BiometricContext biometricContext, Map map, IInvalidationCallback iInvalidationCallback) {
-        super(context, supplier, null, null, i, context.getOpPackageName(), 0, i2, biometricLogger, biometricContext, false);
+    public InvalidationClient(
+            Context context,
+            Supplier supplier,
+            int i,
+            int i2,
+            BiometricLogger biometricLogger,
+            BiometricContext biometricContext,
+            Map map,
+            IInvalidationCallback iInvalidationCallback) {
+        super(
+                context,
+                supplier,
+                null,
+                null,
+                i,
+                context.getOpPackageName(),
+                0,
+                i2,
+                biometricLogger,
+                biometricContext,
+                false);
         this.mAuthenticatorIds = map;
         this.mInvalidationCallback = iInvalidationCallback;
     }
@@ -53,6 +74,5 @@ public abstract class InvalidationClient extends HalClientMonitor implements Err
     }
 
     @Override // com.android.server.biometrics.sensors.HalClientMonitor
-    public final void unableToStart() {
-    }
+    public final void unableToStart() {}
 }

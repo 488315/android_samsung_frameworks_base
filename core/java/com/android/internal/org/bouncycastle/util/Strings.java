@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.util;
 
 import com.android.internal.org.bouncycastle.util.encoders.UTF8;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -15,12 +16,17 @@ public final class Strings {
 
     static {
         try {
-            LINE_SEPARATOR = (String) AccessController.doPrivileged(new PrivilegedAction<String>() { // from class: com.android.internal.org.bouncycastle.util.Strings.1
-                @Override // java.security.PrivilegedAction
-                public String run() {
-                    return System.getProperty("line.separator");
-                }
-            });
+            LINE_SEPARATOR =
+                    (String)
+                            AccessController.doPrivileged(
+                                    new PrivilegedAction<
+                                            String>() { // from class:
+                                                        // com.android.internal.org.bouncycastle.util.Strings.1
+                                        @Override // java.security.PrivilegedAction
+                                        public String run() {
+                                            return System.getProperty("line.separator");
+                                        }
+                                    });
         } catch (Exception e) {
             try {
                 LINE_SEPARATOR = String.format("%n", new Object[0]);
@@ -186,15 +192,16 @@ public final class Strings {
     }
 
     private static class StringListImpl extends ArrayList<String> implements StringList {
-        private StringListImpl() {
-        }
+        private StringListImpl() {}
 
-        @Override // java.util.ArrayList, java.util.AbstractList, java.util.List, com.android.internal.org.bouncycastle.util.StringList
+        @Override // java.util.ArrayList, java.util.AbstractList, java.util.List,
+                  // com.android.internal.org.bouncycastle.util.StringList
         public /* bridge */ /* synthetic */ String get(int i) {
             return (String) super.get(i);
         }
 
-        @Override // java.util.ArrayList, java.util.AbstractList, java.util.AbstractCollection, java.util.Collection, java.util.List
+        @Override // java.util.ArrayList, java.util.AbstractList, java.util.AbstractCollection,
+                  // java.util.Collection, java.util.List
         public boolean add(String s) {
             return super.add((StringListImpl) s);
         }

@@ -2,7 +2,9 @@ package android.hardware.camera2.extension;
 
 import android.annotation.SystemApi;
 import android.hardware.camera2.CaptureRequest;
+
 import com.android.internal.camera.flags.Flags;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +17,11 @@ public class ExtensionConfiguration {
     private final int mSessionTemplateId;
     private final int mSessionType;
 
-    public ExtensionConfiguration(int sessionType, int sessionTemplateId, List<ExtensionOutputConfiguration> outputs, CaptureRequest sessionParams) {
+    public ExtensionConfiguration(
+            int sessionType,
+            int sessionTemplateId,
+            List<ExtensionOutputConfiguration> outputs,
+            CaptureRequest sessionParams) {
         this.mSessionType = sessionType;
         this.mSessionTemplateId = sessionTemplateId;
         this.mOutputs = outputs;

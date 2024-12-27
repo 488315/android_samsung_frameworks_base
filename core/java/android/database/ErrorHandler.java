@@ -39,6 +39,5 @@ public abstract class ErrorHandler {
         return false;
     }
 
-    void postHandleError(SQLiteDatabase db, boolean deleteDatabase) {
-    }
+    void postHandleError(SQLiteDatabase db, boolean deleteDatabase) {}
 }

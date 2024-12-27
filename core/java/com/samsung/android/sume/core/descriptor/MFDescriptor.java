@@ -1,6 +1,7 @@
 package com.samsung.android.sume.core.descriptor;
 
 import com.samsung.android.sume.core.filter.MediaFilter;
+
 import java.io.Serializable;
 
 /* loaded from: classes6.dex */

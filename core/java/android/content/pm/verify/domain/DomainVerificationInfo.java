@@ -5,8 +5,10 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArrayMap;
+
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Parcelling;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
@@ -29,15 +31,15 @@ public final class DomainVerificationInfo implements Parcelable {
     private final String mPackageName;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface State {
-    }
+    public @interface State {}
 
     private void parcelHostToStateMap(Parcel dest, int flags) {
         DomainVerificationUtils.writeHostMap(dest, this.mHostToStateMap);
     }
 
     private Map<String, Integer> unparcelHostToStateMap(Parcel in) {
-        return DomainVerificationUtils.readHostMap(in, new ArrayMap(), DomainVerificationUserState.class.getClassLoader());
+        return DomainVerificationUtils.readHostMap(
+                in, new ArrayMap(), DomainVerificationUserState.class.getClassLoader());
     }
 
     public static String stateToString(int value) {
@@ -59,13 +61,17 @@ public final class DomainVerificationInfo implements Parcelable {
         }
     }
 
-    public DomainVerificationInfo(UUID identifier, String packageName, Map<String, Integer> hostToStateMap) {
+    public DomainVerificationInfo(
+            UUID identifier, String packageName, Map<String, Integer> hostToStateMap) {
         this.mIdentifier = identifier;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mIdentifier);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mIdentifier);
         this.mPackageName = packageName;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPackageName);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPackageName);
         this.mHostToStateMap = hostToStateMap;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHostToStateMap);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHostToStateMap);
     }
 
     public UUID getIdentifier() {
@@ -81,7 +87,13 @@ public final class DomainVerificationInfo implements Parcelable {
     }
 
     public String toString() {
-        return "DomainVerificationInfo { identifier = " + this.mIdentifier + ", packageName = " + this.mPackageName + ", hostToStateMap = " + this.mHostToStateMap + " }";
+        return "DomainVerificationInfo { identifier = "
+                + this.mIdentifier
+                + ", packageName = "
+                + this.mPackageName
+                + ", hostToStateMap = "
+                + this.mHostToStateMap
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -92,7 +104,9 @@ public final class DomainVerificationInfo implements Parcelable {
             return false;
         }
         DomainVerificationInfo that = (DomainVerificationInfo) o;
-        if (Objects.equals(this.mIdentifier, that.mIdentifier) && Objects.equals(this.mPackageName, that.mPackageName) && Objects.equals(this.mHostToStateMap, that.mHostToStateMap)) {
+        if (Objects.equals(this.mIdentifier, that.mIdentifier)
+                && Objects.equals(this.mPackageName, that.mPackageName)
+                && Objects.equals(this.mHostToStateMap, that.mHostToStateMap)) {
             return true;
         }
         return false;
@@ -100,7 +114,8 @@ public final class DomainVerificationInfo implements Parcelable {
 
     public int hashCode() {
         int _hash = (1 * 31) + Objects.hashCode(this.mIdentifier);
-        return (((_hash * 31) + Objects.hashCode(this.mPackageName)) * 31) + Objects.hashCode(this.mHostToStateMap);
+        return (((_hash * 31) + Objects.hashCode(this.mPackageName)) * 31)
+                + Objects.hashCode(this.mHostToStateMap);
     }
 
     static {
@@ -108,19 +123,21 @@ public final class DomainVerificationInfo implements Parcelable {
         if (sParcellingForIdentifier == null) {
             sParcellingForIdentifier = Parcelling.Cache.put(new Parcelling.BuiltIn.ForUUID());
         }
-        CREATOR = new Parcelable.Creator<DomainVerificationInfo>() { // from class: android.content.pm.verify.domain.DomainVerificationInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public DomainVerificationInfo[] newArray(int size) {
-                return new DomainVerificationInfo[size];
-            }
+        CREATOR =
+                new Parcelable.Creator<DomainVerificationInfo>() { // from class:
+                    // android.content.pm.verify.domain.DomainVerificationInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public DomainVerificationInfo[] newArray(int size) {
+                        return new DomainVerificationInfo[size];
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public DomainVerificationInfo createFromParcel(Parcel in) {
-                return new DomainVerificationInfo(in);
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public DomainVerificationInfo createFromParcel(Parcel in) {
+                        return new DomainVerificationInfo(in);
+                    }
+                };
     }
 
     @Override // android.os.Parcelable
@@ -140,14 +157,16 @@ public final class DomainVerificationInfo implements Parcelable {
         String packageName = in.readString();
         Map<String, Integer> hostToStateMap = unparcelHostToStateMap(in);
         this.mIdentifier = identifier;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mIdentifier);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mIdentifier);
         this.mPackageName = packageName;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPackageName);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mPackageName);
         this.mHostToStateMap = hostToStateMap;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHostToStateMap);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHostToStateMap);
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

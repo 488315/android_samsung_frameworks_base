@@ -11,13 +11,15 @@ import com.android.internal.org.bouncycastle.asn1.pkcs.RSASSAPSSparams;
 import com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import com.android.internal.org.bouncycastle.asn1.x9.X9ObjectIdentifiers;
 import com.android.internal.org.bouncycastle.util.Strings;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 /* loaded from: classes5.dex */
-public class DefaultSignatureAlgorithmIdentifierFinder implements SignatureAlgorithmIdentifierFinder {
+public class DefaultSignatureAlgorithmIdentifierFinder
+        implements SignatureAlgorithmIdentifierFinder {
     private static Map algorithms = new HashMap();
     private static Set noParams = new HashSet();
     private static Map params = new HashMap();
@@ -25,8 +27,10 @@ public class DefaultSignatureAlgorithmIdentifierFinder implements SignatureAlgor
     private static Map digestOids = new HashMap();
     private static final ASN1ObjectIdentifier ENCRYPTION_RSA = PKCSObjectIdentifiers.rsaEncryption;
     private static final ASN1ObjectIdentifier ENCRYPTION_DSA = X9ObjectIdentifiers.id_dsa_with_sha1;
-    private static final ASN1ObjectIdentifier ENCRYPTION_ECDSA = X9ObjectIdentifiers.ecdsa_with_SHA1;
-    private static final ASN1ObjectIdentifier ENCRYPTION_RSA_PSS = PKCSObjectIdentifiers.id_RSASSA_PSS;
+    private static final ASN1ObjectIdentifier ENCRYPTION_ECDSA =
+            X9ObjectIdentifiers.ecdsa_with_SHA1;
+    private static final ASN1ObjectIdentifier ENCRYPTION_RSA_PSS =
+            PKCSObjectIdentifiers.id_RSASSA_PSS;
 
     static {
         algorithms.put("MD5WITHRSAENCRYPTION", PKCSObjectIdentifiers.md5WithRSAEncryption);
@@ -73,20 +77,29 @@ public class DefaultSignatureAlgorithmIdentifierFinder implements SignatureAlgor
         pkcs15RsaEncryption.add(PKCSObjectIdentifiers.sha256WithRSAEncryption);
         pkcs15RsaEncryption.add(PKCSObjectIdentifiers.sha384WithRSAEncryption);
         pkcs15RsaEncryption.add(PKCSObjectIdentifiers.sha512WithRSAEncryption);
-        AlgorithmIdentifier sha1AlgId = new AlgorithmIdentifier(OIWObjectIdentifiers.idSHA1, DERNull.INSTANCE);
+        AlgorithmIdentifier sha1AlgId =
+                new AlgorithmIdentifier(OIWObjectIdentifiers.idSHA1, DERNull.INSTANCE);
         params.put("SHA1WITHRSAANDMGF1", createPSSParams(sha1AlgId, 20));
-        AlgorithmIdentifier sha224AlgId = new AlgorithmIdentifier(NISTObjectIdentifiers.id_sha224, DERNull.INSTANCE);
+        AlgorithmIdentifier sha224AlgId =
+                new AlgorithmIdentifier(NISTObjectIdentifiers.id_sha224, DERNull.INSTANCE);
         params.put("SHA224WITHRSAANDMGF1", createPSSParams(sha224AlgId, 28));
-        AlgorithmIdentifier sha256AlgId = new AlgorithmIdentifier(NISTObjectIdentifiers.id_sha256, DERNull.INSTANCE);
+        AlgorithmIdentifier sha256AlgId =
+                new AlgorithmIdentifier(NISTObjectIdentifiers.id_sha256, DERNull.INSTANCE);
         params.put("SHA256WITHRSAANDMGF1", createPSSParams(sha256AlgId, 32));
-        AlgorithmIdentifier sha384AlgId = new AlgorithmIdentifier(NISTObjectIdentifiers.id_sha384, DERNull.INSTANCE);
+        AlgorithmIdentifier sha384AlgId =
+                new AlgorithmIdentifier(NISTObjectIdentifiers.id_sha384, DERNull.INSTANCE);
         params.put("SHA384WITHRSAANDMGF1", createPSSParams(sha384AlgId, 48));
-        AlgorithmIdentifier sha512AlgId = new AlgorithmIdentifier(NISTObjectIdentifiers.id_sha512, DERNull.INSTANCE);
+        AlgorithmIdentifier sha512AlgId =
+                new AlgorithmIdentifier(NISTObjectIdentifiers.id_sha512, DERNull.INSTANCE);
         params.put("SHA512WITHRSAANDMGF1", createPSSParams(sha512AlgId, 64));
-        digestOids.put(PKCSObjectIdentifiers.sha224WithRSAEncryption, NISTObjectIdentifiers.id_sha224);
-        digestOids.put(PKCSObjectIdentifiers.sha256WithRSAEncryption, NISTObjectIdentifiers.id_sha256);
-        digestOids.put(PKCSObjectIdentifiers.sha384WithRSAEncryption, NISTObjectIdentifiers.id_sha384);
-        digestOids.put(PKCSObjectIdentifiers.sha512WithRSAEncryption, NISTObjectIdentifiers.id_sha512);
+        digestOids.put(
+                PKCSObjectIdentifiers.sha224WithRSAEncryption, NISTObjectIdentifiers.id_sha224);
+        digestOids.put(
+                PKCSObjectIdentifiers.sha256WithRSAEncryption, NISTObjectIdentifiers.id_sha256);
+        digestOids.put(
+                PKCSObjectIdentifiers.sha384WithRSAEncryption, NISTObjectIdentifiers.id_sha384);
+        digestOids.put(
+                PKCSObjectIdentifiers.sha512WithRSAEncryption, NISTObjectIdentifiers.id_sha512);
         digestOids.put(PKCSObjectIdentifiers.md5WithRSAEncryption, PKCSObjectIdentifiers.md5);
         digestOids.put(PKCSObjectIdentifiers.sha1WithRSAEncryption, OIWObjectIdentifiers.idSHA1);
         digestOids.put(NISTObjectIdentifiers.dsa_with_sha224, NISTObjectIdentifiers.id_sha224);
@@ -101,14 +114,16 @@ public class DefaultSignatureAlgorithmIdentifierFinder implements SignatureAlgor
         String algorithmName = Strings.toUpperCase(signatureAlgorithm);
         ASN1ObjectIdentifier sigOID = (ASN1ObjectIdentifier) algorithms.get(algorithmName);
         if (sigOID == null) {
-            throw new IllegalArgumentException("Unknown signature type requested: " + algorithmName);
+            throw new IllegalArgumentException(
+                    "Unknown signature type requested: " + algorithmName);
         }
         if (noParams.contains(sigOID)) {
             AlgorithmIdentifier sigAlgId = new AlgorithmIdentifier(sigOID);
             return sigAlgId;
         }
         if (params.containsKey(algorithmName)) {
-            AlgorithmIdentifier sigAlgId2 = new AlgorithmIdentifier(sigOID, (ASN1Encodable) params.get(algorithmName));
+            AlgorithmIdentifier sigAlgId2 =
+                    new AlgorithmIdentifier(sigOID, (ASN1Encodable) params.get(algorithmName));
             return sigAlgId2;
         }
         AlgorithmIdentifier sigAlgId3 = new AlgorithmIdentifier(sigOID, DERNull.INSTANCE);
@@ -116,7 +131,11 @@ public class DefaultSignatureAlgorithmIdentifierFinder implements SignatureAlgor
     }
 
     private static RSASSAPSSparams createPSSParams(AlgorithmIdentifier hashAlgId, int saltSize) {
-        return new RSASSAPSSparams(hashAlgId, new AlgorithmIdentifier(PKCSObjectIdentifiers.id_mgf1, hashAlgId), new ASN1Integer(saltSize), new ASN1Integer(1L));
+        return new RSASSAPSSparams(
+                hashAlgId,
+                new AlgorithmIdentifier(PKCSObjectIdentifiers.id_mgf1, hashAlgId),
+                new ASN1Integer(saltSize),
+                new ASN1Integer(1L));
     }
 
     @Override // com.android.internal.org.bouncycastle.operator.SignatureAlgorithmIdentifierFinder

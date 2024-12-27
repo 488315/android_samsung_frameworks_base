@@ -10,7 +10,8 @@ public final /* synthetic */ class BatteryStatsImpl$$ExternalSyntheticLambda6 im
     public final /* synthetic */ int f$1;
     public final /* synthetic */ int f$2;
 
-    public /* synthetic */ BatteryStatsImpl$$ExternalSyntheticLambda6(BatteryStatsImpl batteryStatsImpl, int i, int i2, int i3) {
+    public /* synthetic */ BatteryStatsImpl$$ExternalSyntheticLambda6(
+            BatteryStatsImpl batteryStatsImpl, int i, int i2, int i3) {
         this.$r8$classId = i3;
         this.f$0 = batteryStatsImpl;
         this.f$1 = i;
@@ -30,11 +31,18 @@ public final /* synthetic */ class BatteryStatsImpl$$ExternalSyntheticLambda6 im
                 int batteryPermil = batteryStatsImpl.getBatteryPermil();
                 if (batteryStatsImpl.mIsSubScreen) {
                     if (Display.isOnState(i4)) {
-                        int i6 = batteryStatsImpl.mDischargeSubScreenOnUnplugLevelPermil - batteryPermil;
+                        int i6 =
+                                batteryStatsImpl.mDischargeSubScreenOnUnplugLevelPermil
+                                        - batteryPermil;
                         if (i6 > 0) {
                             batteryStatsImpl.mDischargeAmountSubScreenOnSinceChargePermil += i6;
                         }
-                    } else if (Display.isDozeState(i4) && (i = batteryStatsImpl.mDischargeSubScreenDozeUnplugLevelPermil - batteryPermil) > 0) {
+                    } else if (Display.isDozeState(i4)
+                            && (i =
+                                            batteryStatsImpl
+                                                            .mDischargeSubScreenDozeUnplugLevelPermil
+                                                    - batteryPermil)
+                                    > 0) {
                         batteryStatsImpl.mDischargeAmountSubScreenDozeSinceChargePermil += i;
                     }
                 }
@@ -46,7 +54,8 @@ public final /* synthetic */ class BatteryStatsImpl$$ExternalSyntheticLambda6 im
                             break;
                         } else {
                             batteryStatsImpl.mDischargeSubScreenOnUnplugLevelPermil = 0;
-                            batteryStatsImpl.mDischargeSubScreenDozeUnplugLevelPermil = batteryPermil;
+                            batteryStatsImpl.mDischargeSubScreenDozeUnplugLevelPermil =
+                                    batteryPermil;
                             break;
                         }
                     } else {
@@ -68,11 +77,17 @@ public final /* synthetic */ class BatteryStatsImpl$$ExternalSyntheticLambda6 im
                         batteryStatsImpl2.mDischargeAmountScreenOnSinceChargePermil += i9;
                     }
                 } else if (Display.isDozeState(i7)) {
-                    int i10 = batteryStatsImpl2.mDischargeScreenDozeUnplugLevelPermil - batteryPermil2;
+                    int i10 =
+                            batteryStatsImpl2.mDischargeScreenDozeUnplugLevelPermil
+                                    - batteryPermil2;
                     if (i10 > 0) {
                         batteryStatsImpl2.mDischargeAmountScreenDozeSinceChargePermil += i10;
                     }
-                } else if (Display.isOffState(i7) && (i2 = batteryStatsImpl2.mDischargeScreenOffUnplugLevelPermil - batteryPermil2) > 0) {
+                } else if (Display.isOffState(i7)
+                        && (i2 =
+                                        batteryStatsImpl2.mDischargeScreenOffUnplugLevelPermil
+                                                - batteryPermil2)
+                                > 0) {
                     batteryStatsImpl2.mDischargeAmountScreenOffSinceChargePermil += i2;
                 }
                 if (Display.isOnState(i8)) {
@@ -89,28 +104,39 @@ public final /* synthetic */ class BatteryStatsImpl$$ExternalSyntheticLambda6 im
                     batteryStatsImpl2.mDischargeScreenOffUnplugLevelPermil = batteryPermil2;
                 }
                 if (Display.isOnState(i7)) {
-                    int i11 = batteryStatsImpl2.mDischargeScreenOnUnplugLevelCoulombCounter - batteryCCInfo;
+                    int i11 =
+                            batteryStatsImpl2.mDischargeScreenOnUnplugLevelCoulombCounter
+                                    - batteryCCInfo;
                     if (i11 > 0) {
                         batteryStatsImpl2.mDischargeAmountScreenOnSinceChargeCoulombCounter += i11;
                     }
                 } else if (Display.isDozeState(i7)) {
-                    int i12 = batteryStatsImpl2.mDischargeScreenOffUnplugLevelCoulombCounter - batteryCCInfo;
+                    int i12 =
+                            batteryStatsImpl2.mDischargeScreenOffUnplugLevelCoulombCounter
+                                    - batteryCCInfo;
                     if (i12 > 0) {
                         batteryStatsImpl2.mDischargeAmountScreenOffSinceChargeCoulombCounter += i12;
                     }
-                } else if (Display.isOffState(i7) && (i3 = batteryStatsImpl2.mDischargeScreenOffUnplugLevelCoulombCounter - batteryCCInfo) > 0) {
+                } else if (Display.isOffState(i7)
+                        && (i3 =
+                                        batteryStatsImpl2
+                                                        .mDischargeScreenOffUnplugLevelCoulombCounter
+                                                - batteryCCInfo)
+                                > 0) {
                     batteryStatsImpl2.mDischargeAmountScreenOffSinceChargeCoulombCounter += i3;
                 }
                 if (!Display.isOnState(i8)) {
                     if (!Display.isDozeState(i8)) {
                         if (Display.isOffState(i8)) {
                             batteryStatsImpl2.mDischargeScreenOnUnplugLevelCoulombCounter = 0;
-                            batteryStatsImpl2.mDischargeScreenOffUnplugLevelCoulombCounter = batteryCCInfo;
+                            batteryStatsImpl2.mDischargeScreenOffUnplugLevelCoulombCounter =
+                                    batteryCCInfo;
                             break;
                         }
                     } else {
                         batteryStatsImpl2.mDischargeScreenOnUnplugLevelCoulombCounter = 0;
-                        batteryStatsImpl2.mDischargeScreenOffUnplugLevelCoulombCounter = batteryCCInfo;
+                        batteryStatsImpl2.mDischargeScreenOffUnplugLevelCoulombCounter =
+                                batteryCCInfo;
                         break;
                     }
                 } else {

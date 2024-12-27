@@ -1,7 +1,5 @@
 package android.hardware.radio.sim;
 
-import android.hardware.radio.sim.IRadioSimIndication;
-import android.hardware.radio.sim.IRadioSimResponse;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -10,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IRadioSim extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$radio$sim$IRadioSim".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$radio$sim$IRadioSim".replace('$', '.');
     public static final String HASH = "ea7be3035be8d4869237a6478d2e0bb0efcc1e87";
     public static final int VERSION = 3;
 
@@ -28,7 +27,8 @@ public interface IRadioSim extends IInterface {
 
     void getCdmaSubscriptionSource(int i) throws RemoteException;
 
-    void getFacilityLockForApp(int i, String str, String str2, int i2, String str3) throws RemoteException;
+    void getFacilityLockForApp(int i, String str, String str2, int i2, String str3)
+            throws RemoteException;
 
     void getIccCardStatus(int i) throws RemoteException;
 
@@ -45,7 +45,8 @@ public interface IRadioSim extends IInterface {
     @Deprecated
     void iccCloseLogicalChannel(int i, int i2) throws RemoteException;
 
-    void iccCloseLogicalChannelWithSessionInfo(int i, SessionInfo sessionInfo) throws RemoteException;
+    void iccCloseLogicalChannelWithSessionInfo(int i, SessionInfo sessionInfo)
+            throws RemoteException;
 
     void iccIoForApp(int i, IccIo iccIo) throws RemoteException;
 
@@ -67,15 +68,20 @@ public interface IRadioSim extends IInterface {
 
     void sendTerminalResponseToSim(int i, String str) throws RemoteException;
 
-    void setAllowedCarriers(int i, CarrierRestrictions carrierRestrictions, int i2) throws RemoteException;
+    void setAllowedCarriers(int i, CarrierRestrictions carrierRestrictions, int i2)
+            throws RemoteException;
 
-    void setCarrierInfoForImsiEncryption(int i, ImsiEncryptionInfo imsiEncryptionInfo) throws RemoteException;
+    void setCarrierInfoForImsiEncryption(int i, ImsiEncryptionInfo imsiEncryptionInfo)
+            throws RemoteException;
 
     void setCdmaSubscriptionSource(int i, int i2) throws RemoteException;
 
-    void setFacilityLockForApp(int i, String str, boolean z, String str2, int i2, String str3) throws RemoteException;
+    void setFacilityLockForApp(int i, String str, boolean z, String str2, int i2, String str3)
+            throws RemoteException;
 
-    void setResponseFunctions(IRadioSimResponse iRadioSimResponse, IRadioSimIndication iRadioSimIndication) throws RemoteException;
+    void setResponseFunctions(
+            IRadioSimResponse iRadioSimResponse, IRadioSimIndication iRadioSimIndication)
+            throws RemoteException;
 
     void setSimCardPower(int i, int i2) throws RemoteException;
 
@@ -91,156 +97,144 @@ public interface IRadioSim extends IInterface {
 
     void supplySimDepersonalization(int i, int i2, String str) throws RemoteException;
 
-    void updateSimPhonebookRecords(int i, PhonebookRecordInfo phonebookRecordInfo) throws RemoteException;
+    void updateSimPhonebookRecords(int i, PhonebookRecordInfo phonebookRecordInfo)
+            throws RemoteException;
 
     public static class Default implements IRadioSim {
         @Override // android.hardware.radio.sim.IRadioSim
-        public void areUiccApplicationsEnabled(int serial) throws RemoteException {
-        }
+        public void areUiccApplicationsEnabled(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void changeIccPin2ForApp(int serial, String oldPin2, String newPin2, String aid) throws RemoteException {
-        }
+        public void changeIccPin2ForApp(int serial, String oldPin2, String newPin2, String aid)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void changeIccPinForApp(int serial, String oldPin, String newPin, String aid) throws RemoteException {
-        }
+        public void changeIccPinForApp(int serial, String oldPin, String newPin, String aid)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void enableUiccApplications(int serial, boolean enable) throws RemoteException {
-        }
+        public void enableUiccApplications(int serial, boolean enable) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void getAllowedCarriers(int serial) throws RemoteException {
-        }
+        public void getAllowedCarriers(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void getCdmaSubscription(int serial) throws RemoteException {
-        }
+        public void getCdmaSubscription(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void getCdmaSubscriptionSource(int serial) throws RemoteException {
-        }
+        public void getCdmaSubscriptionSource(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void getFacilityLockForApp(int serial, String facility, String password, int serviceClass, String appId) throws RemoteException {
-        }
+        public void getFacilityLockForApp(
+                int serial, String facility, String password, int serviceClass, String appId)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void getIccCardStatus(int serial) throws RemoteException {
-        }
+        public void getIccCardStatus(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void getImsiForApp(int serial, String aid) throws RemoteException {
-        }
+        public void getImsiForApp(int serial, String aid) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void getSimPhonebookCapacity(int serial) throws RemoteException {
-        }
+        public void getSimPhonebookCapacity(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void getSimPhonebookRecords(int serial) throws RemoteException {
-        }
+        public void getSimPhonebookRecords(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void iccCloseLogicalChannel(int serial, int channelId) throws RemoteException {
-        }
+        public void iccCloseLogicalChannel(int serial, int channelId) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void iccIoForApp(int serial, IccIo iccIo) throws RemoteException {
-        }
+        public void iccIoForApp(int serial, IccIo iccIo) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void iccOpenLogicalChannel(int serial, String aid, int p2) throws RemoteException {
-        }
+        public void iccOpenLogicalChannel(int serial, String aid, int p2) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void iccTransmitApduBasicChannel(int serial, SimApdu message) throws RemoteException {
-        }
+        public void iccTransmitApduBasicChannel(int serial, SimApdu message)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void iccTransmitApduLogicalChannel(int serial, SimApdu message) throws RemoteException {
-        }
+        public void iccTransmitApduLogicalChannel(int serial, SimApdu message)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void reportStkServiceIsRunning(int serial) throws RemoteException {
-        }
+        public void reportStkServiceIsRunning(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void requestIccSimAuthentication(int serial, int authContext, String authData, String aid) throws RemoteException {
-        }
+        public void requestIccSimAuthentication(
+                int serial, int authContext, String authData, String aid) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void responseAcknowledgement() throws RemoteException {
-        }
+        public void responseAcknowledgement() throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void sendEnvelope(int serial, String contents) throws RemoteException {
-        }
+        public void sendEnvelope(int serial, String contents) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void sendEnvelopeWithStatus(int serial, String contents) throws RemoteException {
-        }
+        public void sendEnvelopeWithStatus(int serial, String contents) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void sendTerminalResponseToSim(int serial, String contents) throws RemoteException {
-        }
+        public void sendTerminalResponseToSim(int serial, String contents) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void setAllowedCarriers(int serial, CarrierRestrictions carriers, int multiSimPolicy) throws RemoteException {
-        }
+        public void setAllowedCarriers(int serial, CarrierRestrictions carriers, int multiSimPolicy)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void setCarrierInfoForImsiEncryption(int serial, ImsiEncryptionInfo imsiEncryptionInfo) throws RemoteException {
-        }
+        public void setCarrierInfoForImsiEncryption(
+                int serial, ImsiEncryptionInfo imsiEncryptionInfo) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void setCdmaSubscriptionSource(int serial, int cdmaSub) throws RemoteException {
-        }
+        public void setCdmaSubscriptionSource(int serial, int cdmaSub) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void setFacilityLockForApp(int serial, String facility, boolean lockState, String password, int serviceClass, String appId) throws RemoteException {
-        }
+        public void setFacilityLockForApp(
+                int serial,
+                String facility,
+                boolean lockState,
+                String password,
+                int serviceClass,
+                String appId)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void setResponseFunctions(IRadioSimResponse radioSimResponse, IRadioSimIndication radioSimIndication) throws RemoteException {
-        }
+        public void setResponseFunctions(
+                IRadioSimResponse radioSimResponse, IRadioSimIndication radioSimIndication)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void setSimCardPower(int serial, int powerUp) throws RemoteException {
-        }
+        public void setSimCardPower(int serial, int powerUp) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void setUiccSubscription(int serial, SelectUiccSub uiccSub) throws RemoteException {
-        }
+        public void setUiccSubscription(int serial, SelectUiccSub uiccSub) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void supplyIccPin2ForApp(int serial, String pin2, String aid) throws RemoteException {
-        }
+        public void supplyIccPin2ForApp(int serial, String pin2, String aid)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void supplyIccPinForApp(int serial, String pin, String aid) throws RemoteException {
-        }
+        public void supplyIccPinForApp(int serial, String pin, String aid) throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void supplyIccPuk2ForApp(int serial, String puk2, String pin2, String aid) throws RemoteException {
-        }
+        public void supplyIccPuk2ForApp(int serial, String puk2, String pin2, String aid)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void supplyIccPukForApp(int serial, String puk, String pin, String aid) throws RemoteException {
-        }
+        public void supplyIccPukForApp(int serial, String puk, String pin, String aid)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void supplySimDepersonalization(int serial, int persoType, String controlKey) throws RemoteException {
-        }
+        public void supplySimDepersonalization(int serial, int persoType, String controlKey)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void updateSimPhonebookRecords(int serial, PhonebookRecordInfo recordInfo) throws RemoteException {
-        }
+        public void updateSimPhonebookRecords(int serial, PhonebookRecordInfo recordInfo)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
-        public void iccCloseLogicalChannelWithSessionInfo(int serial, SessionInfo sessionInfo) throws RemoteException {
-        }
+        public void iccCloseLogicalChannelWithSessionInfo(int serial, SessionInfo sessionInfo)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.sim.IRadioSim
         public int getInterfaceVersion() {
@@ -258,7 +252,7 @@ public interface IRadioSim extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRadioSim {
+    public abstract static class Stub extends Binder implements IRadioSim {
         static final int TRANSACTION_areUiccApplicationsEnabled = 1;
         static final int TRANSACTION_changeIccPin2ForApp = 2;
         static final int TRANSACTION_changeIccPinForApp = 3;
@@ -321,7 +315,8 @@ public interface IRadioSim extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -480,14 +475,16 @@ public interface IRadioSim extends IInterface {
                     return true;
                 case 24:
                     int _arg023 = data.readInt();
-                    CarrierRestrictions _arg115 = (CarrierRestrictions) data.readTypedObject(CarrierRestrictions.CREATOR);
+                    CarrierRestrictions _arg115 =
+                            (CarrierRestrictions) data.readTypedObject(CarrierRestrictions.CREATOR);
                     int _arg26 = data.readInt();
                     data.enforceNoDataAvail();
                     setAllowedCarriers(_arg023, _arg115, _arg26);
                     return true;
                 case 25:
                     int _arg024 = data.readInt();
-                    ImsiEncryptionInfo _arg116 = (ImsiEncryptionInfo) data.readTypedObject(ImsiEncryptionInfo.CREATOR);
+                    ImsiEncryptionInfo _arg116 =
+                            (ImsiEncryptionInfo) data.readTypedObject(ImsiEncryptionInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setCarrierInfoForImsiEncryption(_arg024, _arg116);
                     return true;
@@ -508,8 +505,10 @@ public interface IRadioSim extends IInterface {
                     setFacilityLockForApp(_arg026, _arg118, _arg27, _arg35, _arg42, _arg5);
                     return true;
                 case 28:
-                    IRadioSimResponse _arg027 = IRadioSimResponse.Stub.asInterface(data.readStrongBinder());
-                    IRadioSimIndication _arg119 = IRadioSimIndication.Stub.asInterface(data.readStrongBinder());
+                    IRadioSimResponse _arg027 =
+                            IRadioSimResponse.Stub.asInterface(data.readStrongBinder());
+                    IRadioSimIndication _arg119 =
+                            IRadioSimIndication.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setResponseFunctions(_arg027, _arg119);
                     return true;
@@ -521,7 +520,8 @@ public interface IRadioSim extends IInterface {
                     return true;
                 case 30:
                     int _arg029 = data.readInt();
-                    SelectUiccSub _arg121 = (SelectUiccSub) data.readTypedObject(SelectUiccSub.CREATOR);
+                    SelectUiccSub _arg121 =
+                            (SelectUiccSub) data.readTypedObject(SelectUiccSub.CREATOR);
                     data.enforceNoDataAvail();
                     setUiccSubscription(_arg029, _arg121);
                     return true;
@@ -564,7 +564,8 @@ public interface IRadioSim extends IInterface {
                     return true;
                 case 36:
                     int _arg035 = data.readInt();
-                    PhonebookRecordInfo _arg127 = (PhonebookRecordInfo) data.readTypedObject(PhonebookRecordInfo.CREATOR);
+                    PhonebookRecordInfo _arg127 =
+                            (PhonebookRecordInfo) data.readTypedObject(PhonebookRecordInfo.CREATOR);
                     data.enforceNoDataAvail();
                     updateSimPhonebookRecords(_arg035, _arg127);
                     return true;
@@ -605,7 +606,8 @@ public interface IRadioSim extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(1, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method areUiccApplicationsEnabled is unimplemented.");
+                        throw new RemoteException(
+                                "Method areUiccApplicationsEnabled is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -613,7 +615,8 @@ public interface IRadioSim extends IInterface {
             }
 
             @Override // android.hardware.radio.sim.IRadioSim
-            public void changeIccPin2ForApp(int serial, String oldPin2, String newPin2, String aid) throws RemoteException {
+            public void changeIccPin2ForApp(int serial, String oldPin2, String newPin2, String aid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -631,7 +634,8 @@ public interface IRadioSim extends IInterface {
             }
 
             @Override // android.hardware.radio.sim.IRadioSim
-            public void changeIccPinForApp(int serial, String oldPin, String newPin, String aid) throws RemoteException {
+            public void changeIccPinForApp(int serial, String oldPin, String newPin, String aid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -657,7 +661,8 @@ public interface IRadioSim extends IInterface {
                     _data.writeBoolean(enable);
                     boolean _status = this.mRemote.transact(4, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method enableUiccApplications is unimplemented.");
+                        throw new RemoteException(
+                                "Method enableUiccApplications is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -702,7 +707,8 @@ public interface IRadioSim extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(7, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getCdmaSubscriptionSource is unimplemented.");
+                        throw new RemoteException(
+                                "Method getCdmaSubscriptionSource is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -710,7 +716,9 @@ public interface IRadioSim extends IInterface {
             }
 
             @Override // android.hardware.radio.sim.IRadioSim
-            public void getFacilityLockForApp(int serial, String facility, String password, int serviceClass, String appId) throws RemoteException {
+            public void getFacilityLockForApp(
+                    int serial, String facility, String password, int serviceClass, String appId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -767,7 +775,8 @@ public interface IRadioSim extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(11, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getSimPhonebookCapacity is unimplemented.");
+                        throw new RemoteException(
+                                "Method getSimPhonebookCapacity is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -782,7 +791,8 @@ public interface IRadioSim extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(12, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getSimPhonebookRecords is unimplemented.");
+                        throw new RemoteException(
+                                "Method getSimPhonebookRecords is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -798,7 +808,8 @@ public interface IRadioSim extends IInterface {
                     _data.writeInt(channelId);
                     boolean _status = this.mRemote.transact(13, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method iccCloseLogicalChannel is unimplemented.");
+                        throw new RemoteException(
+                                "Method iccCloseLogicalChannel is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -822,7 +833,8 @@ public interface IRadioSim extends IInterface {
             }
 
             @Override // android.hardware.radio.sim.IRadioSim
-            public void iccOpenLogicalChannel(int serial, String aid, int p2) throws RemoteException {
+            public void iccOpenLogicalChannel(int serial, String aid, int p2)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -839,7 +851,8 @@ public interface IRadioSim extends IInterface {
             }
 
             @Override // android.hardware.radio.sim.IRadioSim
-            public void iccTransmitApduBasicChannel(int serial, SimApdu message) throws RemoteException {
+            public void iccTransmitApduBasicChannel(int serial, SimApdu message)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -847,7 +860,8 @@ public interface IRadioSim extends IInterface {
                     _data.writeTypedObject(message, 0);
                     boolean _status = this.mRemote.transact(16, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method iccTransmitApduBasicChannel is unimplemented.");
+                        throw new RemoteException(
+                                "Method iccTransmitApduBasicChannel is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -855,7 +869,8 @@ public interface IRadioSim extends IInterface {
             }
 
             @Override // android.hardware.radio.sim.IRadioSim
-            public void iccTransmitApduLogicalChannel(int serial, SimApdu message) throws RemoteException {
+            public void iccTransmitApduLogicalChannel(int serial, SimApdu message)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -863,7 +878,8 @@ public interface IRadioSim extends IInterface {
                     _data.writeTypedObject(message, 0);
                     boolean _status = this.mRemote.transact(17, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method iccTransmitApduLogicalChannel is unimplemented.");
+                        throw new RemoteException(
+                                "Method iccTransmitApduLogicalChannel is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -878,7 +894,8 @@ public interface IRadioSim extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(18, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method reportStkServiceIsRunning is unimplemented.");
+                        throw new RemoteException(
+                                "Method reportStkServiceIsRunning is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -886,7 +903,9 @@ public interface IRadioSim extends IInterface {
             }
 
             @Override // android.hardware.radio.sim.IRadioSim
-            public void requestIccSimAuthentication(int serial, int authContext, String authData, String aid) throws RemoteException {
+            public void requestIccSimAuthentication(
+                    int serial, int authContext, String authData, String aid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -896,7 +915,8 @@ public interface IRadioSim extends IInterface {
                     _data.writeString(aid);
                     boolean _status = this.mRemote.transact(19, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method requestIccSimAuthentication is unimplemented.");
+                        throw new RemoteException(
+                                "Method requestIccSimAuthentication is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -910,7 +930,8 @@ public interface IRadioSim extends IInterface {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(20, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method responseAcknowledgement is unimplemented.");
+                        throw new RemoteException(
+                                "Method responseAcknowledgement is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -942,7 +963,8 @@ public interface IRadioSim extends IInterface {
                     _data.writeString(contents);
                     boolean _status = this.mRemote.transact(22, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method sendEnvelopeWithStatus is unimplemented.");
+                        throw new RemoteException(
+                                "Method sendEnvelopeWithStatus is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -950,7 +972,8 @@ public interface IRadioSim extends IInterface {
             }
 
             @Override // android.hardware.radio.sim.IRadioSim
-            public void sendTerminalResponseToSim(int serial, String contents) throws RemoteException {
+            public void sendTerminalResponseToSim(int serial, String contents)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -958,7 +981,8 @@ public interface IRadioSim extends IInterface {
                     _data.writeString(contents);
                     boolean _status = this.mRemote.transact(23, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method sendTerminalResponseToSim is unimplemented.");
+                        throw new RemoteException(
+                                "Method sendTerminalResponseToSim is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -966,7 +990,9 @@ public interface IRadioSim extends IInterface {
             }
 
             @Override // android.hardware.radio.sim.IRadioSim
-            public void setAllowedCarriers(int serial, CarrierRestrictions carriers, int multiSimPolicy) throws RemoteException {
+            public void setAllowedCarriers(
+                    int serial, CarrierRestrictions carriers, int multiSimPolicy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -983,7 +1009,8 @@ public interface IRadioSim extends IInterface {
             }
 
             @Override // android.hardware.radio.sim.IRadioSim
-            public void setCarrierInfoForImsiEncryption(int serial, ImsiEncryptionInfo imsiEncryptionInfo) throws RemoteException {
+            public void setCarrierInfoForImsiEncryption(
+                    int serial, ImsiEncryptionInfo imsiEncryptionInfo) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -991,7 +1018,8 @@ public interface IRadioSim extends IInterface {
                     _data.writeTypedObject(imsiEncryptionInfo, 0);
                     boolean _status = this.mRemote.transact(25, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setCarrierInfoForImsiEncryption is unimplemented.");
+                        throw new RemoteException(
+                                "Method setCarrierInfoForImsiEncryption is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1007,7 +1035,8 @@ public interface IRadioSim extends IInterface {
                     _data.writeInt(cdmaSub);
                     boolean _status = this.mRemote.transact(26, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setCdmaSubscriptionSource is unimplemented.");
+                        throw new RemoteException(
+                                "Method setCdmaSubscriptionSource is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1015,7 +1044,14 @@ public interface IRadioSim extends IInterface {
             }
 
             @Override // android.hardware.radio.sim.IRadioSim
-            public void setFacilityLockForApp(int serial, String facility, boolean lockState, String password, int serviceClass, String appId) throws RemoteException {
+            public void setFacilityLockForApp(
+                    int serial,
+                    String facility,
+                    boolean lockState,
+                    String password,
+                    int serviceClass,
+                    String appId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1035,7 +1071,9 @@ public interface IRadioSim extends IInterface {
             }
 
             @Override // android.hardware.radio.sim.IRadioSim
-            public void setResponseFunctions(IRadioSimResponse radioSimResponse, IRadioSimIndication radioSimIndication) throws RemoteException {
+            public void setResponseFunctions(
+                    IRadioSimResponse radioSimResponse, IRadioSimIndication radioSimIndication)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1067,7 +1105,8 @@ public interface IRadioSim extends IInterface {
             }
 
             @Override // android.hardware.radio.sim.IRadioSim
-            public void setUiccSubscription(int serial, SelectUiccSub uiccSub) throws RemoteException {
+            public void setUiccSubscription(int serial, SelectUiccSub uiccSub)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1083,7 +1122,8 @@ public interface IRadioSim extends IInterface {
             }
 
             @Override // android.hardware.radio.sim.IRadioSim
-            public void supplyIccPin2ForApp(int serial, String pin2, String aid) throws RemoteException {
+            public void supplyIccPin2ForApp(int serial, String pin2, String aid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1100,7 +1140,8 @@ public interface IRadioSim extends IInterface {
             }
 
             @Override // android.hardware.radio.sim.IRadioSim
-            public void supplyIccPinForApp(int serial, String pin, String aid) throws RemoteException {
+            public void supplyIccPinForApp(int serial, String pin, String aid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1117,7 +1158,8 @@ public interface IRadioSim extends IInterface {
             }
 
             @Override // android.hardware.radio.sim.IRadioSim
-            public void supplyIccPuk2ForApp(int serial, String puk2, String pin2, String aid) throws RemoteException {
+            public void supplyIccPuk2ForApp(int serial, String puk2, String pin2, String aid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1135,7 +1177,8 @@ public interface IRadioSim extends IInterface {
             }
 
             @Override // android.hardware.radio.sim.IRadioSim
-            public void supplyIccPukForApp(int serial, String puk, String pin, String aid) throws RemoteException {
+            public void supplyIccPukForApp(int serial, String puk, String pin, String aid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1153,7 +1196,8 @@ public interface IRadioSim extends IInterface {
             }
 
             @Override // android.hardware.radio.sim.IRadioSim
-            public void supplySimDepersonalization(int serial, int persoType, String controlKey) throws RemoteException {
+            public void supplySimDepersonalization(int serial, int persoType, String controlKey)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1162,7 +1206,8 @@ public interface IRadioSim extends IInterface {
                     _data.writeString(controlKey);
                     boolean _status = this.mRemote.transact(35, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method supplySimDepersonalization is unimplemented.");
+                        throw new RemoteException(
+                                "Method supplySimDepersonalization is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1170,7 +1215,8 @@ public interface IRadioSim extends IInterface {
             }
 
             @Override // android.hardware.radio.sim.IRadioSim
-            public void updateSimPhonebookRecords(int serial, PhonebookRecordInfo recordInfo) throws RemoteException {
+            public void updateSimPhonebookRecords(int serial, PhonebookRecordInfo recordInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1178,7 +1224,8 @@ public interface IRadioSim extends IInterface {
                     _data.writeTypedObject(recordInfo, 0);
                     boolean _status = this.mRemote.transact(36, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method updateSimPhonebookRecords is unimplemented.");
+                        throw new RemoteException(
+                                "Method updateSimPhonebookRecords is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -1186,7 +1233,8 @@ public interface IRadioSim extends IInterface {
             }
 
             @Override // android.hardware.radio.sim.IRadioSim
-            public void iccCloseLogicalChannelWithSessionInfo(int serial, SessionInfo sessionInfo) throws RemoteException {
+            public void iccCloseLogicalChannelWithSessionInfo(int serial, SessionInfo sessionInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -1194,7 +1242,8 @@ public interface IRadioSim extends IInterface {
                     _data.writeTypedObject(sessionInfo, 0);
                     boolean _status = this.mRemote.transact(37, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method iccCloseLogicalChannelWithSessionInfo is unimplemented.");
+                        throw new RemoteException(
+                                "Method iccCloseLogicalChannelWithSessionInfo is unimplemented.");
                     }
                 } finally {
                     _data.recycle();

@@ -62,7 +62,8 @@ public class ChildZygoteInit {
                 throw new RuntimeException("Passed in UID range is invalid, min > max.");
             }
             if (uidGidMin < 90000) {
-                throw new RuntimeException("Passed in UID range does not map to isolated processes.");
+                throw new RuntimeException(
+                        "Passed in UID range does not map to isolated processes.");
             }
             Zygote.nativeInstallSeccompUidGidFilter(uidGidMin, uidGidMax);
             try {

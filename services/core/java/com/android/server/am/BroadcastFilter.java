@@ -2,6 +2,7 @@ package com.android.server.am;
 
 import android.content.IntentFilter;
 import android.util.proto.ProtoOutputStream;
+
 import dalvik.annotation.optimization.NeverCompile;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -18,7 +19,18 @@ public final class BroadcastFilter extends IntentFilter {
     public final String requiredPermission;
     public final boolean visibleToInstantApp;
 
-    public BroadcastFilter(IntentFilter intentFilter, ReceiverList receiverList, String str, String str2, String str3, String str4, int i, int i2, boolean z, boolean z2, boolean z3) {
+    public BroadcastFilter(
+            IntentFilter intentFilter,
+            ReceiverList receiverList,
+            String str,
+            String str2,
+            String str3,
+            String str4,
+            int i,
+            int i2,
+            boolean z,
+            boolean z2,
+            boolean z3) {
         super(intentFilter);
         this.receiverList = receiverList;
         this.packageName = str;
@@ -46,6 +58,14 @@ public final class BroadcastFilter extends IntentFilter {
     }
 
     public final String toString() {
-        return "BroadcastFilter{" + Integer.toHexString(System.identityHashCode(this)) + ' ' + this.owningUid + "/u" + this.owningUserId + ' ' + this.receiverList + '}';
+        return "BroadcastFilter{"
+                + Integer.toHexString(System.identityHashCode(this))
+                + ' '
+                + this.owningUid
+                + "/u"
+                + this.owningUserId
+                + ' '
+                + this.receiverList
+                + '}';
     }
 }

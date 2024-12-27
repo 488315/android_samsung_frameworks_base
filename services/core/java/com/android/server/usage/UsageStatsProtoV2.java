@@ -12,8 +12,9 @@ import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.util.proto.ProtoInputStream;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.server.VaultKeeperService$$ExternalSyntheticOutline0;
-import com.android.server.usage.IntervalStats;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -47,7 +48,8 @@ public abstract class UsageStatsProtoV2 {
                 return;
             }
             if (nextField == 1) {
-                usageStats.mChooserCountsObfuscated.put(protoInputStream.readInt(1120986464257L) - 1, sparseIntArray);
+                usageStats.mChooserCountsObfuscated.put(
+                        protoInputStream.readInt(1120986464257L) - 1, sparseIntArray);
             } else if (nextField == 2) {
                 long start = protoInputStream.start(2246267895810L);
                 int i = 0;
@@ -71,7 +73,8 @@ public abstract class UsageStatsProtoV2 {
         }
     }
 
-    public static void loadConfigStats(ProtoInputStream protoInputStream, IntervalStats intervalStats) {
+    public static void loadConfigStats(
+            ProtoInputStream protoInputStream, IntervalStats intervalStats) {
         Configuration configuration = new Configuration();
         ConfigurationStats configurationStats = new ConfigurationStats();
         boolean z = false;
@@ -86,13 +89,15 @@ public abstract class UsageStatsProtoV2 {
             }
             if (nextField == 1) {
                 configuration.readFromProto(protoInputStream, 1146756268033L);
-                ConfigurationStats orCreateConfigurationStats = intervalStats.getOrCreateConfigurationStats(configuration);
+                ConfigurationStats orCreateConfigurationStats =
+                        intervalStats.getOrCreateConfigurationStats(configuration);
                 orCreateConfigurationStats.mLastTimeActive = configurationStats.mLastTimeActive;
                 orCreateConfigurationStats.mTotalTimeActive = configurationStats.mTotalTimeActive;
                 orCreateConfigurationStats.mActivationCount = configurationStats.mActivationCount;
                 configurationStats = orCreateConfigurationStats;
             } else if (nextField == 2) {
-                configurationStats.mLastTimeActive = protoInputStream.readLong(1112396529666L) + intervalStats.beginTime;
+                configurationStats.mLastTimeActive =
+                        protoInputStream.readLong(1112396529666L) + intervalStats.beginTime;
             } else if (nextField == 3) {
                 configurationStats.mTotalTimeActive = protoInputStream.readLong(1112396529667L);
             } else if (nextField == 4) {
@@ -106,7 +111,8 @@ public abstract class UsageStatsProtoV2 {
         }
     }
 
-    public static void loadCountAndTime(ProtoInputStream protoInputStream, long j, IntervalStats.EventTracker eventTracker) {
+    public static void loadCountAndTime(
+            ProtoInputStream protoInputStream, long j, IntervalStats.EventTracker eventTracker) {
         try {
             long start = protoInputStream.start(j);
             while (true) {
@@ -126,22 +132,23 @@ public abstract class UsageStatsProtoV2 {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:73:0x00fb, code lost:
-    
-        if (r0.mPackageToken != (-1)) goto L80;
-     */
+
+       if (r0.mPackageToken != (-1)) goto L80;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:74:0x00fd, code lost:
-    
-        return null;
-     */
+
+       return null;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:76:?, code lost:
-    
-        return r0;
-     */
+
+       return r0;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.app.usage.UsageEvents.Event parseEvent(android.util.proto.ProtoInputStream r12, long r13) {
+    public static android.app.usage.UsageEvents.Event parseEvent(
+            android.util.proto.ProtoInputStream r12, long r13) {
         /*
             android.app.usage.UsageEvents$Event r0 = new android.app.usage.UsageEvents$Event
             r0.<init>()
@@ -284,66 +291,70 @@ public abstract class UsageStatsProtoV2 {
         Lfe:
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.usage.UsageStatsProtoV2.parseEvent(android.util.proto.ProtoInputStream, long):android.app.usage.UsageEvents$Event");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.usage.UsageStatsProtoV2.parseEvent(android.util.proto.ProtoInputStream,"
+                    + " long):android.app.usage.UsageEvents$Event");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:45:0x00bb, code lost:
-    
-        r4 = r0.mEventType;
-     */
+
+       r4 = r0.mEventType;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:46:0x00be, code lost:
-    
-        if (r4 == 5) goto L32;
-     */
+
+       if (r4 == 5) goto L32;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:48:0x00c4, code lost:
-    
-        if (r4 == 8) goto L29;
-     */
+
+       if (r4 == 8) goto L29;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:50:0x00c8, code lost:
-    
-        if (r4 == 12) goto L26;
-     */
+
+       if (r4 == 12) goto L26;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:52:0x00cd, code lost:
-    
-        if (r0.mNotificationChannelId != null) goto L35;
-     */
+
+       if (r0.mNotificationChannelId != null) goto L35;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:53:0x00cf, code lost:
-    
-        r0.mNotificationChannelId = "";
-     */
+
+       r0.mNotificationChannelId = "";
+    */
     /* JADX WARN: Code restructure failed: missing block: B:55:0x00e6, code lost:
-    
-        if (r0.mPackage != null) goto L68;
-     */
+
+       if (r0.mPackage != null) goto L68;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:56:0x00e8, code lost:
-    
-        return null;
-     */
+
+       return null;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:58:?, code lost:
-    
-        return r0;
-     */
+
+       return r0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:60:0x00d4, code lost:
-    
-        if (r0.mShortcutId != null) goto L35;
-     */
+
+       if (r0.mShortcutId != null) goto L35;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:61:0x00d6, code lost:
-    
-        r0.mShortcutId = "";
-     */
+
+       r0.mShortcutId = "";
+    */
     /* JADX WARN: Code restructure failed: missing block: B:63:0x00db, code lost:
-    
-        if (r0.mConfiguration != null) goto L35;
-     */
+
+       if (r0.mConfiguration != null) goto L35;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:64:0x00dd, code lost:
-    
-        r0.mConfiguration = new android.content.res.Configuration();
-     */
+
+       r0.mConfiguration = new android.content.res.Configuration();
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.app.usage.UsageEvents.Event parsePendingEvent(android.util.proto.ProtoInputStream r4) {
+    public static android.app.usage.UsageEvents.Event parsePendingEvent(
+            android.util.proto.ProtoInputStream r4) {
         /*
             android.app.usage.UsageEvents$Event r0 = new android.app.usage.UsageEvents$Event
             r0.<init>()
@@ -473,7 +484,9 @@ public abstract class UsageStatsProtoV2 {
         Le9:
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.usage.UsageStatsProtoV2.parsePendingEvent(android.util.proto.ProtoInputStream):android.app.usage.UsageEvents$Event");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.usage.UsageStatsProtoV2.parsePendingEvent(android.util.proto.ProtoInputStream):android.app.usage.UsageEvents$Event");
     }
 
     public static UsageStats parseUsageStats(ProtoInputStream protoInputStream, long j) {
@@ -499,14 +512,19 @@ public abstract class UsageStatsProtoV2 {
                             protoInputStream.end(start);
                             break;
                         } catch (IOException unused) {
-                            VaultKeeperService$$ExternalSyntheticOutline0.m(new StringBuilder("Unable to read chooser counts for "), usageStats.mPackageToken, "UsageStatsProtoV2");
+                            VaultKeeperService$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("Unable to read chooser counts for "),
+                                    usageStats.mPackageToken,
+                                    "UsageStatsProtoV2");
                             break;
                         }
                     case 8:
-                        usageStats.mLastTimeForegroundServiceUsed = protoInputStream.readLong(1112396529672L) + j;
+                        usageStats.mLastTimeForegroundServiceUsed =
+                                protoInputStream.readLong(1112396529672L) + j;
                         break;
                     case 9:
-                        usageStats.mTotalTimeForegroundServiceUsed = protoInputStream.readLong(1112396529673L);
+                        usageStats.mTotalTimeForegroundServiceUsed =
+                                protoInputStream.readLong(1112396529673L);
                         break;
                     case 10:
                         usageStats.mLastTimeVisible = protoInputStream.readLong(1112396529674L) + j;
@@ -515,7 +533,8 @@ public abstract class UsageStatsProtoV2 {
                         usageStats.mTotalTimeVisible = protoInputStream.readLong(1112396529675L);
                         break;
                     case 12:
-                        usageStats.mLastTimeComponentUsed = protoInputStream.readLong(1112396529676L) + j;
+                        usageStats.mLastTimeComponentUsed =
+                                protoInputStream.readLong(1112396529676L) + j;
                         break;
                 }
             } else {
@@ -531,46 +550,64 @@ public abstract class UsageStatsProtoV2 {
             if (nextField == -1) {
                 int size = intervalStats.packageStatsObfuscated.size();
                 for (int i = 0; i < size; i++) {
-                    UsageStats usageStats = (UsageStats) intervalStats.packageStatsObfuscated.valueAt(i);
+                    UsageStats usageStats =
+                            (UsageStats) intervalStats.packageStatsObfuscated.valueAt(i);
                     usageStats.mBeginTimeStamp = intervalStats.beginTime;
                     usageStats.mEndTimeStamp = intervalStats.endTime;
                 }
                 return;
             }
             if (nextField == 1) {
-                intervalStats.endTime = protoInputStream.readLong(1112396529665L) + intervalStats.beginTime;
+                intervalStats.endTime =
+                        protoInputStream.readLong(1112396529665L) + intervalStats.beginTime;
             } else if (nextField == 2) {
                 intervalStats.majorVersion = protoInputStream.readInt(1120986464258L);
             } else if (nextField != 3) {
                 switch (nextField) {
                     case 10:
-                        loadCountAndTime(protoInputStream, 1146756268042L, intervalStats.interactiveTracker);
+                        loadCountAndTime(
+                                protoInputStream, 1146756268042L, intervalStats.interactiveTracker);
                         break;
                     case 11:
-                        loadCountAndTime(protoInputStream, 1146756268043L, intervalStats.nonInteractiveTracker);
+                        loadCountAndTime(
+                                protoInputStream,
+                                1146756268043L,
+                                intervalStats.nonInteractiveTracker);
                         break;
                     case 12:
-                        loadCountAndTime(protoInputStream, 1146756268044L, intervalStats.keyguardShownTracker);
+                        loadCountAndTime(
+                                protoInputStream,
+                                1146756268044L,
+                                intervalStats.keyguardShownTracker);
                         break;
                     case 13:
-                        loadCountAndTime(protoInputStream, 1146756268045L, intervalStats.keyguardHiddenTracker);
+                        loadCountAndTime(
+                                protoInputStream,
+                                1146756268045L,
+                                intervalStats.keyguardHiddenTracker);
                         break;
                     default:
                         switch (nextField) {
                             case 20:
                                 try {
                                     long start = protoInputStream.start(2246267895828L);
-                                    UsageStats parseUsageStats = parseUsageStats(protoInputStream, intervalStats.beginTime);
+                                    UsageStats parseUsageStats =
+                                            parseUsageStats(
+                                                    protoInputStream, intervalStats.beginTime);
                                     protoInputStream.end(start);
                                     int i2 = parseUsageStats.mPackageToken;
                                     if (i2 != -1) {
-                                        intervalStats.packageStatsObfuscated.put(i2, parseUsageStats);
+                                        intervalStats.packageStatsObfuscated.put(
+                                                i2, parseUsageStats);
                                         break;
                                     } else {
                                         break;
                                     }
                                 } catch (IOException e) {
-                                    Slog.e("UsageStatsProtoV2", "Unable to read some usage stats from proto.", e);
+                                    Slog.e(
+                                            "UsageStatsProtoV2",
+                                            "Unable to read some usage stats from proto.",
+                                            e);
                                     break;
                                 }
                             case 21:
@@ -580,7 +617,10 @@ public abstract class UsageStatsProtoV2 {
                                     protoInputStream.end(start2);
                                     break;
                                 } catch (IOException e2) {
-                                    Slog.e("UsageStatsProtoV2", "Unable to read some configuration stats from proto.", e2);
+                                    Slog.e(
+                                            "UsageStatsProtoV2",
+                                            "Unable to read some configuration stats from proto.",
+                                            e2);
                                     break;
                                 }
                             case 22:
@@ -589,7 +629,9 @@ public abstract class UsageStatsProtoV2 {
                                 } else {
                                     try {
                                         long start3 = protoInputStream.start(2246267895830L);
-                                        UsageEvents.Event parseEvent = parseEvent(protoInputStream, intervalStats.beginTime);
+                                        UsageEvents.Event parseEvent =
+                                                parseEvent(
+                                                        protoInputStream, intervalStats.beginTime);
                                         protoInputStream.end(start3);
                                         if (parseEvent != null) {
                                             intervalStats.events.insert(parseEvent);
@@ -598,7 +640,10 @@ public abstract class UsageStatsProtoV2 {
                                             break;
                                         }
                                     } catch (IOException e3) {
-                                        Slog.e("UsageStatsProtoV2", "Unable to read some events from proto.", e3);
+                                        Slog.e(
+                                                "UsageStatsProtoV2",
+                                                "Unable to read some events from proto.",
+                                                e3);
                                         break;
                                     }
                                 }
@@ -639,13 +684,17 @@ public abstract class UsageStatsProtoV2 {
                         ((ArrayMap) map).put((String) pair.first, (Long) pair.second);
                     }
                 } catch (IOException e) {
-                    Slog.e("UsageStatsProtoV2", "Unable to parse some package usage from proto.", e);
+                    Slog.e(
+                            "UsageStatsProtoV2",
+                            "Unable to parse some package usage from proto.",
+                            e);
                 }
             }
         }
     }
 
-    public static void readObfuscatedData(InputStream inputStream, PackagesTokenData packagesTokenData) {
+    public static void readObfuscatedData(
+            InputStream inputStream, PackagesTokenData packagesTokenData) {
         ProtoInputStream protoInputStream = new ProtoInputStream(inputStream);
         while (true) {
             int nextField = protoInputStream.nextField();
@@ -689,21 +738,31 @@ public abstract class UsageStatsProtoV2 {
         protoOutputStream.write(1120986464259L, intervalStats.minorVersion);
         try {
             IntervalStats.EventTracker eventTracker = intervalStats.interactiveTracker;
-            writeCountAndTime(eventTracker.count, 1146756268042L, eventTracker.duration, protoOutputStream);
+            writeCountAndTime(
+                    eventTracker.count, 1146756268042L, eventTracker.duration, protoOutputStream);
             IntervalStats.EventTracker eventTracker2 = intervalStats.nonInteractiveTracker;
-            writeCountAndTime(eventTracker2.count, 1146756268043L, eventTracker2.duration, protoOutputStream);
+            writeCountAndTime(
+                    eventTracker2.count, 1146756268043L, eventTracker2.duration, protoOutputStream);
             IntervalStats.EventTracker eventTracker3 = intervalStats.keyguardShownTracker;
-            writeCountAndTime(eventTracker3.count, 1146756268044L, eventTracker3.duration, protoOutputStream);
+            writeCountAndTime(
+                    eventTracker3.count, 1146756268044L, eventTracker3.duration, protoOutputStream);
             IntervalStats.EventTracker eventTracker4 = intervalStats.keyguardHiddenTracker;
-            writeCountAndTime(eventTracker4.count, 1146756268045L, eventTracker4.duration, protoOutputStream);
+            writeCountAndTime(
+                    eventTracker4.count, 1146756268045L, eventTracker4.duration, protoOutputStream);
         } catch (IllegalArgumentException e) {
-            Slog.e("UsageStatsProtoV2", "Unable to write some interval stats trackers to proto.", e);
+            Slog.e(
+                    "UsageStatsProtoV2",
+                    "Unable to write some interval stats trackers to proto.",
+                    e);
         }
         int size = intervalStats.packageStatsObfuscated.size();
         for (int i = 0; i < size; i++) {
             try {
                 long start = protoOutputStream.start(2246267895828L);
-                writeUsageStats(protoOutputStream, intervalStats.beginTime, (UsageStats) intervalStats.packageStatsObfuscated.valueAt(i));
+                writeUsageStats(
+                        protoOutputStream,
+                        intervalStats.beginTime,
+                        (UsageStats) intervalStats.packageStatsObfuscated.valueAt(i));
                 protoOutputStream.end(start);
             } catch (IllegalArgumentException e2) {
                 Slog.e("UsageStatsProtoV2", "Unable to write some usage stats to proto.", e2);
@@ -711,26 +770,34 @@ public abstract class UsageStatsProtoV2 {
         }
         int size2 = intervalStats.configurations.size();
         for (int i2 = 0; i2 < size2; i2++) {
-            boolean equals = intervalStats.activeConfiguration.equals((Configuration) intervalStats.configurations.keyAt(i2));
+            boolean equals =
+                    intervalStats.activeConfiguration.equals(
+                            (Configuration) intervalStats.configurations.keyAt(i2));
             try {
                 long start2 = protoOutputStream.start(2246267895829L);
                 long j2 = intervalStats.beginTime;
-                ConfigurationStats configurationStats = (ConfigurationStats) intervalStats.configurations.valueAt(i2);
+                ConfigurationStats configurationStats =
+                        (ConfigurationStats) intervalStats.configurations.valueAt(i2);
                 configurationStats.mConfiguration.dumpDebug(protoOutputStream, 1146756268033L);
-                writeOffsetTimestamp(protoOutputStream, 1112396529666L, configurationStats.mLastTimeActive, j2);
+                writeOffsetTimestamp(
+                        protoOutputStream, 1112396529666L, configurationStats.mLastTimeActive, j2);
                 protoOutputStream.write(1112396529667L, configurationStats.mTotalTimeActive);
                 protoOutputStream.write(1120986464260L, configurationStats.mActivationCount);
                 protoOutputStream.write(1133871366149L, equals);
                 protoOutputStream.end(start2);
             } catch (IllegalArgumentException e3) {
-                Slog.e("UsageStatsProtoV2", "Unable to write some configuration stats to proto.", e3);
+                Slog.e(
+                        "UsageStatsProtoV2",
+                        "Unable to write some configuration stats to proto.",
+                        e3);
             }
         }
         int size3 = intervalStats.events.size();
         for (int i3 = 0; i3 < size3; i3++) {
             try {
                 long start3 = protoOutputStream.start(2246267895830L);
-                writeEvent(protoOutputStream, intervalStats.beginTime, intervalStats.events.get(i3));
+                writeEvent(
+                        protoOutputStream, intervalStats.beginTime, intervalStats.events.get(i3));
                 protoOutputStream.end(start3);
             } catch (IllegalArgumentException e4) {
                 Slog.e("UsageStatsProtoV2", "Unable to write some events to proto.", e4);
@@ -739,14 +806,16 @@ public abstract class UsageStatsProtoV2 {
         protoOutputStream.flush();
     }
 
-    public static void writeChooserCounts(ProtoOutputStream protoOutputStream, UsageStats usageStats) {
+    public static void writeChooserCounts(
+            ProtoOutputStream protoOutputStream, UsageStats usageStats) {
         if (usageStats == null || usageStats.mChooserCountsObfuscated.size() == 0) {
             return;
         }
         int size = usageStats.mChooserCountsObfuscated.size();
         for (int i = 0; i < size; i++) {
             int keyAt = usageStats.mChooserCountsObfuscated.keyAt(i);
-            SparseIntArray sparseIntArray = (SparseIntArray) usageStats.mChooserCountsObfuscated.valueAt(i);
+            SparseIntArray sparseIntArray =
+                    (SparseIntArray) usageStats.mChooserCountsObfuscated.valueAt(i);
             if (sparseIntArray != null && sparseIntArray.size() != 0) {
                 long start = protoOutputStream.start(2246267895815L);
                 long j = 1120986464257L;
@@ -770,14 +839,16 @@ public abstract class UsageStatsProtoV2 {
         }
     }
 
-    public static void writeCountAndTime(int i, long j, long j2, ProtoOutputStream protoOutputStream) {
+    public static void writeCountAndTime(
+            int i, long j, long j2, ProtoOutputStream protoOutputStream) {
         long start = protoOutputStream.start(j);
         protoOutputStream.write(1120986464257L, i);
         protoOutputStream.write(1112396529666L, j2);
         protoOutputStream.end(start);
     }
 
-    public static void writeEvent(ProtoOutputStream protoOutputStream, long j, UsageEvents.Event event) {
+    public static void writeEvent(
+            ProtoOutputStream protoOutputStream, long j, UsageEvents.Event event) {
         int i;
         protoOutputStream.write(1120986464257L, event.mPackageToken + 1);
         int i2 = event.mClassToken;
@@ -814,11 +885,14 @@ public abstract class UsageStatsProtoV2 {
             return;
         }
         if (i5 == 7) {
-            UsageEvents.Event.UserInteractionEventExtrasToken userInteractionEventExtrasToken = event.mUserInteractionExtrasToken;
+            UsageEvents.Event.UserInteractionEventExtrasToken userInteractionEventExtrasToken =
+                    event.mUserInteractionExtrasToken;
             if (userInteractionEventExtrasToken != null) {
                 long start = protoOutputStream.start(1146756268046L);
-                protoOutputStream.write(1120986464257L, userInteractionEventExtrasToken.mCategoryToken + 1);
-                protoOutputStream.write(1120986464258L, userInteractionEventExtrasToken.mActionToken + 1);
+                protoOutputStream.write(
+                        1120986464257L, userInteractionEventExtrasToken.mCategoryToken + 1);
+                protoOutputStream.write(
+                        1120986464258L, userInteractionEventExtrasToken.mActionToken + 1);
                 protoOutputStream.end(start);
                 return;
             }
@@ -853,19 +927,22 @@ public abstract class UsageStatsProtoV2 {
             if (((Long) entryArr[i].getValue()).longValue() > 0) {
                 long start = protoOutputStream.start(2246267895832L);
                 protoOutputStream.write(1138166333441L, (String) entryArr[i].getKey());
-                protoOutputStream.write(1112396529666L, ((Long) entryArr[i].getValue()).longValue());
+                protoOutputStream.write(
+                        1112396529666L, ((Long) entryArr[i].getValue()).longValue());
                 protoOutputStream.end(start);
             }
         }
     }
 
-    public static void writeObfuscatedData(OutputStream outputStream, PackagesTokenData packagesTokenData) {
+    public static void writeObfuscatedData(
+            OutputStream outputStream, PackagesTokenData packagesTokenData) {
         ProtoOutputStream protoOutputStream = new ProtoOutputStream(outputStream);
         protoOutputStream.write(1120986464257L, packagesTokenData.counter);
         int size = packagesTokenData.tokensToPackagesMap.size();
         for (int i = 0; i < size; i++) {
             long start = protoOutputStream.start(2246267895810L);
-            protoOutputStream.write(1120986464257L, packagesTokenData.tokensToPackagesMap.keyAt(i) + 1);
+            protoOutputStream.write(
+                    1120986464257L, packagesTokenData.tokensToPackagesMap.keyAt(i) + 1);
             ArrayList arrayList = (ArrayList) packagesTokenData.tokensToPackagesMap.valueAt(i);
             int size2 = arrayList.size();
             for (int i2 = 0; i2 < size2; i2++) {
@@ -876,7 +953,8 @@ public abstract class UsageStatsProtoV2 {
         protoOutputStream.flush();
     }
 
-    public static void writeOffsetTimestamp(ProtoOutputStream protoOutputStream, long j, long j2, long j3) {
+    public static void writeOffsetTimestamp(
+            ProtoOutputStream protoOutputStream, long j, long j2, long j3) {
         if (j2 > j3 - ONE_HOUR_MS) {
             long j4 = j2 - j3;
             if (j4 == 0) {
@@ -886,7 +964,8 @@ public abstract class UsageStatsProtoV2 {
         }
     }
 
-    public static void writePendingEvent(ProtoOutputStream protoOutputStream, UsageEvents.Event event) {
+    public static void writePendingEvent(
+            ProtoOutputStream protoOutputStream, UsageEvents.Event event) {
         String str;
         protoOutputStream.write(1138166333441L, event.mPackage);
         String str2 = event.mClass;
@@ -961,20 +1040,26 @@ public abstract class UsageStatsProtoV2 {
         protoOutputStream.flush();
     }
 
-    public static void writeUsageStats(ProtoOutputStream protoOutputStream, long j, UsageStats usageStats) {
+    public static void writeUsageStats(
+            ProtoOutputStream protoOutputStream, long j, UsageStats usageStats) {
         protoOutputStream.write(1120986464257L, usageStats.mPackageToken + 1);
         writeOffsetTimestamp(protoOutputStream, 1112396529667L, usageStats.mLastTimeUsed, j);
         protoOutputStream.write(1112396529668L, usageStats.mTotalTimeInForeground);
-        writeOffsetTimestamp(protoOutputStream, 1112396529672L, usageStats.mLastTimeForegroundServiceUsed, j);
+        writeOffsetTimestamp(
+                protoOutputStream, 1112396529672L, usageStats.mLastTimeForegroundServiceUsed, j);
         protoOutputStream.write(1112396529673L, usageStats.mTotalTimeForegroundServiceUsed);
         writeOffsetTimestamp(protoOutputStream, 1112396529674L, usageStats.mLastTimeVisible, j);
         protoOutputStream.write(1112396529675L, usageStats.mTotalTimeVisible);
-        writeOffsetTimestamp(protoOutputStream, 1112396529676L, usageStats.mLastTimeComponentUsed, j);
+        writeOffsetTimestamp(
+                protoOutputStream, 1112396529676L, usageStats.mLastTimeComponentUsed, j);
         protoOutputStream.write(1120986464262L, usageStats.mAppLaunchCount);
         try {
             writeChooserCounts(protoOutputStream, usageStats);
         } catch (IllegalArgumentException e) {
-            Slog.e("UsageStatsProtoV2", "Unable to write chooser counts for " + usageStats.mPackageName, e);
+            Slog.e(
+                    "UsageStatsProtoV2",
+                    "Unable to write chooser counts for " + usageStats.mPackageName,
+                    e);
         }
     }
 }

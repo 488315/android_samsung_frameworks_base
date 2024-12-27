@@ -4,7 +4,9 @@ import android.icu.lang.UCharacter;
 import android.icu.text.DecimalFormatSymbols;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+
 import com.android.internal.util.ArrayUtils;
+
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Locale;
@@ -26,9 +28,15 @@ public class DigitsKeyListener extends NumberKeyListener {
     private String mSignChars;
     private final boolean mStringMode;
     private static final char HYPHEN_MINUS = '-';
-    private static final char[][] COMPATIBILITY_CHARACTERS = {new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}, new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', HYPHEN_MINUS, '+'}, new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'}, new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', HYPHEN_MINUS, '+', '.'}};
+    private static final char[][] COMPATIBILITY_CHARACTERS = {
+        new char[] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'},
+        new char[] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', HYPHEN_MINUS, '+'},
+        new char[] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'},
+        new char[] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', HYPHEN_MINUS, '+', '.'}
+    };
     private static final Object sLocaleCacheLock = new Object();
-    private static final HashMap<Locale, DigitsKeyListener[]> sLocaleInstanceCache = new HashMap<>();
+    private static final HashMap<Locale, DigitsKeyListener[]> sLocaleInstanceCache =
+            new HashMap<>();
     private static final Object sStringCacheLock = new Object();
     private static final HashMap<String, DigitsKeyListener> sStringInstanceCache = new HashMap<>();
 
@@ -67,7 +75,10 @@ public class DigitsKeyListener extends NumberKeyListener {
     }
 
     private void calculateNeedForAdvancedInput() {
-        this.mNeedsAdvancedInput = !ArrayUtils.containsAll(COMPATIBILITY_CHARACTERS[(this.mSign ? 1 : 0) | (this.mDecimal ? 2 : 0)], this.mAccepted);
+        this.mNeedsAdvancedInput =
+                !ArrayUtils.containsAll(
+                        COMPATIBILITY_CHARACTERS[(this.mSign ? 1 : 0) | (this.mDecimal ? 2 : 0)],
+                        this.mAccepted);
     }
 
     private static String stripBidiControls(String sign) {
@@ -215,7 +226,8 @@ public class DigitsKeyListener extends NumberKeyListener {
     }
 
     @Override // android.text.method.NumberKeyListener, android.text.InputFilter
-    public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+    public CharSequence filter(
+            CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
         CharSequence source2;
         int start2;
         int end2;

@@ -2,8 +2,9 @@ package com.android.server.wm;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+
 import com.android.internal.util.FrameworkStatsLog;
-import com.android.server.wm.TspStateController;
+
 import com.samsung.android.rune.CoreRune;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -74,11 +75,15 @@ public final class TspGripCommand {
         String lowerCase = str.toLowerCase();
         int lastIndexOf = lowerCase.lastIndexOf("%");
         if (lastIndexOf >= 0) {
-            return Math.round((Float.parseFloat(lowerCase.subSequence(0, lastIndexOf).toString()) / 100.0f) * i2);
+            return Math.round(
+                    (Float.parseFloat(lowerCase.subSequence(0, lastIndexOf).toString()) / 100.0f)
+                            * i2);
         }
         int lastIndexOf2 = lowerCase.lastIndexOf("px");
         if (lastIndexOf2 >= 0) {
-            return (int) ((Float.parseFloat(lowerCase.subSequence(0, lastIndexOf2).toString()) * i2) / i);
+            return (int)
+                    ((Float.parseFloat(lowerCase.subSequence(0, lastIndexOf2).toString()) * i2)
+                            / i);
         }
         int parseInt = Integer.parseInt(str);
         return i2 < i3 ? (parseInt * i2) / i3 : parseInt;
@@ -132,7 +137,8 @@ public final class TspGripCommand {
                             String str4 = split[3];
                             this.mPortX3 = convertToIntWidth(str4 != null ? str4.trim() : null);
                             String str5 = split[4];
-                            int convertToIntHeight = convertToIntHeight(str5 != null ? str5.trim() : null);
+                            int convertToIntHeight =
+                                    convertToIntHeight(str5 != null ? str5.trim() : null);
                             if (convertToIntHeight >= this.mPortY1) {
                                 this.mPortY2 = convertToIntHeight;
                             }
@@ -145,28 +151,37 @@ public final class TspGripCommand {
                         }
                         if (length >= 7) {
                             String str7 = split[6];
-                            this.mPortEdgeZone = convertToIntWidth(str7 != null ? str7.trim() : null);
+                            this.mPortEdgeZone =
+                                    convertToIntWidth(str7 != null ? str7.trim() : null);
                         }
                         this.mLandEdgeZone = this.mPortEdgeZone;
                         if (length >= 8) {
                             String str8 = split[7];
-                            this.mLandEdgeZone = convertToIntWidth(str8 != null ? str8.trim() : null);
+                            this.mLandEdgeZone =
+                                    convertToIntWidth(str8 != null ? str8.trim() : null);
                         }
                         if (length >= 9) {
                             String str9 = split[8];
-                            this.mLandTopRejectWidth = convertToIntLandscapeHeight(str9 != null ? str9.trim() : null);
+                            this.mLandTopRejectWidth =
+                                    convertToIntLandscapeHeight(str9 != null ? str9.trim() : null);
                         }
                         if (length >= 10) {
                             String str10 = split[9];
-                            this.mLandBottomRejectWidth = convertToIntLandscapeHeight(str10 != null ? str10.trim() : null);
+                            this.mLandBottomRejectWidth =
+                                    convertToIntLandscapeHeight(
+                                            str10 != null ? str10.trim() : null);
                         }
                         if (length >= 11) {
                             String str11 = split[10];
-                            this.mLandTopGripWidth = convertToIntLandscapeHeight(str11 != null ? str11.trim() : null);
+                            this.mLandTopGripWidth =
+                                    convertToIntLandscapeHeight(
+                                            str11 != null ? str11.trim() : null);
                         }
                         if (length >= 12) {
                             String str12 = split[11];
-                            this.mLandBottomGripWidth = convertToIntLandscapeHeight(str12 != null ? str12.trim() : null);
+                            this.mLandBottomGripWidth =
+                                    convertToIntLandscapeHeight(
+                                            str12 != null ? str12.trim() : null);
                         }
                         setMinimumValue(i);
                         return;
@@ -184,7 +199,8 @@ public final class TspGripCommand {
             int i4 = deviceSize.initWidth;
             int i5 = deviceSize.initHeight;
             int valueFromBundle = getValueFromBundle(bundle, "dead_zone_port_x1", -1, i2, i4, 1440);
-            int valueFromBundle2 = getValueFromBundle(bundle, "dead_zone_port_x2", -1, i2, i4, 1440);
+            int valueFromBundle2 =
+                    getValueFromBundle(bundle, "dead_zone_port_x2", -1, i2, i4, 1440);
             if (valueFromBundle != -1 && valueFromBundle2 == -1) {
                 this.mPortX2 = valueFromBundle;
             } else if (valueFromBundle != -1) {
@@ -193,17 +209,22 @@ public final class TspGripCommand {
             if (valueFromBundle2 != -1) {
                 this.mPortX2 = valueFromBundle2;
             }
-            this.mPortY1 = getValueFromBundle(bundle, "dead_zone_port_y1", this.mPortY1, i3, i5, 2560);
+            this.mPortY1 =
+                    getValueFromBundle(bundle, "dead_zone_port_y1", this.mPortY1, i3, i5, 2560);
             int i6 = bundle.getInt("dead_zone_port_real_y1", -1);
             if (i6 != -1) {
                 this.mPortY1 = (i5 * i6) / i3;
             }
-            this.mLandX1 = getValueFromBundle(bundle, "dead_zone_land_x1", this.mLandX1, i2, i4, 1440);
-            int valueFromBundle3 = getValueFromBundle(bundle, "edge_zone_width", this.mPortEdgeZone, i2, i4, 1440);
+            this.mLandX1 =
+                    getValueFromBundle(bundle, "dead_zone_land_x1", this.mLandX1, i2, i4, 1440);
+            int valueFromBundle3 =
+                    getValueFromBundle(bundle, "edge_zone_width", this.mPortEdgeZone, i2, i4, 1440);
             this.mPortEdgeZone = valueFromBundle3;
             this.mLandEdgeZone = valueFromBundle3;
-            this.mLandEdgeZone = getValueFromBundle(bundle, "edge_zone_land", valueFromBundle3, i2, i4, 1440);
-            this.mPortEdgeZone = getValueFromBundle(bundle, "edge_zone_port", this.mPortEdgeZone, i2, i4, 1440);
+            this.mLandEdgeZone =
+                    getValueFromBundle(bundle, "edge_zone_land", valueFromBundle3, i2, i4, 1440);
+            this.mPortEdgeZone =
+                    getValueFromBundle(bundle, "edge_zone_port", this.mPortEdgeZone, i2, i4, 1440);
             setMinimumValue(i4);
         }
     }
@@ -251,19 +272,23 @@ public final class TspGripCommand {
                 }
                 if (length >= 7) {
                     String str9 = split[6];
-                    this.mLandTopRejectWidth = convertToIntLandscapeHeight(str9 != null ? str9.trim() : null);
+                    this.mLandTopRejectWidth =
+                            convertToIntLandscapeHeight(str9 != null ? str9.trim() : null);
                 }
                 if (length >= 8) {
                     String str10 = split[7];
-                    this.mLandBottomRejectWidth = convertToIntLandscapeHeight(str10 != null ? str10.trim() : null);
+                    this.mLandBottomRejectWidth =
+                            convertToIntLandscapeHeight(str10 != null ? str10.trim() : null);
                 }
                 if (length >= 9) {
                     String str11 = split[8];
-                    this.mLandTopGripWidth = convertToIntLandscapeHeight(str11 != null ? str11.trim() : null);
+                    this.mLandTopGripWidth =
+                            convertToIntLandscapeHeight(str11 != null ? str11.trim() : null);
                 }
                 if (length >= 10) {
                     String str12 = split[9];
-                    this.mLandBottomGripWidth = convertToIntLandscapeHeight(str12 != null ? str12.trim() : null);
+                    this.mLandBottomGripWidth =
+                            convertToIntLandscapeHeight(str12 != null ? str12.trim() : null);
                 }
             }
             if (CoreRune.FW_TSP_DEADZONE_V3) {
@@ -333,6 +358,29 @@ public final class TspGripCommand {
     }
 
     public final String toString() {
-        return "portX1=" + this.mPortX1 + ", portX2=" + this.mPortX2 + ", portX3=" + this.mPortX3 + ", portY1=" + this.mPortY1 + ", portY2=" + this.mPortY2 + ", landX1=" + this.mLandX1 + ", portEdge=" + this.mPortEdgeZone + ", landEdge=" + this.mLandEdgeZone + ", mLandTopRejectWidth=" + this.mLandTopRejectWidth + ", mLandBottomRejectWidth=" + this.mLandBottomRejectWidth + ", mLandTopGripWidth=" + this.mLandTopGripWidth + ", mLandBottomGripWidth=" + this.mLandBottomGripWidth;
+        return "portX1="
+                + this.mPortX1
+                + ", portX2="
+                + this.mPortX2
+                + ", portX3="
+                + this.mPortX3
+                + ", portY1="
+                + this.mPortY1
+                + ", portY2="
+                + this.mPortY2
+                + ", landX1="
+                + this.mLandX1
+                + ", portEdge="
+                + this.mPortEdgeZone
+                + ", landEdge="
+                + this.mLandEdgeZone
+                + ", mLandTopRejectWidth="
+                + this.mLandTopRejectWidth
+                + ", mLandBottomRejectWidth="
+                + this.mLandBottomRejectWidth
+                + ", mLandTopGripWidth="
+                + this.mLandTopGripWidth
+                + ", mLandBottomGripWidth="
+                + this.mLandBottomGripWidth;
     }
 }

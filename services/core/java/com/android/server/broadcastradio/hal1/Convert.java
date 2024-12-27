@@ -1,6 +1,7 @@
 package com.android.server.broadcastradio.hal1;
 
 import com.android.server.utils.Slogf;
+
 import java.lang.reflect.Array;
 import java.util.Map;
 import java.util.Set;
@@ -16,7 +17,8 @@ public final class Convert {
             return (String[][]) Array.newInstance((Class<?>) String.class, 0, 0);
         }
         Set<Map.Entry> entrySet = map.entrySet();
-        String[][] strArr = (String[][]) Array.newInstance((Class<?>) String.class, entrySet.size(), 2);
+        String[][] strArr =
+                (String[][]) Array.newInstance((Class<?>) String.class, entrySet.size(), 2);
         int i = 0;
         for (Map.Entry entry : entrySet) {
             strArr[i][0] = (String) entry.getKey();

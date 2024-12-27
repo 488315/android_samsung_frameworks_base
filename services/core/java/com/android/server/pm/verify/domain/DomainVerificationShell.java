@@ -13,14 +13,15 @@ public final class DomainVerificationShell {
     }
 
     public static int translateUserId(int i, String str) {
-        return ActivityManager.handleIncomingUser(Binder.getCallingPid(), Binder.getCallingUid(), i, true, true, str, "pm command");
+        return ActivityManager.handleIncomingUser(
+                Binder.getCallingPid(), Binder.getCallingUid(), i, true, true, str, "pm command");
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:218:0x0331, code lost:
-    
-        if (r10.equals("STATE_NO_RESPONSE") == false) goto L183;
-     */
+
+       if (r10.equals("STATE_NO_RESPONSE") == false) goto L183;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:199:0x0398 A[LOOP:9: B:197:0x0392->B:199:0x0398, LOOP_END] */
     /* JADX WARN: Removed duplicated region for block: B:200:0x039c A[SYNTHETIC] */
@@ -38,11 +39,15 @@ public final class DomainVerificationShell {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.Boolean runCommand(com.android.modules.utils.BasicShellCommandHandler r13, java.lang.String r14) {
+    public final java.lang.Boolean runCommand(
+            com.android.modules.utils.BasicShellCommandHandler r13, java.lang.String r14) {
         /*
             Method dump skipped, instructions count: 1704
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.verify.domain.DomainVerificationShell.runCommand(com.android.modules.utils.BasicShellCommandHandler, java.lang.String):java.lang.Boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.verify.domain.DomainVerificationShell.runCommand(com.android.modules.utils.BasicShellCommandHandler,"
+                    + " java.lang.String):java.lang.Boolean");
     }
 }

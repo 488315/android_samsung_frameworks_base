@@ -3,8 +3,8 @@ package com.samsung.android.media;
 import android.media.AudioSystem;
 import android.util.ArrayMap;
 import android.util.Log;
+
 import com.samsung.android.audio.Rune;
-import com.samsung.android.media.AudioParameter;
 
 /* loaded from: classes6.dex */
 public class AudioFxHelper {
@@ -20,7 +20,8 @@ public class AudioFxHelper {
         sPreDefinedVolumeEffects.put(6, valueOf);
         sPreDefinedVolumeEffects.put(7, valueOf);
         sPreDefinedVolumeEffects.put(8, valueOf);
-        sPreDefinedVolumeEffects.put(Integer.valueOf(getPlaySoundTypeForSEP(101)), Float.valueOf(1.0f));
+        sPreDefinedVolumeEffects.put(
+                Integer.valueOf(getPlaySoundTypeForSEP(101)), Float.valueOf(1.0f));
     }
 
     public static int getPlaySoundTypeForSEP(int effectType) {
@@ -31,7 +32,12 @@ public class AudioFxHelper {
     }
 
     public static float getSoundFxVolumeByType(int type) {
-        AudioParameter parameters = new AudioParameter.Builder().setParam(AudioParameter.SEC_GLOBAL_VOLUME_SITUATION_KEY).setParam("type", 1).setParam("device", 0).build();
+        AudioParameter parameters =
+                new AudioParameter.Builder()
+                        .setParam(AudioParameter.SEC_GLOBAL_VOLUME_SITUATION_KEY)
+                        .setParam("type", 1)
+                        .setParam("device", 0)
+                        .build();
         if (sPreDefinedVolumeEffects.containsKey(Integer.valueOf(type))) {
             return sPreDefinedVolumeEffects.get(Integer.valueOf(type)).floatValue();
         }
@@ -54,7 +60,12 @@ public class AudioFxHelper {
     }
 
     public static void setSoundEffectVolume() {
-        AudioParameter parameter = new AudioParameter.Builder().setParam(AudioParameter.SEC_GLOBAL_VOLUME_SITUATION_KEY).setParam("type", 1).setParam("device", 0).build();
+        AudioParameter parameter =
+                new AudioParameter.Builder()
+                        .setParam(AudioParameter.SEC_GLOBAL_VOLUME_SITUATION_KEY)
+                        .setParam("type", 1)
+                        .setParam("device", 0)
+                        .build();
         try {
             setSoundFxVolume(Float.parseFloat(AudioSystem.getParameters(parameter.toString())));
         } catch (NumberFormatException e) {

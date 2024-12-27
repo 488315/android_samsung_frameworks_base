@@ -10,12 +10,15 @@ import android.os.RemoteException;
 public interface IPreferredMixerAttributesDispatcher extends IInterface {
     public static final String DESCRIPTOR = "android.media.IPreferredMixerAttributesDispatcher";
 
-    void dispatchPrefMixerAttributesChanged(AudioAttributes audioAttributes, int i, AudioMixerAttributes audioMixerAttributes) throws RemoteException;
+    void dispatchPrefMixerAttributesChanged(
+            AudioAttributes audioAttributes, int i, AudioMixerAttributes audioMixerAttributes)
+            throws RemoteException;
 
     public static class Default implements IPreferredMixerAttributesDispatcher {
         @Override // android.media.IPreferredMixerAttributesDispatcher
-        public void dispatchPrefMixerAttributesChanged(AudioAttributes attributes, int deviceId, AudioMixerAttributes mixerAttributes) throws RemoteException {
-        }
+        public void dispatchPrefMixerAttributesChanged(
+                AudioAttributes attributes, int deviceId, AudioMixerAttributes mixerAttributes)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +26,8 @@ public interface IPreferredMixerAttributesDispatcher extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPreferredMixerAttributesDispatcher {
+    public abstract static class Stub extends Binder
+            implements IPreferredMixerAttributesDispatcher {
         static final int TRANSACTION_dispatchPrefMixerAttributesChanged = 1;
 
         public Stub() {
@@ -34,7 +38,8 @@ public interface IPreferredMixerAttributesDispatcher extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(IPreferredMixerAttributesDispatcher.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(IPreferredMixerAttributesDispatcher.DESCRIPTOR);
             if (iin != null && (iin instanceof IPreferredMixerAttributesDispatcher)) {
                 return (IPreferredMixerAttributesDispatcher) iin;
             }
@@ -61,7 +66,8 @@ public interface IPreferredMixerAttributesDispatcher extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IPreferredMixerAttributesDispatcher.DESCRIPTOR);
             }
@@ -71,9 +77,12 @@ public interface IPreferredMixerAttributesDispatcher extends IInterface {
             }
             switch (code) {
                 case 1:
-                    AudioAttributes _arg0 = (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
+                    AudioAttributes _arg0 =
+                            (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
                     int _arg1 = data.readInt();
-                    AudioMixerAttributes _arg2 = (AudioMixerAttributes) data.readTypedObject(AudioMixerAttributes.CREATOR);
+                    AudioMixerAttributes _arg2 =
+                            (AudioMixerAttributes)
+                                    data.readTypedObject(AudioMixerAttributes.CREATOR);
                     data.enforceNoDataAvail();
                     dispatchPrefMixerAttributesChanged(_arg0, _arg1, _arg2);
                     return true;
@@ -99,7 +108,9 @@ public interface IPreferredMixerAttributesDispatcher extends IInterface {
             }
 
             @Override // android.media.IPreferredMixerAttributesDispatcher
-            public void dispatchPrefMixerAttributesChanged(AudioAttributes attributes, int deviceId, AudioMixerAttributes mixerAttributes) throws RemoteException {
+            public void dispatchPrefMixerAttributesChanged(
+                    AudioAttributes attributes, int deviceId, AudioMixerAttributes mixerAttributes)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IPreferredMixerAttributesDispatcher.DESCRIPTOR);

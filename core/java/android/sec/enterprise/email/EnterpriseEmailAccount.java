@@ -5,40 +5,64 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class EnterpriseEmailAccount implements Parcelable {
-    public static final Parcelable.Creator<EnterpriseEmailAccount> CREATOR = new Parcelable.Creator<EnterpriseEmailAccount>() { // from class: android.sec.enterprise.email.EnterpriseEmailAccount.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EnterpriseEmailAccount createFromParcel(Parcel in) {
-            return new EnterpriseEmailAccount(in);
-        }
+    public static final Parcelable.Creator<EnterpriseEmailAccount> CREATOR =
+            new Parcelable.Creator<
+                    EnterpriseEmailAccount>() { // from class:
+                                                // android.sec.enterprise.email.EnterpriseEmailAccount.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EnterpriseEmailAccount createFromParcel(Parcel in) {
+                    return new EnterpriseEmailAccount(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EnterpriseEmailAccount[] newArray(int size) {
-            return new EnterpriseEmailAccount[size];
-        }
-    };
-    public static final String EXTRA_ACCOUNT_ID_INTERNAL = "com.samsung.android.knox.intent.extra.ACCOUNT_ID_INTERNAL";
-    public static final String EXTRA_ACCOUNT_NAME_INTERNAL = "com.samsung.android.knox.intent.extra.ACCOUNT_NAME_INTERNAL";
-    public static final String EXTRA_NOTIFY_INTERNAL = "com.samsung.android.knox.intent.extra.EXTRA_NOTIFY_INTERNAL";
-    public static final String EXTRA_OUTGOING_SENDER_NAME_INTERNAL = "com.samsung.android.knox.intent.extra.OUTGOING_SENDER_NAME_INTERNAL";
-    public static final String EXTRA_OUTGOING_SERVICE_INTERNAL = "com.samsung.android.knox.intent.extra.OUTGOING_SERVICE_INTERNAL";
-    public static final String EXTRA_OUTGOING_USER_PASSWORD_ID_INTERNAL = "com.samsung.android.knox.intent.extra.OUTGOING_USER_PASSWD_ID_INTERNAL";
-    public static final String EXTRA_OUTGOING_USER_PASSWORD_INTERNAL = "com.samsung.android.knox.intent.extra.OUTGOING_USER_PASSWD_INTERNAL";
-    public static final String EXTRA_RECEIVE_HOST_INTERNAL = "com.samsung.android.knox.intent.extra.RECEIVE_HOST_INTERNAL";
-    public static final String EXTRA_RECEIVE_PORT_INTERNAL = "com.samsung.android.knox.intent.extra.RECEIVE_PORT_INTERNAL";
-    public static final String EXTRA_RECEIVE_SECURITY_INTERNAL = "com.samsung.android.knox.intent.extra.RECEIVE_SECURITY_INTERNAL";
-    public static final String EXTRA_SENDER_NAME_INTERNAL = "com.samsung.android.knox.intent.extra.SENDER_NAME_INTERNAL";
-    public static final String EXTRA_SEND_HOST_INTERNAL = "com.samsung.android.knox.intent.extra.SEND_HOST_INTERNAL";
-    public static final String EXTRA_SEND_PORT_INTERNAL = "com.samsung.android.knox.intent.extra.SEND_PORT_INTERNAL";
-    public static final String EXTRA_SEND_SECURITY_INTERNAL = "com.samsung.android.knox.intent.extra.SEND_SECURITY_INTERNAL";
-    public static final String EXTRA_SERVICE_INTERNAL = "com.samsung.android.knox.intent.extra.SERVICE_INTERNAL";
-    public static final String EXTRA_SIGNATURE_INTERNAL = "com.samsung.android.knox.intent.extra.SIGNATURE_INTERNAL";
-    public static final String EXTRA_USER_ID_INTERNAL = "com.samsung.android.knox.intent.extra.USER_ID_INTERNAL";
-    public static final String EXTRA_USER_PASSWORD_ID_INTERNAL = "com.samsung.android.knox.intent.extra.USER_PASSWD_ID_INTERNAL";
-    public static final String EXTRA_USER_PASSWORD_INTERNAL = "com.samsung.android.knox.intent.extra.USER_PASSWD_INTERNAL";
-    public static final String EXTRA_VIBRATE_INTERNAL = "com.samsung.android.knox.intent.extra.VIBRATE_INTERNAL";
-    public static final String EXTRA_VIBRATE_WHEN_SILENT_INTERNAL = "com.samsung.android.knox.intent.extra.VIBRATE_WHEN_SILENT_INTERNAL";
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EnterpriseEmailAccount[] newArray(int size) {
+                    return new EnterpriseEmailAccount[size];
+                }
+            };
+    public static final String EXTRA_ACCOUNT_ID_INTERNAL =
+            "com.samsung.android.knox.intent.extra.ACCOUNT_ID_INTERNAL";
+    public static final String EXTRA_ACCOUNT_NAME_INTERNAL =
+            "com.samsung.android.knox.intent.extra.ACCOUNT_NAME_INTERNAL";
+    public static final String EXTRA_NOTIFY_INTERNAL =
+            "com.samsung.android.knox.intent.extra.EXTRA_NOTIFY_INTERNAL";
+    public static final String EXTRA_OUTGOING_SENDER_NAME_INTERNAL =
+            "com.samsung.android.knox.intent.extra.OUTGOING_SENDER_NAME_INTERNAL";
+    public static final String EXTRA_OUTGOING_SERVICE_INTERNAL =
+            "com.samsung.android.knox.intent.extra.OUTGOING_SERVICE_INTERNAL";
+    public static final String EXTRA_OUTGOING_USER_PASSWORD_ID_INTERNAL =
+            "com.samsung.android.knox.intent.extra.OUTGOING_USER_PASSWD_ID_INTERNAL";
+    public static final String EXTRA_OUTGOING_USER_PASSWORD_INTERNAL =
+            "com.samsung.android.knox.intent.extra.OUTGOING_USER_PASSWD_INTERNAL";
+    public static final String EXTRA_RECEIVE_HOST_INTERNAL =
+            "com.samsung.android.knox.intent.extra.RECEIVE_HOST_INTERNAL";
+    public static final String EXTRA_RECEIVE_PORT_INTERNAL =
+            "com.samsung.android.knox.intent.extra.RECEIVE_PORT_INTERNAL";
+    public static final String EXTRA_RECEIVE_SECURITY_INTERNAL =
+            "com.samsung.android.knox.intent.extra.RECEIVE_SECURITY_INTERNAL";
+    public static final String EXTRA_SENDER_NAME_INTERNAL =
+            "com.samsung.android.knox.intent.extra.SENDER_NAME_INTERNAL";
+    public static final String EXTRA_SEND_HOST_INTERNAL =
+            "com.samsung.android.knox.intent.extra.SEND_HOST_INTERNAL";
+    public static final String EXTRA_SEND_PORT_INTERNAL =
+            "com.samsung.android.knox.intent.extra.SEND_PORT_INTERNAL";
+    public static final String EXTRA_SEND_SECURITY_INTERNAL =
+            "com.samsung.android.knox.intent.extra.SEND_SECURITY_INTERNAL";
+    public static final String EXTRA_SERVICE_INTERNAL =
+            "com.samsung.android.knox.intent.extra.SERVICE_INTERNAL";
+    public static final String EXTRA_SIGNATURE_INTERNAL =
+            "com.samsung.android.knox.intent.extra.SIGNATURE_INTERNAL";
+    public static final String EXTRA_USER_ID_INTERNAL =
+            "com.samsung.android.knox.intent.extra.USER_ID_INTERNAL";
+    public static final String EXTRA_USER_PASSWORD_ID_INTERNAL =
+            "com.samsung.android.knox.intent.extra.USER_PASSWD_ID_INTERNAL";
+    public static final String EXTRA_USER_PASSWORD_INTERNAL =
+            "com.samsung.android.knox.intent.extra.USER_PASSWD_INTERNAL";
+    public static final String EXTRA_VIBRATE_INTERNAL =
+            "com.samsung.android.knox.intent.extra.VIBRATE_INTERNAL";
+    public static final String EXTRA_VIBRATE_WHEN_SILENT_INTERNAL =
+            "com.samsung.android.knox.intent.extra.VIBRATE_WHEN_SILENT_INTERNAL";
     public String mDisplayName;
     public String mEmailAddress;
     public boolean mEmailNotificationVibrateAlways;
@@ -81,8 +105,7 @@ public class EnterpriseEmailAccount implements Parcelable {
         readFromParcel(in);
     }
 
-    public EnterpriseEmailAccount() {
-    }
+    public EnterpriseEmailAccount() {}
 
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
@@ -156,6 +179,33 @@ public class EnterpriseEmailAccount implements Parcelable {
     }
 
     public String toString() {
-        return "mId = " + this.mId + ", mDisplayName=" + this.mDisplayName + ", mEmailAddress=" + this.mEmailAddress + ", mSenderName" + this.mSenderName + ", mSyncLookback =" + this.mSyncLookback + ", mSyncInterval=" + this.mSyncInterval + ", mEmailNotificationVibrateAlways =" + this.mEmailNotificationVibrateAlways + ", mIsDefault=" + this.mIsDefault + ", mPeakDays=" + this.mPeakDays + ", mPeakStartMinute=" + this.mPeakStartMinute + ", mPeakEndMinute=" + this.mPeakEndMinute + ", mPeakSyncSchedule= " + this.mPeakSyncSchedule + ", mOffPeakSyncSchedule=" + this.mOffPeakSyncSchedule + ", mRoamingSyncSchedule=" + this.mRoamingSyncSchedule;
+        return "mId = "
+                + this.mId
+                + ", mDisplayName="
+                + this.mDisplayName
+                + ", mEmailAddress="
+                + this.mEmailAddress
+                + ", mSenderName"
+                + this.mSenderName
+                + ", mSyncLookback ="
+                + this.mSyncLookback
+                + ", mSyncInterval="
+                + this.mSyncInterval
+                + ", mEmailNotificationVibrateAlways ="
+                + this.mEmailNotificationVibrateAlways
+                + ", mIsDefault="
+                + this.mIsDefault
+                + ", mPeakDays="
+                + this.mPeakDays
+                + ", mPeakStartMinute="
+                + this.mPeakStartMinute
+                + ", mPeakEndMinute="
+                + this.mPeakEndMinute
+                + ", mPeakSyncSchedule= "
+                + this.mPeakSyncSchedule
+                + ", mOffPeakSyncSchedule="
+                + this.mOffPeakSyncSchedule
+                + ", mRoamingSyncSchedule="
+                + this.mRoamingSyncSchedule;
     }
 }

@@ -24,11 +24,11 @@ import android.util.ArraySet;
 import android.util.LocalLog;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.HeimdAllFsService$$ExternalSyntheticOutline0;
 import com.android.server.ambientcontext.AmbientContextManagerPerUserService$$ExternalSyntheticOutline0;
-import com.android.server.notification.ManagedServices;
-import com.android.server.notification.NotificationManagerService;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -42,8 +42,7 @@ public final class ConditionProviders extends ManagedServices {
     public final ArraySet mSystemConditionProviders;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface Callback {
-    }
+    public interface Callback {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ConditionRecord {
@@ -59,17 +58,29 @@ public final class ConditionProviders extends ManagedServices {
         }
 
         public final String toString() {
-            return "ConditionRecord[id=" + this.id + ",component=" + this.component + ",subscribed=" + this.subscribed + ']';
+            return "ConditionRecord[id="
+                    + this.id
+                    + ",component="
+                    + this.component
+                    + ",subscribed="
+                    + this.subscribed
+                    + ']';
         }
     }
 
-    public ConditionProviders(Context context, ManagedServices.UserProfiles userProfiles, IPackageManager iPackageManager) {
+    public ConditionProviders(
+            Context context,
+            ManagedServices.UserProfiles userProfiles,
+            IPackageManager iPackageManager) {
         super(context, new Object(), userProfiles, iPackageManager);
         this.mRecords = new ArrayList();
         this.mSystemConditionProviders = new ArraySet();
         Context context2 = this.mContext;
         String str = SystemProperties.get("system.condition.providers", "UNSET");
-        String[] split = !"UNSET".equals(str) ? str.split(",") : context2.getResources().getStringArray(17236326);
+        String[] split =
+                !"UNSET".equals(str)
+                        ? str.split(",")
+                        : context2.getResources().getStringArray(17236326);
         ArraySet arraySet = new ArraySet();
         if (split != null && split.length != 0) {
             for (String str2 : split) {
@@ -82,13 +93,17 @@ public final class ConditionProviders extends ManagedServices {
         this.mApprovalLevel = 0;
     }
 
-    public final void addSystemProvider(SystemConditionProviderService systemConditionProviderService) {
+    public final void addSystemProvider(
+            SystemConditionProviderService systemConditionProviderService) {
         this.mSystemConditionProviders.add(systemConditionProviderService);
         systemConditionProviderService.attachBase(this.mContext);
         IConditionProvider asInterface = systemConditionProviderService.asInterface();
         ComponentName component = systemConditionProviderService.getComponent();
         checkNotNull(asInterface);
-        ManagedServices.ManagedServiceInfo registerServiceImpl = registerServiceImpl(new ManagedServices.ManagedServiceInfo(asInterface, component, 0, true, null, 10000, 1000));
+        ManagedServices.ManagedServiceInfo registerServiceImpl =
+                registerServiceImpl(
+                        new ManagedServices.ManagedServiceInfo(
+                                asInterface, component, 0, true, null, 10000, 1000));
         if (registerServiceImpl != null) {
             onServiceAdded(registerServiceImpl);
         }
@@ -105,7 +120,8 @@ public final class ConditionProviders extends ManagedServices {
     }
 
     @Override // com.android.server.notification.ManagedServices
-    public final void dump(PrintWriter printWriter, NotificationManagerService.DumpFilter dumpFilter) {
+    public final void dump(
+            PrintWriter printWriter, NotificationManagerService.DumpFilter dumpFilter) {
         int i;
         String format;
         super.dump(printWriter, dumpFilter);
@@ -121,12 +137,25 @@ public final class ConditionProviders extends ManagedServices {
                         printWriter.println(conditionRecord);
                         Uri uri = conditionRecord.id;
                         boolean z = CountdownConditionProvider.DEBUG;
-                        long tryParseCountdownConditionId = ZenModeConfig.tryParseCountdownConditionId(uri);
+                        long tryParseCountdownConditionId =
+                                ZenModeConfig.tryParseCountdownConditionId(uri);
                         if (tryParseCountdownConditionId == 0) {
                             format = null;
                         } else {
                             long currentTimeMillis = System.currentTimeMillis();
-                            format = String.format("Scheduled for %s, %s in the future (%s), now=%s", SystemConditionProviderService.ts(tryParseCountdownConditionId), Long.valueOf(tryParseCountdownConditionId - currentTimeMillis), DateUtils.getRelativeTimeSpanString(tryParseCountdownConditionId, currentTimeMillis, 60000L), SystemConditionProviderService.ts(currentTimeMillis));
+                            format =
+                                    String.format(
+                                            "Scheduled for %s, %s in the future (%s), now=%s",
+                                            SystemConditionProviderService.ts(
+                                                    tryParseCountdownConditionId),
+                                            Long.valueOf(
+                                                    tryParseCountdownConditionId
+                                                            - currentTimeMillis),
+                                            DateUtils.getRelativeTimeSpanString(
+                                                    tryParseCountdownConditionId,
+                                                    currentTimeMillis,
+                                                    60000L),
+                                            SystemConditionProviderService.ts(currentTimeMillis));
                         }
                         if (format != null) {
                             printWriter.print("        (");
@@ -142,15 +171,16 @@ public final class ConditionProviders extends ManagedServices {
         printWriter.print("    mSystemConditionProviders: ");
         printWriter.println(this.mSystemConditionProviderNames);
         for (i = 0; i < this.mSystemConditionProviders.size(); i++) {
-            ((SystemConditionProviderService) this.mSystemConditionProviders.valueAt(i)).dump(printWriter);
+            ((SystemConditionProviderService) this.mSystemConditionProviders.valueAt(i))
+                    .dump(printWriter);
         }
     }
 
     @Override // com.android.server.notification.ManagedServices
-    public final void ensureFilters(ServiceInfo serviceInfo, int i) {
-    }
+    public final void ensureFilters(ServiceInfo serviceInfo, int i) {}
 
-    public final void ensureRecordExists(ComponentName componentName, Uri uri, IConditionProvider iConditionProvider) {
+    public final void ensureRecordExists(
+            ComponentName componentName, Uri uri, IConditionProvider iConditionProvider) {
         synchronized (this.mMutex) {
             try {
                 ConditionRecord recordLocked = getRecordLocked(uri, componentName, true);
@@ -182,7 +212,8 @@ public final class ConditionProviders extends ManagedServices {
             int size = this.mRecords.size();
             for (int i = 0; i < size; i++) {
                 ConditionRecord conditionRecord = (ConditionRecord) this.mRecords.get(i);
-                if (conditionRecord.id.equals(uri) && conditionRecord.component.equals(componentName)) {
+                if (conditionRecord.id.equals(uri)
+                        && conditionRecord.component.equals(componentName)) {
                     return conditionRecord;
                 }
             }
@@ -210,7 +241,8 @@ public final class ConditionProviders extends ManagedServices {
             Condition condition = conditionArr[i];
             String str2 = this.TAG;
             if (condition == null) {
-                HeimdAllFsService$$ExternalSyntheticOutline0.m("Ignoring null condition from ", str, str2);
+                HeimdAllFsService$$ExternalSyntheticOutline0.m(
+                        "Ignoring null condition from ", str, str2);
             } else {
                 Uri uri = condition.id;
                 if (arrayMap.containsKey(uri)) {
@@ -262,7 +294,11 @@ public final class ConditionProviders extends ManagedServices {
                         service.removeAutomaticZenRules(str, false);
                         service.setNotificationPolicyAccessGranted(str, false);
                     } catch (Exception e) {
-                        Slog.e(this.TAG, ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("Failed to clean up rules for ", str), e);
+                        Slog.e(
+                                this.TAG,
+                                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                        "Failed to clean up rules for ", str),
+                                e);
                     }
                 }
             }
@@ -288,7 +324,9 @@ public final class ConditionProviders extends ManagedServices {
             ZenModeHelper zenModeHelper = zenModeConditions.mHelper;
             ZenModeConfig config = zenModeHelper.getConfig();
             int i = callingUid == 1000 ? 5 : 4;
-            String m = AmbientContextManagerPerUserService$$ExternalSyntheticOutline0.m(componentName, "zmc.onServiceAdded:");
+            String m =
+                    AmbientContextManagerPerUserService$$ExternalSyntheticOutline0.m(
+                            componentName, "zmc.onServiceAdded:");
             synchronized (zenModeHelper.mConfigLock) {
                 zenModeHelper.setConfigLocked(config, i, m, componentName, true, callingUid);
             }
@@ -296,12 +334,14 @@ public final class ConditionProviders extends ManagedServices {
     }
 
     @Override // com.android.server.notification.ManagedServices
-    public final void onServiceRemovedLocked(ManagedServices.ManagedServiceInfo managedServiceInfo) {
+    public final void onServiceRemovedLocked(
+            ManagedServices.ManagedServiceInfo managedServiceInfo) {
         if (managedServiceInfo == null) {
             return;
         }
         for (int size = this.mRecords.size() - 1; size >= 0; size--) {
-            if (((ConditionRecord) this.mRecords.get(size)).component.equals(managedServiceInfo.component)) {
+            if (((ConditionRecord) this.mRecords.get(size))
+                    .component.equals(managedServiceInfo.component)) {
                 this.mRecords.remove(size);
             }
         }
@@ -315,10 +355,16 @@ public final class ConditionProviders extends ManagedServices {
         }
         ManagedServices.ManagedServiceInfo managedServiceInfo = conditionRecord.info;
         RemoteException remoteException = null;
-        IConditionProvider iConditionProvider = managedServiceInfo == null ? null : managedServiceInfo.service;
+        IConditionProvider iConditionProvider =
+                managedServiceInfo == null ? null : managedServiceInfo.service;
         if (iConditionProvider != null) {
             try {
-                Slog.d(str, "Subscribing to " + conditionRecord.id + " with " + conditionRecord.component);
+                Slog.d(
+                        str,
+                        "Subscribing to "
+                                + conditionRecord.id
+                                + " with "
+                                + conditionRecord.component);
                 iConditionProvider.onSubscribe(conditionRecord.id);
                 conditionRecord.subscribed = true;
             } catch (RemoteException e) {
@@ -331,7 +377,10 @@ public final class ConditionProviders extends ManagedServices {
         StringBuilder sb = new StringBuilder();
         sb.append(uri);
         sb.append(",");
-        sb.append(iConditionProvider == null ? "no provider" : remoteException != null ? remoteException.getMessage() : "ok");
+        sb.append(
+                iConditionProvider == null
+                        ? "no provider"
+                        : remoteException != null ? remoteException.getMessage() : "ok");
         ZenLog.append(9, sb.toString());
     }
 
@@ -360,7 +409,8 @@ public final class ConditionProviders extends ManagedServices {
         }
         ManagedServices.ManagedServiceInfo managedServiceInfo = conditionRecord.info;
         RemoteException e = null;
-        IConditionProvider iConditionProvider = managedServiceInfo == null ? null : managedServiceInfo.service;
+        IConditionProvider iConditionProvider =
+                managedServiceInfo == null ? null : managedServiceInfo.service;
         if (iConditionProvider != null) {
             try {
                 iConditionProvider.onUnsubscribe(conditionRecord.id);
@@ -382,7 +432,8 @@ public final class ConditionProviders extends ManagedServices {
     @Override // com.android.server.notification.ManagedServices
     public final void writeDefaults(TypedXmlSerializer typedXmlSerializer) {
         synchronized (this.mDefaultsLock) {
-            typedXmlSerializer.attribute((String) null, "defaults", String.join(":", this.mDefaultPackages));
+            typedXmlSerializer.attribute(
+                    (String) null, "defaults", String.join(":", this.mDefaultPackages));
         }
     }
 }

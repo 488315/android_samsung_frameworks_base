@@ -7,19 +7,21 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes2.dex */
 public class SContextActivityLocationLogging extends SContextEventContext {
-    public static final Parcelable.Creator<SContextActivityLocationLogging> CREATOR = new Parcelable.Creator<SContextActivityLocationLogging>() { // from class: android.hardware.scontext.SContextActivityLocationLogging.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextActivityLocationLogging createFromParcel(Parcel in) {
-            return new SContextActivityLocationLogging(in);
-        }
+    public static final Parcelable.Creator<SContextActivityLocationLogging> CREATOR =
+            new Parcelable.Creator<SContextActivityLocationLogging>() { // from class:
+                // android.hardware.scontext.SContextActivityLocationLogging.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextActivityLocationLogging createFromParcel(Parcel in) {
+                    return new SContextActivityLocationLogging(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextActivityLocationLogging[] newArray(int size) {
-            return new SContextActivityLocationLogging[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextActivityLocationLogging[] newArray(int size) {
+                    return new SContextActivityLocationLogging[size];
+                }
+            };
     private Bundle mContext;
     private Bundle mInfo;
     private int mType;
@@ -123,7 +125,8 @@ public class SContextActivityLocationLogging extends SContextEventContext {
         return this.mInfo.getIntArray("StayingAreaStatus");
     }
 
-    @Override // android.hardware.scontext.SContextEventContext, com.samsung.android.hardware.context.SemContextEventContext
+    @Override // android.hardware.scontext.SContextEventContext,
+    // com.samsung.android.hardware.context.SemContextEventContext
     public void setValues(Bundle context) {
         Bundle bundle = context.getBundle("LoggingBundle");
         if (bundle != null) {

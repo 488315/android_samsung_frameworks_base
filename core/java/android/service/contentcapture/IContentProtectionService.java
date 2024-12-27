@@ -9,7 +9,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes3.dex */
 public interface IContentProtectionService extends IInterface {
-    public static final String DESCRIPTOR = "android.service.contentcapture.IContentProtectionService";
+    public static final String DESCRIPTOR =
+            "android.service.contentcapture.IContentProtectionService";
 
     void onLoginDetected(ParceledListSlice parceledListSlice) throws RemoteException;
 
@@ -17,12 +18,10 @@ public interface IContentProtectionService extends IInterface {
 
     public static class Default implements IContentProtectionService {
         @Override // android.service.contentcapture.IContentProtectionService
-        public void onLoginDetected(ParceledListSlice events) throws RemoteException {
-        }
+        public void onLoginDetected(ParceledListSlice events) throws RemoteException {}
 
         @Override // android.service.contentcapture.IContentProtectionService
-        public void onUpdateAllowlistRequest(IBinder callback) throws RemoteException {
-        }
+        public void onUpdateAllowlistRequest(IBinder callback) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +29,7 @@ public interface IContentProtectionService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IContentProtectionService {
+    public abstract static class Stub extends Binder implements IContentProtectionService {
         static final int TRANSACTION_onLoginDetected = 1;
         static final int TRANSACTION_onUpdateAllowlistRequest = 2;
 
@@ -71,7 +70,8 @@ public interface IContentProtectionService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IContentProtectionService.DESCRIPTOR);
             }
@@ -81,7 +81,8 @@ public interface IContentProtectionService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ParceledListSlice _arg0 = (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _arg0 =
+                            (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
                     data.enforceNoDataAvail();
                     onLoginDetected(_arg0);
                     return true;

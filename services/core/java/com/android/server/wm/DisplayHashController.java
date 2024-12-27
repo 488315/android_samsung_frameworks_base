@@ -17,8 +17,9 @@ import android.os.RemoteException;
 import android.service.displayhash.IDisplayHashingService;
 import android.util.Slog;
 import android.view.MagnificationSpec;
+
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
-import com.android.server.wm.DisplayHashController;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,8 +57,7 @@ public final class DisplayHashController {
         public ArrayList mQueuedCommands;
         public IDisplayHashingService mRemoteService;
 
-        public DisplayHashingServiceConnection() {
-        }
+        public DisplayHashingServiceConnection() {}
 
         @Override // android.content.ServiceConnection
         public final void onBindingDied(ComponentName componentName) {
@@ -84,7 +84,9 @@ public final class DisplayHashController {
                         try {
                             ((Command) this.mQueuedCommands.get(i)).run(this.mRemoteService);
                         } catch (RemoteException e) {
-                            Slog.w("WindowManager", "exception calling " + componentName + ": " + e);
+                            Slog.w(
+                                    "WindowManager",
+                                    "exception calling " + componentName + ": " + e);
                         }
                     }
                     this.mQueuedCommands = null;
@@ -112,9 +114,11 @@ public final class DisplayHashController {
                 synchronized (DisplayHashController.this.mServiceConnectionLock) {
                     try {
                         DisplayHashController displayHashController = DisplayHashController.this;
-                        DisplayHashingServiceConnection displayHashingServiceConnection = displayHashController.mServiceConnection;
+                        DisplayHashingServiceConnection displayHashingServiceConnection =
+                                displayHashController.mServiceConnection;
                         if (displayHashingServiceConnection != null) {
-                            displayHashController.mContext.unbindService(displayHashingServiceConnection);
+                            displayHashController.mContext.unbindService(
+                                    displayHashingServiceConnection);
                             DisplayHashController.this.mServiceConnection = null;
                         }
                     } finally {
@@ -129,25 +133,33 @@ public final class DisplayHashController {
         public final CountDownLatch mCountDownLatch = new CountDownLatch(1);
         public Bundle mResult;
 
-        public SyncCommand() {
-        }
+        public SyncCommand() {}
 
         public final Bundle run(final BiConsumer biConsumer) {
-            DisplayHashController.this.connectAndRun(new Command() { // from class: com.android.server.wm.DisplayHashController$SyncCommand$$ExternalSyntheticLambda0
-                @Override // com.android.server.wm.DisplayHashController.Command
-                public final void run(IDisplayHashingService iDisplayHashingService) {
-                    BiConsumer biConsumer2 = biConsumer;
-                    final DisplayHashController.SyncCommand syncCommand = DisplayHashController.SyncCommand.this;
-                    syncCommand.getClass();
-                    biConsumer2.accept(iDisplayHashingService, new RemoteCallback(new RemoteCallback.OnResultListener() { // from class: com.android.server.wm.DisplayHashController$SyncCommand$$ExternalSyntheticLambda1
-                        public final void onResult(Bundle bundle) {
-                            DisplayHashController.SyncCommand syncCommand2 = DisplayHashController.SyncCommand.this;
-                            syncCommand2.mResult = bundle;
-                            syncCommand2.mCountDownLatch.countDown();
+            DisplayHashController.this.connectAndRun(
+                    new Command() { // from class:
+                                    // com.android.server.wm.DisplayHashController$SyncCommand$$ExternalSyntheticLambda0
+                        @Override // com.android.server.wm.DisplayHashController.Command
+                        public final void run(IDisplayHashingService iDisplayHashingService) {
+                            BiConsumer biConsumer2 = biConsumer;
+                            final DisplayHashController.SyncCommand syncCommand =
+                                    DisplayHashController.SyncCommand.this;
+                            syncCommand.getClass();
+                            biConsumer2.accept(
+                                    iDisplayHashingService,
+                                    new RemoteCallback(
+                                            new RemoteCallback
+                                                    .OnResultListener() { // from class:
+                                                                          // com.android.server.wm.DisplayHashController$SyncCommand$$ExternalSyntheticLambda1
+                                                public final void onResult(Bundle bundle) {
+                                                    DisplayHashController.SyncCommand syncCommand2 =
+                                                            DisplayHashController.SyncCommand.this;
+                                                    syncCommand2.mResult = bundle;
+                                                    syncCommand2.mCountDownLatch.countDown();
+                                                }
+                                            }));
                         }
-                    }));
-                }
-            });
+                    });
             try {
                 this.mCountDownLatch.await(5L, TimeUnit.SECONDS);
             } catch (Exception e) {
@@ -167,7 +179,8 @@ public final class DisplayHashController {
         remoteCallback.sendResult(bundle);
     }
 
-    public final void calculateDisplayHashBoundsLocked(WindowState windowState, Rect rect, Rect rect2) {
+    public final void calculateDisplayHashBoundsLocked(
+            WindowState windowState, Rect rect, Rect rect2) {
         rect2.set(rect);
         DisplayContent displayContent = windowState.getDisplayContent();
         if (displayContent == null) {
@@ -205,12 +218,14 @@ public final class DisplayHashController {
                 Handler handler = this.mHandler;
                 handler.removeMessages(1);
                 handler.sendEmptyMessageDelayed(1, 10000L);
-                if (this.mServiceConnection == null && (serviceComponentName = getServiceComponentName()) != null) {
+                if (this.mServiceConnection == null
+                        && (serviceComponentName = getServiceComponentName()) != null) {
                     Intent intent = new Intent();
                     intent.setComponent(serviceComponentName);
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
-                        DisplayHashingServiceConnection displayHashingServiceConnection = new DisplayHashingServiceConnection();
+                        DisplayHashingServiceConnection displayHashingServiceConnection =
+                                new DisplayHashingServiceConnection();
                         this.mServiceConnection = displayHashingServiceConnection;
                         this.mContext.bindService(intent, displayHashingServiceConnection, 1);
                         Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -219,9 +234,11 @@ public final class DisplayHashController {
                         throw th;
                     }
                 }
-                DisplayHashingServiceConnection displayHashingServiceConnection2 = this.mServiceConnection;
+                DisplayHashingServiceConnection displayHashingServiceConnection2 =
+                        this.mServiceConnection;
                 if (displayHashingServiceConnection2 != null) {
-                    IDisplayHashingService iDisplayHashingService = displayHashingServiceConnection2.mRemoteService;
+                    IDisplayHashingService iDisplayHashingService =
+                            displayHashingServiceConnection2.mRemoteService;
                     if (iDisplayHashingService == null) {
                         if (displayHashingServiceConnection2.mQueuedCommands == null) {
                             displayHashingServiceConnection2.mQueuedCommands = new ArrayList(1);
@@ -231,7 +248,8 @@ public final class DisplayHashController {
                         try {
                             command.run(iDisplayHashingService);
                         } catch (RemoteException e) {
-                            AccountManagerService$$ExternalSyntheticOutline0.m("exception calling service: ", e, "WindowManager");
+                            AccountManagerService$$ExternalSyntheticOutline0.m(
+                                    "exception calling service: ", e, "WindowManager");
                         }
                     }
                 }
@@ -248,7 +266,9 @@ public final class DisplayHashController {
                 if (map != null) {
                     return map;
                 }
-                Bundle run = new SyncCommand().run(new DisplayHashController$$ExternalSyntheticLambda1(1));
+                Bundle run =
+                        new SyncCommand()
+                                .run(new DisplayHashController$$ExternalSyntheticLambda1(1));
                 this.mDisplayHashAlgorithms = new HashMap(run.size());
                 for (String str : run.keySet()) {
                     ((HashMap) this.mDisplayHashAlgorithms).put(str, run.getParcelable(str));
@@ -324,6 +344,8 @@ public final class DisplayHashController {
             android.os.Binder.restoreCallingIdentity(r3)
             throw r6
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.DisplayHashController.getServiceComponentName():android.content.ComponentName");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.DisplayHashController.getServiceComponentName():android.content.ComponentName");
     }
 }

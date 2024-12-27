@@ -10,13 +10,15 @@ import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.os.RuntimeInit;
+
 import com.samsung.android.common.AsPackageName;
 import com.samsung.android.isrb.IsrbManager;
+
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.lang.Thread;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -34,7 +36,48 @@ public class IsrbHooks {
     public static final int mIsrbTriggerCount = 5;
     private static int mState;
     private static volatile boolean mCrashing = false;
-    private static final String[] ISRBSKIPSERVICE = {"com.android.server.slice.SliceManagerService$Lifecycle", "com.android.server.telecom.TelecomLoaderService", "com.android.server.privilege.SemPrivilegeManagerService", "com.android.server.BluetoothService", "com.android.server.connectivity.IpConnectivityMetrics", "com.android.server.net.watchlist.NetworkWatchlistService$Lifecycle", "com.android.server.PinnerService", "com.google.android.startop.iorap.IorapForwardingService", "com.android.server.integrity.AppIntegrityManagerService", "com.android.server.appprediction.AppPredictionManagerService", "com.android.server.testharness.TestHarnessModeService", "com.android.server.contentcapture.ContentCaptureManagerService", "com.android.server.systemcaptions.SystemCaptionsManagerService", "com.android.server.textservices.TextServicesManagerService$Lifecycle", "com.android.server.textclassifier.TextClassificationManagerService$Lifecycle", "com.android.server.DockObserver", "com.android.server.midi.MidiService$Lifecycle", "com.android.server.usb.UsbService$Lifecycle", "com.android.server.twilight.TwilightService", "com.android.server.backup.BackupManagerService$Lifecycle", "com.android.server.GestureLauncherService", "com.android.server.SensorNotificationService", "com.android.server.emergency.EmergencyAffordanceService", "com.android.server.print.PrintManagerService", "com.android.server.companion.CompanionDeviceManagerService", "com.android.server.restrictions.RestrictionsManagerService", "com.android.server.cocktailbar.CocktailBarManagerService", "com.android.server.cover.CoverManagerService", "com.android.server.media.MediaResourceMonitorService", "com.android.server.camera.CameraServiceProxy", "com.samsung.android.camera.CameraServiceWorker", "com.android.server.incident.IncidentCompanionService", "com.android.server.MmsServiceBroker", "com.android.server.autofill.AutofillManagerService", "com.android.server.clipboard.ClipboardService", "com.android.server.appbinding.AppBindingService$Lifecycle", "com.android.server.soundtrigger_middleware.SoundTriggerMiddlewareService$Lifecycle", "com.android.server.soundtrigger.SoundTriggerService", "com.android.server.blob.BlobStoreManagerService", "com.android.server.voiceinteraction.VoiceInteractionManagerService"};
+    private static final String[] ISRBSKIPSERVICE = {
+        "com.android.server.slice.SliceManagerService$Lifecycle",
+        "com.android.server.telecom.TelecomLoaderService",
+        "com.android.server.privilege.SemPrivilegeManagerService",
+        "com.android.server.BluetoothService",
+        "com.android.server.connectivity.IpConnectivityMetrics",
+        "com.android.server.net.watchlist.NetworkWatchlistService$Lifecycle",
+        "com.android.server.PinnerService",
+        "com.google.android.startop.iorap.IorapForwardingService",
+        "com.android.server.integrity.AppIntegrityManagerService",
+        "com.android.server.appprediction.AppPredictionManagerService",
+        "com.android.server.testharness.TestHarnessModeService",
+        "com.android.server.contentcapture.ContentCaptureManagerService",
+        "com.android.server.systemcaptions.SystemCaptionsManagerService",
+        "com.android.server.textservices.TextServicesManagerService$Lifecycle",
+        "com.android.server.textclassifier.TextClassificationManagerService$Lifecycle",
+        "com.android.server.DockObserver",
+        "com.android.server.midi.MidiService$Lifecycle",
+        "com.android.server.usb.UsbService$Lifecycle",
+        "com.android.server.twilight.TwilightService",
+        "com.android.server.backup.BackupManagerService$Lifecycle",
+        "com.android.server.GestureLauncherService",
+        "com.android.server.SensorNotificationService",
+        "com.android.server.emergency.EmergencyAffordanceService",
+        "com.android.server.print.PrintManagerService",
+        "com.android.server.companion.CompanionDeviceManagerService",
+        "com.android.server.restrictions.RestrictionsManagerService",
+        "com.android.server.cocktailbar.CocktailBarManagerService",
+        "com.android.server.cover.CoverManagerService",
+        "com.android.server.media.MediaResourceMonitorService",
+        "com.android.server.camera.CameraServiceProxy",
+        "com.samsung.android.camera.CameraServiceWorker",
+        "com.android.server.incident.IncidentCompanionService",
+        "com.android.server.MmsServiceBroker",
+        "com.android.server.autofill.AutofillManagerService",
+        "com.android.server.clipboard.ClipboardService",
+        "com.android.server.appbinding.AppBindingService$Lifecycle",
+        "com.android.server.soundtrigger_middleware.SoundTriggerMiddlewareService$Lifecycle",
+        "com.android.server.soundtrigger.SoundTriggerService",
+        "com.android.server.blob.BlobStoreManagerService",
+        "com.android.server.voiceinteraction.VoiceInteractionManagerService"
+    };
 
     /* JADX INFO: Access modifiers changed from: private */
     public static int Clog_e(String tag, String msg, Throwable tr) {
@@ -65,10 +108,14 @@ public class IsrbHooks {
                 return;
             }
             if (IsrbHooks.mApplicationObject == null && 1000 == Process.myUid()) {
-                IsrbHooks.Clog_e(IsrbHooks.TAG, "!@*** FATAL EXCEPTION IN SYSTEM PROCESS: " + t.getName(), e);
+                IsrbHooks.Clog_e(
+                        IsrbHooks.TAG,
+                        "!@*** FATAL EXCEPTION IN SYSTEM PROCESS: " + t.getName(),
+                        e);
                 Debug.saveResetReason(Debug.PLATFORM_EXCEPTION, t.getName());
             } else {
-                IsrbHooks.logUncaught(t.getName(), ActivityThread.currentProcessName(), Process.myPid(), e);
+                IsrbHooks.logUncaught(
+                        t.getName(), ActivityThread.currentProcessName(), Process.myPid(), e);
             }
         }
     }
@@ -77,7 +124,8 @@ public class IsrbHooks {
         private final Thread.UncaughtExceptionHandler mHandler;
         private final LoggingHandler mLoggingHandler;
 
-        private ISRBExceptionHandler(Thread.UncaughtExceptionHandler handler, LoggingHandler loggingHandler) {
+        private ISRBExceptionHandler(
+                Thread.UncaughtExceptionHandler handler, LoggingHandler loggingHandler) {
             this.mHandler = handler;
             this.mLoggingHandler = (LoggingHandler) Objects.requireNonNull(loggingHandler);
         }
@@ -95,7 +143,9 @@ public class IsrbHooks {
         @Override // java.lang.Thread.UncaughtExceptionHandler
         public void uncaughtException(Thread thread, Throwable ex) {
             IsrbHooks.mApplicationObject = RuntimeInit.getApplicationObject();
-            if (IsrbHooks.mApplicationObject == null && 1000 == Process.myUid() && !IsrbHooks.checkServiceState()) {
+            if (IsrbHooks.mApplicationObject == null
+                    && 1000 == Process.myUid()
+                    && !IsrbHooks.checkServiceState()) {
                 Slog.d(IsrbHooks.TAG, "checkServiceState is NULL");
                 IsrbHooks.mState = 0;
                 if (this.mHandler != null) {
@@ -129,11 +179,20 @@ public class IsrbHooks {
                 Slog.d(IsrbHooks.TAG, "set SystemProperties for wifi");
                 SystemProperties.set("sys.isrb.wificrash", Boolean.toString(true));
             }
-            if (thread.getName().indexOf("Wifi") >= 0 || thread.getName().indexOf("Network") >= 0 || thread.getName().indexOf("Connectivity") >= 0) {
+            if (thread.getName().indexOf("Wifi") >= 0
+                    || thread.getName().indexOf("Network") >= 0
+                    || thread.getName().indexOf("Connectivity") >= 0) {
                 Slog.d(IsrbHooks.TAG, "set SystemProperties for networkcrash");
                 SystemProperties.set("sys.isrb.networkcrash", Boolean.toString(true));
             }
-            if ("android.fg".equals(thread.getName()) || "android.ui".equals(thread.getName()) || "ActivityManager".equals(thread.getName()) || "PackageManager".equals(thread.getName()) || "android.anim".equals(thread.getName()) || "android.display".equals(thread.getName()) || "ObserverHandler".equals(thread.getName()) || "android.io".equals(thread.getName())) {
+            if ("android.fg".equals(thread.getName())
+                    || "android.ui".equals(thread.getName())
+                    || "ActivityManager".equals(thread.getName())
+                    || "PackageManager".equals(thread.getName())
+                    || "android.anim".equals(thread.getName())
+                    || "android.display".equals(thread.getName())
+                    || "ObserverHandler".equals(thread.getName())
+                    || "android.io".equals(thread.getName())) {
                 Slog.d(IsrbHooks.TAG, "android thread loop");
                 while (true) {
                     try {
@@ -145,18 +204,24 @@ public class IsrbHooks {
             } else {
                 if (IsrbHooks.mApplicationObject == null && 1000 == Process.myUid()) {
                     Handler checkhandler = new Handler(Looper.getMainLooper());
-                    checkhandler.postDelayed(new Runnable() { // from class: com.samsung.isrb.IsrbHooks.ISRBExceptionHandler.1
-                        @Override // java.lang.Runnable
-                        public void run() {
-                            if (IsrbHooks.getEnterIdle()) {
-                                Slog.d(IsrbHooks.TAG, "successfully enter idle");
-                            } else {
-                                IsrbHooks.mState = 2;
-                                Slog.d(IsrbHooks.TAG, "can not enter idle, we should back to rescue party");
-                                throw new RuntimeException("exit frorm loop to next step");
-                            }
-                        }
-                    }, IsrbHooks.ISRB_DETECT_TIME_MS);
+                    checkhandler.postDelayed(
+                            new Runnable() { // from class:
+                                // com.samsung.isrb.IsrbHooks.ISRBExceptionHandler.1
+                                @Override // java.lang.Runnable
+                                public void run() {
+                                    if (IsrbHooks.getEnterIdle()) {
+                                        Slog.d(IsrbHooks.TAG, "successfully enter idle");
+                                    } else {
+                                        IsrbHooks.mState = 2;
+                                        Slog.d(
+                                                IsrbHooks.TAG,
+                                                "can not enter idle, we should back to rescue"
+                                                    + " party");
+                                        throw new RuntimeException("exit frorm loop to next step");
+                                    }
+                                }
+                            },
+                            IsrbHooks.ISRB_DETECT_TIME_MS);
                 }
                 if (thread == Looper.getMainLooper().getThread()) {
                     int mCrashMainCount = 0;
@@ -193,7 +258,15 @@ public class IsrbHooks {
                     return false;
                 }
                 StackTraceElement element = elements[i];
-                if (("android.view.Choreographer".equals(element.getClassName()) && "Choreographer.java".equals(element.getFileName()) && "doFrame".equals(element.getMethodName())) || "onCreate".equals(element.getMethodName()) || "onStart".equals(element.getMethodName()) || "onResume".equals(element.getMethodName()) || "onPause".equals(element.getMethodName()) || "onStop".equals(element.getMethodName()) || "onDestroy".equals(element.getMethodName())) {
+                if (("android.view.Choreographer".equals(element.getClassName())
+                                && "Choreographer.java".equals(element.getFileName())
+                                && "doFrame".equals(element.getMethodName()))
+                        || "onCreate".equals(element.getMethodName())
+                        || "onStart".equals(element.getMethodName())
+                        || "onResume".equals(element.getMethodName())
+                        || "onPause".equals(element.getMethodName())
+                        || "onStop".equals(element.getMethodName())
+                        || "onDestroy".equals(element.getMethodName())) {
                     return true;
                 }
             }
@@ -232,7 +305,8 @@ public class IsrbHooks {
                     return false;
                 }
                 StackTraceElement element = elements[i];
-                if ("startOtherServices".equals(element.getMethodName()) || "startCoreServices".equals(element.getMethodName())) {
+                if ("startOtherServices".equals(element.getMethodName())
+                        || "startCoreServices".equals(element.getMethodName())) {
                     return true;
                 }
             }
@@ -262,10 +336,15 @@ public class IsrbHooks {
         String str = SystemProperties.get("persist.sys.rescue_mode", "");
         if (SystemProperties.getBoolean(PROP_ENABLE_ISRB, false) && !"isrb_boot".equals(str)) {
             String currentProcessName = getCurrentProcessName();
-            if (!("system_server".equals(currentProcessName) || AsPackageName.SYSTEMUI.equals(currentProcessName) || "com.android.networkstack.process".equals(currentProcessName) || "com.android.phone".equals(currentProcessName))) {
+            if (!("system_server".equals(currentProcessName)
+                    || AsPackageName.SYSTEMUI.equals(currentProcessName)
+                    || "com.android.networkstack.process".equals(currentProcessName)
+                    || "com.android.phone".equals(currentProcessName))) {
                 return;
             }
-            Thread.setDefaultUncaughtExceptionHandler(new ISRBExceptionHandler(Thread.getDefaultUncaughtExceptionHandler(), new LoggingHandler()));
+            Thread.setDefaultUncaughtExceptionHandler(
+                    new ISRBExceptionHandler(
+                            Thread.getDefaultUncaughtExceptionHandler(), new LoggingHandler()));
             mState = 0;
         }
     }

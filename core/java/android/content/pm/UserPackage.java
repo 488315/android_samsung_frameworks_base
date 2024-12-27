@@ -1,10 +1,13 @@
 package android.content.pm;
 
 import android.util.SparseArrayMap;
+
 import com.android.internal.util.ArrayUtils;
+
+import libcore.util.EmptyArray;
+
 import java.util.Objects;
 import java.util.Random;
-import libcore.util.EmptyArray;
 
 /* loaded from: classes.dex */
 public final class UserPackage {

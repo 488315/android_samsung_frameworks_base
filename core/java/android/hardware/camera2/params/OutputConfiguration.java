@@ -15,7 +15,9 @@ import android.util.Log;
 import android.util.Size;
 import android.view.Surface;
 import android.view.SurfaceHolder;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -34,17 +36,13 @@ public final class OutputConfiguration implements Parcelable {
     public static final int MIRROR_MODE_NONE = 1;
     public static final int MIRROR_MODE_V = 3;
 
-    @SystemApi
-    public static final int ROTATION_0 = 0;
+    @SystemApi public static final int ROTATION_0 = 0;
 
-    @SystemApi
-    public static final int ROTATION_180 = 2;
+    @SystemApi public static final int ROTATION_180 = 2;
 
-    @SystemApi
-    public static final int ROTATION_270 = 3;
+    @SystemApi public static final int ROTATION_270 = 3;
 
-    @SystemApi
-    public static final int ROTATION_90 = 1;
+    @SystemApi public static final int ROTATION_90 = 1;
     public static final int SURFACE_GROUP_ID_NONE = -1;
     private static final int SURFACE_TYPE_IMAGE_READER = 4;
     private static final int SURFACE_TYPE_MEDIA_CODEC = 3;
@@ -80,36 +78,34 @@ public final class OutputConfiguration implements Parcelable {
     private ArrayList<Surface> mSurfaces;
     private int mTimestampBase;
     private long mUsage;
-    public static final Parcelable.Creator<OutputConfiguration> CREATOR = new Parcelable.Creator<OutputConfiguration>() { // from class: android.hardware.camera2.params.OutputConfiguration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OutputConfiguration createFromParcel(Parcel source) {
-            return new OutputConfiguration(source);
-        }
+    public static final Parcelable.Creator<OutputConfiguration> CREATOR =
+            new Parcelable.Creator<OutputConfiguration>() { // from class:
+                // android.hardware.camera2.params.OutputConfiguration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OutputConfiguration createFromParcel(Parcel source) {
+                    return new OutputConfiguration(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OutputConfiguration[] newArray(int size) {
-            return new OutputConfiguration[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OutputConfiguration[] newArray(int size) {
+                    return new OutputConfiguration[size];
+                }
+            };
     private static AtomicInteger sNextMultiResolutionGroupId = new AtomicInteger(0);
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MirrorMode {
-    }
+    public @interface MirrorMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SensorPixelMode {
-    }
+    public @interface SensorPixelMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StreamUseCase {
-    }
+    public @interface StreamUseCase {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TimestampBase {
-    }
+    public @interface TimestampBase {}
 
     public OutputConfiguration(Surface surface) {
         this(-1, surface, 0);
@@ -121,10 +117,14 @@ public final class OutputConfiguration implements Parcelable {
 
     public void setMultiResolutionOutput() {
         if (this.mIsShared) {
-            throw new IllegalStateException("Multi-resolution output flag must not be set for configuration with surface sharing");
+            throw new IllegalStateException(
+                    "Multi-resolution output flag must not be set for configuration with surface"
+                            + " sharing");
         }
         if (this.mSurfaceGroupId == -1) {
-            throw new IllegalStateException("Multi-resolution output flag should only be set for surface with non-negative group ID");
+            throw new IllegalStateException(
+                    "Multi-resolution output flag should only be set for surface with non-negative"
+                            + " group ID");
         }
         this.mIsMultiResolution = true;
     }
@@ -167,11 +167,13 @@ public final class OutputConfiguration implements Parcelable {
         this.mStreamUseCase = Integer.toUnsignedLong(option) << Long.numberOfTrailingZeros(65536L);
     }
 
-    public static OutputConfiguration semCreateOutputConfiguration(int surfaceGroupId, Surface surface, int rotation, int option) {
+    public static OutputConfiguration semCreateOutputConfiguration(
+            int surfaceGroupId, Surface surface, int rotation, int option) {
         return new OutputConfiguration(surfaceGroupId, surface, rotation, option);
     }
 
-    public static <T> OutputConfiguration semCreateOutputConfiguration(Size surfaceSize, Class<T> klass, int option) {
+    public static <T> OutputConfiguration semCreateOutputConfiguration(
+            Size surfaceSize, Class<T> klass, int option) {
         return new OutputConfiguration(surfaceSize, klass, option);
     }
 
@@ -206,14 +208,18 @@ public final class OutputConfiguration implements Parcelable {
         this.mUsage = 0L;
     }
 
-    public static Collection<OutputConfiguration> createInstancesForMultiResolutionOutput(MultiResolutionImageReader multiResolutionImageReader) {
-        Preconditions.checkNotNull(multiResolutionImageReader, "Multi-resolution image reader must not be null");
+    public static Collection<OutputConfiguration> createInstancesForMultiResolutionOutput(
+            MultiResolutionImageReader multiResolutionImageReader) {
+        Preconditions.checkNotNull(
+                multiResolutionImageReader, "Multi-resolution image reader must not be null");
         int groupId = getAndIncreaseMultiResolutionGroupId();
         ImageReader[] imageReaders = multiResolutionImageReader.getReaders();
         ArrayList<OutputConfiguration> configs = new ArrayList<>();
         for (int i = 0; i < imageReaders.length; i++) {
-            MultiResolutionStreamInfo streamInfo = multiResolutionImageReader.getStreamInfoForImageReader(imageReaders[i]);
-            OutputConfiguration config = new OutputConfiguration(groupId, imageReaders[i].getSurface());
+            MultiResolutionStreamInfo streamInfo =
+                    multiResolutionImageReader.getStreamInfoForImageReader(imageReaders[i]);
+            OutputConfiguration config =
+                    new OutputConfiguration(groupId, imageReaders[i].getSurface());
             config.setPhysicalCameraId(streamInfo.getPhysicalCameraId());
             config.setMultiResolutionOutput();
             configs.add(config);
@@ -221,7 +227,8 @@ public final class OutputConfiguration implements Parcelable {
         return configs;
     }
 
-    public static List<OutputConfiguration> createInstancesForMultiResolutionOutput(Collection<MultiResolutionStreamInfo> streams, int format) {
+    public static List<OutputConfiguration> createInstancesForMultiResolutionOutput(
+            Collection<MultiResolutionStreamInfo> streams, int format) {
         if (streams == null || streams.size() <= 1) {
             throw new IllegalArgumentException("The streams list must contain at least 2 entries");
         }
@@ -240,18 +247,24 @@ public final class OutputConfiguration implements Parcelable {
         return configs;
     }
 
-    public static void setSurfacesForMultiResolutionOutput(Collection<OutputConfiguration> outputConfigurations, MultiResolutionImageReader multiResolutionImageReader) {
+    public static void setSurfacesForMultiResolutionOutput(
+            Collection<OutputConfiguration> outputConfigurations,
+            MultiResolutionImageReader multiResolutionImageReader) {
         Preconditions.checkNotNull(outputConfigurations, "outputConfigurations must not be null");
-        Preconditions.checkNotNull(multiResolutionImageReader, "multiResolutionImageReader must not be null");
+        Preconditions.checkNotNull(
+                multiResolutionImageReader, "multiResolutionImageReader must not be null");
         if (outputConfigurations.size() != multiResolutionImageReader.getReaders().length) {
-            throw new IllegalArgumentException("outputConfigurations and multiResolutionImageReader sizes must match");
+            throw new IllegalArgumentException(
+                    "outputConfigurations and multiResolutionImageReader sizes must match");
         }
         for (OutputConfiguration config : outputConfigurations) {
             String physicalCameraId = config.getPhysicalCameraId();
             if (physicalCameraId == null) {
                 physicalCameraId = "";
             }
-            Surface surface = multiResolutionImageReader.getSurface(config.getConfiguredSize(), physicalCameraId);
+            Surface surface =
+                    multiResolutionImageReader.getSurface(
+                            config.getConfiguredSize(), physicalCameraId);
             config.addSurface(surface);
         }
     }
@@ -343,7 +356,8 @@ public final class OutputConfiguration implements Parcelable {
 
     public void enableSurfaceSharing() {
         if (this.mIsMultiResolution) {
-            throw new IllegalStateException("Cannot enable surface sharing on multi-resolution output configurations");
+            throw new IllegalStateException(
+                    "Cannot enable surface sharing on multi-resolution output configurations");
         }
         this.mIsShared = true;
     }
@@ -354,7 +368,8 @@ public final class OutputConfiguration implements Parcelable {
 
     public void addSensorPixelModeUsed(int sensorPixelModeUsed) {
         if (sensorPixelModeUsed != 0 && sensorPixelModeUsed != 1) {
-            throw new IllegalArgumentException("Not a valid sensor pixel mode " + sensorPixelModeUsed);
+            throw new IllegalArgumentException(
+                    "Not a valid sensor pixel mode " + sensorPixelModeUsed);
         }
         if (this.mSensorPixelModesUsed.contains(Integer.valueOf(sensorPixelModeUsed))) {
             return;
@@ -364,7 +379,10 @@ public final class OutputConfiguration implements Parcelable {
 
     public void removeSensorPixelModeUsed(int sensorPixelModeUsed) {
         if (!this.mSensorPixelModesUsed.remove(Integer.valueOf(sensorPixelModeUsed))) {
-            throw new IllegalArgumentException("sensorPixelMode " + sensorPixelModeUsed + "is not part of this output configuration");
+            throw new IllegalArgumentException(
+                    "sensorPixelMode "
+                            + sensorPixelModeUsed
+                            + "is not part of this output configuration");
         }
     }
 
@@ -382,19 +400,27 @@ public final class OutputConfiguration implements Parcelable {
             throw new IllegalStateException("Surface is already added!");
         }
         if (this.mSurfaces.size() == 1 && !this.mIsShared) {
-            throw new IllegalStateException("Cannot have 2 surfaces for a non-sharing configuration");
+            throw new IllegalStateException(
+                    "Cannot have 2 surfaces for a non-sharing configuration");
         }
         if (this.mSurfaces.size() + 1 > 4) {
             throw new IllegalArgumentException("Exceeds maximum number of surfaces");
         }
         Size surfaceSize = SurfaceUtils.getSurfaceSize(surface);
         if (!surfaceSize.equals(this.mConfiguredSize)) {
-            Log.w(TAG, "Added surface size " + surfaceSize + " is different than pre-configured size " + this.mConfiguredSize + ", the pre-configured size will be used.");
+            Log.w(
+                    TAG,
+                    "Added surface size "
+                            + surfaceSize
+                            + " is different than pre-configured size "
+                            + this.mConfiguredSize
+                            + ", the pre-configured size will be used.");
         }
         if (this.mConfiguredFormat != SurfaceUtils.getSurfaceFormat(surface)) {
             throw new IllegalArgumentException("The format of added surface format doesn't match");
         }
-        if (this.mConfiguredFormat != 34 && this.mConfiguredDataspace != SurfaceUtils.getSurfaceDataspace(surface)) {
+        if (this.mConfiguredFormat != 34
+                && this.mConfiguredDataspace != SurfaceUtils.getSurfaceDataspace(surface)) {
             throw new IllegalArgumentException("The dataspace of added surface doesn't match");
         }
         this.mSurfaces.add(surface);
@@ -403,7 +429,8 @@ public final class OutputConfiguration implements Parcelable {
     public void removeSurface(Surface surface) {
         Preconditions.checkNotNull(surface, "Surface must not be null");
         if (getSurface() == surface) {
-            throw new IllegalArgumentException("Cannot remove surface associated with this output configuration");
+            throw new IllegalArgumentException(
+                    "Cannot remove surface associated with this output configuration");
         }
         if (!this.mSurfaces.remove(surface)) {
             throw new IllegalArgumentException("Surface is not part of this output configuration");
@@ -412,7 +439,8 @@ public final class OutputConfiguration implements Parcelable {
 
     public void setStreamUseCase(long streamUseCase) {
         if (streamUseCase > 6 && streamUseCase < 65536) {
-            throw new IllegalArgumentException("Not a valid stream use case value " + streamUseCase);
+            throw new IllegalArgumentException(
+                    "Not a valid stream use case value " + streamUseCase);
         }
         this.mStreamUseCase = streamUseCase;
     }
@@ -668,11 +696,28 @@ public final class OutputConfiguration implements Parcelable {
             return false;
         }
         OutputConfiguration other = (OutputConfiguration) obj;
-        if (this.mRotation != other.mRotation || !this.mConfiguredSize.equals(other.mConfiguredSize) || this.mConfiguredFormat != other.mConfiguredFormat || this.mSurfaceGroupId != other.mSurfaceGroupId || this.mSurfaceType != other.mSurfaceType || this.mIsDeferredConfig != other.mIsDeferredConfig || this.mIsShared != other.mIsShared || this.mConfiguredDataspace != other.mConfiguredDataspace || this.mConfiguredGenerationId != other.mConfiguredGenerationId || !Objects.equals(this.mPhysicalCameraId, other.mPhysicalCameraId) || this.mIsMultiResolution != other.mIsMultiResolution || this.mStreamUseCase != other.mStreamUseCase || this.mTimestampBase != other.mTimestampBase || this.mMirrorMode != other.mMirrorMode || this.mReadoutTimestampEnabled != other.mReadoutTimestampEnabled || this.mUsage != other.mUsage || this.mSensorPixelModesUsed.size() != other.mSensorPixelModesUsed.size()) {
+        if (this.mRotation != other.mRotation
+                || !this.mConfiguredSize.equals(other.mConfiguredSize)
+                || this.mConfiguredFormat != other.mConfiguredFormat
+                || this.mSurfaceGroupId != other.mSurfaceGroupId
+                || this.mSurfaceType != other.mSurfaceType
+                || this.mIsDeferredConfig != other.mIsDeferredConfig
+                || this.mIsShared != other.mIsShared
+                || this.mConfiguredDataspace != other.mConfiguredDataspace
+                || this.mConfiguredGenerationId != other.mConfiguredGenerationId
+                || !Objects.equals(this.mPhysicalCameraId, other.mPhysicalCameraId)
+                || this.mIsMultiResolution != other.mIsMultiResolution
+                || this.mStreamUseCase != other.mStreamUseCase
+                || this.mTimestampBase != other.mTimestampBase
+                || this.mMirrorMode != other.mMirrorMode
+                || this.mReadoutTimestampEnabled != other.mReadoutTimestampEnabled
+                || this.mUsage != other.mUsage
+                || this.mSensorPixelModesUsed.size() != other.mSensorPixelModesUsed.size()) {
             return false;
         }
         for (int j = 0; j < this.mSensorPixelModesUsed.size(); j++) {
-            if (!Objects.equals(this.mSensorPixelModesUsed.get(j), other.mSensorPixelModesUsed.get(j))) {
+            if (!Objects.equals(
+                    this.mSensorPixelModesUsed.get(j), other.mSensorPixelModesUsed.get(j))) {
                 return false;
             }
         }
@@ -682,19 +727,23 @@ public final class OutputConfiguration implements Parcelable {
                 return false;
             }
         }
-        if ((!this.mIsDeferredConfig && this.mSurfaces.size() != other.mSurfaces.size()) || this.mDynamicRangeProfile != other.mDynamicRangeProfile || this.mColorSpace != other.mColorSpace) {
+        if ((!this.mIsDeferredConfig && this.mSurfaces.size() != other.mSurfaces.size())
+                || this.mDynamicRangeProfile != other.mDynamicRangeProfile
+                || this.mColorSpace != other.mColorSpace) {
             return false;
         }
         return true;
     }
 
     private static int getAndIncreaseMultiResolutionGroupId() {
-        return sNextMultiResolutionGroupId.getAndUpdate(new IntUnaryOperator() { // from class: android.hardware.camera2.params.OutputConfiguration$$ExternalSyntheticLambda0
-            @Override // java.util.function.IntUnaryOperator
-            public final int applyAsInt(int i) {
-                return OutputConfiguration.lambda$getAndIncreaseMultiResolutionGroupId$0(i);
-            }
-        });
+        return sNextMultiResolutionGroupId.getAndUpdate(
+                new IntUnaryOperator() { // from class:
+                    // android.hardware.camera2.params.OutputConfiguration$$ExternalSyntheticLambda0
+                    @Override // java.util.function.IntUnaryOperator
+                    public final int applyAsInt(int i) {
+                        return OutputConfiguration.lambda$getAndIncreaseMultiResolutionGroupId$0(i);
+                    }
+                });
     }
 
     static /* synthetic */ int lambda$getAndIncreaseMultiResolutionGroupId$0(int i) {
@@ -703,8 +752,43 @@ public final class OutputConfiguration implements Parcelable {
 
     public int hashCode() {
         if (this.mIsDeferredConfig) {
-            return HashCodeHelpers.hashCode(this.mRotation, this.mConfiguredSize.hashCode(), this.mConfiguredFormat, this.mConfiguredDataspace, this.mSurfaceGroupId, this.mSurfaceType, this.mIsShared ? 1.0f : 0.0f, this.mPhysicalCameraId == null ? 0.0f : this.mPhysicalCameraId.hashCode(), this.mIsMultiResolution ? 1.0f : 0.0f, this.mSensorPixelModesUsed.hashCode(), this.mDynamicRangeProfile, this.mColorSpace, this.mStreamUseCase, this.mTimestampBase, this.mMirrorMode, this.mReadoutTimestampEnabled ? 1.0f : 0.0f, Long.hashCode(this.mUsage));
+            return HashCodeHelpers.hashCode(
+                    this.mRotation,
+                    this.mConfiguredSize.hashCode(),
+                    this.mConfiguredFormat,
+                    this.mConfiguredDataspace,
+                    this.mSurfaceGroupId,
+                    this.mSurfaceType,
+                    this.mIsShared ? 1.0f : 0.0f,
+                    this.mPhysicalCameraId == null ? 0.0f : this.mPhysicalCameraId.hashCode(),
+                    this.mIsMultiResolution ? 1.0f : 0.0f,
+                    this.mSensorPixelModesUsed.hashCode(),
+                    this.mDynamicRangeProfile,
+                    this.mColorSpace,
+                    this.mStreamUseCase,
+                    this.mTimestampBase,
+                    this.mMirrorMode,
+                    this.mReadoutTimestampEnabled ? 1.0f : 0.0f,
+                    Long.hashCode(this.mUsage));
         }
-        return HashCodeHelpers.hashCode(this.mRotation, this.mSurfaces.hashCode(), this.mConfiguredGenerationId, this.mConfiguredSize.hashCode(), this.mConfiguredFormat, this.mConfiguredDataspace, this.mSurfaceGroupId, this.mIsShared ? 1.0f : 0.0f, this.mPhysicalCameraId == null ? 0.0f : this.mPhysicalCameraId.hashCode(), this.mIsMultiResolution ? 1.0f : 0.0f, this.mSensorPixelModesUsed.hashCode(), this.mDynamicRangeProfile, this.mColorSpace, this.mStreamUseCase, this.mTimestampBase, this.mMirrorMode, this.mReadoutTimestampEnabled ? 1.0f : 0.0f, Long.hashCode(this.mUsage));
+        return HashCodeHelpers.hashCode(
+                this.mRotation,
+                this.mSurfaces.hashCode(),
+                this.mConfiguredGenerationId,
+                this.mConfiguredSize.hashCode(),
+                this.mConfiguredFormat,
+                this.mConfiguredDataspace,
+                this.mSurfaceGroupId,
+                this.mIsShared ? 1.0f : 0.0f,
+                this.mPhysicalCameraId == null ? 0.0f : this.mPhysicalCameraId.hashCode(),
+                this.mIsMultiResolution ? 1.0f : 0.0f,
+                this.mSensorPixelModesUsed.hashCode(),
+                this.mDynamicRangeProfile,
+                this.mColorSpace,
+                this.mStreamUseCase,
+                this.mTimestampBase,
+                this.mMirrorMode,
+                this.mReadoutTimestampEnabled ? 1.0f : 0.0f,
+                Long.hashCode(this.mUsage));
     }
 }

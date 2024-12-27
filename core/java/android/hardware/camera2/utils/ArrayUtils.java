@@ -37,7 +37,8 @@ public class ArrayUtils {
         return -1;
     }
 
-    public static int[] convertStringListToIntArray(List<String> list, String[] convertFrom, int[] convertTo) {
+    public static int[] convertStringListToIntArray(
+            List<String> list, String[] convertFrom, int[] convertTo) {
         if (list == null) {
             return null;
         }
@@ -49,7 +50,8 @@ public class ArrayUtils {
         return returnArray;
     }
 
-    public static List<Integer> convertStringListToIntList(List<String> list, String[] convertFrom, int[] convertTo) {
+    public static List<Integer> convertStringListToIntList(
+            List<String> list, String[] convertFrom, int[] convertTo) {
         if (list == null) {
             return null;
         }

@@ -3,23 +3,27 @@ package com.samsung.android.location;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.telecom.ParcelableCallAnalytics;
+
 import com.samsung.android.lock.LsConstants;
 
 /* loaded from: classes6.dex */
 public class SemLocationBatchingRequest implements Parcelable {
-    public static final Parcelable.Creator<SemLocationBatchingRequest> CREATOR = new Parcelable.Creator<SemLocationBatchingRequest>() { // from class: com.samsung.android.location.SemLocationBatchingRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemLocationBatchingRequest createFromParcel(Parcel in) {
-            return new SemLocationBatchingRequest(in);
-        }
+    public static final Parcelable.Creator<SemLocationBatchingRequest> CREATOR =
+            new Parcelable.Creator<
+                    SemLocationBatchingRequest>() { // from class:
+                                                    // com.samsung.android.location.SemLocationBatchingRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemLocationBatchingRequest createFromParcel(Parcel in) {
+                    return new SemLocationBatchingRequest(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemLocationBatchingRequest[] newArray(int size) {
-            return new SemLocationBatchingRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemLocationBatchingRequest[] newArray(int size) {
+                    return new SemLocationBatchingRequest[size];
+                }
+            };
     private long maxInterval;
     private int maxNumUpdates;
     private long maxWaitTime;

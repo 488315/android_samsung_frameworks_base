@@ -24,19 +24,20 @@ public class ShutdownActivity extends Activity {
         String str = TAG;
         Slog.i(TAG, "onCreate(): reason = " + reason);
         Thread thr = new Thread(str) { // from class: com.android.internal.app.ShutdownActivity.1
-            @Override // java.lang.Thread, java.lang.Runnable
-            public void run() {
-                IPowerManager pm = IPowerManager.Stub.asInterface(ServiceManager.getService("power"));
-                try {
-                    if (ShutdownActivity.this.mReboot) {
-                        pm.reboot(ShutdownActivity.this.mConfirm, reason, false);
-                    } else {
-                        pm.shutdown(ShutdownActivity.this.mConfirm, reason, false);
+                    @Override // java.lang.Thread, java.lang.Runnable
+                    public void run() {
+                        IPowerManager pm =
+                                IPowerManager.Stub.asInterface(ServiceManager.getService("power"));
+                        try {
+                            if (ShutdownActivity.this.mReboot) {
+                                pm.reboot(ShutdownActivity.this.mConfirm, reason, false);
+                            } else {
+                                pm.shutdown(ShutdownActivity.this.mConfirm, reason, false);
+                            }
+                        } catch (RemoteException e) {
+                        }
                     }
-                } catch (RemoteException e) {
-                }
-            }
-        };
+                };
         thr.start();
         finish();
         try {

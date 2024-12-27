@@ -19,16 +19,36 @@ public class SystemUiSystemPropertiesFlags {
     }
 
     public static final class NotificationFlags {
-        public static final Flag LOG_DND_STATE_EVENTS = SystemUiSystemPropertiesFlags.releasedFlag("persist.sysui.notification.log_dnd_state_events");
-        public static final Flag RANKING_UPDATE_ASHMEM = SystemUiSystemPropertiesFlags.devFlag("persist.sysui.notification.ranking_update_ashmem");
-        public static final Flag PROPAGATE_CHANNEL_UPDATES_TO_CONVERSATIONS = SystemUiSystemPropertiesFlags.releasedFlag("persist.sysui.notification.propagate_channel_updates_to_conversations");
-        public static final Flag NOTIF_COOLDOWN_T1 = SystemUiSystemPropertiesFlags.devFlag("persist.debug.sysui.notification.notif_cooldown_t1", 60000);
-        public static final Flag NOTIF_COOLDOWN_T2 = SystemUiSystemPropertiesFlags.devFlag("persist.debug.sysui.notification.notif_cooldown_t2", 10000);
-        public static final Flag NOTIF_VOLUME1 = SystemUiSystemPropertiesFlags.devFlag("persist.debug.sysui.notification.notif_volume1", 30);
-        public static final Flag NOTIF_VOLUME2 = SystemUiSystemPropertiesFlags.devFlag("persist.debug.sysui.notification.notif_volume2", 0);
-        public static final Flag NOTIF_COOLDOWN_COUNTER_RESET = SystemUiSystemPropertiesFlags.devFlag("persist.debug.sysui.notification.notif_cooldown_counter_reset", 10);
-        public static final Flag NOTIF_AVALANCHE_TIMEOUT = SystemUiSystemPropertiesFlags.devFlag("persist.debug.sysui.notification.notif_avalanche_timeout", 120000);
-        public static final Flag DEBUG_SHORT_BITMAP_DURATION = SystemUiSystemPropertiesFlags.devFlag("persist.sysui.notification.debug_short_bitmap_duration");
+        public static final Flag LOG_DND_STATE_EVENTS =
+                SystemUiSystemPropertiesFlags.releasedFlag(
+                        "persist.sysui.notification.log_dnd_state_events");
+        public static final Flag RANKING_UPDATE_ASHMEM =
+                SystemUiSystemPropertiesFlags.devFlag(
+                        "persist.sysui.notification.ranking_update_ashmem");
+        public static final Flag PROPAGATE_CHANNEL_UPDATES_TO_CONVERSATIONS =
+                SystemUiSystemPropertiesFlags.releasedFlag(
+                        "persist.sysui.notification.propagate_channel_updates_to_conversations");
+        public static final Flag NOTIF_COOLDOWN_T1 =
+                SystemUiSystemPropertiesFlags.devFlag(
+                        "persist.debug.sysui.notification.notif_cooldown_t1", 60000);
+        public static final Flag NOTIF_COOLDOWN_T2 =
+                SystemUiSystemPropertiesFlags.devFlag(
+                        "persist.debug.sysui.notification.notif_cooldown_t2", 10000);
+        public static final Flag NOTIF_VOLUME1 =
+                SystemUiSystemPropertiesFlags.devFlag(
+                        "persist.debug.sysui.notification.notif_volume1", 30);
+        public static final Flag NOTIF_VOLUME2 =
+                SystemUiSystemPropertiesFlags.devFlag(
+                        "persist.debug.sysui.notification.notif_volume2", 0);
+        public static final Flag NOTIF_COOLDOWN_COUNTER_RESET =
+                SystemUiSystemPropertiesFlags.devFlag(
+                        "persist.debug.sysui.notification.notif_cooldown_counter_reset", 10);
+        public static final Flag NOTIF_AVALANCHE_TIMEOUT =
+                SystemUiSystemPropertiesFlags.devFlag(
+                        "persist.debug.sysui.notification.notif_avalanche_timeout", 120000);
+        public static final Flag DEBUG_SHORT_BITMAP_DURATION =
+                SystemUiSystemPropertiesFlags.devFlag(
+                        "persist.sysui.notification.debug_short_bitmap_duration");
     }
 
     static {

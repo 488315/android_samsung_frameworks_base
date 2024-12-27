@@ -12,7 +12,8 @@ public final class VirtualCameraConversionUtil$1 extends Binder implements IVirt
     public static final /* synthetic */ int $r8$clinit = 0;
     public final /* synthetic */ android.companion.virtual.camera.IVirtualCameraCallback val$camera;
 
-    public VirtualCameraConversionUtil$1(android.companion.virtual.camera.IVirtualCameraCallback iVirtualCameraCallback) {
+    public VirtualCameraConversionUtil$1(
+            android.companion.virtual.camera.IVirtualCameraCallback iVirtualCameraCallback) {
         this.val$camera = iVirtualCameraCallback;
         attachInterface(this, "android.companion.virtualcamera.IVirtualCameraCallback");
     }
@@ -56,7 +57,8 @@ public final class VirtualCameraConversionUtil$1 extends Binder implements IVirt
             int readInt3 = parcel.readInt();
             int readInt4 = parcel.readInt();
             parcel.enforceNoDataAvail();
-            android.companion.virtual.camera.IVirtualCameraCallback iVirtualCameraCallback = this.val$camera;
+            android.companion.virtual.camera.IVirtualCameraCallback iVirtualCameraCallback =
+                    this.val$camera;
             if (readInt4 != 1) {
                 i3 = readInt4 != 35 ? 0 : 35;
             } else {

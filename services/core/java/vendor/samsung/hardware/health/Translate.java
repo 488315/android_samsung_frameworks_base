@@ -7,17 +7,20 @@ import android.hardware.health.V2_1.HealthInfo;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public abstract class Translate {
-    public static SehHealthInfo h2saTranslate(vendor.samsung.hardware.health.V2_0.SehHealthInfo sehHealthInfo) {
+    public static SehHealthInfo h2saTranslate(
+            vendor.samsung.hardware.health.V2_0.SehHealthInfo sehHealthInfo) {
         SehHealthInfo sehHealthInfo2 = new SehHealthInfo();
         HealthInfo healthInfo = sehHealthInfo.legacy;
         android.hardware.health.HealthInfo healthInfo2 = new android.hardware.health.HealthInfo();
-        android.hardware.health.Translate.h2aTranslateInternal(healthInfo2, healthInfo.legacy.legacy);
+        android.hardware.health.Translate.h2aTranslateInternal(
+                healthInfo2, healthInfo.legacy.legacy);
         android.hardware.health.V2_0.HealthInfo healthInfo3 = healthInfo.legacy;
         healthInfo2.batteryCurrentAverageMicroamps = healthInfo3.batteryCurrentAverage;
         healthInfo2.diskStats = new DiskStats[healthInfo3.diskStats.size()];
         for (int i = 0; i < healthInfo.legacy.diskStats.size(); i++) {
             DiskStats[] diskStatsArr = healthInfo2.diskStats;
-            android.hardware.health.V2_0.DiskStats diskStats = (android.hardware.health.V2_0.DiskStats) healthInfo.legacy.diskStats.get(i);
+            android.hardware.health.V2_0.DiskStats diskStats =
+                    (android.hardware.health.V2_0.DiskStats) healthInfo.legacy.diskStats.get(i);
             DiskStats diskStats2 = new DiskStats();
             diskStats2.reads = diskStats.reads;
             diskStats2.readMerges = diskStats.readMerges;
@@ -35,7 +38,9 @@ public abstract class Translate {
         healthInfo2.storageInfos = new StorageInfo[healthInfo.legacy.storageInfos.size()];
         for (int i2 = 0; i2 < healthInfo.legacy.storageInfos.size(); i2++) {
             StorageInfo[] storageInfoArr = healthInfo2.storageInfos;
-            android.hardware.health.V2_0.StorageInfo storageInfo = (android.hardware.health.V2_0.StorageInfo) healthInfo.legacy.storageInfos.get(i2);
+            android.hardware.health.V2_0.StorageInfo storageInfo =
+                    (android.hardware.health.V2_0.StorageInfo)
+                            healthInfo.legacy.storageInfos.get(i2);
             StorageInfo storageInfo2 = new StorageInfo();
             storageInfo2.eol = storageInfo.eol;
             storageInfo2.lifetimeA = storageInfo.lifetimeA;
@@ -44,8 +49,10 @@ public abstract class Translate {
             storageInfoArr[i2] = storageInfo2;
         }
         healthInfo2.batteryCapacityLevel = healthInfo.batteryCapacityLevel;
-        healthInfo2.batteryChargeTimeToFullNowSeconds = healthInfo.batteryChargeTimeToFullNowSeconds;
-        healthInfo2.batteryFullChargeDesignCapacityUah = healthInfo.batteryFullChargeDesignCapacityUah;
+        healthInfo2.batteryChargeTimeToFullNowSeconds =
+                healthInfo.batteryChargeTimeToFullNowSeconds;
+        healthInfo2.batteryFullChargeDesignCapacityUah =
+                healthInfo.batteryFullChargeDesignCapacityUah;
         sehHealthInfo2.aospHealthInfo = healthInfo2;
         sehHealthInfo2.batteryCurrentNow = sehHealthInfo.batteryCurrentNow;
         sehHealthInfo2.batteryOnline = sehHealthInfo.batteryOnline;

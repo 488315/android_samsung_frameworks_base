@@ -3,6 +3,7 @@ package android.media;
 import android.media.permission.SafeCloseable;
 import android.os.Bundle;
 import android.util.Log;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -31,13 +32,18 @@ public class LoudnessCodecController implements SafeCloseable {
     public static LoudnessCodecController create(int sessionId) {
         LoudnessCodecDispatcher dispatcher = new LoudnessCodecDispatcher(AudioManager.getService());
         LoudnessCodecController controller = new LoudnessCodecController(dispatcher, sessionId);
-        dispatcher.addLoudnessCodecListener(controller, Executors.newSingleThreadExecutor(), new OnLoudnessCodecUpdateListener() { // from class: android.media.LoudnessCodecController.1
-        });
+        dispatcher.addLoudnessCodecListener(
+                controller,
+                Executors.newSingleThreadExecutor(),
+                new OnLoudnessCodecUpdateListener() { // from class:
+                    // android.media.LoudnessCodecController.1
+                });
         dispatcher.startLoudnessCodecUpdates(sessionId);
         return controller;
     }
 
-    public static LoudnessCodecController create(int sessionId, Executor executor, OnLoudnessCodecUpdateListener listener) {
+    public static LoudnessCodecController create(
+            int sessionId, Executor executor, OnLoudnessCodecUpdateListener listener) {
         Objects.requireNonNull(executor, "Executor cannot be null");
         Objects.requireNonNull(listener, "OnLoudnessCodecUpdateListener cannot be null");
         LoudnessCodecDispatcher dispatcher = new LoudnessCodecDispatcher(AudioManager.getService());
@@ -47,7 +53,11 @@ public class LoudnessCodecController implements SafeCloseable {
         return controller;
     }
 
-    public static LoudnessCodecController createForTesting(int sessionId, Executor executor, OnLoudnessCodecUpdateListener listener, IAudioService service) {
+    public static LoudnessCodecController createForTesting(
+            int sessionId,
+            Executor executor,
+            OnLoudnessCodecUpdateListener listener,
+            IAudioService service) {
         Objects.requireNonNull(service, "IAudioService cannot be null");
         Objects.requireNonNull(executor, "Executor cannot be null");
         Objects.requireNonNull(listener, "OnLoudnessCodecUpdateListener cannot be null");
@@ -59,12 +69,17 @@ public class LoudnessCodecController implements SafeCloseable {
     }
 
     private LoudnessCodecController(LoudnessCodecDispatcher lcDispatcher, int sessionId) {
-        this.mLcDispatcher = (LoudnessCodecDispatcher) Objects.requireNonNull(lcDispatcher, "Dispatcher cannot be null");
+        this.mLcDispatcher =
+                (LoudnessCodecDispatcher)
+                        Objects.requireNonNull(lcDispatcher, "Dispatcher cannot be null");
         this.mSessionId = sessionId;
     }
 
     public boolean addMediaCodec(MediaCodec mediaCodec) {
-        final MediaCodec mc = (MediaCodec) Objects.requireNonNull(mediaCodec, "MediaCodec for addMediaCodec cannot be null");
+        final MediaCodec mc =
+                (MediaCodec)
+                        Objects.requireNonNull(
+                                mediaCodec, "MediaCodec for addMediaCodec cannot be null");
         LoudnessCodecInfo mcInfo = getCodecInfo(mc);
         if (mcInfo == null) {
             Log.v(TAG, "Could not extract codec loudness information");
@@ -72,25 +87,32 @@ public class LoudnessCodecController implements SafeCloseable {
         }
         synchronized (this.mControllerLock) {
             final AtomicBoolean containsCodec = new AtomicBoolean(false);
-            if (this.mMediaCodecs.computeIfPresent(mcInfo, new BiFunction() { // from class: android.media.LoudnessCodecController$$ExternalSyntheticLambda1
-                @Override // java.util.function.BiFunction
-                public final Object apply(Object obj, Object obj2) {
-                    return LoudnessCodecController.lambda$addMediaCodec$0(containsCodec, mc, (LoudnessCodecInfo) obj, (Set) obj2);
-                }
-            }) == null) {
+            if (this.mMediaCodecs.computeIfPresent(
+                            mcInfo,
+                            new BiFunction() { // from class:
+                                // android.media.LoudnessCodecController$$ExternalSyntheticLambda1
+                                @Override // java.util.function.BiFunction
+                                public final Object apply(Object obj, Object obj2) {
+                                    return LoudnessCodecController.lambda$addMediaCodec$0(
+                                            containsCodec, mc, (LoudnessCodecInfo) obj, (Set) obj2);
+                                }
+                            })
+                    == null) {
                 Set<MediaCodec> newSet = new HashSet<>();
                 newSet.add(mc);
                 this.mMediaCodecs.put(mcInfo, newSet);
             }
             if (containsCodec.get()) {
-                throw new IllegalArgumentException("Loudness controller already added " + mediaCodec);
+                throw new IllegalArgumentException(
+                        "Loudness controller already added " + mediaCodec);
             }
         }
         this.mLcDispatcher.addLoudnessCodecInfo(this.mSessionId, mediaCodec.hashCode(), mcInfo);
         return true;
     }
 
-    static /* synthetic */ Set lambda$addMediaCodec$0(AtomicBoolean containsCodec, MediaCodec mc, LoudnessCodecInfo info, Set codecSet) {
+    static /* synthetic */ Set lambda$addMediaCodec$0(
+            AtomicBoolean containsCodec, MediaCodec mc, LoudnessCodecInfo info, Set codecSet) {
         containsCodec.set(!codecSet.add(mc));
         return codecSet;
     }
@@ -98,19 +120,33 @@ public class LoudnessCodecController implements SafeCloseable {
     public void removeMediaCodec(final MediaCodec mediaCodec) {
         final AtomicBoolean removedMc = new AtomicBoolean(false);
         final AtomicBoolean removeInfo = new AtomicBoolean(false);
-        LoudnessCodecInfo mcInfo = getCodecInfo((MediaCodec) Objects.requireNonNull(mediaCodec, "MediaCodec for removeMediaCodec cannot be null"));
+        LoudnessCodecInfo mcInfo =
+                getCodecInfo(
+                        (MediaCodec)
+                                Objects.requireNonNull(
+                                        mediaCodec,
+                                        "MediaCodec for removeMediaCodec cannot be null"));
         if (mcInfo == null) {
             throw new IllegalArgumentException("Could not extract codec loudness information");
         }
         synchronized (this.mControllerLock) {
-            this.mMediaCodecs.computeIfPresent(mcInfo, new BiFunction() { // from class: android.media.LoudnessCodecController$$ExternalSyntheticLambda0
-                @Override // java.util.function.BiFunction
-                public final Object apply(Object obj, Object obj2) {
-                    return LoudnessCodecController.lambda$removeMediaCodec$1(removedMc, mediaCodec, removeInfo, (LoudnessCodecInfo) obj, (Set) obj2);
-                }
-            });
+            this.mMediaCodecs.computeIfPresent(
+                    mcInfo,
+                    new BiFunction() { // from class:
+                        // android.media.LoudnessCodecController$$ExternalSyntheticLambda0
+                        @Override // java.util.function.BiFunction
+                        public final Object apply(Object obj, Object obj2) {
+                            return LoudnessCodecController.lambda$removeMediaCodec$1(
+                                    removedMc,
+                                    mediaCodec,
+                                    removeInfo,
+                                    (LoudnessCodecInfo) obj,
+                                    (Set) obj2);
+                        }
+                    });
             if (!removedMc.get()) {
-                throw new IllegalArgumentException("Loudness controller does not contain " + mediaCodec);
+                throw new IllegalArgumentException(
+                        "Loudness controller does not contain " + mediaCodec);
             }
         }
         if (removeInfo.get()) {
@@ -118,7 +154,12 @@ public class LoudnessCodecController implements SafeCloseable {
         }
     }
 
-    static /* synthetic */ Set lambda$removeMediaCodec$1(AtomicBoolean removedMc, MediaCodec mediaCodec, AtomicBoolean removeInfo, LoudnessCodecInfo format, Set mcs) {
+    static /* synthetic */ Set lambda$removeMediaCodec$1(
+            AtomicBoolean removedMc,
+            MediaCodec mediaCodec,
+            AtomicBoolean removeInfo,
+            LoudnessCodecInfo format,
+            Set mcs) {
         removedMc.set(mcs.remove(mediaCodec));
         if (mcs.isEmpty()) {
             removeInfo.set(true);
@@ -136,7 +177,8 @@ public class LoudnessCodecController implements SafeCloseable {
         synchronized (this.mControllerLock) {
             Set<MediaCodec> codecs = this.mMediaCodecs.get(codecInfo);
             if (codecs == null || !codecs.contains(mediaCodec)) {
-                throw new IllegalArgumentException("MediaCodec was not added for loudness annotation");
+                throw new IllegalArgumentException(
+                        "MediaCodec was not added for loudness annotation");
             }
         }
         return this.mLcDispatcher.getLoudnessCodecParams(codecInfo);
@@ -156,7 +198,8 @@ public class LoudnessCodecController implements SafeCloseable {
 
     void mediaCodecsConsume(Consumer<Map.Entry<LoudnessCodecInfo, Set<MediaCodec>>> consumer) {
         synchronized (this.mControllerLock) {
-            for (Map.Entry<LoudnessCodecInfo, Set<MediaCodec>> entry : this.mMediaCodecs.entrySet()) {
+            for (Map.Entry<LoudnessCodecInfo, Set<MediaCodec>> entry :
+                    this.mMediaCodecs.entrySet()) {
                 consumer.accept(entry);
             }
         }
@@ -190,7 +233,8 @@ public class LoudnessCodecController implements SafeCloseable {
                     lci.metadataType = 1;
                 }
                 MediaFormat outputFormat = mediaCodec.getOutputFormat();
-                if (outputFormat.getInteger(MediaFormat.KEY_CHANNEL_COUNT) >= inputFormat.getInteger(MediaFormat.KEY_CHANNEL_COUNT)) {
+                if (outputFormat.getInteger(MediaFormat.KEY_CHANNEL_COUNT)
+                        >= inputFormat.getInteger(MediaFormat.KEY_CHANNEL_COUNT)) {
                     z = false;
                 }
                 lci.isDownmixing = z;

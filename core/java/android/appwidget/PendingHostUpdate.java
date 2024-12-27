@@ -6,19 +6,21 @@ import android.widget.RemoteViews;
 
 /* loaded from: classes.dex */
 public class PendingHostUpdate implements Parcelable {
-    public static final Parcelable.Creator<PendingHostUpdate> CREATOR = new Parcelable.Creator<PendingHostUpdate>() { // from class: android.appwidget.PendingHostUpdate.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PendingHostUpdate createFromParcel(Parcel parcel) {
-            return new PendingHostUpdate(parcel);
-        }
+    public static final Parcelable.Creator<PendingHostUpdate> CREATOR =
+            new Parcelable.Creator<
+                    PendingHostUpdate>() { // from class: android.appwidget.PendingHostUpdate.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PendingHostUpdate createFromParcel(Parcel parcel) {
+                    return new PendingHostUpdate(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PendingHostUpdate[] newArray(int size) {
-            return new PendingHostUpdate[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PendingHostUpdate[] newArray(int size) {
+                    return new PendingHostUpdate[size];
+                }
+            };
     static final int TYPE_APP_WIDGET_REMOVED = 3;
     static final int TYPE_PROVIDER_CHANGED = 1;
     static final int TYPE_VIEWS_UPDATE = 0;

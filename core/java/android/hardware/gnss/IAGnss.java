@@ -1,6 +1,5 @@
 package android.hardware.gnss;
 
-import android.hardware.gnss.IAGnssCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -36,24 +35,20 @@ public interface IAGnss extends IInterface {
 
     public static class Default implements IAGnss {
         @Override // android.hardware.gnss.IAGnss
-        public void setCallback(IAGnssCallback callback) throws RemoteException {
-        }
+        public void setCallback(IAGnssCallback callback) throws RemoteException {}
 
         @Override // android.hardware.gnss.IAGnss
-        public void dataConnClosed() throws RemoteException {
-        }
+        public void dataConnClosed() throws RemoteException {}
 
         @Override // android.hardware.gnss.IAGnss
-        public void dataConnFailed() throws RemoteException {
-        }
+        public void dataConnFailed() throws RemoteException {}
 
         @Override // android.hardware.gnss.IAGnss
-        public void setServer(int type, String hostname, int port) throws RemoteException {
-        }
+        public void setServer(int type, String hostname, int port) throws RemoteException {}
 
         @Override // android.hardware.gnss.IAGnss
-        public void dataConnOpen(long networkHandle, String apn, int apnIpType) throws RemoteException {
-        }
+        public void dataConnOpen(long networkHandle, String apn, int apnIpType)
+                throws RemoteException {}
 
         @Override // android.hardware.gnss.IAGnss
         public int getInterfaceVersion() {
@@ -71,7 +66,7 @@ public interface IAGnss extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAGnss {
+    public abstract static class Stub extends Binder implements IAGnss {
         static final int TRANSACTION_dataConnClosed = 2;
         static final int TRANSACTION_dataConnFailed = 3;
         static final int TRANSACTION_dataConnOpen = 5;
@@ -128,7 +123,8 @@ public interface IAGnss extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -274,7 +270,8 @@ public interface IAGnss extends IInterface {
             }
 
             @Override // android.hardware.gnss.IAGnss
-            public void dataConnOpen(long networkHandle, String apn, int apnIpType) throws RemoteException {
+            public void dataConnOpen(long networkHandle, String apn, int apnIpType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

@@ -3,27 +3,29 @@ package android.media.permission;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class Identity implements Parcelable {
-    public static final Parcelable.Creator<Identity> CREATOR = new Parcelable.Creator<Identity>() { // from class: android.media.permission.Identity.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Identity createFromParcel(Parcel _aidl_source) {
-            Identity _aidl_out = new Identity();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<Identity> CREATOR =
+            new Parcelable.Creator<Identity>() { // from class: android.media.permission.Identity.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Identity createFromParcel(Parcel _aidl_source) {
+                    Identity _aidl_out = new Identity();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Identity[] newArray(int _aidl_size) {
-            return new Identity[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Identity[] newArray(int _aidl_size) {
+                    return new Identity[_aidl_size];
+                }
+            };
     public String attributionTag;
     public String packageName;
     public int uid = -1;
@@ -112,14 +114,23 @@ public class Identity implements Parcelable {
             return false;
         }
         Identity that = (Identity) other;
-        if (Objects.deepEquals(Integer.valueOf(this.uid), Integer.valueOf(that.uid)) && Objects.deepEquals(Integer.valueOf(this.pid), Integer.valueOf(that.pid)) && Objects.deepEquals(this.packageName, that.packageName) && Objects.deepEquals(this.attributionTag, that.attributionTag)) {
+        if (Objects.deepEquals(Integer.valueOf(this.uid), Integer.valueOf(that.uid))
+                && Objects.deepEquals(Integer.valueOf(this.pid), Integer.valueOf(that.pid))
+                && Objects.deepEquals(this.packageName, that.packageName)
+                && Objects.deepEquals(this.attributionTag, that.attributionTag)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.uid), Integer.valueOf(this.pid), this.packageName, this.attributionTag).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                Integer.valueOf(this.uid),
+                                Integer.valueOf(this.pid),
+                                this.packageName,
+                                this.attributionTag)
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

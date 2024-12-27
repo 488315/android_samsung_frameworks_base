@@ -5,13 +5,14 @@ import android.os.UserHandle;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.SparseBooleanArray;
+
 import com.android.internal.util.function.QuadConsumer;
 import com.android.internal.util.function.pooled.PooledLambda;
-import com.android.server.appop.AppOpsService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class AppOpsUidStateTrackerImpl$$ExternalSyntheticLambda1 implements QuadConsumer {
+public final /* synthetic */ class AppOpsUidStateTrackerImpl$$ExternalSyntheticLambda1
+        implements QuadConsumer {
     public final void accept(Object obj, Object obj2, Object obj3, Object obj4) {
         boolean z;
         ArraySet arraySet;
@@ -30,14 +31,16 @@ public final /* synthetic */ class AppOpsUidStateTrackerImpl$$ExternalSyntheticL
                 } finally {
                 }
             }
-            AppOpsService.UidState uidStateLocked = appOpsService.getUidStateLocked(intValue, false);
+            AppOpsService.UidState uidStateLocked =
+                    appOpsService.getUidStateLocked(intValue, false);
             int i4 = 0;
             while (true) {
                 if (i4 >= appOpsService.mModeWatchers.size()) {
                     z = false;
                     break;
                 }
-                AppOpsService.ModeCallback modeCallback = (AppOpsService.ModeCallback) appOpsService.mModeWatchers.valueAt(i4);
+                AppOpsService.ModeCallback modeCallback =
+                        (AppOpsService.ModeCallback) appOpsService.mModeWatchers.valueAt(i4);
                 modeCallback.getClass();
                 if ((modeCallback.mFlags & 1) != 0) {
                     z = true;
@@ -47,14 +50,16 @@ public final /* synthetic */ class AppOpsUidStateTrackerImpl$$ExternalSyntheticL
             }
             if (uidStateLocked != null && booleanValue && z) {
                 SparseBooleanArray sparseBooleanArray = new SparseBooleanArray();
-                SparseBooleanArray foregroundOps = appOpsService.mAppOpsCheckingService.getForegroundOps(intValue);
+                SparseBooleanArray foregroundOps =
+                        appOpsService.mAppOpsCheckingService.getForegroundOps(intValue);
                 for (int i5 = 0; i5 < foregroundOps.size(); i5++) {
                     sparseBooleanArray.put(foregroundOps.keyAt(i5), true);
                 }
                 String[] packagesForUid = AppOpsService.getPackagesForUid(intValue);
                 int userId = UserHandle.getUserId(intValue);
                 for (String str : packagesForUid) {
-                    SparseBooleanArray foregroundOps2 = appOpsService.mAppOpsCheckingService.getForegroundOps(userId, str);
+                    SparseBooleanArray foregroundOps2 =
+                            appOpsService.mAppOpsCheckingService.getForegroundOps(userId, str);
                     for (int i6 = 0; i6 < foregroundOps2.size(); i6++) {
                         sparseBooleanArray.put(foregroundOps2.keyAt(i6), true);
                     }
@@ -63,22 +68,59 @@ public final /* synthetic */ class AppOpsUidStateTrackerImpl$$ExternalSyntheticL
                     if (sparseBooleanArray.valueAt(size)) {
                         int keyAt = sparseBooleanArray.keyAt(size);
                         int i7 = 4;
-                        if (appOpsService.mAppOpsCheckingService.getUidMode(uidStateLocked.uid, keyAt, "default:0") != AppOpsManager.opToDefaultMode(keyAt) && appOpsService.mAppOpsCheckingService.getUidMode(uidStateLocked.uid, keyAt, "default:0") == 4) {
-                            appOpsService.mHandler.sendMessage(PooledLambda.obtainMessage(new AppOpsService$$ExternalSyntheticLambda15(0), appOpsService, Integer.valueOf(keyAt), Integer.valueOf(uidStateLocked.uid), Boolean.TRUE, "default:0"));
-                        } else if (!uidStateLocked.pkgOps.isEmpty() && (arraySet = (ArraySet) appOpsService.mOpModeWatchers.get(keyAt)) != null) {
+                        if (appOpsService.mAppOpsCheckingService.getUidMode(
+                                                uidStateLocked.uid, keyAt, "default:0")
+                                        != AppOpsManager.opToDefaultMode(keyAt)
+                                && appOpsService.mAppOpsCheckingService.getUidMode(
+                                                uidStateLocked.uid, keyAt, "default:0")
+                                        == 4) {
+                            appOpsService.mHandler.sendMessage(
+                                    PooledLambda.obtainMessage(
+                                            new AppOpsService$$ExternalSyntheticLambda15(0),
+                                            appOpsService,
+                                            Integer.valueOf(keyAt),
+                                            Integer.valueOf(uidStateLocked.uid),
+                                            Boolean.TRUE,
+                                            "default:0"));
+                        } else if (!uidStateLocked.pkgOps.isEmpty()
+                                && (arraySet = (ArraySet) appOpsService.mOpModeWatchers.get(keyAt))
+                                        != null) {
                             int size2 = arraySet.size() - 1;
                             while (size2 >= 0) {
-                                if ((((AppOpsService.ModeCallback) arraySet.valueAt(size2)).mFlags & 1) != 0) {
+                                if ((((AppOpsService.ModeCallback) arraySet.valueAt(size2)).mFlags
+                                                & 1)
+                                        != 0) {
                                     int size3 = uidStateLocked.pkgOps.size() - 1;
                                     while (size3 >= 0) {
-                                        AppOpsService.Op op = (AppOpsService.Op) ((AppOpsService.Ops) uidStateLocked.pkgOps.valueAt(size3)).get(keyAt);
+                                        AppOpsService.Op op =
+                                                (AppOpsService.Op)
+                                                        ((AppOpsService.Ops)
+                                                                        uidStateLocked.pkgOps
+                                                                                .valueAt(size3))
+                                                                .get(keyAt);
                                         if (op != null) {
-                                            if (appOpsService.mAppOpsCheckingService.getPackageMode(op.op, UserHandle.getUserId(op.uid), op.packageName) == i7) {
+                                            if (appOpsService.mAppOpsCheckingService.getPackageMode(
+                                                            op.op,
+                                                            UserHandle.getUserId(op.uid),
+                                                            op.packageName)
+                                                    == i7) {
                                                 i = size3;
                                                 i2 = size2;
                                                 arraySet2 = arraySet;
                                                 i3 = i7;
-                                                appOpsService.mHandler.sendMessage(PooledLambda.obtainMessage(new AppOpsService$$ExternalSyntheticLambda7(0), appOpsService, (AppOpsService.ModeCallback) arraySet.valueAt(size2), Integer.valueOf(keyAt), Integer.valueOf(uidStateLocked.uid), (String) uidStateLocked.pkgOps.keyAt(size3), "default:0"));
+                                                appOpsService.mHandler.sendMessage(
+                                                        PooledLambda.obtainMessage(
+                                                                new AppOpsService$$ExternalSyntheticLambda7(
+                                                                        0),
+                                                                appOpsService,
+                                                                (AppOpsService.ModeCallback)
+                                                                        arraySet.valueAt(size2),
+                                                                Integer.valueOf(keyAt),
+                                                                Integer.valueOf(uidStateLocked.uid),
+                                                                (String)
+                                                                        uidStateLocked.pkgOps.keyAt(
+                                                                                size3),
+                                                                "default:0"));
                                                 size3 = i - 1;
                                                 size2 = i2;
                                                 arraySet = arraySet2;

@@ -1,7 +1,9 @@
 package android.hardware.camera2.params;
 
 import android.hardware.camera2.utils.HashCodeHelpers;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.Arrays;
 
 /* loaded from: classes2.dex */
@@ -19,7 +21,10 @@ public final class ReprocessFormatsMap {
             int left2 = left - 1;
             int i2 = i + 1;
             if (left2 < 1) {
-                throw new IllegalArgumentException(String.format("Input %x had no output format length listed", Integer.valueOf(inputFormat)));
+                throw new IllegalArgumentException(
+                        String.format(
+                                "Input %x had no output format length listed",
+                                Integer.valueOf(inputFormat)));
             }
             int length = entry[i2];
             left = left2 - 1;
@@ -30,7 +35,13 @@ public final class ReprocessFormatsMap {
             }
             if (length > 0) {
                 if (left < length) {
-                    throw new IllegalArgumentException(String.format("Input %x had too few output formats listed (actual: %d, expected: %d)", Integer.valueOf(inputFormat), Integer.valueOf(left), Integer.valueOf(length)));
+                    throw new IllegalArgumentException(
+                            String.format(
+                                    "Input %x had too few output formats listed (actual: %d,"
+                                            + " expected: %d)",
+                                    Integer.valueOf(inputFormat),
+                                    Integer.valueOf(left),
+                                    Integer.valueOf(length)));
                 }
                 i += length;
                 left -= length;
@@ -51,14 +62,23 @@ public final class ReprocessFormatsMap {
             int left2 = left - 1;
             int i2 = i + 1;
             if (left2 < 1) {
-                throw new AssertionError(String.format("Input %x had no output format length listed", Integer.valueOf(format)));
+                throw new AssertionError(
+                        String.format(
+                                "Input %x had no output format length listed",
+                                Integer.valueOf(format)));
             }
             int length = this.mEntry[i2];
             left = left2 - 1;
             i = i2 + 1;
             if (length > 0) {
                 if (left < length) {
-                    throw new AssertionError(String.format("Input %x had too few output formats listed (actual: %d, expected: %d)", Integer.valueOf(format), Integer.valueOf(left), Integer.valueOf(length)));
+                    throw new AssertionError(
+                            String.format(
+                                    "Input %x had too few output formats listed (actual: %d,"
+                                            + " expected: %d)",
+                                    Integer.valueOf(format),
+                                    Integer.valueOf(left),
+                                    Integer.valueOf(length)));
                 }
                 i += length;
                 left -= length;
@@ -77,13 +97,22 @@ public final class ReprocessFormatsMap {
             int left2 = left - 1;
             int i2 = i + 1;
             if (left2 < 1) {
-                throw new AssertionError(String.format("Input %x had no output format length listed", Integer.valueOf(format)));
+                throw new AssertionError(
+                        String.format(
+                                "Input %x had no output format length listed",
+                                Integer.valueOf(format)));
             }
             int length = this.mEntry[i2];
             int left3 = left2 - 1;
             int i3 = i2 + 1;
             if (length > 0 && left3 < length) {
-                throw new AssertionError(String.format("Input %x had too few output formats listed (actual: %d, expected: %d)", Integer.valueOf(format), Integer.valueOf(left3), Integer.valueOf(length)));
+                throw new AssertionError(
+                        String.format(
+                                "Input %x had too few output formats listed (actual: %d, expected:"
+                                        + " %d)",
+                                Integer.valueOf(format),
+                                Integer.valueOf(left3),
+                                Integer.valueOf(length)));
             }
             if (inputFormat == format) {
                 int[] outputs = new int[length];
@@ -95,7 +124,9 @@ public final class ReprocessFormatsMap {
             i = i3 + length;
             left = left3 - length;
         }
-        throw new IllegalArgumentException(String.format("Input format %x was not one in #getInputs", Integer.valueOf(format)));
+        throw new IllegalArgumentException(
+                String.format(
+                        "Input format %x was not one in #getInputs", Integer.valueOf(format)));
     }
 
     public boolean equals(Object obj) {

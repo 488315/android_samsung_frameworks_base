@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IUsbGadgetCallback extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$usb$gadget$IUsbGadgetCallback".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$usb$gadget$IUsbGadgetCallback".replace('$', '.');
     public static final String HASH = "cb628c69682659911bca5c1d04042adba7f0de4b";
     public static final int VERSION = 1;
 
@@ -26,20 +27,18 @@ public interface IUsbGadgetCallback extends IInterface {
 
     public static class Default implements IUsbGadgetCallback {
         @Override // android.hardware.usb.gadget.IUsbGadgetCallback
-        public void setCurrentUsbFunctionsCb(long functions, int status, long transactionId) throws RemoteException {
-        }
+        public void setCurrentUsbFunctionsCb(long functions, int status, long transactionId)
+                throws RemoteException {}
 
         @Override // android.hardware.usb.gadget.IUsbGadgetCallback
-        public void getCurrentUsbFunctionsCb(long functions, int status, long transactionId) throws RemoteException {
-        }
+        public void getCurrentUsbFunctionsCb(long functions, int status, long transactionId)
+                throws RemoteException {}
 
         @Override // android.hardware.usb.gadget.IUsbGadgetCallback
-        public void getUsbSpeedCb(int speed, long transactionId) throws RemoteException {
-        }
+        public void getUsbSpeedCb(int speed, long transactionId) throws RemoteException {}
 
         @Override // android.hardware.usb.gadget.IUsbGadgetCallback
-        public void resetCb(int status, long transactionId) throws RemoteException {
-        }
+        public void resetCb(int status, long transactionId) throws RemoteException {}
 
         @Override // android.hardware.usb.gadget.IUsbGadgetCallback
         public int getInterfaceVersion() {
@@ -57,7 +56,7 @@ public interface IUsbGadgetCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUsbGadgetCallback {
+    public abstract static class Stub extends Binder implements IUsbGadgetCallback {
         static final int TRANSACTION_getCurrentUsbFunctionsCb = 2;
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
@@ -87,7 +86,8 @@ public interface IUsbGadgetCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -157,7 +157,8 @@ public interface IUsbGadgetCallback extends IInterface {
             }
 
             @Override // android.hardware.usb.gadget.IUsbGadgetCallback
-            public void setCurrentUsbFunctionsCb(long functions, int status, long transactionId) throws RemoteException {
+            public void setCurrentUsbFunctionsCb(long functions, int status, long transactionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -166,7 +167,8 @@ public interface IUsbGadgetCallback extends IInterface {
                     _data.writeLong(transactionId);
                     boolean _status = this.mRemote.transact(1, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setCurrentUsbFunctionsCb is unimplemented.");
+                        throw new RemoteException(
+                                "Method setCurrentUsbFunctionsCb is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -174,7 +176,8 @@ public interface IUsbGadgetCallback extends IInterface {
             }
 
             @Override // android.hardware.usb.gadget.IUsbGadgetCallback
-            public void getCurrentUsbFunctionsCb(long functions, int status, long transactionId) throws RemoteException {
+            public void getCurrentUsbFunctionsCb(long functions, int status, long transactionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -183,7 +186,8 @@ public interface IUsbGadgetCallback extends IInterface {
                     _data.writeLong(transactionId);
                     boolean _status = this.mRemote.transact(2, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getCurrentUsbFunctionsCb is unimplemented.");
+                        throw new RemoteException(
+                                "Method getCurrentUsbFunctionsCb is unimplemented.");
                     }
                 } finally {
                     _data.recycle();

@@ -7,6 +7,5 @@ public abstract class RenderProcessGoneDetail {
     public abstract int rendererPriorityAtExit();
 
     @Deprecated
-    public RenderProcessGoneDetail() {
-    }
+    public RenderProcessGoneDetail() {}
 }

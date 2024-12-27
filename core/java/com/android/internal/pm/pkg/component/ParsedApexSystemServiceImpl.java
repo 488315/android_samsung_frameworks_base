@@ -3,6 +3,7 @@ package com.android.internal.pm.pkg.component;
 import android.annotation.NonNull;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Parcelling;
 
@@ -19,12 +20,17 @@ public class ParsedApexSystemServiceImpl implements ParsedApexSystemService, Par
     private String minSdkVersion;
     private String name;
 
-    public ParsedApexSystemServiceImpl() {
-    }
+    public ParsedApexSystemServiceImpl() {}
 
-    public ParsedApexSystemServiceImpl(String name, String jarPath, String minSdkVersion, String maxSdkVersion, int initOrder) {
+    public ParsedApexSystemServiceImpl(
+            String name,
+            String jarPath,
+            String minSdkVersion,
+            String maxSdkVersion,
+            int initOrder) {
         this.name = name;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) name);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) name);
         this.jarPath = jarPath;
         this.minSdkVersion = minSdkVersion;
         this.maxSdkVersion = maxSdkVersion;
@@ -58,7 +64,8 @@ public class ParsedApexSystemServiceImpl implements ParsedApexSystemService, Par
 
     public ParsedApexSystemServiceImpl setName(String value) {
         this.name = value;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.name);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.name);
         return this;
     }
 
@@ -89,29 +96,37 @@ public class ParsedApexSystemServiceImpl implements ParsedApexSystemService, Par
         }
         sParcellingForJarPath = Parcelling.Cache.get(Parcelling.BuiltIn.ForInternedString.class);
         if (sParcellingForJarPath == null) {
-            sParcellingForJarPath = Parcelling.Cache.put(new Parcelling.BuiltIn.ForInternedString());
+            sParcellingForJarPath =
+                    Parcelling.Cache.put(new Parcelling.BuiltIn.ForInternedString());
         }
-        sParcellingForMinSdkVersion = Parcelling.Cache.get(Parcelling.BuiltIn.ForInternedString.class);
+        sParcellingForMinSdkVersion =
+                Parcelling.Cache.get(Parcelling.BuiltIn.ForInternedString.class);
         if (sParcellingForMinSdkVersion == null) {
-            sParcellingForMinSdkVersion = Parcelling.Cache.put(new Parcelling.BuiltIn.ForInternedString());
+            sParcellingForMinSdkVersion =
+                    Parcelling.Cache.put(new Parcelling.BuiltIn.ForInternedString());
         }
-        sParcellingForMaxSdkVersion = Parcelling.Cache.get(Parcelling.BuiltIn.ForInternedString.class);
+        sParcellingForMaxSdkVersion =
+                Parcelling.Cache.get(Parcelling.BuiltIn.ForInternedString.class);
         if (sParcellingForMaxSdkVersion == null) {
-            sParcellingForMaxSdkVersion = Parcelling.Cache.put(new Parcelling.BuiltIn.ForInternedString());
+            sParcellingForMaxSdkVersion =
+                    Parcelling.Cache.put(new Parcelling.BuiltIn.ForInternedString());
         }
-        CREATOR = new Parcelable.Creator<ParsedApexSystemServiceImpl>() { // from class: com.android.internal.pm.pkg.component.ParsedApexSystemServiceImpl.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ParsedApexSystemServiceImpl[] newArray(int size) {
-                return new ParsedApexSystemServiceImpl[size];
-            }
+        CREATOR =
+                new Parcelable.Creator<
+                        ParsedApexSystemServiceImpl>() { // from class:
+                                                         // com.android.internal.pm.pkg.component.ParsedApexSystemServiceImpl.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ParsedApexSystemServiceImpl[] newArray(int size) {
+                        return new ParsedApexSystemServiceImpl[size];
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ParsedApexSystemServiceImpl createFromParcel(Parcel in) {
-                return new ParsedApexSystemServiceImpl(in);
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ParsedApexSystemServiceImpl createFromParcel(Parcel in) {
+                        return new ParsedApexSystemServiceImpl(in);
+                    }
+                };
     }
 
     @Override // android.os.Parcelable
@@ -144,7 +159,8 @@ public class ParsedApexSystemServiceImpl implements ParsedApexSystemService, Par
         String _maxSdkVersion = sParcellingForMaxSdkVersion.unparcel(in);
         int _initOrder = in.readInt();
         this.name = _name;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.name);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.name);
         this.jarPath = _jarPath;
         this.minSdkVersion = _minSdkVersion;
         this.maxSdkVersion = _maxSdkVersion;
@@ -152,6 +168,5 @@ public class ParsedApexSystemServiceImpl implements ParsedApexSystemService, Par
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

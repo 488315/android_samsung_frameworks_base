@@ -24,7 +24,9 @@ public final class MidiConstants {
     public static final byte STATUS_TIMING_CLOCK = -8;
     public static final byte STATUS_TUNE_REQUEST = -10;
     public static final int[] CHANNEL_BYTE_LENGTHS = {3, 3, 3, 3, 2, 2, 3};
-    public static final int[] SYSTEM_BYTE_LENGTHS = {1, 2, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    public static final int[] SYSTEM_BYTE_LENGTHS = {
+        1, 2, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+    };
 
     public static int getBytesPerMessage(byte statusByte) {
         int statusInt = statusByte & 255;

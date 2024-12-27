@@ -12,16 +12,15 @@ public interface IGetCandidateCredentialsCallback extends IInterface {
 
     void onError(String str, String str2) throws RemoteException;
 
-    void onResponse(GetCandidateCredentialsResponse getCandidateCredentialsResponse) throws RemoteException;
+    void onResponse(GetCandidateCredentialsResponse getCandidateCredentialsResponse)
+            throws RemoteException;
 
     public static class Default implements IGetCandidateCredentialsCallback {
         @Override // android.credentials.IGetCandidateCredentialsCallback
-        public void onResponse(GetCandidateCredentialsResponse response) throws RemoteException {
-        }
+        public void onResponse(GetCandidateCredentialsResponse response) throws RemoteException {}
 
         @Override // android.credentials.IGetCandidateCredentialsCallback
-        public void onError(String errorType, String message) throws RemoteException {
-        }
+        public void onError(String errorType, String message) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +28,7 @@ public interface IGetCandidateCredentialsCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGetCandidateCredentialsCallback {
+    public abstract static class Stub extends Binder implements IGetCandidateCredentialsCallback {
         static final int TRANSACTION_onError = 2;
         static final int TRANSACTION_onResponse = 1;
 
@@ -70,7 +69,8 @@ public interface IGetCandidateCredentialsCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IGetCandidateCredentialsCallback.DESCRIPTOR);
             }
@@ -80,7 +80,9 @@ public interface IGetCandidateCredentialsCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    GetCandidateCredentialsResponse _arg0 = (GetCandidateCredentialsResponse) data.readTypedObject(GetCandidateCredentialsResponse.CREATOR);
+                    GetCandidateCredentialsResponse _arg0 =
+                            (GetCandidateCredentialsResponse)
+                                    data.readTypedObject(GetCandidateCredentialsResponse.CREATOR);
                     data.enforceNoDataAvail();
                     onResponse(_arg0);
                     return true;
@@ -112,7 +114,8 @@ public interface IGetCandidateCredentialsCallback extends IInterface {
             }
 
             @Override // android.credentials.IGetCandidateCredentialsCallback
-            public void onResponse(GetCandidateCredentialsResponse response) throws RemoteException {
+            public void onResponse(GetCandidateCredentialsResponse response)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IGetCandidateCredentialsCallback.DESCRIPTOR);

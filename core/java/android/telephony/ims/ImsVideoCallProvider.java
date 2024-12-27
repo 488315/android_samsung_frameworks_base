@@ -8,6 +8,7 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.telecom.VideoProfile;
 import android.view.Surface;
+
 import com.android.ims.internal.IImsVideoCallCallback;
 import com.android.ims.internal.IImsVideoCallProvider;
 import com.android.internal.os.SomeArgs;
@@ -27,67 +28,75 @@ public abstract class ImsVideoCallProvider {
     private static final int MSG_SET_PREVIEW_SURFACE = 3;
     private static final int MSG_SET_ZOOM = 6;
     private IImsVideoCallCallback mCallback;
-    private final Handler mProviderHandler = new Handler(Looper.getMainLooper()) { // from class: android.telephony.ims.ImsVideoCallProvider.1
-        @Override // android.os.Handler
-        public void handleMessage(Message msg) {
-            SomeArgs args;
-            switch (msg.what) {
-                case 1:
-                    ImsVideoCallProvider.this.mCallback = (IImsVideoCallCallback) msg.obj;
-                    return;
-                case 2:
-                    args = (SomeArgs) msg.obj;
-                    try {
-                        ImsVideoCallProvider.this.onSetCamera((String) args.arg1);
-                        ImsVideoCallProvider.this.onSetCamera((String) args.arg1, args.argi1);
-                        return;
-                    } finally {
+    private final Handler mProviderHandler =
+            new Handler(
+                    Looper
+                            .getMainLooper()) { // from class:
+                                                // android.telephony.ims.ImsVideoCallProvider.1
+                @Override // android.os.Handler
+                public void handleMessage(Message msg) {
+                    SomeArgs args;
+                    switch (msg.what) {
+                        case 1:
+                            ImsVideoCallProvider.this.mCallback = (IImsVideoCallCallback) msg.obj;
+                            return;
+                        case 2:
+                            args = (SomeArgs) msg.obj;
+                            try {
+                                ImsVideoCallProvider.this.onSetCamera((String) args.arg1);
+                                ImsVideoCallProvider.this.onSetCamera(
+                                        (String) args.arg1, args.argi1);
+                                return;
+                            } finally {
+                            }
+                        case 3:
+                            ImsVideoCallProvider.this.onSetPreviewSurface((Surface) msg.obj);
+                            return;
+                        case 4:
+                            ImsVideoCallProvider.this.onSetDisplaySurface((Surface) msg.obj);
+                            return;
+                        case 5:
+                            ImsVideoCallProvider.this.onSetDeviceOrientation(msg.arg1);
+                            return;
+                        case 6:
+                            ImsVideoCallProvider.this.onSetZoom(((Float) msg.obj).floatValue());
+                            return;
+                        case 7:
+                            args = (SomeArgs) msg.obj;
+                            try {
+                                VideoProfile fromProfile = (VideoProfile) args.arg1;
+                                VideoProfile toProfile = (VideoProfile) args.arg2;
+                                ImsVideoCallProvider.this.onSendSessionModifyRequest(
+                                        fromProfile, toProfile);
+                                return;
+                            } finally {
+                            }
+                        case 8:
+                            ImsVideoCallProvider.this.onSendSessionModifyResponse(
+                                    (VideoProfile) msg.obj);
+                            return;
+                        case 9:
+                            ImsVideoCallProvider.this.onRequestCameraCapabilities();
+                            return;
+                        case 10:
+                            ImsVideoCallProvider.this.onRequestCallDataUsage();
+                            return;
+                        case 11:
+                            ImsVideoCallProvider.this.onSetPauseImage((Uri) msg.obj);
+                            return;
+                        default:
+                            return;
                     }
-                case 3:
-                    ImsVideoCallProvider.this.onSetPreviewSurface((Surface) msg.obj);
-                    return;
-                case 4:
-                    ImsVideoCallProvider.this.onSetDisplaySurface((Surface) msg.obj);
-                    return;
-                case 5:
-                    ImsVideoCallProvider.this.onSetDeviceOrientation(msg.arg1);
-                    return;
-                case 6:
-                    ImsVideoCallProvider.this.onSetZoom(((Float) msg.obj).floatValue());
-                    return;
-                case 7:
-                    args = (SomeArgs) msg.obj;
-                    try {
-                        VideoProfile fromProfile = (VideoProfile) args.arg1;
-                        VideoProfile toProfile = (VideoProfile) args.arg2;
-                        ImsVideoCallProvider.this.onSendSessionModifyRequest(fromProfile, toProfile);
-                        return;
-                    } finally {
-                    }
-                case 8:
-                    ImsVideoCallProvider.this.onSendSessionModifyResponse((VideoProfile) msg.obj);
-                    return;
-                case 9:
-                    ImsVideoCallProvider.this.onRequestCameraCapabilities();
-                    return;
-                case 10:
-                    ImsVideoCallProvider.this.onRequestCallDataUsage();
-                    return;
-                case 11:
-                    ImsVideoCallProvider.this.onSetPauseImage((Uri) msg.obj);
-                    return;
-                default:
-                    return;
-            }
-        }
-    };
+                }
+            };
     private final ImsVideoCallProviderBinder mBinder = new ImsVideoCallProviderBinder();
 
     public abstract void onRequestCallDataUsage();
 
     public abstract void onRequestCameraCapabilities();
 
-    public abstract void onSendSessionModifyRequest(VideoProfile videoProfile, VideoProfile videoProfile2);
+    public abstract void onSendSessionModifyRequest(
+            VideoProfile videoProfile, VideoProfile videoProfile2);
 
     public abstract void onSendSessionModifyResponse(VideoProfile videoProfile);
 
@@ -104,8 +113,7 @@ public abstract class ImsVideoCallProvider {
     public abstract void onSetZoom(float f);
 
     private final class ImsVideoCallProviderBinder extends IImsVideoCallProvider.Stub {
-        private ImsVideoCallProviderBinder() {
-        }
+        private ImsVideoCallProviderBinder() {}
 
         @Override // com.android.ims.internal.IImsVideoCallProvider
         public void setCallback(IImsVideoCallCallback callback) {
@@ -137,7 +145,10 @@ public abstract class ImsVideoCallProvider {
 
         @Override // com.android.ims.internal.IImsVideoCallProvider
         public void setZoom(float value) {
-            ImsVideoCallProvider.this.mProviderHandler.obtainMessage(6, Float.valueOf(value)).sendToTarget();
+            ImsVideoCallProvider.this
+                    .mProviderHandler
+                    .obtainMessage(6, Float.valueOf(value))
+                    .sendToTarget();
         }
 
         @Override // com.android.ims.internal.IImsVideoCallProvider
@@ -150,7 +161,10 @@ public abstract class ImsVideoCallProvider {
 
         @Override // com.android.ims.internal.IImsVideoCallProvider
         public void sendSessionModifyResponse(VideoProfile responseProfile) {
-            ImsVideoCallProvider.this.mProviderHandler.obtainMessage(8, responseProfile).sendToTarget();
+            ImsVideoCallProvider.this
+                    .mProviderHandler
+                    .obtainMessage(8, responseProfile)
+                    .sendToTarget();
         }
 
         @Override // com.android.ims.internal.IImsVideoCallProvider
@@ -173,8 +187,7 @@ public abstract class ImsVideoCallProvider {
         return this.mBinder;
     }
 
-    public void onSetCamera(String cameraId, int uid) {
-    }
+    public void onSetCamera(String cameraId, int uid) {}
 
     public void receiveSessionModifyRequest(VideoProfile VideoProfile) {
         if (this.mCallback != null) {
@@ -185,10 +198,12 @@ public abstract class ImsVideoCallProvider {
         }
     }
 
-    public void receiveSessionModifyResponse(int status, VideoProfile requestedProfile, VideoProfile responseProfile) {
+    public void receiveSessionModifyResponse(
+            int status, VideoProfile requestedProfile, VideoProfile responseProfile) {
         if (this.mCallback != null) {
             try {
-                this.mCallback.receiveSessionModifyResponse(status, requestedProfile, responseProfile);
+                this.mCallback.receiveSessionModifyResponse(
+                        status, requestedProfile, responseProfile);
             } catch (RemoteException e) {
             }
         }

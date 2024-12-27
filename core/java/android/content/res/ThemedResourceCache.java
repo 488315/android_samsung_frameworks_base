@@ -1,8 +1,8 @@
 package android.content.res;
 
-import android.content.res.Resources;
 import android.util.ArrayMap;
 import android.util.LongSparseArray;
+
 import java.lang.ref.WeakReference;
 
 /* loaded from: classes.dex */
@@ -15,8 +15,7 @@ abstract class ThemedResourceCache<T> {
 
     protected abstract boolean shouldInvalidateEntry(T t, int i);
 
-    ThemedResourceCache() {
-    }
+    ThemedResourceCache() {}
 
     public void put(long key, Resources.Theme theme, T entry, int generation) {
         put(key, theme, entry, generation, true);
@@ -108,10 +107,13 @@ abstract class ThemedResourceCache<T> {
         }
         pruneEntriesLocked(this.mNullThemedEntries, configChanges);
         pruneEntriesLocked(this.mUnthemedEntries, configChanges);
-        return this.mThemedEntries == null && this.mNullThemedEntries == null && this.mUnthemedEntries == null;
+        return this.mThemedEntries == null
+                && this.mNullThemedEntries == null
+                && this.mUnthemedEntries == null;
     }
 
-    private boolean pruneEntriesLocked(LongSparseArray<WeakReference<T>> entries, int configChanges) {
+    private boolean pruneEntriesLocked(
+            LongSparseArray<WeakReference<T>> entries, int configChanges) {
         if (entries == null) {
             return true;
         }

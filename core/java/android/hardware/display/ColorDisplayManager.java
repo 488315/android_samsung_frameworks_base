@@ -3,16 +3,17 @@ package android.hardware.display;
 import android.annotation.SystemApi;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.hardware.display.IColorDisplayManager;
 import android.metrics.LogMaker;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.Settings;
+
 import com.android.internal.R;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto;
 import com.android.server.display.feature.flags.Flags;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.time.LocalTime;
@@ -21,26 +22,19 @@ import java.time.LocalTime;
 /* loaded from: classes2.dex */
 public final class ColorDisplayManager {
 
-    @SystemApi
-    public static final int AUTO_MODE_CUSTOM_TIME = 1;
+    @SystemApi public static final int AUTO_MODE_CUSTOM_TIME = 1;
 
-    @SystemApi
-    public static final int AUTO_MODE_DISABLED = 0;
+    @SystemApi public static final int AUTO_MODE_DISABLED = 0;
 
-    @SystemApi
-    public static final int AUTO_MODE_TWILIGHT = 2;
+    @SystemApi public static final int AUTO_MODE_TWILIGHT = 2;
 
-    @SystemApi
-    public static final int CAPABILITY_HARDWARE_ACCELERATION_GLOBAL = 2;
+    @SystemApi public static final int CAPABILITY_HARDWARE_ACCELERATION_GLOBAL = 2;
 
-    @SystemApi
-    public static final int CAPABILITY_HARDWARE_ACCELERATION_PER_APP = 4;
+    @SystemApi public static final int CAPABILITY_HARDWARE_ACCELERATION_PER_APP = 4;
 
-    @SystemApi
-    public static final int CAPABILITY_NONE = 0;
+    @SystemApi public static final int CAPABILITY_NONE = 0;
 
-    @SystemApi
-    public static final int CAPABILITY_PROTECTED_CONTENT = 1;
+    @SystemApi public static final int CAPABILITY_PROTECTED_CONTENT = 1;
     public static final int COLOR_MODE_AUTOMATIC = 3;
     public static final int COLOR_MODE_BOOSTED = 1;
     public static final int COLOR_MODE_NATURAL = 0;
@@ -51,16 +45,13 @@ public final class ColorDisplayManager {
     private MetricsLogger mMetricsLogger;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AutoMode {
-    }
+    public @interface AutoMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CapabilityType {
-    }
+    public @interface CapabilityType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ColorMode {
-    }
+    public @interface ColorMode {}
 
     public boolean setNightDisplayActivated(boolean activated) {
         return this.mManager.setNightDisplayActivated(activated);
@@ -93,7 +84,13 @@ public final class ColorDisplayManager {
             throw new IllegalArgumentException("Invalid autoMode: " + autoMode);
         }
         if (this.mManager.getNightDisplayAutoMode() != autoMode) {
-            getMetricsLogger().write(new LogMaker(MetricsProto.MetricsEvent.ACTION_NIGHT_DISPLAY_AUTO_MODE_CHANGED).setType(4).setSubtype(autoMode));
+            getMetricsLogger()
+                    .write(
+                            new LogMaker(
+                                            MetricsProto.MetricsEvent
+                                                    .ACTION_NIGHT_DISPLAY_AUTO_MODE_CHANGED)
+                                    .setType(4)
+                                    .setSubtype(autoMode));
         }
         return this.mManager.setNightDisplayAutoMode(autoMode);
     }
@@ -107,7 +104,13 @@ public final class ColorDisplayManager {
         if (startTime == null) {
             throw new IllegalArgumentException("startTime cannot be null");
         }
-        getMetricsLogger().write(new LogMaker(MetricsProto.MetricsEvent.ACTION_NIGHT_DISPLAY_AUTO_MODE_CUSTOM_TIME_CHANGED).setType(4).setSubtype(0));
+        getMetricsLogger()
+                .write(
+                        new LogMaker(
+                                        MetricsProto.MetricsEvent
+                                                .ACTION_NIGHT_DISPLAY_AUTO_MODE_CUSTOM_TIME_CHANGED)
+                                .setType(4)
+                                .setSubtype(0));
         return this.mManager.setNightDisplayCustomStartTime(new Time(startTime));
     }
 
@@ -120,7 +123,13 @@ public final class ColorDisplayManager {
         if (endTime == null) {
             throw new IllegalArgumentException("endTime cannot be null");
         }
-        getMetricsLogger().write(new LogMaker(MetricsProto.MetricsEvent.ACTION_NIGHT_DISPLAY_AUTO_MODE_CUSTOM_TIME_CHANGED).setType(4).setSubtype(1));
+        getMetricsLogger()
+                .write(
+                        new LogMaker(
+                                        MetricsProto.MetricsEvent
+                                                .ACTION_NIGHT_DISPLAY_AUTO_MODE_CUSTOM_TIME_CHANGED)
+                                .setType(4)
+                                .setSubtype(1));
         return this.mManager.setNightDisplayCustomEndTime(new Time(endTime));
     }
 
@@ -199,7 +208,9 @@ public final class ColorDisplayManager {
     }
 
     public static boolean isReduceBrightColorsAvailable(Context context) {
-        return context.getResources().getBoolean(R.bool.config_reduceBrightColorsAvailable) && !(Flags.evenDimmer() && context.getResources().getBoolean(R.bool.config_evenDimmerEnabled));
+        return context.getResources().getBoolean(R.bool.config_reduceBrightColorsAvailable)
+                && !(Flags.evenDimmer()
+                        && context.getResources().getBoolean(R.bool.config_evenDimmerEnabled));
     }
 
     public static int getMinimumReduceBrightColorsStrength(Context context) {
@@ -221,7 +232,12 @@ public final class ColorDisplayManager {
 
     public static boolean areAccessibilityTransformsEnabled(Context context) {
         ContentResolver cr = context.getContentResolver();
-        return Settings.Secure.getInt(cr, Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, 0) == 1 || Settings.Secure.getInt(cr, Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED, 0) == 1;
+        return Settings.Secure.getInt(
+                                cr, Settings.Secure.ACCESSIBILITY_DISPLAY_INVERSION_ENABLED, 0)
+                        == 1
+                || Settings.Secure.getInt(
+                                cr, Settings.Secure.ACCESSIBILITY_DISPLAY_DALTONIZER_ENABLED, 0)
+                        == 1;
     }
 
     private MetricsLogger getMetricsLogger() {
@@ -245,7 +261,9 @@ public final class ColorDisplayManager {
                 if (sInstance == null) {
                     try {
                         IBinder b = ServiceManager.getServiceOrThrow(Context.COLOR_DISPLAY_SERVICE);
-                        sInstance = new ColorDisplayManagerInternal(IColorDisplayManager.Stub.asInterface(b));
+                        sInstance =
+                                new ColorDisplayManagerInternal(
+                                        IColorDisplayManager.Stub.asInterface(b));
                     } catch (ServiceManager.ServiceNotFoundException e) {
                         throw new IllegalStateException(e);
                     }

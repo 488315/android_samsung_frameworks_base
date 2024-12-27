@@ -5,8 +5,10 @@ import android.location.Location;
 import android.location.provider.ProviderProperties;
 import android.os.SystemClock;
 import android.os.UserHandle;
+
 import com.android.modules.utils.BasicShellCommandHandler;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Collections;
@@ -137,7 +139,10 @@ public final class LocationShellCommand extends BasicShellCommandHandler {
                 }
                 switch (c2) {
                     case 0:
-                        this.mService.removeTestProvider(getNextArgRequired(), this.mContext.getOpPackageName(), this.mContext.getAttributionTag());
+                        this.mService.removeTestProvider(
+                                getNextArgRequired(),
+                                this.mContext.getOpPackageName(),
+                                this.mContext.getAttributionTag());
                         return 0;
                     case 1:
                         String nextArgRequired2 = getNextArgRequired();
@@ -177,7 +182,8 @@ public final class LocationShellCommand extends BasicShellCommandHandler {
                                 }
                                 switch (c3) {
                                     case 0:
-                                        location.setAccuracy(Float.parseFloat(getNextArgRequired()));
+                                        location.setAccuracy(
+                                                Float.parseFloat(getNextArgRequired()));
                                         break;
                                     case 1:
                                         location.setTime(Long.parseLong(getNextArgRequired()));
@@ -185,25 +191,38 @@ public final class LocationShellCommand extends BasicShellCommandHandler {
                                     case 2:
                                         String[] split = getNextArgRequired().split(",");
                                         if (split.length != 2) {
-                                            throw new IllegalArgumentException("Location argument must be in the form of \"<LATITUDE>,<LONGITUDE>\", not " + Arrays.toString(split));
+                                            throw new IllegalArgumentException(
+                                                    "Location argument must be in the form of"
+                                                        + " \"<LATITUDE>,<LONGITUDE>\", not "
+                                                            + Arrays.toString(split));
                                         }
                                         location.setLatitude(Double.parseDouble(split[0]));
                                         location.setLongitude(Double.parseDouble(split[1]));
                                         z = true;
                                         break;
                                     default:
-                                        throw new IllegalArgumentException("Unknown option: ".concat(nextOption));
+                                        throw new IllegalArgumentException(
+                                                "Unknown option: ".concat(nextOption));
                                 }
                             } else {
                                 if (!z) {
-                                    throw new IllegalArgumentException("Option \"--location\" is required");
+                                    throw new IllegalArgumentException(
+                                            "Option \"--location\" is required");
                                 }
-                                this.mService.setTestProviderLocation(nextArgRequired2, location, this.mContext.getOpPackageName(), this.mContext.getAttributionTag());
+                                this.mService.setTestProviderLocation(
+                                        nextArgRequired2,
+                                        location,
+                                        this.mContext.getOpPackageName(),
+                                        this.mContext.getAttributionTag());
                                 break;
                             }
                         }
                     case 2:
-                        this.mService.setTestProviderEnabled(getNextArgRequired(), Boolean.parseBoolean(getNextArgRequired()), this.mContext.getOpPackageName(), this.mContext.getAttributionTag());
+                        this.mService.setTestProviderEnabled(
+                                getNextArgRequired(),
+                                Boolean.parseBoolean(getNextArgRequired()),
+                                this.mContext.getOpPackageName(),
+                                this.mContext.getAttributionTag());
                         return 0;
                     case 3:
                         String nextArgRequired3 = getNextArgRequired();
@@ -220,7 +239,22 @@ public final class LocationShellCommand extends BasicShellCommandHandler {
                         while (true) {
                             String nextOption2 = getNextOption();
                             if (nextOption2 == null) {
-                                this.mService.addTestProvider(nextArgRequired3, new ProviderProperties.Builder().setHasNetworkRequirement(z2).setHasSatelliteRequirement(z5).setHasCellRequirement(z6).setHasMonetaryCost(z7).setHasAltitudeSupport(z8).setHasSpeedSupport(z3).setHasBearingSupport(z4).setPowerUsage(i2).setAccuracy(i3).build(), emptyList, this.mContext.getOpPackageName(), this.mContext.getAttributionTag());
+                                this.mService.addTestProvider(
+                                        nextArgRequired3,
+                                        new ProviderProperties.Builder()
+                                                .setHasNetworkRequirement(z2)
+                                                .setHasSatelliteRequirement(z5)
+                                                .setHasCellRequirement(z6)
+                                                .setHasMonetaryCost(z7)
+                                                .setHasAltitudeSupport(z8)
+                                                .setHasSpeedSupport(z3)
+                                                .setHasBearingSupport(z4)
+                                                .setPowerUsage(i2)
+                                                .setAccuracy(i3)
+                                                .build(),
+                                        emptyList,
+                                        this.mContext.getOpPackageName(),
+                                        this.mContext.getAttributionTag());
                             } else {
                                 switch (nextOption2.hashCode()) {
                                     case -2115952999:
@@ -329,32 +363,44 @@ public final class LocationShellCommand extends BasicShellCommandHandler {
                                         z3 = true;
                                         break;
                                     default:
-                                        throw new IllegalArgumentException("Received unexpected option: ".concat(nextOption2));
+                                        throw new IllegalArgumentException(
+                                                "Received unexpected option: ".concat(nextOption2));
                                 }
                             }
                         }
                         return 0;
                     case 4:
-                        this.mService.sendExtraCommand(getNextArgRequired(), getNextArgRequired(), null);
+                        this.mService.sendExtraCommand(
+                                getNextArgRequired(), getNextArgRequired(), null);
                         return 0;
                     default:
                         return handleDefaultCommands(nextArgRequired);
                 }
             case 2:
-                if (!this.mContext.getPackageManager().hasSystemFeature("android.hardware.type.automotive")) {
-                    throw new IllegalStateException("command only recognized on automotive devices");
+                if (!this.mContext
+                        .getPackageManager()
+                        .hasSystemFeature("android.hardware.type.automotive")) {
+                    throw new IllegalStateException(
+                            "command only recognized on automotive devices");
                 }
                 getOutPrintWriter().println(this.mService.isAutomotiveGnssSuspended());
                 return 0;
             case 3:
-                if (!this.mContext.getPackageManager().hasSystemFeature("android.hardware.type.automotive")) {
-                    throw new IllegalStateException("command only recognized on automotive devices");
+                if (!this.mContext
+                        .getPackageManager()
+                        .hasSystemFeature("android.hardware.type.automotive")) {
+                    throw new IllegalStateException(
+                            "command only recognized on automotive devices");
                 }
-                this.mService.setAutomotiveGnssSuspended(Boolean.parseBoolean(getNextArgRequired()));
+                this.mService.setAutomotiveGnssSuspended(
+                        Boolean.parseBoolean(getNextArgRequired()));
                 return 0;
             case 4:
-                if (!this.mContext.getPackageManager().hasSystemFeature("android.hardware.type.automotive")) {
-                    throw new IllegalStateException("command only recognized on automotive devices");
+                if (!this.mContext
+                        .getPackageManager()
+                        .hasSystemFeature("android.hardware.type.automotive")) {
+                    throw new IllegalStateException(
+                            "command only recognized on automotive devices");
                 }
                 boolean parseBoolean = Boolean.parseBoolean(getNextArgRequired());
                 while (true) {
@@ -382,13 +428,17 @@ public final class LocationShellCommand extends BasicShellCommandHandler {
                     i = UserHandle.parseUserArg(getNextArgRequired());
                 }
             case 6:
-                if (!this.mContext.getPackageManager().hasSystemFeature("android.hardware.type.automotive")) {
-                    throw new IllegalStateException("command only recognized on automotive devices");
+                if (!this.mContext
+                        .getPackageManager()
+                        .hasSystemFeature("android.hardware.type.automotive")) {
+                    throw new IllegalStateException(
+                            "command only recognized on automotive devices");
                 }
                 while (true) {
                     String nextOption5 = getNextOption();
                     if (nextOption5 == null) {
-                        getOutPrintWriter().println(this.mService.isAdasGnssLocationEnabledForUser(i));
+                        getOutPrintWriter()
+                                .println(this.mService.isAdasGnssLocationEnabledForUser(i));
                         return 0;
                     }
                     if (!"--user".equals(nextOption5)) {
@@ -418,28 +468,73 @@ public final class LocationShellCommand extends BasicShellCommandHandler {
         outPrintWriter.println("  help or -h");
         outPrintWriter.println("    Print this help text.");
         outPrintWriter.println("  is-location-enabled [--user <USER_ID>]");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Gets the master location switch enabled state. If no user is specified,", "    the current user is assumed.", "  set-location-enabled true|false [--user <USER_ID>]", "    Sets the master location switch enabled state. If no user is specified,");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Gets the master location switch enabled state. If no user is specified,",
+                "    the current user is assumed.",
+                "  set-location-enabled true|false [--user <USER_ID>]",
+                "    Sets the master location switch enabled state. If no user is specified,");
         outPrintWriter.println("    the current user is assumed.");
-        if (this.mContext.getPackageManager().hasSystemFeature("android.hardware.type.automotive")) {
-            BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  is-adas-gnss-location-enabled [--user <USER_ID>]", "    Gets the ADAS GNSS location enabled state. If no user is specified,", "    the current user is assumed.", "  set-adas-gnss-location-enabled true|false [--user <USER_ID>]");
-            BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Sets the ADAS GNSS location enabled state. If no user is specified,", "    the current user is assumed.", "  is-automotive-gnss-suspended", "    Gets the automotive GNSS suspended state.");
+        if (this.mContext
+                .getPackageManager()
+                .hasSystemFeature("android.hardware.type.automotive")) {
+            BatteryService$$ExternalSyntheticOutline0.m(
+                    outPrintWriter,
+                    "  is-adas-gnss-location-enabled [--user <USER_ID>]",
+                    "    Gets the ADAS GNSS location enabled state. If no user is specified,",
+                    "    the current user is assumed.",
+                    "  set-adas-gnss-location-enabled true|false [--user <USER_ID>]");
+            BatteryService$$ExternalSyntheticOutline0.m(
+                    outPrintWriter,
+                    "    Sets the ADAS GNSS location enabled state. If no user is specified,",
+                    "    the current user is assumed.",
+                    "  is-automotive-gnss-suspended",
+                    "    Gets the automotive GNSS suspended state.");
             outPrintWriter.println("  set-automotive-gnss-suspended true|false");
             outPrintWriter.println("    Sets the automotive GNSS suspended state.");
         }
         outPrintWriter.println("  providers");
-        outPrintWriter.println("    The providers command is followed by a subcommand, as listed below:");
+        outPrintWriter.println(
+                "    The providers command is followed by a subcommand, as listed below:");
         outPrintWriter.println();
-        outPrintWriter.println("    add-test-provider <PROVIDER> [--requiresNetwork] [--requiresSatellite]");
+        outPrintWriter.println(
+                "    add-test-provider <PROVIDER> [--requiresNetwork] [--requiresSatellite]");
         outPrintWriter.println("      [--requiresCell] [--hasMonetaryCost] [--supportsAltitude]");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "      [--supportsSpeed] [--supportsBearing]", "      [--powerRequirement <POWER_REQUIREMENT>]", "      [--extraAttributionTags <TAG>,<TAG>,...]", "      Add the given test provider. Requires MOCK_LOCATION permissions which");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "      can be enabled by running \"adb shell appops set <uid>", "      android:mock_location allow\". There are optional flags that can be", "      used to configure the provider properties and additional arguments. If", "      no flags are included, then default values will be used.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    remove-test-provider <PROVIDER>", "      Remove the given test provider.", "    set-test-provider-enabled <PROVIDER> true|false", "      Sets the given test provider enabled state.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    set-test-provider-location <PROVIDER> --location <LATITUDE>,<LONGITUDE>", "      [--accuracy <ACCURACY>] [--time <TIME>]", "      Set location for given test provider. Accuracy and time are optional.", "    send-extra-command <PROVIDER> <COMMAND>");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "      [--supportsSpeed] [--supportsBearing]",
+                "      [--powerRequirement <POWER_REQUIREMENT>]",
+                "      [--extraAttributionTags <TAG>,<TAG>,...]",
+                "      Add the given test provider. Requires MOCK_LOCATION permissions which");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "      can be enabled by running \"adb shell appops set <uid>",
+                "      android:mock_location allow\". There are optional flags that can be",
+                "      used to configure the provider properties and additional arguments. If",
+                "      no flags are included, then default values will be used.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    remove-test-provider <PROVIDER>",
+                "      Remove the given test provider.",
+                "    set-test-provider-enabled <PROVIDER> true|false",
+                "      Sets the given test provider enabled state.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    set-test-provider-location <PROVIDER> --location <LATITUDE>,<LONGITUDE>",
+                "      [--accuracy <ACCURACY>] [--time <TIME>]",
+                "      Set location for given test provider. Accuracy and time are optional.",
+                "    send-extra-command <PROVIDER> <COMMAND>");
         outPrintWriter.println("      Sends the given extra command to the given provider.");
         outPrintWriter.println();
-        outPrintWriter.println("      Common commands that may be supported by the gps provider, depending on");
+        outPrintWriter.println(
+                "      Common commands that may be supported by the gps provider, depending on");
         outPrintWriter.println("      hardware and software configurations:");
-        outPrintWriter.println("        delete_aiding_data - requests deletion of any predictive aiding data");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "        force_time_injection - requests NTP time injection", "        force_psds_injection - requests predictive aiding data injection", "        request_power_stats - requests GNSS power stats update");
+        outPrintWriter.println(
+                "        delete_aiding_data - requests deletion of any predictive aiding data");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "        force_time_injection - requests NTP time injection",
+                "        force_psds_injection - requests predictive aiding data injection",
+                "        request_power_stats - requests GNSS power stats update");
     }
 }

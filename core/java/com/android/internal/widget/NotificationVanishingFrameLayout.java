@@ -21,7 +21,8 @@ public class NotificationVanishingFrameLayout extends FrameLayout {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public NotificationVanishingFrameLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public NotificationVanishingFrameLayout(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 

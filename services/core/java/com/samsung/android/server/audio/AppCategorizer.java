@@ -1,7 +1,9 @@
 package com.samsung.android.server.audio;
 
 import android.content.ContentValues;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+
 import java.util.Hashtable;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -29,6 +31,9 @@ public final class AppCategorizer {
         ContentValues contentValues = new ContentValues();
         contentValues.put("_uid", Integer.valueOf(i));
         contentValues.put("_package", str);
-        audioSettingsHelper.set(contentValues, "selectedpkg", BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "_uid='", "'"));
+        audioSettingsHelper.set(
+                contentValues,
+                "selectedpkg",
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "_uid='", "'"));
     }
 }

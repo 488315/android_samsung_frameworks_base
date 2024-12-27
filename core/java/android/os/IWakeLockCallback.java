@@ -8,8 +8,7 @@ public interface IWakeLockCallback extends IInterface {
 
     public static class Default implements IWakeLockCallback {
         @Override // android.os.IWakeLockCallback
-        public void onStateChanged(boolean enabled) throws RemoteException {
-        }
+        public void onStateChanged(boolean enabled) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -17,7 +16,7 @@ public interface IWakeLockCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWakeLockCallback {
+    public abstract static class Stub extends Binder implements IWakeLockCallback {
         static final int TRANSACTION_onStateChanged = 1;
 
         public Stub() {
@@ -55,7 +54,8 @@ public interface IWakeLockCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IWakeLockCallback.DESCRIPTOR);
             }

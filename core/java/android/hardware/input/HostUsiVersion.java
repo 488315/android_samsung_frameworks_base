@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class HostUsiVersion implements Parcelable {
-    public static final Parcelable.Creator<HostUsiVersion> CREATOR = new Parcelable.Creator<HostUsiVersion>() { // from class: android.hardware.input.HostUsiVersion.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HostUsiVersion[] newArray(int size) {
-            return new HostUsiVersion[size];
-        }
+    public static final Parcelable.Creator<HostUsiVersion> CREATOR =
+            new Parcelable.Creator<
+                    HostUsiVersion>() { // from class: android.hardware.input.HostUsiVersion.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HostUsiVersion[] newArray(int size) {
+                    return new HostUsiVersion[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HostUsiVersion createFromParcel(Parcel in) {
-            return new HostUsiVersion(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HostUsiVersion createFromParcel(Parcel in) {
+                    return new HostUsiVersion(in);
+                }
+            };
     private final int mMajorVersion;
     private final int mMinorVersion;
 
@@ -39,7 +41,11 @@ public final class HostUsiVersion implements Parcelable {
     }
 
     public String toString() {
-        return "HostUsiVersion { majorVersion = " + this.mMajorVersion + ", minorVersion = " + this.mMinorVersion + " }";
+        return "HostUsiVersion { majorVersion = "
+                + this.mMajorVersion
+                + ", minorVersion = "
+                + this.mMinorVersion
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -80,6 +86,5 @@ public final class HostUsiVersion implements Parcelable {
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

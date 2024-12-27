@@ -23,16 +23,16 @@ public interface IHdmiRecordListener extends IInterface {
         }
 
         @Override // android.hardware.hdmi.IHdmiRecordListener
-        public void onOneTouchRecordResult(int recorderAddress, int result) throws RemoteException {
-        }
+        public void onOneTouchRecordResult(int recorderAddress, int result)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiRecordListener
-        public void onTimerRecordingResult(int recorderAddress, int result) throws RemoteException {
-        }
+        public void onTimerRecordingResult(int recorderAddress, int result)
+                throws RemoteException {}
 
         @Override // android.hardware.hdmi.IHdmiRecordListener
-        public void onClearTimerRecordingResult(int recorderAddress, int result) throws RemoteException {
-        }
+        public void onClearTimerRecordingResult(int recorderAddress, int result)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -40,7 +40,7 @@ public interface IHdmiRecordListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IHdmiRecordListener {
+    public abstract static class Stub extends Binder implements IHdmiRecordListener {
         public static final String DESCRIPTOR = "android.hardware.hdmi.IHdmiRecordListener";
         static final int TRANSACTION_getOneTouchRecordSource = 1;
         static final int TRANSACTION_onClearTimerRecordingResult = 4;
@@ -88,7 +88,8 @@ public interface IHdmiRecordListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -164,7 +165,8 @@ public interface IHdmiRecordListener extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiRecordListener
-            public void onOneTouchRecordResult(int recorderAddress, int result) throws RemoteException {
+            public void onOneTouchRecordResult(int recorderAddress, int result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -180,7 +182,8 @@ public interface IHdmiRecordListener extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiRecordListener
-            public void onTimerRecordingResult(int recorderAddress, int result) throws RemoteException {
+            public void onTimerRecordingResult(int recorderAddress, int result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -196,7 +199,8 @@ public interface IHdmiRecordListener extends IInterface {
             }
 
             @Override // android.hardware.hdmi.IHdmiRecordListener
-            public void onClearTimerRecordingResult(int recorderAddress, int result) throws RemoteException {
+            public void onClearTimerRecordingResult(int recorderAddress, int result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

@@ -3,6 +3,7 @@ package android.hardware.radio.V1_0;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -20,18 +21,29 @@ public final class IccIoResult {
             return false;
         }
         IccIoResult other = (IccIoResult) otherObject;
-        if (this.sw1 == other.sw1 && this.sw2 == other.sw2 && HidlSupport.deepEquals(this.simResponse, other.simResponse)) {
+        if (this.sw1 == other.sw1
+                && this.sw2 == other.sw2
+                && HidlSupport.deepEquals(this.simResponse, other.simResponse)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.sw1))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.sw2))), Integer.valueOf(HidlSupport.deepHashCode(this.simResponse)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.sw1))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.sw2))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.simResponse)));
     }
 
     public final String toString() {
-        return "{.sw1 = " + this.sw1 + ", .sw2 = " + this.sw2 + ", .simResponse = " + this.simResponse + "}";
+        return "{.sw1 = "
+                + this.sw1
+                + ", .sw2 = "
+                + this.sw2
+                + ", .simResponse = "
+                + this.simResponse
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -43,7 +55,8 @@ public final class IccIoResult {
         ArrayList<IccIoResult> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 24, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 24, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             IccIoResult _hidl_vec_element = new IccIoResult();
@@ -53,11 +66,16 @@ public final class IccIoResult {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.sw1 = _hidl_blob.getInt32(_hidl_offset + 0);
         this.sw2 = _hidl_blob.getInt32(_hidl_offset + 4);
         this.simResponse = _hidl_blob.getString(_hidl_offset + 8);
-        parcel.readEmbeddedBuffer(this.simResponse.getBytes().length + 1, _hidl_blob.handle(), _hidl_offset + 8 + 0, false);
+        parcel.readEmbeddedBuffer(
+                this.simResponse.getBytes().length + 1,
+                _hidl_blob.handle(),
+                _hidl_offset + 8 + 0,
+                false);
     }
 
     public final void writeToParcel(HwParcel parcel) {
@@ -66,7 +84,8 @@ public final class IccIoResult {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<IccIoResult> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<IccIoResult> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

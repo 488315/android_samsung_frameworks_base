@@ -5,6 +5,7 @@ import com.android.internal.widget.remotecompose.core.Operation;
 import com.android.internal.widget.remotecompose.core.PaintContext;
 import com.android.internal.widget.remotecompose.core.PaintOperation;
 import com.android.internal.widget.remotecompose.core.WireBuffer;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -28,12 +29,18 @@ public class DrawTextOnPath extends PaintOperation {
     }
 
     public String toString() {
-        return "DrawTextOnPath [" + this.mTextId + "] [" + this.mPathId + "] " + this.mHOffset + ", " + this.mVOffset;
+        return "DrawTextOnPath ["
+                + this.mTextId
+                + "] ["
+                + this.mPathId
+                + "] "
+                + this.mHOffset
+                + ", "
+                + this.mVOffset;
     }
 
     public static class Companion implements CompanionOperation {
-        private Companion() {
-        }
+        private Companion() {}
 
         @Override // com.android.internal.widget.remotecompose.core.CompanionOperation
         public void read(WireBuffer buffer, List<Operation> operations) {

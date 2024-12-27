@@ -3,6 +3,7 @@ package android.telephony.ims;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -17,19 +18,20 @@ public final class ImsSsInfo implements Parcelable {
     public static final int CLIR_STATUS_TEMPORARILY_ALLOWED = 4;
     public static final int CLIR_STATUS_TEMPORARILY_RESTRICTED = 3;
     public static final int CLIR_STATUS_UNKNOWN = 2;
-    public static final Parcelable.Creator<ImsSsInfo> CREATOR = new Parcelable.Creator<ImsSsInfo>() { // from class: android.telephony.ims.ImsSsInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsSsInfo createFromParcel(Parcel in) {
-            return new ImsSsInfo(in);
-        }
+    public static final Parcelable.Creator<ImsSsInfo> CREATOR =
+            new Parcelable.Creator<ImsSsInfo>() { // from class: android.telephony.ims.ImsSsInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsSsInfo createFromParcel(Parcel in) {
+                    return new ImsSsInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsSsInfo[] newArray(int size) {
-            return new ImsSsInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsSsInfo[] newArray(int size) {
+                    return new ImsSsInfo[size];
+                }
+            };
     public static final int DISABLED = 0;
     public static final int ENABLED = 1;
     public static final int NOT_REGISTERED = -1;
@@ -44,20 +46,16 @@ public final class ImsSsInfo implements Parcelable {
     public int mStatus;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ClirInterrogationStatus {
-    }
+    public @interface ClirInterrogationStatus {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ClirOutgoingState {
-    }
+    public @interface ClirOutgoingState {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ServiceProvisionStatus {
-    }
+    public @interface ServiceProvisionStatus {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ServiceStatus {
-    }
+    public @interface ServiceStatus {}
 
     public ImsSsInfo() {
         this.mProvisionStatus = -1;
@@ -134,7 +132,11 @@ public final class ImsSsInfo implements Parcelable {
     }
 
     public String toString() {
-        return super.toString() + ", Status: " + (this.mStatus == 0 ? "disabled" : "enabled") + ", ProvisionStatus: " + provisionStatusToString(this.mProvisionStatus);
+        return super.toString()
+                + ", Status: "
+                + (this.mStatus == 0 ? "disabled" : "enabled")
+                + ", ProvisionStatus: "
+                + provisionStatusToString(this.mProvisionStatus);
     }
 
     private static String provisionStatusToString(int pStatus) {

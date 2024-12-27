@@ -2,6 +2,7 @@ package com.android.internal.alsa;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.util.Slog;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -34,8 +35,7 @@ public class AlsaCardsParser {
         String mCardDescription = "";
         private String mUsbDeviceAddress = null;
 
-        public AlsaCardRecord() {
-        }
+        public AlsaCardRecord() {}
 
         public int getCardNum() {
             return this.mCardNum;
@@ -64,12 +64,21 @@ public class AlsaCardsParser {
                     int tokenIndex3 = AlsaCardsParser.mTokenizer.nextToken(line, delimIndex);
                     int delimIndex2 = AlsaCardsParser.mTokenizer.nextDelimiter(line, tokenIndex3);
                     this.mField1 = line.substring(tokenIndex3, delimIndex2);
-                    this.mCardName = line.substring(AlsaCardsParser.mTokenizer.nextToken(line, delimIndex2));
+                    this.mCardName =
+                            line.substring(AlsaCardsParser.mTokenizer.nextToken(line, delimIndex2));
                 } catch (NumberFormatException e) {
-                    Slog.e(TAG, "Failed to parse line " + lineIndex + " of " + AlsaCardsParser.kCardsFilePath + ": " + line.substring(tokenIndex2, delimIndex));
+                    Slog.e(
+                            TAG,
+                            "Failed to parse line "
+                                    + lineIndex
+                                    + " of "
+                                    + AlsaCardsParser.kCardsFilePath
+                                    + ": "
+                                    + line.substring(tokenIndex2, delimIndex));
                     return false;
                 }
-            } else if (lineIndex == 1 && (tokenIndex = AlsaCardsParser.mTokenizer.nextToken(line, 0)) != -1) {
+            } else if (lineIndex == 1
+                    && (tokenIndex = AlsaCardsParser.mTokenizer.nextToken(line, 0)) != -1) {
                 int keyIndex = line.indexOf(kUsbCardKeyStr);
                 boolean isUsb = keyIndex != -1;
                 if (isUsb) {
@@ -84,11 +93,27 @@ public class AlsaCardsParser {
         }
 
         public String textFormat() {
-            return this.mCardName + " : " + this.mCardDescription + " [addr:" + this.mUsbDeviceAddress + NavigationBarInflaterView.SIZE_MOD_END;
+            return this.mCardName
+                    + " : "
+                    + this.mCardDescription
+                    + " [addr:"
+                    + this.mUsbDeviceAddress
+                    + NavigationBarInflaterView.SIZE_MOD_END;
         }
 
         public void log(int listIndex) {
-            Slog.d(TAG, "" + listIndex + " [" + this.mCardNum + " " + this.mCardName + " : " + this.mCardDescription + " usb:" + isUsb());
+            Slog.d(
+                    TAG,
+                    ""
+                            + listIndex
+                            + " ["
+                            + this.mCardNum
+                            + " "
+                            + this.mCardName
+                            + " : "
+                            + this.mCardDescription
+                            + " usb:"
+                            + isUsb());
         }
     }
 

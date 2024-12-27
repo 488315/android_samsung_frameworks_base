@@ -10,7 +10,10 @@ import java.util.function.Predicate;
 /* loaded from: classes3.dex */
 public class CustomFeatureFlags implements FeatureFlags {
     private BiPredicate<String, Predicate<FeatureFlags>> mGetValueImpl;
-    private Set<String> mReadOnlyFlagsSet = new HashSet(Arrays.asList(Flags.FLAG_REMOVE_TEXT_SERVICE, Flags.FLAG_TELEMETRY_APIS_SERVICE, ""));
+    private Set<String> mReadOnlyFlagsSet =
+            new HashSet(
+                    Arrays.asList(
+                            Flags.FLAG_REMOVE_TEXT_SERVICE, Flags.FLAG_TELEMETRY_APIS_SERVICE, ""));
 
     public CustomFeatureFlags(BiPredicate<String, Predicate<FeatureFlags>> getValueImpl) {
         this.mGetValueImpl = getValueImpl;
@@ -18,22 +21,28 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // android.server.FeatureFlags
     public boolean removeTextService() {
-        return getValue(Flags.FLAG_REMOVE_TEXT_SERVICE, new Predicate() { // from class: android.server.CustomFeatureFlags$$ExternalSyntheticLambda1
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).removeTextService();
-            }
-        });
+        return getValue(
+                Flags.FLAG_REMOVE_TEXT_SERVICE,
+                new Predicate() { // from class:
+                                  // android.server.CustomFeatureFlags$$ExternalSyntheticLambda1
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).removeTextService();
+                    }
+                });
     }
 
     @Override // android.server.FeatureFlags
     public boolean telemetryApisService() {
-        return getValue(Flags.FLAG_TELEMETRY_APIS_SERVICE, new Predicate() { // from class: android.server.CustomFeatureFlags$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).telemetryApisService();
-            }
-        });
+        return getValue(
+                Flags.FLAG_TELEMETRY_APIS_SERVICE,
+                new Predicate() { // from class:
+                                  // android.server.CustomFeatureFlags$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).telemetryApisService();
+                    }
+                });
     }
 
     public boolean isFlagReadOnlyOptimized(String flagName) {

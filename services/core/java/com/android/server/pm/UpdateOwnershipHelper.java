@@ -2,8 +2,10 @@ package com.android.server.pm;
 
 import android.util.ArrayMap;
 import android.util.ArraySet;
+
 import com.android.internal.pm.parsing.pkg.AndroidPackageInternal;
 import com.android.internal.pm.pkg.component.ParsedUsesPermission;
+
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -17,10 +19,15 @@ public final class UpdateOwnershipHelper {
         if (androidPackageInternal == null) {
             return false;
         }
-        if ((!packageSetting.isSystem() && !packageSetting.pkgState.updatedSystemApp) || !androidPackageInternal.getProperties().containsKey("android.app.PROPERTY_LEGACY_UPDATE_OWNERSHIP_DENYLIST")) {
+        if ((!packageSetting.isSystem() && !packageSetting.pkgState.updatedSystemApp)
+                || !androidPackageInternal
+                        .getProperties()
+                        .containsKey("android.app.PROPERTY_LEGACY_UPDATE_OWNERSHIP_DENYLIST")) {
             return false;
         }
-        String[] strArr = {"android.permission.INSTALL_PACKAGES", "android.permission.INSTALL_PACKAGE_UPDATES"};
+        String[] strArr = {
+            "android.permission.INSTALL_PACKAGES", "android.permission.INSTALL_PACKAGE_UPDATES"
+        };
         List usesPermissions = androidPackageInternal.getUsesPermissions();
         for (int i = 0; i < usesPermissions.size(); i++) {
             for (int i2 = 0; i2 < 2; i2++) {

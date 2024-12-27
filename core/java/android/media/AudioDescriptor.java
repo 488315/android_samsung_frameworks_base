@@ -3,6 +3,7 @@ package android.media;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
@@ -10,19 +11,21 @@ import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public class AudioDescriptor implements Parcelable {
-    public static final Parcelable.Creator<AudioDescriptor> CREATOR = new Parcelable.Creator<AudioDescriptor>() { // from class: android.media.AudioDescriptor.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioDescriptor createFromParcel(Parcel p) {
-            return new AudioDescriptor(p);
-        }
+    public static final Parcelable.Creator<AudioDescriptor> CREATOR =
+            new Parcelable.Creator<
+                    AudioDescriptor>() { // from class: android.media.AudioDescriptor.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioDescriptor createFromParcel(Parcel p) {
+                    return new AudioDescriptor(p);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioDescriptor[] newArray(int size) {
-            return new AudioDescriptor[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioDescriptor[] newArray(int size) {
+                    return new AudioDescriptor[size];
+                }
+            };
     public static final int STANDARD_EDID = 1;
     public static final int STANDARD_NONE = 0;
     public static final int STANDARD_SADB = 2;
@@ -32,8 +35,7 @@ public class AudioDescriptor implements Parcelable {
     private final int mStandard;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AudioDescriptorStandard {
-    }
+    public @interface AudioDescriptorStandard {}
 
     @SystemApi
     public AudioDescriptor(int standard, int encapsulationType, byte[] descriptor) {
@@ -55,7 +57,10 @@ public class AudioDescriptor implements Parcelable {
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mStandard), Integer.valueOf(this.mEncapsulationType), Integer.valueOf(Arrays.hashCode(this.mDescriptor)));
+        return Objects.hash(
+                Integer.valueOf(this.mStandard),
+                Integer.valueOf(this.mEncapsulationType),
+                Integer.valueOf(Arrays.hashCode(this.mDescriptor)));
     }
 
     public boolean equals(Object o) {
@@ -66,7 +71,9 @@ public class AudioDescriptor implements Parcelable {
             return false;
         }
         AudioDescriptor that = (AudioDescriptor) o;
-        if (this.mStandard == that.mStandard && this.mEncapsulationType == that.mEncapsulationType && Arrays.equals(this.mDescriptor, that.mDescriptor)) {
+        if (this.mStandard == that.mStandard
+                && this.mEncapsulationType == that.mEncapsulationType
+                && Arrays.equals(this.mDescriptor, that.mDescriptor)) {
             return true;
         }
         return false;

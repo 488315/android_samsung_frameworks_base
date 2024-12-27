@@ -3,6 +3,7 @@ package com.android.media.permission;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -10,21 +11,24 @@ import java.util.StringJoiner;
 
 /* loaded from: classes5.dex */
 public class UidPackageState implements Parcelable {
-    public static final Parcelable.Creator<UidPackageState> CREATOR = new Parcelable.Creator<UidPackageState>() { // from class: com.android.media.permission.UidPackageState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UidPackageState createFromParcel(Parcel _aidl_source) {
-            UidPackageState _aidl_out = new UidPackageState();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<UidPackageState> CREATOR =
+            new Parcelable.Creator<
+                    UidPackageState>() { // from class:
+                                         // com.android.media.permission.UidPackageState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UidPackageState createFromParcel(Parcel _aidl_source) {
+                    UidPackageState _aidl_out = new UidPackageState();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UidPackageState[] newArray(int _aidl_size) {
-            return new UidPackageState[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UidPackageState[] newArray(int _aidl_size) {
+                    return new UidPackageState[_aidl_size];
+                }
+            };
     public List<String> packageNames;
     public int uid = 0;
 
@@ -91,14 +95,16 @@ public class UidPackageState implements Parcelable {
             return false;
         }
         UidPackageState that = (UidPackageState) other;
-        if (Objects.deepEquals(Integer.valueOf(this.uid), Integer.valueOf(that.uid)) && Objects.deepEquals(this.packageNames, that.packageNames)) {
+        if (Objects.deepEquals(Integer.valueOf(this.uid), Integer.valueOf(that.uid))
+                && Objects.deepEquals(this.packageNames, that.packageNames)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.uid), this.packageNames).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(Integer.valueOf(this.uid), this.packageNames).toArray());
     }
 
     @Override // android.os.Parcelable

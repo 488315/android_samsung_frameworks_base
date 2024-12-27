@@ -6,21 +6,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class MediaResourceNotifyInfoParcel implements Parcelable {
-    public static final Parcelable.Creator<MediaResourceNotifyInfoParcel> CREATOR = new Parcelable.Creator<MediaResourceNotifyInfoParcel>() { // from class: com.samsung.android.media.MediaResourceNotifyInfoParcel.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MediaResourceNotifyInfoParcel createFromParcel(Parcel _aidl_source) {
-            MediaResourceNotifyInfoParcel _aidl_out = new MediaResourceNotifyInfoParcel();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<MediaResourceNotifyInfoParcel> CREATOR =
+            new Parcelable.Creator<
+                    MediaResourceNotifyInfoParcel>() { // from class:
+                                                       // com.samsung.android.media.MediaResourceNotifyInfoParcel.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MediaResourceNotifyInfoParcel createFromParcel(Parcel _aidl_source) {
+                    MediaResourceNotifyInfoParcel _aidl_out = new MediaResourceNotifyInfoParcel();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MediaResourceNotifyInfoParcel[] newArray(int _aidl_size) {
-            return new MediaResourceNotifyInfoParcel[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MediaResourceNotifyInfoParcel[] newArray(int _aidl_size) {
+                    return new MediaResourceNotifyInfoParcel[_aidl_size];
+                }
+            };
     public MediaResourceInfoParcel mediaResourceInfo;
     public int pid = -1;
 
@@ -57,7 +60,9 @@ public class MediaResourceNotifyInfoParcel implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.mediaResourceInfo = (MediaResourceInfoParcel) _aidl_parcel.readTypedObject(MediaResourceInfoParcel.CREATOR);
+                this.mediaResourceInfo =
+                        (MediaResourceInfoParcel)
+                                _aidl_parcel.readTypedObject(MediaResourceInfoParcel.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

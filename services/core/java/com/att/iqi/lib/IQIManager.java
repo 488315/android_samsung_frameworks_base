@@ -11,14 +11,14 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
 import android.util.SparseArray;
+
 import com.att.iqi.IIQIBroker;
 import com.att.iqi.IMetricQueryCallback;
 import com.att.iqi.IMetricSourcingCallback;
 import com.att.iqi.IProfileChangedCallback;
 import com.att.iqi.IServiceStateChangeCallback;
 import com.att.iqi.LogTagsSdkKt;
-import com.att.iqi.lib.IQIManager;
-import com.att.iqi.lib.Metric;
+
 import java.lang.ref.WeakReference;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.ByteBuffer;
@@ -31,9 +31,11 @@ import java.util.concurrent.Executors;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public class IQIManager {
-    private static final String ACTION_SERVICE_FORCE_STOPPED = "com.att.iqi.action.SERVICE_FORCE_STOPPED";
+    private static final String ACTION_SERVICE_FORCE_STOPPED =
+            "com.att.iqi.action.SERVICE_FORCE_STOPPED";
     private static final long FORCE_STOP_WAIT_MS = 3500;
-    private static final String PERMISSION_SERVICE_FORCE_STOP = "com.att.iqi.permission.RECEIVE_FORCE_STOP_NOTIFICATION";
+    private static final String PERMISSION_SERVICE_FORCE_STOP =
+            "com.att.iqi.permission.RECEIVE_FORCE_STOP_NOTIFICATION";
     private static IQIManager sInstance;
     private static final Object sLock = new Object();
     private final HandlerThread mHandlerThread;
@@ -44,36 +46,49 @@ public class IQIManager {
     private final SparseArray mMetricSourcingListenerMap = new SparseArray();
     private final List mServiceStateChangeListenerList = new ArrayList();
     private final ExecutorService mExecutorService = Executors.newSingleThreadExecutor();
-    private final IMetricQueryCallback mQueryCallback = new IMetricQueryCallback.Stub() { // from class: com.att.iqi.lib.IQIManager.2
-        @Override // com.att.iqi.IMetricQueryCallback
-        public void onMetricQueried(Metric.ID id, byte[] bArr) throws RemoteException {
-            if (id == null) {
-                return;
-            }
-            IQIManager.this.mMessageDispatcher.obtainMessage(1, id.asInt(), 0, bArr).sendToTarget();
-        }
-    };
-    private final IMetricSourcingCallback mMetricSourcingCallback = new IMetricSourcingCallback.Stub() { // from class: com.att.iqi.lib.IQIManager.3
-        @Override // com.att.iqi.IMetricSourcingCallback
-        public void onMetricSourced(Metric.ID id, byte[] bArr) throws RemoteException {
-            if (id == null) {
-                return;
-            }
-            IQIManager.this.mMessageDispatcher.obtainMessage(2, id.asInt(), 0, bArr).sendToTarget();
-        }
-    };
-    private final IProfileChangedCallback mProfileChangedCallback = new IProfileChangedCallback.Stub() { // from class: com.att.iqi.lib.IQIManager.4
-        @Override // com.att.iqi.IProfileChangedCallback
-        public void onProfileChanged() throws RemoteException {
-            IQIManager.this.mMessageDispatcher.obtainMessage(3).sendToTarget();
-        }
-    };
-    private final IServiceStateChangeCallback mServiceStateChangedCallback = new IServiceStateChangeCallback.Stub() { // from class: com.att.iqi.lib.IQIManager.5
-        @Override // com.att.iqi.IServiceStateChangeCallback
-        public void onServiceChange(boolean z) throws RemoteException {
-            IQIManager.this.mMessageDispatcher.obtainMessage(4, z ? 1 : 0, 0).sendToTarget();
-        }
-    };
+    private final IMetricQueryCallback mQueryCallback =
+            new IMetricQueryCallback.Stub() { // from class: com.att.iqi.lib.IQIManager.2
+                @Override // com.att.iqi.IMetricQueryCallback
+                public void onMetricQueried(Metric.ID id, byte[] bArr) throws RemoteException {
+                    if (id == null) {
+                        return;
+                    }
+                    IQIManager.this
+                            .mMessageDispatcher
+                            .obtainMessage(1, id.asInt(), 0, bArr)
+                            .sendToTarget();
+                }
+            };
+    private final IMetricSourcingCallback mMetricSourcingCallback =
+            new IMetricSourcingCallback.Stub() { // from class: com.att.iqi.lib.IQIManager.3
+                @Override // com.att.iqi.IMetricSourcingCallback
+                public void onMetricSourced(Metric.ID id, byte[] bArr) throws RemoteException {
+                    if (id == null) {
+                        return;
+                    }
+                    IQIManager.this
+                            .mMessageDispatcher
+                            .obtainMessage(2, id.asInt(), 0, bArr)
+                            .sendToTarget();
+                }
+            };
+    private final IProfileChangedCallback mProfileChangedCallback =
+            new IProfileChangedCallback.Stub() { // from class: com.att.iqi.lib.IQIManager.4
+                @Override // com.att.iqi.IProfileChangedCallback
+                public void onProfileChanged() throws RemoteException {
+                    IQIManager.this.mMessageDispatcher.obtainMessage(3).sendToTarget();
+                }
+            };
+    private final IServiceStateChangeCallback mServiceStateChangedCallback =
+            new IServiceStateChangeCallback.Stub() { // from class: com.att.iqi.lib.IQIManager.5
+                @Override // com.att.iqi.IServiceStateChangeCallback
+                public void onServiceChange(boolean z) throws RemoteException {
+                    IQIManager.this
+                            .mMessageDispatcher
+                            .obtainMessage(4, z ? 1 : 0, 0)
+                            .sendToTarget();
+                }
+            };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class MessageDispatcherCallback implements Handler.Callback {
@@ -89,12 +104,14 @@ public class IQIManager {
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public static /* synthetic */ void lambda$handleMessage$0(MetricQueryCallback metricQueryCallback, int i, ByteBuffer byteBuffer) {
+        public static /* synthetic */ void lambda$handleMessage$0(
+                MetricQueryCallback metricQueryCallback, int i, ByteBuffer byteBuffer) {
             metricQueryCallback.onMetricQueried(new Metric.ID(i), byteBuffer);
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public static /* synthetic */ void lambda$handleMessage$1(MetricSourcingListener metricSourcingListener, int i, ByteBuffer byteBuffer) {
+        public static /* synthetic */ void lambda$handleMessage$1(
+                MetricSourcingListener metricSourcingListener, int i, ByteBuffer byteBuffer) {
             metricSourcingListener.onMetricSourcing(new Metric.ID(i), byteBuffer);
         }
 
@@ -107,58 +124,90 @@ public class IQIManager {
             int i = message.what;
             if (i == 1) {
                 final int i2 = message.arg1;
-                final MetricQueryCallback metricQueryCallback = (MetricQueryCallback) iQIManager.mMetricQueryCallbackMap.get(i2);
+                final MetricQueryCallback metricQueryCallback =
+                        (MetricQueryCallback) iQIManager.mMetricQueryCallbackMap.get(i2);
                 if (metricQueryCallback != null) {
                     Object obj = message.obj;
-                    final ByteBuffer wrap = ByteBuffer.wrap(obj != null ? (byte[]) obj : new byte[0]);
+                    final ByteBuffer wrap =
+                            ByteBuffer.wrap(obj != null ? (byte[]) obj : new byte[0]);
                     final int i3 = 0;
-                    iQIManager.mExecutorService.execute(new Runnable() { // from class: com.att.iqi.lib.IQIManager$MessageDispatcherCallback$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            switch (i3) {
-                                case 0:
-                                    IQIManager.MessageDispatcherCallback.lambda$handleMessage$0((IQIManager.MetricQueryCallback) metricQueryCallback, i2, wrap);
-                                    break;
-                                default:
-                                    IQIManager.MessageDispatcherCallback.lambda$handleMessage$1((IQIManager.MetricSourcingListener) metricQueryCallback, i2, wrap);
-                                    break;
-                            }
-                        }
-                    });
+                    iQIManager.mExecutorService.execute(
+                            new Runnable() { // from class:
+                                             // com.att.iqi.lib.IQIManager$MessageDispatcherCallback$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    switch (i3) {
+                                        case 0:
+                                            IQIManager.MessageDispatcherCallback
+                                                    .lambda$handleMessage$0(
+                                                            (IQIManager.MetricQueryCallback)
+                                                                    metricQueryCallback,
+                                                            i2,
+                                                            wrap);
+                                            break;
+                                        default:
+                                            IQIManager.MessageDispatcherCallback
+                                                    .lambda$handleMessage$1(
+                                                            (IQIManager.MetricSourcingListener)
+                                                                    metricQueryCallback,
+                                                            i2,
+                                                            wrap);
+                                            break;
+                                    }
+                                }
+                            });
                 }
             } else if (i == 2) {
                 final int i4 = message.arg1;
-                final MetricSourcingListener metricSourcingListener = (MetricSourcingListener) iQIManager.mMetricSourcingListenerMap.get(i4);
+                final MetricSourcingListener metricSourcingListener =
+                        (MetricSourcingListener) iQIManager.mMetricSourcingListenerMap.get(i4);
                 if (metricSourcingListener != null) {
                     Object obj2 = message.obj;
-                    final ByteBuffer wrap2 = ByteBuffer.wrap(obj2 != null ? (byte[]) obj2 : new byte[0]);
+                    final ByteBuffer wrap2 =
+                            ByteBuffer.wrap(obj2 != null ? (byte[]) obj2 : new byte[0]);
                     final int i5 = 1;
-                    iQIManager.mExecutorService.execute(new Runnable() { // from class: com.att.iqi.lib.IQIManager$MessageDispatcherCallback$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            switch (i5) {
-                                case 0:
-                                    IQIManager.MessageDispatcherCallback.lambda$handleMessage$0((IQIManager.MetricQueryCallback) metricSourcingListener, i4, wrap2);
-                                    break;
-                                default:
-                                    IQIManager.MessageDispatcherCallback.lambda$handleMessage$1((IQIManager.MetricSourcingListener) metricSourcingListener, i4, wrap2);
-                                    break;
-                            }
-                        }
-                    });
+                    iQIManager.mExecutorService.execute(
+                            new Runnable() { // from class:
+                                             // com.att.iqi.lib.IQIManager$MessageDispatcherCallback$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    switch (i5) {
+                                        case 0:
+                                            IQIManager.MessageDispatcherCallback
+                                                    .lambda$handleMessage$0(
+                                                            (IQIManager.MetricQueryCallback)
+                                                                    metricSourcingListener,
+                                                            i4,
+                                                            wrap2);
+                                            break;
+                                        default:
+                                            IQIManager.MessageDispatcherCallback
+                                                    .lambda$handleMessage$1(
+                                                            (IQIManager.MetricSourcingListener)
+                                                                    metricSourcingListener,
+                                                            i4,
+                                                            wrap2);
+                                            break;
+                                    }
+                                }
+                            });
                 }
             } else if (i == 3) {
                 synchronized (iQIManager.mProfileChangeListenerList) {
                     try {
-                        for (final ProfileChangeListener profileChangeListener : iQIManager.mProfileChangeListenerList) {
+                        for (final ProfileChangeListener profileChangeListener :
+                                iQIManager.mProfileChangeListenerList) {
                             ExecutorService executorService = iQIManager.mExecutorService;
                             Objects.requireNonNull(profileChangeListener);
-                            executorService.execute(new Runnable() { // from class: com.att.iqi.lib.IQIManager$MessageDispatcherCallback$$ExternalSyntheticLambda2
-                                @Override // java.lang.Runnable
-                                public final void run() {
-                                    IQIManager.ProfileChangeListener.this.onProfileChanged();
-                                }
-                            });
+                            executorService.execute(
+                                    new Runnable() { // from class:
+                                                     // com.att.iqi.lib.IQIManager$MessageDispatcherCallback$$ExternalSyntheticLambda2
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            IQIManager.ProfileChangeListener.this
+                                                    .onProfileChanged();
+                                        }
+                                    });
                         }
                     } finally {
                     }
@@ -167,19 +216,25 @@ public class IQIManager {
                 final boolean z = message.arg1 == 1;
                 synchronized (iQIManager.mServiceStateChangeListenerList) {
                     try {
-                        for (final ServiceStateChangeListener serviceStateChangeListener : iQIManager.mServiceStateChangeListenerList) {
-                            iQIManager.mExecutorService.execute(new Runnable() { // from class: com.att.iqi.lib.IQIManager$MessageDispatcherCallback$$ExternalSyntheticLambda3
-                                @Override // java.lang.Runnable
-                                public final void run() {
-                                    IQIManager.ServiceStateChangeListener.this.onServiceChange(z);
-                                }
-                            });
+                        for (final ServiceStateChangeListener serviceStateChangeListener :
+                                iQIManager.mServiceStateChangeListenerList) {
+                            iQIManager.mExecutorService.execute(
+                                    new Runnable() { // from class:
+                                                     // com.att.iqi.lib.IQIManager$MessageDispatcherCallback$$ExternalSyntheticLambda3
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            IQIManager.ServiceStateChangeListener.this
+                                                    .onServiceChange(z);
+                                        }
+                                    });
                         }
                     } finally {
                     }
                 }
             } else if (i == 5) {
-                Log.d(LogTagsSdkKt.IQIMANAGER_TAG, "Timed out waiting for package to be force stopped");
+                Log.d(
+                        LogTagsSdkKt.IQIMANAGER_TAG,
+                        "Timed out waiting for package to be force stopped");
                 Object obj3 = message.obj;
                 if (obj3 instanceof Runnable) {
                     iQIManager.mExecutorService.execute((Runnable) obj3);
@@ -215,7 +270,10 @@ public class IQIManager {
         this.mHandlerThread = handlerThread;
         handlerThread.start();
         Looper looper = handlerThread.getLooper();
-        this.mMessageDispatcher = new Handler(looper == null ? Looper.getMainLooper() : looper, new MessageDispatcherCallback(this));
+        this.mMessageDispatcher =
+                new Handler(
+                        looper == null ? Looper.getMainLooper() : looper,
+                        new MessageDispatcherCallback(this));
     }
 
     public static IQIManager getInstance() {
@@ -240,7 +298,11 @@ public class IQIManager {
         try {
             try {
                 try {
-                    IBinder iBinder = (IBinder) Class.forName("android.os.ServiceManager").getDeclaredMethod("getService", String.class).invoke(null, "iqi");
+                    IBinder iBinder =
+                            (IBinder)
+                                    Class.forName("android.os.ServiceManager")
+                                            .getDeclaredMethod("getService", String.class)
+                                            .invoke(null, "iqi");
                     if (iBinder != null) {
                         IIQIBroker asInterface = IIQIBroker.Stub.asInterface(iBinder);
                         this.mIQIService = asInterface;
@@ -275,14 +337,20 @@ public class IQIManager {
     public void forceStopService(Context context, final Runnable runnable) {
         if (runnable != null) {
             final Message obtainMessage = this.mMessageDispatcher.obtainMessage(5, runnable);
-            context.registerReceiver(new BroadcastReceiver() { // from class: com.att.iqi.lib.IQIManager.1
-                @Override // android.content.BroadcastReceiver
-                public void onReceive(Context context2, Intent intent) {
-                    IQIManager.this.mMessageDispatcher.removeMessages(obtainMessage.what, runnable);
-                    IQIManager.this.mExecutorService.execute(runnable);
-                    context2.unregisterReceiver(this);
-                }
-            }, new IntentFilter(ACTION_SERVICE_FORCE_STOPPED), PERMISSION_SERVICE_FORCE_STOP, this.mMessageDispatcher, 2);
+            context.registerReceiver(
+                    new BroadcastReceiver() { // from class: com.att.iqi.lib.IQIManager.1
+                        @Override // android.content.BroadcastReceiver
+                        public void onReceive(Context context2, Intent intent) {
+                            IQIManager.this.mMessageDispatcher.removeMessages(
+                                    obtainMessage.what, runnable);
+                            IQIManager.this.mExecutorService.execute(runnable);
+                            context2.unregisterReceiver(this);
+                        }
+                    },
+                    new IntentFilter(ACTION_SERVICE_FORCE_STOPPED),
+                    PERMISSION_SERVICE_FORCE_STOP,
+                    this.mMessageDispatcher,
+                    2);
             this.mMessageDispatcher.sendMessageDelayed(obtainMessage, FORCE_STOP_WAIT_MS);
         }
         try {
@@ -293,7 +361,8 @@ public class IQIManager {
         }
     }
 
-    public void registerMetricSourcingListener(Metric.ID id, MetricSourcingListener metricSourcingListener) {
+    public void registerMetricSourcingListener(
+            Metric.ID id, MetricSourcingListener metricSourcingListener) {
         if (id == null || metricSourcingListener == null) {
             return;
         }
@@ -304,9 +373,13 @@ public class IQIManager {
                 this.mMetricSourcingListenerMap.append(id.asInt(), metricSourcingListener);
             }
         } catch (IllegalArgumentException unused) {
-            throw new IllegalArgumentException("Callback already registered for metric ID " + id.asString());
+            throw new IllegalArgumentException(
+                    "Callback already registered for metric ID " + id.asString());
         } catch (Exception e) {
-            Log.d(LogTagsSdkKt.IQIMANAGER_TAG, "Remote exception in registerMetricSourcingListener", e);
+            Log.d(
+                    LogTagsSdkKt.IQIMANAGER_TAG,
+                    "Remote exception in registerMetricSourcingListener",
+                    e);
         }
     }
 
@@ -324,7 +397,10 @@ public class IQIManager {
                 getService();
                 this.mIQIService.registerProfileChangedCallback(this.mProfileChangedCallback);
             } catch (Exception e) {
-                Log.d(LogTagsSdkKt.IQIMANAGER_TAG, "Remote exception in registerProfileChangeListener", e);
+                Log.d(
+                        LogTagsSdkKt.IQIMANAGER_TAG,
+                        "Remote exception in registerProfileChangeListener",
+                        e);
             }
         }
     }
@@ -340,13 +416,15 @@ public class IQIManager {
                 this.mMetricQueryCallbackMap.append(id.asInt(), metricQueryCallback);
             }
         } catch (IllegalArgumentException unused) {
-            throw new IllegalArgumentException("Callback already registered for metric ID " + id.asString());
+            throw new IllegalArgumentException(
+                    "Callback already registered for metric ID " + id.asString());
         } catch (Exception e) {
             Log.d(LogTagsSdkKt.IQIMANAGER_TAG, "Remote exception in registerQueryCallback", e);
         }
     }
 
-    public void registerServiceStateChangeListener(ServiceStateChangeListener serviceStateChangeListener) {
+    public void registerServiceStateChangeListener(
+            ServiceStateChangeListener serviceStateChangeListener) {
         boolean isEmpty;
         if (serviceStateChangeListener == null) {
             return;
@@ -360,7 +438,10 @@ public class IQIManager {
                 getService();
                 this.mIQIService.registerServiceChangedCallback(this.mServiceStateChangedCallback);
             } catch (Exception e) {
-                Log.d(LogTagsSdkKt.IQIMANAGER_TAG, "Remote exception in registerServiceStateChangeListener", e);
+                Log.d(
+                        LogTagsSdkKt.IQIMANAGER_TAG,
+                        "Remote exception in registerServiceStateChangeListener",
+                        e);
             }
         }
     }
@@ -400,7 +481,8 @@ public class IQIManager {
         }
     }
 
-    public void unregisterMetricSourcingListener(Metric.ID id, MetricSourcingListener metricSourcingListener) {
+    public void unregisterMetricSourcingListener(
+            Metric.ID id, MetricSourcingListener metricSourcingListener) {
         if (id == null || metricSourcingListener == null) {
             return;
         }
@@ -411,7 +493,10 @@ public class IQIManager {
                 this.mMetricSourcingListenerMap.remove(id.asInt());
             }
         } catch (Exception e) {
-            Log.d(LogTagsSdkKt.IQIMANAGER_TAG, "Remote exception in unregisterMetricSourcingListener", e);
+            Log.d(
+                    LogTagsSdkKt.IQIMANAGER_TAG,
+                    "Remote exception in unregisterMetricSourcingListener",
+                    e);
         }
     }
 
@@ -429,7 +514,10 @@ public class IQIManager {
                 getService();
                 this.mIQIService.unregisterProfileChangedCallback(this.mProfileChangedCallback);
             } catch (Exception e) {
-                Log.d(LogTagsSdkKt.IQIMANAGER_TAG, "Remote exception in unregisterProfileChangeListener", e);
+                Log.d(
+                        LogTagsSdkKt.IQIMANAGER_TAG,
+                        "Remote exception in unregisterProfileChangeListener",
+                        e);
             }
         }
     }
@@ -449,7 +537,8 @@ public class IQIManager {
         }
     }
 
-    public void unregisterServiceStateChangeListener(ServiceStateChangeListener serviceStateChangeListener) {
+    public void unregisterServiceStateChangeListener(
+            ServiceStateChangeListener serviceStateChangeListener) {
         boolean isEmpty;
         if (serviceStateChangeListener == null) {
             return;
@@ -461,9 +550,13 @@ public class IQIManager {
         if (isEmpty) {
             try {
                 getService();
-                this.mIQIService.unregisterServiceChangedCallback(this.mServiceStateChangedCallback);
+                this.mIQIService.unregisterServiceChangedCallback(
+                        this.mServiceStateChangedCallback);
             } catch (Exception e) {
-                Log.d(LogTagsSdkKt.IQIMANAGER_TAG, "Remote exception in unregisterServiceStateChangeListener", e);
+                Log.d(
+                        LogTagsSdkKt.IQIMANAGER_TAG,
+                        "Remote exception in unregisterServiceStateChangeListener",
+                        e);
             }
         }
     }

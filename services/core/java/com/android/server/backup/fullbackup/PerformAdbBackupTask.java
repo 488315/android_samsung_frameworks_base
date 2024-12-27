@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.ParcelFileDescriptor;
 import android.util.Slog;
+
 import com.android.server.PinnerService$$ExternalSyntheticOutline0;
 import com.android.server.backup.BackupManagerYuva;
 import com.android.server.backup.BackupRestoreTask;
@@ -13,6 +14,9 @@ import com.android.server.backup.UserBackupManagerService;
 import com.android.server.backup.internal.LifecycleOperationStorage;
 import com.android.server.backup.utils.BackupEligibilityRules;
 import com.android.server.backup.utils.PasswordUtils;
+
+import libcore.util.HexEncoding;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -23,11 +27,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicBoolean;
+
 import javax.crypto.Cipher;
 import javax.crypto.CipherOutputStream;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import libcore.util.HexEncoding;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -56,7 +60,28 @@ public final class PerformAdbBackupTask extends FullBackupTask implements Backup
     public final int mTransportFlags;
     public final UserBackupManagerService mUserBackupManagerService;
 
-    public PerformAdbBackupTask(UserBackupManagerService userBackupManagerService, LifecycleOperationStorage lifecycleOperationStorage, ParcelFileDescriptor parcelFileDescriptor, IFullBackupRestoreObserver iFullBackupRestoreObserver, boolean z, boolean z2, boolean z3, boolean z4, String str, String str2, boolean z5, boolean z6, boolean z7, boolean z8, String[] strArr, AtomicBoolean atomicBoolean, BackupEligibilityRules backupEligibilityRules, boolean z9, int i, String[] strArr2, int i2) {
+    public PerformAdbBackupTask(
+            UserBackupManagerService userBackupManagerService,
+            LifecycleOperationStorage lifecycleOperationStorage,
+            ParcelFileDescriptor parcelFileDescriptor,
+            IFullBackupRestoreObserver iFullBackupRestoreObserver,
+            boolean z,
+            boolean z2,
+            boolean z3,
+            boolean z4,
+            String str,
+            String str2,
+            boolean z5,
+            boolean z6,
+            boolean z7,
+            boolean z8,
+            String[] strArr,
+            AtomicBoolean atomicBoolean,
+            BackupEligibilityRules backupEligibilityRules,
+            boolean z9,
+            int i,
+            String[] strArr2,
+            int i2) {
         super(iFullBackupRestoreObserver);
         this.mUserBackupManagerService = userBackupManagerService;
         this.mOperationStorage = lifecycleOperationStorage;
@@ -103,9 +128,13 @@ public final class PerformAdbBackupTask extends FullBackupTask implements Backup
             String str = (String) it.next();
             if (!treeMap.containsKey(str)) {
                 try {
-                    treeMap.put(str, this.mUserBackupManagerService.mPackageManager.getPackageInfo(str, 134217728));
+                    treeMap.put(
+                            str,
+                            this.mUserBackupManagerService.mPackageManager.getPackageInfo(
+                                    str, 134217728));
                 } catch (PackageManager.NameNotFoundException unused) {
-                    PinnerService$$ExternalSyntheticOutline0.m("Unknown package ", str, ", skipping", "BackupManagerService");
+                    PinnerService$$ExternalSyntheticOutline0.m(
+                            "Unknown package ", str, ", skipping", "BackupManagerService");
                 }
             }
         }
@@ -114,7 +143,9 @@ public final class PerformAdbBackupTask extends FullBackupTask implements Backup
     public final OutputStream emitAesBackupHeader(StringBuilder sb, OutputStream outputStream) {
         byte[] bArr = new byte[64];
         this.mUserBackupManagerService.mRng.nextBytes(bArr);
-        SecretKey buildCharArrayKey = PasswordUtils.buildCharArrayKey("PBKDF2WithHmacSHA1", this.mEncryptPassword.toCharArray(), bArr, 10000);
+        SecretKey buildCharArrayKey =
+                PasswordUtils.buildCharArrayKey(
+                        "PBKDF2WithHmacSHA1", this.mEncryptPassword.toCharArray(), bArr, 10000);
         byte[] bArr2 = new byte[32];
         this.mUserBackupManagerService.mRng.nextBytes(bArr2);
         byte[] bArr3 = new byte[64];
@@ -142,8 +173,11 @@ public final class PerformAdbBackupTask extends FullBackupTask implements Backup
         for (int i = 0; i < encoded2.length; i++) {
             cArr[i] = (char) encoded2[i];
         }
-        byte[] encoded3 = PasswordUtils.buildCharArrayKey("PBKDF2WithHmacSHA1", cArr, bArr3, 10000).getEncoded();
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(iv.length + encoded.length + encoded3.length + 3);
+        byte[] encoded3 =
+                PasswordUtils.buildCharArrayKey("PBKDF2WithHmacSHA1", cArr, bArr3, 10000)
+                        .getEncoded();
+        ByteArrayOutputStream byteArrayOutputStream =
+                new ByteArrayOutputStream(iv.length + encoded.length + encoded3.length + 3);
         DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
         dataOutputStream.writeByte(iv.length);
         dataOutputStream.write(iv);
@@ -152,36 +186,37 @@ public final class PerformAdbBackupTask extends FullBackupTask implements Backup
         dataOutputStream.writeByte(encoded3.length);
         dataOutputStream.write(encoded3);
         dataOutputStream.flush();
-        sb.append(HexEncoding.encodeToString(cipher2.doFinal(byteArrayOutputStream.toByteArray()), true));
+        sb.append(
+                HexEncoding.encodeToString(
+                        cipher2.doFinal(byteArrayOutputStream.toByteArray()), true));
         sb.append('\n');
         return cipherOutputStream;
     }
 
     @Override // com.android.server.backup.BackupRestoreTask
-    public final void execute() {
-    }
+    public final void execute() {}
 
     @Override // com.android.server.backup.BackupRestoreTask
     public final void handleCancel(boolean z) {
         PackageInfo packageInfo = this.mCurrentTarget;
         Slog.w("BackupManagerService", "adb backup cancel of " + packageInfo);
         if (packageInfo != null) {
-            this.mUserBackupManagerService.tearDownAgentAndKill(this.mCurrentTarget.applicationInfo);
+            this.mUserBackupManagerService.tearDownAgentAndKill(
+                    this.mCurrentTarget.applicationInfo);
         }
         ((LifecycleOperationStorage) this.mOperationStorage).removeOperation(this.mCurrentOpToken);
     }
 
     @Override // com.android.server.backup.BackupRestoreTask
-    public final void operationComplete(long j) {
-    }
+    public final void operationComplete(long j) {}
 
     /*  JADX ERROR: Type inference failed
-        jadx.core.utils.exceptions.JadxOverflowException: Type inference error: updates count limit reached
-        	at jadx.core.utils.ErrorsCounter.addError(ErrorsCounter.java:59)
-        	at jadx.core.utils.ErrorsCounter.error(ErrorsCounter.java:31)
-        	at jadx.core.dex.attributes.nodes.NotificationAttrNode.addError(NotificationAttrNode.java:19)
-        	at jadx.core.dex.visitors.typeinference.TypeInferenceVisitor.visit(TypeInferenceVisitor.java:77)
-        */
+    jadx.core.utils.exceptions.JadxOverflowException: Type inference error: updates count limit reached
+    	at jadx.core.utils.ErrorsCounter.addError(ErrorsCounter.java:59)
+    	at jadx.core.utils.ErrorsCounter.error(ErrorsCounter.java:31)
+    	at jadx.core.dex.attributes.nodes.NotificationAttrNode.addError(NotificationAttrNode.java:19)
+    	at jadx.core.dex.visitors.typeinference.TypeInferenceVisitor.visit(TypeInferenceVisitor.java:77)
+    */
     /* JADX WARN: Unreachable blocks removed: 1, instructions: 4 */
     /* JADX WARN: Unreachable blocks removed: 2, instructions: 5 */
     /* JADX WARN: Unreachable blocks removed: 2, instructions: 6 */
@@ -191,6 +226,8 @@ public final class PerformAdbBackupTask extends FullBackupTask implements Backup
             Method dump skipped, instructions count: 1655
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.backup.fullbackup.PerformAdbBackupTask.run():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.backup.fullbackup.PerformAdbBackupTask.run():void");
     }
 }

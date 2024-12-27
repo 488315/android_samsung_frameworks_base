@@ -12,8 +12,11 @@ import android.os.NativeHandle;
 import android.os.RemoteException;
 import android.telephony.CarrierConfigManager;
 import android.telephony.ims.SipDelegateImsConfiguration;
+
 import com.android.internal.midi.MidiConstants;
+
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -165,7 +168,8 @@ public interface IAGnss extends IBase {
             this.mRemote = (IHwBinder) Objects.requireNonNull(remote);
         }
 
-        @Override // android.hardware.gnss.V2_0.IAGnss, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+        @Override // android.hardware.gnss.V2_0.IAGnss, android.internal.hidl.base.V1_0.IBase,
+        // android.os.IHwInterface
         public IHwBinder asBinder() {
             return this.mRemote;
         }
@@ -253,7 +257,8 @@ public interface IAGnss extends IBase {
         }
 
         @Override // android.hardware.gnss.V2_0.IAGnss
-        public boolean dataConnOpen(long networkHandle, String apn, byte apnIpType) throws RemoteException {
+        public boolean dataConnOpen(long networkHandle, String apn, byte apnIpType)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IAGnss.kInterfaceName);
             _hidl_request.writeInt64(networkHandle);
@@ -331,7 +336,9 @@ public interface IAGnss extends IBase {
                 ArrayList<byte[]> _hidl_out_hashchain = new ArrayList<>();
                 HwBlob _hidl_blob = _hidl_reply.readBuffer(16L);
                 int _hidl_vec_size = _hidl_blob.getInt32(8L);
-                HwBlob childBlob = _hidl_reply.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
+                HwBlob childBlob =
+                        _hidl_reply.readEmbeddedBuffer(
+                                _hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
                 _hidl_out_hashchain.clear();
                 for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                     byte[] _hidl_vec_element = new byte[32];
@@ -359,7 +366,8 @@ public interface IAGnss extends IBase {
         }
 
         @Override // android.hardware.gnss.V2_0.IAGnss, android.internal.hidl.base.V1_0.IBase
-        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) throws RemoteException {
+        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie)
+                throws RemoteException {
             return this.mRemote.linkToDeath(recipient, cookie);
         }
 
@@ -413,8 +421,9 @@ public interface IAGnss extends IBase {
         }
     }
 
-    public static abstract class Stub extends HwBinder implements IAGnss {
-        @Override // android.hardware.gnss.V2_0.IAGnss, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+    public abstract static class Stub extends HwBinder implements IAGnss {
+        @Override // android.hardware.gnss.V2_0.IAGnss, android.internal.hidl.base.V1_0.IBase,
+        // android.os.IHwInterface
         public IHwBinder asBinder() {
             return this;
         }
@@ -425,8 +434,7 @@ public interface IAGnss extends IBase {
         }
 
         @Override // android.hardware.gnss.V2_0.IAGnss, android.internal.hidl.base.V1_0.IBase
-        public void debug(NativeHandle fd, ArrayList<String> options) {
-        }
+        public void debug(NativeHandle fd, ArrayList<String> options) {}
 
         @Override // android.hardware.gnss.V2_0.IAGnss, android.internal.hidl.base.V1_0.IBase
         public final String interfaceDescriptor() {
@@ -435,21 +443,89 @@ public interface IAGnss extends IBase {
 
         @Override // android.hardware.gnss.V2_0.IAGnss, android.internal.hidl.base.V1_0.IBase
         public final ArrayList<byte[]> getHashChain() {
-            return new ArrayList<>(Arrays.asList(new byte[]{Byte.MAX_VALUE, 70, 14, 121, 95, 93, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEINOUT, -43, -29, 120, -109, 95, -104, -58, -37, 77, 57, 73, 125, -23, -120, -82, MidiConstants.STATUS_MIDI_TIME_CODE, -76, -62, -92, MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH, 122, 108, 64, 3, -110}, new byte[]{-20, Byte.MAX_VALUE, -41, -98, MidiConstants.STATUS_CHANNEL_PRESSURE, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60, -6, -123, -68, 73, -108, 38, -83, -82, 62, -66, 35, -17, 5, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, MidiConstants.STATUS_SONG_SELECT, -51, 105, 87, 19, -109, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, -72, 59, 24, -54, 76}));
+            return new ArrayList<>(
+                    Arrays.asList(
+                            new byte[] {
+                                Byte.MAX_VALUE,
+                                70,
+                                14,
+                                121,
+                                95,
+                                93,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEINOUT,
+                                -43,
+                                -29,
+                                120,
+                                -109,
+                                95,
+                                -104,
+                                -58,
+                                -37,
+                                77,
+                                57,
+                                73,
+                                125,
+                                -23,
+                                -120,
+                                -82,
+                                MidiConstants.STATUS_MIDI_TIME_CODE,
+                                -76,
+                                -62,
+                                -92,
+                                MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH,
+                                122,
+                                108,
+                                64,
+                                3,
+                                -110
+                            },
+                            new byte[] {
+                                -20,
+                                Byte.MAX_VALUE,
+                                -41,
+                                -98,
+                                MidiConstants.STATUS_CHANNEL_PRESSURE,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60,
+                                -6,
+                                -123,
+                                -68,
+                                73,
+                                -108,
+                                38,
+                                -83,
+                                -82,
+                                62,
+                                -66,
+                                35,
+                                -17,
+                                5,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                MidiConstants.STATUS_SONG_SELECT,
+                                -51,
+                                105,
+                                87,
+                                19,
+                                -109,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                -72,
+                                59,
+                                24,
+                                -54,
+                                76
+                            }));
         }
 
         @Override // android.hardware.gnss.V2_0.IAGnss, android.internal.hidl.base.V1_0.IBase
-        public final void setHALInstrumentation() {
-        }
+        public final void setHALInstrumentation() {}
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) {
             return true;
         }
 
         @Override // android.hardware.gnss.V2_0.IAGnss, android.internal.hidl.base.V1_0.IBase
-        public final void ping() {
-        }
+        public final void ping() {}
 
         @Override // android.hardware.gnss.V2_0.IAGnss, android.internal.hidl.base.V1_0.IBase
         public final DebugInfo getDebugInfo() {
@@ -465,7 +541,8 @@ public interface IAGnss extends IBase {
             HwBinder.enableInstrumentation();
         }
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) {
             return true;
         }
@@ -487,11 +564,14 @@ public interface IAGnss extends IBase {
         }
 
         @Override // android.os.HwBinder
-        public void onTransact(int _hidl_code, HwParcel _hidl_request, HwParcel _hidl_reply, int _hidl_flags) throws RemoteException {
+        public void onTransact(
+                int _hidl_code, HwParcel _hidl_request, HwParcel _hidl_reply, int _hidl_flags)
+                throws RemoteException {
             switch (_hidl_code) {
                 case 1:
                     _hidl_request.enforceInterface(IAGnss.kInterfaceName);
-                    IAGnssCallback callback = IAGnssCallback.asInterface(_hidl_request.readStrongBinder());
+                    IAGnssCallback callback =
+                            IAGnssCallback.asInterface(_hidl_request.readStrongBinder());
                     setCallback(callback);
                     _hidl_reply.writeStatus(0);
                     _hidl_reply.send();
@@ -565,7 +645,8 @@ public interface IAGnss extends IBase {
                         long _hidl_array_offset_1 = _hidl_index_0 * 32;
                         byte[] _hidl_array_item_1 = _hidl_out_hashchain.get(_hidl_index_0);
                         if (_hidl_array_item_1 == null || _hidl_array_item_1.length != 32) {
-                            throw new IllegalArgumentException("Array element is not of the expected length");
+                            throw new IllegalArgumentException(
+                                    "Array element is not of the expected length");
                         }
                         childBlob.putInt8Array(_hidl_array_offset_1, _hidl_array_item_1);
                     }

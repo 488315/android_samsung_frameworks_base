@@ -1,8 +1,5 @@
 package android.renderscript;
 
-import android.renderscript.Element;
-import android.renderscript.Program;
-import android.renderscript.Type;
 
 @Deprecated
 /* loaded from: classes3.dex */
@@ -18,7 +15,13 @@ public class ProgramFragmentFixedFunction extends ProgramFragment {
 
         public ProgramFragmentFixedFunction create() {
             this.mRS.validate();
-            long[] tmp = new long[(this.mInputCount + this.mOutputCount + this.mConstantCount + this.mTextureCount) * 2];
+            long[] tmp =
+                    new long
+                            [(this.mInputCount
+                                            + this.mOutputCount
+                                            + this.mConstantCount
+                                            + this.mTextureCount)
+                                    * 2];
             String[] texNames = new String[this.mTextureCount];
             int idx = 0;
             for (int i = 0; i < this.mInputCount; i++) {
@@ -159,7 +162,8 @@ public class ProgramFragmentFixedFunction extends ProgramFragment {
             this.mRS = rs;
         }
 
-        public Builder setTexture(EnvMode env, Format fmt, int slot) throws IllegalArgumentException {
+        public Builder setTexture(EnvMode env, Format fmt, int slot)
+                throws IllegalArgumentException {
             if (slot < 0 || slot >= 2) {
                 throw new IllegalArgumentException("MAX_TEXTURE exceeded.");
             }

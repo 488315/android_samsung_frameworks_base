@@ -1,7 +1,9 @@
 package com.android.server.devicepolicy;
 
 import android.content.ComponentName;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -15,7 +17,8 @@ public final class OwnerShellData {
     public final int parentUserId;
     public final int userId;
 
-    public OwnerShellData(int i, int i2, ComponentName componentName, boolean z, boolean z2, boolean z3) {
+    public OwnerShellData(
+            int i, int i2, ComponentName componentName, boolean z, boolean z2, boolean z3) {
         Preconditions.checkArgument(i != -10000, "userId cannot be USER_NULL");
         this.userId = i;
         this.parentUserId = i2;
@@ -25,8 +28,10 @@ public final class OwnerShellData {
         this.isProfileOwner = z2;
         this.isManagedProfileOwner = z3;
         if (z3) {
-            Preconditions.checkArgument(i2 != -10000, "parentUserId cannot be USER_NULL for managed profile owner");
-            Preconditions.checkArgument(i2 != i, "cannot be parent of itself (%d)", new Object[]{Integer.valueOf(i)});
+            Preconditions.checkArgument(
+                    i2 != -10000, "parentUserId cannot be USER_NULL for managed profile owner");
+            Preconditions.checkArgument(
+                    i2 != i, "cannot be parent of itself (%d)", new Object[] {Integer.valueOf(i)});
         }
     }
 

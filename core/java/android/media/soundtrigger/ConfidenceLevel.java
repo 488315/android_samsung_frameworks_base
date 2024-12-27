@@ -3,27 +3,30 @@ package android.media.soundtrigger;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class ConfidenceLevel implements Parcelable {
-    public static final Parcelable.Creator<ConfidenceLevel> CREATOR = new Parcelable.Creator<ConfidenceLevel>() { // from class: android.media.soundtrigger.ConfidenceLevel.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ConfidenceLevel createFromParcel(Parcel _aidl_source) {
-            ConfidenceLevel _aidl_out = new ConfidenceLevel();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<ConfidenceLevel> CREATOR =
+            new Parcelable.Creator<
+                    ConfidenceLevel>() { // from class: android.media.soundtrigger.ConfidenceLevel.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ConfidenceLevel createFromParcel(Parcel _aidl_source) {
+                    ConfidenceLevel _aidl_out = new ConfidenceLevel();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ConfidenceLevel[] newArray(int _aidl_size) {
-            return new ConfidenceLevel[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ConfidenceLevel[] newArray(int _aidl_size) {
+                    return new ConfidenceLevel[_aidl_size];
+                }
+            };
     public int userId = 0;
     public int levelPercent = 0;
 
@@ -95,14 +98,18 @@ public class ConfidenceLevel implements Parcelable {
             return false;
         }
         ConfidenceLevel that = (ConfidenceLevel) other;
-        if (Objects.deepEquals(Integer.valueOf(this.userId), Integer.valueOf(that.userId)) && Objects.deepEquals(Integer.valueOf(this.levelPercent), Integer.valueOf(that.levelPercent))) {
+        if (Objects.deepEquals(Integer.valueOf(this.userId), Integer.valueOf(that.userId))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.levelPercent), Integer.valueOf(that.levelPercent))) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.userId), Integer.valueOf(this.levelPercent)).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(Integer.valueOf(this.userId), Integer.valueOf(this.levelPercent))
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

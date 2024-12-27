@@ -1,7 +1,5 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.MessageLite;
-import com.android.framework.protobuf.WireFormat;
 import java.io.IOException;
 import java.util.AbstractMap;
 import java.util.Map;
@@ -20,7 +18,11 @@ public class MapEntryLite<K, V> {
         public final WireFormat.FieldType keyType;
         public final WireFormat.FieldType valueType;
 
-        public Metadata(WireFormat.FieldType keyType, K defaultKey, WireFormat.FieldType valueType, V defaultValue) {
+        public Metadata(
+                WireFormat.FieldType keyType,
+                K defaultKey,
+                WireFormat.FieldType valueType,
+                V defaultValue) {
             this.keyType = keyType;
             this.defaultKey = defaultKey;
             this.valueType = valueType;
@@ -28,7 +30,11 @@ public class MapEntryLite<K, V> {
         }
     }
 
-    private MapEntryLite(WireFormat.FieldType keyType, K defaultKey, WireFormat.FieldType valueType, V defaultValue) {
+    private MapEntryLite(
+            WireFormat.FieldType keyType,
+            K defaultKey,
+            WireFormat.FieldType valueType,
+            V defaultValue) {
         this.metadata = new Metadata<>(keyType, defaultKey, valueType, defaultValue);
         this.key = defaultKey;
         this.value = defaultValue;
@@ -48,20 +54,31 @@ public class MapEntryLite<K, V> {
         return this.value;
     }
 
-    public static <K, V> MapEntryLite<K, V> newDefaultInstance(WireFormat.FieldType keyType, K defaultKey, WireFormat.FieldType valueType, V defaultValue) {
+    public static <K, V> MapEntryLite<K, V> newDefaultInstance(
+            WireFormat.FieldType keyType,
+            K defaultKey,
+            WireFormat.FieldType valueType,
+            V defaultValue) {
         return new MapEntryLite<>(keyType, defaultKey, valueType, defaultValue);
     }
 
-    static <K, V> void writeTo(CodedOutputStream output, Metadata<K, V> metadata, K key, V value) throws IOException {
+    static <K, V> void writeTo(CodedOutputStream output, Metadata<K, V> metadata, K key, V value)
+            throws IOException {
         FieldSet.writeElement(output, metadata.keyType, 1, key);
         FieldSet.writeElement(output, metadata.valueType, 2, value);
     }
 
     static <K, V> int computeSerializedSize(Metadata<K, V> metadata, K key, V value) {
-        return FieldSet.computeElementSize(metadata.keyType, 1, key) + FieldSet.computeElementSize(metadata.valueType, 2, value);
+        return FieldSet.computeElementSize(metadata.keyType, 1, key)
+                + FieldSet.computeElementSize(metadata.valueType, 2, value);
     }
 
-    static <T> T parseField(CodedInputStream codedInputStream, ExtensionRegistryLite extensionRegistryLite, WireFormat.FieldType fieldType, T t) throws IOException {
+    static <T> T parseField(
+            CodedInputStream codedInputStream,
+            ExtensionRegistryLite extensionRegistryLite,
+            WireFormat.FieldType fieldType,
+            T t)
+            throws IOException {
         switch (fieldType) {
             case WireFormat.FieldType.MESSAGE:
                 MessageLite.Builder builder = ((MessageLite) t).toBuilder();
@@ -76,21 +93,29 @@ public class MapEntryLite<K, V> {
         }
     }
 
-    public void serializeTo(CodedOutputStream output, int fieldNumber, K key, V value) throws IOException {
+    public void serializeTo(CodedOutputStream output, int fieldNumber, K key, V value)
+            throws IOException {
         output.writeTag(fieldNumber, 2);
         output.writeUInt32NoTag(computeSerializedSize(this.metadata, key, value));
         writeTo(output, this.metadata, key, value);
     }
 
     public int computeMessageSize(int fieldNumber, K key, V value) {
-        return CodedOutputStream.computeTagSize(fieldNumber) + CodedOutputStream.computeLengthDelimitedFieldSize(computeSerializedSize(this.metadata, key, value));
+        return CodedOutputStream.computeTagSize(fieldNumber)
+                + CodedOutputStream.computeLengthDelimitedFieldSize(
+                        computeSerializedSize(this.metadata, key, value));
     }
 
-    public Map.Entry<K, V> parseEntry(ByteString bytes, ExtensionRegistryLite extensionRegistry) throws IOException {
+    public Map.Entry<K, V> parseEntry(ByteString bytes, ExtensionRegistryLite extensionRegistry)
+            throws IOException {
         return parseEntry(bytes.newCodedInput(), this.metadata, extensionRegistry);
     }
 
-    static <K, V> Map.Entry<K, V> parseEntry(CodedInputStream input, Metadata<K, V> metadata, ExtensionRegistryLite extensionRegistry) throws IOException {
+    static <K, V> Map.Entry<K, V> parseEntry(
+            CodedInputStream input,
+            Metadata<K, V> metadata,
+            ExtensionRegistryLite extensionRegistry)
+            throws IOException {
         Object obj = metadata.defaultKey;
         Object obj2 = metadata.defaultValue;
         while (true) {
@@ -110,7 +135,11 @@ public class MapEntryLite<K, V> {
     }
 
     /* JADX WARN: Multi-variable type inference failed */
-    public void parseInto(MapFieldLite<K, V> mapFieldLite, CodedInputStream input, ExtensionRegistryLite extensionRegistry) throws IOException {
+    public void parseInto(
+            MapFieldLite<K, V> mapFieldLite,
+            CodedInputStream input,
+            ExtensionRegistryLite extensionRegistry)
+            throws IOException {
         int length = input.readRawVarint32();
         int oldLimit = input.pushLimit(length);
         Object obj = this.metadata.defaultKey;

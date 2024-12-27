@@ -5,7 +5,9 @@ package com.android.server.pm.pkg;
 public abstract class PackageUserStateUtils {
     public static boolean isAvailable(PackageUserState packageUserState, long j) {
         boolean z = (4194304 & j) != 0;
-        boolean z2 = (((8192 & j) > 0L ? 1 : ((8192 & j) == 0L ? 0 : -1)) != 0) || (((j & 4294967296L) > 0L ? 1 : ((j & 4294967296L) == 0L ? 0 : -1)) != 0);
+        boolean z2 =
+                (((8192 & j) > 0L ? 1 : ((8192 & j) == 0L ? 0 : -1)) != 0)
+                        || (((j & 4294967296L) > 0L ? 1 : ((j & 4294967296L) == 0L ? 0 : -1)) != 0);
         if (z) {
             return true;
         }
@@ -19,16 +21,21 @@ public abstract class PackageUserStateUtils {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:40:0x0073, code lost:
-    
-        if ((r11 & 32768) == 0) goto L39;
-     */
+
+       if ((r11 & 32768) == 0) goto L39;
+    */
     /* JADX WARN: Removed duplicated region for block: B:43:0x007f A[RETURN] */
     /* JADX WARN: Removed duplicated region for block: B:44:0x0080  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static boolean isEnabled(com.android.server.pm.pkg.PackageUserStateInternal r7, boolean r8, boolean r9, java.lang.String r10, long r11) {
+    public static boolean isEnabled(
+            com.android.server.pm.pkg.PackageUserStateInternal r7,
+            boolean r8,
+            boolean r9,
+            java.lang.String r10,
+            long r11) {
         /*
             r0 = 512(0x200, double:2.53E-321)
             long r0 = r0 & r11
@@ -105,16 +112,28 @@ public abstract class PackageUserStateUtils {
         L87:
             return r9
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.pkg.PackageUserStateUtils.isEnabled(com.android.server.pm.pkg.PackageUserStateInternal, boolean, boolean, java.lang.String, long):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.pkg.PackageUserStateUtils.isEnabled(com.android.server.pm.pkg.PackageUserStateInternal,"
+                    + " boolean, boolean, java.lang.String, long):boolean");
     }
 
-    public static boolean isMatch(PackageUserStateInternal packageUserStateInternal, boolean z, boolean z2, boolean z3, boolean z4, String str, long j) {
+    public static boolean isMatch(
+            PackageUserStateInternal packageUserStateInternal,
+            boolean z,
+            boolean z2,
+            boolean z3,
+            boolean z4,
+            String str,
+            long j) {
         boolean z5 = (4202496 & j) != 0;
-        if ((!isAvailable(packageUserStateInternal, j) && (!z || !z5)) || !isEnabled(packageUserStateInternal, z2, z3, str, j)) {
+        if ((!isAvailable(packageUserStateInternal, j) && (!z || !z5))
+                || !isEnabled(packageUserStateInternal, z2, z3, str, j)) {
             return false;
         }
         if ((1048576 & j) == 0 || z) {
-            return (((262144 & j) > 0L ? 1 : ((262144 & j) == 0L ? 0 : -1)) != 0 && !z4) || (((524288 & j) > 0L ? 1 : ((524288 & j) == 0L ? 0 : -1)) != 0 && z4);
+            return (((262144 & j) > 0L ? 1 : ((262144 & j) == 0L ? 0 : -1)) != 0 && !z4)
+                    || (((524288 & j) > 0L ? 1 : ((524288 & j) == 0L ? 0 : -1)) != 0 && z4);
         }
         return false;
     }

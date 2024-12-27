@@ -2,6 +2,7 @@ package com.android.internal.org.bouncycastle.math.ec;
 
 import com.android.internal.org.bouncycastle.math.ec.endo.EndoUtil;
 import com.android.internal.org.bouncycastle.math.ec.endo.GLVEndomorphism;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */

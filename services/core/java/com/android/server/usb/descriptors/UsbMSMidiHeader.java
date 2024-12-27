@@ -16,9 +16,18 @@ public final class UsbMSMidiHeader extends UsbACInterface {
         return i2;
     }
 
-    @Override // com.android.server.usb.descriptors.UsbACInterface, com.android.server.usb.descriptors.UsbDescriptor
+    @Override // com.android.server.usb.descriptors.UsbACInterface,
+              // com.android.server.usb.descriptors.UsbDescriptor
     public final void report(TextReportCanvas textReportCanvas) {
         super.report(textReportCanvas);
-        textReportCanvas.writeHeader("MS Midi Header: " + TextReportCanvas.getHexString(this.mType) + " SubType: " + TextReportCanvas.getHexString(this.mSubclass) + " Length: " + this.mLength + " MidiStreamingClass :" + this.mMidiStreamingClass);
+        textReportCanvas.writeHeader(
+                "MS Midi Header: "
+                        + TextReportCanvas.getHexString(this.mType)
+                        + " SubType: "
+                        + TextReportCanvas.getHexString(this.mSubclass)
+                        + " Length: "
+                        + this.mLength
+                        + " MidiStreamingClass :"
+                        + this.mMidiStreamingClass);
     }
 }

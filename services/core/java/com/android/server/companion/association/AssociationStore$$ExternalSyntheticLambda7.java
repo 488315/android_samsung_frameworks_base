@@ -1,6 +1,7 @@
 package com.android.server.companion.association;
 
 import android.companion.AssociationInfo;
+
 import java.util.function.Predicate;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -23,15 +24,17 @@ public final /* synthetic */ class AssociationStore$$ExternalSyntheticLambda7 im
                 String str = this.f$0;
                 int i = this.f$1;
                 AssociationInfo associationInfo = (AssociationInfo) obj;
-                if (!str.equals(associationInfo.getPackageName()) || associationInfo.getUserId() != i || !associationInfo.isPending()) {
-                }
+                if (!str.equals(associationInfo.getPackageName())
+                        || associationInfo.getUserId() != i
+                        || !associationInfo.isPending()) {}
                 break;
             default:
                 String str2 = this.f$0;
                 int i2 = this.f$1;
                 AssociationInfo associationInfo2 = (AssociationInfo) obj;
-                if (!str2.equals(associationInfo2.getPackageName()) || associationInfo2.getUserId() != i2 || !associationInfo2.isRevoked()) {
-                }
+                if (!str2.equals(associationInfo2.getPackageName())
+                        || associationInfo2.getUserId() != i2
+                        || !associationInfo2.isRevoked()) {}
                 break;
         }
         return false;

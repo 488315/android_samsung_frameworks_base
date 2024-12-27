@@ -1,12 +1,5 @@
 package android.app.ondeviceintelligence;
 
-import android.app.ondeviceintelligence.IDownloadCallback;
-import android.app.ondeviceintelligence.IFeatureCallback;
-import android.app.ondeviceintelligence.IFeatureDetailsCallback;
-import android.app.ondeviceintelligence.IListFeaturesCallback;
-import android.app.ondeviceintelligence.IResponseCallback;
-import android.app.ondeviceintelligence.IStreamingResponseCallback;
-import android.app.ondeviceintelligence.ITokenInfoCallback;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -14,16 +7,20 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteCallback;
 import android.os.RemoteException;
+
 import com.android.internal.infra.AndroidFuture;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
 public interface IOnDeviceIntelligenceManager extends IInterface {
-    public static final String DESCRIPTOR = "android.app.ondeviceintelligence.IOnDeviceIntelligenceManager";
+    public static final String DESCRIPTOR =
+            "android.app.ondeviceintelligence.IOnDeviceIntelligenceManager";
 
     void getFeature(int i, IFeatureCallback iFeatureCallback) throws RemoteException;
 
-    void getFeatureDetails(Feature feature, IFeatureDetailsCallback iFeatureDetailsCallback) throws RemoteException;
+    void getFeatureDetails(Feature feature, IFeatureDetailsCallback iFeatureDetailsCallback)
+            throws RemoteException;
 
     List<InferenceInfo> getLatestInferenceInfo(long j) throws RemoteException;
 
@@ -33,46 +30,84 @@ public interface IOnDeviceIntelligenceManager extends IInterface {
 
     void listFeatures(IListFeaturesCallback iListFeaturesCallback) throws RemoteException;
 
-    void processRequest(Feature feature, Bundle bundle, int i, AndroidFuture androidFuture, AndroidFuture androidFuture2, IResponseCallback iResponseCallback) throws RemoteException;
+    void processRequest(
+            Feature feature,
+            Bundle bundle,
+            int i,
+            AndroidFuture androidFuture,
+            AndroidFuture androidFuture2,
+            IResponseCallback iResponseCallback)
+            throws RemoteException;
 
-    void processRequestStreaming(Feature feature, Bundle bundle, int i, AndroidFuture androidFuture, AndroidFuture androidFuture2, IStreamingResponseCallback iStreamingResponseCallback) throws RemoteException;
+    void processRequestStreaming(
+            Feature feature,
+            Bundle bundle,
+            int i,
+            AndroidFuture androidFuture,
+            AndroidFuture androidFuture2,
+            IStreamingResponseCallback iStreamingResponseCallback)
+            throws RemoteException;
 
-    void requestFeatureDownload(Feature feature, AndroidFuture androidFuture, IDownloadCallback iDownloadCallback) throws RemoteException;
+    void requestFeatureDownload(
+            Feature feature, AndroidFuture androidFuture, IDownloadCallback iDownloadCallback)
+            throws RemoteException;
 
-    void requestTokenInfo(Feature feature, Bundle bundle, AndroidFuture androidFuture, ITokenInfoCallback iTokenInfoCallback) throws RemoteException;
+    void requestTokenInfo(
+            Feature feature,
+            Bundle bundle,
+            AndroidFuture androidFuture,
+            ITokenInfoCallback iTokenInfoCallback)
+            throws RemoteException;
 
     public static class Default implements IOnDeviceIntelligenceManager {
         @Override // android.app.ondeviceintelligence.IOnDeviceIntelligenceManager
-        public void getVersion(RemoteCallback remoteCallback) throws RemoteException {
-        }
+        public void getVersion(RemoteCallback remoteCallback) throws RemoteException {}
 
         @Override // android.app.ondeviceintelligence.IOnDeviceIntelligenceManager
-        public void getFeature(int featureId, IFeatureCallback remoteCallback) throws RemoteException {
-        }
+        public void getFeature(int featureId, IFeatureCallback remoteCallback)
+                throws RemoteException {}
 
         @Override // android.app.ondeviceintelligence.IOnDeviceIntelligenceManager
-        public void listFeatures(IListFeaturesCallback listFeaturesCallback) throws RemoteException {
-        }
+        public void listFeatures(IListFeaturesCallback listFeaturesCallback)
+                throws RemoteException {}
 
         @Override // android.app.ondeviceintelligence.IOnDeviceIntelligenceManager
-        public void getFeatureDetails(Feature feature, IFeatureDetailsCallback featureDetailsCallback) throws RemoteException {
-        }
+        public void getFeatureDetails(
+                Feature feature, IFeatureDetailsCallback featureDetailsCallback)
+                throws RemoteException {}
 
         @Override // android.app.ondeviceintelligence.IOnDeviceIntelligenceManager
-        public void requestFeatureDownload(Feature feature, AndroidFuture cancellationSignalFuture, IDownloadCallback callback) throws RemoteException {
-        }
+        public void requestFeatureDownload(
+                Feature feature, AndroidFuture cancellationSignalFuture, IDownloadCallback callback)
+                throws RemoteException {}
 
         @Override // android.app.ondeviceintelligence.IOnDeviceIntelligenceManager
-        public void requestTokenInfo(Feature feature, Bundle requestBundle, AndroidFuture cancellationSignalFuture, ITokenInfoCallback tokenInfocallback) throws RemoteException {
-        }
+        public void requestTokenInfo(
+                Feature feature,
+                Bundle requestBundle,
+                AndroidFuture cancellationSignalFuture,
+                ITokenInfoCallback tokenInfocallback)
+                throws RemoteException {}
 
         @Override // android.app.ondeviceintelligence.IOnDeviceIntelligenceManager
-        public void processRequest(Feature feature, Bundle requestBundle, int requestType, AndroidFuture cancellationSignalFuture, AndroidFuture processingSignalFuture, IResponseCallback responseCallback) throws RemoteException {
-        }
+        public void processRequest(
+                Feature feature,
+                Bundle requestBundle,
+                int requestType,
+                AndroidFuture cancellationSignalFuture,
+                AndroidFuture processingSignalFuture,
+                IResponseCallback responseCallback)
+                throws RemoteException {}
 
         @Override // android.app.ondeviceintelligence.IOnDeviceIntelligenceManager
-        public void processRequestStreaming(Feature feature, Bundle requestBundle, int requestType, AndroidFuture cancellationSignalFuture, AndroidFuture processingSignalFuture, IStreamingResponseCallback streamingCallback) throws RemoteException {
-        }
+        public void processRequestStreaming(
+                Feature feature,
+                Bundle requestBundle,
+                int requestType,
+                AndroidFuture cancellationSignalFuture,
+                AndroidFuture processingSignalFuture,
+                IStreamingResponseCallback streamingCallback)
+                throws RemoteException {}
 
         @Override // android.app.ondeviceintelligence.IOnDeviceIntelligenceManager
         public String getRemoteServicePackageName() throws RemoteException {
@@ -80,7 +115,8 @@ public interface IOnDeviceIntelligenceManager extends IInterface {
         }
 
         @Override // android.app.ondeviceintelligence.IOnDeviceIntelligenceManager
-        public List<InferenceInfo> getLatestInferenceInfo(long startTimeEpochMillis) throws RemoteException {
+        public List<InferenceInfo> getLatestInferenceInfo(long startTimeEpochMillis)
+                throws RemoteException {
             return null;
         }
 
@@ -90,7 +126,7 @@ public interface IOnDeviceIntelligenceManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IOnDeviceIntelligenceManager {
+    public abstract static class Stub extends Binder implements IOnDeviceIntelligenceManager {
         static final int TRANSACTION_getFeature = 3;
         static final int TRANSACTION_getFeatureDetails = 5;
         static final int TRANSACTION_getLatestInferenceInfo = 11;
@@ -155,7 +191,8 @@ public interface IOnDeviceIntelligenceManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IOnDeviceIntelligenceManager.DESCRIPTOR);
             }
@@ -165,35 +202,41 @@ public interface IOnDeviceIntelligenceManager extends IInterface {
             }
             switch (code) {
                 case 2:
-                    RemoteCallback _arg0 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg0 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     getVersion(_arg0);
                     reply.writeNoException();
                     return true;
                 case 3:
                     int _arg02 = data.readInt();
-                    IFeatureCallback _arg1 = IFeatureCallback.Stub.asInterface(data.readStrongBinder());
+                    IFeatureCallback _arg1 =
+                            IFeatureCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getFeature(_arg02, _arg1);
                     reply.writeNoException();
                     return true;
                 case 4:
-                    IListFeaturesCallback _arg03 = IListFeaturesCallback.Stub.asInterface(data.readStrongBinder());
+                    IListFeaturesCallback _arg03 =
+                            IListFeaturesCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     listFeatures(_arg03);
                     reply.writeNoException();
                     return true;
                 case 5:
                     Feature _arg04 = (Feature) data.readTypedObject(Feature.CREATOR);
-                    IFeatureDetailsCallback _arg12 = IFeatureDetailsCallback.Stub.asInterface(data.readStrongBinder());
+                    IFeatureDetailsCallback _arg12 =
+                            IFeatureDetailsCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getFeatureDetails(_arg04, _arg12);
                     reply.writeNoException();
                     return true;
                 case 6:
                     Feature _arg05 = (Feature) data.readTypedObject(Feature.CREATOR);
-                    AndroidFuture _arg13 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
-                    IDownloadCallback _arg2 = IDownloadCallback.Stub.asInterface(data.readStrongBinder());
+                    AndroidFuture _arg13 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    IDownloadCallback _arg2 =
+                            IDownloadCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestFeatureDownload(_arg05, _arg13, _arg2);
                     reply.writeNoException();
@@ -201,8 +244,10 @@ public interface IOnDeviceIntelligenceManager extends IInterface {
                 case 7:
                     Feature _arg06 = (Feature) data.readTypedObject(Feature.CREATOR);
                     Bundle _arg14 = (Bundle) data.readTypedObject(Bundle.CREATOR);
-                    AndroidFuture _arg22 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
-                    ITokenInfoCallback _arg3 = ITokenInfoCallback.Stub.asInterface(data.readStrongBinder());
+                    AndroidFuture _arg22 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    ITokenInfoCallback _arg3 =
+                            ITokenInfoCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestTokenInfo(_arg06, _arg14, _arg22, _arg3);
                     reply.writeNoException();
@@ -211,9 +256,12 @@ public interface IOnDeviceIntelligenceManager extends IInterface {
                     Feature _arg07 = (Feature) data.readTypedObject(Feature.CREATOR);
                     Bundle _arg15 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     int _arg23 = data.readInt();
-                    AndroidFuture _arg32 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
-                    AndroidFuture _arg4 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
-                    IResponseCallback _arg5 = IResponseCallback.Stub.asInterface(data.readStrongBinder());
+                    AndroidFuture _arg32 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg4 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    IResponseCallback _arg5 =
+                            IResponseCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     processRequest(_arg07, _arg15, _arg23, _arg32, _arg4, _arg5);
                     reply.writeNoException();
@@ -222,9 +270,12 @@ public interface IOnDeviceIntelligenceManager extends IInterface {
                     Feature _arg08 = (Feature) data.readTypedObject(Feature.CREATOR);
                     Bundle _arg16 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     int _arg24 = data.readInt();
-                    AndroidFuture _arg33 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
-                    AndroidFuture _arg42 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
-                    IStreamingResponseCallback _arg52 = IStreamingResponseCallback.Stub.asInterface(data.readStrongBinder());
+                    AndroidFuture _arg33 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg42 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    IStreamingResponseCallback _arg52 =
+                            IStreamingResponseCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     processRequestStreaming(_arg08, _arg16, _arg24, _arg33, _arg42, _arg52);
                     reply.writeNoException();
@@ -278,7 +329,8 @@ public interface IOnDeviceIntelligenceManager extends IInterface {
             }
 
             @Override // android.app.ondeviceintelligence.IOnDeviceIntelligenceManager
-            public void getFeature(int featureId, IFeatureCallback remoteCallback) throws RemoteException {
+            public void getFeature(int featureId, IFeatureCallback remoteCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -294,7 +346,8 @@ public interface IOnDeviceIntelligenceManager extends IInterface {
             }
 
             @Override // android.app.ondeviceintelligence.IOnDeviceIntelligenceManager
-            public void listFeatures(IListFeaturesCallback listFeaturesCallback) throws RemoteException {
+            public void listFeatures(IListFeaturesCallback listFeaturesCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -309,7 +362,9 @@ public interface IOnDeviceIntelligenceManager extends IInterface {
             }
 
             @Override // android.app.ondeviceintelligence.IOnDeviceIntelligenceManager
-            public void getFeatureDetails(Feature feature, IFeatureDetailsCallback featureDetailsCallback) throws RemoteException {
+            public void getFeatureDetails(
+                    Feature feature, IFeatureDetailsCallback featureDetailsCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -325,7 +380,11 @@ public interface IOnDeviceIntelligenceManager extends IInterface {
             }
 
             @Override // android.app.ondeviceintelligence.IOnDeviceIntelligenceManager
-            public void requestFeatureDownload(Feature feature, AndroidFuture cancellationSignalFuture, IDownloadCallback callback) throws RemoteException {
+            public void requestFeatureDownload(
+                    Feature feature,
+                    AndroidFuture cancellationSignalFuture,
+                    IDownloadCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -342,7 +401,12 @@ public interface IOnDeviceIntelligenceManager extends IInterface {
             }
 
             @Override // android.app.ondeviceintelligence.IOnDeviceIntelligenceManager
-            public void requestTokenInfo(Feature feature, Bundle requestBundle, AndroidFuture cancellationSignalFuture, ITokenInfoCallback tokenInfocallback) throws RemoteException {
+            public void requestTokenInfo(
+                    Feature feature,
+                    Bundle requestBundle,
+                    AndroidFuture cancellationSignalFuture,
+                    ITokenInfoCallback tokenInfocallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -360,7 +424,14 @@ public interface IOnDeviceIntelligenceManager extends IInterface {
             }
 
             @Override // android.app.ondeviceintelligence.IOnDeviceIntelligenceManager
-            public void processRequest(Feature feature, Bundle requestBundle, int requestType, AndroidFuture cancellationSignalFuture, AndroidFuture processingSignalFuture, IResponseCallback responseCallback) throws RemoteException {
+            public void processRequest(
+                    Feature feature,
+                    Bundle requestBundle,
+                    int requestType,
+                    AndroidFuture cancellationSignalFuture,
+                    AndroidFuture processingSignalFuture,
+                    IResponseCallback responseCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -380,7 +451,14 @@ public interface IOnDeviceIntelligenceManager extends IInterface {
             }
 
             @Override // android.app.ondeviceintelligence.IOnDeviceIntelligenceManager
-            public void processRequestStreaming(Feature feature, Bundle requestBundle, int requestType, AndroidFuture cancellationSignalFuture, AndroidFuture processingSignalFuture, IStreamingResponseCallback streamingCallback) throws RemoteException {
+            public void processRequestStreaming(
+                    Feature feature,
+                    Bundle requestBundle,
+                    int requestType,
+                    AndroidFuture cancellationSignalFuture,
+                    AndroidFuture processingSignalFuture,
+                    IStreamingResponseCallback streamingCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -416,7 +494,8 @@ public interface IOnDeviceIntelligenceManager extends IInterface {
             }
 
             @Override // android.app.ondeviceintelligence.IOnDeviceIntelligenceManager
-            public List<InferenceInfo> getLatestInferenceInfo(long startTimeEpochMillis) throws RemoteException {
+            public List<InferenceInfo> getLatestInferenceInfo(long startTimeEpochMillis)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -424,7 +503,8 @@ public interface IOnDeviceIntelligenceManager extends IInterface {
                     _data.writeLong(startTimeEpochMillis);
                     this.mRemote.transact(11, _data, _reply, 0);
                     _reply.readException();
-                    List<InferenceInfo> _result = _reply.createTypedArrayList(InferenceInfo.CREATOR);
+                    List<InferenceInfo> _result =
+                            _reply.createTypedArrayList(InferenceInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

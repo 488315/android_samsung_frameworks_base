@@ -18,6 +18,7 @@ import android.provider.Settings;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.SparseBooleanArray;
+
 import com.android.internal.content.PackageMonitor;
 import com.android.internal.os.BackgroundThread;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
@@ -30,6 +31,7 @@ import com.android.server.SystemService;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
 import com.android.server.pm.UserManagerInternal;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,26 +56,35 @@ public abstract class AbstractMasterSystemService extends SystemService {
     public final class SettingsObserver extends ContentObserver {
         public SettingsObserver(Handler handler) {
             super(handler);
-            ContentResolver contentResolver = AbstractMasterSystemService.this.getContext().getContentResolver();
-            String serviceSettingsProperty = AbstractMasterSystemService.this.getServiceSettingsProperty();
+            ContentResolver contentResolver =
+                    AbstractMasterSystemService.this.getContext().getContentResolver();
+            String serviceSettingsProperty =
+                    AbstractMasterSystemService.this.getServiceSettingsProperty();
             if (serviceSettingsProperty != null) {
-                contentResolver.registerContentObserver(Settings.Secure.getUriFor(serviceSettingsProperty), false, this, -1);
+                contentResolver.registerContentObserver(
+                        Settings.Secure.getUriFor(serviceSettingsProperty), false, this, -1);
             }
-            contentResolver.registerContentObserver(Settings.Secure.getUriFor("user_setup_complete"), false, this, -1);
+            contentResolver.registerContentObserver(
+                    Settings.Secure.getUriFor("user_setup_complete"), false, this, -1);
             AbstractMasterSystemService.this.registerForExtraSettingsChanges(contentResolver, this);
         }
 
         @Override // android.database.ContentObserver
         public final void onChange(boolean z, Uri uri, int i) {
-            AbstractMasterSystemService abstractMasterSystemService = AbstractMasterSystemService.this;
+            AbstractMasterSystemService abstractMasterSystemService =
+                    AbstractMasterSystemService.this;
             if (abstractMasterSystemService.verbose) {
-                Slog.v(abstractMasterSystemService.mTag, "onChange(): uri=" + uri + ", userId=" + i);
+                Slog.v(
+                        abstractMasterSystemService.mTag,
+                        "onChange(): uri=" + uri + ", userId=" + i);
             }
             String lastPathSegment = uri.getLastPathSegment();
             if (lastPathSegment == null) {
                 return;
             }
-            if (!lastPathSegment.equals(AbstractMasterSystemService.this.getServiceSettingsProperty()) && !lastPathSegment.equals("user_setup_complete")) {
+            if (!lastPathSegment.equals(
+                            AbstractMasterSystemService.this.getServiceSettingsProperty())
+                    && !lastPathSegment.equals("user_setup_complete")) {
                 AbstractMasterSystemService.this.onSettingsChanged(i, lastPathSegment);
                 return;
             }
@@ -83,11 +94,18 @@ public abstract class AbstractMasterSystemService extends SystemService {
         }
     }
 
-    public AbstractMasterSystemService(Context context, FrameworkResourcesServiceNameResolver frameworkResourcesServiceNameResolver, String str) {
+    public AbstractMasterSystemService(
+            Context context,
+            FrameworkResourcesServiceNameResolver frameworkResourcesServiceNameResolver,
+            String str) {
         this(context, frameworkResourcesServiceNameResolver, str, 34);
     }
 
-    public AbstractMasterSystemService(Context context, ServiceNameBaseResolver serviceNameBaseResolver, final String str, int i) {
+    public AbstractMasterSystemService(
+            Context context,
+            ServiceNameBaseResolver serviceNameBaseResolver,
+            final String str,
+            int i) {
         super(context);
         String simpleName = getClass().getSimpleName();
         this.mTag = simpleName;
@@ -100,12 +118,14 @@ public abstract class AbstractMasterSystemService extends SystemService {
         this.mServicePackagePolicyFlags = (i & 112) == 0 ? i | 32 : i;
         this.mServiceNameResolver = serviceNameBaseResolver;
         if (serviceNameBaseResolver != null) {
-            ServiceNameResolver$NameResolverListener serviceNameResolver$NameResolverListener = new ServiceNameResolver$NameResolverListener() { // from class: com.android.server.infra.AbstractMasterSystemService$$ExternalSyntheticLambda0
-                @Override // com.android.server.infra.ServiceNameResolver$NameResolverListener
-                public final void onNameResolved(int i3, String str2, boolean z) {
-                    AbstractMasterSystemService.this.onServiceNameChanged(i3, str2, z);
-                }
-            };
+            ServiceNameResolver$NameResolverListener serviceNameResolver$NameResolverListener =
+                    new ServiceNameResolver$NameResolverListener() { // from class:
+                                                                     // com.android.server.infra.AbstractMasterSystemService$$ExternalSyntheticLambda0
+                        @Override // com.android.server.infra.ServiceNameResolver$NameResolverListener
+                        public final void onNameResolved(int i3, String str2, boolean z) {
+                            AbstractMasterSystemService.this.onServiceNameChanged(i3, str2, z);
+                        }
+                    };
             synchronized (serviceNameBaseResolver.mLock) {
                 serviceNameBaseResolver.mOnSetCallback = serviceNameResolver$NameResolverListener;
             }
@@ -118,7 +138,8 @@ public abstract class AbstractMasterSystemService extends SystemService {
                 if (this.verbose) {
                     Slog.v(simpleName, "lazy-loading UserManagerInternal");
                 }
-                this.mUm = (UserManagerInternal) LocalServices.getService(UserManagerInternal.class);
+                this.mUm =
+                        (UserManagerInternal) LocalServices.getService(UserManagerInternal.class);
             }
             UserManagerInternal userManagerInternal = this.mUm;
             List supportedUsers = getSupportedUsers();
@@ -130,75 +151,117 @@ public abstract class AbstractMasterSystemService extends SystemService {
                 int i3 = ((UserInfo) arrayList.get(i2)).id;
                 boolean userRestriction = userManagerInternal.getUserRestriction(i3, str);
                 if (userRestriction) {
-                    HermesService$3$$ExternalSyntheticOutline0.m(i3, "Disabling by restrictions user ", this.mTag);
+                    HermesService$3$$ExternalSyntheticOutline0.m(
+                            i3, "Disabling by restrictions user ", this.mTag);
                     this.mDisabledByUserRestriction.put(i3, userRestriction);
                 }
                 i2++;
             }
-            userManagerInternal.addUserRestrictionsListener(new UserManagerInternal.UserRestrictionsListener() { // from class: com.android.server.infra.AbstractMasterSystemService$$ExternalSyntheticLambda1
-                @Override // com.android.server.pm.UserManagerInternal.UserRestrictionsListener
-                public final void onUserRestrictionsChanged(int i4, Bundle bundle, Bundle bundle2) {
-                    AbstractMasterSystemService abstractMasterSystemService = AbstractMasterSystemService.this;
-                    String str2 = str;
-                    abstractMasterSystemService.getClass();
-                    boolean z = bundle.getBoolean(str2, false);
-                    synchronized (abstractMasterSystemService.mLock) {
-                        try {
-                            if (abstractMasterSystemService.mDisabledByUserRestriction.get(i4) == z && abstractMasterSystemService.debug) {
-                                Slog.d(abstractMasterSystemService.mTag, "Restriction did not change for user " + i4);
-                                return;
+            userManagerInternal.addUserRestrictionsListener(
+                    new UserManagerInternal
+                            .UserRestrictionsListener() { // from class:
+                                                          // com.android.server.infra.AbstractMasterSystemService$$ExternalSyntheticLambda1
+                        @Override // com.android.server.pm.UserManagerInternal.UserRestrictionsListener
+                        public final void onUserRestrictionsChanged(
+                                int i4, Bundle bundle, Bundle bundle2) {
+                            AbstractMasterSystemService abstractMasterSystemService =
+                                    AbstractMasterSystemService.this;
+                            String str2 = str;
+                            abstractMasterSystemService.getClass();
+                            boolean z = bundle.getBoolean(str2, false);
+                            synchronized (abstractMasterSystemService.mLock) {
+                                try {
+                                    if (abstractMasterSystemService.mDisabledByUserRestriction.get(
+                                                            i4)
+                                                    == z
+                                            && abstractMasterSystemService.debug) {
+                                        Slog.d(
+                                                abstractMasterSystemService.mTag,
+                                                "Restriction did not change for user " + i4);
+                                        return;
+                                    }
+                                    Slog.i(
+                                            abstractMasterSystemService.mTag,
+                                            "Updating for user " + i4 + ": disabled=" + z);
+                                    abstractMasterSystemService.mDisabledByUserRestriction.put(
+                                            i4, z);
+                                    abstractMasterSystemService.getServiceForUserLocked(i4);
+                                    abstractMasterSystemService.updateCachedServiceListLocked(
+                                            i4, z);
+                                } finally {
+                                }
                             }
-                            Slog.i(abstractMasterSystemService.mTag, "Updating for user " + i4 + ": disabled=" + z);
-                            abstractMasterSystemService.mDisabledByUserRestriction.put(i4, z);
-                            abstractMasterSystemService.getServiceForUserLocked(i4);
-                            abstractMasterSystemService.updateCachedServiceListLocked(i4, z);
-                        } finally {
                         }
-                    }
-                }
-            });
+                    });
         }
         new PackageMonitor() { // from class: com.android.server.infra.AbstractMasterSystemService.1
             public final void handleActiveServiceRestartedLocked(int i4, String str2) {
-                AbstractMasterSystemService abstractMasterSystemService = AbstractMasterSystemService.this;
+                AbstractMasterSystemService abstractMasterSystemService =
+                        AbstractMasterSystemService.this;
                 int i5 = abstractMasterSystemService.mServicePackagePolicyFlags & 16;
                 String str3 = abstractMasterSystemService.mTag;
                 if (i5 == 0) {
                     if (abstractMasterSystemService.debug) {
-                        Slog.d(str3, AccountManagerService$$ExternalSyntheticOutline0.m(i4, "Removing service for user ", " because package ", str2, " is being restarted"));
+                        Slog.d(
+                                str3,
+                                AccountManagerService$$ExternalSyntheticOutline0.m(
+                                        i4,
+                                        "Removing service for user ",
+                                        " because package ",
+                                        str2,
+                                        " is being restarted"));
                     }
                     AbstractMasterSystemService.this.removeCachedServiceListLocked(i4);
-                    AbstractMasterSystemService abstractMasterSystemService2 = AbstractMasterSystemService.this;
+                    AbstractMasterSystemService abstractMasterSystemService2 =
+                            AbstractMasterSystemService.this;
                     if ((abstractMasterSystemService2.mServicePackagePolicyFlags & 64) != 0) {
                         if (abstractMasterSystemService2.debug) {
-                            Slog.d(abstractMasterSystemService2.mTag, VibrationParam$1$$ExternalSyntheticOutline0.m(i4, "Eagerly recreating service for user "));
+                            Slog.d(
+                                    abstractMasterSystemService2.mTag,
+                                    VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                            i4, "Eagerly recreating service for user "));
                         }
                         AbstractMasterSystemService.this.updateCachedServiceLocked(i4);
                     }
                 } else if (abstractMasterSystemService.debug) {
-                    Slog.d(str3, AccountManagerService$$ExternalSyntheticOutline0.m(i4, "Holding service for user ", " while package ", str2, " is being restarted"));
+                    Slog.d(
+                            str3,
+                            AccountManagerService$$ExternalSyntheticOutline0.m(
+                                    i4,
+                                    "Holding service for user ",
+                                    " while package ",
+                                    str2,
+                                    " is being restarted"));
                 }
                 AbstractMasterSystemService.this.onServicePackageRestartedLocked(i4);
             }
 
             public final void handlePackageUpdateLocked(String str2) {
-                AbstractMasterSystemService abstractMasterSystemService = AbstractMasterSystemService.this;
+                AbstractMasterSystemService abstractMasterSystemService =
+                        AbstractMasterSystemService.this;
                 int size = abstractMasterSystemService.mServicesCacheList.size();
                 for (int i4 = 0; i4 < size; i4++) {
                     List list = (List) abstractMasterSystemService.mServicesCacheList.valueAt(i4);
                     for (int i5 = 0; i5 < list.size(); i5++) {
-                        ((AbstractPerUserSystemService) list.get(i5)).handlePackageUpdateLocked(str2);
+                        ((AbstractPerUserSystemService) list.get(i5))
+                                .handlePackageUpdateLocked(str2);
                     }
                 }
             }
 
-            public final boolean onHandleForceStop(Intent intent, String[] strArr, int i4, boolean z) {
+            public final boolean onHandleForceStop(
+                    Intent intent, String[] strArr, int i4, boolean z) {
                 ComponentName serviceComponentName;
                 synchronized (AbstractMasterSystemService.this.mLock) {
                     try {
-                        AbstractPerUserSystemService peekServiceForUserLocked = AbstractMasterSystemService.this.peekServiceForUserLocked(getChangingUserId());
+                        AbstractPerUserSystemService peekServiceForUserLocked =
+                                AbstractMasterSystemService.this.peekServiceForUserLocked(
+                                        getChangingUserId());
                         String str2 = null;
-                        if (peekServiceForUserLocked != null && (serviceComponentName = peekServiceForUserLocked.getServiceComponentName()) != null) {
+                        if (peekServiceForUserLocked != null
+                                && (serviceComponentName =
+                                                peekServiceForUserLocked.getServiceComponentName())
+                                        != null) {
                             str2 = serviceComponentName.getPackageName();
                         }
                         for (String str3 : strArr) {
@@ -213,7 +276,8 @@ public abstract class AbstractMasterSystemService extends SystemService {
                                 if ("android.intent.action.PACKAGE_RESTARTED".equals(action)) {
                                     handleActiveServiceRestartedLocked(changingUserId, str2);
                                 } else {
-                                    AbstractMasterSystemService.this.removeCachedServiceListLocked(changingUserId);
+                                    AbstractMasterSystemService.this.removeCachedServiceListLocked(
+                                            changingUserId);
                                 }
                             }
                         }
@@ -226,29 +290,46 @@ public abstract class AbstractMasterSystemService extends SystemService {
 
             public final void onPackageDataCleared(String str2, int i4) {
                 ComponentName serviceComponentName;
-                AbstractMasterSystemService abstractMasterSystemService = AbstractMasterSystemService.this;
+                AbstractMasterSystemService abstractMasterSystemService =
+                        AbstractMasterSystemService.this;
                 if (abstractMasterSystemService.verbose) {
                     Slog.v(abstractMasterSystemService.mTag, "onPackageDataCleared(): " + str2);
                 }
                 int changingUserId = getChangingUserId();
-                AbstractMasterSystemService abstractMasterSystemService2 = AbstractMasterSystemService.this;
-                ServiceNameBaseResolver serviceNameBaseResolver2 = abstractMasterSystemService2.mServiceNameResolver;
+                AbstractMasterSystemService abstractMasterSystemService2 =
+                        AbstractMasterSystemService.this;
+                ServiceNameBaseResolver serviceNameBaseResolver2 =
+                        abstractMasterSystemService2.mServiceNameResolver;
                 if (serviceNameBaseResolver2 != null && serviceNameBaseResolver2.mIsMultiple) {
                     synchronized (abstractMasterSystemService2.mLock) {
-                        AbstractMasterSystemService abstractMasterSystemService3 = AbstractMasterSystemService.this;
+                        AbstractMasterSystemService abstractMasterSystemService3 =
+                                AbstractMasterSystemService.this;
                         if (abstractMasterSystemService3.verbose) {
-                            Slog.v(abstractMasterSystemService3.mTag, "onServicePackageDataClearedMultiModeLocked(" + changingUserId + ")");
+                            Slog.v(
+                                    abstractMasterSystemService3.mTag,
+                                    "onServicePackageDataClearedMultiModeLocked("
+                                            + changingUserId
+                                            + ")");
                         }
                     }
                     return;
                 }
                 synchronized (abstractMasterSystemService2.mLock) {
                     try {
-                        AbstractPerUserSystemService peekServiceForUserLocked = AbstractMasterSystemService.this.peekServiceForUserLocked(changingUserId);
-                        if (peekServiceForUserLocked != null && (serviceComponentName = peekServiceForUserLocked.getServiceComponentName()) != null && str2.equals(serviceComponentName.getPackageName())) {
-                            AbstractMasterSystemService abstractMasterSystemService4 = AbstractMasterSystemService.this;
+                        AbstractPerUserSystemService peekServiceForUserLocked =
+                                AbstractMasterSystemService.this.peekServiceForUserLocked(
+                                        changingUserId);
+                        if (peekServiceForUserLocked != null
+                                && (serviceComponentName =
+                                                peekServiceForUserLocked.getServiceComponentName())
+                                        != null
+                                && str2.equals(serviceComponentName.getPackageName())) {
+                            AbstractMasterSystemService abstractMasterSystemService4 =
+                                    AbstractMasterSystemService.this;
                             if (abstractMasterSystemService4.verbose) {
-                                Slog.v(abstractMasterSystemService4.mTag, "onServicePackageDataCleared(" + changingUserId + ")");
+                                Slog.v(
+                                        abstractMasterSystemService4.mTag,
+                                        "onServicePackageDataCleared(" + changingUserId + ")");
                             }
                         }
                     } catch (Throwable th) {
@@ -262,23 +343,41 @@ public abstract class AbstractMasterSystemService extends SystemService {
                 AbstractPerUserSystemService peekServiceForUserLocked;
                 synchronized (AbstractMasterSystemService.this.mLock) {
                     try {
-                        AbstractMasterSystemService abstractMasterSystemService = AbstractMasterSystemService.this;
+                        AbstractMasterSystemService abstractMasterSystemService =
+                                AbstractMasterSystemService.this;
                         if (abstractMasterSystemService.verbose) {
-                            Slog.v(abstractMasterSystemService.mTag, "onPackageModified(): " + str2);
+                            Slog.v(
+                                    abstractMasterSystemService.mTag,
+                                    "onPackageModified(): " + str2);
                         }
                         if (AbstractMasterSystemService.this.mServiceNameResolver == null) {
                             return;
                         }
                         int changingUserId = getChangingUserId();
-                        String[] defaultServiceNameList = AbstractMasterSystemService.this.mServiceNameResolver.getDefaultServiceNameList(changingUserId);
+                        String[] defaultServiceNameList =
+                                AbstractMasterSystemService.this.mServiceNameResolver
+                                        .getDefaultServiceNameList(changingUserId);
                         if (defaultServiceNameList != null) {
                             for (String str3 : defaultServiceNameList) {
-                                if (str3 != null && (unflattenFromString = ComponentName.unflattenFromString(str3)) != null && unflattenFromString.getPackageName().equals(str2) && (peekServiceForUserLocked = AbstractMasterSystemService.this.peekServiceForUserLocked(changingUserId)) != null && peekServiceForUserLocked.getServiceComponentName() == null) {
-                                    AbstractMasterSystemService abstractMasterSystemService2 = AbstractMasterSystemService.this;
+                                if (str3 != null
+                                        && (unflattenFromString =
+                                                        ComponentName.unflattenFromString(str3))
+                                                != null
+                                        && unflattenFromString.getPackageName().equals(str2)
+                                        && (peekServiceForUserLocked =
+                                                        AbstractMasterSystemService.this
+                                                                .peekServiceForUserLocked(
+                                                                        changingUserId))
+                                                != null
+                                        && peekServiceForUserLocked.getServiceComponentName()
+                                                == null) {
+                                    AbstractMasterSystemService abstractMasterSystemService2 =
+                                            AbstractMasterSystemService.this;
                                     if (abstractMasterSystemService2.verbose) {
                                         Slog.v(abstractMasterSystemService2.mTag, "update cached");
                                     }
-                                    AbstractMasterSystemService.this.updateCachedServiceLocked(changingUserId);
+                                    AbstractMasterSystemService.this.updateCachedServiceLocked(
+                                            changingUserId);
                                 }
                             }
                         }
@@ -290,26 +389,43 @@ public abstract class AbstractMasterSystemService extends SystemService {
 
             public final void onPackageRemoved(String str2, int i4) {
                 ComponentName serviceComponentName;
-                AbstractMasterSystemService abstractMasterSystemService = AbstractMasterSystemService.this;
-                ServiceNameBaseResolver serviceNameBaseResolver2 = abstractMasterSystemService.mServiceNameResolver;
+                AbstractMasterSystemService abstractMasterSystemService =
+                        AbstractMasterSystemService.this;
+                ServiceNameBaseResolver serviceNameBaseResolver2 =
+                        abstractMasterSystemService.mServiceNameResolver;
                 if (serviceNameBaseResolver2 != null && serviceNameBaseResolver2.mIsMultiple) {
                     int changingUserId = getChangingUserId();
                     synchronized (AbstractMasterSystemService.this.mLock) {
-                        AbstractMasterSystemService.this.handlePackageRemovedMultiModeLocked(changingUserId, str2);
+                        AbstractMasterSystemService.this.handlePackageRemovedMultiModeLocked(
+                                changingUserId, str2);
                     }
                     return;
                 }
                 synchronized (abstractMasterSystemService.mLock) {
                     try {
                         int changingUserId2 = getChangingUserId();
-                        AbstractPerUserSystemService peekServiceForUserLocked = AbstractMasterSystemService.this.peekServiceForUserLocked(changingUserId2);
-                        if (peekServiceForUserLocked != null && (serviceComponentName = peekServiceForUserLocked.getServiceComponentName()) != null && str2.equals(serviceComponentName.getPackageName())) {
+                        AbstractPerUserSystemService peekServiceForUserLocked =
+                                AbstractMasterSystemService.this.peekServiceForUserLocked(
+                                        changingUserId2);
+                        if (peekServiceForUserLocked != null
+                                && (serviceComponentName =
+                                                peekServiceForUserLocked.getServiceComponentName())
+                                        != null
+                                && str2.equals(serviceComponentName.getPackageName())) {
                             synchronized (AbstractMasterSystemService.this.mLock) {
-                                AbstractMasterSystemService.this.removeCachedServiceListLocked(changingUserId2);
+                                AbstractMasterSystemService.this.removeCachedServiceListLocked(
+                                        changingUserId2);
                             }
-                            String serviceSettingsProperty = AbstractMasterSystemService.this.getServiceSettingsProperty();
+                            String serviceSettingsProperty =
+                                    AbstractMasterSystemService.this.getServiceSettingsProperty();
                             if (serviceSettingsProperty != null) {
-                                Settings.Secure.putStringForUser(AbstractMasterSystemService.this.getContext().getContentResolver(), serviceSettingsProperty, null, changingUserId2);
+                                Settings.Secure.putStringForUser(
+                                        AbstractMasterSystemService.this
+                                                .getContext()
+                                                .getContentResolver(),
+                                        serviceSettingsProperty,
+                                        null,
+                                        changingUserId2);
                             }
                         }
                     } catch (Throwable th) {
@@ -319,23 +435,31 @@ public abstract class AbstractMasterSystemService extends SystemService {
             }
 
             public final void onPackageUpdateFinished(String str2, int i4) {
-                AbstractMasterSystemService abstractMasterSystemService = AbstractMasterSystemService.this;
+                AbstractMasterSystemService abstractMasterSystemService =
+                        AbstractMasterSystemService.this;
                 if (abstractMasterSystemService.verbose) {
                     Slog.v(abstractMasterSystemService.mTag, "onPackageUpdateFinished(): " + str2);
                 }
                 int changingUserId = getChangingUserId();
                 synchronized (AbstractMasterSystemService.this.mLock) {
                     try {
-                        SparseArray sparseArray = AbstractMasterSystemService.this.mUpdatingPackageNames;
-                        if (str2.equals(sparseArray == null ? null : (String) sparseArray.get(changingUserId))) {
-                            SparseArray sparseArray2 = AbstractMasterSystemService.this.mUpdatingPackageNames;
+                        SparseArray sparseArray =
+                                AbstractMasterSystemService.this.mUpdatingPackageNames;
+                        if (str2.equals(
+                                sparseArray == null
+                                        ? null
+                                        : (String) sparseArray.get(changingUserId))) {
+                            SparseArray sparseArray2 =
+                                    AbstractMasterSystemService.this.mUpdatingPackageNames;
                             if (sparseArray2 != null) {
                                 sparseArray2.remove(changingUserId);
-                                if (AbstractMasterSystemService.this.mUpdatingPackageNames.size() == 0) {
+                                if (AbstractMasterSystemService.this.mUpdatingPackageNames.size()
+                                        == 0) {
                                     AbstractMasterSystemService.this.mUpdatingPackageNames = null;
                                 }
                             }
-                            AbstractMasterSystemService.this.onServicePackageUpdatedLocked(changingUserId);
+                            AbstractMasterSystemService.this.onServicePackageUpdatedLocked(
+                                    changingUserId);
                         } else {
                             handlePackageUpdateLocked(str2);
                         }
@@ -347,40 +471,73 @@ public abstract class AbstractMasterSystemService extends SystemService {
 
             public final void onPackageUpdateStarted(String str2, int i4) {
                 ComponentName serviceComponentName;
-                AbstractMasterSystemService abstractMasterSystemService = AbstractMasterSystemService.this;
+                AbstractMasterSystemService abstractMasterSystemService =
+                        AbstractMasterSystemService.this;
                 if (abstractMasterSystemService.verbose) {
                     Slog.v(abstractMasterSystemService.mTag, "onPackageUpdateStarted(): " + str2);
                 }
-                AbstractPerUserSystemService peekServiceForUserLocked = AbstractMasterSystemService.this.peekServiceForUserLocked(getChangingUserId());
+                AbstractPerUserSystemService peekServiceForUserLocked =
+                        AbstractMasterSystemService.this.peekServiceForUserLocked(
+                                getChangingUserId());
                 String str3 = null;
-                if (peekServiceForUserLocked != null && (serviceComponentName = peekServiceForUserLocked.getServiceComponentName()) != null) {
+                if (peekServiceForUserLocked != null
+                        && (serviceComponentName =
+                                        peekServiceForUserLocked.getServiceComponentName())
+                                != null) {
                     str3 = serviceComponentName.getPackageName();
                 }
                 if (str2.equals(str3)) {
                     int changingUserId = getChangingUserId();
                     synchronized (AbstractMasterSystemService.this.mLock) {
                         try {
-                            AbstractMasterSystemService abstractMasterSystemService2 = AbstractMasterSystemService.this;
+                            AbstractMasterSystemService abstractMasterSystemService2 =
+                                    AbstractMasterSystemService.this;
                             if (abstractMasterSystemService2.mUpdatingPackageNames == null) {
-                                abstractMasterSystemService2.mUpdatingPackageNames = new SparseArray(AbstractMasterSystemService.this.mServicesCacheList.size());
+                                abstractMasterSystemService2.mUpdatingPackageNames =
+                                        new SparseArray(
+                                                AbstractMasterSystemService.this.mServicesCacheList
+                                                        .size());
                             }
-                            AbstractMasterSystemService.this.mUpdatingPackageNames.put(changingUserId, str2);
-                            AbstractMasterSystemService.this.onServicePackageUpdatingLocked(changingUserId);
-                            AbstractMasterSystemService abstractMasterSystemService3 = AbstractMasterSystemService.this;
-                            if ((abstractMasterSystemService3.mServicePackagePolicyFlags & 1) == 0) {
+                            AbstractMasterSystemService.this.mUpdatingPackageNames.put(
+                                    changingUserId, str2);
+                            AbstractMasterSystemService.this.onServicePackageUpdatingLocked(
+                                    changingUserId);
+                            AbstractMasterSystemService abstractMasterSystemService3 =
+                                    AbstractMasterSystemService.this;
+                            if ((abstractMasterSystemService3.mServicePackagePolicyFlags & 1)
+                                    == 0) {
                                 if (abstractMasterSystemService3.debug) {
-                                    Slog.d(abstractMasterSystemService3.mTag, "Removing service for user " + changingUserId + " because package " + str3 + " is being updated");
+                                    Slog.d(
+                                            abstractMasterSystemService3.mTag,
+                                            "Removing service for user "
+                                                    + changingUserId
+                                                    + " because package "
+                                                    + str3
+                                                    + " is being updated");
                                 }
-                                AbstractMasterSystemService.this.removeCachedServiceListLocked(changingUserId);
-                                AbstractMasterSystemService abstractMasterSystemService4 = AbstractMasterSystemService.this;
-                                if ((abstractMasterSystemService4.mServicePackagePolicyFlags & 4) != 0) {
+                                AbstractMasterSystemService.this.removeCachedServiceListLocked(
+                                        changingUserId);
+                                AbstractMasterSystemService abstractMasterSystemService4 =
+                                        AbstractMasterSystemService.this;
+                                if ((abstractMasterSystemService4.mServicePackagePolicyFlags & 4)
+                                        != 0) {
                                     if (abstractMasterSystemService4.debug) {
-                                        Slog.d(abstractMasterSystemService4.mTag, "Eagerly recreating service for user " + changingUserId);
+                                        Slog.d(
+                                                abstractMasterSystemService4.mTag,
+                                                "Eagerly recreating service for user "
+                                                        + changingUserId);
                                     }
-                                    AbstractMasterSystemService.this.getServiceForUserLocked(changingUserId);
+                                    AbstractMasterSystemService.this.getServiceForUserLocked(
+                                            changingUserId);
                                 }
                             } else if (abstractMasterSystemService3.debug) {
-                                Slog.d(abstractMasterSystemService3.mTag, "Holding service for user " + changingUserId + " while package " + str3 + " is being updated");
+                                Slog.d(
+                                        abstractMasterSystemService3.mTag,
+                                        "Holding service for user "
+                                                + changingUserId
+                                                + " while package "
+                                                + str3
+                                                + " is being updated");
                             }
                         } catch (Throwable th) {
                             throw th;
@@ -402,7 +559,9 @@ public abstract class AbstractMasterSystemService extends SystemService {
                 }
             }
         }
-        throw new SecurityException(AccessibilityManagerService$$ExternalSyntheticOutline0.m(callingUid, "UID ", " does not own ", str));
+        throw new SecurityException(
+                AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                        callingUid, "UID ", " does not own ", str));
     }
 
     public void dumpLocked(PrintWriter printWriter) {
@@ -470,7 +629,8 @@ public abstract class AbstractMasterSystemService extends SystemService {
                     printWriter.println(": ");
                     List list = (List) this.mServicesCacheList.valueAt(i3);
                     for (int i4 = 0; i4 < list.size(); i4++) {
-                        AbstractPerUserSystemService abstractPerUserSystemService = (AbstractPerUserSystemService) list.get(i4);
+                        AbstractPerUserSystemService abstractPerUserSystemService =
+                                (AbstractPerUserSystemService) list.get(i4);
                         synchronized (abstractPerUserSystemService.mLock) {
                             abstractPerUserSystemService.dumpLocked(printWriter);
                         }
@@ -505,7 +665,15 @@ public abstract class AbstractMasterSystemService extends SystemService {
 
     public final List getServiceListForUserLocked(int i) {
         List list;
-        int handleIncomingUser = ActivityManager.handleIncomingUser(Binder.getCallingPid(), Binder.getCallingUid(), i, false, false, null, null);
+        int handleIncomingUser =
+                ActivityManager.handleIncomingUser(
+                        Binder.getCallingPid(),
+                        Binder.getCallingUid(),
+                        i,
+                        false,
+                        false,
+                        null,
+                        null);
         List list2 = (List) this.mServicesCacheList.get(handleIncomingUser);
         if (list2 != null && list2.size() != 0) {
             return list2;
@@ -517,11 +685,14 @@ public abstract class AbstractMasterSystemService extends SystemService {
             arrayList.add(newServiceLocked(handleIncomingUser, isDisabledLocked));
             list = arrayList;
         } else {
-            list = newServiceListLocked(handleIncomingUser, serviceNameBaseResolver.getServiceNameList(i));
+            list =
+                    newServiceListLocked(
+                            handleIncomingUser, serviceNameBaseResolver.getServiceNameList(i));
         }
         if (!isDisabledLocked) {
             for (int i2 = 0; i2 < list.size(); i2++) {
-                onServiceEnabledLocked((AbstractPerUserSystemService) list.get(i2), handleIncomingUser);
+                onServiceEnabledLocked(
+                        (AbstractPerUserSystemService) list.get(i2), handleIncomingUser);
             }
         }
         this.mServicesCacheList.put(i, list);
@@ -551,7 +722,10 @@ public abstract class AbstractMasterSystemService extends SystemService {
 
     public void handlePackageRemovedMultiModeLocked(int i, String str) {
         if (this.verbose) {
-            Slog.v(this.mTag, BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "handlePackageRemovedMultiModeLocked(", ")"));
+            Slog.v(
+                    this.mTag,
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            i, "handlePackageRemovedMultiModeLocked(", ")"));
         }
     }
 
@@ -596,8 +770,8 @@ public abstract class AbstractMasterSystemService extends SystemService {
         }
     }
 
-    public void onServiceEnabledLocked(AbstractPerUserSystemService abstractPerUserSystemService, int i) {
-    }
+    public void onServiceEnabledLocked(
+            AbstractPerUserSystemService abstractPerUserSystemService, int i) {}
 
     public void onServiceNameChanged(int i, String str, boolean z) {
         synchronized (this.mLock) {
@@ -607,27 +781,35 @@ public abstract class AbstractMasterSystemService extends SystemService {
 
     public void onServicePackageRestartedLocked(int i) {
         if (this.verbose) {
-            Slog.v(this.mTag, BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "onServicePackageRestarted(", ")"));
+            Slog.v(
+                    this.mTag,
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            i, "onServicePackageRestarted(", ")"));
         }
     }
 
     public void onServicePackageUpdatedLocked(int i) {
         if (this.verbose) {
-            Slog.v(this.mTag, BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "onServicePackageUpdated(", ")"));
+            Slog.v(
+                    this.mTag,
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            i, "onServicePackageUpdated(", ")"));
         }
     }
 
     public void onServicePackageUpdatingLocked(int i) {
         if (this.verbose) {
-            Slog.v(this.mTag, BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "onServicePackageUpdatingLocked(", ")"));
+            Slog.v(
+                    this.mTag,
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            i, "onServicePackageUpdatingLocked(", ")"));
         }
     }
 
-    public void onServiceRemoved(AbstractPerUserSystemService abstractPerUserSystemService, int i) {
-    }
+    public void onServiceRemoved(
+            AbstractPerUserSystemService abstractPerUserSystemService, int i) {}
 
-    public void onSettingsChanged(int i, String str) {
-    }
+    public void onSettingsChanged(int i, String str) {}
 
     @Override // com.android.server.SystemService
     public void onUserStopped(SystemService.TargetUser targetUser) {
@@ -652,18 +834,28 @@ public abstract class AbstractMasterSystemService extends SystemService {
     }
 
     public final List peekServiceListForUserLocked(int i) {
-        return (List) this.mServicesCacheList.get(ActivityManager.handleIncomingUser(Binder.getCallingPid(), Binder.getCallingUid(), i, false, false, null, null));
+        return (List)
+                this.mServicesCacheList.get(
+                        ActivityManager.handleIncomingUser(
+                                Binder.getCallingPid(),
+                                Binder.getCallingUid(),
+                                i,
+                                false,
+                                false,
+                                null,
+                                null));
     }
 
-    public void registerForExtraSettingsChanges(ContentResolver contentResolver, ContentObserver contentObserver) {
-    }
+    public void registerForExtraSettingsChanges(
+            ContentResolver contentResolver, ContentObserver contentObserver) {}
 
     public final void removeCachedServiceListLocked(int i) {
         List peekServiceListForUserLocked = peekServiceListForUserLocked(i);
         if (peekServiceListForUserLocked != null) {
             this.mServicesCacheList.delete(i);
             for (int i2 = 0; i2 < peekServiceListForUserLocked.size(); i2++) {
-                onServiceRemoved((AbstractPerUserSystemService) peekServiceListForUserLocked.get(i2), i);
+                onServiceRemoved(
+                        (AbstractPerUserSystemService) peekServiceListForUserLocked.get(i2), i);
             }
         }
     }
@@ -674,7 +866,8 @@ public abstract class AbstractMasterSystemService extends SystemService {
         synchronized (this.mLock) {
             AbstractPerUserSystemService serviceForUserLocked = getServiceForUserLocked(i);
             if (serviceForUserLocked != null) {
-                serviceForUserLocked.mMaster.mServiceNameResolver.resetTemporaryService(serviceForUserLocked.mUserId);
+                serviceForUserLocked.mMaster.mServiceNameResolver.resetTemporaryService(
+                        serviceForUserLocked.mUserId);
             }
         }
     }
@@ -697,7 +890,8 @@ public abstract class AbstractMasterSystemService extends SystemService {
                     return false;
                 }
                 if (serviceNameBaseResolver.setDefaultServiceEnabled(i, z)) {
-                    AbstractPerUserSystemService peekServiceForUserLocked = peekServiceForUserLocked(i);
+                    AbstractPerUserSystemService peekServiceForUserLocked =
+                            peekServiceForUserLocked(i);
                     if (peekServiceForUserLocked != null) {
                         peekServiceForUserLocked.removeSelfFromCache();
                     }
@@ -715,7 +909,12 @@ public abstract class AbstractMasterSystemService extends SystemService {
     }
 
     public final void setTemporaryService(int i, String str, int i2) {
-        CustomizedBinderCallsStatsInternal$$ExternalSyntheticOutline0.m(DirEncryptService$$ExternalSyntheticOutline0.m(i, "setTemporaryService(", ") to ", str, " for "), i2, "ms", this.mTag);
+        CustomizedBinderCallsStatsInternal$$ExternalSyntheticOutline0.m(
+                DirEncryptService$$ExternalSyntheticOutline0.m(
+                        i, "setTemporaryService(", ") to ", str, " for "),
+                i2,
+                "ms",
+                this.mTag);
         if (this.mServiceNameResolver == null) {
             return;
         }
@@ -723,7 +922,13 @@ public abstract class AbstractMasterSystemService extends SystemService {
         Objects.requireNonNull(str);
         int maximumTemporaryServiceDurationMs = getMaximumTemporaryServiceDurationMs();
         if (i2 > maximumTemporaryServiceDurationMs) {
-            throw new IllegalArgumentException(DualAppManagerService$$ExternalSyntheticOutline0.m(maximumTemporaryServiceDurationMs, i2, "Max duration is ", " (called with ", ")"));
+            throw new IllegalArgumentException(
+                    DualAppManagerService$$ExternalSyntheticOutline0.m(
+                            maximumTemporaryServiceDurationMs,
+                            i2,
+                            "Max duration is ",
+                            " (called with ",
+                            ")"));
         }
         synchronized (this.mLock) {
             try {
@@ -731,7 +936,7 @@ public abstract class AbstractMasterSystemService extends SystemService {
                 if (peekServiceForUserLocked != null) {
                     peekServiceForUserLocked.removeSelfFromCache();
                 }
-                this.mServiceNameResolver.setTemporaryServices(i, i2, new String[]{str});
+                this.mServiceNameResolver.setTemporaryServices(i, i2, new String[] {str});
             } catch (Throwable th) {
                 throw th;
             }
@@ -741,7 +946,15 @@ public abstract class AbstractMasterSystemService extends SystemService {
     public final void updateCachedServiceListLocked(int i, boolean z) {
         ServiceNameBaseResolver serviceNameBaseResolver = this.mServiceNameResolver;
         if (serviceNameBaseResolver != null && serviceNameBaseResolver.mIsMultiple) {
-            int handleIncomingUser = ActivityManager.handleIncomingUser(Binder.getCallingPid(), Binder.getCallingUid(), i, false, false, null, null);
+            int handleIncomingUser =
+                    ActivityManager.handleIncomingUser(
+                            Binder.getCallingPid(),
+                            Binder.getCallingUid(),
+                            i,
+                            false,
+                            false,
+                            null,
+                            null);
             new ArrayList();
             synchronized (this.mLock) {
                 removeCachedServiceListLocked(handleIncomingUser);
@@ -754,13 +967,16 @@ public abstract class AbstractMasterSystemService extends SystemService {
             return;
         }
         for (int i2 = 0; i2 < serviceListForUserLocked.size(); i2++) {
-            AbstractPerUserSystemService abstractPerUserSystemService = (AbstractPerUserSystemService) serviceListForUserLocked.get(i2);
+            AbstractPerUserSystemService abstractPerUserSystemService =
+                    (AbstractPerUserSystemService) serviceListForUserLocked.get(i2);
             if (abstractPerUserSystemService != null) {
                 synchronized (abstractPerUserSystemService.mLock) {
                     try {
                         abstractPerUserSystemService.updateLocked(z);
                         if (abstractPerUserSystemService.isEnabledLocked()) {
-                            onServiceEnabledLocked((AbstractPerUserSystemService) serviceListForUserLocked.get(i2), i);
+                            onServiceEnabledLocked(
+                                    (AbstractPerUserSystemService) serviceListForUserLocked.get(i2),
+                                    i);
                         } else {
                             removeCachedServiceListLocked(i);
                         }

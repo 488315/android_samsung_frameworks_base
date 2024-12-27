@@ -1,6 +1,7 @@
 package android.os;
 
 import android.util.Log;
+
 import java.util.ArrayDeque;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CancellationException;
@@ -28,11 +29,9 @@ public abstract class AsyncTask<Params, Progress, Result> {
     private static final int MESSAGE_POST_PROGRESS = 2;
     private static final int MESSAGE_POST_RESULT = 1;
 
-    @Deprecated
-    public static final Executor SERIAL_EXECUTOR;
+    @Deprecated public static final Executor SERIAL_EXECUTOR;
 
-    @Deprecated
-    public static final Executor THREAD_POOL_EXECUTOR;
+    @Deprecated public static final Executor THREAD_POOL_EXECUTOR;
     private static ThreadPoolExecutor sBackupExecutor;
     private static LinkedBlockingQueue<Runnable> sBackupExecutorQueue;
     private static volatile Executor sDefaultExecutor;
@@ -43,28 +42,37 @@ public abstract class AsyncTask<Params, Progress, Result> {
     private volatile Status mStatus;
     private final AtomicBoolean mTaskInvoked;
     private final WorkerRunnable<Params, Result> mWorker;
-    private static final ThreadFactory sThreadFactory = new ThreadFactory() { // from class: android.os.AsyncTask.1
-        private final AtomicInteger mCount = new AtomicInteger(1);
+    private static final ThreadFactory sThreadFactory =
+            new ThreadFactory() { // from class: android.os.AsyncTask.1
+                private final AtomicInteger mCount = new AtomicInteger(1);
 
-        @Override // java.util.concurrent.ThreadFactory
-        public Thread newThread(Runnable r) {
-            return new Thread(r, "AsyncTask #" + this.mCount.getAndIncrement());
-        }
-    };
-    private static final RejectedExecutionHandler sRunOnSerialPolicy = new RejectedExecutionHandler() { // from class: android.os.AsyncTask.2
-        @Override // java.util.concurrent.RejectedExecutionHandler
-        public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {
-            Log.w(AsyncTask.LOG_TAG, "Exceeded ThreadPoolExecutor pool size");
-            synchronized (this) {
-                if (AsyncTask.sBackupExecutor == null) {
-                    AsyncTask.sBackupExecutorQueue = new LinkedBlockingQueue();
-                    AsyncTask.sBackupExecutor = new ThreadPoolExecutor(5, 5, 3L, TimeUnit.SECONDS, AsyncTask.sBackupExecutorQueue, AsyncTask.sThreadFactory);
-                    AsyncTask.sBackupExecutor.allowCoreThreadTimeOut(true);
+                @Override // java.util.concurrent.ThreadFactory
+                public Thread newThread(Runnable r) {
+                    return new Thread(r, "AsyncTask #" + this.mCount.getAndIncrement());
                 }
-            }
-            AsyncTask.sBackupExecutor.execute(r);
-        }
-    };
+            };
+    private static final RejectedExecutionHandler sRunOnSerialPolicy =
+            new RejectedExecutionHandler() { // from class: android.os.AsyncTask.2
+                @Override // java.util.concurrent.RejectedExecutionHandler
+                public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {
+                    Log.w(AsyncTask.LOG_TAG, "Exceeded ThreadPoolExecutor pool size");
+                    synchronized (this) {
+                        if (AsyncTask.sBackupExecutor == null) {
+                            AsyncTask.sBackupExecutorQueue = new LinkedBlockingQueue();
+                            AsyncTask.sBackupExecutor =
+                                    new ThreadPoolExecutor(
+                                            5,
+                                            5,
+                                            3L,
+                                            TimeUnit.SECONDS,
+                                            AsyncTask.sBackupExecutorQueue,
+                                            AsyncTask.sThreadFactory);
+                            AsyncTask.sBackupExecutor.allowCoreThreadTimeOut(true);
+                        }
+                    }
+                    AsyncTask.sBackupExecutor.execute(r);
+                }
+            };
 
     public enum Status {
         PENDING,
@@ -75,7 +83,9 @@ public abstract class AsyncTask<Params, Progress, Result> {
     protected abstract Result doInBackground(Params... paramsArr);
 
     static {
-        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(1, 20, 3L, TimeUnit.SECONDS, new SynchronousQueue(), sThreadFactory);
+        ThreadPoolExecutor threadPoolExecutor =
+                new ThreadPoolExecutor(
+                        1, 20, 3L, TimeUnit.SECONDS, new SynchronousQueue(), sThreadFactory);
         threadPoolExecutor.setRejectedExecutionHandler(sRunOnSerialPolicy);
         THREAD_POOL_EXECUTOR = threadPoolExecutor;
         SERIAL_EXECUTOR = new SerialExecutor();
@@ -92,16 +102,17 @@ public abstract class AsyncTask<Params, Progress, Result> {
 
         @Override // java.util.concurrent.Executor
         public synchronized void execute(final Runnable r) {
-            this.mTasks.offer(new Runnable() { // from class: android.os.AsyncTask.SerialExecutor.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    try {
-                        r.run();
-                    } finally {
-                        SerialExecutor.this.scheduleNext();
-                    }
-                }
-            });
+            this.mTasks.offer(
+                    new Runnable() { // from class: android.os.AsyncTask.SerialExecutor.1
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            try {
+                                r.run();
+                            } finally {
+                                SerialExecutor.this.scheduleNext();
+                            }
+                        }
+                    });
             if (this.mActive == null) {
                 scheduleNext();
             }
@@ -155,35 +166,39 @@ public abstract class AsyncTask<Params, Progress, Result> {
             mainHandler = new Handler(callbackLooper);
         }
         this.mHandler = mainHandler;
-        this.mWorker = new WorkerRunnable<Params, Result>() { // from class: android.os.AsyncTask.3
-            /* JADX WARN: Multi-variable type inference failed */
-            @Override // java.util.concurrent.Callable
-            public Result call() throws Exception {
-                AsyncTask.this.mTaskInvoked.set(true);
-                Result result = null;
-                try {
-                    Process.setThreadPriority(10);
-                    result = AsyncTask.this.doInBackground(this.mParams);
-                    Binder.flushPendingCommands();
-                    return result;
-                } finally {
-                }
-            }
-        };
-        this.mFuture = new FutureTask<Result>(this.mWorker) { // from class: android.os.AsyncTask.4
-            @Override // java.util.concurrent.FutureTask
-            protected void done() {
-                try {
-                    AsyncTask.this.postResultIfNotInvoked(get());
-                } catch (InterruptedException e) {
-                    Log.w(AsyncTask.LOG_TAG, e);
-                } catch (CancellationException e2) {
-                    AsyncTask.this.postResultIfNotInvoked(null);
-                } catch (ExecutionException e3) {
-                    throw new RuntimeException("An error occurred while executing doInBackground()", e3.getCause());
-                }
-            }
-        };
+        this.mWorker =
+                new WorkerRunnable<Params, Result>() { // from class: android.os.AsyncTask.3
+                    /* JADX WARN: Multi-variable type inference failed */
+                    @Override // java.util.concurrent.Callable
+                    public Result call() throws Exception {
+                        AsyncTask.this.mTaskInvoked.set(true);
+                        Result result = null;
+                        try {
+                            Process.setThreadPriority(10);
+                            result = AsyncTask.this.doInBackground(this.mParams);
+                            Binder.flushPendingCommands();
+                            return result;
+                        } finally {
+                        }
+                    }
+                };
+        this.mFuture =
+                new FutureTask<Result>(this.mWorker) { // from class: android.os.AsyncTask.4
+                    @Override // java.util.concurrent.FutureTask
+                    protected void done() {
+                        try {
+                            AsyncTask.this.postResultIfNotInvoked(get());
+                        } catch (InterruptedException e) {
+                            Log.w(AsyncTask.LOG_TAG, e);
+                        } catch (CancellationException e2) {
+                            AsyncTask.this.postResultIfNotInvoked(null);
+                        } catch (ExecutionException e3) {
+                            throw new RuntimeException(
+                                    "An error occurred while executing doInBackground()",
+                                    e3.getCause());
+                        }
+                    }
+                };
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -205,21 +220,17 @@ public abstract class AsyncTask<Params, Progress, Result> {
         return this.mStatus;
     }
 
-    protected void onPreExecute() {
-    }
+    protected void onPreExecute() {}
 
-    protected void onPostExecute(Result result) {
-    }
+    protected void onPostExecute(Result result) {}
 
-    protected void onProgressUpdate(Progress... values) {
-    }
+    protected void onProgressUpdate(Progress... values) {}
 
     protected void onCancelled(Result result) {
         onCancelled();
     }
 
-    protected void onCancelled() {
-    }
+    protected void onCancelled() {}
 
     public final boolean isCancelled() {
         return this.mCancelled.get();
@@ -234,7 +245,8 @@ public abstract class AsyncTask<Params, Progress, Result> {
         return this.mFuture.get();
     }
 
-    public final Result get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException {
+    public final Result get(long timeout, TimeUnit unit)
+            throws InterruptedException, ExecutionException, TimeoutException {
         return this.mFuture.get(timeout, unit);
     }
 
@@ -242,13 +254,17 @@ public abstract class AsyncTask<Params, Progress, Result> {
         return executeOnExecutor(sDefaultExecutor, params);
     }
 
-    public final AsyncTask<Params, Progress, Result> executeOnExecutor(Executor exec, Params... params) {
+    public final AsyncTask<Params, Progress, Result> executeOnExecutor(
+            Executor exec, Params... params) {
         if (this.mStatus != Status.PENDING) {
             switch (this.mStatus.ordinal()) {
                 case 1:
-                    throw new IllegalStateException("Cannot execute task: the task is already running.");
+                    throw new IllegalStateException(
+                            "Cannot execute task: the task is already running.");
                 case 2:
-                    throw new IllegalStateException("Cannot execute task: the task has already been executed (a task can be executed only once)");
+                    throw new IllegalStateException(
+                            "Cannot execute task: the task has already been executed (a task can be"
+                                + " executed only once)");
             }
         }
         this.mStatus = Status.RUNNING;
@@ -297,11 +313,10 @@ public abstract class AsyncTask<Params, Progress, Result> {
         }
     }
 
-    private static abstract class WorkerRunnable<Params, Result> implements Callable<Result> {
+    private abstract static class WorkerRunnable<Params, Result> implements Callable<Result> {
         Params[] mParams;
 
-        private WorkerRunnable() {
-        }
+        private WorkerRunnable() {}
     }
 
     private static class AsyncTaskResult<Data> {

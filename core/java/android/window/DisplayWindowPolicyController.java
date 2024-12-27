@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.util.ArraySet;
+
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Set;
@@ -15,15 +16,18 @@ public abstract class DisplayWindowPolicyController {
     private int mSystemWindowFlags;
     private int mWindowFlags;
 
-    public abstract boolean canActivityBeLaunched(ActivityInfo activityInfo, Intent intent, int i, int i2, boolean z);
+    public abstract boolean canActivityBeLaunched(
+            ActivityInfo activityInfo, Intent intent, int i, int i2, boolean z);
 
-    protected abstract boolean canContainActivity(ActivityInfo activityInfo, int i, int i2, boolean z);
+    protected abstract boolean canContainActivity(
+            ActivityInfo activityInfo, int i, int i2, boolean z);
 
     public abstract boolean canShowTasksInHostDeviceRecents();
 
     public abstract ComponentName getCustomHomeComponent();
 
-    public abstract boolean keepActivityOnWindowFlagsChanged(ActivityInfo activityInfo, int i, int i2);
+    public abstract boolean keepActivityOnWindowFlagsChanged(
+            ActivityInfo activityInfo, int i, int i2);
 
     public DisplayWindowPolicyController() {
         synchronized (this.mSupportedWindowingModes) {
@@ -35,7 +39,10 @@ public abstract class DisplayWindowPolicyController {
     }
 
     public final boolean isInterestedWindowFlags(int windowFlags, int systemWindowFlags) {
-        return ((this.mWindowFlags & windowFlags) == 0 && (this.mSystemWindowFlags & systemWindowFlags) == 0) ? false : true;
+        return ((this.mWindowFlags & windowFlags) == 0
+                        && (this.mSystemWindowFlags & systemWindowFlags) == 0)
+                ? false
+                : true;
     }
 
     public final void setInterestedWindowFlags(int windowFlags, int systemWindowFlags) {
@@ -67,11 +74,9 @@ public abstract class DisplayWindowPolicyController {
         return true;
     }
 
-    public void onTopActivityChanged(ComponentName topActivity, int uid, int userId) {
-    }
+    public void onTopActivityChanged(ComponentName topActivity, int uid, int userId) {}
 
-    public void onRunningAppsChanged(ArraySet<Integer> runningUids) {
-    }
+    public void onRunningAppsChanged(ArraySet<Integer> runningUids) {}
 
     public boolean isEnteringPipAllowed(int uid) {
         return isWindowingModeSupported(2);

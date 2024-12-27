@@ -3,8 +3,11 @@ package com.android.server.pm;
 import android.os.SystemProperties;
 import android.util.ArrayMap;
 import android.util.Log;
+
 import com.android.server.audio.AudioDeviceInventory$$ExternalSyntheticOutline0;
+
 import com.samsung.android.server.pm.install.SkippingApks;
+
 import java.util.Arrays;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -13,7 +16,8 @@ public abstract class NfcFeatureManager {
     public static void updateFeatureAndPackage(ArrayMap arrayMap, SkippingApks skippingApks) {
         String str = SystemProperties.get("ro.boot.product.hardware.sku", "");
         if (!Arrays.asList("hcesimese", "hceese", "hcesim", "hce", "disabled").contains(str)) {
-            AudioDeviceInventory$$ExternalSyntheticOutline0.m("Non-single binary (sku: ", str, ")", "NfcFeatureManager");
+            AudioDeviceInventory$$ExternalSyntheticOutline0.m(
+                    "Non-single binary (sku: ", str, ")", "NfcFeatureManager");
             if (!SystemProperties.getBoolean("ro.vendor.nfc.support.uicc", false)) {
                 if (arrayMap != null) {
                     arrayMap.remove("android.hardware.nfc.uicc");
@@ -36,7 +40,8 @@ public abstract class NfcFeatureManager {
         }
         try {
             if (!str.contains("disabled")) {
-                if (!SystemProperties.getBoolean("ro.vendor.nfc.support.uicc", false) || !str.contains("sim")) {
+                if (!SystemProperties.getBoolean("ro.vendor.nfc.support.uicc", false)
+                        || !str.contains("sim")) {
                     if (arrayMap != null) {
                         arrayMap.remove("android.hardware.nfc.uicc");
                         Log.i("NfcFeatureManager", "removed SIM feature");
@@ -44,7 +49,8 @@ public abstract class NfcFeatureManager {
                         Log.e("NfcFeatureManager", "cannot remove SIM feature");
                     }
                 }
-                if (SystemProperties.getBoolean("ro.vendor.nfc.support.ese", false) && str.contains("ese")) {
+                if (SystemProperties.getBoolean("ro.vendor.nfc.support.ese", false)
+                        && str.contains("ese")) {
                     return;
                 }
                 if (arrayMap == null) {

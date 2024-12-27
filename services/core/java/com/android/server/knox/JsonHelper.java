@@ -2,11 +2,13 @@ package com.android.server.knox;
 
 import android.content.SharedPreferences;
 import android.text.TextUtils;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -17,7 +19,9 @@ public abstract class JsonHelper {
             jSONObject.put("event_id", i);
             jSONObject.put("event_key", str);
             jSONObject.put("count", 1);
-            jSONObject.put("save_date", DateTimeFormatter.ofPattern("yyyy/MM/dd").format(LocalDateTime.now()));
+            jSONObject.put(
+                    "save_date",
+                    DateTimeFormatter.ofPattern("yyyy/MM/dd").format(LocalDateTime.now()));
             return jSONObject;
         } catch (JSONException e) {
             e.printStackTrace();
@@ -25,7 +29,8 @@ public abstract class JsonHelper {
         }
     }
 
-    public static long shallSaveOrReturnCount(int i, String str, SharedPreferences sharedPreferences) {
+    public static long shallSaveOrReturnCount(
+            int i, String str, SharedPreferences sharedPreferences) {
         JSONArray jSONArray;
         String str2;
         long j;
@@ -49,7 +54,8 @@ public abstract class JsonHelper {
                         break;
                     }
                     JSONObject jSONObject = (JSONObject) jSONArray.get(i2);
-                    if (jSONObject.getInt("event_id") == i && jSONObject.getString("event_key").equals(str)) {
+                    if (jSONObject.getInt("event_id") == i
+                            && jSONObject.getString("event_key").equals(str)) {
                         j = jSONObject.getLong("count");
                         String string2 = jSONObject.getString("save_date");
                         if (string2 == null) {

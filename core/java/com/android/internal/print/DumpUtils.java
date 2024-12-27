@@ -11,23 +11,32 @@ import android.print.PrinterId;
 import android.print.PrinterInfo;
 import android.provider.Telephony;
 import android.service.print.PrinterCapabilitiesProto;
+
 import com.android.internal.util.dump.DualDumpOutputStream;
 
 /* loaded from: classes5.dex */
 public class DumpUtils {
-    public static void writePrinterId(DualDumpOutputStream proto, String idName, long id, PrinterId printerId) {
+    public static void writePrinterId(
+            DualDumpOutputStream proto, String idName, long id, PrinterId printerId) {
         long token = proto.start(idName, id);
-        com.android.internal.util.dump.DumpUtils.writeComponentName(proto, "service_name", 1146756268033L, printerId.getServiceName());
+        com.android.internal.util.dump.DumpUtils.writeComponentName(
+                proto, "service_name", 1146756268033L, printerId.getServiceName());
         proto.write("local_id", 1138166333442L, printerId.getLocalId());
         proto.end(token);
     }
 
-    public static void writePrinterCapabilities(Context context, DualDumpOutputStream proto, String idName, long id, PrinterCapabilitiesInfo cap) {
+    public static void writePrinterCapabilities(
+            Context context,
+            DualDumpOutputStream proto,
+            String idName,
+            long id,
+            PrinterCapabilitiesInfo cap) {
         long token = proto.start(idName, id);
         writeMargins(proto, "min_margins", 1146756268033L, cap.getMinMargins());
         int numMediaSizes = cap.getMediaSizes().size();
         for (int i = 0; i < numMediaSizes; i++) {
-            writeMediaSize(context, proto, "media_sizes", 2246267895810L, cap.getMediaSizes().get(i));
+            writeMediaSize(
+                    context, proto, "media_sizes", 2246267895810L, cap.getMediaSizes().get(i));
         }
         int numResolutions = cap.getResolutions().size();
         for (int i2 = 0; i2 < numResolutions; i2++) {
@@ -52,7 +61,8 @@ public class DumpUtils {
         proto.end(token);
     }
 
-    public static void writePrinterInfo(Context context, DualDumpOutputStream proto, String idName, long id, PrinterInfo info) {
+    public static void writePrinterInfo(
+            Context context, DualDumpOutputStream proto, String idName, long id, PrinterInfo info) {
         long token = proto.start(idName, id);
         writePrinterId(proto, "id", 1146756268033L, info.getId());
         proto.write("name", 1138166333442L, info.getName());
@@ -65,7 +75,12 @@ public class DumpUtils {
         proto.end(token);
     }
 
-    public static void writeMediaSize(Context context, DualDumpOutputStream proto, String idName, long id, PrintAttributes.MediaSize mediaSize) {
+    public static void writeMediaSize(
+            Context context,
+            DualDumpOutputStream proto,
+            String idName,
+            long id,
+            PrintAttributes.MediaSize mediaSize) {
         long token = proto.start(idName, id);
         proto.write("id", 1138166333441L, mediaSize.getId());
         proto.write("label", 1138166333442L, mediaSize.getLabel(context.getPackageManager()));
@@ -74,7 +89,8 @@ public class DumpUtils {
         proto.end(token);
     }
 
-    public static void writeResolution(DualDumpOutputStream proto, String idName, long id, PrintAttributes.Resolution res) {
+    public static void writeResolution(
+            DualDumpOutputStream proto, String idName, long id, PrintAttributes.Resolution res) {
         long token = proto.start(idName, id);
         proto.write("id", 1138166333441L, res.getId());
         proto.write("label", 1138166333442L, res.getLabel());
@@ -83,7 +99,8 @@ public class DumpUtils {
         proto.end(token);
     }
 
-    public static void writeMargins(DualDumpOutputStream proto, String idName, long id, PrintAttributes.Margins margins) {
+    public static void writeMargins(
+            DualDumpOutputStream proto, String idName, long id, PrintAttributes.Margins margins) {
         long token = proto.start(idName, id);
         proto.write("top_mils", 1120986464257L, margins.getTopMils());
         proto.write("left_mils", 1120986464258L, margins.getLeftMils());
@@ -92,7 +109,12 @@ public class DumpUtils {
         proto.end(token);
     }
 
-    public static void writePrintAttributes(Context context, DualDumpOutputStream proto, String idName, long id, PrintAttributes attributes) {
+    public static void writePrintAttributes(
+            Context context,
+            DualDumpOutputStream proto,
+            String idName,
+            long id,
+            PrintAttributes attributes) {
         long token = proto.start(idName, id);
         PrintAttributes.MediaSize mediaSize = attributes.getMediaSize();
         if (mediaSize != null) {
@@ -108,11 +130,15 @@ public class DumpUtils {
             writeMargins(proto, "min_margings", 1146756268036L, minMargins);
         }
         proto.write("color_mode", 1159641169925L, attributes.getColorMode());
-        proto.write(Telephony.ServiceStateTable.DUPLEX_MODE, 1159641169926L, attributes.getDuplexMode());
+        proto.write(
+                Telephony.ServiceStateTable.DUPLEX_MODE,
+                1159641169926L,
+                attributes.getDuplexMode());
         proto.end(token);
     }
 
-    public static void writePrintDocumentInfo(DualDumpOutputStream proto, String idName, long id, PrintDocumentInfo info) {
+    public static void writePrintDocumentInfo(
+            DualDumpOutputStream proto, String idName, long id, PrintDocumentInfo info) {
         long token = proto.start(idName, id);
         proto.write("name", 1138166333441L, info.getName());
         int pageCount = info.getPageCount();
@@ -124,14 +150,20 @@ public class DumpUtils {
         proto.end(token);
     }
 
-    public static void writePageRange(DualDumpOutputStream proto, String idName, long id, PageRange range) {
+    public static void writePageRange(
+            DualDumpOutputStream proto, String idName, long id, PageRange range) {
         long token = proto.start(idName, id);
         proto.write("start", 1120986464257L, range.getStart());
         proto.write("end", 1120986464258L, range.getEnd());
         proto.end(token);
     }
 
-    public static void writePrintJobInfo(Context context, DualDumpOutputStream proto, String idName, long id, PrintJobInfo printJobInfo) {
+    public static void writePrintJobInfo(
+            Context context,
+            DualDumpOutputStream proto,
+            String idName,
+            long id,
+            PrintJobInfo printJobInfo) {
         long token = proto.start(idName, id);
         proto.write("label", 1138166333441L, printJobInfo.getLabel());
         PrintJobId printJobId = printJobInfo.getId();
@@ -168,7 +200,8 @@ public class DumpUtils {
                 writePageRange(proto, "pages", 2246267895818L, pageRange);
             }
         }
-        proto.write("has_advanced_options", 1133871366155L, printJobInfo.getAdvancedOptions() != null);
+        proto.write(
+                "has_advanced_options", 1133871366155L, printJobInfo.getAdvancedOptions() != null);
         proto.write("progress", 1108101562380L, printJobInfo.getProgress());
         CharSequence status = printJobInfo.getStatus(context.getPackageManager());
         if (status != null) {

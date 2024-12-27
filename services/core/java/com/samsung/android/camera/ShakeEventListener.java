@@ -11,7 +11,7 @@ import android.hardware.SensorManager;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.util.Slog;
-import com.samsung.android.camera.Logger;
+
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -28,35 +28,47 @@ public final class ShakeEventListener extends BroadcastReceiver implements Senso
     public final PowerManager.WakeLock mWakeLock;
 
     /* JADX WARN: Type inference failed for: r0v1, types: [com.samsung.android.camera.ShakeEventListener$1] */
-    public ShakeEventListener(CameraServiceWorker cameraServiceWorker, Context context, Handler handler) {
+    public ShakeEventListener(
+            CameraServiceWorker cameraServiceWorker, Context context, Handler handler) {
         new ArrayList();
         this.mInCall = false;
         this.mShakeDetected = false;
         this.mLastEventMessage = "No event.";
-        this.mShakeOffRunnable = new Runnable() { // from class: com.samsung.android.camera.ShakeEventListener.1
-            @Override // java.lang.Runnable
-            public final void run() {
-                synchronized (ShakeEventListener.this) {
-                }
-            }
-        };
+        this.mShakeOffRunnable =
+                new Runnable() { // from class: com.samsung.android.camera.ShakeEventListener.1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        synchronized (ShakeEventListener.this) {
+                        }
+                    }
+                };
         ((SensorManager) context.getSystemService("sensor")).getDefaultSensor(65612, true);
         ((PowerManager) context.getSystemService("power")).newWakeLock(1, "ShakeEventListener");
         this.mHandler = handler;
-        PendingIntent.getBroadcast(context, 0, new Intent("com.samsung.android.intent.ACTION_CAMERA_SERVICE_WORKER_LOGGING"), 67108864);
+        PendingIntent.getBroadcast(
+                context,
+                0,
+                new Intent("com.samsung.android.intent.ACTION_CAMERA_SERVICE_WORKER_LOGGING"),
+                67108864);
     }
 
     public final void handleShakeEventChanged() {
         synchronized (this.mLock) {
-            String str = "Shake event changed now(false) -> next(false), enable(" + Boolean.FALSE + ") call(" + this.mInCall + ") shake(" + this.mShakeDetected + ")";
+            String str =
+                    "Shake event changed now(false) -> next(false), enable("
+                            + Boolean.FALSE
+                            + ") call("
+                            + this.mInCall
+                            + ") shake("
+                            + this.mShakeDetected
+                            + ")";
             Slog.w("ShakeEventListener", str);
             Logger.log(Logger.ID.SHAKE_EVENT_LISTENER, str);
         }
     }
 
     @Override // android.hardware.SensorEventListener
-    public final void onAccuracyChanged(Sensor sensor, int i) {
-    }
+    public final void onAccuracyChanged(Sensor sensor, int i) {}
 
     /* JADX WARN: Removed duplicated region for block: B:16:0x0035 A[DONT_GENERATE] */
     /* JADX WARN: Removed duplicated region for block: B:19:0x0036 A[Catch: all -> 0x0026, TryCatch #0 {all -> 0x0026, blocks: (B:4:0x0003, B:9:0x000b, B:19:0x0036, B:26:0x0056, B:28:0x005a, B:29:0x0060, B:31:0x0064, B:32:0x001c, B:35:0x0028), top: B:3:0x0003 }] */
@@ -65,7 +77,8 @@ public final class ShakeEventListener extends BroadcastReceiver implements Senso
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final synchronized void onReceive(android.content.Context r6, android.content.Intent r7) {
+    public final synchronized void onReceive(
+            android.content.Context r6, android.content.Intent r7) {
         /*
             r5 = this;
             java.lang.String r6 = "Audio mode changed: "
@@ -136,7 +149,10 @@ public final class ShakeEventListener extends BroadcastReceiver implements Senso
             monitor-exit(r5)
             throw r6
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.camera.ShakeEventListener.onReceive(android.content.Context, android.content.Intent):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.camera.ShakeEventListener.onReceive(android.content.Context,"
+                    + " android.content.Intent):void");
     }
 
     @Override // android.hardware.SensorEventListener

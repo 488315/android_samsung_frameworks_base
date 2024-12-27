@@ -2,8 +2,11 @@ package com.samsung.android.sdk.scs.ai.text;
 
 import android.content.ContentResolver;
 import android.content.Context;
+
 import com.android.server.RCPManagerService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.sdk.scs.base.utils.Log;
+
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;

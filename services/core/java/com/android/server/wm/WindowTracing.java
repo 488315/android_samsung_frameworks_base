@@ -8,11 +8,14 @@ import android.tracing.Flags;
 import android.util.Log;
 import android.util.proto.ProtoOutputStream;
 import android.view.Choreographer;
+
 import com.android.internal.protolog.ProtoLogImpl_54989576;
 import com.android.internal.protolog.common.IProtoLog;
 import com.android.internal.util.TraceBuffer;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knoxguard.service.utils.Constants;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,15 +39,19 @@ public final class WindowTracing {
     public final File mTraceFile;
 
     /* JADX WARN: Type inference failed for: r1v1, types: [com.android.server.wm.WindowTracing$$ExternalSyntheticLambda0] */
-    public WindowTracing(File file, WindowManagerService windowManagerService, Choreographer choreographer) {
+    public WindowTracing(
+            File file, WindowManagerService windowManagerService, Choreographer choreographer) {
         WindowManagerGlobalLock windowManagerGlobalLock = windowManagerService.mGlobalLock;
         this.mEnabledLock = new Object();
-        this.mFrameCallback = new Choreographer.FrameCallback() { // from class: com.android.server.wm.WindowTracing$$ExternalSyntheticLambda0
-            @Override // android.view.Choreographer.FrameCallback
-            public final void doFrame(long j) {
-                WindowTracing.this.log("onFrame");
-            }
-        };
+        this.mFrameCallback =
+                new Choreographer
+                        .FrameCallback() { // from class:
+                                           // com.android.server.wm.WindowTracing$$ExternalSyntheticLambda0
+                    @Override // android.view.Choreographer.FrameCallback
+                    public final void doFrame(long j) {
+                        WindowTracing.this.log("onFrame");
+                    }
+                };
         this.mLogLevel = 1;
         this.mLogOnFrame = false;
         this.mChoreographer = choreographer;
@@ -185,14 +192,16 @@ public final class WindowTracing {
                 saveForBugreport(outPrintWriter);
                 return 0;
             case 2:
-                setBufferCapacity(Integer.parseInt(shellCommand.getNextArgRequired()) * 1024, outPrintWriter);
+                setBufferCapacity(
+                        Integer.parseInt(shellCommand.getNextArgRequired()) * 1024, outPrintWriter);
                 this.mBuffer.resetBuffer();
                 return 0;
             case 3:
                 stopTrace(outPrintWriter);
                 return 0;
             case 4:
-                logAndPrintln(outPrintWriter, "Setting window tracing log frequency to ".concat("frame"));
+                logAndPrintln(
+                        outPrintWriter, "Setting window tracing log frequency to ".concat("frame"));
                 this.mLogOnFrame = true;
                 this.mBuffer.resetBuffer();
                 return 0;
@@ -219,7 +228,9 @@ public final class WindowTracing {
                 startTrace(outPrintWriter);
                 return 0;
             case 7:
-                logAndPrintln(outPrintWriter, "Setting window tracing log frequency to ".concat("transaction"));
+                logAndPrintln(
+                        outPrintWriter,
+                        "Setting window tracing log frequency to ".concat("transaction"));
                 this.mLogOnFrame = false;
                 this.mBuffer.resetBuffer();
                 return 0;
@@ -227,9 +238,23 @@ public final class WindowTracing {
                 outPrintWriter.println("Unknown command: ".concat(nextArgRequired));
                 outPrintWriter.println("Window manager trace options:");
                 outPrintWriter.println("  start: Start logging");
-                BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  stop: Stop logging", "  save-for-bugreport: Save logging data to file if it's running.", "  frame: Log trace once per frame", "  transaction: Log each transaction");
-                BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  size: Set the maximum log size (in KB)", "  status: Print trace status", "  level [lvl]: Set the log level between", "    lvl may be one of:");
-                BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "      critical: Only visible windows with reduced information", "      trim: All windows with reduced", "      all: All window and information");
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        outPrintWriter,
+                        "  stop: Stop logging",
+                        "  save-for-bugreport: Save logging data to file if it's running.",
+                        "  frame: Log trace once per frame",
+                        "  transaction: Log each transaction");
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        outPrintWriter,
+                        "  size: Set the maximum log size (in KB)",
+                        "  status: Print trace status",
+                        "  level [lvl]: Set the log level between",
+                        "    lvl may be one of:");
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        outPrintWriter,
+                        "      critical: Only visible windows with reduced information",
+                        "      trim: All windows with reduced",
+                        "      all: All window and information");
                 return -1;
         }
     }
@@ -244,7 +269,11 @@ public final class WindowTracing {
                 if (this.mEnabled) {
                     this.mEnabledLockFree = false;
                     this.mEnabled = false;
-                    logAndPrintln(printWriter, "Stop tracing to " + this.mTraceFile + ". Waiting for traces to flush.");
+                    logAndPrintln(
+                            printWriter,
+                            "Stop tracing to "
+                                    + this.mTraceFile
+                                    + ". Waiting for traces to flush.");
                     writeTraceToFileLocked();
                     logAndPrintln(printWriter, "Trace written to " + this.mTraceFile + ".");
                     if (!Flags.perfettoProtologTracing()) {
@@ -311,7 +340,9 @@ public final class WindowTracing {
             return;
         }
         synchronized (this.mEnabledLock) {
-            logAndPrintln(printWriter, "Stop tracing to " + this.mTraceFile + ". Waiting for traces to flush.");
+            logAndPrintln(
+                    printWriter,
+                    "Stop tracing to " + this.mTraceFile + ". Waiting for traces to flush.");
             this.mEnabledLockFree = false;
             this.mEnabled = false;
             writeTraceToFileLocked();
@@ -329,7 +360,10 @@ public final class WindowTracing {
                 Trace.traceBegin(32L, "writeTraceToFileLocked");
                 ProtoOutputStream protoOutputStream = new ProtoOutputStream();
                 protoOutputStream.write(1125281431553L, 4990904633914181975L);
-                protoOutputStream.write(1125281431555L, TimeUnit.MILLISECONDS.toNanos(System.currentTimeMillis()) - SystemClock.elapsedRealtimeNanos());
+                protoOutputStream.write(
+                        1125281431555L,
+                        TimeUnit.MILLISECONDS.toNanos(System.currentTimeMillis())
+                                - SystemClock.elapsedRealtimeNanos());
                 this.mBuffer.writeTraceToFile(this.mTraceFile, protoOutputStream);
             } catch (IOException e) {
                 Log.e("WindowTracing", "Unable to write buffer to file", e);

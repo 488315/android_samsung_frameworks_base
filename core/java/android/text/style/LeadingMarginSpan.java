@@ -13,7 +13,19 @@ public interface LeadingMarginSpan extends ParagraphStyle {
         int getLeadingMarginLineCount();
     }
 
-    void drawLeadingMargin(Canvas canvas, Paint paint, int i, int i2, int i3, int i4, int i5, CharSequence charSequence, int i6, int i7, boolean z, Layout layout);
+    void drawLeadingMargin(
+            Canvas canvas,
+            Paint paint,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            CharSequence charSequence,
+            int i6,
+            int i7,
+            boolean z,
+            Layout layout);
 
     int getLeadingMargin(boolean z);
 
@@ -67,7 +79,18 @@ public interface LeadingMarginSpan extends ParagraphStyle {
         }
 
         @Override // android.text.style.LeadingMarginSpan
-        public void drawLeadingMargin(Canvas c, Paint p, int x, int dir, int top, int baseline, int bottom, CharSequence text, int start, int end, boolean first, Layout layout) {
-        }
+        public void drawLeadingMargin(
+                Canvas c,
+                Paint p,
+                int x,
+                int dir,
+                int top,
+                int baseline,
+                int bottom,
+                CharSequence text,
+                int start,
+                int end,
+                boolean first,
+                Layout layout) {}
     }
 }

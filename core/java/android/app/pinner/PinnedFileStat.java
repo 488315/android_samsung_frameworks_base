@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public final class PinnedFileStat implements Parcelable {
-    public static final Parcelable.Creator<PinnedFileStat> CREATOR = new Parcelable.Creator<PinnedFileStat>() { // from class: android.app.pinner.PinnedFileStat.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PinnedFileStat createFromParcel(Parcel source) {
-            return new PinnedFileStat(source);
-        }
+    public static final Parcelable.Creator<PinnedFileStat> CREATOR =
+            new Parcelable.Creator<
+                    PinnedFileStat>() { // from class: android.app.pinner.PinnedFileStat.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PinnedFileStat createFromParcel(Parcel source) {
+                    return new PinnedFileStat(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PinnedFileStat[] newArray(int size) {
-            return new PinnedFileStat[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PinnedFileStat[] newArray(int size) {
+                    return new PinnedFileStat[size];
+                }
+            };
     private long bytesPinned;
     private String filename;
     private String groupName;

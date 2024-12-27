@@ -14,12 +14,14 @@ import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Slog;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.LocalServices;
 import com.android.server.SystemService;
 import com.android.server.pdb.PersistentDataBlockManagerInternal;
 import com.android.server.pdb.PersistentDataBlockService;
 import com.android.server.pm.UserManagerInternal;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
@@ -56,7 +58,8 @@ public final class TestHarnessModeService extends SystemService {
 
         public static PersistentData fromBytes(byte[] bArr) {
             try {
-                DataInputStream dataInputStream = new DataInputStream(new ByteArrayInputStream(bArr));
+                DataInputStream dataInputStream =
+                        new DataInputStream(new ByteArrayInputStream(bArr));
                 if (dataInputStream.readInt() == 1) {
                     dataInputStream.readBoolean();
                 }
@@ -90,13 +93,11 @@ public final class TestHarnessModeService extends SystemService {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    class SetUpTestHarnessModeException extends Exception {
-    }
+    class SetUpTestHarnessModeException extends Exception {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class TestHarnessModeShellCommand extends ShellCommand {
-        public TestHarnessModeShellCommand() {
-        }
+        public TestHarnessModeShellCommand() {}
 
         public static byte[] getBytesFromFile(File file) {
             if (file == null || !file.exists()) {
@@ -125,24 +126,39 @@ public final class TestHarnessModeService extends SystemService {
         }
 
         public final int handleEnable() {
-            AdbManagerInternal adbManagerInternal = (AdbManagerInternal) LocalServices.getService(AdbManagerInternal.class);
+            AdbManagerInternal adbManagerInternal =
+                    (AdbManagerInternal) LocalServices.getService(AdbManagerInternal.class);
             try {
-                PersistentData persistentData = new PersistentData(getBytesFromFile(adbManagerInternal.getAdbKeysFile()), getBytesFromFile(adbManagerInternal.getAdbTempKeysFile()));
-                PersistentDataBlockManagerInternal persistentDataBlock = TestHarnessModeService.this.getPersistentDataBlock();
+                PersistentData persistentData =
+                        new PersistentData(
+                                getBytesFromFile(adbManagerInternal.getAdbKeysFile()),
+                                getBytesFromFile(adbManagerInternal.getAdbTempKeysFile()));
+                PersistentDataBlockManagerInternal persistentDataBlock =
+                        TestHarnessModeService.this.getPersistentDataBlock();
                 if (persistentDataBlock == null) {
-                    Slog.e("ShellCommand", "Failed to enable Test Harness Mode. No implementation of PersistentDataBlockManagerInternal was bound.");
+                    Slog.e(
+                            "ShellCommand",
+                            "Failed to enable Test Harness Mode. No implementation of"
+                                + " PersistentDataBlockManagerInternal was bound.");
                     getErrPrintWriter().println("Failed to enable Test Harness Mode");
                     return 1;
                 }
-                PersistentDataBlockService.InternalService internalService = (PersistentDataBlockService.InternalService) persistentDataBlock;
-                internalService.writeInternal(PersistentDataBlockService.this.getTestHarnessModeDataOffset(), persistentData.toBytes(), 9996);
+                PersistentDataBlockService.InternalService internalService =
+                        (PersistentDataBlockService.InternalService) persistentDataBlock;
+                internalService.writeInternal(
+                        PersistentDataBlockService.this.getTestHarnessModeDataOffset(),
+                        persistentData.toBytes(),
+                        9996);
                 Intent intent = new Intent("android.intent.action.FACTORY_RESET");
                 intent.setPackage("android");
                 intent.addFlags(268435456);
                 intent.putExtra("android.intent.extra.REASON", "ShellCommand");
                 intent.putExtra("android.intent.extra.WIPE_EXTERNAL_STORAGE", true);
-                intent.putExtra("keep_memtag_mode", TestHarnessModeService.this.mEnableKeepMemtagMode);
-                TestHarnessModeService.this.getContext().sendBroadcastAsUser(intent, UserHandle.SYSTEM);
+                intent.putExtra(
+                        "keep_memtag_mode", TestHarnessModeService.this.mEnableKeepMemtagMode);
+                TestHarnessModeService.this
+                        .getContext()
+                        .sendBroadcastAsUser(intent, UserHandle.SYSTEM);
                 return 0;
             } catch (IOException e) {
                 Slog.e("ShellCommand", "Failed to store ADB keys.", e);
@@ -161,15 +177,28 @@ public final class TestHarnessModeService extends SystemService {
             while (true) {
                 String nextOption = getNextOption();
                 if (nextOption == null) {
-                    TestHarnessModeService.this.getContext().enforceCallingPermission("android.permission.ENABLE_TEST_HARNESS_MODE", "You must hold android.permission.ENABLE_TEST_HARNESS_MODE to enable Test Harness Mode");
+                    TestHarnessModeService.this
+                            .getContext()
+                            .enforceCallingPermission(
+                                    "android.permission.ENABLE_TEST_HARNESS_MODE",
+                                    "You must hold android.permission.ENABLE_TEST_HARNESS_MODE to"
+                                        + " enable Test Harness Mode");
                     long clearCallingIdentity = Binder.clearCallingIdentity();
                     try {
-                        KeyguardManager keyguardManager = (KeyguardManager) TestHarnessModeService.this.getContext().getSystemService(KeyguardManager.class);
+                        KeyguardManager keyguardManager =
+                                (KeyguardManager)
+                                        TestHarnessModeService.this
+                                                .getContext()
+                                                .getSystemService(KeyguardManager.class);
                         TestHarnessModeService.this.getClass();
-                        if (!keyguardManager.isDeviceSecure(TestHarnessModeService.getMainUserId())) {
+                        if (!keyguardManager.isDeviceSecure(
+                                TestHarnessModeService.getMainUserId())) {
                             return handleEnable();
                         }
-                        getErrPrintWriter().println("Test Harness Mode cannot be enabled if there is a lock screen");
+                        getErrPrintWriter()
+                                .println(
+                                        "Test Harness Mode cannot be enabled if there is a lock"
+                                            + " screen");
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                         return 2;
                     } finally {
@@ -187,14 +216,22 @@ public final class TestHarnessModeService extends SystemService {
         public final void onHelp() {
             PrintWriter outPrintWriter = getOutPrintWriter();
             outPrintWriter.println("About:");
-            outPrintWriter.println("  Test Harness Mode is a mode that the device can be placed in to prepare");
-            outPrintWriter.println("  the device for running UI tests. The device is placed into this mode by");
+            outPrintWriter.println(
+                    "  Test Harness Mode is a mode that the device can be placed in to prepare");
+            outPrintWriter.println(
+                    "  the device for running UI tests. The device is placed into this mode by");
             outPrintWriter.println("  first wiping all data from the device, preserving ADB keys.");
             outPrintWriter.println();
-            BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  By default, the following settings are configured:", "    * Package Verifier is disabled", "    * Stay Awake While Charging is enabled", "    * OTA Updates are disabled");
+            BatteryService$$ExternalSyntheticOutline0.m(
+                    outPrintWriter,
+                    "  By default, the following settings are configured:",
+                    "    * Package Verifier is disabled",
+                    "    * Stay Awake While Charging is enabled",
+                    "    * OTA Updates are disabled");
             outPrintWriter.println("    * Auto-Sync for accounts is disabled");
             outPrintWriter.println();
-            outPrintWriter.println("  Other apps may configure themselves differently in Test Harness Mode by");
+            outPrintWriter.println(
+                    "  Other apps may configure themselves differently in Test Harness Mode by");
             outPrintWriter.println("  checking ActivityManager.isRunningInUserTestHarness()");
             outPrintWriter.println();
             outPrintWriter.println("Test Harness Mode commands:");
@@ -202,9 +239,12 @@ public final class TestHarnessModeService extends SystemService {
             outPrintWriter.println("    Print this help text.");
             outPrintWriter.println();
             outPrintWriter.println("  enable|restore");
-            outPrintWriter.println("    Erase all data from this device and enable Test Harness Mode,");
-            outPrintWriter.println("    preserving the stored ADB keys currently on the device and toggling");
-            outPrintWriter.println("    settings in a way that are conducive to Instrumentation testing.");
+            outPrintWriter.println(
+                    "    Erase all data from this device and enable Test Harness Mode,");
+            outPrintWriter.println(
+                    "    preserving the stored ADB keys currently on the device and toggling");
+            outPrintWriter.println(
+                    "    settings in a way that are conducive to Instrumentation testing.");
         }
     }
 
@@ -212,15 +252,33 @@ public final class TestHarnessModeService extends SystemService {
     public TestHarnessModeService(Context context) {
         super(context);
         this.mEnableKeepMemtagMode = false;
-        this.mService = new Binder() { // from class: com.android.server.testharness.TestHarnessModeService.1
-            public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
-                TestHarnessModeService.this.new TestHarnessModeShellCommand().exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
-            }
-        };
+        this.mService =
+                new Binder() { // from class:
+                               // com.android.server.testharness.TestHarnessModeService.1
+                    public final void onShellCommand(
+                            FileDescriptor fileDescriptor,
+                            FileDescriptor fileDescriptor2,
+                            FileDescriptor fileDescriptor3,
+                            String[] strArr,
+                            ShellCallback shellCallback,
+                            ResultReceiver resultReceiver) {
+                        TestHarnessModeService.this.new TestHarnessModeShellCommand()
+                                .exec(
+                                        this,
+                                        fileDescriptor,
+                                        fileDescriptor2,
+                                        fileDescriptor3,
+                                        strArr,
+                                        shellCallback,
+                                        resultReceiver);
+                    }
+                };
     }
 
     public static int getMainUserId() {
-        int mainUserId = ((UserManagerInternal) LocalServices.getService(UserManagerInternal.class)).getMainUserId();
+        int mainUserId =
+                ((UserManagerInternal) LocalServices.getService(UserManagerInternal.class))
+                        .getMainUserId();
         if (mainUserId >= 0) {
             return mainUserId;
         }
@@ -229,12 +287,14 @@ public final class TestHarnessModeService extends SystemService {
     }
 
     public static void setUpAdbFiles(PersistentData persistentData) {
-        AdbManagerInternal adbManagerInternal = (AdbManagerInternal) LocalServices.getService(AdbManagerInternal.class);
+        AdbManagerInternal adbManagerInternal =
+                (AdbManagerInternal) LocalServices.getService(AdbManagerInternal.class);
         if (adbManagerInternal.getAdbKeysFile() != null) {
             writeBytesToFile(persistentData.mAdbKeys, adbManagerInternal.getAdbKeysFile().toPath());
         }
         if (adbManagerInternal.getAdbTempKeysFile() != null) {
-            writeBytesToFile(persistentData.mAdbTempKeys, adbManagerInternal.getAdbTempKeysFile().toPath());
+            writeBytesToFile(
+                    persistentData.mAdbTempKeys, adbManagerInternal.getAdbTempKeysFile().toPath());
         }
         adbManagerInternal.notifyKeyFilesUpdated();
     }
@@ -244,7 +304,8 @@ public final class TestHarnessModeService extends SystemService {
             OutputStream newOutputStream = Files.newOutputStream(path, new OpenOption[0]);
             newOutputStream.write(bArr);
             newOutputStream.close();
-            Set<PosixFilePermission> posixFilePermissions = Files.getPosixFilePermissions(path, new LinkOption[0]);
+            Set<PosixFilePermission> posixFilePermissions =
+                    Files.getPosixFilePermissions(path, new LinkOption[0]);
             posixFilePermissions.add(PosixFilePermission.GROUP_READ);
             Files.setPosixFilePermissions(path, posixFilePermissions);
         } catch (IOException e) {
@@ -268,21 +329,26 @@ public final class TestHarnessModeService extends SystemService {
     public final void configureUser() {
         int mainUserId = getMainUserId();
         ContentResolver.setMasterSyncAutomaticallyAsUser(false, mainUserId);
-        ((LocationManager) getContext().getSystemService(LocationManager.class)).setLocationEnabledForUser(true, UserHandle.of(mainUserId));
+        ((LocationManager) getContext().getSystemService(LocationManager.class))
+                .setLocationEnabledForUser(true, UserHandle.of(mainUserId));
     }
 
     public final PersistentDataBlockManagerInternal getPersistentDataBlock() {
         if (this.mPersistentDataBlockManagerInternal == null) {
-            Slog.d("TestHarnessModeService", "Getting PersistentDataBlockManagerInternal from LocalServices");
-            this.mPersistentDataBlockManagerInternal = (PersistentDataBlockManagerInternal) LocalServices.getService(PersistentDataBlockManagerInternal.class);
+            Slog.d(
+                    "TestHarnessModeService",
+                    "Getting PersistentDataBlockManagerInternal from LocalServices");
+            this.mPersistentDataBlockManagerInternal =
+                    (PersistentDataBlockManagerInternal)
+                            LocalServices.getService(PersistentDataBlockManagerInternal.class);
         }
         return this.mPersistentDataBlockManagerInternal;
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:28:0x0037, code lost:
-    
-        if (r0.length == 0) goto L10;
-     */
+
+       if (r0.length == 0) goto L10;
+    */
     @Override // com.android.server.SystemService
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -293,7 +359,9 @@ public final class TestHarnessModeService extends SystemService {
             Method dump skipped, instructions count: 305
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.testharness.TestHarnessModeService.onBootPhase(int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.testharness.TestHarnessModeService.onBootPhase(int):void");
     }
 
     @Override // com.android.server.SystemService

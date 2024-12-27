@@ -6,16 +6,20 @@ import android.os.Debug;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
+
 import com.samsung.android.cocktailbar.CocktailBarStateInfo;
 import com.samsung.android.cocktailbar.ICocktailBarStateCallback;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class CocktailBarStatePolicyController implements CocktailBarStatePolicy$OnCocktailBarStateListener {
+public final class CocktailBarStatePolicyController
+        implements CocktailBarStatePolicy$OnCocktailBarStateListener {
     public static final boolean DEBUG = Debug.semIsProductDev();
     public static CocktailBarStatePolicyController mInstance = null;
     public String mPackageName;
@@ -29,7 +33,8 @@ public final class CocktailBarStatePolicyController implements CocktailBarStateP
         public final IBinder token;
         public final int uid;
 
-        public CocktailBarStateListenerInfo(IBinder iBinder, ComponentName componentName, int i, int i2) {
+        public CocktailBarStateListenerInfo(
+                IBinder iBinder, ComponentName componentName, int i, int i2) {
             this.token = iBinder;
             this.component = componentName;
             this.pid = i;
@@ -44,9 +49,11 @@ public final class CocktailBarStatePolicyController implements CocktailBarStateP
                 try {
                     String str = CocktailBarStatePolicyController.this.mPackageName;
                     if (str != null && str.equals(this.component.getPackageName())) {
-                        CocktailBarStatePolicyController cocktailBarStatePolicyController = CocktailBarStatePolicyController.this;
+                        CocktailBarStatePolicyController cocktailBarStatePolicyController =
+                                CocktailBarStatePolicyController.this;
                         cocktailBarStatePolicyController.mPackageName = null;
-                        cocktailBarStatePolicyController.mPolicy.updateCocktailBarWindowType(1, null);
+                        cocktailBarStatePolicyController.mPolicy.updateCocktailBarWindowType(
+                                1, null);
                     }
                     CocktailBarStatePolicyController.this.mStateListeners.remove(this);
                 } catch (Throwable th) {
@@ -69,17 +76,23 @@ public final class CocktailBarStatePolicyController implements CocktailBarStateP
             IBinder iBinder = this.token;
             if (iBinder == null) {
                 boolean z = CocktailBarStatePolicyController.DEBUG;
-                Slog.w("CocktailBarStatePolicyController", "onCocktailBarStateChanged : token is null");
+                Slog.w(
+                        "CocktailBarStatePolicyController",
+                        "onCocktailBarStateChanged : token is null");
                 return;
             }
             try {
-                ICocktailBarStateCallback asInterface = ICocktailBarStateCallback.Stub.asInterface(iBinder);
+                ICocktailBarStateCallback asInterface =
+                        ICocktailBarStateCallback.Stub.asInterface(iBinder);
                 if (asInterface != null) {
                     asInterface.onCocktailBarStateChanged(cocktailBarStateInfo);
                 }
             } catch (RemoteException e) {
                 boolean z2 = CocktailBarStatePolicyController.DEBUG;
-                Slog.e("CocktailBarStatePolicyController", "onCocktailBarStateChanged : RemoteException : ", e);
+                Slog.e(
+                        "CocktailBarStatePolicyController",
+                        "onCocktailBarStateChanged : RemoteException : ",
+                        e);
             }
         }
     }
@@ -89,10 +102,12 @@ public final class CocktailBarStatePolicyController implements CocktailBarStateP
         synchronized (CocktailBarStatePolicyController.class) {
             try {
                 if (mInstance == null) {
-                    CocktailBarStatePolicyController cocktailBarStatePolicyController2 = new CocktailBarStatePolicyController();
+                    CocktailBarStatePolicyController cocktailBarStatePolicyController2 =
+                            new CocktailBarStatePolicyController();
                     cocktailBarStatePolicyController2.mPackageName = null;
                     cocktailBarStatePolicyController2.mStateListeners = new ArrayList();
-                    cocktailBarStatePolicyController2.mPolicy = new OverlayCocktailBarStatePolicy(cocktailBarStatePolicyController2);
+                    cocktailBarStatePolicyController2.mPolicy =
+                            new OverlayCocktailBarStatePolicy(cocktailBarStatePolicyController2);
                     mInstance = cocktailBarStatePolicyController2;
                 }
                 cocktailBarStatePolicyController = mInstance;
@@ -119,13 +134,19 @@ public final class CocktailBarStatePolicyController implements CocktailBarStateP
             }
         }
         OverlayCocktailBarStatePolicy overlayCocktailBarStatePolicy = this.mPolicy;
-        StringBuilder m = Preconditions$$ExternalSyntheticOutline0.m("[LockState : " + overlayCocktailBarStatePolicy.mLockMap.toString(), " : ");
+        StringBuilder m =
+                Preconditions$$ExternalSyntheticOutline0.m(
+                        "[LockState : " + overlayCocktailBarStatePolicy.mLockMap.toString(), " : ");
         m.append(overlayCocktailBarStatePolicy.mStateInfo.lockState);
-        StringBuilder m2 = Preconditions$$ExternalSyntheticOutline0.m(m.toString(), " Visibility : ");
+        StringBuilder m2 =
+                Preconditions$$ExternalSyntheticOutline0.m(m.toString(), " Visibility : ");
         m2.append(overlayCocktailBarStatePolicy.mStateInfo.visibility);
-        StringBuilder m3 = Preconditions$$ExternalSyntheticOutline0.m(m2.toString(), " CocktailBarWindowType : ");
+        StringBuilder m3 =
+                Preconditions$$ExternalSyntheticOutline0.m(
+                        m2.toString(), " CocktailBarWindowType : ");
         m3.append(overlayCocktailBarStatePolicy.mStateInfo.windowType);
-        StringBuilder m4 = Preconditions$$ExternalSyntheticOutline0.m(m3.toString(), " WindowType : ");
+        StringBuilder m4 =
+                Preconditions$$ExternalSyntheticOutline0.m(m3.toString(), " WindowType : ");
         m4.append(overlayCocktailBarStatePolicy.mWindowType);
         sb.append(m4.toString());
         return sb.toString();
@@ -146,23 +167,28 @@ public final class CocktailBarStatePolicyController implements CocktailBarStateP
             sb.append(" windowType = ");
             sb.append(cocktailBarStateInfo.windowType);
             sb.append(" changeFlag = ");
-            SystemServiceManager$$ExternalSyntheticOutline0.m(sb, cocktailBarStateInfo.changeFlag, "CocktailBarStatePolicyController");
+            SystemServiceManager$$ExternalSyntheticOutline0.m(
+                    sb, cocktailBarStateInfo.changeFlag, "CocktailBarStatePolicyController");
         }
         synchronized (this.mStateListeners) {
             try {
                 if (cocktailBarStateInfo.changeFlag == 128) {
                     Iterator it = this.mStateListeners.iterator();
                     while (it.hasNext()) {
-                        CocktailBarStateListenerInfo cocktailBarStateListenerInfo = (CocktailBarStateListenerInfo) it.next();
+                        CocktailBarStateListenerInfo cocktailBarStateListenerInfo =
+                                (CocktailBarStateListenerInfo) it.next();
                         String str = this.mPackageName;
-                        if (str != null && str.equals(cocktailBarStateListenerInfo.component.getPackageName())) {
-                        }
-                        cocktailBarStateListenerInfo.onCocktailBarStateChanged(cocktailBarStateInfo);
+                        if (str != null
+                                && str.equals(
+                                        cocktailBarStateListenerInfo.component.getPackageName())) {}
+                        cocktailBarStateListenerInfo.onCocktailBarStateChanged(
+                                cocktailBarStateInfo);
                     }
                 } else {
                     Iterator it2 = this.mStateListeners.iterator();
                     while (it2.hasNext()) {
-                        ((CocktailBarStateListenerInfo) it2.next()).onCocktailBarStateChanged(cocktailBarStateInfo);
+                        ((CocktailBarStateListenerInfo) it2.next())
+                                .onCocktailBarStateChanged(cocktailBarStateInfo);
                     }
                 }
             } catch (Throwable th) {

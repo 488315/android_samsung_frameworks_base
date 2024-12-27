@@ -1,7 +1,6 @@
 package android.media;
 
 import android.app.INotificationPlayerOnCompletionListener;
-import android.media.VolumeShaper;
 import android.media.tv.interactive.TvInteractiveAppService;
 import android.net.Uri;
 import android.os.Binder;
@@ -24,15 +23,28 @@ public interface IRingtonePlayer extends IInterface {
 
     ParcelFileDescriptor openRingtone(Uri uri) throws RemoteException;
 
-    void play(IBinder iBinder, Uri uri, AudioAttributes audioAttributes, float f, boolean z) throws RemoteException;
+    void play(IBinder iBinder, Uri uri, AudioAttributes audioAttributes, float f, boolean z)
+            throws RemoteException;
 
-    void playAsync(Uri uri, UserHandle userHandle, boolean z, AudioAttributes audioAttributes, float f) throws RemoteException;
+    void playAsync(
+            Uri uri, UserHandle userHandle, boolean z, AudioAttributes audioAttributes, float f)
+            throws RemoteException;
 
-    void playWithVolumeShaping(IBinder iBinder, Uri uri, AudioAttributes audioAttributes, float f, boolean z, VolumeShaper.Configuration configuration) throws RemoteException;
+    void playWithVolumeShaping(
+            IBinder iBinder,
+            Uri uri,
+            AudioAttributes audioAttributes,
+            float f,
+            boolean z,
+            VolumeShaper.Configuration configuration)
+            throws RemoteException;
 
-    IBinder setOnCompletionListener(INotificationPlayerOnCompletionListener iNotificationPlayerOnCompletionListener) throws RemoteException;
+    IBinder setOnCompletionListener(
+            INotificationPlayerOnCompletionListener iNotificationPlayerOnCompletionListener)
+            throws RemoteException;
 
-    void setPlaybackProperties(IBinder iBinder, float f, boolean z, boolean z2) throws RemoteException;
+    void setPlaybackProperties(IBinder iBinder, float f, boolean z, boolean z2)
+            throws RemoteException;
 
     void stop(IBinder iBinder) throws RemoteException;
 
@@ -40,16 +52,21 @@ public interface IRingtonePlayer extends IInterface {
 
     public static class Default implements IRingtonePlayer {
         @Override // android.media.IRingtonePlayer
-        public void play(IBinder token, Uri uri, AudioAttributes aa, float volume, boolean looping) throws RemoteException {
-        }
+        public void play(IBinder token, Uri uri, AudioAttributes aa, float volume, boolean looping)
+                throws RemoteException {}
 
         @Override // android.media.IRingtonePlayer
-        public void playWithVolumeShaping(IBinder token, Uri uri, AudioAttributes aa, float volume, boolean looping, VolumeShaper.Configuration volumeShaperConfig) throws RemoteException {
-        }
+        public void playWithVolumeShaping(
+                IBinder token,
+                Uri uri,
+                AudioAttributes aa,
+                float volume,
+                boolean looping,
+                VolumeShaper.Configuration volumeShaperConfig)
+                throws RemoteException {}
 
         @Override // android.media.IRingtonePlayer
-        public void stop(IBinder token) throws RemoteException {
-        }
+        public void stop(IBinder token) throws RemoteException {}
 
         @Override // android.media.IRingtonePlayer
         public boolean isPlaying(IBinder token) throws RemoteException {
@@ -57,16 +74,17 @@ public interface IRingtonePlayer extends IInterface {
         }
 
         @Override // android.media.IRingtonePlayer
-        public void setPlaybackProperties(IBinder token, float volume, boolean looping, boolean hapticGeneratorEnabled) throws RemoteException {
-        }
+        public void setPlaybackProperties(
+                IBinder token, float volume, boolean looping, boolean hapticGeneratorEnabled)
+                throws RemoteException {}
 
         @Override // android.media.IRingtonePlayer
-        public void playAsync(Uri uri, UserHandle user, boolean looping, AudioAttributes aa, float volume) throws RemoteException {
-        }
+        public void playAsync(
+                Uri uri, UserHandle user, boolean looping, AudioAttributes aa, float volume)
+                throws RemoteException {}
 
         @Override // android.media.IRingtonePlayer
-        public void stopAsync() throws RemoteException {
-        }
+        public void stopAsync() throws RemoteException {}
 
         @Override // android.media.IRingtonePlayer
         public String getTitle(Uri uri) throws RemoteException {
@@ -79,15 +97,15 @@ public interface IRingtonePlayer extends IInterface {
         }
 
         @Override // android.media.IRingtonePlayer
-        public void fadeinRingtone(IBinder token) throws RemoteException {
-        }
+        public void fadeinRingtone(IBinder token) throws RemoteException {}
 
         @Override // android.media.IRingtonePlayer
-        public void fadeoutRingtone(IBinder token, int delay, float minVolume) throws RemoteException {
-        }
+        public void fadeoutRingtone(IBinder token, int delay, float minVolume)
+                throws RemoteException {}
 
         @Override // android.media.IRingtonePlayer
-        public IBinder setOnCompletionListener(INotificationPlayerOnCompletionListener l) throws RemoteException {
+        public IBinder setOnCompletionListener(INotificationPlayerOnCompletionListener l)
+                throws RemoteException {
             return null;
         }
 
@@ -97,7 +115,7 @@ public interface IRingtonePlayer extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRingtonePlayer {
+    public abstract static class Stub extends Binder implements IRingtonePlayer {
         public static final String DESCRIPTOR = "android.media.IRingtonePlayer";
         static final int TRANSACTION_fadeinRingtone = 10;
         static final int TRANSACTION_fadeoutRingtone = 11;
@@ -169,7 +187,8 @@ public interface IRingtonePlayer extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -181,7 +200,8 @@ public interface IRingtonePlayer extends IInterface {
                 case 1:
                     IBinder _arg0 = data.readStrongBinder();
                     Uri _arg1 = (Uri) data.readTypedObject(Uri.CREATOR);
-                    AudioAttributes _arg2 = (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
+                    AudioAttributes _arg2 =
+                            (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
                     float _arg3 = data.readFloat();
                     boolean _arg4 = data.readBoolean();
                     data.enforceNoDataAvail();
@@ -190,10 +210,13 @@ public interface IRingtonePlayer extends IInterface {
                 case 2:
                     IBinder _arg02 = data.readStrongBinder();
                     Uri _arg12 = (Uri) data.readTypedObject(Uri.CREATOR);
-                    AudioAttributes _arg22 = (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
+                    AudioAttributes _arg22 =
+                            (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
                     float _arg32 = data.readFloat();
                     boolean _arg42 = data.readBoolean();
-                    VolumeShaper.Configuration _arg5 = (VolumeShaper.Configuration) data.readTypedObject(VolumeShaper.Configuration.CREATOR);
+                    VolumeShaper.Configuration _arg5 =
+                            (VolumeShaper.Configuration)
+                                    data.readTypedObject(VolumeShaper.Configuration.CREATOR);
                     data.enforceNoDataAvail();
                     playWithVolumeShaping(_arg02, _arg12, _arg22, _arg32, _arg42, _arg5);
                     return true;
@@ -221,7 +244,8 @@ public interface IRingtonePlayer extends IInterface {
                     Uri _arg06 = (Uri) data.readTypedObject(Uri.CREATOR);
                     UserHandle _arg14 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     boolean _arg24 = data.readBoolean();
-                    AudioAttributes _arg34 = (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
+                    AudioAttributes _arg34 =
+                            (AudioAttributes) data.readTypedObject(AudioAttributes.CREATOR);
                     float _arg43 = data.readFloat();
                     data.enforceNoDataAvail();
                     playAsync(_arg06, _arg14, _arg24, _arg34, _arg43);
@@ -256,7 +280,9 @@ public interface IRingtonePlayer extends IInterface {
                     fadeoutRingtone(_arg010, _arg15, _arg25);
                     return true;
                 case 12:
-                    INotificationPlayerOnCompletionListener _arg011 = INotificationPlayerOnCompletionListener.Stub.asInterface(data.readStrongBinder());
+                    INotificationPlayerOnCompletionListener _arg011 =
+                            INotificationPlayerOnCompletionListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     IBinder _result4 = setOnCompletionListener(_arg011);
                     reply.writeNoException();
@@ -284,7 +310,9 @@ public interface IRingtonePlayer extends IInterface {
             }
 
             @Override // android.media.IRingtonePlayer
-            public void play(IBinder token, Uri uri, AudioAttributes aa, float volume, boolean looping) throws RemoteException {
+            public void play(
+                    IBinder token, Uri uri, AudioAttributes aa, float volume, boolean looping)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -300,7 +328,14 @@ public interface IRingtonePlayer extends IInterface {
             }
 
             @Override // android.media.IRingtonePlayer
-            public void playWithVolumeShaping(IBinder token, Uri uri, AudioAttributes aa, float volume, boolean looping, VolumeShaper.Configuration volumeShaperConfig) throws RemoteException {
+            public void playWithVolumeShaping(
+                    IBinder token,
+                    Uri uri,
+                    AudioAttributes aa,
+                    float volume,
+                    boolean looping,
+                    VolumeShaper.Configuration volumeShaperConfig)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -346,7 +381,9 @@ public interface IRingtonePlayer extends IInterface {
             }
 
             @Override // android.media.IRingtonePlayer
-            public void setPlaybackProperties(IBinder token, float volume, boolean looping, boolean hapticGeneratorEnabled) throws RemoteException {
+            public void setPlaybackProperties(
+                    IBinder token, float volume, boolean looping, boolean hapticGeneratorEnabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -361,7 +398,9 @@ public interface IRingtonePlayer extends IInterface {
             }
 
             @Override // android.media.IRingtonePlayer
-            public void playAsync(Uri uri, UserHandle user, boolean looping, AudioAttributes aa, float volume) throws RemoteException {
+            public void playAsync(
+                    Uri uri, UserHandle user, boolean looping, AudioAttributes aa, float volume)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -413,7 +452,9 @@ public interface IRingtonePlayer extends IInterface {
                     _data.writeTypedObject(uri, 0);
                     this.mRemote.transact(9, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -434,7 +475,8 @@ public interface IRingtonePlayer extends IInterface {
             }
 
             @Override // android.media.IRingtonePlayer
-            public void fadeoutRingtone(IBinder token, int delay, float minVolume) throws RemoteException {
+            public void fadeoutRingtone(IBinder token, int delay, float minVolume)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -448,7 +490,8 @@ public interface IRingtonePlayer extends IInterface {
             }
 
             @Override // android.media.IRingtonePlayer
-            public IBinder setOnCompletionListener(INotificationPlayerOnCompletionListener l) throws RemoteException {
+            public IBinder setOnCompletionListener(INotificationPlayerOnCompletionListener l)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

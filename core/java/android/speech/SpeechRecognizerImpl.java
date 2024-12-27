@@ -12,14 +12,9 @@ import android.os.Message;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.provider.Settings;
-import android.speech.IModelDownloadListener;
-import android.speech.IRecognitionListener;
-import android.speech.IRecognitionServiceManager;
-import android.speech.IRecognitionServiceManagerCallback;
-import android.speech.IRecognitionSupportCallback;
-import android.speech.SpeechRecognizerImpl;
 import android.text.TextUtils;
 import android.util.Log;
+
 import java.util.Objects;
 import java.util.Queue;
 import java.util.concurrent.Executor;
@@ -55,40 +50,53 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
         this(context, null, onDevice);
     }
 
-    private SpeechRecognizerImpl(Context context, ComponentName serviceComponent, boolean onDevice) {
-        this.mHandler = new Handler(Looper.getMainLooper()) { // from class: android.speech.SpeechRecognizerImpl.1
-            @Override // android.os.Handler
-            public void handleMessage(Message msg) {
-                switch (msg.what) {
-                    case 1:
-                        SpeechRecognizerImpl.this.handleStartListening((Intent) msg.obj);
-                        break;
-                    case 2:
-                        SpeechRecognizerImpl.this.handleStopMessage();
-                        break;
-                    case 3:
-                        SpeechRecognizerImpl.this.handleCancelMessage();
-                        break;
-                    case 4:
-                        SpeechRecognizerImpl.this.handleChangeListener((RecognitionListener) msg.obj);
-                        break;
-                    case 5:
-                        SpeechRecognizerImpl.this.handleSetTemporaryComponent((ComponentName) msg.obj);
-                        break;
-                    case 6:
-                        CheckRecognitionSupportArgs args = (CheckRecognitionSupportArgs) msg.obj;
-                        SpeechRecognizerImpl.this.handleCheckRecognitionSupport(args.mIntent, args.mCallbackExecutor, args.mCallback);
-                        break;
-                    case 7:
-                        ModelDownloadListenerArgs modelDownloadListenerArgs = (ModelDownloadListenerArgs) msg.obj;
-                        SpeechRecognizerImpl.this.handleTriggerModelDownload(modelDownloadListenerArgs.mIntent, modelDownloadListenerArgs.mExecutor, modelDownloadListenerArgs.mModelDownloadListener);
-                        break;
-                    case 8:
-                        SpeechRecognizerImpl.this.handleDestroy();
-                        break;
-                }
-            }
-        };
+    private SpeechRecognizerImpl(
+            Context context, ComponentName serviceComponent, boolean onDevice) {
+        this.mHandler =
+                new Handler(
+                        Looper
+                                .getMainLooper()) { // from class:
+                                                    // android.speech.SpeechRecognizerImpl.1
+                    @Override // android.os.Handler
+                    public void handleMessage(Message msg) {
+                        switch (msg.what) {
+                            case 1:
+                                SpeechRecognizerImpl.this.handleStartListening((Intent) msg.obj);
+                                break;
+                            case 2:
+                                SpeechRecognizerImpl.this.handleStopMessage();
+                                break;
+                            case 3:
+                                SpeechRecognizerImpl.this.handleCancelMessage();
+                                break;
+                            case 4:
+                                SpeechRecognizerImpl.this.handleChangeListener(
+                                        (RecognitionListener) msg.obj);
+                                break;
+                            case 5:
+                                SpeechRecognizerImpl.this.handleSetTemporaryComponent(
+                                        (ComponentName) msg.obj);
+                                break;
+                            case 6:
+                                CheckRecognitionSupportArgs args =
+                                        (CheckRecognitionSupportArgs) msg.obj;
+                                SpeechRecognizerImpl.this.handleCheckRecognitionSupport(
+                                        args.mIntent, args.mCallbackExecutor, args.mCallback);
+                                break;
+                            case 7:
+                                ModelDownloadListenerArgs modelDownloadListenerArgs =
+                                        (ModelDownloadListenerArgs) msg.obj;
+                                SpeechRecognizerImpl.this.handleTriggerModelDownload(
+                                        modelDownloadListenerArgs.mIntent,
+                                        modelDownloadListenerArgs.mExecutor,
+                                        modelDownloadListenerArgs.mModelDownloadListener);
+                                break;
+                            case 8:
+                                SpeechRecognizerImpl.this.handleDestroy();
+                                break;
+                        }
+                    }
+                };
         this.mPendingTasks = new LinkedBlockingQueue();
         this.mListener = new InternalRecognitionListener();
         this.mClientToken = new Binder();
@@ -140,13 +148,21 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
     }
 
     @Override // android.speech.SpeechRecognizer
-    public void checkRecognitionSupport(Intent recognizerIntent, Executor executor, RecognitionSupportCallback supportListener) {
+    public void checkRecognitionSupport(
+            Intent recognizerIntent,
+            Executor executor,
+            RecognitionSupportCallback supportListener) {
         Objects.requireNonNull(recognizerIntent, "intent must not be null");
         Objects.requireNonNull(supportListener, "listener must not be null");
         if (this.mService == null) {
             connectToSystemService();
         }
-        putMessage(Message.obtain(this.mHandler, 6, new CheckRecognitionSupportArgs(recognizerIntent, executor, supportListener)));
+        putMessage(
+                Message.obtain(
+                        this.mHandler,
+                        6,
+                        new CheckRecognitionSupportArgs(
+                                recognizerIntent, executor, supportListener)));
     }
 
     @Override // android.speech.SpeechRecognizer
@@ -155,16 +171,25 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
         if (this.mService == null) {
             connectToSystemService();
         }
-        putMessage(Message.obtain(this.mHandler, 7, new ModelDownloadListenerArgs(intent, null, 0 == true ? 1 : 0)));
+        putMessage(
+                Message.obtain(
+                        this.mHandler,
+                        7,
+                        new ModelDownloadListenerArgs(intent, null, 0 == true ? 1 : 0)));
     }
 
     @Override // android.speech.SpeechRecognizer
-    public void triggerModelDownload(Intent recognizerIntent, Executor executor, ModelDownloadListener listener) {
+    public void triggerModelDownload(
+            Intent recognizerIntent, Executor executor, ModelDownloadListener listener) {
         Objects.requireNonNull(recognizerIntent, "intent must not be null");
         if (this.mService == null) {
             connectToSystemService();
         }
-        putMessage(Message.obtain(this.mHandler, 7, new ModelDownloadListenerArgs(recognizerIntent, executor, listener)));
+        putMessage(
+                Message.obtain(
+                        this.mHandler,
+                        7,
+                        new ModelDownloadListenerArgs(recognizerIntent, executor, listener)));
     }
 
     @Override // android.speech.SpeechRecognizer
@@ -174,7 +199,8 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
 
     static void checkIsCalledFromMainThread() {
         if (Looper.myLooper() != Looper.getMainLooper()) {
-            throw new RuntimeException("SpeechRecognizer should be used only from the application's main thread");
+            throw new RuntimeException(
+                    "SpeechRecognizer should be used only from the application's main thread");
         }
     }
 
@@ -192,7 +218,8 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
             return;
         }
         try {
-            this.mService.startListening(recognizerIntent, this.mListener, this.mContext.getAttributionSource());
+            this.mService.startListening(
+                    recognizerIntent, this.mListener, this.mContext.getAttributionSource());
         } catch (Exception e) {
             Log.e(TAG, "startListening() failed", e);
             this.mListener.onError(5);
@@ -238,31 +265,43 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void handleCheckRecognitionSupport(Intent recognizerIntent, Executor callbackExecutor, final RecognitionSupportCallback recognitionSupportCallback) {
+    public void handleCheckRecognitionSupport(
+            Intent recognizerIntent,
+            Executor callbackExecutor,
+            final RecognitionSupportCallback recognitionSupportCallback) {
         if (!maybeInitializeManagerService() || !checkOpenConnection()) {
             return;
         }
         try {
-            this.mService.checkRecognitionSupport(recognizerIntent, this.mContext.getAttributionSource(), new InternalSupportCallback(callbackExecutor, recognitionSupportCallback));
+            this.mService.checkRecognitionSupport(
+                    recognizerIntent,
+                    this.mContext.getAttributionSource(),
+                    new InternalSupportCallback(callbackExecutor, recognitionSupportCallback));
         } catch (Exception e) {
             Log.e(TAG, "checkRecognitionSupport() failed", e);
-            callbackExecutor.execute(new Runnable() { // from class: android.speech.SpeechRecognizerImpl$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    RecognitionSupportCallback.this.onError(5);
-                }
-            });
+            callbackExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.speech.SpeechRecognizerImpl$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            RecognitionSupportCallback.this.onError(5);
+                        }
+                    });
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void handleTriggerModelDownload(Intent recognizerIntent, Executor callbackExecutor, final ModelDownloadListener modelDownloadListener) {
+    public void handleTriggerModelDownload(
+            Intent recognizerIntent,
+            Executor callbackExecutor,
+            final ModelDownloadListener modelDownloadListener) {
         if (!maybeInitializeManagerService() || !checkOpenConnection()) {
             return;
         }
         if (modelDownloadListener == null) {
             try {
-                this.mService.triggerModelDownload(recognizerIntent, this.mContext.getAttributionSource(), null);
+                this.mService.triggerModelDownload(
+                        recognizerIntent, this.mContext.getAttributionSource(), null);
                 return;
             } catch (Exception e) {
                 Log.e(TAG, "triggerModelDownload() without a listener failed", e);
@@ -271,15 +310,20 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
             }
         }
         try {
-            this.mService.triggerModelDownload(recognizerIntent, this.mContext.getAttributionSource(), new InternalModelDownloadListener(callbackExecutor, modelDownloadListener));
+            this.mService.triggerModelDownload(
+                    recognizerIntent,
+                    this.mContext.getAttributionSource(),
+                    new InternalModelDownloadListener(callbackExecutor, modelDownloadListener));
         } catch (Exception e2) {
             Log.e(TAG, "triggerModelDownload() with a listener failed", e2);
-            callbackExecutor.execute(new Runnable() { // from class: android.speech.SpeechRecognizerImpl$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ModelDownloadListener.this.onError(5);
-                }
-            });
+            callbackExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.speech.SpeechRecognizerImpl$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ModelDownloadListener.this.onError(5);
+                        }
+                    });
         }
     }
 
@@ -325,21 +369,30 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
             return;
         }
         try {
-            this.mManagerService.createSession(componentName, this.mClientToken, this.mOnDevice, new IRecognitionServiceManagerCallback.Stub() { // from class: android.speech.SpeechRecognizerImpl.2
-                @Override // android.speech.IRecognitionServiceManagerCallback
-                public void onSuccess(IRecognitionService service) throws RemoteException {
-                    SpeechRecognizerImpl.this.mService = service;
-                    while (!SpeechRecognizerImpl.this.mPendingTasks.isEmpty()) {
-                        SpeechRecognizerImpl.this.mHandler.sendMessage((Message) SpeechRecognizerImpl.this.mPendingTasks.poll());
-                    }
-                }
+            this.mManagerService.createSession(
+                    componentName,
+                    this.mClientToken,
+                    this.mOnDevice,
+                    new IRecognitionServiceManagerCallback
+                            .Stub() { // from class: android.speech.SpeechRecognizerImpl.2
+                        @Override // android.speech.IRecognitionServiceManagerCallback
+                        public void onSuccess(IRecognitionService service) throws RemoteException {
+                            SpeechRecognizerImpl.this.mService = service;
+                            while (!SpeechRecognizerImpl.this.mPendingTasks.isEmpty()) {
+                                SpeechRecognizerImpl.this.mHandler.sendMessage(
+                                        (Message) SpeechRecognizerImpl.this.mPendingTasks.poll());
+                            }
+                        }
 
-                @Override // android.speech.IRecognitionServiceManagerCallback
-                public void onError(int errorCode) throws RemoteException {
-                    Log.e(SpeechRecognizerImpl.TAG, "Bind to system recognition service failed with error " + errorCode);
-                    SpeechRecognizerImpl.this.mListener.onError(errorCode);
-                }
-            });
+                        @Override // android.speech.IRecognitionServiceManagerCallback
+                        public void onError(int errorCode) throws RemoteException {
+                            Log.e(
+                                    SpeechRecognizerImpl.TAG,
+                                    "Bind to system recognition service failed with error "
+                                            + errorCode);
+                            SpeechRecognizerImpl.this.mListener.onError(errorCode);
+                        }
+                    });
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
@@ -370,7 +423,10 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
         if (this.mServiceComponent != null) {
             return this.mServiceComponent;
         }
-        String serviceComponent = Settings.Secure.getString(this.mContext.getContentResolver(), Settings.Secure.VOICE_RECOGNITION_SERVICE);
+        String serviceComponent =
+                Settings.Secure.getString(
+                        this.mContext.getContentResolver(),
+                        Settings.Secure.VOICE_RECOGNITION_SERVICE);
         if (TextUtils.isEmpty(serviceComponent)) {
             Log.e(TAG, "no selected voice recognition service");
             this.mListener.onError(5);
@@ -384,7 +440,8 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
         final Executor mCallbackExecutor;
         final Intent mIntent;
 
-        private CheckRecognitionSupportArgs(Intent intent, Executor callbackExecutor, RecognitionSupportCallback callback) {
+        private CheckRecognitionSupportArgs(
+                Intent intent, Executor callbackExecutor, RecognitionSupportCallback callback) {
             this.mIntent = intent;
             this.mCallbackExecutor = callbackExecutor;
             this.mCallback = callback;
@@ -396,7 +453,8 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
         final Intent mIntent;
         final ModelDownloadListener mModelDownloadListener;
 
-        private ModelDownloadListenerArgs(Intent intent, Executor executor, ModelDownloadListener modelDownloadListener) {
+        private ModelDownloadListenerArgs(
+                Intent intent, Executor executor, ModelDownloadListener modelDownloadListener) {
             this.mIntent = intent;
             this.mExecutor = executor;
             this.mModelDownloadListener = modelDownloadListener;
@@ -420,51 +478,66 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
         private RecognitionListener mInternalListener;
 
         private InternalRecognitionListener() {
-            this.mInternalHandler = new Handler(Looper.getMainLooper()) { // from class: android.speech.SpeechRecognizerImpl.InternalRecognitionListener.1
-                @Override // android.os.Handler
-                public void handleMessage(Message msg) {
-                    if (InternalRecognitionListener.this.mInternalListener == null) {
-                    }
-                    switch (msg.what) {
-                        case 1:
-                            InternalRecognitionListener.this.mInternalListener.onBeginningOfSpeech();
-                            break;
-                        case 2:
-                            InternalRecognitionListener.this.mInternalListener.onBufferReceived((byte[]) msg.obj);
-                            break;
-                        case 3:
-                            InternalRecognitionListener.this.mInternalListener.onEndOfSpeech();
-                            break;
-                        case 4:
-                            InternalRecognitionListener.this.mInternalListener.onError(((Integer) msg.obj).intValue());
-                            break;
-                        case 5:
-                            InternalRecognitionListener.this.mInternalListener.onReadyForSpeech((Bundle) msg.obj);
-                            break;
-                        case 6:
-                            InternalRecognitionListener.this.mInternalListener.onResults((Bundle) msg.obj);
-                            break;
-                        case 7:
-                            InternalRecognitionListener.this.mInternalListener.onPartialResults((Bundle) msg.obj);
-                            break;
-                        case 8:
-                            InternalRecognitionListener.this.mInternalListener.onRmsChanged(((Float) msg.obj).floatValue());
-                            break;
-                        case 9:
-                            InternalRecognitionListener.this.mInternalListener.onEvent(msg.arg1, (Bundle) msg.obj);
-                            break;
-                        case 10:
-                            InternalRecognitionListener.this.mInternalListener.onSegmentResults((Bundle) msg.obj);
-                            break;
-                        case 11:
-                            InternalRecognitionListener.this.mInternalListener.onEndOfSegmentedSession();
-                            break;
-                        case 12:
-                            InternalRecognitionListener.this.mInternalListener.onLanguageDetection((Bundle) msg.obj);
-                            break;
-                    }
-                }
-            };
+            this.mInternalHandler =
+                    new Handler(
+                            Looper
+                                    .getMainLooper()) { // from class:
+                                                        // android.speech.SpeechRecognizerImpl.InternalRecognitionListener.1
+                        @Override // android.os.Handler
+                        public void handleMessage(Message msg) {
+                            if (InternalRecognitionListener.this.mInternalListener == null) {}
+                            switch (msg.what) {
+                                case 1:
+                                    InternalRecognitionListener.this.mInternalListener
+                                            .onBeginningOfSpeech();
+                                    break;
+                                case 2:
+                                    InternalRecognitionListener.this.mInternalListener
+                                            .onBufferReceived((byte[]) msg.obj);
+                                    break;
+                                case 3:
+                                    InternalRecognitionListener.this.mInternalListener
+                                            .onEndOfSpeech();
+                                    break;
+                                case 4:
+                                    InternalRecognitionListener.this.mInternalListener.onError(
+                                            ((Integer) msg.obj).intValue());
+                                    break;
+                                case 5:
+                                    InternalRecognitionListener.this.mInternalListener
+                                            .onReadyForSpeech((Bundle) msg.obj);
+                                    break;
+                                case 6:
+                                    InternalRecognitionListener.this.mInternalListener.onResults(
+                                            (Bundle) msg.obj);
+                                    break;
+                                case 7:
+                                    InternalRecognitionListener.this.mInternalListener
+                                            .onPartialResults((Bundle) msg.obj);
+                                    break;
+                                case 8:
+                                    InternalRecognitionListener.this.mInternalListener.onRmsChanged(
+                                            ((Float) msg.obj).floatValue());
+                                    break;
+                                case 9:
+                                    InternalRecognitionListener.this.mInternalListener.onEvent(
+                                            msg.arg1, (Bundle) msg.obj);
+                                    break;
+                                case 10:
+                                    InternalRecognitionListener.this.mInternalListener
+                                            .onSegmentResults((Bundle) msg.obj);
+                                    break;
+                                case 11:
+                                    InternalRecognitionListener.this.mInternalListener
+                                            .onEndOfSegmentedSession();
+                                    break;
+                                case 12:
+                                    InternalRecognitionListener.this.mInternalListener
+                                            .onLanguageDetection((Bundle) msg.obj);
+                                    break;
+                            }
+                        }
+                    };
         }
 
         @Override // android.speech.IRecognitionListener
@@ -539,18 +612,23 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onSupportResult$0(RecognitionSupport recognitionSupport) {
+        public /* synthetic */ void lambda$onSupportResult$0(
+                RecognitionSupport recognitionSupport) {
             this.mCallback.onSupportResult(recognitionSupport);
         }
 
         @Override // android.speech.IRecognitionSupportCallback
-        public void onSupportResult(final RecognitionSupport recognitionSupport) throws RemoteException {
-            this.mExecutor.execute(new Runnable() { // from class: android.speech.SpeechRecognizerImpl$InternalSupportCallback$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SpeechRecognizerImpl.InternalSupportCallback.this.lambda$onSupportResult$0(recognitionSupport);
-                }
-            });
+        public void onSupportResult(final RecognitionSupport recognitionSupport)
+                throws RemoteException {
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.speech.SpeechRecognizerImpl$InternalSupportCallback$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SpeechRecognizerImpl.InternalSupportCallback.this
+                                    .lambda$onSupportResult$0(recognitionSupport);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -560,12 +638,15 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
 
         @Override // android.speech.IRecognitionSupportCallback
         public void onError(final int errorCode) throws RemoteException {
-            this.mExecutor.execute(new Runnable() { // from class: android.speech.SpeechRecognizerImpl$InternalSupportCallback$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SpeechRecognizerImpl.InternalSupportCallback.this.lambda$onError$1(errorCode);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.speech.SpeechRecognizerImpl$InternalSupportCallback$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SpeechRecognizerImpl.InternalSupportCallback.this.lambda$onError$1(
+                                    errorCode);
+                        }
+                    });
         }
     }
 
@@ -574,7 +655,8 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
         private final Executor mExecutor;
         private final ModelDownloadListener mModelDownloadListener;
 
-        private InternalModelDownloadListener(Executor executor, ModelDownloadListener modelDownloadListener) {
+        private InternalModelDownloadListener(
+                Executor executor, ModelDownloadListener modelDownloadListener) {
             this.mExecutor = executor;
             this.mModelDownloadListener = modelDownloadListener;
         }
@@ -586,12 +668,15 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
 
         @Override // android.speech.IModelDownloadListener
         public void onProgress(final int completedPercent) throws RemoteException {
-            this.mExecutor.execute(new Runnable() { // from class: android.speech.SpeechRecognizerImpl$InternalModelDownloadListener$$ExternalSyntheticLambda2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SpeechRecognizerImpl.InternalModelDownloadListener.this.lambda$onProgress$0(completedPercent);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.speech.SpeechRecognizerImpl$InternalModelDownloadListener$$ExternalSyntheticLambda2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SpeechRecognizerImpl.InternalModelDownloadListener.this
+                                    .lambda$onProgress$0(completedPercent);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -601,12 +686,15 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
 
         @Override // android.speech.IModelDownloadListener
         public void onSuccess() throws RemoteException {
-            this.mExecutor.execute(new Runnable() { // from class: android.speech.SpeechRecognizerImpl$InternalModelDownloadListener$$ExternalSyntheticLambda3
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SpeechRecognizerImpl.InternalModelDownloadListener.this.lambda$onSuccess$1();
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.speech.SpeechRecognizerImpl$InternalModelDownloadListener$$ExternalSyntheticLambda3
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SpeechRecognizerImpl.InternalModelDownloadListener.this
+                                    .lambda$onSuccess$1();
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -616,12 +704,15 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
 
         @Override // android.speech.IModelDownloadListener
         public void onScheduled() throws RemoteException {
-            this.mExecutor.execute(new Runnable() { // from class: android.speech.SpeechRecognizerImpl$InternalModelDownloadListener$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SpeechRecognizerImpl.InternalModelDownloadListener.this.lambda$onScheduled$2();
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.speech.SpeechRecognizerImpl$InternalModelDownloadListener$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SpeechRecognizerImpl.InternalModelDownloadListener.this
+                                    .lambda$onScheduled$2();
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -631,12 +722,15 @@ class SpeechRecognizerImpl extends SpeechRecognizer {
 
         @Override // android.speech.IModelDownloadListener
         public void onError(final int error) throws RemoteException {
-            this.mExecutor.execute(new Runnable() { // from class: android.speech.SpeechRecognizerImpl$InternalModelDownloadListener$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SpeechRecognizerImpl.InternalModelDownloadListener.this.lambda$onError$3(error);
-                }
-            });
+            this.mExecutor.execute(
+                    new Runnable() { // from class:
+                                     // android.speech.SpeechRecognizerImpl$InternalModelDownloadListener$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            SpeechRecognizerImpl.InternalModelDownloadListener.this
+                                    .lambda$onError$3(error);
+                        }
+                    });
         }
     }
 }

@@ -32,26 +32,30 @@ public final class NSConnectionHelper {
         }
     }
 
-    public final void onStateUpdated(final LocationConstants.STATE_TYPE state_type, final Bundle bundle) {
+    public final void onStateUpdated(
+            final LocationConstants.STATE_TYPE state_type, final Bundle bundle) {
         Handler handler;
         if (this.mHasNsflpFeature && (handler = this.mHandler) != null) {
-            handler.post(new Runnable() { // from class: com.android.server.location.nsflp.NSConnectionHelper$$ExternalSyntheticLambda4
-                @Override // java.lang.Runnable
-                public final void run() {
-                    NSConnectionHelper nSConnectionHelper = NSConnectionHelper.this;
-                    LocationConstants.STATE_TYPE state_type2 = state_type;
-                    Bundle bundle2 = bundle;
-                    nSConnectionHelper.getClass();
-                    try {
-                        INSLocationManager iNSLocationManager = nSConnectionHelper.mMonitorService;
-                        if (iNSLocationManager != null) {
-                            iNSLocationManager.onStateUpdated(state_type2, bundle2);
+            handler.post(
+                    new Runnable() { // from class:
+                                     // com.android.server.location.nsflp.NSConnectionHelper$$ExternalSyntheticLambda4
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            NSConnectionHelper nSConnectionHelper = NSConnectionHelper.this;
+                            LocationConstants.STATE_TYPE state_type2 = state_type;
+                            Bundle bundle2 = bundle;
+                            nSConnectionHelper.getClass();
+                            try {
+                                INSLocationManager iNSLocationManager =
+                                        nSConnectionHelper.mMonitorService;
+                                if (iNSLocationManager != null) {
+                                    iNSLocationManager.onStateUpdated(state_type2, bundle2);
+                                }
+                            } catch (Exception e) {
+                                Log.e("NSConnectionHelper", e.toString());
+                            }
                         }
-                    } catch (Exception e) {
-                        Log.e("NSConnectionHelper", e.toString());
-                    }
-                }
-            });
+                    });
         }
     }
 }

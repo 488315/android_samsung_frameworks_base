@@ -24,32 +24,28 @@ public interface ITextToSpeechCallback extends IInterface {
 
     public static class Default implements ITextToSpeechCallback {
         @Override // android.speech.tts.ITextToSpeechCallback
-        public void onStart(String utteranceId) throws RemoteException {
-        }
+        public void onStart(String utteranceId) throws RemoteException {}
 
         @Override // android.speech.tts.ITextToSpeechCallback
-        public void onSuccess(String utteranceId) throws RemoteException {
-        }
+        public void onSuccess(String utteranceId) throws RemoteException {}
 
         @Override // android.speech.tts.ITextToSpeechCallback
-        public void onStop(String utteranceId, boolean isStarted) throws RemoteException {
-        }
+        public void onStop(String utteranceId, boolean isStarted) throws RemoteException {}
 
         @Override // android.speech.tts.ITextToSpeechCallback
-        public void onError(String utteranceId, int errorCode) throws RemoteException {
-        }
+        public void onError(String utteranceId, int errorCode) throws RemoteException {}
 
         @Override // android.speech.tts.ITextToSpeechCallback
-        public void onBeginSynthesis(String utteranceId, int sampleRateInHz, int audioFormat, int channelCount) throws RemoteException {
-        }
+        public void onBeginSynthesis(
+                String utteranceId, int sampleRateInHz, int audioFormat, int channelCount)
+                throws RemoteException {}
 
         @Override // android.speech.tts.ITextToSpeechCallback
-        public void onAudioAvailable(String utteranceId, byte[] audio) throws RemoteException {
-        }
+        public void onAudioAvailable(String utteranceId, byte[] audio) throws RemoteException {}
 
         @Override // android.speech.tts.ITextToSpeechCallback
-        public void onRangeStart(String utteranceId, int start, int end, int frame) throws RemoteException {
-        }
+        public void onRangeStart(String utteranceId, int start, int end, int frame)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -57,7 +53,7 @@ public interface ITextToSpeechCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITextToSpeechCallback {
+    public abstract static class Stub extends Binder implements ITextToSpeechCallback {
         public static final String DESCRIPTOR = "android.speech.tts.ITextToSpeechCallback";
         static final int TRANSACTION_onAudioAvailable = 6;
         static final int TRANSACTION_onBeginSynthesis = 5;
@@ -114,7 +110,8 @@ public interface ITextToSpeechCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -239,7 +236,9 @@ public interface ITextToSpeechCallback extends IInterface {
             }
 
             @Override // android.speech.tts.ITextToSpeechCallback
-            public void onBeginSynthesis(String utteranceId, int sampleRateInHz, int audioFormat, int channelCount) throws RemoteException {
+            public void onBeginSynthesis(
+                    String utteranceId, int sampleRateInHz, int audioFormat, int channelCount)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -267,7 +266,8 @@ public interface ITextToSpeechCallback extends IInterface {
             }
 
             @Override // android.speech.tts.ITextToSpeechCallback
-            public void onRangeStart(String utteranceId, int start, int end, int frame) throws RemoteException {
+            public void onRangeStart(String utteranceId, int start, int end, int frame)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

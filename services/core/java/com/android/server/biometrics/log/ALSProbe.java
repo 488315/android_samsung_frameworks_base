@@ -6,7 +6,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Handler;
 import android.util.Slog;
-import com.android.server.biometrics.log.ALSProbe;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -25,16 +25,16 @@ public final class ALSProbe {
     public boolean mDisableRequested = false;
     public NextConsumer mNextConsumer = null;
     public volatile float mLastAmbientLux = -1.0f;
-    public final AnonymousClass1 mLightSensorListener = new SensorEventListener() { // from class: com.android.server.biometrics.log.ALSProbe.1
-        @Override // android.hardware.SensorEventListener
-        public final void onAccuracyChanged(Sensor sensor, int i) {
-        }
+    public final AnonymousClass1 mLightSensorListener =
+            new SensorEventListener() { // from class: com.android.server.biometrics.log.ALSProbe.1
+                @Override // android.hardware.SensorEventListener
+                public final void onAccuracyChanged(Sensor sensor, int i) {}
 
-        @Override // android.hardware.SensorEventListener
-        public final void onSensorChanged(SensorEvent sensorEvent) {
-            ALSProbe.this.onNext(sensorEvent.values[0]);
-        }
-    };
+                @Override // android.hardware.SensorEventListener
+                public final void onSensorChanged(SensorEvent sensorEvent) {
+                    ALSProbe.this.onNext(sensorEvent.values[0]);
+                }
+            };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class NextConsumer {
@@ -42,19 +42,23 @@ public final class ALSProbe {
         public final List mOthers = new ArrayList();
         public final Handler mHandler = null;
 
-        public NextConsumer(BiometricFrameworkStatsLogger$$ExternalSyntheticLambda2 biometricFrameworkStatsLogger$$ExternalSyntheticLambda2) {
+        public NextConsumer(
+                BiometricFrameworkStatsLogger$$ExternalSyntheticLambda2
+                        biometricFrameworkStatsLogger$$ExternalSyntheticLambda2) {
             this.mConsumer = biometricFrameworkStatsLogger$$ExternalSyntheticLambda2;
         }
 
         public final void consume(final float f) {
             Handler handler = this.mHandler;
             if (handler != null) {
-                handler.post(new Runnable() { // from class: com.android.server.biometrics.log.ALSProbe$NextConsumer$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        ALSProbe.NextConsumer.this.mConsumer.accept(Float.valueOf(f));
-                    }
-                });
+                handler.post(
+                        new Runnable() { // from class:
+                                         // com.android.server.biometrics.log.ALSProbe$NextConsumer$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                ALSProbe.NextConsumer.this.mConsumer.accept(Float.valueOf(f));
+                            }
+                        });
             } else {
                 this.mConsumer.accept(Float.valueOf(f));
             }
@@ -126,17 +130,24 @@ public final class ALSProbe {
         handler.removeCallbacksAndMessages(this);
         long j = this.mMaxSubscriptionTime;
         if (j > 0) {
-            handler.postDelayed(new Runnable() { // from class: com.android.server.biometrics.log.ALSProbe$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ALSProbe aLSProbe = ALSProbe.this;
-                    synchronized (aLSProbe) {
-                        Slog.e("ALSProbe", "Max time exceeded for ALS logger - disabling: " + aLSProbe.mLightSensorListener.hashCode());
-                        aLSProbe.onNext(aLSProbe.mLastAmbientLux);
-                        aLSProbe.disable();
-                    }
-                }
-            }, this, j);
+            handler.postDelayed(
+                    new Runnable() { // from class:
+                                     // com.android.server.biometrics.log.ALSProbe$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ALSProbe aLSProbe = ALSProbe.this;
+                            synchronized (aLSProbe) {
+                                Slog.e(
+                                        "ALSProbe",
+                                        "Max time exceeded for ALS logger - disabling: "
+                                                + aLSProbe.mLightSensorListener.hashCode());
+                                aLSProbe.onNext(aLSProbe.mLastAmbientLux);
+                                aLSProbe.disable();
+                            }
+                        }
+                    },
+                    this,
+                    j);
         }
     }
 

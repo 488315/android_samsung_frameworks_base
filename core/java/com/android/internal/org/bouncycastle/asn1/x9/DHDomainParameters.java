@@ -8,6 +8,7 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
+
 import java.math.BigInteger;
 import java.util.Enumeration;
 
@@ -30,10 +31,16 @@ public class DHDomainParameters extends ASN1Object {
         if (obj instanceof ASN1Sequence) {
             return new DHDomainParameters((ASN1Sequence) obj);
         }
-        throw new IllegalArgumentException("Invalid DHDomainParameters: " + obj.getClass().getName());
+        throw new IllegalArgumentException(
+                "Invalid DHDomainParameters: " + obj.getClass().getName());
     }
 
-    public DHDomainParameters(BigInteger p, BigInteger g, BigInteger q, BigInteger j, DHValidationParms validationParms) {
+    public DHDomainParameters(
+            BigInteger p,
+            BigInteger g,
+            BigInteger q,
+            BigInteger j,
+            DHValidationParms validationParms) {
         if (p == null) {
             throw new IllegalArgumentException("'p' cannot be null");
         }
@@ -50,7 +57,12 @@ public class DHDomainParameters extends ASN1Object {
         this.validationParms = validationParms;
     }
 
-    public DHDomainParameters(ASN1Integer p, ASN1Integer g, ASN1Integer q, ASN1Integer j, DHValidationParms validationParms) {
+    public DHDomainParameters(
+            ASN1Integer p,
+            ASN1Integer g,
+            ASN1Integer q,
+            ASN1Integer j,
+            DHValidationParms validationParms) {
         if (p == null) {
             throw new IllegalArgumentException("'p' cannot be null");
         }
@@ -112,7 +124,8 @@ public class DHDomainParameters extends ASN1Object {
         return this.validationParms;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(5);
         v.add(this.p);

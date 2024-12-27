@@ -7,9 +7,11 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.UserManager;
 import android.util.Slog;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.biometrics.Utils;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -29,25 +31,27 @@ public final class BiometricStateCallback implements ClientMonitorCallback, IBin
     }
 
     @Override // android.os.IBinder.DeathRecipient
-    public final void binderDied() {
-    }
+    public final void binderDied() {}
 
     @Override // android.os.IBinder.DeathRecipient
     public final void binderDied(final IBinder iBinder) {
         Slog.w("BiometricStateCallback", "Callback binder died: " + iBinder);
-        if (!this.mBiometricStateListeners.removeIf(new Predicate() { // from class: com.android.server.biometrics.sensors.BiometricStateCallback$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((IBiometricStateListener) obj).asBinder().equals(iBinder);
-            }
-        })) {
+        if (!this.mBiometricStateListeners.removeIf(
+                new Predicate() { // from class:
+                                  // com.android.server.biometrics.sensors.BiometricStateCallback$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((IBiometricStateListener) obj).asBinder().equals(iBinder);
+                    }
+                })) {
             Slog.w("BiometricStateCallback", "No dead listeners found");
             return;
         }
         Slog.w("BiometricStateCallback", "Removed dead listener for " + iBinder);
     }
 
-    public final synchronized void broadcastCurrentEnrollmentState(IBiometricStateListener iBiometricStateListener) {
+    public final synchronized void broadcastCurrentEnrollmentState(
+            IBiometricStateListener iBiometricStateListener) {
         try {
         } catch (Throwable th) {
             throw th;
@@ -55,12 +59,16 @@ public final class BiometricStateCallback implements ClientMonitorCallback, IBin
         for (BiometricServiceProvider biometricServiceProvider : this.mProviders) {
             Iterator it = ((ArrayList) biometricServiceProvider.getSensorProperties()).iterator();
             while (it.hasNext()) {
-                SensorPropertiesInternal sensorPropertiesInternal = (SensorPropertiesInternal) it.next();
+                SensorPropertiesInternal sensorPropertiesInternal =
+                        (SensorPropertiesInternal) it.next();
                 for (UserInfo userInfo : this.mUserManager.getAliveUsers()) {
-                    boolean hasEnrollments = biometricServiceProvider.hasEnrollments(sensorPropertiesInternal.sensorId, userInfo.id);
+                    boolean hasEnrollments =
+                            biometricServiceProvider.hasEnrollments(
+                                    sensorPropertiesInternal.sensorId, userInfo.id);
                     if (iBiometricStateListener != null) {
                         try {
-                            iBiometricStateListener.onEnrollmentsChanged(userInfo.id, sensorPropertiesInternal.sensorId, hasEnrollments);
+                            iBiometricStateListener.onEnrollmentsChanged(
+                                    userInfo.id, sensorPropertiesInternal.sensorId, hasEnrollments);
                         } catch (RemoteException e) {
                             Slog.e("BiometricStateCallback", "Remote exception", e);
                         }
@@ -70,7 +78,8 @@ public final class BiometricStateCallback implements ClientMonitorCallback, IBin
                         Iterator it2 = this.mBiometricStateListeners.iterator();
                         while (it2.hasNext()) {
                             try {
-                                ((IBiometricStateListener) it2.next()).onEnrollmentsChanged(i, i2, hasEnrollments);
+                                ((IBiometricStateListener) it2.next())
+                                        .onEnrollmentsChanged(i, i2, hasEnrollments);
                             } catch (RemoteException e2) {
                                 Slog.e("BiometricStateCallback", "Remote exception", e2);
                             }
@@ -109,11 +118,19 @@ public final class BiometricStateCallback implements ClientMonitorCallback, IBin
     @Override // com.android.server.biometrics.sensors.ClientMonitorCallback
     public final void onClientFinished(BaseClientMonitor baseClientMonitor, boolean z) {
         this.mBiometricState = 0;
-        Slog.d("BiometricStateCallback", "Client finished, state updated to " + this.mBiometricState + ", client " + baseClientMonitor);
+        Slog.d(
+                "BiometricStateCallback",
+                "Client finished, state updated to "
+                        + this.mBiometricState
+                        + ", client "
+                        + baseClientMonitor);
         if (baseClientMonitor instanceof EnrollmentModifier) {
             EnrollmentModifier enrollmentModifier = (EnrollmentModifier) baseClientMonitor;
             boolean hasEnrollmentStateChanged = enrollmentModifier.hasEnrollmentStateChanged();
-            DeviceIdleController$$ExternalSyntheticOutline0.m("Enrollment state changed: ", "BiometricStateCallback", hasEnrollmentStateChanged);
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    "Enrollment state changed: ",
+                    "BiometricStateCallback",
+                    hasEnrollmentStateChanged);
             if (hasEnrollmentStateChanged) {
                 int i = baseClientMonitor.mTargetUserId;
                 int i2 = baseClientMonitor.mSensorId;
@@ -121,7 +138,8 @@ public final class BiometricStateCallback implements ClientMonitorCallback, IBin
                 Iterator it = this.mBiometricStateListeners.iterator();
                 while (it.hasNext()) {
                     try {
-                        ((IBiometricStateListener) it.next()).onEnrollmentsChanged(i, i2, hasEnrollments);
+                        ((IBiometricStateListener) it.next())
+                                .onEnrollmentsChanged(i, i2, hasEnrollments);
                     } catch (RemoteException e) {
                         Slog.e("BiometricStateCallback", "Remote exception", e);
                     }
@@ -146,10 +164,13 @@ public final class BiometricStateCallback implements ClientMonitorCallback, IBin
         } else if (baseClientMonitor instanceof EnrollClient) {
             this.mBiometricState = 1;
         } else {
-            Slog.w("BiometricStateCallback", "Other authentication client: ".concat(Utils.getClientName(baseClientMonitor)));
+            Slog.w(
+                    "BiometricStateCallback",
+                    "Other authentication client: ".concat(Utils.getClientName(baseClientMonitor)));
             this.mBiometricState = 0;
         }
-        StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "State updated from ", " to ");
+        StringBuilder m =
+                BatteryService$$ExternalSyntheticOutline0.m(i, "State updated from ", " to ");
         m.append(this.mBiometricState);
         m.append(", client ");
         m.append(baseClientMonitor);
@@ -157,7 +178,8 @@ public final class BiometricStateCallback implements ClientMonitorCallback, IBin
         notifyBiometricStateListeners(this.mBiometricState);
     }
 
-    public final synchronized void registerBiometricStateListener(IBiometricStateListener iBiometricStateListener) {
+    public final synchronized void registerBiometricStateListener(
+            IBiometricStateListener iBiometricStateListener) {
         this.mBiometricStateListeners.add(iBiometricStateListener);
         broadcastCurrentEnrollmentState(iBiometricStateListener);
         try {

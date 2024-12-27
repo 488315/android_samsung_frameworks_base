@@ -13,11 +13,14 @@ public final class IPv6ProvisioningLossQuirk {
         this.mQuirkExpiry = j;
     }
 
-    public static IPv6ProvisioningLossQuirk fromStableParcelable(IPv6ProvisioningLossQuirkParcelable iPv6ProvisioningLossQuirkParcelable) {
+    public static IPv6ProvisioningLossQuirk fromStableParcelable(
+            IPv6ProvisioningLossQuirkParcelable iPv6ProvisioningLossQuirkParcelable) {
         if (iPv6ProvisioningLossQuirkParcelable == null) {
             return null;
         }
-        return new IPv6ProvisioningLossQuirk(iPv6ProvisioningLossQuirkParcelable.detectionCount, iPv6ProvisioningLossQuirkParcelable.quirkExpiry);
+        return new IPv6ProvisioningLossQuirk(
+                iPv6ProvisioningLossQuirkParcelable.detectionCount,
+                iPv6ProvisioningLossQuirkParcelable.quirkExpiry);
     }
 
     public boolean equals(Object obj) {
@@ -25,7 +28,8 @@ public final class IPv6ProvisioningLossQuirk {
             return false;
         }
         IPv6ProvisioningLossQuirk iPv6ProvisioningLossQuirk = (IPv6ProvisioningLossQuirk) obj;
-        return this.mDetectionCount == iPv6ProvisioningLossQuirk.mDetectionCount && this.mQuirkExpiry == iPv6ProvisioningLossQuirk.mQuirkExpiry;
+        return this.mDetectionCount == iPv6ProvisioningLossQuirk.mDetectionCount
+                && this.mQuirkExpiry == iPv6ProvisioningLossQuirk.mQuirkExpiry;
     }
 
     public int hashCode() {
@@ -33,7 +37,8 @@ public final class IPv6ProvisioningLossQuirk {
     }
 
     public IPv6ProvisioningLossQuirkParcelable toStableParcelable() {
-        IPv6ProvisioningLossQuirkParcelable iPv6ProvisioningLossQuirkParcelable = new IPv6ProvisioningLossQuirkParcelable();
+        IPv6ProvisioningLossQuirkParcelable iPv6ProvisioningLossQuirkParcelable =
+                new IPv6ProvisioningLossQuirkParcelable();
         iPv6ProvisioningLossQuirkParcelable.detectionCount = this.mDetectionCount;
         iPv6ProvisioningLossQuirkParcelable.quirkExpiry = this.mQuirkExpiry;
         return iPv6ProvisioningLossQuirkParcelable;

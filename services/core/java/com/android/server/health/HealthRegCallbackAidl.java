@@ -6,7 +6,9 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.Trace;
 import android.util.Slog;
+
 import com.android.server.BatteryService$$ExternalSyntheticLambda11;
+
 import vendor.samsung.hardware.health.ISehHealth;
 import vendor.samsung.hardware.health.ISehHealthInfoCallback;
 import vendor.samsung.hardware.health.SehHealthInfo;
@@ -52,14 +54,16 @@ public class HealthRegCallbackAidl {
             if (i != 1) {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
-            SehHealthInfo sehHealthInfo = (SehHealthInfo) parcel.readTypedObject(SehHealthInfo.CREATOR);
+            SehHealthInfo sehHealthInfo =
+                    (SehHealthInfo) parcel.readTypedObject(SehHealthInfo.CREATOR);
             parcel.enforceNoDataAvail();
             HealthRegCallbackAidl.this.mServiceInfoCallback.update(sehHealthInfo);
             return true;
         }
     }
 
-    public HealthRegCallbackAidl(BatteryService$$ExternalSyntheticLambda11 batteryService$$ExternalSyntheticLambda11) {
+    public HealthRegCallbackAidl(
+            BatteryService$$ExternalSyntheticLambda11 batteryService$$ExternalSyntheticLambda11) {
         this.mServiceInfoCallback = batteryService$$ExternalSyntheticLambda11;
     }
 
@@ -71,12 +75,17 @@ public class HealthRegCallbackAidl {
         try {
             ((ISehHealth.Stub.Proxy) iSehHealth).unregisterCallback(halInfoCallback);
         } catch (RemoteException e) {
-            Slog.w("HealthRegCallbackAidl", "health: cannot unregister previous callback (transaction error): " + e.getMessage());
+            Slog.w(
+                    "HealthRegCallbackAidl",
+                    "health: cannot unregister previous callback (transaction error): "
+                            + e.getMessage());
         }
     }
 
     public void onRegistration(ISehHealth iSehHealth, ISehHealth iSehHealth2) {
-        Slog.d("HealthRegCallbackAidl", "onRegistration: oldService: " + iSehHealth + " newService: " + iSehHealth2);
+        Slog.d(
+                "HealthRegCallbackAidl",
+                "onRegistration: oldService: " + iSehHealth + " newService: " + iSehHealth2);
         if (this.mServiceInfoCallback == null) {
             return;
         }
@@ -94,10 +103,17 @@ public class HealthRegCallbackAidl {
                     try {
                         proxy.update();
                     } catch (RemoteException e) {
-                        Slog.e("HealthRegCallbackAidl", "health: cannot update after registering health info callback", e);
+                        Slog.e(
+                                "HealthRegCallbackAidl",
+                                "health: cannot update after registering health info callback",
+                                e);
                     }
                 } catch (RemoteException e2) {
-                    Slog.e("HealthRegCallbackAidl", "health: cannot register callback, framework may cease to receive updates on health / battery info!", e2);
+                    Slog.e(
+                            "HealthRegCallbackAidl",
+                            "health: cannot register callback, framework may cease to receive"
+                                + " updates on health / battery info!",
+                            e2);
                 }
             } finally {
             }

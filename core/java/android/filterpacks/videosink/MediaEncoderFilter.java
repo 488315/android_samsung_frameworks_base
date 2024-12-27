@@ -14,6 +14,7 @@ import android.filterfw.geometry.Quad;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.util.Log;
+
 import java.io.FileDescriptor;
 import java.io.IOException;
 
@@ -24,6 +25,7 @@ public class MediaEncoderFilter extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = "audioSource")
     private int mAudioSource;
+
     private boolean mCaptureTimeLapse;
 
     @GenerateFieldPort(hasDefault = true, name = "errorListener")
@@ -40,6 +42,7 @@ public class MediaEncoderFilter extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = "infoListener")
     private MediaRecorder.OnInfoListener mInfoListener;
+
     private long mLastTimeLapseFrameRealTimestampNs;
     private boolean mLogVerbose;
 
@@ -48,6 +51,7 @@ public class MediaEncoderFilter extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = "maxFileSize")
     private long mMaxFileSize;
+
     private MediaRecorder mMediaRecorder;
     private int mNumFramesEncoded;
 
@@ -62,22 +66,27 @@ public class MediaEncoderFilter extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = "recordingProfile")
     private CamcorderProfile mProfile;
+
     private ShaderProgram mProgram;
 
     @GenerateFieldPort(hasDefault = true, name = "recording")
     private boolean mRecording;
+
     private boolean mRecordingActive;
 
     @GenerateFieldPort(hasDefault = true, name = "recordingDoneListener")
     private OnRecordingDoneListener mRecordingDoneListener;
+
     private GLFrame mScreen;
 
     @GenerateFieldPort(hasDefault = true, name = "inputRegion")
     private Quad mSourceRegion;
+
     private int mSurfaceId;
 
     @GenerateFieldPort(hasDefault = true, name = "timelapseRecordingIntervalUs")
     private long mTimeBetweenTimeLapseFrameCaptureUs;
+
     private long mTimestampNs;
 
     @GenerateFieldPort(hasDefault = true, name = "videoEncoder")
@@ -140,7 +149,8 @@ public class MediaEncoderFilter extends Filter {
                 updateSourceRegion();
             }
         } else if (isOpen() && this.mRecordingActive) {
-            throw new RuntimeException("Cannot change recording parameters when the filter is recording!");
+            throw new RuntimeException(
+                    "Cannot change recording parameters when the filter is recording!");
         }
     }
 
@@ -233,7 +243,9 @@ public class MediaEncoderFilter extends Filter {
             if (this.mLogVerbose) {
                 Log.v(TAG, "Open: registering surface from Mediarecorder");
             }
-            this.mSurfaceId = context.getGLEnvironment().registerSurfaceFromMediaRecorder(this.mMediaRecorder);
+            this.mSurfaceId =
+                    context.getGLEnvironment()
+                            .registerSurfaceFromMediaRecorder(this.mMediaRecorder);
             this.mNumFramesEncoded = 0;
             this.mRecordingActive = true;
         } catch (IOException e) {
@@ -250,11 +262,19 @@ public class MediaEncoderFilter extends Filter {
             this.mLastTimeLapseFrameRealTimestampNs = timestampNs;
             this.mTimestampNs = timestampNs;
             if (this.mLogVerbose) {
-                Log.v(TAG, "timelapse: FIRST frame, last real t= " + this.mLastTimeLapseFrameRealTimestampNs + ", setting t = " + this.mTimestampNs);
+                Log.v(
+                        TAG,
+                        "timelapse: FIRST frame, last real t= "
+                                + this.mLastTimeLapseFrameRealTimestampNs
+                                + ", setting t = "
+                                + this.mTimestampNs);
             }
             return false;
         }
-        if (this.mNumFramesEncoded >= 2 && timestampNs < this.mLastTimeLapseFrameRealTimestampNs + (this.mTimeBetweenTimeLapseFrameCaptureUs * 1000)) {
+        if (this.mNumFramesEncoded >= 2
+                && timestampNs
+                        < this.mLastTimeLapseFrameRealTimestampNs
+                                + (this.mTimeBetweenTimeLapseFrameCaptureUs * 1000)) {
             if (this.mLogVerbose) {
                 Log.v(TAG, "timelapse: skipping intermediate frame");
                 return true;
@@ -262,12 +282,26 @@ public class MediaEncoderFilter extends Filter {
             return true;
         }
         if (this.mLogVerbose) {
-            Log.v(TAG, "timelapse: encoding frame, Timestamp t = " + timestampNs + ", last real t= " + this.mLastTimeLapseFrameRealTimestampNs + ", interval = " + this.mTimeBetweenTimeLapseFrameCaptureUs);
+            Log.v(
+                    TAG,
+                    "timelapse: encoding frame, Timestamp t = "
+                            + timestampNs
+                            + ", last real t= "
+                            + this.mLastTimeLapseFrameRealTimestampNs
+                            + ", interval = "
+                            + this.mTimeBetweenTimeLapseFrameCaptureUs);
         }
         this.mLastTimeLapseFrameRealTimestampNs = timestampNs;
         this.mTimestampNs += 1000000000 / this.mFps;
         if (this.mLogVerbose) {
-            Log.v(TAG, "timelapse: encoding frame, setting t = " + this.mTimestampNs + ", delta t = " + (1000000000 / this.mFps) + ", fps = " + this.mFps);
+            Log.v(
+                    TAG,
+                    "timelapse: encoding frame, setting t = "
+                            + this.mTimestampNs
+                            + ", delta t = "
+                            + (1000000000 / this.mFps)
+                            + ", fps = "
+                            + this.mFps);
         }
         return false;
     }

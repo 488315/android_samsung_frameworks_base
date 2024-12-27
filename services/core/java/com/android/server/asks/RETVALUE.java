@@ -11,7 +11,8 @@ public final class RETVALUE {
     public int status;
     public String tagName;
 
-    public final void set(int i, int i2, int i3, int i4, String str, String str2, MORERULES morerules) {
+    public final void set(
+            int i, int i2, int i3, int i4, String str, String str2, MORERULES morerules) {
         this.status = i;
         this.policy = i2;
         this.SA = i3;

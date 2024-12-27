@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.android.ims.ImsFeatureContainer;
 
 /* loaded from: classes5.dex */
@@ -19,20 +20,17 @@ public interface IImsServiceFeatureCallback extends IInterface {
 
     public static class Default implements IImsServiceFeatureCallback {
         @Override // com.android.ims.internal.IImsServiceFeatureCallback
-        public void imsFeatureCreated(ImsFeatureContainer feature, int subId) throws RemoteException {
-        }
+        public void imsFeatureCreated(ImsFeatureContainer feature, int subId)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsServiceFeatureCallback
-        public void imsFeatureRemoved(int reason) throws RemoteException {
-        }
+        public void imsFeatureRemoved(int reason) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsServiceFeatureCallback
-        public void imsStatusChanged(int status, int subId) throws RemoteException {
-        }
+        public void imsStatusChanged(int status, int subId) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsServiceFeatureCallback
-        public void updateCapabilities(long capabilities) throws RemoteException {
-        }
+        public void updateCapabilities(long capabilities) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -40,8 +38,9 @@ public interface IImsServiceFeatureCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImsServiceFeatureCallback {
-        public static final String DESCRIPTOR = "com.android.ims.internal.IImsServiceFeatureCallback";
+    public abstract static class Stub extends Binder implements IImsServiceFeatureCallback {
+        public static final String DESCRIPTOR =
+                "com.android.ims.internal.IImsServiceFeatureCallback";
         static final int TRANSACTION_imsFeatureCreated = 1;
         static final int TRANSACTION_imsFeatureRemoved = 2;
         static final int TRANSACTION_imsStatusChanged = 3;
@@ -88,7 +87,8 @@ public interface IImsServiceFeatureCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -98,7 +98,8 @@ public interface IImsServiceFeatureCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ImsFeatureContainer _arg0 = (ImsFeatureContainer) data.readTypedObject(ImsFeatureContainer.CREATOR);
+                    ImsFeatureContainer _arg0 =
+                            (ImsFeatureContainer) data.readTypedObject(ImsFeatureContainer.CREATOR);
                     int _arg1 = data.readInt();
                     data.enforceNoDataAvail();
                     imsFeatureCreated(_arg0, _arg1);
@@ -141,7 +142,8 @@ public interface IImsServiceFeatureCallback extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsServiceFeatureCallback
-            public void imsFeatureCreated(ImsFeatureContainer feature, int subId) throws RemoteException {
+            public void imsFeatureCreated(ImsFeatureContainer feature, int subId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

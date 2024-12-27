@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface IRemoveNotificationFromListCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.telephony.euicc.IRemoveNotificationFromListCallback";
+    public static final String DESCRIPTOR =
+            "com.android.internal.telephony.euicc.IRemoveNotificationFromListCallback";
 
     void onComplete(int i) throws RemoteException;
 
     public static class Default implements IRemoveNotificationFromListCallback {
         @Override // com.android.internal.telephony.euicc.IRemoveNotificationFromListCallback
-        public void onComplete(int resultCode) throws RemoteException {
-        }
+        public void onComplete(int resultCode) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,8 @@ public interface IRemoveNotificationFromListCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRemoveNotificationFromListCallback {
+    public abstract static class Stub extends Binder
+            implements IRemoveNotificationFromListCallback {
         static final int TRANSACTION_onComplete = 1;
 
         public Stub() {
@@ -34,7 +35,8 @@ public interface IRemoveNotificationFromListCallback extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(IRemoveNotificationFromListCallback.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(IRemoveNotificationFromListCallback.DESCRIPTOR);
             if (iin != null && (iin instanceof IRemoveNotificationFromListCallback)) {
                 return (IRemoveNotificationFromListCallback) iin;
             }
@@ -61,7 +63,8 @@ public interface IRemoveNotificationFromListCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRemoveNotificationFromListCallback.DESCRIPTOR);
             }

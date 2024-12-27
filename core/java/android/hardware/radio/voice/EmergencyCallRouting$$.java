@@ -2,13 +2,20 @@ package android.hardware.radio.voice;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import java.lang.reflect.Array;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public interface EmergencyCallRouting$$ {
     static String toString(int _aidl_v) {
-        return _aidl_v == 0 ? "UNKNOWN" : _aidl_v == 1 ? "EMERGENCY" : _aidl_v == 2 ? SQLiteDatabase.SYNC_MODE_NORMAL : Integer.toString(_aidl_v);
+        return _aidl_v == 0
+                ? "UNKNOWN"
+                : _aidl_v == 1
+                        ? "EMERGENCY"
+                        : _aidl_v == 2
+                                ? SQLiteDatabase.SYNC_MODE_NORMAL
+                                : Integer.toString(_aidl_v);
     }
 
     static String arrayToString(Object _aidl_v) {
@@ -20,7 +27,11 @@ public interface EmergencyCallRouting$$ {
             throw new IllegalArgumentException("not an array: " + _aidl_v);
         }
         Class<?> comp = _aidl_cls.getComponentType();
-        StringJoiner _aidl_sj = new StringJoiner(", ", NavigationBarInflaterView.SIZE_MOD_START, NavigationBarInflaterView.SIZE_MOD_END);
+        StringJoiner _aidl_sj =
+                new StringJoiner(
+                        ", ",
+                        NavigationBarInflaterView.SIZE_MOD_START,
+                        NavigationBarInflaterView.SIZE_MOD_END);
         if (comp.isArray()) {
             for (int _aidl_i = 0; _aidl_i < Array.getLength(_aidl_v); _aidl_i++) {
                 _aidl_sj.add(arrayToString(Array.get(_aidl_v, _aidl_i)));

@@ -15,7 +15,6 @@ public final class SensorDeviceProto {
         public static final long SAMPLING_PERIOD_MS = 2207613190147L;
         public static final long SAMPLING_PERIOD_SELECTED = 1108101562372L;
 
-        public SensorProto() {
-        }
+        public SensorProto() {}
     }
 }

@@ -12,8 +12,8 @@ public interface IPackageStatsObserver extends IInterface {
 
     public static class Default implements IPackageStatsObserver {
         @Override // android.content.pm.IPackageStatsObserver
-        public void onGetStatsCompleted(PackageStats pStats, boolean succeeded) throws RemoteException {
-        }
+        public void onGetStatsCompleted(PackageStats pStats, boolean succeeded)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +21,7 @@ public interface IPackageStatsObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPackageStatsObserver {
+    public abstract static class Stub extends Binder implements IPackageStatsObserver {
         public static final String DESCRIPTOR = "android.content.pm.IPackageStatsObserver";
         static final int TRANSACTION_onGetStatsCompleted = 1;
 
@@ -60,7 +60,8 @@ public interface IPackageStatsObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -97,7 +98,8 @@ public interface IPackageStatsObserver extends IInterface {
             }
 
             @Override // android.content.pm.IPackageStatsObserver
-            public void onGetStatsCompleted(PackageStats pStats, boolean succeeded) throws RemoteException {
+            public void onGetStatsCompleted(PackageStats pStats, boolean succeeded)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

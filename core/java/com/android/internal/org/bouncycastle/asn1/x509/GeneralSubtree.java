@@ -8,6 +8,7 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
@@ -37,12 +38,14 @@ public class GeneralSubtree extends ASN1Object {
             case 3:
                 ASN1TaggedObject oMin = ASN1TaggedObject.getInstance(seq.getObjectAt(1));
                 if (oMin.getTagNo() != 0) {
-                    throw new IllegalArgumentException("Bad tag number for 'minimum': " + oMin.getTagNo());
+                    throw new IllegalArgumentException(
+                            "Bad tag number for 'minimum': " + oMin.getTagNo());
                 }
                 this.minimum = ASN1Integer.getInstance(oMin, false);
                 ASN1TaggedObject oMax = ASN1TaggedObject.getInstance(seq.getObjectAt(2));
                 if (oMax.getTagNo() != 1) {
-                    throw new IllegalArgumentException("Bad tag number for 'maximum': " + oMax.getTagNo());
+                    throw new IllegalArgumentException(
+                            "Bad tag number for 'maximum': " + oMax.getTagNo());
                 }
                 this.maximum = ASN1Integer.getInstance(oMax, false);
                 return;
@@ -99,7 +102,8 @@ public class GeneralSubtree extends ASN1Object {
         return this.maximum.getValue();
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(3);
         v.add(this.base);

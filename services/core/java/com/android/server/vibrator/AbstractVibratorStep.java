@@ -3,7 +3,9 @@ package com.android.server.vibrator;
 import android.os.SystemClock;
 import android.os.VibrationEffect;
 import android.util.Slog;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,7 +19,13 @@ public abstract class AbstractVibratorStep extends Step {
     public long mVibratorOnResult;
     public final int segmentIndex;
 
-    public AbstractVibratorStep(VibrationStepConductor vibrationStepConductor, long j, VibratorController vibratorController, VibrationEffect.Composed composed, int i, long j2) {
+    public AbstractVibratorStep(
+            VibrationStepConductor vibrationStepConductor,
+            long j,
+            VibratorController vibratorController,
+            VibrationEffect.Composed composed,
+            int i,
+            long j2) {
         super(vibrationStepConductor, j);
         this.controller = vibratorController;
         this.effect = composed;
@@ -39,7 +47,13 @@ public abstract class AbstractVibratorStep extends Step {
 
     @Override // com.android.server.vibrator.Step
     public List cancel() {
-        return Arrays.asList(new CompleteEffectVibratorStep(this.conductor, SystemClock.uptimeMillis(), true, this.controller, this.mPendingVibratorOffDeadline));
+        return Arrays.asList(
+                new CompleteEffectVibratorStep(
+                        this.conductor,
+                        SystemClock.uptimeMillis(),
+                        true,
+                        this.controller,
+                        this.mPendingVibratorOffDeadline));
     }
 
     @Override // com.android.server.vibrator.Step
@@ -72,7 +86,8 @@ public abstract class AbstractVibratorStep extends Step {
         sb.append(", result = ");
         BatteryService$$ExternalSyntheticOutline0.m(sb, this.mVibratorOnResult, "VibrationThread");
         if (this.mVibratorOnResult > 0) {
-            this.mPendingVibratorOffDeadline = SystemClock.uptimeMillis() + this.mVibratorOnResult + 1000;
+            this.mPendingVibratorOffDeadline =
+                    SystemClock.uptimeMillis() + this.mVibratorOnResult + 1000;
         } else {
             this.mPendingVibratorOffDeadline = 0L;
         }
@@ -96,7 +111,9 @@ public abstract class AbstractVibratorStep extends Step {
             this.conductor.mVibration.stats.mRepeatCount += (i2 - repeatIndex) / i3;
             i2 = ((i2 - size) % i3) + repeatIndex;
         }
-        return Arrays.asList(this.conductor.nextVibrateStep(j, this.controller, this.effect, i2, this.mPendingVibratorOffDeadline));
+        return Arrays.asList(
+                this.conductor.nextVibrateStep(
+                        j, this.controller, this.effect, i2, this.mPendingVibratorOffDeadline));
     }
 
     public final void stopVibrating() {

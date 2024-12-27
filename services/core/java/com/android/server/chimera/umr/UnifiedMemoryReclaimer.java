@@ -2,13 +2,15 @@ package com.android.server.chimera.umr;
 
 import android.os.Process;
 import android.os.SystemProperties;
+
 import java.io.PrintWriter;
 import java.util.Arrays;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public abstract class UnifiedMemoryReclaimer {
-    public static final boolean MODEL_UMR_ENABLED = "true".equals(SystemProperties.get("ro.sys.kernelmemory.umr.enabled", "false"));
+    public static final boolean MODEL_UMR_ENABLED =
+            "true".equals(SystemProperties.get("ro.sys.kernelmemory.umr.enabled", "false"));
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Reclaimer {
@@ -22,7 +24,12 @@ public abstract class UnifiedMemoryReclaimer {
         }
 
         public final String toString() {
-            return String.format("%s: %s, %s, %d", this.name, CONTROL_STRINGS[0], MODE_STRINGS[0], Integer.valueOf(this.efficiency));
+            return String.format(
+                    "%s: %s, %s, %d",
+                    this.name,
+                    CONTROL_STRINGS[0],
+                    MODE_STRINGS[0],
+                    Integer.valueOf(this.efficiency));
         }
     }
 
@@ -33,7 +40,8 @@ public abstract class UnifiedMemoryReclaimer {
         SystemProperties.getInt("ro.sys.kernelmemory.umr.psi_mem_threshold_ms", 100);
         SystemProperties.getLong("ro.sys.kernelmemory.umr.mem_avail_low_threshold_kb", 2097152L);
         SystemProperties.getLong("ro.sys.kernelmemory.umr.mem_free_low_threshold_kb", 102400L);
-        KernelMemoryProxy$ReclaimerLog.write("staticInitialize: UnifiedMemoryReclaimer is disabled by config", true);
+        KernelMemoryProxy$ReclaimerLog.write(
+                "staticInitialize: UnifiedMemoryReclaimer is disabled by config", true);
     }
 
     private static native void closeCpuStatusMonitorNative();

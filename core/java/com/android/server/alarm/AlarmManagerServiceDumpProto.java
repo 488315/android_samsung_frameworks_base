@@ -50,8 +50,7 @@ public final class AlarmManagerServiceDumpProto {
         public static final long TIME_MS = 1112396529666L;
         public static final long UID = 1120986464257L;
 
-        public LastAllowWhileIdleDispatch() {
-        }
+        public LastAllowWhileIdleDispatch() {}
     }
 
     public final class TopAlarm {
@@ -59,15 +58,13 @@ public final class AlarmManagerServiceDumpProto {
         public static final long PACKAGE_NAME = 1138166333442L;
         public static final long UID = 1120986464257L;
 
-        public TopAlarm() {
-        }
+        public TopAlarm() {}
     }
 
     public final class AlarmStat {
         public static final long BROADCAST = 1146756268033L;
         public static final long FILTERS = 2246267895810L;
 
-        public AlarmStat() {
-        }
+        public AlarmStat() {}
     }
 }

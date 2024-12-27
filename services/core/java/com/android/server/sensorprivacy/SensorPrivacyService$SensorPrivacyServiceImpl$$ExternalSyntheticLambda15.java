@@ -4,10 +4,13 @@ import com.android.internal.util.function.HexConsumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class SensorPrivacyService$SensorPrivacyServiceImpl$$ExternalSyntheticLambda15 implements HexConsumer {
+public final /* synthetic */
+class SensorPrivacyService$SensorPrivacyServiceImpl$$ExternalSyntheticLambda15
+        implements HexConsumer {
     public final /* synthetic */ int $r8$classId;
 
-    public /* synthetic */ SensorPrivacyService$SensorPrivacyServiceImpl$$ExternalSyntheticLambda15(int i) {
+    public /* synthetic */ SensorPrivacyService$SensorPrivacyServiceImpl$$ExternalSyntheticLambda15(
+            int i) {
         this.$r8$classId = i;
     }
 
@@ -19,7 +22,13 @@ public final /* synthetic */ class SensorPrivacyService$SensorPrivacyServiceImpl
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void accept(java.lang.Object r9, java.lang.Object r10, java.lang.Object r11, java.lang.Object r12, java.lang.Object r13, java.lang.Object r14) {
+    public final void accept(
+            java.lang.Object r9,
+            java.lang.Object r10,
+            java.lang.Object r11,
+            java.lang.Object r12,
+            java.lang.Object r13,
+            java.lang.Object r14) {
         /*
             r8 = this;
             int r8 = r8.$r8$classId
@@ -107,6 +116,10 @@ public final /* synthetic */ class SensorPrivacyService$SensorPrivacyServiceImpl
             com.android.internal.util.FrameworkStatsLog.write(r2, r3, r4, r5, r6)
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.sensorprivacy.SensorPrivacyService$SensorPrivacyServiceImpl$$ExternalSyntheticLambda15.accept(java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.sensorprivacy.SensorPrivacyService$SensorPrivacyServiceImpl$$ExternalSyntheticLambda15.accept(java.lang.Object,"
+                    + " java.lang.Object, java.lang.Object, java.lang.Object, java.lang.Object,"
+                    + " java.lang.Object):void");
     }
 }

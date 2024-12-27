@@ -18,45 +18,82 @@ class BlockchainTZNative {
     public int mTAId;
     public String mTATechnology;
 
-    private native boolean nativeBlockchainProcessTACommand(TACommandRequest tACommandRequest, TACommandResponse tACommandResponse);
+    private native boolean nativeBlockchainProcessTACommand(
+            TACommandRequest tACommandRequest, TACommandResponse tACommandResponse);
 
     public final boolean loadTA(Context context, int i, long j, long j2) {
         if (this.mMOPTZNativePtr_ != 0) {
-            Log.e("BlockchainTZService", "BlockchainTZNative::loadTA called for TA that is already loaded. Call Ignored");
+            Log.e(
+                    "BlockchainTZService",
+                    "BlockchainTZNative::loadTA called for TA that is already loaded. Call"
+                        + " Ignored");
             return true;
         }
         if (j > 2147483647L || j2 > 2147483647L) {
             Log.e("BlockchainTZService", "BlockchainFw_loadTA: cannot get ta offset or size");
             return false;
         }
-        long nativeBlockchainCreateTLCommunicationContext = nativeBlockchainCreateTLCommunicationContext(context, i, (int) j, (int) j2, this.mTAId, this.mSendBufSize, this.mRecvBufSize, this.mTATechnology, this.mRootName, this.mProcessName);
+        long nativeBlockchainCreateTLCommunicationContext =
+                nativeBlockchainCreateTLCommunicationContext(
+                        context,
+                        i,
+                        (int) j,
+                        (int) j2,
+                        this.mTAId,
+                        this.mSendBufSize,
+                        this.mRecvBufSize,
+                        this.mTATechnology,
+                        this.mRootName,
+                        this.mProcessName);
         this.mMOPTZNativePtr_ = nativeBlockchainCreateTLCommunicationContext;
         if (nativeBlockchainCreateTLCommunicationContext == 0) {
-            Log.e("BlockchainTZService", "Error: nativeBlockchainCreateTLCommunicationContext failed");
+            Log.e(
+                    "BlockchainTZService",
+                    "Error: nativeBlockchainCreateTLCommunicationContext failed");
             return false;
         }
         synchronized (BlockchainTZNative.class) {
             this.mIsLoaded = true;
         }
         if (DEBUG) {
-            Log.d("BlockchainTZService", "BlockchainTZNative::loadTA: mMOPTZNativePtr_ = " + this.mMOPTZNativePtr_);
+            Log.d(
+                    "BlockchainTZService",
+                    "BlockchainTZNative::loadTA: mMOPTZNativePtr_ = " + this.mMOPTZNativePtr_);
         }
         return true;
     }
 
-    public native long nativeBlockchainCreateTLCommunicationContext(Context context, int i, int i2, int i3, int i4, int i5, int i6, String str, String str2, String str3);
+    public native long nativeBlockchainCreateTLCommunicationContext(
+            Context context,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            String str,
+            String str2,
+            String str3);
 
     public native void nativeBlockchainDestroyTLCommunicationContext();
 
     public final TACommandResponse processTACommand(TACommandRequest tACommandRequest) {
         if (DEBUG) {
-            Log.d("BlockchainTZService", "BlockchainTZNative::processTACommand: request = " + tACommandRequest + "; mMOPTZNativePtr_ = " + this.mMOPTZNativePtr_);
+            Log.d(
+                    "BlockchainTZService",
+                    "BlockchainTZNative::processTACommand: request = "
+                            + tACommandRequest
+                            + "; mMOPTZNativePtr_ = "
+                            + this.mMOPTZNativePtr_);
         }
         TACommandResponse tACommandResponse = new TACommandResponse();
         if (nativeBlockchainProcessTACommand(tACommandRequest, tACommandResponse)) {
             return tACommandResponse;
         }
-        Log.e("BlockchainTZService", "BlockchainTZNative::processTACommand: Error: nativeBlockchainProcessTACommand returned failure");
+        Log.e(
+                "BlockchainTZService",
+                "BlockchainTZNative::processTACommand: Error: nativeBlockchainProcessTACommand"
+                    + " returned failure");
         return null;
     }
 
@@ -72,7 +109,11 @@ class BlockchainTZNative {
                 }
                 return;
             }
-            Log.e("BlockchainTZService", "BlockchainTZNative::unloadTA called for TA that is not loaded. Call Ignored: ta loaded: " + this.mIsLoaded);
+            Log.e(
+                    "BlockchainTZService",
+                    "BlockchainTZNative::unloadTA called for TA that is not loaded. Call Ignored:"
+                        + " ta loaded: "
+                            + this.mIsLoaded);
         }
     }
 }

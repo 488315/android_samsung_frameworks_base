@@ -10,10 +10,11 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Telephony;
 import android.util.SparseArray;
+
 import com.android.internal.util.FunctionalUtils;
 import com.android.server.LocalServices;
-import com.android.server.devicepolicy.OwnersData;
 import com.android.server.utils.Slogf;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,28 +22,37 @@ import java.util.concurrent.TimeUnit;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class DevicePolicyManagerService$$ExternalSyntheticLambda33 implements FunctionalUtils.ThrowingSupplier {
+public final /* synthetic */ class DevicePolicyManagerService$$ExternalSyntheticLambda33
+        implements FunctionalUtils.ThrowingSupplier {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ DevicePolicyManagerService f$0;
 
-    public /* synthetic */ DevicePolicyManagerService$$ExternalSyntheticLambda33(DevicePolicyManagerService devicePolicyManagerService, int i) {
+    public /* synthetic */ DevicePolicyManagerService$$ExternalSyntheticLambda33(
+            DevicePolicyManagerService devicePolicyManagerService, int i) {
         this.$r8$classId = i;
         this.f$0 = devicePolicyManagerService;
     }
 
-    private final Object getOrThrow$com$android$server$devicepolicy$DevicePolicyManagerService$$ExternalSyntheticLambda49() {
+    private final Object
+            getOrThrow$com$android$server$devicepolicy$DevicePolicyManagerService$$ExternalSyntheticLambda49() {
         long j;
-        NetworkLoggingHandler networkLoggingHandler = this.f$0.mNetworkLogger.mNetworkLoggingHandler;
+        NetworkLoggingHandler networkLoggingHandler =
+                this.f$0.mNetworkLogger.mNetworkLoggingHandler;
         synchronized (networkLoggingHandler) {
             try {
-                long nanoTime = (networkLoggingHandler.mLastFinalizationNanos + NetworkLoggingHandler.FORCE_FETCH_THROTTLE_NS) - System.nanoTime();
+                long nanoTime =
+                        (networkLoggingHandler.mLastFinalizationNanos
+                                        + NetworkLoggingHandler.FORCE_FETCH_THROTTLE_NS)
+                                - System.nanoTime();
                 j = 0;
                 if (nanoTime > 0) {
                     j = 1 + TimeUnit.NANOSECONDS.toMillis(nanoTime);
                 } else {
-                    Bundle finalizeBatchAndBuildAdminMessageLocked = networkLoggingHandler.finalizeBatchAndBuildAdminMessageLocked();
+                    Bundle finalizeBatchAndBuildAdminMessageLocked =
+                            networkLoggingHandler.finalizeBatchAndBuildAdminMessageLocked();
                     if (finalizeBatchAndBuildAdminMessageLocked != null) {
-                        networkLoggingHandler.notifyDeviceOwnerOrProfileOwner(finalizeBatchAndBuildAdminMessageLocked);
+                        networkLoggingHandler.notifyDeviceOwnerOrProfileOwner(
+                                finalizeBatchAndBuildAdminMessageLocked);
                     }
                 }
             } finally {
@@ -51,16 +61,25 @@ public final /* synthetic */ class DevicePolicyManagerService$$ExternalSynthetic
         return Long.valueOf(j);
     }
 
-    private final Object getOrThrow$com$android$server$devicepolicy$DevicePolicyManagerService$$ExternalSyntheticLambda63() {
+    private final Object
+            getOrThrow$com$android$server$devicepolicy$DevicePolicyManagerService$$ExternalSyntheticLambda63() {
         Boolean bool;
         DevicePolicyManagerService devicePolicyManagerService = this.f$0;
         devicePolicyManagerService.getClass();
         try {
             synchronized (devicePolicyManagerService.getLockObject()) {
-                Slogf.i("DevicePolicyManager", "Started device policies migration to the device policy engine.");
-                Binder.withCleanCallingIdentity(new DevicePolicyManagerService$$ExternalSyntheticLambda57(9, devicePolicyManagerService));
-                Binder.withCleanCallingIdentity(new DevicePolicyManagerService$$ExternalSyntheticLambda57(8, devicePolicyManagerService));
-                Binder.withCleanCallingIdentity(new DevicePolicyManagerService$$ExternalSyntheticLambda57(7, devicePolicyManagerService));
+                Slogf.i(
+                        "DevicePolicyManager",
+                        "Started device policies migration to the device policy engine.");
+                Binder.withCleanCallingIdentity(
+                        new DevicePolicyManagerService$$ExternalSyntheticLambda57(
+                                9, devicePolicyManagerService));
+                Binder.withCleanCallingIdentity(
+                        new DevicePolicyManagerService$$ExternalSyntheticLambda57(
+                                8, devicePolicyManagerService));
+                Binder.withCleanCallingIdentity(
+                        new DevicePolicyManagerService$$ExternalSyntheticLambda57(
+                                7, devicePolicyManagerService));
                 Owners owners = devicePolicyManagerService.mOwners;
                 synchronized (owners.mData) {
                     OwnersData ownersData = owners.mData;
@@ -74,17 +93,25 @@ public final /* synthetic */ class DevicePolicyManagerService$$ExternalSynthetic
             DevicePolicyEngine devicePolicyEngine = devicePolicyManagerService.mDevicePolicyEngine;
             devicePolicyEngine.clear();
             devicePolicyEngine.write();
-            Slogf.e("DevicePolicyManager", e, "Error occurred during device policy migration, will reattempt on the next system server restart.", new Object[0]);
+            Slogf.e(
+                    "DevicePolicyManager",
+                    e,
+                    "Error occurred during device policy migration, will reattempt on the next"
+                        + " system server restart.",
+                    new Object[0]);
             return Boolean.FALSE;
         }
     }
 
-    private final Object getOrThrow$com$android$server$devicepolicy$DevicePolicyManagerService$$ExternalSyntheticLambda76() {
+    private final Object
+            getOrThrow$com$android$server$devicepolicy$DevicePolicyManagerService$$ExternalSyntheticLambda76() {
         boolean isUserAffiliatedWithDeviceLocked;
         DevicePolicyManagerService devicePolicyManagerService = this.f$0;
         int currentForegroundUserId = devicePolicyManagerService.getCurrentForegroundUserId();
         synchronized (devicePolicyManagerService.getLockObject()) {
-            isUserAffiliatedWithDeviceLocked = devicePolicyManagerService.isUserAffiliatedWithDeviceLocked(currentForegroundUserId);
+            isUserAffiliatedWithDeviceLocked =
+                    devicePolicyManagerService.isUserAffiliatedWithDeviceLocked(
+                            currentForegroundUserId);
         }
         if (!isUserAffiliatedWithDeviceLocked) {
             return Collections.emptyList();
@@ -105,7 +132,9 @@ public final /* synthetic */ class DevicePolicyManagerService$$ExternalSynthetic
                 try {
                     if (devicePolicyManagerService.isManagedKioskInternal()) {
                         devicePolicyManagerService.mInjector.getClass();
-                        if (((PowerManagerInternal) LocalServices.getService(PowerManagerInternal.class)).wasDeviceIdleFor(30000L)) {
+                        if (((PowerManagerInternal)
+                                        LocalServices.getService(PowerManagerInternal.class))
+                                .wasDeviceIdleFor(30000L)) {
                             z = true;
                             return Boolean.valueOf(z);
                         }
@@ -116,14 +145,21 @@ public final /* synthetic */ class DevicePolicyManagerService$$ExternalSynthetic
                     throw new IllegalStateException(e);
                 }
             case 1:
-                return Boolean.valueOf(this.f$0.mInjector.settingsGlobalGetInt("wifi_device_owner_configs_lockdown") > 0);
+                return Boolean.valueOf(
+                        this.f$0.mInjector.settingsGlobalGetInt(
+                                        "wifi_device_owner_configs_lockdown")
+                                > 0);
             case 2:
                 DevicePolicyManagerService devicePolicyManagerService2 = this.f$0;
-                List<UserInfo> aliveUsers = UserManager.get(devicePolicyManagerService2.mInjector.mContext).getAliveUsers();
+                List<UserInfo> aliveUsers =
+                        UserManager.get(devicePolicyManagerService2.mInjector.mContext)
+                                .getAliveUsers();
                 ArrayList arrayList = new ArrayList();
                 for (UserInfo userInfo : aliveUsers) {
                     UserHandle userHandle = userInfo.getUserHandle();
-                    if (!userHandle.isSystem() && !devicePolicyManagerService2.isManagedProfile(userHandle.getIdentifier())) {
+                    if (!userHandle.isSystem()
+                            && !devicePolicyManagerService2.isManagedProfile(
+                                    userHandle.getIdentifier())) {
                         arrayList.add(userInfo.getUserHandle());
                     }
                 }
@@ -133,15 +169,22 @@ public final /* synthetic */ class DevicePolicyManagerService$$ExternalSynthetic
                 for (UserInfo userInfo2 : devicePolicyManagerService3.mUserManager.getUsers()) {
                     synchronized (devicePolicyManagerService3.getLockObject()) {
                         try {
-                            List<ComponentName> activeAdmins = devicePolicyManagerService3.getActiveAdmins(userInfo2.id);
+                            List<ComponentName> activeAdmins =
+                                    devicePolicyManagerService3.getActiveAdmins(userInfo2.id);
                             if (activeAdmins != null) {
                                 for (ComponentName componentName : activeAdmins) {
-                                    if (!devicePolicyManagerService3.isAdminTestOnlyLocked(userInfo2.id, componentName)) {
+                                    if (!devicePolicyManagerService3.isAdminTestOnlyLocked(
+                                            userInfo2.id, componentName)) {
                                         devicePolicyManagerService3.mInjector.getClass();
-                                        KnoxPolicyHelper knoxPolicyHelper = devicePolicyManagerService3.mKnoxPolicyHelper;
+                                        KnoxPolicyHelper knoxPolicyHelper =
+                                                devicePolicyManagerService3.mKnoxPolicyHelper;
                                         String packageName = componentName.getPackageName();
                                         knoxPolicyHelper.getClass();
-                                        if (!"com.samsung.android.kgclient".equals(packageName) && !"com.nttdocomo.android.remotelock".equals(packageName) && !"com.nttdocomo.android.wipe".equals(packageName)) {
+                                        if (!"com.samsung.android.kgclient".equals(packageName)
+                                                && !"com.nttdocomo.android.remotelock"
+                                                        .equals(packageName)
+                                                && !"com.nttdocomo.android.wipe"
+                                                        .equals(packageName)) {
                                             return Boolean.TRUE;
                                         }
                                     }
@@ -163,10 +206,27 @@ public final /* synthetic */ class DevicePolicyManagerService$$ExternalSynthetic
                         OwnersData ownersData = owners.mData;
                         OwnersData.OwnerInfo ownerInfo = ownersData.mDeviceOwner;
                         if (ownerInfo != null) {
-                            arrayList2.add(new OwnerShellData(ownersData.mDeviceOwnerUserId, -10000, ownerInfo.admin, true, false, false));
+                            arrayList2.add(
+                                    new OwnerShellData(
+                                            ownersData.mDeviceOwnerUserId,
+                                            -10000,
+                                            ownerInfo.admin,
+                                            true,
+                                            false,
+                                            false));
                         }
                         for (int i = 0; i < owners.mData.mProfileOwners.size(); i++) {
-                            arrayList2.add(new OwnerShellData(((Integer) owners.mData.mProfileOwners.keyAt(i)).intValue(), -10000, ((OwnersData.OwnerInfo) owners.mData.mProfileOwners.valueAt(i)).admin, false, true, false));
+                            arrayList2.add(
+                                    new OwnerShellData(
+                                            ((Integer) owners.mData.mProfileOwners.keyAt(i))
+                                                    .intValue(),
+                                            -10000,
+                                            ((OwnersData.OwnerInfo)
+                                                            owners.mData.mProfileOwners.valueAt(i))
+                                                    .admin,
+                                            false,
+                                            true,
+                                            false));
                         }
                     } finally {
                     }
@@ -175,19 +235,32 @@ public final /* synthetic */ class DevicePolicyManagerService$$ExternalSynthetic
                     for (int i2 = 0; i2 < arrayList2.size(); i2++) {
                         try {
                             OwnerShellData ownerShellData = (OwnerShellData) arrayList2.get(i2);
-                            ownerShellData.isAffiliated = devicePolicyManagerService4.isUserAffiliatedWithDeviceLocked(ownerShellData.userId);
+                            ownerShellData.isAffiliated =
+                                    devicePolicyManagerService4.isUserAffiliatedWithDeviceLocked(
+                                            ownerShellData.userId);
                         } finally {
                         }
                     }
                     sparseArray = devicePolicyManagerService4.mUserData;
                 }
                 for (int i3 = 0; i3 < sparseArray.size(); i3++) {
-                    DevicePolicyData devicePolicyData = (DevicePolicyData) devicePolicyManagerService4.mUserData.valueAt(i3);
+                    DevicePolicyData devicePolicyData =
+                            (DevicePolicyData) devicePolicyManagerService4.mUserData.valueAt(i3);
                     int keyAt = sparseArray.keyAt(i3);
-                    int profileParentId = devicePolicyManagerService4.mUserManagerInternal.getProfileParentId(keyAt);
+                    int profileParentId =
+                            devicePolicyManagerService4.mUserManagerInternal.getProfileParentId(
+                                    keyAt);
                     if (profileParentId != keyAt) {
                         for (int i4 = 0; i4 < devicePolicyData.mAdminList.size(); i4++) {
-                            arrayList2.add(new OwnerShellData(keyAt, profileParentId, ((ActiveAdmin) devicePolicyData.mAdminList.get(i4)).info.getComponent(), false, false, true));
+                            arrayList2.add(
+                                    new OwnerShellData(
+                                            keyAt,
+                                            profileParentId,
+                                            ((ActiveAdmin) devicePolicyData.mAdminList.get(i4))
+                                                    .info.getComponent(),
+                                            false,
+                                            false,
+                                            true));
                         }
                     }
                 }
@@ -215,21 +288,38 @@ public final /* synthetic */ class DevicePolicyManagerService$$ExternalSynthetic
                 return Boolean.TRUE;
             case 9:
                 DevicePolicyManagerService devicePolicyManagerService6 = this.f$0;
-                if (devicePolicyManagerService6.getUserData(0).mBypassDevicePolicyManagementRoleQualifications) {
+                if (devicePolicyManagerService6.getUserData(0)
+                        .mBypassDevicePolicyManagementRoleQualifications) {
                     return Boolean.TRUE;
                 }
-                return Boolean.valueOf(devicePolicyManagerService6.nonTestNonPrecreatedUsersExist() ? false : !devicePolicyManagerService6.hasIncompatibleAccountsOnAnyUser());
+                return Boolean.valueOf(
+                        devicePolicyManagerService6.nonTestNonPrecreatedUsersExist()
+                                ? false
+                                : !devicePolicyManagerService6.hasIncompatibleAccountsOnAnyUser());
             case 10:
                 DevicePolicyManagerService devicePolicyManagerService7 = this.f$0;
                 UserHandle mainUser = devicePolicyManagerService7.mUserManager.getMainUser();
-                return Integer.valueOf(mainUser == null ? -10000 : devicePolicyManagerService7.getManagedUserId(mainUser.getIdentifier()));
+                return Integer.valueOf(
+                        mainUser == null
+                                ? -10000
+                                : devicePolicyManagerService7.getManagedUserId(
+                                        mainUser.getIdentifier()));
             case 11:
-                return this.f$0.mContext.getContentResolver().query(Telephony.Carriers.ENFORCE_MANAGED_URI, null, null, null, null);
+                return this.f$0
+                        .mContext
+                        .getContentResolver()
+                        .query(Telephony.Carriers.ENFORCE_MANAGED_URI, null, null, null, null);
             case 12:
                 DevicePolicyManagerService devicePolicyManagerService8 = this.f$0;
                 for (UserInfo userInfo3 : devicePolicyManagerService8.mUserManager.getUsers()) {
-                    if (userInfo3.isManagedProfile() && devicePolicyManagerService8.getProfileOwnerAsUser(userInfo3.id) != null && devicePolicyManagerService8.isProfileOwnerOfOrganizationOwnedDevice(userInfo3.id)) {
-                        return devicePolicyManagerService8.getActiveAdminUncheckedLocked(userInfo3.id, devicePolicyManagerService8.getProfileOwnerAsUser(userInfo3.id));
+                    if (userInfo3.isManagedProfile()
+                            && devicePolicyManagerService8.getProfileOwnerAsUser(userInfo3.id)
+                                    != null
+                            && devicePolicyManagerService8.isProfileOwnerOfOrganizationOwnedDevice(
+                                    userInfo3.id)) {
+                        return devicePolicyManagerService8.getActiveAdminUncheckedLocked(
+                                userInfo3.id,
+                                devicePolicyManagerService8.getProfileOwnerAsUser(userInfo3.id));
                     }
                 }
                 return null;

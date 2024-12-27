@@ -5,8 +5,10 @@ import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 import android.os.SemSystemProperties;
+
 import com.samsung.android.transcode.util.LogS;
 import com.samsung.android.transcode.util.OpenGlHelper;
+
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -16,12 +18,53 @@ import java.nio.FloatBuffer;
 public class RenderTexture_GL_OES {
     private static final String A_POSITION = "a_Position";
     private static final String A_TEXTURE_COORDINATES = "a_TextureCoordinates";
-    private static final String BLUR_FRAGMENT_SHADER_CODE = "#extension GL_OES_EGL_image_external : require\nprecision mediump float;\nvarying vec2 v_TextureCoord;\nuniform samplerExternalOES u_TextureUnit;\nuniform float fWidth;\nuniform float fHeight;\nvoid main()\t\t\t\t\t\t\t\t\t\t \n        {\n  vec4 lightColor; \t\t\t\t\t\t\t\t \n\thighp vec4 color = vec4(0,0,0,1);\t\t\n\thighp vec2 gaussFilter[7];\t\t\t\t\n\t gaussFilter[0] = vec2(-3.0, 0.1063);\t \n\t gaussFilter[1] = vec2(-2.0, 0.1403);\t \n\t gaussFilter[2] = vec2(-1.0, 0.1658);\t \n\t gaussFilter[3] = vec2(0.0, 0.1752); \n\t gaussFilter[4] = vec2(1.0, 0.1658);\t\n\t gaussFilter[5] = vec2(2.0, 0.1403);\t\n\t gaussFilter[6] = vec2(3.0, 0.1063);\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\n\tfor( int i = 0; i < 7; i++ )\t\t\n\t\tcolor += texture2D(u_TextureUnit, vec2( v_TextureCoord.x+gaussFilter[i].x*fWidth, v_TextureCoord.y+gaussFilter[i].x*fHeight))*gaussFilter[i].y;\t\t\n  gl_FragColor = color ;\t\n}\n";
+    private static final String BLUR_FRAGMENT_SHADER_CODE =
+            "#extension GL_OES_EGL_image_external : require\n"
+                + "precision mediump float;\n"
+                + "varying vec2 v_TextureCoord;\n"
+                + "uniform samplerExternalOES u_TextureUnit;\n"
+                + "uniform float fWidth;\n"
+                + "uniform float fHeight;\n"
+                + "void main()\t\t\t\t\t\t\t\t\t\t \n"
+                + "        {\n"
+                + "  vec4 lightColor; \t\t\t\t\t\t\t\t \n"
+                + "\thighp vec4 color = vec4(0,0,0,1);\t\t\n"
+                + "\thighp vec2 gaussFilter[7];\t\t\t\t\n"
+                + "\t gaussFilter[0] = vec2(-3.0, 0.1063);\t \n"
+                + "\t gaussFilter[1] = vec2(-2.0, 0.1403);\t \n"
+                + "\t gaussFilter[2] = vec2(-1.0, 0.1658);\t \n"
+                + "\t gaussFilter[3] = vec2(0.0, 0.1752); \n"
+                + "\t gaussFilter[4] = vec2(1.0, 0.1658);\t\n"
+                + "\t gaussFilter[5] = vec2(2.0, 0.1403);\t\n"
+                + "\t gaussFilter[6] = vec2(3.0, 0.1063);\t\n"
+                + "\t\t\t\t\t\t\t\t\t\t\t\t\t\n"
+                + "\tfor( int i = 0; i < 7; i++ )\t\t\n"
+                + "\t\tcolor += texture2D(u_TextureUnit, vec2("
+                + " v_TextureCoord.x+gaussFilter[i].x*fWidth,"
+                + " v_TextureCoord.y+gaussFilter[i].x*fHeight))*gaussFilter[i].y;\t\t\n"
+                + "  gl_FragColor = color ;\t\n"
+                + "}\n";
     private static final int FLOAT_SIZE_BYTES = 4;
     public static final int PREPARE_FAILURE = 0;
     public static final int PREPARE_SUCCESS = 1;
-    private static final String TEXTURE_FRAGMENT_SHADER_CODE = "#extension GL_OES_EGL_image_external : require\nprecision mediump float;\nvarying vec2 v_TextureCoord;\nuniform samplerExternalOES u_TextureUnit;\nvoid main() {\n  gl_FragColor = texture2D(u_TextureUnit, v_TextureCoord);\n}\n";
-    private static final String TEXTURE_VERTEX_SHADER_CODE = "uniform mat4 u_MVPMatrix;\nuniform mat4 u_STMatrix;\nattribute vec4 a_Position;\nattribute vec4 a_TextureCoordinates;\nvarying vec2 v_TextureCoord;\nvoid main() {\n  gl_Position = u_MVPMatrix * a_Position;\n  v_TextureCoord = (u_STMatrix * a_TextureCoordinates).xy;\n}\n";
+    private static final String TEXTURE_FRAGMENT_SHADER_CODE =
+            "#extension GL_OES_EGL_image_external : require\n"
+                + "precision mediump float;\n"
+                + "varying vec2 v_TextureCoord;\n"
+                + "uniform samplerExternalOES u_TextureUnit;\n"
+                + "void main() {\n"
+                + "  gl_FragColor = texture2D(u_TextureUnit, v_TextureCoord);\n"
+                + "}\n";
+    private static final String TEXTURE_VERTEX_SHADER_CODE =
+            "uniform mat4 u_MVPMatrix;\n"
+                + "uniform mat4 u_STMatrix;\n"
+                + "attribute vec4 a_Position;\n"
+                + "attribute vec4 a_TextureCoordinates;\n"
+                + "varying vec2 v_TextureCoord;\n"
+                + "void main() {\n"
+                + "  gl_Position = u_MVPMatrix * a_Position;\n"
+                + "  v_TextureCoord = (u_STMatrix * a_TextureCoordinates).xy;\n"
+                + "}\n";
     private static final String U_FRMAE_HEIGHT = "fHegiht";
     private static final String U_FRMAE_WIDTH = "fWidth";
     private static final String U_MVPMATRIX = "u_MVPMatrix";
@@ -43,12 +86,19 @@ public class RenderTexture_GL_OES {
     private int mu_MVPMatrixHandle;
     private int mu_STMatrixHandle;
     private int mu_TextureUnitHandle;
-    private final float[] mVerticesData = {-1.0f, -1.0f, 0.0f, 0.0f, 1.0f, -1.0f, 1.0f, 0.0f, -1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f};
+    private final float[] mVerticesData = {
+        -1.0f, -1.0f, 0.0f, 0.0f, 1.0f, -1.0f, 1.0f, 0.0f, -1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f,
+        1.0f, 1.0f
+    };
     private final float[] mMVPMatrix = new float[16];
     private final float[] mSTMatrix = new float[16];
     private boolean mMMSMode = false;
     private boolean mCallFinish = true;
-    private FloatBuffer mVerticesFloatBuffer = ByteBuffer.allocateDirect(this.mVerticesData.length * 4).order(ByteOrder.nativeOrder()).asFloatBuffer().put(this.mVerticesData);
+    private FloatBuffer mVerticesFloatBuffer =
+            ByteBuffer.allocateDirect(this.mVerticesData.length * 4)
+                    .order(ByteOrder.nativeOrder())
+                    .asFloatBuffer()
+                    .put(this.mVerticesData);
 
     public RenderTexture_GL_OES() {
         this.mVerticesFloatBuffer.position(0);
@@ -56,9 +106,13 @@ public class RenderTexture_GL_OES {
 
     public int createProgram(boolean isBlurMode) {
         if (isBlurMode) {
-            this.mProgram = OpenGlHelper.createProgram(TEXTURE_VERTEX_SHADER_CODE, BLUR_FRAGMENT_SHADER_CODE);
+            this.mProgram =
+                    OpenGlHelper.createProgram(
+                            TEXTURE_VERTEX_SHADER_CODE, BLUR_FRAGMENT_SHADER_CODE);
         } else {
-            this.mProgram = OpenGlHelper.createProgram(TEXTURE_VERTEX_SHADER_CODE, TEXTURE_FRAGMENT_SHADER_CODE);
+            this.mProgram =
+                    OpenGlHelper.createProgram(
+                            TEXTURE_VERTEX_SHADER_CODE, TEXTURE_FRAGMENT_SHADER_CODE);
         }
         if (this.mProgram == 0) {
             return 0;
@@ -66,7 +120,8 @@ public class RenderTexture_GL_OES {
         this.mu_MVPMatrixHandle = GLES20.glGetUniformLocation(this.mProgram, U_MVPMATRIX);
         this.mu_STMatrixHandle = GLES20.glGetUniformLocation(this.mProgram, U_STMATRIX);
         this.ma_PositionHandle = GLES20.glGetAttribLocation(this.mProgram, A_POSITION);
-        this.ma_TextureCoordinatesHandle = GLES20.glGetAttribLocation(this.mProgram, A_TEXTURE_COORDINATES);
+        this.ma_TextureCoordinatesHandle =
+                GLES20.glGetAttribLocation(this.mProgram, A_TEXTURE_COORDINATES);
         this.mu_TextureUnitHandle = GLES20.glGetUniformLocation(this.mProgram, U_TEXTURE_UNIT);
         return 1;
     }
@@ -80,7 +135,17 @@ public class RenderTexture_GL_OES {
         return 1;
     }
 
-    public int prepare(int rotationAngle, int x, int y, int width, int height, int original_width, int original_height, boolean mmsMode, int pbuffer_width, int pbuffer_height) {
+    public int prepare(
+            int rotationAngle,
+            int x,
+            int y,
+            int width,
+            int height,
+            int original_width,
+            int original_height,
+            boolean mmsMode,
+            int pbuffer_width,
+            int pbuffer_height) {
         this.mMMSMode = mmsMode;
         this.mCallFinish = checkcallFinish();
         if (createProgram(this.mMMSMode) == 0) {
@@ -115,11 +180,18 @@ public class RenderTexture_GL_OES {
             GLES20.glUniform1f(this.mu_FheightHandle, 1.0f / this.mHeight);
         }
         this.mVerticesFloatBuffer.position(0);
-        GLES20.glVertexAttribPointer(this.ma_PositionHandle, 2, 5126, false, 16, (Buffer) this.mVerticesFloatBuffer);
+        GLES20.glVertexAttribPointer(
+                this.ma_PositionHandle, 2, 5126, false, 16, (Buffer) this.mVerticesFloatBuffer);
         GLES20.glEnableVertexAttribArray(this.ma_PositionHandle);
         OpenGlHelper.checkGLError("glEnableVertexAttribArray ma_PositionHandle");
         this.mVerticesFloatBuffer.position(2);
-        GLES20.glVertexAttribPointer(this.ma_TextureCoordinatesHandle, 2, 5126, false, 16, (Buffer) this.mVerticesFloatBuffer);
+        GLES20.glVertexAttribPointer(
+                this.ma_TextureCoordinatesHandle,
+                2,
+                5126,
+                false,
+                16,
+                (Buffer) this.mVerticesFloatBuffer);
         GLES20.glEnableVertexAttribArray(this.ma_TextureCoordinatesHandle);
         OpenGlHelper.checkGLError("glEnableVertexAttribArray ma_TextureCoordinatesHandle");
         GLES20.glEnable(3042);

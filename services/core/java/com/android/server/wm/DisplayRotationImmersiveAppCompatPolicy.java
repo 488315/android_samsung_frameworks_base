@@ -9,7 +9,10 @@ public final class DisplayRotationImmersiveAppCompatPolicy {
     public final DisplayContent mDisplayContent;
     public final DisplayRotation mDisplayRotation;
 
-    public DisplayRotationImmersiveAppCompatPolicy(AppCompatConfiguration appCompatConfiguration, DisplayRotation displayRotation, DisplayContent displayContent) {
+    public DisplayRotationImmersiveAppCompatPolicy(
+            AppCompatConfiguration appCompatConfiguration,
+            DisplayRotation displayRotation,
+            DisplayContent displayContent) {
         this.mDisplayRotation = displayRotation;
         this.mAppCompatConfiguration = appCompatConfiguration;
         this.mDisplayContent = displayContent;
@@ -20,11 +23,25 @@ public final class DisplayRotationImmersiveAppCompatPolicy {
         WindowState findMainWindow;
         Task task;
         DisplayContent displayContent = this.mDisplayContent;
-        if (!displayContent.getIgnoreOrientationRequest() || (activityRecord = displayContent.topRunningActivity(false)) == null || (findMainWindow = activityRecord.findMainWindow(true)) == null || (findMainWindow.mRequestedVisibleTypes & (WindowInsets.Type.statusBars() | WindowInsets.Type.navigationBars())) != 0 || (task = activityRecord.task) == null || task.getWindowingMode() != 1 || activityRecord.areBoundsLetterboxed() || activityRecord.getRequestedConfigurationOrientation() == 0) {
+        if (!displayContent.getIgnoreOrientationRequest()
+                || (activityRecord = displayContent.topRunningActivity(false)) == null
+                || (findMainWindow = activityRecord.findMainWindow(true)) == null
+                || (findMainWindow.mRequestedVisibleTypes
+                                & (WindowInsets.Type.statusBars()
+                                        | WindowInsets.Type.navigationBars()))
+                        != 0
+                || (task = activityRecord.task) == null
+                || task.getWindowingMode() != 1
+                || activityRecord.areBoundsLetterboxed()
+                || activityRecord.getRequestedConfigurationOrientation() == 0) {
             return false;
         }
-        int requestedConfigurationOrientation = activityRecord.getRequestedConfigurationOrientation();
+        int requestedConfigurationOrientation =
+                activityRecord.getRequestedConfigurationOrientation();
         DisplayRotation displayRotation = this.mDisplayRotation;
-        return requestedConfigurationOrientation != (displayRotation.isAnyPortrait(i) ? 1 : displayRotation.isLandscapeOrSeascape(i) ? 2 : 0);
+        return requestedConfigurationOrientation
+                != (displayRotation.isAnyPortrait(i)
+                        ? 1
+                        : displayRotation.isLandscapeOrSeascape(i) ? 2 : 0);
     }
 }

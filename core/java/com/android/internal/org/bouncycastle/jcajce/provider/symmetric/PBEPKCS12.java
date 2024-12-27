@@ -6,15 +6,16 @@ import com.android.internal.org.bouncycastle.asn1.pkcs.PKCS12PBEParams;
 import com.android.internal.org.bouncycastle.jcajce.provider.config.ConfigurableProvider;
 import com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseAlgorithmParameters;
 import com.android.internal.org.bouncycastle.jcajce.provider.util.AlgorithmProvider;
+
 import java.io.IOException;
 import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.InvalidParameterSpecException;
+
 import javax.crypto.spec.PBEParameterSpec;
 
 /* loaded from: classes5.dex */
 public class PBEPKCS12 {
-    private PBEPKCS12() {
-    }
+    private PBEPKCS12() {}
 
     public static class AlgParams extends BaseAlgorithmParameters {
         PKCS12PBEParams params;
@@ -37,17 +38,23 @@ public class PBEPKCS12 {
         }
 
         @Override // com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.BaseAlgorithmParameters
-        protected AlgorithmParameterSpec localEngineGetParameterSpec(Class paramSpec) throws InvalidParameterSpecException {
+        protected AlgorithmParameterSpec localEngineGetParameterSpec(Class paramSpec)
+                throws InvalidParameterSpecException {
             if (paramSpec == PBEParameterSpec.class || paramSpec == AlgorithmParameterSpec.class) {
-                return new PBEParameterSpec(this.params.getIV(), this.params.getIterations().intValue());
+                return new PBEParameterSpec(
+                        this.params.getIV(), this.params.getIterations().intValue());
             }
-            throw new InvalidParameterSpecException("unknown parameter spec passed to PKCS12 PBE parameters object.");
+            throw new InvalidParameterSpecException(
+                    "unknown parameter spec passed to PKCS12 PBE parameters object.");
         }
 
         @Override // java.security.AlgorithmParametersSpi
-        protected void engineInit(AlgorithmParameterSpec paramSpec) throws InvalidParameterSpecException {
+        protected void engineInit(AlgorithmParameterSpec paramSpec)
+                throws InvalidParameterSpecException {
             if (!(paramSpec instanceof PBEParameterSpec)) {
-                throw new InvalidParameterSpecException("PBEParameterSpec required to initialise a PKCS12 PBE parameters algorithm parameters object");
+                throw new InvalidParameterSpecException(
+                        "PBEParameterSpec required to initialise a PKCS12 PBE parameters algorithm"
+                            + " parameters object");
             }
             PBEParameterSpec pbeSpec = (PBEParameterSpec) paramSpec;
             this.params = new PKCS12PBEParams(pbeSpec.getSalt(), pbeSpec.getIterationCount());

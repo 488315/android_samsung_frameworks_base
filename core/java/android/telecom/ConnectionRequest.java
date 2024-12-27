@@ -8,25 +8,27 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.Parcelable;
-import android.telecom.Connection;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes3.dex */
 public final class ConnectionRequest implements Parcelable {
-    public static final Parcelable.Creator<ConnectionRequest> CREATOR = new Parcelable.Creator<ConnectionRequest>() { // from class: android.telecom.ConnectionRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ConnectionRequest createFromParcel(Parcel source) {
-            return new ConnectionRequest(source);
-        }
+    public static final Parcelable.Creator<ConnectionRequest> CREATOR =
+            new Parcelable.Creator<
+                    ConnectionRequest>() { // from class: android.telecom.ConnectionRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ConnectionRequest createFromParcel(Parcel source) {
+                    return new ConnectionRequest(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ConnectionRequest[] newArray(int size) {
-            return new ConnectionRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ConnectionRequest[] newArray(int size) {
+                    return new ConnectionRequest[size];
+                }
+            };
     private final PhoneAccountHandle mAccountHandle;
     private final Uri mAddress;
     private final Bundle mExtras;
@@ -102,7 +104,17 @@ public final class ConnectionRequest implements Parcelable {
         }
 
         public ConnectionRequest build() {
-            return new ConnectionRequest(this.mAccountHandle, this.mAddress, this.mExtras, this.mVideoState, this.mTelecomCallId, this.mShouldShowIncomingCallUi, this.mRttPipeFromInCall, this.mRttPipeToInCall, this.mParticipants, this.mIsAdhocConference);
+            return new ConnectionRequest(
+                    this.mAccountHandle,
+                    this.mAddress,
+                    this.mExtras,
+                    this.mVideoState,
+                    this.mTelecomCallId,
+                    this.mShouldShowIncomingCallUi,
+                    this.mRttPipeFromInCall,
+                    this.mRttPipeToInCall,
+                    this.mParticipants,
+                    this.mIsAdhocConference);
         }
     }
 
@@ -110,19 +122,62 @@ public final class ConnectionRequest implements Parcelable {
         this(accountHandle, handle, extras, 0, null, false, null, null);
     }
 
-    public ConnectionRequest(PhoneAccountHandle accountHandle, Uri handle, Bundle extras, int videoState) {
+    public ConnectionRequest(
+            PhoneAccountHandle accountHandle, Uri handle, Bundle extras, int videoState) {
         this(accountHandle, handle, extras, videoState, null, false, null, null);
     }
 
-    public ConnectionRequest(PhoneAccountHandle accountHandle, Uri handle, Bundle extras, int videoState, String telecomCallId, boolean shouldShowIncomingCallUi) {
-        this(accountHandle, handle, extras, videoState, telecomCallId, shouldShowIncomingCallUi, null, null);
+    public ConnectionRequest(
+            PhoneAccountHandle accountHandle,
+            Uri handle,
+            Bundle extras,
+            int videoState,
+            String telecomCallId,
+            boolean shouldShowIncomingCallUi) {
+        this(
+                accountHandle,
+                handle,
+                extras,
+                videoState,
+                telecomCallId,
+                shouldShowIncomingCallUi,
+                null,
+                null);
     }
 
-    private ConnectionRequest(PhoneAccountHandle accountHandle, Uri handle, Bundle extras, int videoState, String telecomCallId, boolean shouldShowIncomingCallUi, ParcelFileDescriptor rttPipeFromInCall, ParcelFileDescriptor rttPipeToInCall) {
-        this(accountHandle, handle, extras, videoState, telecomCallId, shouldShowIncomingCallUi, rttPipeFromInCall, rttPipeToInCall, null, false);
+    private ConnectionRequest(
+            PhoneAccountHandle accountHandle,
+            Uri handle,
+            Bundle extras,
+            int videoState,
+            String telecomCallId,
+            boolean shouldShowIncomingCallUi,
+            ParcelFileDescriptor rttPipeFromInCall,
+            ParcelFileDescriptor rttPipeToInCall) {
+        this(
+                accountHandle,
+                handle,
+                extras,
+                videoState,
+                telecomCallId,
+                shouldShowIncomingCallUi,
+                rttPipeFromInCall,
+                rttPipeToInCall,
+                null,
+                false);
     }
 
-    private ConnectionRequest(PhoneAccountHandle accountHandle, Uri handle, Bundle extras, int videoState, String telecomCallId, boolean shouldShowIncomingCallUi, ParcelFileDescriptor rttPipeFromInCall, ParcelFileDescriptor rttPipeToInCall, List<Uri> participants, boolean isAdhocConference) {
+    private ConnectionRequest(
+            PhoneAccountHandle accountHandle,
+            Uri handle,
+            Bundle extras,
+            int videoState,
+            String telecomCallId,
+            boolean shouldShowIncomingCallUi,
+            ParcelFileDescriptor rttPipeFromInCall,
+            ParcelFileDescriptor rttPipeToInCall,
+            List<Uri> participants,
+            boolean isAdhocConference) {
         this.mAccountHandle = accountHandle;
         this.mAddress = handle;
         this.mExtras = extras;
@@ -136,14 +191,20 @@ public final class ConnectionRequest implements Parcelable {
     }
 
     private ConnectionRequest(Parcel in) {
-        this.mAccountHandle = (PhoneAccountHandle) in.readParcelable(getClass().getClassLoader(), PhoneAccountHandle.class);
+        this.mAccountHandle =
+                (PhoneAccountHandle)
+                        in.readParcelable(getClass().getClassLoader(), PhoneAccountHandle.class);
         this.mAddress = (Uri) in.readParcelable(getClass().getClassLoader(), Uri.class);
         this.mExtras = (Bundle) in.readParcelable(getClass().getClassLoader(), Bundle.class);
         this.mVideoState = in.readInt();
         this.mTelecomCallId = in.readString();
         this.mShouldShowIncomingCallUi = in.readInt() == 1;
-        this.mRttPipeFromInCall = (ParcelFileDescriptor) in.readParcelable(getClass().getClassLoader(), ParcelFileDescriptor.class);
-        this.mRttPipeToInCall = (ParcelFileDescriptor) in.readParcelable(getClass().getClassLoader(), ParcelFileDescriptor.class);
+        this.mRttPipeFromInCall =
+                (ParcelFileDescriptor)
+                        in.readParcelable(getClass().getClassLoader(), ParcelFileDescriptor.class);
+        this.mRttPipeToInCall =
+                (ParcelFileDescriptor)
+                        in.readParcelable(getClass().getClassLoader(), ParcelFileDescriptor.class);
         this.mParticipants = new ArrayList();
         in.readList(this.mParticipants, getClass().getClassLoader(), Uri.class);
         this.mIsAdhocConference = in.readInt() == 1;
@@ -193,7 +254,9 @@ public final class ConnectionRequest implements Parcelable {
     public Connection.RttTextStream getRttTextStream() {
         if (isRequestingRtt()) {
             if (this.mRttTextStream == null) {
-                this.mRttTextStream = new Connection.RttTextStream(this.mRttPipeToInCall, this.mRttPipeFromInCall);
+                this.mRttTextStream =
+                        new Connection.RttTextStream(
+                                this.mRttPipeToInCall, this.mRttPipeFromInCall);
             }
             return this.mRttTextStream;
         }
@@ -211,7 +274,11 @@ public final class ConnectionRequest implements Parcelable {
         } else {
             logSafePhoneNumber = Connection.toLogSafePhoneNumber(this.mAddress.toString());
         }
-        return String.format("ConnectionRequest %s %s isAdhocConf: %s", logSafePhoneNumber, Log.maskPii(bundleToString(this.mExtras)), isAdhocConferenceCall() ? GnssSignalType.CODE_TYPE_Y : GnssSignalType.CODE_TYPE_N);
+        return String.format(
+                "ConnectionRequest %s %s isAdhocConf: %s",
+                logSafePhoneNumber,
+                Log.maskPii(bundleToString(this.mExtras)),
+                isAdhocConferenceCall() ? GnssSignalType.CODE_TYPE_Y : GnssSignalType.CODE_TYPE_N);
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */

@@ -1,11 +1,13 @@
 package com.android.internal.widget.remotecompose.core.operations.utilities;
 
 import android.media.MediaMetrics;
+
 import java.util.Arrays;
 
 /* loaded from: classes5.dex */
 public class StringUtils {
-    public static String floatToString(float value, int beforeDecimalPoint, int afterDecimalPoint, char pre, char post) {
+    public static String floatToString(
+            float value, int beforeDecimalPoint, int afterDecimalPoint, char pre, char post) {
         int integerPart = (int) value;
         float fractionalPart = value % 1.0f;
         String integerPartString = String.valueOf(integerPart);

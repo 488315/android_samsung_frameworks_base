@@ -20,19 +20,44 @@ public interface IWearableSensingService extends IInterface {
 
     void onValidatedByHotwordDetectionService() throws RemoteException;
 
-    void provideData(PersistableBundle persistableBundle, SharedMemory sharedMemory, RemoteCallback remoteCallback) throws RemoteException;
+    void provideData(
+            PersistableBundle persistableBundle,
+            SharedMemory sharedMemory,
+            RemoteCallback remoteCallback)
+            throws RemoteException;
 
-    void provideDataStream(ParcelFileDescriptor parcelFileDescriptor, IWearableSensingCallback iWearableSensingCallback, RemoteCallback remoteCallback) throws RemoteException;
+    void provideDataStream(
+            ParcelFileDescriptor parcelFileDescriptor,
+            IWearableSensingCallback iWearableSensingCallback,
+            RemoteCallback remoteCallback)
+            throws RemoteException;
 
-    void provideSecureConnection(ParcelFileDescriptor parcelFileDescriptor, IWearableSensingCallback iWearableSensingCallback, RemoteCallback remoteCallback) throws RemoteException;
+    void provideSecureConnection(
+            ParcelFileDescriptor parcelFileDescriptor,
+            IWearableSensingCallback iWearableSensingCallback,
+            RemoteCallback remoteCallback)
+            throws RemoteException;
 
-    void queryServiceStatus(int[] iArr, String str, RemoteCallback remoteCallback) throws RemoteException;
+    void queryServiceStatus(int[] iArr, String str, RemoteCallback remoteCallback)
+            throws RemoteException;
 
-    void registerDataRequestObserver(int i, RemoteCallback remoteCallback, int i2, String str, RemoteCallback remoteCallback2) throws RemoteException;
+    void registerDataRequestObserver(
+            int i,
+            RemoteCallback remoteCallback,
+            int i2,
+            String str,
+            RemoteCallback remoteCallback2)
+            throws RemoteException;
 
-    void startDetection(AmbientContextEventRequest ambientContextEventRequest, String str, RemoteCallback remoteCallback, RemoteCallback remoteCallback2) throws RemoteException;
+    void startDetection(
+            AmbientContextEventRequest ambientContextEventRequest,
+            String str,
+            RemoteCallback remoteCallback,
+            RemoteCallback remoteCallback2)
+            throws RemoteException;
 
-    void startHotwordRecognition(RemoteCallback remoteCallback, RemoteCallback remoteCallback2) throws RemoteException;
+    void startHotwordRecognition(RemoteCallback remoteCallback, RemoteCallback remoteCallback2)
+            throws RemoteException;
 
     void stopActiveHotwordAudio() throws RemoteException;
 
@@ -40,60 +65,78 @@ public interface IWearableSensingService extends IInterface {
 
     void stopHotwordRecognition(RemoteCallback remoteCallback) throws RemoteException;
 
-    void unregisterDataRequestObserver(int i, int i2, String str, RemoteCallback remoteCallback) throws RemoteException;
+    void unregisterDataRequestObserver(int i, int i2, String str, RemoteCallback remoteCallback)
+            throws RemoteException;
 
     public static class Default implements IWearableSensingService {
         @Override // android.service.wearable.IWearableSensingService
-        public void provideSecureConnection(ParcelFileDescriptor parcelFileDescriptor, IWearableSensingCallback wearableSensingCallback, RemoteCallback statusCallback) throws RemoteException {
-        }
+        public void provideSecureConnection(
+                ParcelFileDescriptor parcelFileDescriptor,
+                IWearableSensingCallback wearableSensingCallback,
+                RemoteCallback statusCallback)
+                throws RemoteException {}
 
         @Override // android.service.wearable.IWearableSensingService
-        public void provideDataStream(ParcelFileDescriptor parcelFileDescriptor, IWearableSensingCallback wearableSensingCallback, RemoteCallback statusCallback) throws RemoteException {
-        }
+        public void provideDataStream(
+                ParcelFileDescriptor parcelFileDescriptor,
+                IWearableSensingCallback wearableSensingCallback,
+                RemoteCallback statusCallback)
+                throws RemoteException {}
 
         @Override // android.service.wearable.IWearableSensingService
-        public void provideData(PersistableBundle data, SharedMemory sharedMemory, RemoteCallback callback) throws RemoteException {
-        }
+        public void provideData(
+                PersistableBundle data, SharedMemory sharedMemory, RemoteCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.wearable.IWearableSensingService
-        public void registerDataRequestObserver(int dataType, RemoteCallback dataRequestCallback, int dataRequestObserverId, String packageName, RemoteCallback statusCallback) throws RemoteException {
-        }
+        public void registerDataRequestObserver(
+                int dataType,
+                RemoteCallback dataRequestCallback,
+                int dataRequestObserverId,
+                String packageName,
+                RemoteCallback statusCallback)
+                throws RemoteException {}
 
         @Override // android.service.wearable.IWearableSensingService
-        public void unregisterDataRequestObserver(int dataType, int dataRequestObserverId, String packageName, RemoteCallback statusCallback) throws RemoteException {
-        }
+        public void unregisterDataRequestObserver(
+                int dataType,
+                int dataRequestObserverId,
+                String packageName,
+                RemoteCallback statusCallback)
+                throws RemoteException {}
 
         @Override // android.service.wearable.IWearableSensingService
-        public void startHotwordRecognition(RemoteCallback wearableHotwordCallback, RemoteCallback statusCallback) throws RemoteException {
-        }
+        public void startHotwordRecognition(
+                RemoteCallback wearableHotwordCallback, RemoteCallback statusCallback)
+                throws RemoteException {}
 
         @Override // android.service.wearable.IWearableSensingService
-        public void stopHotwordRecognition(RemoteCallback statusCallback) throws RemoteException {
-        }
+        public void stopHotwordRecognition(RemoteCallback statusCallback) throws RemoteException {}
 
         @Override // android.service.wearable.IWearableSensingService
-        public void onValidatedByHotwordDetectionService() throws RemoteException {
-        }
+        public void onValidatedByHotwordDetectionService() throws RemoteException {}
 
         @Override // android.service.wearable.IWearableSensingService
-        public void stopActiveHotwordAudio() throws RemoteException {
-        }
+        public void stopActiveHotwordAudio() throws RemoteException {}
 
         @Override // android.service.wearable.IWearableSensingService
-        public void startDetection(AmbientContextEventRequest request, String packageName, RemoteCallback detectionResultCallback, RemoteCallback statusCallback) throws RemoteException {
-        }
+        public void startDetection(
+                AmbientContextEventRequest request,
+                String packageName,
+                RemoteCallback detectionResultCallback,
+                RemoteCallback statusCallback)
+                throws RemoteException {}
 
         @Override // android.service.wearable.IWearableSensingService
-        public void stopDetection(String packageName) throws RemoteException {
-        }
+        public void stopDetection(String packageName) throws RemoteException {}
 
         @Override // android.service.wearable.IWearableSensingService
-        public void queryServiceStatus(int[] eventTypes, String packageName, RemoteCallback callback) throws RemoteException {
-        }
+        public void queryServiceStatus(
+                int[] eventTypes, String packageName, RemoteCallback callback)
+                throws RemoteException {}
 
         @Override // android.service.wearable.IWearableSensingService
-        public void killProcess() throws RemoteException {
-        }
+        public void killProcess() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -101,7 +144,7 @@ public interface IWearableSensingService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWearableSensingService {
+    public abstract static class Stub extends Binder implements IWearableSensingService {
         static final int TRANSACTION_killProcess = 13;
         static final int TRANSACTION_onValidatedByHotwordDetectionService = 8;
         static final int TRANSACTION_provideData = 3;
@@ -175,7 +218,8 @@ public interface IWearableSensingService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IWearableSensingService.DESCRIPTOR);
             }
@@ -185,32 +229,44 @@ public interface IWearableSensingService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ParcelFileDescriptor _arg0 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    IWearableSensingCallback _arg1 = IWearableSensingCallback.Stub.asInterface(data.readStrongBinder());
-                    RemoteCallback _arg2 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    ParcelFileDescriptor _arg0 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    IWearableSensingCallback _arg1 =
+                            IWearableSensingCallback.Stub.asInterface(data.readStrongBinder());
+                    RemoteCallback _arg2 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     provideSecureConnection(_arg0, _arg1, _arg2);
                     return true;
                 case 2:
-                    ParcelFileDescriptor _arg02 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    IWearableSensingCallback _arg12 = IWearableSensingCallback.Stub.asInterface(data.readStrongBinder());
-                    RemoteCallback _arg22 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    ParcelFileDescriptor _arg02 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    IWearableSensingCallback _arg12 =
+                            IWearableSensingCallback.Stub.asInterface(data.readStrongBinder());
+                    RemoteCallback _arg22 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     provideDataStream(_arg02, _arg12, _arg22);
                     return true;
                 case 3:
-                    PersistableBundle _arg03 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _arg03 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
                     SharedMemory _arg13 = (SharedMemory) data.readTypedObject(SharedMemory.CREATOR);
-                    RemoteCallback _arg23 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg23 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     provideData(_arg03, _arg13, _arg23);
                     return true;
                 case 4:
                     int _arg04 = data.readInt();
-                    RemoteCallback _arg14 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg14 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     int _arg24 = data.readInt();
                     String _arg3 = data.readString();
-                    RemoteCallback _arg4 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg4 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     registerDataRequestObserver(_arg04, _arg14, _arg24, _arg3, _arg4);
                     return true;
@@ -218,18 +274,22 @@ public interface IWearableSensingService extends IInterface {
                     int _arg05 = data.readInt();
                     int _arg15 = data.readInt();
                     String _arg25 = data.readString();
-                    RemoteCallback _arg32 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg32 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     unregisterDataRequestObserver(_arg05, _arg15, _arg25, _arg32);
                     return true;
                 case 6:
-                    RemoteCallback _arg06 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
-                    RemoteCallback _arg16 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg06 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg16 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     startHotwordRecognition(_arg06, _arg16);
                     return true;
                 case 7:
-                    RemoteCallback _arg07 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg07 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     stopHotwordRecognition(_arg07);
                     return true;
@@ -240,10 +300,14 @@ public interface IWearableSensingService extends IInterface {
                     stopActiveHotwordAudio();
                     return true;
                 case 10:
-                    AmbientContextEventRequest _arg08 = (AmbientContextEventRequest) data.readTypedObject(AmbientContextEventRequest.CREATOR);
+                    AmbientContextEventRequest _arg08 =
+                            (AmbientContextEventRequest)
+                                    data.readTypedObject(AmbientContextEventRequest.CREATOR);
                     String _arg17 = data.readString();
-                    RemoteCallback _arg26 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
-                    RemoteCallback _arg33 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg26 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg33 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     startDetection(_arg08, _arg17, _arg26, _arg33);
                     return true;
@@ -255,7 +319,8 @@ public interface IWearableSensingService extends IInterface {
                 case 12:
                     int[] _arg010 = data.createIntArray();
                     String _arg18 = data.readString();
-                    RemoteCallback _arg27 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg27 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     queryServiceStatus(_arg010, _arg18, _arg27);
                     return true;
@@ -284,7 +349,11 @@ public interface IWearableSensingService extends IInterface {
             }
 
             @Override // android.service.wearable.IWearableSensingService
-            public void provideSecureConnection(ParcelFileDescriptor parcelFileDescriptor, IWearableSensingCallback wearableSensingCallback, RemoteCallback statusCallback) throws RemoteException {
+            public void provideSecureConnection(
+                    ParcelFileDescriptor parcelFileDescriptor,
+                    IWearableSensingCallback wearableSensingCallback,
+                    RemoteCallback statusCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
@@ -298,7 +367,11 @@ public interface IWearableSensingService extends IInterface {
             }
 
             @Override // android.service.wearable.IWearableSensingService
-            public void provideDataStream(ParcelFileDescriptor parcelFileDescriptor, IWearableSensingCallback wearableSensingCallback, RemoteCallback statusCallback) throws RemoteException {
+            public void provideDataStream(
+                    ParcelFileDescriptor parcelFileDescriptor,
+                    IWearableSensingCallback wearableSensingCallback,
+                    RemoteCallback statusCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
@@ -312,7 +385,9 @@ public interface IWearableSensingService extends IInterface {
             }
 
             @Override // android.service.wearable.IWearableSensingService
-            public void provideData(PersistableBundle data, SharedMemory sharedMemory, RemoteCallback callback) throws RemoteException {
+            public void provideData(
+                    PersistableBundle data, SharedMemory sharedMemory, RemoteCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
@@ -326,7 +401,13 @@ public interface IWearableSensingService extends IInterface {
             }
 
             @Override // android.service.wearable.IWearableSensingService
-            public void registerDataRequestObserver(int dataType, RemoteCallback dataRequestCallback, int dataRequestObserverId, String packageName, RemoteCallback statusCallback) throws RemoteException {
+            public void registerDataRequestObserver(
+                    int dataType,
+                    RemoteCallback dataRequestCallback,
+                    int dataRequestObserverId,
+                    String packageName,
+                    RemoteCallback statusCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
@@ -342,7 +423,12 @@ public interface IWearableSensingService extends IInterface {
             }
 
             @Override // android.service.wearable.IWearableSensingService
-            public void unregisterDataRequestObserver(int dataType, int dataRequestObserverId, String packageName, RemoteCallback statusCallback) throws RemoteException {
+            public void unregisterDataRequestObserver(
+                    int dataType,
+                    int dataRequestObserverId,
+                    String packageName,
+                    RemoteCallback statusCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
@@ -357,7 +443,9 @@ public interface IWearableSensingService extends IInterface {
             }
 
             @Override // android.service.wearable.IWearableSensingService
-            public void startHotwordRecognition(RemoteCallback wearableHotwordCallback, RemoteCallback statusCallback) throws RemoteException {
+            public void startHotwordRecognition(
+                    RemoteCallback wearableHotwordCallback, RemoteCallback statusCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
@@ -370,7 +458,8 @@ public interface IWearableSensingService extends IInterface {
             }
 
             @Override // android.service.wearable.IWearableSensingService
-            public void stopHotwordRecognition(RemoteCallback statusCallback) throws RemoteException {
+            public void stopHotwordRecognition(RemoteCallback statusCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
@@ -404,7 +493,12 @@ public interface IWearableSensingService extends IInterface {
             }
 
             @Override // android.service.wearable.IWearableSensingService
-            public void startDetection(AmbientContextEventRequest request, String packageName, RemoteCallback detectionResultCallback, RemoteCallback statusCallback) throws RemoteException {
+            public void startDetection(
+                    AmbientContextEventRequest request,
+                    String packageName,
+                    RemoteCallback detectionResultCallback,
+                    RemoteCallback statusCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);
@@ -431,7 +525,9 @@ public interface IWearableSensingService extends IInterface {
             }
 
             @Override // android.service.wearable.IWearableSensingService
-            public void queryServiceStatus(int[] eventTypes, String packageName, RemoteCallback callback) throws RemoteException {
+            public void queryServiceStatus(
+                    int[] eventTypes, String packageName, RemoteCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IWearableSensingService.DESCRIPTOR);

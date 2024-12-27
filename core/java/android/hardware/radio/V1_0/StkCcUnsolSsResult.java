@@ -3,6 +3,7 @@ package android.hardware.radio.V1_0;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -24,18 +25,46 @@ public final class StkCcUnsolSsResult {
             return false;
         }
         StkCcUnsolSsResult other = (StkCcUnsolSsResult) otherObject;
-        if (this.serviceType == other.serviceType && this.requestType == other.requestType && this.teleserviceType == other.teleserviceType && HidlSupport.deepEquals(Integer.valueOf(this.serviceClass), Integer.valueOf(other.serviceClass)) && this.result == other.result && HidlSupport.deepEquals(this.ssInfo, other.ssInfo) && HidlSupport.deepEquals(this.cfData, other.cfData)) {
+        if (this.serviceType == other.serviceType
+                && this.requestType == other.requestType
+                && this.teleserviceType == other.teleserviceType
+                && HidlSupport.deepEquals(
+                        Integer.valueOf(this.serviceClass), Integer.valueOf(other.serviceClass))
+                && this.result == other.result
+                && HidlSupport.deepEquals(this.ssInfo, other.ssInfo)
+                && HidlSupport.deepEquals(this.cfData, other.cfData)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.serviceType))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.requestType))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.teleserviceType))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.serviceClass))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.result))), Integer.valueOf(HidlSupport.deepHashCode(this.ssInfo)), Integer.valueOf(HidlSupport.deepHashCode(this.cfData)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.serviceType))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.requestType))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.teleserviceType))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.serviceClass))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.result))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.ssInfo)),
+                Integer.valueOf(HidlSupport.deepHashCode(this.cfData)));
     }
 
     public final String toString() {
-        return "{.serviceType = " + SsServiceType.toString(this.serviceType) + ", .requestType = " + SsRequestType.toString(this.requestType) + ", .teleserviceType = " + SsTeleserviceType.toString(this.teleserviceType) + ", .serviceClass = " + SuppServiceClass.dumpBitfield(this.serviceClass) + ", .result = " + RadioError.toString(this.result) + ", .ssInfo = " + this.ssInfo + ", .cfData = " + this.cfData + "}";
+        return "{.serviceType = "
+                + SsServiceType.toString(this.serviceType)
+                + ", .requestType = "
+                + SsRequestType.toString(this.requestType)
+                + ", .teleserviceType = "
+                + SsTeleserviceType.toString(this.teleserviceType)
+                + ", .serviceClass = "
+                + SuppServiceClass.dumpBitfield(this.serviceClass)
+                + ", .result = "
+                + RadioError.toString(this.result)
+                + ", .ssInfo = "
+                + this.ssInfo
+                + ", .cfData = "
+                + this.cfData
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -47,7 +76,8 @@ public final class StkCcUnsolSsResult {
         ArrayList<StkCcUnsolSsResult> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 56, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 56, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             StkCcUnsolSsResult _hidl_vec_element = new StkCcUnsolSsResult();
@@ -57,14 +87,17 @@ public final class StkCcUnsolSsResult {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.serviceType = _hidl_blob.getInt32(_hidl_offset + 0);
         this.requestType = _hidl_blob.getInt32(_hidl_offset + 4);
         this.teleserviceType = _hidl_blob.getInt32(_hidl_offset + 8);
         this.serviceClass = _hidl_blob.getInt32(_hidl_offset + 12);
         this.result = _hidl_blob.getInt32(_hidl_offset + 16);
         int _hidl_vec_size = _hidl_blob.getInt32(_hidl_offset + 24 + 8);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 16, _hidl_blob.handle(), _hidl_offset + 24 + 0, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size * 16, _hidl_blob.handle(), _hidl_offset + 24 + 0, true);
         this.ssInfo.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             SsInfoData _hidl_vec_element = new SsInfoData();
@@ -72,7 +105,9 @@ public final class StkCcUnsolSsResult {
             this.ssInfo.add(_hidl_vec_element);
         }
         int _hidl_vec_size2 = _hidl_blob.getInt32(_hidl_offset + 40 + 8);
-        HwBlob childBlob2 = parcel.readEmbeddedBuffer(_hidl_vec_size2 * 16, _hidl_blob.handle(), _hidl_offset + 40 + 0, true);
+        HwBlob childBlob2 =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size2 * 16, _hidl_blob.handle(), _hidl_offset + 40 + 0, true);
         this.cfData.clear();
         for (int _hidl_index_02 = 0; _hidl_index_02 < _hidl_vec_size2; _hidl_index_02++) {
             CfData _hidl_vec_element2 = new CfData();
@@ -87,7 +122,8 @@ public final class StkCcUnsolSsResult {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<StkCcUnsolSsResult> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<StkCcUnsolSsResult> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);

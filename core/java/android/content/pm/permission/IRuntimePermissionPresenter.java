@@ -14,8 +14,8 @@ public interface IRuntimePermissionPresenter extends IInterface {
 
     public static class Default implements IRuntimePermissionPresenter {
         @Override // android.content.pm.permission.IRuntimePermissionPresenter
-        public void getAppPermissions(String packageName, RemoteCallback callback) throws RemoteException {
-        }
+        public void getAppPermissions(String packageName, RemoteCallback callback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,8 +23,9 @@ public interface IRuntimePermissionPresenter extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRuntimePermissionPresenter {
-        public static final String DESCRIPTOR = "android.content.pm.permission.IRuntimePermissionPresenter";
+    public abstract static class Stub extends Binder implements IRuntimePermissionPresenter {
+        public static final String DESCRIPTOR =
+                "android.content.pm.permission.IRuntimePermissionPresenter";
         static final int TRANSACTION_getAppPermissions = 1;
 
         public Stub() {
@@ -62,7 +63,8 @@ public interface IRuntimePermissionPresenter extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -73,7 +75,8 @@ public interface IRuntimePermissionPresenter extends IInterface {
             switch (code) {
                 case 1:
                     String _arg0 = data.readString();
-                    RemoteCallback _arg1 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg1 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     getAppPermissions(_arg0, _arg1);
                     return true;
@@ -99,7 +102,8 @@ public interface IRuntimePermissionPresenter extends IInterface {
             }
 
             @Override // android.content.pm.permission.IRuntimePermissionPresenter
-            public void getAppPermissions(String packageName, RemoteCallback callback) throws RemoteException {
+            public void getAppPermissions(String packageName, RemoteCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

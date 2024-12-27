@@ -15,9 +15,12 @@ import android.telephony.TelephonyFrameworkInitializer;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.internal.telephony.euicc.IEuiccController;
 import com.android.internal.telephony.flags.Flags;
+
 import com.samsung.android.feature.SemFloatingFeature;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Collections;
@@ -30,29 +33,43 @@ import java.util.stream.Collectors;
 public class EuiccManager {
 
     @SystemApi
-    public static final String ACTION_CONVERT_TO_EMBEDDED_SUBSCRIPTION = "android.telephony.euicc.action.CONVERT_TO_EMBEDDED_SUBSCRIPTION";
+    public static final String ACTION_CONVERT_TO_EMBEDDED_SUBSCRIPTION =
+            "android.telephony.euicc.action.CONVERT_TO_EMBEDDED_SUBSCRIPTION";
 
     @SystemApi
-    public static final String ACTION_DELETE_SUBSCRIPTION_PRIVILEGED = "android.telephony.euicc.action.DELETE_SUBSCRIPTION_PRIVILEGED";
-    public static final String ACTION_MANAGE_EMBEDDED_SUBSCRIPTIONS = "android.telephony.euicc.action.MANAGE_EMBEDDED_SUBSCRIPTIONS";
-    public static final String ACTION_NOTIFY_CARRIER_SETUP_INCOMPLETE = "android.telephony.euicc.action.NOTIFY_CARRIER_SETUP_INCOMPLETE";
+    public static final String ACTION_DELETE_SUBSCRIPTION_PRIVILEGED =
+            "android.telephony.euicc.action.DELETE_SUBSCRIPTION_PRIVILEGED";
+
+    public static final String ACTION_MANAGE_EMBEDDED_SUBSCRIPTIONS =
+            "android.telephony.euicc.action.MANAGE_EMBEDDED_SUBSCRIPTIONS";
+    public static final String ACTION_NOTIFY_CARRIER_SETUP_INCOMPLETE =
+            "android.telephony.euicc.action.NOTIFY_CARRIER_SETUP_INCOMPLETE";
 
     @SystemApi
-    public static final String ACTION_OTA_STATUS_CHANGED = "android.telephony.euicc.action.OTA_STATUS_CHANGED";
+    public static final String ACTION_OTA_STATUS_CHANGED =
+            "android.telephony.euicc.action.OTA_STATUS_CHANGED";
 
     @SystemApi
-    public static final String ACTION_PROVISION_EMBEDDED_SUBSCRIPTION = "android.telephony.euicc.action.PROVISION_EMBEDDED_SUBSCRIPTION";
+    public static final String ACTION_PROVISION_EMBEDDED_SUBSCRIPTION =
+            "android.telephony.euicc.action.PROVISION_EMBEDDED_SUBSCRIPTION";
 
     @SystemApi
-    public static final String ACTION_RENAME_SUBSCRIPTION_PRIVILEGED = "android.telephony.euicc.action.RENAME_SUBSCRIPTION_PRIVILEGED";
-    public static final String ACTION_RESOLVE_ERROR = "android.telephony.euicc.action.RESOLVE_ERROR";
-    public static final String ACTION_START_EUICC_ACTIVATION = "android.telephony.euicc.action.START_EUICC_ACTIVATION";
+    public static final String ACTION_RENAME_SUBSCRIPTION_PRIVILEGED =
+            "android.telephony.euicc.action.RENAME_SUBSCRIPTION_PRIVILEGED";
+
+    public static final String ACTION_RESOLVE_ERROR =
+            "android.telephony.euicc.action.RESOLVE_ERROR";
+    public static final String ACTION_START_EUICC_ACTIVATION =
+            "android.telephony.euicc.action.START_EUICC_ACTIVATION";
 
     @SystemApi
-    public static final String ACTION_TOGGLE_SUBSCRIPTION_PRIVILEGED = "android.telephony.euicc.action.TOGGLE_SUBSCRIPTION_PRIVILEGED";
+    public static final String ACTION_TOGGLE_SUBSCRIPTION_PRIVILEGED =
+            "android.telephony.euicc.action.TOGGLE_SUBSCRIPTION_PRIVILEGED";
 
     @SystemApi
-    public static final String ACTION_TRANSFER_EMBEDDED_SUBSCRIPTIONS = "android.telephony.euicc.action.TRANSFER_EMBEDDED_SUBSCRIPTIONS";
+    public static final String ACTION_TRANSFER_EMBEDDED_SUBSCRIPTIONS =
+            "android.telephony.euicc.action.TRANSFER_EMBEDDED_SUBSCRIPTIONS";
+
     public static final int EMBEDDED_SUBSCRIPTION_RESULT_ERROR = 2;
     public static final int EMBEDDED_SUBSCRIPTION_RESULT_OK = 0;
     public static final int EMBEDDED_SUBSCRIPTION_RESULT_RESOLVABLE_ERROR = 1;
@@ -75,68 +92,80 @@ public class EuiccManager {
     public static final int ERROR_TIME_OUT = 10005;
     public static final int ERROR_UNSUPPORTED_VERSION = 10007;
 
-    @SystemApi
-    public static final int EUICC_ACTIVATION_TYPE_ACCOUNT_REQUIRED = 4;
+    @SystemApi public static final int EUICC_ACTIVATION_TYPE_ACCOUNT_REQUIRED = 4;
 
-    @SystemApi
-    public static final int EUICC_ACTIVATION_TYPE_BACKUP = 2;
+    @SystemApi public static final int EUICC_ACTIVATION_TYPE_BACKUP = 2;
 
-    @SystemApi
-    public static final int EUICC_ACTIVATION_TYPE_DEFAULT = 1;
+    @SystemApi public static final int EUICC_ACTIVATION_TYPE_DEFAULT = 1;
 
-    @SystemApi
-    public static final int EUICC_ACTIVATION_TYPE_TRANSFER = 3;
+    @SystemApi public static final int EUICC_ACTIVATION_TYPE_TRANSFER = 3;
     public static final int EUICC_ACTIVATION_TYPE_TRANSFER_FINAL_HOLD = 5;
     public static final long EUICC_MEMORY_FIELD_UNAVAILABLE = -1;
 
-    @SystemApi
-    public static final int EUICC_OTA_FAILED = 2;
+    @SystemApi public static final int EUICC_OTA_FAILED = 2;
+
+    @SystemApi public static final int EUICC_OTA_IN_PROGRESS = 1;
+
+    @SystemApi public static final int EUICC_OTA_NOT_NEEDED = 4;
+
+    @SystemApi public static final int EUICC_OTA_STATUS_UNAVAILABLE = 5;
+
+    @SystemApi public static final int EUICC_OTA_SUCCEEDED = 3;
 
     @SystemApi
-    public static final int EUICC_OTA_IN_PROGRESS = 1;
+    public static final String EXTRA_ACTIVATION_TYPE =
+            "android.telephony.euicc.extra.ACTIVATION_TYPE";
+
+    public static final String EXTRA_EMBEDDED_SUBSCRIPTION_DETAILED_CODE =
+            "android.telephony.euicc.extra.EMBEDDED_SUBSCRIPTION_DETAILED_CODE";
+    public static final String EXTRA_EMBEDDED_SUBSCRIPTION_DOWNLOADABLE_SUBSCRIPTION =
+            "android.telephony.euicc.extra.EMBEDDED_SUBSCRIPTION_DOWNLOADABLE_SUBSCRIPTION";
 
     @SystemApi
-    public static final int EUICC_OTA_NOT_NEEDED = 4;
+    public static final String EXTRA_EMBEDDED_SUBSCRIPTION_DOWNLOADABLE_SUBSCRIPTIONS =
+            "android.telephony.euicc.extra.EMBEDDED_SUBSCRIPTION_DOWNLOADABLE_SUBSCRIPTIONS";
+
+    public static final String EXTRA_EMBEDDED_SUBSCRIPTION_ERROR_CODE =
+            "android.telephony.euicc.extra.EMBEDDED_SUBSCRIPTION_ERROR_CODE";
+    public static final String EXTRA_EMBEDDED_SUBSCRIPTION_OPERATION_CODE =
+            "android.telephony.euicc.extra.EMBEDDED_SUBSCRIPTION_OPERATION_CODE";
+    public static final String EXTRA_EMBEDDED_SUBSCRIPTION_RESOLUTION_ACTION =
+            "android.telephony.euicc.extra.EMBEDDED_SUBSCRIPTION_RESOLUTION_ACTION";
+    public static final String EXTRA_EMBEDDED_SUBSCRIPTION_RESOLUTION_CALLBACK_INTENT =
+            "android.telephony.euicc.extra.EMBEDDED_SUBSCRIPTION_RESOLUTION_CALLBACK_INTENT";
+    public static final String EXTRA_EMBEDDED_SUBSCRIPTION_RESOLUTION_INTENT =
+            "android.telephony.euicc.extra.EMBEDDED_SUBSCRIPTION_RESOLUTION_INTENT";
+    public static final String EXTRA_EMBEDDED_SUBSCRIPTION_SMDX_REASON_CODE =
+            "android.telephony.euicc.extra.EMBEDDED_SUBSCRIPTION_SMDX_REASON_CODE";
+    public static final String EXTRA_EMBEDDED_SUBSCRIPTION_SMDX_SUBJECT_CODE =
+            "android.telephony.euicc.extra.EMBEDDED_SUBSCRIPTION_SMDX_SUBJECT_CODE";
 
     @SystemApi
-    public static final int EUICC_OTA_STATUS_UNAVAILABLE = 5;
+    public static final String EXTRA_ENABLE_SUBSCRIPTION =
+            "android.telephony.euicc.extra.ENABLE_SUBSCRIPTION";
 
     @SystemApi
-    public static final int EUICC_OTA_SUCCEEDED = 3;
+    public static final String EXTRA_FORCE_PROVISION =
+            "android.telephony.euicc.extra.FORCE_PROVISION";
 
     @SystemApi
-    public static final String EXTRA_ACTIVATION_TYPE = "android.telephony.euicc.extra.ACTIVATION_TYPE";
-    public static final String EXTRA_EMBEDDED_SUBSCRIPTION_DETAILED_CODE = "android.telephony.euicc.extra.EMBEDDED_SUBSCRIPTION_DETAILED_CODE";
-    public static final String EXTRA_EMBEDDED_SUBSCRIPTION_DOWNLOADABLE_SUBSCRIPTION = "android.telephony.euicc.extra.EMBEDDED_SUBSCRIPTION_DOWNLOADABLE_SUBSCRIPTION";
+    public static final String EXTRA_FROM_SUBSCRIPTION_ID =
+            "android.telephony.euicc.extra.FROM_SUBSCRIPTION_ID";
 
     @SystemApi
-    public static final String EXTRA_EMBEDDED_SUBSCRIPTION_DOWNLOADABLE_SUBSCRIPTIONS = "android.telephony.euicc.extra.EMBEDDED_SUBSCRIPTION_DOWNLOADABLE_SUBSCRIPTIONS";
-    public static final String EXTRA_EMBEDDED_SUBSCRIPTION_ERROR_CODE = "android.telephony.euicc.extra.EMBEDDED_SUBSCRIPTION_ERROR_CODE";
-    public static final String EXTRA_EMBEDDED_SUBSCRIPTION_OPERATION_CODE = "android.telephony.euicc.extra.EMBEDDED_SUBSCRIPTION_OPERATION_CODE";
-    public static final String EXTRA_EMBEDDED_SUBSCRIPTION_RESOLUTION_ACTION = "android.telephony.euicc.extra.EMBEDDED_SUBSCRIPTION_RESOLUTION_ACTION";
-    public static final String EXTRA_EMBEDDED_SUBSCRIPTION_RESOLUTION_CALLBACK_INTENT = "android.telephony.euicc.extra.EMBEDDED_SUBSCRIPTION_RESOLUTION_CALLBACK_INTENT";
-    public static final String EXTRA_EMBEDDED_SUBSCRIPTION_RESOLUTION_INTENT = "android.telephony.euicc.extra.EMBEDDED_SUBSCRIPTION_RESOLUTION_INTENT";
-    public static final String EXTRA_EMBEDDED_SUBSCRIPTION_SMDX_REASON_CODE = "android.telephony.euicc.extra.EMBEDDED_SUBSCRIPTION_SMDX_REASON_CODE";
-    public static final String EXTRA_EMBEDDED_SUBSCRIPTION_SMDX_SUBJECT_CODE = "android.telephony.euicc.extra.EMBEDDED_SUBSCRIPTION_SMDX_SUBJECT_CODE";
+    public static final String EXTRA_PHYSICAL_SLOT_ID =
+            "android.telephony.euicc.extra.PHYSICAL_SLOT_ID";
 
     @SystemApi
-    public static final String EXTRA_ENABLE_SUBSCRIPTION = "android.telephony.euicc.extra.ENABLE_SUBSCRIPTION";
+    public static final String EXTRA_SUBSCRIPTION_ID =
+            "android.telephony.euicc.extra.SUBSCRIPTION_ID";
 
     @SystemApi
-    public static final String EXTRA_FORCE_PROVISION = "android.telephony.euicc.extra.FORCE_PROVISION";
+    public static final String EXTRA_SUBSCRIPTION_NICKNAME =
+            "android.telephony.euicc.extra.SUBSCRIPTION_NICKNAME";
 
-    @SystemApi
-    public static final String EXTRA_FROM_SUBSCRIPTION_ID = "android.telephony.euicc.extra.FROM_SUBSCRIPTION_ID";
-
-    @SystemApi
-    public static final String EXTRA_PHYSICAL_SLOT_ID = "android.telephony.euicc.extra.PHYSICAL_SLOT_ID";
-
-    @SystemApi
-    public static final String EXTRA_SUBSCRIPTION_ID = "android.telephony.euicc.extra.SUBSCRIPTION_ID";
-
-    @SystemApi
-    public static final String EXTRA_SUBSCRIPTION_NICKNAME = "android.telephony.euicc.extra.SUBSCRIPTION_NICKNAME";
-    public static final String EXTRA_USE_QR_SCANNER = "android.telephony.euicc.extra.USE_QR_SCANNER";
+    public static final String EXTRA_USE_QR_SCANNER =
+            "android.telephony.euicc.extra.USE_QR_SCANNER";
     public static final long INACTIVE_PORT_AVAILABILITY_CHECK = 240273417;
     public static final String META_DATA_CARRIER_ICON = "android.telephony.euicc.carriericon";
     public static final int OPERATION_APDU = 8;
@@ -157,20 +186,16 @@ public class EuiccManager {
     private final Context mContext;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ErrorCode {
-    }
+    public @interface ErrorCode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface EuiccActivationType {
-    }
+    public @interface EuiccActivationType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface OperationCode {
-    }
+    public @interface OperationCode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface OtaStatus {
-    }
+    public @interface OtaStatus {}
 
     public EuiccManager(Context context) {
         this.mContext = context;
@@ -187,10 +212,14 @@ public class EuiccManager {
     }
 
     public boolean isEnabled() {
-        if (!this.mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_TELEPHONY_EUICC)) {
+        if (!this.mContext
+                .getPackageManager()
+                .hasSystemFeature(PackageManager.FEATURE_TELEPHONY_EUICC)) {
             return false;
         }
-        String slotSwitch = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_COMMON_CONFIG_EMBEDDED_SIM_SLOTSWITCH");
+        String slotSwitch =
+                SemFloatingFeature.getInstance()
+                        .getString("SEC_FLOATING_FEATURE_COMMON_CONFIG_EMBEDDED_SIM_SLOTSWITCH");
         if (getIEuiccController() != null) {
             return refreshCardIdIfUninitialized() || !TextUtils.isEmpty(slotSwitch);
         }
@@ -213,7 +242,8 @@ public class EuiccManager {
             return -1L;
         }
         try {
-            return getIEuiccController().getAvailableMemoryInBytes(this.mCardId, this.mContext.getOpPackageName());
+            return getIEuiccController()
+                    .getAvailableMemoryInBytes(this.mCardId, this.mContext.getOpPackageName());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -231,32 +261,53 @@ public class EuiccManager {
         }
     }
 
-    public void downloadSubscription(DownloadableSubscription subscription, boolean switchAfterDownload, PendingIntent callbackIntent) {
+    public void downloadSubscription(
+            DownloadableSubscription subscription,
+            boolean switchAfterDownload,
+            PendingIntent callbackIntent) {
         if (!isEnabled()) {
             sendUnavailableError(callbackIntent);
             return;
         }
         try {
-            getIEuiccController().downloadSubscription(this.mCardId, subscription, switchAfterDownload, this.mContext.getOpPackageName(), null, callbackIntent);
+            getIEuiccController()
+                    .downloadSubscription(
+                            this.mCardId,
+                            subscription,
+                            switchAfterDownload,
+                            this.mContext.getOpPackageName(),
+                            null,
+                            callbackIntent);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public void startResolutionActivity(Activity activity, int requestCode, Intent resultIntent, PendingIntent callbackIntent) throws IntentSender.SendIntentException {
-        PendingIntent resolutionIntent = (PendingIntent) resultIntent.getParcelableExtra(EXTRA_EMBEDDED_SUBSCRIPTION_RESOLUTION_INTENT, PendingIntent.class);
+    public void startResolutionActivity(
+            Activity activity, int requestCode, Intent resultIntent, PendingIntent callbackIntent)
+            throws IntentSender.SendIntentException {
+        PendingIntent resolutionIntent =
+                (PendingIntent)
+                        resultIntent.getParcelableExtra(
+                                EXTRA_EMBEDDED_SUBSCRIPTION_RESOLUTION_INTENT, PendingIntent.class);
         if (resolutionIntent == null) {
             throw new IllegalArgumentException("Invalid result intent");
         }
         Intent fillInIntent = new Intent();
-        fillInIntent.putExtra(EXTRA_EMBEDDED_SUBSCRIPTION_RESOLUTION_CALLBACK_INTENT, callbackIntent);
-        activity.startIntentSenderForResult(resolutionIntent.getIntentSender(), requestCode, fillInIntent, 0, 0, 0);
+        fillInIntent.putExtra(
+                EXTRA_EMBEDDED_SUBSCRIPTION_RESOLUTION_CALLBACK_INTENT, callbackIntent);
+        activity.startIntentSenderForResult(
+                resolutionIntent.getIntentSender(), requestCode, fillInIntent, 0, 0, 0);
     }
 
     @SystemApi
     public void continueOperation(Intent resolutionIntent, Bundle resolutionExtras) {
         if (!isEnabled()) {
-            PendingIntent callbackIntent = (PendingIntent) resolutionIntent.getParcelableExtra(EXTRA_EMBEDDED_SUBSCRIPTION_RESOLUTION_CALLBACK_INTENT, PendingIntent.class);
+            PendingIntent callbackIntent =
+                    (PendingIntent)
+                            resolutionIntent.getParcelableExtra(
+                                    EXTRA_EMBEDDED_SUBSCRIPTION_RESOLUTION_CALLBACK_INTENT,
+                                    PendingIntent.class);
             if (callbackIntent != null) {
                 sendUnavailableError(callbackIntent);
                 return;
@@ -264,20 +315,27 @@ public class EuiccManager {
             return;
         }
         try {
-            getIEuiccController().continueOperation(this.mCardId, resolutionIntent, resolutionExtras);
+            getIEuiccController()
+                    .continueOperation(this.mCardId, resolutionIntent, resolutionExtras);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
     @SystemApi
-    public void getDownloadableSubscriptionMetadata(DownloadableSubscription subscription, PendingIntent callbackIntent) {
+    public void getDownloadableSubscriptionMetadata(
+            DownloadableSubscription subscription, PendingIntent callbackIntent) {
         if (!isEnabled()) {
             sendUnavailableError(callbackIntent);
             return;
         }
         try {
-            getIEuiccController().getDownloadableSubscriptionMetadata(this.mCardId, subscription, this.mContext.getOpPackageName(), callbackIntent);
+            getIEuiccController()
+                    .getDownloadableSubscriptionMetadata(
+                            this.mCardId,
+                            subscription,
+                            this.mContext.getOpPackageName(),
+                            callbackIntent);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -290,7 +348,9 @@ public class EuiccManager {
             return;
         }
         try {
-            getIEuiccController().getDefaultDownloadableSubscriptionList(this.mCardId, this.mContext.getOpPackageName(), callbackIntent);
+            getIEuiccController()
+                    .getDefaultDownloadableSubscriptionList(
+                            this.mCardId, this.mContext.getOpPackageName(), callbackIntent);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -313,7 +373,12 @@ public class EuiccManager {
             return;
         }
         try {
-            getIEuiccController().deleteSubscription(this.mCardId, subscriptionId, this.mContext.getOpPackageName(), callbackIntent);
+            getIEuiccController()
+                    .deleteSubscription(
+                            this.mCardId,
+                            subscriptionId,
+                            this.mContext.getOpPackageName(),
+                            callbackIntent);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -326,41 +391,75 @@ public class EuiccManager {
         }
         if (subscriptionId == -1) {
             try {
-                if (getIEuiccController().isCompatChangeEnabled(this.mContext.getOpPackageName(), SWITCH_WITHOUT_PORT_INDEX_EXCEPTION_ON_DISABLE)) {
-                    Log.e(TAG, "switchToSubscription without portIndex is not allowed for disable operation");
-                    throw new IllegalArgumentException("Must use switchToSubscription with portIndex API for disable operation");
+                if (getIEuiccController()
+                        .isCompatChangeEnabled(
+                                this.mContext.getOpPackageName(),
+                                SWITCH_WITHOUT_PORT_INDEX_EXCEPTION_ON_DISABLE)) {
+                    Log.e(
+                            TAG,
+                            "switchToSubscription without portIndex is not allowed for disable"
+                                + " operation");
+                    throw new IllegalArgumentException(
+                            "Must use switchToSubscription with portIndex API for disable"
+                                + " operation");
                 }
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
         }
-        getIEuiccController().switchToSubscription(this.mCardId, subscriptionId, this.mContext.getOpPackageName(), callbackIntent);
+        getIEuiccController()
+                .switchToSubscription(
+                        this.mCardId,
+                        subscriptionId,
+                        this.mContext.getOpPackageName(),
+                        callbackIntent);
     }
 
-    public void switchToSubscription(int subscriptionId, int portIndex, PendingIntent callbackIntent) {
+    public void switchToSubscription(
+            int subscriptionId, int portIndex, PendingIntent callbackIntent) {
         if (!isEnabled()) {
             sendUnavailableError(callbackIntent);
             return;
         }
         try {
-            boolean canWriteEmbeddedSubscriptions = this.mContext.checkCallingOrSelfPermission(Manifest.permission.WRITE_EMBEDDED_SUBSCRIPTIONS) == 0;
-            if (!canWriteEmbeddedSubscriptions && !getIEuiccController().hasCarrierPrivilegesForPackageOnAnyPhone(this.mContext.getOpPackageName())) {
+            boolean canWriteEmbeddedSubscriptions =
+                    this.mContext.checkCallingOrSelfPermission(
+                                    Manifest.permission.WRITE_EMBEDDED_SUBSCRIPTIONS)
+                            == 0;
+            if (!canWriteEmbeddedSubscriptions
+                    && !getIEuiccController()
+                            .hasCarrierPrivilegesForPackageOnAnyPhone(
+                                    this.mContext.getOpPackageName())) {
                 Log.e(TAG, "Not permitted to use switchToSubscription with portIndex");
-                throw new SecurityException("Must have carrier privileges to use switchToSubscription with portIndex");
+                throw new SecurityException(
+                        "Must have carrier privileges to use switchToSubscription with portIndex");
             }
-            getIEuiccController().switchToSubscriptionWithPort(this.mCardId, subscriptionId, portIndex, this.mContext.getOpPackageName(), callbackIntent);
+            getIEuiccController()
+                    .switchToSubscriptionWithPort(
+                            this.mCardId,
+                            subscriptionId,
+                            portIndex,
+                            this.mContext.getOpPackageName(),
+                            callbackIntent);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public void updateSubscriptionNickname(int subscriptionId, String nickname, PendingIntent callbackIntent) {
+    public void updateSubscriptionNickname(
+            int subscriptionId, String nickname, PendingIntent callbackIntent) {
         if (!isEnabled()) {
             sendUnavailableError(callbackIntent);
             return;
         }
         try {
-            getIEuiccController().updateSubscriptionNickname(this.mCardId, subscriptionId, nickname, this.mContext.getOpPackageName(), callbackIntent);
+            getIEuiccController()
+                    .updateSubscriptionNickname(
+                            this.mCardId,
+                            subscriptionId,
+                            nickname,
+                            this.mContext.getOpPackageName(),
+                            callbackIntent);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -387,7 +486,8 @@ public class EuiccManager {
             return;
         }
         try {
-            getIEuiccController().eraseSubscriptionsWithOptions(this.mCardId, options, callbackIntent);
+            getIEuiccController()
+                    .eraseSubscriptionsWithOptions(this.mCardId, options, callbackIntent);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -411,7 +511,13 @@ public class EuiccManager {
             return;
         }
         try {
-            getIEuiccController().setSupportedCountries(true, (List) supportedCountries.stream().map(new EuiccManager$$ExternalSyntheticLambda0()).collect(Collectors.toList()));
+            getIEuiccController()
+                    .setSupportedCountries(
+                            true,
+                            (List)
+                                    supportedCountries.stream()
+                                            .map(new EuiccManager$$ExternalSyntheticLambda0())
+                                            .collect(Collectors.toList()));
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -423,7 +529,13 @@ public class EuiccManager {
             return;
         }
         try {
-            getIEuiccController().setSupportedCountries(false, (List) unsupportedCountries.stream().map(new EuiccManager$$ExternalSyntheticLambda0()).collect(Collectors.toList()));
+            getIEuiccController()
+                    .setSupportedCountries(
+                            false,
+                            (List)
+                                    unsupportedCountries.stream()
+                                            .map(new EuiccManager$$ExternalSyntheticLambda0())
+                                            .collect(Collectors.toList()));
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -480,7 +592,10 @@ public class EuiccManager {
     }
 
     private static IEuiccController getIEuiccController() {
-        return IEuiccController.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getEuiccControllerService().get());
+        return IEuiccController.Stub.asInterface(
+                TelephonyFrameworkInitializer.getTelephonyServiceManager()
+                        .getEuiccControllerService()
+                        .get());
     }
 
     private int getCardIdForDefaultEuicc() {
@@ -489,18 +604,21 @@ public class EuiccManager {
             if (pm == null || !pm.hasSystemFeature(PackageManager.FEATURE_TELEPHONY_EUICC)) {
                 return -2;
             }
-            TelephonyManager tm = (TelephonyManager) this.mContext.getSystemService(TelephonyManager.class);
+            TelephonyManager tm =
+                    (TelephonyManager) this.mContext.getSystemService(TelephonyManager.class);
             int cardId = tm.getCardIdForDefaultEuicc();
             return cardId;
         }
-        TelephonyManager tm2 = (TelephonyManager) this.mContext.getSystemService(TelephonyManager.class);
+        TelephonyManager tm2 =
+                (TelephonyManager) this.mContext.getSystemService(TelephonyManager.class);
         int cardId2 = tm2.getCardIdForDefaultEuicc();
         return cardId2;
     }
 
     public boolean isSimPortAvailable(int portIndex) {
         try {
-            return getIEuiccController().isSimPortAvailable(this.mCardId, portIndex, this.mContext.getOpPackageName());
+            return getIEuiccController()
+                    .isSimPortAvailable(this.mCardId, portIndex, this.mContext.getOpPackageName());
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -512,7 +630,11 @@ public class EuiccManager {
             throw new IllegalStateException("Euicc is not enabled");
         }
         try {
-            int[] arr = carrierIds.stream().mapToInt(new PreferentialNetworkServiceConfig$$ExternalSyntheticLambda2()).toArray();
+            int[] arr =
+                    carrierIds.stream()
+                            .mapToInt(
+                                    new PreferentialNetworkServiceConfig$$ExternalSyntheticLambda2())
+                            .toArray();
             getIEuiccController().setPsimConversionSupportedCarriers(arr);
         } catch (RemoteException e) {
             throw e.rethrowAsRuntimeException();

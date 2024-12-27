@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util;
 
 import android.security.keystore.KeyProperties;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.internal.org.bouncycastle.asn1.kisa.KISAObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.misc.MiscObjectIdentifiers;
@@ -14,10 +15,12 @@ import com.android.internal.org.bouncycastle.crypto.params.KDFParameters;
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.Integers;
 import com.android.internal.org.bouncycastle.util.Strings;
+
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
+
 import javax.crypto.KeyAgreementSpi;
 import javax.crypto.SecretKey;
 import javax.crypto.ShortBufferException;
@@ -94,13 +97,24 @@ public abstract class BaseAgreementSpi extends KeyAgreementSpi {
         nameTable.put(OIWObjectIdentifiers.desOFB.getId(), "DES");
         nameTable.put(OIWObjectIdentifiers.desEDE.getId(), KeyProperties.KEY_ALGORITHM_3DES);
         nameTable.put(PKCSObjectIdentifiers.des_EDE3_CBC.getId(), KeyProperties.KEY_ALGORITHM_3DES);
-        nameTable.put(PKCSObjectIdentifiers.id_alg_CMS3DESwrap.getId(), KeyProperties.KEY_ALGORITHM_3DES);
+        nameTable.put(
+                PKCSObjectIdentifiers.id_alg_CMS3DESwrap.getId(), KeyProperties.KEY_ALGORITHM_3DES);
         nameTable.put(PKCSObjectIdentifiers.id_alg_CMSRC2wrap.getId(), "RC2");
-        nameTable.put(PKCSObjectIdentifiers.id_hmacWithSHA1.getId(), KeyProperties.KEY_ALGORITHM_HMAC_SHA1);
-        nameTable.put(PKCSObjectIdentifiers.id_hmacWithSHA224.getId(), KeyProperties.KEY_ALGORITHM_HMAC_SHA224);
-        nameTable.put(PKCSObjectIdentifiers.id_hmacWithSHA256.getId(), KeyProperties.KEY_ALGORITHM_HMAC_SHA256);
-        nameTable.put(PKCSObjectIdentifiers.id_hmacWithSHA384.getId(), KeyProperties.KEY_ALGORITHM_HMAC_SHA384);
-        nameTable.put(PKCSObjectIdentifiers.id_hmacWithSHA512.getId(), KeyProperties.KEY_ALGORITHM_HMAC_SHA512);
+        nameTable.put(
+                PKCSObjectIdentifiers.id_hmacWithSHA1.getId(),
+                KeyProperties.KEY_ALGORITHM_HMAC_SHA1);
+        nameTable.put(
+                PKCSObjectIdentifiers.id_hmacWithSHA224.getId(),
+                KeyProperties.KEY_ALGORITHM_HMAC_SHA224);
+        nameTable.put(
+                PKCSObjectIdentifiers.id_hmacWithSHA256.getId(),
+                KeyProperties.KEY_ALGORITHM_HMAC_SHA256);
+        nameTable.put(
+                PKCSObjectIdentifiers.id_hmacWithSHA384.getId(),
+                KeyProperties.KEY_ALGORITHM_HMAC_SHA384);
+        nameTable.put(
+                PKCSObjectIdentifiers.id_hmacWithSHA512.getId(),
+                KeyProperties.KEY_ALGORITHM_HMAC_SHA512);
         nameTable.put(NTTObjectIdentifiers.id_camellia128_cbc.getId(), "Camellia");
         nameTable.put(NTTObjectIdentifiers.id_camellia192_cbc.getId(), "Camellia");
         nameTable.put(NTTObjectIdentifiers.id_camellia256_cbc.getId(), "Camellia");
@@ -144,7 +158,8 @@ public abstract class BaseAgreementSpi extends KeyAgreementSpi {
 
     protected static int getKeySize(String algDetails) {
         if (algDetails.indexOf(91) > 0) {
-            return Integer.parseInt(algDetails.substring(algDetails.indexOf(91) + 1, algDetails.indexOf(93)));
+            return Integer.parseInt(
+                    algDetails.substring(algDetails.indexOf(91) + 1, algDetails.indexOf(93)));
         }
         String algKey = Strings.toUpperCase(algDetails);
         if (!keySizes.containsKey(algKey)) {
@@ -180,10 +195,12 @@ public abstract class BaseAgreementSpi extends KeyAgreementSpi {
     }
 
     @Override // javax.crypto.KeyAgreementSpi
-    protected int engineGenerateSecret(byte[] sharedSecret, int offset) throws IllegalStateException, ShortBufferException {
+    protected int engineGenerateSecret(byte[] sharedSecret, int offset)
+            throws IllegalStateException, ShortBufferException {
         byte[] secret = engineGenerateSecret();
         if (sharedSecret.length - offset < secret.length) {
-            throw new ShortBufferException(this.kaAlgorithm + " key agreement: need " + secret.length + " bytes");
+            throw new ShortBufferException(
+                    this.kaAlgorithm + " key agreement: need " + secret.length + " bytes");
         }
         System.arraycopy(secret, 0, sharedSecret, offset, secret.length);
         return secret.length;
@@ -205,10 +222,12 @@ public abstract class BaseAgreementSpi extends KeyAgreementSpi {
         return new SecretKeySpec(secret, algName);
     }
 
-    private byte[] getSharedSecretBytes(byte[] secret, String oidAlgorithm, int keySize) throws NoSuchAlgorithmException {
+    private byte[] getSharedSecretBytes(byte[] secret, String oidAlgorithm, int keySize)
+            throws NoSuchAlgorithmException {
         if (this.kdf != null) {
             if (keySize < 0) {
-                throw new NoSuchAlgorithmException("unknown algorithm encountered: " + oidAlgorithm);
+                throw new NoSuchAlgorithmException(
+                        "unknown algorithm encountered: " + oidAlgorithm);
             }
             byte[] keyBytes = new byte[keySize / 8];
             KDFParameters params = new KDFParameters(secret, this.ukmParameters);

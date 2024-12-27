@@ -1,6 +1,7 @@
 package com.android.server.wm;
 
 import android.view.InsetsState;
+
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -9,7 +10,8 @@ public final /* synthetic */ class WindowToken$$ExternalSyntheticLambda1 impleme
     public final /* synthetic */ WindowToken f$0;
     public final /* synthetic */ boolean f$1;
 
-    public /* synthetic */ WindowToken$$ExternalSyntheticLambda1(WindowToken windowToken, boolean z) {
+    public /* synthetic */ WindowToken$$ExternalSyntheticLambda1(
+            WindowToken windowToken, boolean z) {
         this.f$0 = windowToken;
         this.f$1 = z;
     }
@@ -24,7 +26,8 @@ public final /* synthetic */ class WindowToken$$ExternalSyntheticLambda1 impleme
             if (!z) {
                 windowState.mFrozenInsetsState = null;
             } else if (windowState.mFrozenInsetsState == null) {
-                windowState.mFrozenInsetsState = new InsetsState(windowState.getInsetsState(false), true);
+                windowState.mFrozenInsetsState =
+                        new InsetsState(windowState.getInsetsState(false), true);
             }
         }
     }

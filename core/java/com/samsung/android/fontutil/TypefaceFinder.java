@@ -5,15 +5,18 @@ import android.content.res.AssetManager;
 import android.net.Uri;
 import android.sec.enterprise.content.SecContentProviderURI;
 import android.util.Log;
+
+import org.xml.sax.InputSource;
+import org.xml.sax.XMLReader;
+
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import org.xml.sax.InputSource;
-import org.xml.sax.XMLReader;
 
 /* loaded from: classes6.dex */
 public class TypefaceFinder {
@@ -23,7 +26,8 @@ public class TypefaceFinder {
     private static final String FONT_EXTENSION = ".ttf";
     private static final String FONT_FOUNDATION_PRELOAD = "com.monotype.android.font.foundation";
     private static final String FONT_ROBOTO_PRELOAD = "com.monotype.android.font.roboto";
-    private static final String FONT_SAMSUNGONE_DOWNLOAD = "com.monotype.android.font.samsungoneuiregular";
+    private static final String FONT_SAMSUNGONE_DOWNLOAD =
+            "com.monotype.android.font.samsungoneuiregular";
     public static final String FONT_SAMSUNGONE_PRELOAD = "com.monotype.android.font.samsungone";
     private static final String TAG = "TypefaceFinder";
     private final List<SemTypeface> mTypefaces = new ArrayList();
@@ -40,7 +44,12 @@ public class TypefaceFinder {
                 return;
             }
             for (String xmlFile : xmlFiles) {
-                Uri uriXML = Uri.parse(SecContentProviderURI.CONTENT + fontPackageName + "/xml/" + xmlFile);
+                Uri uriXML =
+                        Uri.parse(
+                                SecContentProviderURI.CONTENT
+                                        + fontPackageName
+                                        + "/xml/"
+                                        + xmlFile);
                 try {
                     InputStream in = context.getContentResolver().openInputStream(uriXML);
                     try {
@@ -98,7 +107,8 @@ public class TypefaceFinder {
         }
     }
 
-    private void parseTypefaceXml(String xmlFilename, InputStream inStream, String fontPackageName) {
+    private void parseTypefaceXml(
+            String xmlFilename, InputStream inStream, String fontPackageName) {
         try {
             SAXParserFactory spf = SAXParserFactory.newInstance();
             SAXParser sp = spf.newSAXParser();
@@ -124,12 +134,21 @@ public class TypefaceFinder {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void getSansEntries(android.content.Context r24, android.content.pm.PackageManager r25, java.util.ArrayList r26, java.util.ArrayList r27, java.util.ArrayList r28) {
+    public void getSansEntries(
+            android.content.Context r24,
+            android.content.pm.PackageManager r25,
+            java.util.ArrayList r26,
+            java.util.ArrayList r27,
+            java.util.ArrayList r28) {
         /*
             Method dump skipped, instructions count: 392
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.fontutil.TypefaceFinder.getSansEntries(android.content.Context, android.content.pm.PackageManager, java.util.ArrayList, java.util.ArrayList, java.util.ArrayList):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.fontutil.TypefaceFinder.getSansEntries(android.content.Context,"
+                    + " android.content.pm.PackageManager, java.util.ArrayList,"
+                    + " java.util.ArrayList, java.util.ArrayList):void");
     }
 
     public SemTypeface findMatchingTypeface(String typefaceFilename) {

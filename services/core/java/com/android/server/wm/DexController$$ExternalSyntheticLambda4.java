@@ -3,7 +3,7 @@ package com.android.server.wm;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.util.Slog;
-import com.android.server.wm.DexController;
+
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
@@ -29,10 +29,13 @@ public final /* synthetic */ class DexController$$ExternalSyntheticLambda4 imple
                 DisplayContent displayContent = (DisplayContent) this.f$1;
                 Task task = (Task) obj;
                 dexController.getClass();
-                if (!task.isActivityTypeHome() && !task.isActivityTypeRecents() && !task.mCreatedByOrganizer) {
+                if (!task.isActivityTypeHome()
+                        && !task.isActivityTypeRecents()
+                        && !task.mCreatedByOrganizer) {
                     task.getRootTask().reparent(displayContent.getDefaultTaskDisplayArea(), false);
                     if (task.inFreeformWindowingMode()) {
-                        dexController.mAtm.mTaskSupervisor.mLaunchParamsController.layoutTask(task, null, null, null, null, -1);
+                        dexController.mAtm.mTaskSupervisor.mLaunchParamsController.layoutTask(
+                                task, null, null, null, null, -1);
                         break;
                     }
                 }
@@ -43,9 +46,16 @@ public final /* synthetic */ class DexController$$ExternalSyntheticLambda4 imple
                 Task task2 = (Task) obj;
                 dexController2.getClass();
                 ActivityRecord rootActivity = task2.getRootActivity(true, false);
-                if (rootActivity != null && rootActivity.isActivityTypeStandardOrUndefined() && task2.isActivityTypeStandardOrUndefined()) {
-                    if (!task2.inRecents || (((intent = task2.intent) != null && (intent.getFlags() & 8388608) != 0) || dexController2.getNonStartableActivityInDexMode(task2) != null)) {
-                        dexController2.mH.post(new DexController$$ExternalSyntheticLambda5(dexController2, task2));
+                if (rootActivity != null
+                        && rootActivity.isActivityTypeStandardOrUndefined()
+                        && task2.isActivityTypeStandardOrUndefined()) {
+                    if (!task2.inRecents
+                            || (((intent = task2.intent) != null
+                                            && (intent.getFlags() & 8388608) != 0)
+                                    || dexController2.getNonStartableActivityInDexMode(task2)
+                                            != null)) {
+                        dexController2.mH.post(
+                                new DexController$$ExternalSyntheticLambda5(dexController2, task2));
                         break;
                     } else {
                         ActivityOptions makeBasic = ActivityOptions.makeBasic();
@@ -53,7 +63,8 @@ public final /* synthetic */ class DexController$$ExternalSyntheticLambda4 imple
                         if (displayContent2.isDexMode()) {
                             task2.updateDexCompatMode(null, null, false);
                         }
-                        dexController2.mAtm.mTaskSupervisor.mLaunchParamsController.layoutTask(task2, null, null, null, makeBasic, -1);
+                        dexController2.mAtm.mTaskSupervisor.mLaunchParamsController.layoutTask(
+                                task2, null, null, null, makeBasic, -1);
                         if (!displayContent2.getBounds().equals(task2.getBounds())) {
                             if (task2.getRequestedOverrideWindowingMode() != 5) {
                                 task2.setWindowingMode(5);
@@ -61,18 +72,24 @@ public final /* synthetic */ class DexController$$ExternalSyntheticLambda4 imple
                             }
                         } else {
                             task2.setWindowingMode(1);
-                            Slog.d("DexController", "moveTaskToFreeformLocked: has fullscreen dex persistent bounds task= " + task2);
+                            Slog.d(
+                                    "DexController",
+                                    "moveTaskToFreeformLocked: has fullscreen dex persistent bounds"
+                                        + " task= "
+                                            + task2);
                             break;
                         }
                     }
                 }
                 break;
             default:
-                DexController.FindTaskResult findTaskResult = (DexController.FindTaskResult) this.f$0;
+                DexController.FindTaskResult findTaskResult =
+                        (DexController.FindTaskResult) this.f$0;
                 AtomicInteger atomicInteger = (AtomicInteger) this.f$1;
                 ActivityRecord activityRecord = (ActivityRecord) obj;
                 findTaskResult.getClass();
-                if (findTaskResult.mProcessName.equals(activityRecord.processName) && activityRecord.getUid() == findTaskResult.mUid) {
+                if (findTaskResult.mProcessName.equals(activityRecord.processName)
+                        && activityRecord.getUid() == findTaskResult.mUid) {
                     atomicInteger.set(findTaskResult.mTask.getChildCount());
                     break;
                 }

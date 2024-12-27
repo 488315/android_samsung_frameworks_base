@@ -4,8 +4,6 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.RemoteException;
-import com.samsung.android.wifi.stdp.IStandardPlusCallback;
-import com.samsung.android.wifi.stdp.StandardPlusManager;
 
 /* loaded from: classes6.dex */
 public class StandardPlusManager {
@@ -36,12 +34,15 @@ public class StandardPlusManager {
         @Override // com.samsung.android.wifi.stdp.IStandardPlusCallback
         public void onEvent(final int event) {
             if (this.mCallback != null) {
-                this.mHandler.post(new Runnable() { // from class: com.samsung.android.wifi.stdp.StandardPlusManager$StandardPlusCallbackProxy$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        StandardPlusManager.StandardPlusCallbackProxy.this.lambda$onEvent$0(event);
-                    }
-                });
+                this.mHandler.post(
+                        new Runnable() { // from class:
+                                         // com.samsung.android.wifi.stdp.StandardPlusManager$StandardPlusCallbackProxy$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                StandardPlusManager.StandardPlusCallbackProxy.this.lambda$onEvent$0(
+                                        event);
+                            }
+                        });
             }
         }
 
@@ -92,7 +93,8 @@ public class StandardPlusManager {
     }
 
     public boolean registerCallback(EventListener listener) {
-        StandardPlusCallbackProxy callbackProxy = new StandardPlusCallbackProxy(this.mLooper, listener);
+        StandardPlusCallbackProxy callbackProxy =
+                new StandardPlusCallbackProxy(this.mLooper, listener);
         try {
             return this.mService.registerCallback(listener.hashCode(), callbackProxy);
         } catch (RemoteException e) {

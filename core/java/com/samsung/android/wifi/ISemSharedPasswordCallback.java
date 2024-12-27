@@ -18,16 +18,13 @@ public interface ISemSharedPasswordCallback extends IInterface {
 
     public static class Default implements ISemSharedPasswordCallback {
         @Override // com.samsung.android.wifi.ISemSharedPasswordCallback
-        public void onAccepted(String bssid, String password) throws RemoteException {
-        }
+        public void onAccepted(String bssid, String password) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemSharedPasswordCallback
-        public void onRejected(String bssid) throws RemoteException {
-        }
+        public void onRejected(String bssid) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.ISemSharedPasswordCallback
-        public void onAvailable(boolean isPossibleToRequest) throws RemoteException {
-        }
+        public void onAvailable(boolean isPossibleToRequest) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -35,7 +32,7 @@ public interface ISemSharedPasswordCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemSharedPasswordCallback {
+    public abstract static class Stub extends Binder implements ISemSharedPasswordCallback {
         static final int TRANSACTION_onAccepted = 1;
         static final int TRANSACTION_onAvailable = 3;
         static final int TRANSACTION_onRejected = 2;
@@ -79,7 +76,8 @@ public interface ISemSharedPasswordCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemSharedPasswordCallback.DESCRIPTOR);
             }

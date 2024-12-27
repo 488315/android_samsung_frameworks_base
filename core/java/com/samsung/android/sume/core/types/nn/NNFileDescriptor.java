@@ -4,23 +4,27 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.Parcelable;
+
 import java.io.IOException;
 
 /* loaded from: classes6.dex */
 public class NNFileDescriptor implements Parcelable, Cloneable {
-    public static final Parcelable.Creator<NNFileDescriptor> CREATOR = new Parcelable.Creator<NNFileDescriptor>() { // from class: com.samsung.android.sume.core.types.nn.NNFileDescriptor.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NNFileDescriptor createFromParcel(Parcel in) {
-            return new NNFileDescriptor(in);
-        }
+    public static final Parcelable.Creator<NNFileDescriptor> CREATOR =
+            new Parcelable.Creator<
+                    NNFileDescriptor>() { // from class:
+                                          // com.samsung.android.sume.core.types.nn.NNFileDescriptor.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NNFileDescriptor createFromParcel(Parcel in) {
+                    return new NNFileDescriptor(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NNFileDescriptor[] newArray(int size) {
-            return new NNFileDescriptor[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NNFileDescriptor[] newArray(int size) {
+                    return new NNFileDescriptor[size];
+                }
+            };
     private ParcelFileDescriptor fd;
     private long length;
     private String name;
@@ -52,7 +56,9 @@ public class NNFileDescriptor implements Parcelable, Cloneable {
         this.realPath = in.readString();
         this.offset = in.readLong();
         this.length = in.readLong();
-        this.fd = (ParcelFileDescriptor) in.readParcelable(ParcelFileDescriptor.class.getClassLoader());
+        this.fd =
+                (ParcelFileDescriptor)
+                        in.readParcelable(ParcelFileDescriptor.class.getClassLoader());
     }
 
     @Override // android.os.Parcelable

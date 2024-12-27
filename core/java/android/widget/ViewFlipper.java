@@ -7,7 +7,7 @@ import android.view.RemotableViewMethod;
 import android.view.inspector.InspectionCompanion;
 import android.view.inspector.PropertyMapper;
 import android.view.inspector.PropertyReader;
-import android.widget.RemoteViews;
+
 import com.android.internal.R;
 
 @RemoteViews.RemoteView
@@ -23,7 +23,8 @@ public class ViewFlipper extends ViewAnimator {
     private boolean mStarted;
     private boolean mVisible;
 
-    public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<ViewFlipper> {
+    public final class InspectionCompanion
+            implements android.view.inspector.InspectionCompanion<ViewFlipper> {
         private int mAutoStartId;
         private int mFlipIntervalId;
         private int mFlippingId;
@@ -55,15 +56,17 @@ public class ViewFlipper extends ViewAnimator {
         this.mRunning = false;
         this.mStarted = false;
         this.mVisible = false;
-        this.mFlipRunnable = new Runnable() { // from class: android.widget.ViewFlipper.1
-            @Override // java.lang.Runnable
-            public void run() {
-                if (ViewFlipper.this.mRunning) {
-                    ViewFlipper.this.showNext();
-                    ViewFlipper.this.postDelayed(ViewFlipper.this.mFlipRunnable, ViewFlipper.this.mFlipInterval);
-                }
-            }
-        };
+        this.mFlipRunnable =
+                new Runnable() { // from class: android.widget.ViewFlipper.1
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        if (ViewFlipper.this.mRunning) {
+                            ViewFlipper.this.showNext();
+                            ViewFlipper.this.postDelayed(
+                                    ViewFlipper.this.mFlipRunnable, ViewFlipper.this.mFlipInterval);
+                        }
+                    }
+                };
     }
 
     public ViewFlipper(Context context, AttributeSet attrs) {
@@ -73,15 +76,17 @@ public class ViewFlipper extends ViewAnimator {
         this.mRunning = false;
         this.mStarted = false;
         this.mVisible = false;
-        this.mFlipRunnable = new Runnable() { // from class: android.widget.ViewFlipper.1
-            @Override // java.lang.Runnable
-            public void run() {
-                if (ViewFlipper.this.mRunning) {
-                    ViewFlipper.this.showNext();
-                    ViewFlipper.this.postDelayed(ViewFlipper.this.mFlipRunnable, ViewFlipper.this.mFlipInterval);
-                }
-            }
-        };
+        this.mFlipRunnable =
+                new Runnable() { // from class: android.widget.ViewFlipper.1
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        if (ViewFlipper.this.mRunning) {
+                            ViewFlipper.this.showNext();
+                            ViewFlipper.this.postDelayed(
+                                    ViewFlipper.this.mFlipRunnable, ViewFlipper.this.mFlipInterval);
+                        }
+                    }
+                };
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ViewFlipper);
         this.mFlipInterval = a.getInt(0, 3000);
         this.mAutoStart = a.getBoolean(1, false);
@@ -129,7 +134,8 @@ public class ViewFlipper extends ViewAnimator {
         updateRunning();
     }
 
-    @Override // android.widget.ViewAnimator, android.widget.FrameLayout, android.view.ViewGroup, android.view.View
+    @Override // android.widget.ViewAnimator, android.widget.FrameLayout, android.view.ViewGroup,
+              // android.view.View
     public CharSequence getAccessibilityClassName() {
         return ViewFlipper.class.getName();
     }

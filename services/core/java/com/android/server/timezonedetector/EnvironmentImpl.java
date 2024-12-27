@@ -4,10 +4,11 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.util.LocalLog;
+
 import com.android.server.SystemTimeZone;
 import com.android.server.alarm.AlarmManagerService;
 import com.android.server.timedetector.TimeDetectorStrategyImpl$$ExternalSyntheticLambda0;
-import com.android.server.timezonedetector.TimeZoneDetectorStrategyImpl;
+
 import java.io.PrintWriter;
 import java.util.Objects;
 
@@ -52,7 +53,9 @@ public final class EnvironmentImpl implements TimeZoneDetectorStrategyImpl.Envir
     }
 
     @Override // com.android.server.timezonedetector.TimeZoneDetectorStrategyImpl.Environment
-    public final void runAsync(TimeDetectorStrategyImpl$$ExternalSyntheticLambda0 timeDetectorStrategyImpl$$ExternalSyntheticLambda0) {
+    public final void runAsync(
+            TimeDetectorStrategyImpl$$ExternalSyntheticLambda0
+                    timeDetectorStrategyImpl$$ExternalSyntheticLambda0) {
         this.mHandler.post(timeDetectorStrategyImpl$$ExternalSyntheticLambda0);
     }
 

@@ -7,18 +7,21 @@ import android.os.RemoteException;
 import android.os.SystemClock;
 import android.util.ArraySet;
 import android.util.Slog;
+
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
-import com.android.server.usage.AppStandbyController;
+
 import java.util.Iterator;
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class AppStandbyController$$ExternalSyntheticLambda0 implements Runnable {
+public final /* synthetic */ class AppStandbyController$$ExternalSyntheticLambda0
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ AppStandbyController f$0;
 
-    public /* synthetic */ AppStandbyController$$ExternalSyntheticLambda0(AppStandbyController appStandbyController, int i) {
+    public /* synthetic */ AppStandbyController$$ExternalSyntheticLambda0(
+            AppStandbyController appStandbyController, int i) {
         this.$r8$classId = i;
         this.f$0 = appStandbyController;
     }
@@ -34,7 +37,8 @@ public final /* synthetic */ class AppStandbyController$$ExternalSyntheticLambda
                     return;
                 }
                 try {
-                    String[] fullPowerWhitelistExceptIdle = injector.mDeviceIdleController.getFullPowerWhitelistExceptIdle();
+                    String[] fullPowerWhitelistExceptIdle =
+                            injector.mDeviceIdleController.getFullPowerWhitelistExceptIdle();
                     synchronized (injector.mPowerWhitelistedApps) {
                         try {
                             injector.mPowerWhitelistedApps.clear();
@@ -52,8 +56,14 @@ public final /* synthetic */ class AppStandbyController$$ExternalSyntheticLambda
             default:
                 appStandbyController.getClass();
                 long uptimeMillis = SystemClock.uptimeMillis();
-                List installedPackagesAsUser = appStandbyController.mPackageManager.getInstalledPackagesAsUser(1835520, 0);
-                List queryIntentActivitiesAsUser = appStandbyController.mPackageManager.queryIntentActivitiesAsUser(new Intent("android.intent.action.MAIN").addCategory("android.intent.category.LAUNCHER"), 1835520, 0);
+                List installedPackagesAsUser =
+                        appStandbyController.mPackageManager.getInstalledPackagesAsUser(1835520, 0);
+                List queryIntentActivitiesAsUser =
+                        appStandbyController.mPackageManager.queryIntentActivitiesAsUser(
+                                new Intent("android.intent.action.MAIN")
+                                        .addCategory("android.intent.category.LAUNCHER"),
+                                1835520,
+                                0);
                 ArraySet arraySet = new ArraySet();
                 Iterator it = queryIntentActivitiesAsUser.iterator();
                 while (it.hasNext()) {
@@ -64,9 +74,13 @@ public final /* synthetic */ class AppStandbyController$$ExternalSyntheticLambda
                     PackageInfo packageInfo = (PackageInfo) installedPackagesAsUser.get(i2);
                     if (packageInfo != null) {
                         String str2 = packageInfo.packageName;
-                        if (appStandbyController.updateHeadlessSystemAppCache(str2, !arraySet.contains(str2))) {
+                        if (appStandbyController.updateHeadlessSystemAppCache(
+                                str2, !arraySet.contains(str2))) {
                             Flags.avoidIdleCheck();
-                            appStandbyController.mHandler.obtainMessage(11, 0, -1, str2).sendToTarget();
+                            appStandbyController
+                                    .mHandler
+                                    .obtainMessage(11, 0, -1, str2)
+                                    .sendToTarget();
                         }
                     }
                 }
@@ -74,7 +88,8 @@ public final /* synthetic */ class AppStandbyController$$ExternalSyntheticLambda
                 StringBuilder sb = new StringBuilder("Loaded headless system app cache in ");
                 sb.append(uptimeMillis2 - uptimeMillis);
                 sb.append(" ms: appIdleEnabled=");
-                AnyMotionDetector$$ExternalSyntheticOutline0.m("AppStandbyController", sb, appStandbyController.mAppIdleEnabled);
+                AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                        "AppStandbyController", sb, appStandbyController.mAppIdleEnabled);
                 return;
         }
     }

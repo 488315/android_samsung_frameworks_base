@@ -3,6 +3,7 @@ package com.android.server.ibs.sqd;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.util.Slog;
+
 import com.android.server.ibs.sleepmode.SharePrefUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -25,22 +26,36 @@ public final /* synthetic */ class IbsQuickDim$$ExternalSyntheticLambda0 impleme
                 ibsQuickDim.getClass();
                 Slog.d("IbsQuickDim", "readBlockList");
                 ibsQuickDim.mBlockUnDimUidSet.clear();
-                Cursor query = ibsQuickDim.mSQLiteSQDwhilteList.getDataOperator(0).query(ibsQuickDim.mSQLiteSQDwhilteList.mDb);
+                Cursor query =
+                        ibsQuickDim
+                                .mSQLiteSQDwhilteList
+                                .getDataOperator(0)
+                                .query(ibsQuickDim.mSQLiteSQDwhilteList.mDb);
                 if (query != null) {
                     while (query.moveToNext()) {
                         try {
-                            ibsQuickDim.mBlockUnDimUidSet.add(Integer.valueOf(Integer.parseInt(query.getString(query.getColumnIndex("Uid")))));
+                            ibsQuickDim.mBlockUnDimUidSet.add(
+                                    Integer.valueOf(
+                                            Integer.parseInt(
+                                                    query.getString(query.getColumnIndex("Uid")))));
                         } finally {
                         }
                     }
                 }
                 Slog.d("IbsQuickDim", "readAllowList");
                 ibsQuickDim.mAllowDimUidSet.clear();
-                query = ibsQuickDim.mSQLiteSQDwhilteList.getDataOperator(1).query(ibsQuickDim.mSQLiteSQDwhilteList.mDb);
+                query =
+                        ibsQuickDim
+                                .mSQLiteSQDwhilteList
+                                .getDataOperator(1)
+                                .query(ibsQuickDim.mSQLiteSQDwhilteList.mDb);
                 if (query != null) {
                     while (query.moveToNext()) {
                         try {
-                            ibsQuickDim.mAllowDimUidSet.add(Integer.valueOf(Integer.parseInt(query.getString(query.getColumnIndex("Uid")))));
+                            ibsQuickDim.mAllowDimUidSet.add(
+                                    Integer.valueOf(
+                                            Integer.parseInt(
+                                                    query.getString(query.getColumnIndex("Uid")))));
                         } finally {
                         }
                     }
@@ -59,7 +74,8 @@ public final /* synthetic */ class IbsQuickDim$$ExternalSyntheticLambda0 impleme
                     if (ibsQuickDim.mUiControlEnabled) {
                         ibsQuickDim.setUicontrolEnable(false);
                     }
-                    SharedPreferences.Editor edit = ibsQuickDim.mContext.getSharedPreferences("sleep_mode_pref", 0).edit();
+                    SharedPreferences.Editor edit =
+                            ibsQuickDim.mContext.getSharedPreferences("sleep_mode_pref", 0).edit();
                     edit.clear();
                     edit.apply();
                     return;

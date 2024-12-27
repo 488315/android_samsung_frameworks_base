@@ -3,25 +3,28 @@ package android.hardware.location;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import libcore.util.EmptyArray;
 
 @SystemApi
 @Deprecated
 /* loaded from: classes2.dex */
 public class NanoAppInstanceInfo implements Parcelable {
-    public static final Parcelable.Creator<NanoAppInstanceInfo> CREATOR = new Parcelable.Creator<NanoAppInstanceInfo>() { // from class: android.hardware.location.NanoAppInstanceInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NanoAppInstanceInfo createFromParcel(Parcel in) {
-            return new NanoAppInstanceInfo(in);
-        }
+    public static final Parcelable.Creator<NanoAppInstanceInfo> CREATOR =
+            new Parcelable.Creator<NanoAppInstanceInfo>() { // from class:
+                // android.hardware.location.NanoAppInstanceInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NanoAppInstanceInfo createFromParcel(Parcel in) {
+                    return new NanoAppInstanceInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NanoAppInstanceInfo[] newArray(int size) {
-            return new NanoAppInstanceInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NanoAppInstanceInfo[] newArray(int size) {
+                    return new NanoAppInstanceInfo[size];
+                }
+            };
     private long mAppId;
     private int mAppVersion;
     private int mContexthubId;
@@ -151,6 +154,8 @@ public class NanoAppInstanceInfo implements Parcelable {
 
     public String toString() {
         String retVal = "handle : " + this.mHandle;
-        return (retVal + ", Id : 0x" + Long.toHexString(this.mAppId)) + ", Version : 0x" + Integer.toHexString(this.mAppVersion);
+        return (retVal + ", Id : 0x" + Long.toHexString(this.mAppId))
+                + ", Version : 0x"
+                + Integer.toHexString(this.mAppVersion);
     }
 }

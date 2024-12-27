@@ -66,7 +66,25 @@ public final class NewUserRequest {
     }
 
     public String toString() {
-        return "NewUserRequest{mName='" + this.mName + DateFormat.QUOTE + ", mAdmin=" + this.mAdmin + ", mEphemeral=" + this.mEphemeral + ", mUserType='" + this.mUserType + DateFormat.QUOTE + ", mAccountName='" + this.mAccountName + DateFormat.QUOTE + ", mAccountType='" + this.mAccountType + DateFormat.QUOTE + ", mAccountOptions=" + this.mAccountOptions + '}';
+        return "NewUserRequest{mName='"
+                + this.mName
+                + DateFormat.QUOTE
+                + ", mAdmin="
+                + this.mAdmin
+                + ", mEphemeral="
+                + this.mEphemeral
+                + ", mUserType='"
+                + this.mUserType
+                + DateFormat.QUOTE
+                + ", mAccountName='"
+                + this.mAccountName
+                + DateFormat.QUOTE
+                + ", mAccountType='"
+                + this.mAccountType
+                + DateFormat.QUOTE
+                + ", mAccountOptions="
+                + this.mAccountOptions
+                + '}';
     }
 
     public static final class Builder {
@@ -132,7 +150,8 @@ public final class NewUserRequest {
                 throw new IllegalStateException("Admin user can't be of type: " + this.mUserType);
             }
             if (TextUtils.isEmpty(this.mAccountName) != TextUtils.isEmpty(this.mAccountType)) {
-                throw new IllegalStateException("Account name and account type should be provided together.");
+                throw new IllegalStateException(
+                        "Account name and account type should be provided together.");
             }
         }
     }

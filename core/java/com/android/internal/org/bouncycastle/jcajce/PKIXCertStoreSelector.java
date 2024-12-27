@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.jcajce;
 
 import com.android.internal.org.bouncycastle.util.Selector;
+
 import java.io.IOException;
 import java.security.cert.CertSelector;
 import java.security.cert.CertStore;
@@ -46,7 +47,8 @@ public class PKIXCertStoreSelector<T extends Certificate> implements Selector<T>
         return new PKIXCertStoreSelector(this.baseSelector);
     }
 
-    public static Collection<? extends Certificate> getCertificates(PKIXCertStoreSelector selector, CertStore certStore) throws CertStoreException {
+    public static Collection<? extends Certificate> getCertificates(
+            PKIXCertStoreSelector selector, CertStore certStore) throws CertStoreException {
         return certStore.getCertificates(new SelectorClone(selector));
     }
 

@@ -1,6 +1,7 @@
 package android.app;
 
 import android.view.View;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -16,8 +17,7 @@ public abstract class FragmentTransaction {
     public static final int TRANSIT_UNSET = -1;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Transit {
-    }
+    public @interface Transit {}
 
     public abstract FragmentTransaction add(int i, Fragment fragment);
 

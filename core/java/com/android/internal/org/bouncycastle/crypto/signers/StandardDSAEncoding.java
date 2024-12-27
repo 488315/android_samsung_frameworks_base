@@ -7,6 +7,7 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.util.Arrays;
+
 import java.io.IOException;
 import java.math.BigInteger;
 
@@ -30,7 +31,7 @@ public class StandardDSAEncoding implements DSAEncoding {
             BigInteger s = decodeValue(n, seq, 1);
             byte[] expectedEncoding = encode(n, r, s);
             if (Arrays.areEqual(expectedEncoding, encoding)) {
-                return new BigInteger[]{r, s};
+                return new BigInteger[] {r, s};
             }
         }
         throw new IllegalArgumentException("Malformed signature");

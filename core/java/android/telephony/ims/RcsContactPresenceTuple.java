@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.time.Instant;
@@ -20,35 +21,48 @@ import java.util.List;
 @SystemApi
 /* loaded from: classes4.dex */
 public final class RcsContactPresenceTuple implements Parcelable {
-    public static final Parcelable.Creator<RcsContactPresenceTuple> CREATOR = new Parcelable.Creator<RcsContactPresenceTuple>() { // from class: android.telephony.ims.RcsContactPresenceTuple.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RcsContactPresenceTuple createFromParcel(Parcel in) {
-            return new RcsContactPresenceTuple(in);
-        }
+    public static final Parcelable.Creator<RcsContactPresenceTuple> CREATOR =
+            new Parcelable.Creator<
+                    RcsContactPresenceTuple>() { // from class:
+                                                 // android.telephony.ims.RcsContactPresenceTuple.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RcsContactPresenceTuple createFromParcel(Parcel in) {
+                    return new RcsContactPresenceTuple(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RcsContactPresenceTuple[] newArray(int size) {
-            return new RcsContactPresenceTuple[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RcsContactPresenceTuple[] newArray(int size) {
+                    return new RcsContactPresenceTuple[size];
+                }
+            };
     private static final String LOG_TAG = "RcsContactPresenceTuple";
-    public static final String SERVICE_ID_CALL_COMPOSER = "org.3gpp.urn:urn-7:3gpp-service.ims.icsi.gsma.callcomposer";
-    public static final String SERVICE_ID_CHATBOT = "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.chatbot";
+    public static final String SERVICE_ID_CALL_COMPOSER =
+            "org.3gpp.urn:urn-7:3gpp-service.ims.icsi.gsma.callcomposer";
+    public static final String SERVICE_ID_CHATBOT =
+            "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.chatbot";
     public static final String SERVICE_ID_CHATBOT_ROLE = "org.gsma.rcs.isbot";
-    public static final String SERVICE_ID_CHATBOT_STANDALONE = " org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.chatbot.sa";
+    public static final String SERVICE_ID_CHATBOT_STANDALONE =
+            " org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.chatbot.sa";
     public static final String SERVICE_ID_CHAT_V1 = "org.openmobilealliance:IM-session";
     public static final String SERVICE_ID_CHAT_V2 = "org.openmobilealliance:ChatSession";
     public static final String SERVICE_ID_FT = "org.openmobilealliance:File-Transfer-HTTP";
-    public static final String SERVICE_ID_FT_OVER_SMS = "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.ftsms";
-    public static final String SERVICE_ID_GEO_PUSH = "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.geopush";
-    public static final String SERVICE_ID_GEO_PUSH_VIA_SMS = "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.geosms";
+    public static final String SERVICE_ID_FT_OVER_SMS =
+            "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.ftsms";
+    public static final String SERVICE_ID_GEO_PUSH =
+            "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.geopush";
+    public static final String SERVICE_ID_GEO_PUSH_VIA_SMS =
+            "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcs.geosms";
     public static final String SERVICE_ID_MMTEL = "org.3gpp.urn:urn-7:3gpp-service.ims.icsi.mmtel";
-    public static final String SERVICE_ID_POST_CALL = "org.3gpp.urn:urn-7:3gpp-service.ims.icsi.gsma.callunanswered";
-    public static final String SERVICE_ID_PRESENCE = "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcse.dp";
-    public static final String SERVICE_ID_SHARED_MAP = "org.3gpp.urn:urn-7:3gpp-service.ims.icsi.gsma.sharedmap";
-    public static final String SERVICE_ID_SHARED_SKETCH = "org.3gpp.urn:urn-7:3gpp-service.ims.icsi.gsma.sharedsketch";
+    public static final String SERVICE_ID_POST_CALL =
+            "org.3gpp.urn:urn-7:3gpp-service.ims.icsi.gsma.callunanswered";
+    public static final String SERVICE_ID_PRESENCE =
+            "org.3gpp.urn:urn-7:3gpp-application.ims.iari.rcse.dp";
+    public static final String SERVICE_ID_SHARED_MAP =
+            "org.3gpp.urn:urn-7:3gpp-service.ims.icsi.gsma.sharedmap";
+    public static final String SERVICE_ID_SHARED_SKETCH =
+            "org.3gpp.urn:urn-7:3gpp-service.ims.icsi.gsma.sharedsketch";
     public static final String SERVICE_ID_SLM = "org.openmobilealliance:StandaloneMsg";
     public static final String TUPLE_BASIC_STATUS_CLOSED = "closed";
     public static final String TUPLE_BASIC_STATUS_OPEN = "open";
@@ -61,27 +75,28 @@ public final class RcsContactPresenceTuple implements Parcelable {
     private Instant mTimestamp;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BasicStatus {
-    }
+    public @interface BasicStatus {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ServiceId {
-    }
+    public @interface ServiceId {}
 
     public static final class ServiceCapabilities implements Parcelable {
-        public static final Parcelable.Creator<ServiceCapabilities> CREATOR = new Parcelable.Creator<ServiceCapabilities>() { // from class: android.telephony.ims.RcsContactPresenceTuple.ServiceCapabilities.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ServiceCapabilities createFromParcel(Parcel in) {
-                return new ServiceCapabilities(in);
-            }
+        public static final Parcelable.Creator<ServiceCapabilities> CREATOR =
+                new Parcelable.Creator<
+                        ServiceCapabilities>() { // from class:
+                                                 // android.telephony.ims.RcsContactPresenceTuple.ServiceCapabilities.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ServiceCapabilities createFromParcel(Parcel in) {
+                        return new ServiceCapabilities(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ServiceCapabilities[] newArray(int size) {
-                return new ServiceCapabilities[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ServiceCapabilities[] newArray(int size) {
+                        return new ServiceCapabilities[size];
+                    }
+                };
         public static final String DUPLEX_MODE_FULL = "full";
         public static final String DUPLEX_MODE_HALF = "half";
         public static final String DUPLEX_MODE_RECEIVE_ONLY = "receive-only";
@@ -92,8 +107,7 @@ public final class RcsContactPresenceTuple implements Parcelable {
         private final List<String> mUnsupportedDuplexModeList;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface DuplexMode {
-        }
+        public @interface DuplexMode {}
 
         public static final class Builder {
             private ServiceCapabilities mCapabilities;
@@ -163,7 +177,15 @@ public final class RcsContactPresenceTuple implements Parcelable {
         }
 
         public String toString() {
-            return "servCaps{a=" + this.mIsAudioCapable + ", v=" + this.mIsVideoCapable + ", supported=" + this.mSupportedDuplexModeList + ", unsupported=" + this.mUnsupportedDuplexModeList + '}';
+            return "servCaps{a="
+                    + this.mIsAudioCapable
+                    + ", v="
+                    + this.mIsVideoCapable
+                    + ", supported="
+                    + this.mSupportedDuplexModeList
+                    + ", unsupported="
+                    + this.mUnsupportedDuplexModeList
+                    + '}';
         }
     }
 
@@ -212,7 +234,11 @@ public final class RcsContactPresenceTuple implements Parcelable {
         this.mServiceId = in.readString();
         this.mServiceVersion = in.readString();
         this.mServiceDescription = in.readString();
-        this.mServiceCapabilities = (ServiceCapabilities) in.readParcelable(ServiceCapabilities.class.getClassLoader(), ServiceCapabilities.class);
+        this.mServiceCapabilities =
+                (ServiceCapabilities)
+                        in.readParcelable(
+                                ServiceCapabilities.class.getClassLoader(),
+                                ServiceCapabilities.class);
     }
 
     @Override // android.os.Parcelable
@@ -243,12 +269,16 @@ public final class RcsContactPresenceTuple implements Parcelable {
             return null;
         }
         try {
-            return (Instant) DateTimeFormatter.ISO_OFFSET_DATE_TIME.parse(timestamp, new TemporalQuery() { // from class: android.telephony.ims.RcsContactPresenceTuple$$ExternalSyntheticLambda0
-                @Override // java.time.temporal.TemporalQuery
-                public final Object queryFrom(TemporalAccessor temporalAccessor) {
-                    return Instant.from(temporalAccessor);
-                }
-            });
+            return (Instant)
+                    DateTimeFormatter.ISO_OFFSET_DATE_TIME.parse(
+                            timestamp,
+                            new TemporalQuery() { // from class:
+                                                  // android.telephony.ims.RcsContactPresenceTuple$$ExternalSyntheticLambda0
+                                @Override // java.time.temporal.TemporalQuery
+                                public final Object queryFrom(TemporalAccessor temporalAccessor) {
+                                    return Instant.from(temporalAccessor);
+                                }
+                            });
         } catch (DateTimeParseException e) {
             return null;
         }

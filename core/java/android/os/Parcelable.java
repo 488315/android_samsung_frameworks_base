@@ -1,6 +1,7 @@
 package android.os;
 
 import android.annotation.SystemApi;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -14,6 +15,7 @@ public interface Parcelable {
 
     @SystemApi(client = SystemApi.Client.PRIVILEGED_APPS)
     public static final int PARCELABLE_STABILITY_VINTF = 1;
+
     public static final int PARCELABLE_WRITE_RETURN_VALUE = 1;
 
     public interface ClassLoaderCreator<T> extends Creator<T> {
@@ -21,8 +23,7 @@ public interface Parcelable {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ContentsFlags {
-    }
+    public @interface ContentsFlags {}
 
     public interface Creator<T> {
         T createFromParcel(Parcel parcel);
@@ -31,12 +32,10 @@ public interface Parcelable {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Stability {
-    }
+    public @interface Stability {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WriteFlags {
-    }
+    public @interface WriteFlags {}
 
     int describeContents();
 

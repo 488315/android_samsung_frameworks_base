@@ -8,8 +8,7 @@ public interface IStatsBootstrapAtomService extends IInterface {
 
     public static class Default implements IStatsBootstrapAtomService {
         @Override // android.os.IStatsBootstrapAtomService
-        public void reportBootstrapAtom(StatsBootstrapAtom atom) throws RemoteException {
-        }
+        public void reportBootstrapAtom(StatsBootstrapAtom atom) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -17,7 +16,7 @@ public interface IStatsBootstrapAtomService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IStatsBootstrapAtomService {
+    public abstract static class Stub extends Binder implements IStatsBootstrapAtomService {
         static final int TRANSACTION_reportBootstrapAtom = 1;
 
         public Stub() {
@@ -55,7 +54,8 @@ public interface IStatsBootstrapAtomService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IStatsBootstrapAtomService.DESCRIPTOR);
             }
@@ -65,7 +65,8 @@ public interface IStatsBootstrapAtomService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    StatsBootstrapAtom _arg0 = (StatsBootstrapAtom) data.readTypedObject(StatsBootstrapAtom.CREATOR);
+                    StatsBootstrapAtom _arg0 =
+                            (StatsBootstrapAtom) data.readTypedObject(StatsBootstrapAtom.CREATOR);
                     data.enforceNoDataAvail();
                     reportBootstrapAtom(_arg0);
                     return true;

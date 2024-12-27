@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Process;
+
 import com.android.server.am.MARsPackageInfo;
 import com.android.server.am.MARsPolicyManager;
 
@@ -24,10 +25,13 @@ public final class AutoDisableHandler {
                 boolean z = false;
                 if (data.getBoolean("isGoogleChanged", false)) {
                     boolean z2 = MARsPolicyManager.MARs_ENABLE;
-                    MARsPolicyManager mARsPolicyManager = MARsPolicyManager.MARsPolicyManagerHolder.INSTANCE;
+                    MARsPolicyManager mARsPolicyManager =
+                            MARsPolicyManager.MARsPolicyManagerHolder.INSTANCE;
                     mARsPolicyManager.getClass();
                     synchronized (MARsPolicyManager.MARsLock) {
-                        MARsPackageInfo mARsPackageInfo = MARsPolicyManager.getMARsPackageInfo(mARsPolicyManager.mMARsTargetPackages, string, i);
+                        MARsPackageInfo mARsPackageInfo =
+                                MARsPolicyManager.getMARsPackageInfo(
+                                        mARsPolicyManager.mMARsTargetPackages, string, i);
                         if (mARsPackageInfo != null) {
                             mARsPackageInfo.curLevel = 0;
                             mARsPackageInfo.isDisabled = false;
@@ -36,11 +40,15 @@ public final class AutoDisableHandler {
                     return;
                 }
                 boolean z3 = MARsPolicyManager.MARs_ENABLE;
-                MARsPolicyManager mARsPolicyManager2 = MARsPolicyManager.MARsPolicyManagerHolder.INSTANCE;
+                MARsPolicyManager mARsPolicyManager2 =
+                        MARsPolicyManager.MARsPolicyManagerHolder.INSTANCE;
                 mARsPolicyManager2.getClass();
                 synchronized (MARsPolicyManager.MARsLock) {
-                    MARsPackageInfo mARsPackageInfo2 = MARsPolicyManager.getMARsPackageInfo(mARsPolicyManager2.mMARsRestrictedPackages, string, i);
-                    if (mARsPackageInfo2 != null && MARsPolicyManager.isDisabledByUser(mARsPackageInfo2.disableReason)) {
+                    MARsPackageInfo mARsPackageInfo2 =
+                            MARsPolicyManager.getMARsPackageInfo(
+                                    mARsPolicyManager2.mMARsRestrictedPackages, string, i);
+                    if (mARsPackageInfo2 != null
+                            && MARsPolicyManager.isDisabledByUser(mARsPackageInfo2.disableReason)) {
                         mARsPackageInfo2.disableReason = 0;
                         if (!MARsPolicyManager.isChinaPolicyEnabled()) {
                             mARsPackageInfo2.fasType = 1;

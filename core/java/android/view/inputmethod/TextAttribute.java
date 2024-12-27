@@ -3,25 +3,28 @@ package android.view.inputmethod;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.PersistableBundle;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 /* loaded from: classes4.dex */
 public final class TextAttribute implements Parcelable {
-    public static final Parcelable.Creator<TextAttribute> CREATOR = new Parcelable.Creator<TextAttribute>() { // from class: android.view.inputmethod.TextAttribute.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TextAttribute createFromParcel(Parcel source) {
-            return new TextAttribute(source);
-        }
+    public static final Parcelable.Creator<TextAttribute> CREATOR =
+            new Parcelable.Creator<
+                    TextAttribute>() { // from class: android.view.inputmethod.TextAttribute.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TextAttribute createFromParcel(Parcel source) {
+                    return new TextAttribute(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TextAttribute[] newArray(int size) {
-            return new TextAttribute[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TextAttribute[] newArray(int size) {
+                    return new TextAttribute[size];
+                }
+            };
     private final PersistableBundle mExtras;
     private final List<String> mTextConversionSuggestions;
 
@@ -48,7 +51,8 @@ public final class TextAttribute implements Parcelable {
         private PersistableBundle mExtras = new PersistableBundle();
 
         public Builder setTextConversionSuggestions(List<String> textConversionSuggestions) {
-            this.mTextConversionSuggestions = Collections.unmodifiableList(textConversionSuggestions);
+            this.mTextConversionSuggestions =
+                    Collections.unmodifiableList(textConversionSuggestions);
             return this;
         }
 

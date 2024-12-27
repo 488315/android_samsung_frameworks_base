@@ -8,9 +8,10 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.view.inputmethod.InputMethodManager;
-import android.view.textservice.SpellCheckerSession;
+
 import com.android.internal.textservice.ISpellCheckerSessionListener;
 import com.android.internal.textservice.ITextServicesManager;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -23,19 +24,24 @@ public final class TextServicesManager {
     private static final boolean DBG = false;
     private static final String TAG = TextServicesManager.class.getSimpleName();
 
-    @Deprecated
-    private static TextServicesManager sInstance;
+    @Deprecated private static TextServicesManager sInstance;
     private final InputMethodManager mInputMethodManager;
-    private final ITextServicesManager mService = ITextServicesManager.Stub.asInterface(ServiceManager.getServiceOrThrow(Context.TEXT_SERVICES_MANAGER_SERVICE));
+    private final ITextServicesManager mService =
+            ITextServicesManager.Stub.asInterface(
+                    ServiceManager.getServiceOrThrow(Context.TEXT_SERVICES_MANAGER_SERVICE));
     private final int mUserId;
 
-    private TextServicesManager(int userId, InputMethodManager inputMethodManager) throws ServiceManager.ServiceNotFoundException {
+    private TextServicesManager(int userId, InputMethodManager inputMethodManager)
+            throws ServiceManager.ServiceNotFoundException {
         this.mUserId = userId;
         this.mInputMethodManager = inputMethodManager;
     }
 
-    public static TextServicesManager createInstance(Context context) throws ServiceManager.ServiceNotFoundException {
-        return new TextServicesManager(context.getUserId(), (InputMethodManager) context.getSystemService(InputMethodManager.class));
+    public static TextServicesManager createInstance(Context context)
+            throws ServiceManager.ServiceNotFoundException {
+        return new TextServicesManager(
+                context.getUserId(),
+                (InputMethodManager) context.getSystemService(InputMethodManager.class));
     }
 
     public static TextServicesManager getInstance() {
@@ -65,8 +71,17 @@ public final class TextServicesManager {
         return locale.substring(0, idx);
     }
 
-    public SpellCheckerSession newSpellCheckerSession(Bundle bundle, Locale locale, SpellCheckerSession.SpellCheckerSessionListener listener, boolean referToSpellCheckerLanguageSettings) {
-        SpellCheckerSession.SpellCheckerSessionParams.Builder paramsBuilder = new SpellCheckerSession.SpellCheckerSessionParams.Builder().setLocale(locale).setShouldReferToSpellCheckerLanguageSettings(referToSpellCheckerLanguageSettings).setSupportedAttributes(7);
+    public SpellCheckerSession newSpellCheckerSession(
+            Bundle bundle,
+            Locale locale,
+            SpellCheckerSession.SpellCheckerSessionListener listener,
+            boolean referToSpellCheckerLanguageSettings) {
+        SpellCheckerSession.SpellCheckerSessionParams.Builder paramsBuilder =
+                new SpellCheckerSession.SpellCheckerSessionParams.Builder()
+                        .setLocale(locale)
+                        .setShouldReferToSpellCheckerLanguageSettings(
+                                referToSpellCheckerLanguageSettings)
+                        .setSupportedAttributes(7);
         if (bundle != null) {
             paramsBuilder.setExtras(bundle);
         }
@@ -74,12 +89,16 @@ public final class TextServicesManager {
         return newSpellCheckerSession(paramsBuilder.build(), executor, listener);
     }
 
-    public SpellCheckerSession newSpellCheckerSession(SpellCheckerSession.SpellCheckerSessionParams params, Executor executor, SpellCheckerSession.SpellCheckerSessionListener listener) {
+    public SpellCheckerSession newSpellCheckerSession(
+            SpellCheckerSession.SpellCheckerSessionParams params,
+            Executor executor,
+            SpellCheckerSession.SpellCheckerSessionListener listener) {
         Objects.requireNonNull(executor);
         Objects.requireNonNull(listener);
         Locale locale = params.getLocale();
         if (!params.shouldReferToSpellCheckerLanguageSettings() && locale == null) {
-            throw new IllegalArgumentException("Locale should not be null if you don't refer settings.");
+            throw new IllegalArgumentException(
+                    "Locale should not be null if you don't refer settings.");
         }
         if (params.shouldReferToSpellCheckerLanguageSettings() && !isSpellCheckerEnabled()) {
             return null;
@@ -98,7 +117,8 @@ public final class TextServicesManager {
                 if (locale != null) {
                     String subtypeLocale = subtypeInUse.getLocale();
                     String subtypeLanguage = parseLanguageFromLocaleString(subtypeLocale);
-                    if (subtypeLanguage.length() < 2 || !locale.getLanguage().equals(subtypeLanguage)) {
+                    if (subtypeLanguage.length() < 2
+                            || !locale.getLanguage().equals(subtypeLanguage)) {
                         return null;
                     }
                 }
@@ -116,7 +136,8 @@ public final class TextServicesManager {
                         subtypeInUse = subtype;
                         break;
                     }
-                    if (tempSubtypeLanguage.length() >= 2 && locale.getLanguage().equals(tempSubtypeLanguage)) {
+                    if (tempSubtypeLanguage.length() >= 2
+                            && locale.getLanguage().equals(tempSubtypeLanguage)) {
                         subtypeInUse = subtype;
                     }
                     i++;
@@ -127,7 +148,14 @@ public final class TextServicesManager {
             }
             SpellCheckerSession session = new SpellCheckerSession(sci, this, listener, executor);
             try {
-                this.mService.getSpellCheckerService(this.mUserId, sci.getId(), subtypeInUse.getLocale(), session.getTextServicesSessionListener(), session.getSpellCheckerSessionListener(), params.getExtras(), params.getSupportedAttributes());
+                this.mService.getSpellCheckerService(
+                        this.mUserId,
+                        sci.getId(),
+                        subtypeInUse.getLocale(),
+                        session.getTextServicesSessionListener(),
+                        session.getSpellCheckerSessionListener(),
+                        params.getExtras(),
+                        params.getSupportedAttributes());
                 return session;
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
@@ -148,7 +176,9 @@ public final class TextServicesManager {
 
     public List<SpellCheckerInfo> getEnabledSpellCheckerInfos() {
         SpellCheckerInfo[] enabledSpellCheckers = getEnabledSpellCheckers();
-        return enabledSpellCheckers != null ? Arrays.asList(enabledSpellCheckers) : Collections.emptyList();
+        return enabledSpellCheckers != null
+                ? Arrays.asList(enabledSpellCheckers)
+                : Collections.emptyList();
     }
 
     public SpellCheckerInfo getCurrentSpellCheckerInfo() {
@@ -163,9 +193,11 @@ public final class TextServicesManager {
         return getCurrentSpellCheckerInfo();
     }
 
-    public SpellCheckerSubtype getCurrentSpellCheckerSubtype(boolean allowImplicitlySelectedSubtype) {
+    public SpellCheckerSubtype getCurrentSpellCheckerSubtype(
+            boolean allowImplicitlySelectedSubtype) {
         try {
-            return this.mService.getCurrentSpellCheckerSubtype(this.mUserId, allowImplicitlySelectedSubtype);
+            return this.mService.getCurrentSpellCheckerSubtype(
+                    this.mUserId, allowImplicitlySelectedSubtype);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }

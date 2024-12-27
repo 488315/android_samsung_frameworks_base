@@ -10,10 +10,13 @@ import android.media.MediaSyncEvent;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.PersistableBundle;
+
 import com.android.internal.R;
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Preconditions;
+
 import com.samsung.android.share.SemShareConstants;
+
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -55,39 +58,37 @@ public final class HotwordDetectedResult implements Parcelable {
     private final int mScore;
     private final int mSpeakerId;
     private static int sMaxBundleSize = -1;
-    public static final Parcelable.Creator<HotwordDetectedResult> CREATOR = new Parcelable.Creator<HotwordDetectedResult>() { // from class: android.service.voice.HotwordDetectedResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HotwordDetectedResult[] newArray(int size) {
-            return new HotwordDetectedResult[size];
-        }
+    public static final Parcelable.Creator<HotwordDetectedResult> CREATOR =
+            new Parcelable.Creator<
+                    HotwordDetectedResult>() { // from class:
+                                               // android.service.voice.HotwordDetectedResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HotwordDetectedResult[] newArray(int size) {
+                    return new HotwordDetectedResult[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HotwordDetectedResult createFromParcel(Parcel in) {
-            return new HotwordDetectedResult(in);
-        }
-    };
-
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface ConfidenceLevel {
-    }
-
-    @Retention(RetentionPolicy.SOURCE)
-    @interface HotwordConfidenceLevelValue {
-    }
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HotwordDetectedResult createFromParcel(Parcel in) {
+                    return new HotwordDetectedResult(in);
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface Limit {
-    }
+    public @interface ConfidenceLevel {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Proximity {
-    }
+    @interface HotwordConfidenceLevelValue {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ProximityValue {
-    }
+    @interface Limit {}
+
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Proximity {}
+
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface ProximityValue {}
 
     /* JADX INFO: Access modifiers changed from: private */
     public static int defaultSpeakerId() {
@@ -138,7 +139,9 @@ public final class HotwordDetectedResult implements Parcelable {
 
     public static int getMaxBundleSize() {
         if (sMaxBundleSize < 0) {
-            sMaxBundleSize = Resources.getSystem().getInteger(R.integer.config_hotwordDetectedResultMaxBundleSize);
+            sMaxBundleSize =
+                    Resources.getSystem()
+                            .getInteger(R.integer.config_hotwordDetectedResultMaxBundleSize);
         }
         return sMaxBundleSize;
     }
@@ -166,7 +169,10 @@ public final class HotwordDetectedResult implements Parcelable {
     }
 
     public static int getUsageSize(HotwordDetectedResult hotwordDetectedResult) {
-        int totalBits = hotwordDetectedResult.getConfidenceLevel() != defaultConfidenceLevel() ? 0 + bitCount(6L) : 0;
+        int totalBits =
+                hotwordDetectedResult.getConfidenceLevel() != defaultConfidenceLevel()
+                        ? 0 + bitCount(6L)
+                        : 0;
         if (hotwordDetectedResult.getHotwordOffsetMillis() != -1) {
             totalBits += bitCount(3600000L);
         }
@@ -207,15 +213,30 @@ public final class HotwordDetectedResult implements Parcelable {
 
     private void onConstructed() {
         Preconditions.checkArgumentInRange(this.mSpeakerId, 0, getMaxSpeakerId(), "speakerId");
-        Preconditions.checkArgumentInRange(this.mScore, 0, getMaxScore(), SemShareConstants.SHARE_STAR_KEY_SCORE);
-        Preconditions.checkArgumentInRange(this.mPersonalizedScore, 0, getMaxScore(), "personalizedScore");
-        Preconditions.checkArgumentInRange(this.mHotwordPhraseId, 0, getMaxHotwordPhraseId(), "hotwordPhraseId");
+        Preconditions.checkArgumentInRange(
+                this.mScore, 0, getMaxScore(), SemShareConstants.SHARE_STAR_KEY_SCORE);
+        Preconditions.checkArgumentInRange(
+                this.mPersonalizedScore, 0, getMaxScore(), "personalizedScore");
+        Preconditions.checkArgumentInRange(
+                this.mHotwordPhraseId, 0, getMaxHotwordPhraseId(), "hotwordPhraseId");
         if (this.mBackgroundAudioPower != -1) {
-            Preconditions.checkArgumentInRange(this.mBackgroundAudioPower, 0, getMaxBackgroundAudioPower(), "backgroundAudioPower");
+            Preconditions.checkArgumentInRange(
+                    this.mBackgroundAudioPower,
+                    0,
+                    getMaxBackgroundAudioPower(),
+                    "backgroundAudioPower");
         }
-        Preconditions.checkArgumentInRange(this.mHotwordDurationMillis, 0L, AudioRecord.getMaxSharedAudioHistoryMillis(), "hotwordDurationMillis");
+        Preconditions.checkArgumentInRange(
+                this.mHotwordDurationMillis,
+                0L,
+                AudioRecord.getMaxSharedAudioHistoryMillis(),
+                "hotwordDurationMillis");
         if (this.mHotwordOffsetMillis != -1) {
-            Preconditions.checkArgumentInRange(this.mHotwordOffsetMillis, 0, LIMIT_HOTWORD_OFFSET_MAX_VALUE, "hotwordOffsetMillis");
+            Preconditions.checkArgumentInRange(
+                    this.mHotwordOffsetMillis,
+                    0,
+                    LIMIT_HOTWORD_OFFSET_MAX_VALUE,
+                    "hotwordOffsetMillis");
         }
         if (this.mAudioChannel != -1) {
             Preconditions.checkArgumentInRange(this.mAudioChannel, 0, 63, "audioChannel");
@@ -225,12 +246,20 @@ public final class HotwordDetectedResult implements Parcelable {
                 int proximityValue = this.mExtras.getInt(EXTRA_PROXIMITY);
                 this.mExtras.remove(EXTRA_PROXIMITY);
                 if (this.mExtras.size() > 0) {
-                    Preconditions.checkArgumentInRange(getParcelableSize(this.mExtras), 0, getMaxBundleSize(), AppSearchShortcutInfo.KEY_EXTRAS);
+                    Preconditions.checkArgumentInRange(
+                            getParcelableSize(this.mExtras),
+                            0,
+                            getMaxBundleSize(),
+                            AppSearchShortcutInfo.KEY_EXTRAS);
                 }
                 this.mExtras.putInt(EXTRA_PROXIMITY, proximityValue);
                 return;
             }
-            Preconditions.checkArgumentInRange(getParcelableSize(this.mExtras), 0, getMaxBundleSize(), AppSearchShortcutInfo.KEY_EXTRAS);
+            Preconditions.checkArgumentInRange(
+                    getParcelableSize(this.mExtras),
+                    0,
+                    getMaxBundleSize(),
+                    AppSearchShortcutInfo.KEY_EXTRAS);
         }
     }
 
@@ -259,9 +288,8 @@ public final class HotwordDetectedResult implements Parcelable {
         return 2;
     }
 
-    static abstract class BaseBuilder {
-        BaseBuilder() {
-        }
+    abstract static class BaseBuilder {
+        BaseBuilder() {}
 
         public Builder setAudioStreams(List<HotwordAudioStream> value) {
             Objects.requireNonNull(value, "value should not be null");
@@ -273,7 +301,20 @@ public final class HotwordDetectedResult implements Parcelable {
     }
 
     public Builder buildUpon() {
-        return new Builder().setConfidenceLevel(this.mConfidenceLevel).setMediaSyncEvent(this.mMediaSyncEvent).setHotwordOffsetMillis(this.mHotwordOffsetMillis).setHotwordDurationMillis(this.mHotwordDurationMillis).setAudioChannel(this.mAudioChannel).setHotwordDetectionPersonalized(this.mHotwordDetectionPersonalized).setScore(this.mScore).setPersonalizedScore(this.mPersonalizedScore).setHotwordPhraseId(this.mHotwordPhraseId).setAudioStreams(this.mAudioStreams).setExtras(this.mExtras).setBackgroundAudioPower(this.mBackgroundAudioPower).setSpeakerId(this.mSpeakerId);
+        return new Builder()
+                .setConfidenceLevel(this.mConfidenceLevel)
+                .setMediaSyncEvent(this.mMediaSyncEvent)
+                .setHotwordOffsetMillis(this.mHotwordOffsetMillis)
+                .setHotwordDurationMillis(this.mHotwordDurationMillis)
+                .setAudioChannel(this.mAudioChannel)
+                .setHotwordDetectionPersonalized(this.mHotwordDetectionPersonalized)
+                .setScore(this.mScore)
+                .setPersonalizedScore(this.mPersonalizedScore)
+                .setHotwordPhraseId(this.mHotwordPhraseId)
+                .setAudioStreams(this.mAudioStreams)
+                .setExtras(this.mExtras)
+                .setBackgroundAudioPower(this.mBackgroundAudioPower)
+                .setSpeakerId(this.mSpeakerId);
     }
 
     public static String confidenceLevelToString(int value) {
@@ -322,7 +363,20 @@ public final class HotwordDetectedResult implements Parcelable {
         }
     }
 
-    HotwordDetectedResult(int speakerId, int confidenceLevel, MediaSyncEvent mediaSyncEvent, int hotwordOffsetMillis, int hotwordDurationMillis, int audioChannel, boolean hotwordDetectionPersonalized, int score, int personalizedScore, int hotwordPhraseId, List<HotwordAudioStream> audioStreams, PersistableBundle extras, int backgroundAudioPower) {
+    HotwordDetectedResult(
+            int speakerId,
+            int confidenceLevel,
+            MediaSyncEvent mediaSyncEvent,
+            int hotwordOffsetMillis,
+            int hotwordDurationMillis,
+            int audioChannel,
+            boolean hotwordDetectionPersonalized,
+            int score,
+            int personalizedScore,
+            int hotwordPhraseId,
+            List<HotwordAudioStream> audioStreams,
+            PersistableBundle extras,
+            int backgroundAudioPower) {
         this.mMediaSyncEvent = null;
         this.mHotwordOffsetMillis = -1;
         this.mHotwordDurationMillis = 0;
@@ -330,7 +384,10 @@ public final class HotwordDetectedResult implements Parcelable {
         this.mHotwordDetectionPersonalized = false;
         this.mSpeakerId = speakerId;
         this.mConfidenceLevel = confidenceLevel;
-        AnnotationValidations.validate((Class<? extends Annotation>) HotwordConfidenceLevelValue.class, (Annotation) null, this.mConfidenceLevel);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) HotwordConfidenceLevelValue.class,
+                (Annotation) null,
+                this.mConfidenceLevel);
         this.mMediaSyncEvent = mediaSyncEvent;
         this.mHotwordOffsetMillis = hotwordOffsetMillis;
         this.mHotwordDurationMillis = hotwordDurationMillis;
@@ -340,9 +397,11 @@ public final class HotwordDetectedResult implements Parcelable {
         this.mPersonalizedScore = personalizedScore;
         this.mHotwordPhraseId = hotwordPhraseId;
         this.mAudioStreams = audioStreams;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAudioStreams);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAudioStreams);
         this.mExtras = extras;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mExtras);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mExtras);
         this.mBackgroundAudioPower = backgroundAudioPower;
         onConstructed();
     }
@@ -392,7 +451,33 @@ public final class HotwordDetectedResult implements Parcelable {
     }
 
     public String toString() {
-        return "HotwordDetectedResult { speakerId = " + this.mSpeakerId + ", confidenceLevel = " + this.mConfidenceLevel + ", mediaSyncEvent = " + this.mMediaSyncEvent + ", hotwordOffsetMillis = " + this.mHotwordOffsetMillis + ", hotwordDurationMillis = " + this.mHotwordDurationMillis + ", audioChannel = " + this.mAudioChannel + ", hotwordDetectionPersonalized = " + this.mHotwordDetectionPersonalized + ", score = " + this.mScore + ", personalizedScore = " + this.mPersonalizedScore + ", hotwordPhraseId = " + this.mHotwordPhraseId + ", audioStreams = " + this.mAudioStreams + ", extras = " + this.mExtras + ", backgroundAudioPower = " + this.mBackgroundAudioPower + " }";
+        return "HotwordDetectedResult { speakerId = "
+                + this.mSpeakerId
+                + ", confidenceLevel = "
+                + this.mConfidenceLevel
+                + ", mediaSyncEvent = "
+                + this.mMediaSyncEvent
+                + ", hotwordOffsetMillis = "
+                + this.mHotwordOffsetMillis
+                + ", hotwordDurationMillis = "
+                + this.mHotwordDurationMillis
+                + ", audioChannel = "
+                + this.mAudioChannel
+                + ", hotwordDetectionPersonalized = "
+                + this.mHotwordDetectionPersonalized
+                + ", score = "
+                + this.mScore
+                + ", personalizedScore = "
+                + this.mPersonalizedScore
+                + ", hotwordPhraseId = "
+                + this.mHotwordPhraseId
+                + ", audioStreams = "
+                + this.mAudioStreams
+                + ", extras = "
+                + this.mExtras
+                + ", backgroundAudioPower = "
+                + this.mBackgroundAudioPower
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -403,7 +488,19 @@ public final class HotwordDetectedResult implements Parcelable {
             return false;
         }
         HotwordDetectedResult that = (HotwordDetectedResult) o;
-        if (this.mSpeakerId == that.mSpeakerId && this.mConfidenceLevel == that.mConfidenceLevel && Objects.equals(this.mMediaSyncEvent, that.mMediaSyncEvent) && this.mHotwordOffsetMillis == that.mHotwordOffsetMillis && this.mHotwordDurationMillis == that.mHotwordDurationMillis && this.mAudioChannel == that.mAudioChannel && this.mHotwordDetectionPersonalized == that.mHotwordDetectionPersonalized && this.mScore == that.mScore && this.mPersonalizedScore == that.mPersonalizedScore && this.mHotwordPhraseId == that.mHotwordPhraseId && Objects.equals(this.mAudioStreams, that.mAudioStreams) && Objects.equals(this.mExtras, that.mExtras) && this.mBackgroundAudioPower == that.mBackgroundAudioPower) {
+        if (this.mSpeakerId == that.mSpeakerId
+                && this.mConfidenceLevel == that.mConfidenceLevel
+                && Objects.equals(this.mMediaSyncEvent, that.mMediaSyncEvent)
+                && this.mHotwordOffsetMillis == that.mHotwordOffsetMillis
+                && this.mHotwordDurationMillis == that.mHotwordDurationMillis
+                && this.mAudioChannel == that.mAudioChannel
+                && this.mHotwordDetectionPersonalized == that.mHotwordDetectionPersonalized
+                && this.mScore == that.mScore
+                && this.mPersonalizedScore == that.mPersonalizedScore
+                && this.mHotwordPhraseId == that.mHotwordPhraseId
+                && Objects.equals(this.mAudioStreams, that.mAudioStreams)
+                && Objects.equals(this.mExtras, that.mExtras)
+                && this.mBackgroundAudioPower == that.mBackgroundAudioPower) {
             return true;
         }
         return false;
@@ -411,7 +508,39 @@ public final class HotwordDetectedResult implements Parcelable {
 
     public int hashCode() {
         int _hash = (1 * 31) + this.mSpeakerId;
-        return (((((((((((((((((((((((_hash * 31) + this.mConfidenceLevel) * 31) + Objects.hashCode(this.mMediaSyncEvent)) * 31) + this.mHotwordOffsetMillis) * 31) + this.mHotwordDurationMillis) * 31) + this.mAudioChannel) * 31) + Boolean.hashCode(this.mHotwordDetectionPersonalized)) * 31) + this.mScore) * 31) + this.mPersonalizedScore) * 31) + this.mHotwordPhraseId) * 31) + Objects.hashCode(this.mAudioStreams)) * 31) + Objects.hashCode(this.mExtras)) * 31) + this.mBackgroundAudioPower;
+        return (((((((((((((((((((((((_hash * 31) + this.mConfidenceLevel) * 31)
+                                                                                                                                                                                + Objects
+                                                                                                                                                                                        .hashCode(
+                                                                                                                                                                                                this
+                                                                                                                                                                                                        .mMediaSyncEvent))
+                                                                                                                                                                        * 31)
+                                                                                                                                                                + this
+                                                                                                                                                                        .mHotwordOffsetMillis)
+                                                                                                                                                        * 31)
+                                                                                                                                                + this
+                                                                                                                                                        .mHotwordDurationMillis)
+                                                                                                                                        * 31)
+                                                                                                                                + this
+                                                                                                                                        .mAudioChannel)
+                                                                                                                        * 31)
+                                                                                                                + Boolean
+                                                                                                                        .hashCode(
+                                                                                                                                this
+                                                                                                                                        .mHotwordDetectionPersonalized))
+                                                                                                        * 31)
+                                                                                                + this
+                                                                                                        .mScore)
+                                                                                        * 31)
+                                                                                + this
+                                                                                        .mPersonalizedScore)
+                                                                        * 31)
+                                                                + this.mHotwordPhraseId)
+                                                        * 31)
+                                                + Objects.hashCode(this.mAudioStreams))
+                                        * 31)
+                                + Objects.hashCode(this.mExtras))
+                        * 31)
+                + this.mBackgroundAudioPower;
     }
 
     @Override // android.os.Parcelable
@@ -452,7 +581,8 @@ public final class HotwordDetectedResult implements Parcelable {
         boolean hotwordDetectionPersonalized = (flg & 64) != 0;
         int speakerId = in.readInt();
         int confidenceLevel = in.readInt();
-        MediaSyncEvent mediaSyncEvent = (flg & 4) == 0 ? null : (MediaSyncEvent) in.readTypedObject(MediaSyncEvent.CREATOR);
+        MediaSyncEvent mediaSyncEvent =
+                (flg & 4) == 0 ? null : (MediaSyncEvent) in.readTypedObject(MediaSyncEvent.CREATOR);
         int hotwordOffsetMillis = in.readInt();
         int hotwordDurationMillis = in.readInt();
         int audioChannel = in.readInt();
@@ -461,11 +591,15 @@ public final class HotwordDetectedResult implements Parcelable {
         int hotwordPhraseId = in.readInt();
         ArrayList arrayList = new ArrayList();
         in.readParcelableList(arrayList, HotwordAudioStream.class.getClassLoader());
-        PersistableBundle extras = (PersistableBundle) in.readTypedObject(PersistableBundle.CREATOR);
+        PersistableBundle extras =
+                (PersistableBundle) in.readTypedObject(PersistableBundle.CREATOR);
         int backgroundAudioPower = in.readInt();
         this.mSpeakerId = speakerId;
         this.mConfidenceLevel = confidenceLevel;
-        AnnotationValidations.validate((Class<? extends Annotation>) HotwordConfidenceLevelValue.class, (Annotation) null, this.mConfidenceLevel);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) HotwordConfidenceLevelValue.class,
+                (Annotation) null,
+                this.mConfidenceLevel);
         this.mMediaSyncEvent = mediaSyncEvent;
         this.mHotwordOffsetMillis = hotwordOffsetMillis;
         this.mHotwordDurationMillis = hotwordDurationMillis;
@@ -475,9 +609,11 @@ public final class HotwordDetectedResult implements Parcelable {
         this.mPersonalizedScore = personalizedScore;
         this.mHotwordPhraseId = hotwordPhraseId;
         this.mAudioStreams = arrayList;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAudioStreams);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAudioStreams);
         this.mExtras = extras;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mExtras);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mExtras);
         this.mBackgroundAudioPower = backgroundAudioPower;
         onConstructed();
     }
@@ -629,18 +765,32 @@ public final class HotwordDetectedResult implements Parcelable {
             if ((this.mBuilderFieldsSet & 4096) == 0) {
                 this.mBackgroundAudioPower = HotwordDetectedResult.defaultBackgroundAudioPower();
             }
-            HotwordDetectedResult o = new HotwordDetectedResult(this.mSpeakerId, this.mConfidenceLevel, this.mMediaSyncEvent, this.mHotwordOffsetMillis, this.mHotwordDurationMillis, this.mAudioChannel, this.mHotwordDetectionPersonalized, this.mScore, this.mPersonalizedScore, this.mHotwordPhraseId, this.mAudioStreams, this.mExtras, this.mBackgroundAudioPower);
+            HotwordDetectedResult o =
+                    new HotwordDetectedResult(
+                            this.mSpeakerId,
+                            this.mConfidenceLevel,
+                            this.mMediaSyncEvent,
+                            this.mHotwordOffsetMillis,
+                            this.mHotwordDurationMillis,
+                            this.mAudioChannel,
+                            this.mHotwordDetectionPersonalized,
+                            this.mScore,
+                            this.mPersonalizedScore,
+                            this.mHotwordPhraseId,
+                            this.mAudioStreams,
+                            this.mExtras,
+                            this.mBackgroundAudioPower);
             return o;
         }
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 8192) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

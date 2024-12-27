@@ -8,6 +8,5 @@ public abstract class Subtitle {
 
     public abstract Uri getUri();
 
-    protected Subtitle() {
-    }
+    protected Subtitle() {}
 }

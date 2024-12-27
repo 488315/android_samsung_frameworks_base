@@ -16,30 +16,23 @@ public class SemDisplayQuality extends SemDisplayQualityAP {
     }
 
     @Override // com.samsung.android.displayquality.SemDisplayQualityAP
-    public void handleAutoBrightnessModeOff() {
-    }
+    public void handleAutoBrightnessModeOff() {}
 
     @Override // com.samsung.android.displayquality.SemDisplayQualityAP
-    public void handleAutoBrightnessModeOn() {
-    }
+    public void handleAutoBrightnessModeOn() {}
 
     @Override // com.samsung.android.displayquality.SemDisplayQualityAP
-    public void handleScreenModeChanged(int i) {
-    }
+    public void handleScreenModeChanged(int i) {}
 
     @Override // com.samsung.android.displayquality.SemDisplayQualityAP
-    public void handleScreenOff() {
-    }
+    public void handleScreenOff() {}
 
     @Override // com.samsung.android.displayquality.SemDisplayQualityAP
-    public void handleScreenOffAsync() {
-    }
+    public void handleScreenOffAsync() {}
 
     @Override // com.samsung.android.displayquality.SemDisplayQualityAP
-    public void handleScreenOn() {
-    }
+    public void handleScreenOn() {}
 
     @Override // com.samsung.android.displayquality.SemDisplayQualityAP
-    public void handleScreenOnAsync() {
-    }
+    public void handleScreenOnAsync() {}
 }

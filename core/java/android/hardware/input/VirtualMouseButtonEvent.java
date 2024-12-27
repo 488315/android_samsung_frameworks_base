@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.MotionEvent;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -19,30 +20,30 @@ public final class VirtualMouseButtonEvent implements Parcelable {
     public static final int BUTTON_SECONDARY = 2;
     public static final int BUTTON_TERTIARY = 4;
     public static final int BUTTON_UNKNOWN = -1;
-    public static final Parcelable.Creator<VirtualMouseButtonEvent> CREATOR = new Parcelable.Creator<VirtualMouseButtonEvent>() { // from class: android.hardware.input.VirtualMouseButtonEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualMouseButtonEvent createFromParcel(Parcel source) {
-            return new VirtualMouseButtonEvent(source);
-        }
+    public static final Parcelable.Creator<VirtualMouseButtonEvent> CREATOR =
+            new Parcelable.Creator<VirtualMouseButtonEvent>() { // from class:
+                // android.hardware.input.VirtualMouseButtonEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualMouseButtonEvent createFromParcel(Parcel source) {
+                    return new VirtualMouseButtonEvent(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualMouseButtonEvent[] newArray(int size) {
-            return new VirtualMouseButtonEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualMouseButtonEvent[] newArray(int size) {
+                    return new VirtualMouseButtonEvent[size];
+                }
+            };
     private final int mAction;
     private final int mButtonCode;
     private final long mEventTimeNanos;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Action {
-    }
+    public @interface Action {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Button {
-    }
+    public @interface Button {}
 
     private VirtualMouseButtonEvent(int action, int buttonCode, long eventTimeNanos) {
         this.mAction = action;
@@ -69,7 +70,12 @@ public final class VirtualMouseButtonEvent implements Parcelable {
     }
 
     public String toString() {
-        return "VirtualMouseButtonEvent( action=" + MotionEvent.actionToString(this.mAction) + " button=" + MotionEvent.buttonStateToString(this.mButtonCode) + " eventTime(ns)=" + this.mEventTimeNanos;
+        return "VirtualMouseButtonEvent( action="
+                + MotionEvent.actionToString(this.mAction)
+                + " button="
+                + MotionEvent.buttonStateToString(this.mButtonCode)
+                + " eventTime(ns)="
+                + this.mEventTimeNanos;
     }
 
     public int getButtonCode() {
@@ -91,13 +97,19 @@ public final class VirtualMouseButtonEvent implements Parcelable {
 
         public VirtualMouseButtonEvent build() {
             if (this.mAction == -1 || this.mButtonCode == -1) {
-                throw new IllegalArgumentException("Cannot build virtual mouse button event with unset fields");
+                throw new IllegalArgumentException(
+                        "Cannot build virtual mouse button event with unset fields");
             }
-            return new VirtualMouseButtonEvent(this.mAction, this.mButtonCode, this.mEventTimeNanos);
+            return new VirtualMouseButtonEvent(
+                    this.mAction, this.mButtonCode, this.mEventTimeNanos);
         }
 
         public Builder setButtonCode(int buttonCode) {
-            if (buttonCode != 1 && buttonCode != 4 && buttonCode != 2 && buttonCode != 8 && buttonCode != 16) {
+            if (buttonCode != 1
+                    && buttonCode != 4
+                    && buttonCode != 2
+                    && buttonCode != 8
+                    && buttonCode != 16) {
                 throw new IllegalArgumentException("Unsupported mouse button code");
             }
             this.mButtonCode = buttonCode;

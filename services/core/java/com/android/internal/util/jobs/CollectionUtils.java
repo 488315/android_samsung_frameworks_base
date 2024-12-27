@@ -3,7 +3,7 @@ package com.android.internal.util.jobs;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.ExceptionUtils;
-import com.android.internal.util.jobs.FunctionalUtils;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -18,8 +18,7 @@ import java.util.function.Predicate;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public class CollectionUtils {
-    private CollectionUtils() {
-    }
+    private CollectionUtils() {}
 
     public static List add(List list, int i, Object obj) {
         if (list == null || list == Collections.emptyList()) {

@@ -4,38 +4,62 @@ import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArrayMap;
+
 import com.android.internal.view.AppearanceRegion;
 
 /* loaded from: classes5.dex */
 public final class RegisterStatusBarResult implements Parcelable {
-    public static final Parcelable.Creator<RegisterStatusBarResult> CREATOR = new Parcelable.Creator<RegisterStatusBarResult>() { // from class: com.android.internal.statusbar.RegisterStatusBarResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RegisterStatusBarResult createFromParcel(Parcel source) {
-            ArrayMap<String, StatusBarIcon> icons = source.createTypedArrayMap(StatusBarIcon.CREATOR);
-            int disabledFlags1 = source.readInt();
-            int appearance = source.readInt();
-            AppearanceRegion[] appearanceRegions = (AppearanceRegion[]) source.readParcelableArray(null, AppearanceRegion.class);
-            int imeWindowVis = source.readInt();
-            int imeBackDisposition = source.readInt();
-            boolean showImeSwitcher = source.readBoolean();
-            int disabledFlags2 = source.readInt();
-            IBinder imeToken = source.readStrongBinder();
-            boolean navbarColorManagedByIme = source.readBoolean();
-            int behavior = source.readInt();
-            int requestedVisibleTypes = source.readInt();
-            String packageName = source.readString();
-            int transientBarTypes = source.readInt();
-            LetterboxDetails[] letterboxDetails = (LetterboxDetails[]) source.readParcelableArray(null, LetterboxDetails.class);
-            return new RegisterStatusBarResult(icons, disabledFlags1, appearance, appearanceRegions, imeWindowVis, imeBackDisposition, showImeSwitcher, disabledFlags2, imeToken, navbarColorManagedByIme, behavior, requestedVisibleTypes, packageName, transientBarTypes, letterboxDetails);
-        }
+    public static final Parcelable.Creator<RegisterStatusBarResult> CREATOR =
+            new Parcelable.Creator<
+                    RegisterStatusBarResult>() { // from class:
+                                                 // com.android.internal.statusbar.RegisterStatusBarResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RegisterStatusBarResult createFromParcel(Parcel source) {
+                    ArrayMap<String, StatusBarIcon> icons =
+                            source.createTypedArrayMap(StatusBarIcon.CREATOR);
+                    int disabledFlags1 = source.readInt();
+                    int appearance = source.readInt();
+                    AppearanceRegion[] appearanceRegions =
+                            (AppearanceRegion[])
+                                    source.readParcelableArray(null, AppearanceRegion.class);
+                    int imeWindowVis = source.readInt();
+                    int imeBackDisposition = source.readInt();
+                    boolean showImeSwitcher = source.readBoolean();
+                    int disabledFlags2 = source.readInt();
+                    IBinder imeToken = source.readStrongBinder();
+                    boolean navbarColorManagedByIme = source.readBoolean();
+                    int behavior = source.readInt();
+                    int requestedVisibleTypes = source.readInt();
+                    String packageName = source.readString();
+                    int transientBarTypes = source.readInt();
+                    LetterboxDetails[] letterboxDetails =
+                            (LetterboxDetails[])
+                                    source.readParcelableArray(null, LetterboxDetails.class);
+                    return new RegisterStatusBarResult(
+                            icons,
+                            disabledFlags1,
+                            appearance,
+                            appearanceRegions,
+                            imeWindowVis,
+                            imeBackDisposition,
+                            showImeSwitcher,
+                            disabledFlags2,
+                            imeToken,
+                            navbarColorManagedByIme,
+                            behavior,
+                            requestedVisibleTypes,
+                            packageName,
+                            transientBarTypes,
+                            letterboxDetails);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RegisterStatusBarResult[] newArray(int size) {
-            return new RegisterStatusBarResult[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RegisterStatusBarResult[] newArray(int size) {
+                    return new RegisterStatusBarResult[size];
+                }
+            };
     public final int mAppearance;
     public final AppearanceRegion[] mAppearanceRegions;
     public final int mBehavior;
@@ -52,7 +76,22 @@ public final class RegisterStatusBarResult implements Parcelable {
     public final boolean mShowImeSwitcher;
     public final int mTransientBarTypes;
 
-    public RegisterStatusBarResult(ArrayMap<String, StatusBarIcon> icons, int disabledFlags1, int appearance, AppearanceRegion[] appearanceRegions, int imeWindowVis, int imeBackDisposition, boolean showImeSwitcher, int disabledFlags2, IBinder imeToken, boolean navbarColorManagedByIme, int behavior, int requestedVisibleTypes, String packageName, int transientBarTypes, LetterboxDetails[] letterboxDetails) {
+    public RegisterStatusBarResult(
+            ArrayMap<String, StatusBarIcon> icons,
+            int disabledFlags1,
+            int appearance,
+            AppearanceRegion[] appearanceRegions,
+            int imeWindowVis,
+            int imeBackDisposition,
+            boolean showImeSwitcher,
+            int disabledFlags2,
+            IBinder imeToken,
+            boolean navbarColorManagedByIme,
+            int behavior,
+            int requestedVisibleTypes,
+            String packageName,
+            int transientBarTypes,
+            LetterboxDetails[] letterboxDetails) {
         this.mIcons = new ArrayMap<>(icons);
         this.mDisabledFlags1 = disabledFlags1;
         this.mAppearance = appearance;

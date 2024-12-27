@@ -5,6 +5,7 @@ import android.media.AudioManager;
 import android.media.AudioSystem;
 import android.media.MediaMetrics;
 import android.net.INetd;
+
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
@@ -132,9 +133,23 @@ public final class AudioServiceEvents$VolumeEvent extends EventLogger.Event {
         int i4 = this.mOp;
         switch (i4) {
             case 0:
-                return "adjustSuggestedStreamVolume(sugg:" + AudioSystem.streamToString(i) + " dir:" + AudioManager.adjustToString(i3) + " flags:0x" + Integer.toHexString(i2) + ") from " + str2;
+                return "adjustSuggestedStreamVolume(sugg:"
+                        + AudioSystem.streamToString(i)
+                        + " dir:"
+                        + AudioManager.adjustToString(i3)
+                        + " flags:0x"
+                        + Integer.toHexString(i2)
+                        + ") from "
+                        + str2;
             case 1:
-                return "adjustStreamVolume(stream:" + AudioSystem.streamToString(i) + " dir:" + AudioManager.adjustToString(i3) + " flags:0x" + Integer.toHexString(i2) + ") from " + str2;
+                return "adjustStreamVolume(stream:"
+                        + AudioSystem.streamToString(i)
+                        + " dir:"
+                        + AudioManager.adjustToString(i3)
+                        + " flags:0x"
+                        + Integer.toHexString(i2)
+                        + ") from "
+                        + str2;
             case 2:
                 StringBuilder sb = new StringBuilder("setStreamVolume(stream:");
                 sb.append(AudioSystem.streamToString(i));
@@ -147,20 +162,44 @@ public final class AudioServiceEvents$VolumeEvent extends EventLogger.Event {
                 sb.append(str2);
                 return sb.toString();
             case 3:
-                return ArrayUtils$$ExternalSyntheticOutline0.m(i3, i2, "setHearingAidVolume: index:", " gain dB:");
+                return ArrayUtils$$ExternalSyntheticOutline0.m(
+                        i3, i2, "setHearingAidVolume: index:", " gain dB:");
             case 4:
                 return VibrationParam$1$$ExternalSyntheticOutline0.m(i3, "setAvrcpVolume: index:");
             case 5:
-                return "adjustStreamVolumeForUid(stream:" + AudioSystem.streamToString(i) + " dir:" + AudioManager.adjustToString(i3) + " flags:0x" + Integer.toHexString(i2) + ") from " + str2;
+                return "adjustStreamVolumeForUid(stream:"
+                        + AudioSystem.streamToString(i)
+                        + " dir:"
+                        + AudioManager.adjustToString(i3)
+                        + " flags:0x"
+                        + Integer.toHexString(i2)
+                        + ") from "
+                        + str2;
             case 6:
                 StringBuilder sb2 = new StringBuilder("Voice activity change (");
-                AccessibilityManagerService$$ExternalSyntheticOutline0.m(i3, i2 == 1 ? "active" : "inactive", ") causes setting HEARING_AID volume to idx:", " stream:", sb2);
+                AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                        i3,
+                        i2 == 1 ? "active" : "inactive",
+                        ") causes setting HEARING_AID volume to idx:",
+                        " stream:",
+                        sb2);
                 sb2.append(AudioSystem.streamToString(i));
                 return sb2.toString();
             case 7:
-                return "setMode(" + AudioSystem.modeToString(i2) + ") causes setting HEARING_AID volume to idx:" + i3 + " stream:" + AudioSystem.streamToString(i);
+                return "setMode("
+                        + AudioSystem.modeToString(i2)
+                        + ") causes setting HEARING_AID volume to idx:"
+                        + i3
+                        + " stream:"
+                        + AudioSystem.streamToString(i);
             case 8:
-                StringBuilder m = StorageManagerService$$ExternalSyntheticOutline0.m(i3, "setVolumeIndexForAttributes(group: group: ", str, " index:", " flags:0x");
+                StringBuilder m =
+                        StorageManagerService$$ExternalSyntheticOutline0.m(
+                                i3,
+                                "setVolumeIndexForAttributes(group: group: ",
+                                str,
+                                " index:",
+                                " flags:0x");
                 m.append(Integer.toHexString(i2));
                 m.append(") from ");
                 m.append(str2);
@@ -171,9 +210,16 @@ public final class AudioServiceEvents$VolumeEvent extends EventLogger.Event {
                 sb3.append(i3 == 1 ? ", muted)" : ", unmuted)");
                 return sb3.toString();
             case 10:
-                return "setLeAudioVolume(stream:" + AudioSystem.streamToString(i) + " index:" + i3 + " maxIndex:" + i2;
+                return "setLeAudioVolume(stream:"
+                        + AudioSystem.streamToString(i)
+                        + " index:"
+                        + i3
+                        + " maxIndex:"
+                        + i2;
             case 11:
-                StringBuilder m2 = DumpUtils$$ExternalSyntheticOutline0.m("adjustVolumeGroupVolume(group:", str, " dir:");
+                StringBuilder m2 =
+                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                "adjustVolumeGroupVolume(group:", str, " dir:");
                 m2.append(AudioManager.adjustToString(i3));
                 m2.append(" flags:0x");
                 m2.append(Integer.toHexString(i2));
@@ -207,41 +253,88 @@ public final class AudioServiceEvents$VolumeEvent extends EventLogger.Event {
                 } else if (i4 == 5) {
                     str = "adjustStreamVolumeForUid";
                 }
-                MediaMetrics.Item item = new MediaMetrics.Item("audio.volume.event").set(MediaMetrics.Property.CALLING_PACKAGE, str4);
+                MediaMetrics.Item item =
+                        new MediaMetrics.Item("audio.volume.event")
+                                .set(MediaMetrics.Property.CALLING_PACKAGE, str4);
                 MediaMetrics.Key key = MediaMetrics.Property.DIRECTION;
                 if (i3 > 0) {
                     str3 = INetd.IF_STATE_UP;
                 }
-                item.set(key, str3).set(MediaMetrics.Property.EVENT, str).set(MediaMetrics.Property.FLAGS, Integer.valueOf(i2)).set(MediaMetrics.Property.STREAM_TYPE, AudioSystem.streamToString(i)).record();
+                item.set(key, str3)
+                        .set(MediaMetrics.Property.EVENT, str)
+                        .set(MediaMetrics.Property.FLAGS, Integer.valueOf(i2))
+                        .set(MediaMetrics.Property.STREAM_TYPE, AudioSystem.streamToString(i))
+                        .record();
                 break;
             case 2:
-                new MediaMetrics.Item("audio.volume.event").set(MediaMetrics.Property.CALLING_PACKAGE, str4).set(MediaMetrics.Property.EVENT, "setStreamVolume").set(MediaMetrics.Property.FLAGS, Integer.valueOf(i2)).set(MediaMetrics.Property.INDEX, Integer.valueOf(i3)).set(MediaMetrics.Property.OLD_INDEX, Integer.valueOf(this.mVal3)).set(MediaMetrics.Property.STREAM_TYPE, AudioSystem.streamToString(i)).record();
+                new MediaMetrics.Item("audio.volume.event")
+                        .set(MediaMetrics.Property.CALLING_PACKAGE, str4)
+                        .set(MediaMetrics.Property.EVENT, "setStreamVolume")
+                        .set(MediaMetrics.Property.FLAGS, Integer.valueOf(i2))
+                        .set(MediaMetrics.Property.INDEX, Integer.valueOf(i3))
+                        .set(MediaMetrics.Property.OLD_INDEX, Integer.valueOf(this.mVal3))
+                        .set(MediaMetrics.Property.STREAM_TYPE, AudioSystem.streamToString(i))
+                        .record();
                 break;
             case 3:
-                new MediaMetrics.Item("audio.volume.event").set(MediaMetrics.Property.EVENT, "setHearingAidVolume").set(MediaMetrics.Property.GAIN_DB, Double.valueOf(i2)).set(MediaMetrics.Property.INDEX, Integer.valueOf(i3)).record();
+                new MediaMetrics.Item("audio.volume.event")
+                        .set(MediaMetrics.Property.EVENT, "setHearingAidVolume")
+                        .set(MediaMetrics.Property.GAIN_DB, Double.valueOf(i2))
+                        .set(MediaMetrics.Property.INDEX, Integer.valueOf(i3))
+                        .record();
                 break;
             case 4:
-                new MediaMetrics.Item("audio.volume.event").set(MediaMetrics.Property.EVENT, "setAvrcpVolume").set(MediaMetrics.Property.INDEX, Integer.valueOf(i3)).record();
+                new MediaMetrics.Item("audio.volume.event")
+                        .set(MediaMetrics.Property.EVENT, "setAvrcpVolume")
+                        .set(MediaMetrics.Property.INDEX, Integer.valueOf(i3))
+                        .record();
                 break;
             case 6:
-                new MediaMetrics.Item("audio.volume.event").set(MediaMetrics.Property.EVENT, "voiceActivityHearingAid").set(MediaMetrics.Property.INDEX, Integer.valueOf(i3)).set(MediaMetrics.Property.STATE, i2 == 1 ? "active" : "inactive").set(MediaMetrics.Property.STREAM_TYPE, AudioSystem.streamToString(i)).record();
+                new MediaMetrics.Item("audio.volume.event")
+                        .set(MediaMetrics.Property.EVENT, "voiceActivityHearingAid")
+                        .set(MediaMetrics.Property.INDEX, Integer.valueOf(i3))
+                        .set(MediaMetrics.Property.STATE, i2 == 1 ? "active" : "inactive")
+                        .set(MediaMetrics.Property.STREAM_TYPE, AudioSystem.streamToString(i))
+                        .record();
                 break;
             case 7:
-                new MediaMetrics.Item("audio.volume.event").set(MediaMetrics.Property.EVENT, "modeChangeHearingAid").set(MediaMetrics.Property.INDEX, Integer.valueOf(i3)).set(MediaMetrics.Property.MODE, AudioSystem.modeToString(i2)).set(MediaMetrics.Property.STREAM_TYPE, AudioSystem.streamToString(i)).record();
+                new MediaMetrics.Item("audio.volume.event")
+                        .set(MediaMetrics.Property.EVENT, "modeChangeHearingAid")
+                        .set(MediaMetrics.Property.INDEX, Integer.valueOf(i3))
+                        .set(MediaMetrics.Property.MODE, AudioSystem.modeToString(i2))
+                        .set(MediaMetrics.Property.STREAM_TYPE, AudioSystem.streamToString(i))
+                        .record();
                 break;
             case 8:
-                new MediaMetrics.Item("audio.volume.event").set(MediaMetrics.Property.CALLING_PACKAGE, str4).set(MediaMetrics.Property.EVENT, "setVolumeIndexForAttributes").set(MediaMetrics.Property.FLAGS, Integer.valueOf(i2)).set(MediaMetrics.Property.GROUP, str2).set(MediaMetrics.Property.INDEX, Integer.valueOf(i3)).record();
+                new MediaMetrics.Item("audio.volume.event")
+                        .set(MediaMetrics.Property.CALLING_PACKAGE, str4)
+                        .set(MediaMetrics.Property.EVENT, "setVolumeIndexForAttributes")
+                        .set(MediaMetrics.Property.FLAGS, Integer.valueOf(i2))
+                        .set(MediaMetrics.Property.GROUP, str2)
+                        .set(MediaMetrics.Property.INDEX, Integer.valueOf(i3))
+                        .record();
                 break;
             case 10:
-                new MediaMetrics.Item("audio.volume.event").set(MediaMetrics.Property.EVENT, "setLeAudioVolume").set(MediaMetrics.Property.INDEX, Integer.valueOf(i3)).set(MediaMetrics.Property.MAX_INDEX, Integer.valueOf(i2)).set(MediaMetrics.Property.STREAM_TYPE, AudioSystem.streamToString(i)).record();
+                new MediaMetrics.Item("audio.volume.event")
+                        .set(MediaMetrics.Property.EVENT, "setLeAudioVolume")
+                        .set(MediaMetrics.Property.INDEX, Integer.valueOf(i3))
+                        .set(MediaMetrics.Property.MAX_INDEX, Integer.valueOf(i2))
+                        .set(MediaMetrics.Property.STREAM_TYPE, AudioSystem.streamToString(i))
+                        .record();
                 break;
             case 11:
-                MediaMetrics.Item item2 = new MediaMetrics.Item("audio.volume.event").set(MediaMetrics.Property.CALLING_PACKAGE, str4);
+                MediaMetrics.Item item2 =
+                        new MediaMetrics.Item("audio.volume.event")
+                                .set(MediaMetrics.Property.CALLING_PACKAGE, str4);
                 MediaMetrics.Key key2 = MediaMetrics.Property.DIRECTION;
                 if (i3 > 0) {
                     str3 = INetd.IF_STATE_UP;
                 }
-                item2.set(key2, str3).set(MediaMetrics.Property.EVENT, "adjustVolumeGroupVolume").set(MediaMetrics.Property.FLAGS, Integer.valueOf(i2)).set(MediaMetrics.Property.GROUP, str2).record();
+                item2.set(key2, str3)
+                        .set(MediaMetrics.Property.EVENT, "adjustVolumeGroupVolume")
+                        .set(MediaMetrics.Property.FLAGS, Integer.valueOf(i2))
+                        .set(MediaMetrics.Property.GROUP, str2)
+                        .record();
                 break;
         }
     }

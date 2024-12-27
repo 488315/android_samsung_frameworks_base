@@ -133,7 +133,8 @@ public class NetworkMonitorManager {
     }
 
     @Deprecated
-    public boolean notifyNetworkConnected(LinkProperties linkProperties, NetworkCapabilities networkCapabilities) {
+    public boolean notifyNetworkConnected(
+            LinkProperties linkProperties, NetworkCapabilities networkCapabilities) {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {

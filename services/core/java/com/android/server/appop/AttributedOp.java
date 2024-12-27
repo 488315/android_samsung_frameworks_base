@@ -8,9 +8,10 @@ import android.util.ArraySet;
 import android.util.LongSparseArray;
 import android.util.Pools;
 import android.util.Slog;
+
 import com.android.internal.util.function.pooled.PooledLambda;
 import com.android.internal.util.function.pooled.PooledRunnable;
-import com.android.server.appop.AppOpsService;
+
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -50,8 +51,7 @@ public final class AttributedOp {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class OpEventProxyInfoPool extends Pools.SimplePool {
-    }
+    public final class OpEventProxyInfoPool extends Pools.SimplePool {}
 
     public AttributedOp(AppOpsService appOpsService, String str, AppOpsService.Op op) {
         this.mAppOpsService = appOpsService;
@@ -59,7 +59,8 @@ public final class AttributedOp {
         this.parent = op;
     }
 
-    public static LongSparseArray add(LongSparseArray longSparseArray, LongSparseArray longSparseArray2) {
+    public static LongSparseArray add(
+            LongSparseArray longSparseArray, LongSparseArray longSparseArray2) {
         if (longSparseArray == null) {
             return longSparseArray2;
         }
@@ -69,8 +70,10 @@ public final class AttributedOp {
         int size = longSparseArray2.size();
         for (int i = 0; i < size; i++) {
             long keyAt = longSparseArray2.keyAt(i);
-            AppOpsManager.NoteOpEvent noteOpEvent = (AppOpsManager.NoteOpEvent) longSparseArray2.valueAt(i);
-            AppOpsManager.NoteOpEvent noteOpEvent2 = (AppOpsManager.NoteOpEvent) longSparseArray.get(keyAt);
+            AppOpsManager.NoteOpEvent noteOpEvent =
+                    (AppOpsManager.NoteOpEvent) longSparseArray2.valueAt(i);
+            AppOpsManager.NoteOpEvent noteOpEvent2 =
+                    (AppOpsManager.NoteOpEvent) longSparseArray.get(keyAt);
             if (noteOpEvent2 == null || noteOpEvent.getNoteTime() > noteOpEvent2.getNoteTime()) {
                 longSparseArray.put(keyAt, noteOpEvent);
             }
@@ -85,7 +88,10 @@ public final class AttributedOp {
         int size = longSparseArray.size();
         LongSparseArray longSparseArray2 = new LongSparseArray(size);
         for (int i = 0; i < size; i++) {
-            longSparseArray2.put(longSparseArray.keyAt(i), new AppOpsManager.NoteOpEvent((AppOpsManager.NoteOpEvent) longSparseArray.valueAt(i)));
+            longSparseArray2.put(
+                    longSparseArray.keyAt(i),
+                    new AppOpsManager.NoteOpEvent(
+                            (AppOpsManager.NoteOpEvent) longSparseArray.valueAt(i)));
         }
         return longSparseArray2;
     }
@@ -95,17 +101,20 @@ public final class AttributedOp {
         accessed(currentTimeMillis, -1L, i, str, str2, str3, i2, i3);
         HistoricalRegistry historicalRegistry = this.mAppOpsService.mHistoricalRegistry;
         AppOpsService.Op op = this.parent;
-        historicalRegistry.incrementOpAccessedCount(op.op, op.uid, op.packageName, this.tag, i2, i3, currentTimeMillis, 0, -1);
+        historicalRegistry.incrementOpAccessedCount(
+                op.op, op.uid, op.packageName, this.tag, i2, i3, currentTimeMillis, 0, -1);
         AppOpsService appOpsService = this.mAppOpsService;
         AppOpsService.Op op2 = this.parent;
         int i4 = op2.op;
         int i5 = op2.uid;
         String str4 = op2.packageName;
         String str5 = this.tag;
-        appOpsService.writePermissionAccessInformation(i4, i5, str4, str, str5 == null ? str2 : str5, i2);
+        appOpsService.writePermissionAccessInformation(
+                i4, i5, str4, str, str5 == null ? str2 : str5, i2);
     }
 
-    public final void accessed(long j, long j2, int i, String str, String str2, String str3, int i2, int i3) {
+    public final void accessed(
+            long j, long j2, int i, String str, String str2, String str3, int i2, int i3) {
         AppOpsManager.OpEventProxyInfo opEventProxyInfo;
         long makeKey = AppOpsManager.makeKey(i2, i3);
         if (this.mAccessEvents == null) {
@@ -113,7 +122,8 @@ public final class AttributedOp {
         }
         AppOpsService appOpsService = this.mAppOpsService;
         if (i != -1) {
-            opEventProxyInfo = (AppOpsManager.OpEventProxyInfo) appOpsService.mOpEventProxyInfoPool.acquire();
+            opEventProxyInfo =
+                    (AppOpsManager.OpEventProxyInfo) appOpsService.mOpEventProxyInfoPool.acquire();
             if (opEventProxyInfo != null) {
                 opEventProxyInfo.reinit(i, str, str2, str3);
             } else {
@@ -122,7 +132,8 @@ public final class AttributedOp {
         } else {
             opEventProxyInfo = null;
         }
-        AppOpsManager.NoteOpEvent noteOpEvent = (AppOpsManager.NoteOpEvent) this.mAccessEvents.get(makeKey);
+        AppOpsManager.NoteOpEvent noteOpEvent =
+                (AppOpsManager.NoteOpEvent) this.mAccessEvents.get(makeKey);
         if (noteOpEvent == null) {
             this.mAccessEvents.put(makeKey, new AppOpsManager.NoteOpEvent(j, j2, opEventProxyInfo));
         } else {
@@ -140,13 +151,23 @@ public final class AttributedOp {
             }
             int i = 0;
             while (i < size) {
-                InProgressStartOpEvent inProgressStartOpEvent = (InProgressStartOpEvent) this.mInProgressEvents.valueAt(i);
-                deepClone.append(AppOpsManager.makeKey(inProgressStartOpEvent.mUidState, inProgressStartOpEvent.mFlags), new AppOpsManager.NoteOpEvent(inProgressStartOpEvent.mStartTime, Math.max(elapsedRealtime - inProgressStartOpEvent.mStartElapsedTime, 0L), inProgressStartOpEvent.mProxy));
+                InProgressStartOpEvent inProgressStartOpEvent =
+                        (InProgressStartOpEvent) this.mInProgressEvents.valueAt(i);
+                deepClone.append(
+                        AppOpsManager.makeKey(
+                                inProgressStartOpEvent.mUidState, inProgressStartOpEvent.mFlags),
+                        new AppOpsManager.NoteOpEvent(
+                                inProgressStartOpEvent.mStartTime,
+                                Math.max(
+                                        elapsedRealtime - inProgressStartOpEvent.mStartElapsedTime,
+                                        0L),
+                                inProgressStartOpEvent.mProxy));
                 i++;
                 elapsedRealtime = elapsedRealtime;
             }
         }
-        return new AppOpsManager.AttributedOpEntry(this.parent.op, isRunning(), deepClone, deepClone(this.mRejectEvents));
+        return new AppOpsManager.AttributedOpEntry(
+                this.parent.op, isRunning(), deepClone, deepClone(this.mRejectEvents));
     }
 
     public final void doForAllInProgressStartOpEvents(Consumer consumer) {
@@ -176,7 +197,10 @@ public final class AttributedOp {
             Method dump skipped, instructions count: 350
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.appop.AttributedOp.finishOrPause(android.os.IBinder, boolean, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.appop.AttributedOp.finishOrPause(android.os.IBinder,"
+                    + " boolean, boolean):void");
     }
 
     public final boolean isPaused() {
@@ -200,7 +224,9 @@ public final class AttributedOp {
             Method dump skipped, instructions count: 381
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.appop.AttributedOp.onUidStateChanged(int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.appop.AttributedOp.onUidStateChanged(int):void");
     }
 
     public final void rejected(int i, int i2) {
@@ -215,10 +241,14 @@ public final class AttributedOp {
             try {
                 if (historicalRegistry.mMode == 1) {
                     if (!historicalRegistry.isPersistenceInitializedMLocked()) {
-                        Slog.v(HistoricalRegistry.LOG_TAG, "Interaction before persistence initialized");
+                        Slog.v(
+                                HistoricalRegistry.LOG_TAG,
+                                "Interaction before persistence initialized");
                         return;
                     }
-                    historicalRegistry.getUpdatedPendingHistoricalOpsMLocked(System.currentTimeMillis()).increaseRejectCount(i3, i4, str, str2, i, i2, 1L);
+                    historicalRegistry
+                            .getUpdatedPendingHistoricalOpsMLocked(System.currentTimeMillis())
+                            .increaseRejectCount(i3, i4, str, str2, i, i2, 1L);
                 }
             } finally {
             }
@@ -230,22 +260,42 @@ public final class AttributedOp {
         if (this.mRejectEvents == null) {
             this.mRejectEvents = new LongSparseArray(1);
         }
-        AppOpsManager.NoteOpEvent noteOpEvent = (AppOpsManager.NoteOpEvent) this.mRejectEvents.get(makeKey);
+        AppOpsManager.NoteOpEvent noteOpEvent =
+                (AppOpsManager.NoteOpEvent) this.mRejectEvents.get(makeKey);
         if (noteOpEvent != null) {
-            noteOpEvent.reinit(j, -1L, (AppOpsManager.OpEventProxyInfo) null, this.mAppOpsService.mOpEventProxyInfoPool);
+            noteOpEvent.reinit(
+                    j,
+                    -1L,
+                    (AppOpsManager.OpEventProxyInfo) null,
+                    this.mAppOpsService.mOpEventProxyInfoPool);
         } else {
-            this.mRejectEvents.put(makeKey, new AppOpsManager.NoteOpEvent(j, -1L, (AppOpsManager.OpEventProxyInfo) null));
+            this.mRejectEvents.put(
+                    makeKey,
+                    new AppOpsManager.NoteOpEvent(j, -1L, (AppOpsManager.OpEventProxyInfo) null));
         }
     }
 
-    public final void startedOrPaused(IBinder iBinder, int i, int i2, String str, String str2, String str3, int i3, int i4, int i5, int i6, boolean z, boolean z2) {
+    public final void startedOrPaused(
+            IBinder iBinder,
+            int i,
+            int i2,
+            String str,
+            String str2,
+            String str3,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            boolean z,
+            boolean z2) {
         AppOpsManager.OpEventProxyInfo opEventProxyInfo;
         InProgressStartOpEvent inProgressStartOpEvent;
         String str4 = str2;
         if (!z && !this.parent.isRunning() && z2) {
             AppOpsService appOpsService = this.mAppOpsService;
             AppOpsService.Op op = this.parent;
-            appOpsService.scheduleOpActiveChangedIfNeededLocked(op.op, op.uid, op.packageName, this.tag, i, true, i5, i6);
+            appOpsService.scheduleOpActiveChangedIfNeededLocked(
+                    op.op, op.uid, op.packageName, this.tag, i, true, i5, i6);
         }
         if (z2 && this.mInProgressEvents == null) {
             this.mInProgressEvents = new ArrayMap(1);
@@ -254,14 +304,21 @@ public final class AttributedOp {
         }
         ArrayMap arrayMap = z2 ? this.mInProgressEvents : this.mPausedInProgressEvents;
         long currentTimeMillis = System.currentTimeMillis();
-        InProgressStartOpEvent inProgressStartOpEvent2 = (InProgressStartOpEvent) arrayMap.get(iBinder);
+        InProgressStartOpEvent inProgressStartOpEvent2 =
+                (InProgressStartOpEvent) arrayMap.get(iBinder);
         if (inProgressStartOpEvent2 == null) {
-            InProgressStartOpEventPool inProgressStartOpEventPool = this.mAppOpsService.mInProgressStartOpEventPool;
+            InProgressStartOpEventPool inProgressStartOpEventPool =
+                    this.mAppOpsService.mInProgressStartOpEventPool;
             long elapsedRealtime = SystemClock.elapsedRealtime();
-            PooledRunnable obtainRunnable = PooledLambda.obtainRunnable(new AttributedOp$$ExternalSyntheticLambda0(), this, iBinder);
-            InProgressStartOpEvent inProgressStartOpEvent3 = (InProgressStartOpEvent) inProgressStartOpEventPool.acquire();
+            PooledRunnable obtainRunnable =
+                    PooledLambda.obtainRunnable(
+                            new AttributedOp$$ExternalSyntheticLambda0(), this, iBinder);
+            InProgressStartOpEvent inProgressStartOpEvent3 =
+                    (InProgressStartOpEvent) inProgressStartOpEventPool.acquire();
             if (i2 != -1) {
-                opEventProxyInfo = (AppOpsManager.OpEventProxyInfo) inProgressStartOpEventPool.mOpEventProxyInfoPool.acquire();
+                opEventProxyInfo =
+                        (AppOpsManager.OpEventProxyInfo)
+                                inProgressStartOpEventPool.mOpEventProxyInfoPool.acquire();
                 if (opEventProxyInfo != null) {
                     opEventProxyInfo.reinit(i2, str, str4, str3);
                 } else {
@@ -271,7 +328,8 @@ public final class AttributedOp {
                 opEventProxyInfo = null;
             }
             if (inProgressStartOpEvent3 != null) {
-                OpEventProxyInfoPool opEventProxyInfoPool = inProgressStartOpEventPool.mOpEventProxyInfoPool;
+                OpEventProxyInfoPool opEventProxyInfoPool =
+                        inProgressStartOpEventPool.mOpEventProxyInfoPool;
                 inProgressStartOpEvent3.mStartTime = currentTimeMillis;
                 inProgressStartOpEvent3.mStartElapsedTime = elapsedRealtime;
                 inProgressStartOpEvent3.mClientId = iBinder;
@@ -311,7 +369,8 @@ public final class AttributedOp {
         if (z2) {
             HistoricalRegistry historicalRegistry = this.mAppOpsService.mHistoricalRegistry;
             AppOpsService.Op op2 = this.parent;
-            historicalRegistry.incrementOpAccessedCount(op2.op, op2.uid, op2.packageName, this.tag, i3, i4, currentTimeMillis, i5, i6);
+            historicalRegistry.incrementOpAccessedCount(
+                    op2.op, op2.uid, op2.packageName, this.tag, i3, i4, currentTimeMillis, i5, i6);
             AppOpsService appOpsService2 = this.mAppOpsService;
             AppOpsService.Op op3 = this.parent;
             int i7 = op3.op;

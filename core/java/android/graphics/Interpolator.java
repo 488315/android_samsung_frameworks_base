@@ -20,7 +20,8 @@ public class Interpolator {
 
     private static native void nativeReset(long j, int i, int i2);
 
-    private static native void nativeSetKeyFrame(long j, int i, int i2, float[] fArr, float[] fArr2);
+    private static native void nativeSetKeyFrame(
+            long j, int i, int i2, float[] fArr, float[] fArr2);
 
     private static native void nativeSetRepeatMirror(long j, float f, boolean z);
 

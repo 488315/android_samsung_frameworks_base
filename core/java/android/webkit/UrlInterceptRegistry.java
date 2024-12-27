@@ -1,6 +1,5 @@
 package android.webkit;
 
-import android.webkit.CacheManager;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
@@ -60,7 +59,8 @@ public final class UrlInterceptRegistry {
     }
 
     @Deprecated
-    public static synchronized CacheManager.CacheResult getSurrogate(String url, Map<String, String> headers) {
+    public static synchronized CacheManager.CacheResult getSurrogate(
+            String url, Map<String, String> headers) {
         synchronized (UrlInterceptRegistry.class) {
             if (urlInterceptDisabled()) {
                 return null;

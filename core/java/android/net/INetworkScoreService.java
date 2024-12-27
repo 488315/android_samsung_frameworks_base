@@ -1,11 +1,11 @@
 package android.net;
 
-import android.net.INetworkScoreCache;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -22,13 +22,15 @@ public interface INetworkScoreService extends IInterface {
 
     boolean isCallerActiveScorer(int i) throws RemoteException;
 
-    void registerNetworkScoreCache(int i, INetworkScoreCache iNetworkScoreCache, int i2) throws RemoteException;
+    void registerNetworkScoreCache(int i, INetworkScoreCache iNetworkScoreCache, int i2)
+            throws RemoteException;
 
     boolean requestScores(NetworkKey[] networkKeyArr) throws RemoteException;
 
     boolean setActiveScorer(String str) throws RemoteException;
 
-    void unregisterNetworkScoreCache(int i, INetworkScoreCache iNetworkScoreCache) throws RemoteException;
+    void unregisterNetworkScoreCache(int i, INetworkScoreCache iNetworkScoreCache)
+            throws RemoteException;
 
     boolean updateScores(ScoredNetwork[] scoredNetworkArr) throws RemoteException;
 
@@ -49,16 +51,16 @@ public interface INetworkScoreService extends IInterface {
         }
 
         @Override // android.net.INetworkScoreService
-        public void disableScoring() throws RemoteException {
-        }
+        public void disableScoring() throws RemoteException {}
 
         @Override // android.net.INetworkScoreService
-        public void registerNetworkScoreCache(int networkType, INetworkScoreCache scoreCache, int filterType) throws RemoteException {
-        }
+        public void registerNetworkScoreCache(
+                int networkType, INetworkScoreCache scoreCache, int filterType)
+                throws RemoteException {}
 
         @Override // android.net.INetworkScoreService
-        public void unregisterNetworkScoreCache(int networkType, INetworkScoreCache scoreCache) throws RemoteException {
-        }
+        public void unregisterNetworkScoreCache(int networkType, INetworkScoreCache scoreCache)
+                throws RemoteException {}
 
         @Override // android.net.INetworkScoreService
         public boolean requestScores(NetworkKey[] networks) throws RemoteException {
@@ -91,7 +93,7 @@ public interface INetworkScoreService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements INetworkScoreService {
+    public abstract static class Stub extends Binder implements INetworkScoreService {
         public static final String DESCRIPTOR = "android.net.INetworkScoreService";
         static final int TRANSACTION_clearScores = 2;
         static final int TRANSACTION_disableScoring = 4;
@@ -160,7 +162,8 @@ public interface INetworkScoreService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -170,7 +173,8 @@ public interface INetworkScoreService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ScoredNetwork[] _arg0 = (ScoredNetwork[]) data.createTypedArray(ScoredNetwork.CREATOR);
+                    ScoredNetwork[] _arg0 =
+                            (ScoredNetwork[]) data.createTypedArray(ScoredNetwork.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result = updateScores(_arg0);
                     reply.writeNoException();
@@ -194,7 +198,8 @@ public interface INetworkScoreService extends IInterface {
                     return true;
                 case 5:
                     int _arg03 = data.readInt();
-                    INetworkScoreCache _arg1 = INetworkScoreCache.Stub.asInterface(data.readStrongBinder());
+                    INetworkScoreCache _arg1 =
+                            INetworkScoreCache.Stub.asInterface(data.readStrongBinder());
                     int _arg2 = data.readInt();
                     data.enforceNoDataAvail();
                     registerNetworkScoreCache(_arg03, _arg1, _arg2);
@@ -202,7 +207,8 @@ public interface INetworkScoreService extends IInterface {
                     return true;
                 case 6:
                     int _arg04 = data.readInt();
-                    INetworkScoreCache _arg12 = INetworkScoreCache.Stub.asInterface(data.readStrongBinder());
+                    INetworkScoreCache _arg12 =
+                            INetworkScoreCache.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterNetworkScoreCache(_arg04, _arg12);
                     reply.writeNoException();
@@ -322,7 +328,9 @@ public interface INetworkScoreService extends IInterface {
             }
 
             @Override // android.net.INetworkScoreService
-            public void registerNetworkScoreCache(int networkType, INetworkScoreCache scoreCache, int filterType) throws RemoteException {
+            public void registerNetworkScoreCache(
+                    int networkType, INetworkScoreCache scoreCache, int filterType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -339,7 +347,8 @@ public interface INetworkScoreService extends IInterface {
             }
 
             @Override // android.net.INetworkScoreService
-            public void unregisterNetworkScoreCache(int networkType, INetworkScoreCache scoreCache) throws RemoteException {
+            public void unregisterNetworkScoreCache(int networkType, INetworkScoreCache scoreCache)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -412,7 +421,9 @@ public interface INetworkScoreService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(10, _data, _reply, 0);
                     _reply.readException();
-                    NetworkScorerAppData _result = (NetworkScorerAppData) _reply.readTypedObject(NetworkScorerAppData.CREATOR);
+                    NetworkScorerAppData _result =
+                            (NetworkScorerAppData)
+                                    _reply.readTypedObject(NetworkScorerAppData.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -428,7 +439,8 @@ public interface INetworkScoreService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(11, _data, _reply, 0);
                     _reply.readException();
-                    List<NetworkScorerAppData> _result = _reply.createTypedArrayList(NetworkScorerAppData.CREATOR);
+                    List<NetworkScorerAppData> _result =
+                            _reply.createTypedArrayList(NetworkScorerAppData.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

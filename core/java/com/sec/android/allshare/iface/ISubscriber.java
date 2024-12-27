@@ -39,8 +39,7 @@ public interface ISubscriber extends IInterface {
         }
 
         @Override // com.sec.android.allshare.iface.ISubscriber
-        public void unsubscribeEvent(String subscriber, CVMessage cvm) throws RemoteException {
-        }
+        public void unsubscribeEvent(String subscriber, CVMessage cvm) throws RemoteException {}
 
         @Override // com.sec.android.allshare.iface.ISubscriber
         public String getServiceVersion() throws RemoteException {
@@ -58,7 +57,7 @@ public interface ISubscriber extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISubscriber {
+    public abstract static class Stub extends Binder implements ISubscriber {
         static final int TRANSACTION_getCaptionFilePathFromURI = 6;
         static final int TRANSACTION_getServiceVersion = 5;
         static final int TRANSACTION_requestCVAsync = 1;
@@ -111,7 +110,8 @@ public interface ISubscriber extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISubscriber.DESCRIPTOR);
             }
@@ -203,7 +203,8 @@ public interface ISubscriber extends IInterface {
             }
 
             @Override // com.sec.android.allshare.iface.ISubscriber
-            public CVMessage requestCVSync(String subscriber, CVMessage cvm) throws RemoteException {
+            public CVMessage requestCVSync(String subscriber, CVMessage cvm)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

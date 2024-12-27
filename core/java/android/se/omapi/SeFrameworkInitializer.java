@@ -7,8 +7,7 @@ import android.annotation.SystemApi;
 public class SeFrameworkInitializer {
     private static volatile SeServiceManager sSeServiceManager;
 
-    private SeFrameworkInitializer() {
-    }
+    private SeFrameworkInitializer() {}
 
     public static void setSeServiceManager(SeServiceManager seServiceManager) {
         if (sSeServiceManager != null) {

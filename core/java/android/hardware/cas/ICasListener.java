@@ -24,16 +24,14 @@ public interface ICasListener extends IInterface {
 
     public static class Default implements ICasListener {
         @Override // android.hardware.cas.ICasListener
-        public void onEvent(int event, int arg, byte[] data) throws RemoteException {
-        }
+        public void onEvent(int event, int arg, byte[] data) throws RemoteException {}
 
         @Override // android.hardware.cas.ICasListener
-        public void onSessionEvent(byte[] sessionId, int event, int arg, byte[] data) throws RemoteException {
-        }
+        public void onSessionEvent(byte[] sessionId, int event, int arg, byte[] data)
+                throws RemoteException {}
 
         @Override // android.hardware.cas.ICasListener
-        public void onStatusUpdate(byte event, int number) throws RemoteException {
-        }
+        public void onStatusUpdate(byte event, int number) throws RemoteException {}
 
         @Override // android.hardware.cas.ICasListener
         public int getInterfaceVersion() {
@@ -51,7 +49,7 @@ public interface ICasListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICasListener {
+    public abstract static class Stub extends Binder implements ICasListener {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_onEvent = 1;
@@ -80,7 +78,8 @@ public interface ICasListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -168,7 +167,8 @@ public interface ICasListener extends IInterface {
             }
 
             @Override // android.hardware.cas.ICasListener
-            public void onSessionEvent(byte[] sessionId, int event, int arg, byte[] data) throws RemoteException {
+            public void onSessionEvent(byte[] sessionId, int event, int arg, byte[] data)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

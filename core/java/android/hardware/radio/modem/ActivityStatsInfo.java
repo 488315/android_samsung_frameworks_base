@@ -3,26 +3,29 @@ package android.hardware.radio.modem;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class ActivityStatsInfo implements Parcelable {
-    public static final Parcelable.Creator<ActivityStatsInfo> CREATOR = new Parcelable.Creator<ActivityStatsInfo>() { // from class: android.hardware.radio.modem.ActivityStatsInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ActivityStatsInfo createFromParcel(Parcel _aidl_source) {
-            ActivityStatsInfo _aidl_out = new ActivityStatsInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<ActivityStatsInfo> CREATOR =
+            new Parcelable.Creator<ActivityStatsInfo>() { // from class:
+                // android.hardware.radio.modem.ActivityStatsInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ActivityStatsInfo createFromParcel(Parcel _aidl_source) {
+                    ActivityStatsInfo _aidl_out = new ActivityStatsInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ActivityStatsInfo[] newArray(int _aidl_size) {
-            return new ActivityStatsInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ActivityStatsInfo[] newArray(int _aidl_size) {
+                    return new ActivityStatsInfo[_aidl_size];
+                }
+            };
     public ActivityStatsTechSpecificInfo[] techSpecificInfo;
     public int sleepModeTimeMs = 0;
     public int idleModeTimeMs = 0;
@@ -74,7 +77,10 @@ public class ActivityStatsInfo implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.techSpecificInfo = (ActivityStatsTechSpecificInfo[]) _aidl_parcel.createTypedArray(ActivityStatsTechSpecificInfo.CREATOR);
+                this.techSpecificInfo =
+                        (ActivityStatsTechSpecificInfo[])
+                                _aidl_parcel.createTypedArray(
+                                        ActivityStatsTechSpecificInfo.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

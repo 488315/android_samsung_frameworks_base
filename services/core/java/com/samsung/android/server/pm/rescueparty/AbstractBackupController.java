@@ -8,7 +8,9 @@ import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.server.KnoxCaptureInputFilter$$ExternalSyntheticOutline0;
+
 import java.io.File;
 import java.io.IOException;
 import java.security.SecureRandom;
@@ -31,17 +33,23 @@ public abstract class AbstractBackupController {
         if (TextUtils.isEmpty("pm_settings_backup")) {
             throw new IllegalStateException("Module name is empty or null");
         }
-        this.mSharedPrefForConfigs = context.createDeviceProtectedStorageContext().getSharedPreferences(new File(getControllerDir(), "pref_pm_settings_backup.xml"), 0);
+        this.mSharedPrefForConfigs =
+                context.createDeviceProtectedStorageContext()
+                        .getSharedPreferences(
+                                new File(getControllerDir(), "pref_pm_settings_backup.xml"), 0);
         try {
             readBackupItems();
             setLastSelectedItemIndex(getBackupConfigInt(-1, "last_selected_item"));
         } catch (Exception e) {
-            KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m(e, "Failed to read configs: ", "AbstractBackupController");
+            KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m(
+                    e, "Failed to read configs: ", "AbstractBackupController");
             this.mBackupItemList.clear();
             this.mLastSelectedBackupItemIndex.set(-1);
         }
         Slog.d("AbstractBackupController", "mBackupItemList: " + this.mBackupItemList);
-        Slog.d("AbstractBackupController", "mLastSelectedBackupItemIndex: " + this.mLastSelectedBackupItemIndex.get());
+        Slog.d(
+                "AbstractBackupController",
+                "mLastSelectedBackupItemIndex: " + this.mLastSelectedBackupItemIndex.get());
     }
 
     public static boolean copyFile(File file, File file2) {
@@ -50,16 +58,22 @@ public abstract class AbstractBackupController {
             try {
                 Slog.d("AbstractBackupController", "Copy " + file + " to " + file2);
                 FileUtils.copy(file, file2);
-                Slog.d("AbstractBackupController", "Took " + (SystemClock.elapsedRealtime() - elapsedRealtime) + " ms");
+                Slog.d(
+                        "AbstractBackupController",
+                        "Took " + (SystemClock.elapsedRealtime() - elapsedRealtime) + " ms");
                 return true;
             } catch (IOException e) {
                 Slog.d("AbstractBackupController", "Failed to copy " + file + " to " + file2);
                 e.printStackTrace();
-                Slog.d("AbstractBackupController", "Took " + (SystemClock.elapsedRealtime() - elapsedRealtime) + " ms");
+                Slog.d(
+                        "AbstractBackupController",
+                        "Took " + (SystemClock.elapsedRealtime() - elapsedRealtime) + " ms");
                 return false;
             }
         } catch (Throwable th) {
-            Slog.d("AbstractBackupController", "Took " + (SystemClock.elapsedRealtime() - elapsedRealtime) + " ms");
+            Slog.d(
+                    "AbstractBackupController",
+                    "Took " + (SystemClock.elapsedRealtime() - elapsedRealtime) + " ms");
             throw th;
         }
     }
@@ -87,7 +101,8 @@ public abstract class AbstractBackupController {
                 this.mBackupItemList.add(file.toString().trim());
                 if (this.mBackupItemList.size() > 3) {
                     for (int i = 0; i < this.mBackupItemList.size() - 3; i++) {
-                        File file2 = new File(getControllerDir(), (String) this.mBackupItemList.get(i));
+                        File file2 =
+                                new File(getControllerDir(), (String) this.mBackupItemList.get(i));
                         this.mBackupItemList.remove(0);
                         if (file2.exists() && file2.delete()) {
                             Slog.d("AbstractBackupController", "Failed to delete " + file2);
@@ -108,7 +123,8 @@ public abstract class AbstractBackupController {
                     return;
                 }
                 for (File file : listFiles) {
-                    if (file.isDirectory() && !this.mBackupItemList.contains(file.toString().trim())) {
+                    if (file.isDirectory()
+                            && !this.mBackupItemList.contains(file.toString().trim())) {
                         Slog.d("AbstractBackupController", "Removing outdated file: " + file);
                         if (deleteContents(file)) {
                             file.delete();
@@ -138,9 +154,12 @@ public abstract class AbstractBackupController {
     }
 
     public File getControllerDir() {
-        File file = new File(new File(injectSystemDataDir(), "pm_backup_files"), "pm_settings_backup");
+        File file =
+                new File(new File(injectSystemDataDir(), "pm_backup_files"), "pm_settings_backup");
         if (!file.exists() && !file.mkdirs()) {
-            Slog.e("AbstractBackupController", "Failed to make " + file + " for pm_settings_backup");
+            Slog.e(
+                    "AbstractBackupController",
+                    "Failed to make " + file + " for pm_settings_backup");
         }
         return file;
     }
@@ -178,7 +197,10 @@ public abstract class AbstractBackupController {
             Slog.d("AbstractBackupController", "!@File doesn't exist: " + file);
             return null;
         } catch (Exception e) {
-            KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m(e, "!@Invalid file name or any exception occurred: ", "AbstractBackupController");
+            KnoxCaptureInputFilter$$ExternalSyntheticOutline0.m(
+                    e,
+                    "!@Invalid file name or any exception occurred: ",
+                    "AbstractBackupController");
             return null;
         }
     }

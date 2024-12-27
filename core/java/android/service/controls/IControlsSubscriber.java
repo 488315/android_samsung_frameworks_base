@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.service.controls.IControlsSubscription;
 
 /* loaded from: classes3.dex */
 public interface IControlsSubscriber extends IInterface {
@@ -17,24 +16,21 @@ public interface IControlsSubscriber extends IInterface {
 
     void onNext(IBinder iBinder, Control control) throws RemoteException;
 
-    void onSubscribe(IBinder iBinder, IControlsSubscription iControlsSubscription) throws RemoteException;
+    void onSubscribe(IBinder iBinder, IControlsSubscription iControlsSubscription)
+            throws RemoteException;
 
     public static class Default implements IControlsSubscriber {
         @Override // android.service.controls.IControlsSubscriber
-        public void onSubscribe(IBinder token, IControlsSubscription cs) throws RemoteException {
-        }
+        public void onSubscribe(IBinder token, IControlsSubscription cs) throws RemoteException {}
 
         @Override // android.service.controls.IControlsSubscriber
-        public void onNext(IBinder token, Control c) throws RemoteException {
-        }
+        public void onNext(IBinder token, Control c) throws RemoteException {}
 
         @Override // android.service.controls.IControlsSubscriber
-        public void onError(IBinder token, String s) throws RemoteException {
-        }
+        public void onError(IBinder token, String s) throws RemoteException {}
 
         @Override // android.service.controls.IControlsSubscriber
-        public void onComplete(IBinder token) throws RemoteException {
-        }
+        public void onComplete(IBinder token) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -42,7 +38,7 @@ public interface IControlsSubscriber extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IControlsSubscriber {
+    public abstract static class Stub extends Binder implements IControlsSubscriber {
         static final int TRANSACTION_onComplete = 4;
         static final int TRANSACTION_onError = 3;
         static final int TRANSACTION_onNext = 2;
@@ -89,7 +85,8 @@ public interface IControlsSubscriber extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IControlsSubscriber.DESCRIPTOR);
             }
@@ -100,7 +97,8 @@ public interface IControlsSubscriber extends IInterface {
             switch (code) {
                 case 1:
                     IBinder _arg0 = data.readStrongBinder();
-                    IControlsSubscription _arg1 = IControlsSubscription.Stub.asInterface(data.readStrongBinder());
+                    IControlsSubscription _arg1 =
+                            IControlsSubscription.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onSubscribe(_arg0, _arg1);
                     return true;
@@ -143,7 +141,8 @@ public interface IControlsSubscriber extends IInterface {
             }
 
             @Override // android.service.controls.IControlsSubscriber
-            public void onSubscribe(IBinder token, IControlsSubscription cs) throws RemoteException {
+            public void onSubscribe(IBinder token, IControlsSubscription cs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IControlsSubscriber.DESCRIPTOR);

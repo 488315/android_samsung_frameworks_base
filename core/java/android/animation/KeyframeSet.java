@@ -1,8 +1,8 @@
 package android.animation;
 
-import android.animation.Keyframe;
 import android.graphics.Path;
 import android.util.Log;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -34,7 +34,8 @@ public class KeyframeSet implements Keyframes {
         if (numKeyframes != 1) {
             keyframes[0] = (Keyframe.IntKeyframe) Keyframe.ofInt(0.0f, values[0]);
             for (int i = 1; i < numKeyframes; i++) {
-                keyframes[i] = (Keyframe.IntKeyframe) Keyframe.ofInt(i / (numKeyframes - 1), values[i]);
+                keyframes[i] =
+                        (Keyframe.IntKeyframe) Keyframe.ofInt(i / (numKeyframes - 1), values[i]);
             }
         } else {
             keyframes[0] = (Keyframe.IntKeyframe) Keyframe.ofInt(0.0f);
@@ -50,7 +51,9 @@ public class KeyframeSet implements Keyframes {
         if (numKeyframes != 1) {
             keyframes[0] = (Keyframe.FloatKeyframe) Keyframe.ofFloat(0.0f, values[0]);
             for (int i = 1; i < numKeyframes; i++) {
-                keyframes[i] = (Keyframe.FloatKeyframe) Keyframe.ofFloat(i / (numKeyframes - 1), values[i]);
+                keyframes[i] =
+                        (Keyframe.FloatKeyframe)
+                                Keyframe.ofFloat(i / (numKeyframes - 1), values[i]);
                 if (Float.isNaN(values[i])) {
                     badValue = true;
                 }
@@ -101,11 +104,14 @@ public class KeyframeSet implements Keyframes {
 
     public static KeyframeSet ofObject(Object... values) {
         int numKeyframes = values.length;
-        Keyframe.ObjectKeyframe[] keyframes = new Keyframe.ObjectKeyframe[Math.max(numKeyframes, 2)];
+        Keyframe.ObjectKeyframe[] keyframes =
+                new Keyframe.ObjectKeyframe[Math.max(numKeyframes, 2)];
         if (numKeyframes != 1) {
             keyframes[0] = (Keyframe.ObjectKeyframe) Keyframe.ofObject(0.0f, values[0]);
             for (int i = 1; i < numKeyframes; i++) {
-                keyframes[i] = (Keyframe.ObjectKeyframe) Keyframe.ofObject(i / (numKeyframes - 1), values[i]);
+                keyframes[i] =
+                        (Keyframe.ObjectKeyframe)
+                                Keyframe.ofObject(i / (numKeyframes - 1), values[i]);
             }
         } else {
             keyframes[0] = (Keyframe.ObjectKeyframe) Keyframe.ofObject(0.0f);
@@ -132,7 +138,7 @@ public class KeyframeSet implements Keyframes {
         return this.mFirstKeyframe.getType();
     }
 
-    @Override // 
+    @Override //
     /* renamed from: clone */
     public KeyframeSet mo84clone() {
         List<Keyframe> keyframes = this.mKeyframes;
@@ -151,7 +157,8 @@ public class KeyframeSet implements Keyframes {
             if (this.mInterpolator != null) {
                 fraction = this.mInterpolator.getInterpolation(fraction);
             }
-            return this.mEvaluator.evaluate(fraction, this.mFirstKeyframe.getValue(), this.mLastKeyframe.getValue());
+            return this.mEvaluator.evaluate(
+                    fraction, this.mFirstKeyframe.getValue(), this.mLastKeyframe.getValue());
         }
         if (fraction <= 0.0f) {
             Keyframe nextKeyframe = this.mKeyframes.get(1);
@@ -160,7 +167,10 @@ public class KeyframeSet implements Keyframes {
                 fraction = interpolator.getInterpolation(fraction);
             }
             float prevFraction = this.mFirstKeyframe.getFraction();
-            return this.mEvaluator.evaluate((fraction - prevFraction) / (nextKeyframe.getFraction() - prevFraction), this.mFirstKeyframe.getValue(), nextKeyframe.getValue());
+            return this.mEvaluator.evaluate(
+                    (fraction - prevFraction) / (nextKeyframe.getFraction() - prevFraction),
+                    this.mFirstKeyframe.getValue(),
+                    nextKeyframe.getValue());
         }
         if (fraction >= 1.0f) {
             Keyframe prevKeyframe = this.mKeyframes.get(this.mNumKeyframes - 2);
@@ -169,7 +179,10 @@ public class KeyframeSet implements Keyframes {
                 fraction = interpolator2.getInterpolation(fraction);
             }
             float prevFraction2 = prevKeyframe.getFraction();
-            return this.mEvaluator.evaluate((fraction - prevFraction2) / (this.mLastKeyframe.getFraction() - prevFraction2), prevKeyframe.getValue(), this.mLastKeyframe.getValue());
+            return this.mEvaluator.evaluate(
+                    (fraction - prevFraction2) / (this.mLastKeyframe.getFraction() - prevFraction2),
+                    prevKeyframe.getValue(),
+                    this.mLastKeyframe.getValue());
         }
         Keyframe prevKeyframe2 = this.mFirstKeyframe;
         for (int i = 1; i < this.mNumKeyframes; i++) {
@@ -177,11 +190,13 @@ public class KeyframeSet implements Keyframes {
             if (fraction < nextKeyframe2.getFraction()) {
                 TimeInterpolator interpolator3 = nextKeyframe2.getInterpolator();
                 float prevFraction3 = prevKeyframe2.getFraction();
-                float intervalFraction = (fraction - prevFraction3) / (nextKeyframe2.getFraction() - prevFraction3);
+                float intervalFraction =
+                        (fraction - prevFraction3) / (nextKeyframe2.getFraction() - prevFraction3);
                 if (interpolator3 != null) {
                     intervalFraction = interpolator3.getInterpolation(intervalFraction);
                 }
-                return this.mEvaluator.evaluate(intervalFraction, prevKeyframe2.getValue(), nextKeyframe2.getValue());
+                return this.mEvaluator.evaluate(
+                        intervalFraction, prevKeyframe2.getValue(), nextKeyframe2.getValue());
             }
             prevKeyframe2 = nextKeyframe2;
         }

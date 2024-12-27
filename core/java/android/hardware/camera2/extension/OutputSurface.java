@@ -7,21 +7,23 @@ import android.view.Surface;
 
 /* loaded from: classes2.dex */
 public class OutputSurface implements Parcelable {
-    public static final Parcelable.Creator<OutputSurface> CREATOR = new Parcelable.Creator<OutputSurface>() { // from class: android.hardware.camera2.extension.OutputSurface.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OutputSurface createFromParcel(Parcel _aidl_source) {
-            OutputSurface _aidl_out = new OutputSurface();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<OutputSurface> CREATOR =
+            new Parcelable.Creator<OutputSurface>() { // from class:
+                // android.hardware.camera2.extension.OutputSurface.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OutputSurface createFromParcel(Parcel _aidl_source) {
+                    OutputSurface _aidl_out = new OutputSurface();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OutputSurface[] newArray(int _aidl_size) {
-            return new OutputSurface[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OutputSurface[] newArray(int _aidl_size) {
+                    return new OutputSurface[_aidl_size];
+                }
+            };
     public Size size;
     public Surface surface;
     public int imageFormat = 0;

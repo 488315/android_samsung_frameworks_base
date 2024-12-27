@@ -5,7 +5,8 @@ import android.animation.AnimatorListenerAdapter;
 import android.graphics.RenderNode;
 
 /* loaded from: classes4.dex */
-public class ViewAnimationHostBridge extends AnimatorListenerAdapter implements RenderNode.AnimationHost {
+public class ViewAnimationHostBridge extends AnimatorListenerAdapter
+        implements RenderNode.AnimationHost {
     private final View mView;
 
     public ViewAnimationHostBridge(View view) {
@@ -29,7 +30,8 @@ public class ViewAnimationHostBridge extends AnimatorListenerAdapter implements 
         return this.mView.mAttachInfo != null;
     }
 
-    @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+    @Override // android.animation.AnimatorListenerAdapter,
+              // android.animation.Animator.AnimatorListener
     public void onAnimationStart(Animator animation) {
         ViewRootImpl viewRoot = this.mView.getViewRootImpl();
         if (viewRoot != null) {
@@ -37,7 +39,8 @@ public class ViewAnimationHostBridge extends AnimatorListenerAdapter implements 
         }
     }
 
-    @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+    @Override // android.animation.AnimatorListenerAdapter,
+              // android.animation.Animator.AnimatorListener
     public void onAnimationEnd(Animator animation) {
         ViewRootImpl viewRoot = this.mView.getViewRootImpl();
         if (viewRoot != null) {

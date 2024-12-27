@@ -1,6 +1,7 @@
 package android.media.tv.tuner.frontend;
 
 import android.annotation.SystemApi;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -47,30 +48,31 @@ public final class DtmbFrontendSettings extends FrontendSettings {
     private final int mTransmissionMode;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Bandwidth {
-    }
+    public @interface Bandwidth {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CodeRate {
-    }
+    public @interface CodeRate {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface GuardInterval {
-    }
+    public @interface GuardInterval {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Modulation {
-    }
+    public @interface Modulation {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TimeInterleaveMode {
-    }
+    public @interface TimeInterleaveMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TransmissionMode {
-    }
+    public @interface TransmissionMode {}
 
-    private DtmbFrontendSettings(long frequency, int modulation, int codeRate, int transmissionMode, int guardInterval, int timeInterleaveMode, int bandwidth) {
+    private DtmbFrontendSettings(
+            long frequency,
+            int modulation,
+            int codeRate,
+            int transmissionMode,
+            int guardInterval,
+            int timeInterleaveMode,
+            int bandwidth) {
         super(frequency);
         this.mModulation = modulation;
         this.mCodeRate = codeRate;
@@ -168,7 +170,14 @@ public final class DtmbFrontendSettings extends FrontendSettings {
         }
 
         public DtmbFrontendSettings build() {
-            return new DtmbFrontendSettings(this.mFrequency, this.mModulation, this.mCodeRate, this.mTransmissionMode, this.mGuardInterval, this.mTimeInterleaveMode, this.mBandwidth);
+            return new DtmbFrontendSettings(
+                    this.mFrequency,
+                    this.mModulation,
+                    this.mCodeRate,
+                    this.mTransmissionMode,
+                    this.mGuardInterval,
+                    this.mTimeInterleaveMode,
+                    this.mBandwidth);
         }
     }
 

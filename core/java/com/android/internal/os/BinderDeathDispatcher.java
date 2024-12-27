@@ -11,7 +11,8 @@ import android.util.IndentingPrintWriter;
 public class BinderDeathDispatcher<T extends IInterface> {
     private static final String TAG = "BinderDeathDispatcher";
     private final Object mLock = new Object();
-    private final ArrayMap<IBinder, BinderDeathDispatcher<T>.RecipientsInfo> mTargets = new ArrayMap<>();
+    private final ArrayMap<IBinder, BinderDeathDispatcher<T>.RecipientsInfo> mTargets =
+            new ArrayMap<>();
 
     class RecipientsInfo implements IBinder.DeathRecipient {
         ArraySet<IBinder.DeathRecipient> mRecipients;
@@ -23,8 +24,7 @@ public class BinderDeathDispatcher<T extends IInterface> {
         }
 
         @Override // android.os.IBinder.DeathRecipient
-        public void binderDied() {
-        }
+        public void binderDied() {}
 
         @Override // android.os.IBinder.DeathRecipient
         public void binderDied(IBinder who) {

@@ -3,7 +3,9 @@ package android.service.autofill;
 import android.annotation.IntRange;
 import android.annotation.NonNull;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -16,17 +18,23 @@ public final class SavedDatasetsInfo {
     private final String mType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Type {
-    }
+    public @interface Type {}
 
     public SavedDatasetsInfo(String type, int count) {
         this.mType = type;
         if (!Objects.equals(this.mType, "other") && !Objects.equals(this.mType, TYPE_PASSWORDS)) {
-            throw new IllegalArgumentException("type was " + this.mType + " but must be one of: TYPE_OTHER(other), TYPE_PASSWORDS(" + TYPE_PASSWORDS + NavigationBarInflaterView.KEY_CODE_END);
+            throw new IllegalArgumentException(
+                    "type was "
+                            + this.mType
+                            + " but must be one of: TYPE_OTHER(other), TYPE_PASSWORDS("
+                            + TYPE_PASSWORDS
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mType);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mType);
         this.mCount = count;
-        AnnotationValidations.validate((Class<IntRange>) IntRange.class, (IntRange) null, this.mCount, "from", 0L);
+        AnnotationValidations.validate(
+                (Class<IntRange>) IntRange.class, (IntRange) null, this.mCount, "from", 0L);
     }
 
     public String getType() {
@@ -61,6 +69,5 @@ public final class SavedDatasetsInfo {
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

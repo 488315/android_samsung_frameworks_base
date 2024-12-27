@@ -4,6 +4,7 @@ import android.companion.virtualcamera.SupportedStreamConfiguration$$ExternalSyn
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -70,7 +71,10 @@ public final class ProgramIdentifier implements Parcelable {
             return false;
         }
         ProgramIdentifier programIdentifier = (ProgramIdentifier) obj;
-        return Objects.deepEquals(Integer.valueOf(this.type), Integer.valueOf(programIdentifier.type)) && Objects.deepEquals(Long.valueOf(this.value), Long.valueOf(programIdentifier.value));
+        return Objects.deepEquals(
+                        Integer.valueOf(this.type), Integer.valueOf(programIdentifier.type))
+                && Objects.deepEquals(
+                        Long.valueOf(this.value), Long.valueOf(programIdentifier.value));
     }
 
     public final int getStability() {
@@ -78,14 +82,16 @@ public final class ProgramIdentifier implements Parcelable {
     }
 
     public final int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.type), Long.valueOf(this.value)).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(Integer.valueOf(this.type), Long.valueOf(this.value)).toArray());
     }
 
     public final String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
         stringJoiner.add("type: " + IdentifierType$$.toString(this.type));
         stringJoiner.add("value: " + this.value);
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, new StringBuilder("ProgramIdentifier"));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner, new StringBuilder("ProgramIdentifier"));
     }
 
     @Override // android.os.Parcelable
@@ -96,6 +102,7 @@ public final class ProgramIdentifier implements Parcelable {
         parcel.writeLong(this.value);
         int dataPosition2 = parcel.dataPosition();
         parcel.setDataPosition(dataPosition);
-        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(dataPosition2, dataPosition, parcel, dataPosition2);
+        SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                dataPosition2, dataPosition, parcel, dataPosition2);
     }
 }

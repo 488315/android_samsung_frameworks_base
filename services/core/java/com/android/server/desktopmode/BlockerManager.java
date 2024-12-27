@@ -6,7 +6,9 @@ import android.hardware.broadcastradio.V2_0.AmFmBandRange$$ExternalSyntheticOutl
 import android.hardware.display.DisplayManager;
 import android.os.IBinder;
 import android.util.ArrayMap;
+
 import com.samsung.android.desktopmode.IDesktopModeBlocker;
+
 import java.util.Map;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -24,7 +26,8 @@ public final class BlockerManager {
         public final int pid;
         public final int uid;
 
-        public DesktopModeBlockerInfo(IDesktopModeBlocker iDesktopModeBlocker, String str, int i, int i2) {
+        public DesktopModeBlockerInfo(
+                IDesktopModeBlocker iDesktopModeBlocker, String str, int i, int i2) {
             this.blocker = iDesktopModeBlocker;
             this.name = str;
             this.pid = i;
@@ -52,7 +55,12 @@ public final class BlockerManager {
         }
     }
 
-    public BlockerManager(Context context, IStateManager iStateManager, ActivityManager activityManager, DisplayManager displayManager, Injector injector) {
+    public BlockerManager(
+            Context context,
+            IStateManager iStateManager,
+            ActivityManager activityManager,
+            DisplayManager displayManager,
+            Injector injector) {
         this.mDefaultBlocker = new DefaultBlocker(context, activityManager, displayManager);
         this.mStateManager = iStateManager;
         this.mInjector = injector;
@@ -64,11 +72,14 @@ public final class BlockerManager {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.android.server.desktopmode.BlockerManager.DesktopModeBlockerInfo getDefaultBlockerInfo(com.android.server.desktopmode.StateManager.InternalState r12) {
+    public final com.android.server.desktopmode.BlockerManager.DesktopModeBlockerInfo
+            getDefaultBlockerInfo(com.android.server.desktopmode.StateManager.InternalState r12) {
         /*
             Method dump skipped, instructions count: 276
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.desktopmode.BlockerManager.getDefaultBlockerInfo(com.android.server.desktopmode.StateManager$InternalState):com.android.server.desktopmode.BlockerManager$DesktopModeBlockerInfo");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.desktopmode.BlockerManager.getDefaultBlockerInfo(com.android.server.desktopmode.StateManager$InternalState):com.android.server.desktopmode.BlockerManager$DesktopModeBlockerInfo");
     }
 }

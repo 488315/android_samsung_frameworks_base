@@ -2,32 +2,35 @@ package android.service.games;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class GameScreenshotResult implements Parcelable {
-    public static final Parcelable.Creator<GameScreenshotResult> CREATOR = new Parcelable.Creator<GameScreenshotResult>() { // from class: android.service.games.GameScreenshotResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GameScreenshotResult createFromParcel(Parcel source) {
-            return new GameScreenshotResult(source.readInt());
-        }
+    public static final Parcelable.Creator<GameScreenshotResult> CREATOR =
+            new Parcelable.Creator<
+                    GameScreenshotResult>() { // from class:
+                                              // android.service.games.GameScreenshotResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GameScreenshotResult createFromParcel(Parcel source) {
+                    return new GameScreenshotResult(source.readInt());
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GameScreenshotResult[] newArray(int size) {
-            return new GameScreenshotResult[0];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GameScreenshotResult[] newArray(int size) {
+                    return new GameScreenshotResult[0];
+                }
+            };
     public static final int GAME_SCREENSHOT_ERROR_INTERNAL_ERROR = 1;
     public static final int GAME_SCREENSHOT_SUCCESS = 0;
     private final int mStatus;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface GameScreenshotStatus {
-    }
+    public @interface GameScreenshotStatus {}
 
     public static GameScreenshotResult createSuccessResult() {
         return new GameScreenshotResult(0);

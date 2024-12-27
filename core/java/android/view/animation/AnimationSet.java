@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.RectF;
 import android.util.AttributeSet;
+
 import com.android.internal.R;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -160,7 +162,10 @@ public class AnimationSet extends Animation {
             this.mDuration = a.getStartOffset() + a.getDuration();
             this.mLastEnd = this.mStartOffset + this.mDuration;
         } else {
-            this.mLastEnd = Math.max(this.mLastEnd, this.mStartOffset + a.getStartOffset() + a.getDuration());
+            this.mLastEnd =
+                    Math.max(
+                            this.mLastEnd,
+                            this.mStartOffset + a.getStartOffset() + a.getDuration());
             this.mDuration = this.mLastEnd - this.mStartOffset;
         }
         this.mDirty = true;
@@ -244,7 +249,9 @@ public class AnimationSet extends Animation {
                 if (!a.isFillEnabled() || a.getFillBefore() || a.getStartOffset() == 0) {
                     temp.clear();
                     Interpolator interpolator = a.mInterpolator;
-                    a.applyTransformation(interpolator != null ? interpolator.getInterpolation(0.0f) : 0.0f, temp);
+                    a.applyTransformation(
+                            interpolator != null ? interpolator.getInterpolation(0.0f) : 0.0f,
+                            temp);
                     previousTransformation.compose(temp);
                 }
             }

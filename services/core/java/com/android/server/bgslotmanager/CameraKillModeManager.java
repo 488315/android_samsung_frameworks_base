@@ -3,9 +3,11 @@ package com.android.server.bgslotmanager;
 import android.hardware.camera2.CameraManager;
 import android.os.SystemClock;
 import android.util.Slog;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.StorageManagerService$$ExternalSyntheticOutline0;
 import com.android.server.am.DynamicHiddenApp;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -34,12 +36,15 @@ public final class CameraKillModeManager extends CameraManager.SemCameraDeviceSt
         static {
             CameraKillModeManager cameraKillModeManager = new CameraKillModeManager();
             cameraKillModeManager.isOriginBG = true;
-            cameraKillModeManager.mCamKillStartTime = BgAppPropManager.getSlmkPropertyInt("cam_kill_start_tm", "120000");
-            cameraKillModeManager.mSzDHAThresholdRate = Float.parseFloat(BgAppPropManager.getSlmkPropertyString("dha_th_rate", "2.0"));
+            cameraKillModeManager.mCamKillStartTime =
+                    BgAppPropManager.getSlmkPropertyInt("cam_kill_start_tm", "120000");
+            cameraKillModeManager.mSzDHAThresholdRate =
+                    Float.parseFloat(BgAppPropManager.getSlmkPropertyString("dha_th_rate", "2.0"));
             cameraKillModeManager.dha_camera_map = new LinkedHashMap();
             cameraKillModeManager.dha_cameraclientexcept_map = new HashMap();
             cameraKillModeManager.mCameraManager = null;
-            cameraKillModeManager.mCameraKillModeOperator = cameraKillModeManager.new CameraKillModeOperator();
+            cameraKillModeManager.mCameraKillModeOperator =
+                    cameraKillModeManager.new CameraKillModeOperator();
             INSTANCE = cameraKillModeManager;
             isinitClass = false;
         }
@@ -50,8 +55,7 @@ public final class CameraKillModeManager extends CameraManager.SemCameraDeviceSt
         public int cameraState;
         public int prevCameraState;
 
-        public CameraKillModeOperator() {
-        }
+        public CameraKillModeOperator() {}
 
         public final void setState(int i, boolean z) {
             CameraKillModeManager cameraKillModeManager = CameraKillModeManager.this;
@@ -86,13 +90,17 @@ public final class CameraKillModeManager extends CameraManager.SemCameraDeviceSt
         }
         long uptimeMillis = SystemClock.uptimeMillis();
         if (DynamicHiddenApp.DEBUG) {
-            StringBuilder m = StorageManagerService$$ExternalSyntheticOutline0.m(i, "Camera Callback on DHA [id] ", str, " [faceing] ", " [newState] ");
+            StringBuilder m =
+                    StorageManagerService$$ExternalSyntheticOutline0.m(
+                            i, "Camera Callback on DHA [id] ", str, " [faceing] ", " [newState] ");
             m.append(i2);
             m.append(" [clientName] ");
             m.append(str2);
             Slog.i("DynamicHiddenApp_CameraKillModeManager", m.toString());
         }
-        if (uptimeMillis >= 600000 && (CAMERA_DHA_VER & 1) != 0 && "com.sec.android.app.camera".equals(str2)) {
+        if (uptimeMillis >= 600000
+                && (CAMERA_DHA_VER & 1) != 0
+                && "com.sec.android.app.camera".equals(str2)) {
             this.mCameraKillModeOperator.setState(i2, false);
             CameraKillModeOperator cameraKillModeOperator = this.mCameraKillModeOperator;
             int i3 = cameraKillModeOperator.cameraState;
@@ -108,11 +116,23 @@ public final class CameraKillModeManager extends CameraManager.SemCameraDeviceSt
             } else if (cameraKillModeManager.isOriginBG) {
                 MemInfoGetter memInfoGetter = cameraKillModeManager.mInfo;
                 memInfoGetter.mInfoInner.readLightMemInfo();
-                long freeSize = (memInfoGetter.mInfoInner.getFreeSize() + memInfoGetter.mInfoInner.getCachedSizeLegacy()) - (memInfoGetter.mInfoInner.getRbinTotalSize() - memInfoGetter.mInfoInner.getRbinAllocedSize());
-                StringBuilder m2 = BatteryService$$ExternalSyntheticOutline0.m("Available Mem: ", freeSize, " CAM TH ");
-                m2.append((long) (cameraKillModeManager.mMinFreeMax * cameraKillModeManager.mSzDHAThresholdRate));
+                long freeSize =
+                        (memInfoGetter.mInfoInner.getFreeSize()
+                                        + memInfoGetter.mInfoInner.getCachedSizeLegacy())
+                                - (memInfoGetter.mInfoInner.getRbinTotalSize()
+                                        - memInfoGetter.mInfoInner.getRbinAllocedSize());
+                StringBuilder m2 =
+                        BatteryService$$ExternalSyntheticOutline0.m(
+                                "Available Mem: ", freeSize, " CAM TH ");
+                m2.append(
+                        (long)
+                                (cameraKillModeManager.mMinFreeMax
+                                        * cameraKillModeManager.mSzDHAThresholdRate));
                 Slog.i("DynamicHiddenApp_CameraKillModeManager", m2.toString());
-                if (freeSize < ((long) (cameraKillModeManager.mMinFreeMax * cameraKillModeManager.mSzDHAThresholdRate))) {
+                if (freeSize
+                        < ((long)
+                                (cameraKillModeManager.mMinFreeMax
+                                        * cameraKillModeManager.mSzDHAThresholdRate))) {
                     BGSlotManager bGSlotManager2 = cameraKillModeManager.mBGSlotManager;
                     bGSlotManager2.BGSlotState |= 1;
                     bGSlotManager2.changeBGSlot();
@@ -120,7 +140,11 @@ public final class CameraKillModeManager extends CameraManager.SemCameraDeviceSt
                 }
             }
         }
-        if (uptimeMillis < this.mCamKillStartTime || (CAMERA_DHA_VER & 2) == 0 || this.dha_cameraclientexcept_map.containsKey(str2) || str2.contains("vendor.") || str2.contains("client.")) {
+        if (uptimeMillis < this.mCamKillStartTime
+                || (CAMERA_DHA_VER & 2) == 0
+                || this.dha_cameraclientexcept_map.containsKey(str2)
+                || str2.contains("vendor.")
+                || str2.contains("client.")) {
             return;
         }
         if (this.dha_camera_map.containsKey(str2)) {
@@ -136,7 +160,8 @@ public final class CameraKillModeManager extends CameraManager.SemCameraDeviceSt
         this.mCameraKillModeOperator.setState(i2, true);
         CameraKillModeOperator cameraKillModeOperator2 = this.mCameraKillModeOperator;
         if (CameraKillModeManager.this.mDynamicHiddenApp != null) {
-            DynamicHiddenApp.setLmkdCameraKillBoost(cameraKillModeOperator2.cameraState, intValue, indexOf);
+            DynamicHiddenApp.setLmkdCameraKillBoost(
+                    cameraKillModeOperator2.cameraState, intValue, indexOf);
         }
     }
 }

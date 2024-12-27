@@ -3,7 +3,9 @@ package com.android.server.am;
 import android.content.IIntentReceiver;
 import android.os.Binder;
 import android.os.IBinder;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -19,7 +21,13 @@ final class ReceiverList extends ArrayList implements IBinder.DeathRecipient {
     public final int uid;
     public final int userId;
 
-    public ReceiverList(ActivityManagerService activityManagerService, ProcessRecord processRecord, int i, int i2, int i3, IIntentReceiver iIntentReceiver) {
+    public ReceiverList(
+            ActivityManagerService activityManagerService,
+            ProcessRecord processRecord,
+            int i,
+            int i2,
+            int i3,
+            IIntentReceiver iIntentReceiver) {
         this.owner = activityManagerService;
         this.receiver = iIntentReceiver;
         this.app = processRecord;

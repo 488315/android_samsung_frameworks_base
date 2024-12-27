@@ -35,7 +35,9 @@ public class ThreadPriorityBooster {
     public void boost() {
         int threadPriority;
         PriorityState priorityState = (PriorityState) this.mThreadState.get();
-        if (priorityState.regionCounter == 0 && (threadPriority = Process.getThreadPriority(priorityState.tid)) > this.mBoostToPriority) {
+        if (priorityState.regionCounter == 0
+                && (threadPriority = Process.getThreadPriority(priorityState.tid))
+                        > this.mBoostToPriority) {
             Process.setThreadPriority(priorityState.tid, this.mBoostToPriority);
             priorityState.prevPriority = threadPriority;
         }

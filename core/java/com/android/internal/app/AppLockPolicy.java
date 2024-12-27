@@ -18,8 +18,11 @@ import android.os.UserManager;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.internal.R;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -42,29 +45,52 @@ public class AppLockPolicy {
     private static final String BIOMETRICS_PATTERN_TYPE = "biometrics_pattern_type";
     private static final String BIOMETRICS_PINCODE_TYPE = "biometrics_pincode_type";
     private static final String BIOMETRICS_TYPE = "biometrics_type";
-    private static final String CHECK_APPLOCK_BIOMETRICS_ACTION = "com.samsung.android.intent.action.CHECK_APPLOCK_BIOMETRICS";
-    private static final String CHECK_APPLOCK_FACE_ACTION = "com.samsung.android.intent.action.CHECK_APPLOCK_FACE";
-    private static final String CHECK_APPLOCK_FACE_SPASS_ACTION = "com.samsung.android.intent.action.CHECK_APPLOCK_FACE_SPASS";
-    private static final String CHECK_APPLOCK_FINGERPRINT_ACTION = "com.samsung.android.intent.action.CHECK_APPLOCK_FINGERPRINT";
-    private static final String CHECK_APPLOCK_FINGERPRINT_PASSWORD_ACTION = "com.samsung.android.intent.action.CHECK_APPLOCK_FINGERPRINT_PASSWORD";
-    private static final String CHECK_APPLOCK_FINGERPRINT_PATTERN_ACTION = "com.samsung.android.intent.action.CHECK_APPLOCK_FINGERPRINT_PATTERN";
-    private static final String CHECK_APPLOCK_FINGERPRINT_PINCODE_ACTION = "com.samsung.android.intent.action.CHECK_APPLOCK_FINGERPRINT_PINCODE";
-    private static final String CHECK_APPLOCK_IRISES_ACTION = "com.samsung.android.intent.action.CHECK_APPLOCK_IRISES";
-    private static final String CHECK_APPLOCK_PASSWORD_ACTION = "com.samsung.android.intent.action.CHECK_APPLOCK_PASSWORD";
-    private static final String CHECK_APPLOCK_PASSWORD_BIOMETRICS_ACTION = "com.samsung.android.intent.action.CHECK_APPLOCK_PASSWORD_BIOMETRICS";
-    private static final String CHECK_APPLOCK_PASSWORD_FACE_ACTION = "com.samsung.android.intent.action.CHECK_APPLOCK_PASSWORD_FACE";
-    private static final String CHECK_APPLOCK_PASSWORD_FACE_SPASS_ACTION = "com.samsung.android.intent.action.CHECK_APPLOCK_PASSWORD_FACE_SPASS";
-    private static final String CHECK_APPLOCK_PASSWORD_IRISES_ACTION = "com.samsung.android.intent.action.CHECK_APPLOCK_PASSWORD_IRISES";
-    private static final String CHECK_APPLOCK_PATTERN_ACTION = "com.samsung.android.intent.action.CHECK_APPLOCK_PATTERN";
-    private static final String CHECK_APPLOCK_PATTERN_BIOMETRICS_ACTION = "com.samsung.android.intent.action.CHECK_APPLOCK_PATTERN_BIOMETRICS";
-    private static final String CHECK_APPLOCK_PATTERN_FACE_ACTION = "com.samsung.android.intent.action.CHECK_APPLOCK_PATTERN_FACE";
-    private static final String CHECK_APPLOCK_PATTERN_FACE_SPASS_ACTION = "com.samsung.android.intent.action.CHECK_APPLOCK_PATTERN_FACE_SPASS";
-    private static final String CHECK_APPLOCK_PATTERN_IRISES_ACTION = "com.samsung.android.intent.action.CHECK_APPLOCK_PATTERN_IRISES";
-    private static final String CHECK_APPLOCK_PINCODE_ACTION = "com.samsung.android.intent.action.CHECK_APPLOCK_PINCODE";
-    private static final String CHECK_APPLOCK_PINCODE_BIOMETRICS_ACTION = "com.samsung.android.intent.action.CHECK_APPLOCK_PINCODE_BIOMETRICS";
-    private static final String CHECK_APPLOCK_PINCODE_FACE_ACTION = "com.samsung.android.intent.action.CHECK_APPLOCK_PINCODE_FACE";
-    private static final String CHECK_APPLOCK_PINCODE_FACE_SPASS_ACTION = "com.samsung.android.intent.action.CHECK_APPLOCK_PINCODE_FACE_SPASS";
-    private static final String CHECK_APPLOCK_PINCODE_IRISES_ACTION = "com.samsung.android.intent.action.CHECK_APPLOCK_PINCODE_IRISES";
+    private static final String CHECK_APPLOCK_BIOMETRICS_ACTION =
+            "com.samsung.android.intent.action.CHECK_APPLOCK_BIOMETRICS";
+    private static final String CHECK_APPLOCK_FACE_ACTION =
+            "com.samsung.android.intent.action.CHECK_APPLOCK_FACE";
+    private static final String CHECK_APPLOCK_FACE_SPASS_ACTION =
+            "com.samsung.android.intent.action.CHECK_APPLOCK_FACE_SPASS";
+    private static final String CHECK_APPLOCK_FINGERPRINT_ACTION =
+            "com.samsung.android.intent.action.CHECK_APPLOCK_FINGERPRINT";
+    private static final String CHECK_APPLOCK_FINGERPRINT_PASSWORD_ACTION =
+            "com.samsung.android.intent.action.CHECK_APPLOCK_FINGERPRINT_PASSWORD";
+    private static final String CHECK_APPLOCK_FINGERPRINT_PATTERN_ACTION =
+            "com.samsung.android.intent.action.CHECK_APPLOCK_FINGERPRINT_PATTERN";
+    private static final String CHECK_APPLOCK_FINGERPRINT_PINCODE_ACTION =
+            "com.samsung.android.intent.action.CHECK_APPLOCK_FINGERPRINT_PINCODE";
+    private static final String CHECK_APPLOCK_IRISES_ACTION =
+            "com.samsung.android.intent.action.CHECK_APPLOCK_IRISES";
+    private static final String CHECK_APPLOCK_PASSWORD_ACTION =
+            "com.samsung.android.intent.action.CHECK_APPLOCK_PASSWORD";
+    private static final String CHECK_APPLOCK_PASSWORD_BIOMETRICS_ACTION =
+            "com.samsung.android.intent.action.CHECK_APPLOCK_PASSWORD_BIOMETRICS";
+    private static final String CHECK_APPLOCK_PASSWORD_FACE_ACTION =
+            "com.samsung.android.intent.action.CHECK_APPLOCK_PASSWORD_FACE";
+    private static final String CHECK_APPLOCK_PASSWORD_FACE_SPASS_ACTION =
+            "com.samsung.android.intent.action.CHECK_APPLOCK_PASSWORD_FACE_SPASS";
+    private static final String CHECK_APPLOCK_PASSWORD_IRISES_ACTION =
+            "com.samsung.android.intent.action.CHECK_APPLOCK_PASSWORD_IRISES";
+    private static final String CHECK_APPLOCK_PATTERN_ACTION =
+            "com.samsung.android.intent.action.CHECK_APPLOCK_PATTERN";
+    private static final String CHECK_APPLOCK_PATTERN_BIOMETRICS_ACTION =
+            "com.samsung.android.intent.action.CHECK_APPLOCK_PATTERN_BIOMETRICS";
+    private static final String CHECK_APPLOCK_PATTERN_FACE_ACTION =
+            "com.samsung.android.intent.action.CHECK_APPLOCK_PATTERN_FACE";
+    private static final String CHECK_APPLOCK_PATTERN_FACE_SPASS_ACTION =
+            "com.samsung.android.intent.action.CHECK_APPLOCK_PATTERN_FACE_SPASS";
+    private static final String CHECK_APPLOCK_PATTERN_IRISES_ACTION =
+            "com.samsung.android.intent.action.CHECK_APPLOCK_PATTERN_IRISES";
+    private static final String CHECK_APPLOCK_PINCODE_ACTION =
+            "com.samsung.android.intent.action.CHECK_APPLOCK_PINCODE";
+    private static final String CHECK_APPLOCK_PINCODE_BIOMETRICS_ACTION =
+            "com.samsung.android.intent.action.CHECK_APPLOCK_PINCODE_BIOMETRICS";
+    private static final String CHECK_APPLOCK_PINCODE_FACE_ACTION =
+            "com.samsung.android.intent.action.CHECK_APPLOCK_PINCODE_FACE";
+    private static final String CHECK_APPLOCK_PINCODE_FACE_SPASS_ACTION =
+            "com.samsung.android.intent.action.CHECK_APPLOCK_PINCODE_FACE_SPASS";
+    private static final String CHECK_APPLOCK_PINCODE_IRISES_ACTION =
+            "com.samsung.android.intent.action.CHECK_APPLOCK_PINCODE_IRISES";
     private static final String FACE_PASSWORD_TYPE = "face_password_type";
     private static final String FACE_PATTERN_TYPE = "face_pattern_type";
     private static final String FACE_PINCODE_TYPE = "face_pincode_type";
@@ -98,7 +124,8 @@ public class AppLockPolicy {
     public static final String LOCKED_PACKAGE_MULTIWINDOWSTYLE = "LOCKED_PACKAGE_MULTIWINDOWSTYLE";
     public static final String LOCKED_PACKAGE_NAME = "LOCKED_PACKAGE_NAME";
     public static final String LOCKED_PACKAGE_USERID = "LOCKED_PACKAGE_USERID";
-    public static final String LOCKED_PACKAGE_WINDOW_ATTRIBUTES = "LOCKED_PACKAGE_WINDOW_ATTRIBUTES";
+    public static final String LOCKED_PACKAGE_WINDOW_ATTRIBUTES =
+            "LOCKED_PACKAGE_WINDOW_ATTRIBUTES";
     private static final String LOCKED_TYPE = "applock_lock_type";
     private static final String PACKAGE_NAME_CONTACTS = "com.samsung.android.contacts";
     private static final String PASSWORD_TYPE = "password_type";
@@ -125,14 +152,15 @@ public class AppLockPolicy {
     private ArrayList<String> mAppLockedVerifyingList = new ArrayList<>();
     private ArrayList<String> mAppLockLaunchingExcpetionList = new ArrayList<>();
     private ArrayList<String> mApplockCallingExceptionList = new ArrayList<>();
-    private final BroadcastReceiver mReceiver = new BroadcastReceiver() { // from class: com.android.internal.app.AppLockPolicy.2
-        @Override // android.content.BroadcastReceiver
-        public void onReceive(Context context, Intent intent) {
-            AppLockPolicy.this.mAppLockSharedPref.initializeSharedPreference();
-            AppLockPolicy.this.updateSettings();
-            AppLockPolicy.this.updateLockedApps();
-        }
-    };
+    private final BroadcastReceiver mReceiver =
+            new BroadcastReceiver() { // from class: com.android.internal.app.AppLockPolicy.2
+                @Override // android.content.BroadcastReceiver
+                public void onReceive(Context context, Intent intent) {
+                    AppLockPolicy.this.mAppLockSharedPref.initializeSharedPreference();
+                    AppLockPolicy.this.updateSettings();
+                    AppLockPolicy.this.updateLockedApps();
+                }
+            };
     private String mLockedPackages = null;
     private String mLockedClasses = null;
 
@@ -154,12 +182,16 @@ public class AppLockPolicy {
     }
 
     private void getAppLockLaunchingExceptionList() {
-        String[] activities = this.mContext.getResources().getStringArray(R.array.app_lock_exception_activity_list);
+        String[] activities =
+                this.mContext
+                        .getResources()
+                        .getStringArray(R.array.app_lock_exception_activity_list);
         this.mAppLockLaunchingExcpetionList.addAll(Arrays.asList(activities));
     }
 
     private void getCallingExceptionList() {
-        String[] activities = this.mContext.getResources().getStringArray(R.array.app_lock_calling_bypass);
+        String[] activities =
+                this.mContext.getResources().getStringArray(R.array.app_lock_calling_bypass);
         this.mApplockCallingExceptionList.addAll(Arrays.asList(activities));
     }
 
@@ -311,14 +343,20 @@ public class AppLockPolicy {
             if (!this.mAppLockedHasUnLockedPackageList.contains(packageName)) {
                 this.mAppLockedHasUnLockedPackageList.add(packageName);
                 this.mAppLockActiveLockedPackages.remove(packageName);
-                Settings.Secure.putString(this.mContext.getContentResolver(), "applock_locked_packages", this.mAppLockActiveLockedPackages.toString());
+                Settings.Secure.putString(
+                        this.mContext.getContentResolver(),
+                        "applock_locked_packages",
+                        this.mAppLockActiveLockedPackages.toString());
                 if (this.mAppLockedRelatedPackageMap.containsKey(packageName)) {
                     List<String> related = this.mAppLockedRelatedPackageMap.get(packageName);
                     for (String relatedPackage : related) {
                         if (!this.mAppLockedHasUnLockedPackageList.contains(relatedPackage)) {
                             this.mAppLockedHasUnLockedPackageList.add(relatedPackage);
                             this.mAppLockActiveLockedPackages.remove(relatedPackage);
-                            Settings.Secure.putString(this.mContext.getContentResolver(), "applock_locked_packages", this.mAppLockActiveLockedPackages.toString());
+                            Settings.Secure.putString(
+                                    this.mContext.getContentResolver(),
+                                    "applock_locked_packages",
+                                    this.mAppLockActiveLockedPackages.toString());
                         }
                     }
                 }
@@ -337,7 +375,10 @@ public class AppLockPolicy {
                 String pkg = it.next();
                 this.mAppLockActiveLockedPackages.add(new String(pkg));
             }
-            Settings.Secure.putString(this.mContext.getContentResolver(), "applock_locked_packages", this.mAppLockActiveLockedPackages.toString());
+            Settings.Secure.putString(
+                    this.mContext.getContentResolver(),
+                    "applock_locked_packages",
+                    this.mAppLockActiveLockedPackages.toString());
         }
     }
 
@@ -349,7 +390,11 @@ public class AppLockPolicy {
             if (this.mAppLockedHasUnLockedPackageList.contains(packageName)) {
                 return false;
             }
-            return (packageName == null || packageName.isEmpty() || !this.mAppLockedPackageList.contains(packageName)) ? false : true;
+            return (packageName == null
+                            || packageName.isEmpty()
+                            || !this.mAppLockedPackageList.contains(packageName))
+                    ? false
+                    : true;
         }
     }
 
@@ -422,29 +467,31 @@ public class AppLockPolicy {
 
     private void init() {
         try {
-            ActivityManagerNative.getDefault().registerUserSwitchObserver(new IUserSwitchObserver.Stub() { // from class: com.android.internal.app.AppLockPolicy.1
-                @Override // android.app.IUserSwitchObserver
-                public void onBeforeUserSwitching(int newUserId) {
-                }
+            ActivityManagerNative.getDefault()
+                    .registerUserSwitchObserver(
+                            new IUserSwitchObserver
+                                    .Stub() { // from class:
+                                              // com.android.internal.app.AppLockPolicy.1
+                                @Override // android.app.IUserSwitchObserver
+                                public void onBeforeUserSwitching(int newUserId) {}
 
-                @Override // android.app.IUserSwitchObserver
-                public void onUserSwitching(int newUserId, IRemoteCallback reply) {
-                }
+                                @Override // android.app.IUserSwitchObserver
+                                public void onUserSwitching(int newUserId, IRemoteCallback reply) {}
 
-                @Override // android.app.IUserSwitchObserver
-                public void onUserSwitchComplete(int newUserId) throws RemoteException {
-                    Log.d(AppLockPolicy.TAG, "onUserSwitchComplete getLockedApps");
-                    AppLockPolicy.this.updateLockedApps();
-                }
+                                @Override // android.app.IUserSwitchObserver
+                                public void onUserSwitchComplete(int newUserId)
+                                        throws RemoteException {
+                                    Log.d(AppLockPolicy.TAG, "onUserSwitchComplete getLockedApps");
+                                    AppLockPolicy.this.updateLockedApps();
+                                }
 
-                @Override // android.app.IUserSwitchObserver
-                public void onForegroundProfileSwitch(int newProfileId) {
-                }
+                                @Override // android.app.IUserSwitchObserver
+                                public void onForegroundProfileSwitch(int newProfileId) {}
 
-                @Override // android.app.IUserSwitchObserver
-                public void onLockedBootComplete(int newUserId) {
-                }
-            }, AppLockPolicy.class.getName());
+                                @Override // android.app.IUserSwitchObserver
+                                public void onLockedBootComplete(int newUserId) {}
+                            },
+                            AppLockPolicy.class.getName());
         } catch (Exception e) {
             Log.d(TAG, "onUserSwitch, observe()", e);
         }
@@ -550,7 +597,10 @@ public class AppLockPolicy {
                     String pkg = it.next();
                     this.mAppLockActiveLockedPackages.add(new String(pkg));
                 }
-                Settings.Secure.putString(this.mContext.getContentResolver(), "applock_locked_packages", this.mAppLockActiveLockedPackages.toString());
+                Settings.Secure.putString(
+                        this.mContext.getContentResolver(),
+                        "applock_locked_packages",
+                        this.mAppLockActiveLockedPackages.toString());
             }
             if (this.mLockedClasses != null) {
                 String[] lockedClassArray = this.mLockedClasses.split(",");
@@ -646,7 +696,12 @@ public class AppLockPolicy {
         return CoreRune.FW_APPLOCK;
     }
 
-    public static boolean skipLockWhenStart(Context context, String targetPackage, Intent intent, ActivityOptions options, String callingPackage) {
+    public static boolean skipLockWhenStart(
+            Context context,
+            String targetPackage,
+            Intent intent,
+            ActivityOptions options,
+            String callingPackage) {
         if (CoreRune.FW_APPLOCK && isSupportSSecure()) {
             Log.d(TAG, "intent is starting with S secure, skip");
             return true;
@@ -655,7 +710,10 @@ public class AppLockPolicy {
             Log.d(TAG, "intent is starting in dex display, skip");
             return true;
         }
-        if (options != null && (WindowConfiguration.inMultiWindowMode(options.getLaunchWindowingMode()) || WindowConfiguration.inMultiWindowMode(options.getForceLaunchWindowingMode()))) {
+        if (options != null
+                && (WindowConfiguration.inMultiWindowMode(options.getLaunchWindowingMode())
+                        || WindowConfiguration.inMultiWindowMode(
+                                options.getForceLaunchWindowingMode()))) {
             Log.d(TAG, "intent is starting in multi WindowingMode, skip");
             return true;
         }
@@ -671,7 +729,9 @@ public class AppLockPolicy {
     }
 
     private static boolean fileUriMayExposed(Uri uri) {
-        if (uri != null && "file".equals(uri.getScheme()) && !uri.getPath().startsWith("/system/")) {
+        if (uri != null
+                && "file".equals(uri.getScheme())
+                && !uri.getPath().startsWith("/system/")) {
             return true;
         }
         return false;

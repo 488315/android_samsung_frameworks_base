@@ -5,6 +5,7 @@ import android.net.QosSessionAttributes;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
@@ -26,19 +27,22 @@ public final class NrQosSessionAttributes implements Parcelable, QosSessionAttri
     private final int mQfi;
     private final List<InetSocketAddress> mRemoteAddresses;
     private static final String TAG = NrQosSessionAttributes.class.getSimpleName();
-    public static final Parcelable.Creator<NrQosSessionAttributes> CREATOR = new Parcelable.Creator<NrQosSessionAttributes>() { // from class: android.telephony.data.NrQosSessionAttributes.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NrQosSessionAttributes createFromParcel(Parcel in) {
-            return new NrQosSessionAttributes(in);
-        }
+    public static final Parcelable.Creator<NrQosSessionAttributes> CREATOR =
+            new Parcelable.Creator<
+                    NrQosSessionAttributes>() { // from class:
+                                                // android.telephony.data.NrQosSessionAttributes.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NrQosSessionAttributes createFromParcel(Parcel in) {
+                    return new NrQosSessionAttributes(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NrQosSessionAttributes[] newArray(int size) {
-            return new NrQosSessionAttributes[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NrQosSessionAttributes[] newArray(int size) {
+                    return new NrQosSessionAttributes[size];
+                }
+            };
 
     public int getQosIdentifier() {
         return this.m5Qi;
@@ -72,7 +76,15 @@ public final class NrQosSessionAttributes implements Parcelable, QosSessionAttri
         return this.mRemoteAddresses;
     }
 
-    public NrQosSessionAttributes(int fiveQi, int qfi, long maxDownlinkBitRate, long maxUplinkBitRate, long guaranteedDownlinkBitRate, long guaranteedUplinkBitRate, long averagingWindow, List<InetSocketAddress> remoteAddresses) {
+    public NrQosSessionAttributes(
+            int fiveQi,
+            int qfi,
+            long maxDownlinkBitRate,
+            long maxUplinkBitRate,
+            long guaranteedDownlinkBitRate,
+            long guaranteedUplinkBitRate,
+            long averagingWindow,
+            List<InetSocketAddress> remoteAddresses) {
         Objects.requireNonNull(remoteAddresses, "remoteAddress must be non-null");
         this.m5Qi = fiveQi;
         this.mQfi = qfi;
@@ -85,7 +97,8 @@ public final class NrQosSessionAttributes implements Parcelable, QosSessionAttri
         this.mRemoteAddresses = Collections.unmodifiableList(remoteAddressesTemp);
     }
 
-    private static List<InetSocketAddress> copySocketAddresses(List<InetSocketAddress> remoteAddresses) {
+    private static List<InetSocketAddress> copySocketAddresses(
+            List<InetSocketAddress> remoteAddresses) {
         List<InetSocketAddress> remoteAddressesTemp = new ArrayList<>();
         for (InetSocketAddress socketAddress : remoteAddresses) {
             if (socketAddress != null && socketAddress.getAddress() != null) {
@@ -109,7 +122,8 @@ public final class NrQosSessionAttributes implements Parcelable, QosSessionAttri
             byte[] addressBytes = in.createByteArray();
             int port = in.readInt();
             try {
-                remoteAddresses.add(new InetSocketAddress(InetAddress.getByAddress(addressBytes), port));
+                remoteAddresses.add(
+                        new InetSocketAddress(InetAddress.getByAddress(addressBytes), port));
             } catch (UnknownHostException e) {
                 Log.e(TAG, "unable to unparcel remote address at index: " + i, e);
             }
@@ -148,13 +162,29 @@ public final class NrQosSessionAttributes implements Parcelable, QosSessionAttri
             return false;
         }
         NrQosSessionAttributes nrQosAttr = (NrQosSessionAttributes) o;
-        if (this.m5Qi == nrQosAttr.m5Qi && this.mQfi == nrQosAttr.mQfi && this.mMaxUplinkBitRate == nrQosAttr.mMaxUplinkBitRate && this.mMaxDownlinkBitRate == nrQosAttr.mMaxDownlinkBitRate && this.mGuaranteedUplinkBitRate == nrQosAttr.mGuaranteedUplinkBitRate && this.mGuaranteedDownlinkBitRate == nrQosAttr.mGuaranteedDownlinkBitRate && this.mAveragingWindow == nrQosAttr.mAveragingWindow && this.mRemoteAddresses.size() == nrQosAttr.mRemoteAddresses.size() && this.mRemoteAddresses.containsAll(nrQosAttr.mRemoteAddresses)) {
+        if (this.m5Qi == nrQosAttr.m5Qi
+                && this.mQfi == nrQosAttr.mQfi
+                && this.mMaxUplinkBitRate == nrQosAttr.mMaxUplinkBitRate
+                && this.mMaxDownlinkBitRate == nrQosAttr.mMaxDownlinkBitRate
+                && this.mGuaranteedUplinkBitRate == nrQosAttr.mGuaranteedUplinkBitRate
+                && this.mGuaranteedDownlinkBitRate == nrQosAttr.mGuaranteedDownlinkBitRate
+                && this.mAveragingWindow == nrQosAttr.mAveragingWindow
+                && this.mRemoteAddresses.size() == nrQosAttr.mRemoteAddresses.size()
+                && this.mRemoteAddresses.containsAll(nrQosAttr.mRemoteAddresses)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.m5Qi), Integer.valueOf(this.mQfi), Long.valueOf(this.mMaxUplinkBitRate), Long.valueOf(this.mMaxDownlinkBitRate), Long.valueOf(this.mGuaranteedUplinkBitRate), Long.valueOf(this.mGuaranteedDownlinkBitRate), Long.valueOf(this.mAveragingWindow), this.mRemoteAddresses);
+        return Objects.hash(
+                Integer.valueOf(this.m5Qi),
+                Integer.valueOf(this.mQfi),
+                Long.valueOf(this.mMaxUplinkBitRate),
+                Long.valueOf(this.mMaxDownlinkBitRate),
+                Long.valueOf(this.mGuaranteedUplinkBitRate),
+                Long.valueOf(this.mGuaranteedDownlinkBitRate),
+                Long.valueOf(this.mAveragingWindow),
+                this.mRemoteAddresses);
     }
 }

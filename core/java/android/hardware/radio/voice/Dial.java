@@ -3,6 +3,7 @@ package android.hardware.radio.voice;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -12,21 +13,22 @@ public class Dial implements Parcelable {
     public static final int CLIR_DEFAULT = 0;
     public static final int CLIR_INVOCATION = 1;
     public static final int CLIR_SUPPRESSION = 2;
-    public static final Parcelable.Creator<Dial> CREATOR = new Parcelable.Creator<Dial>() { // from class: android.hardware.radio.voice.Dial.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Dial createFromParcel(Parcel _aidl_source) {
-            Dial _aidl_out = new Dial();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<Dial> CREATOR =
+            new Parcelable.Creator<Dial>() { // from class: android.hardware.radio.voice.Dial.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Dial createFromParcel(Parcel _aidl_source) {
+                    Dial _aidl_out = new Dial();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Dial[] newArray(int _aidl_size) {
-            return new Dial[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Dial[] newArray(int _aidl_size) {
+                    return new Dial[_aidl_size];
+                }
+            };
     public String address;
     public int clir = 0;
     public UusInfo[] uusInfo;

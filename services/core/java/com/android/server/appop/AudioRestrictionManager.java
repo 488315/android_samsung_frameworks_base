@@ -5,8 +5,10 @@ import android.media.AudioAttributes;
 import android.util.ArraySet;
 import android.util.SparseArray;
 import android.util.SparseBooleanArray;
+
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
 import com.android.server.input.KeyboardMetricsCollector;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -32,7 +34,8 @@ public final class AudioRestrictionManager {
                 sparseBooleanArray.append(i, true);
                 sparseBooleanArray2.append(i, true);
             } else if (i2 != 5 && i2 != 6 && i2 != 3) {
-                NandswapManager$$ExternalSyntheticOutline0.m(i2, "Unknown audio suppression behavior", "AudioRestriction");
+                NandswapManager$$ExternalSyntheticOutline0.m(
+                        i2, "Unknown audio suppression behavior", "AudioRestriction");
             }
         }
         SparseArray sparseArray = new SparseArray();
@@ -47,8 +50,10 @@ public final class AudioRestrictionManager {
             boolean z = false;
             for (int i = 0; i < this.mZenModeAudioRestrictions.size(); i++) {
                 try {
-                    String opToName = AppOpsManager.opToName(this.mZenModeAudioRestrictions.keyAt(i));
-                    SparseArray sparseArray = (SparseArray) this.mZenModeAudioRestrictions.valueAt(i);
+                    String opToName =
+                            AppOpsManager.opToName(this.mZenModeAudioRestrictions.keyAt(i));
+                    SparseArray sparseArray =
+                            (SparseArray) this.mZenModeAudioRestrictions.valueAt(i);
                     for (int i2 = 0; i2 < sparseArray.size(); i2++) {
                         if (!z) {
                             printWriter.println("  Zen Mode Audio Restrictions:");
@@ -66,7 +71,8 @@ public final class AudioRestrictionManager {
                             printWriter.println("      Exceptions:");
                             for (int i3 = 0; i3 < restriction.exceptionPackages.size(); i3++) {
                                 printWriter.print("        ");
-                                printWriter.println((String) restriction.exceptionPackages.valueAt(i3));
+                                printWriter.println(
+                                        (String) restriction.exceptionPackages.valueAt(i3));
                             }
                         }
                     }
@@ -78,7 +84,12 @@ public final class AudioRestrictionManager {
                 StringBuilder sb = new StringBuilder();
                 sb.append("  Camera Audio Restriction Mode: ");
                 int i4 = this.mCameraAudioRestriction;
-                sb.append(i4 != 0 ? i4 != 1 ? i4 != 3 ? "Unknown" : "MuteVibrationAndSound" : "MuteVibration" : KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG);
+                sb.append(
+                        i4 != 0
+                                ? i4 != 1
+                                        ? i4 != 3 ? "Unknown" : "MuteVibrationAndSound"
+                                        : "MuteVibration"
+                                : KeyboardMetricsCollector.DEFAULT_LANGUAGE_TAG);
                 printWriter.println(sb.toString());
             }
         }

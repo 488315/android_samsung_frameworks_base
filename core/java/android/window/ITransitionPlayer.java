@@ -11,24 +11,33 @@ import android.view.SurfaceControl;
 public interface ITransitionPlayer extends IInterface {
     public static final String DESCRIPTOR = "android.window.ITransitionPlayer";
 
-    void onTransitionReady(IBinder iBinder, TransitionInfo transitionInfo, SurfaceControl.Transaction transaction, SurfaceControl.Transaction transaction2) throws RemoteException;
+    void onTransitionReady(
+            IBinder iBinder,
+            TransitionInfo transitionInfo,
+            SurfaceControl.Transaction transaction,
+            SurfaceControl.Transaction transaction2)
+            throws RemoteException;
 
-    void requestStartTransition(IBinder iBinder, TransitionRequestInfo transitionRequestInfo) throws RemoteException;
+    void requestStartTransition(IBinder iBinder, TransitionRequestInfo transitionRequestInfo)
+            throws RemoteException;
 
     void transitionAborted(IBinder iBinder) throws RemoteException;
 
     public static class Default implements ITransitionPlayer {
         @Override // android.window.ITransitionPlayer
-        public void onTransitionReady(IBinder transitionToken, TransitionInfo info, SurfaceControl.Transaction t, SurfaceControl.Transaction finishT) throws RemoteException {
-        }
+        public void onTransitionReady(
+                IBinder transitionToken,
+                TransitionInfo info,
+                SurfaceControl.Transaction t,
+                SurfaceControl.Transaction finishT)
+                throws RemoteException {}
 
         @Override // android.window.ITransitionPlayer
-        public void requestStartTransition(IBinder transitionToken, TransitionRequestInfo request) throws RemoteException {
-        }
+        public void requestStartTransition(IBinder transitionToken, TransitionRequestInfo request)
+                throws RemoteException {}
 
         @Override // android.window.ITransitionPlayer
-        public void transitionAborted(IBinder transitionToken) throws RemoteException {
-        }
+        public void transitionAborted(IBinder transitionToken) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -36,7 +45,7 @@ public interface ITransitionPlayer extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITransitionPlayer {
+    public abstract static class Stub extends Binder implements ITransitionPlayer {
         static final int TRANSACTION_onTransitionReady = 1;
         static final int TRANSACTION_requestStartTransition = 2;
         static final int TRANSACTION_transitionAborted = 3;
@@ -80,7 +89,8 @@ public interface ITransitionPlayer extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITransitionPlayer.DESCRIPTOR);
             }
@@ -91,15 +101,22 @@ public interface ITransitionPlayer extends IInterface {
             switch (code) {
                 case 1:
                     IBinder _arg0 = data.readStrongBinder();
-                    TransitionInfo _arg1 = (TransitionInfo) data.readTypedObject(TransitionInfo.CREATOR);
-                    SurfaceControl.Transaction _arg2 = (SurfaceControl.Transaction) data.readTypedObject(SurfaceControl.Transaction.CREATOR);
-                    SurfaceControl.Transaction _arg3 = (SurfaceControl.Transaction) data.readTypedObject(SurfaceControl.Transaction.CREATOR);
+                    TransitionInfo _arg1 =
+                            (TransitionInfo) data.readTypedObject(TransitionInfo.CREATOR);
+                    SurfaceControl.Transaction _arg2 =
+                            (SurfaceControl.Transaction)
+                                    data.readTypedObject(SurfaceControl.Transaction.CREATOR);
+                    SurfaceControl.Transaction _arg3 =
+                            (SurfaceControl.Transaction)
+                                    data.readTypedObject(SurfaceControl.Transaction.CREATOR);
                     data.enforceNoDataAvail();
                     onTransitionReady(_arg0, _arg1, _arg2, _arg3);
                     return true;
                 case 2:
                     IBinder _arg02 = data.readStrongBinder();
-                    TransitionRequestInfo _arg12 = (TransitionRequestInfo) data.readTypedObject(TransitionRequestInfo.CREATOR);
+                    TransitionRequestInfo _arg12 =
+                            (TransitionRequestInfo)
+                                    data.readTypedObject(TransitionRequestInfo.CREATOR);
                     data.enforceNoDataAvail();
                     requestStartTransition(_arg02, _arg12);
                     return true;
@@ -130,7 +147,12 @@ public interface ITransitionPlayer extends IInterface {
             }
 
             @Override // android.window.ITransitionPlayer
-            public void onTransitionReady(IBinder transitionToken, TransitionInfo info, SurfaceControl.Transaction t, SurfaceControl.Transaction finishT) throws RemoteException {
+            public void onTransitionReady(
+                    IBinder transitionToken,
+                    TransitionInfo info,
+                    SurfaceControl.Transaction t,
+                    SurfaceControl.Transaction finishT)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITransitionPlayer.DESCRIPTOR);
@@ -145,7 +167,8 @@ public interface ITransitionPlayer extends IInterface {
             }
 
             @Override // android.window.ITransitionPlayer
-            public void requestStartTransition(IBinder transitionToken, TransitionRequestInfo request) throws RemoteException {
+            public void requestStartTransition(
+                    IBinder transitionToken, TransitionRequestInfo request) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITransitionPlayer.DESCRIPTOR);

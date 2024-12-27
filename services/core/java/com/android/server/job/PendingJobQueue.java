@@ -3,7 +3,9 @@ package com.android.server.job;
 import android.util.ArraySet;
 import android.util.Pools;
 import android.util.SparseArray;
+
 import com.android.server.job.controllers.JobStatus;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -14,7 +16,8 @@ import java.util.PriorityQueue;
 public final class PendingJobQueue {
     public final Pools.Pool mAppJobQueuePool = new Pools.SimplePool(8);
     public final SparseArray mCurrentQueues = new SparseArray();
-    public final PriorityQueue mOrderedQueues = new PriorityQueue(new PendingJobQueue$$ExternalSyntheticLambda0(0));
+    public final PriorityQueue mOrderedQueues =
+            new PriorityQueue(new PendingJobQueue$$ExternalSyntheticLambda0(0));
     public int mSize = 0;
     public boolean mOptimizeIteration = true;
     public int mPullCount = 0;
@@ -22,7 +25,8 @@ public final class PendingJobQueue {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class AppJobQueue {
-        public static final PendingJobQueue$$ExternalSyntheticLambda0 sJobComparator = new PendingJobQueue$$ExternalSyntheticLambda0(1);
+        public static final PendingJobQueue$$ExternalSyntheticLambda0 sJobComparator =
+                new PendingJobQueue$$ExternalSyntheticLambda0(1);
         public static final Pools.Pool mAdjustedJobStatusPool = new Pools.SimplePool(16);
         public final List mJobs = new ArrayList();
         public int mCurIndex = 0;
@@ -47,27 +51,33 @@ public final class PendingJobQueue {
             if (this.mCurIndex >= ((ArrayList) this.mJobs).size()) {
                 return -1;
             }
-            return ((AdjustedJobStatus) ((ArrayList) this.mJobs).get(this.mCurIndex)).job.overrideState;
+            return ((AdjustedJobStatus) ((ArrayList) this.mJobs).get(this.mCurIndex))
+                    .job
+                    .overrideState;
         }
 
         public final long peekNextTimestamp() {
             if (this.mCurIndex >= ((ArrayList) this.mJobs).size()) {
                 return -1L;
             }
-            return ((AdjustedJobStatus) ((ArrayList) this.mJobs).get(this.mCurIndex)).adjustedEnqueueTime;
+            return ((AdjustedJobStatus) ((ArrayList) this.mJobs).get(this.mCurIndex))
+                    .adjustedEnqueueTime;
         }
     }
 
     public final void add(JobStatus jobStatus) {
         AppJobQueue appJobQueue = getAppJobQueue(jobStatus.sourceUid, true);
         long peekNextTimestamp = appJobQueue.peekNextTimestamp();
-        AppJobQueue.AdjustedJobStatus adjustedJobStatus = (AppJobQueue.AdjustedJobStatus) AppJobQueue.mAdjustedJobStatusPool.acquire();
+        AppJobQueue.AdjustedJobStatus adjustedJobStatus =
+                (AppJobQueue.AdjustedJobStatus) AppJobQueue.mAdjustedJobStatusPool.acquire();
         if (adjustedJobStatus == null) {
             adjustedJobStatus = new AppJobQueue.AdjustedJobStatus();
         }
         adjustedJobStatus.adjustedEnqueueTime = jobStatus.enqueueTime;
         adjustedJobStatus.job = jobStatus;
-        int binarySearch = Collections.binarySearch(appJobQueue.mJobs, adjustedJobStatus, AppJobQueue.sJobComparator);
+        int binarySearch =
+                Collections.binarySearch(
+                        appJobQueue.mJobs, adjustedJobStatus, AppJobQueue.sJobComparator);
         if (binarySearch < 0) {
             binarySearch = ~binarySearch;
         }
@@ -76,12 +86,19 @@ public final class PendingJobQueue {
             appJobQueue.mCurIndex = binarySearch;
         }
         if (binarySearch > 0) {
-            adjustedJobStatus.adjustedEnqueueTime = Math.max(((AppJobQueue.AdjustedJobStatus) ((ArrayList) appJobQueue.mJobs).get(binarySearch - 1)).adjustedEnqueueTime, adjustedJobStatus.adjustedEnqueueTime);
+            adjustedJobStatus.adjustedEnqueueTime =
+                    Math.max(
+                            ((AppJobQueue.AdjustedJobStatus)
+                                            ((ArrayList) appJobQueue.mJobs).get(binarySearch - 1))
+                                    .adjustedEnqueueTime,
+                            adjustedJobStatus.adjustedEnqueueTime);
         }
         int size = ((ArrayList) appJobQueue.mJobs).size();
         if (binarySearch < size - 1) {
             while (binarySearch < size) {
-                AppJobQueue.AdjustedJobStatus adjustedJobStatus2 = (AppJobQueue.AdjustedJobStatus) ((ArrayList) appJobQueue.mJobs).get(binarySearch);
+                AppJobQueue.AdjustedJobStatus adjustedJobStatus2 =
+                        (AppJobQueue.AdjustedJobStatus)
+                                ((ArrayList) appJobQueue.mJobs).get(binarySearch);
                 long j = adjustedJobStatus.adjustedEnqueueTime;
                 if (j < adjustedJobStatus2.adjustedEnqueueTime) {
                     break;
@@ -115,13 +132,17 @@ public final class PendingJobQueue {
             int i = Integer.MAX_VALUE;
             for (int size3 = list2.size() - 1; size3 >= 0; size3--) {
                 JobStatus jobStatus2 = (JobStatus) list2.get(size3);
-                AppJobQueue.AdjustedJobStatus adjustedJobStatus = (AppJobQueue.AdjustedJobStatus) AppJobQueue.mAdjustedJobStatusPool.acquire();
+                AppJobQueue.AdjustedJobStatus adjustedJobStatus =
+                        (AppJobQueue.AdjustedJobStatus)
+                                AppJobQueue.mAdjustedJobStatusPool.acquire();
                 if (adjustedJobStatus == null) {
                     adjustedJobStatus = new AppJobQueue.AdjustedJobStatus();
                 }
                 adjustedJobStatus.adjustedEnqueueTime = jobStatus2.enqueueTime;
                 adjustedJobStatus.job = jobStatus2;
-                int binarySearch = Collections.binarySearch(appJobQueue.mJobs, adjustedJobStatus, AppJobQueue.sJobComparator);
+                int binarySearch =
+                        Collections.binarySearch(
+                                appJobQueue.mJobs, adjustedJobStatus, AppJobQueue.sJobComparator);
                 if (binarySearch < 0) {
                     binarySearch = ~binarySearch;
                 }
@@ -133,8 +154,14 @@ public final class PendingJobQueue {
             }
             int size4 = ((ArrayList) appJobQueue.mJobs).size();
             for (int max = Math.max(i, 1); max < size4; max++) {
-                AppJobQueue.AdjustedJobStatus adjustedJobStatus2 = (AppJobQueue.AdjustedJobStatus) ((ArrayList) appJobQueue.mJobs).get(max);
-                adjustedJobStatus2.adjustedEnqueueTime = Math.max(adjustedJobStatus2.adjustedEnqueueTime, ((AppJobQueue.AdjustedJobStatus) ((ArrayList) appJobQueue.mJobs).get(max - 1)).adjustedEnqueueTime);
+                AppJobQueue.AdjustedJobStatus adjustedJobStatus2 =
+                        (AppJobQueue.AdjustedJobStatus) ((ArrayList) appJobQueue.mJobs).get(max);
+                adjustedJobStatus2.adjustedEnqueueTime =
+                        Math.max(
+                                adjustedJobStatus2.adjustedEnqueueTime,
+                                ((AppJobQueue.AdjustedJobStatus)
+                                                ((ArrayList) appJobQueue.mJobs).get(max - 1))
+                                        .adjustedEnqueueTime);
             }
         }
         this.mSize = arraySet.size() + this.mSize;
@@ -192,7 +219,11 @@ public final class PendingJobQueue {
             }
             int i2 = this.mPullCount + 1;
             this.mPullCount = i2;
-            if (i2 >= min || ((jobStatus != null && appJobQueue2.peekNextOverrideState() != jobStatus.overrideState) || appJobQueue2.peekNextTimestamp() == -1)) {
+            if (i2 >= min
+                    || ((jobStatus != null
+                                    && appJobQueue2.peekNextOverrideState()
+                                            != jobStatus.overrideState)
+                            || appJobQueue2.peekNextTimestamp() == -1)) {
                 this.mOrderedQueues.poll();
                 if (appJobQueue2.peekNextTimestamp() != -1) {
                     this.mOrderedQueues.offer(appJobQueue2);
@@ -213,7 +244,8 @@ public final class PendingJobQueue {
         if (indexOf < 0) {
             return false;
         }
-        AppJobQueue.AdjustedJobStatus adjustedJobStatus = (AppJobQueue.AdjustedJobStatus) ((ArrayList) appJobQueue.mJobs).remove(indexOf);
+        AppJobQueue.AdjustedJobStatus adjustedJobStatus =
+                (AppJobQueue.AdjustedJobStatus) ((ArrayList) appJobQueue.mJobs).remove(indexOf);
         adjustedJobStatus.adjustedEnqueueTime = 0L;
         adjustedJobStatus.job = null;
         AppJobQueue.mAdjustedJobStatusPool.release(adjustedJobStatus);

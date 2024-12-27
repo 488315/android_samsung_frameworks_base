@@ -7,6 +7,7 @@ import android.util.Log;
 import android.util.LongArray;
 import android.util.LongSparseArray;
 import android.util.SparseArray;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +28,10 @@ public class AccessibilityCache {
     private long mValidWindowCacheTimeStamp = 0;
     private int mAccessibilityFocusedWindow = -1;
     private int mInputFocusWindow = -1;
-    private final SparseArray<SparseArray<AccessibilityWindowInfo>> mWindowCacheByDisplay = new SparseArray<>();
-    private final SparseArray<LongSparseArray<AccessibilityNodeInfo>> mNodeCache = new SparseArray<>();
+    private final SparseArray<SparseArray<AccessibilityWindowInfo>> mWindowCacheByDisplay =
+            new SparseArray<>();
+    private final SparseArray<LongSparseArray<AccessibilityNodeInfo>> mNodeCache =
+            new SparseArray<>();
     private final SparseArray<AccessibilityWindowInfo> mTempWindowArray = new SparseArray<>();
 
     public interface OnNodeAddedListener {
@@ -60,7 +63,9 @@ public class AccessibilityCache {
         }
     }
 
-    public void setWindowsOnAllDisplays(SparseArray<List<AccessibilityWindowInfo>> windowsOnAllDisplays, long populationTimeStamp) {
+    public void setWindowsOnAllDisplays(
+            SparseArray<List<AccessibilityWindowInfo>> windowsOnAllDisplays,
+            long populationTimeStamp) {
         synchronized (this.mLock) {
             if (!this.mEnabled) {
                 if (DEBUG) {
@@ -101,7 +106,13 @@ public class AccessibilityCache {
                 }
             } else {
                 if (DEBUG) {
-                    Log.i(LOG_TAG, "Caching window: " + window.getId() + " at display Id [ " + window.getDisplayId() + " ]");
+                    Log.i(
+                            LOG_TAG,
+                            "Caching window: "
+                                    + window.getId()
+                                    + " at display Id [ "
+                                    + window.getDisplayId()
+                                    + " ]");
                 }
                 addWindowByDisplayLocked(window.getDisplayId(), window);
             }
@@ -131,7 +142,9 @@ public class AccessibilityCache {
             Method dump skipped, instructions count: 348
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.accessibility.AccessibilityCache.onAccessibilityEvent(android.view.accessibility.AccessibilityEvent):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.view.accessibility.AccessibilityCache.onAccessibilityEvent(android.view.accessibility.AccessibilityEvent):void");
     }
 
     private AccessibilityNodeInfo removeCachedNodeLocked(int windowId, long sourceId) {
@@ -210,7 +223,8 @@ public class AccessibilityCache {
             }
             for (int i = 0; i < displayCounts; i++) {
                 int displayId = this.mWindowCacheByDisplay.keyAt(i);
-                SparseArray<AccessibilityWindowInfo> windowsOfDisplay = this.mWindowCacheByDisplay.valueAt(i);
+                SparseArray<AccessibilityWindowInfo> windowsOfDisplay =
+                        this.mWindowCacheByDisplay.valueAt(i);
                 if (windowsOfDisplay != null && (windowCount = windowsOfDisplay.size()) > 0) {
                     SparseArray<AccessibilityWindowInfo> sortedWindows = this.mTempWindowArray;
                     sortedWindows.clear();
@@ -242,7 +256,8 @@ public class AccessibilityCache {
             }
             int displayCounts = this.mWindowCacheByDisplay.size();
             for (int i = 0; i < displayCounts; i++) {
-                SparseArray<AccessibilityWindowInfo> windowsOfDisplay = this.mWindowCacheByDisplay.valueAt(i);
+                SparseArray<AccessibilityWindowInfo> windowsOfDisplay =
+                        this.mWindowCacheByDisplay.valueAt(i);
                 if (windowsOfDisplay != null && (window = windowsOfDisplay.get(windowId)) != null) {
                     return new AccessibilityWindowInfo(window);
                 }
@@ -291,7 +306,8 @@ public class AccessibilityCache {
             AccessibilityNodeInfo clone = new AccessibilityNodeInfo(info);
             nodes.put(sourceId, clone);
             if (clone.isAccessibilityFocused()) {
-                if (this.mAccessibilityFocus != 2147483647L && this.mAccessibilityFocus != sourceId) {
+                if (this.mAccessibilityFocus != 2147483647L
+                        && this.mAccessibilityFocus != sourceId) {
                     removeCachedNodeLocked(windowId, this.mAccessibilityFocus);
                 }
                 this.mAccessibilityFocus = sourceId;
@@ -336,7 +352,8 @@ public class AccessibilityCache {
         if (displayCounts > 0) {
             for (int i = displayCounts - 1; i >= 0; i--) {
                 int displayId = this.mWindowCacheByDisplay.keyAt(i);
-                SparseArray<AccessibilityWindowInfo> windows = this.mWindowCacheByDisplay.get(displayId);
+                SparseArray<AccessibilityWindowInfo> windows =
+                        this.mWindowCacheByDisplay.get(displayId);
                 if (windows != null) {
                     windows.clear();
                 }
@@ -375,7 +392,8 @@ public class AccessibilityCache {
             if (windowId != -2 && windowId != currentFocusWindowId) {
                 return null;
             }
-            LongSparseArray<AccessibilityNodeInfo> nodes = this.mNodeCache.get(currentFocusWindowId);
+            LongSparseArray<AccessibilityNodeInfo> nodes =
+                    this.mNodeCache.get(currentFocusWindowId);
             if (nodes == null) {
                 return null;
             }
@@ -385,9 +403,11 @@ public class AccessibilityCache {
             }
             if (initialNodeId != currentFocusId) {
                 currentFocusedNode = currentFocusedNode3;
-                if (!isCachedNodeOrDescendantLocked(currentFocusedNode3.getParentNodeId(), initialNodeId, nodes)) {
+                if (!isCachedNodeOrDescendantLocked(
+                        currentFocusedNode3.getParentNodeId(), initialNodeId, nodes)) {
                     if (VERBOSE) {
-                        StringBuilder append = new StringBuilder().append("getFocus is null with type: ");
+                        StringBuilder append =
+                                new StringBuilder().append("getFocus is null with type: ");
                         if (focusType == 2) {
                             str2 = "FOCUS_ACCESSIBILITY";
                         } else {
@@ -404,7 +424,13 @@ public class AccessibilityCache {
                 currentFocusedNode2 = currentFocusedNode;
             } else {
                 currentFocusedNode2 = currentFocusedNode;
-                StringBuilder append2 = new StringBuilder().append("getFocus(0x").append(Long.toHexString(currentFocusId)).append(") = ").append(currentFocusedNode2).append(" with type: ");
+                StringBuilder append2 =
+                        new StringBuilder()
+                                .append("getFocus(0x")
+                                .append(Long.toHexString(currentFocusId))
+                                .append(") = ")
+                                .append(currentFocusedNode2)
+                                .append(" with type: ");
                 if (focusType == 2) {
                     str = "FOCUS_ACCESSIBILITY";
                 } else {
@@ -416,7 +442,8 @@ public class AccessibilityCache {
         }
     }
 
-    private boolean isCachedNodeOrDescendantLocked(long nodeId, long ancestorId, LongSparseArray<AccessibilityNodeInfo> nodes) {
+    private boolean isCachedNodeOrDescendantLocked(
+            long nodeId, long ancestorId, LongSparseArray<AccessibilityNodeInfo> nodes) {
         if (ancestorId == nodeId) {
             return true;
         }
@@ -429,7 +456,11 @@ public class AccessibilityCache {
 
     private void clearNodesForWindowLocked(int windowId) {
         if (DEBUG) {
-            Log.i(LOG_TAG, "clearNodesForWindowLocked(" + windowId + NavigationBarInflaterView.KEY_CODE_END);
+            Log.i(
+                    LOG_TAG,
+                    "clearNodesForWindowLocked("
+                            + windowId
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         LongSparseArray<AccessibilityNodeInfo> nodes = this.mNodeCache.get(windowId);
         if (nodes == null) {
@@ -464,7 +495,8 @@ public class AccessibilityCache {
         }
     }
 
-    private boolean clearSubTreeRecursiveLocked(LongSparseArray<AccessibilityNodeInfo> nodes, long rootNodeId) {
+    private boolean clearSubTreeRecursiveLocked(
+            LongSparseArray<AccessibilityNodeInfo> nodes, long rootNodeId) {
         AccessibilityNodeInfo current = nodes.get(rootNodeId);
         if (current == null) {
             clear();
@@ -493,12 +525,14 @@ public class AccessibilityCache {
         int k;
         AccessibilityCache accessibilityCache = this;
         synchronized (accessibilityCache.mLock) {
-            if (accessibilityCache.mWindowCacheByDisplay.size() > 0 || accessibilityCache.mNodeCache.size() != 0) {
+            if (accessibilityCache.mWindowCacheByDisplay.size() > 0
+                    || accessibilityCache.mNodeCache.size() != 0) {
                 AccessibilityWindowInfo focusedWindow3 = null;
                 AccessibilityWindowInfo activeWindow3 = null;
                 int displayCounts3 = accessibilityCache.mWindowCacheByDisplay.size();
                 for (int i = 0; i < displayCounts3; i++) {
-                    SparseArray<AccessibilityWindowInfo> windowsOfDisplay = accessibilityCache.mWindowCacheByDisplay.valueAt(i);
+                    SparseArray<AccessibilityWindowInfo> windowsOfDisplay =
+                            accessibilityCache.mWindowCacheByDisplay.valueAt(i);
                     if (windowsOfDisplay != null) {
                         int windowCount = windowsOfDisplay.size();
                         for (int j = 0; j < windowCount; j++) {
@@ -525,7 +559,8 @@ public class AccessibilityCache {
                 int nodesForWindowCount = accessibilityCache.mNodeCache.size();
                 int i2 = 0;
                 while (i2 < nodesForWindowCount) {
-                    LongSparseArray<AccessibilityNodeInfo> nodes = accessibilityCache.mNodeCache.valueAt(i2);
+                    LongSparseArray<AccessibilityNodeInfo> nodes =
+                            accessibilityCache.mNodeCache.valueAt(i2);
                     if (nodes.size() <= 0) {
                         focusedWindow = focusedWindow3;
                         activeWindow = activeWindow3;
@@ -539,26 +574,39 @@ public class AccessibilityCache {
                             AccessibilityNodeInfo node = nodes.valueAt(j2);
                             if (!seen.add(node)) {
                                 focusedWindow2 = focusedWindow3;
-                                Log.e(LOG_TAG, "Duplicate node: " + node + " in window:" + windowId);
+                                Log.e(
+                                        LOG_TAG,
+                                        "Duplicate node: " + node + " in window:" + windowId);
                                 activeWindow2 = activeWindow3;
                                 displayCounts2 = displayCounts3;
                             } else {
                                 focusedWindow2 = focusedWindow3;
                                 if (node.isAccessibilityFocused()) {
                                     if (accessFocus != null) {
-                                        Log.e(LOG_TAG, "Duplicate accessibility focus:" + node + " in window:" + windowId);
+                                        Log.e(
+                                                LOG_TAG,
+                                                "Duplicate accessibility focus:"
+                                                        + node
+                                                        + " in window:"
+                                                        + windowId);
                                     } else {
                                         accessFocus = node;
                                     }
                                 }
                                 if (node.isFocused()) {
                                     if (inputFocus2 != null) {
-                                        Log.e(LOG_TAG, "Duplicate input focus: " + node + " in window:" + windowId);
+                                        Log.e(
+                                                LOG_TAG,
+                                                "Duplicate input focus: "
+                                                        + node
+                                                        + " in window:"
+                                                        + windowId);
                                     } else {
                                         inputFocus2 = node;
                                     }
                                 }
-                                AccessibilityNodeInfo nodeParent = nodes.get(node.getParentNodeId());
+                                AccessibilityNodeInfo nodeParent =
+                                        nodes.get(node.getParentNodeId());
                                 if (nodeParent == null) {
                                     activeWindow2 = activeWindow3;
                                     displayCounts2 = displayCounts3;
@@ -584,7 +632,12 @@ public class AccessibilityCache {
                                         }
                                     }
                                     if (k == 0) {
-                                        Log.e(LOG_TAG, "Invalid parent-child relation between parent: " + nodeParent + " and child: " + node);
+                                        Log.e(
+                                                LOG_TAG,
+                                                "Invalid parent-child relation between parent: "
+                                                        + nodeParent
+                                                        + " and child: "
+                                                        + node);
                                     }
                                 }
                                 int childCount3 = node.getChildCount();
@@ -597,12 +650,18 @@ public class AccessibilityCache {
                                         inputFocus = inputFocus2;
                                     } else {
                                         inputFocus = inputFocus2;
-                                        AccessibilityNodeInfo parent = nodes.get(child.getParentNodeId());
+                                        AccessibilityNodeInfo parent =
+                                                nodes.get(child.getParentNodeId());
                                         if (parent == node) {
                                             childCount = childCount3;
                                         } else {
                                             childCount = childCount3;
-                                            Log.e(LOG_TAG, "Invalid child-parent relation between child: " + node + " and parent: " + nodeParent);
+                                            Log.e(
+                                                    LOG_TAG,
+                                                    "Invalid child-parent relation between child: "
+                                                            + node
+                                                            + " and parent: "
+                                                            + nodeParent);
                                         }
                                     }
                                     k3++;

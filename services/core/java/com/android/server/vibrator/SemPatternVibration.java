@@ -6,9 +6,11 @@ import android.os.CombinedVibration;
 import android.os.IBinder;
 import android.os.VibrationEffect;
 import android.util.Slog;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.am.PendingIntentController$$ExternalSyntheticOutline0;
+
 import com.samsung.android.server.vibrator.VibratorHelper;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -36,14 +38,23 @@ public final class SemPatternVibration extends SemVibration {
             int[] engineData = vibratorHelper.getEngineData(i7);
             if (engineData.length != 2 || engineData[0] >= 0) {
                 this.mHasEngineData = true;
-                if (engineData.length == 5 && engineData[0] == 4 && engineData[1] == 0 && engineData[2] == 0 && engineData[3] == 0 && engineData[4] == 0) {
+                if (engineData.length == 5
+                        && engineData[0] == 4
+                        && engineData[1] == 0
+                        && engineData[2] == 0
+                        && engineData[3] == 0
+                        && engineData[4] == 0) {
                     Slog.d("VibratorManagerService", "Empty pattern for haptic engine.");
                 } else {
                     int length = engineData.length;
                     int i8 = length - 1;
                     if (length <= 4 || (i8 / 4) * 4 != i8) {
                         while (i4 < length) {
-                            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i4, "isColorfulDataFormat() - wrong format(1) : data[", "] = ");
+                            StringBuilder m =
+                                    BatteryService$$ExternalSyntheticOutline0.m(
+                                            i4,
+                                            "isColorfulDataFormat() - wrong format(1) : data[",
+                                            "] = ");
                             m.append(engineData[i4]);
                             Slog.e("VibratorManagerService", m.toString());
                             i4++;
@@ -52,7 +63,7 @@ public final class SemPatternVibration extends SemVibration {
                         if (i7 == -1) {
                             int length2 = engineData.length;
                             if (engineData.length <= 4) {
-                                patternByIndex = new long[]{-1, -1};
+                                patternByIndex = new long[] {-1, -1};
                                 iArr = engineData;
                             } else {
                                 long[] jArr = new long[((length2 - 1) / 4) + 1];
@@ -100,19 +111,34 @@ public final class SemPatternVibration extends SemVibration {
                             }
                             i = 2;
                             j = 0;
-                            patternByIndex = new long[]{0, i12};
+                            patternByIndex = new long[] {0, i12};
                         } else {
                             i = 2;
                             j = 0;
                         }
                         if (patternByIndex.length == i && patternByIndex[0] < j) {
-                            DeviceIdleController$$ExternalSyntheticOutline0.m(i7, "This ", " is not supported.(colorful)", "VibratorManagerService");
+                            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                                    i7,
+                                    "This ",
+                                    " is not supported.(colorful)",
+                                    "VibratorManagerService");
                         } else if (i6 <= -1 || isExecutablePattern(patternByIndex)) {
-                            return new HalVibration(this.mToken, this.mEffect, vibratorHelper.getIndexDuration(i7) + 100, this.mMagnitude, iArr, null, getCallerInfo());
+                            return new HalVibration(
+                                    this.mToken,
+                                    this.mEffect,
+                                    vibratorHelper.getIndexDuration(i7) + 100,
+                                    this.mMagnitude,
+                                    iArr,
+                                    null,
+                                    getCallerInfo());
                         }
                     } else {
                         while (i4 < length) {
-                            StringBuilder m2 = BatteryService$$ExternalSyntheticOutline0.m(i4, "isColorfulDataFormat() - wrong format(2) : data[", "] = ");
+                            StringBuilder m2 =
+                                    BatteryService$$ExternalSyntheticOutline0.m(
+                                            i4,
+                                            "isColorfulDataFormat() - wrong format(2) : data[",
+                                            "] = ");
                             m2.append(engineData[i4]);
                             Slog.e("VibratorManagerService", m2.toString());
                             i4++;
@@ -122,15 +148,18 @@ public final class SemPatternVibration extends SemVibration {
                 }
                 return null;
             }
-            DeviceIdleController$$ExternalSyntheticOutline0.m(i7, "This ", " is not supported for engine.", "VibratorManagerService");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    i7, "This ", " is not supported for engine.", "VibratorManagerService");
         }
         long[] patternByIndex2 = vibratorHelper.getPatternByIndex(i7);
         if (patternByIndex2.length == 2) {
             long j3 = patternByIndex2[0];
             if (j3 == 0 && patternByIndex2[1] == 0) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m(i7, "This ", " is blank pattern.(common)", "VibratorManagerService");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        i7, "This ", " is blank pattern.(common)", "VibratorManagerService");
             } else if (j3 < 0) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m(i7, "This ", " is not supported.(common)", "VibratorManagerService");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        i7, "This ", " is not supported.(common)", "VibratorManagerService");
             }
             return null;
         }
@@ -145,19 +174,33 @@ public final class SemPatternVibration extends SemVibration {
                     i4++;
                 } else if (i6 < patternByIndex2.length && this.mToken != null) {
                     if (i6 <= -1 || i7 != -1 || isExecutablePattern(patternByIndex2)) {
-                        VibrationEffect createWaveform = VibrationEffect.createWaveform(patternByIndex2, i6);
+                        VibrationEffect createWaveform =
+                                VibrationEffect.createWaveform(patternByIndex2, i6);
                         createWaveform.semSetMagnitude(this.mMagnitude);
-                        CombinedVibration createParallel = CombinedVibration.createParallel(createWaveform);
+                        CombinedVibration createParallel =
+                                CombinedVibration.createParallel(createWaveform);
                         IBinder iBinder = this.mToken;
                         long indexDuration = vibratorHelper.getIndexDuration(i7);
                         vibratorHelper.getPatternFrequencyByIndex(i7);
-                        return new HalVibration(iBinder, createParallel, indexDuration, this.mMagnitude, null, null, getCallerInfo());
+                        return new HalVibration(
+                                iBinder,
+                                createParallel,
+                                indexDuration,
+                                this.mMagnitude,
+                                null,
+                                null,
+                                getCallerInfo());
                     }
                 }
             }
         }
         Slog.d("VibratorManagerService", "semPatternVibrate() is failed by illegal argument.");
-        Slog.d("VibratorManagerService", "semPatternVibrate() - pattern.length = " + patternByIndex2.length + ", repeat = " + i6);
+        Slog.d(
+                "VibratorManagerService",
+                "semPatternVibrate() - pattern.length = "
+                        + patternByIndex2.length
+                        + ", repeat = "
+                        + i6);
         StringBuilder sb = new StringBuilder("semPatternVibrate() - token = ");
         sb.append(this.mToken);
         Slog.d("VibratorManagerService", sb.toString());
@@ -168,14 +211,20 @@ public final class SemPatternVibration extends SemVibration {
         int length = jArr.length;
         int i = this.mRepeat;
         if (i >= length) {
-            PendingIntentController$$ExternalSyntheticOutline0.m(length, i, "isExecutablePattern() - length = ", ", repeat = ", "VibratorManagerService");
+            PendingIntentController$$ExternalSyntheticOutline0.m(
+                    length,
+                    i,
+                    "isExecutablePattern() - length = ",
+                    ", repeat = ",
+                    "VibratorManagerService");
             return false;
         }
         if (jArr[i] > 0) {
             return true;
         }
         int i2 = (i / 2) * 2;
-        if (((i2 == i && (length / 2) * 2 == length) || (i2 != i && (length / 2) * 2 != length)) && jArr[length - 1] > 0) {
+        if (((i2 == i && (length / 2) * 2 == length) || (i2 != i && (length / 2) * 2 != length))
+                && jArr[length - 1] > 0) {
             return true;
         }
         for (int i3 = 0; i3 < length; i3 += 2) {
@@ -186,7 +235,8 @@ public final class SemPatternVibration extends SemVibration {
                 return true;
             }
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m(i, "This pattern is not executable. repeat = ", "VibratorManagerService");
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                i, "This pattern is not executable. repeat = ", "VibratorManagerService");
         for (int i7 = 0; i7 < length; i7++) {
             StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i7, "pattern[", "] = ");
             m.append(jArr[i7]);
@@ -196,7 +246,8 @@ public final class SemPatternVibration extends SemVibration {
             StringBuilder sb = new StringBuilder();
             sb.append(this.mIsExecutablePkg);
             sb.append(" ");
-            this.mIsExecutablePkg = AudioOffloadInfo$$ExternalSyntheticOutline0.m(sb, this.mOpPkg, ":");
+            this.mIsExecutablePkg =
+                    AudioOffloadInfo$$ExternalSyntheticOutline0.m(sb, this.mOpPkg, ":");
             for (long j : jArr) {
                 StringBuilder sb2 = new StringBuilder();
                 sb2.append(this.mIsExecutablePkg);

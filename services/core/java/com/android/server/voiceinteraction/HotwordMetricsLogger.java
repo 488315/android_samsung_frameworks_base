@@ -13,7 +13,8 @@ public abstract class HotwordMetricsLogger {
                 i7 = 0;
             }
         }
-        FrameworkStatsLog.write(FrameworkStatsLog.HOTWORD_AUDIO_EGRESS_EVENT_REPORTED, i7, i2, i3, i4, i5, i6);
+        FrameworkStatsLog.write(
+                FrameworkStatsLog.HOTWORD_AUDIO_EGRESS_EVENT_REPORTED, i7, i2, i3, i4, i5, i6);
     }
 
     public static void writeDetectorEvent(int i, int i2, int i3) {

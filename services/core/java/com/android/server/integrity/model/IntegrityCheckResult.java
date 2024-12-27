@@ -21,7 +21,7 @@ public final class IntegrityCheckResult {
             ALLOW = effect;
             Effect effect2 = new Effect("DENY", 1);
             DENY = effect2;
-            $VALUES = new Effect[]{effect, effect2};
+            $VALUES = new Effect[] {effect, effect2};
         }
 
         public static Effect valueOf(String str) {

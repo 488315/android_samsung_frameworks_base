@@ -11,12 +11,7 @@ import android.service.notification.StatusBarNotification;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.view.Surface;
-import com.samsung.android.remoteappmode.IRemoteAppModeListener;
-import com.samsung.android.remoteappmode.IRotationChangeListener;
-import com.samsung.android.remoteappmode.ISecureAppChangedListener;
-import com.samsung.android.remoteappmode.IStartActivityInterceptListener;
-import com.samsung.android.remoteappmode.ITaskChangeListener;
-import com.samsung.android.remoteappmode.IVirtualDisplayAliveChecker;
+
 import java.util.Map;
 
 /* loaded from: classes6.dex */
@@ -25,10 +20,14 @@ public final class SemRemoteAppModeManager {
     private static final Object sLock = new Object();
     private IRemoteAppMode mService;
     private Map<TaskChangeListener, TaskChangeListenerDelegate> mTaskChangeListeners = null;
-    private Map<SecureAppChangedListener, SecureAppChangedListenerDelegate> mSecureAppChangedListeners = null;
-    private Map<RotationChangedListener, RotationChangedListenerDelegate> mRotationChangedListeners = null;
-    private Map<StartActivityInterceptedListener, StartActivityInterceptedListenerDelegate> mStartActivityInterceptedListeners = null;
-    private Map<RemoteAppModeListener, RemoteAppModeListenerDelegate> mRemoteAppModeListeners = null;
+    private Map<SecureAppChangedListener, SecureAppChangedListenerDelegate>
+            mSecureAppChangedListeners = null;
+    private Map<RotationChangedListener, RotationChangedListenerDelegate>
+            mRotationChangedListeners = null;
+    private Map<StartActivityInterceptedListener, StartActivityInterceptedListenerDelegate>
+            mStartActivityInterceptedListeners = null;
+    private Map<RemoteAppModeListener, RemoteAppModeListenerDelegate> mRemoteAppModeListeners =
+            null;
 
     public interface RemoteAppModeListener {
         void onRemoteAppModeStateChanged(boolean z);
@@ -45,7 +44,15 @@ public final class SemRemoteAppModeManager {
     }
 
     public interface StartActivityInterceptedListener {
-        void onStartActivityIntercepted(Intent intent, Bundle bundle, ActivityInfo activityInfo, int i, boolean z, int i2, int i3, int i4);
+        void onStartActivityIntercepted(
+                Intent intent,
+                Bundle bundle,
+                ActivityInfo activityInfo,
+                int i,
+                boolean z,
+                int i2,
+                int i3,
+                int i4);
     }
 
     public interface TaskChangeListener {
@@ -75,9 +82,21 @@ public final class SemRemoteAppModeManager {
         }
     }
 
-    public int createVirtualDisplay(String name, int width, int height, int densityDpi, Surface surface, VirtualDisplayAliveChecker checker) {
+    public int createVirtualDisplay(
+            String name,
+            int width,
+            int height,
+            int densityDpi,
+            Surface surface,
+            VirtualDisplayAliveChecker checker) {
         try {
-            return this.mService.createVirtualDisplay(name, width, height, densityDpi, surface, new VirtualDisplayAliveCheckerDelegate(checker));
+            return this.mService.createVirtualDisplay(
+                    name,
+                    width,
+                    height,
+                    densityDpi,
+                    surface,
+                    new VirtualDisplayAliveCheckerDelegate(checker));
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
             return -1;
@@ -92,7 +111,8 @@ public final class SemRemoteAppModeManager {
         }
     }
 
-    public void resizeVirtualDisplay(int displayId, int width, int height, int densityDpi, Surface surface) {
+    public void resizeVirtualDisplay(
+            int displayId, int width, int height, int densityDpi, Surface surface) {
         try {
             this.mService.resizeVirtualDisplay(displayId, width, height, densityDpi, surface);
         } catch (RemoteException e) {
@@ -108,7 +128,8 @@ public final class SemRemoteAppModeManager {
         }
     }
 
-    public void launchApplication(int displayId, String packageName, Intent intent, Bundle activityOptionsBundle) {
+    public void launchApplication(
+            int displayId, String packageName, Intent intent, Bundle activityOptionsBundle) {
         try {
             this.mService.launchApplication(displayId, packageName, intent, activityOptionsBundle);
         } catch (RemoteException e) {
@@ -116,17 +137,21 @@ public final class SemRemoteAppModeManager {
         }
     }
 
-    public void transferTaskWithoutIntercept(int taskId, int targetDisplayId, Bundle activityOptionsBundle) {
+    public void transferTaskWithoutIntercept(
+            int taskId, int targetDisplayId, Bundle activityOptionsBundle) {
         try {
-            this.mService.transferTaskWithoutIntercept(taskId, targetDisplayId, activityOptionsBundle);
+            this.mService.transferTaskWithoutIntercept(
+                    taskId, targetDisplayId, activityOptionsBundle);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
     }
 
-    public void transferTaskUsingIntent(Intent intent, int taskId, int targetDisplayId, Bundle activityOptionsBundle) {
+    public void transferTaskUsingIntent(
+            Intent intent, int taskId, int targetDisplayId, Bundle activityOptionsBundle) {
         try {
-            this.mService.transferTaskUsingIntent(intent, taskId, targetDisplayId, activityOptionsBundle);
+            this.mService.transferTaskUsingIntent(
+                    intent, taskId, targetDisplayId, activityOptionsBundle);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }
@@ -156,7 +181,8 @@ public final class SemRemoteAppModeManager {
         }
     }
 
-    private static class VirtualDisplayAliveCheckerDelegate extends IVirtualDisplayAliveChecker.Stub {
+    private static class VirtualDisplayAliveCheckerDelegate
+            extends IVirtualDisplayAliveChecker.Stub {
         private VirtualDisplayAliveChecker mListener;
 
         VirtualDisplayAliveCheckerDelegate(VirtualDisplayAliveChecker listener) {
@@ -170,7 +196,9 @@ public final class SemRemoteAppModeManager {
                 listener = this.mListener;
             }
             if (listener != null) {
-                Log.d(SemRemoteAppModeManager.TAG, "onVirtualDisplayCreated() displayId=" + displayId);
+                Log.d(
+                        SemRemoteAppModeManager.TAG,
+                        "onVirtualDisplayCreated() displayId=" + displayId);
                 listener.onVirtualDisplayCreated(displayId);
             }
         }
@@ -182,7 +210,9 @@ public final class SemRemoteAppModeManager {
                 listener = this.mListener;
             }
             if (listener != null) {
-                Log.d(SemRemoteAppModeManager.TAG, "onVirtualDisplayReleased() displayId=" + displayId);
+                Log.d(
+                        SemRemoteAppModeManager.TAG,
+                        "onVirtualDisplayReleased() displayId=" + displayId);
                 listener.onVirtualDisplayReleased(displayId);
             }
         }
@@ -214,7 +244,9 @@ public final class SemRemoteAppModeManager {
                 listener = this.mListener;
             }
             if (listener != null) {
-                Log.d(SemRemoteAppModeManager.TAG, "onTaskRemoved() taskId=" + taskId + ", listener=" + listener);
+                Log.d(
+                        SemRemoteAppModeManager.TAG,
+                        "onTaskRemoved() taskId=" + taskId + ", listener=" + listener);
                 listener.onTaskRemoved(taskId);
             }
         }
@@ -226,7 +258,14 @@ public final class SemRemoteAppModeManager {
                 listener = this.mListener;
             }
             if (listener != null) {
-                Log.d(SemRemoteAppModeManager.TAG, "onTaskPlayed() taskId=" + taskId + ", listener=" + listener + ", displayId=" + displayId);
+                Log.d(
+                        SemRemoteAppModeManager.TAG,
+                        "onTaskPlayed() taskId="
+                                + taskId
+                                + ", listener="
+                                + listener
+                                + ", displayId="
+                                + displayId);
                 listener.onTaskPlayed(taskId, displayId);
             }
         }
@@ -238,7 +277,14 @@ public final class SemRemoteAppModeManager {
                 listener = this.mListener;
             }
             if (listener != null) {
-                Log.d(SemRemoteAppModeManager.TAG, "onTaskTriedToGoToBackground() taskId=" + taskId + ", listener=" + listener + ", displayId=" + displayId);
+                Log.d(
+                        SemRemoteAppModeManager.TAG,
+                        "onTaskTriedToGoToBackground() taskId="
+                                + taskId
+                                + ", listener="
+                                + listener
+                                + ", displayId="
+                                + displayId);
                 listener.onTaskTriedToGoToBackground(taskId, displayId);
             }
         }
@@ -250,7 +296,14 @@ public final class SemRemoteAppModeManager {
                 listener = this.mListener;
             }
             if (listener != null) {
-                Log.d(SemRemoteAppModeManager.TAG, "onTaskDisplayChanged() taskId=" + taskId + ", listener=" + listener + ", displayId=" + newDisplayId);
+                Log.d(
+                        SemRemoteAppModeManager.TAG,
+                        "onTaskDisplayChanged() taskId="
+                                + taskId
+                                + ", listener="
+                                + listener
+                                + ", displayId="
+                                + newDisplayId);
                 listener.onTaskDisplayChanged(taskId, newDisplayId);
             }
         }
@@ -408,7 +461,14 @@ public final class SemRemoteAppModeManager {
                 listener = this.mListener;
             }
             if (listener != null) {
-                Log.d(SemRemoteAppModeManager.TAG, "onRotationChanged() displayId=" + displayId + ", rotation=" + rotation + ", listener=" + listener);
+                Log.d(
+                        SemRemoteAppModeManager.TAG,
+                        "onRotationChanged() displayId="
+                                + displayId
+                                + ", rotation="
+                                + rotation
+                                + ", listener="
+                                + listener);
                 listener.onRotationChanged(displayId, rotation);
             }
         }
@@ -439,9 +499,11 @@ public final class SemRemoteAppModeManager {
                 Log.w(TAG, "registerListener: " + listener + " already registered");
                 return;
             }
-            RotationChangedListenerDelegate delegate = new RotationChangedListenerDelegate(listener);
+            RotationChangedListenerDelegate delegate =
+                    new RotationChangedListenerDelegate(listener);
             try {
-                this.mService.registerRotationChangeListener(delegate, listener.toString(), displayId);
+                this.mService.registerRotationChangeListener(
+                        delegate, listener.toString(), displayId);
                 this.mRotationChangedListeners.put(listener, delegate);
                 Log.i(TAG, "registerRotationChangeListener: " + listener);
             } catch (RemoteException e) {
@@ -459,9 +521,12 @@ public final class SemRemoteAppModeManager {
             if (this.mRotationChangedListeners == null) {
                 return;
             }
-            RotationChangedListenerDelegate delegate = this.mRotationChangedListeners.remove(listener);
+            RotationChangedListenerDelegate delegate =
+                    this.mRotationChangedListeners.remove(listener);
             if (delegate == null) {
-                Log.w(TAG, "unregisterRotationChangeListener: " + listener + " already unregistered");
+                Log.w(
+                        TAG,
+                        "unregisterRotationChangeListener: " + listener + " already unregistered");
                 return;
             }
             if (this.mRotationChangedListeners.isEmpty()) {
@@ -491,7 +556,14 @@ public final class SemRemoteAppModeManager {
                 listener = this.mListener;
             }
             if (listener != null) {
-                Log.d(SemRemoteAppModeManager.TAG, "onSecuredAppLaunched() taskId=" + taskId + ", packageName=" + packageName + ", listener=" + listener);
+                Log.d(
+                        SemRemoteAppModeManager.TAG,
+                        "onSecuredAppLaunched() taskId="
+                                + taskId
+                                + ", packageName="
+                                + packageName
+                                + ", listener="
+                                + listener);
                 listener.onSecuredAppLaunched(taskId, packageName);
             }
         }
@@ -503,7 +575,14 @@ public final class SemRemoteAppModeManager {
                 listener = this.mListener;
             }
             if (listener != null) {
-                Log.d(SemRemoteAppModeManager.TAG, "onSecuredAppRemoved() taskId=" + taskId + ", packageName=" + packageName + ", listener=" + listener);
+                Log.d(
+                        SemRemoteAppModeManager.TAG,
+                        "onSecuredAppRemoved() taskId="
+                                + taskId
+                                + ", packageName="
+                                + packageName
+                                + ", listener="
+                                + listener);
                 listener.onSecuredAppRemoved(taskId, packageName);
             }
         }
@@ -534,7 +613,8 @@ public final class SemRemoteAppModeManager {
                 Log.w(TAG, "registerSecureAppChangedListener: " + listener + " already registered");
                 return;
             }
-            SecureAppChangedListenerDelegate delegate = new SecureAppChangedListenerDelegate(listener);
+            SecureAppChangedListenerDelegate delegate =
+                    new SecureAppChangedListenerDelegate(listener);
             try {
                 this.mService.registerSecureAppChangedListener(delegate, listener.toString());
                 this.mSecureAppChangedListeners.put(listener, delegate);
@@ -554,9 +634,14 @@ public final class SemRemoteAppModeManager {
             if (this.mSecureAppChangedListeners == null) {
                 return;
             }
-            SecureAppChangedListenerDelegate delegate = this.mSecureAppChangedListeners.remove(listener);
+            SecureAppChangedListenerDelegate delegate =
+                    this.mSecureAppChangedListeners.remove(listener);
             if (delegate == null) {
-                Log.w(TAG, "unregisterSecureAppChangedListener: " + listener + " already unregistered");
+                Log.w(
+                        TAG,
+                        "unregisterSecureAppChangedListener: "
+                                + listener
+                                + " already unregistered");
                 return;
             }
             if (this.mSecureAppChangedListeners.isEmpty()) {
@@ -591,7 +676,8 @@ public final class SemRemoteAppModeManager {
         }
     }
 
-    private static class StartActivityInterceptedListenerDelegate extends IStartActivityInterceptListener.Stub {
+    private static class StartActivityInterceptedListenerDelegate
+            extends IStartActivityInterceptListener.Stub {
         private StartActivityInterceptedListener mListener;
 
         StartActivityInterceptedListenerDelegate(StartActivityInterceptedListener listener) {
@@ -599,7 +685,16 @@ public final class SemRemoteAppModeManager {
         }
 
         @Override // com.samsung.android.remoteappmode.IStartActivityInterceptListener
-        public void onStartActivityIntercepted(Intent intent, Bundle activityOptionsBundle, ActivityInfo activityInfo, int interceptedDisplayId, boolean isVisibleTask, int runningTaskId, int runningTaskDisplayId, int interceptReason) throws RemoteException {
+        public void onStartActivityIntercepted(
+                Intent intent,
+                Bundle activityOptionsBundle,
+                ActivityInfo activityInfo,
+                int interceptedDisplayId,
+                boolean isVisibleTask,
+                int runningTaskId,
+                int runningTaskDisplayId,
+                int interceptReason)
+                throws RemoteException {
             StartActivityInterceptedListener listener;
             synchronized (SemRemoteAppModeManager.sLock) {
                 try {
@@ -616,8 +711,23 @@ public final class SemRemoteAppModeManager {
                 }
             }
             if (listener != null) {
-                Log.d(SemRemoteAppModeManager.TAG, "onStartActivityIntercepted() interceptedDisplayId=" + interceptedDisplayId + ", intent=" + intent.toString() + ", listener=" + listener);
-                listener.onStartActivityIntercepted(intent, activityOptionsBundle, activityInfo, interceptedDisplayId, isVisibleTask, runningTaskId, runningTaskDisplayId, interceptReason);
+                Log.d(
+                        SemRemoteAppModeManager.TAG,
+                        "onStartActivityIntercepted() interceptedDisplayId="
+                                + interceptedDisplayId
+                                + ", intent="
+                                + intent.toString()
+                                + ", listener="
+                                + listener);
+                listener.onStartActivityIntercepted(
+                        intent,
+                        activityOptionsBundle,
+                        activityInfo,
+                        interceptedDisplayId,
+                        isVisibleTask,
+                        runningTaskId,
+                        runningTaskDisplayId,
+                        interceptReason);
             }
         }
 
@@ -634,7 +744,8 @@ public final class SemRemoteAppModeManager {
         }
     }
 
-    public void registerStartActivityInterceptedListener(StartActivityInterceptedListener listener) {
+    public void registerStartActivityInterceptedListener(
+            StartActivityInterceptedListener listener) {
         synchronized (sLock) {
             if (listener == null) {
                 Log.w(TAG, "registerListener: Listener is null");
@@ -647,7 +758,8 @@ public final class SemRemoteAppModeManager {
                 Log.w(TAG, "registerListener: " + listener + " already registered");
                 return;
             }
-            StartActivityInterceptedListenerDelegate delegate = new StartActivityInterceptedListenerDelegate(listener);
+            StartActivityInterceptedListenerDelegate delegate =
+                    new StartActivityInterceptedListenerDelegate(listener);
             try {
                 this.mService.registerStartActivityInterceptListener(delegate, listener.toString());
                 this.mStartActivityInterceptedListeners.put(listener, delegate);
@@ -658,7 +770,8 @@ public final class SemRemoteAppModeManager {
         }
     }
 
-    public void unregisterStartActivityInterceptedListener(StartActivityInterceptedListener listener) {
+    public void unregisterStartActivityInterceptedListener(
+            StartActivityInterceptedListener listener) {
         synchronized (sLock) {
             if (listener == null) {
                 Log.w(TAG, "unregisterListener: Listener is null");
@@ -667,7 +780,8 @@ public final class SemRemoteAppModeManager {
             if (this.mStartActivityInterceptedListeners == null) {
                 return;
             }
-            StartActivityInterceptedListenerDelegate delegate = this.mStartActivityInterceptedListeners.remove(listener);
+            StartActivityInterceptedListenerDelegate delegate =
+                    this.mStartActivityInterceptedListeners.remove(listener);
             if (delegate == null) {
                 Log.w(TAG, "unregisterListener: " + listener + " already unregistered");
                 return;
@@ -702,7 +816,8 @@ public final class SemRemoteAppModeManager {
         }
     }
 
-    public boolean sendNotificationAction(StatusBarNotification sbn, int actionIndex, Intent intent) {
+    public boolean sendNotificationAction(
+            StatusBarNotification sbn, int actionIndex, Intent intent) {
         try {
             return this.mService.sendNotificationAction(sbn, actionIndex, intent);
         } catch (RemoteException e) {
@@ -733,7 +848,12 @@ public final class SemRemoteAppModeManager {
                 listener = this.mListener;
             }
             if (listener != null) {
-                Log.d(SemRemoteAppModeManager.TAG, "onRemoteAppModeStateChanged() isEnabled=" + isEnabled + ", listener=" + listener);
+                Log.d(
+                        SemRemoteAppModeManager.TAG,
+                        "onRemoteAppModeStateChanged() isEnabled="
+                                + isEnabled
+                                + ", listener="
+                                + listener);
                 listener.onRemoteAppModeStateChanged(isEnabled);
             }
         }
@@ -786,7 +906,9 @@ public final class SemRemoteAppModeManager {
             }
             RemoteAppModeListenerDelegate delegate = this.mRemoteAppModeListeners.remove(listener);
             if (delegate == null) {
-                Log.w(TAG, "unregisterRemoteAppModeListener: " + listener + " already unregistered");
+                Log.w(
+                        TAG,
+                        "unregisterRemoteAppModeListener: " + listener + " already unregistered");
                 return;
             }
             if (this.mRemoteAppModeListeners.isEmpty()) {

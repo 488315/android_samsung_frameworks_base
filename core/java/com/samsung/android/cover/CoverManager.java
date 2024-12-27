@@ -13,8 +13,9 @@ import android.util.Log;
 import android.util.Slog;
 import android.view.Window;
 import android.view.WindowManager;
-import com.samsung.android.cover.ICoverManager;
+
 import com.samsung.android.sepunion.UnionConstants;
+
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -25,11 +26,14 @@ public class CoverManager {
     public static final int COVER_MODE_SVIEW = 1;
     private static final String FEATURE_COVER = "com.sec.feature.cover";
     private static final String FEATURE_COVER_CLEAR = "com.sec.feature.cover.clearcover";
-    private static final String FEATURE_COVER_CLEAR_CAMERA_VIEW = "com.sec.feature.cover.clearcameraviewcover";
-    private static final String FEATURE_COVER_CLEAR_SIDE_VIEW = "com.sec.feature.cover.clearsideviewcover";
+    private static final String FEATURE_COVER_CLEAR_CAMERA_VIEW =
+            "com.sec.feature.cover.clearcameraviewcover";
+    private static final String FEATURE_COVER_CLEAR_SIDE_VIEW =
+            "com.sec.feature.cover.clearsideviewcover";
     private static final String FEATURE_COVER_FLIP = "com.sec.feature.cover.flip";
     private static final String FEATURE_COVER_LED_BACK = "com.sec.feature.cover.ledbackcover";
-    private static final String FEATURE_COVER_MINI_SVIEW_WALLET = "com.sec.feature.cover.minisviewwalletcover";
+    private static final String FEATURE_COVER_MINI_SVIEW_WALLET =
+            "com.sec.feature.cover.minisviewwalletcover";
     private static final String FEATURE_COVER_NEON = "com.sec.feature.cover.neoncover";
     private static final String FEATURE_COVER_NFCLED = "com.sec.feature.cover.nfcledcover";
     private static final String FEATURE_COVER_SVIEW = "com.sec.feature.cover.sview";
@@ -47,12 +51,18 @@ public class CoverManager {
     private static boolean sIsLEDBackCoverSystemFeatureEnabled = false;
     private static boolean sIsMiniSviewWalletCoverFeatureEnabled = false;
     private static boolean sIsClearCameraViewCoverSystemFeatureEnabled = false;
-    private final CopyOnWriteArrayList<CoverListenerDelegate> mListenerDelegates = new CopyOnWriteArrayList<>();
-    private final CopyOnWriteArrayList<CoverStateListenerDelegate> mCoverStateListenerDelegates = new CopyOnWriteArrayList<>();
-    private final CopyOnWriteArrayList<NfcLedCoverTouchListenerDelegate> mNfcLedCoverTouchListenerDelegates = new CopyOnWriteArrayList<>();
-    private final CopyOnWriteArrayList<LedSystemEventListenerDelegate> mLedSystemEventListenerDelegates = new CopyOnWriteArrayList<>();
-    private final CopyOnWriteArrayList<CoverPowerKeyListenerDelegate> mCoverPowerKeyListenerDelegates = new CopyOnWriteArrayList<>();
-    private final CopyOnWriteArrayList<CoverListenerDelegate> mLcdOffDisableDelegates = new CopyOnWriteArrayList<>();
+    private final CopyOnWriteArrayList<CoverListenerDelegate> mListenerDelegates =
+            new CopyOnWriteArrayList<>();
+    private final CopyOnWriteArrayList<CoverStateListenerDelegate> mCoverStateListenerDelegates =
+            new CopyOnWriteArrayList<>();
+    private final CopyOnWriteArrayList<NfcLedCoverTouchListenerDelegate>
+            mNfcLedCoverTouchListenerDelegates = new CopyOnWriteArrayList<>();
+    private final CopyOnWriteArrayList<LedSystemEventListenerDelegate>
+            mLedSystemEventListenerDelegates = new CopyOnWriteArrayList<>();
+    private final CopyOnWriteArrayList<CoverPowerKeyListenerDelegate>
+            mCoverPowerKeyListenerDelegates = new CopyOnWriteArrayList<>();
+    private final CopyOnWriteArrayList<CoverListenerDelegate> mLcdOffDisableDelegates =
+            new CopyOnWriteArrayList<>();
     private final IBinder mToken = new Binder();
 
     public CoverManager(Context context) {
@@ -71,13 +81,18 @@ public class CoverManager {
             sIsCoverSystemFeatureEnabled = pm.hasSystemFeature("com.sec.feature.cover");
             sIsFilpCoverSystemFeatureEnabled = pm.hasSystemFeature("com.sec.feature.cover.flip");
             sIsSViewCoverSystemFeatureEnabled = pm.hasSystemFeature("com.sec.feature.cover.sview");
-            sIsNfcLedCoverSystemFeatureEnabled = pm.hasSystemFeature("com.sec.feature.cover.nfcledcover");
-            sIsClearCoverSystemFeatureEnabled = pm.hasSystemFeature("com.sec.feature.cover.clearcover");
+            sIsNfcLedCoverSystemFeatureEnabled =
+                    pm.hasSystemFeature("com.sec.feature.cover.nfcledcover");
+            sIsClearCoverSystemFeatureEnabled =
+                    pm.hasSystemFeature("com.sec.feature.cover.clearcover");
             sIsNeonCoverSystemFeatureEnabled = pm.hasSystemFeature(FEATURE_COVER_NEON);
-            sIsClearSideViewCoverSystemFeatureEnabled = pm.hasSystemFeature(FEATURE_COVER_CLEAR_SIDE_VIEW);
+            sIsClearSideViewCoverSystemFeatureEnabled =
+                    pm.hasSystemFeature(FEATURE_COVER_CLEAR_SIDE_VIEW);
             sIsLEDBackCoverSystemFeatureEnabled = pm.hasSystemFeature(FEATURE_COVER_LED_BACK);
-            sIsMiniSviewWalletCoverFeatureEnabled = pm.hasSystemFeature(FEATURE_COVER_MINI_SVIEW_WALLET);
-            sIsClearCameraViewCoverSystemFeatureEnabled = pm.hasSystemFeature(FEATURE_COVER_CLEAR_CAMERA_VIEW);
+            sIsMiniSviewWalletCoverFeatureEnabled =
+                    pm.hasSystemFeature(FEATURE_COVER_MINI_SVIEW_WALLET);
+            sIsClearCameraViewCoverSystemFeatureEnabled =
+                    pm.hasSystemFeature(FEATURE_COVER_CLEAR_CAMERA_VIEW);
             sIsSystemFeatureQueried = true;
         }
     }
@@ -158,7 +173,9 @@ public class CoverManager {
 
     private synchronized ICoverManager getService() {
         if (this.mService == null) {
-            this.mService = ICoverManager.Stub.asInterface(ServiceManager.getService(UnionConstants.SERVICE_COVER));
+            this.mService =
+                    ICoverManager.Stub.asInterface(
+                            ServiceManager.getService(UnionConstants.SERVICE_COVER));
             if (this.mService == null) {
                 Slog.w(TAG, "warning: no COVER_MANAGER_SERVICE");
             }
@@ -214,7 +231,9 @@ public class CoverManager {
         try {
             ICoverManager svc = getService();
             if (svc != null) {
-                ComponentName cm = new ComponentName(this.mContext.getPackageName(), getClass().getCanonicalName());
+                ComponentName cm =
+                        new ComponentName(
+                                this.mContext.getPackageName(), getClass().getCanonicalName());
                 if (coverListener != null) {
                     svc.registerCallback(coverListener, cm);
                     if (!hasDelegate) {
@@ -260,7 +279,9 @@ public class CoverManager {
         try {
             ICoverManager svc = getService();
             if (svc != null) {
-                ComponentName cm = new ComponentName(this.mContext.getPackageName(), getClass().getCanonicalName());
+                ComponentName cm =
+                        new ComponentName(
+                                this.mContext.getPackageName(), getClass().getCanonicalName());
                 if (coverListener != null) {
                     svc.registerListenerCallback(coverListener, cm, 2);
                     if (!hasDelegate) {
@@ -431,16 +452,13 @@ public class CoverManager {
     }
 
     public static class StateListener {
-        public void onCoverStateChanged(CoverState state) {
-        }
+        public void onCoverStateChanged(CoverState state) {}
     }
 
     public static class CoverStateListener {
-        public void onCoverSwitchStateChanged(boolean switchState) {
-        }
+        public void onCoverSwitchStateChanged(boolean switchState) {}
 
-        public void onCoverAttachStateChanged(boolean attached) {
-        }
+        public void onCoverAttachStateChanged(boolean attached) {}
     }
 
     public void registerNfcTouchListener(int type, NfcLedCoverTouchListener listener) {
@@ -458,7 +476,8 @@ public class CoverManager {
         }
         NfcLedCoverTouchListenerDelegate nfcTouchListener = null;
         boolean hasDelegate = false;
-        Iterator<NfcLedCoverTouchListenerDelegate> i = this.mNfcLedCoverTouchListenerDelegates.iterator();
+        Iterator<NfcLedCoverTouchListenerDelegate> i =
+                this.mNfcLedCoverTouchListenerDelegates.iterator();
         while (true) {
             if (!i.hasNext()) {
                 break;
@@ -476,7 +495,9 @@ public class CoverManager {
         try {
             ICoverManager svc = getService();
             if (svc != null) {
-                ComponentName cm = new ComponentName(this.mContext.getPackageName(), getClass().getCanonicalName());
+                ComponentName cm =
+                        new ComponentName(
+                                this.mContext.getPackageName(), getClass().getCanonicalName());
                 if (nfcTouchListener != null) {
                     svc.registerNfcTouchListenerCallback(type, nfcTouchListener, cm);
                     if (!hasDelegate) {
@@ -503,7 +524,8 @@ public class CoverManager {
             return;
         }
         NfcLedCoverTouchListenerDelegate nfcTouchListener = null;
-        Iterator<NfcLedCoverTouchListenerDelegate> i = this.mNfcLedCoverTouchListenerDelegates.iterator();
+        Iterator<NfcLedCoverTouchListenerDelegate> i =
+                this.mNfcLedCoverTouchListenerDelegates.iterator();
         while (true) {
             if (!i.hasNext()) {
                 break;
@@ -597,11 +619,9 @@ public class CoverManager {
     }
 
     public static class NfcLedCoverTouchListener {
-        public void onCoverTouchAccept() {
-        }
+        public void onCoverTouchAccept() {}
 
-        public void onCoverTouchReject() {
-        }
+        public void onCoverTouchReject() {}
     }
 
     public void registerLedSystemListener(LedSystemEventListener listener) {
@@ -620,7 +640,8 @@ public class CoverManager {
         }
         LedSystemEventListenerDelegate ledSystemEventListener = null;
         boolean hasDelegate = false;
-        Iterator<LedSystemEventListenerDelegate> i = this.mLedSystemEventListenerDelegates.iterator();
+        Iterator<LedSystemEventListenerDelegate> i =
+                this.mLedSystemEventListenerDelegates.iterator();
         while (true) {
             if (!i.hasNext()) {
                 break;
@@ -633,12 +654,15 @@ public class CoverManager {
             }
         }
         if (ledSystemEventListener == null) {
-            ledSystemEventListener = new LedSystemEventListenerDelegate(listener, null, this.mContext);
+            ledSystemEventListener =
+                    new LedSystemEventListenerDelegate(listener, null, this.mContext);
         }
         try {
             ICoverManager svc = getService();
             if (svc != null) {
-                ComponentName cm = new ComponentName(this.mContext.getPackageName(), getClass().getCanonicalName());
+                ComponentName cm =
+                        new ComponentName(
+                                this.mContext.getPackageName(), getClass().getCanonicalName());
                 if (ledSystemEventListener != null) {
                     svc.registerNfcTouchListenerCallback(4, ledSystemEventListener, cm);
                     if (!hasDelegate) {
@@ -658,7 +682,10 @@ public class CoverManager {
             return;
         }
         if (!isSupportNfcLedCover()) {
-            Log.w(TAG, "unregisterLedSystemEventListener : This device does not support NFC Led cover");
+            Log.w(
+                    TAG,
+                    "unregisterLedSystemEventListener : This device does not support NFC Led"
+                        + " cover");
             return;
         }
         if (listener == null) {
@@ -666,7 +693,8 @@ public class CoverManager {
             return;
         }
         LedSystemEventListenerDelegate ledSystemEventListener = null;
-        Iterator<LedSystemEventListenerDelegate> i = this.mLedSystemEventListenerDelegates.iterator();
+        Iterator<LedSystemEventListenerDelegate> i =
+                this.mLedSystemEventListenerDelegates.iterator();
         while (true) {
             if (!i.hasNext()) {
                 break;
@@ -693,8 +721,7 @@ public class CoverManager {
     public static class LedSystemEventListener {
         private static final int EVENT_TYPE_SYSTEM = 4;
 
-        public void onSystemCoverEvent(int event, Bundle args) {
-        }
+        public void onSystemCoverEvent(int event, Bundle args) {}
     }
 
     public void registerCoverPowerKeyListener(CoverPowerKeyListener listener) {
@@ -726,12 +753,15 @@ public class CoverManager {
             }
         }
         if (powerKeyEventListener == null) {
-            powerKeyEventListener = new CoverPowerKeyListenerDelegate(listener, null, this.mContext);
+            powerKeyEventListener =
+                    new CoverPowerKeyListenerDelegate(listener, null, this.mContext);
         }
         try {
             ICoverManager svc = getService();
             if (svc != null) {
-                ComponentName cm = new ComponentName(this.mContext.getPackageName(), getClass().getCanonicalName());
+                ComponentName cm =
+                        new ComponentName(
+                                this.mContext.getPackageName(), getClass().getCanonicalName());
                 if (powerKeyEventListener != null) {
                     svc.registerNfcTouchListenerCallback(10, powerKeyEventListener, cm);
                     if (!hasDelegate) {
@@ -787,8 +817,7 @@ public class CoverManager {
     public static class CoverPowerKeyListener {
         private static final int EVENT_TYPE_POWER_KEY = 10;
 
-        public void onPowerKeyPress() {
-        }
+        public void onPowerKeyPress() {}
     }
 
     public boolean disableLcdOffByCover(StateListener listener) {
@@ -819,7 +848,9 @@ public class CoverManager {
         try {
             ICoverManager svc = getService();
             if (svc != null) {
-                ComponentName cm = new ComponentName(this.mContext.getPackageName(), getClass().getCanonicalName());
+                ComponentName cm =
+                        new ComponentName(
+                                this.mContext.getPackageName(), getClass().getCanonicalName());
                 if (svc.disableLcdOffByCover(coverListener, cm)) {
                     this.mLcdOffDisableDelegates.add(coverListener);
                     return true;
@@ -860,7 +891,9 @@ public class CoverManager {
         try {
             ICoverManager svc = getService();
             if (svc != null) {
-                ComponentName cm = new ComponentName(this.mContext.getPackageName(), getClass().getCanonicalName());
+                ComponentName cm =
+                        new ComponentName(
+                                this.mContext.getPackageName(), getClass().getCanonicalName());
                 if (svc.enableLcdOffByCover(coverListener, cm)) {
                     this.mLcdOffDisableDelegates.remove(coverListener);
                     return true;

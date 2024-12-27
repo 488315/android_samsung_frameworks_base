@@ -6,7 +6,9 @@ import android.security.keystore.recovery.KeyDerivationParams;
 import android.security.keystore.recovery.WrappedApplicationKey;
 import android.util.Base64;
 import android.util.Xml;
+
 import com.android.modules.utils.TypedXmlSerializer;
+
 import java.io.OutputStream;
 import java.util.List;
 
@@ -17,28 +19,47 @@ public abstract class KeyChainSnapshotSerializer {
         TypedXmlSerializer resolveSerializer = Xml.resolveSerializer(outputStream);
         resolveSerializer.startDocument((String) null, (Boolean) null);
         resolveSerializer.startTag((String) null, "keyChainSnapshot");
-        writePropertyTag(resolveSerializer, "snapshotVersion", keyChainSnapshot.getSnapshotVersion());
+        writePropertyTag(
+                resolveSerializer, "snapshotVersion", keyChainSnapshot.getSnapshotVersion());
         writePropertyTag(resolveSerializer, "maxAttempts", keyChainSnapshot.getMaxAttempts());
         writePropertyTag(resolveSerializer, "counterId", keyChainSnapshot.getCounterId());
-        writePropertyTag(keyChainSnapshot.getEncryptedRecoveryKeyBlob(), "recoveryKeyMaterial", resolveSerializer);
+        writePropertyTag(
+                keyChainSnapshot.getEncryptedRecoveryKeyBlob(),
+                "recoveryKeyMaterial",
+                resolveSerializer);
         writePropertyTag(keyChainSnapshot.getServerParams(), "serverParams", resolveSerializer);
-        writePropertyTag(keyChainSnapshot.getTrustedHardwareCertPath().getEncoded("PkiPath"), "thmCertPath", resolveSerializer);
-        List<KeyChainProtectionParams> keyChainProtectionParams = keyChainSnapshot.getKeyChainProtectionParams();
+        writePropertyTag(
+                keyChainSnapshot.getTrustedHardwareCertPath().getEncoded("PkiPath"),
+                "thmCertPath",
+                resolveSerializer);
+        List<KeyChainProtectionParams> keyChainProtectionParams =
+                keyChainSnapshot.getKeyChainProtectionParams();
         resolveSerializer.startTag((String) null, "keyChainProtectionParamsList");
         for (KeyChainProtectionParams keyChainProtectionParams2 : keyChainProtectionParams) {
             resolveSerializer.startTag((String) null, "keyChainProtectionParams");
-            writePropertyTag(resolveSerializer, "userSecretType", keyChainProtectionParams2.getUserSecretType());
-            writePropertyTag(resolveSerializer, "lockScreenUiType", keyChainProtectionParams2.getLockScreenUiFormat());
-            KeyDerivationParams keyDerivationParams = keyChainProtectionParams2.getKeyDerivationParams();
+            writePropertyTag(
+                    resolveSerializer,
+                    "userSecretType",
+                    keyChainProtectionParams2.getUserSecretType());
+            writePropertyTag(
+                    resolveSerializer,
+                    "lockScreenUiType",
+                    keyChainProtectionParams2.getLockScreenUiFormat());
+            KeyDerivationParams keyDerivationParams =
+                    keyChainProtectionParams2.getKeyDerivationParams();
             resolveSerializer.startTag((String) null, "keyDerivationParams");
             writePropertyTag(resolveSerializer, "algorithm", keyDerivationParams.getAlgorithm());
             writePropertyTag(keyDerivationParams.getSalt(), "salt", resolveSerializer);
-            writePropertyTag(resolveSerializer, "memoryDifficulty", keyDerivationParams.getMemoryDifficulty());
+            writePropertyTag(
+                    resolveSerializer,
+                    "memoryDifficulty",
+                    keyDerivationParams.getMemoryDifficulty());
             resolveSerializer.endTag((String) null, "keyDerivationParams");
             resolveSerializer.endTag((String) null, "keyChainProtectionParams");
         }
         resolveSerializer.endTag((String) null, "keyChainProtectionParamsList");
-        List<WrappedApplicationKey> wrappedApplicationKeys = keyChainSnapshot.getWrappedApplicationKeys();
+        List<WrappedApplicationKey> wrappedApplicationKeys =
+                keyChainSnapshot.getWrappedApplicationKeys();
         resolveSerializer.startTag((String) null, "applicationKeysList");
         for (WrappedApplicationKey wrappedApplicationKey : wrappedApplicationKeys) {
             resolveSerializer.startTag((String) null, "applicationKey");
@@ -46,7 +67,10 @@ public abstract class KeyChainSnapshotSerializer {
             resolveSerializer.startTag((String) null, "alias");
             resolveSerializer.text(alias);
             resolveSerializer.endTag((String) null, "alias");
-            writePropertyTag(wrappedApplicationKey.getEncryptedKeyMaterial(), "keyMaterial", resolveSerializer);
+            writePropertyTag(
+                    wrappedApplicationKey.getEncryptedKeyMaterial(),
+                    "keyMaterial",
+                    resolveSerializer);
             writePropertyTag(wrappedApplicationKey.getMetadata(), "keyMetadata", resolveSerializer);
             resolveSerializer.endTag((String) null, "applicationKey");
         }
@@ -61,7 +85,8 @@ public abstract class KeyChainSnapshotSerializer {
         typedXmlSerializer.endTag((String) null, str);
     }
 
-    public static void writePropertyTag(byte[] bArr, String str, TypedXmlSerializer typedXmlSerializer) {
+    public static void writePropertyTag(
+            byte[] bArr, String str, TypedXmlSerializer typedXmlSerializer) {
         if (bArr == null) {
             return;
         }

@@ -3,6 +3,7 @@ package com.android.server.pm.parsing.pkg;
 import android.content.pm.dex.DexMetadataHelper;
 import android.content.pm.parsing.result.ParseResult;
 import android.content.pm.parsing.result.ParseTypeImpl;
+
 import com.android.internal.pm.parsing.PackageParserException;
 import com.android.internal.pm.parsing.pkg.PackageImpl;
 import com.android.internal.pm.pkg.component.ParsedActivity;
@@ -13,6 +14,7 @@ import com.android.internal.util.ArrayUtils;
 import com.android.server.SystemConfig;
 import com.android.server.pm.pkg.AndroidPackage;
 import com.android.server.pm.pkg.PackageStateInternal;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -34,7 +36,8 @@ public abstract class AndroidPackageUtils {
         return arrayList;
     }
 
-    public static int getHiddenApiEnforcementPolicy(AndroidPackage androidPackage, PackageStateInternal packageStateInternal) {
+    public static int getHiddenApiEnforcementPolicy(
+            AndroidPackage androidPackage, PackageStateInternal packageStateInternal) {
         if (androidPackage == null) {
             return 2;
         }
@@ -42,7 +45,12 @@ public abstract class AndroidPackageUtils {
             return 0;
         }
         if (packageStateInternal.isSystem()) {
-            return (androidPackage.isNonSdkApiRequested() || SystemConfig.getInstance().mHiddenApiPackageWhitelist.contains(androidPackage.getPackageName())) ? 0 : 2;
+            return (androidPackage.isNonSdkApiRequested()
+                            || SystemConfig.getInstance()
+                                    .mHiddenApiPackageWhitelist
+                                    .contains(androidPackage.getPackageName()))
+                    ? 0
+                    : 2;
         }
         return 2;
     }
@@ -90,23 +98,38 @@ public abstract class AndroidPackageUtils {
                 return true;
             }
         }
-        return androidPackage.getBackupAgentName() != null && Objects.equals(str, androidPackage.getBackupAgentName());
+        return androidPackage.getBackupAgentName() != null
+                && Objects.equals(str, androidPackage.getBackupAgentName());
     }
 
     public static boolean isLibrary(AndroidPackage androidPackage) {
-        return (androidPackage.getSdkLibraryName() == null && androidPackage.getStaticSharedLibraryName() == null && androidPackage.getLibraryNames().isEmpty()) ? false : true;
+        return (androidPackage.getSdkLibraryName() == null
+                        && androidPackage.getStaticSharedLibraryName() == null
+                        && androidPackage.getLibraryNames().isEmpty())
+                ? false
+                : true;
     }
 
     public static void validatePackageDexMetadata(AndroidPackage androidPackage) {
-        Collection values = DexMetadataHelper.buildPackageApkToDexMetadataMap(getAllCodePaths(androidPackage)).values();
+        Collection values =
+                DexMetadataHelper.buildPackageApkToDexMetadataMap(getAllCodePaths(androidPackage))
+                        .values();
         String packageName = androidPackage.getPackageName();
         long longVersionCode = androidPackage.getLongVersionCode();
         ParseTypeImpl forDefaultParsing = ParseTypeImpl.forDefaultParsing();
         Iterator it = values.iterator();
         while (it.hasNext()) {
-            ParseResult validateDexMetadataFile = DexMetadataHelper.validateDexMetadataFile(forDefaultParsing.reset(), (String) it.next(), packageName, longVersionCode);
+            ParseResult validateDexMetadataFile =
+                    DexMetadataHelper.validateDexMetadataFile(
+                            forDefaultParsing.reset(),
+                            (String) it.next(),
+                            packageName,
+                            longVersionCode);
             if (validateDexMetadataFile.isError()) {
-                throw new PackageParserException(validateDexMetadataFile.getErrorCode(), validateDexMetadataFile.getErrorMessage(), validateDexMetadataFile.getException());
+                throw new PackageParserException(
+                        validateDexMetadataFile.getErrorCode(),
+                        validateDexMetadataFile.getErrorMessage(),
+                        validateDexMetadataFile.getException());
             }
         }
     }

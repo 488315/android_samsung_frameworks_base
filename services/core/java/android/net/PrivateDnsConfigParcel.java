@@ -7,6 +7,7 @@ import android.hardware.broadcastradio.DabTableEntry$$ExternalSyntheticOutline0;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -52,12 +53,31 @@ public class PrivateDnsConfigParcel implements Parcelable {
             return false;
         }
         PrivateDnsConfigParcel privateDnsConfigParcel = (PrivateDnsConfigParcel) obj;
-        return Objects.deepEquals(this.hostname, privateDnsConfigParcel.hostname) && Objects.deepEquals(this.ips, privateDnsConfigParcel.ips) && Objects.deepEquals(Integer.valueOf(this.privateDnsMode), Integer.valueOf(privateDnsConfigParcel.privateDnsMode)) && Objects.deepEquals(this.dohName, privateDnsConfigParcel.dohName) && Objects.deepEquals(this.dohIps, privateDnsConfigParcel.dohIps) && Objects.deepEquals(this.dohPath, privateDnsConfigParcel.dohPath) && Objects.deepEquals(Integer.valueOf(this.dohPort), Integer.valueOf(privateDnsConfigParcel.dohPort));
+        return Objects.deepEquals(this.hostname, privateDnsConfigParcel.hostname)
+                && Objects.deepEquals(this.ips, privateDnsConfigParcel.ips)
+                && Objects.deepEquals(
+                        Integer.valueOf(this.privateDnsMode),
+                        Integer.valueOf(privateDnsConfigParcel.privateDnsMode))
+                && Objects.deepEquals(this.dohName, privateDnsConfigParcel.dohName)
+                && Objects.deepEquals(this.dohIps, privateDnsConfigParcel.dohIps)
+                && Objects.deepEquals(this.dohPath, privateDnsConfigParcel.dohPath)
+                && Objects.deepEquals(
+                        Integer.valueOf(this.dohPort),
+                        Integer.valueOf(privateDnsConfigParcel.dohPort));
     }
 
     /* JADX WARN: Multi-variable type inference failed */
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(this.hostname, this.ips, Integer.valueOf(this.privateDnsMode), this.dohName, this.dohIps, this.dohPath, Integer.valueOf(this.dohPort)).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                this.hostname,
+                                this.ips,
+                                Integer.valueOf(this.privateDnsMode),
+                                this.dohName,
+                                this.dohIps,
+                                this.dohPath,
+                                Integer.valueOf(this.dohPort))
+                        .toArray());
     }
 
     public final void readFromParcel(Parcel parcel) {
@@ -82,19 +102,23 @@ public class PrivateDnsConfigParcel implements Parcelable {
                                     if (parcel.dataPosition() - dataPosition < readInt) {
                                         this.dohPort = parcel.readInt();
                                         if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                            throw new BadParcelableException("Overflow in the size of parcelable");
+                                            throw new BadParcelableException(
+                                                    "Overflow in the size of parcelable");
                                         }
                                         parcel.setDataPosition(dataPosition + readInt);
                                         return;
                                     }
                                     if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                        throw new BadParcelableException("Overflow in the size of parcelable");
+                                        throw new BadParcelableException(
+                                                "Overflow in the size of parcelable");
                                     }
                                 } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");
@@ -120,7 +144,42 @@ public class PrivateDnsConfigParcel implements Parcelable {
 
     public String toString() {
         StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
-        return AmFmBandRange$$ExternalSyntheticOutline0.m(stringJoiner, AmFmBandRange$$ExternalSyntheticOutline0.m(DabTableEntry$$ExternalSyntheticOutline0.m(this.dohPath, "dohPort: ", AmFmRegionConfig$$ExternalSyntheticOutline0.m(Arrays.toString(this.dohIps), "dohPath: ", DabTableEntry$$ExternalSyntheticOutline0.m(this.dohName, "dohIps: ", AmFmBandRange$$ExternalSyntheticOutline0.m(AmFmRegionConfig$$ExternalSyntheticOutline0.m(Arrays.toString(this.ips), "privateDnsMode: ", DabTableEntry$$ExternalSyntheticOutline0.m(this.hostname, "ips: ", new StringBuilder("hostname: "), stringJoiner), stringJoiner), this.privateDnsMode, stringJoiner, "dohName: "), stringJoiner), stringJoiner), stringJoiner), this.dohPort, stringJoiner, "PrivateDnsConfigParcel"));
+        return AmFmBandRange$$ExternalSyntheticOutline0.m(
+                stringJoiner,
+                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                        DabTableEntry$$ExternalSyntheticOutline0.m(
+                                this.dohPath,
+                                "dohPort: ",
+                                AmFmRegionConfig$$ExternalSyntheticOutline0.m(
+                                        Arrays.toString(this.dohIps),
+                                        "dohPath: ",
+                                        DabTableEntry$$ExternalSyntheticOutline0.m(
+                                                this.dohName,
+                                                "dohIps: ",
+                                                AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                                        AmFmRegionConfig$$ExternalSyntheticOutline0
+                                                                .m(
+                                                                        Arrays.toString(this.ips),
+                                                                        "privateDnsMode: ",
+                                                                        DabTableEntry$$ExternalSyntheticOutline0
+                                                                                .m(
+                                                                                        this
+                                                                                                .hostname,
+                                                                                        "ips: ",
+                                                                                        new StringBuilder(
+                                                                                                "hostname:"
+                                                                                                    + " "),
+                                                                                        stringJoiner),
+                                                                        stringJoiner),
+                                                        this.privateDnsMode,
+                                                        stringJoiner,
+                                                        "dohName: "),
+                                                stringJoiner),
+                                        stringJoiner),
+                                stringJoiner),
+                        this.dohPort,
+                        stringJoiner,
+                        "PrivateDnsConfigParcel"));
     }
 
     @Override // android.os.Parcelable
@@ -133,7 +192,9 @@ public class PrivateDnsConfigParcel implements Parcelable {
         parcel.writeString(this.dohName);
         parcel.writeStringArray(this.dohIps);
         parcel.writeString(this.dohPath);
-        int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.dohPort, dataPosition);
+        int m =
+                SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                        parcel, this.dohPort, dataPosition);
         SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
     }
 }

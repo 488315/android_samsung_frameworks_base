@@ -5,8 +5,7 @@ class DERFactory {
     static final ASN1Sequence EMPTY_SEQUENCE = new DERSequence();
     static final ASN1Set EMPTY_SET = new DERSet();
 
-    DERFactory() {
-    }
+    DERFactory() {}
 
     static ASN1Sequence createSequence(ASN1EncodableVector v) {
         if (v.size() < 1) {

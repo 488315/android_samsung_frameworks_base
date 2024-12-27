@@ -16,6 +16,11 @@ class TalkbackShortcutController {
     }
 
     public final boolean isTalkBackShortcutGestureEnabled() {
-        return Settings.System.getIntForUser(this.mContext.getContentResolver(), "wear_accessibility_gesture_enabled", 0, -2) == 1;
+        return Settings.System.getIntForUser(
+                        this.mContext.getContentResolver(),
+                        "wear_accessibility_gesture_enabled",
+                        0,
+                        -2)
+                == 1;
     }
 }

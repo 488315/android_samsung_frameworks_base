@@ -13,8 +13,10 @@ import android.util.proto.ProtoInputStream;
 import android.util.proto.ProtoOutputStream;
 import android.util.proto.WireTypeMismatchException;
 import android.view.Surface;
+
 import com.samsung.android.rune.CoreRune;
 import com.samsung.android.wallpaperbackup.GenerateXML;
+
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -31,19 +33,21 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
     private static final int ALWAYS_ON_TOP_OFF = 2;
     private static final int ALWAYS_ON_TOP_ON = 1;
     private static final int ALWAYS_ON_TOP_UNDEFINED = 0;
-    public static final Parcelable.Creator<WindowConfiguration> CREATOR = new Parcelable.Creator<WindowConfiguration>() { // from class: android.app.WindowConfiguration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WindowConfiguration createFromParcel(Parcel in) {
-            return new WindowConfiguration(in);
-        }
+    public static final Parcelable.Creator<WindowConfiguration> CREATOR =
+            new Parcelable.Creator<
+                    WindowConfiguration>() { // from class: android.app.WindowConfiguration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WindowConfiguration createFromParcel(Parcel in) {
+                    return new WindowConfiguration(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WindowConfiguration[] newArray(int size) {
-            return new WindowConfiguration[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WindowConfiguration[] newArray(int size) {
+                    return new WindowConfiguration[size];
+                }
+            };
     public static final int DEX_TASK_DOCKING_LEFT = 1;
     public static final int DEX_TASK_DOCKING_NONE = 0;
     public static final int DEX_TASK_DOCKING_RIGHT = 2;
@@ -122,39 +126,28 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
     private int mWindowingMode;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ActivityType {
-    }
+    public @interface ActivityType {}
 
-    private @interface AlwaysOnTop {
-    }
+    private @interface AlwaysOnTop {}
 
-    public @interface DexTaskDocking {
-    }
+    public @interface DexTaskDocking {}
 
-    public @interface EmbedActivityMode {
-    }
+    public @interface EmbedActivityMode {}
 
-    private @interface FlexPanelMode {
-    }
+    private @interface FlexPanelMode {}
 
-    public @interface FreeformTaskPinning {
-    }
+    public @interface FreeformTaskPinning {}
 
-    public @interface FreeformTranslucent {
-    }
+    public @interface FreeformTranslucent {}
 
-    public @interface StagePosition {
-    }
+    public @interface StagePosition {}
 
-    public @interface StageType {
-    }
+    public @interface StageType {}
 
-    public @interface WindowConfig {
-    }
+    public @interface WindowConfig {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WindowingMode {
-    }
+    public @interface WindowingMode {}
 
     public void setPopOverState(int state) {
         this.mPopOverState = state;
@@ -434,7 +427,11 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
             return;
         }
         if (ActivityThread.isSystem() && this.mActivityType != 0 && activityType != 0) {
-            throw new IllegalStateException("Can't change activity type once set: " + this + " activityType=" + activityTypeToString(activityType));
+            throw new IllegalStateException(
+                    "Can't change activity type once set: "
+                            + this
+                            + " activityType="
+                            + activityTypeToString(activityType));
         }
         this.mActivityType = activityType;
     }
@@ -498,7 +495,8 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
             setFlexPanelMode(other.mFlexPanelMode);
         }
         setPopOverState(other.mPopOverState);
-        setCompatSandboxValues(other.mCompatSandboxFlags, other.mCompatSandboxScale, other.mCompatSandboxBounds);
+        setCompatSandboxValues(
+                other.mCompatSandboxFlags, other.mCompatSandboxScale, other.mCompatSandboxBounds);
         setDexTaskDockingState(other.mDexTaskDockingState);
         if (CoreRune.MW_CAPTION_SHELL_FREEFORM_PINNING) {
             setFreeformTaskPinningState(other.mFreeformTaskPinningState);
@@ -587,11 +585,15 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
                 setStagePosition(deltaStagePosition);
             }
         }
-        if (CoreRune.MW_SPLIT_FLEX_PANEL_MODE && delta.mFlexPanelMode != 0 && this.mFlexPanelMode != delta.mFlexPanelMode) {
+        if (CoreRune.MW_SPLIT_FLEX_PANEL_MODE
+                && delta.mFlexPanelMode != 0
+                && this.mFlexPanelMode != delta.mFlexPanelMode) {
             changed |= 524288;
             setFlexPanelMode(delta.mFlexPanelMode);
         }
-        if (CoreRune.MW_EMBED_ACTIVITY_MODE && delta.mEmbedActivityMode != 0 && this.mEmbedActivityMode != delta.mEmbedActivityMode) {
+        if (CoreRune.MW_EMBED_ACTIVITY_MODE
+                && delta.mEmbedActivityMode != 0
+                && this.mEmbedActivityMode != delta.mEmbedActivityMode) {
             setEmbedActivityMode(delta.mEmbedActivityMode);
         }
         if (delta.mPopOverState != 0 && this.mPopOverState != delta.mPopOverState) {
@@ -599,17 +601,20 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
         }
         boolean compatSandboxChanged = false;
         int flags = this.mCompatSandboxFlags;
-        if (delta.mCompatSandboxFlags != 0 && this.mCompatSandboxFlags != delta.mCompatSandboxFlags) {
+        if (delta.mCompatSandboxFlags != 0
+                && this.mCompatSandboxFlags != delta.mCompatSandboxFlags) {
             compatSandboxChanged = true;
             flags = delta.mCompatSandboxFlags;
         }
         float scale = this.mCompatSandboxScale;
-        if (delta.mCompatSandboxScale != -1.0f && this.mCompatSandboxScale != delta.mCompatSandboxScale) {
+        if (delta.mCompatSandboxScale != -1.0f
+                && this.mCompatSandboxScale != delta.mCompatSandboxScale) {
             compatSandboxChanged = true;
             scale = delta.mCompatSandboxScale;
         }
         Rect bounds = this.mCompatSandboxBounds;
-        if (delta.mCompatSandboxBounds != null && !delta.mCompatSandboxBounds.equals(this.mCompatSandboxBounds)) {
+        if (delta.mCompatSandboxBounds != null
+                && !delta.mCompatSandboxBounds.equals(this.mCompatSandboxBounds)) {
             compatSandboxChanged = true;
             bounds = delta.mCompatSandboxBounds;
         }
@@ -617,11 +622,14 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
             changed |= 33554432;
             setCompatSandboxValues(flags, scale, bounds);
         }
-        if (delta.mDexTaskDockingState != -1 && this.mDexTaskDockingState != delta.mDexTaskDockingState) {
+        if (delta.mDexTaskDockingState != -1
+                && this.mDexTaskDockingState != delta.mDexTaskDockingState) {
             changed |= 16777216;
             setDexTaskDockingState(delta.mDexTaskDockingState);
         }
-        if (CoreRune.MW_CAPTION_SHELL_FREEFORM_PINNING && delta.mFreeformTaskPinningState != 0 && this.mFreeformTaskPinningState != delta.mFreeformTaskPinningState) {
+        if (CoreRune.MW_CAPTION_SHELL_FREEFORM_PINNING
+                && delta.mFreeformTaskPinningState != 0
+                && this.mFreeformTaskPinningState != delta.mFreeformTaskPinningState) {
             setFreeformTaskPinningState(delta.mFreeformTaskPinningState);
         }
         return changed;
@@ -674,25 +682,31 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
 
     public long diff(WindowConfiguration other, boolean compareUndefined) {
         long changes = this.mBounds.equals(other.mBounds) ? 0L : 0 | 1;
-        if ((compareUndefined || other.mAppBounds != null) && this.mAppBounds != other.mAppBounds && (this.mAppBounds == null || !this.mAppBounds.equals(other.mAppBounds))) {
+        if ((compareUndefined || other.mAppBounds != null)
+                && this.mAppBounds != other.mAppBounds
+                && (this.mAppBounds == null || !this.mAppBounds.equals(other.mAppBounds))) {
             changes |= 2;
         }
         if (!this.mMaxBounds.equals(other.mMaxBounds)) {
             changes |= 4;
         }
-        if ((compareUndefined || other.mWindowingMode != 0) && this.mWindowingMode != other.mWindowingMode) {
+        if ((compareUndefined || other.mWindowingMode != 0)
+                && this.mWindowingMode != other.mWindowingMode) {
             changes |= 8;
         }
-        if ((compareUndefined || other.mActivityType != 0) && this.mActivityType != other.mActivityType) {
+        if ((compareUndefined || other.mActivityType != 0)
+                && this.mActivityType != other.mActivityType) {
             changes |= 16;
         }
-        if ((compareUndefined || other.mAlwaysOnTop != 0) && this.mAlwaysOnTop != other.mAlwaysOnTop) {
+        if ((compareUndefined || other.mAlwaysOnTop != 0)
+                && this.mAlwaysOnTop != other.mAlwaysOnTop) {
             changes |= 32;
         }
         if ((compareUndefined || other.mRotation != -1) && this.mRotation != other.mRotation) {
             changes |= 64;
         }
-        if ((compareUndefined || other.mDisplayRotation != -1) && this.mDisplayRotation != other.mDisplayRotation) {
+        if ((compareUndefined || other.mDisplayRotation != -1)
+                && this.mDisplayRotation != other.mDisplayRotation) {
             changes |= 128;
         }
         if (compareUndefined || other.mStage != 0) {
@@ -705,26 +719,37 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
                 changes |= 2097152;
             }
         }
-        if (CoreRune.MW_EMBED_ACTIVITY_MODE && ((compareUndefined || other.mEmbedActivityMode != 0) && this.mEmbedActivityMode != other.mEmbedActivityMode)) {
+        if (CoreRune.MW_EMBED_ACTIVITY_MODE
+                && ((compareUndefined || other.mEmbedActivityMode != 0)
+                        && this.mEmbedActivityMode != other.mEmbedActivityMode)) {
             changes |= 8388608;
         }
-        if (CoreRune.MW_SPLIT_FLEX_PANEL_MODE && ((compareUndefined || other.mFlexPanelMode != 0) && this.mFlexPanelMode != other.mFlexPanelMode)) {
+        if (CoreRune.MW_SPLIT_FLEX_PANEL_MODE
+                && ((compareUndefined || other.mFlexPanelMode != 0)
+                        && this.mFlexPanelMode != other.mFlexPanelMode)) {
             changes |= 524288;
         }
-        if ((compareUndefined || other.mCompatSandboxFlags != 0) && this.mCompatSandboxFlags != other.mCompatSandboxFlags) {
+        if ((compareUndefined || other.mCompatSandboxFlags != 0)
+                && this.mCompatSandboxFlags != other.mCompatSandboxFlags) {
             changes |= 33554432;
-        } else if ((compareUndefined || other.mCompatSandboxScale != -1.0f) && this.mCompatSandboxScale != other.mCompatSandboxScale) {
+        } else if ((compareUndefined || other.mCompatSandboxScale != -1.0f)
+                && this.mCompatSandboxScale != other.mCompatSandboxScale) {
             changes |= 33554432;
-        } else if ((compareUndefined || other.mCompatSandboxBounds != null) && this.mCompatSandboxBounds != other.mCompatSandboxBounds && (this.mCompatSandboxBounds == null || !this.mCompatSandboxBounds.equals(other.mCompatSandboxBounds))) {
+        } else if ((compareUndefined || other.mCompatSandboxBounds != null)
+                && this.mCompatSandboxBounds != other.mCompatSandboxBounds
+                && (this.mCompatSandboxBounds == null
+                        || !this.mCompatSandboxBounds.equals(other.mCompatSandboxBounds))) {
             changes |= 33554432;
         }
-        if ((compareUndefined || other.mDexTaskDockingState != -1) && this.mDexTaskDockingState != other.mDexTaskDockingState) {
+        if ((compareUndefined || other.mDexTaskDockingState != -1)
+                && this.mDexTaskDockingState != other.mDexTaskDockingState) {
             changes |= 16777216;
         }
         if (!CoreRune.MW_CAPTION_SHELL_FREEFORM_PINNING) {
             return changes;
         }
-        if ((compareUndefined || other.mFreeformTaskPinningState != 0) && this.mFreeformTaskPinningState != other.mFreeformTaskPinningState) {
+        if ((compareUndefined || other.mFreeformTaskPinningState != 0)
+                && this.mFreeformTaskPinningState != other.mFreeformTaskPinningState) {
             return changes | 8;
         }
         return changes;
@@ -814,10 +839,12 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
         if (n20 != 0) {
             return n20;
         }
-        if (CoreRune.MW_SPLIT_FLEX_PANEL_MODE && (n2 = this.mFlexPanelMode - that.mFlexPanelMode) != 0) {
+        if (CoreRune.MW_SPLIT_FLEX_PANEL_MODE
+                && (n2 = this.mFlexPanelMode - that.mFlexPanelMode) != 0) {
             return n2;
         }
-        if (CoreRune.MW_EMBED_ACTIVITY_MODE && (n = this.mEmbedActivityMode - that.mEmbedActivityMode) != 0) {
+        if (CoreRune.MW_EMBED_ACTIVITY_MODE
+                && (n = this.mEmbedActivityMode - that.mEmbedActivityMode) != 0) {
             return n;
         }
         int n21 = this.mPopOverState - that.mPopOverState;
@@ -825,7 +852,15 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
             return n21;
         }
         int n22 = this.mDexTaskDockingState - that.mDexTaskDockingState;
-        return n22 != 0 ? n22 : (!CoreRune.MW_CAPTION_SHELL_FREEFORM_PINNING || (n22 = this.mFreeformTaskPinningState - that.mFreeformTaskPinningState) == 0) ? n22 : n22;
+        return n22 != 0
+                ? n22
+                : (!CoreRune.MW_CAPTION_SHELL_FREEFORM_PINNING
+                                || (n22 =
+                                                this.mFreeformTaskPinningState
+                                                        - that.mFreeformTaskPinningState)
+                                        == 0)
+                        ? n22
+                        : n22;
     }
 
     public boolean equals(Object that) {
@@ -842,7 +877,31 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
     }
 
     public int hashCode() {
-        int result = (((((((((((((((((0 * 31) + Objects.hashCode(this.mAppBounds)) * 31) + Objects.hashCode(this.mBounds)) * 31) + Objects.hashCode(this.mMaxBounds)) * 31) + this.mWindowingMode) * 31) + this.mActivityType) * 31) + this.mAlwaysOnTop) * 31) + this.mRotation) * 31) + this.mDisplayRotation) * 31) + this.mStage;
+        int result =
+                (((((((((((((((((0 * 31) + Objects.hashCode(this.mAppBounds)) * 31)
+                                                                                                                                        + Objects
+                                                                                                                                                .hashCode(
+                                                                                                                                                        this
+                                                                                                                                                                .mBounds))
+                                                                                                                                * 31)
+                                                                                                                        + Objects
+                                                                                                                                .hashCode(
+                                                                                                                                        this
+                                                                                                                                                .mMaxBounds))
+                                                                                                                * 31)
+                                                                                                        + this
+                                                                                                                .mWindowingMode)
+                                                                                                * 31)
+                                                                                        + this
+                                                                                                .mActivityType)
+                                                                                * 31)
+                                                                        + this.mAlwaysOnTop)
+                                                                * 31)
+                                                        + this.mRotation)
+                                                * 31)
+                                        + this.mDisplayRotation)
+                                * 31)
+                        + this.mStage;
         if (CoreRune.MW_SPLIT_FLEX_PANEL_MODE) {
             return (result * 31) + this.mFlexPanelMode;
         }
@@ -850,14 +909,58 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
     }
 
     public String toString() {
-        StringBuilder append = new StringBuilder().append("{ mBounds=").append(this.mBounds).append(" mAppBounds=").append(this.mAppBounds).append(" mMaxBounds=").append(this.mMaxBounds).append(" mDisplayRotation=");
+        StringBuilder append =
+                new StringBuilder()
+                        .append("{ mBounds=")
+                        .append(this.mBounds)
+                        .append(" mAppBounds=")
+                        .append(this.mAppBounds)
+                        .append(" mMaxBounds=")
+                        .append(this.mMaxBounds)
+                        .append(" mDisplayRotation=");
         int i = this.mRotation;
         String str = KeyboardLayout.LAYOUT_TYPE_UNDEFINED;
-        StringBuilder append2 = append.append(i == -1 ? KeyboardLayout.LAYOUT_TYPE_UNDEFINED : Surface.rotationToString(this.mDisplayRotation)).append(" mWindowingMode=").append(windowingModeToString(this.mWindowingMode)).append(" mActivityType=").append(activityTypeToString(this.mActivityType)).append(" mAlwaysOnTop=").append(alwaysOnTopToString(this.mAlwaysOnTop)).append(" mRotation=");
+        StringBuilder append2 =
+                append.append(
+                                i == -1
+                                        ? KeyboardLayout.LAYOUT_TYPE_UNDEFINED
+                                        : Surface.rotationToString(this.mDisplayRotation))
+                        .append(" mWindowingMode=")
+                        .append(windowingModeToString(this.mWindowingMode))
+                        .append(" mActivityType=")
+                        .append(activityTypeToString(this.mActivityType))
+                        .append(" mAlwaysOnTop=")
+                        .append(alwaysOnTopToString(this.mAlwaysOnTop))
+                        .append(" mRotation=");
         if (this.mRotation != -1) {
             str = Surface.rotationToString(this.mRotation);
         }
-        return append2.append(str).append(" mStageConfig=").append(stageConfigToString(this.mStage)).append(CoreRune.MW_EMBED_ACTIVITY_MODE ? " mEmbedActivityMode=" + embedActivityModeToString(this.mEmbedActivityMode) : "").append(" mPopOver=").append(popOverStateToString(this.mPopOverState)).append(CoreRune.MW_SPLIT_FLEX_PANEL_MODE ? " mFlexPanelMode=" + flexPanelModeToString(this.mFlexPanelMode) : "").append(compatSandboxInfoToString()).append(" mDexTaskDockingState=").append(dexTaskDockingStateToString(this.mDexTaskDockingState)).append("").append(CoreRune.MW_CAPTION_SHELL_FREEFORM_PINNING ? " mFreeformTaskPinningState=" + freeformTaskPinningToString(this.mFreeformTaskPinningState) : "").append("}").toString();
+        return append2.append(str)
+                .append(" mStageConfig=")
+                .append(stageConfigToString(this.mStage))
+                .append(
+                        CoreRune.MW_EMBED_ACTIVITY_MODE
+                                ? " mEmbedActivityMode="
+                                        + embedActivityModeToString(this.mEmbedActivityMode)
+                                : "")
+                .append(" mPopOver=")
+                .append(popOverStateToString(this.mPopOverState))
+                .append(
+                        CoreRune.MW_SPLIT_FLEX_PANEL_MODE
+                                ? " mFlexPanelMode=" + flexPanelModeToString(this.mFlexPanelMode)
+                                : "")
+                .append(compatSandboxInfoToString())
+                .append(" mDexTaskDockingState=")
+                .append(dexTaskDockingStateToString(this.mDexTaskDockingState))
+                .append("")
+                .append(
+                        CoreRune.MW_CAPTION_SHELL_FREEFORM_PINNING
+                                ? " mFreeformTaskPinningState="
+                                        + freeformTaskPinningToString(
+                                                this.mFreeformTaskPinningState)
+                                : "")
+                .append("}")
+                .toString();
     }
 
     private static String translucentToString(int translucent) {
@@ -900,7 +1003,8 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
         protoOutputStream.end(token);
     }
 
-    public void readFromProto(ProtoInputStream proto, long fieldId) throws IOException, WireTypeMismatchException {
+    public void readFromProto(ProtoInputStream proto, long fieldId)
+            throws IOException, WireTypeMismatchException {
         long token = proto.start(fieldId);
         while (proto.nextField() != -1) {
             try {
@@ -982,8 +1086,14 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
         return (activityType == 4 || activityType == 5) ? false : true;
     }
 
-    public static boolean areConfigurationsEqualForDisplay(Configuration newConfig, Configuration oldConfig) {
-        return newConfig.windowConfiguration.getMaxBounds().equals(oldConfig.windowConfiguration.getMaxBounds()) && newConfig.windowConfiguration.getDisplayRotation() == oldConfig.windowConfiguration.getDisplayRotation();
+    public static boolean areConfigurationsEqualForDisplay(
+            Configuration newConfig, Configuration oldConfig) {
+        return newConfig
+                        .windowConfiguration
+                        .getMaxBounds()
+                        .equals(oldConfig.windowConfiguration.getMaxBounds())
+                && newConfig.windowConfiguration.getDisplayRotation()
+                        == oldConfig.windowConfiguration.getDisplayRotation();
     }
 
     public static String windowingModeToString(int windowingMode) {
@@ -1177,7 +1287,8 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
     }
 
     public void setCompatSandboxValues(WindowConfiguration other) {
-        setCompatSandboxValues(other.mCompatSandboxFlags, other.mCompatSandboxScale, other.mCompatSandboxBounds);
+        setCompatSandboxValues(
+                other.mCompatSandboxFlags, other.mCompatSandboxScale, other.mCompatSandboxBounds);
     }
 
     public void setCompatSandboxValues(int flags, float scale, Rect bounds) {
@@ -1230,11 +1341,21 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
     }
 
     private String compatSandboxInfoToString() {
-        return (this.mCompatSandboxFlags != 0 ? " mCompatSandboxFlags=0x" + this.mCompatSandboxFlags : "") + (this.mCompatSandboxScale != 1.0f ? " mCompatSandboxScale=" + this.mCompatSandboxScale : "") + (this.mCompatSandboxBounds != null ? " mCompatSandboxScale=" + this.mCompatSandboxBounds : "");
+        return (this.mCompatSandboxFlags != 0
+                        ? " mCompatSandboxFlags=0x" + this.mCompatSandboxFlags
+                        : "")
+                + (this.mCompatSandboxScale != 1.0f
+                        ? " mCompatSandboxScale=" + this.mCompatSandboxScale
+                        : "")
+                + (this.mCompatSandboxBounds != null
+                        ? " mCompatSandboxScale=" + this.mCompatSandboxBounds
+                        : "");
     }
 
     public void overrideUndefinedFrom(WindowConfiguration delta) {
-        if (CoreRune.MW_CAPTION_SHELL_FREEFORM_PINNING && this.mFreeformTaskPinningState == 0 && delta.mFreeformTaskPinningState == 1) {
+        if (CoreRune.MW_CAPTION_SHELL_FREEFORM_PINNING
+                && this.mFreeformTaskPinningState == 0
+                && delta.mFreeformTaskPinningState == 1) {
             this.mFreeformTaskPinningState = delta.mFreeformTaskPinningState;
         }
         if (this.mPopOverState == 0 && delta.mPopOverState == 2) {

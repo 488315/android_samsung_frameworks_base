@@ -15,10 +15,10 @@ import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.security.keystore2.AndroidKeyStoreLoadStoreParameter;
 import android.util.Slog;
+
 import com.android.internal.widget.RebootEscrowListener;
-import com.android.server.locksettings.RebootEscrowProviderServerBasedImpl;
-import com.android.server.locksettings.ResumeOnRebootServiceProvider;
 import com.android.server.pm.UserManagerInternal;
+
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.security.KeyStore;
@@ -48,18 +48,21 @@ public final class RebootEscrowManager {
     public final RebootEscrowEventLog mEventLog = new RebootEscrowEventLog();
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface Callbacks {
-    }
+    public interface Callbacks {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Injector {
         public final Context mContext;
-        public final RebootEscrowKeyStoreManager mKeyStoreManager = new RebootEscrowKeyStoreManager();
+        public final RebootEscrowKeyStoreManager mKeyStoreManager =
+                new RebootEscrowKeyStoreManager();
         public RebootEscrowProviderInterface mRebootEscrowProvider;
         public final LockSettingsStorage mStorage;
         public final UserManagerInternal mUserManagerInternal;
 
-        public Injector(Context context, LockSettingsStorage lockSettingsStorage, UserManagerInternal userManagerInternal) {
+        public Injector(
+                Context context,
+                LockSettingsStorage lockSettingsStorage,
+                UserManagerInternal userManagerInternal) {
             this.mContext = context;
             this.mStorage = lockSettingsStorage;
             this.mUserManagerInternal = userManagerInternal;
@@ -73,12 +76,16 @@ public final class RebootEscrowManager {
                 if (serverBasedResumeOnReboot()) {
                     Slog.i("RebootEscrowManager", "Using server based resume on reboot");
                     Context context = this.mContext;
-                    RebootEscrowProviderServerBasedImpl.Injector injector = new RebootEscrowProviderServerBasedImpl.Injector();
+                    RebootEscrowProviderServerBasedImpl.Injector injector =
+                            new RebootEscrowProviderServerBasedImpl.Injector();
                     injector.mServiceConnection = null;
-                    ResumeOnRebootServiceProvider resumeOnRebootServiceProvider = new ResumeOnRebootServiceProvider(context, context.getPackageManager());
+                    ResumeOnRebootServiceProvider resumeOnRebootServiceProvider =
+                            new ResumeOnRebootServiceProvider(context, context.getPackageManager());
                     Intent intent = new Intent();
                     intent.setAction("android.service.resumeonreboot.ResumeOnRebootService");
-                    String str = SystemProperties.get("persist.sys.resume_on_reboot_provider_package", "");
+                    String str =
+                            SystemProperties.get(
+                                    "persist.sys.resume_on_reboot_provider_package", "");
                     if (str.isEmpty()) {
                         String str2 = ResumeOnRebootServiceProvider.PROVIDER_PACKAGE;
                         if (str2 != null && !str2.equals("")) {
@@ -90,7 +97,11 @@ public final class RebootEscrowManager {
                         intent.setPackage(str);
                         i = 4;
                     }
-                    Iterator<ResolveInfo> it = resumeOnRebootServiceProvider.mPackageManager.queryIntentServices(intent, i).iterator();
+                    Iterator<ResolveInfo> it =
+                            resumeOnRebootServiceProvider
+                                    .mPackageManager
+                                    .queryIntentServices(intent, i)
+                                    .iterator();
                     while (true) {
                         if (!it.hasNext()) {
                             serviceInfo = null;
@@ -98,22 +109,37 @@ public final class RebootEscrowManager {
                         }
                         ResolveInfo next = it.next();
                         ServiceInfo serviceInfo2 = next.serviceInfo;
-                        if (serviceInfo2 != null && "android.permission.BIND_RESUME_ON_REBOOT_SERVICE".equals(serviceInfo2.permission)) {
+                        if (serviceInfo2 != null
+                                && "android.permission.BIND_RESUME_ON_REBOOT_SERVICE"
+                                        .equals(serviceInfo2.permission)) {
                             serviceInfo = next.serviceInfo;
                             break;
                         }
                     }
-                    ResumeOnRebootServiceProvider.ResumeOnRebootServiceConnection resumeOnRebootServiceConnection = serviceInfo == null ? null : new ResumeOnRebootServiceProvider.ResumeOnRebootServiceConnection(resumeOnRebootServiceProvider.mContext, serviceInfo.getComponentName());
+                    ResumeOnRebootServiceProvider.ResumeOnRebootServiceConnection
+                            resumeOnRebootServiceConnection =
+                                    serviceInfo == null
+                                            ? null
+                                            : new ResumeOnRebootServiceProvider
+                                                    .ResumeOnRebootServiceConnection(
+                                                    resumeOnRebootServiceProvider.mContext,
+                                                    serviceInfo.getComponentName());
                     injector.mServiceConnection = resumeOnRebootServiceConnection;
                     if (resumeOnRebootServiceConnection == null) {
-                        Slog.e("RebootEscrowProviderServerBased", "Failed to resolve resume on reboot server service.");
+                        Slog.e(
+                                "RebootEscrowProviderServerBased",
+                                "Failed to resolve resume on reboot server service.");
                     }
-                    rebootEscrowProviderHalImpl = new RebootEscrowProviderServerBasedImpl(this.mStorage, injector);
+                    rebootEscrowProviderHalImpl =
+                            new RebootEscrowProviderServerBasedImpl(this.mStorage, injector);
                 } else {
                     Slog.i("RebootEscrowManager", "Using HAL based resume on reboot");
                     rebootEscrowProviderHalImpl = new RebootEscrowProviderHalImpl();
                 }
-                this.mRebootEscrowProvider = rebootEscrowProviderHalImpl.hasRebootEscrowSupport() ? rebootEscrowProviderHalImpl : null;
+                this.mRebootEscrowProvider =
+                        rebootEscrowProviderHalImpl.hasRebootEscrowSupport()
+                                ? rebootEscrowProviderHalImpl
+                                : null;
             }
             return this.mRebootEscrowProvider;
         }
@@ -127,7 +153,9 @@ public final class RebootEscrowManager {
         }
 
         public final boolean serverBasedResumeOnReboot() {
-            if (this.mContext.getPackageManager().hasSystemFeature("android.hardware.reboot_escrow")) {
+            if (this.mContext
+                    .getPackageManager()
+                    .hasSystemFeature("android.hardware.reboot_escrow")) {
                 return DeviceConfig.getBoolean("ota", "server_based_ror_enabled", false);
             }
             return true;
@@ -153,7 +181,11 @@ public final class RebootEscrowManager {
         public int mNextIndex = 0;
     }
 
-    public RebootEscrowManager(Injector injector, Callbacks callbacks, LockSettingsStorage lockSettingsStorage, Handler handler) {
+    public RebootEscrowManager(
+            Injector injector,
+            Callbacks callbacks,
+            LockSettingsStorage lockSettingsStorage,
+            Handler handler) {
         this.mInjector = injector;
         this.mCallbacks = callbacks;
         this.mStorage = lockSettingsStorage;
@@ -175,7 +207,8 @@ public final class RebootEscrowManager {
         this.mRebootEscrowWanted = false;
         setRebootEscrowReady(false);
         Injector injector = this.mInjector;
-        RebootEscrowProviderInterface createRebootEscrowProviderIfNeeded = injector.createRebootEscrowProviderIfNeeded();
+        RebootEscrowProviderInterface createRebootEscrowProviderIfNeeded =
+                injector.createRebootEscrowProviderIfNeeded();
         if (createRebootEscrowProviderIfNeeded == null) {
             Slog.w("RebootEscrowManager", "RebootEscrowProvider is unavailable for clear request");
         } else {
@@ -210,18 +243,28 @@ public final class RebootEscrowManager {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void loadRebootEscrowDataWithRetry(final android.os.Handler r17, int r18, final java.util.List r19, final java.util.List r20) {
+    public final void loadRebootEscrowDataWithRetry(
+            final android.os.Handler r17,
+            int r18,
+            final java.util.List r19,
+            final java.util.List r20) {
         /*
             Method dump skipped, instructions count: 482
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.locksettings.RebootEscrowManager.loadRebootEscrowDataWithRetry(android.os.Handler, int, java.util.List, java.util.List):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.locksettings.RebootEscrowManager.loadRebootEscrowDataWithRetry(android.os.Handler,"
+                    + " int, java.util.List, java.util.List):void");
     }
 
     public final void onEscrowRestoreComplete(boolean z, int i, Handler handler) {
         ConnectivityManager connectivityManager;
         int i2 = this.mStorage.getInt(-1, 0, REBOOT_ESCROW_ARMED_KEY);
-        int i3 = Settings.Global.getInt(this.mInjector.mContext.getContentResolver(), "boot_count", 0) - i2;
+        int i3 =
+                Settings.Global.getInt(
+                                this.mInjector.mContext.getContentResolver(), "boot_count", 0)
+                        - i2;
         if (z || (i2 != -1 && i3 <= 5)) {
             reportMetricOnRestoreComplete(z, i, handler);
         }
@@ -231,13 +274,21 @@ public final class RebootEscrowManager {
                 keyStore.load(new AndroidKeyStoreLoadStoreParameter(120));
                 keyStore.deleteEntry("reboot_escrow_key_store_encryption_key");
             } catch (IOException | GeneralSecurityException e) {
-                Slog.e("RebootEscrowKeyStoreManager", "Unable to delete encryption key in keystore.", e);
+                Slog.e(
+                        "RebootEscrowKeyStoreManager",
+                        "Unable to delete encryption key in keystore.",
+                        e);
             }
         }
         this.mInjector.mRebootEscrowProvider = null;
         clearMetricsStorage();
         AnonymousClass1 anonymousClass1 = this.mNetworkCallback;
-        if (anonymousClass1 != null && (connectivityManager = (ConnectivityManager) this.mInjector.mContext.getSystemService(ConnectivityManager.class)) != null) {
+        if (anonymousClass1 != null
+                && (connectivityManager =
+                                (ConnectivityManager)
+                                        this.mInjector.mContext.getSystemService(
+                                                ConnectivityManager.class))
+                        != null) {
             connectivityManager.unregisterNetworkCallback(anonymousClass1);
         }
         PowerManager.WakeLock wakeLock = this.mWakeLock;
@@ -247,7 +298,9 @@ public final class RebootEscrowManager {
     }
 
     public final void onGetRebootEscrowKeyFailed(List list, int i, Handler handler) {
-        Slog.w("RebootEscrowManager", "Had reboot escrow data for users, but no key; removing escrow storage.");
+        Slog.w(
+                "RebootEscrowManager",
+                "Had reboot escrow data for users, but no key; removing escrow storage.");
         Iterator it = list.iterator();
         while (it.hasNext()) {
             int i2 = ((UserInfo) it.next()).id;
@@ -258,9 +311,9 @@ public final class RebootEscrowManager {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:16:0x005b, code lost:
-    
-        if (r0.equals(r4) != false) goto L21;
-     */
+
+       if (r0.equals(r4) != false) goto L21;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -351,18 +404,23 @@ public final class RebootEscrowManager {
             r12.setLoadEscrowDataErrorCode(r11, r15)
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.locksettings.RebootEscrowManager.reportMetricOnRestoreComplete(boolean, int, android.os.Handler):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.locksettings.RebootEscrowManager.reportMetricOnRestoreComplete(boolean,"
+                    + " int, android.os.Handler):void");
     }
 
     public final void setLoadEscrowDataErrorCode(final int i, Handler handler) {
         this.mInjector.getClass();
         if (DeviceConfig.getBoolean("ota", "wait_for_internet_ror", false)) {
-            handler.post(new Runnable() { // from class: com.android.server.locksettings.RebootEscrowManager$$ExternalSyntheticLambda4
-                @Override // java.lang.Runnable
-                public final void run() {
-                    RebootEscrowManager.this.mLoadEscrowDataErrorCode = i;
-                }
-            });
+            handler.post(
+                    new Runnable() { // from class:
+                                     // com.android.server.locksettings.RebootEscrowManager$$ExternalSyntheticLambda4
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            RebootEscrowManager.this.mLoadEscrowDataErrorCode = i;
+                        }
+                    });
         } else {
             this.mLoadEscrowDataErrorCode = i;
         }
@@ -370,13 +428,15 @@ public final class RebootEscrowManager {
 
     public final void setRebootEscrowReady(final boolean z) {
         if (this.mRebootEscrowReady != z) {
-            this.mHandler.post(new Runnable() { // from class: com.android.server.locksettings.RebootEscrowManager$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    RebootEscrowManager rebootEscrowManager = RebootEscrowManager.this;
-                    rebootEscrowManager.mRebootEscrowListener.onPreparedForReboot(z);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // com.android.server.locksettings.RebootEscrowManager$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            RebootEscrowManager rebootEscrowManager = RebootEscrowManager.this;
+                            rebootEscrowManager.mRebootEscrowListener.onPreparedForReboot(z);
+                        }
+                    });
         }
         this.mRebootEscrowReady = z;
     }

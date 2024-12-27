@@ -10,10 +10,11 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
-import com.android.server.wm.DexCompatBoundsProvider;
-import com.android.server.wm.LaunchParamsController;
+
 import com.samsung.android.knoxguard.service.utils.Constants;
+
 import java.io.PrintWriter;
 import java.util.function.BooleanSupplier;
 import java.util.function.IntSupplier;
@@ -47,7 +48,9 @@ public final class DexCompatController implements IController {
                 Method dump skipped, instructions count: 284
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.DexCompatController.H.handleMessage(android.os.Message):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.wm.DexCompatController.H.handleMessage(android.os.Message):void");
         }
     }
 
@@ -72,17 +75,23 @@ public final class DexCompatController implements IController {
 
     public final void changeWindowingModeIfNeeded(Task task, ActivityRecord activityRecord) {
         Task rootTask;
-        if (activityRecord == null || !task.isDexCompatEnabled() || (rootTask = task.getRootTask()) == null) {
+        if (activityRecord == null
+                || !task.isDexCompatEnabled()
+                || (rootTask = task.getRootTask()) == null) {
             return;
         }
-        LaunchParamsController.LaunchParams launchParams = new LaunchParamsController.LaunchParams();
-        this.mAtm.mTaskSupervisor.mLaunchParamsController.calculate(task, null, activityRecord, null, null, null, 3, launchParams, null);
+        LaunchParamsController.LaunchParams launchParams =
+                new LaunchParamsController.LaunchParams();
+        this.mAtm.mTaskSupervisor.mLaunchParamsController.calculate(
+                task, null, activityRecord, null, null, null, 3, launchParams, null);
         int windowingMode = rootTask.getWindowingMode();
         int i = launchParams.mWindowingMode;
         if (i == 0 || i == windowingMode) {
             return;
         }
-        StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(windowingMode, "[DexCompat] changeWindowingModeIfNeeded: prev=", ", next=");
+        StringBuilder m =
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        windowingMode, "[DexCompat] changeWindowingModeIfNeeded: prev=", ", next=");
         m.append(launchParams.mWindowingMode);
         m.append(", task=");
         m.append(task);
@@ -96,7 +105,9 @@ public final class DexCompatController implements IController {
         ActivityTaskManagerService activityTaskManagerService = this.mAtm;
         int dexModeLocked = activityTaskManagerService.mDexController.getDexModeLocked();
         if (dexModeLocked != 0) {
-            DisplayContent displayContent = activityTaskManagerService.mRootWindowContainer.getDisplayContent(dexModeLocked == 1 ? 0 : 2);
+            DisplayContent displayContent =
+                    activityTaskManagerService.mRootWindowContainer.getDisplayContent(
+                            dexModeLocked == 1 ? 0 : 2);
             if (displayContent == null) {
                 return;
             }
@@ -107,7 +118,8 @@ public final class DexCompatController implements IController {
             StringBuilder sb = new StringBuilder("  DexCompat isDefaultSizeCompatible=");
             sb.append(min <= 0 || min > 1400);
             printWriter.println(sb.toString());
-            printWriter.println("  DexCompat DefaultSize=(" + defaultWidth + "x" + defaultHeight + ")");
+            printWriter.println(
+                    "  DexCompat DefaultSize=(" + defaultWidth + "x" + defaultHeight + ")");
         }
         printWriter.println();
     }
@@ -116,7 +128,9 @@ public final class DexCompatController implements IController {
         int orientation;
         DexCompatBoundsProvider compatBoundsProvider = getCompatBoundsProvider(i);
         if (compatBoundsProvider == null) {
-            Slog.w("DexCompatController", "rotateDexCompatTaskLocked: cannot found bounds provider, " + task);
+            Slog.w(
+                    "DexCompatController",
+                    "rotateDexCompatTaskLocked: cannot found bounds provider, " + task);
             return;
         }
         ActivityRecord topMostActivity = task.getTopMostActivity();
@@ -126,14 +140,22 @@ public final class DexCompatController implements IController {
                 orientation = topMostActivity.info.screenOrientation;
             }
         } else {
-            orientation = activityRecord != null ? activityRecord.getRootTask() != null ? activityRecord.getOrientation() : activityRecord.info.screenOrientation : -1;
+            orientation =
+                    activityRecord != null
+                            ? activityRecord.getRootTask() != null
+                                    ? activityRecord.getOrientation()
+                                    : activityRecord.info.screenOrientation
+                            : -1;
         }
         if (task.getDisplayContent() == null) {
             return;
         }
         compatBoundsProvider.mTask = task;
         compatBoundsProvider.mIsPortrait = compatBoundsProvider.isPortrait(orientation);
-        compatBoundsProvider.mTask.getDisplayContent().getStableRect(compatBoundsProvider.mStableBounds);
+        compatBoundsProvider
+                .mTask
+                .getDisplayContent()
+                .getStableRect(compatBoundsProvider.mStableBounds);
         compatBoundsProvider.getBounds(rect);
     }
 
@@ -169,7 +191,12 @@ public final class DexCompatController implements IController {
         }
         int requestedOrientation = activityRecord.getRequestedOrientation();
         char c = 2;
-        char c2 = ActivityInfo.isFixedOrientationPortrait(requestedOrientation) ? (char) 1 : ActivityInfo.isFixedOrientationLandscape(requestedOrientation) ? (char) 2 : (char) 0;
+        char c2 =
+                ActivityInfo.isFixedOrientationPortrait(requestedOrientation)
+                        ? (char) 1
+                        : ActivityInfo.isFixedOrientationLandscape(requestedOrientation)
+                                ? (char) 2
+                                : (char) 0;
         if (c2 == 0) {
             return false;
         }
@@ -189,9 +216,12 @@ public final class DexCompatController implements IController {
         if (task == null || !task.isDexCompatEnabled()) {
             return;
         }
-        DexCompatBoundsProvider compatBoundsProvider = getCompatBoundsProvider(task.mDexCompatUiMode);
+        DexCompatBoundsProvider compatBoundsProvider =
+                getCompatBoundsProvider(task.mDexCompatUiMode);
         if (compatBoundsProvider == null) {
-            Slog.w("DexCompatController", "rotateDexCompatTaskLocked: cannot found bounds provider, " + task);
+            Slog.w(
+                    "DexCompatController",
+                    "rotateDexCompatTaskLocked: cannot found bounds provider, " + task);
             return;
         }
         Rect rect = new Rect();
@@ -200,7 +230,10 @@ public final class DexCompatController implements IController {
         if (task.getDisplayContent() != null) {
             compatBoundsProvider.mTask = task;
             compatBoundsProvider.mIsPortrait = compatBoundsProvider.isPortrait(i4);
-            compatBoundsProvider.mTask.getDisplayContent().getStableRect(compatBoundsProvider.mStableBounds);
+            compatBoundsProvider
+                    .mTask
+                    .getDisplayContent()
+                    .getStableRect(compatBoundsProvider.mStableBounds);
             compatBoundsProvider.getBounds(rect);
         }
         Task rootTask = task.getRootTask();
@@ -219,10 +252,14 @@ public final class DexCompatController implements IController {
             point = activityTaskManagerService.mDexController.mDexDisplaySize;
         } else {
             point = new Point();
-            activityTaskManagerService.mRootWindowContainer.mDefaultDisplay.mDisplay.getRealSize(point);
+            activityTaskManagerService.mRootWindowContainer.mDefaultDisplay.mDisplay.getRealSize(
+                    point);
         }
         int width = (point.x - rect.width()) / 2;
-        if ((task.mDexCompatUiMode == 3 && compatBoundsProvider.mIsPortrait && activityRecord.getRequestedConfigurationOrientation() == 1) || bounds.isEmpty()) {
+        if ((task.mDexCompatUiMode == 3
+                        && compatBoundsProvider.mIsPortrait
+                        && activityRecord.getRequestedConfigurationOrientation() == 1)
+                || bounds.isEmpty()) {
             i = 0;
         } else {
             width = bounds.left;
@@ -249,7 +286,11 @@ public final class DexCompatController implements IController {
         activityTaskManagerService.resizeTask(task.mTaskId, rect, 0);
     }
 
-    public final void scheduleStartActivityAsToggleFreeform(Task task, BooleanSupplier booleanSupplier, IntSupplier intSupplier, Supplier supplier) {
+    public final void scheduleStartActivityAsToggleFreeform(
+            Task task,
+            BooleanSupplier booleanSupplier,
+            IntSupplier intSupplier,
+            Supplier supplier) {
         ActivityTaskManagerService activityTaskManagerService;
         ActivityRecord rootActivity = task.getRootActivity(true, false);
         if (rootActivity == null) {
@@ -285,7 +326,12 @@ public final class DexCompatController implements IController {
             if (windowProcessController != null) {
                 String str2 = windowProcessController.mName;
                 if (Constants.SYSTEMUI_PACKAGE_NAME.equals(str2) || "system:ui".equals(str2)) {
-                    Slog.w("DexCompatController", "startActivityForDexRestart: cannot kill systemui process, root=" + rootActivity + ", task=" + task);
+                    Slog.w(
+                            "DexCompatController",
+                            "startActivityForDexRestart: cannot kill systemui process, root="
+                                    + rootActivity
+                                    + ", task="
+                                    + task);
                     request.intent = intent;
                     request.callingUid = task.mCallingUid;
                     request.callingPackage = task.mCallingPackage;
@@ -297,13 +343,27 @@ public final class DexCompatController implements IController {
                     request.userId = task.mUserId;
                     activityTaskManagerService = this.mAtm;
                     activityTaskManagerService.deferWindowLayout();
-                    activityTaskManagerService.mTaskSupervisor.removeTaskById(task.mTaskId, request.callingUid, request.realCallingPid, str, false, true, false);
+                    activityTaskManagerService.mTaskSupervisor.removeTaskById(
+                            task.mTaskId,
+                            request.callingUid,
+                            request.realCallingPid,
+                            str,
+                            false,
+                            true,
+                            false);
                     H h = this.mH;
                     h.sendMessage(h.obtainMessage(0, displayId, 0, request));
                     return;
                 }
             }
-            activityTaskManagerService.mTaskSupervisor.removeTaskById(task.mTaskId, request.callingUid, request.realCallingPid, str, false, true, false);
+            activityTaskManagerService.mTaskSupervisor.removeTaskById(
+                    task.mTaskId,
+                    request.callingUid,
+                    request.realCallingPid,
+                    str,
+                    false,
+                    true,
+                    false);
             H h2 = this.mH;
             h2.sendMessage(h2.obtainMessage(0, displayId, 0, request));
             return;
@@ -330,7 +390,10 @@ public final class DexCompatController implements IController {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean shouldBeApplyDexCompatConfigurationLocked(com.android.server.wm.ActivityRecord r6, android.content.pm.ApplicationInfo r7, int r8) {
+    public final boolean shouldBeApplyDexCompatConfigurationLocked(
+            com.android.server.wm.ActivityRecord r6,
+            android.content.pm.ApplicationInfo r7,
+            int r8) {
         /*
             r5 = this;
             r0 = 0
@@ -423,6 +486,9 @@ public final class DexCompatController implements IController {
         Lab:
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.DexCompatController.shouldBeApplyDexCompatConfigurationLocked(com.android.server.wm.ActivityRecord, android.content.pm.ApplicationInfo, int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.DexCompatController.shouldBeApplyDexCompatConfigurationLocked(com.android.server.wm.ActivityRecord,"
+                    + " android.content.pm.ApplicationInfo, int):boolean");
     }
 }

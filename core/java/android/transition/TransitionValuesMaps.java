@@ -12,6 +12,5 @@ class TransitionValuesMaps {
     LongSparseArray<View> itemIdValues = new LongSparseArray<>();
     ArrayMap<String, View> nameValues = new ArrayMap<>();
 
-    TransitionValuesMaps() {
-    }
+    TransitionValuesMaps() {}
 }

@@ -5,8 +5,10 @@ import android.net.MacAddress;
 import android.net.wifi.ScanResult;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Parcelling;
+
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -20,7 +22,10 @@ public final class WifiDeviceFilter implements DeviceFilter<ScanResult> {
 
     @Override // android.companion.DeviceFilter
     public boolean matches(ScanResult device) {
-        return BluetoothDeviceFilterUtils.matchesName(getNamePattern(), device) && (this.mBssid == null || MacAddress.fromString(device.BSSID).matches(this.mBssid, this.mBssidMask));
+        return BluetoothDeviceFilterUtils.matchesName(getNamePattern(), device)
+                && (this.mBssid == null
+                        || MacAddress.fromString(device.BSSID)
+                                .matches(this.mBssid, this.mBssidMask));
     }
 
     @Override // android.companion.DeviceFilter
@@ -37,7 +42,8 @@ public final class WifiDeviceFilter implements DeviceFilter<ScanResult> {
         this.mNamePattern = namePattern;
         this.mBssid = bssid;
         this.mBssidMask = bssidMask;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBssidMask);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBssidMask);
     }
 
     public Pattern getNamePattern() {
@@ -60,7 +66,9 @@ public final class WifiDeviceFilter implements DeviceFilter<ScanResult> {
             return false;
         }
         WifiDeviceFilter that = (WifiDeviceFilter) o;
-        if (Objects.equals(this.mNamePattern, that.mNamePattern) && Objects.equals(this.mBssid, that.mBssid) && Objects.equals(this.mBssidMask, that.mBssidMask)) {
+        if (Objects.equals(this.mNamePattern, that.mNamePattern)
+                && Objects.equals(this.mBssid, that.mBssid)
+                && Objects.equals(this.mBssidMask, that.mBssidMask)) {
             return true;
         }
         return false;
@@ -68,7 +76,8 @@ public final class WifiDeviceFilter implements DeviceFilter<ScanResult> {
 
     public int hashCode() {
         int _hash = (1 * 31) + Objects.hashCode(this.mNamePattern);
-        return (((_hash * 31) + Objects.hashCode(this.mBssid)) * 31) + Objects.hashCode(this.mBssidMask);
+        return (((_hash * 31) + Objects.hashCode(this.mBssid)) * 31)
+                + Objects.hashCode(this.mBssidMask);
     }
 
     static {
@@ -76,19 +85,21 @@ public final class WifiDeviceFilter implements DeviceFilter<ScanResult> {
         if (sParcellingForNamePattern == null) {
             sParcellingForNamePattern = Parcelling.Cache.put(new Parcelling.BuiltIn.ForPattern());
         }
-        CREATOR = new Parcelable.Creator<WifiDeviceFilter>() { // from class: android.companion.WifiDeviceFilter.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public WifiDeviceFilter[] newArray(int size) {
-                return new WifiDeviceFilter[size];
-            }
+        CREATOR =
+                new Parcelable.Creator<
+                        WifiDeviceFilter>() { // from class: android.companion.WifiDeviceFilter.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public WifiDeviceFilter[] newArray(int size) {
+                        return new WifiDeviceFilter[size];
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public WifiDeviceFilter createFromParcel(Parcel in) {
-                return new WifiDeviceFilter(in);
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public WifiDeviceFilter createFromParcel(Parcel in) {
+                        return new WifiDeviceFilter(in);
+                    }
+                };
     }
 
     @Override // android.os.Parcelable
@@ -113,12 +124,14 @@ public final class WifiDeviceFilter implements DeviceFilter<ScanResult> {
     WifiDeviceFilter(Parcel in) {
         byte flg = in.readByte();
         Pattern namePattern = sParcellingForNamePattern.unparcel(in);
-        MacAddress bssid = (flg & 2) == 0 ? null : (MacAddress) in.readTypedObject(MacAddress.CREATOR);
+        MacAddress bssid =
+                (flg & 2) == 0 ? null : (MacAddress) in.readTypedObject(MacAddress.CREATOR);
         MacAddress bssidMask = (MacAddress) in.readTypedObject(MacAddress.CREATOR);
         this.mNamePattern = namePattern;
         this.mBssid = bssid;
         this.mBssidMask = bssidMask;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBssidMask);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBssidMask);
     }
 
     public static final class Builder {
@@ -165,7 +178,8 @@ public final class WifiDeviceFilter implements DeviceFilter<ScanResult> {
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 8) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }

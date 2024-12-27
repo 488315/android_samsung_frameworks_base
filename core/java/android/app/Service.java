@@ -13,13 +13,15 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.view.contentcapture.ContentCaptureManager;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes.dex */
-public abstract class Service extends ContextWrapper implements ComponentCallbacks2, ContentCaptureManager.ContentCaptureClient {
+public abstract class Service extends ContextWrapper
+        implements ComponentCallbacks2, ContentCaptureManager.ContentCaptureClient {
     public static final int START_CONTINUATION_MASK = 15;
     public static final int START_FLAG_REDELIVERY = 1;
     public static final int START_FLAG_RETRY = 2;
@@ -30,12 +32,12 @@ public abstract class Service extends ContextWrapper implements ComponentCallbac
     public static final int START_TASK_REMOVED_COMPLETE = 1000;
     public static final int STOP_FOREGROUND_DETACH = 2;
 
-    @Deprecated
-    public static final int STOP_FOREGROUND_LEGACY = 0;
+    @Deprecated public static final int STOP_FOREGROUND_LEGACY = 0;
     public static final int STOP_FOREGROUND_REMOVE = 1;
     private static final String TAG = "Service";
     private static final String TRACE_TRACK_NAME_FOREGROUND_SERVICE = "FGS";
-    private static final ArrayMap<String, StackTrace> sStartForegroundServiceStackTraces = new ArrayMap<>();
+    private static final ArrayMap<String, StackTrace> sStartForegroundServiceStackTraces =
+            new ArrayMap<>();
     private IActivityManager mActivityManager;
     private Application mApplication;
     private String mClassName;
@@ -46,16 +48,13 @@ public abstract class Service extends ContextWrapper implements ComponentCallbac
     private IBinder mToken;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StartArgFlags {
-    }
+    public @interface StartArgFlags {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StartResult {
-    }
+    public @interface StartResult {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StopForegroundSelector {
-    }
+    public @interface StopForegroundSelector {}
 
     public abstract IBinder onBind(Intent intent);
 
@@ -75,42 +74,34 @@ public abstract class Service extends ContextWrapper implements ComponentCallbac
         return this.mApplication;
     }
 
-    public void onCreate() {
-    }
+    public void onCreate() {}
 
     @Deprecated
-    public void onStart(Intent intent, int startId) {
-    }
+    public void onStart(Intent intent, int startId) {}
 
     public int onStartCommand(Intent intent, int i, int i2) {
         onStart(intent, i2);
         return !this.mStartCompatibility ? 1 : 0;
     }
 
-    public void onDestroy() {
-    }
+    public void onDestroy() {}
 
     @Override // android.content.ComponentCallbacks
-    public void onConfigurationChanged(Configuration newConfig) {
-    }
+    public void onConfigurationChanged(Configuration newConfig) {}
 
     @Override // android.content.ComponentCallbacks
-    public void onLowMemory() {
-    }
+    public void onLowMemory() {}
 
     @Override // android.content.ComponentCallbacks2
-    public void onTrimMemory(int level) {
-    }
+    public void onTrimMemory(int level) {}
 
     public boolean onUnbind(Intent intent) {
         return false;
     }
 
-    public void onRebind(Intent intent) {
-    }
+    public void onRebind(Intent intent) {}
 
-    public void onTaskRemoved(Intent rootIntent) {
-    }
+    public void onTaskRemoved(Intent rootIntent) {}
 
     public final void stopSelf() {
         stopSelf(-1);
@@ -121,7 +112,8 @@ public abstract class Service extends ContextWrapper implements ComponentCallbac
             return;
         }
         try {
-            this.mActivityManager.stopServiceToken(new ComponentName(this, this.mClassName), this.mToken, startId);
+            this.mActivityManager.stopServiceToken(
+                    new ComponentName(this, this.mClassName), this.mToken, startId);
         } catch (RemoteException e) {
         }
     }
@@ -131,7 +123,8 @@ public abstract class Service extends ContextWrapper implements ComponentCallbac
             return false;
         }
         try {
-            return this.mActivityManager.stopServiceToken(new ComponentName(this, this.mClassName), this.mToken, startId);
+            return this.mActivityManager.stopServiceToken(
+                    new ComponentName(this, this.mClassName), this.mToken, startId);
         } catch (RemoteException e) {
             return false;
         }
@@ -152,10 +145,12 @@ public abstract class Service extends ContextWrapper implements ComponentCallbac
         }
     }
 
-    public final void startForeground(int id, Notification notification, int foregroundServiceType) {
+    public final void startForeground(
+            int id, Notification notification, int foregroundServiceType) {
         try {
             ComponentName comp = new ComponentName(this, this.mClassName);
-            this.mActivityManager.setServiceForeground(comp, this.mToken, id, notification, 0, foregroundServiceType);
+            this.mActivityManager.setServiceForeground(
+                    comp, this.mToken, id, notification, 0, foregroundServiceType);
             clearStartForegroundServiceStackTrace();
             logForegroundServiceStart(comp, foregroundServiceType);
         } catch (RemoteException e) {
@@ -169,7 +164,13 @@ public abstract class Service extends ContextWrapper implements ComponentCallbac
 
     public final void stopForeground(int notificationBehavior) {
         try {
-            this.mActivityManager.setServiceForeground(new ComponentName(this, this.mClassName), this.mToken, 0, null, notificationBehavior, 0);
+            this.mActivityManager.setServiceForeground(
+                    new ComponentName(this, this.mClassName),
+                    this.mToken,
+                    0,
+                    null,
+                    notificationBehavior,
+                    0);
             logForegroundServiceStopIfNecessary();
         } catch (RemoteException e) {
         }
@@ -177,7 +178,9 @@ public abstract class Service extends ContextWrapper implements ComponentCallbac
 
     public final int getForegroundServiceType() {
         try {
-            int ret = this.mActivityManager.getForegroundServiceType(new ComponentName(this, this.mClassName), this.mToken);
+            int ret =
+                    this.mActivityManager.getForegroundServiceType(
+                            new ComponentName(this, this.mClassName), this.mToken);
             return ret;
         } catch (RemoteException e) {
             return 0;
@@ -196,7 +199,13 @@ public abstract class Service extends ContextWrapper implements ComponentCallbac
         }
     }
 
-    public final void attach(Context context, ActivityThread thread, String className, IBinder token, Application application, Object activityManager) {
+    public final void attach(
+            Context context,
+            ActivityThread thread,
+            String className,
+            IBinder token,
+            Application application,
+            Object activityManager) {
         attachBaseContext(context);
         this.mThread = thread;
         this.mClassName = className;
@@ -233,10 +242,20 @@ public abstract class Service extends ContextWrapper implements ComponentCallbac
     private void logForegroundServiceStart(ComponentName comp, int foregroundServiceType) {
         synchronized (this.mForegroundServiceTraceTitleLock) {
             if (this.mForegroundServiceTraceTitle == null) {
-                this.mForegroundServiceTraceTitle = TextUtils.formatSimple("comp=%s type=%s", comp.toShortString(), Integer.toHexString(foregroundServiceType));
-                Trace.asyncTraceForTrackBegin(64L, TRACE_TRACK_NAME_FOREGROUND_SERVICE, this.mForegroundServiceTraceTitle, System.identityHashCode(this));
+                this.mForegroundServiceTraceTitle =
+                        TextUtils.formatSimple(
+                                "comp=%s type=%s",
+                                comp.toShortString(), Integer.toHexString(foregroundServiceType));
+                Trace.asyncTraceForTrackBegin(
+                        64L,
+                        TRACE_TRACK_NAME_FOREGROUND_SERVICE,
+                        this.mForegroundServiceTraceTitle,
+                        System.identityHashCode(this));
             } else {
-                Trace.instantForTrack(64L, TRACE_TRACK_NAME_FOREGROUND_SERVICE, this.mForegroundServiceTraceTitle);
+                Trace.instantForTrack(
+                        64L,
+                        TRACE_TRACK_NAME_FOREGROUND_SERVICE,
+                        this.mForegroundServiceTraceTitle);
             }
         }
     }
@@ -244,13 +263,15 @@ public abstract class Service extends ContextWrapper implements ComponentCallbac
     private void logForegroundServiceStopIfNecessary() {
         synchronized (this.mForegroundServiceTraceTitleLock) {
             if (this.mForegroundServiceTraceTitle != null) {
-                Trace.asyncTraceForTrackEnd(64L, TRACE_TRACK_NAME_FOREGROUND_SERVICE, System.identityHashCode(this));
+                Trace.asyncTraceForTrackEnd(
+                        64L, TRACE_TRACK_NAME_FOREGROUND_SERVICE, System.identityHashCode(this));
                 this.mForegroundServiceTraceTitle = null;
             }
         }
     }
 
-    public static void setStartForegroundServiceStackTrace(String className, StackTrace stacktrace) {
+    public static void setStartForegroundServiceStackTrace(
+            String className, StackTrace stacktrace) {
         synchronized (sStartForegroundServiceStackTraces) {
             sStartForegroundServiceStackTraces.put(className, stacktrace);
         }
@@ -276,7 +297,8 @@ public abstract class Service extends ContextWrapper implements ComponentCallbac
             return;
         }
         try {
-            if (!this.mActivityManager.shouldServiceTimeOut(new ComponentName(this, this.mClassName), this.mToken)) {
+            if (!this.mActivityManager.shouldServiceTimeOut(
+                    new ComponentName(this, this.mClassName), this.mToken)) {
                 Log.w(TAG, "Service no longer relevant, skipping onTimeout()");
                 return;
             }
@@ -288,8 +310,7 @@ public abstract class Service extends ContextWrapper implements ComponentCallbac
         }
     }
 
-    public void onTimeout(int startId) {
-    }
+    public void onTimeout(int startId) {}
 
     public final void callOnTimeLimitExceeded(int startId, int fgsType) {
         if (this.mToken == null) {
@@ -297,7 +318,8 @@ public abstract class Service extends ContextWrapper implements ComponentCallbac
             return;
         }
         try {
-            if (!this.mActivityManager.hasServiceTimeLimitExceeded(new ComponentName(this, this.mClassName), this.mToken)) {
+            if (!this.mActivityManager.hasServiceTimeLimitExceeded(
+                    new ComponentName(this, this.mClassName), this.mToken)) {
                 Log.w(TAG, "Service no longer relevant, skipping onTimeLimitExceeded()");
                 return;
             }
@@ -308,6 +330,5 @@ public abstract class Service extends ContextWrapper implements ComponentCallbac
         }
     }
 
-    public void onTimeout(int startId, int fgsType) {
-    }
+    public void onTimeout(int startId, int fgsType) {}
 }

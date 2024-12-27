@@ -8,7 +8,8 @@ public final /* synthetic */ class FirstUseDateData$$ExternalSyntheticLambda0 im
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ FirstUseDateData f$0;
 
-    public /* synthetic */ FirstUseDateData$$ExternalSyntheticLambda0(FirstUseDateData firstUseDateData, int i) {
+    public /* synthetic */ FirstUseDateData$$ExternalSyntheticLambda0(
+            FirstUseDateData firstUseDateData, int i) {
         this.$r8$classId = i;
         this.f$0 = firstUseDateData;
     }

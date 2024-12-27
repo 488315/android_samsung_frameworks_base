@@ -6,13 +6,13 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Region;
 import android.text.TextUtils;
-import android.view.HandwritingInitiator;
 import android.view.inputmethod.ConnectionlessHandwritingCallback;
 import android.view.inputmethod.CursorAnchorInfo;
 import android.view.inputmethod.Flags;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -40,7 +40,8 @@ public class HandwritingInitiator {
     private final boolean mInitiateWithoutConnection = Flags.initiationWithoutInputConnection();
     private final long mHandwritingTimeoutInMillis = ViewConfiguration.getLongPressTimeout();
 
-    public HandwritingInitiator(ViewConfiguration viewConfiguration, InputMethodManager inputMethodManager) {
+    public HandwritingInitiator(
+            ViewConfiguration viewConfiguration, InputMethodManager inputMethodManager) {
         this.mHandwritingSlop = viewConfiguration.getScaledHandwritingSlop();
         this.mImm = inputMethodManager;
     }
@@ -56,7 +57,9 @@ public class HandwritingInitiator {
             Method dump skipped, instructions count: 410
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.HandwritingInitiator.onTouchEvent(android.view.MotionEvent):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.view.HandwritingInitiator.onTouchEvent(android.view.MotionEvent):boolean");
     }
 
     private View getConnectedView() {
@@ -98,7 +101,10 @@ public class HandwritingInitiator {
         this.mShowHoverIconForConnectedView = true;
         if (view.isHandwritingDelegate() && tryAcceptStylusHandwritingDelegation(view)) {
             this.mShowHoverIconForConnectedView = false;
-        } else if (!this.mInitiateWithoutConnection && this.mState != null && this.mState.mPendingConnectedView != null && this.mState.mPendingConnectedView.get() == view) {
+        } else if (!this.mInitiateWithoutConnection
+                && this.mState != null
+                && this.mState.mPendingConnectedView != null
+                && this.mState.mPendingConnectedView.get() == view) {
             startHandwriting(view);
         }
     }
@@ -116,14 +122,17 @@ public class HandwritingInitiator {
             return;
         }
         updateFocusedView(view);
-        if (this.mState != null && this.mState.mPendingFocusedView != null && this.mState.mPendingFocusedView.get() == view) {
+        if (this.mState != null
+                && this.mState.mPendingFocusedView != null
+                && this.mState.mPendingFocusedView.get() == view) {
             startHandwriting(view);
         }
     }
 
     public void onInputConnectionClosed(View view) {
         View connectedView;
-        if ((!this.mInitiateWithoutConnection || view.isHandwritingDelegate()) && (connectedView = getConnectedView()) != null) {
+        if ((!this.mInitiateWithoutConnection || view.isHandwritingDelegate())
+                && (connectedView = getConnectedView()) != null) {
             if (connectedView == view) {
                 this.mConnectionCount--;
                 if (this.mConnectionCount == 0) {
@@ -180,9 +189,15 @@ public class HandwritingInitiator {
         if (this.mImm.isConnectionlessStylusHandwritingAvailable()) {
             view.getViewRootImpl().getView().clearFocus();
             InputMethodManager inputMethodManager = this.mImm;
-            CursorAnchorInfo cursorAnchorInfoForConnectionless = getCursorAnchorInfoForConnectionless(view);
+            CursorAnchorInfo cursorAnchorInfoForConnectionless =
+                    getCursorAnchorInfoForConnectionless(view);
             Objects.requireNonNull(view);
-            inputMethodManager.startConnectionlessStylusHandwritingForDelegation(view, cursorAnchorInfoForConnectionless, delegatePackageName, new HandwritingInitiator$$ExternalSyntheticLambda0(view), new DelegationCallback(view, delegatePackageName));
+            inputMethodManager.startConnectionlessStylusHandwritingForDelegation(
+                    view,
+                    cursorAnchorInfoForConnectionless,
+                    delegatePackageName,
+                    new HandwritingInitiator$$ExternalSyntheticLambda0(view),
+                    new DelegationCallback(view, delegatePackageName));
             this.mState.mShouldInitHandwriting = false;
         } else {
             this.mImm.prepareStylusHandwritingDelegation(view, delegatePackageName);
@@ -217,19 +232,28 @@ public class HandwritingInitiator {
             delegatorPackageName = view.getContext().getOpPackageName();
         }
         final WeakReference<View> viewRef = new WeakReference<>(view);
-        Consumer<Boolean> consumer = new Consumer() { // from class: android.view.HandwritingInitiator$$ExternalSyntheticLambda1
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                HandwritingInitiator.this.lambda$tryAcceptStylusHandwritingDelegationAsync$0(viewRef, (Boolean) obj);
-            }
-        };
+        Consumer<Boolean> consumer =
+                new Consumer() { // from class:
+                                 // android.view.HandwritingInitiator$$ExternalSyntheticLambda1
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        HandwritingInitiator.this
+                                .lambda$tryAcceptStylusHandwritingDelegationAsync$0(
+                                        viewRef, (Boolean) obj);
+                    }
+                };
         InputMethodManager inputMethodManager = this.mImm;
         Objects.requireNonNull(view);
-        inputMethodManager.acceptStylusHandwritingDelegation(view, delegatorPackageName, new HandwritingInitiator$$ExternalSyntheticLambda0(view), consumer);
+        inputMethodManager.acceptStylusHandwritingDelegation(
+                view,
+                delegatorPackageName,
+                new HandwritingInitiator$$ExternalSyntheticLambda0(view),
+                consumer);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$tryAcceptStylusHandwritingDelegationAsync$0(WeakReference viewRef, Boolean delegationAccepted) {
+    public /* synthetic */ void lambda$tryAcceptStylusHandwritingDelegationAsync$0(
+            WeakReference viewRef, Boolean delegationAccepted) {
         if (delegationAccepted.booleanValue()) {
             onDelegationAccepted((View) viewRef.get());
         }
@@ -313,7 +337,10 @@ public class HandwritingInitiator {
             View cachedHoverTarget = getCachedHoverTarget();
             if (cachedHoverTarget != null) {
                 Rect handwritingArea = this.mTempRect;
-                if (getViewHandwritingArea(cachedHoverTarget, handwritingArea) && isInHandwritingArea(handwritingArea, hoverX, hoverY, cachedHoverTarget, true) && shouldTriggerStylusHandwritingForView(cachedHoverTarget)) {
+                if (getViewHandwritingArea(cachedHoverTarget, handwritingArea)
+                        && isInHandwritingArea(
+                                handwritingArea, hoverX, hoverY, cachedHoverTarget, true)
+                        && shouldTriggerStylusHandwritingForView(cachedHoverTarget)) {
                     return cachedHoverTarget;
                 }
             }
@@ -330,11 +357,15 @@ public class HandwritingInitiator {
     }
 
     private void requestFocusWithoutReveal(View view) {
-        if (!com.android.text.flags.Flags.handwritingCursorPosition() && (view instanceof EditText)) {
+        if (!com.android.text.flags.Flags.handwritingCursorPosition()
+                && (view instanceof EditText)) {
             EditText editText = (EditText) view;
             if (!this.mState.mStylusDownWithinEditorBounds) {
                 view.getLocationInWindow(this.mTempLocation);
-                int offset = editText.getOffsetForPosition(this.mState.mStylusDownX - this.mTempLocation[0], this.mState.mStylusDownY - this.mTempLocation[1]);
+                int offset =
+                        editText.getOffsetForPosition(
+                                this.mState.mStylusDownX - this.mTempLocation[0],
+                                this.mState.mStylusDownY - this.mTempLocation[1]);
                 editText.setSelection(offset);
             }
         }
@@ -345,11 +376,17 @@ public class HandwritingInitiator {
         } else {
             view.requestFocus();
         }
-        if (com.android.text.flags.Flags.handwritingCursorPosition() && (view instanceof EditText)) {
+        if (com.android.text.flags.Flags.handwritingCursorPosition()
+                && (view instanceof EditText)) {
             EditText editText2 = (EditText) view;
             view.getLocationInWindow(this.mTempLocation);
-            int line = editText2.getLineAtCoordinate(this.mState.mStylusDownY - this.mTempLocation[1]);
-            int paragraphEnd = TextUtils.indexOf((CharSequence) editText2.getText(), '\n', editText2.getLayout().getLineStart(line));
+            int line =
+                    editText2.getLineAtCoordinate(this.mState.mStylusDownY - this.mTempLocation[1]);
+            int paragraphEnd =
+                    TextUtils.indexOf(
+                            (CharSequence) editText2.getText(),
+                            '\n',
+                            editText2.getLayout().getLineStart(line));
             if (paragraphEnd < 0) {
                 paragraphEnd = editText2.getText().length();
             }
@@ -361,20 +398,26 @@ public class HandwritingInitiator {
         View connectedOrFocusedView = getConnectedOrFocusedView();
         if (connectedOrFocusedView != null) {
             Rect handwritingArea = this.mTempRect;
-            if (getViewHandwritingArea(connectedOrFocusedView, handwritingArea) && isInHandwritingArea(handwritingArea, x, y, connectedOrFocusedView, isHover) && shouldTriggerHandwritingOrShowUnavailableMessageForView(connectedOrFocusedView)) {
+            if (getViewHandwritingArea(connectedOrFocusedView, handwritingArea)
+                    && isInHandwritingArea(handwritingArea, x, y, connectedOrFocusedView, isHover)
+                    && shouldTriggerHandwritingOrShowUnavailableMessageForView(
+                            connectedOrFocusedView)) {
                 if (!isHover && this.mState != null) {
-                    this.mState.mStylusDownWithinEditorBounds = contains(handwritingArea, x, y, 0.0f, 0.0f, 0.0f, 0.0f);
+                    this.mState.mStylusDownWithinEditorBounds =
+                            contains(handwritingArea, x, y, 0.0f, 0.0f, 0.0f, 0.0f);
                 }
                 return connectedOrFocusedView;
             }
         }
-        List<HandwritableViewInfo> handwritableViewInfos = this.mHandwritingAreasTracker.computeViewInfos();
+        List<HandwritableViewInfo> handwritableViewInfos =
+                this.mHandwritingAreasTracker.computeViewInfos();
         float minDistance = Float.MAX_VALUE;
         View bestCandidate = null;
         for (HandwritableViewInfo viewInfo : handwritableViewInfos) {
             View view = viewInfo.getView();
             Rect handwritingArea2 = viewInfo.getHandwritingArea();
-            if (isInHandwritingArea(handwritingArea2, x, y, view, isHover) && shouldTriggerHandwritingOrShowUnavailableMessageForView(view)) {
+            if (isInHandwritingArea(handwritingArea2, x, y, view, isHover)
+                    && shouldTriggerHandwritingOrShowUnavailableMessageForView(view)) {
                 float distance = distance(handwritingArea2, x, y);
                 if (distance == 0.0f) {
                     if (!isHover && this.mState != null) {
@@ -428,8 +471,17 @@ public class HandwritingInitiator {
         return viewParent.getChildVisibleRect(view, rect, null);
     }
 
-    private boolean isInHandwritingArea(Rect handwritingArea, float x, float y, View view, boolean isHover) {
-        if (handwritingArea == null || !contains(handwritingArea, x, y, view.getHandwritingBoundsOffsetLeft(), view.getHandwritingBoundsOffsetTop(), view.getHandwritingBoundsOffsetRight(), view.getHandwritingBoundsOffsetBottom())) {
+    private boolean isInHandwritingArea(
+            Rect handwritingArea, float x, float y, View view, boolean isHover) {
+        if (handwritingArea == null
+                || !contains(
+                        handwritingArea,
+                        x,
+                        y,
+                        view.getHandwritingBoundsOffsetLeft(),
+                        view.getHandwritingBoundsOffsetTop(),
+                        view.getHandwritingBoundsOffsetRight(),
+                        view.getHandwritingBoundsOffsetBottom())) {
             return false;
         }
         ViewParent parent = view.getParent();
@@ -450,11 +502,26 @@ public class HandwritingInitiator {
         RectF rectF = this.mTempRectF;
         rectF.set(left, top, right, bottom);
         matrix.mapRect(rectF);
-        return region.op(Math.round(rectF.left), Math.round(rectF.top), Math.round(rectF.right), Math.round(rectF.bottom), Region.Op.INTERSECT);
+        return region.op(
+                Math.round(rectF.left),
+                Math.round(rectF.top),
+                Math.round(rectF.right),
+                Math.round(rectF.bottom),
+                Region.Op.INTERSECT);
     }
 
-    private static boolean contains(Rect rect, float x, float y, float offsetLeft, float offsetTop, float offsetRight, float offsetBottom) {
-        return x >= ((float) rect.left) - offsetLeft && x < ((float) rect.right) + offsetRight && y >= ((float) rect.top) - offsetTop && y < ((float) rect.bottom) + offsetBottom;
+    private static boolean contains(
+            Rect rect,
+            float x,
+            float y,
+            float offsetLeft,
+            float offsetTop,
+            float offsetRight,
+            float offsetBottom) {
+        return x >= ((float) rect.left) - offsetLeft
+                && x < ((float) rect.right) + offsetRight
+                && y >= ((float) rect.top) - offsetTop
+                && y < ((float) rect.bottom) + offsetBottom;
     }
 
     private boolean largerThanTouchSlop(float x1, float y1, float x2, float y2) {
@@ -491,7 +558,10 @@ public class HandwritingInitiator {
 
     /* JADX INFO: Access modifiers changed from: private */
     public static boolean isViewActive(View view) {
-        return view != null && view.isAttachedToWindow() && view.isAggregatedVisible() && view.shouldTrackHandwritingArea();
+        return view != null
+                && view.isAttachedToWindow()
+                && view.isAggregatedVisible()
+                && view.shouldTrackHandwritingArea();
     }
 
     private CursorAnchorInfo getCursorAnchorInfoForConnectionless(View view) {
@@ -501,13 +571,23 @@ public class HandwritingInitiator {
             textView.getCursorAnchorInfo(0, builder, this.mTempMatrix);
             if (textView.getSelectionStart() < 0) {
                 float bottom = textView.getHeight() - textView.getExtendedPaddingBottom();
-                builder.setInsertionMarkerLocation(textView.getCompoundPaddingStart(), textView.getExtendedPaddingTop(), bottom, bottom, 0);
+                builder.setInsertionMarkerLocation(
+                        textView.getCompoundPaddingStart(),
+                        textView.getExtendedPaddingTop(),
+                        bottom,
+                        bottom,
+                        0);
             }
         } else {
             this.mTempMatrix.reset();
             view.transformMatrixToGlobal(this.mTempMatrix);
             builder.setMatrix(this.mTempMatrix);
-            builder.setInsertionMarkerLocation(view.isLayoutRtl() ? view.getWidth() : 0.0f, 0.0f, view.getHeight(), view.getHeight(), 0);
+            builder.setInsertionMarkerLocation(
+                    view.isLayoutRtl() ? view.getWidth() : 0.0f,
+                    0.0f,
+                    view.getHeight(),
+                    view.getHeight(),
+                    0);
         }
         return builder.build();
     }
@@ -517,8 +597,14 @@ public class HandwritingInitiator {
             ViewGroup viewGroup = (ViewGroup) view;
             for (int i = 0; i < viewGroup.getChildCount(); i++) {
                 View child = viewGroup.getChildAt(i);
-                TextView textView = child instanceof TextView ? (TextView) child : findFirstTextViewDescendent(viewGroup.getChildAt(i));
-                if (textView != null && textView.isAggregatedVisible() && (!TextUtils.isEmpty(textView.getText()) || !TextUtils.isEmpty(textView.getHint()))) {
+                TextView textView =
+                        child instanceof TextView
+                                ? (TextView) child
+                                : findFirstTextViewDescendent(viewGroup.getChildAt(i));
+                if (textView != null
+                        && textView.isAggregatedVisible()
+                        && (!TextUtils.isEmpty(textView.getText())
+                                || !TextUtils.isEmpty(textView.getHint()))) {
                     return textView;
                 }
             }
@@ -554,12 +640,16 @@ public class HandwritingInitiator {
         }
 
         public List<HandwritableViewInfo> computeViewInfos() {
-            this.mHandwritableViewInfos.removeIf(new Predicate() { // from class: android.view.HandwritingInitiator$HandwritingAreaTracker$$ExternalSyntheticLambda0
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    return HandwritingInitiator.HandwritingAreaTracker.lambda$computeViewInfos$0((HandwritingInitiator.HandwritableViewInfo) obj);
-                }
-            });
+            this.mHandwritableViewInfos.removeIf(
+                    new Predicate() { // from class:
+                                      // android.view.HandwritingInitiator$HandwritingAreaTracker$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Predicate
+                        public final boolean test(Object obj) {
+                            return HandwritingInitiator.HandwritingAreaTracker
+                                    .lambda$computeViewInfos$0(
+                                            (HandwritingInitiator.HandwritableViewInfo) obj);
+                        }
+                    });
             return this.mHandwritableViewInfos;
         }
     }
@@ -629,7 +719,8 @@ public class HandwritingInitiator {
                     this.mView.getHandwritingDelegatorCallback().run();
                     break;
                 case 1:
-                    HandwritingInitiator.this.mImm.prepareStylusHandwritingDelegation(this.mView, this.mDelegatePackageName);
+                    HandwritingInitiator.this.mImm.prepareStylusHandwritingDelegation(
+                            this.mView, this.mDelegatePackageName);
                     this.mView.getHandwritingDelegatorCallback().run();
                     break;
             }

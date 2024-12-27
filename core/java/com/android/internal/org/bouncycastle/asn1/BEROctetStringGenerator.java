@@ -10,7 +10,8 @@ public class BEROctetStringGenerator extends BERGenerator {
         writeBERHeader(36);
     }
 
-    public BEROctetStringGenerator(OutputStream out, int tagNo, boolean isExplicit) throws IOException {
+    public BEROctetStringGenerator(OutputStream out, int tagNo, boolean isExplicit)
+            throws IOException {
         super(out, tagNo, isExplicit);
         writeBERHeader(36);
     }

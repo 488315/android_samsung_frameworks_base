@@ -80,8 +80,10 @@ public class CFBBlockCipher extends StreamBlockCipher {
         bArr[i] = rv;
         if (this.byteCount == this.blockSize) {
             this.byteCount = 0;
-            System.arraycopy(this.cfbV, this.blockSize, this.cfbV, 0, this.cfbV.length - this.blockSize);
-            System.arraycopy(this.inBuf, 0, this.cfbV, this.cfbV.length - this.blockSize, this.blockSize);
+            System.arraycopy(
+                    this.cfbV, this.blockSize, this.cfbV, 0, this.cfbV.length - this.blockSize);
+            System.arraycopy(
+                    this.inBuf, 0, this.cfbV, this.cfbV.length - this.blockSize, this.blockSize);
         }
         return rv;
     }
@@ -97,8 +99,10 @@ public class CFBBlockCipher extends StreamBlockCipher {
         byte rv = (byte) (bArr[i] ^ in);
         if (this.byteCount == this.blockSize) {
             this.byteCount = 0;
-            System.arraycopy(this.cfbV, this.blockSize, this.cfbV, 0, this.cfbV.length - this.blockSize);
-            System.arraycopy(this.inBuf, 0, this.cfbV, this.cfbV.length - this.blockSize, this.blockSize);
+            System.arraycopy(
+                    this.cfbV, this.blockSize, this.cfbV, 0, this.cfbV.length - this.blockSize);
+            System.arraycopy(
+                    this.inBuf, 0, this.cfbV, this.cfbV.length - this.blockSize, this.blockSize);
         }
         return rv;
     }
@@ -109,17 +113,20 @@ public class CFBBlockCipher extends StreamBlockCipher {
     }
 
     @Override // com.android.internal.org.bouncycastle.crypto.BlockCipher
-    public int processBlock(byte[] in, int inOff, byte[] out, int outOff) throws DataLengthException, IllegalStateException {
+    public int processBlock(byte[] in, int inOff, byte[] out, int outOff)
+            throws DataLengthException, IllegalStateException {
         processBytes(in, inOff, this.blockSize, out, outOff);
         return this.blockSize;
     }
 
-    public int encryptBlock(byte[] in, int inOff, byte[] out, int outOff) throws DataLengthException, IllegalStateException {
+    public int encryptBlock(byte[] in, int inOff, byte[] out, int outOff)
+            throws DataLengthException, IllegalStateException {
         processBytes(in, inOff, this.blockSize, out, outOff);
         return this.blockSize;
     }
 
-    public int decryptBlock(byte[] in, int inOff, byte[] out, int outOff) throws DataLengthException, IllegalStateException {
+    public int decryptBlock(byte[] in, int inOff, byte[] out, int outOff)
+            throws DataLengthException, IllegalStateException {
         processBytes(in, inOff, this.blockSize, out, outOff);
         return this.blockSize;
     }

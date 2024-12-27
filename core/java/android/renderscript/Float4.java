@@ -8,8 +8,7 @@ public class Float4 {
     public float y;
     public float z;
 
-    public Float4() {
-    }
+    public Float4() {}
 
     public Float4(Float4 data) {
         this.x = data.x;

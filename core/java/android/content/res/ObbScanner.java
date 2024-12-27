@@ -7,8 +7,7 @@ import java.io.IOException;
 public class ObbScanner {
     private static native void getObbInfo_native(String str, ObbInfo obbInfo) throws IOException;
 
-    private ObbScanner() {
-    }
+    private ObbScanner() {}
 
     public static ObbInfo getObbInfo(String filePath) throws IOException {
         if (filePath == null) {

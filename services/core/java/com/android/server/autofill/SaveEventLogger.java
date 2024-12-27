@@ -1,8 +1,10 @@
 package com.android.server.autofill;
 
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.alarm.GmsAlarmManager$$ExternalSyntheticOutline0;
+
 import java.util.Optional;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -56,7 +58,9 @@ public final class SaveEventLogger {
 
     public final void logAndEndEvent() {
         if (!this.mEventInternal.isPresent()) {
-            Slog.w("SaveEventLogger", "Shouldn't be logging AutofillSaveEventReported again for same event");
+            Slog.w(
+                    "SaveEventLogger",
+                    "Shouldn't be logging AutofillSaveEventReported again for same event");
             return;
         }
         SaveEventInternal saveEventInternal = (SaveEventInternal) this.mEventInternal.get();
@@ -94,9 +98,28 @@ public final class SaveEventLogger {
             sb.append(" mIsFrameworkCreatedSaveInfo=");
             sb.append(saveEventInternal.mIsFrameworkCreatedSaveInfo);
             sb.append(" mServiceUid=");
-            GmsAlarmManager$$ExternalSyntheticOutline0.m(sb, saveEventInternal.mServiceUid, "SaveEventLogger");
+            GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                    sb, saveEventInternal.mServiceUid, "SaveEventLogger");
         }
-        FrameworkStatsLog.write(FrameworkStatsLog.AUTOFILL_SAVE_EVENT_REPORTED, saveEventInternal.mRequestId, this.mSessionId, saveEventInternal.mAppPackageUid, saveEventInternal.mSaveUiTriggerIds, saveEventInternal.mFlag, saveEventInternal.mIsNewField, saveEventInternal.mSaveUiShownReason, saveEventInternal.mSaveUiNotShownReason, saveEventInternal.mSaveButtonClicked, saveEventInternal.mCancelButtonClicked, saveEventInternal.mDialogDismissed, saveEventInternal.mIsSaved, saveEventInternal.mLatencySaveUiDisplayMillis, saveEventInternal.mLatencySaveRequestMillis, saveEventInternal.mLatencySaveFinishMillis, saveEventInternal.mIsFrameworkCreatedSaveInfo, saveEventInternal.mServiceUid);
+        FrameworkStatsLog.write(
+                FrameworkStatsLog.AUTOFILL_SAVE_EVENT_REPORTED,
+                saveEventInternal.mRequestId,
+                this.mSessionId,
+                saveEventInternal.mAppPackageUid,
+                saveEventInternal.mSaveUiTriggerIds,
+                saveEventInternal.mFlag,
+                saveEventInternal.mIsNewField,
+                saveEventInternal.mSaveUiShownReason,
+                saveEventInternal.mSaveUiNotShownReason,
+                saveEventInternal.mSaveButtonClicked,
+                saveEventInternal.mCancelButtonClicked,
+                saveEventInternal.mDialogDismissed,
+                saveEventInternal.mIsSaved,
+                saveEventInternal.mLatencySaveUiDisplayMillis,
+                saveEventInternal.mLatencySaveRequestMillis,
+                saveEventInternal.mLatencySaveFinishMillis,
+                saveEventInternal.mIsFrameworkCreatedSaveInfo,
+                saveEventInternal.mServiceUid);
         this.mEventInternal = Optional.empty();
     }
 

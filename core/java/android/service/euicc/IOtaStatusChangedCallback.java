@@ -12,8 +12,7 @@ public interface IOtaStatusChangedCallback extends IInterface {
 
     public static class Default implements IOtaStatusChangedCallback {
         @Override // android.service.euicc.IOtaStatusChangedCallback
-        public void onOtaStatusChanged(int status) throws RemoteException {
-        }
+        public void onOtaStatusChanged(int status) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface IOtaStatusChangedCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IOtaStatusChangedCallback {
+    public abstract static class Stub extends Binder implements IOtaStatusChangedCallback {
         public static final String DESCRIPTOR = "android.service.euicc.IOtaStatusChangedCallback";
         static final int TRANSACTION_onOtaStatusChanged = 1;
 
@@ -60,7 +59,8 @@ public interface IOtaStatusChangedCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

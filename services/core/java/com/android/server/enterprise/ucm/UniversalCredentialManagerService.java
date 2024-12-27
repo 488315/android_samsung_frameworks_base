@@ -26,6 +26,7 @@ import android.os.UserHandle;
 import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.DirEncryptService$$ExternalSyntheticOutline0;
@@ -46,6 +47,7 @@ import com.android.server.am.Pageboost$PageboostFileDBHelper$$ExternalSyntheticO
 import com.android.server.enterprise.EnterpriseServiceCallback;
 import com.android.server.enterprise.RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.storage.EdmStorageProvider;
+
 import com.samsung.android.knox.AppIdentity;
 import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.EnterpriseDeviceManager;
@@ -60,6 +62,7 @@ import com.samsung.android.knox.ucm.core.jcajce.UcmKeystoreProvider;
 import com.samsung.android.knoxguard.service.utils.Constants;
 import com.samsung.ucm.keystore.UcmKeyStoreHelper;
 import com.samsung.ucm.ucmservice.UcmServiceUtil;
+
 import java.io.File;
 import java.security.Provider;
 import java.util.ArrayList;
@@ -74,7 +77,8 @@ import java.util.Set;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class UniversalCredentialManagerService extends IUniversalCredentialManager.Stub implements EnterpriseServiceCallback {
+public final class UniversalCredentialManagerService extends IUniversalCredentialManager.Stub
+        implements EnterpriseServiceCallback {
     public final Context mContext;
     public final EdmStorageProvider mEdmStorageProvider;
     public boolean mExistCert;
@@ -87,7 +91,11 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
     public static final boolean DBG = UcmServiceUtil.isDebug();
     public static final String TAG = "UniversalCredentialManagerService";
     public static Context sContext = null;
-    public static final List systemPlugin = Arrays.asList("com.samsung.ucs.agent.boot", "com.samsung.ucs.agent.ese", "com.sec.smartcard.manager");
+    public static final List systemPlugin =
+            Arrays.asList(
+                    "com.samsung.ucs.agent.boot",
+                    "com.samsung.ucs.agent.ese",
+                    "com.sec.smartcard.manager");
     public static IUcmService mUcseService = null;
     public EnterpriseDeviceManager mEDM = null;
     public final List adminIds = new ArrayList();
@@ -107,8 +115,7 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UCSMHandler extends Handler {
-        public UCSMHandler() {
-        }
+        public UCSMHandler() {}
 
         @Override // android.os.Handler
         public final void handleMessage(Message message) {
@@ -117,101 +124,202 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             r9 = false;
             boolean z2 = false;
             int i2 = 0;
-            UniversalCredentialManagerService universalCredentialManagerService = UniversalCredentialManagerService.this;
+            UniversalCredentialManagerService universalCredentialManagerService =
+                    UniversalCredentialManagerService.this;
             switch (i) {
                 case 1:
-                    Log.i(UniversalCredentialManagerService.TAG, "****MSG_CLEAN_USER_INFO block started****");
+                    Log.i(
+                            UniversalCredentialManagerService.TAG,
+                            "****MSG_CLEAN_USER_INFO block started****");
                     int i3 = message.arg1;
                     Log.i(UniversalCredentialManagerService.TAG, "userId - " + i3);
                     IUcmService ucmService$1 = UniversalCredentialManagerService.getUcmService$1();
                     if (ucmService$1 != null) {
-                        Log.i(UniversalCredentialManagerService.TAG, "notifyChangeToPlugin is called for user removed...");
+                        Log.i(
+                                UniversalCredentialManagerService.TAG,
+                                "notifyChangeToPlugin is called for user removed...");
                         try {
                             Bundle bundle = new Bundle();
                             bundle.putInt("userId", i3);
                             ucmService$1.notifyChangeToPlugin((String) null, 11, bundle);
                             ucmService$1.removeEnforcedLockTypeNotification(i3);
                         } catch (Exception e) {
-                            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), UniversalCredentialManagerService.TAG);
+                            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                    .m(
+                                            e,
+                                            new StringBuilder("The exception occurs "),
+                                            UniversalCredentialManagerService.TAG);
                         }
                     }
-                    UniversalCredentialManagerService.m544$$Nest$mperformUserCleanup(universalCredentialManagerService, i3);
-                    Log.i(UniversalCredentialManagerService.TAG, "****MSG_CLEAN_USER_INFO block ended****");
+                    UniversalCredentialManagerService.m544$$Nest$mperformUserCleanup(
+                            universalCredentialManagerService, i3);
+                    Log.i(
+                            UniversalCredentialManagerService.TAG,
+                            "****MSG_CLEAN_USER_INFO block ended****");
                     break;
                 case 2:
-                    Log.i(UniversalCredentialManagerService.TAG, "****MSG_LOAD_ADMINS block started****");
+                    Log.i(
+                            UniversalCredentialManagerService.TAG,
+                            "****MSG_LOAD_ADMINS block started****");
                     try {
-                        List m535$$Nest$mgetAllAdmins = UniversalCredentialManagerService.m535$$Nest$mgetAllAdmins(universalCredentialManagerService);
+                        List m535$$Nest$mgetAllAdmins =
+                                UniversalCredentialManagerService.m535$$Nest$mgetAllAdmins(
+                                        universalCredentialManagerService);
                         if (universalCredentialManagerService.adminIds != null) {
-                            ((ArrayList) universalCredentialManagerService.adminIds).addAll(m535$$Nest$mgetAllAdmins);
-                            if (((ArrayList) universalCredentialManagerService.adminIds).size() > 0) {
-                                Log.i(UniversalCredentialManagerService.TAG, "adminIds size- " + ((ArrayList) universalCredentialManagerService.adminIds).size());
+                            ((ArrayList) universalCredentialManagerService.adminIds)
+                                    .addAll(m535$$Nest$mgetAllAdmins);
+                            if (((ArrayList) universalCredentialManagerService.adminIds).size()
+                                    > 0) {
+                                Log.i(
+                                        UniversalCredentialManagerService.TAG,
+                                        "adminIds size- "
+                                                + ((ArrayList)
+                                                                universalCredentialManagerService
+                                                                        .adminIds)
+                                                        .size());
                             }
                         }
                     } catch (Exception e2) {
-                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e2, new StringBuilder("The exception occurs "), UniversalCredentialManagerService.TAG);
+                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                .m(
+                                        e2,
+                                        new StringBuilder("The exception occurs "),
+                                        UniversalCredentialManagerService.TAG);
                     }
-                    Log.i(UniversalCredentialManagerService.TAG, "****MSG_LOAD_ADMINS block ended****");
-                    universalCredentialManagerService.mUCSMHandler.sendMessage(universalCredentialManagerService.mUCSMHandler.obtainMessage(4));
+                    Log.i(
+                            UniversalCredentialManagerService.TAG,
+                            "****MSG_LOAD_ADMINS block ended****");
+                    universalCredentialManagerService.mUCSMHandler.sendMessage(
+                            universalCredentialManagerService.mUCSMHandler.obtainMessage(4));
                     break;
                 case 3:
-                    Log.i(UniversalCredentialManagerService.TAG, "****MSG_CLEAN_INFO block started****");
+                    Log.i(
+                            UniversalCredentialManagerService.TAG,
+                            "****MSG_CLEAN_INFO block started****");
                     try {
                         int[] iArr = (int[]) message.obj;
                         if (iArr != null && iArr.length > 0) {
                             for (int i4 : iArr) {
                                 Integer valueOf = Integer.valueOf(i4);
                                 int userId = UserHandle.getUserId(i4);
-                                Log.i(UniversalCredentialManagerService.TAG, "uid - " + valueOf + ", userId-" + userId);
-                                if (((ArrayList) universalCredentialManagerService.adminIds).contains(valueOf)) {
-                                    Log.i(UniversalCredentialManagerService.TAG, "UCS admin uninstall. Start cleaning....");
-                                    UniversalCredentialManagerService.m539$$Nest$mnotifyAdminUninstall(universalCredentialManagerService, i4);
-                                    UniversalCredentialManagerService.m541$$Nest$mperformAdminCleanup(universalCredentialManagerService, i4);
-                                    ((ArrayList) universalCredentialManagerService.adminIds).remove(valueOf);
+                                Log.i(
+                                        UniversalCredentialManagerService.TAG,
+                                        "uid - " + valueOf + ", userId-" + userId);
+                                if (((ArrayList) universalCredentialManagerService.adminIds)
+                                        .contains(valueOf)) {
+                                    Log.i(
+                                            UniversalCredentialManagerService.TAG,
+                                            "UCS admin uninstall. Start cleaning....");
+                                    UniversalCredentialManagerService
+                                            .m539$$Nest$mnotifyAdminUninstall(
+                                                    universalCredentialManagerService, i4);
+                                    UniversalCredentialManagerService
+                                            .m541$$Nest$mperformAdminCleanup(
+                                                    universalCredentialManagerService, i4);
+                                    ((ArrayList) universalCredentialManagerService.adminIds)
+                                            .remove(valueOf);
                                 }
-                                if (universalCredentialManagerService.activePluginsCache.containsKey(valueOf)) {
-                                    String str = (String) universalCredentialManagerService.activePluginsCache.get(valueOf);
-                                    Log.i(UniversalCredentialManagerService.TAG, "Active plugin is removed. Perform clean up for uid-" + valueOf + ", pluginPkg-" + str);
-                                    UniversalCredentialManagerService.m540$$Nest$mnotifyPluginIsUninstalled(universalCredentialManagerService, str);
-                                    universalCredentialManagerService.activePluginsCache.remove(valueOf);
-                                    UniversalCredentialManagerService.m543$$Nest$mperformStorageCleanup(universalCredentialManagerService, str);
+                                if (universalCredentialManagerService.activePluginsCache
+                                        .containsKey(valueOf)) {
+                                    String str =
+                                            (String)
+                                                    universalCredentialManagerService
+                                                            .activePluginsCache.get(valueOf);
+                                    Log.i(
+                                            UniversalCredentialManagerService.TAG,
+                                            "Active plugin is removed. Perform clean up for uid-"
+                                                    + valueOf
+                                                    + ", pluginPkg-"
+                                                    + str);
+                                    UniversalCredentialManagerService
+                                            .m540$$Nest$mnotifyPluginIsUninstalled(
+                                                    universalCredentialManagerService, str);
+                                    universalCredentialManagerService.activePluginsCache.remove(
+                                            valueOf);
+                                    UniversalCredentialManagerService
+                                            .m543$$Nest$mperformStorageCleanup(
+                                                    universalCredentialManagerService, str);
                                 }
-                                if (universalCredentialManagerService.whitelistedAppsCache.containsKey(valueOf)) {
-                                    String str2 = (String) universalCredentialManagerService.whitelistedAppsCache.get(valueOf);
-                                    Log.i(UniversalCredentialManagerService.TAG, "Calling performWhitelistAppCleanup for userId-" + userId + ", packageName-" + str2);
-                                    UniversalCredentialManagerService.m545$$Nest$mperformWhitelistAppCleanup(universalCredentialManagerService, userId, str2);
-                                    universalCredentialManagerService.whitelistedAppsCache.remove(valueOf);
+                                if (universalCredentialManagerService.whitelistedAppsCache
+                                        .containsKey(valueOf)) {
+                                    String str2 =
+                                            (String)
+                                                    universalCredentialManagerService
+                                                            .whitelistedAppsCache.get(valueOf);
+                                    Log.i(
+                                            UniversalCredentialManagerService.TAG,
+                                            "Calling performWhitelistAppCleanup for userId-"
+                                                    + userId
+                                                    + ", packageName-"
+                                                    + str2);
+                                    UniversalCredentialManagerService
+                                            .m545$$Nest$mperformWhitelistAppCleanup(
+                                                    universalCredentialManagerService,
+                                                    userId,
+                                                    str2);
+                                    universalCredentialManagerService.whitelistedAppsCache.remove(
+                                            valueOf);
                                 }
-                                if (universalCredentialManagerService.exemptedAppsCache.containsKey(valueOf)) {
-                                    String str3 = (String) universalCredentialManagerService.exemptedAppsCache.get(valueOf);
-                                    Log.i(UniversalCredentialManagerService.TAG, "Calling performExemptedAppCleanup for userId-" + userId + ", packageName-" + str3);
-                                    UniversalCredentialManagerService.m542$$Nest$mperformExemptedAppCleanup(universalCredentialManagerService, userId, str3);
-                                    universalCredentialManagerService.exemptedAppsCache.remove(valueOf);
+                                if (universalCredentialManagerService.exemptedAppsCache.containsKey(
+                                        valueOf)) {
+                                    String str3 =
+                                            (String)
+                                                    universalCredentialManagerService
+                                                            .exemptedAppsCache.get(valueOf);
+                                    Log.i(
+                                            UniversalCredentialManagerService.TAG,
+                                            "Calling performExemptedAppCleanup for userId-"
+                                                    + userId
+                                                    + ", packageName-"
+                                                    + str3);
+                                    UniversalCredentialManagerService
+                                            .m542$$Nest$mperformExemptedAppCleanup(
+                                                    universalCredentialManagerService,
+                                                    userId,
+                                                    str3);
+                                    universalCredentialManagerService.exemptedAppsCache.remove(
+                                            valueOf);
                                 }
-                                IUcmService ucmService$12 = UniversalCredentialManagerService.getUcmService$1();
+                                IUcmService ucmService$12 =
+                                        UniversalCredentialManagerService.getUcmService$1();
                                 if (ucmService$12 != null) {
-                                    Log.i(UniversalCredentialManagerService.TAG, "notifyChangeToPlugin is called for package uninstalled...");
+                                    Log.i(
+                                            UniversalCredentialManagerService.TAG,
+                                            "notifyChangeToPlugin is called for package"
+                                                + " uninstalled...");
                                     try {
                                         Bundle bundle2 = new Bundle();
                                         bundle2.putInt("userId", userId);
                                         bundle2.putInt("packageUid", i4);
-                                        ucmService$12.notifyChangeToPlugin((String) null, 12, bundle2);
+                                        ucmService$12.notifyChangeToPlugin(
+                                                (String) null, 12, bundle2);
                                     } catch (Exception e3) {
-                                        Log.i(UniversalCredentialManagerService.TAG, "The exception occurs " + e3.getMessage());
+                                        Log.i(
+                                                UniversalCredentialManagerService.TAG,
+                                                "The exception occurs " + e3.getMessage());
                                     }
                                 }
                             }
                         }
-                        Log.i(UniversalCredentialManagerService.TAG, "****MSG_CLEAN_INFO block ended****");
+                        Log.i(
+                                UniversalCredentialManagerService.TAG,
+                                "****MSG_CLEAN_INFO block ended****");
                         break;
                     } catch (Exception e4) {
-                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e4, new StringBuilder("The exception occurs "), UniversalCredentialManagerService.TAG);
+                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                .m(
+                                        e4,
+                                        new StringBuilder("The exception occurs "),
+                                        UniversalCredentialManagerService.TAG);
                         return;
                     }
                 case 4:
-                    Log.i(UniversalCredentialManagerService.TAG, "****MSG_LOAD_PLUGINS block started****");
+                    Log.i(
+                            UniversalCredentialManagerService.TAG,
+                            "****MSG_LOAD_PLUGINS block started****");
                     try {
-                        ArrayList activePlugin = universalCredentialManagerService.getActivePlugin();
+                        ArrayList activePlugin =
+                                universalCredentialManagerService.getActivePlugin();
                         if (activePlugin.isEmpty()) {
                             Log.i(UniversalCredentialManagerService.TAG, "No active plugin found");
                         } else {
@@ -224,33 +332,65 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                                     int intValue = asInteger.intValue();
                                     if (intValue != 1000 && intValue != 0) {
                                         try {
-                                            if (!universalCredentialManagerService.activePluginsCache.containsKey(asInteger)) {
-                                                universalCredentialManagerService.activePluginsCache.put(asInteger, asString);
-                                                Log.i(UniversalCredentialManagerService.TAG, "Caching plugin app id-" + intValue + ", packageName-" + asString);
+                                            if (!universalCredentialManagerService
+                                                    .activePluginsCache.containsKey(asInteger)) {
+                                                universalCredentialManagerService.activePluginsCache
+                                                        .put(asInteger, asString);
+                                                Log.i(
+                                                        UniversalCredentialManagerService.TAG,
+                                                        "Caching plugin app id-"
+                                                                + intValue
+                                                                + ", packageName-"
+                                                                + asString);
                                             }
                                         } catch (Exception e5) {
-                                            Log.i(UniversalCredentialManagerService.TAG, "The exception occurs " + e5.getMessage());
+                                            Log.i(
+                                                    UniversalCredentialManagerService.TAG,
+                                                    "The exception occurs " + e5.getMessage());
                                         }
                                     }
                                 }
-                                Log.i(UniversalCredentialManagerService.TAG, "parsing error, continue...");
+                                Log.i(
+                                        UniversalCredentialManagerService.TAG,
+                                        "parsing error, continue...");
                             }
-                            for (Map.Entry entry : universalCredentialManagerService.activePluginsCache.entrySet()) {
-                                Log.i(UniversalCredentialManagerService.TAG, "Plugin ID = " + ((Integer) entry.getKey()) + ", Plugin package = " + ((String) entry.getValue()));
+                            for (Map.Entry entry :
+                                    universalCredentialManagerService.activePluginsCache
+                                            .entrySet()) {
+                                Log.i(
+                                        UniversalCredentialManagerService.TAG,
+                                        "Plugin ID = "
+                                                + ((Integer) entry.getKey())
+                                                + ", Plugin package = "
+                                                + ((String) entry.getValue()));
                             }
                         }
                     } catch (Exception e6) {
-                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e6, new StringBuilder("The exception occurs "), UniversalCredentialManagerService.TAG);
+                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                .m(
+                                        e6,
+                                        new StringBuilder("The exception occurs "),
+                                        UniversalCredentialManagerService.TAG);
                     }
-                    Log.i(UniversalCredentialManagerService.TAG, "****MSG_LOAD_PLUGINS block ended****");
-                    universalCredentialManagerService.mUCSMHandler.sendMessage(universalCredentialManagerService.mUCSMHandler.obtainMessage(5));
+                    Log.i(
+                            UniversalCredentialManagerService.TAG,
+                            "****MSG_LOAD_PLUGINS block ended****");
+                    universalCredentialManagerService.mUCSMHandler.sendMessage(
+                            universalCredentialManagerService.mUCSMHandler.obtainMessage(5));
                     break;
                 case 5:
-                    Log.i(UniversalCredentialManagerService.TAG, "****MSG_LOAD_WHITELIST_AND_EXEMPT_APPS block started****");
+                    Log.i(
+                            UniversalCredentialManagerService.TAG,
+                            "****MSG_LOAD_WHITELIST_AND_EXEMPT_APPS block started****");
                     try {
-                        ArrayList m538$$Nest$mgetAllWhitelistedApps = UniversalCredentialManagerService.m538$$Nest$mgetAllWhitelistedApps(universalCredentialManagerService);
+                        ArrayList m538$$Nest$mgetAllWhitelistedApps =
+                                UniversalCredentialManagerService.m538$$Nest$mgetAllWhitelistedApps(
+                                        universalCredentialManagerService);
                         if (m538$$Nest$mgetAllWhitelistedApps.size() > 0) {
-                            Log.i(UniversalCredentialManagerService.TAG, "getAllWhitelistedApps - Size-" + m538$$Nest$mgetAllWhitelistedApps.size());
+                            Log.i(
+                                    UniversalCredentialManagerService.TAG,
+                                    "getAllWhitelistedApps - Size-"
+                                            + m538$$Nest$mgetAllWhitelistedApps.size());
                             Iterator it2 = m538$$Nest$mgetAllWhitelistedApps.iterator();
                             while (it2.hasNext()) {
                                 ContentValues contentValues2 = (ContentValues) it2.next();
@@ -259,149 +399,306 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                                 if (asString2 != null && asInteger2 != null) {
                                     int intValue2 = asInteger2.intValue();
                                     try {
-                                        if (!asString2.equals("*") && intValue2 != 1000 && intValue2 != 0 && !universalCredentialManagerService.whitelistedAppsCache.containsKey(asInteger2)) {
-                                            universalCredentialManagerService.whitelistedAppsCache.put(asInteger2, asString2);
-                                            Log.i(UniversalCredentialManagerService.TAG, "Caching WhiteList app id-" + intValue2 + ", packageName-" + asString2);
+                                        if (!asString2.equals("*")
+                                                && intValue2 != 1000
+                                                && intValue2 != 0
+                                                && !universalCredentialManagerService
+                                                        .whitelistedAppsCache.containsKey(
+                                                        asInteger2)) {
+                                            universalCredentialManagerService.whitelistedAppsCache
+                                                    .put(asInteger2, asString2);
+                                            Log.i(
+                                                    UniversalCredentialManagerService.TAG,
+                                                    "Caching WhiteList app id-"
+                                                            + intValue2
+                                                            + ", packageName-"
+                                                            + asString2);
                                         }
                                     } catch (Exception e7) {
-                                        Log.i(UniversalCredentialManagerService.TAG, "The exception occurs " + e7.getMessage());
+                                        Log.i(
+                                                UniversalCredentialManagerService.TAG,
+                                                "The exception occurs " + e7.getMessage());
                                     }
                                 }
-                                Log.i(UniversalCredentialManagerService.TAG, "parsing error, continue...");
+                                Log.i(
+                                        UniversalCredentialManagerService.TAG,
+                                        "parsing error, continue...");
                             }
-                            for (Map.Entry entry2 : universalCredentialManagerService.whitelistedAppsCache.entrySet()) {
-                                Log.i(UniversalCredentialManagerService.TAG, "WHITELIST App UID = " + ((Integer) entry2.getKey()) + ", App package = " + ((String) entry2.getValue()));
+                            for (Map.Entry entry2 :
+                                    universalCredentialManagerService.whitelistedAppsCache
+                                            .entrySet()) {
+                                Log.i(
+                                        UniversalCredentialManagerService.TAG,
+                                        "WHITELIST App UID = "
+                                                + ((Integer) entry2.getKey())
+                                                + ", App package = "
+                                                + ((String) entry2.getValue()));
                             }
                         } else {
-                            Log.i(UniversalCredentialManagerService.TAG, "getAllWhitelistedApps DB is empty...");
+                            Log.i(
+                                    UniversalCredentialManagerService.TAG,
+                                    "getAllWhitelistedApps DB is empty...");
                         }
-                        ArrayList m536$$Nest$mgetAllExemptedApps = UniversalCredentialManagerService.m536$$Nest$mgetAllExemptedApps(universalCredentialManagerService);
+                        ArrayList m536$$Nest$mgetAllExemptedApps =
+                                UniversalCredentialManagerService.m536$$Nest$mgetAllExemptedApps(
+                                        universalCredentialManagerService);
                         if (m536$$Nest$mgetAllExemptedApps.size() > 0) {
-                            Log.i(UniversalCredentialManagerService.TAG, "getAllExemptedApps - Size-" + m536$$Nest$mgetAllExemptedApps.size());
+                            Log.i(
+                                    UniversalCredentialManagerService.TAG,
+                                    "getAllExemptedApps - Size-"
+                                            + m536$$Nest$mgetAllExemptedApps.size());
                             Iterator it3 = m536$$Nest$mgetAllExemptedApps.iterator();
                             while (it3.hasNext()) {
                                 ContentValues contentValues3 = (ContentValues) it3.next();
                                 if (contentValues3 == null) {
-                                    Log.i(UniversalCredentialManagerService.TAG, "value is null, continue...");
+                                    Log.i(
+                                            UniversalCredentialManagerService.TAG,
+                                            "value is null, continue...");
                                 } else {
                                     String asString3 = contentValues3.getAsString("appPackage");
                                     Integer asInteger3 = contentValues3.getAsInteger("appUid");
                                     if (asString3 != null && asInteger3 != null) {
                                         int intValue3 = asInteger3.intValue();
                                         try {
-                                            if (!asString3.equals("com.samsung.knox.virtual.wifi") && intValue3 != 1000 && intValue3 != 0 && !universalCredentialManagerService.exemptedAppsCache.containsKey(asInteger3)) {
-                                                universalCredentialManagerService.exemptedAppsCache.put(asInteger3, asString3);
-                                                Log.i(UniversalCredentialManagerService.TAG, "Caching Exempted app id-" + intValue3 + ", packageName-" + asString3);
+                                            if (!asString3.equals("com.samsung.knox.virtual.wifi")
+                                                    && intValue3 != 1000
+                                                    && intValue3 != 0
+                                                    && !universalCredentialManagerService
+                                                            .exemptedAppsCache.containsKey(
+                                                            asInteger3)) {
+                                                universalCredentialManagerService.exemptedAppsCache
+                                                        .put(asInteger3, asString3);
+                                                Log.i(
+                                                        UniversalCredentialManagerService.TAG,
+                                                        "Caching Exempted app id-"
+                                                                + intValue3
+                                                                + ", packageName-"
+                                                                + asString3);
                                             }
                                         } catch (Exception e8) {
-                                            Log.i(UniversalCredentialManagerService.TAG, "The exception occurs " + e8.getMessage());
+                                            Log.i(
+                                                    UniversalCredentialManagerService.TAG,
+                                                    "The exception occurs " + e8.getMessage());
                                         }
                                     }
-                                    Log.i(UniversalCredentialManagerService.TAG, "parsing error, continue...");
+                                    Log.i(
+                                            UniversalCredentialManagerService.TAG,
+                                            "parsing error, continue...");
                                 }
                             }
-                            for (Map.Entry entry3 : universalCredentialManagerService.exemptedAppsCache.entrySet()) {
-                                Log.i(UniversalCredentialManagerService.TAG, "EXEPMT-> App UID = " + ((Integer) entry3.getKey()) + ", App package = " + ((String) entry3.getValue()));
+                            for (Map.Entry entry3 :
+                                    universalCredentialManagerService.exemptedAppsCache
+                                            .entrySet()) {
+                                Log.i(
+                                        UniversalCredentialManagerService.TAG,
+                                        "EXEPMT-> App UID = "
+                                                + ((Integer) entry3.getKey())
+                                                + ", App package = "
+                                                + ((String) entry3.getValue()));
                             }
                         } else {
-                            Log.i(UniversalCredentialManagerService.TAG, "getAllExemptedApps DB is empty...");
+                            Log.i(
+                                    UniversalCredentialManagerService.TAG,
+                                    "getAllExemptedApps DB is empty...");
                         }
                     } catch (Exception e9) {
-                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e9, new StringBuilder("The exception occurs "), UniversalCredentialManagerService.TAG);
+                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                .m(
+                                        e9,
+                                        new StringBuilder("The exception occurs "),
+                                        UniversalCredentialManagerService.TAG);
                     }
-                    Log.i(UniversalCredentialManagerService.TAG, "****MSG_LOAD_WHITELIST_AND_EXEMPT_APPS block ended****");
+                    Log.i(
+                            UniversalCredentialManagerService.TAG,
+                            "****MSG_LOAD_WHITELIST_AND_EXEMPT_APPS block ended****");
                     break;
                 case 6:
-                    Log.i(UniversalCredentialManagerService.TAG, "****MSG_SYNC_UP_DATA block started****");
+                    Log.i(
+                            UniversalCredentialManagerService.TAG,
+                            "****MSG_SYNC_UP_DATA block started****");
                     try {
                         Bundle bundle3 = new Bundle();
-                        IUcmService ucmService$13 = UniversalCredentialManagerService.getUcmService$1();
+                        IUcmService ucmService$13 =
+                                UniversalCredentialManagerService.getUcmService$1();
                         if (ucmService$13 != null) {
                             ucmService$13.notifyChangeToPlugin((String) null, 17, bundle3);
-                            ArrayList arrayList = (ArrayList) UniversalCredentialManagerService.m537$$Nest$mgetAllUsers(universalCredentialManagerService);
+                            ArrayList arrayList =
+                                    (ArrayList)
+                                            UniversalCredentialManagerService
+                                                    .m537$$Nest$mgetAllUsers(
+                                                            universalCredentialManagerService);
                             if (arrayList.size() > 0) {
-                                Iterator it4 = ((UserManager) universalCredentialManagerService.mContext.getSystemService("user")).getUsers().iterator();
+                                Iterator it4 =
+                                        ((UserManager)
+                                                        universalCredentialManagerService.mContext
+                                                                .getSystemService("user"))
+                                                .getUsers()
+                                                .iterator();
                                 while (it4.hasNext()) {
                                     int i5 = ((UserInfo) it4.next()).id;
-                                    Log.i(UniversalCredentialManagerService.TAG, "Valid userid-" + i5);
+                                    Log.i(
+                                            UniversalCredentialManagerService.TAG,
+                                            "Valid userid-" + i5);
                                     if (arrayList.contains(Integer.valueOf(i5))) {
-                                        Log.i(UniversalCredentialManagerService.TAG, "Found userid on cache-" + i5);
+                                        Log.i(
+                                                UniversalCredentialManagerService.TAG,
+                                                "Found userid on cache-" + i5);
                                         arrayList.remove(Integer.valueOf(i5));
                                     }
                                 }
                                 Iterator it5 = arrayList.iterator();
                                 while (it5.hasNext()) {
                                     Integer num = (Integer) it5.next();
-                                    Log.i(UniversalCredentialManagerService.TAG, "InValid userid-" + num);
-                                    Message obtainMessage = universalCredentialManagerService.mUCSMHandler.obtainMessage(1);
+                                    Log.i(
+                                            UniversalCredentialManagerService.TAG,
+                                            "InValid userid-" + num);
+                                    Message obtainMessage =
+                                            universalCredentialManagerService.mUCSMHandler
+                                                    .obtainMessage(1);
                                     obtainMessage.arg1 = num.intValue();
-                                    universalCredentialManagerService.mUCSMHandler.sendMessage(obtainMessage);
+                                    universalCredentialManagerService.mUCSMHandler.sendMessage(
+                                            obtainMessage);
                                 }
                             }
                         }
                     } catch (Exception e10) {
-                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e10, new StringBuilder("The exception occurs "), UniversalCredentialManagerService.TAG);
+                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                .m(
+                                        e10,
+                                        new StringBuilder("The exception occurs "),
+                                        UniversalCredentialManagerService.TAG);
                     }
                     ArrayList arrayList2 = new ArrayList();
                     IPackageManager packageManager = AppGlobals.getPackageManager();
                     try {
-                        Iterator it6 = ((ArrayList) universalCredentialManagerService.adminIds).iterator();
+                        Iterator it6 =
+                                ((ArrayList) universalCredentialManagerService.adminIds).iterator();
                         while (it6.hasNext()) {
                             Integer num2 = (Integer) it6.next();
-                            Log.i(UniversalCredentialManagerService.TAG, "MSG_SYNC_UP_DATA adminId-" + num2);
-                            if (universalCredentialManagerService.mPm.getPackagesForUid(num2.intValue()) != null) {
-                                if (packageManager.checkUidPermission("com.samsung.android.knox.permission.KNOX_UCM_ESE_MGMT", num2.intValue()) != 0 && packageManager.checkUidPermission("com.samsung.android.knox.permission.KNOX_UCM_OTHER_MGMT", num2.intValue()) != 0 && packageManager.checkUidPermission("com.samsung.android.knox.permission.KNOX_UCM_MGMT", num2.intValue()) != 0) {
-                                    Log.i(UniversalCredentialManagerService.TAG, "  Admin don't has UCS permission...");
-                                    universalCredentialManagerService.processAdminLicenseExpiry(num2.intValue());
+                            Log.i(
+                                    UniversalCredentialManagerService.TAG,
+                                    "MSG_SYNC_UP_DATA adminId-" + num2);
+                            if (universalCredentialManagerService.mPm.getPackagesForUid(
+                                            num2.intValue())
+                                    != null) {
+                                if (packageManager.checkUidPermission(
+                                                        "com.samsung.android.knox.permission.KNOX_UCM_ESE_MGMT",
+                                                        num2.intValue())
+                                                != 0
+                                        && packageManager.checkUidPermission(
+                                                        "com.samsung.android.knox.permission.KNOX_UCM_OTHER_MGMT",
+                                                        num2.intValue())
+                                                != 0
+                                        && packageManager.checkUidPermission(
+                                                        "com.samsung.android.knox.permission.KNOX_UCM_MGMT",
+                                                        num2.intValue())
+                                                != 0) {
+                                    Log.i(
+                                            UniversalCredentialManagerService.TAG,
+                                            "  Admin don't has UCS permission...");
+                                    universalCredentialManagerService.processAdminLicenseExpiry(
+                                            num2.intValue());
                                 }
-                                Log.i(UniversalCredentialManagerService.TAG, "  Admin has valid permission. Processing further...");
+                                Log.i(
+                                        UniversalCredentialManagerService.TAG,
+                                        "  Admin has valid permission. Processing further...");
                             } else if (!arrayList2.contains(num2)) {
-                                Log.i(UniversalCredentialManagerService.TAG, "MSG_SYNC_UP_DATA remove adminid : " + num2);
+                                Log.i(
+                                        UniversalCredentialManagerService.TAG,
+                                        "MSG_SYNC_UP_DATA remove adminid : " + num2);
                                 arrayList2.add(num2);
                             }
                         }
                     } catch (Exception e11) {
-                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e11, new StringBuilder("The exception occurs "), UniversalCredentialManagerService.TAG);
+                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                .m(
+                                        e11,
+                                        new StringBuilder("The exception occurs "),
+                                        UniversalCredentialManagerService.TAG);
                     }
                     try {
-                        for (Map.Entry entry4 : universalCredentialManagerService.activePluginsCache.entrySet()) {
+                        for (Map.Entry entry4 :
+                                universalCredentialManagerService.activePluginsCache.entrySet()) {
                             Integer num3 = (Integer) entry4.getKey();
                             String str4 = (String) entry4.getValue();
-                            Log.i(UniversalCredentialManagerService.TAG, "MSG_SYNC_UP_DATA plugin id -" + num3);
-                            Log.i(UniversalCredentialManagerService.TAG, "MSG_SYNC_UP_DATA plugin package -" + str4);
-                            if (universalCredentialManagerService.mPm.getPackagesForUid(num3.intValue()) == null && !arrayList2.contains(num3)) {
-                                Log.i(UniversalCredentialManagerService.TAG, "MSG_SYNC_UP_DATA remove plugin : " + num3);
+                            Log.i(
+                                    UniversalCredentialManagerService.TAG,
+                                    "MSG_SYNC_UP_DATA plugin id -" + num3);
+                            Log.i(
+                                    UniversalCredentialManagerService.TAG,
+                                    "MSG_SYNC_UP_DATA plugin package -" + str4);
+                            if (universalCredentialManagerService.mPm.getPackagesForUid(
+                                                    num3.intValue())
+                                            == null
+                                    && !arrayList2.contains(num3)) {
+                                Log.i(
+                                        UniversalCredentialManagerService.TAG,
+                                        "MSG_SYNC_UP_DATA remove plugin : " + num3);
                                 arrayList2.add(num3);
                             }
                         }
                     } catch (Exception e12) {
-                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e12, new StringBuilder("The exception occurs "), UniversalCredentialManagerService.TAG);
+                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                .m(
+                                        e12,
+                                        new StringBuilder("The exception occurs "),
+                                        UniversalCredentialManagerService.TAG);
                     }
                     try {
-                        Iterator it7 = universalCredentialManagerService.exemptedAppsCache.entrySet().iterator();
+                        Iterator it7 =
+                                universalCredentialManagerService
+                                        .exemptedAppsCache
+                                        .entrySet()
+                                        .iterator();
                         while (it7.hasNext()) {
                             Integer num4 = (Integer) ((Map.Entry) it7.next()).getKey();
-                            Log.i(UniversalCredentialManagerService.TAG, "MSG_SYNC_UP_DATA exempt app id -" + num4);
-                            if (universalCredentialManagerService.mPm.getPackagesForUid(num4.intValue()) == null && !arrayList2.contains(num4)) {
-                                Log.i(UniversalCredentialManagerService.TAG, "MSG_SYNC_UP_DATA remove exempt app : " + num4);
+                            Log.i(
+                                    UniversalCredentialManagerService.TAG,
+                                    "MSG_SYNC_UP_DATA exempt app id -" + num4);
+                            if (universalCredentialManagerService.mPm.getPackagesForUid(
+                                                    num4.intValue())
+                                            == null
+                                    && !arrayList2.contains(num4)) {
+                                Log.i(
+                                        UniversalCredentialManagerService.TAG,
+                                        "MSG_SYNC_UP_DATA remove exempt app : " + num4);
                                 arrayList2.add(num4);
                             }
                         }
                     } catch (Exception e13) {
-                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e13, new StringBuilder("The exception occurs "), UniversalCredentialManagerService.TAG);
+                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                .m(
+                                        e13,
+                                        new StringBuilder("The exception occurs "),
+                                        UniversalCredentialManagerService.TAG);
                     }
                     try {
-                        Iterator it8 = universalCredentialManagerService.whitelistedAppsCache.entrySet().iterator();
+                        Iterator it8 =
+                                universalCredentialManagerService
+                                        .whitelistedAppsCache
+                                        .entrySet()
+                                        .iterator();
                         while (it8.hasNext()) {
                             Integer num5 = (Integer) ((Map.Entry) it8.next()).getKey();
-                            Log.i(UniversalCredentialManagerService.TAG, "MSG_SYNC_UP_DATA Whitelist app id -" + num5);
-                            if (universalCredentialManagerService.mPm.getPackagesForUid(num5.intValue()) == null && !arrayList2.contains(num5)) {
-                                Log.i(UniversalCredentialManagerService.TAG, "MSG_SYNC_UP_DATA remove Whitelist app : " + num5);
+                            Log.i(
+                                    UniversalCredentialManagerService.TAG,
+                                    "MSG_SYNC_UP_DATA Whitelist app id -" + num5);
+                            if (universalCredentialManagerService.mPm.getPackagesForUid(
+                                                    num5.intValue())
+                                            == null
+                                    && !arrayList2.contains(num5)) {
+                                Log.i(
+                                        UniversalCredentialManagerService.TAG,
+                                        "MSG_SYNC_UP_DATA remove Whitelist app : " + num5);
                                 arrayList2.add(num5);
                             }
                         }
                     } catch (Exception e14) {
-                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e14, new StringBuilder("The exception occurs "), UniversalCredentialManagerService.TAG);
+                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                .m(
+                                        e14,
+                                        new StringBuilder("The exception occurs "),
+                                        UniversalCredentialManagerService.TAG);
                     }
                     if (arrayList2.size() > 0) {
                         int[] iArr2 = new int[arrayList2.size()];
@@ -409,26 +706,43 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                         while (it9.hasNext()) {
                             Integer num6 = (Integer) it9.next();
                             if (num6 == null) {
-                                Log.i(UniversalCredentialManagerService.TAG, "id is null, continue...");
+                                Log.i(
+                                        UniversalCredentialManagerService.TAG,
+                                        "id is null, continue...");
                             } else {
-                                Log.i(UniversalCredentialManagerService.TAG, "adding clean app id-" + num6);
+                                Log.i(
+                                        UniversalCredentialManagerService.TAG,
+                                        "adding clean app id-" + num6);
                                 iArr2[i2] = num6.intValue();
                                 i2++;
                             }
                         }
-                        Message obtainMessage2 = universalCredentialManagerService.mUCSMHandler.obtainMessage(3);
+                        Message obtainMessage2 =
+                                universalCredentialManagerService.mUCSMHandler.obtainMessage(3);
                         obtainMessage2.obj = iArr2;
-                        Log.i(UniversalCredentialManagerService.TAG, "MSG_SYNC_UP_DATA calling MSG_CLEAN_INFO...");
+                        Log.i(
+                                UniversalCredentialManagerService.TAG,
+                                "MSG_SYNC_UP_DATA calling MSG_CLEAN_INFO...");
                         universalCredentialManagerService.mUCSMHandler.sendMessage(obtainMessage2);
                     }
-                    Log.i(UniversalCredentialManagerService.TAG, "****MSG_SYNC_UP_DATA block ended****");
+                    Log.i(
+                            UniversalCredentialManagerService.TAG,
+                            "****MSG_SYNC_UP_DATA block ended****");
                     break;
                 case 7:
-                    Log.i(UniversalCredentialManagerService.TAG, "****MSG_LOCK_STATUS_UPDATE block started****");
+                    Log.i(
+                            UniversalCredentialManagerService.TAG,
+                            "****MSG_LOCK_STATUS_UPDATE block started****");
                     IUcmService ucmService$14 = UniversalCredentialManagerService.getUcmService$1();
                     if (ucmService$14 != null) {
-                        Log.i(UniversalCredentialManagerService.TAG, "notifyChangeToPlugin is called for Lock status update...");
-                        boolean isKeyguardLocked = ((KeyguardManager) universalCredentialManagerService.mContext.getSystemService("keyguard")).isKeyguardLocked();
+                        Log.i(
+                                UniversalCredentialManagerService.TAG,
+                                "notifyChangeToPlugin is called for Lock status update...");
+                        boolean isKeyguardLocked =
+                                ((KeyguardManager)
+                                                universalCredentialManagerService.mContext
+                                                        .getSystemService("keyguard"))
+                                        .isKeyguardLocked();
                         try {
                             Bundle bundle4 = new Bundle();
                             bundle4.putInt("userId", 0);
@@ -438,17 +752,29 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                                 ucmService$14.notifyChangeToPlugin((String) null, 16, bundle4);
                             }
                         } catch (Exception e15) {
-                            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e15, new StringBuilder("notifyChangeToPlugin Exception "), UniversalCredentialManagerService.TAG);
+                            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                    .m(
+                                            e15,
+                                            new StringBuilder("notifyChangeToPlugin Exception "),
+                                            UniversalCredentialManagerService.TAG);
                         }
                     }
-                    Log.i(UniversalCredentialManagerService.TAG, "****MSG_LOCK_STATUS_UPDATE block ended****");
+                    Log.i(
+                            UniversalCredentialManagerService.TAG,
+                            "****MSG_LOCK_STATUS_UPDATE block ended****");
                     break;
                 case 9:
                     IUcmService ucmService$15 = UniversalCredentialManagerService.getUcmService$1();
                     if (ucmService$15 != null) {
                         int i6 = message.arg1;
                         int i7 = message.arg2;
-                        AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(i6, i7, "notifyChangeToPlugin is called for container Lock status update containerId-", ", status-", UniversalCredentialManagerService.TAG);
+                        AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(
+                                i6,
+                                i7,
+                                "notifyChangeToPlugin is called for container Lock status update"
+                                    + " containerId-",
+                                ", status-",
+                                UniversalCredentialManagerService.TAG);
                         try {
                             Bundle bundle5 = new Bundle();
                             bundle5.putInt("userId", i6);
@@ -459,7 +785,11 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                             }
                             break;
                         } catch (Exception e16) {
-                            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e16, new StringBuilder("The exception occurs "), UniversalCredentialManagerService.TAG);
+                            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                    .m(
+                                            e16,
+                                            new StringBuilder("The exception occurs "),
+                                            UniversalCredentialManagerService.TAG);
                             return;
                         }
                     }
@@ -468,45 +798,91 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                     String[] strArr = {"adminUid"};
                     String[] strArr2 = {String.valueOf(message.arg1)};
                     try {
-                        z = universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialEnforcedLockTypeTable", strArr, strArr2);
+                        z =
+                                universalCredentialManagerService.mEdmStorageProvider
+                                        .deleteDataByFields(
+                                                "UniversalCredentialEnforcedLockTypeTable",
+                                                strArr,
+                                                strArr2);
                     } catch (Exception e17) {
                         if (UniversalCredentialManagerService.DBG) {
-                            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e17, new StringBuilder("performPreAdminCleanup - Exception delete locktype"), UniversalCredentialManagerService.TAG);
+                            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                    .m(
+                                            e17,
+                                            new StringBuilder(
+                                                    "performPreAdminCleanup - Exception delete"
+                                                        + " locktype"),
+                                            UniversalCredentialManagerService.TAG);
                         }
                         z = false;
                     }
-                    ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("performPreAdminCleanup - Enforce Lock Type status- ", UniversalCredentialManagerService.TAG, z);
+                    ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                            "performPreAdminCleanup - Enforce Lock Type status- ",
+                            UniversalCredentialManagerService.TAG,
+                            z);
                     try {
-                        z2 = universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialWhiteListTable", strArr, strArr2);
+                        z2 =
+                                universalCredentialManagerService.mEdmStorageProvider
+                                        .deleteDataByFields(
+                                                "UniversalCredentialWhiteListTable",
+                                                strArr,
+                                                strArr2);
                     } catch (Exception e18) {
                         if (UniversalCredentialManagerService.DBG) {
-                            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e18, new StringBuilder("performPreAdminCleanup - Exception delete whitelist"), UniversalCredentialManagerService.TAG);
+                            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                    .m(
+                                            e18,
+                                            new StringBuilder(
+                                                    "performPreAdminCleanup - Exception delete"
+                                                        + " whitelist"),
+                                            UniversalCredentialManagerService.TAG);
                         }
                     }
-                    ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("performPreAdminCleanup - White List status - ", UniversalCredentialManagerService.TAG, z2);
+                    ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                            "performPreAdminCleanup - White List status - ",
+                            UniversalCredentialManagerService.TAG,
+                            z2);
                     break;
                 case 11:
-                    Log.i(UniversalCredentialManagerService.TAG, "****MSG_SHUTDOWN block started****");
+                    Log.i(
+                            UniversalCredentialManagerService.TAG,
+                            "****MSG_SHUTDOWN block started****");
                     try {
                         Bundle bundle6 = new Bundle();
-                        IUcmService ucmService$16 = UniversalCredentialManagerService.getUcmService$1();
+                        IUcmService ucmService$16 =
+                                UniversalCredentialManagerService.getUcmService$1();
                         if (ucmService$16 != null) {
                             ucmService$16.notifyChangeToPlugin((String) null, 22, bundle6);
                         }
                     } catch (Exception e19) {
-                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e19, new StringBuilder("The exception occurs "), UniversalCredentialManagerService.TAG);
+                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                .m(
+                                        e19,
+                                        new StringBuilder("The exception occurs "),
+                                        UniversalCredentialManagerService.TAG);
                     }
-                    Log.i(UniversalCredentialManagerService.TAG, "****MSG_SHUTDOWN block ended****");
+                    Log.i(
+                            UniversalCredentialManagerService.TAG,
+                            "****MSG_SHUTDOWN block ended****");
                     break;
             }
         }
     }
 
     /* renamed from: -$$Nest$mgetAllAdmins, reason: not valid java name */
-    public static List m535$$Nest$mgetAllAdmins(UniversalCredentialManagerService universalCredentialManagerService) {
+    public static List m535$$Nest$mgetAllAdmins(
+            UniversalCredentialManagerService universalCredentialManagerService) {
         universalCredentialManagerService.getClass();
         ArrayList arrayList = new ArrayList();
-        Iterator it = universalCredentialManagerService.mEdmStorageProvider.getDataByFields("UniversalCredentialInfoTable", null, null, new String[]{"adminUid"}).iterator();
+        Iterator it =
+                universalCredentialManagerService
+                        .mEdmStorageProvider
+                        .getDataByFields(
+                                "UniversalCredentialInfoTable",
+                                null,
+                                null,
+                                new String[] {"adminUid"})
+                        .iterator();
         while (it.hasNext()) {
             ContentValues contentValues = (ContentValues) it.next();
             if (contentValues == null) {
@@ -524,18 +900,29 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
     }
 
     /* renamed from: -$$Nest$mgetAllExemptedApps, reason: not valid java name */
-    public static ArrayList m536$$Nest$mgetAllExemptedApps(UniversalCredentialManagerService universalCredentialManagerService) {
-        return universalCredentialManagerService.mEdmStorageProvider.getDataByFields("UniversalCredentialExemptTable", null, null, new String[]{"appUid", "appPackage"});
+    public static ArrayList m536$$Nest$mgetAllExemptedApps(
+            UniversalCredentialManagerService universalCredentialManagerService) {
+        return universalCredentialManagerService.mEdmStorageProvider.getDataByFields(
+                "UniversalCredentialExemptTable",
+                null,
+                null,
+                new String[] {"appUid", "appPackage"});
     }
 
     /* renamed from: -$$Nest$mgetAllUsers, reason: not valid java name */
-    public static List m537$$Nest$mgetAllUsers(UniversalCredentialManagerService universalCredentialManagerService) {
+    public static List m537$$Nest$mgetAllUsers(
+            UniversalCredentialManagerService universalCredentialManagerService) {
         universalCredentialManagerService.getClass();
         Log.i(TAG, "getAllUsers() is called...");
         ArrayList arrayList = new ArrayList();
         try {
             String[] strArr = {"userId"};
-            Iterator it = universalCredentialManagerService.mEdmStorageProvider.getDataByFields("UniversalCredentialCertificateTable", null, null, strArr).iterator();
+            Iterator it =
+                    universalCredentialManagerService
+                            .mEdmStorageProvider
+                            .getDataByFields(
+                                    "UniversalCredentialCertificateTable", null, null, strArr)
+                            .iterator();
             while (it.hasNext()) {
                 ContentValues contentValues = (ContentValues) it.next();
                 if (contentValues == null) {
@@ -549,7 +936,12 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                     }
                 }
             }
-            Iterator it2 = universalCredentialManagerService.mEdmStorageProvider.getDataByFields("UniversalCredentialWhiteListTable", null, null, strArr).iterator();
+            Iterator it2 =
+                    universalCredentialManagerService
+                            .mEdmStorageProvider
+                            .getDataByFields(
+                                    "UniversalCredentialWhiteListTable", null, null, strArr)
+                            .iterator();
             while (it2.hasNext()) {
                 ContentValues contentValues2 = (ContentValues) it2.next();
                 if (contentValues2 == null) {
@@ -563,7 +955,12 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                     }
                 }
             }
-            Iterator it3 = universalCredentialManagerService.mEdmStorageProvider.getDataByFields("UniversalCredentialDefaultInstallTable", null, null, strArr).iterator();
+            Iterator it3 =
+                    universalCredentialManagerService
+                            .mEdmStorageProvider
+                            .getDataByFields(
+                                    "UniversalCredentialDefaultInstallTable", null, null, strArr)
+                            .iterator();
             while (it3.hasNext()) {
                 ContentValues contentValues3 = (ContentValues) it3.next();
                 if (contentValues3 == null) {
@@ -577,7 +974,11 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                     }
                 }
             }
-            Iterator it4 = universalCredentialManagerService.mEdmStorageProvider.getDataByFields("UniversalCredentialExemptTable", null, null, strArr).iterator();
+            Iterator it4 =
+                    universalCredentialManagerService
+                            .mEdmStorageProvider
+                            .getDataByFields("UniversalCredentialExemptTable", null, null, strArr)
+                            .iterator();
             while (it4.hasNext()) {
                 ContentValues contentValues4 = (ContentValues) it4.next();
                 if (contentValues4 == null) {
@@ -592,22 +993,34 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 }
             }
         } catch (Exception e) {
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("The exception occurs "), TAG);
         }
         return arrayList;
     }
 
     /* renamed from: -$$Nest$mgetAllWhitelistedApps, reason: not valid java name */
-    public static ArrayList m538$$Nest$mgetAllWhitelistedApps(UniversalCredentialManagerService universalCredentialManagerService) {
-        return universalCredentialManagerService.mEdmStorageProvider.getDataByFields("UniversalCredentialWhiteListTable", null, null, new String[]{"appUid", "appPackage"});
+    public static ArrayList m538$$Nest$mgetAllWhitelistedApps(
+            UniversalCredentialManagerService universalCredentialManagerService) {
+        return universalCredentialManagerService.mEdmStorageProvider.getDataByFields(
+                "UniversalCredentialWhiteListTable",
+                null,
+                null,
+                new String[] {"appUid", "appPackage"});
     }
 
     /* renamed from: -$$Nest$mnotifyAdminUninstall, reason: not valid java name */
-    public static void m539$$Nest$mnotifyAdminUninstall(UniversalCredentialManagerService universalCredentialManagerService, int i) {
+    public static void m539$$Nest$mnotifyAdminUninstall(
+            UniversalCredentialManagerService universalCredentialManagerService, int i) {
         universalCredentialManagerService.getClass();
         DirEncryptService$$ExternalSyntheticOutline0.m(i, "notifyAdminUninstall -> adminUid-", TAG);
         try {
-            ArrayList dataByFields = universalCredentialManagerService.mEdmStorageProvider.getDataByFields("UniversalCredentialInfoTable", new String[]{"adminUid"}, new String[]{String.valueOf(i)}, new String[]{"userId", "storageName", "storagePackageName"});
+            ArrayList dataByFields =
+                    universalCredentialManagerService.mEdmStorageProvider.getDataByFields(
+                            "UniversalCredentialInfoTable",
+                            new String[] {"adminUid"},
+                            new String[] {String.valueOf(i)},
+                            new String[] {"userId", "storageName", "storagePackageName"});
             if (dataByFields.size() > 0) {
                 Iterator it = dataByFields.iterator();
                 while (it.hasNext()) {
@@ -620,11 +1033,19 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                         String asString2 = contentValues.getAsString("storagePackageName");
                         if (asInteger != null && asString != null && asString2 != null) {
                             int intValue = asInteger.intValue();
-                            Log.i(TAG, "notifyAdminUninstall - userId-" + intValue + ", csName-" + asString + ", csPackage-" + asString2);
+                            Log.i(
+                                    TAG,
+                                    "notifyAdminUninstall - userId-"
+                                            + intValue
+                                            + ", csName-"
+                                            + asString
+                                            + ", csPackage-"
+                                            + asString2);
                             CredentialStorage credentialStorage = new CredentialStorage();
                             credentialStorage.name = asString;
                             credentialStorage.packageName = asString2;
-                            universalCredentialManagerService.notifyToPlugin(i, credentialStorage, intValue);
+                            universalCredentialManagerService.notifyToPlugin(
+                                    i, credentialStorage, intValue);
                         }
                         Log.i(TAG, "invalid parameters, continue...");
                     }
@@ -632,16 +1053,20 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
         } catch (Exception e) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("The exception occurs "), TAG);
             }
         }
     }
 
     /* renamed from: -$$Nest$mnotifyPluginIsUninstalled, reason: not valid java name */
-    public static void m540$$Nest$mnotifyPluginIsUninstalled(UniversalCredentialManagerService universalCredentialManagerService, String str) {
-        ArrayList arrayList = (ArrayList) universalCredentialManagerService.getAdminIdRelatedToStorage(str);
+    public static void m540$$Nest$mnotifyPluginIsUninstalled(
+            UniversalCredentialManagerService universalCredentialManagerService, String str) {
+        ArrayList arrayList =
+                (ArrayList) universalCredentialManagerService.getAdminIdRelatedToStorage(str);
         if (arrayList.size() == 0) {
-            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("No admin found related to package : ", str, TAG);
+            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                    "No admin found related to package : ", str, TAG);
             return;
         }
         Iterator it = arrayList.iterator();
@@ -649,7 +1074,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             Integer num = (Integer) it.next();
             String str2 = TAG;
             Log.i(str2, "notifyPluginIsUninstalled to " + num);
-            String[] packagesForUid = universalCredentialManagerService.mPm.getPackagesForUid(num.intValue());
+            String[] packagesForUid =
+                    universalCredentialManagerService.mPm.getPackagesForUid(num.intValue());
             if (packagesForUid == null) {
                 Log.i(str2, "cannot find admin package name of uid : " + num);
             } else {
@@ -659,7 +1085,9 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                     } else {
                         String str4 = TAG;
                         Log.i(str4, "Sending event update to package ".concat(str3));
-                        Intent intent = new Intent("com.samsung.android.knox.intent.action.UCM_NOTIFY_EVENT");
+                        Intent intent =
+                                new Intent(
+                                        "com.samsung.android.knox.intent.action.UCM_NOTIFY_EVENT");
                         intent.setPackage(str3);
                         Bundle bundle = new Bundle();
                         bundle.putInt("event_id", 1);
@@ -667,16 +1095,31 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                         intent.putExtras(bundle);
                         IPackageManager packageManager = AppGlobals.getPackageManager();
                         try {
-                            if (packageManager.checkPermission("com.samsung.android.knox.permission.KNOX_UCM_OTHER_MGMT", str, UserHandle.getUserId(num.intValue())) == 0) {
-                                universalCredentialManagerService.mContext.sendBroadcastAsUser(intent, new UserHandle(UserHandle.getUserId(num.intValue())), "com.samsung.android.knox.permission.KNOX_UCM_OTHER_MGMT");
-                            } else if (packageManager.checkPermission("com.samsung.android.knox.permission.KNOX_UCM_MGMT", str, UserHandle.getUserId(num.intValue())) == 0) {
-                                universalCredentialManagerService.mContext.sendBroadcastAsUser(intent, new UserHandle(UserHandle.getUserId(num.intValue())), "com.samsung.android.knox.permission.KNOX_UCM_MGMT");
+                            if (packageManager.checkPermission(
+                                            "com.samsung.android.knox.permission.KNOX_UCM_OTHER_MGMT",
+                                            str,
+                                            UserHandle.getUserId(num.intValue()))
+                                    == 0) {
+                                universalCredentialManagerService.mContext.sendBroadcastAsUser(
+                                        intent,
+                                        new UserHandle(UserHandle.getUserId(num.intValue())),
+                                        "com.samsung.android.knox.permission.KNOX_UCM_OTHER_MGMT");
+                            } else if (packageManager.checkPermission(
+                                            "com.samsung.android.knox.permission.KNOX_UCM_MGMT",
+                                            str,
+                                            UserHandle.getUserId(num.intValue()))
+                                    == 0) {
+                                universalCredentialManagerService.mContext.sendBroadcastAsUser(
+                                        intent,
+                                        new UserHandle(UserHandle.getUserId(num.intValue())),
+                                        "com.samsung.android.knox.permission.KNOX_UCM_MGMT");
                             } else {
                                 Log.i(str4, "admin does not have proper UCM permission");
                             }
                             Log.i(str4, "notifyPluginIsUninstalled done");
                         } catch (Exception e) {
-                            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+                            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                    .m(e, new StringBuilder("The exception occurs "), TAG);
                         }
                     }
                 }
@@ -685,247 +1128,358 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
     }
 
     /* renamed from: -$$Nest$mperformAdminCleanup, reason: not valid java name */
-    public static void m541$$Nest$mperformAdminCleanup(UniversalCredentialManagerService universalCredentialManagerService, int i) {
+    public static void m541$$Nest$mperformAdminCleanup(
+            UniversalCredentialManagerService universalCredentialManagerService, int i) {
         boolean z;
         universalCredentialManagerService.getClass();
         String[] strArr = {"adminUid"};
         String[] strArr2 = {String.valueOf(i)};
         try {
-            z = universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialCertificateTable", strArr, strArr2);
+            z =
+                    universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialCertificateTable", strArr, strArr2);
         } catch (Exception e) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("The exception occurs "), TAG);
             }
             z = false;
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("performAdminCleanup Clean certificate status-", TAG, z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "performAdminCleanup Clean certificate status-", TAG, z);
         try {
-            z = universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialWhiteListTable", strArr, strArr2);
+            z =
+                    universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialWhiteListTable", strArr, strArr2);
         } catch (Exception e2) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e2, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e2, new StringBuilder("The exception occurs "), TAG);
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("performAdminCleanup WhiteList APP status-", TAG, z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "performAdminCleanup WhiteList APP status-", TAG, z);
         try {
-            z = universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialDefaultInstallTable", strArr, strArr2);
+            z =
+                    universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialDefaultInstallTable", strArr, strArr2);
         } catch (Exception e3) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e3, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e3, new StringBuilder("The exception occurs "), TAG);
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("performAdminCleanup Default Install status-", TAG, z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "performAdminCleanup Default Install status-", TAG, z);
         try {
-            z = universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialInfoTable", strArr, strArr2);
+            z =
+                    universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialInfoTable", strArr, strArr2);
         } catch (Exception e4) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e4, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e4, new StringBuilder("The exception occurs "), TAG);
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("performAdminCleanup Certificate info status-", TAG, z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "performAdminCleanup Certificate info status-", TAG, z);
         try {
-            z = universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialExemptTable", strArr, strArr2);
+            z =
+                    universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialExemptTable", strArr, strArr2);
         } catch (Exception e5) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e5, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e5, new StringBuilder("The exception occurs "), TAG);
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("performAdminCleanup - Exempt apps status- ", TAG, z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "performAdminCleanup - Exempt apps status- ", TAG, z);
         try {
-            z = universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialEnforcedLockTypeTable", strArr, strArr2);
+            z =
+                    universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialEnforcedLockTypeTable", strArr, strArr2);
         } catch (Exception e6) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e6, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e6, new StringBuilder("The exception occurs "), TAG);
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("performAdminCleanup - Enforce Lock Type status- ", TAG, z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "performAdminCleanup - Enforce Lock Type status- ", TAG, z);
         try {
-            z = universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialEnabledLockTypeTable", strArr, strArr2);
+            z =
+                    universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialEnabledLockTypeTable", strArr, strArr2);
         } catch (Exception e7) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e7, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e7, new StringBuilder("The exception occurs "), TAG);
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("performAdminCleanup - Enable Lock Type status- ", TAG, z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "performAdminCleanup - Enable Lock Type status- ", TAG, z);
         try {
-            z = universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialCACertificateTable", strArr, strArr2);
+            z =
+                    universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialCACertificateTable", strArr, strArr2);
         } catch (Exception e8) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e8, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e8, new StringBuilder("The exception occurs "), TAG);
             }
         }
         Log.i(TAG, "performAdminCleanup - CA Cert status- " + z);
-        universalCredentialManagerService.mExistCert = universalCredentialManagerService.checkCountFromEdmDB("UniversalCredentialCertificateTable");
-        universalCredentialManagerService.mExistWhitelist = universalCredentialManagerService.checkCountFromEdmDB("UniversalCredentialWhiteListTable");
+        universalCredentialManagerService.mExistCert =
+                universalCredentialManagerService.checkCountFromEdmDB(
+                        "UniversalCredentialCertificateTable");
+        universalCredentialManagerService.mExistWhitelist =
+                universalCredentialManagerService.checkCountFromEdmDB(
+                        "UniversalCredentialWhiteListTable");
         universalCredentialManagerService.updateUcmCryptoProp();
     }
 
     /* renamed from: -$$Nest$mperformExemptedAppCleanup, reason: not valid java name */
-    public static void m542$$Nest$mperformExemptedAppCleanup(UniversalCredentialManagerService universalCredentialManagerService, int i, String str) {
+    public static void m542$$Nest$mperformExemptedAppCleanup(
+            UniversalCredentialManagerService universalCredentialManagerService,
+            int i,
+            String str) {
         boolean z;
         universalCredentialManagerService.getClass();
         try {
-            z = universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialExemptTable", new String[]{"userId", "appPackage"}, new String[]{String.valueOf(i), str});
+            z =
+                    universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialExemptTable",
+                            new String[] {"userId", "appPackage"},
+                            new String[] {String.valueOf(i), str});
         } catch (Exception e) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("The exception occurs "), TAG);
             }
             z = false;
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("performExemptedAppCleanup Exempted App status-", TAG, z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "performExemptedAppCleanup Exempted App status-", TAG, z);
     }
 
     /* renamed from: -$$Nest$mperformStorageCleanup, reason: not valid java name */
-    public static void m543$$Nest$mperformStorageCleanup(UniversalCredentialManagerService universalCredentialManagerService, String str) {
+    public static void m543$$Nest$mperformStorageCleanup(
+            UniversalCredentialManagerService universalCredentialManagerService, String str) {
         boolean z;
         universalCredentialManagerService.getClass();
         String[] strArr = {"storagePackageName"};
         String[] strArr2 = {str};
         try {
-            z = universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialCertificateTable", strArr, strArr2);
+            z =
+                    universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialCertificateTable", strArr, strArr2);
         } catch (Exception e) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("The exception occurs "), TAG);
             }
             z = false;
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("performStorageCleanup Clean certificate status-", TAG, z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "performStorageCleanup Clean certificate status-", TAG, z);
         try {
-            z = universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialWhiteListTable", strArr, strArr2);
+            z =
+                    universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialWhiteListTable", strArr, strArr2);
         } catch (Exception e2) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e2, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e2, new StringBuilder("The exception occurs "), TAG);
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("performStorageCleanup WhiteList APP status-", TAG, z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "performStorageCleanup WhiteList APP status-", TAG, z);
         try {
-            z = universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialDefaultInstallTable", strArr, strArr2);
+            z =
+                    universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialDefaultInstallTable", strArr, strArr2);
         } catch (Exception e3) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e3, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e3, new StringBuilder("The exception occurs "), TAG);
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("performStorageCleanup Default Install status-", TAG, z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "performStorageCleanup Default Install status-", TAG, z);
         try {
-            z = universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialInfoTable", strArr, strArr2);
+            z =
+                    universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialInfoTable", strArr, strArr2);
         } catch (Exception e4) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e4, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e4, new StringBuilder("The exception occurs "), TAG);
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("performStorageCleanup Certificate info status-", TAG, z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "performStorageCleanup Certificate info status-", TAG, z);
         try {
-            universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialExemptTable", strArr, strArr2);
+            universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields(
+                    "UniversalCredentialExemptTable", strArr, strArr2);
         } catch (Exception e5) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e5, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e5, new StringBuilder("The exception occurs "), TAG);
             }
         }
         try {
-            universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialEnforcedLockTypeTable", strArr, strArr2);
+            universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields(
+                    "UniversalCredentialEnforcedLockTypeTable", strArr, strArr2);
         } catch (Exception e6) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e6, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e6, new StringBuilder("The exception occurs "), TAG);
             }
         }
         try {
-            universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialEnabledLockTypeTable", strArr, strArr2);
+            universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields(
+                    "UniversalCredentialEnabledLockTypeTable", strArr, strArr2);
         } catch (Exception e7) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e7, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e7, new StringBuilder("The exception occurs "), TAG);
             }
         }
-        universalCredentialManagerService.mExistCert = universalCredentialManagerService.checkCountFromEdmDB("UniversalCredentialCertificateTable");
-        universalCredentialManagerService.mExistWhitelist = universalCredentialManagerService.checkCountFromEdmDB("UniversalCredentialWhiteListTable");
+        universalCredentialManagerService.mExistCert =
+                universalCredentialManagerService.checkCountFromEdmDB(
+                        "UniversalCredentialCertificateTable");
+        universalCredentialManagerService.mExistWhitelist =
+                universalCredentialManagerService.checkCountFromEdmDB(
+                        "UniversalCredentialWhiteListTable");
         universalCredentialManagerService.updateUcmCryptoProp();
     }
 
     /* renamed from: -$$Nest$mperformUserCleanup, reason: not valid java name */
-    public static void m544$$Nest$mperformUserCleanup(UniversalCredentialManagerService universalCredentialManagerService, int i) {
+    public static void m544$$Nest$mperformUserCleanup(
+            UniversalCredentialManagerService universalCredentialManagerService, int i) {
         boolean z;
         universalCredentialManagerService.getClass();
         String[] strArr = {"userId"};
         String[] strArr2 = {String.valueOf(i)};
         try {
-            z = universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialCertificateTable", strArr, strArr2);
+            z =
+                    universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialCertificateTable", strArr, strArr2);
         } catch (Exception e) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("The exception occurs "), TAG);
             }
             z = false;
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("performUserCleanup Clean certificate status-", TAG, z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "performUserCleanup Clean certificate status-", TAG, z);
         try {
-            z = universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialWhiteListTable", strArr, strArr2);
+            z =
+                    universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialWhiteListTable", strArr, strArr2);
         } catch (Exception e2) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e2, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e2, new StringBuilder("The exception occurs "), TAG);
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("performUserCleanup WhiteList APP status-", TAG, z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "performUserCleanup WhiteList APP status-", TAG, z);
         try {
-            z = universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialDefaultInstallTable", strArr, strArr2);
+            z =
+                    universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialDefaultInstallTable", strArr, strArr2);
         } catch (Exception e3) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e3, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e3, new StringBuilder("The exception occurs "), TAG);
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("performUserCleanup Default Install status-", TAG, z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "performUserCleanup Default Install status-", TAG, z);
         try {
-            z = universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialInfoTable", strArr, strArr2);
+            z =
+                    universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialInfoTable", strArr, strArr2);
         } catch (Exception e4) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e4, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e4, new StringBuilder("The exception occurs "), TAG);
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("performUserCleanup Certificate info status-", TAG, z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "performUserCleanup Certificate info status-", TAG, z);
         try {
-            universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialExemptTable", strArr, strArr2);
+            universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields(
+                    "UniversalCredentialExemptTable", strArr, strArr2);
         } catch (Exception e5) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e5, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e5, new StringBuilder("The exception occurs "), TAG);
             }
         }
         try {
-            universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialCACertificateTable", strArr, strArr2);
+            universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields(
+                    "UniversalCredentialCACertificateTable", strArr, strArr2);
         } catch (Exception e6) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e6, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e6, new StringBuilder("The exception occurs "), TAG);
             }
         }
         try {
-            universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialEnforcedLockTypeTable", strArr, strArr2);
+            universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields(
+                    "UniversalCredentialEnforcedLockTypeTable", strArr, strArr2);
         } catch (Exception e7) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e7, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e7, new StringBuilder("The exception occurs "), TAG);
             }
         }
         try {
-            universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialEnabledLockTypeTable", strArr, strArr2);
+            universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields(
+                    "UniversalCredentialEnabledLockTypeTable", strArr, strArr2);
         } catch (Exception e8) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e8, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e8, new StringBuilder("The exception occurs "), TAG);
             }
         }
-        universalCredentialManagerService.mExistCert = universalCredentialManagerService.checkCountFromEdmDB("UniversalCredentialCertificateTable");
-        universalCredentialManagerService.mExistWhitelist = universalCredentialManagerService.checkCountFromEdmDB("UniversalCredentialWhiteListTable");
+        universalCredentialManagerService.mExistCert =
+                universalCredentialManagerService.checkCountFromEdmDB(
+                        "UniversalCredentialCertificateTable");
+        universalCredentialManagerService.mExistWhitelist =
+                universalCredentialManagerService.checkCountFromEdmDB(
+                        "UniversalCredentialWhiteListTable");
         universalCredentialManagerService.updateUcmCryptoProp();
     }
 
     /* renamed from: -$$Nest$mperformWhitelistAppCleanup, reason: not valid java name */
-    public static void m545$$Nest$mperformWhitelistAppCleanup(UniversalCredentialManagerService universalCredentialManagerService, int i, String str) {
+    public static void m545$$Nest$mperformWhitelistAppCleanup(
+            UniversalCredentialManagerService universalCredentialManagerService,
+            int i,
+            String str) {
         boolean z;
         universalCredentialManagerService.getClass();
         try {
-            z = universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields("UniversalCredentialWhiteListTable", new String[]{"userId", "appPackage"}, new String[]{String.valueOf(i), str});
+            z =
+                    universalCredentialManagerService.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialWhiteListTable",
+                            new String[] {"userId", "appPackage"},
+                            new String[] {String.valueOf(i), str});
         } catch (Exception e) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("The exception occurs "), TAG);
             }
             z = false;
         }
         Log.i(TAG, "performWhitelistAPpCleanup WhiteList APP status-" + z);
-        universalCredentialManagerService.mExistWhitelist = universalCredentialManagerService.checkCountFromEdmDB("UniversalCredentialWhiteListTable");
+        universalCredentialManagerService.mExistWhitelist =
+                universalCredentialManagerService.checkCountFromEdmDB(
+                        "UniversalCredentialWhiteListTable");
         universalCredentialManagerService.updateUcmCryptoProp();
     }
 
@@ -940,249 +1494,459 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         this.mExistCert = false;
         this.mExistWhitelist = false;
         final int i = 0;
-        this.mSystemReceiver = new BroadcastReceiver(this) { // from class: com.android.server.enterprise.ucm.UniversalCredentialManagerService.2
-            public final /* synthetic */ UniversalCredentialManagerService this$0;
+        this.mSystemReceiver =
+                new BroadcastReceiver(this) { // from class:
+                    // com.android.server.enterprise.ucm.UniversalCredentialManagerService.2
+                    public final /* synthetic */ UniversalCredentialManagerService this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                String keyguardStorageForCurrentUser;
-                switch (i) {
-                    case 0:
-                        String action = intent.getAction();
-                        String str = UniversalCredentialManagerService.TAG;
-                        Log.i(str, "inside mBReciever onReceive : " + action);
-                        if (!action.equals("android.intent.action.USER_REMOVED")) {
-                            if (!action.equals("android.intent.action.LOCKED_BOOT_COMPLETED")) {
-                                if (!action.equals("android.intent.action.ACTION_SHUTDOWN")) {
-                                    if (!action.equals("android.intent.action.SCREEN_ON") && !action.equals("android.intent.action.SCREEN_OFF") && !action.equals("android.intent.action.USER_PRESENT")) {
-                                        if (action.equals("android.intent.action.DEVICE_LOCKED_CHANGED")) {
-                                            int intExtra = intent.getIntExtra("android.intent.extra.user_handle", 0);
-                                            UniversalCredentialManagerService universalCredentialManagerService = this.this$0;
-                                            if (universalCredentialManagerService.mKgm == null) {
-                                                universalCredentialManagerService.mKgm = (KeyguardManager) universalCredentialManagerService.mContext.getSystemService("keyguard");
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        String keyguardStorageForCurrentUser;
+                        switch (i) {
+                            case 0:
+                                String action = intent.getAction();
+                                String str = UniversalCredentialManagerService.TAG;
+                                Log.i(str, "inside mBReciever onReceive : " + action);
+                                if (!action.equals("android.intent.action.USER_REMOVED")) {
+                                    if (!action.equals(
+                                            "android.intent.action.LOCKED_BOOT_COMPLETED")) {
+                                        if (!action.equals(
+                                                "android.intent.action.ACTION_SHUTDOWN")) {
+                                            if (!action.equals("android.intent.action.SCREEN_ON")
+                                                    && !action.equals(
+                                                            "android.intent.action.SCREEN_OFF")
+                                                    && !action.equals(
+                                                            "android.intent.action.USER_PRESENT")) {
+                                                if (action.equals(
+                                                        "android.intent.action.DEVICE_LOCKED_CHANGED")) {
+                                                    int intExtra =
+                                                            intent.getIntExtra(
+                                                                    "android.intent.extra.user_handle",
+                                                                    0);
+                                                    UniversalCredentialManagerService
+                                                            universalCredentialManagerService =
+                                                                    this.this$0;
+                                                    if (universalCredentialManagerService.mKgm
+                                                            == null) {
+                                                        universalCredentialManagerService.mKgm =
+                                                                (KeyguardManager)
+                                                                        universalCredentialManagerService
+                                                                                .mContext
+                                                                                .getSystemService(
+                                                                                        "keyguard");
+                                                    }
+                                                    boolean isDeviceLocked =
+                                                            universalCredentialManagerService.mKgm
+                                                                    .isDeviceLocked(intExtra);
+                                                    Log.i(
+                                                            str,
+                                                            "mLockEventReceiver. userId ["
+                                                                    + intExtra
+                                                                    + "] isDeviceLocked ["
+                                                                    + isDeviceLocked
+                                                                    + "]");
+                                                    Message obtainMessage =
+                                                            this.this$0.mUCSMHandler.obtainMessage(
+                                                                    9);
+                                                    obtainMessage.arg1 = intExtra;
+                                                    obtainMessage.arg2 = !isDeviceLocked ? 1 : 0;
+                                                    this.this$0.mUCSMHandler.sendMessage(
+                                                            obtainMessage);
+                                                    break;
+                                                }
+                                            } else {
+                                                this.this$0.mUCSMHandler.sendMessage(
+                                                        this.this$0.mUCSMHandler.obtainMessage(7));
+                                                break;
                                             }
-                                            boolean isDeviceLocked = universalCredentialManagerService.mKgm.isDeviceLocked(intExtra);
-                                            Log.i(str, "mLockEventReceiver. userId [" + intExtra + "] isDeviceLocked [" + isDeviceLocked + "]");
-                                            Message obtainMessage = this.this$0.mUCSMHandler.obtainMessage(9);
-                                            obtainMessage.arg1 = intExtra;
-                                            obtainMessage.arg2 = !isDeviceLocked ? 1 : 0;
-                                            this.this$0.mUCSMHandler.sendMessage(obtainMessage);
+                                        } else {
+                                            this.this$0.mUCSMHandler.sendMessage(
+                                                    this.this$0.mUCSMHandler.obtainMessage(11));
                                             break;
                                         }
                                     } else {
-                                        this.this$0.mUCSMHandler.sendMessage(this.this$0.mUCSMHandler.obtainMessage(7));
-                                        break;
-                                    }
-                                } else {
-                                    this.this$0.mUCSMHandler.sendMessage(this.this$0.mUCSMHandler.obtainMessage(11));
-                                    break;
-                                }
-                            } else {
-                                this.this$0.mUCSMHandler.sendMessage(this.this$0.mUCSMHandler.obtainMessage(6));
-                                UniversalCredentialManagerService universalCredentialManagerService2 = this.this$0;
-                                universalCredentialManagerService2.getClass();
-                                Log.i(str, "showEnforcedLockTypeNotificationForAllUser ");
-                                Iterator it = ((UserManager) universalCredentialManagerService2.mContext.getSystemService("user")).getUsers().iterator();
-                                while (it.hasNext()) {
-                                    int i2 = ((UserInfo) it.next()).id;
-                                    try {
-                                        CredentialStorage enforcedCredentialStorageFromDb = universalCredentialManagerService2.getEnforcedCredentialStorageFromDb(i2);
-                                        IUcmService ucmService$1 = UniversalCredentialManagerService.getUcmService$1();
-                                        if (enforcedCredentialStorageFromDb != null && ucmService$1 != null) {
-                                            if (UniversalCredentialManagerService.DBG) {
-                                                Log.i(UniversalCredentialManagerService.TAG, "showEnforcedLockTypeNotificationForAllUser userId: " + i2 + ", cs.name: " + enforcedCredentialStorageFromDb.name);
-                                            }
-                                            if (!enforcedCredentialStorageFromDb.name.equalsIgnoreCase(ucmService$1.getKeyguardStorageForCurrentUser(i2))) {
-                                                ucmService$1.showEnforcedLockTypeNotification(i2, enforcedCredentialStorageFromDb.name);
+                                        this.this$0.mUCSMHandler.sendMessage(
+                                                this.this$0.mUCSMHandler.obtainMessage(6));
+                                        UniversalCredentialManagerService
+                                                universalCredentialManagerService2 = this.this$0;
+                                        universalCredentialManagerService2.getClass();
+                                        Log.i(str, "showEnforcedLockTypeNotificationForAllUser ");
+                                        Iterator it =
+                                                ((UserManager)
+                                                                universalCredentialManagerService2
+                                                                        .mContext.getSystemService(
+                                                                        "user"))
+                                                        .getUsers()
+                                                        .iterator();
+                                        while (it.hasNext()) {
+                                            int i2 = ((UserInfo) it.next()).id;
+                                            try {
+                                                CredentialStorage enforcedCredentialStorageFromDb =
+                                                        universalCredentialManagerService2
+                                                                .getEnforcedCredentialStorageFromDb(
+                                                                        i2);
+                                                IUcmService ucmService$1 =
+                                                        UniversalCredentialManagerService
+                                                                .getUcmService$1();
+                                                if (enforcedCredentialStorageFromDb != null
+                                                        && ucmService$1 != null) {
+                                                    if (UniversalCredentialManagerService.DBG) {
+                                                        Log.i(
+                                                                UniversalCredentialManagerService
+                                                                        .TAG,
+                                                                "showEnforcedLockTypeNotificationForAllUser"
+                                                                    + " userId: "
+                                                                        + i2
+                                                                        + ", cs.name: "
+                                                                        + enforcedCredentialStorageFromDb
+                                                                                .name);
+                                                    }
+                                                    if (!enforcedCredentialStorageFromDb.name
+                                                            .equalsIgnoreCase(
+                                                                    ucmService$1
+                                                                            .getKeyguardStorageForCurrentUser(
+                                                                                    i2))) {
+                                                        ucmService$1
+                                                                .showEnforcedLockTypeNotification(
+                                                                        i2,
+                                                                        enforcedCredentialStorageFromDb
+                                                                                .name);
+                                                    }
+                                                }
+                                            } catch (Exception e) {
+                                                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                                        .m(
+                                                                e,
+                                                                new StringBuilder(
+                                                                        "The exception occurs "),
+                                                                UniversalCredentialManagerService
+                                                                        .TAG);
                                             }
                                         }
-                                    } catch (Exception e) {
-                                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), UniversalCredentialManagerService.TAG);
+                                        this.this$0.getClass();
+                                        try {
+                                            IUcmService ucmService$12 =
+                                                    UniversalCredentialManagerService
+                                                            .getUcmService$1();
+                                            if (ucmService$12 != null
+                                                    && (keyguardStorageForCurrentUser =
+                                                                    ucmService$12
+                                                                            .getKeyguardStorageForCurrentUser(
+                                                                                    0))
+                                                            != null
+                                                    && !keyguardStorageForCurrentUser.isEmpty()
+                                                    && !"none"
+                                                            .equalsIgnoreCase(
+                                                                    keyguardStorageForCurrentUser)) {
+                                                SystemProperties.set(
+                                                        "persist.keyguard.ucs", "true");
+                                                break;
+                                            }
+                                        } catch (Exception e2) {
+                                            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                                    .m(
+                                                            e2,
+                                                            new StringBuilder(
+                                                                    "The exception occurs "),
+                                                            UniversalCredentialManagerService.TAG);
+                                            return;
+                                        }
                                     }
+                                } else {
+                                    int intExtra2 =
+                                            intent.getIntExtra(
+                                                    "android.intent.extra.user_handle", -1);
+                                    DirEncryptService$$ExternalSyntheticOutline0.m(
+                                            intExtra2, "ACTION_USER_REMOVED UserHandle : ", str);
+                                    Message obtainMessage2 =
+                                            this.this$0.mUCSMHandler.obtainMessage(1);
+                                    obtainMessage2.arg1 = intExtra2;
+                                    this.this$0.mUCSMHandler.sendMessage(obtainMessage2);
+                                    break;
                                 }
-                                this.this$0.getClass();
-                                try {
-                                    IUcmService ucmService$12 = UniversalCredentialManagerService.getUcmService$1();
-                                    if (ucmService$12 != null && (keyguardStorageForCurrentUser = ucmService$12.getKeyguardStorageForCurrentUser(0)) != null && !keyguardStorageForCurrentUser.isEmpty() && !"none".equalsIgnoreCase(keyguardStorageForCurrentUser)) {
-                                        SystemProperties.set("persist.keyguard.ucs", "true");
-                                        break;
-                                    }
-                                } catch (Exception e2) {
-                                    RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e2, new StringBuilder("The exception occurs "), UniversalCredentialManagerService.TAG);
-                                    return;
-                                }
-                            }
-                        } else {
-                            int intExtra2 = intent.getIntExtra("android.intent.extra.user_handle", -1);
-                            DirEncryptService$$ExternalSyntheticOutline0.m(intExtra2, "ACTION_USER_REMOVED UserHandle : ", str);
-                            Message obtainMessage2 = this.this$0.mUCSMHandler.obtainMessage(1);
-                            obtainMessage2.arg1 = intExtra2;
-                            this.this$0.mUCSMHandler.sendMessage(obtainMessage2);
-                            break;
-                        }
-                        break;
-                    case 1:
-                        Message obtainMessage3 = this.this$0.mUCSMHandler.obtainMessage(3);
-                        int intExtra3 = intent.getIntExtra("android.intent.extra.UID", -1);
-                        boolean booleanExtra = intent.getBooleanExtra("android.intent.extra.REPLACING", false);
-                        obtainMessage3.obj = new int[]{intExtra3};
-                        String str2 = UniversalCredentialManagerService.TAG;
-                        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("ACTION_PACKAGE_REMOVED : replacingApp -", str2, booleanExtra);
-                        if (!booleanExtra) {
-                            this.this$0.mUCSMHandler.sendMessage(obtainMessage3);
-                            break;
-                        } else {
-                            Log.i(str2, "ACTION_PACKAGE_REMOVED : No need to cleanup db entries for app update");
-                            break;
-                        }
-                    default:
-                        String str3 = UniversalCredentialManagerService.TAG;
-                        Log.i(str3, "UcsReceiver intent " + intent.getAction());
-                        if (intent.getAction().equals("com.samsung.android.knox.intent.action.UCM_PLUGIN_STATUS")) {
-                            if (intent.getExtras() == null) {
-                                Log.i(str3, "UcsReceiver no extras received from plugin....");
                                 break;
-                            } else {
-                                Bundle extras = intent.getExtras();
-                                if (extras == null) {
-                                    Log.i(str3, "UcsReceiver no bundle extras received from plugin");
+                            case 1:
+                                Message obtainMessage3 = this.this$0.mUCSMHandler.obtainMessage(3);
+                                int intExtra3 = intent.getIntExtra("android.intent.extra.UID", -1);
+                                boolean booleanExtra =
+                                        intent.getBooleanExtra(
+                                                "android.intent.extra.REPLACING", false);
+                                obtainMessage3.obj = new int[] {intExtra3};
+                                String str2 = UniversalCredentialManagerService.TAG;
+                                ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                                        "ACTION_PACKAGE_REMOVED : replacingApp -",
+                                        str2,
+                                        booleanExtra);
+                                if (!booleanExtra) {
+                                    this.this$0.mUCSMHandler.sendMessage(obtainMessage3);
                                     break;
                                 } else {
-                                    this.this$0.notifyUCMConfigStatus(extras);
+                                    Log.i(
+                                            str2,
+                                            "ACTION_PACKAGE_REMOVED : No need to cleanup db entries"
+                                                + " for app update");
                                     break;
                                 }
-                            }
+                            default:
+                                String str3 = UniversalCredentialManagerService.TAG;
+                                Log.i(str3, "UcsReceiver intent " + intent.getAction());
+                                if (intent.getAction()
+                                        .equals(
+                                                "com.samsung.android.knox.intent.action.UCM_PLUGIN_STATUS")) {
+                                    if (intent.getExtras() == null) {
+                                        Log.i(
+                                                str3,
+                                                "UcsReceiver no extras received from plugin....");
+                                        break;
+                                    } else {
+                                        Bundle extras = intent.getExtras();
+                                        if (extras == null) {
+                                            Log.i(
+                                                    str3,
+                                                    "UcsReceiver no bundle extras received from"
+                                                        + " plugin");
+                                            break;
+                                        } else {
+                                            this.this$0.notifyUCMConfigStatus(extras);
+                                            break;
+                                        }
+                                    }
+                                }
+                                break;
                         }
-                        break;
-                }
-            }
-        };
+                    }
+                };
         final int i2 = 1;
-        this.mPackageRemovedReceiver = new BroadcastReceiver(this) { // from class: com.android.server.enterprise.ucm.UniversalCredentialManagerService.2
-            public final /* synthetic */ UniversalCredentialManagerService this$0;
+        this.mPackageRemovedReceiver =
+                new BroadcastReceiver(this) { // from class:
+                    // com.android.server.enterprise.ucm.UniversalCredentialManagerService.2
+                    public final /* synthetic */ UniversalCredentialManagerService this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                String keyguardStorageForCurrentUser;
-                switch (i2) {
-                    case 0:
-                        String action = intent.getAction();
-                        String str = UniversalCredentialManagerService.TAG;
-                        Log.i(str, "inside mBReciever onReceive : " + action);
-                        if (!action.equals("android.intent.action.USER_REMOVED")) {
-                            if (!action.equals("android.intent.action.LOCKED_BOOT_COMPLETED")) {
-                                if (!action.equals("android.intent.action.ACTION_SHUTDOWN")) {
-                                    if (!action.equals("android.intent.action.SCREEN_ON") && !action.equals("android.intent.action.SCREEN_OFF") && !action.equals("android.intent.action.USER_PRESENT")) {
-                                        if (action.equals("android.intent.action.DEVICE_LOCKED_CHANGED")) {
-                                            int intExtra = intent.getIntExtra("android.intent.extra.user_handle", 0);
-                                            UniversalCredentialManagerService universalCredentialManagerService = this.this$0;
-                                            if (universalCredentialManagerService.mKgm == null) {
-                                                universalCredentialManagerService.mKgm = (KeyguardManager) universalCredentialManagerService.mContext.getSystemService("keyguard");
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        String keyguardStorageForCurrentUser;
+                        switch (i2) {
+                            case 0:
+                                String action = intent.getAction();
+                                String str = UniversalCredentialManagerService.TAG;
+                                Log.i(str, "inside mBReciever onReceive : " + action);
+                                if (!action.equals("android.intent.action.USER_REMOVED")) {
+                                    if (!action.equals(
+                                            "android.intent.action.LOCKED_BOOT_COMPLETED")) {
+                                        if (!action.equals(
+                                                "android.intent.action.ACTION_SHUTDOWN")) {
+                                            if (!action.equals("android.intent.action.SCREEN_ON")
+                                                    && !action.equals(
+                                                            "android.intent.action.SCREEN_OFF")
+                                                    && !action.equals(
+                                                            "android.intent.action.USER_PRESENT")) {
+                                                if (action.equals(
+                                                        "android.intent.action.DEVICE_LOCKED_CHANGED")) {
+                                                    int intExtra =
+                                                            intent.getIntExtra(
+                                                                    "android.intent.extra.user_handle",
+                                                                    0);
+                                                    UniversalCredentialManagerService
+                                                            universalCredentialManagerService =
+                                                                    this.this$0;
+                                                    if (universalCredentialManagerService.mKgm
+                                                            == null) {
+                                                        universalCredentialManagerService.mKgm =
+                                                                (KeyguardManager)
+                                                                        universalCredentialManagerService
+                                                                                .mContext
+                                                                                .getSystemService(
+                                                                                        "keyguard");
+                                                    }
+                                                    boolean isDeviceLocked =
+                                                            universalCredentialManagerService.mKgm
+                                                                    .isDeviceLocked(intExtra);
+                                                    Log.i(
+                                                            str,
+                                                            "mLockEventReceiver. userId ["
+                                                                    + intExtra
+                                                                    + "] isDeviceLocked ["
+                                                                    + isDeviceLocked
+                                                                    + "]");
+                                                    Message obtainMessage =
+                                                            this.this$0.mUCSMHandler.obtainMessage(
+                                                                    9);
+                                                    obtainMessage.arg1 = intExtra;
+                                                    obtainMessage.arg2 = !isDeviceLocked ? 1 : 0;
+                                                    this.this$0.mUCSMHandler.sendMessage(
+                                                            obtainMessage);
+                                                    break;
+                                                }
+                                            } else {
+                                                this.this$0.mUCSMHandler.sendMessage(
+                                                        this.this$0.mUCSMHandler.obtainMessage(7));
+                                                break;
                                             }
-                                            boolean isDeviceLocked = universalCredentialManagerService.mKgm.isDeviceLocked(intExtra);
-                                            Log.i(str, "mLockEventReceiver. userId [" + intExtra + "] isDeviceLocked [" + isDeviceLocked + "]");
-                                            Message obtainMessage = this.this$0.mUCSMHandler.obtainMessage(9);
-                                            obtainMessage.arg1 = intExtra;
-                                            obtainMessage.arg2 = !isDeviceLocked ? 1 : 0;
-                                            this.this$0.mUCSMHandler.sendMessage(obtainMessage);
+                                        } else {
+                                            this.this$0.mUCSMHandler.sendMessage(
+                                                    this.this$0.mUCSMHandler.obtainMessage(11));
                                             break;
                                         }
                                     } else {
-                                        this.this$0.mUCSMHandler.sendMessage(this.this$0.mUCSMHandler.obtainMessage(7));
-                                        break;
-                                    }
-                                } else {
-                                    this.this$0.mUCSMHandler.sendMessage(this.this$0.mUCSMHandler.obtainMessage(11));
-                                    break;
-                                }
-                            } else {
-                                this.this$0.mUCSMHandler.sendMessage(this.this$0.mUCSMHandler.obtainMessage(6));
-                                UniversalCredentialManagerService universalCredentialManagerService2 = this.this$0;
-                                universalCredentialManagerService2.getClass();
-                                Log.i(str, "showEnforcedLockTypeNotificationForAllUser ");
-                                Iterator it = ((UserManager) universalCredentialManagerService2.mContext.getSystemService("user")).getUsers().iterator();
-                                while (it.hasNext()) {
-                                    int i22 = ((UserInfo) it.next()).id;
-                                    try {
-                                        CredentialStorage enforcedCredentialStorageFromDb = universalCredentialManagerService2.getEnforcedCredentialStorageFromDb(i22);
-                                        IUcmService ucmService$1 = UniversalCredentialManagerService.getUcmService$1();
-                                        if (enforcedCredentialStorageFromDb != null && ucmService$1 != null) {
-                                            if (UniversalCredentialManagerService.DBG) {
-                                                Log.i(UniversalCredentialManagerService.TAG, "showEnforcedLockTypeNotificationForAllUser userId: " + i22 + ", cs.name: " + enforcedCredentialStorageFromDb.name);
-                                            }
-                                            if (!enforcedCredentialStorageFromDb.name.equalsIgnoreCase(ucmService$1.getKeyguardStorageForCurrentUser(i22))) {
-                                                ucmService$1.showEnforcedLockTypeNotification(i22, enforcedCredentialStorageFromDb.name);
+                                        this.this$0.mUCSMHandler.sendMessage(
+                                                this.this$0.mUCSMHandler.obtainMessage(6));
+                                        UniversalCredentialManagerService
+                                                universalCredentialManagerService2 = this.this$0;
+                                        universalCredentialManagerService2.getClass();
+                                        Log.i(str, "showEnforcedLockTypeNotificationForAllUser ");
+                                        Iterator it =
+                                                ((UserManager)
+                                                                universalCredentialManagerService2
+                                                                        .mContext.getSystemService(
+                                                                        "user"))
+                                                        .getUsers()
+                                                        .iterator();
+                                        while (it.hasNext()) {
+                                            int i22 = ((UserInfo) it.next()).id;
+                                            try {
+                                                CredentialStorage enforcedCredentialStorageFromDb =
+                                                        universalCredentialManagerService2
+                                                                .getEnforcedCredentialStorageFromDb(
+                                                                        i22);
+                                                IUcmService ucmService$1 =
+                                                        UniversalCredentialManagerService
+                                                                .getUcmService$1();
+                                                if (enforcedCredentialStorageFromDb != null
+                                                        && ucmService$1 != null) {
+                                                    if (UniversalCredentialManagerService.DBG) {
+                                                        Log.i(
+                                                                UniversalCredentialManagerService
+                                                                        .TAG,
+                                                                "showEnforcedLockTypeNotificationForAllUser"
+                                                                    + " userId: "
+                                                                        + i22
+                                                                        + ", cs.name: "
+                                                                        + enforcedCredentialStorageFromDb
+                                                                                .name);
+                                                    }
+                                                    if (!enforcedCredentialStorageFromDb.name
+                                                            .equalsIgnoreCase(
+                                                                    ucmService$1
+                                                                            .getKeyguardStorageForCurrentUser(
+                                                                                    i22))) {
+                                                        ucmService$1
+                                                                .showEnforcedLockTypeNotification(
+                                                                        i22,
+                                                                        enforcedCredentialStorageFromDb
+                                                                                .name);
+                                                    }
+                                                }
+                                            } catch (Exception e) {
+                                                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                                        .m(
+                                                                e,
+                                                                new StringBuilder(
+                                                                        "The exception occurs "),
+                                                                UniversalCredentialManagerService
+                                                                        .TAG);
                                             }
                                         }
-                                    } catch (Exception e) {
-                                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), UniversalCredentialManagerService.TAG);
+                                        this.this$0.getClass();
+                                        try {
+                                            IUcmService ucmService$12 =
+                                                    UniversalCredentialManagerService
+                                                            .getUcmService$1();
+                                            if (ucmService$12 != null
+                                                    && (keyguardStorageForCurrentUser =
+                                                                    ucmService$12
+                                                                            .getKeyguardStorageForCurrentUser(
+                                                                                    0))
+                                                            != null
+                                                    && !keyguardStorageForCurrentUser.isEmpty()
+                                                    && !"none"
+                                                            .equalsIgnoreCase(
+                                                                    keyguardStorageForCurrentUser)) {
+                                                SystemProperties.set(
+                                                        "persist.keyguard.ucs", "true");
+                                                break;
+                                            }
+                                        } catch (Exception e2) {
+                                            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                                    .m(
+                                                            e2,
+                                                            new StringBuilder(
+                                                                    "The exception occurs "),
+                                                            UniversalCredentialManagerService.TAG);
+                                            return;
+                                        }
                                     }
+                                } else {
+                                    int intExtra2 =
+                                            intent.getIntExtra(
+                                                    "android.intent.extra.user_handle", -1);
+                                    DirEncryptService$$ExternalSyntheticOutline0.m(
+                                            intExtra2, "ACTION_USER_REMOVED UserHandle : ", str);
+                                    Message obtainMessage2 =
+                                            this.this$0.mUCSMHandler.obtainMessage(1);
+                                    obtainMessage2.arg1 = intExtra2;
+                                    this.this$0.mUCSMHandler.sendMessage(obtainMessage2);
+                                    break;
                                 }
-                                this.this$0.getClass();
-                                try {
-                                    IUcmService ucmService$12 = UniversalCredentialManagerService.getUcmService$1();
-                                    if (ucmService$12 != null && (keyguardStorageForCurrentUser = ucmService$12.getKeyguardStorageForCurrentUser(0)) != null && !keyguardStorageForCurrentUser.isEmpty() && !"none".equalsIgnoreCase(keyguardStorageForCurrentUser)) {
-                                        SystemProperties.set("persist.keyguard.ucs", "true");
-                                        break;
-                                    }
-                                } catch (Exception e2) {
-                                    RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e2, new StringBuilder("The exception occurs "), UniversalCredentialManagerService.TAG);
-                                    return;
-                                }
-                            }
-                        } else {
-                            int intExtra2 = intent.getIntExtra("android.intent.extra.user_handle", -1);
-                            DirEncryptService$$ExternalSyntheticOutline0.m(intExtra2, "ACTION_USER_REMOVED UserHandle : ", str);
-                            Message obtainMessage2 = this.this$0.mUCSMHandler.obtainMessage(1);
-                            obtainMessage2.arg1 = intExtra2;
-                            this.this$0.mUCSMHandler.sendMessage(obtainMessage2);
-                            break;
-                        }
-                        break;
-                    case 1:
-                        Message obtainMessage3 = this.this$0.mUCSMHandler.obtainMessage(3);
-                        int intExtra3 = intent.getIntExtra("android.intent.extra.UID", -1);
-                        boolean booleanExtra = intent.getBooleanExtra("android.intent.extra.REPLACING", false);
-                        obtainMessage3.obj = new int[]{intExtra3};
-                        String str2 = UniversalCredentialManagerService.TAG;
-                        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("ACTION_PACKAGE_REMOVED : replacingApp -", str2, booleanExtra);
-                        if (!booleanExtra) {
-                            this.this$0.mUCSMHandler.sendMessage(obtainMessage3);
-                            break;
-                        } else {
-                            Log.i(str2, "ACTION_PACKAGE_REMOVED : No need to cleanup db entries for app update");
-                            break;
-                        }
-                    default:
-                        String str3 = UniversalCredentialManagerService.TAG;
-                        Log.i(str3, "UcsReceiver intent " + intent.getAction());
-                        if (intent.getAction().equals("com.samsung.android.knox.intent.action.UCM_PLUGIN_STATUS")) {
-                            if (intent.getExtras() == null) {
-                                Log.i(str3, "UcsReceiver no extras received from plugin....");
                                 break;
-                            } else {
-                                Bundle extras = intent.getExtras();
-                                if (extras == null) {
-                                    Log.i(str3, "UcsReceiver no bundle extras received from plugin");
+                            case 1:
+                                Message obtainMessage3 = this.this$0.mUCSMHandler.obtainMessage(3);
+                                int intExtra3 = intent.getIntExtra("android.intent.extra.UID", -1);
+                                boolean booleanExtra =
+                                        intent.getBooleanExtra(
+                                                "android.intent.extra.REPLACING", false);
+                                obtainMessage3.obj = new int[] {intExtra3};
+                                String str2 = UniversalCredentialManagerService.TAG;
+                                ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                                        "ACTION_PACKAGE_REMOVED : replacingApp -",
+                                        str2,
+                                        booleanExtra);
+                                if (!booleanExtra) {
+                                    this.this$0.mUCSMHandler.sendMessage(obtainMessage3);
                                     break;
                                 } else {
-                                    this.this$0.notifyUCMConfigStatus(extras);
+                                    Log.i(
+                                            str2,
+                                            "ACTION_PACKAGE_REMOVED : No need to cleanup db entries"
+                                                + " for app update");
                                     break;
                                 }
-                            }
+                            default:
+                                String str3 = UniversalCredentialManagerService.TAG;
+                                Log.i(str3, "UcsReceiver intent " + intent.getAction());
+                                if (intent.getAction()
+                                        .equals(
+                                                "com.samsung.android.knox.intent.action.UCM_PLUGIN_STATUS")) {
+                                    if (intent.getExtras() == null) {
+                                        Log.i(
+                                                str3,
+                                                "UcsReceiver no extras received from plugin....");
+                                        break;
+                                    } else {
+                                        Bundle extras = intent.getExtras();
+                                        if (extras == null) {
+                                            Log.i(
+                                                    str3,
+                                                    "UcsReceiver no bundle extras received from"
+                                                        + " plugin");
+                                            break;
+                                        } else {
+                                            this.this$0.notifyUCMConfigStatus(extras);
+                                            break;
+                                        }
+                                    }
+                                }
+                                break;
                         }
-                        break;
-                }
-            }
-        };
+                    }
+                };
         if (DBG) {
             Log.i(TAG, "Constructor");
         }
@@ -1200,127 +1964,237 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             registerReceiver();
         }
         final int i3 = 2;
-        context.registerReceiver(new BroadcastReceiver(this) { // from class: com.android.server.enterprise.ucm.UniversalCredentialManagerService.2
-            public final /* synthetic */ UniversalCredentialManagerService this$0;
+        context.registerReceiver(
+                new BroadcastReceiver(this) { // from class:
+                    // com.android.server.enterprise.ucm.UniversalCredentialManagerService.2
+                    public final /* synthetic */ UniversalCredentialManagerService this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                String keyguardStorageForCurrentUser;
-                switch (i3) {
-                    case 0:
-                        String action = intent.getAction();
-                        String str = UniversalCredentialManagerService.TAG;
-                        Log.i(str, "inside mBReciever onReceive : " + action);
-                        if (!action.equals("android.intent.action.USER_REMOVED")) {
-                            if (!action.equals("android.intent.action.LOCKED_BOOT_COMPLETED")) {
-                                if (!action.equals("android.intent.action.ACTION_SHUTDOWN")) {
-                                    if (!action.equals("android.intent.action.SCREEN_ON") && !action.equals("android.intent.action.SCREEN_OFF") && !action.equals("android.intent.action.USER_PRESENT")) {
-                                        if (action.equals("android.intent.action.DEVICE_LOCKED_CHANGED")) {
-                                            int intExtra = intent.getIntExtra("android.intent.extra.user_handle", 0);
-                                            UniversalCredentialManagerService universalCredentialManagerService = this.this$0;
-                                            if (universalCredentialManagerService.mKgm == null) {
-                                                universalCredentialManagerService.mKgm = (KeyguardManager) universalCredentialManagerService.mContext.getSystemService("keyguard");
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        String keyguardStorageForCurrentUser;
+                        switch (i3) {
+                            case 0:
+                                String action = intent.getAction();
+                                String str = UniversalCredentialManagerService.TAG;
+                                Log.i(str, "inside mBReciever onReceive : " + action);
+                                if (!action.equals("android.intent.action.USER_REMOVED")) {
+                                    if (!action.equals(
+                                            "android.intent.action.LOCKED_BOOT_COMPLETED")) {
+                                        if (!action.equals(
+                                                "android.intent.action.ACTION_SHUTDOWN")) {
+                                            if (!action.equals("android.intent.action.SCREEN_ON")
+                                                    && !action.equals(
+                                                            "android.intent.action.SCREEN_OFF")
+                                                    && !action.equals(
+                                                            "android.intent.action.USER_PRESENT")) {
+                                                if (action.equals(
+                                                        "android.intent.action.DEVICE_LOCKED_CHANGED")) {
+                                                    int intExtra =
+                                                            intent.getIntExtra(
+                                                                    "android.intent.extra.user_handle",
+                                                                    0);
+                                                    UniversalCredentialManagerService
+                                                            universalCredentialManagerService =
+                                                                    this.this$0;
+                                                    if (universalCredentialManagerService.mKgm
+                                                            == null) {
+                                                        universalCredentialManagerService.mKgm =
+                                                                (KeyguardManager)
+                                                                        universalCredentialManagerService
+                                                                                .mContext
+                                                                                .getSystemService(
+                                                                                        "keyguard");
+                                                    }
+                                                    boolean isDeviceLocked =
+                                                            universalCredentialManagerService.mKgm
+                                                                    .isDeviceLocked(intExtra);
+                                                    Log.i(
+                                                            str,
+                                                            "mLockEventReceiver. userId ["
+                                                                    + intExtra
+                                                                    + "] isDeviceLocked ["
+                                                                    + isDeviceLocked
+                                                                    + "]");
+                                                    Message obtainMessage =
+                                                            this.this$0.mUCSMHandler.obtainMessage(
+                                                                    9);
+                                                    obtainMessage.arg1 = intExtra;
+                                                    obtainMessage.arg2 = !isDeviceLocked ? 1 : 0;
+                                                    this.this$0.mUCSMHandler.sendMessage(
+                                                            obtainMessage);
+                                                    break;
+                                                }
+                                            } else {
+                                                this.this$0.mUCSMHandler.sendMessage(
+                                                        this.this$0.mUCSMHandler.obtainMessage(7));
+                                                break;
                                             }
-                                            boolean isDeviceLocked = universalCredentialManagerService.mKgm.isDeviceLocked(intExtra);
-                                            Log.i(str, "mLockEventReceiver. userId [" + intExtra + "] isDeviceLocked [" + isDeviceLocked + "]");
-                                            Message obtainMessage = this.this$0.mUCSMHandler.obtainMessage(9);
-                                            obtainMessage.arg1 = intExtra;
-                                            obtainMessage.arg2 = !isDeviceLocked ? 1 : 0;
-                                            this.this$0.mUCSMHandler.sendMessage(obtainMessage);
+                                        } else {
+                                            this.this$0.mUCSMHandler.sendMessage(
+                                                    this.this$0.mUCSMHandler.obtainMessage(11));
                                             break;
                                         }
                                     } else {
-                                        this.this$0.mUCSMHandler.sendMessage(this.this$0.mUCSMHandler.obtainMessage(7));
-                                        break;
-                                    }
-                                } else {
-                                    this.this$0.mUCSMHandler.sendMessage(this.this$0.mUCSMHandler.obtainMessage(11));
-                                    break;
-                                }
-                            } else {
-                                this.this$0.mUCSMHandler.sendMessage(this.this$0.mUCSMHandler.obtainMessage(6));
-                                UniversalCredentialManagerService universalCredentialManagerService2 = this.this$0;
-                                universalCredentialManagerService2.getClass();
-                                Log.i(str, "showEnforcedLockTypeNotificationForAllUser ");
-                                Iterator it = ((UserManager) universalCredentialManagerService2.mContext.getSystemService("user")).getUsers().iterator();
-                                while (it.hasNext()) {
-                                    int i22 = ((UserInfo) it.next()).id;
-                                    try {
-                                        CredentialStorage enforcedCredentialStorageFromDb = universalCredentialManagerService2.getEnforcedCredentialStorageFromDb(i22);
-                                        IUcmService ucmService$1 = UniversalCredentialManagerService.getUcmService$1();
-                                        if (enforcedCredentialStorageFromDb != null && ucmService$1 != null) {
-                                            if (UniversalCredentialManagerService.DBG) {
-                                                Log.i(UniversalCredentialManagerService.TAG, "showEnforcedLockTypeNotificationForAllUser userId: " + i22 + ", cs.name: " + enforcedCredentialStorageFromDb.name);
-                                            }
-                                            if (!enforcedCredentialStorageFromDb.name.equalsIgnoreCase(ucmService$1.getKeyguardStorageForCurrentUser(i22))) {
-                                                ucmService$1.showEnforcedLockTypeNotification(i22, enforcedCredentialStorageFromDb.name);
+                                        this.this$0.mUCSMHandler.sendMessage(
+                                                this.this$0.mUCSMHandler.obtainMessage(6));
+                                        UniversalCredentialManagerService
+                                                universalCredentialManagerService2 = this.this$0;
+                                        universalCredentialManagerService2.getClass();
+                                        Log.i(str, "showEnforcedLockTypeNotificationForAllUser ");
+                                        Iterator it =
+                                                ((UserManager)
+                                                                universalCredentialManagerService2
+                                                                        .mContext.getSystemService(
+                                                                        "user"))
+                                                        .getUsers()
+                                                        .iterator();
+                                        while (it.hasNext()) {
+                                            int i22 = ((UserInfo) it.next()).id;
+                                            try {
+                                                CredentialStorage enforcedCredentialStorageFromDb =
+                                                        universalCredentialManagerService2
+                                                                .getEnforcedCredentialStorageFromDb(
+                                                                        i22);
+                                                IUcmService ucmService$1 =
+                                                        UniversalCredentialManagerService
+                                                                .getUcmService$1();
+                                                if (enforcedCredentialStorageFromDb != null
+                                                        && ucmService$1 != null) {
+                                                    if (UniversalCredentialManagerService.DBG) {
+                                                        Log.i(
+                                                                UniversalCredentialManagerService
+                                                                        .TAG,
+                                                                "showEnforcedLockTypeNotificationForAllUser"
+                                                                    + " userId: "
+                                                                        + i22
+                                                                        + ", cs.name: "
+                                                                        + enforcedCredentialStorageFromDb
+                                                                                .name);
+                                                    }
+                                                    if (!enforcedCredentialStorageFromDb.name
+                                                            .equalsIgnoreCase(
+                                                                    ucmService$1
+                                                                            .getKeyguardStorageForCurrentUser(
+                                                                                    i22))) {
+                                                        ucmService$1
+                                                                .showEnforcedLockTypeNotification(
+                                                                        i22,
+                                                                        enforcedCredentialStorageFromDb
+                                                                                .name);
+                                                    }
+                                                }
+                                            } catch (Exception e) {
+                                                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                                        .m(
+                                                                e,
+                                                                new StringBuilder(
+                                                                        "The exception occurs "),
+                                                                UniversalCredentialManagerService
+                                                                        .TAG);
                                             }
                                         }
-                                    } catch (Exception e) {
-                                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), UniversalCredentialManagerService.TAG);
+                                        this.this$0.getClass();
+                                        try {
+                                            IUcmService ucmService$12 =
+                                                    UniversalCredentialManagerService
+                                                            .getUcmService$1();
+                                            if (ucmService$12 != null
+                                                    && (keyguardStorageForCurrentUser =
+                                                                    ucmService$12
+                                                                            .getKeyguardStorageForCurrentUser(
+                                                                                    0))
+                                                            != null
+                                                    && !keyguardStorageForCurrentUser.isEmpty()
+                                                    && !"none"
+                                                            .equalsIgnoreCase(
+                                                                    keyguardStorageForCurrentUser)) {
+                                                SystemProperties.set(
+                                                        "persist.keyguard.ucs", "true");
+                                                break;
+                                            }
+                                        } catch (Exception e2) {
+                                            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                                    .m(
+                                                            e2,
+                                                            new StringBuilder(
+                                                                    "The exception occurs "),
+                                                            UniversalCredentialManagerService.TAG);
+                                            return;
+                                        }
                                     }
+                                } else {
+                                    int intExtra2 =
+                                            intent.getIntExtra(
+                                                    "android.intent.extra.user_handle", -1);
+                                    DirEncryptService$$ExternalSyntheticOutline0.m(
+                                            intExtra2, "ACTION_USER_REMOVED UserHandle : ", str);
+                                    Message obtainMessage2 =
+                                            this.this$0.mUCSMHandler.obtainMessage(1);
+                                    obtainMessage2.arg1 = intExtra2;
+                                    this.this$0.mUCSMHandler.sendMessage(obtainMessage2);
+                                    break;
                                 }
-                                this.this$0.getClass();
-                                try {
-                                    IUcmService ucmService$12 = UniversalCredentialManagerService.getUcmService$1();
-                                    if (ucmService$12 != null && (keyguardStorageForCurrentUser = ucmService$12.getKeyguardStorageForCurrentUser(0)) != null && !keyguardStorageForCurrentUser.isEmpty() && !"none".equalsIgnoreCase(keyguardStorageForCurrentUser)) {
-                                        SystemProperties.set("persist.keyguard.ucs", "true");
-                                        break;
-                                    }
-                                } catch (Exception e2) {
-                                    RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e2, new StringBuilder("The exception occurs "), UniversalCredentialManagerService.TAG);
-                                    return;
-                                }
-                            }
-                        } else {
-                            int intExtra2 = intent.getIntExtra("android.intent.extra.user_handle", -1);
-                            DirEncryptService$$ExternalSyntheticOutline0.m(intExtra2, "ACTION_USER_REMOVED UserHandle : ", str);
-                            Message obtainMessage2 = this.this$0.mUCSMHandler.obtainMessage(1);
-                            obtainMessage2.arg1 = intExtra2;
-                            this.this$0.mUCSMHandler.sendMessage(obtainMessage2);
-                            break;
-                        }
-                        break;
-                    case 1:
-                        Message obtainMessage3 = this.this$0.mUCSMHandler.obtainMessage(3);
-                        int intExtra3 = intent.getIntExtra("android.intent.extra.UID", -1);
-                        boolean booleanExtra = intent.getBooleanExtra("android.intent.extra.REPLACING", false);
-                        obtainMessage3.obj = new int[]{intExtra3};
-                        String str2 = UniversalCredentialManagerService.TAG;
-                        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("ACTION_PACKAGE_REMOVED : replacingApp -", str2, booleanExtra);
-                        if (!booleanExtra) {
-                            this.this$0.mUCSMHandler.sendMessage(obtainMessage3);
-                            break;
-                        } else {
-                            Log.i(str2, "ACTION_PACKAGE_REMOVED : No need to cleanup db entries for app update");
-                            break;
-                        }
-                    default:
-                        String str3 = UniversalCredentialManagerService.TAG;
-                        Log.i(str3, "UcsReceiver intent " + intent.getAction());
-                        if (intent.getAction().equals("com.samsung.android.knox.intent.action.UCM_PLUGIN_STATUS")) {
-                            if (intent.getExtras() == null) {
-                                Log.i(str3, "UcsReceiver no extras received from plugin....");
                                 break;
-                            } else {
-                                Bundle extras = intent.getExtras();
-                                if (extras == null) {
-                                    Log.i(str3, "UcsReceiver no bundle extras received from plugin");
+                            case 1:
+                                Message obtainMessage3 = this.this$0.mUCSMHandler.obtainMessage(3);
+                                int intExtra3 = intent.getIntExtra("android.intent.extra.UID", -1);
+                                boolean booleanExtra =
+                                        intent.getBooleanExtra(
+                                                "android.intent.extra.REPLACING", false);
+                                obtainMessage3.obj = new int[] {intExtra3};
+                                String str2 = UniversalCredentialManagerService.TAG;
+                                ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                                        "ACTION_PACKAGE_REMOVED : replacingApp -",
+                                        str2,
+                                        booleanExtra);
+                                if (!booleanExtra) {
+                                    this.this$0.mUCSMHandler.sendMessage(obtainMessage3);
                                     break;
                                 } else {
-                                    this.this$0.notifyUCMConfigStatus(extras);
+                                    Log.i(
+                                            str2,
+                                            "ACTION_PACKAGE_REMOVED : No need to cleanup db entries"
+                                                + " for app update");
                                     break;
                                 }
-                            }
+                            default:
+                                String str3 = UniversalCredentialManagerService.TAG;
+                                Log.i(str3, "UcsReceiver intent " + intent.getAction());
+                                if (intent.getAction()
+                                        .equals(
+                                                "com.samsung.android.knox.intent.action.UCM_PLUGIN_STATUS")) {
+                                    if (intent.getExtras() == null) {
+                                        Log.i(
+                                                str3,
+                                                "UcsReceiver no extras received from plugin....");
+                                        break;
+                                    } else {
+                                        Bundle extras = intent.getExtras();
+                                        if (extras == null) {
+                                            Log.i(
+                                                    str3,
+                                                    "UcsReceiver no bundle extras received from"
+                                                        + " plugin");
+                                            break;
+                                        } else {
+                                            this.this$0.notifyUCMConfigStatus(extras);
+                                            break;
+                                        }
+                                    }
+                                }
+                                break;
                         }
-                        break;
-                }
-            }
-        }, BatteryService$$ExternalSyntheticOutline0.m("com.samsung.android.knox.intent.action.UCM_PLUGIN_STATUS"), "com.samsung.android.knox.permission.KNOX_UCM_PLUGIN_SERVICE", null, 2);
+                    }
+                },
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        "com.samsung.android.knox.intent.action.UCM_PLUGIN_STATUS"),
+                "com.samsung.android.knox.permission.KNOX_UCM_PLUGIN_SERVICE",
+                null,
+                2);
         uCSMHandler.sendMessage(uCSMHandler.obtainMessage(2));
         File file = new File(new File(Environment.getDataDirectory(), "system"), "ucm_ca_cert");
         File file2 = new File("/efs/sec_efs/ucm_ca_cert");
@@ -1328,7 +2202,10 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             Log.i(TAG, "Error!!! Cannot create root directory: " + file.getAbsolutePath());
         }
         if (!file2.exists() && !file2.mkdirs()) {
-            Log.i(TAG, "Error!!! Cannot create root ODE CA cert directory: " + file2.getAbsolutePath());
+            Log.i(
+                    TAG,
+                    "Error!!! Cannot create root ODE CA cert directory: "
+                            + file2.getAbsolutePath());
         }
         uCSMHandler.sendMessage(uCSMHandler.obtainMessage(8));
         if ("false".equals(SystemProperties.get("persist.security.ucmcrypto", "false"))) {
@@ -1341,8 +2218,22 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
     public static void checkCallerPermissionFor(String str) {
         String str2 = TAG;
         Log.i(str2, "checkCallerPermissionFor is called for method-".concat(str));
-        if (ServiceKeeper.isAuthorized(Binder.getCallingPid(), Binder.getCallingUid(), sContext, "UniversalCredentialManagerService", str) != 0) {
-            SecurityException securityException = new SecurityException("Security Exception Occurred while pid[" + Binder.getCallingPid() + "] with uid[" + Binder.getCallingUid() + "] trying to access methodName [" + str + "] in [UniversalCredentialManagerService] service");
+        if (ServiceKeeper.isAuthorized(
+                        Binder.getCallingPid(),
+                        Binder.getCallingUid(),
+                        sContext,
+                        "UniversalCredentialManagerService",
+                        str)
+                != 0) {
+            SecurityException securityException =
+                    new SecurityException(
+                            "Security Exception Occurred while pid["
+                                    + Binder.getCallingPid()
+                                    + "] with uid["
+                                    + Binder.getCallingUid()
+                                    + "] trying to access methodName ["
+                                    + str
+                                    + "] in [UniversalCredentialManagerService] service");
             if (!DBG) {
                 throw securityException;
             }
@@ -1354,7 +2245,11 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
     public static void checkKnoxCorePermission(ContextInfo contextInfo) {
         if (contextInfo == null || contextInfo.mCallerUid != 5250) {
             if (contextInfo != null) {
-                Log.e(TAG, "checkKnoxCorePermission : caller does not have valid UCM permission : callerId - " + contextInfo.mCallerUid);
+                Log.e(
+                        TAG,
+                        "checkKnoxCorePermission : caller does not have valid UCM permission :"
+                            + " callerId - "
+                                + contextInfo.mCallerUid);
             } else {
                 Log.e(TAG, "checkKnoxCorePermission : caller does not have valid UCM permission");
             }
@@ -1401,7 +2296,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
             return TextUtils.join(",", strArr);
         } catch (Exception e) {
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("The exception occurs "), TAG);
             return "";
         }
     }
@@ -1416,14 +2312,21 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             if (split == null || split.length <= 0) {
                 signatureArr = null;
             } else {
-                UiModeManagerService$13$$ExternalSyntheticOutline0.m(new StringBuilder("convertStringToSignature providerList sigStrings:"), split.length, TAG);
+                UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("convertStringToSignature providerList sigStrings:"),
+                        split.length,
+                        TAG);
                 signatureArr = new Signature[split.length];
                 for (int i = 0; i < split.length; i++) {
                     String str2 = split[i];
                     if (str2 != null && str2.length() > 0) {
                         boolean z = DBG;
                         if (z) {
-                            Log.i(TAG, "convertStringToSignature creating signatures : ----" + split[i] + "----");
+                            Log.i(
+                                    TAG,
+                                    "convertStringToSignature creating signatures : ----"
+                                            + split[i]
+                                            + "----");
                         }
                         try {
                             Signature signature = new Signature(split[i]);
@@ -1432,7 +2335,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                             }
                             signatureArr[i] = signature;
                         } catch (Exception e) {
-                            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+                            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                    .m(e, new StringBuilder("The exception occurs "), TAG);
                         }
                     }
                 }
@@ -1456,7 +2360,9 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
     }
 
     public static int getReturnvalue(Bundle bundle) {
-        return bundle.getInt("errorresponse", -1) == 0 ? bundle.getInt("intresponse", 0) : bundle.getInt("errorresponse", -1);
+        return bundle.getInt("errorresponse", -1) == 0
+                ? bundle.getInt("intresponse", 0)
+                : bundle.getInt("errorresponse", -1);
     }
 
     public static Bundle getStatusErrorBundle(int i) {
@@ -1468,7 +2374,9 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         synchronized (UniversalCredentialManagerService.class) {
             try {
                 if (mUcseService == null) {
-                    mUcseService = IUcmService.Stub.asInterface(ServiceManager.getService("com.samsung.ucs.ucsservice"));
+                    mUcseService =
+                            IUcmService.Stub.asInterface(
+                                    ServiceManager.getService("com.samsung.ucs.ucsservice"));
                 }
                 iUcmService = mUcseService;
             } catch (Throwable th) {
@@ -1489,7 +2397,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
             return null;
         } catch (Exception e) {
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("The exception occurs "), TAG);
             return null;
         }
     }
@@ -1502,12 +2411,25 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static int installCertificateInProvider(com.samsung.android.knox.ucm.configurator.CredentialStorage r6, byte[] r7, java.lang.String r8, java.lang.String r9, android.os.Bundle r10, int r11, int r12, boolean r13, boolean r14) {
+    public static int installCertificateInProvider(
+            com.samsung.android.knox.ucm.configurator.CredentialStorage r6,
+            byte[] r7,
+            java.lang.String r8,
+            java.lang.String r9,
+            android.os.Bundle r10,
+            int r11,
+            int r12,
+            boolean r13,
+            boolean r14) {
         /*
             Method dump skipped, instructions count: 370
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.ucm.UniversalCredentialManagerService.installCertificateInProvider(com.samsung.android.knox.ucm.configurator.CredentialStorage, byte[], java.lang.String, java.lang.String, android.os.Bundle, int, int, boolean, boolean):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.ucm.UniversalCredentialManagerService.installCertificateInProvider(com.samsung.android.knox.ucm.configurator.CredentialStorage,"
+                    + " byte[], java.lang.String, java.lang.String, android.os.Bundle, int, int,"
+                    + " boolean, boolean):int");
     }
 
     public static boolean isSignatureInvalid(AppIdentity appIdentity, PackageInfo packageInfo) {
@@ -1545,7 +2467,11 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
     }
 
     public static boolean isValidParam(CredentialStorage credentialStorage) {
-        return (credentialStorage == null || TextUtils.isEmpty(credentialStorage.name) || TextUtils.isEmpty(credentialStorage.packageName)) ? false : true;
+        return (credentialStorage == null
+                        || TextUtils.isEmpty(credentialStorage.name)
+                        || TextUtils.isEmpty(credentialStorage.packageName))
+                ? false
+                : true;
     }
 
     public static void validateContextInfo(ContextInfo contextInfo) {
@@ -1554,7 +2480,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             throw new SecurityException("Input parameter is not proper");
         }
         int callingUid = Binder.getCallingUid();
-        if (contextInfo.mCallerUid == callingUid && contextInfo.mContainerId == UserHandle.getUserId(callingUid)) {
+        if (contextInfo.mCallerUid == callingUid
+                && contextInfo.mContainerId == UserHandle.getUserId(callingUid)) {
             return;
         }
         Log.e(TAG, "Invalid contextInfo");
@@ -1570,13 +2497,15 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             try {
                 if (str2 != null) {
                     try {
-                        PackageInfo packageInfo = AppGlobals.getPackageManager().getPackageInfo(str, 64L, i);
+                        PackageInfo packageInfo =
+                                AppGlobals.getPackageManager().getPackageInfo(str, 64L, i);
                         if (packageInfo != null) {
                             Signature[] convertStringToSignature = convertStringToSignature(str2);
                             if (convertStringToSignature == null) {
                                 Log.i(str3, "validateSignature passed String signature is invalid");
                             }
-                            if (compareSignatures(packageInfo.signatures, convertStringToSignature)) {
+                            if (compareSignatures(
+                                    packageInfo.signatures, convertStringToSignature)) {
                                 Log.i(str3, "Package is installed, and signature matched...");
                                 z = true;
                             }
@@ -1594,7 +2523,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         return z;
     }
 
-    public final boolean addCredentialStorageLockType(int i, CredentialStorage credentialStorage, int i2) {
+    public final boolean addCredentialStorageLockType(
+            int i, CredentialStorage credentialStorage, int i2) {
         boolean z;
         String str = credentialStorage.name;
         String str2 = credentialStorage.packageName;
@@ -1604,7 +2534,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             StringBuilder sb = new StringBuilder("addCredentialStorageLockType adminUid - ");
             sb.append(i);
             sb.append(" ContainerId - ");
-            AlarmManagerService$DeliveryTracker$$ExternalSyntheticOutline0.m(i2, ", Storage Name- ", str, ", Storage Package name - ", sb);
+            AlarmManagerService$DeliveryTracker$$ExternalSyntheticOutline0.m(
+                    i2, ", Storage Name- ", str, ", Storage Package name - ", sb);
             DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(sb, str2, str3);
         }
         try {
@@ -1617,18 +2548,23 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             if (str4 != null && str4.length() > 0) {
                 contentValues.put("storageManufacture", credentialStorage.manufacturer);
             }
-            z = this.mEdmStorageProvider.putValuesNoUpdate("UniversalCredentialEnabledLockTypeTable", contentValues);
+            z =
+                    this.mEdmStorageProvider.putValuesNoUpdate(
+                            "UniversalCredentialEnabledLockTypeTable", contentValues);
         } catch (Exception e) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("The exception occurs "), TAG);
             }
             z = false;
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("addCredentialStorageLockType retcode-", TAG, z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "addCredentialStorageLockType retcode-", TAG, z);
         return z;
     }
 
-    public final boolean addOrUpdateDefaultInstallStorage(int i, CredentialStorage credentialStorage, int i2) {
+    public final boolean addOrUpdateDefaultInstallStorage(
+            int i, CredentialStorage credentialStorage, int i2) {
         boolean z = DBG;
         if (z) {
             Log.i(TAG, "addOrUpdateDefaultInstallStorage is called...");
@@ -1642,13 +2578,24 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
         if (z) {
             String str = TAG;
-            StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "addOrUpdateDefaultInstallStorage adminUid - ", " ContainerId - ", ", Storage Name- ");
+            StringBuilder m =
+                    ArrayUtils$$ExternalSyntheticOutline0.m(
+                            i,
+                            i2,
+                            "addOrUpdateDefaultInstallStorage adminUid - ",
+                            " ContainerId - ",
+                            ", Storage Name- ");
             m.append(credentialStorage.name);
             m.append(", Storage Package name - ");
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(m, credentialStorage.packageName, str);
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    m, credentialStorage.packageName, str);
         }
         try {
-            boolean deleteDataByFields = this.mEdmStorageProvider.deleteDataByFields("UniversalCredentialDefaultInstallTable", new String[]{"adminUid", "userId"}, new String[]{String.valueOf(i), String.valueOf(i2)});
+            boolean deleteDataByFields =
+                    this.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialDefaultInstallTable",
+                            new String[] {"adminUid", "userId"},
+                            new String[] {String.valueOf(i), String.valueOf(i2)});
             Log.i(TAG, "addOrUpdateDefaultInstallStorage oldResult-" + deleteDataByFields);
             ContentValues contentValues = new ContentValues();
             contentValues.put("adminUid", Integer.valueOf(i));
@@ -1659,17 +2606,22 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             if (str2 != null && str2.length() > 0) {
                 contentValues.put("storageManufacture", credentialStorage.manufacturer);
             }
-            z2 = this.mEdmStorageProvider.putValuesNoUpdate("UniversalCredentialDefaultInstallTable", contentValues);
+            z2 =
+                    this.mEdmStorageProvider.putValuesNoUpdate(
+                            "UniversalCredentialDefaultInstallTable", contentValues);
         } catch (Exception e) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("The exception occurs "), TAG);
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("addOrUpdateDefaultInstallStorage retcode-", TAG, z2);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "addOrUpdateDefaultInstallStorage retcode-", TAG, z2);
         return z2;
     }
 
-    public final boolean addOrUpdateEnforcedCredentialStorageLockType(int i, CredentialStorage credentialStorage, int i2) {
+    public final boolean addOrUpdateEnforcedCredentialStorageLockType(
+            int i, CredentialStorage credentialStorage, int i2) {
         boolean z = DBG;
         if (z) {
             Log.i(TAG, "addOrUpdateEnforcedCredentialStorageLockType is called...");
@@ -1683,14 +2635,28 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
         if (z) {
             String str = TAG;
-            StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "addOrUpdateEnforcedCredentialStorageLockType adminUid - ", " ContainerId - ", ", Storage Name- ");
+            StringBuilder m =
+                    ArrayUtils$$ExternalSyntheticOutline0.m(
+                            i,
+                            i2,
+                            "addOrUpdateEnforcedCredentialStorageLockType adminUid - ",
+                            " ContainerId - ",
+                            ", Storage Name- ");
             m.append(credentialStorage.name);
             m.append(", Storage Package name - ");
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(m, credentialStorage.packageName, str);
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    m, credentialStorage.packageName, str);
         }
         try {
-            boolean deleteDataByFields = this.mEdmStorageProvider.deleteDataByFields("UniversalCredentialEnforcedLockTypeTable", new String[]{"adminUid", "userId"}, new String[]{String.valueOf(i), String.valueOf(i2)});
-            Log.i(TAG, "addOrUpdateEnforcedCredentialStorageLockType oldResult - " + deleteDataByFields);
+            boolean deleteDataByFields =
+                    this.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialEnforcedLockTypeTable",
+                            new String[] {"adminUid", "userId"},
+                            new String[] {String.valueOf(i), String.valueOf(i2)});
+            Log.i(
+                    TAG,
+                    "addOrUpdateEnforcedCredentialStorageLockType oldResult - "
+                            + deleteDataByFields);
             ContentValues contentValues = new ContentValues();
             contentValues.put("adminUid", Integer.valueOf(i));
             contentValues.put("userId", Integer.valueOf(i2));
@@ -1700,17 +2666,22 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             if (str2 != null && str2.length() > 0) {
                 contentValues.put("storageManufacture", credentialStorage.manufacturer);
             }
-            z2 = this.mEdmStorageProvider.putValuesNoUpdate("UniversalCredentialEnforcedLockTypeTable", contentValues);
+            z2 =
+                    this.mEdmStorageProvider.putValuesNoUpdate(
+                            "UniversalCredentialEnforcedLockTypeTable", contentValues);
         } catch (Exception e) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("The exception occurs "), TAG);
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("addOrUpdateEnforcedCredentialStorageLockType retcode-", TAG, z2);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "addOrUpdateEnforcedCredentialStorageLockType retcode-", TAG, z2);
         return z2;
     }
 
-    public final boolean addOrUpdateSecureStorageConfig(int i, int i2, CredentialStorage credentialStorage, boolean z) {
+    public final boolean addOrUpdateSecureStorageConfig(
+            int i, int i2, CredentialStorage credentialStorage, boolean z) {
         boolean z2;
         boolean z3 = DBG;
         if (z3) {
@@ -1718,10 +2689,17 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
         if (z3) {
             String str = TAG;
-            StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "addOrUpdateSecureStorageConfig adminUid - ", " ContainerId - ", ", Storage Name- ");
+            StringBuilder m =
+                    ArrayUtils$$ExternalSyntheticOutline0.m(
+                            i,
+                            i2,
+                            "addOrUpdateSecureStorageConfig adminUid - ",
+                            " ContainerId - ",
+                            ", Storage Name- ");
             m.append(credentialStorage.name);
             m.append(", Storage Package name - ");
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(m, credentialStorage.packageName, str);
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    m, credentialStorage.packageName, str);
         }
         boolean z4 = false;
         if (z) {
@@ -1729,55 +2707,83 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 Log.i(TAG, "addOrUpdateSecureStorageConfig - enabling CS...");
             }
             ContentValues contentValues = new ContentValues();
-            Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(i, contentValues, "adminUid", i2, "userId");
+            Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(
+                    i, contentValues, "adminUid", i2, "userId");
             contentValues.put("storageName", credentialStorage.name);
             contentValues.put("storagePackageName", credentialStorage.packageName);
             try {
-                int packageUidAsUser = this.mPm.getPackageUidAsUser(credentialStorage.packageName, i2);
+                int packageUidAsUser =
+                        this.mPm.getPackageUidAsUser(credentialStorage.packageName, i2);
                 contentValues.put("appUid", Integer.valueOf(packageUidAsUser));
-                if (this.mEdmStorageProvider.getCount("UniversalCredentialInfoTable", contentValues) > 0) {
+                if (this.mEdmStorageProvider.getCount("UniversalCredentialInfoTable", contentValues)
+                        > 0) {
                     ContentValues contentValues2 = new ContentValues();
                     String str2 = credentialStorage.manufacturer;
                     if (str2 != null && str2.length() > 0) {
                         contentValues2.put("storageManufacture", credentialStorage.manufacturer);
                     }
-                    z2 = this.mEdmStorageProvider.putValues("UniversalCredentialInfoTable", contentValues2, contentValues);
+                    z2 =
+                            this.mEdmStorageProvider.putValues(
+                                    "UniversalCredentialInfoTable", contentValues2, contentValues);
                 } else {
                     String str3 = credentialStorage.manufacturer;
                     if (str3 != null && str3.length() > 0) {
                         contentValues.put("storageManufacture", credentialStorage.manufacturer);
                     }
-                    boolean putValuesNoUpdate = this.mEdmStorageProvider.putValuesNoUpdate("UniversalCredentialInfoTable", contentValues);
+                    boolean putValuesNoUpdate =
+                            this.mEdmStorageProvider.putValuesNoUpdate(
+                                    "UniversalCredentialInfoTable", contentValues);
                     if (!((ArrayList) this.adminIds).contains(Integer.valueOf(i))) {
                         ((ArrayList) this.adminIds).add(Integer.valueOf(i));
                     }
                     z2 = putValuesNoUpdate;
                 }
                 if (!this.activePluginsCache.containsKey(Integer.valueOf(packageUidAsUser))) {
-                    Log.i(TAG, "addOrUpdateSecureStorageConfig - adding new plugin in cache pluginUid-" + packageUidAsUser + ",pkg-" + credentialStorage.packageName);
-                    this.activePluginsCache.put(Integer.valueOf(packageUidAsUser), credentialStorage.packageName);
+                    Log.i(
+                            TAG,
+                            "addOrUpdateSecureStorageConfig - adding new plugin in cache pluginUid-"
+                                    + packageUidAsUser
+                                    + ",pkg-"
+                                    + credentialStorage.packageName);
+                    this.activePluginsCache.put(
+                            Integer.valueOf(packageUidAsUser), credentialStorage.packageName);
                 }
                 z4 = z2;
             } catch (Exception e) {
                 if (DBG) {
-                    RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+                    RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                            e, new StringBuilder("The exception occurs "), TAG);
                 }
             }
-        } else if (isCredentialStorageManagedInternal(i, i2, credentialStorage.name, credentialStorage.packageName)) {
+        } else if (isCredentialStorageManagedInternal(
+                i, i2, credentialStorage.name, credentialStorage.packageName)) {
             Log.i(TAG, "addOrUpdateSecureStorageConfig - Removing Credential Storage for Admin");
             try {
-                z4 = this.mEdmStorageProvider.deleteDataByFields("UniversalCredentialInfoTable", new String[]{"adminUid", "userId", "storageName", "storagePackageName"}, new String[]{String.valueOf(i), String.valueOf(i2), credentialStorage.name, credentialStorage.packageName});
+                z4 =
+                        this.mEdmStorageProvider.deleteDataByFields(
+                                "UniversalCredentialInfoTable",
+                                new String[] {
+                                    "adminUid", "userId", "storageName", "storagePackageName"
+                                },
+                                new String[] {
+                                    String.valueOf(i),
+                                    String.valueOf(i2),
+                                    credentialStorage.name,
+                                    credentialStorage.packageName
+                                });
                 if (z4) {
                     notifyToPlugin(i, credentialStorage, i2);
                     performCredentialStorageCleanup(i, credentialStorage, i2);
                 }
             } catch (Exception e2) {
                 if (DBG) {
-                    RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e2, new StringBuilder("The exception occurs "), TAG);
+                    RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                            e2, new StringBuilder("The exception occurs "), TAG);
                 }
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("addOrUpdateSecureStorageConfig retcode-", TAG, z4);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "addOrUpdateSecureStorageConfig retcode-", TAG, z4);
         return z4;
     }
 
@@ -1788,15 +2794,27 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final int addPackagesToExemptList(com.samsung.android.knox.ContextInfo r13, com.samsung.android.knox.ucm.configurator.CredentialStorage r14, int r15, java.util.List r16) {
+    public final int addPackagesToExemptList(
+            com.samsung.android.knox.ContextInfo r13,
+            com.samsung.android.knox.ucm.configurator.CredentialStorage r14,
+            int r15,
+            java.util.List r16) {
         /*
             Method dump skipped, instructions count: 251
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.ucm.UniversalCredentialManagerService.addPackagesToExemptList(com.samsung.android.knox.ContextInfo, com.samsung.android.knox.ucm.configurator.CredentialStorage, int, java.util.List):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.ucm.UniversalCredentialManagerService.addPackagesToExemptList(com.samsung.android.knox.ContextInfo,"
+                    + " com.samsung.android.knox.ucm.configurator.CredentialStorage, int,"
+                    + " java.util.List):int");
     }
 
-    public final int addPackagesToWhiteList(ContextInfo contextInfo, CredentialStorage credentialStorage, List list, Bundle bundle) {
+    public final int addPackagesToWhiteList(
+            ContextInfo contextInfo,
+            CredentialStorage credentialStorage,
+            List list,
+            Bundle bundle) {
         boolean z;
         String str = TAG;
         Log.i(str, "addPackagesToWhiteList is called....");
@@ -1814,19 +2832,27 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         return addPackagesToWhiteListMain(i, userId, credentialStorage, list, bundle, z);
     }
 
-    public final int addPackagesToWhiteListInternal(int i, int i2, CredentialStorage credentialStorage, List list, Bundle bundle) {
+    public final int addPackagesToWhiteListInternal(
+            int i, int i2, CredentialStorage credentialStorage, List list, Bundle bundle) {
         Log.i(TAG, "addPackagesToWhiteListInternal is called....");
         checkCallerPermissionFor("addPackagesToWhiteListInternal");
         return addPackagesToWhiteListMain(i, i2, credentialStorage, list, bundle, false);
     }
 
-    public final int addPackagesToWhiteListMain(int i, int i2, CredentialStorage credentialStorage, List list, Bundle bundle, boolean z) {
+    public final int addPackagesToWhiteListMain(
+            int i,
+            int i2,
+            CredentialStorage credentialStorage,
+            List list,
+            Bundle bundle,
+            boolean z) {
         String str;
         Log.i(TAG, "addPackagesToWhiteListMain is called....");
         try {
             KnoxAnalytics.log(getKAData("addPackagesToWhiteList", credentialStorage.packageName));
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -1834,10 +2860,16 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 if (isValidParam(credentialStorage) && list != null && bundle != null) {
                     boolean z2 = DBG;
                     if (z2) {
-                        Log.i(TAG, "addPackagesToWhiteListMain is called for Caller UID-" + i + " mContainerId " + i2);
+                        Log.i(
+                                TAG,
+                                "addPackagesToWhiteListMain is called for Caller UID-"
+                                        + i
+                                        + " mContainerId "
+                                        + i2);
                     }
                     String str2 = credentialStorage.signature;
-                    if (str2 != null && !validateSignature(i2, credentialStorage.packageName, str2)) {
+                    if (str2 != null
+                            && !validateSignature(i2, credentialStorage.packageName, str2)) {
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                         return -18;
                     }
@@ -1846,7 +2878,13 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                         return -13;
                     }
-                    if (true != isCredentialStorageManagedInternal(i, i2, credentialStorage.name, credentialStorage.packageName) && !z) {
+                    if (true
+                                    != isCredentialStorageManagedInternal(
+                                            i,
+                                            i2,
+                                            credentialStorage.name,
+                                            credentialStorage.packageName)
+                            && !z) {
                         if (z2) {
                             Log.i(TAG, "addPackagesToWhiteListMain return false..");
                         }
@@ -1867,13 +2905,22 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                         Log.i(str3, "addPackagesToWhiteListMain alias-" + string);
                         if (TextUtils.isEmpty(string)) {
                             if (z2) {
-                                Log.i(str3, "addPackagesToWhiteListMain alias name not provided for Certificate access_type");
+                                Log.i(
+                                        str3,
+                                        "addPackagesToWhiteListMain alias name not provided for"
+                                            + " Certificate access_type");
                             }
                             Binder.restoreCallingIdentity(clearCallingIdentity);
                             return -16;
                         }
                         str = string;
-                        if (true != checkCredentialStorageAliasForAdmin(i, i2, credentialStorage.name, credentialStorage.packageName, string)) {
+                        if (true
+                                != checkCredentialStorageAliasForAdmin(
+                                        i,
+                                        i2,
+                                        credentialStorage.name,
+                                        credentialStorage.packageName,
+                                        string)) {
                             if (z2) {
                                 Log.i(str3, "- alias not exist for credential storage...");
                             }
@@ -1885,12 +2932,18 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                     }
                     if (z) {
                         if (i3 == 103) {
-                            Log.i(TAG, "addPackagesToWhiteListMain Delegated app can't WhiteList storage.. error");
+                            Log.i(
+                                    TAG,
+                                    "addPackagesToWhiteListMain Delegated app can't WhiteList"
+                                        + " storage.. error");
                             Binder.restoreCallingIdentity(clearCallingIdentity);
                             return -30;
                         }
                         if (i3 == 107) {
-                            Log.i(TAG, "addPackagesToWhiteListMain Delegated app can't further delegate.. error");
+                            Log.i(
+                                    TAG,
+                                    "addPackagesToWhiteListMain Delegated app can't further"
+                                        + " delegate.. error");
                             Binder.restoreCallingIdentity(clearCallingIdentity);
                             return -29;
                         }
@@ -1898,13 +2951,18 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                         while (it.hasNext()) {
                             AppIdentity appIdentity = (AppIdentity) it.next();
                             if (z && isPackageDelegated(appIdentity.getPackageName())) {
-                                Log.i(TAG, "addPackagesToWhiteListMain ..app is already delegated by other app.. error");
+                                Log.i(
+                                        TAG,
+                                        "addPackagesToWhiteListMain ..app is already delegated by"
+                                            + " other app.. error");
                                 Binder.restoreCallingIdentity(clearCallingIdentity);
                                 return -29;
                             }
                         }
                     }
-                    int insertOrUpdateWhiteListPackages = insertOrUpdateWhiteListPackages(credentialStorage, list, i, i2, i3, str);
+                    int insertOrUpdateWhiteListPackages =
+                            insertOrUpdateWhiteListPackages(
+                                    credentialStorage, list, i, i2, i3, str);
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                     return insertOrUpdateWhiteListPackages;
                 }
@@ -1924,7 +2982,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    public final int changeKeyguardPin(ContextInfo contextInfo, CredentialStorage credentialStorage, String str, String str2) {
+    public final int changeKeyguardPin(
+            ContextInfo contextInfo, CredentialStorage credentialStorage, String str, String str2) {
         Log.i(TAG, "changeKeyguardPin is called....");
         validateContextInfo(contextInfo);
         int checkContext = checkContext(contextInfo, credentialStorage, true);
@@ -1934,13 +2993,19 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         try {
             KnoxAnalytics.log(getKAData("changeKeyguardPin", credentialStorage.packageName));
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         int i = contextInfo.mCallerUid;
         int userId = UserHandle.getUserId(i);
         try {
             if (DBG) {
-                Log.i(TAG, "changeKeyguardPin is called for Caller UID-" + i + " mContainerId " + userId);
+                Log.i(
+                        TAG,
+                        "changeKeyguardPin is called for Caller UID-"
+                                + i
+                                + " mContainerId "
+                                + userId);
             }
             int checkCS = checkCS(contextInfo, credentialStorage);
             if (checkCS != 0) {
@@ -1948,11 +3013,19 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
             IUcmService ucmService$1 = getUcmService$1();
             if (ucmService$1 != null) {
-                return getReturnvalue(ucmService$1.changePin(new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name).setResourceId(4).setUid(i).build(), str, str2));
+                return getReturnvalue(
+                        ucmService$1.changePin(
+                                new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name)
+                                        .setResourceId(4)
+                                        .setUid(i)
+                                        .build(),
+                                str,
+                                str2));
             }
             return -1;
         } catch (Exception e2) {
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e2, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e2, new StringBuilder("The exception occurs "), TAG);
             return -1;
         }
     }
@@ -1960,7 +3033,13 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
     public final int checkCS(ContextInfo contextInfo, CredentialStorage credentialStorage) {
         try {
             if (isValidParam(credentialStorage)) {
-                return !isCredentialStorageManagedInternal(contextInfo.mCallerUid, contextInfo.mContainerId, credentialStorage.name, credentialStorage.packageName) ? -12 : 0;
+                return !isCredentialStorageManagedInternal(
+                                contextInfo.mCallerUid,
+                                contextInfo.mContainerId,
+                                credentialStorage.name,
+                                credentialStorage.packageName)
+                        ? -12
+                        : 0;
             }
             return -1;
         } catch (Exception unused) {
@@ -1968,7 +3047,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    public final int checkContext(ContextInfo contextInfo, CredentialStorage credentialStorage, boolean z) {
+    public final int checkContext(
+            ContextInfo contextInfo, CredentialStorage credentialStorage, boolean z) {
         if (z) {
             Log.i(TAG, "Caller Must be Active Admin");
             enforceActiveAdminPermission(contextInfo);
@@ -1981,25 +3061,32 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
     }
 
     public final boolean checkCountFromEdmDB(String str) {
-        if (!"UniversalCredentialWhiteListTable".equals(str) && !"UniversalCredentialCertificateTable".equals(str)) {
+        if (!"UniversalCredentialWhiteListTable".equals(str)
+                && !"UniversalCredentialCertificateTable".equals(str)) {
             Log.i(TAG, "Input param is undefined flag, can't update flag");
             return false;
         }
         try {
             return this.mEdmStorageProvider.getCount(str, null) > 0;
         } catch (Exception e) {
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("The exception occurs "), TAG);
             return false;
         }
     }
 
-    public final boolean checkCredentialStorageAliasForAdmin(int i, int i2, String str, String str2, String str3) {
+    public final boolean checkCredentialStorageAliasForAdmin(
+            int i, int i2, String str, String str2, String str3) {
         boolean z = DBG;
         if (z) {
             Log.i(TAG, "checkCredentialStorageAliasForAdmin");
         }
         if (z) {
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "AdminId - ", ", UserId - ", ", storageName - "), str, TAG);
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    ArrayUtils$$ExternalSyntheticOutline0.m(
+                            i, i2, "AdminId - ", ", UserId - ", ", storageName - "),
+                    str,
+                    TAG);
         }
         try {
             CredentialStorage credentialStorage = new CredentialStorage();
@@ -2016,13 +3103,15 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
         } catch (Exception e) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("The exception occurs "), TAG);
             }
         }
         return false;
     }
 
-    public final boolean checkCredentialStorageEnabledForLockTypebyAdmin(int i, CredentialStorage credentialStorage, int i2) {
+    public final boolean checkCredentialStorageEnabledForLockTypebyAdmin(
+            int i, CredentialStorage credentialStorage, int i2) {
         String str = credentialStorage.name;
         String str2 = credentialStorage.packageName;
         try {
@@ -2037,7 +3126,9 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             if (str2 != null) {
                 contentValues.put("storagePackageName", str2);
             }
-            if (this.mEdmStorageProvider.getCount("UniversalCredentialEnabledLockTypeTable", contentValues) <= 0) {
+            if (this.mEdmStorageProvider.getCount(
+                            "UniversalCredentialEnabledLockTypeTable", contentValues)
+                    <= 0) {
                 return false;
             }
             if (!DBG) {
@@ -2049,7 +3140,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             if (!DBG) {
                 return false;
             }
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("The exception occurs "), TAG);
             return false;
         }
     }
@@ -2060,14 +3152,24 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             Log.i(TAG, "checkCredentialStorageLockTypeEnforced");
         }
         if (z) {
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(DirEncryptService$$ExternalSyntheticOutline0.m(i, "checkCredentialStorageLockTypeEnforced UserId - ", ", storageName - ", str, " and storagePackageName-"), str2, TAG);
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    DirEncryptService$$ExternalSyntheticOutline0.m(
+                            i,
+                            "checkCredentialStorageLockTypeEnforced UserId - ",
+                            ", storageName - ",
+                            str,
+                            " and storagePackageName-"),
+                    str2,
+                    TAG);
         }
         try {
             ContentValues contentValues = new ContentValues();
             contentValues.put("userId", Integer.valueOf(i));
             contentValues.put("storageName", str);
             contentValues.put("storagePackageName", str2);
-            if (this.mEdmStorageProvider.getCount("UniversalCredentialEnforcedLockTypeTable", contentValues) <= 0) {
+            if (this.mEdmStorageProvider.getCount(
+                            "UniversalCredentialEnforcedLockTypeTable", contentValues)
+                    <= 0) {
                 return false;
             }
             if (!z) {
@@ -2079,19 +3181,23 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             if (!DBG) {
                 return false;
             }
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("The exception occurs "), TAG);
             return false;
         }
     }
 
-    public final boolean checkCredentialStorageLockTypeEnforcedForAdmin(int i, int i2, String str, String str2) {
+    public final boolean checkCredentialStorageLockTypeEnforcedForAdmin(
+            int i, int i2, String str, String str2) {
         boolean z = DBG;
         if (z) {
             Log.i(TAG, "checkCredentialStorageLockTypeEnforcedForAdmin");
         }
         if (z) {
             String str3 = TAG;
-            StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "AdminId - ", ", UserId - ", ", storageName - ");
+            StringBuilder m =
+                    ArrayUtils$$ExternalSyntheticOutline0.m(
+                            i, i2, "AdminId - ", ", UserId - ", ", storageName - ");
             m.append(str);
             m.append(" and ");
             Log.i(str3, m.toString());
@@ -2106,7 +3212,9 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             if (str2 != null) {
                 contentValues.put("storagePackageName", str2);
             }
-            if (this.mEdmStorageProvider.getCount("UniversalCredentialEnforcedLockTypeTable", contentValues) <= 0) {
+            if (this.mEdmStorageProvider.getCount(
+                            "UniversalCredentialEnforcedLockTypeTable", contentValues)
+                    <= 0) {
                 return false;
             }
             if (!z) {
@@ -2118,25 +3226,37 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             if (!DBG) {
                 return false;
             }
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("The exception occurs "), TAG);
             return false;
         }
     }
 
-    public final boolean checkDefaultInstallCredentialStorageExists(int i, String str, String str2) {
+    public final boolean checkDefaultInstallCredentialStorageExists(
+            int i, String str, String str2) {
         boolean z = DBG;
         if (z) {
             Log.i(TAG, "checkDefaultInstallCredentialStorageExists");
         }
         if (z) {
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(DirEncryptService$$ExternalSyntheticOutline0.m(i, "checkDefaultInstallCredentialStorageExists UserId - ", ", storageName - ", str, " and storagePackageName-"), str2, TAG);
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    DirEncryptService$$ExternalSyntheticOutline0.m(
+                            i,
+                            "checkDefaultInstallCredentialStorageExists UserId - ",
+                            ", storageName - ",
+                            str,
+                            " and storagePackageName-"),
+                    str2,
+                    TAG);
         }
         try {
             ContentValues contentValues = new ContentValues();
             contentValues.put("userId", Integer.valueOf(i));
             contentValues.put("storageName", str);
             contentValues.put("storagePackageName", str2);
-            if (this.mEdmStorageProvider.getCount("UniversalCredentialDefaultInstallTable", contentValues) <= 0) {
+            if (this.mEdmStorageProvider.getCount(
+                            "UniversalCredentialDefaultInstallTable", contentValues)
+                    <= 0) {
                 return false;
             }
             if (!z) {
@@ -2148,19 +3268,23 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             if (!DBG) {
                 return false;
             }
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("The exception occurs "), TAG);
             return false;
         }
     }
 
-    public final boolean checkDefaultInstallCredentialStorageExistsForAdmin(int i, int i2, String str, String str2) {
+    public final boolean checkDefaultInstallCredentialStorageExistsForAdmin(
+            int i, int i2, String str, String str2) {
         boolean z = DBG;
         if (z) {
             Log.i(TAG, "checkDefaultInstallCredentialStorageExistsForAdmin");
         }
         if (z) {
             String str3 = TAG;
-            StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "AdminId - ", ", UserId - ", ", storageName - ");
+            StringBuilder m =
+                    ArrayUtils$$ExternalSyntheticOutline0.m(
+                            i, i2, "AdminId - ", ", UserId - ", ", storageName - ");
             m.append(str);
             m.append(" and ");
             Log.i(str3, m.toString());
@@ -2175,7 +3299,9 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             if (str2 != null) {
                 contentValues.put("storagePackageName", str2);
             }
-            if (this.mEdmStorageProvider.getCount("UniversalCredentialDefaultInstallTable", contentValues) <= 0) {
+            if (this.mEdmStorageProvider.getCount(
+                            "UniversalCredentialDefaultInstallTable", contentValues)
+                    <= 0) {
                 return false;
             }
             if (!z) {
@@ -2187,41 +3313,52 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             if (!DBG) {
                 return false;
             }
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("The exception occurs "), TAG);
             return false;
         }
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:19:0x00bc, code lost:
-    
-        android.util.Log.i(r14, "getDelegatorUid delegator found..");
-     */
+
+       android.util.Log.i(r14, "getDelegatorUid delegator found..");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:20:0x00c2, code lost:
-    
-        r7 = r12;
-     */
+
+       r7 = r12;
+    */
     /* JADX WARN: Removed duplicated region for block: B:40:0x0104 A[Catch: Exception -> 0x0122, TRY_ENTER, TryCatch #2 {Exception -> 0x0122, blocks: (B:37:0x00f6, B:40:0x0104, B:43:0x010c, B:45:0x0112, B:47:0x011c, B:50:0x0124, B:52:0x012e, B:56:0x0134, B:58:0x013e, B:60:0x0148), top: B:36:0x00f6 }] */
     /* JADX WARN: Removed duplicated region for block: B:56:0x0134 A[Catch: Exception -> 0x0122, TryCatch #2 {Exception -> 0x0122, blocks: (B:37:0x00f6, B:40:0x0104, B:43:0x010c, B:45:0x0112, B:47:0x011c, B:50:0x0124, B:52:0x012e, B:56:0x0134, B:58:0x013e, B:60:0x0148), top: B:36:0x00f6 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean checkDelegatorPermission(int r11, int r12, com.samsung.android.knox.ucm.configurator.CredentialStorage r13, java.lang.String r14) {
+    public final boolean checkDelegatorPermission(
+            int r11,
+            int r12,
+            com.samsung.android.knox.ucm.configurator.CredentialStorage r13,
+            java.lang.String r14) {
         /*
             Method dump skipped, instructions count: 354
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.ucm.UniversalCredentialManagerService.checkDelegatorPermission(int, int, com.samsung.android.knox.ucm.configurator.CredentialStorage, java.lang.String):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.ucm.UniversalCredentialManagerService.checkDelegatorPermission(int,"
+                    + " int, com.samsung.android.knox.ucm.configurator.CredentialStorage,"
+                    + " java.lang.String):boolean");
     }
 
-    public final int clearWhiteList(ContextInfo contextInfo, CredentialStorage credentialStorage, Bundle bundle) {
+    public final int clearWhiteList(
+            ContextInfo contextInfo, CredentialStorage credentialStorage, Bundle bundle) {
         boolean z;
         boolean z2;
         String str;
         int i;
         String str2;
         String str3 = TAG;
-        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(contextInfo, credentialStorage, str3, "clearWhiteList is called....")) {
+        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(
+                contextInfo, credentialStorage, str3, "clearWhiteList is called....")) {
             if (!DBG) {
                 return -11;
             }
@@ -2231,7 +3368,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         try {
             KnoxAnalytics.log(getKAData("clearWhiteList", credentialStorage.packageName));
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         int i2 = contextInfo.mCallerUid;
         int userId = UserHandle.getUserId(i2);
@@ -2248,7 +3386,12 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             try {
                 z2 = DBG;
                 if (z2) {
-                    Log.i(TAG, "clearWhiteList is called for Caller UID-" + i2 + " mContainerId " + userId);
+                    Log.i(
+                            TAG,
+                            "clearWhiteList is called for Caller UID-"
+                                    + i2
+                                    + " mContainerId "
+                                    + userId);
                 }
                 str = credentialStorage.signature;
             } catch (Exception e2) {
@@ -2262,7 +3405,13 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 return -13;
             }
-            if (true != isCredentialStorageManagedInternal(i2, userId, credentialStorage.name, credentialStorage.packageName) && !z) {
+            if (true
+                            != isCredentialStorageManagedInternal(
+                                    i2,
+                                    userId,
+                                    credentialStorage.name,
+                                    credentialStorage.packageName)
+                    && !z) {
                 if (z2) {
                     Log.i(TAG, "clearWhiteList return false..");
                 }
@@ -2283,13 +3432,22 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 Log.i(str4, "clearWhiteList alias-" + string);
                 if (TextUtils.isEmpty(string)) {
                     if (z2) {
-                        Log.i(str4, "clearWhiteList alias name not provided for Certificate access_type");
+                        Log.i(
+                                str4,
+                                "clearWhiteList alias name not provided for Certificate"
+                                    + " access_type");
                     }
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                     return -16;
                 }
                 i = i3;
-                if (true != checkCredentialStorageAliasForAdmin(i2, userId, credentialStorage.name, credentialStorage.packageName, string)) {
+                if (true
+                        != checkCredentialStorageAliasForAdmin(
+                                i2,
+                                userId,
+                                credentialStorage.name,
+                                credentialStorage.packageName,
+                                string)) {
                     if (z2) {
                         Log.i(str4, "clearWhiteList - alias not exist for credential storage...");
                     }
@@ -2315,35 +3473,78 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    public final boolean clearWhiteListPackages(int i, int i2, int i3, CredentialStorage credentialStorage, String str) {
+    public final boolean clearWhiteListPackages(
+            int i, int i2, int i3, CredentialStorage credentialStorage, String str) {
         boolean z = DBG;
         if (z) {
             Log.i(TAG, "clearWhiteListPackages is called...");
         }
         if (z) {
             String str2 = TAG;
-            StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "adminId - ", " ContainerId - ", " Storage name - ");
+            StringBuilder m =
+                    ArrayUtils$$ExternalSyntheticOutline0.m(
+                            i, i2, "adminId - ", " ContainerId - ", " Storage name - ");
             m.append(credentialStorage.name);
             m.append(" Storage Package - ");
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(m, credentialStorage.packageName, str2);
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    m, credentialStorage.packageName, str2);
         }
         boolean z2 = false;
         if (str == null) {
-            DirEncryptService$$ExternalSyntheticOutline0.m(i3, "clearWhiteListPackages access_type-", TAG);
+            DirEncryptService$$ExternalSyntheticOutline0.m(
+                    i3, "clearWhiteListPackages access_type-", TAG);
             try {
-                z2 = this.mEdmStorageProvider.deleteDataByFields("UniversalCredentialWhiteListTable", new String[]{"adminUid", "userId", "storageName", "storagePackageName", "accessType"}, new String[]{String.valueOf(i), String.valueOf(i2), credentialStorage.name, credentialStorage.packageName, String.valueOf(i3)});
+                z2 =
+                        this.mEdmStorageProvider.deleteDataByFields(
+                                "UniversalCredentialWhiteListTable",
+                                new String[] {
+                                    "adminUid",
+                                    "userId",
+                                    "storageName",
+                                    "storagePackageName",
+                                    "accessType"
+                                },
+                                new String[] {
+                                    String.valueOf(i),
+                                    String.valueOf(i2),
+                                    credentialStorage.name,
+                                    credentialStorage.packageName,
+                                    String.valueOf(i3)
+                                });
             } catch (Exception e) {
                 if (DBG) {
-                    RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("clearWhiteListPackages - Exception delete"), TAG);
+                    RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                            e, new StringBuilder("clearWhiteListPackages - Exception delete"), TAG);
                 }
             }
         } else {
             Log.i(TAG, "removeWhiteListPackages access_type-" + i3 + " and alias-" + str);
             try {
-                z2 = this.mEdmStorageProvider.deleteDataByFields("UniversalCredentialWhiteListTable", new String[]{"adminUid", "userId", "storageName", "storagePackageName", "accessType", "alias"}, new String[]{String.valueOf(i), String.valueOf(i2), credentialStorage.name, credentialStorage.packageName, String.valueOf(i3), str});
+                z2 =
+                        this.mEdmStorageProvider.deleteDataByFields(
+                                "UniversalCredentialWhiteListTable",
+                                new String[] {
+                                    "adminUid",
+                                    "userId",
+                                    "storageName",
+                                    "storagePackageName",
+                                    "accessType",
+                                    "alias"
+                                },
+                                new String[] {
+                                    String.valueOf(i),
+                                    String.valueOf(i2),
+                                    credentialStorage.name,
+                                    credentialStorage.packageName,
+                                    String.valueOf(i3),
+                                    str
+                                });
             } catch (Exception e2) {
                 if (DBG) {
-                    RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e2, new StringBuilder("clearWhiteListPackages - Exception delete"), TAG);
+                    RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                            e2,
+                            new StringBuilder("clearWhiteListPackages - Exception delete"),
+                            TAG);
                 }
             }
         }
@@ -2353,7 +3554,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         return z2;
     }
 
-    public final int configureCredentialStorageForODESettings(ContextInfo contextInfo, CredentialStorage credentialStorage, Bundle bundle) {
+    public final int configureCredentialStorageForODESettings(
+            ContextInfo contextInfo, CredentialStorage credentialStorage, Bundle bundle) {
         boolean z;
         String build;
         String str = TAG;
@@ -2368,9 +3570,13 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             return -11;
         }
         try {
-            KnoxAnalytics.log(getKAData("configureCredentialStorageForODESettings", credentialStorage.packageName));
+            KnoxAnalytics.log(
+                    getKAData(
+                            "configureCredentialStorageForODESettings",
+                            credentialStorage.packageName));
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         int i = contextInfo.mCallerUid;
         int userId = UserHandle.getUserId(i);
@@ -2379,7 +3585,12 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             try {
                 z = DBG;
                 if (z) {
-                    Log.i(TAG, "configureCredentialStorageForODESettings is called for Caller UID-" + i + " mContainerId " + userId);
+                    Log.i(
+                            TAG,
+                            "configureCredentialStorageForODESettings is called for Caller UID-"
+                                    + i
+                                    + " mContainerId "
+                                    + userId);
                 }
             } catch (Exception e2) {
                 Log.i(TAG, "The exception occurs " + e2.getMessage());
@@ -2390,9 +3601,14 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 return -1;
             }
             if (credentialStorage != null) {
-                build = new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name).setResourceId(4).setUid(i).build();
+                build =
+                        new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name)
+                                .setResourceId(4)
+                                .setUid(i)
+                                .build();
                 String str2 = credentialStorage.signature;
-                if (str2 != null && !validateSignature(userId, credentialStorage.packageName, str2)) {
+                if (str2 != null
+                        && !validateSignature(userId, credentialStorage.packageName, str2)) {
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                     return -18;
                 }
@@ -2401,7 +3617,9 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                     return -13;
                 }
-                if (true != isCredentialStorageManagedInternal(i, userId, credentialStorage.name, credentialStorage.packageName)) {
+                if (true
+                        != isCredentialStorageManagedInternal(
+                                i, userId, credentialStorage.name, credentialStorage.packageName)) {
                     if (z) {
                         Log.i(TAG, "configureCredentialStorageForODESettings return false..");
                     }
@@ -2409,12 +3627,23 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                     return -12;
                 }
             } else {
-                build = new UniversalCredentialUtil.UcmUriBuilder("reset").setResourceId(4).setUid(i).build();
+                build =
+                        new UniversalCredentialUtil.UcmUriBuilder("reset")
+                                .setResourceId(4)
+                                .setUid(i)
+                                .build();
             }
             IUcmService ucmService$1 = getUcmService$1();
             if (ucmService$1 != null) {
-                Log.i(TAG, "configureCredentialStorageForODESettings is called for plugin unmanaged...");
-                int configureODESettings = ucmService$1.configureODESettings(build, bundle, credentialStorage != null ? credentialStorage.signature : null);
+                Log.i(
+                        TAG,
+                        "configureCredentialStorageForODESettings is called for plugin"
+                            + " unmanaged...");
+                int configureODESettings =
+                        ucmService$1.configureODESettings(
+                                build,
+                                bundle,
+                                credentialStorage != null ? credentialStorage.signature : null);
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 return configureODESettings;
             }
@@ -2426,15 +3655,24 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    public final int configureCredentialStoragePlugin(ContextInfo contextInfo, CredentialStorage credentialStorage, Bundle bundle) {
+    public final int configureCredentialStoragePlugin(
+            ContextInfo contextInfo, CredentialStorage credentialStorage, Bundle bundle) {
         return configureCredentialStoragePlugin(contextInfo, credentialStorage, bundle, true);
     }
 
-    public final int configureCredentialStoragePlugin(ContextInfo contextInfo, CredentialStorage credentialStorage, Bundle bundle, boolean z) {
+    public final int configureCredentialStoragePlugin(
+            ContextInfo contextInfo,
+            CredentialStorage credentialStorage,
+            Bundle bundle,
+            boolean z) {
         String str;
         Bundle bundle2 = bundle;
         String str2 = TAG;
-        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(contextInfo, credentialStorage, str2, "configureCredentialStoragePlugin is called....")) {
+        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(
+                contextInfo,
+                credentialStorage,
+                str2,
+                "configureCredentialStoragePlugin is called....")) {
             if (!DBG) {
                 return -11;
             }
@@ -2442,7 +3680,9 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             return -11;
         }
         if (z) {
-            if (bundle2 != null && bundle2.containsKey("applet_location") && bundle2.getString("applet_location") == null) {
+            if (bundle2 != null
+                    && bundle2.containsKey("applet_location")
+                    && bundle2.getString("applet_location") == null) {
                 enforceActiveAdminPermission(contextInfo);
             } else {
                 enforceSecurityPermission(contextInfo, credentialStorage);
@@ -2468,9 +3708,16 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
             boolean z2 = DBG;
             if (z2) {
-                Log.i(str2, "configureCredentialStoragePlugin is called for Caller UID-" + i + " userId " + userId);
+                Log.i(
+                        str2,
+                        "configureCredentialStoragePlugin is called for Caller UID-"
+                                + i
+                                + " userId "
+                                + userId);
             }
-            if (true != isCredentialStorageManagedInternal(i, userId, credentialStorage.name, credentialStorage.packageName)) {
+            if (true
+                    != isCredentialStorageManagedInternal(
+                            i, userId, credentialStorage.name, credentialStorage.packageName)) {
                 if (z2) {
                     Log.i(str2, "configureCredentialStoragePlugin return false..");
                 }
@@ -2479,7 +3726,10 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
             IUcmService ucmService$1 = getUcmService$1();
             if (ucmService$1 != null) {
-                if (credentialStorage.name.equalsIgnoreCase("com.samsung.ucs.agent.ese:eSE Credential Storage") && credentialStorage.packageName.equalsIgnoreCase("com.samsung.ucs.agent.ese")) {
+                if (credentialStorage.name.equalsIgnoreCase(
+                                "com.samsung.ucs.agent.ese:eSE Credential Storage")
+                        && credentialStorage.packageName.equalsIgnoreCase(
+                                "com.samsung.ucs.agent.ese")) {
                     Log.i(str2, "Adding install flag for ESE applet");
                     if (bundle2 == null) {
                         bundle2 = new Bundle();
@@ -2489,18 +3739,37 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 Bundle bundle3 = bundle2;
                 getEnforcedCredentialStorageFromDb(userId);
                 Log.i(str2, "configureCredentialStoragePlugin - pass to agent...");
-                String build = new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name).setResourceId(4).setUid(i).build();
+                String build =
+                        new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name)
+                                .setResourceId(4)
+                                .setUid(i)
+                                .build();
                 RequestIdGenerator requestIdGenerator = this.mRIdGenerator;
                 int i2 = requestIdGenerator.fraction + 1;
                 requestIdGenerator.fraction = i2;
                 if (i2 > 10) {
                     requestIdGenerator.fraction = 1;
                 }
-                int nextInt = (requestIdGenerator.random.nextInt(90001) + 10000) * requestIdGenerator.fraction;
-                Bundle adminConfigureBundleForCs = ucmService$1.setAdminConfigureBundleForCs(i, userId, build, bundle3, nextInt);
-                int i3 = adminConfigureBundleForCs != null ? adminConfigureBundleForCs.getInt("intresponse", -1) : -1;
-                int i4 = adminConfigureBundleForCs != null ? adminConfigureBundleForCs.getInt("errorresponse", -1) : -1;
-                Log.i(str2, "configureCredentialStoragePlugin - requestId -" + nextInt + " and retCode-" + i3);
+                int nextInt =
+                        (requestIdGenerator.random.nextInt(90001) + 10000)
+                                * requestIdGenerator.fraction;
+                Bundle adminConfigureBundleForCs =
+                        ucmService$1.setAdminConfigureBundleForCs(
+                                i, userId, build, bundle3, nextInt);
+                int i3 =
+                        adminConfigureBundleForCs != null
+                                ? adminConfigureBundleForCs.getInt("intresponse", -1)
+                                : -1;
+                int i4 =
+                        adminConfigureBundleForCs != null
+                                ? adminConfigureBundleForCs.getInt("errorresponse", -1)
+                                : -1;
+                Log.i(
+                        str2,
+                        "configureCredentialStoragePlugin - requestId -"
+                                + nextInt
+                                + " and retCode-"
+                                + i3);
                 return i3 == 0 ? nextInt : i4;
             }
             return -1;
@@ -2512,7 +3781,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
     public final int configureWpcDar(ContextInfo contextInfo, CredentialStorage credentialStorage) {
         String str;
         String str2 = TAG;
-        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(contextInfo, credentialStorage, str2, "configureWpcDar")) {
+        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(
+                contextInfo, credentialStorage, str2, "configureWpcDar")) {
             return -11;
         }
         checkKnoxCorePermission(contextInfo);
@@ -2520,7 +3790,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         int userId = UserHandle.getUserId(i);
         boolean z = DBG;
         if (z) {
-            AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(i, userId, "configureWpcDar is called for Caller UID-", " mContainerId ", str2);
+            AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(
+                    i, userId, "configureWpcDar is called for Caller UID-", " mContainerId ", str2);
         }
         if (userId != 0) {
             Log.e(str2, "This API is only valid for User 0");
@@ -2529,7 +3800,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         try {
             str = credentialStorage.signature;
         } catch (Exception e) {
-            RCPManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+            RCPManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("The exception occurs "), TAG);
         }
         if (str != null && !validateSignature(userId, credentialStorage.packageName, str)) {
             return -18;
@@ -2538,7 +3810,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             Log.e(str2, "Storage is not active");
             return -13;
         }
-        if (!isCredentialStorageManagedInternal(i, userId, credentialStorage.name, credentialStorage.packageName)) {
+        if (!isCredentialStorageManagedInternal(
+                i, userId, credentialStorage.name, credentialStorage.packageName)) {
             if (!z) {
                 return -12;
             }
@@ -2547,7 +3820,11 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
         IUcmService ucmService$1 = getUcmService$1();
         if (ucmService$1 != null) {
-            String build = new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name).setResourceId(4).setUid(i).build();
+            String build =
+                    new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name)
+                            .setResourceId(4)
+                            .setUid(i)
+                            .build();
             Log.i(str2, "configureWPCDARFlag is called for plugin...");
             return ucmService$1.configureWPCDARFlag(build, credentialStorage.signature);
         }
@@ -2561,12 +3838,14 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             KnoxAnalytics.log(getKAData("deleteCACertificate"));
             return -1;
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
             return -1;
         }
     }
 
-    public final int deleteCertificate(ContextInfo contextInfo, CredentialStorage credentialStorage, String str) {
+    public final int deleteCertificate(
+            ContextInfo contextInfo, CredentialStorage credentialStorage, String str) {
         String str2 = TAG;
         Log.i(str2, "deleteCertificate is called....");
         validateContextInfo(contextInfo);
@@ -2581,18 +3860,21 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         return deleteCertificateMain(i, userId, credentialStorage, str);
     }
 
-    public final int deleteCertificateInternal(int i, int i2, CredentialStorage credentialStorage, String str) {
+    public final int deleteCertificateInternal(
+            int i, int i2, CredentialStorage credentialStorage, String str) {
         Log.i(TAG, "deleteCertificateInternal is called....");
         checkCallerPermissionFor("deleteCertificateInternal");
         return deleteCertificateMain(i, i2, credentialStorage, str);
     }
 
-    public final int deleteCertificateMain(int i, int i2, CredentialStorage credentialStorage, String str) {
+    public final int deleteCertificateMain(
+            int i, int i2, CredentialStorage credentialStorage, String str) {
         Log.i(TAG, "deleteCertificateMain is called....");
         try {
             KnoxAnalytics.log(getKAData("deleteCertificate", credentialStorage.packageName));
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -2603,7 +3885,12 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             if (isValidParam(credentialStorage) && str != null && str.length() != 0) {
                 boolean z = DBG;
                 if (z) {
-                    Log.i(TAG, "deleteCertificateMain is called for Caller UID-" + i + " mContainerId " + i2);
+                    Log.i(
+                            TAG,
+                            "deleteCertificateMain is called for Caller UID-"
+                                    + i
+                                    + " mContainerId "
+                                    + i2);
                 }
                 String str2 = credentialStorage.signature;
                 if (str2 != null && !validateSignature(i2, credentialStorage.packageName, str2)) {
@@ -2619,14 +3906,26 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 if (z) {
                     Log.i(TAG, "deleteCertificateMain userId-" + i2 + " and adminId-" + i);
                 }
-                if (true != checkCredentialStorageAliasForAdmin(i, i2, credentialStorage.name, credentialStorage.packageName, validString)) {
+                if (true
+                        != checkCredentialStorageAliasForAdmin(
+                                i,
+                                i2,
+                                credentialStorage.name,
+                                credentialStorage.packageName,
+                                validString)) {
                     if (z) {
                         Log.i(TAG, "- alias not exist for credential storage...");
                     }
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                     return -14;
                 }
-                int removeCertificatefromProvider = removeCertificatefromProvider(i2, i, credentialStorage.name, credentialStorage.packageName, validString);
+                int removeCertificatefromProvider =
+                        removeCertificatefromProvider(
+                                i2,
+                                i,
+                                credentialStorage.name,
+                                credentialStorage.packageName,
+                                validString);
                 if (removeCertificatefromProvider != 0) {
                     if (z) {
                         Log.i(TAG, "deleteCertificateMain - removeCertificatefromProvider failed");
@@ -2657,27 +3956,46 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    public final boolean deleteCertificateUsingAdminId(int i, int i2, CredentialStorage credentialStorage, String str) {
+    public final boolean deleteCertificateUsingAdminId(
+            int i, int i2, CredentialStorage credentialStorage, String str) {
         if (DBG) {
-            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("deleteCertificateUsingAdminId is called for alias-", str, TAG);
+            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                    "deleteCertificateUsingAdminId is called for alias-", str, TAG);
         }
         boolean z = false;
         try {
-            z = this.mEdmStorageProvider.deleteDataByFields("UniversalCredentialCertificateTable", new String[]{"adminUid", "userId", "storageName", "storagePackageName", "alias"}, new String[]{String.valueOf(i), String.valueOf(i2), credentialStorage.name, credentialStorage.packageName, str});
+            z =
+                    this.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialCertificateTable",
+                            new String[] {
+                                "adminUid", "userId", "storageName", "storagePackageName", "alias"
+                            },
+                            new String[] {
+                                String.valueOf(i),
+                                String.valueOf(i2),
+                                credentialStorage.name,
+                                credentialStorage.packageName,
+                                str
+                            });
             String str2 = TAG;
             Log.i(str2, "deleteCertificateUsingAdminId is successful for alias-" + str);
             if (z) {
-                Log.i(str2, "deleteCertificateUsingAdminId remove whitelist status-" + clearWhiteListPackages(i, i2, 104, credentialStorage, str));
+                Log.i(
+                        str2,
+                        "deleteCertificateUsingAdminId remove whitelist status-"
+                                + clearWhiteListPackages(i, i2, 104, credentialStorage, str));
             }
         } catch (Exception e) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("deleteCertificateUsingAdminId - Exception"), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("deleteCertificateUsingAdminId - Exception"), TAG);
             }
         }
         return z;
     }
 
-    public final int enableCredentialStorageForLockType(ContextInfo contextInfo, CredentialStorage credentialStorage, boolean z) {
+    public final int enableCredentialStorageForLockType(
+            ContextInfo contextInfo, CredentialStorage credentialStorage, boolean z) {
         boolean z2;
         Log.i(TAG, "enableCredentialStorageForLockType is called....");
         validateContextInfo(contextInfo);
@@ -2685,11 +4003,13 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         int i = contextInfo.mCallerUid;
         int userId = UserHandle.getUserId(i);
         try {
-            KnoxAnalyticsData kAData = getKAData("enableCredentialStorageForLockType", credentialStorage.packageName);
+            KnoxAnalyticsData kAData =
+                    getKAData("enableCredentialStorageForLockType", credentialStorage.packageName);
             kAData.setProperty("enable", z);
             KnoxAnalytics.log(kAData);
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         String str = credentialStorage.signature;
         if (str != null && !validateSignature(userId, credentialStorage.packageName, str)) {
@@ -2705,45 +4025,68 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             try {
                 z2 = DBG;
                 if (z2) {
-                    Log.i(TAG, "enableCredentialStorageForLockType is called for Caller UID-" + i + " mContainerId " + userId);
+                    Log.i(
+                            TAG,
+                            "enableCredentialStorageForLockType is called for Caller UID-"
+                                    + i
+                                    + " mContainerId "
+                                    + userId);
                 }
             } catch (Exception e2) {
                 Log.i(TAG, "The exception occurs " + e2.getMessage());
             }
             if (!isValidParam(credentialStorage)) {
                 if (z2) {
-                    Log.i(TAG, "enableCredentialStorageForLockType Invalid credential storage object passed...");
+                    Log.i(
+                            TAG,
+                            "enableCredentialStorageForLockType Invalid credential storage object"
+                                + " passed...");
                 }
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 return -1;
             }
-            if (true != isCredentialStorageManagedInternal(i, userId, credentialStorage.name, credentialStorage.packageName)) {
+            if (true
+                    != isCredentialStorageManagedInternal(
+                            i, userId, credentialStorage.name, credentialStorage.packageName)) {
                 if (z2) {
                     Log.i(TAG, "enableCredentialStorageForLockType return false..");
                 }
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 return -12;
             }
-            Provider credentialStorageProvider = getCredentialStorageProvider(credentialStorage.name, credentialStorage.packageName);
+            Provider credentialStorageProvider =
+                    getCredentialStorageProvider(
+                            credentialStorage.name, credentialStorage.packageName);
             if (credentialStorageProvider == null) {
                 if (z2) {
-                    Log.i(TAG, "enableCredentialStorageForLockType No matching managed Credential Storage found in Provider list");
+                    Log.i(
+                            TAG,
+                            "enableCredentialStorageForLockType No matching managed Credential"
+                                + " Storage found in Provider list");
                 }
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 return -13;
             }
             String property = credentialStorageProvider.getProperty("isGeneratePasswordAvailable");
             String str2 = TAG;
-            Log.i(str2, "enableCredentialStorageForLockType isGeneratePasswordAvailable-" + property);
+            Log.i(
+                    str2,
+                    "enableCredentialStorageForLockType isGeneratePasswordAvailable-" + property);
             if ("false".equals(property)) {
                 if (z2) {
-                    Log.i(str2, "enableCredentialStorageForLockType Generate Password not supported by Provider");
+                    Log.i(
+                            str2,
+                            "enableCredentialStorageForLockType Generate Password not supported by"
+                                + " Provider");
                 }
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 return -27;
             }
             if (z2) {
-                Log.i(str2, "enableCredentialStorageForLockType Generate Password supported by Provider");
+                Log.i(
+                        str2,
+                        "enableCredentialStorageForLockType Generate Password supported by"
+                            + " Provider");
             }
             i2 = enableCredentialStorageForLockTypeInternal(i, userId, credentialStorage, z);
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -2754,35 +4097,52 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    public final int enableCredentialStorageForLockTypeInternal(int i, int i2, CredentialStorage credentialStorage, boolean z) {
+    public final int enableCredentialStorageForLockTypeInternal(
+            int i, int i2, CredentialStorage credentialStorage, boolean z) {
         try {
             if (checkCredentialStorageEnabledForLockTypebyAdmin(-1, credentialStorage, i2)) {
                 if (checkCredentialStorageEnabledForLockTypebyAdmin(i, credentialStorage, i2)) {
                     if (z) {
-                        Log.i(TAG, "enableCredentialStorageForLockTypeInternal record already exist...");
+                        Log.i(
+                                TAG,
+                                "enableCredentialStorageForLockTypeInternal record already"
+                                    + " exist...");
                         return 0;
                     }
                     if (removeCredentialStorageLockType(i, credentialStorage, i2)) {
                         return 0;
                     }
                 } else if (z) {
-                    Log.i(TAG, "enableCredentialStorageForLockTypeInternal record already exist for another admin. Enabling for current Admin too...");
+                    Log.i(
+                            TAG,
+                            "enableCredentialStorageForLockTypeInternal record already exist for"
+                                + " another admin. Enabling for current Admin too...");
                     if (addCredentialStorageLockType(i, credentialStorage, i2)) {
                         return 0;
                     }
                 } else if (DBG) {
-                    Log.i(TAG, "enableCredentialStorageForLockTypeInternal Credential storage not enabled as a Lock type by this admin..");
+                    Log.i(
+                            TAG,
+                            "enableCredentialStorageForLockTypeInternal Credential storage not"
+                                + " enabled as a Lock type by this admin..");
                 }
             } else if (z) {
-                Log.i(TAG, "enableCredentialStorageForLockTypeInternal enabling lock type for current Admin ...");
+                Log.i(
+                        TAG,
+                        "enableCredentialStorageForLockTypeInternal enabling lock type for current"
+                            + " Admin ...");
                 if (addCredentialStorageLockType(i, credentialStorage, i2)) {
                     return 0;
                 }
             } else if (DBG) {
-                Log.i(TAG, "enableCredentialStorageForLockTypeInternal Credential storage not enabled as a Lock type by this admin..");
+                Log.i(
+                        TAG,
+                        "enableCredentialStorageForLockTypeInternal Credential storage not enabled"
+                            + " as a Lock type by this admin..");
             }
         } catch (Exception e) {
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("The exception occurs "), TAG);
         }
         return -1;
     }
@@ -2800,13 +4160,13 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
 
     /* JADX WARN: Can't wrap try/catch for region: R(13:(18:90|91|(1:93)|(1:9)|10|11|(2:13|(2:19|(2:21|22))(1:17))|23|24|25|(1:27)|28|(2:30|(3:(1:33)|34|35)(2:36|(2:38|(3:(1:41)|42|43)(1:(1:45)))(3:(1:63)|64|65)))(1:(2:67|(2:69|(3:(1:72)|73|74)))(3:(1:76)|77|78))|46|47|(2:57|(1:61))(1:(1:51)(2:54|(1:56)))|52|53)|24|25|(0)|28|(0)(0)|46|47|(0)|57|(1:61)|52|53) */
     /* JADX WARN: Code restructure failed: missing block: B:83:0x00a1, code lost:
-    
-        r11 = move-exception;
-     */
+
+       r11 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:85:0x01a2, code lost:
-    
-        android.util.Log.i(com.android.server.enterprise.ucm.UniversalCredentialManagerService.TAG, "The exception occurs " + r11.getMessage());
-     */
+
+       android.util.Log.i(com.android.server.enterprise.ucm.UniversalCredentialManagerService.TAG, "The exception occurs " + r11.getMessage());
+    */
     /* JADX WARN: Removed duplicated region for block: B:13:0x005e  */
     /* JADX WARN: Removed duplicated region for block: B:27:0x0084 A[Catch: all -> 0x009e, Exception -> 0x00a1, TryCatch #2 {Exception -> 0x00a1, blocks: (B:25:0x0080, B:27:0x0084, B:28:0x00a4, B:30:0x00aa, B:33:0x00b6, B:36:0x00c4, B:38:0x00ce, B:41:0x00f1, B:45:0x00ff, B:46:0x0134, B:51:0x0145, B:54:0x0161, B:56:0x0167, B:61:0x0175, B:63:0x0108, B:67:0x0116, B:69:0x011c, B:72:0x0128, B:76:0x0196), top: B:24:0x0080, outer: #1 }] */
     /* JADX WARN: Removed duplicated region for block: B:30:0x00aa A[Catch: all -> 0x009e, Exception -> 0x00a1, TryCatch #2 {Exception -> 0x00a1, blocks: (B:25:0x0080, B:27:0x0084, B:28:0x00a4, B:30:0x00aa, B:33:0x00b6, B:36:0x00c4, B:38:0x00ce, B:41:0x00f1, B:45:0x00ff, B:46:0x0134, B:51:0x0145, B:54:0x0161, B:56:0x0167, B:61:0x0175, B:63:0x0108, B:67:0x0116, B:69:0x011c, B:72:0x0128, B:76:0x0196), top: B:24:0x0080, outer: #1 }] */
@@ -2815,43 +4175,74 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final int enforceCredentialStorageAsLockType(com.samsung.android.knox.ContextInfo r12, com.samsung.android.knox.ucm.configurator.CredentialStorage r13, android.os.Bundle r14) {
+    public final int enforceCredentialStorageAsLockType(
+            com.samsung.android.knox.ContextInfo r12,
+            com.samsung.android.knox.ucm.configurator.CredentialStorage r13,
+            android.os.Bundle r14) {
         /*
             Method dump skipped, instructions count: 445
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.ucm.UniversalCredentialManagerService.enforceCredentialStorageAsLockType(com.samsung.android.knox.ContextInfo, com.samsung.android.knox.ucm.configurator.CredentialStorage, android.os.Bundle):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.ucm.UniversalCredentialManagerService.enforceCredentialStorageAsLockType(com.samsung.android.knox.ContextInfo,"
+                    + " com.samsung.android.knox.ucm.configurator.CredentialStorage,"
+                    + " android.os.Bundle):int");
     }
 
-    public final int enforceCredentialStorageAsLockTypeInternal(int i, CredentialStorage credentialStorage, int i2) {
+    public final int enforceCredentialStorageAsLockTypeInternal(
+            int i, CredentialStorage credentialStorage, int i2) {
         try {
             if (credentialStorage == null) {
                 String str = TAG;
-                Log.i(str, "enforceCredentialStorageAsLockTypeInternal cs is null so removing admin entry...");
-                boolean deleteDataByFields = this.mEdmStorageProvider.deleteDataByFields("UniversalCredentialEnforcedLockTypeTable", new String[]{"adminUid", "userId"}, new String[]{String.valueOf(i), String.valueOf(i2)});
-                Log.i(str, "enforceCredentialStorageAsLockTypeInternal result-" + deleteDataByFields);
+                Log.i(
+                        str,
+                        "enforceCredentialStorageAsLockTypeInternal cs is null so removing admin"
+                            + " entry...");
+                boolean deleteDataByFields =
+                        this.mEdmStorageProvider.deleteDataByFields(
+                                "UniversalCredentialEnforcedLockTypeTable",
+                                new String[] {"adminUid", "userId"},
+                                new String[] {String.valueOf(i), String.valueOf(i2)});
+                Log.i(
+                        str,
+                        "enforceCredentialStorageAsLockTypeInternal result-" + deleteDataByFields);
                 return deleteDataByFields ? 0 : -1;
             }
-            if (!checkCredentialStorageLockTypeEnforced(i2, credentialStorage.name, credentialStorage.packageName)) {
-                return addOrUpdateEnforcedCredentialStorageLockType(i, credentialStorage, i2) ? 0 : -1;
+            if (!checkCredentialStorageLockTypeEnforced(
+                    i2, credentialStorage.name, credentialStorage.packageName)) {
+                return addOrUpdateEnforcedCredentialStorageLockType(i, credentialStorage, i2)
+                        ? 0
+                        : -1;
             }
-            if (checkCredentialStorageLockTypeEnforcedForAdmin(i, i2, credentialStorage.name, credentialStorage.packageName)) {
+            if (checkCredentialStorageLockTypeEnforcedForAdmin(
+                    i, i2, credentialStorage.name, credentialStorage.packageName)) {
                 Log.i(TAG, "enforceCredentialStorageAsLockTypeInternal record already exist...");
                 return 10;
             }
             if (checkCredentialStorageLockTypeEnforcedForAdmin(i, i2, null, null)) {
-                Log.i(TAG, "enforceCredentialStorageAsLockTypeInternal Another Credential storage is already configured by some other admin");
-                return addOrUpdateEnforcedCredentialStorageLockType(i, credentialStorage, i2) ? 0 : -1;
+                Log.i(
+                        TAG,
+                        "enforceCredentialStorageAsLockTypeInternal Another Credential storage is"
+                            + " already configured by some other admin");
+                return addOrUpdateEnforcedCredentialStorageLockType(i, credentialStorage, i2)
+                        ? 0
+                        : -1;
             }
-            Log.i(TAG, "enforceCredentialStorageAsLockTypeInternal Credential storage is configured by some other admin");
+            Log.i(
+                    TAG,
+                    "enforceCredentialStorageAsLockTypeInternal Credential storage is configured by"
+                        + " some other admin");
             return -10;
         } catch (Exception e) {
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("The exception occurs "), TAG);
             return -1;
         }
     }
 
-    public final void enforceSecurityPermission(ContextInfo contextInfo, CredentialStorage credentialStorage) {
+    public final void enforceSecurityPermission(
+            ContextInfo contextInfo, CredentialStorage credentialStorage) {
         if (this.mEDM == null) {
             this.mEDM = EnterpriseDeviceManager.getInstance(this.mContext);
         }
@@ -2859,7 +4250,9 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             enforceActiveAdminPermission(contextInfo);
             return;
         }
-        ArrayList m = PortStatus_1_1$$ExternalSyntheticOutline0.m("com.samsung.android.knox.permission.KNOX_UCM_MGMT");
+        ArrayList m =
+                PortStatus_1_1$$ExternalSyntheticOutline0.m(
+                        "com.samsung.android.knox.permission.KNOX_UCM_MGMT");
         if (credentialStorage != null) {
             String str = credentialStorage.name;
             String str2 = credentialStorage.packageName;
@@ -2885,12 +4278,17 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
         this.mEDM.enforcePermissionByContext(contextInfo, m);
         if (contextInfo.mCallerUid != i) {
-            UiModeManagerService$13$$ExternalSyntheticOutline0.m(BatteryService$$ExternalSyntheticOutline0.m(i, "enforceSecurityPermission : oldCallerId = ", " newCallerId = "), contextInfo.mCallerUid, TAG);
+            UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            i, "enforceSecurityPermission : oldCallerId = ", " newCallerId = "),
+                    contextInfo.mCallerUid,
+                    TAG);
         }
         Log.i(TAG, "enforceSecurityPermission : caller has valid UCM permission");
     }
 
-    public final boolean existAliasInternal(int i, CredentialStorage credentialStorage, String str) {
+    public final boolean existAliasInternal(
+            int i, CredentialStorage credentialStorage, String str) {
         boolean z = DBG;
         if (z) {
             Log.i(TAG, "existAliasInternal");
@@ -2906,7 +4304,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             if (str2 != null) {
                 if (true == str2.equals(str)) {
                     if (DBG) {
-                        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("exist alias : ", str, TAG);
+                        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                                "exist alias : ", str, TAG);
                     }
                     return true;
                 }
@@ -2920,10 +4319,15 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
     public final ArrayList getActivePlugin() {
         Log.i(TAG, "getActivePlugin ..");
         try {
-            return this.mEdmStorageProvider.getDataByFields("UniversalCredentialInfoTable", null, null, new String[]{"storagePackageName", "appUid"});
+            return this.mEdmStorageProvider.getDataByFields(
+                    "UniversalCredentialInfoTable",
+                    null,
+                    null,
+                    new String[] {"storagePackageName", "appUid"});
         } catch (Exception e) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("The exception occurs "), TAG);
             }
             return new ArrayList();
         }
@@ -2933,7 +4337,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         String str = TAG;
         Log.i(str, "getAdminForEnforcedCredentialStorageAsUser is called....");
         if (DBG) {
-            DirEncryptService$$ExternalSyntheticOutline0.m(i, "getAdminForEnforcedCredentialStorageAsUser is called for userId ", str);
+            DirEncryptService$$ExternalSyntheticOutline0.m(
+                    i, "getAdminForEnforcedCredentialStorageAsUser is called for userId ", str);
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -2952,7 +4357,12 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
     }
 
     public final int getAdminForEnforcedCredentialStorageFromDb(int i) {
-        ArrayList dataByFields = this.mEdmStorageProvider.getDataByFields("UniversalCredentialEnforcedLockTypeTable", new String[]{"userId"}, new String[]{String.valueOf(i)}, new String[]{"adminUid"});
+        ArrayList dataByFields =
+                this.mEdmStorageProvider.getDataByFields(
+                        "UniversalCredentialEnforcedLockTypeTable",
+                        new String[] {"userId"},
+                        new String[] {String.valueOf(i)},
+                        new String[] {"adminUid"});
         if (dataByFields.size() <= 0) {
             return -1;
         }
@@ -2973,7 +4383,12 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         Log.i(TAG, "getAdminIdRelatedToStorage stroragePackage-" + str);
         ArrayList arrayList = new ArrayList();
         try {
-            ArrayList dataByFields = this.mEdmStorageProvider.getDataByFields("UniversalCredentialInfoTable", new String[]{"storagePackageName"}, new String[]{str}, new String[]{"adminUid"});
+            ArrayList dataByFields =
+                    this.mEdmStorageProvider.getDataByFields(
+                            "UniversalCredentialInfoTable",
+                            new String[] {"storagePackageName"},
+                            new String[] {str},
+                            new String[] {"adminUid"});
             if (dataByFields.size() > 0) {
                 Iterator it = dataByFields.iterator();
                 while (it.hasNext()) {
@@ -2992,7 +4407,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
         } catch (Exception e) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("The exception occurs "), TAG);
             }
         }
         return arrayList;
@@ -3001,7 +4417,16 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
     public final List getAdminIdRelatedToStorageAsUser(int i, CredentialStorage credentialStorage) {
         ArrayList arrayList = new ArrayList();
         try {
-            ArrayList dataByFields = this.mEdmStorageProvider.getDataByFields("UniversalCredentialInfoTable", new String[]{"userId", "storageName", "storagePackageName"}, new String[]{String.valueOf(i), credentialStorage.name, credentialStorage.packageName}, new String[]{"adminUid"});
+            ArrayList dataByFields =
+                    this.mEdmStorageProvider.getDataByFields(
+                            "UniversalCredentialInfoTable",
+                            new String[] {"userId", "storageName", "storagePackageName"},
+                            new String[] {
+                                String.valueOf(i),
+                                credentialStorage.name,
+                                credentialStorage.packageName
+                            },
+                            new String[] {"adminUid"});
             if (dataByFields.size() > 0) {
                 Iterator it = dataByFields.iterator();
                 while (it.hasNext()) {
@@ -3020,7 +4445,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
         } catch (Exception e) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("The exception occurs "), TAG);
             }
         }
         return arrayList;
@@ -3028,7 +4454,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
 
     public final String[] getAliases(ContextInfo contextInfo, CredentialStorage credentialStorage) {
         String str = TAG;
-        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(contextInfo, credentialStorage, str, "getAliases is called....")) {
+        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(
+                contextInfo, credentialStorage, str, "getAliases is called....")) {
             if (DBG) {
                 Log.i(str, "getAliases - Invalid Arguments");
             }
@@ -3037,7 +4464,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         try {
             KnoxAnalytics.log(getKAData("getAliases", credentialStorage.packageName));
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         int i = contextInfo.mCallerUid;
         int userId = UserHandle.getUserId(i);
@@ -3048,7 +4476,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             i = contextInfo.mCallerUid;
         }
         if (DBG) {
-            AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(i, userId, "getAliases is called for Caller UID-", " mContainerId ", TAG);
+            AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(
+                    i, userId, "getAliases is called for Caller UID-", " mContainerId ", TAG);
         }
         String str2 = credentialStorage.signature;
         if (str2 != null && !validateSignature(userId, credentialStorage.packageName, str2)) {
@@ -3066,7 +4495,19 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         String[] strArr = null;
         try {
             try {
-                ArrayList dataByFields = this.mEdmStorageProvider.getDataByFields("UniversalCredentialCertificateTable", new String[]{"adminUid", "userId", "storageName", "storagePackageName"}, new String[]{String.valueOf(i), String.valueOf(i2), credentialStorage.name, credentialStorage.packageName}, new String[]{"alias"});
+                ArrayList dataByFields =
+                        this.mEdmStorageProvider.getDataByFields(
+                                "UniversalCredentialCertificateTable",
+                                new String[] {
+                                    "adminUid", "userId", "storageName", "storagePackageName"
+                                },
+                                new String[] {
+                                    String.valueOf(i),
+                                    String.valueOf(i2),
+                                    credentialStorage.name,
+                                    credentialStorage.packageName
+                                },
+                                new String[] {"alias"});
                 if (dataByFields.size() > 0) {
                     strArr = new String[dataByFields.size()];
                     Iterator it = dataByFields.iterator();
@@ -3101,7 +4542,14 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                ArrayList dataByFields = this.mEdmStorageProvider.getDataByFields("UniversalCredentialCertificateTable", new String[]{"storageName", "storagePackageName"}, new String[]{credentialStorage.name, credentialStorage.packageName}, new String[]{"adminUid", "alias"});
+                ArrayList dataByFields =
+                        this.mEdmStorageProvider.getDataByFields(
+                                "UniversalCredentialCertificateTable",
+                                new String[] {"storageName", "storagePackageName"},
+                                new String[] {
+                                    credentialStorage.name, credentialStorage.packageName
+                                },
+                                new String[] {"adminUid", "alias"});
                 if (dataByFields.size() > 0) {
                     ArrayList arrayList = new ArrayList();
                     Iterator it = dataByFields.iterator();
@@ -3130,7 +4578,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
 
     public final int getAuthType(ContextInfo contextInfo, CredentialStorage credentialStorage) {
         String str = TAG;
-        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(contextInfo, credentialStorage, str, "getAuthType is called....")) {
+        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(
+                contextInfo, credentialStorage, str, "getAuthType is called....")) {
             if (!DBG) {
                 return -11;
             }
@@ -3140,7 +4589,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         try {
             KnoxAnalytics.log(getKAData("getAuthType", credentialStorage.packageName));
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         enforceSecurityPermission(contextInfo, credentialStorage);
         int i = contextInfo.mCallerUid;
@@ -3149,7 +4599,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         try {
             try {
                 String str2 = credentialStorage.signature;
-                if (str2 != null && !validateSignature(userId, credentialStorage.packageName, str2)) {
+                if (str2 != null
+                        && !validateSignature(userId, credentialStorage.packageName, str2)) {
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                     return -18;
                 }
@@ -3160,9 +4611,16 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 }
                 boolean z = DBG;
                 if (z) {
-                    Log.i(TAG, "getAuthType is called for Caller UID-" + i + " mContainerId " + userId);
+                    Log.i(
+                            TAG,
+                            "getAuthType is called for Caller UID-"
+                                    + i
+                                    + " mContainerId "
+                                    + userId);
                 }
-                if (true == isCredentialStorageManagedInternal(i, userId, credentialStorage.name, credentialStorage.packageName)) {
+                if (true
+                        == isCredentialStorageManagedInternal(
+                                i, userId, credentialStorage.name, credentialStorage.packageName)) {
                     return getStorageAuthenticationType(userId, credentialStorage);
                 }
                 if (z) {
@@ -3191,12 +4649,16 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.samsung.android.knox.ucm.configurator.CredentialStorage[] getAvailableCredentialStorages(com.samsung.android.knox.ContextInfo r17, boolean r18) {
+    public final com.samsung.android.knox.ucm.configurator.CredentialStorage[]
+            getAvailableCredentialStorages(com.samsung.android.knox.ContextInfo r17, boolean r18) {
         /*
             Method dump skipped, instructions count: 566
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.ucm.UniversalCredentialManagerService.getAvailableCredentialStorages(com.samsung.android.knox.ContextInfo, boolean):com.samsung.android.knox.ucm.configurator.CredentialStorage[]");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.ucm.UniversalCredentialManagerService.getAvailableCredentialStorages(com.samsung.android.knox.ContextInfo,"
+                    + " boolean):com.samsung.android.knox.ucm.configurator.CredentialStorage[]");
     }
 
     public final CACertificateInfo getCACertificate(ContextInfo contextInfo, String str) {
@@ -3205,7 +4667,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             KnoxAnalytics.log(getKAData("getCACertificate"));
             return null;
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
             return null;
         }
     }
@@ -3221,12 +4684,16 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.lang.String[] getCertificateAliases(int r19, com.samsung.android.knox.ucm.configurator.CredentialStorage r20) {
+    public final java.lang.String[] getCertificateAliases(
+            int r19, com.samsung.android.knox.ucm.configurator.CredentialStorage r20) {
         /*
             Method dump skipped, instructions count: 411
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.ucm.UniversalCredentialManagerService.getCertificateAliases(int, com.samsung.android.knox.ucm.configurator.CredentialStorage):java.lang.String[]");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.ucm.UniversalCredentialManagerService.getCertificateAliases(int,"
+                    + " com.samsung.android.knox.ucm.configurator.CredentialStorage):java.lang.String[]");
     }
 
     public final String[] getCertificateAliasesAsUser(int i, CredentialStorage credentialStorage) {
@@ -3241,12 +4708,22 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             return null;
         }
         if (DBG) {
-            DirEncryptService$$ExternalSyntheticOutline0.m(i, "getCertificateAliasesAsUser is called for mContainerId ", str);
+            DirEncryptService$$ExternalSyntheticOutline0.m(
+                    i, "getCertificateAliasesAsUser is called for mContainerId ", str);
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                ArrayList dataByFields = this.mEdmStorageProvider.getDataByFields("UniversalCredentialCertificateTable", new String[]{"userId", "storageName", "storagePackageName"}, new String[]{String.valueOf(i), credentialStorage.name, credentialStorage.packageName}, new String[]{"adminUid", "alias"});
+                ArrayList dataByFields =
+                        this.mEdmStorageProvider.getDataByFields(
+                                "UniversalCredentialCertificateTable",
+                                new String[] {"userId", "storageName", "storagePackageName"},
+                                new String[] {
+                                    String.valueOf(i),
+                                    credentialStorage.name,
+                                    credentialStorage.packageName
+                                },
+                                new String[] {"adminUid", "alias"});
                 if (dataByFields.size() > 0) {
                     ArrayList arrayList = new ArrayList();
                     Iterator it = dataByFields.iterator();
@@ -3278,19 +4755,28 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    public final Bundle getCredentialStoragePluginConfiguration(ContextInfo contextInfo, CredentialStorage credentialStorage) {
+    public final Bundle getCredentialStoragePluginConfiguration(
+            ContextInfo contextInfo, CredentialStorage credentialStorage) {
         String str;
         String str2 = TAG;
-        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(contextInfo, credentialStorage, str2, "getCredentialStoragePluginConfiguration is called....")) {
+        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(
+                contextInfo,
+                credentialStorage,
+                str2,
+                "getCredentialStoragePluginConfiguration is called....")) {
             if (DBG) {
                 Log.i(str2, "getCredentialStoragePluginConfiguration - Invalid Arguments");
             }
             return null;
         }
         try {
-            KnoxAnalytics.log(getKAData("getCredentialStoragePluginConfiguration", credentialStorage.packageName));
+            KnoxAnalytics.log(
+                    getKAData(
+                            "getCredentialStoragePluginConfiguration",
+                            credentialStorage.packageName));
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         enforceSecurityPermission(contextInfo, credentialStorage);
         int i = contextInfo.mCallerUid;
@@ -3311,9 +4797,16 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
             boolean z = DBG;
             if (z) {
-                Log.i(TAG, "getCredentialStoragePluginConfiguration is called for Caller UID-" + i + " userId " + userId);
+                Log.i(
+                        TAG,
+                        "getCredentialStoragePluginConfiguration is called for Caller UID-"
+                                + i
+                                + " userId "
+                                + userId);
             }
-            if (true != isCredentialStorageManagedInternal(i, userId, credentialStorage.name, credentialStorage.packageName)) {
+            if (true
+                    != isCredentialStorageManagedInternal(
+                            i, userId, credentialStorage.name, credentialStorage.packageName)) {
                 if (z) {
                     Log.i(TAG, "getCredentialStoragePluginConfiguration return null");
                 }
@@ -3322,7 +4815,13 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             IUcmService ucmService$1 = getUcmService$1();
             if (ucmService$1 != null) {
                 Log.i(TAG, "getCredentialStoragePluginConfiguration - pass to agent...");
-                return ucmService$1.getAdminConfigureBundleFromCs(i, userId, new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name).setResourceId(4).setUid(i).build());
+                return ucmService$1.getAdminConfigureBundleFromCs(
+                        i,
+                        userId,
+                        new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name)
+                                .setResourceId(4)
+                                .setUid(i)
+                                .build());
             }
             return null;
         } finally {
@@ -3330,19 +4829,23 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    public final Bundle getCredentialStorageProperty(ContextInfo contextInfo, CredentialStorage credentialStorage, Bundle bundle) {
+    public final Bundle getCredentialStorageProperty(
+            ContextInfo contextInfo, CredentialStorage credentialStorage, Bundle bundle) {
         String str;
         String str2 = TAG;
-        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(contextInfo, credentialStorage, str2, "getPackageSetting is called....")) {
+        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(
+                contextInfo, credentialStorage, str2, "getPackageSetting is called....")) {
             if (DBG) {
                 Log.i(str2, "getCredentialStorageProperty - Invalid Arguments");
             }
             return null;
         }
         try {
-            KnoxAnalytics.log(getKAData("getCredentialStorageProperty", credentialStorage.packageName));
+            KnoxAnalytics.log(
+                    getKAData("getCredentialStorageProperty", credentialStorage.packageName));
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         enforceSecurityPermission(contextInfo, credentialStorage);
         int i = contextInfo.mCallerUid;
@@ -3363,9 +4866,16 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
             boolean z = DBG;
             if (z) {
-                Log.i(TAG, "getCredentialStorageProperty is called for mCallerUid- " + i + " user- " + userId);
+                Log.i(
+                        TAG,
+                        "getCredentialStorageProperty is called for mCallerUid- "
+                                + i
+                                + " user- "
+                                + userId);
             }
-            if (true != isCredentialStorageManagedInternal(i, userId, credentialStorage.name, credentialStorage.packageName)) {
+            if (true
+                    != isCredentialStorageManagedInternal(
+                            i, userId, credentialStorage.name, credentialStorage.packageName)) {
                 if (z) {
                     Log.i(TAG, "setPackageSetting return false..");
                 }
@@ -3374,7 +4884,14 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             IUcmService ucmService$1 = getUcmService$1();
             if (ucmService$1 != null) {
                 Log.i(TAG, "getCredentialStorageProperty - pass to agent...");
-                return ucmService$1.getCredentialStorageProperty(i, new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name).setResourceId(4).setUid(i).build(), bundle, userId);
+                return ucmService$1.getCredentialStorageProperty(
+                        i,
+                        new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name)
+                                .setResourceId(4)
+                                .setUid(i)
+                                .build(),
+                        bundle,
+                        userId);
             }
             return null;
         } finally {
@@ -3388,7 +4905,10 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 this.mUniversalCredentialUtil = UniversalCredentialUtil.getInstance();
             }
             if (this.mUniversalCredentialUtil == null) {
-                Log.i(TAG, "getCredentialStorageProperties - UniversalCredentialUtil service is null.... ");
+                Log.i(
+                        TAG,
+                        "getCredentialStorageProperties - UniversalCredentialUtil service is"
+                            + " null.... ");
                 return null;
             }
             Log.i(TAG, "getCredentialStorageProperties name-" + str + " and pkg-" + str2);
@@ -3401,8 +4921,7 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 String property = provider.getProperty("packageName");
                 if (name != null && property != null) {
                     if (property.equals(str2)) {
-                        if (str != null && !name.equals(str)) {
-                        }
+                        if (str != null && !name.equals(str)) {}
                         Log.i(TAG, "getCredentialStorageProperties match found...");
                         return provider;
                     }
@@ -3412,7 +4931,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
             return null;
         } catch (Exception e) {
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("The exception occurs "), TAG);
             return null;
         }
     }
@@ -3432,19 +4952,31 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             kAData.setProperty("packageName", str);
             KnoxAnalytics.log(kAData);
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         enforceSecurityPermission(contextInfo, null);
         int i = contextInfo.mCallerUid;
         int userId = UserHandle.getUserId(i);
         HashMap hashMap = new HashMap();
         if (DBG) {
-            AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(i, userId, "getCredentialStorages is called for Caller UID-", " userId ", TAG);
+            AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(
+                    i, userId, "getCredentialStorages is called for Caller UID-", " userId ", TAG);
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                ArrayList dataByFields = this.mEdmStorageProvider.getDataByFields("UniversalCredentialWhiteListTable", new String[]{"adminUid", "userId"}, new String[]{String.valueOf(i), String.valueOf(userId)}, new String[]{"storageName", "storagePackageName", "storageManufacture", "appPackage"});
+                ArrayList dataByFields =
+                        this.mEdmStorageProvider.getDataByFields(
+                                "UniversalCredentialWhiteListTable",
+                                new String[] {"adminUid", "userId"},
+                                new String[] {String.valueOf(i), String.valueOf(userId)},
+                                new String[] {
+                                    "storageName",
+                                    "storagePackageName",
+                                    "storageManufacture",
+                                    "appPackage"
+                                });
                 if (dataByFields.size() > 0) {
                     Log.i(TAG, "getCredentialStorages - Size-" + dataByFields.size());
                     Iterator it = dataByFields.iterator();
@@ -3454,8 +4986,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                         String str3 = TAG;
                         Log.i(str3, "getCredentialStorages dbPackage-" + asString);
                         if (asString != null) {
-                            if (!asString.equalsIgnoreCase(str) && !asString.equalsIgnoreCase("*")) {
-                            }
+                            if (!asString.equalsIgnoreCase(str)
+                                    && !asString.equalsIgnoreCase("*")) {}
                             Log.i(str3, "getCredentialStorages match found...");
                             String asString2 = contentValues.getAsString("storageName");
                             String asString3 = contentValues.getAsString("storagePackageName");
@@ -3496,18 +5028,35 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         int i = contextInfo.mCallerUid;
         int userId = UserHandle.getUserId(i);
         if (DBG) {
-            AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(i, userId, "getDefaultInstallStorage is called for Caller UID-", " userId ", str);
+            AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(
+                    i,
+                    userId,
+                    "getDefaultInstallStorage is called for Caller UID-",
+                    " userId ",
+                    str);
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                ArrayList dataByFields = this.mEdmStorageProvider.getDataByFields("UniversalCredentialDefaultInstallTable", new String[]{"userId"}, new String[]{String.valueOf(userId)}, new String[]{"storageName", "storagePackageName", "storageManufacture"});
+                ArrayList dataByFields =
+                        this.mEdmStorageProvider.getDataByFields(
+                                "UniversalCredentialDefaultInstallTable",
+                                new String[] {"userId"},
+                                new String[] {String.valueOf(userId)},
+                                new String[] {
+                                    "storageName", "storagePackageName", "storageManufacture"
+                                });
                 if (dataByFields.size() > 0) {
                     CredentialStorage credentialStorage2 = new CredentialStorage();
                     try {
-                        credentialStorage2.name = ((ContentValues) dataByFields.get(0)).getAsString("storageName");
-                        credentialStorage2.packageName = ((ContentValues) dataByFields.get(0)).getAsString("storagePackageName");
-                        credentialStorage2.manufacturer = ((ContentValues) dataByFields.get(0)).getAsString("storageManufacture");
+                        credentialStorage2.name =
+                                ((ContentValues) dataByFields.get(0)).getAsString("storageName");
+                        credentialStorage2.packageName =
+                                ((ContentValues) dataByFields.get(0))
+                                        .getAsString("storagePackageName");
+                        credentialStorage2.manufacturer =
+                                ((ContentValues) dataByFields.get(0))
+                                        .getAsString("storageManufacture");
                         credentialStorage = credentialStorage2;
                     } catch (Exception e) {
                         e = e;
@@ -3532,19 +5081,32 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         String str = TAG;
         Log.i(str, "getDefaultInstallStorageAsUser is called....");
         if (DBG) {
-            DirEncryptService$$ExternalSyntheticOutline0.m(i, "getDefaultInstallStorageAsUser is called for userId ", str);
+            DirEncryptService$$ExternalSyntheticOutline0.m(
+                    i, "getDefaultInstallStorageAsUser is called for userId ", str);
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         CredentialStorage credentialStorage = null;
         try {
             try {
-                ArrayList dataByFields = this.mEdmStorageProvider.getDataByFields("UniversalCredentialDefaultInstallTable", new String[]{"userId"}, new String[]{String.valueOf(i)}, new String[]{"storageName", "storagePackageName", "storageManufacture"});
+                ArrayList dataByFields =
+                        this.mEdmStorageProvider.getDataByFields(
+                                "UniversalCredentialDefaultInstallTable",
+                                new String[] {"userId"},
+                                new String[] {String.valueOf(i)},
+                                new String[] {
+                                    "storageName", "storagePackageName", "storageManufacture"
+                                });
                 if (dataByFields.size() > 0) {
                     CredentialStorage credentialStorage2 = new CredentialStorage();
                     try {
-                        credentialStorage2.name = ((ContentValues) dataByFields.get(0)).getAsString("storageName");
-                        credentialStorage2.packageName = ((ContentValues) dataByFields.get(0)).getAsString("storagePackageName");
-                        credentialStorage2.manufacturer = ((ContentValues) dataByFields.get(0)).getAsString("storageManufacture");
+                        credentialStorage2.name =
+                                ((ContentValues) dataByFields.get(0)).getAsString("storageName");
+                        credentialStorage2.packageName =
+                                ((ContentValues) dataByFields.get(0))
+                                        .getAsString("storagePackageName");
+                        credentialStorage2.manufacturer =
+                                ((ContentValues) dataByFields.get(0))
+                                        .getAsString("storageManufacture");
                         credentialStorage = credentialStorage2;
                     } catch (Exception e) {
                         e = e;
@@ -3564,7 +5126,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    public final CredentialStorage getEnforcedCredentialStorageForLockType(ContextInfo contextInfo) {
+    public final CredentialStorage getEnforcedCredentialStorageForLockType(
+            ContextInfo contextInfo) {
         String str = TAG;
         Log.i(str, "getEnforcedCredentialStorageForLockType is called....");
         validateContextInfo(contextInfo);
@@ -3573,7 +5136,12 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         int i = contextInfo.mCallerUid;
         int userId = UserHandle.getUserId(i);
         if (DBG) {
-            AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(i, userId, "getEnforcedCredentialStorageForLockType is called for Caller UID-", " mContainerId ", str);
+            AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(
+                    i,
+                    userId,
+                    "getEnforcedCredentialStorageForLockType is called for Caller UID-",
+                    " mContainerId ",
+                    str);
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -3595,7 +5163,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         String str = TAG;
         Log.i(str, "getEnforcedCredentialStorageForLockTypeAsUser is called....");
         if (DBG) {
-            DirEncryptService$$ExternalSyntheticOutline0.m(i, "getEnforcedCredentialStorageForLockTypeAsUser is called for userId ", str);
+            DirEncryptService$$ExternalSyntheticOutline0.m(
+                    i, "getEnforcedCredentialStorageForLockTypeAsUser is called for userId ", str);
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -3614,18 +5183,26 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
     }
 
     public final CredentialStorage getEnforcedCredentialStorageFromDb(int i) {
-        ArrayList dataByFields = this.mEdmStorageProvider.getDataByFields("UniversalCredentialEnforcedLockTypeTable", new String[]{"userId"}, new String[]{String.valueOf(i)}, new String[]{"storageName", "storagePackageName", "storageManufacture"});
+        ArrayList dataByFields =
+                this.mEdmStorageProvider.getDataByFields(
+                        "UniversalCredentialEnforcedLockTypeTable",
+                        new String[] {"userId"},
+                        new String[] {String.valueOf(i)},
+                        new String[] {"storageName", "storagePackageName", "storageManufacture"});
         if (dataByFields.size() <= 0) {
             return null;
         }
         CredentialStorage credentialStorage = new CredentialStorage();
         credentialStorage.name = ((ContentValues) dataByFields.get(0)).getAsString("storageName");
-        credentialStorage.packageName = ((ContentValues) dataByFields.get(0)).getAsString("storagePackageName");
-        credentialStorage.manufacturer = ((ContentValues) dataByFields.get(0)).getAsString("storageManufacture");
+        credentialStorage.packageName =
+                ((ContentValues) dataByFields.get(0)).getAsString("storagePackageName");
+        credentialStorage.manufacturer =
+                ((ContentValues) dataByFields.get(0)).getAsString("storageManufacture");
         return credentialStorage;
     }
 
-    public final int getKeyguardPinCurrentRetryCount(ContextInfo contextInfo, CredentialStorage credentialStorage) {
+    public final int getKeyguardPinCurrentRetryCount(
+            ContextInfo contextInfo, CredentialStorage credentialStorage) {
         Log.i(TAG, "getKeyguardPinCurrentRetryCount is called....");
         validateContextInfo(contextInfo);
         int checkContext = checkContext(contextInfo, credentialStorage, false);
@@ -3633,15 +5210,22 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             return checkContext;
         }
         try {
-            KnoxAnalytics.log(getKAData("getKeyguardPinCurrentRetryCount", credentialStorage.packageName));
+            KnoxAnalytics.log(
+                    getKAData("getKeyguardPinCurrentRetryCount", credentialStorage.packageName));
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         int i = contextInfo.mCallerUid;
         int userId = UserHandle.getUserId(i);
         try {
             if (DBG) {
-                Log.i(TAG, "getKeyguardPinCurrentRetryCount is called for Caller UID-" + i + " mContainerId " + userId);
+                Log.i(
+                        TAG,
+                        "getKeyguardPinCurrentRetryCount is called for Caller UID-"
+                                + i
+                                + " mContainerId "
+                                + userId);
             }
             int checkCS = checkCS(contextInfo, credentialStorage);
             if (checkCS != 0) {
@@ -3649,16 +5233,23 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
             IUcmService ucmService$1 = getUcmService$1();
             if (ucmService$1 != null) {
-                return getReturnvalue(ucmService$1.getKeyguardPinCurrentRetryCount(new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name).setResourceId(4).setUid(i).build()));
+                return getReturnvalue(
+                        ucmService$1.getKeyguardPinCurrentRetryCount(
+                                new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name)
+                                        .setResourceId(4)
+                                        .setUid(i)
+                                        .build()));
             }
             return -1;
         } catch (Exception e2) {
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e2, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e2, new StringBuilder("The exception occurs "), TAG);
             return -1;
         }
     }
 
-    public final int getKeyguardPinMaximumLength(ContextInfo contextInfo, CredentialStorage credentialStorage) {
+    public final int getKeyguardPinMaximumLength(
+            ContextInfo contextInfo, CredentialStorage credentialStorage) {
         Log.i(TAG, "getKeyguardPinMaximumLength is called....");
         validateContextInfo(contextInfo);
         int checkContext = checkContext(contextInfo, credentialStorage, false);
@@ -3666,15 +5257,22 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             return checkContext;
         }
         try {
-            KnoxAnalytics.log(getKAData("getKeyguardPinMaximumLength", credentialStorage.packageName));
+            KnoxAnalytics.log(
+                    getKAData("getKeyguardPinMaximumLength", credentialStorage.packageName));
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         int i = contextInfo.mCallerUid;
         int userId = UserHandle.getUserId(i);
         try {
             if (DBG) {
-                Log.i(TAG, "getKeyguardPinMaximumLength is called for Caller UID-" + i + " mContainerId " + userId);
+                Log.i(
+                        TAG,
+                        "getKeyguardPinMaximumLength is called for Caller UID-"
+                                + i
+                                + " mContainerId "
+                                + userId);
             }
             int checkCS = checkCS(contextInfo, credentialStorage);
             if (checkCS != 0) {
@@ -3682,16 +5280,23 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
             IUcmService ucmService$1 = getUcmService$1();
             if (ucmService$1 != null) {
-                return getReturnvalue(ucmService$1.getKeyguardPinMaximumLength(new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name).setResourceId(4).setUid(i).build()));
+                return getReturnvalue(
+                        ucmService$1.getKeyguardPinMaximumLength(
+                                new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name)
+                                        .setResourceId(4)
+                                        .setUid(i)
+                                        .build()));
             }
             return -1;
         } catch (Exception e2) {
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e2, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e2, new StringBuilder("The exception occurs "), TAG);
             return -1;
         }
     }
 
-    public final int getKeyguardPinMaximumRetryCount(ContextInfo contextInfo, CredentialStorage credentialStorage) {
+    public final int getKeyguardPinMaximumRetryCount(
+            ContextInfo contextInfo, CredentialStorage credentialStorage) {
         Log.i(TAG, "getKeyguardPinMaximumRetryCount is called....");
         validateContextInfo(contextInfo);
         int checkContext = checkContext(contextInfo, credentialStorage, false);
@@ -3699,15 +5304,22 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             return checkContext;
         }
         try {
-            KnoxAnalytics.log(getKAData("getKeyguardPinMaximumRetryCount", credentialStorage.packageName));
+            KnoxAnalytics.log(
+                    getKAData("getKeyguardPinMaximumRetryCount", credentialStorage.packageName));
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         int i = contextInfo.mCallerUid;
         int userId = UserHandle.getUserId(i);
         try {
             if (DBG) {
-                Log.i(TAG, "getKeyguardPinMaximumRetryCount is called for Caller UID-" + i + " mContainerId " + userId);
+                Log.i(
+                        TAG,
+                        "getKeyguardPinMaximumRetryCount is called for Caller UID-"
+                                + i
+                                + " mContainerId "
+                                + userId);
             }
             int checkCS = checkCS(contextInfo, credentialStorage);
             if (checkCS != 0) {
@@ -3715,16 +5327,23 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
             IUcmService ucmService$1 = getUcmService$1();
             if (ucmService$1 != null) {
-                return getReturnvalue(ucmService$1.getKeyguardPinMaximumRetryCount(new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name).setResourceId(4).setUid(i).build()));
+                return getReturnvalue(
+                        ucmService$1.getKeyguardPinMaximumRetryCount(
+                                new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name)
+                                        .setResourceId(4)
+                                        .setUid(i)
+                                        .build()));
             }
             return -1;
         } catch (Exception e2) {
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e2, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e2, new StringBuilder("The exception occurs "), TAG);
             return -1;
         }
     }
 
-    public final int getKeyguardPinMinimumLength(ContextInfo contextInfo, CredentialStorage credentialStorage) {
+    public final int getKeyguardPinMinimumLength(
+            ContextInfo contextInfo, CredentialStorage credentialStorage) {
         Log.i(TAG, "getKeyguardPinMinimumLength is called....");
         validateContextInfo(contextInfo);
         int checkContext = checkContext(contextInfo, credentialStorage, false);
@@ -3732,15 +5351,22 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             return checkContext;
         }
         try {
-            KnoxAnalytics.log(getKAData("getKeyguardPinMinimumLength", credentialStorage.packageName));
+            KnoxAnalytics.log(
+                    getKAData("getKeyguardPinMinimumLength", credentialStorage.packageName));
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         int i = contextInfo.mCallerUid;
         int userId = UserHandle.getUserId(i);
         try {
             if (DBG) {
-                Log.i(TAG, "getKeyguardPinMinimumLength is called for Caller UID-" + i + " mContainerId " + userId);
+                Log.i(
+                        TAG,
+                        "getKeyguardPinMinimumLength is called for Caller UID-"
+                                + i
+                                + " mContainerId "
+                                + userId);
             }
             int checkCS = checkCS(contextInfo, credentialStorage);
             if (checkCS != 0) {
@@ -3748,11 +5374,17 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
             IUcmService ucmService$1 = getUcmService$1();
             if (ucmService$1 != null) {
-                return getReturnvalue(ucmService$1.getKeyguardPinMinimumLength(new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name).setResourceId(4).setUid(i).build()));
+                return getReturnvalue(
+                        ucmService$1.getKeyguardPinMinimumLength(
+                                new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name)
+                                        .setResourceId(4)
+                                        .setUid(i)
+                                        .build()));
             }
             return -1;
         } catch (Exception e2) {
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e2, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e2, new StringBuilder("The exception occurs "), TAG);
             return -1;
         }
     }
@@ -3783,7 +5415,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                             arrayList.add(new UcmKeystoreProvider(string, bundle));
                         }
                     }
-                    Provider[] providerArr = (Provider[]) arrayList.toArray(new Provider[arrayList.size()]);
+                    Provider[] providerArr =
+                            (Provider[]) arrayList.toArray(new Provider[arrayList.size()]);
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                     return providerArr;
                 }
@@ -3809,7 +5442,12 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         try {
             try {
                 if (DBG) {
-                    Log.i(str, "getODESettingsConfiguration is called for Caller UID-" + i + " mContainerId " + userId);
+                    Log.i(
+                            str,
+                            "getODESettingsConfiguration is called for Caller UID-"
+                                    + i
+                                    + " mContainerId "
+                                    + userId);
                 }
                 IUcmService ucmService$1 = getUcmService$1();
                 if (ucmService$1 != null) {
@@ -3829,23 +5467,27 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    public final List getPackagesFromExemptList(ContextInfo contextInfo, CredentialStorage credentialStorage, int i) {
+    public final List getPackagesFromExemptList(
+            ContextInfo contextInfo, CredentialStorage credentialStorage, int i) {
         boolean z;
         String str;
         String str2 = TAG;
         ArrayList arrayList = null;
-        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(contextInfo, credentialStorage, str2, "getPackagesFromExemptList is called....")) {
+        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(
+                contextInfo, credentialStorage, str2, "getPackagesFromExemptList is called....")) {
             if (DBG) {
                 Log.i(str2, "getPackagesFromExemptList - Invalid Arguments");
             }
             return null;
         }
         try {
-            KnoxAnalyticsData kAData = getKAData("getPackagesFromExemptList", credentialStorage.packageName);
+            KnoxAnalyticsData kAData =
+                    getKAData("getPackagesFromExemptList", credentialStorage.packageName);
             kAData.setProperty("authType", i == 106 ? "AUTH" : "OTHER");
             KnoxAnalytics.log(kAData);
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         enforceSecurityPermission(contextInfo, credentialStorage);
         int i2 = contextInfo.mCallerUid;
@@ -3855,7 +5497,14 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             try {
                 z = DBG;
                 if (z) {
-                    Log.i(TAG, "getPackagesFromExemptList is called for Caller UID-" + i2 + " mContainerId " + userId + ",type-" + i);
+                    Log.i(
+                            TAG,
+                            "getPackagesFromExemptList is called for Caller UID-"
+                                    + i2
+                                    + " mContainerId "
+                                    + userId
+                                    + ",type-"
+                                    + i);
                 }
                 str = credentialStorage.signature;
             } catch (Exception e2) {
@@ -3870,7 +5519,9 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 return null;
             }
-            if (true != isCredentialStorageManagedInternal(i2, userId, credentialStorage.name, credentialStorage.packageName)) {
+            if (true
+                    != isCredentialStorageManagedInternal(
+                            i2, userId, credentialStorage.name, credentialStorage.packageName)) {
                 if (z) {
                     Log.i(TAG, "getPackagesFromExemptList return false..");
                 }
@@ -3882,7 +5533,24 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 return null;
             }
-            ArrayList dataByFields = this.mEdmStorageProvider.getDataByFields("UniversalCredentialExemptTable", new String[]{"adminUid", "userId", "storageName", "storagePackageName", "exemptType"}, new String[]{String.valueOf(i2), String.valueOf(userId), credentialStorage.name, credentialStorage.packageName, String.valueOf(i)}, new String[]{"appPackage", "appSignature"});
+            ArrayList dataByFields =
+                    this.mEdmStorageProvider.getDataByFields(
+                            "UniversalCredentialExemptTable",
+                            new String[] {
+                                "adminUid",
+                                "userId",
+                                "storageName",
+                                "storagePackageName",
+                                "exemptType"
+                            },
+                            new String[] {
+                                String.valueOf(i2),
+                                String.valueOf(userId),
+                                credentialStorage.name,
+                                credentialStorage.packageName,
+                                String.valueOf(i)
+                            },
+                            new String[] {"appPackage", "appSignature"});
             if (dataByFields.size() > 0) {
                 Log.i(TAG, "getPackagesFromExemptList - Size-" + dataByFields.size());
                 ArrayList arrayList2 = new ArrayList();
@@ -3914,7 +5582,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    public final List getPackagesFromExemptListAsUser(int i, CredentialStorage credentialStorage, int i2) {
+    public final List getPackagesFromExemptListAsUser(
+            int i, CredentialStorage credentialStorage, int i2) {
         String str = TAG;
         Log.i(str, "getPackagesFromExemptListAsUser is called....");
         ArrayList arrayList = null;
@@ -3926,13 +5595,30 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 return null;
             }
             if (DBG) {
-                Log.i(str, "getPackagesFromExemptListAsUser is called for Container-" + i + ",type-" + i2);
+                Log.i(
+                        str,
+                        "getPackagesFromExemptListAsUser is called for Container-"
+                                + i
+                                + ",type-"
+                                + i2);
             }
             if (!isValidExemptType(i2)) {
                 Log.i(str, "getPackagesFromExemptListAsUser - Invalid Exempt Type...");
                 return null;
             }
-            ArrayList dataByFields = this.mEdmStorageProvider.getDataByFields("UniversalCredentialExemptTable", new String[]{"userId", "storageName", "storagePackageName", "exemptType"}, new String[]{String.valueOf(i), credentialStorage.name, credentialStorage.packageName, String.valueOf(i2)}, new String[]{"adminUid", "appPackage", "appSignature"});
+            ArrayList dataByFields =
+                    this.mEdmStorageProvider.getDataByFields(
+                            "UniversalCredentialExemptTable",
+                            new String[] {
+                                "userId", "storageName", "storagePackageName", "exemptType"
+                            },
+                            new String[] {
+                                String.valueOf(i),
+                                credentialStorage.name,
+                                credentialStorage.packageName,
+                                String.valueOf(i2)
+                            },
+                            new String[] {"adminUid", "appPackage", "appSignature"});
             if (dataByFields.size() <= 0) {
                 return null;
             }
@@ -3963,7 +5649,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 if (!DBG) {
                     return arrayList;
                 }
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("The exception occurs "), TAG);
                 return arrayList;
             }
         } catch (Exception e2) {
@@ -3976,20 +5663,29 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.util.List getPackagesFromWhiteList(com.samsung.android.knox.ContextInfo r21, com.samsung.android.knox.ucm.configurator.CredentialStorage r22, android.os.Bundle r23) {
+    public final java.util.List getPackagesFromWhiteList(
+            com.samsung.android.knox.ContextInfo r21,
+            com.samsung.android.knox.ucm.configurator.CredentialStorage r22,
+            android.os.Bundle r23) {
         /*
             Method dump skipped, instructions count: 524
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.ucm.UniversalCredentialManagerService.getPackagesFromWhiteList(com.samsung.android.knox.ContextInfo, com.samsung.android.knox.ucm.configurator.CredentialStorage, android.os.Bundle):java.util.List");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.ucm.UniversalCredentialManagerService.getPackagesFromWhiteList(com.samsung.android.knox.ContextInfo,"
+                    + " com.samsung.android.knox.ucm.configurator.CredentialStorage,"
+                    + " android.os.Bundle):java.util.List");
     }
 
-    public final List getPackagesFromWhiteListAsUser(int i, CredentialStorage credentialStorage, Bundle bundle) {
+    public final List getPackagesFromWhiteListAsUser(
+            int i, CredentialStorage credentialStorage, Bundle bundle) {
         String str = TAG;
         Log.i(str, "getPackagesFromWhiteListAsUser is called....");
         if (isValidParam(credentialStorage) && bundle != null) {
             if (DBG) {
-                DirEncryptService$$ExternalSyntheticOutline0.m(i, "getPackagesFromWhiteListAsUser is called for mContainerId ", str);
+                DirEncryptService$$ExternalSyntheticOutline0.m(
+                        i, "getPackagesFromWhiteListAsUser is called for mContainerId ", str);
             }
             return getPackagesFromWhiteListInternal(i, credentialStorage, bundle);
         }
@@ -4000,7 +5696,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         return null;
     }
 
-    public final List getPackagesFromWhiteListInternal(int i, CredentialStorage credentialStorage, Bundle bundle) {
+    public final List getPackagesFromWhiteListInternal(
+            int i, CredentialStorage credentialStorage, Bundle bundle) {
         String str;
         String str2 = TAG;
         Log.i(str2, "getPackagesFromWhiteListInternal is called....");
@@ -4018,7 +5715,10 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 Log.i(str2, "getPackagesFromWhiteListInternal alias-" + str);
                 if (TextUtils.isEmpty(str)) {
                     if (DBG) {
-                        Log.i(str2, "getPackagesFromWhiteListInternal alias name not provided for Certificate access_type");
+                        Log.i(
+                                str2,
+                                "getPackagesFromWhiteListInternal alias name not provided for"
+                                    + " Certificate access_type");
                     }
                     return null;
                 }
@@ -4034,7 +5734,46 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             sb.append(", accessType-");
             sb.append(i2);
             Log.i(str2, sb.toString());
-            ArrayList dataByFields = str == null ? credentialStorage != null ? this.mEdmStorageProvider.getDataByFields("UniversalCredentialWhiteListTable", new String[]{"userId", "storageName", "storagePackageName", "accessType"}, new String[]{String.valueOf(i), credentialStorage.name, credentialStorage.packageName, String.valueOf(i2)}, new String[]{"adminUid", "appPackage", "appSignature"}) : this.mEdmStorageProvider.getDataByFields("UniversalCredentialWhiteListTable", new String[]{"userId", "accessType"}, new String[]{String.valueOf(i), String.valueOf(i2)}, new String[]{"adminUid", "appPackage", "appSignature"}) : this.mEdmStorageProvider.getDataByFields("UniversalCredentialWhiteListTable", new String[]{"userId", "storageName", "storagePackageName", "accessType", "alias"}, new String[]{String.valueOf(i), credentialStorage.name, credentialStorage.packageName, String.valueOf(i2), str}, new String[]{"adminUid", "appPackage", "appSignature"});
+            ArrayList dataByFields =
+                    str == null
+                            ? credentialStorage != null
+                                    ? this.mEdmStorageProvider.getDataByFields(
+                                            "UniversalCredentialWhiteListTable",
+                                            new String[] {
+                                                "userId",
+                                                "storageName",
+                                                "storagePackageName",
+                                                "accessType"
+                                            },
+                                            new String[] {
+                                                String.valueOf(i),
+                                                credentialStorage.name,
+                                                credentialStorage.packageName,
+                                                String.valueOf(i2)
+                                            },
+                                            new String[] {"adminUid", "appPackage", "appSignature"})
+                                    : this.mEdmStorageProvider.getDataByFields(
+                                            "UniversalCredentialWhiteListTable",
+                                            new String[] {"userId", "accessType"},
+                                            new String[] {String.valueOf(i), String.valueOf(i2)},
+                                            new String[] {"adminUid", "appPackage", "appSignature"})
+                            : this.mEdmStorageProvider.getDataByFields(
+                                    "UniversalCredentialWhiteListTable",
+                                    new String[] {
+                                        "userId",
+                                        "storageName",
+                                        "storagePackageName",
+                                        "accessType",
+                                        "alias"
+                                    },
+                                    new String[] {
+                                        String.valueOf(i),
+                                        credentialStorage.name,
+                                        credentialStorage.packageName,
+                                        String.valueOf(i2),
+                                        str
+                                    },
+                                    new String[] {"adminUid", "appPackage", "appSignature"});
             if (dataByFields.size() <= 0) {
                 return null;
             }
@@ -4050,9 +5789,15 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                         appIdentity.setPackageName(contentValues.getAsString("appPackage"));
                         appIdentity.setSignature(contentValues.getAsString("appSignature"));
                         String str3 = TAG;
-                        Log.i(str3, "getPackagesFromWhiteListInternal APP PKG-" + contentValues.getAsString("appPackage"));
+                        Log.i(
+                                str3,
+                                "getPackagesFromWhiteListInternal APP PKG-"
+                                        + contentValues.getAsString("appPackage"));
                         if (DBG) {
-                            Log.i(str3, "getPackagesFromWhiteListInternal APP PKG-" + contentValues.getAsString("appSignature"));
+                            Log.i(
+                                    str3,
+                                    "getPackagesFromWhiteListInternal APP PKG-"
+                                            + contentValues.getAsString("appSignature"));
                         }
                         Integer asInteger = contentValues.getAsInteger("adminUid");
                         if (asInteger == null) {
@@ -4069,7 +5814,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 if (!DBG) {
                     return arrayList;
                 }
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("The exception occurs "), TAG);
                 return arrayList;
             }
         } catch (Exception e2) {
@@ -4078,18 +5824,19 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:29:0x0098, code lost:
-    
-        android.util.Log.i(com.android.server.enterprise.ucm.UniversalCredentialManagerService.TAG, "getStorageAuthenticationType - found the strictest value...");
-     */
+
+       android.util.Log.i(com.android.server.enterprise.ucm.UniversalCredentialManagerService.TAG, "getStorageAuthenticationType - found the strictest value...");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:30:0x00a0, code lost:
-    
-        r3 = r8;
-     */
+
+       r3 = r8;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final int getStorageAuthenticationType(int r8, com.samsung.android.knox.ucm.configurator.CredentialStorage r9) {
+    public final int getStorageAuthenticationType(
+            int r8, com.samsung.android.knox.ucm.configurator.CredentialStorage r9) {
         /*
             r7 = this;
             java.lang.String r0 = "storageAuthType"
@@ -4185,14 +5932,19 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             android.os.Binder.restoreCallingIdentity(r1)
             throw r7
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.ucm.UniversalCredentialManagerService.getStorageAuthenticationType(int, com.samsung.android.knox.ucm.configurator.CredentialStorage):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.ucm.UniversalCredentialManagerService.getStorageAuthenticationType(int,"
+                    + " com.samsung.android.knox.ucm.configurator.CredentialStorage):int");
     }
 
-    public final String[] getSupportedAlgorithms(ContextInfo contextInfo, CredentialStorage credentialStorage) {
+    public final String[] getSupportedAlgorithms(
+            ContextInfo contextInfo, CredentialStorage credentialStorage) {
         Set<Provider.Service> services;
         String str = TAG;
         String[] strArr = null;
-        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(contextInfo, credentialStorage, str, "getSupportedAlgorithms is called....")) {
+        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(
+                contextInfo, credentialStorage, str, "getSupportedAlgorithms is called....")) {
             if (DBG) {
                 Log.i(str, "getSupportedAlgorithms - Invalid Arguments");
             }
@@ -4204,10 +5956,12 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         try {
             KnoxAnalytics.log(getKAData("getSupportedAlgorithms", credentialStorage.packageName));
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         if (DBG) {
-            AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(i, userId, "getSupportedAlgorithms is called for Caller UID-", " userId ", TAG);
+            AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(
+                    i, userId, "getSupportedAlgorithms is called for Caller UID-", " userId ", TAG);
         }
         String str2 = credentialStorage.signature;
         if (str2 != null && !validateSignature(userId, credentialStorage.packageName, str2)) {
@@ -4226,12 +5980,20 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 if (this.mUniversalCredentialUtil != null) {
                     Provider[] managedProviders = getManagedProviders();
                     if (managedProviders == null || managedProviders.length <= 0) {
-                        Log.i(TAG, "getSupportedAlgorithmsInternal - UniversalCredentialUtil service returns no providers... ");
+                        Log.i(
+                                TAG,
+                                "getSupportedAlgorithmsInternal - UniversalCredentialUtil service"
+                                    + " returns no providers... ");
                     } else {
                         for (Provider provider : managedProviders) {
                             String name = provider.getName();
                             String property = provider.getProperty("packageName");
-                            if (name != null && name.equals(credentialStorage.name) && property != null && property.equals(credentialStorage.packageName) && (services = provider.getServices()) != null && services.size() > 0) {
+                            if (name != null
+                                    && name.equals(credentialStorage.name)
+                                    && property != null
+                                    && property.equals(credentialStorage.packageName)
+                                    && (services = provider.getServices()) != null
+                                    && services.size() > 0) {
                                 strArr = new String[services.size()];
                                 Iterator<Provider.Service> it = services.iterator();
                                 int i2 = 0;
@@ -4243,7 +6005,10 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                         }
                     }
                 } else {
-                    Log.i(TAG, "getSupportedAlgorithmsInternal - UniversalCredentialUtil service is null.... ");
+                    Log.i(
+                            TAG,
+                            "getSupportedAlgorithmsInternal - UniversalCredentialUtil service is"
+                                + " null.... ");
                 }
             } catch (Exception e2) {
                 Log.i(TAG, "The exception occurs " + e2.getMessage());
@@ -4256,14 +6021,41 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    public final ArrayList getWhitelistedData(int i, int i2, int i3, CredentialStorage credentialStorage, String str) {
+    public final ArrayList getWhitelistedData(
+            int i, int i2, int i3, CredentialStorage credentialStorage, String str) {
         if (str == null) {
-            return this.mEdmStorageProvider.getDataByFields("UniversalCredentialWhiteListTable", new String[]{"adminUid", "userId", "storageName", "storagePackageName", "accessType"}, new String[]{String.valueOf(i), String.valueOf(i2), credentialStorage.name, credentialStorage.packageName, String.valueOf(i3)}, new String[]{"appPackage", "appSignature"});
+            return this.mEdmStorageProvider.getDataByFields(
+                    "UniversalCredentialWhiteListTable",
+                    new String[] {
+                        "adminUid", "userId", "storageName", "storagePackageName", "accessType"
+                    },
+                    new String[] {
+                        String.valueOf(i),
+                        String.valueOf(i2),
+                        credentialStorage.name,
+                        credentialStorage.packageName,
+                        String.valueOf(i3)
+                    },
+                    new String[] {"appPackage", "appSignature"});
         }
-        return this.mEdmStorageProvider.getDataByFields("UniversalCredentialWhiteListTable", new String[]{"adminUid", "userId", "storageName", "storagePackageName", "accessType", "alias"}, new String[]{String.valueOf(i), String.valueOf(i2), credentialStorage.name, credentialStorage.packageName, String.valueOf(i3), str}, new String[]{"appPackage", "appSignature"});
+        return this.mEdmStorageProvider.getDataByFields(
+                "UniversalCredentialWhiteListTable",
+                new String[] {
+                    "adminUid", "userId", "storageName", "storagePackageName", "accessType", "alias"
+                },
+                new String[] {
+                    String.valueOf(i),
+                    String.valueOf(i2),
+                    credentialStorage.name,
+                    credentialStorage.packageName,
+                    String.valueOf(i3),
+                    str
+                },
+                new String[] {"appPackage", "appSignature"});
     }
 
-    public final String[] getWifiCertificateAliasesAsUser(int i, CredentialStorage credentialStorage) {
+    public final String[] getWifiCertificateAliasesAsUser(
+            int i, CredentialStorage credentialStorage) {
         String[] strArr;
         String str = TAG;
         Log.i(str, "getWifiCertificateAliasesAsUser is called....");
@@ -4275,12 +6067,22 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             return null;
         }
         if (DBG) {
-            DirEncryptService$$ExternalSyntheticOutline0.m(i, "getWifiCertificateAliasesAsUser is called for mContainerId ", str);
+            DirEncryptService$$ExternalSyntheticOutline0.m(
+                    i, "getWifiCertificateAliasesAsUser is called for mContainerId ", str);
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                ArrayList dataByFields = this.mEdmStorageProvider.getDataByFields("UniversalCredentialCertificateTable", new String[]{"userId", "storageName", "storagePackageName"}, new String[]{String.valueOf(i), credentialStorage.name, credentialStorage.packageName}, new String[]{"adminUid", "alias", "wifi"});
+                ArrayList dataByFields =
+                        this.mEdmStorageProvider.getDataByFields(
+                                "UniversalCredentialCertificateTable",
+                                new String[] {"userId", "storageName", "storagePackageName"},
+                                new String[] {
+                                    String.valueOf(i),
+                                    credentialStorage.name,
+                                    credentialStorage.packageName
+                                },
+                                new String[] {"adminUid", "alias", "wifi"});
                 if (dataByFields.size() > 0) {
                     ArrayList arrayList = new ArrayList();
                     Iterator it = dataByFields.iterator();
@@ -4295,8 +6097,11 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                             if (asInteger != null && asInteger2 != null) {
                                 int intValue = asInteger.intValue();
                                 int intValue2 = asInteger2.intValue();
-                                Log.i(TAG, "getWifiCertificateAliasesAsUser - isWifi :" + intValue2);
-                                if (isAdminLicenseActive(intValue, credentialStorage) && intValue2 == 1) {
+                                Log.i(
+                                        TAG,
+                                        "getWifiCertificateAliasesAsUser - isWifi :" + intValue2);
+                                if (isAdminLicenseActive(intValue, credentialStorage)
+                                        && intValue2 == 1) {
                                     arrayList.add(asString);
                                 }
                             }
@@ -4324,7 +6129,11 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    public final int initKeyguardPin(ContextInfo contextInfo, CredentialStorage credentialStorage, String str, Bundle bundle) {
+    public final int initKeyguardPin(
+            ContextInfo contextInfo,
+            CredentialStorage credentialStorage,
+            String str,
+            Bundle bundle) {
         Log.i(TAG, "initKeyguardPin is called....");
         validateContextInfo(contextInfo);
         int checkContext = checkContext(contextInfo, credentialStorage, true);
@@ -4334,13 +6143,19 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         try {
             KnoxAnalytics.log(getKAData("initKeyguardPin", credentialStorage.packageName));
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         int i = contextInfo.mCallerUid;
         int userId = UserHandle.getUserId(i);
         try {
             if (DBG) {
-                Log.i(TAG, "initKeyguardPin is called for Caller UID-" + i + " mContainerId " + userId);
+                Log.i(
+                        TAG,
+                        "initKeyguardPin is called for Caller UID-"
+                                + i
+                                + " mContainerId "
+                                + userId);
             }
             int checkCS = checkCS(contextInfo, credentialStorage);
             if (checkCS != 0) {
@@ -4348,11 +6163,19 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
             IUcmService ucmService$1 = getUcmService$1();
             if (ucmService$1 != null) {
-                return getReturnvalue(ucmService$1.initKeyguardPin(new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name).setResourceId(4).setUid(i).build(), str, bundle));
+                return getReturnvalue(
+                        ucmService$1.initKeyguardPin(
+                                new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name)
+                                        .setResourceId(4)
+                                        .setUid(i)
+                                        .build(),
+                                str,
+                                bundle));
             }
             return -1;
         } catch (Exception e2) {
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e2, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e2, new StringBuilder("The exception occurs "), TAG);
             return -1;
         }
     }
@@ -4368,14 +6191,16 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
         checkKnoxCorePermission(contextInfo);
         Log.i(str2, "initPluginForWpc : caller has valid UCM permission");
-        CredentialStorage[] availableCredentialStorages = getAvailableCredentialStorages(contextInfo, false);
+        CredentialStorage[] availableCredentialStorages =
+                getAvailableCredentialStorages(contextInfo, false);
         if (availableCredentialStorages == null) {
             Log.e(str2, "No credential storages found for UCM WPC DAR.");
         } else {
             int length = availableCredentialStorages.length;
             for (int i = 0; i < length; i++) {
                 credentialStorage = availableCredentialStorages[i];
-                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(new StringBuilder("cs.packageName -"), credentialStorage.name, TAG);
+                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("cs.packageName -"), credentialStorage.name, TAG);
                 if (str.equals(credentialStorage.packageName)) {
                     break;
                 }
@@ -4390,13 +6215,15 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         StringBuilder sb = new StringBuilder("Selected CS for UCM WPC DAR");
         sb.append(credentialStorage.name);
         sb.append(" and pkg-");
-        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(sb, credentialStorage.packageName, str3);
+        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                sb, credentialStorage.packageName, str3);
         boolean z = true;
         try {
             if (manageCredentialStorage(contextInfo, credentialStorage, true, false) != 0) {
                 return getStatusErrorBundle(-1);
             }
-            Provider credentialStorageProvider = getCredentialStorageProvider(null, credentialStorage.packageName);
+            Provider credentialStorageProvider =
+                    getCredentialStorageProvider(null, credentialStorage.packageName);
             if (credentialStorageProvider == null) {
                 Log.e(str3, "getCredentialStorageForWpc. csProvider is null");
                 return getStatusErrorBundle(-1);
@@ -4409,13 +6236,16 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                     try {
                         Bundle bundle2 = new Bundle();
                         bundle2.putString("applet_location", null);
-                        int configureCredentialStoragePlugin = configureCredentialStoragePlugin(contextInfo, credentialStorage, bundle2, false);
+                        int configureCredentialStoragePlugin =
+                                configureCredentialStoragePlugin(
+                                        contextInfo, credentialStorage, bundle2, false);
                         if (configureCredentialStoragePlugin < 10000) {
                             Log.e(str3, "getCredentialStorageForWpc. failed to install applet");
                             Bundle statusErrorBundle = getStatusErrorBundle(-1);
                             try {
                                 Log.e(str3, "Failed to install applet, unmanage Plugin");
-                                manageCredentialStorage(contextInfo, credentialStorage, false, false);
+                                manageCredentialStorage(
+                                        contextInfo, credentialStorage, false, false);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -4429,11 +6259,15 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                             z = false;
                             e.printStackTrace();
                             String str4 = TAG;
-                            Log.e(str4, "Exception in configureCredentialStoragePlugin in UCM DAR WPC" + e);
+                            Log.e(
+                                    str4,
+                                    "Exception in configureCredentialStoragePlugin in UCM DAR WPC"
+                                            + e);
                             if (z) {
                                 try {
                                     Log.e(str4, "Failed to install applet, unmanage Plugin");
-                                    manageCredentialStorage(contextInfo, credentialStorage, false, false);
+                                    manageCredentialStorage(
+                                            contextInfo, credentialStorage, false, false);
                                 } catch (Exception e3) {
                                     e3.printStackTrace();
                                 }
@@ -4445,7 +6279,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                             if (z) {
                                 try {
                                     Log.e(TAG, "Failed to install applet, unmanage Plugin");
-                                    manageCredentialStorage(contextInfo, credentialStorage, false, false);
+                                    manageCredentialStorage(
+                                            contextInfo, credentialStorage, false, false);
                                 } catch (Exception e4) {
                                     e4.printStackTrace();
                                 }
@@ -4469,7 +6304,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    public final boolean insertOrUpdateCertificateProfile(CredentialStorage credentialStorage, int i, int i2, String str, boolean z) {
+    public final boolean insertOrUpdateCertificateProfile(
+            CredentialStorage credentialStorage, int i, int i2, String str, boolean z) {
         boolean z2;
         boolean z3 = DBG;
         if (z3) {
@@ -4484,12 +6320,15 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
         if (z3) {
             String str2 = TAG;
-            StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "InstallerId - ", " ContainerId - ", " and alias-");
+            StringBuilder m =
+                    ArrayUtils$$ExternalSyntheticOutline0.m(
+                            i, i2, "InstallerId - ", " ContainerId - ", " and alias-");
             m.append(str);
             m.append(", storage name -");
             m.append(credentialStorage.name);
             m.append(", storage package - ");
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(m, credentialStorage.packageName, str2);
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    m, credentialStorage.packageName, str2);
         }
         String validString = getValidString(str);
         try {
@@ -4500,9 +6339,13 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             contentValues.put("storagePackageName", credentialStorage.packageName);
             contentValues.put("alias", validString);
             contentValues.put("wifi", Integer.valueOf(z ? 1 : 0));
-            if (this.mEdmStorageProvider.getCount("UniversalCredentialCertificateTable", contentValues) == 0) {
+            if (this.mEdmStorageProvider.getCount(
+                            "UniversalCredentialCertificateTable", contentValues)
+                    == 0) {
                 contentValues.put("storageManufacture", credentialStorage.manufacturer);
-                z2 = this.mEdmStorageProvider.putValuesNoUpdate("UniversalCredentialCertificateTable", contentValues);
+                z2 =
+                        this.mEdmStorageProvider.putValuesNoUpdate(
+                                "UniversalCredentialCertificateTable", contentValues);
             } else {
                 Log.i(TAG, "insertOrUpdateCertificateProfile - record already exist..");
                 z2 = true;
@@ -4510,7 +6353,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             z4 = z2;
         } catch (Exception e) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("The exception occurs "), TAG);
             }
         }
         ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("retcode-", TAG, z4);
@@ -4518,7 +6362,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
     }
 
     /* JADX WARN: Unreachable blocks removed: 2, instructions: 2 */
-    public final int insertOrUpdateExemptPackages(CredentialStorage credentialStorage, List list, int i, int i2, int i3) {
+    public final int insertOrUpdateExemptPackages(
+            CredentialStorage credentialStorage, List list, int i, int i2, int i3) {
         int i4;
         PackageInfo packageInfo;
         Iterator it;
@@ -4530,7 +6375,9 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
         if (z) {
             String str = TAG;
-            StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "adminId - ", " ContainerId - ", " Storage name - ");
+            StringBuilder m =
+                    ArrayUtils$$ExternalSyntheticOutline0.m(
+                            i, i2, "adminId - ", " ContainerId - ", " Storage name - ");
             m.append(credentialStorage.name);
             m.append(" Storage Package - ");
             m.append(credentialStorage.packageName);
@@ -4545,9 +6392,11 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         while (it2.hasNext()) {
             AppIdentity appIdentity = (AppIdentity) it2.next();
             Log.i(TAG, "insertOrUpdateExemptPackages - pkg : " + appIdentity.getPackageName());
-            if (appIdentity.getPackageName() != null && appIdentity.getPackageName().length() != 0) {
+            if (appIdentity.getPackageName() != null
+                    && appIdentity.getPackageName().length() != 0) {
                 try {
-                    packageInfo = packageManager.getPackageInfo(appIdentity.getPackageName(), 64L, i2);
+                    packageInfo =
+                            packageManager.getPackageInfo(appIdentity.getPackageName(), 64L, i2);
                 } catch (Exception e) {
                     Log.i(TAG, Log.getStackTraceString(e));
                     packageInfo = null;
@@ -4556,18 +6405,29 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 String str2 = TAG;
                 Log.i(str2, "Package Info: " + packageInfo3);
                 boolean z2 = packageInfo3 != null;
-                if (appIdentity.getSignature() != null && appIdentity.getSignature().length() > 0 && z2) {
-                    Signature[] convertStringToSignature = convertStringToSignature(appIdentity.getSignature());
+                if (appIdentity.getSignature() != null
+                        && appIdentity.getSignature().length() > 0
+                        && z2) {
+                    Signature[] convertStringToSignature =
+                            convertStringToSignature(appIdentity.getSignature());
                     if (convertStringToSignature == null) {
-                        Log.i(str2, "UniversalCredentialManagerPolicy passed String signature is invalid");
-                    } else if (!compareSignatures(packageInfo3.signatures, convertStringToSignature)) {
-                        Log.i(str2, "Package is installed, and signature doesn't match. So return falure");
+                        Log.i(
+                                str2,
+                                "UniversalCredentialManagerPolicy passed String signature is"
+                                    + " invalid");
+                    } else if (!compareSignatures(
+                            packageInfo3.signatures, convertStringToSignature)) {
+                        Log.i(
+                                str2,
+                                "Package is installed, and signature doesn't match. So return"
+                                    + " falure");
                     }
                     i4 = -18;
                     break;
                 }
                 ContentValues contentValues = new ContentValues();
-                Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(i, contentValues, "adminUid", i2, "userId");
+                Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(
+                        i, contentValues, "adminUid", i2, "userId");
                 contentValues.put("storageName", credentialStorage.name);
                 contentValues.put("storagePackageName", credentialStorage.packageName);
                 IPackageManager iPackageManager = packageManager;
@@ -4575,10 +6435,12 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 if (z2) {
                     it = it2;
                     try {
-                        contentValues.put("appUid", Integer.valueOf(packageInfo3.applicationInfo.uid));
+                        contentValues.put(
+                                "appUid", Integer.valueOf(packageInfo3.applicationInfo.uid));
                     } catch (Exception e2) {
                         packageInfo2 = packageInfo3;
-                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e2, new StringBuilder("The exception occurs "), TAG);
+                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                .m(e2, new StringBuilder("The exception occurs "), TAG);
                     }
                 } else {
                     it = it2;
@@ -4593,7 +6455,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                     contentValues.put("storageManufacture", str3);
                 }
                 ContentValues contentValues2 = new ContentValues();
-                Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(i, contentValues2, "adminUid", i2, "userId");
+                Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(
+                        i, contentValues2, "adminUid", i2, "userId");
                 contentValues2.put("storageName", credentialStorage.name);
                 contentValues2.put("storagePackageName", credentialStorage.packageName);
                 contentValues2.put("appPackage", appIdentity.getPackageName());
@@ -4601,11 +6464,13 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 try {
                 } catch (Exception e3) {
                     if (DBG) {
-                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e3, new StringBuilder("The exception occurs "), TAG);
+                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                .m(e3, new StringBuilder("The exception occurs "), TAG);
                     }
                     i5 = -1;
                 }
-                if (!this.mEdmStorageProvider.putValues("UniversalCredentialExemptTable", contentValues, contentValues2)) {
+                if (!this.mEdmStorageProvider.putValues(
+                        "UniversalCredentialExemptTable", contentValues, contentValues2)) {
                     if (DBG) {
                         Log.i(TAG, "insertOrUpdateExemptPackages - DB operation failed");
                     }
@@ -4617,11 +6482,18 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                     try {
                         int i7 = packageInfo2.applicationInfo.uid;
                         if (!this.exemptedAppsCache.containsKey(Integer.valueOf(i7))) {
-                            this.exemptedAppsCache.put(Integer.valueOf(i7), appIdentity.getPackageName());
-                            Log.i(TAG, "Caching Exempt app id-" + i7 + ", packageName-" + appIdentity.getPackageName());
+                            this.exemptedAppsCache.put(
+                                    Integer.valueOf(i7), appIdentity.getPackageName());
+                            Log.i(
+                                    TAG,
+                                    "Caching Exempt app id-"
+                                            + i7
+                                            + ", packageName-"
+                                            + appIdentity.getPackageName());
                         }
                     } catch (Exception e4) {
-                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e4, new StringBuilder("The exception occurs "), TAG);
+                        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                .m(e4, new StringBuilder("The exception occurs "), TAG);
                     }
                 }
                 i6 = i5;
@@ -4630,7 +6502,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
         }
         i4 = i6;
-        DirEncryptService$$ExternalSyntheticOutline0.m(i4, "insertOrUpdateExemptPackages retcode-", TAG);
+        DirEncryptService$$ExternalSyntheticOutline0.m(
+                i4, "insertOrUpdateExemptPackages retcode-", TAG);
         return i4;
     }
 
@@ -4649,27 +6522,44 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final int insertOrUpdateWhiteListPackages(com.samsung.android.knox.ucm.configurator.CredentialStorage r26, java.util.List r27, int r28, int r29, int r30, java.lang.String r31) {
+    public final int insertOrUpdateWhiteListPackages(
+            com.samsung.android.knox.ucm.configurator.CredentialStorage r26,
+            java.util.List r27,
+            int r28,
+            int r29,
+            int r30,
+            java.lang.String r31) {
         /*
             Method dump skipped, instructions count: 877
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.ucm.UniversalCredentialManagerService.insertOrUpdateWhiteListPackages(com.samsung.android.knox.ucm.configurator.CredentialStorage, java.util.List, int, int, int, java.lang.String):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.ucm.UniversalCredentialManagerService.insertOrUpdateWhiteListPackages(com.samsung.android.knox.ucm.configurator.CredentialStorage,"
+                    + " java.util.List, int, int, int, java.lang.String):int");
     }
 
-    public final int installCACertificate(ContextInfo contextInfo, byte[] bArr, String str, Bundle bundle) {
+    public final int installCACertificate(
+            ContextInfo contextInfo, byte[] bArr, String str, Bundle bundle) {
         Log.i(TAG, "installCACertificate is deprecated from Knox 3.10, not supported anymore.");
         validateContextInfo(contextInfo);
         try {
             KnoxAnalytics.log(getKAData("installCACertificate"));
             return -1;
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
             return -1;
         }
     }
 
-    public final int installCertificate(ContextInfo contextInfo, CredentialStorage credentialStorage, byte[] bArr, String str, String str2, Bundle bundle) {
+    public final int installCertificate(
+            ContextInfo contextInfo,
+            CredentialStorage credentialStorage,
+            byte[] bArr,
+            String str,
+            String str2,
+            Bundle bundle) {
         boolean z;
         String str3 = TAG;
         Log.i(str3, "installCertificate is called....");
@@ -4684,16 +6574,44 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             i = contextInfo.mCallerUid;
             z = false;
         }
-        return installCertificateMain(i, userId, credentialStorage, bArr, str, str2, bundle, false, false, z);
+        return installCertificateMain(
+                i, userId, credentialStorage, bArr, str, str2, bundle, false, false, z);
     }
 
-    public final int installCertificateInternal(int i, int i2, CredentialStorage credentialStorage, byte[] bArr, String str, Bundle bundle, boolean z) {
+    public final int installCertificateInternal(
+            int i,
+            int i2,
+            CredentialStorage credentialStorage,
+            byte[] bArr,
+            String str,
+            Bundle bundle,
+            boolean z) {
         Log.i(TAG, "installCertificateInternal is called....");
         checkCallerPermissionFor("installCertificateInternal");
-        return installCertificateMain(i, i2, credentialStorage, bArr, str, bundle != null ? bundle.getString("ucm_privatekey_password") : null, bundle, true, z, false);
+        return installCertificateMain(
+                i,
+                i2,
+                credentialStorage,
+                bArr,
+                str,
+                bundle != null ? bundle.getString("ucm_privatekey_password") : null,
+                bundle,
+                true,
+                z,
+                false);
     }
 
-    public final int installCertificateMain(int i, int i2, CredentialStorage credentialStorage, byte[] bArr, String str, String str2, Bundle bundle, boolean z, boolean z2, boolean z3) {
+    public final int installCertificateMain(
+            int i,
+            int i2,
+            CredentialStorage credentialStorage,
+            byte[] bArr,
+            String str,
+            String str2,
+            Bundle bundle,
+            boolean z,
+            boolean z2,
+            boolean z3) {
         int i3;
         String str3 = TAG;
         Log.i(str3, "installCertificateMain is called....");
@@ -4715,7 +6633,10 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             e = e2;
             i3 = -1;
         }
-        if (!isValidParam(credentialStorage) || bArr == null || str == null || (!z && str2 == null)) {
+        if (!isValidParam(credentialStorage)
+                || bArr == null
+                || str == null
+                || (!z && str2 == null)) {
             if (DBG) {
                 Log.i(str3, "installCertificateMain - Invalid Arguments");
             }
@@ -4724,7 +6645,14 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
         boolean z4 = DBG;
         if (z4) {
-            Log.i(str3, "installCertificateMain is called for Caller UID-" + i + " mContainerId " + i2 + ", renew-" + z2);
+            Log.i(
+                    str3,
+                    "installCertificateMain is called for Caller UID-"
+                            + i
+                            + " mContainerId "
+                            + i2
+                            + ", renew-"
+                            + z2);
         }
         String str4 = credentialStorage.signature;
         if (str4 != null && !validateSignature(i2, credentialStorage.packageName, str4)) {
@@ -4736,7 +6664,10 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             Binder.restoreCallingIdentity(clearCallingIdentity);
             return -13;
         }
-        if (true != isCredentialStorageManagedInternal(i, i2, credentialStorage.name, credentialStorage.packageName) && !z3) {
+        if (true
+                        != isCredentialStorageManagedInternal(
+                                i, i2, credentialStorage.name, credentialStorage.packageName)
+                && !z3) {
             if (z4) {
                 Log.i(str3, "installCertificateMain return false..");
             }
@@ -4761,10 +6692,14 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             Binder.restoreCallingIdentity(clearCallingIdentity);
             return -14;
         }
-        Log.i(str3, "installCertificateMain storageOption-" + (bundle != null ? bundle.getInt("ese_storage_option", -1) : -1));
+        Log.i(
+                str3,
+                "installCertificateMain storageOption-"
+                        + (bundle != null ? bundle.getInt("ese_storage_option", -1) : -1));
         boolean z5 = bundle != null ? bundle.getBoolean("allow_wifi", false) : false;
         try {
-            KnoxAnalyticsData kAData = getKAData("installCertificate", credentialStorage.packageName);
+            KnoxAnalyticsData kAData =
+                    getKAData("installCertificate", credentialStorage.packageName);
             kAData.setProperty("certType", z5 ? "WIFI" : "VPN");
             KnoxAnalytics.log(kAData);
         } catch (Exception e3) {
@@ -4776,7 +6711,9 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             return -1;
         }
         i3 = -1;
-        int installCertificateInProvider = installCertificateInProvider(credentialStorage, bArr, str, str2, bundle, i2, i, z, z2);
+        int installCertificateInProvider =
+                installCertificateInProvider(
+                        credentialStorage, bArr, str, str2, bundle, i2, i, z, z2);
         if (installCertificateInProvider != 0) {
             if (DBG) {
                 Log.i(TAG, "installCertificateInProvider failed...");
@@ -4794,7 +6731,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         return i3;
     }
 
-    public final boolean isAccessAllowed(int i, CredentialStorage credentialStorage, Bundle bundle) {
+    public final boolean isAccessAllowed(
+            int i, CredentialStorage credentialStorage, Bundle bundle) {
         int i2;
         boolean z;
         List list;
@@ -4823,7 +6761,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             if (i2 == -1) {
                 i2 = UserHandle.getUserId(i);
             }
-            List<AppIdentity> packagesFromWhiteListAsUser = getPackagesFromWhiteListAsUser(i2, credentialStorage, bundle);
+            List<AppIdentity> packagesFromWhiteListAsUser =
+                    getPackagesFromWhiteListAsUser(i2, credentialStorage, bundle);
             if (packagesFromWhiteListAsUser == null || packagesFromWhiteListAsUser.size() <= 0) {
                 Log.i(str, "getPackagesFromWhiteListAsUser returned empty/null whitelist");
             } else {
@@ -4859,23 +6798,46 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                                     sb.append(" and DB packageName-");
                                     sb.append(packageName2);
                                     Log.i(str3, sb.toString());
-                                    if (str2 != null && packageName2 != null && packageName2.equals(str2)) {
+                                    if (str2 != null
+                                            && packageName2 != null
+                                            && packageName2.equals(str2)) {
                                         if (signature != null) {
-                                            Log.i(str3, "isAccessAllowed package matched. Now matching signature....");
-                                            Signature[] convertStringToSignature = convertStringToSignature(signature);
+                                            Log.i(
+                                                    str3,
+                                                    "isAccessAllowed package matched. Now matching"
+                                                        + " signature....");
+                                            Signature[] convertStringToSignature =
+                                                    convertStringToSignature(signature);
                                             if (convertStringToSignature == null) {
-                                                Log.i(str3, "isAccessAllowed - failed to convert signature from db.");
+                                                Log.i(
+                                                        str3,
+                                                        "isAccessAllowed - failed to convert"
+                                                            + " signature from db.");
                                             }
                                             try {
-                                                packageInfo = packageManager.getPackageInfo(str2, 64L, UserHandle.getUserId(i));
+                                                packageInfo =
+                                                        packageManager.getPackageInfo(
+                                                                str2, 64L, UserHandle.getUserId(i));
                                             } catch (Exception e2) {
-                                                Log.i(TAG, "The exception occurs " + e2.getMessage());
+                                                Log.i(
+                                                        TAG,
+                                                        "The exception occurs " + e2.getMessage());
                                                 packageInfo = null;
                                             }
-                                            if (convertStringToSignature == null || packageInfo == null || !compareSignatures(packageInfo.signatures, convertStringToSignature)) {
-                                                Log.i(TAG, "isAccessAllowed signature mismatch happened...Ignoring package");
+                                            if (convertStringToSignature == null
+                                                    || packageInfo == null
+                                                    || !compareSignatures(
+                                                            packageInfo.signatures,
+                                                            convertStringToSignature)) {
+                                                Log.i(
+                                                        TAG,
+                                                        "isAccessAllowed signature mismatch"
+                                                            + " happened...Ignoring package");
                                             } else {
-                                                Log.i(TAG, "isAccessAllowed match found with signature matching...");
+                                                Log.i(
+                                                        TAG,
+                                                        "isAccessAllowed match found with signature"
+                                                            + " matching...");
                                             }
                                         } else {
                                             Log.i(str3, "isAccessAllowed match found ...");
@@ -4915,7 +6877,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
 
     public final boolean isAdminLicenseActive(int i, CredentialStorage credentialStorage) {
         String str = TAG;
-        DirEncryptService$$ExternalSyntheticOutline0.m(i, "isAdminLicenseActive Test adminId-", str);
+        DirEncryptService$$ExternalSyntheticOutline0.m(
+                i, "isAdminLicenseActive Test adminId-", str);
         try {
             if (!this.expiredAdmins.containsKey(Integer.valueOf(i))) {
                 Log.i(str, "isAdminLicenseActive - admin License is active");
@@ -4930,7 +6893,9 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             if (isSystemStorage(credentialStorage.packageName)) {
                 Log.i(str, "isAdminLicenseActive - Storage is system. Blocking access");
             } else {
-                Provider credentialStorageProvider = getCredentialStorageProvider(credentialStorage.name, credentialStorage.packageName);
+                Provider credentialStorageProvider =
+                        getCredentialStorageProvider(
+                                credentialStorage.name, credentialStorage.packageName);
                 if (credentialStorageProvider == null) {
                     return true;
                 }
@@ -4942,14 +6907,16 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
             return false;
         } catch (Exception e) {
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("The exception occurs "), TAG);
             return true;
         }
     }
 
     public final boolean isAllowed(int i, int i2) {
         String str = TAG;
-        AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(i, i2, "isAllowed: adminUid - ", ", userId-", str);
+        AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(
+                i, i2, "isAllowed: adminUid - ", ", userId-", str);
         boolean z = true;
         try {
         } catch (Exception e) {
@@ -4958,7 +6925,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
         if (i2 < 10) {
             if (UserHandle.getUserId(i) == 0) {
-                ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("isAllowed status-", TAG, z);
+                ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                        "isAllowed status-", TAG, z);
                 return z;
             }
             Log.i(str, "isAllowed: caller app is not in user 0");
@@ -4971,7 +6939,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         try {
         } catch (Exception e2) {
             e = e2;
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("The exception occurs "), TAG);
             ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("isAllowed status-", TAG, z);
             return z;
         }
@@ -4984,7 +6953,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             if (mUMContainerOwnerUid != i) {
                 Log.i(str, "isAllowed: no match found....");
                 z = false;
-                ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("isAllowed status-", TAG, z);
+                ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                        "isAllowed status-", TAG, z);
                 return z;
             }
             Log.i(str, "isAllowed: match found....");
@@ -4993,15 +6963,19 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         return z;
     }
 
-    public final boolean isCallerDelegated(int i, int i2, CredentialStorage credentialStorage, int i3) {
+    public final boolean isCallerDelegated(
+            int i, int i2, CredentialStorage credentialStorage, int i3) {
         String str = TAG;
-        AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(i2, i, "isCallerDelegated is called callerUid-", ", userId-", str);
+        AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(
+                i2, i, "isCallerDelegated is called callerUid-", ", userId-", str);
         boolean z = false;
         try {
             Bundle bundle = new Bundle();
             bundle.putInt("access_type", i3);
-            List<AppIdentity> packagesFromWhiteListInternal = getPackagesFromWhiteListInternal(i, credentialStorage, bundle);
-            if (packagesFromWhiteListInternal == null || packagesFromWhiteListInternal.size() <= 0) {
+            List<AppIdentity> packagesFromWhiteListInternal =
+                    getPackagesFromWhiteListInternal(i, credentialStorage, bundle);
+            if (packagesFromWhiteListInternal == null
+                    || packagesFromWhiteListInternal.size() <= 0) {
                 Log.i(str, "isCallerDelegated Caller is not delegated app...");
             } else {
                 String[] packagesForUid = this.mPm.getPackagesForUid(i2);
@@ -5011,7 +6985,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                         Log.i(str2, "isCallerDelegated package- " + appIdentity.getPackageName());
                         if (Arrays.asList(packagesForUid).contains(appIdentity.getPackageName())) {
                             Log.i(str2, "isCallerDelegated Caller is delegated app...");
-                            if (checkDelegatorPermission(i, i3, credentialStorage, appIdentity.getPackageName())) {
+                            if (checkDelegatorPermission(
+                                    i, i3, credentialStorage, appIdentity.getPackageName())) {
                                 z = true;
                                 break;
                             }
@@ -5020,16 +6995,21 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 }
             }
         } catch (Exception e) {
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("The exception occurs "), TAG);
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("isCallerDelegated status ", TAG, z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "isCallerDelegated status ", TAG, z);
         return z;
     }
 
-    public final boolean isCallerDelegated(ContextInfo contextInfo, CredentialStorage credentialStorage, int i) {
+    public final boolean isCallerDelegated(
+            ContextInfo contextInfo, CredentialStorage credentialStorage, int i) {
         String str = TAG;
-        if (UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(contextInfo, credentialStorage, str, "isCallerDelegated is called....")) {
-            return isCallerDelegated(contextInfo.mContainerId, contextInfo.mCallerUid, credentialStorage, i);
+        if (UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(
+                contextInfo, credentialStorage, str, "isCallerDelegated is called....")) {
+            return isCallerDelegated(
+                    contextInfo.mContainerId, contextInfo.mCallerUid, credentialStorage, i);
         }
         Log.i(str, "cxtInfo is null");
         return false;
@@ -5041,9 +7021,16 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         try {
             int callingUid = Binder.getCallingUid();
             String nameForUid = this.mPm.getNameForUid(callingUid);
-            Log.i(str, "isCallerPackageManaged, callingUid: " + callingUid + ", packageName: " + nameForUid);
+            Log.i(
+                    str,
+                    "isCallerPackageManaged, callingUid: "
+                            + callingUid
+                            + ", packageName: "
+                            + nameForUid);
             if (callingUid != -1 && nameForUid != null) {
-                ContentValues m = AccountManagerService$$ExternalSyntheticOutline0.m("storagePackageName", nameForUid);
+                ContentValues m =
+                        AccountManagerService$$ExternalSyntheticOutline0.m(
+                                "storagePackageName", nameForUid);
                 m.put("appUid", Integer.valueOf(callingUid));
                 try {
                     if (this.mEdmStorageProvider.getCount("UniversalCredentialInfoTable", m) > 0) {
@@ -5060,31 +7047,45 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    public final boolean isCredentialStorageEnabledForLockType(ContextInfo contextInfo, CredentialStorage credentialStorage) {
+    public final boolean isCredentialStorageEnabledForLockType(
+            ContextInfo contextInfo, CredentialStorage credentialStorage) {
         Log.i(TAG, "isCredentialStorageEnabledForLockType is called....");
         validateContextInfo(contextInfo);
         enforceSecurityPermission(contextInfo, null);
         try {
-            KnoxAnalytics.log(getKAData("isCredentialStorageEnabledForLockType", credentialStorage.packageName));
+            KnoxAnalytics.log(
+                    getKAData(
+                            "isCredentialStorageEnabledForLockType",
+                            credentialStorage.packageName));
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         int i = contextInfo.mCallerUid;
         int userId = UserHandle.getUserId(i);
         boolean z = DBG;
         if (z) {
-            AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(i, userId, "isCredentialStorageEnabledForLockType is called for Caller UID - ", ", mContainerId ", TAG);
+            AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(
+                    i,
+                    userId,
+                    "isCredentialStorageEnabledForLockType is called for Caller UID - ",
+                    ", mContainerId ",
+                    TAG);
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
                 if (isValidParam(credentialStorage)) {
-                    if (checkCredentialStorageEnabledForLockTypebyAdmin(i, credentialStorage, userId)) {
+                    if (checkCredentialStorageEnabledForLockTypebyAdmin(
+                            i, credentialStorage, userId)) {
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                         return true;
                     }
                 } else if (z) {
-                    Log.i(TAG, "isCredentialStorageEnabledForLockType Invalid credential storage object passed...");
+                    Log.i(
+                            TAG,
+                            "isCredentialStorageEnabledForLockType Invalid credential storage"
+                                + " object passed...");
                 }
             } catch (Exception e2) {
                 if (DBG) {
@@ -5097,13 +7098,15 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    public final boolean isCredentialStorageEnabledForLockTypeAsUser(int i, CredentialStorage credentialStorage) {
+    public final boolean isCredentialStorageEnabledForLockTypeAsUser(
+            int i, CredentialStorage credentialStorage) {
         checkCallerPermissionFor("isCredentialStorageEnabledForLockTypeAsUser");
         String str = TAG;
         Log.i(str, "isCredentialStorageEnabledForLockTypeAsUser is called....");
         boolean z = DBG;
         if (z) {
-            DirEncryptService$$ExternalSyntheticOutline0.m(i, "isCredentialStorageEnabledForLockTypeAsUser is called for userId ", str);
+            DirEncryptService$$ExternalSyntheticOutline0.m(
+                    i, "isCredentialStorageEnabledForLockTypeAsUser is called for userId ", str);
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -5114,7 +7117,10 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                         return true;
                     }
                 } else if (z) {
-                    Log.i(str, "isCredentialStorageEnabledForLockTypeAsUser Invalid credential storage object passed...");
+                    Log.i(
+                            str,
+                            "isCredentialStorageEnabledForLockTypeAsUser Invalid credential storage"
+                                + " object passed...");
                 }
             } catch (Exception e) {
                 if (DBG) {
@@ -5127,10 +7133,12 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    public final boolean isCredentialStorageLocked(ContextInfo contextInfo, CredentialStorage credentialStorage) {
+    public final boolean isCredentialStorageLocked(
+            ContextInfo contextInfo, CredentialStorage credentialStorage) {
         String str = TAG;
         boolean z = false;
-        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(contextInfo, credentialStorage, str, "isCredentialStorageLocked is called....")) {
+        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(
+                contextInfo, credentialStorage, str, "isCredentialStorageLocked is called....")) {
             if (DBG) {
                 Log.i(str, "isCredentialStorageLocked - Invalid Arguments");
             }
@@ -5148,7 +7156,12 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             return true;
         }
         if (DBG) {
-            AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(i, userId, "isCredentialStorageLocked is called for Caller UID-", " userId ", str);
+            AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(
+                    i,
+                    userId,
+                    "isCredentialStorageLocked is called for Caller UID-",
+                    " userId ",
+                    str);
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -5163,7 +7176,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    public final boolean isCredentialStorageLockedAsUser(int i, CredentialStorage credentialStorage) {
+    public final boolean isCredentialStorageLockedAsUser(
+            int i, CredentialStorage credentialStorage) {
         checkCallerPermissionFor("isCredentialStorageLockedAsUser");
         String str = TAG;
         Log.i(str, "isCredentialStorageLockedAsUser is called....");
@@ -5175,12 +7189,15 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             return false;
         }
         try {
-            KnoxAnalytics.log(getKAData("isCredentialStorageLocked", credentialStorage.packageName));
+            KnoxAnalytics.log(
+                    getKAData("isCredentialStorageLocked", credentialStorage.packageName));
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         if (DBG) {
-            DirEncryptService$$ExternalSyntheticOutline0.m(i, "isCredentialStorageLockedAsUser is called for userId-", TAG);
+            DirEncryptService$$ExternalSyntheticOutline0.m(
+                    i, "isCredentialStorageLockedAsUser is called for userId-", TAG);
         }
         try {
             ContentValues contentValues = new ContentValues();
@@ -5188,23 +7205,28 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             contentValues.put("storageName", credentialStorage.name);
             contentValues.put("storagePackageName", credentialStorage.packageName);
             contentValues.put(Constants.JSON_CLIENT_DATA_STATUS, (Integer) 1);
-            if (this.mEdmStorageProvider.getCount("UniversalCredentialInfoTable", contentValues) > 0) {
+            if (this.mEdmStorageProvider.getCount("UniversalCredentialInfoTable", contentValues)
+                    > 0) {
                 z = true;
             }
         } catch (Exception e2) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e2, new StringBuilder("isCredentialStorageLockedAsUser - Exception"), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e2, new StringBuilder("isCredentialStorageLockedAsUser - Exception"), TAG);
             }
         }
         if (DBG) {
-            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("isCredentialStorageLockedAsUser - isLocked : ", TAG, z);
+            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                    "isCredentialStorageLockedAsUser - isLocked : ", TAG, z);
         }
         return z;
     }
 
-    public final boolean isCredentialStorageManaged(ContextInfo contextInfo, CredentialStorage credentialStorage) {
+    public final boolean isCredentialStorageManaged(
+            ContextInfo contextInfo, CredentialStorage credentialStorage) {
         String str = TAG;
-        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(contextInfo, credentialStorage, str, "isCredentialStorageManaged is called....")) {
+        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(
+                contextInfo, credentialStorage, str, "isCredentialStorageManaged is called....")) {
             if (DBG) {
                 Log.i(str, "isCredentialStorageManaged - Invalid Arguments");
             }
@@ -5214,24 +7236,33 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         int i = contextInfo.mCallerUid;
         int userId = UserHandle.getUserId(i);
         if (DBG) {
-            AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(i, userId, "isCredentialStorageManaged is called for Caller UID-", " userId ", str);
+            AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(
+                    i,
+                    userId,
+                    "isCredentialStorageManaged is called for Caller UID-",
+                    " userId ",
+                    str);
         }
         String str2 = credentialStorage.signature;
         if (str2 == null || validateSignature(userId, credentialStorage.packageName, str2)) {
-            return isCredentialStorageManagedInternal(i, userId, credentialStorage.name, credentialStorage.packageName);
+            return isCredentialStorageManagedInternal(
+                    i, userId, credentialStorage.name, credentialStorage.packageName);
         }
         return false;
     }
 
-    public final boolean isCredentialStorageManagedAsUser(int i, CredentialStorage credentialStorage) {
+    public final boolean isCredentialStorageManagedAsUser(
+            int i, CredentialStorage credentialStorage) {
         checkCallerPermissionFor("isCredentialStorageManagedAsUser");
         String str = TAG;
         Log.i(str, "isCredentialStorageManagedAsUser is called....");
         if (isValidParam(credentialStorage)) {
             if (DBG) {
-                DirEncryptService$$ExternalSyntheticOutline0.m(i, "isCredentialStorageManagedAsUser is called for ContainerId-", str);
+                DirEncryptService$$ExternalSyntheticOutline0.m(
+                        i, "isCredentialStorageManagedAsUser is called for ContainerId-", str);
             }
-            return isCredentialStorageManagedInternal(-1, i, credentialStorage.name, credentialStorage.packageName);
+            return isCredentialStorageManagedInternal(
+                    -1, i, credentialStorage.name, credentialStorage.packageName);
         }
         if (!DBG) {
             return false;
@@ -5240,13 +7271,18 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         return false;
     }
 
-    public final boolean isCredentialStorageManagedInternal(int i, int i2, String str, String str2) {
+    public final boolean isCredentialStorageManagedInternal(
+            int i, int i2, String str, String str2) {
         boolean z = DBG;
         if (z) {
             Log.i(TAG, "isCredentialStorageManagedInternal");
         }
         if (z) {
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(DirEncryptService$$ExternalSyntheticOutline0.m(i2, "UserId - ", ", storageName - ", str, " and storagePackageName-"), str2, TAG);
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    DirEncryptService$$ExternalSyntheticOutline0.m(
+                            i2, "UserId - ", ", storageName - ", str, " and storagePackageName-"),
+                    str2,
+                    TAG);
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         boolean z2 = false;
@@ -5259,7 +7295,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 contentValues.put("userId", Integer.valueOf(i2));
                 contentValues.put("storageName", str);
                 contentValues.put("storagePackageName", str2);
-                if (this.mEdmStorageProvider.getCount("UniversalCredentialInfoTable", contentValues) > 0) {
+                if (this.mEdmStorageProvider.getCount("UniversalCredentialInfoTable", contentValues)
+                        > 0) {
                     z2 = true;
                 }
             } catch (Exception e) {
@@ -5269,7 +7306,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
             Binder.restoreCallingIdentity(clearCallingIdentity);
             if (DBG) {
-                ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("isCredentialStorageManagedInternal - status : ", TAG, z2);
+                ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                        "isCredentialStorageManagedInternal - status : ", TAG, z2);
             }
             return z2;
         } catch (Throwable th) {
@@ -5285,7 +7323,9 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             ContentValues contentValues = new ContentValues();
             contentValues.put("appPackage", str);
             contentValues.put("accessType", (Integer) 107);
-            if (this.mEdmStorageProvider.getCount("UniversalCredentialWhiteListTable", contentValues) <= 0) {
+            if (this.mEdmStorageProvider.getCount(
+                            "UniversalCredentialWhiteListTable", contentValues)
+                    <= 0) {
                 return false;
             }
             if (!DBG) {
@@ -5297,12 +7337,14 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             if (!DBG) {
                 return false;
             }
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("The exception occurs "), TAG);
             return false;
         }
     }
 
-    public final boolean isPackageFromExemptList(int i, CredentialStorage credentialStorage, int i2) {
+    public final boolean isPackageFromExemptList(
+            int i, CredentialStorage credentialStorage, int i2) {
         PackageInfo packageInfo;
         checkCallerPermissionFor("isPackageFromExemptList");
         long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -5311,13 +7353,16 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         z = false;
         try {
             try {
-                List<AppIdentity> packagesFromExemptListAsUser = getPackagesFromExemptListAsUser(UserHandle.getUserId(i), credentialStorage, i2);
-                if (packagesFromExemptListAsUser == null || packagesFromExemptListAsUser.size() <= 0) {
+                List<AppIdentity> packagesFromExemptListAsUser =
+                        getPackagesFromExemptListAsUser(
+                                UserHandle.getUserId(i), credentialStorage, i2);
+                if (packagesFromExemptListAsUser == null
+                        || packagesFromExemptListAsUser.size() <= 0) {
                     Log.i(TAG, "isPackageFromExemptList returned empty/null whitelist");
                 } else {
                     String[] packagesForUid = this.mPm.getPackagesForUid(i);
                     if (i == 1010) {
-                        packagesForUid = new String[]{"com.samsung.knox.virtual.wifi"};
+                        packagesForUid = new String[] {"com.samsung.knox.virtual.wifi"};
                         Log.i(TAG, "isPackageFromExemptList WIFI special block...");
                     }
                     String[] strArr = packagesForUid;
@@ -5330,24 +7375,52 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                                     String packageName = appIdentity.getPackageName();
                                     String signature = appIdentity.getSignature();
                                     String str2 = TAG;
-                                    Log.i(str2, "isPackageFromExemptList pkgName-" + str + " and DB packageName-" + packageName);
-                                    if (str != null && packageName != null && packageName.equals(str)) {
+                                    Log.i(
+                                            str2,
+                                            "isPackageFromExemptList pkgName-"
+                                                    + str
+                                                    + " and DB packageName-"
+                                                    + packageName);
+                                    if (str != null
+                                            && packageName != null
+                                            && packageName.equals(str)) {
                                         if (signature != null) {
-                                            Log.i(str2, "isPackageFromExemptList package matched. Now matching signature....");
-                                            Signature[] convertStringToSignature = convertStringToSignature(signature);
+                                            Log.i(
+                                                    str2,
+                                                    "isPackageFromExemptList package matched. Now"
+                                                        + " matching signature....");
+                                            Signature[] convertStringToSignature =
+                                                    convertStringToSignature(signature);
                                             if (convertStringToSignature == null) {
-                                                Log.i(str2, "isPackageFromExemptList - failed to convert signature from db.");
+                                                Log.i(
+                                                        str2,
+                                                        "isPackageFromExemptList - failed to"
+                                                            + " convert signature from db.");
                                             }
                                             try {
-                                                packageInfo = packageManager.getPackageInfo(str, 64L, UserHandle.getUserId(i));
+                                                packageInfo =
+                                                        packageManager.getPackageInfo(
+                                                                str, 64L, UserHandle.getUserId(i));
                                             } catch (Exception e) {
-                                                Log.i(TAG, "isPackageFromExemptList exception - " + e);
+                                                Log.i(
+                                                        TAG,
+                                                        "isPackageFromExemptList exception - " + e);
                                                 packageInfo = null;
                                             }
-                                            if (convertStringToSignature == null || packageInfo == null || !compareSignatures(packageInfo.signatures, convertStringToSignature)) {
-                                                Log.i(TAG, "isPackageFromExemptList signature mismatch happened...Ignoring package");
+                                            if (convertStringToSignature == null
+                                                    || packageInfo == null
+                                                    || !compareSignatures(
+                                                            packageInfo.signatures,
+                                                            convertStringToSignature)) {
+                                                Log.i(
+                                                        TAG,
+                                                        "isPackageFromExemptList signature mismatch"
+                                                            + " happened...Ignoring package");
                                             } else {
-                                                Log.i(TAG, "isPackageFromExemptList match found with signature matching...");
+                                                Log.i(
+                                                        TAG,
+                                                        "isPackageFromExemptList match found with"
+                                                            + " signature matching...");
                                             }
                                         } else {
                                             Log.i(str2, "isPackageFromExemptList match found ...");
@@ -5382,7 +7455,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
     }
 
     public final boolean isPluginActive(CredentialStorage credentialStorage) {
-        if (getCredentialStorageProvider(credentialStorage.name, credentialStorage.packageName) == null) {
+        if (getCredentialStorageProvider(credentialStorage.name, credentialStorage.packageName)
+                == null) {
             return false;
         }
         Log.i(TAG, "Plugin is active...");
@@ -5438,7 +7512,9 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         L44:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.ucm.UniversalCredentialManagerService.isSystemStorage(java.lang.String):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.ucm.UniversalCredentialManagerService.isSystemStorage(java.lang.String):boolean");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:53:0x0181 A[ADDED_TO_REGION] */
@@ -5449,19 +7525,25 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final int isValidCredentialStorage(int r18, com.samsung.android.knox.ucm.configurator.CredentialStorage r19) {
+    public final int isValidCredentialStorage(
+            int r18, com.samsung.android.knox.ucm.configurator.CredentialStorage r19) {
         /*
             Method dump skipped, instructions count: 547
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.ucm.UniversalCredentialManagerService.isValidCredentialStorage(int, com.samsung.android.knox.ucm.configurator.CredentialStorage):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.ucm.UniversalCredentialManagerService.isValidCredentialStorage(int,"
+                    + " com.samsung.android.knox.ucm.configurator.CredentialStorage):int");
     }
 
-    public final int lockCredentialStorage(ContextInfo contextInfo, CredentialStorage credentialStorage, boolean z) {
+    public final int lockCredentialStorage(
+            ContextInfo contextInfo, CredentialStorage credentialStorage, boolean z) {
         boolean z2;
         String str;
         String str2 = TAG;
-        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(contextInfo, credentialStorage, str2, "lockCredentialStorage is called....")) {
+        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(
+                contextInfo, credentialStorage, str2, "lockCredentialStorage is called....")) {
             if (!DBG) {
                 return -11;
             }
@@ -5469,11 +7551,13 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             return -11;
         }
         try {
-            KnoxAnalyticsData kAData = getKAData("lockCredentialStorage", credentialStorage.packageName);
+            KnoxAnalyticsData kAData =
+                    getKAData("lockCredentialStorage", credentialStorage.packageName);
             kAData.setProperty("enable", z);
             KnoxAnalytics.log(kAData);
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         enforceSecurityPermission(contextInfo, credentialStorage);
         int i = contextInfo.mCallerUid;
@@ -5483,7 +7567,12 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             try {
                 z2 = DBG;
                 if (z2) {
-                    Log.i(TAG, "lockCredentialStorage is called for Caller UID-" + i + " userId " + userId);
+                    Log.i(
+                            TAG,
+                            "lockCredentialStorage is called for Caller UID-"
+                                    + i
+                                    + " userId "
+                                    + userId);
                 }
                 str = credentialStorage.signature;
             } catch (Exception e2) {
@@ -5498,7 +7587,9 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 return -13;
             }
-            if (true != isCredentialStorageManagedInternal(i, userId, credentialStorage.name, credentialStorage.packageName)) {
+            if (true
+                    != isCredentialStorageManagedInternal(
+                            i, userId, credentialStorage.name, credentialStorage.packageName)) {
                 if (z2) {
                     Log.i(TAG, "lockCredentialStorage return false..");
                 }
@@ -5517,7 +7608,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    public final boolean lockCredentialStorageInternal(int i, int i2, CredentialStorage credentialStorage, boolean z) {
+    public final boolean lockCredentialStorageInternal(
+            int i, int i2, CredentialStorage credentialStorage, boolean z) {
         boolean z2 = false;
         try {
             ContentValues contentValues = new ContentValues();
@@ -5527,24 +7619,35 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             contentValues.put("storagePackageName", credentialStorage.packageName);
             ContentValues contentValues2 = new ContentValues();
             contentValues2.put(Constants.JSON_CLIENT_DATA_STATUS, Integer.valueOf(z ? 1 : 0));
-            z2 = this.mEdmStorageProvider.putValues("UniversalCredentialInfoTable", contentValues2, contentValues);
+            z2 =
+                    this.mEdmStorageProvider.putValues(
+                            "UniversalCredentialInfoTable", contentValues2, contentValues);
         } catch (Exception e) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("lockCredentialStorageInternal - Exception lockCredentialStorageInternal"), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e,
+                        new StringBuilder(
+                                "lockCredentialStorageInternal - Exception"
+                                    + " lockCredentialStorageInternal"),
+                        TAG);
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("lockCredentialStorageInternal retcode-", TAG, z2);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "lockCredentialStorageInternal retcode-", TAG, z2);
         return z2;
     }
 
-    public final int manageCredentialStorage(ContextInfo contextInfo, CredentialStorage credentialStorage, boolean z) {
+    public final int manageCredentialStorage(
+            ContextInfo contextInfo, CredentialStorage credentialStorage, boolean z) {
         return manageCredentialStorage(contextInfo, credentialStorage, z, true);
     }
 
-    public final int manageCredentialStorage(ContextInfo contextInfo, CredentialStorage credentialStorage, boolean z, boolean z2) {
+    public final int manageCredentialStorage(
+            ContextInfo contextInfo, CredentialStorage credentialStorage, boolean z, boolean z2) {
         String str;
         String str2 = TAG;
-        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(contextInfo, credentialStorage, str2, "manageCredentialStorage is called....")) {
+        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(
+                contextInfo, credentialStorage, str2, "manageCredentialStorage is called....")) {
             if (!DBG) {
                 return -11;
             }
@@ -5558,7 +7661,15 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         int userId = UserHandle.getUserId(i);
         boolean z3 = DBG;
         if (z3) {
-            FlashNotificationsController$$ExternalSyntheticOutline0.m(str2, ArrayUtils$$ExternalSyntheticOutline0.m(i, userId, "manageCredentialStorage is called for Caller UID-", " userId ", ", enable- "), z);
+            FlashNotificationsController$$ExternalSyntheticOutline0.m(
+                    str2,
+                    ArrayUtils$$ExternalSyntheticOutline0.m(
+                            i,
+                            userId,
+                            "manageCredentialStorage is called for Caller UID-",
+                            " userId ",
+                            ", enable- "),
+                    z);
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -5580,7 +7691,9 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 }
                 return -1;
             }
-            if (true != isCredentialStorageManagedInternal(i, userId, credentialStorage.name, credentialStorage.packageName)) {
+            if (true
+                    != isCredentialStorageManagedInternal(
+                            i, userId, credentialStorage.name, credentialStorage.packageName)) {
                 if (z3) {
                     Log.i(str2, "configureCredentialStorageInternal return false..");
                 }
@@ -5589,10 +7702,21 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
             IUcmService ucmService$1 = getUcmService$1();
             if (ucmService$1 != null) {
-                String keyguardStorageForCurrentUser = ucmService$1.getKeyguardStorageForCurrentUser(userId);
-                Log.i(str2, "configureCredentialStorageInternal keyguardCSName -" + keyguardStorageForCurrentUser + " and CS name -" + credentialStorage.name);
-                if (keyguardStorageForCurrentUser != null && keyguardStorageForCurrentUser.length() > 0 && credentialStorage.name.equalsIgnoreCase(keyguardStorageForCurrentUser)) {
-                    Log.i(str2, "configureCredentialStorageInternal : Keyguard is setup with CS. Can't unmanaged it.");
+                String keyguardStorageForCurrentUser =
+                        ucmService$1.getKeyguardStorageForCurrentUser(userId);
+                Log.i(
+                        str2,
+                        "configureCredentialStorageInternal keyguardCSName -"
+                                + keyguardStorageForCurrentUser
+                                + " and CS name -"
+                                + credentialStorage.name);
+                if (keyguardStorageForCurrentUser != null
+                        && keyguardStorageForCurrentUser.length() > 0
+                        && credentialStorage.name.equalsIgnoreCase(keyguardStorageForCurrentUser)) {
+                    Log.i(
+                            str2,
+                            "configureCredentialStorageInternal : Keyguard is setup with CS. Can't"
+                                + " unmanaged it.");
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                     return -26;
                 }
@@ -5633,7 +7757,12 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                                 break;
                             }
                             if (packagesForUid[i4].equals(str)) {
-                                Log.i(TAG, "admin license has renewed, admin-" + num + ", packageName-" + str);
+                                Log.i(
+                                        TAG,
+                                        "admin license has renewed, admin-"
+                                                + num
+                                                + ", packageName-"
+                                                + str);
                                 i3 = num.intValue();
                                 break;
                             }
@@ -5650,9 +7779,14 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                     try {
                         Bundle bundle = new Bundle();
                         bundle.putInt("adminUid", i3);
-                        Iterator it2 = ((List) this.expiredAdmins.get(Integer.valueOf(i3))).iterator();
+                        Iterator it2 =
+                                ((List) this.expiredAdmins.get(Integer.valueOf(i3))).iterator();
                         while (it2.hasNext()) {
-                            ucmService$1.notifyChangeToPlugin(new UniversalCredentialUtil.UcmUriBuilder((String) it2.next()).build(), 14, bundle);
+                            ucmService$1.notifyChangeToPlugin(
+                                    new UniversalCredentialUtil.UcmUriBuilder((String) it2.next())
+                                            .build(),
+                                    14,
+                                    bundle);
                         }
                     } catch (Exception e) {
                         Log.i(TAG, "notifyChangeToPlugin Exception " + e);
@@ -5666,11 +7800,34 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
             ArrayList arrayList = (ArrayList) getAdminIdRelatedToStorage(str);
             if (arrayList.size() > 0) {
-                if (packageManager.checkPermission("com.samsung.android.knox.permission.KNOX_UCM_PLUGIN_SERVICE", str, UserHandle.getUserId(callingUid)) == 0) {
+                if (packageManager.checkPermission(
+                                "com.samsung.android.knox.permission.KNOX_UCM_PLUGIN_SERVICE",
+                                str,
+                                UserHandle.getUserId(callingUid))
+                        == 0) {
                     Log.i(str2, "Plugin still have permission. Ignoring notification to MDM.");
                     return false;
                 }
-                if (packageManager.checkPermission("com.samsung.android.knox.permission.KNOX_UCM_ESE_MGMT", str, UserHandle.getUserId(callingUid)) != 0 && packageManager.checkPermission("com.samsung.android.knox.permission.KNOX_UCM_OTHER_MGMT", str, UserHandle.getUserId(callingUid)) != 0 && packageManager.checkPermission("com.samsung.android.knox.permission.KNOX_UCM_PRIVILEGED_MGMT", str, UserHandle.getUserId(callingUid)) != 0 && packageManager.checkPermission("com.samsung.android.knox.permission.KNOX_UCM_MGMT", str, UserHandle.getUserId(callingUid)) != 0) {
+                if (packageManager.checkPermission(
+                                        "com.samsung.android.knox.permission.KNOX_UCM_ESE_MGMT",
+                                        str,
+                                        UserHandle.getUserId(callingUid))
+                                != 0
+                        && packageManager.checkPermission(
+                                        "com.samsung.android.knox.permission.KNOX_UCM_OTHER_MGMT",
+                                        str,
+                                        UserHandle.getUserId(callingUid))
+                                != 0
+                        && packageManager.checkPermission(
+                                        "com.samsung.android.knox.permission.KNOX_UCM_PRIVILEGED_MGMT",
+                                        str,
+                                        UserHandle.getUserId(callingUid))
+                                != 0
+                        && packageManager.checkPermission(
+                                        "com.samsung.android.knox.permission.KNOX_UCM_MGMT",
+                                        str,
+                                        UserHandle.getUserId(callingUid))
+                                != 0) {
                     Iterator it3 = arrayList.iterator();
                     while (it3.hasNext()) {
                         Integer num2 = (Integer) it3.next();
@@ -5686,7 +7843,9 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                                 String str4 = packagesForUid2[i5];
                                 String str5 = TAG;
                                 Log.i(str5, "Sending event update to package " + str4);
-                                Intent intent = new Intent("com.samsung.android.knox.intent.action.UCM_NOTIFY_EVENT");
+                                Intent intent =
+                                        new Intent(
+                                                "com.samsung.android.knox.intent.action.UCM_NOTIFY_EVENT");
                                 intent.setPackage(str4);
                                 Bundle bundle2 = new Bundle();
                                 Iterator it4 = it3;
@@ -5697,10 +7856,24 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                                 } catch (Exception e2) {
                                     Log.i(TAG, "The exception occurs " + e2.getMessage());
                                 }
-                                if (packageManager.checkPermission("com.samsung.android.knox.permission.KNOX_UCM_OTHER_MGMT", str, UserHandle.getUserId(num2.intValue())) == 0) {
-                                    this.mContext.sendBroadcastAsUser(intent, new UserHandle(UserHandle.getUserId(num2.intValue())), "com.samsung.android.knox.permission.KNOX_UCM_OTHER_MGMT");
-                                } else if (packageManager.checkPermission("com.samsung.android.knox.permission.KNOX_UCM_MGMT", str, UserHandle.getUserId(num2.intValue())) == 0) {
-                                    this.mContext.sendBroadcastAsUser(intent, new UserHandle(UserHandle.getUserId(num2.intValue())), "com.samsung.android.knox.permission.KNOX_UCM_MGMT");
+                                if (packageManager.checkPermission(
+                                                "com.samsung.android.knox.permission.KNOX_UCM_OTHER_MGMT",
+                                                str,
+                                                UserHandle.getUserId(num2.intValue()))
+                                        == 0) {
+                                    this.mContext.sendBroadcastAsUser(
+                                            intent,
+                                            new UserHandle(UserHandle.getUserId(num2.intValue())),
+                                            "com.samsung.android.knox.permission.KNOX_UCM_OTHER_MGMT");
+                                } else if (packageManager.checkPermission(
+                                                "com.samsung.android.knox.permission.KNOX_UCM_MGMT",
+                                                str,
+                                                UserHandle.getUserId(num2.intValue()))
+                                        == 0) {
+                                    this.mContext.sendBroadcastAsUser(
+                                            intent,
+                                            new UserHandle(UserHandle.getUserId(num2.intValue())),
+                                            "com.samsung.android.knox.permission.KNOX_UCM_MGMT");
                                 } else {
                                     Log.i(str5, "admin does not have proper UCM permission");
                                     i5++;
@@ -5731,7 +7904,12 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                             break;
                         }
                         if (packagesForUid3[i6].equals(str)) {
-                            Log.i(TAG, "admin license has expired, admin-" + num3 + ", packageName-" + str);
+                            Log.i(
+                                    TAG,
+                                    "admin license has expired, admin-"
+                                            + num3
+                                            + ", packageName-"
+                                            + str);
                             processAdminLicenseExpiry(num3.intValue());
                             break;
                         }
@@ -5741,23 +7919,26 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
             return false;
         } catch (Exception e3) {
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e3, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e3, new StringBuilder("The exception occurs "), TAG);
             return false;
         }
-        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e3, new StringBuilder("The exception occurs "), TAG);
+        RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                e3, new StringBuilder("The exception occurs "), TAG);
         return false;
     }
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void notifyToAddSystemService(String str, IBinder iBinder) {
-    }
+    public final void notifyToAddSystemService(String str, IBinder iBinder) {}
 
     public final void notifyToPlugin(int i, CredentialStorage credentialStorage, int i2) {
         String str = TAG;
-        AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(i, i2, "notifyToPlugin eventId-10, adminUid-", ", userId-", str);
+        AccountsDb$CeDatabaseHelper$$ExternalSyntheticOutline0.m(
+                i, i2, "notifyToPlugin eventId-10, adminUid-", ", userId-", str);
         try {
             Bundle bundle = new Bundle();
-            String build = new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name).build();
+            String build =
+                    new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name).build();
             bundle.putInt("adminUid", i);
             bundle.putInt("userId", i2);
             String[] aliasesInternal = getAliasesInternal(i, credentialStorage, i2);
@@ -5771,13 +7952,29 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 ucmService$1.notifyChangeToPlugin(build, 10, bundle);
             }
         } catch (Exception e) {
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("The exception occurs "), TAG);
         }
     }
 
     public final void notifyUCMConfigStatus(int i, String str, Bundle bundle) {
         UserHandle userHandle = new UserHandle(UserHandle.getUserId(i));
-        if (notifyUCMConfigStatusByPermission(str, bundle, userHandle, "com.samsung.android.knox.permission.KNOX_UCM_ESE_MGMT") || notifyUCMConfigStatusByPermission(str, bundle, userHandle, "com.samsung.android.knox.permission.KNOX_UCM_OTHER_MGMT") || notifyUCMConfigStatusByPermission(str, bundle, userHandle, "com.samsung.android.knox.permission.KNOX_UCM_MGMT") || 5250 != i) {
+        if (notifyUCMConfigStatusByPermission(
+                        str,
+                        bundle,
+                        userHandle,
+                        "com.samsung.android.knox.permission.KNOX_UCM_ESE_MGMT")
+                || notifyUCMConfigStatusByPermission(
+                        str,
+                        bundle,
+                        userHandle,
+                        "com.samsung.android.knox.permission.KNOX_UCM_OTHER_MGMT")
+                || notifyUCMConfigStatusByPermission(
+                        str,
+                        bundle,
+                        userHandle,
+                        "com.samsung.android.knox.permission.KNOX_UCM_MGMT")
+                || 5250 != i) {
             return;
         }
         Context context = this.mContext;
@@ -5801,7 +7998,10 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 int i2 = bundle.getInt("adminUid", 0);
                 int i3 = bundle.getInt("status_code", -1);
                 Log.i(str, "notifyUCMConfigStatus requestId -" + i + ", adminUid-" + i2);
-                if (i2 != 0 && i != 0 && i3 != -1 && (packagesForUid = this.mPm.getPackagesForUid(i2)) != null) {
+                if (i2 != 0
+                        && i != 0
+                        && i3 != -1
+                        && (packagesForUid = this.mPm.getPackagesForUid(i2)) != null) {
                     for (String str2 : packagesForUid) {
                         Log.i(TAG, "Sending config update to package " + str2);
                         try {
@@ -5819,9 +8019,12 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    public final boolean notifyUCMConfigStatusByPermission(String str, Bundle bundle, UserHandle userHandle, String str2) {
+    public final boolean notifyUCMConfigStatusByPermission(
+            String str, Bundle bundle, UserHandle userHandle, String str2) {
         try {
-            if (AppGlobals.getPackageManager().checkPermission(str2, str, userHandle.getIdentifier()) != 0) {
+            if (AppGlobals.getPackageManager()
+                            .checkPermission(str2, str, userHandle.getIdentifier())
+                    != 0) {
                 return false;
             }
             Log.i(TAG, "Package has UCM permission. : ".concat(str2));
@@ -5838,8 +8041,7 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
     }
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void onAdminAdded(int i) {
-    }
+    public final void onAdminAdded(int i) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
     public final void onAdminRemoved(int i) {
@@ -5858,40 +8060,61 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         this.mUCSMHandler.sendMessage(obtainMessage);
     }
 
-    public final void performCredentialStorageCleanup(int i, CredentialStorage credentialStorage, int i2) {
+    public final void performCredentialStorageCleanup(
+            int i, CredentialStorage credentialStorage, int i2) {
         boolean z;
         String[] strArr = {"adminUid", "userId", "storageName", "storagePackageName"};
-        String[] strArr2 = {String.valueOf(i), String.valueOf(i2), credentialStorage.name, credentialStorage.packageName};
+        String[] strArr2 = {
+            String.valueOf(i),
+            String.valueOf(i2),
+            credentialStorage.name,
+            credentialStorage.packageName
+        };
         try {
-            z = this.mEdmStorageProvider.deleteDataByFields("UniversalCredentialCertificateTable", strArr, strArr2);
+            z =
+                    this.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialCertificateTable", strArr, strArr2);
         } catch (Exception e) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("The exception occurs "), TAG);
             }
             z = false;
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("performCredentialStorageCleanup Clean certificate status-", TAG, z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "performCredentialStorageCleanup Clean certificate status-", TAG, z);
         try {
-            z = this.mEdmStorageProvider.deleteDataByFields("UniversalCredentialWhiteListTable", strArr, strArr2);
+            z =
+                    this.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialWhiteListTable", strArr, strArr2);
         } catch (Exception e2) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e2, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e2, new StringBuilder("The exception occurs "), TAG);
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("performCredentialStorageCleanup WhiteList APP status-", TAG, z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "performCredentialStorageCleanup WhiteList APP status-", TAG, z);
         try {
-            z = this.mEdmStorageProvider.deleteDataByFields("UniversalCredentialDefaultInstallTable", strArr, strArr2);
+            z =
+                    this.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialDefaultInstallTable", strArr, strArr2);
         } catch (Exception e3) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e3, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e3, new StringBuilder("The exception occurs "), TAG);
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("performCredentialStorageCleanup Default Install status-", TAG, z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "performCredentialStorageCleanup Default Install status-", TAG, z);
         try {
-            z = this.mEdmStorageProvider.deleteDataByFields("UniversalCredentialExemptTable", strArr, strArr2);
+            z =
+                    this.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialExemptTable", strArr, strArr2);
         } catch (Exception e4) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e4, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e4, new StringBuilder("The exception occurs "), TAG);
             }
         }
         Log.i(TAG, "performCredentialStorageCleanup Default Install status-" + z);
@@ -5904,7 +8127,12 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         Log.i(TAG, "getStoragesRelatedToAdminId adminId-" + i);
         ArrayList arrayList = new ArrayList();
         try {
-            ArrayList dataByFields = this.mEdmStorageProvider.getDataByFields("UniversalCredentialInfoTable", new String[]{"adminUid"}, new String[]{String.valueOf(i)}, new String[]{"storageName"});
+            ArrayList dataByFields =
+                    this.mEdmStorageProvider.getDataByFields(
+                            "UniversalCredentialInfoTable",
+                            new String[] {"adminUid"},
+                            new String[] {String.valueOf(i)},
+                            new String[] {"storageName"});
             if (dataByFields.size() > 0) {
                 Iterator it = dataByFields.iterator();
                 while (it.hasNext()) {
@@ -5913,7 +8141,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
         } catch (Exception e) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("The exception occurs "), TAG);
             }
         }
         if (this.expiredAdmins.containsKey(Integer.valueOf(i)) || arrayList.size() <= 0) {
@@ -5930,19 +8159,29 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 bundle.putInt("adminUid", i);
                 Iterator it2 = arrayList.iterator();
                 while (it2.hasNext()) {
-                    ucmService$1.notifyChangeToPlugin(new UniversalCredentialUtil.UcmUriBuilder((String) it2.next()).build(), 13, bundle);
+                    ucmService$1.notifyChangeToPlugin(
+                            new UniversalCredentialUtil.UcmUriBuilder((String) it2.next()).build(),
+                            13,
+                            bundle);
                 }
             } catch (Exception e2) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e2, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e2, new StringBuilder("The exception occurs "), TAG);
             }
         }
     }
 
-    public final void processPackagesForPlugin(int i, int i2, CredentialStorage credentialStorage, Bundle bundle) {
+    public final void processPackagesForPlugin(
+            int i, int i2, CredentialStorage credentialStorage, Bundle bundle) {
         PackageInfo packageInfo;
-        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "processPackagesForPlugin - adminUid", ", userId-", ", Storage -"), credentialStorage.name, TAG);
+        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                ArrayUtils$$ExternalSyntheticOutline0.m(
+                        i, i2, "processPackagesForPlugin - adminUid", ", userId-", ", Storage -"),
+                credentialStorage.name,
+                TAG);
         try {
-            List adminIdRelatedToStorageAsUser = getAdminIdRelatedToStorageAsUser(i2, credentialStorage);
+            List adminIdRelatedToStorageAsUser =
+                    getAdminIdRelatedToStorageAsUser(i2, credentialStorage);
             ArrayList arrayList = new ArrayList();
             Iterator it = ((ArrayList) adminIdRelatedToStorageAsUser).iterator();
             while (it.hasNext()) {
@@ -5955,13 +8194,18 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                     if (num.intValue() == i) {
                         Log.i(str, "Ignoring current adminUid  - " + num);
                     } else {
-                        ArrayList whitelistedData = getWhitelistedData(num.intValue(), i2, 103, credentialStorage, null);
+                        ArrayList whitelistedData =
+                                getWhitelistedData(
+                                        num.intValue(), i2, 103, credentialStorage, null);
                         if (whitelistedData.size() > 0) {
                             Iterator it2 = whitelistedData.iterator();
                             while (it2.hasNext()) {
-                                String asString = ((ContentValues) it2.next()).getAsString("appPackage");
+                                String asString =
+                                        ((ContentValues) it2.next()).getAsString("appPackage");
                                 if (!arrayList.contains(asString)) {
-                                    Log.i(TAG, "Adding app in whitelistPkgsByOtherAdmin -" + asString);
+                                    Log.i(
+                                            TAG,
+                                            "Adding app in whitelistPkgsByOtherAdmin -" + asString);
                                     arrayList.add(asString);
                                 }
                             }
@@ -6018,12 +8262,19 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 bundle.putIntArray("allowed_packages", iArr);
             }
         } catch (Exception e2) {
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e2, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e2, new StringBuilder("The exception occurs "), TAG);
         }
     }
 
     public final void registerReceiver() {
-        IntentFilter m = VcnManagementService$$ExternalSyntheticOutline0.m("android.intent.action.USER_REMOVED", "android.intent.action.LOCKED_BOOT_COMPLETED", "android.intent.action.ACTION_SHUTDOWN", "android.intent.action.SCREEN_ON", "android.intent.action.SCREEN_OFF");
+        IntentFilter m =
+                VcnManagementService$$ExternalSyntheticOutline0.m(
+                        "android.intent.action.USER_REMOVED",
+                        "android.intent.action.LOCKED_BOOT_COMPLETED",
+                        "android.intent.action.ACTION_SHUTDOWN",
+                        "android.intent.action.SCREEN_ON",
+                        "android.intent.action.SCREEN_OFF");
         m.addAction("android.intent.action.USER_PRESENT");
         m.addAction("android.intent.action.DEVICE_LOCKED_CHANGED");
         Context context = this.mContext;
@@ -6033,7 +8284,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("android.intent.action.PACKAGE_REMOVED");
         intentFilter.addDataScheme("package");
-        this.mContext.registerReceiverAsUser(this.mPackageRemovedReceiver, userHandle, intentFilter, null, null);
+        this.mContext.registerReceiverAsUser(
+                this.mPackageRemovedReceiver, userHandle, intentFilter, null, null);
         this.mIsSystemReceiverRegistered = true;
     }
 
@@ -6043,7 +8295,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final int removeCertificatefromProvider(int r9, int r10, java.lang.String r11, java.lang.String r12, java.lang.String r13) {
+    public final int removeCertificatefromProvider(
+            int r9, int r10, java.lang.String r11, java.lang.String r12, java.lang.String r13) {
         /*
             r8 = this;
             java.lang.String r0 = "wifi"
@@ -6147,10 +8400,14 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         Ld8:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.ucm.UniversalCredentialManagerService.removeCertificatefromProvider(int, int, java.lang.String, java.lang.String, java.lang.String):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.ucm.UniversalCredentialManagerService.removeCertificatefromProvider(int,"
+                    + " int, java.lang.String, java.lang.String, java.lang.String):int");
     }
 
-    public final boolean removeCredentialStorageLockType(int i, CredentialStorage credentialStorage, int i2) {
+    public final boolean removeCredentialStorageLockType(
+            int i, CredentialStorage credentialStorage, int i2) {
         boolean z;
         String str = credentialStorage.name;
         String str2 = credentialStorage.packageName;
@@ -6160,30 +8417,42 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             StringBuilder sb = new StringBuilder("removeCredentialStorageLockType adminUid - ");
             sb.append(i);
             sb.append(" ContainerId - ");
-            AlarmManagerService$DeliveryTracker$$ExternalSyntheticOutline0.m(i2, ", Storage Name- ", str, ", Storage Package name - ", sb);
+            AlarmManagerService$DeliveryTracker$$ExternalSyntheticOutline0.m(
+                    i2, ", Storage Name- ", str, ", Storage Package name - ", sb);
             DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(sb, str2, str3);
         }
         try {
-            z = this.mEdmStorageProvider.deleteDataByFields("UniversalCredentialEnabledLockTypeTable", new String[]{"adminUid", "userId", "storageName", "storagePackageName"}, new String[]{String.valueOf(i), String.valueOf(i2), str, str2});
+            z =
+                    this.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialEnabledLockTypeTable",
+                            new String[] {
+                                "adminUid", "userId", "storageName", "storagePackageName"
+                            },
+                            new String[] {String.valueOf(i), String.valueOf(i2), str, str2});
             Log.i(TAG, "removeCredentialStorageLockType result - " + z);
         } catch (Exception e) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("The exception occurs "), TAG);
             }
             z = false;
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("removeCredentialStorageLockType retcode-", TAG, z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "removeCredentialStorageLockType retcode-", TAG, z);
         return z;
     }
 
-    public final boolean removeExemptPackages(CredentialStorage credentialStorage, List list, int i, int i2, int i3) {
+    public final boolean removeExemptPackages(
+            CredentialStorage credentialStorage, List list, int i, int i2, int i3) {
         boolean z = DBG;
         if (z) {
             Log.i(TAG, "removeExemptPackages is called...");
         }
         if (z) {
             String str = TAG;
-            StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "adminId - ", " ContainerId - ", " Storage name - ");
+            StringBuilder m =
+                    ArrayUtils$$ExternalSyntheticOutline0.m(
+                            i, i2, "adminId - ", " ContainerId - ", " Storage name - ");
             m.append(credentialStorage.name);
             m.append(" Storage Package - ");
             m.append(credentialStorage.packageName);
@@ -6195,10 +8464,27 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         if (list == null || list.size() <= 0) {
             Log.i(TAG, "removeExemptPackages clearing all packages....");
             try {
-                z2 = this.mEdmStorageProvider.deleteDataByFields("UniversalCredentialExemptTable", new String[]{"adminUid", "userId", "storageName", "storagePackageName", "exemptType"}, new String[]{String.valueOf(i), String.valueOf(i2), credentialStorage.name, credentialStorage.packageName, String.valueOf(i3)});
+                z2 =
+                        this.mEdmStorageProvider.deleteDataByFields(
+                                "UniversalCredentialExemptTable",
+                                new String[] {
+                                    "adminUid",
+                                    "userId",
+                                    "storageName",
+                                    "storagePackageName",
+                                    "exemptType"
+                                },
+                                new String[] {
+                                    String.valueOf(i),
+                                    String.valueOf(i2),
+                                    credentialStorage.name,
+                                    credentialStorage.packageName,
+                                    String.valueOf(i3)
+                                });
             } catch (Exception e) {
                 if (DBG) {
-                    RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+                    RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                            e, new StringBuilder("The exception occurs "), TAG);
                 }
             }
         } else {
@@ -6209,9 +8495,28 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 String str2 = TAG;
                 Log.i(str2, "removeExemptPackages - pkg : " + appIdentity.getPackageName());
                 if (appIdentity.getPackageName() != null) {
-                    DirEncryptService$$ExternalSyntheticOutline0.m(i3, "removeExemptPackages exempt type-", str2);
+                    DirEncryptService$$ExternalSyntheticOutline0.m(
+                            i3, "removeExemptPackages exempt type-", str2);
                     try {
-                        z2 = this.mEdmStorageProvider.deleteDataByFields("UniversalCredentialExemptTable", new String[]{"adminUid", "userId", "storageName", "storagePackageName", "exemptType", "appPackage"}, new String[]{String.valueOf(i), String.valueOf(i2), credentialStorage.name, credentialStorage.packageName, String.valueOf(i3), appIdentity.getPackageName()});
+                        z2 =
+                                this.mEdmStorageProvider.deleteDataByFields(
+                                        "UniversalCredentialExemptTable",
+                                        new String[] {
+                                            "adminUid",
+                                            "userId",
+                                            "storageName",
+                                            "storagePackageName",
+                                            "exemptType",
+                                            "appPackage"
+                                        },
+                                        new String[] {
+                                            String.valueOf(i),
+                                            String.valueOf(i2),
+                                            credentialStorage.name,
+                                            credentialStorage.packageName,
+                                            String.valueOf(i3),
+                                            appIdentity.getPackageName()
+                                        });
                         if (!z2) {
                             Log.i(str2, "removeExemptPackages - failed to remove record...");
                             break;
@@ -6219,13 +8524,19 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                         continue;
                     } catch (Exception e2) {
                         if (DBG) {
-                            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e2, new StringBuilder("removeExemptPackages - Exception delete"), TAG);
+                            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                    .m(
+                                            e2,
+                                            new StringBuilder(
+                                                    "removeExemptPackages - Exception delete"),
+                                            TAG);
                         }
                     }
                 }
             }
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("removeExemptPackages retcode-", TAG, z2);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "removeExemptPackages retcode-", TAG, z2);
         return z2;
     }
 
@@ -6241,7 +8552,12 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         try {
             try {
                 if (DBG) {
-                    Log.i(str, "removeODEConfigForWPC is called for Caller UID-" + callingUid + " mContainerId " + userId);
+                    Log.i(
+                            str,
+                            "removeODEConfigForWPC is called for Caller UID-"
+                                    + callingUid
+                                    + " mContainerId "
+                                    + userId);
                 }
                 IUcmService ucmService$1 = getUcmService$1();
                 if (ucmService$1 != null) {
@@ -6268,22 +8584,39 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final int removePackagesFromExemptList(com.samsung.android.knox.ContextInfo r13, com.samsung.android.knox.ucm.configurator.CredentialStorage r14, int r15, java.util.List r16) {
+    public final int removePackagesFromExemptList(
+            com.samsung.android.knox.ContextInfo r13,
+            com.samsung.android.knox.ucm.configurator.CredentialStorage r14,
+            int r15,
+            java.util.List r16) {
         /*
             Method dump skipped, instructions count: 258
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.ucm.UniversalCredentialManagerService.removePackagesFromExemptList(com.samsung.android.knox.ContextInfo, com.samsung.android.knox.ucm.configurator.CredentialStorage, int, java.util.List):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.ucm.UniversalCredentialManagerService.removePackagesFromExemptList(com.samsung.android.knox.ContextInfo,"
+                    + " com.samsung.android.knox.ucm.configurator.CredentialStorage, int,"
+                    + " java.util.List):int");
     }
 
-    public final int removePackagesFromWhiteList(ContextInfo contextInfo, CredentialStorage credentialStorage, List list, Bundle bundle) {
+    public final int removePackagesFromWhiteList(
+            ContextInfo contextInfo,
+            CredentialStorage credentialStorage,
+            List list,
+            Bundle bundle) {
         boolean z;
         boolean z2;
         String str;
         int i;
         String str2;
         String str3 = TAG;
-        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(contextInfo, credentialStorage, str3, "removePackagesFromWhiteList is called....") || list == null) {
+        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(
+                        contextInfo,
+                        credentialStorage,
+                        str3,
+                        "removePackagesFromWhiteList is called....")
+                || list == null) {
             if (!DBG) {
                 return -11;
             }
@@ -6291,9 +8624,11 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             return -11;
         }
         try {
-            KnoxAnalytics.log(getKAData("removePackagesFromWhiteList", credentialStorage.packageName));
+            KnoxAnalytics.log(
+                    getKAData("removePackagesFromWhiteList", credentialStorage.packageName));
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         int i2 = contextInfo.mCallerUid;
         int userId = UserHandle.getUserId(i2);
@@ -6310,7 +8645,12 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             try {
                 z2 = DBG;
                 if (z2) {
-                    Log.i(TAG, "removePackagesFromWhiteList is called for Caller UID-" + i2 + " userId " + userId);
+                    Log.i(
+                            TAG,
+                            "removePackagesFromWhiteList is called for Caller UID-"
+                                    + i2
+                                    + " userId "
+                                    + userId);
                 }
                 str = credentialStorage.signature;
             } catch (Exception e2) {
@@ -6325,7 +8665,13 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 return -13;
             }
-            if (true != isCredentialStorageManagedInternal(i2, userId, credentialStorage.name, credentialStorage.packageName) && !z) {
+            if (true
+                            != isCredentialStorageManagedInternal(
+                                    i2,
+                                    userId,
+                                    credentialStorage.name,
+                                    credentialStorage.packageName)
+                    && !z) {
                 if (z2) {
                     Log.i(TAG, "removePackagesFromWhiteList return false..");
                 }
@@ -6346,16 +8692,28 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
                 Log.i(str4, "removePackagesFromWhiteList alias-" + string);
                 if (TextUtils.isEmpty(string)) {
                     if (z2) {
-                        Log.i(str4, "removePackagesFromWhiteList alias name not provided for Certificate access_type");
+                        Log.i(
+                                str4,
+                                "removePackagesFromWhiteList alias name not provided for"
+                                    + " Certificate access_type");
                     }
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                     return -16;
                 }
                 str2 = string;
                 i = i3;
-                if (true != checkCredentialStorageAliasForAdmin(i2, userId, credentialStorage.name, credentialStorage.packageName, str2)) {
+                if (true
+                        != checkCredentialStorageAliasForAdmin(
+                                i2,
+                                userId,
+                                credentialStorage.name,
+                                credentialStorage.packageName,
+                                str2)) {
                     if (z2) {
-                        Log.i(str4, "removePackagesFromWhiteList - alias not exist for credential storage...");
+                        Log.i(
+                                str4,
+                                "removePackagesFromWhiteList - alias not exist for credential"
+                                    + " storage...");
                     }
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                     return -14;
@@ -6376,7 +8734,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    public final boolean removeWhiteListPackages(CredentialStorage credentialStorage, List list, int i, int i2, int i3, String str) {
+    public final boolean removeWhiteListPackages(
+            CredentialStorage credentialStorage, List list, int i, int i2, int i3, String str) {
         String str2;
         CredentialStorage credentialStorage2 = credentialStorage;
         int i4 = i3;
@@ -6387,10 +8746,13 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
         if (z) {
             String str4 = TAG;
-            StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "adminId - ", " ContainerId - ", " Storage name - ");
+            StringBuilder m =
+                    ArrayUtils$$ExternalSyntheticOutline0.m(
+                            i, i2, "adminId - ", " ContainerId - ", " Storage name - ");
             m.append(credentialStorage2.name);
             m.append(" Storage Package - ");
-            AccessibilityManagerService$$ExternalSyntheticOutline0.m(i4, credentialStorage2.packageName, ", accessType-", ", alias-", m);
+            AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                    i4, credentialStorage2.packageName, ", accessType-", ", alias-", m);
             DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(m, str3, str4);
         }
         Log.i(TAG, "removeWhiteListPackages - WhiteList app size -" + list.size());
@@ -6402,30 +8764,71 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             Log.i(str5, "removeWhiteListPackages - pkg : " + appIdentity.getPackageName());
             if (appIdentity.getPackageName() != null) {
                 if (str3 == null) {
-                    DirEncryptService$$ExternalSyntheticOutline0.m(i4, "removeWhiteListPackages access_type-", str5);
+                    DirEncryptService$$ExternalSyntheticOutline0.m(
+                            i4, "removeWhiteListPackages access_type-", str5);
                     try {
-                        z2 = this.mEdmStorageProvider.deleteDataByFields("UniversalCredentialWhiteListTable", new String[]{"adminUid", "userId", "storageName", "storagePackageName", "accessType", "appPackage"}, new String[]{String.valueOf(i), String.valueOf(i2), credentialStorage2.name, credentialStorage2.packageName, String.valueOf(i3), appIdentity.getPackageName()});
+                        z2 =
+                                this.mEdmStorageProvider.deleteDataByFields(
+                                        "UniversalCredentialWhiteListTable",
+                                        new String[] {
+                                            "adminUid",
+                                            "userId",
+                                            "storageName",
+                                            "storagePackageName",
+                                            "accessType",
+                                            "appPackage"
+                                        },
+                                        new String[] {
+                                            String.valueOf(i),
+                                            String.valueOf(i2),
+                                            credentialStorage2.name,
+                                            credentialStorage2.packageName,
+                                            String.valueOf(i3),
+                                            appIdentity.getPackageName()
+                                        });
                         if (!z2) {
                             Log.i(str5, "removeWhiteListPackages - failed to remove record...");
                             break;
                         }
                     } catch (Exception e) {
                         if (DBG) {
-                            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+                            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                    .m(e, new StringBuilder("The exception occurs "), TAG);
                         }
                     }
                 } else {
                     Log.i(str5, "removeWhiteListPackages access_type-" + i4 + " and alias-" + str3);
                     str2 = "UniversalCredentialWhiteListTable";
                     try {
-                        z2 = this.mEdmStorageProvider.deleteDataByFields(str2, new String[]{"adminUid", "userId", "storageName", "storagePackageName", "accessType", "alias", "appPackage"}, new String[]{String.valueOf(i), String.valueOf(i2), credentialStorage2.name, credentialStorage2.packageName, String.valueOf(i3), str, appIdentity.getPackageName()});
+                        z2 =
+                                this.mEdmStorageProvider.deleteDataByFields(
+                                        str2,
+                                        new String[] {
+                                            "adminUid",
+                                            "userId",
+                                            "storageName",
+                                            "storagePackageName",
+                                            "accessType",
+                                            "alias",
+                                            "appPackage"
+                                        },
+                                        new String[] {
+                                            String.valueOf(i),
+                                            String.valueOf(i2),
+                                            credentialStorage2.name,
+                                            credentialStorage2.packageName,
+                                            String.valueOf(i3),
+                                            str,
+                                            appIdentity.getPackageName()
+                                        });
                         if (!z2) {
                             Log.i(str5, "removeWhiteListPackages - failed to remove record...");
                             break;
                         }
                     } catch (Exception e2) {
                         if (DBG) {
-                            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e2, new StringBuilder("The exception occurs "), TAG);
+                            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0
+                                    .m(e2, new StringBuilder("The exception occurs "), TAG);
                         }
                     }
                 }
@@ -6437,14 +8840,17 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         str2 = "UniversalCredentialWhiteListTable";
         this.mExistWhitelist = checkCountFromEdmDB(str2);
         updateUcmCryptoProp();
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("removeWhiteListPackages retcode-", TAG, z2);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "removeWhiteListPackages retcode-", TAG, z2);
         return z2;
     }
 
-    public final int setAuthType(ContextInfo contextInfo, CredentialStorage credentialStorage, int i) {
+    public final int setAuthType(
+            ContextInfo contextInfo, CredentialStorage credentialStorage, int i) {
         String str;
         String str2 = TAG;
-        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(contextInfo, credentialStorage, str2, "setAuthType is called....")) {
+        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(
+                contextInfo, credentialStorage, str2, "setAuthType is called....")) {
             if (!DBG) {
                 return -11;
             }
@@ -6460,7 +8866,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
             KnoxAnalytics.log(kAData);
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         enforceSecurityPermission(contextInfo, credentialStorage);
         int i2 = contextInfo.mCallerUid;
@@ -6483,9 +8890,16 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
             boolean z = DBG;
             if (z) {
-                Log.i(TAG, "setAuthType is called for Caller UID-" + i2 + " mContainerId " + contextInfo.mContainerId);
+                Log.i(
+                        TAG,
+                        "setAuthType is called for Caller UID-"
+                                + i2
+                                + " mContainerId "
+                                + contextInfo.mContainerId);
             }
-            if (true != isCredentialStorageManagedInternal(i2, userId, credentialStorage.name, credentialStorage.packageName)) {
+            if (true
+                    != isCredentialStorageManagedInternal(
+                            i2, userId, credentialStorage.name, credentialStorage.packageName)) {
                 if (z) {
                     Log.i(TAG, "setAuthType return false..");
                 }
@@ -6508,7 +8922,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    public final boolean setAuthTypeInternal(int i, int i2, CredentialStorage credentialStorage, int i3) {
+    public final boolean setAuthTypeInternal(
+            int i, int i2, CredentialStorage credentialStorage, int i3) {
         boolean z;
         try {
             ContentValues contentValues = new ContentValues();
@@ -6518,21 +8933,27 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             contentValues.put("storagePackageName", credentialStorage.packageName);
             ContentValues contentValues2 = new ContentValues();
             contentValues2.put("storageAuthType", Integer.valueOf(i3));
-            z = this.mEdmStorageProvider.putValues("UniversalCredentialInfoTable", contentValues2, contentValues);
+            z =
+                    this.mEdmStorageProvider.putValues(
+                            "UniversalCredentialInfoTable", contentValues2, contentValues);
         } catch (Exception e) {
             if (DBG) {
-                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+                RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("The exception occurs "), TAG);
             }
             z = false;
         }
-        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("setAuthTypeInternal retcode-", TAG, z);
+        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                "setAuthTypeInternal retcode-", TAG, z);
         return z;
     }
 
-    public final Bundle setCredentialStorageProperty(ContextInfo contextInfo, CredentialStorage credentialStorage, Bundle bundle) {
+    public final Bundle setCredentialStorageProperty(
+            ContextInfo contextInfo, CredentialStorage credentialStorage, Bundle bundle) {
         String str;
         String str2 = TAG;
-        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(contextInfo, credentialStorage, str2, "setPackageSetting is called....")) {
+        if (!UniversalCredentialManagerService$$ExternalSyntheticOutline0.m(
+                contextInfo, credentialStorage, str2, "setPackageSetting is called....")) {
             if (DBG) {
                 Log.i(str2, "setCredentialStorageProperty - Invalid Arguments");
             }
@@ -6557,9 +8978,16 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
             boolean z = DBG;
             if (z) {
-                Log.i(str2, "setCredentialStorageProperty is called for Caller UID-" + i + " mContainerId " + userId);
+                Log.i(
+                        str2,
+                        "setCredentialStorageProperty is called for Caller UID-"
+                                + i
+                                + " mContainerId "
+                                + userId);
             }
-            if (true != isCredentialStorageManagedInternal(i, userId, credentialStorage.name, credentialStorage.packageName)) {
+            if (true
+                    != isCredentialStorageManagedInternal(
+                            i, userId, credentialStorage.name, credentialStorage.packageName)) {
                 if (z) {
                     Log.i(str2, "setCredentialStorageProperty return false..");
                 }
@@ -6568,7 +8996,14 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             IUcmService ucmService$1 = getUcmService$1();
             if (ucmService$1 != null) {
                 Log.i(str2, "setCredentialStorageProperty - pass to agent...");
-                return ucmService$1.setCredentialStorageProperty(i, new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name).setResourceId(4).setUid(i).build(), bundle, userId);
+                return ucmService$1.setCredentialStorageProperty(
+                        i,
+                        new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name)
+                                .setResourceId(4)
+                                .setUid(i)
+                                .build(),
+                        bundle,
+                        userId);
             }
             return null;
         } finally {
@@ -6576,7 +9011,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    public final int setDefaultInstallStorage(ContextInfo contextInfo, CredentialStorage credentialStorage) {
+    public final int setDefaultInstallStorage(
+            ContextInfo contextInfo, CredentialStorage credentialStorage) {
         String str = TAG;
         Log.i(str, "setDefaultInstallStorage is called....");
         validateContextInfo(contextInfo);
@@ -6586,7 +9022,8 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         if (credentialStorage != null) {
             String str2 = credentialStorage.signature;
             if (str2 != null) {
-                if (!validateSignature(contextInfo.mContainerId, credentialStorage.packageName, str2)) {
+                if (!validateSignature(
+                        contextInfo.mContainerId, credentialStorage.packageName, str2)) {
                     return -18;
                 }
             }
@@ -6597,46 +9034,70 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
         try {
             if (credentialStorage != null) {
-                KnoxAnalytics.log(getKAData("setDefaultInstallStorage", credentialStorage.packageName));
+                KnoxAnalytics.log(
+                        getKAData("setDefaultInstallStorage", credentialStorage.packageName));
             } else {
                 KnoxAnalytics.log(getKAData("setDefaultInstallStorage", "null"));
             }
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
                 boolean z = DBG;
                 if (z) {
-                    Log.i(TAG, "setDefaultInstallStorage is called for Caller UID-" + i + " mContainerId " + userId);
+                    Log.i(
+                            TAG,
+                            "setDefaultInstallStorage is called for Caller UID-"
+                                    + i
+                                    + " mContainerId "
+                                    + userId);
                 }
                 if (userId >= 10) {
-                    int mUMContainerOwnerUid = this.mEdmStorageProvider.getMUMContainerOwnerUid(userId);
+                    int mUMContainerOwnerUid =
+                            this.mEdmStorageProvider.getMUMContainerOwnerUid(userId);
                     String str3 = TAG;
-                    Log.i(str3, "setDefaultInstallStorage container ownerUid - " + mUMContainerOwnerUid);
+                    Log.i(
+                            str3,
+                            "setDefaultInstallStorage container ownerUid - "
+                                    + mUMContainerOwnerUid);
                     if (mUMContainerOwnerUid != i) {
-                        Log.i(str3, "setDefaultInstallStorage callerUid - " + i + " is not owner of container. Request fail...");
+                        Log.i(
+                                str3,
+                                "setDefaultInstallStorage callerUid - "
+                                        + i
+                                        + " is not owner of container. Request fail...");
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                         return -24;
                     }
                 }
                 if (isValidParam(credentialStorage)) {
-                    if (true != isCredentialStorageManagedInternal(i, userId, credentialStorage.name, credentialStorage.packageName)) {
+                    if (true
+                            != isCredentialStorageManagedInternal(
+                                    i,
+                                    userId,
+                                    credentialStorage.name,
+                                    credentialStorage.packageName)) {
                         if (z) {
                             Log.i(TAG, "setDefaultInstallStorage return false..");
                         }
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                         return -12;
                     }
-                } else if (!checkDefaultInstallCredentialStorageExistsForAdmin(i, userId, null, null)) {
+                } else if (!checkDefaultInstallCredentialStorageExistsForAdmin(
+                        i, userId, null, null)) {
                     if (z) {
-                        Log.i(TAG, "setDefaultInstallStorage MDM don't own any credential storage...");
+                        Log.i(
+                                TAG,
+                                "setDefaultInstallStorage MDM don't own any credential storage...");
                     }
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                     return -12;
                 }
-                int defaultInstallStorageInternal = setDefaultInstallStorageInternal(i, credentialStorage, userId);
+                int defaultInstallStorageInternal =
+                        setDefaultInstallStorageInternal(i, credentialStorage, userId);
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 return defaultInstallStorageInternal;
             } catch (Exception e2) {
@@ -6650,31 +9111,43 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
         }
     }
 
-    public final int setDefaultInstallStorageInternal(int i, CredentialStorage credentialStorage, int i2) {
+    public final int setDefaultInstallStorageInternal(
+            int i, CredentialStorage credentialStorage, int i2) {
         try {
             if (isValidParam(credentialStorage)) {
-                if (!checkDefaultInstallCredentialStorageExists(i2, credentialStorage.name, credentialStorage.packageName)) {
+                if (!checkDefaultInstallCredentialStorageExists(
+                        i2, credentialStorage.name, credentialStorage.packageName)) {
                     return addOrUpdateDefaultInstallStorage(i, credentialStorage, i2) ? 0 : -1;
                 }
-                if (checkDefaultInstallCredentialStorageExistsForAdmin(i, i2, credentialStorage.name, credentialStorage.packageName)) {
+                if (checkDefaultInstallCredentialStorageExistsForAdmin(
+                        i, i2, credentialStorage.name, credentialStorage.packageName)) {
                     Log.i(TAG, "configureSecureStorageInternal record already exist...");
                     return 0;
                 }
-                Log.i(TAG, "setDefaultInstallStorageInternal Credential storage is configured by some other admin");
+                Log.i(
+                        TAG,
+                        "setDefaultInstallStorageInternal Credential storage is configured by some"
+                            + " other admin");
                 return -10;
             }
             String str = TAG;
             Log.i(str, "setDefaultInstallStorageInternal cs is null so removing admin entry...");
-            boolean deleteDataByFields = this.mEdmStorageProvider.deleteDataByFields("UniversalCredentialDefaultInstallTable", new String[]{"adminUid", "userId"}, new String[]{String.valueOf(i), String.valueOf(i2)});
+            boolean deleteDataByFields =
+                    this.mEdmStorageProvider.deleteDataByFields(
+                            "UniversalCredentialDefaultInstallTable",
+                            new String[] {"adminUid", "userId"},
+                            new String[] {String.valueOf(i), String.valueOf(i2)});
             Log.i(str, "setDefaultInstallStorageInternal result-" + deleteDataByFields);
             return deleteDataByFields ? 0 : -1;
         } catch (Exception e) {
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("The exception occurs "), TAG);
             return -1;
         }
     }
 
-    public final int setKeyguardPinMaximumLength(ContextInfo contextInfo, CredentialStorage credentialStorage, int i) {
+    public final int setKeyguardPinMaximumLength(
+            ContextInfo contextInfo, CredentialStorage credentialStorage, int i) {
         Log.i(TAG, "setKeyguardPinMaximumLength is called....");
         validateContextInfo(contextInfo);
         int checkContext = checkContext(contextInfo, credentialStorage, true);
@@ -6682,15 +9155,22 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             return checkContext;
         }
         try {
-            KnoxAnalytics.log(getKAData("setKeyguardPinMaximumLength", credentialStorage.packageName));
+            KnoxAnalytics.log(
+                    getKAData("setKeyguardPinMaximumLength", credentialStorage.packageName));
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         int i2 = contextInfo.mCallerUid;
         int userId = UserHandle.getUserId(i2);
         try {
             if (DBG) {
-                Log.i(TAG, "setKeyguardPinMaximumLength is called for Caller UID-" + i2 + " mContainerId " + userId);
+                Log.i(
+                        TAG,
+                        "setKeyguardPinMaximumLength is called for Caller UID-"
+                                + i2
+                                + " mContainerId "
+                                + userId);
             }
             int checkCS = checkCS(contextInfo, credentialStorage);
             if (checkCS != 0) {
@@ -6698,16 +9178,24 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
             IUcmService ucmService$1 = getUcmService$1();
             if (ucmService$1 != null) {
-                return getReturnvalue(ucmService$1.setKeyguardPinMaximumLength(new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name).setResourceId(4).setUid(i2).build(), i));
+                return getReturnvalue(
+                        ucmService$1.setKeyguardPinMaximumLength(
+                                new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name)
+                                        .setResourceId(4)
+                                        .setUid(i2)
+                                        .build(),
+                                i));
             }
             return -1;
         } catch (Exception e2) {
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e2, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e2, new StringBuilder("The exception occurs "), TAG);
             return -1;
         }
     }
 
-    public final int setKeyguardPinMaximumRetryCount(ContextInfo contextInfo, CredentialStorage credentialStorage, int i) {
+    public final int setKeyguardPinMaximumRetryCount(
+            ContextInfo contextInfo, CredentialStorage credentialStorage, int i) {
         Log.i(TAG, "setKeyguardPinMaximumRetryCount is called....");
         validateContextInfo(contextInfo);
         int checkContext = checkContext(contextInfo, credentialStorage, true);
@@ -6715,15 +9203,22 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             return checkContext;
         }
         try {
-            KnoxAnalytics.log(getKAData("setKeyguardPinMaximumRetryCount", credentialStorage.packageName));
+            KnoxAnalytics.log(
+                    getKAData("setKeyguardPinMaximumRetryCount", credentialStorage.packageName));
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         int i2 = contextInfo.mCallerUid;
         int userId = UserHandle.getUserId(i2);
         try {
             if (DBG) {
-                Log.i(TAG, "setKeyguardPinMaximumRetryCount is called for Caller UID-" + i2 + " mContainerId " + userId);
+                Log.i(
+                        TAG,
+                        "setKeyguardPinMaximumRetryCount is called for Caller UID-"
+                                + i2
+                                + " mContainerId "
+                                + userId);
             }
             int checkCS = checkCS(contextInfo, credentialStorage);
             if (checkCS != 0) {
@@ -6731,16 +9226,24 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
             IUcmService ucmService$1 = getUcmService$1();
             if (ucmService$1 != null) {
-                return getReturnvalue(ucmService$1.setKeyguardPinMaximumRetryCount(new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name).setResourceId(4).setUid(i2).build(), i));
+                return getReturnvalue(
+                        ucmService$1.setKeyguardPinMaximumRetryCount(
+                                new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name)
+                                        .setResourceId(4)
+                                        .setUid(i2)
+                                        .build(),
+                                i));
             }
             return -1;
         } catch (Exception e2) {
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e2, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e2, new StringBuilder("The exception occurs "), TAG);
             return -1;
         }
     }
 
-    public final int setKeyguardPinMinimumLength(ContextInfo contextInfo, CredentialStorage credentialStorage, int i) {
+    public final int setKeyguardPinMinimumLength(
+            ContextInfo contextInfo, CredentialStorage credentialStorage, int i) {
         Log.i(TAG, "setKeyguardPinMinimumLength is called....");
         validateContextInfo(contextInfo);
         int checkContext = checkContext(contextInfo, credentialStorage, true);
@@ -6748,15 +9251,22 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             return checkContext;
         }
         try {
-            KnoxAnalytics.log(getKAData("setKeyguardPinMinimumLength", credentialStorage.packageName));
+            KnoxAnalytics.log(
+                    getKAData("setKeyguardPinMinimumLength", credentialStorage.packageName));
         } catch (Exception e) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("Exception = "), TAG);
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Exception = "), TAG);
         }
         int i2 = contextInfo.mCallerUid;
         int userId = UserHandle.getUserId(i2);
         try {
             if (DBG) {
-                Log.i(TAG, "setKeyguardPinMinimumLength is called for Caller UID-" + i2 + " mContainerId " + userId);
+                Log.i(
+                        TAG,
+                        "setKeyguardPinMinimumLength is called for Caller UID-"
+                                + i2
+                                + " mContainerId "
+                                + userId);
             }
             int checkCS = checkCS(contextInfo, credentialStorage);
             if (checkCS != 0) {
@@ -6764,18 +9274,24 @@ public final class UniversalCredentialManagerService extends IUniversalCredentia
             }
             IUcmService ucmService$1 = getUcmService$1();
             if (ucmService$1 != null) {
-                return getReturnvalue(ucmService$1.setKeyguardPinMinimumLength(new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name).setResourceId(4).setUid(i2).build(), i));
+                return getReturnvalue(
+                        ucmService$1.setKeyguardPinMinimumLength(
+                                new UniversalCredentialUtil.UcmUriBuilder(credentialStorage.name)
+                                        .setResourceId(4)
+                                        .setUid(i2)
+                                        .build(),
+                                i));
             }
             return -1;
         } catch (Exception e2) {
-            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(e2, new StringBuilder("The exception occurs "), TAG);
+            RestrictionToastManager$RestrictionToastHandler$$ExternalSyntheticOutline0.m(
+                    e2, new StringBuilder("The exception occurs "), TAG);
             return -1;
         }
     }
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void systemReady() {
-    }
+    public final void systemReady() {}
 
     public final void updateUcmCryptoProp() {
         boolean z = SystemProperties.getBoolean("persist.security.ucmcrypto", false);

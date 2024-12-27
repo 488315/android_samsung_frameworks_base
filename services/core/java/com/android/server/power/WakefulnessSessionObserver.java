@@ -27,27 +27,24 @@ public final class WakefulnessSessionObserver {
     public final Object mLock = new Object();
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    interface Clock {
-    }
+    interface Clock {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    class Injector {
-    }
+    class Injector {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserSwitchObserver extends SynchronousUserSwitchObserver {
-        public UserSwitchObserver() {
-        }
+        public UserSwitchObserver() {}
 
         public final void onUserSwitching(int i) {
             WakefulnessSessionObserver wakefulnessSessionObserver = WakefulnessSessionObserver.this;
-            wakefulnessSessionObserver.updateSettingScreenOffTimeout(wakefulnessSessionObserver.mContext);
+            wakefulnessSessionObserver.updateSettingScreenOffTimeout(
+                    wakefulnessSessionObserver.mContext);
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class WakefulnessSessionFrameworkStatsLogger {
-    }
+    public final class WakefulnessSessionFrameworkStatsLogger {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class WakefulnessSessionPowerGroup {
@@ -78,7 +75,8 @@ public final class WakefulnessSessionObserver {
     }
 
     /* renamed from: -$$Nest$mgetScreenOffTimeout, reason: not valid java name */
-    public static int m827$$Nest$mgetScreenOffTimeout(WakefulnessSessionObserver wakefulnessSessionObserver) {
+    public static int m827$$Nest$mgetScreenOffTimeout(
+            WakefulnessSessionObserver wakefulnessSessionObserver) {
         int i;
         synchronized (wakefulnessSessionObserver.mLock) {
             i = wakefulnessSessionObserver.mScreenOffTimeoutMs;
@@ -94,17 +92,32 @@ public final class WakefulnessSessionObserver {
         this.mClock = new WakefulnessSessionObserver$Injector$$ExternalSyntheticLambda0();
         updateSettingScreenOffTimeout(context);
         try {
-            ActivityManager.getService().registerUserSwitchObserver(new UserSwitchObserver(), "WakefulnessSessionObserver");
+            ActivityManager.getService()
+                    .registerUserSwitchObserver(
+                            new UserSwitchObserver(), "WakefulnessSessionObserver");
         } catch (RemoteException unused) {
         }
-        this.mOverrideTimeoutMs = this.mContext.getResources().getInteger(R.integer.config_windowOutsetBottom);
-        this.mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor("screen_off_timeout"), false, new ContentObserver(new Handler(this.mContext.getMainLooper())) { // from class: com.android.server.power.WakefulnessSessionObserver.1
-            @Override // android.database.ContentObserver
-            public final void onChange(boolean z) {
-                WakefulnessSessionObserver wakefulnessSessionObserver = WakefulnessSessionObserver.this;
-                wakefulnessSessionObserver.updateSettingScreenOffTimeout(wakefulnessSessionObserver.mContext);
-            }
-        }, -1);
+        this.mOverrideTimeoutMs =
+                this.mContext.getResources().getInteger(R.integer.config_windowOutsetBottom);
+        this.mContext
+                .getContentResolver()
+                .registerContentObserver(
+                        Settings.System.getUriFor("screen_off_timeout"),
+                        false,
+                        new ContentObserver(
+                                new Handler(
+                                        this.mContext
+                                                .getMainLooper())) { // from class:
+                                                                     // com.android.server.power.WakefulnessSessionObserver.1
+                            @Override // android.database.ContentObserver
+                            public final void onChange(boolean z) {
+                                WakefulnessSessionObserver wakefulnessSessionObserver =
+                                        WakefulnessSessionObserver.this;
+                                wakefulnessSessionObserver.updateSettingScreenOffTimeout(
+                                        wakefulnessSessionObserver.mContext);
+                            }
+                        },
+                        -1);
         this.mPowerGroups.append(0, new WakefulnessSessionPowerGroup(0));
     }
 
@@ -112,20 +125,24 @@ public final class WakefulnessSessionObserver {
         if (!this.mPowerGroups.contains(i)) {
             this.mPowerGroups.append(i, new WakefulnessSessionPowerGroup(i));
         }
-        WakefulnessSessionPowerGroup wakefulnessSessionPowerGroup = (WakefulnessSessionPowerGroup) this.mPowerGroups.get(i);
+        WakefulnessSessionPowerGroup wakefulnessSessionPowerGroup =
+                (WakefulnessSessionPowerGroup) this.mPowerGroups.get(i);
         int i3 = wakefulnessSessionPowerGroup.mCurrentUserActivityEvent;
         if (i2 == i3) {
             return;
         }
         wakefulnessSessionPowerGroup.mPrevUserActivityEvent = i3;
         wakefulnessSessionPowerGroup.mCurrentUserActivityEvent = i2;
-        wakefulnessSessionPowerGroup.mPrevUserActivityTimestamp = wakefulnessSessionPowerGroup.mCurrentUserActivityTimestamp;
+        wakefulnessSessionPowerGroup.mPrevUserActivityTimestamp =
+                wakefulnessSessionPowerGroup.mCurrentUserActivityTimestamp;
         wakefulnessSessionPowerGroup.mCurrentUserActivityTimestamp = j;
     }
 
     public final void updateSettingScreenOffTimeout(Context context) {
         synchronized (this.mLock) {
-            this.mScreenOffTimeoutMs = Settings.System.getIntForUser(context.getContentResolver(), "screen_off_timeout", 15000, -2);
+            this.mScreenOffTimeoutMs =
+                    Settings.System.getIntForUser(
+                            context.getContentResolver(), "screen_off_timeout", 15000, -2);
         }
     }
 }

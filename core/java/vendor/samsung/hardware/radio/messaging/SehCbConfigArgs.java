@@ -6,19 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SehCbConfigArgs implements Parcelable {
-    public static final Parcelable.Creator<SehCbConfigArgs> CREATOR = new Parcelable.Creator<SehCbConfigArgs>() { // from class: vendor.samsung.hardware.radio.messaging.SehCbConfigArgs.1
-        @Override // android.os.Parcelable.Creator
-        public SehCbConfigArgs createFromParcel(Parcel _aidl_source) {
-            SehCbConfigArgs _aidl_out = new SehCbConfigArgs();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SehCbConfigArgs> CREATOR =
+            new Parcelable.Creator<
+                    SehCbConfigArgs>() { // from class:
+                                         // vendor.samsung.hardware.radio.messaging.SehCbConfigArgs.1
+                @Override // android.os.Parcelable.Creator
+                public SehCbConfigArgs createFromParcel(Parcel _aidl_source) {
+                    SehCbConfigArgs _aidl_out = new SehCbConfigArgs();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehCbConfigArgs[] newArray(int _aidl_size) {
-            return new SehCbConfigArgs[_aidl_size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehCbConfigArgs[] newArray(int _aidl_size) {
+                    return new SehCbConfigArgs[_aidl_size];
+                }
+            };
     public String msgIDs;
     public int enabled = 0;
     public int selectedId = 0;

@@ -9,7 +9,9 @@ import android.tracing.perfetto.StartCallbackArguments;
 import android.tracing.perfetto.StopCallbackArguments;
 import android.util.proto.ProtoInputStream;
 import android.util.proto.WireTypeMismatchException;
+
 import com.android.internal.protolog.common.LogLevel;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +30,8 @@ public class ProtoLogDataSource extends DataSource<Instance, TlsState, Increment
         public boolean clearReported = false;
     }
 
-    public ProtoLogDataSource(Consumer<ProtoLogConfig> onStart, Runnable onFlush, Consumer<ProtoLogConfig> onStop) {
+    public ProtoLogDataSource(
+            Consumer<ProtoLogConfig> onStart, Runnable onFlush, Consumer<ProtoLogConfig> onStop) {
         super("android.protolog");
         this.mOnStart = onStart;
         this.mOnFlush = onFlush;
@@ -57,7 +60,8 @@ public class ProtoLogDataSource extends DataSource<Instance, TlsState, Increment
         if (config == null) {
             config = ProtoLogConfig.DEFAULT;
         }
-        return new Instance(this, instanceIndex, config, this.mOnStart, this.mOnFlush, this.mOnStop);
+        return new Instance(
+                this, instanceIndex, config, this.mOnStart, this.mOnFlush, this.mOnStop);
     }
 
     /* JADX WARN: Can't rename method to resolve collision */
@@ -116,11 +120,13 @@ public class ProtoLogDataSource extends DataSource<Instance, TlsState, Increment
     }
 
     public static class ProtoLogConfig {
-        private static final ProtoLogConfig DEFAULT = new ProtoLogConfig(LogLevel.WTF, new HashMap());
+        private static final ProtoLogConfig DEFAULT =
+                new ProtoLogConfig(LogLevel.WTF, new HashMap());
         private final LogLevel mDefaultLogFromLevel;
         private final Map<String, GroupConfig> mGroupConfigs;
 
-        private ProtoLogConfig(LogLevel defaultLogFromLevel, Map<String, GroupConfig> groupConfigs) {
+        private ProtoLogConfig(
+                LogLevel defaultLogFromLevel, Map<String, GroupConfig> groupConfigs) {
             this.mDefaultLogFromLevel = defaultLogFromLevel;
             this.mGroupConfigs = groupConfigs;
         }
@@ -223,7 +229,9 @@ public class ProtoLogDataSource extends DataSource<Instance, TlsState, Increment
                 }
                 long group_overrides_token3 = group_overrides_token2;
                 if (tag == null) {
-                    throw new RuntimeException("Failed to decode proto config. Got a group override without a group tag.");
+                    throw new RuntimeException(
+                            "Failed to decode proto config. Got a group override without a group"
+                                + " tag.");
                 }
                 groupConfigs.put(tag, new GroupConfig(logFromLevel, collectStackTrace));
                 configStream.end(group_overrides_token3);
@@ -239,7 +247,13 @@ public class ProtoLogDataSource extends DataSource<Instance, TlsState, Increment
         private final Consumer<ProtoLogConfig> mOnStart;
         private final Consumer<ProtoLogConfig> mOnStop;
 
-        public Instance(DataSource<Instance, TlsState, IncrementalState> dataSource, int instanceIdx, ProtoLogConfig config, Consumer<ProtoLogConfig> onStart, Runnable onFlush, Consumer<ProtoLogConfig> onStop) {
+        public Instance(
+                DataSource<Instance, TlsState, IncrementalState> dataSource,
+                int instanceIdx,
+                ProtoLogConfig config,
+                Consumer<ProtoLogConfig> onStart,
+                Runnable onFlush,
+                Consumer<ProtoLogConfig> onStop) {
             super(dataSource, instanceIdx);
             this.mOnStart = onStart;
             this.mOnFlush = onFlush;

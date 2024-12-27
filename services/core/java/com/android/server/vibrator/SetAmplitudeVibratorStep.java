@@ -6,9 +6,11 @@ import android.os.VibrationEffect;
 import android.os.vibrator.StepSegment;
 import android.os.vibrator.VibrationEffectSegment;
 import android.util.Slog;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,10 +23,14 @@ public final class SetAmplitudeVibratorStep extends AbstractVibratorStep {
         if (!super.acceptVibratorCompleteCallback(i)) {
             return false;
         }
-        if (SystemClock.uptimeMillis() < this.startTime && this.controller.mCurrentAmplitude > FullScreenMagnificationGestureHandler.MAX_SCALE) {
+        if (SystemClock.uptimeMillis() < this.startTime
+                && this.controller.mCurrentAmplitude
+                        > FullScreenMagnificationGestureHandler.MAX_SCALE) {
             z = true;
         }
-        Slog.d("VibrationThread", "Amplitude step received completion callback from " + i + ", accepted = " + z);
+        Slog.d(
+                "VibrationThread",
+                "Amplitude step received completion callback from " + i + ", accepted = " + z);
         return z;
     }
 
@@ -36,7 +42,10 @@ public final class SetAmplitudeVibratorStep extends AbstractVibratorStep {
         long j = 0;
         while (i2 < size) {
             StepSegment stepSegment = (VibrationEffectSegment) segments.get(i2);
-            if (!(stepSegment instanceof StepSegment) || (stepSegment.getDuration() > 0 && stepSegment.getAmplitude() == FullScreenMagnificationGestureHandler.MAX_SCALE)) {
+            if (!(stepSegment instanceof StepSegment)
+                    || (stepSegment.getDuration() > 0
+                            && stepSegment.getAmplitude()
+                                    == FullScreenMagnificationGestureHandler.MAX_SCALE)) {
                 break;
             }
             j += stepSegment.getDuration();
@@ -49,7 +58,9 @@ public final class SetAmplitudeVibratorStep extends AbstractVibratorStep {
                 return Math.max(j, 5000L);
             }
         }
-        return (i2 != size || composed.getRepeatIndex() >= 0) ? j : j + this.conductor.vibrationSettings.mVibrationConfig.getRampDownDurationMs();
+        return (i2 != size || composed.getRepeatIndex() >= 0)
+                ? j
+                : j + this.conductor.vibrationSettings.mVibrationConfig.getRampDownDurationMs();
     }
 
     @Override // com.android.server.vibrator.Step
@@ -61,11 +72,22 @@ public final class SetAmplitudeVibratorStep extends AbstractVibratorStep {
             Slog.d("VibrationThread", "Running amplitude step with " + j + "ms latency.");
             if (this.mVibratorCompleteCallbackReceived && j < 0) {
                 turnVibratorBackOn(-j);
-                return Arrays.asList(new SetAmplitudeVibratorStep(this.conductor, this.startTime, this.controller, this.effect, this.segmentIndex, this.mPendingVibratorOffDeadline));
+                return Arrays.asList(
+                        new SetAmplitudeVibratorStep(
+                                this.conductor,
+                                this.startTime,
+                                this.controller,
+                                this.effect,
+                                this.segmentIndex,
+                                this.mPendingVibratorOffDeadline));
             }
-            VibrationEffectSegment vibrationEffectSegment = (VibrationEffectSegment) this.effect.getSegments().get(this.segmentIndex);
+            VibrationEffectSegment vibrationEffectSegment =
+                    (VibrationEffectSegment) this.effect.getSegments().get(this.segmentIndex);
             if (!(vibrationEffectSegment instanceof StepSegment)) {
-                Slog.w("VibrationThread", "Ignoring wrong segment for a SetAmplitudeVibratorStep: " + vibrationEffectSegment);
+                Slog.w(
+                        "VibrationThread",
+                        "Ignoring wrong segment for a SetAmplitudeVibratorStep: "
+                                + vibrationEffectSegment);
                 return nextSteps(1, this.startTime);
             }
             StepSegment stepSegment = (StepSegment) vibrationEffectSegment;
@@ -104,7 +126,11 @@ public final class SetAmplitudeVibratorStep extends AbstractVibratorStep {
             return;
         }
         long j2 = vibratorOnDuration + j;
-        StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m("Turning the vibrator back ON using the remaining duration of ", j, "ms, for a total of ");
+        StringBuilder m =
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        "Turning the vibrator back ON using the remaining duration of ",
+                        j,
+                        "ms, for a total of ");
         m.append(j2);
         m.append("ms");
         Slog.d("VibrationThread", m.toString());

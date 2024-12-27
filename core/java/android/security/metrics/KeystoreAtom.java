@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class KeystoreAtom implements Parcelable {
-    public static final Parcelable.Creator<KeystoreAtom> CREATOR = new Parcelable.Creator<KeystoreAtom>() { // from class: android.security.metrics.KeystoreAtom.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeystoreAtom createFromParcel(Parcel _aidl_source) {
-            KeystoreAtom _aidl_out = new KeystoreAtom();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<KeystoreAtom> CREATOR =
+            new Parcelable.Creator<
+                    KeystoreAtom>() { // from class: android.security.metrics.KeystoreAtom.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeystoreAtom createFromParcel(Parcel _aidl_source) {
+                    KeystoreAtom _aidl_out = new KeystoreAtom();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeystoreAtom[] newArray(int _aidl_size) {
-            return new KeystoreAtom[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeystoreAtom[] newArray(int _aidl_size) {
+                    return new KeystoreAtom[_aidl_size];
+                }
+            };
     public int count = 0;
     public KeystoreAtomPayload payload;
 
@@ -50,7 +52,8 @@ public class KeystoreAtom implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.payload = (KeystoreAtomPayload) _aidl_parcel.readTypedObject(KeystoreAtomPayload.CREATOR);
+            this.payload =
+                    (KeystoreAtomPayload) _aidl_parcel.readTypedObject(KeystoreAtomPayload.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");

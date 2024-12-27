@@ -7,8 +7,7 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 public class ImsException extends Exception {
     private int mCode;
 
-    public ImsException() {
-    }
+    public ImsException() {}
 
     public ImsException(String message) {
         super(message);
@@ -16,7 +15,11 @@ public class ImsException extends Exception {
     }
 
     public ImsException(String message, int code) {
-        super(message + NavigationBarInflaterView.KEY_CODE_START + code + NavigationBarInflaterView.KEY_CODE_END);
+        super(
+                message
+                        + NavigationBarInflaterView.KEY_CODE_START
+                        + code
+                        + NavigationBarInflaterView.KEY_CODE_END);
         this.mCode = code;
     }
 

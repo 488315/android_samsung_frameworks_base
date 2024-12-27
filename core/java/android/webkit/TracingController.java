@@ -12,8 +12,7 @@ public abstract class TracingController {
     public abstract boolean stop(OutputStream outputStream, Executor executor);
 
     @Deprecated
-    public TracingController() {
-    }
+    public TracingController() {}
 
     public static TracingController getInstance() {
         return WebViewFactory.getProvider().getTracingController();

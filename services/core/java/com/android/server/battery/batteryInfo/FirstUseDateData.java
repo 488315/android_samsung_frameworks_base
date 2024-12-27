@@ -7,12 +7,15 @@ import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Slog;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.alarm.GmsAlarmManager$$ExternalSyntheticOutline0;
 import com.android.server.battery.BattUtils;
 import com.android.server.battery.BatteryLogger;
+
 import com.samsung.android.knoxguard.service.utils.Constants;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.IntStream;
@@ -55,7 +58,9 @@ public final class FirstUseDateData extends BaseData {
                 Method dump skipped, instructions count: 792
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.battery.batteryInfo.FirstUseDateData.AnonymousClass1.run():void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.battery.batteryInfo.FirstUseDateData.AnonymousClass1.run():void");
         }
     }
 
@@ -77,7 +82,9 @@ public final class FirstUseDateData extends BaseData {
                     this.this$0.mHandler.post(new AnonymousClass1(1, this));
                     break;
                 default:
-                    Slog.d(this.this$0.TAG, "[WriteFirstUseDateReceiver_onReceive]intent:" + intent.getAction());
+                    Slog.d(
+                            this.this$0.TAG,
+                            "[WriteFirstUseDateReceiver_onReceive]intent:" + intent.getAction());
                     FirstUseDateData firstUseDateData = this.this$0;
                     firstUseDateData.mHandler.removeCallbacks(firstUseDateData.mUpdateDateRunnable);
                     FirstUseDateData firstUseDateData2 = this.this$0;
@@ -131,25 +138,41 @@ public final class FirstUseDateData extends BaseData {
                 String str2 = this.TAG;
                 if (z) {
                     String readNode = BattUtils.readNode((String) this.authPaths.get(i4), false);
-                    Slog.d(str2, "[syncAuthAndEfs]sync efs FirstUseDate with auth:" + readNode + " ,result:" + BattUtils.writeNode((String) this.efsPaths.get(i4), readNode));
+                    Slog.d(
+                            str2,
+                            "[syncAuthAndEfs]sync efs FirstUseDate with auth:"
+                                    + readNode
+                                    + " ,result:"
+                                    + BattUtils.writeNode(
+                                            (String) this.efsPaths.get(i4), readNode));
                 } else {
-                    DeviceIdleController$$ExternalSyntheticOutline0.m(i4, "[syncAuthAndEfs]Authentification false => skip_", str2);
+                    DeviceIdleController$$ExternalSyntheticOutline0.m(
+                            i4, "[syncAuthAndEfs]Authentification false => skip_", str2);
                 }
             }
         }
         setPermissionsEfs(1000);
         Object[] readEfsValues = readEfsValues();
         this.mCurrentValues = readEfsValues;
-        boolean allMatch = Arrays.stream((String[]) readEfsValues).allMatch(new FirstUseDateData$$ExternalSyntheticLambda0(this, 0));
+        boolean allMatch =
+                Arrays.stream((String[]) readEfsValues)
+                        .allMatch(new FirstUseDateData$$ExternalSyntheticLambda0(this, 0));
         String str3 = this.TAG;
         if (allMatch) {
             Slog.i(str3, "[activateFirstUseDateCheckIfRequired]Already all of FirstUseDate Exist");
         } else {
-            IntentFilter m = GmsAlarmManager$$ExternalSyntheticOutline0.m("android.intent.action.TIME_SET", Constants.INTENT_SECSETUPWIZARD_COMPLETE, Constants.INTENT_SETUPWIZARD_COMPLETE);
+            IntentFilter m =
+                    GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                            "android.intent.action.TIME_SET",
+                            Constants.INTENT_SECSETUPWIZARD_COMPLETE,
+                            Constants.INTENT_SETUPWIZARD_COMPLETE);
             DateChangedReceiver dateChangedReceiver = new DateChangedReceiver(this, 1);
             this.mWriteFirstUseDateReceiver = dateChangedReceiver;
             this.mContext.registerReceiver(dateChangedReceiver, m, null, null, 2);
-            Slog.i(str3, "[activateFirstUseDateCheckIfRequired]writeFirstUseDateReceiver Registered For FirstUseDate");
+            Slog.i(
+                    str3,
+                    "[activateFirstUseDateCheckIfRequired]writeFirstUseDateReceiver Registered For"
+                        + " FirstUseDate");
             this.mHandler.postDelayed(this.mUpdateDateRunnable, 45000L);
         }
         int i5 = this.mBatteryType;
@@ -163,8 +186,11 @@ public final class FirstUseDateData extends BaseData {
                     break;
                 }
                 if (this.mAuthentificationResults[i6]) {
-                    String readNode2 = BattUtils.readNode((String) this.authFaiExpiredPaths.get(i6), true);
-                    Slog.d(str, "[activateFaiExpiredCheckIfRequired]faiExpiredStr:".concat(readNode2));
+                    String readNode2 =
+                            BattUtils.readNode((String) this.authFaiExpiredPaths.get(i6), true);
+                    Slog.d(
+                            str,
+                            "[activateFaiExpiredCheckIfRequired]faiExpiredStr:".concat(readNode2));
                     if (!"1".equals(readNode2)) {
                         zArr2[i6] = true;
                         if (!"0".equals(readNode2)) {
@@ -172,17 +198,29 @@ public final class FirstUseDateData extends BaseData {
                         }
                     }
                 } else {
-                    DeviceIdleController$$ExternalSyntheticOutline0.m(i6, "[activateFaiExpiredCheckIfRequired]Authentification false => skip_", str);
+                    DeviceIdleController$$ExternalSyntheticOutline0.m(
+                            i6,
+                            "[activateFaiExpiredCheckIfRequired]Authentification false => skip_",
+                            str);
                 }
                 i6++;
             }
-            BatteryLogger.writeToFile("/data/log/battery_service/battery_service_main_history", "FaiExpiredCheck", "shouldCheckFaiExpireds:" + Arrays.toString(zArr2));
-            if (IntStream.range(0, zArr2.length).anyMatch(new FirstUseDateData$$ExternalSyntheticLambda1(this, 0))) {
-                IntentFilter m2 = BatteryService$$ExternalSyntheticOutline0.m("android.intent.action.DATE_CHANGED");
+            BatteryLogger.writeToFile(
+                    "/data/log/battery_service/battery_service_main_history",
+                    "FaiExpiredCheck",
+                    "shouldCheckFaiExpireds:" + Arrays.toString(zArr2));
+            if (IntStream.range(0, zArr2.length)
+                    .anyMatch(new FirstUseDateData$$ExternalSyntheticLambda1(this, 0))) {
+                IntentFilter m2 =
+                        BatteryService$$ExternalSyntheticOutline0.m(
+                                "android.intent.action.DATE_CHANGED");
                 DateChangedReceiver dateChangedReceiver2 = new DateChangedReceiver(this, 0);
                 this.mDateChangedReceiver = dateChangedReceiver2;
                 this.mContext.registerReceiver(dateChangedReceiver2, m2, null, null, 2);
-                Slog.i(str, "[activateFaiExpiredCheckIfRequired]DateChangedReceiver Registered For FAI Expired");
+                Slog.i(
+                        str,
+                        "[activateFaiExpiredCheckIfRequired]DateChangedReceiver Registered For FAI"
+                            + " Expired");
             }
         }
         saveInfoHistory();

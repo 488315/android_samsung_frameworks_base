@@ -8,6 +8,7 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.security.keystore.ParcelableKeyGenParameterSpec;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -30,7 +31,8 @@ public interface IKeyChainService extends IInterface {
 
     byte[] findIssuer(byte[] bArr) throws RemoteException;
 
-    int generateKeyPair(String str, ParcelableKeyGenParameterSpec parcelableKeyGenParameterSpec) throws RemoteException;
+    int generateKeyPair(String str, ParcelableKeyGenParameterSpec parcelableKeyGenParameterSpec)
+            throws RemoteException;
 
     List<String> getCaCertificateChainAliases(String str, boolean z) throws RemoteException;
 
@@ -66,7 +68,8 @@ public interface IKeyChainService extends IInterface {
 
     String installCaCertificate(byte[] bArr) throws RemoteException;
 
-    boolean installKeyPair(byte[] bArr, byte[] bArr2, byte[] bArr3, String str, int i) throws RemoteException;
+    boolean installKeyPair(byte[] bArr, byte[] bArr2, byte[] bArr3, String str, int i)
+            throws RemoteException;
 
     boolean isCertificateEntry(String str, int i) throws RemoteException;
 
@@ -86,7 +89,9 @@ public interface IKeyChainService extends IInterface {
 
     boolean setCertificateChain(String str, byte[] bArr) throws RemoteException;
 
-    void setCredentialManagementApp(String str, AppUriAuthenticationPolicy appUriAuthenticationPolicy) throws RemoteException;
+    void setCredentialManagementApp(
+            String str, AppUriAuthenticationPolicy appUriAuthenticationPolicy)
+            throws RemoteException;
 
     boolean setGrant(int i, String str, boolean z) throws RemoteException;
 
@@ -120,16 +125,18 @@ public interface IKeyChainService extends IInterface {
         }
 
         @Override // android.security.IKeyChainService
-        public void setUserSelectable(String alias, boolean isUserSelectable) throws RemoteException {
-        }
+        public void setUserSelectable(String alias, boolean isUserSelectable)
+                throws RemoteException {}
 
         @Override // android.security.IKeyChainService
-        public int generateKeyPair(String algorithm, ParcelableKeyGenParameterSpec spec) throws RemoteException {
+        public int generateKeyPair(String algorithm, ParcelableKeyGenParameterSpec spec)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.security.IKeyChainService
-        public boolean setKeyPairCertificate(String alias, byte[] userCert, byte[] certChain) throws RemoteException {
+        public boolean setKeyPairCertificate(String alias, byte[] userCert, byte[] certChain)
+                throws RemoteException {
             return false;
         }
 
@@ -139,7 +146,9 @@ public interface IKeyChainService extends IInterface {
         }
 
         @Override // android.security.IKeyChainService
-        public boolean installKeyPair(byte[] privateKey, byte[] userCert, byte[] certChain, String alias, int uid) throws RemoteException {
+        public boolean installKeyPair(
+                byte[] privateKey, byte[] userCert, byte[] certChain, String alias, int uid)
+                throws RemoteException {
             return false;
         }
 
@@ -184,18 +193,20 @@ public interface IKeyChainService extends IInterface {
         }
 
         @Override // android.security.IKeyChainService
-        public byte[] getEncodedCaCertificate(String alias, boolean includeDeletedSystem) throws RemoteException {
+        public byte[] getEncodedCaCertificate(String alias, boolean includeDeletedSystem)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.security.IKeyChainService
-        public List<String> getCaCertificateChainAliases(String rootAlias, boolean includeDeletedSystem) throws RemoteException {
+        public List<String> getCaCertificateChainAliases(
+                String rootAlias, boolean includeDeletedSystem) throws RemoteException {
             return null;
         }
 
         @Override // android.security.IKeyChainService
-        public void setCredentialManagementApp(String packageName, AppUriAuthenticationPolicy policy) throws RemoteException {
-        }
+        public void setCredentialManagementApp(
+                String packageName, AppUriAuthenticationPolicy policy) throws RemoteException {}
 
         @Override // android.security.IKeyChainService
         public boolean hasCredentialManagementApp() throws RemoteException {
@@ -208,18 +219,19 @@ public interface IKeyChainService extends IInterface {
         }
 
         @Override // android.security.IKeyChainService
-        public AppUriAuthenticationPolicy getCredentialManagementAppPolicy() throws RemoteException {
+        public AppUriAuthenticationPolicy getCredentialManagementAppPolicy()
+                throws RemoteException {
             return null;
         }
 
         @Override // android.security.IKeyChainService
-        public String getPredefinedAliasForPackageAndUri(String packageName, Uri uri) throws RemoteException {
+        public String getPredefinedAliasForPackageAndUri(String packageName, Uri uri)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.security.IKeyChainService
-        public void removeCredentialManagementApp() throws RemoteException {
-        }
+        public void removeCredentialManagementApp() throws RemoteException {}
 
         @Override // android.security.IKeyChainService
         public boolean isCredentialManagementApp(String packageName) throws RemoteException {
@@ -242,7 +254,8 @@ public interface IKeyChainService extends IInterface {
         }
 
         @Override // android.security.IKeyChainService
-        public byte[] getCertificateFromTrustCredential(String alias, boolean includeDeletedSystem) throws RemoteException {
+        public byte[] getCertificateFromTrustCredential(String alias, boolean includeDeletedSystem)
+                throws RemoteException {
             return null;
         }
 
@@ -282,7 +295,8 @@ public interface IKeyChainService extends IInterface {
         }
 
         @Override // android.security.IKeyChainService
-        public byte[] getCertificateSystem(String alias, String type, int uid) throws RemoteException {
+        public byte[] getCertificateSystem(String alias, String type, int uid)
+                throws RemoteException {
             return null;
         }
 
@@ -292,7 +306,9 @@ public interface IKeyChainService extends IInterface {
         }
 
         @Override // android.security.IKeyChainService
-        public boolean updateKeyPair(String alias, byte[] userCertificate, byte[] userCertificateChain, int uid) throws RemoteException {
+        public boolean updateKeyPair(
+                String alias, byte[] userCertificate, byte[] userCertificateChain, int uid)
+                throws RemoteException {
             return false;
         }
 
@@ -307,7 +323,8 @@ public interface IKeyChainService extends IInterface {
         }
 
         @Override // android.security.IKeyChainService
-        public boolean setCertificateChain(String alias, byte[] certificateChain) throws RemoteException {
+        public boolean setCertificateChain(String alias, byte[] certificateChain)
+                throws RemoteException {
             return false;
         }
 
@@ -317,7 +334,7 @@ public interface IKeyChainService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IKeyChainService {
+    public abstract static class Stub extends Binder implements IKeyChainService {
         public static final String DESCRIPTOR = "android.security.IKeyChainService";
         static final int TRANSACTION_allSystemAliases = 32;
         static final int TRANSACTION_attestKey = 42;
@@ -482,7 +499,8 @@ public interface IKeyChainService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -528,7 +546,9 @@ public interface IKeyChainService extends IInterface {
                     return true;
                 case 6:
                     String _arg06 = data.readString();
-                    ParcelableKeyGenParameterSpec _arg12 = (ParcelableKeyGenParameterSpec) data.readTypedObject(ParcelableKeyGenParameterSpec.CREATOR);
+                    ParcelableKeyGenParameterSpec _arg12 =
+                            (ParcelableKeyGenParameterSpec)
+                                    data.readTypedObject(ParcelableKeyGenParameterSpec.CREATOR);
                     data.enforceNoDataAvail();
                     int _result5 = generateKeyPair(_arg06, _arg12);
                     reply.writeNoException();
@@ -629,7 +649,9 @@ public interface IKeyChainService extends IInterface {
                     return true;
                 case 20:
                     String _arg017 = data.readString();
-                    AppUriAuthenticationPolicy _arg17 = (AppUriAuthenticationPolicy) data.readTypedObject(AppUriAuthenticationPolicy.CREATOR);
+                    AppUriAuthenticationPolicy _arg17 =
+                            (AppUriAuthenticationPolicy)
+                                    data.readTypedObject(AppUriAuthenticationPolicy.CREATOR);
                     data.enforceNoDataAvail();
                     setCredentialManagementApp(_arg017, _arg17);
                     reply.writeNoException();
@@ -888,7 +910,8 @@ public interface IKeyChainService extends IInterface {
             }
 
             @Override // android.security.IKeyChainService
-            public void setUserSelectable(String alias, boolean isUserSelectable) throws RemoteException {
+            public void setUserSelectable(String alias, boolean isUserSelectable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -904,7 +927,8 @@ public interface IKeyChainService extends IInterface {
             }
 
             @Override // android.security.IKeyChainService
-            public int generateKeyPair(String algorithm, ParcelableKeyGenParameterSpec spec) throws RemoteException {
+            public int generateKeyPair(String algorithm, ParcelableKeyGenParameterSpec spec)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -922,7 +946,8 @@ public interface IKeyChainService extends IInterface {
             }
 
             @Override // android.security.IKeyChainService
-            public boolean setKeyPairCertificate(String alias, byte[] userCert, byte[] certChain) throws RemoteException {
+            public boolean setKeyPairCertificate(String alias, byte[] userCert, byte[] certChain)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -958,7 +983,9 @@ public interface IKeyChainService extends IInterface {
             }
 
             @Override // android.security.IKeyChainService
-            public boolean installKeyPair(byte[] privateKey, byte[] userCert, byte[] certChain, String alias, int uid) throws RemoteException {
+            public boolean installKeyPair(
+                    byte[] privateKey, byte[] userCert, byte[] certChain, String alias, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1070,7 +1097,9 @@ public interface IKeyChainService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(15, _data, _reply, 0);
                     _reply.readException();
-                    StringParceledListSlice _result = (StringParceledListSlice) _reply.readTypedObject(StringParceledListSlice.CREATOR);
+                    StringParceledListSlice _result =
+                            (StringParceledListSlice)
+                                    _reply.readTypedObject(StringParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1086,7 +1115,9 @@ public interface IKeyChainService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(16, _data, _reply, 0);
                     _reply.readException();
-                    StringParceledListSlice _result = (StringParceledListSlice) _reply.readTypedObject(StringParceledListSlice.CREATOR);
+                    StringParceledListSlice _result =
+                            (StringParceledListSlice)
+                                    _reply.readTypedObject(StringParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1112,7 +1143,8 @@ public interface IKeyChainService extends IInterface {
             }
 
             @Override // android.security.IKeyChainService
-            public byte[] getEncodedCaCertificate(String alias, boolean includeDeletedSystem) throws RemoteException {
+            public byte[] getEncodedCaCertificate(String alias, boolean includeDeletedSystem)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1130,7 +1162,8 @@ public interface IKeyChainService extends IInterface {
             }
 
             @Override // android.security.IKeyChainService
-            public List<String> getCaCertificateChainAliases(String rootAlias, boolean includeDeletedSystem) throws RemoteException {
+            public List<String> getCaCertificateChainAliases(
+                    String rootAlias, boolean includeDeletedSystem) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1148,7 +1181,8 @@ public interface IKeyChainService extends IInterface {
             }
 
             @Override // android.security.IKeyChainService
-            public void setCredentialManagementApp(String packageName, AppUriAuthenticationPolicy policy) throws RemoteException {
+            public void setCredentialManagementApp(
+                    String packageName, AppUriAuthenticationPolicy policy) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1196,14 +1230,17 @@ public interface IKeyChainService extends IInterface {
             }
 
             @Override // android.security.IKeyChainService
-            public AppUriAuthenticationPolicy getCredentialManagementAppPolicy() throws RemoteException {
+            public AppUriAuthenticationPolicy getCredentialManagementAppPolicy()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(23, _data, _reply, 0);
                     _reply.readException();
-                    AppUriAuthenticationPolicy _result = (AppUriAuthenticationPolicy) _reply.readTypedObject(AppUriAuthenticationPolicy.CREATOR);
+                    AppUriAuthenticationPolicy _result =
+                            (AppUriAuthenticationPolicy)
+                                    _reply.readTypedObject(AppUriAuthenticationPolicy.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1212,7 +1249,8 @@ public interface IKeyChainService extends IInterface {
             }
 
             @Override // android.security.IKeyChainService
-            public String getPredefinedAliasForPackageAndUri(String packageName, Uri uri) throws RemoteException {
+            public String getPredefinedAliasForPackageAndUri(String packageName, Uri uri)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1315,7 +1353,8 @@ public interface IKeyChainService extends IInterface {
             }
 
             @Override // android.security.IKeyChainService
-            public byte[] getCertificateFromTrustCredential(String alias, boolean includeDeletedSystem) throws RemoteException {
+            public byte[] getCertificateFromTrustCredential(
+                    String alias, boolean includeDeletedSystem) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1452,7 +1491,8 @@ public interface IKeyChainService extends IInterface {
             }
 
             @Override // android.security.IKeyChainService
-            public byte[] getCertificateSystem(String alias, String type, int uid) throws RemoteException {
+            public byte[] getCertificateSystem(String alias, String type, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1489,7 +1529,9 @@ public interface IKeyChainService extends IInterface {
             }
 
             @Override // android.security.IKeyChainService
-            public boolean updateKeyPair(String alias, byte[] userCertificate, byte[] userCertificateChain, int uid) throws RemoteException {
+            public boolean updateKeyPair(
+                    String alias, byte[] userCertificate, byte[] userCertificateChain, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1545,7 +1587,8 @@ public interface IKeyChainService extends IInterface {
             }
 
             @Override // android.security.IKeyChainService
-            public boolean setCertificateChain(String alias, byte[] certificateChain) throws RemoteException {
+            public boolean setCertificateChain(String alias, byte[] certificateChain)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

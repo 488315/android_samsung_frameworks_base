@@ -4,7 +4,8 @@ import android.database.DataSetObservable;
 import android.database.DataSetObserver;
 
 /* loaded from: classes4.dex */
-public abstract class BaseExpandableListAdapter implements ExpandableListAdapter, HeterogeneousExpandableList {
+public abstract class BaseExpandableListAdapter
+        implements ExpandableListAdapter, HeterogeneousExpandableList {
     private final DataSetObservable mDataSetObservable = new DataSetObservable();
 
     @Override // android.widget.ExpandableListAdapter
@@ -31,12 +32,10 @@ public abstract class BaseExpandableListAdapter implements ExpandableListAdapter
     }
 
     @Override // android.widget.ExpandableListAdapter
-    public void onGroupCollapsed(int groupPosition) {
-    }
+    public void onGroupCollapsed(int groupPosition) {}
 
     @Override // android.widget.ExpandableListAdapter
-    public void onGroupExpanded(int groupPosition) {
-    }
+    public void onGroupExpanded(int groupPosition) {}
 
     @Override // android.widget.ExpandableListAdapter
     public long getCombinedChildId(long groupId, long childId) {

@@ -9,8 +9,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.util.Log;
-import com.samsung.android.hardware.context.ISemContextCallback;
-import com.samsung.android.hardware.context.ISemContextService;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -31,7 +30,8 @@ public class SemContextManager {
         this.mSemContextService = null;
         this.mAvailableServiceMap = null;
         this.mClientInfo = "";
-        this.mSemContextService = ISemContextService.Stub.asInterface(ServiceManager.getService("scontext"));
+        this.mSemContextService =
+                ISemContextService.Stub.asInterface(ServiceManager.getService("scontext"));
         this.mMainLooper = mainLooper;
         this.mPackageName = ctx.getPackageName();
     }
@@ -41,14 +41,16 @@ public class SemContextManager {
         this.mSemContextService = null;
         this.mAvailableServiceMap = null;
         this.mClientInfo = "";
-        this.mSemContextService = ISemContextService.Stub.asInterface(ServiceManager.getService("scontext"));
+        this.mSemContextService =
+                ISemContextService.Stub.asInterface(ServiceManager.getService("scontext"));
         this.mMainLooper = mainLooper;
         this.mPackageName = " ";
     }
 
     private synchronized boolean recoverService() {
         if (this.mSemContextService == null) {
-            this.mSemContextService = ISemContextService.Stub.asInterface(ServiceManager.getService("scontext"));
+            this.mSemContextService =
+                    ISemContextService.Stub.asInterface(ServiceManager.getService("scontext"));
         }
         return this.mSemContextService != null;
     }
@@ -63,7 +65,8 @@ public class SemContextManager {
         return registerListener(listener, service, attribute, looper);
     }
 
-    public boolean registerListener(SemContextListener listener, int service, SemContextAttribute attribute) {
+    public boolean registerListener(
+            SemContextListener listener, int service, SemContextAttribute attribute) {
         if (this.mSemContextService == null) {
             Log.e(TAG, "SemContextService is null");
             if (!recoverService()) {
@@ -73,7 +76,9 @@ public class SemContextManager {
         if (service == 48) {
             return setReferenceData(service, attribute);
         }
-        if (attribute == null || !attribute.checkAttribute() || !checkListenerAndService(listener, service)) {
+        if (attribute == null
+                || !attribute.checkAttribute()
+                || !checkListenerAndService(listener, service)) {
             return false;
         }
         ListenerDelegate listenerDelegate = getListenerDelegate(listener);
@@ -82,8 +87,14 @@ public class SemContextManager {
             this.mListenerDelegates.add(listenerDelegate);
         }
         try {
-            this.mSemContextService.registerCallback(listenerDelegate, service, attribute, this.mPackageName);
-            Log.d(TAG, "  .registerListener : listener = " + listener + ", service=" + SemContext.getServiceName(service));
+            this.mSemContextService.registerCallback(
+                    listenerDelegate, service, attribute, this.mPackageName);
+            Log.d(
+                    TAG,
+                    "  .registerListener : listener = "
+                            + listener
+                            + ", service="
+                            + SemContext.getServiceName(service));
             return true;
         } catch (RemoteException e) {
             Log.e(TAG, "RemoteException in registerListener: ", e);
@@ -91,14 +102,20 @@ public class SemContextManager {
         }
     }
 
-    public boolean registerListener(SemContextListener listener, int service, SemContextAttribute attribute, Looper looper) {
+    public boolean registerListener(
+            SemContextListener listener,
+            int service,
+            SemContextAttribute attribute,
+            Looper looper) {
         if (this.mSemContextService == null) {
             Log.e(TAG, "SemContextService is null");
             if (!recoverService()) {
                 return false;
             }
         }
-        if (attribute == null || !attribute.checkAttribute() || !checkListenerAndService(listener, service)) {
+        if (attribute == null
+                || !attribute.checkAttribute()
+                || !checkListenerAndService(listener, service)) {
             return false;
         }
         ListenerDelegate listenerDelegate = getListenerDelegate(listener);
@@ -107,8 +124,14 @@ public class SemContextManager {
             this.mListenerDelegates.add(listenerDelegate);
         }
         try {
-            this.mSemContextService.registerCallback(listenerDelegate, service, attribute, this.mPackageName);
-            Log.d(TAG, "  .registerListener : listener = " + listener + ", service=" + SemContext.getServiceName(service));
+            this.mSemContextService.registerCallback(
+                    listenerDelegate, service, attribute, this.mPackageName);
+            Log.d(
+                    TAG,
+                    "  .registerListener : listener = "
+                            + listener
+                            + ", service="
+                            + SemContext.getServiceName(service));
             return true;
         } catch (RemoteException e) {
             Log.e(TAG, "RemoteException in registerListener: ", e);
@@ -143,7 +166,8 @@ public class SemContextManager {
     }
 
     @Deprecated
-    public boolean registerListener(SemContextListener listener, int service, int[] arg1, int arg2) {
+    public boolean registerListener(
+            SemContextListener listener, int service, int[] arg1, int arg2) {
         SemContextAttribute attribute = null;
         if (service == 30) {
             attribute = new SemContextActivityNotificationExAttribute(arg1, arg2);
@@ -161,7 +185,8 @@ public class SemContextManager {
     }
 
     @Deprecated
-    public boolean registerListener(SemContextListener listener, int service, int arg1, int arg2, int arg3) {
+    public boolean registerListener(
+            SemContextListener listener, int service, int arg1, int arg2, int arg3) {
         SemContextAttribute attribute = null;
         if (service == 35) {
             attribute = new SemContextSedentaryTimerAttribute(arg1, arg2, arg3, 1500, 1500);
@@ -170,7 +195,8 @@ public class SemContextManager {
     }
 
     @Deprecated
-    public boolean registerListener(SemContextListener listener, int service, int arg1, double arg2, double arg3) {
+    public boolean registerListener(
+            SemContextListener listener, int service, int arg1, double arg2, double arg3) {
         SemContextAttribute attribute = null;
         if (service == 2) {
             attribute = new SemContextPedometerAttribute(arg1, arg2, arg3);
@@ -179,7 +205,8 @@ public class SemContextManager {
     }
 
     @Deprecated
-    public boolean registerListener(SemContextListener listener, int service, int arg1, int arg2, int arg3, int arg4) {
+    public boolean registerListener(
+            SemContextListener listener, int service, int arg1, int arg2, int arg3, int arg4) {
         SemContextAttribute attribute = null;
         if (service == 28) {
             attribute = new SemContextSpecificPoseAlertAttribute(arg1, arg2, arg3, arg4);
@@ -188,10 +215,18 @@ public class SemContextManager {
     }
 
     @Deprecated
-    public boolean registerListener(SemContextListener listener, int service, int arg1, int arg2, int arg3, int arg4, int arg5) {
+    public boolean registerListener(
+            SemContextListener listener,
+            int service,
+            int arg1,
+            int arg2,
+            int arg3,
+            int arg4,
+            int arg5) {
         SemContextAttribute attribute = null;
         if (service == 24) {
-            attribute = new SemContextActivityLocationLoggingAttribute(arg1, arg2, arg3, arg4, arg5);
+            attribute =
+                    new SemContextActivityLocationLoggingAttribute(arg1, arg2, arg3, arg4, arg5);
         } else if (service == 35) {
             attribute = new SemContextSedentaryTimerAttribute(arg1, arg2, arg3, arg4, arg5);
         }
@@ -212,7 +247,14 @@ public class SemContextManager {
             }
             ListenerDelegate listenerDelegate = getListenerDelegate(listener);
             if (listenerDelegate == null) {
-                Log.e(TAG, "  .unregisterListener : SemContextListener is null!, manager = " + toString() + ", listener = " + listener.toString() + ", service = " + service);
+                Log.e(
+                        TAG,
+                        "  .unregisterListener : SemContextListener is null!, manager = "
+                                + toString()
+                                + ", listener = "
+                                + listener.toString()
+                                + ", service = "
+                                + service);
                 return;
             }
             try {
@@ -220,7 +262,12 @@ public class SemContextManager {
                     listenerDelegate.clear();
                     this.mListenerDelegates.remove(listenerDelegate);
                 }
-                Log.d(TAG, "  .unregisterListener : listener = " + listener + ", service=" + SemContext.getServiceName(service));
+                Log.d(
+                        TAG,
+                        "  .unregisterListener : listener = "
+                                + listener
+                                + ", service="
+                                + SemContext.getServiceName(service));
             } catch (RemoteException e) {
                 Log.e(TAG, "RemoteException in unregisterListener: ", e);
             }
@@ -245,23 +292,40 @@ public class SemContextManager {
         }
         try {
             this.mSemContextService.initializeService(listenerDelegate, service);
-            Log.d(TAG, "  .initializeSemContextService : listener = " + listener + ", service=" + SemContext.getServiceName(service));
+            Log.d(
+                    TAG,
+                    "  .initializeSemContextService : listener = "
+                            + listener
+                            + ", service="
+                            + SemContext.getServiceName(service));
         } catch (RemoteException e) {
             Log.e(TAG, "RemoteException in initializeSemContextService: ", e);
         }
     }
 
-    public boolean changeParameters(SemContextListener listener, int service, SemContextAttribute attribute) {
+    public boolean changeParameters(
+            SemContextListener listener, int service, SemContextAttribute attribute) {
         if (this.mSemContextService == null) {
             Log.e(TAG, "SemContextService is null");
             if (!recoverService()) {
                 return false;
             }
         }
-        if (attribute == null || !attribute.checkAttribute() || !checkListenerAndService(listener, service)) {
+        if (attribute == null
+                || !attribute.checkAttribute()
+                || !checkListenerAndService(listener, service)) {
             return false;
         }
-        if (service != 1 && service != 2 && service != 33 && service != 35 && service != 39 && service != 47 && service != 51 && service != 53 && service != 54 && service != 56) {
+        if (service != 1
+                && service != 2
+                && service != 33
+                && service != 35
+                && service != 39
+                && service != 47
+                && service != 51
+                && service != 53
+                && service != 54
+                && service != 56) {
             return false;
         }
         ListenerDelegate listenerDelegate = getListenerDelegate(listener);
@@ -271,7 +335,12 @@ public class SemContextManager {
         }
         try {
             if (this.mSemContextService.changeParameters(listenerDelegate, service, attribute)) {
-                Log.d(TAG, "  .changeParameters : listener = " + listener + ", service=" + SemContext.getServiceName(service));
+                Log.d(
+                        TAG,
+                        "  .changeParameters : listener = "
+                                + listener
+                                + ", service="
+                                + SemContext.getServiceName(service));
             }
         } catch (RemoteException e) {
             Log.e(TAG, "RemoteException in changeParameters: ", e);
@@ -280,7 +349,8 @@ public class SemContextManager {
     }
 
     @Deprecated
-    public boolean changeParameters(SemContextListener listener, int service, int arg1, int arg2, int arg3, int arg4) {
+    public boolean changeParameters(
+            SemContextListener listener, int service, int arg1, int arg2, int arg3, int arg4) {
         SemContextAttribute attribute = null;
         if (service == 35) {
             attribute = new SemContextSedentaryTimerAttribute(1, arg1, arg2, arg3, arg4);
@@ -289,7 +359,8 @@ public class SemContextManager {
     }
 
     @Deprecated
-    public boolean changeParameters(SemContextListener listener, int service, int arg1, double arg2, double arg3) {
+    public boolean changeParameters(
+            SemContextListener listener, int service, int arg1, double arg2, double arg3) {
         SemContextAttribute attribute = null;
         if (service == 2) {
             attribute = new SemContextPedometerAttribute(arg1, arg2, arg3);
@@ -316,7 +387,13 @@ public class SemContextManager {
             }
         }
         if (isAvailableService(service)) {
-            if (service != 2 && service != 25 && service != 26 && service != 50 && service != 51 && service != 52 && service != 54) {
+            if (service != 2
+                    && service != 25
+                    && service != 26
+                    && service != 50
+                    && service != 51
+                    && service != 52
+                    && service != 54) {
                 Log.e(TAG, "  .requestToUpdate : This service is not supported!");
                 return;
             }
@@ -326,8 +403,14 @@ public class SemContextManager {
                 return;
             }
             try {
-                this.mSemContextService.requestToUpdate(listenerDelegate, service, this.mPackageName);
-                Log.d(TAG, "  .requestToUpdate : listener = " + listener + ", service=" + SemContext.getServiceName(service));
+                this.mSemContextService.requestToUpdate(
+                        listenerDelegate, service, this.mPackageName);
+                Log.d(
+                        TAG,
+                        "  .requestToUpdate : listener = "
+                                + listener
+                                + ", service="
+                                + SemContext.getServiceName(service));
             } catch (RemoteException e) {
                 Log.e(TAG, "RemoteException in requestToUpdate: ", e);
             }
@@ -348,14 +431,24 @@ public class SemContextManager {
             }
             if (checkListenerAndService(listener, service)) {
                 if (getListenerDelegate(listener) != null) {
-                    Log.e(TAG, "  .requestHistoryData : This listener is currently using other services. You should create a new listener to request history data.");
+                    Log.e(
+                            TAG,
+                            "  .requestHistoryData : This listener is currently using other"
+                                + " services. You should create a new listener to request history"
+                                + " data.");
                     return;
                 }
                 ListenerDelegate listenerDelegate = new ListenerDelegate(listener, true);
                 this.mListenerDelegates.add(listenerDelegate);
                 try {
-                    this.mSemContextService.requestHistoryData(listenerDelegate, service, this.mPackageName);
-                    Log.d(TAG, "  .requestHistoryData : listener = " + listener + ", service=" + SemContext.getServiceName(service));
+                    this.mSemContextService.requestHistoryData(
+                            listenerDelegate, service, this.mPackageName);
+                    Log.d(
+                            TAG,
+                            "  .requestHistoryData : listener = "
+                                    + listener
+                                    + ", service="
+                                    + SemContext.getServiceName(service));
                 } catch (RemoteException e) {
                     Log.e(TAG, "RemoteException in requestHistoryData: ", e);
                 }
@@ -374,7 +467,9 @@ public class SemContextManager {
             return false;
         }
         boolean res = this.mAvailableServiceMap.containsKey(Integer.valueOf(service));
-        if (service == 47 && "BCM4773_SLOCATION_CORE".equals(SystemProperties.get("ro.gps.chip.vendor.slocation"))) {
+        if (service == 47
+                && "BCM4773_SLOCATION_CORE"
+                        .equals(SystemProperties.get("ro.gps.chip.vendor.slocation"))) {
             return false;
         }
         return res;
@@ -428,7 +523,9 @@ public class SemContextManager {
                         byte[] netData = bundle.getByteArray("net_data");
                         byte[] gramData = bundle.getByteArray("gram_data");
                         if (netData != null && gramData != null) {
-                            if (this.mSemContextService.setReferenceData(service, 1, netData) && this.mSemContextService.setReferenceData(service, 2, gramData)) {
+                            if (this.mSemContextService.setReferenceData(service, 1, netData)
+                                    && this.mSemContextService.setReferenceData(
+                                            service, 2, gramData)) {
                                 z = true;
                             }
                             boolean res2 = z;
@@ -437,8 +534,12 @@ public class SemContextManager {
                     }
                     break;
                 case 39:
-                    if (bundle.containsKey("luminance_config_data") && (luminanceConfigData = bundle.getByteArray("luminance_config_data")) != null) {
-                        boolean res3 = this.mSemContextService.setReferenceData(service, 0, luminanceConfigData);
+                    if (bundle.containsKey("luminance_config_data")
+                            && (luminanceConfigData = bundle.getByteArray("luminance_config_data"))
+                                    != null) {
+                        boolean res3 =
+                                this.mSemContextService.setReferenceData(
+                                        service, 0, luminanceConfigData);
                         break;
                     }
                     break;
@@ -448,8 +549,12 @@ public class SemContextManager {
                         break;
                     } else {
                         byte[] hallSensorStatus = {(byte) bundle.getInt("display_status")};
-                        Log.d(TAG, "Hall Sensor Data : " + String.valueOf((int) hallSensorStatus[0]));
-                        boolean res4 = this.mSemContextService.setReferenceData(service, 43, hallSensorStatus);
+                        Log.d(
+                                TAG,
+                                "Hall Sensor Data : " + String.valueOf((int) hallSensorStatus[0]));
+                        boolean res4 =
+                                this.mSemContextService.setReferenceData(
+                                        service, 43, hallSensorStatus);
                         break;
                     }
                 case 48:
@@ -459,7 +564,8 @@ public class SemContextManager {
                     } else {
                         byte[] sysfsMode = {(byte) bundle.getInt("interrupt_gyro")};
                         Log.d(TAG, "sysfs data : " + String.valueOf((int) sysfsMode[0]));
-                        boolean res5 = this.mSemContextService.setReferenceData(service, 48, sysfsMode);
+                        boolean res5 =
+                                this.mSemContextService.setReferenceData(service, 48, sysfsMode);
                         break;
                     }
             }
@@ -498,7 +604,8 @@ public class SemContextManager {
             }
         }
         try {
-            HashMap<Integer, Integer> serviceMap = (HashMap) this.mSemContextService.getAvailableServiceMap();
+            HashMap<Integer, Integer> serviceMap =
+                    (HashMap) this.mSemContextService.getAvailableServiceMap();
             return serviceMap;
         } catch (RemoteException e) {
             Log.e(TAG, "RemoteException in getAvailableServiceMap: ", e);
@@ -555,7 +662,8 @@ public class SemContextManager {
                 res = Boolean.valueOf(z);
                 break;
             case 33:
-                SemContextStepLevelMonitor stepLevelMonitorContext = event.getStepLevelMonitorContext();
+                SemContextStepLevelMonitor stepLevelMonitorContext =
+                        event.getStepLevelMonitorContext();
                 if (stepLevelMonitorContext.getMode() == 1) {
                     z = true;
                 }
@@ -587,36 +695,56 @@ public class SemContextManager {
             this.mListener = listener;
             Looper mainLooper = looper != null ? looper : SemContextManager.this.mMainLooper;
             this.mIsHistoryData = isHistoryData;
-            this.mHandler = new Handler(mainLooper) { // from class: com.samsung.android.hardware.context.SemContextManager.ListenerDelegate.1
-                @Override // android.os.Handler
-                public void handleMessage(Message msg) {
-                    SemContextEvent event;
-                    SemContext context;
-                    if (ListenerDelegate.this.mListener == null || (event = (SemContextEvent) msg.obj) == null || (context = event.semContext) == null) {
-                        return;
-                    }
-                    int type = context.getType();
-                    if (ListenerDelegate.this.mIsHistoryData) {
-                        Log.d(SemContextManager.TAG, "History data is received. : type = " + SemContext.getServiceName(type));
-                        ListenerDelegate.this.mListener.onSemContextChanged(event);
-                        SemContextManager.this.unregisterListener(ListenerDelegate.this.mListener, type);
-                        ListenerDelegate.this.mIsHistoryData = false;
-                        return;
-                    }
-                    if (!SemContextManager.this.checkHistoryMode(event)) {
-                        if (type == 6) {
-                            SemContextAutoRotation autoRotation = event.getAutoRotationContext();
-                            Log.d(SemContextManager.TAG, "AutoRotationEvent : Angle = " + autoRotation.getAngle());
-                        } else if (type == 2) {
-                            SemContextPedometer pedometer = event.getPedometerContext();
-                            Log.d(SemContextManager.TAG, "[2] : " + pedometer.getTotalStepCount() + ", " + pedometer.getWalkStepCount() + ", " + pedometer.getRunStepCount());
+            this.mHandler =
+                    new Handler(
+                            mainLooper) { // from class:
+                                          // com.samsung.android.hardware.context.SemContextManager.ListenerDelegate.1
+                        @Override // android.os.Handler
+                        public void handleMessage(Message msg) {
+                            SemContextEvent event;
+                            SemContext context;
+                            if (ListenerDelegate.this.mListener == null
+                                    || (event = (SemContextEvent) msg.obj) == null
+                                    || (context = event.semContext) == null) {
+                                return;
+                            }
+                            int type = context.getType();
+                            if (ListenerDelegate.this.mIsHistoryData) {
+                                Log.d(
+                                        SemContextManager.TAG,
+                                        "History data is received. : type = "
+                                                + SemContext.getServiceName(type));
+                                ListenerDelegate.this.mListener.onSemContextChanged(event);
+                                SemContextManager.this.unregisterListener(
+                                        ListenerDelegate.this.mListener, type);
+                                ListenerDelegate.this.mIsHistoryData = false;
+                                return;
+                            }
+                            if (!SemContextManager.this.checkHistoryMode(event)) {
+                                if (type == 6) {
+                                    SemContextAutoRotation autoRotation =
+                                            event.getAutoRotationContext();
+                                    Log.d(
+                                            SemContextManager.TAG,
+                                            "AutoRotationEvent : Angle = "
+                                                    + autoRotation.getAngle());
+                                } else if (type == 2) {
+                                    SemContextPedometer pedometer = event.getPedometerContext();
+                                    Log.d(
+                                            SemContextManager.TAG,
+                                            "[2] : "
+                                                    + pedometer.getTotalStepCount()
+                                                    + ", "
+                                                    + pedometer.getWalkStepCount()
+                                                    + ", "
+                                                    + pedometer.getRunStepCount());
+                                }
+                                if (!ListenerDelegate.this.mDereisgeredListener) {
+                                    ListenerDelegate.this.mListener.onSemContextChanged(event);
+                                }
+                            }
                         }
-                        if (!ListenerDelegate.this.mDereisgeredListener) {
-                            ListenerDelegate.this.mListener.onSemContextChanged(event);
-                        }
-                    }
-                }
-            };
+                    };
         }
 
         public void clear() {

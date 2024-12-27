@@ -58,7 +58,8 @@ public class ResponderID extends ASN1Object implements ASN1Choice {
         return X500Name.getInstance(this.value);
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         if (this.value instanceof ASN1OctetString) {
             return new DERTaggedObject(true, 2, this.value);

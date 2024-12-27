@@ -18,7 +18,8 @@ class ByteBufferDataSource implements DataSource {
     }
 
     @Override // android.util.apk.DataSource
-    public void feedIntoDataDigester(DataDigester md, long offset, int size) throws IOException, DigestException {
+    public void feedIntoDataDigester(DataDigester md, long offset, int size)
+            throws IOException, DigestException {
         ByteBuffer region;
         synchronized (this.mBuf) {
             this.mBuf.position(0);

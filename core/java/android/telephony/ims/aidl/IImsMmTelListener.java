@@ -9,8 +9,7 @@ import android.os.RemoteException;
 import android.telephony.ims.ImsCallProfile;
 import android.telephony.ims.ImsReasonInfo;
 import android.telephony.ims.MediaQualityStatus;
-import android.telephony.ims.aidl.IImsCallSessionListener;
-import android.telephony.ims.aidl.IImsTrafficSessionCallback;
+
 import com.android.ims.internal.IImsCallSession;
 
 /* loaded from: classes4.dex */
@@ -21,15 +20,19 @@ public interface IImsMmTelListener extends IInterface {
 
     void onCdpnReceived(String str, int i) throws RemoteException;
 
-    IImsCallSessionListener onIncomingCall(IImsCallSession iImsCallSession, String str, Bundle bundle) throws RemoteException;
+    IImsCallSessionListener onIncomingCall(
+            IImsCallSession iImsCallSession, String str, Bundle bundle) throws RemoteException;
 
     void onMediaQualityStatusChanged(MediaQualityStatus mediaQualityStatus) throws RemoteException;
 
     void onModifyImsTrafficSession(int i, int i2) throws RemoteException;
 
-    void onRejectedCall(ImsCallProfile imsCallProfile, ImsReasonInfo imsReasonInfo) throws RemoteException;
+    void onRejectedCall(ImsCallProfile imsCallProfile, ImsReasonInfo imsReasonInfo)
+            throws RemoteException;
 
-    void onStartImsTrafficSession(int i, int i2, int i3, int i4, IImsTrafficSessionCallback iImsTrafficSessionCallback) throws RemoteException;
+    void onStartImsTrafficSession(
+            int i, int i2, int i3, int i4, IImsTrafficSessionCallback iImsTrafficSessionCallback)
+            throws RemoteException;
 
     void onStopImsTrafficSession(int i) throws RemoteException;
 
@@ -39,45 +42,45 @@ public interface IImsMmTelListener extends IInterface {
 
     public static class Default implements IImsMmTelListener {
         @Override // android.telephony.ims.aidl.IImsMmTelListener
-        public IImsCallSessionListener onIncomingCall(IImsCallSession c, String callId, Bundle extras) throws RemoteException {
+        public IImsCallSessionListener onIncomingCall(
+                IImsCallSession c, String callId, Bundle extras) throws RemoteException {
             return null;
         }
 
         @Override // android.telephony.ims.aidl.IImsMmTelListener
-        public void onRejectedCall(ImsCallProfile callProfile, ImsReasonInfo reason) throws RemoteException {
-        }
+        public void onRejectedCall(ImsCallProfile callProfile, ImsReasonInfo reason)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelListener
-        public void onVoiceMessageCountUpdate(int count) throws RemoteException {
-        }
+        public void onVoiceMessageCountUpdate(int count) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelListener
-        public void onCdpnReceived(String calledPartyNumber, int timeout) throws RemoteException {
-        }
+        public void onCdpnReceived(String calledPartyNumber, int timeout) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelListener
-        public void onAudioModeIsVoipChanged(int imsAudioHandler) throws RemoteException {
-        }
+        public void onAudioModeIsVoipChanged(int imsAudioHandler) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelListener
-        public void onTriggerEpsFallback(int reason) throws RemoteException {
-        }
+        public void onTriggerEpsFallback(int reason) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelListener
-        public void onStartImsTrafficSession(int token, int trafficType, int accessNetworkType, int trafficDirection, IImsTrafficSessionCallback callback) throws RemoteException {
-        }
+        public void onStartImsTrafficSession(
+                int token,
+                int trafficType,
+                int accessNetworkType,
+                int trafficDirection,
+                IImsTrafficSessionCallback callback)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelListener
-        public void onModifyImsTrafficSession(int token, int accessNetworkType) throws RemoteException {
-        }
+        public void onModifyImsTrafficSession(int token, int accessNetworkType)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelListener
-        public void onStopImsTrafficSession(int token) throws RemoteException {
-        }
+        public void onStopImsTrafficSession(int token) throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IImsMmTelListener
-        public void onMediaQualityStatusChanged(MediaQualityStatus status) throws RemoteException {
-        }
+        public void onMediaQualityStatusChanged(MediaQualityStatus status) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -85,7 +88,7 @@ public interface IImsMmTelListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImsMmTelListener {
+    public abstract static class Stub extends Binder implements IImsMmTelListener {
         static final int TRANSACTION_onAudioModeIsVoipChanged = 5;
         static final int TRANSACTION_onCdpnReceived = 4;
         static final int TRANSACTION_onIncomingCall = 1;
@@ -150,7 +153,8 @@ public interface IImsMmTelListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IImsMmTelListener.DESCRIPTOR);
             }
@@ -160,7 +164,8 @@ public interface IImsMmTelListener extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IImsCallSession _arg0 = IImsCallSession.Stub.asInterface(data.readStrongBinder());
+                    IImsCallSession _arg0 =
+                            IImsCallSession.Stub.asInterface(data.readStrongBinder());
                     String _arg1 = data.readString();
                     Bundle _arg2 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     data.enforceNoDataAvail();
@@ -169,8 +174,10 @@ public interface IImsMmTelListener extends IInterface {
                     reply.writeStrongInterface(_result);
                     return true;
                 case 2:
-                    ImsCallProfile _arg02 = (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
-                    ImsReasonInfo _arg12 = (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
+                    ImsCallProfile _arg02 =
+                            (ImsCallProfile) data.readTypedObject(ImsCallProfile.CREATOR);
+                    ImsReasonInfo _arg12 =
+                            (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onRejectedCall(_arg02, _arg12);
                     reply.writeNoException();
@@ -202,7 +209,8 @@ public interface IImsMmTelListener extends IInterface {
                     int _arg14 = data.readInt();
                     int _arg22 = data.readInt();
                     int _arg3 = data.readInt();
-                    IImsTrafficSessionCallback _arg4 = IImsTrafficSessionCallback.Stub.asInterface(data.readStrongBinder());
+                    IImsTrafficSessionCallback _arg4 =
+                            IImsTrafficSessionCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onStartImsTrafficSession(_arg07, _arg14, _arg22, _arg3, _arg4);
                     return true;
@@ -218,7 +226,8 @@ public interface IImsMmTelListener extends IInterface {
                     onStopImsTrafficSession(_arg09);
                     return true;
                 case 10:
-                    MediaQualityStatus _arg010 = (MediaQualityStatus) data.readTypedObject(MediaQualityStatus.CREATOR);
+                    MediaQualityStatus _arg010 =
+                            (MediaQualityStatus) data.readTypedObject(MediaQualityStatus.CREATOR);
                     data.enforceNoDataAvail();
                     onMediaQualityStatusChanged(_arg010);
                     return true;
@@ -244,7 +253,8 @@ public interface IImsMmTelListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelListener
-            public IImsCallSessionListener onIncomingCall(IImsCallSession c, String callId, Bundle extras) throws RemoteException {
+            public IImsCallSessionListener onIncomingCall(
+                    IImsCallSession c, String callId, Bundle extras) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -254,7 +264,8 @@ public interface IImsMmTelListener extends IInterface {
                     _data.writeTypedObject(extras, 0);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    IImsCallSessionListener _result = IImsCallSessionListener.Stub.asInterface(_reply.readStrongBinder());
+                    IImsCallSessionListener _result =
+                            IImsCallSessionListener.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -263,7 +274,8 @@ public interface IImsMmTelListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelListener
-            public void onRejectedCall(ImsCallProfile callProfile, ImsReasonInfo reason) throws RemoteException {
+            public void onRejectedCall(ImsCallProfile callProfile, ImsReasonInfo reason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -291,7 +303,8 @@ public interface IImsMmTelListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelListener
-            public void onCdpnReceived(String calledPartyNumber, int timeout) throws RemoteException {
+            public void onCdpnReceived(String calledPartyNumber, int timeout)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -331,7 +344,13 @@ public interface IImsMmTelListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelListener
-            public void onStartImsTrafficSession(int token, int trafficType, int accessNetworkType, int trafficDirection, IImsTrafficSessionCallback callback) throws RemoteException {
+            public void onStartImsTrafficSession(
+                    int token,
+                    int trafficType,
+                    int accessNetworkType,
+                    int trafficDirection,
+                    IImsTrafficSessionCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IImsMmTelListener.DESCRIPTOR);
@@ -347,7 +366,8 @@ public interface IImsMmTelListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelListener
-            public void onModifyImsTrafficSession(int token, int accessNetworkType) throws RemoteException {
+            public void onModifyImsTrafficSession(int token, int accessNetworkType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IImsMmTelListener.DESCRIPTOR);
@@ -372,7 +392,8 @@ public interface IImsMmTelListener extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IImsMmTelListener
-            public void onMediaQualityStatusChanged(MediaQualityStatus status) throws RemoteException {
+            public void onMediaQualityStatusChanged(MediaQualityStatus status)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IImsMmTelListener.DESCRIPTOR);

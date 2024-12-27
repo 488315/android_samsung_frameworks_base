@@ -8,19 +8,20 @@ import android.os.Parcelable;
 /* loaded from: classes.dex */
 public final class SyncResult implements Parcelable {
     public static final SyncResult ALREADY_IN_PROGRESS = new SyncResult(true);
-    public static final Parcelable.Creator<SyncResult> CREATOR = new Parcelable.Creator<SyncResult>() { // from class: android.content.SyncResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SyncResult createFromParcel(Parcel in) {
-            return new SyncResult(in);
-        }
+    public static final Parcelable.Creator<SyncResult> CREATOR =
+            new Parcelable.Creator<SyncResult>() { // from class: android.content.SyncResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SyncResult createFromParcel(Parcel in) {
+                    return new SyncResult(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SyncResult[] newArray(int size) {
-            return new SyncResult[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SyncResult[] newArray(int size) {
+                    return new SyncResult[size];
+                }
+            };
     public boolean databaseError;
     public long delayUntil;
     public boolean fullSyncRequested;
@@ -59,7 +60,12 @@ public final class SyncResult implements Parcelable {
     }
 
     public boolean hasHardError() {
-        return this.stats.numParseExceptions > 0 || this.stats.numConflictDetectedExceptions > 0 || this.stats.numAuthExceptions > 0 || this.tooManyDeletions || this.tooManyRetries || this.databaseError;
+        return this.stats.numParseExceptions > 0
+                || this.stats.numConflictDetectedExceptions > 0
+                || this.stats.numAuthExceptions > 0
+                || this.tooManyDeletions
+                || this.tooManyRetries
+                || this.databaseError;
     }
 
     public boolean hasSoftError() {
@@ -71,12 +77,15 @@ public final class SyncResult implements Parcelable {
     }
 
     public boolean madeSomeProgress() {
-        return (this.stats.numDeletes > 0 && !this.tooManyDeletions) || this.stats.numInserts > 0 || this.stats.numUpdates > 0;
+        return (this.stats.numDeletes > 0 && !this.tooManyDeletions)
+                || this.stats.numInserts > 0
+                || this.stats.numUpdates > 0;
     }
 
     public void clear() {
         if (this.syncAlreadyInProgress) {
-            throw new UnsupportedOperationException("you are not allowed to clear the ALREADY_IN_PROGRESS SyncStats");
+            throw new UnsupportedOperationException(
+                    "you are not allowed to clear the ALREADY_IN_PROGRESS SyncStats");
         }
         this.tooManyDeletions = false;
         this.tooManyRetries = false;

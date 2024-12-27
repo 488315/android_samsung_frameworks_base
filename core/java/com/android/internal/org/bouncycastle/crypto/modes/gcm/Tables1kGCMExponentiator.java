@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.crypto.modes.gcm;
 
 import com.android.internal.org.bouncycastle.util.Arrays;
+
 import java.util.Vector;
 
 /* loaded from: classes5.dex */
@@ -10,7 +11,8 @@ public class Tables1kGCMExponentiator implements GCMExponentiator {
     @Override // com.android.internal.org.bouncycastle.crypto.modes.gcm.GCMExponentiator
     public void init(byte[] x) {
         long[] y = GCMUtil.asLongs(x);
-        if (this.lookupPowX2 != null && Arrays.areEqual(y, (long[]) this.lookupPowX2.elementAt(0))) {
+        if (this.lookupPowX2 != null
+                && Arrays.areEqual(y, (long[]) this.lookupPowX2.elementAt(0))) {
             return;
         }
         this.lookupPowX2 = new Vector(8);

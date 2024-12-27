@@ -8,7 +8,12 @@ final class ViewFocusParameterInfo {
     final int mPreviousStartInputReason;
     final int mPreviousWindowFlags;
 
-    ViewFocusParameterInfo(EditorInfo previousEditorInfo, int previousStartInputFlags, int previousStartInputReason, int previousSoftInputMode, int previousWindowFlags) {
+    ViewFocusParameterInfo(
+            EditorInfo previousEditorInfo,
+            int previousStartInputFlags,
+            int previousStartInputReason,
+            int previousSoftInputMode,
+            int previousWindowFlags) {
         this.mPreviousEditorInfo = previousEditorInfo;
         this.mPreviousStartInputFlags = previousStartInputFlags;
         this.mPreviousStartInputReason = previousStartInputReason;
@@ -16,7 +21,18 @@ final class ViewFocusParameterInfo {
         this.mPreviousWindowFlags = previousWindowFlags;
     }
 
-    boolean sameAs(EditorInfo currentEditorInfo, int startInputFlags, int startInputReason, int softInputMode, int windowFlags) {
-        return this.mPreviousStartInputFlags == startInputFlags && this.mPreviousStartInputReason == startInputReason && this.mPreviousSoftInputMode == softInputMode && this.mPreviousWindowFlags == windowFlags && (this.mPreviousEditorInfo == currentEditorInfo || (this.mPreviousEditorInfo != null && this.mPreviousEditorInfo.kindofEquals(currentEditorInfo)));
+    boolean sameAs(
+            EditorInfo currentEditorInfo,
+            int startInputFlags,
+            int startInputReason,
+            int softInputMode,
+            int windowFlags) {
+        return this.mPreviousStartInputFlags == startInputFlags
+                && this.mPreviousStartInputReason == startInputReason
+                && this.mPreviousSoftInputMode == softInputMode
+                && this.mPreviousWindowFlags == windowFlags
+                && (this.mPreviousEditorInfo == currentEditorInfo
+                        || (this.mPreviousEditorInfo != null
+                                && this.mPreviousEditorInfo.kindofEquals(currentEditorInfo)));
     }
 }

@@ -9,14 +9,17 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.sec.enterprise.auditlog.AuditComponents;
 import android.util.Slog;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 import java.util.function.Supplier;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public final class ParcelableResource implements Parcelable {
@@ -31,29 +34,32 @@ public final class ParcelableResource implements Parcelable {
     private final String mResourceName;
     private final int mResourceType;
     private static String TAG = AuditComponents.DEVICE_POLICY_MANAGER;
-    public static final Parcelable.Creator<ParcelableResource> CREATOR = new Parcelable.Creator<ParcelableResource>() { // from class: android.app.admin.ParcelableResource.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParcelableResource createFromParcel(Parcel in) {
-            int resourceId = in.readInt();
-            String packageName = in.readString();
-            String resourceName = in.readString();
-            int resourceType = in.readInt();
-            return new ParcelableResource(resourceId, packageName, resourceName, resourceType);
-        }
+    public static final Parcelable.Creator<ParcelableResource> CREATOR =
+            new Parcelable.Creator<
+                    ParcelableResource>() { // from class: android.app.admin.ParcelableResource.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParcelableResource createFromParcel(Parcel in) {
+                    int resourceId = in.readInt();
+                    String packageName = in.readString();
+                    String resourceName = in.readString();
+                    int resourceType = in.readInt();
+                    return new ParcelableResource(
+                            resourceId, packageName, resourceName, resourceType);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ParcelableResource[] newArray(int size) {
-            return new ParcelableResource[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ParcelableResource[] newArray(int size) {
+                    return new ParcelableResource[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ResourceType {
-    }
+    public @interface ResourceType {}
 
-    public ParcelableResource(Context context, int resourceId, int resourceType) throws IllegalStateException, IllegalArgumentException {
+    public ParcelableResource(Context context, int resourceId, int resourceType)
+            throws IllegalStateException, IllegalArgumentException {
         Objects.requireNonNull(context, "context must be provided");
         verifyResourceExistsInCallingPackage(context, resourceId, resourceType);
         this.mResourceId = resourceId;
@@ -62,23 +68,32 @@ public final class ParcelableResource implements Parcelable {
         this.mResourceType = resourceType;
     }
 
-    private ParcelableResource(int resourceId, String packageName, String resourceName, int resourceType) {
+    private ParcelableResource(
+            int resourceId, String packageName, String resourceName, int resourceType) {
         this.mResourceId = resourceId;
         this.mPackageName = (String) Objects.requireNonNull(packageName);
         this.mResourceName = (String) Objects.requireNonNull(resourceName);
         this.mResourceType = resourceType;
     }
 
-    private static void verifyResourceExistsInCallingPackage(Context context, int resourceId, int resourceType) throws IllegalStateException, IllegalArgumentException {
+    private static void verifyResourceExistsInCallingPackage(
+            Context context, int resourceId, int resourceType)
+            throws IllegalStateException, IllegalArgumentException {
         switch (resourceType) {
             case 1:
                 if (!hasDrawableInCallingPackage(context, resourceId)) {
-                    throw new IllegalStateException(String.format("Drawable with id %d doesn't exist in the calling package %s", Integer.valueOf(resourceId), context.getPackageName()));
+                    throw new IllegalStateException(
+                            String.format(
+                                    "Drawable with id %d doesn't exist in the calling package %s",
+                                    Integer.valueOf(resourceId), context.getPackageName()));
                 }
                 return;
             case 2:
                 if (!hasStringInCallingPackage(context, resourceId)) {
-                    throw new IllegalStateException(String.format("String with id %d doesn't exist in the calling package %s", Integer.valueOf(resourceId), context.getPackageName()));
+                    throw new IllegalStateException(
+                            String.format(
+                                    "String with id %d doesn't exist in the calling package %s",
+                                    Integer.valueOf(resourceId), context.getPackageName()));
                 }
                 return;
             default:
@@ -118,7 +133,8 @@ public final class ParcelableResource implements Parcelable {
         return this.mResourceType;
     }
 
-    public Drawable getDrawable(Context context, int density, Supplier<Drawable> defaultDrawableLoader) {
+    public Drawable getDrawable(
+            Context context, int density, Supplier<Drawable> defaultDrawableLoader) {
         try {
             Resources resources = getAppResourcesWithCallersConfiguration(context);
             verifyResourceName(resources);
@@ -140,19 +156,24 @@ public final class ParcelableResource implements Parcelable {
         }
     }
 
-    public String getString(Context context, Supplier<String> defaultStringLoader, Object... formatArgs) {
+    public String getString(
+            Context context, Supplier<String> defaultStringLoader, Object... formatArgs) {
         try {
             Resources resources = getAppResourcesWithCallersConfiguration(context);
             verifyResourceName(resources);
             String rawString = resources.getString(this.mResourceId);
-            return String.format(context.getResources().getConfiguration().getLocales().get(0), rawString, formatArgs);
+            return String.format(
+                    context.getResources().getConfiguration().getLocales().get(0),
+                    rawString,
+                    formatArgs);
         } catch (PackageManager.NameNotFoundException | RuntimeException e) {
             Slog.e(TAG, "Unable to load string resource " + this.mResourceName, e);
             return loadDefaultString(defaultStringLoader);
         }
     }
 
-    private Resources getAppResourcesWithCallersConfiguration(Context context) throws PackageManager.NameNotFoundException {
+    private Resources getAppResourcesWithCallersConfiguration(Context context)
+            throws PackageManager.NameNotFoundException {
         PackageManager pm = context.getPackageManager();
         ApplicationInfo ai = pm.getApplicationInfo(this.mPackageName, 9216);
         return pm.getResourcesForApplication(ai, context.getResources().getConfiguration());
@@ -161,7 +182,11 @@ public final class ParcelableResource implements Parcelable {
     private void verifyResourceName(Resources resources) throws IllegalStateException {
         String name = resources.getResourceName(this.mResourceId);
         if (!this.mResourceName.equals(name)) {
-            throw new IllegalStateException(String.format("Current resource name %s for resource id %d has changed from the previously stored resource name %s.", name, Integer.valueOf(this.mResourceId), this.mResourceName));
+            throw new IllegalStateException(
+                    String.format(
+                            "Current resource name %s for resource id %d has changed from the"
+                                    + " previously stored resource name %s.",
+                            name, Integer.valueOf(this.mResourceId), this.mResourceName));
         }
     }
 
@@ -182,7 +207,8 @@ public final class ParcelableResource implements Parcelable {
         xmlSerializer.attributeInt(null, ATTR_RESOURCE_TYPE, this.mResourceType);
     }
 
-    public static ParcelableResource createFromXml(TypedXmlPullParser xmlPullParser) throws XmlPullParserException, IOException {
+    public static ParcelableResource createFromXml(TypedXmlPullParser xmlPullParser)
+            throws XmlPullParserException, IOException {
         int resourceId = xmlPullParser.getAttributeInt(null, ATTR_RESOURCE_ID);
         String packageName = xmlPullParser.getAttributeValue(null, ATTR_PACKAGE_NAME);
         String resourceName = xmlPullParser.getAttributeValue(null, ATTR_RESOURCE_NAME);
@@ -198,14 +224,21 @@ public final class ParcelableResource implements Parcelable {
             return false;
         }
         ParcelableResource other = (ParcelableResource) o;
-        if (this.mResourceId == other.mResourceId && this.mPackageName.equals(other.mPackageName) && this.mResourceName.equals(other.mResourceName) && this.mResourceType == other.mResourceType) {
+        if (this.mResourceId == other.mResourceId
+                && this.mPackageName.equals(other.mPackageName)
+                && this.mResourceName.equals(other.mResourceName)
+                && this.mResourceType == other.mResourceType) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mResourceId), this.mPackageName, this.mResourceName, Integer.valueOf(this.mResourceType));
+        return Objects.hash(
+                Integer.valueOf(this.mResourceId),
+                this.mPackageName,
+                this.mResourceName,
+                Integer.valueOf(this.mResourceType));
     }
 
     @Override // android.os.Parcelable

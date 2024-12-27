@@ -4,23 +4,25 @@ import android.annotation.SystemApi;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class FileInfo implements Parcelable {
-    public static final Parcelable.Creator<FileInfo> CREATOR = new Parcelable.Creator<FileInfo>() { // from class: android.telephony.mbms.FileInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FileInfo createFromParcel(Parcel source) {
-            return new FileInfo(source);
-        }
+    public static final Parcelable.Creator<FileInfo> CREATOR =
+            new Parcelable.Creator<FileInfo>() { // from class: android.telephony.mbms.FileInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FileInfo createFromParcel(Parcel source) {
+                    return new FileInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FileInfo[] newArray(int size) {
-            return new FileInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FileInfo[] newArray(int size) {
+                    return new FileInfo[size];
+                }
+            };
     private final String mimeType;
     private final Uri uri;
 
@@ -62,7 +64,8 @@ public final class FileInfo implements Parcelable {
             return false;
         }
         FileInfo fileInfo = (FileInfo) o;
-        if (Objects.equals(this.uri, fileInfo.uri) && Objects.equals(this.mimeType, fileInfo.mimeType)) {
+        if (Objects.equals(this.uri, fileInfo.uri)
+                && Objects.equals(this.mimeType, fileInfo.mimeType)) {
             return true;
         }
         return false;

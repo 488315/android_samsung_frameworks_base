@@ -1,6 +1,5 @@
 package android.hardware.camera2.utils;
 
-import android.hardware.camera2.utils.TaskDrainer;
 import java.util.concurrent.Executor;
 
 /* loaded from: classes2.dex */

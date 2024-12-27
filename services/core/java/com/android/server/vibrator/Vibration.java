@@ -12,6 +12,7 @@ import android.os.vibrator.StepSegment;
 import android.util.IndentingPrintWriter;
 import android.util.SparseBooleanArray;
 import android.util.proto.ProtoOutputStream;
+
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -26,8 +27,10 @@ public abstract class Vibration {
     public final IBinder callerToken;
     public final long id;
     public final VibrationStats stats;
-    public static final DateTimeFormatter DEBUG_TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss.SSS");
-    public static final DateTimeFormatter DEBUG_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("MM-dd HH:mm:ss.SSS");
+    public static final DateTimeFormatter DEBUG_TIME_FORMATTER =
+            DateTimeFormatter.ofPattern("HH:mm:ss.SSS");
+    public static final DateTimeFormatter DEBUG_DATE_TIME_FORMATTER =
+            DateTimeFormatter.ofPattern("MM-dd HH:mm:ss.SSS");
     public static final AtomicInteger sNextVibrationId = new AtomicInteger(1);
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -38,7 +41,8 @@ public abstract class Vibration {
         public final String reason;
         public final int uid;
 
-        public CallerInfo(VibrationAttributes vibrationAttributes, int i, int i2, String str, String str2) {
+        public CallerInfo(
+                VibrationAttributes vibrationAttributes, int i, int i2, String str, String str2) {
             Objects.requireNonNull(vibrationAttributes);
             this.attrs = vibrationAttributes;
             this.uid = i;
@@ -55,15 +59,34 @@ public abstract class Vibration {
                 return false;
             }
             CallerInfo callerInfo = (CallerInfo) obj;
-            return Objects.equals(this.attrs, callerInfo.attrs) && this.uid == callerInfo.uid && this.deviceId == callerInfo.deviceId && Objects.equals(this.opPkg, callerInfo.opPkg) && Objects.equals(this.reason, callerInfo.reason);
+            return Objects.equals(this.attrs, callerInfo.attrs)
+                    && this.uid == callerInfo.uid
+                    && this.deviceId == callerInfo.deviceId
+                    && Objects.equals(this.opPkg, callerInfo.opPkg)
+                    && Objects.equals(this.reason, callerInfo.reason);
         }
 
         public final int hashCode() {
-            return Objects.hash(this.attrs, Integer.valueOf(this.uid), Integer.valueOf(this.deviceId), this.opPkg, this.reason);
+            return Objects.hash(
+                    this.attrs,
+                    Integer.valueOf(this.uid),
+                    Integer.valueOf(this.deviceId),
+                    this.opPkg,
+                    this.reason);
         }
 
         public final String toString() {
-            return "CallerInfo{ uid=" + this.uid + ", opPkg=" + this.opPkg + ", deviceId=" + this.deviceId + ", attrs=" + this.attrs + ", reason=" + this.reason + '}';
+            return "CallerInfo{ uid="
+                    + this.uid
+                    + ", opPkg="
+                    + this.opPkg
+                    + ", deviceId="
+                    + this.deviceId
+                    + ", attrs="
+                    + this.attrs
+                    + ", reason="
+                    + this.reason
+                    + '}';
         }
     }
 
@@ -80,7 +103,14 @@ public abstract class Vibration {
         public final long mStartTime;
         public final Status mStatus;
 
-        public DebugInfo(Status status, VibrationStats vibrationStats, CombinedVibration combinedVibration, CombinedVibration combinedVibration2, int i, float f, CallerInfo callerInfo) {
+        public DebugInfo(
+                Status status,
+                VibrationStats vibrationStats,
+                CombinedVibration combinedVibration,
+                CombinedVibration combinedVibration2,
+                int i,
+                float f,
+                CallerInfo callerInfo) {
             Objects.requireNonNull(callerInfo);
             this.mCreateTime = vibrationStats.mCreateTimeDebug;
             this.mStartTime = vibrationStats.mStartTimeDebug;
@@ -95,8 +125,10 @@ public abstract class Vibration {
             this.mStatus = status;
         }
 
-        public static void dumpEffect(ProtoOutputStream protoOutputStream, long j, CombinedVibration combinedVibration) {
-            CombinedVibration.Sequential combine = CombinedVibration.startSequential().addNext(combinedVibration).combine();
+        public static void dumpEffect(
+                ProtoOutputStream protoOutputStream, long j, CombinedVibration combinedVibration) {
+            CombinedVibration.Sequential combine =
+                    CombinedVibration.startSequential().addNext(combinedVibration).combine();
             long start = protoOutputStream.start(j);
             for (int i = 0; i < combine.getEffects().size(); i++) {
                 CombinedVibration.Mono mono = (CombinedVibration) combine.getEffects().get(i);
@@ -109,16 +141,20 @@ public abstract class Vibration {
                     long start3 = protoOutputStream.start(2246267895809L);
                     for (int i2 = 0; i2 < stereo.getEffects().size(); i2++) {
                         protoOutputStream.write(2220498092034L, stereo.getEffects().keyAt(i2));
-                        dumpEffect(protoOutputStream, (VibrationEffect) stereo.getEffects().valueAt(i2));
+                        dumpEffect(
+                                protoOutputStream,
+                                (VibrationEffect) stereo.getEffects().valueAt(i2));
                     }
                     protoOutputStream.end(start3);
                 }
-                protoOutputStream.write(2220498092034L, ((Integer) combine.getDelays().get(i)).intValue());
+                protoOutputStream.write(
+                        2220498092034L, ((Integer) combine.getDelays().get(i)).intValue());
             }
             protoOutputStream.end(start);
         }
 
-        public static void dumpEffect(ProtoOutputStream protoOutputStream, VibrationEffect vibrationEffect) {
+        public static void dumpEffect(
+                ProtoOutputStream protoOutputStream, VibrationEffect vibrationEffect) {
             long start = protoOutputStream.start(2246267895809L);
             VibrationEffect.Composed composed = (VibrationEffect.Composed) vibrationEffect;
             for (StepSegment stepSegment : composed.getSegments()) {
@@ -161,7 +197,9 @@ public abstract class Vibration {
         }
 
         public static String formatTime(long j, boolean z) {
-            return (z ? Vibration.DEBUG_DATE_TIME_FORMATTER : Vibration.DEBUG_TIME_FORMATTER).withZone(ZoneId.systemDefault()).format(Instant.ofEpochMilli(j));
+            return (z ? Vibration.DEBUG_DATE_TIME_FORMATTER : Vibration.DEBUG_TIME_FORMATTER)
+                    .withZone(ZoneId.systemDefault())
+                    .format(Instant.ofEpochMilli(j));
         }
 
         public final void dump(IndentingPrintWriter indentingPrintWriter) {
@@ -181,8 +219,13 @@ public abstract class Vibration {
             indentingPrintWriter.println(sb2.toString());
             indentingPrintWriter.println("playedEffect = " + this.mPlayedEffect);
             indentingPrintWriter.println("originalEffect = " + this.mOriginalEffect);
-            indentingPrintWriter.println("scale = " + VibrationScaler.scaleLevelToString(this.mScaleLevel));
-            indentingPrintWriter.println("adaptiveScale = ".concat(String.format(locale, "%.2f", Float.valueOf(this.mAdaptiveScale))));
+            indentingPrintWriter.println(
+                    "scale = " + VibrationScaler.scaleLevelToString(this.mScaleLevel));
+            indentingPrintWriter.println(
+                    "adaptiveScale = "
+                            .concat(
+                                    String.format(
+                                            locale, "%.2f", Float.valueOf(this.mAdaptiveScale))));
             indentingPrintWriter.println("callerInfo = " + this.mCallerInfo);
             indentingPrintWriter.decreaseIndent();
         }

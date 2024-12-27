@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface IAirGestureListener extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.content.smartclip.IAirGestureListener";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.content.smartclip.IAirGestureListener";
 
     void onGesture(String str) throws RemoteException;
 
     public static class Default implements IAirGestureListener {
         @Override // com.samsung.android.content.smartclip.IAirGestureListener
-        public void onGesture(String gesture) throws RemoteException {
-        }
+        public void onGesture(String gesture) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IAirGestureListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAirGestureListener {
+    public abstract static class Stub extends Binder implements IAirGestureListener {
         static final int TRANSACTION_onGesture = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface IAirGestureListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAirGestureListener.DESCRIPTOR);
             }

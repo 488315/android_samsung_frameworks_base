@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
@@ -17,8 +18,7 @@ public abstract class DynamicDrawableSpan extends ReplacementSpan {
     protected final int mVerticalAlignment;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AlignmentType {
-    }
+    public @interface AlignmentType {}
 
     public abstract Drawable getDrawable();
 
@@ -35,7 +35,8 @@ public abstract class DynamicDrawableSpan extends ReplacementSpan {
     }
 
     @Override // android.text.style.ReplacementSpan
-    public int getSize(Paint paint, CharSequence text, int start, int end, Paint.FontMetricsInt fm) {
+    public int getSize(
+            Paint paint, CharSequence text, int start, int end, Paint.FontMetricsInt fm) {
         Drawable d = getCachedDrawable();
         Rect rect = d.getBounds();
         if (fm != null) {
@@ -48,7 +49,16 @@ public abstract class DynamicDrawableSpan extends ReplacementSpan {
     }
 
     @Override // android.text.style.ReplacementSpan
-    public void draw(Canvas canvas, CharSequence text, int start, int end, float x, int top, int y, int bottom, Paint paint) {
+    public void draw(
+            Canvas canvas,
+            CharSequence text,
+            int start,
+            int end,
+            float x,
+            int top,
+            int y,
+            int bottom,
+            Paint paint) {
         Drawable b = getCachedDrawable();
         canvas.save();
         int transY = bottom - b.getBounds().bottom;
@@ -78,6 +88,10 @@ public abstract class DynamicDrawableSpan extends ReplacementSpan {
     }
 
     public String toString() {
-        return "DynamicDrawableSpan{verticalAlignment=" + getVerticalAlignment() + ", drawable=" + getDrawable() + '}';
+        return "DynamicDrawableSpan{verticalAlignment="
+                + getVerticalAlignment()
+                + ", drawable="
+                + getDrawable()
+                + '}';
     }
 }

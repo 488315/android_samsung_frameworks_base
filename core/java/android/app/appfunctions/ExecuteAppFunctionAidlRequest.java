@@ -3,31 +3,37 @@ package android.app.appfunctions;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.UserHandle;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class ExecuteAppFunctionAidlRequest implements Parcelable {
-    public static final Parcelable.Creator<ExecuteAppFunctionAidlRequest> CREATOR = new Parcelable.Creator<ExecuteAppFunctionAidlRequest>() { // from class: android.app.appfunctions.ExecuteAppFunctionAidlRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ExecuteAppFunctionAidlRequest createFromParcel(Parcel in) {
-            ExecuteAppFunctionRequest clientRequest = ExecuteAppFunctionRequest.CREATOR.createFromParcel(in);
-            UserHandle userHandle = UserHandle.CREATOR.createFromParcel(in);
-            String callingPackage = in.readString8();
-            return new ExecuteAppFunctionAidlRequest(clientRequest, userHandle, callingPackage);
-        }
+    public static final Parcelable.Creator<ExecuteAppFunctionAidlRequest> CREATOR =
+            new Parcelable.Creator<ExecuteAppFunctionAidlRequest>() { // from class:
+                // android.app.appfunctions.ExecuteAppFunctionAidlRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ExecuteAppFunctionAidlRequest createFromParcel(Parcel in) {
+                    ExecuteAppFunctionRequest clientRequest =
+                            ExecuteAppFunctionRequest.CREATOR.createFromParcel(in);
+                    UserHandle userHandle = UserHandle.CREATOR.createFromParcel(in);
+                    String callingPackage = in.readString8();
+                    return new ExecuteAppFunctionAidlRequest(
+                            clientRequest, userHandle, callingPackage);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ExecuteAppFunctionAidlRequest[] newArray(int size) {
-            return new ExecuteAppFunctionAidlRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ExecuteAppFunctionAidlRequest[] newArray(int size) {
+                    return new ExecuteAppFunctionAidlRequest[size];
+                }
+            };
     private final String mCallingPackage;
     private final ExecuteAppFunctionRequest mClientRequest;
     private final UserHandle mUserHandle;
 
-    public ExecuteAppFunctionAidlRequest(ExecuteAppFunctionRequest clientRequest, UserHandle userHandle, String callingPackage) {
+    public ExecuteAppFunctionAidlRequest(
+            ExecuteAppFunctionRequest clientRequest, UserHandle userHandle, String callingPackage) {
         this.mClientRequest = (ExecuteAppFunctionRequest) Objects.requireNonNull(clientRequest);
         this.mUserHandle = (UserHandle) Objects.requireNonNull(userHandle);
         this.mCallingPackage = (String) Objects.requireNonNull(callingPackage);

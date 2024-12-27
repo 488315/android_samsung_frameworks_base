@@ -16,16 +16,14 @@ public final class IpConnectivityLogClass {
     public final class NetworkId {
         public static final long NETWORK_ID = 1120986464257L;
 
-        public NetworkId() {
-        }
+        public NetworkId() {}
     }
 
     public final class Pair {
         public static final long KEY = 1120986464257L;
         public static final long VALUE = 1120986464258L;
 
-        public Pair() {
-        }
+        public Pair() {}
     }
 
     public final class DefaultNetworkEvent {
@@ -49,16 +47,14 @@ public final class IpConnectivityLogClass {
         public static final int UNKNOWN = 0;
         public static final long VALIDATION_DURATION_MS = 1112396529675L;
 
-        public DefaultNetworkEvent() {
-        }
+        public DefaultNetworkEvent() {}
     }
 
     public final class IpReachabilityEvent {
         public static final long EVENT_TYPE = 1120986464258L;
         public static final long IF_NAME = 1138166333441L;
 
-        public IpReachabilityEvent() {
-        }
+        public IpReachabilityEvent() {}
     }
 
     public final class NetworkEvent {
@@ -66,8 +62,7 @@ public final class IpConnectivityLogClass {
         public static final long LATENCY_MS = 1120986464259L;
         public static final long NETWORK_ID = 1146756268033L;
 
-        public NetworkEvent() {
-        }
+        public NetworkEvent() {}
     }
 
     public final class ValidationProbeEvent {
@@ -76,8 +71,7 @@ public final class IpConnectivityLogClass {
         public static final long PROBE_RESULT = 1120986464260L;
         public static final long PROBE_TYPE = 1120986464259L;
 
-        public ValidationProbeEvent() {
-        }
+        public ValidationProbeEvent() {}
     }
 
     public final class DNSLookupBatch {
@@ -92,8 +86,7 @@ public final class IpConnectivityLogClass {
         public static final long NETWORK_ID = 1146756268033L;
         public static final long RETURN_CODES = 2220498092035L;
 
-        public DNSLookupBatch() {
-        }
+        public DNSLookupBatch() {}
     }
 
     public final class DNSLatencies {
@@ -104,8 +97,7 @@ public final class IpConnectivityLogClass {
         public static final long RETURN_CODE = 1120986464258L;
         public static final long TYPE = 1120986464257L;
 
-        public DNSLatencies() {
-        }
+        public DNSLatencies() {}
     }
 
     public final class ConnectStatistics {
@@ -116,8 +108,7 @@ public final class IpConnectivityLogClass {
         public static final long LATENCIES_MS = 2220498092035L;
         public static final long NON_BLOCKING_LATENCIES_MS = 2220498092038L;
 
-        public ConnectStatistics() {
-        }
+        public ConnectStatistics() {}
     }
 
     public final class DHCPEvent {
@@ -126,8 +117,7 @@ public final class IpConnectivityLogClass {
         public static final long IF_NAME = 1138166333441L;
         public static final long STATE_TRANSITION = 1138166333442L;
 
-        public DHCPEvent() {
-        }
+        public DHCPEvent() {}
     }
 
     public final class ApfProgramEvent {
@@ -139,8 +129,7 @@ public final class IpConnectivityLogClass {
         public static final long LIFETIME = 1112396529665L;
         public static final long PROGRAM_LENGTH = 1120986464260L;
 
-        public ApfProgramEvent() {
-        }
+        public ApfProgramEvent() {}
     }
 
     public final class ApfStatistics {
@@ -158,8 +147,7 @@ public final class IpConnectivityLogClass {
         public static final long TOTAL_PACKET_PROCESSED = 1120986464268L;
         public static final long ZERO_LIFETIME_RAS = 1120986464262L;
 
-        public ApfStatistics() {
-        }
+        public ApfStatistics() {}
     }
 
     public final class RaEvent {
@@ -170,8 +158,7 @@ public final class IpConnectivityLogClass {
         public static final long ROUTER_LIFETIME = 1112396529665L;
         public static final long ROUTE_INFO_LIFETIME = 1112396529668L;
 
-        public RaEvent() {
-        }
+        public RaEvent() {}
     }
 
     public final class IpProvisioningEvent {
@@ -179,8 +166,7 @@ public final class IpConnectivityLogClass {
         public static final long IF_NAME = 1138166333441L;
         public static final long LATENCY_MS = 1120986464259L;
 
-        public IpProvisioningEvent() {
-        }
+        public IpProvisioningEvent() {}
     }
 
     public final class NetworkStats {
@@ -193,8 +179,7 @@ public final class IpConnectivityLogClass {
         public static final long VALIDATION_EVENTS = 2246267895815L;
         public static final long VALIDATION_STATES = 2246267895816L;
 
-        public NetworkStats() {
-        }
+        public NetworkStats() {}
     }
 
     public final class WakeupStats {
@@ -211,8 +196,7 @@ public final class IpConnectivityLogClass {
         public static final long SYSTEM_WAKEUPS = 1112396529668L;
         public static final long TOTAL_WAKEUPS = 1112396529666L;
 
-        public WakeupStats() {
-        }
+        public WakeupStats() {}
     }
 
     public final class IpConnectivityEvent {
@@ -236,8 +220,7 @@ public final class IpConnectivityLogClass {
         public static final long VALIDATION_PROBE_EVENT = 1146756268040L;
         public static final long WAKEUP_STATS = 1146756268052L;
 
-        public IpConnectivityEvent() {
-        }
+        public IpConnectivityEvent() {}
     }
 
     public final class IpConnectivityLog {
@@ -245,7 +228,6 @@ public final class IpConnectivityLogClass {
         public static final long EVENTS = 2246267895809L;
         public static final long VERSION = 1120986464259L;
 
-        public IpConnectivityLog() {
-        }
+        public IpConnectivityLog() {}
     }
 }

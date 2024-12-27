@@ -31,6 +31,14 @@ public class Status {
 
     public String toString() {
         int i = this.resultCode;
-        return i != -4 ? i != -3 ? i != -2 ? i != -1 ? i != 0 ? "Unknown value ?!" : "SUCCESS" : "GENERIC ERROR" : "ILLEGAL ARGUMENT" : "DATABASE CANNOT BE OPENED" : "DATABASE STORAGE ERROR";
+        return i != -4
+                ? i != -3
+                        ? i != -2
+                                ? i != -1
+                                        ? i != 0 ? "Unknown value ?!" : "SUCCESS"
+                                        : "GENERIC ERROR"
+                                : "ILLEGAL ARGUMENT"
+                        : "DATABASE CANNOT BE OPENED"
+                : "DATABASE STORAGE ERROR";
     }
 }

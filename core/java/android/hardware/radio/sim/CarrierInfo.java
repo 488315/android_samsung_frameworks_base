@@ -3,6 +3,7 @@ package android.hardware.radio.sim;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -10,21 +11,23 @@ import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class CarrierInfo implements Parcelable {
-    public static final Parcelable.Creator<CarrierInfo> CREATOR = new Parcelable.Creator<CarrierInfo>() { // from class: android.hardware.radio.sim.CarrierInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CarrierInfo createFromParcel(Parcel _aidl_source) {
-            CarrierInfo _aidl_out = new CarrierInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CarrierInfo> CREATOR =
+            new Parcelable.Creator<
+                    CarrierInfo>() { // from class: android.hardware.radio.sim.CarrierInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CarrierInfo createFromParcel(Parcel _aidl_source) {
+                    CarrierInfo _aidl_out = new CarrierInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CarrierInfo[] newArray(int _aidl_size) {
-            return new CarrierInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CarrierInfo[] newArray(int _aidl_size) {
+                    return new CarrierInfo[_aidl_size];
+                }
+            };
     public List<Plmn> ehplmn;
     public String gid1;
     public String gid2;

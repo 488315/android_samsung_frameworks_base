@@ -6,7 +6,6 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.telephony.ims.ImsService;
 import android.telephony.ims.aidl.IImsConfig;
 import android.telephony.ims.aidl.IImsMmTelFeature;
 import android.telephony.ims.aidl.IImsRcsFeature;
@@ -24,8 +23,10 @@ import android.telephony.ims.stub.SipTransportImplBase;
 import android.util.Log;
 import android.util.SparseArray;
 import android.util.SparseBooleanArray;
+
 import com.android.ims.internal.IImsFeatureStatusCallback;
 import com.android.internal.telephony.util.TelephonyUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
@@ -49,59 +50,79 @@ public class ImsService extends Service {
     private Executor mExecutor;
     private IImsServiceControllerListener mListener;
     public static final long CAPABILITY_MAX_INDEX = Long.numberOfTrailingZeros(8);
-    private static final Map<Long, String> CAPABILITIES_LOG_MAP = Map.of(1L, "EMERGENCY_OVER_MMTEL", 2L, "SIP_DELEGATE_CREATION", 4L, "TERMINAL_BASED_CALL_WAITING", 8L, "SIMULTANEOUS_CALLING");
+    private static final Map<Long, String> CAPABILITIES_LOG_MAP =
+            Map.of(
+                    1L,
+                    "EMERGENCY_OVER_MMTEL",
+                    2L,
+                    "SIP_DELEGATE_CREATION",
+                    4L,
+                    "TERMINAL_BASED_CALL_WAITING",
+                    8L,
+                    "SIMULTANEOUS_CALLING");
     private final SparseArray<SparseArray<ImsFeature>> mFeaturesBySlot = new SparseArray<>();
-    private final SparseArray<SparseBooleanArray> mCreateImsFeatureWithSlotIdFlagMap = new SparseArray<>();
+    private final SparseArray<SparseBooleanArray> mCreateImsFeatureWithSlotIdFlagMap =
+            new SparseArray<>();
     private final Object mListenerLock = new Object();
     private final Object mExecutorLock = new Object();
     protected final IBinder mImsServiceController = new AnonymousClass1();
     private final IBinder.DeathRecipient mDeathRecipient = new AnonymousClass2();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ImsServiceCapability {
-    }
+    public @interface ImsServiceCapability {}
 
     public static class Listener extends IImsServiceControllerListener.Stub {
         @Override // android.telephony.ims.aidl.IImsServiceControllerListener
-        public void onUpdateSupportedImsFeatures(ImsFeatureConfiguration c) {
-        }
+        public void onUpdateSupportedImsFeatures(ImsFeatureConfiguration c) {}
     }
 
     /* renamed from: android.telephony.ims.ImsService$1, reason: invalid class name */
     class AnonymousClass1 extends IImsServiceController.Stub {
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         @Override // android.telephony.ims.aidl.IImsServiceController
         public void setListener(IImsServiceControllerListener l) {
             synchronized (ImsService.this.mListenerLock) {
-                if (ImsService.this.mListener != null && ImsService.this.mListener.asBinder().isBinderAlive()) {
+                if (ImsService.this.mListener != null
+                        && ImsService.this.mListener.asBinder().isBinderAlive()) {
                     try {
-                        ImsService.this.mListener.asBinder().unlinkToDeath(ImsService.this.mDeathRecipient, 0);
+                        ImsService.this
+                                .mListener
+                                .asBinder()
+                                .unlinkToDeath(ImsService.this.mDeathRecipient, 0);
                     } catch (NoSuchElementException e) {
                         Log.w(ImsService.LOG_TAG, "IImsServiceControllerListener does not exist");
                     }
                 }
                 ImsService.this.mListener = l;
                 if (ImsService.this.mListener == null) {
-                    ImsService.this.executeMethodAsync(new Runnable() { // from class: android.telephony.ims.ImsService$1$$ExternalSyntheticLambda9
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            ImsService.AnonymousClass1.this.lambda$setListener$0();
-                        }
-                    }, "releaseResource");
+                    ImsService.this.executeMethodAsync(
+                            new Runnable() { // from class:
+                                             // android.telephony.ims.ImsService$1$$ExternalSyntheticLambda9
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    ImsService.AnonymousClass1.this.lambda$setListener$0();
+                                }
+                            },
+                            "releaseResource");
                     return;
                 }
                 try {
-                    ImsService.this.mListener.asBinder().linkToDeath(ImsService.this.mDeathRecipient, 0);
+                    ImsService.this
+                            .mListener
+                            .asBinder()
+                            .linkToDeath(ImsService.this.mDeathRecipient, 0);
                     Log.i(ImsService.LOG_TAG, "setListener: register linkToDeath");
                 } catch (RemoteException e2) {
-                    ImsService.this.executeMethodAsync(new Runnable() { // from class: android.telephony.ims.ImsService$1$$ExternalSyntheticLambda10
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            ImsService.AnonymousClass1.this.lambda$setListener$1();
-                        }
-                    }, "releaseResource");
+                    ImsService.this.executeMethodAsync(
+                            new Runnable() { // from class:
+                                             // android.telephony.ims.ImsService$1$$ExternalSyntheticLambda10
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    ImsService.AnonymousClass1.this.lambda$setListener$1();
+                                }
+                            },
+                            "releaseResource");
                 }
             }
         }
@@ -120,14 +141,20 @@ public class ImsService extends Service {
         public IImsMmTelFeature createMmTelFeature(final int slotId, final int subId) {
             MmTelFeature f = (MmTelFeature) ImsService.this.getImsFeature(slotId, 1);
             if (f == null) {
-                return (IImsMmTelFeature) ImsService.this.executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.ImsService$1$$ExternalSyntheticLambda0
-                    @Override // java.util.function.Supplier
-                    public final Object get() {
-                        IImsMmTelFeature lambda$createMmTelFeature$2;
-                        lambda$createMmTelFeature$2 = ImsService.AnonymousClass1.this.lambda$createMmTelFeature$2(slotId, subId);
-                        return lambda$createMmTelFeature$2;
-                    }
-                }, "createMmTelFeature");
+                return (IImsMmTelFeature)
+                        ImsService.this.executeMethodAsyncForResult(
+                                new Supplier() { // from class:
+                                                 // android.telephony.ims.ImsService$1$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Supplier
+                                    public final Object get() {
+                                        IImsMmTelFeature lambda$createMmTelFeature$2;
+                                        lambda$createMmTelFeature$2 =
+                                                ImsService.AnonymousClass1.this
+                                                        .lambda$createMmTelFeature$2(slotId, subId);
+                                        return lambda$createMmTelFeature$2;
+                                    }
+                                },
+                                "createMmTelFeature");
             }
             return f.getBinder();
         }
@@ -141,20 +168,28 @@ public class ImsService extends Service {
         public IImsMmTelFeature createEmergencyOnlyMmTelFeature(final int slotId) {
             MmTelFeature f = (MmTelFeature) ImsService.this.getImsFeature(slotId, 1);
             if (f == null) {
-                return (IImsMmTelFeature) ImsService.this.executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.ImsService$1$$ExternalSyntheticLambda11
-                    @Override // java.util.function.Supplier
-                    public final Object get() {
-                        IImsMmTelFeature lambda$createEmergencyOnlyMmTelFeature$3;
-                        lambda$createEmergencyOnlyMmTelFeature$3 = ImsService.AnonymousClass1.this.lambda$createEmergencyOnlyMmTelFeature$3(slotId);
-                        return lambda$createEmergencyOnlyMmTelFeature$3;
-                    }
-                }, "createEmergencyOnlyMmTelFeature");
+                return (IImsMmTelFeature)
+                        ImsService.this.executeMethodAsyncForResult(
+                                new Supplier() { // from class:
+                                                 // android.telephony.ims.ImsService$1$$ExternalSyntheticLambda11
+                                    @Override // java.util.function.Supplier
+                                    public final Object get() {
+                                        IImsMmTelFeature lambda$createEmergencyOnlyMmTelFeature$3;
+                                        lambda$createEmergencyOnlyMmTelFeature$3 =
+                                                ImsService.AnonymousClass1.this
+                                                        .lambda$createEmergencyOnlyMmTelFeature$3(
+                                                                slotId);
+                                        return lambda$createEmergencyOnlyMmTelFeature$3;
+                                    }
+                                },
+                                "createEmergencyOnlyMmTelFeature");
             }
             return f.getBinder();
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ IImsMmTelFeature lambda$createEmergencyOnlyMmTelFeature$3(int slotId) {
+        public /* synthetic */ IImsMmTelFeature lambda$createEmergencyOnlyMmTelFeature$3(
+                int slotId) {
             return ImsService.this.createEmergencyOnlyMmTelFeatureInternal(slotId);
         }
 
@@ -162,14 +197,20 @@ public class ImsService extends Service {
         public IImsRcsFeature createRcsFeature(final int slotId, final int subId) {
             RcsFeature f = (RcsFeature) ImsService.this.getImsFeature(slotId, 2);
             if (f == null) {
-                return (IImsRcsFeature) ImsService.this.executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.ImsService$1$$ExternalSyntheticLambda14
-                    @Override // java.util.function.Supplier
-                    public final Object get() {
-                        IImsRcsFeature lambda$createRcsFeature$4;
-                        lambda$createRcsFeature$4 = ImsService.AnonymousClass1.this.lambda$createRcsFeature$4(slotId, subId);
-                        return lambda$createRcsFeature$4;
-                    }
-                }, "createRcsFeature");
+                return (IImsRcsFeature)
+                        ImsService.this.executeMethodAsyncForResult(
+                                new Supplier() { // from class:
+                                                 // android.telephony.ims.ImsService$1$$ExternalSyntheticLambda14
+                                    @Override // java.util.function.Supplier
+                                    public final Object get() {
+                                        IImsRcsFeature lambda$createRcsFeature$4;
+                                        lambda$createRcsFeature$4 =
+                                                ImsService.AnonymousClass1.this
+                                                        .lambda$createRcsFeature$4(slotId, subId);
+                                        return lambda$createRcsFeature$4;
+                                    }
+                                },
+                                "createRcsFeature");
             }
             return f.getBinder();
         }
@@ -180,33 +221,45 @@ public class ImsService extends Service {
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$addFeatureStatusCallback$5(int slotId, int featureType, IImsFeatureStatusCallback c) {
+        public /* synthetic */ void lambda$addFeatureStatusCallback$5(
+                int slotId, int featureType, IImsFeatureStatusCallback c) {
             ImsService.this.addImsFeatureStatusCallback(slotId, featureType, c);
         }
 
         @Override // android.telephony.ims.aidl.IImsServiceController
-        public void addFeatureStatusCallback(final int slotId, final int featureType, final IImsFeatureStatusCallback c) {
-            ImsService.this.executeMethodAsync(new Runnable() { // from class: android.telephony.ims.ImsService$1$$ExternalSyntheticLambda2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsService.AnonymousClass1.this.lambda$addFeatureStatusCallback$5(slotId, featureType, c);
-                }
-            }, "addFeatureStatusCallback");
+        public void addFeatureStatusCallback(
+                final int slotId, final int featureType, final IImsFeatureStatusCallback c) {
+            ImsService.this.executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.ImsService$1$$ExternalSyntheticLambda2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsService.AnonymousClass1.this.lambda$addFeatureStatusCallback$5(
+                                    slotId, featureType, c);
+                        }
+                    },
+                    "addFeatureStatusCallback");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$removeFeatureStatusCallback$6(int slotId, int featureType, IImsFeatureStatusCallback c) {
+        public /* synthetic */ void lambda$removeFeatureStatusCallback$6(
+                int slotId, int featureType, IImsFeatureStatusCallback c) {
             ImsService.this.removeImsFeatureStatusCallback(slotId, featureType, c);
         }
 
         @Override // android.telephony.ims.aidl.IImsServiceController
-        public void removeFeatureStatusCallback(final int slotId, final int featureType, final IImsFeatureStatusCallback c) {
-            ImsService.this.executeMethodAsync(new Runnable() { // from class: android.telephony.ims.ImsService$1$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsService.AnonymousClass1.this.lambda$removeFeatureStatusCallback$6(slotId, featureType, c);
-                }
-            }, "removeFeatureStatusCallback");
+        public void removeFeatureStatusCallback(
+                final int slotId, final int featureType, final IImsFeatureStatusCallback c) {
+            ImsService.this.executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.ImsService$1$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsService.AnonymousClass1.this.lambda$removeFeatureStatusCallback$6(
+                                    slotId, featureType, c);
+                        }
+                    },
+                    "removeFeatureStatusCallback");
         }
 
         @Override // android.telephony.ims.aidl.IImsServiceController
@@ -214,12 +267,16 @@ public class ImsService extends Service {
             if (changeSubId && ImsService.this.isImsFeatureCreatedForSlot(slotId, featureType)) {
                 Log.w(ImsService.LOG_TAG, "Do not remove Ims feature for compatibility");
             } else {
-                ImsService.this.executeMethodAsync(new Runnable() { // from class: android.telephony.ims.ImsService$1$$ExternalSyntheticLambda5
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        ImsService.AnonymousClass1.this.lambda$removeImsFeature$7(slotId, featureType);
-                    }
-                }, "removeImsFeature");
+                ImsService.this.executeMethodAsync(
+                        new Runnable() { // from class:
+                                         // android.telephony.ims.ImsService$1$$ExternalSyntheticLambda5
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                ImsService.AnonymousClass1.this.lambda$removeImsFeature$7(
+                                        slotId, featureType);
+                            }
+                        },
+                        "removeImsFeature");
                 ImsService.this.setImsFeatureCreatedForSlot(slotId, featureType, false);
             }
         }
@@ -236,26 +293,39 @@ public class ImsService extends Service {
 
         @Override // android.telephony.ims.aidl.IImsServiceController
         public ImsFeatureConfiguration querySupportedImsFeatures() {
-            return (ImsFeatureConfiguration) ImsService.this.executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.ImsService$1$$ExternalSyntheticLambda12
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    ImsFeatureConfiguration lambda$querySupportedImsFeatures$8;
-                    lambda$querySupportedImsFeatures$8 = ImsService.AnonymousClass1.this.lambda$querySupportedImsFeatures$8();
-                    return lambda$querySupportedImsFeatures$8;
-                }
-            }, "ImsFeatureConfiguration");
+            return (ImsFeatureConfiguration)
+                    ImsService.this.executeMethodAsyncForResult(
+                            new Supplier() { // from class:
+                                             // android.telephony.ims.ImsService$1$$ExternalSyntheticLambda12
+                                @Override // java.util.function.Supplier
+                                public final Object get() {
+                                    ImsFeatureConfiguration lambda$querySupportedImsFeatures$8;
+                                    lambda$querySupportedImsFeatures$8 =
+                                            ImsService.AnonymousClass1.this
+                                                    .lambda$querySupportedImsFeatures$8();
+                                    return lambda$querySupportedImsFeatures$8;
+                                }
+                            },
+                            "ImsFeatureConfiguration");
         }
 
         @Override // android.telephony.ims.aidl.IImsServiceController
         public long getImsServiceCapabilities() {
-            return ((Long) ImsService.this.executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.ImsService$1$$ExternalSyntheticLambda4
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    Long lambda$getImsServiceCapabilities$9;
-                    lambda$getImsServiceCapabilities$9 = ImsService.AnonymousClass1.this.lambda$getImsServiceCapabilities$9();
-                    return lambda$getImsServiceCapabilities$9;
-                }
-            }, "getImsServiceCapabilities")).longValue();
+            return ((Long)
+                            ImsService.this.executeMethodAsyncForResult(
+                                    new Supplier() { // from class:
+                                                     // android.telephony.ims.ImsService$1$$ExternalSyntheticLambda4
+                                        @Override // java.util.function.Supplier
+                                        public final Object get() {
+                                            Long lambda$getImsServiceCapabilities$9;
+                                            lambda$getImsServiceCapabilities$9 =
+                                                    ImsService.AnonymousClass1.this
+                                                            .lambda$getImsServiceCapabilities$9();
+                                            return lambda$getImsServiceCapabilities$9;
+                                        }
+                                    },
+                                    "getImsServiceCapabilities"))
+                    .longValue();
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -263,7 +333,10 @@ public class ImsService extends Service {
             long caps = ImsService.this.getImsServiceCapabilities();
             long sanitizedCaps = ImsService.sanitizeCapabilities(caps);
             if (caps != sanitizedCaps) {
-                Log.w(ImsService.LOG_TAG, "removing invalid bits from field: 0x" + Long.toHexString(caps ^ sanitizedCaps));
+                Log.w(
+                        ImsService.LOG_TAG,
+                        "removing invalid bits from field: 0x"
+                                + Long.toHexString(caps ^ sanitizedCaps));
             }
             return Long.valueOf(sanitizedCaps);
         }
@@ -275,24 +348,34 @@ public class ImsService extends Service {
 
         @Override // android.telephony.ims.aidl.IImsServiceController
         public void notifyImsServiceReadyForFeatureCreation() {
-            ImsService.this.executeMethodAsync(new Runnable() { // from class: android.telephony.ims.ImsService$1$$ExternalSyntheticLambda3
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsService.AnonymousClass1.this.lambda$notifyImsServiceReadyForFeatureCreation$10();
-                }
-            }, "notifyImsServiceReadyForFeatureCreation");
+            ImsService.this.executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.ImsService$1$$ExternalSyntheticLambda3
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsService.AnonymousClass1.this
+                                    .lambda$notifyImsServiceReadyForFeatureCreation$10();
+                        }
+                    },
+                    "notifyImsServiceReadyForFeatureCreation");
         }
 
         @Override // android.telephony.ims.aidl.IImsServiceController
         public IImsConfig getConfig(final int slotId, final int subId) {
-            return (IImsConfig) ImsService.this.executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.ImsService$1$$ExternalSyntheticLambda13
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    IImsConfig lambda$getConfig$11;
-                    lambda$getConfig$11 = ImsService.AnonymousClass1.this.lambda$getConfig$11(slotId, subId);
-                    return lambda$getConfig$11;
-                }
-            }, "getConfig");
+            return (IImsConfig)
+                    ImsService.this.executeMethodAsyncForResult(
+                            new Supplier() { // from class:
+                                             // android.telephony.ims.ImsService$1$$ExternalSyntheticLambda13
+                                @Override // java.util.function.Supplier
+                                public final Object get() {
+                                    IImsConfig lambda$getConfig$11;
+                                    lambda$getConfig$11 =
+                                            ImsService.AnonymousClass1.this.lambda$getConfig$11(
+                                                    slotId, subId);
+                                    return lambda$getConfig$11;
+                                }
+                            },
+                            "getConfig");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -307,19 +390,26 @@ public class ImsService extends Service {
 
         @Override // android.telephony.ims.aidl.IImsServiceController
         public IImsRegistration getRegistration(final int slotId, final int subId) {
-            return (IImsRegistration) ImsService.this.executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.ImsService$1$$ExternalSyntheticLambda15
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    IImsRegistration lambda$getRegistration$12;
-                    lambda$getRegistration$12 = ImsService.AnonymousClass1.this.lambda$getRegistration$12(slotId, subId);
-                    return lambda$getRegistration$12;
-                }
-            }, "getRegistration");
+            return (IImsRegistration)
+                    ImsService.this.executeMethodAsyncForResult(
+                            new Supplier() { // from class:
+                                             // android.telephony.ims.ImsService$1$$ExternalSyntheticLambda15
+                                @Override // java.util.function.Supplier
+                                public final Object get() {
+                                    IImsRegistration lambda$getRegistration$12;
+                                    lambda$getRegistration$12 =
+                                            ImsService.AnonymousClass1.this
+                                                    .lambda$getRegistration$12(slotId, subId);
+                                    return lambda$getRegistration$12;
+                                }
+                            },
+                            "getRegistration");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ IImsRegistration lambda$getRegistration$12(int slotId, int subId) {
-            ImsRegistrationImplBase r = ImsService.this.getRegistrationForSubscription(slotId, subId);
+            ImsRegistrationImplBase r =
+                    ImsService.this.getRegistrationForSubscription(slotId, subId);
             if (r != null) {
                 r.setDefaultExecutor(ImsService.this.getCachedExecutor());
                 return r.getBinder();
@@ -329,14 +419,20 @@ public class ImsService extends Service {
 
         @Override // android.telephony.ims.aidl.IImsServiceController
         public ISipTransport getSipTransport(final int slotId) {
-            return (ISipTransport) ImsService.this.executeMethodAsyncForResult(new Supplier() { // from class: android.telephony.ims.ImsService$1$$ExternalSyntheticLambda6
-                @Override // java.util.function.Supplier
-                public final Object get() {
-                    ISipTransport lambda$getSipTransport$13;
-                    lambda$getSipTransport$13 = ImsService.AnonymousClass1.this.lambda$getSipTransport$13(slotId);
-                    return lambda$getSipTransport$13;
-                }
-            }, "getSipTransport");
+            return (ISipTransport)
+                    ImsService.this.executeMethodAsyncForResult(
+                            new Supplier() { // from class:
+                                             // android.telephony.ims.ImsService$1$$ExternalSyntheticLambda6
+                                @Override // java.util.function.Supplier
+                                public final Object get() {
+                                    ISipTransport lambda$getSipTransport$13;
+                                    lambda$getSipTransport$13 =
+                                            ImsService.AnonymousClass1.this
+                                                    .lambda$getSipTransport$13(slotId);
+                                    return lambda$getSipTransport$13;
+                                }
+                            },
+                            "getSipTransport");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -351,12 +447,15 @@ public class ImsService extends Service {
 
         @Override // android.telephony.ims.aidl.IImsServiceController
         public void enableIms(final int slotId, final int subId) {
-            ImsService.this.executeMethodAsync(new Runnable() { // from class: android.telephony.ims.ImsService$1$$ExternalSyntheticLambda16
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsService.AnonymousClass1.this.lambda$enableIms$14(slotId, subId);
-                }
-            }, "enableIms");
+            ImsService.this.executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.ImsService$1$$ExternalSyntheticLambda16
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsService.AnonymousClass1.this.lambda$enableIms$14(slotId, subId);
+                        }
+                    },
+                    "enableIms");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -366,12 +465,15 @@ public class ImsService extends Service {
 
         @Override // android.telephony.ims.aidl.IImsServiceController
         public void disableIms(final int slotId, final int subId) {
-            ImsService.this.executeMethodAsync(new Runnable() { // from class: android.telephony.ims.ImsService$1$$ExternalSyntheticLambda7
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsService.AnonymousClass1.this.lambda$disableIms$15(slotId, subId);
-                }
-            }, "disableIms");
+            ImsService.this.executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.ImsService$1$$ExternalSyntheticLambda7
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsService.AnonymousClass1.this.lambda$disableIms$15(slotId, subId);
+                        }
+                    },
+                    "disableIms");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -381,12 +483,15 @@ public class ImsService extends Service {
 
         @Override // android.telephony.ims.aidl.IImsServiceController
         public void resetIms(final int slotId, final int subId) {
-            ImsService.this.executeMethodAsync(new Runnable() { // from class: android.telephony.ims.ImsService$1$$ExternalSyntheticLambda8
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsService.AnonymousClass1.this.lambda$resetIms$16(slotId, subId);
-                }
-            }, "resetIms");
+            ImsService.this.executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.ImsService$1$$ExternalSyntheticLambda8
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsService.AnonymousClass1.this.lambda$resetIms$16(slotId, subId);
+                        }
+                    },
+                    "resetIms");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -397,18 +502,22 @@ public class ImsService extends Service {
 
     /* renamed from: android.telephony.ims.ImsService$2, reason: invalid class name */
     class AnonymousClass2 implements IBinder.DeathRecipient {
-        AnonymousClass2() {
-        }
+        AnonymousClass2() {}
 
         @Override // android.os.IBinder.DeathRecipient
         public void binderDied() {
-            Log.w(ImsService.LOG_TAG, "IImsServiceControllerListener binder to framework has died. Cleaning up");
-            ImsService.this.executeMethodAsync(new Runnable() { // from class: android.telephony.ims.ImsService$2$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ImsService.AnonymousClass2.this.lambda$binderDied$0();
-                }
-            }, "releaseResource");
+            Log.w(
+                    ImsService.LOG_TAG,
+                    "IImsServiceControllerListener binder to framework has died. Cleaning up");
+            ImsService.this.executeMethodAsync(
+                    new Runnable() { // from class:
+                                     // android.telephony.ims.ImsService$2$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ImsService.AnonymousClass2.this.lambda$binderDied$0();
+                        }
+                    },
+                    "releaseResource");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -481,11 +590,14 @@ public class ImsService extends Service {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void addImsFeatureStatusCallback(int slotId, int featureType, IImsFeatureStatusCallback c) {
+    public void addImsFeatureStatusCallback(
+            int slotId, int featureType, IImsFeatureStatusCallback c) {
         synchronized (this.mFeaturesBySlot) {
             SparseArray<ImsFeature> features = this.mFeaturesBySlot.get(slotId);
             if (features == null) {
-                Log.w(LOG_TAG, "Can not add ImsFeatureStatusCallback - no features on slot " + slotId);
+                Log.w(
+                        LOG_TAG,
+                        "Can not add ImsFeatureStatusCallback - no features on slot " + slotId);
                 return;
             }
             ImsFeature f = features.get(featureType);
@@ -496,11 +608,14 @@ public class ImsService extends Service {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void removeImsFeatureStatusCallback(int slotId, int featureType, IImsFeatureStatusCallback c) {
+    public void removeImsFeatureStatusCallback(
+            int slotId, int featureType, IImsFeatureStatusCallback c) {
         synchronized (this.mFeaturesBySlot) {
             SparseArray<ImsFeature> features = this.mFeaturesBySlot.get(slotId);
             if (features == null) {
-                Log.w(LOG_TAG, "Can not remove ImsFeatureStatusCallback - no features on slot " + slotId);
+                Log.w(
+                        LOG_TAG,
+                        "Can not remove ImsFeatureStatusCallback - no features on slot " + slotId);
                 return;
             }
             ImsFeature f = features.get(featureType);
@@ -532,7 +647,12 @@ public class ImsService extends Service {
             }
             ImsFeature f = features.get(featureType);
             if (f == null) {
-                Log.w(LOG_TAG, "Can not remove ImsFeature. No feature with type " + featureType + " exists on slot " + slotId);
+                Log.w(
+                        LOG_TAG,
+                        "Can not remove ImsFeature. No feature with type "
+                                + featureType
+                                + " exists on slot "
+                                + slotId);
             } else {
                 f.onFeatureRemoved();
                 features.remove(featureType);
@@ -598,12 +718,16 @@ public class ImsService extends Service {
     /* JADX INFO: Access modifiers changed from: private */
     public void executeMethodAsync(final Runnable r, String errorLogName) {
         try {
-            CompletableFuture.runAsync(new Runnable() { // from class: android.telephony.ims.ImsService$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    TelephonyUtils.runWithCleanCallingIdentity(r);
-                }
-            }, getCachedExecutor()).join();
+            CompletableFuture.runAsync(
+                            new Runnable() { // from class:
+                                             // android.telephony.ims.ImsService$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    TelephonyUtils.runWithCleanCallingIdentity(r);
+                                }
+                            },
+                            getCachedExecutor())
+                    .join();
         } catch (CancellationException | CompletionException e) {
             Log.w(LOG_TAG, "ImsService Binder - " + errorLogName + " exception: " + e.getMessage());
         }
@@ -611,14 +735,20 @@ public class ImsService extends Service {
 
     /* JADX INFO: Access modifiers changed from: private */
     public <T> T executeMethodAsyncForResult(final Supplier<T> r, String errorLogName) {
-        CompletableFuture<T> future = CompletableFuture.supplyAsync(new Supplier() { // from class: android.telephony.ims.ImsService$$ExternalSyntheticLambda1
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                Object runWithCleanCallingIdentity;
-                runWithCleanCallingIdentity = TelephonyUtils.runWithCleanCallingIdentity((Supplier<Object>) r);
-                return runWithCleanCallingIdentity;
-            }
-        }, getCachedExecutor());
+        CompletableFuture<T> future =
+                CompletableFuture.supplyAsync(
+                        new Supplier() { // from class:
+                                         // android.telephony.ims.ImsService$$ExternalSyntheticLambda1
+                            @Override // java.util.function.Supplier
+                            public final Object get() {
+                                Object runWithCleanCallingIdentity;
+                                runWithCleanCallingIdentity =
+                                        TelephonyUtils.runWithCleanCallingIdentity(
+                                                (Supplier<Object>) r);
+                                return runWithCleanCallingIdentity;
+                            }
+                        },
+                        getCachedExecutor());
         try {
             return future.get();
         } catch (InterruptedException | ExecutionException e) {
@@ -640,7 +770,8 @@ public class ImsService extends Service {
         return new ImsFeatureConfiguration();
     }
 
-    public final void onUpdateSupportedImsFeatures(ImsFeatureConfiguration c) throws RemoteException {
+    public final void onUpdateSupportedImsFeatures(ImsFeatureConfiguration c)
+            throws RemoteException {
         IImsServiceControllerListener l;
         synchronized (this.mListenerLock) {
             if (this.mListener == null) {
@@ -655,8 +786,7 @@ public class ImsService extends Service {
         return 0L;
     }
 
-    public void readyForFeatureCreation() {
-    }
+    public void readyForFeatureCreation() {}
 
     public void enableImsForSubscription(int slotId, int subscriptionId) {
         enableIms(slotId);
@@ -678,12 +808,10 @@ public class ImsService extends Service {
     }
 
     @Deprecated
-    public void enableIms(int slotId) {
-    }
+    public void enableIms(int slotId) {}
 
     @Deprecated
-    public void disableIms(int slotId) {
-    }
+    public void disableIms(int slotId) {}
 
     public void resetIms(int slotId) {
         throw new UnsupportedOperationException();
@@ -749,7 +877,9 @@ public class ImsService extends Service {
         for (long i = 0; (caps & filter) != 0 && i <= 63; i++) {
             long bitToCheck = 1 << ((int) i);
             if ((caps & bitToCheck) != 0) {
-                result.append(CAPABILITIES_LOG_MAP.getOrDefault(Long.valueOf(bitToCheck), bitToCheck + "?"));
+                result.append(
+                        CAPABILITIES_LOG_MAP.getOrDefault(
+                                Long.valueOf(bitToCheck), bitToCheck + "?"));
                 result.append(" ");
             }
             filter <<= 1;

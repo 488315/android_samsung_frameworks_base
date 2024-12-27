@@ -1,11 +1,11 @@
 package android.content.pm;
 
-import android.content.pm.IASKSManager;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,13 +25,29 @@ public interface IASKSManager extends IInterface {
 
     boolean checkFollowingLegitimateWay(String str, int i) throws RemoteException;
 
-    String checkIfSuspiciousValue(String str, String str2, boolean z, Map<String, String> map) throws RemoteException;
+    String checkIfSuspiciousValue(String str, String str2, boolean z, Map<String, String> map)
+            throws RemoteException;
 
     int checkRestrictedPermission(String str, String str2) throws RemoteException;
 
     int checkSecurityEnabled() throws RemoteException;
 
-    int checkUnknownSourcePackage(String str, String[] strArr, String[] strArr2, String str2, Signature[] signatureArr, String str3, String str4, String str5, int i, String str6, String str7, int i2, String str8, String str9) throws RemoteException;
+    int checkUnknownSourcePackage(
+            String str,
+            String[] strArr,
+            String[] strArr2,
+            String str2,
+            Signature[] signatureArr,
+            String str3,
+            String str4,
+            String str5,
+            int i,
+            String str6,
+            String str7,
+            int i2,
+            String str8,
+            String str9)
+            throws RemoteException;
 
     void clearASKSruleForRemovedPackage(String str) throws RemoteException;
 
@@ -61,28 +77,43 @@ public interface IASKSManager extends IInterface {
 
     void systemReady() throws RemoteException;
 
-    int verifyASKStokenForPackage(String str, String str2, long j, Signature[] signatureArr, String str3, String str4, boolean z) throws RemoteException;
+    int verifyASKStokenForPackage(
+            String str,
+            String str2,
+            long j,
+            Signature[] signatureArr,
+            String str3,
+            String str4,
+            boolean z)
+            throws RemoteException;
 
     public static class Default implements IASKSManager {
         @Override // android.content.pm.IASKSManager
-        public void systemReady() throws RemoteException {
-        }
+        public void systemReady() throws RemoteException {}
 
         @Override // android.content.pm.IASKSManager
-        public int verifyASKStokenForPackage(String packageName, String baseCodePath, long versionCode, Signature[] signatures, String installerPackageName, String initiatingPackageName, boolean isSystemApp) throws RemoteException {
+        public int verifyASKStokenForPackage(
+                String packageName,
+                String baseCodePath,
+                long versionCode,
+                Signature[] signatures,
+                String installerPackageName,
+                String initiatingPackageName,
+                boolean isSystemApp)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.content.pm.IASKSManager
-        public void postASKSsetup(String packageName, String baseCodePath, int userId) throws RemoteException {
-        }
+        public void postASKSsetup(String packageName, String baseCodePath, int userId)
+                throws RemoteException {}
 
         @Override // android.content.pm.IASKSManager
-        public void clearASKSruleForRemovedPackage(String packageName) throws RemoteException {
-        }
+        public void clearASKSruleForRemovedPackage(String packageName) throws RemoteException {}
 
         @Override // android.content.pm.IASKSManager
-        public int checkRestrictedPermission(String packageName, String permission) throws RemoteException {
+        public int checkRestrictedPermission(String packageName, String permission)
+                throws RemoteException {
             return 0;
         }
 
@@ -97,17 +128,16 @@ public interface IASKSManager extends IInterface {
         }
 
         @Override // android.content.pm.IASKSManager
-        public boolean checkFollowingLegitimateWay(String pkgName, int flags) throws RemoteException {
+        public boolean checkFollowingLegitimateWay(String pkgName, int flags)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.IASKSManager
-        public void checkDeletableListForASKS() throws RemoteException {
-        }
+        public void checkDeletableListForASKS() throws RemoteException {}
 
         @Override // android.content.pm.IASKSManager
-        public void setTrustTimebyStatusChanged() throws RemoteException {
-        }
+        public void setTrustTimebyStatusChanged() throws RemoteException {}
 
         @Override // android.content.pm.IASKSManager
         public String getUNvalueForASKS() throws RemoteException {
@@ -120,12 +150,28 @@ public interface IASKSManager extends IInterface {
         }
 
         @Override // android.content.pm.IASKSManager
-        public int checkUnknownSourcePackage(String packageName, String[] permList, String[] servicePermList, String baseCodePath, Signature[] signatures, String initiatingPackageName, String originatingPackageName, String originalInstallerPackageName, int sdkVersion, String referralUrl, String downloadUrl, int userId, String safeInstallToken, String safeInstallCert) throws RemoteException {
+        public int checkUnknownSourcePackage(
+                String packageName,
+                String[] permList,
+                String[] servicePermList,
+                String baseCodePath,
+                Signature[] signatures,
+                String initiatingPackageName,
+                String originatingPackageName,
+                String originalInstallerPackageName,
+                int sdkVersion,
+                String referralUrl,
+                String downloadUrl,
+                int userId,
+                String safeInstallToken,
+                String safeInstallCert)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.content.pm.IASKSManager
-        public boolean isUnknownApps(String packageName, Signature[] signatures) throws RemoteException {
+        public boolean isUnknownApps(String packageName, Signature[] signatures)
+                throws RemoteException {
             return false;
         }
 
@@ -135,7 +181,12 @@ public interface IASKSManager extends IInterface {
         }
 
         @Override // android.content.pm.IASKSManager
-        public String checkIfSuspiciousValue(String targetContentsValue, String fileName, boolean checkContains, Map<String, String> results) throws RemoteException {
+        public String checkIfSuspiciousValue(
+                String targetContentsValue,
+                String fileName,
+                boolean checkContains,
+                Map<String, String> results)
+                throws RemoteException {
             return null;
         }
 
@@ -170,8 +221,7 @@ public interface IASKSManager extends IInterface {
         }
 
         @Override // android.content.pm.IASKSManager
-        public void setASKSPolicyVersion(String newVersion) throws RemoteException {
-        }
+        public void setASKSPolicyVersion(String newVersion) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -179,7 +229,7 @@ public interface IASKSManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IASKSManager {
+    public abstract static class Stub extends Binder implements IASKSManager {
         static final int TRANSACTION_applyScpmPolicyFromService = 19;
         static final int TRANSACTION_checkASKSTarget = 12;
         static final int TRANSACTION_checkDeletableListForASKS = 9;
@@ -283,7 +333,8 @@ public interface IASKSManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, final Parcel data, final Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, final Parcel data, final Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IASKSManager.DESCRIPTOR);
             }
@@ -305,7 +356,9 @@ public interface IASKSManager extends IInterface {
                     String _arg5 = data.readString();
                     boolean _arg6 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    int _result = verifyASKStokenForPackage(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6);
+                    int _result =
+                            verifyASKStokenForPackage(
+                                    _arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6);
                     reply.writeNoException();
                     reply.writeInt(_result);
                     return true;
@@ -387,7 +440,10 @@ public interface IASKSManager extends IInterface {
                     String _arg122 = data.readString();
                     String _arg132 = data.readString();
                     data.enforceNoDataAvail();
-                    int _result8 = checkUnknownSourcePackage(_arg08, _arg15, _arg23, _arg32, _arg42, _arg52, _arg62, _arg7, _arg8, _arg9, _arg10, _arg11, _arg122, _arg132);
+                    int _result8 =
+                            checkUnknownSourcePackage(
+                                    _arg08, _arg15, _arg23, _arg32, _arg42, _arg52, _arg62, _arg7,
+                                    _arg8, _arg9, _arg10, _arg11, _arg122, _arg132);
                     reply.writeNoException();
                     reply.writeInt(_result8);
                     return true;
@@ -410,12 +466,16 @@ public interface IASKSManager extends IInterface {
                     boolean _arg24 = data.readBoolean();
                     int N = data.readInt();
                     final Map<String, String> _arg33 = N < 0 ? null : new HashMap<>();
-                    IntStream.range(0, N).forEach(new IntConsumer() { // from class: android.content.pm.IASKSManager$Stub$$ExternalSyntheticLambda0
-                        @Override // java.util.function.IntConsumer
-                        public final void accept(int i) {
-                            IASKSManager.Stub.lambda$onTransact$0(Parcel.this, _arg33, i);
-                        }
-                    });
+                    IntStream.range(0, N)
+                            .forEach(
+                                    new IntConsumer() { // from class:
+                                        // android.content.pm.IASKSManager$Stub$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.IntConsumer
+                                        public final void accept(int i) {
+                                            IASKSManager.Stub.lambda$onTransact$0(
+                                                    Parcel.this, _arg33, i);
+                                        }
+                                    });
                     data.enforceNoDataAvail();
                     String _result11 = checkIfSuspiciousValue(_arg010, _arg17, _arg24, _arg33);
                     reply.writeNoException();
@@ -425,12 +485,15 @@ public interface IASKSManager extends IInterface {
                         return true;
                     }
                     reply.writeInt(_arg33.size());
-                    _arg33.forEach(new BiConsumer() { // from class: android.content.pm.IASKSManager$Stub$$ExternalSyntheticLambda1
-                        @Override // java.util.function.BiConsumer
-                        public final void accept(Object obj, Object obj2) {
-                            IASKSManager.Stub.lambda$onTransact$1(Parcel.this, (String) obj, (String) obj2);
-                        }
-                    });
+                    _arg33.forEach(
+                            new BiConsumer() { // from class:
+                                // android.content.pm.IASKSManager$Stub$$ExternalSyntheticLambda1
+                                @Override // java.util.function.BiConsumer
+                                public final void accept(Object obj, Object obj2) {
+                                    IASKSManager.Stub.lambda$onTransact$1(
+                                            Parcel.this, (String) obj, (String) obj2);
+                                }
+                            });
                     return true;
                 case 17:
                     String _arg011 = data.readString();
@@ -528,7 +591,15 @@ public interface IASKSManager extends IInterface {
             }
 
             @Override // android.content.pm.IASKSManager
-            public int verifyASKStokenForPackage(String packageName, String baseCodePath, long versionCode, Signature[] signatures, String installerPackageName, String initiatingPackageName, boolean isSystemApp) throws RemoteException {
+            public int verifyASKStokenForPackage(
+                    String packageName,
+                    String baseCodePath,
+                    long versionCode,
+                    Signature[] signatures,
+                    String installerPackageName,
+                    String initiatingPackageName,
+                    boolean isSystemApp)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -551,7 +622,8 @@ public interface IASKSManager extends IInterface {
             }
 
             @Override // android.content.pm.IASKSManager
-            public void postASKSsetup(String packageName, String baseCodePath, int userId) throws RemoteException {
+            public void postASKSsetup(String packageName, String baseCodePath, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -583,7 +655,8 @@ public interface IASKSManager extends IInterface {
             }
 
             @Override // android.content.pm.IASKSManager
-            public int checkRestrictedPermission(String packageName, String permission) throws RemoteException {
+            public int checkRestrictedPermission(String packageName, String permission)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -634,7 +707,8 @@ public interface IASKSManager extends IInterface {
             }
 
             @Override // android.content.pm.IASKSManager
-            public boolean checkFollowingLegitimateWay(String pkgName, int flags) throws RemoteException {
+            public boolean checkFollowingLegitimateWay(String pkgName, int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -713,7 +787,22 @@ public interface IASKSManager extends IInterface {
             }
 
             @Override // android.content.pm.IASKSManager
-            public int checkUnknownSourcePackage(String packageName, String[] permList, String[] servicePermList, String baseCodePath, Signature[] signatures, String initiatingPackageName, String originatingPackageName, String originalInstallerPackageName, int sdkVersion, String referralUrl, String downloadUrl, int userId, String safeInstallToken, String safeInstallCert) throws RemoteException {
+            public int checkUnknownSourcePackage(
+                    String packageName,
+                    String[] permList,
+                    String[] servicePermList,
+                    String baseCodePath,
+                    Signature[] signatures,
+                    String initiatingPackageName,
+                    String originatingPackageName,
+                    String originalInstallerPackageName,
+                    int sdkVersion,
+                    String referralUrl,
+                    String downloadUrl,
+                    int userId,
+                    String safeInstallToken,
+                    String safeInstallCert)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -821,7 +910,8 @@ public interface IASKSManager extends IInterface {
             }
 
             @Override // android.content.pm.IASKSManager
-            public boolean isUnknownApps(String packageName, Signature[] signatures) throws RemoteException {
+            public boolean isUnknownApps(String packageName, Signature[] signatures)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -855,7 +945,12 @@ public interface IASKSManager extends IInterface {
             }
 
             @Override // android.content.pm.IASKSManager
-            public String checkIfSuspiciousValue(String targetContentsValue, String fileName, boolean checkContains, final Map<String, String> results) throws RemoteException {
+            public String checkIfSuspiciousValue(
+                    String targetContentsValue,
+                    String fileName,
+                    boolean checkContains,
+                    final Map<String, String> results)
+                    throws RemoteException {
                 final Parcel _data = Parcel.obtain(asBinder());
                 final Parcel _reply = Parcel.obtain();
                 try {
@@ -867,12 +962,15 @@ public interface IASKSManager extends IInterface {
                         _data.writeInt(-1);
                     } else {
                         _data.writeInt(results.size());
-                        results.forEach(new BiConsumer() { // from class: android.content.pm.IASKSManager$Stub$Proxy$$ExternalSyntheticLambda0
-                            @Override // java.util.function.BiConsumer
-                            public final void accept(Object obj, Object obj2) {
-                                IASKSManager.Stub.Proxy.lambda$checkIfSuspiciousValue$0(Parcel.this, (String) obj, (String) obj2);
-                            }
-                        });
+                        results.forEach(
+                                new BiConsumer() { // from class:
+                                    // android.content.pm.IASKSManager$Stub$Proxy$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.BiConsumer
+                                    public final void accept(Object obj, Object obj2) {
+                                        IASKSManager.Stub.Proxy.lambda$checkIfSuspiciousValue$0(
+                                                Parcel.this, (String) obj, (String) obj2);
+                                    }
+                                });
                     }
                     this.mRemote.transact(16, _data, _reply, 0);
                     _reply.readException();
@@ -880,12 +978,16 @@ public interface IASKSManager extends IInterface {
                     if (results != null) {
                         results.clear();
                     }
-                    IntStream.range(0, _reply.readInt()).forEach(new IntConsumer() { // from class: android.content.pm.IASKSManager$Stub$Proxy$$ExternalSyntheticLambda1
-                        @Override // java.util.function.IntConsumer
-                        public final void accept(int i) {
-                            IASKSManager.Stub.Proxy.lambda$checkIfSuspiciousValue$1(Parcel.this, results, i);
-                        }
-                    });
+                    IntStream.range(0, _reply.readInt())
+                            .forEach(
+                                    new IntConsumer() { // from class:
+                                        // android.content.pm.IASKSManager$Stub$Proxy$$ExternalSyntheticLambda1
+                                        @Override // java.util.function.IntConsumer
+                                        public final void accept(int i) {
+                                            IASKSManager.Stub.Proxy.lambda$checkIfSuspiciousValue$1(
+                                                    Parcel.this, results, i);
+                                        }
+                                    });
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -893,12 +995,14 @@ public interface IASKSManager extends IInterface {
                 }
             }
 
-            static /* synthetic */ void lambda$checkIfSuspiciousValue$0(Parcel _data, String k, String v) {
+            static /* synthetic */ void lambda$checkIfSuspiciousValue$0(
+                    Parcel _data, String k, String v) {
                 _data.writeString(k);
                 _data.writeString(v);
             }
 
-            static /* synthetic */ void lambda$checkIfSuspiciousValue$1(Parcel _reply, Map results, int i) {
+            static /* synthetic */ void lambda$checkIfSuspiciousValue$1(
+                    Parcel _reply, Map results, int i) {
                 String k = _reply.readString();
                 String v = _reply.readString();
                 results.put(k, v);

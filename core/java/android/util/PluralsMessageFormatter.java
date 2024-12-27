@@ -2,6 +2,7 @@ package android.util;
 
 import android.content.res.Resources;
 import android.icu.text.MessageFormat;
+
 import java.util.Map;
 
 /* loaded from: classes4.dex */

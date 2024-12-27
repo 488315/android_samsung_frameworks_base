@@ -4,7 +4,9 @@ import android.app.ActivityOptions;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.TypedValue;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.util.function.Predicate;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -17,20 +19,41 @@ public abstract class PopOverBoundsCalculator {
             return activityRecord.getBounds();
         }
         final DisplayContent displayContent = activityRecord.mDisplayContent;
-        ActivityRecord activity = activityRecord.task.getActivity(new Predicate() { // from class: com.android.server.wm.PopOverBoundsCalculator$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                ActivityRecord activityRecord2 = (ActivityRecord) obj;
-                return activityRecord2 != ActivityRecord.this && displayContent.isFixedRotationLaunchingApp(activityRecord2) && activityRecord2.inFullscreenWindowingMode() && !activityRecord2.mPopOverState.mIsActivated;
-            }
-        });
-        int i = (activity == null || activity.getFixedRotationTransformDisplayInfo() == null) ? displayContent.mDisplayRotation.mRotation : activity.getFixedRotationTransformDisplayInfo().rotation;
+        ActivityRecord activity =
+                activityRecord.task.getActivity(
+                        new Predicate() { // from class:
+                                          // com.android.server.wm.PopOverBoundsCalculator$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Predicate
+                            public final boolean test(Object obj) {
+                                ActivityRecord activityRecord2 = (ActivityRecord) obj;
+                                return activityRecord2 != ActivityRecord.this
+                                        && displayContent.isFixedRotationLaunchingApp(
+                                                activityRecord2)
+                                        && activityRecord2.inFullscreenWindowingMode()
+                                        && !activityRecord2.mPopOverState.mIsActivated;
+                            }
+                        });
+        int i =
+                (activity == null || activity.getFixedRotationTransformDisplayInfo() == null)
+                        ? displayContent.mDisplayRotation.mRotation
+                        : activity.getFixedRotationTransformDisplayInfo().rotation;
         boolean isAnyPortrait = displayContent.mDisplayRotation.isAnyPortrait(i);
         float f = displayContent.mDisplayMetrics.density;
-        Rect bounds = activity != null ? activity.getBounds() : new Rect(activityRecord.task.getBounds());
+        Rect bounds =
+                activity != null ? activity.getBounds() : new Rect(activityRecord.task.getBounds());
         Rect rect = new Rect();
         byte b = i == 1 || i == 3;
-        Rect rect2 = new Rect(displayContent.mDisplayPolicy.getDecorInsetsInfo(i, b != false ? displayContent.mBaseDisplayHeight : displayContent.mBaseDisplayWidth, b != false ? displayContent.mBaseDisplayWidth : displayContent.mBaseDisplayHeight).mOverrideConfigInsets);
+        Rect rect2 =
+                new Rect(
+                        displayContent.mDisplayPolicy.getDecorInsetsInfo(
+                                        i,
+                                        b != false
+                                                ? displayContent.mBaseDisplayHeight
+                                                : displayContent.mBaseDisplayWidth,
+                                        b != false
+                                                ? displayContent.mBaseDisplayWidth
+                                                : displayContent.mBaseDisplayHeight)
+                                .mOverrideConfigInsets);
         rect.set(0, rect2.top, 0, rect2.bottom);
         Task task = activityRecord.task;
         if (task.isDesktopModeEnabled()) {
@@ -39,7 +62,17 @@ public abstract class PopOverBoundsCalculator {
             }
             if (task.isActivityTypeStandard() || task.inFreeformWindowingMode()) {
                 if (task.inFullscreenWindowingMode()) {
-                    bounds.top = ((int) TypedValue.applyDimension(1, 32.0f, displayContent.mDisplayPolicy.getContext().getResources().getDisplayMetrics())) + bounds.top;
+                    bounds.top =
+                            ((int)
+                                            TypedValue.applyDimension(
+                                                    1,
+                                                    32.0f,
+                                                    displayContent
+                                                            .mDisplayPolicy
+                                                            .getContext()
+                                                            .getResources()
+                                                            .getDisplayMetrics()))
+                                    + bounds.top;
                 }
                 bounds.top = task.getCaptionHeight() + bounds.top;
             }
@@ -47,8 +80,13 @@ public abstract class PopOverBoundsCalculator {
         } else if (task.inFreeformWindowingMode()) {
             bounds.top = task.getCaptionHeight() + bounds.top;
         } else if (!task.inMultiWindowMode()) {
-            Rect safeInsets = displayContent.calculateDisplayCutoutForRotation(i, activityRecord.isConfigurationNeededInUdcCutout()).getSafeInsets();
-            if (CoreRune.FW_OVERLAPPING_WITH_CUTOUT_AS_DEFAULT && displayContent.mIsOverlappingWithCutoutAsDefault) {
+            Rect safeInsets =
+                    displayContent
+                            .calculateDisplayCutoutForRotation(
+                                    i, activityRecord.isConfigurationNeededInUdcCutout())
+                            .getSafeInsets();
+            if (CoreRune.FW_OVERLAPPING_WITH_CUTOUT_AS_DEFAULT
+                    && displayContent.mIsOverlappingWithCutoutAsDefault) {
                 safeInsets.setEmpty();
             }
             bounds.top = Math.max(rect.top, safeInsets.top) + bounds.top;

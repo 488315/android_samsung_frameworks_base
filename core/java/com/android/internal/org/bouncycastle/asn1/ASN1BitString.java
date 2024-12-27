@@ -1,15 +1,34 @@
 package com.android.internal.org.bouncycastle.asn1;
 
 import android.text.format.DateFormat;
+
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.io.Streams;
+
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 
 /* loaded from: classes5.dex */
 public abstract class ASN1BitString extends ASN1Primitive implements ASN1String {
-    private static final char[] table = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', DateFormat.CAPITAL_AM_PM, 'B', 'C', 'D', DateFormat.DAY, 'F'};
+    private static final char[] table = {
+        '0',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        DateFormat.CAPITAL_AM_PM,
+        'B',
+        'C',
+        'D',
+        DateFormat.DAY,
+        'F'
+    };
     protected final byte[] data;
     protected final int padBits;
 
@@ -71,7 +90,7 @@ public abstract class ASN1BitString extends ASN1Primitive implements ASN1String 
         if (padBits > 7 || padBits < 0) {
             throw new IllegalArgumentException("pad bits cannot be greater than 7 or less than 0");
         }
-        this.data = new byte[]{data};
+        this.data = new byte[] {data};
         this.padBits = padBits;
     }
 
@@ -100,7 +119,8 @@ public abstract class ASN1BitString extends ASN1Primitive implements ASN1String 
             }
             return buf.toString();
         } catch (IOException e) {
-            throw new ASN1ParsingException("Internal error encoding BitString: " + e.getMessage(), e);
+            throw new ASN1ParsingException(
+                    "Internal error encoding BitString: " + e.getMessage(), e);
         }
     }
 
@@ -119,7 +139,8 @@ public abstract class ASN1BitString extends ASN1Primitive implements ASN1String 
 
     public byte[] getOctets() {
         if (this.padBits != 0) {
-            throw new IllegalStateException("attempt to get non-octet aligned data from BIT STRING");
+            throw new IllegalStateException(
+                    "attempt to get non-octet aligned data from BIT STRING");
         }
         return Arrays.clone(this.data);
     }
@@ -142,7 +163,8 @@ public abstract class ASN1BitString extends ASN1Primitive implements ASN1String 
         return getString();
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive, com.android.internal.org.bouncycastle.asn1.ASN1Object
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Object
     public int hashCode() {
         int end = this.data.length - 1;
         if (end < 0) {
@@ -193,7 +215,10 @@ public abstract class ASN1BitString extends ASN1Primitive implements ASN1String 
             if (Streams.readFully(stream, data) != data.length) {
                 throw new EOFException("EOF encountered in middle of BIT STRING");
             }
-            if (padBits > 0 && padBits < 8 && data[data.length - 1] != ((byte) (data[data.length - 1] & (255 << padBits)))) {
+            if (padBits > 0
+                    && padBits < 8
+                    && data[data.length - 1]
+                            != ((byte) (data[data.length - 1] & (255 << padBits)))) {
                 return new DLBitString(data, padBits);
             }
         }

@@ -6,6 +6,7 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Object;
 import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
+
 import java.util.Enumeration;
 
 /* loaded from: classes5.dex */
@@ -30,9 +31,12 @@ public class PBES2Parameters extends ASN1Object implements PKCSObjectIdentifiers
 
     private PBES2Parameters(ASN1Sequence obj) {
         Enumeration e = obj.getObjects();
-        ASN1Sequence funcSeq = ASN1Sequence.getInstance(((ASN1Encodable) e.nextElement()).toASN1Primitive());
+        ASN1Sequence funcSeq =
+                ASN1Sequence.getInstance(((ASN1Encodable) e.nextElement()).toASN1Primitive());
         if (funcSeq.getObjectAt(0).equals(id_PBKDF2)) {
-            this.func = new KeyDerivationFunc(id_PBKDF2, PBKDF2Params.getInstance(funcSeq.getObjectAt(1)));
+            this.func =
+                    new KeyDerivationFunc(
+                            id_PBKDF2, PBKDF2Params.getInstance(funcSeq.getObjectAt(1)));
         } else {
             this.func = KeyDerivationFunc.getInstance(funcSeq);
         }
@@ -47,7 +51,8 @@ public class PBES2Parameters extends ASN1Object implements PKCSObjectIdentifiers
         return this.scheme;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(2);
         v.add(this.func);

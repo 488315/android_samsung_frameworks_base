@@ -8,6 +8,7 @@ import android.location.provider.IGeocodeProvider;
 import android.location.provider.ReverseGeocodeRequest;
 import android.os.IBinder;
 import android.os.RemoteException;
+
 import com.android.server.FgThread;
 import com.android.server.location.injector.Injector;
 import com.android.server.servicewatcher.CurrentUserServiceSupplier;
@@ -26,12 +27,14 @@ public final class ProxyGeocodeProvider {
         public final /* synthetic */ IGeocodeCallback val$callback;
         public final /* synthetic */ Object val$request;
 
-        public AnonymousClass1(ForwardGeocodeRequest forwardGeocodeRequest, IGeocodeCallback iGeocodeCallback) {
+        public AnonymousClass1(
+                ForwardGeocodeRequest forwardGeocodeRequest, IGeocodeCallback iGeocodeCallback) {
             this.val$request = forwardGeocodeRequest;
             this.val$callback = iGeocodeCallback;
         }
 
-        public AnonymousClass1(ReverseGeocodeRequest reverseGeocodeRequest, IGeocodeCallback iGeocodeCallback) {
+        public AnonymousClass1(
+                ReverseGeocodeRequest reverseGeocodeRequest, IGeocodeCallback iGeocodeCallback) {
             this.val$request = reverseGeocodeRequest;
             this.val$callback = iGeocodeCallback;
         }
@@ -60,20 +63,46 @@ public final class ProxyGeocodeProvider {
         public final void run(IBinder iBinder) {
             switch (this.$r8$classId) {
                 case 0:
-                    IGeocodeProvider.Stub.asInterface(iBinder).reverseGeocode((ReverseGeocodeRequest) this.val$request, this.val$callback);
+                    IGeocodeProvider.Stub.asInterface(iBinder)
+                            .reverseGeocode(
+                                    (ReverseGeocodeRequest) this.val$request, this.val$callback);
                     break;
                 default:
-                    IGeocodeProvider.Stub.asInterface(iBinder).forwardGeocode((ForwardGeocodeRequest) this.val$request, this.val$callback);
+                    IGeocodeProvider.Stub.asInterface(iBinder)
+                            .forwardGeocode(
+                                    (ForwardGeocodeRequest) this.val$request, this.val$callback);
                     break;
             }
         }
     }
 
     public ProxyGeocodeProvider(Context context, Injector injector) {
-        this.mServiceWatcher = new ServiceWatcherImpl(context, FgThread.getHandler(), "GeocoderProxy", CurrentUserServiceSupplier.createFromConfig(context, "com.android.location.service.GeocodeProvider", R.bool.config_enableMotionPrediction, R.string.duration_minutes_relative_future), null, injector);
+        this.mServiceWatcher =
+                new ServiceWatcherImpl(
+                        context,
+                        FgThread.getHandler(),
+                        "GeocoderProxy",
+                        CurrentUserServiceSupplier.createFromConfig(
+                                context,
+                                "com.android.location.service.GeocodeProvider",
+                                R.bool.config_enableMotionPrediction,
+                                R.string.duration_minutes_relative_future),
+                        null,
+                        injector);
     }
 
     public ProxyGeocodeProvider(Context context, Injector injector, int i) {
-        this.mServiceWatcher = new ServiceWatcherImpl(context, FgThread.getHandler(), "GeocoderProxy", CurrentUserServiceSupplier.createFromConfig(context, "com.android.location.service.GeocodeProvider", R.bool.config_enableStylusPointerIcon, R.string.duration_minutes_shortest), null, injector);
+        this.mServiceWatcher =
+                new ServiceWatcherImpl(
+                        context,
+                        FgThread.getHandler(),
+                        "GeocoderProxy",
+                        CurrentUserServiceSupplier.createFromConfig(
+                                context,
+                                "com.android.location.service.GeocodeProvider",
+                                R.bool.config_enableStylusPointerIcon,
+                                R.string.duration_minutes_shortest),
+                        null,
+                        injector);
     }
 }

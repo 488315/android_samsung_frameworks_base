@@ -30,8 +30,7 @@ public class RDSParser {
         return mInstance;
     }
 
-    private RDSParser() {
-    }
+    private RDSParser() {}
 
     public void reset() {
         this.mFinalRadioText = null;
@@ -50,7 +49,9 @@ public class RDSParser {
             Method dump skipped, instructions count: 658
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.RDSParser.parseData(com.android.server.ExtRDSData):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.RDSParser.parseData(com.android.server.ExtRDSData):void");
     }
 
     public boolean isRDSDataValid() {
@@ -120,7 +121,10 @@ public class RDSParser {
         }
 
         public boolean isRTValid(int maxLength) {
-            return (RDSParser.this.mRadioText.endReceived && RDSParser.this.mRadioText.length == RDSParser.this.mRadioText.receivedChar) || RDSParser.this.mRadioText.receivedChar == maxLength;
+            return (RDSParser.this.mRadioText.endReceived
+                            && RDSParser.this.mRadioText.length
+                                    == RDSParser.this.mRadioText.receivedChar)
+                    || RDSParser.this.mRadioText.receivedChar == maxLength;
         }
     }
 

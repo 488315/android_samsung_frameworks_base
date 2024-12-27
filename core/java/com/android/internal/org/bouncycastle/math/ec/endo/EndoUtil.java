@@ -5,6 +5,7 @@ import com.android.internal.org.bouncycastle.math.ec.ECCurve;
 import com.android.internal.org.bouncycastle.math.ec.ECPoint;
 import com.android.internal.org.bouncycastle.math.ec.PreCompCallback;
 import com.android.internal.org.bouncycastle.math.ec.PreCompInfo;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
@@ -17,29 +18,46 @@ public abstract class EndoUtil {
         BigInteger b2 = calculateB(k, p.getG2(), bits);
         BigInteger a = k.subtract(b1.multiply(p.getV1A()).add(b2.multiply(p.getV2A())));
         BigInteger b = b1.multiply(p.getV1B()).add(b2.multiply(p.getV2B())).negate();
-        return new BigInteger[]{a, b};
+        return new BigInteger[] {a, b};
     }
 
     public static ECPoint mapPoint(final ECEndomorphism endomorphism, final ECPoint p) {
         ECCurve c = p.getCurve();
-        EndoPreCompInfo precomp = (EndoPreCompInfo) c.precompute(p, PRECOMP_NAME, new PreCompCallback() { // from class: com.android.internal.org.bouncycastle.math.ec.endo.EndoUtil.1
-            @Override // com.android.internal.org.bouncycastle.math.ec.PreCompCallback
-            public PreCompInfo precompute(PreCompInfo existing) {
-                EndoPreCompInfo existingEndo = existing instanceof EndoPreCompInfo ? (EndoPreCompInfo) existing : null;
-                if (checkExisting(existingEndo, ECEndomorphism.this)) {
-                    return existingEndo;
-                }
-                ECPoint mappedPoint = ECEndomorphism.this.getPointMap().map(p);
-                EndoPreCompInfo result = new EndoPreCompInfo();
-                result.setEndomorphism(ECEndomorphism.this);
-                result.setMappedPoint(mappedPoint);
-                return result;
-            }
+        EndoPreCompInfo precomp =
+                (EndoPreCompInfo)
+                        c.precompute(
+                                p,
+                                PRECOMP_NAME,
+                                new PreCompCallback() { // from class:
+                                                        // com.android.internal.org.bouncycastle.math.ec.endo.EndoUtil.1
+                                    @Override // com.android.internal.org.bouncycastle.math.ec.PreCompCallback
+                                    public PreCompInfo precompute(PreCompInfo existing) {
+                                        EndoPreCompInfo existingEndo =
+                                                existing instanceof EndoPreCompInfo
+                                                        ? (EndoPreCompInfo) existing
+                                                        : null;
+                                        if (checkExisting(existingEndo, ECEndomorphism.this)) {
+                                            return existingEndo;
+                                        }
+                                        ECPoint mappedPoint =
+                                                ECEndomorphism.this.getPointMap().map(p);
+                                        EndoPreCompInfo result = new EndoPreCompInfo();
+                                        result.setEndomorphism(ECEndomorphism.this);
+                                        result.setMappedPoint(mappedPoint);
+                                        return result;
+                                    }
 
-            private boolean checkExisting(EndoPreCompInfo existingEndo, ECEndomorphism endomorphism2) {
-                return (existingEndo == null || existingEndo.getEndomorphism() != endomorphism2 || existingEndo.getMappedPoint() == null) ? false : true;
-            }
-        });
+                                    private boolean checkExisting(
+                                            EndoPreCompInfo existingEndo,
+                                            ECEndomorphism endomorphism2) {
+                                        return (existingEndo == null
+                                                        || existingEndo.getEndomorphism()
+                                                                != endomorphism2
+                                                        || existingEndo.getMappedPoint() == null)
+                                                ? false
+                                                : true;
+                                    }
+                                });
         return precomp.getMappedPoint();
     }
 

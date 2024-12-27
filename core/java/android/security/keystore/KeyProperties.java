@@ -1,6 +1,9 @@
 package android.security.keystore;
 
 import android.annotation.SystemApi;
+
+import libcore.util.EmptyArray;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.security.spec.AlgorithmParameterSpec;
@@ -9,7 +12,6 @@ import java.security.spec.MGF1ParameterSpec;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Locale;
-import libcore.util.EmptyArray;
 
 /* loaded from: classes3.dex */
 public abstract class KeyProperties {
@@ -31,8 +33,7 @@ public abstract class KeyProperties {
     public static final String ENCRYPTION_PADDING_RSA_OAEP = "OAEPPadding";
     public static final String ENCRYPTION_PADDING_RSA_PKCS1 = "PKCS1Padding";
 
-    @Deprecated
-    public static final String KEY_ALGORITHM_3DES = "DESede";
+    @Deprecated public static final String KEY_ALGORITHM_3DES = "DESede";
     public static final String KEY_ALGORITHM_AES = "AES";
     public static final String KEY_ALGORITHM_EC = "EC";
     public static final String KEY_ALGORITHM_HMAC_SHA1 = "HmacSHA1";
@@ -43,12 +44,10 @@ public abstract class KeyProperties {
     public static final String KEY_ALGORITHM_RSA = "RSA";
     public static final String KEY_ALGORITHM_XDH = "XDH";
 
-    @SystemApi
-    public static final int NAMESPACE_APPLICATION = -1;
+    @SystemApi public static final int NAMESPACE_APPLICATION = -1;
     public static final int NAMESPACE_LOCKSETTINGS = 103;
 
-    @SystemApi
-    public static final int NAMESPACE_WIFI = 102;
+    @SystemApi public static final int NAMESPACE_WIFI = 102;
     public static final int ORIGIN_GENERATED = 1;
     public static final int ORIGIN_IMPORTED = 2;
     public static final int ORIGIN_SECURELY_IMPORTED = 8;
@@ -71,51 +70,39 @@ public abstract class KeyProperties {
     public static final int UNRESTRICTED_USAGE_COUNT = -1;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AuthEnum {
-    }
+    public @interface AuthEnum {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BlockModeEnum {
-    }
+    public @interface BlockModeEnum {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DigestEnum {
-    }
+    public @interface DigestEnum {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface EncryptionPaddingEnum {
-    }
+    public @interface EncryptionPaddingEnum {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface KeyAlgorithmEnum {
-    }
+    public @interface KeyAlgorithmEnum {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Namespace {
-    }
+    public @interface Namespace {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface OriginEnum {
-    }
+    public @interface OriginEnum {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PurposeEnum {
-    }
+    public @interface PurposeEnum {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SecurityLevelEnum {
-    }
+    public @interface SecurityLevelEnum {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SignaturePaddingEnum {
-    }
+    public @interface SignaturePaddingEnum {}
 
-    private KeyProperties() {
-    }
+    private KeyProperties() {}
 
-    public static abstract class Purpose {
-        private Purpose() {
-        }
+    public abstract static class Purpose {
+        private Purpose() {}
 
         public static int toKeymaster(int purpose) {
             switch (purpose) {
@@ -179,12 +166,12 @@ public abstract class KeyProperties {
         }
     }
 
-    public static abstract class KeyAlgorithm {
-        private KeyAlgorithm() {
-        }
+    public abstract static class KeyAlgorithm {
+        private KeyAlgorithm() {}
 
         public static int toKeymasterAsymmetricKeyAlgorithm(String algorithm) {
-            if (KeyProperties.KEY_ALGORITHM_EC.equalsIgnoreCase(algorithm) || KeyProperties.KEY_ALGORITHM_XDH.equalsIgnoreCase(algorithm)) {
+            if (KeyProperties.KEY_ALGORITHM_EC.equalsIgnoreCase(algorithm)
+                    || KeyProperties.KEY_ALGORITHM_XDH.equalsIgnoreCase(algorithm)) {
                 return 3;
             }
             if ("RSA".equalsIgnoreCase(algorithm)) {
@@ -199,7 +186,8 @@ public abstract class KeyProperties {
                     return "RSA";
                 case 2:
                 default:
-                    throw new IllegalArgumentException("Unsupported key algorithm: " + keymasterAlgorithm);
+                    throw new IllegalArgumentException(
+                            "Unsupported key algorithm: " + keymasterAlgorithm);
                 case 3:
                     return KeyProperties.KEY_ALGORITHM_EC;
             }
@@ -218,7 +206,8 @@ public abstract class KeyProperties {
             throw new IllegalArgumentException("Unsupported secret key algorithm: " + algorithm);
         }
 
-        public static String fromKeymasterSecretKeyAlgorithm(int keymasterAlgorithm, int keymasterDigest) {
+        public static String fromKeymasterSecretKeyAlgorithm(
+                int keymasterAlgorithm, int keymasterDigest) {
             switch (keymasterAlgorithm) {
                 case 32:
                     return "AES";
@@ -237,10 +226,13 @@ public abstract class KeyProperties {
                         case 6:
                             return KeyProperties.KEY_ALGORITHM_HMAC_SHA512;
                         default:
-                            throw new IllegalArgumentException("Unsupported HMAC digest: " + Digest.fromKeymaster(keymasterDigest));
+                            throw new IllegalArgumentException(
+                                    "Unsupported HMAC digest: "
+                                            + Digest.fromKeymaster(keymasterDigest));
                     }
                 default:
-                    throw new IllegalArgumentException("Unsupported key algorithm: " + keymasterAlgorithm);
+                    throw new IllegalArgumentException(
+                            "Unsupported key algorithm: " + keymasterAlgorithm);
             }
         }
 
@@ -268,9 +260,8 @@ public abstract class KeyProperties {
         }
     }
 
-    public static abstract class BlockMode {
-        private BlockMode() {
-        }
+    public abstract static class BlockMode {
+        private BlockMode() {}
 
         public static int toKeymaster(String blockMode) {
             if (KeyProperties.BLOCK_MODE_ECB.equalsIgnoreCase(blockMode)) {
@@ -330,9 +321,8 @@ public abstract class KeyProperties {
         }
     }
 
-    public static abstract class EncryptionPadding {
-        private EncryptionPadding() {
-        }
+    public abstract static class EncryptionPadding {
+        private EncryptionPadding() {}
 
         public static int toKeymaster(String padding) {
             if ("NoPadding".equalsIgnoreCase(padding)) {
@@ -361,7 +351,8 @@ public abstract class KeyProperties {
                 case 64:
                     return KeyProperties.ENCRYPTION_PADDING_PKCS7;
                 default:
-                    throw new IllegalArgumentException("Unsupported encryption padding: " + padding);
+                    throw new IllegalArgumentException(
+                            "Unsupported encryption padding: " + padding);
             }
         }
 
@@ -377,9 +368,8 @@ public abstract class KeyProperties {
         }
     }
 
-    public static abstract class SignaturePadding {
-        private SignaturePadding() {
-        }
+    public abstract static class SignaturePadding {
+        private SignaturePadding() {}
 
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         public static int toKeymaster(String padding) {
@@ -410,7 +400,8 @@ public abstract class KeyProperties {
                 case 1:
                     return 3;
                 default:
-                    throw new IllegalArgumentException("Unsupported signature padding scheme: " + padding);
+                    throw new IllegalArgumentException(
+                            "Unsupported signature padding scheme: " + padding);
             }
         }
 
@@ -438,9 +429,8 @@ public abstract class KeyProperties {
         }
     }
 
-    public static abstract class Digest {
-        private Digest() {
-        }
+    public abstract static class Digest {
+        private Digest() {}
 
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         public static int toKeymaster(String digest) {
@@ -606,9 +596,8 @@ public abstract class KeyProperties {
         }
     }
 
-    public static abstract class Origin {
-        private Origin() {
-        }
+    public abstract static class Origin {
+        private Origin() {}
 
         public static int fromKeymaster(int origin) {
             switch (origin) {
@@ -660,9 +649,8 @@ public abstract class KeyProperties {
         return result;
     }
 
-    public static abstract class SecurityLevel {
-        private SecurityLevel() {
-        }
+    public abstract static class SecurityLevel {
+        private SecurityLevel() {}
 
         public static int toKeymaster(int securityLevel) {
             switch (securityLevel) {
@@ -673,7 +661,8 @@ public abstract class KeyProperties {
                 case 2:
                     return 2;
                 default:
-                    throw new IllegalArgumentException("Unsupported security level: " + securityLevel);
+                    throw new IllegalArgumentException(
+                            "Unsupported security level: " + securityLevel);
             }
         }
 
@@ -686,14 +675,14 @@ public abstract class KeyProperties {
                 case 2:
                     return 2;
                 default:
-                    throw new IllegalArgumentException("Unsupported security level: " + securityLevel);
+                    throw new IllegalArgumentException(
+                            "Unsupported security level: " + securityLevel);
             }
         }
     }
 
-    public static abstract class EcCurve {
-        private EcCurve() {
-        }
+    public abstract static class EcCurve {
+        private EcCurve() {}
 
         public static int toKeymasterCurve(ECParameterSpec spec) {
             int keySize = spec.getCurve().getField().getFieldSize();
@@ -735,7 +724,8 @@ public abstract class KeyProperties {
             case 102:
                 return 1010;
             default:
-                throw new IllegalArgumentException("No UID corresponding to namespace " + namespace);
+                throw new IllegalArgumentException(
+                        "No UID corresponding to namespace " + namespace);
         }
     }
 

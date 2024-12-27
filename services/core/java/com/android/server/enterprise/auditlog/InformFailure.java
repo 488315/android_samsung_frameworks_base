@@ -34,7 +34,8 @@ public final class InformFailure {
             }
             if (this.mContext != null) {
                 long clearCallingIdentity = Binder.clearCallingIdentity();
-                this.mContext.sendBroadcast(intent, "com.samsung.android.knox.permission.KNOX_AUDIT_LOG");
+                this.mContext.sendBroadcast(
+                        intent, "com.samsung.android.knox.permission.KNOX_AUDIT_LOG");
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
         } catch (Throwable th) {
@@ -51,7 +52,8 @@ public final class InformFailure {
             }
             if (this.mContext != null) {
                 long clearCallingIdentity = Binder.clearCallingIdentity();
-                this.mContext.sendBroadcast(intent, "com.samsung.android.knox.permission.KNOX_AUDIT_LOG");
+                this.mContext.sendBroadcast(
+                        intent, "com.samsung.android.knox.permission.KNOX_AUDIT_LOG");
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
         } catch (Throwable th) {

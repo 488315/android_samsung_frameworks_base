@@ -1,11 +1,13 @@
 package android.audio.policy.configuration.V7_0;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.datatype.DatatypeConfigurationException;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public class Reference {
@@ -34,7 +36,8 @@ public class Reference {
         this.name = name;
     }
 
-    static Reference read(XmlPullParser _parser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static Reference read(XmlPullParser _parser)
+            throws XmlPullParserException, IOException, DatatypeConfigurationException {
         int type;
         Reference _instance = new Reference();
         String _raw = _parser.getAttributeValue(null, "name");

@@ -1,10 +1,10 @@
 package android.content;
 
-import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.CancellationSignal;
 import android.os.OperationCanceledException;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.Arrays;
@@ -31,7 +31,16 @@ public class CursorLoader extends AsyncTaskLoader<Cursor> {
             this.mCancellationSignal = new CancellationSignal();
         }
         try {
-            Cursor cursor = getContext().getContentResolver().query(this.mUri, this.mProjection, this.mSelection, this.mSelectionArgs, this.mSortOrder, this.mCancellationSignal);
+            Cursor cursor =
+                    getContext()
+                            .getContentResolver()
+                            .query(
+                                    this.mUri,
+                                    this.mProjection,
+                                    this.mSelection,
+                                    this.mSelectionArgs,
+                                    this.mSortOrder,
+                                    this.mCancellationSignal);
             if (cursor != null) {
                 try {
                     cursor.getCount();
@@ -87,7 +96,13 @@ public class CursorLoader extends AsyncTaskLoader<Cursor> {
         this.mObserver = new Loader.ForceLoadContentObserver();
     }
 
-    public CursorLoader(Context context, Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public CursorLoader(
+            Context context,
+            Uri uri,
+            String[] projection,
+            String selection,
+            String[] selectionArgs,
+            String sortOrder) {
         super(context);
         this.mObserver = new Loader.ForceLoadContentObserver();
         this.mUri = uri;

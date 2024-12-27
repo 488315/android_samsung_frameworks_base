@@ -2,23 +2,27 @@ package android.window;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class TrustedPresentationThresholds implements Parcelable {
-    public static final Parcelable.Creator<TrustedPresentationThresholds> CREATOR = new Parcelable.Creator<TrustedPresentationThresholds>() { // from class: android.window.TrustedPresentationThresholds.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TrustedPresentationThresholds[] newArray(int size) {
-            return new TrustedPresentationThresholds[size];
-        }
+    public static final Parcelable.Creator<TrustedPresentationThresholds> CREATOR =
+            new Parcelable.Creator<
+                    TrustedPresentationThresholds>() { // from class:
+                                                       // android.window.TrustedPresentationThresholds.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TrustedPresentationThresholds[] newArray(int size) {
+                    return new TrustedPresentationThresholds[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TrustedPresentationThresholds createFromParcel(Parcel in) {
-            return new TrustedPresentationThresholds(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TrustedPresentationThresholds createFromParcel(Parcel in) {
+                    return new TrustedPresentationThresholds(in);
+                }
+            };
     private final float mMinAlpha;
     private final float mMinFractionRendered;
     private final int mStabilityRequirementMs;
@@ -36,12 +40,15 @@ public final class TrustedPresentationThresholds implements Parcelable {
     }
 
     private void checkValid() {
-        if (this.mMinAlpha <= 0.0f || this.mMinFractionRendered <= 0.0f || this.mStabilityRequirementMs < 1) {
+        if (this.mMinAlpha <= 0.0f
+                || this.mMinFractionRendered <= 0.0f
+                || this.mStabilityRequirementMs < 1) {
             throw new IllegalArgumentException("TrustedPresentationThresholds values are invalid");
         }
     }
 
-    public TrustedPresentationThresholds(float minAlpha, float minFractionRendered, int stabilityRequirementMs) {
+    public TrustedPresentationThresholds(
+            float minAlpha, float minFractionRendered, int stabilityRequirementMs) {
         this.mMinAlpha = minAlpha;
         this.mMinFractionRendered = minFractionRendered;
         this.mStabilityRequirementMs = stabilityRequirementMs;
@@ -49,7 +56,13 @@ public final class TrustedPresentationThresholds implements Parcelable {
     }
 
     public String toString() {
-        return "TrustedPresentationThresholds { minAlpha = " + this.mMinAlpha + ", minFractionRendered = " + this.mMinFractionRendered + ", stabilityRequirementMs = " + this.mStabilityRequirementMs + " }";
+        return "TrustedPresentationThresholds { minAlpha = "
+                + this.mMinAlpha
+                + ", minFractionRendered = "
+                + this.mMinFractionRendered
+                + ", stabilityRequirementMs = "
+                + this.mStabilityRequirementMs
+                + " }";
     }
 
     @Override // android.os.Parcelable
@@ -65,7 +78,10 @@ public final class TrustedPresentationThresholds implements Parcelable {
     }
 
     public int hashCode() {
-        return Objects.hash(Float.valueOf(this.mMinAlpha), Float.valueOf(this.mMinFractionRendered), Integer.valueOf(this.mStabilityRequirementMs));
+        return Objects.hash(
+                Float.valueOf(this.mMinAlpha),
+                Float.valueOf(this.mMinFractionRendered),
+                Integer.valueOf(this.mStabilityRequirementMs));
     }
 
     public boolean equals(Object o) {
@@ -76,7 +92,9 @@ public final class TrustedPresentationThresholds implements Parcelable {
             return false;
         }
         TrustedPresentationThresholds that = (TrustedPresentationThresholds) o;
-        return this.mMinAlpha == that.mMinAlpha && this.mMinFractionRendered == that.mMinFractionRendered && this.mStabilityRequirementMs == that.mStabilityRequirementMs;
+        return this.mMinAlpha == that.mMinAlpha
+                && this.mMinFractionRendered == that.mMinFractionRendered
+                && this.mStabilityRequirementMs == that.mStabilityRequirementMs;
     }
 
     TrustedPresentationThresholds(Parcel in) {

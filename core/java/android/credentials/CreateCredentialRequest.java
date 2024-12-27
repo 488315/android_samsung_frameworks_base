@@ -4,25 +4,29 @@ import android.annotation.NonNull;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Preconditions;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class CreateCredentialRequest implements Parcelable {
-    public static final Parcelable.Creator<CreateCredentialRequest> CREATOR = new Parcelable.Creator<CreateCredentialRequest>() { // from class: android.credentials.CreateCredentialRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CreateCredentialRequest[] newArray(int size) {
-            return new CreateCredentialRequest[size];
-        }
+    public static final Parcelable.Creator<CreateCredentialRequest> CREATOR =
+            new Parcelable.Creator<CreateCredentialRequest>() { // from class:
+                // android.credentials.CreateCredentialRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CreateCredentialRequest[] newArray(int size) {
+                    return new CreateCredentialRequest[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CreateCredentialRequest createFromParcel(Parcel in) {
-            return new CreateCredentialRequest(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CreateCredentialRequest createFromParcel(Parcel in) {
+                    return new CreateCredentialRequest(in);
+                }
+            };
     private final boolean mAlwaysSendAppInfoToProvider;
     private final Bundle mCandidateQueryData;
     private final Bundle mCredentialData;
@@ -70,13 +74,35 @@ public final class CreateCredentialRequest implements Parcelable {
     }
 
     public String toString() {
-        return "CreateCredentialRequest {type=" + this.mType + ", credentialData=" + this.mCredentialData + ", candidateQueryData=" + this.mCandidateQueryData + ", isSystemProviderRequired=" + this.mIsSystemProviderRequired + ", alwaysSendAppInfoToProvider=" + this.mAlwaysSendAppInfoToProvider + ", origin=" + this.mOrigin + "}";
+        return "CreateCredentialRequest {type="
+                + this.mType
+                + ", credentialData="
+                + this.mCredentialData
+                + ", candidateQueryData="
+                + this.mCandidateQueryData
+                + ", isSystemProviderRequired="
+                + this.mIsSystemProviderRequired
+                + ", alwaysSendAppInfoToProvider="
+                + this.mAlwaysSendAppInfoToProvider
+                + ", origin="
+                + this.mOrigin
+                + "}";
     }
 
-    private CreateCredentialRequest(String type, Bundle credentialData, Bundle candidateQueryData, boolean isSystemProviderRequired, boolean alwaysSendAppInfoToProvider, String origin) {
+    private CreateCredentialRequest(
+            String type,
+            Bundle credentialData,
+            Bundle candidateQueryData,
+            boolean isSystemProviderRequired,
+            boolean alwaysSendAppInfoToProvider,
+            String origin) {
         this.mType = (String) Preconditions.checkStringNotEmpty(type, "type must not be empty");
-        this.mCredentialData = (Bundle) Objects.requireNonNull(credentialData, "credentialData must not be null");
-        this.mCandidateQueryData = (Bundle) Objects.requireNonNull(candidateQueryData, "candidateQueryData must not be null");
+        this.mCredentialData =
+                (Bundle) Objects.requireNonNull(credentialData, "credentialData must not be null");
+        this.mCandidateQueryData =
+                (Bundle)
+                        Objects.requireNonNull(
+                                candidateQueryData, "candidateQueryData must not be null");
         this.mIsSystemProviderRequired = isSystemProviderRequired;
         this.mAlwaysSendAppInfoToProvider = alwaysSendAppInfoToProvider;
         this.mOrigin = origin;
@@ -90,11 +116,14 @@ public final class CreateCredentialRequest implements Parcelable {
         boolean alwaysSendAppInfoToProvider = in.readBoolean();
         this.mOrigin = in.readString8();
         this.mType = type;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mType);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mType);
         this.mCredentialData = credentialData;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mCredentialData);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mCredentialData);
         this.mCandidateQueryData = candidateQueryData;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mCandidateQueryData);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mCandidateQueryData);
         this.mIsSystemProviderRequired = isSystemProviderRequired;
         this.mAlwaysSendAppInfoToProvider = alwaysSendAppInfoToProvider;
     }
@@ -108,9 +137,18 @@ public final class CreateCredentialRequest implements Parcelable {
         private String mType;
 
         public Builder(String type, Bundle credentialData, Bundle candidateQueryData) {
-            this.mType = (String) Preconditions.checkStringNotEmpty(type, "type must not be null or empty");
-            this.mCredentialData = (Bundle) Objects.requireNonNull(credentialData, "credentialData must not be null");
-            this.mCandidateQueryData = (Bundle) Objects.requireNonNull(candidateQueryData, "candidateQueryData must not be null");
+            this.mType =
+                    (String)
+                            Preconditions.checkStringNotEmpty(
+                                    type, "type must not be null or empty");
+            this.mCredentialData =
+                    (Bundle)
+                            Objects.requireNonNull(
+                                    credentialData, "credentialData must not be null");
+            this.mCandidateQueryData =
+                    (Bundle)
+                            Objects.requireNonNull(
+                                    candidateQueryData, "candidateQueryData must not be null");
         }
 
         public Builder setAlwaysSendAppInfoToProvider(boolean value) {
@@ -130,7 +168,13 @@ public final class CreateCredentialRequest implements Parcelable {
 
         public CreateCredentialRequest build() {
             Preconditions.checkStringNotEmpty(this.mType, "type must not be empty");
-            return new CreateCredentialRequest(this.mType, this.mCredentialData, this.mCandidateQueryData, this.mIsSystemProviderRequired, this.mAlwaysSendAppInfoToProvider, this.mOrigin);
+            return new CreateCredentialRequest(
+                    this.mType,
+                    this.mCredentialData,
+                    this.mCandidateQueryData,
+                    this.mIsSystemProviderRequired,
+                    this.mAlwaysSendAppInfoToProvider,
+                    this.mOrigin);
         }
     }
 }

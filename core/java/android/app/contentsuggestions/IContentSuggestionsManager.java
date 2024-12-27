@@ -1,7 +1,5 @@
 package android.app.contentsuggestions;
 
-import android.app.contentsuggestions.IClassificationsCallback;
-import android.app.contentsuggestions.ISelectionsCallback;
 import android.graphics.Bitmap;
 import android.os.Binder;
 import android.os.Bundle;
@@ -9,13 +7,19 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.android.internal.os.IResultReceiver;
 
 /* loaded from: classes.dex */
 public interface IContentSuggestionsManager extends IInterface {
-    public static final String DESCRIPTOR = "android.app.contentsuggestions.IContentSuggestionsManager";
+    public static final String DESCRIPTOR =
+            "android.app.contentsuggestions.IContentSuggestionsManager";
 
-    void classifyContentSelections(int i, ClassificationsRequest classificationsRequest, IClassificationsCallback iClassificationsCallback) throws RemoteException;
+    void classifyContentSelections(
+            int i,
+            ClassificationsRequest classificationsRequest,
+            IClassificationsCallback iClassificationsCallback)
+            throws RemoteException;
 
     void isEnabled(int i, IResultReceiver iResultReceiver) throws RemoteException;
 
@@ -31,44 +35,46 @@ public interface IContentSuggestionsManager extends IInterface {
 
     void setTemporaryService(int i, String str, int i2) throws RemoteException;
 
-    void suggestContentSelections(int i, SelectionsRequest selectionsRequest, ISelectionsCallback iSelectionsCallback) throws RemoteException;
+    void suggestContentSelections(
+            int i, SelectionsRequest selectionsRequest, ISelectionsCallback iSelectionsCallback)
+            throws RemoteException;
 
     public static class Default implements IContentSuggestionsManager {
         @Override // android.app.contentsuggestions.IContentSuggestionsManager
-        public void provideContextImage(int userId, int taskId, Bundle imageContextRequestExtras) throws RemoteException {
-        }
+        public void provideContextImage(int userId, int taskId, Bundle imageContextRequestExtras)
+                throws RemoteException {}
 
         @Override // android.app.contentsuggestions.IContentSuggestionsManager
-        public void provideContextBitmap(int userId, Bitmap bitmap, Bundle imageContextRequestExtras) throws RemoteException {
-        }
+        public void provideContextBitmap(
+                int userId, Bitmap bitmap, Bundle imageContextRequestExtras)
+                throws RemoteException {}
 
         @Override // android.app.contentsuggestions.IContentSuggestionsManager
-        public void suggestContentSelections(int userId, SelectionsRequest request, ISelectionsCallback callback) throws RemoteException {
-        }
+        public void suggestContentSelections(
+                int userId, SelectionsRequest request, ISelectionsCallback callback)
+                throws RemoteException {}
 
         @Override // android.app.contentsuggestions.IContentSuggestionsManager
-        public void classifyContentSelections(int userId, ClassificationsRequest request, IClassificationsCallback callback) throws RemoteException {
-        }
+        public void classifyContentSelections(
+                int userId, ClassificationsRequest request, IClassificationsCallback callback)
+                throws RemoteException {}
 
         @Override // android.app.contentsuggestions.IContentSuggestionsManager
-        public void notifyInteraction(int userId, String requestId, Bundle interaction) throws RemoteException {
-        }
+        public void notifyInteraction(int userId, String requestId, Bundle interaction)
+                throws RemoteException {}
 
         @Override // android.app.contentsuggestions.IContentSuggestionsManager
-        public void isEnabled(int userId, IResultReceiver receiver) throws RemoteException {
-        }
+        public void isEnabled(int userId, IResultReceiver receiver) throws RemoteException {}
 
         @Override // android.app.contentsuggestions.IContentSuggestionsManager
-        public void resetTemporaryService(int userId) throws RemoteException {
-        }
+        public void resetTemporaryService(int userId) throws RemoteException {}
 
         @Override // android.app.contentsuggestions.IContentSuggestionsManager
-        public void setTemporaryService(int userId, String serviceName, int duration) throws RemoteException {
-        }
+        public void setTemporaryService(int userId, String serviceName, int duration)
+                throws RemoteException {}
 
         @Override // android.app.contentsuggestions.IContentSuggestionsManager
-        public void setDefaultServiceEnabled(int userId, boolean enabled) throws RemoteException {
-        }
+        public void setDefaultServiceEnabled(int userId, boolean enabled) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -76,7 +82,7 @@ public interface IContentSuggestionsManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IContentSuggestionsManager {
+    public abstract static class Stub extends Binder implements IContentSuggestionsManager {
         static final int TRANSACTION_classifyContentSelections = 4;
         static final int TRANSACTION_isEnabled = 6;
         static final int TRANSACTION_notifyInteraction = 5;
@@ -138,7 +144,8 @@ public interface IContentSuggestionsManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IContentSuggestionsManager.DESCRIPTOR);
             }
@@ -163,15 +170,20 @@ public interface IContentSuggestionsManager extends IInterface {
                     return true;
                 case 3:
                     int _arg03 = data.readInt();
-                    SelectionsRequest _arg13 = (SelectionsRequest) data.readTypedObject(SelectionsRequest.CREATOR);
-                    ISelectionsCallback _arg23 = ISelectionsCallback.Stub.asInterface(data.readStrongBinder());
+                    SelectionsRequest _arg13 =
+                            (SelectionsRequest) data.readTypedObject(SelectionsRequest.CREATOR);
+                    ISelectionsCallback _arg23 =
+                            ISelectionsCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     suggestContentSelections(_arg03, _arg13, _arg23);
                     return true;
                 case 4:
                     int _arg04 = data.readInt();
-                    ClassificationsRequest _arg14 = (ClassificationsRequest) data.readTypedObject(ClassificationsRequest.CREATOR);
-                    IClassificationsCallback _arg24 = IClassificationsCallback.Stub.asInterface(data.readStrongBinder());
+                    ClassificationsRequest _arg14 =
+                            (ClassificationsRequest)
+                                    data.readTypedObject(ClassificationsRequest.CREATOR);
+                    IClassificationsCallback _arg24 =
+                            IClassificationsCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     classifyContentSelections(_arg04, _arg14, _arg24);
                     return true;
@@ -184,7 +196,8 @@ public interface IContentSuggestionsManager extends IInterface {
                     return true;
                 case 6:
                     int _arg06 = data.readInt();
-                    IResultReceiver _arg16 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg16 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     isEnabled(_arg06, _arg16);
                     return true;
@@ -228,7 +241,9 @@ public interface IContentSuggestionsManager extends IInterface {
             }
 
             @Override // android.app.contentsuggestions.IContentSuggestionsManager
-            public void provideContextImage(int userId, int taskId, Bundle imageContextRequestExtras) throws RemoteException {
+            public void provideContextImage(
+                    int userId, int taskId, Bundle imageContextRequestExtras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentSuggestionsManager.DESCRIPTOR);
@@ -242,7 +257,9 @@ public interface IContentSuggestionsManager extends IInterface {
             }
 
             @Override // android.app.contentsuggestions.IContentSuggestionsManager
-            public void provideContextBitmap(int userId, Bitmap bitmap, Bundle imageContextRequestExtras) throws RemoteException {
+            public void provideContextBitmap(
+                    int userId, Bitmap bitmap, Bundle imageContextRequestExtras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentSuggestionsManager.DESCRIPTOR);
@@ -256,7 +273,9 @@ public interface IContentSuggestionsManager extends IInterface {
             }
 
             @Override // android.app.contentsuggestions.IContentSuggestionsManager
-            public void suggestContentSelections(int userId, SelectionsRequest request, ISelectionsCallback callback) throws RemoteException {
+            public void suggestContentSelections(
+                    int userId, SelectionsRequest request, ISelectionsCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentSuggestionsManager.DESCRIPTOR);
@@ -270,7 +289,9 @@ public interface IContentSuggestionsManager extends IInterface {
             }
 
             @Override // android.app.contentsuggestions.IContentSuggestionsManager
-            public void classifyContentSelections(int userId, ClassificationsRequest request, IClassificationsCallback callback) throws RemoteException {
+            public void classifyContentSelections(
+                    int userId, ClassificationsRequest request, IClassificationsCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentSuggestionsManager.DESCRIPTOR);
@@ -284,7 +305,8 @@ public interface IContentSuggestionsManager extends IInterface {
             }
 
             @Override // android.app.contentsuggestions.IContentSuggestionsManager
-            public void notifyInteraction(int userId, String requestId, Bundle interaction) throws RemoteException {
+            public void notifyInteraction(int userId, String requestId, Bundle interaction)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentSuggestionsManager.DESCRIPTOR);
@@ -323,7 +345,8 @@ public interface IContentSuggestionsManager extends IInterface {
             }
 
             @Override // android.app.contentsuggestions.IContentSuggestionsManager
-            public void setTemporaryService(int userId, String serviceName, int duration) throws RemoteException {
+            public void setTemporaryService(int userId, String serviceName, int duration)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentSuggestionsManager.DESCRIPTOR);
@@ -337,7 +360,8 @@ public interface IContentSuggestionsManager extends IInterface {
             }
 
             @Override // android.app.contentsuggestions.IContentSuggestionsManager
-            public void setDefaultServiceEnabled(int userId, boolean enabled) throws RemoteException {
+            public void setDefaultServiceEnabled(int userId, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentSuggestionsManager.DESCRIPTOR);

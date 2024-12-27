@@ -11,12 +11,6 @@ import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.service.notification.StatusBarNotification;
 import android.view.Surface;
-import com.samsung.android.remoteappmode.IRemoteAppModeListener;
-import com.samsung.android.remoteappmode.IRotationChangeListener;
-import com.samsung.android.remoteappmode.ISecureAppChangedListener;
-import com.samsung.android.remoteappmode.IStartActivityInterceptListener;
-import com.samsung.android.remoteappmode.ITaskChangeListener;
-import com.samsung.android.remoteappmode.IVirtualDisplayAliveChecker;
 
 /* loaded from: classes6.dex */
 public interface IRemoteAppMode extends IInterface {
@@ -24,7 +18,14 @@ public interface IRemoteAppMode extends IInterface {
 
     void clearAll() throws RemoteException;
 
-    int createVirtualDisplay(String str, int i, int i2, int i3, Surface surface, IVirtualDisplayAliveChecker iVirtualDisplayAliveChecker) throws RemoteException;
+    int createVirtualDisplay(
+            String str,
+            int i,
+            int i2,
+            int i3,
+            Surface surface,
+            IVirtualDisplayAliveChecker iVirtualDisplayAliveChecker)
+            throws RemoteException;
 
     void disableSendingUserPresentIntent() throws RemoteException;
 
@@ -46,23 +47,34 @@ public interface IRemoteAppMode extends IInterface {
 
     void moveDisplayToTop(int i) throws RemoteException;
 
-    boolean registerRemoteAppModeListener(IRemoteAppModeListener iRemoteAppModeListener, String str) throws RemoteException;
+    boolean registerRemoteAppModeListener(IRemoteAppModeListener iRemoteAppModeListener, String str)
+            throws RemoteException;
 
-    boolean registerRotationChangeListener(IRotationChangeListener iRotationChangeListener, String str, int i) throws RemoteException;
+    boolean registerRotationChangeListener(
+            IRotationChangeListener iRotationChangeListener, String str, int i)
+            throws RemoteException;
 
-    boolean registerSecureAppChangedListener(ISecureAppChangedListener iSecureAppChangedListener, String str) throws RemoteException;
+    boolean registerSecureAppChangedListener(
+            ISecureAppChangedListener iSecureAppChangedListener, String str) throws RemoteException;
 
-    boolean registerStartActivityInterceptListener(IStartActivityInterceptListener iStartActivityInterceptListener, String str) throws RemoteException;
+    boolean registerStartActivityInterceptListener(
+            IStartActivityInterceptListener iStartActivityInterceptListener, String str)
+            throws RemoteException;
 
-    boolean registerTaskChangeListener(ITaskChangeListener iTaskChangeListener, String str) throws RemoteException;
+    boolean registerTaskChangeListener(ITaskChangeListener iTaskChangeListener, String str)
+            throws RemoteException;
 
     void releaseVirtualDisplay(int i) throws RemoteException;
 
-    void resizeVirtualDisplay(int i, int i2, int i3, int i4, Surface surface) throws RemoteException;
+    void resizeVirtualDisplay(int i, int i2, int i3, int i4, Surface surface)
+            throws RemoteException;
 
-    boolean sendNotificationAction(StatusBarNotification statusBarNotification, int i, Intent intent) throws RemoteException;
+    boolean sendNotificationAction(
+            StatusBarNotification statusBarNotification, int i, Intent intent)
+            throws RemoteException;
 
-    boolean sendNotificationContent(StatusBarNotification statusBarNotification) throws RemoteException;
+    boolean sendNotificationContent(StatusBarNotification statusBarNotification)
+            throws RemoteException;
 
     void sendPendingIntent(PendingIntent pendingIntent) throws RemoteException;
 
@@ -74,41 +86,54 @@ public interface IRemoteAppMode extends IInterface {
 
     void stopRFCommService() throws RemoteException;
 
-    void transferTaskUsingIntent(Intent intent, int i, int i2, Bundle bundle) throws RemoteException;
+    void transferTaskUsingIntent(Intent intent, int i, int i2, Bundle bundle)
+            throws RemoteException;
 
     void transferTaskWithoutIntercept(int i, int i2, Bundle bundle) throws RemoteException;
 
-    boolean unregisterRemoteAppModeListener(IRemoteAppModeListener iRemoteAppModeListener) throws RemoteException;
+    boolean unregisterRemoteAppModeListener(IRemoteAppModeListener iRemoteAppModeListener)
+            throws RemoteException;
 
-    boolean unregisterRotationChangeListener(IRotationChangeListener iRotationChangeListener) throws RemoteException;
+    boolean unregisterRotationChangeListener(IRotationChangeListener iRotationChangeListener)
+            throws RemoteException;
 
-    boolean unregisterSecureAppChangedListener(ISecureAppChangedListener iSecureAppChangedListener) throws RemoteException;
+    boolean unregisterSecureAppChangedListener(ISecureAppChangedListener iSecureAppChangedListener)
+            throws RemoteException;
 
-    boolean unregisterStartActivityInterceptListener(IStartActivityInterceptListener iStartActivityInterceptListener) throws RemoteException;
+    boolean unregisterStartActivityInterceptListener(
+            IStartActivityInterceptListener iStartActivityInterceptListener) throws RemoteException;
 
-    boolean unregisterTaskChangeListener(ITaskChangeListener iTaskChangeListener) throws RemoteException;
+    boolean unregisterTaskChangeListener(ITaskChangeListener iTaskChangeListener)
+            throws RemoteException;
 
     public static class Default implements IRemoteAppMode {
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public int createVirtualDisplay(String name, int width, int height, int densityDpi, Surface surface, IVirtualDisplayAliveChecker checker) throws RemoteException {
+        public int createVirtualDisplay(
+                String name,
+                int width,
+                int height,
+                int densityDpi,
+                Surface surface,
+                IVirtualDisplayAliveChecker checker)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public void releaseVirtualDisplay(int displayId) throws RemoteException {
-        }
+        public void releaseVirtualDisplay(int displayId) throws RemoteException {}
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public void resizeVirtualDisplay(int displayId, int width, int height, int densityDpi, Surface surface) throws RemoteException {
-        }
+        public void resizeVirtualDisplay(
+                int displayId, int width, int height, int densityDpi, Surface surface)
+                throws RemoteException {}
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public void moveDisplayToTop(int displayId) throws RemoteException {
-        }
+        public void moveDisplayToTop(int displayId) throws RemoteException {}
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public void launchApplication(int displayId, String packageName, Intent intent, Bundle activityOptionsBundle) throws RemoteException {
-        }
+        public void launchApplication(
+                int displayId, String packageName, Intent intent, Bundle activityOptionsBundle)
+                throws RemoteException {}
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
         public boolean isAllowed() throws RemoteException {
@@ -116,62 +141,71 @@ public interface IRemoteAppMode extends IInterface {
         }
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public boolean registerSecureAppChangedListener(ISecureAppChangedListener listener, String name) throws RemoteException {
+        public boolean registerSecureAppChangedListener(
+                ISecureAppChangedListener listener, String name) throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public boolean unregisterSecureAppChangedListener(ISecureAppChangedListener listener) throws RemoteException {
+        public boolean unregisterSecureAppChangedListener(ISecureAppChangedListener listener)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public boolean registerTaskChangeListener(ITaskChangeListener listner, String name) throws RemoteException {
+        public boolean registerTaskChangeListener(ITaskChangeListener listner, String name)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public boolean unregisterTaskChangeListener(ITaskChangeListener listner) throws RemoteException {
+        public boolean unregisterTaskChangeListener(ITaskChangeListener listner)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public boolean registerRotationChangeListener(IRotationChangeListener listener, String name, int displayId) throws RemoteException {
+        public boolean registerRotationChangeListener(
+                IRotationChangeListener listener, String name, int displayId)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public boolean unregisterRotationChangeListener(IRotationChangeListener listener) throws RemoteException {
+        public boolean unregisterRotationChangeListener(IRotationChangeListener listener)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public boolean registerStartActivityInterceptListener(IStartActivityInterceptListener listner, String name) throws RemoteException {
+        public boolean registerStartActivityInterceptListener(
+                IStartActivityInterceptListener listner, String name) throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public boolean unregisterStartActivityInterceptListener(IStartActivityInterceptListener listner) throws RemoteException {
+        public boolean unregisterStartActivityInterceptListener(
+                IStartActivityInterceptListener listner) throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public boolean registerRemoteAppModeListener(IRemoteAppModeListener listner, String name) throws RemoteException {
+        public boolean registerRemoteAppModeListener(IRemoteAppModeListener listner, String name)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public boolean unregisterRemoteAppModeListener(IRemoteAppModeListener listner) throws RemoteException {
+        public boolean unregisterRemoteAppModeListener(IRemoteAppModeListener listner)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public void clearAll() throws RemoteException {
-        }
+        public void clearAll() throws RemoteException {}
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public void sendPendingIntent(PendingIntent pendingIntent) throws RemoteException {
-        }
+        public void sendPendingIntent(PendingIntent pendingIntent) throws RemoteException {}
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
         public int getProtocolVersion() throws RemoteException {
@@ -184,41 +218,37 @@ public interface IRemoteAppMode extends IInterface {
         }
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public boolean sendNotificationAction(StatusBarNotification sbn, int actionIndex, Intent intent) throws RemoteException {
+        public boolean sendNotificationAction(
+                StatusBarNotification sbn, int actionIndex, Intent intent) throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public void forceStopPackage(String packageName) throws RemoteException {
-        }
+        public void forceStopPackage(String packageName) throws RemoteException {}
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public void transferTaskWithoutIntercept(int taskId, int targetDisplayId, Bundle activityOptionsBundle) throws RemoteException {
-        }
+        public void transferTaskWithoutIntercept(
+                int taskId, int targetDisplayId, Bundle activityOptionsBundle)
+                throws RemoteException {}
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public void setLTWProtocolVersion(int version) throws RemoteException {
-        }
+        public void setLTWProtocolVersion(int version) throws RemoteException {}
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public void startRFCommService() throws RemoteException {
-        }
+        public void startRFCommService() throws RemoteException {}
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public void stopRFCommService() throws RemoteException {
-        }
+        public void stopRFCommService() throws RemoteException {}
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public void getLastAnr(String packageName, ParcelFileDescriptor outputPfd) throws RemoteException {
-        }
+        public void getLastAnr(String packageName, ParcelFileDescriptor outputPfd)
+                throws RemoteException {}
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public void enableSendingUserPresentIntent(String packageName) throws RemoteException {
-        }
+        public void enableSendingUserPresentIntent(String packageName) throws RemoteException {}
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public void disableSendingUserPresentIntent() throws RemoteException {
-        }
+        public void disableSendingUserPresentIntent() throws RemoteException {}
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
         public boolean isSendingUserPresentEnabled() throws RemoteException {
@@ -226,8 +256,8 @@ public interface IRemoteAppMode extends IInterface {
         }
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public void setSendingUserPresentExpiredTime(long expiredTimeMillis) throws RemoteException {
-        }
+        public void setSendingUserPresentExpiredTime(long expiredTimeMillis)
+                throws RemoteException {}
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
         public long getSendingUserPresentExpiredTime() throws RemoteException {
@@ -235,8 +265,9 @@ public interface IRemoteAppMode extends IInterface {
         }
 
         @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-        public void transferTaskUsingIntent(Intent intent, int taskId, int targetDisplayId, Bundle activityOptionsBundle) throws RemoteException {
-        }
+        public void transferTaskUsingIntent(
+                Intent intent, int taskId, int targetDisplayId, Bundle activityOptionsBundle)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -244,7 +275,7 @@ public interface IRemoteAppMode extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRemoteAppMode {
+    public abstract static class Stub extends Binder implements IRemoteAppMode {
         static final int TRANSACTION_clearAll = 17;
         static final int TRANSACTION_createVirtualDisplay = 1;
         static final int TRANSACTION_disableSendingUserPresentIntent = 29;
@@ -378,7 +409,8 @@ public interface IRemoteAppMode extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRemoteAppMode.DESCRIPTOR);
             }
@@ -393,7 +425,8 @@ public interface IRemoteAppMode extends IInterface {
                     int _arg2 = data.readInt();
                     int _arg3 = data.readInt();
                     Surface _arg4 = (Surface) data.readTypedObject(Surface.CREATOR);
-                    IVirtualDisplayAliveChecker _arg5 = IVirtualDisplayAliveChecker.Stub.asInterface(data.readStrongBinder());
+                    IVirtualDisplayAliveChecker _arg5 =
+                            IVirtualDisplayAliveChecker.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result = createVirtualDisplay(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5);
                     reply.writeNoException();
@@ -436,7 +469,8 @@ public interface IRemoteAppMode extends IInterface {
                     reply.writeBoolean(_result2);
                     return true;
                 case 7:
-                    ISecureAppChangedListener _arg06 = ISecureAppChangedListener.Stub.asInterface(data.readStrongBinder());
+                    ISecureAppChangedListener _arg06 =
+                            ISecureAppChangedListener.Stub.asInterface(data.readStrongBinder());
                     String _arg14 = data.readString();
                     data.enforceNoDataAvail();
                     boolean _result3 = registerSecureAppChangedListener(_arg06, _arg14);
@@ -444,14 +478,16 @@ public interface IRemoteAppMode extends IInterface {
                     reply.writeBoolean(_result3);
                     return true;
                 case 8:
-                    ISecureAppChangedListener _arg07 = ISecureAppChangedListener.Stub.asInterface(data.readStrongBinder());
+                    ISecureAppChangedListener _arg07 =
+                            ISecureAppChangedListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result4 = unregisterSecureAppChangedListener(_arg07);
                     reply.writeNoException();
                     reply.writeBoolean(_result4);
                     return true;
                 case 9:
-                    ITaskChangeListener _arg08 = ITaskChangeListener.Stub.asInterface(data.readStrongBinder());
+                    ITaskChangeListener _arg08 =
+                            ITaskChangeListener.Stub.asInterface(data.readStrongBinder());
                     String _arg15 = data.readString();
                     data.enforceNoDataAvail();
                     boolean _result5 = registerTaskChangeListener(_arg08, _arg15);
@@ -459,14 +495,16 @@ public interface IRemoteAppMode extends IInterface {
                     reply.writeBoolean(_result5);
                     return true;
                 case 10:
-                    ITaskChangeListener _arg09 = ITaskChangeListener.Stub.asInterface(data.readStrongBinder());
+                    ITaskChangeListener _arg09 =
+                            ITaskChangeListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result6 = unregisterTaskChangeListener(_arg09);
                     reply.writeNoException();
                     reply.writeBoolean(_result6);
                     return true;
                 case 11:
-                    IRotationChangeListener _arg010 = IRotationChangeListener.Stub.asInterface(data.readStrongBinder());
+                    IRotationChangeListener _arg010 =
+                            IRotationChangeListener.Stub.asInterface(data.readStrongBinder());
                     String _arg16 = data.readString();
                     int _arg24 = data.readInt();
                     data.enforceNoDataAvail();
@@ -475,14 +513,17 @@ public interface IRemoteAppMode extends IInterface {
                     reply.writeBoolean(_result7);
                     return true;
                 case 12:
-                    IRotationChangeListener _arg011 = IRotationChangeListener.Stub.asInterface(data.readStrongBinder());
+                    IRotationChangeListener _arg011 =
+                            IRotationChangeListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result8 = unregisterRotationChangeListener(_arg011);
                     reply.writeNoException();
                     reply.writeBoolean(_result8);
                     return true;
                 case 13:
-                    IStartActivityInterceptListener _arg012 = IStartActivityInterceptListener.Stub.asInterface(data.readStrongBinder());
+                    IStartActivityInterceptListener _arg012 =
+                            IStartActivityInterceptListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     String _arg17 = data.readString();
                     data.enforceNoDataAvail();
                     boolean _result9 = registerStartActivityInterceptListener(_arg012, _arg17);
@@ -490,14 +531,17 @@ public interface IRemoteAppMode extends IInterface {
                     reply.writeBoolean(_result9);
                     return true;
                 case 14:
-                    IStartActivityInterceptListener _arg013 = IStartActivityInterceptListener.Stub.asInterface(data.readStrongBinder());
+                    IStartActivityInterceptListener _arg013 =
+                            IStartActivityInterceptListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result10 = unregisterStartActivityInterceptListener(_arg013);
                     reply.writeNoException();
                     reply.writeBoolean(_result10);
                     return true;
                 case 15:
-                    IRemoteAppModeListener _arg014 = IRemoteAppModeListener.Stub.asInterface(data.readStrongBinder());
+                    IRemoteAppModeListener _arg014 =
+                            IRemoteAppModeListener.Stub.asInterface(data.readStrongBinder());
                     String _arg18 = data.readString();
                     data.enforceNoDataAvail();
                     boolean _result11 = registerRemoteAppModeListener(_arg014, _arg18);
@@ -505,7 +549,8 @@ public interface IRemoteAppMode extends IInterface {
                     reply.writeBoolean(_result11);
                     return true;
                 case 16:
-                    IRemoteAppModeListener _arg015 = IRemoteAppModeListener.Stub.asInterface(data.readStrongBinder());
+                    IRemoteAppModeListener _arg015 =
+                            IRemoteAppModeListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result12 = unregisterRemoteAppModeListener(_arg015);
                     reply.writeNoException();
@@ -516,7 +561,8 @@ public interface IRemoteAppMode extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 18:
-                    PendingIntent _arg016 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg016 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     data.enforceNoDataAvail();
                     sendPendingIntent(_arg016);
                     reply.writeNoException();
@@ -527,14 +573,18 @@ public interface IRemoteAppMode extends IInterface {
                     reply.writeInt(_result13);
                     return true;
                 case 20:
-                    StatusBarNotification _arg017 = (StatusBarNotification) data.readTypedObject(StatusBarNotification.CREATOR);
+                    StatusBarNotification _arg017 =
+                            (StatusBarNotification)
+                                    data.readTypedObject(StatusBarNotification.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result14 = sendNotificationContent(_arg017);
                     reply.writeNoException();
                     reply.writeBoolean(_result14);
                     return true;
                 case 21:
-                    StatusBarNotification _arg018 = (StatusBarNotification) data.readTypedObject(StatusBarNotification.CREATOR);
+                    StatusBarNotification _arg018 =
+                            (StatusBarNotification)
+                                    data.readTypedObject(StatusBarNotification.CREATOR);
                     int _arg19 = data.readInt();
                     Intent _arg25 = (Intent) data.readTypedObject(Intent.CREATOR);
                     data.enforceNoDataAvail();
@@ -572,7 +622,9 @@ public interface IRemoteAppMode extends IInterface {
                     return true;
                 case 27:
                     String _arg022 = data.readString();
-                    ParcelFileDescriptor _arg111 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg111 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     data.enforceNoDataAvail();
                     getLastAnr(_arg022, _arg111);
                     reply.writeNoException();
@@ -634,7 +686,14 @@ public interface IRemoteAppMode extends IInterface {
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-            public int createVirtualDisplay(String name, int width, int height, int densityDpi, Surface surface, IVirtualDisplayAliveChecker checker) throws RemoteException {
+            public int createVirtualDisplay(
+                    String name,
+                    int width,
+                    int height,
+                    int densityDpi,
+                    Surface surface,
+                    IVirtualDisplayAliveChecker checker)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -671,7 +730,9 @@ public interface IRemoteAppMode extends IInterface {
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-            public void resizeVirtualDisplay(int displayId, int width, int height, int densityDpi, Surface surface) throws RemoteException {
+            public void resizeVirtualDisplay(
+                    int displayId, int width, int height, int densityDpi, Surface surface)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -705,7 +766,9 @@ public interface IRemoteAppMode extends IInterface {
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-            public void launchApplication(int displayId, String packageName, Intent intent, Bundle activityOptionsBundle) throws RemoteException {
+            public void launchApplication(
+                    int displayId, String packageName, Intent intent, Bundle activityOptionsBundle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -739,7 +802,8 @@ public interface IRemoteAppMode extends IInterface {
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-            public boolean registerSecureAppChangedListener(ISecureAppChangedListener listener, String name) throws RemoteException {
+            public boolean registerSecureAppChangedListener(
+                    ISecureAppChangedListener listener, String name) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -757,7 +821,8 @@ public interface IRemoteAppMode extends IInterface {
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-            public boolean unregisterSecureAppChangedListener(ISecureAppChangedListener listener) throws RemoteException {
+            public boolean unregisterSecureAppChangedListener(ISecureAppChangedListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -774,7 +839,8 @@ public interface IRemoteAppMode extends IInterface {
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-            public boolean registerTaskChangeListener(ITaskChangeListener listner, String name) throws RemoteException {
+            public boolean registerTaskChangeListener(ITaskChangeListener listner, String name)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -792,7 +858,8 @@ public interface IRemoteAppMode extends IInterface {
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-            public boolean unregisterTaskChangeListener(ITaskChangeListener listner) throws RemoteException {
+            public boolean unregisterTaskChangeListener(ITaskChangeListener listner)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -809,7 +876,9 @@ public interface IRemoteAppMode extends IInterface {
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-            public boolean registerRotationChangeListener(IRotationChangeListener listener, String name, int displayId) throws RemoteException {
+            public boolean registerRotationChangeListener(
+                    IRotationChangeListener listener, String name, int displayId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -828,7 +897,8 @@ public interface IRemoteAppMode extends IInterface {
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-            public boolean unregisterRotationChangeListener(IRotationChangeListener listener) throws RemoteException {
+            public boolean unregisterRotationChangeListener(IRotationChangeListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -845,7 +915,8 @@ public interface IRemoteAppMode extends IInterface {
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-            public boolean registerStartActivityInterceptListener(IStartActivityInterceptListener listner, String name) throws RemoteException {
+            public boolean registerStartActivityInterceptListener(
+                    IStartActivityInterceptListener listner, String name) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -863,7 +934,8 @@ public interface IRemoteAppMode extends IInterface {
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-            public boolean unregisterStartActivityInterceptListener(IStartActivityInterceptListener listner) throws RemoteException {
+            public boolean unregisterStartActivityInterceptListener(
+                    IStartActivityInterceptListener listner) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -880,7 +952,8 @@ public interface IRemoteAppMode extends IInterface {
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-            public boolean registerRemoteAppModeListener(IRemoteAppModeListener listner, String name) throws RemoteException {
+            public boolean registerRemoteAppModeListener(
+                    IRemoteAppModeListener listner, String name) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -898,7 +971,8 @@ public interface IRemoteAppMode extends IInterface {
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-            public boolean unregisterRemoteAppModeListener(IRemoteAppModeListener listner) throws RemoteException {
+            public boolean unregisterRemoteAppModeListener(IRemoteAppModeListener listner)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -960,7 +1034,8 @@ public interface IRemoteAppMode extends IInterface {
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-            public boolean sendNotificationContent(StatusBarNotification sbn) throws RemoteException {
+            public boolean sendNotificationContent(StatusBarNotification sbn)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -977,7 +1052,9 @@ public interface IRemoteAppMode extends IInterface {
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-            public boolean sendNotificationAction(StatusBarNotification sbn, int actionIndex, Intent intent) throws RemoteException {
+            public boolean sendNotificationAction(
+                    StatusBarNotification sbn, int actionIndex, Intent intent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1011,7 +1088,9 @@ public interface IRemoteAppMode extends IInterface {
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-            public void transferTaskWithoutIntercept(int taskId, int targetDisplayId, Bundle activityOptionsBundle) throws RemoteException {
+            public void transferTaskWithoutIntercept(
+                    int taskId, int targetDisplayId, Bundle activityOptionsBundle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1071,7 +1150,8 @@ public interface IRemoteAppMode extends IInterface {
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-            public void getLastAnr(String packageName, ParcelFileDescriptor outputPfd) throws RemoteException {
+            public void getLastAnr(String packageName, ParcelFileDescriptor outputPfd)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1132,7 +1212,8 @@ public interface IRemoteAppMode extends IInterface {
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-            public void setSendingUserPresentExpiredTime(long expiredTimeMillis) throws RemoteException {
+            public void setSendingUserPresentExpiredTime(long expiredTimeMillis)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1163,7 +1244,9 @@ public interface IRemoteAppMode extends IInterface {
             }
 
             @Override // com.samsung.android.remoteappmode.IRemoteAppMode
-            public void transferTaskUsingIntent(Intent intent, int taskId, int targetDisplayId, Bundle activityOptionsBundle) throws RemoteException {
+            public void transferTaskUsingIntent(
+                    Intent intent, int taskId, int targetDisplayId, Bundle activityOptionsBundle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import android.text.TextUtils;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodSubtype;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -15,27 +16,34 @@ import java.util.Objects;
 
 /* loaded from: classes5.dex */
 public final class InputMethodSubtypeHandle implements Parcelable {
-    public static final Parcelable.Creator<InputMethodSubtypeHandle> CREATOR = new Parcelable.Creator<InputMethodSubtypeHandle>() { // from class: com.android.internal.inputmethod.InputMethodSubtypeHandle.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InputMethodSubtypeHandle createFromParcel(Parcel in) {
-            return InputMethodSubtypeHandle.of(in.readString8());
-        }
+    public static final Parcelable.Creator<InputMethodSubtypeHandle> CREATOR =
+            new Parcelable.Creator<
+                    InputMethodSubtypeHandle>() { // from class:
+                                                  // com.android.internal.inputmethod.InputMethodSubtypeHandle.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InputMethodSubtypeHandle createFromParcel(Parcel in) {
+                    return InputMethodSubtypeHandle.of(in.readString8());
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InputMethodSubtypeHandle[] newArray(int size) {
-            return new InputMethodSubtypeHandle[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InputMethodSubtypeHandle[] newArray(int size) {
+                    return new InputMethodSubtypeHandle[size];
+                }
+            };
     private static final char DATA_SEPARATOR = ':';
     private static final String SUBTYPE_TAG = "subtype";
     private final String mHandle;
 
-    @Target({ElementType.METHOD, ElementType.FIELD, ElementType.LOCAL_VARIABLE, ElementType.PARAMETER})
+    @Target({
+        ElementType.METHOD,
+        ElementType.FIELD,
+        ElementType.LOCAL_VARIABLE,
+        ElementType.PARAMETER
+    })
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RawHandle {
-    }
+    public @interface RawHandle {}
 
     private static String encodeHandle(String imeId, int subtypeHashCode) {
         return imeId + ':' + SUBTYPE_TAG + ':' + subtypeHashCode;

@@ -3,6 +3,7 @@ package android.content.om;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -10,31 +11,30 @@ import java.util.Objects;
 /* loaded from: classes.dex */
 public final class OverlayInfo implements CriticalOverlayInfo, Parcelable {
     public static final String CATEGORY_THEME = "android.theme";
-    public static final Parcelable.Creator<OverlayInfo> CREATOR = new Parcelable.Creator<OverlayInfo>() { // from class: android.content.om.OverlayInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OverlayInfo createFromParcel(Parcel source) {
-            return new OverlayInfo(source);
-        }
+    public static final Parcelable.Creator<OverlayInfo> CREATOR =
+            new Parcelable.Creator<OverlayInfo>() { // from class: android.content.om.OverlayInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OverlayInfo createFromParcel(Parcel source) {
+                    return new OverlayInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OverlayInfo[] newArray(int size) {
-            return new OverlayInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OverlayInfo[] newArray(int size) {
+                    return new OverlayInfo[size];
+                }
+            };
     public static final int STATE_DISABLED = 2;
     public static final int STATE_ENABLED = 3;
 
-    @Deprecated
-    public static final int STATE_ENABLED_IMMUTABLE = 6;
+    @Deprecated public static final int STATE_ENABLED_IMMUTABLE = 6;
     public static final int STATE_MISSING_TARGET = 0;
     public static final int STATE_NO_IDMAP = 1;
     public static final int STATE_OVERLAY_IS_BEING_REPLACED = 5;
     public static final int STATE_SYSTEM_UPDATE_UNINSTALL = 7;
 
-    @Deprecated
-    public static final int STATE_TARGET_IS_BEING_REPLACED = 4;
+    @Deprecated public static final int STATE_TARGET_IS_BEING_REPLACED = 4;
     public static final int STATE_UNKNOWN = -1;
     public final String baseCodePath;
     public final String category;
@@ -50,18 +50,59 @@ public final class OverlayInfo implements CriticalOverlayInfo, Parcelable {
     public final int userId;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface State {
-    }
+    public @interface State {}
 
     public OverlayInfo(OverlayInfo source, int state) {
-        this(source.packageName, source.overlayName, source.targetPackageName, source.targetOverlayableName, source.category, source.baseCodePath, state, source.userId, source.priority, source.isMutable, source.isFabricated);
+        this(
+                source.packageName,
+                source.overlayName,
+                source.targetPackageName,
+                source.targetOverlayableName,
+                source.category,
+                source.baseCodePath,
+                state,
+                source.userId,
+                source.priority,
+                source.isMutable,
+                source.isFabricated);
     }
 
-    public OverlayInfo(String packageName, String targetPackageName, String targetOverlayableName, String category, String baseCodePath, int state, int userId, int priority, boolean isMutable) {
-        this(packageName, null, targetPackageName, targetOverlayableName, category, baseCodePath, state, userId, priority, isMutable, false);
+    public OverlayInfo(
+            String packageName,
+            String targetPackageName,
+            String targetOverlayableName,
+            String category,
+            String baseCodePath,
+            int state,
+            int userId,
+            int priority,
+            boolean isMutable) {
+        this(
+                packageName,
+                null,
+                targetPackageName,
+                targetOverlayableName,
+                category,
+                baseCodePath,
+                state,
+                userId,
+                priority,
+                isMutable,
+                false);
     }
 
-    public OverlayInfo(String packageName, String overlayName, String targetPackageName, String targetOverlayableName, String category, String baseCodePath, int state, int userId, int priority, boolean isMutable, boolean isFabricated) {
+    public OverlayInfo(
+            String packageName,
+            String overlayName,
+            String targetPackageName,
+            String targetOverlayableName,
+            String category,
+            String baseCodePath,
+            int state,
+            int userId,
+            int priority,
+            boolean isMutable,
+            boolean isFabricated) {
         this.packageName = packageName;
         this.overlayName = overlayName;
         this.targetPackageName = targetPackageName;
@@ -223,7 +264,34 @@ public final class OverlayInfo implements CriticalOverlayInfo, Parcelable {
 
     public int hashCode() {
         int result = (1 * 31) + this.userId;
-        return (((((((((((((result * 31) + this.state) * 31) + (this.packageName == null ? 0 : this.packageName.hashCode())) * 31) + (this.overlayName == null ? 0 : this.overlayName.hashCode())) * 31) + (this.targetPackageName == null ? 0 : this.targetPackageName.hashCode())) * 31) + (this.targetOverlayableName == null ? 0 : this.targetOverlayableName.hashCode())) * 31) + (this.category == null ? 0 : this.category.hashCode())) * 31) + (this.baseCodePath != null ? this.baseCodePath.hashCode() : 0);
+        return (((((((((((((result * 31) + this.state) * 31)
+                                                                                                + (this
+                                                                                                                        .packageName
+                                                                                                                == null
+                                                                                                        ? 0
+                                                                                                        : this
+                                                                                                                .packageName
+                                                                                                                .hashCode()))
+                                                                                        * 31)
+                                                                                + (this.overlayName
+                                                                                                == null
+                                                                                        ? 0
+                                                                                        : this
+                                                                                                .overlayName
+                                                                                                .hashCode()))
+                                                                        * 31)
+                                                                + (this.targetPackageName == null
+                                                                        ? 0
+                                                                        : this.targetPackageName
+                                                                                .hashCode()))
+                                                        * 31)
+                                                + (this.targetOverlayableName == null
+                                                        ? 0
+                                                        : this.targetOverlayableName.hashCode()))
+                                        * 31)
+                                + (this.category == null ? 0 : this.category.hashCode()))
+                        * 31)
+                + (this.baseCodePath != null ? this.baseCodePath.hashCode() : 0);
     }
 
     public boolean equals(Object obj) {
@@ -234,13 +302,36 @@ public final class OverlayInfo implements CriticalOverlayInfo, Parcelable {
             return false;
         }
         OverlayInfo other = (OverlayInfo) obj;
-        if (this.userId == other.userId && this.state == other.state && this.packageName.equals(other.packageName) && Objects.equals(this.overlayName, other.overlayName) && this.targetPackageName.equals(other.targetPackageName) && Objects.equals(this.targetOverlayableName, other.targetOverlayableName) && Objects.equals(this.category, other.category) && this.baseCodePath.equals(other.baseCodePath)) {
+        if (this.userId == other.userId
+                && this.state == other.state
+                && this.packageName.equals(other.packageName)
+                && Objects.equals(this.overlayName, other.overlayName)
+                && this.targetPackageName.equals(other.targetPackageName)
+                && Objects.equals(this.targetOverlayableName, other.targetOverlayableName)
+                && Objects.equals(this.category, other.category)
+                && this.baseCodePath.equals(other.baseCodePath)) {
             return true;
         }
         return false;
     }
 
     public String toString() {
-        return "OverlayInfo {packageName=" + this.packageName + ", overlayName=" + this.overlayName + ", targetPackage=" + this.targetPackageName + ", targetOverlayable=" + this.targetOverlayableName + ", category=" + this.category + ", state=" + this.state + " (" + stateToString(this.state) + "),, userId=" + this.userId + " }";
+        return "OverlayInfo {packageName="
+                + this.packageName
+                + ", overlayName="
+                + this.overlayName
+                + ", targetPackage="
+                + this.targetPackageName
+                + ", targetOverlayable="
+                + this.targetOverlayableName
+                + ", category="
+                + this.category
+                + ", state="
+                + this.state
+                + " ("
+                + stateToString(this.state)
+                + "),, userId="
+                + this.userId
+                + " }";
     }
 }

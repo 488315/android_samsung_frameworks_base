@@ -12,11 +12,13 @@ import android.view.WindowManagerGlobal;
 import android.view.inputmethod.InputMethod;
 import android.view.inputmethod.InputMethodSession;
 import android.window.WindowProviderService;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
 /* loaded from: classes2.dex */
-public abstract class AbstractInputMethodService extends WindowProviderService implements KeyEvent.Callback {
+public abstract class AbstractInputMethodService extends WindowProviderService
+        implements KeyEvent.Callback {
     final KeyEvent.DispatcherState mDispatcherState = new KeyEvent.DispatcherState();
     private InputMethod mInputMethod;
     private InputMethodServiceInternal mInputMethodServiceInternal;
@@ -31,12 +33,12 @@ public abstract class AbstractInputMethodService extends WindowProviderService i
     }
 
     public abstract class AbstractInputMethodImpl implements InputMethod {
-        public AbstractInputMethodImpl() {
-        }
+        public AbstractInputMethodImpl() {}
 
         @Override // android.view.inputmethod.InputMethod
         public void createSession(InputMethod.SessionCallback callback) {
-            callback.sessionCreated(AbstractInputMethodService.this.onCreateInputMethodSessionInterface());
+            callback.sessionCreated(
+                    AbstractInputMethodService.this.onCreateInputMethodSessionInterface());
         }
 
         @Override // android.view.inputmethod.InputMethod
@@ -54,8 +56,7 @@ public abstract class AbstractInputMethodService extends WindowProviderService i
         boolean mEnabled = true;
         boolean mRevoked;
 
-        public AbstractInputMethodSessionImpl() {
-        }
+        public AbstractInputMethodSessionImpl() {}
 
         public boolean isEnabled() {
             return this.mEnabled;
@@ -77,8 +78,13 @@ public abstract class AbstractInputMethodService extends WindowProviderService i
         }
 
         @Override // android.view.inputmethod.InputMethodSession
-        public void dispatchKeyEvent(int seq, KeyEvent event, InputMethodSession.EventCallback callback) {
-            boolean handled = event.dispatch(AbstractInputMethodService.this, AbstractInputMethodService.this.mDispatcherState, this);
+        public void dispatchKeyEvent(
+                int seq, KeyEvent event, InputMethodSession.EventCallback callback) {
+            boolean handled =
+                    event.dispatch(
+                            AbstractInputMethodService.this,
+                            AbstractInputMethodService.this.mDispatcherState,
+                            this);
             if (event.getKeyCode() == 1006 && event.getAction() == 0) {
                 AbstractInputMethodService.this.mIsPressBtnSIPOnOff = true;
             }
@@ -88,7 +94,8 @@ public abstract class AbstractInputMethodService extends WindowProviderService i
         }
 
         @Override // android.view.inputmethod.InputMethodSession
-        public void dispatchTrackballEvent(int seq, MotionEvent event, InputMethodSession.EventCallback callback) {
+        public void dispatchTrackballEvent(
+                int seq, MotionEvent event, InputMethodSession.EventCallback callback) {
             boolean handled = AbstractInputMethodService.this.onTrackballEvent(event);
             if (callback != null) {
                 callback.finishedEvent(seq, handled);
@@ -96,7 +103,8 @@ public abstract class AbstractInputMethodService extends WindowProviderService i
         }
 
         @Override // android.view.inputmethod.InputMethodSession
-        public void dispatchGenericMotionEvent(int seq, MotionEvent event, InputMethodSession.EventCallback callback) {
+        public void dispatchGenericMotionEvent(
+                int seq, MotionEvent event, InputMethodSession.EventCallback callback) {
             boolean handled = AbstractInputMethodService.this.onGenericMotionEvent(event);
             if (callback != null) {
                 callback.finishedEvent(seq, handled);
@@ -109,8 +117,7 @@ public abstract class AbstractInputMethodService extends WindowProviderService i
     }
 
     @Override // android.app.Service
-    protected void dump(FileDescriptor fd, PrintWriter fout, String[] args) {
-    }
+    protected void dump(FileDescriptor fd, PrintWriter fout, String[] args) {}
 
     @Override // android.app.Service
     public final IBinder onBind(Intent intent) {
@@ -124,7 +131,8 @@ public abstract class AbstractInputMethodService extends WindowProviderService i
     }
 
     InputMethodServiceInternal createInputMethodServiceInternal() {
-        return new InputMethodServiceInternal() { // from class: android.inputmethodservice.AbstractInputMethodService.1
+        return new InputMethodServiceInternal() { // from class:
+            // android.inputmethodservice.AbstractInputMethodService.1
             @Override // android.inputmethodservice.InputMethodServiceInternal
             public Context getContext() {
                 return AbstractInputMethodService.this;

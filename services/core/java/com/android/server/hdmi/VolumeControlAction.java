@@ -1,7 +1,7 @@
 package com.android.server.hdmi;
 
 import android.net.resolv.aidl.IDnsResolverUnsolicitedEventListener;
-import com.android.server.hdmi.HdmiCecFeatureAction;
+
 import java.util.Map;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -77,13 +77,16 @@ public final class VolumeControlAction extends HdmiCecFeatureAction {
         this.mLastAvrMute = z;
         HdmiCecLocalDevice hdmiCecLocalDevice = this.mSource;
         if (!z) {
-            DefaultAudioManagerWrapper defaultAudioManagerWrapper = (DefaultAudioManagerWrapper) ((HdmiCecLocalDeviceTv) hdmiCecLocalDevice).mService.mAudioManager;
+            DefaultAudioManagerWrapper defaultAudioManagerWrapper =
+                    (DefaultAudioManagerWrapper)
+                            ((HdmiCecLocalDeviceTv) hdmiCecLocalDevice).mService.mAudioManager;
             int streamVolume = defaultAudioManagerWrapper.mAudioManager.getStreamVolume(3);
-            if (!this.mIsVolumeUp) {
-            }
+            if (!this.mIsVolumeUp) {}
             return true;
         }
-        HdmiLogger.debug("Force volume change[mute:%b, volume=%d]", Boolean.valueOf(z), Integer.valueOf(audioStatusVolume));
+        HdmiLogger.debug(
+                "Force volume change[mute:%b, volume=%d]",
+                Boolean.valueOf(z), Integer.valueOf(audioStatusVolume));
         ((HdmiCecLocalDeviceTv) hdmiCecLocalDevice).setAudioStatus(audioStatusVolume, z);
         this.mLastAvrVolume = -1;
         this.mLastAvrMute = false;
@@ -91,7 +94,18 @@ public final class VolumeControlAction extends HdmiCecFeatureAction {
     }
 
     public final void sendVolumeKeyPressed() {
-        this.mService.sendCecCommand(HdmiCecMessage.build(getSourceAddress(), this.mAvrAddress, 68, new byte[]{(byte) ((this.mIsVolumeUp ? 65 : 66) & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT)}), null);
+        this.mService.sendCecCommand(
+                HdmiCecMessage.build(
+                        getSourceAddress(),
+                        this.mAvrAddress,
+                        68,
+                        new byte[] {
+                            (byte)
+                                    ((this.mIsVolumeUp ? 65 : 66)
+                                            & IDnsResolverUnsolicitedEventListener
+                                                    .DNS_HEALTH_RESULT_TIMEOUT)
+                        }),
+                null);
         this.mSentKeyPressed = true;
     }
 

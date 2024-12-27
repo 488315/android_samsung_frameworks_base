@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.jcajce.provider.util;
 
 import android.security.keystore.KeyProperties;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.internal.org.bouncycastle.asn1.nist.NISTObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.oiw.OIWObjectIdentifiers;
@@ -8,6 +9,7 @@ import com.android.internal.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import com.android.internal.org.bouncycastle.crypto.Digest;
 import com.android.internal.org.bouncycastle.crypto.digests.AndroidDigestFactory;
 import com.android.internal.org.bouncycastle.util.Strings;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -98,7 +100,12 @@ public class DigestFactory {
     }
 
     public static boolean isSameDigest(String digest1, String digest2) {
-        return (sha1.contains(digest1) && sha1.contains(digest2)) || (sha224.contains(digest1) && sha224.contains(digest2)) || ((sha256.contains(digest1) && sha256.contains(digest2)) || ((sha384.contains(digest1) && sha384.contains(digest2)) || ((sha512.contains(digest1) && sha512.contains(digest2)) || (md5.contains(digest1) && md5.contains(digest2)))));
+        return (sha1.contains(digest1) && sha1.contains(digest2))
+                || (sha224.contains(digest1) && sha224.contains(digest2))
+                || ((sha256.contains(digest1) && sha256.contains(digest2))
+                        || ((sha384.contains(digest1) && sha384.contains(digest2))
+                                || ((sha512.contains(digest1) && sha512.contains(digest2))
+                                        || (md5.contains(digest1) && md5.contains(digest2)))));
     }
 
     public static ASN1ObjectIdentifier getOID(String digestName) {

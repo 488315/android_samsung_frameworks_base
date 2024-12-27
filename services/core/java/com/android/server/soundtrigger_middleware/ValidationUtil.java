@@ -1,6 +1,7 @@
 package com.android.server.soundtrigger_middleware;
 
 import android.media.soundtrigger.SoundModel;
+
 import java.util.Objects;
 import java.util.regex.Pattern;
 

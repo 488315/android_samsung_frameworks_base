@@ -14,19 +14,23 @@ import android.os.RemoteException;
 import android.os.ServiceSpecificException;
 import android.os.Trace;
 import android.util.Slog;
+
 import com.android.internal.hidden_from_bootclasspath.android.os.Flags;
 import com.android.server.LocalServices;
 import com.android.server.StorageManagerService$$ExternalSyntheticOutline0;
-import com.android.server.health.HealthServiceWrapperAidl;
+
+import vendor.samsung.hardware.health.ISehHealth;
+
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
-import vendor.samsung.hardware.health.ISehHealth;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class HealthServiceWrapperAidl extends HealthServiceWrapper {
-    static final String SERVICE_NAME = AudioOffloadInfo$$ExternalSyntheticOutline0.m(new StringBuilder(), IHealth.DESCRIPTOR, "/default");
+    static final String SERVICE_NAME =
+            AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                    new StringBuilder(), IHealth.DESCRIPTOR, "/default");
     public final HandlerThread mHandlerThread = new HandlerThread("HealthServiceBinder");
     public final AtomicReference mLastSehService;
     public final AtomicReference mLastService;
@@ -35,84 +39,123 @@ public final class HealthServiceWrapperAidl extends HealthServiceWrapper {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ServiceCallback extends IServiceCallback.Stub {
-        public ServiceCallback() {
-        }
+        public ServiceCallback() {}
 
         public final void onRegistration(String str, final IBinder iBinder) {
             if (HealthServiceWrapperAidl.SERVICE_NAME.equals(str)) {
-                HealthServiceWrapperAidl.this.getHandlerThread().getThreadHandler().post(new Runnable() { // from class: com.android.server.health.HealthServiceWrapperAidl$ServiceCallback$$ExternalSyntheticLambda0
-                    /* JADX WARN: Multi-variable type inference failed */
-                    /* JADX WARN: Type inference failed for: r4v3, types: [android.hardware.health.IHealth] */
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        IHealth.Stub.Proxy proxy;
-                        ISehHealth iSehHealth;
-                        HealthServiceWrapperAidl.ServiceCallback serviceCallback = HealthServiceWrapperAidl.ServiceCallback.this;
-                        IBinder iBinder2 = iBinder;
-                        serviceCallback.getClass();
-                        IBinder allowBlocking = Binder.allowBlocking(iBinder2);
-                        int i = IHealth.Stub.$r8$clinit;
-                        ISehHealth iSehHealth2 = null;
-                        if (allowBlocking == null) {
-                            proxy = null;
-                        } else {
-                            IInterface queryLocalInterface = allowBlocking.queryLocalInterface(IHealth.DESCRIPTOR);
-                            if (queryLocalInterface == null || !(queryLocalInterface instanceof IHealth)) {
-                                IHealth.Stub.Proxy proxy2 = new IHealth.Stub.Proxy();
-                                proxy2.mRemote = allowBlocking;
-                                proxy = proxy2;
-                            } else {
-                                proxy = (IHealth) queryLocalInterface;
-                            }
-                        }
-                        IHealth iHealth = (IHealth) HealthServiceWrapperAidl.this.mLastService.getAndSet(proxy);
-                        if (Objects.equals(iBinder2, iHealth != null ? ((IHealth.Stub.Proxy) iHealth).mRemote : null)) {
-                            return;
-                        }
-                        try {
-                            IBinder extension = Binder.allowBlocking(iBinder2).getExtension();
-                            int i2 = ISehHealth.Stub.$r8$clinit;
-                            if (extension != null) {
-                                IInterface queryLocalInterface2 = extension.queryLocalInterface(ISehHealth.DESCRIPTOR);
-                                if (queryLocalInterface2 == null || !(queryLocalInterface2 instanceof ISehHealth)) {
-                                    ISehHealth.Stub.Proxy proxy3 = new ISehHealth.Stub.Proxy();
-                                    proxy3.mRemote = extension;
-                                    iSehHealth = proxy3;
-                                } else {
-                                    iSehHealth = (ISehHealth) queryLocalInterface2;
-                                }
-                                iSehHealth2 = iSehHealth;
-                            }
-                        } catch (Exception e) {
-                            Slog.e("HealthServiceWrapperAidl", "Unable to getExtension for health ", e);
-                        }
-                        if (iSehHealth2 == null) {
-                            Slog.e("HealthServiceWrapperAidl", "HealthServiceWrapperAidl: ServiceCallback: newSehService: " + iSehHealth2);
-                            throw new NoSuchElementException("ServiceCallback: ISehHealth service instance isn't available. Perhaps no permission?");
-                        }
-                        ISehHealth iSehHealth3 = (ISehHealth) HealthServiceWrapperAidl.this.mLastSehService.getAndSet(iSehHealth2);
-                        Slog.i("HealthServiceWrapperAidl", "New health AIDL HAL service registered");
-                        HealthRegCallbackAidl healthRegCallbackAidl = HealthServiceWrapperAidl.this.mRegCallback;
-                        if (healthRegCallbackAidl != null) {
-                            healthRegCallbackAidl.onRegistration(iSehHealth3, iSehHealth2);
-                        }
-                    }
-                });
+                HealthServiceWrapperAidl.this
+                        .getHandlerThread()
+                        .getThreadHandler()
+                        .post(
+                                new Runnable() { // from class:
+                                    // com.android.server.health.HealthServiceWrapperAidl$ServiceCallback$$ExternalSyntheticLambda0
+                                    /* JADX WARN: Multi-variable type inference failed */
+                                    /* JADX WARN: Type inference failed for: r4v3, types: [android.hardware.health.IHealth] */
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        IHealth.Stub.Proxy proxy;
+                                        ISehHealth iSehHealth;
+                                        HealthServiceWrapperAidl.ServiceCallback serviceCallback =
+                                                HealthServiceWrapperAidl.ServiceCallback.this;
+                                        IBinder iBinder2 = iBinder;
+                                        serviceCallback.getClass();
+                                        IBinder allowBlocking = Binder.allowBlocking(iBinder2);
+                                        int i = IHealth.Stub.$r8$clinit;
+                                        ISehHealth iSehHealth2 = null;
+                                        if (allowBlocking == null) {
+                                            proxy = null;
+                                        } else {
+                                            IInterface queryLocalInterface =
+                                                    allowBlocking.queryLocalInterface(
+                                                            IHealth.DESCRIPTOR);
+                                            if (queryLocalInterface == null
+                                                    || !(queryLocalInterface instanceof IHealth)) {
+                                                IHealth.Stub.Proxy proxy2 =
+                                                        new IHealth.Stub.Proxy();
+                                                proxy2.mRemote = allowBlocking;
+                                                proxy = proxy2;
+                                            } else {
+                                                proxy = (IHealth) queryLocalInterface;
+                                            }
+                                        }
+                                        IHealth iHealth =
+                                                (IHealth)
+                                                        HealthServiceWrapperAidl.this.mLastService
+                                                                .getAndSet(proxy);
+                                        if (Objects.equals(
+                                                iBinder2,
+                                                iHealth != null
+                                                        ? ((IHealth.Stub.Proxy) iHealth).mRemote
+                                                        : null)) {
+                                            return;
+                                        }
+                                        try {
+                                            IBinder extension =
+                                                    Binder.allowBlocking(iBinder2).getExtension();
+                                            int i2 = ISehHealth.Stub.$r8$clinit;
+                                            if (extension != null) {
+                                                IInterface queryLocalInterface2 =
+                                                        extension.queryLocalInterface(
+                                                                ISehHealth.DESCRIPTOR);
+                                                if (queryLocalInterface2 == null
+                                                        || !(queryLocalInterface2
+                                                                instanceof ISehHealth)) {
+                                                    ISehHealth.Stub.Proxy proxy3 =
+                                                            new ISehHealth.Stub.Proxy();
+                                                    proxy3.mRemote = extension;
+                                                    iSehHealth = proxy3;
+                                                } else {
+                                                    iSehHealth = (ISehHealth) queryLocalInterface2;
+                                                }
+                                                iSehHealth2 = iSehHealth;
+                                            }
+                                        } catch (Exception e) {
+                                            Slog.e(
+                                                    "HealthServiceWrapperAidl",
+                                                    "Unable to getExtension for health ",
+                                                    e);
+                                        }
+                                        if (iSehHealth2 == null) {
+                                            Slog.e(
+                                                    "HealthServiceWrapperAidl",
+                                                    "HealthServiceWrapperAidl: ServiceCallback:"
+                                                        + " newSehService: "
+                                                            + iSehHealth2);
+                                            throw new NoSuchElementException(
+                                                    "ServiceCallback: ISehHealth service instance"
+                                                        + " isn't available. Perhaps no"
+                                                        + " permission?");
+                                        }
+                                        ISehHealth iSehHealth3 =
+                                                (ISehHealth)
+                                                        HealthServiceWrapperAidl.this
+                                                                .mLastSehService.getAndSet(
+                                                                iSehHealth2);
+                                        Slog.i(
+                                                "HealthServiceWrapperAidl",
+                                                "New health AIDL HAL service registered");
+                                        HealthRegCallbackAidl healthRegCallbackAidl =
+                                                HealthServiceWrapperAidl.this.mRegCallback;
+                                        if (healthRegCallbackAidl != null) {
+                                            healthRegCallbackAidl.onRegistration(
+                                                    iSehHealth3, iSehHealth2);
+                                        }
+                                    }
+                                });
             }
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface ServiceManagerStub {
-    }
+    public interface ServiceManagerStub {}
 
     /*  JADX ERROR: JadxRuntimeException in pass: RegionMakerVisitor
-        jadx.core.utils.exceptions.JadxRuntimeException: Can't find top splitter block for handler:B:26:0x0094
-        	at jadx.core.utils.BlockUtils.getTopSplitterForHandler(BlockUtils.java:1179)
-        	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.collectHandlerRegions(ExcHandlersRegionMaker.java:53)
-        	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.process(ExcHandlersRegionMaker.java:38)
-        	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:27)
-        */
+    jadx.core.utils.exceptions.JadxRuntimeException: Can't find top splitter block for handler:B:26:0x0094
+    	at jadx.core.utils.BlockUtils.getTopSplitterForHandler(BlockUtils.java:1179)
+    	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.collectHandlerRegions(ExcHandlersRegionMaker.java:53)
+    	at jadx.core.dex.visitors.regions.maker.ExcHandlersRegionMaker.process(ExcHandlersRegionMaker.java:38)
+    	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:27)
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:14:0x00a3  */
     /* JADX WARN: Type inference failed for: r7v3, types: [android.hardware.health.IHealth] */
@@ -120,7 +163,9 @@ public final class HealthServiceWrapperAidl extends HealthServiceWrapper {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public HealthServiceWrapperAidl(com.android.server.health.HealthRegCallbackAidl r10, com.android.server.health.HealthServiceWrapperAidl.ServiceManagerStub r11) {
+    public HealthServiceWrapperAidl(
+            com.android.server.health.HealthRegCallbackAidl r10,
+            com.android.server.health.HealthServiceWrapperAidl.ServiceManagerStub r11) {
         /*
             r9 = this;
             java.lang.String r0 = "HealthServiceWrapperAidl"
@@ -228,7 +273,10 @@ public final class HealthServiceWrapperAidl extends HealthServiceWrapper {
             traceEnd()
             throw r9
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.health.HealthServiceWrapperAidl.<init>(com.android.server.health.HealthRegCallbackAidl, com.android.server.health.HealthServiceWrapperAidl$ServiceManagerStub):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.health.HealthServiceWrapperAidl.<init>(com.android.server.health.HealthRegCallbackAidl,"
+                    + " com.android.server.health.HealthServiceWrapperAidl$ServiceManagerStub):void");
     }
 
     public static void traceEnd() {
@@ -275,10 +323,12 @@ public final class HealthServiceWrapperAidl extends HealthServiceWrapper {
                     batteryProperty.setLong(((IHealth.Stub.Proxy) iHealth).getChargeCounterUah());
                     break;
                 case 2:
-                    batteryProperty.setLong(((IHealth.Stub.Proxy) iHealth).getCurrentNowMicroamps());
+                    batteryProperty.setLong(
+                            ((IHealth.Stub.Proxy) iHealth).getCurrentNowMicroamps());
                     break;
                 case 3:
-                    batteryProperty.setLong(((IHealth.Stub.Proxy) iHealth).getCurrentAverageMicroamps());
+                    batteryProperty.setLong(
+                            ((IHealth.Stub.Proxy) iHealth).getCurrentAverageMicroamps());
                     break;
                 case 4:
                     batteryProperty.setLong(((IHealth.Stub.Proxy) iHealth).getCapacity());
@@ -290,26 +340,41 @@ public final class HealthServiceWrapperAidl extends HealthServiceWrapper {
                     batteryProperty.setLong(((IHealth.Stub.Proxy) iHealth).getChargeStatus());
                     break;
                 case 7:
-                    batteryProperty.setLong(((IHealth.Stub.Proxy) iHealth).getBatteryHealthData().batteryManufacturingDateSeconds);
+                    batteryProperty.setLong(
+                            ((IHealth.Stub.Proxy) iHealth)
+                                    .getBatteryHealthData()
+                                    .batteryManufacturingDateSeconds);
                     break;
                 case 8:
-                    batteryProperty.setLong(((IHealth.Stub.Proxy) iHealth).getBatteryHealthData().batteryFirstUsageSeconds);
+                    batteryProperty.setLong(
+                            ((IHealth.Stub.Proxy) iHealth)
+                                    .getBatteryHealthData()
+                                    .batteryFirstUsageSeconds);
                     break;
                 case 9:
                     batteryProperty.setLong(((IHealth.Stub.Proxy) iHealth).getChargingPolicy());
                     break;
                 case 10:
-                    batteryProperty.setLong(((IHealth.Stub.Proxy) iHealth).getBatteryHealthData().batteryStateOfHealth);
+                    batteryProperty.setLong(
+                            ((IHealth.Stub.Proxy) iHealth)
+                                    .getBatteryHealthData()
+                                    .batteryStateOfHealth);
                     break;
                 case 11:
                     if (Flags.batteryPartStatusApi()) {
-                        batteryProperty.setString(((IHealth.Stub.Proxy) iHealth).getBatteryHealthData().batterySerialNumber);
+                        batteryProperty.setString(
+                                ((IHealth.Stub.Proxy) iHealth)
+                                        .getBatteryHealthData()
+                                        .batterySerialNumber);
                         break;
                     }
                     break;
                 case 12:
                     if (Flags.batteryPartStatusApi()) {
-                        batteryProperty.setLong(((IHealth.Stub.Proxy) iHealth).getBatteryHealthData().batteryPartStatus);
+                        batteryProperty.setLong(
+                                ((IHealth.Stub.Proxy) iHealth)
+                                        .getBatteryHealthData()
+                                        .batteryPartStatus);
                         break;
                     }
                     break;
@@ -318,7 +383,13 @@ public final class HealthServiceWrapperAidl extends HealthServiceWrapper {
             }
             return 0;
         } catch (RemoteException unused) {
-            if (10 != i || (batteryStateOfHealth = ((BatteryManagerInternal) LocalServices.getService(BatteryManagerInternal.class)).getBatteryStateOfHealth()) <= -1) {
+            if (10 != i
+                    || (batteryStateOfHealth =
+                                    ((BatteryManagerInternal)
+                                                    LocalServices.getService(
+                                                            BatteryManagerInternal.class))
+                                            .getBatteryStateOfHealth())
+                            <= -1) {
                 return -3;
             }
             batteryProperty.setLong(batteryStateOfHealth);
@@ -332,28 +403,38 @@ public final class HealthServiceWrapperAidl extends HealthServiceWrapper {
 
     @Override // com.android.server.health.HealthServiceWrapper
     public final void scheduleUpdate() {
-        getHandlerThread().getThreadHandler().post(new Runnable() { // from class: com.android.server.health.HealthServiceWrapperAidl$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                HealthServiceWrapperAidl healthServiceWrapperAidl = HealthServiceWrapperAidl.this;
-                healthServiceWrapperAidl.getClass();
-                Trace.traceBegin(524288L, "HealthScheduleUpdate");
-                try {
-                    try {
-                        IHealth iHealth = (IHealth) healthServiceWrapperAidl.mLastService.get();
-                        if (iHealth == null) {
-                            Slog.e("HealthServiceWrapperAidl", "no health service");
-                        } else {
-                            ((IHealth.Stub.Proxy) iHealth).update();
-                        }
-                    } catch (RemoteException | ServiceSpecificException e) {
-                        Slog.e("HealthServiceWrapperAidl", "Cannot call update on health AIDL HAL", e);
-                    }
-                } finally {
-                    HealthServiceWrapperAidl.traceEnd();
-                }
-            }
-        });
+        getHandlerThread()
+                .getThreadHandler()
+                .post(
+                        new Runnable() { // from class:
+                                         // com.android.server.health.HealthServiceWrapperAidl$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                HealthServiceWrapperAidl healthServiceWrapperAidl =
+                                        HealthServiceWrapperAidl.this;
+                                healthServiceWrapperAidl.getClass();
+                                Trace.traceBegin(524288L, "HealthScheduleUpdate");
+                                try {
+                                    try {
+                                        IHealth iHealth =
+                                                (IHealth)
+                                                        healthServiceWrapperAidl.mLastService.get();
+                                        if (iHealth == null) {
+                                            Slog.e("HealthServiceWrapperAidl", "no health service");
+                                        } else {
+                                            ((IHealth.Stub.Proxy) iHealth).update();
+                                        }
+                                    } catch (RemoteException | ServiceSpecificException e) {
+                                        Slog.e(
+                                                "HealthServiceWrapperAidl",
+                                                "Cannot call update on health AIDL HAL",
+                                                e);
+                                    }
+                                } finally {
+                                    HealthServiceWrapperAidl.traceEnd();
+                                }
+                            }
+                        });
     }
 
     @Override // com.android.server.health.HealthServiceWrapper
@@ -364,9 +445,17 @@ public final class HealthServiceWrapperAidl extends HealthServiceWrapper {
                 throw new RemoteException("no seh health service");
             }
             ((ISehHealth.Stub.Proxy) iSehHealth).sehWriteEnableToParam(i, z);
-            Slog.d("HealthServiceWrapperAidl", "sehWriteEnableToParam[" + str + "]: , offset: " + i + ", enable: " + z);
+            Slog.d(
+                    "HealthServiceWrapperAidl",
+                    "sehWriteEnableToParam[" + str + "]: , offset: " + i + ", enable: " + z);
         } catch (Exception e) {
-            StringBuilder m = StorageManagerService$$ExternalSyntheticOutline0.m(i, "Exception in sehWriteEnableToParam[", str, "]: , offset: ", ", enable: ");
+            StringBuilder m =
+                    StorageManagerService$$ExternalSyntheticOutline0.m(
+                            i,
+                            "Exception in sehWriteEnableToParam[",
+                            str,
+                            "]: , offset: ",
+                            ", enable: ");
             m.append(z);
             Slog.e("HealthServiceWrapperAidl", m.toString());
             e.printStackTrace();

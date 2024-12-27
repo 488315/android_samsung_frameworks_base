@@ -4,14 +4,16 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.os.Parcel;
-import android.widget.RemoteViews;
+
 import com.android.internal.widget.IRemoteViewsFactory;
+
 import java.util.HashMap;
 
 /* loaded from: classes4.dex */
 public abstract class RemoteViewsService extends Service {
     private static final String LOG_TAG = "RemoteViewsService";
-    private static final HashMap<Intent.FilterComparison, RemoteViewsFactory> sRemoteViewFactories = new HashMap<>();
+    private static final HashMap<Intent.FilterComparison, RemoteViewsFactory> sRemoteViewFactories =
+            new HashMap<>();
     private static final Object sLock = new Object();
 
     public abstract RemoteViewsFactory onGetViewFactory(Intent intent);
@@ -40,7 +42,8 @@ public abstract class RemoteViewsService extends Service {
             Parcel capSizeTestParcel = Parcel.obtain();
             boolean prevAllowSquashing = capSizeTestParcel.allowSquashing();
             try {
-                RemoteViews.RemoteCollectionItems.Builder itemsBuilder = new RemoteViews.RemoteCollectionItems.Builder();
+                RemoteViews.RemoteCollectionItems.Builder itemsBuilder =
+                        new RemoteViews.RemoteCollectionItems.Builder();
                 onDataSetChanged();
                 itemsBuilder.setHasStableIds(hasStableIds());
                 int numOfEntries = getCount();
@@ -177,7 +180,8 @@ public abstract class RemoteViewsService extends Service {
             synchronized (RemoteViewsService.sLock) {
                 Intent.FilterComparison fc = new Intent.FilterComparison(intent);
                 if (RemoteViewsService.sRemoteViewFactories.containsKey(fc)) {
-                    RemoteViewsFactory factory = (RemoteViewsFactory) RemoteViewsService.sRemoteViewFactories.get(fc);
+                    RemoteViewsFactory factory =
+                            (RemoteViewsFactory) RemoteViewsService.sRemoteViewFactories.get(fc);
                     try {
                         factory.onDestroy();
                     } catch (Exception ex) {
@@ -191,9 +195,11 @@ public abstract class RemoteViewsService extends Service {
 
         @Override // com.android.internal.widget.IRemoteViewsFactory
         public RemoteViews.RemoteCollectionItems getRemoteCollectionItems(int capSize) {
-            RemoteViews.RemoteCollectionItems items = new RemoteViews.RemoteCollectionItems.Builder().build();
+            RemoteViews.RemoteCollectionItems items =
+                    new RemoteViews.RemoteCollectionItems.Builder().build();
             try {
-                RemoteViews.RemoteCollectionItems items2 = this.mFactory.getRemoteCollectionItems(capSize);
+                RemoteViews.RemoteCollectionItems items2 =
+                        this.mFactory.getRemoteCollectionItems(capSize);
                 return items2;
             } catch (Exception ex) {
                 Thread t = Thread.currentThread();

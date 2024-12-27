@@ -8,7 +8,9 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface ISehRadioMessagingIndication extends IInterface {
-    public static final String DESCRIPTOR = "vendor$samsung$hardware$radio$messaging$ISehRadioMessagingIndication".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "vendor$samsung$hardware$radio$messaging$ISehRadioMessagingIndication"
+                    .replace('$', '.');
     public static final String HASH = "c1a8596db57e3bcc8e4e86f1eb7b2df7839ca140";
     public static final int VERSION = 1;
 
@@ -22,12 +24,10 @@ public interface ISehRadioMessagingIndication extends IInterface {
 
     public static class Default implements ISehRadioMessagingIndication {
         @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessagingIndication
-        public void deviceReadyNoti(int type) throws RemoteException {
-        }
+        public void deviceReadyNoti(int type) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessagingIndication
-        public void stkSmsSendResultIndication(int type, int result) throws RemoteException {
-        }
+        public void stkSmsSendResultIndication(int type, int result) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.messaging.ISehRadioMessagingIndication
         public int getInterfaceVersion() {
@@ -45,7 +45,7 @@ public interface ISehRadioMessagingIndication extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISehRadioMessagingIndication {
+    public abstract static class Stub extends Binder implements ISehRadioMessagingIndication {
         static final int TRANSACTION_deviceReadyNoti = 1;
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
@@ -73,7 +73,8 @@ public interface ISehRadioMessagingIndication extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -151,7 +152,8 @@ public interface ISehRadioMessagingIndication extends IInterface {
                     _data.writeInt(result);
                     boolean _status = this.mRemote.transact(2, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method stkSmsSendResultIndication is unimplemented.");
+                        throw new RemoteException(
+                                "Method stkSmsSendResultIndication is unimplemented.");
                     }
                 } finally {
                     _data.recycle();

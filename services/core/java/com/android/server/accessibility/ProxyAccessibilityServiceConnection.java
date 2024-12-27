@@ -14,9 +14,9 @@ import android.os.RemoteCallback;
 import android.view.KeyEvent;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityWindowInfo;
+
 import com.android.internal.util.DumpUtils;
-import com.android.server.accessibility.AbstractAccessibilityServiceConnection;
-import com.android.server.accessibility.AccessibilityWindowManager;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.Arrays;
@@ -36,36 +36,64 @@ public final class ProxyAccessibilityServiceConnection extends AccessibilityServ
     public int mInteractiveTimeout;
     public int mNonInteractiveTimeout;
 
-    @Override // com.android.server.accessibility.AccessibilityServiceConnection, android.os.IBinder.DeathRecipient
-    public final void binderDied() {
-    }
+    @Override // com.android.server.accessibility.AccessibilityServiceConnection,
+              // android.os.IBinder.DeathRecipient
+    public final void binderDied() {}
 
     @Override // com.android.server.accessibility.AccessibilityServiceConnection
     public final void disableSelf() {
         throw new UnsupportedOperationException("disableSelf is not supported");
     }
 
-    @Override // com.android.server.accessibility.AccessibilityServiceConnection, com.android.server.accessibility.AbstractAccessibilityServiceConnection
+    @Override // com.android.server.accessibility.AccessibilityServiceConnection,
+              // com.android.server.accessibility.AbstractAccessibilityServiceConnection
     public final void dispatchGesture(int i, ParceledListSlice parceledListSlice, int i2) {
         throw new UnsupportedOperationException("dispatchGesture is not supported");
     }
 
     @Override // com.android.server.accessibility.AbstractAccessibilityServiceConnection
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
-        if (DumpUtils.checkDumpPermission(this.mContext, "ProxyAccessibilityServiceConnection", printWriter)) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+        if (DumpUtils.checkDumpPermission(
+                this.mContext, "ProxyAccessibilityServiceConnection", printWriter)) {
             synchronized (this.mLock) {
                 printWriter.append((CharSequence) ("Proxy[displayId=" + this.mDisplayId));
                 printWriter.append((CharSequence) (", deviceId=" + this.mDeviceId));
-                printWriter.append((CharSequence) (", feedbackType" + AccessibilityServiceInfo.feedbackTypeToString(this.mFeedbackType)));
-                printWriter.append((CharSequence) (", capabilities=" + this.mAccessibilityServiceInfo.getCapabilities()));
-                printWriter.append((CharSequence) (", eventTypes=" + AccessibilityEvent.eventTypeToString(this.mEventTypes)));
-                printWriter.append((CharSequence) (", notificationTimeout=" + this.mNotificationTimeout));
-                printWriter.append(", nonInteractiveUiTimeout=").append((CharSequence) String.valueOf(this.mNonInteractiveTimeout));
-                printWriter.append(", interactiveUiTimeout=").append((CharSequence) String.valueOf(this.mInteractiveTimeout));
-                printWriter.append(", focusStrokeWidth=").append((CharSequence) String.valueOf(this.mFocusStrokeWidth));
-                printWriter.append(", focusColor=").append((CharSequence) String.valueOf(this.mFocusColor));
-                printWriter.append(", installedAndEnabledServiceCount=").append((CharSequence) String.valueOf(this.mInstalledAndEnabledServices.size()));
-                printWriter.append(", installedAndEnabledServices=").append((CharSequence) this.mInstalledAndEnabledServices.toString());
+                printWriter.append(
+                        (CharSequence)
+                                (", feedbackType"
+                                        + AccessibilityServiceInfo.feedbackTypeToString(
+                                                this.mFeedbackType)));
+                printWriter.append(
+                        (CharSequence)
+                                (", capabilities="
+                                        + this.mAccessibilityServiceInfo.getCapabilities()));
+                printWriter.append(
+                        (CharSequence)
+                                (", eventTypes="
+                                        + AccessibilityEvent.eventTypeToString(this.mEventTypes)));
+                printWriter.append(
+                        (CharSequence) (", notificationTimeout=" + this.mNotificationTimeout));
+                printWriter
+                        .append(", nonInteractiveUiTimeout=")
+                        .append((CharSequence) String.valueOf(this.mNonInteractiveTimeout));
+                printWriter
+                        .append(", interactiveUiTimeout=")
+                        .append((CharSequence) String.valueOf(this.mInteractiveTimeout));
+                printWriter
+                        .append(", focusStrokeWidth=")
+                        .append((CharSequence) String.valueOf(this.mFocusStrokeWidth));
+                printWriter
+                        .append(", focusColor=")
+                        .append((CharSequence) String.valueOf(this.mFocusColor));
+                printWriter
+                        .append(", installedAndEnabledServiceCount=")
+                        .append(
+                                (CharSequence)
+                                        String.valueOf(this.mInstalledAndEnabledServices.size()));
+                printWriter
+                        .append(", installedAndEnabledServices=")
+                        .append((CharSequence) this.mInstalledAndEnabledServices.toString());
                 printWriter.append("]");
             }
         }
@@ -126,13 +154,15 @@ public final class ProxyAccessibilityServiceConnection extends AccessibilityServ
     @Override // com.android.server.accessibility.AbstractAccessibilityServiceConnection
     public final AccessibilityWindowInfo.WindowListSparseArray getWindows() {
         AccessibilityWindowInfo.WindowListSparseArray windows = super.getWindows();
-        AccessibilityWindowInfo.WindowListSparseArray windowListSparseArray = new AccessibilityWindowInfo.WindowListSparseArray();
+        AccessibilityWindowInfo.WindowListSparseArray windowListSparseArray =
+                new AccessibilityWindowInfo.WindowListSparseArray();
         int i = this.mDisplayId;
         windowListSparseArray.put(i, (List) windows.get(i, Collections.emptyList()));
         return windowListSparseArray;
     }
 
-    @Override // com.android.server.accessibility.AccessibilityServiceConnection, com.android.server.accessibility.AbstractAccessibilityServiceConnection
+    @Override // com.android.server.accessibility.AccessibilityServiceConnection,
+              // com.android.server.accessibility.AbstractAccessibilityServiceConnection
     public final boolean hasRightsToCurrentUserLocked() {
         return true;
     }
@@ -142,14 +172,16 @@ public final class ProxyAccessibilityServiceConnection extends AccessibilityServ
         throw new UnsupportedOperationException("isAccessibilityButtonAvailable is not supported");
     }
 
-    @Override // com.android.server.accessibility.AccessibilityServiceConnection, com.android.server.accessibility.FingerprintGestureDispatcher.FingerprintGestureClient
+    @Override // com.android.server.accessibility.AccessibilityServiceConnection,
+              // com.android.server.accessibility.FingerprintGestureDispatcher.FingerprintGestureClient
     public final boolean isCapturingFingerprintGestures() {
         throw new UnsupportedOperationException("isCapturingFingerprintGestures is not supported");
     }
 
     @Override // com.android.server.accessibility.AbstractAccessibilityServiceConnection
     public final boolean isFingerprintGestureDetectionAvailable() {
-        throw new UnsupportedOperationException("isFingerprintGestureDetectionAvailable is not supported");
+        throw new UnsupportedOperationException(
+                "isFingerprintGestureDetectionAvailable is not supported");
     }
 
     @Override // com.android.server.accessibility.AbstractAccessibilityServiceConnection
@@ -167,27 +199,33 @@ public final class ProxyAccessibilityServiceConnection extends AccessibilityServ
         throw new UnsupportedOperationException("onDoubleTapAndHold is not supported");
     }
 
-    @Override // com.android.server.accessibility.AccessibilityServiceConnection, com.android.server.accessibility.FingerprintGestureDispatcher.FingerprintGestureClient
+    @Override // com.android.server.accessibility.AccessibilityServiceConnection,
+              // com.android.server.accessibility.FingerprintGestureDispatcher.FingerprintGestureClient
     public final void onFingerprintGesture(int i) {
         throw new UnsupportedOperationException("onFingerprintGesture is not supported");
     }
 
-    @Override // com.android.server.accessibility.AccessibilityServiceConnection, com.android.server.accessibility.FingerprintGestureDispatcher.FingerprintGestureClient
+    @Override // com.android.server.accessibility.AccessibilityServiceConnection,
+              // com.android.server.accessibility.FingerprintGestureDispatcher.FingerprintGestureClient
     public final void onFingerprintGestureDetectionActiveChanged(boolean z) {
-        throw new UnsupportedOperationException("onFingerprintGestureDetectionActiveChanged is not supported");
+        throw new UnsupportedOperationException(
+                "onFingerprintGestureDetectionActiveChanged is not supported");
     }
 
-    @Override // com.android.server.accessibility.AbstractAccessibilityServiceConnection, com.android.server.accessibility.KeyEventDispatcher.KeyEventFilter
+    @Override // com.android.server.accessibility.AbstractAccessibilityServiceConnection,
+              // com.android.server.accessibility.KeyEventDispatcher.KeyEventFilter
     public final boolean onKeyEvent(KeyEvent keyEvent, int i) {
         throw new UnsupportedOperationException("onKeyEvent is not supported");
     }
 
-    @Override // com.android.server.accessibility.AccessibilityServiceConnection, android.content.ServiceConnection
+    @Override // com.android.server.accessibility.AccessibilityServiceConnection,
+              // android.content.ServiceConnection
     public final void onServiceConnected(ComponentName componentName, IBinder iBinder) {
         throw new UnsupportedOperationException("onServiceConnected is not supported");
     }
 
-    @Override // com.android.server.accessibility.AccessibilityServiceConnection, android.content.ServiceConnection
+    @Override // com.android.server.accessibility.AccessibilityServiceConnection,
+              // android.content.ServiceConnection
     public final void onServiceDisconnected(ComponentName componentName) {
         throw new UnsupportedOperationException("onServiceDisconnected is not supported");
     }
@@ -231,8 +269,18 @@ public final class ProxyAccessibilityServiceConnection extends AccessibilityServ
             if (i3 == -1 || i3 == 0 || !accessibilityWindowManager.mHasProxy) {
                 i = accessibilityWindowManager.getDefaultFocus(i2);
             } else {
-                AccessibilityWindowManager.DisplayWindowsObserver displayWindowsObserver = (AccessibilityWindowManager.DisplayWindowsObserver) accessibilityWindowManager.mDisplayWindowsObservers.get(i3);
-                i = (displayWindowsObserver == null || !displayWindowsObserver.mIsProxy) ? accessibilityWindowManager.getDefaultFocus(i2) : i2 == 1 ? accessibilityWindowManager.mTopFocusedWindowId : i2 == 2 ? displayWindowsObserver.mProxyDisplayAccessibilityFocusedWindow : -1;
+                AccessibilityWindowManager.DisplayWindowsObserver displayWindowsObserver =
+                        (AccessibilityWindowManager.DisplayWindowsObserver)
+                                accessibilityWindowManager.mDisplayWindowsObservers.get(i3);
+                i =
+                        (displayWindowsObserver == null || !displayWindowsObserver.mIsProxy)
+                                ? accessibilityWindowManager.getDefaultFocus(i2)
+                                : i2 == 1
+                                        ? accessibilityWindowManager.mTopFocusedWindowId
+                                        : i2 == 2
+                                                ? displayWindowsObserver
+                                                        .mProxyDisplayAccessibilityFocusedWindow
+                                                : -1;
             }
             if (!this.mA11yWindowManager.windowIdBelongsToDisplayType(i, this.mDisplayTypes)) {
                 return -1;
@@ -251,7 +299,8 @@ public final class ProxyAccessibilityServiceConnection extends AccessibilityServ
         throw new UnsupportedOperationException("setAnimationScale is not supported");
     }
 
-    public final void setDefaultPropertiesIfNullLocked(AccessibilityServiceInfo accessibilityServiceInfo) {
+    public final void setDefaultPropertiesIfNullLocked(
+            AccessibilityServiceInfo accessibilityServiceInfo) {
         String str = "ProxyClass" + this.mDisplayId;
         if (accessibilityServiceInfo.getResolveInfo() == null) {
             ResolveInfo resolveInfo = new ResolveInfo();
@@ -270,7 +319,8 @@ public final class ProxyAccessibilityServiceConnection extends AccessibilityServ
         }
     }
 
-    @Override // com.android.server.accessibility.AccessibilityServiceConnection, com.android.server.accessibility.AbstractAccessibilityServiceConnection
+    @Override // com.android.server.accessibility.AccessibilityServiceConnection,
+              // com.android.server.accessibility.AbstractAccessibilityServiceConnection
     public final void setFocusAppearance(int i, int i2) {
         synchronized (this.mLock) {
             try {
@@ -280,8 +330,10 @@ public final class ProxyAccessibilityServiceConnection extends AccessibilityServ
                     }
                     this.mFocusStrokeWidth = i;
                     this.mFocusColor = i2;
-                    AbstractAccessibilityServiceConnection.SystemSupport systemSupport = this.mSystemSupport;
-                    ((AccessibilityManagerService) systemSupport).mProxyManager.onProxyChanged(this.mDeviceId, false);
+                    AbstractAccessibilityServiceConnection.SystemSupport systemSupport =
+                            this.mSystemSupport;
+                    ((AccessibilityManagerService) systemSupport)
+                            .mProxyManager.onProxyChanged(this.mDeviceId, false);
                 }
             } catch (Throwable th) {
                 throw th;
@@ -291,7 +343,8 @@ public final class ProxyAccessibilityServiceConnection extends AccessibilityServ
 
     @Override // com.android.server.accessibility.AbstractAccessibilityServiceConnection
     public final void setGestureDetectionPassthroughRegion(int i, Region region) {
-        throw new UnsupportedOperationException("setGestureDetectionPassthroughRegion is not supported");
+        throw new UnsupportedOperationException(
+                "setGestureDetectionPassthroughRegion is not supported");
     }
 
     @Override // com.android.server.accessibility.AccessibilityServiceConnection
@@ -306,7 +359,8 @@ public final class ProxyAccessibilityServiceConnection extends AccessibilityServ
             synchronized (this.mLock) {
                 try {
                     this.mInstalledAndEnabledServices = list;
-                    AccessibilityServiceInfo accessibilityServiceInfo = this.mAccessibilityServiceInfo;
+                    AccessibilityServiceInfo accessibilityServiceInfo =
+                            this.mAccessibilityServiceInfo;
                     accessibilityServiceInfo.flags = 0;
                     accessibilityServiceInfo.eventTypes = 0;
                     accessibilityServiceInfo.notificationTimeout = 0L;
@@ -317,28 +371,50 @@ public final class ProxyAccessibilityServiceConnection extends AccessibilityServ
                     int i2 = 0;
                     boolean z2 = false;
                     while (it.hasNext()) {
-                        AccessibilityServiceInfo accessibilityServiceInfo2 = (AccessibilityServiceInfo) it.next();
+                        AccessibilityServiceInfo accessibilityServiceInfo2 =
+                                (AccessibilityServiceInfo) it.next();
                         z |= accessibilityServiceInfo2.isAccessibilityTool();
                         String[] strArr = accessibilityServiceInfo2.packageNames;
                         if (strArr != null && strArr.length != 0) {
                             if (!z2) {
                                 hashSet.addAll(Arrays.asList(strArr));
                             }
-                            i = Math.max(i, accessibilityServiceInfo2.getInteractiveUiTimeoutMillis());
-                            i2 = Math.max(i2, accessibilityServiceInfo2.getNonInteractiveUiTimeoutMillis());
-                            accessibilityServiceInfo.notificationTimeout = Math.max(accessibilityServiceInfo.notificationTimeout, accessibilityServiceInfo2.notificationTimeout);
-                            accessibilityServiceInfo.eventTypes |= accessibilityServiceInfo2.eventTypes;
-                            accessibilityServiceInfo.feedbackType |= accessibilityServiceInfo2.feedbackType;
+                            i =
+                                    Math.max(
+                                            i,
+                                            accessibilityServiceInfo2
+                                                    .getInteractiveUiTimeoutMillis());
+                            i2 =
+                                    Math.max(
+                                            i2,
+                                            accessibilityServiceInfo2
+                                                    .getNonInteractiveUiTimeoutMillis());
+                            accessibilityServiceInfo.notificationTimeout =
+                                    Math.max(
+                                            accessibilityServiceInfo.notificationTimeout,
+                                            accessibilityServiceInfo2.notificationTimeout);
+                            accessibilityServiceInfo.eventTypes |=
+                                    accessibilityServiceInfo2.eventTypes;
+                            accessibilityServiceInfo.feedbackType |=
+                                    accessibilityServiceInfo2.feedbackType;
                             accessibilityServiceInfo.flags |= accessibilityServiceInfo2.flags;
                             setDefaultPropertiesIfNullLocked(accessibilityServiceInfo2);
                             hashSet = hashSet;
                         }
                         z2 = true;
                         i = Math.max(i, accessibilityServiceInfo2.getInteractiveUiTimeoutMillis());
-                        i2 = Math.max(i2, accessibilityServiceInfo2.getNonInteractiveUiTimeoutMillis());
-                        accessibilityServiceInfo.notificationTimeout = Math.max(accessibilityServiceInfo.notificationTimeout, accessibilityServiceInfo2.notificationTimeout);
+                        i2 =
+                                Math.max(
+                                        i2,
+                                        accessibilityServiceInfo2
+                                                .getNonInteractiveUiTimeoutMillis());
+                        accessibilityServiceInfo.notificationTimeout =
+                                Math.max(
+                                        accessibilityServiceInfo.notificationTimeout,
+                                        accessibilityServiceInfo2.notificationTimeout);
                         accessibilityServiceInfo.eventTypes |= accessibilityServiceInfo2.eventTypes;
-                        accessibilityServiceInfo.feedbackType |= accessibilityServiceInfo2.feedbackType;
+                        accessibilityServiceInfo.feedbackType |=
+                                accessibilityServiceInfo2.feedbackType;
                         accessibilityServiceInfo.flags |= accessibilityServiceInfo2.flags;
                         setDefaultPropertiesIfNullLocked(accessibilityServiceInfo2);
                         hashSet = hashSet;
@@ -352,10 +428,12 @@ public final class ProxyAccessibilityServiceConnection extends AccessibilityServ
                     if (z2) {
                         accessibilityServiceInfo.packageNames = null;
                     } else {
-                        accessibilityServiceInfo.packageNames = (String[]) hashSet2.toArray(new String[0]);
+                        accessibilityServiceInfo.packageNames =
+                                (String[]) hashSet2.toArray(new String[0]);
                     }
                     setDynamicallyConfigurableProperties(accessibilityServiceInfo);
-                    ((AccessibilityManagerService) this.mSystemSupport).mProxyManager.onProxyChanged(this.mDeviceId, false);
+                    ((AccessibilityManagerService) this.mSystemSupport)
+                            .mProxyManager.onProxyChanged(this.mDeviceId, false);
                 } catch (Throwable th) {
                     throw th;
                 }
@@ -371,7 +449,8 @@ public final class ProxyAccessibilityServiceConnection extends AccessibilityServ
     }
 
     @Override // com.android.server.accessibility.AbstractAccessibilityServiceConnection
-    public final boolean setMagnificationConfig(int i, MagnificationConfig magnificationConfig, boolean z) {
+    public final boolean setMagnificationConfig(
+            int i, MagnificationConfig magnificationConfig, boolean z) {
         throw new UnsupportedOperationException("setMagnificationConfig is not supported");
     }
 
@@ -382,7 +461,8 @@ public final class ProxyAccessibilityServiceConnection extends AccessibilityServ
 
     @Override // com.android.server.accessibility.AbstractAccessibilityServiceConnection
     public final void setServiceDetectsGesturesEnabled(int i, boolean z) {
-        throw new UnsupportedOperationException("setServiceDetectsGesturesEnabled is not supported");
+        throw new UnsupportedOperationException(
+                "setServiceDetectsGesturesEnabled is not supported");
     }
 
     @Override // com.android.server.accessibility.AbstractAccessibilityServiceConnection
@@ -402,11 +482,13 @@ public final class ProxyAccessibilityServiceConnection extends AccessibilityServ
 
     @Override // com.android.server.accessibility.AbstractAccessibilityServiceConnection
     public final void setTouchExplorationPassthroughRegion(int i, Region region) {
-        throw new UnsupportedOperationException("setTouchExplorationPassthroughRegion is not supported");
+        throw new UnsupportedOperationException(
+                "setTouchExplorationPassthroughRegion is not supported");
     }
 
     @Override // com.android.server.accessibility.AbstractAccessibilityServiceConnection
-    public final boolean supportsFlagForNotImportantViews(AccessibilityServiceInfo accessibilityServiceInfo) {
+    public final boolean supportsFlagForNotImportantViews(
+            AccessibilityServiceInfo accessibilityServiceInfo) {
         return true;
     }
 

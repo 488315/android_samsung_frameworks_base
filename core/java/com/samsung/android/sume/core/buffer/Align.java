@@ -5,9 +5,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 import android.util.Pair;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.format.Copyable;
 import com.samsung.android.sume.core.format.MediaFormat;
+
 import java.io.Serializable;
 
 /* loaded from: classes6.dex */
@@ -17,19 +19,21 @@ public class Align implements Serializable, Parcelable, Copyable<Align>, Compara
     private int scanline;
     private int stride;
     private static final String TAG = Def.tagOf((Class<?>) Align.class);
-    public static final Parcelable.Creator<Align> CREATOR = new Parcelable.Creator<Align>() { // from class: com.samsung.android.sume.core.buffer.Align.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Align createFromParcel(Parcel in) {
-            return new Align(in);
-        }
+    public static final Parcelable.Creator<Align> CREATOR =
+            new Parcelable.Creator<
+                    Align>() { // from class: com.samsung.android.sume.core.buffer.Align.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Align createFromParcel(Parcel in) {
+                    return new Align(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Align[] newArray(int size) {
-            return new Align[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Align[] newArray(int size) {
+                    return new Align[size];
+                }
+            };
 
     protected Align() {
         this.stride = 0;
@@ -98,17 +102,31 @@ public class Align implements Serializable, Parcelable, Copyable<Align>, Compara
     }
 
     public String contentToString(Object obj) {
-        return Def.taglnOf(obj) + Def.contentToString("stride=" + this.stride, "scanline=" + this.scanline, "width-align=" + this.alignOfWidth, "height-align=" + this.alignOfHeight);
+        return Def.taglnOf(obj)
+                + Def.contentToString(
+                        "stride=" + this.stride,
+                        "scanline=" + this.scanline,
+                        "width-align=" + this.alignOfWidth,
+                        "height-align=" + this.alignOfHeight);
     }
 
     public void adjustAlign() {
         if (this.stride > 0 && this.alignOfWidth > 0 && this.stride % this.alignOfWidth != 0) {
             this.stride = ((this.stride + this.alignOfWidth) - 1) & (~(this.alignOfWidth - 1));
         }
-        if (this.scanline > 0 && this.alignOfHeight > 0 && this.scanline % this.alignOfHeight != 0) {
-            this.scanline = ((this.scanline + this.alignOfHeight) - 1) & (~(this.alignOfHeight - 1));
+        if (this.scanline > 0
+                && this.alignOfHeight > 0
+                && this.scanline % this.alignOfHeight != 0) {
+            this.scanline =
+                    ((this.scanline + this.alignOfHeight) - 1) & (~(this.alignOfHeight - 1));
         }
-        Log.d(TAG, "adjust align to [" + this.stride + " , " + this.scanline + NavigationBarInflaterView.SIZE_MOD_END);
+        Log.d(
+                TAG,
+                "adjust align to ["
+                        + this.stride
+                        + " , "
+                        + this.scanline
+                        + NavigationBarInflaterView.SIZE_MOD_END);
     }
 
     public int getStride() {

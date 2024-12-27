@@ -17,10 +17,12 @@ import com.android.internal.org.bouncycastle.crypto.params.DHValidationParameter
 import com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.KeyUtil;
 import com.android.internal.org.bouncycastle.jcajce.spec.DHDomainParameterSpec;
 import com.android.internal.org.bouncycastle.jcajce.spec.DHExtendedPublicKeySpec;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.math.BigInteger;
+
 import javax.crypto.interfaces.DHPublicKey;
 import javax.crypto.spec.DHParameterSpec;
 import javax.crypto.spec.DHPublicKeySpec;
@@ -44,7 +46,8 @@ public class BCDHPublicKey implements DHPublicKey {
             DHDomainParameterSpec dhSp = (DHDomainParameterSpec) this.dhSpec;
             this.dhPublicKey = new DHPublicKeyParameters(this.y, dhSp.getDomainParameters());
         } else {
-            this.dhPublicKey = new DHPublicKeyParameters(this.y, new DHParameters(spec.getP(), spec.getG()));
+            this.dhPublicKey =
+                    new DHPublicKeyParameters(this.y, new DHParameters(spec.getP(), spec.getG()));
         }
     }
 
@@ -55,7 +58,9 @@ public class BCDHPublicKey implements DHPublicKey {
             DHDomainParameterSpec dhSp = (DHDomainParameterSpec) this.dhSpec;
             this.dhPublicKey = new DHPublicKeyParameters(this.y, dhSp.getDomainParameters());
         } else {
-            this.dhPublicKey = new DHPublicKeyParameters(this.y, new DHParameters(this.dhSpec.getP(), this.dhSpec.getG()));
+            this.dhPublicKey =
+                    new DHPublicKeyParameters(
+                            this.y, new DHParameters(this.dhSpec.getP(), this.dhSpec.getG()));
         }
     }
 
@@ -69,9 +74,12 @@ public class BCDHPublicKey implements DHPublicKey {
         this.y = y;
         this.dhSpec = dhSpec;
         if (dhSpec instanceof DHDomainParameterSpec) {
-            this.dhPublicKey = new DHPublicKeyParameters(y, ((DHDomainParameterSpec) dhSpec).getDomainParameters());
+            this.dhPublicKey =
+                    new DHPublicKeyParameters(
+                            y, ((DHDomainParameterSpec) dhSpec).getDomainParameters());
         } else {
-            this.dhPublicKey = new DHPublicKeyParameters(y, new DHParameters(dhSpec.getP(), dhSpec.getG()));
+            this.dhPublicKey =
+                    new DHPublicKeyParameters(y, new DHParameters(dhSpec.getP(), dhSpec.getG()));
         }
     }
 
@@ -82,27 +90,57 @@ public class BCDHPublicKey implements DHPublicKey {
             this.y = derY.getValue();
             ASN1Sequence seq = ASN1Sequence.getInstance(info.getAlgorithm().getParameters());
             ASN1ObjectIdentifier id = info.getAlgorithm().getAlgorithm();
-            if (!id.equals((ASN1Primitive) PKCSObjectIdentifiers.dhKeyAgreement) && !isPKCSParam(seq)) {
+            if (!id.equals((ASN1Primitive) PKCSObjectIdentifiers.dhKeyAgreement)
+                    && !isPKCSParam(seq)) {
                 if (!id.equals((ASN1Primitive) X9ObjectIdentifiers.dhpublicnumber)) {
                     throw new IllegalArgumentException("unknown algorithm type: " + id);
                 }
                 DomainParameters params = DomainParameters.getInstance(seq);
                 ValidationParams validationParams = params.getValidationParams();
                 if (validationParams != null) {
-                    this.dhPublicKey = new DHPublicKeyParameters(this.y, new DHParameters(params.getP(), params.getG(), params.getQ(), params.getJ(), new DHValidationParameters(validationParams.getSeed(), validationParams.getPgenCounter().intValue())));
+                    this.dhPublicKey =
+                            new DHPublicKeyParameters(
+                                    this.y,
+                                    new DHParameters(
+                                            params.getP(),
+                                            params.getG(),
+                                            params.getQ(),
+                                            params.getJ(),
+                                            new DHValidationParameters(
+                                                    validationParams.getSeed(),
+                                                    validationParams.getPgenCounter().intValue())));
                 } else {
-                    this.dhPublicKey = new DHPublicKeyParameters(this.y, new DHParameters(params.getP(), params.getG(), params.getQ(), params.getJ(), (DHValidationParameters) null));
+                    this.dhPublicKey =
+                            new DHPublicKeyParameters(
+                                    this.y,
+                                    new DHParameters(
+                                            params.getP(),
+                                            params.getG(),
+                                            params.getQ(),
+                                            params.getJ(),
+                                            (DHValidationParameters) null));
                 }
                 this.dhSpec = new DHDomainParameterSpec(this.dhPublicKey.getParameters());
                 return;
             }
             DHParameter params2 = DHParameter.getInstance(seq);
             if (params2.getL() != null) {
-                this.dhSpec = new DHParameterSpec(params2.getP(), params2.getG(), params2.getL().intValue());
-                this.dhPublicKey = new DHPublicKeyParameters(this.y, new DHParameters(this.dhSpec.getP(), this.dhSpec.getG(), null, this.dhSpec.getL()));
+                this.dhSpec =
+                        new DHParameterSpec(
+                                params2.getP(), params2.getG(), params2.getL().intValue());
+                this.dhPublicKey =
+                        new DHPublicKeyParameters(
+                                this.y,
+                                new DHParameters(
+                                        this.dhSpec.getP(),
+                                        this.dhSpec.getG(),
+                                        null,
+                                        this.dhSpec.getL()));
             } else {
                 this.dhSpec = new DHParameterSpec(params2.getP(), params2.getG());
-                this.dhPublicKey = new DHPublicKeyParameters(this.y, new DHParameters(this.dhSpec.getP(), this.dhSpec.getG()));
+                this.dhPublicKey =
+                        new DHPublicKeyParameters(
+                                this.y, new DHParameters(this.dhSpec.getP(), this.dhSpec.getG()));
             }
         } catch (IOException e) {
             throw new IllegalArgumentException("invalid info structure in DH public key");
@@ -124,20 +162,39 @@ public class BCDHPublicKey implements DHPublicKey {
         if (this.info != null) {
             return KeyUtil.getEncodedSubjectPublicKeyInfo(this.info);
         }
-        if ((this.dhSpec instanceof DHDomainParameterSpec) && ((DHDomainParameterSpec) this.dhSpec).getQ() != null) {
+        if ((this.dhSpec instanceof DHDomainParameterSpec)
+                && ((DHDomainParameterSpec) this.dhSpec).getQ() != null) {
             DHParameters params = ((DHDomainParameterSpec) this.dhSpec).getDomainParameters();
             DHValidationParameters validationParameters = params.getValidationParameters();
             ValidationParams vParams = null;
             if (validationParameters != null) {
-                vParams = new ValidationParams(validationParameters.getSeed(), validationParameters.getCounter());
+                vParams =
+                        new ValidationParams(
+                                validationParameters.getSeed(), validationParameters.getCounter());
             }
-            return KeyUtil.getEncodedSubjectPublicKeyInfo(new AlgorithmIdentifier(X9ObjectIdentifiers.dhpublicnumber, new DomainParameters(params.getP(), params.getG(), params.getQ(), params.getJ(), vParams).toASN1Primitive()), new ASN1Integer(this.y));
+            return KeyUtil.getEncodedSubjectPublicKeyInfo(
+                    new AlgorithmIdentifier(
+                            X9ObjectIdentifiers.dhpublicnumber,
+                            new DomainParameters(
+                                            params.getP(),
+                                            params.getG(),
+                                            params.getQ(),
+                                            params.getJ(),
+                                            vParams)
+                                    .toASN1Primitive()),
+                    new ASN1Integer(this.y));
         }
-        return KeyUtil.getEncodedSubjectPublicKeyInfo(new AlgorithmIdentifier(PKCSObjectIdentifiers.dhKeyAgreement, new DHParameter(this.dhSpec.getP(), this.dhSpec.getG(), this.dhSpec.getL()).toASN1Primitive()), new ASN1Integer(this.y));
+        return KeyUtil.getEncodedSubjectPublicKeyInfo(
+                new AlgorithmIdentifier(
+                        PKCSObjectIdentifiers.dhKeyAgreement,
+                        new DHParameter(this.dhSpec.getP(), this.dhSpec.getG(), this.dhSpec.getL())
+                                .toASN1Primitive()),
+                new ASN1Integer(this.y));
     }
 
     public String toString() {
-        return DHUtil.publicKeyToString("DH", this.y, new DHParameters(this.dhSpec.getP(), this.dhSpec.getG()));
+        return DHUtil.publicKeyToString(
+                "DH", this.y, new DHParameters(this.dhSpec.getP(), this.dhSpec.getG()));
     }
 
     @Override // javax.crypto.interfaces.DHKey
@@ -167,7 +224,8 @@ public class BCDHPublicKey implements DHPublicKey {
     }
 
     public int hashCode() {
-        return ((getY().hashCode() ^ getParams().getG().hashCode()) ^ getParams().getP().hashCode()) ^ getParams().getL();
+        return ((getY().hashCode() ^ getParams().getG().hashCode()) ^ getParams().getP().hashCode())
+                ^ getParams().getL();
     }
 
     public boolean equals(Object o) {
@@ -175,12 +233,17 @@ public class BCDHPublicKey implements DHPublicKey {
             return false;
         }
         DHPublicKey other = (DHPublicKey) o;
-        return getY().equals(other.getY()) && getParams().getG().equals(other.getParams().getG()) && getParams().getP().equals(other.getParams().getP()) && getParams().getL() == other.getParams().getL();
+        return getY().equals(other.getY())
+                && getParams().getG().equals(other.getParams().getG())
+                && getParams().getP().equals(other.getParams().getP())
+                && getParams().getL() == other.getParams().getL();
     }
 
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
-        this.dhSpec = new DHParameterSpec((BigInteger) in.readObject(), (BigInteger) in.readObject(), in.readInt());
+        this.dhSpec =
+                new DHParameterSpec(
+                        (BigInteger) in.readObject(), (BigInteger) in.readObject(), in.readInt());
         this.info = null;
     }
 

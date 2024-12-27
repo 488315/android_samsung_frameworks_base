@@ -6,21 +6,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class CasSessionRequest implements Parcelable {
-    public static final Parcelable.Creator<CasSessionRequest> CREATOR = new Parcelable.Creator<CasSessionRequest>() { // from class: android.media.tv.tunerresourcemanager.CasSessionRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CasSessionRequest createFromParcel(Parcel _aidl_source) {
-            CasSessionRequest _aidl_out = new CasSessionRequest();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<CasSessionRequest> CREATOR =
+            new Parcelable.Creator<
+                    CasSessionRequest>() { // from class:
+                                           // android.media.tv.tunerresourcemanager.CasSessionRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CasSessionRequest createFromParcel(Parcel _aidl_source) {
+                    CasSessionRequest _aidl_out = new CasSessionRequest();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CasSessionRequest[] newArray(int _aidl_size) {
-            return new CasSessionRequest[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CasSessionRequest[] newArray(int _aidl_size) {
+                    return new CasSessionRequest[_aidl_size];
+                }
+            };
     public int clientId = 0;
     public int casSystemId = 0;
 

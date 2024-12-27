@@ -14,30 +14,36 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Printer;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes4.dex */
 public final class InputMethodInfo implements Parcelable {
-    public static final String ACTION_IME_LANGUAGE_SETTINGS = "android.view.inputmethod.action.IME_LANGUAGE_SETTINGS";
-    public static final String ACTION_STYLUS_HANDWRITING_SETTINGS = "android.view.inputmethod.action.STYLUS_HANDWRITING_SETTINGS";
+    public static final String ACTION_IME_LANGUAGE_SETTINGS =
+            "android.view.inputmethod.action.IME_LANGUAGE_SETTINGS";
+    public static final String ACTION_STYLUS_HANDWRITING_SETTINGS =
+            "android.view.inputmethod.action.STYLUS_HANDWRITING_SETTINGS";
     public static final int COMPONENT_NAME_MAX_LENGTH = 1000;
-    public static final Parcelable.Creator<InputMethodInfo> CREATOR = new Parcelable.Creator<InputMethodInfo>() { // from class: android.view.inputmethod.InputMethodInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InputMethodInfo createFromParcel(Parcel source) {
-            return new InputMethodInfo(source);
-        }
+    public static final Parcelable.Creator<InputMethodInfo> CREATOR =
+            new Parcelable.Creator<
+                    InputMethodInfo>() { // from class: android.view.inputmethod.InputMethodInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InputMethodInfo createFromParcel(Parcel source) {
+                    return new InputMethodInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InputMethodInfo[] newArray(int size) {
-            return new InputMethodInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InputMethodInfo[] newArray(int size) {
+                    return new InputMethodInfo[size];
+                }
+            };
     public static final int MAX_IMES_PER_PACKAGE = 20;
     static final String TAG = "InputMethodInfo";
     private final boolean mForceDefault;
@@ -65,24 +71,25 @@ public final class InputMethodInfo implements Parcelable {
         return new ComponentName(si.packageName, si.name).flattenToShortString();
     }
 
-    public InputMethodInfo(Context context, ResolveInfo service) throws XmlPullParserException, IOException {
+    public InputMethodInfo(Context context, ResolveInfo service)
+            throws XmlPullParserException, IOException {
         this(context, service, null);
     }
 
     /*  JADX ERROR: Types fix failed
-        java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.InsnArg.getType()" because "changeArg" is null
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.moveListener(TypeUpdate.java:439)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.runListeners(TypeUpdate.java:232)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.requestUpdate(TypeUpdate.java:212)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeForSsaVar(TypeUpdate.java:183)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeChecked(TypeUpdate.java:112)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:83)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:56)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryPossibleTypes(FixTypesVisitor.java:183)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.deduceType(FixTypesVisitor.java:242)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryDeduceTypes(FixTypesVisitor.java:221)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.visit(FixTypesVisitor.java:91)
-        */
+    java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.InsnArg.getType()" because "changeArg" is null
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.moveListener(TypeUpdate.java:439)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.runListeners(TypeUpdate.java:232)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.requestUpdate(TypeUpdate.java:212)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeForSsaVar(TypeUpdate.java:183)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeChecked(TypeUpdate.java:112)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:83)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:56)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryPossibleTypes(FixTypesVisitor.java:183)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.deduceType(FixTypesVisitor.java:242)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryDeduceTypes(FixTypesVisitor.java:221)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.visit(FixTypesVisitor.java:91)
+    */
     /* JADX WARN: Failed to apply debug info
     java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.InsnArg.getType()" because "changeArg" is null
     	at jadx.core.dex.visitors.typeinference.TypeUpdate.moveListener(TypeUpdate.java:439)
@@ -104,12 +111,19 @@ public final class InputMethodInfo implements Parcelable {
     /* JADX WARN: Not initialized variable reg: 21, insn: 0x03c7: MOVE (r5 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r21 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isAuxIme' boolean)]), block:B:181:0x03c7 */
     /* JADX WARN: Not initialized variable reg: 24, insn: 0x03c3: MOVE (r7 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r24 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('inlineSuggestionsEnabled' boolean)]), block:B:179:0x03c1 */
     /* JADX WARN: Not initialized variable reg: 24, insn: 0x03c9: MOVE (r7 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r24 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('inlineSuggestionsEnabled' boolean)]), block:B:181:0x03c7 */
-    public InputMethodInfo(android.content.Context r34, android.content.pm.ResolveInfo r35, java.util.List<android.view.inputmethod.InputMethodSubtype> r36) throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
+    public InputMethodInfo(
+            android.content.Context r34,
+            android.content.pm.ResolveInfo r35,
+            java.util.List<android.view.inputmethod.InputMethodSubtype> r36)
+            throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
         /*
             Method dump skipped, instructions count: 1031
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.inputmethod.InputMethodInfo.<init>(android.content.Context, android.content.pm.ResolveInfo, java.util.List):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.view.inputmethod.InputMethodInfo.<init>(android.content.Context,"
+                    + " android.content.pm.ResolveInfo, java.util.List):void");
     }
 
     public InputMethodInfo(InputMethodInfo source) {
@@ -124,7 +138,8 @@ public final class InputMethodInfo implements Parcelable {
         this.mIsAuxIme = source.mIsAuxIme;
         this.mSupportsSwitchingToNextInputMethod = source.mSupportsSwitchingToNextInputMethod;
         this.mInlineSuggestionsEnabled = source.mInlineSuggestionsEnabled;
-        this.mSupportsInlineSuggestionsWithTouchExploration = source.mSupportsInlineSuggestionsWithTouchExploration;
+        this.mSupportsInlineSuggestionsWithTouchExploration =
+                source.mSupportsInlineSuggestionsWithTouchExploration;
         this.mSuppressesSpellChecker = source.mSuppressesSpellChecker;
         this.mShowInInputMethodPicker = source.mShowInInputMethodPicker;
         this.mIsVrOnly = source.mIsVrOnly;
@@ -145,7 +160,8 @@ public final class InputMethodInfo implements Parcelable {
         }
         this.mHandledConfigChanges = source.mHandledConfigChanges;
         this.mSupportsStylusHandwriting = source.mSupportsStylusHandwriting;
-        this.mSupportsConnectionlessStylusHandwriting = source.mSupportsConnectionlessStylusHandwriting;
+        this.mSupportsConnectionlessStylusHandwriting =
+                source.mSupportsConnectionlessStylusHandwriting;
         this.mForceDefault = source.mForceDefault;
         this.mStylusHandwritingSettingsActivityAttr = source.mStylusHandwritingSettingsActivityAttr;
     }
@@ -172,35 +188,204 @@ public final class InputMethodInfo implements Parcelable {
         this.mForceDefault = false;
     }
 
-    public InputMethodInfo(String packageName, String className, CharSequence label, String settingsActivity) {
-        this(buildFakeResolveInfo(packageName, className, label), false, settingsActivity, null, null, 0, false, true, false, false, false, 0, false, false, null, false);
+    public InputMethodInfo(
+            String packageName, String className, CharSequence label, String settingsActivity) {
+        this(
+                buildFakeResolveInfo(packageName, className, label),
+                false,
+                settingsActivity,
+                null,
+                null,
+                0,
+                false,
+                true,
+                false,
+                false,
+                false,
+                0,
+                false,
+                false,
+                null,
+                false);
     }
 
-    public InputMethodInfo(String packageName, String className, CharSequence label, String settingsActivity, boolean supportStylusHandwriting, String stylusHandwritingSettingsActivityAttr) {
-        this(buildFakeResolveInfo(packageName, className, label), false, settingsActivity, null, null, 0, false, true, false, false, false, 0, supportStylusHandwriting, false, stylusHandwritingSettingsActivityAttr, false);
+    public InputMethodInfo(
+            String packageName,
+            String className,
+            CharSequence label,
+            String settingsActivity,
+            boolean supportStylusHandwriting,
+            String stylusHandwritingSettingsActivityAttr) {
+        this(
+                buildFakeResolveInfo(packageName, className, label),
+                false,
+                settingsActivity,
+                null,
+                null,
+                0,
+                false,
+                true,
+                false,
+                false,
+                false,
+                0,
+                supportStylusHandwriting,
+                false,
+                stylusHandwritingSettingsActivityAttr,
+                false);
     }
 
-    public InputMethodInfo(String packageName, String className, CharSequence label, String settingsActivity, String languageSettingsActivity, boolean supportStylusHandwriting, String stylusHandwritingSettingsActivityAttr) {
-        this(buildFakeResolveInfo(packageName, className, label), false, settingsActivity, languageSettingsActivity, null, 0, false, true, false, false, false, 0, supportStylusHandwriting, false, stylusHandwritingSettingsActivityAttr, false);
+    public InputMethodInfo(
+            String packageName,
+            String className,
+            CharSequence label,
+            String settingsActivity,
+            String languageSettingsActivity,
+            boolean supportStylusHandwriting,
+            String stylusHandwritingSettingsActivityAttr) {
+        this(
+                buildFakeResolveInfo(packageName, className, label),
+                false,
+                settingsActivity,
+                languageSettingsActivity,
+                null,
+                0,
+                false,
+                true,
+                false,
+                false,
+                false,
+                0,
+                supportStylusHandwriting,
+                false,
+                stylusHandwritingSettingsActivityAttr,
+                false);
     }
 
-    public InputMethodInfo(String packageName, String className, CharSequence label, String settingsActivity, String languageSettingsActivity, boolean supportStylusHandwriting, boolean supportConnectionlessStylusHandwriting, String stylusHandwritingSettingsActivityAttr) {
-        this(buildFakeResolveInfo(packageName, className, label), false, settingsActivity, languageSettingsActivity, null, 0, false, true, false, false, false, 0, supportStylusHandwriting, supportConnectionlessStylusHandwriting, stylusHandwritingSettingsActivityAttr, false);
+    public InputMethodInfo(
+            String packageName,
+            String className,
+            CharSequence label,
+            String settingsActivity,
+            String languageSettingsActivity,
+            boolean supportStylusHandwriting,
+            boolean supportConnectionlessStylusHandwriting,
+            String stylusHandwritingSettingsActivityAttr) {
+        this(
+                buildFakeResolveInfo(packageName, className, label),
+                false,
+                settingsActivity,
+                languageSettingsActivity,
+                null,
+                0,
+                false,
+                true,
+                false,
+                false,
+                false,
+                0,
+                supportStylusHandwriting,
+                supportConnectionlessStylusHandwriting,
+                stylusHandwritingSettingsActivityAttr,
+                false);
     }
 
-    public InputMethodInfo(String packageName, String className, CharSequence label, String settingsActivity, int handledConfigChanges) {
-        this(buildFakeResolveInfo(packageName, className, label), false, settingsActivity, null, null, 0, false, true, false, false, false, handledConfigChanges, false, false, null, false);
+    public InputMethodInfo(
+            String packageName,
+            String className,
+            CharSequence label,
+            String settingsActivity,
+            int handledConfigChanges) {
+        this(
+                buildFakeResolveInfo(packageName, className, label),
+                false,
+                settingsActivity,
+                null,
+                null,
+                0,
+                false,
+                true,
+                false,
+                false,
+                false,
+                handledConfigChanges,
+                false,
+                false,
+                null,
+                false);
     }
 
-    public InputMethodInfo(ResolveInfo ri, boolean isAuxIme, String settingsActivity, List<InputMethodSubtype> subtypes, int isDefaultResId, boolean forceDefault) {
-        this(ri, isAuxIme, settingsActivity, null, subtypes, isDefaultResId, forceDefault, true, false, false, false, 0, false, false, null, false);
+    public InputMethodInfo(
+            ResolveInfo ri,
+            boolean isAuxIme,
+            String settingsActivity,
+            List<InputMethodSubtype> subtypes,
+            int isDefaultResId,
+            boolean forceDefault) {
+        this(
+                ri,
+                isAuxIme,
+                settingsActivity,
+                null,
+                subtypes,
+                isDefaultResId,
+                forceDefault,
+                true,
+                false,
+                false,
+                false,
+                0,
+                false,
+                false,
+                null,
+                false);
     }
 
-    public InputMethodInfo(ResolveInfo ri, boolean isAuxIme, String settingsActivity, List<InputMethodSubtype> subtypes, int isDefaultResId, boolean forceDefault, boolean supportsSwitchingToNextInputMethod, boolean isVrOnly) {
-        this(ri, isAuxIme, settingsActivity, null, subtypes, isDefaultResId, forceDefault, supportsSwitchingToNextInputMethod, false, isVrOnly, false, 0, false, false, null, false);
+    public InputMethodInfo(
+            ResolveInfo ri,
+            boolean isAuxIme,
+            String settingsActivity,
+            List<InputMethodSubtype> subtypes,
+            int isDefaultResId,
+            boolean forceDefault,
+            boolean supportsSwitchingToNextInputMethod,
+            boolean isVrOnly) {
+        this(
+                ri,
+                isAuxIme,
+                settingsActivity,
+                null,
+                subtypes,
+                isDefaultResId,
+                forceDefault,
+                supportsSwitchingToNextInputMethod,
+                false,
+                isVrOnly,
+                false,
+                0,
+                false,
+                false,
+                null,
+                false);
     }
 
-    public InputMethodInfo(ResolveInfo ri, boolean isAuxIme, String settingsActivity, String languageSettingsActivity, List<InputMethodSubtype> subtypes, int isDefaultResId, boolean forceDefault, boolean supportsSwitchingToNextInputMethod, boolean inlineSuggestionsEnabled, boolean isVrOnly, boolean isVirtualDeviceOnly, int handledConfigChanges, boolean supportsStylusHandwriting, boolean supportsConnectionlessStylusHandwriting, String stylusHandwritingSettingsActivityAttr, boolean supportsInlineSuggestionsWithTouchExploration) {
+    public InputMethodInfo(
+            ResolveInfo ri,
+            boolean isAuxIme,
+            String settingsActivity,
+            String languageSettingsActivity,
+            List<InputMethodSubtype> subtypes,
+            int isDefaultResId,
+            boolean forceDefault,
+            boolean supportsSwitchingToNextInputMethod,
+            boolean inlineSuggestionsEnabled,
+            boolean isVrOnly,
+            boolean isVirtualDeviceOnly,
+            int handledConfigChanges,
+            boolean supportsStylusHandwriting,
+            boolean supportsConnectionlessStylusHandwriting,
+            String stylusHandwritingSettingsActivityAttr,
+            boolean supportsInlineSuggestionsWithTouchExploration) {
         ServiceInfo si = ri.serviceInfo;
         this.mService = ri;
         this.mId = new ComponentName(si.packageName, si.name).flattenToShortString();
@@ -212,7 +397,8 @@ public final class InputMethodInfo implements Parcelable {
         this.mForceDefault = forceDefault;
         this.mSupportsSwitchingToNextInputMethod = supportsSwitchingToNextInputMethod;
         this.mInlineSuggestionsEnabled = inlineSuggestionsEnabled;
-        this.mSupportsInlineSuggestionsWithTouchExploration = supportsInlineSuggestionsWithTouchExploration;
+        this.mSupportsInlineSuggestionsWithTouchExploration =
+                supportsInlineSuggestionsWithTouchExploration;
         this.mSuppressesSpellChecker = false;
         this.mShowInInputMethodPicker = true;
         this.mIsVrOnly = isVrOnly;
@@ -223,7 +409,8 @@ public final class InputMethodInfo implements Parcelable {
         this.mStylusHandwritingSettingsActivityAttr = stylusHandwritingSettingsActivityAttr;
     }
 
-    private static ResolveInfo buildFakeResolveInfo(String packageName, String className, CharSequence label) {
+    private static ResolveInfo buildFakeResolveInfo(
+            String packageName, String className, CharSequence label) {
         ResolveInfo ri = new ResolveInfo();
         ServiceInfo si = new ServiceInfo();
         ApplicationInfo ai = new ApplicationInfo();
@@ -256,7 +443,8 @@ public final class InputMethodInfo implements Parcelable {
     }
 
     public ComponentName getComponent() {
-        return new ComponentName(this.mService.serviceInfo.packageName, this.mService.serviceInfo.name);
+        return new ComponentName(
+                this.mService.serviceInfo.packageName, this.mService.serviceInfo.name);
     }
 
     public CharSequence loadLabel(PackageManager pm) {
@@ -320,21 +508,56 @@ public final class InputMethodInfo implements Parcelable {
     }
 
     public Intent createStylusHandwritingSettingsActivityIntent() {
-        if (TextUtils.isEmpty(this.mStylusHandwritingSettingsActivityAttr) || !this.mSupportsStylusHandwriting) {
+        if (TextUtils.isEmpty(this.mStylusHandwritingSettingsActivityAttr)
+                || !this.mSupportsStylusHandwriting) {
             return null;
         }
-        return new Intent(ACTION_STYLUS_HANDWRITING_SETTINGS).setComponent(new ComponentName(getServiceInfo().packageName, this.mStylusHandwritingSettingsActivityAttr));
+        return new Intent(ACTION_STYLUS_HANDWRITING_SETTINGS)
+                .setComponent(
+                        new ComponentName(
+                                getServiceInfo().packageName,
+                                this.mStylusHandwritingSettingsActivityAttr));
     }
 
     public Intent createImeLanguageSettingsActivityIntent() {
         if (TextUtils.isEmpty(this.mLanguageSettingsActivityName)) {
             return null;
         }
-        return new Intent(ACTION_IME_LANGUAGE_SETTINGS).setComponent(new ComponentName(getServiceInfo().packageName, this.mLanguageSettingsActivityName));
+        return new Intent(ACTION_IME_LANGUAGE_SETTINGS)
+                .setComponent(
+                        new ComponentName(
+                                getServiceInfo().packageName, this.mLanguageSettingsActivityName));
     }
 
     public void dump(Printer pw, String prefix) {
-        pw.println(prefix + "mId=" + this.mId + " mSettingsActivityName=" + this.mSettingsActivityName + " mLanguageSettingsActivityName=" + this.mLanguageSettingsActivityName + " mIsVrOnly=" + this.mIsVrOnly + " mIsVirtualDeviceOnly=" + this.mIsVirtualDeviceOnly + " mSupportsSwitchingToNextInputMethod=" + this.mSupportsSwitchingToNextInputMethod + " mInlineSuggestionsEnabled=" + this.mInlineSuggestionsEnabled + " mSupportsInlineSuggestionsWithTouchExploration=" + this.mSupportsInlineSuggestionsWithTouchExploration + " mSuppressesSpellChecker=" + this.mSuppressesSpellChecker + " mShowInInputMethodPicker=" + this.mShowInInputMethodPicker + " mSupportsStylusHandwriting=" + this.mSupportsStylusHandwriting + " mSupportsConnectionlessStylusHandwriting=" + this.mSupportsConnectionlessStylusHandwriting + " mStylusHandwritingSettingsActivityAttr=" + this.mStylusHandwritingSettingsActivityAttr);
+        pw.println(
+                prefix
+                        + "mId="
+                        + this.mId
+                        + " mSettingsActivityName="
+                        + this.mSettingsActivityName
+                        + " mLanguageSettingsActivityName="
+                        + this.mLanguageSettingsActivityName
+                        + " mIsVrOnly="
+                        + this.mIsVrOnly
+                        + " mIsVirtualDeviceOnly="
+                        + this.mIsVirtualDeviceOnly
+                        + " mSupportsSwitchingToNextInputMethod="
+                        + this.mSupportsSwitchingToNextInputMethod
+                        + " mInlineSuggestionsEnabled="
+                        + this.mInlineSuggestionsEnabled
+                        + " mSupportsInlineSuggestionsWithTouchExploration="
+                        + this.mSupportsInlineSuggestionsWithTouchExploration
+                        + " mSuppressesSpellChecker="
+                        + this.mSuppressesSpellChecker
+                        + " mShowInInputMethodPicker="
+                        + this.mShowInInputMethodPicker
+                        + " mSupportsStylusHandwriting="
+                        + this.mSupportsStylusHandwriting
+                        + " mSupportsConnectionlessStylusHandwriting="
+                        + this.mSupportsConnectionlessStylusHandwriting
+                        + " mStylusHandwritingSettingsActivityAttr="
+                        + this.mStylusHandwritingSettingsActivityAttr);
         pw.println(prefix + "mIsDefaultResId=0x" + Integer.toHexString(this.mIsDefaultResId));
         pw.println(prefix + "Service:");
         this.mService.dump(pw, prefix + "  ");
@@ -343,7 +566,13 @@ public final class InputMethodInfo implements Parcelable {
     }
 
     public String toString() {
-        return "InputMethodInfo{" + this.mId + ", settings: " + this.mSettingsActivityName + ", languageSettings: " + this.mLanguageSettingsActivityName + "}";
+        return "InputMethodInfo{"
+                + this.mId
+                + ", settings: "
+                + this.mSettingsActivityName
+                + ", languageSettings: "
+                + this.mLanguageSettingsActivityName
+                + "}";
     }
 
     public boolean equals(Object o) {

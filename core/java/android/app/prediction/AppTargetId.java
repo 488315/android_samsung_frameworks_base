@@ -7,19 +7,21 @@ import android.os.Parcelable;
 @SystemApi
 /* loaded from: classes.dex */
 public final class AppTargetId implements Parcelable {
-    public static final Parcelable.Creator<AppTargetId> CREATOR = new Parcelable.Creator<AppTargetId>() { // from class: android.app.prediction.AppTargetId.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppTargetId createFromParcel(Parcel parcel) {
-            return new AppTargetId(parcel);
-        }
+    public static final Parcelable.Creator<AppTargetId> CREATOR =
+            new Parcelable.Creator<
+                    AppTargetId>() { // from class: android.app.prediction.AppTargetId.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppTargetId createFromParcel(Parcel parcel) {
+                    return new AppTargetId(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppTargetId[] newArray(int size) {
-            return new AppTargetId[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppTargetId[] newArray(int size) {
+                    return new AppTargetId[size];
+                }
+            };
     private final String mId;
 
     @SystemApi

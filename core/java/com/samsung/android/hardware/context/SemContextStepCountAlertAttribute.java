@@ -7,19 +7,22 @@ import android.util.Log;
 
 /* loaded from: classes6.dex */
 public class SemContextStepCountAlertAttribute extends SemContextAttribute {
-    public static final Parcelable.Creator<SemContextStepCountAlertAttribute> CREATOR = new Parcelable.Creator<SemContextStepCountAlertAttribute>() { // from class: com.samsung.android.hardware.context.SemContextStepCountAlertAttribute.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextStepCountAlertAttribute createFromParcel(Parcel in) {
-            return new SemContextStepCountAlertAttribute(in);
-        }
+    public static final Parcelable.Creator<SemContextStepCountAlertAttribute> CREATOR =
+            new Parcelable.Creator<
+                    SemContextStepCountAlertAttribute>() { // from class:
+                                                           // com.samsung.android.hardware.context.SemContextStepCountAlertAttribute.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextStepCountAlertAttribute createFromParcel(Parcel in) {
+                    return new SemContextStepCountAlertAttribute(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextStepCountAlertAttribute[] newArray(int size) {
-            return new SemContextStepCountAlertAttribute[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextStepCountAlertAttribute[] newArray(int size) {
+                    return new SemContextStepCountAlertAttribute[size];
+                }
+            };
     public static final int INTERRUPT_GYRO_DISABLE_SYSFS_NODE = 0;
     public static final int INTERRUPT_GYRO_ENABLE_SYSFS_NODE = 1;
     private static final String TAG = "SemContextStepCountAlertAttribute";

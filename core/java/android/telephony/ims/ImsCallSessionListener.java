@@ -7,7 +7,9 @@ import android.telephony.ServiceState;
 import android.telephony.ims.aidl.IImsCallSessionListener;
 import android.telephony.ims.stub.ImsCallSessionImplBase;
 import android.util.Log;
+
 import com.android.ims.internal.IImsCallSession;
+
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Set;
@@ -132,7 +134,8 @@ public class ImsCallSessionListener {
                 return;
             }
         }
-        this.mListener.callSessionMergeStarted(newSession != null ? newSession.getServiceImpl() : null, profile);
+        this.mListener.callSessionMergeStarted(
+                newSession != null ? newSession.getServiceImpl() : null, profile);
     }
 
     public void callSessionMergeStarted(IImsCallSession newSession, ImsCallProfile profile) {
@@ -154,7 +157,8 @@ public class ImsCallSessionListener {
                 return;
             }
         }
-        this.mListener.callSessionMergeComplete(newSession != null ? newSession.getServiceImpl() : null);
+        this.mListener.callSessionMergeComplete(
+                newSession != null ? newSession.getServiceImpl() : null);
     }
 
     public void callSessionMergeComplete(IImsCallSession newSession) {
@@ -197,7 +201,8 @@ public class ImsCallSessionListener {
         }
     }
 
-    public void callSessionConferenceExtended(ImsCallSessionImplBase newSession, ImsCallProfile profile) {
+    public void callSessionConferenceExtended(
+            ImsCallSessionImplBase newSession, ImsCallProfile profile) {
         if (newSession != null) {
             try {
                 if (this.mExecutor != null) {
@@ -208,7 +213,8 @@ public class ImsCallSessionListener {
                 return;
             }
         }
-        this.mListener.callSessionConferenceExtended(newSession != null ? newSession.getServiceImpl() : null, profile);
+        this.mListener.callSessionConferenceExtended(
+                newSession != null ? newSession.getServiceImpl() : null, profile);
     }
 
     public void callSessionConferenceExtended(IImsCallSession newSession, ImsCallProfile profile) {
@@ -227,7 +233,8 @@ public class ImsCallSessionListener {
         }
     }
 
-    public void callSessionConferenceExtendReceived(ImsCallSessionImplBase newSession, ImsCallProfile profile) {
+    public void callSessionConferenceExtendReceived(
+            ImsCallSessionImplBase newSession, ImsCallProfile profile) {
         if (newSession != null) {
             try {
                 if (this.mExecutor != null) {
@@ -238,10 +245,12 @@ public class ImsCallSessionListener {
                 return;
             }
         }
-        this.mListener.callSessionConferenceExtendReceived(newSession != null ? newSession.getServiceImpl() : null, profile);
+        this.mListener.callSessionConferenceExtendReceived(
+                newSession != null ? newSession.getServiceImpl() : null, profile);
     }
 
-    public void callSessionConferenceExtendReceived(IImsCallSession newSession, ImsCallProfile profile) {
+    public void callSessionConferenceExtendReceived(
+            IImsCallSession newSession, ImsCallProfile profile) {
         try {
             this.mListener.callSessionConferenceExtendReceived(newSession, profile);
         } catch (RemoteException e) {
@@ -299,7 +308,9 @@ public class ImsCallSessionListener {
 
     @Deprecated
     public void callSessionMayHandover(int srcAccessTech, int targetAccessTech) {
-        onMayHandover(ServiceState.rilRadioTechnologyToNetworkType(srcAccessTech), ServiceState.rilRadioTechnologyToNetworkType(targetAccessTech));
+        onMayHandover(
+                ServiceState.rilRadioTechnologyToNetworkType(srcAccessTech),
+                ServiceState.rilRadioTechnologyToNetworkType(targetAccessTech));
     }
 
     public void onMayHandover(int srcNetworkType, int targetNetworkType) {
@@ -311,8 +322,12 @@ public class ImsCallSessionListener {
     }
 
     @Deprecated
-    public void callSessionHandover(int srcAccessTech, int targetAccessTech, ImsReasonInfo reasonInfo) {
-        onHandover(ServiceState.rilRadioTechnologyToNetworkType(srcAccessTech), ServiceState.rilRadioTechnologyToNetworkType(targetAccessTech), reasonInfo);
+    public void callSessionHandover(
+            int srcAccessTech, int targetAccessTech, ImsReasonInfo reasonInfo) {
+        onHandover(
+                ServiceState.rilRadioTechnologyToNetworkType(srcAccessTech),
+                ServiceState.rilRadioTechnologyToNetworkType(targetAccessTech),
+                reasonInfo);
     }
 
     public void onHandover(int srcNetworkType, int targetNetworkType, ImsReasonInfo reasonInfo) {
@@ -324,11 +339,16 @@ public class ImsCallSessionListener {
     }
 
     @Deprecated
-    public void callSessionHandoverFailed(int srcAccessTech, int targetAccessTech, ImsReasonInfo reasonInfo) {
-        onHandoverFailed(ServiceState.rilRadioTechnologyToNetworkType(srcAccessTech), ServiceState.rilRadioTechnologyToNetworkType(targetAccessTech), reasonInfo);
+    public void callSessionHandoverFailed(
+            int srcAccessTech, int targetAccessTech, ImsReasonInfo reasonInfo) {
+        onHandoverFailed(
+                ServiceState.rilRadioTechnologyToNetworkType(srcAccessTech),
+                ServiceState.rilRadioTechnologyToNetworkType(targetAccessTech),
+                reasonInfo);
     }
 
-    public void onHandoverFailed(int srcNetworkType, int targetNetworkType, ImsReasonInfo reasonInfo) {
+    public void onHandoverFailed(
+            int srcNetworkType, int targetNetworkType, ImsReasonInfo reasonInfo) {
         try {
             this.mListener.callSessionHandoverFailed(srcNetworkType, targetNetworkType, reasonInfo);
         } catch (RemoteException e) {
@@ -401,7 +421,9 @@ public class ImsCallSessionListener {
     }
 
     public void callSessionDtmfReceived(char dtmf) {
-        if ((dtmf < '0' || dtmf > '9') && ((dtmf < 'A' || dtmf > 'D') && ((dtmf < 'a' || dtmf > 'd') && dtmf != '*' && dtmf != '#'))) {
+        if ((dtmf < '0' || dtmf > '9')
+                && ((dtmf < 'A' || dtmf > 'D')
+                        && ((dtmf < 'a' || dtmf > 'd') && dtmf != '*' && dtmf != '#'))) {
             throw new IllegalArgumentException("DTMF digit must be 0-9, *, #, A, B, C, D");
         }
         try {

@@ -3,27 +3,30 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class AudioFormatDescription implements Parcelable {
-    public static final Parcelable.Creator<AudioFormatDescription> CREATOR = new Parcelable.Creator<AudioFormatDescription>() { // from class: android.media.audio.common.AudioFormatDescription.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioFormatDescription createFromParcel(Parcel _aidl_source) {
-            AudioFormatDescription _aidl_out = new AudioFormatDescription();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioFormatDescription> CREATOR =
+            new Parcelable.Creator<AudioFormatDescription>() { // from class:
+                // android.media.audio.common.AudioFormatDescription.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioFormatDescription createFromParcel(Parcel _aidl_source) {
+                    AudioFormatDescription _aidl_out = new AudioFormatDescription();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioFormatDescription[] newArray(int _aidl_size) {
-            return new AudioFormatDescription[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioFormatDescription[] newArray(int _aidl_size) {
+                    return new AudioFormatDescription[_aidl_size];
+                }
+            };
     public String encoding;
     public byte type = 0;
     public byte pcm = 0;
@@ -106,14 +109,22 @@ public class AudioFormatDescription implements Parcelable {
             return false;
         }
         AudioFormatDescription that = (AudioFormatDescription) other;
-        if (Objects.deepEquals(java.lang.Byte.valueOf(this.type), java.lang.Byte.valueOf(that.type)) && Objects.deepEquals(java.lang.Byte.valueOf(this.pcm), java.lang.Byte.valueOf(that.pcm)) && Objects.deepEquals(this.encoding, that.encoding)) {
+        if (Objects.deepEquals(java.lang.Byte.valueOf(this.type), java.lang.Byte.valueOf(that.type))
+                && Objects.deepEquals(
+                        java.lang.Byte.valueOf(this.pcm), java.lang.Byte.valueOf(that.pcm))
+                && Objects.deepEquals(this.encoding, that.encoding)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(java.lang.Byte.valueOf(this.type), java.lang.Byte.valueOf(this.pcm), this.encoding).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                java.lang.Byte.valueOf(this.type),
+                                java.lang.Byte.valueOf(this.pcm),
+                                this.encoding)
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

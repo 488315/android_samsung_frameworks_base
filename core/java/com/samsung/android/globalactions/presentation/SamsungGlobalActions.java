@@ -1,6 +1,7 @@
 package com.samsung.android.globalactions.presentation;
 
 import android.net.Uri;
+
 import com.samsung.android.globalactions.presentation.view.ExtendableGlobalActionsView;
 import com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel;
 

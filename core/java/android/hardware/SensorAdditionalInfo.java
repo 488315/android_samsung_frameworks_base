@@ -1,6 +1,7 @@
 package android.hardware;
 
 import android.util.Log;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -28,23 +29,17 @@ public class SensorAdditionalInfo {
     public static final int SENSORHUB_INFO_SUB_SCREEN_ON = 50350017;
     private static final int SENSORHUB_INFO_VM_PKG = 804801;
 
-    @Deprecated
-    public static final int SENSORHUB_INFO_WIFI_DATA_ACTIVITY_IN = 117458881;
+    @Deprecated public static final int SENSORHUB_INFO_WIFI_DATA_ACTIVITY_IN = 117458881;
 
-    @Deprecated
-    public static final int SENSORHUB_INFO_WIFI_DATA_ACTIVITY_INOUT = 151013313;
+    @Deprecated public static final int SENSORHUB_INFO_WIFI_DATA_ACTIVITY_INOUT = 151013313;
 
-    @Deprecated
-    public static final int SENSORHUB_INFO_WIFI_DATA_ACTIVITY_NONE = 100681665;
+    @Deprecated public static final int SENSORHUB_INFO_WIFI_DATA_ACTIVITY_NONE = 100681665;
 
-    @Deprecated
-    public static final int SENSORHUB_INFO_WIFI_DATA_ACTIVITY_OUT = 134236097;
+    @Deprecated public static final int SENSORHUB_INFO_WIFI_DATA_ACTIVITY_OUT = 134236097;
 
-    @Deprecated
-    public static final int SENSORHUB_INFO_WIFI_SCAN_OFF = 83904449;
+    @Deprecated public static final int SENSORHUB_INFO_WIFI_SCAN_OFF = 83904449;
 
-    @Deprecated
-    public static final int SENSORHUB_INFO_WIFI_SCAN_ON = 67127233;
+    @Deprecated public static final int SENSORHUB_INFO_WIFI_SCAN_ON = 67127233;
     public static final int TYPE_BRIGHTNESS_HYSTERESIS_INFO = 268435458;
     public static final int TYPE_CALIBRATED_LUX_INFO = 268435457;
     public static final int TYPE_CUSTOM_INFO = 268435456;
@@ -74,10 +69,10 @@ public class SensorAdditionalInfo {
     public final int type;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AdditionalInfoType {
-    }
+    public @interface AdditionalInfoType {}
 
-    SensorAdditionalInfo(Sensor aSensor, int aType, int aSerial, int[] aIntValues, float[] aFloatValues) {
+    SensorAdditionalInfo(
+            Sensor aSensor, int aType, int aSerial, int[] aIntValues, float[] aFloatValues) {
         this.sensor = aSensor;
         this.type = aType;
         this.serial = aSerial;
@@ -85,23 +80,36 @@ public class SensorAdditionalInfo {
         this.floatValues = aFloatValues;
     }
 
-    public static SensorAdditionalInfo createLocalGeomagneticField(float strength, float declination, float inclination) {
-        if (strength < 10.0f || strength > 100.0f || declination < -1.5707963267948966d || declination > 1.5707963267948966d || inclination < -1.5707963267948966d || inclination > 1.5707963267948966d) {
+    public static SensorAdditionalInfo createLocalGeomagneticField(
+            float strength, float declination, float inclination) {
+        if (strength < 10.0f
+                || strength > 100.0f
+                || declination < -1.5707963267948966d
+                || declination > 1.5707963267948966d
+                || inclination < -1.5707963267948966d
+                || inclination > 1.5707963267948966d) {
             throw new IllegalArgumentException("Geomagnetic field info out of range");
         }
-        return new SensorAdditionalInfo(null, 196608, 0, null, new float[]{strength, declination, inclination});
+        return new SensorAdditionalInfo(
+                null, 196608, 0, null, new float[] {strength, declination, inclination});
     }
 
     public static SensorAdditionalInfo createCustomInfo(Sensor aSensor, int type, float[] data) {
         if (type < 268435456 || type >= 1073741824 || aSensor == null) {
-            throw new IllegalArgumentException("invalid parameter(s): type: " + type + "; sensor: " + aSensor);
+            throw new IllegalArgumentException(
+                    "invalid parameter(s): type: " + type + "; sensor: " + aSensor);
         }
         return new SensorAdditionalInfo(aSensor, type, 0, null, data);
     }
 
-    public static SensorAdditionalInfo createSamsungCustomInfo(Sensor aSensor, int aType, int aSerial, int[] aIntValues, float[] aFloatValues) {
-        if (aType < 268435456 || aType >= 1073741824 || aSensor == null || (aIntValues == null && aFloatValues == null)) {
-            throw new IllegalArgumentException("invalid parameter(s): type: " + aType + "; sensor: " + aSensor);
+    public static SensorAdditionalInfo createSamsungCustomInfo(
+            Sensor aSensor, int aType, int aSerial, int[] aIntValues, float[] aFloatValues) {
+        if (aType < 268435456
+                || aType >= 1073741824
+                || aSensor == null
+                || (aIntValues == null && aFloatValues == null)) {
+            throw new IllegalArgumentException(
+                    "invalid parameter(s): type: " + aType + "; sensor: " + aSensor);
         }
         return new SensorAdditionalInfo(aSensor, aType, aSerial, aIntValues, aFloatValues);
     }

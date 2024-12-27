@@ -14,8 +14,7 @@ public interface IFeatureFlagsCallback extends IInterface {
 
     public static class Default implements IFeatureFlagsCallback {
         @Override // android.flags.IFeatureFlagsCallback
-        public void onFlagChange(SyncableFlag flag) throws RemoteException {
-        }
+        public void onFlagChange(SyncableFlag flag) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IFeatureFlagsCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFeatureFlagsCallback {
+    public abstract static class Stub extends Binder implements IFeatureFlagsCallback {
         static final int TRANSACTION_onFlagChange = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IFeatureFlagsCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IFeatureFlagsCallback.DESCRIPTOR);
             }

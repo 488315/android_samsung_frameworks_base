@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
+
 import com.android.internal.R;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -23,54 +25,60 @@ public class Slide extends Visibility {
     private float mSlideFraction;
     private static final TimeInterpolator sDecelerate = new DecelerateInterpolator();
     private static final TimeInterpolator sAccelerate = new AccelerateInterpolator();
-    private static final CalculateSlide sCalculateLeft = new CalculateSlideHorizontal() { // from class: android.transition.Slide.1
-        @Override // android.transition.Slide.CalculateSlide
-        public float getGoneX(ViewGroup sceneRoot, View view, float fraction) {
-            return view.getTranslationX() - (sceneRoot.getWidth() * fraction);
-        }
-    };
-    private static final CalculateSlide sCalculateStart = new CalculateSlideHorizontal() { // from class: android.transition.Slide.2
-        @Override // android.transition.Slide.CalculateSlide
-        public float getGoneX(ViewGroup sceneRoot, View view, float fraction) {
-            boolean isRtl = sceneRoot.getLayoutDirection() == 1;
-            if (isRtl) {
-                float x = view.getTranslationX() + (sceneRoot.getWidth() * fraction);
-                return x;
-            }
-            float x2 = view.getTranslationX();
-            return x2 - (sceneRoot.getWidth() * fraction);
-        }
-    };
-    private static final CalculateSlide sCalculateTop = new CalculateSlideVertical() { // from class: android.transition.Slide.3
-        @Override // android.transition.Slide.CalculateSlide
-        public float getGoneY(ViewGroup sceneRoot, View view, float fraction) {
-            return view.getTranslationY() - (sceneRoot.getHeight() * fraction);
-        }
-    };
-    private static final CalculateSlide sCalculateRight = new CalculateSlideHorizontal() { // from class: android.transition.Slide.4
-        @Override // android.transition.Slide.CalculateSlide
-        public float getGoneX(ViewGroup sceneRoot, View view, float fraction) {
-            return view.getTranslationX() + (sceneRoot.getWidth() * fraction);
-        }
-    };
-    private static final CalculateSlide sCalculateEnd = new CalculateSlideHorizontal() { // from class: android.transition.Slide.5
-        @Override // android.transition.Slide.CalculateSlide
-        public float getGoneX(ViewGroup sceneRoot, View view, float fraction) {
-            boolean isRtl = sceneRoot.getLayoutDirection() == 1;
-            if (isRtl) {
-                float x = view.getTranslationX() - (sceneRoot.getWidth() * fraction);
-                return x;
-            }
-            float x2 = view.getTranslationX();
-            return x2 + (sceneRoot.getWidth() * fraction);
-        }
-    };
-    private static final CalculateSlide sCalculateBottom = new CalculateSlideVertical() { // from class: android.transition.Slide.6
-        @Override // android.transition.Slide.CalculateSlide
-        public float getGoneY(ViewGroup sceneRoot, View view, float fraction) {
-            return view.getTranslationY() + (sceneRoot.getHeight() * fraction);
-        }
-    };
+    private static final CalculateSlide sCalculateLeft =
+            new CalculateSlideHorizontal() { // from class: android.transition.Slide.1
+                @Override // android.transition.Slide.CalculateSlide
+                public float getGoneX(ViewGroup sceneRoot, View view, float fraction) {
+                    return view.getTranslationX() - (sceneRoot.getWidth() * fraction);
+                }
+            };
+    private static final CalculateSlide sCalculateStart =
+            new CalculateSlideHorizontal() { // from class: android.transition.Slide.2
+                @Override // android.transition.Slide.CalculateSlide
+                public float getGoneX(ViewGroup sceneRoot, View view, float fraction) {
+                    boolean isRtl = sceneRoot.getLayoutDirection() == 1;
+                    if (isRtl) {
+                        float x = view.getTranslationX() + (sceneRoot.getWidth() * fraction);
+                        return x;
+                    }
+                    float x2 = view.getTranslationX();
+                    return x2 - (sceneRoot.getWidth() * fraction);
+                }
+            };
+    private static final CalculateSlide sCalculateTop =
+            new CalculateSlideVertical() { // from class: android.transition.Slide.3
+                @Override // android.transition.Slide.CalculateSlide
+                public float getGoneY(ViewGroup sceneRoot, View view, float fraction) {
+                    return view.getTranslationY() - (sceneRoot.getHeight() * fraction);
+                }
+            };
+    private static final CalculateSlide sCalculateRight =
+            new CalculateSlideHorizontal() { // from class: android.transition.Slide.4
+                @Override // android.transition.Slide.CalculateSlide
+                public float getGoneX(ViewGroup sceneRoot, View view, float fraction) {
+                    return view.getTranslationX() + (sceneRoot.getWidth() * fraction);
+                }
+            };
+    private static final CalculateSlide sCalculateEnd =
+            new CalculateSlideHorizontal() { // from class: android.transition.Slide.5
+                @Override // android.transition.Slide.CalculateSlide
+                public float getGoneX(ViewGroup sceneRoot, View view, float fraction) {
+                    boolean isRtl = sceneRoot.getLayoutDirection() == 1;
+                    if (isRtl) {
+                        float x = view.getTranslationX() - (sceneRoot.getWidth() * fraction);
+                        return x;
+                    }
+                    float x2 = view.getTranslationX();
+                    return x2 + (sceneRoot.getWidth() * fraction);
+                }
+            };
+    private static final CalculateSlide sCalculateBottom =
+            new CalculateSlideVertical() { // from class: android.transition.Slide.6
+                @Override // android.transition.Slide.CalculateSlide
+                public float getGoneY(ViewGroup sceneRoot, View view, float fraction) {
+                    return view.getTranslationY() + (sceneRoot.getHeight() * fraction);
+                }
+            };
 
     private interface CalculateSlide {
         float getGoneX(ViewGroup viewGroup, View view, float f);
@@ -79,12 +87,10 @@ public class Slide extends Visibility {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface GravityFlag {
-    }
+    public @interface GravityFlag {}
 
-    private static abstract class CalculateSlideHorizontal implements CalculateSlide {
-        private CalculateSlideHorizontal() {
-        }
+    private abstract static class CalculateSlideHorizontal implements CalculateSlide {
+        private CalculateSlideHorizontal() {}
 
         @Override // android.transition.Slide.CalculateSlide
         public float getGoneY(ViewGroup sceneRoot, View view, float fraction) {
@@ -92,9 +98,8 @@ public class Slide extends Visibility {
         }
     }
 
-    private static abstract class CalculateSlideVertical implements CalculateSlide {
-        private CalculateSlideVertical() {
-        }
+    private abstract static class CalculateSlideVertical implements CalculateSlide {
+        private CalculateSlideVertical() {}
 
         @Override // android.transition.Slide.CalculateSlide
         public float getGoneX(ViewGroup sceneRoot, View view, float fraction) {
@@ -180,7 +185,11 @@ public class Slide extends Visibility {
     }
 
     @Override // android.transition.Visibility
-    public Animator onAppear(ViewGroup sceneRoot, View view, TransitionValues startValues, TransitionValues endValues) {
+    public Animator onAppear(
+            ViewGroup sceneRoot,
+            View view,
+            TransitionValues startValues,
+            TransitionValues endValues) {
         if (endValues == null) {
             return null;
         }
@@ -189,11 +198,25 @@ public class Slide extends Visibility {
         float endY = view.getTranslationY();
         float startX = this.mSlideCalculator.getGoneX(sceneRoot, view, this.mSlideFraction);
         float startY = this.mSlideCalculator.getGoneY(sceneRoot, view, this.mSlideFraction);
-        return TranslationAnimationCreator.createAnimation(view, endValues, position[0], position[1], startX, startY, endX, endY, sDecelerate, this);
+        return TranslationAnimationCreator.createAnimation(
+                view,
+                endValues,
+                position[0],
+                position[1],
+                startX,
+                startY,
+                endX,
+                endY,
+                sDecelerate,
+                this);
     }
 
     @Override // android.transition.Visibility
-    public Animator onDisappear(ViewGroup sceneRoot, View view, TransitionValues startValues, TransitionValues endValues) {
+    public Animator onDisappear(
+            ViewGroup sceneRoot,
+            View view,
+            TransitionValues startValues,
+            TransitionValues endValues) {
         if (startValues == null) {
             return null;
         }
@@ -202,7 +225,17 @@ public class Slide extends Visibility {
         float startY = view.getTranslationY();
         float endX = this.mSlideCalculator.getGoneX(sceneRoot, view, this.mSlideFraction);
         float endY = this.mSlideCalculator.getGoneY(sceneRoot, view, this.mSlideFraction);
-        return TranslationAnimationCreator.createAnimation(view, startValues, position[0], position[1], startX, startY, endX, endY, sAccelerate, this);
+        return TranslationAnimationCreator.createAnimation(
+                view,
+                startValues,
+                position[0],
+                position[1],
+                startX,
+                startY,
+                endX,
+                endY,
+                sAccelerate,
+                this);
     }
 
     public void setSlideFraction(float slideFraction) {

@@ -4,6 +4,7 @@ import com.android.internal.org.bouncycastle.math.raw.Mod;
 import com.android.internal.org.bouncycastle.math.raw.Nat;
 import com.android.internal.org.bouncycastle.math.raw.Nat224;
 import com.android.internal.org.bouncycastle.util.Pack;
+
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
@@ -13,7 +14,9 @@ public class SecP224K1Field {
     private static final int PExt13 = -1;
     private static final int PInv33 = 6803;
     static final int[] P = {-6803, -2, -1, -1, -1, -1, -1};
-    private static final int[] PExt = {46280809, 13606, 1, 0, 0, 0, 0, -13606, -3, -1, -1, -1, -1, -1};
+    private static final int[] PExt = {
+        46280809, 13606, 1, 0, 0, 0, 0, -13606, -3, -1, -1, -1, -1, -1
+    };
     private static final int[] PExtInv = {-46280809, -13607, -2, -1, -1, -1, -1, 13605, 2};
 
     public static void add(int[] x, int[] y, int[] z) {
@@ -25,7 +28,8 @@ public class SecP224K1Field {
 
     public static void addExt(int[] xx, int[] yy, int[] zz) {
         int c = Nat.add(14, xx, yy, zz);
-        if ((c != 0 || (zz[13] == -1 && Nat.gte(14, zz, PExt))) && Nat.addTo(PExtInv.length, PExtInv, zz) != 0) {
+        if ((c != 0 || (zz[13] == -1 && Nat.gte(14, zz, PExt)))
+                && Nat.addTo(PExtInv.length, PExtInv, zz) != 0) {
             Nat.incAt(14, zz, PExtInv.length);
         }
     }
@@ -75,7 +79,8 @@ public class SecP224K1Field {
 
     public static void multiplyAddToExt(int[] x, int[] y, int[] zz) {
         int c = Nat224.mulAddTo(x, y, zz);
-        if ((c != 0 || (zz[13] == -1 && Nat.gte(14, zz, PExt))) && Nat.addTo(PExtInv.length, PExtInv, zz) != 0) {
+        if ((c != 0 || (zz[13] == -1 && Nat.gte(14, zz, PExt)))
+                && Nat.addTo(PExtInv.length, PExtInv, zz) != 0) {
             Nat.incAt(14, zz, PExtInv.length);
         }
     }
@@ -111,7 +116,8 @@ public class SecP224K1Field {
     }
 
     public static void reduce32(int x, int[] z) {
-        if ((x != 0 && Nat224.mul33WordAdd(PInv33, x, z, 0) != 0) || (z[6] == -1 && Nat224.gte(z, P))) {
+        if ((x != 0 && Nat224.mul33WordAdd(PInv33, x, z, 0) != 0)
+                || (z[6] == -1 && Nat224.gte(z, P))) {
             Nat.add33To(7, PInv33, z);
         }
     }

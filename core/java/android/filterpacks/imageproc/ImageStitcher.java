@@ -20,6 +20,7 @@ public class ImageStitcher extends Filter {
 
     @GenerateFieldPort(name = "padSize")
     private int mPadSize;
+
     private Program mProgram;
     private int mSliceHeight;
     private int mSliceIndex;
@@ -64,8 +65,10 @@ public class ImageStitcher extends Filter {
         Frame input = pullInput("image");
         FrameFormat format = input.getFormat();
         if (this.mSliceIndex == 0) {
-            this.mOutputFrame = context.getFrameManager().newFrame(calcOutputFormatForInput(format));
-        } else if (format.getWidth() != this.mInputWidth || format.getHeight() != this.mInputHeight) {
+            this.mOutputFrame =
+                    context.getFrameManager().newFrame(calcOutputFormatForInput(format));
+        } else if (format.getWidth() != this.mInputWidth
+                || format.getHeight() != this.mInputHeight) {
             throw new RuntimeException("Image size should not change.");
         }
         if (this.mProgram == null) {
@@ -77,8 +80,15 @@ public class ImageStitcher extends Filter {
         int outputOffsetY = (this.mSliceIndex / this.mXSlices) * this.mSliceHeight;
         float outputWidth = Math.min(this.mSliceWidth, this.mImageWidth - outputOffsetX);
         float outputHeight = Math.min(this.mSliceHeight, this.mImageHeight - outputOffsetY);
-        ((ShaderProgram) this.mProgram).setSourceRect(x0, y0, outputWidth / this.mInputWidth, outputHeight / this.mInputHeight);
-        ((ShaderProgram) this.mProgram).setTargetRect(outputOffsetX / this.mImageWidth, outputOffsetY / this.mImageHeight, outputWidth / this.mImageWidth, outputHeight / this.mImageHeight);
+        ((ShaderProgram) this.mProgram)
+                .setSourceRect(
+                        x0, y0, outputWidth / this.mInputWidth, outputHeight / this.mInputHeight);
+        ((ShaderProgram) this.mProgram)
+                .setTargetRect(
+                        outputOffsetX / this.mImageWidth,
+                        outputOffsetY / this.mImageHeight,
+                        outputWidth / this.mImageWidth,
+                        outputHeight / this.mImageHeight);
         this.mProgram.process(input, this.mOutputFrame);
         this.mSliceIndex++;
         if (this.mSliceIndex == this.mXSlices * this.mYSlices) {

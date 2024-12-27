@@ -68,7 +68,8 @@ public class RDN extends ASN1Object {
     int collectAttributeTypes(ASN1ObjectIdentifier[] oids, int oidsOff) {
         int count = this.values.size();
         for (int i = 0; i < count; i++) {
-            AttributeTypeAndValue attr = AttributeTypeAndValue.getInstance(this.values.getObjectAt(i));
+            AttributeTypeAndValue attr =
+                    AttributeTypeAndValue.getInstance(this.values.getObjectAt(i));
             oids[oidsOff + i] = attr.getType();
         }
         return count;
@@ -77,7 +78,8 @@ public class RDN extends ASN1Object {
     boolean containsAttributeType(ASN1ObjectIdentifier attributeType) {
         int count = this.values.size();
         for (int i = 0; i < count; i++) {
-            AttributeTypeAndValue attr = AttributeTypeAndValue.getInstance(this.values.getObjectAt(i));
+            AttributeTypeAndValue attr =
+                    AttributeTypeAndValue.getInstance(this.values.getObjectAt(i));
             if (attr.getType().equals((ASN1Primitive) attributeType)) {
                 return true;
             }
@@ -85,7 +87,8 @@ public class RDN extends ASN1Object {
         return false;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         return this.values;
     }

@@ -14,7 +14,7 @@ public final class StartReason {
         EDM_SYSTEM_READY = startReason;
         StartReason startReason2 = new StartReason("EDM_SERVICE_READY", 1);
         EDM_SERVICE_READY = startReason2;
-        $VALUES = new StartReason[]{startReason, startReason2};
+        $VALUES = new StartReason[] {startReason, startReason2};
     }
 
     public static StartReason valueOf(String str) {

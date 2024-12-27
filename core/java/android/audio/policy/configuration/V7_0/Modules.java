@@ -1,11 +1,13 @@
 package android.audio.policy.configuration.V7_0;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.datatype.DatatypeConfigurationException;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public class Modules {
@@ -125,7 +127,8 @@ public class Modules {
             this.halVersion = halVersion;
         }
 
-        static Module read(XmlPullParser _parser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+        static Module read(XmlPullParser _parser)
+                throws XmlPullParserException, IOException, DatatypeConfigurationException {
             int type;
             Module _instance = new Module();
             String _raw = _parser.getAttributeValue(null, "name");
@@ -178,7 +181,8 @@ public class Modules {
         return this.module;
     }
 
-    static Modules read(XmlPullParser _parser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static Modules read(XmlPullParser _parser)
+            throws XmlPullParserException, IOException, DatatypeConfigurationException {
         int type;
         Modules _instance = new Modules();
         _parser.getDepth();

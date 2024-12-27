@@ -33,7 +33,7 @@ public interface ISerialManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISerialManager {
+    public abstract static class Stub extends Binder implements ISerialManager {
         public static final String DESCRIPTOR = "android.hardware.ISerialManager";
         static final int TRANSACTION_getSerialPorts = 1;
         static final int TRANSACTION_openSerialPort = 2;
@@ -49,7 +49,9 @@ public interface ISerialManager extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static ISerialManager asInterface(IBinder obj) {
@@ -85,7 +87,8 @@ public interface ISerialManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -152,7 +155,9 @@ public interface ISerialManager extends IInterface {
                     _data.writeString(name);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -162,11 +167,13 @@ public interface ISerialManager extends IInterface {
         }
 
         protected void getSerialPorts_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.SERIAL_PORT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.SERIAL_PORT, getCallingPid(), getCallingUid());
         }
 
         protected void openSerialPort_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.SERIAL_PORT, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.SERIAL_PORT, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

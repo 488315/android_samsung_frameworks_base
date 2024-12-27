@@ -14,6 +14,7 @@ import com.android.internal.org.bouncycastle.operator.DigestCalculator;
 import com.android.internal.org.bouncycastle.operator.DigestCalculatorProvider;
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.Selector;
+
 import java.io.OutputStream;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -29,19 +30,36 @@ public class AttributeCertificateHolder implements Selector {
     }
 
     public AttributeCertificateHolder(X500Name issuerName, BigInteger serialNumber) {
-        this.holder = new Holder(new IssuerSerial(generateGeneralNames(issuerName), new ASN1Integer(serialNumber)));
+        this.holder =
+                new Holder(
+                        new IssuerSerial(
+                                generateGeneralNames(issuerName), new ASN1Integer(serialNumber)));
     }
 
     public AttributeCertificateHolder(X509CertificateHolder cert) {
-        this.holder = new Holder(new IssuerSerial(generateGeneralNames(cert.getIssuer()), new ASN1Integer(cert.getSerialNumber())));
+        this.holder =
+                new Holder(
+                        new IssuerSerial(
+                                generateGeneralNames(cert.getIssuer()),
+                                new ASN1Integer(cert.getSerialNumber())));
     }
 
     public AttributeCertificateHolder(X500Name principal) {
         this.holder = new Holder(generateGeneralNames(principal));
     }
 
-    public AttributeCertificateHolder(int digestedObjectType, ASN1ObjectIdentifier digestAlgorithm, ASN1ObjectIdentifier otherObjectTypeID, byte[] objectDigest) {
-        this.holder = new Holder(new ObjectDigestInfo(digestedObjectType, otherObjectTypeID, new AlgorithmIdentifier(digestAlgorithm), Arrays.clone(objectDigest)));
+    public AttributeCertificateHolder(
+            int digestedObjectType,
+            ASN1ObjectIdentifier digestAlgorithm,
+            ASN1ObjectIdentifier otherObjectTypeID,
+            byte[] objectDigest) {
+        this.holder =
+                new Holder(
+                        new ObjectDigestInfo(
+                                digestedObjectType,
+                                otherObjectTypeID,
+                                new AlgorithmIdentifier(digestAlgorithm),
+                                Arrays.clone(objectDigest)));
     }
 
     public int getDigestedObjectType() {
@@ -67,7 +85,8 @@ public class AttributeCertificateHolder implements Selector {
 
     public ASN1ObjectIdentifier getOtherObjectTypeID() {
         if (this.holder.getObjectDigestInfo() != null) {
-            new ASN1ObjectIdentifier(this.holder.getObjectDigestInfo().getOtherObjectTypeID().getId());
+            new ASN1ObjectIdentifier(
+                    this.holder.getObjectDigestInfo().getOtherObjectTypeID().getId());
             return null;
         }
         return null;
@@ -132,16 +151,24 @@ public class AttributeCertificateHolder implements Selector {
         }
         X509CertificateHolder x509Cert = (X509CertificateHolder) obj;
         if (this.holder.getBaseCertificateID() != null) {
-            return this.holder.getBaseCertificateID().getSerial().hasValue(x509Cert.getSerialNumber()) && matchesDN(x509Cert.getIssuer(), this.holder.getBaseCertificateID().getIssuer());
+            return this.holder
+                            .getBaseCertificateID()
+                            .getSerial()
+                            .hasValue(x509Cert.getSerialNumber())
+                    && matchesDN(
+                            x509Cert.getIssuer(), this.holder.getBaseCertificateID().getIssuer());
         }
-        if (this.holder.getEntityName() != null && matchesDN(x509Cert.getSubject(), this.holder.getEntityName())) {
+        if (this.holder.getEntityName() != null
+                && matchesDN(x509Cert.getSubject(), this.holder.getEntityName())) {
             return true;
         }
         if (this.holder.getObjectDigestInfo() == null) {
             return false;
         }
         try {
-            DigestCalculator digCalc = digestCalculatorProvider.get(this.holder.getObjectDigestInfo().getDigestAlgorithm());
+            DigestCalculator digCalc =
+                    digestCalculatorProvider.get(
+                            this.holder.getObjectDigestInfo().getDigestAlgorithm());
             OutputStream digOut = digCalc.getOutputStream();
             switch (getDigestedObjectType()) {
                 case 0:

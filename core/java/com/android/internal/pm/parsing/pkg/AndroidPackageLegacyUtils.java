@@ -2,13 +2,13 @@ package com.android.internal.pm.parsing.pkg;
 
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
+
 import com.android.internal.pm.pkg.parsing.ParsingPackageHidden;
 import com.android.server.pm.pkg.AndroidPackage;
 
 /* loaded from: classes5.dex */
 public class AndroidPackageLegacyUtils {
-    private AndroidPackageLegacyUtils() {
-    }
+    private AndroidPackageLegacyUtils() {}
 
     public static String getRawPrimaryCpuAbi(AndroidPackage pkg) {
         return ((AndroidPackageHidden) pkg).getPrimaryCpuAbi();

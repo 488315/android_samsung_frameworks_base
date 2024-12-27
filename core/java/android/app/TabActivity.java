@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
+
 import com.android.internal.R;
 
 @Deprecated
@@ -64,7 +65,9 @@ public class TabActivity extends ActivityGroup {
         super.onContentChanged();
         this.mTabHost = (TabHost) findViewById(16908306);
         if (this.mTabHost == null) {
-            throw new RuntimeException("Your content must have a TabHost whose id attribute is 'android.R.id.tabhost'");
+            throw new RuntimeException(
+                    "Your content must have a TabHost whose id attribute is"
+                            + " 'android.R.id.tabhost'");
         }
         this.mTabHost.setup(getLocalActivityManager());
     }
@@ -78,7 +81,9 @@ public class TabActivity extends ActivityGroup {
     @Override // android.app.Activity
     protected void onChildTitleChanged(Activity childActivity, CharSequence title) {
         View tabView;
-        if (getLocalActivityManager().getCurrentActivity() == childActivity && (tabView = this.mTabHost.getCurrentTabView()) != null && (tabView instanceof TextView)) {
+        if (getLocalActivityManager().getCurrentActivity() == childActivity
+                && (tabView = this.mTabHost.getCurrentTabView()) != null
+                && (tabView instanceof TextView)) {
             ((TextView) tabView).lambda$setTextAsync$0(title);
         }
     }

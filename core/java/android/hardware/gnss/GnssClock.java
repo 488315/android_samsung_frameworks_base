@@ -7,21 +7,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class GnssClock implements Parcelable {
-    public static final Parcelable.Creator<GnssClock> CREATOR = new Parcelable.Creator<GnssClock>() { // from class: android.hardware.gnss.GnssClock.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GnssClock createFromParcel(Parcel _aidl_source) {
-            GnssClock _aidl_out = new GnssClock();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<GnssClock> CREATOR =
+            new Parcelable.Creator<GnssClock>() { // from class: android.hardware.gnss.GnssClock.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GnssClock createFromParcel(Parcel _aidl_source) {
+                    GnssClock _aidl_out = new GnssClock();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GnssClock[] newArray(int _aidl_size) {
-            return new GnssClock[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GnssClock[] newArray(int _aidl_size) {
+                    return new GnssClock[_aidl_size];
+                }
+            };
     public static final int HAS_BIAS = 8;
     public static final int HAS_BIAS_UNCERTAINTY = 16;
     public static final int HAS_DRIFT = 32;
@@ -160,7 +161,8 @@ public class GnssClock implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.referenceSignalTypeForIsb = (GnssSignalType) _aidl_parcel.readTypedObject(GnssSignalType.CREATOR);
+                this.referenceSignalTypeForIsb =
+                        (GnssSignalType) _aidl_parcel.readTypedObject(GnssSignalType.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

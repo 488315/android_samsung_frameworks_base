@@ -10,12 +10,20 @@ import android.os.RemoteException;
 public interface IAppOpsNotedCallback extends IInterface {
     public static final String DESCRIPTOR = "com.android.internal.app.IAppOpsNotedCallback";
 
-    void opNoted(int i, int i2, String str, String str2, int i3, int i4, int i5) throws RemoteException;
+    void opNoted(int i, int i2, String str, String str2, int i3, int i4, int i5)
+            throws RemoteException;
 
     public static class Default implements IAppOpsNotedCallback {
         @Override // com.android.internal.app.IAppOpsNotedCallback
-        public void opNoted(int op, int uid, String packageName, String attributionTag, int virtualDeviceId, int flags, int mode) throws RemoteException {
-        }
+        public void opNoted(
+                int op,
+                int uid,
+                String packageName,
+                String attributionTag,
+                int virtualDeviceId,
+                int flags,
+                int mode)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +31,7 @@ public interface IAppOpsNotedCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAppOpsNotedCallback {
+    public abstract static class Stub extends Binder implements IAppOpsNotedCallback {
         static final int TRANSACTION_opNoted = 1;
 
         public Stub() {
@@ -61,7 +69,8 @@ public interface IAppOpsNotedCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAppOpsNotedCallback.DESCRIPTOR);
             }
@@ -103,7 +112,15 @@ public interface IAppOpsNotedCallback extends IInterface {
             }
 
             @Override // com.android.internal.app.IAppOpsNotedCallback
-            public void opNoted(int op, int uid, String packageName, String attributionTag, int virtualDeviceId, int flags, int mode) throws RemoteException {
+            public void opNoted(
+                    int op,
+                    int uid,
+                    String packageName,
+                    String attributionTag,
+                    int virtualDeviceId,
+                    int flags,
+                    int mode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IAppOpsNotedCallback.DESCRIPTOR);

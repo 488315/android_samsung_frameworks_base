@@ -6,10 +6,12 @@ import android.hardware.broadcastradio.V2_0.AmFmBandRange$$ExternalSyntheticOutl
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.server.biometrics.BiometricHandlerProvider;
 import com.android.server.biometrics.log.BiometricContext;
 import com.android.server.biometrics.log.BiometricLogger;
 import com.android.server.biometrics.sensors.face.aidl.FaceDetectClient;
+
 import java.util.NoSuchElementException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -36,23 +38,40 @@ public abstract class BaseClientMonitor implements IBinder.DeathRecipient {
     public final class AnonymousClass1 implements ClientMonitorCallback {
         @Override // com.android.server.biometrics.sensors.ClientMonitorCallback
         public final void onClientFinished(BaseClientMonitor baseClientMonitor, boolean z) {
-            Slog.e("BaseClientMonitor", "mCallback onClientFinished: called before set (should not happen)");
+            Slog.e(
+                    "BaseClientMonitor",
+                    "mCallback onClientFinished: called before set (should not happen)");
         }
 
         @Override // com.android.server.biometrics.sensors.ClientMonitorCallback
         public final void onClientStarted(BaseClientMonitor baseClientMonitor) {
-            Slog.e("BaseClientMonitor", "mCallback onClientStarted: called before set (should not happen)");
+            Slog.e(
+                    "BaseClientMonitor",
+                    "mCallback onClientStarted: called before set (should not happen)");
         }
     }
 
-    public BaseClientMonitor(Context context, IBinder iBinder, ClientMonitorCallbackConverter clientMonitorCallbackConverter, int i, String str, int i2, int i3, BiometricLogger biometricLogger, BiometricContext biometricContext) {
+    public BaseClientMonitor(
+            Context context,
+            IBinder iBinder,
+            ClientMonitorCallbackConverter clientMonitorCallbackConverter,
+            int i,
+            String str,
+            int i2,
+            int i3,
+            BiometricLogger biometricLogger,
+            BiometricContext biometricContext) {
         int i4 = sCount;
         sCount = i4 + 1;
         this.mSequentialId = i4;
         this.mContext = context;
         this.mToken = iBinder;
         this.mRequestId = -1L;
-        this.mListener = clientMonitorCallbackConverter == null ? new ClientMonitorCallbackConverter((IBiometricSensorReceiver) new IBiometricSensorReceiver.Default()) : clientMonitorCallbackConverter;
+        this.mListener =
+                clientMonitorCallbackConverter == null
+                        ? new ClientMonitorCallbackConverter(
+                                (IBiometricSensorReceiver) new IBiometricSensorReceiver.Default())
+                        : clientMonitorCallbackConverter;
         this.mTargetUserId = i;
         this.mOwner = str;
         this.mCookie = i2;
@@ -76,28 +95,43 @@ public abstract class BaseClientMonitor implements IBinder.DeathRecipient {
 
     public final void binderDiedInternal(final boolean z) {
         int i = this.mLogger.mStatsModality;
-        BiometricHandlerProvider biometricHandlerProvider = BiometricHandlerProvider.sBiometricHandlerProvider;
-        (i == 1 ? biometricHandlerProvider.getFingerprintHandler() : i == 4 ? biometricHandlerProvider.getFaceHandler() : biometricHandlerProvider.getBiometricCallbackHandler()).post(new Runnable() { // from class: com.android.server.biometrics.sensors.BaseClientMonitor$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                BaseClientMonitor baseClientMonitor = BaseClientMonitor.this;
-                boolean z2 = z;
-                baseClientMonitor.getClass();
-                Slog.e("BaseClientMonitor", "Binder died, operation: " + baseClientMonitor);
-                if (baseClientMonitor.mAlreadyDone) {
-                    Slog.w("BaseClientMonitor", "Binder died but client is finished, ignoring");
-                    return;
-                }
-                if (baseClientMonitor.isInterruptable()) {
-                    Slog.e("BaseClientMonitor", "Binder died, cancelling client");
-                    baseClientMonitor.cancel();
-                }
-                baseClientMonitor.mToken = null;
-                if (z2) {
-                    baseClientMonitor.mListener = new ClientMonitorCallbackConverter((IBiometricSensorReceiver) new IBiometricSensorReceiver.Default());
-                }
-            }
-        });
+        BiometricHandlerProvider biometricHandlerProvider =
+                BiometricHandlerProvider.sBiometricHandlerProvider;
+        (i == 1
+                        ? biometricHandlerProvider.getFingerprintHandler()
+                        : i == 4
+                                ? biometricHandlerProvider.getFaceHandler()
+                                : biometricHandlerProvider.getBiometricCallbackHandler())
+                .post(
+                        new Runnable() { // from class:
+                                         // com.android.server.biometrics.sensors.BaseClientMonitor$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                BaseClientMonitor baseClientMonitor = BaseClientMonitor.this;
+                                boolean z2 = z;
+                                baseClientMonitor.getClass();
+                                Slog.e(
+                                        "BaseClientMonitor",
+                                        "Binder died, operation: " + baseClientMonitor);
+                                if (baseClientMonitor.mAlreadyDone) {
+                                    Slog.w(
+                                            "BaseClientMonitor",
+                                            "Binder died but client is finished, ignoring");
+                                    return;
+                                }
+                                if (baseClientMonitor.isInterruptable()) {
+                                    Slog.e("BaseClientMonitor", "Binder died, cancelling client");
+                                    baseClientMonitor.cancel();
+                                }
+                                baseClientMonitor.mToken = null;
+                                if (z2) {
+                                    baseClientMonitor.mListener =
+                                            new ClientMonitorCallbackConverter(
+                                                    (IBiometricSensorReceiver)
+                                                            new IBiometricSensorReceiver.Default());
+                                }
+                            }
+                        });
     }
 
     public void cancel() {

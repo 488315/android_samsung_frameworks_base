@@ -19,18 +19,18 @@ public final /* synthetic */ class DisplayContent$$ExternalSyntheticLambda14 imp
         int i2 = this.f$0;
         switch (i) {
             case 0:
-                if (((Task) obj).getRootTask().mTaskId == i2) {
-                }
+                if (((Task) obj).getRootTask().mTaskId == i2) {}
                 break;
             case 1:
                 WindowState windowState = (WindowState) obj;
-                if (windowState.mOwnerUid != i2 || !windowState.isFocused()) {
-                }
+                if (windowState.mOwnerUid != i2 || !windowState.isFocused()) {}
                 break;
             default:
                 WindowState windowState2 = (WindowState) obj;
-                if (windowState2.mAttrs.type != 2005 || windowState2.mOwnerUid != i2 || windowState2.mPermanentlyHidden || windowState2.mWindowRemovalAllowed) {
-                }
+                if (windowState2.mAttrs.type != 2005
+                        || windowState2.mOwnerUid != i2
+                        || windowState2.mPermanentlyHidden
+                        || windowState2.mWindowRemovalAllowed) {}
                 break;
         }
         return false;

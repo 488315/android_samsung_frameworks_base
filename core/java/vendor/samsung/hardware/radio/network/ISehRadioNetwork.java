@@ -5,12 +5,11 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import vendor.samsung.hardware.radio.network.ISehRadioNetworkIndication;
-import vendor.samsung.hardware.radio.network.ISehRadioNetworkResponse;
 
 /* loaded from: classes6.dex */
 public interface ISehRadioNetwork extends IInterface {
-    public static final String DESCRIPTOR = "vendor$samsung$hardware$radio$network$ISehRadioNetwork".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "vendor$samsung$hardware$radio$network$ISehRadioNetwork".replace('$', '.');
     public static final String HASH = "8fb94cb4cf759f224987eb2d1908582a1f6f1600";
     public static final int VERSION = 1;
 
@@ -48,7 +47,8 @@ public interface ISehRadioNetwork extends IInterface {
 
     void sendRequestStrings(int i, String[] strArr) throws RemoteException;
 
-    void setCurrentNetworkInfoViaBLE(int i, SehCurrentNetworkInfo[] sehCurrentNetworkInfoArr) throws RemoteException;
+    void setCurrentNetworkInfoViaBLE(int i, SehCurrentNetworkInfo[] sehCurrentNetworkInfoArr)
+            throws RemoteException;
 
     void setDisable2g(int i, int i2) throws RemoteException;
 
@@ -56,112 +56,103 @@ public interface ISehRadioNetwork extends IInterface {
 
     void setNrMode(int i, int i2, boolean z) throws RemoteException;
 
-    void setPreferredNetworkList(int i, SehPreferredNetworkInfo sehPreferredNetworkInfo) throws RemoteException;
+    void setPreferredNetworkList(int i, SehPreferredNetworkInfo sehPreferredNetworkInfo)
+            throws RemoteException;
 
-    void setResponseFunctions(ISehRadioNetworkResponse iSehRadioNetworkResponse, ISehRadioNetworkIndication iSehRadioNetworkIndication) throws RemoteException;
+    void setResponseFunctions(
+            ISehRadioNetworkResponse iSehRadioNetworkResponse,
+            ISehRadioNetworkIndication iSehRadioNetworkIndication)
+            throws RemoteException;
 
-    void setRoamingNetworkInfoViaBLE(int i, SehRoamingNetworkInfo[] sehRoamingNetworkInfoArr) throws RemoteException;
+    void setRoamingNetworkInfoViaBLE(int i, SehRoamingNetworkInfo[] sehRoamingNetworkInfoArr)
+            throws RemoteException;
 
     void setScanResultViaBLE(int i, byte b, byte b2) throws RemoteException;
 
-    void setVendorSpecificConfiguration(int i, SehVendorConfiguration[] sehVendorConfigurationArr) throws RemoteException;
+    void setVendorSpecificConfiguration(int i, SehVendorConfiguration[] sehVendorConfigurationArr)
+            throws RemoteException;
 
     public static class Default implements ISehRadioNetwork {
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-        public void emergencyControl(int serial, int command) throws RemoteException {
-        }
+        public void emergencyControl(int serial, int command) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-        public void emergencySearch(int serial) throws RemoteException {
-        }
+        public void emergencySearch(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-        public void getAvailableNetworks(int serial) throws RemoteException {
-        }
+        public void getAvailableNetworks(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-        public void getCnap(int serial) throws RemoteException {
-        }
+        public void getCnap(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-        public void getCsgList(int serial) throws RemoteException {
-        }
+        public void getCsgList(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-        public void getDisable2g(int serial) throws RemoteException {
-        }
+        public void getDisable2g(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-        public void getNrIconType(int serial) throws RemoteException {
-        }
+        public void getNrIconType(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-        public void getNrMode(int serial) throws RemoteException {
-        }
+        public void getNrMode(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-        public void getPreferredNetworkList(int serial) throws RemoteException {
-        }
+        public void getPreferredNetworkList(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-        public void getRoamingNetworkInfoViaBLE(int serial, byte mode, String homePlmn) throws RemoteException {
-        }
+        public void getRoamingNetworkInfoViaBLE(int serial, byte mode, String homePlmn)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-        public void getVendorSpecificConfiguration(int serial) throws RemoteException {
-        }
+        public void getVendorSpecificConfiguration(int serial) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-        public void selectCsgManual(int serial, SehCsgInfo csgInfo) throws RemoteException {
-        }
+        public void selectCsgManual(int serial, SehCsgInfo csgInfo) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-        public void sendEncodedUssd(int serial, SehEncodedUssd encodedUssd) throws RemoteException {
-        }
+        public void sendEncodedUssd(int serial, SehEncodedUssd encodedUssd)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-        public void sendRequestRaw(int serial, byte[] data) throws RemoteException {
-        }
+        public void sendRequestRaw(int serial, byte[] data) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-        public void sendRequestStrings(int serial, String[] data) throws RemoteException {
-        }
+        public void sendRequestStrings(int serial, String[] data) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-        public void setCurrentNetworkInfoViaBLE(int serial, SehCurrentNetworkInfo[] networkInfo) throws RemoteException {
-        }
+        public void setCurrentNetworkInfoViaBLE(int serial, SehCurrentNetworkInfo[] networkInfo)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-        public void setDisable2g(int serial, int on) throws RemoteException {
-        }
+        public void setDisable2g(int serial, int on) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-        public void setImsCallList(int serial, SehImsCall[] imsCalls) throws RemoteException {
-        }
+        public void setImsCallList(int serial, SehImsCall[] imsCalls) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-        public void setNrMode(int serial, int mode, boolean force) throws RemoteException {
-        }
+        public void setNrMode(int serial, int mode, boolean force) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-        public void setPreferredNetworkList(int serial, SehPreferredNetworkInfo info) throws RemoteException {
-        }
+        public void setPreferredNetworkList(int serial, SehPreferredNetworkInfo info)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-        public void setResponseFunctions(ISehRadioNetworkResponse radioResponse, ISehRadioNetworkIndication radioIndication) throws RemoteException {
-        }
+        public void setResponseFunctions(
+                ISehRadioNetworkResponse radioResponse, ISehRadioNetworkIndication radioIndication)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-        public void setRoamingNetworkInfoViaBLE(int serial, SehRoamingNetworkInfo[] networkInfo) throws RemoteException {
-        }
+        public void setRoamingNetworkInfoViaBLE(int serial, SehRoamingNetworkInfo[] networkInfo)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-        public void setScanResultViaBLE(int serial, byte result, byte scanType) throws RemoteException {
-        }
+        public void setScanResultViaBLE(int serial, byte result, byte scanType)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-        public void setVendorSpecificConfiguration(int serial, SehVendorConfiguration[] configurations) throws RemoteException {
-        }
+        public void setVendorSpecificConfiguration(
+                int serial, SehVendorConfiguration[] configurations) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
         public int getInterfaceVersion() {
@@ -179,7 +170,7 @@ public interface ISehRadioNetwork extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISehRadioNetwork {
+    public abstract static class Stub extends Binder implements ISehRadioNetwork {
         static final int TRANSACTION_emergencyControl = 1;
         static final int TRANSACTION_emergencySearch = 2;
         static final int TRANSACTION_getAvailableNetworks = 3;
@@ -229,7 +220,8 @@ public interface ISehRadioNetwork extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -315,7 +307,8 @@ public interface ISehRadioNetwork extends IInterface {
                     return true;
                 case 13:
                     int _arg013 = data.readInt();
-                    SehEncodedUssd _arg14 = (SehEncodedUssd) data.readTypedObject(SehEncodedUssd.CREATOR);
+                    SehEncodedUssd _arg14 =
+                            (SehEncodedUssd) data.readTypedObject(SehEncodedUssd.CREATOR);
                     data.enforceNoDataAvail();
                     sendEncodedUssd(_arg013, _arg14);
                     return true;
@@ -333,7 +326,9 @@ public interface ISehRadioNetwork extends IInterface {
                     return true;
                 case 16:
                     int _arg016 = data.readInt();
-                    SehCurrentNetworkInfo[] _arg17 = (SehCurrentNetworkInfo[]) data.createTypedArray(SehCurrentNetworkInfo.CREATOR);
+                    SehCurrentNetworkInfo[] _arg17 =
+                            (SehCurrentNetworkInfo[])
+                                    data.createTypedArray(SehCurrentNetworkInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setCurrentNetworkInfoViaBLE(_arg016, _arg17);
                     return true;
@@ -358,20 +353,26 @@ public interface ISehRadioNetwork extends IInterface {
                     return true;
                 case 20:
                     int _arg020 = data.readInt();
-                    SehPreferredNetworkInfo _arg111 = (SehPreferredNetworkInfo) data.readTypedObject(SehPreferredNetworkInfo.CREATOR);
+                    SehPreferredNetworkInfo _arg111 =
+                            (SehPreferredNetworkInfo)
+                                    data.readTypedObject(SehPreferredNetworkInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setPreferredNetworkList(_arg020, _arg111);
                     return true;
                 case 21:
-                    ISehRadioNetworkResponse _arg021 = ISehRadioNetworkResponse.Stub.asInterface(data.readStrongBinder());
-                    ISehRadioNetworkIndication _arg112 = ISehRadioNetworkIndication.Stub.asInterface(data.readStrongBinder());
+                    ISehRadioNetworkResponse _arg021 =
+                            ISehRadioNetworkResponse.Stub.asInterface(data.readStrongBinder());
+                    ISehRadioNetworkIndication _arg112 =
+                            ISehRadioNetworkIndication.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setResponseFunctions(_arg021, _arg112);
                     reply.writeNoException();
                     return true;
                 case 22:
                     int _arg022 = data.readInt();
-                    SehRoamingNetworkInfo[] _arg113 = (SehRoamingNetworkInfo[]) data.createTypedArray(SehRoamingNetworkInfo.CREATOR);
+                    SehRoamingNetworkInfo[] _arg113 =
+                            (SehRoamingNetworkInfo[])
+                                    data.createTypedArray(SehRoamingNetworkInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setRoamingNetworkInfoViaBLE(_arg022, _arg113);
                     return true;
@@ -384,7 +385,9 @@ public interface ISehRadioNetwork extends IInterface {
                     return true;
                 case 24:
                     int _arg024 = data.readInt();
-                    SehVendorConfiguration[] _arg115 = (SehVendorConfiguration[]) data.createTypedArray(SehVendorConfiguration.CREATOR);
+                    SehVendorConfiguration[] _arg115 =
+                            (SehVendorConfiguration[])
+                                    data.createTypedArray(SehVendorConfiguration.CREATOR);
                     data.enforceNoDataAvail();
                     setVendorSpecificConfiguration(_arg024, _arg115);
                     return true;
@@ -540,7 +543,8 @@ public interface ISehRadioNetwork extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(9, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getPreferredNetworkList is unimplemented.");
+                        throw new RemoteException(
+                                "Method getPreferredNetworkList is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -548,7 +552,8 @@ public interface ISehRadioNetwork extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-            public void getRoamingNetworkInfoViaBLE(int serial, byte mode, String homePlmn) throws RemoteException {
+            public void getRoamingNetworkInfoViaBLE(int serial, byte mode, String homePlmn)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -557,7 +562,8 @@ public interface ISehRadioNetwork extends IInterface {
                     _data.writeString(homePlmn);
                     boolean _status = this.mRemote.transact(10, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getRoamingNetworkInfoViaBLE is unimplemented.");
+                        throw new RemoteException(
+                                "Method getRoamingNetworkInfoViaBLE is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -572,7 +578,8 @@ public interface ISehRadioNetwork extends IInterface {
                     _data.writeInt(serial);
                     boolean _status = this.mRemote.transact(11, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getVendorSpecificConfiguration is unimplemented.");
+                        throw new RemoteException(
+                                "Method getVendorSpecificConfiguration is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -596,7 +603,8 @@ public interface ISehRadioNetwork extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-            public void sendEncodedUssd(int serial, SehEncodedUssd encodedUssd) throws RemoteException {
+            public void sendEncodedUssd(int serial, SehEncodedUssd encodedUssd)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -644,7 +652,8 @@ public interface ISehRadioNetwork extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-            public void setCurrentNetworkInfoViaBLE(int serial, SehCurrentNetworkInfo[] networkInfo) throws RemoteException {
+            public void setCurrentNetworkInfoViaBLE(int serial, SehCurrentNetworkInfo[] networkInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -652,7 +661,8 @@ public interface ISehRadioNetwork extends IInterface {
                     _data.writeTypedArray(networkInfo, 0);
                     boolean _status = this.mRemote.transact(16, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setCurrentNetworkInfoViaBLE is unimplemented.");
+                        throw new RemoteException(
+                                "Method setCurrentNetworkInfoViaBLE is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -709,7 +719,8 @@ public interface ISehRadioNetwork extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-            public void setPreferredNetworkList(int serial, SehPreferredNetworkInfo info) throws RemoteException {
+            public void setPreferredNetworkList(int serial, SehPreferredNetworkInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -717,7 +728,8 @@ public interface ISehRadioNetwork extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(20, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setPreferredNetworkList is unimplemented.");
+                        throw new RemoteException(
+                                "Method setPreferredNetworkList is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -725,7 +737,10 @@ public interface ISehRadioNetwork extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-            public void setResponseFunctions(ISehRadioNetworkResponse radioResponse, ISehRadioNetworkIndication radioIndication) throws RemoteException {
+            public void setResponseFunctions(
+                    ISehRadioNetworkResponse radioResponse,
+                    ISehRadioNetworkIndication radioIndication)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -744,7 +759,8 @@ public interface ISehRadioNetwork extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-            public void setRoamingNetworkInfoViaBLE(int serial, SehRoamingNetworkInfo[] networkInfo) throws RemoteException {
+            public void setRoamingNetworkInfoViaBLE(int serial, SehRoamingNetworkInfo[] networkInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -752,7 +768,8 @@ public interface ISehRadioNetwork extends IInterface {
                     _data.writeTypedArray(networkInfo, 0);
                     boolean _status = this.mRemote.transact(22, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setRoamingNetworkInfoViaBLE is unimplemented.");
+                        throw new RemoteException(
+                                "Method setRoamingNetworkInfoViaBLE is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -760,7 +777,8 @@ public interface ISehRadioNetwork extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-            public void setScanResultViaBLE(int serial, byte result, byte scanType) throws RemoteException {
+            public void setScanResultViaBLE(int serial, byte result, byte scanType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -777,7 +795,8 @@ public interface ISehRadioNetwork extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.network.ISehRadioNetwork
-            public void setVendorSpecificConfiguration(int serial, SehVendorConfiguration[] configurations) throws RemoteException {
+            public void setVendorSpecificConfiguration(
+                    int serial, SehVendorConfiguration[] configurations) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -785,7 +804,8 @@ public interface ISehRadioNetwork extends IInterface {
                     _data.writeTypedArray(configurations, 0);
                     boolean _status = this.mRemote.transact(24, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setVendorSpecificConfiguration is unimplemented.");
+                        throw new RemoteException(
+                                "Method setVendorSpecificConfiguration is unimplemented.");
                     }
                 } finally {
                     _data.recycle();

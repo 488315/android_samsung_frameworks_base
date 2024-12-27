@@ -3,17 +3,19 @@ package android.preference;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.preference.GenericInflater;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+
 import com.android.internal.R;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 @Deprecated
 /* loaded from: classes3.dex */
-public abstract class PreferenceGroup extends Preference implements GenericInflater.Parent<Preference> {
+public abstract class PreferenceGroup extends Preference
+        implements GenericInflater.Parent<Preference> {
     private boolean mAttachedToActivity;
     int mCategoryBGColor;
     private int mCurrentPreferenceOrder;
@@ -29,7 +31,9 @@ public abstract class PreferenceGroup extends Preference implements GenericInfla
         this.mIsChangedCategoryBG = false;
         this.mCategoryBGColor = 0;
         this.mPreferenceList = new ArrayList();
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.PreferenceGroup, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.PreferenceGroup, defStyleAttr, defStyleRes);
         this.mOrderingAsAdded = a.getBoolean(0, this.mOrderingAsAdded);
         a.recycle();
     }
@@ -141,7 +145,9 @@ public abstract class PreferenceGroup extends Preference implements GenericInfla
             if (curKey != null && curKey.equals(key)) {
                 return preference;
             }
-            if ((preference instanceof PreferenceGroup) && (returnedPreference = ((PreferenceGroup) preference).findPreference(key)) != null) {
+            if ((preference instanceof PreferenceGroup)
+                    && (returnedPreference = ((PreferenceGroup) preference).findPreference(key))
+                            != null) {
                 return returnedPreference;
             }
         }

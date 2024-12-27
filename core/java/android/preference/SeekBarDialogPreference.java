@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+
 import com.android.internal.R;
 
 @Deprecated
@@ -13,7 +14,8 @@ import com.android.internal.R;
 public class SeekBarDialogPreference extends DialogPreference {
     private final Drawable mMyIcon;
 
-    public SeekBarDialogPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public SeekBarDialogPreference(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         createActionButtons();
         this.mMyIcon = getDialogIcon();

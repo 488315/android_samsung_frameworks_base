@@ -5,11 +5,14 @@ import android.os.IBinder;
 import android.os.Process;
 import android.os.RemoteException;
 import android.util.Log;
+
 import dalvik.system.CloseGuard;
+
+import libcore.io.IoUtils;
+
 import java.io.Closeable;
 import java.io.FileDescriptor;
 import java.io.IOException;
-import libcore.io.IoUtils;
 
 /* loaded from: classes2.dex */
 public final class MidiDevice implements Closeable {
@@ -67,7 +70,12 @@ public final class MidiDevice implements Closeable {
         }
     }
 
-    MidiDevice(MidiDeviceInfo deviceInfo, IMidiDeviceServer server, IMidiManager midiManager, IBinder clientToken, IBinder deviceToken) {
+    MidiDevice(
+            MidiDeviceInfo deviceInfo,
+            IMidiDeviceServer server,
+            IMidiManager midiManager,
+            IBinder clientToken,
+            IBinder deviceToken) {
         this.mDeviceInfo = deviceInfo;
         this.mDeviceServer = server;
         this.mDeviceServerBinder = this.mDeviceServer.asBinder();
@@ -140,7 +148,10 @@ public final class MidiDevice implements Closeable {
     public void close() throws IOException {
         synchronized (this.mGuard) {
             if (this.mNativeHandle != 0) {
-                Log.w(TAG, "MidiDevice#close() called while there is an outstanding native client 0x" + Long.toHexString(this.mNativeHandle));
+                Log.w(
+                        TAG,
+                        "MidiDevice#close() called while there is an outstanding native client 0x"
+                                + Long.toHexString(this.mNativeHandle));
             }
             if (!this.mIsDeviceClosed && this.mNativeHandle == 0) {
                 this.mGuard.close();

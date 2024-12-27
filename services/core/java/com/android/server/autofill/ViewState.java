@@ -23,8 +23,7 @@ public final class ViewState {
     public Rect mVirtualBounds;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface Listener {
-    }
+    public interface Listener {}
 
     public ViewState(AutofillId autofillId, Listener listener, int i, boolean z) {
         this.id = autofillId;
@@ -38,9 +37,9 @@ public final class ViewState {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:151:0x0041, code lost:
-    
-        r2 = r17.mPrimaryFillResponse;
-     */
+
+       r2 = r17.mPrimaryFillResponse;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r7v3, types: [com.android.server.autofill.ui.AutoFillUI$$ExternalSyntheticLambda9, java.lang.Runnable] */
     /*
@@ -52,7 +51,9 @@ public final class ViewState {
             Method dump skipped, instructions count: 705
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.autofill.ViewState.maybeCallOnFillReady(int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.autofill.ViewState.maybeCallOnFillReady(int):void");
     }
 
     public final void resetState(int i) {

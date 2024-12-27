@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.samsung.android.desktopmode.IDesktopModeUiServiceCallback;
 
 /* loaded from: classes6.dex */
 public interface IDesktopModeUiService extends IInterface {
@@ -31,15 +30,18 @@ public interface IDesktopModeUiService extends IInterface {
 
     void removeNotification(int i) throws RemoteException;
 
-    void showDialog(int i, int i2, IDesktopModeUiServiceCallback iDesktopModeUiServiceCallback) throws RemoteException;
+    void showDialog(int i, int i2, IDesktopModeUiServiceCallback iDesktopModeUiServiceCallback)
+            throws RemoteException;
 
     void showNavBarIcon(int i) throws RemoteException;
 
     void showNotification(int i) throws RemoteException;
 
-    void showOverlay(int i, int i2, IDesktopModeUiServiceCallback iDesktopModeUiServiceCallback) throws RemoteException;
+    void showOverlay(int i, int i2, IDesktopModeUiServiceCallback iDesktopModeUiServiceCallback)
+            throws RemoteException;
 
-    void startActivity(int i, int i2, IDesktopModeUiServiceCallback iDesktopModeUiServiceCallback) throws RemoteException;
+    void startActivity(int i, int i2, IDesktopModeUiServiceCallback iDesktopModeUiServiceCallback)
+            throws RemoteException;
 
     public static class Default implements IDesktopModeUiService {
         @Override // com.samsung.android.desktopmode.IDesktopModeUiService
@@ -48,12 +50,11 @@ public interface IDesktopModeUiService extends IInterface {
         }
 
         @Override // com.samsung.android.desktopmode.IDesktopModeUiService
-        public void showDialog(int displayId, int type, IDesktopModeUiServiceCallback callback) throws RemoteException {
-        }
+        public void showDialog(int displayId, int type, IDesktopModeUiServiceCallback callback)
+                throws RemoteException {}
 
         @Override // com.samsung.android.desktopmode.IDesktopModeUiService
-        public void dismissDialog(int displayId, int type) throws RemoteException {
-        }
+        public void dismissDialog(int displayId, int type) throws RemoteException {}
 
         @Override // com.samsung.android.desktopmode.IDesktopModeUiService
         public int getCurrentDialogType() throws RemoteException {
@@ -61,12 +62,11 @@ public interface IDesktopModeUiService extends IInterface {
         }
 
         @Override // com.samsung.android.desktopmode.IDesktopModeUiService
-        public void showOverlay(int where, int type, IDesktopModeUiServiceCallback callback) throws RemoteException {
-        }
+        public void showOverlay(int where, int type, IDesktopModeUiServiceCallback callback)
+                throws RemoteException {}
 
         @Override // com.samsung.android.desktopmode.IDesktopModeUiService
-        public void dismissOverlay(int where, int type) throws RemoteException {
-        }
+        public void dismissOverlay(int where, int type) throws RemoteException {}
 
         @Override // com.samsung.android.desktopmode.IDesktopModeUiService
         public int getCurrentOverlayType(int where) throws RemoteException {
@@ -79,20 +79,17 @@ public interface IDesktopModeUiService extends IInterface {
         }
 
         @Override // com.samsung.android.desktopmode.IDesktopModeUiService
-        public void showNotification(int type) throws RemoteException {
-        }
+        public void showNotification(int type) throws RemoteException {}
 
         @Override // com.samsung.android.desktopmode.IDesktopModeUiService
-        public void removeNotification(int type) throws RemoteException {
-        }
+        public void removeNotification(int type) throws RemoteException {}
 
         @Override // com.samsung.android.desktopmode.IDesktopModeUiService
-        public void startActivity(int displayId, int type, IDesktopModeUiServiceCallback callback) throws RemoteException {
-        }
+        public void startActivity(int displayId, int type, IDesktopModeUiServiceCallback callback)
+                throws RemoteException {}
 
         @Override // com.samsung.android.desktopmode.IDesktopModeUiService
-        public void finishActivity(int type) throws RemoteException {
-        }
+        public void finishActivity(int type) throws RemoteException {}
 
         @Override // com.samsung.android.desktopmode.IDesktopModeUiService
         public boolean isActivityShowing(int type) throws RemoteException {
@@ -100,12 +97,10 @@ public interface IDesktopModeUiService extends IInterface {
         }
 
         @Override // com.samsung.android.desktopmode.IDesktopModeUiService
-        public void showNavBarIcon(int type) throws RemoteException {
-        }
+        public void showNavBarIcon(int type) throws RemoteException {}
 
         @Override // com.samsung.android.desktopmode.IDesktopModeUiService
-        public void removeNavBarIcon(int type) throws RemoteException {
-        }
+        public void removeNavBarIcon(int type) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -113,7 +108,7 @@ public interface IDesktopModeUiService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDesktopModeUiService {
+    public abstract static class Stub extends Binder implements IDesktopModeUiService {
         static final int TRANSACTION_dismissDialog = 3;
         static final int TRANSACTION_dismissOverlay = 6;
         static final int TRANSACTION_finishActivity = 12;
@@ -193,7 +188,8 @@ public interface IDesktopModeUiService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDesktopModeUiService.DESCRIPTOR);
             }
@@ -210,7 +206,8 @@ public interface IDesktopModeUiService extends IInterface {
                 case 2:
                     int _arg0 = data.readInt();
                     int _arg1 = data.readInt();
-                    IDesktopModeUiServiceCallback _arg2 = IDesktopModeUiServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    IDesktopModeUiServiceCallback _arg2 =
+                            IDesktopModeUiServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     showDialog(_arg0, _arg1, _arg2);
                     reply.writeNoException();
@@ -230,7 +227,8 @@ public interface IDesktopModeUiService extends IInterface {
                 case 5:
                     int _arg03 = data.readInt();
                     int _arg13 = data.readInt();
-                    IDesktopModeUiServiceCallback _arg22 = IDesktopModeUiServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    IDesktopModeUiServiceCallback _arg22 =
+                            IDesktopModeUiServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     showOverlay(_arg03, _arg13, _arg22);
                     reply.writeNoException();
@@ -272,7 +270,8 @@ public interface IDesktopModeUiService extends IInterface {
                 case 11:
                     int _arg09 = data.readInt();
                     int _arg16 = data.readInt();
-                    IDesktopModeUiServiceCallback _arg23 = IDesktopModeUiServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    IDesktopModeUiServiceCallback _arg23 =
+                            IDesktopModeUiServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     startActivity(_arg09, _arg16, _arg23);
                     reply.writeNoException();
@@ -340,7 +339,8 @@ public interface IDesktopModeUiService extends IInterface {
             }
 
             @Override // com.samsung.android.desktopmode.IDesktopModeUiService
-            public void showDialog(int displayId, int type, IDesktopModeUiServiceCallback callback) throws RemoteException {
+            public void showDialog(int displayId, int type, IDesktopModeUiServiceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -389,7 +389,8 @@ public interface IDesktopModeUiService extends IInterface {
             }
 
             @Override // com.samsung.android.desktopmode.IDesktopModeUiService
-            public void showOverlay(int where, int type, IDesktopModeUiServiceCallback callback) throws RemoteException {
+            public void showOverlay(int where, int type, IDesktopModeUiServiceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -487,7 +488,9 @@ public interface IDesktopModeUiService extends IInterface {
             }
 
             @Override // com.samsung.android.desktopmode.IDesktopModeUiService
-            public void startActivity(int displayId, int type, IDesktopModeUiServiceCallback callback) throws RemoteException {
+            public void startActivity(
+                    int displayId, int type, IDesktopModeUiServiceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

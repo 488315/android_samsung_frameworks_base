@@ -1,28 +1,30 @@
 package android.app.time;
 
 import android.annotation.SystemApi;
-import android.app.time.TimeZoneConfiguration;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.UserHandle;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class TimeZoneCapabilities implements Parcelable {
-    public static final Parcelable.Creator<TimeZoneCapabilities> CREATOR = new Parcelable.Creator<TimeZoneCapabilities>() { // from class: android.app.time.TimeZoneCapabilities.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TimeZoneCapabilities createFromParcel(Parcel in) {
-            return TimeZoneCapabilities.createFromParcel(in);
-        }
+    public static final Parcelable.Creator<TimeZoneCapabilities> CREATOR =
+            new Parcelable.Creator<
+                    TimeZoneCapabilities>() { // from class: android.app.time.TimeZoneCapabilities.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TimeZoneCapabilities createFromParcel(Parcel in) {
+                    return TimeZoneCapabilities.createFromParcel(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TimeZoneCapabilities[] newArray(int size) {
-            return new TimeZoneCapabilities[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TimeZoneCapabilities[] newArray(int size) {
+                    return new TimeZoneCapabilities[size];
+                }
+            };
     private final int mConfigureAutoDetectionEnabledCapability;
     private final int mConfigureGeoDetectionEnabledCapability;
     private final int mSetManualTimeZoneCapability;
@@ -31,16 +33,23 @@ public final class TimeZoneCapabilities implements Parcelable {
 
     private TimeZoneCapabilities(Builder builder) {
         this.mUserHandle = (UserHandle) Objects.requireNonNull(builder.mUserHandle);
-        this.mConfigureAutoDetectionEnabledCapability = builder.mConfigureAutoDetectionEnabledCapability;
+        this.mConfigureAutoDetectionEnabledCapability =
+                builder.mConfigureAutoDetectionEnabledCapability;
         this.mUseLocationEnabled = builder.mUseLocationEnabled.booleanValue();
-        this.mConfigureGeoDetectionEnabledCapability = builder.mConfigureGeoDetectionEnabledCapability;
+        this.mConfigureGeoDetectionEnabledCapability =
+                builder.mConfigureGeoDetectionEnabledCapability;
         this.mSetManualTimeZoneCapability = builder.mSetManualTimeZoneCapability;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public static TimeZoneCapabilities createFromParcel(Parcel in) {
         UserHandle userHandle = UserHandle.readFromParcel(in);
-        return new Builder(userHandle).setConfigureAutoDetectionEnabledCapability(in.readInt()).setUseLocationEnabled(in.readBoolean()).setConfigureGeoDetectionEnabledCapability(in.readInt()).setSetManualTimeZoneCapability(in.readInt()).build();
+        return new Builder(userHandle)
+                .setConfigureAutoDetectionEnabledCapability(in.readInt())
+                .setUseLocationEnabled(in.readBoolean())
+                .setConfigureGeoDetectionEnabledCapability(in.readInt())
+                .setSetManualTimeZoneCapability(in.readInt())
+                .build();
     }
 
     @Override // android.os.Parcelable
@@ -68,7 +77,8 @@ public final class TimeZoneCapabilities implements Parcelable {
         return this.mSetManualTimeZoneCapability;
     }
 
-    public TimeZoneConfiguration tryApplyConfigChanges(TimeZoneConfiguration config, TimeZoneConfiguration requestedChanges) {
+    public TimeZoneConfiguration tryApplyConfigChanges(
+            TimeZoneConfiguration config, TimeZoneConfiguration requestedChanges) {
         TimeZoneConfiguration.Builder newConfigBuilder = new TimeZoneConfiguration.Builder(config);
         if (requestedChanges.hasIsAutoDetectionEnabled()) {
             if (getConfigureAutoDetectionEnabledCapability() < 30) {
@@ -98,18 +108,38 @@ public final class TimeZoneCapabilities implements Parcelable {
             return false;
         }
         TimeZoneCapabilities that = (TimeZoneCapabilities) o;
-        if (this.mUserHandle.equals(that.mUserHandle) && this.mConfigureAutoDetectionEnabledCapability == that.mConfigureAutoDetectionEnabledCapability && this.mUseLocationEnabled == that.mUseLocationEnabled && this.mConfigureGeoDetectionEnabledCapability == that.mConfigureGeoDetectionEnabledCapability && this.mSetManualTimeZoneCapability == that.mSetManualTimeZoneCapability) {
+        if (this.mUserHandle.equals(that.mUserHandle)
+                && this.mConfigureAutoDetectionEnabledCapability
+                        == that.mConfigureAutoDetectionEnabledCapability
+                && this.mUseLocationEnabled == that.mUseLocationEnabled
+                && this.mConfigureGeoDetectionEnabledCapability
+                        == that.mConfigureGeoDetectionEnabledCapability
+                && this.mSetManualTimeZoneCapability == that.mSetManualTimeZoneCapability) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(this.mUserHandle, Integer.valueOf(this.mConfigureAutoDetectionEnabledCapability), Integer.valueOf(this.mConfigureGeoDetectionEnabledCapability), Integer.valueOf(this.mSetManualTimeZoneCapability));
+        return Objects.hash(
+                this.mUserHandle,
+                Integer.valueOf(this.mConfigureAutoDetectionEnabledCapability),
+                Integer.valueOf(this.mConfigureGeoDetectionEnabledCapability),
+                Integer.valueOf(this.mSetManualTimeZoneCapability));
     }
 
     public String toString() {
-        return "TimeZoneDetectorCapabilities{mUserHandle=" + this.mUserHandle + ", mConfigureAutoDetectionEnabledCapability=" + this.mConfigureAutoDetectionEnabledCapability + ", mUseLocationEnabled=" + this.mUseLocationEnabled + ", mConfigureGeoDetectionEnabledCapability=" + this.mConfigureGeoDetectionEnabledCapability + ", mSetManualTimeZoneCapability=" + this.mSetManualTimeZoneCapability + '}';
+        return "TimeZoneDetectorCapabilities{mUserHandle="
+                + this.mUserHandle
+                + ", mConfigureAutoDetectionEnabledCapability="
+                + this.mConfigureAutoDetectionEnabledCapability
+                + ", mUseLocationEnabled="
+                + this.mUseLocationEnabled
+                + ", mConfigureGeoDetectionEnabledCapability="
+                + this.mConfigureGeoDetectionEnabledCapability
+                + ", mSetManualTimeZoneCapability="
+                + this.mSetManualTimeZoneCapability
+                + '}';
     }
 
     public static class Builder {
@@ -126,9 +156,11 @@ public final class TimeZoneCapabilities implements Parcelable {
         public Builder(TimeZoneCapabilities capabilitiesToCopy) {
             Objects.requireNonNull(capabilitiesToCopy);
             this.mUserHandle = capabilitiesToCopy.mUserHandle;
-            this.mConfigureAutoDetectionEnabledCapability = capabilitiesToCopy.mConfigureAutoDetectionEnabledCapability;
+            this.mConfigureAutoDetectionEnabledCapability =
+                    capabilitiesToCopy.mConfigureAutoDetectionEnabledCapability;
             this.mUseLocationEnabled = Boolean.valueOf(capabilitiesToCopy.mUseLocationEnabled);
-            this.mConfigureGeoDetectionEnabledCapability = capabilitiesToCopy.mConfigureGeoDetectionEnabledCapability;
+            this.mConfigureGeoDetectionEnabledCapability =
+                    capabilitiesToCopy.mConfigureGeoDetectionEnabledCapability;
             this.mSetManualTimeZoneCapability = capabilitiesToCopy.mSetManualTimeZoneCapability;
         }
 
@@ -153,9 +185,13 @@ public final class TimeZoneCapabilities implements Parcelable {
         }
 
         public TimeZoneCapabilities build() {
-            verifyCapabilitySet(this.mConfigureAutoDetectionEnabledCapability, "configureAutoDetectionEnabledCapability");
+            verifyCapabilitySet(
+                    this.mConfigureAutoDetectionEnabledCapability,
+                    "configureAutoDetectionEnabledCapability");
             Objects.requireNonNull(this.mUseLocationEnabled, "useLocationEnabled");
-            verifyCapabilitySet(this.mConfigureGeoDetectionEnabledCapability, "configureGeoDetectionEnabledCapability");
+            verifyCapabilitySet(
+                    this.mConfigureGeoDetectionEnabledCapability,
+                    "configureGeoDetectionEnabledCapability");
             verifyCapabilitySet(this.mSetManualTimeZoneCapability, "mSetManualTimeZoneCapability");
             return new TimeZoneCapabilities(this);
         }

@@ -1,11 +1,11 @@
 package android.media;
 
 import android.content.Context;
-import android.media.AudioAttributes;
 import android.net.Uri;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.util.Log;
+
 import java.util.LinkedList;
 
 /* loaded from: classes2.dex */
@@ -28,11 +28,18 @@ public class AsyncPlayer {
         long requestTime;
         Uri uri;
 
-        private Command() {
-        }
+        private Command() {}
 
         public String toString() {
-            return "{ code=" + this.code + " looping=" + this.looping + " attr=" + this.attributes + " uri=" + this.uri + " }";
+            return "{ code="
+                    + this.code
+                    + " looping="
+                    + this.looping
+                    + " attr="
+                    + this.attributes
+                    + " uri="
+                    + this.uri
+                    + " }";
         }
     }
 
@@ -78,7 +85,9 @@ public class AsyncPlayer {
                         if (AsyncPlayer.this.mPlayer != null) {
                             long delay = SystemClock.uptimeMillis() - cmd.requestTime;
                             if (delay > 1000) {
-                                Log.w(AsyncPlayer.this.mTag, "Notification stop delayed by " + delay + "msecs");
+                                Log.w(
+                                        AsyncPlayer.this.mTag,
+                                        "Notification stop delayed by " + delay + "msecs");
                             }
                             AsyncPlayer.this.mPlayer.stop();
                             AsyncPlayer.this.mPlayer.release();
@@ -114,13 +123,18 @@ public class AsyncPlayer {
             return;
         }
         try {
-            play(context, uri, looping, new AudioAttributes.Builder().setInternalLegacyStreamType(stream).build());
+            play(
+                    context,
+                    uri,
+                    looping,
+                    new AudioAttributes.Builder().setInternalLegacyStreamType(stream).build());
         } catch (IllegalArgumentException e) {
             Log.e(this.mTag, "Call to deprecated AsyncPlayer.play() method caused:", e);
         }
     }
 
-    public void play(Context context, Uri uri, boolean looping, AudioAttributes attributes) throws IllegalArgumentException {
+    public void play(Context context, Uri uri, boolean looping, AudioAttributes attributes)
+            throws IllegalArgumentException {
         if (context == null || uri == null || attributes == null) {
             throw new IllegalArgumentException("Illegal null AsyncPlayer.play() argument");
         }
@@ -160,7 +174,8 @@ public class AsyncPlayer {
 
     public void setUsesWakeLock(Context context) {
         if (this.mWakeLock != null || this.mThread != null) {
-            throw new RuntimeException("assertion failed mWakeLock=" + this.mWakeLock + " mThread=" + this.mThread);
+            throw new RuntimeException(
+                    "assertion failed mWakeLock=" + this.mWakeLock + " mThread=" + this.mThread);
         }
         PowerManager pm = (PowerManager) context.getSystemService("power");
         this.mWakeLock = pm.newWakeLock(1, this.mTag);

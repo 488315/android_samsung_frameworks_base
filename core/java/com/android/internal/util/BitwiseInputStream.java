@@ -27,7 +27,14 @@ public class BitwiseInputStream {
         int index = this.mPos >>> 3;
         int offset = (16 - (this.mPos & 7)) - bits;
         if (bits < 0 || bits > 8 || this.mPos + bits > this.mEnd) {
-            throw new AccessException("illegal read (pos " + this.mPos + ", end " + this.mEnd + ", bits " + bits + NavigationBarInflaterView.KEY_CODE_END);
+            throw new AccessException(
+                    "illegal read (pos "
+                            + this.mPos
+                            + ", end "
+                            + this.mEnd
+                            + ", bits "
+                            + bits
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         int data = (this.mBuf[index] & 255) << 8;
         if (offset < 8) {
@@ -50,7 +57,14 @@ public class BitwiseInputStream {
 
     public void skip(int bits) throws AccessException {
         if (this.mPos + bits > this.mEnd) {
-            throw new AccessException("illegal skip (pos " + this.mPos + ", end " + this.mEnd + ", bits " + bits + NavigationBarInflaterView.KEY_CODE_END);
+            throw new AccessException(
+                    "illegal skip (pos "
+                            + this.mPos
+                            + ", end "
+                            + this.mEnd
+                            + ", bits "
+                            + bits
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         this.mPos += bits;
     }

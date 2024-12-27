@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
 import android.util.Slog;
+
 import com.samsung.android.service.EngineeringMode.EngineeringModeManager;
 
 /* loaded from: classes5.dex */
 public class AutoBlockATCmd implements IWorkOnAt {
-    private static final String ACTION_MODE_RESET_AUTOBLOCKER = "com.samsung.android.intent.action.MODE_RESET_AUTOBLOCKER";
+    private static final String ACTION_MODE_RESET_AUTOBLOCKER =
+            "com.samsung.android.intent.action.MODE_RESET_AUTOBLOCKER";
     private static final String AT_COMMAND_BLOCKER = "ABSTACHK";
     private static final String AT_COMMAND_HEADER = "AT";
     private static final String AT_RESPONSE_ATBLOCK_OFF = "OFF";
@@ -19,7 +21,8 @@ public class AutoBlockATCmd implements IWorkOnAt {
     private static final String AT_RESPONSE_NG_NOTOKEN = "NG,NO_TOK";
     private static final String AT_RESPONSE_OK = "OK";
     private static final int EM_IDX = 61;
-    private static final String PERMISSION_ACCESS_AUTOBLOCKER = "com.samsung.android.permission.ACCESS_AUTOBLOCKER";
+    private static final String PERMISSION_ACCESS_AUTOBLOCKER =
+            "com.samsung.android.permission.ACCESS_AUTOBLOCKER";
     private static final String RAMPART = "com.samsung.android.rampart";
     private static final String TAG = "AutoBlockATCmd";
     private static Context mContext;
@@ -55,7 +58,9 @@ public class AutoBlockATCmd implements IWorkOnAt {
                         Intent rampartResetIntent = new Intent(ACTION_MODE_RESET_AUTOBLOCKER);
                         rampartResetIntent.setPackage(RAMPART);
                         rampartResetIntent.addFlags(32);
-                        mContext.sendBroadcast(rampartResetIntent, "com.samsung.android.permission.ACCESS_AUTOBLOCKER");
+                        mContext.sendBroadcast(
+                                rampartResetIntent,
+                                "com.samsung.android.permission.ACCESS_AUTOBLOCKER");
                         result2 = result3 + "OK";
                     } else {
                         result2 = result3 + AT_RESPONSE_NG_NOTOKEN;
@@ -96,6 +101,10 @@ public class AutoBlockATCmd implements IWorkOnAt {
     }
 
     private boolean isRampartBlockedAdbCommand() {
-        return Settings.Secure.getInt(mContext.getContentResolver(), Settings.Secure.RAMPART_MAIN_SWITCH_ENABLED, 0) == 1;
+        return Settings.Secure.getInt(
+                        mContext.getContentResolver(),
+                        Settings.Secure.RAMPART_MAIN_SWITCH_ENABLED,
+                        0)
+                == 1;
     }
 }

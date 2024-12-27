@@ -14,17 +14,17 @@ import android.util.IndentingPrintWriter;
 import android.util.Pair;
 import android.util.Slog;
 import android.util.SparseArrayMap;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
 import com.android.server.FgThread;
 import com.android.server.utils.AlarmQueue;
-import com.android.server.utils.quota.CountQuotaTracker;
-import com.android.server.utils.quota.QuotaTracker;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public abstract class QuotaTracker {
-    public static final String ALARM_TAG_QUOTA_CHECK = XmlUtils$$ExternalSyntheticOutline0.m("*", "QuotaTracker", ".quota_check*");
+    public static final String ALARM_TAG_QUOTA_CHECK =
+            XmlUtils$$ExternalSyntheticOutline0.m("*", "QuotaTracker", ".quota_check*");
     static final long MAX_WINDOW_SIZE_MS = 2592000000L;
     static final long MIN_WINDOW_SIZE_MS = 20000;
     public final AlarmManager mAlarmManager;
@@ -52,66 +52,78 @@ public abstract class QuotaTracker {
         public final void processExpiredAlarms(ArraySet arraySet) {
             for (int i = 0; i < arraySet.size(); i++) {
                 final Uptc uptc = (Uptc) arraySet.valueAt(i);
-                ((CountQuotaTracker) QuotaTracker.this).mHandler.post(new Runnable() { // from class: com.android.server.utils.quota.QuotaTracker$InQuotaAlarmQueue$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        QuotaTracker.InQuotaAlarmQueue inQuotaAlarmQueue = QuotaTracker.InQuotaAlarmQueue.this;
-                        Uptc uptc2 = uptc;
-                        QuotaTracker quotaTracker = QuotaTracker.this;
-                        int i2 = uptc2.userId;
-                        String str = uptc2.packageName;
-                        String str2 = uptc2.tag;
-                        CountQuotaTracker countQuotaTracker = (CountQuotaTracker) quotaTracker;
-                        synchronized (countQuotaTracker.mLock) {
-                            countQuotaTracker.maybeUpdateStatusForUptcLocked(i2, str, str2);
-                        }
-                    }
-                });
+                ((CountQuotaTracker) QuotaTracker.this)
+                        .mHandler.post(
+                                new Runnable() { // from class:
+                                                 // com.android.server.utils.quota.QuotaTracker$InQuotaAlarmQueue$$ExternalSyntheticLambda0
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        QuotaTracker.InQuotaAlarmQueue inQuotaAlarmQueue =
+                                                QuotaTracker.InQuotaAlarmQueue.this;
+                                        Uptc uptc2 = uptc;
+                                        QuotaTracker quotaTracker = QuotaTracker.this;
+                                        int i2 = uptc2.userId;
+                                        String str = uptc2.packageName;
+                                        String str2 = uptc2.tag;
+                                        CountQuotaTracker countQuotaTracker =
+                                                (CountQuotaTracker) quotaTracker;
+                                        synchronized (countQuotaTracker.mLock) {
+                                            countQuotaTracker.maybeUpdateStatusForUptcLocked(
+                                                    i2, str, str2);
+                                        }
+                                    }
+                                });
             }
         }
     }
 
     /* JADX INFO: Access modifiers changed from: package-private */
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public class Injector {
-    }
+    public class Injector {}
 
     public QuotaTracker(Context context, Categorizer categorizer, Injector injector) {
-        BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class: com.android.server.utils.quota.QuotaTracker.1
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context2, Intent intent) {
-                if (intent == null || intent.getBooleanExtra("android.intent.extra.REPLACING", false)) {
-                    return;
-                }
-                String action = intent.getAction();
-                if (action == null) {
-                    String str = QuotaTracker.ALARM_TAG_QUOTA_CHECK;
-                    Slog.e("QuotaTracker", "Received intent with null action");
-                    return;
-                }
-                if (action.equals("android.intent.action.USER_REMOVED")) {
-                    int intExtra = intent.getIntExtra("android.intent.extra.user_handle", 0);
-                    synchronized (QuotaTracker.this.mLock) {
-                        QuotaTracker quotaTracker = QuotaTracker.this;
-                        quotaTracker.mInQuotaAlarmQueue.removeAlarmsForUserId(intExtra);
-                        quotaTracker.mFreeQuota.delete(intExtra);
-                        CountQuotaTracker countQuotaTracker = (CountQuotaTracker) quotaTracker;
-                        countQuotaTracker.mEventTimes.mData.delete(intExtra);
-                        countQuotaTracker.mExecutionStatsCache.mData.delete(intExtra);
+        BroadcastReceiver broadcastReceiver =
+                new BroadcastReceiver() { // from class:
+                                          // com.android.server.utils.quota.QuotaTracker.1
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context2, Intent intent) {
+                        if (intent == null
+                                || intent.getBooleanExtra(
+                                        "android.intent.extra.REPLACING", false)) {
+                            return;
+                        }
+                        String action = intent.getAction();
+                        if (action == null) {
+                            String str = QuotaTracker.ALARM_TAG_QUOTA_CHECK;
+                            Slog.e("QuotaTracker", "Received intent with null action");
+                            return;
+                        }
+                        if (action.equals("android.intent.action.USER_REMOVED")) {
+                            int intExtra =
+                                    intent.getIntExtra("android.intent.extra.user_handle", 0);
+                            synchronized (QuotaTracker.this.mLock) {
+                                QuotaTracker quotaTracker = QuotaTracker.this;
+                                quotaTracker.mInQuotaAlarmQueue.removeAlarmsForUserId(intExtra);
+                                quotaTracker.mFreeQuota.delete(intExtra);
+                                CountQuotaTracker countQuotaTracker =
+                                        (CountQuotaTracker) quotaTracker;
+                                countQuotaTracker.mEventTimes.mData.delete(intExtra);
+                                countQuotaTracker.mExecutionStatsCache.mData.delete(intExtra);
+                            }
+                            return;
+                        }
+                        if (action.equals("android.intent.action.PACKAGE_FULLY_REMOVED")) {
+                            int intExtra2 = intent.getIntExtra("android.intent.extra.UID", -1);
+                            synchronized (QuotaTracker.this.mLock) {
+                                QuotaTracker quotaTracker2 = QuotaTracker.this;
+                                int userId = UserHandle.getUserId(intExtra2);
+                                Uri data = intent.getData();
+                                quotaTracker2.onAppRemovedLocked(
+                                        userId, data != null ? data.getSchemeSpecificPart() : null);
+                            }
+                        }
                     }
-                    return;
-                }
-                if (action.equals("android.intent.action.PACKAGE_FULLY_REMOVED")) {
-                    int intExtra2 = intent.getIntExtra("android.intent.extra.UID", -1);
-                    synchronized (QuotaTracker.this.mLock) {
-                        QuotaTracker quotaTracker2 = QuotaTracker.this;
-                        int userId = UserHandle.getUserId(intExtra2);
-                        Uri data = intent.getData();
-                        quotaTracker2.onAppRemovedLocked(userId, data != null ? data.getSchemeSpecificPart() : null);
-                    }
-                }
-            }
-        };
+                };
         this.mCategorizer = categorizer;
         this.mInjector = injector;
         this.mAlarmManager = (AlarmManager) context.getSystemService(AlarmManager.class);
@@ -120,8 +132,14 @@ public abstract class QuotaTracker {
         intentFilter.addAction("android.intent.action.PACKAGE_FULLY_REMOVED");
         intentFilter.addDataScheme("package");
         UserHandle userHandle = UserHandle.ALL;
-        context.registerReceiverAsUser(broadcastReceiver, userHandle, intentFilter, null, BackgroundThread.getHandler());
-        context.registerReceiverAsUser(broadcastReceiver, userHandle, new IntentFilter("android.intent.action.USER_REMOVED"), null, BackgroundThread.getHandler());
+        context.registerReceiverAsUser(
+                broadcastReceiver, userHandle, intentFilter, null, BackgroundThread.getHandler());
+        context.registerReceiverAsUser(
+                broadcastReceiver,
+                userHandle,
+                new IntentFilter("android.intent.action.USER_REMOVED"),
+                null,
+                BackgroundThread.getHandler());
     }
 
     public final void clear() {
@@ -173,8 +191,11 @@ public abstract class QuotaTracker {
         synchronized (this.mLock) {
             CountQuotaTracker countQuotaTracker = (CountQuotaTracker) this;
             z = true;
-            if (countQuotaTracker.mIsEnabled && !((Boolean) countQuotaTracker.mFreeQuota.getOrDefault(i, str, Boolean.FALSE)).booleanValue()) {
-                CountQuotaTracker.ExecutionStats executionStatsLocked = countQuotaTracker.getExecutionStatsLocked(i, str, str2);
+            if (countQuotaTracker.mIsEnabled
+                    && !((Boolean) countQuotaTracker.mFreeQuota.getOrDefault(i, str, Boolean.FALSE))
+                            .booleanValue()) {
+                CountQuotaTracker.ExecutionStats executionStatsLocked =
+                        countQuotaTracker.getExecutionStatsLocked(i, str, str2);
                 if (executionStatsLocked.countInWindow >= executionStatsLocked.countLimit) {
                     z = false;
                 }
@@ -191,7 +212,11 @@ public abstract class QuotaTracker {
         boolean isWithinQuota = isWithinQuota(i, str, str2);
         InQuotaAlarmQueue inQuotaAlarmQueue = this.mInQuotaAlarmQueue;
         if (!isWithinQuota) {
-            inQuotaAlarmQueue.addAlarm(((CountQuotaTracker) this).getExecutionStatsLocked(i, str, str2).inQuotaTimeElapsed, new Uptc(i, str, str2));
+            inQuotaAlarmQueue.addAlarm(
+                    ((CountQuotaTracker) this)
+                            .getExecutionStatsLocked(i, str, str2)
+                            .inQuotaTimeElapsed,
+                    new Uptc(i, str, str2));
             return;
         }
         inQuotaAlarmQueue.removeAlarmForKey(new Uptc(i, str, str2));
@@ -209,8 +234,10 @@ public abstract class QuotaTracker {
         InQuotaAlarmQueue inQuotaAlarmQueue = this.mInQuotaAlarmQueue;
         synchronized (inQuotaAlarmQueue.mLock) {
             try {
-                AlarmQueue.AlarmPriorityQueue alarmPriorityQueue = inQuotaAlarmQueue.mAlarmPriorityQueue;
-                Pair[] pairArr = (Pair[]) alarmPriorityQueue.toArray(new Pair[alarmPriorityQueue.size()]);
+                AlarmQueue.AlarmPriorityQueue alarmPriorityQueue =
+                        inQuotaAlarmQueue.mAlarmPriorityQueue;
+                Pair[] pairArr =
+                        (Pair[]) alarmPriorityQueue.toArray(new Pair[alarmPriorityQueue.size()]);
                 boolean z = false;
                 for (int length = pairArr.length - 1; length >= 0; length--) {
                     Uptc uptc = (Uptc) pairArr[length].first;
@@ -220,7 +247,9 @@ public abstract class QuotaTracker {
                     }
                 }
                 if (z) {
-                    inQuotaAlarmQueue.setNextAlarmLocked(inQuotaAlarmQueue.mLastFireTimeElapsed + inQuotaAlarmQueue.mMinTimeBetweenAlarmsMs);
+                    inQuotaAlarmQueue.setNextAlarmLocked(
+                            inQuotaAlarmQueue.mLastFireTimeElapsed
+                                    + inQuotaAlarmQueue.mMinTimeBetweenAlarmsMs);
                 }
             } catch (Throwable th) {
                 throw th;

@@ -6,7 +6,8 @@ import android.os.HandlerThread;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class BiometricHandlerProvider {
-    public static final BiometricHandlerProvider sBiometricHandlerProvider = new BiometricHandlerProvider();
+    public static final BiometricHandlerProvider sBiometricHandlerProvider =
+            new BiometricHandlerProvider();
     public Handler mBiometricsCallbackHandler;
     public Handler mFaceHandler;
     public Handler mFingerprintHandler;

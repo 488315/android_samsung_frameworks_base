@@ -5,13 +5,12 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.android.ims.internal.IImsFeatureStatusCallback;
-import com.android.ims.internal.IImsMMTelFeature;
-import com.android.ims.internal.IImsRcsFeature;
 
 /* loaded from: classes5.dex */
 public interface IImsServiceController extends IInterface {
-    void addFeatureStatusCallback(int i, int i2, IImsFeatureStatusCallback iImsFeatureStatusCallback) throws RemoteException;
+    void addFeatureStatusCallback(
+            int i, int i2, IImsFeatureStatusCallback iImsFeatureStatusCallback)
+            throws RemoteException;
 
     IImsMMTelFeature createEmergencyMMTelFeature(int i) throws RemoteException;
 
@@ -19,7 +18,9 @@ public interface IImsServiceController extends IInterface {
 
     IImsRcsFeature createRcsFeature(int i) throws RemoteException;
 
-    void removeFeatureStatusCallback(int i, int i2, IImsFeatureStatusCallback iImsFeatureStatusCallback) throws RemoteException;
+    void removeFeatureStatusCallback(
+            int i, int i2, IImsFeatureStatusCallback iImsFeatureStatusCallback)
+            throws RemoteException;
 
     void removeImsFeature(int i, int i2) throws RemoteException;
 
@@ -40,16 +41,15 @@ public interface IImsServiceController extends IInterface {
         }
 
         @Override // com.android.ims.internal.IImsServiceController
-        public void removeImsFeature(int slotId, int featureType) throws RemoteException {
-        }
+        public void removeImsFeature(int slotId, int featureType) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsServiceController
-        public void addFeatureStatusCallback(int slotId, int featureType, IImsFeatureStatusCallback c) throws RemoteException {
-        }
+        public void addFeatureStatusCallback(
+                int slotId, int featureType, IImsFeatureStatusCallback c) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsServiceController
-        public void removeFeatureStatusCallback(int slotId, int featureType, IImsFeatureStatusCallback c) throws RemoteException {
-        }
+        public void removeFeatureStatusCallback(
+                int slotId, int featureType, IImsFeatureStatusCallback c) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -57,7 +57,7 @@ public interface IImsServiceController extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImsServiceController {
+    public abstract static class Stub extends Binder implements IImsServiceController {
         public static final String DESCRIPTOR = "com.android.ims.internal.IImsServiceController";
         static final int TRANSACTION_addFeatureStatusCallback = 5;
         static final int TRANSACTION_createEmergencyMMTelFeature = 1;
@@ -111,7 +111,8 @@ public interface IImsServiceController extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -151,7 +152,8 @@ public interface IImsServiceController extends IInterface {
                 case 5:
                     int _arg05 = data.readInt();
                     int _arg12 = data.readInt();
-                    IImsFeatureStatusCallback _arg2 = IImsFeatureStatusCallback.Stub.asInterface(data.readStrongBinder());
+                    IImsFeatureStatusCallback _arg2 =
+                            IImsFeatureStatusCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addFeatureStatusCallback(_arg05, _arg12, _arg2);
                     reply.writeNoException();
@@ -159,7 +161,8 @@ public interface IImsServiceController extends IInterface {
                 case 6:
                     int _arg06 = data.readInt();
                     int _arg13 = data.readInt();
-                    IImsFeatureStatusCallback _arg22 = IImsFeatureStatusCallback.Stub.asInterface(data.readStrongBinder());
+                    IImsFeatureStatusCallback _arg22 =
+                            IImsFeatureStatusCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeFeatureStatusCallback(_arg06, _arg13, _arg22);
                     reply.writeNoException();
@@ -194,7 +197,8 @@ public interface IImsServiceController extends IInterface {
                     _data.writeInt(slotId);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    IImsMMTelFeature _result = IImsMMTelFeature.Stub.asInterface(_reply.readStrongBinder());
+                    IImsMMTelFeature _result =
+                            IImsMMTelFeature.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -211,7 +215,8 @@ public interface IImsServiceController extends IInterface {
                     _data.writeInt(slotId);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    IImsMMTelFeature _result = IImsMMTelFeature.Stub.asInterface(_reply.readStrongBinder());
+                    IImsMMTelFeature _result =
+                            IImsMMTelFeature.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -228,7 +233,8 @@ public interface IImsServiceController extends IInterface {
                     _data.writeInt(slotId);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    IImsRcsFeature _result = IImsRcsFeature.Stub.asInterface(_reply.readStrongBinder());
+                    IImsRcsFeature _result =
+                            IImsRcsFeature.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -253,7 +259,9 @@ public interface IImsServiceController extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsServiceController
-            public void addFeatureStatusCallback(int slotId, int featureType, IImsFeatureStatusCallback c) throws RemoteException {
+            public void addFeatureStatusCallback(
+                    int slotId, int featureType, IImsFeatureStatusCallback c)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -270,7 +278,9 @@ public interface IImsServiceController extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsServiceController
-            public void removeFeatureStatusCallback(int slotId, int featureType, IImsFeatureStatusCallback c) throws RemoteException {
+            public void removeFeatureStatusCallback(
+                    int slotId, int featureType, IImsFeatureStatusCallback c)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

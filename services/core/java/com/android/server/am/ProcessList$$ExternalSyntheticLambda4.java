@@ -3,7 +3,6 @@ package com.android.server.am;
 import android.os.Process;
 import android.os.UserHandle;
 import android.util.Slog;
-import com.android.server.am.ProcessList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -21,7 +20,18 @@ public final /* synthetic */ class ProcessList$$ExternalSyntheticLambda4 impleme
     public final /* synthetic */ String f$8;
     public final /* synthetic */ String f$9;
 
-    public /* synthetic */ ProcessList$$ExternalSyntheticLambda4(ProcessList processList, ProcessRecord processRecord, int[] iArr, int i, int i2, int i3, String str, String str2, String str3, long j, int i4) {
+    public /* synthetic */ ProcessList$$ExternalSyntheticLambda4(
+            ProcessList processList,
+            ProcessRecord processRecord,
+            int[] iArr,
+            int i,
+            int i2,
+            int i3,
+            String str,
+            String str2,
+            String str3,
+            long j,
+            int i4) {
         this.$r8$classId = i4;
         this.f$0 = processList;
         this.f$1 = processRecord;
@@ -59,20 +69,39 @@ public final /* synthetic */ class ProcessList$$ExternalSyntheticLambda4 impleme
                 String str3 = this.f$9;
                 long j2 = this.f$10;
                 processList.getClass();
-                ProcessList$$ExternalSyntheticLambda4 processList$$ExternalSyntheticLambda4 = new ProcessList$$ExternalSyntheticLambda4(processList, processRecord2, iArr, i, i2, i3, str, str2, str3, j2, 1);
+                ProcessList$$ExternalSyntheticLambda4 processList$$ExternalSyntheticLambda4 =
+                        new ProcessList$$ExternalSyntheticLambda4(
+                                processList,
+                                processRecord2,
+                                iArr,
+                                i,
+                                i2,
+                                i3,
+                                str,
+                                str2,
+                                str3,
+                                j2,
+                                1);
                 ProcessRecord processRecord3 = processRecord2.mPredecessor;
                 if (processRecord3 == null || processRecord3.mDyingPid <= 0) {
                     processList$$ExternalSyntheticLambda4.run();
                     return;
                 }
                 if (processRecord3.mSuccessorStartRunnable != null) {
-                    Slog.wtf("ActivityManager", "We've been watching for the death of " + processRecord3);
+                    Slog.wtf(
+                            "ActivityManager",
+                            "We've been watching for the death of " + processRecord3);
                     return;
                 } else {
-                    Slog.d("ActivityManager_PRED", "handleProcessStartWithPredecessor predecessor = " + processRecord3);
+                    Slog.d(
+                            "ActivityManager_PRED",
+                            "handleProcessStartWithPredecessor predecessor = " + processRecord3);
                     processRecord3.mSuccessorStartRunnable = processList$$ExternalSyntheticLambda4;
-                    ProcessList.ProcStartHandler procStartHandler = processList.mService.mProcStartHandler;
-                    procStartHandler.sendMessageDelayed(procStartHandler.obtainMessage(2, processRecord3), processList.mService.mConstants.mProcessKillTimeoutMs);
+                    ProcessList.ProcStartHandler procStartHandler =
+                            processList.mService.mProcStartHandler;
+                    procStartHandler.sendMessageDelayed(
+                            procStartHandler.obtainMessage(2, processRecord3),
+                            processList.mService.mConstants.mProcessKillTimeoutMs);
                     return;
                 }
             default:
@@ -93,7 +122,20 @@ public final /* synthetic */ class ProcessList$$ExternalSyntheticLambda4 impleme
                     j = processRecord4.mSeInfo;
                     processRecord = str5;
                     try {
-                        Process.ProcessStartResult startProcess = processList2.startProcess(hostingRecord, processRecord4, i7, iArr2, i4, i5, i6, j, str4, processRecord, str6, processRecord4.mStartUptime);
+                        Process.ProcessStartResult startProcess =
+                                processList2.startProcess(
+                                        hostingRecord,
+                                        processRecord4,
+                                        i7,
+                                        iArr2,
+                                        i4,
+                                        i5,
+                                        i6,
+                                        j,
+                                        str4,
+                                        processRecord,
+                                        str6,
+                                        processRecord4.mStartUptime);
                         ActivityManagerService activityManagerService = processList2.mService;
                         ActivityManagerService.boostPriorityForLockedSection();
                         try {
@@ -105,11 +147,17 @@ public final /* synthetic */ class ProcessList$$ExternalSyntheticLambda4 impleme
                                     }
                                     try {
                                         if (processList2.mPendingStarts.get(j3) != null) {
-                                            processList2.handleProcessStartedLocked(processRecord4, startProcess.pid, startProcess.usingWrapper, j3, false);
+                                            processList2.handleProcessStartedLocked(
+                                                    processRecord4,
+                                                    startProcess.pid,
+                                                    startProcess.usingWrapper,
+                                                    j3,
+                                                    false);
                                         } else if (processRecord4.mPid == startProcess.pid) {
                                             boolean z = startProcess.usingWrapper;
                                             processRecord4.mUsingWrapper = z;
-                                            processRecord4.mWindowProcessController.mUsingWrapper = z;
+                                            processRecord4.mWindowProcessController.mUsingWrapper =
+                                                    z;
                                         }
                                         ActivityManagerService.resetPriorityAfterLockedSection();
                                         return;
@@ -120,16 +168,31 @@ public final /* synthetic */ class ProcessList$$ExternalSyntheticLambda4 impleme
                                 }
                             } catch (RuntimeException e) {
                                 e = e;
-                                ActivityManagerService activityManagerService2 = processList2.mService;
+                                ActivityManagerService activityManagerService2 =
+                                        processList2.mService;
                                 ActivityManagerService.boostPriorityForLockedSection();
                                 synchronized (activityManagerService2) {
                                     try {
-                                        Slog.e("ActivityManager", "Failure starting process " + processRecord.processName, e);
+                                        Slog.e(
+                                                "ActivityManager",
+                                                "Failure starting process "
+                                                        + processRecord.processName,
+                                                e);
                                         processList2.mPendingStarts.remove(j);
                                         processRecord.mPendingStart = false;
-                                        processList2.mService.forceStopPackageLocked(processRecord.info.packageName, UserHandle.getAppId(processRecord.uid), false, false, true, false, false, processRecord.userId, "start failure");
+                                        processList2.mService.forceStopPackageLocked(
+                                                processRecord.info.packageName,
+                                                UserHandle.getAppId(processRecord.uid),
+                                                false,
+                                                false,
+                                                true,
+                                                false,
+                                                false,
+                                                processRecord.userId,
+                                                "start failure");
                                         if (processRecord.mThread == null) {
-                                            processRecord.mService.mOomAdjuster.onProcessEndLocked(processRecord);
+                                            processRecord.mService.mOomAdjuster.onProcessEndLocked(
+                                                    processRecord);
                                         }
                                     } finally {
                                         ActivityManagerService.resetPriorityAfterLockedSection();

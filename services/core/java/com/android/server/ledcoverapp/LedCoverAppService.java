@@ -21,7 +21,8 @@ public final class LedCoverAppService extends Binder {
             if (intent == null || (action = intent.getAction()) == null) {
                 return;
             }
-            if (action.equals("android.intent.action.PACKAGE_REPLACED") || action.equals("android.intent.action.PACKAGE_ADDED")) {
+            if (action.equals("android.intent.action.PACKAGE_REPLACED")
+                    || action.equals("android.intent.action.PACKAGE_ADDED")) {
                 LedCoverAppService.backgroundAllowlist(context);
             }
         }
@@ -40,7 +41,10 @@ public final class LedCoverAppService extends Binder {
 
     public static void backgroundAllowlist(Context context) {
         try {
-            int i = context.getPackageManager().getApplicationInfo("com.samsung.android.app.ledcoverdream", 0).uid;
+            int i =
+                    context.getPackageManager()
+                            .getApplicationInfo("com.samsung.android.app.ledcoverdream", 0)
+                            .uid;
             String num = Integer.toString(i);
             if (i >= 1000 && num != null) {
                 if (hasValidSignature(context)) {
@@ -50,7 +54,9 @@ public final class LedCoverAppService extends Binder {
                 }
                 return;
             }
-            Log.e("LedCoverAppService", "backgroundAllowlist: bad uid: " + i + ", uidString: " + num);
+            Log.e(
+                    "LedCoverAppService",
+                    "backgroundAllowlist: bad uid: " + i + ", uidString: " + num);
         } catch (Exception e) {
             Log.e("LedCoverAppService", "backgroundAllowlist exception ", e);
         }
@@ -59,8 +65,16 @@ public final class LedCoverAppService extends Binder {
     public static boolean hasValidSignature(Context context) {
         try {
             PackageManager packageManager = context.getPackageManager();
-            if (packageManager.getPackageInfo("android", 64).signatures[0].equals(packageManager.getPackageInfo("com.samsung.android.app.ledcoverdream", 64).signatures[0])) {
-                Log.d("LedCoverAppService", "hasValidSignature, VALID : com.samsung.android.app.ledcoverdream");
+            if (packageManager
+                    .getPackageInfo("android", 64)
+                    .signatures[0]
+                    .equals(
+                            packageManager.getPackageInfo(
+                                            "com.samsung.android.app.ledcoverdream", 64)
+                                    .signatures[0])) {
+                Log.d(
+                        "LedCoverAppService",
+                        "hasValidSignature, VALID : com.samsung.android.app.ledcoverdream");
                 return true;
             }
         } catch (PackageManager.NameNotFoundException | NullPointerException e) {

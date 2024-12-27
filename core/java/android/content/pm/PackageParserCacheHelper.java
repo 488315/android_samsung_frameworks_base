@@ -1,6 +1,7 @@
 package android.content.pm;
 
 import android.os.Parcel;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,8 +10,7 @@ public class PackageParserCacheHelper {
     private static final boolean DEBUG = false;
     private static final String TAG = "PackageParserCacheHelper";
 
-    private PackageParserCacheHelper() {
-    }
+    private PackageParserCacheHelper() {}
 
     public static class ReadHelper extends Parcel.ReadWriteHelper {
         private final Parcel mParcel;

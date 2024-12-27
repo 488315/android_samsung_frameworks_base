@@ -5,24 +5,26 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class WifiDisplaySessionInfo implements Parcelable {
-    public static final Parcelable.Creator<WifiDisplaySessionInfo> CREATOR = new Parcelable.Creator<WifiDisplaySessionInfo>() { // from class: android.hardware.display.WifiDisplaySessionInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WifiDisplaySessionInfo createFromParcel(Parcel in) {
-            boolean client = in.readInt() != 0;
-            int session = in.readInt();
-            String group = in.readString();
-            String pp = in.readString();
-            String ip = in.readString();
-            return new WifiDisplaySessionInfo(client, session, group, pp, ip);
-        }
+    public static final Parcelable.Creator<WifiDisplaySessionInfo> CREATOR =
+            new Parcelable.Creator<WifiDisplaySessionInfo>() { // from class:
+                // android.hardware.display.WifiDisplaySessionInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WifiDisplaySessionInfo createFromParcel(Parcel in) {
+                    boolean client = in.readInt() != 0;
+                    int session = in.readInt();
+                    String group = in.readString();
+                    String pp = in.readString();
+                    String ip = in.readString();
+                    return new WifiDisplaySessionInfo(client, session, group, pp, ip);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WifiDisplaySessionInfo[] newArray(int size) {
-            return new WifiDisplaySessionInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WifiDisplaySessionInfo[] newArray(int size) {
+                    return new WifiDisplaySessionInfo[size];
+                }
+            };
     private final boolean mClient;
     private final String mGroupId;
     private final String mIP;
@@ -76,6 +78,15 @@ public final class WifiDisplaySessionInfo implements Parcelable {
     }
 
     public String toString() {
-        return "WifiDisplaySessionInfo:\n    Client/Owner: " + (this.mClient ? "Client" : "Owner") + "\n    GroupId: " + this.mGroupId + "\n    Passphrase: " + this.mPassphrase + "\n    SessionId: " + this.mSessionId + "\n    IP Address: " + this.mIP;
+        return "WifiDisplaySessionInfo:\n    Client/Owner: "
+                + (this.mClient ? "Client" : "Owner")
+                + "\n    GroupId: "
+                + this.mGroupId
+                + "\n    Passphrase: "
+                + this.mPassphrase
+                + "\n    SessionId: "
+                + this.mSessionId
+                + "\n    IP Address: "
+                + this.mIP;
     }
 }

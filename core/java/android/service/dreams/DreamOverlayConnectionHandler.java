@@ -9,11 +9,11 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
-import android.service.dreams.IDreamOverlay;
-import android.service.dreams.IDreamOverlayClientCallback;
 import android.util.Log;
+
 import com.android.internal.util.ObservableServiceConnection;
 import com.android.internal.util.PersistentServiceConnection;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -32,11 +32,31 @@ public final class DreamOverlayConnectionHandler {
     private final List<Consumer<IDreamOverlayClient>> mConsumers;
     private final Handler mHandler;
 
-    DreamOverlayConnectionHandler(Context context, Looper looper, Intent serviceIntent, int minConnectionDurationMs, int maxReconnectAttempts, int baseReconnectDelayMs) {
-        this(context, looper, serviceIntent, minConnectionDurationMs, maxReconnectAttempts, baseReconnectDelayMs, new Injector());
+    DreamOverlayConnectionHandler(
+            Context context,
+            Looper looper,
+            Intent serviceIntent,
+            int minConnectionDurationMs,
+            int maxReconnectAttempts,
+            int baseReconnectDelayMs) {
+        this(
+                context,
+                looper,
+                serviceIntent,
+                minConnectionDurationMs,
+                maxReconnectAttempts,
+                baseReconnectDelayMs,
+                new Injector());
     }
 
-    public DreamOverlayConnectionHandler(Context context, Looper looper, Intent intent, int i, int i2, int i3, Injector injector) {
+    public DreamOverlayConnectionHandler(
+            Context context,
+            Looper looper,
+            Intent intent,
+            int i,
+            int i2,
+            int i3,
+            Injector injector) {
         this.mConsumers = new ArrayList();
         this.mCallback = new OverlayConnectionCallback();
         this.mHandler = new Handler(looper, new OverlayHandlerCallback());
@@ -72,8 +92,7 @@ public final class DreamOverlayConnectionHandler {
     }
 
     private final class OverlayHandlerCallback implements Handler.Callback {
-        private OverlayHandlerCallback() {
-        }
+        private OverlayHandlerCallback() {}
 
         @Override // android.os.Handler.Callback
         public boolean handleMessage(Message msg) {
@@ -85,7 +104,8 @@ public final class DreamOverlayConnectionHandler {
                     DreamOverlayConnectionHandler.this.onRemoveConsumer((Consumer) msg.obj);
                     break;
                 case 3:
-                    DreamOverlayConnectionHandler.this.onOverlayClientReady((IDreamOverlayClient) msg.obj);
+                    DreamOverlayConnectionHandler.this.onOverlayClientReady(
+                            (IDreamOverlayClient) msg.obj);
                     break;
             }
             return true;
@@ -113,21 +133,28 @@ public final class DreamOverlayConnectionHandler {
         this.mConsumers.remove(consumer);
     }
 
-    private final class OverlayConnectionCallback implements ObservableServiceConnection.Callback<IDreamOverlay> {
+    private final class OverlayConnectionCallback
+            implements ObservableServiceConnection.Callback<IDreamOverlay> {
         private final IDreamOverlayClientCallback mClientCallback;
 
         private OverlayConnectionCallback() {
-            this.mClientCallback = new IDreamOverlayClientCallback.Stub() { // from class: android.service.dreams.DreamOverlayConnectionHandler.OverlayConnectionCallback.1
-                @Override // android.service.dreams.IDreamOverlayClientCallback
-                public void onDreamOverlayClient(IDreamOverlayClient client) {
-                    Message msg = DreamOverlayConnectionHandler.this.mHandler.obtainMessage(3, client);
-                    DreamOverlayConnectionHandler.this.mHandler.sendMessage(msg);
-                }
-            };
+            this.mClientCallback =
+                    new IDreamOverlayClientCallback
+                            .Stub() { // from class:
+                                      // android.service.dreams.DreamOverlayConnectionHandler.OverlayConnectionCallback.1
+                        @Override // android.service.dreams.IDreamOverlayClientCallback
+                        public void onDreamOverlayClient(IDreamOverlayClient client) {
+                            Message msg =
+                                    DreamOverlayConnectionHandler.this.mHandler.obtainMessage(
+                                            3, client);
+                            DreamOverlayConnectionHandler.this.mHandler.sendMessage(msg);
+                        }
+                    };
         }
 
         @Override // com.android.internal.util.ObservableServiceConnection.Callback
-        public void onConnected(ObservableServiceConnection<IDreamOverlay> connection, IDreamOverlay service) {
+        public void onConnected(
+                ObservableServiceConnection<IDreamOverlay> connection, IDreamOverlay service) {
             try {
                 service.getClient(this.mClientCallback);
             } catch (RemoteException e) {
@@ -136,22 +163,40 @@ public final class DreamOverlayConnectionHandler {
         }
 
         @Override // com.android.internal.util.ObservableServiceConnection.Callback
-        public void onDisconnected(ObservableServiceConnection<IDreamOverlay> connection, int reason) {
+        public void onDisconnected(
+                ObservableServiceConnection<IDreamOverlay> connection, int reason) {
             DreamOverlayConnectionHandler.this.mClient = null;
             DreamOverlayConnectionHandler.this.mHandler.removeMessages(3);
         }
     }
 
     public static class Injector {
-        public PersistentServiceConnection<IDreamOverlay> buildConnection(Context context, Handler handler, Intent serviceIntent, int minConnectionDurationMs, int maxReconnectAttempts, int baseReconnectDelayMs) {
+        public PersistentServiceConnection<IDreamOverlay> buildConnection(
+                Context context,
+                Handler handler,
+                Intent serviceIntent,
+                int minConnectionDurationMs,
+                int maxReconnectAttempts,
+                int baseReconnectDelayMs) {
             Objects.requireNonNull(handler);
             Executor executor = new MidiManager$$ExternalSyntheticLambda0(handler);
-            return new PersistentServiceConnection<>(context, executor, handler, new ObservableServiceConnection.ServiceTransformer() { // from class: android.service.dreams.DreamOverlayConnectionHandler$Injector$$ExternalSyntheticLambda0
-                @Override // com.android.internal.util.ObservableServiceConnection.ServiceTransformer
-                public final Object convert(IBinder iBinder) {
-                    return IDreamOverlay.Stub.asInterface(iBinder);
-                }
-            }, serviceIntent, Enums.AUDIO_FORMAT_AAC_MAIN, minConnectionDurationMs, maxReconnectAttempts, baseReconnectDelayMs);
+            return new PersistentServiceConnection<>(
+                    context,
+                    executor,
+                    handler,
+                    new ObservableServiceConnection
+                            .ServiceTransformer() { // from class:
+                                                    // android.service.dreams.DreamOverlayConnectionHandler$Injector$$ExternalSyntheticLambda0
+                        @Override // com.android.internal.util.ObservableServiceConnection.ServiceTransformer
+                        public final Object convert(IBinder iBinder) {
+                            return IDreamOverlay.Stub.asInterface(iBinder);
+                        }
+                    },
+                    serviceIntent,
+                    Enums.AUDIO_FORMAT_AAC_MAIN,
+                    minConnectionDurationMs,
+                    maxReconnectAttempts,
+                    baseReconnectDelayMs);
         }
     }
 }

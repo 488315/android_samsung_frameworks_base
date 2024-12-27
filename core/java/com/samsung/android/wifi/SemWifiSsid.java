@@ -2,6 +2,7 @@ package com.samsung.android.wifi;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -15,24 +16,26 @@ import java.util.Locale;
 
 /* loaded from: classes6.dex */
 public final class SemWifiSsid implements Parcelable {
-    public static final Parcelable.Creator<SemWifiSsid> CREATOR = new Parcelable.Creator<SemWifiSsid>() { // from class: com.samsung.android.wifi.SemWifiSsid.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemWifiSsid createFromParcel(Parcel in) {
-            SemWifiSsid ssid = new SemWifiSsid();
-            int length = in.readInt();
-            byte[] b = new byte[length];
-            in.readByteArray(b);
-            ssid.octets.write(b, 0, length);
-            return ssid;
-        }
+    public static final Parcelable.Creator<SemWifiSsid> CREATOR =
+            new Parcelable.Creator<
+                    SemWifiSsid>() { // from class: com.samsung.android.wifi.SemWifiSsid.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemWifiSsid createFromParcel(Parcel in) {
+                    SemWifiSsid ssid = new SemWifiSsid();
+                    int length = in.readInt();
+                    byte[] b = new byte[length];
+                    in.readByteArray(b);
+                    ssid.octets.write(b, 0, length);
+                    return ssid;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemWifiSsid[] newArray(int size) {
-            return new SemWifiSsid[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemWifiSsid[] newArray(int size) {
+                    return new SemWifiSsid[size];
+                }
+            };
     private static final int HEX_RADIX = 16;
     public static final String NONE = "<unknown ssid>";
     private static final String TAG = "SemWifiSsid";
@@ -167,7 +170,10 @@ public final class SemWifiSsid implements Parcelable {
             return "";
         }
         Charset charset = StandardCharsets.UTF_8;
-        CharsetDecoder decoder = charset.newDecoder().onMalformedInput(CodingErrorAction.REPLACE).onUnmappableCharacter(CodingErrorAction.REPLACE);
+        CharsetDecoder decoder =
+                charset.newDecoder()
+                        .onMalformedInput(CodingErrorAction.REPLACE)
+                        .onUnmappableCharacter(CodingErrorAction.REPLACE);
         CharBuffer out = CharBuffer.allocate(32);
         CoderResult result = decoder.decode(ByteBuffer.wrap(ssidBytes), out, true);
         out.flip();

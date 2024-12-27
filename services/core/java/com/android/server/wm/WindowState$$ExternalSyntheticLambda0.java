@@ -2,7 +2,9 @@ package com.android.server.wm;
 
 import android.graphics.Point;
 import android.view.SurfaceControl;
+
 import com.android.server.am.ActivityManagerService$$ExternalSyntheticOutline0;
+
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -27,8 +29,12 @@ public final /* synthetic */ class WindowState$$ExternalSyntheticLambda0 impleme
                 if (seamlessRotator != null) {
                     seamlessRotator.finish(transaction, windowState);
                     windowState.mPendingSeamlessRotate = null;
-                    windowState.getDisplayContent().mDisplayRotation.markForSeamlessRotation(windowState, false);
-                    InsetsSourceProvider insetsSourceProvider = windowState.mControllableInsetProvider;
+                    windowState
+                            .getDisplayContent()
+                            .mDisplayRotation
+                            .markForSeamlessRotation(windowState, false);
+                    InsetsSourceProvider insetsSourceProvider =
+                            windowState.mControllableInsetProvider;
                     if (insetsSourceProvider != null) {
                         insetsSourceProvider.mSeamlessRotating = false;
                     }
@@ -37,7 +43,9 @@ public final /* synthetic */ class WindowState$$ExternalSyntheticLambda0 impleme
                 break;
             case 1:
                 SurfaceControl surfaceControl = windowState.mSurfaceControl;
-                if (surfaceControl != null && surfaceControl.isValid() && !windowState.mSurfaceAnimator.hasLeash()) {
+                if (surfaceControl != null
+                        && surfaceControl.isValid()
+                        && !windowState.mSurfaceAnimator.hasLeash()) {
                     SurfaceControl surfaceControl2 = windowState.mSurfaceControl;
                     Point point = windowState.mSurfacePosition;
                     transaction.setPosition(surfaceControl2, point.x, point.y);

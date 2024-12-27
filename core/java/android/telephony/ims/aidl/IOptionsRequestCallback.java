@@ -11,18 +11,20 @@ import android.telephony.ims.RcsContactUceCapability;
 public interface IOptionsRequestCallback extends IInterface {
     public static final String DESCRIPTOR = "android.telephony.ims.aidl.IOptionsRequestCallback";
 
-    void respondToCapabilityRequest(RcsContactUceCapability rcsContactUceCapability, boolean z) throws RemoteException;
+    void respondToCapabilityRequest(RcsContactUceCapability rcsContactUceCapability, boolean z)
+            throws RemoteException;
 
     void respondToCapabilityRequestWithError(int i, String str) throws RemoteException;
 
     public static class Default implements IOptionsRequestCallback {
         @Override // android.telephony.ims.aidl.IOptionsRequestCallback
-        public void respondToCapabilityRequest(RcsContactUceCapability ownCapabilities, boolean isBlocked) throws RemoteException {
-        }
+        public void respondToCapabilityRequest(
+                RcsContactUceCapability ownCapabilities, boolean isBlocked)
+                throws RemoteException {}
 
         @Override // android.telephony.ims.aidl.IOptionsRequestCallback
-        public void respondToCapabilityRequestWithError(int code, String reason) throws RemoteException {
-        }
+        public void respondToCapabilityRequestWithError(int code, String reason)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +32,7 @@ public interface IOptionsRequestCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IOptionsRequestCallback {
+    public abstract static class Stub extends Binder implements IOptionsRequestCallback {
         static final int TRANSACTION_respondToCapabilityRequest = 1;
         static final int TRANSACTION_respondToCapabilityRequestWithError = 2;
 
@@ -71,7 +73,8 @@ public interface IOptionsRequestCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IOptionsRequestCallback.DESCRIPTOR);
             }
@@ -81,7 +84,9 @@ public interface IOptionsRequestCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    RcsContactUceCapability _arg0 = (RcsContactUceCapability) data.readTypedObject(RcsContactUceCapability.CREATOR);
+                    RcsContactUceCapability _arg0 =
+                            (RcsContactUceCapability)
+                                    data.readTypedObject(RcsContactUceCapability.CREATOR);
                     boolean _arg1 = data.readBoolean();
                     data.enforceNoDataAvail();
                     respondToCapabilityRequest(_arg0, _arg1);
@@ -114,7 +119,9 @@ public interface IOptionsRequestCallback extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IOptionsRequestCallback
-            public void respondToCapabilityRequest(RcsContactUceCapability ownCapabilities, boolean isBlocked) throws RemoteException {
+            public void respondToCapabilityRequest(
+                    RcsContactUceCapability ownCapabilities, boolean isBlocked)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IOptionsRequestCallback.DESCRIPTOR);
@@ -127,7 +134,8 @@ public interface IOptionsRequestCallback extends IInterface {
             }
 
             @Override // android.telephony.ims.aidl.IOptionsRequestCallback
-            public void respondToCapabilityRequestWithError(int code, String reason) throws RemoteException {
+            public void respondToCapabilityRequestWithError(int code, String reason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IOptionsRequestCallback.DESCRIPTOR);

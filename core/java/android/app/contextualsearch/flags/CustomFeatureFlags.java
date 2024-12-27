@@ -10,7 +10,9 @@ import java.util.function.Predicate;
 /* loaded from: classes.dex */
 public class CustomFeatureFlags implements FeatureFlags {
     private BiPredicate<String, Predicate<FeatureFlags>> mGetValueImpl;
-    private Set<String> mReadOnlyFlagsSet = new HashSet(Arrays.asList(Flags.FLAG_ENABLE_SERVICE, Flags.FLAG_ENABLE_TOKEN_REFRESH, ""));
+    private Set<String> mReadOnlyFlagsSet =
+            new HashSet(
+                    Arrays.asList(Flags.FLAG_ENABLE_SERVICE, Flags.FLAG_ENABLE_TOKEN_REFRESH, ""));
 
     public CustomFeatureFlags(BiPredicate<String, Predicate<FeatureFlags>> getValueImpl) {
         this.mGetValueImpl = getValueImpl;
@@ -18,22 +20,28 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // android.app.contextualsearch.flags.FeatureFlags
     public boolean enableService() {
-        return getValue(Flags.FLAG_ENABLE_SERVICE, new Predicate() { // from class: android.app.contextualsearch.flags.CustomFeatureFlags$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).enableService();
-            }
-        });
+        return getValue(
+                Flags.FLAG_ENABLE_SERVICE,
+                new Predicate() { // from class:
+                    // android.app.contextualsearch.flags.CustomFeatureFlags$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).enableService();
+                    }
+                });
     }
 
     @Override // android.app.contextualsearch.flags.FeatureFlags
     public boolean enableTokenRefresh() {
-        return getValue(Flags.FLAG_ENABLE_TOKEN_REFRESH, new Predicate() { // from class: android.app.contextualsearch.flags.CustomFeatureFlags$$ExternalSyntheticLambda1
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).enableTokenRefresh();
-            }
-        });
+        return getValue(
+                Flags.FLAG_ENABLE_TOKEN_REFRESH,
+                new Predicate() { // from class:
+                    // android.app.contextualsearch.flags.CustomFeatureFlags$$ExternalSyntheticLambda1
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).enableTokenRefresh();
+                    }
+                });
     }
 
     public boolean isFlagReadOnlyOptimized(String flagName) {

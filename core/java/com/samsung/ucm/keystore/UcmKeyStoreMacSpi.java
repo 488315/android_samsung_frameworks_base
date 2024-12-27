@@ -5,11 +5,13 @@ import android.sec.enterprise.EnterpriseDeviceManager;
 import android.sec.enterprise.IEDMProxy;
 import android.security.keystore.KeyProperties;
 import android.util.Log;
+
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.spec.AlgorithmParameterSpec;
 import java.util.Arrays;
+
 import javax.crypto.MacSpi;
 
 /* loaded from: classes6.dex */
@@ -24,7 +26,8 @@ public class UcmKeyStoreMacSpi extends MacSpi {
     }
 
     @Override // javax.crypto.MacSpi
-    public void engineInit(Key key, AlgorithmParameterSpec params) throws InvalidKeyException, InvalidAlgorithmParameterException {
+    public void engineInit(Key key, AlgorithmParameterSpec params)
+            throws InvalidKeyException, InvalidAlgorithmParameterException {
         if (key == null) {
             throw new InvalidKeyException("Key is null");
         }
@@ -36,7 +39,7 @@ public class UcmKeyStoreMacSpi extends MacSpi {
 
     @Override // javax.crypto.MacSpi
     public void engineUpdate(byte input) {
-        engineUpdate(new byte[]{input}, 0, 1);
+        engineUpdate(new byte[] {input}, 0, 1);
     }
 
     @Override // javax.crypto.MacSpi
@@ -63,7 +66,8 @@ public class UcmKeyStoreMacSpi extends MacSpi {
             return null;
         }
         try {
-            byte[] output = lService.ucmMac(this.mSecretKey.getAlias(), this.mInput, this.mAlgorithm);
+            byte[] output =
+                    lService.ucmMac(this.mSecretKey.getAlias(), this.mInput, this.mAlgorithm);
             return output;
         } catch (RemoteException re) {
             Log.e(TAG, "Remote Exception " + re);

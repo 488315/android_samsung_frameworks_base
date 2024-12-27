@@ -69,15 +69,18 @@ public final class Histogram {
     public static final class ScaledRangeOptions implements BinOptions {
         final long[] mBins;
 
-        public ScaledRangeOptions(int binCount, int minValue, float firstBinWidth, float scaleFactor) {
+        public ScaledRangeOptions(
+                int binCount, int minValue, float firstBinWidth, float scaleFactor) {
             if (binCount < 1) {
                 throw new IllegalArgumentException("Bin count should be positive number");
             }
             if (firstBinWidth < 1.0f) {
-                throw new IllegalArgumentException("First bin width invalid (should be 1.f at minimum)");
+                throw new IllegalArgumentException(
+                        "First bin width invalid (should be 1.f at minimum)");
             }
             if (scaleFactor < 1.0f) {
-                throw new IllegalArgumentException("Scaled factor invalid (should be 1.f at minimum)");
+                throw new IllegalArgumentException(
+                        "Scaled factor invalid (should be 1.f at minimum)");
             }
             this.mBins = initBins(binCount + 1, minValue, firstBinWidth, scaleFactor);
         }
@@ -106,14 +109,16 @@ public final class Histogram {
             return index;
         }
 
-        private static long[] initBins(int count, int minValue, float firstBinWidth, float scaleFactor) {
+        private static long[] initBins(
+                int count, int minValue, float firstBinWidth, float scaleFactor) {
             long[] bins = new long[count];
             bins[0] = minValue;
             double lastWidth = firstBinWidth;
             for (int i = 1; i < count; i++) {
                 double currentBinMinValue = bins[i - 1] + lastWidth;
                 if (currentBinMinValue > 2.147483647E9d) {
-                    throw new IllegalArgumentException("Attempted to create a bucket larger than maxint");
+                    throw new IllegalArgumentException(
+                            "Attempted to create a bucket larger than maxint");
                 }
                 bins[i] = (long) currentBinMinValue;
                 lastWidth *= scaleFactor;

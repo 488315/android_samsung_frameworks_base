@@ -8,6 +8,7 @@ import android.content.pm.Signature;
 import android.provider.Settings;
 import android.util.ArrayMap;
 import android.util.ArraySet;
+
 import com.android.internal.hidden_from_bootclasspath.android.permission.flags.Flags;
 import com.android.internal.util.CollectionUtils;
 import com.android.server.LocalServices;
@@ -15,6 +16,11 @@ import com.android.server.pm.PackageManagerService;
 import com.android.server.pm.pkg.AndroidPackage;
 import com.android.server.pm.pkg.PackageStateInternal;
 import com.android.server.role.RoleServicePlatformHelper;
+
+import libcore.util.HexEncoding;
+
+import org.xmlpull.v1.XmlPullParser;
+
 import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -25,8 +31,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
-import libcore.util.HexEncoding;
-import org.xmlpull.v1.XmlPullParser;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -80,7 +84,8 @@ public final class RoleServicePlatformHelperImpl implements RoleServicePlatformH
                 int depth5 = xmlPullParser.getDepth() + 1;
                 while (true) {
                     int next2 = xmlPullParser.next();
-                    if (next2 == 1 || ((depth2 = xmlPullParser.getDepth()) < depth5 && next2 == 3)) {
+                    if (next2 == 1
+                            || ((depth2 = xmlPullParser.getDepth()) < depth5 && next2 == 3)) {
                         break;
                     }
                     if (depth2 <= depth5 && next2 == 2 && xmlPullParser.getName().equals("role")) {
@@ -89,10 +94,14 @@ public final class RoleServicePlatformHelperImpl implements RoleServicePlatformH
                         int depth6 = xmlPullParser.getDepth() + 1;
                         while (true) {
                             int next3 = xmlPullParser.next();
-                            if (next3 == 1 || ((depth3 = xmlPullParser.getDepth()) < depth6 && next3 == 3)) {
+                            if (next3 == 1
+                                    || ((depth3 = xmlPullParser.getDepth()) < depth6
+                                            && next3 == 3)) {
                                 break;
                             }
-                            if (depth3 <= depth6 && next3 == 2 && xmlPullParser.getName().equals("holder")) {
+                            if (depth3 <= depth6
+                                    && next3 == 2
+                                    && xmlPullParser.getName().equals("holder")) {
                                 arraySet.add(xmlPullParser.getAttributeValue(null, "name"));
                             }
                         }
@@ -110,63 +119,107 @@ public final class RoleServicePlatformHelperImpl implements RoleServicePlatformH
         ComponentName deviceOwnerComponent;
         String packageName;
         ComponentName profileOwnerAsUser;
-        final PackageManagerInternal packageManagerInternal = (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
-        DevicePolicyManagerInternal devicePolicyManagerInternal = (DevicePolicyManagerInternal) LocalServices.getService(DevicePolicyManagerInternal.class);
+        final PackageManagerInternal packageManagerInternal =
+                (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
+        DevicePolicyManagerInternal devicePolicyManagerInternal =
+                (DevicePolicyManagerInternal)
+                        LocalServices.getService(DevicePolicyManagerInternal.class);
         MessageDigestOutputStream messageDigestOutputStream = new MessageDigestOutputStream();
-        final DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(messageDigestOutputStream));
-        packageManagerInternal.forEachInstalledPackage(i, new Consumer() { // from class: com.android.server.policy.role.RoleServicePlatformHelperImpl$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                DataOutputStream dataOutputStream2 = dataOutputStream;
-                PackageManagerInternal packageManagerInternal2 = packageManagerInternal;
-                int i2 = i;
-                AndroidPackage androidPackage = (AndroidPackage) obj;
-                try {
-                    dataOutputStream2.writeUTF(androidPackage.getPackageName());
-                    dataOutputStream2.writeLong(androidPackage.getLongVersionCode());
-                    PackageStateInternal packageStateInternal = ((PackageManagerService.PackageManagerInternalImpl) packageManagerInternal2).getPackageStateInternal(androidPackage.getPackageName());
-                    dataOutputStream2.writeInt(packageStateInternal == null ? 0 : packageStateInternal.getUserStateOrDefault(i2).getEnabledState());
-                    Set requestedPermissions = androidPackage.getRequestedPermissions();
-                    dataOutputStream2.writeInt(requestedPermissions.size());
-                    Iterator it = requestedPermissions.iterator();
-                    while (it.hasNext()) {
-                        dataOutputStream2.writeUTF((String) it.next());
+        final DataOutputStream dataOutputStream =
+                new DataOutputStream(new BufferedOutputStream(messageDigestOutputStream));
+        packageManagerInternal.forEachInstalledPackage(
+                i,
+                new Consumer() { // from class:
+                                 // com.android.server.policy.role.RoleServicePlatformHelperImpl$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        DataOutputStream dataOutputStream2 = dataOutputStream;
+                        PackageManagerInternal packageManagerInternal2 = packageManagerInternal;
+                        int i2 = i;
+                        AndroidPackage androidPackage = (AndroidPackage) obj;
+                        try {
+                            dataOutputStream2.writeUTF(androidPackage.getPackageName());
+                            dataOutputStream2.writeLong(androidPackage.getLongVersionCode());
+                            PackageStateInternal packageStateInternal =
+                                    ((PackageManagerService.PackageManagerInternalImpl)
+                                                    packageManagerInternal2)
+                                            .getPackageStateInternal(
+                                                    androidPackage.getPackageName());
+                            dataOutputStream2.writeInt(
+                                    packageStateInternal == null
+                                            ? 0
+                                            : packageStateInternal
+                                                    .getUserStateOrDefault(i2)
+                                                    .getEnabledState());
+                            Set requestedPermissions = androidPackage.getRequestedPermissions();
+                            dataOutputStream2.writeInt(requestedPermissions.size());
+                            Iterator it = requestedPermissions.iterator();
+                            while (it.hasNext()) {
+                                dataOutputStream2.writeUTF((String) it.next());
+                            }
+                            PackageStateInternal packageStateInternal2 =
+                                    ((PackageManagerService.PackageManagerInternalImpl)
+                                                    packageManagerInternal2)
+                                            .getPackageStateInternal(
+                                                    androidPackage.getPackageName());
+                            ArraySet arraySet =
+                                    packageStateInternal2 == null
+                                            ? new ArraySet()
+                                            : packageStateInternal2
+                                                    .getUserStateOrDefault(i2)
+                                                    .m788getEnabledComponents();
+                            int size = CollectionUtils.size(arraySet);
+                            dataOutputStream2.writeInt(size);
+                            for (int i3 = 0; i3 < size; i3++) {
+                                dataOutputStream2.writeUTF((String) arraySet.valueAt(i3));
+                            }
+                            PackageStateInternal packageStateInternal3 =
+                                    ((PackageManagerService.PackageManagerInternalImpl)
+                                                    packageManagerInternal2)
+                                            .getPackageStateInternal(
+                                                    androidPackage.getPackageName());
+                            ArraySet arraySet2 =
+                                    packageStateInternal3 == null
+                                            ? new ArraySet()
+                                            : packageStateInternal3
+                                                    .getUserStateOrDefault(i2)
+                                                    .m787getDisabledComponents();
+                            int size2 = CollectionUtils.size(arraySet2);
+                            for (int i4 = 0; i4 < size2; i4++) {
+                                dataOutputStream2.writeUTF((String) arraySet2.valueAt(i4));
+                            }
+                            for (Signature signature :
+                                    androidPackage.getSigningDetails().getSignatures()) {
+                                dataOutputStream2.write(signature.toByteArray());
+                            }
+                        } catch (IOException e) {
+                            throw new AssertionError(e);
+                        }
                     }
-                    PackageStateInternal packageStateInternal2 = ((PackageManagerService.PackageManagerInternalImpl) packageManagerInternal2).getPackageStateInternal(androidPackage.getPackageName());
-                    ArraySet arraySet = packageStateInternal2 == null ? new ArraySet() : packageStateInternal2.getUserStateOrDefault(i2).m788getEnabledComponents();
-                    int size = CollectionUtils.size(arraySet);
-                    dataOutputStream2.writeInt(size);
-                    for (int i3 = 0; i3 < size; i3++) {
-                        dataOutputStream2.writeUTF((String) arraySet.valueAt(i3));
-                    }
-                    PackageStateInternal packageStateInternal3 = ((PackageManagerService.PackageManagerInternalImpl) packageManagerInternal2).getPackageStateInternal(androidPackage.getPackageName());
-                    ArraySet arraySet2 = packageStateInternal3 == null ? new ArraySet() : packageStateInternal3.getUserStateOrDefault(i2).m787getDisabledComponents();
-                    int size2 = CollectionUtils.size(arraySet2);
-                    for (int i4 = 0; i4 < size2; i4++) {
-                        dataOutputStream2.writeUTF((String) arraySet2.valueAt(i4));
-                    }
-                    for (Signature signature : androidPackage.getSigningDetails().getSignatures()) {
-                        dataOutputStream2.write(signature.toByteArray());
-                    }
-                } catch (IOException e) {
-                    throw new AssertionError(e);
-                }
-            }
-        });
+                });
         String str = "";
         if (devicePolicyManagerInternal != null) {
             try {
-                if (devicePolicyManagerInternal.getDeviceOwnerUserId() == i && (deviceOwnerComponent = devicePolicyManagerInternal.getDeviceOwnerComponent(false)) != null) {
+                if (devicePolicyManagerInternal.getDeviceOwnerUserId() == i
+                        && (deviceOwnerComponent =
+                                        devicePolicyManagerInternal.getDeviceOwnerComponent(false))
+                                != null) {
                     packageName = deviceOwnerComponent.getPackageName();
                     dataOutputStream.writeUTF(packageName);
-                    if (devicePolicyManagerInternal != null && (profileOwnerAsUser = devicePolicyManagerInternal.getProfileOwnerAsUser(i)) != null) {
+                    if (devicePolicyManagerInternal != null
+                            && (profileOwnerAsUser =
+                                            devicePolicyManagerInternal.getProfileOwnerAsUser(i))
+                                    != null) {
                         str = profileOwnerAsUser.getPackageName();
                     }
                     dataOutputStream.writeUTF(str);
-                    dataOutputStream.writeInt(Settings.Global.getInt(this.mContext.getContentResolver(), "device_demo_mode", 0));
+                    dataOutputStream.writeInt(
+                            Settings.Global.getInt(
+                                    this.mContext.getContentResolver(), "device_demo_mode", 0));
                     dataOutputStream.writeBoolean(Flags.walletRoleEnabled());
                     dataOutputStream.flush();
-                    return HexEncoding.encodeToString(messageDigestOutputStream.mMessageDigest.digest(), true);
+                    return HexEncoding.encodeToString(
+                            messageDigestOutputStream.mMessageDigest.digest(), true);
                 }
             } catch (IOException e) {
                 throw new AssertionError(e);
@@ -178,20 +231,21 @@ public final class RoleServicePlatformHelperImpl implements RoleServicePlatformH
             str = profileOwnerAsUser.getPackageName();
         }
         dataOutputStream.writeUTF(str);
-        dataOutputStream.writeInt(Settings.Global.getInt(this.mContext.getContentResolver(), "device_demo_mode", 0));
+        dataOutputStream.writeInt(
+                Settings.Global.getInt(this.mContext.getContentResolver(), "device_demo_mode", 0));
         dataOutputStream.writeBoolean(Flags.walletRoleEnabled());
         dataOutputStream.flush();
         return HexEncoding.encodeToString(messageDigestOutputStream.mMessageDigest.digest(), true);
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:54:0x016f, code lost:
-    
-        if (((r7 == null || (r7 = r7.activityInfo) == null) ? false : r1.equals(r7.packageName)) != false) goto L78;
-     */
+
+       if (((r7 == null || (r7 = r7.activityInfo) == null) ? false : r1.equals(r7.packageName)) != false) goto L78;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:73:0x0096, code lost:
-    
-        if (android.text.TextUtils.isEmpty(r1) == false) goto L33;
-     */
+
+       if (android.text.TextUtils.isEmpty(r1) == false) goto L33;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Removed duplicated region for block: B:17:0x009a  */
     /* JADX WARN: Removed duplicated region for block: B:20:0x00b4 A[EXC_TOP_SPLITTER, SYNTHETIC] */
@@ -207,6 +261,8 @@ public final class RoleServicePlatformHelperImpl implements RoleServicePlatformH
             Method dump skipped, instructions count: 406
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.policy.role.RoleServicePlatformHelperImpl.getLegacyRoleState(int):java.util.Map");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.policy.role.RoleServicePlatformHelperImpl.getLegacyRoleState(int):java.util.Map");
     }
 }

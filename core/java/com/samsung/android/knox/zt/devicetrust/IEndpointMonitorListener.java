@@ -9,7 +9,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface IEndpointMonitorListener extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.knox.zt.devicetrust.IEndpointMonitorListener";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.knox.zt.devicetrust.IEndpointMonitorListener";
 
     void onEvent(int i, Bundle bundle) throws RemoteException;
 
@@ -19,16 +20,13 @@ public interface IEndpointMonitorListener extends IInterface {
 
     public static class Default implements IEndpointMonitorListener {
         @Override // com.samsung.android.knox.zt.devicetrust.IEndpointMonitorListener
-        public void onEventSimplified(int event, String data) throws RemoteException {
-        }
+        public void onEventSimplified(int event, String data) throws RemoteException {}
 
         @Override // com.samsung.android.knox.zt.devicetrust.IEndpointMonitorListener
-        public void onEventGeneralized(int event, String data) throws RemoteException {
-        }
+        public void onEventGeneralized(int event, String data) throws RemoteException {}
 
         @Override // com.samsung.android.knox.zt.devicetrust.IEndpointMonitorListener
-        public void onEvent(int event, Bundle data) throws RemoteException {
-        }
+        public void onEvent(int event, Bundle data) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -36,7 +34,7 @@ public interface IEndpointMonitorListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IEndpointMonitorListener {
+    public abstract static class Stub extends Binder implements IEndpointMonitorListener {
         static final int TRANSACTION_onEvent = 3;
         static final int TRANSACTION_onEventGeneralized = 2;
         static final int TRANSACTION_onEventSimplified = 1;
@@ -80,7 +78,8 @@ public interface IEndpointMonitorListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IEndpointMonitorListener.DESCRIPTOR);
             }

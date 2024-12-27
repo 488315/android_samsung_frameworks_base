@@ -13,6 +13,7 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Pair;
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.DeviceIdleInternal;
 import com.android.server.pm.DomainVerificationConnection;
@@ -21,6 +22,7 @@ import com.android.server.pm.verify.domain.DomainVerificationCollector;
 import com.android.server.pm.verify.domain.DomainVerificationManagerInternal;
 import com.android.server.pm.verify.domain.DomainVerificationService;
 import com.android.server.pm.verify.domain.models.DomainVerificationPkgState;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -52,7 +54,12 @@ public final class DomainVerificationProxyV1 implements DomainVerificationProxy 
         }
     }
 
-    public DomainVerificationProxyV1(Context context, DomainVerificationManagerInternal domainVerificationManagerInternal, DomainVerificationCollector domainVerificationCollector, DomainVerificationConnection domainVerificationConnection, ComponentName componentName) {
+    public DomainVerificationProxyV1(
+            Context context,
+            DomainVerificationManagerInternal domainVerificationManagerInternal,
+            DomainVerificationCollector domainVerificationCollector,
+            DomainVerificationConnection domainVerificationConnection,
+            ComponentName componentName) {
         this.mContext = context;
         this.mConnection = domainVerificationConnection;
         this.mVerifierComponent = componentName;
@@ -70,7 +77,11 @@ public final class DomainVerificationProxyV1 implements DomainVerificationProxy 
         String packageName = this.mVerifierComponent.getPackageName();
         DomainVerificationConnection domainVerificationConnection = this.mConnection;
         domainVerificationConnection.getClass();
-        return i == domainVerificationConnection.mPm.snapshotComputer().getPackageUid(packageName, 0L, UserHandle.getUserId(i));
+        return i
+                == domainVerificationConnection
+                        .mPm
+                        .snapshotComputer()
+                        .getPackageUid(packageName, 0L, UserHandle.getUserId(i));
     }
 
     @Override // com.android.server.pm.verify.domain.proxy.DomainVerificationProxy
@@ -84,11 +95,18 @@ public final class DomainVerificationProxyV1 implements DomainVerificationProxy 
             ArrayMap arrayMap = new ArrayMap(set.size());
             synchronized (this.mLock) {
                 for (String str : set) {
-                    DomainVerificationService domainVerificationService = (DomainVerificationService) this.mManager;
+                    DomainVerificationService domainVerificationService =
+                            (DomainVerificationService) this.mManager;
                     synchronized (domainVerificationService.mLock) {
                         try {
-                            DomainVerificationPkgState domainVerificationPkgState = (DomainVerificationPkgState) domainVerificationService.mAttachedPkgStates.mPackageNameMap.get(str);
-                            uuid = domainVerificationPkgState != null ? domainVerificationPkgState.mId : null;
+                            DomainVerificationPkgState domainVerificationPkgState =
+                                    (DomainVerificationPkgState)
+                                            domainVerificationService.mAttachedPkgStates
+                                                    .mPackageNameMap.get(str);
+                            uuid =
+                                    domainVerificationPkgState != null
+                                            ? domainVerificationPkgState.mId
+                                            : null;
                         } finally {
                         }
                     }
@@ -101,14 +119,32 @@ public final class DomainVerificationProxyV1 implements DomainVerificationProxy 
                 this.mRequests.putAll(arrayMap);
             }
             DomainVerificationConnection domainVerificationConnection = this.mConnection;
-            long max = Math.max(Settings.Global.getLong(domainVerificationConnection.mPm.mContext.getContentResolver(), "verifier_timeout", 10000L), 10000L);
-            ((DeviceIdleInternal) domainVerificationConnection.mPm.mInjector.mGetLocalServiceProducer.produce(DeviceIdleInternal.class)).addPowerSaveTempWhitelistApp(Process.myUid(), this.mVerifierComponent.getPackageName(), max, 0, true, FrameworkStatsLog.APP_BACKGROUND_RESTRICTIONS_INFO__EXEMPTION_REASON__REASON_DOMAIN_VERIFICATION_V1, "domain verification agent");
+            long max =
+                    Math.max(
+                            Settings.Global.getLong(
+                                    domainVerificationConnection.mPm.mContext.getContentResolver(),
+                                    "verifier_timeout",
+                                    10000L),
+                            10000L);
+            ((DeviceIdleInternal)
+                            domainVerificationConnection.mPm.mInjector.mGetLocalServiceProducer
+                                    .produce(DeviceIdleInternal.class))
+                    .addPowerSaveTempWhitelistApp(
+                            Process.myUid(),
+                            this.mVerifierComponent.getPackageName(),
+                            max,
+                            0,
+                            true,
+                            FrameworkStatsLog
+                                    .APP_BACKGROUND_RESTRICTIONS_INFO__EXEMPTION_REASON__REASON_DOMAIN_VERIFICATION_V1,
+                            "domain verification agent");
             int size = arrayMap.size();
             int i4 = 0;
             while (i4 < size) {
                 int intValue = ((Integer) arrayMap.keyAt(i4)).intValue();
                 String str2 = (String) ((Pair) arrayMap.valueAt(i4)).second;
-                AndroidPackage androidPackage = domainVerificationConnection.mPm.snapshotComputer().getPackage(str2);
+                AndroidPackage androidPackage =
+                        domainVerificationConnection.mPm.snapshotComputer().getPackage(str2);
                 if (androidPackage != null) {
                     ArraySet collectDomains = this.mCollector.collectDomains(androidPackage, z, z);
                     StringBuilder sb = new StringBuilder();
@@ -124,10 +160,31 @@ public final class DomainVerificationProxyV1 implements DomainVerificationProxy 
                         sb.append(str3);
                         i2++;
                     }
-                    Intent addFlags = new Intent("android.intent.action.INTENT_FILTER_NEEDS_VERIFICATION").setComponent(this.mVerifierComponent).putExtra("android.content.pm.extra.INTENT_FILTER_VERIFICATION_ID", intValue).putExtra("android.content.pm.extra.INTENT_FILTER_VERIFICATION_URI_SCHEME", "https").putExtra("android.content.pm.extra.INTENT_FILTER_VERIFICATION_HOSTS", sb.toString()).putExtra("android.content.pm.extra.INTENT_FILTER_VERIFICATION_PACKAGE_NAME", str2).addFlags(268435456);
+                    Intent addFlags =
+                            new Intent("android.intent.action.INTENT_FILTER_NEEDS_VERIFICATION")
+                                    .setComponent(this.mVerifierComponent)
+                                    .putExtra(
+                                            "android.content.pm.extra.INTENT_FILTER_VERIFICATION_ID",
+                                            intValue)
+                                    .putExtra(
+                                            "android.content.pm.extra.INTENT_FILTER_VERIFICATION_URI_SCHEME",
+                                            "https")
+                                    .putExtra(
+                                            "android.content.pm.extra.INTENT_FILTER_VERIFICATION_HOSTS",
+                                            sb.toString())
+                                    .putExtra(
+                                            "android.content.pm.extra.INTENT_FILTER_VERIFICATION_PACKAGE_NAME",
+                                            str2)
+                                    .addFlags(268435456);
                     BroadcastOptions makeBasic = BroadcastOptions.makeBasic();
-                    makeBasic.setTemporaryAppAllowlist(max, 0, FrameworkStatsLog.APP_BACKGROUND_RESTRICTIONS_INFO__EXEMPTION_REASON__REASON_DOMAIN_VERIFICATION_V1, "");
-                    this.mContext.sendBroadcastAsUser(addFlags, UserHandle.SYSTEM, null, makeBasic.toBundle());
+                    makeBasic.setTemporaryAppAllowlist(
+                            max,
+                            0,
+                            FrameworkStatsLog
+                                    .APP_BACKGROUND_RESTRICTIONS_INFO__EXEMPTION_REASON__REASON_DOMAIN_VERIFICATION_V1,
+                            "");
+                    this.mContext.sendBroadcastAsUser(
+                            addFlags, UserHandle.SYSTEM, null, makeBasic.toBundle());
                 }
                 i4++;
                 z = true;
@@ -146,10 +203,13 @@ public final class DomainVerificationProxyV1 implements DomainVerificationProxy 
         UUID uuid2 = (UUID) pair.first;
         String str4 = (String) pair.second;
         try {
-            domainVerificationInfo = ((DomainVerificationService) this.mManager).getDomainVerificationInfo(str4);
+            domainVerificationInfo =
+                    ((DomainVerificationService) this.mManager).getDomainVerificationInfo(str4);
         } catch (PackageManager.NameNotFoundException unused) {
         }
-        if (domainVerificationInfo == null || !Objects.equals(uuid2, domainVerificationInfo.getIdentifier()) || this.mConnection.mPm.snapshotComputer().getPackage(str4) == null) {
+        if (domainVerificationInfo == null
+                || !Objects.equals(uuid2, domainVerificationInfo.getIdentifier())
+                || this.mConnection.mPm.snapshotComputer().getPackage(str4) == null) {
             return true;
         }
         ArraySet arraySet = new ArraySet(response.failedDomains);
@@ -172,20 +232,34 @@ public final class DomainVerificationProxyV1 implements DomainVerificationProxy 
         int i5 = response.callingUid;
         if (!arraySet2.isEmpty()) {
             try {
-                if (((DomainVerificationService) this.mManager).setDomainVerificationStatusInternal(i5, uuid2, arraySet2, 1) != 0) {
-                    Slog.e("DomainVerificationProxyV1", "Failure reporting successful domains for " + str4);
+                if (((DomainVerificationService) this.mManager)
+                                .setDomainVerificationStatusInternal(i5, uuid2, arraySet2, 1)
+                        != 0) {
+                    Slog.e(
+                            "DomainVerificationProxyV1",
+                            "Failure reporting successful domains for " + str4);
                 }
             } catch (Exception e) {
-                Slog.e("DomainVerificationProxyV1", "Failure reporting successful domains for " + str4, e);
+                Slog.e(
+                        "DomainVerificationProxyV1",
+                        "Failure reporting successful domains for " + str4,
+                        e);
             }
         }
         if (!arraySet.isEmpty()) {
             try {
-                if (((DomainVerificationService) this.mManager).setDomainVerificationStatusInternal(i5, uuid2, arraySet, 6) != 0) {
-                    Slog.e("DomainVerificationProxyV1", "Failure reporting failed domains for " + str4);
+                if (((DomainVerificationService) this.mManager)
+                                .setDomainVerificationStatusInternal(i5, uuid2, arraySet, 6)
+                        != 0) {
+                    Slog.e(
+                            "DomainVerificationProxyV1",
+                            "Failure reporting failed domains for " + str4);
                 }
             } catch (Exception e2) {
-                Slog.e("DomainVerificationProxyV1", "Failure reporting failed domains for " + str4, e2);
+                Slog.e(
+                        "DomainVerificationProxyV1",
+                        "Failure reporting failed domains for " + str4,
+                        e2);
             }
         }
         return true;

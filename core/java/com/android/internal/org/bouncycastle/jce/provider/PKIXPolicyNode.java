@@ -17,7 +17,14 @@ public class PKIXPolicyNode implements PolicyNode {
     protected Set policyQualifiers;
     protected String validPolicy;
 
-    public PKIXPolicyNode(List _children, int _depth, Set _expectedPolicies, PolicyNode _parent, Set _policyQualifiers, String _validPolicy, boolean _critical) {
+    public PKIXPolicyNode(
+            List _children,
+            int _depth,
+            Set _expectedPolicies,
+            PolicyNode _parent,
+            Set _policyQualifiers,
+            String _validPolicy,
+            boolean _critical) {
         this.children = _children;
         this.depth = _depth;
         this.expectedPolicies = _expectedPolicies;
@@ -115,7 +122,15 @@ public class PKIXPolicyNode implements PolicyNode {
         while (_iter2.hasNext()) {
             _policyQualifiers.add(new String((String) _iter2.next()));
         }
-        PKIXPolicyNode _node = new PKIXPolicyNode(new ArrayList(), this.depth, _expectedPolicies, null, _policyQualifiers, new String(this.validPolicy), this.critical);
+        PKIXPolicyNode _node =
+                new PKIXPolicyNode(
+                        new ArrayList(),
+                        this.depth,
+                        _expectedPolicies,
+                        null,
+                        _policyQualifiers,
+                        new String(this.validPolicy),
+                        this.critical);
         Iterator _iter3 = this.children.iterator();
         while (_iter3.hasNext()) {
             PKIXPolicyNode _child = ((PKIXPolicyNode) _iter3.next()).copy();

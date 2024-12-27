@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class Timestamp implements Parcelable {
-    public static final Parcelable.Creator<Timestamp> CREATOR = new Parcelable.Creator<Timestamp>() { // from class: android.hardware.keymaster.Timestamp.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Timestamp createFromParcel(Parcel _aidl_source) {
-            Timestamp _aidl_out = new Timestamp();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<Timestamp> CREATOR =
+            new Parcelable.Creator<
+                    Timestamp>() { // from class: android.hardware.keymaster.Timestamp.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Timestamp createFromParcel(Parcel _aidl_source) {
+                    Timestamp _aidl_out = new Timestamp();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Timestamp[] newArray(int _aidl_size) {
-            return new Timestamp[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Timestamp[] newArray(int _aidl_size) {
+                    return new Timestamp[_aidl_size];
+                }
+            };
     public long milliSeconds = 0;
 
     @Override // android.os.Parcelable

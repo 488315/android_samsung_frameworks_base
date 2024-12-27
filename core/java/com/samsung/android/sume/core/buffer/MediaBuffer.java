@@ -3,6 +3,7 @@ package com.samsung.android.sume.core.buffer;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.os.Parcelable;
+
 import com.samsung.android.sume.core.UniExifInterface;
 import com.samsung.android.sume.core.format.Copyable;
 import com.samsung.android.sume.core.format.MediaFormat;
@@ -13,6 +14,7 @@ import com.samsung.android.sume.core.types.ColorFormat;
 import com.samsung.android.sume.core.types.ColorSpace;
 import com.samsung.android.sume.core.types.DataType;
 import com.samsung.android.sume.core.types.MediaType;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.nio.ByteBuffer;
@@ -29,8 +31,7 @@ public interface MediaBuffer extends Parcelable, Copyable<MediaBuffer> {
     public static final int BUFFER_FLAG_PACKED_IO_BUFFERS = 1;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BufferFlag {
-    }
+    public @interface BufferFlag {}
 
     void addExtra(Map<String, Object> map);
 
@@ -152,7 +153,11 @@ public interface MediaBuffer extends Parcelable, Copyable<MediaBuffer> {
     }
 
     static boolean isInstanceOfFormat(Object object) {
-        return (object instanceof ColorFormat) || (object instanceof DataType) || (object instanceof Shape) || (object instanceof ColorSpace) || (object instanceof Rect);
+        return (object instanceof ColorFormat)
+                || (object instanceof DataType)
+                || (object instanceof Shape)
+                || (object instanceof ColorSpace)
+                || (object instanceof Rect);
     }
 
     static MediaBuffer of(MediaType mediaType, Object... args) {
@@ -264,7 +269,8 @@ public interface MediaBuffer extends Parcelable, Copyable<MediaBuffer> {
         return MediaBufferAllocator.of(format, align).wrap(data);
     }
 
-    static <T> MediaBuffer of(MutableMediaFormat format, T data, List<MediaBuffer> metaDataBuffers) {
+    static <T> MediaBuffer of(
+            MutableMediaFormat format, T data, List<MediaBuffer> metaDataBuffers) {
         MediaBuffer buffer = of(format, (Object) data);
         metaDataBuffers.add(0, buffer);
         return groupOf(buffer, metaDataBuffers);
@@ -295,7 +301,9 @@ public interface MediaBuffer extends Parcelable, Copyable<MediaBuffer> {
     }
 
     static MutableMediaBuffer mutableMetaOf(Object... args) {
-        return mutableOf(MediaType.META, Stream.concat(Stream.of(DataType.U8C1), Arrays.stream(args)).toArray());
+        return mutableOf(
+                MediaType.META,
+                Stream.concat(Stream.of(DataType.U8C1), Arrays.stream(args)).toArray());
     }
 
     static MutableMediaBuffer mutableScalaOf(Object... args) {
@@ -331,7 +339,9 @@ public interface MediaBuffer extends Parcelable, Copyable<MediaBuffer> {
     }
 
     static MediaBuffer metaOf(Object... args) {
-        return of(MediaType.META, Stream.concat(Stream.of(DataType.U8C1), Arrays.stream(args)).toArray());
+        return of(
+                MediaType.META,
+                Stream.concat(Stream.of(DataType.U8C1), Arrays.stream(args)).toArray());
     }
 
     static MediaBuffer scalaOf(Object... args) {
@@ -361,7 +371,12 @@ public interface MediaBuffer extends Parcelable, Copyable<MediaBuffer> {
     }
 
     static MediaBuffer metadataBufferOf(int metadataKey, Bitmap bitmap) {
-        MutableMediaFormat fmt = MediaFormat.mutableMetaOf(Integer.valueOf(metadataKey), DataType.U8C3, ColorFormat.RGB, Shape.of(bitmap.getHeight(), bitmap.getWidth()));
+        MutableMediaFormat fmt =
+                MediaFormat.mutableMetaOf(
+                        Integer.valueOf(metadataKey),
+                        DataType.U8C3,
+                        ColorFormat.RGB,
+                        Shape.of(bitmap.getHeight(), bitmap.getWidth()));
         fmt.setColorSpace(ColorSpace.of(bitmap));
         float ratio = fmt.size() / bitmap.getByteCount();
         if (Math.round(ratio * 100.0f) / 100.0f == 0.75f) {
@@ -376,7 +391,11 @@ public interface MediaBuffer extends Parcelable, Copyable<MediaBuffer> {
             fmt.setDataType(DataType.U8C1);
             fmt.setColorFormat(ColorFormat.GRAY);
         } else {
-            throw new IllegalArgumentException("byte count +" + bitmap.getByteCount() + "is differ from calculated buffer size" + fmt.size());
+            throw new IllegalArgumentException(
+                    "byte count +"
+                            + bitmap.getByteCount()
+                            + "is differ from calculated buffer size"
+                            + fmt.size());
         }
         return of(fmt, bitmap);
     }
@@ -395,7 +414,11 @@ public interface MediaBuffer extends Parcelable, Copyable<MediaBuffer> {
             format = MediaFormat.mutableMetaOf(Shape.of(1, byteBufferData.limit()));
         } else if (t instanceof Bitmap) {
             Bitmap bitmap = (Bitmap) t;
-            MutableMediaFormat format2 = MediaFormat.mutableMetaOf(DataType.U8C3, ColorFormat.RGB, Shape.of(bitmap.getHeight(), bitmap.getWidth()));
+            MutableMediaFormat format2 =
+                    MediaFormat.mutableMetaOf(
+                            DataType.U8C3,
+                            ColorFormat.RGB,
+                            Shape.of(bitmap.getHeight(), bitmap.getWidth()));
             format2.setColorSpace(ColorSpace.of(bitmap));
             float ratio = format2.size() / bitmap.getByteCount();
             if (Math.round(ratio * 100.0f) / 100.0f == 0.75f) {
@@ -410,7 +433,11 @@ public interface MediaBuffer extends Parcelable, Copyable<MediaBuffer> {
                 format2.setDataType(DataType.U8C1);
                 format2.setColorFormat(ColorFormat.GRAY);
             } else {
-                throw new IllegalArgumentException("byte count +" + bitmap.getByteCount() + "is differ from calculated buffer size" + format2.size());
+                throw new IllegalArgumentException(
+                        "byte count +"
+                                + bitmap.getByteCount()
+                                + "is differ from calculated buffer size"
+                                + format2.size());
             }
             format = format2;
         } else {
@@ -421,7 +448,8 @@ public interface MediaBuffer extends Parcelable, Copyable<MediaBuffer> {
     }
 
     static MediaBuffer exifBufferOf(ByteBuffer exifByteBuffer) {
-        MutableMediaFormat exifFormat = MediaFormat.mutableMetaOf(Shape.of(1, exifByteBuffer.limit()));
+        MutableMediaFormat exifFormat =
+                MediaFormat.mutableMetaOf(Shape.of(1, exifByteBuffer.limit()));
         exifFormat.set("exif", true);
         return of(exifFormat, exifByteBuffer);
     }
@@ -431,7 +459,8 @@ public interface MediaBuffer extends Parcelable, Copyable<MediaBuffer> {
     }
 
     static MediaBuffer iccBufferOf(ByteBuffer iccByteBuffer) {
-        MutableMediaFormat iccFormat = MediaFormat.mutableMetaOf(Shape.of(1, iccByteBuffer.limit()));
+        MutableMediaFormat iccFormat =
+                MediaFormat.mutableMetaOf(Shape.of(1, iccByteBuffer.limit()));
         iccFormat.set("icc", true);
         return of(iccFormat, iccByteBuffer);
     }
@@ -442,7 +471,11 @@ public interface MediaBuffer extends Parcelable, Copyable<MediaBuffer> {
     }
 
     static MediaBuffer gainMapBufferOf(Bitmap bitmap) {
-        MutableMediaFormat fmt = MediaFormat.mutableGainMapOf(DataType.U8C3, ColorFormat.RGB, Shape.of(bitmap.getHeight(), bitmap.getWidth()));
+        MutableMediaFormat fmt =
+                MediaFormat.mutableGainMapOf(
+                        DataType.U8C3,
+                        ColorFormat.RGB,
+                        Shape.of(bitmap.getHeight(), bitmap.getWidth()));
         fmt.setColorSpace(ColorSpace.of(bitmap));
         float ratio = fmt.size() / bitmap.getByteCount();
         if (Math.round(ratio * 100.0f) / 100.0f == 0.75f) {
@@ -457,7 +490,11 @@ public interface MediaBuffer extends Parcelable, Copyable<MediaBuffer> {
             fmt.setDataType(DataType.U8C1);
             fmt.setColorFormat(ColorFormat.GRAY);
         } else {
-            throw new IllegalArgumentException("byte count +" + bitmap.getByteCount() + "is differ from calculated buffer size" + fmt.size());
+            throw new IllegalArgumentException(
+                    "byte count +"
+                            + bitmap.getByteCount()
+                            + "is differ from calculated buffer size"
+                            + fmt.size());
         }
         return of(fmt, bitmap);
     }
@@ -467,7 +504,10 @@ public interface MediaBuffer extends Parcelable, Copyable<MediaBuffer> {
     }
 
     static MediaBuffer groupOf(int primaryId, MediaBuffer... buffers) {
-        return groupOf(primaryId, (List<MediaBuffer>) (buffers.length == 0 ? new ArrayList() : Arrays.asList(buffers)));
+        return groupOf(
+                primaryId,
+                (List<MediaBuffer>)
+                        (buffers.length == 0 ? new ArrayList() : Arrays.asList(buffers)));
     }
 
     static MediaBuffer groupOf(int primaryId, List<MediaBuffer> buffers) {
@@ -488,7 +528,8 @@ public interface MediaBuffer extends Parcelable, Copyable<MediaBuffer> {
         return groupOf(buffer, metaDataBuffers);
     }
 
-    static <T> MediaBuffer groupOf(MutableMediaFormat format, T data, List<MediaBuffer> metaDataBuffers) {
+    static <T> MediaBuffer groupOf(
+            MutableMediaFormat format, T data, List<MediaBuffer> metaDataBuffers) {
         return groupOf(format.toMediaFormat(), data, metaDataBuffers);
     }
 

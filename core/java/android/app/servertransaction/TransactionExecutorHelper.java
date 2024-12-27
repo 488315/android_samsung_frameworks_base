@@ -7,6 +7,7 @@ import android.app.admin.DevicePolicyResources;
 import android.os.IBinder;
 import android.util.IntArray;
 import android.util.Log;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
@@ -23,7 +24,8 @@ public class TransactionExecutorHelper {
             throw new IllegalArgumentException("Can't resolve lifecycle path for undefined state");
         }
         if (start == 7 || finish == 7) {
-            throw new IllegalArgumentException("Can't start or finish in intermittent RESTART state");
+            throw new IllegalArgumentException(
+                    "Can't start or finish in intermittent RESTART state");
         }
         if (finish == 0 && start != finish) {
             throw new IllegalArgumentException("Can only start in pre-onCreate state");
@@ -61,14 +63,18 @@ public class TransactionExecutorHelper {
         return this.mLifecycleSequence;
     }
 
-    public int getClosestPreExecutionState(ActivityThread.ActivityClientRecord r, int postExecutionState) {
+    public int getClosestPreExecutionState(
+            ActivityThread.ActivityClientRecord r, int postExecutionState) {
         switch (postExecutionState) {
             case -1:
                 return -1;
             case 3:
                 return getClosestOfStates(r, ON_RESUME_PRE_EXCUTION_STATES);
             default:
-                throw new UnsupportedOperationException("Pre-execution states for state: " + postExecutionState + " is not supported.");
+                throw new UnsupportedOperationException(
+                        "Pre-execution states for state: "
+                                + postExecutionState
+                                + " is not supported.");
         }
     }
 
@@ -97,7 +103,8 @@ public class TransactionExecutorHelper {
         return closestState;
     }
 
-    public static ActivityLifecycleItem getLifecycleRequestForCurrentState(ActivityThread.ActivityClientRecord r) {
+    public static ActivityLifecycleItem getLifecycleRequestForCurrentState(
+            ActivityThread.ActivityClientRecord r) {
         int prevState = r.getLifecycleState();
         switch (prevState) {
             case 2:
@@ -106,7 +113,8 @@ public class TransactionExecutorHelper {
                 return lifecycleItem;
             case 3:
             default:
-                ActivityLifecycleItem lifecycleItem2 = ResumeActivityItem.obtain(r.token, false, false);
+                ActivityLifecycleItem lifecycleItem2 =
+                        ResumeActivityItem.obtain(r.token, false, false);
                 return lifecycleItem2;
             case 5:
                 ActivityLifecycleItem lifecycleItem3 = StopActivityItem.obtain(r.token);
@@ -127,13 +135,23 @@ public class TransactionExecutorHelper {
     @Deprecated
     static int lastCallbackRequestingState(ClientTransaction transaction) {
         List<ClientTransactionItem> callbacks = transaction.getCallbacks();
-        if (callbacks == null || callbacks.isEmpty() || transaction.getLifecycleStateRequest() == null) {
+        if (callbacks == null
+                || callbacks.isEmpty()
+                || transaction.getLifecycleStateRequest() == null) {
             return -1;
         }
-        return lastCallbackRequestingStateIndex(callbacks, 0, callbacks.size() - 1, transaction.getLifecycleStateRequest().getActivityToken());
+        return lastCallbackRequestingStateIndex(
+                callbacks,
+                0,
+                callbacks.size() - 1,
+                transaction.getLifecycleStateRequest().getActivityToken());
     }
 
-    private static int lastCallbackRequestingStateIndex(List<ClientTransactionItem> items, int startIndex, int lastIndex, IBinder activityToken) {
+    private static int lastCallbackRequestingStateIndex(
+            List<ClientTransactionItem> items,
+            int startIndex,
+            int lastIndex,
+            IBinder activityToken) {
         int lastRequestedState = -1;
         int lastRequestingCallback = -1;
         for (int i = lastIndex; i >= startIndex; i--) {
@@ -150,19 +168,29 @@ public class TransactionExecutorHelper {
         return lastRequestingCallback;
     }
 
-    static boolean shouldExcludeLastLifecycleState(List<ClientTransactionItem> items, int currentIndex) {
+    static boolean shouldExcludeLastLifecycleState(
+            List<ClientTransactionItem> items, int currentIndex) {
         int nextLifecycleItemIndex;
         ClientTransactionItem item = items.get(currentIndex);
         IBinder activityToken = item.getActivityToken();
         int postExecutionState = item.getPostExecutionState();
-        if (activityToken == null || postExecutionState == -1 || (nextLifecycleItemIndex = findNextLifecycleItemIndex(items, currentIndex + 1, activityToken)) == -1) {
+        if (activityToken == null
+                || postExecutionState == -1
+                || (nextLifecycleItemIndex =
+                                findNextLifecycleItemIndex(items, currentIndex + 1, activityToken))
+                        == -1) {
             return false;
         }
-        ActivityLifecycleItem lifecycleItem = (ActivityLifecycleItem) items.get(nextLifecycleItemIndex);
-        return postExecutionState == lifecycleItem.getTargetState() && currentIndex == lastCallbackRequestingStateIndex(items, currentIndex, nextLifecycleItemIndex + (-1), activityToken);
+        ActivityLifecycleItem lifecycleItem =
+                (ActivityLifecycleItem) items.get(nextLifecycleItemIndex);
+        return postExecutionState == lifecycleItem.getTargetState()
+                && currentIndex
+                        == lastCallbackRequestingStateIndex(
+                                items, currentIndex, nextLifecycleItemIndex + (-1), activityToken);
     }
 
-    private static int findNextLifecycleItemIndex(List<ClientTransactionItem> items, int startIndex, IBinder activityToken) {
+    private static int findNextLifecycleItemIndex(
+            List<ClientTransactionItem> items, int startIndex, IBinder activityToken) {
         int size = items.size();
         for (int i = startIndex; i < size; i++) {
             ClientTransactionItem item = items.get(i);
@@ -173,7 +201,8 @@ public class TransactionExecutorHelper {
         return -1;
     }
 
-    static String transactionToString(ClientTransaction transaction, ClientTransactionHandler transactionHandler) {
+    static String transactionToString(
+            ClientTransaction transaction, ClientTransactionHandler transactionHandler) {
         StringWriter stringWriter = new StringWriter();
         PrintWriter pw = new PrintWriter(stringWriter);
         String prefix = tId(transaction);
@@ -201,7 +230,8 @@ public class TransactionExecutorHelper {
         return "Not found for token: " + token;
     }
 
-    private static Activity getActivityForToken(IBinder token, ClientTransactionHandler transactionHandler) {
+    private static Activity getActivityForToken(
+            IBinder token, ClientTransactionHandler transactionHandler) {
         if (token == null) {
             return null;
         }

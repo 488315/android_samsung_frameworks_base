@@ -9,7 +9,12 @@ import android.content.res.XmlResourceParser;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Bundle;
 import android.util.Log;
+
 import com.android.internal.content.NativeLibraryHelper;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -18,8 +23,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public class MetaDataManager {
@@ -50,7 +53,9 @@ public class MetaDataManager {
                 this.mUidMap.put(uid.getUidValue(), uid);
             }
         }
-        ThemeUtil.saveSWTLog("SWT_MetaDataManager", "load static metadatas, uidMap size: " + this.mUidMap.size());
+        ThemeUtil.saveSWTLog(
+                "SWT_MetaDataManager",
+                "load static metadatas, uidMap size: " + this.mUidMap.size());
     }
 
     private void clearMetadataInfo() {
@@ -97,11 +102,15 @@ public class MetaDataManager {
                             }
                             metadataXmlNames = metadataXmlNames2;
                             i = length;
-                            ThemeUtil.saveSWTLog("SWT_MetaDataManager", "metadata rpUID [" + rpUID + "] replaced by " + pkgName);
+                            ThemeUtil.saveSWTLog(
+                                    "SWT_MetaDataManager",
+                                    "metadata rpUID [" + rpUID + "] replaced by " + pkgName);
                         } else {
                             metadataXmlNames = metadataXmlNames2;
                             i = length;
-                            ThemeUtil.saveSWTLog("SWT_MetaDataManager", "It doesn't include any UID in res/xml : " + str);
+                            ThemeUtil.saveSWTLog(
+                                    "SWT_MetaDataManager",
+                                    "It doesn't include any UID in res/xml : " + str);
                         }
                     } else {
                         strArr = strArr2;
@@ -129,13 +138,19 @@ public class MetaDataManager {
                         this.mUidMap.put(uid2.getUidValue(), uid2);
                         metadataResId3 = metadataResId3;
                     }
-                    ThemeUtil.saveSWTLog("SWT_MetaDataManager", "metadata rpUID [" + rpUID2 + "] replaced by " + pkgName);
+                    ThemeUtil.saveSWTLog(
+                            "SWT_MetaDataManager",
+                            "metadata rpUID [" + rpUID2 + "] replaced by " + pkgName);
                     return;
                 }
-                ThemeUtil.saveSWTLog("SWT_MetaDataManager", "It doesn't include any UID in res/xml : " + pkgName);
+                ThemeUtil.saveSWTLog(
+                        "SWT_MetaDataManager",
+                        "It doesn't include any UID in res/xml : " + pkgName);
             }
         } catch (Exception e) {
-            ThemeUtil.saveSWTLog("SWT_MetaDataManager", "Package : " + appInfo.packageName + " metadata update error = " + e);
+            ThemeUtil.saveSWTLog(
+                    "SWT_MetaDataManager",
+                    "Package : " + appInfo.packageName + " metadata update error = " + e);
         }
     }
 
@@ -146,7 +161,10 @@ public class MetaDataManager {
     public String getRefUid(String name) {
         Uid uid;
         String ref;
-        if (this.mUidMap == null || (uid = this.mUidMap.get(name)) == null || (ref = uid.getReference()) == null || ref.isEmpty()) {
+        if (this.mUidMap == null
+                || (uid = this.mUidMap.get(name)) == null
+                || (ref = uid.getReference()) == null
+                || ref.isEmpty()) {
             return null;
         }
         return ref;
@@ -173,7 +191,8 @@ public class MetaDataManager {
         }
         Map<String, Uid> result = new HashMap<>();
         for (Map.Entry<String, Uid> entry : this.mUidMap.entrySet()) {
-            if (entry.getKey() != null && entry.getKey().startsWith(rpUID + NativeLibraryHelper.CLEAR_ABI_OVERRIDE)) {
+            if (entry.getKey() != null
+                    && entry.getKey().startsWith(rpUID + NativeLibraryHelper.CLEAR_ABI_OVERRIDE)) {
                 result.put(entry.getKey(), entry.getValue());
             }
         }
@@ -190,7 +209,15 @@ public class MetaDataManager {
             Package p = it.next();
             pw.println(" [PKG : " + p.getPackageName() + NavigationBarInflaterView.SIZE_MOD_END);
             for (Uid u : p.mUidList) {
-                pw.println("  -UID:" + u.mUidValue + ", REF:" + u.mValueRef + ", OPA:" + u.mOpacity + ", TYP:" + u.mType);
+                pw.println(
+                        "  -UID:"
+                                + u.mUidValue
+                                + ", REF:"
+                                + u.mValueRef
+                                + ", OPA:"
+                                + u.mOpacity
+                                + ", TYP:"
+                                + u.mType);
                 pw.println("    res : " + u.mDestAttribName);
             }
         }
@@ -260,7 +287,9 @@ public class MetaDataManager {
         }
 
         private void addSeslMetaData() {
-            this.mCurrentPackage.getUidList().addAll(((Package) MetaDataManager.this.mPackageList.getFirst()).getUidList());
+            this.mCurrentPackage
+                    .getUidList()
+                    .addAll(((Package) MetaDataManager.this.mPackageList.getFirst()).getUidList());
         }
 
         private void addUID(XmlPullParser xmlParser) {
@@ -271,7 +300,9 @@ public class MetaDataManager {
             String valueRef = xmlParser.getAttributeValue(null, ATTR_VALUE_REF);
             String opacity = xmlParser.getAttributeValue(null, ATTR_OPACITY);
             if (uID == null) {
-                ThemeUtil.saveSWTLog(TAG, "Parsing xml error, uid is empty. destAttributeName : " + destAttribName);
+                ThemeUtil.saveSWTLog(
+                        TAG,
+                        "Parsing xml error, uid is empty. destAttributeName : " + destAttribName);
                 return;
             }
             Uid newUID = new Uid(uID, valueType, destAttribName, defaultValue, valueRef, opacity);
@@ -280,10 +311,19 @@ public class MetaDataManager {
             if (this.mRpUID == null) {
                 String[] strArr = uID.split(NativeLibraryHelper.CLEAR_ABI_OVERRIDE);
                 this.mRpUID = strArr[0];
-                if (!MetaDataManager.this.mRpUidMap.containsKey(this.mRpUID) || Objects.equals(MetaDataManager.this.mRpUidMap.get(this.mRpUID), packageName)) {
+                if (!MetaDataManager.this.mRpUidMap.containsKey(this.mRpUID)
+                        || Objects.equals(
+                                MetaDataManager.this.mRpUidMap.get(this.mRpUID), packageName)) {
                     MetaDataManager.this.mRpUidMap.put(this.mRpUID, packageName);
                 } else {
-                    ThemeUtil.saveSWTLog(TAG, "Abnormal metadata replacement attempts detected, RpUid : " + this.mRpUID + ", existed package : " + ((String) MetaDataManager.this.mRpUidMap.get(this.mRpUID)) + ", requested package : " + packageName);
+                    ThemeUtil.saveSWTLog(
+                            TAG,
+                            "Abnormal metadata replacement attempts detected, RpUid : "
+                                    + this.mRpUID
+                                    + ", existed package : "
+                                    + ((String) MetaDataManager.this.mRpUidMap.get(this.mRpUID))
+                                    + ", requested package : "
+                                    + packageName);
                 }
             }
         }
@@ -334,7 +374,13 @@ public class MetaDataManager {
         private String mValueRef;
 
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
-        public Uid(String uidValue, String type, String destAttrName, String defaultValue, String valueRef, String opacity) {
+        public Uid(
+                String uidValue,
+                String type,
+                String destAttrName,
+                String defaultValue,
+                String valueRef,
+                String opacity) {
             char c;
             this.mUidValue = uidValue;
             this.mDestAttribName = destAttrName;

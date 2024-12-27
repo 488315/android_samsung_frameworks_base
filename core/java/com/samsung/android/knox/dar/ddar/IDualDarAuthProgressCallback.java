@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface IDualDarAuthProgressCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.knox.dar.ddar.IDualDarAuthProgressCallback";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.knox.dar.ddar.IDualDarAuthProgressCallback";
 
     void onInnerLayerUnlockFailed() throws RemoteException;
 
@@ -16,12 +17,10 @@ public interface IDualDarAuthProgressCallback extends IInterface {
 
     public static class Default implements IDualDarAuthProgressCallback {
         @Override // com.samsung.android.knox.dar.ddar.IDualDarAuthProgressCallback
-        public void onInnerLayerUnlocked() throws RemoteException {
-        }
+        public void onInnerLayerUnlocked() throws RemoteException {}
 
         @Override // com.samsung.android.knox.dar.ddar.IDualDarAuthProgressCallback
-        public void onInnerLayerUnlockFailed() throws RemoteException {
-        }
+        public void onInnerLayerUnlockFailed() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +28,7 @@ public interface IDualDarAuthProgressCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDualDarAuthProgressCallback {
+    public abstract static class Stub extends Binder implements IDualDarAuthProgressCallback {
         static final int TRANSACTION_onInnerLayerUnlockFailed = 2;
         static final int TRANSACTION_onInnerLayerUnlocked = 1;
 
@@ -70,7 +69,8 @@ public interface IDualDarAuthProgressCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDualDarAuthProgressCallback.DESCRIPTOR);
             }

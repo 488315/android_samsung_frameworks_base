@@ -13,42 +13,51 @@ public class ImeAwareEditText extends EditText {
 
     public ImeAwareEditText(Context context) {
         super(context, null);
-        this.mRunShowSoftInputIfNecessary = new Runnable() { // from class: android.widget.ImeAwareEditText$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                ImeAwareEditText.this.lambda$new$0();
-            }
-        };
+        this.mRunShowSoftInputIfNecessary =
+                new Runnable() { // from class:
+                                 // android.widget.ImeAwareEditText$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        ImeAwareEditText.this.lambda$new$0();
+                    }
+                };
     }
 
     public ImeAwareEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
-        this.mRunShowSoftInputIfNecessary = new Runnable() { // from class: android.widget.ImeAwareEditText$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                ImeAwareEditText.this.lambda$new$0();
-            }
-        };
+        this.mRunShowSoftInputIfNecessary =
+                new Runnable() { // from class:
+                                 // android.widget.ImeAwareEditText$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        ImeAwareEditText.this.lambda$new$0();
+                    }
+                };
     }
 
     public ImeAwareEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        this.mRunShowSoftInputIfNecessary = new Runnable() { // from class: android.widget.ImeAwareEditText$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                ImeAwareEditText.this.lambda$new$0();
-            }
-        };
+        this.mRunShowSoftInputIfNecessary =
+                new Runnable() { // from class:
+                                 // android.widget.ImeAwareEditText$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        ImeAwareEditText.this.lambda$new$0();
+                    }
+                };
     }
 
-    public ImeAwareEditText(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public ImeAwareEditText(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        this.mRunShowSoftInputIfNecessary = new Runnable() { // from class: android.widget.ImeAwareEditText$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                ImeAwareEditText.this.lambda$new$0();
-            }
-        };
+        this.mRunShowSoftInputIfNecessary =
+                new Runnable() { // from class:
+                                 // android.widget.ImeAwareEditText$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        ImeAwareEditText.this.lambda$new$0();
+                    }
+                };
     }
 
     @Override // android.widget.TextView, android.view.View
@@ -65,14 +74,16 @@ public class ImeAwareEditText extends EditText {
     /* renamed from: showSoftInputIfNecessary, reason: merged with bridge method [inline-methods] */
     public void lambda$new$0() {
         if (this.mHasPendingShowSoftInputRequest) {
-            InputMethodManager imm = (InputMethodManager) getContext().getSystemService(InputMethodManager.class);
+            InputMethodManager imm =
+                    (InputMethodManager) getContext().getSystemService(InputMethodManager.class);
             imm.showSoftInput(this, 0);
             this.mHasPendingShowSoftInputRequest = false;
         }
     }
 
     public void scheduleShowSoftInput() {
-        InputMethodManager imm = (InputMethodManager) getContext().getSystemService(InputMethodManager.class);
+        InputMethodManager imm =
+                (InputMethodManager) getContext().getSystemService(InputMethodManager.class);
         if (imm.hasActiveInputConnection(this)) {
             this.mHasPendingShowSoftInputRequest = false;
             removeCallbacks(this.mRunShowSoftInputIfNecessary);

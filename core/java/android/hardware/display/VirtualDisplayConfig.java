@@ -7,6 +7,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArraySet;
 import android.view.Surface;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Objects;
@@ -14,19 +15,21 @@ import java.util.Set;
 
 /* loaded from: classes2.dex */
 public final class VirtualDisplayConfig implements Parcelable {
-    public static final Parcelable.Creator<VirtualDisplayConfig> CREATOR = new Parcelable.Creator<VirtualDisplayConfig>() { // from class: android.hardware.display.VirtualDisplayConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualDisplayConfig[] newArray(int size) {
-            return new VirtualDisplayConfig[size];
-        }
+    public static final Parcelable.Creator<VirtualDisplayConfig> CREATOR =
+            new Parcelable.Creator<VirtualDisplayConfig>() { // from class:
+                // android.hardware.display.VirtualDisplayConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualDisplayConfig[] newArray(int size) {
+                    return new VirtualDisplayConfig[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualDisplayConfig createFromParcel(Parcel in) {
-            return new VirtualDisplayConfig(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualDisplayConfig createFromParcel(Parcel in) {
+                    return new VirtualDisplayConfig(in);
+                }
+            };
     private final int mDensityDpi;
     private ArraySet<String> mDisplayCategories;
     private final int mDisplayIdToMirror;
@@ -40,7 +43,19 @@ public final class VirtualDisplayConfig implements Parcelable {
     private final int mWidth;
     private final boolean mWindowManagerMirroringEnabled;
 
-    private VirtualDisplayConfig(String name, int width, int height, int densityDpi, int flags, Surface surface, String uniqueId, int displayIdToMirror, boolean windowManagerMirroringEnabled, ArraySet<String> displayCategories, float requestedRefreshRate, boolean isHomeSupported) {
+    private VirtualDisplayConfig(
+            String name,
+            int width,
+            int height,
+            int densityDpi,
+            int flags,
+            Surface surface,
+            String uniqueId,
+            int displayIdToMirror,
+            boolean windowManagerMirroringEnabled,
+            ArraySet<String> displayCategories,
+            float requestedRefreshRate,
+            boolean isHomeSupported) {
         this.mDisplayCategories = null;
         this.mName = name;
         this.mWidth = width;
@@ -134,16 +149,64 @@ public final class VirtualDisplayConfig implements Parcelable {
             return false;
         }
         VirtualDisplayConfig that = (VirtualDisplayConfig) o;
-        return Objects.equals(this.mName, that.mName) && this.mWidth == that.mWidth && this.mHeight == that.mHeight && this.mDensityDpi == that.mDensityDpi && this.mFlags == that.mFlags && Objects.equals(this.mSurface, that.mSurface) && Objects.equals(this.mUniqueId, that.mUniqueId) && this.mDisplayIdToMirror == that.mDisplayIdToMirror && this.mWindowManagerMirroringEnabled == that.mWindowManagerMirroringEnabled && Objects.equals(this.mDisplayCategories, that.mDisplayCategories) && this.mRequestedRefreshRate == that.mRequestedRefreshRate && this.mIsHomeSupported == that.mIsHomeSupported;
+        return Objects.equals(this.mName, that.mName)
+                && this.mWidth == that.mWidth
+                && this.mHeight == that.mHeight
+                && this.mDensityDpi == that.mDensityDpi
+                && this.mFlags == that.mFlags
+                && Objects.equals(this.mSurface, that.mSurface)
+                && Objects.equals(this.mUniqueId, that.mUniqueId)
+                && this.mDisplayIdToMirror == that.mDisplayIdToMirror
+                && this.mWindowManagerMirroringEnabled == that.mWindowManagerMirroringEnabled
+                && Objects.equals(this.mDisplayCategories, that.mDisplayCategories)
+                && this.mRequestedRefreshRate == that.mRequestedRefreshRate
+                && this.mIsHomeSupported == that.mIsHomeSupported;
     }
 
     public int hashCode() {
-        int hashCode = Objects.hash(this.mName, Integer.valueOf(this.mWidth), Integer.valueOf(this.mHeight), Integer.valueOf(this.mDensityDpi), Integer.valueOf(this.mFlags), this.mSurface, this.mUniqueId, Integer.valueOf(this.mDisplayIdToMirror), Boolean.valueOf(this.mWindowManagerMirroringEnabled), this.mDisplayCategories, Float.valueOf(this.mRequestedRefreshRate), Boolean.valueOf(this.mIsHomeSupported));
+        int hashCode =
+                Objects.hash(
+                        this.mName,
+                        Integer.valueOf(this.mWidth),
+                        Integer.valueOf(this.mHeight),
+                        Integer.valueOf(this.mDensityDpi),
+                        Integer.valueOf(this.mFlags),
+                        this.mSurface,
+                        this.mUniqueId,
+                        Integer.valueOf(this.mDisplayIdToMirror),
+                        Boolean.valueOf(this.mWindowManagerMirroringEnabled),
+                        this.mDisplayCategories,
+                        Float.valueOf(this.mRequestedRefreshRate),
+                        Boolean.valueOf(this.mIsHomeSupported));
         return hashCode;
     }
 
     public String toString() {
-        return "VirtualDisplayConfig( mName=" + this.mName + " mHeight=" + this.mHeight + " mWidth=" + this.mWidth + " mDensityDpi=" + this.mDensityDpi + " mFlags=" + this.mFlags + " mSurface=" + this.mSurface + " mUniqueId=" + this.mUniqueId + " mDisplayIdToMirror=" + this.mDisplayIdToMirror + " mWindowManagerMirroringEnabled=" + this.mWindowManagerMirroringEnabled + " mDisplayCategories=" + this.mDisplayCategories + " mRequestedRefreshRate=" + this.mRequestedRefreshRate + " mIsHomeSupported=" + this.mIsHomeSupported + NavigationBarInflaterView.KEY_CODE_END;
+        return "VirtualDisplayConfig( mName="
+                + this.mName
+                + " mHeight="
+                + this.mHeight
+                + " mWidth="
+                + this.mWidth
+                + " mDensityDpi="
+                + this.mDensityDpi
+                + " mFlags="
+                + this.mFlags
+                + " mSurface="
+                + this.mSurface
+                + " mUniqueId="
+                + this.mUniqueId
+                + " mDisplayIdToMirror="
+                + this.mDisplayIdToMirror
+                + " mWindowManagerMirroringEnabled="
+                + this.mWindowManagerMirroringEnabled
+                + " mDisplayCategories="
+                + this.mDisplayCategories
+                + " mRequestedRefreshRate="
+                + this.mRequestedRefreshRate
+                + " mIsHomeSupported="
+                + this.mIsHomeSupported
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 
     private VirtualDisplayConfig(Parcel in) {
@@ -222,7 +285,8 @@ public final class VirtualDisplayConfig implements Parcelable {
 
         public Builder setDisplayCategories(Set<String> displayCategories) {
             this.mDisplayCategories.clear();
-            this.mDisplayCategories.addAll((Collection<? extends String>) Objects.requireNonNull(displayCategories));
+            this.mDisplayCategories.addAll(
+                    (Collection<? extends String>) Objects.requireNonNull(displayCategories));
             return this;
         }
 
@@ -233,7 +297,8 @@ public final class VirtualDisplayConfig implements Parcelable {
 
         public Builder setRequestedRefreshRate(float requestedRefreshRate) {
             if (requestedRefreshRate < 0.0f) {
-                throw new IllegalArgumentException("Virtual display requested refresh rate must be non-negative");
+                throw new IllegalArgumentException(
+                        "Virtual display requested refresh rate must be non-negative");
             }
             this.mRequestedRefreshRate = requestedRefreshRate;
             return this;
@@ -246,7 +311,19 @@ public final class VirtualDisplayConfig implements Parcelable {
         }
 
         public VirtualDisplayConfig build() {
-            return new VirtualDisplayConfig(this.mName, this.mWidth, this.mHeight, this.mDensityDpi, this.mFlags, this.mSurface, this.mUniqueId, this.mDisplayIdToMirror, this.mWindowManagerMirroringEnabled, this.mDisplayCategories, this.mRequestedRefreshRate, this.mIsHomeSupported);
+            return new VirtualDisplayConfig(
+                    this.mName,
+                    this.mWidth,
+                    this.mHeight,
+                    this.mDensityDpi,
+                    this.mFlags,
+                    this.mSurface,
+                    this.mUniqueId,
+                    this.mDisplayIdToMirror,
+                    this.mWindowManagerMirroringEnabled,
+                    this.mDisplayCategories,
+                    this.mRequestedRefreshRate,
+                    this.mIsHomeSupported);
         }
     }
 }

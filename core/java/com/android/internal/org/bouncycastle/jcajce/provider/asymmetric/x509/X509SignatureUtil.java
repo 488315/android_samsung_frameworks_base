@@ -15,6 +15,7 @@ import com.android.internal.org.bouncycastle.asn1.x9.X9ObjectIdentifiers;
 import com.android.internal.org.bouncycastle.jcajce.util.MessageDigestUtils;
 import com.android.internal.org.bouncycastle.jce.provider.BouncyCastleProvider;
 import com.android.internal.org.bouncycastle.util.encoders.Hex;
+
 import java.io.IOException;
 import java.security.AlgorithmParameters;
 import java.security.GeneralSecurityException;
@@ -33,8 +34,7 @@ class X509SignatureUtil {
     private static final Map<ASN1ObjectIdentifier, String> algNames = new HashMap();
     private static final ASN1Null derNull;
 
-    X509SignatureUtil() {
-    }
+    X509SignatureUtil() {}
 
     static {
         algNames.put(OIWObjectIdentifiers.dsaWithSHA1, "SHA1withDSA");
@@ -43,19 +43,24 @@ class X509SignatureUtil {
     }
 
     static boolean isCompositeAlgorithm(AlgorithmIdentifier algorithmIdentifier) {
-        return MiscObjectIdentifiers.id_alg_composite.equals((ASN1Primitive) algorithmIdentifier.getAlgorithm());
+        return MiscObjectIdentifiers.id_alg_composite.equals(
+                (ASN1Primitive) algorithmIdentifier.getAlgorithm());
     }
 
-    static void setSignatureParameters(Signature signature, ASN1Encodable params) throws NoSuchAlgorithmException, SignatureException, InvalidKeyException {
+    static void setSignatureParameters(Signature signature, ASN1Encodable params)
+            throws NoSuchAlgorithmException, SignatureException, InvalidKeyException {
         if (params != null && !derNull.equals(params)) {
-            AlgorithmParameters sigParams = AlgorithmParameters.getInstance(signature.getAlgorithm(), signature.getProvider());
+            AlgorithmParameters sigParams =
+                    AlgorithmParameters.getInstance(
+                            signature.getAlgorithm(), signature.getProvider());
             try {
                 sigParams.init(params.toASN1Primitive().getEncoded());
                 if (signature.getAlgorithm().endsWith("MGF1")) {
                     try {
                         signature.setParameter(sigParams.getParameterSpec(PSSParameterSpec.class));
                     } catch (GeneralSecurityException e) {
-                        throw new SignatureException("Exception extracting parameters: " + e.getMessage());
+                        throw new SignatureException(
+                                "Exception extracting parameters: " + e.getMessage());
                     }
                 }
             } catch (IOException e2) {
@@ -67,13 +72,17 @@ class X509SignatureUtil {
     static String getSignatureName(AlgorithmIdentifier sigAlgId) {
         ASN1Encodable params = sigAlgId.getParameters();
         if (params != null && !derNull.equals(params)) {
-            if (sigAlgId.getAlgorithm().equals((ASN1Primitive) PKCSObjectIdentifiers.id_RSASSA_PSS)) {
+            if (sigAlgId.getAlgorithm()
+                    .equals((ASN1Primitive) PKCSObjectIdentifiers.id_RSASSA_PSS)) {
                 RSASSAPSSparams rsaParams = RSASSAPSSparams.getInstance(params);
-                return getDigestAlgName(rsaParams.getHashAlgorithm().getAlgorithm()) + "withRSAandMGF1";
+                return getDigestAlgName(rsaParams.getHashAlgorithm().getAlgorithm())
+                        + "withRSAandMGF1";
             }
-            if (sigAlgId.getAlgorithm().equals((ASN1Primitive) X9ObjectIdentifiers.ecdsa_with_SHA2)) {
+            if (sigAlgId.getAlgorithm()
+                    .equals((ASN1Primitive) X9ObjectIdentifiers.ecdsa_with_SHA2)) {
                 ASN1Sequence ecDsaParams = ASN1Sequence.getInstance(params);
-                return getDigestAlgName((ASN1ObjectIdentifier) ecDsaParams.getObjectAt(0)) + "withECDSA";
+                return getDigestAlgName((ASN1ObjectIdentifier) ecDsaParams.getObjectAt(0))
+                        + "withECDSA";
             }
         }
         String algName = algNames.get(sigAlgId.getAlgorithm());
@@ -125,9 +134,13 @@ class X509SignatureUtil {
             buf.append("            Signature: ").append(Hex.toHexString(sig, 0, 20)).append(nl);
             for (int i = 20; i < sig.length; i += 20) {
                 if (i < sig.length - 20) {
-                    buf.append("                       ").append(Hex.toHexString(sig, i, 20)).append(nl);
+                    buf.append("                       ")
+                            .append(Hex.toHexString(sig, i, 20))
+                            .append(nl);
                 } else {
-                    buf.append("                       ").append(Hex.toHexString(sig, i, sig.length - i)).append(nl);
+                    buf.append("                       ")
+                            .append(Hex.toHexString(sig, i, sig.length - i))
+                            .append(nl);
                 }
             }
             return;

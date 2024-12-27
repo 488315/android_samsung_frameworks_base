@@ -1,28 +1,30 @@
 package android.app.smartspace.uitemplatedata;
 
 import android.annotation.SystemApi;
-import android.app.smartspace.uitemplatedata.BaseTemplateData;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.List;
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class CombinedCardsTemplateData extends BaseTemplateData {
-    public static final Parcelable.Creator<CombinedCardsTemplateData> CREATOR = new Parcelable.Creator<CombinedCardsTemplateData>() { // from class: android.app.smartspace.uitemplatedata.CombinedCardsTemplateData.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CombinedCardsTemplateData createFromParcel(Parcel in) {
-            return new CombinedCardsTemplateData(in);
-        }
+    public static final Parcelable.Creator<CombinedCardsTemplateData> CREATOR =
+            new Parcelable.Creator<CombinedCardsTemplateData>() { // from class:
+                // android.app.smartspace.uitemplatedata.CombinedCardsTemplateData.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CombinedCardsTemplateData createFromParcel(Parcel in) {
+                    return new CombinedCardsTemplateData(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CombinedCardsTemplateData[] newArray(int size) {
-            return new CombinedCardsTemplateData[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CombinedCardsTemplateData[] newArray(int size) {
+                    return new CombinedCardsTemplateData[size];
+                }
+            };
     private final List<BaseTemplateData> mCombinedCardDataList;
 
     CombinedCardsTemplateData(Parcel in) {
@@ -30,8 +32,23 @@ public final class CombinedCardsTemplateData extends BaseTemplateData {
         this.mCombinedCardDataList = in.createTypedArrayList(BaseTemplateData.CREATOR);
     }
 
-    private CombinedCardsTemplateData(int templateType, BaseTemplateData.SubItemInfo primaryItem, BaseTemplateData.SubItemInfo subtitleItem, BaseTemplateData.SubItemInfo subtitleSupplementalItem, BaseTemplateData.SubItemInfo supplementalLineItem, BaseTemplateData.SubItemInfo supplementalAlarmItem, int layoutWeight, List<BaseTemplateData> combinedCardDataList) {
-        super(templateType, primaryItem, subtitleItem, subtitleSupplementalItem, supplementalLineItem, supplementalAlarmItem, layoutWeight);
+    private CombinedCardsTemplateData(
+            int templateType,
+            BaseTemplateData.SubItemInfo primaryItem,
+            BaseTemplateData.SubItemInfo subtitleItem,
+            BaseTemplateData.SubItemInfo subtitleSupplementalItem,
+            BaseTemplateData.SubItemInfo supplementalLineItem,
+            BaseTemplateData.SubItemInfo supplementalAlarmItem,
+            int layoutWeight,
+            List<BaseTemplateData> combinedCardDataList) {
+        super(
+                templateType,
+                primaryItem,
+                subtitleItem,
+                subtitleSupplementalItem,
+                supplementalLineItem,
+                supplementalAlarmItem,
+                layoutWeight);
         this.mCombinedCardDataList = combinedCardDataList;
     }
 
@@ -69,7 +86,10 @@ public final class CombinedCardsTemplateData extends BaseTemplateData {
 
     @Override // android.app.smartspace.uitemplatedata.BaseTemplateData
     public String toString() {
-        return super.toString() + " + SmartspaceCombinedCardsUiTemplateData{mCombinedCardDataList=" + this.mCombinedCardDataList + '}';
+        return super.toString()
+                + " + SmartspaceCombinedCardsUiTemplateData{mCombinedCardDataList="
+                + this.mCombinedCardDataList
+                + '}';
     }
 
     @SystemApi
@@ -86,7 +106,15 @@ public final class CombinedCardsTemplateData extends BaseTemplateData {
             if (this.mCombinedCardDataList == null) {
                 throw new IllegalStateException("Please assign a value to all @NonNull args.");
             }
-            return new CombinedCardsTemplateData(getTemplateType(), getPrimaryItem(), getSubtitleItem(), getSubtitleSupplemtnalItem(), getSupplementalLineItem(), getSupplementalAlarmItem(), getLayoutWeight(), this.mCombinedCardDataList);
+            return new CombinedCardsTemplateData(
+                    getTemplateType(),
+                    getPrimaryItem(),
+                    getSubtitleItem(),
+                    getSubtitleSupplemtnalItem(),
+                    getSupplementalLineItem(),
+                    getSupplementalAlarmItem(),
+                    getLayoutWeight(),
+                    this.mCombinedCardDataList);
         }
     }
 }

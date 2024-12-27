@@ -4,7 +4,9 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.util.Printer;
 import android.util.SparseArray;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.hidden_from_bootclasspath.android.os.Flags;
+
 import java.io.FileDescriptor;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -36,8 +38,7 @@ public final class MessageQueue {
         public static final int EVENT_OUTPUT = 2;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface Events {
-        }
+        public @interface Events {}
 
         int onFileDescriptorEvents(FileDescriptor fileDescriptor, int i);
     }
@@ -109,7 +110,8 @@ public final class MessageQueue {
         return !this.mQuitting && nativeIsPolling(this.mPtr);
     }
 
-    public void addOnFileDescriptorEventListener(FileDescriptor fd, int events, OnFileDescriptorEventListener listener) {
+    public void addOnFileDescriptorEventListener(
+            FileDescriptor fd, int events, OnFileDescriptorEventListener listener) {
         if (fd == null) {
             throw new IllegalArgumentException("fd must not be null");
         }
@@ -130,11 +132,15 @@ public final class MessageQueue {
         }
     }
 
-    private void updateOnFileDescriptorEventListenerLocked(FileDescriptor fd, int events, OnFileDescriptorEventListener listener) {
+    private void updateOnFileDescriptorEventListenerLocked(
+            FileDescriptor fd, int events, OnFileDescriptorEventListener listener) {
         int fdNum = fd.getInt$();
         int index = -1;
         FileDescriptorRecord record = null;
-        if (this.mFileDescriptorRecords != null && (index = this.mFileDescriptorRecords.indexOfKey(fdNum)) >= 0 && (record = this.mFileDescriptorRecords.valueAt(index)) != null && record.mEvents == events) {
+        if (this.mFileDescriptorRecords != null
+                && (index = this.mFileDescriptorRecords.indexOfKey(fdNum)) >= 0
+                && (record = this.mFileDescriptorRecords.valueAt(index)) != null
+                && record.mEvents == events) {
             return;
         }
         if (events != 0) {
@@ -143,7 +149,8 @@ public final class MessageQueue {
                 if (this.mFileDescriptorRecords == null) {
                     this.mFileDescriptorRecords = new SparseArray<>();
                 }
-                this.mFileDescriptorRecords.put(fdNum, new FileDescriptorRecord(fd, events2, listener));
+                this.mFileDescriptorRecords.put(
+                        fdNum, new FileDescriptorRecord(fd, events2, listener));
             } else {
                 record.mListener = listener;
                 record.mEvents = events2;
@@ -179,7 +186,9 @@ public final class MessageQueue {
             if (newWatchedEvents != oldWatchedEvents) {
                 synchronized (this) {
                     int index = this.mFileDescriptorRecords.indexOfKey(fd);
-                    if (index >= 0 && this.mFileDescriptorRecords.valueAt(index) == record && record.mSeq == seq) {
+                    if (index >= 0
+                            && this.mFileDescriptorRecords.valueAt(index) == record
+                            && record.mSeq == seq) {
                         record.mEvents = newWatchedEvents;
                         if (newWatchedEvents == 0) {
                             this.mFileDescriptorRecords.removeAt(index);
@@ -192,36 +201,36 @@ public final class MessageQueue {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:42:0x00af, code lost:
-    
-        r5 = 0;
-     */
+
+       r5 = 0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:43:0x00b0, code lost:
-    
-        if (r5 >= r2) goto L92;
-     */
+
+       if (r5 >= r2) goto L92;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:44:0x00b2, code lost:
-    
-        r6 = r14.mPendingIdleHandlers[r5];
-        r14.mPendingIdleHandlers[r5] = null;
-        r7 = false;
-     */
+
+       r6 = r14.mPendingIdleHandlers[r5];
+       r14.mPendingIdleHandlers[r5] = null;
+       r7 = false;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:47:0x00bf, code lost:
-    
-        r7 = r6.queueIdle();
-     */
+
+       r7 = r6.queueIdle();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:62:0x00c1, code lost:
-    
-        r8 = move-exception;
-     */
+
+       r8 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:63:0x00c2, code lost:
-    
-        android.util.Log.wtf(android.os.MessageQueue.TAG, "IdleHandler threw exception", r8);
-     */
+
+       android.util.Log.wtf(android.os.MessageQueue.TAG, "IdleHandler threw exception", r8);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:65:0x00d9, code lost:
-    
-        r2 = 0;
-        r4 = 0;
-     */
+
+       r2 = 0;
+       r4 = 0;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -231,7 +240,8 @@ public final class MessageQueue {
             Method dump skipped, instructions count: 224
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.MessageQueue.next():android.os.Message");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.os.MessageQueue.next():android.os.Message");
     }
 
     void quit(boolean safe) {
@@ -302,7 +312,9 @@ public final class MessageQueue {
                 p = p.next;
             }
             if (p == null) {
-                throw new IllegalStateException("The specified message queue synchronization  barrier token has not been posted or has already been removed.");
+                throw new IllegalStateException(
+                        "The specified message queue synchronization  barrier token has not been"
+                            + " posted or has already been removed.");
             }
             if (prev != null) {
                 prev.next = p.next;
@@ -338,7 +350,9 @@ public final class MessageQueue {
             Method dump skipped, instructions count: 260
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.MessageQueue.enqueueMessage(android.os.Message, long):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.os.MessageQueue.enqueueMessage(android.os.Message,"
+                    + " long):boolean");
     }
 
     boolean hasMessages(Handler h, int what, Object object) {
@@ -398,9 +412,9 @@ public final class MessageQueue {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:17:0x002d, code lost:
-    
-        r4.mLast = r4.mMessages;
-     */
+
+       r4.mLast = r4.mMessages;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -474,13 +488,15 @@ public final class MessageQueue {
             monitor-exit(r4)     // Catch: java.lang.Throwable -> L63
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.MessageQueue.removeMessages(android.os.Handler, int, java.lang.Object):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.os.MessageQueue.removeMessages(android.os.Handler,"
+                    + " int, java.lang.Object):void");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:17:0x0031, code lost:
-    
-        r4.mLast = r4.mMessages;
-     */
+
+       r4.mLast = r4.mMessages;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -556,13 +572,16 @@ public final class MessageQueue {
             monitor-exit(r4)     // Catch: java.lang.Throwable -> L6b
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.MessageQueue.removeEqualMessages(android.os.Handler, int, java.lang.Object):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.os.MessageQueue.removeEqualMessages(android.os.Handler, int,"
+                    + " java.lang.Object):void");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:16:0x002f, code lost:
-    
-        r4.mLast = r4.mMessages;
-     */
+
+       r4.mLast = r4.mMessages;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -639,13 +658,15 @@ public final class MessageQueue {
         L68:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.MessageQueue.removeMessages(android.os.Handler, java.lang.Runnable, java.lang.Object):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.os.MessageQueue.removeMessages(android.os.Handler,"
+                    + " java.lang.Runnable, java.lang.Object):void");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:16:0x0034, code lost:
-    
-        r4.mLast = r4.mMessages;
-     */
+
+       r4.mLast = r4.mMessages;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -724,13 +745,16 @@ public final class MessageQueue {
         L71:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.MessageQueue.removeEqualMessages(android.os.Handler, java.lang.Runnable, java.lang.Object):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.os.MessageQueue.removeEqualMessages(android.os.Handler,"
+                    + " java.lang.Runnable, java.lang.Object):void");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:15:0x0029, code lost:
-    
-        r4.mLast = r4.mMessages;
-     */
+
+       r4.mLast = r4.mMessages;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -800,13 +824,16 @@ public final class MessageQueue {
             monitor-exit(r4)     // Catch: java.lang.Throwable -> L5b
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.MessageQueue.removeCallbacksAndMessages(android.os.Handler, java.lang.Object):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.os.MessageQueue.removeCallbacksAndMessages(android.os.Handler,"
+                    + " java.lang.Object):void");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:15:0x002d, code lost:
-    
-        r4.mLast = r4.mMessages;
-     */
+
+       r4.mLast = r4.mMessages;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -878,7 +905,10 @@ public final class MessageQueue {
             monitor-exit(r4)     // Catch: java.lang.Throwable -> L63
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.MessageQueue.removeCallbacksAndEqualMessages(android.os.Handler, java.lang.Object):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.os.MessageQueue.removeCallbacksAndEqualMessages(android.os.Handler,"
+                    + " java.lang.Object):void");
     }
 
     private void removeAllMessagesLocked() {
@@ -936,7 +966,15 @@ public final class MessageQueue {
                 }
                 n++;
             }
-            pw.println(prefix + "(Total messages: " + n + ", polling=" + isPollingLocked() + ", quitting=" + this.mQuitting + NavigationBarInflaterView.KEY_CODE_END);
+            pw.println(
+                    prefix
+                            + "(Total messages: "
+                            + n
+                            + ", polling="
+                            + isPollingLocked()
+                            + ", quitting="
+                            + this.mQuitting
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
     }
 
@@ -958,7 +996,8 @@ public final class MessageQueue {
         public OnFileDescriptorEventListener mListener;
         public int mSeq;
 
-        public FileDescriptorRecord(FileDescriptor descriptor, int events, OnFileDescriptorEventListener listener) {
+        public FileDescriptorRecord(
+                FileDescriptor descriptor, int events, OnFileDescriptorEventListener listener) {
             this.mDescriptor = descriptor;
             this.mEvents = events;
             this.mListener = listener;

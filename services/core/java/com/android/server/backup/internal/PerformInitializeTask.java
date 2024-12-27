@@ -1,8 +1,10 @@
 package com.android.server.backup.internal;
 
 import android.app.backup.IBackupObserver;
+
 import com.android.server.backup.TransportManager;
 import com.android.server.backup.UserBackupManagerService;
+
 import java.io.File;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -15,7 +17,13 @@ public final class PerformInitializeTask implements Runnable {
     public final String[] mQueue;
     public final TransportManager mTransportManager;
 
-    public PerformInitializeTask(UserBackupManagerService userBackupManagerService, TransportManager transportManager, String[] strArr, IBackupObserver iBackupObserver, OnTaskFinishedListener onTaskFinishedListener, File file) {
+    public PerformInitializeTask(
+            UserBackupManagerService userBackupManagerService,
+            TransportManager transportManager,
+            String[] strArr,
+            IBackupObserver iBackupObserver,
+            OnTaskFinishedListener onTaskFinishedListener,
+            File file) {
         this.mBackupManagerService = userBackupManagerService;
         this.mTransportManager = transportManager;
         this.mQueue = strArr;
@@ -36,6 +44,8 @@ public final class PerformInitializeTask implements Runnable {
             Method dump skipped, instructions count: 450
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.backup.internal.PerformInitializeTask.run():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.backup.internal.PerformInitializeTask.run():void");
     }
 }

@@ -9,7 +9,9 @@ public class UninitializedMessageException extends RuntimeException {
     private final List<String> missingFields;
 
     public UninitializedMessageException(MessageLite message) {
-        super("Message was missing required fields.  (Lite runtime could not determine which fields were missing).");
+        super(
+                "Message was missing required fields.  (Lite runtime could not determine which"
+                    + " fields were missing).");
         this.missingFields = null;
     }
 

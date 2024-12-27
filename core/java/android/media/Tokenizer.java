@@ -37,8 +37,7 @@ class Tokenizer {
     class DataTokenizer implements TokenizerPhase {
         private StringBuilder mData;
 
-        DataTokenizer() {
-        }
+        DataTokenizer() {}
 
         @Override // android.media.Tokenizer.TokenizerPhase
         public TokenizerPhase start() {
@@ -66,7 +65,11 @@ class Tokenizer {
                     break;
                 }
                 if (Tokenizer.this.mLine.charAt(pos) == '&') {
-                    if (!replaceEscape("&amp;", "&", pos) && !replaceEscape("&lt;", "<", pos) && !replaceEscape("&gt;", ">", pos) && !replaceEscape("&lrm;", "\u200e", pos) && !replaceEscape("&rlm;", "\u200f", pos)) {
+                    if (!replaceEscape("&amp;", "&", pos)
+                            && !replaceEscape("&lt;", "<", pos)
+                            && !replaceEscape("&gt;", ">", pos)
+                            && !replaceEscape("&lrm;", "\u200e", pos)
+                            && !replaceEscape("&rlm;", "\u200f", pos)) {
                         replaceEscape("&nbsp;", " ", pos);
                     }
                 } else if (Tokenizer.this.mLine.charAt(pos) == '<') {
@@ -89,8 +92,7 @@ class Tokenizer {
         private boolean mAtAnnotation;
         private String mName;
 
-        TagTokenizer() {
-        }
+        TagTokenizer() {}
 
         @Override // android.media.Tokenizer.TokenizerPhase
         public TokenizerPhase start() {
@@ -107,12 +109,20 @@ class Tokenizer {
                 Tokenizer.this.mHandledLen++;
             }
             if (Tokenizer.this.mHandledLen < Tokenizer.this.mLine.length()) {
-                if (this.mAtAnnotation || Tokenizer.this.mLine.charAt(Tokenizer.this.mHandledLen) == '/') {
+                if (this.mAtAnnotation
+                        || Tokenizer.this.mLine.charAt(Tokenizer.this.mHandledLen) == '/') {
                     parts = Tokenizer.this.mLine.substring(Tokenizer.this.mHandledLen).split(">");
                 } else {
-                    parts = Tokenizer.this.mLine.substring(Tokenizer.this.mHandledLen).split("[\t\f >]");
+                    parts =
+                            Tokenizer.this
+                                    .mLine
+                                    .substring(Tokenizer.this.mHandledLen)
+                                    .split("[\t\f >]");
                 }
-                String part = Tokenizer.this.mLine.substring(Tokenizer.this.mHandledLen, Tokenizer.this.mHandledLen + parts[0].length());
+                String part =
+                        Tokenizer.this.mLine.substring(
+                                Tokenizer.this.mHandledLen,
+                                Tokenizer.this.mHandledLen + parts[0].length());
                 Tokenizer.this.mHandledLen += parts[0].length();
                 if (this.mAtAnnotation) {
                     this.mAnnotation += " " + part;
@@ -121,7 +131,8 @@ class Tokenizer {
                 }
             }
             this.mAtAnnotation = true;
-            if (Tokenizer.this.mHandledLen < Tokenizer.this.mLine.length() && Tokenizer.this.mLine.charAt(Tokenizer.this.mHandledLen) == '>') {
+            if (Tokenizer.this.mHandledLen < Tokenizer.this.mLine.length()
+                    && Tokenizer.this.mLine.charAt(Tokenizer.this.mHandledLen) == '>') {
                 yield_tag();
                 Tokenizer.this.mPhase = Tokenizer.this.mDataTokenizer.start();
                 Tokenizer.this.mHandledLen++;

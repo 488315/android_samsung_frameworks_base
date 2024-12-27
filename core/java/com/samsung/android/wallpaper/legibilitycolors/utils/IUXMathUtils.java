@@ -1,6 +1,7 @@
 package com.samsung.android.wallpaper.legibilitycolors.utils;
 
 import android.graphics.Color;
+
 import java.util.Random;
 
 /* loaded from: classes6.dex */
@@ -158,7 +159,11 @@ public class IUXMathUtils {
     }
 
     public static int lerpColor(float t, int a, int b) {
-        return Color.argb(lerp(t, Color.alpha(a), Color.alpha(b)), lerp(t, Color.red(a), Color.red(b)), lerp(t, Color.green(a), Color.green(b)), lerp(t, Color.blue(a), Color.blue(b)));
+        return Color.argb(
+                lerp(t, Color.alpha(a), Color.alpha(b)),
+                lerp(t, Color.red(a), Color.red(b)),
+                lerp(t, Color.green(a), Color.green(b)),
+                lerp(t, Color.blue(a), Color.blue(b)));
     }
 
     public static int getRangedVal() {

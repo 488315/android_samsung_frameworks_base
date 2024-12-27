@@ -15,6 +15,7 @@ import android.database.sqlite.SQLiteReadOnlyDatabaseException;
 import android.net.Uri;
 import android.os.Debug;
 import android.util.Log;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -65,7 +66,13 @@ public final class WifiControlHistoryProvider extends ContentProvider {
                     oldV = 1;
                 }
             }
-            Log.v(TAG, "Upgrading downloads database from version " + oldV + " to " + newV + ", which will destroy all old data");
+            Log.v(
+                    TAG,
+                    "Upgrading downloads database from version "
+                            + oldV
+                            + " to "
+                            + newV
+                            + ", which will destroy all old data");
             dropTable(db);
             createTable(db);
         }
@@ -73,7 +80,11 @@ public final class WifiControlHistoryProvider extends ContentProvider {
         private void createTable(SQLiteDatabase db) {
             Log.v(TAG, "createTable");
             try {
-                db.execSQL("CREATE TABLE WifiHistory(conrol_id INTEGER PRIMARY KEY AUTOINCREMENT,package_name TEXT, time_stamp LONG, enable_number INTEGER, disable_number INTEGER, first_control LONG, last_control INTEGER) ");
+                db.execSQL(
+                        "CREATE TABLE WifiHistory(conrol_id INTEGER PRIMARY KEY"
+                            + " AUTOINCREMENT,package_name TEXT, time_stamp LONG, enable_number"
+                            + " INTEGER, disable_number INTEGER, first_control LONG, last_control"
+                            + " INTEGER) ");
             } catch (SQLException e) {
                 Log.e(TAG, "couldn't create table in downloads database");
             }
@@ -116,12 +127,22 @@ public final class WifiControlHistoryProvider extends ContentProvider {
             ContentValues filteredValues = new ContentValues();
             filteredValues.put("package_name", values.getAsString("package_name"));
             long now = System.currentTimeMillis();
-            filteredValues.put("time_stamp", Long.valueOf(getLong("time_stamp", null, values, now)));
+            filteredValues.put(
+                    "time_stamp", Long.valueOf(getLong("time_stamp", null, values, now)));
             int lastControl = getInteger(LAST_CONTROL, null, values, 0);
             filteredValues.put(LAST_CONTROL, Integer.valueOf(lastControl));
-            filteredValues.put(FIRST_CONTROL, Long.valueOf(getLong(FIRST_CONTROL, cursor, values, now)));
-            filteredValues.put(ENABLE_NUMBER, Integer.valueOf(getInteger(ENABLE_NUMBER, cursor, values, 0) + (lastControl == 1 ? 1 : 0)));
-            filteredValues.put(DISABLE_NUMBER, Integer.valueOf(getInteger(DISABLE_NUMBER, cursor, values, 0) + (lastControl == 0 ? 1 : 0)));
+            filteredValues.put(
+                    FIRST_CONTROL, Long.valueOf(getLong(FIRST_CONTROL, cursor, values, now)));
+            filteredValues.put(
+                    ENABLE_NUMBER,
+                    Integer.valueOf(
+                            getInteger(ENABLE_NUMBER, cursor, values, 0)
+                                    + (lastControl == 1 ? 1 : 0)));
+            filteredValues.put(
+                    DISABLE_NUMBER,
+                    Integer.valueOf(
+                            getInteger(DISABLE_NUMBER, cursor, values, 0)
+                                    + (lastControl == 0 ? 1 : 0)));
             return filteredValues;
         }
 
@@ -129,7 +150,11 @@ public final class WifiControlHistoryProvider extends ContentProvider {
             Integer retValue;
             int index;
             if (cursor == null || (index = cursor.getColumnIndex(key)) < 0) {
-                return (values == null || !values.containsKey(key) || (retValue = values.getAsInteger(key)) == null) ? defaultValue : retValue.intValue();
+                return (values == null
+                                || !values.containsKey(key)
+                                || (retValue = values.getAsInteger(key)) == null)
+                        ? defaultValue
+                        : retValue.intValue();
             }
             return cursor.getInt(index);
         }
@@ -138,7 +163,11 @@ public final class WifiControlHistoryProvider extends ContentProvider {
             Long retValue;
             int index;
             if (cursor == null || (index = cursor.getColumnIndex(key)) < 0) {
-                return (values == null || !values.containsKey(key) || (retValue = values.getAsLong(key)) == null) ? defaultValue : retValue.longValue();
+                return (values == null
+                                || !values.containsKey(key)
+                                || (retValue = values.getAsLong(key)) == null)
+                        ? defaultValue
+                        : retValue.longValue();
             }
             return cursor.getLong(index);
         }
@@ -173,11 +202,27 @@ public final class WifiControlHistoryProvider extends ContentProvider {
     }
 
     @Override // android.content.ContentProvider
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(
+            Uri uri,
+            String[] projection,
+            String selection,
+            String[] selectionArgs,
+            String sortOrder) {
         if (DBG) {
             Log.v(TAG, "query uri " + uri.toSafeString());
         }
-        Log.v(TAG, "query table " + this.mDbHelper.getTableName() + " where " + selection + " arg length " + (selectionArgs != null ? Integer.valueOf(selectionArgs.length) : "null") + " projection length " + (projection != null ? Integer.valueOf(projection.length) : "null") + " sortOrder " + sortOrder);
+        Log.v(
+                TAG,
+                "query table "
+                        + this.mDbHelper.getTableName()
+                        + " where "
+                        + selection
+                        + " arg length "
+                        + (selectionArgs != null ? Integer.valueOf(selectionArgs.length) : "null")
+                        + " projection length "
+                        + (projection != null ? Integer.valueOf(projection.length) : "null")
+                        + " sortOrder "
+                        + sortOrder);
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
         qb.setTables(this.mDbHelper.getTableName());
         qb.setStrict(true);
@@ -185,7 +230,8 @@ public final class WifiControlHistoryProvider extends ContentProvider {
         try {
             try {
                 SQLiteDatabase db = this.mDbHelper.getDatabase(false);
-                Cursor cursor = qb.query(db, projection, selection, selectionArgs, null, null, sortOrder);
+                Cursor cursor =
+                        qb.query(db, projection, selection, selectionArgs, null, null, sortOrder);
                 return cursor;
             } catch (SQLiteException e) {
                 Log.e(TAG, "Failed to query - " + e);
@@ -205,7 +251,11 @@ public final class WifiControlHistoryProvider extends ContentProvider {
         if (insertedUri == null) {
             try {
                 SQLiteDatabase db = this.mDbHelper.getDatabase(true);
-                long rowId = db.insert(this.mDbHelper.getTableName(), null, this.mDbHelper.checkAndGetContentValues(null, values));
+                long rowId =
+                        db.insert(
+                                this.mDbHelper.getTableName(),
+                                null,
+                                this.mDbHelper.checkAndGetContentValues(null, values));
                 if (rowId < 0) {
                     Log.e(TAG, "Failed to insert - " + rowId);
                     return null;
@@ -334,7 +384,10 @@ public final class WifiControlHistoryProvider extends ContentProvider {
         Le1:
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.wifi.db.WifiControlHistoryProvider.updateIfExist(android.net.Uri, android.content.ContentValues):android.net.Uri");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.wifi.db.WifiControlHistoryProvider.updateIfExist(android.net.Uri,"
+                    + " android.content.ContentValues):android.net.Uri");
     }
 
     @Override // android.content.ContentProvider

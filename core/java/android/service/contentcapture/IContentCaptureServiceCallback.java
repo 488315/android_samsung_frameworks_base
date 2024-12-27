@@ -8,36 +8,51 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.contentcapture.ContentCaptureCondition;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
 public interface IContentCaptureServiceCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.service.contentcapture.IContentCaptureServiceCallback";
+    public static final String DESCRIPTOR =
+            "android.service.contentcapture.IContentCaptureServiceCallback";
 
     void disableSelf() throws RemoteException;
 
-    void setContentCaptureConditions(String str, List<ContentCaptureCondition> list) throws RemoteException;
+    void setContentCaptureConditions(String str, List<ContentCaptureCondition> list)
+            throws RemoteException;
 
-    void setContentCaptureWhitelist(List<String> list, List<ComponentName> list2) throws RemoteException;
+    void setContentCaptureWhitelist(List<String> list, List<ComponentName> list2)
+            throws RemoteException;
 
-    void writeSessionFlush(int i, ComponentName componentName, FlushMetrics flushMetrics, ContentCaptureOptions contentCaptureOptions, int i2) throws RemoteException;
+    void writeSessionFlush(
+            int i,
+            ComponentName componentName,
+            FlushMetrics flushMetrics,
+            ContentCaptureOptions contentCaptureOptions,
+            int i2)
+            throws RemoteException;
 
     public static class Default implements IContentCaptureServiceCallback {
         @Override // android.service.contentcapture.IContentCaptureServiceCallback
-        public void setContentCaptureWhitelist(List<String> packages, List<ComponentName> activities) throws RemoteException {
-        }
+        public void setContentCaptureWhitelist(
+                List<String> packages, List<ComponentName> activities) throws RemoteException {}
 
         @Override // android.service.contentcapture.IContentCaptureServiceCallback
-        public void setContentCaptureConditions(String packageName, List<ContentCaptureCondition> conditions) throws RemoteException {
-        }
+        public void setContentCaptureConditions(
+                String packageName, List<ContentCaptureCondition> conditions)
+                throws RemoteException {}
 
         @Override // android.service.contentcapture.IContentCaptureServiceCallback
-        public void disableSelf() throws RemoteException {
-        }
+        public void disableSelf() throws RemoteException {}
 
         @Override // android.service.contentcapture.IContentCaptureServiceCallback
-        public void writeSessionFlush(int sessionId, ComponentName app, FlushMetrics flushMetrics, ContentCaptureOptions options, int flushReason) throws RemoteException {
-        }
+        public void writeSessionFlush(
+                int sessionId,
+                ComponentName app,
+                FlushMetrics flushMetrics,
+                ContentCaptureOptions options,
+                int flushReason)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -45,7 +60,7 @@ public interface IContentCaptureServiceCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IContentCaptureServiceCallback {
+    public abstract static class Stub extends Binder implements IContentCaptureServiceCallback {
         static final int TRANSACTION_disableSelf = 3;
         static final int TRANSACTION_setContentCaptureConditions = 2;
         static final int TRANSACTION_setContentCaptureWhitelist = 1;
@@ -92,7 +107,8 @@ public interface IContentCaptureServiceCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IContentCaptureServiceCallback.DESCRIPTOR);
             }
@@ -109,7 +125,8 @@ public interface IContentCaptureServiceCallback extends IInterface {
                     return true;
                 case 2:
                     String _arg02 = data.readString();
-                    List<ContentCaptureCondition> _arg12 = data.createTypedArrayList(ContentCaptureCondition.CREATOR);
+                    List<ContentCaptureCondition> _arg12 =
+                            data.createTypedArrayList(ContentCaptureCondition.CREATOR);
                     data.enforceNoDataAvail();
                     setContentCaptureConditions(_arg02, _arg12);
                     return true;
@@ -118,9 +135,12 @@ public interface IContentCaptureServiceCallback extends IInterface {
                     return true;
                 case 4:
                     int _arg03 = data.readInt();
-                    ComponentName _arg13 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg13 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     FlushMetrics _arg2 = (FlushMetrics) data.readTypedObject(FlushMetrics.CREATOR);
-                    ContentCaptureOptions _arg3 = (ContentCaptureOptions) data.readTypedObject(ContentCaptureOptions.CREATOR);
+                    ContentCaptureOptions _arg3 =
+                            (ContentCaptureOptions)
+                                    data.readTypedObject(ContentCaptureOptions.CREATOR);
                     int _arg4 = data.readInt();
                     data.enforceNoDataAvail();
                     writeSessionFlush(_arg03, _arg13, _arg2, _arg3, _arg4);
@@ -147,7 +167,8 @@ public interface IContentCaptureServiceCallback extends IInterface {
             }
 
             @Override // android.service.contentcapture.IContentCaptureServiceCallback
-            public void setContentCaptureWhitelist(List<String> packages, List<ComponentName> activities) throws RemoteException {
+            public void setContentCaptureWhitelist(
+                    List<String> packages, List<ComponentName> activities) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentCaptureServiceCallback.DESCRIPTOR);
@@ -160,7 +181,9 @@ public interface IContentCaptureServiceCallback extends IInterface {
             }
 
             @Override // android.service.contentcapture.IContentCaptureServiceCallback
-            public void setContentCaptureConditions(String packageName, List<ContentCaptureCondition> conditions) throws RemoteException {
+            public void setContentCaptureConditions(
+                    String packageName, List<ContentCaptureCondition> conditions)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentCaptureServiceCallback.DESCRIPTOR);
@@ -184,7 +207,13 @@ public interface IContentCaptureServiceCallback extends IInterface {
             }
 
             @Override // android.service.contentcapture.IContentCaptureServiceCallback
-            public void writeSessionFlush(int sessionId, ComponentName app, FlushMetrics flushMetrics, ContentCaptureOptions options, int flushReason) throws RemoteException {
+            public void writeSessionFlush(
+                    int sessionId,
+                    ComponentName app,
+                    FlushMetrics flushMetrics,
+                    ContentCaptureOptions options,
+                    int flushReason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentCaptureServiceCallback.DESCRIPTOR);

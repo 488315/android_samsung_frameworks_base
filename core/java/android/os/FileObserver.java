@@ -2,6 +2,7 @@ package android.os;
 
 import android.util.Log;
 import android.util.SparseArray;
+
 import java.io.File;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -32,8 +33,7 @@ public abstract class FileObserver {
     private final int mMask;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface NotifyEventType {
-    }
+    public @interface NotifyEventType {}
 
     public abstract void onEvent(int i, String str);
 
@@ -98,7 +98,10 @@ public abstract class FileObserver {
                 try {
                     observer.onEvent(mask, path);
                 } catch (Throwable throwable) {
-                    Log.wtf(FileObserver.LOG_TAG, "Unhandled exception in FileObserver " + observer, throwable);
+                    Log.wtf(
+                            FileObserver.LOG_TAG,
+                            "Unhandled exception in FileObserver " + observer,
+                            throwable);
                 }
             }
         }

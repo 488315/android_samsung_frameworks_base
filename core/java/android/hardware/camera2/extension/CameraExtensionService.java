@@ -4,7 +4,6 @@ import android.annotation.SystemApi;
 import android.app.AppOpsManager;
 import android.app.Service;
 import android.content.Intent;
-import android.hardware.camera2.extension.ICameraExtensionsProxyService;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
@@ -14,17 +13,18 @@ import android.util.Log;
 public abstract class CameraExtensionService extends Service {
     private static final String TAG = "CameraExtensionService";
     private CameraUsageTracker mCameraUsageTracker;
-    private IBinder.DeathRecipient mDeathRecipient = new IBinder.DeathRecipient() { // from class: android.hardware.camera2.extension.CameraExtensionService.1
-        @Override // android.os.IBinder.DeathRecipient
-        public void binderDied() {
-            synchronized (CameraExtensionService.mLock) {
-                CameraExtensionService.mInitializeCb = null;
-            }
-            if (CameraExtensionService.this.mCameraUsageTracker != null) {
-                CameraExtensionService.this.mCameraUsageTracker.finishCameraOperation();
-            }
-        }
-    };
+    private IBinder.DeathRecipient mDeathRecipient = new IBinder.DeathRecipient() { // from class:
+                // android.hardware.camera2.extension.CameraExtensionService.1
+                @Override // android.os.IBinder.DeathRecipient
+                public void binderDied() {
+                    synchronized (CameraExtensionService.mLock) {
+                        CameraExtensionService.mInitializeCb = null;
+                    }
+                    if (CameraExtensionService.this.mCameraUsageTracker != null) {
+                        CameraExtensionService.this.mCameraUsageTracker.finishCameraOperation();
+                    }
+                }
+            };
     private static Object mLock = new Object();
     private static IInitializeSessionCallback mInitializeCb = null;
 
@@ -41,7 +41,11 @@ public abstract class CameraExtensionService extends Service {
         private int mUid;
 
         private CameraTracker() {
-            this.mAppOpsService = (AppOpsManager) CameraExtensionService.this.getApplicationContext().getSystemService(AppOpsManager.class);
+            this.mAppOpsService =
+                    (AppOpsManager)
+                            CameraExtensionService.this
+                                    .getApplicationContext()
+                                    .getSystemService(AppOpsManager.class);
             this.mPackageName = CameraExtensionService.this.getPackageName();
             this.mAttributionTag = CameraExtensionService.this.getAttributionTag();
             this.mUid = CameraExtensionService.this.getApplicationInfo().uid;
@@ -50,20 +54,28 @@ public abstract class CameraExtensionService extends Service {
         @Override // android.hardware.camera2.extension.CameraUsageTracker
         public void startCameraOperation() {
             if (this.mAppOpsService != null) {
-                this.mAppOpsService.startOp(AppOpsManager.OPSTR_CAMERA, this.mUid, this.mPackageName, this.mAttributionTag, "Camera extensions");
+                this.mAppOpsService.startOp(
+                        AppOpsManager.OPSTR_CAMERA,
+                        this.mUid,
+                        this.mPackageName,
+                        this.mAttributionTag,
+                        "Camera extensions");
             }
         }
 
         @Override // android.hardware.camera2.extension.CameraUsageTracker
         public void finishCameraOperation() {
             if (this.mAppOpsService != null) {
-                this.mAppOpsService.finishOp(AppOpsManager.OPSTR_CAMERA, this.mUid, this.mPackageName, this.mAttributionTag);
+                this.mAppOpsService.finishOp(
+                        AppOpsManager.OPSTR_CAMERA,
+                        this.mUid,
+                        this.mPackageName,
+                        this.mAttributionTag);
             }
         }
     }
 
-    protected CameraExtensionService() {
-    }
+    protected CameraExtensionService() {}
 
     @Override // android.app.Service
     public final IBinder onBind(Intent intent) {
@@ -75,8 +87,7 @@ public abstract class CameraExtensionService extends Service {
     }
 
     private class CameraExtensionServiceImpl extends ICameraExtensionsProxyService.Stub {
-        private CameraExtensionServiceImpl() {
-        }
+        private CameraExtensionServiceImpl() {}
 
         @Override // android.hardware.camera2.extension.ICameraExtensionsProxyService
         public boolean registerClient(IBinder token) throws RemoteException {
@@ -100,9 +111,13 @@ public abstract class CameraExtensionService extends Service {
                 if (CameraExtensionService.mInitializeCb == null) {
                     CameraExtensionService.mInitializeCb = cb;
                     try {
-                        CameraExtensionService.mInitializeCb.asBinder().linkToDeath(CameraExtensionService.this.mDeathRecipient, 0);
+                        CameraExtensionService.mInitializeCb
+                                .asBinder()
+                                .linkToDeath(CameraExtensionService.this.mDeathRecipient, 0);
                     } catch (RemoteException e) {
-                        Log.e(CameraExtensionService.TAG, "Failure to register binder death notifier!");
+                        Log.e(
+                                CameraExtensionService.TAG,
+                                "Failure to register binder death notifier!");
                     }
                     ret = true;
                 }
@@ -122,25 +137,31 @@ public abstract class CameraExtensionService extends Service {
         public void releaseSession() {
             synchronized (CameraExtensionService.mLock) {
                 if (CameraExtensionService.mInitializeCb != null) {
-                    CameraExtensionService.mInitializeCb.asBinder().unlinkToDeath(CameraExtensionService.this.mDeathRecipient, 0);
+                    CameraExtensionService.mInitializeCb
+                            .asBinder()
+                            .unlinkToDeath(CameraExtensionService.this.mDeathRecipient, 0);
                     CameraExtensionService.mInitializeCb = null;
                 }
             }
         }
 
         @Override // android.hardware.camera2.extension.ICameraExtensionsProxyService
-        public IPreviewExtenderImpl initializePreviewExtension(int extensionType) throws RemoteException {
+        public IPreviewExtenderImpl initializePreviewExtension(int extensionType)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.camera2.extension.ICameraExtensionsProxyService
-        public IImageCaptureExtenderImpl initializeImageExtension(int extensionType) throws RemoteException {
+        public IImageCaptureExtenderImpl initializeImageExtension(int extensionType)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.hardware.camera2.extension.ICameraExtensionsProxyService
-        public IAdvancedExtenderImpl initializeAdvancedExtension(int extensionType) throws RemoteException {
-            AdvancedExtender extender = CameraExtensionService.this.onInitializeAdvancedExtension(extensionType);
+        public IAdvancedExtenderImpl initializeAdvancedExtension(int extensionType)
+                throws RemoteException {
+            AdvancedExtender extender =
+                    CameraExtensionService.this.onInitializeAdvancedExtension(extensionType);
             extender.setCameraUsageTracker(CameraExtensionService.this.mCameraUsageTracker);
             return extender.getAdvancedExtenderBinder();
         }

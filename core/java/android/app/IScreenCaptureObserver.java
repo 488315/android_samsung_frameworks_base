@@ -14,8 +14,7 @@ public interface IScreenCaptureObserver extends IInterface {
 
     public static class Default implements IScreenCaptureObserver {
         @Override // android.app.IScreenCaptureObserver
-        public void onScreenCaptured() throws RemoteException {
-        }
+        public void onScreenCaptured() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IScreenCaptureObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IScreenCaptureObserver {
+    public abstract static class Stub extends Binder implements IScreenCaptureObserver {
         static final int TRANSACTION_onScreenCaptured = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IScreenCaptureObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IScreenCaptureObserver.DESCRIPTOR);
             }

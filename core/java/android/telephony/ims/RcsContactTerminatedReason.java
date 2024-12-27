@@ -6,19 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public final class RcsContactTerminatedReason implements Parcelable {
-    public static final Parcelable.Creator<RcsContactTerminatedReason> CREATOR = new Parcelable.Creator<RcsContactTerminatedReason>() { // from class: android.telephony.ims.RcsContactTerminatedReason.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RcsContactTerminatedReason createFromParcel(Parcel in) {
-            return new RcsContactTerminatedReason(in);
-        }
+    public static final Parcelable.Creator<RcsContactTerminatedReason> CREATOR =
+            new Parcelable.Creator<
+                    RcsContactTerminatedReason>() { // from class:
+                                                    // android.telephony.ims.RcsContactTerminatedReason.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RcsContactTerminatedReason createFromParcel(Parcel in) {
+                    return new RcsContactTerminatedReason(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RcsContactTerminatedReason[] newArray(int size) {
-            return new RcsContactTerminatedReason[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RcsContactTerminatedReason[] newArray(int size) {
+                    return new RcsContactTerminatedReason[size];
+                }
+            };
     private final Uri mContactUri;
     private final String mReason;
 

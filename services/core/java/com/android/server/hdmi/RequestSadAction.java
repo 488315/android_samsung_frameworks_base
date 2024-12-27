@@ -2,10 +2,11 @@ package com.android.server.hdmi;
 
 import android.net.resolv.aidl.IDnsResolverUnsolicitedEventListener;
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.UiModeManagerService$13$$ExternalSyntheticOutline0;
-import com.android.server.hdmi.SetArcTransmissionStateAction;
 import com.android.server.hdmi.SetArcTransmissionStateAction.AnonymousClass1;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,9 @@ public final class RequestSadAction extends HdmiCecFeatureAction {
     public final int mTargetAddress;
     public int mTimeoutRetry;
 
-    public RequestSadAction(HdmiCecLocalDevice hdmiCecLocalDevice, SetArcTransmissionStateAction.AnonymousClass1 anonymousClass1) {
+    public RequestSadAction(
+            HdmiCecLocalDevice hdmiCecLocalDevice,
+            SetArcTransmissionStateAction.AnonymousClass1 anonymousClass1) {
         super(hdmiCecLocalDevice);
         ArrayList arrayList = new ArrayList();
         this.mCecCodecsToQuery = arrayList;
@@ -100,9 +103,14 @@ public final class RequestSadAction extends HdmiCecFeatureAction {
                     for (int i3 = 0; i3 < bArr.length - 2; i3 += 3) {
                         byte b = bArr[i3];
                         if ((b & 128) == 0 && (i = (b & 120) >> 3) > 0 && i <= 15) {
-                            ((ArrayList) this.mSupportedSads).add(new byte[]{b, bArr[i3 + 1], bArr[i3 + 2]});
+                            ((ArrayList) this.mSupportedSads)
+                                    .add(new byte[] {b, bArr[i3 + 1], bArr[i3 + 2]});
                         } else {
-                            UiModeManagerService$13$$ExternalSyntheticOutline0.m(new StringBuilder("Dropped invalid codec "), bArr[i3], ".", "RequestSadAction");
+                            UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("Dropped invalid codec "),
+                                    bArr[i3],
+                                    ".",
+                                    "RequestSadAction");
                         }
                     }
                     this.mQueriedSadCount += 4;
@@ -134,14 +142,33 @@ public final class RequestSadAction extends HdmiCecFeatureAction {
             return;
         }
         List list = this.mCecCodecsToQuery;
-        int[] array = ((ArrayList) list).subList(this.mQueriedSadCount, Math.min(((ArrayList) list).size(), this.mQueriedSadCount + 4)).stream().mapToInt(new RequestSadAction$$ExternalSyntheticLambda0()).toArray();
+        int[] array =
+                ((ArrayList) list)
+                                .subList(
+                                        this.mQueriedSadCount,
+                                        Math.min(
+                                                ((ArrayList) list).size(),
+                                                this.mQueriedSadCount + 4))
+                                .stream()
+                                .mapToInt(new RequestSadAction$$ExternalSyntheticLambda0())
+                                .toArray();
         int sourceAddress = getSourceAddress();
         int min = Math.min(array.length, 4);
         byte[] bArr = new byte[min];
         for (int i = 0; i < min; i++) {
-            bArr[i] = (byte) (array[i] & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
+            bArr[i] =
+                    (byte)
+                            (array[i]
+                                    & IDnsResolverUnsolicitedEventListener
+                                            .DNS_HEALTH_RESULT_TIMEOUT);
         }
-        sendCommand(HdmiCecMessage.build(sourceAddress, this.mTargetAddress, FrameworkStatsLog.DEVICE_POLICY_EVENT__EVENT_ID__CROSS_PROFILE_SETTINGS_PAGE_ADMIN_RESTRICTED, bArr));
+        sendCommand(
+                HdmiCecMessage.build(
+                        sourceAddress,
+                        this.mTargetAddress,
+                        FrameworkStatsLog
+                                .DEVICE_POLICY_EVENT__EVENT_ID__CROSS_PROFILE_SETTINGS_PAGE_ADMIN_RESTRICTED,
+                        bArr));
         this.mState = 1;
         addTimer(1, 2000);
     }
@@ -156,16 +183,25 @@ public final class RequestSadAction extends HdmiCecFeatureAction {
         SetArcTransmissionStateAction.AnonymousClass1 anonymousClass1 = this.mCallback;
         anonymousClass1.getClass();
         Slog.i("SetArcTransmissionStateAction", "Enabling ARC");
-        SetArcTransmissionStateAction setArcTransmissionStateAction = SetArcTransmissionStateAction.this;
-        HdmiCecLocalDeviceTv hdmiCecLocalDeviceTv = (HdmiCecLocalDeviceTv) setArcTransmissionStateAction.mSource;
+        SetArcTransmissionStateAction setArcTransmissionStateAction =
+                SetArcTransmissionStateAction.this;
+        HdmiCecLocalDeviceTv hdmiCecLocalDeviceTv =
+                (HdmiCecLocalDeviceTv) setArcTransmissionStateAction.mSource;
         hdmiCecLocalDeviceTv.assertRunOnServiceThread();
-        HdmiLogger.debug("Set Arc Status[old:%b new:true]", Boolean.valueOf(hdmiCecLocalDeviceTv.mArcEstablished));
+        HdmiLogger.debug(
+                "Set Arc Status[old:%b new:true]",
+                Boolean.valueOf(hdmiCecLocalDeviceTv.mArcEstablished));
         hdmiCecLocalDeviceTv.enableAudioReturnChannel$1(true);
         hdmiCecLocalDeviceTv.notifyArcStatusToAudioService(list, true);
         hdmiCecLocalDeviceTv.mArcEstablished = true;
         setArcTransmissionStateAction.mState = 1;
         setArcTransmissionStateAction.addTimer(1, 2000);
-        setArcTransmissionStateAction.sendCommand(HdmiCecMessage.build(setArcTransmissionStateAction.getSourceAddress(), setArcTransmissionStateAction.mAvrAddress, 193), setArcTransmissionStateAction.new AnonymousClass1());
+        setArcTransmissionStateAction.sendCommand(
+                HdmiCecMessage.build(
+                        setArcTransmissionStateAction.getSourceAddress(),
+                        setArcTransmissionStateAction.mAvrAddress,
+                        193),
+                setArcTransmissionStateAction.new AnonymousClass1());
         finish(true);
     }
 }

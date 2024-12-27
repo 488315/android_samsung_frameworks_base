@@ -10,18 +10,20 @@ import android.os.ResultReceiver;
 import android.telecom.CallEndpoint;
 import android.telecom.CallException;
 import android.telecom.DisconnectCause;
-import com.android.internal.telecom.ICallControl;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
 public interface ICallEventCallback extends IInterface {
     public static final String DESCRIPTOR = "com.android.internal.telecom.ICallEventCallback";
 
-    void onAddCallControl(String str, int i, ICallControl iCallControl, CallException callException) throws RemoteException;
+    void onAddCallControl(String str, int i, ICallControl iCallControl, CallException callException)
+            throws RemoteException;
 
     void onAnswer(String str, int i, ResultReceiver resultReceiver) throws RemoteException;
 
-    void onAvailableCallEndpointsChanged(String str, List<CallEndpoint> list) throws RemoteException;
+    void onAvailableCallEndpointsChanged(String str, List<CallEndpoint> list)
+            throws RemoteException;
 
     void onCallEndpointChanged(String str, CallEndpoint callEndpoint) throws RemoteException;
 
@@ -29,7 +31,8 @@ public interface ICallEventCallback extends IInterface {
 
     void onCallStreamingStarted(String str, ResultReceiver resultReceiver) throws RemoteException;
 
-    void onDisconnect(String str, DisconnectCause disconnectCause, ResultReceiver resultReceiver) throws RemoteException;
+    void onDisconnect(String str, DisconnectCause disconnectCause, ResultReceiver resultReceiver)
+            throws RemoteException;
 
     void onEvent(String str, String str2, Bundle bundle) throws RemoteException;
 
@@ -45,56 +48,51 @@ public interface ICallEventCallback extends IInterface {
 
     public static class Default implements ICallEventCallback {
         @Override // com.android.internal.telecom.ICallEventCallback
-        public void onAddCallControl(String callId, int resultCode, ICallControl callControl, CallException exception) throws RemoteException {
-        }
+        public void onAddCallControl(
+                String callId, int resultCode, ICallControl callControl, CallException exception)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallEventCallback
-        public void onSetActive(String callId, ResultReceiver callback) throws RemoteException {
-        }
+        public void onSetActive(String callId, ResultReceiver callback) throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallEventCallback
-        public void onSetInactive(String callId, ResultReceiver callback) throws RemoteException {
-        }
+        public void onSetInactive(String callId, ResultReceiver callback) throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallEventCallback
-        public void onAnswer(String callId, int videoState, ResultReceiver callback) throws RemoteException {
-        }
+        public void onAnswer(String callId, int videoState, ResultReceiver callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallEventCallback
-        public void onDisconnect(String callId, DisconnectCause cause, ResultReceiver callback) throws RemoteException {
-        }
+        public void onDisconnect(String callId, DisconnectCause cause, ResultReceiver callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallEventCallback
-        public void onCallStreamingStarted(String callId, ResultReceiver callback) throws RemoteException {
-        }
+        public void onCallStreamingStarted(String callId, ResultReceiver callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallEventCallback
-        public void onCallStreamingFailed(String callId, int reason) throws RemoteException {
-        }
+        public void onCallStreamingFailed(String callId, int reason) throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallEventCallback
-        public void onCallEndpointChanged(String callId, CallEndpoint endpoint) throws RemoteException {
-        }
+        public void onCallEndpointChanged(String callId, CallEndpoint endpoint)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallEventCallback
-        public void onAvailableCallEndpointsChanged(String callId, List<CallEndpoint> endpoint) throws RemoteException {
-        }
+        public void onAvailableCallEndpointsChanged(String callId, List<CallEndpoint> endpoint)
+                throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallEventCallback
-        public void onMuteStateChanged(String callId, boolean isMuted) throws RemoteException {
-        }
+        public void onMuteStateChanged(String callId, boolean isMuted) throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallEventCallback
-        public void onVideoStateChanged(String callId, int videoState) throws RemoteException {
-        }
+        public void onVideoStateChanged(String callId, int videoState) throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallEventCallback
-        public void onEvent(String callId, String event, Bundle extras) throws RemoteException {
-        }
+        public void onEvent(String callId, String event, Bundle extras) throws RemoteException {}
 
         @Override // com.android.internal.telecom.ICallEventCallback
-        public void removeCallFromTransactionalServiceWrapper(String callId) throws RemoteException {
-        }
+        public void removeCallFromTransactionalServiceWrapper(String callId)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -102,7 +100,7 @@ public interface ICallEventCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICallEventCallback {
+    public abstract static class Stub extends Binder implements ICallEventCallback {
         static final int TRANSACTION_onAddCallControl = 1;
         static final int TRANSACTION_onAnswer = 4;
         static final int TRANSACTION_onAvailableCallEndpointsChanged = 9;
@@ -176,7 +174,8 @@ public interface ICallEventCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICallEventCallback.DESCRIPTOR);
             }
@@ -189,39 +188,46 @@ public interface ICallEventCallback extends IInterface {
                     String _arg0 = data.readString();
                     int _arg1 = data.readInt();
                     ICallControl _arg2 = ICallControl.Stub.asInterface(data.readStrongBinder());
-                    CallException _arg3 = (CallException) data.readTypedObject(CallException.CREATOR);
+                    CallException _arg3 =
+                            (CallException) data.readTypedObject(CallException.CREATOR);
                     data.enforceNoDataAvail();
                     onAddCallControl(_arg0, _arg1, _arg2, _arg3);
                     return true;
                 case 2:
                     String _arg02 = data.readString();
-                    ResultReceiver _arg12 = (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
+                    ResultReceiver _arg12 =
+                            (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
                     data.enforceNoDataAvail();
                     onSetActive(_arg02, _arg12);
                     return true;
                 case 3:
                     String _arg03 = data.readString();
-                    ResultReceiver _arg13 = (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
+                    ResultReceiver _arg13 =
+                            (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
                     data.enforceNoDataAvail();
                     onSetInactive(_arg03, _arg13);
                     return true;
                 case 4:
                     String _arg04 = data.readString();
                     int _arg14 = data.readInt();
-                    ResultReceiver _arg22 = (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
+                    ResultReceiver _arg22 =
+                            (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
                     data.enforceNoDataAvail();
                     onAnswer(_arg04, _arg14, _arg22);
                     return true;
                 case 5:
                     String _arg05 = data.readString();
-                    DisconnectCause _arg15 = (DisconnectCause) data.readTypedObject(DisconnectCause.CREATOR);
-                    ResultReceiver _arg23 = (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
+                    DisconnectCause _arg15 =
+                            (DisconnectCause) data.readTypedObject(DisconnectCause.CREATOR);
+                    ResultReceiver _arg23 =
+                            (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
                     data.enforceNoDataAvail();
                     onDisconnect(_arg05, _arg15, _arg23);
                     return true;
                 case 6:
                     String _arg06 = data.readString();
-                    ResultReceiver _arg16 = (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
+                    ResultReceiver _arg16 =
+                            (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
                     data.enforceNoDataAvail();
                     onCallStreamingStarted(_arg06, _arg16);
                     return true;
@@ -289,7 +295,12 @@ public interface ICallEventCallback extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ICallEventCallback
-            public void onAddCallControl(String callId, int resultCode, ICallControl callControl, CallException exception) throws RemoteException {
+            public void onAddCallControl(
+                    String callId,
+                    int resultCode,
+                    ICallControl callControl,
+                    CallException exception)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
@@ -317,7 +328,8 @@ public interface ICallEventCallback extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ICallEventCallback
-            public void onSetInactive(String callId, ResultReceiver callback) throws RemoteException {
+            public void onSetInactive(String callId, ResultReceiver callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
@@ -330,7 +342,8 @@ public interface ICallEventCallback extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ICallEventCallback
-            public void onAnswer(String callId, int videoState, ResultReceiver callback) throws RemoteException {
+            public void onAnswer(String callId, int videoState, ResultReceiver callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
@@ -344,7 +357,8 @@ public interface ICallEventCallback extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ICallEventCallback
-            public void onDisconnect(String callId, DisconnectCause cause, ResultReceiver callback) throws RemoteException {
+            public void onDisconnect(String callId, DisconnectCause cause, ResultReceiver callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
@@ -358,7 +372,8 @@ public interface ICallEventCallback extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ICallEventCallback
-            public void onCallStreamingStarted(String callId, ResultReceiver callback) throws RemoteException {
+            public void onCallStreamingStarted(String callId, ResultReceiver callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
@@ -384,7 +399,8 @@ public interface ICallEventCallback extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ICallEventCallback
-            public void onCallEndpointChanged(String callId, CallEndpoint endpoint) throws RemoteException {
+            public void onCallEndpointChanged(String callId, CallEndpoint endpoint)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
@@ -397,7 +413,8 @@ public interface ICallEventCallback extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ICallEventCallback
-            public void onAvailableCallEndpointsChanged(String callId, List<CallEndpoint> endpoint) throws RemoteException {
+            public void onAvailableCallEndpointsChanged(String callId, List<CallEndpoint> endpoint)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);
@@ -450,7 +467,8 @@ public interface ICallEventCallback extends IInterface {
             }
 
             @Override // com.android.internal.telecom.ICallEventCallback
-            public void removeCallFromTransactionalServiceWrapper(String callId) throws RemoteException {
+            public void removeCallFromTransactionalServiceWrapper(String callId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICallEventCallback.DESCRIPTOR);

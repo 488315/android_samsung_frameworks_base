@@ -4,7 +4,9 @@ import android.hardware.gnss.GnssSignalType;
 import android.os.Debug;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.internal.widget.LockPatternUtils;
+
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -99,14 +101,33 @@ public class LsLogEnroll {
     public String toString() {
         String req = byteToText(this.mPackage != null ? this.mPackage : this.mReason);
         String msg = byteToText(this.mMessage);
-        String result = String.format("Finish [User %d %s(%d)][%s:%d]\n    [%s(%d)][%016x]%s(%dms)\n", Integer.valueOf(this.mUserId), LockPatternUtils.credentialTypeToString(this.mType), Integer.valueOf(this.mSlot), req, Integer.valueOf(this.mProcessId), msg, Integer.valueOf(this.mResponse), Long.valueOf(this.mProtectorId), LsUtil.gethashStr(this.mSalt), Integer.valueOf(this.mElapsedTime));
+        String result =
+                String.format(
+                        "Finish [User %d %s(%d)][%s:%d]\n    [%s(%d)][%016x]%s(%dms)\n",
+                        Integer.valueOf(this.mUserId),
+                        LockPatternUtils.credentialTypeToString(this.mType),
+                        Integer.valueOf(this.mSlot),
+                        req,
+                        Integer.valueOf(this.mProcessId),
+                        msg,
+                        Integer.valueOf(this.mResponse),
+                        Long.valueOf(this.mProtectorId),
+                        LsUtil.gethashStr(this.mSalt),
+                        Integer.valueOf(this.mElapsedTime));
         return result;
     }
 
     public String toSummary() {
         String req = byteToText(this.mPackage != null ? this.mPackage : this.mReason);
         String msg = byteToText(this.mMessage);
-        String result = String.format("%s E:%s [User %d %s]\n    [%s]\n", LsUtil.getTimeForSummary(this.mReqTime), this.mResponse == 0 ? GnssSignalType.CODE_TYPE_S : "F", Integer.valueOf(this.mUserId), LockPatternUtils.credentialTypeToString(this.mType), req);
+        String result =
+                String.format(
+                        "%s E:%s [User %d %s]\n    [%s]\n",
+                        LsUtil.getTimeForSummary(this.mReqTime),
+                        this.mResponse == 0 ? GnssSignalType.CODE_TYPE_S : "F",
+                        Integer.valueOf(this.mUserId),
+                        LockPatternUtils.credentialTypeToString(this.mType),
+                        req);
         if (this.mResponse != 0) {
             return result + String.format("    [%s]\n", msg);
         }
@@ -267,11 +288,19 @@ public class LsLogEnroll {
                 Log.e(TAG, "loadRequestor failed ", e);
             }
             if (mEnrollResult == null) {
-                LsLog.enroll("No enroll data for user " + userId + ". Unknown requestor :\n" + Debug.getCallers(10, "    "));
+                LsLog.enroll(
+                        "No enroll data for user "
+                                + userId
+                                + ". Unknown requestor :\n"
+                                + Debug.getCallers(10, "    "));
                 mEnrollResult = new LsLogEnroll(userId);
             }
         } else {
-            LsLog.enroll("No enroll data for user " + userId + ". Unknown requestor :\n" + Debug.getCallers(10, "    "));
+            LsLog.enroll(
+                    "No enroll data for user "
+                            + userId
+                            + ". Unknown requestor :\n"
+                            + Debug.getCallers(10, "    "));
             mEnrollResult = new LsLogEnroll(0);
         }
         return mEnrollResult;
@@ -310,14 +339,24 @@ public class LsLogEnroll {
         int savedUserId = buffer.getInt();
         int savedPid = buffer.getInt();
         if (savedUserId != userId) {
-            Log.w(TAG, String.format("mismatch enroll data, Req User %d, Saved User %d, pid %d)", Integer.valueOf(userId), Integer.valueOf(savedUserId), Integer.valueOf(savedPid)));
+            Log.w(
+                    TAG,
+                    String.format(
+                            "mismatch enroll data, Req User %d, Saved User %d, pid %d)",
+                            Integer.valueOf(userId),
+                            Integer.valueOf(savedUserId),
+                            Integer.valueOf(savedPid)));
             saveRequestor(null);
             return null;
         }
         long reqTime = buffer.getLong();
         long curTime = System.currentTimeMillis();
         if (1000 + reqTime < curTime) {
-            Log.w(TAG, String.format("request data is too old, req = %s, cur = %s", LsUtil.getTimeForLog(reqTime), LsUtil.getTimeForLog(curTime)));
+            Log.w(
+                    TAG,
+                    String.format(
+                            "request data is too old, req = %s, cur = %s",
+                            LsUtil.getTimeForLog(reqTime), LsUtil.getTimeForLog(curTime)));
             saveRequestor(null);
             return null;
         }

@@ -4,6 +4,7 @@ import android.security.KeyStoreSecurityLevel;
 import android.security.keystore.ArrayUtils;
 import android.system.keystore2.KeyDescriptor;
 import android.system.keystore2.KeyMetadata;
+
 import java.security.PublicKey;
 import java.util.Arrays;
 
@@ -15,7 +16,12 @@ public abstract class AndroidKeyStorePublicKey extends AndroidKeyStoreKey implem
 
     abstract AndroidKeyStorePrivateKey getPrivateKey();
 
-    public AndroidKeyStorePublicKey(KeyDescriptor descriptor, KeyMetadata metadata, byte[] x509EncodedForm, String algorithm, KeyStoreSecurityLevel securityLevel) {
+    public AndroidKeyStorePublicKey(
+            KeyDescriptor descriptor,
+            KeyMetadata metadata,
+            byte[] x509EncodedForm,
+            String algorithm,
+            KeyStoreSecurityLevel securityLevel) {
         super(descriptor, metadata.key.nspace, metadata.authorizations, algorithm, securityLevel);
         this.mCertificate = metadata.certificate;
         this.mCertificateChain = metadata.certificateChain;
@@ -35,7 +41,8 @@ public abstract class AndroidKeyStorePublicKey extends AndroidKeyStoreKey implem
     @Override // android.security.keystore2.AndroidKeyStoreKey
     public int hashCode() {
         int result = (1 * 31) + super.hashCode();
-        return (((result * 31) + Arrays.hashCode(this.mCertificate)) * 31) + Arrays.hashCode(this.mCertificateChain);
+        return (((result * 31) + Arrays.hashCode(this.mCertificate)) * 31)
+                + Arrays.hashCode(this.mCertificateChain);
     }
 
     @Override // android.security.keystore2.AndroidKeyStoreKey
@@ -47,6 +54,7 @@ public abstract class AndroidKeyStorePublicKey extends AndroidKeyStoreKey implem
             return false;
         }
         AndroidKeyStorePublicKey other = (AndroidKeyStorePublicKey) obj;
-        return Arrays.equals(this.mCertificate, other.mCertificate) && Arrays.equals(this.mCertificateChain, other.mCertificateChain);
+        return Arrays.equals(this.mCertificate, other.mCertificate)
+                && Arrays.equals(this.mCertificateChain, other.mCertificateChain);
     }
 }

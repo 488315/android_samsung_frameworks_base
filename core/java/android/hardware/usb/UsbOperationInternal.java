@@ -1,7 +1,7 @@
 package android.hardware.usb;
 
-import android.hardware.usb.IUsbOperationInternal;
 import android.util.Log;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
@@ -30,10 +30,10 @@ public final class UsbOperationInternal extends IUsbOperationInternal.Stub {
     private int mStatus;
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface UsbOperationStatus {
-    }
+    @interface UsbOperationStatus {}
 
-    UsbOperationInternal(int operationID, String id, Executor executor, Consumer<Integer> consumer) {
+    UsbOperationInternal(
+            int operationID, String id, Executor executor, Consumer<Integer> consumer) {
         this.mAsynchronous = false;
         this.mResult = 0;
         this.mLock = new ReentrantLock();
@@ -60,7 +60,9 @@ public final class UsbOperationInternal extends IUsbOperationInternal.Stub {
         try {
             this.mOperationComplete = true;
             this.mStatus = status;
-            Log.i(TAG, "Port:" + this.mId + " opID:" + this.mOperationID + " status:" + this.mStatus);
+            Log.i(
+                    TAG,
+                    "Port:" + this.mId + " opID:" + this.mOperationID + " status:" + this.mStatus);
             if (this.mAsynchronous) {
                 switch (this.mStatus) {
                     case 0:
@@ -79,12 +81,14 @@ public final class UsbOperationInternal extends IUsbOperationInternal.Stub {
                         this.mResult = 4;
                         break;
                 }
-                this.mExecutor.execute(new Runnable() { // from class: android.hardware.usb.UsbOperationInternal$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        UsbOperationInternal.this.lambda$onOperationComplete$0();
-                    }
-                });
+                this.mExecutor.execute(
+                        new Runnable() { // from class:
+                            // android.hardware.usb.UsbOperationInternal$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                UsbOperationInternal.this.lambda$onOperationComplete$0();
+                            }
+                        });
             } else {
                 this.mOperationWait.signal();
             }
@@ -105,16 +109,29 @@ public final class UsbOperationInternal extends IUsbOperationInternal.Stub {
                 long now = System.currentTimeMillis();
                 long deadline = 5000 + now;
                 do {
-                    this.mOperationWait.await(deadline - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+                    this.mOperationWait.await(
+                            deadline - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
                     if (this.mOperationComplete) {
                         break;
                     }
                 } while (System.currentTimeMillis() < deadline);
                 if (!this.mOperationComplete) {
-                    Log.e(TAG, "Port:" + this.mId + " opID:" + this.mOperationID + " operationComplete not received in 5000msecs");
+                    Log.e(
+                            TAG,
+                            "Port:"
+                                    + this.mId
+                                    + " opID:"
+                                    + this.mOperationID
+                                    + " operationComplete not received in 5000msecs");
                 }
             } catch (InterruptedException e) {
-                Log.e(TAG, "Port:" + this.mId + " opID:" + this.mOperationID + " operationComplete interrupted");
+                Log.e(
+                        TAG,
+                        "Port:"
+                                + this.mId
+                                + " opID:"
+                                + this.mOperationID
+                                + " operationComplete interrupted");
             }
         } finally {
             this.mLock.unlock();

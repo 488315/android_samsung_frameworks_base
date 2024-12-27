@@ -20,9 +20,11 @@ import android.view.inputmethod.SurroundingText;
 import android.view.inputmethod.TextAttribute;
 import android.view.inputmethod.TextBoundsInfo;
 import android.view.inputmethod.TextBoundsInfoResult;
+
 import com.android.internal.infra.AndroidFuture;
 import com.android.internal.inputmethod.IRemoteInputConnection;
 import com.android.internal.inputmethod.InputConnectionCommandHeader;
+
 import java.util.Objects;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
@@ -39,7 +41,7 @@ final class IRemoteInputConnectionInvoker {
         this.mSessionId = sessionId;
     }
 
-    private static abstract class OnceResultReceiver<C> extends ResultReceiver {
+    private abstract static class OnceResultReceiver<C> extends ResultReceiver {
         private C mConsumer;
         private Executor mExecutor;
 
@@ -77,32 +79,43 @@ final class IRemoteInputConnectionInvoker {
 
         /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.inputmethodservice.IRemoteInputConnectionInvoker.OnceResultReceiver
-        public void dispatch(Executor executor, final IntConsumer consumer, final int code, Bundle data) {
-            executor.execute(new Runnable() { // from class: android.inputmethodservice.IRemoteInputConnectionInvoker$IntResultReceiver$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    consumer.accept(code);
-                }
-            });
+        public void dispatch(
+                Executor executor, final IntConsumer consumer, final int code, Bundle data) {
+            executor.execute(
+                    new Runnable() { // from class:
+                        // android.inputmethodservice.IRemoteInputConnectionInvoker$IntResultReceiver$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            consumer.accept(code);
+                        }
+                    });
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    static final class TextBoundsInfoResultReceiver extends OnceResultReceiver<Consumer<TextBoundsInfoResult>> {
+    static final class TextBoundsInfoResultReceiver
+            extends OnceResultReceiver<Consumer<TextBoundsInfoResult>> {
         TextBoundsInfoResultReceiver(Executor executor, Consumer<TextBoundsInfoResult> consumer) {
             super(executor, consumer);
         }
 
         /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.inputmethodservice.IRemoteInputConnectionInvoker.OnceResultReceiver
-        public void dispatch(Executor executor, final Consumer<TextBoundsInfoResult> consumer, int code, Bundle data) {
-            final TextBoundsInfoResult textBoundsInfoResult = new TextBoundsInfoResult(code, TextBoundsInfo.createFromBundle(data));
-            executor.execute(new Runnable() { // from class: android.inputmethodservice.IRemoteInputConnectionInvoker$TextBoundsInfoResultReceiver$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    consumer.accept(textBoundsInfoResult);
-                }
-            });
+        public void dispatch(
+                Executor executor,
+                final Consumer<TextBoundsInfoResult> consumer,
+                int code,
+                Bundle data) {
+            final TextBoundsInfoResult textBoundsInfoResult =
+                    new TextBoundsInfoResult(code, TextBoundsInfo.createFromBundle(data));
+            executor.execute(
+                    new Runnable() { // from class:
+                        // android.inputmethodservice.IRemoteInputConnectionInvoker$TextBoundsInfoResultReceiver$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            consumer.accept(textBoundsInfoResult);
+                        }
+                    });
         }
     }
 
@@ -153,10 +166,12 @@ final class IRemoteInputConnectionInvoker {
         return future;
     }
 
-    public AndroidFuture<SurroundingText> getSurroundingText(int beforeLength, int afterLength, int flags) {
+    public AndroidFuture<SurroundingText> getSurroundingText(
+            int beforeLength, int afterLength, int flags) {
         AndroidFuture<SurroundingText> future = new AndroidFuture<>();
         try {
-            this.mConnection.getSurroundingText(createHeader(), beforeLength, afterLength, flags, future);
+            this.mConnection.getSurroundingText(
+                    createHeader(), beforeLength, afterLength, flags, future);
         } catch (RemoteException e) {
             future.completeExceptionally(e);
         }
@@ -192,9 +207,11 @@ final class IRemoteInputConnectionInvoker {
         }
     }
 
-    public boolean commitText(CharSequence text, int newCursorPosition, TextAttribute textAttribute) {
+    public boolean commitText(
+            CharSequence text, int newCursorPosition, TextAttribute textAttribute) {
         try {
-            this.mConnection.commitTextWithTextAttribute(createHeader(), text, newCursorPosition, textAttribute);
+            this.mConnection.commitTextWithTextAttribute(
+                    createHeader(), text, newCursorPosition, textAttribute);
             return true;
         } catch (RemoteException e) {
             return false;
@@ -257,7 +274,8 @@ final class IRemoteInputConnectionInvoker {
 
     public boolean setComposingRegion(int start, int end, TextAttribute textAttribute) {
         try {
-            this.mConnection.setComposingRegionWithTextAttribute(createHeader(), start, end, textAttribute);
+            this.mConnection.setComposingRegionWithTextAttribute(
+                    createHeader(), start, end, textAttribute);
             return true;
         } catch (RemoteException e) {
             return false;
@@ -273,9 +291,11 @@ final class IRemoteInputConnectionInvoker {
         }
     }
 
-    public boolean setComposingText(CharSequence text, int newCursorPosition, TextAttribute textAttribute) {
+    public boolean setComposingText(
+            CharSequence text, int newCursorPosition, TextAttribute textAttribute) {
         try {
-            this.mConnection.setComposingTextWithTextAttribute(createHeader(), text, newCursorPosition, textAttribute);
+            this.mConnection.setComposingTextWithTextAttribute(
+                    createHeader(), text, newCursorPosition, textAttribute);
             return true;
         } catch (RemoteException e) {
             return false;
@@ -338,7 +358,8 @@ final class IRemoteInputConnectionInvoker {
 
     public boolean deleteSurroundingTextInCodePoints(int beforeLength, int afterLength) {
         try {
-            this.mConnection.deleteSurroundingTextInCodePoints(createHeader(), beforeLength, afterLength);
+            this.mConnection.deleteSurroundingTextInCodePoints(
+                    createHeader(), beforeLength, afterLength);
             return true;
         } catch (RemoteException e) {
             return false;
@@ -363,16 +384,19 @@ final class IRemoteInputConnectionInvoker {
         }
     }
 
-    public void performHandwritingGesture(HandwritingGesture gesture, Executor executor, final IntConsumer consumer) {
+    public void performHandwritingGesture(
+            HandwritingGesture gesture, Executor executor, final IntConsumer consumer) {
         ResultReceiver resultReceiver = null;
         if (consumer != null) {
             Objects.requireNonNull(executor);
             resultReceiver = new IntResultReceiver(executor, consumer);
         }
         try {
-            CancellationSignalBeamer.Sender.MustClose ignored = getCancellationSignalBeamer().beamScopeIfNeeded(gesture);
+            CancellationSignalBeamer.Sender.MustClose ignored =
+                    getCancellationSignalBeamer().beamScopeIfNeeded(gesture);
             try {
-                this.mConnection.performHandwritingGesture(createHeader(), ParcelableHandwritingGesture.of(gesture), resultReceiver);
+                this.mConnection.performHandwritingGesture(
+                        createHeader(), ParcelableHandwritingGesture.of(gesture), resultReceiver);
                 if (ignored != null) {
                     ignored.close();
                 }
@@ -380,21 +404,25 @@ final class IRemoteInputConnectionInvoker {
             }
         } catch (RemoteException e) {
             if (consumer != null && executor != null) {
-                executor.execute(new Runnable() { // from class: android.inputmethodservice.IRemoteInputConnectionInvoker$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        consumer.accept(4);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                            // android.inputmethodservice.IRemoteInputConnectionInvoker$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                consumer.accept(4);
+                            }
+                        });
             }
         }
     }
 
-    public boolean previewHandwritingGesture(HandwritingGesture gesture, CancellationSignal cancellationSignal) {
+    public boolean previewHandwritingGesture(
+            HandwritingGesture gesture, CancellationSignal cancellationSignal) {
         try {
             CancellationSignalBeamer.Sender.CloseableToken csToken = beam(cancellationSignal);
             try {
-                this.mConnection.previewHandwritingGesture(createHeader(), ParcelableHandwritingGesture.of(gesture), csToken);
+                this.mConnection.previewHandwritingGesture(
+                        createHeader(), ParcelableHandwritingGesture.of(gesture), csToken);
                 if (csToken != null) {
                     csToken.close();
                     return true;
@@ -418,63 +446,74 @@ final class IRemoteInputConnectionInvoker {
         if (this.mBeamer != null) {
             return this.mBeamer;
         }
-        this.mBeamer = new CancellationSignalBeamer.Sender() { // from class: android.inputmethodservice.IRemoteInputConnectionInvoker.1
-            @Override // android.os.CancellationSignalBeamer.Sender
-            public void onCancel(IBinder token) {
-                try {
-                    IRemoteInputConnectionInvoker.this.mConnection.cancelCancellationSignal(token);
-                } catch (RemoteException e) {
-                }
-            }
+        this.mBeamer =
+                new CancellationSignalBeamer.Sender() { // from class:
+                    // android.inputmethodservice.IRemoteInputConnectionInvoker.1
+                    @Override // android.os.CancellationSignalBeamer.Sender
+                    public void onCancel(IBinder token) {
+                        try {
+                            IRemoteInputConnectionInvoker.this.mConnection.cancelCancellationSignal(
+                                    token);
+                        } catch (RemoteException e) {
+                        }
+                    }
 
-            @Override // android.os.CancellationSignalBeamer.Sender
-            public void onForget(IBinder token) {
-                try {
-                    IRemoteInputConnectionInvoker.this.mConnection.forgetCancellationSignal(token);
-                } catch (RemoteException e) {
-                }
-            }
-        };
+                    @Override // android.os.CancellationSignalBeamer.Sender
+                    public void onForget(IBinder token) {
+                        try {
+                            IRemoteInputConnectionInvoker.this.mConnection.forgetCancellationSignal(
+                                    token);
+                        } catch (RemoteException e) {
+                        }
+                    }
+                };
         return this.mBeamer;
     }
 
     public AndroidFuture<Boolean> requestCursorUpdates(int cursorUpdateMode, int imeDisplayId) {
         AndroidFuture<Boolean> future = new AndroidFuture<>();
         try {
-            this.mConnection.requestCursorUpdates(createHeader(), cursorUpdateMode, imeDisplayId, future);
+            this.mConnection.requestCursorUpdates(
+                    createHeader(), cursorUpdateMode, imeDisplayId, future);
         } catch (RemoteException e) {
             future.completeExceptionally(e);
         }
         return future;
     }
 
-    public AndroidFuture<Boolean> requestCursorUpdates(int cursorUpdateMode, int cursorUpdateFilter, int imeDisplayId) {
+    public AndroidFuture<Boolean> requestCursorUpdates(
+            int cursorUpdateMode, int cursorUpdateFilter, int imeDisplayId) {
         AndroidFuture<Boolean> future = new AndroidFuture<>();
         try {
-            this.mConnection.requestCursorUpdatesWithFilter(createHeader(), cursorUpdateMode, cursorUpdateFilter, imeDisplayId, future);
+            this.mConnection.requestCursorUpdatesWithFilter(
+                    createHeader(), cursorUpdateMode, cursorUpdateFilter, imeDisplayId, future);
         } catch (RemoteException e) {
             future.completeExceptionally(e);
         }
         return future;
     }
 
-    public void requestTextBoundsInfo(RectF bounds, Executor executor, final Consumer<TextBoundsInfoResult> consumer) {
+    public void requestTextBoundsInfo(
+            RectF bounds, Executor executor, final Consumer<TextBoundsInfoResult> consumer) {
         Objects.requireNonNull(executor);
         Objects.requireNonNull(consumer);
         ResultReceiver resultReceiver = new TextBoundsInfoResultReceiver(executor, consumer);
         try {
             this.mConnection.requestTextBoundsInfo(createHeader(), bounds, resultReceiver);
         } catch (RemoteException e) {
-            executor.execute(new Runnable() { // from class: android.inputmethodservice.IRemoteInputConnectionInvoker$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    consumer.accept(new TextBoundsInfoResult(3));
-                }
-            });
+            executor.execute(
+                    new Runnable() { // from class:
+                        // android.inputmethodservice.IRemoteInputConnectionInvoker$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            consumer.accept(new TextBoundsInfoResult(3));
+                        }
+                    });
         }
     }
 
-    public AndroidFuture<Boolean> commitContent(InputContentInfo inputContentInfo, int flags, Bundle opts) {
+    public AndroidFuture<Boolean> commitContent(
+            InputContentInfo inputContentInfo, int flags, Bundle opts) {
         AndroidFuture<Boolean> future = new AndroidFuture<>();
         try {
             this.mConnection.commitContent(createHeader(), inputContentInfo, flags, opts, future);
@@ -493,9 +532,15 @@ final class IRemoteInputConnectionInvoker {
         }
     }
 
-    public boolean replaceText(int start, int end, CharSequence text, int newCursorPosition, TextAttribute textAttribute) {
+    public boolean replaceText(
+            int start,
+            int end,
+            CharSequence text,
+            int newCursorPosition,
+            TextAttribute textAttribute) {
         try {
-            this.mConnection.replaceText(createHeader(), start, end, text, newCursorPosition, textAttribute);
+            this.mConnection.replaceText(
+                    createHeader(), start, end, text, newCursorPosition, textAttribute);
             return true;
         } catch (RemoteException e) {
             return false;

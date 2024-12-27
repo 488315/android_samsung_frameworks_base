@@ -4,23 +4,26 @@ import android.app.slice.Slice;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.provider.UserDictionary;
+
 import com.sec.android.iaft.SmLib_IafdConstant;
 
 /* loaded from: classes2.dex */
 public final class AudioMixMatchCriterionValue implements Parcelable {
-    public static final Parcelable.Creator<AudioMixMatchCriterionValue> CREATOR = new Parcelable.Creator<AudioMixMatchCriterionValue>() { // from class: android.media.AudioMixMatchCriterionValue.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioMixMatchCriterionValue createFromParcel(Parcel _aidl_source) {
-            return new AudioMixMatchCriterionValue(_aidl_source);
-        }
+    public static final Parcelable.Creator<AudioMixMatchCriterionValue> CREATOR =
+            new Parcelable.Creator<AudioMixMatchCriterionValue>() { // from class:
+                // android.media.AudioMixMatchCriterionValue.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioMixMatchCriterionValue createFromParcel(Parcel _aidl_source) {
+                    return new AudioMixMatchCriterionValue(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioMixMatchCriterionValue[] newArray(int _aidl_size) {
-            return new AudioMixMatchCriterionValue[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioMixMatchCriterionValue[] newArray(int _aidl_size) {
+                    return new AudioMixMatchCriterionValue[_aidl_size];
+                }
+            };
     public static final int appid = 6;
     public static final int audioSessionId = 4;
     public static final int pid = 5;
@@ -222,7 +225,12 @@ public final class AudioMixMatchCriterionValue implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

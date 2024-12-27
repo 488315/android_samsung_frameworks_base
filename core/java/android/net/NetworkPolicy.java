@@ -1,13 +1,14 @@
 package android.net;
 
-import android.net.NetworkTemplate;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.BackupUtils;
 import android.util.Log;
 import android.util.Range;
 import android.util.RecurrenceRule;
+
 import com.android.internal.util.Preconditions;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -39,24 +40,24 @@ public class NetworkPolicy implements Parcelable, Comparable<NetworkPolicy> {
     public long lastWarningSnooze;
     public long limitBytes;
 
-    @Deprecated
-    public boolean metered;
+    @Deprecated public boolean metered;
     public NetworkTemplate template;
     public long warningBytes;
     private static final String TAG = NetworkPolicy.class.getSimpleName();
-    public static final Parcelable.Creator<NetworkPolicy> CREATOR = new Parcelable.Creator<NetworkPolicy>() { // from class: android.net.NetworkPolicy.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NetworkPolicy createFromParcel(Parcel in) {
-            return new NetworkPolicy(in);
-        }
+    public static final Parcelable.Creator<NetworkPolicy> CREATOR =
+            new Parcelable.Creator<NetworkPolicy>() { // from class: android.net.NetworkPolicy.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NetworkPolicy createFromParcel(Parcel in) {
+                    return new NetworkPolicy(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NetworkPolicy[] newArray(int size) {
-            return new NetworkPolicy[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NetworkPolicy[] newArray(int size) {
+                    return new NetworkPolicy[size];
+                }
+            };
 
     public static RecurrenceRule buildRule(int cycleDay, ZoneId cycleTimezone) {
         if (cycleDay != -1) {
@@ -66,21 +67,70 @@ public class NetworkPolicy implements Parcelable, Comparable<NetworkPolicy> {
     }
 
     @Deprecated
-    public NetworkPolicy(NetworkTemplate template, int cycleDay, String cycleTimezone, long warningBytes, long limitBytes, boolean metered) {
+    public NetworkPolicy(
+            NetworkTemplate template,
+            int cycleDay,
+            String cycleTimezone,
+            long warningBytes,
+            long limitBytes,
+            boolean metered) {
         this(template, cycleDay, cycleTimezone, warningBytes, limitBytes, -1L, -1L, metered, false);
     }
 
     @Deprecated
-    public NetworkPolicy(NetworkTemplate template, int cycleDay, String cycleTimezone, long warningBytes, long limitBytes, long lastWarningSnooze, long lastLimitSnooze, boolean metered, boolean inferred) {
-        this(template, buildRule(cycleDay, ZoneId.of(cycleTimezone)), warningBytes, limitBytes, lastWarningSnooze, lastLimitSnooze, metered, inferred);
+    public NetworkPolicy(
+            NetworkTemplate template,
+            int cycleDay,
+            String cycleTimezone,
+            long warningBytes,
+            long limitBytes,
+            long lastWarningSnooze,
+            long lastLimitSnooze,
+            boolean metered,
+            boolean inferred) {
+        this(
+                template,
+                buildRule(cycleDay, ZoneId.of(cycleTimezone)),
+                warningBytes,
+                limitBytes,
+                lastWarningSnooze,
+                lastLimitSnooze,
+                metered,
+                inferred);
     }
 
     @Deprecated
-    public NetworkPolicy(NetworkTemplate template, RecurrenceRule cycleRule, long warningBytes, long limitBytes, long lastWarningSnooze, long lastLimitSnooze, boolean metered, boolean inferred) {
-        this(template, cycleRule, warningBytes, limitBytes, lastWarningSnooze, lastLimitSnooze, -1L, metered, inferred);
+    public NetworkPolicy(
+            NetworkTemplate template,
+            RecurrenceRule cycleRule,
+            long warningBytes,
+            long limitBytes,
+            long lastWarningSnooze,
+            long lastLimitSnooze,
+            boolean metered,
+            boolean inferred) {
+        this(
+                template,
+                cycleRule,
+                warningBytes,
+                limitBytes,
+                lastWarningSnooze,
+                lastLimitSnooze,
+                -1L,
+                metered,
+                inferred);
     }
 
-    public NetworkPolicy(NetworkTemplate template, RecurrenceRule cycleRule, long warningBytes, long limitBytes, long lastWarningSnooze, long lastLimitSnooze, long lastRapidSnooze, boolean metered, boolean inferred) {
+    public NetworkPolicy(
+            NetworkTemplate template,
+            RecurrenceRule cycleRule,
+            long warningBytes,
+            long limitBytes,
+            long lastWarningSnooze,
+            long lastLimitSnooze,
+            long lastRapidSnooze,
+            boolean metered,
+            boolean inferred) {
         this.warningBytes = -1L;
         this.limitBytes = -1L;
         this.lastWarningSnooze = -1L;
@@ -88,8 +138,10 @@ public class NetworkPolicy implements Parcelable, Comparable<NetworkPolicy> {
         this.lastRapidSnooze = -1L;
         this.metered = true;
         this.inferred = false;
-        this.template = (NetworkTemplate) Preconditions.checkNotNull(template, "missing NetworkTemplate");
-        this.cycleRule = (RecurrenceRule) Preconditions.checkNotNull(cycleRule, "missing RecurrenceRule");
+        this.template =
+                (NetworkTemplate) Preconditions.checkNotNull(template, "missing NetworkTemplate");
+        this.cycleRule =
+                (RecurrenceRule) Preconditions.checkNotNull(cycleRule, "missing RecurrenceRule");
         this.warningBytes = warningBytes;
         this.limitBytes = limitBytes;
         this.lastWarningSnooze = lastWarningSnooze;
@@ -176,7 +228,16 @@ public class NetworkPolicy implements Parcelable, Comparable<NetworkPolicy> {
     }
 
     public int hashCode() {
-        return Objects.hash(this.template, this.cycleRule, Long.valueOf(this.warningBytes), Long.valueOf(this.limitBytes), Long.valueOf(this.lastWarningSnooze), Long.valueOf(this.lastLimitSnooze), Long.valueOf(this.lastRapidSnooze), Boolean.valueOf(this.metered), Boolean.valueOf(this.inferred));
+        return Objects.hash(
+                this.template,
+                this.cycleRule,
+                Long.valueOf(this.warningBytes),
+                Long.valueOf(this.limitBytes),
+                Long.valueOf(this.lastWarningSnooze),
+                Long.valueOf(this.lastLimitSnooze),
+                Long.valueOf(this.lastRapidSnooze),
+                Boolean.valueOf(this.metered),
+                Boolean.valueOf(this.inferred));
     }
 
     public boolean equals(Object obj) {
@@ -184,11 +245,37 @@ public class NetworkPolicy implements Parcelable, Comparable<NetworkPolicy> {
             return false;
         }
         NetworkPolicy other = (NetworkPolicy) obj;
-        return this.warningBytes == other.warningBytes && this.limitBytes == other.limitBytes && this.lastWarningSnooze == other.lastWarningSnooze && this.lastLimitSnooze == other.lastLimitSnooze && this.lastRapidSnooze == other.lastRapidSnooze && this.metered == other.metered && this.inferred == other.inferred && Objects.equals(this.template, other.template) && Objects.equals(this.cycleRule, other.cycleRule);
+        return this.warningBytes == other.warningBytes
+                && this.limitBytes == other.limitBytes
+                && this.lastWarningSnooze == other.lastWarningSnooze
+                && this.lastLimitSnooze == other.lastLimitSnooze
+                && this.lastRapidSnooze == other.lastRapidSnooze
+                && this.metered == other.metered
+                && this.inferred == other.inferred
+                && Objects.equals(this.template, other.template)
+                && Objects.equals(this.cycleRule, other.cycleRule);
     }
 
     public String toString() {
-        return "NetworkPolicy{template=" + this.template + " cycleRule=" + this.cycleRule + " warningBytes=" + this.warningBytes + " limitBytes=" + this.limitBytes + " lastWarningSnooze=" + this.lastWarningSnooze + " lastLimitSnooze=" + this.lastLimitSnooze + " lastRapidSnooze=" + this.lastRapidSnooze + " metered=" + this.metered + " inferred=" + this.inferred + "}";
+        return "NetworkPolicy{template="
+                + this.template
+                + " cycleRule="
+                + this.cycleRule
+                + " warningBytes="
+                + this.warningBytes
+                + " limitBytes="
+                + this.limitBytes
+                + " lastWarningSnooze="
+                + this.lastWarningSnooze
+                + " lastLimitSnooze="
+                + this.lastLimitSnooze
+                + " lastRapidSnooze="
+                + this.lastRapidSnooze
+                + " metered="
+                + this.metered
+                + " inferred="
+                + this.inferred
+                + "}";
     }
 
     public byte[] getBytesForBackup() throws IOException {
@@ -207,7 +294,8 @@ public class NetworkPolicy implements Parcelable, Comparable<NetworkPolicy> {
         return byteArrayOutputStream.toByteArray();
     }
 
-    public static NetworkPolicy getNetworkPolicyFromBackup(DataInputStream in) throws IOException, BackupUtils.BadVersionException {
+    public static NetworkPolicy getNetworkPolicyFromBackup(DataInputStream in)
+            throws IOException, BackupUtils.BadVersionException {
         RecurrenceRule cycleRule;
         long lastRapidSnooze;
         int version = in.readInt();
@@ -233,7 +321,16 @@ public class NetworkPolicy implements Parcelable, Comparable<NetworkPolicy> {
         }
         boolean metered = in.readInt() == 1;
         boolean inferred = in.readInt() == 1;
-        return new NetworkPolicy(template, cycleRule, warningBytes, limitBytes, lastWarningSnooze, lastLimitSnooze, lastRapidSnooze, metered, inferred);
+        return new NetworkPolicy(
+                template,
+                cycleRule,
+                warningBytes,
+                limitBytes,
+                lastWarningSnooze,
+                lastLimitSnooze,
+                lastRapidSnooze,
+                metered,
+                inferred);
     }
 
     private byte[] getNetworkTemplateBytesForBackup() throws IOException {
@@ -245,13 +342,19 @@ public class NetworkPolicy implements Parcelable, Comparable<NetworkPolicy> {
         out.writeInt(3);
         out.writeInt(this.template.getMatchRule());
         Set<String> subscriberIds = this.template.getSubscriberIds();
-        BackupUtils.writeString(out, subscriberIds.isEmpty() ? null : subscriberIds.iterator().next());
-        BackupUtils.writeString(out, this.template.getWifiNetworkKeys().isEmpty() ? null : (String) this.template.getWifiNetworkKeys().iterator().next());
+        BackupUtils.writeString(
+                out, subscriberIds.isEmpty() ? null : subscriberIds.iterator().next());
+        BackupUtils.writeString(
+                out,
+                this.template.getWifiNetworkKeys().isEmpty()
+                        ? null
+                        : (String) this.template.getWifiNetworkKeys().iterator().next());
         out.writeInt(this.template.getMeteredness());
         return baos.toByteArray();
     }
 
-    private static NetworkTemplate getNetworkTemplateFromBackup(DataInputStream in) throws IOException, BackupUtils.BadVersionException {
+    private static NetworkTemplate getNetworkTemplateFromBackup(DataInputStream in)
+            throws IOException, BackupUtils.BadVersionException {
         int version = in.readInt();
         int metered = 1;
         if (version < 1 || version > 3 || version == 2) {
@@ -266,7 +369,8 @@ public class NetworkPolicy implements Parcelable, Comparable<NetworkPolicy> {
             metered = -1;
         }
         try {
-            NetworkTemplate.Builder builder = new NetworkTemplate.Builder(matchRule).setMeteredness(metered);
+            NetworkTemplate.Builder builder =
+                    new NetworkTemplate.Builder(matchRule).setMeteredness(metered);
             if (subscriberId != null) {
                 builder.setSubscriberIds(Set.of(subscriberId));
             }
@@ -275,7 +379,8 @@ public class NetworkPolicy implements Parcelable, Comparable<NetworkPolicy> {
             }
             return builder.build();
         } catch (IllegalArgumentException e) {
-            throw new BackupUtils.BadVersionException("Restored network template contains unknown match rule " + matchRule, e);
+            throw new BackupUtils.BadVersionException(
+                    "Restored network template contains unknown match rule " + matchRule, e);
         }
     }
 
@@ -285,7 +390,10 @@ public class NetworkPolicy implements Parcelable, Comparable<NetworkPolicy> {
             case 10:
                 return !template.getSubscriberIds().isEmpty() && template.getMeteredness() == 1;
             case 4:
-                return (template.getWifiNetworkKeys().isEmpty() && template.getSubscriberIds().isEmpty()) ? false : true;
+                return (template.getWifiNetworkKeys().isEmpty()
+                                && template.getSubscriberIds().isEmpty())
+                        ? false
+                        : true;
             case 5:
             case 8:
                 return true;

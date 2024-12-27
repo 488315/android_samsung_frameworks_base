@@ -3,9 +3,11 @@ package android.hardware.motion;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+
 import com.samsung.android.gesture.SemMotionEventListener;
 import com.samsung.android.gesture.SemMotionRecognitionEvent;
 import com.samsung.android.gesture.SemMotionRecognitionManager;
+
 import java.util.ArrayList;
 
 @Deprecated
@@ -36,8 +38,11 @@ public class MotionRecognitionManager extends SemMotionRecognitionManager {
     }
 
     @Deprecated
-    public void registerListenerEvent(MRListener listener, int motion_sensors, int motion_events, Handler handler) {
-        Log.d("MotionRecognitionService", "deprecated API. use com.samsung.android.gesture.SemMotionRecognitionManager.");
+    public void registerListenerEvent(
+            MRListener listener, int motion_sensors, int motion_events, Handler handler) {
+        Log.d(
+                "MotionRecognitionService",
+                "deprecated API. use com.samsung.android.gesture.SemMotionRecognitionManager.");
     }
 
     @Deprecated
@@ -71,12 +76,10 @@ public class MotionRecognitionManager extends SemMotionRecognitionManager {
     }
 
     @Deprecated
-    public void useMotionAlways(MRListener listener, boolean bUseAlways) {
-    }
+    public void useMotionAlways(MRListener listener, boolean bUseAlways) {}
 
     @Deprecated
-    public void setMotionAngle(MRListener listener, int status) {
-    }
+    public void setMotionAngle(MRListener listener, int status) {}
 
     @Deprecated
     public void setSmartMotionAngle(MRListener listener, int status) {
@@ -93,21 +96,23 @@ public class MotionRecognitionManager extends SemMotionRecognitionManager {
     }
 
     private static class ListenerDelegate {
-        private final SemMotionEventListener mListener = new SemMotionEventListener() { // from class: android.hardware.motion.MotionRecognitionManager.ListenerDelegate.1
-            @Override // com.samsung.android.gesture.SemMotionEventListener
-            public void onMotionEvent(SemMotionRecognitionEvent motionEvent) {
-                MREvent event = new MREvent();
-                event.setMotion(motionEvent.getMotion());
-                event.setTilt(motionEvent.getTilt());
-                event.setPanningDx(motionEvent.getPanningDx());
-                event.setPanningDy(motionEvent.getPanningDy());
-                event.setPanningDz(motionEvent.getPanningDz());
-                event.setPanningDxImage(motionEvent.getPanningDxImage());
-                event.setPanningDyImage(motionEvent.getPanningDyImage());
-                event.setPanningDzImage(motionEvent.getPanningDzImage());
-                ListenerDelegate.this.moldListener.onMotionListener(event);
-            }
-        };
+        private final SemMotionEventListener mListener =
+                new SemMotionEventListener() { // from class:
+                    // android.hardware.motion.MotionRecognitionManager.ListenerDelegate.1
+                    @Override // com.samsung.android.gesture.SemMotionEventListener
+                    public void onMotionEvent(SemMotionRecognitionEvent motionEvent) {
+                        MREvent event = new MREvent();
+                        event.setMotion(motionEvent.getMotion());
+                        event.setTilt(motionEvent.getTilt());
+                        event.setPanningDx(motionEvent.getPanningDx());
+                        event.setPanningDy(motionEvent.getPanningDy());
+                        event.setPanningDz(motionEvent.getPanningDz());
+                        event.setPanningDxImage(motionEvent.getPanningDxImage());
+                        event.setPanningDyImage(motionEvent.getPanningDyImage());
+                        event.setPanningDzImage(motionEvent.getPanningDzImage());
+                        ListenerDelegate.this.moldListener.onMotionListener(event);
+                    }
+                };
         private final MRListener moldListener;
 
         private ListenerDelegate(MRListener listener) {

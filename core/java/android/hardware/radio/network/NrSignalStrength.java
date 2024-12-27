@@ -3,26 +3,29 @@ package android.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class NrSignalStrength implements Parcelable {
-    public static final Parcelable.Creator<NrSignalStrength> CREATOR = new Parcelable.Creator<NrSignalStrength>() { // from class: android.hardware.radio.network.NrSignalStrength.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NrSignalStrength createFromParcel(Parcel _aidl_source) {
-            NrSignalStrength _aidl_out = new NrSignalStrength();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<NrSignalStrength> CREATOR =
+            new Parcelable.Creator<NrSignalStrength>() { // from class:
+                // android.hardware.radio.network.NrSignalStrength.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NrSignalStrength createFromParcel(Parcel _aidl_source) {
+                    NrSignalStrength _aidl_out = new NrSignalStrength();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NrSignalStrength[] newArray(int _aidl_size) {
-            return new NrSignalStrength[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NrSignalStrength[] newArray(int _aidl_size) {
+                    return new NrSignalStrength[_aidl_size];
+                }
+            };
     public byte[] csiCqiReport;
     public int ssRsrp = 0;
     public int ssRsrq = 0;

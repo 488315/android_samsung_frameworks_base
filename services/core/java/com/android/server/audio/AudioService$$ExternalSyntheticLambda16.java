@@ -6,6 +6,7 @@ import android.media.audiopolicy.AudioMix;
 import android.media.audiopolicy.AudioMixingRule;
 import android.os.RemoteException;
 import android.util.Log;
+
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -35,23 +36,32 @@ public final /* synthetic */ class AudioService$$ExternalSyntheticLambda16 imple
                 synchronized (audioService.mMuteAwaitConnectionLock) {
                     try {
                         if (audioDeviceAttributes.equals(audioService.mMutingExpectedDevice)) {
-                            Log.i("AS.AudioService", "muteAwaitConnection timeout, clearing expected device " + audioService.mMutingExpectedDevice);
+                            Log.i(
+                                    "AS.AudioService",
+                                    "muteAwaitConnection timeout, clearing expected device "
+                                            + audioService.mMutingExpectedDevice);
                             final int[] iArr = audioService.mMutedUsagesAwaitingConnection;
                             audioService.mMutingExpectedDevice = null;
                             audioService.mMutedUsagesAwaitingConnection = null;
-                            audioService.dispatchMuteAwaitConnection(new BiConsumer() { // from class: com.android.server.audio.AudioService$$ExternalSyntheticLambda19
-                                @Override // java.util.function.BiConsumer
-                                public final void accept(Object obj3, Object obj4) {
-                                    AudioDeviceAttributes audioDeviceAttributes2 = audioDeviceAttributes;
-                                    int[] iArr2 = iArr;
-                                    IMuteAwaitConnectionCallback iMuteAwaitConnectionCallback = (IMuteAwaitConnectionCallback) obj3;
-                                    int i3 = AudioService.BECOMING_NOISY_DELAY_MS;
-                                    try {
-                                        iMuteAwaitConnectionCallback.dispatchOnUnmutedEvent(2, audioDeviceAttributes2, iArr2);
-                                    } catch (RemoteException unused) {
-                                    }
-                                }
-                            });
+                            audioService.dispatchMuteAwaitConnection(
+                                    new BiConsumer() { // from class:
+                                                       // com.android.server.audio.AudioService$$ExternalSyntheticLambda19
+                                        @Override // java.util.function.BiConsumer
+                                        public final void accept(Object obj3, Object obj4) {
+                                            AudioDeviceAttributes audioDeviceAttributes2 =
+                                                    audioDeviceAttributes;
+                                            int[] iArr2 = iArr;
+                                            IMuteAwaitConnectionCallback
+                                                    iMuteAwaitConnectionCallback =
+                                                            (IMuteAwaitConnectionCallback) obj3;
+                                            int i3 = AudioService.BECOMING_NOISY_DELAY_MS;
+                                            try {
+                                                iMuteAwaitConnectionCallback.dispatchOnUnmutedEvent(
+                                                        2, audioDeviceAttributes2, iArr2);
+                                            } catch (RemoteException unused) {
+                                            }
+                                        }
+                                    });
                             return;
                         }
                         return;
@@ -72,7 +82,8 @@ public final /* synthetic */ class AudioService$$ExternalSyntheticLambda16 imple
                         }
                     }
                 }
-                AudioService.sendMsg(audioService2.mAudioHandler, 48, 0, 0, 0, "rotation=" + num, 0);
+                AudioService.sendMsg(
+                        audioService2.mAudioHandler, 48, 0, 0, 0, "rotation=" + num, 0);
                 return;
             case 3:
                 AudioService audioService3 = (AudioService) obj2;
@@ -88,7 +99,14 @@ public final /* synthetic */ class AudioService$$ExternalSyntheticLambda16 imple
                         }
                     }
                 }
-                AudioService.sendMsg(audioService3.mAudioHandler, 49, 0, 0, 0, "device_folded=".concat(bool.booleanValue() ? "on" : "off"), 0);
+                AudioService.sendMsg(
+                        audioService3.mAudioHandler,
+                        49,
+                        0,
+                        0,
+                        0,
+                        "device_folded=".concat(bool.booleanValue() ? "on" : "off"),
+                        0);
                 return;
             default:
                 ((AudioMix) obj).setAudioMixingRule((AudioMixingRule) obj2);

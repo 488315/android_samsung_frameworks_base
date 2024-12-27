@@ -3,7 +3,9 @@ package com.android.server.locksettings;
 import android.frameworks.vibrator.VibrationParam$1$$ExternalSyntheticOutline0;
 import android.os.SystemProperties;
 import android.util.Slog;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -74,7 +76,9 @@ public final class PasswordSlotManager {
         L4e:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.locksettings.PasswordSlotManager.ensureSlotMapLoaded():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.locksettings.PasswordSlotManager.ensureSlotMapLoaded():void");
     }
 
     public int getGsiImageNumber() {
@@ -83,7 +87,9 @@ public final class PasswordSlotManager {
 
     public final String getMode() {
         int gsiImageNumber = getGsiImageNumber();
-        return gsiImageNumber > 0 ? VibrationParam$1$$ExternalSyntheticOutline0.m(gsiImageNumber, "gsi") : "host";
+        return gsiImageNumber > 0
+                ? VibrationParam$1$$ExternalSyntheticOutline0.m(gsiImageNumber, "gsi")
+                : "host";
     }
 
     public String getSlotMapDir() {
@@ -103,8 +109,11 @@ public final class PasswordSlotManager {
 
     public final void markSlotInUse(int i) {
         ensureSlotMapLoaded();
-        if (this.mSlotMap.containsKey(Integer.valueOf(i)) && !((String) this.mSlotMap.get(Integer.valueOf(i))).equals(getMode())) {
-            throw new IllegalStateException(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "password slot ", " is not available"));
+        if (this.mSlotMap.containsKey(Integer.valueOf(i))
+                && !((String) this.mSlotMap.get(Integer.valueOf(i))).equals(getMode())) {
+            throw new IllegalStateException(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            i, "password slot ", " is not available"));
         }
         this.mSlotMap.put(Integer.valueOf(i), getMode());
         saveSlotMap();
@@ -137,11 +146,14 @@ public final class PasswordSlotManager {
             return;
         }
         if (!Paths.get(getSlotMapDir(), "slot_map").toFile().getParentFile().exists()) {
-            Slog.w("PasswordSlotManager", "Not saving slot map, " + getSlotMapDir() + " does not exist");
+            Slog.w(
+                    "PasswordSlotManager",
+                    "Not saving slot map, " + getSlotMapDir() + " does not exist");
             return;
         }
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream(Paths.get(getSlotMapDir(), "slot_map").toFile());
+            FileOutputStream fileOutputStream =
+                    new FileOutputStream(Paths.get(getSlotMapDir(), "slot_map").toFile());
             try {
                 saveSlotMap(fileOutputStream);
                 fileOutputStream.close();
@@ -158,7 +170,8 @@ public final class PasswordSlotManager {
         }
         Properties properties = new Properties();
         for (Map.Entry entry : this.mSlotMap.entrySet()) {
-            properties.setProperty(((Integer) entry.getKey()).toString(), (String) entry.getValue());
+            properties.setProperty(
+                    ((Integer) entry.getKey()).toString(), (String) entry.getValue());
         }
         properties.store(outputStream, "");
     }

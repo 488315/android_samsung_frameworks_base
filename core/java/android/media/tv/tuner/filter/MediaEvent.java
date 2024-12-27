@@ -3,6 +3,7 @@ package android.media.tv.tuner.filter;
 import android.annotation.SystemApi;
 import android.media.AudioPresentation;
 import android.media.MediaCodec;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -34,7 +35,22 @@ public class MediaEvent extends FilterEvent {
 
     private native MediaCodec.LinearBlock nativeGetLinearBlock();
 
-    private MediaEvent(int streamId, boolean isPtsPresent, long pts, boolean isDtsPresent, long dts, long dataLength, long offset, MediaCodec.LinearBlock buffer, boolean isSecureMemory, long dataId, int mpuSequenceNumber, boolean isPrivateData, int scIndexMask, AudioDescriptor extraMetaData, List<AudioPresentation> audioPresentations) {
+    private MediaEvent(
+            int streamId,
+            boolean isPtsPresent,
+            long pts,
+            boolean isDtsPresent,
+            long dts,
+            long dataLength,
+            long offset,
+            MediaCodec.LinearBlock buffer,
+            boolean isSecureMemory,
+            long dataId,
+            int mpuSequenceNumber,
+            boolean isPrivateData,
+            int scIndexMask,
+            AudioDescriptor extraMetaData,
+            List<AudioPresentation> audioPresentations) {
         this.mStreamId = streamId;
         this.mIsPtsPresent = isPtsPresent;
         this.mPts = pts;
@@ -121,7 +137,9 @@ public class MediaEvent extends FilterEvent {
     }
 
     public List<AudioPresentation> getAudioPresentations() {
-        return this.mAudioPresentations == null ? Collections.emptyList() : this.mAudioPresentations;
+        return this.mAudioPresentations == null
+                ? Collections.emptyList()
+                : this.mAudioPresentations;
     }
 
     protected void finalize() {

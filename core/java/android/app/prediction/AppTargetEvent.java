@@ -3,6 +3,7 @@ package android.app.prediction;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -15,26 +16,27 @@ public final class AppTargetEvent implements Parcelable {
     public static final int ACTION_PIN = 3;
     public static final int ACTION_UNDISMISS = 5;
     public static final int ACTION_UNPIN = 4;
-    public static final Parcelable.Creator<AppTargetEvent> CREATOR = new Parcelable.Creator<AppTargetEvent>() { // from class: android.app.prediction.AppTargetEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppTargetEvent createFromParcel(Parcel parcel) {
-            return new AppTargetEvent(parcel);
-        }
+    public static final Parcelable.Creator<AppTargetEvent> CREATOR =
+            new Parcelable.Creator<
+                    AppTargetEvent>() { // from class: android.app.prediction.AppTargetEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppTargetEvent createFromParcel(Parcel parcel) {
+                    return new AppTargetEvent(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppTargetEvent[] newArray(int size) {
-            return new AppTargetEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppTargetEvent[] newArray(int size) {
+                    return new AppTargetEvent[size];
+                }
+            };
     private final int mAction;
     private final String mLocation;
     private final AppTarget mTarget;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ActionType {
-    }
+    public @interface ActionType {}
 
     private AppTargetEvent(AppTarget target, String location, int actionType) {
         this.mTarget = target;
@@ -65,7 +67,9 @@ public final class AppTargetEvent implements Parcelable {
             return false;
         }
         AppTargetEvent other = (AppTargetEvent) o;
-        return this.mTarget.equals(other.mTarget) && this.mLocation.equals(other.mLocation) && this.mAction == other.mAction;
+        return this.mTarget.equals(other.mTarget)
+                && this.mLocation.equals(other.mLocation)
+                && this.mAction == other.mAction;
     }
 
     public int hashCode() {

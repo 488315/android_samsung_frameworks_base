@@ -3,9 +3,11 @@ package android.view.translation;
 import android.annotation.NonNull;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.BitUtils;
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -15,19 +17,22 @@ import java.util.function.IntFunction;
 
 /* loaded from: classes4.dex */
 public final class TranslationRequest implements Parcelable {
-    public static final Parcelable.Creator<TranslationRequest> CREATOR = new Parcelable.Creator<TranslationRequest>() { // from class: android.view.translation.TranslationRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TranslationRequest[] newArray(int size) {
-            return new TranslationRequest[size];
-        }
+    public static final Parcelable.Creator<TranslationRequest> CREATOR =
+            new Parcelable.Creator<
+                    TranslationRequest>() { // from class:
+                                            // android.view.translation.TranslationRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TranslationRequest[] newArray(int size) {
+                    return new TranslationRequest[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TranslationRequest createFromParcel(Parcel in) {
-            return new TranslationRequest(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TranslationRequest createFromParcel(Parcel in) {
+                    return new TranslationRequest(in);
+                }
+            };
     public static final int FLAG_DICTIONARY_RESULT = 2;
     public static final int FLAG_PARTIAL_RESPONSES = 8;
     public static final int FLAG_TRANSLATION_RESULT = 1;
@@ -37,8 +42,7 @@ public final class TranslationRequest implements Parcelable {
     private final List<ViewTranslationRequest> mViewTranslationRequests;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RequestFlags {
-    }
+    public @interface RequestFlags {}
 
     /* JADX INFO: Access modifiers changed from: private */
     public static int defaultFlags() {
@@ -55,24 +59,28 @@ public final class TranslationRequest implements Parcelable {
         return Collections.emptyList();
     }
 
-    static abstract class BaseBuilder {
+    abstract static class BaseBuilder {
         @Deprecated
-        public abstract Builder addTranslationRequestValue(TranslationRequestValue translationRequestValue);
+        public abstract Builder addTranslationRequestValue(
+                TranslationRequestValue translationRequestValue);
 
         @Deprecated
-        public abstract Builder addViewTranslationRequest(ViewTranslationRequest viewTranslationRequest);
+        public abstract Builder addViewTranslationRequest(
+                ViewTranslationRequest viewTranslationRequest);
 
-        BaseBuilder() {
-        }
+        BaseBuilder() {}
     }
 
     public static String requestFlagsToString(int value) {
-        return BitUtils.flagsToString(value, new IntFunction() { // from class: android.view.translation.TranslationRequest$$ExternalSyntheticLambda0
-            @Override // java.util.function.IntFunction
-            public final Object apply(int i) {
-                return TranslationRequest.singleRequestFlagsToString(i);
-            }
-        });
+        return BitUtils.flagsToString(
+                value,
+                new IntFunction() { // from class:
+                                    // android.view.translation.TranslationRequest$$ExternalSyntheticLambda0
+                    @Override // java.util.function.IntFunction
+                    public final Object apply(int i) {
+                        return TranslationRequest.singleRequestFlagsToString(i);
+                    }
+                });
     }
 
     static String singleRequestFlagsToString(int value) {
@@ -90,13 +98,22 @@ public final class TranslationRequest implements Parcelable {
         }
     }
 
-    TranslationRequest(int flags, List<TranslationRequestValue> translationRequestValues, List<ViewTranslationRequest> viewTranslationRequests) {
+    TranslationRequest(
+            int flags,
+            List<TranslationRequestValue> translationRequestValues,
+            List<ViewTranslationRequest> viewTranslationRequests) {
         this.mFlags = flags;
         Preconditions.checkFlagsArgument(this.mFlags, 15);
         this.mTranslationRequestValues = translationRequestValues;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mTranslationRequestValues);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mTranslationRequestValues);
         this.mViewTranslationRequests = viewTranslationRequests;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mViewTranslationRequests);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mViewTranslationRequests);
     }
 
     public int getFlags() {
@@ -112,7 +129,13 @@ public final class TranslationRequest implements Parcelable {
     }
 
     public String toString() {
-        return "TranslationRequest { flags = " + requestFlagsToString(this.mFlags) + ", translationRequestValues = " + this.mTranslationRequestValues + ", viewTranslationRequests = " + this.mViewTranslationRequests + " }";
+        return "TranslationRequest { flags = "
+                + requestFlagsToString(this.mFlags)
+                + ", translationRequestValues = "
+                + this.mTranslationRequestValues
+                + ", viewTranslationRequests = "
+                + this.mViewTranslationRequests
+                + " }";
     }
 
     @Override // android.os.Parcelable
@@ -130,15 +153,27 @@ public final class TranslationRequest implements Parcelable {
     TranslationRequest(Parcel in) {
         int flags = in.readInt();
         ArrayList arrayList = new ArrayList();
-        in.readParcelableList(arrayList, TranslationRequestValue.class.getClassLoader(), TranslationRequestValue.class);
+        in.readParcelableList(
+                arrayList,
+                TranslationRequestValue.class.getClassLoader(),
+                TranslationRequestValue.class);
         ArrayList arrayList2 = new ArrayList();
-        in.readParcelableList(arrayList2, ViewTranslationRequest.class.getClassLoader(), ViewTranslationRequest.class);
+        in.readParcelableList(
+                arrayList2,
+                ViewTranslationRequest.class.getClassLoader(),
+                ViewTranslationRequest.class);
         this.mFlags = flags;
         Preconditions.checkFlagsArgument(this.mFlags, 15);
         this.mTranslationRequestValues = arrayList;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mTranslationRequestValues);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mTranslationRequestValues);
         this.mViewTranslationRequests = arrayList2;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mViewTranslationRequests);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mViewTranslationRequests);
     }
 
     public static final class Builder extends BaseBuilder {
@@ -195,23 +230,28 @@ public final class TranslationRequest implements Parcelable {
                 this.mFlags = TranslationRequest.defaultFlags();
             }
             if ((this.mBuilderFieldsSet & 2) == 0) {
-                this.mTranslationRequestValues = TranslationRequest.defaultTranslationRequestValues();
+                this.mTranslationRequestValues =
+                        TranslationRequest.defaultTranslationRequestValues();
             }
             if ((this.mBuilderFieldsSet & 4) == 0) {
                 this.mViewTranslationRequests = TranslationRequest.defaultViewTranslationRequests();
             }
-            TranslationRequest o = new TranslationRequest(this.mFlags, this.mTranslationRequestValues, this.mViewTranslationRequests);
+            TranslationRequest o =
+                    new TranslationRequest(
+                            this.mFlags,
+                            this.mTranslationRequestValues,
+                            this.mViewTranslationRequests);
             return o;
         }
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 8) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

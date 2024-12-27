@@ -9,8 +9,10 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.server.HermesService$3$$ExternalSyntheticOutline0;
 import com.android.server.utils.Slogf;
+
 import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -62,7 +64,8 @@ public final class SecurityLogMonitor implements Runnable {
         MAX_AUDIT_LOG_EVENT_AGE_NS = timeUnit.toNanos(8L);
     }
 
-    public SecurityLogMonitor(DevicePolicyManagerService devicePolicyManagerService, Handler handler) {
+    public SecurityLogMonitor(
+            DevicePolicyManagerService devicePolicyManagerService, Handler handler) {
         this.mLastForceNanos = 0L;
         this.mService = devicePolicyManagerService;
         this.mLastForceNanos = System.nanoTime();
@@ -73,7 +76,11 @@ public final class SecurityLogMonitor implements Runnable {
         if (this.mLastEventNanos < 0) {
             SecurityLog.readEvents(arrayList);
         } else {
-            SecurityLog.readEventsSince(this.mLastEvents.isEmpty() ? this.mLastEventNanos : Math.max(0L, this.mLastEventNanos - OVERLAP_NS), arrayList);
+            SecurityLog.readEventsSince(
+                    this.mLastEvents.isEmpty()
+                            ? this.mLastEventNanos
+                            : Math.max(0L, this.mLastEventNanos - OVERLAP_NS),
+                    arrayList);
         }
         int i = 0;
         while (true) {
@@ -100,7 +107,8 @@ public final class SecurityLogMonitor implements Runnable {
             if (timeNanos > this.mLastEventNanos) {
                 break;
             }
-            SecurityLog.SecurityEvent securityEvent2 = (SecurityLog.SecurityEvent) this.mLastEvents.get(i);
+            SecurityLog.SecurityEvent securityEvent2 =
+                    (SecurityLog.SecurityEvent) this.mLastEvents.get(i);
             long timeNanos2 = securityEvent2.getTimeNanos();
             if (timeNanos2 > timeNanos) {
                 arrayList2.add(securityEvent);
@@ -128,12 +136,17 @@ public final class SecurityLogMonitor implements Runnable {
         }
         if (!Flags.securityLogV2Enabled() || this.mLegacyLogEnabled) {
             this.mPendingLogs.addAll(arrayList2);
-            if (SecurityLog.isLoggingEnabled() && this.mPendingLogs.size() >= 9216 && !this.mCriticalLevelLogged) {
+            if (SecurityLog.isLoggingEnabled()
+                    && this.mPendingLogs.size() >= 9216
+                    && !this.mCriticalLevelLogged) {
                 this.mCriticalLevelLogged = true;
                 SecurityLog.writeEvent(210015, new Object[0]);
             }
             if (this.mPendingLogs.size() > 10240) {
-                this.mPendingLogs = new ArrayList(this.mPendingLogs.subList(r2.size() - 5120, this.mPendingLogs.size()));
+                this.mPendingLogs =
+                        new ArrayList(
+                                this.mPendingLogs.subList(
+                                        r2.size() - 5120, this.mPendingLogs.size()));
                 this.mCriticalLevelLogged = false;
                 Slog.i("SecurityLogMonitor", "Pending logs buffer full. Discarding old logs.");
             }
@@ -141,7 +154,12 @@ public final class SecurityLogMonitor implements Runnable {
         if (Flags.securityLogV2Enabled() && this.mAuditLogEnabled && !this.mPaused) {
             if (!arrayList2.isEmpty()) {
                 for (int i3 = 0; i3 < this.mAuditLogCallbacks.size(); i3++) {
-                    this.mHandler.post(new SecurityLogMonitor$$ExternalSyntheticLambda0(this, this.mAuditLogCallbacks.keyAt(i3), (IAuditLogEventsCallback) this.mAuditLogCallbacks.valueAt(i3), arrayList2));
+                    this.mHandler.post(
+                            new SecurityLogMonitor$$ExternalSyntheticLambda0(
+                                    this,
+                                    this.mAuditLogCallbacks.keyAt(i3),
+                                    (IAuditLogEventsCallback) this.mAuditLogCallbacks.valueAt(i3),
+                                    arrayList2));
                 }
             }
             this.mAuditLogEventBuffer.addAll(arrayList2);
@@ -149,7 +167,8 @@ public final class SecurityLogMonitor implements Runnable {
             Iterator it2 = this.mAuditLogEventBuffer.iterator();
             while (it2.hasNext()) {
                 SecurityLog.SecurityEvent securityEvent3 = (SecurityLog.SecurityEvent) it2.next();
-                if (this.mAuditLogEventBuffer.size() <= 10000 && nanos - securityEvent3.getTimeNanos() <= MAX_AUDIT_LOG_EVENT_AGE_NS) {
+                if (this.mAuditLogEventBuffer.size() <= 10000
+                        && nanos - securityEvent3.getTimeNanos() <= MAX_AUDIT_LOG_EVENT_AGE_NS) {
                     return;
                 } else {
                     it2.remove();
@@ -172,12 +191,14 @@ public final class SecurityLogMonitor implements Runnable {
             }
             if (z2) {
                 this.mAllowedToRetrieve = true;
-                this.mNextAllowedRetrievalTimeMillis = SystemClock.elapsedRealtime() + BROADCAST_RETRY_INTERVAL_MS;
+                this.mNextAllowedRetrievalTimeMillis =
+                        SystemClock.elapsedRealtime() + BROADCAST_RETRY_INTERVAL_MS;
             }
             ((ReentrantLock) this.mLock).unlock();
             if (z2) {
                 Slog.i("SecurityLogMonitor", "notify DO or PO");
-                this.mService.sendDeviceOwnerOrProfileOwnerCommand(this.mEnabledUser, "android.app.action.SECURITY_LOGS_AVAILABLE", null);
+                this.mService.sendDeviceOwnerOrProfileOwnerCommand(
+                        this.mEnabledUser, "android.app.action.SECURITY_LOGS_AVAILABLE", null);
             }
         } catch (Throwable th) {
             ((ReentrantLock) this.mLock).unlock();
@@ -200,7 +221,8 @@ public final class SecurityLogMonitor implements Runnable {
         ArrayList arrayList = new ArrayList();
         while (!Thread.currentThread().isInterrupted()) {
             try {
-                tryAcquire = this.mForceSemaphore.tryAcquire(POLLING_INTERVAL_MS, TimeUnit.MILLISECONDS);
+                tryAcquire =
+                        this.mForceSemaphore.tryAcquire(POLLING_INTERVAL_MS, TimeUnit.MILLISECONDS);
                 getNextBatch(arrayList);
                 ((ReentrantLock) this.mLock).lockInterruptibly();
                 try {
@@ -217,8 +239,7 @@ public final class SecurityLogMonitor implements Runnable {
             } catch (InterruptedException e2) {
                 Log.i("SecurityLogMonitor", "Thread interrupted, exiting.", e2);
             }
-            if (Flags.securityLogV2Enabled() && !this.mLegacyLogEnabled) {
-            }
+            if (Flags.securityLogV2Enabled() && !this.mLegacyLogEnabled) {}
             notifyDeviceOwnerOrProfileOwnerIfNeeded(tryAcquire);
         }
         this.mLastEvents.clear();
@@ -234,23 +255,36 @@ public final class SecurityLogMonitor implements Runnable {
         if (arrayList.isEmpty()) {
             return;
         }
-        this.mLastEventNanos = ((SecurityLog.SecurityEvent) arrayList.get(arrayList.size() - 1)).getTimeNanos();
+        this.mLastEventNanos =
+                ((SecurityLog.SecurityEvent) arrayList.get(arrayList.size() - 1)).getTimeNanos();
         int size = arrayList.size() - 2;
-        while (size >= 0 && this.mLastEventNanos - ((SecurityLog.SecurityEvent) arrayList.get(size)).getTimeNanos() < OVERLAP_NS) {
+        while (size >= 0
+                && this.mLastEventNanos
+                                - ((SecurityLog.SecurityEvent) arrayList.get(size)).getTimeNanos()
+                        < OVERLAP_NS) {
             size--;
         }
         this.mLastEvents.addAll(arrayList.subList(size + 1, arrayList.size()));
     }
 
-    public final void setAuditLogEventsCallback(int i, IAuditLogEventsCallback iAuditLogEventsCallback) {
+    public final void setAuditLogEventsCallback(
+            int i, IAuditLogEventsCallback iAuditLogEventsCallback) {
         ((ReentrantLock) this.mLock).lock();
         try {
             if (iAuditLogEventsCallback == null) {
                 this.mAuditLogCallbacks.remove(i);
-                Slogf.i("SecurityLogMonitor", "Cleared audit log callback for UID %d", Integer.valueOf(i));
+                Slogf.i(
+                        "SecurityLogMonitor",
+                        "Cleared audit log callback for UID %d",
+                        Integer.valueOf(i));
                 return;
             }
-            this.mHandler.post(new SecurityLogMonitor$$ExternalSyntheticLambda0(this, i, iAuditLogEventsCallback, new ArrayList(this.mAuditLogEventBuffer)));
+            this.mHandler.post(
+                    new SecurityLogMonitor$$ExternalSyntheticLambda0(
+                            this,
+                            i,
+                            iAuditLogEventsCallback,
+                            new ArrayList(this.mAuditLogEventBuffer)));
             this.mAuditLogCallbacks.append(i, iAuditLogEventsCallback);
             ((ReentrantLock) this.mLock).unlock();
             Slogf.i("SecurityLogMonitor", "Set audit log callback for UID %d", Integer.valueOf(i));
@@ -260,7 +294,8 @@ public final class SecurityLogMonitor implements Runnable {
     }
 
     public final void start(int i) {
-        HermesService$3$$ExternalSyntheticOutline0.m(i, "Starting security logging for user ", "SecurityLogMonitor");
+        HermesService$3$$ExternalSyntheticOutline0.m(
+                i, "Starting security logging for user ", "SecurityLogMonitor");
         this.mEnabledUser = i;
         ((ReentrantLock) this.mLock).lock();
         try {

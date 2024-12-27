@@ -3,8 +3,8 @@ package android.media.audiofx;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.AudioDeviceInfo;
 import android.media.AudioFormat;
-import android.media.audiofx.AudioEffect;
 import android.util.Log;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.nio.ByteBuffer;
@@ -30,18 +30,20 @@ public class Virtualizer extends AudioEffect {
     private boolean mStrengthSupported;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ForceVirtualizationMode {
-    }
+    public @interface ForceVirtualizationMode {}
 
     public interface OnParameterChangeListener {
         void onParameterChange(Virtualizer virtualizer, int i, int i2, short s);
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface VirtualizationMode {
-    }
+    public @interface VirtualizationMode {}
 
-    public Virtualizer(int priority, int audioSession) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException, RuntimeException {
+    public Virtualizer(int priority, int audioSession)
+            throws IllegalStateException,
+                    IllegalArgumentException,
+                    UnsupportedOperationException,
+                    RuntimeException {
         super(EFFECT_TYPE_VIRTUALIZER, EFFECT_TYPE_NULL, priority, audioSession);
         this.mStrengthSupported = false;
         this.mParamListener = null;
@@ -59,25 +61,36 @@ public class Virtualizer extends AudioEffect {
         return this.mStrengthSupported;
     }
 
-    public void setStrength(short strength) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public void setStrength(short strength)
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         checkStatus(setParameter(1, strength));
     }
 
-    public short getRoundedStrength() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public short getRoundedStrength()
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         short[] value = new short[1];
         checkStatus(getParameter(1, value));
         return value[0];
     }
 
-    private boolean getAnglesInt(int inputChannelMask, int deviceType, int[] angles) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    private boolean getAnglesInt(int inputChannelMask, int deviceType, int[] angles)
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         if (inputChannelMask == 0) {
             throw new IllegalArgumentException("Virtualizer: illegal CHANNEL_INVALID channel mask");
         }
         int channelMask = inputChannelMask == 1 ? 12 : inputChannelMask;
         int nbChannels = AudioFormat.channelCountFromOutChannelMask(channelMask);
         if (angles != null && angles.length < nbChannels * 3) {
-            Log.e(TAG, "Size of array for angles cannot accomodate number of channels in mask (" + nbChannels + NavigationBarInflaterView.KEY_CODE_END);
-            throw new IllegalArgumentException("Virtualizer: array for channel / angle pairs is too small: is " + angles.length + ", should be " + (nbChannels * 3));
+            Log.e(
+                    TAG,
+                    "Size of array for angles cannot accomodate number of channels in mask ("
+                            + nbChannels
+                            + NavigationBarInflaterView.KEY_CODE_END);
+            throw new IllegalArgumentException(
+                    "Virtualizer: array for channel / angle pairs is too small: is "
+                            + angles.length
+                            + ", should be "
+                            + (nbChannels * 3));
         }
         ByteBuffer paramsConverter = ByteBuffer.allocate(12);
         paramsConverter.order(ByteOrder.nativeOrder());
@@ -91,7 +104,9 @@ public class Virtualizer extends AudioEffect {
                 ByteBuffer resultConverter = ByteBuffer.wrap(result);
                 resultConverter.order(ByteOrder.nativeOrder());
                 for (int i = 0; i < nbChannels; i++) {
-                    angles[i * 3] = AudioFormat.convertNativeChannelMaskToOutMask(resultConverter.getInt(i * 4 * 3));
+                    angles[i * 3] =
+                            AudioFormat.convertNativeChannelMaskToOutMask(
+                                    resultConverter.getInt(i * 4 * 3));
                     angles[(i * 3) + 1] = resultConverter.getInt((i * 4 * 3) + 4);
                     angles[(i * 3) + 2] = resultConverter.getInt((i * 4 * 3) + 8);
                 }
@@ -102,22 +117,29 @@ public class Virtualizer extends AudioEffect {
             return false;
         }
         checkStatus(status);
-        Log.e(TAG, "unexpected status code " + status + " after getParameter(PARAM_VIRTUAL_SPEAKER_ANGLES)");
+        Log.e(
+                TAG,
+                "unexpected status code "
+                        + status
+                        + " after getParameter(PARAM_VIRTUAL_SPEAKER_ANGLES)");
         return false;
     }
 
-    private static int getDeviceForModeQuery(int virtualizationMode) throws IllegalArgumentException {
+    private static int getDeviceForModeQuery(int virtualizationMode)
+            throws IllegalArgumentException {
         switch (virtualizationMode) {
             case 2:
                 return 4;
             case 3:
                 return 2;
             default:
-                throw new IllegalArgumentException("Virtualizer: illegal virtualization mode " + virtualizationMode);
+                throw new IllegalArgumentException(
+                        "Virtualizer: illegal virtualization mode " + virtualizationMode);
         }
     }
 
-    private static int getDeviceForModeForce(int virtualizationMode) throws IllegalArgumentException {
+    private static int getDeviceForModeForce(int virtualizationMode)
+            throws IllegalArgumentException {
         if (virtualizationMode == 1) {
             return 0;
         }
@@ -155,18 +177,21 @@ public class Virtualizer extends AudioEffect {
         }
     }
 
-    public boolean canVirtualize(int inputChannelMask, int virtualizationMode) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public boolean canVirtualize(int inputChannelMask, int virtualizationMode)
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         return getAnglesInt(inputChannelMask, getDeviceForModeQuery(virtualizationMode), null);
     }
 
-    public boolean getSpeakerAngles(int inputChannelMask, int virtualizationMode, int[] angles) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public boolean getSpeakerAngles(int inputChannelMask, int virtualizationMode, int[] angles)
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         if (angles == null) {
             throw new IllegalArgumentException("Virtualizer: illegal null channel / angle array");
         }
         return getAnglesInt(inputChannelMask, getDeviceForModeQuery(virtualizationMode), angles);
     }
 
-    public boolean forceVirtualizationMode(int virtualizationMode) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public boolean forceVirtualizationMode(int virtualizationMode)
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         int deviceType = getDeviceForModeForce(virtualizationMode);
         int internalDevice = AudioDeviceInfo.convertDeviceTypeToInternalDevice(deviceType);
         int status = setParameter(3, internalDevice);
@@ -177,7 +202,11 @@ public class Virtualizer extends AudioEffect {
             return false;
         }
         checkStatus(status);
-        Log.e(TAG, "unexpected status code " + status + " after setParameter(PARAM_FORCE_VIRTUALIZATION_MODE)");
+        Log.e(
+                TAG,
+                "unexpected status code "
+                        + status
+                        + " after setParameter(PARAM_FORCE_VIRTUALIZATION_MODE)");
         return false;
     }
 
@@ -191,13 +220,16 @@ public class Virtualizer extends AudioEffect {
             return 0;
         }
         checkStatus(status);
-        Log.e(TAG, "unexpected status code " + status + " after getParameter(PARAM_VIRTUALIZATION_MODE)");
+        Log.e(
+                TAG,
+                "unexpected status code "
+                        + status
+                        + " after getParameter(PARAM_VIRTUALIZATION_MODE)");
         return 0;
     }
 
     private class BaseParameterListener implements AudioEffect.OnParameterChangeListener {
-        private BaseParameterListener() {
-        }
+        private BaseParameterListener() {}
 
         @Override // android.media.audiofx.AudioEffect.OnParameterChangeListener
         public void onParameterChange(AudioEffect effect, int status, byte[] param, byte[] value) {
@@ -236,8 +268,7 @@ public class Virtualizer extends AudioEffect {
     public static class Settings {
         public short strength;
 
-        public Settings() {
-        }
+        public Settings() {}
 
         public Settings(String settings) {
             StringTokenizer st = new StringTokenizer(settings, "=;");
@@ -266,7 +297,8 @@ public class Virtualizer extends AudioEffect {
         }
     }
 
-    public Settings getProperties() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public Settings getProperties()
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         Settings settings = new Settings();
         short[] value = new short[1];
         checkStatus(getParameter(1, value));
@@ -274,7 +306,8 @@ public class Virtualizer extends AudioEffect {
         return settings;
     }
 
-    public void setProperties(Settings settings) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public void setProperties(Settings settings)
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         checkStatus(setParameter(1, settings.strength));
     }
 }

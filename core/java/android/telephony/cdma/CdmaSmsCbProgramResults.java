@@ -5,19 +5,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public class CdmaSmsCbProgramResults implements Parcelable {
-    public static final Parcelable.Creator<CdmaSmsCbProgramResults> CREATOR = new Parcelable.Creator<CdmaSmsCbProgramResults>() { // from class: android.telephony.cdma.CdmaSmsCbProgramResults.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CdmaSmsCbProgramResults createFromParcel(Parcel in) {
-            return new CdmaSmsCbProgramResults(in);
-        }
+    public static final Parcelable.Creator<CdmaSmsCbProgramResults> CREATOR =
+            new Parcelable.Creator<
+                    CdmaSmsCbProgramResults>() { // from class:
+                                                 // android.telephony.cdma.CdmaSmsCbProgramResults.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CdmaSmsCbProgramResults createFromParcel(Parcel in) {
+                    return new CdmaSmsCbProgramResults(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CdmaSmsCbProgramResults[] newArray(int size) {
-            return new CdmaSmsCbProgramResults[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CdmaSmsCbProgramResults[] newArray(int size) {
+                    return new CdmaSmsCbProgramResults[size];
+                }
+            };
     public static final int RESULT_CATEGORY_ALREADY_ADDED = 3;
     public static final int RESULT_CATEGORY_ALREADY_DELETED = 4;
     public static final int RESULT_CATEGORY_LIMIT_EXCEEDED = 2;
@@ -63,7 +66,13 @@ public class CdmaSmsCbProgramResults implements Parcelable {
     }
 
     public String toString() {
-        return "CdmaSmsCbProgramResults{category=" + this.mCategory + ", language=" + this.mLanguage + ", result=" + this.mCategoryResult + '}';
+        return "CdmaSmsCbProgramResults{category="
+                + this.mCategory
+                + ", language="
+                + this.mLanguage
+                + ", result="
+                + this.mCategoryResult
+                + '}';
     }
 
     @Override // android.os.Parcelable

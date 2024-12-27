@@ -4,17 +4,16 @@ import android.annotation.SystemApi;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.android.ims.internal.IImsUtListener;
 
 @SystemApi
 /* loaded from: classes4.dex */
 public class ImsUtListener {
 
-    @Deprecated
-    public static final String BUNDLE_KEY_CLIR = "queryClir";
+    @Deprecated public static final String BUNDLE_KEY_CLIR = "queryClir";
 
-    @Deprecated
-    public static final String BUNDLE_KEY_SSINFO = "imsSsInfo";
+    @Deprecated public static final String BUNDLE_KEY_SSINFO = "imsSsInfo";
     private static final String LOG_TAG = "ImsUtListener";
     private IImsUtListener mServiceInterface;
 
@@ -45,7 +44,8 @@ public class ImsUtListener {
 
     public void onLineIdentificationSupplementaryServiceResponse(int id, ImsSsInfo configuration) {
         try {
-            this.mServiceInterface.lineIdentificationSupplementaryServiceResponse(id, configuration);
+            this.mServiceInterface.lineIdentificationSupplementaryServiceResponse(
+                    id, configuration);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
         }

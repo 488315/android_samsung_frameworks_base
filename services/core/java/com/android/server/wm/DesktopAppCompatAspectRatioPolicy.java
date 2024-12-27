@@ -8,7 +8,11 @@ public final class DesktopAppCompatAspectRatioPolicy {
     public final AppCompatOverrides mAppCompatOverrides;
     public final TransparentPolicy mTransparentPolicy;
 
-    public DesktopAppCompatAspectRatioPolicy(ActivityRecord activityRecord, AppCompatOverrides appCompatOverrides, TransparentPolicy transparentPolicy, AppCompatConfiguration appCompatConfiguration) {
+    public DesktopAppCompatAspectRatioPolicy(
+            ActivityRecord activityRecord,
+            AppCompatOverrides appCompatOverrides,
+            TransparentPolicy transparentPolicy,
+            AppCompatConfiguration appCompatConfiguration) {
         this.mActivityRecord = activityRecord;
         this.mAppCompatOverrides = appCompatOverrides;
         this.mTransparentPolicy = transparentPolicy;
@@ -118,6 +122,8 @@ public final class DesktopAppCompatAspectRatioPolicy {
             float r5 = com.android.server.wm.AppCompatUtils.computeAspectRatio(r5)
             return r5
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.DesktopAppCompatAspectRatioPolicy.getDesiredAspectRatio(com.android.server.wm.Task):float");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.DesktopAppCompatAspectRatioPolicy.getDesiredAspectRatio(com.android.server.wm.Task):float");
     }
 }

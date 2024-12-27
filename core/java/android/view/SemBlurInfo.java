@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -70,32 +71,91 @@ public class SemBlurInfo implements Parcelable {
     private float mCornerRadiusTL;
     private float mCornerRadiusTR;
     private final boolean mHasCapturedBitmap;
-    private static final float[] COLOR_CURVE_PRESET_SPATIAL_BACKGROUND_LIGHT = {150.0f, 0.0f, 5.0f, 0.0f, 255.0f, 1.0f, 212.0f};
-    private static final float[] COLOR_CURVE_PRESET_DIM_BACKGROUND_LIGHT = {300.0f, 0.0f, 14.0f, 0.0f, 255.0f, 146.6f, 242.0f};
-    private static final float[] COLOR_CURVE_PRESET_ULTRA_BACKGROUND_LIGHT = {348.0f, 0.0f, 8.0f, 0.0f, 255.0f, 81.0f, 207.0f};
-    private static final float[] COLOR_CURVE_PRESET_SPATIAL_BACKGROUND_DARK = {150.0f, 0.0f, 8.0f, 0.0f, 255.0f, 2.0f, 152.0f};
-    private static final float[] COLOR_CURVE_PRESET_DIM_BACKGROUND_DARK = {300.0f, 0.0f, 14.0f, 0.0f, 255.0f, 2.4f, 94.2f};
-    private static final float[] COLOR_CURVE_PRESET_ULTRA_BACKGROUND_DARK = {348.0f, 0.0f, 8.0f, 0.0f, 255.0f, 41.0f, 167.0f};
-    private static final float[][] BLUR_PRESET = {new float[]{300.0f, 0.1f, 5.0f, 0.0f, 250.0f, 17.8f, 247.3f}, new float[]{300.0f, 0.1f, 5.0f, 0.0f, 250.0f, 68.8f, 247.4f}, new float[]{300.0f, 0.1f, 5.0f, 0.0f, 250.0f, 118.6f, 246.1f}, new float[]{300.0f, 0.1f, 5.0f, 0.0f, 250.0f, 169.6f, 246.1f}, new float[]{300.0f, 0.1f, 5.0f, 0.0f, 250.0f, 208.1f, 246.3f}, new float[]{300.0f, 0.3f, 12.0f, 5.0f, 235.0f, 17.8f, 247.3f}, new float[]{300.0f, 0.3f, 12.0f, 15.0f, 235.0f, 68.8f, 247.4f}, new float[]{300.0f, 0.35f, 15.0f, 15.0f, 235.0f, 118.6f, 246.1f}, new float[]{300.0f, 0.4f, 15.0f, 15.0f, 235.0f, 169.6f, 246.1f}, new float[]{300.0f, 0.5f, 15.0f, 15.0f, 235.0f, 208.1f, 246.3f}, new float[]{300.0f, 0.4f, 20.0f, 5.0f, 235.0f, 17.8f, 247.3f}, new float[]{300.0f, 0.45f, 20.0f, 15.0f, 235.0f, 68.8f, 247.4f}, new float[]{300.0f, 0.5f, 23.0f, 15.0f, 235.0f, 118.6f, 246.1f}, new float[]{300.0f, 0.65f, 25.0f, 15.0f, 235.0f, 169.6f, 246.1f}, new float[]{300.0f, 0.75f, 25.0f, 15.0f, 235.0f, 208.1f, 246.3f}, new float[]{300.0f, 0.1f, -15.0f, 0.0f, 255.0f, 13.3f, 235.1f}, new float[]{300.0f, 0.1f, -15.0f, 0.0f, 255.0f, 14.0f, 205.3f}, new float[]{300.0f, 0.1f, -15.0f, 0.0f, 255.0f, 13.4f, 179.1f}, new float[]{300.0f, 0.1f, -20.0f, 0.0f, 255.0f, 13.5f, 133.4f}, new float[]{300.0f, 0.1f, -20.0f, 0.0f, 255.0f, 14.3f, 90.8f}, new float[]{300.0f, 0.35f, -5.0f, 0.0f, 255.0f, 13.3f, 235.1f}, new float[]{300.0f, 0.4f, -10.0f, 0.0f, 255.0f, 14.0f, 205.3f}, new float[]{300.0f, 0.45f, -10.0f, 0.0f, 255.0f, 13.4f, 179.1f}, new float[]{300.0f, 0.5f, -15.0f, 0.0f, 255.0f, 13.5f, 133.4f}, new float[]{300.0f, 0.55f, -15.0f, 0.0f, 255.0f, 14.3f, 90.8f}, new float[]{300.0f, 0.45f, -5.0f, 0.0f, 255.0f, 13.3f, 235.1f}, new float[]{300.0f, 0.5f, -10.0f, 0.0f, 255.0f, 14.0f, 205.3f}, new float[]{300.0f, 0.6f, -10.0f, 0.0f, 255.0f, 13.4f, 179.1f}, new float[]{300.0f, 0.65f, -15.0f, 0.0f, 255.0f, 13.5f, 133.4f}, new float[]{300.0f, 0.7f, -15.0f, 0.0f, 255.0f, 14.3f, 90.8f}, new float[]{110.0f, 0.25f, 10.0f, 15.0f, 255.0f, 40.2f, 205.9f}, new float[]{250.0f, 0.25f, 10.0f, 15.0f, 255.0f, 40.2f, 205.9f}, new float[]{400.0f, 0.25f, 10.0f, 15.0f, 255.0f, 40.2f, 205.9f}, new float[]{110.0f, 0.25f, 10.0f, 15.0f, 255.0f, 34.4f, 174.7f}, new float[]{250.0f, 0.25f, 10.0f, 15.0f, 255.0f, 34.4f, 174.7f}, new float[]{400.0f, 0.25f, 10.0f, 15.0f, 255.0f, 34.4f, 174.7f}, new float[]{400.0f, 0.25f, 10.0f, 15.0f, 255.0f, 14.0f, 128.8f}};
-    public static final Parcelable.Creator<SemBlurInfo> CREATOR = new Parcelable.Creator<SemBlurInfo>() { // from class: android.view.SemBlurInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemBlurInfo createFromParcel(Parcel in) {
-            return new SemBlurInfo(in);
-        }
-
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemBlurInfo[] newArray(int size) {
-            return new SemBlurInfo[size];
-        }
+    private static final float[] COLOR_CURVE_PRESET_SPATIAL_BACKGROUND_LIGHT = {
+        150.0f, 0.0f, 5.0f, 0.0f, 255.0f, 1.0f, 212.0f
     };
+    private static final float[] COLOR_CURVE_PRESET_DIM_BACKGROUND_LIGHT = {
+        300.0f, 0.0f, 14.0f, 0.0f, 255.0f, 146.6f, 242.0f
+    };
+    private static final float[] COLOR_CURVE_PRESET_ULTRA_BACKGROUND_LIGHT = {
+        348.0f, 0.0f, 8.0f, 0.0f, 255.0f, 81.0f, 207.0f
+    };
+    private static final float[] COLOR_CURVE_PRESET_SPATIAL_BACKGROUND_DARK = {
+        150.0f, 0.0f, 8.0f, 0.0f, 255.0f, 2.0f, 152.0f
+    };
+    private static final float[] COLOR_CURVE_PRESET_DIM_BACKGROUND_DARK = {
+        300.0f, 0.0f, 14.0f, 0.0f, 255.0f, 2.4f, 94.2f
+    };
+    private static final float[] COLOR_CURVE_PRESET_ULTRA_BACKGROUND_DARK = {
+        348.0f, 0.0f, 8.0f, 0.0f, 255.0f, 41.0f, 167.0f
+    };
+    private static final float[][] BLUR_PRESET = {
+        new float[] {300.0f, 0.1f, 5.0f, 0.0f, 250.0f, 17.8f, 247.3f},
+        new float[] {300.0f, 0.1f, 5.0f, 0.0f, 250.0f, 68.8f, 247.4f},
+        new float[] {300.0f, 0.1f, 5.0f, 0.0f, 250.0f, 118.6f, 246.1f},
+        new float[] {300.0f, 0.1f, 5.0f, 0.0f, 250.0f, 169.6f, 246.1f},
+        new float[] {300.0f, 0.1f, 5.0f, 0.0f, 250.0f, 208.1f, 246.3f},
+        new float[] {300.0f, 0.3f, 12.0f, 5.0f, 235.0f, 17.8f, 247.3f},
+        new float[] {300.0f, 0.3f, 12.0f, 15.0f, 235.0f, 68.8f, 247.4f},
+        new float[] {300.0f, 0.35f, 15.0f, 15.0f, 235.0f, 118.6f, 246.1f},
+        new float[] {300.0f, 0.4f, 15.0f, 15.0f, 235.0f, 169.6f, 246.1f},
+        new float[] {300.0f, 0.5f, 15.0f, 15.0f, 235.0f, 208.1f, 246.3f},
+        new float[] {300.0f, 0.4f, 20.0f, 5.0f, 235.0f, 17.8f, 247.3f},
+        new float[] {300.0f, 0.45f, 20.0f, 15.0f, 235.0f, 68.8f, 247.4f},
+        new float[] {300.0f, 0.5f, 23.0f, 15.0f, 235.0f, 118.6f, 246.1f},
+        new float[] {300.0f, 0.65f, 25.0f, 15.0f, 235.0f, 169.6f, 246.1f},
+        new float[] {300.0f, 0.75f, 25.0f, 15.0f, 235.0f, 208.1f, 246.3f},
+        new float[] {300.0f, 0.1f, -15.0f, 0.0f, 255.0f, 13.3f, 235.1f},
+        new float[] {300.0f, 0.1f, -15.0f, 0.0f, 255.0f, 14.0f, 205.3f},
+        new float[] {300.0f, 0.1f, -15.0f, 0.0f, 255.0f, 13.4f, 179.1f},
+        new float[] {300.0f, 0.1f, -20.0f, 0.0f, 255.0f, 13.5f, 133.4f},
+        new float[] {300.0f, 0.1f, -20.0f, 0.0f, 255.0f, 14.3f, 90.8f},
+        new float[] {300.0f, 0.35f, -5.0f, 0.0f, 255.0f, 13.3f, 235.1f},
+        new float[] {300.0f, 0.4f, -10.0f, 0.0f, 255.0f, 14.0f, 205.3f},
+        new float[] {300.0f, 0.45f, -10.0f, 0.0f, 255.0f, 13.4f, 179.1f},
+        new float[] {300.0f, 0.5f, -15.0f, 0.0f, 255.0f, 13.5f, 133.4f},
+        new float[] {300.0f, 0.55f, -15.0f, 0.0f, 255.0f, 14.3f, 90.8f},
+        new float[] {300.0f, 0.45f, -5.0f, 0.0f, 255.0f, 13.3f, 235.1f},
+        new float[] {300.0f, 0.5f, -10.0f, 0.0f, 255.0f, 14.0f, 205.3f},
+        new float[] {300.0f, 0.6f, -10.0f, 0.0f, 255.0f, 13.4f, 179.1f},
+        new float[] {300.0f, 0.65f, -15.0f, 0.0f, 255.0f, 13.5f, 133.4f},
+        new float[] {300.0f, 0.7f, -15.0f, 0.0f, 255.0f, 14.3f, 90.8f},
+        new float[] {110.0f, 0.25f, 10.0f, 15.0f, 255.0f, 40.2f, 205.9f},
+        new float[] {250.0f, 0.25f, 10.0f, 15.0f, 255.0f, 40.2f, 205.9f},
+        new float[] {400.0f, 0.25f, 10.0f, 15.0f, 255.0f, 40.2f, 205.9f},
+        new float[] {110.0f, 0.25f, 10.0f, 15.0f, 255.0f, 34.4f, 174.7f},
+        new float[] {250.0f, 0.25f, 10.0f, 15.0f, 255.0f, 34.4f, 174.7f},
+        new float[] {400.0f, 0.25f, 10.0f, 15.0f, 255.0f, 34.4f, 174.7f},
+        new float[] {400.0f, 0.25f, 10.0f, 15.0f, 255.0f, 14.0f, 128.8f}
+    };
+    public static final Parcelable.Creator<SemBlurInfo> CREATOR =
+            new Parcelable.Creator<SemBlurInfo>() { // from class: android.view.SemBlurInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemBlurInfo createFromParcel(Parcel in) {
+                    return new SemBlurInfo(in);
+                }
+
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemBlurInfo[] newArray(int size) {
+                    return new SemBlurInfo[size];
+                }
+            };
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BlurMode {
-    }
+    public @interface BlurMode {}
 
-    public SemBlurInfo(int blurMode, Bitmap capturedBitmap, int blurRadius, int backgroundBlurColor, float cornerRadiusTL, float cornerRadiusTR, float cornerRadiusBL, float cornerRadiusBR, int scale) {
+    public SemBlurInfo(
+            int blurMode,
+            Bitmap capturedBitmap,
+            int blurRadius,
+            int backgroundBlurColor,
+            float cornerRadiusTL,
+            float cornerRadiusTR,
+            float cornerRadiusBL,
+            float cornerRadiusBR,
+            int scale) {
         this.mBlurMode = blurMode;
         this.mCapturedBitmap = capturedBitmap;
         if (this.mCapturedBitmap == null) {
@@ -112,8 +172,27 @@ public class SemBlurInfo implements Parcelable {
         this.mCanvasDownScale = scale;
     }
 
-    public SemBlurInfo(int blurMode, Bitmap capturedBitmap, int blurRadius, int backgroundBlurColor, float cornerRadiusTL, float cornerRadiusTR, float cornerRadiusBL, float cornerRadiusBR, int scale, ColorCurve colorCurve) {
-        this(blurMode, capturedBitmap, blurRadius, backgroundBlurColor, cornerRadiusTL, cornerRadiusTR, cornerRadiusBL, cornerRadiusBR, scale);
+    public SemBlurInfo(
+            int blurMode,
+            Bitmap capturedBitmap,
+            int blurRadius,
+            int backgroundBlurColor,
+            float cornerRadiusTL,
+            float cornerRadiusTR,
+            float cornerRadiusBL,
+            float cornerRadiusBR,
+            int scale,
+            ColorCurve colorCurve) {
+        this(
+                blurMode,
+                capturedBitmap,
+                blurRadius,
+                backgroundBlurColor,
+                cornerRadiusTL,
+                cornerRadiusTR,
+                cornerRadiusBL,
+                cornerRadiusBR,
+                scale);
         this.mColorCurve = colorCurve;
     }
 
@@ -165,14 +244,18 @@ public class SemBlurInfo implements Parcelable {
 
     public int getBackgroundBlurColor() {
         if (this.mBlurMode != 0) {
-            throw new IllegalStateException("Failed to getBackgroundBlurColor, because of blurMode is not BLUR_MODE_WINDOW");
+            throw new IllegalStateException(
+                    "Failed to getBackgroundBlurColor, because of blurMode is not"
+                        + " BLUR_MODE_WINDOW");
         }
         return this.mBackgroundBlurColor;
     }
 
     public void getBackgroundBlurCornerRadius(float[] outRadius) {
         if (this.mBlurMode != 0) {
-            throw new IllegalStateException("Failed to getBackgroundBlurCornerRadius, because of blurMode is not BLUR_MODE_WINDOW");
+            throw new IllegalStateException(
+                    "Failed to getBackgroundBlurCornerRadius, because of blurMode is not"
+                        + " BLUR_MODE_WINDOW");
         }
         if (outRadius == null || outRadius.length < 4) {
             throw new IllegalArgumentException("outRadius must be an array of four integers");
@@ -185,14 +268,17 @@ public class SemBlurInfo implements Parcelable {
 
     public Bitmap getCapturedBitmap() {
         if (this.mBlurMode != 1) {
-            throw new IllegalStateException("Failed to getCapturedBitmap, because of blurMode is not BLUR_MODE_WINDOW_CAPTURED");
+            throw new IllegalStateException(
+                    "Failed to getCapturedBitmap, because of blurMode is not"
+                        + " BLUR_MODE_WINDOW_CAPTURED");
         }
         return this.mCapturedBitmap;
     }
 
     public int getCanvasDownScale() {
         if (this.mBlurMode != 2) {
-            throw new IllegalStateException("Failed to getCanvasDownScale, because of blurMode is not BLUR_MODE_CANVAS");
+            throw new IllegalStateException(
+                    "Failed to getCanvasDownScale, because of blurMode is not BLUR_MODE_CANVAS");
         }
         return this.mCanvasDownScale;
     }
@@ -204,11 +290,40 @@ public class SemBlurInfo implements Parcelable {
     public String toString() {
         switch (this.mBlurMode) {
             case 0:
-                return super.toString() + " {BLUR_MODE_WINDOW, mBlurRadius = " + this.mBlurRadius + ", mBackgroundBlurColor = " + this.mBackgroundBlurColor + ", mCornerRadiusTL = " + this.mCornerRadiusTL + ", mCornerRadiusTR = " + this.mCornerRadiusTR + ", mCornerRadiusBL = " + this.mCornerRadiusBL + ", mCornerRadiusBR = " + this.mCornerRadiusBR + ", mColorCurve = " + this.mColorCurve + "}";
+                return super.toString()
+                        + " {BLUR_MODE_WINDOW, mBlurRadius = "
+                        + this.mBlurRadius
+                        + ", mBackgroundBlurColor = "
+                        + this.mBackgroundBlurColor
+                        + ", mCornerRadiusTL = "
+                        + this.mCornerRadiusTL
+                        + ", mCornerRadiusTR = "
+                        + this.mCornerRadiusTR
+                        + ", mCornerRadiusBL = "
+                        + this.mCornerRadiusBL
+                        + ", mCornerRadiusBR = "
+                        + this.mCornerRadiusBR
+                        + ", mColorCurve = "
+                        + this.mColorCurve
+                        + "}";
             case 1:
-                return super.toString() + " {BLUR_MODE_WINDOW_CAPTURED, mBlurRadius = " + this.mBlurRadius + ", mCapturedBitmap = " + this.mCapturedBitmap + ", mColorCurve = " + this.mColorCurve + "}";
+                return super.toString()
+                        + " {BLUR_MODE_WINDOW_CAPTURED, mBlurRadius = "
+                        + this.mBlurRadius
+                        + ", mCapturedBitmap = "
+                        + this.mCapturedBitmap
+                        + ", mColorCurve = "
+                        + this.mColorCurve
+                        + "}";
             case 2:
-                return super.toString() + " {BLUR_MODE_CANVAS, mBlurRadius = " + this.mBlurRadius + ", mCanvasDownScale = " + this.mCanvasDownScale + ", mColorCurve = " + this.mColorCurve + "}";
+                return super.toString()
+                        + " {BLUR_MODE_CANVAS, mBlurRadius = "
+                        + this.mBlurRadius
+                        + ", mCanvasDownScale = "
+                        + this.mCanvasDownScale
+                        + ", mColorCurve = "
+                        + this.mColorCurve
+                        + "}";
             default:
                 return super.toString() + " {BLUR_MODE_NONE}";
         }
@@ -278,7 +393,9 @@ public class SemBlurInfo implements Parcelable {
         public Builder setBackgroundCornerRadius(float cornerRadius) {
             this.mBuilderFieldsSet |= 16;
             if (cornerRadius < 0.0f) {
-                Log.i(SemBlurInfo.TAG, "cornerRadius = (" + cornerRadius + ") is negative, set to 0.0f");
+                Log.i(
+                        SemBlurInfo.TAG,
+                        "cornerRadius = (" + cornerRadius + ") is negative, set to 0.0f");
                 cornerRadius = 0.0f;
             }
             setBackgroundCornerRadius(cornerRadius, cornerRadius, cornerRadius, cornerRadius);
@@ -289,7 +406,8 @@ public class SemBlurInfo implements Parcelable {
             return setBackgroundCornerRadius(cornerRadius);
         }
 
-        public Builder setBackgroundCornerRadius(float topLeft, float topRight, float bottomLeft, float bottomRight) {
+        public Builder setBackgroundCornerRadius(
+                float topLeft, float topRight, float bottomLeft, float bottomRight) {
             this.mBuilderFieldsSet |= 16;
             this.mCornerRadiusTL = topLeft;
             this.mCornerRadiusTR = topRight;
@@ -304,9 +422,17 @@ public class SemBlurInfo implements Parcelable {
             return this;
         }
 
-        public Builder setColorCurve(float saturation, float curve, float minX, float maxX, float minY, float maxY) {
+        public Builder setColorCurve(
+                float saturation, float curve, float minX, float maxX, float minY, float maxY) {
             this.mBuilderFieldsSet |= 128;
-            this.mColorCurve = new ColorCurve(checkValueRange(saturation, 1.0f, -1.0f), checkValueRange(curve, 100.0f, CURVEGRAPH_CURVE_MIN_VALUE), checkValueRange(minX, CURVEGRAPH_MAX_XY_VALUE, 0.0f), checkValueRange(maxX, CURVEGRAPH_MAX_XY_VALUE, 0.0f), checkValueRange(minY, CURVEGRAPH_MAX_XY_VALUE, 0.0f), checkValueRange(maxY, CURVEGRAPH_MAX_XY_VALUE, 0.0f));
+            this.mColorCurve =
+                    new ColorCurve(
+                            checkValueRange(saturation, 1.0f, -1.0f),
+                            checkValueRange(curve, 100.0f, CURVEGRAPH_CURVE_MIN_VALUE),
+                            checkValueRange(minX, CURVEGRAPH_MAX_XY_VALUE, 0.0f),
+                            checkValueRange(maxX, CURVEGRAPH_MAX_XY_VALUE, 0.0f),
+                            checkValueRange(minY, CURVEGRAPH_MAX_XY_VALUE, 0.0f),
+                            checkValueRange(maxY, CURVEGRAPH_MAX_XY_VALUE, 0.0f));
             return this;
         }
 
@@ -326,7 +452,14 @@ public class SemBlurInfo implements Parcelable {
             float[] presetAttrs = getBlurPresetAttrs(preset);
             if (presetAttrs != null) {
                 setRadius((int) presetAttrs[0]);
-                this.mColorCurve = new ColorCurve(presetAttrs[1], presetAttrs[2], presetAttrs[3], presetAttrs[4], presetAttrs[5], presetAttrs[6]);
+                this.mColorCurve =
+                        new ColorCurve(
+                                presetAttrs[1],
+                                presetAttrs[2],
+                                presetAttrs[3],
+                                presetAttrs[4],
+                                presetAttrs[5],
+                                presetAttrs[6]);
             }
             return this;
         }
@@ -349,7 +482,11 @@ public class SemBlurInfo implements Parcelable {
                 case 16:
                     return SemBlurInfo.COLOR_CURVE_PRESET_ULTRA_BACKGROUND_DARK;
                 default:
-                    Log.e(SemBlurInfo.TAG, "BlurPreset (" + preset + ") is not valid. getBlurPresetAttrs return null");
+                    Log.e(
+                            SemBlurInfo.TAG,
+                            "BlurPreset ("
+                                    + preset
+                                    + ") is not valid. getBlurPresetAttrs return null");
                     return null;
             }
         }
@@ -358,46 +495,79 @@ public class SemBlurInfo implements Parcelable {
             checkNotUsed();
             this.mBuilderFieldsSet |= 256;
             if ((this.mBuilderFieldsSet & 1) == 0) {
-                throw new IllegalStateException("Failed to create SemBlurInfo, Blurmode is not set");
+                throw new IllegalStateException(
+                        "Failed to create SemBlurInfo, Blurmode is not set");
             }
             if ((this.mBuilderFieldsSet & 128) != 0 && (this.mBuilderFieldsSet & 64) != 0) {
-                throw new IllegalStateException("Failed to create SemBlurInfo, BlurPreset and BlurColorCurve can not be used together");
+                throw new IllegalStateException(
+                        "Failed to create SemBlurInfo, BlurPreset and BlurColorCurve can not be"
+                            + " used together");
             }
             if ((this.mBuilderFieldsSet & 64) != 0 && this.mColorCurve == null) {
-                throw new IllegalStateException("Failed to create SemBlurInfo, you set the wrong preset value " + this.mPreset);
+                throw new IllegalStateException(
+                        "Failed to create SemBlurInfo, you set the wrong preset value "
+                                + this.mPreset);
             }
             if (this.mBlurMode == 0) {
                 if ((this.mBuilderFieldsSet & 2) != 0) {
-                    throw new IllegalStateException("Failed to create SemBlurInfo, Blurmode is BLUR_MODE_WINDOW, can not set capturedBitmap");
+                    throw new IllegalStateException(
+                            "Failed to create SemBlurInfo, Blurmode is BLUR_MODE_WINDOW, can not"
+                                + " set capturedBitmap");
                 }
                 if ((this.mBuilderFieldsSet & 32) != 0) {
-                    throw new IllegalStateException("Failed to create SemBlurInfo, Blurmode is BLUR_MODE_WINDOW, can not set canvasDownScale");
+                    throw new IllegalStateException(
+                            "Failed to create SemBlurInfo, Blurmode is BLUR_MODE_WINDOW, can not"
+                                + " set canvasDownScale");
                 }
             } else if (this.mBlurMode == 1) {
                 if ((this.mBuilderFieldsSet & 2) == 0) {
-                    throw new IllegalStateException("Failed to create SemBlurInfo, Blurmode is BLUR_MODE_WINDOW_CAPTURED, must set capturedBitmap");
+                    throw new IllegalStateException(
+                            "Failed to create SemBlurInfo, Blurmode is BLUR_MODE_WINDOW_CAPTURED,"
+                                + " must set capturedBitmap");
                 }
                 if ((this.mBuilderFieldsSet & 8) != 0) {
-                    throw new IllegalStateException("Failed to create SemBlurInfo, Blurmode is BLUR_MODE_WINDOW_CAPTURED, can not set backgroundColor");
+                    throw new IllegalStateException(
+                            "Failed to create SemBlurInfo, Blurmode is BLUR_MODE_WINDOW_CAPTURED,"
+                                + " can not set backgroundColor");
                 }
                 if ((this.mBuilderFieldsSet & 16) != 0) {
-                    throw new IllegalStateException("Failed to create SemBlurInfo, Blurmode is BLUR_MODE_WINDOW_CAPTURED, can not set backgroundCornerRadius");
+                    throw new IllegalStateException(
+                            "Failed to create SemBlurInfo, Blurmode is BLUR_MODE_WINDOW_CAPTURED,"
+                                + " can not set backgroundCornerRadius");
                 }
                 if ((this.mBuilderFieldsSet & 32) != 0) {
-                    throw new IllegalStateException("Failed to create SemBlurInfo, Blurmode is BLUR_MODE_WINDOW_CAPTURED, can not set canvasDownScale");
+                    throw new IllegalStateException(
+                            "Failed to create SemBlurInfo, Blurmode is BLUR_MODE_WINDOW_CAPTURED,"
+                                + " can not set canvasDownScale");
                 }
             } else if (this.mBlurMode == 2) {
                 if ((this.mBuilderFieldsSet & 2) != 0) {
-                    throw new IllegalStateException("Failed to create SemBlurInfo, Blurmode is BLUR_MODE_CANVAS, can not capturedBitmap");
+                    throw new IllegalStateException(
+                            "Failed to create SemBlurInfo, Blurmode is BLUR_MODE_CANVAS, can not"
+                                + " capturedBitmap");
                 }
                 if ((this.mBuilderFieldsSet & 8) != 0) {
-                    throw new IllegalStateException("Failed to create SemBlurInfo, Blurmode is BLUR_MODE_CANVAS, can not set backgroundColor");
+                    throw new IllegalStateException(
+                            "Failed to create SemBlurInfo, Blurmode is BLUR_MODE_CANVAS, can not"
+                                + " set backgroundColor");
                 }
                 if ((this.mBuilderFieldsSet & 16) != 0) {
-                    throw new IllegalStateException("Failed to create SemBlurInfo, Blurmode is BLUR_MODE_CANVAS, can not set backgroundCornerRadius");
+                    throw new IllegalStateException(
+                            "Failed to create SemBlurInfo, Blurmode is BLUR_MODE_CANVAS, can not"
+                                + " set backgroundCornerRadius");
                 }
             }
-            return new SemBlurInfo(this.mBlurMode, this.mCapturedBitmap, this.mBlurRadius, this.mBackgroundBlurColor, this.mCornerRadiusTL, this.mCornerRadiusTR, this.mCornerRadiusBL, this.mCornerRadiusBR, this.mCanvasDownScale, this.mColorCurve);
+            return new SemBlurInfo(
+                    this.mBlurMode,
+                    this.mCapturedBitmap,
+                    this.mBlurRadius,
+                    this.mBackgroundBlurColor,
+                    this.mCornerRadiusTL,
+                    this.mCornerRadiusTR,
+                    this.mCornerRadiusBL,
+                    this.mCornerRadiusBR,
+                    this.mCanvasDownScale,
+                    this.mColorCurve);
         }
 
         private SemBlurInfo hidden_build() {
@@ -406,7 +576,9 @@ public class SemBlurInfo implements Parcelable {
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 256) != 0) {
-                throw new IllegalStateException("Failed to create SemBlurInfo, This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "Failed to create SemBlurInfo, This Builder should not be reused. Use a new"
+                            + " Builder instance instead");
             }
         }
     }
@@ -419,7 +591,8 @@ public class SemBlurInfo implements Parcelable {
         public float mMinY;
         public float mSaturation;
 
-        public ColorCurve(float saturation, float curve, float minX, float maxX, float minY, float maxY) {
+        public ColorCurve(
+                float saturation, float curve, float minX, float maxX, float minY, float maxY) {
             this.mSaturation = saturation;
             this.mCurveBias = curve;
             this.mMinX = minX;
@@ -429,7 +602,20 @@ public class SemBlurInfo implements Parcelable {
         }
 
         public String toString() {
-            return super.toString() + " {minX = " + this.mMinX + ", minY = " + this.mMinY + ", maxX = " + this.mMaxX + ", maxY = " + this.mMaxY + ", curveBias = " + this.mCurveBias + ", saturation = " + this.mSaturation + "}";
+            return super.toString()
+                    + " {minX = "
+                    + this.mMinX
+                    + ", minY = "
+                    + this.mMinY
+                    + ", maxX = "
+                    + this.mMaxX
+                    + ", maxY = "
+                    + this.mMaxY
+                    + ", curveBias = "
+                    + this.mCurveBias
+                    + ", saturation = "
+                    + this.mSaturation
+                    + "}";
         }
     }
 }

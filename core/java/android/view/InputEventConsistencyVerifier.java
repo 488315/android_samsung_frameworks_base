@@ -100,7 +100,9 @@ public final class InputEventConsistencyVerifier {
                     if (state != null) {
                         if (!state.unhandled) {
                             if ((1 & this.mFlags) == 0 && event.getRepeatCount() == 0) {
-                                problem("ACTION_DOWN but key is already down and this event is not a key repeat.");
+                                problem(
+                                        "ACTION_DOWN but key is already down and this event is not"
+                                            + " a key repeat.");
                                 break;
                             }
                         } else {
@@ -124,7 +126,10 @@ public final class InputEventConsistencyVerifier {
                 case 2:
                     break;
                 default:
-                    problem("Invalid action " + KeyEvent.actionToString(action) + " for key event.");
+                    problem(
+                            "Invalid action "
+                                    + KeyEvent.actionToString(action)
+                                    + " for key event.");
                     break;
             }
         } finally {
@@ -166,7 +171,10 @@ public final class InputEventConsistencyVerifier {
                         ensurePointerCountIsOneForThisAction(event);
                         break;
                     default:
-                        problem("Invalid action " + MotionEvent.actionToString(action) + " for trackball event.");
+                        problem(
+                                "Invalid action "
+                                        + MotionEvent.actionToString(action)
+                                        + " for trackball event.");
                         break;
                 }
                 if (this.mTrackballDown && event.getPressure() <= 0.0f) {
@@ -200,8 +208,20 @@ public final class InputEventConsistencyVerifier {
             ensureMetaStateIsNormalized(event.getMetaState());
             int deviceId = event.getDeviceId();
             int source = event.getSource();
-            if (!newStream && this.mTouchEventStreamDeviceId != -1 && (this.mTouchEventStreamDeviceId != deviceId || this.mTouchEventStreamSource != source)) {
-                problem("Touch event stream contains events from multiple sources: previous device id " + this.mTouchEventStreamDeviceId + ", previous source " + Integer.toHexString(this.mTouchEventStreamSource) + ", new device id " + deviceId + ", new source " + Integer.toHexString(source));
+            if (!newStream
+                    && this.mTouchEventStreamDeviceId != -1
+                    && (this.mTouchEventStreamDeviceId != deviceId
+                            || this.mTouchEventStreamSource != source)) {
+                problem(
+                        "Touch event stream contains events from multiple sources: previous device"
+                            + " id "
+                                + this.mTouchEventStreamDeviceId
+                                + ", previous source "
+                                + Integer.toHexString(this.mTouchEventStreamSource)
+                                + ", new device id "
+                                + deviceId
+                                + ", new source "
+                                + Integer.toHexString(source));
             }
             this.mTouchEventStreamDeviceId = deviceId;
             this.mTouchEventStreamSource = source;
@@ -210,7 +230,9 @@ public final class InputEventConsistencyVerifier {
                 switch (action) {
                     case 0:
                         if (this.mTouchEventStreamPointers != 0) {
-                            problem("ACTION_DOWN but pointers are already down.  Probably missing ACTION_UP from previous gesture.");
+                            problem(
+                                    "ACTION_DOWN but pointers are already down.  Probably missing"
+                                        + " ACTION_UP from previous gesture.");
                         }
                         ensureHistorySizeIsZeroForThisAction(event);
                         ensurePointerCountIsOneForThisAction(event);
@@ -225,7 +247,12 @@ public final class InputEventConsistencyVerifier {
                     case 2:
                         int expectedPointerCount = Integer.bitCount(this.mTouchEventStreamPointers);
                         if (pointerCount != expectedPointerCount) {
-                            problem("ACTION_MOVE contained " + pointerCount + " pointers but there are currently " + expectedPointerCount + " pointers down.");
+                            problem(
+                                    "ACTION_MOVE contained "
+                                            + pointerCount
+                                            + " pointers but there are currently "
+                                            + expectedPointerCount
+                                            + " pointers down.");
                             this.mTouchEventStreamIsTainted = true;
                             break;
                         }
@@ -254,7 +281,10 @@ public final class InputEventConsistencyVerifier {
                                 int id = event.getPointerId(actionIndex);
                                 int idBit = 1 << id;
                                 if ((this.mTouchEventStreamPointers & idBit) != 0) {
-                                    problem("ACTION_POINTER_DOWN specified pointer id " + id + " which is already down.");
+                                    problem(
+                                            "ACTION_POINTER_DOWN specified pointer id "
+                                                    + id
+                                                    + " which is already down.");
                                     this.mTouchEventStreamIsTainted = true;
                                 } else {
                                     this.mTouchEventStreamPointers |= idBit;
@@ -262,7 +292,12 @@ public final class InputEventConsistencyVerifier {
                                 ensureHistorySizeIsZeroForThisAction(event);
                                 break;
                             }
-                            problem("ACTION_POINTER_DOWN index is " + actionIndex + " but the pointer count is " + pointerCount + MediaMetrics.SEPARATOR);
+                            problem(
+                                    "ACTION_POINTER_DOWN index is "
+                                            + actionIndex
+                                            + " but the pointer count is "
+                                            + pointerCount
+                                            + MediaMetrics.SEPARATOR);
                             this.mTouchEventStreamIsTainted = true;
                             ensureHistorySizeIsZeroForThisAction(event);
                         } else if (actionMasked == 6) {
@@ -270,7 +305,10 @@ public final class InputEventConsistencyVerifier {
                                 int id2 = event.getPointerId(actionIndex);
                                 int idBit2 = 1 << id2;
                                 if ((this.mTouchEventStreamPointers & idBit2) == 0) {
-                                    problem("ACTION_POINTER_UP specified pointer id " + id2 + " which is not currently down.");
+                                    problem(
+                                            "ACTION_POINTER_UP specified pointer id "
+                                                    + id2
+                                                    + " which is not currently down.");
                                     this.mTouchEventStreamIsTainted = true;
                                 } else {
                                     this.mTouchEventStreamPointers &= ~idBit2;
@@ -278,11 +316,19 @@ public final class InputEventConsistencyVerifier {
                                 ensureHistorySizeIsZeroForThisAction(event);
                                 break;
                             }
-                            problem("ACTION_POINTER_UP index is " + actionIndex + " but the pointer count is " + pointerCount + MediaMetrics.SEPARATOR);
+                            problem(
+                                    "ACTION_POINTER_UP index is "
+                                            + actionIndex
+                                            + " but the pointer count is "
+                                            + pointerCount
+                                            + MediaMetrics.SEPARATOR);
                             this.mTouchEventStreamIsTainted = true;
                             ensureHistorySizeIsZeroForThisAction(event);
                         } else {
-                            problem("Invalid action " + MotionEvent.actionToString(action) + " for touch event.");
+                            problem(
+                                    "Invalid action "
+                                            + MotionEvent.actionToString(action)
+                                            + " for touch event.");
                             break;
                         }
                 }
@@ -327,7 +373,11 @@ public final class InputEventConsistencyVerifier {
                     case 11:
                         ensureActionButtonIsNonZeroForThisAction(event);
                         if ((this.mButtonsPressed & actionButton) != 0) {
-                            problem("Action button for ACTION_BUTTON_PRESS event is " + actionButton + ", but it has already been pressed and has yet to be released.");
+                            problem(
+                                    "Action button for ACTION_BUTTON_PRESS event is "
+                                            + actionButton
+                                            + ", but it has already been pressed and has yet to be"
+                                            + " released.");
                         }
                         this.mButtonsPressed |= actionButton;
                         if (actionButton == 32 && (buttonState & 2) != 0) {
@@ -336,14 +386,24 @@ public final class InputEventConsistencyVerifier {
                             this.mButtonsPressed |= 4;
                         }
                         if (this.mButtonsPressed != buttonState) {
-                            problem(String.format("Reported button state differs from expected button state based on press and release events. Is 0x%08x but expected 0x%08x.", Integer.valueOf(buttonState), Integer.valueOf(this.mButtonsPressed)));
+                            problem(
+                                    String.format(
+                                            "Reported button state differs from expected button"
+                                                + " state based on press and release events. Is"
+                                                + " 0x%08x but expected 0x%08x.",
+                                            Integer.valueOf(buttonState),
+                                            Integer.valueOf(this.mButtonsPressed)));
                             break;
                         }
                         break;
                     case 12:
                         ensureActionButtonIsNonZeroForThisAction(event);
                         if ((this.mButtonsPressed & actionButton) != actionButton) {
-                            problem("Action button for ACTION_BUTTON_RELEASE event is " + actionButton + ", but it was either never pressed or has already been released.");
+                            problem(
+                                    "Action button for ACTION_BUTTON_RELEASE event is "
+                                            + actionButton
+                                            + ", but it was either never pressed or has already"
+                                            + " been released.");
                         }
                         this.mButtonsPressed &= ~actionButton;
                         if (actionButton == 32 && (buttonState & 2) == 0) {
@@ -352,7 +412,13 @@ public final class InputEventConsistencyVerifier {
                             this.mButtonsPressed &= -5;
                         }
                         if (this.mButtonsPressed != buttonState) {
-                            problem(String.format("Reported button state differs from expected button state based on press and release events. Is 0x%08x but expected 0x%08x.", Integer.valueOf(buttonState), Integer.valueOf(this.mButtonsPressed)));
+                            problem(
+                                    String.format(
+                                            "Reported button state differs from expected button"
+                                                + " state based on press and release events. Is"
+                                                + " 0x%08x but expected 0x%08x.",
+                                            Integer.valueOf(buttonState),
+                                            Integer.valueOf(this.mButtonsPressed)));
                             break;
                         }
                         break;
@@ -405,34 +471,49 @@ public final class InputEventConsistencyVerifier {
     private void ensureMetaStateIsNormalized(int metaState) {
         int normalizedMetaState = KeyEvent.normalizeMetaState(metaState);
         if (normalizedMetaState != metaState) {
-            problem(String.format("Metastate not normalized.  Was 0x%08x but expected 0x%08x.", Integer.valueOf(metaState), Integer.valueOf(normalizedMetaState)));
+            problem(
+                    String.format(
+                            "Metastate not normalized.  Was 0x%08x but expected 0x%08x.",
+                            Integer.valueOf(metaState), Integer.valueOf(normalizedMetaState)));
         }
     }
 
     private void ensurePointerCountIsOneForThisAction(MotionEvent event) {
         int pointerCount = event.getPointerCount();
         if (pointerCount != 1) {
-            problem("Pointer count is " + pointerCount + " but it should always be 1 for " + MotionEvent.actionToString(event.getAction()));
+            problem(
+                    "Pointer count is "
+                            + pointerCount
+                            + " but it should always be 1 for "
+                            + MotionEvent.actionToString(event.getAction()));
         }
     }
 
     private void ensureActionButtonIsNonZeroForThisAction(MotionEvent event) {
         int actionButton = event.getActionButton();
         if (actionButton == 0) {
-            problem("No action button set. Action button should always be non-zero for " + MotionEvent.actionToString(event.getAction()));
+            problem(
+                    "No action button set. Action button should always be non-zero for "
+                            + MotionEvent.actionToString(event.getAction()));
         }
     }
 
     private void ensureHistorySizeIsZeroForThisAction(MotionEvent event) {
         int historySize = event.getHistorySize();
         if (historySize != 0) {
-            problem("History size is " + historySize + " but it should always be 0 for " + MotionEvent.actionToString(event.getAction()));
+            problem(
+                    "History size is "
+                            + historySize
+                            + " but it should always be 0 for "
+                            + MotionEvent.actionToString(event.getAction()));
         }
     }
 
     private boolean startEvent(InputEvent event, int nestingLevel, String eventType) {
         int seq = event.getSequenceNumber();
-        if (seq == this.mLastEventSeq && nestingLevel < this.mLastNestingLevel && eventType == this.mLastEventType) {
+        if (seq == this.mLastEventSeq
+                && nestingLevel < this.mLastNestingLevel
+                && eventType == this.mLastEventType) {
             return false;
         }
         if (nestingLevel > 0) {
@@ -464,7 +545,11 @@ public final class InputEventConsistencyVerifier {
                             break;
                         }
                         this.mViolationMessage.append("\n  ");
-                        appendEvent(this.mViolationMessage, i + 1, event, this.mRecentEventsUnhandled[index]);
+                        appendEvent(
+                                this.mViolationMessage,
+                                i + 1,
+                                event,
+                                this.mRecentEventsUnhandled[index]);
                     }
                 }
                 Log.d(this.mLogTag, this.mViolationMessage.toString());
@@ -487,7 +572,8 @@ public final class InputEventConsistencyVerifier {
         this.mCurrentEventType = null;
     }
 
-    private static void appendEvent(StringBuilder message, int index, InputEvent event, boolean unhandled) {
+    private static void appendEvent(
+            StringBuilder message, int index, InputEvent event, boolean unhandled) {
         message.append(index).append(": sent at ").append(event.getEventTimeNanos());
         message.append(", ");
         if (unhandled) {
@@ -542,8 +628,7 @@ public final class InputEventConsistencyVerifier {
         public int source;
         public boolean unhandled;
 
-        private KeyState() {
-        }
+        private KeyState() {}
 
         public static KeyState obtain(int deviceId, int source, int keyCode) {
             KeyState state;

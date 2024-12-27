@@ -5,6 +5,7 @@ import com.android.internal.widget.remotecompose.core.Operation;
 import com.android.internal.widget.remotecompose.core.PaintContext;
 import com.android.internal.widget.remotecompose.core.PaintOperation;
 import com.android.internal.widget.remotecompose.core.WireBuffer;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -30,12 +31,20 @@ public class DrawTweenPath extends PaintOperation {
     }
 
     public String toString() {
-        return "DrawTweenPath " + this.mPath1Id + " " + this.mPath2Id + " " + this.mTween + " " + this.mStart + " - " + this.mStop;
+        return "DrawTweenPath "
+                + this.mPath1Id
+                + " "
+                + this.mPath2Id
+                + " "
+                + this.mTween
+                + " "
+                + this.mStart
+                + " - "
+                + this.mStop;
     }
 
     public static class Companion implements CompanionOperation {
-        private Companion() {
-        }
+        private Companion() {}
 
         @Override // com.android.internal.widget.remotecompose.core.CompanionOperation
         public void read(WireBuffer buffer, List<Operation> operations) {
@@ -58,7 +67,8 @@ public class DrawTweenPath extends PaintOperation {
             return 125;
         }
 
-        public void apply(WireBuffer buffer, int path1Id, int path2Id, float tween, float start, float stop) {
+        public void apply(
+                WireBuffer buffer, int path1Id, int path2Id, float tween, float start, float stop) {
             buffer.start(125);
             buffer.writeInt(path1Id);
             buffer.writeInt(path2Id);

@@ -3,9 +3,11 @@ package com.android.server.broadcastradio;
 import android.content.Context;
 import android.hardware.radio.IRadioService;
 import android.os.ServiceManager;
+
 import com.android.server.SystemService;
 import com.android.server.broadcastradio.aidl.BroadcastRadioServiceImpl;
 import com.android.server.utils.Slogf;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +35,8 @@ public final class BroadcastRadioService extends SystemService {
         if (arrayList.isEmpty()) {
             iRadioService = new IRadioServiceHidlImpl(this);
         } else {
-            IRadioService iRadioServiceAidlImpl = new IRadioServiceAidlImpl(this, new BroadcastRadioServiceImpl(arrayList));
+            IRadioService iRadioServiceAidlImpl =
+                    new IRadioServiceAidlImpl(this, new BroadcastRadioServiceImpl(arrayList));
             Slogf.i("BcRadioSrvAidl", "Initialize BroadcastRadioServiceAidl(%s)", this);
             iRadioService = iRadioServiceAidlImpl;
         }

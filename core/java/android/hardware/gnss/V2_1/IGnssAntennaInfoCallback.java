@@ -11,8 +11,11 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import com.android.internal.midi.MidiConstants;
+
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -20,7 +23,8 @@ import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public interface IGnssAntennaInfoCallback extends IBase {
-    public static final String kInterfaceName = "android.hardware.gnss@2.1::IGnssAntennaInfoCallback";
+    public static final String kInterfaceName =
+            "android.hardware.gnss@2.1::IGnssAntennaInfoCallback";
 
     @Override // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
     IHwBinder asBinder();
@@ -86,7 +90,8 @@ public interface IGnssAntennaInfoCallback extends IBase {
         return asInterface(iface.asBinder());
     }
 
-    static IGnssAntennaInfoCallback getService(String serviceName, boolean retry) throws RemoteException {
+    static IGnssAntennaInfoCallback getService(String serviceName, boolean retry)
+            throws RemoteException {
         return asInterface(HwBinder.getService(kInterfaceName, serviceName, retry));
     }
 
@@ -138,7 +143,8 @@ public interface IGnssAntennaInfoCallback extends IBase {
             ArrayList<Row> _hidl_vec = new ArrayList<>();
             HwBlob _hidl_blob = parcel.readBuffer(16L);
             int _hidl_vec_size = _hidl_blob.getInt32(8L);
-            HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 16, _hidl_blob.handle(), 0L, true);
+            HwBlob childBlob =
+                    parcel.readEmbeddedBuffer(_hidl_vec_size * 16, _hidl_blob.handle(), 0L, true);
             _hidl_vec.clear();
             for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                 Row _hidl_vec_element = new Row();
@@ -148,9 +154,12 @@ public interface IGnssAntennaInfoCallback extends IBase {
             return _hidl_vec;
         }
 
-        public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+        public final void readEmbeddedFromParcel(
+                HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
             int _hidl_vec_size = _hidl_blob.getInt32(_hidl_offset + 0 + 8);
-            HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 8, _hidl_blob.handle(), _hidl_offset + 0 + 0, true);
+            HwBlob childBlob =
+                    parcel.readEmbeddedBuffer(
+                            _hidl_vec_size * 8, _hidl_blob.handle(), _hidl_offset + 0 + 0, true);
             this.row.clear();
             for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                 double _hidl_vec_element = childBlob.getDouble(_hidl_index_0 * 8);
@@ -205,18 +214,41 @@ public interface IGnssAntennaInfoCallback extends IBase {
                 return false;
             }
             Coord other = (Coord) otherObject;
-            if (this.x == other.x && this.xUncertainty == other.xUncertainty && this.y == other.y && this.yUncertainty == other.yUncertainty && this.z == other.z && this.zUncertainty == other.zUncertainty) {
+            if (this.x == other.x
+                    && this.xUncertainty == other.xUncertainty
+                    && this.y == other.y
+                    && this.yUncertainty == other.yUncertainty
+                    && this.z == other.z
+                    && this.zUncertainty == other.zUncertainty) {
                 return true;
             }
             return false;
         }
 
         public final int hashCode() {
-            return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Double.valueOf(this.x))), Integer.valueOf(HidlSupport.deepHashCode(Double.valueOf(this.xUncertainty))), Integer.valueOf(HidlSupport.deepHashCode(Double.valueOf(this.y))), Integer.valueOf(HidlSupport.deepHashCode(Double.valueOf(this.yUncertainty))), Integer.valueOf(HidlSupport.deepHashCode(Double.valueOf(this.z))), Integer.valueOf(HidlSupport.deepHashCode(Double.valueOf(this.zUncertainty))));
+            return Objects.hash(
+                    Integer.valueOf(HidlSupport.deepHashCode(Double.valueOf(this.x))),
+                    Integer.valueOf(HidlSupport.deepHashCode(Double.valueOf(this.xUncertainty))),
+                    Integer.valueOf(HidlSupport.deepHashCode(Double.valueOf(this.y))),
+                    Integer.valueOf(HidlSupport.deepHashCode(Double.valueOf(this.yUncertainty))),
+                    Integer.valueOf(HidlSupport.deepHashCode(Double.valueOf(this.z))),
+                    Integer.valueOf(HidlSupport.deepHashCode(Double.valueOf(this.zUncertainty))));
         }
 
         public final String toString() {
-            return "{.x = " + this.x + ", .xUncertainty = " + this.xUncertainty + ", .y = " + this.y + ", .yUncertainty = " + this.yUncertainty + ", .z = " + this.z + ", .zUncertainty = " + this.zUncertainty + "}";
+            return "{.x = "
+                    + this.x
+                    + ", .xUncertainty = "
+                    + this.xUncertainty
+                    + ", .y = "
+                    + this.y
+                    + ", .yUncertainty = "
+                    + this.yUncertainty
+                    + ", .z = "
+                    + this.z
+                    + ", .zUncertainty = "
+                    + this.zUncertainty
+                    + "}";
         }
 
         public final void readFromParcel(HwParcel parcel) {
@@ -228,7 +260,8 @@ public interface IGnssAntennaInfoCallback extends IBase {
             ArrayList<Coord> _hidl_vec = new ArrayList<>();
             HwBlob _hidl_blob = parcel.readBuffer(16L);
             int _hidl_vec_size = _hidl_blob.getInt32(8L);
-            HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 48, _hidl_blob.handle(), 0L, true);
+            HwBlob childBlob =
+                    parcel.readEmbeddedBuffer(_hidl_vec_size * 48, _hidl_blob.handle(), 0L, true);
             _hidl_vec.clear();
             for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                 Coord _hidl_vec_element = new Coord();
@@ -238,7 +271,8 @@ public interface IGnssAntennaInfoCallback extends IBase {
             return _hidl_vec;
         }
 
-        public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+        public final void readEmbeddedFromParcel(
+                HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
             this.x = _hidl_blob.getDouble(0 + _hidl_offset);
             this.xUncertainty = _hidl_blob.getDouble(8 + _hidl_offset);
             this.y = _hidl_blob.getDouble(16 + _hidl_offset);
@@ -280,7 +314,8 @@ public interface IGnssAntennaInfoCallback extends IBase {
         public double carrierFrequencyMHz = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
         public Coord phaseCenterOffsetCoordinateMillimeters = new Coord();
         public ArrayList<Row> phaseCenterVariationCorrectionMillimeters = new ArrayList<>();
-        public ArrayList<Row> phaseCenterVariationCorrectionUncertaintyMillimeters = new ArrayList<>();
+        public ArrayList<Row> phaseCenterVariationCorrectionUncertaintyMillimeters =
+                new ArrayList<>();
         public ArrayList<Row> signalGainCorrectionDbi = new ArrayList<>();
         public ArrayList<Row> signalGainCorrectionUncertaintyDbi = new ArrayList<>();
 
@@ -292,18 +327,57 @@ public interface IGnssAntennaInfoCallback extends IBase {
                 return false;
             }
             GnssAntennaInfo other = (GnssAntennaInfo) otherObject;
-            if (this.carrierFrequencyMHz == other.carrierFrequencyMHz && HidlSupport.deepEquals(this.phaseCenterOffsetCoordinateMillimeters, other.phaseCenterOffsetCoordinateMillimeters) && HidlSupport.deepEquals(this.phaseCenterVariationCorrectionMillimeters, other.phaseCenterVariationCorrectionMillimeters) && HidlSupport.deepEquals(this.phaseCenterVariationCorrectionUncertaintyMillimeters, other.phaseCenterVariationCorrectionUncertaintyMillimeters) && HidlSupport.deepEquals(this.signalGainCorrectionDbi, other.signalGainCorrectionDbi) && HidlSupport.deepEquals(this.signalGainCorrectionUncertaintyDbi, other.signalGainCorrectionUncertaintyDbi)) {
+            if (this.carrierFrequencyMHz == other.carrierFrequencyMHz
+                    && HidlSupport.deepEquals(
+                            this.phaseCenterOffsetCoordinateMillimeters,
+                            other.phaseCenterOffsetCoordinateMillimeters)
+                    && HidlSupport.deepEquals(
+                            this.phaseCenterVariationCorrectionMillimeters,
+                            other.phaseCenterVariationCorrectionMillimeters)
+                    && HidlSupport.deepEquals(
+                            this.phaseCenterVariationCorrectionUncertaintyMillimeters,
+                            other.phaseCenterVariationCorrectionUncertaintyMillimeters)
+                    && HidlSupport.deepEquals(
+                            this.signalGainCorrectionDbi, other.signalGainCorrectionDbi)
+                    && HidlSupport.deepEquals(
+                            this.signalGainCorrectionUncertaintyDbi,
+                            other.signalGainCorrectionUncertaintyDbi)) {
                 return true;
             }
             return false;
         }
 
         public final int hashCode() {
-            return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Double.valueOf(this.carrierFrequencyMHz))), Integer.valueOf(HidlSupport.deepHashCode(this.phaseCenterOffsetCoordinateMillimeters)), Integer.valueOf(HidlSupport.deepHashCode(this.phaseCenterVariationCorrectionMillimeters)), Integer.valueOf(HidlSupport.deepHashCode(this.phaseCenterVariationCorrectionUncertaintyMillimeters)), Integer.valueOf(HidlSupport.deepHashCode(this.signalGainCorrectionDbi)), Integer.valueOf(HidlSupport.deepHashCode(this.signalGainCorrectionUncertaintyDbi)));
+            return Objects.hash(
+                    Integer.valueOf(
+                            HidlSupport.deepHashCode(Double.valueOf(this.carrierFrequencyMHz))),
+                    Integer.valueOf(
+                            HidlSupport.deepHashCode(this.phaseCenterOffsetCoordinateMillimeters)),
+                    Integer.valueOf(
+                            HidlSupport.deepHashCode(
+                                    this.phaseCenterVariationCorrectionMillimeters)),
+                    Integer.valueOf(
+                            HidlSupport.deepHashCode(
+                                    this.phaseCenterVariationCorrectionUncertaintyMillimeters)),
+                    Integer.valueOf(HidlSupport.deepHashCode(this.signalGainCorrectionDbi)),
+                    Integer.valueOf(
+                            HidlSupport.deepHashCode(this.signalGainCorrectionUncertaintyDbi)));
         }
 
         public final String toString() {
-            return "{.carrierFrequencyMHz = " + this.carrierFrequencyMHz + ", .phaseCenterOffsetCoordinateMillimeters = " + this.phaseCenterOffsetCoordinateMillimeters + ", .phaseCenterVariationCorrectionMillimeters = " + this.phaseCenterVariationCorrectionMillimeters + ", .phaseCenterVariationCorrectionUncertaintyMillimeters = " + this.phaseCenterVariationCorrectionUncertaintyMillimeters + ", .signalGainCorrectionDbi = " + this.signalGainCorrectionDbi + ", .signalGainCorrectionUncertaintyDbi = " + this.signalGainCorrectionUncertaintyDbi + "}";
+            return "{.carrierFrequencyMHz = "
+                    + this.carrierFrequencyMHz
+                    + ", .phaseCenterOffsetCoordinateMillimeters = "
+                    + this.phaseCenterOffsetCoordinateMillimeters
+                    + ", .phaseCenterVariationCorrectionMillimeters = "
+                    + this.phaseCenterVariationCorrectionMillimeters
+                    + ", .phaseCenterVariationCorrectionUncertaintyMillimeters = "
+                    + this.phaseCenterVariationCorrectionUncertaintyMillimeters
+                    + ", .signalGainCorrectionDbi = "
+                    + this.signalGainCorrectionDbi
+                    + ", .signalGainCorrectionUncertaintyDbi = "
+                    + this.signalGainCorrectionUncertaintyDbi
+                    + "}";
         }
 
         public final void readFromParcel(HwParcel parcel) {
@@ -315,7 +389,8 @@ public interface IGnssAntennaInfoCallback extends IBase {
             ArrayList<GnssAntennaInfo> _hidl_vec = new ArrayList<>();
             HwBlob _hidl_blob = parcel.readBuffer(16L);
             int _hidl_vec_size = _hidl_blob.getInt32(8L);
-            HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 120, _hidl_blob.handle(), 0L, true);
+            HwBlob childBlob =
+                    parcel.readEmbeddedBuffer(_hidl_vec_size * 120, _hidl_blob.handle(), 0L, true);
             _hidl_vec.clear();
             for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                 GnssAntennaInfo _hidl_vec_element = new GnssAntennaInfo();
@@ -325,11 +400,15 @@ public interface IGnssAntennaInfoCallback extends IBase {
             return _hidl_vec;
         }
 
-        public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+        public final void readEmbeddedFromParcel(
+                HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
             this.carrierFrequencyMHz = _hidl_blob.getDouble(_hidl_offset + 0);
-            this.phaseCenterOffsetCoordinateMillimeters.readEmbeddedFromParcel(parcel, _hidl_blob, _hidl_offset + 8);
+            this.phaseCenterOffsetCoordinateMillimeters.readEmbeddedFromParcel(
+                    parcel, _hidl_blob, _hidl_offset + 8);
             int _hidl_vec_size = _hidl_blob.getInt32(_hidl_offset + 56 + 8);
-            HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 16, _hidl_blob.handle(), _hidl_offset + 56 + 0, true);
+            HwBlob childBlob =
+                    parcel.readEmbeddedBuffer(
+                            _hidl_vec_size * 16, _hidl_blob.handle(), _hidl_offset + 56 + 0, true);
             this.phaseCenterVariationCorrectionMillimeters.clear();
             for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                 Row _hidl_vec_element = new Row();
@@ -337,7 +416,9 @@ public interface IGnssAntennaInfoCallback extends IBase {
                 this.phaseCenterVariationCorrectionMillimeters.add(_hidl_vec_element);
             }
             int _hidl_vec_size2 = _hidl_blob.getInt32(_hidl_offset + 72 + 8);
-            HwBlob childBlob2 = parcel.readEmbeddedBuffer(_hidl_vec_size2 * 16, _hidl_blob.handle(), _hidl_offset + 72 + 0, true);
+            HwBlob childBlob2 =
+                    parcel.readEmbeddedBuffer(
+                            _hidl_vec_size2 * 16, _hidl_blob.handle(), _hidl_offset + 72 + 0, true);
             this.phaseCenterVariationCorrectionUncertaintyMillimeters.clear();
             for (int _hidl_index_02 = 0; _hidl_index_02 < _hidl_vec_size2; _hidl_index_02++) {
                 Row _hidl_vec_element2 = new Row();
@@ -345,7 +426,9 @@ public interface IGnssAntennaInfoCallback extends IBase {
                 this.phaseCenterVariationCorrectionUncertaintyMillimeters.add(_hidl_vec_element2);
             }
             int _hidl_vec_size3 = _hidl_blob.getInt32(_hidl_offset + 88 + 8);
-            HwBlob childBlob3 = parcel.readEmbeddedBuffer(_hidl_vec_size3 * 16, _hidl_blob.handle(), _hidl_offset + 88 + 0, true);
+            HwBlob childBlob3 =
+                    parcel.readEmbeddedBuffer(
+                            _hidl_vec_size3 * 16, _hidl_blob.handle(), _hidl_offset + 88 + 0, true);
             this.signalGainCorrectionDbi.clear();
             for (int _hidl_index_03 = 0; _hidl_index_03 < _hidl_vec_size3; _hidl_index_03++) {
                 Row _hidl_vec_element3 = new Row();
@@ -353,7 +436,12 @@ public interface IGnssAntennaInfoCallback extends IBase {
                 this.signalGainCorrectionDbi.add(_hidl_vec_element3);
             }
             int _hidl_vec_size4 = _hidl_blob.getInt32(_hidl_offset + 104 + 8);
-            HwBlob childBlob4 = parcel.readEmbeddedBuffer(_hidl_vec_size4 * 16, _hidl_blob.handle(), _hidl_offset + 104 + 0, true);
+            HwBlob childBlob4 =
+                    parcel.readEmbeddedBuffer(
+                            _hidl_vec_size4 * 16,
+                            _hidl_blob.handle(),
+                            _hidl_offset + 104 + 0,
+                            true);
             this.signalGainCorrectionUncertaintyDbi.clear();
             for (int _hidl_index_04 = 0; _hidl_index_04 < _hidl_vec_size4; _hidl_index_04++) {
                 Row _hidl_vec_element4 = new Row();
@@ -368,7 +456,8 @@ public interface IGnssAntennaInfoCallback extends IBase {
             parcel.writeBuffer(_hidl_blob);
         }
 
-        public static final void writeVectorToParcel(HwParcel parcel, ArrayList<GnssAntennaInfo> _hidl_vec) {
+        public static final void writeVectorToParcel(
+                HwParcel parcel, ArrayList<GnssAntennaInfo> _hidl_vec) {
             HwBlob _hidl_blob = new HwBlob(16);
             int _hidl_vec_size = _hidl_vec.size();
             _hidl_blob.putInt32(8L, _hidl_vec_size);
@@ -383,13 +472,16 @@ public interface IGnssAntennaInfoCallback extends IBase {
 
         public final void writeEmbeddedToBlob(HwBlob _hidl_blob, long _hidl_offset) {
             _hidl_blob.putDouble(_hidl_offset + 0, this.carrierFrequencyMHz);
-            this.phaseCenterOffsetCoordinateMillimeters.writeEmbeddedToBlob(_hidl_blob, _hidl_offset + 8);
+            this.phaseCenterOffsetCoordinateMillimeters.writeEmbeddedToBlob(
+                    _hidl_blob, _hidl_offset + 8);
             int _hidl_vec_size = this.phaseCenterVariationCorrectionMillimeters.size();
             _hidl_blob.putInt32(_hidl_offset + 56 + 8, _hidl_vec_size);
             _hidl_blob.putBool(_hidl_offset + 56 + 12, false);
             HwBlob childBlob = new HwBlob(_hidl_vec_size * 16);
             for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
-                this.phaseCenterVariationCorrectionMillimeters.get(_hidl_index_0).writeEmbeddedToBlob(childBlob, _hidl_index_0 * 16);
+                this.phaseCenterVariationCorrectionMillimeters
+                        .get(_hidl_index_0)
+                        .writeEmbeddedToBlob(childBlob, _hidl_index_0 * 16);
             }
             _hidl_blob.putBlob(_hidl_offset + 56 + 0, childBlob);
             int _hidl_vec_size2 = this.phaseCenterVariationCorrectionUncertaintyMillimeters.size();
@@ -397,7 +489,9 @@ public interface IGnssAntennaInfoCallback extends IBase {
             _hidl_blob.putBool(_hidl_offset + 72 + 12, false);
             HwBlob childBlob2 = new HwBlob(_hidl_vec_size2 * 16);
             for (int _hidl_index_02 = 0; _hidl_index_02 < _hidl_vec_size2; _hidl_index_02++) {
-                this.phaseCenterVariationCorrectionUncertaintyMillimeters.get(_hidl_index_02).writeEmbeddedToBlob(childBlob2, _hidl_index_02 * 16);
+                this.phaseCenterVariationCorrectionUncertaintyMillimeters
+                        .get(_hidl_index_02)
+                        .writeEmbeddedToBlob(childBlob2, _hidl_index_02 * 16);
             }
             _hidl_blob.putBlob(_hidl_offset + 72 + 0, childBlob2);
             int _hidl_vec_size3 = this.signalGainCorrectionDbi.size();
@@ -405,7 +499,9 @@ public interface IGnssAntennaInfoCallback extends IBase {
             _hidl_blob.putBool(_hidl_offset + 88 + 12, false);
             HwBlob childBlob3 = new HwBlob(_hidl_vec_size3 * 16);
             for (int _hidl_index_03 = 0; _hidl_index_03 < _hidl_vec_size3; _hidl_index_03++) {
-                this.signalGainCorrectionDbi.get(_hidl_index_03).writeEmbeddedToBlob(childBlob3, _hidl_index_03 * 16);
+                this.signalGainCorrectionDbi
+                        .get(_hidl_index_03)
+                        .writeEmbeddedToBlob(childBlob3, _hidl_index_03 * 16);
             }
             _hidl_blob.putBlob(_hidl_offset + 88 + 0, childBlob3);
             int _hidl_vec_size4 = this.signalGainCorrectionUncertaintyDbi.size();
@@ -413,7 +509,9 @@ public interface IGnssAntennaInfoCallback extends IBase {
             _hidl_blob.putBool(_hidl_offset + 104 + 12, false);
             HwBlob childBlob4 = new HwBlob(_hidl_vec_size4 * 16);
             for (int _hidl_index_04 = 0; _hidl_index_04 < _hidl_vec_size4; _hidl_index_04++) {
-                this.signalGainCorrectionUncertaintyDbi.get(_hidl_index_04).writeEmbeddedToBlob(childBlob4, _hidl_index_04 * 16);
+                this.signalGainCorrectionUncertaintyDbi
+                        .get(_hidl_index_04)
+                        .writeEmbeddedToBlob(childBlob4, _hidl_index_04 * 16);
             }
             _hidl_blob.putBlob(_hidl_offset + 104 + 0, childBlob4);
         }
@@ -426,7 +524,8 @@ public interface IGnssAntennaInfoCallback extends IBase {
             this.mRemote = (IHwBinder) Objects.requireNonNull(remote);
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback,
+        // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
         public IHwBinder asBinder() {
             return this.mRemote;
         }
@@ -435,7 +534,8 @@ public interface IGnssAntennaInfoCallback extends IBase {
             try {
                 return interfaceDescriptor() + "@Proxy";
             } catch (RemoteException e) {
-                return "[class or subclass of android.hardware.gnss@2.1::IGnssAntennaInfoCallback]@Proxy";
+                return "[class or subclass of"
+                        + " android.hardware.gnss@2.1::IGnssAntennaInfoCallback]@Proxy";
             }
         }
 
@@ -448,7 +548,8 @@ public interface IGnssAntennaInfoCallback extends IBase {
         }
 
         @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback
-        public void gnssAntennaInfoCb(ArrayList<GnssAntennaInfo> gnssAntennaInfos) throws RemoteException {
+        public void gnssAntennaInfoCb(ArrayList<GnssAntennaInfo> gnssAntennaInfos)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IGnssAntennaInfoCallback.kInterfaceName);
             GnssAntennaInfo.writeVectorToParcel(_hidl_request, gnssAntennaInfos);
@@ -462,7 +563,8 @@ public interface IGnssAntennaInfoCallback extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public ArrayList<String> interfaceChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -478,7 +580,8 @@ public interface IGnssAntennaInfoCallback extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public void debug(NativeHandle fd, ArrayList<String> options) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -494,7 +597,8 @@ public interface IGnssAntennaInfoCallback extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public String interfaceDescriptor() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -510,7 +614,8 @@ public interface IGnssAntennaInfoCallback extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public ArrayList<byte[]> getHashChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -522,7 +627,9 @@ public interface IGnssAntennaInfoCallback extends IBase {
                 ArrayList<byte[]> _hidl_out_hashchain = new ArrayList<>();
                 HwBlob _hidl_blob = _hidl_reply.readBuffer(16L);
                 int _hidl_vec_size = _hidl_blob.getInt32(8L);
-                HwBlob childBlob = _hidl_reply.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
+                HwBlob childBlob =
+                        _hidl_reply.readEmbeddedBuffer(
+                                _hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
                 _hidl_out_hashchain.clear();
                 for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                     byte[] _hidl_vec_element = new byte[32];
@@ -536,7 +643,8 @@ public interface IGnssAntennaInfoCallback extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public void setHALInstrumentation() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -549,12 +657,15 @@ public interface IGnssAntennaInfoCallback extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback, android.internal.hidl.base.V1_0.IBase
-        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) throws RemoteException {
+        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback,
+        // android.internal.hidl.base.V1_0.IBase
+        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie)
+                throws RemoteException {
             return this.mRemote.linkToDeath(recipient, cookie);
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public void ping() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -568,7 +679,8 @@ public interface IGnssAntennaInfoCallback extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public DebugInfo getDebugInfo() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -585,7 +697,8 @@ public interface IGnssAntennaInfoCallback extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public void notifySyspropsChanged() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -598,51 +711,128 @@ public interface IGnssAntennaInfoCallback extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) throws RemoteException {
             return this.mRemote.unlinkToDeath(recipient);
         }
     }
 
-    public static abstract class Stub extends HwBinder implements IGnssAntennaInfoCallback {
-        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+    public abstract static class Stub extends HwBinder implements IGnssAntennaInfoCallback {
+        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback,
+        // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
         public IHwBinder asBinder() {
             return this;
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public final ArrayList<String> interfaceChain() {
-            return new ArrayList<>(Arrays.asList(IGnssAntennaInfoCallback.kInterfaceName, IBase.kInterfaceName));
+            return new ArrayList<>(
+                    Arrays.asList(IGnssAntennaInfoCallback.kInterfaceName, IBase.kInterfaceName));
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback, android.internal.hidl.base.V1_0.IBase
-        public void debug(NativeHandle fd, ArrayList<String> options) {
-        }
+        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback,
+        // android.internal.hidl.base.V1_0.IBase
+        public void debug(NativeHandle fd, ArrayList<String> options) {}
 
-        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public final String interfaceDescriptor() {
             return IGnssAntennaInfoCallback.kInterfaceName;
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public final ArrayList<byte[]> getHashChain() {
-            return new ArrayList<>(Arrays.asList(new byte[]{11, -61, -19, -105, -53, -61, -10, -85, -56, -100, 104, -12, -23, -12, -47, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, -7, -9, 35, 67, 25, -105, -36, -120, -62, 24, 108, -12, -46, -83, 71, -18}, new byte[]{-20, Byte.MAX_VALUE, -41, -98, MidiConstants.STATUS_CHANNEL_PRESSURE, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60, -6, -123, -68, 73, -108, 38, -83, -82, 62, -66, 35, -17, 5, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, MidiConstants.STATUS_SONG_SELECT, -51, 105, 87, 19, -109, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, -72, 59, 24, -54, 76}));
+            return new ArrayList<>(
+                    Arrays.asList(
+                            new byte[] {
+                                11,
+                                -61,
+                                -19,
+                                -105,
+                                -53,
+                                -61,
+                                -10,
+                                -85,
+                                -56,
+                                -100,
+                                104,
+                                -12,
+                                -23,
+                                -12,
+                                -47,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                -7,
+                                -9,
+                                35,
+                                67,
+                                25,
+                                -105,
+                                -36,
+                                -120,
+                                -62,
+                                24,
+                                108,
+                                -12,
+                                -46,
+                                -83,
+                                71,
+                                -18
+                            },
+                            new byte[] {
+                                -20,
+                                Byte.MAX_VALUE,
+                                -41,
+                                -98,
+                                MidiConstants.STATUS_CHANNEL_PRESSURE,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60,
+                                -6,
+                                -123,
+                                -68,
+                                73,
+                                -108,
+                                38,
+                                -83,
+                                -82,
+                                62,
+                                -66,
+                                35,
+                                -17,
+                                5,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                MidiConstants.STATUS_SONG_SELECT,
+                                -51,
+                                105,
+                                87,
+                                19,
+                                -109,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                -72,
+                                59,
+                                24,
+                                -54,
+                                76
+                            }));
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback, android.internal.hidl.base.V1_0.IBase
-        public final void setHALInstrumentation() {
-        }
+        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback,
+        // android.internal.hidl.base.V1_0.IBase
+        public final void setHALInstrumentation() {}
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) {
             return true;
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback, android.internal.hidl.base.V1_0.IBase
-        public final void ping() {
-        }
+        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback,
+        // android.internal.hidl.base.V1_0.IBase
+        public final void ping() {}
 
-        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public final DebugInfo getDebugInfo() {
             DebugInfo info = new DebugInfo();
             info.pid = HidlSupport.getPidIfSharable();
@@ -651,12 +841,14 @@ public interface IGnssAntennaInfoCallback extends IBase {
             return info;
         }
 
-        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_1.IGnssAntennaInfoCallback,
+        // android.internal.hidl.base.V1_0.IBase
         public final void notifySyspropsChanged() {
             HwBinder.enableInstrumentation();
         }
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) {
             return true;
         }
@@ -678,11 +870,14 @@ public interface IGnssAntennaInfoCallback extends IBase {
         }
 
         @Override // android.os.HwBinder
-        public void onTransact(int _hidl_code, HwParcel _hidl_request, HwParcel _hidl_reply, int _hidl_flags) throws RemoteException {
+        public void onTransact(
+                int _hidl_code, HwParcel _hidl_request, HwParcel _hidl_reply, int _hidl_flags)
+                throws RemoteException {
             switch (_hidl_code) {
                 case 1:
                     _hidl_request.enforceInterface(IGnssAntennaInfoCallback.kInterfaceName);
-                    ArrayList<GnssAntennaInfo> gnssAntennaInfos = GnssAntennaInfo.readVectorFromParcel(_hidl_request);
+                    ArrayList<GnssAntennaInfo> gnssAntennaInfos =
+                            GnssAntennaInfo.readVectorFromParcel(_hidl_request);
                     gnssAntennaInfoCb(gnssAntennaInfos);
                     _hidl_reply.writeStatus(0);
                     _hidl_reply.send();
@@ -722,7 +917,8 @@ public interface IGnssAntennaInfoCallback extends IBase {
                         long _hidl_array_offset_1 = _hidl_index_0 * 32;
                         byte[] _hidl_array_item_1 = _hidl_out_hashchain.get(_hidl_index_0);
                         if (_hidl_array_item_1 == null || _hidl_array_item_1.length != 32) {
-                            throw new IllegalArgumentException("Array element is not of the expected length");
+                            throw new IllegalArgumentException(
+                                    "Array element is not of the expected length");
                         }
                         childBlob.putInt8Array(_hidl_array_offset_1, _hidl_array_item_1);
                     }

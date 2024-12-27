@@ -3,23 +3,26 @@ package android.view.inputmethod;
 import android.graphics.PointF;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class InsertGesture extends HandwritingGesture implements Parcelable {
-    public static final Parcelable.Creator<InsertGesture> CREATOR = new Parcelable.Creator<InsertGesture>() { // from class: android.view.inputmethod.InsertGesture.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InsertGesture createFromParcel(Parcel source) {
-            return new InsertGesture(source);
-        }
+    public static final Parcelable.Creator<InsertGesture> CREATOR =
+            new Parcelable.Creator<
+                    InsertGesture>() { // from class: android.view.inputmethod.InsertGesture.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InsertGesture createFromParcel(Parcel source) {
+                    return new InsertGesture(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InsertGesture[] newArray(int size) {
-            return new InsertGesture[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InsertGesture[] newArray(int size) {
+                    return new InsertGesture[size];
+                }
+            };
     private PointF mPoint;
     private String mTextToInsert;
 
@@ -88,7 +91,8 @@ public final class InsertGesture extends HandwritingGesture implements Parcelabl
             return false;
         }
         InsertGesture that = (InsertGesture) o;
-        if (Objects.equals(this.mFallbackText, that.mFallbackText) && Objects.equals(this.mTextToInsert, that.mTextToInsert)) {
+        if (Objects.equals(this.mFallbackText, that.mFallbackText)
+                && Objects.equals(this.mTextToInsert, that.mTextToInsert)) {
             return Objects.equals(this.mPoint, that.mPoint);
         }
         return false;

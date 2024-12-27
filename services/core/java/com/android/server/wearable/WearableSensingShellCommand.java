@@ -8,9 +8,10 @@ import android.os.PersistableBundle;
 import android.os.RemoteCallback;
 import android.os.ShellCommand;
 import android.util.Slog;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.am.ActiveServices$$ExternalSyntheticOutline0;
-import com.android.server.wearable.WearableSensingShellCommand;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.Duration;
@@ -19,7 +20,8 @@ import java.time.Duration;
 /* loaded from: classes2.dex */
 public final class WearableSensingShellCommand extends ShellCommand {
     public static ParcelFileDescriptor[] sPipe;
-    public static final TestableCallbackInternal sTestableCallbackInternal = new TestableCallbackInternal();
+    public static final TestableCallbackInternal sTestableCallbackInternal =
+            new TestableCallbackInternal();
     public final WearableSensingManagerService mService;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -27,7 +29,8 @@ public final class WearableSensingShellCommand extends ShellCommand {
         public int mLastStatus;
     }
 
-    public WearableSensingShellCommand(WearableSensingManagerService wearableSensingManagerService) {
+    public WearableSensingShellCommand(
+            WearableSensingManagerService wearableSensingManagerService) {
         this.mService = wearableSensingManagerService;
     }
 
@@ -44,7 +47,10 @@ public final class WearableSensingShellCommand extends ShellCommand {
                 WearableSensingManagerService wearableSensingManagerService = this.mService;
                 synchronized (wearableSensingManagerService.mLock) {
                     try {
-                        WearableSensingManagerPerUserService wearableSensingManagerPerUserService = (WearableSensingManagerPerUserService) wearableSensingManagerService.getServiceForUserLocked(parseInt);
+                        WearableSensingManagerPerUserService wearableSensingManagerPerUserService =
+                                (WearableSensingManagerPerUserService)
+                                        wearableSensingManagerService.getServiceForUserLocked(
+                                                parseInt);
                         if (wearableSensingManagerPerUserService != null) {
                             componentName = wearableSensingManagerPerUserService.getComponentName();
                         }
@@ -57,7 +63,8 @@ public final class WearableSensingShellCommand extends ShellCommand {
                 Slog.d("WearableSensingShellCommand", "writeToDataStream");
                 if (sPipe != null) {
                     try {
-                        new ParcelFileDescriptor.AutoCloseOutputStream(sPipe[1].dup()).write(getNextArgRequired().getBytes());
+                        new ParcelFileDescriptor.AutoCloseOutputStream(sPipe[1].dup())
+                                .write(getNextArgRequired().getBytes());
                     } catch (IOException e) {
                         Slog.d("WearableSensingShellCommand", "Failed to writeToDataStream.", e);
                     }
@@ -94,21 +101,34 @@ public final class WearableSensingShellCommand extends ShellCommand {
                 int parseInt4 = Integer.parseInt(getNextArgRequired());
                 PersistableBundle persistableBundle = new PersistableBundle();
                 persistableBundle.putInt(nextArgRequired, parseInt4);
-                this.mService.provideData(parseInt3, persistableBundle, null, new RemoteCallback(new RemoteCallback.OnResultListener() { // from class: com.android.server.wearable.WearableSensingShellCommand$TestableCallbackInternal$$ExternalSyntheticLambda0
-                    public final /* synthetic */ WearableSensingShellCommand.TestableCallbackInternal f$0 = WearableSensingShellCommand.sTestableCallbackInternal;
+                this.mService.provideData(
+                        parseInt3,
+                        persistableBundle,
+                        null,
+                        new RemoteCallback(
+                                new RemoteCallback.OnResultListener() { // from class:
+                                    // com.android.server.wearable.WearableSensingShellCommand$TestableCallbackInternal$$ExternalSyntheticLambda0
+                                    public final /* synthetic */ WearableSensingShellCommand
+                                                    .TestableCallbackInternal
+                                            f$0 =
+                                                    WearableSensingShellCommand
+                                                            .sTestableCallbackInternal;
 
-                    public final void onResult(Bundle bundle) {
-                        WearableSensingShellCommand.TestableCallbackInternal testableCallbackInternal = this.f$0;
-                        testableCallbackInternal.getClass();
-                        int i = bundle.getInt("android.app.wearable.WearableSensingStatusBundleKey");
-                        long clearCallingIdentity = Binder.clearCallingIdentity();
-                        try {
-                            testableCallbackInternal.mLastStatus = i;
-                        } finally {
-                            Binder.restoreCallingIdentity(clearCallingIdentity);
-                        }
-                    }
-                }));
+                                    public final void onResult(Bundle bundle) {
+                                        WearableSensingShellCommand.TestableCallbackInternal
+                                                testableCallbackInternal = this.f$0;
+                                        testableCallbackInternal.getClass();
+                                        int i =
+                                                bundle.getInt(
+                                                        "android.app.wearable.WearableSensingStatusBundleKey");
+                                        long clearCallingIdentity = Binder.clearCallingIdentity();
+                                        try {
+                                            testableCallbackInternal.mLastStatus = i;
+                                        } finally {
+                                            Binder.restoreCallingIdentity(clearCallingIdentity);
+                                        }
+                                    }
+                                }));
                 return 0;
             case "create-data-stream":
                 Slog.d("WearableSensingShellCommand", "createDataStream");
@@ -128,27 +148,47 @@ public final class WearableSensingShellCommand extends ShellCommand {
                 } else {
                     int parseInt6 = Integer.parseInt(getNextArgRequired());
                     this.mService.setTemporaryService(parseInt5, nextArg, parseInt6);
-                    outPrintWriter2.println(ActiveServices$$ExternalSyntheticOutline0.m(parseInt6, nextArg, " for ", "ms", new StringBuilder("WearableSensingService temporarily set to ")));
+                    outPrintWriter2.println(
+                            ActiveServices$$ExternalSyntheticOutline0.m(
+                                    parseInt6,
+                                    nextArg,
+                                    " for ",
+                                    "ms",
+                                    new StringBuilder(
+                                            "WearableSensingService temporarily set to ")));
                 }
                 return 0;
             case "provide-data-stream":
                 Slog.d("WearableSensingShellCommand", "provideDataStream");
                 if (sPipe != null) {
-                    this.mService.provideDataStream(Integer.parseInt(getNextArgRequired()), sPipe[0], new RemoteCallback(new RemoteCallback.OnResultListener() { // from class: com.android.server.wearable.WearableSensingShellCommand$TestableCallbackInternal$$ExternalSyntheticLambda0
-                        public final /* synthetic */ WearableSensingShellCommand.TestableCallbackInternal f$0 = WearableSensingShellCommand.sTestableCallbackInternal;
+                    this.mService.provideDataStream(
+                            Integer.parseInt(getNextArgRequired()),
+                            sPipe[0],
+                            new RemoteCallback(
+                                    new RemoteCallback.OnResultListener() { // from class:
+                                        // com.android.server.wearable.WearableSensingShellCommand$TestableCallbackInternal$$ExternalSyntheticLambda0
+                                        public final /* synthetic */ WearableSensingShellCommand
+                                                        .TestableCallbackInternal
+                                                f$0 =
+                                                        WearableSensingShellCommand
+                                                                .sTestableCallbackInternal;
 
-                        public final void onResult(Bundle bundle) {
-                            WearableSensingShellCommand.TestableCallbackInternal testableCallbackInternal = this.f$0;
-                            testableCallbackInternal.getClass();
-                            int i = bundle.getInt("android.app.wearable.WearableSensingStatusBundleKey");
-                            long clearCallingIdentity = Binder.clearCallingIdentity();
-                            try {
-                                testableCallbackInternal.mLastStatus = i;
-                            } finally {
-                                Binder.restoreCallingIdentity(clearCallingIdentity);
-                            }
-                        }
-                    }));
+                                        public final void onResult(Bundle bundle) {
+                                            WearableSensingShellCommand.TestableCallbackInternal
+                                                    testableCallbackInternal = this.f$0;
+                                            testableCallbackInternal.getClass();
+                                            int i =
+                                                    bundle.getInt(
+                                                            "android.app.wearable.WearableSensingStatusBundleKey");
+                                            long clearCallingIdentity =
+                                                    Binder.clearCallingIdentity();
+                                            try {
+                                                testableCallbackInternal.mLastStatus = i;
+                                            } finally {
+                                                Binder.restoreCallingIdentity(clearCallingIdentity);
+                                            }
+                                        }
+                                    }));
                 }
                 return 0;
             case "get-last-status-code":
@@ -167,9 +207,26 @@ public final class WearableSensingShellCommand extends ShellCommand {
         outPrintWriter.println("    Print this help text.");
         outPrintWriter.println();
         outPrintWriter.println("  create-data-stream: Creates a data stream to be provided.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  destroy-data-stream: Destroys a data stream if one was previously created.", "  provide-data-stream USER_ID: Provides data stream to WearableSensingService.", "  write-to-data-stream STRING: writes string to data stream.", "  provide-data USER_ID KEY INTEGER: provide integer as data with key.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  get-last-status-code: Prints the latest request status code.", "  get-bound-package USER_ID:     Print the bound package that implements the service.", "  set-temporary-service USER_ID [PACKAGE_NAME] [COMPONENT_NAME DURATION]", "    Temporarily (for DURATION ms) changes the service implementation.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    To reset, call with just the USER_ID argument.", "  set-data-request-rate-limit-window-size WINDOW_SIZE", "    Set the window size used in data request rate limiting to WINDOW_SIZE seconds.", "    positive WINDOW_SIZE smaller than 20 will be automatically set to 20.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  destroy-data-stream: Destroys a data stream if one was previously created.",
+                "  provide-data-stream USER_ID: Provides data stream to WearableSensingService.",
+                "  write-to-data-stream STRING: writes string to data stream.",
+                "  provide-data USER_ID KEY INTEGER: provide integer as data with key.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  get-last-status-code: Prints the latest request status code.",
+                "  get-bound-package USER_ID:     Print the bound package that implements the"
+                    + " service.",
+                "  set-temporary-service USER_ID [PACKAGE_NAME] [COMPONENT_NAME DURATION]",
+                "    Temporarily (for DURATION ms) changes the service implementation.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    To reset, call with just the USER_ID argument.",
+                "  set-data-request-rate-limit-window-size WINDOW_SIZE",
+                "    Set the window size used in data request rate limiting to WINDOW_SIZE"
+                    + " seconds.",
+                "    positive WINDOW_SIZE smaller than 20 will be automatically set to 20.");
         outPrintWriter.println("    To reset, call with 0 or a negative WINDOW_SIZE.");
     }
 }

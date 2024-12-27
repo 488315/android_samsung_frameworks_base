@@ -1,8 +1,8 @@
 package android.media;
 
 import android.graphics.Rect;
-import android.media.MediaFormat;
 import android.text.TextUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.nio.ByteBuffer;
@@ -47,7 +47,8 @@ public final class MediaFormat {
     public static final String KEY_BITRATE_MODE = "bitrate-mode";
     public static final String KEY_BIT_RATE = "bitrate";
     public static final String KEY_BUFFER_BATCH_MAX_OUTPUT_SIZE = "buffer-batch-max-output-size";
-    public static final String KEY_BUFFER_BATCH_THRESHOLD_OUTPUT_SIZE = "buffer-batch-threshold-output-size";
+    public static final String KEY_BUFFER_BATCH_THRESHOLD_OUTPUT_SIZE =
+            "buffer-batch-threshold-output-size";
     public static final String KEY_CAPTION_SERVICE_NUMBER = "caption-service-number";
     public static final String KEY_CAPTURE_RATE = "capture-rate";
     public static final String KEY_CA_PRIVATE_DATA = "ca-private-data";
@@ -62,7 +63,8 @@ public final class MediaFormat {
     public static final String KEY_COLOR_TRANSFER = "color-transfer";
     public static final String KEY_COLOR_TRANSFER_REQUEST = "color-transfer-request";
     public static final String KEY_COMPLEXITY = "complexity";
-    public static final String KEY_CREATE_INPUT_SURFACE_SUSPENDED = "create-input-buffers-suspended";
+    public static final String KEY_CREATE_INPUT_SURFACE_SUSPENDED =
+            "create-input-buffers-suspended";
     public static final String KEY_CROP_BOTTOM = "crop-bottom";
     public static final String KEY_CROP_LEFT = "crop-left";
     public static final String KEY_CROP_RIGHT = "crop-right";
@@ -102,8 +104,10 @@ public final class MediaFormat {
     public static final String KEY_MAX_WIDTH = "max-width";
     public static final String KEY_MIME = "mime";
     public static final String KEY_MPEGH_COMPATIBLE_SETS = "mpegh-compatible-sets";
-    public static final String KEY_MPEGH_PROFILE_LEVEL_INDICATION = "mpegh-profile-level-indication";
-    public static final String KEY_MPEGH_REFERENCE_CHANNEL_LAYOUT = "mpegh-reference-channel-layout";
+    public static final String KEY_MPEGH_PROFILE_LEVEL_INDICATION =
+            "mpegh-profile-level-indication";
+    public static final String KEY_MPEGH_REFERENCE_CHANNEL_LAYOUT =
+            "mpegh-reference-channel-layout";
     public static final String KEY_OPERATING_RATE = "operating-rate";
     public static final String KEY_OUTPUT_REORDER_DEPTH = "output-reorder-depth";
     public static final String KEY_PCM_ENCODING = "pcm-encoding";
@@ -126,7 +130,8 @@ public final class MediaFormat {
     public static final String KEY_TILE_HEIGHT = "tile-height";
     public static final String KEY_TILE_WIDTH = "tile-width";
     public static final String KEY_TRACK_ID = "track-id";
-    public static final String KEY_VIDEO_ENCODING_STATISTICS_LEVEL = "video-encoding-statistics-level";
+    public static final String KEY_VIDEO_ENCODING_STATISTICS_LEVEL =
+            "video-encoding-statistics-level";
     public static final String KEY_VIDEO_QP_AVERAGE = "video-qp-average";
     public static final String KEY_VIDEO_QP_B_MAX = "video-qp-b-max";
     public static final String KEY_VIDEO_QP_B_MIN = "video-qp-b-min";
@@ -207,32 +212,25 @@ public final class MediaFormat {
     private Map<String, Object> mMap;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ColorRange {
-    }
+    public @interface ColorRange {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ColorStandard {
-    }
+    public @interface ColorStandard {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ColorTransfer {
-    }
+    public @interface ColorTransfer {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PictureType {
-    }
+    public @interface PictureType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SecurityModelFlag {
-    }
+    public @interface SecurityModelFlag {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Type {
-    }
+    public @interface Type {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface VideoEncodingStatisticsLevel {
-    }
+    public @interface VideoEncodingStatisticsLevel {}
 
     public static final class QpOffsetRect {
         private Rect mContour;
@@ -249,7 +247,13 @@ public final class MediaFormat {
         }
 
         public String flattenToString() {
-            return TextUtils.formatSimple("%d,%d-%d,%d=%d;", Integer.valueOf(this.mContour.top), Integer.valueOf(this.mContour.left), Integer.valueOf(this.mContour.bottom), Integer.valueOf(this.mContour.right), Integer.valueOf(this.mQpOffset));
+            return TextUtils.formatSimple(
+                    "%d,%d-%d,%d=%d;",
+                    Integer.valueOf(this.mContour.top),
+                    Integer.valueOf(this.mContour.left),
+                    Integer.valueOf(this.mContour.bottom),
+                    Integer.valueOf(this.mContour.right),
+                    Integer.valueOf(this.mQpOffset));
         }
 
         public static String flattenToString(List<QpOffsetRect> qpOffsetRects) {
@@ -444,14 +448,27 @@ public final class MediaFormat {
             String mLast;
 
             public KeyIterator() {
-                this.mIterator = ((List) FilteredMappedKeySet.this.mKeys.stream().filter(new Predicate() { // from class: android.media.MediaFormat$FilteredMappedKeySet$KeyIterator$$ExternalSyntheticLambda0
-                    @Override // java.util.function.Predicate
-                    public final boolean test(Object obj) {
-                        boolean lambda$new$0;
-                        lambda$new$0 = MediaFormat.FilteredMappedKeySet.KeyIterator.this.lambda$new$0((String) obj);
-                        return lambda$new$0;
-                    }
-                }).collect(Collectors.toList())).iterator();
+                this.mIterator =
+                        ((List)
+                                        FilteredMappedKeySet.this.mKeys.stream()
+                                                .filter(
+                                                        new Predicate() { // from class:
+                                                            // android.media.MediaFormat$FilteredMappedKeySet$KeyIterator$$ExternalSyntheticLambda0
+                                                            @Override // java.util.function.Predicate
+                                                            public final boolean test(Object obj) {
+                                                                boolean lambda$new$0;
+                                                                lambda$new$0 =
+                                                                        MediaFormat
+                                                                                .FilteredMappedKeySet
+                                                                                .KeyIterator.this
+                                                                                .lambda$new$0(
+                                                                                        (String)
+                                                                                                obj);
+                                                                return lambda$new$0;
+                                                            }
+                                                        })
+                                                .collect(Collectors.toList()))
+                                .iterator();
             }
 
             /* JADX INFO: Access modifiers changed from: private */
@@ -477,19 +494,26 @@ public final class MediaFormat {
             }
         }
 
-        @Override // java.util.AbstractCollection, java.util.Collection, java.lang.Iterable, java.util.Set
+        @Override // java.util.AbstractCollection, java.util.Collection, java.lang.Iterable,
+        // java.util.Set
         public Iterator<String> iterator() {
             return new KeyIterator();
         }
 
         @Override // java.util.AbstractCollection, java.util.Collection, java.util.Set
         public int size() {
-            return (int) this.mKeys.stream().filter(new Predicate() { // from class: android.media.MediaFormat$FilteredMappedKeySet$$ExternalSyntheticLambda0
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    return MediaFormat.FilteredMappedKeySet.this.keepKey((String) obj);
-                }
-            }).count();
+            return (int)
+                    this.mKeys.stream()
+                            .filter(
+                                    new Predicate() { // from class:
+                                        // android.media.MediaFormat$FilteredMappedKeySet$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.Predicate
+                                        public final boolean test(Object obj) {
+                                            return MediaFormat.FilteredMappedKeySet.this.keepKey(
+                                                    (String) obj);
+                                        }
+                                    })
+                            .count();
         }
     }
 
@@ -560,7 +584,8 @@ public final class MediaFormat {
         setInteger(KEY_FEATURE_ + str, z ? 1 : 0);
     }
 
-    public static final MediaFormat createAudioFormat(String mime, int sampleRate, int channelCount) {
+    public static final MediaFormat createAudioFormat(
+            String mime, int sampleRate, int channelCount) {
         MediaFormat format = new MediaFormat();
         format.setString("mime", mime);
         format.setInteger(KEY_SAMPLE_RATE, sampleRate);

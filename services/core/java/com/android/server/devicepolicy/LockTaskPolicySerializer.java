@@ -3,11 +3,14 @@ package com.android.server.devicepolicy;
 import android.app.admin.LockTaskPolicy;
 import android.app.admin.PolicyValue;
 import android.util.Log;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.util.Objects;
 import java.util.Set;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -20,7 +23,9 @@ public final class LockTaskPolicySerializer extends PolicySerializer {
             return null;
         }
         try {
-            return new LockTaskPolicy(Set.of((Object[]) attributeValue.split(";")), typedXmlPullParser.getAttributeInt((String) null, "flags"));
+            return new LockTaskPolicy(
+                    Set.of((Object[]) attributeValue.split(";")),
+                    typedXmlPullParser.getAttributeInt((String) null, "flags"));
         } catch (XmlPullParserException e) {
             Log.e("LockTaskPolicySerializer", "Error parsing LockTask policy value", e);
             return null;
@@ -31,7 +36,8 @@ public final class LockTaskPolicySerializer extends PolicySerializer {
     public final void saveToXml(Object obj, TypedXmlSerializer typedXmlSerializer) {
         LockTaskPolicy lockTaskPolicy = (LockTaskPolicy) obj;
         Objects.requireNonNull(lockTaskPolicy);
-        typedXmlSerializer.attribute((String) null, "packages", String.join(";", lockTaskPolicy.getPackages()));
+        typedXmlSerializer.attribute(
+                (String) null, "packages", String.join(";", lockTaskPolicy.getPackages()));
         typedXmlSerializer.attributeInt((String) null, "flags", lockTaskPolicy.getFlags());
     }
 }

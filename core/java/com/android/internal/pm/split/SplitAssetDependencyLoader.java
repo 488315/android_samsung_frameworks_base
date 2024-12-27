@@ -7,13 +7,16 @@ import android.content.res.ApkAssets;
 import android.content.res.AssetManager;
 import android.os.Build;
 import android.util.SparseArray;
+
+import libcore.io.IoUtils;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import libcore.io.IoUtils;
 
 /* loaded from: classes5.dex */
-public class SplitAssetDependencyLoader extends SplitDependencyLoader<IllegalArgumentException> implements SplitAssetLoader {
+public class SplitAssetDependencyLoader extends SplitDependencyLoader<IllegalArgumentException>
+        implements SplitAssetLoader {
     private final AssetManager[] mCachedAssetManagers;
     private final ApkAssets[][] mCachedSplitApks;
     private final int mFlags;
@@ -23,7 +26,8 @@ public class SplitAssetDependencyLoader extends SplitDependencyLoader<IllegalArg
         super(dependencies);
         this.mSplitPaths = new String[pkg.getSplitApkPaths().length + 1];
         this.mSplitPaths[0] = pkg.getBaseApkPath();
-        System.arraycopy(pkg.getSplitApkPaths(), 0, this.mSplitPaths, 1, pkg.getSplitApkPaths().length);
+        System.arraycopy(
+                pkg.getSplitApkPaths(), 0, this.mSplitPaths, 1, pkg.getSplitApkPaths().length);
         this.mFlags = flags;
         this.mCachedSplitApks = new ApkAssets[this.mSplitPaths.length][];
         this.mCachedAssetManagers = new AssetManager[this.mSplitPaths.length];
@@ -47,13 +51,34 @@ public class SplitAssetDependencyLoader extends SplitDependencyLoader<IllegalArg
 
     private static AssetManager createAssetManagerWithAssets(ApkAssets[] apkAssets) {
         AssetManager assets = new AssetManager();
-        assets.setConfiguration(0, 0, null, new String[0], 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, Build.VERSION.RESOURCES_SDK_INT);
+        assets.setConfiguration(
+                0,
+                0,
+                null,
+                new String[0],
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                Build.VERSION.RESOURCES_SDK_INT);
         assets.setApkAssets(apkAssets, false);
         return assets;
     }
 
     @Override // android.content.pm.split.SplitDependencyLoader
-    protected void constructSplit(int splitIdx, int[] configSplitIndices, int parentSplitIdx) throws IllegalArgumentException {
+    protected void constructSplit(int splitIdx, int[] configSplitIndices, int parentSplitIdx)
+            throws IllegalArgumentException {
         ArrayList<ApkAssets> assets = new ArrayList<>();
         if (parentSplitIdx >= 0) {
             Collections.addAll(assets, this.mCachedSplitApks[parentSplitIdx]);
@@ -62,8 +87,10 @@ public class SplitAssetDependencyLoader extends SplitDependencyLoader<IllegalArg
         for (int configSplitIdx : configSplitIndices) {
             assets.add(loadApkAssets(this.mSplitPaths[configSplitIdx], this.mFlags));
         }
-        this.mCachedSplitApks[splitIdx] = (ApkAssets[]) assets.toArray(new ApkAssets[assets.size()]);
-        this.mCachedAssetManagers[splitIdx] = createAssetManagerWithAssets(this.mCachedSplitApks[splitIdx]);
+        this.mCachedSplitApks[splitIdx] =
+                (ApkAssets[]) assets.toArray(new ApkAssets[assets.size()]);
+        this.mCachedAssetManagers[splitIdx] =
+                createAssetManagerWithAssets(this.mCachedSplitApks[splitIdx]);
     }
 
     @Override // com.android.internal.pm.split.SplitAssetLoader

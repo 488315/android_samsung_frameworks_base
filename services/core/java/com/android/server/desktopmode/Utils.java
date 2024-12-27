@@ -8,8 +8,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.Display;
+
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
+
 import com.samsung.android.desktopmode.DesktopModeFeature;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -80,7 +83,11 @@ public abstract class Utils {
     public static Context getDisplayContext(Context context, int i) {
         DisplayManager displayManager;
         Display display;
-        if (context == null || i == -1 || i == context.getDisplay().getDisplayId() || (displayManager = (DisplayManager) context.getSystemService("display")) == null || (display = displayManager.getDisplay(i)) == null) {
+        if (context == null
+                || i == -1
+                || i == context.getDisplay().getDisplayId()
+                || (displayManager = (DisplayManager) context.getSystemService("display")) == null
+                || (display = displayManager.getDisplay(i)) == null) {
             return context;
         }
         Context createDisplayContext = context.createDisplayContext(display);
@@ -101,7 +108,10 @@ public abstract class Utils {
         File file = new File(str);
         if (file.exists()) {
             try {
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8));
+                BufferedReader bufferedReader =
+                        new BufferedReader(
+                                new InputStreamReader(
+                                        new FileInputStream(file), StandardCharsets.UTF_8));
                 try {
                     str2 = bufferedReader.readLine();
                     bufferedReader.close();

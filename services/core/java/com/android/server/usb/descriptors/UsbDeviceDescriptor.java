@@ -3,6 +3,7 @@ package com.android.server.usb.descriptors;
 import com.android.server.DirEncryptService$$ExternalSyntheticOutline0;
 import com.android.server.usb.descriptors.report.TextReportCanvas;
 import com.android.server.usb.descriptors.report.UsbStrings;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -22,7 +23,11 @@ public final class UsbDeviceDescriptor extends UsbDescriptor {
 
     public final String getDeviceReleaseString() {
         int i = this.mDeviceRelease;
-        return String.format("%d.%d%d", Integer.valueOf((((i & 61440) >> 12) * 10) + ((i & 3840) >> 8)), Integer.valueOf((i & 240) >> 4), Integer.valueOf(i & 15));
+        return String.format(
+                "%d.%d%d",
+                Integer.valueOf((((i & 61440) >> 12) * 10) + ((i & 3840) >> 8)),
+                Integer.valueOf((i & 240) >> 4),
+                Integer.valueOf(i & 15));
     }
 
     @Override // com.android.server.usb.descriptors.UsbDescriptor
@@ -51,18 +56,28 @@ public final class UsbDeviceDescriptor extends UsbDescriptor {
         String className = UsbStrings.getClassName(i);
         int i2 = this.mDevSubClass;
         String className2 = UsbStrings.getClassName(i2);
-        StringBuilder m = DirEncryptService$$ExternalSyntheticOutline0.m(i, "Class ", ": ", className, " Subclass");
+        StringBuilder m =
+                DirEncryptService$$ExternalSyntheticOutline0.m(
+                        i, "Class ", ": ", className, " Subclass");
         m.append(i2);
         m.append(": ");
         m.append(className2);
         textReportCanvas.writeListItem(m.toString());
-        textReportCanvas.writeListItem("Vendor ID: " + TextReportCanvas.getHexString(this.mVendorID) + " Product ID: " + TextReportCanvas.getHexString(this.mProductID) + " Product Release: " + TextReportCanvas.getBCDString(this.mDeviceRelease));
+        textReportCanvas.writeListItem(
+                "Vendor ID: "
+                        + TextReportCanvas.getHexString(this.mVendorID)
+                        + " Product ID: "
+                        + TextReportCanvas.getHexString(this.mProductID)
+                        + " Product Release: "
+                        + TextReportCanvas.getBCDString(this.mDeviceRelease));
         byte b = this.mMfgIndex;
         UsbDescriptorParser usbDescriptorParser = textReportCanvas.mParser;
         String descriptorString = usbDescriptorParser.getDescriptorString(b);
         byte b2 = this.mProductIndex;
         String descriptorString2 = usbDescriptorParser.getDescriptorString(b2);
-        StringBuilder m2 = DirEncryptService$$ExternalSyntheticOutline0.m(b, "Manufacturer ", ": ", descriptorString, " Product ");
+        StringBuilder m2 =
+                DirEncryptService$$ExternalSyntheticOutline0.m(
+                        b, "Manufacturer ", ": ", descriptorString, " Product ");
         m2.append((int) b2);
         m2.append(": ");
         m2.append(descriptorString2);

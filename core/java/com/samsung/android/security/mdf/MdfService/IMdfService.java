@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface IMdfService extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.security.mdf.MdfService.IMdfService";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.security.mdf.MdfService.IMdfService";
 
     int initCCMode() throws RemoteException;
 
@@ -24,7 +25,7 @@ public interface IMdfService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMdfService {
+    public abstract static class Stub extends Binder implements IMdfService {
         static final int TRANSACTION_initCCMode = 1;
 
         public Stub() {
@@ -62,7 +63,8 @@ public interface IMdfService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IMdfService.DESCRIPTOR);
             }

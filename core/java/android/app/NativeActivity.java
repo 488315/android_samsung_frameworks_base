@@ -16,11 +16,16 @@ import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
+
 import dalvik.system.BaseDexClassLoader;
+
 import java.io.File;
 
 /* loaded from: classes.dex */
-public class NativeActivity extends Activity implements SurfaceHolder.Callback2, InputQueue.Callback, ViewTreeObserver.OnGlobalLayoutListener {
+public class NativeActivity extends Activity
+        implements SurfaceHolder.Callback2,
+                InputQueue.Callback,
+                ViewTreeObserver.OnGlobalLayoutListener {
     private static final String KEY_NATIVE_SAVED_STATE = "android:native_state";
     public static final String META_DATA_FUNC_NAME = "android.app.func_name";
     public static final String META_DATA_LIB_NAME = "android.app.lib_name";
@@ -39,7 +44,18 @@ public class NativeActivity extends Activity implements SurfaceHolder.Callback2,
 
     private native String getDlError();
 
-    private native long loadNativeCode(String str, String str2, MessageQueue messageQueue, String str3, String str4, String str5, int i, AssetManager assetManager, byte[] bArr, ClassLoader classLoader, String str6);
+    private native long loadNativeCode(
+            String str,
+            String str2,
+            MessageQueue messageQueue,
+            String str3,
+            String str4,
+            String str5,
+            int i,
+            AssetManager assetManager,
+            byte[] bArr,
+            ClassLoader classLoader,
+            String str6);
 
     private native void onConfigurationChangedNative(long j);
 
@@ -121,14 +137,31 @@ public class NativeActivity extends Activity implements SurfaceHolder.Callback2,
                 } else {
                     nativeSavedState = savedInstanceState.getByteArray(KEY_NATIVE_SAVED_STATE);
                 }
-                this.mNativeHandle = loadNativeCode(path, funcname, Looper.myQueue(), getAbsolutePath(getFilesDir()), getAbsolutePath(getObbDir()), getAbsolutePath(getExternalFilesDir(null)), Build.VERSION.SDK_INT, getAssets(), nativeSavedState, classLoader, classLoader.getLdLibraryPath());
+                this.mNativeHandle =
+                        loadNativeCode(
+                                path,
+                                funcname,
+                                Looper.myQueue(),
+                                getAbsolutePath(getFilesDir()),
+                                getAbsolutePath(getObbDir()),
+                                getAbsolutePath(getExternalFilesDir(null)),
+                                Build.VERSION.SDK_INT,
+                                getAssets(),
+                                nativeSavedState,
+                                classLoader,
+                                classLoader.getLdLibraryPath());
                 if (this.mNativeHandle == 0) {
-                    throw new UnsatisfiedLinkError("Unable to load native library \"" + path + "\": " + getDlError());
+                    throw new UnsatisfiedLinkError(
+                            "Unable to load native library \"" + path + "\": " + getDlError());
                 }
                 super.onCreate(savedInstanceState);
                 return;
             }
-            throw new IllegalArgumentException("Unable to find native library " + libname + " using classloader: " + classLoader.toString());
+            throw new IllegalArgumentException(
+                    "Unable to find native library "
+                            + libname
+                            + " using classloader: "
+                            + classLoader.toString());
         } catch (PackageManager.NameNotFoundException e) {
             throw new RuntimeException("Error getting activity info", e);
         }
@@ -266,13 +299,21 @@ public class NativeActivity extends Activity implements SurfaceHolder.Callback2,
         this.mNativeContentView.getLocationInWindow(this.mLocation);
         int w = this.mNativeContentView.getWidth();
         int h = this.mNativeContentView.getHeight();
-        if (this.mLocation[0] != this.mLastContentX || this.mLocation[1] != this.mLastContentY || w != this.mLastContentWidth || h != this.mLastContentHeight) {
+        if (this.mLocation[0] != this.mLastContentX
+                || this.mLocation[1] != this.mLastContentY
+                || w != this.mLastContentWidth
+                || h != this.mLastContentHeight) {
             this.mLastContentX = this.mLocation[0];
             this.mLastContentY = this.mLocation[1];
             this.mLastContentWidth = w;
             this.mLastContentHeight = h;
             if (!this.mDestroyed) {
-                onContentRectChangedNative(this.mNativeHandle, this.mLastContentX, this.mLastContentY, this.mLastContentWidth, this.mLastContentHeight);
+                onContentRectChangedNative(
+                        this.mNativeHandle,
+                        this.mLastContentX,
+                        this.mLastContentY,
+                        this.mLastContentWidth,
+                        this.mLastContentHeight);
             }
         }
     }

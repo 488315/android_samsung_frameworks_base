@@ -5,6 +5,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.Surface;
+
 import com.samsung.vekit.Animation.Animation;
 import com.samsung.vekit.Common.Object.CaptureInfo;
 import com.samsung.vekit.Common.Object.Element;
@@ -37,6 +38,7 @@ import com.samsung.vekit.Listener.PlayerStatusListener;
 import com.samsung.vekit.Listener.VEControllerStatusListener;
 import com.samsung.vekit.Task.CaptureFrameTask;
 import com.samsung.vekit.Task.CaptureFrameThread;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -84,39 +86,44 @@ public class VEController extends Element {
         this.context = new VEContext();
         this.analyzer = new VEAnalyzer(this.context, looper);
         this.captureFrameThread = null;
-        this.controllerStatusListener = new VEControllerStatusListener() { // from class: com.samsung.vekit.Control.VEController$$ExternalSyntheticLambda0
-            @Override // com.samsung.vekit.Listener.VEControllerStatusListener
-            public final void onEvent(EventType eventType) {
-                VEController.this.m9386lambda$new$0$comsamsungvekitControlVEController(eventType);
-            }
-        };
+        this.controllerStatusListener =
+                new VEControllerStatusListener() { // from class:
+                                                   // com.samsung.vekit.Control.VEController$$ExternalSyntheticLambda0
+                    @Override // com.samsung.vekit.Listener.VEControllerStatusListener
+                    public final void onEvent(EventType eventType) {
+                        VEController.this.m9386lambda$new$0$comsamsungvekitControlVEController(
+                                eventType);
+                    }
+                };
         this.exportstatuslistener = null;
-        this.animationStatusListener = new AnimationStatusListener() { // from class: com.samsung.vekit.Control.VEController.1
-            @Override // com.samsung.vekit.Listener.AnimationStatusListener
-            public void onAnimationStarted(Object interpolatedValue) {
-                Log.i(VEController.this.TAG, "onAnimationStarted : UI Animations");
-                VEController.this.isAnimating = true;
-            }
+        this.animationStatusListener =
+                new AnimationStatusListener() { // from class:
+                                                // com.samsung.vekit.Control.VEController.1
+                    @Override // com.samsung.vekit.Listener.AnimationStatusListener
+                    public void onAnimationStarted(Object interpolatedValue) {
+                        Log.i(VEController.this.TAG, "onAnimationStarted : UI Animations");
+                        VEController.this.isAnimating = true;
+                    }
 
-            @Override // com.samsung.vekit.Listener.AnimationStatusListener
-            public void onAnimationUpdated(Object interpolatedValue) {
-                Log.i(VEController.this.TAG, "onAnimationUpdated : UI Animations");
-            }
+                    @Override // com.samsung.vekit.Listener.AnimationStatusListener
+                    public void onAnimationUpdated(Object interpolatedValue) {
+                        Log.i(VEController.this.TAG, "onAnimationUpdated : UI Animations");
+                    }
 
-            @Override // com.samsung.vekit.Listener.AnimationStatusListener
-            public void onAnimationFinished(Object interpolatedValue) {
-                Log.i(VEController.this.TAG, "onAnimationFinished : UI Animations");
-                VEController.this.cancelAnimation();
-                VEController.this.isAnimating = false;
-            }
+                    @Override // com.samsung.vekit.Listener.AnimationStatusListener
+                    public void onAnimationFinished(Object interpolatedValue) {
+                        Log.i(VEController.this.TAG, "onAnimationFinished : UI Animations");
+                        VEController.this.cancelAnimation();
+                        VEController.this.isAnimating = false;
+                    }
 
-            @Override // com.samsung.vekit.Listener.AnimationStatusListener
-            public void onAnimationCanceled(Object interpolatedValue) {
-                Log.i(VEController.this.TAG, "onAnimationCanceled : UI Animations");
-                VEController.this.clearAnimations();
-                VEController.this.isAnimating = false;
-            }
-        };
+                    @Override // com.samsung.vekit.Listener.AnimationStatusListener
+                    public void onAnimationCanceled(Object interpolatedValue) {
+                        Log.i(VEController.this.TAG, "onAnimationCanceled : UI Animations");
+                        VEController.this.clearAnimations();
+                        VEController.this.isAnimating = false;
+                    }
+                };
     }
 
     /* renamed from: lambda$new$0$com-samsung-vekit-Control-VEController, reason: not valid java name */
@@ -156,7 +163,8 @@ public class VEController extends Element {
                     break;
                 case 3:
                     if (VEController.this.playerStatusListener != null) {
-                        VEController.this.playerStatusListener.onShowCompleted(((Long) msg.obj).longValue());
+                        VEController.this.playerStatusListener.onShowCompleted(
+                                ((Long) msg.obj).longValue());
                         break;
                     }
                     break;
@@ -176,7 +184,8 @@ public class VEController extends Element {
                     VEController.this.handleError(msg.arg1, msg.obj);
                     break;
                 case 101:
-                    VEController.this.handleItemError(msg.arg1, msg.arg2, ((Integer) msg.obj).intValue());
+                    VEController.this.handleItemError(
+                            msg.arg1, msg.arg2, ((Integer) msg.obj).intValue());
                     break;
                 case 200:
                     break;
@@ -192,7 +201,9 @@ public class VEController extends Element {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void handleError(int errorType, Object extension) {
-        Log.e(this.TAG, "handleExecuteError with errorType : " + errorType + ", extension : " + extension);
+        Log.e(
+                this.TAG,
+                "handleExecuteError with errorType : " + errorType + ", extension : " + extension);
         ErrorType type = ErrorType.values()[errorType];
         if (this.playerStatusListener != null) {
             switch (type) {
@@ -214,7 +225,14 @@ public class VEController extends Element {
                 ItemStatusListener listener = this.context.getItemManager().get(elementId);
                 if (listener != null) {
                     ItemErrorType itemErrorType = ItemErrorType.values()[errorType];
-                    Log.i(this.TAG, "handleItemError itemErrorType : " + itemErrorType + ", elementType : " + elementType + ", elementId : " + elementId);
+                    Log.i(
+                            this.TAG,
+                            "handleItemError itemErrorType : "
+                                    + itemErrorType
+                                    + ", elementType : "
+                                    + elementType
+                                    + ", elementId : "
+                                    + elementId);
                     listener.onError(itemErrorType);
                     break;
                 }
@@ -223,7 +241,12 @@ public class VEController extends Element {
             case LAYER:
             case ANIMATION:
             case FILTER:
-                Log.i(this.TAG, "Unsupported listener error handling ElementType : " + elementType + ", errorType : " + errorType);
+                Log.i(
+                        this.TAG,
+                        "Unsupported listener error handling ElementType : "
+                                + elementType
+                                + ", errorType : "
+                                + errorType);
                 break;
             default:
                 Log.i(this.TAG, "Invalid elementType : " + elementType);
@@ -318,7 +341,9 @@ public class VEController extends Element {
             int itemId = msg.arg1;
             Item item = this.controller.getContext().getItemManager().get(itemId);
             if (item == null || item.getItemType() != ItemType.PORTRAIT_VIDEO) {
-                Log.e(VEController.this.TAG, "PortraitVideoEventHandler : item is invalid : " + itemId);
+                Log.e(
+                        VEController.this.TAG,
+                        "PortraitVideoEventHandler : item is invalid : " + itemId);
                 return;
             }
             PortraitVideoItem targetItem = (PortraitVideoItem) item;
@@ -356,13 +381,30 @@ public class VEController extends Element {
         this.context.getAnimationManager().clearAnimations();
     }
 
-    public void initializeController(Surface surface, int graphicBufferWidth, int graphicBufferHeight, int viewportWidth, int viewportHeight, ViewMode viewMode, FrameworkType frameworkType) {
-        this.context.getNativeInterface().initializeFramework(surface, graphicBufferWidth, graphicBufferHeight, viewportWidth, viewportHeight, viewMode, frameworkType);
+    public void initializeController(
+            Surface surface,
+            int graphicBufferWidth,
+            int graphicBufferHeight,
+            int viewportWidth,
+            int viewportHeight,
+            ViewMode viewMode,
+            FrameworkType frameworkType) {
+        this.context
+                .getNativeInterface()
+                .initializeFramework(
+                        surface,
+                        graphicBufferWidth,
+                        graphicBufferHeight,
+                        viewportWidth,
+                        viewportHeight,
+                        viewMode,
+                        frameworkType);
         this.context.initialize();
         this.context.setFrameworkType(frameworkType);
         if (viewMode == ViewMode.PREVIEW) {
             if (this.captureFrameThread == null) {
-                this.captureFrameThread = new CaptureFrameThread(this.context, this.captureEventHandler);
+                this.captureFrameThread =
+                        new CaptureFrameThread(this.context, this.captureEventHandler);
             }
             this.captureFrameThread.startThread();
         }
@@ -381,7 +423,13 @@ public class VEController extends Element {
     }
 
     public void updateViewport(Vector4<Integer> viewport) {
-        this.context.getNativeInterface().updateViewport(viewport.getX().intValue(), viewport.getY().intValue(), viewport.getZ().intValue(), viewport.getW().intValue());
+        this.context
+                .getNativeInterface()
+                .updateViewport(
+                        viewport.getX().intValue(),
+                        viewport.getY().intValue(),
+                        viewport.getZ().intValue(),
+                        viewport.getW().intValue());
     }
 
     public VEController seekTo(long millisecond, SeekType seekType) {
@@ -399,27 +447,42 @@ public class VEController extends Element {
         return this.seekTime;
     }
 
-    public void captureAnimatedFrame(ImageItem item, int outputWidth, int outputHeight, CaptureFrameTaskListener listener) {
+    public void captureAnimatedFrame(
+            ImageItem item, int outputWidth, int outputHeight, CaptureFrameTaskListener listener) {
         if (this.captureFrameThread != null) {
             this.captureFrameThread.addRequest(item, outputWidth, outputHeight, listener);
         }
     }
 
-    public void captureLatestFrame(int outputWidth, int outputHeight, CaptureFrameTaskListener listener) {
+    public void captureLatestFrame(
+            int outputWidth, int outputHeight, CaptureFrameTaskListener listener) {
         if (this.captureFrameThread != null) {
             this.captureFrameThread.addRequest(outputWidth, outputHeight, listener);
         }
     }
 
-    public void captureSuperHDRFrame(Item item, int outputWidth, int outputHeight, CaptureFrameTask.CaptureType captureType, CaptureFrameTaskListener listener) {
+    public void captureSuperHDRFrame(
+            Item item,
+            int outputWidth,
+            int outputHeight,
+            CaptureFrameTask.CaptureType captureType,
+            CaptureFrameTaskListener listener) {
         if (this.captureFrameThread != null) {
-            this.captureFrameThread.addRequest(item, outputWidth, outputHeight, captureType, listener);
+            this.captureFrameThread.addRequest(
+                    item, outputWidth, outputHeight, captureType, listener);
         }
     }
 
-    public void captureSuperHDRFrame(int outputWidth, int outputHeight, int centerX, int centerY, CaptureFrameTask.CaptureType captureType, CaptureFrameTaskListener listener) {
+    public void captureSuperHDRFrame(
+            int outputWidth,
+            int outputHeight,
+            int centerX,
+            int centerY,
+            CaptureFrameTask.CaptureType captureType,
+            CaptureFrameTaskListener listener) {
         if (this.captureFrameThread != null) {
-            this.captureFrameThread.addRequest(outputWidth, outputHeight, centerX, centerY, captureType, listener);
+            this.captureFrameThread.addRequest(
+                    outputWidth, outputHeight, centerX, centerY, captureType, listener);
         }
     }
 
@@ -492,14 +555,18 @@ public class VEController extends Element {
 
     private void onControllerEvent(int event, int arg1, int arg2, int arg3) {
         if (this.controllerEventHandler != null) {
-            Message m = this.controllerEventHandler.obtainMessage(event, arg1, arg2, Integer.valueOf(arg3));
+            Message m =
+                    this.controllerEventHandler.obtainMessage(
+                            event, arg1, arg2, Integer.valueOf(arg3));
             this.controllerEventHandler.sendMessage(m);
         }
     }
 
     private void onControllerEvent(int event, int arg1, int arg2, long arg3) {
         if (this.controllerEventHandler != null) {
-            Message m = this.controllerEventHandler.obtainMessage(event, arg1, arg2, Long.valueOf(arg3));
+            Message m =
+                    this.controllerEventHandler.obtainMessage(
+                            event, arg1, arg2, Long.valueOf(arg3));
             this.controllerEventHandler.sendMessage(m);
         }
     }
@@ -520,7 +587,9 @@ public class VEController extends Element {
 
     private void onAnimationEvent(int status, int animationId, int type, float value) {
         if (this.animationEventHandler != null) {
-            Message m = this.animationEventHandler.obtainMessage(status, animationId, type, Float.valueOf(value));
+            Message m =
+                    this.animationEventHandler.obtainMessage(
+                            status, animationId, type, Float.valueOf(value));
             this.animationEventHandler.sendMessage(m);
         }
     }
@@ -546,7 +615,14 @@ public class VEController extends Element {
     }
 
     public void setExportInfo(ExportInfo info) {
-        Log.i(this.TAG, "setExportInfo  width : " + info.getWidth() + " height : " + info.getHeight() + " fd : " + info.getFd());
+        Log.i(
+                this.TAG,
+                "setExportInfo  width : "
+                        + info.getWidth()
+                        + " height : "
+                        + info.getHeight()
+                        + " fd : "
+                        + info.getFd());
         this.context.getNativeInterface().setExportInfo(info);
     }
 
@@ -573,8 +649,7 @@ public class VEController extends Element {
         public static final int PLAYBACK_COMPLETE = 1;
         public static final int SHOW_COMPLETE = 3;
 
-        private ControllerCallbackMsg() {
-        }
+        private ControllerCallbackMsg() {}
     }
 
     public String getVEKitVersion() {

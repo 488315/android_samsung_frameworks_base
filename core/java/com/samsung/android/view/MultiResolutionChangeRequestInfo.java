@@ -5,21 +5,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class MultiResolutionChangeRequestInfo implements Parcelable {
-    public static final Parcelable.Creator<MultiResolutionChangeRequestInfo> CREATOR = new Parcelable.Creator<MultiResolutionChangeRequestInfo>() { // from class: com.samsung.android.view.MultiResolutionChangeRequestInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MultiResolutionChangeRequestInfo createFromParcel(Parcel in) {
-            MultiResolutionChangeRequestInfo data = new MultiResolutionChangeRequestInfo();
-            data.readFromParcel(in);
-            return data;
-        }
+    public static final Parcelable.Creator<MultiResolutionChangeRequestInfo> CREATOR =
+            new Parcelable.Creator<
+                    MultiResolutionChangeRequestInfo>() { // from class:
+                                                          // com.samsung.android.view.MultiResolutionChangeRequestInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MultiResolutionChangeRequestInfo createFromParcel(Parcel in) {
+                    MultiResolutionChangeRequestInfo data = new MultiResolutionChangeRequestInfo();
+                    data.readFromParcel(in);
+                    return data;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MultiResolutionChangeRequestInfo[] newArray(int size) {
-            return new MultiResolutionChangeRequestInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MultiResolutionChangeRequestInfo[] newArray(int size) {
+                    return new MultiResolutionChangeRequestInfo[size];
+                }
+            };
     private String mCallerInfo;
     private int mDensity;
     private int mDisplayId;
@@ -32,7 +35,8 @@ public class MultiResolutionChangeRequestInfo implements Parcelable {
         this.mForcedHideCutout = -1;
     }
 
-    private MultiResolutionChangeRequestInfo(int displayId, int width, int height, int density, boolean saveToSettings) {
+    private MultiResolutionChangeRequestInfo(
+            int displayId, int width, int height, int density, boolean saveToSettings) {
         this.mForcedHideCutout = -1;
         this.mDisplayId = displayId;
         this.mWidth = width;
@@ -83,7 +87,13 @@ public class MultiResolutionChangeRequestInfo implements Parcelable {
         }
 
         public MultiResolutionChangeRequestInfo build() {
-            MultiResolutionChangeRequestInfo info = new MultiResolutionChangeRequestInfo(this.mDisplayId, this.mWidth, this.mHeight, this.mDensity, this.mSaveToSettings);
+            MultiResolutionChangeRequestInfo info =
+                    new MultiResolutionChangeRequestInfo(
+                            this.mDisplayId,
+                            this.mWidth,
+                            this.mHeight,
+                            this.mDensity,
+                            this.mSaveToSettings);
             info.mForcedHideCutout = this.mForcedHideCutout;
             return info;
         }

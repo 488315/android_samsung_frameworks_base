@@ -10,9 +10,11 @@ import android.os.ResultReceiver;
 import android.os.ShellCallback;
 import android.os.UserHandle;
 import android.util.Slog;
+
 import com.android.server.infra.AbstractMasterSystemService;
 import com.android.server.infra.AbstractPerUserSystemService;
 import com.android.server.infra.FrameworkResourcesServiceNameResolver;
+
 import java.io.FileDescriptor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -24,15 +26,15 @@ public final class MusicRecognitionManagerService extends AbstractMasterSystemSe
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class MusicRecognitionManagerStub extends IMusicRecognitionManager.Stub {
-        public MusicRecognitionManagerStub() {
-        }
+        public MusicRecognitionManagerStub() {}
 
         /* JADX WARN: Can't wrap try/catch for region: R(6:5|6|(5:8|(1:10)(1:20)|(2:12|(1:14))|15|16)|21|22|16) */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final void beginRecognition(android.media.musicrecognition.RecognitionRequest r6, android.os.IBinder r7) {
+        public final void beginRecognition(
+                android.media.musicrecognition.RecognitionRequest r6, android.os.IBinder r7) {
             /*
                 r5 = this;
                 com.android.server.musicrecognition.MusicRecognitionManagerService r0 = com.android.server.musicrecognition.MusicRecognitionManagerService.this
@@ -97,49 +99,94 @@ public final class MusicRecognitionManagerService extends AbstractMasterSystemSe
                 r6.<init>(r5)
                 throw r6
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.musicrecognition.MusicRecognitionManagerService.MusicRecognitionManagerStub.beginRecognition(android.media.musicrecognition.RecognitionRequest, android.os.IBinder):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.musicrecognition.MusicRecognitionManagerService.MusicRecognitionManagerStub.beginRecognition(android.media.musicrecognition.RecognitionRequest,"
+                        + " android.os.IBinder):void");
         }
 
         public final boolean isCalledByServiceAppLocked() {
             int callingUserId = UserHandle.getCallingUserId();
             int callingUid = Binder.getCallingUid();
-            String serviceName = MusicRecognitionManagerService.this.mServiceNameResolver.getServiceName(callingUserId);
+            String serviceName =
+                    MusicRecognitionManagerService.this.mServiceNameResolver.getServiceName(
+                            callingUserId);
             if (serviceName == null) {
-                Slog.e("MusicRecognitionManagerService", "beginRecognition: called by UID " + callingUid + ", but there's no service set for user " + callingUserId);
+                Slog.e(
+                        "MusicRecognitionManagerService",
+                        "beginRecognition: called by UID "
+                                + callingUid
+                                + ", but there's no service set for user "
+                                + callingUserId);
                 return false;
             }
             ComponentName unflattenFromString = ComponentName.unflattenFromString(serviceName);
             if (unflattenFromString == null) {
-                Slog.w("MusicRecognitionManagerService", "beginRecognition: invalid service name: ".concat(serviceName));
+                Slog.w(
+                        "MusicRecognitionManagerService",
+                        "beginRecognition: invalid service name: ".concat(serviceName));
                 return false;
             }
             try {
-                int packageUidAsUser = MusicRecognitionManagerService.this.getContext().getPackageManager().getPackageUidAsUser(unflattenFromString.getPackageName(), UserHandle.getCallingUserId());
+                int packageUidAsUser =
+                        MusicRecognitionManagerService.this
+                                .getContext()
+                                .getPackageManager()
+                                .getPackageUidAsUser(
+                                        unflattenFromString.getPackageName(),
+                                        UserHandle.getCallingUserId());
                 if (callingUid == packageUidAsUser) {
                     return true;
                 }
-                Slog.e("MusicRecognitionManagerService", "beginRecognition: called by UID " + callingUid + ", but service UID is " + packageUidAsUser);
+                Slog.e(
+                        "MusicRecognitionManagerService",
+                        "beginRecognition: called by UID "
+                                + callingUid
+                                + ", but service UID is "
+                                + packageUidAsUser);
                 return false;
             } catch (PackageManager.NameNotFoundException unused) {
-                Slog.w("MusicRecognitionManagerService", "beginRecognition: could not verify UID for ".concat(serviceName));
+                Slog.w(
+                        "MusicRecognitionManagerService",
+                        "beginRecognition: could not verify UID for ".concat(serviceName));
                 return false;
             }
         }
 
         /* JADX WARN: Multi-variable type inference failed */
-        public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
-            new MusicRecognitionManagerServiceShellCommand(MusicRecognitionManagerService.this).exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
+        public final void onShellCommand(
+                FileDescriptor fileDescriptor,
+                FileDescriptor fileDescriptor2,
+                FileDescriptor fileDescriptor3,
+                String[] strArr,
+                ShellCallback shellCallback,
+                ResultReceiver resultReceiver) {
+            new MusicRecognitionManagerServiceShellCommand(MusicRecognitionManagerService.this)
+                    .exec(
+                            this,
+                            fileDescriptor,
+                            fileDescriptor2,
+                            fileDescriptor3,
+                            strArr,
+                            shellCallback,
+                            resultReceiver);
         }
     }
 
     public MusicRecognitionManagerService(Context context) {
-        super(context, new FrameworkResourcesServiceNameResolver(context, R.string.default_audio_route_id), null);
+        super(
+                context,
+                new FrameworkResourcesServiceNameResolver(context, R.string.default_audio_route_id),
+                null);
         this.mExecutorService = Executors.newCachedThreadPool();
     }
 
     @Override // com.android.server.infra.AbstractMasterSystemService
     public final void enforceCallingPermissionForManagement() {
-        getContext().enforceCallingPermission("android.permission.MANAGE_MUSIC_RECOGNITION", "MusicRecognitionManagerService");
+        getContext()
+                .enforceCallingPermission(
+                        "android.permission.MANAGE_MUSIC_RECOGNITION",
+                        "MusicRecognitionManagerService");
     }
 
     @Override // com.android.server.infra.AbstractMasterSystemService

@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -15,8 +16,7 @@ public interface IOnChecksumsReadyListener extends IInterface {
 
     public static class Default implements IOnChecksumsReadyListener {
         @Override // android.content.pm.IOnChecksumsReadyListener
-        public void onChecksumsReady(List<ApkChecksum> checksums) throws RemoteException {
-        }
+        public void onChecksumsReady(List<ApkChecksum> checksums) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +24,7 @@ public interface IOnChecksumsReadyListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IOnChecksumsReadyListener {
+    public abstract static class Stub extends Binder implements IOnChecksumsReadyListener {
         static final int TRANSACTION_onChecksumsReady = 1;
 
         public Stub() {
@@ -62,7 +62,8 @@ public interface IOnChecksumsReadyListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IOnChecksumsReadyListener.DESCRIPTOR);
             }

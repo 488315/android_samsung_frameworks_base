@@ -10,8 +10,7 @@ public class SslError {
     public static final int SSL_IDMISMATCH = 2;
     public static final int SSL_INVALID = 5;
 
-    @Deprecated
-    public static final int SSL_MAX_ERROR = 6;
+    @Deprecated public static final int SSL_MAX_ERROR = 6;
     public static final int SSL_NOTYETVALID = 0;
     public static final int SSL_UNTRUSTED = 3;
     final SslCertificate mCertificate;
@@ -38,7 +37,8 @@ public class SslError {
         this(error, new SslCertificate(certificate), url);
     }
 
-    public static SslError SslErrorFromChromiumErrorCode(int error, SslCertificate cert, String url) {
+    public static SslError SslErrorFromChromiumErrorCode(
+            int error, SslCertificate cert, String url) {
         if (error == -200) {
             return new SslError(2, cert, url);
         }
@@ -88,6 +88,11 @@ public class SslError {
     }
 
     public String toString() {
-        return "primary error: " + getPrimaryError() + " certificate: " + getCertificate() + " on URL: " + getUrl();
+        return "primary error: "
+                + getPrimaryError()
+                + " certificate: "
+                + getCertificate()
+                + " on URL: "
+                + getUrl();
     }
 }

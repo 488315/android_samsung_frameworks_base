@@ -1,24 +1,26 @@
 package android.os;
 
-import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class FabricatedOverlayInternalEntry implements Parcelable {
-    public static final Parcelable.Creator<FabricatedOverlayInternalEntry> CREATOR = new Parcelable.Creator<FabricatedOverlayInternalEntry>() { // from class: android.os.FabricatedOverlayInternalEntry.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FabricatedOverlayInternalEntry createFromParcel(Parcel _aidl_source) {
-            FabricatedOverlayInternalEntry _aidl_out = new FabricatedOverlayInternalEntry();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<FabricatedOverlayInternalEntry> CREATOR =
+            new Parcelable.Creator<
+                    FabricatedOverlayInternalEntry>() { // from class:
+                                                        // android.os.FabricatedOverlayInternalEntry.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FabricatedOverlayInternalEntry createFromParcel(Parcel _aidl_source) {
+                    FabricatedOverlayInternalEntry _aidl_out = new FabricatedOverlayInternalEntry();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FabricatedOverlayInternalEntry[] newArray(int _aidl_size) {
-            return new FabricatedOverlayInternalEntry[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FabricatedOverlayInternalEntry[] newArray(int _aidl_size) {
+                    return new FabricatedOverlayInternalEntry[_aidl_size];
+                }
+            };
     public ParcelFileDescriptor binaryData;
     public String configuration;
     public String resourceName;
@@ -94,7 +96,9 @@ public class FabricatedOverlayInternalEntry implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.binaryData = (ParcelFileDescriptor) _aidl_parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
+            this.binaryData =
+                    (ParcelFileDescriptor)
+                            _aidl_parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");

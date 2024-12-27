@@ -7,10 +7,13 @@ import android.os.SystemProperties;
 import android.security.keystore.KeyProperties;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+
 import com.android.telephony.Rlog;
+
 import com.samsung.android.feature.SemCarrierFeature;
 import com.samsung.android.wallpaperbackup.BnRConstants;
 import com.samsung.telephony.sysprop.SemTelephonyProps;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -61,7 +64,8 @@ public class TelephonyFeatures {
     private static boolean sSimHotswapSupported;
     private static String[] sSimbasedChangeType;
     public static final boolean SHIP_BUILD = SystemProperties.getBoolean("ro.product_ship", true);
-    private static final String SALES_CODE = SystemProperties.get("ro.csc.sales_code", KeyProperties.DIGEST_NONE);
+    private static final String SALES_CODE =
+            SystemProperties.get("ro.csc.sales_code", KeyProperties.DIGEST_NONE);
     public static final String DEVICE_TYPE = SystemProperties.get("ro.build.characteristics", "");
     public static final boolean IS_TABLET = DEVICE_TYPE.contains(BnRConstants.DEVICETYPE_TABLET);
     public static final boolean IS_WATCH = DEVICE_TYPE.contains("watch");
@@ -73,13 +77,17 @@ public class TelephonyFeatures {
         IS_EXYNOS = HARDWARE_TYPE.contains("exynos") || HARDWARE_TYPE.contains("s5e");
         IS_MTK = HARDWARE_TYPE.contains("mt");
         IS_WIFI_ONLY = "wifi-only".equals(SemTelephonyProps.carrier().orElse("unknown"));
-        IS_FACTORY_BIN = "factory".equalsIgnoreCase(SystemProperties.get("ro.factory.factory_binary", "Unknown"));
+        IS_FACTORY_BIN =
+                "factory"
+                        .equalsIgnoreCase(
+                                SystemProperties.get("ro.factory.factory_binary", "Unknown"));
         sSimHotswapSupported = true;
         sSimbasedChangeType = null;
     }
 
     private static void InitializeSimbasedType() {
-        String changeType = SystemProperties.get("ro.simbased.changetype", KeyProperties.DIGEST_NONE);
+        String changeType =
+                SystemProperties.get("ro.simbased.changetype", KeyProperties.DIGEST_NONE);
         sSimbasedChangeType = changeType.split(",");
         if (sSimbasedChangeType == null || sSimbasedChangeType.length < 2) {
             sSimbasedChangeType = new String[2];
@@ -92,22 +100,46 @@ public class TelephonyFeatures {
     }
 
     public static String getMainOperatorName(int phoneId) {
-        String ntcRawData = SemCarrierFeature.getInstance().getString(phoneId, "CarrierFeature_RIL_ConfigNetworkTypeCapability", "", true);
+        String ntcRawData =
+                SemCarrierFeature.getInstance()
+                        .getString(
+                                phoneId,
+                                "CarrierFeature_RIL_ConfigNetworkTypeCapability",
+                                "",
+                                true);
         return SemTelephonyUtils.getMainOperator(ntcRawData);
     }
 
     public static String getSubOperatorName(int phoneId) {
-        String ntcRawData = SemCarrierFeature.getInstance().getString(phoneId, "CarrierFeature_RIL_ConfigNetworkTypeCapability", "", true);
+        String ntcRawData =
+                SemCarrierFeature.getInstance()
+                        .getString(
+                                phoneId,
+                                "CarrierFeature_RIL_ConfigNetworkTypeCapability",
+                                "",
+                                true);
         return SemTelephonyUtils.getSubOperator(ntcRawData);
     }
 
     public static String getOperatorType(int phoneId) {
-        String ntcRawData = SemCarrierFeature.getInstance().getString(phoneId, "CarrierFeature_RIL_ConfigNetworkTypeCapability", "", true);
+        String ntcRawData =
+                SemCarrierFeature.getInstance()
+                        .getString(
+                                phoneId,
+                                "CarrierFeature_RIL_ConfigNetworkTypeCapability",
+                                "",
+                                true);
         return SemTelephonyUtils.getOperatorType(ntcRawData);
     }
 
     public static String getCountryName(int phoneId) {
-        String ntcRawData = SemCarrierFeature.getInstance().getString(phoneId, "CarrierFeature_RIL_ConfigNetworkTypeCapability", "", true);
+        String ntcRawData =
+                SemCarrierFeature.getInstance()
+                        .getString(
+                                phoneId,
+                                "CarrierFeature_RIL_ConfigNetworkTypeCapability",
+                                "",
+                                true);
         return SemTelephonyUtils.getCountry(ntcRawData);
     }
 
@@ -116,11 +148,13 @@ public class TelephonyFeatures {
     }
 
     public static String getCarrierGroup(int phoneId) {
-        return SemCarrierFeature.getInstance().getString(phoneId, "CarrierFeature_Common_CarrierGroup", "", true);
+        return SemCarrierFeature.getInstance()
+                .getString(phoneId, "CarrierFeature_Common_CarrierGroup", "", true);
     }
 
     public static String getNetworkCode(int phoneId) {
-        return SemCarrierFeature.getInstance().getString(phoneId, "CarrierFeature_Common_CarrierGroup", SALES_CODE, true);
+        return SemCarrierFeature.getInstance()
+                .getString(phoneId, "CarrierFeature_Common_CarrierGroup", SALES_CODE, true);
     }
 
     public static boolean getNtcFeature(int phoneId, int ntcFeature) {
@@ -133,7 +167,10 @@ public class TelephonyFeatures {
                 return "SPR".equals(getMainOperatorName(phoneId));
             case 2:
                 if ("SPR".equals(getMainOperatorName(phoneId))) {
-                    return "SPR".equalsIgnoreCase(getSalesCode()) || "BST".equalsIgnoreCase(getSalesCode()) || "XAS".equalsIgnoreCase(getSalesCode()) || "SPRPRE".equalsIgnoreCase(getSalesCode());
+                    return "SPR".equalsIgnoreCase(getSalesCode())
+                            || "BST".equalsIgnoreCase(getSalesCode())
+                            || "XAS".equalsIgnoreCase(getSalesCode())
+                            || "SPRPRE".equalsIgnoreCase(getSalesCode());
                 }
                 return false;
             case 3:
@@ -143,19 +180,38 @@ public class TelephonyFeatures {
             case 5:
                 return isMainOperatorSpecific(phoneId, "VZW", "SPR", "USC");
             case 6:
-                if (isCountrySpecific(phoneId, "CHN", "KOR") || SemCarrierFeature.getInstance().getBoolean(phoneId, "CarrierFeature_RIL_DisableEons", false, true)) {
+                if (isCountrySpecific(phoneId, "CHN", "KOR")
+                        || SemCarrierFeature.getInstance()
+                                .getBoolean(
+                                        phoneId, "CarrierFeature_RIL_DisableEons", false, true)) {
                     return false;
                 }
-                return SemCarrierFeature.getInstance().getBoolean(phoneId, "CarrierFeature_RIL_ReferEonsWithoutLac", false, true) || "VZW".equals(getMainOperatorName(phoneId));
+                return SemCarrierFeature.getInstance()
+                                .getBoolean(
+                                        phoneId,
+                                        "CarrierFeature_RIL_ReferEonsWithoutLac",
+                                        false,
+                                        true)
+                        || "VZW".equals(getMainOperatorName(phoneId));
             case 7:
                 boolean isSimMobility = IS_TABLET;
                 return isSimMobility && isSalesCodeSpecific("ATT", "APP");
             case 8:
-                if (isMainOperatorSpecific(phoneId, "VZW", "USC", "SPR") && !"ATC".equals(getSubOperatorName(phoneId))) {
-                    boolean isSimMobility2 = ((Boolean) getTelephonyProperty(phoneId, SemTelephonyProps.sim_mobility(), false)).booleanValue();
+                if (isMainOperatorSpecific(phoneId, "VZW", "USC", "SPR")
+                        && !"ATC".equals(getSubOperatorName(phoneId))) {
+                    boolean isSimMobility2 =
+                            ((Boolean)
+                                            getTelephonyProperty(
+                                                    phoneId,
+                                                    SemTelephonyProps.sim_mobility(),
+                                                    false))
+                                    .booleanValue();
                     TelephonyManager.getDefault();
                     String simCountry = TelephonyManager.getSimCountryIsoForPhone(phoneId);
-                    if (!isSimMobility2 || XmlTags.ATTR_USER_ID.equals(simCountry) || "pr".equals(simCountry) || "vi".equals(simCountry)) {
+                    if (!isSimMobility2
+                            || XmlTags.ATTR_USER_ID.equals(simCountry)
+                            || "pr".equals(simCountry)
+                            || "vi".equals(simCountry)) {
                         return true;
                     }
                     log("No ECBM (Reason: SimMobility)");
@@ -173,27 +229,44 @@ public class TelephonyFeatures {
             case 13:
                 return true;
             case 14:
-                return isCountrySpecific(phoneId, "CHN", "HKG", "TPE") ? TelephonyManager.getDefault().getActiveModemCount() > 1 : isSalesCodeSpecific("INU", "INS") && TelephonyManager.getDefault().getActiveModemCount() > 1 && Integer.parseInt(SemTelephonyProps.support_dual_rat().orElse("0")) == 1;
+                return isCountrySpecific(phoneId, "CHN", "HKG", "TPE")
+                        ? TelephonyManager.getDefault().getActiveModemCount() > 1
+                        : isSalesCodeSpecific("INU", "INS")
+                                && TelephonyManager.getDefault().getActiveModemCount() > 1
+                                && Integer.parseInt(
+                                                SemTelephonyProps.support_dual_rat().orElse("0"))
+                                        == 1;
             case 15:
-                return 1 == Integer.parseInt(SemTelephonyProps.support_dual_rat().orElse("0")) && !isCountrySpecific(phoneId, "USA", "CAN");
+                return 1 == Integer.parseInt(SemTelephonyProps.support_dual_rat().orElse("0"))
+                        && !isCountrySpecific(phoneId, "USA", "CAN");
             case 16:
-                return (("XXV".equalsIgnoreCase(SALES_CODE) || "XEV".equalsIgnoreCase(SALES_CODE)) && isIccOperatorNumericSpecific(phoneId, "45204")) || !TextUtils.isEmpty(getNotAllowedNetworkMode(phoneId));
+                return (("XXV".equalsIgnoreCase(SALES_CODE) || "XEV".equalsIgnoreCase(SALES_CODE))
+                                && isIccOperatorNumericSpecific(phoneId, "45204"))
+                        || !TextUtils.isEmpty(getNotAllowedNetworkMode(phoneId));
             case 17:
                 return !isMainOperatorSpecific(phoneId, "BMC");
             case 18:
                 return true;
             case 19:
-                return isCountrySpecific(phoneId, "KOR") || isMainOperatorSpecific(phoneId, "VZW", "SPR", "USC", "TGY", "KDI") || isNetworkCodeSpecific(phoneId, "COD", "COB");
+                return isCountrySpecific(phoneId, "KOR")
+                        || isMainOperatorSpecific(phoneId, "VZW", "SPR", "USC", "TGY", "KDI")
+                        || isNetworkCodeSpecific(phoneId, "COD", "COB");
             case 20:
-                return Build.VERSION.DEVICE_INITIAL_SDK_INT < 33 && isSubOperatorSpecific(phoneId, "ATT", "AIO");
+                return Build.VERSION.DEVICE_INITIAL_SDK_INT < 33
+                        && isSubOperatorSpecific(phoneId, "ATT", "AIO");
             case 21:
-                return Build.VERSION.DEVICE_INITIAL_SDK_INT < 34 && isSubOperatorSpecific(phoneId, "TMO", "MTR", "ASR");
+                return Build.VERSION.DEVICE_INITIAL_SDK_INT < 34
+                        && isSubOperatorSpecific(phoneId, "TMO", "MTR", "ASR");
             case 22:
                 return isMainOperatorSpecific(phoneId, "TMO", "ATT", "XAA", "BMC", "DSG");
             case 23:
                 return isMainOperatorSpecific(phoneId, "VZW");
             case 24:
-                return carrierId == 1187 || carrierId == 1779 || carrierId == 1 || carrierId == 1943 || carrierId == 1433;
+                return carrierId == 1187
+                        || carrierId == 1779
+                        || carrierId == 1
+                        || carrierId == 1943
+                        || carrierId == 1433;
             case 25:
                 return isCountrySpecific(phoneId, "CHN", "HKG", "TPE");
             case 26:
@@ -279,7 +352,8 @@ public class TelephonyFeatures {
     }
 
     public static boolean isIccOperatorNumericSpecific(int phoneId, String... numeric) {
-        String iccOperatorNumeric = TelephonyManager.getDefault().getSimOperatorNumericForPhone(phoneId);
+        String iccOperatorNumeric =
+                TelephonyManager.getDefault().getSimOperatorNumericForPhone(phoneId);
         for (String x : numeric) {
             if (x.equals(iccOperatorNumeric)) {
                 return true;
@@ -306,13 +380,17 @@ public class TelephonyFeatures {
     }
 
     public static String getNotAllowedNetworkMode(int phoneId) {
-        return SemCarrierFeature.getInstance().getString(phoneId, "CarrierFeature_RIL_NotAllowedNetworkMode", "", true);
+        return SemCarrierFeature.getInstance()
+                .getString(phoneId, "CarrierFeature_RIL_NotAllowedNetworkMode", "", true);
     }
 
     public static boolean needToCheckEmergencyNumberForEachSlot(int phoneId) {
         String countryIso = TelephonyManager.getDefault().getNetworkCountryIso(phoneId);
         String lastCountryIso = TelephonyManager.getDefault().getLastNetworkCountryIso(phoneId);
-        if ("vn".equals(countryIso) || "vn".equals(lastCountryIso) || "th".equals(countryIso) || "th".equals(lastCountryIso)) {
+        if ("vn".equals(countryIso)
+                || "vn".equals(lastCountryIso)
+                || "th".equals(countryIso)
+                || "th".equals(lastCountryIso)) {
             return true;
         }
         return false;
@@ -320,7 +398,8 @@ public class TelephonyFeatures {
 
     public static boolean needSecSimOnOffEx() {
         if (Build.VERSION.DEVICE_INITIAL_SDK_INT < 28) {
-            if ("SM-M205F".equalsIgnoreCase(SystemProperties.get("ro.product.model", "")) || "SM-M305F".equalsIgnoreCase(SystemProperties.get("ro.product.model", ""))) {
+            if ("SM-M205F".equalsIgnoreCase(SystemProperties.get("ro.product.model", ""))
+                    || "SM-M305F".equalsIgnoreCase(SystemProperties.get("ro.product.model", ""))) {
                 return true;
             }
             return false;
@@ -329,7 +408,8 @@ public class TelephonyFeatures {
     }
 
     public static boolean isGCFMode(int phoneId) {
-        return "GCF".equals(getMainOperatorName(phoneId)) || "1".equals(SystemProperties.get("persist.radio.gcfmode", "0"));
+        return "GCF".equals(getMainOperatorName(phoneId))
+                || "1".equals(SystemProperties.get("persist.radio.gcfmode", "0"));
     }
 
     public static boolean supportDualLte() {
@@ -387,8 +467,26 @@ public class TelephonyFeatures {
         log("getCountryName: " + getCountryName(phoneId));
         log("SHIP_BUILD: " + SHIP_BUILD);
         log("SALES_CODE: " + SALES_CODE);
-        log("DEVICE_TYPE: " + DEVICE_TYPE + " (IS_PHONE: " + IS_PHONE + ", IS_TABLET: " + IS_TABLET + ", IS_WATCH: " + IS_WATCH + NavigationBarInflaterView.KEY_CODE_END);
-        log("HARDWARE_TYPE: " + HARDWARE_TYPE + " (IS_QCOM: " + IS_QCOM + ", IS_EXYNOS: " + IS_EXYNOS + ", IS_MTK: " + IS_MTK + NavigationBarInflaterView.KEY_CODE_END);
+        log(
+                "DEVICE_TYPE: "
+                        + DEVICE_TYPE
+                        + " (IS_PHONE: "
+                        + IS_PHONE
+                        + ", IS_TABLET: "
+                        + IS_TABLET
+                        + ", IS_WATCH: "
+                        + IS_WATCH
+                        + NavigationBarInflaterView.KEY_CODE_END);
+        log(
+                "HARDWARE_TYPE: "
+                        + HARDWARE_TYPE
+                        + " (IS_QCOM: "
+                        + IS_QCOM
+                        + ", IS_EXYNOS: "
+                        + IS_EXYNOS
+                        + ", IS_MTK: "
+                        + IS_MTK
+                        + NavigationBarInflaterView.KEY_CODE_END);
         log("IS_WIFI_ONLY: " + IS_WIFI_ONLY);
         log("IS_FACTORY_BIN: " + IS_FACTORY_BIN);
         log("getNetworkCode: " + getNetworkCode(phoneId));

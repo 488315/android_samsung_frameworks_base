@@ -7,19 +7,25 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public final class SyncableFlag implements Parcelable {
-    public static final Parcelable.Creator<SyncableFlag> CREATOR = new Parcelable.Creator<SyncableFlag>() { // from class: android.flags.SyncableFlag.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SyncableFlag createFromParcel(Parcel in) {
-            return new SyncableFlag(in.readString(), in.readString(), in.readString(), in.readBoolean(), in.readBoolean());
-        }
+    public static final Parcelable.Creator<SyncableFlag> CREATOR =
+            new Parcelable.Creator<SyncableFlag>() { // from class: android.flags.SyncableFlag.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SyncableFlag createFromParcel(Parcel in) {
+                    return new SyncableFlag(
+                            in.readString(),
+                            in.readString(),
+                            in.readString(),
+                            in.readBoolean(),
+                            in.readBoolean());
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SyncableFlag[] newArray(int size) {
-            return new SyncableFlag[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SyncableFlag[] newArray(int size) {
+                    return new SyncableFlag[size];
+                }
+            };
     private final boolean mDynamic;
     private final String mName;
     private final String mNamespace;
@@ -30,7 +36,8 @@ public final class SyncableFlag implements Parcelable {
         this(namespace, name, value, dynamic, false);
     }
 
-    public SyncableFlag(String namespace, String name, String value, boolean dynamic, boolean overridden) {
+    public SyncableFlag(
+            String namespace, String name, String value, boolean dynamic, boolean overridden) {
         this.mNamespace = namespace;
         this.mName = name;
         this.mValue = value;
@@ -73,6 +80,11 @@ public final class SyncableFlag implements Parcelable {
     }
 
     public String toString() {
-        return getNamespace() + MediaMetrics.SEPARATOR + getName() + NavigationBarInflaterView.SIZE_MOD_START + getValue() + NavigationBarInflaterView.SIZE_MOD_END;
+        return getNamespace()
+                + MediaMetrics.SEPARATOR
+                + getName()
+                + NavigationBarInflaterView.SIZE_MOD_START
+                + getValue()
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 }

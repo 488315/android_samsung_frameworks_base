@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
@@ -13,8 +14,7 @@ public interface IAnnouncementListener extends IInterface {
 
     public static class Default implements IAnnouncementListener {
         @Override // android.hardware.radio.IAnnouncementListener
-        public void onListUpdated(List<Announcement> activeAnnouncements) throws RemoteException {
-        }
+        public void onListUpdated(List<Announcement> activeAnnouncements) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -22,7 +22,7 @@ public interface IAnnouncementListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAnnouncementListener {
+    public abstract static class Stub extends Binder implements IAnnouncementListener {
         public static final String DESCRIPTOR = "android.hardware.radio.IAnnouncementListener";
         static final int TRANSACTION_onListUpdated = 1;
 
@@ -61,7 +61,8 @@ public interface IAnnouncementListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -97,7 +98,8 @@ public interface IAnnouncementListener extends IInterface {
             }
 
             @Override // android.hardware.radio.IAnnouncementListener
-            public void onListUpdated(List<Announcement> activeAnnouncements) throws RemoteException {
+            public void onListUpdated(List<Announcement> activeAnnouncements)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

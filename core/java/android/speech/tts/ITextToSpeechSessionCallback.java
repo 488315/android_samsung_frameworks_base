@@ -5,13 +5,13 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.speech.tts.ITextToSpeechSession;
 
 /* loaded from: classes3.dex */
 public interface ITextToSpeechSessionCallback extends IInterface {
     public static final String DESCRIPTOR = "android.speech.tts.ITextToSpeechSessionCallback";
 
-    void onConnected(ITextToSpeechSession iTextToSpeechSession, IBinder iBinder) throws RemoteException;
+    void onConnected(ITextToSpeechSession iTextToSpeechSession, IBinder iBinder)
+            throws RemoteException;
 
     void onDisconnected() throws RemoteException;
 
@@ -19,16 +19,14 @@ public interface ITextToSpeechSessionCallback extends IInterface {
 
     public static class Default implements ITextToSpeechSessionCallback {
         @Override // android.speech.tts.ITextToSpeechSessionCallback
-        public void onConnected(ITextToSpeechSession session, IBinder serviceBinder) throws RemoteException {
-        }
+        public void onConnected(ITextToSpeechSession session, IBinder serviceBinder)
+                throws RemoteException {}
 
         @Override // android.speech.tts.ITextToSpeechSessionCallback
-        public void onDisconnected() throws RemoteException {
-        }
+        public void onDisconnected() throws RemoteException {}
 
         @Override // android.speech.tts.ITextToSpeechSessionCallback
-        public void onError(String errorInfo) throws RemoteException {
-        }
+        public void onError(String errorInfo) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -36,7 +34,7 @@ public interface ITextToSpeechSessionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITextToSpeechSessionCallback {
+    public abstract static class Stub extends Binder implements ITextToSpeechSessionCallback {
         static final int TRANSACTION_onConnected = 1;
         static final int TRANSACTION_onDisconnected = 2;
         static final int TRANSACTION_onError = 3;
@@ -80,7 +78,8 @@ public interface ITextToSpeechSessionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITextToSpeechSessionCallback.DESCRIPTOR);
             }
@@ -90,7 +89,8 @@ public interface ITextToSpeechSessionCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ITextToSpeechSession _arg0 = ITextToSpeechSession.Stub.asInterface(data.readStrongBinder());
+                    ITextToSpeechSession _arg0 =
+                            ITextToSpeechSession.Stub.asInterface(data.readStrongBinder());
                     IBinder _arg1 = data.readStrongBinder();
                     data.enforceNoDataAvail();
                     onConnected(_arg0, _arg1);
@@ -125,7 +125,8 @@ public interface ITextToSpeechSessionCallback extends IInterface {
             }
 
             @Override // android.speech.tts.ITextToSpeechSessionCallback
-            public void onConnected(ITextToSpeechSession session, IBinder serviceBinder) throws RemoteException {
+            public void onConnected(ITextToSpeechSession session, IBinder serviceBinder)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITextToSpeechSessionCallback.DESCRIPTOR);

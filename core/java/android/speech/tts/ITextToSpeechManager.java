@@ -5,18 +5,18 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.speech.tts.ITextToSpeechSessionCallback;
 
 /* loaded from: classes3.dex */
 public interface ITextToSpeechManager extends IInterface {
     public static final String DESCRIPTOR = "android.speech.tts.ITextToSpeechManager";
 
-    void createSession(String str, ITextToSpeechSessionCallback iTextToSpeechSessionCallback) throws RemoteException;
+    void createSession(String str, ITextToSpeechSessionCallback iTextToSpeechSessionCallback)
+            throws RemoteException;
 
     public static class Default implements ITextToSpeechManager {
         @Override // android.speech.tts.ITextToSpeechManager
-        public void createSession(String engine, ITextToSpeechSessionCallback managerCallback) throws RemoteException {
-        }
+        public void createSession(String engine, ITextToSpeechSessionCallback managerCallback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +24,7 @@ public interface ITextToSpeechManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITextToSpeechManager {
+    public abstract static class Stub extends Binder implements ITextToSpeechManager {
         static final int TRANSACTION_createSession = 1;
 
         public Stub() {
@@ -62,7 +62,8 @@ public interface ITextToSpeechManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITextToSpeechManager.DESCRIPTOR);
             }
@@ -73,7 +74,8 @@ public interface ITextToSpeechManager extends IInterface {
             switch (code) {
                 case 1:
                     String _arg0 = data.readString();
-                    ITextToSpeechSessionCallback _arg1 = ITextToSpeechSessionCallback.Stub.asInterface(data.readStrongBinder());
+                    ITextToSpeechSessionCallback _arg1 =
+                            ITextToSpeechSessionCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     createSession(_arg0, _arg1);
                     return true;
@@ -99,7 +101,8 @@ public interface ITextToSpeechManager extends IInterface {
             }
 
             @Override // android.speech.tts.ITextToSpeechManager
-            public void createSession(String engine, ITextToSpeechSessionCallback managerCallback) throws RemoteException {
+            public void createSession(String engine, ITextToSpeechSessionCallback managerCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITextToSpeechManager.DESCRIPTOR);

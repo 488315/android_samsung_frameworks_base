@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.operator;
 
 import android.security.keystore.KeyProperties;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.DERNull;
@@ -10,6 +11,7 @@ import com.android.internal.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.pkcs.RSASSAPSSparams;
 import com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import com.android.internal.org.bouncycastle.asn1.x9.X9ObjectIdentifiers;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,10 +22,14 @@ public class DefaultDigestAlgorithmIdentifierFinder implements DigestAlgorithmId
 
     static {
         digestOids.put(OIWObjectIdentifiers.sha1WithRSA, OIWObjectIdentifiers.idSHA1);
-        digestOids.put(PKCSObjectIdentifiers.sha224WithRSAEncryption, NISTObjectIdentifiers.id_sha224);
-        digestOids.put(PKCSObjectIdentifiers.sha256WithRSAEncryption, NISTObjectIdentifiers.id_sha256);
-        digestOids.put(PKCSObjectIdentifiers.sha384WithRSAEncryption, NISTObjectIdentifiers.id_sha384);
-        digestOids.put(PKCSObjectIdentifiers.sha512WithRSAEncryption, NISTObjectIdentifiers.id_sha512);
+        digestOids.put(
+                PKCSObjectIdentifiers.sha224WithRSAEncryption, NISTObjectIdentifiers.id_sha224);
+        digestOids.put(
+                PKCSObjectIdentifiers.sha256WithRSAEncryption, NISTObjectIdentifiers.id_sha256);
+        digestOids.put(
+                PKCSObjectIdentifiers.sha384WithRSAEncryption, NISTObjectIdentifiers.id_sha384);
+        digestOids.put(
+                PKCSObjectIdentifiers.sha512WithRSAEncryption, NISTObjectIdentifiers.id_sha512);
         digestOids.put(PKCSObjectIdentifiers.md5WithRSAEncryption, PKCSObjectIdentifiers.md5);
         digestOids.put(PKCSObjectIdentifiers.sha1WithRSAEncryption, OIWObjectIdentifiers.idSHA1);
         digestOids.put(X9ObjectIdentifiers.ecdsa_with_SHA1, OIWObjectIdentifiers.idSHA1);
@@ -47,15 +53,20 @@ public class DefaultDigestAlgorithmIdentifierFinder implements DigestAlgorithmId
     @Override // com.android.internal.org.bouncycastle.operator.DigestAlgorithmIdentifierFinder
     public AlgorithmIdentifier find(AlgorithmIdentifier sigAlgId) {
         if (sigAlgId.getAlgorithm().equals((ASN1Primitive) PKCSObjectIdentifiers.id_RSASSA_PSS)) {
-            AlgorithmIdentifier digAlgId = RSASSAPSSparams.getInstance(sigAlgId.getParameters()).getHashAlgorithm();
+            AlgorithmIdentifier digAlgId =
+                    RSASSAPSSparams.getInstance(sigAlgId.getParameters()).getHashAlgorithm();
             return digAlgId;
         }
-        AlgorithmIdentifier digAlgId2 = new AlgorithmIdentifier((ASN1ObjectIdentifier) digestOids.get(sigAlgId.getAlgorithm()), DERNull.INSTANCE);
+        AlgorithmIdentifier digAlgId2 =
+                new AlgorithmIdentifier(
+                        (ASN1ObjectIdentifier) digestOids.get(sigAlgId.getAlgorithm()),
+                        DERNull.INSTANCE);
         return digAlgId2;
     }
 
     @Override // com.android.internal.org.bouncycastle.operator.DigestAlgorithmIdentifierFinder
     public AlgorithmIdentifier find(String digAlgName) {
-        return new AlgorithmIdentifier((ASN1ObjectIdentifier) digestNameToOids.get(digAlgName), DERNull.INSTANCE);
+        return new AlgorithmIdentifier(
+                (ASN1ObjectIdentifier) digestNameToOids.get(digAlgName), DERNull.INSTANCE);
     }
 }

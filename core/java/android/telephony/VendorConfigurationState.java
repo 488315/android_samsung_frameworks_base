@@ -2,6 +2,7 @@ package android.telephony;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -20,19 +21,22 @@ public class VendorConfigurationState implements Parcelable {
     public static final String CONFIG_SUPPORT_UAC_TYPE = "SUPPORT_UAC_TYPE";
     public static final String CONFIG_VOLTE_E911CALL = "VOLTE_911_CALL";
     public static final String CONFIG_WFC_DEFAULT_SPN = "WFC_DEFAULT_SPN";
-    public static final Parcelable.Creator<VendorConfigurationState> CREATOR = new Parcelable.Creator<VendorConfigurationState>() { // from class: android.telephony.VendorConfigurationState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VendorConfigurationState createFromParcel(Parcel in) {
-            return new VendorConfigurationState(in);
-        }
+    public static final Parcelable.Creator<VendorConfigurationState> CREATOR =
+            new Parcelable.Creator<
+                    VendorConfigurationState>() { // from class:
+                                                  // android.telephony.VendorConfigurationState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VendorConfigurationState createFromParcel(Parcel in) {
+                    return new VendorConfigurationState(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VendorConfigurationState[] newArray(int size) {
-            return new VendorConfigurationState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VendorConfigurationState[] newArray(int size) {
+                    return new VendorConfigurationState[size];
+                }
+            };
     private static final String LOG_TAG = "VendorConfigurationState";
     private Map<String, String> mDataMap;
 
@@ -100,7 +104,8 @@ public class VendorConfigurationState implements Parcelable {
         if (this.mDataMap.containsKey(name)) {
             this.mDataMap.put(name, value);
         } else {
-            com.android.telephony.Rlog.d(LOG_TAG, "setData - VendorConfiguration does not match: " + name);
+            com.android.telephony.Rlog.d(
+                    LOG_TAG, "setData - VendorConfiguration does not match: " + name);
         }
     }
 
@@ -108,7 +113,8 @@ public class VendorConfigurationState implements Parcelable {
         if (this.mDataMap.containsKey(name)) {
             return this.mDataMap.get(name);
         }
-        com.android.telephony.Rlog.d(LOG_TAG, "getData - VendorConfiguration does not match: " + name);
+        com.android.telephony.Rlog.d(
+                LOG_TAG, "getData - VendorConfiguration does not match: " + name);
         return "";
     }
 

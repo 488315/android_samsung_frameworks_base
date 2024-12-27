@@ -28,7 +28,13 @@ public class DebugUtils {
                     Class<?> parent = klass;
                     do {
                         try {
-                            declaredMethod = parent.getDeclaredMethod("get" + pair[0].substring(0, 1).toUpperCase(Locale.ROOT) + pair[0].substring(1), null);
+                            declaredMethod =
+                                    parent.getDeclaredMethod(
+                                            "get"
+                                                    + pair[0].substring(0, 1)
+                                                            .toUpperCase(Locale.ROOT)
+                                                    + pair[0].substring(1),
+                                            null);
                             Class<? super Object> superclass = klass.getSuperclass();
                             parent = superclass;
                             if (superclass == null) {
@@ -59,7 +65,8 @@ public class DebugUtils {
             return;
         }
         String simpleName = cls.getClass().getSimpleName();
-        if ((simpleName == null || simpleName.isEmpty()) && (end = (simpleName = cls.getClass().getName()).lastIndexOf(46)) > 0) {
+        if ((simpleName == null || simpleName.isEmpty())
+                && (end = (simpleName = cls.getClass().getName()).lastIndexOf(46)) > 0) {
             simpleName = simpleName.substring(end + 1);
         }
         out.append(simpleName);
@@ -151,7 +158,10 @@ public class DebugUtils {
         for (int i = 0; i < length; i++) {
             Field field = declaredFields[i];
             int modifiers = field.getModifiers();
-            if (Modifier.isStatic(modifiers) && Modifier.isFinal(modifiers) && field.getType().equals(Integer.TYPE) && field.getName().startsWith(prefix)) {
+            if (Modifier.isStatic(modifiers)
+                    && Modifier.isFinal(modifiers)
+                    && field.getType().equals(Integer.TYPE)
+                    && field.getName().startsWith(prefix)) {
                 try {
                     if (value == field.getInt(null)) {
                         return constNameWithoutPrefix(prefix, field);
@@ -177,7 +187,8 @@ public class DebugUtils {
             int modifiers = field.getModifiers();
             if (!Modifier.isStatic(modifiers) || !Modifier.isFinal(modifiers)) {
                 fieldArr = declaredFields;
-            } else if (!field.getType().equals(Integer.TYPE) && !field.getType().equals(Long.TYPE)) {
+            } else if (!field.getType().equals(Integer.TYPE)
+                    && !field.getType().equals(Long.TYPE)) {
                 fieldArr = declaredFields;
             } else if (!field.getName().startsWith(prefix)) {
                 fieldArr = declaredFields;
@@ -229,7 +240,11 @@ public class DebugUtils {
             Field field = declaredFields[i];
             int modifiers = field.getModifiers();
             try {
-                if (Modifier.isStatic(modifiers) && Modifier.isFinal(modifiers) && field.getType().equals(Integer.TYPE) && field.getName().startsWith(prefix) && field.getInt(null) == value) {
+                if (Modifier.isStatic(modifiers)
+                        && Modifier.isFinal(modifiers)
+                        && field.getType().equals(Integer.TYPE)
+                        && field.getName().startsWith(prefix)
+                        && field.getInt(null) == value) {
                     return constNameWithoutPrefix(prefix, field);
                 }
             } catch (IllegalAccessException e) {
@@ -243,19 +258,32 @@ public class DebugUtils {
     }
 
     public static List<String> callersWithin(final Class<?> cls, int offset) {
-        List<String> result = (List) Arrays.stream(Thread.currentThread().getStackTrace()).skip(offset + 3).filter(new Predicate() { // from class: android.util.DebugUtils$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                boolean startsWith;
-                startsWith = ((StackTraceElement) obj).getClassName().startsWith(cls.getName());
-                return startsWith;
-            }
-        }).map(new Function() { // from class: android.util.DebugUtils$$ExternalSyntheticLambda1
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return ((StackTraceElement) obj).getMethodName();
-            }
-        }).collect(Collectors.toList());
+        List<String> result =
+                (List)
+                        Arrays.stream(Thread.currentThread().getStackTrace())
+                                .skip(offset + 3)
+                                .filter(
+                                        new Predicate() { // from class:
+                                                          // android.util.DebugUtils$$ExternalSyntheticLambda0
+                                            @Override // java.util.function.Predicate
+                                            public final boolean test(Object obj) {
+                                                boolean startsWith;
+                                                startsWith =
+                                                        ((StackTraceElement) obj)
+                                                                .getClassName()
+                                                                .startsWith(cls.getName());
+                                                return startsWith;
+                                            }
+                                        })
+                                .map(
+                                        new Function() { // from class:
+                                                         // android.util.DebugUtils$$ExternalSyntheticLambda1
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                return ((StackTraceElement) obj).getMethodName();
+                                            }
+                                        })
+                                .collect(Collectors.toList());
         Collections.reverse(result);
         return result;
     }

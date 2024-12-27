@@ -3,6 +3,7 @@ package com.samsung.android.server.dynamicfeature;
 import android.os.Build;
 import android.os.SystemProperties;
 import android.util.Slog;
+
 import java.util.Random;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -60,7 +61,8 @@ public abstract class InfoBoard {
     public static String getProperty() {
         try {
             Class<?> cls = Class.forName("android.os.SystemProperties");
-            String str = (String) cls.getMethod("get", String.class).invoke(cls, "ro.build.version.sep");
+            String str =
+                    (String) cls.getMethod("get", String.class).invoke(cls, "ro.build.version.sep");
             return str != null ? !str.isEmpty() ? str : "" : "";
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
@@ -87,10 +89,13 @@ public abstract class InfoBoard {
             return true;
         }
         String str = Build.DISPLAY;
-        if (!sExecutableBinaryType.equals("Z".equals(str.substring(str.length() + (-4), str.length() + (-3))) ? "Z" : "C")) {
+        if (!sExecutableBinaryType.equals(
+                "Z".equals(str.substring(str.length() + (-4), str.length() + (-3))) ? "Z" : "C")) {
             return false;
         }
-        Slog.d("dynamicfeature_InfoBoard", "This is Beta Binary : " + str.substring(str.length() - 4, str.length() - 3));
+        Slog.d(
+                "dynamicfeature_InfoBoard",
+                "This is Beta Binary : " + str.substring(str.length() - 4, str.length() - 3));
         return true;
     }
 
@@ -106,7 +111,8 @@ public abstract class InfoBoard {
         }
     }
 
-    public static void setParams(String str, String str2, String str3, String str4, String str5, int i) {
+    public static void setParams(
+            String str, String str2, String str3, String str4, String str5, int i) {
         ParamInfos paramInfos = paramInfo;
         if (!paramInfos.mcc.equals(str)) {
             sParamDirty = true;

@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -17,12 +18,10 @@ public interface IAmbientContextObserver extends IInterface {
 
     public static class Default implements IAmbientContextObserver {
         @Override // android.app.ambientcontext.IAmbientContextObserver
-        public void onEvents(List<AmbientContextEvent> events) throws RemoteException {
-        }
+        public void onEvents(List<AmbientContextEvent> events) throws RemoteException {}
 
         @Override // android.app.ambientcontext.IAmbientContextObserver
-        public void onRegistrationComplete(int statusCode) throws RemoteException {
-        }
+        public void onRegistrationComplete(int statusCode) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +29,7 @@ public interface IAmbientContextObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAmbientContextObserver {
+    public abstract static class Stub extends Binder implements IAmbientContextObserver {
         static final int TRANSACTION_onEvents = 1;
         static final int TRANSACTION_onRegistrationComplete = 2;
 
@@ -71,7 +70,8 @@ public interface IAmbientContextObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAmbientContextObserver.DESCRIPTOR);
             }
@@ -81,7 +81,8 @@ public interface IAmbientContextObserver extends IInterface {
             }
             switch (code) {
                 case 1:
-                    List<AmbientContextEvent> _arg0 = data.createTypedArrayList(AmbientContextEvent.CREATOR);
+                    List<AmbientContextEvent> _arg0 =
+                            data.createTypedArrayList(AmbientContextEvent.CREATOR);
                     data.enforceNoDataAvail();
                     onEvents(_arg0);
                     return true;

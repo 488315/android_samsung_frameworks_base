@@ -17,7 +17,9 @@ import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;
+
 import com.samsung.android.media.SemBackgroundMusic;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
@@ -164,15 +166,18 @@ public final class SemMediaCapture {
 
     private native void _seekTo(int i);
 
-    private native void _setAudioVolumeFade(int i, int i2, int i3, int i4, int i5) throws IllegalStateException, IllegalArgumentException;
+    private native void _setAudioVolumeFade(int i, int i2, int i3, int i4, int i5)
+            throws IllegalStateException, IllegalArgumentException;
 
     private native void _setBackgroundMusic(Parcel parcel) throws IllegalStateException;
 
     private native void _setCaptureRange(int i, int i2);
 
-    private native void _setDataSource(FileDescriptor fileDescriptor, long j, long j2) throws IllegalArgumentException, IllegalStateException;
+    private native void _setDataSource(FileDescriptor fileDescriptor, long j, long j2)
+            throws IllegalArgumentException, IllegalStateException;
 
-    private native void _setOutputFile(FileDescriptor fileDescriptor) throws IllegalArgumentException, IllegalStateException;
+    private native void _setOutputFile(FileDescriptor fileDescriptor)
+            throws IllegalArgumentException, IllegalStateException;
 
     private native void _setParameter(int i, int i2);
 
@@ -188,7 +193,9 @@ public final class SemMediaCapture {
 
     private native void _stopCapture();
 
-    private native void nativeSetDataSource(IBinder iBinder, String str, String[] strArr, String[] strArr2) throws IOException, IllegalArgumentException, SecurityException, IllegalStateException;
+    private native void nativeSetDataSource(
+            IBinder iBinder, String str, String[] strArr, String[] strArr2)
+            throws IOException, IllegalArgumentException, SecurityException, IllegalStateException;
 
     private final native void native_finalize();
 
@@ -218,11 +225,13 @@ public final class SemMediaCapture {
         native_setup(new WeakReference(this));
     }
 
-    public void setDataSource(FileDescriptor fd) throws IOException, IllegalStateException, IllegalArgumentException {
+    public void setDataSource(FileDescriptor fd)
+            throws IOException, IllegalStateException, IllegalArgumentException {
         _setDataSource(fd, 0L, 576460752303423487L);
     }
 
-    public void setDataSource(FileDescriptor fd, long offset, long length) throws IOException, IllegalStateException, IllegalArgumentException {
+    public void setDataSource(FileDescriptor fd, long offset, long length)
+            throws IOException, IllegalStateException, IllegalArgumentException {
         ParcelFileDescriptor modernFd = FileUtils.convertToModernFd(fd);
         if (modernFd == null) {
             _setDataSource(fd, offset, length);
@@ -231,11 +240,13 @@ public final class SemMediaCapture {
         }
     }
 
-    public void setDataSource(String path) throws IOException, IllegalStateException, IllegalArgumentException {
+    public void setDataSource(String path)
+            throws IOException, IllegalStateException, IllegalArgumentException {
         setDataSource(path, (Map<String, String>) null, (List<HttpCookie>) null);
     }
 
-    private void setDataSource(String path, Map<String, String> headers, List<HttpCookie> cookies) throws IOException, IllegalArgumentException, SecurityException, IllegalStateException {
+    private void setDataSource(String path, Map<String, String> headers, List<HttpCookie> cookies)
+            throws IOException, IllegalArgumentException, SecurityException, IllegalStateException {
         String[] keys = null;
         String[] values = null;
         if (headers != null) {
@@ -258,7 +269,8 @@ public final class SemMediaCapture {
                 if (afd.getDeclaredLength() < 0) {
                     setDataSource(afd.getFileDescriptor());
                 } else {
-                    _setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getDeclaredLength());
+                    _setDataSource(
+                            afd.getFileDescriptor(), afd.getStartOffset(), afd.getDeclaredLength());
                 }
                 if (afd != null) {
                     afd.close();
@@ -280,11 +292,14 @@ public final class SemMediaCapture {
         }
     }
 
-    public void setDataSource(Context context, Uri uri) throws IOException, IllegalArgumentException, SecurityException, IllegalStateException {
+    public void setDataSource(Context context, Uri uri)
+            throws IOException, IllegalArgumentException, SecurityException, IllegalStateException {
         setDataSource(context, uri, (Map<String, String>) null, (List<HttpCookie>) null);
     }
 
-    public void setDataSource(Context context, Uri uri, Map<String, String> headers, List<HttpCookie> cookies) throws IOException {
+    public void setDataSource(
+            Context context, Uri uri, Map<String, String> headers, List<HttpCookie> cookies)
+            throws IOException {
         CookieHandler cookieHandler;
         if (context == null) {
             throw new NullPointerException("context param can not be null.");
@@ -292,8 +307,12 @@ public final class SemMediaCapture {
         if (uri == null) {
             throw new NullPointerException("uri param can not be null.");
         }
-        if (cookies != null && (cookieHandler = CookieHandler.getDefault()) != null && !(cookieHandler instanceof CookieManager)) {
-            throw new IllegalArgumentException("The cookie handler has to be of CookieManager type when cookies are provided.");
+        if (cookies != null
+                && (cookieHandler = CookieHandler.getDefault()) != null
+                && !(cookieHandler instanceof CookieManager)) {
+            throw new IllegalArgumentException(
+                    "The cookie handler has to be of CookieManager type when cookies are"
+                        + " provided.");
         }
         ContentResolver resolver = context.getContentResolver();
         String scheme = uri.getScheme();
@@ -314,7 +333,9 @@ public final class SemMediaCapture {
         return null;
     }
 
-    private void setDataSource(String path, String[] keys, String[] values, List<HttpCookie> cookies) throws IOException, IllegalArgumentException, SecurityException, IllegalStateException {
+    private void setDataSource(
+            String path, String[] keys, String[] values, List<HttpCookie> cookies)
+            throws IOException, IllegalArgumentException, SecurityException, IllegalStateException {
         if (path == null) {
             throw new IllegalArgumentException("input path is null.");
         }
@@ -323,7 +344,8 @@ public final class SemMediaCapture {
         if ("file".equals(scheme)) {
             path = uri.getPath();
         } else if (scheme != null) {
-            nativeSetDataSource(createHttpServiceBinderIfNecessary(path, cookies), path, keys, values);
+            nativeSetDataSource(
+                    createHttpServiceBinderIfNecessary(path, cookies), path, keys, values);
             return;
         }
         File file = new File(path);
@@ -345,7 +367,8 @@ public final class SemMediaCapture {
         throw new IOException("setDataSource failed.");
     }
 
-    public void setOutputFile(FileDescriptor fd) throws IOException, IllegalStateException, IllegalArgumentException {
+    public void setOutputFile(FileDescriptor fd)
+            throws IOException, IllegalStateException, IllegalArgumentException {
         _setOutputFile(fd);
     }
 
@@ -365,15 +388,19 @@ public final class SemMediaCapture {
         return _getCaptureFrame(msec);
     }
 
-    public void setStartEndTime(int startMs, int endMs) throws IllegalStateException, IllegalArgumentException {
+    public void setStartEndTime(int startMs, int endMs)
+            throws IllegalStateException, IllegalArgumentException {
         _setStartEndTime(startMs, endMs);
     }
 
-    public void setAudioVolumeFade(int mode, int fadeInStart, int fadeInDuration, int fadeOutStart, int fadeOutDuration) throws IllegalStateException, IllegalArgumentException {
+    public void setAudioVolumeFade(
+            int mode, int fadeInStart, int fadeInDuration, int fadeOutStart, int fadeOutDuration)
+            throws IllegalStateException, IllegalArgumentException {
         _setAudioVolumeFade(mode, fadeInStart, fadeInDuration, fadeOutStart, fadeOutDuration);
     }
 
-    public void setParameter(int key, int value) throws IllegalStateException, IllegalArgumentException {
+    public void setParameter(int key, int value)
+            throws IllegalStateException, IllegalArgumentException {
         _setParameter(key, value);
     }
 
@@ -409,13 +436,15 @@ public final class SemMediaCapture {
         }
     }
 
-    public void setDynamicViewingConfigurations(List<DynamicViewingConfiguration> dvConfigs) throws IllegalStateException, IllegalArgumentException {
+    public void setDynamicViewingConfigurations(List<DynamicViewingConfiguration> dvConfigs)
+            throws IllegalStateException, IllegalArgumentException {
         if (dvConfigs == null) {
             throw new NullPointerException("dvConfigs param can not be null.");
         }
         int numDvConfigs = dvConfigs.size();
         if (numDvConfigs <= 0) {
-            throw new IllegalArgumentException("DynamicViewingConfiguration size : " + numDvConfigs);
+            throw new IllegalArgumentException(
+                    "DynamicViewingConfiguration size : " + numDvConfigs);
         }
         Parcel request = Parcel.obtain();
         Parcel reply = Parcel.obtain();
@@ -429,7 +458,15 @@ public final class SemMediaCapture {
                 int endTime = dvConfig.getEndTime();
                 float speedRate = dvConfig.getSpeedRate();
                 if (startTime < 0 || endTime < 0 || startTime == endTime || speedRate <= 0.0f) {
-                    throw new IllegalArgumentException("DynamicViewingConfiguration is abnormal. dvConfig(" + i + ") = " + startTime + ":" + endTime + ":" + speedRate);
+                    throw new IllegalArgumentException(
+                            "DynamicViewingConfiguration is abnormal. dvConfig("
+                                    + i
+                                    + ") = "
+                                    + startTime
+                                    + ":"
+                                    + endTime
+                                    + ":"
+                                    + speedRate);
                 }
                 request.writeInt(startTime);
                 request.writeInt(endTime);
@@ -448,7 +485,8 @@ public final class SemMediaCapture {
         private float mSpeedRate;
         private int mStartTime;
 
-        public BoomerangConfiguration(int startTimeMs, int endTimeMs, float speedRate, int loopCount) {
+        public BoomerangConfiguration(
+                int startTimeMs, int endTimeMs, float speedRate, int loopCount) {
             this.mStartTime = startTimeMs;
             this.mEndTime = endTimeMs;
             this.mSpeedRate = speedRate;
@@ -472,7 +510,8 @@ public final class SemMediaCapture {
         }
     }
 
-    public void setBoomerangConfiguration(BoomerangConfiguration bmConfig) throws IllegalArgumentException {
+    public void setBoomerangConfiguration(BoomerangConfiguration bmConfig)
+            throws IllegalArgumentException {
         if (bmConfig == null) {
             throw new NullPointerException("bmConfig param can not be null.");
         }
@@ -480,8 +519,20 @@ public final class SemMediaCapture {
         int endTime = bmConfig.getEndTime();
         float speedRate = bmConfig.getSpeedRate();
         int loopCount = bmConfig.getLoopCount();
-        if (startTime < 0 || endTime < 0 || startTime == endTime || speedRate < 1.0f || loopCount < 1) {
-            throw new IllegalArgumentException("BoomerangConfiguration is invalid. bmConfig = " + startTime + ":" + endTime + ":" + speedRate + ":" + loopCount);
+        if (startTime < 0
+                || endTime < 0
+                || startTime == endTime
+                || speedRate < 1.0f
+                || loopCount < 1) {
+            throw new IllegalArgumentException(
+                    "BoomerangConfiguration is invalid. bmConfig = "
+                            + startTime
+                            + ":"
+                            + endTime
+                            + ":"
+                            + speedRate
+                            + ":"
+                            + loopCount);
         }
         Parcel request = Parcel.obtain();
         Parcel reply = Parcel.obtain();
@@ -523,7 +574,8 @@ public final class SemMediaCapture {
         _stop();
     }
 
-    public void setStartEndTimeForTrimming(int startTimeMs, int endTimeMs) throws IllegalStateException, IllegalArgumentException {
+    public void setStartEndTimeForTrimming(int startTimeMs, int endTimeMs)
+            throws IllegalStateException, IllegalArgumentException {
         _setCaptureRange(startTimeMs, endTimeMs);
     }
 
@@ -567,7 +619,7 @@ public final class SemMediaCapture {
         native_finalize();
     }
 
-    public static abstract class BackgroundMusic {
+    public abstract static class BackgroundMusic {
         protected ArrayList<BGMInfo> mBGMInfos = new ArrayList<>();
 
         public void clear() {
@@ -600,7 +652,8 @@ public final class SemMediaCapture {
             return bgmInfo;
         }
 
-        protected BGMInfo addInfo(BGMInfo bgmInfo, AssetFileDescriptor afd, int startTime, int endTime) {
+        protected BGMInfo addInfo(
+                BGMInfo bgmInfo, AssetFileDescriptor afd, int startTime, int endTime) {
             bgmInfo.fd = afd.getFileDescriptor();
             bgmInfo.offset = afd.getStartOffset();
             bgmInfo.length = afd.getLength();
@@ -618,8 +671,7 @@ public final class SemMediaCapture {
             long offset;
             int startTimeMs;
 
-            protected BGMInfo() {
-            }
+            protected BGMInfo() {}
         }
     }
 
@@ -712,9 +764,14 @@ public final class SemMediaCapture {
             this.mFBGMOutro = super.addInfo(this.mFBGMOutro, afd, startTime, endTime);
         }
 
-        public void setPlaybackRule(int bodyRepeatCount, int bodyLastIndex, boolean useOutro) throws IllegalArgumentException {
+        public void setPlaybackRule(int bodyRepeatCount, int bodyLastIndex, boolean useOutro)
+                throws IllegalArgumentException {
             if (bodyLastIndex > this.mBodyCount) {
-                String msg = "bodyLastIndex " + bodyLastIndex + "is invalid; larger than BGM_SECTION_TYPE_BODY count " + this.mBodyCount;
+                String msg =
+                        "bodyLastIndex "
+                                + bodyLastIndex
+                                + "is invalid; larger than BGM_SECTION_TYPE_BODY count "
+                                + this.mBodyCount;
                 throw new IllegalArgumentException(msg);
             }
             this.mBodyCycle = bodyRepeatCount;
@@ -786,38 +843,50 @@ public final class SemMediaCapture {
                     break;
                 case 5:
                     if (SemMediaCapture.this.mOnDecodingCompletionListener != null) {
-                        SemMediaCapture.this.mOnDecodingCompletionListener.onDecodingCompletion(this.mMediaCapture);
+                        SemMediaCapture.this.mOnDecodingCompletionListener.onDecodingCompletion(
+                                this.mMediaCapture);
                         break;
                     }
                     break;
                 case 6:
                     if (SemMediaCapture.this.mOnPlaybackCompletionListener != null) {
-                        SemMediaCapture.this.mOnPlaybackCompletionListener.onPlaybackCompletion(this.mMediaCapture);
+                        SemMediaCapture.this.mOnPlaybackCompletionListener.onPlaybackCompletion(
+                                this.mMediaCapture);
                         break;
                     }
                     break;
                 case 7:
                     if (SemMediaCapture.this.mOnRecordingCompletionListener != null) {
-                        SemMediaCapture.this.mOnRecordingCompletionListener.onRecordingCompletion(this.mMediaCapture);
+                        SemMediaCapture.this.mOnRecordingCompletionListener.onRecordingCompletion(
+                                this.mMediaCapture);
                         break;
                     }
                     break;
                 case 8:
                     if (SemMediaCapture.this.mOnRenderingStartedListener != null) {
-                        SemMediaCapture.this.mOnRenderingStartedListener.onRenderingStarted(this.mMediaCapture);
+                        SemMediaCapture.this.mOnRenderingStartedListener.onRenderingStarted(
+                                this.mMediaCapture);
                         break;
                     }
                     break;
                 case 10:
                     if (SemMediaCapture.this.mOnDecodingUpdatedListener != null) {
-                        SemMediaCapture.this.mOnDecodingUpdatedListener.onUpdated(this.mMediaCapture, msg.arg1);
+                        SemMediaCapture.this.mOnDecodingUpdatedListener.onUpdated(
+                                this.mMediaCapture, msg.arg1);
                         break;
                     }
                     break;
                 case 100:
-                    Log.e(SemMediaCapture.TAG, "Error (" + msg.arg1 + "," + msg.arg2 + NavigationBarInflaterView.KEY_CODE_END);
+                    Log.e(
+                            SemMediaCapture.TAG,
+                            "Error ("
+                                    + msg.arg1
+                                    + ","
+                                    + msg.arg2
+                                    + NavigationBarInflaterView.KEY_CODE_END);
                     if (SemMediaCapture.this.mOnErrorListener != null) {
-                        SemMediaCapture.this.mOnErrorListener.onError(this.mMediaCapture, msg.arg1, msg.arg2);
+                        SemMediaCapture.this.mOnErrorListener.onError(
+                                this.mMediaCapture, msg.arg1, msg.arg2);
                         break;
                     }
                     break;
@@ -828,7 +897,8 @@ public final class SemMediaCapture {
         }
     }
 
-    private static void postEventFromNative(Object mediacapture_ref, int what, int arg1, int arg2, Object obj) {
+    private static void postEventFromNative(
+            Object mediacapture_ref, int what, int arg1, int arg2, Object obj) {
         SemMediaCapture mc = (SemMediaCapture) ((WeakReference) mediacapture_ref).get();
         if (mc != null && mc.mEventHandler != null) {
             Message m = mc.mEventHandler.obtainMessage(what, arg1, arg2, obj);

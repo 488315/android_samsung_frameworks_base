@@ -9,25 +9,30 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IRadioDataResponse extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$radio$data$IRadioDataResponse".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$radio$data$IRadioDataResponse".replace('$', '.');
     public static final String HASH = "cd8913a3f9d39f1cc0a5fcf9e90257be94ec38df";
     public static final int VERSION = 3;
 
     void acknowledgeRequest(int i) throws RemoteException;
 
-    void allocatePduSessionIdResponse(RadioResponseInfo radioResponseInfo, int i) throws RemoteException;
+    void allocatePduSessionIdResponse(RadioResponseInfo radioResponseInfo, int i)
+            throws RemoteException;
 
     void cancelHandoverResponse(RadioResponseInfo radioResponseInfo) throws RemoteException;
 
     void deactivateDataCallResponse(RadioResponseInfo radioResponseInfo) throws RemoteException;
 
-    void getDataCallListResponse(RadioResponseInfo radioResponseInfo, SetupDataCallResult[] setupDataCallResultArr) throws RemoteException;
+    void getDataCallListResponse(
+            RadioResponseInfo radioResponseInfo, SetupDataCallResult[] setupDataCallResultArr)
+            throws RemoteException;
 
     String getInterfaceHash() throws RemoteException;
 
     int getInterfaceVersion() throws RemoteException;
 
-    void getSlicingConfigResponse(RadioResponseInfo radioResponseInfo, SlicingConfig slicingConfig) throws RemoteException;
+    void getSlicingConfigResponse(RadioResponseInfo radioResponseInfo, SlicingConfig slicingConfig)
+            throws RemoteException;
 
     void releasePduSessionIdResponse(RadioResponseInfo radioResponseInfo) throws RemoteException;
 
@@ -39,74 +44,68 @@ public interface IRadioDataResponse extends IInterface {
 
     void setInitialAttachApnResponse(RadioResponseInfo radioResponseInfo) throws RemoteException;
 
-    void setupDataCallResponse(RadioResponseInfo radioResponseInfo, SetupDataCallResult setupDataCallResult) throws RemoteException;
+    void setupDataCallResponse(
+            RadioResponseInfo radioResponseInfo, SetupDataCallResult setupDataCallResult)
+            throws RemoteException;
 
     void startHandoverResponse(RadioResponseInfo radioResponseInfo) throws RemoteException;
 
-    void startKeepaliveResponse(RadioResponseInfo radioResponseInfo, KeepaliveStatus keepaliveStatus) throws RemoteException;
+    void startKeepaliveResponse(
+            RadioResponseInfo radioResponseInfo, KeepaliveStatus keepaliveStatus)
+            throws RemoteException;
 
     void stopKeepaliveResponse(RadioResponseInfo radioResponseInfo) throws RemoteException;
 
     public static class Default implements IRadioDataResponse {
         @Override // android.hardware.radio.data.IRadioDataResponse
-        public void acknowledgeRequest(int serial) throws RemoteException {
-        }
+        public void acknowledgeRequest(int serial) throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioDataResponse
-        public void allocatePduSessionIdResponse(RadioResponseInfo info, int id) throws RemoteException {
-        }
+        public void allocatePduSessionIdResponse(RadioResponseInfo info, int id)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioDataResponse
-        public void cancelHandoverResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void cancelHandoverResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioDataResponse
-        public void deactivateDataCallResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void deactivateDataCallResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioDataResponse
-        public void getDataCallListResponse(RadioResponseInfo info, SetupDataCallResult[] dcResponse) throws RemoteException {
-        }
+        public void getDataCallListResponse(
+                RadioResponseInfo info, SetupDataCallResult[] dcResponse) throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioDataResponse
-        public void getSlicingConfigResponse(RadioResponseInfo info, SlicingConfig slicingConfig) throws RemoteException {
-        }
+        public void getSlicingConfigResponse(RadioResponseInfo info, SlicingConfig slicingConfig)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioDataResponse
-        public void releasePduSessionIdResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void releasePduSessionIdResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioDataResponse
-        public void setDataAllowedResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void setDataAllowedResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioDataResponse
-        public void setDataProfileResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void setDataProfileResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioDataResponse
-        public void setDataThrottlingResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void setDataThrottlingResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioDataResponse
-        public void setInitialAttachApnResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void setInitialAttachApnResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioDataResponse
-        public void setupDataCallResponse(RadioResponseInfo info, SetupDataCallResult dcResponse) throws RemoteException {
-        }
+        public void setupDataCallResponse(RadioResponseInfo info, SetupDataCallResult dcResponse)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioDataResponse
-        public void startHandoverResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void startHandoverResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioDataResponse
-        public void startKeepaliveResponse(RadioResponseInfo info, KeepaliveStatus status) throws RemoteException {
-        }
+        public void startKeepaliveResponse(RadioResponseInfo info, KeepaliveStatus status)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioDataResponse
-        public void stopKeepaliveResponse(RadioResponseInfo info) throws RemoteException {
-        }
+        public void stopKeepaliveResponse(RadioResponseInfo info) throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioDataResponse
         public int getInterfaceVersion() {
@@ -124,7 +123,7 @@ public interface IRadioDataResponse extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRadioDataResponse {
+    public abstract static class Stub extends Binder implements IRadioDataResponse {
         static final int TRANSACTION_acknowledgeRequest = 1;
         static final int TRANSACTION_allocatePduSessionIdResponse = 2;
         static final int TRANSACTION_cancelHandoverResponse = 3;
@@ -165,7 +164,8 @@ public interface IRadioDataResponse extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -191,77 +191,96 @@ public interface IRadioDataResponse extends IInterface {
                     acknowledgeRequest(_arg0);
                     return true;
                 case 2:
-                    RadioResponseInfo _arg02 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg02 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     int _arg1 = data.readInt();
                     data.enforceNoDataAvail();
                     allocatePduSessionIdResponse(_arg02, _arg1);
                     return true;
                 case 3:
-                    RadioResponseInfo _arg03 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg03 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     cancelHandoverResponse(_arg03);
                     return true;
                 case 4:
-                    RadioResponseInfo _arg04 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg04 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     deactivateDataCallResponse(_arg04);
                     return true;
                 case 5:
-                    RadioResponseInfo _arg05 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
-                    SetupDataCallResult[] _arg12 = (SetupDataCallResult[]) data.createTypedArray(SetupDataCallResult.CREATOR);
+                    RadioResponseInfo _arg05 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    SetupDataCallResult[] _arg12 =
+                            (SetupDataCallResult[])
+                                    data.createTypedArray(SetupDataCallResult.CREATOR);
                     data.enforceNoDataAvail();
                     getDataCallListResponse(_arg05, _arg12);
                     return true;
                 case 6:
-                    RadioResponseInfo _arg06 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
-                    SlicingConfig _arg13 = (SlicingConfig) data.readTypedObject(SlicingConfig.CREATOR);
+                    RadioResponseInfo _arg06 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    SlicingConfig _arg13 =
+                            (SlicingConfig) data.readTypedObject(SlicingConfig.CREATOR);
                     data.enforceNoDataAvail();
                     getSlicingConfigResponse(_arg06, _arg13);
                     return true;
                 case 7:
-                    RadioResponseInfo _arg07 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg07 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     releasePduSessionIdResponse(_arg07);
                     return true;
                 case 8:
-                    RadioResponseInfo _arg08 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg08 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setDataAllowedResponse(_arg08);
                     return true;
                 case 9:
-                    RadioResponseInfo _arg09 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg09 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setDataProfileResponse(_arg09);
                     return true;
                 case 10:
-                    RadioResponseInfo _arg010 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg010 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setDataThrottlingResponse(_arg010);
                     return true;
                 case 11:
-                    RadioResponseInfo _arg011 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg011 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setInitialAttachApnResponse(_arg011);
                     return true;
                 case 12:
-                    RadioResponseInfo _arg012 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
-                    SetupDataCallResult _arg14 = (SetupDataCallResult) data.readTypedObject(SetupDataCallResult.CREATOR);
+                    RadioResponseInfo _arg012 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    SetupDataCallResult _arg14 =
+                            (SetupDataCallResult) data.readTypedObject(SetupDataCallResult.CREATOR);
                     data.enforceNoDataAvail();
                     setupDataCallResponse(_arg012, _arg14);
                     return true;
                 case 13:
-                    RadioResponseInfo _arg013 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg013 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     startHandoverResponse(_arg013);
                     return true;
                 case 14:
-                    RadioResponseInfo _arg014 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
-                    KeepaliveStatus _arg15 = (KeepaliveStatus) data.readTypedObject(KeepaliveStatus.CREATOR);
+                    RadioResponseInfo _arg014 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    KeepaliveStatus _arg15 =
+                            (KeepaliveStatus) data.readTypedObject(KeepaliveStatus.CREATOR);
                     data.enforceNoDataAvail();
                     startKeepaliveResponse(_arg014, _arg15);
                     return true;
                 case 15:
-                    RadioResponseInfo _arg015 = (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
+                    RadioResponseInfo _arg015 =
+                            (RadioResponseInfo) data.readTypedObject(RadioResponseInfo.CREATOR);
                     data.enforceNoDataAvail();
                     stopKeepaliveResponse(_arg015);
                     return true;
@@ -304,7 +323,8 @@ public interface IRadioDataResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.data.IRadioDataResponse
-            public void allocatePduSessionIdResponse(RadioResponseInfo info, int id) throws RemoteException {
+            public void allocatePduSessionIdResponse(RadioResponseInfo info, int id)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -312,7 +332,8 @@ public interface IRadioDataResponse extends IInterface {
                     _data.writeInt(id);
                     boolean _status = this.mRemote.transact(2, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method allocatePduSessionIdResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method allocatePduSessionIdResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -327,7 +348,8 @@ public interface IRadioDataResponse extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(3, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method cancelHandoverResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method cancelHandoverResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -342,7 +364,8 @@ public interface IRadioDataResponse extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(4, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method deactivateDataCallResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method deactivateDataCallResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -350,7 +373,9 @@ public interface IRadioDataResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.data.IRadioDataResponse
-            public void getDataCallListResponse(RadioResponseInfo info, SetupDataCallResult[] dcResponse) throws RemoteException {
+            public void getDataCallListResponse(
+                    RadioResponseInfo info, SetupDataCallResult[] dcResponse)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -358,7 +383,8 @@ public interface IRadioDataResponse extends IInterface {
                     _data.writeTypedArray(dcResponse, 0);
                     boolean _status = this.mRemote.transact(5, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getDataCallListResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method getDataCallListResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -366,7 +392,8 @@ public interface IRadioDataResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.data.IRadioDataResponse
-            public void getSlicingConfigResponse(RadioResponseInfo info, SlicingConfig slicingConfig) throws RemoteException {
+            public void getSlicingConfigResponse(
+                    RadioResponseInfo info, SlicingConfig slicingConfig) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -374,7 +401,8 @@ public interface IRadioDataResponse extends IInterface {
                     _data.writeTypedObject(slicingConfig, 0);
                     boolean _status = this.mRemote.transact(6, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method getSlicingConfigResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method getSlicingConfigResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -389,7 +417,8 @@ public interface IRadioDataResponse extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(7, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method releasePduSessionIdResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method releasePduSessionIdResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -404,7 +433,8 @@ public interface IRadioDataResponse extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(8, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setDataAllowedResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method setDataAllowedResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -419,7 +449,8 @@ public interface IRadioDataResponse extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(9, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setDataProfileResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method setDataProfileResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -434,7 +465,8 @@ public interface IRadioDataResponse extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(10, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setDataThrottlingResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method setDataThrottlingResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -449,7 +481,8 @@ public interface IRadioDataResponse extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(11, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method setInitialAttachApnResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method setInitialAttachApnResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -457,7 +490,8 @@ public interface IRadioDataResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.data.IRadioDataResponse
-            public void setupDataCallResponse(RadioResponseInfo info, SetupDataCallResult dcResponse) throws RemoteException {
+            public void setupDataCallResponse(
+                    RadioResponseInfo info, SetupDataCallResult dcResponse) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -488,7 +522,8 @@ public interface IRadioDataResponse extends IInterface {
             }
 
             @Override // android.hardware.radio.data.IRadioDataResponse
-            public void startKeepaliveResponse(RadioResponseInfo info, KeepaliveStatus status) throws RemoteException {
+            public void startKeepaliveResponse(RadioResponseInfo info, KeepaliveStatus status)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -496,7 +531,8 @@ public interface IRadioDataResponse extends IInterface {
                     _data.writeTypedObject(status, 0);
                     boolean _status = this.mRemote.transact(14, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method startKeepaliveResponse is unimplemented.");
+                        throw new RemoteException(
+                                "Method startKeepaliveResponse is unimplemented.");
                     }
                 } finally {
                     _data.recycle();

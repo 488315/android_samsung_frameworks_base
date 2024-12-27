@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class UriRelativeFilterParcel implements Parcelable {
-    public static final Parcelable.Creator<UriRelativeFilterParcel> CREATOR = new Parcelable.Creator<UriRelativeFilterParcel>() { // from class: android.content.UriRelativeFilterParcel.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UriRelativeFilterParcel createFromParcel(Parcel _aidl_source) {
-            UriRelativeFilterParcel _aidl_out = new UriRelativeFilterParcel();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<UriRelativeFilterParcel> CREATOR =
+            new Parcelable.Creator<UriRelativeFilterParcel>() { // from class:
+                // android.content.UriRelativeFilterParcel.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UriRelativeFilterParcel createFromParcel(Parcel _aidl_source) {
+                    UriRelativeFilterParcel _aidl_out = new UriRelativeFilterParcel();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UriRelativeFilterParcel[] newArray(int _aidl_size) {
-            return new UriRelativeFilterParcel[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UriRelativeFilterParcel[] newArray(int _aidl_size) {
+                    return new UriRelativeFilterParcel[_aidl_size];
+                }
+            };
     public String filter;
     public int uriPart = 0;
     public int patternType = 0;

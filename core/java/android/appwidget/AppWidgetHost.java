@@ -19,9 +19,11 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.SparseArray;
 import android.widget.RemoteViews;
+
 import com.android.internal.R;
 import com.android.internal.appwidget.IAppWidgetHost;
 import com.android.internal.appwidget.IAppWidgetService;
+
 import java.lang.ref.WeakReference;
 import java.util.List;
 
@@ -164,7 +166,8 @@ public class AppWidgetHost {
         return tempListener;
     }
 
-    public AppWidgetHost(Context context, int hostId, RemoteViews.InteractionHandler handler, Looper looper) {
+    public AppWidgetHost(
+            Context context, int hostId, RemoteViews.InteractionHandler handler, Looper looper) {
         this.mListeners = new SparseArray<>();
         this.mContextOpPackageName = context.getOpPackageName();
         this.mHostId = hostId;
@@ -182,7 +185,8 @@ public class AppWidgetHost {
             }
             sServiceInitialized = true;
             PackageManager packageManager = context.getPackageManager();
-            if (packageManager.hasSystemFeature(PackageManager.FEATURE_APP_WIDGETS) || context.getResources().getBoolean(R.bool.config_enableAppWidgetService)) {
+            if (packageManager.hasSystemFeature(PackageManager.FEATURE_APP_WIDGETS)
+                    || context.getResources().getBoolean(R.bool.config_enableAppWidgetService)) {
                 IBinder b = ServiceManager.getService(Context.APPWIDGET_SERVICE);
                 sService = IAppWidgetService.Stub.asInterface(b);
             }
@@ -202,7 +206,13 @@ public class AppWidgetHost {
             }
         }
         try {
-            List<PendingHostUpdate> updates = sService.startListening(this.mCallbacks, this.mContextOpPackageName, this.mHostId, idsToUpdate).getList();
+            List<PendingHostUpdate> updates =
+                    sService.startListening(
+                                    this.mCallbacks,
+                                    this.mContextOpPackageName,
+                                    this.mHostId,
+                                    idsToUpdate)
+                            .getList();
             int N = updates.size();
             for (int i2 = 0; i2 < N; i2++) {
                 PendingHostUpdate update = updates.get(i2);
@@ -248,14 +258,18 @@ public class AppWidgetHost {
         }
     }
 
-    public final void startAppWidgetConfigureActivityForResult(Activity activity, int appWidgetId, int intentFlags, int requestCode, Bundle options) {
+    public final void startAppWidgetConfigureActivityForResult(
+            Activity activity, int appWidgetId, int intentFlags, int requestCode, Bundle options) {
         if (sService == null) {
             return;
         }
         try {
-            IntentSender intentSender = sService.createAppWidgetConfigIntentSender(this.mContextOpPackageName, appWidgetId, intentFlags);
+            IntentSender intentSender =
+                    sService.createAppWidgetConfigIntentSender(
+                            this.mContextOpPackageName, appWidgetId, intentFlags);
             if (intentSender != null) {
-                activity.startIntentSenderForResult(intentSender, requestCode, (Intent) null, 0, 0, 0, options);
+                activity.startIntentSenderForResult(
+                        intentSender, requestCode, (Intent) null, 0, 0, 0, options);
                 return;
             }
             throw new ActivityNotFoundException();
@@ -277,14 +291,18 @@ public class AppWidgetHost {
         }
     }
 
-    public final void semStartAppWidgetConfigureActivityForResult(Activity activity, int appWidgetId, int intentFlags, int requestCode, Bundle options) {
+    public final void semStartAppWidgetConfigureActivityForResult(
+            Activity activity, int appWidgetId, int intentFlags, int requestCode, Bundle options) {
         if (sService == null) {
             return;
         }
         try {
-            IntentSender intentSender = sService.semCreateAppWidgetConfigIntentSender(this.mContextOpPackageName, appWidgetId, intentFlags);
+            IntentSender intentSender =
+                    sService.semCreateAppWidgetConfigIntentSender(
+                            this.mContextOpPackageName, appWidgetId, intentFlags);
             if (intentSender != null) {
-                activity.startIntentSenderForResult(intentSender, requestCode, (Intent) null, 0, 0, 0, options);
+                activity.startIntentSenderForResult(
+                        intentSender, requestCode, (Intent) null, 0, 0, 0, options);
                 return;
             }
             throw new ActivityNotFoundException();
@@ -346,7 +364,8 @@ public class AppWidgetHost {
         }
     }
 
-    public final AppWidgetHostView createView(Context context, int appWidgetId, AppWidgetProviderInfo appWidget) {
+    public final AppWidgetHostView createView(
+            Context context, int appWidgetId, AppWidgetProviderInfo appWidget) {
         if (sService == null) {
             return null;
         }
@@ -357,7 +376,8 @@ public class AppWidgetHost {
         return view;
     }
 
-    protected AppWidgetHostView onCreateView(Context context, int appWidgetId, AppWidgetProviderInfo appWidget) {
+    protected AppWidgetHostView onCreateView(
+            Context context, int appWidgetId, AppWidgetProviderInfo appWidget) {
         return new AppWidgetHostView(context, this.mInteractionHandler);
     }
 
@@ -392,11 +412,9 @@ public class AppWidgetHost {
         onAppWidgetRemoved(appWidgetId);
     }
 
-    public void onAppWidgetRemoved(int appWidgetId) {
-    }
+    public void onAppWidgetRemoved(int appWidgetId) {}
 
-    protected void onProvidersChanged() {
-    }
+    protected void onProvidersChanged() {}
 
     public void setListener(int appWidgetId, AppWidgetHostListener listener) {
         synchronized (this.mListeners) {

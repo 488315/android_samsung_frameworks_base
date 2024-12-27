@@ -3,6 +3,7 @@ package android.app.backup;
 import android.app.QueuedWork;
 import android.content.Context;
 import android.os.ParcelFileDescriptor;
+
 import java.io.File;
 
 /* loaded from: classes.dex */
@@ -13,7 +14,8 @@ public class SharedPreferencesBackupHelper extends FileBackupHelperBase implemen
     private String[] mPrefGroups;
 
     @Override // android.app.backup.FileBackupHelperBase, android.app.backup.BackupHelper
-    public /* bridge */ /* synthetic */ void writeNewStateDescription(ParcelFileDescriptor parcelFileDescriptor) {
+    public /* bridge */ /* synthetic */ void writeNewStateDescription(
+            ParcelFileDescriptor parcelFileDescriptor) {
         super.writeNewStateDescription(parcelFileDescriptor);
     }
 
@@ -24,7 +26,8 @@ public class SharedPreferencesBackupHelper extends FileBackupHelperBase implemen
     }
 
     @Override // android.app.backup.BackupHelper
-    public void performBackup(ParcelFileDescriptor oldState, BackupDataOutput data, ParcelFileDescriptor newState) {
+    public void performBackup(
+            ParcelFileDescriptor oldState, BackupDataOutput data, ParcelFileDescriptor newState) {
         Context context = this.mContext;
         QueuedWork.waitToFinish();
         String[] prefGroups = this.mPrefGroups;

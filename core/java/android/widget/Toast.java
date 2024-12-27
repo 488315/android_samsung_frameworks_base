@@ -34,15 +34,17 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.WindowManagerGlobal;
 import android.view.accessibility.IAccessibilityManager;
-import android.widget.Toast;
 import android.widget.flags.Flags;
+
 import com.android.internal.R;
 import com.android.internal.util.Preconditions;
+
 import com.samsung.android.desktopmode.SemDesktopModeManager;
 import com.samsung.android.desktopmode.SemDesktopModeState;
 import com.samsung.android.knox.custom.CustomDeviceManagerProxy;
 import com.samsung.android.rune.CoreRune;
 import com.samsung.android.rune.ViewRune;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
@@ -76,8 +78,7 @@ public class Toast {
     static final boolean DEBUG = Debug.semIsProductDev();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Duration {
-    }
+    public @interface Duration {}
 
     public Toast(Context context) {
         this(context, null);
@@ -102,13 +103,19 @@ public class Toast {
         if (looper != null) {
             return looper;
         }
-        return (Looper) Preconditions.checkNotNull(Looper.myLooper(), "Can't toast on a thread that has not called Looper.prepare()");
+        return (Looper)
+                Preconditions.checkNotNull(
+                        Looper.myLooper(),
+                        "Can't toast on a thread that has not called Looper.prepare()");
     }
 
     private boolean isSpeg() {
         Context context;
         PackageManager pm;
-        return CoreRune.SYSFW_APP_SPEG && (context = ActivityThread.currentApplication()) != null && (pm = context.getPackageManager()) != null && pm.isSpeg(Binder.getCallingUid());
+        return CoreRune.SYSFW_APP_SPEG
+                && (context = ActivityThread.currentApplication()) != null
+                && (pm = context.getPackageManager()) != null
+                && pm.isSpeg(Binder.getCallingUid());
     }
 
     public void show() {
@@ -125,7 +132,9 @@ public class Toast {
             return;
         }
         if (Compatibility.isChangeEnabled(CHANGE_TEXT_TOASTS_IN_THE_SYSTEM)) {
-            Preconditions.checkState((this.mNextView == null && this.mText == null) ? false : true, "You must either set a text or a view");
+            Preconditions.checkState(
+                    (this.mNextView == null && this.mText == null) ? false : true,
+                    "You must either set a text or a view");
         } else if (this.mNextView == null) {
             throw new RuntimeException("setView must have been called");
         }
@@ -138,13 +147,30 @@ public class Toast {
         boolean isDexDualMode = isDexDualModeEnabled(this.mContext);
         boolean isFocusInDesktop = isDexDualMode && focusedDisplayId == 2;
         Log.i(TAG, "show: isDexDualMode = " + isDexDualMode);
-        if (!this.mIsCustomToast && !isActivityContext && isFocusInDesktop && isDexDualMode && this.mContext.getApplicationContext() != null) {
+        if (!this.mIsCustomToast
+                && !isActivityContext
+                && isFocusInDesktop
+                && isDexDualMode
+                && this.mContext.getApplicationContext() != null) {
             this.mDisplayContext = semCreateDisplayContext(2);
         }
-        if (ViewRune.WIDGET_ONEUI_TOAST_SUPPRORT_SUB_DISPLAY && !this.mIsCustomToast && focusedDisplayId == 1 && contextDispId != 1 && this.mContext.getApplicationContext() != null) {
+        if (ViewRune.WIDGET_ONEUI_TOAST_SUPPRORT_SUB_DISPLAY
+                && !this.mIsCustomToast
+                && focusedDisplayId == 1
+                && contextDispId != 1
+                && this.mContext.getApplicationContext() != null) {
             this.mDisplayContext = semCreateDisplayContext(1);
         }
-        Log.i(TAG, "show: contextDispId = " + contextDispId + " mCustomDisplayId = " + this.mCustomDisplayId + " focusedDisplayId = " + focusedDisplayId + " isActivityContext = " + isActivityContext);
+        Log.i(
+                TAG,
+                "show: contextDispId = "
+                        + contextDispId
+                        + " mCustomDisplayId = "
+                        + this.mCustomDisplayId
+                        + " focusedDisplayId = "
+                        + focusedDisplayId
+                        + " isActivityContext = "
+                        + isActivityContext);
         if (knoxCustomManager != null && knoxCustomManager.getToastShowPackageNameState()) {
             PackageManager pm = this.mContext.getPackageManager();
             ApplicationInfo info = this.mContext.getApplicationInfo();
@@ -157,19 +183,30 @@ public class Toast {
                         String oldText = Html.toHtml(spannedText);
                         int idx1 = oldText.indexOf(62);
                         int idx2 = oldText.lastIndexOf(60);
-                        tv.lambda$setTextAsync$0(Html.fromHtml(String.format("%1s: %2s", appName, oldText.substring(idx1 + 1, idx2))));
+                        tv.lambda$setTextAsync$0(
+                                Html.fromHtml(
+                                        String.format(
+                                                "%1s: %2s",
+                                                appName, oldText.substring(idx1 + 1, idx2))));
                     } catch (Exception e) {
                         Log.e(TAG, "Exception thrown :", e);
-                        tv.lambda$setTextAsync$0(String.format("%1s: %2s", appName, tv.getText().toString()));
+                        tv.lambda$setTextAsync$0(
+                                String.format("%1s: %2s", appName, tv.getText().toString()));
                     }
                 }
-            } else if (appName != null && this.mText != null && !this.mText.toString().startsWith(appName)) {
+            } else if (appName != null
+                    && this.mText != null
+                    && !this.mText.toString().startsWith(appName)) {
                 try {
                     Spanned spannedText2 = new SpannableString(this.mText);
                     String oldText2 = Html.toHtml(spannedText2);
                     int idx12 = oldText2.indexOf(62);
                     int idx22 = oldText2.lastIndexOf(60);
-                    this.mText = Html.fromHtml(String.format("%1s: %2s", appName, oldText2.substring(idx12 + 1, idx22)));
+                    this.mText =
+                            Html.fromHtml(
+                                    String.format(
+                                            "%1s: %2s",
+                                            appName, oldText2.substring(idx12 + 1, idx22)));
                 } catch (Exception e2) {
                     Log.e(TAG, "Exception thrown :", e2);
                     this.mText = String.format("%1s: %2s", appName, this.mText.toString());
@@ -177,16 +214,21 @@ public class Toast {
             }
         }
         if (!this.mIsCustomToast && this.mDisplayContext != null) {
-            this.mNextViewForDex = ToastPresenter.getTextToastView(this.mDisplayContext, this.mText);
+            this.mNextViewForDex =
+                    ToastPresenter.getTextToastView(this.mDisplayContext, this.mText);
             if (localLOGV) {
                 Log.v(TAG, "show: new view = " + this.mNextViewForDex);
             }
         }
         if (!this.mTN.mIsCustomOffset) {
             if (this.mDisplayContext != null) {
-                this.mTN.mY = this.mDisplayContext.getResources().getDimensionPixelSize(R.dimen.toast_y_offset);
+                this.mTN.mY =
+                        this.mDisplayContext
+                                .getResources()
+                                .getDimensionPixelSize(R.dimen.toast_y_offset);
             } else {
-                this.mTN.mY = this.mContext.getResources().getDimensionPixelSize(R.dimen.toast_y_offset);
+                this.mTN.mY =
+                        this.mContext.getResources().getDimensionPixelSize(R.dimen.toast_y_offset);
             }
         }
         INotificationManager service = getService();
@@ -195,9 +237,13 @@ public class Toast {
         if (Flags.toastNoWeakref()) {
             tn.mNextView = this.mNextViewForDex != null ? this.mNextViewForDex : this.mNextView;
         } else {
-            tn.mNextViewWeakRef = new WeakReference<>(this.mNextViewForDex != null ? this.mNextViewForDex : this.mNextView);
+            tn.mNextViewWeakRef =
+                    new WeakReference<>(
+                            this.mNextViewForDex != null ? this.mNextViewForDex : this.mNextView);
         }
-        int displayId2 = (this.mDisplayContext != null ? this.mDisplayContext : this.mContext).getDisplayId();
+        int displayId2 =
+                (this.mDisplayContext != null ? this.mDisplayContext : this.mContext)
+                        .getDisplayId();
         if (this.mCustomDisplayId == -1) {
             displayId = displayId2;
         } else {
@@ -217,22 +263,49 @@ public class Toast {
             try {
                 if (Compatibility.isChangeEnabled(CHANGE_TEXT_TOASTS_IN_THE_SYSTEM)) {
                     if (this.mNextView != null) {
-                        service.enqueueToastForDex(pkg, this.mToken, tn, this.mDuration, isUiContext, displayId, semGetMessageFromTv(this.mNextView), uid);
+                        service.enqueueToastForDex(
+                                pkg,
+                                this.mToken,
+                                tn,
+                                this.mDuration,
+                                isUiContext,
+                                displayId,
+                                semGetMessageFromTv(this.mNextView),
+                                uid);
                         return;
                     } else {
-                        ITransientNotificationCallback callback = new CallbackBinder(this.mCallbacks, this.mHandler);
-                        service.enqueueTextToastForDex(pkg, this.mToken, this.mText, this.mDuration, isUiContext, displayId, callback, this.mText != null ? this.mText.toString() : "", uid);
+                        ITransientNotificationCallback callback =
+                                new CallbackBinder(this.mCallbacks, this.mHandler);
+                        service.enqueueTextToastForDex(
+                                pkg,
+                                this.mToken,
+                                this.mText,
+                                this.mDuration,
+                                isUiContext,
+                                displayId,
+                                callback,
+                                this.mText != null ? this.mText.toString() : "",
+                                uid);
                         return;
                     }
                 }
-                service.enqueueToastForDex(pkg, this.mToken, tn, this.mDuration, isUiContext, displayId, semGetMessageFromTv(this.mNextView), uid);
+                service.enqueueToastForDex(
+                        pkg,
+                        this.mToken,
+                        tn,
+                        this.mDuration,
+                        isUiContext,
+                        displayId,
+                        semGetMessageFromTv(this.mNextView),
+                        uid);
             } catch (RemoteException e4) {
             }
         }
     }
 
     public void cancel() {
-        if (Compatibility.isChangeEnabled(CHANGE_TEXT_TOASTS_IN_THE_SYSTEM) && this.mNextView == null) {
+        if (Compatibility.isChangeEnabled(CHANGE_TEXT_TOASTS_IN_THE_SYSTEM)
+                && this.mNextView == null) {
             try {
                 getService().cancelToast(this.mContext.getOpPackageName(), this.mToken);
             } catch (RemoteException e) {
@@ -273,14 +346,20 @@ public class Toast {
 
     public float getHorizontalMargin() {
         if (isSystemRenderedTextToast()) {
-            Log.e(TAG, "getHorizontalMargin() shouldn't be called on text toasts, the result may not reflect actual values.");
+            Log.e(
+                    TAG,
+                    "getHorizontalMargin() shouldn't be called on text toasts, the result may not"
+                        + " reflect actual values.");
         }
         return this.mTN.mHorizontalMargin;
     }
 
     public float getVerticalMargin() {
         if (isSystemRenderedTextToast()) {
-            Log.e(TAG, "getVerticalMargin() shouldn't be called on text toasts, the result may not reflect actual values.");
+            Log.e(
+                    TAG,
+                    "getVerticalMargin() shouldn't be called on text toasts, the result may not"
+                        + " reflect actual values.");
         }
         return this.mTN.mVerticalMargin;
     }
@@ -297,27 +376,37 @@ public class Toast {
 
     public int getGravity() {
         if (isSystemRenderedTextToast()) {
-            Log.e(TAG, "getGravity() shouldn't be called on text toasts, the result may not reflect actual values.");
+            Log.e(
+                    TAG,
+                    "getGravity() shouldn't be called on text toasts, the result may not reflect"
+                        + " actual values.");
         }
         return this.mTN.mGravity;
     }
 
     public int getXOffset() {
         if (isSystemRenderedTextToast()) {
-            Log.e(TAG, "getXOffset() shouldn't be called on text toasts, the result may not reflect actual values.");
+            Log.e(
+                    TAG,
+                    "getXOffset() shouldn't be called on text toasts, the result may not reflect"
+                        + " actual values.");
         }
         return this.mTN.mX;
     }
 
     public int getYOffset() {
         if (isSystemRenderedTextToast()) {
-            Log.e(TAG, "getYOffset() shouldn't be called on text toasts, the result may not reflect actual values.");
+            Log.e(
+                    TAG,
+                    "getYOffset() shouldn't be called on text toasts, the result may not reflect"
+                        + " actual values.");
         }
         return this.mTN.mY;
     }
 
     private boolean isSystemRenderedTextToast() {
-        return Compatibility.isChangeEnabled(CHANGE_TEXT_TOASTS_IN_THE_SYSTEM) && this.mNextView == null;
+        return Compatibility.isChangeEnabled(CHANGE_TEXT_TOASTS_IN_THE_SYSTEM)
+                && this.mNextView == null;
     }
 
     public void addCallback(Callback callback) {
@@ -358,9 +447,11 @@ public class Toast {
         return result;
     }
 
-    public static Toast makeCustomToastWithIcon(Context context, Looper looper, CharSequence text, int duration, Drawable icon) {
+    public static Toast makeCustomToastWithIcon(
+            Context context, Looper looper, CharSequence text, int duration, Drawable icon) {
         if (icon == null) {
-            throw new IllegalArgumentException("Drawable icon should not be null for makeCustomToastWithIcon");
+            throw new IllegalArgumentException(
+                    "Drawable icon should not be null for makeCustomToastWithIcon");
         }
         Toast result = new Toast(context, looper);
         result.mNextView = ToastPresenter.getTextToastViewWithIcon(context, text, icon);
@@ -368,7 +459,8 @@ public class Toast {
         return result;
     }
 
-    public static Toast makeText(Context context, int resId, int duration) throws Resources.NotFoundException {
+    public static Toast makeText(Context context, int resId, int duration)
+            throws Resources.NotFoundException {
         return makeText(context, context.getResources().getText(resId), duration);
     }
 
@@ -379,7 +471,9 @@ public class Toast {
     public void setText(CharSequence s) {
         if (Compatibility.isChangeEnabled(CHANGE_TEXT_TOASTS_IN_THE_SYSTEM)) {
             if (this.mNextView != null) {
-                throw new IllegalStateException("Text provided for custom toast, remove previous setView() calls if you want a text toast instead.");
+                throw new IllegalStateException(
+                        "Text provided for custom toast, remove previous setView() calls if you"
+                            + " want a text toast instead.");
             }
             this.mText = s;
         } else {
@@ -430,46 +524,57 @@ public class Toast {
         int mX;
         int mY;
 
-        TN(Context context, String packageName, Binder token, List<Callback> callbacks, Looper looper) {
-            IAccessibilityManager accessibilityManager = IAccessibilityManager.Stub.asInterface(ServiceManager.getService(Context.ACCESSIBILITY_SERVICE));
-            this.mPresenter = new ToastPresenter(context, accessibilityManager, Toast.getService(), packageName);
+        TN(
+                Context context,
+                String packageName,
+                Binder token,
+                List<Callback> callbacks,
+                Looper looper) {
+            IAccessibilityManager accessibilityManager =
+                    IAccessibilityManager.Stub.asInterface(
+                            ServiceManager.getService(Context.ACCESSIBILITY_SERVICE));
+            this.mPresenter =
+                    new ToastPresenter(
+                            context, accessibilityManager, Toast.getService(), packageName);
             this.mParams = this.mPresenter.getLayoutParams();
             this.mPackageName = packageName;
             this.mToken = token;
             this.mCallbacks = new WeakReference<>(callbacks);
-            this.mHandler = new Handler(looper, null) { // from class: android.widget.Toast.TN.1
-                @Override // android.os.Handler
-                public void handleMessage(Message msg) {
-                    switch (msg.what) {
-                        case 0:
-                            IBinder token2 = (IBinder) msg.obj;
-                            TN.this.handleShow(token2);
-                            break;
-                        case 1:
-                            TN.this.handleHide();
-                            if (Flags.toastNoWeakref()) {
-                                TN.this.mNextView = null;
-                                break;
-                            } else {
-                                TN.this.mNextViewWeakRef = null;
-                                break;
+            this.mHandler =
+                    new Handler(looper, null) { // from class: android.widget.Toast.TN.1
+                        @Override // android.os.Handler
+                        public void handleMessage(Message msg) {
+                            switch (msg.what) {
+                                case 0:
+                                    IBinder token2 = (IBinder) msg.obj;
+                                    TN.this.handleShow(token2);
+                                    break;
+                                case 1:
+                                    TN.this.handleHide();
+                                    if (Flags.toastNoWeakref()) {
+                                        TN.this.mNextView = null;
+                                        break;
+                                    } else {
+                                        TN.this.mNextViewWeakRef = null;
+                                        break;
+                                    }
+                                case 2:
+                                    TN.this.handleHide();
+                                    if (Flags.toastNoWeakref()) {
+                                        TN.this.mNextView = null;
+                                    } else {
+                                        TN.this.mNextViewWeakRef = null;
+                                    }
+                                    try {
+                                        Toast.getService()
+                                                .cancelToast(TN.this.mPackageName, TN.this.mToken);
+                                        break;
+                                    } catch (RemoteException e) {
+                                        return;
+                                    }
                             }
-                        case 2:
-                            TN.this.handleHide();
-                            if (Flags.toastNoWeakref()) {
-                                TN.this.mNextView = null;
-                            } else {
-                                TN.this.mNextViewWeakRef = null;
-                            }
-                            try {
-                                Toast.getService().cancelToast(TN.this.mPackageName, TN.this.mToken);
-                                break;
-                            } catch (RemoteException e) {
-                                return;
-                            }
-                    }
-                }
-            };
+                        }
+                    };
         }
 
         private List<Callback> getCallbacks() {
@@ -507,10 +612,24 @@ public class Toast {
         public void handleShow(IBinder windowToken) {
             if (Flags.toastNoWeakref()) {
                 if (Toast.localLOGV) {
-                    Log.v(Toast.TAG, "HANDLE SHOW: " + this + " mView=" + this.mView + " mNextView=" + this.mNextView);
+                    Log.v(
+                            Toast.TAG,
+                            "HANDLE SHOW: "
+                                    + this
+                                    + " mView="
+                                    + this.mView
+                                    + " mNextView="
+                                    + this.mNextView);
                 }
             } else if (Toast.localLOGV) {
-                Log.v(Toast.TAG, "HANDLE SHOW: " + this + " mView=" + this.mView + " mNextView=" + this.mNextViewWeakRef);
+                Log.v(
+                        Toast.TAG,
+                        "HANDLE SHOW: "
+                                + this
+                                + " mView="
+                                + this.mView
+                                + " mNextView="
+                                + this.mNextViewWeakRef);
             }
             if (this.mHandler.hasMessages(2) || this.mHandler.hasMessages(1)) {
                 return;
@@ -525,7 +644,17 @@ public class Toast {
                     }
                     this.mView = this.mNextView;
                     if (this.mView != null) {
-                        this.mPresenter.show(this.mView, this.mToken, windowToken, this.mDuration, this.mGravity, this.mX, this.mY, this.mHorizontalMargin, this.mVerticalMargin, new CallbackBinder(getCallbacks(), this.mHandler));
+                        this.mPresenter.show(
+                                this.mView,
+                                this.mToken,
+                                windowToken,
+                                this.mDuration,
+                                this.mGravity,
+                                this.mX,
+                                this.mY,
+                                this.mHorizontalMargin,
+                                this.mVerticalMargin,
+                                new CallbackBinder(getCallbacks(), this.mHandler));
                         return;
                     }
                     return;
@@ -541,7 +670,17 @@ public class Toast {
                 }
                 this.mView = this.mNextViewWeakRef.get();
                 if (this.mView != null) {
-                    this.mPresenter.show(this.mView, this.mToken, windowToken, this.mDuration, this.mGravity, this.mX, this.mY, this.mHorizontalMargin, this.mVerticalMargin, new CallbackBinder(getCallbacks(), this.mHandler));
+                    this.mPresenter.show(
+                            this.mView,
+                            this.mToken,
+                            windowToken,
+                            this.mDuration,
+                            this.mGravity,
+                            this.mX,
+                            this.mY,
+                            this.mHorizontalMargin,
+                            this.mVerticalMargin,
+                            new CallbackBinder(getCallbacks(), this.mHandler));
                 }
             }
         }
@@ -551,7 +690,9 @@ public class Toast {
                 Log.v(Toast.TAG, "HANDLE HIDE: " + this + " mView=" + this.mView);
             }
             if (this.mView != null) {
-                Preconditions.checkState(this.mView == this.mPresenter.getView(), "Trying to hide toast view different than the last one displayed");
+                Preconditions.checkState(
+                        this.mView == this.mPresenter.getView(),
+                        "Trying to hide toast view different than the last one displayed");
                 this.mPresenter.hide(new CallbackBinder(getCallbacks(), this.mHandler));
                 this.mView = null;
             }
@@ -568,12 +709,10 @@ public class Toast {
         }
     }
 
-    public static abstract class Callback {
-        public void onToastShown() {
-        }
+    public abstract static class Callback {
+        public void onToastShown() {}
 
-        public void onToastHidden() {
-        }
+        public void onToastHidden() {}
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -588,12 +727,14 @@ public class Toast {
 
         @Override // android.app.ITransientNotificationCallback
         public void onToastShown() {
-            this.mHandler.post(new Runnable() { // from class: android.widget.Toast$CallbackBinder$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    Toast.CallbackBinder.this.lambda$onToastShown$0();
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.widget.Toast$CallbackBinder$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            Toast.CallbackBinder.this.lambda$onToastShown$0();
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -605,12 +746,14 @@ public class Toast {
 
         @Override // android.app.ITransientNotificationCallback
         public void onToastHidden() {
-            this.mHandler.post(new Runnable() { // from class: android.widget.Toast$CallbackBinder$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    Toast.CallbackBinder.this.lambda$onToastHidden$1();
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.widget.Toast$CallbackBinder$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            Toast.CallbackBinder.this.lambda$onToastHidden$1();
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -634,11 +777,15 @@ public class Toast {
             Log.i(TAG, "Boot is not completed yet. Don't read settings db.");
             return false;
         }
-        int gameNoInterruption = Settings.System.getInt(this.mContext.getContentResolver(), "game_no_interruption", 0);
+        int gameNoInterruption =
+                Settings.System.getInt(
+                        this.mContext.getContentResolver(), "game_no_interruption", 0);
         if (gameNoInterruption <= 0) {
             return false;
         }
-        String allowList = Settings.System.getString(this.mContext.getContentResolver(), "game_no_interruption_white_list");
+        String allowList =
+                Settings.System.getString(
+                        this.mContext.getContentResolver(), "game_no_interruption_white_list");
         if (allowList != null) {
             String packageName = this.mContext.getPackageName();
             if (allowList.contains(packageName)) {
@@ -652,7 +799,12 @@ public class Toast {
         return false;
     }
 
-    public static Toast semMakeAction(Context context, CharSequence text, int duration, CharSequence action, View.OnClickListener listener) {
+    public static Toast semMakeAction(
+            Context context,
+            CharSequence text,
+            int duration,
+            CharSequence action,
+            View.OnClickListener listener) {
         return makeText(context, null, text, duration);
     }
 
@@ -682,10 +834,12 @@ public class Toast {
 
     private boolean isDexDualModeEnabled(Context context) {
         boolean isDesktopDualMode = false;
-        SemDesktopModeManager desktopModeManager = (SemDesktopModeManager) context.getSystemService(Context.SEM_DESKTOP_MODE_SERVICE);
+        SemDesktopModeManager desktopModeManager =
+                (SemDesktopModeManager) context.getSystemService(Context.SEM_DESKTOP_MODE_SERVICE);
         if (desktopModeManager != null) {
             SemDesktopModeState state = desktopModeManager.getDesktopModeState();
-            isDesktopDualMode = state != null && state.enabled == 4 && state.getDisplayType() == 102;
+            isDesktopDualMode =
+                    state != null && state.enabled == 4 && state.getDisplayType() == 102;
         }
         if (localLOGV) {
             Log.v(TAG, "isDexDualModeEnabled: isDesktopDualMode = " + isDesktopDualMode);
@@ -700,7 +854,10 @@ public class Toast {
             if (tempContext instanceof Activity) {
                 activity = (Activity) tempContext;
             } else {
-                tempContext = tempContext instanceof ContextWrapper ? ((ContextWrapper) tempContext).getBaseContext() : null;
+                tempContext =
+                        tempContext instanceof ContextWrapper
+                                ? ((ContextWrapper) tempContext).getBaseContext()
+                                : null;
             }
         }
         return activity;
@@ -709,7 +866,8 @@ public class Toast {
     private Context semCreateDisplayContext(int displayType) {
         String dispCategory;
         Context displayContextTemp;
-        DisplayManager dm = (DisplayManager) this.mContext.getSystemService(Context.DISPLAY_SERVICE);
+        DisplayManager dm =
+                (DisplayManager) this.mContext.getSystemService(Context.DISPLAY_SERVICE);
         if (dm == null) {
             return null;
         }
@@ -722,7 +880,8 @@ public class Toast {
         }
         Display[] displays = dm.getDisplays(dispCategory);
         for (Display d : displays) {
-            if ((d.getDisplayId() == 1 || d.getDisplayId() == 2) && (displayContextTemp = this.mContext.createDisplayContext(d)) != null) {
+            if ((d.getDisplayId() == 1 || d.getDisplayId() == 2)
+                    && (displayContextTemp = this.mContext.createDisplayContext(d)) != null) {
                 Context dispContext = new ContextThemeWrapper(displayContextTemp, 16974123);
                 return dispContext;
             }

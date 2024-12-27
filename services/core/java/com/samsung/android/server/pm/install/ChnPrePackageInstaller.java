@@ -7,7 +7,10 @@ import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Xml;
-import com.samsung.android.server.pm.install.PrePackageInstallerBase;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,8 +20,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Consumer;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -52,9 +53,9 @@ public final class ChnPrePackageInstaller extends PrePackageInstallerBase {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:35:0x007b, code lost:
-    
-        if (r3 != false) goto L8;
-     */
+
+       if (r3 != false) goto L8;
+    */
     /* JADX WARN: Removed duplicated region for block: B:12:0x0086  */
     /* JADX WARN: Removed duplicated region for block: B:9:0x0080  */
     @Override // com.samsung.android.server.pm.install.PrePackageInstallerBase
@@ -140,7 +141,9 @@ public final class ChnPrePackageInstaller extends PrePackageInstallerBase {
         L8d:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.server.pm.install.ChnPrePackageInstaller.addInstallPackageList(java.io.File[]):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.server.pm.install.ChnPrePackageInstaller.addInstallPackageList(java.io.File[]):void");
     }
 
     public boolean isInstalled(File file) {
@@ -155,7 +158,8 @@ public final class ChnPrePackageInstaller extends PrePackageInstallerBase {
                 this.mPackageManager.getApplicationInfo(cachedPackageArchiveInfo.packageName, 0);
                 return true;
             } catch (PackageManager.NameNotFoundException unused) {
-                localIntentReceiver.out("PackageManager can't search - " + cachedPackageArchiveInfo.packageName);
+                localIntentReceiver.out(
+                        "PackageManager can't search - " + cachedPackageArchiveInfo.packageName);
             }
         }
         return false;
@@ -167,9 +171,13 @@ public final class ChnPrePackageInstaller extends PrePackageInstallerBase {
         PrePackageInstallerBase.LocalIntentReceiver localIntentReceiver = this.mLogMsg;
         localIntentReceiver.out(str);
         localIntentReceiver.out("mCscUninstallPKGList = " + this.mCscUninstallPKGList.toString());
-        localIntentReceiver.out("mCscInstallOnceAPKList = " + this.mCscInstallOnceAPKList.toString());
+        localIntentReceiver.out(
+                "mCscInstallOnceAPKList = " + this.mCscInstallOnceAPKList.toString());
         localIntentReceiver.out("mCscUpdateAPKList = " + this.mCscUpdateAPKList.toString());
-        if (((ArrayList) this.mCscAddedAPKList).size() <= 0 && ((ArrayList) this.mCscUpdateAPKList).size() <= 0 && ((ArrayList) this.mCscInstallOnceAPKList).size() <= 0 && ((ArrayList) this.mCscUninstallPKGList).size() <= 0) {
+        if (((ArrayList) this.mCscAddedAPKList).size() <= 0
+                && ((ArrayList) this.mCscUpdateAPKList).size() <= 0
+                && ((ArrayList) this.mCscInstallOnceAPKList).size() <= 0
+                && ((ArrayList) this.mCscUninstallPKGList).size() <= 0) {
             localIntentReceiver.out("empty apk list, call setDisabled");
         } else {
             localIntentReceiver.out("items are loaded.");
@@ -229,16 +237,20 @@ public final class ChnPrePackageInstaller extends PrePackageInstallerBase {
                 name.getClass();
                 switch (name) {
                     case "remove-package":
-                        ((ArrayList) this.mCscUninstallPKGList).addAll(parsePackagesOrApks(xmlPullParser));
+                        ((ArrayList) this.mCscUninstallPKGList)
+                                .addAll(parsePackagesOrApks(xmlPullParser));
                         break;
                     case "add-apk":
-                        ((ArrayList) this.mCscAddedAPKList).addAll(parsePackagesOrApks(xmlPullParser));
+                        ((ArrayList) this.mCscAddedAPKList)
+                                .addAll(parsePackagesOrApks(xmlPullParser));
                         break;
                     case "update-apk":
-                        ((ArrayList) this.mCscUpdateAPKList).addAll(parsePackagesOrApks(xmlPullParser));
+                        ((ArrayList) this.mCscUpdateAPKList)
+                                .addAll(parsePackagesOrApks(xmlPullParser));
                         break;
                     case "install-once-apk":
-                        ((ArrayList) this.mCscInstallOnceAPKList).addAll(parsePackagesOrApks(xmlPullParser));
+                        ((ArrayList) this.mCscInstallOnceAPKList)
+                                .addAll(parsePackagesOrApks(xmlPullParser));
                         break;
                     default:
                         this.mLogMsg.out("Invalid element name: ".concat(name));
@@ -257,7 +269,8 @@ public final class ChnPrePackageInstaller extends PrePackageInstallerBase {
             boolean z = this.mLoaded;
             PrePackageInstallerBase.LocalIntentReceiver localIntentReceiver = this.mLogMsg;
             if (!z) {
-                localIntentReceiver.out("CHN - loadChinaCSCConfig - no items to load -> setDisabled");
+                localIntentReceiver.out(
+                        "CHN - loadChinaCSCConfig - no items to load -> setDisabled");
                 super.setDisabled();
                 return;
             }
@@ -288,11 +301,13 @@ public final class ChnPrePackageInstaller extends PrePackageInstallerBase {
     @Override // com.samsung.android.server.pm.install.PrePackageInstallerBase
     public final void uninstallPackage() {
         super.uninstallPackage();
-        this.mUninstallPackageList.forEach(new Consumer() { // from class: com.samsung.android.server.pm.install.ChnPrePackageInstaller$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                ChnPrePackageInstaller.this.getClass();
-            }
-        });
+        this.mUninstallPackageList.forEach(
+                new Consumer() { // from class:
+                                 // com.samsung.android.server.pm.install.ChnPrePackageInstaller$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        ChnPrePackageInstaller.this.getClass();
+                    }
+                });
     }
 }

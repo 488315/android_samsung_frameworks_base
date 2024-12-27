@@ -9,19 +9,22 @@ public class SemContextActivityBatch extends SemContextEventContext {
     public static final int ACCURACY_HIGH = 2;
     public static final int ACCURACY_LOW = 0;
     public static final int ACCURACY_MID = 1;
-    public static final Parcelable.Creator<SemContextActivityBatch> CREATOR = new Parcelable.Creator<SemContextActivityBatch>() { // from class: com.samsung.android.hardware.context.SemContextActivityBatch.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextActivityBatch createFromParcel(Parcel in) {
-            return new SemContextActivityBatch(in);
-        }
+    public static final Parcelable.Creator<SemContextActivityBatch> CREATOR =
+            new Parcelable.Creator<
+                    SemContextActivityBatch>() { // from class:
+                                                 // com.samsung.android.hardware.context.SemContextActivityBatch.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextActivityBatch createFromParcel(Parcel in) {
+                    return new SemContextActivityBatch(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextActivityBatch[] newArray(int size) {
-            return new SemContextActivityBatch[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextActivityBatch[] newArray(int size) {
+                    return new SemContextActivityBatch[size];
+                }
+            };
     public static final int HISTORY_MODE = 1;
     public static final int NORMAL_MODE = 0;
     public static final int STATUS_BIKE = 5;

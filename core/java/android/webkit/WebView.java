@@ -53,6 +53,7 @@ import android.view.translation.TranslationCapability;
 import android.view.translation.ViewTranslationRequest;
 import android.view.translation.ViewTranslationResponse;
 import android.widget.AbsoluteLayout;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.lang.annotation.Retention;
@@ -64,7 +65,10 @@ import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 
 /* loaded from: classes4.dex */
-public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobalFocusChangeListener, ViewGroup.OnHierarchyChangeListener, ViewDebug.HierarchyHandler {
+public class WebView extends AbsoluteLayout
+        implements ViewTreeObserver.OnGlobalFocusChangeListener,
+                ViewGroup.OnHierarchyChangeListener,
+                ViewDebug.HierarchyHandler {
     private static final String LOGTAG = "WebView";
     public static final int RENDERER_PRIORITY_BOUND = 1;
     public static final int RENDERER_PRIORITY_IMPORTANT = 2;
@@ -88,14 +92,14 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RendererPriority {
-    }
+    public @interface RendererPriority {}
 
-    public static abstract class VisualStateCallback {
+    public abstract static class VisualStateCallback {
         public abstract void onComplete(long j);
     }
 
-    public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<WebView> {
+    public final class InspectionCompanion
+            implements android.view.inspector.InspectionCompanion<WebView> {
         private int mContentHeightId;
         private int mFaviconId;
         private int mOriginalUrlId;
@@ -112,13 +116,19 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
             this.mFaviconId = propertyMapper.mapObject("favicon", 0);
             this.mOriginalUrlId = propertyMapper.mapObject("originalUrl", 0);
             this.mProgressId = propertyMapper.mapInt("progress", 0);
-            this.mRendererPriorityWaivedWhenNotVisibleId = propertyMapper.mapBoolean("rendererPriorityWaivedWhenNotVisible", 0);
+            this.mRendererPriorityWaivedWhenNotVisibleId =
+                    propertyMapper.mapBoolean("rendererPriorityWaivedWhenNotVisible", 0);
             SparseArray<String> rendererRequestedPriorityEnumMapping = new SparseArray<>();
             rendererRequestedPriorityEnumMapping.put(0, "waived");
             rendererRequestedPriorityEnumMapping.put(1, "bound");
             rendererRequestedPriorityEnumMapping.put(2, "important");
             Objects.requireNonNull(rendererRequestedPriorityEnumMapping);
-            this.mRendererRequestedPriorityId = propertyMapper.mapIntEnum("rendererRequestedPriority", 0, new View$InspectionCompanion$$ExternalSyntheticLambda0(rendererRequestedPriorityEnumMapping));
+            this.mRendererRequestedPriorityId =
+                    propertyMapper.mapIntEnum(
+                            "rendererRequestedPriority",
+                            0,
+                            new View$InspectionCompanion$$ExternalSyntheticLambda0(
+                                    rendererRequestedPriorityEnumMapping));
             this.mTitleId = propertyMapper.mapObject("title", 0);
             this.mUrlId = propertyMapper.mapObject("url", 0);
             this.mPropertiesMapped = true;
@@ -133,8 +143,11 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
             propertyReader.readObject(this.mFaviconId, node.getFavicon());
             propertyReader.readObject(this.mOriginalUrlId, node.getOriginalUrl());
             propertyReader.readInt(this.mProgressId, node.getProgress());
-            propertyReader.readBoolean(this.mRendererPriorityWaivedWhenNotVisibleId, node.getRendererPriorityWaivedWhenNotVisible());
-            propertyReader.readIntEnum(this.mRendererRequestedPriorityId, node.getRendererRequestedPriority());
+            propertyReader.readBoolean(
+                    this.mRendererPriorityWaivedWhenNotVisibleId,
+                    node.getRendererPriorityWaivedWhenNotVisible());
+            propertyReader.readIntEnum(
+                    this.mRendererRequestedPriorityId, node.getRendererRequestedPriority());
             propertyReader.readObject(this.mTitleId, node.getTitle());
             propertyReader.readObject(this.mUrlId, node.getUrl());
         }
@@ -143,8 +156,7 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
     public class WebViewTransport {
         private WebView mWebview;
 
-        public WebViewTransport() {
-        }
+        public WebViewTransport() {}
 
         public synchronized void setWebView(WebView webview) {
             this.mWebview = webview;
@@ -157,14 +169,12 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
 
     public static class HitTestResult {
 
-        @Deprecated
-        public static final int ANCHOR_TYPE = 1;
+        @Deprecated public static final int ANCHOR_TYPE = 1;
         public static final int EDIT_TEXT_TYPE = 9;
         public static final int EMAIL_TYPE = 4;
         public static final int GEO_TYPE = 3;
 
-        @Deprecated
-        public static final int IMAGE_ANCHOR_TYPE = 6;
+        @Deprecated public static final int IMAGE_ANCHOR_TYPE = 6;
         public static final int IMAGE_TYPE = 5;
         public static final int PHONE_TYPE = 2;
         public static final int SRC_ANCHOR_TYPE = 7;
@@ -174,8 +184,7 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
         private int mType = 0;
 
         @SystemApi
-        public HitTestResult() {
-        }
+        public HitTestResult() {}
 
         @SystemApi
         public void setType(int type) {
@@ -217,11 +226,22 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
         this(context, attrs, defStyleAttr, 0, null, privateBrowsing);
     }
 
-    protected WebView(Context context, AttributeSet attrs, int defStyleAttr, Map<String, Object> javaScriptInterfaces, boolean privateBrowsing) {
+    protected WebView(
+            Context context,
+            AttributeSet attrs,
+            int defStyleAttr,
+            Map<String, Object> javaScriptInterfaces,
+            boolean privateBrowsing) {
         this(context, attrs, defStyleAttr, 0, javaScriptInterfaces, privateBrowsing);
     }
 
-    protected WebView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, Map<String, Object> javaScriptInterfaces, boolean privateBrowsing) {
+    protected WebView(
+            Context context,
+            AttributeSet attrs,
+            int defStyleAttr,
+            int defStyleRes,
+            Map<String, Object> javaScriptInterfaces,
+            boolean privateBrowsing) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.mWebViewThread = Looper.myLooper();
         if (getImportantForAutofill() == 0) {
@@ -234,7 +254,8 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
             throw new IllegalArgumentException("Invalid context argument");
         }
         if (this.mWebViewThread == null) {
-            throw new RuntimeException("WebView cannot be initialized on a thread that has no Looper.");
+            throw new RuntimeException(
+                    "WebView cannot be initialized on a thread that has no Looper.");
         }
         sEnforceThreadChecking = context.getApplicationInfo().targetSdkVersion >= 18;
         checkThread();
@@ -244,12 +265,10 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
     }
 
     @Deprecated
-    public void setHorizontalScrollbarOverlay(boolean overlay) {
-    }
+    public void setHorizontalScrollbarOverlay(boolean overlay) {}
 
     @Deprecated
-    public void setVerticalScrollbarOverlay(boolean overlay) {
-    }
+    public void setVerticalScrollbarOverlay(boolean overlay) {}
 
     @Deprecated
     public boolean overlayHorizontalScrollbar() {
@@ -285,7 +304,8 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
     }
 
     @Deprecated
-    public void setHttpAuthUsernamePassword(String host, String realm, String username, String password) {
+    public void setHttpAuthUsernamePassword(
+            String host, String realm, String username, String password) {
         checkThread();
         this.mProvider.setHttpAuthUsernamePassword(host, realm, username, password);
     }
@@ -302,12 +322,10 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
     }
 
     @Deprecated
-    public static void enablePlatformNotifications() {
-    }
+    public static void enablePlatformNotifications() {}
 
     @Deprecated
-    public static void disablePlatformNotifications() {
-    }
+    public static void disablePlatformNotifications() {}
 
     public static void freeMemoryForTests() {
         getFactory().getStatics().freeMemoryForTests();
@@ -364,7 +382,8 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
         this.mProvider.loadData(data, mimeType, encoding);
     }
 
-    public void loadDataWithBaseURL(String baseUrl, String data, String mimeType, String encoding, String historyUrl) {
+    public void loadDataWithBaseURL(
+            String baseUrl, String data, String mimeType, String encoding, String historyUrl) {
         checkThread();
         this.mProvider.loadDataWithBaseURL(baseUrl, data, mimeType, encoding, historyUrl);
     }
@@ -600,7 +619,8 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
         getFactory().getStatics().initSafeBrowsing(context, callback);
     }
 
-    public static void setSafeBrowsingWhitelist(List<String> hosts, ValueCallback<Boolean> callback) {
+    public static void setSafeBrowsingWhitelist(
+            List<String> hosts, ValueCallback<Boolean> callback) {
         getFactory().getStatics().setSafeBrowsingWhitelist(hosts, callback);
     }
 
@@ -679,12 +699,14 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
         return this.mProvider.getWebViewRenderProcess();
     }
 
-    public void setWebViewRenderProcessClient(Executor executor, WebViewRenderProcessClient webViewRenderProcessClient) {
+    public void setWebViewRenderProcessClient(
+            Executor executor, WebViewRenderProcessClient webViewRenderProcessClient) {
         checkThread();
         this.mProvider.setWebViewRenderProcessClient(executor, webViewRenderProcessClient);
     }
 
-    public void setWebViewRenderProcessClient(WebViewRenderProcessClient webViewRenderProcessClient) {
+    public void setWebViewRenderProcessClient(
+            WebViewRenderProcessClient webViewRenderProcessClient) {
         checkThread();
         this.mProvider.setWebViewRenderProcessClient(null, webViewRenderProcessClient);
     }
@@ -773,18 +795,15 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
 
     @Override // android.view.ViewGroup.OnHierarchyChangeListener
     @Deprecated
-    public void onChildViewAdded(View parent, View child) {
-    }
+    public void onChildViewAdded(View parent, View child) {}
 
     @Override // android.view.ViewGroup.OnHierarchyChangeListener
     @Deprecated
-    public void onChildViewRemoved(View p, View child) {
-    }
+    public void onChildViewRemoved(View p, View child) {}
 
     @Override // android.view.ViewTreeObserver.OnGlobalFocusChangeListener
     @Deprecated
-    public void onGlobalFocusChanged(View oldFocus, View newFocus) {
-    }
+    public void onGlobalFocusChanged(View oldFocus, View newFocus) {}
 
     @Deprecated
     public void setMapTrackballToArrowKeys(boolean setMap) {
@@ -851,7 +870,8 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
         return this.mProvider.findHierarchyView(className, hashCode);
     }
 
-    public void setRendererPriorityPolicy(int rendererRequestedPriority, boolean waivedWhenNotVisible) {
+    public void setRendererPriorityPolicy(
+            int rendererRequestedPriority, boolean waivedWhenNotVisible) {
         this.mProvider.setRendererPriorityPolicy(rendererRequestedPriority, waivedWhenNotVisible);
     }
 
@@ -886,8 +906,7 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
 
     @SystemApi
     public class PrivateAccess {
-        public PrivateAccess() {
-        }
+        public PrivateAccess() {}
 
         public int super_getScrollBarStyle() {
             return WebView.super.getScrollBarStyle();
@@ -941,8 +960,26 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
             return WebView.super.onApplyWindowInsets(insets);
         }
 
-        public void overScrollBy(int deltaX, int deltaY, int scrollX, int scrollY, int scrollRangeX, int scrollRangeY, int maxOverScrollX, int maxOverScrollY, boolean isTouchEvent) {
-            WebView.this.overScrollBy(deltaX, deltaY, scrollX, scrollY, scrollRangeX, scrollRangeY, maxOverScrollX, maxOverScrollY, isTouchEvent);
+        public void overScrollBy(
+                int deltaX,
+                int deltaY,
+                int scrollX,
+                int scrollY,
+                int scrollRangeX,
+                int scrollRangeY,
+                int maxOverScrollX,
+                int maxOverScrollY,
+                boolean isTouchEvent) {
+            WebView.this.overScrollBy(
+                    deltaX,
+                    deltaY,
+                    scrollX,
+                    scrollY,
+                    scrollRangeX,
+                    scrollRangeY,
+                    maxOverScrollX,
+                    maxOverScrollY,
+                    isTouchEvent);
         }
 
         public void awakenScrollBars(int duration) {
@@ -973,7 +1010,8 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
             return WebView.this.getHorizontalScrollbarHeight();
         }
 
-        public void super_onDrawVerticalScrollBar(Canvas canvas, Drawable scrollBar, int l, int t, int r, int b) {
+        public void super_onDrawVerticalScrollBar(
+                Canvas canvas, Drawable scrollBar, int l, int t, int r, int b) {
             WebView.super.onDrawVerticalScrollBar(canvas, scrollBar, l, t, r, b);
         }
 
@@ -1001,16 +1039,18 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
         private FindListener mFindDialogFindListener;
         private FindListener mUserFindListener;
 
-        private FindListenerDistributor() {
-        }
+        private FindListenerDistributor() {}
 
         @Override // android.webkit.WebView.FindListener
-        public void onFindResultReceived(int activeMatchOrdinal, int numberOfMatches, boolean isDoneCounting) {
+        public void onFindResultReceived(
+                int activeMatchOrdinal, int numberOfMatches, boolean isDoneCounting) {
             if (this.mFindDialogFindListener != null) {
-                this.mFindDialogFindListener.onFindResultReceived(activeMatchOrdinal, numberOfMatches, isDoneCounting);
+                this.mFindDialogFindListener.onFindResultReceived(
+                        activeMatchOrdinal, numberOfMatches, isDoneCounting);
             }
             if (this.mUserFindListener != null) {
-                this.mUserFindListener.onFindResultReceived(activeMatchOrdinal, numberOfMatches, isDoneCounting);
+                this.mUserFindListener.onFindResultReceived(
+                        activeMatchOrdinal, numberOfMatches, isDoneCounting);
             }
         }
     }
@@ -1035,7 +1075,18 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
 
     private void checkThread() {
         if (this.mWebViewThread != null && Looper.myLooper() != this.mWebViewThread) {
-            Throwable throwable = new Throwable("A WebView method was called on thread '" + Thread.currentThread().getName() + "'. All WebView methods must be called on the same thread. (Expected Looper " + this.mWebViewThread + " called on " + Looper.myLooper() + ", FYI main Looper is " + Looper.getMainLooper() + NavigationBarInflaterView.KEY_CODE_END);
+            Throwable throwable =
+                    new Throwable(
+                            "A WebView method was called on thread '"
+                                    + Thread.currentThread().getName()
+                                    + "'. All WebView methods must be called on the same thread."
+                                    + " (Expected Looper "
+                                    + this.mWebViewThread
+                                    + " called on "
+                                    + Looper.myLooper()
+                                    + ", FYI main Looper is "
+                                    + Looper.getMainLooper()
+                                    + NavigationBarInflaterView.KEY_CODE_END);
             Log.w(LOGTAG, Log.getStackTraceString(throwable));
             StrictMode.onWebViewMethodCalledOnWrongThread(throwable);
             if (sEnforceThreadChecking) {
@@ -1146,7 +1197,8 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
 
     @Override // android.view.View
     public AccessibilityNodeProvider getAccessibilityNodeProvider() {
-        AccessibilityNodeProvider provider = this.mProvider.getViewDelegate().getAccessibilityNodeProvider();
+        AccessibilityNodeProvider provider =
+                this.mProvider.getViewDelegate().getAccessibilityNodeProvider();
         return provider == null ? super.getAccessibilityNodeProvider() : provider;
     }
 
@@ -1187,18 +1239,32 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
     }
 
     @Override // android.view.View
-    public void onCreateVirtualViewTranslationRequests(long[] virtualIds, int[] supportedFormats, Consumer<ViewTranslationRequest> requestsCollector) {
-        this.mProvider.getViewDelegate().onCreateVirtualViewTranslationRequests(virtualIds, supportedFormats, requestsCollector);
+    public void onCreateVirtualViewTranslationRequests(
+            long[] virtualIds,
+            int[] supportedFormats,
+            Consumer<ViewTranslationRequest> requestsCollector) {
+        this.mProvider
+                .getViewDelegate()
+                .onCreateVirtualViewTranslationRequests(
+                        virtualIds, supportedFormats, requestsCollector);
     }
 
     @Override // android.view.ViewGroup, android.view.View
-    public void dispatchCreateViewTranslationRequest(Map<AutofillId, long[]> viewIds, int[] supportedFormats, TranslationCapability capability, List<ViewTranslationRequest> requests) {
+    public void dispatchCreateViewTranslationRequest(
+            Map<AutofillId, long[]> viewIds,
+            int[] supportedFormats,
+            TranslationCapability capability,
+            List<ViewTranslationRequest> requests) {
         super.dispatchCreateViewTranslationRequest(viewIds, supportedFormats, capability, requests);
-        this.mProvider.getViewDelegate().dispatchCreateViewTranslationRequest(viewIds, supportedFormats, capability, requests);
+        this.mProvider
+                .getViewDelegate()
+                .dispatchCreateViewTranslationRequest(
+                        viewIds, supportedFormats, capability, requests);
     }
 
     @Override // android.view.View
-    public void onVirtualViewTranslationResponses(LongSparseArray<ViewTranslationResponse> response) {
+    public void onVirtualViewTranslationResponses(
+            LongSparseArray<ViewTranslationResponse> response) {
         this.mProvider.getViewDelegate().onVirtualViewTranslationResponses(response);
     }
 
@@ -1221,7 +1287,8 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
 
     /* JADX INFO: Access modifiers changed from: protected */
     @Override // android.view.View
-    public void onDrawVerticalScrollBar(Canvas canvas, Drawable scrollBar, int l, int t, int r, int b) {
+    public void onDrawVerticalScrollBar(
+            Canvas canvas, Drawable scrollBar, int l, int t, int r, int b) {
         this.mProvider.getViewDelegate().onDrawVerticalScrollBar(canvas, scrollBar, l, t, r, b);
     }
 
@@ -1291,7 +1358,9 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
         super.onSizeChanged(w, h, ow, oh);
         this.mProvider.getViewDelegate().onSizeChanged(w, h, ow, oh);
         ActivityThread activityThread = ActivityThread.currentActivityThread();
-        if (activityThread != null && activityThread.getCompatInfo() != null && activityThread.getCompatInfo().hasOverrideScaling()) {
+        if (activityThread != null
+                && activityThread.getCompatInfo() != null
+                && activityThread.getCompatInfo().hasOverrideScaling()) {
             getSettings().setLoadWithOverviewMode(true);
             getSettings().setUseWideViewPort(true);
             setInitialScale(1);
@@ -1322,7 +1391,9 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
 
     @Override // android.view.ViewGroup, android.view.ViewParent
     public boolean requestChildRectangleOnScreen(View child, Rect rect, boolean immediate) {
-        return this.mProvider.getViewDelegate().requestChildRectangleOnScreen(child, rect, immediate);
+        return this.mProvider
+                .getViewDelegate()
+                .requestChildRectangleOnScreen(child, rect, immediate);
     }
 
     @Override // android.view.View
@@ -1417,7 +1488,8 @@ public class WebView extends AbsoluteLayout implements ViewTreeObserver.OnGlobal
 
     @Override // android.view.ViewGroup, android.view.View
     public PointerIcon onResolvePointerIcon(MotionEvent event, int pointerIndex) {
-        PointerIcon icon = this.mProvider.getViewDelegate().onResolvePointerIcon(event, pointerIndex);
+        PointerIcon icon =
+                this.mProvider.getViewDelegate().onResolvePointerIcon(event, pointerIndex);
         if (icon != null) {
             return icon;
         }

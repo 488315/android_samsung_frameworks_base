@@ -7,6 +7,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -27,28 +28,25 @@ public interface IDisplayWindowListener extends IInterface {
 
     public static class Default implements IDisplayWindowListener {
         @Override // android.view.IDisplayWindowListener
-        public void onDisplayAdded(int displayId) throws RemoteException {
-        }
+        public void onDisplayAdded(int displayId) throws RemoteException {}
 
         @Override // android.view.IDisplayWindowListener
-        public void onDisplayConfigurationChanged(int displayId, Configuration newConfig) throws RemoteException {
-        }
+        public void onDisplayConfigurationChanged(int displayId, Configuration newConfig)
+                throws RemoteException {}
 
         @Override // android.view.IDisplayWindowListener
-        public void onDisplayRemoved(int displayId) throws RemoteException {
-        }
+        public void onDisplayRemoved(int displayId) throws RemoteException {}
 
         @Override // android.view.IDisplayWindowListener
-        public void onFixedRotationStarted(int displayId, int newRotation) throws RemoteException {
-        }
+        public void onFixedRotationStarted(int displayId, int newRotation) throws RemoteException {}
 
         @Override // android.view.IDisplayWindowListener
-        public void onFixedRotationFinished(int displayId) throws RemoteException {
-        }
+        public void onFixedRotationFinished(int displayId) throws RemoteException {}
 
         @Override // android.view.IDisplayWindowListener
-        public void onKeepClearAreasChanged(int displayId, List<Rect> restricted, List<Rect> unrestricted) throws RemoteException {
-        }
+        public void onKeepClearAreasChanged(
+                int displayId, List<Rect> restricted, List<Rect> unrestricted)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -56,7 +54,7 @@ public interface IDisplayWindowListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDisplayWindowListener {
+    public abstract static class Stub extends Binder implements IDisplayWindowListener {
         static final int TRANSACTION_onDisplayAdded = 1;
         static final int TRANSACTION_onDisplayConfigurationChanged = 2;
         static final int TRANSACTION_onDisplayRemoved = 3;
@@ -109,7 +107,8 @@ public interface IDisplayWindowListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDisplayWindowListener.DESCRIPTOR);
             }
@@ -125,7 +124,8 @@ public interface IDisplayWindowListener extends IInterface {
                     return true;
                 case 2:
                     int _arg02 = data.readInt();
-                    Configuration _arg1 = (Configuration) data.readTypedObject(Configuration.CREATOR);
+                    Configuration _arg1 =
+                            (Configuration) data.readTypedObject(Configuration.CREATOR);
                     data.enforceNoDataAvail();
                     onDisplayConfigurationChanged(_arg02, _arg1);
                     return true;
@@ -186,7 +186,8 @@ public interface IDisplayWindowListener extends IInterface {
             }
 
             @Override // android.view.IDisplayWindowListener
-            public void onDisplayConfigurationChanged(int displayId, Configuration newConfig) throws RemoteException {
+            public void onDisplayConfigurationChanged(int displayId, Configuration newConfig)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDisplayWindowListener.DESCRIPTOR);
@@ -211,7 +212,8 @@ public interface IDisplayWindowListener extends IInterface {
             }
 
             @Override // android.view.IDisplayWindowListener
-            public void onFixedRotationStarted(int displayId, int newRotation) throws RemoteException {
+            public void onFixedRotationStarted(int displayId, int newRotation)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDisplayWindowListener.DESCRIPTOR);
@@ -236,7 +238,9 @@ public interface IDisplayWindowListener extends IInterface {
             }
 
             @Override // android.view.IDisplayWindowListener
-            public void onKeepClearAreasChanged(int displayId, List<Rect> restricted, List<Rect> unrestricted) throws RemoteException {
+            public void onKeepClearAreasChanged(
+                    int displayId, List<Rect> restricted, List<Rect> unrestricted)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDisplayWindowListener.DESCRIPTOR);

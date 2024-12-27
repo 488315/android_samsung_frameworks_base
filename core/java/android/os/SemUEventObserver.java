@@ -1,15 +1,15 @@
 package android.os;
 
-import android.os.UEventObserver;
 
 /* loaded from: classes3.dex */
 public abstract class SemUEventObserver {
-    private UEventObserver mUEO = new UEventObserver() { // from class: android.os.SemUEventObserver.1
-        @Override // android.os.UEventObserver
-        public void onUEvent(UEventObserver.UEvent event) {
-            SemUEventObserver.this.onSemUEvent(new SemUEvent(event));
-        }
-    };
+    private UEventObserver mUEO =
+            new UEventObserver() { // from class: android.os.SemUEventObserver.1
+                @Override // android.os.UEventObserver
+                public void onUEvent(UEventObserver.UEvent event) {
+                    SemUEventObserver.this.onSemUEvent(new SemUEvent(event));
+                }
+            };
 
     public abstract void onSemUEvent(SemUEvent semUEvent);
 

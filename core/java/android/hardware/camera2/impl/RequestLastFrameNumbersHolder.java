@@ -2,6 +2,7 @@ package android.hardware.camera2.impl;
 
 import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.utils.SubmitInfo;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
@@ -20,7 +21,13 @@ public class RequestLastFrameNumbersHolder {
         long frameNumber = requestInfo.getLastFrameNumber();
         int i = 1;
         if (requestInfo.getLastFrameNumber() < requestList.size() - 1) {
-            throw new IllegalArgumentException("lastFrameNumber: " + requestInfo.getLastFrameNumber() + " should be at least " + (requestList.size() - 1) + " for the number of  requests in the list: " + requestList.size());
+            throw new IllegalArgumentException(
+                    "lastFrameNumber: "
+                            + requestInfo.getLastFrameNumber()
+                            + " should be at least "
+                            + (requestList.size() - 1)
+                            + " for the number of  requests in the list: "
+                            + requestList.size());
         }
         int i2 = requestList.size() - 1;
         while (i2 >= 0) {
@@ -33,7 +40,9 @@ public class RequestLastFrameNumbersHolder {
             } else if (requestType == 0 && lastRegularFrameNumber == -1) {
                 lastRegularFrameNumber = frameNumber;
             }
-            if (lastReprocessFrameNumber != -1 && lastZslStillFrameNumber != -1 && lastRegularFrameNumber != -1) {
+            if (lastReprocessFrameNumber != -1
+                    && lastZslStillFrameNumber != -1
+                    && lastRegularFrameNumber != -1) {
                 break;
             }
             frameNumber--;
@@ -48,14 +57,21 @@ public class RequestLastFrameNumbersHolder {
         this.mInflightCompleted = false;
     }
 
-    RequestLastFrameNumbersHolder(int requestId, long lastFrameNumber, int[] repeatingRequestTypes) {
+    RequestLastFrameNumbersHolder(
+            int requestId, long lastFrameNumber, int[] repeatingRequestTypes) {
         long lastRegularFrameNumber = -1;
         long lastZslStillFrameNumber = -1;
         if (repeatingRequestTypes == null) {
             throw new IllegalArgumentException("repeatingRequest list must not be null");
         }
         if (lastFrameNumber < repeatingRequestTypes.length - 1) {
-            throw new IllegalArgumentException("lastFrameNumber: " + lastFrameNumber + " should be at least " + (repeatingRequestTypes.length - 1) + " for the number of requests in the list: " + repeatingRequestTypes.length);
+            throw new IllegalArgumentException(
+                    "lastFrameNumber: "
+                            + lastFrameNumber
+                            + " should be at least "
+                            + (repeatingRequestTypes.length - 1)
+                            + " for the number of requests in the list: "
+                            + repeatingRequestTypes.length);
         }
         long frameNumber = lastFrameNumber;
         int i = repeatingRequestTypes.length;
@@ -97,7 +113,9 @@ public class RequestLastFrameNumbersHolder {
     }
 
     public long getLastFrameNumber() {
-        return Math.max(this.mLastZslStillFrameNumber, Math.max(this.mLastRegularFrameNumber, this.mLastReprocessFrameNumber));
+        return Math.max(
+                this.mLastZslStillFrameNumber,
+                Math.max(this.mLastRegularFrameNumber, this.mLastReprocessFrameNumber));
     }
 
     public int getRequestId() {

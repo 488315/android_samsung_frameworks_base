@@ -2,9 +2,11 @@ package android.graphics.text;
 
 import dalvik.annotation.optimization.CriticalNative;
 import dalvik.annotation.optimization.FastNative;
+
+import libcore.util.NativeAllocationRegistry;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes.dex */
 public class LineBreaker {
@@ -25,18 +27,25 @@ public class LineBreaker {
     private final boolean mUseBoundsForWidth;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BreakStrategy {
-    }
+    public @interface BreakStrategy {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface HyphenationFrequency {
-    }
+    public @interface HyphenationFrequency {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface JustificationMode {
-    }
+    public @interface JustificationMode {}
 
-    private static native long nComputeLineBreaks(long j, char[] cArr, long j2, int i, float f, int i2, float f2, float[] fArr, float f3, int i3);
+    private static native long nComputeLineBreaks(
+            long j,
+            char[] cArr,
+            long j2,
+            int i,
+            float f,
+            int i2,
+            float f2,
+            float[] fArr,
+            float f3,
+            int i3);
 
     /* JADX INFO: Access modifiers changed from: private */
     @CriticalNative
@@ -106,7 +115,12 @@ public class LineBreaker {
         }
 
         public LineBreaker build() {
-            return new LineBreaker(this.mBreakStrategy, this.mHyphenationFrequency, this.mJustificationMode, this.mIndents, this.mUseBoundsForWidth);
+            return new LineBreaker(
+                    this.mBreakStrategy,
+                    this.mHyphenationFrequency,
+                    this.mJustificationMode,
+                    this.mIndents,
+                    this.mUseBoundsForWidth);
         }
     }
 
@@ -158,7 +172,9 @@ public class LineBreaker {
         private static final int START_HYPHEN_BITS_SHIFT = 3;
         private static final int START_HYPHEN_MASK = 24;
         private static final int TAB_MASK = 536870912;
-        private static final NativeAllocationRegistry sRegistry = NativeAllocationRegistry.createMalloced(Result.class.getClassLoader(), LineBreaker.nGetReleaseResultFunc());
+        private static final NativeAllocationRegistry sRegistry =
+                NativeAllocationRegistry.createMalloced(
+                        Result.class.getClassLoader(), LineBreaker.nGetReleaseResultFunc());
         private final long mPtr;
 
         private Result(long ptr) {
@@ -200,14 +216,26 @@ public class LineBreaker {
     }
 
     private static class NoImagePreloadHolder {
-        private static final NativeAllocationRegistry sRegistry = NativeAllocationRegistry.createMalloced(LineBreaker.class.getClassLoader(), LineBreaker.nGetReleaseFunc());
+        private static final NativeAllocationRegistry sRegistry =
+                NativeAllocationRegistry.createMalloced(
+                        LineBreaker.class.getClassLoader(), LineBreaker.nGetReleaseFunc());
 
-        private NoImagePreloadHolder() {
-        }
+        private NoImagePreloadHolder() {}
     }
 
-    private LineBreaker(int breakStrategy, int hyphenationFrequency, int justify, int[] indents, boolean useBoundsForWidth) {
-        this.mNativePtr = nInit(breakStrategy, hyphenationFrequency, justify == 1, indents, useBoundsForWidth);
+    private LineBreaker(
+            int breakStrategy,
+            int hyphenationFrequency,
+            int justify,
+            int[] indents,
+            boolean useBoundsForWidth) {
+        this.mNativePtr =
+                nInit(
+                        breakStrategy,
+                        hyphenationFrequency,
+                        justify == 1,
+                        indents,
+                        useBoundsForWidth);
         NoImagePreloadHolder.sRegistry.registerNativeAllocation(this, this.mNativePtr);
         this.mBreakStrategy = breakStrategy;
         this.mHyphenationFrequency = hyphenationFrequency;
@@ -236,7 +264,19 @@ public class LineBreaker {
         return this.mUseBoundsForWidth;
     }
 
-    public Result computeLineBreaks(MeasuredText measuredPara, ParagraphConstraints constraints, int lineNumber) {
-        return new Result(nComputeLineBreaks(this.mNativePtr, measuredPara.getChars(), measuredPara.getNativePtr(), measuredPara.getChars().length, constraints.mFirstWidth, constraints.mFirstWidthLineCount, constraints.mWidth, constraints.mVariableTabStops, constraints.mDefaultTabStop, lineNumber));
+    public Result computeLineBreaks(
+            MeasuredText measuredPara, ParagraphConstraints constraints, int lineNumber) {
+        return new Result(
+                nComputeLineBreaks(
+                        this.mNativePtr,
+                        measuredPara.getChars(),
+                        measuredPara.getNativePtr(),
+                        measuredPara.getChars().length,
+                        constraints.mFirstWidth,
+                        constraints.mFirstWidthLineCount,
+                        constraints.mWidth,
+                        constraints.mVariableTabStops,
+                        constraints.mDefaultTabStop,
+                        lineNumber));
     }
 }

@@ -5,31 +5,32 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class LinkQualityInfo implements Parcelable {
-    public static final Parcelable.Creator<LinkQualityInfo> CREATOR = new Parcelable.Creator<LinkQualityInfo>() { // from class: android.net.LinkQualityInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LinkQualityInfo createFromParcel(Parcel in) {
-            int objectType = in.readInt();
-            if (objectType == 1) {
-                LinkQualityInfo li = new LinkQualityInfo();
-                li.initializeFromParcel(in);
-                return li;
-            }
-            if (objectType == 2) {
-                return WifiLinkQualityInfo.createFromParcelBody(in);
-            }
-            if (objectType == 3) {
-                return MobileLinkQualityInfo.createFromParcelBody(in);
-            }
-            return null;
-        }
+    public static final Parcelable.Creator<LinkQualityInfo> CREATOR =
+            new Parcelable.Creator<LinkQualityInfo>() { // from class: android.net.LinkQualityInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LinkQualityInfo createFromParcel(Parcel in) {
+                    int objectType = in.readInt();
+                    if (objectType == 1) {
+                        LinkQualityInfo li = new LinkQualityInfo();
+                        li.initializeFromParcel(in);
+                        return li;
+                    }
+                    if (objectType == 2) {
+                        return WifiLinkQualityInfo.createFromParcelBody(in);
+                    }
+                    if (objectType == 3) {
+                        return MobileLinkQualityInfo.createFromParcelBody(in);
+                    }
+                    return null;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LinkQualityInfo[] newArray(int size) {
-            return new LinkQualityInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LinkQualityInfo[] newArray(int size) {
+                    return new LinkQualityInfo[size];
+                }
+            };
     public static final int NORMALIZED_MAX_SIGNAL_STRENGTH = 99;
     public static final int NORMALIZED_MIN_SIGNAL_STRENGTH = 0;
     public static final int NORMALIZED_SIGNAL_STRENGTH_RANGE = 100;

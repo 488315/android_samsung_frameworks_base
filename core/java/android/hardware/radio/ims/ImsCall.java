@@ -4,25 +4,27 @@ import android.hardware.radio.AccessNetwork$$;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class ImsCall implements Parcelable {
-    public static final Parcelable.Creator<ImsCall> CREATOR = new Parcelable.Creator<ImsCall>() { // from class: android.hardware.radio.ims.ImsCall.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsCall createFromParcel(Parcel _aidl_source) {
-            ImsCall _aidl_out = new ImsCall();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<ImsCall> CREATOR =
+            new Parcelable.Creator<ImsCall>() { // from class: android.hardware.radio.ims.ImsCall.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsCall createFromParcel(Parcel _aidl_source) {
+                    ImsCall _aidl_out = new ImsCall();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImsCall[] newArray(int _aidl_size) {
-            return new ImsCall[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImsCall[] newArray(int _aidl_size) {
+                    return new ImsCall[_aidl_size];
+                }
+            };
     public int accessNetwork;
     public int callState;
     public int callType;

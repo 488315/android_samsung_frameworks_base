@@ -6,10 +6,12 @@ import android.frameworks.vibrator.VibrationParam$1$$ExternalSyntheticOutline0;
 import android.os.RemoteException;
 import android.os.SystemClock;
 import android.util.Log;
+
 import com.android.internal.app.IBatteryStats;
 import com.android.internal.util.ConcurrentUtils;
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.location.gnss.hal.GnssNative;
+
 import java.util.List;
 import java.util.concurrent.Executor;
 
@@ -118,8 +120,7 @@ public final class GnssMetrics {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class StatsPullAtomCallbackImpl implements StatsManager.StatsPullAtomCallback {
-        public StatsPullAtomCallbackImpl() {
-        }
+        public StatsPullAtomCallbackImpl() {}
 
         public final int onPullAtom(int i, List list) {
             long j;
@@ -129,16 +130,48 @@ public final class GnssMetrics {
             long j5;
             if (i != 10074) {
                 if (i != 10101) {
-                    throw new UnsupportedOperationException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Unknown tagId = "));
+                    throw new UnsupportedOperationException(
+                            VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Unknown tagId = "));
                 }
-                GnssPowerStats requestPowerStatsBlocking = GnssMetrics.this.mGnssNative.requestPowerStatsBlocking();
+                GnssPowerStats requestPowerStatsBlocking =
+                        GnssMetrics.this.mGnssNative.requestPowerStatsBlocking();
                 if (requestPowerStatsBlocking == null) {
                     return 1;
                 }
                 double[] dArr = new double[10];
                 double[] dArr2 = requestPowerStatsBlocking.mOtherModesEnergyMilliJoule;
                 System.arraycopy(dArr2, 0, dArr, 0, Math.min(dArr2.length, 10));
-                list.add(FrameworkStatsLog.buildStatsEvent(i, (long) requestPowerStatsBlocking.mElapsedRealtimeUncertaintyNanos, (long) (requestPowerStatsBlocking.mTotalEnergyMilliJoule * 1000.0d), (long) (requestPowerStatsBlocking.mSinglebandTrackingModeEnergyMilliJoule * 1000.0d), (long) (requestPowerStatsBlocking.mMultibandTrackingModeEnergyMilliJoule * 1000.0d), (long) (requestPowerStatsBlocking.mSinglebandAcquisitionModeEnergyMilliJoule * 1000.0d), (long) (requestPowerStatsBlocking.mMultibandAcquisitionModeEnergyMilliJoule * 1000.0d), (long) (dArr[0] * 1000.0d), (long) (dArr[1] * 1000.0d), (long) (dArr[2] * 1000.0d), (long) (dArr[3] * 1000.0d), (long) (dArr[4] * 1000.0d), (long) (dArr[5] * 1000.0d), (long) (dArr[6] * 1000.0d), (long) (dArr[7] * 1000.0d), (long) (dArr[8] * 1000.0d), (long) (dArr[9] * 1000.0d)));
+                list.add(
+                        FrameworkStatsLog.buildStatsEvent(
+                                i,
+                                (long) requestPowerStatsBlocking.mElapsedRealtimeUncertaintyNanos,
+                                (long) (requestPowerStatsBlocking.mTotalEnergyMilliJoule * 1000.0d),
+                                (long)
+                                        (requestPowerStatsBlocking
+                                                        .mSinglebandTrackingModeEnergyMilliJoule
+                                                * 1000.0d),
+                                (long)
+                                        (requestPowerStatsBlocking
+                                                        .mMultibandTrackingModeEnergyMilliJoule
+                                                * 1000.0d),
+                                (long)
+                                        (requestPowerStatsBlocking
+                                                        .mSinglebandAcquisitionModeEnergyMilliJoule
+                                                * 1000.0d),
+                                (long)
+                                        (requestPowerStatsBlocking
+                                                        .mMultibandAcquisitionModeEnergyMilliJoule
+                                                * 1000.0d),
+                                (long) (dArr[0] * 1000.0d),
+                                (long) (dArr[1] * 1000.0d),
+                                (long) (dArr[2] * 1000.0d),
+                                (long) (dArr[3] * 1000.0d),
+                                (long) (dArr[4] * 1000.0d),
+                                (long) (dArr[5] * 1000.0d),
+                                (long) (dArr[6] * 1000.0d),
+                                (long) (dArr[7] * 1000.0d),
+                                (long) (dArr[8] * 1000.0d),
+                                (long) (dArr[9] * 1000.0d)));
                 return 0;
             }
             GnssMetrics gnssMetrics = GnssMetrics.this;
@@ -167,7 +200,23 @@ public final class GnssMetrics {
             synchronized (statistics5) {
                 j5 = statistics5.mLongSum;
             }
-            list.add(FrameworkStatsLog.buildStatsEvent(i, count, j, count2, j2, count3, j3, count4, j4, count5, j5, gnssMetrics.mSvStatusReports, gnssMetrics.mSvStatusReportsUsedInFix, gnssMetrics.mL5SvStatusReports, gnssMetrics.mL5SvStatusReportsUsedInFix));
+            list.add(
+                    FrameworkStatsLog.buildStatsEvent(
+                            i,
+                            count,
+                            j,
+                            count2,
+                            j2,
+                            count3,
+                            j3,
+                            count4,
+                            j4,
+                            count5,
+                            j5,
+                            gnssMetrics.mSvStatusReports,
+                            gnssMetrics.mSvStatusReportsUsedInFix,
+                            gnssMetrics.mL5SvStatusReports,
+                            gnssMetrics.mL5SvStatusReportsUsedInFix));
             return 0;
         }
     }
@@ -184,8 +233,16 @@ public final class GnssMetrics {
         StatsManager statsManager = (StatsManager) context.getSystemService("stats");
         StatsPullAtomCallbackImpl statsPullAtomCallbackImpl = new StatsPullAtomCallbackImpl();
         Executor executor = ConcurrentUtils.DIRECT_EXECUTOR;
-        statsManager.setPullAtomCallback(FrameworkStatsLog.GNSS_STATS, (StatsManager.PullAtomMetadata) null, executor, statsPullAtomCallbackImpl);
-        statsManager.setPullAtomCallback(FrameworkStatsLog.GNSS_POWER_STATS, (StatsManager.PullAtomMetadata) null, executor, statsPullAtomCallbackImpl);
+        statsManager.setPullAtomCallback(
+                FrameworkStatsLog.GNSS_STATS,
+                (StatsManager.PullAtomMetadata) null,
+                executor,
+                statsPullAtomCallbackImpl);
+        statsManager.setPullAtomCallback(
+                FrameworkStatsLog.GNSS_POWER_STATS,
+                (StatsManager.PullAtomMetadata) null,
+                executor,
+                statsPullAtomCallbackImpl);
     }
 
     public static boolean isL5Sv(float f) {

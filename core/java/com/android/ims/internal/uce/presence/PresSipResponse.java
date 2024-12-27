@@ -5,19 +5,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class PresSipResponse implements Parcelable {
-    public static final Parcelable.Creator<PresSipResponse> CREATOR = new Parcelable.Creator<PresSipResponse>() { // from class: com.android.ims.internal.uce.presence.PresSipResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PresSipResponse createFromParcel(Parcel source) {
-            return new PresSipResponse(source);
-        }
+    public static final Parcelable.Creator<PresSipResponse> CREATOR =
+            new Parcelable.Creator<
+                    PresSipResponse>() { // from class:
+                                         // com.android.ims.internal.uce.presence.PresSipResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PresSipResponse createFromParcel(Parcel source) {
+                    return new PresSipResponse(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PresSipResponse[] newArray(int size) {
-            return new PresSipResponse[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PresSipResponse[] newArray(int size) {
+                    return new PresSipResponse[size];
+                }
+            };
     private PresCmdId mCmdId;
     private String mReasonHeader;
     private String mReasonPhrase;
@@ -111,7 +114,9 @@ public class PresSipResponse implements Parcelable {
         this.mRequestId = source.readInt();
         this.mSipResponseCode = source.readInt();
         this.mReasonPhrase = source.readString();
-        this.mCmdId = (PresCmdId) source.readParcelable(PresCmdId.class.getClassLoader(), PresCmdId.class);
+        this.mCmdId =
+                (PresCmdId)
+                        source.readParcelable(PresCmdId.class.getClassLoader(), PresCmdId.class);
         this.mRetryAfter = source.readInt();
         this.mReasonHeader = source.readString();
     }

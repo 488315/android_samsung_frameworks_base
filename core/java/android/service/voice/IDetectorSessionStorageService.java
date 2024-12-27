@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.android.internal.infra.AndroidFuture;
 
 /* loaded from: classes3.dex */
@@ -15,8 +16,7 @@ public interface IDetectorSessionStorageService extends IInterface {
 
     public static class Default implements IDetectorSessionStorageService {
         @Override // android.service.voice.IDetectorSessionStorageService
-        public void openFile(String filename, AndroidFuture future) throws RemoteException {
-        }
+        public void openFile(String filename, AndroidFuture future) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +24,7 @@ public interface IDetectorSessionStorageService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDetectorSessionStorageService {
+    public abstract static class Stub extends Binder implements IDetectorSessionStorageService {
         static final int TRANSACTION_openFile = 1;
 
         public Stub() {
@@ -62,7 +62,8 @@ public interface IDetectorSessionStorageService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDetectorSessionStorageService.DESCRIPTOR);
             }
@@ -73,7 +74,8 @@ public interface IDetectorSessionStorageService extends IInterface {
             switch (code) {
                 case 1:
                     String _arg0 = data.readString();
-                    AndroidFuture _arg1 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture _arg1 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     openFile(_arg0, _arg1);
                     return true;

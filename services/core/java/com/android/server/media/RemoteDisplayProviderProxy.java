@@ -12,7 +12,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.Slog;
-import com.android.server.media.MediaRouterService;
+
 import java.lang.ref.WeakReference;
 import java.util.Objects;
 
@@ -49,22 +49,31 @@ public final class RemoteDisplayProviderProxy implements ServiceConnection {
         public final void run() {
             switch (this.$r8$classId) {
                 case 0:
-                    RemoteDisplayProviderProxy remoteDisplayProviderProxy = (RemoteDisplayProviderProxy) this.this$0;
+                    RemoteDisplayProviderProxy remoteDisplayProviderProxy =
+                            (RemoteDisplayProviderProxy) this.this$0;
                     int i = 0;
                     remoteDisplayProviderProxy.mScheduledDisplayStateChangedCallback = false;
                     Callback callback = remoteDisplayProviderProxy.mDisplayStateCallback;
                     if (callback != null) {
-                        RemoteDisplayState remoteDisplayState = remoteDisplayProviderProxy.mDisplayState;
-                        MediaRouterService.UserHandler userHandler = (MediaRouterService.UserHandler) callback;
+                        RemoteDisplayState remoteDisplayState =
+                                remoteDisplayProviderProxy.mDisplayState;
+                        MediaRouterService.UserHandler userHandler =
+                                (MediaRouterService.UserHandler) callback;
                         int size = userHandler.mProviderRecords.size();
                         while (true) {
                             if (i >= size) {
                                 i = -1;
-                            } else if (((MediaRouterService.UserHandler.ProviderRecord) userHandler.mProviderRecords.get(i)).mProvider != remoteDisplayProviderProxy) {
+                            } else if (((MediaRouterService.UserHandler.ProviderRecord)
+                                                    userHandler.mProviderRecords.get(i))
+                                            .mProvider
+                                    != remoteDisplayProviderProxy) {
                                 i++;
                             }
                         }
-                        if (i >= 0 && ((MediaRouterService.UserHandler.ProviderRecord) userHandler.mProviderRecords.get(i)).updateDescriptor(remoteDisplayState)) {
+                        if (i >= 0
+                                && ((MediaRouterService.UserHandler.ProviderRecord)
+                                                userHandler.mProviderRecords.get(i))
+                                        .updateDescriptor(remoteDisplayState)) {
                             userHandler.checkSelectedRouteState();
                             userHandler.scheduleUpdateClientState();
                             break;
@@ -73,7 +82,8 @@ public final class RemoteDisplayProviderProxy implements ServiceConnection {
                     break;
                 case 1:
                     Connection connection = (Connection) this.this$0;
-                    RemoteDisplayProviderProxy remoteDisplayProviderProxy2 = RemoteDisplayProviderProxy.this;
+                    RemoteDisplayProviderProxy remoteDisplayProviderProxy2 =
+                            RemoteDisplayProviderProxy.this;
                     Connection connection2 = remoteDisplayProviderProxy2.mActiveConnection;
                     if (connection2 == connection) {
                         remoteDisplayProviderProxy2.mConnectionReady = true;
@@ -83,7 +93,10 @@ public final class RemoteDisplayProviderProxy implements ServiceConnection {
                             try {
                                 connection2.mProvider.setDiscoveryMode(i2);
                             } catch (RemoteException e) {
-                                Slog.e("RemoteDisplayProvider", "Failed to deliver request to set discovery mode.", e);
+                                Slog.e(
+                                        "RemoteDisplayProvider",
+                                        "Failed to deliver request to set discovery mode.",
+                                        e);
                             }
                         }
                         String str = remoteDisplayProviderProxy2.mSelectedDisplayId;
@@ -94,7 +107,10 @@ public final class RemoteDisplayProviderProxy implements ServiceConnection {
                                 connection3.mProvider.connect(str);
                                 break;
                             } catch (RemoteException e2) {
-                                Slog.e("RemoteDisplayProvider", "Failed to deliver request to connect to display.", e2);
+                                Slog.e(
+                                        "RemoteDisplayProvider",
+                                        "Failed to deliver request to connect to display.",
+                                        e2);
                                 return;
                             }
                         }
@@ -102,9 +118,12 @@ public final class RemoteDisplayProviderProxy implements ServiceConnection {
                     break;
                 default:
                     Connection connection4 = (Connection) this.this$0;
-                    RemoteDisplayProviderProxy remoteDisplayProviderProxy3 = RemoteDisplayProviderProxy.this;
+                    RemoteDisplayProviderProxy remoteDisplayProviderProxy3 =
+                            RemoteDisplayProviderProxy.this;
                     if (remoteDisplayProviderProxy3.mActiveConnection == connection4) {
-                        Slog.d("RemoteDisplayProvider", remoteDisplayProviderProxy3 + ": Service connection died");
+                        Slog.d(
+                                "RemoteDisplayProvider",
+                                remoteDisplayProviderProxy3 + ": Service connection died");
                         remoteDisplayProviderProxy3.disconnect();
                         break;
                     }
@@ -114,8 +133,7 @@ public final class RemoteDisplayProviderProxy implements ServiceConnection {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface Callback {
-    }
+    public interface Callback {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Connection implements IBinder.DeathRecipient {
@@ -143,26 +161,39 @@ public final class RemoteDisplayProviderProxy implements ServiceConnection {
         public final void onStateChanged(final RemoteDisplayState remoteDisplayState) {
             final Connection connection = (Connection) this.mConnectionRef.get();
             if (connection != null) {
-                RemoteDisplayProviderProxy.this.mHandler.post(new Runnable() { // from class: com.android.server.media.RemoteDisplayProviderProxy.Connection.3
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        Connection connection2 = Connection.this;
-                        RemoteDisplayProviderProxy remoteDisplayProviderProxy = RemoteDisplayProviderProxy.this;
-                        RemoteDisplayState remoteDisplayState2 = remoteDisplayState;
-                        if (remoteDisplayProviderProxy.mActiveConnection == connection2) {
-                            Slog.d("RemoteDisplayProvider", remoteDisplayProviderProxy + ": State changed, state=" + remoteDisplayState2);
-                            if (Objects.equals(remoteDisplayProviderProxy.mDisplayState, remoteDisplayState2)) {
-                                return;
+                RemoteDisplayProviderProxy.this.mHandler.post(
+                        new Runnable() { // from class:
+                                         // com.android.server.media.RemoteDisplayProviderProxy.Connection.3
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                Connection connection2 = Connection.this;
+                                RemoteDisplayProviderProxy remoteDisplayProviderProxy =
+                                        RemoteDisplayProviderProxy.this;
+                                RemoteDisplayState remoteDisplayState2 = remoteDisplayState;
+                                if (remoteDisplayProviderProxy.mActiveConnection == connection2) {
+                                    Slog.d(
+                                            "RemoteDisplayProvider",
+                                            remoteDisplayProviderProxy
+                                                    + ": State changed, state="
+                                                    + remoteDisplayState2);
+                                    if (Objects.equals(
+                                            remoteDisplayProviderProxy.mDisplayState,
+                                            remoteDisplayState2)) {
+                                        return;
+                                    }
+                                    remoteDisplayProviderProxy.mDisplayState = remoteDisplayState2;
+                                    if (remoteDisplayProviderProxy
+                                            .mScheduledDisplayStateChangedCallback) {
+                                        return;
+                                    }
+                                    remoteDisplayProviderProxy
+                                                    .mScheduledDisplayStateChangedCallback =
+                                            true;
+                                    remoteDisplayProviderProxy.mHandler.post(
+                                            remoteDisplayProviderProxy.mDisplayStateChanged);
+                                }
                             }
-                            remoteDisplayProviderProxy.mDisplayState = remoteDisplayState2;
-                            if (remoteDisplayProviderProxy.mScheduledDisplayStateChangedCallback) {
-                                return;
-                            }
-                            remoteDisplayProviderProxy.mScheduledDisplayStateChangedCallback = true;
-                            remoteDisplayProviderProxy.mHandler.post(remoteDisplayProviderProxy.mDisplayStateChanged);
-                        }
-                    }
-                });
+                        });
             }
         }
     }
@@ -181,7 +212,9 @@ public final class RemoteDisplayProviderProxy implements ServiceConnection {
         Intent intent = new Intent("com.android.media.remotedisplay.RemoteDisplayProvider");
         intent.setComponent(this.mComponentName);
         try {
-            boolean bindServiceAsUser = this.mContext.bindServiceAsUser(intent, this, 67108865, new UserHandle(this.mUserId));
+            boolean bindServiceAsUser =
+                    this.mContext.bindServiceAsUser(
+                            intent, this, 67108865, new UserHandle(this.mUserId));
             this.mBound = bindServiceAsUser;
             if (bindServiceAsUser) {
                 return;
@@ -200,7 +233,10 @@ public final class RemoteDisplayProviderProxy implements ServiceConnection {
                 try {
                     connection.mProvider.disconnect(str);
                 } catch (RemoteException e) {
-                    Slog.e("RemoteDisplayProvider", "Failed to deliver request to disconnect from display.", e);
+                    Slog.e(
+                            "RemoteDisplayProvider",
+                            "Failed to deliver request to disconnect from display.",
+                            e);
                 }
             }
             this.mConnectionReady = false;
@@ -227,7 +263,9 @@ public final class RemoteDisplayProviderProxy implements ServiceConnection {
             disconnect();
             IRemoteDisplayProvider asInterface = IRemoteDisplayProvider.Stub.asInterface(iBinder);
             if (asInterface == null) {
-                Slog.e("RemoteDisplayProvider", this + ": Service returned invalid remote display provider binder");
+                Slog.e(
+                        "RemoteDisplayProvider",
+                        this + ": Service returned invalid remote display provider binder");
                 return;
             }
             Connection connection = new Connection(asInterface);
@@ -258,7 +296,10 @@ public final class RemoteDisplayProviderProxy implements ServiceConnection {
                 try {
                     connection.mProvider.setDiscoveryMode(i);
                 } catch (RemoteException e) {
-                    Slog.e("RemoteDisplayProvider", "Failed to deliver request to set discovery mode.", e);
+                    Slog.e(
+                            "RemoteDisplayProvider",
+                            "Failed to deliver request to set discovery mode.",
+                            e);
                 }
             }
             updateBinding();
@@ -276,7 +317,10 @@ public final class RemoteDisplayProviderProxy implements ServiceConnection {
             try {
                 connection.mProvider.disconnect(str2);
             } catch (RemoteException e) {
-                Slog.e("RemoteDisplayProvider", "Failed to deliver request to disconnect from display.", e);
+                Slog.e(
+                        "RemoteDisplayProvider",
+                        "Failed to deliver request to disconnect from display.",
+                        e);
             }
         }
         this.mSelectedDisplayId = str;
@@ -286,7 +330,10 @@ public final class RemoteDisplayProviderProxy implements ServiceConnection {
             try {
                 connection2.mProvider.connect(str);
             } catch (RemoteException e2) {
-                Slog.e("RemoteDisplayProvider", "Failed to deliver request to connect to display.", e2);
+                Slog.e(
+                        "RemoteDisplayProvider",
+                        "Failed to deliver request to connect to display.",
+                        e2);
             }
         }
         updateBinding();

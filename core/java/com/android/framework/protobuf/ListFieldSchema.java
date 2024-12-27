@@ -1,6 +1,5 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.Internal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,8 +16,7 @@ abstract class ListFieldSchema {
 
     abstract <L> List<L> mutableListAt(Object obj, long j);
 
-    private ListFieldSchema() {
-    }
+    private ListFieldSchema() {}
 
     static {
         FULL_INSTANCE = new ListFieldSchemaFull();
@@ -34,7 +32,8 @@ abstract class ListFieldSchema {
     }
 
     private static final class ListFieldSchemaFull extends ListFieldSchema {
-        private static final Class<?> UNMODIFIABLE_LIST_CLASS = Collections.unmodifiableList(Collections.emptyList()).getClass();
+        private static final Class<?> UNMODIFIABLE_LIST_CLASS =
+                Collections.unmodifiableList(Collections.emptyList()).getClass();
 
         private ListFieldSchemaFull() {
             super();
@@ -55,7 +54,8 @@ abstract class ListFieldSchema {
                 if (UNMODIFIABLE_LIST_CLASS.isAssignableFrom(list.getClass())) {
                     return;
                 }
-                if ((list instanceof PrimitiveNonBoxingCollection) && (list instanceof Internal.ProtobufList)) {
+                if ((list instanceof PrimitiveNonBoxingCollection)
+                        && (list instanceof Internal.ProtobufList)) {
                     if (((Internal.ProtobufList) list).isModifiable()) {
                         ((Internal.ProtobufList) list).makeImmutable();
                         return;
@@ -67,14 +67,18 @@ abstract class ListFieldSchema {
             UnsafeUtil.putObject(message, offset, immutable);
         }
 
-        private static <L> List<L> mutableListAt(Object message, long offset, int additionalCapacity) {
+        private static <L> List<L> mutableListAt(
+                Object message, long offset, int additionalCapacity) {
             List<L> list;
             List<L> list2 = getList(message, offset);
             if (list2.isEmpty()) {
                 if (list2 instanceof LazyStringList) {
                     list = new LazyStringArrayList(additionalCapacity);
-                } else if ((list2 instanceof PrimitiveNonBoxingCollection) && (list2 instanceof Internal.ProtobufList)) {
-                    list = ((Internal.ProtobufList) list2).mutableCopyWithCapacity2(additionalCapacity);
+                } else if ((list2 instanceof PrimitiveNonBoxingCollection)
+                        && (list2 instanceof Internal.ProtobufList)) {
+                    list =
+                            ((Internal.ProtobufList) list2)
+                                    .mutableCopyWithCapacity2(additionalCapacity);
                 } else {
                     list = new ArrayList(additionalCapacity);
                 }
@@ -88,13 +92,18 @@ abstract class ListFieldSchema {
                 return newList;
             }
             if (list2 instanceof UnmodifiableLazyStringList) {
-                LazyStringArrayList newList2 = new LazyStringArrayList(list2.size() + additionalCapacity);
+                LazyStringArrayList newList2 =
+                        new LazyStringArrayList(list2.size() + additionalCapacity);
                 newList2.addAll((UnmodifiableLazyStringList) list2);
                 UnsafeUtil.putObject(message, offset, newList2);
                 return newList2;
             }
-            if ((list2 instanceof PrimitiveNonBoxingCollection) && (list2 instanceof Internal.ProtobufList) && !((Internal.ProtobufList) list2).isModifiable()) {
-                List<L> list3 = ((Internal.ProtobufList) list2).mutableCopyWithCapacity2(list2.size() + additionalCapacity);
+            if ((list2 instanceof PrimitiveNonBoxingCollection)
+                    && (list2 instanceof Internal.ProtobufList)
+                    && !((Internal.ProtobufList) list2).isModifiable()) {
+                List<L> list3 =
+                        ((Internal.ProtobufList) list2)
+                                .mutableCopyWithCapacity2(list2.size() + additionalCapacity);
                 UnsafeUtil.putObject(message, offset, list3);
                 return list3;
             }
@@ -129,7 +138,8 @@ abstract class ListFieldSchema {
             Internal.ProtobufList<L> list = getProtobufList(message, offset);
             if (!list.isModifiable()) {
                 int size = list.size();
-                Internal.ProtobufList<L> list2 = list.mutableCopyWithCapacity2(size == 0 ? 10 : size * 2);
+                Internal.ProtobufList<L> list2 =
+                        list.mutableCopyWithCapacity2(size == 0 ? 10 : size * 2);
                 UnsafeUtil.putObject(message, offset, list2);
                 return list2;
             }

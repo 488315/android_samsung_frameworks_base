@@ -3,7 +3,7 @@ package com.samsung.android.motionphoto.core;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
-import com.samsung.android.motionphoto.core.MPClientEventHandler;
+
 import java.lang.ref.WeakReference;
 
 /* loaded from: classes6.dex */
@@ -80,8 +80,15 @@ public class MPRecorderListener {
         }
     }
 
-    private static void postEventFromNative(Object listener_ref, int what, int arg1, int arg2, Object obj) {
-        Log.d(TAG, String.format("postEventFromNative: %d, %d, %d", Integer.valueOf(what), Integer.valueOf(arg1), Integer.valueOf(arg2)) + ", obj=" + obj);
+    private static void postEventFromNative(
+            Object listener_ref, int what, int arg1, int arg2, Object obj) {
+        Log.d(
+                TAG,
+                String.format(
+                                "postEventFromNative: %d, %d, %d",
+                                Integer.valueOf(what), Integer.valueOf(arg1), Integer.valueOf(arg2))
+                        + ", obj="
+                        + obj);
         MPRecorderListener l = (MPRecorderListener) ((WeakReference) listener_ref).get();
         if (l != null && l.mEventHandler != null) {
             Message m = l.mEventHandler.obtainMessage(what, arg1, arg2, obj);

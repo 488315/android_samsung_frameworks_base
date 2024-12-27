@@ -23,6 +23,7 @@ import android.util.Pair;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
+
 import com.android.internal.pm.parsing.pkg.AndroidPackageInternal;
 import com.android.internal.pm.pkg.component.ParsedActivity;
 import com.android.internal.util.CollectionUtils;
@@ -40,13 +41,14 @@ import com.android.server.pm.PackageSetting;
 import com.android.server.pm.SettingsXml$ReadSectionImpl;
 import com.android.server.pm.pkg.AndroidPackage;
 import com.android.server.pm.pkg.PackageStateInternal;
-import com.android.server.pm.verify.domain.DomainVerificationLegacySettings;
 import com.android.server.pm.verify.domain.models.DomainVerificationInternalUserState;
 import com.android.server.pm.verify.domain.models.DomainVerificationPkgState;
 import com.android.server.pm.verify.domain.models.DomainVerificationStateMap;
 import com.android.server.pm.verify.domain.proxy.DomainVerificationProxy;
 import com.android.server.pm.verify.domain.proxy.DomainVerificationProxyUnavailable;
+
 import com.samsung.android.knox.custom.LauncherConfigurationInternal;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -59,7 +61,8 @@ import java.util.UUID;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class DomainVerificationService extends SystemService implements DomainVerificationManagerInternal {
+public final class DomainVerificationService extends SystemService
+        implements DomainVerificationManagerInternal {
     public final DomainVerificationStateMap mAttachedPkgStates;
     public boolean mCanSendBroadcasts;
     public final DomainVerificationCollector mCollector;
@@ -86,7 +89,8 @@ public final class DomainVerificationService extends SystemService implements Do
         }
     }
 
-    public DomainVerificationService(Context context, SystemConfig systemConfig, PlatformCompat platformCompat) {
+    public DomainVerificationService(
+            Context context, SystemConfig systemConfig, PlatformCompat platformCompat) {
         super(context);
         this.mAttachedPkgStates = new DomainVerificationStateMap();
         this.mLock = new Object();
@@ -94,7 +98,8 @@ public final class DomainVerificationService extends SystemService implements Do
         this.mProxy = new DomainVerificationProxyUnavailable();
         this.mSystemConfig = systemConfig;
         this.mPlatformCompat = platformCompat;
-        DomainVerificationCollector domainVerificationCollector = new DomainVerificationCollector(platformCompat, systemConfig);
+        DomainVerificationCollector domainVerificationCollector =
+                new DomainVerificationCollector(platformCompat, systemConfig);
         this.mCollector = domainVerificationCollector;
         this.mSettings = new DomainVerificationSettings(domainVerificationCollector);
         this.mEnforcer = new DomainVerificationEnforcer(context);
@@ -103,7 +108,10 @@ public final class DomainVerificationService extends SystemService implements Do
         this.mLegacySettings = new DomainVerificationLegacySettings();
     }
 
-    public static void addIfShouldBroadcastLocked(Collection collection, DomainVerificationPkgState domainVerificationPkgState, boolean z) {
+    public static void addIfShouldBroadcastLocked(
+            Collection collection,
+            DomainVerificationPkgState domainVerificationPkgState,
+            boolean z) {
         if (!z || !domainVerificationPkgState.mHasAutoVerifyDomains) {
             if (!domainVerificationPkgState.mHasAutoVerifyDomains) {
                 return;
@@ -111,7 +119,8 @@ public final class DomainVerificationService extends SystemService implements Do
             ArrayMap arrayMap = domainVerificationPkgState.mStateMap;
             int size = arrayMap.size();
             for (int i = 0; i < size; i++) {
-                if (!DomainVerificationState.isDefault(((Integer) arrayMap.valueAt(i)).intValue())) {
+                if (!DomainVerificationState.isDefault(
+                        ((Integer) arrayMap.valueAt(i)).intValue())) {
                     return;
                 }
             }
@@ -119,7 +128,8 @@ public final class DomainVerificationService extends SystemService implements Do
         ((ArraySet) collection).add(domainVerificationPkgState.mPackageName);
     }
 
-    public static void applyPreVerifiedState(ArrayMap arrayMap, ArraySet arraySet, DomainSet domainSet) {
+    public static void applyPreVerifiedState(
+            ArrayMap arrayMap, ArraySet arraySet, DomainSet domainSet) {
         if (domainSet == null || arraySet.isEmpty()) {
             return;
         }
@@ -131,23 +141,37 @@ public final class DomainVerificationService extends SystemService implements Do
     }
 
     public static void debugApproval(String str, Object obj, int i, boolean z, String str2) {
-        Slog.d("DomainVerificationServiceApproval", str + " was " + (z ? "approved" : "denied") + " for " + obj + " for user " + i + ": " + str2);
+        Slog.d(
+                "DomainVerificationServiceApproval",
+                str
+                        + " was "
+                        + (z ? "approved" : "denied")
+                        + " for "
+                        + obj
+                        + " for user "
+                        + i
+                        + ": "
+                        + str2);
     }
 
     public static void fillInfoMapForSamePackage(ArrayMap arrayMap, String str, int i) {
         int size = arrayMap.size();
         for (int i2 = 0; i2 < size; i2++) {
-            if (Objects.equals(str, ((ResolveInfo) arrayMap.keyAt(i2)).getComponentInfo().packageName)) {
+            if (Objects.equals(
+                    str, ((ResolveInfo) arrayMap.keyAt(i2)).getComponentInfo().packageName)) {
                 arrayMap.setValueAt(i2, Integer.valueOf(i));
             }
         }
     }
 
-    public static int indexOfIntentFilterEntry(AndroidPackage androidPackage, ResolveInfo resolveInfo) {
+    public static int indexOfIntentFilterEntry(
+            AndroidPackage androidPackage, ResolveInfo resolveInfo) {
         List activities = androidPackage.getActivities();
         int size = activities.size();
         for (int i = 0; i < size; i++) {
-            if (Objects.equals(((ParsedActivity) activities.get(i)).getComponentName(), resolveInfo.getComponentInfo().getComponentName())) {
+            if (Objects.equals(
+                    ((ParsedActivity) activities.get(i)).getComponentName(),
+                    resolveInfo.getComponentInfo().getComponentName())) {
                 return i;
             }
         }
@@ -164,16 +188,24 @@ public final class DomainVerificationService extends SystemService implements Do
         String packageName = packageStateInternal.getPackageName();
         DomainVerificationSettings domainVerificationSettings = this.mSettings;
         synchronized (domainVerificationSettings.mLock) {
-            domainVerificationPkgState = (DomainVerificationPkgState) domainVerificationSettings.mPendingPkgStates.remove(packageName);
+            domainVerificationPkgState =
+                    (DomainVerificationPkgState)
+                            domainVerificationSettings.mPendingPkgStates.remove(packageName);
         }
         if (domainVerificationPkgState != null) {
             z = false;
         } else {
             DomainVerificationSettings domainVerificationSettings2 = this.mSettings;
             synchronized (domainVerificationSettings2.mLock) {
-                domainVerificationPkgState = (DomainVerificationPkgState) domainVerificationSettings2.mRestoredPkgStates.remove(packageName);
+                domainVerificationPkgState =
+                        (DomainVerificationPkgState)
+                                domainVerificationSettings2.mRestoredPkgStates.remove(packageName);
             }
-            if (domainVerificationPkgState == null || Objects.equals(domainVerificationPkgState.mBackupSignatureHash, PackageUtils.computeSignaturesSha256Digest(packageStateInternal.getSigningDetails().getSignatures()))) {
+            if (domainVerificationPkgState == null
+                    || Objects.equals(
+                            domainVerificationPkgState.mBackupSignatureHash,
+                            PackageUtils.computeSignaturesSha256Digest(
+                                    packageStateInternal.getSigningDetails().getSignatures()))) {
                 z = true;
             } else {
                 z = true;
@@ -187,24 +219,46 @@ public final class DomainVerificationService extends SystemService implements Do
         if (z3) {
             domainVerificationPkgState2 = r7;
             arraySet = collectDomains;
-            DomainVerificationPkgState domainVerificationPkgState3 = new DomainVerificationPkgState(domainVerificationPkgState.mPackageName, domainSetId, z2, domainVerificationPkgState.mStateMap, domainVerificationPkgState.mUserStates, null, new ArrayMap());
+            DomainVerificationPkgState domainVerificationPkgState3 =
+                    new DomainVerificationPkgState(
+                            domainVerificationPkgState.mPackageName,
+                            domainSetId,
+                            z2,
+                            domainVerificationPkgState.mStateMap,
+                            domainVerificationPkgState.mUserStates,
+                            null,
+                            new ArrayMap());
             domainVerificationPkgState2.mStateMap.retainAll(arraySet);
             ArraySet collectDomains2 = this.mCollector.collectDomains(pkg, false, true);
             SparseArray sparseArray = domainVerificationPkgState2.mUserStates;
             int size = sparseArray.size();
             for (int i = 0; i < size; i++) {
-                ((DomainVerificationInternalUserState) sparseArray.valueAt(i)).mEnabledHosts.retainAll(collectDomains2);
+                ((DomainVerificationInternalUserState) sparseArray.valueAt(i))
+                        .mEnabledHosts.retainAll(collectDomains2);
             }
         } else {
             arraySet = collectDomains;
-            domainVerificationPkgState2 = new DomainVerificationPkgState(packageName, domainSetId, z2, new ArrayMap(0), new SparseArray(0), null, new ArrayMap());
+            domainVerificationPkgState2 =
+                    new DomainVerificationPkgState(
+                            packageName,
+                            domainSetId,
+                            z2,
+                            new ArrayMap(0),
+                            new SparseArray(0),
+                            null,
+                            new ArrayMap());
         }
         DomainVerificationPkgState domainVerificationPkgState4 = domainVerificationPkgState2;
-        if (applyImmutableState(packageStateInternal, domainVerificationPkgState4.mStateMap, arraySet) && !z3) {
-            DomainVerificationLegacySettings domainVerificationLegacySettings = this.mLegacySettings;
+        if (applyImmutableState(
+                        packageStateInternal, domainVerificationPkgState4.mStateMap, arraySet)
+                && !z3) {
+            DomainVerificationLegacySettings domainVerificationLegacySettings =
+                    this.mLegacySettings;
             synchronized (domainVerificationLegacySettings.mLock) {
                 try {
-                    DomainVerificationLegacySettings.LegacyState legacyState = (DomainVerificationLegacySettings.LegacyState) domainVerificationLegacySettings.mStates.get(packageName);
+                    DomainVerificationLegacySettings.LegacyState legacyState =
+                            (DomainVerificationLegacySettings.LegacyState)
+                                    domainVerificationLegacySettings.mStates.get(packageName);
                     sparseIntArray = legacyState != null ? legacyState.mUserStates : null;
                 } finally {
                 }
@@ -217,7 +271,10 @@ public final class DomainVerificationService extends SystemService implements Do
                     if (arraySet2 == null) {
                         arraySet2 = this.mCollector.collectDomains(pkg, false, true);
                     }
-                    domainVerificationPkgState4.getOrCreateUserState(keyAt).mEnabledHosts.addAll(arraySet2);
+                    domainVerificationPkgState4
+                            .getOrCreateUserState(keyAt)
+                            .mEnabledHosts
+                            .addAll(arraySet2);
                 }
             }
             IntentFilterVerificationInfo remove = this.mLegacySettings.remove(packageName);
@@ -241,8 +298,10 @@ public final class DomainVerificationService extends SystemService implements Do
         }
     }
 
-    public final boolean applyImmutableState(PackageStateInternal packageStateInternal, ArrayMap arrayMap, ArraySet arraySet) {
-        if (packageStateInternal.isSystem() && this.mSystemConfig.mLinkedApps.contains(packageStateInternal.getPackageName())) {
+    public final boolean applyImmutableState(
+            PackageStateInternal packageStateInternal, ArrayMap arrayMap, ArraySet arraySet) {
+        if (packageStateInternal.isSystem()
+                && this.mSystemConfig.mLinkedApps.contains(packageStateInternal.getPackageName())) {
             int size = arraySet.size();
             for (int i = 0; i < size; i++) {
                 arrayMap.put((String) arraySet.valueAt(i), 7);
@@ -257,7 +316,8 @@ public final class DomainVerificationService extends SystemService implements Do
         return true;
     }
 
-    public final int approvalLevelForDomain(PackageStateInternal packageStateInternal, Intent intent, long j, int i) {
+    public final int approvalLevelForDomain(
+            PackageStateInternal packageStateInternal, Intent intent, long j, int i) {
         String packageName = packageStateInternal.getPackageName();
         boolean z = (intent.getFlags() & 8) != 0;
         if (!DomainVerificationUtils.isDomainVerificationIntent(intent, j)) {
@@ -266,22 +326,25 @@ public final class DomainVerificationService extends SystemService implements Do
             }
             return 0;
         }
-        int approvalLevelForDomain = approvalLevelForDomain(packageStateInternal, intent.getData().getHost(), false, i, z, intent);
+        int approvalLevelForDomain =
+                approvalLevelForDomain(
+                        packageStateInternal, intent.getData().getHost(), false, i, z, intent);
         if (z) {
             StringBuilder sb = new StringBuilder("Final approval level for ");
             sb.append(packageStateInternal.getPackageName());
             sb.append(" for host ");
             sb.append(intent.getData().getHost());
             sb.append(" is ");
-            DeviceIdleController$$ExternalSyntheticOutline0.m(sb, approvalLevelForDomain, "DomainVerificationServiceApproval");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    sb, approvalLevelForDomain, "DomainVerificationServiceApproval");
         }
         return approvalLevelForDomain;
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:64:0x00c8, code lost:
-    
-        if (r8 != 4) goto L50;
-     */
+
+       if (r8 != 4) goto L50;
+    */
     /* JADX WARN: Removed duplicated region for block: B:10:0x01d4 A[ADDED_TO_REGION] */
     /* JADX WARN: Removed duplicated region for block: B:13:0x01e0 A[RETURN] */
     /* JADX WARN: Removed duplicated region for block: B:15:0x01e2  */
@@ -289,29 +352,44 @@ public final class DomainVerificationService extends SystemService implements Do
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final int approvalLevelForDomain(com.android.server.pm.pkg.PackageStateInternal r20, final java.lang.String r21, boolean r22, int r23, boolean r24, java.lang.Object r25) {
+    public final int approvalLevelForDomain(
+            com.android.server.pm.pkg.PackageStateInternal r20,
+            final java.lang.String r21,
+            boolean r22,
+            int r23,
+            boolean r24,
+            java.lang.Object r25) {
         /*
             Method dump skipped, instructions count: 552
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.verify.domain.DomainVerificationService.approvalLevelForDomain(com.android.server.pm.pkg.PackageStateInternal, java.lang.String, boolean, int, boolean, java.lang.Object):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.verify.domain.DomainVerificationService.approvalLevelForDomain(com.android.server.pm.pkg.PackageStateInternal,"
+                    + " java.lang.String, boolean, int, boolean, java.lang.Object):int");
     }
 
     public final void clearPackageForUser(int i, String str) {
         synchronized (this.mLock) {
             try {
-                DomainVerificationPkgState domainVerificationPkgState = (DomainVerificationPkgState) this.mAttachedPkgStates.mPackageNameMap.get(str);
+                DomainVerificationPkgState domainVerificationPkgState =
+                        (DomainVerificationPkgState)
+                                this.mAttachedPkgStates.mPackageNameMap.get(str);
                 if (domainVerificationPkgState != null) {
                     domainVerificationPkgState.removeUser(i);
                 }
                 DomainVerificationSettings domainVerificationSettings = this.mSettings;
                 synchronized (domainVerificationSettings.mLock) {
                     try {
-                        DomainVerificationPkgState domainVerificationPkgState2 = (DomainVerificationPkgState) domainVerificationSettings.mPendingPkgStates.get(str);
+                        DomainVerificationPkgState domainVerificationPkgState2 =
+                                (DomainVerificationPkgState)
+                                        domainVerificationSettings.mPendingPkgStates.get(str);
                         if (domainVerificationPkgState2 != null) {
                             domainVerificationPkgState2.removeUser(i);
                         }
-                        DomainVerificationPkgState domainVerificationPkgState3 = (DomainVerificationPkgState) domainVerificationSettings.mRestoredPkgStates.get(str);
+                        DomainVerificationPkgState domainVerificationPkgState3 =
+                                (DomainVerificationPkgState)
+                                        domainVerificationSettings.mRestoredPkgStates.get(str);
                         if (domainVerificationPkgState3 != null) {
                             domainVerificationPkgState3.removeUser(i);
                         }
@@ -330,7 +408,9 @@ public final class DomainVerificationService extends SystemService implements Do
             try {
                 int size = this.mAttachedPkgStates.mPackageNameMap.size();
                 for (int i2 = 0; i2 < size; i2++) {
-                    ((DomainVerificationPkgState) this.mAttachedPkgStates.mPackageNameMap.valueAt(i2)).removeUser(i);
+                    ((DomainVerificationPkgState)
+                                    this.mAttachedPkgStates.mPackageNameMap.valueAt(i2))
+                            .removeUser(i);
                 }
                 this.mSettings.removeUser(i);
             } catch (Throwable th) {
@@ -340,17 +420,22 @@ public final class DomainVerificationService extends SystemService implements Do
         this.mConnection.scheduleWriteSettings();
     }
 
-    public final GetAttachedResult getAndValidateAttachedLocked(UUID uuid, Set set, boolean z, int i, Integer num, Computer computer) {
+    public final GetAttachedResult getAndValidateAttachedLocked(
+            UUID uuid, Set set, boolean z, int i, Integer num, Computer computer) {
         if (uuid == null) {
             throw new IllegalArgumentException("domainSetId cannot be null");
         }
-        DomainVerificationPkgState domainVerificationPkgState = (DomainVerificationPkgState) this.mAttachedPkgStates.mDomainSetIdMap.get(uuid);
+        DomainVerificationPkgState domainVerificationPkgState =
+                (DomainVerificationPkgState) this.mAttachedPkgStates.mDomainSetIdMap.get(uuid);
         if (domainVerificationPkgState == null) {
             return new GetAttachedResult(null, 1);
         }
         String str = domainVerificationPkgState.mPackageName;
         if (num != null) {
-            if (this.mConnection.mPm.snapshotComputer().filterAppAccess(i, num.intValue(), str, true)) {
+            if (this.mConnection
+                    .mPm
+                    .snapshotComputer()
+                    .filterAppAccess(i, num.intValue(), str, true)) {
                 return new GetAttachedResult(null, 1);
             }
         }
@@ -364,7 +449,14 @@ public final class DomainVerificationService extends SystemService implements Do
         }
         AndroidPackage androidPackage = packageStateInternal.pkg;
         DomainVerificationCollector domainVerificationCollector = this.mCollector;
-        return set.retainAll(z ? domainVerificationCollector.collectDomains(androidPackage, true, true) : domainVerificationCollector.collectDomains(androidPackage, false, true)) ? new GetAttachedResult(null, 2) : new GetAttachedResult(domainVerificationPkgState, 0);
+        return set.retainAll(
+                        z
+                                ? domainVerificationCollector.collectDomains(
+                                        androidPackage, true, true)
+                                : domainVerificationCollector.collectDomains(
+                                        androidPackage, false, true))
+                ? new GetAttachedResult(null, 2)
+                : new GetAttachedResult(domainVerificationPkgState, 0);
     }
 
     public final DomainVerificationCollector getCollector() {
@@ -379,17 +471,21 @@ public final class DomainVerificationService extends SystemService implements Do
         synchronized (this.mLock) {
             try {
                 PackageSetting packageStateInternal = snapshotComputer.getPackageStateInternal(str);
-                AndroidPackage androidPackage = packageStateInternal == null ? null : packageStateInternal.pkg;
+                AndroidPackage androidPackage =
+                        packageStateInternal == null ? null : packageStateInternal.pkg;
                 if (androidPackage == null) {
                     DomainVerificationUtils.throwPackageUnavailable(str);
                     throw null;
                 }
-                DomainVerificationPkgState domainVerificationPkgState = (DomainVerificationPkgState) this.mAttachedPkgStates.mPackageNameMap.get(str);
+                DomainVerificationPkgState domainVerificationPkgState =
+                        (DomainVerificationPkgState)
+                                this.mAttachedPkgStates.mPackageNameMap.get(str);
                 if (domainVerificationPkgState == null) {
                     return null;
                 }
                 ArrayMap arrayMap = new ArrayMap(domainVerificationPkgState.mStateMap);
-                ArraySet collectDomains = this.mCollector.collectDomains(androidPackage, true, true);
+                ArraySet collectDomains =
+                        this.mCollector.collectDomains(androidPackage, true, true);
                 if (collectDomains.isEmpty()) {
                     return null;
                 }
@@ -399,7 +495,11 @@ public final class DomainVerificationService extends SystemService implements Do
                 }
                 int size2 = arrayMap.size();
                 for (int i2 = 0; i2 < size2; i2++) {
-                    arrayMap.setValueAt(i2, Integer.valueOf(DomainVerificationState.convertToInfoState(((Integer) arrayMap.valueAt(i2)).intValue())));
+                    arrayMap.setValueAt(
+                            i2,
+                            Integer.valueOf(
+                                    DomainVerificationState.convertToInfoState(
+                                            ((Integer) arrayMap.valueAt(i2)).intValue())));
                 }
                 return new DomainVerificationInfo(domainVerificationPkgState.mId, str, arrayMap);
             } finally {
@@ -415,15 +515,27 @@ public final class DomainVerificationService extends SystemService implements Do
         this.mConnection.getClass();
         int callingUserId = UserHandle.getCallingUserId();
         if (callingUserId != i) {
-            domainVerificationEnforcer.mContext.enforcePermission("android.permission.INTERACT_ACROSS_USERS", Binder.getCallingPid(), callingUid, "Caller is not allowed to edit other users");
+            domainVerificationEnforcer.mContext.enforcePermission(
+                    "android.permission.INTERACT_ACROSS_USERS",
+                    Binder.getCallingPid(),
+                    callingUid,
+                    "Caller is not allowed to edit other users");
         }
         if (!domainVerificationEnforcer.mCallback.mUmInternal.exists(callingUserId)) {
-            throw new SecurityException(BinaryTransparencyService$$ExternalSyntheticOutline0.m(callingUserId, "User ", " does not exist"));
+            throw new SecurityException(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            callingUserId, "User ", " does not exist"));
         }
         if (!domainVerificationEnforcer.mCallback.mUmInternal.exists(i)) {
-            throw new SecurityException(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "User ", " does not exist"));
+            throw new SecurityException(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            i, "User ", " does not exist"));
         }
-        if (!(!domainVerificationEnforcer.mCallback.mPm.snapshotComputer().filterAppAccess(callingUid, i, str, true))) {
+        if (!(!domainVerificationEnforcer
+                .mCallback
+                .mPm
+                .snapshotComputer()
+                .filterAppAccess(callingUid, i, str, true))) {
             DomainVerificationUtils.throwPackageUnavailable(str);
             throw null;
         }
@@ -431,32 +543,51 @@ public final class DomainVerificationService extends SystemService implements Do
         synchronized (this.mLock) {
             try {
                 PackageSetting packageStateInternal = snapshotComputer.getPackageStateInternal(str);
-                AndroidPackage androidPackage = packageStateInternal == null ? null : packageStateInternal.pkg;
+                AndroidPackage androidPackage =
+                        packageStateInternal == null ? null : packageStateInternal.pkg;
                 if (androidPackage == null) {
                     DomainVerificationUtils.throwPackageUnavailable(str);
                     throw null;
                 }
-                DomainVerificationPkgState domainVerificationPkgState = (DomainVerificationPkgState) this.mAttachedPkgStates.mPackageNameMap.get(str);
+                DomainVerificationPkgState domainVerificationPkgState =
+                        (DomainVerificationPkgState)
+                                this.mAttachedPkgStates.mPackageNameMap.get(str);
                 if (domainVerificationPkgState == null) {
                     return null;
                 }
-                ArraySet collectDomains = this.mCollector.collectDomains(androidPackage, false, true);
+                ArraySet collectDomains =
+                        this.mCollector.collectDomains(androidPackage, false, true);
                 int size = collectDomains.size();
                 ArrayMap arrayMap = new ArrayMap(size);
                 ArrayMap arrayMap2 = domainVerificationPkgState.mStateMap;
-                DomainVerificationInternalUserState domainVerificationInternalUserState = (DomainVerificationInternalUserState) domainVerificationPkgState.mUserStates.get(i);
-                Set emptySet = domainVerificationInternalUserState == null ? Collections.emptySet() : domainVerificationInternalUserState.mEnabledHosts;
+                DomainVerificationInternalUserState domainVerificationInternalUserState =
+                        (DomainVerificationInternalUserState)
+                                domainVerificationPkgState.mUserStates.get(i);
+                Set emptySet =
+                        domainVerificationInternalUserState == null
+                                ? Collections.emptySet()
+                                : domainVerificationInternalUserState.mEnabledHosts;
                 for (int i2 = 0; i2 < size; i2++) {
                     String str2 = (String) collectDomains.valueAt(i2);
                     Integer num = (Integer) arrayMap2.get(str2);
-                    arrayMap.put(str2, Integer.valueOf((num == null || !DomainVerificationState.isVerified(num.intValue())) ? emptySet.contains(str2) ? 1 : 0 : 2));
+                    arrayMap.put(
+                            str2,
+                            Integer.valueOf(
+                                    (num == null
+                                                    || !DomainVerificationState.isVerified(
+                                                            num.intValue()))
+                                            ? emptySet.contains(str2) ? 1 : 0
+                                            : 2));
                 }
-                if (domainVerificationInternalUserState != null && !domainVerificationInternalUserState.mLinkHandlingAllowed) {
+                if (domainVerificationInternalUserState != null
+                        && !domainVerificationInternalUserState.mLinkHandlingAllowed) {
                     z = false;
-                    return new DomainVerificationUserState(domainVerificationPkgState.mId, str, UserHandle.of(i), z, arrayMap);
+                    return new DomainVerificationUserState(
+                            domainVerificationPkgState.mId, str, UserHandle.of(i), z, arrayMap);
                 }
                 z = true;
-                return new DomainVerificationUserState(domainVerificationPkgState.mId, str, UserHandle.of(i), z, arrayMap);
+                return new DomainVerificationUserState(
+                        domainVerificationPkgState.mId, str, UserHandle.of(i), z, arrayMap);
             } finally {
             }
         }
@@ -472,17 +603,37 @@ public final class DomainVerificationService extends SystemService implements Do
         domainVerificationEnforcer.getClass();
         int callingPid = Binder.getCallingPid();
         if (callingUserId != i) {
-            domainVerificationEnforcer.mContext.enforcePermission("android.permission.INTERACT_ACROSS_USERS", callingPid, callingUid, "Caller is not allowed to query other users");
+            domainVerificationEnforcer.mContext.enforcePermission(
+                    "android.permission.INTERACT_ACROSS_USERS",
+                    callingPid,
+                    callingUid,
+                    "Caller is not allowed to query other users");
         }
-        domainVerificationEnforcer.mContext.enforcePermission("android.permission.QUERY_ALL_PACKAGES", callingPid, callingUid, BinaryTransparencyService$$ExternalSyntheticOutline0.m(callingUid, "Caller ", " does not hold android.permission.QUERY_ALL_PACKAGES"));
-        domainVerificationEnforcer.mContext.enforcePermission("android.permission.UPDATE_DOMAIN_VERIFICATION_USER_SELECTION", callingPid, callingUid, "Caller is not allowed to query user selections");
+        domainVerificationEnforcer.mContext.enforcePermission(
+                "android.permission.QUERY_ALL_PACKAGES",
+                callingPid,
+                callingUid,
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        callingUid,
+                        "Caller ",
+                        " does not hold android.permission.QUERY_ALL_PACKAGES"));
+        domainVerificationEnforcer.mContext.enforcePermission(
+                "android.permission.UPDATE_DOMAIN_VERIFICATION_USER_SELECTION",
+                callingPid,
+                callingUid,
+                "Caller is not allowed to query user selections");
         if (!domainVerificationEnforcer.mCallback.mUmInternal.exists(callingUserId)) {
-            throw new SecurityException(BinaryTransparencyService$$ExternalSyntheticOutline0.m(callingUserId, "User ", " does not exist"));
+            throw new SecurityException(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            callingUserId, "User ", " does not exist"));
         }
         if (!domainVerificationEnforcer.mCallback.mUmInternal.exists(i)) {
-            throw new SecurityException(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "User ", " does not exist"));
+            throw new SecurityException(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            i, "User ", " does not exist"));
         }
-        SparseArray ownersForDomainInternal = getOwnersForDomainInternal(i, this.mConnection.mPm.snapshotComputer(), str, false);
+        SparseArray ownersForDomainInternal =
+                getOwnersForDomainInternal(i, this.mConnection.mPm.snapshotComputer(), str, false);
         if (ownersForDomainInternal.size() == 0) {
             return Collections.emptyList();
         }
@@ -499,17 +650,22 @@ public final class DomainVerificationService extends SystemService implements Do
         return arrayList;
     }
 
-    public final SparseArray getOwnersForDomainInternal(final int i, final Computer computer, String str, boolean z) {
+    public final SparseArray getOwnersForDomainInternal(
+            final int i, final Computer computer, String str, boolean z) {
         int i2;
         SparseArray sparseArray = new SparseArray();
         synchronized (this.mLock) {
             try {
                 int size = this.mAttachedPkgStates.mPackageNameMap.size();
                 for (int i3 = 0; i3 < size; i3++) {
-                    String str2 = ((DomainVerificationPkgState) this.mAttachedPkgStates.mPackageNameMap.valueAt(i3)).mPackageName;
+                    String str2 =
+                            ((DomainVerificationPkgState)
+                                            this.mAttachedPkgStates.mPackageNameMap.valueAt(i3))
+                                    .mPackageName;
                     PackageSetting packageStateInternal = computer.getPackageStateInternal(str2);
                     if (packageStateInternal != null) {
-                        int approvalLevelForDomain = approvalLevelForDomain(packageStateInternal, str, z, i, false, str);
+                        int approvalLevelForDomain =
+                                approvalLevelForDomain(packageStateInternal, str, z, i, false, str);
                         if (z || approvalLevelForDomain > 0) {
                             List list = (List) sparseArray.get(approvalLevelForDomain);
                             if (list == null) {
@@ -529,20 +685,39 @@ public final class DomainVerificationService extends SystemService implements Do
             return sparseArray;
         }
         for (i2 = 0; i2 < size2; i2++) {
-            ((List) sparseArray.valueAt(i2)).sort(new Comparator() { // from class: com.android.server.pm.verify.domain.DomainVerificationService$$ExternalSyntheticLambda0
-                @Override // java.util.Comparator
-                public final int compare(Object obj, Object obj2) {
-                    Computer computer2 = Computer.this;
-                    int i4 = i;
-                    String str3 = (String) obj;
-                    String str4 = (String) obj2;
-                    PackageSetting packageStateInternal2 = computer2.getPackageStateInternal(str3);
-                    PackageSetting packageStateInternal3 = computer2.getPackageStateInternal(str4);
-                    long firstInstallTimeMillis = packageStateInternal2 == null ? -1L : packageStateInternal2.getUserStateOrDefault(i4).getFirstInstallTimeMillis();
-                    long firstInstallTimeMillis2 = packageStateInternal3 != null ? packageStateInternal3.getUserStateOrDefault(i4).getFirstInstallTimeMillis() : -1L;
-                    return firstInstallTimeMillis != firstInstallTimeMillis2 ? (int) (firstInstallTimeMillis - firstInstallTimeMillis2) : str3.compareToIgnoreCase(str4);
-                }
-            });
+            ((List) sparseArray.valueAt(i2))
+                    .sort(
+                            new Comparator() { // from class:
+                                               // com.android.server.pm.verify.domain.DomainVerificationService$$ExternalSyntheticLambda0
+                                @Override // java.util.Comparator
+                                public final int compare(Object obj, Object obj2) {
+                                    Computer computer2 = Computer.this;
+                                    int i4 = i;
+                                    String str3 = (String) obj;
+                                    String str4 = (String) obj2;
+                                    PackageSetting packageStateInternal2 =
+                                            computer2.getPackageStateInternal(str3);
+                                    PackageSetting packageStateInternal3 =
+                                            computer2.getPackageStateInternal(str4);
+                                    long firstInstallTimeMillis =
+                                            packageStateInternal2 == null
+                                                    ? -1L
+                                                    : packageStateInternal2
+                                                            .getUserStateOrDefault(i4)
+                                                            .getFirstInstallTimeMillis();
+                                    long firstInstallTimeMillis2 =
+                                            packageStateInternal3 != null
+                                                    ? packageStateInternal3
+                                                            .getUserStateOrDefault(i4)
+                                                            .getFirstInstallTimeMillis()
+                                                    : -1L;
+                                    return firstInstallTimeMillis != firstInstallTimeMillis2
+                                            ? (int)
+                                                    (firstInstallTimeMillis
+                                                            - firstInstallTimeMillis2)
+                                            : str3.compareToIgnoreCase(str4);
+                                }
+                            });
         }
         return sparseArray;
     }
@@ -551,12 +726,17 @@ public final class DomainVerificationService extends SystemService implements Do
         Bundle bundle = new Bundle();
         synchronized (this.mLock) {
             try {
-                DomainVerificationPkgState domainVerificationPkgState = (DomainVerificationPkgState) this.mAttachedPkgStates.mPackageNameMap.get(str);
+                DomainVerificationPkgState domainVerificationPkgState =
+                        (DomainVerificationPkgState)
+                                this.mAttachedPkgStates.mPackageNameMap.get(str);
                 if (domainVerificationPkgState != null) {
                     ArrayMap arrayMap = domainVerificationPkgState.mUriRelativeFilterGroupMap;
                     for (int i = 0; i < list.size(); i++) {
                         if (arrayMap.containsKey(list.get(i))) {
-                            bundle.putParcelableList((String) list.get(i), UriRelativeFilterGroup.groupsToParcels((List) arrayMap.get(list.get(i))));
+                            bundle.putParcelableList(
+                                    (String) list.get(i),
+                                    UriRelativeFilterGroup.groupsToParcels(
+                                            (List) arrayMap.get(list.get(i))));
                         }
                     }
                 }
@@ -567,7 +747,10 @@ public final class DomainVerificationService extends SystemService implements Do
         return bundle;
     }
 
-    public final void migrateState(PackageStateInternal packageStateInternal, PackageStateInternal packageStateInternal2, DomainSet domainSet) {
+    public final void migrateState(
+            PackageStateInternal packageStateInternal,
+            PackageStateInternal packageStateInternal2,
+            DomainSet domainSet) {
         DomainSet domainSet2;
         boolean z;
         int indexOfValue;
@@ -578,10 +761,15 @@ public final class DomainVerificationService extends SystemService implements Do
                 UUID domainSetId2 = packageStateInternal2.getDomainSetId();
                 DomainVerificationStateMap domainVerificationStateMap = this.mAttachedPkgStates;
                 Object remove = domainVerificationStateMap.mDomainSetIdMap.remove(domainSetId);
-                if (remove != null && (indexOfValue = domainVerificationStateMap.mPackageNameMap.indexOfValue(remove)) >= 0) {
+                if (remove != null
+                        && (indexOfValue =
+                                        domainVerificationStateMap.mPackageNameMap.indexOfValue(
+                                                remove))
+                                >= 0) {
                     domainVerificationStateMap.mPackageNameMap.removeAt(indexOfValue);
                 }
-                DomainVerificationPkgState domainVerificationPkgState = (DomainVerificationPkgState) remove;
+                DomainVerificationPkgState domainVerificationPkgState =
+                        (DomainVerificationPkgState) remove;
                 AndroidPackageInternal pkg = packageStateInternal.getPkg();
                 AndroidPackage pkg2 = packageStateInternal2.getPkg();
                 ArrayMap arrayMap = new ArrayMap();
@@ -601,22 +789,34 @@ public final class DomainVerificationService extends SystemService implements Do
                     SparseArray sparseArray2 = domainVerificationPkgState.mUserStates;
                     int size2 = sparseArray2.size();
                     if (size2 > 0) {
-                        ArraySet collectDomains2 = this.mCollector.collectDomains(pkg2, false, true);
+                        ArraySet collectDomains2 =
+                                this.mCollector.collectDomains(pkg2, false, true);
                         int i2 = 0;
                         while (i2 < size2) {
                             int keyAt = sparseArray2.keyAt(i2);
-                            DomainVerificationInternalUserState domainVerificationInternalUserState = (DomainVerificationInternalUserState) sparseArray2.valueAt(i2);
+                            DomainVerificationInternalUserState
+                                    domainVerificationInternalUserState =
+                                            (DomainVerificationInternalUserState)
+                                                    sparseArray2.valueAt(i2);
                             int i3 = size2;
-                            ArraySet arraySet = new ArraySet(domainVerificationInternalUserState.mEnabledHosts);
+                            ArraySet arraySet =
+                                    new ArraySet(domainVerificationInternalUserState.mEnabledHosts);
                             arraySet.retainAll(collectDomains2);
-                            sparseArray.put(keyAt, new DomainVerificationInternalUserState(keyAt, arraySet, domainVerificationInternalUserState.mLinkHandlingAllowed));
+                            sparseArray.put(
+                                    keyAt,
+                                    new DomainVerificationInternalUserState(
+                                            keyAt,
+                                            arraySet,
+                                            domainVerificationInternalUserState
+                                                    .mLinkHandlingAllowed));
                             i2++;
                             sparseArray2 = sparseArray2;
                             size2 = i3;
                         }
                     }
                     boolean z2 = size > 0;
-                    boolean applyImmutableState = applyImmutableState(packageStateInternal2, arrayMap, collectDomains);
+                    boolean applyImmutableState =
+                            applyImmutableState(packageStateInternal2, arrayMap, collectDomains);
                     if (z2 && applyImmutableState) {
                         domainSet2 = domainSet;
                         z = true;
@@ -625,7 +825,17 @@ public final class DomainVerificationService extends SystemService implements Do
                         z = false;
                     }
                     applyPreVerifiedState(arrayMap, collectDomains, domainSet2);
-                    this.mAttachedPkgStates.put(packageName, domainSetId2, new DomainVerificationPkgState(packageName, domainSetId2, z2, arrayMap, sparseArray, null, arrayMap3));
+                    this.mAttachedPkgStates.put(
+                            packageName,
+                            domainSetId2,
+                            new DomainVerificationPkgState(
+                                    packageName,
+                                    domainSetId2,
+                                    z2,
+                                    arrayMap,
+                                    sparseArray,
+                                    null,
+                                    arrayMap3));
                     if (z) {
                         Set singleton = Collections.singleton(packageName);
                         if (this.mCanSendBroadcasts) {
@@ -636,8 +846,30 @@ public final class DomainVerificationService extends SystemService implements Do
                     }
                     return;
                 }
-                Slog.wtf("DomainVerificationService", "Invalid state nullability old state = " + domainVerificationPkgState + ", old pkgSetting = " + packageStateInternal + ", new pkgSetting = " + packageStateInternal2 + ", old pkg = " + pkg + ", new pkg = " + pkg2, new Exception());
-                this.mAttachedPkgStates.put(packageName, domainSetId2, new DomainVerificationPkgState(packageName, domainSetId2, true, arrayMap, sparseArray, null, new ArrayMap()));
+                Slog.wtf(
+                        "DomainVerificationService",
+                        "Invalid state nullability old state = "
+                                + domainVerificationPkgState
+                                + ", old pkgSetting = "
+                                + packageStateInternal
+                                + ", new pkgSetting = "
+                                + packageStateInternal2
+                                + ", old pkg = "
+                                + pkg
+                                + ", new pkg = "
+                                + pkg2,
+                        new Exception());
+                this.mAttachedPkgStates.put(
+                        packageName,
+                        domainSetId2,
+                        new DomainVerificationPkgState(
+                                packageName,
+                                domainSetId2,
+                                true,
+                                arrayMap,
+                                sparseArray,
+                                null,
+                                new ArrayMap()));
             } catch (Throwable th) {
                 throw th;
             }
@@ -670,7 +902,8 @@ public final class DomainVerificationService extends SystemService implements Do
         verifyPackages(null, false);
     }
 
-    public final void printOwnersForDomain(IndentingPrintWriter indentingPrintWriter, Computer computer, Integer num, String str) {
+    public final void printOwnersForDomain(
+            IndentingPrintWriter indentingPrintWriter, Computer computer, Integer num, String str) {
         String str2;
         SparseArray sparseArray = new SparseArray();
         int i = -1;
@@ -679,7 +912,9 @@ public final class DomainVerificationService extends SystemService implements Do
                 sparseArray.put(i2, getOwnersForDomainInternal(i2, computer, str, true));
             }
         } else {
-            sparseArray.put(num.intValue(), getOwnersForDomainInternal(num.intValue(), computer, str, true));
+            sparseArray.put(
+                    num.intValue(),
+                    getOwnersForDomainInternal(num.intValue(), computer, str, true));
         }
         this.mDebug.getClass();
         indentingPrintWriter.println(str + ":");
@@ -768,7 +1003,8 @@ public final class DomainVerificationService extends SystemService implements Do
         indentingPrintWriter.decreaseIndent();
     }
 
-    public final void printOwnersForDomains(IndentingPrintWriter indentingPrintWriter, List list, Integer num) {
+    public final void printOwnersForDomains(
+            IndentingPrintWriter indentingPrintWriter, List list, Integer num) {
         DomainVerificationEnforcer domainVerificationEnforcer = this.mEnforcer;
         this.mConnection.getClass();
         domainVerificationEnforcer.assertApprovedQuerent(Binder.getCallingUid(), this.mProxy);
@@ -778,7 +1014,8 @@ public final class DomainVerificationService extends SystemService implements Do
                 ArrayList arrayList = (ArrayList) list;
                 int size = arrayList.size();
                 for (int i = 0; i < size; i++) {
-                    printOwnersForDomain(indentingPrintWriter, snapshotComputer, num, (String) arrayList.get(i));
+                    printOwnersForDomain(
+                            indentingPrintWriter, snapshotComputer, num, (String) arrayList.get(i));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -786,9 +1023,11 @@ public final class DomainVerificationService extends SystemService implements Do
         }
     }
 
-    public final void printOwnersForPackage(IndentingPrintWriter indentingPrintWriter, Computer computer, Integer num, String str) {
+    public final void printOwnersForPackage(
+            IndentingPrintWriter indentingPrintWriter, Computer computer, Integer num, String str) {
         PackageSetting packageStateInternal = computer.getPackageStateInternal(str);
-        AndroidPackage androidPackage = packageStateInternal == null ? null : packageStateInternal.pkg;
+        AndroidPackage androidPackage =
+                packageStateInternal == null ? null : packageStateInternal.pkg;
         if (androidPackage == null) {
             DomainVerificationUtils.throwPackageUnavailable(str);
             throw null;
@@ -801,12 +1040,14 @@ public final class DomainVerificationService extends SystemService implements Do
         indentingPrintWriter.println(str + ":");
         indentingPrintWriter.increaseIndent();
         for (int i = 0; i < size; i++) {
-            printOwnersForDomain(indentingPrintWriter, computer, num, (String) collectDomains.valueAt(i));
+            printOwnersForDomain(
+                    indentingPrintWriter, computer, num, (String) collectDomains.valueAt(i));
         }
         indentingPrintWriter.decreaseIndent();
     }
 
-    public final void printOwnersForPackage(IndentingPrintWriter indentingPrintWriter, String str, Integer num) {
+    public final void printOwnersForPackage(
+            IndentingPrintWriter indentingPrintWriter, String str, Integer num) {
         DomainVerificationEnforcer domainVerificationEnforcer = this.mEnforcer;
         this.mConnection.getClass();
         domainVerificationEnforcer.assertApprovedQuerent(Binder.getCallingUid(), this.mProxy);
@@ -816,7 +1057,13 @@ public final class DomainVerificationService extends SystemService implements Do
                 int size = this.mAttachedPkgStates.mPackageNameMap.size();
                 for (int i = 0; i < size; i++) {
                     try {
-                        printOwnersForPackage(indentingPrintWriter, snapshotComputer, num, ((DomainVerificationPkgState) this.mAttachedPkgStates.mPackageNameMap.valueAt(i)).mPackageName);
+                        printOwnersForPackage(
+                                indentingPrintWriter,
+                                snapshotComputer,
+                                num,
+                                ((DomainVerificationPkgState)
+                                                this.mAttachedPkgStates.mPackageNameMap.valueAt(i))
+                                        .mPackageName);
                     } catch (PackageManager.NameNotFoundException unused) {
                     }
                 }
@@ -826,12 +1073,14 @@ public final class DomainVerificationService extends SystemService implements Do
         }
     }
 
-    public final void printState(IndentingPrintWriter indentingPrintWriter, Computer computer, Integer num, String str) {
+    public final void printState(
+            IndentingPrintWriter indentingPrintWriter, Computer computer, Integer num, String str) {
         DomainVerificationEnforcer domainVerificationEnforcer = this.mEnforcer;
         this.mConnection.getClass();
         domainVerificationEnforcer.assertApprovedQuerent(Binder.getCallingUid(), this.mProxy);
         synchronized (this.mLock) {
-            this.mDebug.printState(indentingPrintWriter, str, num, computer, this.mAttachedPkgStates);
+            this.mDebug.printState(
+                    indentingPrintWriter, str, num, computer, this.mAttachedPkgStates);
         }
     }
 
@@ -844,7 +1093,9 @@ public final class DomainVerificationService extends SystemService implements Do
             try {
                 int size = this.mAttachedPkgStates.mPackageNameMap.size();
                 for (int i = 0; i < size; i++) {
-                    DomainVerificationPkgState domainVerificationPkgState = (DomainVerificationPkgState) this.mAttachedPkgStates.mPackageNameMap.valueAt(i);
+                    DomainVerificationPkgState domainVerificationPkgState =
+                            (DomainVerificationPkgState)
+                                    this.mAttachedPkgStates.mPackageNameMap.valueAt(i);
                     if (domainVerificationPkgState.mHasAutoVerifyDomains) {
                         arrayList.add(domainVerificationPkgState.mPackageName);
                     }
@@ -859,19 +1110,29 @@ public final class DomainVerificationService extends SystemService implements Do
     public final void readLegacySettings(TypedXmlPullParser typedXmlPullParser) {
         DomainVerificationLegacySettings domainVerificationLegacySettings = this.mLegacySettings;
         domainVerificationLegacySettings.getClass();
-        SettingsXml$ReadSectionImpl settingsXml$ReadSectionImpl = new SettingsXml$ReadSectionImpl(typedXmlPullParser);
+        SettingsXml$ReadSectionImpl settingsXml$ReadSectionImpl =
+                new SettingsXml$ReadSectionImpl(typedXmlPullParser);
         settingsXml$ReadSectionImpl.children();
         while (settingsXml$ReadSectionImpl.moveToNextInternal(null)) {
-            if ("user-states".equals(((TypedXmlPullParser) settingsXml$ReadSectionImpl.mParser).getName())) {
+            if ("user-states"
+                    .equals(((TypedXmlPullParser) settingsXml$ReadSectionImpl.mParser).getName())) {
                 String string = settingsXml$ReadSectionImpl.getString("packageName");
                 synchronized (domainVerificationLegacySettings.mLock) {
                     try {
-                        DomainVerificationLegacySettings.LegacyState orCreateStateLocked = domainVerificationLegacySettings.getOrCreateStateLocked(string);
+                        DomainVerificationLegacySettings.LegacyState orCreateStateLocked =
+                                domainVerificationLegacySettings.getOrCreateStateLocked(string);
                         settingsXml$ReadSectionImpl.children();
                         while (settingsXml$ReadSectionImpl.moveToNextInternal(null)) {
-                            if ("user-state".equals(((TypedXmlPullParser) settingsXml$ReadSectionImpl.mParser).getName())) {
+                            if ("user-state"
+                                    .equals(
+                                            ((TypedXmlPullParser)
+                                                            settingsXml$ReadSectionImpl.mParser)
+                                                    .getName())) {
                                 int i = settingsXml$ReadSectionImpl.getInt(-1, "userId");
-                                int i2 = settingsXml$ReadSectionImpl.getInt(-1, LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+                                int i2 =
+                                        settingsXml$ReadSectionImpl.getInt(
+                                                -1,
+                                                LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
                                 if (orCreateStateLocked.mUserStates == null) {
                                     orCreateStateLocked.mUserStates = new SparseIntArray(1);
                                 }
@@ -885,24 +1146,34 @@ public final class DomainVerificationService extends SystemService implements Do
         }
     }
 
-    public final void readSettings(ComputerLocked computerLocked, TypedXmlPullParser typedXmlPullParser) {
+    public final void readSettings(
+            ComputerLocked computerLocked, TypedXmlPullParser typedXmlPullParser) {
         synchronized (this.mLock) {
-            this.mSettings.readSettings(typedXmlPullParser, this.mAttachedPkgStates, computerLocked);
+            this.mSettings.readSettings(
+                    typedXmlPullParser, this.mAttachedPkgStates, computerLocked);
         }
     }
 
-    public final void removeUserStatesForDomain(DomainVerificationPkgState domainVerificationPkgState, String str) {
+    public final void removeUserStatesForDomain(
+            DomainVerificationPkgState domainVerificationPkgState, String str) {
         SparseArray sparseArray = domainVerificationPkgState.mUserStates;
         synchronized (this.mLock) {
             try {
                 int size = this.mAttachedPkgStates.mPackageNameMap.size();
                 for (int i = 0; i < size; i++) {
-                    SparseArray sparseArray2 = ((DomainVerificationPkgState) this.mAttachedPkgStates.mPackageNameMap.valueAt(i)).mUserStates;
+                    SparseArray sparseArray2 =
+                            ((DomainVerificationPkgState)
+                                            this.mAttachedPkgStates.mPackageNameMap.valueAt(i))
+                                    .mUserStates;
                     int size2 = sparseArray2.size();
                     for (int i2 = 0; i2 < size2; i2++) {
-                        DomainVerificationInternalUserState domainVerificationInternalUserState = (DomainVerificationInternalUserState) sparseArray.get(sparseArray2.keyAt(i2));
-                        if (domainVerificationInternalUserState == null || domainVerificationInternalUserState.mLinkHandlingAllowed) {
-                            ((DomainVerificationInternalUserState) sparseArray2.valueAt(i2)).mEnabledHosts.remove(str);
+                        DomainVerificationInternalUserState domainVerificationInternalUserState =
+                                (DomainVerificationInternalUserState)
+                                        sparseArray.get(sparseArray2.keyAt(i2));
+                        if (domainVerificationInternalUserState == null
+                                || domainVerificationInternalUserState.mLinkHandlingAllowed) {
+                            ((DomainVerificationInternalUserState) sparseArray2.valueAt(i2))
+                                    .mEnabledHosts.remove(str);
                         }
                     }
                 }
@@ -912,7 +1183,8 @@ public final class DomainVerificationService extends SystemService implements Do
         }
     }
 
-    public final void resetDomainState(ArrayMap arrayMap, PackageStateInternal packageStateInternal) {
+    public final void resetDomainState(
+            ArrayMap arrayMap, PackageStateInternal packageStateInternal) {
         for (int size = arrayMap.size() - 1; size >= 0; size--) {
             Integer num = (Integer) arrayMap.valueAt(size);
             int intValue = num.intValue();
@@ -920,10 +1192,17 @@ public final class DomainVerificationService extends SystemService implements Do
                 arrayMap.removeAt(size);
             }
         }
-        applyImmutableState(packageStateInternal, arrayMap, this.mCollector.collectDomains(packageStateInternal.getPkg(), true, true));
+        applyImmutableState(
+                packageStateInternal,
+                arrayMap,
+                this.mCollector.collectDomains(packageStateInternal.getPkg(), true, true));
     }
 
-    public final int revokeOtherUserSelectionsLocked(DomainVerificationInternalUserState domainVerificationInternalUserState, int i, Set set, Computer computer) {
+    public final int revokeOtherUserSelectionsLocked(
+            DomainVerificationInternalUserState domainVerificationInternalUserState,
+            int i,
+            Set set,
+            Computer computer) {
         DomainVerificationInternalUserState domainVerificationInternalUserState2;
         Pair create;
         int i2;
@@ -943,8 +1222,16 @@ public final class DomainVerificationService extends SystemService implements Do
                     List list2 = (List) arrayMap.valueAt(i5);
                     int size2 = list2.size();
                     for (int i6 = 0; i6 < size2; i6++) {
-                        DomainVerificationPkgState domainVerificationPkgState = (DomainVerificationPkgState) domainVerificationStateMap.mPackageNameMap.get((String) list2.get(i6));
-                        if (domainVerificationPkgState != null && (domainVerificationInternalUserState2 = (DomainVerificationInternalUserState) domainVerificationPkgState.mUserStates.get(i)) != null) {
+                        DomainVerificationPkgState domainVerificationPkgState =
+                                (DomainVerificationPkgState)
+                                        domainVerificationStateMap.mPackageNameMap.get(
+                                                (String) list2.get(i6));
+                        if (domainVerificationPkgState != null
+                                && (domainVerificationInternalUserState2 =
+                                                (DomainVerificationInternalUserState)
+                                                        domainVerificationPkgState.mUserStates.get(
+                                                                i))
+                                        != null) {
                             domainVerificationInternalUserState2.mEnabledHosts.remove(str);
                         }
                     }
@@ -960,7 +1247,10 @@ public final class DomainVerificationService extends SystemService implements Do
                 int i7 = 1;
                 int i8 = 0;
                 while (i8 < size3) {
-                    String str3 = ((DomainVerificationPkgState) domainVerificationStateMap.mPackageNameMap.valueAt(i8)).mPackageName;
+                    String str3 =
+                            ((DomainVerificationPkgState)
+                                            domainVerificationStateMap.mPackageNameMap.valueAt(i8))
+                                    .mPackageName;
                     PackageSetting packageStateInternal = computer.getPackageStateInternal(str3);
                     if (packageStateInternal == null) {
                         i2 = i8;
@@ -973,7 +1263,9 @@ public final class DomainVerificationService extends SystemService implements Do
                         i2 = i8;
                         List list4 = list3;
                         i3 = size3;
-                        int approvalLevelForDomain = approvalLevelForDomain(packageStateInternal, str2, false, i, false, str2);
+                        int approvalLevelForDomain =
+                                approvalLevelForDomain(
+                                        packageStateInternal, str2, false, i, false, str2);
                         z = true;
                         if (approvalLevelForDomain < 1) {
                             list = list4;
@@ -1015,9 +1307,13 @@ public final class DomainVerificationService extends SystemService implements Do
                     long j = Long.MIN_VALUE;
                     for (int i11 = 0; i11 < size4; i11++) {
                         String str4 = (String) list5.get(i11);
-                        PackageSetting packageStateInternal2 = computer.getPackageStateInternal(str4);
+                        PackageSetting packageStateInternal2 =
+                                computer.getPackageStateInternal(str4);
                         if (packageStateInternal2 != null) {
-                            long firstInstallTimeMillis = packageStateInternal2.getUserStateOrDefault(i).getFirstInstallTimeMillis();
+                            long firstInstallTimeMillis =
+                                    packageStateInternal2
+                                            .getUserStateOrDefault(i)
+                                            .getFirstInstallTimeMillis();
                             if (firstInstallTimeMillis > j) {
                                 arrayList.clear();
                                 arrayList.add(str4);
@@ -1047,12 +1343,14 @@ public final class DomainVerificationService extends SystemService implements Do
         this.mConnection.getClass();
         int callingUid = Binder.getCallingUid();
         this.mConnection.getClass();
-        if (!domainVerificationEnforcer.assertApprovedUserSelector(callingUid, UserHandle.getCallingUserId(), i, str)) {
+        if (!domainVerificationEnforcer.assertApprovedUserSelector(
+                callingUid, UserHandle.getCallingUserId(), i, str)) {
             DomainVerificationUtils.throwPackageUnavailable(str);
             throw null;
         }
         synchronized (this.mLock) {
-            DomainVerificationPkgState domainVerificationPkgState = (DomainVerificationPkgState) this.mAttachedPkgStates.mPackageNameMap.get(str);
+            DomainVerificationPkgState domainVerificationPkgState =
+                    (DomainVerificationPkgState) this.mAttachedPkgStates.mPackageNameMap.get(str);
             if (domainVerificationPkgState == null) {
                 DomainVerificationUtils.throwPackageUnavailable(str);
                 throw null;
@@ -1062,7 +1360,8 @@ public final class DomainVerificationService extends SystemService implements Do
         this.mConnection.scheduleWriteSettings();
     }
 
-    public final void setDomainVerificationLinkHandlingAllowedInternal(int i, String str, boolean z) {
+    public final void setDomainVerificationLinkHandlingAllowedInternal(
+            int i, String str, boolean z) {
         DomainVerificationEnforcer domainVerificationEnforcer = this.mEnforcer;
         this.mConnection.getClass();
         int callingUid = Binder.getCallingUid();
@@ -1073,13 +1372,19 @@ public final class DomainVerificationService extends SystemService implements Do
                 try {
                     int size = this.mAttachedPkgStates.mPackageNameMap.size();
                     for (int i2 = 0; i2 < size; i2++) {
-                        DomainVerificationPkgState domainVerificationPkgState = (DomainVerificationPkgState) this.mAttachedPkgStates.mPackageNameMap.valueAt(i2);
+                        DomainVerificationPkgState domainVerificationPkgState =
+                                (DomainVerificationPkgState)
+                                        this.mAttachedPkgStates.mPackageNameMap.valueAt(i2);
                         if (i == -1) {
                             for (int i3 : this.mConnection.mUmInternal.getUserIds()) {
-                                domainVerificationPkgState.getOrCreateUserState(i3).mLinkHandlingAllowed = z;
+                                domainVerificationPkgState.getOrCreateUserState(i3)
+                                                .mLinkHandlingAllowed =
+                                        z;
                             }
                         } else {
-                            domainVerificationPkgState.getOrCreateUserState(i).mLinkHandlingAllowed = z;
+                            domainVerificationPkgState.getOrCreateUserState(i)
+                                            .mLinkHandlingAllowed =
+                                    z;
                         }
                     }
                 } finally {
@@ -1088,17 +1393,22 @@ public final class DomainVerificationService extends SystemService implements Do
         } else {
             synchronized (this.mLock) {
                 try {
-                    DomainVerificationPkgState domainVerificationPkgState2 = (DomainVerificationPkgState) this.mAttachedPkgStates.mPackageNameMap.get(str);
+                    DomainVerificationPkgState domainVerificationPkgState2 =
+                            (DomainVerificationPkgState)
+                                    this.mAttachedPkgStates.mPackageNameMap.get(str);
                     if (domainVerificationPkgState2 == null) {
                         DomainVerificationUtils.throwPackageUnavailable(str);
                         throw null;
                     }
                     if (i == -1) {
                         for (int i4 : this.mConnection.mUmInternal.getUserIds()) {
-                            domainVerificationPkgState2.getOrCreateUserState(i4).mLinkHandlingAllowed = z;
+                            domainVerificationPkgState2.getOrCreateUserState(i4)
+                                            .mLinkHandlingAllowed =
+                                    z;
                         }
                     } else {
-                        domainVerificationPkgState2.getOrCreateUserState(i).mLinkHandlingAllowed = z;
+                        domainVerificationPkgState2.getOrCreateUserState(i).mLinkHandlingAllowed =
+                                z;
                     }
                 } finally {
                 }
@@ -1113,19 +1423,25 @@ public final class DomainVerificationService extends SystemService implements Do
         synchronized (this.mLock) {
             try {
                 ArrayList arrayList = new ArrayList();
-                GetAttachedResult andValidateAttachedLocked = getAndValidateAttachedLocked(uuid, set, true, i, null, snapshotComputer);
+                GetAttachedResult andValidateAttachedLocked =
+                        getAndValidateAttachedLocked(uuid, set, true, i, null, snapshotComputer);
                 int i3 = andValidateAttachedLocked.mErrorCode;
                 if (i3 != 0) {
                     return i3;
                 }
-                DomainVerificationPkgState domainVerificationPkgState = andValidateAttachedLocked.mPkgState;
+                DomainVerificationPkgState domainVerificationPkgState =
+                        andValidateAttachedLocked.mPkgState;
                 ArrayMap arrayMap = domainVerificationPkgState.mStateMap;
                 Iterator it = set.iterator();
                 while (it.hasNext()) {
                     String str = (String) it.next();
                     Integer num = (Integer) arrayMap.get(str);
-                    if (num == null || (num.intValue() != i2 && DomainVerificationState.isModifiable(num.intValue()))) {
-                        if (DomainVerificationState.isVerified(i2) && (num == null || !DomainVerificationState.isVerified(num.intValue()))) {
+                    if (num == null
+                            || (num.intValue() != i2
+                                    && DomainVerificationState.isModifiable(num.intValue()))) {
+                        if (DomainVerificationState.isVerified(i2)
+                                && (num == null
+                                        || !DomainVerificationState.isVerified(num.intValue()))) {
                             arrayList.add(str);
                         }
                         arrayMap.put(str, Integer.valueOf(i2));
@@ -1133,7 +1449,8 @@ public final class DomainVerificationService extends SystemService implements Do
                 }
                 int size = arrayList.size();
                 for (int i4 = 0; i4 < size; i4++) {
-                    removeUserStatesForDomain(domainVerificationPkgState, (String) arrayList.get(i4));
+                    removeUserStatesForDomain(
+                            domainVerificationPkgState, (String) arrayList.get(i4));
                 }
                 this.mConnection.scheduleWriteSettings();
                 return 0;
@@ -1152,7 +1469,8 @@ public final class DomainVerificationService extends SystemService implements Do
         domainVerificationEnforcer.getClass();
         DomainVerificationEnforcer.assertInternal(callingUid);
         if (i != 0 && i != 1 && i != 2 && i != 3) {
-            throw new IllegalArgumentException("State must be one of NO_RESPONSE, SUCCESS, APPROVED, or DENIED");
+            throw new IllegalArgumentException(
+                    "State must be one of NO_RESPONSE, SUCCESS, APPROVED, or DENIED");
         }
         if (str == null) {
             Computer snapshotComputer = this.mConnection.mPm.snapshotComputer();
@@ -1161,11 +1479,17 @@ public final class DomainVerificationService extends SystemService implements Do
                     ArraySet arraySet2 = new ArraySet();
                     int size = this.mAttachedPkgStates.mPackageNameMap.size();
                     for (int i2 = 0; i2 < size; i2++) {
-                        DomainVerificationPkgState domainVerificationPkgState = (DomainVerificationPkgState) this.mAttachedPkgStates.mPackageNameMap.valueAt(i2);
-                        PackageSetting packageStateInternal = snapshotComputer.getPackageStateInternal(domainVerificationPkgState.mPackageName);
-                        if (packageStateInternal != null && (androidPackage2 = packageStateInternal.pkg) != null) {
+                        DomainVerificationPkgState domainVerificationPkgState =
+                                (DomainVerificationPkgState)
+                                        this.mAttachedPkgStates.mPackageNameMap.valueAt(i2);
+                        PackageSetting packageStateInternal =
+                                snapshotComputer.getPackageStateInternal(
+                                        domainVerificationPkgState.mPackageName);
+                        if (packageStateInternal != null
+                                && (androidPackage2 = packageStateInternal.pkg) != null) {
                             arraySet2.clear();
-                            ArraySet collectDomains = this.mCollector.collectDomains(androidPackage2, true, true);
+                            ArraySet collectDomains =
+                                    this.mCollector.collectDomains(androidPackage2, true, true);
                             if (arraySet == null) {
                                 arraySet2.addAll(collectDomains);
                             } else {
@@ -1186,21 +1510,26 @@ public final class DomainVerificationService extends SystemService implements Do
             Computer snapshotComputer2 = this.mConnection.mPm.snapshotComputer();
             synchronized (this.mLock) {
                 try {
-                    DomainVerificationPkgState domainVerificationPkgState2 = (DomainVerificationPkgState) this.mAttachedPkgStates.mPackageNameMap.get(str);
+                    DomainVerificationPkgState domainVerificationPkgState2 =
+                            (DomainVerificationPkgState)
+                                    this.mAttachedPkgStates.mPackageNameMap.get(str);
                     ArraySet arraySet3 = null;
                     if (domainVerificationPkgState2 == null) {
                         DomainVerificationUtils.throwPackageUnavailable(str);
                         throw null;
                     }
-                    PackageSetting packageStateInternal2 = snapshotComputer2.getPackageStateInternal(str);
-                    if (packageStateInternal2 == null || (androidPackage = packageStateInternal2.pkg) == null) {
+                    PackageSetting packageStateInternal2 =
+                            snapshotComputer2.getPackageStateInternal(str);
+                    if (packageStateInternal2 == null
+                            || (androidPackage = packageStateInternal2.pkg) == null) {
                         DomainVerificationUtils.throwPackageUnavailable(str);
                         throw null;
                     }
                     if (arraySet == null) {
                         arraySet = this.mCollector.collectDomains(androidPackage, true, true);
                     } else {
-                        arraySet.retainAll(this.mCollector.collectDomains(androidPackage, true, true));
+                        arraySet.retainAll(
+                                this.mCollector.collectDomains(androidPackage, true, true));
                     }
                     if (DomainVerificationState.isVerified(i)) {
                         arraySet3 = new ArraySet();
@@ -1209,7 +1538,8 @@ public final class DomainVerificationService extends SystemService implements Do
                         for (int i4 = 0; i4 < size3; i4++) {
                             String str2 = (String) arraySet.valueAt(i4);
                             Integer num = (Integer) arrayMap2.get(str2);
-                            if (num == null || !DomainVerificationState.isVerified(num.intValue())) {
+                            if (num == null
+                                    || !DomainVerificationState.isVerified(num.intValue())) {
                                 arraySet3.add(str2);
                             }
                         }
@@ -1222,7 +1552,8 @@ public final class DomainVerificationService extends SystemService implements Do
                     if (arraySet3 != null) {
                         int size5 = arraySet3.size();
                         for (int i6 = 0; i6 < size5; i6++) {
-                            removeUserStatesForDomain(domainVerificationPkgState2, (String) arraySet3.valueAt(i6));
+                            removeUserStatesForDomain(
+                                    domainVerificationPkgState2, (String) arraySet3.valueAt(i6));
                         }
                     }
                 } finally {
@@ -1238,19 +1569,27 @@ public final class DomainVerificationService extends SystemService implements Do
         int callingUid = Binder.getCallingUid();
         DomainVerificationEnforcer domainVerificationEnforcer = this.mEnforcer;
         this.mConnection.getClass();
-        if (!domainVerificationEnforcer.assertApprovedUserSelector(callingUid, UserHandle.getCallingUserId(), i, null)) {
+        if (!domainVerificationEnforcer.assertApprovedUserSelector(
+                callingUid, UserHandle.getCallingUserId(), i, null)) {
             return 1;
         }
         Computer snapshotComputer = this.mConnection.mPm.snapshotComputer();
         synchronized (this.mLock) {
             try {
-                GetAttachedResult andValidateAttachedLocked = getAndValidateAttachedLocked(uuid, set, false, callingUid, Integer.valueOf(i), snapshotComputer);
+                GetAttachedResult andValidateAttachedLocked =
+                        getAndValidateAttachedLocked(
+                                uuid, set, false, callingUid, Integer.valueOf(i), snapshotComputer);
                 int i2 = andValidateAttachedLocked.mErrorCode;
                 if (i2 != 0) {
                     return i2;
                 }
-                DomainVerificationInternalUserState orCreateUserState = andValidateAttachedLocked.mPkgState.getOrCreateUserState(i);
-                if (z && (revokeOtherUserSelectionsLocked = revokeOtherUserSelectionsLocked(orCreateUserState, i, set, snapshotComputer)) != 0) {
+                DomainVerificationInternalUserState orCreateUserState =
+                        andValidateAttachedLocked.mPkgState.getOrCreateUserState(i);
+                if (z
+                        && (revokeOtherUserSelectionsLocked =
+                                        revokeOtherUserSelectionsLocked(
+                                                orCreateUserState, i, set, snapshotComputer))
+                                != 0) {
                     return revokeOtherUserSelectionsLocked;
                 }
                 if (z) {
@@ -1266,7 +1605,8 @@ public final class DomainVerificationService extends SystemService implements Do
         }
     }
 
-    public final void setDomainVerificationUserSelectionInternal(int i, String str, boolean z, ArraySet arraySet) {
+    public final void setDomainVerificationUserSelectionInternal(
+            int i, String str, boolean z, ArraySet arraySet) {
         DomainVerificationEnforcer domainVerificationEnforcer = this.mEnforcer;
         this.mConnection.getClass();
         int callingUid = Binder.getCallingUid();
@@ -1275,13 +1615,16 @@ public final class DomainVerificationService extends SystemService implements Do
         Computer snapshotComputer = this.mConnection.mPm.snapshotComputer();
         synchronized (this.mLock) {
             try {
-                DomainVerificationPkgState domainVerificationPkgState = (DomainVerificationPkgState) this.mAttachedPkgStates.mPackageNameMap.get(str);
+                DomainVerificationPkgState domainVerificationPkgState =
+                        (DomainVerificationPkgState)
+                                this.mAttachedPkgStates.mPackageNameMap.get(str);
                 if (domainVerificationPkgState == null) {
                     DomainVerificationUtils.throwPackageUnavailable(str);
                     throw null;
                 }
                 PackageSetting packageStateInternal = snapshotComputer.getPackageStateInternal(str);
-                AndroidPackage androidPackage = packageStateInternal == null ? null : packageStateInternal.pkg;
+                AndroidPackage androidPackage =
+                        packageStateInternal == null ? null : packageStateInternal.pkg;
                 if (androidPackage == null) {
                     DomainVerificationUtils.throwPackageUnavailable(str);
                     throw null;
@@ -1292,8 +1635,10 @@ public final class DomainVerificationService extends SystemService implements Do
                 arraySet.retainAll(this.mCollector.collectDomains(androidPackage, false, true));
                 if (i == -1) {
                     for (int i2 : this.mConnection.mUmInternal.getUserIds()) {
-                        DomainVerificationInternalUserState orCreateUserState = domainVerificationPkgState.getOrCreateUserState(i2);
-                        revokeOtherUserSelectionsLocked(orCreateUserState, i2, arraySet, snapshotComputer);
+                        DomainVerificationInternalUserState orCreateUserState =
+                                domainVerificationPkgState.getOrCreateUserState(i2);
+                        revokeOtherUserSelectionsLocked(
+                                orCreateUserState, i2, arraySet, snapshotComputer);
                         if (z) {
                             orCreateUserState.mEnabledHosts.addAll((Collection) arraySet);
                         } else {
@@ -1301,8 +1646,10 @@ public final class DomainVerificationService extends SystemService implements Do
                         }
                     }
                 } else {
-                    DomainVerificationInternalUserState orCreateUserState2 = domainVerificationPkgState.getOrCreateUserState(i);
-                    revokeOtherUserSelectionsLocked(orCreateUserState2, i, arraySet, snapshotComputer);
+                    DomainVerificationInternalUserState orCreateUserState2 =
+                            domainVerificationPkgState.getOrCreateUserState(i);
+                    revokeOtherUserSelectionsLocked(
+                            orCreateUserState2, i, arraySet, snapshotComputer);
                     if (z) {
                         orCreateUserState2.mEnabledHosts.addAll((Collection) arraySet);
                     } else {
@@ -1322,24 +1669,43 @@ public final class DomainVerificationService extends SystemService implements Do
         int callingUid = Binder.getCallingUid();
         this.mConnection.getClass();
         int callingUserId = UserHandle.getCallingUserId();
-        domainVerificationEnforcer.mContext.enforcePermission("android.permission.SET_PREFERRED_APPLICATIONS", Binder.getCallingPid(), callingUid, "Caller is not allowed to edit user state");
-        if (callingUserId != i && domainVerificationEnforcer.mContext.checkPermission("android.permission.INTERACT_ACROSS_USERS", Binder.getCallingPid(), callingUid) != 0) {
+        domainVerificationEnforcer.mContext.enforcePermission(
+                "android.permission.SET_PREFERRED_APPLICATIONS",
+                Binder.getCallingPid(),
+                callingUid,
+                "Caller is not allowed to edit user state");
+        if (callingUserId != i
+                && domainVerificationEnforcer.mContext.checkPermission(
+                                "android.permission.INTERACT_ACROSS_USERS",
+                                Binder.getCallingPid(),
+                                callingUid)
+                        != 0) {
             z = false;
         } else {
             if (!domainVerificationEnforcer.mCallback.mUmInternal.exists(callingUserId)) {
-                throw new SecurityException(BinaryTransparencyService$$ExternalSyntheticOutline0.m(callingUserId, "User ", " does not exist"));
+                throw new SecurityException(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                callingUserId, "User ", " does not exist"));
             }
             if (!domainVerificationEnforcer.mCallback.mUmInternal.exists(i)) {
-                throw new SecurityException(BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "User ", " does not exist"));
+                throw new SecurityException(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                i, "User ", " does not exist"));
             }
-            z = !domainVerificationEnforcer.mCallback.mPm.snapshotComputer().filterAppAccess(callingUid, i, str, true);
+            z =
+                    !domainVerificationEnforcer
+                            .mCallback
+                            .mPm
+                            .snapshotComputer()
+                            .filterAppAccess(callingUid, i, str, true);
         }
         if (!z) {
             return false;
         }
         DomainVerificationLegacySettings domainVerificationLegacySettings = this.mLegacySettings;
         synchronized (domainVerificationLegacySettings.mLock) {
-            DomainVerificationLegacySettings.LegacyState orCreateStateLocked = domainVerificationLegacySettings.getOrCreateStateLocked(str);
+            DomainVerificationLegacySettings.LegacyState orCreateStateLocked =
+                    domainVerificationLegacySettings.getOrCreateStateLocked(str);
             if (orCreateStateLocked.mUserStates == null) {
                 orCreateStateLocked.mUserStates = new SparseIntArray(1);
             }
@@ -1360,13 +1726,16 @@ public final class DomainVerificationService extends SystemService implements Do
         this.mConnection.getClass();
         sb.append(Binder.getCallingUid());
         sb.append(" does not hold android.permission.DOMAIN_VERIFICATION_AGENT");
-        context.enforceCallingOrSelfPermission("android.permission.DOMAIN_VERIFICATION_AGENT", sb.toString());
+        context.enforceCallingOrSelfPermission(
+                "android.permission.DOMAIN_VERIFICATION_AGENT", sb.toString());
         if (bundle.isEmpty()) {
             return;
         }
         synchronized (this.mLock) {
             try {
-                DomainVerificationPkgState domainVerificationPkgState = (DomainVerificationPkgState) this.mAttachedPkgStates.mPackageNameMap.get(str);
+                DomainVerificationPkgState domainVerificationPkgState =
+                        (DomainVerificationPkgState)
+                                this.mAttachedPkgStates.mPackageNameMap.get(str);
                 if (domainVerificationPkgState == null) {
                     DomainVerificationUtils.throwPackageUnavailable(str);
                     throw null;
@@ -1394,7 +1763,10 @@ public final class DomainVerificationService extends SystemService implements Do
                                         i++;
                                     }
                                 } else {
-                                    if ((charAt < 'a' || charAt > 'z') && ((charAt < 'A' || charAt > 'Z') && ((charAt < '0' || charAt > '9') && charAt != '-'))) {
+                                    if ((charAt < 'a' || charAt > 'z')
+                                            && ((charAt < 'A' || charAt > 'Z')
+                                                    && ((charAt < '0' || charAt > '9')
+                                                            && charAt != '-'))) {
                                         break;
                                     }
                                     i++;
@@ -1402,7 +1774,11 @@ public final class DomainVerificationService extends SystemService implements Do
                             } else {
                                 int length = (str2.length() - i2) - 1;
                                 if (length != 0 && length <= 63 && i3 > 1) {
-                                    List parcelsToGroups = UriRelativeFilterGroup.parcelsToGroups(bundle.getParcelableArrayList(str3, UriRelativeFilterGroupParcel.class));
+                                    List parcelsToGroups =
+                                            UriRelativeFilterGroup.parcelsToGroups(
+                                                    bundle.getParcelableArrayList(
+                                                            str3,
+                                                            UriRelativeFilterGroupParcel.class));
                                     if (parcelsToGroups != null && !parcelsToGroups.isEmpty()) {
                                         arrayMap.put(str3, parcelsToGroups);
                                     }
@@ -1431,7 +1807,11 @@ public final class DomainVerificationService extends SystemService implements Do
                 try {
                     int size = this.mAttachedPkgStates.mPackageNameMap.size();
                     while (i < size) {
-                        addIfShouldBroadcastLocked(arraySet, (DomainVerificationPkgState) this.mAttachedPkgStates.mPackageNameMap.valueAt(i), z);
+                        addIfShouldBroadcastLocked(
+                                arraySet,
+                                (DomainVerificationPkgState)
+                                        this.mAttachedPkgStates.mPackageNameMap.valueAt(i),
+                                z);
                         i++;
                     }
                 } finally {
@@ -1442,7 +1822,10 @@ public final class DomainVerificationService extends SystemService implements Do
                 try {
                     int size2 = list.size();
                     while (i < size2) {
-                        DomainVerificationPkgState domainVerificationPkgState = (DomainVerificationPkgState) this.mAttachedPkgStates.mPackageNameMap.get((String) list.get(i));
+                        DomainVerificationPkgState domainVerificationPkgState =
+                                (DomainVerificationPkgState)
+                                        this.mAttachedPkgStates.mPackageNameMap.get(
+                                                (String) list.get(i));
                         if (domainVerificationPkgState != null) {
                             addIfShouldBroadcastLocked(arraySet, domainVerificationPkgState, z);
                         }
@@ -1458,36 +1841,53 @@ public final class DomainVerificationService extends SystemService implements Do
         this.mProxy.sendBroadcastForPackages(arraySet);
     }
 
-    public final void writeSettings(Computer computer, TypedXmlSerializer typedXmlSerializer, boolean z, int i) {
-        DomainVerificationService$$ExternalSyntheticLambda1 domainVerificationService$$ExternalSyntheticLambda1;
+    public final void writeSettings(
+            Computer computer, TypedXmlSerializer typedXmlSerializer, boolean z, int i) {
+        DomainVerificationService$$ExternalSyntheticLambda1
+                domainVerificationService$$ExternalSyntheticLambda1;
         synchronized (this.mLock) {
             if (z) {
                 try {
-                    domainVerificationService$$ExternalSyntheticLambda1 = new DomainVerificationService$$ExternalSyntheticLambda1(computer);
+                    domainVerificationService$$ExternalSyntheticLambda1 =
+                            new DomainVerificationService$$ExternalSyntheticLambda1(computer);
                 } finally {
                 }
             } else {
                 domainVerificationService$$ExternalSyntheticLambda1 = null;
             }
-            DomainVerificationService$$ExternalSyntheticLambda1 domainVerificationService$$ExternalSyntheticLambda12 = domainVerificationService$$ExternalSyntheticLambda1;
+            DomainVerificationService$$ExternalSyntheticLambda1
+                    domainVerificationService$$ExternalSyntheticLambda12 =
+                            domainVerificationService$$ExternalSyntheticLambda1;
             DomainVerificationSettings domainVerificationSettings = this.mSettings;
             DomainVerificationStateMap domainVerificationStateMap = this.mAttachedPkgStates;
             synchronized (domainVerificationSettings.mLock) {
-                DomainVerificationPersistence.writeToXml(typedXmlSerializer, domainVerificationStateMap, domainVerificationSettings.mPendingPkgStates, domainVerificationSettings.mRestoredPkgStates, i, domainVerificationService$$ExternalSyntheticLambda12);
+                DomainVerificationPersistence.writeToXml(
+                        typedXmlSerializer,
+                        domainVerificationStateMap,
+                        domainVerificationSettings.mPendingPkgStates,
+                        domainVerificationSettings.mRestoredPkgStates,
+                        i,
+                        domainVerificationService$$ExternalSyntheticLambda12);
             }
         }
         DomainVerificationLegacySettings domainVerificationLegacySettings = this.mLegacySettings;
         domainVerificationLegacySettings.getClass();
-        SettingsXml$ReadSectionImpl settingsXml$ReadSectionImpl = new SettingsXml$ReadSectionImpl(typedXmlSerializer);
+        SettingsXml$ReadSectionImpl settingsXml$ReadSectionImpl =
+                new SettingsXml$ReadSectionImpl(typedXmlSerializer);
         try {
             settingsXml$ReadSectionImpl.startSection("domain-verifications-legacy");
             try {
                 synchronized (domainVerificationLegacySettings.mLock) {
                     int size = domainVerificationLegacySettings.mStates.size();
                     for (int i2 = 0; i2 < size; i2++) {
-                        SparseIntArray sparseIntArray = ((DomainVerificationLegacySettings.LegacyState) domainVerificationLegacySettings.mStates.valueAt(i2)).mUserStates;
+                        SparseIntArray sparseIntArray =
+                                ((DomainVerificationLegacySettings.LegacyState)
+                                                domainVerificationLegacySettings.mStates.valueAt(
+                                                        i2))
+                                        .mUserStates;
                         if (sparseIntArray != null) {
-                            String str = (String) domainVerificationLegacySettings.mStates.keyAt(i2);
+                            String str =
+                                    (String) domainVerificationLegacySettings.mStates.keyAt(i2);
                             settingsXml$ReadSectionImpl.startSection("user-states");
                             settingsXml$ReadSectionImpl.attribute("packageName", str);
                             try {
@@ -1497,7 +1897,9 @@ public final class DomainVerificationService extends SystemService implements Do
                                     int valueAt = sparseIntArray.valueAt(i3);
                                     settingsXml$ReadSectionImpl.startSection("user-state");
                                     settingsXml$ReadSectionImpl.attribute(keyAt, "userId");
-                                    settingsXml$ReadSectionImpl.attribute(valueAt, LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
+                                    settingsXml$ReadSectionImpl.attribute(
+                                            valueAt,
+                                            LauncherConfigurationInternal.KEY_STATE_BOOLEAN);
                                     settingsXml$ReadSectionImpl.close();
                                 }
                                 settingsXml$ReadSectionImpl.close();

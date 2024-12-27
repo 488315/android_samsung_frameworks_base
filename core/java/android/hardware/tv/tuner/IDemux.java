@@ -1,10 +1,5 @@
 package android.hardware.tv.tuner;
 
-import android.hardware.tv.tuner.IDvr;
-import android.hardware.tv.tuner.IDvrCallback;
-import android.hardware.tv.tuner.IFilter;
-import android.hardware.tv.tuner.IFilterCallback;
-import android.hardware.tv.tuner.ITimeFilter;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -33,7 +28,8 @@ public interface IDemux extends IInterface {
 
     IDvr openDvr(byte b, int i, IDvrCallback iDvrCallback) throws RemoteException;
 
-    IFilter openFilter(DemuxFilterType demuxFilterType, int i, IFilterCallback iFilterCallback) throws RemoteException;
+    IFilter openFilter(DemuxFilterType demuxFilterType, int i, IFilterCallback iFilterCallback)
+            throws RemoteException;
 
     ITimeFilter openTimeFilter() throws RemoteException;
 
@@ -41,11 +37,11 @@ public interface IDemux extends IInterface {
 
     public static class Default implements IDemux {
         @Override // android.hardware.tv.tuner.IDemux
-        public void setFrontendDataSource(int frontendId) throws RemoteException {
-        }
+        public void setFrontendDataSource(int frontendId) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IDemux
-        public IFilter openFilter(DemuxFilterType type, int bufferSize, IFilterCallback cb) throws RemoteException {
+        public IFilter openFilter(DemuxFilterType type, int bufferSize, IFilterCallback cb)
+                throws RemoteException {
             return null;
         }
 
@@ -65,8 +61,7 @@ public interface IDemux extends IInterface {
         }
 
         @Override // android.hardware.tv.tuner.IDemux
-        public void close() throws RemoteException {
-        }
+        public void close() throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IDemux
         public IDvr openDvr(byte type, int bufferSize, IDvrCallback cb) throws RemoteException {
@@ -74,12 +69,10 @@ public interface IDemux extends IInterface {
         }
 
         @Override // android.hardware.tv.tuner.IDemux
-        public void connectCiCam(int ciCamId) throws RemoteException {
-        }
+        public void connectCiCam(int ciCamId) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IDemux
-        public void disconnectCiCam() throws RemoteException {
-        }
+        public void disconnectCiCam() throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IDemux
         public int getInterfaceVersion() {
@@ -97,7 +90,7 @@ public interface IDemux extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDemux {
+    public abstract static class Stub extends Binder implements IDemux {
         static final int TRANSACTION_close = 6;
         static final int TRANSACTION_connectCiCam = 8;
         static final int TRANSACTION_disconnectCiCam = 9;
@@ -132,7 +125,8 @@ public interface IDemux extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -159,9 +153,11 @@ public interface IDemux extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 2:
-                    DemuxFilterType _arg02 = (DemuxFilterType) data.readTypedObject(DemuxFilterType.CREATOR);
+                    DemuxFilterType _arg02 =
+                            (DemuxFilterType) data.readTypedObject(DemuxFilterType.CREATOR);
                     int _arg1 = data.readInt();
-                    IFilterCallback _arg2 = IFilterCallback.Stub.asInterface(data.readStrongBinder());
+                    IFilterCallback _arg2 =
+                            IFilterCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     IFilter _result = openFilter(_arg02, _arg1, _arg2);
                     reply.writeNoException();
@@ -251,7 +247,8 @@ public interface IDemux extends IInterface {
             }
 
             @Override // android.hardware.tv.tuner.IDemux
-            public IFilter openFilter(DemuxFilterType type, int bufferSize, IFilterCallback cb) throws RemoteException {
+            public IFilter openFilter(DemuxFilterType type, int bufferSize, IFilterCallback cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

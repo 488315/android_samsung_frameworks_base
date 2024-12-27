@@ -14,8 +14,7 @@ public interface IWificondEventCallback extends IInterface {
 
     public static class Default implements IWificondEventCallback {
         @Override // android.net.wifi.nl80211.IWificondEventCallback
-        public void OnRegDomainChanged(String countryCode) throws RemoteException {
-        }
+        public void OnRegDomainChanged(String countryCode) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IWificondEventCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWificondEventCallback {
+    public abstract static class Stub extends Binder implements IWificondEventCallback {
         static final int TRANSACTION_OnRegDomainChanged = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IWificondEventCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IWificondEventCallback.DESCRIPTOR);
             }

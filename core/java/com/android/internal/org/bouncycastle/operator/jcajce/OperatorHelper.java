@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.operator.jcajce;
 
 import android.security.keystore.KeyProperties;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1Encodable;
 import com.android.internal.org.bouncycastle.asn1.ASN1Integer;
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
@@ -23,6 +24,7 @@ import com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper;
 import com.android.internal.org.bouncycastle.jcajce.util.MessageDigestUtils;
 import com.android.internal.org.bouncycastle.operator.OperatorCreationException;
 import com.android.internal.org.bouncycastle.util.Integers;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.security.AlgorithmParameters;
@@ -42,6 +44,7 @@ import java.security.spec.PSSParameterSpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.crypto.Cipher;
 import javax.crypto.KeyAgreement;
 
@@ -86,21 +89,28 @@ class OperatorHelper {
         symmetricWrapperAlgNames.put(NTTObjectIdentifiers.id_camellia192_wrap, "CamelliaWrap");
         symmetricWrapperAlgNames.put(NTTObjectIdentifiers.id_camellia256_wrap, "CamelliaWrap");
         symmetricWrapperAlgNames.put(KISAObjectIdentifiers.id_npki_app_cmsSeed_wrap, "SEEDWrap");
-        symmetricWrapperAlgNames.put(PKCSObjectIdentifiers.des_EDE3_CBC, KeyProperties.KEY_ALGORITHM_3DES);
-        symmetricWrapperKeySizes.put(PKCSObjectIdentifiers.id_alg_CMS3DESwrap, Integers.valueOf(192));
+        symmetricWrapperAlgNames.put(
+                PKCSObjectIdentifiers.des_EDE3_CBC, KeyProperties.KEY_ALGORITHM_3DES);
+        symmetricWrapperKeySizes.put(
+                PKCSObjectIdentifiers.id_alg_CMS3DESwrap, Integers.valueOf(192));
         symmetricWrapperKeySizes.put(NISTObjectIdentifiers.id_aes128_wrap, Integers.valueOf(128));
         symmetricWrapperKeySizes.put(NISTObjectIdentifiers.id_aes192_wrap, Integers.valueOf(192));
         symmetricWrapperKeySizes.put(NISTObjectIdentifiers.id_aes256_wrap, Integers.valueOf(256));
-        symmetricWrapperKeySizes.put(NTTObjectIdentifiers.id_camellia128_wrap, Integers.valueOf(128));
-        symmetricWrapperKeySizes.put(NTTObjectIdentifiers.id_camellia192_wrap, Integers.valueOf(192));
-        symmetricWrapperKeySizes.put(NTTObjectIdentifiers.id_camellia256_wrap, Integers.valueOf(256));
-        symmetricWrapperKeySizes.put(KISAObjectIdentifiers.id_npki_app_cmsSeed_wrap, Integers.valueOf(128));
+        symmetricWrapperKeySizes.put(
+                NTTObjectIdentifiers.id_camellia128_wrap, Integers.valueOf(128));
+        symmetricWrapperKeySizes.put(
+                NTTObjectIdentifiers.id_camellia192_wrap, Integers.valueOf(192));
+        symmetricWrapperKeySizes.put(
+                NTTObjectIdentifiers.id_camellia256_wrap, Integers.valueOf(256));
+        symmetricWrapperKeySizes.put(
+                KISAObjectIdentifiers.id_npki_app_cmsSeed_wrap, Integers.valueOf(128));
         symmetricWrapperKeySizes.put(PKCSObjectIdentifiers.des_EDE3_CBC, Integers.valueOf(192));
         symmetricKeyAlgNames.put(NISTObjectIdentifiers.aes, "AES");
         symmetricKeyAlgNames.put(NISTObjectIdentifiers.id_aes128_CBC, "AES");
         symmetricKeyAlgNames.put(NISTObjectIdentifiers.id_aes192_CBC, "AES");
         symmetricKeyAlgNames.put(NISTObjectIdentifiers.id_aes256_CBC, "AES");
-        symmetricKeyAlgNames.put(PKCSObjectIdentifiers.des_EDE3_CBC, KeyProperties.KEY_ALGORITHM_3DES);
+        symmetricKeyAlgNames.put(
+                PKCSObjectIdentifiers.des_EDE3_CBC, KeyProperties.KEY_ALGORITHM_3DES);
         symmetricKeyAlgNames.put(PKCSObjectIdentifiers.RC2_CBC, "RC2");
     }
 
@@ -138,7 +148,8 @@ class OperatorHelper {
         }
     }
 
-    KeyAgreement createKeyAgreement(ASN1ObjectIdentifier algorithm) throws OperatorCreationException {
+    KeyAgreement createKeyAgreement(ASN1ObjectIdentifier algorithm)
+            throws OperatorCreationException {
         try {
             if (0 != 0) {
                 try {
@@ -148,11 +159,13 @@ class OperatorHelper {
             }
             return this.helper.createKeyAgreement(algorithm.getId());
         } catch (GeneralSecurityException e2) {
-            throw new OperatorCreationException("cannot create key agreement: " + e2.getMessage(), e2);
+            throw new OperatorCreationException(
+                    "cannot create key agreement: " + e2.getMessage(), e2);
         }
     }
 
-    Cipher createAsymmetricWrapper(ASN1ObjectIdentifier algorithm, Map extraAlgNames) throws OperatorCreationException {
+    Cipher createAsymmetricWrapper(ASN1ObjectIdentifier algorithm, Map extraAlgNames)
+            throws OperatorCreationException {
         String cipherName = null;
         try {
             if (!extraAlgNames.isEmpty()) {
@@ -194,32 +207,45 @@ class OperatorHelper {
         }
     }
 
-    AlgorithmParameters createAlgorithmParameters(AlgorithmIdentifier cipherAlgId) throws OperatorCreationException {
-        if (cipherAlgId.getAlgorithm().equals((ASN1Primitive) PKCSObjectIdentifiers.rsaEncryption)) {
+    AlgorithmParameters createAlgorithmParameters(AlgorithmIdentifier cipherAlgId)
+            throws OperatorCreationException {
+        if (cipherAlgId
+                .getAlgorithm()
+                .equals((ASN1Primitive) PKCSObjectIdentifiers.rsaEncryption)) {
             return null;
         }
         try {
-            AlgorithmParameters parameters = this.helper.createAlgorithmParameters(cipherAlgId.getAlgorithm().getId());
+            AlgorithmParameters parameters =
+                    this.helper.createAlgorithmParameters(cipherAlgId.getAlgorithm().getId());
             try {
                 parameters.init(cipherAlgId.getParameters().toASN1Primitive().getEncoded());
                 return parameters;
             } catch (IOException e) {
-                throw new OperatorCreationException("cannot initialise algorithm parameters: " + e.getMessage(), e);
+                throw new OperatorCreationException(
+                        "cannot initialise algorithm parameters: " + e.getMessage(), e);
             }
         } catch (NoSuchAlgorithmException e2) {
             return null;
         } catch (NoSuchProviderException e3) {
-            throw new OperatorCreationException("cannot create algorithm parameters: " + e3.getMessage(), e3);
+            throw new OperatorCreationException(
+                    "cannot create algorithm parameters: " + e3.getMessage(), e3);
         }
     }
 
     MessageDigest createDigest(AlgorithmIdentifier digAlgId) throws GeneralSecurityException {
         MessageDigest dig;
         try {
-            if (digAlgId.getAlgorithm().equals((ASN1Primitive) NISTObjectIdentifiers.id_shake256_len)) {
-                dig = this.helper.createMessageDigest("SHAKE256-" + ASN1Integer.getInstance(digAlgId.getParameters()).getValue());
+            if (digAlgId.getAlgorithm()
+                    .equals((ASN1Primitive) NISTObjectIdentifiers.id_shake256_len)) {
+                dig =
+                        this.helper.createMessageDigest(
+                                "SHAKE256-"
+                                        + ASN1Integer.getInstance(digAlgId.getParameters())
+                                                .getValue());
             } else {
-                dig = this.helper.createMessageDigest(MessageDigestUtils.getDigestName(digAlgId.getAlgorithm()));
+                dig =
+                        this.helper.createMessageDigest(
+                                MessageDigestUtils.getDigestName(digAlgId.getAlgorithm()));
             }
             return dig;
         } catch (NoSuchAlgorithmException e) {
@@ -239,7 +265,8 @@ class OperatorHelper {
             sig = this.helper.createSignature(sigName);
         } catch (NoSuchAlgorithmException e) {
             if (sigName.endsWith("WITHRSAANDMGF1")) {
-                String signatureAlgorithm = sigName.substring(0, sigName.indexOf(87)) + "WITHRSASSA-PSS";
+                String signatureAlgorithm =
+                        sigName.substring(0, sigName.indexOf(87)) + "WITHRSASSA-PSS";
                 Signature sig2 = this.helper.createSignature(signatureAlgorithm);
                 sig = sig2;
             } else if (oids.get(sigAlgId.getAlgorithm()) != null) {
@@ -254,11 +281,14 @@ class OperatorHelper {
             ASN1Sequence seq = ASN1Sequence.getInstance(sigAlgId.getParameters());
             if (notDefaultPSSParams(seq)) {
                 try {
-                    AlgorithmParameters algParams = this.helper.createAlgorithmParameters(KeyProperties.SIGNATURE_PADDING_RSA_PSS);
+                    AlgorithmParameters algParams =
+                            this.helper.createAlgorithmParameters(
+                                    KeyProperties.SIGNATURE_PADDING_RSA_PSS);
                     algParams.init(seq.getEncoded());
                     sig.setParameter(algParams.getParameterSpec(PSSParameterSpec.class));
                 } catch (IOException e2) {
-                    throw new GeneralSecurityException("unable to process PSS parameters: " + e2.getMessage());
+                    throw new GeneralSecurityException(
+                            "unable to process PSS parameters: " + e2.getMessage());
                 }
             }
         }
@@ -268,12 +298,16 @@ class OperatorHelper {
     public Signature createRawSignature(AlgorithmIdentifier algorithm) {
         try {
             String algName = getSignatureName(algorithm);
-            String algName2 = KeyProperties.DIGEST_NONE + algName.substring(algName.indexOf("WITH"));
+            String algName2 =
+                    KeyProperties.DIGEST_NONE + algName.substring(algName.indexOf("WITH"));
             Signature sig = this.helper.createSignature(algName2);
-            if (algorithm.getAlgorithm().equals((ASN1Primitive) PKCSObjectIdentifiers.id_RSASSA_PSS)) {
+            if (algorithm
+                    .getAlgorithm()
+                    .equals((ASN1Primitive) PKCSObjectIdentifiers.id_RSASSA_PSS)) {
                 AlgorithmParameters params = this.helper.createAlgorithmParameters(algName2);
                 AlgorithmParametersUtils.loadParameters(params, algorithm.getParameters());
-                PSSParameterSpec spec = (PSSParameterSpec) params.getParameterSpec(PSSParameterSpec.class);
+                PSSParameterSpec spec =
+                        (PSSParameterSpec) params.getParameterSpec(PSSParameterSpec.class);
                 sig.setParameter(spec);
             }
             return sig;
@@ -284,7 +318,10 @@ class OperatorHelper {
 
     private static String getSignatureName(AlgorithmIdentifier sigAlgId) {
         ASN1Encodable params = sigAlgId.getParameters();
-        if (params != null && !DERNull.INSTANCE.equals(params) && sigAlgId.getAlgorithm().equals((ASN1Primitive) PKCSObjectIdentifiers.id_RSASSA_PSS)) {
+        if (params != null
+                && !DERNull.INSTANCE.equals(params)
+                && sigAlgId.getAlgorithm()
+                        .equals((ASN1Primitive) PKCSObjectIdentifiers.id_RSASSA_PSS)) {
             RSASSAPSSparams rsaParams = RSASSAPSSparams.getInstance(params);
             return getDigestName(rsaParams.getHashAlgorithm().getAlgorithm()) + "WITHRSAANDMGF1";
         }
@@ -303,29 +340,40 @@ class OperatorHelper {
         return name;
     }
 
-    public X509Certificate convertCertificate(X509CertificateHolder certHolder) throws CertificateException {
+    public X509Certificate convertCertificate(X509CertificateHolder certHolder)
+            throws CertificateException {
         try {
             CertificateFactory certFact = this.helper.createCertificateFactory("X.509");
-            return (X509Certificate) certFact.generateCertificate(new ByteArrayInputStream(certHolder.getEncoded()));
+            return (X509Certificate)
+                    certFact.generateCertificate(new ByteArrayInputStream(certHolder.getEncoded()));
         } catch (IOException e) {
-            throw new OpCertificateException("cannot get encoded form of certificate: " + e.getMessage(), e);
+            throw new OpCertificateException(
+                    "cannot get encoded form of certificate: " + e.getMessage(), e);
         } catch (NoSuchProviderException e2) {
-            throw new OpCertificateException("cannot find factory provider: " + e2.getMessage(), e2);
+            throw new OpCertificateException(
+                    "cannot find factory provider: " + e2.getMessage(), e2);
         }
     }
 
-    public PublicKey convertPublicKey(SubjectPublicKeyInfo publicKeyInfo) throws OperatorCreationException {
+    public PublicKey convertPublicKey(SubjectPublicKeyInfo publicKeyInfo)
+            throws OperatorCreationException {
         try {
-            KeyFactory keyFact = this.helper.createKeyFactory(publicKeyInfo.getAlgorithm().getAlgorithm().getId());
+            KeyFactory keyFact =
+                    this.helper.createKeyFactory(
+                            publicKeyInfo.getAlgorithm().getAlgorithm().getId());
             return keyFact.generatePublic(new X509EncodedKeySpec(publicKeyInfo.getEncoded()));
         } catch (IOException e) {
-            throw new OperatorCreationException("cannot get encoded form of key: " + e.getMessage(), e);
+            throw new OperatorCreationException(
+                    "cannot get encoded form of key: " + e.getMessage(), e);
         } catch (NoSuchAlgorithmException e2) {
-            throw new OperatorCreationException("cannot create key factory: " + e2.getMessage(), e2);
+            throw new OperatorCreationException(
+                    "cannot create key factory: " + e2.getMessage(), e2);
         } catch (NoSuchProviderException e3) {
-            throw new OperatorCreationException("cannot find factory provider: " + e3.getMessage(), e3);
+            throw new OperatorCreationException(
+                    "cannot find factory provider: " + e3.getMessage(), e3);
         } catch (InvalidKeySpecException e4) {
-            throw new OperatorCreationException("cannot create key factory: " + e4.getMessage(), e4);
+            throw new OperatorCreationException(
+                    "cannot create key factory: " + e4.getMessage(), e4);
         }
     }
 
@@ -356,7 +404,15 @@ class OperatorHelper {
             return false;
         }
         RSASSAPSSparams pssParams = RSASSAPSSparams.getInstance(seq);
-        if (!pssParams.getMaskGenAlgorithm().getAlgorithm().equals((ASN1Primitive) PKCSObjectIdentifiers.id_mgf1) || !pssParams.getHashAlgorithm().equals(AlgorithmIdentifier.getInstance(pssParams.getMaskGenAlgorithm().getParameters()))) {
+        if (!pssParams
+                        .getMaskGenAlgorithm()
+                        .getAlgorithm()
+                        .equals((ASN1Primitive) PKCSObjectIdentifiers.id_mgf1)
+                || !pssParams
+                        .getHashAlgorithm()
+                        .equals(
+                                AlgorithmIdentifier.getInstance(
+                                        pssParams.getMaskGenAlgorithm().getParameters()))) {
             return true;
         }
         MessageDigest digest = createDigest(pssParams.getHashAlgorithm());

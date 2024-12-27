@@ -1,6 +1,7 @@
 package android.view;
 
 import android.graphics.Rect;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -35,22 +36,24 @@ public class Gravity {
     public static final int VERTICAL_GRAVITY_MASK = 112;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface GravityFlags {
-    }
+    public @interface GravityFlags {}
 
     public static void apply(int gravity, int w, int h, Rect container, Rect outRect) {
         apply(gravity, w, h, container, 0, 0, outRect);
     }
 
-    public static void apply(int gravity, int w, int h, Rect container, Rect outRect, int layoutDirection) {
+    public static void apply(
+            int gravity, int w, int h, Rect container, Rect outRect, int layoutDirection) {
         int absGravity = getAbsoluteGravity(gravity, layoutDirection);
         apply(absGravity, w, h, container, 0, 0, outRect);
     }
 
-    public static void apply(int gravity, int w, int h, Rect container, int xAdj, int yAdj, Rect outRect) {
+    public static void apply(
+            int gravity, int w, int h, Rect container, int xAdj, int yAdj, Rect outRect) {
         switch (gravity & 6) {
             case 0:
-                outRect.left = container.left + (((container.right - container.left) - w) / 2) + xAdj;
+                outRect.left =
+                        container.left + (((container.right - container.left) - w) / 2) + xAdj;
                 outRect.right = outRect.left + w;
                 if ((gravity & 8) == 8) {
                     if (outRect.left < container.left) {
@@ -122,7 +125,15 @@ public class Gravity {
         }
     }
 
-    public static void apply(int gravity, int w, int h, Rect container, int xAdj, int yAdj, Rect outRect, int layoutDirection) {
+    public static void apply(
+            int gravity,
+            int w,
+            int h,
+            Rect container,
+            int xAdj,
+            int yAdj,
+            Rect outRect,
+            int layoutDirection) {
         int absGravity = getAbsoluteGravity(gravity, layoutDirection);
         apply(absGravity, w, h, container, xAdj, yAdj, outRect);
     }

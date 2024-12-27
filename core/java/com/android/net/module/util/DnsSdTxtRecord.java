@@ -2,26 +2,29 @@ package com.android.net.module.util;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
 /* loaded from: classes5.dex */
 public class DnsSdTxtRecord implements Parcelable {
-    public static final Parcelable.Creator<DnsSdTxtRecord> CREATOR = new Parcelable.Creator<DnsSdTxtRecord>() { // from class: com.android.net.module.util.DnsSdTxtRecord.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DnsSdTxtRecord createFromParcel(Parcel in) {
-            DnsSdTxtRecord info = new DnsSdTxtRecord();
-            in.readByteArray(info.mData);
-            return info;
-        }
+    public static final Parcelable.Creator<DnsSdTxtRecord> CREATOR =
+            new Parcelable.Creator<
+                    DnsSdTxtRecord>() { // from class: com.android.net.module.util.DnsSdTxtRecord.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DnsSdTxtRecord createFromParcel(Parcel in) {
+                    DnsSdTxtRecord info = new DnsSdTxtRecord();
+                    in.readByteArray(info.mData);
+                    return info;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DnsSdTxtRecord[] newArray(int size) {
-            return new DnsSdTxtRecord[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DnsSdTxtRecord[] newArray(int size) {
+                    return new DnsSdTxtRecord[size];
+                }
+            };
     private static final byte mSeparator = 61;
     private byte[] mData;
 
@@ -83,13 +86,19 @@ public class DnsSdTxtRecord implements Parcelable {
         int i = 0;
         while (avStart < this.mData.length) {
             int avLen = this.mData[avStart];
-            if (key.length() <= avLen && (key.length() == avLen || this.mData[key.length() + avStart + 1] == 61)) {
+            if (key.length() <= avLen
+                    && (key.length() == avLen || this.mData[key.length() + avStart + 1] == 61)) {
                 String s = new String(this.mData, avStart + 1, key.length());
                 if (key.compareToIgnoreCase(s) == 0) {
                     byte[] oldBytes = this.mData;
                     this.mData = new byte[(oldBytes.length - avLen) - 1];
                     System.arraycopy(oldBytes, 0, this.mData, 0, avStart);
-                    System.arraycopy(oldBytes, avStart + avLen + 1, this.mData, avStart, ((oldBytes.length - avStart) - avLen) - 1);
+                    System.arraycopy(
+                            oldBytes,
+                            avStart + avLen + 1,
+                            this.mData,
+                            avStart,
+                            ((oldBytes.length - avStart) - avLen) - 1);
                     return i;
                 }
             }

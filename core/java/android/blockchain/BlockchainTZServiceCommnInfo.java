@@ -3,24 +3,27 @@ package android.blockchain;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /* loaded from: classes.dex */
 public class BlockchainTZServiceCommnInfo implements Parcelable {
-    public static final Parcelable.Creator<BlockchainTZServiceCommnInfo> CREATOR = new Parcelable.Creator<BlockchainTZServiceCommnInfo>() { // from class: android.blockchain.BlockchainTZServiceCommnInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BlockchainTZServiceCommnInfo createFromParcel(Parcel in) {
-            return new BlockchainTZServiceCommnInfo(in);
-        }
+    public static final Parcelable.Creator<BlockchainTZServiceCommnInfo> CREATOR =
+            new Parcelable.Creator<BlockchainTZServiceCommnInfo>() { // from class:
+                // android.blockchain.BlockchainTZServiceCommnInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BlockchainTZServiceCommnInfo createFromParcel(Parcel in) {
+                    return new BlockchainTZServiceCommnInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BlockchainTZServiceCommnInfo[] newArray(int size) {
-            return new BlockchainTZServiceCommnInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BlockchainTZServiceCommnInfo[] newArray(int size) {
+                    return new BlockchainTZServiceCommnInfo[size];
+                }
+            };
     public int mServiceVersion;
     public Map<Integer, IBinder> mTAs;
 

@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
@@ -13,19 +14,22 @@ import java.util.Objects;
 /* loaded from: classes4.dex */
 public final class EuiccNotification implements Parcelable {
     public static final int ALL_EVENTS = 15;
-    public static final Parcelable.Creator<EuiccNotification> CREATOR = new Parcelable.Creator<EuiccNotification>() { // from class: android.telephony.euicc.EuiccNotification.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EuiccNotification createFromParcel(Parcel source) {
-            return new EuiccNotification(source);
-        }
+    public static final Parcelable.Creator<EuiccNotification> CREATOR =
+            new Parcelable.Creator<
+                    EuiccNotification>() { // from class:
+                                           // android.telephony.euicc.EuiccNotification.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EuiccNotification createFromParcel(Parcel source) {
+                    return new EuiccNotification(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public EuiccNotification[] newArray(int size) {
-            return new EuiccNotification[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public EuiccNotification[] newArray(int size) {
+                    return new EuiccNotification[size];
+                }
+            };
     public static final int EVENT_DELETE = 8;
     public static final int EVENT_DISABLE = 4;
     public static final int EVENT_ENABLE = 2;
@@ -36,8 +40,7 @@ public final class EuiccNotification implements Parcelable {
     private final String mTargetAddr;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Event {
-    }
+    public @interface Event {}
 
     public EuiccNotification(int seq, String targetAddr, int event, byte[] data) {
         this.mSeq = seq;
@@ -70,7 +73,10 @@ public final class EuiccNotification implements Parcelable {
             return false;
         }
         EuiccNotification that = (EuiccNotification) obj;
-        if (this.mSeq == that.mSeq && Objects.equals(this.mTargetAddr, that.mTargetAddr) && this.mEvent == that.mEvent && Arrays.equals(this.mData, that.mData)) {
+        if (this.mSeq == that.mSeq
+                && Objects.equals(this.mTargetAddr, that.mTargetAddr)
+                && this.mEvent == that.mEvent
+                && Arrays.equals(this.mData, that.mData)) {
             return true;
         }
         return false;
@@ -78,11 +84,22 @@ public final class EuiccNotification implements Parcelable {
 
     public int hashCode() {
         int result = (1 * 31) + this.mSeq;
-        return (((((result * 31) + Objects.hashCode(this.mTargetAddr)) * 31) + this.mEvent) * 31) + Arrays.hashCode(this.mData);
+        return (((((result * 31) + Objects.hashCode(this.mTargetAddr)) * 31) + this.mEvent) * 31)
+                + Arrays.hashCode(this.mData);
     }
 
     public String toString() {
-        return "EuiccNotification (seq=" + this.mSeq + ", targetAddr=" + this.mTargetAddr + ", event=" + this.mEvent + ", data=" + (this.mData == null ? "null" : "byte[" + this.mData.length + NavigationBarInflaterView.SIZE_MOD_END) + NavigationBarInflaterView.KEY_CODE_END;
+        return "EuiccNotification (seq="
+                + this.mSeq
+                + ", targetAddr="
+                + this.mTargetAddr
+                + ", event="
+                + this.mEvent
+                + ", data="
+                + (this.mData == null
+                        ? "null"
+                        : "byte[" + this.mData.length + NavigationBarInflaterView.SIZE_MOD_END)
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 
     @Override // android.os.Parcelable

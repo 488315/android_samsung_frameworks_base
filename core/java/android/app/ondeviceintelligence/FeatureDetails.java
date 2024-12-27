@@ -5,7 +5,9 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.PersistableBundle;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -17,19 +19,21 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes.dex */
 public final class FeatureDetails implements Parcelable {
-    public static final Parcelable.Creator<FeatureDetails> CREATOR = new Parcelable.Creator<FeatureDetails>() { // from class: android.app.ondeviceintelligence.FeatureDetails.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FeatureDetails[] newArray(int size) {
-            return new FeatureDetails[size];
-        }
+    public static final Parcelable.Creator<FeatureDetails> CREATOR =
+            new Parcelable.Creator<FeatureDetails>() { // from class:
+                // android.app.ondeviceintelligence.FeatureDetails.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FeatureDetails[] newArray(int size) {
+                    return new FeatureDetails[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FeatureDetails createFromParcel(Parcel in) {
-            return new FeatureDetails(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FeatureDetails createFromParcel(Parcel in) {
+                    return new FeatureDetails(in);
+                }
+            };
     public static final int FEATURE_STATUS_AVAILABLE = 3;
     public static final int FEATURE_STATUS_DOWNLOADABLE = 1;
     public static final int FEATURE_STATUS_DOWNLOADING = 2;
@@ -40,19 +44,21 @@ public final class FeatureDetails implements Parcelable {
 
     @Target({ElementType.TYPE_USE, ElementType.METHOD, ElementType.PARAMETER, ElementType.FIELD})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Status {
-    }
+    public @interface Status {}
 
     public FeatureDetails(int featureStatus, PersistableBundle featureDetailParams) {
         this.mFeatureStatus = featureStatus;
-        AnnotationValidations.validate((Class<? extends Annotation>) Status.class, (Annotation) null, this.mFeatureStatus);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) Status.class, (Annotation) null, this.mFeatureStatus);
         this.mFeatureDetailParams = featureDetailParams;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mFeatureDetailParams);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mFeatureDetailParams);
     }
 
     public FeatureDetails(int featureStatus) {
         this.mFeatureStatus = featureStatus;
-        AnnotationValidations.validate((Class<? extends Annotation>) Status.class, (Annotation) null, this.mFeatureStatus);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) Status.class, (Annotation) null, this.mFeatureStatus);
         this.mFeatureDetailParams = new PersistableBundle();
     }
 
@@ -65,7 +71,9 @@ public final class FeatureDetails implements Parcelable {
     }
 
     public String toString() {
-        return MessageFormat.format("FeatureDetails '{' status = {0}, persistableBundle = {1} '}'", Integer.valueOf(this.mFeatureStatus), this.mFeatureDetailParams);
+        return MessageFormat.format(
+                "FeatureDetails '{' status = {0}, persistableBundle = {1} '}'",
+                Integer.valueOf(this.mFeatureStatus), this.mFeatureDetailParams);
     }
 
     public boolean equals(Object o) {
@@ -76,7 +84,8 @@ public final class FeatureDetails implements Parcelable {
             return false;
         }
         FeatureDetails that = (FeatureDetails) o;
-        if (this.mFeatureStatus == that.mFeatureStatus && Objects.equals(this.mFeatureDetailParams, that.mFeatureDetailParams)) {
+        if (this.mFeatureStatus == that.mFeatureStatus
+                && Objects.equals(this.mFeatureDetailParams, that.mFeatureDetailParams)) {
             return true;
         }
         return false;
@@ -100,10 +109,13 @@ public final class FeatureDetails implements Parcelable {
 
     FeatureDetails(Parcel in) {
         int status = in.readInt();
-        PersistableBundle persistableBundle = (PersistableBundle) in.readTypedObject(PersistableBundle.CREATOR);
+        PersistableBundle persistableBundle =
+                (PersistableBundle) in.readTypedObject(PersistableBundle.CREATOR);
         this.mFeatureStatus = status;
-        AnnotationValidations.validate((Class<? extends Annotation>) Status.class, (Annotation) null, this.mFeatureStatus);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) Status.class, (Annotation) null, this.mFeatureStatus);
         this.mFeatureDetailParams = persistableBundle;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mFeatureDetailParams);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mFeatureDetailParams);
     }
 }

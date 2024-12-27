@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+
 import com.android.internal.widget.ViewPager;
 
 /* loaded from: classes5.dex */
@@ -25,7 +26,8 @@ public class ResolverViewPager extends ViewPager {
         this.mSwipingEnabled = true;
     }
 
-    public ResolverViewPager(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public ResolverViewPager(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.mSwipingEnabled = true;
     }
@@ -41,7 +43,8 @@ public class ResolverViewPager extends ViewPager {
         int maxHeight = 0;
         for (int i = 0; i < getChildCount(); i++) {
             View child = getChildAt(i);
-            child.measure(widthMeasureSpec2, View.MeasureSpec.makeMeasureSpec(height, Integer.MIN_VALUE));
+            child.measure(
+                    widthMeasureSpec2, View.MeasureSpec.makeMeasureSpec(height, Integer.MIN_VALUE));
             if (maxHeight < child.getMeasuredHeight()) {
                 maxHeight = child.getMeasuredHeight();
             }

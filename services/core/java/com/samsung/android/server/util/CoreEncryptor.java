@@ -3,10 +3,12 @@ package com.samsung.android.server.util;
 import android.content.Context;
 import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
 import android.security.keystore.KeyGenParameterSpec;
+
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.KeyStore;
 import java.util.concurrent.ConcurrentHashMap;
+
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -24,13 +26,22 @@ public final class CoreEncryptor {
         public static SecretKey m1233$$Nest$smgetKey(Context context) {
             KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
             keyStore.load(null);
-            String m$1 = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(context.getPackageName(), "_scspcipher_android_CoreEncryptorKey");
+            String m$1 =
+                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m$1(
+                            context.getPackageName(), "_scspcipher_android_CoreEncryptorKey");
             SecretKey secretKey = (SecretKey) keyStore.getKey(m$1, null);
             if (secretKey != null) {
                 return secretKey;
             }
             KeyGenerator keyGenerator = KeyGenerator.getInstance("AES", "AndroidKeyStore");
-            keyGenerator.init(new KeyGenParameterSpec.Builder(m$1, 3).setBlockModes("CBC").setEncryptionPaddings("PKCS7Padding").setDigests("SHA-256").setUserAuthenticationRequired(false).setKeySize(256).build());
+            keyGenerator.init(
+                    new KeyGenParameterSpec.Builder(m$1, 3)
+                            .setBlockModes("CBC")
+                            .setEncryptionPaddings("PKCS7Padding")
+                            .setDigests("SHA-256")
+                            .setUserAuthenticationRequired(false)
+                            .setKeySize(256)
+                            .build());
             return keyGenerator.generateKey();
         }
     }
@@ -46,7 +57,10 @@ public final class CoreEncryptor {
             int read = inputStream.read();
             byte[] bArr2 = new byte[read];
             inputStream.read(bArr2, 0, read);
-            cipher.init(2, KeyStoreHolder.m1233$$Nest$smgetKey(this.mContext), new IvParameterSpec(bArr2));
+            cipher.init(
+                    2,
+                    KeyStoreHolder.m1233$$Nest$smgetKey(this.mContext),
+                    new IvParameterSpec(bArr2));
             while (true) {
                 int read2 = inputStream.read(bArr);
                 if (read2 == -1) {

@@ -11,9 +11,12 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import com.android.internal.midi.MidiConstants;
+
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -23,7 +26,8 @@ import java.util.Objects;
 public interface IGnssDebug extends android.hardware.gnss.V1_0.IGnssDebug {
     public static final String kInterfaceName = "android.hardware.gnss@2.0::IGnssDebug";
 
-    @Override // android.hardware.gnss.V1_0.IGnssDebug, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+    @Override // android.hardware.gnss.V1_0.IGnssDebug, android.internal.hidl.base.V1_0.IBase,
+    // android.os.IHwInterface
     IHwBinder asBinder();
 
     @Override // android.hardware.gnss.V1_0.IGnssDebug, android.internal.hidl.base.V1_0.IBase
@@ -117,18 +121,25 @@ public interface IGnssDebug extends android.hardware.gnss.V1_0.IGnssDebug {
                 return false;
             }
             SatelliteData other = (SatelliteData) otherObject;
-            if (HidlSupport.deepEquals(this.v1_0, other.v1_0) && this.constellation == other.constellation) {
+            if (HidlSupport.deepEquals(this.v1_0, other.v1_0)
+                    && this.constellation == other.constellation) {
                 return true;
             }
             return false;
         }
 
         public final int hashCode() {
-            return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.v1_0)), Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.constellation))));
+            return Objects.hash(
+                    Integer.valueOf(HidlSupport.deepHashCode(this.v1_0)),
+                    Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.constellation))));
         }
 
         public final String toString() {
-            return "{.v1_0 = " + this.v1_0 + ", .constellation = " + GnssConstellationType.toString(this.constellation) + "}";
+            return "{.v1_0 = "
+                    + this.v1_0
+                    + ", .constellation = "
+                    + GnssConstellationType.toString(this.constellation)
+                    + "}";
         }
 
         public final void readFromParcel(HwParcel parcel) {
@@ -140,7 +151,8 @@ public interface IGnssDebug extends android.hardware.gnss.V1_0.IGnssDebug {
             ArrayList<SatelliteData> _hidl_vec = new ArrayList<>();
             HwBlob _hidl_blob = parcel.readBuffer(16L);
             int _hidl_vec_size = _hidl_blob.getInt32(8L);
-            HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 24, _hidl_blob.handle(), 0L, true);
+            HwBlob childBlob =
+                    parcel.readEmbeddedBuffer(_hidl_vec_size * 24, _hidl_blob.handle(), 0L, true);
             _hidl_vec.clear();
             for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                 SatelliteData _hidl_vec_element = new SatelliteData();
@@ -150,7 +162,8 @@ public interface IGnssDebug extends android.hardware.gnss.V1_0.IGnssDebug {
             return _hidl_vec;
         }
 
-        public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+        public final void readEmbeddedFromParcel(
+                HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
             this.v1_0.readEmbeddedFromParcel(parcel, _hidl_blob, 0 + _hidl_offset);
             this.constellation = _hidl_blob.getInt8(20 + _hidl_offset);
         }
@@ -161,7 +174,8 @@ public interface IGnssDebug extends android.hardware.gnss.V1_0.IGnssDebug {
             parcel.writeBuffer(_hidl_blob);
         }
 
-        public static final void writeVectorToParcel(HwParcel parcel, ArrayList<SatelliteData> _hidl_vec) {
+        public static final void writeVectorToParcel(
+                HwParcel parcel, ArrayList<SatelliteData> _hidl_vec) {
             HwBlob _hidl_blob = new HwBlob(16);
             int _hidl_vec_size = _hidl_vec.size();
             _hidl_blob.putInt32(8L, _hidl_vec_size);
@@ -193,18 +207,29 @@ public interface IGnssDebug extends android.hardware.gnss.V1_0.IGnssDebug {
                 return false;
             }
             DebugData other = (DebugData) otherObject;
-            if (HidlSupport.deepEquals(this.position, other.position) && HidlSupport.deepEquals(this.time, other.time) && HidlSupport.deepEquals(this.satelliteDataArray, other.satelliteDataArray)) {
+            if (HidlSupport.deepEquals(this.position, other.position)
+                    && HidlSupport.deepEquals(this.time, other.time)
+                    && HidlSupport.deepEquals(this.satelliteDataArray, other.satelliteDataArray)) {
                 return true;
             }
             return false;
         }
 
         public final int hashCode() {
-            return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.position)), Integer.valueOf(HidlSupport.deepHashCode(this.time)), Integer.valueOf(HidlSupport.deepHashCode(this.satelliteDataArray)));
+            return Objects.hash(
+                    Integer.valueOf(HidlSupport.deepHashCode(this.position)),
+                    Integer.valueOf(HidlSupport.deepHashCode(this.time)),
+                    Integer.valueOf(HidlSupport.deepHashCode(this.satelliteDataArray)));
         }
 
         public final String toString() {
-            return "{.position = " + this.position + ", .time = " + this.time + ", .satelliteDataArray = " + this.satelliteDataArray + "}";
+            return "{.position = "
+                    + this.position
+                    + ", .time = "
+                    + this.time
+                    + ", .satelliteDataArray = "
+                    + this.satelliteDataArray
+                    + "}";
         }
 
         public final void readFromParcel(HwParcel parcel) {
@@ -216,7 +241,8 @@ public interface IGnssDebug extends android.hardware.gnss.V1_0.IGnssDebug {
             ArrayList<DebugData> _hidl_vec = new ArrayList<>();
             HwBlob _hidl_blob = parcel.readBuffer(16L);
             int _hidl_vec_size = _hidl_blob.getInt32(8L);
-            HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 112, _hidl_blob.handle(), 0L, true);
+            HwBlob childBlob =
+                    parcel.readEmbeddedBuffer(_hidl_vec_size * 112, _hidl_blob.handle(), 0L, true);
             _hidl_vec.clear();
             for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                 DebugData _hidl_vec_element = new DebugData();
@@ -226,11 +252,14 @@ public interface IGnssDebug extends android.hardware.gnss.V1_0.IGnssDebug {
             return _hidl_vec;
         }
 
-        public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+        public final void readEmbeddedFromParcel(
+                HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
             this.position.readEmbeddedFromParcel(parcel, _hidl_blob, _hidl_offset + 0);
             this.time.readEmbeddedFromParcel(parcel, _hidl_blob, _hidl_offset + 80);
             int _hidl_vec_size = _hidl_blob.getInt32(_hidl_offset + 96 + 8);
-            HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 24, _hidl_blob.handle(), _hidl_offset + 96 + 0, true);
+            HwBlob childBlob =
+                    parcel.readEmbeddedBuffer(
+                            _hidl_vec_size * 24, _hidl_blob.handle(), _hidl_offset + 96 + 0, true);
             this.satelliteDataArray.clear();
             for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                 SatelliteData _hidl_vec_element = new SatelliteData();
@@ -245,7 +274,8 @@ public interface IGnssDebug extends android.hardware.gnss.V1_0.IGnssDebug {
             parcel.writeBuffer(_hidl_blob);
         }
 
-        public static final void writeVectorToParcel(HwParcel parcel, ArrayList<DebugData> _hidl_vec) {
+        public static final void writeVectorToParcel(
+                HwParcel parcel, ArrayList<DebugData> _hidl_vec) {
             HwBlob _hidl_blob = new HwBlob(16);
             int _hidl_vec_size = _hidl_vec.size();
             _hidl_blob.putInt32(8L, _hidl_vec_size);
@@ -266,7 +296,9 @@ public interface IGnssDebug extends android.hardware.gnss.V1_0.IGnssDebug {
             _hidl_blob.putBool(_hidl_offset + 96 + 12, false);
             HwBlob childBlob = new HwBlob(_hidl_vec_size * 24);
             for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
-                this.satelliteDataArray.get(_hidl_index_0).writeEmbeddedToBlob(childBlob, _hidl_index_0 * 24);
+                this.satelliteDataArray
+                        .get(_hidl_index_0)
+                        .writeEmbeddedToBlob(childBlob, _hidl_index_0 * 24);
             }
             _hidl_blob.putBlob(96 + _hidl_offset + 0, childBlob);
         }
@@ -279,7 +311,8 @@ public interface IGnssDebug extends android.hardware.gnss.V1_0.IGnssDebug {
             this.mRemote = (IHwBinder) Objects.requireNonNull(remote);
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug,
+        // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
         public IHwBinder asBinder() {
             return this.mRemote;
         }
@@ -334,7 +367,8 @@ public interface IGnssDebug extends android.hardware.gnss.V1_0.IGnssDebug {
             }
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug,
+        // android.internal.hidl.base.V1_0.IBase
         public ArrayList<String> interfaceChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -350,7 +384,8 @@ public interface IGnssDebug extends android.hardware.gnss.V1_0.IGnssDebug {
             }
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug,
+        // android.internal.hidl.base.V1_0.IBase
         public void debug(NativeHandle fd, ArrayList<String> options) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -366,7 +401,8 @@ public interface IGnssDebug extends android.hardware.gnss.V1_0.IGnssDebug {
             }
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug,
+        // android.internal.hidl.base.V1_0.IBase
         public String interfaceDescriptor() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -382,7 +418,8 @@ public interface IGnssDebug extends android.hardware.gnss.V1_0.IGnssDebug {
             }
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug,
+        // android.internal.hidl.base.V1_0.IBase
         public ArrayList<byte[]> getHashChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -394,7 +431,9 @@ public interface IGnssDebug extends android.hardware.gnss.V1_0.IGnssDebug {
                 ArrayList<byte[]> _hidl_out_hashchain = new ArrayList<>();
                 HwBlob _hidl_blob = _hidl_reply.readBuffer(16L);
                 int _hidl_vec_size = _hidl_blob.getInt32(8L);
-                HwBlob childBlob = _hidl_reply.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
+                HwBlob childBlob =
+                        _hidl_reply.readEmbeddedBuffer(
+                                _hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
                 _hidl_out_hashchain.clear();
                 for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                     byte[] _hidl_vec_element = new byte[32];
@@ -408,7 +447,8 @@ public interface IGnssDebug extends android.hardware.gnss.V1_0.IGnssDebug {
             }
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug,
+        // android.internal.hidl.base.V1_0.IBase
         public void setHALInstrumentation() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -421,12 +461,15 @@ public interface IGnssDebug extends android.hardware.gnss.V1_0.IGnssDebug {
             }
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug, android.internal.hidl.base.V1_0.IBase
-        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) throws RemoteException {
+        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug,
+        // android.internal.hidl.base.V1_0.IBase
+        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie)
+                throws RemoteException {
             return this.mRemote.linkToDeath(recipient, cookie);
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug,
+        // android.internal.hidl.base.V1_0.IBase
         public void ping() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -440,7 +483,8 @@ public interface IGnssDebug extends android.hardware.gnss.V1_0.IGnssDebug {
             }
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug,
+        // android.internal.hidl.base.V1_0.IBase
         public DebugInfo getDebugInfo() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -457,7 +501,8 @@ public interface IGnssDebug extends android.hardware.gnss.V1_0.IGnssDebug {
             }
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug,
+        // android.internal.hidl.base.V1_0.IBase
         public void notifySyspropsChanged() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -470,51 +515,165 @@ public interface IGnssDebug extends android.hardware.gnss.V1_0.IGnssDebug {
             }
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug,
+        // android.internal.hidl.base.V1_0.IBase
         public boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) throws RemoteException {
             return this.mRemote.unlinkToDeath(recipient);
         }
     }
 
-    public static abstract class Stub extends HwBinder implements IGnssDebug {
-        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+    public abstract static class Stub extends HwBinder implements IGnssDebug {
+        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug,
+        // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
         public IHwBinder asBinder() {
             return this;
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug,
+        // android.internal.hidl.base.V1_0.IBase
         public final ArrayList<String> interfaceChain() {
-            return new ArrayList<>(Arrays.asList(IGnssDebug.kInterfaceName, android.hardware.gnss.V1_0.IGnssDebug.kInterfaceName, IBase.kInterfaceName));
+            return new ArrayList<>(
+                    Arrays.asList(
+                            IGnssDebug.kInterfaceName,
+                            android.hardware.gnss.V1_0.IGnssDebug.kInterfaceName,
+                            IBase.kInterfaceName));
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug, android.internal.hidl.base.V1_0.IBase
-        public void debug(NativeHandle fd, ArrayList<String> options) {
-        }
+        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug,
+        // android.internal.hidl.base.V1_0.IBase
+        public void debug(NativeHandle fd, ArrayList<String> options) {}
 
-        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug,
+        // android.internal.hidl.base.V1_0.IBase
         public final String interfaceDescriptor() {
             return IGnssDebug.kInterfaceName;
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug,
+        // android.internal.hidl.base.V1_0.IBase
         public final ArrayList<byte[]> getHashChain() {
-            return new ArrayList<>(Arrays.asList(new byte[]{-74, SprAttributeBase.TYPE_SHADOW, -70, -30, -85, -123, 23, 51, 98, MidiConstants.STATUS_NOTE_ON, 83, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT70, 54, 69, 2, -76, -37, -111, 32, 52, 13, 117, 71, 76, -52, -124, 66, -79, -79, 93, 106, -73}, new byte[]{69, 66, 18, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33, -106, -5, MidiConstants.STATUS_SONG_POSITION, 113, 1, -53, -126, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEIN, -70, -5, 118, -25, -56, MidiConstants.STATUS_CHANNEL_PRESSURE, 50, -39, 119, -35, 16, 88, -19, -40, -27, -120, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN, -91, 117, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT80}, new byte[]{-20, Byte.MAX_VALUE, -41, -98, MidiConstants.STATUS_CHANNEL_PRESSURE, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60, -6, -123, -68, 73, -108, 38, -83, -82, 62, -66, 35, -17, 5, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, MidiConstants.STATUS_SONG_SELECT, -51, 105, 87, 19, -109, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, -72, 59, 24, -54, 76}));
+            return new ArrayList<>(
+                    Arrays.asList(
+                            new byte[] {
+                                -74,
+                                SprAttributeBase.TYPE_SHADOW,
+                                -70,
+                                -30,
+                                -85,
+                                -123,
+                                23,
+                                51,
+                                98,
+                                MidiConstants.STATUS_NOTE_ON,
+                                83,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT70,
+                                54,
+                                69,
+                                2,
+                                -76,
+                                -37,
+                                -111,
+                                32,
+                                52,
+                                13,
+                                117,
+                                71,
+                                76,
+                                -52,
+                                -124,
+                                66,
+                                -79,
+                                -79,
+                                93,
+                                106,
+                                -73
+                            },
+                            new byte[] {
+                                69,
+                                66,
+                                18,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33,
+                                -106,
+                                -5,
+                                MidiConstants.STATUS_SONG_POSITION,
+                                113,
+                                1,
+                                -53,
+                                -126,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEIN,
+                                -70,
+                                -5,
+                                118,
+                                -25,
+                                -56,
+                                MidiConstants.STATUS_CHANNEL_PRESSURE,
+                                50,
+                                -39,
+                                119,
+                                -35,
+                                16,
+                                88,
+                                -19,
+                                -40,
+                                -27,
+                                -120,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN,
+                                -91,
+                                117,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT80
+                            },
+                            new byte[] {
+                                -20,
+                                Byte.MAX_VALUE,
+                                -41,
+                                -98,
+                                MidiConstants.STATUS_CHANNEL_PRESSURE,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60,
+                                -6,
+                                -123,
+                                -68,
+                                73,
+                                -108,
+                                38,
+                                -83,
+                                -82,
+                                62,
+                                -66,
+                                35,
+                                -17,
+                                5,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                MidiConstants.STATUS_SONG_SELECT,
+                                -51,
+                                105,
+                                87,
+                                19,
+                                -109,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                -72,
+                                59,
+                                24,
+                                -54,
+                                76
+                            }));
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug, android.internal.hidl.base.V1_0.IBase
-        public final void setHALInstrumentation() {
-        }
+        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug,
+        // android.internal.hidl.base.V1_0.IBase
+        public final void setHALInstrumentation() {}
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) {
             return true;
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug, android.internal.hidl.base.V1_0.IBase
-        public final void ping() {
-        }
+        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug,
+        // android.internal.hidl.base.V1_0.IBase
+        public final void ping() {}
 
-        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug,
+        // android.internal.hidl.base.V1_0.IBase
         public final DebugInfo getDebugInfo() {
             DebugInfo info = new DebugInfo();
             info.pid = HidlSupport.getPidIfSharable();
@@ -523,12 +682,14 @@ public interface IGnssDebug extends android.hardware.gnss.V1_0.IGnssDebug {
             return info;
         }
 
-        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.V2_0.IGnssDebug, android.hardware.gnss.V1_0.IGnssDebug,
+        // android.internal.hidl.base.V1_0.IBase
         public final void notifySyspropsChanged() {
             HwBinder.enableInstrumentation();
         }
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) {
             return true;
         }
@@ -550,10 +711,13 @@ public interface IGnssDebug extends android.hardware.gnss.V1_0.IGnssDebug {
         }
 
         @Override // android.os.HwBinder
-        public void onTransact(int _hidl_code, HwParcel _hidl_request, HwParcel _hidl_reply, int _hidl_flags) throws RemoteException {
+        public void onTransact(
+                int _hidl_code, HwParcel _hidl_request, HwParcel _hidl_reply, int _hidl_flags)
+                throws RemoteException {
             switch (_hidl_code) {
                 case 1:
-                    _hidl_request.enforceInterface(android.hardware.gnss.V1_0.IGnssDebug.kInterfaceName);
+                    _hidl_request.enforceInterface(
+                            android.hardware.gnss.V1_0.IGnssDebug.kInterfaceName);
                     IGnssDebug.DebugData _hidl_out_debugData = getDebugData();
                     _hidl_reply.writeStatus(0);
                     _hidl_out_debugData.writeToParcel(_hidl_reply);
@@ -601,7 +765,8 @@ public interface IGnssDebug extends android.hardware.gnss.V1_0.IGnssDebug {
                         long _hidl_array_offset_1 = _hidl_index_0 * 32;
                         byte[] _hidl_array_item_1 = _hidl_out_hashchain.get(_hidl_index_0);
                         if (_hidl_array_item_1 == null || _hidl_array_item_1.length != 32) {
-                            throw new IllegalArgumentException("Array element is not of the expected length");
+                            throw new IllegalArgumentException(
+                                    "Array element is not of the expected length");
                         }
                         childBlob.putInt8Array(_hidl_array_offset_1, _hidl_array_item_1);
                     }

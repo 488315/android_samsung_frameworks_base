@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+
 import com.android.internal.R;
 
 /* loaded from: classes5.dex */
@@ -67,11 +68,14 @@ public class ActionBarPolicy {
     }
 
     public int getTabContainerHeight() {
-        TypedArray a = this.mContext.obtainStyledAttributes(null, R.styleable.ActionBar, 16843470, 0);
+        TypedArray a =
+                this.mContext.obtainStyledAttributes(null, R.styleable.ActionBar, 16843470, 0);
         int height = a.getLayoutDimension(4, 0);
         Resources r = this.mContext.getResources();
         if (!hasEmbeddedTabs()) {
-            height = Math.min(height, r.getDimensionPixelSize(R.dimen.action_bar_stacked_max_height));
+            height =
+                    Math.min(
+                            height, r.getDimensionPixelSize(R.dimen.action_bar_stacked_max_height));
         }
         a.recycle();
         return height;
@@ -82,6 +86,8 @@ public class ActionBarPolicy {
     }
 
     public int getStackedTabMaxWidth() {
-        return this.mContext.getResources().getDimensionPixelSize(R.dimen.action_bar_stacked_tab_max_width);
+        return this.mContext
+                .getResources()
+                .getDimensionPixelSize(R.dimen.action_bar_stacked_tab_max_width);
     }
 }

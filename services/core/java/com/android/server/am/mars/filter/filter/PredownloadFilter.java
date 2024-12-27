@@ -5,8 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.SystemProperties;
 import android.util.Slog;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.am.mars.filter.IFilter;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -25,12 +27,13 @@ public final class PredownloadFilter implements IFilter {
     public final class PredownloadRequestReceiver extends BroadcastReceiver {
         public boolean registered = false;
 
-        public PredownloadRequestReceiver() {
-        }
+        public PredownloadRequestReceiver() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
-            if (intent == null || intent.getAction() == null || !"com.samsung.action_exempt_for_pre_download".equals(intent.getAction())) {
+            if (intent == null
+                    || intent.getAction() == null
+                    || !"com.samsung.action_exempt_for_pre_download".equals(intent.getAction())) {
                 return;
             }
             int intExtra = intent.getIntExtra("uid", -1);
@@ -41,7 +44,14 @@ public final class PredownloadFilter implements IFilter {
             }
             PredownloadFilter predownloadFilter = PredownloadFilter.this;
             predownloadFilter.getClass();
-            Slog.d("MARs:PredownloadFilter", "PreDownload temp exempt: u=" + intExtra + ", pkg=" + stringExtra + ", exempt=" + booleanExtra);
+            Slog.d(
+                    "MARs:PredownloadFilter",
+                    "PreDownload temp exempt: u="
+                            + intExtra
+                            + ", pkg="
+                            + stringExtra
+                            + ", exempt="
+                            + booleanExtra);
             TargetPackageTuple targetPackageTuple = new TargetPackageTuple(intExtra, stringExtra);
             if (!booleanExtra) {
                 predownloadFilter.mTempAllowlist.remove(targetPackageTuple);
@@ -71,7 +81,10 @@ public final class PredownloadFilter implements IFilter {
             }
             TargetPackageTuple targetPackageTuple = (TargetPackageTuple) obj;
             String str2 = this.pkgName;
-            return str2 != null && (str = targetPackageTuple.pkgName) != null && this.uid == targetPackageTuple.uid && str2.equals(str);
+            return str2 != null
+                    && (str = targetPackageTuple.pkgName) != null
+                    && this.uid == targetPackageTuple.uid
+                    && str2.equals(str);
         }
 
         public final int hashCode() {
@@ -107,7 +120,11 @@ public final class PredownloadFilter implements IFilter {
         }
         PredownloadRequestReceiver predownloadRequestReceiver = this.mReceiver;
         if (!predownloadRequestReceiver.registered) {
-            PredownloadFilter.this.mContext.registerReceiver(predownloadRequestReceiver, BatteryService$$ExternalSyntheticOutline0.m("com.samsung.action_exempt_for_pre_download"), 2);
+            PredownloadFilter.this.mContext.registerReceiver(
+                    predownloadRequestReceiver,
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            "com.samsung.action_exempt_for_pre_download"),
+                    2);
             predownloadRequestReceiver.registered = true;
         }
         SystemProperties.set("sys.config.mars.predl_filter.enabled", "1");

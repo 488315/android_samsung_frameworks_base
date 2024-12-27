@@ -3,7 +3,9 @@ package android.content.res.loader;
 import android.content.res.ApkAssets;
 import android.util.ArrayMap;
 import android.util.ArraySet;
+
 import com.android.internal.util.ArrayUtils;
+
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,28 +26,38 @@ public class ResourcesLoader {
     public List<ResourcesProvider> getProviders() {
         List<ResourcesProvider> emptyList;
         synchronized (this.mLock) {
-            emptyList = this.mProviders == null ? Collections.emptyList() : Arrays.asList(this.mProviders);
+            emptyList =
+                    this.mProviders == null
+                            ? Collections.emptyList()
+                            : Arrays.asList(this.mProviders);
         }
         return emptyList;
     }
 
     public void addProvider(ResourcesProvider resourcesProvider) {
         synchronized (this.mLock) {
-            this.mProviders = (ResourcesProvider[]) ArrayUtils.appendElement(ResourcesProvider.class, this.mProviders, resourcesProvider);
+            this.mProviders =
+                    (ResourcesProvider[])
+                            ArrayUtils.appendElement(
+                                    ResourcesProvider.class, this.mProviders, resourcesProvider);
             notifyProvidersChangedLocked();
         }
     }
 
     public void removeProvider(ResourcesProvider resourcesProvider) {
         synchronized (this.mLock) {
-            this.mProviders = (ResourcesProvider[]) ArrayUtils.removeElement(ResourcesProvider.class, this.mProviders, resourcesProvider);
+            this.mProviders =
+                    (ResourcesProvider[])
+                            ArrayUtils.removeElement(
+                                    ResourcesProvider.class, this.mProviders, resourcesProvider);
             notifyProvidersChangedLocked();
         }
     }
 
     public void setProviders(List<ResourcesProvider> resourcesProviders) {
         synchronized (this.mLock) {
-            this.mProviders = (ResourcesProvider[]) resourcesProviders.toArray(new ResourcesProvider[0]);
+            this.mProviders =
+                    (ResourcesProvider[]) resourcesProviders.toArray(new ResourcesProvider[0]);
             notifyProvidersChangedLocked();
         }
     }

@@ -20,7 +20,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.android.internal.R;
+
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +91,9 @@ public class LocalePicker extends ListFragment {
             }
         }
         int localeCount = result.size();
-        return localeCount == allLocales.length ? allLocales : (String[]) result.toArray(new String[localeCount]);
+        return localeCount == allLocales.length
+                ? allLocales
+                : (String[]) result.toArray(new String[localeCount]);
     }
 
     public static String[] getSpecificCustomerSupportedLocales(Context context) {
@@ -106,14 +110,20 @@ public class LocalePicker extends ListFragment {
 
     private static Predicate<String> getLocaleFilter() {
         try {
-            return (Predicate) LocalizationProperties.locale_filter().map(new Function() { // from class: com.android.internal.app.LocalePicker$$ExternalSyntheticLambda0
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    Predicate asPredicate;
-                    asPredicate = Pattern.compile((String) obj).asPredicate();
-                    return asPredicate;
-                }
-            }).orElse(null);
+            return (Predicate)
+                    LocalizationProperties.locale_filter()
+                            .map(
+                                    new Function() { // from class:
+                                                     // com.android.internal.app.LocalePicker$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.Function
+                                        public final Object apply(Object obj) {
+                                            Predicate asPredicate;
+                                            asPredicate =
+                                                    Pattern.compile((String) obj).asPredicate();
+                                            return asPredicate;
+                                        }
+                                    })
+                            .orElse(null);
         } catch (SecurityException e) {
             Log.e(TAG, "Failed to read locale filter.", e);
             return null;
@@ -131,11 +141,20 @@ public class LocalePicker extends ListFragment {
         return constructAdapter(context, R.layout.locale_picker_item, R.id.locale);
     }
 
-    public static ArrayAdapter<LocaleInfo> constructAdapter(Context context, final int layoutId, final int fieldId) {
-        boolean isInDeveloperMode = Settings.Global.getInt(context.getContentResolver(), "development_settings_enabled", 0) != 0;
+    public static ArrayAdapter<LocaleInfo> constructAdapter(
+            Context context, final int layoutId, final int fieldId) {
+        boolean isInDeveloperMode =
+                Settings.Global.getInt(
+                                context.getContentResolver(), "development_settings_enabled", 0)
+                        != 0;
         List<LocaleInfo> localeInfos = getAllAssetLocales(context, isInDeveloperMode);
-        final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        return new ArrayAdapter<LocaleInfo>(context, layoutId, fieldId, localeInfos) { // from class: com.android.internal.app.LocalePicker.1
+        final LayoutInflater inflater =
+                (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        return new ArrayAdapter<LocaleInfo>(
+                context,
+                layoutId,
+                fieldId,
+                localeInfos) { // from class: com.android.internal.app.LocalePicker.1
             @Override // android.widget.ArrayAdapter, android.widget.Adapter
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view;
@@ -163,7 +182,8 @@ public class LocalePicker extends ListFragment {
         return Character.toUpperCase(s.charAt(0)) + s.substring(1);
     }
 
-    private static String getDisplayName(Locale l, String[] specialLocaleCodes, String[] specialLocaleNames) {
+    private static String getDisplayName(
+            Locale l, String[] specialLocaleCodes, String[] specialLocaleNames) {
         String code = l.toString();
         for (int i = 0; i < specialLocaleCodes.length; i++) {
             if (specialLocaleCodes[i].equals(code)) {
@@ -211,7 +231,8 @@ public class LocalePicker extends ListFragment {
             Configuration config = new Configuration();
             config.setLocales(locales);
             config.userSetLocale = true;
-            am.updatePersistentConfigurationAndLocaleOverlays(config, ActivityThread.currentOpPackageName(), null, locales);
+            am.updatePersistentConfigurationAndLocaleOverlays(
+                    config, ActivityThread.currentOpPackageName(), null, locales);
             BackupManager.dataChanged("com.android.providers.settings");
         } catch (RemoteException e) {
         }
@@ -231,7 +252,9 @@ public class LocalePicker extends ListFragment {
             }
         }
         int i2 = filteredLocales.size();
-        return localeCount == i2 ? locales : new LocaleList((Locale[]) filteredLocales.toArray(new Locale[0]));
+        return localeCount == i2
+                ? locales
+                : new LocaleList((Locale[]) filteredLocales.toArray(new Locale[0]));
     }
 
     public static LocaleList getLocales() {

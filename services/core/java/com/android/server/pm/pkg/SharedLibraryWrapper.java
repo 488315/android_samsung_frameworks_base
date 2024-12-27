@@ -2,6 +2,7 @@ package com.android.server.pm.pkg;
 
 import android.content.pm.SharedLibraryInfo;
 import android.content.pm.VersionedPackage;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -35,7 +36,8 @@ public final class SharedLibraryWrapper implements SharedLibrary {
             } else {
                 ArrayList arrayList = new ArrayList();
                 for (int i = 0; i < dependencies.size(); i++) {
-                    arrayList.add(new SharedLibraryWrapper((SharedLibraryInfo) dependencies.get(i)));
+                    arrayList.add(
+                            new SharedLibraryWrapper((SharedLibraryInfo) dependencies.get(i)));
                 }
                 this.cachedDependenciesList = Collections.unmodifiableList(arrayList);
             }

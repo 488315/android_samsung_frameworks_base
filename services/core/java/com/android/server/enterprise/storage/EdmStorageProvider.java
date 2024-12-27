@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +40,8 @@ public class EdmStorageProvider extends EdmStorageProviderBase {
 
     public final byte[] getBlob(int i, String str, String str2) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put("adminUid", Long.valueOf(EdmStorageProviderBase.translateToAdminLUID(i, 0)));
+        contentValues.put(
+                "adminUid", Long.valueOf(EdmStorageProviderBase.translateToAdminLUID(i, 0)));
         return getBlob(contentValues, str, str2);
     }
 
@@ -58,7 +60,9 @@ public class EdmStorageProvider extends EdmStorageProviderBase {
                     i = rawQuery.getInt(0);
                     Log.d("EdmStorageProvider", "getCount(" + str + ") - " + i);
                 } catch (SQLException e) {
-                    Log.e("EdmStorageProvider", "Exception occurred accessing Enterprise db " + e.getMessage());
+                    Log.e(
+                            "EdmStorageProvider",
+                            "Exception occurred accessing Enterprise db " + e.getMessage());
                 }
             } finally {
                 rawQuery.close();
@@ -67,7 +71,8 @@ public class EdmStorageProvider extends EdmStorageProviderBase {
         return i;
     }
 
-    public final ArrayList getDataByFields(String str, String[] strArr, String[] strArr2, String[] strArr3) {
+    public final ArrayList getDataByFields(
+            String str, String[] strArr, String[] strArr2, String[] strArr3) {
         ContentValues contentValues;
         if (strArr == null || strArr.length <= 0 || strArr2 == null || strArr2.length <= 0) {
             contentValues = null;
@@ -80,9 +85,11 @@ public class EdmStorageProvider extends EdmStorageProviderBase {
         return new ArrayList(getValues(str, strArr3, contentValues));
     }
 
-    public final int getIntByAdminAndField(int i, String str, String str2, String str3, String str4) {
+    public final int getIntByAdminAndField(
+            int i, String str, String str2, String str3, String str4) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put("adminUid", Long.valueOf(EdmStorageProviderBase.translateToAdminLUID(i, 0)));
+        contentValues.put(
+                "adminUid", Long.valueOf(EdmStorageProviderBase.translateToAdminLUID(i, 0)));
         contentValues.put(str2, str3);
         return getInt(contentValues, str, str4);
     }
@@ -95,7 +102,7 @@ public class EdmStorageProvider extends EdmStorageProviderBase {
     }
 
     public final ContentValues getValue(ContentValues contentValues, String str, String str2) {
-        ArrayList arrayList = (ArrayList) getValues(str, new String[]{str2}, contentValues);
+        ArrayList arrayList = (ArrayList) getValues(str, new String[] {str2}, contentValues);
         if (arrayList.isEmpty()) {
             return null;
         }
@@ -115,7 +122,8 @@ public class EdmStorageProvider extends EdmStorageProviderBase {
         Log.d("EdmStorageProvider", "insertConfiguration was failed");
     }
 
-    public final boolean putDataByFields(String str, String[] strArr, String[] strArr2, ContentValues contentValues) {
+    public final boolean putDataByFields(
+            String str, String[] strArr, String[] strArr2, ContentValues contentValues) {
         ContentValues contentValues2;
         if (strArr == null || strArr.length <= 0 || strArr2 == null || strArr2.length <= 0) {
             contentValues2 = null;
@@ -125,7 +133,9 @@ public class EdmStorageProvider extends EdmStorageProviderBase {
                 contentValues2.put(strArr[i], strArr2[i]);
             }
         }
-        return contentValues2 == null ? insert(str, contentValues) != -1 : put(str, contentValues, contentValues2);
+        return contentValues2 == null
+                ? insert(str, contentValues) != -1
+                : put(str, contentValues, contentValues2);
     }
 
     public final boolean putLong(int i, String str, long j, String str2) {
@@ -146,15 +156,19 @@ public class EdmStorageProvider extends EdmStorageProviderBase {
         return super.update(str, contentValues, null) > 0 || insert(str, contentValues) != -1;
     }
 
-    public final boolean putValues(String str, ContentValues contentValues, ContentValues contentValues2) {
+    public final boolean putValues(
+            String str, ContentValues contentValues, ContentValues contentValues2) {
         EdmStorageProviderBase.convertAdminIdToLUID(contentValues);
         EdmStorageProviderBase.convertAdminIdToLUID(contentValues2);
-        return (contentValues2.size() > 0 && super.update(str, contentValues, contentValues2) > 0) || insert(str, contentValues) != -1;
+        return (contentValues2.size() > 0 && super.update(str, contentValues, contentValues2) > 0)
+                || insert(str, contentValues) != -1;
     }
 
-    public final boolean putValuesForAdminAndField(int i, ContentValues contentValues, String str, String str2, String str3) {
+    public final boolean putValuesForAdminAndField(
+            int i, ContentValues contentValues, String str, String str2, String str3) {
         ContentValues contentValues2 = new ContentValues();
-        contentValues2.put("adminUid", Long.valueOf(EdmStorageProviderBase.translateToAdminLUID(i, 0)));
+        contentValues2.put(
+                "adminUid", Long.valueOf(EdmStorageProviderBase.translateToAdminLUID(i, 0)));
         contentValues2.put(str2, str3);
         EdmStorageProviderBase.convertAdminIdToLUID(contentValues);
         return put(str, contentValues, contentValues2);
@@ -167,14 +181,16 @@ public class EdmStorageProvider extends EdmStorageProviderBase {
 
     public final boolean removeByAdminAndField(int i, String str, String str2, String str3) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put("adminUid", Long.valueOf(EdmStorageProviderBase.translateToAdminLUID(i, 0)));
+        contentValues.put(
+                "adminUid", Long.valueOf(EdmStorageProviderBase.translateToAdminLUID(i, 0)));
         contentValues.put(str2, str3);
         return delete(str, contentValues) > 0;
     }
 
     public final boolean updateBlob(int i, String str, byte[] bArr) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put("adminUid", Long.valueOf(EdmStorageProviderBase.translateToAdminLUID(i, 0)));
+        contentValues.put(
+                "adminUid", Long.valueOf(EdmStorageProviderBase.translateToAdminLUID(i, 0)));
         ContentValues contentValues2 = new ContentValues();
         contentValues2.put(str, bArr);
         return put("KNOX_CUSTOM", contentValues2, contentValues);

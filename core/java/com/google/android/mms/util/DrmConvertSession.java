@@ -5,6 +5,7 @@ import android.drm.DrmConvertedStatus;
 import android.drm.DrmManagerClient;
 import android.media.MediaMetrics;
 import android.util.Log;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -72,13 +73,19 @@ public class DrmConvertSession {
                 } else {
                     convertedStatus = this.mDrmClient.convertData(this.mConvertSessionId, inBuffer);
                 }
-                if (convertedStatus == null || convertedStatus.statusCode != 1 || convertedStatus.convertedData == null) {
+                if (convertedStatus == null
+                        || convertedStatus.statusCode != 1
+                        || convertedStatus.convertedData == null) {
                     return null;
                 }
                 byte[] result = convertedStatus.convertedData;
                 return result;
             } catch (IllegalArgumentException e) {
-                Log.w(TAG, "Buffer with data to convert is illegal. Convertsession: " + this.mConvertSessionId, e);
+                Log.w(
+                        TAG,
+                        "Buffer with data to convert is illegal. Convertsession: "
+                                + this.mConvertSessionId,
+                        e);
                 return null;
             } catch (IllegalStateException e2) {
                 Log.w(TAG, "Could not convert data. Convertsession: " + this.mConvertSessionId, e2);
@@ -96,8 +103,11 @@ public class DrmConvertSession {
             return 491;
         }
         try {
-            DrmConvertedStatus convertedStatus = this.mDrmClient.closeConvertSession(this.mConvertSessionId);
-            if (convertedStatus == null || convertedStatus.statusCode != 1 || convertedStatus.convertedData == null) {
+            DrmConvertedStatus convertedStatus =
+                    this.mDrmClient.closeConvertSession(this.mConvertSessionId);
+            if (convertedStatus == null
+                    || convertedStatus.statusCode != 1
+                    || convertedStatus.convertedData == null) {
                 return 406;
             }
             RandomAccessFile rndAccessFile = null;
@@ -116,12 +126,20 @@ public class DrmConvertSession {
                                 } catch (IOException e) {
                                     e = e;
                                     result = 492;
-                                    str = "Failed to close File:" + filename + MediaMetrics.SEPARATOR;
+                                    str =
+                                            "Failed to close File:"
+                                                    + filename
+                                                    + MediaMetrics.SEPARATOR;
                                     Log.w(TAG, str, e);
                                     return result;
                                 }
                             } catch (SecurityException e2) {
-                                Log.w(TAG, "Access to File: " + filename + " was denied denied by SecurityManager.", e2);
+                                Log.w(
+                                        TAG,
+                                        "Access to File: "
+                                                + filename
+                                                + " was denied denied by SecurityManager.",
+                                        e2);
                                 if (rndAccessFile == null) {
                                     return 491;
                                 }
@@ -131,7 +149,10 @@ public class DrmConvertSession {
                                 } catch (IOException e3) {
                                     e = e3;
                                     result = 492;
-                                    str = "Failed to close File:" + filename + MediaMetrics.SEPARATOR;
+                                    str =
+                                            "Failed to close File:"
+                                                    + filename
+                                                    + MediaMetrics.SEPARATOR;
                                     Log.w(TAG, str, e);
                                     return result;
                                 }
@@ -190,7 +211,10 @@ public class DrmConvertSession {
             } finally {
             }
         } catch (IllegalStateException e10) {
-            Log.w(TAG, "Could not close convertsession. Convertsession: " + this.mConvertSessionId, e10);
+            Log.w(
+                    TAG,
+                    "Could not close convertsession. Convertsession: " + this.mConvertSessionId,
+                    e10);
             return result2;
         }
     }

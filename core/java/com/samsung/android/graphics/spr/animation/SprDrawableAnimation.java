@@ -1,6 +1,7 @@
 package com.samsung.android.graphics.spr.animation;
 
 import android.graphics.drawable.Drawable;
+
 import com.samsung.android.graphics.spr.document.SprDocument;
 
 /* loaded from: classes6.dex */
@@ -25,7 +26,8 @@ public abstract class SprDrawableAnimation implements Runnable {
         this.mType = type;
         this.mDrawable = drawable;
         this.mDocument = document;
-        this.mInterval = this.mDocument.mAnimationInterval >= 16 ? this.mDocument.mAnimationInterval : 16;
+        this.mInterval =
+                this.mDocument.mAnimationInterval >= 16 ? this.mDocument.mAnimationInterval : 16;
     }
 
     public void start() {
@@ -44,8 +46,7 @@ public abstract class SprDrawableAnimation implements Runnable {
         return 0;
     }
 
-    public void update() {
-    }
+    public void update() {}
 
     public boolean isRunning() {
         return this.mIsRunning;

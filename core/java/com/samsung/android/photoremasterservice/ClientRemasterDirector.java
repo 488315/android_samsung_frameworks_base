@@ -5,8 +5,10 @@ import android.graphics.Bitmap;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.Uri;
 import android.os.Bundle;
+
 import com.samsung.android.photoremaster.IDirector;
 import com.samsung.android.photoremaster.util.LogUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
@@ -27,8 +29,7 @@ public class ClientRemasterDirector implements IDirector {
     static class StopLockManager {
         private final ReentrantLock mStopLock = new ReentrantLock();
 
-        StopLockManager() {
-        }
+        StopLockManager() {}
 
         private void throwException() {
             LogUtil.e(ClientRemasterDirector.TAG, "New requesting during stop processing.");
@@ -42,19 +43,25 @@ public class ClientRemasterDirector implements IDirector {
         }
 
         public void lock() {
-            LogUtil.d(ClientRemasterDirector.TAG, new Throwable().getStackTrace()[0].getMethodName() + " is called!");
+            LogUtil.d(
+                    ClientRemasterDirector.TAG,
+                    new Throwable().getStackTrace()[0].getMethodName() + " is called!");
             this.mStopLock.lock();
         }
 
         public void tryLock() {
-            LogUtil.d(ClientRemasterDirector.TAG, new Throwable().getStackTrace()[0].getMethodName() + " is called!");
+            LogUtil.d(
+                    ClientRemasterDirector.TAG,
+                    new Throwable().getStackTrace()[0].getMethodName() + " is called!");
             if (!this.mStopLock.tryLock()) {
                 throwException();
             }
         }
 
         public void unlock() {
-            LogUtil.d(ClientRemasterDirector.TAG, new Throwable().getStackTrace()[0].getMethodName() + " is called!");
+            LogUtil.d(
+                    ClientRemasterDirector.TAG,
+                    new Throwable().getStackTrace()[0].getMethodName() + " is called!");
             this.mStopLock.unlock();
         }
     }
@@ -197,7 +204,13 @@ public class ClientRemasterDirector implements IDirector {
         argBundle.putInt(ServiceParameterKey.INT_PROCESS_MODE, processMode);
         ArrayList<Integer> arrayList = new ArrayList<>(enhanceModes);
         argBundle.putIntegerArrayList(ServiceParameterKey.ARRAY_LIST_INT, arrayList);
-        LogUtil.i(TAG, "processImage(" + processMode + ", " + enhanceModes + NavigationBarInflaterView.KEY_CODE_END);
+        LogUtil.i(
+                TAG,
+                "processImage("
+                        + processMode
+                        + ", "
+                        + enhanceModes
+                        + NavigationBarInflaterView.KEY_CODE_END);
         Bundle retBundle = this.mServiceClient.callService(5, argBundle);
         if (retBundle == null) {
             LogUtil.e(TAG, "retBundle is null.");
@@ -250,7 +263,12 @@ public class ClientRemasterDirector implements IDirector {
             argBundle.putInt(ServiceParameterKey.INT_ID, id);
             argBundle.putString(ServiceParameterKey.STRING_VAL, value);
             LogUtil.i(TAG, "setStringParam:");
-            LogUtil.d(TAG, "arg:" + argBundle.getInt(ServiceParameterKey.INT_ID) + ", " + argBundle.getString(ServiceParameterKey.STRING_VAL));
+            LogUtil.d(
+                    TAG,
+                    "arg:"
+                            + argBundle.getInt(ServiceParameterKey.INT_ID)
+                            + ", "
+                            + argBundle.getString(ServiceParameterKey.STRING_VAL));
             this.mServiceClient.callService(9, argBundle);
         } finally {
             this.mStopLockManager.unlock();
@@ -274,7 +292,12 @@ public class ClientRemasterDirector implements IDirector {
                 argBundle.putInt(ServiceParameterKey.INT_ID, id);
                 argBundle.putLong(ServiceParameterKey.LONG_VAL, value);
                 LogUtil.i(TAG, "setLongParam:");
-                LogUtil.d(TAG, "arg:" + argBundle.getInt(ServiceParameterKey.INT_ID) + ", " + argBundle.getLong(ServiceParameterKey.LONG_VAL));
+                LogUtil.d(
+                        TAG,
+                        "arg:"
+                                + argBundle.getInt(ServiceParameterKey.INT_ID)
+                                + ", "
+                                + argBundle.getLong(ServiceParameterKey.LONG_VAL));
                 this.mServiceClient.callService(10, argBundle);
                 this.mStopLockManager.unlock();
             } catch (Throwable th2) {
@@ -361,7 +384,8 @@ public class ClientRemasterDirector implements IDirector {
                 throw new IllegalStateException();
             }
             try {
-                returnBitmap = (Bitmap) retBundle.getParcelable(ServiceReturnKey.BITMAP, Bitmap.class);
+                returnBitmap =
+                        (Bitmap) retBundle.getParcelable(ServiceReturnKey.BITMAP, Bitmap.class);
                 LogUtil.d(TAG, "ret Value: " + returnBitmap);
                 this.mStopLockManager.unlock();
             } catch (Throwable th) {
@@ -415,8 +439,14 @@ public class ClientRemasterDirector implements IDirector {
             Bundle argBundle = new Bundle();
             argBundle.putString(ServiceParameterKey.ORIGINAL_IMAGE_FOCUS_ROI, originalImage);
             argBundle.putString(ServiceParameterKey.REMASTERED_IMAGE_FOCUS_ROI, remasteredImage);
-            LogUtil.d(TAG, "original image for getFocusRoi(): " + argBundle.getString(ServiceParameterKey.ORIGINAL_IMAGE_FOCUS_ROI));
-            LogUtil.d(TAG, "remastered image for getFocusRoi(): " + argBundle.getString(ServiceParameterKey.REMASTERED_IMAGE_FOCUS_ROI));
+            LogUtil.d(
+                    TAG,
+                    "original image for getFocusRoi(): "
+                            + argBundle.getString(ServiceParameterKey.ORIGINAL_IMAGE_FOCUS_ROI));
+            LogUtil.d(
+                    TAG,
+                    "remastered image for getFocusRoi(): "
+                            + argBundle.getString(ServiceParameterKey.REMASTERED_IMAGE_FOCUS_ROI));
             Bundle retBundle = this.mServiceClient.callService(17, argBundle);
             if (retBundle == null) {
                 throwEmptyBundleException();

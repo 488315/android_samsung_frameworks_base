@@ -8,6 +8,7 @@ import android.os.SystemClock;
 import android.util.ArraySet;
 import android.util.IndentingPrintWriter;
 import android.util.Pair;
+
 import java.util.PriorityQueue;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -29,7 +30,8 @@ public abstract class AlarmQueue implements AlarmManager.OnAlarmListener {
     /* JADX INFO: Access modifiers changed from: package-private */
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public class AlarmPriorityQueue extends PriorityQueue {
-        public static final AlarmQueue$AlarmPriorityQueue$$ExternalSyntheticLambda0 sTimeComparator = new AlarmQueue$AlarmPriorityQueue$$ExternalSyntheticLambda0();
+        public static final AlarmQueue$AlarmPriorityQueue$$ExternalSyntheticLambda0
+                sTimeComparator = new AlarmQueue$AlarmPriorityQueue$$ExternalSyntheticLambda0();
 
         public AlarmPriorityQueue() {
             super(1, sTimeComparator);
@@ -49,43 +51,64 @@ public abstract class AlarmQueue implements AlarmManager.OnAlarmListener {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    class Injector {
-    }
+    class Injector {}
 
     public AlarmQueue(Context context, Looper looper, String str, String str2, boolean z, long j) {
         this(context, looper, str, str2, z, j, new Injector());
     }
 
     /* JADX WARN: Type inference failed for: r0v0, types: [com.android.server.utils.AlarmQueue$1] */
-    public AlarmQueue(Context context, Looper looper, String str, String str2, boolean z, long j, Injector injector) {
-        this.mScheduleAlarmRunnable = new Runnable() { // from class: com.android.server.utils.AlarmQueue.1
-            @Override // java.lang.Runnable
-            public final void run() {
-                AlarmQueue.this.mHandler.removeCallbacks(this);
-                AlarmManager alarmManager = (AlarmManager) AlarmQueue.this.mContext.getSystemService(AlarmManager.class);
-                if (alarmManager == null) {
-                    AlarmQueue.this.mHandler.postDelayed(this, 30000L);
-                    return;
-                }
-                synchronized (AlarmQueue.this.mLock) {
-                    try {
-                        AlarmQueue alarmQueue = AlarmQueue.this;
-                        long j2 = alarmQueue.mTriggerTimeElapsed;
-                        if (j2 == -1) {
+    public AlarmQueue(
+            Context context,
+            Looper looper,
+            String str,
+            String str2,
+            boolean z,
+            long j,
+            Injector injector) {
+        this.mScheduleAlarmRunnable =
+                new Runnable() { // from class: com.android.server.utils.AlarmQueue.1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        AlarmQueue.this.mHandler.removeCallbacks(this);
+                        AlarmManager alarmManager =
+                                (AlarmManager)
+                                        AlarmQueue.this.mContext.getSystemService(
+                                                AlarmManager.class);
+                        if (alarmManager == null) {
+                            AlarmQueue.this.mHandler.postDelayed(this, 30000L);
                             return;
                         }
-                        long j3 = alarmQueue.mMinTimeBetweenAlarmsMs;
-                        if (alarmQueue.mExactAlarm) {
-                            alarmManager.setExact(3, j2, alarmQueue.mAlarmTag, alarmQueue, alarmQueue.mHandler);
-                        } else {
-                            alarmManager.setWindow(3, j2, j3 / 2, alarmQueue.mAlarmTag, alarmQueue, alarmQueue.mHandler);
+                        synchronized (AlarmQueue.this.mLock) {
+                            try {
+                                AlarmQueue alarmQueue = AlarmQueue.this;
+                                long j2 = alarmQueue.mTriggerTimeElapsed;
+                                if (j2 == -1) {
+                                    return;
+                                }
+                                long j3 = alarmQueue.mMinTimeBetweenAlarmsMs;
+                                if (alarmQueue.mExactAlarm) {
+                                    alarmManager.setExact(
+                                            3,
+                                            j2,
+                                            alarmQueue.mAlarmTag,
+                                            alarmQueue,
+                                            alarmQueue.mHandler);
+                                } else {
+                                    alarmManager.setWindow(
+                                            3,
+                                            j2,
+                                            j3 / 2,
+                                            alarmQueue.mAlarmTag,
+                                            alarmQueue,
+                                            alarmQueue.mHandler);
+                                }
+                            } catch (Throwable th) {
+                                throw th;
+                            }
                         }
-                    } catch (Throwable th) {
-                        throw th;
                     }
-                }
-            }
-        };
+                };
         this.mLock = new Object();
         this.mAlarmPriorityQueue = new AlarmPriorityQueue();
         this.mTriggerTimeElapsed = -1L;
@@ -122,7 +145,9 @@ public abstract class AlarmQueue implements AlarmManager.OnAlarmListener {
                     indentingPrintWriter.println("NOT WAITING");
                 } else {
                     AlarmPriorityQueue alarmPriorityQueue = this.mAlarmPriorityQueue;
-                    Pair[] pairArr = (Pair[]) alarmPriorityQueue.toArray(new Pair[alarmPriorityQueue.size()]);
+                    Pair[] pairArr =
+                            (Pair[])
+                                    alarmPriorityQueue.toArray(new Pair[alarmPriorityQueue.size()]);
                     for (int i = 0; i < pairArr.length; i++) {
                         indentingPrintWriter.print(pairArr[i].first);
                         indentingPrintWriter.print(": ");
@@ -179,7 +204,8 @@ public abstract class AlarmQueue implements AlarmManager.OnAlarmListener {
         synchronized (this.mLock) {
             try {
                 AlarmPriorityQueue alarmPriorityQueue = this.mAlarmPriorityQueue;
-                Pair[] pairArr = (Pair[]) alarmPriorityQueue.toArray(new Pair[alarmPriorityQueue.size()]);
+                Pair[] pairArr =
+                        (Pair[]) alarmPriorityQueue.toArray(new Pair[alarmPriorityQueue.size()]);
                 boolean z = false;
                 for (int length = pairArr.length - 1; length >= 0; length--) {
                     if (isForUser(i, pairArr[length].first)) {
@@ -214,20 +240,26 @@ public abstract class AlarmQueue implements AlarmManager.OnAlarmListener {
 
     public final void setNextAlarmLocked(long j) {
         if (this.mAlarmPriorityQueue.size() == 0) {
-            this.mHandler.post(new Runnable() { // from class: com.android.server.utils.AlarmQueue$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    AlarmQueue alarmQueue = AlarmQueue.this;
-                    AlarmManager alarmManager = (AlarmManager) alarmQueue.mContext.getSystemService(AlarmManager.class);
-                    if (alarmManager != null) {
-                        alarmManager.cancel(alarmQueue);
-                    }
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // com.android.server.utils.AlarmQueue$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            AlarmQueue alarmQueue = AlarmQueue.this;
+                            AlarmManager alarmManager =
+                                    (AlarmManager)
+                                            alarmQueue.mContext.getSystemService(
+                                                    AlarmManager.class);
+                            if (alarmManager != null) {
+                                alarmManager.cancel(alarmQueue);
+                            }
+                        }
+                    });
             this.mTriggerTimeElapsed = -1L;
             return;
         }
-        long max = Math.max(j, ((Long) ((Pair) this.mAlarmPriorityQueue.peek()).second).longValue());
+        long max =
+                Math.max(j, ((Long) ((Pair) this.mAlarmPriorityQueue.peek()).second).longValue());
         long min = Math.min(60000L, this.mMinTimeBetweenAlarmsMs);
         long j2 = this.mTriggerTimeElapsed;
         if (j2 == -1 || max < j2 - min || j2 < max) {

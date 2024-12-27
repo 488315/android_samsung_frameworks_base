@@ -3,6 +3,7 @@ package android.telephony.ims;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
@@ -11,19 +12,21 @@ import java.util.TreeSet;
 @SystemApi
 /* loaded from: classes4.dex */
 public final class MediaThreshold implements Parcelable {
-    public static final Parcelable.Creator<MediaThreshold> CREATOR = new Parcelable.Creator<MediaThreshold>() { // from class: android.telephony.ims.MediaThreshold.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MediaThreshold createFromParcel(Parcel in) {
-            return new MediaThreshold(in);
-        }
+    public static final Parcelable.Creator<MediaThreshold> CREATOR =
+            new Parcelable.Creator<
+                    MediaThreshold>() { // from class: android.telephony.ims.MediaThreshold.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MediaThreshold createFromParcel(Parcel in) {
+                    return new MediaThreshold(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MediaThreshold[] newArray(int size) {
-            return new MediaThreshold[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MediaThreshold[] newArray(int size) {
+                    return new MediaThreshold[size];
+                }
+            };
     private final long[] mRtpInactivityTimeMillis;
     private final int[] mRtpJitter;
     private final int[] mRtpPacketLossRate;
@@ -41,7 +44,10 @@ public final class MediaThreshold implements Parcelable {
         return this.mRtpInactivityTimeMillis;
     }
 
-    private MediaThreshold(int[] packetLossRateThresholds, int[] jitterThresholds, long[] inactivityTimeThresholds) {
+    private MediaThreshold(
+            int[] packetLossRateThresholds,
+            int[] jitterThresholds,
+            long[] inactivityTimeThresholds) {
         this.mRtpPacketLossRate = packetLossRateThresholds;
         this.mRtpJitter = jitterThresholds;
         this.mRtpInactivityTimeMillis = inactivityTimeThresholds;
@@ -85,14 +91,19 @@ public final class MediaThreshold implements Parcelable {
             return false;
         }
         MediaThreshold that = (MediaThreshold) o;
-        if (Arrays.equals(this.mRtpPacketLossRate, that.mRtpPacketLossRate) && Arrays.equals(this.mRtpJitter, that.mRtpJitter) && Arrays.equals(this.mRtpInactivityTimeMillis, that.mRtpInactivityTimeMillis)) {
+        if (Arrays.equals(this.mRtpPacketLossRate, that.mRtpPacketLossRate)
+                && Arrays.equals(this.mRtpJitter, that.mRtpJitter)
+                && Arrays.equals(this.mRtpInactivityTimeMillis, that.mRtpInactivityTimeMillis)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(Arrays.hashCode(this.mRtpPacketLossRate)), Integer.valueOf(Arrays.hashCode(this.mRtpJitter)), Integer.valueOf(Arrays.hashCode(this.mRtpInactivityTimeMillis)));
+        return Objects.hash(
+                Integer.valueOf(Arrays.hashCode(this.mRtpPacketLossRate)),
+                Integer.valueOf(Arrays.hashCode(this.mRtpJitter)),
+                Integer.valueOf(Arrays.hashCode(this.mRtpInactivityTimeMillis)));
     }
 
     public String toString() {
@@ -191,10 +202,15 @@ public final class MediaThreshold implements Parcelable {
         }
 
         public MediaThreshold build() {
-            this.mRtpPacketLossRate = this.mRtpPacketLossRate != null ? this.mRtpPacketLossRate : new int[0];
+            this.mRtpPacketLossRate =
+                    this.mRtpPacketLossRate != null ? this.mRtpPacketLossRate : new int[0];
             this.mRtpJitter = this.mRtpJitter != null ? this.mRtpJitter : new int[0];
-            this.mRtpInactivityTimeMillis = this.mRtpInactivityTimeMillis != null ? this.mRtpInactivityTimeMillis : new long[0];
-            return new MediaThreshold(this.mRtpPacketLossRate, this.mRtpJitter, this.mRtpInactivityTimeMillis);
+            this.mRtpInactivityTimeMillis =
+                    this.mRtpInactivityTimeMillis != null
+                            ? this.mRtpInactivityTimeMillis
+                            : new long[0];
+            return new MediaThreshold(
+                    this.mRtpPacketLossRate, this.mRtpJitter, this.mRtpInactivityTimeMillis);
         }
     }
 }

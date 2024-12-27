@@ -5,11 +5,11 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import vendor.samsung.hardware.thermal.ISehThermalChangedCallback;
 
 /* loaded from: classes6.dex */
 public interface ISehThermal extends IInterface {
-    public static final String DESCRIPTOR = "vendor$samsung$hardware$thermal$ISehThermal".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "vendor$samsung$hardware$thermal$ISehThermal".replace('$', '.');
     public static final String HASH = "261f5623a2c8ff2223f5f289e93242b275eadfcd";
     public static final int VERSION = 1;
 
@@ -23,11 +23,13 @@ public interface ISehThermal extends IInterface {
 
     SehTemperature[] getTemperaturesWithType(int i) throws RemoteException;
 
-    void registerThermalChangedCallback(ISehThermalChangedCallback iSehThermalChangedCallback) throws RemoteException;
+    void registerThermalChangedCallback(ISehThermalChangedCallback iSehThermalChangedCallback)
+            throws RemoteException;
 
     void setScenarioHint(int i) throws RemoteException;
 
-    void unregisterThermalChangedCallback(ISehThermalChangedCallback iSehThermalChangedCallback) throws RemoteException;
+    void unregisterThermalChangedCallback(ISehThermalChangedCallback iSehThermalChangedCallback)
+            throws RemoteException;
 
     public static class Default implements ISehThermal {
         @Override // vendor.samsung.hardware.thermal.ISehThermal
@@ -41,16 +43,15 @@ public interface ISehThermal extends IInterface {
         }
 
         @Override // vendor.samsung.hardware.thermal.ISehThermal
-        public void registerThermalChangedCallback(ISehThermalChangedCallback callback) throws RemoteException {
-        }
+        public void registerThermalChangedCallback(ISehThermalChangedCallback callback)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.thermal.ISehThermal
-        public void unregisterThermalChangedCallback(ISehThermalChangedCallback callback) throws RemoteException {
-        }
+        public void unregisterThermalChangedCallback(ISehThermalChangedCallback callback)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.thermal.ISehThermal
-        public void setScenarioHint(int hint) throws RemoteException {
-        }
+        public void setScenarioHint(int hint) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.thermal.ISehThermal
         public int getScenarioHint() throws RemoteException {
@@ -73,7 +74,7 @@ public interface ISehThermal extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISehThermal {
+    public abstract static class Stub extends Binder implements ISehThermal {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_getScenarioHint = 6;
@@ -133,7 +134,8 @@ public interface ISehThermal extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -166,13 +168,15 @@ public interface ISehThermal extends IInterface {
                     reply.writeTypedArray(_result2, 1);
                     return true;
                 case 3:
-                    ISehThermalChangedCallback _arg02 = ISehThermalChangedCallback.Stub.asInterface(data.readStrongBinder());
+                    ISehThermalChangedCallback _arg02 =
+                            ISehThermalChangedCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerThermalChangedCallback(_arg02);
                     reply.writeNoException();
                     return true;
                 case 4:
-                    ISehThermalChangedCallback _arg03 = ISehThermalChangedCallback.Stub.asInterface(data.readStrongBinder());
+                    ISehThermalChangedCallback _arg03 =
+                            ISehThermalChangedCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterThermalChangedCallback(_arg03);
                     reply.writeNoException();
@@ -221,7 +225,8 @@ public interface ISehThermal extends IInterface {
                         throw new RemoteException("Method getTemperatures is unimplemented.");
                     }
                     _reply.readException();
-                    SehTemperature[] _result = (SehTemperature[]) _reply.createTypedArray(SehTemperature.CREATOR);
+                    SehTemperature[] _result =
+                            (SehTemperature[]) _reply.createTypedArray(SehTemperature.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -238,10 +243,12 @@ public interface ISehThermal extends IInterface {
                     _data.writeInt(type);
                     boolean _status = this.mRemote.transact(2, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method getTemperaturesWithType is unimplemented.");
+                        throw new RemoteException(
+                                "Method getTemperaturesWithType is unimplemented.");
                     }
                     _reply.readException();
-                    SehTemperature[] _result = (SehTemperature[]) _reply.createTypedArray(SehTemperature.CREATOR);
+                    SehTemperature[] _result =
+                            (SehTemperature[]) _reply.createTypedArray(SehTemperature.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -250,7 +257,8 @@ public interface ISehThermal extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.thermal.ISehThermal
-            public void registerThermalChangedCallback(ISehThermalChangedCallback callback) throws RemoteException {
+            public void registerThermalChangedCallback(ISehThermalChangedCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -258,7 +266,8 @@ public interface ISehThermal extends IInterface {
                     _data.writeStrongInterface(callback);
                     boolean _status = this.mRemote.transact(3, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method registerThermalChangedCallback is unimplemented.");
+                        throw new RemoteException(
+                                "Method registerThermalChangedCallback is unimplemented.");
                     }
                     _reply.readException();
                 } finally {
@@ -268,7 +277,8 @@ public interface ISehThermal extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.thermal.ISehThermal
-            public void unregisterThermalChangedCallback(ISehThermalChangedCallback callback) throws RemoteException {
+            public void unregisterThermalChangedCallback(ISehThermalChangedCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -276,7 +286,8 @@ public interface ISehThermal extends IInterface {
                     _data.writeStrongInterface(callback);
                     boolean _status = this.mRemote.transact(4, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method unregisterThermalChangedCallback is unimplemented.");
+                        throw new RemoteException(
+                                "Method unregisterThermalChangedCallback is unimplemented.");
                     }
                     _reply.readException();
                 } finally {

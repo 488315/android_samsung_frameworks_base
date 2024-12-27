@@ -1,10 +1,9 @@
 package android.app.ondeviceintelligence;
 
 import android.annotation.SystemApi;
-import android.app.ondeviceintelligence.IProcessingSignal;
-import android.app.ondeviceintelligence.ProcessingSignal;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
+
 import java.util.ArrayDeque;
 import java.util.Objects;
 import java.util.concurrent.Executor;
@@ -34,12 +33,15 @@ public final class ProcessingSignal {
             if (callback != null) {
                 while (!this.mActionParamsQueue.isEmpty()) {
                     final PersistableBundle params = this.mActionParamsQueue.removeFirst();
-                    this.mExecutor.execute(new Runnable() { // from class: android.app.ondeviceintelligence.ProcessingSignal$$ExternalSyntheticLambda1
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            ProcessingSignal.OnProcessingSignalCallback.this.onSignalReceived(params);
-                        }
-                    });
+                    this.mExecutor.execute(
+                            new Runnable() { // from class:
+                                // android.app.ondeviceintelligence.ProcessingSignal$$ExternalSyntheticLambda1
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    ProcessingSignal.OnProcessingSignalCallback.this
+                                            .onSignalReceived(params);
+                                }
+                            });
                 }
             }
             if (remote != null) {
@@ -54,7 +56,8 @@ public final class ProcessingSignal {
         }
     }
 
-    public void setOnProcessingSignalCallback(Executor executor, final OnProcessingSignalCallback callback) {
+    public void setOnProcessingSignalCallback(
+            Executor executor, final OnProcessingSignalCallback callback) {
         Objects.requireNonNull(executor);
         synchronized (this.mLock) {
             if (this.mOnProcessingSignalCallback == callback) {
@@ -65,12 +68,15 @@ public final class ProcessingSignal {
             if (callback != null && !this.mActionParamsQueue.isEmpty()) {
                 while (!this.mActionParamsQueue.isEmpty()) {
                     final PersistableBundle params = this.mActionParamsQueue.removeFirst();
-                    this.mExecutor.execute(new Runnable() { // from class: android.app.ondeviceintelligence.ProcessingSignal$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            ProcessingSignal.OnProcessingSignalCallback.this.onSignalReceived(params);
-                        }
-                    });
+                    this.mExecutor.execute(
+                            new Runnable() { // from class:
+                                // android.app.ondeviceintelligence.ProcessingSignal$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    ProcessingSignal.OnProcessingSignalCallback.this
+                                            .onSignalReceived(params);
+                                }
+                            });
                 }
             }
         }

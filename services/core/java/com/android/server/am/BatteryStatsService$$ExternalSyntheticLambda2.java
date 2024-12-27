@@ -1,19 +1,23 @@
 package com.android.server.am;
 
 import android.telephony.TelephonyManager;
+
 import com.android.server.power.stats.BatteryStatsImpl;
+
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda2 implements Runnable {
+public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda2
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ BatteryStatsService f$0;
     public final /* synthetic */ int f$1;
     public final /* synthetic */ long f$2;
     public final /* synthetic */ long f$3;
 
-    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda2(int i, long j, long j2, BatteryStatsService batteryStatsService, boolean z) {
+    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda2(
+            int i, long j, long j2, BatteryStatsService batteryStatsService, boolean z) {
         this.$r8$classId = 8;
         this.f$0 = batteryStatsService;
         this.f$1 = i;
@@ -21,7 +25,8 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda2
         this.f$3 = j2;
     }
 
-    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda2(BatteryStatsService batteryStatsService, int i, long j, long j2, int i2) {
+    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda2(
+            BatteryStatsService batteryStatsService, int i, long j, long j2, int i2) {
         this.$r8$classId = i2;
         this.f$0 = batteryStatsService;
         this.f$1 = i;
@@ -46,7 +51,9 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda2
         long j2 = this.f$3;
         synchronized (batteryStatsService.mStats) {
             BatteryStatsImpl batteryStatsImpl = batteryStatsService.mStats;
-            BatteryStatsImpl.BatchTimer batchTimer = batteryStatsImpl.getUidStatsLocked(batteryStatsImpl.mapUid(i), j, j2).mVibratorOnTimer;
+            BatteryStatsImpl.BatchTimer batchTimer =
+                    batteryStatsImpl.getUidStatsLocked(batteryStatsImpl.mapUid(i), j, j2)
+                            .mVibratorOnTimer;
             if (batchTimer != null) {
                 batchTimer.recomputeLastDuration(j * 1000, true);
             }
@@ -64,7 +71,8 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda2
             int i2 = batteryStatsImpl.mWifiMulticastNesting - 1;
             batteryStatsImpl.mWifiMulticastNesting = i2;
             if (i2 == 0) {
-                batteryStatsImpl.mHistory.recordStateStopEvent(j, j2, EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT);
+                batteryStatsImpl.mHistory.recordStateStopEvent(
+                        j, j2, EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT);
                 if (batteryStatsImpl.mWifiMulticastWakelockTimer.isRunningLocked()) {
                     batteryStatsImpl.mWifiMulticastWakelockTimer.stopRunningLocked(j);
                 }
@@ -86,10 +94,15 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda2
                 int i2 = batteryStatsImpl.mVideoOnNesting - 1;
                 batteryStatsImpl.mVideoOnNesting = i2;
                 if (i2 == 0) {
-                    batteryStatsImpl.mHistory.recordState2StopEvent(j, j2, 1073741824, mapUid, "video");
+                    batteryStatsImpl.mHistory.recordState2StopEvent(
+                            j, j2, 1073741824, mapUid, "video");
                     batteryStatsImpl.mVideoOnTimer.stopRunningLocked(j);
                 }
-                if (!batteryStatsImpl.mPowerStatsCollectorEnabled.get(5) && (stopwatchTimer = batteryStatsImpl.getUidStatsLocked(mapUid, j, j2).mVideoTurnedOnTimer) != null) {
+                if (!batteryStatsImpl.mPowerStatsCollectorEnabled.get(5)
+                        && (stopwatchTimer =
+                                        batteryStatsImpl.getUidStatsLocked(mapUid, j, j2)
+                                                .mVideoTurnedOnTimer)
+                                != null) {
                     stopwatchTimer.stopRunningLocked(j);
                 }
             }
@@ -115,7 +128,8 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda2
             BatteryStatsImpl batteryStatsImpl = batteryStatsService.mStats;
             int mapUid = batteryStatsImpl.mapUid(i);
             if (batteryStatsImpl.mWifiMulticastNesting == 0) {
-                batteryStatsImpl.mHistory.recordStateStartEvent(j, j2, EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT);
+                batteryStatsImpl.mHistory.recordStateStartEvent(
+                        j, j2, EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT);
                 if (!batteryStatsImpl.mWifiMulticastWakelockTimer.isRunningLocked()) {
                     batteryStatsImpl.mWifiMulticastWakelockTimer.startRunningLocked(j);
                 }
@@ -175,14 +189,22 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda2
             int i2 = batteryStatsImpl.mFlashlightOnNesting;
             batteryStatsImpl.mFlashlightOnNesting = i2 + 1;
             if (i2 == 0) {
-                batteryStatsImpl.mHistory.recordState2StartEvent(j, j2, 134217728, mapUid, "flashlight");
+                batteryStatsImpl.mHistory.recordState2StartEvent(
+                        j, j2, 134217728, mapUid, "flashlight");
                 batteryStatsImpl.mFlashlightOnTimer.startRunningLocked(j);
             }
             if (!batteryStatsImpl.mPowerStatsCollectorEnabled.get(6)) {
-                BatteryStatsImpl.Uid uidStatsLocked = batteryStatsImpl.getUidStatsLocked(mapUid, j, j2);
+                BatteryStatsImpl.Uid uidStatsLocked =
+                        batteryStatsImpl.getUidStatsLocked(mapUid, j, j2);
                 if (uidStatsLocked.mFlashlightTurnedOnTimer == null) {
                     BatteryStatsImpl batteryStatsImpl2 = uidStatsLocked.mBsi;
-                    uidStatsLocked.mFlashlightTurnedOnTimer = new BatteryStatsImpl.StopwatchTimer(batteryStatsImpl2.mClock, uidStatsLocked, 16, batteryStatsImpl2.mFlashlightTurnedOnTimers, batteryStatsImpl2.mOnBatteryTimeBase);
+                    uidStatsLocked.mFlashlightTurnedOnTimer =
+                            new BatteryStatsImpl.StopwatchTimer(
+                                    batteryStatsImpl2.mClock,
+                                    uidStatsLocked,
+                                    16,
+                                    batteryStatsImpl2.mFlashlightTurnedOnTimers,
+                                    batteryStatsImpl2.mOnBatteryTimeBase);
                 }
                 uidStatsLocked.mFlashlightTurnedOnTimer.startRunningLocked(j);
             }
@@ -194,10 +216,15 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda2
         int i = this.f$1;
         long j = this.f$2;
         long j2 = this.f$3;
-        int simState = ((TelephonyManager) batteryStatsService.mContext.getSystemService(TelephonyManager.class)).getSimState();
+        int simState =
+                ((TelephonyManager)
+                                batteryStatsService.mContext.getSystemService(
+                                        TelephonyManager.class))
+                        .getSimState();
         synchronized (batteryStatsService.mStats) {
             BatteryStatsImpl batteryStatsImpl = batteryStatsService.mStats;
-            batteryStatsImpl.updateAllPhoneStateLocked(i, simState, batteryStatsImpl.mPhoneSignalStrengthBinRaw, j, j2);
+            batteryStatsImpl.updateAllPhoneStateLocked(
+                    i, simState, batteryStatsImpl.mPhoneSignalStrengthBinRaw, j, j2);
         }
     }
 
@@ -214,10 +241,15 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda2
                 int i2 = batteryStatsImpl.mFlashlightOnNesting - 1;
                 batteryStatsImpl.mFlashlightOnNesting = i2;
                 if (i2 == 0) {
-                    batteryStatsImpl.mHistory.recordState2StopEvent(j, j2, 134217728, mapUid, "flashlight");
+                    batteryStatsImpl.mHistory.recordState2StopEvent(
+                            j, j2, 134217728, mapUid, "flashlight");
                     batteryStatsImpl.mFlashlightOnTimer.stopRunningLocked(j);
                 }
-                if (!batteryStatsImpl.mPowerStatsCollectorEnabled.get(6) && (stopwatchTimer = batteryStatsImpl.getUidStatsLocked(mapUid, j, j2).mFlashlightTurnedOnTimer) != null) {
+                if (!batteryStatsImpl.mPowerStatsCollectorEnabled.get(6)
+                        && (stopwatchTimer =
+                                        batteryStatsImpl.getUidStatsLocked(mapUid, j, j2)
+                                                .mFlashlightTurnedOnTimer)
+                                != null) {
                     stopwatchTimer.stopRunningLocked(j);
                 }
             }
@@ -253,15 +285,23 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda2
             BatteryStatsImpl batteryStatsImpl = batteryStatsService.mStats;
             int mapUid = batteryStatsImpl.mapUid(i);
             if (batteryStatsImpl.mVideoOnNesting == 0) {
-                batteryStatsImpl.mHistory.recordState2StartEvent(j, j2, 1073741824, mapUid, "video");
+                batteryStatsImpl.mHistory.recordState2StartEvent(
+                        j, j2, 1073741824, mapUid, "video");
                 batteryStatsImpl.mVideoOnTimer.startRunningLocked(j);
             }
             batteryStatsImpl.mVideoOnNesting++;
             if (!batteryStatsImpl.mPowerStatsCollectorEnabled.get(5)) {
-                BatteryStatsImpl.Uid uidStatsLocked = batteryStatsImpl.getUidStatsLocked(mapUid, j, j2);
+                BatteryStatsImpl.Uid uidStatsLocked =
+                        batteryStatsImpl.getUidStatsLocked(mapUid, j, j2);
                 if (uidStatsLocked.mVideoTurnedOnTimer == null) {
                     BatteryStatsImpl batteryStatsImpl2 = uidStatsLocked.mBsi;
-                    uidStatsLocked.mVideoTurnedOnTimer = new BatteryStatsImpl.StopwatchTimer(batteryStatsImpl2.mClock, uidStatsLocked, 8, batteryStatsImpl2.mVideoTurnedOnTimers, batteryStatsImpl2.mOnBatteryTimeBase);
+                    uidStatsLocked.mVideoTurnedOnTimer =
+                            new BatteryStatsImpl.StopwatchTimer(
+                                    batteryStatsImpl2.mClock,
+                                    uidStatsLocked,
+                                    8,
+                                    batteryStatsImpl2.mVideoTurnedOnTimers,
+                                    batteryStatsImpl2.mOnBatteryTimeBase);
                 }
                 uidStatsLocked.mVideoTurnedOnTimer.startRunningLocked(j);
             }
@@ -282,10 +322,17 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda2
             }
             batteryStatsImpl.mAudioOnNesting++;
             if (!batteryStatsImpl.mPowerStatsCollectorEnabled.get(4)) {
-                BatteryStatsImpl.Uid uidStatsLocked = batteryStatsImpl.getUidStatsLocked(mapUid, j, j2);
+                BatteryStatsImpl.Uid uidStatsLocked =
+                        batteryStatsImpl.getUidStatsLocked(mapUid, j, j2);
                 if (uidStatsLocked.mAudioTurnedOnTimer == null) {
                     BatteryStatsImpl batteryStatsImpl2 = uidStatsLocked.mBsi;
-                    uidStatsLocked.mAudioTurnedOnTimer = new BatteryStatsImpl.StopwatchTimer(batteryStatsImpl2.mClock, uidStatsLocked, 15, batteryStatsImpl2.mAudioTurnedOnTimers, batteryStatsImpl2.mOnBatteryTimeBase);
+                    uidStatsLocked.mAudioTurnedOnTimer =
+                            new BatteryStatsImpl.StopwatchTimer(
+                                    batteryStatsImpl2.mClock,
+                                    uidStatsLocked,
+                                    15,
+                                    batteryStatsImpl2.mAudioTurnedOnTimers,
+                                    batteryStatsImpl2.mOnBatteryTimeBase);
                 }
                 uidStatsLocked.mAudioTurnedOnTimer.startRunningLocked(j);
             }
@@ -326,10 +373,15 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda2
                         int i4 = batteryStatsImpl.mAudioOnNesting - 1;
                         batteryStatsImpl.mAudioOnNesting = i4;
                         if (i4 == 0) {
-                            batteryStatsImpl.mHistory.recordStateStopEvent(j5, j6, 4194304, mapUid, "audio");
+                            batteryStatsImpl.mHistory.recordStateStopEvent(
+                                    j5, j6, 4194304, mapUid, "audio");
                             batteryStatsImpl.mAudioOnTimer.stopRunningLocked(j5);
                         }
-                        if (!batteryStatsImpl.mPowerStatsCollectorEnabled.get(4) && (stopwatchTimer = batteryStatsImpl.getUidStatsLocked(mapUid, j5, j6).mAudioTurnedOnTimer) != null) {
+                        if (!batteryStatsImpl.mPowerStatsCollectorEnabled.get(4)
+                                && (stopwatchTimer =
+                                                batteryStatsImpl.getUidStatsLocked(mapUid, j5, j6)
+                                                        .mAudioTurnedOnTimer)
+                                        != null) {
                             stopwatchTimer.stopRunningLocked(j5);
                         }
                     }

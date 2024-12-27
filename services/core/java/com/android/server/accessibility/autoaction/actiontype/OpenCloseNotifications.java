@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+
 import com.android.internal.accessibility.util.AccessibilityUtils;
 import com.android.internal.statusbar.IStatusBarService;
 
@@ -16,13 +17,17 @@ public final class OpenCloseNotifications extends CornerActionType {
     @Override // com.android.server.accessibility.autoaction.actiontype.CornerActionType
     public final void performCornerAction(int i) {
         if (AccessibilityUtils.isFoldedLargeCoverScreen()) {
-            this.mContext.sendBroadcast(new Intent("com.samsung.android.app.aodservice.sublauncher.REQUEST_FOCUS_NOTIFICATION"));
+            this.mContext.sendBroadcast(
+                    new Intent(
+                            "com.samsung.android.app.aodservice.sublauncher.REQUEST_FOCUS_NOTIFICATION"));
             return;
         }
         try {
-            IStatusBarService asInterface = IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar"));
+            IStatusBarService asInterface =
+                    IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar"));
             if (asInterface != null) {
-                int naturalBarTypeByDisplayId = StatusBarManager.getNaturalBarTypeByDisplayId(this.mContext, i);
+                int naturalBarTypeByDisplayId =
+                        StatusBarManager.getNaturalBarTypeByDisplayId(this.mContext, i);
                 if (asInterface.getPanelExpandStateToType(naturalBarTypeByDisplayId)) {
                     asInterface.collapsePanelsToType(naturalBarTypeByDisplayId);
                 } else {

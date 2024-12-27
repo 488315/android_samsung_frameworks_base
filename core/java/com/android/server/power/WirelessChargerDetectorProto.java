@@ -18,7 +18,6 @@ public final class WirelessChargerDetectorProto {
         public static final long Y = 1108101562370L;
         public static final long Z = 1108101562371L;
 
-        public VectorProto() {
-        }
+        public VectorProto() {}
     }
 }

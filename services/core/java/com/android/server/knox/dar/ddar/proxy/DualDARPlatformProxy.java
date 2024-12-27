@@ -1,7 +1,9 @@
 package com.android.server.knox.dar.ddar.proxy;
 
 import android.content.Context;
+
 import com.android.server.knox.dar.ddar.DDLog;
+
 import com.samsung.android.knox.dar.ddar.proxy.IProxyAgentService;
 import com.samsung.android.knox.ddar.IDualDARPolicy;
 
@@ -33,16 +35,17 @@ public final class DualDARPlatformProxy extends IProxyAgentService {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:28:0x003e, code lost:
-    
-        if (r6.equals("SET_CLIENT_INFO") != false) goto L17;
-     */
+
+       if (r6.equals("SET_CLIENT_INFO") != false) goto L17;
+    */
     /* JADX WARN: Removed duplicated region for block: B:11:0x0049  */
     /* JADX WARN: Removed duplicated region for block: B:19:0x0079 A[Catch: Exception -> 0x0036, TryCatch #0 {Exception -> 0x0036, blocks: (B:3:0x0003, B:12:0x004c, B:14:0x0050, B:15:0x005a, B:19:0x0079, B:21:0x007d, B:22:0x0087, B:24:0x002c, B:27:0x0038), top: B:2:0x0003 }] */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.os.Bundle onMessage(int r5, java.lang.String r6, final android.os.Bundle r7) {
+    public final android.os.Bundle onMessage(
+            int r5, java.lang.String r6, final android.os.Bundle r7) {
         /*
             r4 = this;
             java.lang.String r5 = "onMessage() "
@@ -124,6 +127,9 @@ public final class DualDARPlatformProxy extends IProxyAgentService {
             r4 = 0
             return r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.knox.dar.ddar.proxy.DualDARPlatformProxy.onMessage(int, java.lang.String, android.os.Bundle):android.os.Bundle");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.knox.dar.ddar.proxy.DualDARPlatformProxy.onMessage(int,"
+                    + " java.lang.String, android.os.Bundle):android.os.Bundle");
     }
 }

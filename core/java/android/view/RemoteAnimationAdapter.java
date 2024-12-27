@@ -3,23 +3,24 @@ package android.view;
 import android.app.IApplicationThread;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.view.IRemoteAnimationRunner;
 
 /* loaded from: classes4.dex */
 public class RemoteAnimationAdapter implements Parcelable {
-    public static final Parcelable.Creator<RemoteAnimationAdapter> CREATOR = new Parcelable.Creator<RemoteAnimationAdapter>() { // from class: android.view.RemoteAnimationAdapter.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RemoteAnimationAdapter createFromParcel(Parcel in) {
-            return new RemoteAnimationAdapter(in);
-        }
+    public static final Parcelable.Creator<RemoteAnimationAdapter> CREATOR =
+            new Parcelable.Creator<
+                    RemoteAnimationAdapter>() { // from class: android.view.RemoteAnimationAdapter.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RemoteAnimationAdapter createFromParcel(Parcel in) {
+                    return new RemoteAnimationAdapter(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RemoteAnimationAdapter[] newArray(int size) {
-            return new RemoteAnimationAdapter[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RemoteAnimationAdapter[] newArray(int size) {
+                    return new RemoteAnimationAdapter[size];
+                }
+            };
     private IApplicationThread mCallingApplication;
     private int mCallingPid;
     private int mCallingUid;
@@ -28,18 +29,27 @@ public class RemoteAnimationAdapter implements Parcelable {
     private final IRemoteAnimationRunner mRunner;
     private final long mStatusBarTransitionDelay;
 
-    public RemoteAnimationAdapter(IRemoteAnimationRunner runner, long duration, long statusBarTransitionDelay, boolean changeNeedsSnapshot) {
+    public RemoteAnimationAdapter(
+            IRemoteAnimationRunner runner,
+            long duration,
+            long statusBarTransitionDelay,
+            boolean changeNeedsSnapshot) {
         this.mRunner = runner;
         this.mDuration = duration;
         this.mChangeNeedsSnapshot = changeNeedsSnapshot;
         this.mStatusBarTransitionDelay = statusBarTransitionDelay;
     }
 
-    public RemoteAnimationAdapter(IRemoteAnimationRunner runner, long duration, long statusBarTransitionDelay) {
+    public RemoteAnimationAdapter(
+            IRemoteAnimationRunner runner, long duration, long statusBarTransitionDelay) {
         this(runner, duration, statusBarTransitionDelay, false);
     }
 
-    public RemoteAnimationAdapter(IRemoteAnimationRunner runner, long duration, long statusBarTransitionDelay, IApplicationThread callingApplication) {
+    public RemoteAnimationAdapter(
+            IRemoteAnimationRunner runner,
+            long duration,
+            long statusBarTransitionDelay,
+            IApplicationThread callingApplication) {
         this(runner, duration, statusBarTransitionDelay, false);
         this.mCallingApplication = callingApplication;
     }

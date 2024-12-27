@@ -7,6 +7,10 @@ import android.graphics.fonts.SystemFonts;
 import android.os.LocaleList;
 import android.text.FontConfig;
 import android.util.Xml;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -16,8 +20,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public class FontListParser {
@@ -32,7 +34,8 @@ public class FontListParser {
     public static final String ATTR_TAG = "tag";
     private static final String ATTR_VARIANT = "variant";
     public static final String ATTR_WEIGHT = "weight";
-    private static final Pattern FILENAME_WHITESPACE_PATTERN = Pattern.compile("^[ \\n\\r\\t]+|[ \\n\\r\\t]+$");
+    private static final Pattern FILENAME_WHITESPACE_PATTERN =
+            Pattern.compile("^[ \\n\\r\\t]+|[ \\n\\r\\t]+$");
     public static final String STYLE_ITALIC = "italic";
     public static final String STYLE_NORMAL = "normal";
     private static final String TAG = "FontListParser";
@@ -47,10 +50,25 @@ public class FontListParser {
         XmlPullParser parser = Xml.newPullParser();
         parser.setInput(in, null);
         parser.nextTag();
-        return readFamilies(parser, SystemFonts.SYSTEM_FONT_DIR, new FontCustomizationParser.Result(), null, 0L, 0, true);
+        return readFamilies(
+                parser,
+                SystemFonts.SYSTEM_FONT_DIR,
+                new FontCustomizationParser.Result(),
+                null,
+                0L,
+                0,
+                true);
     }
 
-    public static FontConfig parse(String fontsXmlPath, String systemFontDir, String oemCustomizationXmlPath, String productFontDir, Map<String, File> updatableFontMap, long lastModifiedDate, int configVersion) throws IOException, XmlPullParserException {
+    public static FontConfig parse(
+            String fontsXmlPath,
+            String systemFontDir,
+            String oemCustomizationXmlPath,
+            String productFontDir,
+            Map<String, File> updatableFontMap,
+            long lastModifiedDate,
+            int configVersion)
+            throws IOException, XmlPullParserException {
         FontCustomizationParser.Result oemCustomization;
         InputStream is;
         if (oemCustomizationXmlPath != null) {
@@ -60,7 +78,8 @@ public class FontListParser {
             }
             try {
                 try {
-                    FontCustomizationParser.Result oemCustomization2 = FontCustomizationParser.parse(is, productFontDir, updatableFontMap);
+                    FontCustomizationParser.Result oemCustomization2 =
+                            FontCustomizationParser.parse(is, productFontDir, updatableFontMap);
                     is.close();
                     oemCustomization = oemCustomization2;
                 } finally {
@@ -71,7 +90,15 @@ public class FontListParser {
                 XmlPullParser parser = Xml.newPullParser();
                 parser.setInput(is2, null);
                 parser.nextTag();
-                FontConfig readFamilies = readFamilies(parser, systemFontDir, oemCustomization, updatableFontMap, lastModifiedDate, configVersion, false);
+                FontConfig readFamilies =
+                        readFamilies(
+                                parser,
+                                systemFontDir,
+                                oemCustomization,
+                                updatableFontMap,
+                                lastModifiedDate,
+                                configVersion,
+                                false);
                 is2.close();
                 return readFamilies;
             }
@@ -83,7 +110,15 @@ public class FontListParser {
             XmlPullParser parser2 = Xml.newPullParser();
             parser2.setInput(is22, null);
             parser2.nextTag();
-            FontConfig readFamilies2 = readFamilies(parser2, systemFontDir, oemCustomization, updatableFontMap, lastModifiedDate, configVersion, false);
+            FontConfig readFamilies2 =
+                    readFamilies(
+                            parser2,
+                            systemFontDir,
+                            oemCustomization,
+                            updatableFontMap,
+                            lastModifiedDate,
+                            configVersion,
+                            false);
             is22.close();
             return readFamilies2;
         } finally {
@@ -95,20 +130,38 @@ public class FontListParser {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.text.FontConfig readFamilies(org.xmlpull.v1.XmlPullParser r20, java.lang.String r21, android.graphics.fonts.FontCustomizationParser.Result r22, java.util.Map<java.lang.String, java.io.File> r23, long r24, int r26, boolean r27) throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
+    public static android.text.FontConfig readFamilies(
+            org.xmlpull.v1.XmlPullParser r20,
+            java.lang.String r21,
+            android.graphics.fonts.FontCustomizationParser.Result r22,
+            java.util.Map<java.lang.String, java.io.File> r23,
+            long r24,
+            int r26,
+            boolean r27)
+            throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
         /*
             Method dump skipped, instructions count: 276
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.graphics.FontListParser.readFamilies(org.xmlpull.v1.XmlPullParser, java.lang.String, android.graphics.fonts.FontCustomizationParser$Result, java.util.Map, long, int, boolean):android.text.FontConfig");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.graphics.FontListParser.readFamilies(org.xmlpull.v1.XmlPullParser,"
+                    + " java.lang.String, android.graphics.fonts.FontCustomizationParser$Result,"
+                    + " java.util.Map, long, int, boolean):android.text.FontConfig");
     }
 
-    private static boolean keepReading(XmlPullParser parser) throws XmlPullParserException, IOException {
+    private static boolean keepReading(XmlPullParser parser)
+            throws XmlPullParserException, IOException {
         int next = parser.next();
         return (next == 3 || next == 1) ? false : true;
     }
 
-    public static FontConfig.FontFamily readFamily(XmlPullParser parser, String fontDir, Map<String, File> updatableFontMap, boolean allowNonExistingFile) throws XmlPullParserException, IOException {
+    public static FontConfig.FontFamily readFamily(
+            XmlPullParser parser,
+            String fontDir,
+            Map<String, File> updatableFontMap,
+            boolean allowNonExistingFile)
+            throws XmlPullParserException, IOException {
         String lang = parser.getAttributeValue("", ATTR_LANG);
         String variant = parser.getAttributeValue(null, "variant");
         String ignore = parser.getAttributeValue(null, "ignore");
@@ -117,7 +170,8 @@ public class FontListParser {
             if (parser.getEventType() == 2) {
                 String tag = parser.getName();
                 if (tag.equals("font")) {
-                    FontConfig.Font font = readFont(parser, fontDir, updatableFontMap, allowNonExistingFile);
+                    FontConfig.Font font =
+                            readFont(parser, fontDir, updatableFontMap, allowNonExistingFile);
                     if (font != null) {
                         fonts.add(font);
                     }
@@ -143,23 +197,37 @@ public class FontListParser {
 
     private static void throwIfAttributeExists(String attrName, XmlPullParser parser) {
         if (parser.getAttributeValue(null, attrName) != null) {
-            throw new IllegalArgumentException(attrName + " cannot be used in FontFamily inside  family or family-list with name attribute.");
+            throw new IllegalArgumentException(
+                    attrName
+                            + " cannot be used in FontFamily inside  family or family-list with"
+                            + " name attribute.");
         }
     }
 
-    public static FontConfig.NamedFamilyList readNamedFamily(XmlPullParser parser, String fontDir, Map<String, File> updatableFontMap, boolean allowNonExistingFile) throws XmlPullParserException, IOException {
+    public static FontConfig.NamedFamilyList readNamedFamily(
+            XmlPullParser parser,
+            String fontDir,
+            Map<String, File> updatableFontMap,
+            boolean allowNonExistingFile)
+            throws XmlPullParserException, IOException {
         String name = parser.getAttributeValue(null, "name");
         throwIfAttributeExists(ATTR_LANG, parser);
         throwIfAttributeExists("variant", parser);
         throwIfAttributeExists("ignore", parser);
-        FontConfig.FontFamily family = readFamily(parser, fontDir, updatableFontMap, allowNonExistingFile);
+        FontConfig.FontFamily family =
+                readFamily(parser, fontDir, updatableFontMap, allowNonExistingFile);
         if (family == null) {
             return null;
         }
         return new FontConfig.NamedFamilyList(Collections.singletonList(family), name);
     }
 
-    public static FontConfig.NamedFamilyList readNamedFamilyList(XmlPullParser parser, String fontDir, Map<String, File> updatableFontMap, boolean allowNonExistingFile) throws XmlPullParserException, IOException {
+    public static FontConfig.NamedFamilyList readNamedFamilyList(
+            XmlPullParser parser,
+            String fontDir,
+            Map<String, File> updatableFontMap,
+            boolean allowNonExistingFile)
+            throws XmlPullParserException, IOException {
         String name = parser.getAttributeValue(null, "name");
         List<FontConfig.FontFamily> familyList = new ArrayList<>();
         while (keepReading(parser)) {
@@ -170,7 +238,8 @@ public class FontListParser {
                     throwIfAttributeExists(ATTR_LANG, parser);
                     throwIfAttributeExists("variant", parser);
                     throwIfAttributeExists("ignore", parser);
-                    FontConfig.FontFamily family = readFamily(parser, fontDir, updatableFontMap, allowNonExistingFile);
+                    FontConfig.FontFamily family =
+                            readFamily(parser, fontDir, updatableFontMap, allowNonExistingFile);
                     if (family != null) {
                         familyList.add(family);
                     }
@@ -185,7 +254,9 @@ public class FontListParser {
         return new FontConfig.NamedFamilyList(familyList, name);
     }
 
-    private static FontConfig.Font readFont(XmlPullParser xmlPullParser, String str, Map<String, File> map, boolean z) throws XmlPullParserException, IOException {
+    private static FontConfig.Font readFont(
+            XmlPullParser xmlPullParser, String str, Map<String, File> map, boolean z)
+            throws XmlPullParserException, IOException {
         int i;
         String str2;
         String str3;
@@ -250,13 +321,23 @@ public class FontListParser {
         if (arrayList.isEmpty()) {
             fontVariationSettings = "";
         } else {
-            fontVariationSettings = FontVariationAxis.toFontVariationSettings((FontVariationAxis[]) arrayList.toArray(new FontVariationAxis[0]));
+            fontVariationSettings =
+                    FontVariationAxis.toFontVariationSettings(
+                            (FontVariationAxis[]) arrayList.toArray(new FontVariationAxis[0]));
         }
         File file = new File(str3);
         if (!z && !file.isFile()) {
             return null;
         }
-        return new FontConfig.Font(file, str4 == null ? null : new File(str4), str2, new FontStyle(parseInt2, equals ? 1 : 0), parseInt, fontVariationSettings, attributeValue3, i);
+        return new FontConfig.Font(
+                file,
+                str4 == null ? null : new File(str4),
+                str2,
+                new FontStyle(parseInt2, equals ? 1 : 0),
+                parseInt,
+                fontVariationSettings,
+                attributeValue3,
+                i);
     }
 
     private static String findUpdatedFontFile(String psName, Map<String, File> updatableFontMap) {
@@ -267,14 +348,16 @@ public class FontListParser {
         return null;
     }
 
-    private static FontVariationAxis readAxis(XmlPullParser parser) throws XmlPullParserException, IOException {
+    private static FontVariationAxis readAxis(XmlPullParser parser)
+            throws XmlPullParserException, IOException {
         String tagStr = parser.getAttributeValue(null, "tag");
         String styleValueStr = parser.getAttributeValue(null, ATTR_STYLEVALUE);
         skip(parser);
         return new FontVariationAxis(tagStr, Float.parseFloat(styleValueStr));
     }
 
-    public static FontConfig.Alias readAlias(XmlPullParser parser) throws XmlPullParserException, IOException {
+    public static FontConfig.Alias readAlias(XmlPullParser parser)
+            throws XmlPullParserException, IOException {
         int weight;
         String name = parser.getAttributeValue(null, "name");
         String toName = parser.getAttributeValue(null, "to");

@@ -8,8 +8,10 @@ import android.os.PowerManager;
 import android.os.SystemProperties;
 import android.security.keystore.KeyProperties;
 import android.util.Slog;
+
 import com.samsung.android.service.EngineeringMode.EngineeringModeManager;
 import com.samsung.android.service.ProtectedATCommand.list.ATCommands;
+
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -34,8 +36,10 @@ public class Device {
     private Context mContext;
     private Timer mTimer;
     private PowerManager.WakeLock mWakeLock;
-    private final boolean mIsShipBin = "true".equals(SystemProperties.get("ro.product_ship", "true"));
-    private final boolean mIsFacBin = "factory".equals(SystemProperties.get("ro.factory.factory_binary", "user"));
+    private final boolean mIsShipBin =
+            "true".equals(SystemProperties.get("ro.product_ship", "true"));
+    private final boolean mIsFacBin =
+            "factory".equals(SystemProperties.get("ro.factory.factory_binary", "user"));
     private HashSet<String> mCache = new HashSet<>();
     private boolean mHasCSTool = false;
 
@@ -45,12 +49,17 @@ public class Device {
         PowerManager pm = (PowerManager) context.getSystemService("power");
         this.mWakeLock = pm.newWakeLock(1, WAKELOCK_TAG);
         boolean isJDMDevice = "jdm".equals("in_house");
-        this.mAtCommandChecker = isJDMDevice ? new ATCommandCheckerWithJDM() : new ATCommandCheckerWithInHouse();
+        this.mAtCommandChecker =
+                isJDMDevice ? new ATCommandCheckerWithJDM() : new ATCommandCheckerWithInHouse();
     }
 
     public boolean isDevDevice() {
-        String deviceStatus = SystemProperties.get("ro.boot.em.status", PROD_DEV_PROPERTY_STATE_DEV);
-        return (deviceStatus.equals(PROD_DEV_PROPERTY_STATE_USR) || deviceStatus.equals(PROD_DEV_PROPERTY_STATE_USR_WITH_EM)) ? false : true;
+        String deviceStatus =
+                SystemProperties.get("ro.boot.em.status", PROD_DEV_PROPERTY_STATE_DEV);
+        return (deviceStatus.equals(PROD_DEV_PROPERTY_STATE_USR)
+                        || deviceStatus.equals(PROD_DEV_PROPERTY_STATE_USR_WITH_EM))
+                ? false
+                : true;
     }
 
     public boolean isShipBin() {
@@ -68,7 +77,8 @@ public class Device {
     public boolean isSecureLockOn() {
         boolean secureLock = false;
         try {
-            KeyguardManager keyguardManager = (KeyguardManager) this.mContext.getSystemService(KeyguardManager.class);
+            KeyguardManager keyguardManager =
+                    (KeyguardManager) this.mContext.getSystemService(KeyguardManager.class);
             secureLock = keyguardManager.isDeviceLocked();
             Slog.d(TAG, "secureLock : " + secureLock);
             return secureLock;
@@ -106,7 +116,9 @@ public class Device {
     }
 
     public String salesCode() {
-        return SystemProperties.get("ro.csc.sales_code", KeyProperties.DIGEST_NONE).trim().toUpperCase();
+        return SystemProperties.get("ro.csc.sales_code", KeyProperties.DIGEST_NONE)
+                .trim()
+                .toUpperCase();
     }
 
     public boolean isPackageInstalled(String packagename) {
@@ -130,7 +142,10 @@ public class Device {
     }
 
     public boolean isCsToolInstalled() {
-        return isPackageInstalled("com.samsung.android.app.mobiledoctor") || isPackageInstalled(VISUAL_DIAG_PACKAGE_NAME) || isPackageInstalled(SS_DIAG_PACKAGE_NAME) || isPackageInstalled(REPAIR_APP_PACKAGE_NAME);
+        return isPackageInstalled("com.samsung.android.app.mobiledoctor")
+                || isPackageInstalled(VISUAL_DIAG_PACKAGE_NAME)
+                || isPackageInstalled(SS_DIAG_PACKAGE_NAME)
+                || isPackageInstalled(REPAIR_APP_PACKAGE_NAME);
     }
 
     public boolean hasToken() {
@@ -169,7 +184,8 @@ public class Device {
     }
 
     private TimerTask clearTokenCache() {
-        return new TimerTask() { // from class: com.samsung.android.service.ProtectedATCommand.Device.1
+        return new TimerTask() { // from class:
+                                 // com.samsung.android.service.ProtectedATCommand.Device.1
             @Override // java.util.TimerTask, java.lang.Runnable
             public void run() {
                 Device.this.mCache.clear();
@@ -192,7 +208,8 @@ public class Device {
         return false;
     }
 
-    public int checkATCommand(LinkedHashMap<String, LinkedHashSet<ATCommands>> mAtMap, String strCmd, Packet packet) {
+    public int checkATCommand(
+            LinkedHashMap<String, LinkedHashSet<ATCommands>> mAtMap, String strCmd, Packet packet) {
         return this.mAtCommandChecker.checkATCommand(this, mAtMap, strCmd, packet);
     }
 }

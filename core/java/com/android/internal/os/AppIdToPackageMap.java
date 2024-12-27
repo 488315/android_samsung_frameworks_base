@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.SparseArray;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -17,7 +18,8 @@ public final class AppIdToPackageMap {
 
     public static AppIdToPackageMap getSnapshot() {
         try {
-            List<PackageInfo> packages = AppGlobals.getPackageManager().getInstalledPackages(794624L, 0).getList();
+            List<PackageInfo> packages =
+                    AppGlobals.getPackageManager().getInstalledPackages(794624L, 0).getList();
             SparseArray<String> map = new SparseArray<>();
             for (PackageInfo pkg : packages) {
                 int uid = pkg.applicationInfo.uid;

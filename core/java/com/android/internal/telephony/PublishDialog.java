@@ -2,24 +2,28 @@ package com.android.internal.telephony;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.telephony.Rlog;
+
 import java.util.ArrayList;
 
 /* loaded from: classes5.dex */
 public class PublishDialog implements Parcelable {
-    public static final Parcelable.Creator<PublishDialog> CREATOR = new Parcelable.Creator<PublishDialog>() { // from class: com.android.internal.telephony.PublishDialog.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PublishDialog createFromParcel(Parcel in) {
-            return new PublishDialog(in);
-        }
+    public static final Parcelable.Creator<PublishDialog> CREATOR =
+            new Parcelable.Creator<
+                    PublishDialog>() { // from class: com.android.internal.telephony.PublishDialog.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PublishDialog createFromParcel(Parcel in) {
+                    return new PublishDialog(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PublishDialog[] newArray(int size) {
-            return new PublishDialog[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PublishDialog[] newArray(int size) {
+                    return new PublishDialog[size];
+                }
+            };
     public static final int CS_DOMAIN = 1;
     private static final String LOG_TAG = "PublishDialog";
     public static final int PS_DOMAIN = 2;
@@ -105,7 +109,31 @@ public class PublishDialog implements Parcelable {
         if (!SemTelephonyUtils.SHIP_BUILD) {
             log("==== Start Dump for Publish Diallog =====");
             log("==== mCallCount is " + this.mCallCount);
-            log(" mCallId: " + this.mCallId + ", mCallDomain: " + this.mCallDomain + ", mCallStatus: " + this.mCallStatus + ", mCallType: " + this.mCallType + ", mCallDirection: " + this.mCallDirection + ", mCallRemoteUri: " + this.mCallRemoteUri + ", mCallPullable: " + this.mCallPullable + ", mCallNumberPresentation: " + this.mCallNumberPresentation + ", mCallCnapNamePresentation: " + this.mCallCnapNamePresentation + ", mCallCnapName: " + this.mCallCnapName + ", mCallMptyCall: " + this.mCallMptyCall + ", mConnectedTime: " + this.mConnectedTime);
+            log(
+                    " mCallId: "
+                            + this.mCallId
+                            + ", mCallDomain: "
+                            + this.mCallDomain
+                            + ", mCallStatus: "
+                            + this.mCallStatus
+                            + ", mCallType: "
+                            + this.mCallType
+                            + ", mCallDirection: "
+                            + this.mCallDirection
+                            + ", mCallRemoteUri: "
+                            + this.mCallRemoteUri
+                            + ", mCallPullable: "
+                            + this.mCallPullable
+                            + ", mCallNumberPresentation: "
+                            + this.mCallNumberPresentation
+                            + ", mCallCnapNamePresentation: "
+                            + this.mCallCnapNamePresentation
+                            + ", mCallCnapName: "
+                            + this.mCallCnapName
+                            + ", mCallMptyCall: "
+                            + this.mCallMptyCall
+                            + ", mConnectedTime: "
+                            + this.mConnectedTime);
             log("==== End Dump for Publish Diallog   =====");
         }
     }
@@ -234,8 +262,7 @@ public class PublishDialog implements Parcelable {
         Rlog.d(LOG_TAG, msg);
     }
 
-    public PublishDialog() {
-    }
+    public PublishDialog() {}
 
     public PublishDialog(Parcel source) {
         readFromParcel(source);

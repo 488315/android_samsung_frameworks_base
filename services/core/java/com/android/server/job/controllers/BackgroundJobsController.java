@@ -16,6 +16,7 @@ import android.util.Log;
 import android.util.Slog;
 import android.util.SparseArrayMap;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.hidden_from_bootclasspath.android.content.pm.Flags;
 import com.android.server.AppStateTracker;
 import com.android.server.AppStateTrackerImpl;
@@ -26,6 +27,7 @@ import com.android.server.job.JobSchedulerService;
 import com.android.server.job.JobSchedulerService$$ExternalSyntheticLambda5;
 import com.android.server.job.JobStore;
 import com.android.server.pm.PackageManagerService;
+
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -49,15 +51,15 @@ public final class BackgroundJobsController extends StateController {
         public int mCheckedCount = 0;
         public long mUpdateTimeElapsed = 0;
 
-        public UpdateJobFunctor() {
-        }
+        public UpdateJobFunctor() {}
 
         @Override // java.util.function.Consumer
         public final void accept(Object obj) {
             JobStatus jobStatus = (JobStatus) obj;
             this.mTotalCount++;
             this.mCheckedCount++;
-            if (BackgroundJobsController.this.updateSingleJobRestrictionLocked(jobStatus, this.mUpdateTimeElapsed, this.mActiveState)) {
+            if (BackgroundJobsController.this.updateSingleJobRestrictionLocked(
+                    jobStatus, this.mUpdateTimeElapsed, this.mActiveState)) {
                 this.mChangedJobs.add(jobStatus);
             }
         }
@@ -73,79 +75,104 @@ public final class BackgroundJobsController extends StateController {
         super(jobSchedulerService);
         this.mPackageStoppedState = new SparseArrayMap();
         this.mUpdateJobFunctor = new UpdateJobFunctor();
-        this.mBroadcastReceiver = new BroadcastReceiver() { // from class: com.android.server.job.controllers.BackgroundJobsController.1
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context, Intent intent) {
-                boolean z = JobSchedulerService.DEBUG;
-                Uri data = intent.getData();
-                String schemeSpecificPart = data != null ? data.getSchemeSpecificPart() : null;
-                int intExtra = intent.getIntExtra("android.intent.extra.UID", -1);
-                String action = intent.getAction();
-                if (intExtra == -1) {
-                    Slog.e("JobScheduler.Background", "Didn't get package UID in intent (" + action + ")");
-                    return;
-                }
-                if (BackgroundJobsController.DEBUG) {
-                    BootReceiver$$ExternalSyntheticOutline0.m(StorageManagerService$$ExternalSyntheticOutline0.m(intExtra, "Got ", action, " for ", "/"), schemeSpecificPart, "JobScheduler.Background");
-                }
-                action.getClass();
-                if (action.equals("android.intent.action.PACKAGE_RESTARTED")) {
-                    synchronized (BackgroundJobsController.this.mLock) {
-                        BackgroundJobsController.this.mPackageStoppedState.delete(intExtra, schemeSpecificPart);
-                        BackgroundJobsController backgroundJobsController = BackgroundJobsController.this;
-                        backgroundJobsController.getClass();
-                        backgroundJobsController.updateJobRestrictionsLocked(intExtra, 2);
+        this.mBroadcastReceiver =
+                new BroadcastReceiver() { // from class:
+                                          // com.android.server.job.controllers.BackgroundJobsController.1
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context, Intent intent) {
+                        boolean z = JobSchedulerService.DEBUG;
+                        Uri data = intent.getData();
+                        String schemeSpecificPart =
+                                data != null ? data.getSchemeSpecificPart() : null;
+                        int intExtra = intent.getIntExtra("android.intent.extra.UID", -1);
+                        String action = intent.getAction();
+                        if (intExtra == -1) {
+                            Slog.e(
+                                    "JobScheduler.Background",
+                                    "Didn't get package UID in intent (" + action + ")");
+                            return;
+                        }
+                        if (BackgroundJobsController.DEBUG) {
+                            BootReceiver$$ExternalSyntheticOutline0.m(
+                                    StorageManagerService$$ExternalSyntheticOutline0.m(
+                                            intExtra, "Got ", action, " for ", "/"),
+                                    schemeSpecificPart,
+                                    "JobScheduler.Background");
+                        }
+                        action.getClass();
+                        if (action.equals("android.intent.action.PACKAGE_RESTARTED")) {
+                            synchronized (BackgroundJobsController.this.mLock) {
+                                BackgroundJobsController.this.mPackageStoppedState.delete(
+                                        intExtra, schemeSpecificPart);
+                                BackgroundJobsController backgroundJobsController =
+                                        BackgroundJobsController.this;
+                                backgroundJobsController.getClass();
+                                backgroundJobsController.updateJobRestrictionsLocked(intExtra, 2);
+                            }
+                            return;
+                        }
+                        if (action.equals("android.intent.action.PACKAGE_UNSTOPPED")) {
+                            synchronized (BackgroundJobsController.this.mLock) {
+                                BackgroundJobsController.this.mPackageStoppedState.add(
+                                        intExtra, schemeSpecificPart, Boolean.FALSE);
+                                BackgroundJobsController.this.updateJobRestrictionsLocked(
+                                        intExtra, 0);
+                            }
+                        }
                     }
-                    return;
-                }
-                if (action.equals("android.intent.action.PACKAGE_UNSTOPPED")) {
-                    synchronized (BackgroundJobsController.this.mLock) {
-                        BackgroundJobsController.this.mPackageStoppedState.add(intExtra, schemeSpecificPart, Boolean.FALSE);
-                        BackgroundJobsController.this.updateJobRestrictionsLocked(intExtra, 0);
+                };
+        this.mForceAppStandbyListener =
+                new AppStateTrackerImpl
+                        .Listener() { // from class:
+                                      // com.android.server.job.controllers.BackgroundJobsController.2
+                    @Override // com.android.server.AppStateTrackerImpl.Listener
+                    public final void updateAllJobs() {
+                        synchronized (BackgroundJobsController.this.mLock) {
+                            BackgroundJobsController.this.updateJobRestrictionsLocked(-1, 0);
+                        }
                     }
-                }
-            }
-        };
-        this.mForceAppStandbyListener = new AppStateTrackerImpl.Listener() { // from class: com.android.server.job.controllers.BackgroundJobsController.2
-            @Override // com.android.server.AppStateTrackerImpl.Listener
-            public final void updateAllJobs() {
-                synchronized (BackgroundJobsController.this.mLock) {
-                    BackgroundJobsController.this.updateJobRestrictionsLocked(-1, 0);
-                }
-            }
 
-            @Override // com.android.server.AppStateTrackerImpl.Listener
-            public final void updateJobsForUid(int i, boolean z) {
-                synchronized (BackgroundJobsController.this.mLock) {
-                    BackgroundJobsController backgroundJobsController = BackgroundJobsController.this;
-                    backgroundJobsController.getClass();
-                    backgroundJobsController.updateJobRestrictionsLocked(i, z ? 1 : 2);
-                }
-            }
+                    @Override // com.android.server.AppStateTrackerImpl.Listener
+                    public final void updateJobsForUid(int i, boolean z) {
+                        synchronized (BackgroundJobsController.this.mLock) {
+                            BackgroundJobsController backgroundJobsController =
+                                    BackgroundJobsController.this;
+                            backgroundJobsController.getClass();
+                            backgroundJobsController.updateJobRestrictionsLocked(i, z ? 1 : 2);
+                        }
+                    }
 
-            @Override // com.android.server.AppStateTrackerImpl.Listener
-            public final void updateJobsForUidPackage(int i, boolean z) {
-                synchronized (BackgroundJobsController.this.mLock) {
-                    BackgroundJobsController backgroundJobsController = BackgroundJobsController.this;
-                    backgroundJobsController.getClass();
-                    backgroundJobsController.updateJobRestrictionsLocked(i, z ? 1 : 2);
-                }
-            }
-        };
-        ActivityManagerInternal activityManagerInternal = (ActivityManagerInternal) LocalServices.getService(ActivityManagerInternal.class);
+                    @Override // com.android.server.AppStateTrackerImpl.Listener
+                    public final void updateJobsForUidPackage(int i, boolean z) {
+                        synchronized (BackgroundJobsController.this.mLock) {
+                            BackgroundJobsController backgroundJobsController =
+                                    BackgroundJobsController.this;
+                            backgroundJobsController.getClass();
+                            backgroundJobsController.updateJobRestrictionsLocked(i, z ? 1 : 2);
+                        }
+                    }
+                };
+        ActivityManagerInternal activityManagerInternal =
+                (ActivityManagerInternal) LocalServices.getService(ActivityManagerInternal.class);
         Objects.requireNonNull(activityManagerInternal);
         this.mActivityManagerInternal = activityManagerInternal;
-        AppStateTracker appStateTracker = (AppStateTracker) LocalServices.getService(AppStateTracker.class);
+        AppStateTracker appStateTracker =
+                (AppStateTracker) LocalServices.getService(AppStateTracker.class);
         Objects.requireNonNull(appStateTracker);
         this.mAppStateTracker = (AppStateTrackerImpl) appStateTracker;
-        this.mPackageManagerInternal = (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
+        this.mPackageManagerInternal =
+                (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class);
     }
 
     @Override // com.android.server.job.controllers.StateController
-    public final void dumpControllerStateLocked(final IndentingPrintWriter indentingPrintWriter, JobSchedulerService$$ExternalSyntheticLambda5 jobSchedulerService$$ExternalSyntheticLambda5) {
+    public final void dumpControllerStateLocked(
+            final IndentingPrintWriter indentingPrintWriter,
+            JobSchedulerService$$ExternalSyntheticLambda5
+                    jobSchedulerService$$ExternalSyntheticLambda5) {
         indentingPrintWriter.println("Aconfig flags:");
         indentingPrintWriter.increaseIndent();
-        indentingPrintWriter.print("android.content.pm.stay_stopped", Boolean.valueOf(Flags.stayStopped()));
+        indentingPrintWriter.print(
+                "android.content.pm.stay_stopped", Boolean.valueOf(Flags.stayStopped()));
         indentingPrintWriter.println();
         indentingPrintWriter.decreaseIndent();
         indentingPrintWriter.println();
@@ -153,26 +180,37 @@ public final class BackgroundJobsController extends StateController {
         indentingPrintWriter.println();
         indentingPrintWriter.println("Stopped packages:");
         indentingPrintWriter.increaseIndent();
-        this.mPackageStoppedState.forEach(new SparseArrayMap.TriConsumer() { // from class: com.android.server.job.controllers.BackgroundJobsController$$ExternalSyntheticLambda0
-            public final void accept(int i, Object obj, Object obj2) {
-                IndentingPrintWriter indentingPrintWriter2 = indentingPrintWriter;
-                indentingPrintWriter2.print(i);
-                indentingPrintWriter2.print(":");
-                indentingPrintWriter2.print((String) obj);
-                indentingPrintWriter2.print("=");
-                indentingPrintWriter2.println((Boolean) obj2);
-            }
-        });
+        this.mPackageStoppedState.forEach(
+                new SparseArrayMap
+                        .TriConsumer() { // from class:
+                                         // com.android.server.job.controllers.BackgroundJobsController$$ExternalSyntheticLambda0
+                    public final void accept(int i, Object obj, Object obj2) {
+                        IndentingPrintWriter indentingPrintWriter2 = indentingPrintWriter;
+                        indentingPrintWriter2.print(i);
+                        indentingPrintWriter2.print(":");
+                        indentingPrintWriter2.print((String) obj);
+                        indentingPrintWriter2.print("=");
+                        indentingPrintWriter2.println((Boolean) obj2);
+                    }
+                });
         indentingPrintWriter.println();
-        this.mService.mJobs.forEachJob(jobSchedulerService$$ExternalSyntheticLambda5, new BackgroundJobsController$$ExternalSyntheticLambda1(this, indentingPrintWriter, 0));
+        this.mService.mJobs.forEachJob(
+                jobSchedulerService$$ExternalSyntheticLambda5,
+                new BackgroundJobsController$$ExternalSyntheticLambda1(
+                        this, indentingPrintWriter, 0));
     }
 
     @Override // com.android.server.job.controllers.StateController
-    public final void dumpControllerStateLocked(ProtoOutputStream protoOutputStream, JobSchedulerService$$ExternalSyntheticLambda5 jobSchedulerService$$ExternalSyntheticLambda5) {
+    public final void dumpControllerStateLocked(
+            ProtoOutputStream protoOutputStream,
+            JobSchedulerService$$ExternalSyntheticLambda5
+                    jobSchedulerService$$ExternalSyntheticLambda5) {
         long start = protoOutputStream.start(2246267895812L);
         long start2 = protoOutputStream.start(1146756268033L);
         this.mAppStateTracker.dumpProto(protoOutputStream, 1146756268033L);
-        this.mService.mJobs.forEachJob(jobSchedulerService$$ExternalSyntheticLambda5, new BackgroundJobsController$$ExternalSyntheticLambda1(this, protoOutputStream, 1));
+        this.mService.mJobs.forEachJob(
+                jobSchedulerService$$ExternalSyntheticLambda5,
+                new BackgroundJobsController$$ExternalSyntheticLambda1(this, protoOutputStream, 1));
         protoOutputStream.end(start2);
         protoOutputStream.end(start);
     }
@@ -190,14 +228,29 @@ public final class BackgroundJobsController extends StateController {
             return ((Boolean) this.mPackageStoppedState.get(i, str)).booleanValue();
         }
         try {
-            boolean isPackageStoppedForUser = ((PackageManagerService.PackageManagerInternalImpl) this.mPackageManagerInternal).mService.snapshotComputer().isPackageStoppedForUser(str, i);
+            boolean isPackageStoppedForUser =
+                    ((PackageManagerService.PackageManagerInternalImpl)
+                                    this.mPackageManagerInternal)
+                            .mService
+                            .snapshotComputer()
+                            .isPackageStoppedForUser(str, i);
             if (DEBUG) {
-                Slog.d("JobScheduler.Background", "Pulled stopped state of " + str + " (" + i + "): " + isPackageStoppedForUser);
+                Slog.d(
+                        "JobScheduler.Background",
+                        "Pulled stopped state of "
+                                + str
+                                + " ("
+                                + i
+                                + "): "
+                                + isPackageStoppedForUser);
             }
             this.mPackageStoppedState.add(i, str, Boolean.valueOf(isPackageStoppedForUser));
             return isPackageStoppedForUser;
         } catch (PackageManager.NameNotFoundException unused) {
-            BootReceiver$$ExternalSyntheticOutline0.m("Couldn't determine stopped state for unknown package: ", str, "JobScheduler.Background");
+            BootReceiver$$ExternalSyntheticOutline0.m(
+                    "Couldn't determine stopped state for unknown package: ",
+                    str,
+                    "JobScheduler.Background");
             return false;
         }
     }
@@ -209,8 +262,7 @@ public final class BackgroundJobsController extends StateController {
     }
 
     @Override // com.android.server.job.controllers.StateController
-    public final void maybeStopTrackingJobLocked(JobStatus jobStatus, JobStatus jobStatus2) {
-    }
+    public final void maybeStopTrackingJobLocked(JobStatus jobStatus, JobStatus jobStatus2) {}
 
     @Override // com.android.server.job.controllers.StateController
     public final void onAppRemovedLocked(int i, String str) {
@@ -233,7 +285,8 @@ public final class BackgroundJobsController extends StateController {
         intentFilter.addAction("android.intent.action.PACKAGE_RESTARTED");
         intentFilter.addAction("android.intent.action.PACKAGE_UNSTOPPED");
         intentFilter.addDataScheme("package");
-        this.mContext.registerReceiverAsUser(this.mBroadcastReceiver, UserHandle.ALL, intentFilter, null, null);
+        this.mContext.registerReceiverAsUser(
+                this.mBroadcastReceiver, UserHandle.ALL, intentFilter, null, null);
     }
 
     public final void updateJobRestrictionsLocked(int i, int i2) {
@@ -252,9 +305,16 @@ public final class BackgroundJobsController extends StateController {
         } else {
             jobStore.forEachJob(updateJobFunctor);
         }
-        long elapsedRealtimeNanos2 = z ? SystemClock.elapsedRealtimeNanos() - elapsedRealtimeNanos : 0L;
+        long elapsedRealtimeNanos2 =
+                z ? SystemClock.elapsedRealtimeNanos() - elapsedRealtimeNanos : 0L;
         if (z) {
-            Slog.d("JobScheduler.Background", String.format("Job status updated: %d/%d checked/total jobs, %d us", Integer.valueOf(updateJobFunctor.mCheckedCount), Integer.valueOf(updateJobFunctor.mTotalCount), Long.valueOf(elapsedRealtimeNanos2 / 1000)));
+            Slog.d(
+                    "JobScheduler.Background",
+                    String.format(
+                            "Job status updated: %d/%d checked/total jobs, %d us",
+                            Integer.valueOf(updateJobFunctor.mCheckedCount),
+                            Integer.valueOf(updateJobFunctor.mTotalCount),
+                            Long.valueOf(elapsedRealtimeNanos2 / 1000)));
         }
         if (updateJobFunctor.mChangedJobs.size() > 0) {
             this.mStateChangedListener.onControllerStateChanged(updateJobFunctor.mChangedJobs);
@@ -270,11 +330,15 @@ public final class BackgroundJobsController extends StateController {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean updateSingleJobRestrictionLocked(com.android.server.job.controllers.JobStatus r9, long r10, int r12) {
+    public final boolean updateSingleJobRestrictionLocked(
+            com.android.server.job.controllers.JobStatus r9, long r10, int r12) {
         /*
             Method dump skipped, instructions count: 201
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.job.controllers.BackgroundJobsController.updateSingleJobRestrictionLocked(com.android.server.job.controllers.JobStatus, long, int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.job.controllers.BackgroundJobsController.updateSingleJobRestrictionLocked(com.android.server.job.controllers.JobStatus,"
+                    + " long, int):boolean");
     }
 }

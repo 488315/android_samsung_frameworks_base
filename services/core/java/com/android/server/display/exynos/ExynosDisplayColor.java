@@ -3,8 +3,10 @@ package com.android.server.display.exynos;
 import android.net.resolv.aidl.IDnsResolverUnsolicitedEventListener;
 import android.os.Build;
 import android.util.Log;
+
 import com.android.server.VpnManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import java.io.File;
 import java.util.TreeMap;
 
@@ -57,11 +59,73 @@ public final class ExynosDisplayColor {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     enum eColortempMethod {
         /* JADX INFO: Fake field, exist only in values array */
-        Bradford(new float[][]{new float[]{0.8951f, 0.2664f, -0.1614f}, new float[]{-0.750192f, 1.7135f, 0.036705f}, new float[]{0.0389f, -0.0685f, 1.0296f}}, new float[][]{new float[]{0.9869929f, -0.1470543f, 0.1599627f}, new float[]{0.4323053f, 0.5183603f, 0.0492912f}, new float[]{-0.0085287f, 0.0400428f, 0.9684867f}}),
+        Bradford(
+                new float[][] {
+                    new float[] {0.8951f, 0.2664f, -0.1614f},
+                    new float[] {-0.750192f, 1.7135f, 0.036705f},
+                    new float[] {0.0389f, -0.0685f, 1.0296f}
+                },
+                new float[][] {
+                    new float[] {0.9869929f, -0.1470543f, 0.1599627f},
+                    new float[] {0.4323053f, 0.5183603f, 0.0492912f},
+                    new float[] {-0.0085287f, 0.0400428f, 0.9684867f}
+                }),
         /* JADX INFO: Fake field, exist only in values array */
-        VonKries(new float[][]{new float[]{0.40024f, 0.707608f, -0.080811f}, new float[]{-0.226304f, 1.165322f, 0.0457f}, new float[]{FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE, 0.918222f}}, new float[][]{new float[]{1.8599364f, -1.1293817f, 0.2198974f}, new float[]{0.3611914f, 0.6388125f, -6.4E-6f}, new float[]{FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE, 1.0890636f}}),
+        VonKries(
+                new float[][] {
+                    new float[] {0.40024f, 0.707608f, -0.080811f},
+                    new float[] {-0.226304f, 1.165322f, 0.0457f},
+                    new float[] {
+                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        0.918222f
+                    }
+                },
+                new float[][] {
+                    new float[] {1.8599364f, -1.1293817f, 0.2198974f},
+                    new float[] {0.3611914f, 0.6388125f, -6.4E-6f},
+                    new float[] {
+                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        1.0890636f
+                    }
+                }),
         /* JADX INFO: Fake field, exist only in values array */
-        XYZScaling(new float[][]{new float[]{1.0f, FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE}, new float[]{FullScreenMagnificationGestureHandler.MAX_SCALE, 1.0f, FullScreenMagnificationGestureHandler.MAX_SCALE}, new float[]{FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE, 1.0f}}, new float[][]{new float[]{1.0f, FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE}, new float[]{FullScreenMagnificationGestureHandler.MAX_SCALE, 1.0f, FullScreenMagnificationGestureHandler.MAX_SCALE}, new float[]{FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE, 1.0f}});
+        XYZScaling(
+                new float[][] {
+                    new float[] {
+                        1.0f,
+                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        FullScreenMagnificationGestureHandler.MAX_SCALE
+                    },
+                    new float[] {
+                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        1.0f,
+                        FullScreenMagnificationGestureHandler.MAX_SCALE
+                    },
+                    new float[] {
+                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        1.0f
+                    }
+                },
+                new float[][] {
+                    new float[] {
+                        1.0f,
+                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        FullScreenMagnificationGestureHandler.MAX_SCALE
+                    },
+                    new float[] {
+                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        1.0f,
+                        FullScreenMagnificationGestureHandler.MAX_SCALE
+                    },
+                    new float[] {
+                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        1.0f
+                    }
+                });
 
         private final float[][] mFwdMethod;
         private final float[][] mRewMethod;
@@ -83,8 +147,30 @@ public final class ExynosDisplayColor {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     enum eRGBXYZTransform {
         /* JADX INFO: Fake field, exist only in values array */
-        sRGB(new float[][]{new float[]{3.24097f, -1.53738f, -0.49861f}, new float[]{-0.96924f, 1.875967f, 0.041555f}, new float[]{0.05563f, -0.20398f, 1.056971f}}, new float[][]{new float[]{0.412391f, 0.357584f, 0.180481f}, new float[]{0.212639f, 0.715169f, 0.072192f}, new float[]{0.019331f, 0.119195f, 0.950532f}}),
-        P3(new float[][]{new float[]{2.493497f, -0.93138f, -0.40271f}, new float[]{-0.82949f, 1.762664f, 0.023625f}, new float[]{0.035846f, -0.07617f, 0.956884f}}, new float[][]{new float[]{0.486571f, 0.265668f, 0.198217f}, new float[]{0.228975f, 0.691739f, 0.079287f}, new float[]{FullScreenMagnificationGestureHandler.MAX_SCALE, 0.045113f, 1.043944f}});
+        sRGB(
+                new float[][] {
+                    new float[] {3.24097f, -1.53738f, -0.49861f},
+                    new float[] {-0.96924f, 1.875967f, 0.041555f},
+                    new float[] {0.05563f, -0.20398f, 1.056971f}
+                },
+                new float[][] {
+                    new float[] {0.412391f, 0.357584f, 0.180481f},
+                    new float[] {0.212639f, 0.715169f, 0.072192f},
+                    new float[] {0.019331f, 0.119195f, 0.950532f}
+                }),
+        P3(
+                new float[][] {
+                    new float[] {2.493497f, -0.93138f, -0.40271f},
+                    new float[] {-0.82949f, 1.762664f, 0.023625f},
+                    new float[] {0.035846f, -0.07617f, 0.956884f}
+                },
+                new float[][] {
+                    new float[] {0.486571f, 0.265668f, 0.198217f},
+                    new float[] {0.228975f, 0.691739f, 0.079287f},
+                    new float[] {
+                        FullScreenMagnificationGestureHandler.MAX_SCALE, 0.045113f, 1.043944f
+                    }
+                });
 
         private final float[][] mRGB2XYZ;
         private final float[][] mXYZ2RGB;
@@ -95,7 +181,8 @@ public final class ExynosDisplayColor {
         }
 
         public final float[][] execute(float[][] fArr) {
-            return ExynosDisplayUtils.matrixMultiplication(ExynosDisplayUtils.matrixMultiplication(this.mXYZ2RGB, fArr), this.mRGB2XYZ);
+            return ExynosDisplayUtils.matrixMultiplication(
+                    ExynosDisplayUtils.matrixMultiplication(this.mXYZ2RGB, fArr), this.mRGB2XYZ);
         }
     }
 
@@ -147,7 +234,8 @@ public final class ExynosDisplayColor {
         if (file.exists() && file.isFile()) {
             this.hw_ver = ExynosDisplayUtils.getStringFromFile("/sys/class/dqe/dqe/dqe_ver");
             if (equals) {
-                VpnManagerService$$ExternalSyntheticOutline0.m(new StringBuilder("hw_ver: "), this.hw_ver, "ExynosDisplayColor");
+                VpnManagerService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("hw_ver: "), this.hw_ver, "ExynosDisplayColor");
             }
         }
     }
@@ -158,22 +246,35 @@ public final class ExynosDisplayColor {
         try {
             if (i <= 7000) {
                 double d = i;
-                pow = ((((float) Math.pow(10.0d, 3.0d)) * 0.09911f) / i) + ((((float) Math.pow(10.0d, 6.0d)) * 2.9678f) / ((float) Math.pow(d, 2.0d))) + ((((float) Math.pow(10.0d, 9.0d)) * (-4.607f)) / ((float) Math.pow(d, 3.0d)));
+                pow =
+                        ((((float) Math.pow(10.0d, 3.0d)) * 0.09911f) / i)
+                                + ((((float) Math.pow(10.0d, 6.0d)) * 2.9678f)
+                                        / ((float) Math.pow(d, 2.0d)))
+                                + ((((float) Math.pow(10.0d, 9.0d)) * (-4.607f))
+                                        / ((float) Math.pow(d, 3.0d)));
                 f = 0.244063f;
             } else {
                 double d2 = i;
-                pow = ((((float) Math.pow(10.0d, 3.0d)) * 0.24748f) / i) + ((((float) Math.pow(10.0d, 6.0d)) * 1.9018f) / ((float) Math.pow(d2, 2.0d))) + ((((float) Math.pow(10.0d, 9.0d)) * (-2.0064f)) / ((float) Math.pow(d2, 3.0d)));
+                pow =
+                        ((((float) Math.pow(10.0d, 3.0d)) * 0.24748f) / i)
+                                + ((((float) Math.pow(10.0d, 6.0d)) * 1.9018f)
+                                        / ((float) Math.pow(d2, 2.0d)))
+                                + ((((float) Math.pow(10.0d, 9.0d)) * (-2.0064f))
+                                        / ((float) Math.pow(d2, 3.0d)));
                 f = 0.23704f;
             }
             float f2 = pow + f;
-            return new float[]{f2, ((2.87f * f2) + (((float) Math.pow(f2, 2.0d)) * (-3.0f))) - 0.275f};
+            return new float[] {
+                f2, ((2.87f * f2) + (((float) Math.pow(f2, 2.0d)) * (-3.0f))) - 0.275f
+            };
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public static float[][] calcChromaticAdaptation(int i, int i2, eColortempMethod ecolortempmethod) {
+    public static float[][] calcChromaticAdaptation(
+            int i, int i2, eColortempMethod ecolortempmethod) {
         try {
             float[][] fwdMethod = ecolortempmethod.getFwdMethod();
             float[][] rewMethod = ecolortempmethod.getRewMethod();
@@ -181,9 +282,43 @@ public final class ExynosDisplayColor {
             float[] T2xy2 = T2xy(i2);
             float[] xyY2XYZ = xyY2XYZ(T2xy[0], T2xy[1]);
             float[] xyY2XYZ2 = xyY2XYZ(T2xy2[0], T2xy2[1]);
-            float[][] matrixMultiplication = ExynosDisplayUtils.matrixMultiplication(fwdMethod, new float[][]{new float[]{xyY2XYZ[0]}, new float[]{xyY2XYZ[1]}, new float[]{xyY2XYZ[2]}});
-            float[][] matrixMultiplication2 = ExynosDisplayUtils.matrixMultiplication(fwdMethod, new float[][]{new float[]{xyY2XYZ2[0]}, new float[]{xyY2XYZ2[1]}, new float[]{xyY2XYZ2[2]}});
-            return ExynosDisplayUtils.matrixMultiplication(ExynosDisplayUtils.matrixMultiplication(rewMethod, new float[][]{new float[]{matrixMultiplication2[0][0] / matrixMultiplication[0][0], FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE}, new float[]{FullScreenMagnificationGestureHandler.MAX_SCALE, matrixMultiplication2[1][0] / matrixMultiplication[1][0], FullScreenMagnificationGestureHandler.MAX_SCALE}, new float[]{FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE, matrixMultiplication2[2][0] / matrixMultiplication[2][0]}}), fwdMethod);
+            float[][] matrixMultiplication =
+                    ExynosDisplayUtils.matrixMultiplication(
+                            fwdMethod,
+                            new float[][] {
+                                new float[] {xyY2XYZ[0]},
+                                new float[] {xyY2XYZ[1]},
+                                new float[] {xyY2XYZ[2]}
+                            });
+            float[][] matrixMultiplication2 =
+                    ExynosDisplayUtils.matrixMultiplication(
+                            fwdMethod,
+                            new float[][] {
+                                new float[] {xyY2XYZ2[0]},
+                                new float[] {xyY2XYZ2[1]},
+                                new float[] {xyY2XYZ2[2]}
+                            });
+            return ExynosDisplayUtils.matrixMultiplication(
+                    ExynosDisplayUtils.matrixMultiplication(
+                            rewMethod,
+                            new float[][] {
+                                new float[] {
+                                    matrixMultiplication2[0][0] / matrixMultiplication[0][0],
+                                    FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                    FullScreenMagnificationGestureHandler.MAX_SCALE
+                                },
+                                new float[] {
+                                    FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                    matrixMultiplication2[1][0] / matrixMultiplication[1][0],
+                                    FullScreenMagnificationGestureHandler.MAX_SCALE
+                                },
+                                new float[] {
+                                    FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                    FullScreenMagnificationGestureHandler.MAX_SCALE,
+                                    matrixMultiplication2[2][0] / matrixMultiplication[2][0]
+                                }
+                            }),
+                    fwdMethod);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -192,7 +327,13 @@ public final class ExynosDisplayColor {
 
     public static float[] xyY2XYZ(float f, float f2) {
         try {
-            return f2 == FullScreenMagnificationGestureHandler.MAX_SCALE ? new float[]{FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE, FullScreenMagnificationGestureHandler.MAX_SCALE} : new float[]{(f * 1.0f) / f2, 1.0f, (((1.0f - f) - f2) * 1.0f) / f2};
+            return f2 == FullScreenMagnificationGestureHandler.MAX_SCALE
+                    ? new float[] {
+                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        FullScreenMagnificationGestureHandler.MAX_SCALE,
+                        FullScreenMagnificationGestureHandler.MAX_SCALE
+                    }
+                    : new float[] {(f * 1.0f) / f2, 1.0f, (((1.0f - f) - f2) * 1.0f) / f2};
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -208,9 +349,14 @@ public final class ExynosDisplayColor {
             }
             String pathWithPanel = ExynosDisplayUtils.getPathWithPanel(str2);
             try {
-                String[] parserFactoryXMLAttribute = ExynosDisplayUtils.parserFactoryXMLAttribute(pathWithPanel, str, null, "subxml");
+                String[] parserFactoryXMLAttribute =
+                        ExynosDisplayUtils.parserFactoryXMLAttribute(
+                                pathWithPanel, str, null, "subxml");
                 if (parserFactoryXMLAttribute != null && parserFactoryXMLAttribute.length >= 1) {
-                    return str2.substring(0, str2.lastIndexOf(".xml")) + "_" + parserFactoryXMLAttribute[0].split("\\s*,\\s*")[0] + ".xml";
+                    return str2.substring(0, str2.lastIndexOf(".xml"))
+                            + "_"
+                            + parserFactoryXMLAttribute[0].split("\\s*,\\s*")[0]
+                            + ".xml";
                 }
                 return pathWithPanel;
             } catch (Exception e) {
@@ -247,16 +393,29 @@ public final class ExynosDisplayColor {
     public final void loadColorTempXml() {
         String pathWithPanel;
         try {
-            if (this.colortemp_map.isEmpty() && (pathWithPanel = ExynosDisplayUtils.getPathWithPanel(this.COLORTEMP_XML_FILE_PATH)) != null) {
-                String[] parserXML = ExynosDisplayUtils.parserXML(pathWithPanel, "colortemp", "linear_matrix");
-                String[] parserXMLAttribute = ExynosDisplayUtils.parserXMLAttribute(pathWithPanel, "linear_matrix", "temp");
-                if (parserXML != null && parserXMLAttribute != null && parserXML.length == parserXMLAttribute.length) {
+            if (this.colortemp_map.isEmpty()
+                    && (pathWithPanel =
+                                    ExynosDisplayUtils.getPathWithPanel(
+                                            this.COLORTEMP_XML_FILE_PATH))
+                            != null) {
+                String[] parserXML =
+                        ExynosDisplayUtils.parserXML(pathWithPanel, "colortemp", "linear_matrix");
+                String[] parserXMLAttribute =
+                        ExynosDisplayUtils.parserXMLAttribute(
+                                pathWithPanel, "linear_matrix", "temp");
+                if (parserXML != null
+                        && parserXMLAttribute != null
+                        && parserXML.length == parserXMLAttribute.length) {
                     for (int i = 0; i < parserXMLAttribute.length; i++) {
-                        this.colortemp_map.put(Integer.valueOf(Integer.parseInt(parserXMLAttribute[i])), parserXML[i]);
+                        this.colortemp_map.put(
+                                Integer.valueOf(Integer.parseInt(parserXMLAttribute[i])),
+                                parserXML[i]);
                     }
                     return;
                 }
-                Log.e("ExynosDisplayColor", "loadColorTempXml: invalid data in ".concat(pathWithPanel));
+                Log.e(
+                        "ExynosDisplayColor",
+                        "loadColorTempXml: invalid data in ".concat(pathWithPanel));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -279,7 +438,9 @@ public final class ExynosDisplayColor {
             this.colortemp_map.clear();
             try {
                 if (this.linear_matrix_bypass_array == null) {
-                    this.linear_matrix_bypass_array = ExynosDisplayUtils.parserXML(this.BYPASS_XML_FILE_PATH, "bypass", "linear_matrix");
+                    this.linear_matrix_bypass_array =
+                            ExynosDisplayUtils.parserXML(
+                                    this.BYPASS_XML_FILE_PATH, "bypass", "linear_matrix");
                 }
                 String[] strArr = this.linear_matrix_bypass_array;
                 if (strArr == null || strArr.length <= 0) {
@@ -304,7 +465,14 @@ public final class ExynosDisplayColor {
                     colorTempFromXml = null;
                     try {
                         try {
-                            fArr = eRGBXYZTransform.P3.execute(calcChromaticAdaptation(i, i2, i3 < eColortempMethod.values().length ? eColortempMethod.values()[i3] : eColortempMethod.values()[0]));
+                            fArr =
+                                    eRGBXYZTransform.P3.execute(
+                                            calcChromaticAdaptation(
+                                                    i,
+                                                    i2,
+                                                    i3 < eColortempMethod.values().length
+                                                            ? eColortempMethod.values()[i3]
+                                                            : eColortempMethod.values()[0]));
                         } catch (Exception e) {
                             e.printStackTrace();
                             fArr = null;
@@ -317,7 +485,8 @@ public final class ExynosDisplayColor {
                     colorTempFromXml = getColorTempFromXml(i2);
                 }
                 if (colorTempFromXml != null) {
-                    ExynosDisplayUtils.sysfsWriteSting(this.LINEAR_MATRIX_SYSFS_PATH, colorTempFromXml);
+                    ExynosDisplayUtils.sysfsWriteSting(
+                            this.LINEAR_MATRIX_SYSFS_PATH, colorTempFromXml);
                 }
             }
         } catch (Exception e3) {
@@ -330,9 +499,12 @@ public final class ExynosDisplayColor {
         String[] strArr;
         try {
             if (i != 0) {
-                this.sharpness_array = ExynosDisplayUtils.parserXML(this.SHARPNESS_XML_FILE_PATH, "sharpness", "de");
+                this.sharpness_array =
+                        ExynosDisplayUtils.parserXML(
+                                this.SHARPNESS_XML_FILE_PATH, "sharpness", "de");
             } else {
-                this.sharpness_array = ExynosDisplayUtils.parserXML(this.BYPASS_XML_FILE_PATH, "bypass", "de");
+                this.sharpness_array =
+                        ExynosDisplayUtils.parserXML(this.BYPASS_XML_FILE_PATH, "bypass", "de");
             }
             strArr = this.sharpness_array;
         } catch (Exception e) {
@@ -349,26 +521,26 @@ public final class ExynosDisplayColor {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:33:0x006d, code lost:
-    
-        android.util.Log.d("ExynosDisplayColor", "setGammaBypass()");
-     */
+
+       android.util.Log.d("ExynosDisplayColor", "setGammaBypass()");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:34:0x0075, code lost:
-    
-        if (r1 == null) goto L42;
-     */
+
+       if (r1 == null) goto L42;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:35:0x0077, code lost:
-    
-        com.android.server.display.exynos.ExynosDisplayUtils.sysfsWriteSting(r7.CGC_DITHER_SYSFS_PATH, r1);
-     */
+
+       com.android.server.display.exynos.ExynosDisplayUtils.sysfsWriteSting(r7.CGC_DITHER_SYSFS_PATH, r1);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:36:0x007c, code lost:
-    
-        sysfsWriteGamma(r0, r7.EXTENSION_OFF);
-        sysfsWriteGamma(r2, r7.EXTENSION_ON);
-     */
+
+       sysfsWriteGamma(r0, r7.EXTENSION_OFF);
+       sysfsWriteGamma(r2, r7.EXTENSION_ON);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:37:0x0086, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -465,7 +637,9 @@ public final class ExynosDisplayColor {
         L86:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.exynos.ExynosDisplayColor.setGammaBypass():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.exynos.ExynosDisplayColor.setGammaBypass():void");
     }
 
     public final void setHsvGainOn() {
@@ -473,7 +647,8 @@ public final class ExynosDisplayColor {
         String[] strArr;
         try {
             if (this.hsc_bypass_array == null) {
-                this.hsc_bypass_array = ExynosDisplayUtils.parserXML(this.BYPASS_XML_FILE_PATH, "bypass", "hsc");
+                this.hsc_bypass_array =
+                        ExynosDisplayUtils.parserXML(this.BYPASS_XML_FILE_PATH, "bypass", "hsc");
             }
             strArr = this.hsc_bypass_array;
         } catch (Exception e) {
@@ -508,14 +683,30 @@ public final class ExynosDisplayColor {
                 split[12] = Integer.toString(i2 - 127);
                 split[13] = Integer.toString(i - 127);
                 split[14] = Integer.toString(i3 - 127);
-                split[146] = Integer.toString(IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
-                split[147] = Integer.toString(IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
-                split[148] = Integer.toString(IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
-                split[149] = Integer.toString(IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
-                split[150] = Integer.toString(IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
-                split[151] = Integer.toString(IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
-                split[152] = Integer.toString(IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
-                split[153] = Integer.toString(IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
+                split[146] =
+                        Integer.toString(
+                                IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
+                split[147] =
+                        Integer.toString(
+                                IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
+                split[148] =
+                        Integer.toString(
+                                IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
+                split[149] =
+                        Integer.toString(
+                                IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
+                split[150] =
+                        Integer.toString(
+                                IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
+                split[151] =
+                        Integer.toString(
+                                IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
+                split[152] =
+                        Integer.toString(
+                                IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
+                split[153] =
+                        Integer.toString(
+                                IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
             } else if (str2.compareTo(this.HW_VER_8_0) >= 0) {
                 split[4] = Integer.toString(1);
                 split[5] = Integer.toString(i - 127);
@@ -524,7 +715,9 @@ public final class ExynosDisplayColor {
                 split[8] = Integer.toString(1);
                 split[9] = Integer.toString(i3 - 127);
                 for (int i4 = 49; i4 <= 66; i4++) {
-                    split[i4] = Integer.toString(IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
+                    split[i4] =
+                            Integer.toString(
+                                    IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
                 }
                 split[49] = Integer.toString(0);
                 split[58] = Integer.toString(0);
@@ -536,7 +729,9 @@ public final class ExynosDisplayColor {
                 split[12] = Integer.toString(1);
                 split[13] = Integer.toString(i3 - 127);
                 for (int i5 = 57; i5 <= 74; i5++) {
-                    split[i5] = Integer.toString(IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
+                    split[i5] =
+                            Integer.toString(
+                                    IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT);
                 }
                 split[57] = Integer.toString(0);
                 split[66] = Integer.toString(0);
@@ -577,10 +772,19 @@ public final class ExynosDisplayColor {
         String[] strArr2;
         try {
             String[] strArr3 = this.rgain_array;
-            if (strArr3 == null || strArr3.length == 0 || (strArr = this.ggain_array) == null || strArr.length == 0 || (strArr2 = this.bgain_array) == null || strArr2.length == 0 || i >= strArr3.length || i2 >= strArr.length || i3 >= strArr2.length) {
+            if (strArr3 == null
+                    || strArr3.length == 0
+                    || (strArr = this.ggain_array) == null
+                    || strArr.length == 0
+                    || (strArr2 = this.bgain_array) == null
+                    || strArr2.length == 0
+                    || i >= strArr3.length
+                    || i2 >= strArr.length
+                    || i3 >= strArr2.length) {
                 return;
             }
-            String str = this.rgain_array[i] + "," + this.ggain_array[i2] + "," + this.bgain_array[i3];
+            String str =
+                    this.rgain_array[i] + "," + this.ggain_array[i2] + "," + this.bgain_array[i3];
             if (str == null) {
                 return;
             }
@@ -600,7 +804,9 @@ public final class ExynosDisplayColor {
             }
             try {
                 if (this.gamma_matrix_bypass_array == null) {
-                    this.gamma_matrix_bypass_array = ExynosDisplayUtils.parserXML(this.BYPASS_XML_FILE_PATH, "bypass", "gamma_matrix");
+                    this.gamma_matrix_bypass_array =
+                            ExynosDisplayUtils.parserXML(
+                                    this.BYPASS_XML_FILE_PATH, "bypass", "gamma_matrix");
                 }
                 String[] strArr = this.gamma_matrix_bypass_array;
                 if (strArr == null || strArr.length <= 0) {
@@ -620,9 +826,12 @@ public final class ExynosDisplayColor {
         String[] strArr;
         try {
             if (i != 0) {
-                this.skincolor_array = ExynosDisplayUtils.parserXML(this.SKINCOLOR_XML_FILE_PATH, "skincolor", "hsc");
+                this.skincolor_array =
+                        ExynosDisplayUtils.parserXML(
+                                this.SKINCOLOR_XML_FILE_PATH, "skincolor", "hsc");
             } else {
-                this.skincolor_array = ExynosDisplayUtils.parserXML(this.BYPASS_XML_FILE_PATH, "bypass", "hsc");
+                this.skincolor_array =
+                        ExynosDisplayUtils.parserXML(this.BYPASS_XML_FILE_PATH, "bypass", "hsc");
             }
             strArr = this.skincolor_array;
         } catch (Exception e) {
@@ -639,25 +848,25 @@ public final class ExynosDisplayColor {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:26:0x005c, code lost:
-    
-        android.util.Log.d("ExynosDisplayColor", "setWhitePointColorOn()");
-     */
+
+       android.util.Log.d("ExynosDisplayColor", "setWhitePointColorOn()");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:27:0x0062, code lost:
-    
-        if (r8 == null) goto L33;
-     */
+
+       if (r8 == null) goto L33;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:28:0x0064, code lost:
-    
-        com.android.server.display.exynos.ExynosDisplayUtils.sysfsWriteSting(r3, r8);
-     */
+
+       com.android.server.display.exynos.ExynosDisplayUtils.sysfsWriteSting(r3, r8);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:29:0x0067, code lost:
-    
-        com.android.server.display.exynos.ExynosDisplayUtils.sysfsWriteSting(r13.CGC_SYSFS_PATH, r14);
-     */
+
+       com.android.server.display.exynos.ExynosDisplayUtils.sysfsWriteSting(r13.CGC_SYSFS_PATH, r14);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:52:0x008d, code lost:
-    
-        com.android.server.display.exynos.ExynosDisplayUtils.sysfsWriteSting(r3, r8);
-     */
+
+       com.android.server.display.exynos.ExynosDisplayUtils.sysfsWriteSting(r3, r8);
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -667,7 +876,9 @@ public final class ExynosDisplayColor {
             Method dump skipped, instructions count: 282
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.display.exynos.ExynosDisplayColor.setWhitePointColorOn(int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.display.exynos.ExynosDisplayColor.setWhitePointColorOn(int):void");
     }
 
     public final void setXMLColorModesImpl(String str) {
@@ -675,7 +886,15 @@ public final class ExynosDisplayColor {
         try {
             String colorModePath = getColorModePath(str);
             try {
-                if (!str.equals("bypass") && (parserFactoryXMLAttribute = ExynosDisplayUtils.parserFactoryXMLAttribute(ExynosDisplayUtils.getPathWithPanel(this.COLORMODE_XML_FILE_PATH), str, null, "subxml")) != null) {
+                if (!str.equals("bypass")
+                        && (parserFactoryXMLAttribute =
+                                        ExynosDisplayUtils.parserFactoryXMLAttribute(
+                                                ExynosDisplayUtils.getPathWithPanel(
+                                                        this.COLORMODE_XML_FILE_PATH),
+                                                str,
+                                                null,
+                                                "subxml"))
+                                != null) {
                     if (parserFactoryXMLAttribute.length >= 1) {
                         str = "tune";
                     }
@@ -683,7 +902,9 @@ public final class ExynosDisplayColor {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            Log.d("ExynosDisplayColor", "setXMLColorModesImpl: xml_path=" + colorModePath + ", mode_name=" + str);
+            Log.d(
+                    "ExynosDisplayColor",
+                    "setXMLColorModesImpl: xml_path=" + colorModePath + ", mode_name=" + str);
             ExynosDisplayTune exynosDisplayTune = this.mExynosDisplayTune;
             if (exynosDisplayTune != null) {
                 exynosDisplayTune.setCalibrationDQE(colorModePath, str);

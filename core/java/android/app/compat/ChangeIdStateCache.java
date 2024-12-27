@@ -5,10 +5,12 @@ import android.content.Context;
 import android.os.Binder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+
 import com.android.internal.compat.IPlatformCompat;
 
 /* loaded from: classes.dex */
-public final class ChangeIdStateCache extends PropertyInvalidatedCache<ChangeIdStateQuery, Boolean> {
+public final class ChangeIdStateCache
+        extends PropertyInvalidatedCache<ChangeIdStateQuery, Boolean> {
     private static final String CACHE_KEY = "cache_key.is_compat_change_enabled";
     private static final int MAX_ENTRIES = 64;
     private static boolean sDisabled = false;
@@ -34,7 +36,9 @@ public final class ChangeIdStateCache extends PropertyInvalidatedCache<ChangeIdS
             synchronized (this) {
                 platformCompat = this.mPlatformCompat;
                 if (platformCompat == null) {
-                    platformCompat = IPlatformCompat.Stub.asInterface(ServiceManager.getService(Context.PLATFORM_COMPAT_SERVICE));
+                    platformCompat =
+                            IPlatformCompat.Stub.asInterface(
+                                    ServiceManager.getService(Context.PLATFORM_COMPAT_SERVICE));
                     if (platformCompat == null) {
                         throw new RuntimeException("Could not get PlatformCompatService instance!");
                     }
@@ -51,10 +55,15 @@ public final class ChangeIdStateCache extends PropertyInvalidatedCache<ChangeIdS
         try {
             try {
                 if (query.type == 0) {
-                    return Boolean.valueOf(getPlatformCompatService().isChangeEnabledByPackageName(query.changeId, query.packageName, query.userId));
+                    return Boolean.valueOf(
+                            getPlatformCompatService()
+                                    .isChangeEnabledByPackageName(
+                                            query.changeId, query.packageName, query.userId));
                 }
                 if (query.type == 1) {
-                    return Boolean.valueOf(getPlatformCompatService().isChangeEnabledByUid(query.changeId, query.uid));
+                    return Boolean.valueOf(
+                            getPlatformCompatService()
+                                    .isChangeEnabledByUid(query.changeId, query.uid));
                 }
                 throw new IllegalArgumentException("Invalid query type: " + query.type);
             } catch (RemoteException e) {

@@ -1,17 +1,18 @@
 package android.hardware.broadcastradio;
 
-import android.hardware.broadcastradio.ICloseHandle;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import com.android.server.broadcastradio.aidl.RadioModule;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public interface IBroadcastRadio extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$broadcastradio$IBroadcastRadio".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$broadcastradio$IBroadcastRadio".replace('$', '.');
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class Stub extends Binder implements IBroadcastRadio {
@@ -141,7 +142,8 @@ public interface IBroadcastRadio extends IInterface {
                 }
             }
 
-            public final ICloseHandle registerAnnouncementListener(RadioModule.AnonymousClass2 anonymousClass2, byte[] bArr) {
+            public final ICloseHandle registerAnnouncementListener(
+                    RadioModule.AnonymousClass2 anonymousClass2, byte[] bArr) {
                 ICloseHandle iCloseHandle;
                 Parcel obtain = Parcel.obtain(this.mRemote);
                 Parcel obtain2 = Parcel.obtain();
@@ -150,7 +152,8 @@ public interface IBroadcastRadio extends IInterface {
                     obtain.writeStrongInterface(anonymousClass2);
                     obtain.writeByteArray(bArr);
                     if (!this.mRemote.transact(17, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method registerAnnouncementListener is unimplemented.");
+                        throw new RemoteException(
+                                "Method registerAnnouncementListener is unimplemented.");
                     }
                     obtain2.readException();
                     IBinder readStrongBinder = obtain2.readStrongBinder();
@@ -158,8 +161,10 @@ public interface IBroadcastRadio extends IInterface {
                     if (readStrongBinder == null) {
                         iCloseHandle = null;
                     } else {
-                        IInterface queryLocalInterface = readStrongBinder.queryLocalInterface(ICloseHandle.DESCRIPTOR);
-                        if (queryLocalInterface == null || !(queryLocalInterface instanceof ICloseHandle)) {
+                        IInterface queryLocalInterface =
+                                readStrongBinder.queryLocalInterface(ICloseHandle.DESCRIPTOR);
+                        if (queryLocalInterface == null
+                                || !(queryLocalInterface instanceof ICloseHandle)) {
                             ICloseHandle.Stub.Proxy proxy = new ICloseHandle.Stub.Proxy();
                             proxy.mRemote = readStrongBinder;
                             iCloseHandle = proxy;
@@ -248,7 +253,8 @@ public interface IBroadcastRadio extends IInterface {
                     obtain.writeInterfaceToken(IBroadcastRadio.DESCRIPTOR);
                     obtain.writeTypedObject(programFilter, 0);
                     if (!this.mRemote.transact(10, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method startProgramListUpdates is unimplemented.");
+                        throw new RemoteException(
+                                "Method startProgramListUpdates is unimplemented.");
                     }
                     obtain2.readException();
                 } finally {
@@ -279,7 +285,8 @@ public interface IBroadcastRadio extends IInterface {
                 try {
                     obtain.writeInterfaceToken(IBroadcastRadio.DESCRIPTOR);
                     if (!this.mRemote.transact(11, obtain, obtain2, 0)) {
-                        throw new RemoteException("Method stopProgramListUpdates is unimplemented.");
+                        throw new RemoteException(
+                                "Method stopProgramListUpdates is unimplemented.");
                     }
                     obtain2.readException();
                 } finally {

@@ -26,6 +26,7 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.TimeUtils;
+
 import com.android.internal.telephony.ISemTelephony;
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
@@ -42,18 +43,20 @@ import com.android.server.accessibility.FlashNotificationsController$$ExternalSy
 import com.android.server.accessibility.GestureWakeup$$ExternalSyntheticOutline0;
 import com.android.server.am.mars.MARsFreezeStateRecord$$ExternalSyntheticOutline0;
 import com.android.server.input.InputManagerService;
+
+import libcore.io.IoUtils;
+
 import com.samsung.accessory.manager.DetachCheck;
 import com.samsung.accessory.manager.SAccessoryManager;
 import com.samsung.accessory.manager.authentication.AuthenticationResult;
 import com.samsung.accessory.manager.authentication.AuthenticationSession;
 import com.samsung.accessory.manager.authentication.CertBlocklister;
 import com.samsung.accessory.manager.authentication.LocalAuthenticator;
-import com.samsung.accessory.manager.authentication.cover.CoverAuthenticator;
-import com.samsung.accessory.manager.authentication.cover.RestrictionPolicyOberver;
 import com.samsung.android.cover.CoverManager;
 import com.samsung.android.cover.CoverState;
 import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.sepunion.SemUnionManagerLocal;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -64,11 +67,13 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicReference;
-import libcore.io.IoUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class CoverAuthenticator extends LocalAuthenticator implements SAccessoryManager.AuthenticationResultCallback, RestrictionPolicyOberver.NfcRestrictionPolicyListener, CertBlocklister.CertBlocklistListener {
+public final class CoverAuthenticator extends LocalAuthenticator
+        implements SAccessoryManager.AuthenticationResultCallback,
+                RestrictionPolicyOberver.NfcRestrictionPolicyListener,
+                CertBlocklister.CertBlocklistListener {
     public final SAccessoryManager.AnonymousClass1 mAuthenticationTask;
     public CertBlocklister mBlocklister;
     public final Context mContext;
@@ -89,9 +94,13 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
     public SemUnionManagerLocal mSemUnionManagerLocal;
     public Sensor mSensor;
     public static final boolean DBG = Debug.semIsProductDev();
-    public static final String RUN_SCHEDULED_AUTH_ACTION = CoverAuthenticator.class.getPackage().getName() + ".action.AUTHENTICATION_INTERVAL_ELAPSED";
+    public static final String RUN_SCHEDULED_AUTH_ACTION =
+            CoverAuthenticator.class.getPackage().getName()
+                    + ".action.AUTHENTICATION_INTERVAL_ELAPSED";
     public static boolean USE_SCHEDULED_AUTHENTICATION_WEHN_CHARGING = true;
-    public static final String BRAND_NAME = SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_SETTINGS_CONFIG_BRAND_NAME");
+    public static final String BRAND_NAME =
+            SemFloatingFeature.getInstance()
+                    .getString("SEC_FLOATING_FEATURE_SETTINGS_CONFIG_BRAND_NAME");
     public byte[] mUriData = null;
     public boolean mSystemReady = false;
     public boolean mNfcServiceReady = false;
@@ -120,38 +129,43 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
     public int mCoverStateBySensor = -1;
     public int mCoverStateByNfc = -1;
     public boolean mIsSensor = false;
-    public final AnonymousClass8 mSensorEventListener = new SensorEventListener() { // from class: com.samsung.accessory.manager.authentication.cover.CoverAuthenticator.8
-        @Override // android.hardware.SensorEventListener
-        public final void onAccuracyChanged(Sensor sensor, int i) {
-        }
+    public final AnonymousClass8 mSensorEventListener =
+            new SensorEventListener() { // from class:
+                                        // com.samsung.accessory.manager.authentication.cover.CoverAuthenticator.8
+                @Override // android.hardware.SensorEventListener
+                public final void onAccuracyChanged(Sensor sensor, int i) {}
 
-        @Override // android.hardware.SensorEventListener
-        public final void onSensorChanged(SensorEvent sensorEvent) {
-            int i = (int) sensorEvent.values[0];
-            long currentTimeMillis = System.currentTimeMillis() * 1000;
-            boolean z = CoverAuthenticator.DBG;
-            UiModeManagerService$13$$ExternalSyntheticOutline0.m(BatteryService$$ExternalSyntheticOutline0.m(i, "onSensorChanged: ", " "), CoverAuthenticator.this.mCoverStateBySensor, "SAccessoryManager_CoverAuthenticator");
-            if (i == 1) {
-                CoverAuthenticator coverAuthenticator = CoverAuthenticator.this;
-                if (coverAuthenticator.mCoverStateBySensor != 1) {
-                    coverAuthenticator.onCoverAttached(currentTimeMillis, true, true);
-                    CoverAuthenticator coverAuthenticator2 = CoverAuthenticator.this;
-                    coverAuthenticator2.mCoverStateBySensor = i;
-                    CoverAuthenticator.m1132$$Nest$maddSensorRecord(coverAuthenticator2, i);
-                    return;
+                @Override // android.hardware.SensorEventListener
+                public final void onSensorChanged(SensorEvent sensorEvent) {
+                    int i = (int) sensorEvent.values[0];
+                    long currentTimeMillis = System.currentTimeMillis() * 1000;
+                    boolean z = CoverAuthenticator.DBG;
+                    UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                            BatteryService$$ExternalSyntheticOutline0.m(
+                                    i, "onSensorChanged: ", " "),
+                            CoverAuthenticator.this.mCoverStateBySensor,
+                            "SAccessoryManager_CoverAuthenticator");
+                    if (i == 1) {
+                        CoverAuthenticator coverAuthenticator = CoverAuthenticator.this;
+                        if (coverAuthenticator.mCoverStateBySensor != 1) {
+                            coverAuthenticator.onCoverAttached(currentTimeMillis, true, true);
+                            CoverAuthenticator coverAuthenticator2 = CoverAuthenticator.this;
+                            coverAuthenticator2.mCoverStateBySensor = i;
+                            CoverAuthenticator.m1132$$Nest$maddSensorRecord(coverAuthenticator2, i);
+                            return;
+                        }
+                    }
+                    if (i == 0) {
+                        CoverAuthenticator coverAuthenticator3 = CoverAuthenticator.this;
+                        if (coverAuthenticator3.mCoverStateBySensor != 0) {
+                            coverAuthenticator3.onCoverAttached(currentTimeMillis, false, true);
+                            CoverAuthenticator coverAuthenticator4 = CoverAuthenticator.this;
+                            coverAuthenticator4.mCoverStateBySensor = i;
+                            CoverAuthenticator.m1132$$Nest$maddSensorRecord(coverAuthenticator4, i);
+                        }
+                    }
                 }
-            }
-            if (i == 0) {
-                CoverAuthenticator coverAuthenticator3 = CoverAuthenticator.this;
-                if (coverAuthenticator3.mCoverStateBySensor != 0) {
-                    coverAuthenticator3.onCoverAttached(currentTimeMillis, false, true);
-                    CoverAuthenticator coverAuthenticator4 = CoverAuthenticator.this;
-                    coverAuthenticator4.mCoverStateBySensor = i;
-                    CoverAuthenticator.m1132$$Nest$maddSensorRecord(coverAuthenticator4, i);
-                }
-            }
-        }
-    };
+            };
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.accessory.manager.authentication.cover.CoverAuthenticator$1, reason: invalid class name */
@@ -175,19 +189,29 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
                     if (((CoverAuthenticator) this.this$0).getCoverSwitchState() < 1) {
                         CoverAuthenticator coverAuthenticator = (CoverAuthenticator) this.this$0;
                         if (!coverAuthenticator.mIsFactoryBinary) {
-                            coverAuthenticator.mAuthenticationTask.stop((AuthenticationSession) this.val$session);
+                            coverAuthenticator.mAuthenticationTask.stop(
+                                    (AuthenticationSession) this.val$session);
                             break;
                         }
                     }
-                    ((CoverAuthenticator) this.this$0).mCurrentSession = (AuthenticationSession) this.val$session;
+                    ((CoverAuthenticator) this.this$0).mCurrentSession =
+                            (AuthenticationSession) this.val$session;
                     break;
                 default:
                     CoverAuthenticator coverAuthenticator2 = ((AnonymousClass5) this.this$0).this$0;
                     boolean z2 = CoverAuthenticator.DBG;
-                    if (coverAuthenticator2.getCoverSwitchState() < 1 && (true ^ TextUtils.isEmpty(Settings.System.getString(((Context) this.val$session).getContentResolver(), "accessory_cover_uri")))) {
-                        CoverAuthenticator coverAuthenticator3 = ((AnonymousClass5) this.this$0).this$0;
+                    if (coverAuthenticator2.getCoverSwitchState() < 1
+                            && (true
+                                    ^ TextUtils.isEmpty(
+                                            Settings.System.getString(
+                                                    ((Context) this.val$session)
+                                                            .getContentResolver(),
+                                                    "accessory_cover_uri")))) {
+                        CoverAuthenticator coverAuthenticator3 =
+                                ((AnonymousClass5) this.this$0).this$0;
                         if (coverAuthenticator3.mPaletteCover == null) {
-                            coverAuthenticator3.mPaletteCover = new PaletteCover((Context) this.val$session);
+                            coverAuthenticator3.mPaletteCover =
+                                    new PaletteCover((Context) this.val$session);
                         }
                         coverAuthenticator3.mPaletteCover.disableSetting();
                         break;
@@ -209,9 +233,9 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:22:0x007b, code lost:
-        
-            if (com.samsung.accessory.manager.authentication.CertBlocklister.isThisKeyBlocklisted(r2) != false) goto L21;
-         */
+
+           if (com.samsung.accessory.manager.authentication.CertBlocklister.isThisKeyBlocklisted(r2) != false) goto L21;
+        */
         @Override // java.lang.Runnable
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -320,7 +344,9 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
             Lb4:
                 return
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.samsung.accessory.manager.authentication.cover.CoverAuthenticator.AnonymousClass2.run():void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.samsung.accessory.manager.authentication.cover.CoverAuthenticator.AnonymousClass2.run():void");
         }
     }
 
@@ -351,28 +377,47 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
                     final String action = intent.getAction();
                     final String stringExtra = intent.getStringExtra("package_name");
                     if (stringExtra != null) {
-                        this.this$0.mCoverAuthHandler.post(new Runnable() { // from class: com.samsung.accessory.manager.authentication.cover.CoverAuthenticator$12$1
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                if (action.equals("com.samsung.accessory.manager.action.AUTHENTICATION_STATE_REQUEST")) {
-                                    CoverAuthenticator.AnonymousClass5.this.this$0.mFactoryIntent = new Intent("com.samsung.accessory.manager.action.AUTHENTICATION_STATE_REPLY");
-                                    CoverAuthenticator.AnonymousClass5.this.this$0.mFactoryIntent.setPackage(stringExtra);
-                                    CoverAuthenticator.AnonymousClass5.this.this$0.sendFactoryResult();
-                                    return;
-                                }
-                                if (action.equals("com.samsung.accessory.manager.action.START_AUTHENTICATION")) {
-                                    CoverAuthenticator.AnonymousClass5.this.this$0.mFactoryIntent = new Intent("com.samsung.accessory.manager.action.AUTHENTICATION_RESULT");
-                                    CoverAuthenticator.AnonymousClass5.this.this$0.mFactoryIntent.setPackage(stringExtra);
-                                    CoverAuthenticator coverAuthenticator = CoverAuthenticator.AnonymousClass5.this.this$0;
-                                    coverAuthenticator.mRetryCounterFactoryTest = 0;
-                                    coverAuthenticator.mFactoryTestRequested = true;
-                                    coverAuthenticator.startAuthentication(0L, false);
-                                }
-                            }
-                        });
+                        this.this$0.mCoverAuthHandler.post(
+                                new Runnable() { // from class:
+                                    // com.samsung.accessory.manager.authentication.cover.CoverAuthenticator$12$1
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        if (action.equals(
+                                                "com.samsung.accessory.manager.action.AUTHENTICATION_STATE_REQUEST")) {
+                                            CoverAuthenticator.AnonymousClass5.this
+                                                            .this$0
+                                                            .mFactoryIntent =
+                                                    new Intent(
+                                                            "com.samsung.accessory.manager.action.AUTHENTICATION_STATE_REPLY");
+                                            CoverAuthenticator.AnonymousClass5.this.this$0
+                                                    .mFactoryIntent.setPackage(stringExtra);
+                                            CoverAuthenticator.AnonymousClass5.this.this$0
+                                                    .sendFactoryResult();
+                                            return;
+                                        }
+                                        if (action.equals(
+                                                "com.samsung.accessory.manager.action.START_AUTHENTICATION")) {
+                                            CoverAuthenticator.AnonymousClass5.this
+                                                            .this$0
+                                                            .mFactoryIntent =
+                                                    new Intent(
+                                                            "com.samsung.accessory.manager.action.AUTHENTICATION_RESULT");
+                                            CoverAuthenticator.AnonymousClass5.this.this$0
+                                                    .mFactoryIntent.setPackage(stringExtra);
+                                            CoverAuthenticator coverAuthenticator =
+                                                    CoverAuthenticator.AnonymousClass5.this.this$0;
+                                            coverAuthenticator.mRetryCounterFactoryTest = 0;
+                                            coverAuthenticator.mFactoryTestRequested = true;
+                                            coverAuthenticator.startAuthentication(0L, false);
+                                        }
+                                    }
+                                });
                         break;
                     } else {
-                        StorageManagerService$$ExternalSyntheticOutline0.m("can't reply auth info, request package = ", stringExtra, "SAccessoryManager_CoverAuthenticator");
+                        StorageManagerService$$ExternalSyntheticOutline0.m(
+                                "can't reply auth info, request package = ",
+                                stringExtra,
+                                "SAccessoryManager_CoverAuthenticator");
                         break;
                     }
                 case 2:
@@ -390,17 +435,24 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
                         }
                     } else {
                         boolean z4 = CoverAuthenticator.DBG;
-                        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("received ", action2, "SAccessoryManager_CoverAuthenticator");
+                        ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                                "received ", action2, "SAccessoryManager_CoverAuthenticator");
                         this.this$0.getClass();
-                        RestrictionPolicyOberver restrictionPolicyOberver = this.this$0.mRestrictionPolicyOberver;
-                        Log.i("SAccessoryManager_CoverAuthenticator", "Cover Switch State  : " + this.this$0.getCoverSwitchState());
-                        this.this$0.mCoverAuthHandler.postDelayed(new AnonymousClass1(i, this, context), 5000L);
+                        RestrictionPolicyOberver restrictionPolicyOberver =
+                                this.this$0.mRestrictionPolicyOberver;
+                        Log.i(
+                                "SAccessoryManager_CoverAuthenticator",
+                                "Cover Switch State  : " + this.this$0.getCoverSwitchState());
+                        this.this$0.mCoverAuthHandler.postDelayed(
+                                new AnonymousClass1(i, this, context), 5000L);
                         break;
                     }
                     break;
                 default:
                     if (CoverAuthenticator.RUN_SCHEDULED_AUTH_ACTION.equals(intent.getAction())) {
-                        Log.i("SAccessoryManager_CoverAuthenticator", "Run scheduled authentication");
+                        Log.i(
+                                "SAccessoryManager_CoverAuthenticator",
+                                "Run scheduled authentication");
                         this.this$0.startAuthentication(0L, true);
                         break;
                     }
@@ -413,8 +465,7 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
     public final class CoverAuthHandler extends Handler {
         public final /* synthetic */ int $r8$classId = 1;
 
-        public CoverAuthHandler() {
-        }
+        public CoverAuthHandler() {}
 
         public CoverAuthHandler(Looper looper) {
             super(looper, null, true);
@@ -433,7 +484,9 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
                 Method dump skipped, instructions count: 1518
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.samsung.accessory.manager.authentication.cover.CoverAuthenticator.CoverAuthHandler.handleMessage(android.os.Message):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.samsung.accessory.manager.authentication.cover.CoverAuthenticator.CoverAuthHandler.handleMessage(android.os.Message):void");
         }
     }
 
@@ -458,7 +511,8 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
         if (coverAuthenticator.mSensorHistory.size() > 60) {
             coverAuthenticator.mSensorHistory.removeFirst();
         }
-        coverAuthenticator.mSensorHistory.add(String.valueOf(i) + "/" + TimeUtils.logTimeOfDay(System.currentTimeMillis()));
+        coverAuthenticator.mSensorHistory.add(
+                String.valueOf(i) + "/" + TimeUtils.logTimeOfDay(System.currentTimeMillis()));
     }
 
     /* renamed from: -$$Nest$monNfcReady, reason: not valid java name */
@@ -471,27 +525,40 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
                 StringBuilder sb = new StringBuilder("ready to authenticate the cover ");
                 sb.append(coverAuthenticator.mIsFactoryBinary);
                 sb.append(" ");
-                UiModeManagerService$13$$ExternalSyntheticOutline0.m(sb, coverAuthenticator.currentHall, "SAccessoryManager_CoverAuthenticator");
+                UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                        sb, coverAuthenticator.currentHall, "SAccessoryManager_CoverAuthenticator");
                 coverAuthenticator.mAuthType = 2;
                 coverAuthenticator.mLastAttachTime = System.currentTimeMillis();
                 coverAuthenticator.startAuthentication(0L, true);
             } else {
-                DirEncryptService$$ExternalSyntheticOutline0.m(coverSwitchState, "ready to authenticate the cover but a cover attach state is ", "SAccessoryManager_CoverAuthenticator");
+                DirEncryptService$$ExternalSyntheticOutline0.m(
+                        coverSwitchState,
+                        "ready to authenticate the cover but a cover attach state is ",
+                        "SAccessoryManager_CoverAuthenticator");
             }
         }
-        if (coverAuthenticator.mSensor != null || (sensorManager = (SensorManager) coverAuthenticator.mContext.getSystemService("sensor")) == null) {
+        if (coverAuthenticator.mSensor != null
+                || (sensorManager =
+                                (SensorManager)
+                                        coverAuthenticator.mContext.getSystemService("sensor"))
+                        == null) {
             return;
         }
         Sensor defaultSensor = sensorManager.getDefaultSensor(65639);
         coverAuthenticator.mSensor = defaultSensor;
         if (defaultSensor != null) {
             Log.i("SAccessoryManager_CoverAuthenticator", "registerListener sensor");
-            sensorManager.registerListener(coverAuthenticator.mSensorEventListener, coverAuthenticator.mSensor, 3);
+            sensorManager.registerListener(
+                    coverAuthenticator.mSensorEventListener, coverAuthenticator.mSensor, 3);
         }
     }
 
     /* JADX WARN: Type inference failed for: r0v2, types: [com.samsung.accessory.manager.authentication.cover.CoverAuthenticator$8] */
-    public CoverAuthenticator(Context context, InputManagerService inputManagerService, Looper looper, SAccessoryManager.AnonymousClass1 anonymousClass1) {
+    public CoverAuthenticator(
+            Context context,
+            InputManagerService inputManagerService,
+            Looper looper,
+            SAccessoryManager.AnonymousClass1 anonymousClass1) {
         new AnonymousClass5(this, 4);
         this.mFactoryReceiver = new AnonymousClass5(this, 1);
         this.mContext = context;
@@ -505,8 +572,11 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
 
     public static void setTransmitPower(boolean z) {
         try {
-            Log.i("SAccessoryManager_CoverAuthenticator", "Call SemTelephony API : is verified :" + z);
-            ISemTelephony.Stub.asInterface(ServiceManager.getService("isemtelephony")).setTransmitPowerExt(16384L, z);
+            Log.i(
+                    "SAccessoryManager_CoverAuthenticator",
+                    "Call SemTelephony API : is verified :" + z);
+            ISemTelephony.Stub.asInterface(ServiceManager.getService("isemtelephony"))
+                    .setTransmitPowerExt(16384L, z);
         } catch (RemoteException | NullPointerException e) {
             e.printStackTrace();
         }
@@ -536,7 +606,18 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
         printWriter.println(" Current CoverAuthenticator state:");
         AuthenticationResult authenticationResult = (AuthenticationResult) this.mResult.get();
         if (authenticationResult != null) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, authenticationResult.mStringManagerURI, "  auth extra data = ", BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("  auth reason = "), authenticationResult.mReason, printWriter, "  auth uri = ")), authenticationResult.mStringExtraData, printWriter);
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            printWriter,
+                            authenticationResult.mStringManagerURI,
+                            "  auth extra data = ",
+                            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                    new StringBuilder("  auth reason = "),
+                                    authenticationResult.mReason,
+                                    printWriter,
+                                    "  auth uri = ")),
+                    authenticationResult.mStringExtraData,
+                    printWriter);
         }
         printWriter.println("  Historical authentication: ");
         for (int i = 0; i < this.mAuthenticationHistory.size(); i++) {
@@ -548,27 +629,73 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
                 printWriter.println("    " + ((String) this.mSensorHistory.get(i2)));
             }
         }
-        StringBuilder m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("  mNfcServiceReady = "), this.mNfcServiceReady, printWriter, "  mFactoryTestRequested = "), this.mFactoryTestRequested, printWriter, "  mLastAuthenticationTime = "), this.mLastAuthenticationTime, printWriter, "  isAuthenticatonAllowed? = "), RestrictionPolicyOberver.sIsFelicaAllowed, printWriter, "  getBlockedType? = "), RestrictionPolicyOberver.sIsFelicaAllowed ? 0 : 2, printWriter, "  isAuthenticationBlocked? = ");
+        StringBuilder m =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                                BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                        .m(
+                                                                new StringBuilder(
+                                                                        "  mNfcServiceReady = "),
+                                                                this.mNfcServiceReady,
+                                                                printWriter,
+                                                                "  mFactoryTestRequested = "),
+                                                this.mFactoryTestRequested,
+                                                printWriter,
+                                                "  mLastAuthenticationTime = "),
+                                        this.mLastAuthenticationTime,
+                                        printWriter,
+                                        "  isAuthenticatonAllowed? = "),
+                                RestrictionPolicyOberver.sIsFelicaAllowed,
+                                printWriter,
+                                "  getBlockedType? = "),
+                        RestrictionPolicyOberver.sIsFelicaAllowed ? 0 : 2,
+                        printWriter,
+                        "  isAuthenticationBlocked? = ");
         this.mBlocklister.getClass();
-        StringBuilder m2 = BinaryTransparencyService$$ExternalSyntheticOutline0.m(m, CertBlocklister.mIsBlocked, printWriter, "  mLastAttachTime = ");
+        StringBuilder m2 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        m, CertBlocklister.mIsBlocked, printWriter, "  mLastAttachTime = ");
         m2.append(TimeUtils.logTimeOfDay(this.mLastAttachTime));
         printWriter.println(m2.toString());
         printWriter.println("  mLastDetachTime = " + TimeUtils.logTimeOfDay(this.mLastDetachTime));
-        StringBuilder m3 = BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("  mFailuresCount = "), this.mFailuresCount, printWriter, "  mIsFactoryBinary = "), this.mIsFactoryBinary, printWriter, "  mSensor = ");
+        StringBuilder m3 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("  mFailuresCount = "),
+                                this.mFailuresCount,
+                                printWriter,
+                                "  mIsFactoryBinary = "),
+                        this.mIsFactoryBinary,
+                        printWriter,
+                        "  mSensor = ");
         m3.append(this.mSensor);
         printWriter.println(m3.toString());
-        StringBuilder m4 = BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("  mIsSensor = "), this.mIsSensor, printWriter, "  mLastCoverState = ");
+        StringBuilder m4 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("  mIsSensor = "),
+                        this.mIsSensor,
+                        printWriter,
+                        "  mLastCoverState = ");
         m4.append(this.mLastCoverState);
         printWriter.println(m4.toString());
         if (this.mCoverBroadcaster != null) {
-            AccessibilityManagerService$$ExternalSyntheticOutline0.m(new StringBuilder("  mRealCoverType = "), this.mCoverBroadcaster.mRealCoverType, printWriter);
+            AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("  mRealCoverType = "),
+                    this.mCoverBroadcaster.mRealCoverType,
+                    printWriter);
         }
     }
 
     public final int getCoverSwitchState() {
         int i = this.currentHall;
         InputManagerService inputManagerService = this.mInputManager;
-        return i == 0 ? (this.mSensor == null || !this.mIsSensor) ? inputManagerService.mNative.getSwitchState(-1, -256, 27) : this.mCoverStateBySensor : inputManagerService.mNative.getSwitchState(-1, -256, 21);
+        return i == 0
+                ? (this.mSensor == null || !this.mIsSensor)
+                        ? inputManagerService.mNative.getSwitchState(-1, -256, 27)
+                        : this.mCoverStateBySensor
+                : inputManagerService.mNative.getSwitchState(-1, -256, 21);
     }
 
     public final boolean isAuthenticationReady() {
@@ -577,13 +704,15 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
         sb.append(" ");
         sb.append(this.mNfcServiceReady);
         sb.append(" ");
-        FlashNotificationsController$$ExternalSyntheticOutline0.m("SAccessoryManager_CoverAuthenticator", sb, this.mIsShutingdown);
+        FlashNotificationsController$$ExternalSyntheticOutline0.m(
+                "SAccessoryManager_CoverAuthenticator", sb, this.mIsShutingdown);
         return this.mSystemReady && this.mNfcServiceReady && !this.mIsShutingdown;
     }
 
     public final void notifyFriendsStateChanged(boolean z, byte[] bArr, byte[] bArr2) {
         if (this.mSemUnionManagerLocal == null) {
-            this.mSemUnionManagerLocal = (SemUnionManagerLocal) LocalServices.getService(SemUnionManagerLocal.class);
+            this.mSemUnionManagerLocal =
+                    (SemUnionManagerLocal) LocalServices.getService(SemUnionManagerLocal.class);
         }
         if (this.mSemUnionManagerLocal != null) {
             if (this.mCoverType == 255 && this.mContext != null) {
@@ -594,7 +723,12 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
             }
             this.mSemUnionManagerLocal.accessoryStateChanged(z, bArr, bArr2);
             try {
-                Intent component = new Intent().setComponent(new ComponentName("com.sec.enterprise.knox.cloudmdm.smdms", "com.sec.enterprise.knox.cloudmdm.smdms.core.AccessoryStateChangeReceiver"));
+                Intent component =
+                        new Intent()
+                                .setComponent(
+                                        new ComponentName(
+                                                "com.sec.enterprise.knox.cloudmdm.smdms",
+                                                "com.sec.enterprise.knox.cloudmdm.smdms.core.AccessoryStateChangeReceiver"));
                 component.putExtra("accessoryType", this.mCoverType);
                 component.putExtra("accessoryState", z ? 1001 : 1002);
                 component.putExtra("accessoryUid", bArr);
@@ -632,7 +766,8 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
     public final void onCoverAttached(long j, boolean z, boolean z2) {
         this.currentHall = 0;
         StringBuilder sb = new StringBuilder("onCoverAttached ");
-        BatteryService$$ExternalSyntheticOutline0.m(sb, this.mIsFactoryBinary, " ", z2, ",mSensor=");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                sb, this.mIsFactoryBinary, " ", z2, ",mSensor=");
         sb.append(this.mSensor);
         Log.i("SAccessoryManager_CoverAuthenticator", sb.toString());
         if (this.mIsFactoryBinary || !isAuthenticationReady()) {
@@ -656,7 +791,9 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
         obtain.setData(bundle);
         CoverAuthHandler coverAuthHandler = this.mCoverAttachProcessHanlder;
         if (z) {
-            if (coverAuthHandler.hasMessages(1) && this.mCoverManager.getCoverState() != null && this.mCoverManager.getCoverState().attached) {
+            if (coverAuthHandler.hasMessages(1)
+                    && this.mCoverManager.getCoverState() != null
+                    && this.mCoverManager.getCoverState().attached) {
                 coverAuthHandler.removeMessages(1);
                 addRecord(-2, 0);
                 return;
@@ -670,10 +807,14 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
         obtain.obj = Boolean.valueOf(z2);
         if (z2) {
             this.mSafetyDetachTimeoutWakeLock.acquire(2000L);
-        } else if (this.mPaletteCover != null && PaletteCover.isDataChanged(this.mContext, this.mUriData)) {
+        } else if (this.mPaletteCover != null
+                && PaletteCover.isDataChanged(this.mContext, this.mUriData)) {
             this.mPaletteCover.disableSetting();
         }
-        if (this.mPaletteCover == null || !(!TextUtils.isEmpty(Settings.System.getString(this.mContext.getContentResolver(), "accessory_cover_uri")))) {
+        if (this.mPaletteCover == null
+                || !(!TextUtils.isEmpty(
+                        Settings.System.getString(
+                                this.mContext.getContentResolver(), "accessory_cover_uri")))) {
             coverAuthHandler.sendMessageDelayed(obtain, 1000L);
         } else {
             coverAuthHandler.sendMessageDelayed(obtain, 50L);
@@ -755,7 +896,9 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
         L5f:
             throw r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.accessory.manager.authentication.cover.CoverAuthenticator.sendCoverStateToSensorhub(char):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.accessory.manager.authentication.cover.CoverAuthenticator.sendCoverStateToSensorhub(char):void");
     }
 
     public final void sendFactoryResult() {
@@ -772,14 +915,18 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
         } else {
             if (bArr != null) {
                 StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < bArr.length; i = MARsFreezeStateRecord$$ExternalSyntheticOutline0.m("%02x", new Object[]{Byte.valueOf(bArr[i])}, sb, i, 1)) {
-                }
+                for (int i = 0;
+                        i < bArr.length;
+                        i =
+                                MARsFreezeStateRecord$$ExternalSyntheticOutline0.m(
+                                        "%02x", new Object[] {Byte.valueOf(bArr[i])}, sb, i, 1)) {}
                 str2 = sb.toString();
             } else {
                 str2 = "null";
             }
             str = str2.substring(10, 18);
-            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("Service ID = ", str, "SAccessoryManager_CoverAuthenticator");
+            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                    "Service ID = ", str, "SAccessoryManager_CoverAuthenticator");
         }
         if (authenticationResult != null) {
             CoverInfo coverInfo = new CoverInfo(authenticationResult.mExtraID);
@@ -813,7 +960,10 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
         String str7 = "";
         if (j > 0) {
             calendar.setTimeInMillis(j);
-            str5 = String.format("%ty-%tm-%td %tH:%tM:%tS.%tL", calendar, calendar, calendar, calendar, calendar, calendar, calendar);
+            str5 =
+                    String.format(
+                            "%ty-%tm-%td %tH:%tM:%tS.%tL",
+                            calendar, calendar, calendar, calendar, calendar, calendar, calendar);
         } else {
             str5 = "";
         }
@@ -824,12 +974,17 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
         Calendar calendar2 = Calendar.getInstance();
         if (j2 > 0) {
             calendar2.setTimeInMillis(j2);
-            str7 = String.format("%ty-%tm-%td %tH:%tM:%tS.%tL", calendar2, calendar2, calendar2, calendar2, calendar2, calendar2, calendar2);
+            str7 =
+                    String.format(
+                            "%ty-%tm-%td %tH:%tM:%tS.%tL",
+                            calendar2, calendar2, calendar2, calendar2, calendar2, calendar2,
+                            calendar2);
         }
         intent2.putExtra("detachInfo", str7);
     }
 
-    public final void setCoverVerified(boolean z, CoverInfo coverInfo, AuthenticationResult authenticationResult) {
+    public final void setCoverVerified(
+            boolean z, CoverInfo coverInfo, AuthenticationResult authenticationResult) {
         CoverAuthStateFile coverAuthStateFile;
         byte[] bArr;
         byte[] bArr2;
@@ -852,28 +1007,44 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
             setTransmitPower(z);
         }
         boolean z2 = getCoverSwitchState() >= 1;
-        StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m("setCoverVerified isVerified: ", ", type:", z);
+        StringBuilder m =
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        "setCoverVerified isVerified: ", ", type:", z);
         m.append(coverInfo != null ? Integer.valueOf(coverInfo.type) : "null");
         m.append(", isCoverAttached:");
         m.append(z2);
         Log.d("SAccessoryManager_CoverAuthenticator", m.toString());
-        boolean z3 = coverInfo != null && coverInfo.type == 14 && this.mContext.getPackageManager().hasSystemFeature("com.sec.feature.nfc_suitled_authentication_cover");
+        boolean z3 =
+                coverInfo != null
+                        && coverInfo.type == 14
+                        && this.mContext
+                                .getPackageManager()
+                                .hasSystemFeature(
+                                        "com.sec.feature.nfc_suitled_authentication_cover");
         boolean z4 = (coverInfo != null && coverInfo.type == 18) || z3;
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("is_SUITE_LED = ", "SAccessoryManager_CoverAuthenticator", z3);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "is_SUITE_LED = ", "SAccessoryManager_CoverAuthenticator", z3);
         if (z4 && ((paletteCover = this.mPaletteCover) == null || z2)) {
             if (paletteCover == null) {
                 this.mPaletteCover = new PaletteCover(this.mContext);
             }
             byte[] bArr4 = authenticationResult.mByteArrayManagerURI;
             this.mUriData = bArr4;
-            if (this.mPaletteCover.mCoverAttached && PaletteCover.isDataChanged(this.mContext, bArr4)) {
-                Log.d("SAccessoryManager_CoverAuthenticator", "Palette Cover changed, force detach first");
-                com.samsung.android.sepunion.Log.addLogString("CoverManager_", "palette cover detach by data change");
+            if (this.mPaletteCover.mCoverAttached
+                    && PaletteCover.isDataChanged(this.mContext, bArr4)) {
+                Log.d(
+                        "SAccessoryManager_CoverAuthenticator",
+                        "Palette Cover changed, force detach first");
+                com.samsung.android.sepunion.Log.addLogString(
+                        "CoverManager_", "palette cover detach by data change");
                 this.mPaletteCover.setCoverVerified(false, null);
             }
             StringBuilder sb = new StringBuilder("Palette Cover attached info = ");
             byte[] bArr5 = this.mUriData;
-            VpnManagerService$$ExternalSyntheticOutline0.m(sb, bArr5 != null ? Arrays.toString(bArr5) : "", "SAccessoryManager_CoverAuthenticator");
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    sb,
+                    bArr5 != null ? Arrays.toString(bArr5) : "",
+                    "SAccessoryManager_CoverAuthenticator");
             if (!this.mPaletteCover.mCoverAttached) {
                 StringBuilder sb2 = new StringBuilder("palette cover attach");
                 byte[] bArr6 = this.mUriData;
@@ -899,12 +1070,15 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
             PaletteCover paletteCover3 = this.mPaletteCover;
             if (paletteCover3 != null && paletteCover3.mCoverAttached && (!z2 || !z4 || !z)) {
                 Log.d("SAccessoryManager_CoverAuthenticator", "Palette Cover detached");
-                com.samsung.android.sepunion.Log.addLogString("CoverManager_", "palette cover detach");
+                com.samsung.android.sepunion.Log.addLogString(
+                        "CoverManager_", "palette cover detach");
                 this.mPaletteCover.setCoverVerified(false, null);
                 this.mPaletteCover = null;
                 this.mUriData = null;
                 if (!z4 || !z) {
-                    Log.d("SAccessoryManager_CoverAuthenticator", "Palette Cover detached by other cover");
+                    Log.d(
+                            "SAccessoryManager_CoverAuthenticator",
+                            "Palette Cover detached by other cover");
                 } else if (!z3) {
                     this.mLastCoverState = null;
                     return;
@@ -928,14 +1102,18 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
                 b3 = b4;
             }
             coverState.setFriendsType(0);
-            if (coverInfo.type == 8 && this.mContext.getPackageManager().hasSystemFeature("com.sec.feature.cover.clearsideviewcover")) {
+            if (coverInfo.type == 8
+                    && this.mContext
+                            .getPackageManager()
+                            .hasSystemFeature("com.sec.feature.cover.clearsideviewcover")) {
                 coverInfo.type = 15;
             }
             if (this.mSensor != null && this.mCoverType != coverInfo.type) {
                 StringBuilder sb3 = new StringBuilder("force detach event, ");
                 sb3.append(this.mCoverType);
                 sb3.append(" ");
-                GestureWakeup$$ExternalSyntheticOutline0.m(sb3, coverInfo.type, "SAccessoryManager_CoverAuthenticator");
+                GestureWakeup$$ExternalSyntheticOutline0.m(
+                        sb3, coverInfo.type, "SAccessoryManager_CoverAuthenticator");
                 setCoverVerified(false, null, null);
             }
             int i2 = coverInfo.type;
@@ -962,14 +1140,21 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
                 this.mInputManager.setCoverVerify(coverState.getType());
                 this.mPowerManager.setCoverType(coverState.getType());
                 if (this.mSemUnionManagerLocal == null) {
-                    this.mSemUnionManagerLocal = (SemUnionManagerLocal) LocalServices.getService(SemUnionManagerLocal.class);
+                    this.mSemUnionManagerLocal =
+                            (SemUnionManagerLocal)
+                                    LocalServices.getService(SemUnionManagerLocal.class);
                 }
                 SemUnionManagerLocal semUnionManagerLocal = this.mSemUnionManagerLocal;
                 if (semUnionManagerLocal != null) {
-                    semUnionManagerLocal.notifySmartCoverAttachStateChanged(System.currentTimeMillis(), z, coverState);
+                    semUnionManagerLocal.notifySmartCoverAttachStateChanged(
+                            System.currentTimeMillis(), z, coverState);
                 }
                 if (coverInfo.type == 0) {
-                    Iterator<ApplicationInfo> it = this.mContext.getPackageManager().getInstalledApplications(0).iterator();
+                    Iterator<ApplicationInfo> it =
+                            this.mContext
+                                    .getPackageManager()
+                                    .getInstalledApplications(0)
+                                    .iterator();
                     while (true) {
                         if (!it.hasNext()) {
                             break;
@@ -977,9 +1162,12 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
                         if (it.next().packageName.equals("com.samsung.android.isag.issmanager")) {
                             Log.i("SAccessoryManager_CoverAuthenticator", "send to iss manager");
                             Intent intent = new Intent();
-                            intent.setAction("com.samsung.android.isag.issmanager.ACTION_COVER_AUTH");
+                            intent.setAction(
+                                    "com.samsung.android.isag.issmanager.ACTION_COVER_AUTH");
                             intent.setPackage("com.samsung.android.isag.issmanager");
-                            this.mContext.sendBroadcast(intent, "com.samsung.android.isag.issmanager.permission.COVER_AUTH");
+                            this.mContext.sendBroadcast(
+                                    intent,
+                                    "com.samsung.android.isag.issmanager.permission.COVER_AUTH");
                             break;
                         }
                     }
@@ -988,7 +1176,9 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
             int i4 = this.mAuthType;
             if (i4 == 1 || i4 == 2 || i4 == 3) {
                 Log.d("SAccessoryManager_CoverAuthenticator", "coverInfo.getUrl: " + coverInfo.url);
-                Intent intent2 = new Intent("com.samsung.android.intent.action.ACCESSORY_AUTHENTICATION_COMPLETE");
+                Intent intent2 =
+                        new Intent(
+                                "com.samsung.android.intent.action.ACCESSORY_AUTHENTICATION_COMPLETE");
                 if (coverInfo.url != 0) {
                     byte[] bArr8 = this.mUriData;
                     if (bArr8 == null || bArr8.length < 23) {
@@ -1022,7 +1212,9 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
             String str = coverAuthStateFile2.TAG;
             if (bArr9 == null) {
                 Log.e(str, "ID is null.. can not write");
-            } else if (Arrays.equals(coverAuthStateFile2.mId, bArr9) && Arrays.equals(coverAuthStateFile2.mUri, bArr10) && Arrays.equals(coverAuthStateFile2.mExtraData, bArr11)) {
+            } else if (Arrays.equals(coverAuthStateFile2.mId, bArr9)
+                    && Arrays.equals(coverAuthStateFile2.mUri, bArr10)
+                    && Arrays.equals(coverAuthStateFile2.mExtraData, bArr11)) {
                 Log.e(str, "same state.. ");
             } else {
                 byte[] bArr12 = new byte[bArr9.length];
@@ -1044,7 +1236,8 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
                 } else {
                     coverAuthStateFile2.mExtraData = bArr3;
                 }
-                new Thread() { // from class: com.samsung.accessory.manager.authentication.cover.CoverAuthenticator.CoverAuthStateFile.1
+                new Thread() { // from class:
+                               // com.samsung.accessory.manager.authentication.cover.CoverAuthenticator.CoverAuthStateFile.1
                     /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
                     {
                         super("AuthStateUpdater");
@@ -1058,7 +1251,9 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
                         FileOutputStream fileOutputStream2;
                         File createTempFile;
                         synchronized (CoverAuthStateFile.this.mTmpDir) {
-                            Log.d(CoverAuthStateFile.this.TAG, "An authentication state changed, updating...");
+                            Log.d(
+                                    CoverAuthStateFile.this.TAG,
+                                    "An authentication state changed, updating...");
                             FileOutputStream fileOutputStream3 = null;
                             try {
                             } catch (Throwable th) {
@@ -1066,7 +1261,9 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
                             }
                             try {
                                 try {
-                                    createTempFile = File.createTempFile("journal", "", CoverAuthStateFile.this.mTmpDir);
+                                    createTempFile =
+                                            File.createTempFile(
+                                                    "journal", "", CoverAuthStateFile.this.mTmpDir);
                                     fileOutputStream = new FileOutputStream(createTempFile);
                                 } catch (FileNotFoundException unused) {
                                 } catch (IOException e2) {
@@ -1087,15 +1284,21 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
                                         fileOutputStream.write(bArr11);
                                     }
                                     FileUtils.sync(fileOutputStream);
-                                    createTempFile.renameTo(new File(CoverAuthStateFile.this.mPath));
-                                    Log.d(CoverAuthStateFile.this.TAG, "An authentication state updated");
+                                    createTempFile.renameTo(
+                                            new File(CoverAuthStateFile.this.mPath));
+                                    Log.d(
+                                            CoverAuthStateFile.this.TAG,
+                                            "An authentication state updated");
                                 } catch (FileNotFoundException unused2) {
                                     fileOutputStream3 = fileOutputStream;
                                     Log.e(CoverAuthStateFile.this.TAG, "File does not exist");
                                     IoUtils.closeQuietly(fileOutputStream3);
                                 } catch (IOException e3) {
                                     e = e3;
-                                    Log.e(CoverAuthStateFile.this.TAG, "Failed to write authentication state", e);
+                                    Log.e(
+                                            CoverAuthStateFile.this.TAG,
+                                            "Failed to write authentication state",
+                                            e);
                                     IoUtils.closeQuietly(fileOutputStream);
                                 }
                                 IoUtils.closeQuietly(fileOutputStream);
@@ -1120,25 +1323,39 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
             }
             CoverState coverState3 = this.mLastCoverState;
             if (this.mSemUnionManagerLocal == null) {
-                this.mSemUnionManagerLocal = (SemUnionManagerLocal) LocalServices.getService(SemUnionManagerLocal.class);
+                this.mSemUnionManagerLocal =
+                        (SemUnionManagerLocal) LocalServices.getService(SemUnionManagerLocal.class);
             }
             SemUnionManagerLocal semUnionManagerLocal2 = this.mSemUnionManagerLocal;
             if (semUnionManagerLocal2 != null) {
-                semUnionManagerLocal2.notifySmartCoverAttachStateChanged(System.currentTimeMillis(), z, coverState3);
+                semUnionManagerLocal2.notifySmartCoverAttachStateChanged(
+                        System.currentTimeMillis(), z, coverState3);
             }
             this.mLastCoverState = null;
             if (this.mCoverType == 17) {
                 setTransmitPower(false);
             }
-            if (this.mAuthType != 4 && (bArr = (coverAuthStateFile = this.mCoverAuthStateFile).mId) != null && bArr[21] == 1 && (bArr2 = coverAuthStateFile.mUri) != null && (b = bArr2[1]) >= 17 && b < 32) {
+            if (this.mAuthType != 4
+                    && (bArr = (coverAuthStateFile = this.mCoverAuthStateFile).mId) != null
+                    && bArr[21] == 1
+                    && (bArr2 = coverAuthStateFile.mUri) != null
+                    && (b = bArr2[1]) >= 17
+                    && b < 32) {
                 notifyFriendsStateChanged(false, this.mUriData, null);
                 this.mUriData = null;
             }
         }
-        Settings.System.putString(this.mContext.getContentResolver(), "cover_type_id", z ? AmFmBandRange$$ExternalSyntheticOutline0.m(this.mCoverType, new StringBuilder(), "") : "");
+        Settings.System.putString(
+                this.mContext.getContentResolver(),
+                "cover_type_id",
+                z
+                        ? AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                this.mCoverType, new StringBuilder(), "")
+                        : "");
     }
 
-    public final void setFriendsVerified(boolean z, CoverInfo coverInfo, AuthenticationResult authenticationResult) {
+    public final void setFriendsVerified(
+            boolean z, CoverInfo coverInfo, AuthenticationResult authenticationResult) {
         byte b;
         Log.i("SAccessoryManager_CoverAuthenticator", "setAccessoryVerified");
         if (!z) {
@@ -1149,7 +1366,12 @@ public final class CoverAuthenticator extends LocalAuthenticator implements SAcc
         byte[] bArr = authenticationResult.mByteArrayManagerURI;
         this.mUriData = bArr;
         int i = this.mAuthType;
-        if ((i == 1 || i == 2 || i == 3) && coverInfo.url != 0 && bArr != null && bArr.length >= 2 && (b = bArr[1]) >= 17 && b < 32) {
+        if ((i == 1 || i == 2 || i == 3)
+                && coverInfo.url != 0
+                && bArr != null
+                && bArr.length >= 2
+                && (b = bArr[1]) >= 17
+                && b < 32) {
             notifyFriendsStateChanged(true, bArr, coverInfo.chip_id);
         }
     }

@@ -9,28 +9,33 @@ import android.os.LocaleList;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.widget.inline.InlinePresentationSpec;
+
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Preconditions;
 import com.android.internal.widget.InlinePresentationStyleUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class InlineSuggestionsRequest implements Parcelable {
-    public static final Parcelable.Creator<InlineSuggestionsRequest> CREATOR = new Parcelable.Creator<InlineSuggestionsRequest>() { // from class: android.view.inputmethod.InlineSuggestionsRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InlineSuggestionsRequest[] newArray(int size) {
-            return new InlineSuggestionsRequest[size];
-        }
+    public static final Parcelable.Creator<InlineSuggestionsRequest> CREATOR =
+            new Parcelable.Creator<
+                    InlineSuggestionsRequest>() { // from class:
+                                                  // android.view.inputmethod.InlineSuggestionsRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InlineSuggestionsRequest[] newArray(int size) {
+                    return new InlineSuggestionsRequest[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InlineSuggestionsRequest createFromParcel(Parcel in) {
-            return new InlineSuggestionsRequest(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InlineSuggestionsRequest createFromParcel(Parcel in) {
+                    return new InlineSuggestionsRequest(in);
+                }
+            };
     private static final long IME_AUTOFILL_DEFAULT_SUPPORTED_LOCALES_IS_EMPTY = 169273070;
     public static final int SUGGESTION_COUNT_UNLIMITED = Integer.MAX_VALUE;
     private Bundle mExtras;
@@ -115,7 +120,7 @@ public final class InlineSuggestionsRequest implements Parcelable {
         return Bundle.EMPTY;
     }
 
-    static abstract class BaseBuilder {
+    abstract static class BaseBuilder {
         abstract Builder setHostDisplayId(int i);
 
         abstract Builder setHostInputToken(IBinder iBinder);
@@ -124,20 +129,33 @@ public final class InlineSuggestionsRequest implements Parcelable {
 
         abstract Builder setInlinePresentationSpecs(List<InlinePresentationSpec> list);
 
-        BaseBuilder() {
-        }
+        BaseBuilder() {}
     }
 
-    InlineSuggestionsRequest(int maxSuggestionCount, List<InlinePresentationSpec> inlinePresentationSpecs, String hostPackageName, LocaleList supportedLocales, Bundle extras, IBinder hostInputToken, int hostDisplayId, InlinePresentationSpec inlineTooltipPresentationSpec) {
+    InlineSuggestionsRequest(
+            int maxSuggestionCount,
+            List<InlinePresentationSpec> inlinePresentationSpecs,
+            String hostPackageName,
+            LocaleList supportedLocales,
+            Bundle extras,
+            IBinder hostInputToken,
+            int hostDisplayId,
+            InlinePresentationSpec inlineTooltipPresentationSpec) {
         this.mMaxSuggestionCount = maxSuggestionCount;
         this.mInlinePresentationSpecs = inlinePresentationSpecs;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mInlinePresentationSpecs);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mInlinePresentationSpecs);
         this.mHostPackageName = hostPackageName;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHostPackageName);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHostPackageName);
         this.mSupportedLocales = supportedLocales;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSupportedLocales);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSupportedLocales);
         this.mExtras = extras;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mExtras);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mExtras);
         this.mHostInputToken = hostInputToken;
         this.mHostDisplayId = hostDisplayId;
         this.mInlineTooltipPresentationSpec = inlineTooltipPresentationSpec;
@@ -177,7 +195,23 @@ public final class InlineSuggestionsRequest implements Parcelable {
     }
 
     public String toString() {
-        return "InlineSuggestionsRequest { maxSuggestionCount = " + this.mMaxSuggestionCount + ", inlinePresentationSpecs = " + this.mInlinePresentationSpecs + ", hostPackageName = " + this.mHostPackageName + ", supportedLocales = " + this.mSupportedLocales + ", extras = " + this.mExtras + ", hostInputToken = " + this.mHostInputToken + ", hostDisplayId = " + this.mHostDisplayId + ", inlineTooltipPresentationSpec = " + this.mInlineTooltipPresentationSpec + " }";
+        return "InlineSuggestionsRequest { maxSuggestionCount = "
+                + this.mMaxSuggestionCount
+                + ", inlinePresentationSpecs = "
+                + this.mInlinePresentationSpecs
+                + ", hostPackageName = "
+                + this.mHostPackageName
+                + ", supportedLocales = "
+                + this.mSupportedLocales
+                + ", extras = "
+                + this.mExtras
+                + ", hostInputToken = "
+                + this.mHostInputToken
+                + ", hostDisplayId = "
+                + this.mHostDisplayId
+                + ", inlineTooltipPresentationSpec = "
+                + this.mInlineTooltipPresentationSpec
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -188,7 +222,15 @@ public final class InlineSuggestionsRequest implements Parcelable {
             return false;
         }
         InlineSuggestionsRequest that = (InlineSuggestionsRequest) o;
-        if (this.mMaxSuggestionCount == that.mMaxSuggestionCount && Objects.equals(this.mInlinePresentationSpecs, that.mInlinePresentationSpecs) && Objects.equals(this.mHostPackageName, that.mHostPackageName) && Objects.equals(this.mSupportedLocales, that.mSupportedLocales) && extrasEquals(that.mExtras) && Objects.equals(this.mHostInputToken, that.mHostInputToken) && this.mHostDisplayId == that.mHostDisplayId && Objects.equals(this.mInlineTooltipPresentationSpec, that.mInlineTooltipPresentationSpec)) {
+        if (this.mMaxSuggestionCount == that.mMaxSuggestionCount
+                && Objects.equals(this.mInlinePresentationSpecs, that.mInlinePresentationSpecs)
+                && Objects.equals(this.mHostPackageName, that.mHostPackageName)
+                && Objects.equals(this.mSupportedLocales, that.mSupportedLocales)
+                && extrasEquals(that.mExtras)
+                && Objects.equals(this.mHostInputToken, that.mHostInputToken)
+                && this.mHostDisplayId == that.mHostDisplayId
+                && Objects.equals(
+                        this.mInlineTooltipPresentationSpec, that.mInlineTooltipPresentationSpec)) {
             return true;
         }
         return false;
@@ -196,7 +238,23 @@ public final class InlineSuggestionsRequest implements Parcelable {
 
     public int hashCode() {
         int _hash = (1 * 31) + this.mMaxSuggestionCount;
-        return (((((((((((((_hash * 31) + Objects.hashCode(this.mInlinePresentationSpecs)) * 31) + Objects.hashCode(this.mHostPackageName)) * 31) + Objects.hashCode(this.mSupportedLocales)) * 31) + Objects.hashCode(this.mExtras)) * 31) + Objects.hashCode(this.mHostInputToken)) * 31) + this.mHostDisplayId) * 31) + Objects.hashCode(this.mInlineTooltipPresentationSpec);
+        return (((((((((((((_hash * 31) + Objects.hashCode(this.mInlinePresentationSpecs)) * 31)
+                                                                                                + Objects
+                                                                                                        .hashCode(
+                                                                                                                this
+                                                                                                                        .mHostPackageName))
+                                                                                        * 31)
+                                                                                + Objects.hashCode(
+                                                                                        this
+                                                                                                .mSupportedLocales))
+                                                                        * 31)
+                                                                + Objects.hashCode(this.mExtras))
+                                                        * 31)
+                                                + Objects.hashCode(this.mHostInputToken))
+                                        * 31)
+                                + this.mHostDisplayId)
+                        * 31)
+                + Objects.hashCode(this.mInlineTooltipPresentationSpec);
     }
 
     @Override // android.os.Parcelable
@@ -233,16 +291,26 @@ public final class InlineSuggestionsRequest implements Parcelable {
         Bundle extras = in.readBundle();
         IBinder hostInputToken = unparcelHostInputToken(in);
         int hostDisplayId = in.readInt();
-        InlinePresentationSpec inlineTooltipPresentationSpec = (flg & 128) == 0 ? null : (InlinePresentationSpec) in.readTypedObject(InlinePresentationSpec.CREATOR);
+        InlinePresentationSpec inlineTooltipPresentationSpec =
+                (flg & 128) == 0
+                        ? null
+                        : (InlinePresentationSpec)
+                                in.readTypedObject(InlinePresentationSpec.CREATOR);
         this.mMaxSuggestionCount = maxSuggestionCount;
         this.mInlinePresentationSpecs = arrayList;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mInlinePresentationSpecs);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mInlinePresentationSpecs);
         this.mHostPackageName = hostPackageName;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHostPackageName);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mHostPackageName);
         this.mSupportedLocales = supportedLocales;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSupportedLocales);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSupportedLocales);
         this.mExtras = extras;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mExtras);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mExtras);
         this.mHostInputToken = hostInputToken;
         this.mHostDisplayId = hostDisplayId;
         this.mInlineTooltipPresentationSpec = inlineTooltipPresentationSpec;
@@ -262,7 +330,10 @@ public final class InlineSuggestionsRequest implements Parcelable {
 
         public Builder(List<InlinePresentationSpec> inlinePresentationSpecs) {
             this.mInlinePresentationSpecs = inlinePresentationSpecs;
-            AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mInlinePresentationSpecs);
+            AnnotationValidations.validate(
+                    (Class<NonNull>) NonNull.class,
+                    (NonNull) null,
+                    (Object) this.mInlinePresentationSpecs);
         }
 
         public Builder setMaxSuggestionCount(int value) {
@@ -355,20 +426,30 @@ public final class InlineSuggestionsRequest implements Parcelable {
                 this.mHostDisplayId = InlineSuggestionsRequest.defaultHostDisplayId();
             }
             if ((this.mBuilderFieldsSet & 128) == 0) {
-                this.mInlineTooltipPresentationSpec = InlineSuggestionsRequest.defaultInlineTooltipPresentationSpec();
+                this.mInlineTooltipPresentationSpec =
+                        InlineSuggestionsRequest.defaultInlineTooltipPresentationSpec();
             }
-            InlineSuggestionsRequest o = new InlineSuggestionsRequest(this.mMaxSuggestionCount, this.mInlinePresentationSpecs, this.mHostPackageName, this.mSupportedLocales, this.mExtras, this.mHostInputToken, this.mHostDisplayId, this.mInlineTooltipPresentationSpec);
+            InlineSuggestionsRequest o =
+                    new InlineSuggestionsRequest(
+                            this.mMaxSuggestionCount,
+                            this.mInlinePresentationSpecs,
+                            this.mHostPackageName,
+                            this.mSupportedLocales,
+                            this.mExtras,
+                            this.mHostInputToken,
+                            this.mHostDisplayId,
+                            this.mInlineTooltipPresentationSpec);
             return o;
         }
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 256) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

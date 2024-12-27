@@ -21,14 +21,16 @@ public class TBSRequest extends ASN1Object {
     ASN1Integer version;
     boolean versionSet;
 
-    public TBSRequest(GeneralName requestorName, ASN1Sequence requestList, X509Extensions requestExtensions) {
+    public TBSRequest(
+            GeneralName requestorName, ASN1Sequence requestList, X509Extensions requestExtensions) {
         this.version = V1;
         this.requestorName = requestorName;
         this.requestList = requestList;
         this.requestExtensions = Extensions.getInstance(requestExtensions);
     }
 
-    public TBSRequest(GeneralName requestorName, ASN1Sequence requestList, Extensions requestExtensions) {
+    public TBSRequest(
+            GeneralName requestorName, ASN1Sequence requestList, Extensions requestExtensions) {
         this.version = V1;
         this.requestorName = requestorName;
         this.requestList = requestList;
@@ -50,13 +52,15 @@ public class TBSRequest extends ASN1Object {
             this.version = V1;
         }
         if (seq.getObjectAt(index) instanceof ASN1TaggedObject) {
-            this.requestorName = GeneralName.getInstance((ASN1TaggedObject) seq.getObjectAt(index), true);
+            this.requestorName =
+                    GeneralName.getInstance((ASN1TaggedObject) seq.getObjectAt(index), true);
             index++;
         }
         int index2 = index + 1;
         this.requestList = (ASN1Sequence) seq.getObjectAt(index);
         if (seq.size() == index2 + 1) {
-            this.requestExtensions = Extensions.getInstance((ASN1TaggedObject) seq.getObjectAt(index2), true);
+            this.requestExtensions =
+                    Extensions.getInstance((ASN1TaggedObject) seq.getObjectAt(index2), true);
         }
     }
 
@@ -90,7 +94,8 @@ public class TBSRequest extends ASN1Object {
         return this.requestExtensions;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(4);
         if (!this.version.equals((ASN1Primitive) V1) || this.versionSet) {

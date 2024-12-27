@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -11,19 +12,20 @@ import java.util.Objects;
 @Deprecated
 /* loaded from: classes3.dex */
 public class RssiCurve implements Parcelable {
-    public static final Parcelable.Creator<RssiCurve> CREATOR = new Parcelable.Creator<RssiCurve>() { // from class: android.net.RssiCurve.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RssiCurve createFromParcel(Parcel in) {
-            return new RssiCurve(in);
-        }
+    public static final Parcelable.Creator<RssiCurve> CREATOR =
+            new Parcelable.Creator<RssiCurve>() { // from class: android.net.RssiCurve.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RssiCurve createFromParcel(Parcel in) {
+                    return new RssiCurve(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RssiCurve[] newArray(int size) {
-            return new RssiCurve[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RssiCurve[] newArray(int size) {
+                    return new RssiCurve[size];
+                }
+            };
     private static final int DEFAULT_ACTIVE_NETWORK_RSSI_BOOST = 25;
     public final int activeNetworkRssiBoost;
     public final int bucketWidth;
@@ -92,19 +94,31 @@ public class RssiCurve implements Parcelable {
             return false;
         }
         RssiCurve rssiCurve = (RssiCurve) o;
-        if (this.start == rssiCurve.start && this.bucketWidth == rssiCurve.bucketWidth && Arrays.equals(this.rssiBuckets, rssiCurve.rssiBuckets) && this.activeNetworkRssiBoost == rssiCurve.activeNetworkRssiBoost) {
+        if (this.start == rssiCurve.start
+                && this.bucketWidth == rssiCurve.bucketWidth
+                && Arrays.equals(this.rssiBuckets, rssiCurve.rssiBuckets)
+                && this.activeNetworkRssiBoost == rssiCurve.activeNetworkRssiBoost) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.start), Integer.valueOf(this.bucketWidth), Integer.valueOf(this.activeNetworkRssiBoost)) ^ Arrays.hashCode(this.rssiBuckets);
+        return Objects.hash(
+                        Integer.valueOf(this.start),
+                        Integer.valueOf(this.bucketWidth),
+                        Integer.valueOf(this.activeNetworkRssiBoost))
+                ^ Arrays.hashCode(this.rssiBuckets);
     }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("RssiCurve[start=").append(this.start).append(",bucketWidth=").append(this.bucketWidth).append(",activeNetworkRssiBoost=").append(this.activeNetworkRssiBoost);
+        sb.append("RssiCurve[start=")
+                .append(this.start)
+                .append(",bucketWidth=")
+                .append(this.bucketWidth)
+                .append(",activeNetworkRssiBoost=")
+                .append(this.activeNetworkRssiBoost);
         sb.append(",buckets=");
         for (int i = 0; i < this.rssiBuckets.length; i++) {
             sb.append((int) this.rssiBuckets[i]);

@@ -22,78 +22,143 @@ public interface IMms extends IInterface {
 
     boolean deleteStoredMessage(String str, Uri uri) throws RemoteException;
 
-    void downloadMessage(int i, String str, String str2, Uri uri, Bundle bundle, PendingIntent pendingIntent, long j, String str3) throws RemoteException;
+    void downloadMessage(
+            int i,
+            String str,
+            String str2,
+            Uri uri,
+            Bundle bundle,
+            PendingIntent pendingIntent,
+            long j,
+            String str3)
+            throws RemoteException;
 
     boolean getAutoPersisting() throws RemoteException;
 
-    Uri importMultimediaMessage(String str, Uri uri, String str2, long j, boolean z, boolean z2) throws RemoteException;
+    Uri importMultimediaMessage(String str, Uri uri, String str2, long j, boolean z, boolean z2)
+            throws RemoteException;
 
-    Uri importTextMessage(String str, String str2, int i, String str3, long j, boolean z, boolean z2) throws RemoteException;
+    Uri importTextMessage(
+            String str, String str2, int i, String str3, long j, boolean z, boolean z2)
+            throws RemoteException;
 
-    void sendMessage(int i, String str, Uri uri, String str2, Bundle bundle, PendingIntent pendingIntent, long j, String str3) throws RemoteException;
+    void sendMessage(
+            int i,
+            String str,
+            Uri uri,
+            String str2,
+            Bundle bundle,
+            PendingIntent pendingIntent,
+            long j,
+            String str3)
+            throws RemoteException;
 
-    void sendStoredMessage(int i, String str, Uri uri, Bundle bundle, PendingIntent pendingIntent) throws RemoteException;
+    void sendStoredMessage(int i, String str, Uri uri, Bundle bundle, PendingIntent pendingIntent)
+            throws RemoteException;
 
     void setAutoPersisting(String str, boolean z) throws RemoteException;
 
-    boolean updateStoredMessageStatus(String str, Uri uri, ContentValues contentValues) throws RemoteException;
+    boolean updateStoredMessageStatus(String str, Uri uri, ContentValues contentValues)
+            throws RemoteException;
 
     public static class Default implements IMms {
         @Override // com.android.internal.telephony.IMms
-        public void sendMessage(int subId, String callingPkg, Uri contentUri, String locationUrl, Bundle configOverrides, PendingIntent sentIntent, long messageId, String attributionTag) throws RemoteException {
-        }
+        public void sendMessage(
+                int subId,
+                String callingPkg,
+                Uri contentUri,
+                String locationUrl,
+                Bundle configOverrides,
+                PendingIntent sentIntent,
+                long messageId,
+                String attributionTag)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.IMms
-        public void downloadMessage(int subId, String callingPkg, String locationUrl, Uri contentUri, Bundle configOverrides, PendingIntent downloadedIntent, long messageId, String attributionTag) throws RemoteException {
-        }
+        public void downloadMessage(
+                int subId,
+                String callingPkg,
+                String locationUrl,
+                Uri contentUri,
+                Bundle configOverrides,
+                PendingIntent downloadedIntent,
+                long messageId,
+                String attributionTag)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.IMms
-        public Uri importTextMessage(String callingPkg, String address, int type, String text, long timestampMillis, boolean seen, boolean read) throws RemoteException {
+        public Uri importTextMessage(
+                String callingPkg,
+                String address,
+                int type,
+                String text,
+                long timestampMillis,
+                boolean seen,
+                boolean read)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.IMms
-        public Uri importMultimediaMessage(String callingPkg, Uri contentUri, String messageId, long timestampSecs, boolean seen, boolean read) throws RemoteException {
+        public Uri importMultimediaMessage(
+                String callingPkg,
+                Uri contentUri,
+                String messageId,
+                long timestampSecs,
+                boolean seen,
+                boolean read)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.IMms
-        public boolean deleteStoredMessage(String callingPkg, Uri messageUri) throws RemoteException {
+        public boolean deleteStoredMessage(String callingPkg, Uri messageUri)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.telephony.IMms
-        public boolean deleteStoredConversation(String callingPkg, long conversationId) throws RemoteException {
+        public boolean deleteStoredConversation(String callingPkg, long conversationId)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.telephony.IMms
-        public boolean updateStoredMessageStatus(String callingPkg, Uri messageUri, ContentValues statusValues) throws RemoteException {
+        public boolean updateStoredMessageStatus(
+                String callingPkg, Uri messageUri, ContentValues statusValues)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.telephony.IMms
-        public boolean archiveStoredConversation(String callingPkg, long conversationId, boolean archived) throws RemoteException {
+        public boolean archiveStoredConversation(
+                String callingPkg, long conversationId, boolean archived) throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.telephony.IMms
-        public Uri addTextMessageDraft(String callingPkg, String address, String text) throws RemoteException {
+        public Uri addTextMessageDraft(String callingPkg, String address, String text)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.IMms
-        public Uri addMultimediaMessageDraft(String callingPkg, Uri contentUri) throws RemoteException {
+        public Uri addMultimediaMessageDraft(String callingPkg, Uri contentUri)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.IMms
-        public void sendStoredMessage(int subId, String callingPkg, Uri messageUri, Bundle configOverrides, PendingIntent sentIntent) throws RemoteException {
-        }
+        public void sendStoredMessage(
+                int subId,
+                String callingPkg,
+                Uri messageUri,
+                Bundle configOverrides,
+                PendingIntent sentIntent)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.IMms
-        public void setAutoPersisting(String callingPkg, boolean enabled) throws RemoteException {
-        }
+        public void setAutoPersisting(String callingPkg, boolean enabled) throws RemoteException {}
 
         @Override // com.android.internal.telephony.IMms
         public boolean getAutoPersisting() throws RemoteException {
@@ -106,7 +171,7 @@ public interface IMms extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMms {
+    public abstract static class Stub extends Binder implements IMms {
         public static final String DESCRIPTOR = "com.android.internal.telephony.IMms";
         static final int TRANSACTION_addMultimediaMessageDraft = 10;
         static final int TRANSACTION_addTextMessageDraft = 9;
@@ -181,7 +246,8 @@ public interface IMms extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -196,7 +262,8 @@ public interface IMms extends IInterface {
                     Uri _arg2 = (Uri) data.readTypedObject(Uri.CREATOR);
                     String _arg3 = data.readString();
                     Bundle _arg4 = (Bundle) data.readTypedObject(Bundle.CREATOR);
-                    PendingIntent _arg5 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg5 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     long _arg6 = data.readLong();
                     String _arg7 = data.readString();
                     data.enforceNoDataAvail();
@@ -209,7 +276,8 @@ public interface IMms extends IInterface {
                     String _arg22 = data.readString();
                     Uri _arg32 = (Uri) data.readTypedObject(Uri.CREATOR);
                     Bundle _arg42 = (Bundle) data.readTypedObject(Bundle.CREATOR);
-                    PendingIntent _arg52 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg52 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     long _arg62 = data.readLong();
                     String _arg72 = data.readString();
                     data.enforceNoDataAvail();
@@ -225,7 +293,9 @@ public interface IMms extends IInterface {
                     boolean _arg53 = data.readBoolean();
                     boolean _arg63 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    Uri _result = importTextMessage(_arg03, _arg13, _arg23, _arg33, _arg43, _arg53, _arg63);
+                    Uri _result =
+                            importTextMessage(
+                                    _arg03, _arg13, _arg23, _arg33, _arg43, _arg53, _arg63);
                     reply.writeNoException();
                     reply.writeTypedObject(_result, 1);
                     return true;
@@ -237,7 +307,8 @@ public interface IMms extends IInterface {
                     boolean _arg44 = data.readBoolean();
                     boolean _arg54 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    Uri _result2 = importMultimediaMessage(_arg04, _arg14, _arg24, _arg34, _arg44, _arg54);
+                    Uri _result2 =
+                            importMultimediaMessage(_arg04, _arg14, _arg24, _arg34, _arg44, _arg54);
                     reply.writeNoException();
                     reply.writeTypedObject(_result2, 1);
                     return true;
@@ -260,7 +331,8 @@ public interface IMms extends IInterface {
                 case 7:
                     String _arg07 = data.readString();
                     Uri _arg17 = (Uri) data.readTypedObject(Uri.CREATOR);
-                    ContentValues _arg25 = (ContentValues) data.readTypedObject(ContentValues.CREATOR);
+                    ContentValues _arg25 =
+                            (ContentValues) data.readTypedObject(ContentValues.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result5 = updateStoredMessageStatus(_arg07, _arg17, _arg25);
                     reply.writeNoException();
@@ -297,7 +369,8 @@ public interface IMms extends IInterface {
                     String _arg111 = data.readString();
                     Uri _arg28 = (Uri) data.readTypedObject(Uri.CREATOR);
                     Bundle _arg35 = (Bundle) data.readTypedObject(Bundle.CREATOR);
-                    PendingIntent _arg45 = (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _arg45 =
+                            (PendingIntent) data.readTypedObject(PendingIntent.CREATOR);
                     data.enforceNoDataAvail();
                     sendStoredMessage(_arg011, _arg111, _arg28, _arg35, _arg45);
                     reply.writeNoException();
@@ -336,7 +409,16 @@ public interface IMms extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IMms
-            public void sendMessage(int subId, String callingPkg, Uri contentUri, String locationUrl, Bundle configOverrides, PendingIntent sentIntent, long messageId, String attributionTag) throws RemoteException {
+            public void sendMessage(
+                    int subId,
+                    String callingPkg,
+                    Uri contentUri,
+                    String locationUrl,
+                    Bundle configOverrides,
+                    PendingIntent sentIntent,
+                    long messageId,
+                    String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -358,7 +440,16 @@ public interface IMms extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IMms
-            public void downloadMessage(int subId, String callingPkg, String locationUrl, Uri contentUri, Bundle configOverrides, PendingIntent downloadedIntent, long messageId, String attributionTag) throws RemoteException {
+            public void downloadMessage(
+                    int subId,
+                    String callingPkg,
+                    String locationUrl,
+                    Uri contentUri,
+                    Bundle configOverrides,
+                    PendingIntent downloadedIntent,
+                    long messageId,
+                    String attributionTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -380,7 +471,15 @@ public interface IMms extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IMms
-            public Uri importTextMessage(String callingPkg, String address, int type, String text, long timestampMillis, boolean seen, boolean read) throws RemoteException {
+            public Uri importTextMessage(
+                    String callingPkg,
+                    String address,
+                    int type,
+                    String text,
+                    long timestampMillis,
+                    boolean seen,
+                    boolean read)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -403,7 +502,14 @@ public interface IMms extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IMms
-            public Uri importMultimediaMessage(String callingPkg, Uri contentUri, String messageId, long timestampSecs, boolean seen, boolean read) throws RemoteException {
+            public Uri importMultimediaMessage(
+                    String callingPkg,
+                    Uri contentUri,
+                    String messageId,
+                    long timestampSecs,
+                    boolean seen,
+                    boolean read)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -425,7 +531,8 @@ public interface IMms extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IMms
-            public boolean deleteStoredMessage(String callingPkg, Uri messageUri) throws RemoteException {
+            public boolean deleteStoredMessage(String callingPkg, Uri messageUri)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -443,7 +550,8 @@ public interface IMms extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IMms
-            public boolean deleteStoredConversation(String callingPkg, long conversationId) throws RemoteException {
+            public boolean deleteStoredConversation(String callingPkg, long conversationId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -461,7 +569,9 @@ public interface IMms extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IMms
-            public boolean updateStoredMessageStatus(String callingPkg, Uri messageUri, ContentValues statusValues) throws RemoteException {
+            public boolean updateStoredMessageStatus(
+                    String callingPkg, Uri messageUri, ContentValues statusValues)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -480,7 +590,9 @@ public interface IMms extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IMms
-            public boolean archiveStoredConversation(String callingPkg, long conversationId, boolean archived) throws RemoteException {
+            public boolean archiveStoredConversation(
+                    String callingPkg, long conversationId, boolean archived)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -499,7 +611,8 @@ public interface IMms extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IMms
-            public Uri addTextMessageDraft(String callingPkg, String address, String text) throws RemoteException {
+            public Uri addTextMessageDraft(String callingPkg, String address, String text)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -518,7 +631,8 @@ public interface IMms extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IMms
-            public Uri addMultimediaMessageDraft(String callingPkg, Uri contentUri) throws RemoteException {
+            public Uri addMultimediaMessageDraft(String callingPkg, Uri contentUri)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -536,7 +650,13 @@ public interface IMms extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IMms
-            public void sendStoredMessage(int subId, String callingPkg, Uri messageUri, Bundle configOverrides, PendingIntent sentIntent) throws RemoteException {
+            public void sendStoredMessage(
+                    int subId,
+                    String callingPkg,
+                    Uri messageUri,
+                    Bundle configOverrides,
+                    PendingIntent sentIntent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -555,7 +675,8 @@ public interface IMms extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IMms
-            public void setAutoPersisting(String callingPkg, boolean enabled) throws RemoteException {
+            public void setAutoPersisting(String callingPkg, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

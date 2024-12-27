@@ -6,8 +6,7 @@ import android.text.TextUtils;
 /* compiled from: SemSmartClipDataRepository.java */
 /* loaded from: classes5.dex */
 class SmartClipDataRootElement extends SmartClipDataElementImpl {
-    SmartClipDataRootElement() {
-    }
+    SmartClipDataRootElement() {}
 
     public String collectPlainTextTag() {
         SmartClipDataElementImpl element = this;
@@ -25,7 +24,9 @@ class SmartClipDataRootElement extends SmartClipDataElementImpl {
                 }
             }
             if (TextUtils.getTrimmedLength(plainText.toString()) > 0) {
-                if (curTextTagRect != null && curTextTagRect.top >= prevTextTagRect.bottom && !TextUtils.isEmpty(resultString)) {
+                if (curTextTagRect != null
+                        && curTextTagRect.top >= prevTextTagRect.bottom
+                        && !TextUtils.isEmpty(resultString)) {
                     resultString.append("\n");
                 }
                 resultString.append((CharSequence) plainText).append(" ");

@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+
 import com.samsung.android.knox.analytics.KnoxAnalyticsData;
 import com.samsung.android.knox.analytics.database.Contract;
 import com.samsung.android.knox.analytics.model.EventList;
@@ -47,11 +48,13 @@ public final class DatabaseSizeObserver {
         @Override // android.database.ContentObserver
         public final void onChange(boolean z, Uri uri) {
             super.onChange(z, uri);
-            long databaseSize = KnoxAnalyticsQueryResolver.getDatabaseSize(DatabaseSizeObserver.this.mContext);
+            long databaseSize =
+                    KnoxAnalyticsQueryResolver.getDatabaseSize(DatabaseSizeObserver.this.mContext);
             String str = DatabaseSizeObserver.TAG;
             Log.d(str, "onChange(): currentSize = " + databaseSize);
             DatabaseSizeObserver databaseSizeObserver = DatabaseSizeObserver.this;
-            if (!databaseSizeObserver.mHasAlertedUploader && databaseSize > databaseSizeObserver.mDbAlertSizeInBytes) {
+            if (!databaseSizeObserver.mHasAlertedUploader
+                    && databaseSize > databaseSizeObserver.mDbAlertSizeInBytes) {
                 Log.d(str, "onChange(): alert triggered");
                 UploaderBroadcaster.broadcastDbSizeWarning(DatabaseSizeObserver.this.mContext);
                 DatabaseSizeObserver.this.mHasAlertedUploader = true;
@@ -76,19 +79,33 @@ public final class DatabaseSizeObserver {
         this.mDbMaxSizeInBytes = 5242880L;
         this.mDbAlertSizeInBytes = (int) (5242880 * 0.9d);
         this.mDbTargetSizeInBytes = (int) (5242880 * 0.85d);
-        Log.d(TAG, "calculateDbMaxDbSize(): dbMaxSize = " + this.mDbMaxSizeInBytes + " , dbAlertSize = " + this.mDbAlertSizeInBytes + ", mDbTargetSizeInBytes = " + this.mDbTargetSizeInBytes);
+        Log.d(
+                TAG,
+                "calculateDbMaxDbSize(): dbMaxSize = "
+                        + this.mDbMaxSizeInBytes
+                        + " , dbAlertSize = "
+                        + this.mDbAlertSizeInBytes
+                        + ", mDbTargetSizeInBytes = "
+                        + this.mDbTargetSizeInBytes);
     }
 
     public final void createDatabaseCleanEvent(long j, long j2) {
-        Log.d(TAG, String.format("createDatabaseCleanEvent(lastDeletedSize=%d, lastDeletedEventsCount=%d", Long.valueOf(j), Long.valueOf(j2)));
-        KnoxAnalyticsData knoxAnalyticsData = new KnoxAnalyticsData("KNOX_ANALYTICS", 1, DB_CLEAN_EVENT_EVENT_NAME);
+        Log.d(
+                TAG,
+                String.format(
+                        "createDatabaseCleanEvent(lastDeletedSize=%d, lastDeletedEventsCount=%d",
+                        Long.valueOf(j), Long.valueOf(j2)));
+        KnoxAnalyticsData knoxAnalyticsData =
+                new KnoxAnalyticsData("KNOX_ANALYTICS", 1, DB_CLEAN_EVENT_EVENT_NAME);
         knoxAnalyticsData.setProperty(DB_CLEAN_EVENT_SIZE_PARAMETER, j);
         knoxAnalyticsData.setProperty(DB_CLEAN_EVENT_COUNT, j2);
         this.mEventQueue.postMessage(3, knoxAnalyticsData);
     }
 
     public final void createDatabaseCleanEvent(DatabaseCleanResult databaseCleanResult) {
-        createDatabaseCleanEvent(databaseCleanResult.getDeletedSizeBytes(), databaseCleanResult.getDeletedEventsCount());
+        createDatabaseCleanEvent(
+                databaseCleanResult.getDeletedSizeBytes(),
+                databaseCleanResult.getDeletedEventsCount());
     }
 
     public final int getFailureCount() {
@@ -108,18 +125,27 @@ public final class DatabaseSizeObserver {
         HandlerThread handlerThread = new HandlerThread(HT_NAME);
         this.mHandlerThread = handlerThread;
         handlerThread.start();
-        this.mDatabaseSizeContentObserver = new DatabaseSizeContentObserver(this.mHandlerThread.getThreadHandler());
-        this.mContext.getContentResolver().registerContentObserver(Contract.CONTENT_URI, true, this.mDatabaseSizeContentObserver, 0);
+        this.mDatabaseSizeContentObserver =
+                new DatabaseSizeContentObserver(this.mHandlerThread.getThreadHandler());
+        this.mContext
+                .getContentResolver()
+                .registerContentObserver(
+                        Contract.CONTENT_URI, true, this.mDatabaseSizeContentObserver, 0);
     }
 
     public final void startCleanDatabase() {
         Log.d(TAG, "startCleanDatabase()");
-        createDatabaseCleanEvent(KnoxAnalyticsQueryResolver.callDatabaseClean(this.mContext, this.mDbTargetSizeInBytes));
+        createDatabaseCleanEvent(
+                KnoxAnalyticsQueryResolver.callDatabaseClean(
+                        this.mContext, this.mDbTargetSizeInBytes));
     }
 
     public final void startCompression() {
         if (KnoxAnalyticsQueryResolver.getEventCount(this.mContext) <= 1000 || this.mFailure > 3) {
-            Log.d(TAG, "startCompression(): Database is full and there is no sufficient data to compress");
+            Log.d(
+                    TAG,
+                    "startCompression(): Database is full and there is no sufficient data to"
+                        + " compress");
             this.mFailure = 0;
             startCleanDatabase();
             return;
@@ -129,8 +155,11 @@ public final class DatabaseSizeObserver {
             Log.d(TAG, "startCompression(): There is no data in Events table");
             return;
         }
-        Bundle performCompressedEventsTransaction = KnoxAnalyticsQueryResolver.performCompressedEventsTransaction(this.mContext, queryEventChunk);
-        if (performCompressedEventsTransaction == null || !performCompressedEventsTransaction.getBoolean(COMPRESSED_RESULT_KEY)) {
+        Bundle performCompressedEventsTransaction =
+                KnoxAnalyticsQueryResolver.performCompressedEventsTransaction(
+                        this.mContext, queryEventChunk);
+        if (performCompressedEventsTransaction == null
+                || !performCompressedEventsTransaction.getBoolean(COMPRESSED_RESULT_KEY)) {
             Log.d(TAG, "startCompression(): Some error occurred when adding compressed data.");
             increaseFailureCount();
         } else {
@@ -142,7 +171,9 @@ public final class DatabaseSizeObserver {
     public final void stop() {
         Log.d(TAG, "stop()");
         if (this.mDatabaseSizeContentObserver != null) {
-            this.mContext.getContentResolver().unregisterContentObserver(this.mDatabaseSizeContentObserver);
+            this.mContext
+                    .getContentResolver()
+                    .unregisterContentObserver(this.mDatabaseSizeContentObserver);
         }
         this.mDatabaseSizeContentObserver = null;
         HandlerThread handlerThread = this.mHandlerThread;

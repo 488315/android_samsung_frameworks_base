@@ -1,9 +1,7 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.AbstractMessageLite;
 import com.android.framework.protobuf.AbstractMessageLite.Builder;
-import com.android.framework.protobuf.ByteString;
-import com.android.framework.protobuf.MessageLite;
+
 import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,7 +11,10 @@ import java.util.Collection;
 import java.util.List;
 
 /* loaded from: classes3.dex */
-public abstract class AbstractMessageLite<MessageType extends AbstractMessageLite<MessageType, BuilderType>, BuilderType extends Builder<MessageType, BuilderType>> implements MessageLite {
+public abstract class AbstractMessageLite<
+                MessageType extends AbstractMessageLite<MessageType, BuilderType>,
+                BuilderType extends Builder<MessageType, BuilderType>>
+        implements MessageLite {
     protected int memoizedHashCode = 0;
 
     protected interface InternalOneOfEnum {
@@ -55,7 +56,9 @@ public abstract class AbstractMessageLite<MessageType extends AbstractMessageLit
     @Override // com.android.framework.protobuf.MessageLite
     public void writeDelimitedTo(OutputStream output) throws IOException {
         int serialized = getSerializedSize();
-        int bufferSize = CodedOutputStream.computePreferredBufferSize(CodedOutputStream.computeUInt32SizeNoTag(serialized) + serialized);
+        int bufferSize =
+                CodedOutputStream.computePreferredBufferSize(
+                        CodedOutputStream.computeUInt32SizeNoTag(serialized) + serialized);
         CodedOutputStream codedOutput = CodedOutputStream.newInstance(output, bufferSize);
         codedOutput.writeUInt32NoTag(serialized);
         writeTo(codedOutput);
@@ -85,10 +88,15 @@ public abstract class AbstractMessageLite<MessageType extends AbstractMessageLit
     }
 
     private String getSerializingExceptionMessage(String target) {
-        return "Serializing " + getClass().getName() + " to a " + target + " threw an IOException (should never happen).";
+        return "Serializing "
+                + getClass().getName()
+                + " to a "
+                + target
+                + " threw an IOException (should never happen).";
     }
 
-    protected static void checkByteStringIsUtf8(ByteString byteString) throws IllegalArgumentException {
+    protected static void checkByteStringIsUtf8(ByteString byteString)
+            throws IllegalArgumentException {
         if (!byteString.isValidUtf8()) {
             throw new IllegalArgumentException("Byte string is not UTF-8.");
         }
@@ -103,15 +111,20 @@ public abstract class AbstractMessageLite<MessageType extends AbstractMessageLit
         Builder.addAll((Iterable) values, (List) list);
     }
 
-    public static abstract class Builder<MessageType extends AbstractMessageLite<MessageType, BuilderType>, BuilderType extends Builder<MessageType, BuilderType>> implements MessageLite.Builder {
-        @Override // 
+    public abstract static class Builder<
+                    MessageType extends AbstractMessageLite<MessageType, BuilderType>,
+                    BuilderType extends Builder<MessageType, BuilderType>>
+            implements MessageLite.Builder {
+        @Override //
         /* renamed from: clone */
         public abstract BuilderType mo7416clone();
 
         protected abstract BuilderType internalMergeFrom(MessageType messagetype);
 
         @Override // com.android.framework.protobuf.MessageLite.Builder
-        public abstract BuilderType mergeFrom(CodedInputStream codedInputStream, ExtensionRegistryLite extensionRegistryLite) throws IOException;
+        public abstract BuilderType mergeFrom(
+                CodedInputStream codedInputStream, ExtensionRegistryLite extensionRegistryLite)
+                throws IOException;
 
         @Override // com.android.framework.protobuf.MessageLite.Builder
         public BuilderType mergeFrom(CodedInputStream input) throws IOException {
@@ -133,7 +146,8 @@ public abstract class AbstractMessageLite<MessageType extends AbstractMessageLit
         }
 
         @Override // com.android.framework.protobuf.MessageLite.Builder
-        public BuilderType mergeFrom(ByteString data, ExtensionRegistryLite extensionRegistry) throws InvalidProtocolBufferException {
+        public BuilderType mergeFrom(ByteString data, ExtensionRegistryLite extensionRegistry)
+                throws InvalidProtocolBufferException {
             try {
                 CodedInputStream input = data.newCodedInput();
                 mergeFrom(input, extensionRegistry);
@@ -152,7 +166,8 @@ public abstract class AbstractMessageLite<MessageType extends AbstractMessageLit
         }
 
         @Override // com.android.framework.protobuf.MessageLite.Builder
-        public BuilderType mergeFrom(byte[] data, int off, int len) throws InvalidProtocolBufferException {
+        public BuilderType mergeFrom(byte[] data, int off, int len)
+                throws InvalidProtocolBufferException {
             try {
                 CodedInputStream input = CodedInputStream.newInstance(data, off, len);
                 mergeFrom(input);
@@ -166,12 +181,15 @@ public abstract class AbstractMessageLite<MessageType extends AbstractMessageLit
         }
 
         @Override // com.android.framework.protobuf.MessageLite.Builder
-        public BuilderType mergeFrom(byte[] data, ExtensionRegistryLite extensionRegistry) throws InvalidProtocolBufferException {
+        public BuilderType mergeFrom(byte[] data, ExtensionRegistryLite extensionRegistry)
+                throws InvalidProtocolBufferException {
             return mergeFrom(data, 0, data.length, extensionRegistry);
         }
 
         @Override // com.android.framework.protobuf.MessageLite.Builder
-        public BuilderType mergeFrom(byte[] data, int off, int len, ExtensionRegistryLite extensionRegistry) throws InvalidProtocolBufferException {
+        public BuilderType mergeFrom(
+                byte[] data, int off, int len, ExtensionRegistryLite extensionRegistry)
+                throws InvalidProtocolBufferException {
             try {
                 CodedInputStream input = CodedInputStream.newInstance(data, off, len);
                 mergeFrom(input, extensionRegistry);
@@ -193,7 +211,8 @@ public abstract class AbstractMessageLite<MessageType extends AbstractMessageLit
         }
 
         @Override // com.android.framework.protobuf.MessageLite.Builder
-        public BuilderType mergeFrom(InputStream input, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public BuilderType mergeFrom(InputStream input, ExtensionRegistryLite extensionRegistry)
+                throws IOException {
             CodedInputStream codedInput = CodedInputStream.newInstance(input);
             mergeFrom(codedInput, extensionRegistry);
             codedInput.checkLastTagWas(0);
@@ -248,7 +267,8 @@ public abstract class AbstractMessageLite<MessageType extends AbstractMessageLit
         }
 
         @Override // com.android.framework.protobuf.MessageLite.Builder
-        public boolean mergeDelimitedFrom(InputStream input, ExtensionRegistryLite extensionRegistry) throws IOException {
+        public boolean mergeDelimitedFrom(
+                InputStream input, ExtensionRegistryLite extensionRegistry) throws IOException {
             int firstByte = input.read();
             if (firstByte == -1) {
                 return false;
@@ -268,13 +288,18 @@ public abstract class AbstractMessageLite<MessageType extends AbstractMessageLit
         @Override // com.android.framework.protobuf.MessageLite.Builder
         public BuilderType mergeFrom(MessageLite messageLite) {
             if (!getDefaultInstanceForType().getClass().isInstance(messageLite)) {
-                throw new IllegalArgumentException("mergeFrom(MessageLite) can only merge messages of the same type.");
+                throw new IllegalArgumentException(
+                        "mergeFrom(MessageLite) can only merge messages of the same type.");
             }
             return (BuilderType) internalMergeFrom((AbstractMessageLite) messageLite);
         }
 
         private String getReadingExceptionMessage(String target) {
-            return "Reading " + getClass().getName() + " from a " + target + " threw an IOException (should never happen).";
+            return "Reading "
+                    + getClass().getName()
+                    + " from a "
+                    + target
+                    + " threw an IOException (should never happen).";
         }
 
         private static <T> void addAllCheckingNulls(Iterable<T> values, List<? super T> list) {
@@ -294,7 +319,8 @@ public abstract class AbstractMessageLite<MessageType extends AbstractMessageLit
             }
         }
 
-        protected static UninitializedMessageException newUninitializedMessageException(MessageLite message) {
+        protected static UninitializedMessageException newUninitializedMessageException(
+                MessageLite message) {
             return new UninitializedMessageException(message);
         }
 
@@ -311,7 +337,8 @@ public abstract class AbstractMessageLite<MessageType extends AbstractMessageLit
                 int begin = list.size();
                 for (Object value : lazyValues) {
                     if (value == null) {
-                        String message = "Element at index " + (lazyList.size() - begin) + " is null.";
+                        String message =
+                                "Element at index " + (lazyList.size() - begin) + " is null.";
                         for (int i = lazyList.size() - 1; i >= begin; i--) {
                             lazyList.remove(i);
                         }

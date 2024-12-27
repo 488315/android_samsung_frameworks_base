@@ -14,12 +14,10 @@ public interface IImsEcbmListener extends IInterface {
 
     public static class Default implements IImsEcbmListener {
         @Override // com.android.ims.internal.IImsEcbmListener
-        public void enteredECBM() throws RemoteException {
-        }
+        public void enteredECBM() throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsEcbmListener
-        public void exitedECBM() throws RemoteException {
-        }
+        public void exitedECBM() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -27,7 +25,7 @@ public interface IImsEcbmListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImsEcbmListener {
+    public abstract static class Stub extends Binder implements IImsEcbmListener {
         public static final String DESCRIPTOR = "com.android.ims.internal.IImsEcbmListener";
         static final int TRANSACTION_enteredECBM = 1;
         static final int TRANSACTION_exitedECBM = 2;
@@ -69,7 +67,8 @@ public interface IImsEcbmListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

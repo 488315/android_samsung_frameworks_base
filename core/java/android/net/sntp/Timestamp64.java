@@ -1,6 +1,7 @@
 package android.net.sntp;
 
 import android.text.TextUtils;
+
 import java.time.Instant;
 import java.util.Objects;
 import java.util.Random;
@@ -46,7 +47,8 @@ public final class Timestamp64 {
 
     private Timestamp64(long eraSeconds, int fractionBits) {
         if (eraSeconds < 0 || eraSeconds > 4294967295L) {
-            throw new IllegalArgumentException("Invalid parameters. seconds=" + eraSeconds + ", fraction=" + fractionBits);
+            throw new IllegalArgumentException(
+                    "Invalid parameters. seconds=" + eraSeconds + ", fraction=" + fractionBits);
         }
         this.mEraSeconds = eraSeconds;
         this.mFractionBits = fractionBits;
@@ -61,7 +63,8 @@ public final class Timestamp64 {
     }
 
     public String toString() {
-        return TextUtils.formatSimple("%08x.%08x", Long.valueOf(this.mEraSeconds), Integer.valueOf(this.mFractionBits));
+        return TextUtils.formatSimple(
+                "%08x.%08x", Long.valueOf(this.mEraSeconds), Integer.valueOf(this.mFractionBits));
     }
 
     public Instant toInstant(int ntpEra) {

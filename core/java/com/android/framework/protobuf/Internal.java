@@ -1,6 +1,7 @@
 package com.android.framework.protobuf;
 
 import com.android.internal.logging.nano.MetricsProto;
+
 import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
@@ -22,14 +23,16 @@ public final class Internal {
     static final Charset ISO_8859_1 = Charset.forName("ISO-8859-1");
     public static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
     public static final ByteBuffer EMPTY_BYTE_BUFFER = ByteBuffer.wrap(EMPTY_BYTE_ARRAY);
-    public static final CodedInputStream EMPTY_CODED_INPUT_STREAM = CodedInputStream.newInstance(EMPTY_BYTE_ARRAY);
+    public static final CodedInputStream EMPTY_CODED_INPUT_STREAM =
+            CodedInputStream.newInstance(EMPTY_BYTE_ARRAY);
 
     public interface BooleanList extends ProtobufList<Boolean> {
         void addBoolean(boolean z);
 
         boolean getBoolean(int i);
 
-        @Override // com.android.framework.protobuf.Internal.ProtobufList, com.android.framework.protobuf.Internal.BooleanList
+        @Override // com.android.framework.protobuf.Internal.ProtobufList,
+                  // com.android.framework.protobuf.Internal.BooleanList
         /* renamed from: mutableCopyWithCapacity, reason: merged with bridge method [inline-methods] */
         ProtobufList<Boolean> mutableCopyWithCapacity2(int i);
 
@@ -41,7 +44,8 @@ public final class Internal {
 
         double getDouble(int i);
 
-        @Override // com.android.framework.protobuf.Internal.ProtobufList, com.android.framework.protobuf.Internal.BooleanList
+        @Override // com.android.framework.protobuf.Internal.ProtobufList,
+                  // com.android.framework.protobuf.Internal.BooleanList
         /* renamed from: mutableCopyWithCapacity */
         ProtobufList<Double> mutableCopyWithCapacity2(int i);
 
@@ -65,7 +69,8 @@ public final class Internal {
 
         float getFloat(int i);
 
-        @Override // com.android.framework.protobuf.Internal.ProtobufList, com.android.framework.protobuf.Internal.BooleanList
+        @Override // com.android.framework.protobuf.Internal.ProtobufList,
+                  // com.android.framework.protobuf.Internal.BooleanList
         /* renamed from: mutableCopyWithCapacity */
         ProtobufList<Float> mutableCopyWithCapacity2(int i);
 
@@ -77,7 +82,8 @@ public final class Internal {
 
         int getInt(int i);
 
-        @Override // com.android.framework.protobuf.Internal.ProtobufList, com.android.framework.protobuf.Internal.BooleanList
+        @Override // com.android.framework.protobuf.Internal.ProtobufList,
+                  // com.android.framework.protobuf.Internal.BooleanList
         /* renamed from: mutableCopyWithCapacity */
         ProtobufList<Integer> mutableCopyWithCapacity2(int i);
 
@@ -89,7 +95,8 @@ public final class Internal {
 
         long getLong(int i);
 
-        @Override // com.android.framework.protobuf.Internal.ProtobufList, com.android.framework.protobuf.Internal.BooleanList
+        @Override // com.android.framework.protobuf.Internal.ProtobufList,
+                  // com.android.framework.protobuf.Internal.BooleanList
         /* renamed from: mutableCopyWithCapacity */
         ProtobufList<Long> mutableCopyWithCapacity2(int i);
 
@@ -105,8 +112,7 @@ public final class Internal {
         ProtobufList<E> mutableCopyWithCapacity2(int i);
     }
 
-    private Internal() {
-    }
+    private Internal() {}
 
     static <T> T checkNotNull(T obj) {
         if (obj == null) {
@@ -168,7 +174,9 @@ public final class Internal {
     }
 
     public static int hashBoolean(boolean b) {
-        return b ? MetricsProto.MetricsEvent.AUTOFILL_SERVICE_DISABLED_APP : MetricsProto.MetricsEvent.ANOMALY_TYPE_UNOPTIMIZED_BT;
+        return b
+                ? MetricsProto.MetricsEvent.AUTOFILL_SERVICE_DISABLED_APP
+                : MetricsProto.MetricsEvent.ANOMALY_TYPE_UNOPTIMIZED_BT;
     }
 
     public static int hashEnum(EnumLite e) {
@@ -251,7 +259,9 @@ public final class Internal {
 
     public static int hashCodeByteBuffer(ByteBuffer bytes) {
         if (bytes.hasArray()) {
-            int h = partialHash(bytes.capacity(), bytes.array(), bytes.arrayOffset(), bytes.capacity());
+            int h =
+                    partialHash(
+                            bytes.capacity(), bytes.array(), bytes.arrayOffset(), bytes.capacity());
             if (h == 0) {
                 return 1;
             }
@@ -284,7 +294,8 @@ public final class Internal {
     }
 
     static Object mergeMessage(Object destination, Object source) {
-        return ((MessageLite) destination).toBuilder().mergeFrom((MessageLite) source).buildPartial();
+        return ((MessageLite) destination)
+                .toBuilder().mergeFrom((MessageLite) source).buildPartial();
     }
 
     public static class ListAdapter<F, T> extends AbstractList<T> {
@@ -321,21 +332,27 @@ public final class Internal {
             B doForward(A a);
         }
 
-        public static <T extends EnumLite> Converter<Integer, T> newEnumConverter(final EnumLiteMap<T> enumLiteMap, final T t) {
-            return (Converter<Integer, T>) new Converter<Integer, T>() { // from class: com.android.framework.protobuf.Internal.MapAdapter.1
-                /* JADX WARN: Incorrect return type in method signature: (Ljava/lang/Integer;)TT; */
-                @Override // com.android.framework.protobuf.Internal.MapAdapter.Converter
-                public EnumLite doForward(Integer value) {
-                    EnumLite findValueByNumber = EnumLiteMap.this.findValueByNumber(value.intValue());
-                    return findValueByNumber == null ? t : findValueByNumber;
-                }
+        public static <T extends EnumLite> Converter<Integer, T> newEnumConverter(
+                final EnumLiteMap<T> enumLiteMap, final T t) {
+            return (Converter<Integer, T>)
+                    new Converter<
+                            Integer,
+                            T>() { // from class:
+                                   // com.android.framework.protobuf.Internal.MapAdapter.1
+                        /* JADX WARN: Incorrect return type in method signature: (Ljava/lang/Integer;)TT; */
+                        @Override // com.android.framework.protobuf.Internal.MapAdapter.Converter
+                        public EnumLite doForward(Integer value) {
+                            EnumLite findValueByNumber =
+                                    EnumLiteMap.this.findValueByNumber(value.intValue());
+                            return findValueByNumber == null ? t : findValueByNumber;
+                        }
 
-                /* JADX WARN: Incorrect types in method signature: (TT;)Ljava/lang/Integer; */
-                @Override // com.android.framework.protobuf.Internal.MapAdapter.Converter
-                public Integer doBackward(EnumLite enumLite) {
-                    return Integer.valueOf(enumLite.getNumber());
-                }
-            };
+                        /* JADX WARN: Incorrect types in method signature: (TT;)Ljava/lang/Integer; */
+                        @Override // com.android.framework.protobuf.Internal.MapAdapter.Converter
+                        public Integer doBackward(EnumLite enumLite) {
+                            return Integer.valueOf(enumLite.getNumber());
+                        }
+                    };
         }
 
         public MapAdapter(Map<K, RealValue> realMap, Converter<RealValue, V> valueConverter) {
@@ -373,7 +390,8 @@ public final class Internal {
                 this.realSet = realSet;
             }
 
-            @Override // java.util.AbstractCollection, java.util.Collection, java.lang.Iterable, java.util.Set
+            @Override // java.util.AbstractCollection, java.util.Collection, java.lang.Iterable,
+                      // java.util.Set
             public Iterator<Map.Entry<K, V>> iterator() {
                 return new IteratorAdapter(this.realSet.iterator());
             }
@@ -427,7 +445,8 @@ public final class Internal {
             /* JADX WARN: Multi-variable type inference failed */
             @Override // java.util.Map.Entry
             public V setValue(V v) {
-                Object value = this.realEntry.setValue(MapAdapter.this.valueConverter.doBackward(v));
+                Object value =
+                        this.realEntry.setValue(MapAdapter.this.valueConverter.doBackward(v));
                 if (value != null) {
                     return (V) MapAdapter.this.valueConverter.doForward(value);
                 }

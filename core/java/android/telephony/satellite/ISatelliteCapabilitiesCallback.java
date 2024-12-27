@@ -8,14 +8,16 @@ import android.os.RemoteException;
 
 /* loaded from: classes4.dex */
 public interface ISatelliteCapabilitiesCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.telephony.satellite.ISatelliteCapabilitiesCallback";
+    public static final String DESCRIPTOR =
+            "android.telephony.satellite.ISatelliteCapabilitiesCallback";
 
-    void onSatelliteCapabilitiesChanged(SatelliteCapabilities satelliteCapabilities) throws RemoteException;
+    void onSatelliteCapabilitiesChanged(SatelliteCapabilities satelliteCapabilities)
+            throws RemoteException;
 
     public static class Default implements ISatelliteCapabilitiesCallback {
         @Override // android.telephony.satellite.ISatelliteCapabilitiesCallback
-        public void onSatelliteCapabilitiesChanged(SatelliteCapabilities capabilities) throws RemoteException {
-        }
+        public void onSatelliteCapabilitiesChanged(SatelliteCapabilities capabilities)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +25,7 @@ public interface ISatelliteCapabilitiesCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISatelliteCapabilitiesCallback {
+    public abstract static class Stub extends Binder implements ISatelliteCapabilitiesCallback {
         static final int TRANSACTION_onSatelliteCapabilitiesChanged = 1;
 
         public Stub() {
@@ -61,7 +63,8 @@ public interface ISatelliteCapabilitiesCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISatelliteCapabilitiesCallback.DESCRIPTOR);
             }
@@ -71,7 +74,9 @@ public interface ISatelliteCapabilitiesCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    SatelliteCapabilities _arg0 = (SatelliteCapabilities) data.readTypedObject(SatelliteCapabilities.CREATOR);
+                    SatelliteCapabilities _arg0 =
+                            (SatelliteCapabilities)
+                                    data.readTypedObject(SatelliteCapabilities.CREATOR);
                     data.enforceNoDataAvail();
                     onSatelliteCapabilitiesChanged(_arg0);
                     return true;
@@ -97,7 +102,8 @@ public interface ISatelliteCapabilitiesCallback extends IInterface {
             }
 
             @Override // android.telephony.satellite.ISatelliteCapabilitiesCallback
-            public void onSatelliteCapabilitiesChanged(SatelliteCapabilities capabilities) throws RemoteException {
+            public void onSatelliteCapabilitiesChanged(SatelliteCapabilities capabilities)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISatelliteCapabilitiesCallback.DESCRIPTOR);

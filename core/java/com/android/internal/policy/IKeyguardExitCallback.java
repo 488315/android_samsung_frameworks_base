@@ -12,8 +12,7 @@ public interface IKeyguardExitCallback extends IInterface {
 
     public static class Default implements IKeyguardExitCallback {
         @Override // com.android.internal.policy.IKeyguardExitCallback
-        public void onKeyguardExitResult(boolean success) throws RemoteException {
-        }
+        public void onKeyguardExitResult(boolean success) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface IKeyguardExitCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IKeyguardExitCallback {
+    public abstract static class Stub extends Binder implements IKeyguardExitCallback {
         public static final String DESCRIPTOR = "com.android.internal.policy.IKeyguardExitCallback";
         static final int TRANSACTION_onKeyguardExitResult = 1;
 
@@ -60,7 +59,8 @@ public interface IKeyguardExitCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

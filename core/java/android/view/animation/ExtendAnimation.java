@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Insets;
 import android.util.AttributeSet;
-import android.view.animation.Animation;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
@@ -92,16 +92,23 @@ public class ExtendAnimation extends Animation {
         this.mToBottomValue = -toInsets.bottom;
     }
 
-    public ExtendAnimation(int fromL, int fromT, int fromR, int fromB, int toL, int toT, int toR, int toB) {
+    public ExtendAnimation(
+            int fromL, int fromT, int fromR, int fromB, int toL, int toT, int toR, int toB) {
         this(Insets.of(-fromL, -fromT, -fromR, -fromB), Insets.of(-toL, -toT, -toR, -toB));
     }
 
     @Override // android.view.animation.Animation
     protected void applyTransformation(float it, Transformation tr) {
-        int l = this.mFromInsets.left + ((int) ((this.mToInsets.left - this.mFromInsets.left) * it));
+        int l =
+                this.mFromInsets.left
+                        + ((int) ((this.mToInsets.left - this.mFromInsets.left) * it));
         int t = this.mFromInsets.top + ((int) ((this.mToInsets.top - this.mFromInsets.top) * it));
-        int r = this.mFromInsets.right + ((int) ((this.mToInsets.right - this.mFromInsets.right) * it));
-        int b = this.mFromInsets.bottom + ((int) ((this.mToInsets.bottom - this.mFromInsets.bottom) * it));
+        int r =
+                this.mFromInsets.right
+                        + ((int) ((this.mToInsets.right - this.mFromInsets.right) * it));
+        int b =
+                this.mFromInsets.bottom
+                        + ((int) ((this.mToInsets.bottom - this.mFromInsets.bottom) * it));
         tr.setInsets(l, t, r, b);
     }
 
@@ -112,13 +119,70 @@ public class ExtendAnimation extends Animation {
 
     @Override // android.view.animation.Animation
     public boolean hasExtension() {
-        return this.mFromInsets.left < 0 || this.mFromInsets.top < 0 || this.mFromInsets.right < 0 || this.mFromInsets.bottom < 0;
+        return this.mFromInsets.left < 0
+                || this.mFromInsets.top < 0
+                || this.mFromInsets.right < 0
+                || this.mFromInsets.bottom < 0;
     }
 
     @Override // android.view.animation.Animation
     public void initialize(int width, int height, int parentWidth, int parentHeight) {
         super.initialize(width, height, parentWidth, parentHeight);
-        this.mFromInsets = Insets.min(Insets.of(-((int) resolveSize(this.mFromLeftType, this.mFromLeftValue, width, parentWidth)), -((int) resolveSize(this.mFromTopType, this.mFromTopValue, height, parentHeight)), -((int) resolveSize(this.mFromRightType, this.mFromRightValue, width, parentWidth)), -((int) resolveSize(this.mFromBottomType, this.mFromBottomValue, height, parentHeight))), Insets.NONE);
-        this.mToInsets = Insets.min(Insets.of(-((int) resolveSize(this.mToLeftType, this.mToLeftValue, width, parentWidth)), -((int) resolveSize(this.mToTopType, this.mToTopValue, height, parentHeight)), -((int) resolveSize(this.mToRightType, this.mToRightValue, width, parentWidth)), -((int) resolveSize(this.mToBottomType, this.mToBottomValue, height, parentHeight))), Insets.NONE);
+        this.mFromInsets =
+                Insets.min(
+                        Insets.of(
+                                -((int)
+                                        resolveSize(
+                                                this.mFromLeftType,
+                                                this.mFromLeftValue,
+                                                width,
+                                                parentWidth)),
+                                -((int)
+                                        resolveSize(
+                                                this.mFromTopType,
+                                                this.mFromTopValue,
+                                                height,
+                                                parentHeight)),
+                                -((int)
+                                        resolveSize(
+                                                this.mFromRightType,
+                                                this.mFromRightValue,
+                                                width,
+                                                parentWidth)),
+                                -((int)
+                                        resolveSize(
+                                                this.mFromBottomType,
+                                                this.mFromBottomValue,
+                                                height,
+                                                parentHeight))),
+                        Insets.NONE);
+        this.mToInsets =
+                Insets.min(
+                        Insets.of(
+                                -((int)
+                                        resolveSize(
+                                                this.mToLeftType,
+                                                this.mToLeftValue,
+                                                width,
+                                                parentWidth)),
+                                -((int)
+                                        resolveSize(
+                                                this.mToTopType,
+                                                this.mToTopValue,
+                                                height,
+                                                parentHeight)),
+                                -((int)
+                                        resolveSize(
+                                                this.mToRightType,
+                                                this.mToRightValue,
+                                                width,
+                                                parentWidth)),
+                                -((int)
+                                        resolveSize(
+                                                this.mToBottomType,
+                                                this.mToBottomValue,
+                                                height,
+                                                parentHeight))),
+                        Insets.NONE);
     }
 }

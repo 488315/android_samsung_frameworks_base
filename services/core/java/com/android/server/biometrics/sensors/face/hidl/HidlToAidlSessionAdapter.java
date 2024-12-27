@@ -15,6 +15,7 @@ import android.hardware.keymaster.HardwareAuthToken;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.biometrics.HardwareAuthTokenUtils;
 import com.android.server.biometrics.SemBiometricFeature;
@@ -23,13 +24,15 @@ import com.android.server.biometrics.sensors.face.aidl.AidlConversionUtils;
 import com.android.server.biometrics.sensors.face.aidl.AidlResponseHandler;
 import com.android.server.biometrics.sensors.face.aidl.AidlResponseHandler$$ExternalSyntheticLambda9;
 import com.android.server.biometrics.sensors.face.aidl.FaceInvalidationClient;
+
+import vendor.samsung.hardware.biometrics.face.V2_0.ISehBiometricsFace;
+import vendor.samsung.hardware.biometrics.face.V3_0.ISehBiometricsFace;
+
 import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-import vendor.samsung.hardware.biometrics.face.V2_0.ISehBiometricsFace;
-import vendor.samsung.hardware.biometrics.face.V3_0.ISehBiometricsFace;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -49,8 +52,7 @@ public final class HidlToAidlSessionAdapter implements ISession {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class Cancellation extends ICancellationSignal.Stub {
-        public Cancellation() {
-        }
+        public Cancellation() {}
 
         public final void cancel() {
             try {
@@ -69,7 +71,8 @@ public final class HidlToAidlSessionAdapter implements ISession {
         }
     }
 
-    public HidlToAidlSessionAdapter(Context context, Supplier supplier, int i, AidlResponseHandler aidlResponseHandler) {
+    public HidlToAidlSessionAdapter(
+            Context context, Supplier supplier, int i, AidlResponseHandler aidlResponseHandler) {
         Clock systemUTC = Clock.systemUTC();
         this.mGeneratedChallengeCount = new ArrayList();
         this.mGenerateChallengeCreatedAt = -1L;
@@ -89,7 +92,9 @@ public final class HidlToAidlSessionAdapter implements ISession {
                     Slog.d("HidlToAidlSessionAdapter", "Unable to set HIDL callback.");
                 }
             } else {
-                Slog.e("HidlToAidlSessionAdapter", "Unable to set HIDL callback. HIDL daemon is null.");
+                Slog.e(
+                        "HidlToAidlSessionAdapter",
+                        "Unable to set HIDL callback. HIDL daemon is null.");
             }
         } catch (RemoteException unused) {
             Slog.d("HidlToAidlSessionAdapter", "Failed to set callback");
@@ -105,7 +110,8 @@ public final class HidlToAidlSessionAdapter implements ISession {
         return new Cancellation();
     }
 
-    public final ICancellationSignal authenticateWithContext(long j, OperationContext operationContext) {
+    public final ICancellationSignal authenticateWithContext(
+            long j, OperationContext operationContext) {
         Slog.e("HidlToAidlSessionAdapter", "authenticateWithContext unsupported in HIDL");
         return authenticate(j);
     }
@@ -119,12 +125,14 @@ public final class HidlToAidlSessionAdapter implements ISession {
         return new Cancellation();
     }
 
-    public final ICancellationSignal detectInteractionWithContext(OperationContext operationContext) {
+    public final ICancellationSignal detectInteractionWithContext(
+            OperationContext operationContext) {
         Slog.e("HidlToAidlSessionAdapter", "detectInteractionWithContext unsupported in HIDL");
         return detectInteraction();
     }
 
-    public final ICancellationSignal enroll(HardwareAuthToken hardwareAuthToken, byte b, byte[] bArr, NativeHandle nativeHandle) {
+    public final ICancellationSignal enroll(
+            HardwareAuthToken hardwareAuthToken, byte b, byte[] bArr, NativeHandle nativeHandle) {
         ArrayList arrayList = new ArrayList();
         byte[] byteArray = HardwareAuthTokenUtils.toByteArray(hardwareAuthToken);
         for (int i = 0; i < 69; i++) {
@@ -138,7 +146,12 @@ public final class HidlToAidlSessionAdapter implements ISession {
         return new Cancellation();
     }
 
-    public final ICancellationSignal enrollWithContext(HardwareAuthToken hardwareAuthToken, byte b, byte[] bArr, NativeHandle nativeHandle, OperationContext operationContext) {
+    public final ICancellationSignal enrollWithContext(
+            HardwareAuthToken hardwareAuthToken,
+            byte b,
+            byte[] bArr,
+            NativeHandle nativeHandle,
+            OperationContext operationContext) {
         Slog.e("HidlToAidlSessionAdapter", "enrollWithContext unsupported in HIDL");
         return enroll(hardwareAuthToken, b, bArr, nativeHandle);
     }
@@ -154,7 +167,9 @@ public final class HidlToAidlSessionAdapter implements ISession {
 
     public final void generateChallenge() {
         ((ArrayList) this.mGeneratedChallengeCount).add(0, Long.valueOf(this.mClock.millis()));
-        if (this.mGenerateChallengeCreatedAt == -1 || this.mGenerateChallengeResult == -1 || this.mClock.millis() - this.mGenerateChallengeCreatedAt >= 60000) {
+        if (this.mGenerateChallengeCreatedAt == -1
+                || this.mGenerateChallengeResult == -1
+                || this.mClock.millis() - this.mGenerateChallengeCreatedAt >= 60000) {
             this.mGenerateChallengeCreatedAt = this.mClock.millis();
             long j = ((IBiometricsFace) this.mSession.get()).generateChallenge(600).value;
             this.mGenerateChallengeResult = j;
@@ -163,11 +178,13 @@ public final class HidlToAidlSessionAdapter implements ISession {
         }
         Slog.d("HidlToAidlSessionAdapter", "Current challenge is cached and will be reused");
         HidlToAidlCallbackConverter hidlToAidlCallbackConverter = this.mHidlToAidlCallbackConverter;
-        hidlToAidlCallbackConverter.mAidlResponseHandler.onChallengeGenerated(this.mGenerateChallengeResult);
+        hidlToAidlCallbackConverter.mAidlResponseHandler.onChallengeGenerated(
+                this.mGenerateChallengeResult);
     }
 
     public final void getAuthenticatorId() {
-        this.mHidlToAidlCallbackConverter.mAidlResponseHandler.onAuthenticatorIdRetrieved(((IBiometricsFace) this.mSession.get()).getAuthenticatorId().value);
+        this.mHidlToAidlCallbackConverter.mAidlResponseHandler.onAuthenticatorIdRetrieved(
+                ((IBiometricsFace) this.mSession.get()).getAuthenticatorId().value);
     }
 
     public final EnrollmentStageConfig[] getEnrollmentConfig(byte b) {
@@ -176,7 +193,9 @@ public final class HidlToAidlSessionAdapter implements ISession {
     }
 
     public final int getFaceId() {
-        List enrolledFaces = ((FaceManager) this.mContext.getSystemService(FaceManager.class)).getEnrolledFaces(this.mUserId);
+        List enrolledFaces =
+                ((FaceManager) this.mContext.getSystemService(FaceManager.class))
+                        .getEnrolledFaces(this.mUserId);
         if (!enrolledFaces.isEmpty()) {
             return ((Face) enrolledFaces.get(0)).getBiometricId();
         }
@@ -190,10 +209,12 @@ public final class HidlToAidlSessionAdapter implements ISession {
         if (faceId == -1 || this.mFeature == -1) {
             return;
         }
-        OptionalBool feature = ((IBiometricsFace) this.mSession.get()).getFeature(this.mFeature, faceId);
+        OptionalBool feature =
+                ((IBiometricsFace) this.mSession.get()).getFeature(this.mFeature, faceId);
         int i = feature.status;
         if (i == 0 && feature.value) {
-            this.mHidlToAidlCallbackConverter.mAidlResponseHandler.onFeaturesRetrieved(new byte[]{AidlConversionUtils.convertFrameworkToAidlFeature(this.mFeature)});
+            this.mHidlToAidlCallbackConverter.mAidlResponseHandler.onFeaturesRetrieved(
+                    new byte[] {AidlConversionUtils.convertFrameworkToAidlFeature(this.mFeature)});
         } else if (i == 0) {
             this.mHidlToAidlCallbackConverter.mAidlResponseHandler.onFeaturesRetrieved(new byte[0]);
         } else {
@@ -214,10 +235,14 @@ public final class HidlToAidlSessionAdapter implements ISession {
 
     public final void invalidateAuthenticatorId() {
         Slog.e("HidlToAidlSessionAdapter", "invalidateAuthenticatorId unsupported in HIDL");
-        AidlResponseHandler aidlResponseHandler = this.mHidlToAidlCallbackConverter.mAidlResponseHandler;
+        AidlResponseHandler aidlResponseHandler =
+                this.mHidlToAidlCallbackConverter.mAidlResponseHandler;
         aidlResponseHandler.getClass();
         Slog.e("AidlResponseHandler", "FaceInvalidationClient is not supported in the HAL.");
-        aidlResponseHandler.handleResponse(FaceInvalidationClient.class, new AidlResponseHandler$$ExternalSyntheticLambda9(6), null);
+        aidlResponseHandler.handleResponse(
+                FaceInvalidationClient.class,
+                new AidlResponseHandler$$ExternalSyntheticLambda9(6),
+                null);
     }
 
     public final void onContextChanged(OperationContext operationContext) {
@@ -239,12 +264,15 @@ public final class HidlToAidlSessionAdapter implements ISession {
 
     public final void revokeChallenge(long j) {
         final long millis = this.mClock.millis();
-        ((ArrayList) this.mGeneratedChallengeCount).removeIf(new Predicate() { // from class: com.android.server.biometrics.sensors.face.hidl.HidlToAidlSessionAdapter$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return millis - ((Long) obj).longValue() > 600000;
-            }
-        });
+        ((ArrayList) this.mGeneratedChallengeCount)
+                .removeIf(
+                        new Predicate() { // from class:
+                                          // com.android.server.biometrics.sensors.face.hidl.HidlToAidlSessionAdapter$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Predicate
+                            public final boolean test(Object obj) {
+                                return millis - ((Long) obj).longValue() > 600000;
+                            }
+                        });
         if (!((ArrayList) this.mGeneratedChallengeCount).isEmpty()) {
             ((ArrayList) this.mGeneratedChallengeCount).remove(0);
         }
@@ -255,7 +283,10 @@ public final class HidlToAidlSessionAdapter implements ISession {
             this.mHidlToAidlCallbackConverter.mAidlResponseHandler.onChallengeRevoked(0L);
             return;
         }
-        Slog.w("HidlToAidlSessionAdapter", "scheduleRevokeChallenge skipped - challenge still in use: " + this.mGeneratedChallengeCount);
+        Slog.w(
+                "HidlToAidlSessionAdapter",
+                "scheduleRevokeChallenge skipped - challenge still in use: "
+                        + this.mGeneratedChallengeCount);
         this.mHidlToAidlCallbackConverter.onError(this.mUserId, 2, 0, 0L);
     }
 
@@ -270,25 +301,50 @@ public final class HidlToAidlSessionAdapter implements ISession {
 
     public final long semSetSehCallback() {
         long currentTimeMillis = System.currentTimeMillis();
-        long j = SemBiometricFeature.FEATURE_JDM_HAL ? ((vendor.samsung.hardware.biometrics.face.V2_0.ISehBiometricsFace) this.mSession.get()).sehSetCallback(this.mHidlToAidlCallbackConverter).value : ((ISehBiometricsFace) this.mSession.get()).sehSetCallbackEx(this.mHidlToAidlCallbackConverter).value;
-        Slog.w("HidlToAidlSessionAdapter", "SetCallback FINISH (" + (System.currentTimeMillis() - currentTimeMillis) + "ms) RESULT(HAL id): " + j);
+        long j =
+                SemBiometricFeature.FEATURE_JDM_HAL
+                        ? ((vendor.samsung.hardware.biometrics.face.V2_0.ISehBiometricsFace)
+                                        this.mSession.get())
+                                .sehSetCallback(this.mHidlToAidlCallbackConverter)
+                                .value
+                        : ((ISehBiometricsFace) this.mSession.get())
+                                .sehSetCallbackEx(this.mHidlToAidlCallbackConverter)
+                                .value;
+        Slog.w(
+                "HidlToAidlSessionAdapter",
+                "SetCallback FINISH ("
+                        + (System.currentTimeMillis() - currentTimeMillis)
+                        + "ms) RESULT(HAL id): "
+                        + j);
         long currentTimeMillis2 = System.currentTimeMillis();
-        ((vendor.samsung.hardware.biometrics.face.V2_0.ISehBiometricsFace) this.mSession.get()).sehGetSecurityLevel(new ISehBiometricsFace.sehGetSecurityLevelCallback() { // from class: com.android.server.biometrics.sensors.face.hidl.HidlToAidlSessionAdapter$$ExternalSyntheticLambda1
-            @Override // vendor.samsung.hardware.biometrics.face.V2_0.ISehBiometricsFace.sehGetSecurityLevelCallback
-            public final void onValues(int i, int i2) {
-                HidlToAidlSessionAdapter hidlToAidlSessionAdapter = HidlToAidlSessionAdapter.this;
-                if (i != 0) {
-                    hidlToAidlSessionAdapter.getClass();
-                    Slog.w("HidlToAidlSessionAdapter", "SecurityLevel fail");
-                } else {
-                    hidlToAidlSessionAdapter.mSecurityLevel = i2;
-                    StringBuilder sb = new StringBuilder("SecurityLevel : ");
-                    sb.append(i2);
-                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb, Utils.DEBUG ? " (Strong=1,2,3)" : "", "HidlToAidlSessionAdapter");
-                }
-            }
-        });
-        Slog.w("HidlToAidlSessionAdapter", "SecurityLevel FINISH (" + (System.currentTimeMillis() - currentTimeMillis2) + "ms) ");
+        ((vendor.samsung.hardware.biometrics.face.V2_0.ISehBiometricsFace) this.mSession.get())
+                .sehGetSecurityLevel(
+                        new ISehBiometricsFace
+                                .sehGetSecurityLevelCallback() { // from class:
+                                                                 // com.android.server.biometrics.sensors.face.hidl.HidlToAidlSessionAdapter$$ExternalSyntheticLambda1
+                            @Override // vendor.samsung.hardware.biometrics.face.V2_0.ISehBiometricsFace.sehGetSecurityLevelCallback
+                            public final void onValues(int i, int i2) {
+                                HidlToAidlSessionAdapter hidlToAidlSessionAdapter =
+                                        HidlToAidlSessionAdapter.this;
+                                if (i != 0) {
+                                    hidlToAidlSessionAdapter.getClass();
+                                    Slog.w("HidlToAidlSessionAdapter", "SecurityLevel fail");
+                                } else {
+                                    hidlToAidlSessionAdapter.mSecurityLevel = i2;
+                                    StringBuilder sb = new StringBuilder("SecurityLevel : ");
+                                    sb.append(i2);
+                                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                            sb,
+                                            Utils.DEBUG ? " (Strong=1,2,3)" : "",
+                                            "HidlToAidlSessionAdapter");
+                                }
+                            }
+                        });
+        Slog.w(
+                "HidlToAidlSessionAdapter",
+                "SecurityLevel FINISH ("
+                        + (System.currentTimeMillis() - currentTimeMillis2)
+                        + "ms) ");
         return j;
     }
 
@@ -302,7 +358,13 @@ public final class HidlToAidlSessionAdapter implements ISession {
         for (int i = 0; i < 69; i++) {
             arrayList.add(Byte.valueOf(byteArray[i]));
         }
-        if (((IBiometricsFace) this.mSession.get()).setFeature(AidlConversionUtils.convertAidlToFrameworkFeature(b), z, arrayList, faceId) == 0) {
+        if (((IBiometricsFace) this.mSession.get())
+                        .setFeature(
+                                AidlConversionUtils.convertAidlToFrameworkFeature(b),
+                                z,
+                                arrayList,
+                                faceId)
+                == 0) {
             this.mHidlToAidlCallbackConverter.mAidlResponseHandler.onFeatureSet(b);
         } else {
             this.mHidlToAidlCallbackConverter.onError(this.mUserId, 17, 0, 0L);

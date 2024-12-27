@@ -4,9 +4,12 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.ServiceManager;
 import android.util.Slog;
+
 import com.android.server.policy.WindowManagerPolicy;
+
 import com.samsung.android.cover.CoverState;
 import com.samsung.android.cover.ICoverManager;
+
 import java.util.HashSet;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -28,8 +31,7 @@ public final class CoverPolicy {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CoverDisplayPolicy implements ExtraDisplayPolicy {
-        public CoverDisplayPolicy() {
-        }
+        public CoverDisplayPolicy() {}
 
         @Override // com.android.server.wm.ExtraDisplayPolicy
         public final int getOtherDisplayId(int i) {
@@ -42,7 +44,8 @@ public final class CoverPolicy {
         }
 
         public final boolean isCoverClosed() {
-            return CoverPolicy.this.mViewCoverDisplay != null && (((CoverState) WmCoverState.getInstance()).switchState ^ true);
+            return CoverPolicy.this.mViewCoverDisplay != null
+                    && (((CoverState) WmCoverState.getInstance()).switchState ^ true);
         }
 
         @Override // com.android.server.wm.ExtraDisplayPolicy
@@ -81,14 +84,14 @@ public final class CoverPolicy {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CoverPolicyHandler extends Handler {
         @Override // android.os.Handler
-        public final void handleMessage(Message message) {
-        }
+        public final void handleMessage(Message message) {}
     }
 
     public final synchronized ICoverManager getCoverManager() {
         try {
             if (this.mCoverManager == null) {
-                ICoverManager asInterface = ICoverManager.Stub.asInterface(ServiceManager.getService("cover"));
+                ICoverManager asInterface =
+                        ICoverManager.Stub.asInterface(ServiceManager.getService("cover"));
                 this.mCoverManager = asInterface;
                 if (asInterface == null) {
                     Slog.w("CoverPolicy", "warning: no COVER_MANAGER_SERVICE");
@@ -116,7 +119,8 @@ public final class CoverPolicy {
             case 15:
             case 16:
             case 17:
-                if (!(!((CoverState) wmCoverState).switchState) && (windowState = this.mHideSViewCoverWindow) != null) {
+                if (!(!((CoverState) wmCoverState).switchState)
+                        && (windowState = this.mHideSViewCoverWindow) != null) {
                     windowState.mDisableHideSViewOnce = true;
                     break;
                 }
@@ -125,7 +129,8 @@ public final class CoverPolicy {
         DisplayContent displayContent = this.mViewCoverDisplay;
         WindowManagerService windowManagerService = this.mWmService;
         if (displayContent != null) {
-            windowManagerService.mExt.moveDisplayToTop(((CoverState) WmCoverState.getInstance()).switchState ^ true ? 4 : 0);
+            windowManagerService.mExt.moveDisplayToTop(
+                    ((CoverState) WmCoverState.getInstance()).switchState ^ true ? 4 : 0);
         }
         if (!z2 && (!((CoverState) wmCoverState).switchState)) {
             windowManagerService.mTaskSnapshotController.snapshotForSleeping(0);

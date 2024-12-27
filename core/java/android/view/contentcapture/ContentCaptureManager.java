@@ -16,12 +16,12 @@ import android.util.Dumpable;
 import android.util.Log;
 import android.util.Slog;
 import android.view.WindowManager;
-import android.view.contentcapture.IContentCaptureManager;
-import android.view.contentcapture.IDataShareWriteAdapter;
 import android.view.contentcapture.flags.Flags;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.util.RingBuffer;
 import com.android.internal.util.SyncResultReceiver;
+
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -56,31 +56,43 @@ public final class ContentCaptureManager {
     public static final int DEFAULT_LOG_HISTORY_SIZE = 10;
     public static final int DEFAULT_MAX_BUFFER_SIZE = 500;
     public static final int DEFAULT_TEXT_CHANGE_FLUSHING_FREQUENCY_MS = 1000;
-    public static final String DEVICE_CONFIG_ENABLE_ACTIVITY_START_ASSIST_CONTENT = "enable_activity_start_assist_content";
-    public static final String DEVICE_CONFIG_PROPERTY_CONTENT_PROTECTION_ALLOWLIST_DELAY_MS = "content_protection_allowlist_delay_ms";
-    public static final String DEVICE_CONFIG_PROPERTY_CONTENT_PROTECTION_ALLOWLIST_TIMEOUT_MS = "content_protection_allowlist_timeout_ms";
-    public static final String DEVICE_CONFIG_PROPERTY_CONTENT_PROTECTION_AUTO_DISCONNECT_TIMEOUT = "content_protection_auto_disconnect_timeout_ms";
-    public static final String DEVICE_CONFIG_PROPERTY_CONTENT_PROTECTION_BUFFER_SIZE = "content_protection_buffer_size";
-    public static final String DEVICE_CONFIG_PROPERTY_CONTENT_PROTECTION_OPTIONAL_GROUPS_CONFIG = "content_protection_optional_groups_config";
-    public static final String DEVICE_CONFIG_PROPERTY_CONTENT_PROTECTION_OPTIONAL_GROUPS_THRESHOLD = "content_protection_optional_groups_threshold";
-    public static final String DEVICE_CONFIG_PROPERTY_CONTENT_PROTECTION_REQUIRED_GROUPS_CONFIG = "content_protection_required_groups_config";
-    public static final String DEVICE_CONFIG_PROPERTY_DISABLE_FLUSH_FOR_VIEW_TREE_APPEARING = "disable_flush_for_view_tree_appearing";
-    public static final String DEVICE_CONFIG_PROPERTY_ENABLE_CONTENT_PROTECTION_RECEIVER = "enable_content_protection_receiver";
+    public static final String DEVICE_CONFIG_ENABLE_ACTIVITY_START_ASSIST_CONTENT =
+            "enable_activity_start_assist_content";
+    public static final String DEVICE_CONFIG_PROPERTY_CONTENT_PROTECTION_ALLOWLIST_DELAY_MS =
+            "content_protection_allowlist_delay_ms";
+    public static final String DEVICE_CONFIG_PROPERTY_CONTENT_PROTECTION_ALLOWLIST_TIMEOUT_MS =
+            "content_protection_allowlist_timeout_ms";
+    public static final String DEVICE_CONFIG_PROPERTY_CONTENT_PROTECTION_AUTO_DISCONNECT_TIMEOUT =
+            "content_protection_auto_disconnect_timeout_ms";
+    public static final String DEVICE_CONFIG_PROPERTY_CONTENT_PROTECTION_BUFFER_SIZE =
+            "content_protection_buffer_size";
+    public static final String DEVICE_CONFIG_PROPERTY_CONTENT_PROTECTION_OPTIONAL_GROUPS_CONFIG =
+            "content_protection_optional_groups_config";
+    public static final String DEVICE_CONFIG_PROPERTY_CONTENT_PROTECTION_OPTIONAL_GROUPS_THRESHOLD =
+            "content_protection_optional_groups_threshold";
+    public static final String DEVICE_CONFIG_PROPERTY_CONTENT_PROTECTION_REQUIRED_GROUPS_CONFIG =
+            "content_protection_required_groups_config";
+    public static final String DEVICE_CONFIG_PROPERTY_DISABLE_FLUSH_FOR_VIEW_TREE_APPEARING =
+            "disable_flush_for_view_tree_appearing";
+    public static final String DEVICE_CONFIG_PROPERTY_ENABLE_CONTENT_PROTECTION_RECEIVER =
+            "enable_content_protection_receiver";
     public static final String DEVICE_CONFIG_PROPERTY_IDLE_FLUSH_FREQUENCY = "idle_flush_frequency";
     public static final String DEVICE_CONFIG_PROPERTY_IDLE_UNBIND_TIMEOUT = "idle_unbind_timeout";
     public static final String DEVICE_CONFIG_PROPERTY_LOGGING_LEVEL = "logging_level";
     public static final String DEVICE_CONFIG_PROPERTY_LOG_HISTORY_SIZE = "log_history_size";
     public static final String DEVICE_CONFIG_PROPERTY_MAX_BUFFER_SIZE = "max_buffer_size";
-    public static final String DEVICE_CONFIG_PROPERTY_REPORT_LIST_VIEW_CHILDREN = "report_list_view_children";
-    public static final String DEVICE_CONFIG_PROPERTY_SERVICE_EXPLICITLY_ENABLED = "service_explicitly_enabled";
-    public static final String DEVICE_CONFIG_PROPERTY_TEXT_CHANGE_FLUSH_FREQUENCY = "text_change_flush_frequency";
+    public static final String DEVICE_CONFIG_PROPERTY_REPORT_LIST_VIEW_CHILDREN =
+            "report_list_view_children";
+    public static final String DEVICE_CONFIG_PROPERTY_SERVICE_EXPLICITLY_ENABLED =
+            "service_explicitly_enabled";
+    public static final String DEVICE_CONFIG_PROPERTY_TEXT_CHANGE_FLUSH_FREQUENCY =
+            "text_change_flush_frequency";
     public static final String DUMPABLE_NAME = "ContentCaptureManager";
     public static final int LOGGING_LEVEL_DEBUG = 1;
     public static final int LOGGING_LEVEL_OFF = 0;
     public static final int LOGGING_LEVEL_VERBOSE = 2;
 
-    @SystemApi
-    public static final int NO_SESSION_ID = 0;
+    @SystemApi public static final int NO_SESSION_ID = 0;
     public static final int RESULT_CODE_FALSE = 2;
     public static final int RESULT_CODE_OK = 0;
     public static final int RESULT_CODE_SECURITY_EXCEPTION = -1;
@@ -98,20 +110,20 @@ public final class ContentCaptureManager {
     private final IContentCaptureManager mService;
     private Handler mUiHandler;
     private static final String TAG = ContentCaptureManager.class.getSimpleName();
-    public static final List<List<String>> DEFAULT_CONTENT_PROTECTION_REQUIRED_GROUPS = Collections.emptyList();
-    public static final List<List<String>> DEFAULT_CONTENT_PROTECTION_OPTIONAL_GROUPS = Collections.emptyList();
+    public static final List<List<String>> DEFAULT_CONTENT_PROTECTION_REQUIRED_GROUPS =
+            Collections.emptyList();
+    public static final List<List<String>> DEFAULT_CONTENT_PROTECTION_OPTIONAL_GROUPS =
+            Collections.emptyList();
 
     public interface ContentCaptureClient {
         ComponentName contentCaptureClientGetComponentName();
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DataShareError {
-    }
+    public @interface DataShareError {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LoggingLevel {
-    }
+    public @interface LoggingLevel {}
 
     /* JADX INFO: Access modifiers changed from: private */
     interface MyRunnable {
@@ -142,19 +154,26 @@ public final class ContentCaptureManager {
         }
     }
 
-    public ContentCaptureManager(Context context, IContentCaptureManager service, ContentCaptureOptions options) {
+    public ContentCaptureManager(
+            Context context, IContentCaptureManager service, ContentCaptureOptions options) {
         Objects.requireNonNull(context, "context cannot be null");
         this.mContext = new StrippedContext(context);
-        this.mService = (IContentCaptureManager) Objects.requireNonNull(service, "service cannot be null");
-        this.mOptions = (ContentCaptureOptions) Objects.requireNonNull(options, "options cannot be null");
+        this.mService =
+                (IContentCaptureManager) Objects.requireNonNull(service, "service cannot be null");
+        this.mOptions =
+                (ContentCaptureOptions) Objects.requireNonNull(options, "options cannot be null");
         ContentCaptureHelper.setLoggingLevel(this.mOptions.loggingLevel);
         setFlushViewTreeAppearingEventDisabled(this.mOptions.disableFlushForViewTreeAppearing);
         if (ContentCaptureHelper.sVerbose) {
             Log.v(TAG, "Constructor for " + context.getPackageName());
         }
         this.mDataShareAdapterResourceManager = new LocalDataShareAdapterResourceManager();
-        if (this.mOptions.contentProtectionOptions.enableReceiver && this.mOptions.contentProtectionOptions.bufferSize > 0) {
-            this.mContentProtectionEventBuffer = new RingBuffer<>(ContentCaptureEvent.class, this.mOptions.contentProtectionOptions.bufferSize);
+        if (this.mOptions.contentProtectionOptions.enableReceiver
+                && this.mOptions.contentProtectionOptions.bufferSize > 0) {
+            this.mContentProtectionEventBuffer =
+                    new RingBuffer<>(
+                            ContentCaptureEvent.class,
+                            this.mOptions.contentProtectionOptions.bufferSize);
         } else {
             this.mContentProtectionEventBuffer = null;
         }
@@ -176,9 +195,15 @@ public final class ContentCaptureManager {
 
     private ContentCaptureSession prepareMainSession() {
         if (Flags.runOnBackgroundThreadEnabled()) {
-            return new MainContentCaptureSessionV2(this.mContext, this, prepareUiHandler(), prepareContentCaptureHandler(), this.mService);
+            return new MainContentCaptureSessionV2(
+                    this.mContext,
+                    this,
+                    prepareUiHandler(),
+                    prepareContentCaptureHandler(),
+                    this.mService);
         }
-        return new MainContentCaptureSession(this.mContext, this, prepareUiHandler(), this.mService);
+        return new MainContentCaptureSession(
+                this.mContext, this, prepareUiHandler(), this.mService);
     }
 
     private Handler prepareContentCaptureHandler() {
@@ -195,12 +220,20 @@ public final class ContentCaptureManager {
         return this.mUiHandler;
     }
 
-    public void onActivityCreated(IBinder applicationToken, IBinder shareableActivityToken, ComponentName activityComponent) {
+    public void onActivityCreated(
+            IBinder applicationToken,
+            IBinder shareableActivityToken,
+            ComponentName activityComponent) {
         if (this.mOptions.lite) {
             return;
         }
         synchronized (this.mLock) {
-            getMainContentCaptureSession().start(applicationToken, shareableActivityToken, activityComponent, this.mFlags);
+            getMainContentCaptureSession()
+                    .start(
+                            applicationToken,
+                            shareableActivityToken,
+                            activityComponent,
+                            this.mFlags);
         }
     }
 
@@ -284,12 +317,16 @@ public final class ContentCaptureManager {
         if (!isContentCaptureEnabled() && !this.mOptions.lite) {
             return null;
         }
-        SyncResultReceiver resultReceiver = syncRun(new MyRunnable() { // from class: android.view.contentcapture.ContentCaptureManager$$ExternalSyntheticLambda0
-            @Override // android.view.contentcapture.ContentCaptureManager.MyRunnable
-            public final void run(SyncResultReceiver syncResultReceiver) {
-                ContentCaptureManager.this.lambda$getContentCaptureConditions$0(syncResultReceiver);
-            }
-        });
+        SyncResultReceiver resultReceiver =
+                syncRun(
+                        new MyRunnable() { // from class:
+                                           // android.view.contentcapture.ContentCaptureManager$$ExternalSyntheticLambda0
+                            @Override // android.view.contentcapture.ContentCaptureManager.MyRunnable
+                            public final void run(SyncResultReceiver syncResultReceiver) {
+                                ContentCaptureManager.this.lambda$getContentCaptureConditions$0(
+                                        syncResultReceiver);
+                            }
+                        });
         try {
             ArrayList<ContentCaptureCondition> result = resultReceiver.getParcelableListResult();
             return ContentCaptureHelper.toSet(result);
@@ -299,14 +336,17 @@ public final class ContentCaptureManager {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$getContentCaptureConditions$0(SyncResultReceiver r) throws RemoteException {
+    public /* synthetic */ void lambda$getContentCaptureConditions$0(SyncResultReceiver r)
+            throws RemoteException {
         this.mService.getContentCaptureConditions(this.mContext.getPackageName(), r);
     }
 
     public void setContentCaptureEnabled(boolean enabled) {
         ContentCaptureSession mainSession;
         if (ContentCaptureHelper.sDebug) {
-            Log.d(TAG, "setContentCaptureEnabled(): setting to " + enabled + " for " + this.mContext);
+            Log.d(
+                    TAG,
+                    "setContentCaptureEnabled(): setting to " + enabled + " for " + this.mContext);
         }
         synchronized (this.mLock) {
             if (enabled) {
@@ -365,12 +405,16 @@ public final class ContentCaptureManager {
 
     @SystemApi
     public boolean isContentCaptureFeatureEnabled() {
-        SyncResultReceiver resultReceiver = syncRun(new MyRunnable() { // from class: android.view.contentcapture.ContentCaptureManager$$ExternalSyntheticLambda1
-            @Override // android.view.contentcapture.ContentCaptureManager.MyRunnable
-            public final void run(SyncResultReceiver syncResultReceiver) {
-                ContentCaptureManager.this.lambda$isContentCaptureFeatureEnabled$1(syncResultReceiver);
-            }
-        });
+        SyncResultReceiver resultReceiver =
+                syncRun(
+                        new MyRunnable() { // from class:
+                                           // android.view.contentcapture.ContentCaptureManager$$ExternalSyntheticLambda1
+                            @Override // android.view.contentcapture.ContentCaptureManager.MyRunnable
+                            public final void run(SyncResultReceiver syncResultReceiver) {
+                                ContentCaptureManager.this.lambda$isContentCaptureFeatureEnabled$1(
+                                        syncResultReceiver);
+                            }
+                        });
         try {
             int resultCode = resultReceiver.getIntResult();
             switch (resultCode) {
@@ -391,7 +435,8 @@ public final class ContentCaptureManager {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$isContentCaptureFeatureEnabled$1(SyncResultReceiver r) throws RemoteException {
+    public /* synthetic */ void lambda$isContentCaptureFeatureEnabled$1(SyncResultReceiver r)
+            throws RemoteException {
         this.mService.isContentCaptureFeatureEnabled(r);
     }
 
@@ -404,12 +449,20 @@ public final class ContentCaptureManager {
         }
     }
 
-    public void shareData(DataShareRequest request, Executor executor, DataShareWriteAdapter dataShareWriteAdapter) {
+    public void shareData(
+            DataShareRequest request,
+            Executor executor,
+            DataShareWriteAdapter dataShareWriteAdapter) {
         Objects.requireNonNull(request);
         Objects.requireNonNull(dataShareWriteAdapter);
         Objects.requireNonNull(executor);
         try {
-            this.mService.shareData(request, new DataShareAdapterDelegate(executor, dataShareWriteAdapter, this.mDataShareAdapterResourceManager));
+            this.mService.shareData(
+                    request,
+                    new DataShareAdapterDelegate(
+                            executor,
+                            dataShareWriteAdapter,
+                            this.mDataShareAdapterResourceManager));
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -443,8 +496,7 @@ public final class ContentCaptureManager {
     }
 
     private final class Dumper implements Dumpable {
-        private Dumper() {
-        }
+        private Dumper() {}
 
         @Override // android.util.Dumpable
         public void dump(PrintWriter pw, String[] args) {
@@ -531,14 +583,18 @@ public final class ContentCaptureManager {
     }
 
     private static IContentCaptureManager getService() {
-        return IContentCaptureManager.Stub.asInterface(ServiceManager.getService(Context.CONTENT_CAPTURE_MANAGER_SERVICE));
+        return IContentCaptureManager.Stub.asInterface(
+                ServiceManager.getService(Context.CONTENT_CAPTURE_MANAGER_SERVICE));
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     static class DataShareAdapterDelegate extends IDataShareWriteAdapter.Stub {
         private final WeakReference<LocalDataShareAdapterResourceManager> mResourceManagerReference;
 
-        private DataShareAdapterDelegate(Executor executor, DataShareWriteAdapter adapter, LocalDataShareAdapterResourceManager resourceManager) {
+        private DataShareAdapterDelegate(
+                Executor executor,
+                DataShareWriteAdapter adapter,
+                LocalDataShareAdapterResourceManager resourceManager) {
             Objects.requireNonNull(executor);
             Objects.requireNonNull(adapter);
             Objects.requireNonNull(resourceManager);
@@ -548,33 +604,42 @@ public final class ContentCaptureManager {
 
         @Override // android.view.contentcapture.IDataShareWriteAdapter
         public void write(final ParcelFileDescriptor destination) throws RemoteException {
-            executeAdapterMethodLocked(new Consumer() { // from class: android.view.contentcapture.ContentCaptureManager$DataShareAdapterDelegate$$ExternalSyntheticLambda2
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ((DataShareWriteAdapter) obj).onWrite(ParcelFileDescriptor.this);
-                }
-            }, "onWrite");
+            executeAdapterMethodLocked(
+                    new Consumer() { // from class:
+                                     // android.view.contentcapture.ContentCaptureManager$DataShareAdapterDelegate$$ExternalSyntheticLambda2
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            ((DataShareWriteAdapter) obj).onWrite(ParcelFileDescriptor.this);
+                        }
+                    },
+                    "onWrite");
         }
 
         @Override // android.view.contentcapture.IDataShareWriteAdapter
         public void error(final int errorCode) throws RemoteException {
-            executeAdapterMethodLocked(new Consumer() { // from class: android.view.contentcapture.ContentCaptureManager$DataShareAdapterDelegate$$ExternalSyntheticLambda0
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ((DataShareWriteAdapter) obj).onError(errorCode);
-                }
-            }, "onError");
+            executeAdapterMethodLocked(
+                    new Consumer() { // from class:
+                                     // android.view.contentcapture.ContentCaptureManager$DataShareAdapterDelegate$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            ((DataShareWriteAdapter) obj).onError(errorCode);
+                        }
+                    },
+                    "onError");
             clearHardReferences();
         }
 
         @Override // android.view.contentcapture.IDataShareWriteAdapter
         public void rejected() throws RemoteException {
-            executeAdapterMethodLocked(new Consumer() { // from class: android.view.contentcapture.ContentCaptureManager$DataShareAdapterDelegate$$ExternalSyntheticLambda3
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ((DataShareWriteAdapter) obj).onRejected();
-                }
-            }, "onRejected");
+            executeAdapterMethodLocked(
+                    new Consumer() { // from class:
+                                     // android.view.contentcapture.ContentCaptureManager$DataShareAdapterDelegate$$ExternalSyntheticLambda3
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            ((DataShareWriteAdapter) obj).onRejected();
+                        }
+                    },
+                    "onRejected");
             clearHardReferences();
         }
 
@@ -583,35 +648,46 @@ public final class ContentCaptureManager {
             clearHardReferences();
         }
 
-        private void executeAdapterMethodLocked(final Consumer<DataShareWriteAdapter> adapterFn, String methodName) {
-            LocalDataShareAdapterResourceManager resourceManager = this.mResourceManagerReference.get();
+        private void executeAdapterMethodLocked(
+                final Consumer<DataShareWriteAdapter> adapterFn, String methodName) {
+            LocalDataShareAdapterResourceManager resourceManager =
+                    this.mResourceManagerReference.get();
             if (resourceManager == null) {
-                Slog.w(ContentCaptureManager.TAG, "Can't execute " + methodName + "(), resource manager has been GC'ed");
+                Slog.w(
+                        ContentCaptureManager.TAG,
+                        "Can't execute " + methodName + "(), resource manager has been GC'ed");
                 return;
             }
             final DataShareWriteAdapter adapter = resourceManager.getAdapter(this);
             Executor executor = resourceManager.getExecutor(this);
             if (adapter == null || executor == null) {
-                Slog.w(ContentCaptureManager.TAG, "Can't execute " + methodName + "(), references are null");
+                Slog.w(
+                        ContentCaptureManager.TAG,
+                        "Can't execute " + methodName + "(), references are null");
                 return;
             }
             long identity = Binder.clearCallingIdentity();
             try {
-                executor.execute(new Runnable() { // from class: android.view.contentcapture.ContentCaptureManager$DataShareAdapterDelegate$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        adapterFn.accept(adapter);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.view.contentcapture.ContentCaptureManager$DataShareAdapterDelegate$$ExternalSyntheticLambda1
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                adapterFn.accept(adapter);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(identity);
             }
         }
 
         private void clearHardReferences() {
-            LocalDataShareAdapterResourceManager resourceManager = this.mResourceManagerReference.get();
+            LocalDataShareAdapterResourceManager resourceManager =
+                    this.mResourceManagerReference.get();
             if (resourceManager == null) {
-                Slog.w(ContentCaptureManager.TAG, "Can't clear references, resource manager has been GC'ed");
+                Slog.w(
+                        ContentCaptureManager.TAG,
+                        "Can't clear references, resource manager has been GC'ed");
             } else {
                 resourceManager.clearHardReferences(this);
             }
@@ -627,7 +703,10 @@ public final class ContentCaptureManager {
             this.mExecutorHardReferences = new HashMap();
         }
 
-        void initializeForDelegate(DataShareAdapterDelegate delegate, DataShareWriteAdapter adapter, Executor executor) {
+        void initializeForDelegate(
+                DataShareAdapterDelegate delegate,
+                DataShareWriteAdapter adapter,
+                Executor executor) {
             this.mWriteAdapterHardReferences.put(delegate, adapter);
             this.mExecutorHardReferences.put(delegate, executor);
         }

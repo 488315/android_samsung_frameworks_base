@@ -1,6 +1,5 @@
 package android.os;
 
-import android.os.IServiceManager;
 
 /* compiled from: ServiceManagerNative.java */
 /* loaded from: classes3.dex */
@@ -29,7 +28,8 @@ class ServiceManagerProxy implements IServiceManager {
     }
 
     @Override // android.os.IServiceManager
-    public void addService(String name, IBinder service, boolean allowIsolated, int dumpPriority) throws RemoteException {
+    public void addService(String name, IBinder service, boolean allowIsolated, int dumpPriority)
+            throws RemoteException {
         this.mServiceManager.addService(name, service, allowIsolated, dumpPriority);
     }
 
@@ -44,7 +44,8 @@ class ServiceManagerProxy implements IServiceManager {
     }
 
     @Override // android.os.IServiceManager
-    public void unregisterForNotifications(String name, IServiceCallback cb) throws RemoteException {
+    public void unregisterForNotifications(String name, IServiceCallback cb)
+            throws RemoteException {
         throw new RemoteException();
     }
 
@@ -74,7 +75,8 @@ class ServiceManagerProxy implements IServiceManager {
     }
 
     @Override // android.os.IServiceManager
-    public void registerClientCallback(String name, IBinder service, IClientCallback cb) throws RemoteException {
+    public void registerClientCallback(String name, IBinder service, IClientCallback cb)
+            throws RemoteException {
         throw new RemoteException();
     }
 

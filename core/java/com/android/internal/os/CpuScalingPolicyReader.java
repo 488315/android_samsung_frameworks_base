@@ -4,19 +4,22 @@ import android.os.FileUtils;
 import android.util.IntArray;
 import android.util.Slog;
 import android.util.SparseArray;
+
+import libcore.util.EmptyArray;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import libcore.util.EmptyArray;
 
 /* loaded from: classes5.dex */
 public class CpuScalingPolicyReader {
     private static final String CPUFREQ_DIR = "/sys/devices/system/cpu/cpufreq";
     private static final String FILE_NAME_CPUINFO_CUR_FREQ = "cpuinfo_cur_freq";
     private static final String FILE_NAME_RELATED_CPUS = "related_cpus";
-    private static final String FILE_NAME_SCALING_AVAILABLE_FREQUENCIES = "scaling_available_frequencies";
+    private static final String FILE_NAME_SCALING_AVAILABLE_FREQUENCIES =
+            "scaling_available_frequencies";
     private static final String FILE_NAME_SCALING_BOOST_FREQUENCIES = "scaling_boost_frequencies";
     private static final Pattern POLICY_PATTERN = Pattern.compile("policy(\\d+)");
     private static final String TAG = "CpuScalingPolicyReader";
@@ -40,20 +43,33 @@ public class CpuScalingPolicyReader {
             for (File policyDir : policyDirs) {
                 Matcher matcher = POLICY_PATTERN.matcher(policyDir.getName());
                 if (matcher.matches()) {
-                    int[] relatedCpus = readIntsFromFile(new File(policyDir, FILE_NAME_RELATED_CPUS));
+                    int[] relatedCpus =
+                            readIntsFromFile(new File(policyDir, FILE_NAME_RELATED_CPUS));
                     if (relatedCpus.length != 0) {
-                        int[] availableFreqs = readIntsFromFile(new File(policyDir, FILE_NAME_SCALING_AVAILABLE_FREQUENCIES));
-                        int[] boostFreqs = readIntsFromFile(new File(policyDir, FILE_NAME_SCALING_BOOST_FREQUENCIES));
+                        int[] availableFreqs =
+                                readIntsFromFile(
+                                        new File(
+                                                policyDir,
+                                                FILE_NAME_SCALING_AVAILABLE_FREQUENCIES));
+                        int[] boostFreqs =
+                                readIntsFromFile(
+                                        new File(policyDir, FILE_NAME_SCALING_BOOST_FREQUENCIES));
                         if (boostFreqs.length == 0) {
                             freqs = availableFreqs;
                         } else {
-                            freqs = Arrays.copyOf(availableFreqs, availableFreqs.length + boostFreqs.length);
-                            System.arraycopy(boostFreqs, 0, freqs, availableFreqs.length, boostFreqs.length);
+                            freqs =
+                                    Arrays.copyOf(
+                                            availableFreqs,
+                                            availableFreqs.length + boostFreqs.length);
+                            System.arraycopy(
+                                    boostFreqs, 0, freqs, availableFreqs.length, boostFreqs.length);
                         }
                         if (freqs.length == 0) {
-                            freqs = readIntsFromFile(new File(policyDir, FILE_NAME_CPUINFO_CUR_FREQ));
+                            freqs =
+                                    readIntsFromFile(
+                                            new File(policyDir, FILE_NAME_CPUINFO_CUR_FREQ));
                             if (freqs.length == 0) {
-                                freqs = new int[]{0};
+                                freqs = new int[] {0};
                             }
                         }
                         int policy = Integer.parseInt(matcher.group(1));
@@ -64,8 +80,8 @@ public class CpuScalingPolicyReader {
             }
         }
         if (cpusByPolicy.size() == 0) {
-            cpusByPolicy.put(0, new int[]{0});
-            freqsByPolicy.put(0, new int[]{0});
+            cpusByPolicy.put(0, new int[] {0});
+            freqsByPolicy.put(0, new int[] {0});
         }
         return new CpuScalingPolicies(cpusByPolicy, freqsByPolicy);
     }

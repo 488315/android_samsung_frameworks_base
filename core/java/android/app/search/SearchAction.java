@@ -9,24 +9,27 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.UserHandle;
 import android.text.TextUtils;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class SearchAction implements Parcelable {
-    public static final Parcelable.Creator<SearchAction> CREATOR = new Parcelable.Creator<SearchAction>() { // from class: android.app.search.SearchAction.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SearchAction createFromParcel(Parcel in) {
-            return new SearchAction(in);
-        }
+    public static final Parcelable.Creator<SearchAction> CREATOR =
+            new Parcelable.Creator<
+                    SearchAction>() { // from class: android.app.search.SearchAction.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SearchAction createFromParcel(Parcel in) {
+                    return new SearchAction(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SearchAction[] newArray(int size) {
-            return new SearchAction[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SearchAction[] newArray(int size) {
+                    return new SearchAction[size];
+                }
+            };
     private static final String TAG = "SearchAction";
     private final CharSequence mContentDescription;
     private final Bundle mExtras;
@@ -50,7 +53,16 @@ public final class SearchAction implements Parcelable {
         this.mExtras = (Bundle) in.readTypedObject(Bundle.CREATOR);
     }
 
-    private SearchAction(String id, CharSequence title, Icon icon, CharSequence subtitle, CharSequence contentDescription, PendingIntent pendingIntent, Intent intent, UserHandle userHandle, Bundle extras) {
+    private SearchAction(
+            String id,
+            CharSequence title,
+            Icon icon,
+            CharSequence subtitle,
+            CharSequence contentDescription,
+            PendingIntent pendingIntent,
+            Intent intent,
+            UserHandle userHandle,
+            Bundle extras) {
         this.mId = (String) Objects.requireNonNull(id);
         this.mTitle = (CharSequence) Objects.requireNonNull(title);
         this.mIcon = icon;
@@ -138,7 +150,23 @@ public final class SearchAction implements Parcelable {
     }
 
     public String toString() {
-        String str = "id=" + this.mId + " title=" + ((Object) this.mTitle) + " contentDescription=" + ((Object) this.mContentDescription) + " subtitle=" + ((Object) this.mSubtitle) + " icon=" + this.mIcon + " pendingIntent=" + (this.mPendingIntent == null ? "" : this.mPendingIntent.getIntent()) + " intent=" + this.mIntent + " userHandle=" + this.mUserHandle;
+        String str =
+                "id="
+                        + this.mId
+                        + " title="
+                        + ((Object) this.mTitle)
+                        + " contentDescription="
+                        + ((Object) this.mContentDescription)
+                        + " subtitle="
+                        + ((Object) this.mSubtitle)
+                        + " icon="
+                        + this.mIcon
+                        + " pendingIntent="
+                        + (this.mPendingIntent == null ? "" : this.mPendingIntent.getIntent())
+                        + " intent="
+                        + this.mIntent
+                        + " userHandle="
+                        + this.mUserHandle;
         return str;
     }
 
@@ -195,7 +223,16 @@ public final class SearchAction implements Parcelable {
         }
 
         public SearchAction build() {
-            return new SearchAction(this.mId, this.mTitle, this.mIcon, this.mSubtitle, this.mContentDescription, this.mPendingIntent, this.mIntent, this.mUserHandle, this.mExtras);
+            return new SearchAction(
+                    this.mId,
+                    this.mTitle,
+                    this.mIcon,
+                    this.mSubtitle,
+                    this.mContentDescription,
+                    this.mPendingIntent,
+                    this.mIntent,
+                    this.mUserHandle,
+                    this.mExtras);
         }
     }
 }

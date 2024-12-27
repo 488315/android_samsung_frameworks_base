@@ -5,11 +5,11 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import vendor.samsung.hardware.radio.channel.ISehRadioChannelCallback;
 
 /* loaded from: classes6.dex */
 public interface ISehRadioChannel extends IInterface {
-    public static final String DESCRIPTOR = "vendor$samsung$hardware$radio$channel$ISehRadioChannel".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "vendor$samsung$hardware$radio$channel$ISehRadioChannel".replace('$', '.');
     public static final String HASH = "4b1672f6a0fac548257cca9e67164725ab13f2d0";
     public static final int VERSION = 1;
 
@@ -23,12 +23,11 @@ public interface ISehRadioChannel extends IInterface {
 
     public static class Default implements ISehRadioChannel {
         @Override // vendor.samsung.hardware.radio.channel.ISehRadioChannel
-        public void setCallback(ISehRadioChannelCallback sehChannelCallback) throws RemoteException {
-        }
+        public void setCallback(ISehRadioChannelCallback sehChannelCallback)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.channel.ISehRadioChannel
-        public void send(byte[] data) throws RemoteException {
-        }
+        public void send(byte[] data) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.channel.ISehRadioChannel
         public int getInterfaceVersion() {
@@ -46,7 +45,7 @@ public interface ISehRadioChannel extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISehRadioChannel {
+    public abstract static class Stub extends Binder implements ISehRadioChannel {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_send = 2;
@@ -74,7 +73,8 @@ public interface ISehRadioChannel extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -95,7 +95,8 @@ public interface ISehRadioChannel extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ISehRadioChannelCallback _arg0 = ISehRadioChannelCallback.Stub.asInterface(data.readStrongBinder());
+                    ISehRadioChannelCallback _arg0 =
+                            ISehRadioChannelCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setCallback(_arg0);
                     return true;
@@ -128,7 +129,8 @@ public interface ISehRadioChannel extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.channel.ISehRadioChannel
-            public void setCallback(ISehRadioChannelCallback sehChannelCallback) throws RemoteException {
+            public void setCallback(ISehRadioChannelCallback sehChannelCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);

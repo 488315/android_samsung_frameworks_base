@@ -17,9 +17,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
+
 import com.android.internal.R;
-import com.android.internal.app.LocaleHelper;
-import com.android.internal.app.LocaleStore;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Locale;
@@ -52,7 +52,8 @@ public class LocalePickerWithRegion extends ListFragment implements SearchView.O
     interface LocaleCollectorBase {
         HashSet<String> getIgnoredLocaleList(boolean z);
 
-        Set<LocaleStore.LocaleInfo> getSupportedLocaleList(LocaleStore.LocaleInfo localeInfo, boolean z, boolean z2);
+        Set<LocaleStore.LocaleInfo> getSupportedLocaleList(
+                LocaleStore.LocaleInfo localeInfo, boolean z, boolean z2);
 
         boolean hasSpecificPackageName();
     }
@@ -61,45 +62,89 @@ public class LocalePickerWithRegion extends ListFragment implements SearchView.O
         void onLocaleSelected(LocaleStore.LocaleInfo localeInfo);
     }
 
-    private static LocalePickerWithRegion createNumberingSystemPicker(LocaleSelectedListener listener, LocaleStore.LocaleInfo parent, boolean translatedOnly, MenuItem.OnActionExpandListener onActionExpandListener, LocaleCollectorBase localePickerCollector) {
+    private static LocalePickerWithRegion createNumberingSystemPicker(
+            LocaleSelectedListener listener,
+            LocaleStore.LocaleInfo parent,
+            boolean translatedOnly,
+            MenuItem.OnActionExpandListener onActionExpandListener,
+            LocaleCollectorBase localePickerCollector) {
         LocalePickerWithRegion localePicker = new LocalePickerWithRegion();
         localePicker.setOnActionExpandListener(onActionExpandListener);
         localePicker.setIsNumberingSystem(true);
-        boolean shouldShowTheList = localePicker.setListener(listener, parent, translatedOnly, localePickerCollector);
+        boolean shouldShowTheList =
+                localePicker.setListener(listener, parent, translatedOnly, localePickerCollector);
         if (shouldShowTheList) {
             return localePicker;
         }
         return null;
     }
 
-    private static LocalePickerWithRegion createCountryPicker(LocaleSelectedListener listener, LocaleStore.LocaleInfo parent, boolean translatedOnly, MenuItem.OnActionExpandListener onActionExpandListener, LocaleCollectorBase localePickerCollector) {
-        return createCountryPicker(listener, parent, translatedOnly, onActionExpandListener, localePickerCollector, 0);
+    private static LocalePickerWithRegion createCountryPicker(
+            LocaleSelectedListener listener,
+            LocaleStore.LocaleInfo parent,
+            boolean translatedOnly,
+            MenuItem.OnActionExpandListener onActionExpandListener,
+            LocaleCollectorBase localePickerCollector) {
+        return createCountryPicker(
+                listener, parent, translatedOnly, onActionExpandListener, localePickerCollector, 0);
     }
 
-    private static LocalePickerWithRegion createCountryPicker(LocaleSelectedListener listener, LocaleStore.LocaleInfo parent, boolean translatedOnly, MenuItem.OnActionExpandListener onActionExpandListener, LocaleCollectorBase localePickerCollector, int changeDisplayName) {
+    private static LocalePickerWithRegion createCountryPicker(
+            LocaleSelectedListener listener,
+            LocaleStore.LocaleInfo parent,
+            boolean translatedOnly,
+            MenuItem.OnActionExpandListener onActionExpandListener,
+            LocaleCollectorBase localePickerCollector,
+            int changeDisplayName) {
         LocalePickerWithRegion localePicker = new LocalePickerWithRegion();
         localePicker.mChangeDisplayName |= changeDisplayName;
         localePicker.setOnActionExpandListener(onActionExpandListener);
-        boolean shouldShowTheList = localePicker.setListener(listener, parent, translatedOnly, localePickerCollector);
+        boolean shouldShowTheList =
+                localePicker.setListener(listener, parent, translatedOnly, localePickerCollector);
         if (shouldShowTheList) {
             return localePicker;
         }
         return null;
     }
 
-    public static LocalePickerWithRegion createLanguagePicker(Context context, LocaleSelectedListener listener, boolean translatedOnly) {
+    public static LocalePickerWithRegion createLanguagePicker(
+            Context context, LocaleSelectedListener listener, boolean translatedOnly) {
         return createLanguagePicker(context, listener, translatedOnly, null, null, null);
     }
 
-    public static LocalePickerWithRegion createLanguagePicker(Context context, LocaleSelectedListener listener, boolean translatedOnly, LocaleList explicitLocales) {
+    public static LocalePickerWithRegion createLanguagePicker(
+            Context context,
+            LocaleSelectedListener listener,
+            boolean translatedOnly,
+            LocaleList explicitLocales) {
         return createLanguagePicker(context, listener, translatedOnly, explicitLocales, null, null);
     }
 
-    public static LocalePickerWithRegion createLanguagePicker(Context context, LocaleSelectedListener listener, boolean translatedOnly, LocaleList explicitLocales, String appPackageName, MenuItem.OnActionExpandListener onActionExpandListener) {
-        return createLanguagePicker(context, listener, translatedOnly, explicitLocales, appPackageName, onActionExpandListener, 0);
+    public static LocalePickerWithRegion createLanguagePicker(
+            Context context,
+            LocaleSelectedListener listener,
+            boolean translatedOnly,
+            LocaleList explicitLocales,
+            String appPackageName,
+            MenuItem.OnActionExpandListener onActionExpandListener) {
+        return createLanguagePicker(
+                context,
+                listener,
+                translatedOnly,
+                explicitLocales,
+                appPackageName,
+                onActionExpandListener,
+                0);
     }
 
-    public static LocalePickerWithRegion createLanguagePicker(Context context, LocaleSelectedListener listener, boolean translatedOnly, LocaleList explicitLocales, String appPackageName, MenuItem.OnActionExpandListener onActionExpandListener, int changeDisplayName) {
+    public static LocalePickerWithRegion createLanguagePicker(
+            Context context,
+            LocaleSelectedListener listener,
+            boolean translatedOnly,
+            LocaleList explicitLocales,
+            String appPackageName,
+            MenuItem.OnActionExpandListener onActionExpandListener,
+            int changeDisplayName) {
         LocaleCollectorBase localePickerController;
         if (TextUtils.isEmpty(appPackageName)) {
             localePickerController = new SystemLocaleCollector(context, explicitLocales);
@@ -117,7 +162,11 @@ public class LocalePickerWithRegion extends ListFragment implements SearchView.O
         this.mIsNumberingSystem = isNumberingSystem;
     }
 
-    private boolean setListener(LocaleSelectedListener listener, LocaleStore.LocaleInfo parent, boolean translatedOnly, LocaleCollectorBase localePickerController) {
+    private boolean setListener(
+            LocaleSelectedListener listener,
+            LocaleStore.LocaleInfo parent,
+            boolean translatedOnly,
+            LocaleCollectorBase localePickerController) {
         boolean z;
         this.mParentLocale = parent;
         this.mListener = listener;
@@ -138,7 +187,8 @@ public class LocalePickerWithRegion extends ListFragment implements SearchView.O
         return false;
     }
 
-    private Set<LocaleStore.LocaleInfo> filterTheLanguagesNotSupportedInApp(boolean shouldShowList, HashSet<Locale> supportedLocales) {
+    private Set<LocaleStore.LocaleInfo> filterTheLanguagesNotSupportedInApp(
+            boolean shouldShowList, HashSet<Locale> supportedLocales) {
         Set<LocaleStore.LocaleInfo> filteredList = new HashSet<>();
         if (!shouldShowList) {
             return filteredList;
@@ -177,12 +227,21 @@ public class LocalePickerWithRegion extends ListFragment implements SearchView.O
         this.mTitle = getActivity().getTitle();
         boolean countryMode = this.mParentLocale != null;
         Locale sortingLocale = countryMode ? this.mParentLocale.getLocale() : Locale.getDefault();
-        boolean hasSpecificPackageName = this.mLocalePickerCollector != null && this.mLocalePickerCollector.hasSpecificPackageName();
-        this.mAdapter = new SuggestedLocaleAdapter(this.mLocaleList, countryMode, hasSpecificPackageName, this.mChangeDisplayName);
+        boolean hasSpecificPackageName =
+                this.mLocalePickerCollector != null
+                        && this.mLocalePickerCollector.hasSpecificPackageName();
+        this.mAdapter =
+                new SuggestedLocaleAdapter(
+                        this.mLocaleList,
+                        countryMode,
+                        hasSpecificPackageName,
+                        this.mChangeDisplayName);
         this.mAdapter.setNumberingSystemMode(this.mIsNumberingSystem);
-        LocaleHelper.LocaleInfoComparator comp = new LocaleHelper.LocaleInfoComparator(sortingLocale, countryMode);
+        LocaleHelper.LocaleInfoComparator comp =
+                new LocaleHelper.LocaleInfoComparator(sortingLocale, countryMode);
         this.mAdapter.sort(comp);
-        LocaleHelper.LocaleInfoComparator compForSecSuggested = new LocaleHelper.LocaleInfoComparator(sortingLocale, countryMode, true);
+        LocaleHelper.LocaleInfoComparator compForSecSuggested =
+                new LocaleHelper.LocaleInfoComparator(sortingLocale, countryMode, true);
         this.mAdapter.sortForSecSuggested(compForSecSuggested);
         this.mPreviousSecSuggestionCount = this.mAdapter.getSecSuggestionCount();
         if (!hasSpecificPackageName && !countryMode) {
@@ -233,7 +292,9 @@ public class LocalePickerWithRegion extends ListFragment implements SearchView.O
             } else {
                 list.semSetGoToTopEnabled(true);
             }
-            View footer = layoutInflater.inflate(R.layout.sem_language_picker_footer, (ViewGroup) null, false);
+            View footer =
+                    layoutInflater.inflate(
+                            R.layout.sem_language_picker_footer, (ViewGroup) null, false);
             footer.setBackgroundColor(this.mSubheaderColor);
             list.addFooterView(footer, null, false);
         }
@@ -283,11 +344,14 @@ public class LocalePickerWithRegion extends ListFragment implements SearchView.O
     @Override // android.app.ListFragment
     public void onListItemClick(ListView parent, View v, int position, long id) {
         LocalePickerWithRegion selector;
-        LocaleStore.LocaleInfo locale = (LocaleStore.LocaleInfo) parent.getAdapter().getItem(position);
+        LocaleStore.LocaleInfo locale =
+                (LocaleStore.LocaleInfo) parent.getAdapter().getItem(position);
         boolean isSystemLocale = locale.isSystemLocale();
         boolean isRegionLocale = locale.getParent() != null;
         boolean mayHaveDifferentNumberingSystem = locale.hasNumberingSystems();
-        if (isSystemLocale || ((isRegionLocale && !mayHaveDifferentNumberingSystem) || this.mIsNumberingSystem)) {
+        if (isSystemLocale
+                || ((isRegionLocale && !mayHaveDifferentNumberingSystem)
+                        || this.mIsNumberingSystem)) {
             if (this.mListener != null) {
                 this.mListener.onLocaleSelected(locale);
             }
@@ -295,15 +359,32 @@ public class LocalePickerWithRegion extends ListFragment implements SearchView.O
             return;
         }
         if (mayHaveDifferentNumberingSystem) {
-            selector = createNumberingSystemPicker(this.mListener, locale, this.mTranslatedOnly, this.mOnActionExpandListener, this.mLocalePickerCollector);
+            selector =
+                    createNumberingSystemPicker(
+                            this.mListener,
+                            locale,
+                            this.mTranslatedOnly,
+                            this.mOnActionExpandListener,
+                            this.mLocalePickerCollector);
         } else {
-            selector = createCountryPicker(this.mListener, locale, this.mTranslatedOnly, this.mOnActionExpandListener, this.mLocalePickerCollector, this.mChangeDisplayName);
+            selector =
+                    createCountryPicker(
+                            this.mListener,
+                            locale,
+                            this.mTranslatedOnly,
+                            this.mOnActionExpandListener,
+                            this.mLocalePickerCollector,
+                            this.mChangeDisplayName);
             if (this.mSearchView != null) {
                 this.mSearchView.clearFocus();
             }
         }
         if (selector != null) {
-            getFragmentManager().beginTransaction().replace(getId(), selector).addToBackStack(null).commit();
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(getId(), selector)
+                    .addToBackStack(null)
+                    .commit();
         } else {
             returnToParentFrame();
         }
@@ -311,7 +392,8 @@ public class LocalePickerWithRegion extends ListFragment implements SearchView.O
 
     @Override // android.app.Fragment
     public void onPrepareOptionsMenu(Menu menu) {
-        if (this.mLocalePickerCollector.hasSpecificPackageName() && this.mOnActionExpandListener != null) {
+        if (this.mLocalePickerCollector.hasSpecificPackageName()
+                && this.mOnActionExpandListener != null) {
             return;
         }
         super.onPrepareOptionsMenu(menu);
@@ -319,7 +401,9 @@ public class LocalePickerWithRegion extends ListFragment implements SearchView.O
 
     @Override // android.app.Fragment
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if ((!this.mLocalePickerCollector.hasSpecificPackageName() || this.mOnActionExpandListener == null) && this.mParentLocale == null) {
+        if ((!this.mLocalePickerCollector.hasSpecificPackageName()
+                        || this.mOnActionExpandListener == null)
+                && this.mParentLocale == null) {
             inflater.inflate(R.menu.language_selection_list, menu);
             MenuItem searchMenuItem = menu.findItem(R.id.locale_search_menu);
             this.mSearchView = new SearchView(getContext());
@@ -327,7 +411,11 @@ public class LocalePickerWithRegion extends ListFragment implements SearchView.O
             int id = getResources().getIdentifier("android:id/search_plate", null, null);
             LinearLayout searchviewView = (LinearLayout) this.mSearchView.findViewById(id);
             if (searchviewView != null) {
-                searchviewView.setPadding(0, searchviewView.getPaddingTop(), searchviewView.getPaddingRight(), searchviewView.getPaddingBottom());
+                searchviewView.setPadding(
+                        0,
+                        searchviewView.getPaddingTop(),
+                        searchviewView.getPaddingRight(),
+                        searchviewView.getPaddingBottom());
             }
             searchMenuItem.setShowAsAction(2);
             if (this.mOnActionExpandListener != null) {
@@ -373,11 +461,14 @@ public class LocalePickerWithRegion extends ListFragment implements SearchView.O
     @Override // android.app.Fragment, android.content.ComponentCallbacks
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        int marginTop = getResources().getDimensionPixelSize(R.dimen.sem_locale_picker_action_bar_margin_top);
+        int marginTop =
+                getResources()
+                        .getDimensionPixelSize(R.dimen.sem_locale_picker_action_bar_margin_top);
         int idSearchBar = getResources().getIdentifier("android:id/search_bar", null, null);
         LinearLayout searchViewBar = (LinearLayout) this.mSearchView.findViewById(idSearchBar);
         if (searchViewBar != null) {
-            LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) searchViewBar.getLayoutParams();
+            LinearLayout.LayoutParams lp =
+                    (LinearLayout.LayoutParams) searchViewBar.getLayoutParams();
             lp.setMargins(0, marginTop, 0, 0);
             searchViewBar.setLayoutParams(lp);
         }

@@ -3,27 +3,30 @@ package android.hardware.radio.data;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class PcoDataInfo implements Parcelable {
-    public static final Parcelable.Creator<PcoDataInfo> CREATOR = new Parcelable.Creator<PcoDataInfo>() { // from class: android.hardware.radio.data.PcoDataInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PcoDataInfo createFromParcel(Parcel _aidl_source) {
-            PcoDataInfo _aidl_out = new PcoDataInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<PcoDataInfo> CREATOR =
+            new Parcelable.Creator<
+                    PcoDataInfo>() { // from class: android.hardware.radio.data.PcoDataInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PcoDataInfo createFromParcel(Parcel _aidl_source) {
+                    PcoDataInfo _aidl_out = new PcoDataInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PcoDataInfo[] newArray(int _aidl_size) {
-            return new PcoDataInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PcoDataInfo[] newArray(int _aidl_size) {
+                    return new PcoDataInfo[_aidl_size];
+                }
+            };
     public String bearerProto;
     public byte[] contents;
     public int cid = 0;

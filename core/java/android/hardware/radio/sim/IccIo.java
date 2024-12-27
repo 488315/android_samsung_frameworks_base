@@ -3,26 +3,28 @@ package android.hardware.radio.sim;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class IccIo implements Parcelable {
-    public static final Parcelable.Creator<IccIo> CREATOR = new Parcelable.Creator<IccIo>() { // from class: android.hardware.radio.sim.IccIo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IccIo createFromParcel(Parcel _aidl_source) {
-            IccIo _aidl_out = new IccIo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<IccIo> CREATOR =
+            new Parcelable.Creator<IccIo>() { // from class: android.hardware.radio.sim.IccIo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IccIo createFromParcel(Parcel _aidl_source) {
+                    IccIo _aidl_out = new IccIo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IccIo[] newArray(int _aidl_size) {
-            return new IccIo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IccIo[] newArray(int _aidl_size) {
+                    return new IccIo[_aidl_size];
+                }
+            };
     public String aid;
     public String data;
     public String path;

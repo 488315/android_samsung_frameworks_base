@@ -4,10 +4,11 @@ import android.location.Location;
 import android.location.LocationResult;
 import android.location.provider.ProviderRequest;
 import android.os.Bundle;
+
 import com.android.internal.util.ConcurrentUtils;
 import com.android.internal.util.Preconditions;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
-import com.android.server.location.provider.AbstractLocationProvider;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.Collections;
@@ -35,7 +36,8 @@ public final class MockableLocationProvider extends AbstractLocationProvider {
             synchronized (MockableLocationProvider.this.mOwnerLock) {
                 try {
                     AbstractLocationProvider abstractLocationProvider = this.mListenerProvider;
-                    MockableLocationProvider mockableLocationProvider = MockableLocationProvider.this;
+                    MockableLocationProvider mockableLocationProvider =
+                            MockableLocationProvider.this;
                     if (abstractLocationProvider != mockableLocationProvider.mProvider) {
                         return;
                     }
@@ -47,15 +49,18 @@ public final class MockableLocationProvider extends AbstractLocationProvider {
         }
 
         @Override // com.android.server.location.provider.AbstractLocationProvider.Listener
-        public final void onStateChanged(AbstractLocationProvider.State state, AbstractLocationProvider.State state2) {
+        public final void onStateChanged(
+                AbstractLocationProvider.State state, AbstractLocationProvider.State state2) {
             synchronized (MockableLocationProvider.this.mOwnerLock) {
                 try {
                     AbstractLocationProvider abstractLocationProvider = this.mListenerProvider;
-                    MockableLocationProvider mockableLocationProvider = MockableLocationProvider.this;
+                    MockableLocationProvider mockableLocationProvider =
+                            MockableLocationProvider.this;
                     if (abstractLocationProvider != mockableLocationProvider.mProvider) {
                         return;
                     }
-                    mockableLocationProvider.setState(new DelegateLocationProvider$$ExternalSyntheticLambda0(1, state2));
+                    mockableLocationProvider.setState(
+                            new DelegateLocationProvider$$ExternalSyntheticLambda0(1, state2));
                 } catch (Throwable th) {
                     throw th;
                 }
@@ -70,7 +75,8 @@ public final class MockableLocationProvider extends AbstractLocationProvider {
     }
 
     @Override // com.android.server.location.provider.AbstractLocationProvider
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         AbstractLocationProvider abstractLocationProvider;
         AbstractLocationProvider.State state;
         Preconditions.checkState(!Thread.holdsLock(this.mOwnerLock));
@@ -78,7 +84,8 @@ public final class MockableLocationProvider extends AbstractLocationProvider {
             abstractLocationProvider = this.mProvider;
             state = ((AbstractLocationProvider.InternalState) this.mInternalState.get()).state;
         }
-        BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("allowed="), state.allowed, printWriter);
+        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                new StringBuilder("allowed="), state.allowed, printWriter);
         if (state.identity != null) {
             printWriter.println("identity=" + state.identity);
         }
@@ -120,11 +127,14 @@ public final class MockableLocationProvider extends AbstractLocationProvider {
     }
 
     @Override // com.android.server.location.provider.AbstractLocationProvider
-    public final void onFlush(LocationProviderManager$Registration$$ExternalSyntheticLambda0 locationProviderManager$Registration$$ExternalSyntheticLambda0) {
+    public final void onFlush(
+            LocationProviderManager$Registration$$ExternalSyntheticLambda0
+                    locationProviderManager$Registration$$ExternalSyntheticLambda0) {
         synchronized (this.mOwnerLock) {
             AbstractLocationProvider abstractLocationProvider = this.mProvider;
             if (abstractLocationProvider != null) {
-                abstractLocationProvider.mController.flush(locationProviderManager$Registration$$ExternalSyntheticLambda0);
+                abstractLocationProvider.mController.flush(
+                        locationProviderManager$Registration$$ExternalSyntheticLambda0);
             } else {
                 locationProviderManager$Registration$$ExternalSyntheticLambda0.run();
             }
@@ -199,7 +209,8 @@ public final class MockableLocationProvider extends AbstractLocationProvider {
                 location2.setIsFromMockProvider(true);
                 mockLocationProvider.mLocation = location2;
                 try {
-                    mockLocationProvider.reportLocation(LocationResult.wrap(new Location[]{location2}).validate());
+                    mockLocationProvider.reportLocation(
+                            LocationResult.wrap(new Location[] {location2}).validate());
                 } catch (LocationResult.BadLocationException e) {
                     throw new IllegalArgumentException((Throwable) e);
                 }
@@ -226,7 +237,9 @@ public final class MockableLocationProvider extends AbstractLocationProvider {
         }
         AbstractLocationProvider abstractLocationProvider3 = this.mProvider;
         if (abstractLocationProvider3 != null) {
-            state = abstractLocationProvider3.mController.setListener(new ListenerWrapper(abstractLocationProvider3));
+            state =
+                    abstractLocationProvider3.mController.setListener(
+                            new ListenerWrapper(abstractLocationProvider3));
             if (this.mStarted) {
                 AbstractLocationProvider.Controller controller2 = this.mProvider.mController;
                 if (!controller2.mStarted) {

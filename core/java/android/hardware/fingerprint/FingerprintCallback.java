@@ -1,7 +1,6 @@
 package android.hardware.fingerprint;
 
 import android.content.Context;
-import android.hardware.fingerprint.FingerprintManager;
 import android.util.Slog;
 
 /* loaded from: classes2.dex */
@@ -18,15 +17,17 @@ public class FingerprintCallback {
     private Fingerprint mRemoveFingerprint;
     private int mRemoveRequest;
 
-    public @interface RemoveRequest {
-    }
+    public @interface RemoveRequest {}
 
-    FingerprintCallback(FingerprintManager.AuthenticationCallback authenticationCallback, FingerprintManager.CryptoObject cryptoObject) {
+    FingerprintCallback(
+            FingerprintManager.AuthenticationCallback authenticationCallback,
+            FingerprintManager.CryptoObject cryptoObject) {
         this.mAuthenticationCallback = authenticationCallback;
         this.mCryptoObject = cryptoObject;
     }
 
-    FingerprintCallback(FingerprintManager.FingerprintDetectionCallback fingerprintDetectionCallback) {
+    FingerprintCallback(
+            FingerprintManager.FingerprintDetectionCallback fingerprintDetectionCallback) {
         this.mFingerprintDetectionCallback = fingerprintDetectionCallback;
     }
 
@@ -38,7 +39,10 @@ public class FingerprintCallback {
         this.mGenerateChallengeCallback = generateChallengeCallback;
     }
 
-    FingerprintCallback(FingerprintManager.RemovalCallback removalCallback, int removeRequest, Fingerprint removeFingerprint) {
+    FingerprintCallback(
+            FingerprintManager.RemovalCallback removalCallback,
+            int removeRequest,
+            Fingerprint removeFingerprint) {
         this.mRemovalCallback = removalCallback;
         this.mRemoveRequest = removeRequest;
         this.mRemoveFingerprint = removeFingerprint;
@@ -73,11 +77,14 @@ public class FingerprintCallback {
         this.mRemovalCallback.onRemovalSucceeded(fingerprint, remaining);
     }
 
-    public void sendAuthenticatedSucceeded(Fingerprint fingerprint, int userId, boolean isStrongBiometric) {
+    public void sendAuthenticatedSucceeded(
+            Fingerprint fingerprint, int userId, boolean isStrongBiometric) {
         if (this.mAuthenticationCallback == null) {
             Slog.e(TAG, "Authentication succeeded but callback is null.");
         } else {
-            FingerprintManager.AuthenticationResult result = new FingerprintManager.AuthenticationResult(this.mCryptoObject, fingerprint, userId, isStrongBiometric);
+            FingerprintManager.AuthenticationResult result =
+                    new FingerprintManager.AuthenticationResult(
+                            this.mCryptoObject, fingerprint, userId, isStrongBiometric);
             this.mAuthenticationCallback.onAuthenticationSucceeded(result);
         }
     }
@@ -109,15 +116,22 @@ public class FingerprintCallback {
     public void sendErrorResult(Context context, int errMsgId, int vendorCode) {
         int clientErrMsgId = errMsgId == 8 ? vendorCode : errMsgId;
         if (this.mEnrollmentCallback != null) {
-            this.mEnrollmentCallback.onEnrollmentError(clientErrMsgId, FingerprintManager.getErrorString(context, errMsgId, vendorCode));
+            this.mEnrollmentCallback.onEnrollmentError(
+                    clientErrMsgId,
+                    FingerprintManager.getErrorString(context, errMsgId, vendorCode));
             return;
         }
         if (this.mAuthenticationCallback != null) {
-            this.mAuthenticationCallback.onAuthenticationError(clientErrMsgId, FingerprintManager.getErrorString(context, errMsgId, vendorCode));
+            this.mAuthenticationCallback.onAuthenticationError(
+                    clientErrMsgId,
+                    FingerprintManager.getErrorString(context, errMsgId, vendorCode));
             return;
         }
         if (this.mRemovalCallback != null) {
-            this.mRemovalCallback.onRemovalError(this.mRemoveFingerprint, clientErrMsgId, FingerprintManager.getErrorString(context, errMsgId, vendorCode));
+            this.mRemovalCallback.onRemovalError(
+                    this.mRemoveFingerprint,
+                    clientErrMsgId,
+                    FingerprintManager.getErrorString(context, errMsgId, vendorCode));
         } else if (this.mFingerprintDetectionCallback != null) {
             this.mFingerprintDetectionCallback.onDetectionError(errMsgId);
             this.mFingerprintDetectionCallback = null;
@@ -136,7 +150,8 @@ public class FingerprintCallback {
         if (this.mFingerprintDetectionCallback == null) {
             Slog.e(TAG, "sendFingerprintDetected, callback null");
         } else {
-            this.mFingerprintDetectionCallback.onFingerprintDetected(sensorId, userId, isStrongBiometric);
+            this.mFingerprintDetectionCallback.onFingerprintDetected(
+                    sensorId, userId, isStrongBiometric);
         }
     }
 

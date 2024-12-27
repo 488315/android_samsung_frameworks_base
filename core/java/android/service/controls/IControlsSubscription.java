@@ -16,12 +16,10 @@ public interface IControlsSubscription extends IInterface {
 
     public static class Default implements IControlsSubscription {
         @Override // android.service.controls.IControlsSubscription
-        public void request(long n) throws RemoteException {
-        }
+        public void request(long n) throws RemoteException {}
 
         @Override // android.service.controls.IControlsSubscription
-        public void cancel() throws RemoteException {
-        }
+        public void cancel() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface IControlsSubscription extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IControlsSubscription {
+    public abstract static class Stub extends Binder implements IControlsSubscription {
         static final int TRANSACTION_cancel = 2;
         static final int TRANSACTION_request = 1;
 
@@ -70,7 +68,8 @@ public interface IControlsSubscription extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IControlsSubscription.DESCRIPTOR);
             }

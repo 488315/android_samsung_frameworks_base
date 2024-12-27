@@ -13,15 +13,11 @@ import android.os.Parcel;
 import android.os.RemoteCallback;
 import android.os.RemoteException;
 import android.util.MergedConfiguration;
-import android.view.IWindow;
-import android.view.IWindowId;
-import android.view.InsetsSourceControl;
-import android.view.SurfaceControl;
-import android.view.WindowManager;
 import android.window.ClientWindowFrames;
 import android.window.InputTransferToken;
 import android.window.OnBackInvokedCallbackInfo;
 import android.window.WindowContainerToken;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -30,11 +26,42 @@ public interface IWindowSession extends IInterface {
     public static final String KEY_RELAYOUT_BUNDLE_CUTOUTPOLICY = "cutoutpolicy";
     public static final String KEY_RELAYOUT_BUNDLE_SEQID = "seqid";
 
-    int addToDisplay(IWindow iWindow, WindowManager.LayoutParams layoutParams, int i, int i2, int i3, InputChannel inputChannel, InsetsState insetsState, InsetsSourceControl.Array array, Rect rect, float[] fArr) throws RemoteException;
+    int addToDisplay(
+            IWindow iWindow,
+            WindowManager.LayoutParams layoutParams,
+            int i,
+            int i2,
+            int i3,
+            InputChannel inputChannel,
+            InsetsState insetsState,
+            InsetsSourceControl.Array array,
+            Rect rect,
+            float[] fArr)
+            throws RemoteException;
 
-    int addToDisplayAsUser(IWindow iWindow, WindowManager.LayoutParams layoutParams, int i, int i2, int i3, int i4, InputChannel inputChannel, InsetsState insetsState, InsetsSourceControl.Array array, Rect rect, float[] fArr) throws RemoteException;
+    int addToDisplayAsUser(
+            IWindow iWindow,
+            WindowManager.LayoutParams layoutParams,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            InputChannel inputChannel,
+            InsetsState insetsState,
+            InsetsSourceControl.Array array,
+            Rect rect,
+            float[] fArr)
+            throws RemoteException;
 
-    int addToDisplayWithoutInputChannel(IWindow iWindow, WindowManager.LayoutParams layoutParams, int i, int i2, InsetsState insetsState, Rect rect, float[] fArr) throws RemoteException;
+    int addToDisplayWithoutInputChannel(
+            IWindow iWindow,
+            WindowManager.LayoutParams layoutParams,
+            int i,
+            int i2,
+            InsetsState insetsState,
+            Rect rect,
+            float[] fArr)
+            throws RemoteException;
 
     void cancelDragAndDrop(IBinder iBinder, boolean z) throws RemoteException;
 
@@ -50,11 +77,13 @@ public interface IWindowSession extends IInterface {
 
     boolean dropForAccessibility(IWindow iWindow, int i, int i2) throws RemoteException;
 
-    void finishDrawing(IWindow iWindow, SurfaceControl.Transaction transaction, int i) throws RemoteException;
+    void finishDrawing(IWindow iWindow, SurfaceControl.Transaction transaction, int i)
+            throws RemoteException;
 
     void finishMovingTask(IWindow iWindow) throws RemoteException;
 
-    void generateDisplayHash(IWindow iWindow, Rect rect, String str, RemoteCallback remoteCallback) throws RemoteException;
+    void generateDisplayHash(IWindow iWindow, Rect rect, String str, RemoteCallback remoteCallback)
+            throws RemoteException;
 
     int getDragDeviceId() throws RemoteException;
 
@@ -64,11 +93,40 @@ public interface IWindowSession extends IInterface {
 
     IWindowId getWindowId(IBinder iBinder) throws RemoteException;
 
-    void grantEmbeddedWindowFocus(IWindow iWindow, InputTransferToken inputTransferToken, boolean z) throws RemoteException;
+    void grantEmbeddedWindowFocus(IWindow iWindow, InputTransferToken inputTransferToken, boolean z)
+            throws RemoteException;
 
-    void grantInputChannel(int i, SurfaceControl surfaceControl, IBinder iBinder, InputTransferToken inputTransferToken, int i2, int i3, int i4, int i5, IBinder iBinder2, InputTransferToken inputTransferToken2, String str, InputChannel inputChannel) throws RemoteException;
+    void grantInputChannel(
+            int i,
+            SurfaceControl surfaceControl,
+            IBinder iBinder,
+            InputTransferToken inputTransferToken,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            IBinder iBinder2,
+            InputTransferToken inputTransferToken2,
+            String str,
+            InputChannel inputChannel)
+            throws RemoteException;
 
-    void grantInputChannelWithTaskToken(int i, SurfaceControl surfaceControl, IBinder iBinder, InputTransferToken inputTransferToken, int i2, int i3, int i4, int i5, IBinder iBinder2, InputTransferToken inputTransferToken2, String str, InputChannel inputChannel, int i6, WindowContainerToken windowContainerToken) throws RemoteException;
+    void grantInputChannelWithTaskToken(
+            int i,
+            SurfaceControl surfaceControl,
+            IBinder iBinder,
+            InputTransferToken inputTransferToken,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            IBinder iBinder2,
+            InputTransferToken inputTransferToken2,
+            String str,
+            InputChannel inputChannel,
+            int i6,
+            WindowContainerToken windowContainerToken)
+            throws RemoteException;
 
     boolean moveFocusToAdjacentWindow(IWindow iWindow, int i) throws RemoteException;
 
@@ -78,9 +136,35 @@ public interface IWindowSession extends IInterface {
 
     void performClipDataUpdate(ClipData clipData) throws RemoteException;
 
-    IBinder performDrag(IWindow iWindow, int i, SurfaceControl surfaceControl, int i2, int i3, int i4, float f, float f2, float f3, float f4, ClipData clipData) throws RemoteException;
+    IBinder performDrag(
+            IWindow iWindow,
+            int i,
+            SurfaceControl surfaceControl,
+            int i2,
+            int i3,
+            int i4,
+            float f,
+            float f2,
+            float f3,
+            float f4,
+            ClipData clipData)
+            throws RemoteException;
 
-    IBinder performDragWithArea(IWindow iWindow, int i, SurfaceControl surfaceControl, int i2, int i3, int i4, float f, float f2, float f3, float f4, ClipData clipData, RectF rectF, Point point) throws RemoteException;
+    IBinder performDragWithArea(
+            IWindow iWindow,
+            int i,
+            SurfaceControl surfaceControl,
+            int i2,
+            int i3,
+            int i4,
+            float f,
+            float f2,
+            float f3,
+            float f4,
+            ClipData clipData,
+            RectF rectF,
+            Point point)
+            throws RemoteException;
 
     boolean performHapticFeedback(int i, boolean z, boolean z2) throws RemoteException;
 
@@ -88,32 +172,75 @@ public interface IWindowSession extends IInterface {
 
     void pokeDrawLock(IBinder iBinder) throws RemoteException;
 
-    int relayout(IWindow iWindow, WindowManager.LayoutParams layoutParams, int i, int i2, int i3, int i4, int i5, int i6, WindowRelayoutResult windowRelayoutResult) throws RemoteException;
+    int relayout(
+            IWindow iWindow,
+            WindowManager.LayoutParams layoutParams,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            WindowRelayoutResult windowRelayoutResult)
+            throws RemoteException;
 
-    void relayoutAsync(IWindow iWindow, WindowManager.LayoutParams layoutParams, int i, int i2, int i3, int i4, int i5, int i6) throws RemoteException;
+    void relayoutAsync(
+            IWindow iWindow,
+            WindowManager.LayoutParams layoutParams,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6)
+            throws RemoteException;
 
     @Deprecated
-    int relayoutLegacy(IWindow iWindow, WindowManager.LayoutParams layoutParams, int i, int i2, int i3, int i4, int i5, int i6, ClientWindowFrames clientWindowFrames, MergedConfiguration mergedConfiguration, SurfaceControl surfaceControl, InsetsState insetsState, InsetsSourceControl.Array array, Bundle bundle) throws RemoteException;
+    int relayoutLegacy(
+            IWindow iWindow,
+            WindowManager.LayoutParams layoutParams,
+            int i,
+            int i2,
+            int i3,
+            int i4,
+            int i5,
+            int i6,
+            ClientWindowFrames clientWindowFrames,
+            MergedConfiguration mergedConfiguration,
+            SurfaceControl surfaceControl,
+            InsetsState insetsState,
+            InsetsSourceControl.Array array,
+            Bundle bundle)
+            throws RemoteException;
 
     void remove(IBinder iBinder) throws RemoteException;
 
-    void removeWithTaskToken(IBinder iBinder, WindowContainerToken windowContainerToken) throws RemoteException;
+    void removeWithTaskToken(IBinder iBinder, WindowContainerToken windowContainerToken)
+            throws RemoteException;
 
-    void reportDecorViewGestureInterceptionChanged(IWindow iWindow, boolean z) throws RemoteException;
+    void reportDecorViewGestureInterceptionChanged(IWindow iWindow, boolean z)
+            throws RemoteException;
 
     void reportDropResult(IWindow iWindow, boolean z) throws RemoteException;
 
-    void reportKeepClearAreasChanged(IWindow iWindow, List<Rect> list, List<Rect> list2) throws RemoteException;
+    void reportKeepClearAreasChanged(IWindow iWindow, List<Rect> list, List<Rect> list2)
+            throws RemoteException;
 
-    void reportSystemGestureExclusionChanged(IWindow iWindow, List<Rect> list) throws RemoteException;
+    void reportSystemGestureExclusionChanged(IWindow iWindow, List<Rect> list)
+            throws RemoteException;
 
-    void sendWallpaperCommand(IBinder iBinder, String str, int i, int i2, int i3, Bundle bundle, boolean z) throws RemoteException;
+    void sendWallpaperCommand(
+            IBinder iBinder, String str, int i, int i2, int i3, Bundle bundle, boolean z)
+            throws RemoteException;
 
-    void setInsets(IWindow iWindow, int i, Rect rect, Rect rect2, Region region, Rect rect3) throws RemoteException;
+    void setInsets(IWindow iWindow, int i, Rect rect, Rect rect2, Region region, Rect rect3)
+            throws RemoteException;
 
     void setKeyguardWallpaperTouchAllowed(IWindow iWindow, boolean z) throws RemoteException;
 
-    void setOnBackInvokedCallbackInfo(IWindow iWindow, OnBackInvokedCallbackInfo onBackInvokedCallbackInfo) throws RemoteException;
+    void setOnBackInvokedCallbackInfo(
+            IWindow iWindow, OnBackInvokedCallbackInfo onBackInvokedCallbackInfo)
+            throws RemoteException;
 
     void setShouldZoomOutWallpaper(IBinder iBinder, boolean z) throws RemoteException;
 
@@ -123,15 +250,33 @@ public interface IWindowSession extends IInterface {
 
     void setWallpaperDisplayOffset(IBinder iBinder, int i, int i2) throws RemoteException;
 
-    void setWallpaperPosition(IBinder iBinder, float f, float f2, float f3, float f4) throws RemoteException;
+    void setWallpaperPosition(IBinder iBinder, float f, float f2, float f3, float f4)
+            throws RemoteException;
 
     void setWallpaperZoomOut(IBinder iBinder, float f) throws RemoteException;
 
     boolean startMovingTask(IWindow iWindow, float f, float f2) throws RemoteException;
 
-    void updateInputChannel(IBinder iBinder, int i, SurfaceControl surfaceControl, int i2, int i3, int i4, Region region) throws RemoteException;
+    void updateInputChannel(
+            IBinder iBinder,
+            int i,
+            SurfaceControl surfaceControl,
+            int i2,
+            int i3,
+            int i4,
+            Region region)
+            throws RemoteException;
 
-    void updateInputChannelWithPointerRegion(IBinder iBinder, int i, SurfaceControl surfaceControl, int i2, int i3, int i4, Region region, Region region2) throws RemoteException;
+    void updateInputChannelWithPointerRegion(
+            IBinder iBinder,
+            int i,
+            SurfaceControl surfaceControl,
+            int i2,
+            int i3,
+            int i4,
+            Region region,
+            Region region2)
+            throws RemoteException;
 
     void updateRequestedVisibleTypes(IWindow iWindow, int i) throws RemoteException;
 
@@ -143,37 +288,100 @@ public interface IWindowSession extends IInterface {
 
     public static class Default implements IWindowSession {
         @Override // android.view.IWindowSession
-        public int addToDisplay(IWindow window, WindowManager.LayoutParams attrs, int viewVisibility, int layerStackId, int requestedVisibleTypes, InputChannel outInputChannel, InsetsState insetsState, InsetsSourceControl.Array activeControls, Rect attachedFrame, float[] sizeCompatScale) throws RemoteException {
+        public int addToDisplay(
+                IWindow window,
+                WindowManager.LayoutParams attrs,
+                int viewVisibility,
+                int layerStackId,
+                int requestedVisibleTypes,
+                InputChannel outInputChannel,
+                InsetsState insetsState,
+                InsetsSourceControl.Array activeControls,
+                Rect attachedFrame,
+                float[] sizeCompatScale)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.view.IWindowSession
-        public int addToDisplayAsUser(IWindow window, WindowManager.LayoutParams attrs, int viewVisibility, int layerStackId, int userId, int requestedVisibleTypes, InputChannel outInputChannel, InsetsState insetsState, InsetsSourceControl.Array activeControls, Rect attachedFrame, float[] sizeCompatScale) throws RemoteException {
+        public int addToDisplayAsUser(
+                IWindow window,
+                WindowManager.LayoutParams attrs,
+                int viewVisibility,
+                int layerStackId,
+                int userId,
+                int requestedVisibleTypes,
+                InputChannel outInputChannel,
+                InsetsState insetsState,
+                InsetsSourceControl.Array activeControls,
+                Rect attachedFrame,
+                float[] sizeCompatScale)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.view.IWindowSession
-        public int addToDisplayWithoutInputChannel(IWindow window, WindowManager.LayoutParams attrs, int viewVisibility, int layerStackId, InsetsState insetsState, Rect attachedFrame, float[] sizeCompatScale) throws RemoteException {
+        public int addToDisplayWithoutInputChannel(
+                IWindow window,
+                WindowManager.LayoutParams attrs,
+                int viewVisibility,
+                int layerStackId,
+                InsetsState insetsState,
+                Rect attachedFrame,
+                float[] sizeCompatScale)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.view.IWindowSession
-        public void remove(IBinder clientToken) throws RemoteException {
-        }
+        public void remove(IBinder clientToken) throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public int relayoutLegacy(IWindow window, WindowManager.LayoutParams attrs, int requestedWidth, int requestedHeight, int viewVisibility, int flags, int seq, int lastSyncSeqId, ClientWindowFrames outFrames, MergedConfiguration outMergedConfiguration, SurfaceControl outSurfaceControl, InsetsState insetsState, InsetsSourceControl.Array activeControls, Bundle bundle) throws RemoteException {
+        public int relayoutLegacy(
+                IWindow window,
+                WindowManager.LayoutParams attrs,
+                int requestedWidth,
+                int requestedHeight,
+                int viewVisibility,
+                int flags,
+                int seq,
+                int lastSyncSeqId,
+                ClientWindowFrames outFrames,
+                MergedConfiguration outMergedConfiguration,
+                SurfaceControl outSurfaceControl,
+                InsetsState insetsState,
+                InsetsSourceControl.Array activeControls,
+                Bundle bundle)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.view.IWindowSession
-        public int relayout(IWindow window, WindowManager.LayoutParams attrs, int requestedWidth, int requestedHeight, int viewVisibility, int flags, int seq, int lastSyncSeqId, WindowRelayoutResult outRelayoutResult) throws RemoteException {
+        public int relayout(
+                IWindow window,
+                WindowManager.LayoutParams attrs,
+                int requestedWidth,
+                int requestedHeight,
+                int viewVisibility,
+                int flags,
+                int seq,
+                int lastSyncSeqId,
+                WindowRelayoutResult outRelayoutResult)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.view.IWindowSession
-        public void relayoutAsync(IWindow window, WindowManager.LayoutParams attrs, int requestedWidth, int requestedHeight, int viewVisibility, int flags, int seq, int lastSyncSeqId) throws RemoteException {
-        }
+        public void relayoutAsync(
+                IWindow window,
+                WindowManager.LayoutParams attrs,
+                int requestedWidth,
+                int requestedHeight,
+                int viewVisibility,
+                int flags,
+                int seq,
+                int lastSyncSeqId)
+                throws RemoteException {}
 
         @Override // android.view.IWindowSession
         public boolean outOfMemory(IWindow window) throws RemoteException {
@@ -181,29 +389,63 @@ public interface IWindowSession extends IInterface {
         }
 
         @Override // android.view.IWindowSession
-        public void setInsets(IWindow window, int touchableInsets, Rect contentInsets, Rect visibleInsets, Region touchableRegion, Rect minimizedInsets) throws RemoteException {
-        }
+        public void setInsets(
+                IWindow window,
+                int touchableInsets,
+                Rect contentInsets,
+                Rect visibleInsets,
+                Region touchableRegion,
+                Rect minimizedInsets)
+                throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void finishDrawing(IWindow window, SurfaceControl.Transaction postDrawTransaction, int seqId) throws RemoteException {
-        }
+        public void finishDrawing(
+                IWindow window, SurfaceControl.Transaction postDrawTransaction, int seqId)
+                throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public boolean performHapticFeedback(int effectId, boolean always, boolean fromIme) throws RemoteException {
+        public boolean performHapticFeedback(int effectId, boolean always, boolean fromIme)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.view.IWindowSession
-        public void performHapticFeedbackAsync(int effectId, boolean always, boolean fromIme) throws RemoteException {
-        }
+        public void performHapticFeedbackAsync(int effectId, boolean always, boolean fromIme)
+                throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public IBinder performDrag(IWindow window, int flags, SurfaceControl surface, int touchSource, int touchDeviceId, int touchPointerId, float touchX, float touchY, float thumbCenterX, float thumbCenterY, ClipData data) throws RemoteException {
+        public IBinder performDrag(
+                IWindow window,
+                int flags,
+                SurfaceControl surface,
+                int touchSource,
+                int touchDeviceId,
+                int touchPointerId,
+                float touchX,
+                float touchY,
+                float thumbCenterX,
+                float thumbCenterY,
+                ClipData data)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.view.IWindowSession
-        public IBinder performDragWithArea(IWindow window, int flags, SurfaceControl surface, int touchSource, int touchDeviceId, int touchPointerId, float touchX, float touchY, float thumbCenterX, float thumbCenterY, ClipData data, RectF selectedArea, Point viewLocation) throws RemoteException {
+        public IBinder performDragWithArea(
+                IWindow window,
+                int flags,
+                SurfaceControl surface,
+                int touchSource,
+                int touchDeviceId,
+                int touchPointerId,
+                float touchX,
+                float touchY,
+                float thumbCenterX,
+                float thumbCenterY,
+                ClipData data,
+                RectF selectedArea,
+                Point viewLocation)
+                throws RemoteException {
             return null;
         }
 
@@ -228,52 +470,49 @@ public interface IWindowSession extends IInterface {
         }
 
         @Override // android.view.IWindowSession
-        public void reportDropResult(IWindow window, boolean consumed) throws RemoteException {
-        }
+        public void reportDropResult(IWindow window, boolean consumed) throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void cancelDragAndDrop(IBinder dragToken, boolean skipAnimation) throws RemoteException {
-        }
+        public void cancelDragAndDrop(IBinder dragToken, boolean skipAnimation)
+                throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void dragRecipientEntered(IWindow window) throws RemoteException {
-        }
+        public void dragRecipientEntered(IWindow window) throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void dragRecipientExited(IWindow window) throws RemoteException {
-        }
+        public void dragRecipientExited(IWindow window) throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void setWallpaperPosition(IBinder windowToken, float x, float y, float xstep, float ystep) throws RemoteException {
-        }
+        public void setWallpaperPosition(
+                IBinder windowToken, float x, float y, float xstep, float ystep)
+                throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void setWallpaperZoomOut(IBinder windowToken, float scale) throws RemoteException {
-        }
+        public void setWallpaperZoomOut(IBinder windowToken, float scale) throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void setShouldZoomOutWallpaper(IBinder windowToken, boolean shouldZoom) throws RemoteException {
-        }
+        public void setShouldZoomOutWallpaper(IBinder windowToken, boolean shouldZoom)
+                throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void wallpaperOffsetsComplete(IBinder window) throws RemoteException {
-        }
+        public void wallpaperOffsetsComplete(IBinder window) throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void setWallpaperDisplayOffset(IBinder windowToken, int x, int y) throws RemoteException {
-        }
+        public void setWallpaperDisplayOffset(IBinder windowToken, int x, int y)
+                throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void sendWallpaperCommand(IBinder window, String action, int x, int y, int z, Bundle extras, boolean sync) throws RemoteException {
-        }
+        public void sendWallpaperCommand(
+                IBinder window, String action, int x, int y, int z, Bundle extras, boolean sync)
+                throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void wallpaperCommandComplete(IBinder window, Bundle result) throws RemoteException {
-        }
+        public void wallpaperCommandComplete(IBinder window, Bundle result)
+                throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void onRectangleOnScreenRequested(IBinder token, Rect rectangle) throws RemoteException {
-        }
+        public void onRectangleOnScreenRequested(IBinder token, Rect rectangle)
+                throws RemoteException {}
 
         @Override // android.view.IWindowSession
         public IWindowId getWindowId(IBinder window) throws RemoteException {
@@ -281,73 +520,114 @@ public interface IWindowSession extends IInterface {
         }
 
         @Override // android.view.IWindowSession
-        public void pokeDrawLock(IBinder window) throws RemoteException {
-        }
+        public void pokeDrawLock(IBinder window) throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public boolean startMovingTask(IWindow window, float startX, float startY) throws RemoteException {
+        public boolean startMovingTask(IWindow window, float startX, float startY)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.view.IWindowSession
-        public void finishMovingTask(IWindow window) throws RemoteException {
-        }
+        public void finishMovingTask(IWindow window) throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void updateTapExcludeRegion(IWindow window, Region region) throws RemoteException {
-        }
+        public void updateTapExcludeRegion(IWindow window, Region region) throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void updateRequestedVisibleTypes(IWindow window, int requestedVisibleTypes) throws RemoteException {
-        }
+        public void updateRequestedVisibleTypes(IWindow window, int requestedVisibleTypes)
+                throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void reportSystemGestureExclusionChanged(IWindow window, List<Rect> exclusionRects) throws RemoteException {
-        }
+        public void reportSystemGestureExclusionChanged(IWindow window, List<Rect> exclusionRects)
+                throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void reportDecorViewGestureInterceptionChanged(IWindow window, boolean intercepted) throws RemoteException {
-        }
+        public void reportDecorViewGestureInterceptionChanged(IWindow window, boolean intercepted)
+                throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void reportKeepClearAreasChanged(IWindow window, List<Rect> restricted, List<Rect> unrestricted) throws RemoteException {
-        }
+        public void reportKeepClearAreasChanged(
+                IWindow window, List<Rect> restricted, List<Rect> unrestricted)
+                throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void grantInputChannel(int displayId, SurfaceControl surface, IBinder clientToken, InputTransferToken hostInputTransferToken, int flags, int privateFlags, int inputFeatures, int type, IBinder windowToken, InputTransferToken embeddedInputTransferToken, String inputHandleName, InputChannel outInputChannel) throws RemoteException {
-        }
+        public void grantInputChannel(
+                int displayId,
+                SurfaceControl surface,
+                IBinder clientToken,
+                InputTransferToken hostInputTransferToken,
+                int flags,
+                int privateFlags,
+                int inputFeatures,
+                int type,
+                IBinder windowToken,
+                InputTransferToken embeddedInputTransferToken,
+                String inputHandleName,
+                InputChannel outInputChannel)
+                throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void grantInputChannelWithTaskToken(int displayId, SurfaceControl surface, IBinder clientToken, InputTransferToken hostInputTransferToken, int flags, int privateFlags, int inputFeatures, int type, IBinder windowToken, InputTransferToken embeddedInputTransferToken, String inputHandleName, InputChannel outInputChannel, int surfaceInset, WindowContainerToken taskToken) throws RemoteException {
-        }
+        public void grantInputChannelWithTaskToken(
+                int displayId,
+                SurfaceControl surface,
+                IBinder clientToken,
+                InputTransferToken hostInputTransferToken,
+                int flags,
+                int privateFlags,
+                int inputFeatures,
+                int type,
+                IBinder windowToken,
+                InputTransferToken embeddedInputTransferToken,
+                String inputHandleName,
+                InputChannel outInputChannel,
+                int surfaceInset,
+                WindowContainerToken taskToken)
+                throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void removeWithTaskToken(IBinder clientToken, WindowContainerToken taskToken) throws RemoteException {
-        }
+        public void removeWithTaskToken(IBinder clientToken, WindowContainerToken taskToken)
+                throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void updateInputChannel(IBinder channelToken, int displayId, SurfaceControl surface, int flags, int privateFlags, int inputFeatures, Region region) throws RemoteException {
-        }
+        public void updateInputChannel(
+                IBinder channelToken,
+                int displayId,
+                SurfaceControl surface,
+                int flags,
+                int privateFlags,
+                int inputFeatures,
+                Region region)
+                throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void updateInputChannelWithPointerRegion(IBinder channelToken, int displayId, SurfaceControl surface, int flags, int privateFlags, int inputFeatures, Region region, Region pointerRegion) throws RemoteException {
-        }
+        public void updateInputChannelWithPointerRegion(
+                IBinder channelToken,
+                int displayId,
+                SurfaceControl surface,
+                int flags,
+                int privateFlags,
+                int inputFeatures,
+                Region region,
+                Region pointerRegion)
+                throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void grantEmbeddedWindowFocus(IWindow window, InputTransferToken inputToken, boolean grantFocus) throws RemoteException {
-        }
+        public void grantEmbeddedWindowFocus(
+                IWindow window, InputTransferToken inputToken, boolean grantFocus)
+                throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void generateDisplayHash(IWindow window, Rect boundsInWindow, String hashAlgorithm, RemoteCallback callback) throws RemoteException {
-        }
+        public void generateDisplayHash(
+                IWindow window, Rect boundsInWindow, String hashAlgorithm, RemoteCallback callback)
+                throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void setOnBackInvokedCallbackInfo(IWindow window, OnBackInvokedCallbackInfo callbackInfo) throws RemoteException {
-        }
+        public void setOnBackInvokedCallbackInfo(
+                IWindow window, OnBackInvokedCallbackInfo callbackInfo) throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void clearTouchableRegion(IWindow window) throws RemoteException {
-        }
+        public void clearTouchableRegion(IWindow window) throws RemoteException {}
 
         @Override // android.view.IWindowSession
         public boolean cancelDraw(IWindow window) throws RemoteException {
@@ -355,29 +635,26 @@ public interface IWindowSession extends IInterface {
         }
 
         @Override // android.view.IWindowSession
-        public boolean moveFocusToAdjacentWindow(IWindow fromWindow, int direction) throws RemoteException {
+        public boolean moveFocusToAdjacentWindow(IWindow fromWindow, int direction)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.view.IWindowSession
-        public void setTspDeadzone(IWindow window, Bundle deadzone) throws RemoteException {
-        }
+        public void setTspDeadzone(IWindow window, Bundle deadzone) throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void clearTspDeadzone(IWindow window) throws RemoteException {
-        }
+        public void clearTspDeadzone(IWindow window) throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void setTspNoteMode(IWindow window, boolean isTspNoteMode) throws RemoteException {
-        }
+        public void setTspNoteMode(IWindow window, boolean isTspNoteMode) throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void performClipDataUpdate(ClipData data) throws RemoteException {
-        }
+        public void performClipDataUpdate(ClipData data) throws RemoteException {}
 
         @Override // android.view.IWindowSession
-        public void setKeyguardWallpaperTouchAllowed(IWindow window, boolean allowed) throws RemoteException {
-        }
+        public void setKeyguardWallpaperTouchAllowed(IWindow window, boolean allowed)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -385,7 +662,7 @@ public interface IWindowSession extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWindowSession {
+    public abstract static class Stub extends Binder implements IWindowSession {
         public static final String DESCRIPTOR = "android.view.IWindowSession";
         static final int TRANSACTION_addToDisplay = 1;
         static final int TRANSACTION_addToDisplayAsUser = 2;
@@ -586,7 +863,8 @@ public interface IWindowSession extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             float[] _arg9;
             float[] _arg10;
             float[] _arg6;
@@ -600,7 +878,9 @@ public interface IWindowSession extends IInterface {
             switch (code) {
                 case 1:
                     IWindow _arg0 = IWindow.Stub.asInterface(data.readStrongBinder());
-                    WindowManager.LayoutParams _arg1 = (WindowManager.LayoutParams) data.readTypedObject(WindowManager.LayoutParams.CREATOR);
+                    WindowManager.LayoutParams _arg1 =
+                            (WindowManager.LayoutParams)
+                                    data.readTypedObject(WindowManager.LayoutParams.CREATOR);
                     int _arg2 = data.readInt();
                     int _arg3 = data.readInt();
                     int _arg4 = data.readInt();
@@ -617,7 +897,10 @@ public interface IWindowSession extends IInterface {
                     }
                     data.enforceNoDataAvail();
                     float[] _arg93 = _arg9;
-                    int _result = addToDisplay(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg62, _arg7, _arg8, _arg93);
+                    int _result =
+                            addToDisplay(
+                                    _arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg62, _arg7, _arg8,
+                                    _arg93);
                     reply.writeNoException();
                     reply.writeInt(_result);
                     reply.writeTypedObject(_arg5, 1);
@@ -628,7 +911,9 @@ public interface IWindowSession extends IInterface {
                     return true;
                 case 2:
                     IWindow _arg02 = IWindow.Stub.asInterface(data.readStrongBinder());
-                    WindowManager.LayoutParams _arg12 = (WindowManager.LayoutParams) data.readTypedObject(WindowManager.LayoutParams.CREATOR);
+                    WindowManager.LayoutParams _arg12 =
+                            (WindowManager.LayoutParams)
+                                    data.readTypedObject(WindowManager.LayoutParams.CREATOR);
                     int _arg22 = data.readInt();
                     int _arg32 = data.readInt();
                     int _arg42 = data.readInt();
@@ -646,7 +931,10 @@ public interface IWindowSession extends IInterface {
                     }
                     data.enforceNoDataAvail();
                     float[] _arg103 = _arg10;
-                    int _result2 = addToDisplayAsUser(_arg02, _arg12, _arg22, _arg32, _arg42, _arg52, _arg63, _arg72, _arg82, _arg94, _arg103);
+                    int _result2 =
+                            addToDisplayAsUser(
+                                    _arg02, _arg12, _arg22, _arg32, _arg42, _arg52, _arg63, _arg72,
+                                    _arg82, _arg94, _arg103);
                     reply.writeNoException();
                     reply.writeInt(_result2);
                     reply.writeTypedObject(_arg63, 1);
@@ -657,7 +945,9 @@ public interface IWindowSession extends IInterface {
                     return true;
                 case 3:
                     IWindow _arg03 = IWindow.Stub.asInterface(data.readStrongBinder());
-                    WindowManager.LayoutParams _arg13 = (WindowManager.LayoutParams) data.readTypedObject(WindowManager.LayoutParams.CREATOR);
+                    WindowManager.LayoutParams _arg13 =
+                            (WindowManager.LayoutParams)
+                                    data.readTypedObject(WindowManager.LayoutParams.CREATOR);
                     int _arg23 = data.readInt();
                     int _arg33 = data.readInt();
                     InsetsState _arg43 = new InsetsState();
@@ -670,7 +960,9 @@ public interface IWindowSession extends IInterface {
                     }
                     data.enforceNoDataAvail();
                     float[] _arg64 = _arg6;
-                    int _result3 = addToDisplayWithoutInputChannel(_arg03, _arg13, _arg23, _arg33, _arg43, _arg53, _arg64);
+                    int _result3 =
+                            addToDisplayWithoutInputChannel(
+                                    _arg03, _arg13, _arg23, _arg33, _arg43, _arg53, _arg64);
                     reply.writeNoException();
                     reply.writeInt(_result3);
                     reply.writeTypedObject(_arg43, 1);
@@ -685,7 +977,9 @@ public interface IWindowSession extends IInterface {
                     return true;
                 case 5:
                     IWindow _arg05 = IWindow.Stub.asInterface(data.readStrongBinder());
-                    WindowManager.LayoutParams _arg14 = (WindowManager.LayoutParams) data.readTypedObject(WindowManager.LayoutParams.CREATOR);
+                    WindowManager.LayoutParams _arg14 =
+                            (WindowManager.LayoutParams)
+                                    data.readTypedObject(WindowManager.LayoutParams.CREATOR);
                     int _arg24 = data.readInt();
                     int _arg34 = data.readInt();
                     int _arg44 = data.readInt();
@@ -699,7 +993,10 @@ public interface IWindowSession extends IInterface {
                     InsetsSourceControl.Array _arg122 = new InsetsSourceControl.Array();
                     Bundle _arg132 = new Bundle();
                     data.enforceNoDataAvail();
-                    int _result4 = relayoutLegacy(_arg05, _arg14, _arg24, _arg34, _arg44, _arg54, _arg65, _arg73, _arg83, _arg95, _arg104, _arg11, _arg122, _arg132);
+                    int _result4 =
+                            relayoutLegacy(
+                                    _arg05, _arg14, _arg24, _arg34, _arg44, _arg54, _arg65, _arg73,
+                                    _arg83, _arg95, _arg104, _arg11, _arg122, _arg132);
                     reply.writeNoException();
                     reply.writeInt(_result4);
                     reply.writeTypedObject(_arg83, 1);
@@ -711,7 +1008,9 @@ public interface IWindowSession extends IInterface {
                     return true;
                 case 6:
                     IWindow _arg06 = IWindow.Stub.asInterface(data.readStrongBinder());
-                    WindowManager.LayoutParams _arg15 = (WindowManager.LayoutParams) data.readTypedObject(WindowManager.LayoutParams.CREATOR);
+                    WindowManager.LayoutParams _arg15 =
+                            (WindowManager.LayoutParams)
+                                    data.readTypedObject(WindowManager.LayoutParams.CREATOR);
                     int _arg25 = data.readInt();
                     int _arg35 = data.readInt();
                     int _arg45 = data.readInt();
@@ -720,14 +1019,19 @@ public interface IWindowSession extends IInterface {
                     int _arg74 = data.readInt();
                     WindowRelayoutResult _arg84 = new WindowRelayoutResult();
                     data.enforceNoDataAvail();
-                    int _result5 = relayout(_arg06, _arg15, _arg25, _arg35, _arg45, _arg55, _arg66, _arg74, _arg84);
+                    int _result5 =
+                            relayout(
+                                    _arg06, _arg15, _arg25, _arg35, _arg45, _arg55, _arg66, _arg74,
+                                    _arg84);
                     reply.writeNoException();
                     reply.writeInt(_result5);
                     reply.writeTypedObject(_arg84, 1);
                     return true;
                 case 7:
                     IWindow _arg07 = IWindow.Stub.asInterface(data.readStrongBinder());
-                    WindowManager.LayoutParams _arg16 = (WindowManager.LayoutParams) data.readTypedObject(WindowManager.LayoutParams.CREATOR);
+                    WindowManager.LayoutParams _arg16 =
+                            (WindowManager.LayoutParams)
+                                    data.readTypedObject(WindowManager.LayoutParams.CREATOR);
                     int _arg26 = data.readInt();
                     int _arg36 = data.readInt();
                     int _arg46 = data.readInt();
@@ -756,7 +1060,9 @@ public interface IWindowSession extends IInterface {
                     return true;
                 case 10:
                     IWindow _arg010 = IWindow.Stub.asInterface(data.readStrongBinder());
-                    SurfaceControl.Transaction _arg18 = (SurfaceControl.Transaction) data.readTypedObject(SurfaceControl.Transaction.CREATOR);
+                    SurfaceControl.Transaction _arg18 =
+                            (SurfaceControl.Transaction)
+                                    data.readTypedObject(SurfaceControl.Transaction.CREATOR);
                     int _arg28 = data.readInt();
                     data.enforceNoDataAvail();
                     finishDrawing(_arg010, _arg18, _arg28);
@@ -780,7 +1086,8 @@ public interface IWindowSession extends IInterface {
                 case 13:
                     IWindow _arg013 = IWindow.Stub.asInterface(data.readStrongBinder());
                     int _arg111 = data.readInt();
-                    SurfaceControl _arg211 = (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
+                    SurfaceControl _arg211 =
+                            (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
                     int _arg38 = data.readInt();
                     int _arg48 = data.readInt();
                     int _arg58 = data.readInt();
@@ -790,14 +1097,18 @@ public interface IWindowSession extends IInterface {
                     float _arg96 = data.readFloat();
                     ClipData _arg105 = (ClipData) data.readTypedObject(ClipData.CREATOR);
                     data.enforceNoDataAvail();
-                    IBinder _result8 = performDrag(_arg013, _arg111, _arg211, _arg38, _arg48, _arg58, _arg68, _arg76, _arg85, _arg96, _arg105);
+                    IBinder _result8 =
+                            performDrag(
+                                    _arg013, _arg111, _arg211, _arg38, _arg48, _arg58, _arg68,
+                                    _arg76, _arg85, _arg96, _arg105);
                     reply.writeNoException();
                     reply.writeStrongBinder(_result8);
                     return true;
                 case 14:
                     IWindow _arg014 = IWindow.Stub.asInterface(data.readStrongBinder());
                     int _arg112 = data.readInt();
-                    SurfaceControl _arg212 = (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
+                    SurfaceControl _arg212 =
+                            (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
                     int _arg39 = data.readInt();
                     int _arg49 = data.readInt();
                     int _arg59 = data.readInt();
@@ -809,7 +1120,10 @@ public interface IWindowSession extends IInterface {
                     RectF _arg113 = (RectF) data.readTypedObject(RectF.CREATOR);
                     Point _arg123 = (Point) data.readTypedObject(Point.CREATOR);
                     data.enforceNoDataAvail();
-                    IBinder _result9 = performDragWithArea(_arg014, _arg112, _arg212, _arg39, _arg49, _arg59, _arg69, _arg77, _arg86, _arg97, _arg106, _arg113, _arg123);
+                    IBinder _result9 =
+                            performDragWithArea(
+                                    _arg014, _arg112, _arg212, _arg39, _arg49, _arg59, _arg69,
+                                    _arg77, _arg86, _arg97, _arg106, _arg113, _arg123);
                     reply.writeNoException();
                     reply.writeStrongBinder(_result9);
                     return true;
@@ -901,7 +1215,8 @@ public interface IWindowSession extends IInterface {
                     Bundle _arg510 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     boolean _arg610 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    sendWallpaperCommand(_arg025, _arg121, _arg216, _arg311, _arg411, _arg510, _arg610);
+                    sendWallpaperCommand(
+                            _arg025, _arg121, _arg216, _arg311, _arg411, _arg510, _arg610);
                     return true;
                 case 29:
                     IBinder _arg026 = data.readStrongBinder();
@@ -975,45 +1290,59 @@ public interface IWindowSession extends IInterface {
                     return true;
                 case 40:
                     int _arg037 = data.readInt();
-                    SurfaceControl _arg133 = (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
+                    SurfaceControl _arg133 =
+                            (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
                     IBinder _arg219 = data.readStrongBinder();
-                    InputTransferToken _arg312 = (InputTransferToken) data.readTypedObject(InputTransferToken.CREATOR);
+                    InputTransferToken _arg312 =
+                            (InputTransferToken) data.readTypedObject(InputTransferToken.CREATOR);
                     int _arg412 = data.readInt();
                     int _arg511 = data.readInt();
                     int _arg611 = data.readInt();
                     int _arg78 = data.readInt();
                     IBinder _arg87 = data.readStrongBinder();
-                    InputTransferToken _arg98 = (InputTransferToken) data.readTypedObject(InputTransferToken.CREATOR);
+                    InputTransferToken _arg98 =
+                            (InputTransferToken) data.readTypedObject(InputTransferToken.CREATOR);
                     String _arg107 = data.readString();
                     InputChannel _arg1110 = new InputChannel();
                     data.enforceNoDataAvail();
-                    grantInputChannel(_arg037, _arg133, _arg219, _arg312, _arg412, _arg511, _arg611, _arg78, _arg87, _arg98, _arg107, _arg1110);
+                    grantInputChannel(
+                            _arg037, _arg133, _arg219, _arg312, _arg412, _arg511, _arg611, _arg78,
+                            _arg87, _arg98, _arg107, _arg1110);
                     reply.writeNoException();
                     reply.writeTypedObject(_arg1110, 1);
                     return true;
                 case 41:
                     int _arg038 = data.readInt();
-                    SurfaceControl _arg134 = (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
+                    SurfaceControl _arg134 =
+                            (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
                     IBinder _arg220 = data.readStrongBinder();
-                    InputTransferToken _arg313 = (InputTransferToken) data.readTypedObject(InputTransferToken.CREATOR);
+                    InputTransferToken _arg313 =
+                            (InputTransferToken) data.readTypedObject(InputTransferToken.CREATOR);
                     int _arg413 = data.readInt();
                     int _arg512 = data.readInt();
                     int _arg612 = data.readInt();
                     int _arg79 = data.readInt();
                     IBinder _arg88 = data.readStrongBinder();
-                    InputTransferToken _arg99 = (InputTransferToken) data.readTypedObject(InputTransferToken.CREATOR);
+                    InputTransferToken _arg99 =
+                            (InputTransferToken) data.readTypedObject(InputTransferToken.CREATOR);
                     String _arg108 = data.readString();
                     InputChannel _arg1111 = new InputChannel();
                     int _arg1210 = data.readInt();
-                    WindowContainerToken _arg135 = (WindowContainerToken) data.readTypedObject(WindowContainerToken.CREATOR);
+                    WindowContainerToken _arg135 =
+                            (WindowContainerToken)
+                                    data.readTypedObject(WindowContainerToken.CREATOR);
                     data.enforceNoDataAvail();
-                    grantInputChannelWithTaskToken(_arg038, _arg134, _arg220, _arg313, _arg413, _arg512, _arg612, _arg79, _arg88, _arg99, _arg108, _arg1111, _arg1210, _arg135);
+                    grantInputChannelWithTaskToken(
+                            _arg038, _arg134, _arg220, _arg313, _arg413, _arg512, _arg612, _arg79,
+                            _arg88, _arg99, _arg108, _arg1111, _arg1210, _arg135);
                     reply.writeNoException();
                     reply.writeTypedObject(_arg1111, 1);
                     return true;
                 case 42:
                     IBinder _arg039 = data.readStrongBinder();
-                    WindowContainerToken _arg136 = (WindowContainerToken) data.readTypedObject(WindowContainerToken.CREATOR);
+                    WindowContainerToken _arg136 =
+                            (WindowContainerToken)
+                                    data.readTypedObject(WindowContainerToken.CREATOR);
                     data.enforceNoDataAvail();
                     removeWithTaskToken(_arg039, _arg136);
                     reply.writeNoException();
@@ -1021,29 +1350,34 @@ public interface IWindowSession extends IInterface {
                 case 43:
                     IBinder _arg040 = data.readStrongBinder();
                     int _arg137 = data.readInt();
-                    SurfaceControl _arg221 = (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
+                    SurfaceControl _arg221 =
+                            (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
                     int _arg314 = data.readInt();
                     int _arg414 = data.readInt();
                     int _arg513 = data.readInt();
                     Region _arg613 = (Region) data.readTypedObject(Region.CREATOR);
                     data.enforceNoDataAvail();
-                    updateInputChannel(_arg040, _arg137, _arg221, _arg314, _arg414, _arg513, _arg613);
+                    updateInputChannel(
+                            _arg040, _arg137, _arg221, _arg314, _arg414, _arg513, _arg613);
                     return true;
                 case 44:
                     IBinder _arg041 = data.readStrongBinder();
                     int _arg138 = data.readInt();
-                    SurfaceControl _arg222 = (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
+                    SurfaceControl _arg222 =
+                            (SurfaceControl) data.readTypedObject(SurfaceControl.CREATOR);
                     int _arg315 = data.readInt();
                     int _arg415 = data.readInt();
                     int _arg514 = data.readInt();
                     Region _arg614 = (Region) data.readTypedObject(Region.CREATOR);
                     Region _arg710 = (Region) data.readTypedObject(Region.CREATOR);
                     data.enforceNoDataAvail();
-                    updateInputChannelWithPointerRegion(_arg041, _arg138, _arg222, _arg315, _arg415, _arg514, _arg614, _arg710);
+                    updateInputChannelWithPointerRegion(
+                            _arg041, _arg138, _arg222, _arg315, _arg415, _arg514, _arg614, _arg710);
                     return true;
                 case 45:
                     IWindow _arg042 = IWindow.Stub.asInterface(data.readStrongBinder());
-                    InputTransferToken _arg139 = (InputTransferToken) data.readTypedObject(InputTransferToken.CREATOR);
+                    InputTransferToken _arg139 =
+                            (InputTransferToken) data.readTypedObject(InputTransferToken.CREATOR);
                     boolean _arg223 = data.readBoolean();
                     data.enforceNoDataAvail();
                     grantEmbeddedWindowFocus(_arg042, _arg139, _arg223);
@@ -1053,13 +1387,16 @@ public interface IWindowSession extends IInterface {
                     IWindow _arg043 = IWindow.Stub.asInterface(data.readStrongBinder());
                     Rect _arg140 = (Rect) data.readTypedObject(Rect.CREATOR);
                     String _arg224 = data.readString();
-                    RemoteCallback _arg316 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg316 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     generateDisplayHash(_arg043, _arg140, _arg224, _arg316);
                     return true;
                 case 47:
                     IWindow _arg044 = IWindow.Stub.asInterface(data.readStrongBinder());
-                    OnBackInvokedCallbackInfo _arg141 = (OnBackInvokedCallbackInfo) data.readTypedObject(OnBackInvokedCallbackInfo.CREATOR);
+                    OnBackInvokedCallbackInfo _arg141 =
+                            (OnBackInvokedCallbackInfo)
+                                    data.readTypedObject(OnBackInvokedCallbackInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setOnBackInvokedCallbackInfo(_arg044, _arg141);
                     return true;
@@ -1136,7 +1473,18 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public int addToDisplay(IWindow window, WindowManager.LayoutParams attrs, int viewVisibility, int layerStackId, int requestedVisibleTypes, InputChannel outInputChannel, InsetsState insetsState, InsetsSourceControl.Array activeControls, Rect attachedFrame, float[] sizeCompatScale) throws RemoteException {
+            public int addToDisplay(
+                    IWindow window,
+                    WindowManager.LayoutParams attrs,
+                    int viewVisibility,
+                    int layerStackId,
+                    int requestedVisibleTypes,
+                    InputChannel outInputChannel,
+                    InsetsState insetsState,
+                    InsetsSourceControl.Array activeControls,
+                    Rect attachedFrame,
+                    float[] sizeCompatScale)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1171,7 +1519,19 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public int addToDisplayAsUser(IWindow window, WindowManager.LayoutParams attrs, int viewVisibility, int layerStackId, int userId, int requestedVisibleTypes, InputChannel outInputChannel, InsetsState insetsState, InsetsSourceControl.Array activeControls, Rect attachedFrame, float[] sizeCompatScale) throws RemoteException {
+            public int addToDisplayAsUser(
+                    IWindow window,
+                    WindowManager.LayoutParams attrs,
+                    int viewVisibility,
+                    int layerStackId,
+                    int userId,
+                    int requestedVisibleTypes,
+                    InputChannel outInputChannel,
+                    InsetsState insetsState,
+                    InsetsSourceControl.Array activeControls,
+                    Rect attachedFrame,
+                    float[] sizeCompatScale)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1282,7 +1642,15 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public int addToDisplayWithoutInputChannel(IWindow window, WindowManager.LayoutParams attrs, int viewVisibility, int layerStackId, InsetsState insetsState, Rect attachedFrame, float[] sizeCompatScale) throws RemoteException {
+            public int addToDisplayWithoutInputChannel(
+                    IWindow window,
+                    WindowManager.LayoutParams attrs,
+                    int viewVisibility,
+                    int layerStackId,
+                    InsetsState insetsState,
+                    Rect attachedFrame,
+                    float[] sizeCompatScale)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1325,7 +1693,22 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public int relayoutLegacy(IWindow window, WindowManager.LayoutParams attrs, int requestedWidth, int requestedHeight, int viewVisibility, int flags, int seq, int lastSyncSeqId, ClientWindowFrames outFrames, MergedConfiguration outMergedConfiguration, SurfaceControl outSurfaceControl, InsetsState insetsState, InsetsSourceControl.Array activeControls, Bundle bundle) throws RemoteException {
+            public int relayoutLegacy(
+                    IWindow window,
+                    WindowManager.LayoutParams attrs,
+                    int requestedWidth,
+                    int requestedHeight,
+                    int viewVisibility,
+                    int flags,
+                    int seq,
+                    int lastSyncSeqId,
+                    ClientWindowFrames outFrames,
+                    MergedConfiguration outMergedConfiguration,
+                    SurfaceControl outSurfaceControl,
+                    InsetsState insetsState,
+                    InsetsSourceControl.Array activeControls,
+                    Bundle bundle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1449,7 +1832,17 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public int relayout(IWindow window, WindowManager.LayoutParams attrs, int requestedWidth, int requestedHeight, int viewVisibility, int flags, int seq, int lastSyncSeqId, WindowRelayoutResult outRelayoutResult) throws RemoteException {
+            public int relayout(
+                    IWindow window,
+                    WindowManager.LayoutParams attrs,
+                    int requestedWidth,
+                    int requestedHeight,
+                    int viewVisibility,
+                    int flags,
+                    int seq,
+                    int lastSyncSeqId,
+                    WindowRelayoutResult outRelayoutResult)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1476,7 +1869,16 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void relayoutAsync(IWindow window, WindowManager.LayoutParams attrs, int requestedWidth, int requestedHeight, int viewVisibility, int flags, int seq, int lastSyncSeqId) throws RemoteException {
+            public void relayoutAsync(
+                    IWindow window,
+                    WindowManager.LayoutParams attrs,
+                    int requestedWidth,
+                    int requestedHeight,
+                    int viewVisibility,
+                    int flags,
+                    int seq,
+                    int lastSyncSeqId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1512,7 +1914,14 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void setInsets(IWindow window, int touchableInsets, Rect contentInsets, Rect visibleInsets, Region touchableRegion, Rect minimizedInsets) throws RemoteException {
+            public void setInsets(
+                    IWindow window,
+                    int touchableInsets,
+                    Rect contentInsets,
+                    Rect visibleInsets,
+                    Region touchableRegion,
+                    Rect minimizedInsets)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1529,7 +1938,9 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void finishDrawing(IWindow window, SurfaceControl.Transaction postDrawTransaction, int seqId) throws RemoteException {
+            public void finishDrawing(
+                    IWindow window, SurfaceControl.Transaction postDrawTransaction, int seqId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1543,7 +1954,8 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public boolean performHapticFeedback(int effectId, boolean always, boolean fromIme) throws RemoteException {
+            public boolean performHapticFeedback(int effectId, boolean always, boolean fromIme)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1562,7 +1974,8 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void performHapticFeedbackAsync(int effectId, boolean always, boolean fromIme) throws RemoteException {
+            public void performHapticFeedbackAsync(int effectId, boolean always, boolean fromIme)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1576,7 +1989,19 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public IBinder performDrag(IWindow window, int flags, SurfaceControl surface, int touchSource, int touchDeviceId, int touchPointerId, float touchX, float touchY, float thumbCenterX, float thumbCenterY, ClipData data) throws RemoteException {
+            public IBinder performDrag(
+                    IWindow window,
+                    int flags,
+                    SurfaceControl surface,
+                    int touchSource,
+                    int touchDeviceId,
+                    int touchPointerId,
+                    float touchX,
+                    float touchY,
+                    float thumbCenterX,
+                    float thumbCenterY,
+                    ClipData data)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1678,7 +2103,21 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public IBinder performDragWithArea(IWindow window, int flags, SurfaceControl surface, int touchSource, int touchDeviceId, int touchPointerId, float touchX, float touchY, float thumbCenterX, float thumbCenterY, ClipData data, RectF selectedArea, Point viewLocation) throws RemoteException {
+            public IBinder performDragWithArea(
+                    IWindow window,
+                    int flags,
+                    SurfaceControl surface,
+                    int touchSource,
+                    int touchDeviceId,
+                    int touchPointerId,
+                    float touchX,
+                    float touchY,
+                    float thumbCenterX,
+                    float thumbCenterY,
+                    ClipData data,
+                    RectF selectedArea,
+                    Point viewLocation)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1833,7 +2272,8 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public boolean dropForAccessibility(IWindow window, int x, int y) throws RemoteException {
+            public boolean dropForAccessibility(IWindow window, int x, int y)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1865,7 +2305,8 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void cancelDragAndDrop(IBinder dragToken, boolean skipAnimation) throws RemoteException {
+            public void cancelDragAndDrop(IBinder dragToken, boolean skipAnimation)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1902,7 +2343,9 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void setWallpaperPosition(IBinder windowToken, float x, float y, float xstep, float ystep) throws RemoteException {
+            public void setWallpaperPosition(
+                    IBinder windowToken, float x, float y, float xstep, float ystep)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1918,7 +2361,8 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void setWallpaperZoomOut(IBinder windowToken, float scale) throws RemoteException {
+            public void setWallpaperZoomOut(IBinder windowToken, float scale)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1931,7 +2375,8 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void setShouldZoomOutWallpaper(IBinder windowToken, boolean shouldZoom) throws RemoteException {
+            public void setShouldZoomOutWallpaper(IBinder windowToken, boolean shouldZoom)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1956,7 +2401,8 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void setWallpaperDisplayOffset(IBinder windowToken, int x, int y) throws RemoteException {
+            public void setWallpaperDisplayOffset(IBinder windowToken, int x, int y)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1970,7 +2416,9 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void sendWallpaperCommand(IBinder window, String action, int x, int y, int z, Bundle extras, boolean sync) throws RemoteException {
+            public void sendWallpaperCommand(
+                    IBinder window, String action, int x, int y, int z, Bundle extras, boolean sync)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1988,7 +2436,8 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void wallpaperCommandComplete(IBinder window, Bundle result) throws RemoteException {
+            public void wallpaperCommandComplete(IBinder window, Bundle result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -2001,7 +2450,8 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void onRectangleOnScreenRequested(IBinder token, Rect rectangle) throws RemoteException {
+            public void onRectangleOnScreenRequested(IBinder token, Rect rectangle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -2046,7 +2496,8 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public boolean startMovingTask(IWindow window, float startX, float startY) throws RemoteException {
+            public boolean startMovingTask(IWindow window, float startX, float startY)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2077,7 +2528,8 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void updateTapExcludeRegion(IWindow window, Region region) throws RemoteException {
+            public void updateTapExcludeRegion(IWindow window, Region region)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -2090,7 +2542,8 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void updateRequestedVisibleTypes(IWindow window, int requestedVisibleTypes) throws RemoteException {
+            public void updateRequestedVisibleTypes(IWindow window, int requestedVisibleTypes)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -2103,7 +2556,8 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void reportSystemGestureExclusionChanged(IWindow window, List<Rect> exclusionRects) throws RemoteException {
+            public void reportSystemGestureExclusionChanged(
+                    IWindow window, List<Rect> exclusionRects) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -2116,7 +2570,8 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void reportDecorViewGestureInterceptionChanged(IWindow window, boolean intercepted) throws RemoteException {
+            public void reportDecorViewGestureInterceptionChanged(
+                    IWindow window, boolean intercepted) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -2129,7 +2584,9 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void reportKeepClearAreasChanged(IWindow window, List<Rect> restricted, List<Rect> unrestricted) throws RemoteException {
+            public void reportKeepClearAreasChanged(
+                    IWindow window, List<Rect> restricted, List<Rect> unrestricted)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -2143,7 +2600,20 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void grantInputChannel(int displayId, SurfaceControl surface, IBinder clientToken, InputTransferToken hostInputTransferToken, int flags, int privateFlags, int inputFeatures, int type, IBinder windowToken, InputTransferToken embeddedInputTransferToken, String inputHandleName, InputChannel outInputChannel) throws RemoteException {
+            public void grantInputChannel(
+                    int displayId,
+                    SurfaceControl surface,
+                    IBinder clientToken,
+                    InputTransferToken hostInputTransferToken,
+                    int flags,
+                    int privateFlags,
+                    int inputFeatures,
+                    int type,
+                    IBinder windowToken,
+                    InputTransferToken embeddedInputTransferToken,
+                    String inputHandleName,
+                    InputChannel outInputChannel)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2253,7 +2723,22 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void grantInputChannelWithTaskToken(int displayId, SurfaceControl surface, IBinder clientToken, InputTransferToken hostInputTransferToken, int flags, int privateFlags, int inputFeatures, int type, IBinder windowToken, InputTransferToken embeddedInputTransferToken, String inputHandleName, InputChannel outInputChannel, int surfaceInset, WindowContainerToken taskToken) throws RemoteException {
+            public void grantInputChannelWithTaskToken(
+                    int displayId,
+                    SurfaceControl surface,
+                    IBinder clientToken,
+                    InputTransferToken hostInputTransferToken,
+                    int flags,
+                    int privateFlags,
+                    int inputFeatures,
+                    int type,
+                    IBinder windowToken,
+                    InputTransferToken embeddedInputTransferToken,
+                    String inputHandleName,
+                    InputChannel outInputChannel,
+                    int surfaceInset,
+                    WindowContainerToken taskToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2365,7 +2850,8 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void removeWithTaskToken(IBinder clientToken, WindowContainerToken taskToken) throws RemoteException {
+            public void removeWithTaskToken(IBinder clientToken, WindowContainerToken taskToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2381,7 +2867,15 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void updateInputChannel(IBinder channelToken, int displayId, SurfaceControl surface, int flags, int privateFlags, int inputFeatures, Region region) throws RemoteException {
+            public void updateInputChannel(
+                    IBinder channelToken,
+                    int displayId,
+                    SurfaceControl surface,
+                    int flags,
+                    int privateFlags,
+                    int inputFeatures,
+                    Region region)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -2399,7 +2893,16 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void updateInputChannelWithPointerRegion(IBinder channelToken, int displayId, SurfaceControl surface, int flags, int privateFlags, int inputFeatures, Region region, Region pointerRegion) throws RemoteException {
+            public void updateInputChannelWithPointerRegion(
+                    IBinder channelToken,
+                    int displayId,
+                    SurfaceControl surface,
+                    int flags,
+                    int privateFlags,
+                    int inputFeatures,
+                    Region region,
+                    Region pointerRegion)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -2418,7 +2921,9 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void grantEmbeddedWindowFocus(IWindow window, InputTransferToken inputToken, boolean grantFocus) throws RemoteException {
+            public void grantEmbeddedWindowFocus(
+                    IWindow window, InputTransferToken inputToken, boolean grantFocus)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2435,7 +2940,12 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void generateDisplayHash(IWindow window, Rect boundsInWindow, String hashAlgorithm, RemoteCallback callback) throws RemoteException {
+            public void generateDisplayHash(
+                    IWindow window,
+                    Rect boundsInWindow,
+                    String hashAlgorithm,
+                    RemoteCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -2450,7 +2960,8 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void setOnBackInvokedCallbackInfo(IWindow window, OnBackInvokedCallbackInfo callbackInfo) throws RemoteException {
+            public void setOnBackInvokedCallbackInfo(
+                    IWindow window, OnBackInvokedCallbackInfo callbackInfo) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -2495,7 +3006,8 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public boolean moveFocusToAdjacentWindow(IWindow fromWindow, int direction) throws RemoteException {
+            public boolean moveFocusToAdjacentWindow(IWindow fromWindow, int direction)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2544,7 +3056,8 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void setTspNoteMode(IWindow window, boolean isTspNoteMode) throws RemoteException {
+            public void setTspNoteMode(IWindow window, boolean isTspNoteMode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -2569,7 +3082,8 @@ public interface IWindowSession extends IInterface {
             }
 
             @Override // android.view.IWindowSession
-            public void setKeyguardWallpaperTouchAllowed(IWindow window, boolean allowed) throws RemoteException {
+            public void setKeyguardWallpaperTouchAllowed(IWindow window, boolean allowed)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

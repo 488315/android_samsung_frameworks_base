@@ -13,29 +13,35 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.Xml;
+
 import com.android.internal.R;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes3.dex */
 public final class TvInteractiveAppServiceInfo implements Parcelable {
-    public static final Parcelable.Creator<TvInteractiveAppServiceInfo> CREATOR = new Parcelable.Creator<TvInteractiveAppServiceInfo>() { // from class: android.media.tv.interactive.TvInteractiveAppServiceInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TvInteractiveAppServiceInfo createFromParcel(Parcel in) {
-            return new TvInteractiveAppServiceInfo(in);
-        }
+    public static final Parcelable.Creator<TvInteractiveAppServiceInfo> CREATOR =
+            new Parcelable.Creator<
+                    TvInteractiveAppServiceInfo>() { // from class:
+                                                     // android.media.tv.interactive.TvInteractiveAppServiceInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TvInteractiveAppServiceInfo createFromParcel(Parcel in) {
+                    return new TvInteractiveAppServiceInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TvInteractiveAppServiceInfo[] newArray(int size) {
-            return new TvInteractiveAppServiceInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TvInteractiveAppServiceInfo[] newArray(int size) {
+                    return new TvInteractiveAppServiceInfo[size];
+                }
+            };
     private static final boolean DEBUG = false;
     public static final int INTERACTIVE_APP_TYPE_ATSC = 2;
     public static final int INTERACTIVE_APP_TYPE_GINGA = 4;
@@ -50,20 +56,22 @@ public final class TvInteractiveAppServiceInfo implements Parcelable {
     private int mTypes;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface InteractiveAppType {
-    }
+    public @interface InteractiveAppType {}
 
     public TvInteractiveAppServiceInfo(Context context, ComponentName component) {
         this.mExtraTypes = new ArrayList();
         if (context == null) {
             throw new IllegalArgumentException("context cannot be null.");
         }
-        Intent intent = new Intent(TvInteractiveAppService.SERVICE_INTERFACE).setComponent(component);
+        Intent intent =
+                new Intent(TvInteractiveAppService.SERVICE_INTERFACE).setComponent(component);
         ResolveInfo resolveInfo = context.getPackageManager().resolveService(intent, 132);
         if (resolveInfo == null) {
             throw new IllegalArgumentException("Invalid component. Can't find the service.");
         }
-        ComponentName componentName = new ComponentName(resolveInfo.serviceInfo.packageName, resolveInfo.serviceInfo.name);
+        ComponentName componentName =
+                new ComponentName(
+                        resolveInfo.serviceInfo.packageName, resolveInfo.serviceInfo.name);
         String id = generateInteractiveAppServiceId(componentName);
         List<String> types = new ArrayList<>();
         parseServiceMetadata(resolveInfo, context, types);
@@ -72,7 +80,8 @@ public final class TvInteractiveAppServiceInfo implements Parcelable {
         toTypesFlag(types);
     }
 
-    private TvInteractiveAppServiceInfo(ResolveInfo service, String id, int types, List<String> extraTypes) {
+    private TvInteractiveAppServiceInfo(
+            ResolveInfo service, String id, int types, List<String> extraTypes) {
         this.mExtraTypes = new ArrayList();
         this.mService = service;
         this.mId = id;
@@ -106,7 +115,8 @@ public final class TvInteractiveAppServiceInfo implements Parcelable {
     }
 
     public ComponentName getComponent() {
-        return new ComponentName(this.mService.serviceInfo.packageName, this.mService.serviceInfo.name);
+        return new ComponentName(
+                this.mService.serviceInfo.packageName, this.mService.serviceInfo.name);
     }
 
     public ServiceInfo getServiceInfo() {
@@ -125,16 +135,20 @@ public final class TvInteractiveAppServiceInfo implements Parcelable {
         return name.flattenToShortString();
     }
 
-    private static void parseServiceMetadata(ResolveInfo resolveInfo, Context context, List<String> types) {
+    private static void parseServiceMetadata(
+            ResolveInfo resolveInfo, Context context, List<String> types) {
         int type;
         ServiceInfo si = resolveInfo.serviceInfo;
         PackageManager pm = context.getPackageManager();
         try {
             try {
-                XmlResourceParser parser = si.loadXmlMetaData(pm, TvInteractiveAppService.SERVICE_META_DATA);
+                XmlResourceParser parser =
+                        si.loadXmlMetaData(pm, TvInteractiveAppService.SERVICE_META_DATA);
                 try {
                     if (parser == null) {
-                        throw new IllegalStateException("No android.media.tv.interactive.app meta-data found for " + si.name);
+                        throw new IllegalStateException(
+                                "No android.media.tv.interactive.app meta-data found for "
+                                        + si.name);
                     }
                     Resources res = pm.getResourcesForApplication(si.applicationInfo);
                     AttributeSet attrs = Xml.asAttributeSet(parser);
@@ -146,9 +160,12 @@ public final class TvInteractiveAppServiceInfo implements Parcelable {
                     } while (type != 2);
                     String nodeName = parser.getName();
                     if (!XML_START_TAG_NAME.equals(nodeName)) {
-                        throw new IllegalStateException("Meta-data does not start with tv-interactive-app tag for " + si.name);
+                        throw new IllegalStateException(
+                                "Meta-data does not start with tv-interactive-app tag for "
+                                        + si.name);
                     }
-                    TypedArray sa = res.obtainAttributes(attrs, R.styleable.TvInteractiveAppService);
+                    TypedArray sa =
+                            res.obtainAttributes(attrs, R.styleable.TvInteractiveAppService);
                     CharSequence[] textArr = sa.getTextArray(0);
                     for (CharSequence cs : textArr) {
                         types.add(cs.toString().toLowerCase());
@@ -168,7 +185,8 @@ public final class TvInteractiveAppServiceInfo implements Parcelable {
                     throw th;
                 }
             } catch (IOException | XmlPullParserException e) {
-                throw new IllegalStateException("Failed reading meta-data for " + si.packageName, e);
+                throw new IllegalStateException(
+                        "Failed reading meta-data for " + si.packageName, e);
             }
         } catch (PackageManager.NameNotFoundException e2) {
             throw new IllegalStateException("No resources found for " + si.packageName, e2);

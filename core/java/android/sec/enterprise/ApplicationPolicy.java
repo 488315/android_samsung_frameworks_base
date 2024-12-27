@@ -1,6 +1,5 @@
 package android.sec.enterprise;
 
-import android.sec.enterprise.EnterpriseDeviceManager;
 import android.util.Log;
 
 /* loaded from: classes3.dex */
@@ -51,13 +50,15 @@ public class ApplicationPolicy {
         }
     }
 
-    public String getApplicationNameForComponent(String componentName, String packageName, int userId) {
+    public String getApplicationNameForComponent(
+            String componentName, String packageName, int userId) {
         try {
             IEDMProxy lService = EnterpriseDeviceManager.EDMProxyServiceHelper.getService();
             if (lService == null) {
                 return null;
             }
-            String newName = lService.getApplicationNameForComponent(componentName, packageName, userId);
+            String newName =
+                    lService.getApplicationNameForComponent(componentName, packageName, userId);
             return newName;
         } catch (Exception e) {
             Log.d(TAG, "PXY-getApplicationNameForComponent returning default value");

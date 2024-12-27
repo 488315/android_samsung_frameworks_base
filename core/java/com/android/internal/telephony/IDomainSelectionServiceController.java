@@ -8,13 +8,16 @@ import android.os.RemoteException;
 import android.telephony.BarringInfo;
 import android.telephony.DomainSelectionService;
 import android.telephony.ServiceState;
-import com.android.internal.telephony.ITransportSelectorCallback;
 
 /* loaded from: classes5.dex */
 public interface IDomainSelectionServiceController extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.telephony.IDomainSelectionServiceController";
+    public static final String DESCRIPTOR =
+            "com.android.internal.telephony.IDomainSelectionServiceController";
 
-    void selectDomain(DomainSelectionService.SelectionAttributes selectionAttributes, ITransportSelectorCallback iTransportSelectorCallback) throws RemoteException;
+    void selectDomain(
+            DomainSelectionService.SelectionAttributes selectionAttributes,
+            ITransportSelectorCallback iTransportSelectorCallback)
+            throws RemoteException;
 
     void updateBarringInfo(int i, int i2, BarringInfo barringInfo) throws RemoteException;
 
@@ -22,16 +25,18 @@ public interface IDomainSelectionServiceController extends IInterface {
 
     public static class Default implements IDomainSelectionServiceController {
         @Override // com.android.internal.telephony.IDomainSelectionServiceController
-        public void selectDomain(DomainSelectionService.SelectionAttributes attr, ITransportSelectorCallback callback) throws RemoteException {
-        }
+        public void selectDomain(
+                DomainSelectionService.SelectionAttributes attr,
+                ITransportSelectorCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.IDomainSelectionServiceController
-        public void updateServiceState(int slotId, int subId, ServiceState serviceState) throws RemoteException {
-        }
+        public void updateServiceState(int slotId, int subId, ServiceState serviceState)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.IDomainSelectionServiceController
-        public void updateBarringInfo(int slotId, int subId, BarringInfo info) throws RemoteException {
-        }
+        public void updateBarringInfo(int slotId, int subId, BarringInfo info)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -39,7 +44,7 @@ public interface IDomainSelectionServiceController extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDomainSelectionServiceController {
+    public abstract static class Stub extends Binder implements IDomainSelectionServiceController {
         static final int TRANSACTION_selectDomain = 1;
         static final int TRANSACTION_updateBarringInfo = 3;
         static final int TRANSACTION_updateServiceState = 2;
@@ -83,7 +88,8 @@ public interface IDomainSelectionServiceController extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDomainSelectionServiceController.DESCRIPTOR);
             }
@@ -93,8 +99,12 @@ public interface IDomainSelectionServiceController extends IInterface {
             }
             switch (code) {
                 case 1:
-                    DomainSelectionService.SelectionAttributes _arg0 = (DomainSelectionService.SelectionAttributes) data.readTypedObject(DomainSelectionService.SelectionAttributes.CREATOR);
-                    ITransportSelectorCallback _arg1 = ITransportSelectorCallback.Stub.asInterface(data.readStrongBinder());
+                    DomainSelectionService.SelectionAttributes _arg0 =
+                            (DomainSelectionService.SelectionAttributes)
+                                    data.readTypedObject(
+                                            DomainSelectionService.SelectionAttributes.CREATOR);
+                    ITransportSelectorCallback _arg1 =
+                            ITransportSelectorCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     selectDomain(_arg0, _arg1);
                     return true;
@@ -134,7 +144,10 @@ public interface IDomainSelectionServiceController extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IDomainSelectionServiceController
-            public void selectDomain(DomainSelectionService.SelectionAttributes attr, ITransportSelectorCallback callback) throws RemoteException {
+            public void selectDomain(
+                    DomainSelectionService.SelectionAttributes attr,
+                    ITransportSelectorCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDomainSelectionServiceController.DESCRIPTOR);
@@ -147,7 +160,8 @@ public interface IDomainSelectionServiceController extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IDomainSelectionServiceController
-            public void updateServiceState(int slotId, int subId, ServiceState serviceState) throws RemoteException {
+            public void updateServiceState(int slotId, int subId, ServiceState serviceState)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDomainSelectionServiceController.DESCRIPTOR);
@@ -161,7 +175,8 @@ public interface IDomainSelectionServiceController extends IInterface {
             }
 
             @Override // com.android.internal.telephony.IDomainSelectionServiceController
-            public void updateBarringInfo(int slotId, int subId, BarringInfo info) throws RemoteException {
+            public void updateBarringInfo(int slotId, int subId, BarringInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDomainSelectionServiceController.DESCRIPTOR);

@@ -9,12 +9,13 @@ import android.os.ResultReceiver;
 
 /* loaded from: classes3.dex */
 public interface ICarrierService extends IInterface {
-    void getCarrierConfig(int i, CarrierIdentifier carrierIdentifier, ResultReceiver resultReceiver) throws RemoteException;
+    void getCarrierConfig(int i, CarrierIdentifier carrierIdentifier, ResultReceiver resultReceiver)
+            throws RemoteException;
 
     public static class Default implements ICarrierService {
         @Override // android.service.carrier.ICarrierService
-        public void getCarrierConfig(int phoneId, CarrierIdentifier id, ResultReceiver result) throws RemoteException {
-        }
+        public void getCarrierConfig(int phoneId, CarrierIdentifier id, ResultReceiver result)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -22,7 +23,7 @@ public interface ICarrierService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICarrierService {
+    public abstract static class Stub extends Binder implements ICarrierService {
         public static final String DESCRIPTOR = "android.service.carrier.ICarrierService";
         static final int TRANSACTION_getCarrierConfig = 1;
 
@@ -61,7 +62,8 @@ public interface ICarrierService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -72,8 +74,10 @@ public interface ICarrierService extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    CarrierIdentifier _arg1 = (CarrierIdentifier) data.readTypedObject(CarrierIdentifier.CREATOR);
-                    ResultReceiver _arg2 = (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
+                    CarrierIdentifier _arg1 =
+                            (CarrierIdentifier) data.readTypedObject(CarrierIdentifier.CREATOR);
+                    ResultReceiver _arg2 =
+                            (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
                     data.enforceNoDataAvail();
                     getCarrierConfig(_arg0, _arg1, _arg2);
                     return true;
@@ -99,7 +103,8 @@ public interface ICarrierService extends IInterface {
             }
 
             @Override // android.service.carrier.ICarrierService
-            public void getCarrierConfig(int phoneId, CarrierIdentifier id, ResultReceiver result) throws RemoteException {
+            public void getCarrierConfig(int phoneId, CarrierIdentifier id, ResultReceiver result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

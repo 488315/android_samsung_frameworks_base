@@ -24,9 +24,10 @@ import android.view.ViewHierarchyEncoder;
 import android.view.inspector.InspectionCompanion;
 import android.view.inspector.PropertyMapper;
 import android.view.inspector.PropertyReader;
-import android.widget.RemoteViews;
+
 import com.android.internal.R;
 import com.android.internal.util.Preconditions;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.time.ZoneId;
@@ -39,24 +40,20 @@ import java.util.TimeZone;
 /* loaded from: classes4.dex */
 public class TextClock extends TextView {
 
-    @Deprecated
-    public static final CharSequence DEFAULT_FORMAT_12_HOUR = "h:mm a";
+    @Deprecated public static final CharSequence DEFAULT_FORMAT_12_HOUR = "h:mm a";
 
-    @Deprecated
-    public static final CharSequence DEFAULT_FORMAT_24_HOUR = "H:mm";
+    @Deprecated public static final CharSequence DEFAULT_FORMAT_24_HOUR = "H:mm";
     private ClockEventDelegate mClockEventDelegate;
     private CharSequence mDescFormat;
     private CharSequence mDescFormat12;
     private CharSequence mDescFormat24;
 
-    @ViewDebug.ExportedProperty
-    private CharSequence mFormat;
+    @ViewDebug.ExportedProperty private CharSequence mFormat;
     private CharSequence mFormat12;
     private CharSequence mFormat24;
     private ContentObserver mFormatChangeObserver;
 
-    @ViewDebug.ExportedProperty
-    private boolean mHasSeconds;
+    @ViewDebug.ExportedProperty private boolean mHasSeconds;
     private final BroadcastReceiver mIntentReceiver;
     private boolean mRegistered;
     private boolean mShouldChooseFormat;
@@ -67,7 +64,8 @@ public class TextClock extends TextView {
     private Calendar mTime;
     private String mTimeZone;
 
-    public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<TextClock> {
+    public final class InspectionCompanion
+            implements android.view.inspector.InspectionCompanion<TextClock> {
         private int mFormat12HourId;
         private int mFormat24HourId;
         private int mIs24HourModeEnabledId;
@@ -123,45 +121,50 @@ public class TextClock extends TextView {
 
     public TextClock(Context context) {
         super(context);
-        this.mIntentReceiver = new BroadcastReceiver() { // from class: android.widget.TextClock.1
-            @Override // android.content.BroadcastReceiver
-            public void onReceive(Context context2, Intent intent) {
-                if (TextClock.this.mStopTicking) {
-                    return;
-                }
-                if (TextClock.this.mTimeZone == null && Intent.ACTION_TIMEZONE_CHANGED.equals(intent.getAction())) {
-                    String timeZone = intent.getStringExtra(Intent.EXTRA_TIMEZONE);
-                    TextClock.this.createTime(timeZone);
-                } else if (!TextClock.this.mShouldRunTicker && Intent.ACTION_TIME_CHANGED.equals(intent.getAction())) {
-                    return;
-                }
-                TextClock.this.onTimeChanged();
-            }
-        };
-        this.mTicker = new Runnable() { // from class: android.widget.TextClock.2
-            @Override // java.lang.Runnable
-            public void run() {
-                ZonedDateTime nextTick;
-                TextClock.this.removeCallbacks(this);
-                if (TextClock.this.mStopTicking || !TextClock.this.mShouldRunTicker) {
-                    return;
-                }
-                TextClock.this.onTimeChanged();
-                Instant now = TextClock.this.mTime.toInstant();
-                ZoneId zone = TextClock.this.mTime.getTimeZone().toZoneId();
-                if (TextClock.this.mHasSeconds) {
-                    nextTick = now.atZone(zone).plusSeconds(1L).withNano(0);
-                } else {
-                    ZonedDateTime nextTick2 = now.atZone(zone);
-                    nextTick = nextTick2.plusMinutes(1L).withSecond(0).withNano(0);
-                }
-                long millisUntilNextTick = Duration.between(now, nextTick.toInstant()).toMillis();
-                if (millisUntilNextTick <= 0) {
-                    millisUntilNextTick = 1000;
-                }
-                TextClock.this.postDelayed(this, millisUntilNextTick);
-            }
-        };
+        this.mIntentReceiver =
+                new BroadcastReceiver() { // from class: android.widget.TextClock.1
+                    @Override // android.content.BroadcastReceiver
+                    public void onReceive(Context context2, Intent intent) {
+                        if (TextClock.this.mStopTicking) {
+                            return;
+                        }
+                        if (TextClock.this.mTimeZone == null
+                                && Intent.ACTION_TIMEZONE_CHANGED.equals(intent.getAction())) {
+                            String timeZone = intent.getStringExtra(Intent.EXTRA_TIMEZONE);
+                            TextClock.this.createTime(timeZone);
+                        } else if (!TextClock.this.mShouldRunTicker
+                                && Intent.ACTION_TIME_CHANGED.equals(intent.getAction())) {
+                            return;
+                        }
+                        TextClock.this.onTimeChanged();
+                    }
+                };
+        this.mTicker =
+                new Runnable() { // from class: android.widget.TextClock.2
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        ZonedDateTime nextTick;
+                        TextClock.this.removeCallbacks(this);
+                        if (TextClock.this.mStopTicking || !TextClock.this.mShouldRunTicker) {
+                            return;
+                        }
+                        TextClock.this.onTimeChanged();
+                        Instant now = TextClock.this.mTime.toInstant();
+                        ZoneId zone = TextClock.this.mTime.getTimeZone().toZoneId();
+                        if (TextClock.this.mHasSeconds) {
+                            nextTick = now.atZone(zone).plusSeconds(1L).withNano(0);
+                        } else {
+                            ZonedDateTime nextTick2 = now.atZone(zone);
+                            nextTick = nextTick2.plusMinutes(1L).withSecond(0).withNano(0);
+                        }
+                        long millisUntilNextTick =
+                                Duration.between(now, nextTick.toInstant()).toMillis();
+                        if (millisUntilNextTick <= 0) {
+                            millisUntilNextTick = 1000;
+                        }
+                        TextClock.this.postDelayed(this, millisUntilNextTick);
+                    }
+                };
         init();
     }
 
@@ -175,47 +178,55 @@ public class TextClock extends TextView {
 
     public TextClock(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        this.mIntentReceiver = new BroadcastReceiver() { // from class: android.widget.TextClock.1
-            @Override // android.content.BroadcastReceiver
-            public void onReceive(Context context2, Intent intent) {
-                if (TextClock.this.mStopTicking) {
-                    return;
-                }
-                if (TextClock.this.mTimeZone == null && Intent.ACTION_TIMEZONE_CHANGED.equals(intent.getAction())) {
-                    String timeZone = intent.getStringExtra(Intent.EXTRA_TIMEZONE);
-                    TextClock.this.createTime(timeZone);
-                } else if (!TextClock.this.mShouldRunTicker && Intent.ACTION_TIME_CHANGED.equals(intent.getAction())) {
-                    return;
-                }
-                TextClock.this.onTimeChanged();
-            }
-        };
-        this.mTicker = new Runnable() { // from class: android.widget.TextClock.2
-            @Override // java.lang.Runnable
-            public void run() {
-                ZonedDateTime nextTick;
-                TextClock.this.removeCallbacks(this);
-                if (TextClock.this.mStopTicking || !TextClock.this.mShouldRunTicker) {
-                    return;
-                }
-                TextClock.this.onTimeChanged();
-                Instant now = TextClock.this.mTime.toInstant();
-                ZoneId zone = TextClock.this.mTime.getTimeZone().toZoneId();
-                if (TextClock.this.mHasSeconds) {
-                    nextTick = now.atZone(zone).plusSeconds(1L).withNano(0);
-                } else {
-                    ZonedDateTime nextTick2 = now.atZone(zone);
-                    nextTick = nextTick2.plusMinutes(1L).withSecond(0).withNano(0);
-                }
-                long millisUntilNextTick = Duration.between(now, nextTick.toInstant()).toMillis();
-                if (millisUntilNextTick <= 0) {
-                    millisUntilNextTick = 1000;
-                }
-                TextClock.this.postDelayed(this, millisUntilNextTick);
-            }
-        };
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TextClock, defStyleAttr, defStyleRes);
-        saveAttributeDataForStyleable(context, R.styleable.TextClock, attrs, a, defStyleAttr, defStyleRes);
+        this.mIntentReceiver =
+                new BroadcastReceiver() { // from class: android.widget.TextClock.1
+                    @Override // android.content.BroadcastReceiver
+                    public void onReceive(Context context2, Intent intent) {
+                        if (TextClock.this.mStopTicking) {
+                            return;
+                        }
+                        if (TextClock.this.mTimeZone == null
+                                && Intent.ACTION_TIMEZONE_CHANGED.equals(intent.getAction())) {
+                            String timeZone = intent.getStringExtra(Intent.EXTRA_TIMEZONE);
+                            TextClock.this.createTime(timeZone);
+                        } else if (!TextClock.this.mShouldRunTicker
+                                && Intent.ACTION_TIME_CHANGED.equals(intent.getAction())) {
+                            return;
+                        }
+                        TextClock.this.onTimeChanged();
+                    }
+                };
+        this.mTicker =
+                new Runnable() { // from class: android.widget.TextClock.2
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        ZonedDateTime nextTick;
+                        TextClock.this.removeCallbacks(this);
+                        if (TextClock.this.mStopTicking || !TextClock.this.mShouldRunTicker) {
+                            return;
+                        }
+                        TextClock.this.onTimeChanged();
+                        Instant now = TextClock.this.mTime.toInstant();
+                        ZoneId zone = TextClock.this.mTime.getTimeZone().toZoneId();
+                        if (TextClock.this.mHasSeconds) {
+                            nextTick = now.atZone(zone).plusSeconds(1L).withNano(0);
+                        } else {
+                            ZonedDateTime nextTick2 = now.atZone(zone);
+                            nextTick = nextTick2.plusMinutes(1L).withSecond(0).withNano(0);
+                        }
+                        long millisUntilNextTick =
+                                Duration.between(now, nextTick.toInstant()).toMillis();
+                        if (millisUntilNextTick <= 0) {
+                            millisUntilNextTick = 1000;
+                        }
+                        TextClock.this.postDelayed(this, millisUntilNextTick);
+                    }
+                };
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.TextClock, defStyleAttr, defStyleRes);
+        saveAttributeDataForStyleable(
+                context, R.styleable.TextClock, attrs, a, defStyleAttr, defStyleRes);
         try {
             this.mFormat12 = a.getText(0);
             this.mFormat24 = a.getText(1);
@@ -343,7 +354,9 @@ public class TextClock extends TextView {
     }
 
     private String getBestDateTimePattern(String skeleton) {
-        DateTimePatternGenerator dtpg = DateTimePatternGenerator.getInstance(getContext().getResources().getConfiguration().locale);
+        DateTimePatternGenerator dtpg =
+                DateTimePatternGenerator.getInstance(
+                        getContext().getResources().getConfiguration().locale);
         return dtpg.getBestPattern(skeleton);
     }
 
@@ -400,7 +413,8 @@ public class TextClock extends TextView {
                 this.mFormatChangeObserver = new FormatChangeObserver(getHandler());
             }
             int userHandle = this.mShowCurrentUserTime ? -1 : UserHandle.myUserId();
-            this.mClockEventDelegate.registerFormatChangeObserver(this.mFormatChangeObserver, userHandle);
+            this.mClockEventDelegate.registerFormatChangeObserver(
+                    this.mFormatChangeObserver, userHandle);
         }
     }
 
@@ -428,7 +442,9 @@ public class TextClock extends TextView {
         stream.addProperty("format12Hour", s == null ? null : s.toString());
         CharSequence s2 = getFormat24Hour();
         stream.addProperty("format24Hour", s2 == null ? null : s2.toString());
-        stream.addProperty(Telephony.CellBroadcasts.MESSAGE_FORMAT, this.mFormat != null ? this.mFormat.toString() : null);
+        stream.addProperty(
+                Telephony.CellBroadcasts.MESSAGE_FORMAT,
+                this.mFormat != null ? this.mFormat.toString() : null);
         stream.addProperty("hasSeconds", this.mHasSeconds);
     }
 
@@ -451,7 +467,10 @@ public class TextClock extends TextView {
         adjustSecondaryCalendarStart.set(2033, 2, 19);
         adjustSecondaryCalendarEnd.set(2034, 2, 20);
         boolean isFakeCalendar = false;
-        if ((calendar.after(adjustPrimaryCalendarStart) && calendar.before(adjustPrimaryCalendarEnd)) || (calendar.after(adjustSecondaryCalendarStart) && calendar.before(adjustSecondaryCalendarEnd))) {
+        if ((calendar.after(adjustPrimaryCalendarStart)
+                        && calendar.before(adjustPrimaryCalendarEnd))
+                || (calendar.after(adjustSecondaryCalendarStart)
+                        && calendar.before(adjustSecondaryCalendarEnd))) {
             calendar.add(5, 1);
             isFakeCalendar = true;
         }
@@ -569,7 +588,10 @@ public class TextClock extends TextView {
                 date2 = date;
             }
         }
-        if (!isFakeCalendar && ((todayYear == 2030 || todayYear == 2034) && todayMonth == 3 && todayDate == 20)) {
+        if (!isFakeCalendar
+                && ((todayYear == 2030 || todayYear == 2034)
+                        && todayMonth == 3
+                        && todayDate == 20)) {
             date2++;
         }
         boolean isLanguageEnglish = false;
@@ -617,7 +639,11 @@ public class TextClock extends TextView {
                 monthStr = "";
                 break;
         }
-        return NavigationBarInflaterView.KEY_CODE_START + String.format("%d", Integer.valueOf(date2)) + " " + monthStr + NavigationBarInflaterView.KEY_CODE_END;
+        return NavigationBarInflaterView.KEY_CODE_START
+                + String.format("%d", Integer.valueOf(date2))
+                + " "
+                + monthStr
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 
     public static class ClockEventDelegate {
@@ -631,7 +657,8 @@ public class TextClock extends TextView {
             IntentFilter filter = new IntentFilter();
             filter.addAction(Intent.ACTION_TIME_CHANGED);
             filter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
-            this.mContext.registerReceiverAsUser(receiver, Process.myUserHandle(), filter, null, handler);
+            this.mContext.registerReceiverAsUser(
+                    receiver, Process.myUserHandle(), filter, null, handler);
         }
 
         public void unregisterTimeChangeReceiver(BroadcastReceiver receiver) {
@@ -640,7 +667,9 @@ public class TextClock extends TextView {
 
         public void registerFormatChangeObserver(ContentObserver observer, int userHandle) {
             Uri uri = Settings.System.getUriFor(Settings.System.TIME_12_24);
-            this.mContext.getContentResolver().registerContentObserver(uri, true, observer, userHandle);
+            this.mContext
+                    .getContentResolver()
+                    .registerContentObserver(uri, true, observer, userHandle);
         }
 
         public void unregisterFormatChangeObserver(ContentObserver observer) {

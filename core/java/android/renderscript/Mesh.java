@@ -1,7 +1,5 @@
 package android.renderscript;
 
-import android.renderscript.Element;
-import android.renderscript.Type;
 import java.util.Vector;
 
 @Deprecated
@@ -99,8 +97,7 @@ public class Mesh extends BaseObj {
             Type t;
             int usage;
 
-            Entry() {
-            }
+            Entry() {}
         }
 
         public Builder(RenderScript rs, int usage) {
@@ -231,8 +228,7 @@ public class Mesh extends BaseObj {
             Allocation a;
             Primitive prim;
 
-            Entry() {
-            }
+            Entry() {}
         }
 
         public AllocationBuilder(RenderScript rs) {
@@ -469,7 +465,12 @@ public class Mesh extends BaseObj {
         }
 
         public TriangleMeshBuilder addTriangle(int idx1, int idx2, int idx3) {
-            if (idx1 >= this.mMaxIndex || idx1 < 0 || idx2 >= this.mMaxIndex || idx2 < 0 || idx3 >= this.mMaxIndex || idx3 < 0) {
+            if (idx1 >= this.mMaxIndex
+                    || idx1 < 0
+                    || idx2 >= this.mMaxIndex
+                    || idx2 < 0
+                    || idx3 >= this.mMaxIndex
+                    || idx3 < 0) {
                 throw new IllegalStateException("Index provided greater than vertex count.");
             }
             if (this.mIndexCount + 3 >= this.mIndexData.length) {
@@ -494,7 +495,9 @@ public class Mesh extends BaseObj {
 
         public Mesh create(boolean uploadToBufferObject) {
             Element.Builder b = new Element.Builder(this.mRS);
-            b.add(Element.createVector(this.mRS, Element.DataType.FLOAT_32, this.mVtxSize), "position");
+            b.add(
+                    Element.createVector(this.mRS, Element.DataType.FLOAT_32, this.mVtxSize),
+                    "position");
             if ((this.mFlags & 1) != 0) {
                 b.add(Element.F32_4(this.mRS), "color");
             }
@@ -517,7 +520,8 @@ public class Mesh extends BaseObj {
             if (uploadToBufferObject) {
                 sm.getVertexAllocation(0).syncAll(1);
             }
-            sm.getIndexSetAllocation(0).copy1DRangeFromUnchecked(0, this.mIndexCount, this.mIndexData);
+            sm.getIndexSetAllocation(0)
+                    .copy1DRangeFromUnchecked(0, this.mIndexCount, this.mIndexData);
             if (uploadToBufferObject) {
                 sm.getIndexSetAllocation(0).syncAll(1);
             }

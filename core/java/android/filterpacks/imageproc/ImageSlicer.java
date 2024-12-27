@@ -20,6 +20,7 @@ public class ImageSlicer extends Filter {
 
     @GenerateFieldPort(name = "padSize")
     private int mPadSize;
+
     private Program mProgram;
     private int mSliceHeight;
     private int mSliceIndex;
@@ -73,7 +74,12 @@ public class ImageSlicer extends Filter {
         int ySliceIndex = this.mSliceIndex / this.mXSlices;
         float x0 = ((this.mSliceWidth * xSliceIndex) - this.mPadSize) / this.mInputWidth;
         float y0 = ((this.mSliceHeight * ySliceIndex) - this.mPadSize) / this.mInputHeight;
-        ((ShaderProgram) this.mProgram).setSourceRect(x0, y0, this.mOutputWidth / this.mInputWidth, this.mOutputHeight / this.mInputHeight);
+        ((ShaderProgram) this.mProgram)
+                .setSourceRect(
+                        x0,
+                        y0,
+                        this.mOutputWidth / this.mInputWidth,
+                        this.mOutputHeight / this.mInputHeight);
         this.mProgram.process(this.mOriginalFrame, output);
         this.mSliceIndex++;
         if (this.mSliceIndex == this.mXSlices * this.mYSlices) {

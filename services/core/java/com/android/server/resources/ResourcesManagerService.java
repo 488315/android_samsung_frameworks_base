@@ -8,9 +8,11 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteCallback;
+
 import com.android.server.SystemService;
 import com.android.server.am.ActivityManagerService;
 import com.android.server.am.ProcessRecord;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 
@@ -22,54 +24,82 @@ public final class ResourcesManagerService extends SystemService {
 
     public ResourcesManagerService(Context context) {
         super(context);
-        publishBinderService("resources", new IResourcesManager.Stub() { // from class: com.android.server.resources.ResourcesManagerService.1
-            public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
-                try {
-                    ParcelFileDescriptor dup = ParcelFileDescriptor.dup(fileDescriptor);
-                    try {
-                        ResourcesManagerService.this.mActivityManagerService.dumpAllResources(dup, printWriter);
-                        if (dup != null) {
-                            dup.close();
+        publishBinderService(
+                "resources",
+                new IResourcesManager
+                        .Stub() { // from class:
+                                  // com.android.server.resources.ResourcesManagerService.1
+                    public final void dump(
+                            FileDescriptor fileDescriptor,
+                            PrintWriter printWriter,
+                            String[] strArr) {
+                        try {
+                            ParcelFileDescriptor dup = ParcelFileDescriptor.dup(fileDescriptor);
+                            try {
+                                ResourcesManagerService.this.mActivityManagerService
+                                        .dumpAllResources(dup, printWriter);
+                                if (dup != null) {
+                                    dup.close();
+                                }
+                            } finally {
+                            }
+                        } catch (Exception e) {
+                            printWriter.println(
+                                    "Exception while trying to dump all resources: "
+                                            + e.getMessage());
+                            e.printStackTrace(printWriter);
                         }
-                    } finally {
                     }
-                } catch (Exception e) {
-                    printWriter.println("Exception while trying to dump all resources: " + e.getMessage());
-                    e.printStackTrace(printWriter);
-                }
-            }
 
-            public final boolean dumpResources(String str, ParcelFileDescriptor parcelFileDescriptor, RemoteCallback remoteCallback) {
-                IApplicationThread iApplicationThread;
-                int callingUid = Binder.getCallingUid();
-                if (callingUid != 0 && callingUid != 2000) {
-                    remoteCallback.sendResult((Bundle) null);
-                    throw new SecurityException("dump should only be called by shell");
-                }
-                ActivityManagerService activityManagerService = ResourcesManagerService.this.mActivityManagerService;
-                activityManagerService.getClass();
-                ActivityManagerService.boostPriorityForLockedSection();
-                synchronized (activityManagerService) {
-                    try {
-                        ProcessRecord findProcessLOSP = activityManagerService.findProcessLOSP(-2, str, "dumpResources");
-                        if (findProcessLOSP == null || (iApplicationThread = findProcessLOSP.mThread) == null) {
-                            throw new IllegalArgumentException("Unknown process: " + str);
+                    public final boolean dumpResources(
+                            String str,
+                            ParcelFileDescriptor parcelFileDescriptor,
+                            RemoteCallback remoteCallback) {
+                        IApplicationThread iApplicationThread;
+                        int callingUid = Binder.getCallingUid();
+                        if (callingUid != 0 && callingUid != 2000) {
+                            remoteCallback.sendResult((Bundle) null);
+                            throw new SecurityException("dump should only be called by shell");
                         }
-                        iApplicationThread.dumpResources(parcelFileDescriptor, remoteCallback);
-                    } catch (Throwable th) {
+                        ActivityManagerService activityManagerService =
+                                ResourcesManagerService.this.mActivityManagerService;
+                        activityManagerService.getClass();
+                        ActivityManagerService.boostPriorityForLockedSection();
+                        synchronized (activityManagerService) {
+                            try {
+                                ProcessRecord findProcessLOSP =
+                                        activityManagerService.findProcessLOSP(
+                                                -2, str, "dumpResources");
+                                if (findProcessLOSP == null
+                                        || (iApplicationThread = findProcessLOSP.mThread) == null) {
+                                    throw new IllegalArgumentException("Unknown process: " + str);
+                                }
+                                iApplicationThread.dumpResources(
+                                        parcelFileDescriptor, remoteCallback);
+                            } catch (Throwable th) {
+                                ActivityManagerService.resetPriorityAfterLockedSection();
+                                throw th;
+                            }
+                        }
                         ActivityManagerService.resetPriorityAfterLockedSection();
-                        throw th;
+                        return true;
                     }
-                }
-                ActivityManagerService.resetPriorityAfterLockedSection();
-                return true;
-            }
 
-            /* JADX WARN: Multi-variable type inference failed */
-            public final int handleShellCommand(ParcelFileDescriptor parcelFileDescriptor, ParcelFileDescriptor parcelFileDescriptor2, ParcelFileDescriptor parcelFileDescriptor3, String[] strArr) {
-                return new ResourcesManagerShellCommand(this).exec(this, parcelFileDescriptor.getFileDescriptor(), parcelFileDescriptor2.getFileDescriptor(), parcelFileDescriptor3.getFileDescriptor(), strArr);
-            }
-        });
+                    /* JADX WARN: Multi-variable type inference failed */
+                    public final int handleShellCommand(
+                            ParcelFileDescriptor parcelFileDescriptor,
+                            ParcelFileDescriptor parcelFileDescriptor2,
+                            ParcelFileDescriptor parcelFileDescriptor3,
+                            String[] strArr) {
+                        return new ResourcesManagerShellCommand(this)
+                                .exec(
+                                        this,
+                                        parcelFileDescriptor.getFileDescriptor(),
+                                        parcelFileDescriptor2.getFileDescriptor(),
+                                        parcelFileDescriptor3.getFileDescriptor(),
+                                        strArr);
+                    }
+                });
     }
 
     @Override // com.android.server.SystemService

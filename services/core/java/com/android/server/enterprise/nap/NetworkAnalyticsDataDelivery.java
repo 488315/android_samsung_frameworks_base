@@ -13,12 +13,13 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.util.Log;
+
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
 import com.android.server.VpnManagerService$$ExternalSyntheticOutline0;
-import com.android.server.enterprise.nap.NetworkAnalyticsConfigStore;
-import com.android.server.enterprise.nap.NetworkAnalyticsService;
 import com.android.server.pm.PackageManagerService;
+
 import com.samsung.android.knox.net.nap.serviceprovider.INetworkAnalyticsService;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
@@ -40,7 +41,8 @@ public final class NetworkAnalyticsDataDelivery {
     public long startTimer;
     public Object syncObject;
     public static final boolean DBG = NetworkAnalyticsService.DBG;
-    public static final PackageManagerService.IPackageManagerImpl pmsImp = (PackageManagerService.IPackageManagerImpl) ServiceManager.getService("package");
+    public static final PackageManagerService.IPackageManagerImpl pmsImp =
+            (PackageManagerService.IPackageManagerImpl) ServiceManager.getService("package");
     public static final Set appset = Collections.synchronizedSet(new HashSet());
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -74,36 +76,58 @@ public final class NetworkAnalyticsDataDelivery {
             List<DataDeliveryHelper> recipientList;
             if (message.what == 1 && (str = (String) message.obj) != null) {
                 ((ArrayList) NetworkAnalyticsDataDelivery.this.dataEntry).add(str);
-                if (((ArrayList) NetworkAnalyticsDataDelivery.this.dataEntry).size() >= 50 || System.currentTimeMillis() - NetworkAnalyticsDataDelivery.this.startTimer > 10000) {
-                    NetworkAnalyticsDataDelivery networkAnalyticsDataDelivery = NetworkAnalyticsDataDelivery.this;
+                if (((ArrayList) NetworkAnalyticsDataDelivery.this.dataEntry).size() >= 50
+                        || System.currentTimeMillis() - NetworkAnalyticsDataDelivery.this.startTimer
+                                > 10000) {
+                    NetworkAnalyticsDataDelivery networkAnalyticsDataDelivery =
+                            NetworkAnalyticsDataDelivery.this;
                     List list = networkAnalyticsDataDelivery.dataEntry;
                     if (list != null && ((ArrayList) list).size() > 0) {
                         synchronized (networkAnalyticsDataDelivery.syncObject) {
                             try {
                                 recipientList = networkAnalyticsDataDelivery.getRecipientList();
                             } catch (Exception e) {
-                                Log.e("NetworkAnalytics:NetworkAnalyticsDataDelivery", "deliverData: Exception ", e);
+                                Log.e(
+                                        "NetworkAnalytics:NetworkAnalyticsDataDelivery",
+                                        "deliverData: Exception ",
+                                        e);
                             } catch (RemoteException e2) {
-                                Log.e("NetworkAnalytics:NetworkAnalyticsDataDelivery", "deliverData: RemoteException ", e2);
+                                Log.e(
+                                        "NetworkAnalytics:NetworkAnalyticsDataDelivery",
+                                        "deliverData: RemoteException ",
+                                        e2);
                             } finally {
                             }
                             if (recipientList != null && recipientList.size() > 0) {
                                 for (DataDeliveryHelper dataDeliveryHelper : recipientList) {
-                                    NetworkAnalyticsService.NetworkAnalyticsServiceConnection networkAnalyticsServiceConnection = dataDeliveryHelper.serviceConnection;
-                                    INetworkAnalyticsService iNetworkAnalyticsService = networkAnalyticsServiceConnection != null ? networkAnalyticsServiceConnection.napInterface : null;
+                                    NetworkAnalyticsService.NetworkAnalyticsServiceConnection
+                                            networkAnalyticsServiceConnection =
+                                                    dataDeliveryHelper.serviceConnection;
+                                    INetworkAnalyticsService iNetworkAnalyticsService =
+                                            networkAnalyticsServiceConnection != null
+                                                    ? networkAnalyticsServiceConnection.napInterface
+                                                    : null;
                                     String str2 = dataDeliveryHelper.profile.profileName;
                                     if (iNetworkAnalyticsService != null) {
-                                        List augmentedData = NetworkAnalyticsDataDelivery.getAugmentedData(dataDeliveryHelper, list);
+                                        List augmentedData =
+                                                NetworkAnalyticsDataDelivery.getAugmentedData(
+                                                        dataDeliveryHelper, list);
                                         if (augmentedData != null && augmentedData.size() > 0) {
-                                            iNetworkAnalyticsService.onDataAvailable(str2, augmentedData);
+                                            iNetworkAnalyticsService.onDataAvailable(
+                                                    str2, augmentedData);
                                         }
                                     } else if (NetworkAnalyticsDataDelivery.DBG) {
-                                        Log.d("NetworkAnalytics:NetworkAnalyticsDataDelivery", "deliverData: service connection is null for entry:" + dataDeliveryHelper.identifier);
+                                        Log.d(
+                                                "NetworkAnalytics:NetworkAnalyticsDataDelivery",
+                                                "deliverData: service connection is null for entry:"
+                                                        + dataDeliveryHelper.identifier);
                                     }
                                 }
                             }
                             if (NetworkAnalyticsDataDelivery.DBG) {
-                                Log.d("NetworkAnalytics:NetworkAnalyticsDataDelivery", "deliverData: No data delivery herlper entries.");
+                                Log.d(
+                                        "NetworkAnalytics:NetworkAnalyticsDataDelivery",
+                                        "deliverData: No data delivery herlper entries.");
                             }
                         }
                     }
@@ -119,7 +143,8 @@ public final class NetworkAnalyticsDataDelivery {
         try {
             Process exec = Runtime.getRuntime().exec("which " + str);
             exec.waitFor();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(exec.getInputStream()));
+            BufferedReader bufferedReader =
+                    new BufferedReader(new InputStreamReader(exec.getInputStream()));
             while (true) {
                 String readLine = bufferedReader.readLine();
                 if (readLine == null) {
@@ -148,7 +173,9 @@ public final class NetworkAnalyticsDataDelivery {
         }
         String[] packagesForUid = iPackageManagerImpl.getPackagesForUid(i);
         if (packagesForUid == null) {
-            Log.d("NetworkAnalytics:NetworkAnalyticsDataDelivery", "unable to find the packages for uid: " + i + " for processName: " + str);
+            Log.d(
+                    "NetworkAnalytics:NetworkAnalyticsDataDelivery",
+                    "unable to find the packages for uid: " + i + " for processName: " + str);
             return null;
         }
         if (packagesForUid.length == 1) {
@@ -173,11 +200,19 @@ public final class NetworkAnalyticsDataDelivery {
                 return str2;
             }
             String str3 = packagesForUid[0];
-            ApplicationInfo applicationInfo = pmsImp.getApplicationInfo(str3, 0L, UserHandle.getUserId(i));
+            ApplicationInfo applicationInfo =
+                    pmsImp.getApplicationInfo(str3, 0L, UserHandle.getUserId(i));
             if (applicationInfo != null && applicationInfo.sourceDir != null) {
                 File file = new File(applicationInfo.sourceDir);
                 if (!file.exists()) {
-                    Log.d("NetworkAnalytics:NetworkAnalyticsDataDelivery", "unable to find the file location for the process:" + str + "for package " + str3 + "for uid " + i);
+                    Log.d(
+                            "NetworkAnalytics:NetworkAnalyticsDataDelivery",
+                            "unable to find the file location for the process:"
+                                    + str
+                                    + "for package "
+                                    + str3
+                                    + "for uid "
+                                    + i);
                     return null;
                 }
                 String hash = getHash(file);
@@ -186,10 +221,19 @@ public final class NetworkAnalyticsDataDelivery {
                     if (str4 != null) {
                         if (str4.length() > 15) {
                             String str5 = applicationInfo.processName;
-                            appInfoSet = new AppInfoSet(i, str3, str5, UserHandle.getUserId(i), str5.substring(str5.length() - 15), hash);
+                            appInfoSet =
+                                    new AppInfoSet(
+                                            i,
+                                            str3,
+                                            str5,
+                                            UserHandle.getUserId(i),
+                                            str5.substring(str5.length() - 15),
+                                            hash);
                         } else {
                             String str6 = applicationInfo.processName;
-                            appInfoSet = new AppInfoSet(i, str3, str6, UserHandle.getUserId(i), str6, hash);
+                            appInfoSet =
+                                    new AppInfoSet(
+                                            i, str3, str6, UserHandle.getUserId(i), str6, hash);
                         }
                         insertHashIntoCache(appInfoSet);
                     }
@@ -206,11 +250,15 @@ public final class NetworkAnalyticsDataDelivery {
             try {
                 boolean z = DBG;
                 if (z) {
-                    Log.d("NetworkAnalytics:NetworkAnalyticsDataDelivery", "clearHashCacheEntire Called : cache size: " + set.size());
+                    Log.d(
+                            "NetworkAnalytics:NetworkAnalyticsDataDelivery",
+                            "clearHashCacheEntire Called : cache size: " + set.size());
                 }
                 set.clear();
                 if (z) {
-                    Log.d("NetworkAnalytics:NetworkAnalyticsDataDelivery", "DataDelivery hash cache entire deletion : cache size: " + set.size());
+                    Log.d(
+                            "NetworkAnalytics:NetworkAnalyticsDataDelivery",
+                            "DataDelivery hash cache entire deletion : cache size: " + set.size());
                 }
             } catch (Throwable th) {
                 throw th;
@@ -218,35 +266,58 @@ public final class NetworkAnalyticsDataDelivery {
         }
     }
 
-    public static String compareProcessNamesAndCalculateHash(int i, String str, String str2, String str3, ApplicationInfo applicationInfo) {
+    public static String compareProcessNamesAndCalculateHash(
+            int i, String str, String str2, String str3, ApplicationInfo applicationInfo) {
         if (str != null && str2 != null && str3 != null && applicationInfo != null) {
             try {
                 if (str3.length() > 15) {
                     if (!str3.substring(str3.length() - 15).equalsIgnoreCase(str)) {
-                        if (str3.equalsIgnoreCase(str)) {
-                        }
+                        if (str3.equalsIgnoreCase(str)) {}
                     }
                     if (applicationInfo.sourceDir != null) {
                         File file = new File(applicationInfo.sourceDir);
                         if (!file.exists()) {
-                            Log.d("NetworkAnalytics:NetworkAnalyticsDataDelivery", "unable to find the file location for the process:" + str + "for package " + str2 + "for uid " + i);
+                            Log.d(
+                                    "NetworkAnalytics:NetworkAnalyticsDataDelivery",
+                                    "unable to find the file location for the process:"
+                                            + str
+                                            + "for package "
+                                            + str2
+                                            + "for uid "
+                                            + i);
                             return null;
                         }
                         String hash = getHash(file);
                         if (hash != null) {
-                            insertHashIntoCache(new AppInfoSet(i, str2, str3, UserHandle.getUserId(i), str3.substring(str3.length() - 15), hash));
+                            insertHashIntoCache(
+                                    new AppInfoSet(
+                                            i,
+                                            str2,
+                                            str3,
+                                            UserHandle.getUserId(i),
+                                            str3.substring(str3.length() - 15),
+                                            hash));
                             return hash;
                         }
                     }
                 } else if (str3.equalsIgnoreCase(str) && applicationInfo.sourceDir != null) {
                     File file2 = new File(applicationInfo.sourceDir);
                     if (!file2.exists()) {
-                        Log.d("NetworkAnalytics:NetworkAnalyticsDataDelivery", "unable to find the file location for the process:" + str + "for package " + str2 + "for uid " + i);
+                        Log.d(
+                                "NetworkAnalytics:NetworkAnalyticsDataDelivery",
+                                "unable to find the file location for the process:"
+                                        + str
+                                        + "for package "
+                                        + str2
+                                        + "for uid "
+                                        + i);
                         return null;
                     }
                     String hash2 = getHash(file2);
                     if (hash2 != null) {
-                        insertHashIntoCache(new AppInfoSet(i, str2, str3, UserHandle.getUserId(i), str3, hash2));
+                        insertHashIntoCache(
+                                new AppInfoSet(
+                                        i, str2, str3, UserHandle.getUserId(i), str3, hash2));
                         return hash2;
                     }
                 }
@@ -261,116 +332,116 @@ public final class NetworkAnalyticsDataDelivery {
     /* JADX WARN: Can't wrap try/catch for region: R(41:13|14|15|17|18|20|21|22|23|24|25|26|(4:240|241|242|(3:244|245|(6:247|(0)|249|62|(2:64|65)(1:67)|66))(1:251))(1:28)|29|30|31|(2:231|232)|34|(3:228|229|230)|37|(3:225|226|227)|40|(3:222|223|224)|43|(3:219|220|221)|46|(3:216|217|218)|49|(3:213|214|215)|52|(2:211|212)(1:55)|56|57|(3:68|69|(62:71|(1:206)|74|(4:188|189|190|(3:193|194|(53:199|200|78|(2:186|187)|81|(4:168|169|170|(3:173|174|(23:179|180|85|(2:166|167)|88|(3:163|164|165)|91|(3:160|161|162)|94|(3:157|158|159)|97|(3:154|155|156)(1:100)|101|(4:139|140|141|(2:143|(3:145|146|147)(1:151)))(1:104)|105|(4:123|124|125|126)|108|(3:120|121|122)(1:111)|112|61|62|(0)(0)|66)(1:178)))|84|85|(0)|166|167|88|(0)|163|164|165|91|(0)|160|161|162|94|(0)|157|158|159|97|(0)|154|155|156|101|(0)|139|140|141|(0)|105|(0)|123|124|125|126|108|(0)|120|121|122|112|61|62|(0)(0)|66)(1:198)))|77|78|(0)|186|187|81|(0)|168|169|170|(51:173|174|(1:176)|179|180|85|(0)|166|167|88|(0)|163|164|165|91|(0)|160|161|162|94|(0)|157|158|159|97|(0)|154|155|156|101|(0)|139|140|141|(0)|105|(0)|123|124|125|126|108|(0)|120|121|122|112|61|62|(0)(0)|66)|84|85|(0)|166|167|88|(0)|163|164|165|91|(0)|160|161|162|94|(0)|157|158|159|97|(0)|154|155|156|101|(0)|139|140|141|(0)|105|(0)|123|124|125|126|108|(0)|120|121|122|112|61|62|(0)(0)|66))|59|60|61|62|(0)(0)|66|11) */
     /* JADX WARN: Can't wrap try/catch for region: R(62:71|(1:206)|74|(4:188|189|190|(3:193|194|(53:199|200|78|(2:186|187)|81|(4:168|169|170|(3:173|174|(23:179|180|85|(2:166|167)|88|(3:163|164|165)|91|(3:160|161|162)|94|(3:157|158|159)|97|(3:154|155|156)(1:100)|101|(4:139|140|141|(2:143|(3:145|146|147)(1:151)))(1:104)|105|(4:123|124|125|126)|108|(3:120|121|122)(1:111)|112|61|62|(0)(0)|66)(1:178)))|84|85|(0)|166|167|88|(0)|163|164|165|91|(0)|160|161|162|94|(0)|157|158|159|97|(0)|154|155|156|101|(0)|139|140|141|(0)|105|(0)|123|124|125|126|108|(0)|120|121|122|112|61|62|(0)(0)|66)(1:198)))|77|78|(0)|186|187|81|(0)|168|169|170|(51:173|174|(1:176)|179|180|85|(0)|166|167|88|(0)|163|164|165|91|(0)|160|161|162|94|(0)|157|158|159|97|(0)|154|155|156|101|(0)|139|140|141|(0)|105|(0)|123|124|125|126|108|(0)|120|121|122|112|61|62|(0)(0)|66)|84|85|(0)|166|167|88|(0)|163|164|165|91|(0)|160|161|162|94|(0)|157|158|159|97|(0)|154|155|156|101|(0)|139|140|141|(0)|105|(0)|123|124|125|126|108|(0)|120|121|122|112|61|62|(0)(0)|66) */
     /* JADX WARN: Code restructure failed: missing block: B:114:0x02ba, code lost:
-    
-        r0 = e;
-     */
+
+       r0 = e;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:115:0x02bb, code lost:
-    
-        r4 = r17;
-     */
+
+       r4 = r17;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:116:0x0304, code lost:
-    
-        android.util.Log.e(r4, "processData: JSONException", r0);
-     */
+
+       android.util.Log.e(r4, "processData: JSONException", r0);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:117:0x0302, code lost:
-    
-        r0 = r9;
-     */
+
+       r0 = r9;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:118:0x02b8, code lost:
-    
-        r0 = e;
-     */
+
+       r0 = e;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:119:0x02fa, code lost:
-    
-        r4 = r17;
-        android.util.Log.e(r4, "processData: Exception", r0);
-     */
+
+       r4 = r17;
+       android.util.Log.e(r4, "processData: Exception", r0);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:128:0x02c3, code lost:
-    
-        r0 = e;
-     */
+
+       r0 = e;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:129:0x02c4, code lost:
-    
-        r2 = r18;
-     */
+
+       r2 = r18;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:130:0x02c6, code lost:
-    
-        r9 = null;
-     */
+
+       r9 = null;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:131:0x02be, code lost:
-    
-        r0 = e;
-     */
+
+       r0 = e;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:132:0x02bf, code lost:
-    
-        r2 = r18;
-     */
+
+       r2 = r18;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:133:0x00b4, code lost:
-    
-        r9 = null;
-     */
+
+       r9 = null;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:134:0x02cd, code lost:
-    
-        r0 = e;
-     */
+
+       r0 = e;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:135:0x02ce, code lost:
-    
-        r9 = r3;
-        r2 = r18;
-     */
+
+       r9 = r3;
+       r2 = r18;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:136:0x02c8, code lost:
-    
-        r0 = e;
-     */
+
+       r0 = e;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:137:0x02c9, code lost:
-    
-        r9 = r3;
-        r2 = r18;
-     */
+
+       r9 = r3;
+       r2 = r18;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:153:0x028a, code lost:
-    
-        r5 = "dnsuid";
-     */
+
+       r5 = "dnsuid";
+    */
     /* JADX WARN: Code restructure failed: missing block: B:210:0x02ea, code lost:
-    
-        r9 = r1;
-        r2 = r18;
-        r1 = r20;
-     */
+
+       r9 = r1;
+       r2 = r18;
+       r1 = r20;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:234:0x02df, code lost:
-    
-        r0 = e;
-     */
+
+       r0 = e;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:235:0x02e0, code lost:
-    
-        r9 = null;
-     */
+
+       r9 = null;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:236:0x02e1, code lost:
-    
-        r2 = r18;
-        r1 = r20;
-     */
+
+       r2 = r18;
+       r1 = r20;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:237:0x02d8, code lost:
-    
-        r0 = e;
-     */
+
+       r0 = e;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:238:0x02d9, code lost:
-    
-        r9 = null;
-     */
+
+       r9 = null;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:239:0x02da, code lost:
-    
-        r2 = r18;
-        r1 = r20;
-     */
+
+       r2 = r18;
+       r1 = r20;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:250:0x00ab, code lost:
-    
-        if (r9 != r10) goto L30;
-     */
+
+       if (r9 != r10) goto L30;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:252:0x00c2, code lost:
-    
-        if (r9 != r10) goto L30;
-     */
+
+       if (r9 != r10) goto L30;
+    */
     /* JADX WARN: Removed duplicated region for block: B:103:0x0266 A[ADDED_TO_REGION] */
     /* JADX WARN: Removed duplicated region for block: B:107:0x0294 A[ADDED_TO_REGION] */
     /* JADX WARN: Removed duplicated region for block: B:110:0x02a2 A[ADDED_TO_REGION] */
@@ -389,12 +460,16 @@ public final class NetworkAnalyticsDataDelivery {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static java.util.List getAugmentedData(com.android.server.enterprise.nap.DataDeliveryHelper r25, java.util.List r26) {
+    public static java.util.List getAugmentedData(
+            com.android.server.enterprise.nap.DataDeliveryHelper r25, java.util.List r26) {
         /*
             Method dump skipped, instructions count: 802
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.nap.NetworkAnalyticsDataDelivery.getAugmentedData(com.android.server.enterprise.nap.DataDeliveryHelper, java.util.List):java.util.List");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.nap.NetworkAnalyticsDataDelivery.getAugmentedData(com.android.server.enterprise.nap.DataDeliveryHelper,"
+                    + " java.util.List):java.util.List");
     }
 
     public static String getFileLocationFromProcessNameAndCalculateHash(int i, String str) {
@@ -419,18 +494,33 @@ public final class NetworkAnalyticsDataDelivery {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (iPackageManagerImpl == null || (packagesForUid = iPackageManagerImpl.getPackagesForUid(i)) == null) {
+        if (iPackageManagerImpl == null
+                || (packagesForUid = iPackageManagerImpl.getPackagesForUid(i)) == null) {
             return null;
         }
         for (String str7 : packagesForUid) {
-            ApplicationInfo applicationInfo = pmsImp.getApplicationInfo(str7, 0L, UserHandle.getUserId(i));
-            if (applicationInfo != null && (str6 = applicationInfo.processName) != null && str != null && (compareProcessNamesAndCalculateHash5 = compareProcessNamesAndCalculateHash(i, str, str7, str6, applicationInfo)) != null) {
+            ApplicationInfo applicationInfo =
+                    pmsImp.getApplicationInfo(str7, 0L, UserHandle.getUserId(i));
+            if (applicationInfo != null
+                    && (str6 = applicationInfo.processName) != null
+                    && str != null
+                    && (compareProcessNamesAndCalculateHash5 =
+                                    compareProcessNamesAndCalculateHash(
+                                            i, str, str7, str6, applicationInfo))
+                            != null) {
                 return compareProcessNamesAndCalculateHash5;
             }
             PackageInfo packageInfo = pmsImp.getPackageInfo(str7, 4L, UserHandle.getUserId(i));
             if (packageInfo != null && (serviceInfoArr = packageInfo.services) != null) {
                 for (ServiceInfo serviceInfo : serviceInfoArr) {
-                    if (serviceInfo != null && (str5 = serviceInfo.processName) != null && str != null && applicationInfo != null && (compareProcessNamesAndCalculateHash4 = compareProcessNamesAndCalculateHash(i, str, str7, str5, applicationInfo)) != null) {
+                    if (serviceInfo != null
+                            && (str5 = serviceInfo.processName) != null
+                            && str != null
+                            && applicationInfo != null
+                            && (compareProcessNamesAndCalculateHash4 =
+                                            compareProcessNamesAndCalculateHash(
+                                                    i, str, str7, str5, applicationInfo))
+                                    != null) {
                         return compareProcessNamesAndCalculateHash4;
                     }
                 }
@@ -438,7 +528,14 @@ public final class NetworkAnalyticsDataDelivery {
             PackageInfo packageInfo2 = pmsImp.getPackageInfo(str7, 8L, UserHandle.getUserId(i));
             if (packageInfo2 != null && (providerInfoArr = packageInfo2.providers) != null) {
                 for (ProviderInfo providerInfo : providerInfoArr) {
-                    if (providerInfo != null && (str4 = providerInfo.processName) != null && str != null && applicationInfo != null && (compareProcessNamesAndCalculateHash3 = compareProcessNamesAndCalculateHash(i, str, str7, str4, applicationInfo)) != null) {
+                    if (providerInfo != null
+                            && (str4 = providerInfo.processName) != null
+                            && str != null
+                            && applicationInfo != null
+                            && (compareProcessNamesAndCalculateHash3 =
+                                            compareProcessNamesAndCalculateHash(
+                                                    i, str, str7, str4, applicationInfo))
+                                    != null) {
                         return compareProcessNamesAndCalculateHash3;
                     }
                 }
@@ -446,7 +543,14 @@ public final class NetworkAnalyticsDataDelivery {
             PackageInfo packageInfo3 = pmsImp.getPackageInfo(str7, 2L, UserHandle.getUserId(i));
             if (packageInfo3 != null && (activityInfoArr2 = packageInfo3.receivers) != null) {
                 for (ActivityInfo activityInfo : activityInfoArr2) {
-                    if (activityInfo != null && (str3 = activityInfo.processName) != null && str != null && applicationInfo != null && (compareProcessNamesAndCalculateHash2 = compareProcessNamesAndCalculateHash(i, str, str7, str3, applicationInfo)) != null) {
+                    if (activityInfo != null
+                            && (str3 = activityInfo.processName) != null
+                            && str != null
+                            && applicationInfo != null
+                            && (compareProcessNamesAndCalculateHash2 =
+                                            compareProcessNamesAndCalculateHash(
+                                                    i, str, str7, str3, applicationInfo))
+                                    != null) {
                         return compareProcessNamesAndCalculateHash2;
                     }
                 }
@@ -454,7 +558,14 @@ public final class NetworkAnalyticsDataDelivery {
             PackageInfo packageInfo4 = pmsImp.getPackageInfo(str7, 1L, UserHandle.getUserId(i));
             if (packageInfo4 != null && (activityInfoArr = packageInfo4.activities) != null) {
                 for (ActivityInfo activityInfo2 : activityInfoArr) {
-                    if (activityInfo2 != null && (str2 = activityInfo2.processName) != null && str != null && applicationInfo != null && (compareProcessNamesAndCalculateHash = compareProcessNamesAndCalculateHash(i, str, str7, str2, applicationInfo)) != null) {
+                    if (activityInfo2 != null
+                            && (str2 = activityInfo2.processName) != null
+                            && str != null
+                            && applicationInfo != null
+                            && (compareProcessNamesAndCalculateHash =
+                                            compareProcessNamesAndCalculateHash(
+                                                    i, str, str7, str2, applicationInfo))
+                                    != null) {
                         return compareProcessNamesAndCalculateHash;
                     }
                 }
@@ -588,7 +699,9 @@ public final class NetworkAnalyticsDataDelivery {
         La5:
             throw r8
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.nap.NetworkAnalyticsDataDelivery.getHash(java.io.File):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.nap.NetworkAnalyticsDataDelivery.getHash(java.io.File):java.lang.String");
     }
 
     public static String getHashFromCache(int i, String str) {
@@ -596,8 +709,9 @@ public final class NetworkAnalyticsDataDelivery {
         synchronized (set) {
             try {
                 for (AppInfoSet appInfoSet : set) {
-                    if (appInfoSet.uid != i || (!appInfoSet.processName.equalsIgnoreCase(str) && !appInfoSet.truncatedProcessName.equalsIgnoreCase(str))) {
-                    }
+                    if (appInfoSet.uid != i
+                            || (!appInfoSet.processName.equalsIgnoreCase(str)
+                                    && !appInfoSet.truncatedProcessName.equalsIgnoreCase(str))) {}
                     return appInfoSet.hash;
                 }
                 return null;
@@ -609,7 +723,8 @@ public final class NetworkAnalyticsDataDelivery {
 
     public static NetworkAnalyticsDataDelivery getInstance() {
         if (mInstance == null) {
-            NetworkAnalyticsDataDelivery networkAnalyticsDataDelivery = new NetworkAnalyticsDataDelivery();
+            NetworkAnalyticsDataDelivery networkAnalyticsDataDelivery =
+                    new NetworkAnalyticsDataDelivery();
             networkAnalyticsDataDelivery.dataEntry = null;
             networkAnalyticsDataDelivery.startTimer = 0L;
             networkAnalyticsDataDelivery.registeredDataRecipients = null;
@@ -634,16 +749,20 @@ public final class NetworkAnalyticsDataDelivery {
             return hashFromCache;
         }
         String checkIfProcessIsDaemon = checkIfProcessIsDaemon(str);
-        if (checkIfProcessIsDaemon == null || checkIfProcessIsDaemon.isEmpty() || checkIfProcessIsDaemon.equals("null")) {
+        if (checkIfProcessIsDaemon == null
+                || checkIfProcessIsDaemon.isEmpty()
+                || checkIfProcessIsDaemon.equals("null")) {
             String checkSingleUidAndCalculateHash = checkSingleUidAndCalculateHash(i, str);
             if (checkSingleUidAndCalculateHash != null) {
                 return checkSingleUidAndCalculateHash;
             }
-            String fileLocationFromProcessNameAndCalculateHash = getFileLocationFromProcessNameAndCalculateHash(i, str);
+            String fileLocationFromProcessNameAndCalculateHash =
+                    getFileLocationFromProcessNameAndCalculateHash(i, str);
             if (fileLocationFromProcessNameAndCalculateHash != null) {
                 return fileLocationFromProcessNameAndCalculateHash;
             }
-            String packageNameFromPathAndCalculateHash = getPackageNameFromPathAndCalculateHash(i, str);
+            String packageNameFromPathAndCalculateHash =
+                    getPackageNameFromPathAndCalculateHash(i, str);
             if (packageNameFromPathAndCalculateHash != null) {
                 return packageNameFromPathAndCalculateHash;
             }
@@ -672,15 +791,33 @@ public final class NetworkAnalyticsDataDelivery {
         }
         String[] split = str.split("/");
         if (split.length >= 4) {
-            String str2 = split[2].equals("data") ? split[3] : (split.length >= 5 && split[2].equals("user") && Integer.toString(UserHandle.getUserId(i)).equals(split[3])) ? split[4] : null;
+            String str2 =
+                    split[2].equals("data")
+                            ? split[3]
+                            : (split.length >= 5
+                                            && split[2].equals("user")
+                                            && Integer.toString(UserHandle.getUserId(i))
+                                                    .equals(split[3]))
+                                    ? split[4]
+                                    : null;
             if (str2 == null || (packagesForUid = pmsImp.getPackagesForUid(i)) == null) {
                 return null;
             }
             for (String str3 : packagesForUid) {
-                if (str3.equalsIgnoreCase(str2) && (applicationInfo = pmsImp.getApplicationInfo(str3, 0L, UserHandle.getUserId(i))) != null && applicationInfo.sourceDir != null) {
+                if (str3.equalsIgnoreCase(str2)
+                        && (applicationInfo =
+                                        pmsImp.getApplicationInfo(
+                                                str3, 0L, UserHandle.getUserId(i)))
+                                != null
+                        && applicationInfo.sourceDir != null) {
                     File file = new File(applicationInfo.sourceDir);
                     if (!file.exists()) {
-                        Log.d("NetworkAnalytics:NetworkAnalyticsDataDelivery", "unable to find the file location for the deamon path:" + str + " for uid " + i);
+                        Log.d(
+                                "NetworkAnalytics:NetworkAnalyticsDataDelivery",
+                                "unable to find the file location for the deamon path:"
+                                        + str
+                                        + " for uid "
+                                        + i);
                         return null;
                     }
                     String hash = getHash(file);
@@ -702,7 +839,18 @@ public final class NetworkAnalyticsDataDelivery {
         synchronized (set) {
             if (z) {
                 try {
-                    Log.d("NetworkAnalytics:NetworkAnalyticsDataDelivery", "DataDelivery hash cache insertion uid:" + appInfoSet.uid + " pacName:" + appInfoSet.packageName + " procName:" + appInfoSet.processName + " trunProcName:" + appInfoSet.truncatedProcessName + " hash:" + appInfoSet.hash);
+                    Log.d(
+                            "NetworkAnalytics:NetworkAnalyticsDataDelivery",
+                            "DataDelivery hash cache insertion uid:"
+                                    + appInfoSet.uid
+                                    + " pacName:"
+                                    + appInfoSet.packageName
+                                    + " procName:"
+                                    + appInfoSet.processName
+                                    + " trunProcName:"
+                                    + appInfoSet.truncatedProcessName
+                                    + " hash:"
+                                    + appInfoSet.hash);
                 } catch (Throwable th) {
                     throw th;
                 }
@@ -712,20 +860,32 @@ public final class NetworkAnalyticsDataDelivery {
     }
 
     public final void addNAPDataRecipient(DataDeliveryHelper dataDeliveryHelper) {
-        if ((dataDeliveryHelper.profile == null || dataDeliveryHelper.serviceConnection == null) && DBG) {
-            VpnManagerService$$ExternalSyntheticOutline0.m(new StringBuilder("adding recipient failed for recipient: "), dataDeliveryHelper.identifier, "NetworkAnalytics:NetworkAnalyticsDataDelivery");
+        if ((dataDeliveryHelper.profile == null || dataDeliveryHelper.serviceConnection == null)
+                && DBG) {
+            VpnManagerService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("adding recipient failed for recipient: "),
+                    dataDeliveryHelper.identifier,
+                    "NetworkAnalytics:NetworkAnalyticsDataDelivery");
         }
         String str = dataDeliveryHelper.identifier;
         boolean z = DBG;
         if (z) {
-            DualAppManagerService$$ExternalSyntheticOutline0.m("adding recipient for data collection:", str, "NetworkAnalytics:NetworkAnalyticsDataDelivery");
+            DualAppManagerService$$ExternalSyntheticOutline0.m(
+                    "adding recipient for data collection:",
+                    str,
+                    "NetworkAnalytics:NetworkAnalyticsDataDelivery");
         }
         synchronized (this.syncObject) {
             try {
-                if (isDataRecipientPresent(NetworkAnalyticsService.getCidFromTransformedName(str), str.substring(0, str.indexOf("__"))) < 0) {
+                if (isDataRecipientPresent(
+                                NetworkAnalyticsService.getCidFromTransformedName(str),
+                                str.substring(0, str.indexOf("__")))
+                        < 0) {
                     getRecipientList().add(dataDeliveryHelper);
                     if (z) {
-                        Log.d("NetworkAnalytics:NetworkAnalyticsDataDelivery", "added recipient for data collection:".concat(str));
+                        Log.d(
+                                "NetworkAnalytics:NetworkAnalyticsDataDelivery",
+                                "added recipient for data collection:".concat(str));
                     }
                 }
             } catch (Throwable th) {
@@ -759,11 +919,15 @@ public final class NetworkAnalyticsDataDelivery {
     public final int isDataRecipientPresent(int i, String str) {
         List recipientList = getRecipientList();
         for (int i2 = 0; i2 < recipientList.size(); i2++) {
-            if (((DataDeliveryHelper) recipientList.get(i2)).identifier.equals(NetworkAnalyticsService.getTransformedVendorName(i, str))) {
+            if (((DataDeliveryHelper) recipientList.get(i2))
+                    .identifier.equals(NetworkAnalyticsService.getTransformedVendorName(i, str))) {
                 if (!DBG) {
                     return i2;
                 }
-                Log.d("NetworkAnalytics:NetworkAnalyticsDataDelivery", "isDataRecipientPresent: found recipient:" + NetworkAnalyticsService.getTransformedVendorName(i, str));
+                Log.d(
+                        "NetworkAnalytics:NetworkAnalyticsDataDelivery",
+                        "isDataRecipientPresent: found recipient:"
+                                + NetworkAnalyticsService.getTransformedVendorName(i, str));
                 return i2;
             }
         }
@@ -777,9 +941,16 @@ public final class NetworkAnalyticsDataDelivery {
                 while (it.hasNext()) {
                     DataDeliveryHelper dataDeliveryHelper = (DataDeliveryHelper) it.next();
                     if (dataDeliveryHelper.profile.packageName.equals(str)) {
-                        NetworkAnalyticsConfigStore.NAPConfigProfile nAPConfigProfile = dataDeliveryHelper.profile;
+                        NetworkAnalyticsConfigStore.NAPConfigProfile nAPConfigProfile =
+                                dataDeliveryHelper.profile;
                         if (nAPConfigProfile.userId == i) {
-                            Log.d("NetworkAnalytics:NetworkAnalyticsDataDelivery", "removeDataRecipientsForPackage: removing recipient for package:" + str + i + nAPConfigProfile.profileName);
+                            Log.d(
+                                    "NetworkAnalytics:NetworkAnalyticsDataDelivery",
+                                    "removeDataRecipientsForPackage: removing recipient for"
+                                        + " package:"
+                                            + str
+                                            + i
+                                            + nAPConfigProfile.profileName);
                             it.remove();
                         }
                     }
@@ -798,7 +969,10 @@ public final class NetworkAnalyticsDataDelivery {
                     return;
                 }
                 if (DBG) {
-                    Log.d("NetworkAnalytics:NetworkAnalyticsDataDelivery", "removeNAPDataRecipient: removing recipient for data collection:" + NetworkAnalyticsService.getTransformedVendorName(i, str));
+                    Log.d(
+                            "NetworkAnalytics:NetworkAnalyticsDataDelivery",
+                            "removeNAPDataRecipient: removing recipient for data collection:"
+                                    + NetworkAnalyticsService.getTransformedVendorName(i, str));
                 }
                 getRecipientList().remove(isDataRecipientPresent);
             } catch (Throwable th) {

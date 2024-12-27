@@ -5,15 +5,17 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 import android.util.proto.ProtoOutputStream;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlSerializer;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlSerializer;
 
 @SystemApi
 /* loaded from: classes3.dex */
@@ -23,25 +25,26 @@ public final class AidGroup implements Parcelable {
     private final List<String> mAids;
     private final String mCategory;
     private final String mDescription;
-    public static final Parcelable.Creator<AidGroup> CREATOR = new Parcelable.Creator<AidGroup>() { // from class: android.nfc.cardemulation.AidGroup.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AidGroup createFromParcel(Parcel source) {
-            String category = source.readString8();
-            int listSize = source.readInt();
-            ArrayList<String> aidList = new ArrayList<>();
-            if (listSize > 0) {
-                source.readStringList(aidList);
-            }
-            return new AidGroup(aidList, category);
-        }
+    public static final Parcelable.Creator<AidGroup> CREATOR =
+            new Parcelable.Creator<AidGroup>() { // from class: android.nfc.cardemulation.AidGroup.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AidGroup createFromParcel(Parcel source) {
+                    String category = source.readString8();
+                    int listSize = source.readInt();
+                    ArrayList<String> aidList = new ArrayList<>();
+                    if (listSize > 0) {
+                        source.readStringList(aidList);
+                    }
+                    return new AidGroup(aidList, category);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AidGroup[] newArray(int size) {
-            return new AidGroup[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AidGroup[] newArray(int size) {
+                    return new AidGroup[size];
+                }
+            };
     private static final Pattern AID_PATTERN = Pattern.compile("[0-9A-Fa-f]{10,32}\\*?\\#?");
 
     public AidGroup(List<String> aids, String category) {
@@ -113,7 +116,8 @@ public final class AidGroup implements Parcelable {
         }
     }
 
-    public static AidGroup createFromXml(XmlPullParser parser) throws XmlPullParserException, IOException {
+    public static AidGroup createFromXml(XmlPullParser parser)
+            throws XmlPullParserException, IOException {
         String category = null;
         ArrayList<String> aids = new ArrayList<>();
         boolean inGroup = false;
@@ -141,7 +145,10 @@ public final class AidGroup implements Parcelable {
                 } else {
                     Log.d(TAG, "Ignoring unexpected tag: " + tagName);
                 }
-            } else if (eventType == 3 && tagName.equals("aid-group") && inGroup && aids.size() > 0) {
+            } else if (eventType == 3
+                    && tagName.equals("aid-group")
+                    && inGroup
+                    && aids.size() > 0) {
                 AidGroup group = new AidGroup(aids, category);
                 return group;
             }

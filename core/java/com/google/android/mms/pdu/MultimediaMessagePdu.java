@@ -6,8 +6,7 @@ import com.google.android.mms.InvalidHeaderValueException;
 public class MultimediaMessagePdu extends GenericPdu {
     private PduBody mMessageBody;
 
-    public MultimediaMessagePdu() {
-    }
+    public MultimediaMessagePdu() {}
 
     public MultimediaMessagePdu(PduHeaders header, PduBody body) {
         super(header);

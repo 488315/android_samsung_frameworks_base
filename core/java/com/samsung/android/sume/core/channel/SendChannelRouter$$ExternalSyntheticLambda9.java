@@ -1,6 +1,7 @@
 package com.samsung.android.sume.core.channel;
 
 import com.samsung.android.sume.core.graph.GraphEdge;
+
 import java.util.function.Function;
 
 /* compiled from: D8$$SyntheticClass */

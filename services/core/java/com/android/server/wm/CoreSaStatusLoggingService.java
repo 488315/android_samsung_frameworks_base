@@ -5,7 +5,9 @@ import android.app.job.JobScheduler;
 import android.app.job.JobService;
 import android.content.ComponentName;
 import android.util.Slog;
+
 import com.samsung.android.server.util.SafetySystemService;
+
 import java.util.HashSet;
 import java.util.concurrent.TimeUnit;
 
@@ -17,11 +19,20 @@ public abstract class CoreSaStatusLoggingService extends JobService {
 
     public static void schedule() {
         try {
-            JobScheduler jobScheduler = (JobScheduler) SafetySystemService.getSystemService(JobScheduler.class);
+            JobScheduler jobScheduler =
+                    (JobScheduler) SafetySystemService.getSystemService(JobScheduler.class);
             if (jobScheduler == null) {
                 return;
             }
-            jobScheduler.schedule(new JobInfo.Builder(415377471, new ComponentName("android", CoreSaStatusLoggingService.class.getName())).setRequiresDeviceIdle(true).setRequiresCharging(true).setPeriodic(IDLE_LOGGING_PERIOD_MILLIS).build());
+            jobScheduler.schedule(
+                    new JobInfo.Builder(
+                                    415377471,
+                                    new ComponentName(
+                                            "android", CoreSaStatusLoggingService.class.getName()))
+                            .setRequiresDeviceIdle(true)
+                            .setRequiresCharging(true)
+                            .setPeriodic(IDLE_LOGGING_PERIOD_MILLIS)
+                            .build());
         } catch (Throwable th) {
             Slog.w("CoreSaStatusLoggingService", "Failed to schedule.", th);
         }

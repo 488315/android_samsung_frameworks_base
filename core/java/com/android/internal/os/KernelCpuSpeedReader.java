@@ -5,6 +5,7 @@ import android.system.Os;
 import android.system.OsConstants;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -20,7 +21,10 @@ public class KernelCpuSpeedReader {
     private final String mProcFile;
 
     public KernelCpuSpeedReader(int cpuNumber, int numSpeedSteps) {
-        this.mProcFile = String.format("/sys/devices/system/cpu/cpu%d/cpufreq/stats/time_in_state", Integer.valueOf(cpuNumber));
+        this.mProcFile =
+                String.format(
+                        "/sys/devices/system/cpu/cpu%d/cpufreq/stats/time_in_state",
+                        Integer.valueOf(cpuNumber));
         this.mNumSpeedSteps = numSpeedSteps;
         this.mLastSpeedTimesMs = new long[numSpeedSteps];
         this.mDeltaSpeedTimesMs = new long[numSpeedSteps];
@@ -35,15 +39,20 @@ public class KernelCpuSpeedReader {
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(this.mProcFile));
                 try {
-                    TextUtils.SimpleStringSplitter splitter = new TextUtils.SimpleStringSplitter(' ');
-                    for (int speedIndex = 0; speedIndex < this.mLastSpeedTimesMs.length && (line = reader.readLine()) != null; speedIndex++) {
+                    TextUtils.SimpleStringSplitter splitter =
+                            new TextUtils.SimpleStringSplitter(' ');
+                    for (int speedIndex = 0;
+                            speedIndex < this.mLastSpeedTimesMs.length
+                                    && (line = reader.readLine()) != null;
+                            speedIndex++) {
                         splitter.setString(line);
                         splitter.next();
                         long time = Long.parseLong(splitter.next()) * this.mJiffyMillis;
                         if (time < this.mLastSpeedTimesMs[speedIndex]) {
                             this.mDeltaSpeedTimesMs[speedIndex] = time;
                         } else {
-                            this.mDeltaSpeedTimesMs[speedIndex] = time - this.mLastSpeedTimesMs[speedIndex];
+                            this.mDeltaSpeedTimesMs[speedIndex] =
+                                    time - this.mLastSpeedTimesMs[speedIndex];
                         }
                         this.mLastSpeedTimesMs[speedIndex] = time;
                     }
@@ -82,7 +91,9 @@ public class KernelCpuSpeedReader {
             }
             try {
                 TextUtils.SimpleStringSplitter splitter = new TextUtils.SimpleStringSplitter(' ');
-                for (int speedIndex = 0; speedIndex < this.mNumSpeedSteps && (line = reader.readLine()) != null; speedIndex++) {
+                for (int speedIndex = 0;
+                        speedIndex < this.mNumSpeedSteps && (line = reader.readLine()) != null;
+                        speedIndex++) {
                     splitter.setString(line);
                     splitter.next();
                     long time = Long.parseLong(splitter.next()) * this.mJiffyMillis;

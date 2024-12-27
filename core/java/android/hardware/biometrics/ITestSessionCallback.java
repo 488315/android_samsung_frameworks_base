@@ -16,12 +16,10 @@ public interface ITestSessionCallback extends IInterface {
 
     public static class Default implements ITestSessionCallback {
         @Override // android.hardware.biometrics.ITestSessionCallback
-        public void onCleanupStarted(int userId) throws RemoteException {
-        }
+        public void onCleanupStarted(int userId) throws RemoteException {}
 
         @Override // android.hardware.biometrics.ITestSessionCallback
-        public void onCleanupFinished(int userId) throws RemoteException {
-        }
+        public void onCleanupFinished(int userId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface ITestSessionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITestSessionCallback {
+    public abstract static class Stub extends Binder implements ITestSessionCallback {
         static final int TRANSACTION_onCleanupFinished = 2;
         static final int TRANSACTION_onCleanupStarted = 1;
 
@@ -70,7 +68,8 @@ public interface ITestSessionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITestSessionCallback.DESCRIPTOR);
             }

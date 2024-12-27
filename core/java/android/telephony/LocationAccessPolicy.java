@@ -9,6 +9,7 @@ import android.os.Binder;
 import android.os.UserHandle;
 import android.util.Log;
 import android.widget.Toast;
+
 import com.android.internal.R;
 import com.android.internal.telephony.util.TelephonyUtils;
 
@@ -34,7 +35,15 @@ public final class LocationAccessPolicy {
         public final int minSdkVersionForCoarse;
         public final int minSdkVersionForFine;
 
-        private LocationPermissionQuery(String callingPackage, String callingFeatureId, int callingUid, int callingPid, int minSdkVersionForCoarse, int minSdkVersionForFine, boolean logAsInfo, String method) {
+        private LocationPermissionQuery(
+                String callingPackage,
+                String callingFeatureId,
+                int callingUid,
+                int callingPid,
+                int minSdkVersionForCoarse,
+                int minSdkVersionForFine,
+                boolean logAsInfo,
+                String method) {
             this.callingPackage = callingPackage;
             this.callingFeatureId = callingFeatureId;
             this.callingUid = callingUid;
@@ -103,15 +112,34 @@ public final class LocationAccessPolicy {
 
             public LocationPermissionQuery build() {
                 if (this.mMinSdkVersionForCoarse < 0 || this.mMinSdkVersionForFine < 0) {
-                    throw new IllegalArgumentException("Must specify min sdk versions for enforcement for both coarse and fine permissions");
+                    throw new IllegalArgumentException(
+                            "Must specify min sdk versions for enforcement for both coarse and fine"
+                                + " permissions");
                 }
-                if (this.mMinSdkVersionForFine > 1 && this.mMinSdkVersionForCoarse > 1 && this.mMinSdkVersionForEnforcement != Math.min(this.mMinSdkVersionForCoarse, this.mMinSdkVersionForFine)) {
-                    throw new IllegalArgumentException("setMinSdkVersionForEnforcement must be called.");
+                if (this.mMinSdkVersionForFine > 1
+                        && this.mMinSdkVersionForCoarse > 1
+                        && this.mMinSdkVersionForEnforcement
+                                != Math.min(
+                                        this.mMinSdkVersionForCoarse, this.mMinSdkVersionForFine)) {
+                    throw new IllegalArgumentException(
+                            "setMinSdkVersionForEnforcement must be called.");
                 }
                 if (this.mMinSdkVersionForFine < this.mMinSdkVersionForCoarse) {
-                    throw new IllegalArgumentException("Since fine location permission includes access to coarse location, the min sdk level for enforcement of the fine location permission must not be less than the min sdk level for enforcement of the coarse location permission.");
+                    throw new IllegalArgumentException(
+                            "Since fine location permission includes access to coarse location, the"
+                                + " min sdk level for enforcement of the fine location permission"
+                                + " must not be less than the min sdk level for enforcement of the"
+                                + " coarse location permission.");
                 }
-                return new LocationPermissionQuery(this.mCallingPackage, this.mCallingFeatureId, this.mCallingUid, this.mCallingPid, this.mMinSdkVersionForCoarse, this.mMinSdkVersionForFine, this.mLogAsInfo, this.mMethod);
+                return new LocationPermissionQuery(
+                        this.mCallingPackage,
+                        this.mCallingFeatureId,
+                        this.mCallingUid,
+                        this.mCallingPid,
+                        this.mMinSdkVersionForCoarse,
+                        this.mMinSdkVersionForFine,
+                        this.mLogAsInfo,
+                        this.mMethod);
             }
         }
     }
@@ -174,70 +202,146 @@ public final class LocationAccessPolicy {
         }
     }
 
-    private static LocationPermissionResult checkAppLocationPermissionHelper(Context context, LocationPermissionQuery query, String permissionToCheck) {
-        String locationTypeForLog = Manifest.permission.ACCESS_FINE_LOCATION.equals(permissionToCheck) ? "fine" : "coarse";
-        boolean hasManifestPermission = checkManifestPermission(context, query.callingPid, query.callingUid, permissionToCheck);
+    private static LocationPermissionResult checkAppLocationPermissionHelper(
+            Context context, LocationPermissionQuery query, String permissionToCheck) {
+        String locationTypeForLog =
+                Manifest.permission.ACCESS_FINE_LOCATION.equals(permissionToCheck)
+                        ? "fine"
+                        : "coarse";
+        boolean hasManifestPermission =
+                checkManifestPermission(
+                        context, query.callingPid, query.callingUid, permissionToCheck);
         if (hasManifestPermission) {
-            int appOpMode = ((AppOpsManager) context.getSystemService(AppOpsManager.class)).noteOpNoThrow(getAppOpsString(permissionToCheck), query.callingUid, query.callingPackage, query.callingFeatureId, (String) null);
+            int appOpMode =
+                    ((AppOpsManager) context.getSystemService(AppOpsManager.class))
+                            .noteOpNoThrow(
+                                    getAppOpsString(permissionToCheck),
+                                    query.callingUid,
+                                    query.callingPackage,
+                                    query.callingFeatureId,
+                                    (String) null);
             if (appOpMode == 0) {
                 return LocationPermissionResult.ALLOWED;
             }
-            Log.i(TAG, query.callingPackage + " is aware of " + locationTypeForLog + " but the app-ops permission is specifically denied.");
+            Log.i(
+                    TAG,
+                    query.callingPackage
+                            + " is aware of "
+                            + locationTypeForLog
+                            + " but the app-ops permission is specifically denied.");
             return appOpsModeToPermissionResult(appOpMode);
         }
-        int minSdkVersion = Manifest.permission.ACCESS_FINE_LOCATION.equals(permissionToCheck) ? query.minSdkVersionForFine : query.minSdkVersionForCoarse;
+        int minSdkVersion =
+                Manifest.permission.ACCESS_FINE_LOCATION.equals(permissionToCheck)
+                        ? query.minSdkVersionForFine
+                        : query.minSdkVersionForCoarse;
         if (minSdkVersion > 10000) {
-            String errorMsg = "Allowing " + query.callingPackage + " " + locationTypeForLog + " because we're not enforcing API " + minSdkVersion + " yet. Please fix this app because it will break in the future. Called from " + query.method;
+            String errorMsg =
+                    "Allowing "
+                            + query.callingPackage
+                            + " "
+                            + locationTypeForLog
+                            + " because we're not enforcing API "
+                            + minSdkVersion
+                            + " yet. Please fix this app because it will break in the future."
+                            + " Called from "
+                            + query.method;
             logError(context, query, errorMsg);
             return null;
         }
         String errorMsg2 = query.callingPackage;
         if (!isAppAtLeastSdkVersion(context, errorMsg2, minSdkVersion)) {
-            String errorMsg3 = "Allowing " + query.callingPackage + " " + locationTypeForLog + " because it doesn't target API " + minSdkVersion + " yet. Please fix this app. Called from " + query.method;
+            String errorMsg3 =
+                    "Allowing "
+                            + query.callingPackage
+                            + " "
+                            + locationTypeForLog
+                            + " because it doesn't target API "
+                            + minSdkVersion
+                            + " yet. Please fix this app. Called from "
+                            + query.method;
             logError(context, query, errorMsg3);
             return null;
         }
         return LocationPermissionResult.DENIED_HARD;
     }
 
-    public static LocationPermissionResult checkLocationPermission(Context context, LocationPermissionQuery query) {
+    public static LocationPermissionResult checkLocationPermission(
+            Context context, LocationPermissionQuery query) {
         LocationPermissionResult resultForCoarse;
         LocationPermissionResult resultForFine;
-        if (query.callingUid == 1001 || query.callingUid == 1000 || query.callingUid == 1073 || query.callingUid == 0) {
+        if (query.callingUid == 1001
+                || query.callingUid == 1000
+                || query.callingUid == 1073
+                || query.callingUid == 0) {
             return LocationPermissionResult.ALLOWED;
         }
-        if (!checkSystemLocationAccess(context, query.callingUid, query.callingPid, query.callingPackage)) {
-            Log.i(TAG, "checkLocationPermission - callingUid: " + query.callingUid + ", callingPid: " + query.callingPid + ", result: DENIED_SOFT");
+        if (!checkSystemLocationAccess(
+                context, query.callingUid, query.callingPid, query.callingPackage)) {
+            Log.i(
+                    TAG,
+                    "checkLocationPermission - callingUid: "
+                            + query.callingUid
+                            + ", callingPid: "
+                            + query.callingPid
+                            + ", result: DENIED_SOFT");
             return LocationPermissionResult.DENIED_SOFT;
         }
-        if (query.minSdkVersionForFine < Integer.MAX_VALUE && (resultForFine = checkAppLocationPermissionHelper(context, query, Manifest.permission.ACCESS_FINE_LOCATION)) != null) {
+        if (query.minSdkVersionForFine < Integer.MAX_VALUE
+                && (resultForFine =
+                                checkAppLocationPermissionHelper(
+                                        context, query, Manifest.permission.ACCESS_FINE_LOCATION))
+                        != null) {
             if (resultForFine != LocationPermissionResult.ALLOWED) {
-                Log.i(TAG, "checkLocationPermission - callingUid: " + query.callingUid + ", callingPid: " + query.callingPid + ", resultForFine: " + resultForFine);
+                Log.i(
+                        TAG,
+                        "checkLocationPermission - callingUid: "
+                                + query.callingUid
+                                + ", callingPid: "
+                                + query.callingPid
+                                + ", resultForFine: "
+                                + resultForFine);
             }
             return resultForFine;
         }
-        if (query.minSdkVersionForCoarse < Integer.MAX_VALUE && (resultForCoarse = checkAppLocationPermissionHelper(context, query, Manifest.permission.ACCESS_COARSE_LOCATION)) != null) {
+        if (query.minSdkVersionForCoarse < Integer.MAX_VALUE
+                && (resultForCoarse =
+                                checkAppLocationPermissionHelper(
+                                        context, query, Manifest.permission.ACCESS_COARSE_LOCATION))
+                        != null) {
             if (resultForCoarse != LocationPermissionResult.ALLOWED) {
-                Log.i(TAG, "checkLocationPermission - callingUid: " + query.callingUid + ", callingPid: " + query.callingPid + ", resultForCoarse: " + resultForCoarse);
+                Log.i(
+                        TAG,
+                        "checkLocationPermission - callingUid: "
+                                + query.callingUid
+                                + ", callingPid: "
+                                + query.callingPid
+                                + ", resultForCoarse: "
+                                + resultForCoarse);
             }
             return resultForCoarse;
         }
         return LocationPermissionResult.ALLOWED;
     }
 
-    private static boolean checkManifestPermission(Context context, int pid, int uid, String permissionToCheck) {
+    private static boolean checkManifestPermission(
+            Context context, int pid, int uid, String permissionToCheck) {
         return context.checkPermission(permissionToCheck, pid, uid) == 0;
     }
 
-    private static boolean checkSystemLocationAccess(Context context, int uid, int pid, String callingPackage) {
-        if (isLocationModeEnabled(context, UserHandle.getUserHandleForUid(uid).getIdentifier()) || isLocationBypassAllowed(context, callingPackage)) {
-            return isCurrentProfile(context, uid) || checkInteractAcrossUsersFull(context, pid, uid);
+    private static boolean checkSystemLocationAccess(
+            Context context, int uid, int pid, String callingPackage) {
+        if (isLocationModeEnabled(context, UserHandle.getUserHandleForUid(uid).getIdentifier())
+                || isLocationBypassAllowed(context, callingPackage)) {
+            return isCurrentProfile(context, uid)
+                    || checkInteractAcrossUsersFull(context, pid, uid);
         }
         return false;
     }
 
     public static boolean isLocationModeEnabled(Context context, int userId) {
-        LocationManager locationManager = (LocationManager) context.getSystemService(LocationManager.class);
+        LocationManager locationManager =
+                (LocationManager) context.getSystemService(LocationManager.class);
         if (locationManager == null) {
             Log.w(TAG, "Couldn't get location manager, denying location access");
             return false;
@@ -255,23 +359,28 @@ public final class LocationAccessPolicy {
     }
 
     public static String[] getLocationBypassPackages(Context context) {
-        return context.getResources().getStringArray(R.array.config_serviceStateLocationAllowedPackages);
+        return context.getResources()
+                .getStringArray(R.array.config_serviceStateLocationAllowedPackages);
     }
 
     private static boolean checkInteractAcrossUsersFull(Context context, int pid, int uid) {
-        return checkManifestPermission(context, pid, uid, Manifest.permission.INTERACT_ACROSS_USERS_FULL);
+        return checkManifestPermission(
+                context, pid, uid, Manifest.permission.INTERACT_ACROSS_USERS_FULL);
     }
 
     private static boolean isCurrentProfile(Context context, int uid) {
         long token = Binder.clearCallingIdentity();
         try {
-            if (UserHandle.getUserHandleForUid(uid).getIdentifier() == ActivityManager.getCurrentUser()) {
+            if (UserHandle.getUserHandleForUid(uid).getIdentifier()
+                    == ActivityManager.getCurrentUser()) {
                 Binder.restoreCallingIdentity(token);
                 return true;
             }
-            ActivityManager activityManager = (ActivityManager) context.getSystemService(ActivityManager.class);
+            ActivityManager activityManager =
+                    (ActivityManager) context.getSystemService(ActivityManager.class);
             if (activityManager != null) {
-                return activityManager.isProfileForeground(UserHandle.getUserHandleForUid(ActivityManager.getCurrentUser()));
+                return activityManager.isProfileForeground(
+                        UserHandle.getUserHandleForUid(ActivityManager.getCurrentUser()));
             }
             Binder.restoreCallingIdentity(token);
             return false;
@@ -281,7 +390,8 @@ public final class LocationAccessPolicy {
     }
 
     private static boolean isAppAtLeastSdkVersion(Context context, String pkgName, int sdkVersion) {
-        if (context.getPackageManager().getApplicationInfo(pkgName, 0).targetSdkVersion < sdkVersion) {
+        if (context.getPackageManager().getApplicationInfo(pkgName, 0).targetSdkVersion
+                < sdkVersion) {
             return false;
         }
         return true;

@@ -2,6 +2,7 @@ package android.security.keymaster;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,19 +15,22 @@ public class KeymasterArguments implements Parcelable {
     private List<KeymasterArgument> mArguments;
     private static final BigInteger UINT64_RANGE = BigInteger.ONE.shiftLeft(64);
     public static final BigInteger UINT64_MAX_VALUE = UINT64_RANGE.subtract(BigInteger.ONE);
-    public static final Parcelable.Creator<KeymasterArguments> CREATOR = new Parcelable.Creator<KeymasterArguments>() { // from class: android.security.keymaster.KeymasterArguments.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeymasterArguments createFromParcel(Parcel in) {
-            return new KeymasterArguments(in);
-        }
+    public static final Parcelable.Creator<KeymasterArguments> CREATOR =
+            new Parcelable.Creator<
+                    KeymasterArguments>() { // from class:
+                                            // android.security.keymaster.KeymasterArguments.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeymasterArguments createFromParcel(Parcel in) {
+                    return new KeymasterArguments(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KeymasterArguments[] newArray(int size) {
-            return new KeymasterArguments[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KeymasterArguments[] newArray(int size) {
+                    return new KeymasterArguments[size];
+                }
+            };
 
     public KeymasterArguments() {
         this.mArguments = new ArrayList();

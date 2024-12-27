@@ -1,6 +1,7 @@
 package android.hardware.contexthub.V1_0;
 
 import com.android.server.SecureKeyConst;
+
 import java.util.ArrayList;
 
 /* loaded from: classes2.dex */

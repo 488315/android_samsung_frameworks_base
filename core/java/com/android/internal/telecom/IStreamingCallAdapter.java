@@ -14,8 +14,7 @@ public interface IStreamingCallAdapter extends IInterface {
 
     public static class Default implements IStreamingCallAdapter {
         @Override // com.android.internal.telecom.IStreamingCallAdapter
-        public void setStreamingState(int state) throws RemoteException {
-        }
+        public void setStreamingState(int state) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IStreamingCallAdapter extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IStreamingCallAdapter {
+    public abstract static class Stub extends Binder implements IStreamingCallAdapter {
         static final int TRANSACTION_setStreamingState = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IStreamingCallAdapter extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IStreamingCallAdapter.DESCRIPTOR);
             }

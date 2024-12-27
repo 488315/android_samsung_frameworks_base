@@ -1,6 +1,5 @@
 package android.sec.enterprise;
 
-import android.sec.enterprise.EnterpriseDeviceManager;
 import android.sec.enterprise.content.SecContentProviderURI;
 import android.util.Log;
 
@@ -15,8 +14,7 @@ public class BrowserPolicy {
         public static final int BROWSER_JAVASCRIPT_SETTING = 16;
         public static final int BROWSER_POPUP_SETTING = 1;
 
-        public BrowserSetting() {
-        }
+        public BrowserSetting() {}
     }
 
     public boolean getCookiesSetting() {

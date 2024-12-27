@@ -12,6 +12,7 @@ import android.util.ArraySet;
 import android.util.Pair;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
+
 import com.android.internal.pm.pkg.component.ParsedActivity;
 import com.android.internal.pm.pkg.component.ParsedApexSystemService;
 import com.android.internal.pm.pkg.component.ParsedAttribution;
@@ -23,6 +24,7 @@ import com.android.internal.pm.pkg.component.ParsedProcess;
 import com.android.internal.pm.pkg.component.ParsedProvider;
 import com.android.internal.pm.pkg.component.ParsedService;
 import com.android.internal.pm.pkg.component.ParsedUsesPermission;
+
 import java.security.PublicKey;
 import java.util.List;
 import java.util.Map;

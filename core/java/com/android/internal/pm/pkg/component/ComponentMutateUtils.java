@@ -2,15 +2,18 @@ package com.android.internal.pm.pkg.component;
 
 /* loaded from: classes5.dex */
 public class ComponentMutateUtils {
-    public static void setMaxAspectRatio(ParsedActivity activity, int resizeMode, float maxAspectRatio) {
+    public static void setMaxAspectRatio(
+            ParsedActivity activity, int resizeMode, float maxAspectRatio) {
         ((ParsedActivityImpl) activity).setMaxAspectRatio(resizeMode, maxAspectRatio);
     }
 
-    public static void setMinAspectRatio(ParsedActivity activity, int resizeMode, float minAspectRatio) {
+    public static void setMinAspectRatio(
+            ParsedActivity activity, int resizeMode, float minAspectRatio) {
         ((ParsedActivityImpl) activity).setMinAspectRatio(resizeMode, minAspectRatio);
     }
 
-    public static void setSupportsSizeChanges(ParsedActivity activity, boolean supportsSizeChanges) {
+    public static void setSupportsSizeChanges(
+            ParsedActivity activity, boolean supportsSizeChanges) {
         ((ParsedActivityImpl) activity).setSupportsSizeChanges(supportsSizeChanges);
     }
 
@@ -50,7 +53,8 @@ public class ComponentMutateUtils {
         ((ParsedPermissionImpl) permission).setProtectionLevel(protectionLevel);
     }
 
-    public static void setParsedPermissionGroup(ParsedPermission permission, ParsedPermissionGroup permissionGroup) {
+    public static void setParsedPermissionGroup(
+            ParsedPermission permission, ParsedPermissionGroup permissionGroup) {
         ((ParsedPermissionImpl) permission).setParsedPermissionGroup(permissionGroup);
     }
 

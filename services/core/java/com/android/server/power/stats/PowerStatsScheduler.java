@@ -2,12 +2,13 @@ package com.android.server.power.stats;
 
 import android.app.AlarmManager;
 import android.os.Handler;
+
 import com.android.internal.os.Clock;
 import com.android.internal.os.MonotonicClock;
 import com.android.server.am.BatteryStatsService$$ExternalSyntheticLambda14;
 import com.android.server.am.BatteryStatsService$$ExternalSyntheticLambda15;
 import com.android.server.am.BatteryStatsService$$ExternalSyntheticLambda16;
-import com.android.server.power.stats.PowerStatsSpan;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -31,7 +32,20 @@ public final class PowerStatsScheduler {
     public static final long MINUTE_IN_MILLIS = TimeUnit.MINUTES.toMillis(1);
     public static final long HOUR_IN_MILLIS = TimeUnit.HOURS.toMillis(1);
 
-    public PowerStatsScheduler(BatteryStatsService$$ExternalSyntheticLambda15 batteryStatsService$$ExternalSyntheticLambda15, PowerStatsAggregator powerStatsAggregator, long j, long j2, PowerStatsStore powerStatsStore, BatteryStatsService$$ExternalSyntheticLambda14 batteryStatsService$$ExternalSyntheticLambda14, Clock clock, MonotonicClock monotonicClock, BatteryStatsService$$ExternalSyntheticLambda16 batteryStatsService$$ExternalSyntheticLambda16, Handler handler) {
+    public PowerStatsScheduler(
+            BatteryStatsService$$ExternalSyntheticLambda15
+                    batteryStatsService$$ExternalSyntheticLambda15,
+            PowerStatsAggregator powerStatsAggregator,
+            long j,
+            long j2,
+            PowerStatsStore powerStatsStore,
+            BatteryStatsService$$ExternalSyntheticLambda14
+                    batteryStatsService$$ExternalSyntheticLambda14,
+            Clock clock,
+            MonotonicClock monotonicClock,
+            BatteryStatsService$$ExternalSyntheticLambda16
+                    batteryStatsService$$ExternalSyntheticLambda16,
+            Handler handler) {
         this.mPowerStatsAggregator = powerStatsAggregator;
         this.mAggregatedPowerStatsSpanDuration = j;
         this.mPowerStatsAggregationPeriod = j2;
@@ -41,7 +55,8 @@ public final class PowerStatsScheduler {
         this.mMonotonicClock = monotonicClock;
         this.mHandler = handler;
         this.mPowerStatsCollector = batteryStatsService$$ExternalSyntheticLambda15;
-        this.mEarliestAvailableBatteryHistoryTimeMs = batteryStatsService$$ExternalSyntheticLambda16;
+        this.mEarliestAvailableBatteryHistoryTimeMs =
+                batteryStatsService$$ExternalSyntheticLambda16;
     }
 
     public static long alignToWallClock(long j, long j2, long j3, long j4) {
@@ -95,14 +110,24 @@ public final class PowerStatsScheduler {
     }
 
     public final void scheduleNextPowerStatsAggregation() {
-        ((AlarmManager) this.mAlarmScheduler.f$0.mContext.getSystemService(AlarmManager.class)).set(3, this.mClock.elapsedRealtime() + this.mPowerStatsAggregationPeriod, "PowerStats", new AlarmManager.OnAlarmListener() { // from class: com.android.server.power.stats.PowerStatsScheduler$$ExternalSyntheticLambda4
-            @Override // android.app.AlarmManager.OnAlarmListener
-            public final void onAlarm() {
-                PowerStatsScheduler powerStatsScheduler = PowerStatsScheduler.this;
-                powerStatsScheduler.schedulePowerStatsAggregation();
-                powerStatsScheduler.mHandler.post(new PowerStatsScheduler$$ExternalSyntheticLambda0(powerStatsScheduler, 1));
-            }
-        }, this.mHandler);
+        ((AlarmManager) this.mAlarmScheduler.f$0.mContext.getSystemService(AlarmManager.class))
+                .set(
+                        3,
+                        this.mClock.elapsedRealtime() + this.mPowerStatsAggregationPeriod,
+                        "PowerStats",
+                        new AlarmManager
+                                .OnAlarmListener() { // from class:
+                                                     // com.android.server.power.stats.PowerStatsScheduler$$ExternalSyntheticLambda4
+                            @Override // android.app.AlarmManager.OnAlarmListener
+                            public final void onAlarm() {
+                                PowerStatsScheduler powerStatsScheduler = PowerStatsScheduler.this;
+                                powerStatsScheduler.schedulePowerStatsAggregation();
+                                powerStatsScheduler.mHandler.post(
+                                        new PowerStatsScheduler$$ExternalSyntheticLambda0(
+                                                powerStatsScheduler, 1));
+                            }
+                        },
+                        this.mHandler);
     }
 
     public void schedulePowerStatsAggregation() {

@@ -18,6 +18,7 @@ import android.os.UserHandle;
 import android.util.ArrayMap;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
@@ -30,9 +31,6 @@ import com.android.server.PinnerService$$ExternalSyntheticOutline0;
 import com.android.server.SystemUpdateManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.alarm.AlarmManagerService;
-import com.android.server.am.FreecessController;
-import com.android.server.am.MARsPolicyManager;
-import com.android.server.am.ServiceRecord;
 import com.android.server.am.mars.MARsDebugConfig;
 import com.android.server.am.mars.filter.filter.ActiveMusicRecordFilter;
 import com.android.server.am.mars.filter.filter.BlueToothConnectedFilter;
@@ -41,7 +39,9 @@ import com.android.server.am.mars.netlink.NetlinkSocket;
 import com.android.server.am.mars.netlink.StructFreeCessMsg;
 import com.android.server.am.mars.util.UidStateMgr;
 import com.android.server.wm.WindowManagerService;
+
 import com.samsung.android.knox.analytics.service.EventQueue;
+
 import java.io.FileDescriptor;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -74,7 +74,8 @@ public final class FreecessHandler {
                     return;
                 }
                 int i = data.getInt("uid", -1);
-                BlueToothConnectedFilter blueToothConnectedFilter = BlueToothConnectedFilter.BlueToothConnectedFilterHolder.INSTANCE;
+                BlueToothConnectedFilter blueToothConnectedFilter =
+                        BlueToothConnectedFilter.BlueToothConnectedFilterHolder.INSTANCE;
                 Integer valueOf = Integer.valueOf(i);
                 List list = blueToothConnectedFilter.mBTTargetList;
                 if (list == null || !list.contains(valueOf)) {
@@ -164,17 +165,21 @@ public final class FreecessHandler {
                     return;
                 }
                 boolean z = FreecessController.IS_MINIMIZE_OLAF_LOCK;
-                FreecessController freecessController = FreecessController.FreecessControllerHolder.INSTANCE;
+                FreecessController freecessController =
+                        FreecessController.FreecessControllerHolder.INSTANCE;
                 freecessController.getClass();
                 Iterator<Integer> it = integerArrayList.iterator();
                 while (it.hasNext()) {
-                    ProcessRecord processRecordFromPidLocked = freecessController.mAm.getProcessRecordFromPidLocked(it.next().intValue());
+                    ProcessRecord processRecordFromPidLocked =
+                            freecessController.mAm.getProcessRecordFromPidLocked(
+                                    it.next().intValue());
                     if (processRecordFromPidLocked != null) {
                         ActivityManagerService activityManagerService = freecessController.mAm;
                         ActivityManagerService.boostPriorityForLockedSection();
                         synchronized (activityManagerService) {
                             try {
-                                Handler handler = freecessController.mAm.mBroadcastQueue.mLocalHandler;
+                                Handler handler =
+                                        freecessController.mAm.mBroadcastQueue.mLocalHandler;
                                 handler.removeMessages(6, processRecordFromPidLocked);
                                 handler.obtainMessage(6, processRecordFromPidLocked).sendToTarget();
                             } finally {
@@ -191,16 +196,31 @@ public final class FreecessHandler {
                     if (data != null) {
                         int i2 = data.getInt("uid");
                         boolean z2 = FreecessController.IS_MINIMIZE_OLAF_LOCK;
-                        FreecessController freecessController2 = FreecessController.FreecessControllerHolder.INSTANCE;
+                        FreecessController freecessController2 =
+                                FreecessController.FreecessControllerHolder.INSTANCE;
                         ActivityManagerService activityManagerService2 = freecessController2.mAm;
                         ActivityManagerService.boostPriorityForLockedSection();
                         synchronized (activityManagerService2) {
                             try {
-                                for (int size = freecessController2.mAm.mServices.mRestartingServices.size() - 1; size >= 0; size--) {
-                                    ServiceRecord serviceRecord = (ServiceRecord) freecessController2.mAm.mServices.mRestartingServices.get(size);
-                                    if (serviceRecord != null && (applicationInfo = serviceRecord.appInfo) != null && applicationInfo.uid == i2 && freecessController2.mAm.mHandler.hasCallbacks(serviceRecord.restarter)) {
-                                        freecessController2.mAm.mHandler.removeCallbacks(serviceRecord.restarter);
-                                        freecessController2.mAm.pendingScheduleServiceRestart(serviceRecord.appInfo.uid, serviceRecord);
+                                for (int size =
+                                                freecessController2.mAm.mServices
+                                                                .mRestartingServices.size()
+                                                        - 1;
+                                        size >= 0;
+                                        size--) {
+                                    ServiceRecord serviceRecord =
+                                            (ServiceRecord)
+                                                    freecessController2.mAm.mServices
+                                                            .mRestartingServices.get(size);
+                                    if (serviceRecord != null
+                                            && (applicationInfo = serviceRecord.appInfo) != null
+                                            && applicationInfo.uid == i2
+                                            && freecessController2.mAm.mHandler.hasCallbacks(
+                                                    serviceRecord.restarter)) {
+                                        freecessController2.mAm.mHandler.removeCallbacks(
+                                                serviceRecord.restarter);
+                                        freecessController2.mAm.pendingScheduleServiceRestart(
+                                                serviceRecord.appInfo.uid, serviceRecord);
                                     }
                                 }
                             } finally {
@@ -213,14 +233,28 @@ public final class FreecessHandler {
                 case 33:
                     ServiceRecord serviceRecord2 = (ServiceRecord) message.obj;
                     boolean z3 = FreecessController.IS_MINIMIZE_OLAF_LOCK;
-                    ((ArrayList) FreecessController.FreecessControllerHolder.INSTANCE.mPendingRemoveConnectionMap.computeIfAbsent(Integer.valueOf(serviceRecord2.appInfo.uid), new FreecessController$$ExternalSyntheticLambda6(0))).add(serviceRecord2);
+                    ((ArrayList)
+                                    FreecessController.FreecessControllerHolder.INSTANCE
+                                            .mPendingRemoveConnectionMap.computeIfAbsent(
+                                            Integer.valueOf(serviceRecord2.appInfo.uid),
+                                            new FreecessController$$ExternalSyntheticLambda6(0)))
+                            .add(serviceRecord2);
                     return;
                 case 34:
                     if (data != null) {
                         int i3 = data.getInt("uid");
                         boolean z4 = FreecessController.IS_MINIMIZE_OLAF_LOCK;
-                        FreecessController freecessController3 = FreecessController.FreecessControllerHolder.INSTANCE;
-                        if (freecessController3.mPendingRemoveConnectionMap.get(Integer.valueOf(i3)) == null || (arrayList = (ArrayList) freecessController3.mPendingRemoveConnectionMap.remove(Integer.valueOf(i3))) == null || arrayList.isEmpty()) {
+                        FreecessController freecessController3 =
+                                FreecessController.FreecessControllerHolder.INSTANCE;
+                        if (freecessController3.mPendingRemoveConnectionMap.get(Integer.valueOf(i3))
+                                        == null
+                                || (arrayList =
+                                                (ArrayList)
+                                                        freecessController3
+                                                                .mPendingRemoveConnectionMap.remove(
+                                                                Integer.valueOf(i3)))
+                                        == null
+                                || arrayList.isEmpty()) {
                             return;
                         }
                         Iterator it2 = arrayList.iterator();
@@ -228,7 +262,9 @@ public final class FreecessHandler {
                             ServiceRecord serviceRecord3 = (ServiceRecord) it2.next();
                             ActiveServices activeServices = freecessController3.mAm.mServices;
                             activeServices.getClass();
-                            Slog.d("ActivityManager", "unpendingRemoveConnection: s=" + serviceRecord3);
+                            Slog.d(
+                                    "ActivityManager",
+                                    "unpendingRemoveConnection: s=" + serviceRecord3);
                             ActivityManagerService activityManagerService3 = activeServices.mAm;
                             ActivityManagerService.boostPriorityForLockedSection();
                             synchronized (activityManagerService3) {
@@ -238,8 +274,13 @@ public final class FreecessHandler {
                                     serviceRecord3.pendingRemoveConnections.clear();
                                     Iterator it3 = arrayList2.iterator();
                                     while (it3.hasNext()) {
-                                        ServiceRecord.removeConnectionItem removeconnectionitem = (ServiceRecord.removeConnectionItem) it3.next();
-                                        activeServices.removeConnectionLocked(removeconnectionitem.c, removeconnectionitem.skipApp, removeconnectionitem.skipAct, removeconnectionitem.enqueueOomAdj);
+                                        ServiceRecord.removeConnectionItem removeconnectionitem =
+                                                (ServiceRecord.removeConnectionItem) it3.next();
+                                        activeServices.removeConnectionLocked(
+                                                removeconnectionitem.c,
+                                                removeconnectionitem.skipApp,
+                                                removeconnectionitem.skipAct,
+                                                removeconnectionitem.enqueueOomAdj);
                                     }
                                 } finally {
                                 }
@@ -274,9 +315,16 @@ public final class FreecessHandler {
             }
             FreecessController freecessController = this.mFreecessController;
             freecessController.getClass();
-            Slog.w("FreecessController", "!@*** unFreezeAllPackages for watchdog : Start reset all state unfreezing!!! - MARs FW Side (reason: " + string + ")");
+            Slog.w(
+                    "FreecessController",
+                    "!@*** unFreezeAllPackages for watchdog : Start reset all state unfreezing!!! -"
+                        + " MARs FW Side (reason: "
+                            + string
+                            + ")");
             if ("SoftReset".equals(string)) {
-                ((PowerManager) freecessController.mContext.getSystemService("power")).newWakeLock(1, string).acquire(2000L);
+                ((PowerManager) freecessController.mContext.getSystemService("power"))
+                        .newWakeLock(1, string)
+                        .acquire(2000L);
             }
             freecessController.unFreezePackage(string);
             if (freecessController.sendFreecessMsg2kernel(3, -1, 2, -1) > 0) {
@@ -295,9 +343,11 @@ public final class FreecessHandler {
             if (freecessController.mIsScreenOnFreecessEnabled) {
                 synchronized (MARsPolicyManager.MARsLock) {
                     try {
-                        SparseArray sparseArray = freecessController.mFreecessManagedPackages.mUidMap;
+                        SparseArray sparseArray =
+                                freecessController.mFreecessManagedPackages.mUidMap;
                         for (int i = 0; i < sparseArray.size(); i++) {
-                            FreecessPkgStatus freecessPkgStatus = (FreecessPkgStatus) sparseArray.valueAt(i);
+                            FreecessPkgStatus freecessPkgStatus =
+                                    (FreecessPkgStatus) sparseArray.valueAt(i);
                             if (freecessPkgStatus != null) {
                                 freecessPkgStatus.freezedState = 1;
                             }
@@ -306,7 +356,12 @@ public final class FreecessHandler {
                     }
                 }
             }
-            PinnerService$$ExternalSyntheticOutline0.m("!@*** unFreezeAllPackages for watchdog : End reset all state unfreezing!!! - MARs FW Side (reason: ", string, ")", "FreecessController");
+            PinnerService$$ExternalSyntheticOutline0.m(
+                    "!@*** unFreezeAllPackages for watchdog : End reset all state unfreezing!!! -"
+                        + " MARs FW Side (reason: ",
+                    string,
+                    ")",
+                    "FreecessController");
         }
 
         public final void handleFreecessResetState() {
@@ -321,11 +376,14 @@ public final class FreecessHandler {
                 freecessController.getClass();
                 synchronized (MARsPolicyManager.MARsLock) {
                     try {
-                        FreecessPkgStatus packageStatus = freecessController.getPackageStatus(i, string);
+                        FreecessPkgStatus packageStatus =
+                                freecessController.getPackageStatus(i, string);
                         if (packageStatus == null) {
                             return;
                         }
-                        if (packageStatus.freezedState != 2 && (!freecessController.mScreenOn || !packageStatus.freezedRecord.isLcdOffFreezed)) {
+                        if (packageStatus.freezedState != 2
+                                && (!freecessController.mScreenOn
+                                        || !packageStatus.freezedRecord.isLcdOffFreezed)) {
                             packageStatus.freezedState = 1;
                             FreecessHandler freecessHandler = FreecessHandlerHolder.INSTANCE;
                             freecessHandler.removeBgTriggerMsgByObj(1, packageStatus.name);
@@ -333,11 +391,13 @@ public final class FreecessHandler {
                             freecessHandler.removeBgTriggerMsgByObj(28, packageStatus.name);
                         }
                         if (packageStatus.freezedRecord.isFrozen) {
-                            freecessController.unFreezePackage(packageStatus.userId, packageStatus.name, "UidActive");
+                            freecessController.unFreezePackage(
+                                    packageStatus.userId, packageStatus.name, "UidActive");
                         } else {
                             packageStatus.freezedState = 1;
                         }
-                        FreecessHandlerHolder.INSTANCE.removeBgTriggerMsgByObj(4, packageStatus.name);
+                        FreecessHandlerHolder.INSTANCE.removeBgTriggerMsgByObj(
+                                4, packageStatus.name);
                     } finally {
                     }
                 }
@@ -394,24 +454,31 @@ public final class FreecessHandler {
                 FreecessController freecessController3 = this.mFreecessController;
                 boolean z3 = i4 == 1;
                 if (freecessController3.mLocalPowerManager == null) {
-                    freecessController3.mLocalPowerManager = (PowerManagerInternal) LocalServices.getService(PowerManagerInternal.class);
+                    freecessController3.mLocalPowerManager =
+                            (PowerManagerInternal)
+                                    LocalServices.getService(PowerManagerInternal.class);
                 }
-                int wakeLockEnableDisable = freecessController3.mLocalPowerManager.setWakeLockEnableDisable(i2, z3);
+                int wakeLockEnableDisable =
+                        freecessController3.mLocalPowerManager.setWakeLockEnableDisable(i2, z3);
                 if (wakeLockEnableDisable == 1) {
                     StringBuilder sb = new StringBuilder();
-                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(sb, z3 ? "disable" : "enable", " frozen app (", string, ",");
-                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb, i2, ") wakelock.", "FreecessController");
+                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                            sb, z3 ? "disable" : "enable", " frozen app (", string, ",");
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            sb, i2, ") wakelock.", "FreecessController");
                 } else if (wakeLockEnableDisable == 2) {
                     if (z) {
                         if (freecessController3.mCalmModeEnabled) {
                             return;
                         }
-                        freecessController3.unFreezePackage(UserHandle.getUserId(i2), string, "Wakelock");
+                        freecessController3.unFreezePackage(
+                                UserHandle.getUserId(i2), string, "Wakelock");
                     } else {
                         if (UidStateMgr.UidStateMgrHolder.INSTANCE.isUidIdle(i2)) {
                             return;
                         }
-                        freecessController3.unFreezePackage(UserHandle.getUserId(i2), string, "Wakelock");
+                        freecessController3.unFreezePackage(
+                                UserHandle.getUserId(i2), string, "Wakelock");
                     }
                 }
             }
@@ -424,34 +491,47 @@ public final class FreecessHandler {
                 int i = this.extras.getInt("uid", -1);
                 FreecessController freecessController = this.mFreecessController;
                 if (freecessController.mAlarmManagerInternal == null) {
-                    freecessController.mAlarmManagerInternal = (AlarmManagerService.LocalService) LocalServices.getService(AlarmManagerService.LocalService.class);
+                    freecessController.mAlarmManagerInternal =
+                            (AlarmManagerService.LocalService)
+                                    LocalServices.getService(
+                                            AlarmManagerService.LocalService.class);
                 }
-                AlarmManagerService.LocalService localService = freecessController.mAlarmManagerInternal;
+                AlarmManagerService.LocalService localService =
+                        freecessController.mAlarmManagerInternal;
                 AlarmManagerService.this.mHandler.removeMessages(21);
                 AlarmManagerService.this.mHandler.sendEmptyMessageDelayed(21, 200L);
                 if (!z) {
                     synchronized (AlarmManagerService.this.mLock) {
                         AlarmManagerService alarmManagerService = AlarmManagerService.this;
-                        ArrayList arrayList = (ArrayList) alarmManagerService.mPendingMARsRestrictedAlarms.get(i);
+                        ArrayList arrayList =
+                                (ArrayList) alarmManagerService.mPendingMARsRestrictedAlarms.get(i);
                         if (arrayList != null && arrayList.size() != 0) {
-                            AnyMotionDetector$$ExternalSyntheticOutline0.m(i, "Sending alarms blocked by MARsFreecess for uid ", "AlarmManager");
+                            AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                                    i,
+                                    "Sending alarms blocked by MARsFreecess for uid ",
+                                    "AlarmManager");
                             alarmManagerService.mPendingMARsRestrictedAlarms.remove(i);
                             alarmManagerService.mInjector.getClass();
-                            alarmManagerService.deliverPendingBackgroundAlarmsLocked(SystemClock.elapsedRealtime(), arrayList);
+                            alarmManagerService.deliverPendingBackgroundAlarmsLocked(
+                                    SystemClock.elapsedRealtime(), arrayList);
                         }
                     }
                 }
                 if (freecessController.FREECESS_LRS_ENABLED) {
                     try {
                         if (freecessController.mLocationManager == null) {
-                            freecessController.mLocationManager = ILocationManager.Stub.asInterface(ServiceManager.getService("location"));
+                            freecessController.mLocationManager =
+                                    ILocationManager.Stub.asInterface(
+                                            ServiceManager.getService("location"));
                         }
                         ILocationManager iLocationManager = freecessController.mLocationManager;
                         if (iLocationManager != null) {
                             iLocationManager.onFreezeStateChanged(z, i);
                         }
                     } catch (RemoteException e) {
-                        StringBuilder m = AccessibilityManagerService$$ExternalSyntheticOutline0.m(i, "Error occurred while setLRs(", ", ", "): ", z);
+                        StringBuilder m =
+                                AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                                        i, "Error occurred while setLRs(", ", ", "): ", z);
                         m.append(e);
                         Slog.e("FreecessController", m.toString());
                     }
@@ -473,26 +553,39 @@ public final class FreecessHandler {
                     if (this.extras != null) {
                         FreecessController freecessController = this.mFreecessController;
                         freecessController.updateRunningLocationPackages();
-                        ActiveMusicRecordFilter.ActiveMusicRecordFilterHolder.INSTANCE.getUidListUsingAudio();
-                        freecessController.triggerLcdOnFreeze(this.extras.getInt("uid", -1), this.extras.getString("packageName", null), this.extras.getString("reason", null));
+                        ActiveMusicRecordFilter.ActiveMusicRecordFilterHolder.INSTANCE
+                                .getUidListUsingAudio();
+                        freecessController.triggerLcdOnFreeze(
+                                this.extras.getInt("uid", -1),
+                                this.extras.getString("packageName", null),
+                                this.extras.getString("reason", null));
                         return;
                     }
                     return;
                 case 2:
                     if (data != null) {
-                        this.mFreecessController.lcdOnFreezedStateChange(1, this.extras.getInt("userId", -1), this.extras.getString("reason", ""), data.getString("packageName", ""));
+                        this.mFreecessController.lcdOnFreezedStateChange(
+                                1,
+                                this.extras.getInt("userId", -1),
+                                this.extras.getString("reason", ""),
+                                data.getString("packageName", ""));
                         return;
                     }
                     return;
                 case 3:
                     if (data != null) {
-                        this.mFreecessController.lcdOnFreezedStateChange(2, this.extras.getInt("userId", -1), this.extras.getString("reason", ""), data.getString("packageName", ""));
+                        this.mFreecessController.lcdOnFreezedStateChange(
+                                2,
+                                this.extras.getInt("userId", -1),
+                                this.extras.getString("reason", ""),
+                                data.getString("packageName", ""));
                         return;
                     }
                     return;
                 case 4:
                     if (data != null) {
-                        this.mFreecessController.lcdOnFreezePackage(this.extras.getInt("uid", -1), data.getString("packageName", ""));
+                        this.mFreecessController.lcdOnFreezePackage(
+                                this.extras.getInt("uid", -1), data.getString("packageName", ""));
                         return;
                     }
                     return;
@@ -568,16 +661,24 @@ public final class FreecessHandler {
                         FreecessController freecessController5 = this.mFreecessController;
                         FreecessPkgStatus packageStatus = freecessController5.getPackageStatus(i4);
                         if (packageStatus == null || !packageStatus.freezedRecord.isFrozen) {
-                            DeviceIdleController$$ExternalSyntheticOutline0.m(i4, "postMonitoringFrozenProcs: u=", " is not frozen, return.", "FreecessController");
+                            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                                    i4,
+                                    "postMonitoringFrozenProcs: u=",
+                                    " is not frozen, return.",
+                                    "FreecessController");
                             return;
                         }
-                        ArrayList pidList = freecessController5.mMapFrozenUidPidList.getPidList(Integer.valueOf(i4));
+                        ArrayList pidList =
+                                freecessController5.mMapFrozenUidPidList.getPidList(
+                                        Integer.valueOf(i4));
                         StringBuilder sb = new StringBuilder();
-                        if (freecessController5.canUidBeFrozen(pidList, new FreecessController$$ExternalSyntheticLambda1(1, sb))) {
+                        if (freecessController5.canUidBeFrozen(
+                                pidList, new FreecessController$$ExternalSyntheticLambda1(1, sb))) {
                             return;
                         }
                         String sb2 = sb.toString();
-                        StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("unfreeze ", string2, "(");
+                        StringBuilder m =
+                                DumpUtils$$ExternalSyntheticOutline0.m("unfreeze ", string2, "(");
                         int i5 = packageStatus.uid;
                         m.append(i5);
                         m.append(")in postMonitoringFrozenProcs. reason : ");
@@ -589,14 +690,16 @@ public final class FreecessHandler {
                     return;
                 case 16:
                     if (data != null) {
-                        this.mFreecessController.deleteRemovedPackage(this.extras.getInt("uid", -1), data.getString("packageName", ""));
+                        this.mFreecessController.deleteRemovedPackage(
+                                this.extras.getInt("uid", -1), data.getString("packageName", ""));
                         return;
                     }
                     return;
                 case 17:
                     if (data != null) {
                         data.getString("packageName", "");
-                        this.mFreecessController.unFreezeSpecialPackage(this.extras.getInt("uid", -1), this.extras.getString("reason", ""));
+                        this.mFreecessController.unFreezeSpecialPackage(
+                                this.extras.getInt("uid", -1), this.extras.getString("reason", ""));
                         return;
                     }
                     return;
@@ -623,11 +726,15 @@ public final class FreecessHandler {
                 case 24:
                     FreecessController freecessController6 = this.mFreecessController;
                     ActivityManagerService activityManagerService = freecessController6.mAm;
-                    if (activityManagerService != null && (windowManagerService = activityManagerService.mWindowManager) != null) {
+                    if (activityManagerService != null
+                            && (windowManagerService = activityManagerService.mWindowManager)
+                                    != null) {
                         str = windowManagerService.getRequestFocusPkg();
                     }
-                    if (freecessController6.isFreezedPackage(freecessController6.mContext.getUserId(), str)) {
-                        freecessController6.unFreezePackage(freecessController6.mContext.getUserId(), str, "has Focus");
+                    if (freecessController6.isFreezedPackage(
+                            freecessController6.mContext.getUserId(), str)) {
+                        freecessController6.unFreezePackage(
+                                freecessController6.mContext.getUserId(), str, "has Focus");
                         return;
                     }
                     return;
@@ -640,7 +747,8 @@ public final class FreecessHandler {
                             return;
                         }
                         boolean z2 = MARsPolicyManager.MARs_ENABLE;
-                        MARsPolicyManager.MARsPolicyManagerHolder.INSTANCE.reportStatusWithMARs(i6, string3, false);
+                        MARsPolicyManager.MARsPolicyManagerHolder.INSTANCE.reportStatusWithMARs(
+                                i6, string3, false);
                         return;
                     }
                     return;
@@ -657,23 +765,47 @@ public final class FreecessHandler {
                         FreecessController freecessController7 = this.mFreecessController;
                         freecessController7.getClass();
                         try {
-                            FreecessPkgStatus packageStatus2 = freecessController7.getPackageStatus(i8, string4);
+                            FreecessPkgStatus packageStatus2 =
+                                    freecessController7.getPackageStatus(i8, string4);
                             if (packageStatus2 == null) {
                                 return;
                             }
                             String str2 = packageStatus2.name;
-                            if (freecessController7.mAm != null && freecessController7.mIsQuickFreezeEnabled && !UidStateMgr.UidStateMgrHolder.INSTANCE.isUidIdle(packageStatus2.uid) && !z3) {
+                            if (freecessController7.mAm != null
+                                    && freecessController7.mIsQuickFreezeEnabled
+                                    && !UidStateMgr.UidStateMgrHolder.INSTANCE.isUidIdle(
+                                            packageStatus2.uid)
+                                    && !z3) {
                                 if (MARsDebugConfig.DEBUG_ENG) {
-                                    Slog.d("FreecessController", "Try to make pkg idle for fz: (" + str2 + ", " + i8 + ").");
+                                    Slog.d(
+                                            "FreecessController",
+                                            "Try to make pkg idle for fz: ("
+                                                    + str2
+                                                    + ", "
+                                                    + i8
+                                                    + ").");
                                 }
                                 freecessController7.mAm.makePackageIdle(str2, i8);
                             }
                             if (freecessController7.mIsQuickFreezeEnabled) {
-                                if (freecessController7.mAm.checkProcDiedOrComponentExecutingForFreeze(freecessController7.getAllRunningPackagePids(i7, true), new ArrayList()) == 2) {
+                                if (freecessController7.mAm
+                                                .checkProcDiedOrComponentExecutingForFreeze(
+                                                        freecessController7
+                                                                .getAllRunningPackagePids(i7, true),
+                                                        new ArrayList())
+                                        == 2) {
                                     if (MARsDebugConfig.DEBUG_ENG) {
-                                        Slog.d("FreecessController", "<" + i7 + ", " + str2 + "> is still ES after making idle, scheduling retry.");
+                                        Slog.d(
+                                                "FreecessController",
+                                                "<"
+                                                        + i7
+                                                        + ", "
+                                                        + str2
+                                                        + "> is still ES after making idle,"
+                                                        + " scheduling retry.");
                                     }
-                                    FreecessHandlerHolder.INSTANCE.sendMakePkgIdleMsg(packageStatus2.name, i7, true, i8, string5);
+                                    FreecessHandlerHolder.INSTANCE.sendMakePkgIdleMsg(
+                                            packageStatus2.name, i7, true, i8, string5);
                                     return;
                                 }
                             }
@@ -681,12 +813,15 @@ public final class FreecessHandler {
                                 return;
                             }
                             if (MARsDebugConfig.DEBUG_ENG) {
-                                Slog.d("FreecessController", "<" + i7 + ", " + string4 + "> Service stopped, continue.");
+                                Slog.d(
+                                        "FreecessController",
+                                        "<" + i7 + ", " + string4 + "> Service stopped, continue.");
                             }
                             FreecessHandlerHolder.INSTANCE.sendChangeToFrozenMsg(i8, str2, string5);
                             return;
                         } catch (Exception e) {
-                            BootReceiver$$ExternalSyntheticOutline0.m(e, "makePkgIdleForLcdOn Exception : ", "FreecessController");
+                            BootReceiver$$ExternalSyntheticOutline0.m(
+                                    e, "makePkgIdleForLcdOn Exception : ", "FreecessController");
                             return;
                         }
                     }
@@ -695,32 +830,61 @@ public final class FreecessHandler {
                     if (data != null) {
                         int i9 = data.getInt("uid", -1);
                         String string6 = this.extras.getString("packageName", null);
-                        ActiveMusicRecordFilter activeMusicRecordFilter = ActiveMusicRecordFilter.ActiveMusicRecordFilterHolder.INSTANCE;
+                        ActiveMusicRecordFilter activeMusicRecordFilter =
+                                ActiveMusicRecordFilter.ActiveMusicRecordFilterHolder.INSTANCE;
                         if (activeMusicRecordFilter.mAudioManager == null) {
                             return;
                         }
                         synchronized (activeMusicRecordFilter.mSilentAudioDetectionMap) {
                             try {
-                                if (!activeMusicRecordFilter.mSilentAudioDetectionMap.containsKey(Integer.valueOf(i9))) {
-                                    ArrayMap arrayMap = activeMusicRecordFilter.mActiveMusicRecordPkgs;
-                                    if ((arrayMap != null && !arrayMap.isEmpty() && activeMusicRecordFilter.mActiveMusicRecordPkgs.containsKey(Integer.valueOf(i9))) || activeMusicRecordFilter.isUsingAudio(i9, string6)) {
-                                        synchronized (activeMusicRecordFilter.mSilentAudioDetectionMap) {
+                                if (!activeMusicRecordFilter.mSilentAudioDetectionMap.containsKey(
+                                        Integer.valueOf(i9))) {
+                                    ArrayMap arrayMap =
+                                            activeMusicRecordFilter.mActiveMusicRecordPkgs;
+                                    if ((arrayMap != null
+                                                    && !arrayMap.isEmpty()
+                                                    && activeMusicRecordFilter
+                                                            .mActiveMusicRecordPkgs.containsKey(
+                                                            Integer.valueOf(i9)))
+                                            || activeMusicRecordFilter.isUsingAudio(i9, string6)) {
+                                        synchronized (
+                                                activeMusicRecordFilter.mSilentAudioDetectionMap) {
                                             try {
                                                 if (MARsDebugConfig.DEBUG_MARs) {
-                                                    Slog.d("ActiveMusicRecordFilter", " startCheckSilentAudio :" + i9);
+                                                    Slog.d(
+                                                            "ActiveMusicRecordFilter",
+                                                            " startCheckSilentAudio :" + i9);
                                                 }
-                                                if (activeMusicRecordFilter.mSlientAudioApp.contains(Integer.valueOf(i9))) {
-                                                    activeMusicRecordFilter.mSlientAudioApp.remove(Integer.valueOf(i9));
+                                                if (activeMusicRecordFilter.mSlientAudioApp
+                                                        .contains(Integer.valueOf(i9))) {
+                                                    activeMusicRecordFilter.mSlientAudioApp.remove(
+                                                            Integer.valueOf(i9));
                                                 }
-                                                activeMusicRecordFilter.mSilentAudioDetectionMap.put(Integer.valueOf(i9), Long.valueOf(SystemClock.elapsedRealtime()));
+                                                activeMusicRecordFilter.mSilentAudioDetectionMap
+                                                        .put(
+                                                                Integer.valueOf(i9),
+                                                                Long.valueOf(
+                                                                        SystemClock
+                                                                                .elapsedRealtime()));
                                                 if (MARsDebugConfig.DEBUG_MARs) {
-                                                    Slog.d("ActiveMusicRecordFilter", "put " + i9 + " to check at : " + activeMusicRecordFilter.mSilentAudioDetectionMap.get(Integer.valueOf(i9)));
+                                                    Slog.d(
+                                                            "ActiveMusicRecordFilter",
+                                                            "put "
+                                                                    + i9
+                                                                    + " to check at : "
+                                                                    + activeMusicRecordFilter
+                                                                            .mSilentAudioDetectionMap
+                                                                            .get(
+                                                                                    Integer.valueOf(
+                                                                                            i9)));
                                                 }
                                             } finally {
                                             }
                                         }
-                                        activeMusicRecordFilter.mAudioManager.setParameters(activeMusicRecordFilter.SILENT_AUDIO_PREX + i9);
-                                        FreecessHandlerHolder.INSTANCE.sendSlientAudioDeactivated(i9, string6, 15000L);
+                                        activeMusicRecordFilter.mAudioManager.setParameters(
+                                                activeMusicRecordFilter.SILENT_AUDIO_PREX + i9);
+                                        FreecessHandlerHolder.INSTANCE.sendSlientAudioDeactivated(
+                                                i9, string6, 15000L);
                                     }
                                 }
                             } finally {
@@ -734,7 +898,8 @@ public final class FreecessHandler {
                         int i10 = data.getInt("uid", -1);
                         this.extras.getString("packageName", null);
                         this.extras.getLong("delay", 0L);
-                        ActiveMusicRecordFilter activeMusicRecordFilter2 = ActiveMusicRecordFilter.ActiveMusicRecordFilterHolder.INSTANCE;
+                        ActiveMusicRecordFilter activeMusicRecordFilter2 =
+                                ActiveMusicRecordFilter.ActiveMusicRecordFilterHolder.INSTANCE;
                         if (activeMusicRecordFilter2.mAudioManager == null) {
                             return;
                         }
@@ -742,31 +907,64 @@ public final class FreecessHandler {
                             SystemClock.elapsedRealtime();
                             synchronized (activeMusicRecordFilter2.mSilentAudioDetectionMap) {
                                 try {
-                                    if (activeMusicRecordFilter2.mSlientAudioApp.contains(Integer.valueOf(i10))) {
-                                        activeMusicRecordFilter2.mSlientAudioApp.remove(Integer.valueOf(i10));
+                                    if (activeMusicRecordFilter2.mSlientAudioApp.contains(
+                                            Integer.valueOf(i10))) {
+                                        activeMusicRecordFilter2.mSlientAudioApp.remove(
+                                                Integer.valueOf(i10));
                                     }
-                                    if (activeMusicRecordFilter2.mSilentAudioDetectionMap.containsKey(Integer.valueOf(i10))) {
-                                        long longValue = ((Long) activeMusicRecordFilter2.mSilentAudioDetectionMap.remove(Integer.valueOf(i10))).longValue();
-                                        String parameters = activeMusicRecordFilter2.mAudioManager.getParameters(activeMusicRecordFilter2.SILENT_AUDIO_PREX + i10);
+                                    if (activeMusicRecordFilter2.mSilentAudioDetectionMap
+                                            .containsKey(Integer.valueOf(i10))) {
+                                        long longValue =
+                                                ((Long)
+                                                                activeMusicRecordFilter2
+                                                                        .mSilentAudioDetectionMap
+                                                                        .remove(
+                                                                                Integer.valueOf(
+                                                                                        i10)))
+                                                        .longValue();
+                                        String parameters =
+                                                activeMusicRecordFilter2.mAudioManager
+                                                        .getParameters(
+                                                                activeMusicRecordFilter2
+                                                                                .SILENT_AUDIO_PREX
+                                                                        + i10);
                                         if (MARsDebugConfig.DEBUG_MARs) {
-                                            Slog.d("ActiveMusicRecordFilter", " endCheckSilentAudio result :" + parameters + " check time:" + (SystemClock.elapsedRealtime() - longValue));
+                                            Slog.d(
+                                                    "ActiveMusicRecordFilter",
+                                                    " endCheckSilentAudio result :"
+                                                            + parameters
+                                                            + " check time:"
+                                                            + (SystemClock.elapsedRealtime()
+                                                                    - longValue));
                                         }
-                                        synchronized (activeMusicRecordFilter2.mSilentAudioDetectionMap) {
+                                        synchronized (
+                                                activeMusicRecordFilter2.mSilentAudioDetectionMap) {
                                             try {
                                                 if ("true".equals(parameters)) {
-                                                    if (SystemClock.elapsedRealtime() - longValue >= 15000) {
-                                                        activeMusicRecordFilter2.mSlientAudioApp.add(Integer.valueOf(i10));
+                                                    if (SystemClock.elapsedRealtime() - longValue
+                                                            >= 15000) {
+                                                        activeMusicRecordFilter2.mSlientAudioApp
+                                                                .add(Integer.valueOf(i10));
                                                         boolean z4 = MARsPolicyManager.MARs_ENABLE;
-                                                        MARsPolicyManager.MARsPolicyManagerHolder.INSTANCE.addDebugInfoToHistory("DEV", "SILENT:" + i10);
+                                                        MARsPolicyManager.MARsPolicyManagerHolder
+                                                                .INSTANCE
+                                                                .addDebugInfoToHistory(
+                                                                        "DEV", "SILENT:" + i10);
                                                     }
-                                                } else if (activeMusicRecordFilter2.mSlientAudioApp.contains(Integer.valueOf(i10))) {
-                                                    activeMusicRecordFilter2.mSlientAudioApp.remove(Integer.valueOf(i10));
+                                                } else if (activeMusicRecordFilter2.mSlientAudioApp
+                                                        .contains(Integer.valueOf(i10))) {
+                                                    activeMusicRecordFilter2.mSlientAudioApp.remove(
+                                                            Integer.valueOf(i10));
                                                 }
                                             } finally {
                                             }
                                         }
                                         if (MARsDebugConfig.DEBUG_MARs) {
-                                            Slog.d("ActiveMusicRecordFilter", "mSlientAudioApp has " + activeMusicRecordFilter2.mSlientAudioApp.toString());
+                                            Slog.d(
+                                                    "ActiveMusicRecordFilter",
+                                                    "mSlientAudioApp has "
+                                                            + activeMusicRecordFilter2
+                                                                    .mSlientAudioApp.toString());
                                             return;
                                         }
                                         return;
@@ -776,7 +974,10 @@ public final class FreecessHandler {
                                 }
                             }
                         } catch (Exception e2) {
-                            PackageWatchdog$BootThreshold$$ExternalSyntheticOutline0.m(e2, " endCheckSilentAudio exception :", "ActiveMusicRecordFilter");
+                            PackageWatchdog$BootThreshold$$ExternalSyntheticOutline0.m(
+                                    e2,
+                                    " endCheckSilentAudio exception :",
+                                    "ActiveMusicRecordFilter");
                             return;
                         }
                     }
@@ -794,9 +995,12 @@ public final class FreecessHandler {
                 freecessController.getClass();
                 synchronized (MARsPolicyManager.MARsLock) {
                     try {
-                        FreecessPkgStatus packageStatus = freecessController.getPackageStatus(i, string);
-                        if (packageStatus != null && !freecessController.freezeForCalmMode(packageStatus, string2)) {
-                            FreecessHandlerHolder.INSTANCE.sendCalmModeRepeatMsg(i, string, string2);
+                        FreecessPkgStatus packageStatus =
+                                freecessController.getPackageStatus(i, string);
+                        if (packageStatus != null
+                                && !freecessController.freezeForCalmMode(packageStatus, string2)) {
+                            FreecessHandlerHolder.INSTANCE.sendCalmModeRepeatMsg(
+                                    i, string, string2);
                         }
                     } finally {
                     }
@@ -817,8 +1021,14 @@ public final class FreecessHandler {
                     try {
                         SparseArray clone = freecessController.mFreezedPackages.mUidMap.clone();
                         for (int i = 0; i < clone.size(); i++) {
-                            FreecessPkgStatus freecessPkgStatus = (FreecessPkgStatus) clone.valueAt(i);
-                            if (WidgetPkgFilter.WidgetPkgFilterHolder.INSTANCE.filter(freecessPkgStatus.userId, freecessPkgStatus.uid, 4, freecessPkgStatus.name) > 0) {
+                            FreecessPkgStatus freecessPkgStatus =
+                                    (FreecessPkgStatus) clone.valueAt(i);
+                            if (WidgetPkgFilter.WidgetPkgFilterHolder.INSTANCE.filter(
+                                            freecessPkgStatus.userId,
+                                            freecessPkgStatus.uid,
+                                            4,
+                                            freecessPkgStatus.name)
+                                    > 0) {
                                 freecessController.unFreezeAction(freecessPkgStatus, string, false);
                             }
                         }
@@ -831,8 +1041,11 @@ public final class FreecessHandler {
                 try {
                     SparseArray clone2 = freecessController.mFreezedPackages.mUidMap.clone();
                     for (int i2 = 0; i2 < clone2.size(); i2++) {
-                        FreecessPkgStatus freecessPkgStatus2 = (FreecessPkgStatus) clone2.valueAt(i2);
-                        if (freecessPkgStatus2.freezedRecord.isLcdOffFreezed && !UidStateMgr.UidStateMgrHolder.INSTANCE.isUidIdle(freecessPkgStatus2.uid)) {
+                        FreecessPkgStatus freecessPkgStatus2 =
+                                (FreecessPkgStatus) clone2.valueAt(i2);
+                        if (freecessPkgStatus2.freezedRecord.isLcdOffFreezed
+                                && !UidStateMgr.UidStateMgrHolder.INSTANCE.isUidIdle(
+                                        freecessPkgStatus2.uid)) {
                             freecessController.unFreezeAction(freecessPkgStatus2, string, false);
                         }
                     }
@@ -862,21 +1075,50 @@ public final class FreecessHandler {
                 Method dump skipped, instructions count: 314
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.FreecessHandler.NetLinkReceiverThread.run():void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.am.FreecessHandler.NetLinkReceiverThread.run():void");
         }
     }
 
     public static void receiveNetLinkInformationContinously() {
         while (true) {
             boolean z = FreecessController.IS_MINIMIZE_OLAF_LOCK;
-            FreecessController freecessController = FreecessController.FreecessControllerHolder.INSTANCE;
+            FreecessController freecessController =
+                    FreecessController.FreecessControllerHolder.INSTANCE;
             freecessController.getClass();
             try {
                 FileDescriptor fileDescriptor = freecessController.mSendRecvNetLinkFd;
                 if (fileDescriptor != null) {
-                    StructFreeCessMsg parse = StructFreeCessMsg.parse(NetlinkSocket.recvMessage(fileDescriptor, FreecessController.DEFAULT_RECV_BUFSIZE, 5000000000L));
+                    StructFreeCessMsg parse =
+                            StructFreeCessMsg.parse(
+                                    NetlinkSocket.recvMessage(
+                                            fileDescriptor,
+                                            FreecessController.DEFAULT_RECV_BUFSIZE,
+                                            5000000000L));
                     if (MARsDebugConfig.DEBUG_NETLINK) {
-                        Slog.d("FreecessController", "RecvNetlink type:" + parse.type + " mod:" + parse.mod + " src_portid:" + parse.src_portid + " dst_portid:" + parse.dst_portid + " version:" + parse.version + " target_uid:" + parse.target_uid + " flag:" + parse.flag + " code:" + parse.code + " cmd:" + parse.cmd + " uid:" + parse.uid);
+                        Slog.d(
+                                "FreecessController",
+                                "RecvNetlink type:"
+                                        + parse.type
+                                        + " mod:"
+                                        + parse.mod
+                                        + " src_portid:"
+                                        + parse.src_portid
+                                        + " dst_portid:"
+                                        + parse.dst_portid
+                                        + " version:"
+                                        + parse.version
+                                        + " target_uid:"
+                                        + parse.target_uid
+                                        + " flag:"
+                                        + parse.flag
+                                        + " code:"
+                                        + parse.code
+                                        + " cmd:"
+                                        + parse.cmd
+                                        + " uid:"
+                                        + parse.uid);
                     }
                     freecessController.kernelFreecessReport(parse);
                 }
@@ -942,7 +1184,8 @@ public final class FreecessHandler {
         this.mMainHandler.sendMessage(obtainMessage);
     }
 
-    public final void sendFreecessSettlementMsg(int i, int i2, boolean z, String str, int i3, boolean z2, boolean z3, int i4) {
+    public final void sendFreecessSettlementMsg(
+            int i, int i2, boolean z, String str, int i3, boolean z2, boolean z3, int i4) {
         MainHandler mainHandler = this.mMainHandler;
         if (mainHandler == null) {
             return;
@@ -977,7 +1220,8 @@ public final class FreecessHandler {
         obtainMessage.setData(m);
         if (this.mMainHandler.hasMessages(28, str)) {
             if (MARsDebugConfig.DEBUG_ENG) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m("packageName: ", str, " already hasMessage", "FreecessHandler");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        "packageName: ", str, " already hasMessage", "FreecessHandler");
             }
         } else if (z) {
             this.mMainHandler.sendMessageDelayed(obtainMessage, 2000L);
@@ -1053,8 +1297,15 @@ public final class FreecessHandler {
         boolean equals = "Watchdog_HALF".equals(str);
         if (equals) {
             boolean z = FreecessController.IS_MINIMIZE_OLAF_LOCK;
-            final FreecessController freecessController = FreecessController.FreecessControllerHolder.INSTANCE;
-            Slog.w("FreecessController", "!@*** unFreezeAllPackages for watchdog : Start thread for preaction unfreezing!!! cntFail(FZ/UFZ/UFZ_P) : " + freecessController.cntFailFreeze + "/" + freecessController.cntFailUnfreeze);
+            final FreecessController freecessController =
+                    FreecessController.FreecessControllerHolder.INSTANCE;
+            Slog.w(
+                    "FreecessController",
+                    "!@*** unFreezeAllPackages for watchdog : Start thread for preaction"
+                        + " unfreezing!!! cntFail(FZ/UFZ/UFZ_P) : "
+                            + freecessController.cntFailFreeze
+                            + "/"
+                            + freecessController.cntFailUnfreeze);
             final long uptimeMillis = SystemClock.uptimeMillis();
             new Thread() { // from class: com.android.server.am.FreecessController.3
                 /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
@@ -1066,7 +1317,9 @@ public final class FreecessHandler {
                 public final void run() {
                     try {
                         if (!FreecessController.this.mFrozenPidListSelfLocked.isEmpty()) {
-                            Iterator it = new ArrayList(FreecessController.this.mFrozenPidListSelfLocked).iterator();
+                            Iterator it =
+                                    new ArrayList(FreecessController.this.mFrozenPidListSelfLocked)
+                                            .iterator();
                             while (it.hasNext()) {
                                 Integer num = (Integer) it.next();
                                 if (SystemClock.uptimeMillis() - uptimeMillis >= 5000) {
@@ -1078,10 +1331,16 @@ public final class FreecessHandler {
                         }
                     } catch (Exception e) {
                         boolean z2 = FreecessController.IS_MINIMIZE_OLAF_LOCK;
-                        BootReceiver$$ExternalSyntheticOutline0.m(e, "Error occurred while handleResetAllPreAction: ", "FreecessController");
+                        BootReceiver$$ExternalSyntheticOutline0.m(
+                                e,
+                                "Error occurred while handleResetAllPreAction: ",
+                                "FreecessController");
                     }
                     boolean z3 = FreecessController.IS_MINIMIZE_OLAF_LOCK;
-                    Slog.w("FreecessController", "!@*** unFreezeAllPackages for watchdog : End thread for preaction unfreezing!!!");
+                    Slog.w(
+                            "FreecessController",
+                            "!@*** unFreezeAllPackages for watchdog : End thread for preaction"
+                                + " unfreezing!!!");
                 }
             }.start();
         }
@@ -1161,7 +1420,8 @@ public final class FreecessHandler {
         obtainMessage.setData(bundle);
         if (this.mMainHandler.hasMessages(1, str)) {
             if (MARsDebugConfig.DEBUG_ENG) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m("packageName: ", str, " already hasMessage", "FreecessHandler");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        "packageName: ", str, " already hasMessage", "FreecessHandler");
             }
         } else {
             if (!z) {

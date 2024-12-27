@@ -5,7 +5,9 @@ import android.content.pm.VersionedPackage;
 import android.os.SystemProperties;
 import android.util.ArraySet;
 import android.util.Slog;
+
 import com.android.server.crashrecovery.proto.CrashRecoveryStatsLog;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -18,7 +20,8 @@ public abstract class WatchdogRollbackLogger {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.content.pm.VersionedPackage getLogPackage(android.content.Context r5, android.content.pm.VersionedPackage r6) {
+    public static android.content.pm.VersionedPackage getLogPackage(
+            android.content.Context r5, android.content.pm.VersionedPackage r6) {
         /*
             java.lang.String r6 = r6.getPackageName()
             android.content.pm.PackageManager r0 = r5.getPackageManager()
@@ -59,7 +62,10 @@ public abstract class WatchdogRollbackLogger {
         L4a:
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.rollback.WatchdogRollbackLogger.getLogPackage(android.content.Context, android.content.pm.VersionedPackage):android.content.pm.VersionedPackage");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.rollback.WatchdogRollbackLogger.getLogPackage(android.content.Context,"
+                    + " android.content.pm.VersionedPackage):android.content.pm.VersionedPackage");
     }
 
     public static void logApexdRevert(Context context, List list, String str) {
@@ -78,7 +84,14 @@ public abstract class WatchdogRollbackLogger {
         boolean z;
         boolean z2;
         StringBuilder sb = new StringBuilder("Watchdog event occurred with type: ");
-        sb.append(i != 1 ? i != 2 ? i != 3 ? i != 4 ? "UNKNOWN" : "ROLLBACK_BOOT_TRIGGERED" : "ROLLBACK_FAILURE" : "ROLLBACK_SUCCESS" : "ROLLBACK_INITIATE");
+        sb.append(
+                i != 1
+                        ? i != 2
+                                ? i != 3
+                                        ? i != 4 ? "UNKNOWN" : "ROLLBACK_BOOT_TRIGGERED"
+                                        : "ROLLBACK_FAILURE"
+                                : "ROLLBACK_SUCCESS"
+                        : "ROLLBACK_INITIATE");
         sb.append(" logPackage: ");
         sb.append(versionedPackage);
         sb.append(" rollbackReason: ");
@@ -89,16 +102,35 @@ public abstract class WatchdogRollbackLogger {
         if (versionedPackage != null) {
             z = false;
             z2 = true;
-            CrashRecoveryStatsLog.write(i, versionedPackage.getPackageName(), versionedPackage.getVersionCode(), i2, str, new byte[0]);
+            CrashRecoveryStatsLog.write(
+                    i,
+                    versionedPackage.getPackageName(),
+                    versionedPackage.getVersionCode(),
+                    i2,
+                    str,
+                    new byte[0]);
         } else {
             z = false;
             z2 = true;
             CrashRecoveryStatsLog.write(i, "", 0, i2, str, new byte[0]);
         }
         if (SystemProperties.getBoolean("persist.sys.rollbacktest.enabled", z)) {
-            String concat = "persist.sys.rollbacktest.".concat(i != z2 ? i != 2 ? i != 3 ? i != 4 ? "UNKNOWN" : "ROLLBACK_BOOT_TRIGGERED" : "ROLLBACK_FAILURE" : "ROLLBACK_SUCCESS" : "ROLLBACK_INITIATE");
+            String concat =
+                    "persist.sys.rollbacktest."
+                            .concat(
+                                    i != z2
+                                            ? i != 2
+                                                    ? i != 3
+                                                            ? i != 4
+                                                                    ? "UNKNOWN"
+                                                                    : "ROLLBACK_BOOT_TRIGGERED"
+                                                            : "ROLLBACK_FAILURE"
+                                                    : "ROLLBACK_SUCCESS"
+                                            : "ROLLBACK_INITIATE");
             SystemProperties.set(concat, String.valueOf(z2));
-            SystemProperties.set(concat + ".logPackage", versionedPackage != null ? versionedPackage.toString() : "");
+            SystemProperties.set(
+                    concat + ".logPackage",
+                    versionedPackage != null ? versionedPackage.toString() : "");
             SystemProperties.set(concat + ".rollbackReason", rollbackReasonToString(i2));
             SystemProperties.set(concat + ".failedPackageName", str);
         }
@@ -122,6 +154,16 @@ public abstract class WatchdogRollbackLogger {
     }
 
     public static String rollbackReasonToString(int i) {
-        return i != 1 ? i != 2 ? i != 3 ? i != 4 ? i != 5 ? i != 7 ? "UNKNOWN" : "REASON_BOOT_LOOP" : "REASON_NATIVE_CRASH_DURING_BOOT" : "REASON_APP_NOT_RESPONDING" : "REASON_APP_CRASH" : "REASON_EXPLICIT_HEALTH_CHECK" : "REASON_NATIVE_CRASH";
+        return i != 1
+                ? i != 2
+                        ? i != 3
+                                ? i != 4
+                                        ? i != 5
+                                                ? i != 7 ? "UNKNOWN" : "REASON_BOOT_LOOP"
+                                                : "REASON_NATIVE_CRASH_DURING_BOOT"
+                                        : "REASON_APP_NOT_RESPONDING"
+                                : "REASON_APP_CRASH"
+                        : "REASON_EXPLICIT_HEALTH_CHECK"
+                : "REASON_NATIVE_CRASH";
     }
 }

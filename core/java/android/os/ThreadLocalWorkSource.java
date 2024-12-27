@@ -5,15 +5,18 @@ import java.util.function.Supplier;
 /* loaded from: classes3.dex */
 public final class ThreadLocalWorkSource {
     public static final int UID_NONE = -1;
-    private static final ThreadLocal<int[]> sWorkSourceUid = ThreadLocal.withInitial(new Supplier() { // from class: android.os.ThreadLocalWorkSource$$ExternalSyntheticLambda0
-        @Override // java.util.function.Supplier
-        public final Object get() {
-            return ThreadLocalWorkSource.lambda$static$0();
-        }
-    });
+    private static final ThreadLocal<int[]> sWorkSourceUid =
+            ThreadLocal.withInitial(
+                    new Supplier() { // from class:
+                                     // android.os.ThreadLocalWorkSource$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Supplier
+                        public final Object get() {
+                            return ThreadLocalWorkSource.lambda$static$0();
+                        }
+                    });
 
     static /* synthetic */ int[] lambda$static$0() {
-        return new int[]{-1};
+        return new int[] {-1};
     }
 
     public static int getUid() {
@@ -42,6 +45,5 @@ public final class ThreadLocalWorkSource {
         return sWorkSourceUid.get()[0];
     }
 
-    private ThreadLocalWorkSource() {
-    }
+    private ThreadLocalWorkSource() {}
 }

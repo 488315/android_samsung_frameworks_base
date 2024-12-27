@@ -22,24 +22,20 @@ public interface IMemorySaverBackupRestoreObserver extends IInterface {
 
     public static class Default implements IMemorySaverBackupRestoreObserver {
         @Override // android.app.backup.IMemorySaverBackupRestoreObserver
-        public void onStartBackup(String packageName) throws RemoteException {
-        }
+        public void onStartBackup(String packageName) throws RemoteException {}
 
         @Override // android.app.backup.IMemorySaverBackupRestoreObserver
-        public void onBackupCompleted(String packageName, boolean success) throws RemoteException {
-        }
+        public void onBackupCompleted(String packageName, boolean success) throws RemoteException {}
 
         @Override // android.app.backup.IMemorySaverBackupRestoreObserver
-        public void onRestoreStart(String name) throws RemoteException {
-        }
+        public void onRestoreStart(String name) throws RemoteException {}
 
         @Override // android.app.backup.IMemorySaverBackupRestoreObserver
-        public void onRestoreCompleted(String packageName, boolean success) throws RemoteException {
-        }
+        public void onRestoreCompleted(String packageName, boolean success)
+                throws RemoteException {}
 
         @Override // android.app.backup.IMemorySaverBackupRestoreObserver
-        public void onTimeout() throws RemoteException {
-        }
+        public void onTimeout() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -47,7 +43,7 @@ public interface IMemorySaverBackupRestoreObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMemorySaverBackupRestoreObserver {
+    public abstract static class Stub extends Binder implements IMemorySaverBackupRestoreObserver {
         static final int TRANSACTION_onBackupCompleted = 2;
         static final int TRANSACTION_onRestoreCompleted = 4;
         static final int TRANSACTION_onRestoreStart = 3;
@@ -97,7 +93,8 @@ public interface IMemorySaverBackupRestoreObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IMemorySaverBackupRestoreObserver.DESCRIPTOR);
             }
@@ -165,7 +162,8 @@ public interface IMemorySaverBackupRestoreObserver extends IInterface {
             }
 
             @Override // android.app.backup.IMemorySaverBackupRestoreObserver
-            public void onBackupCompleted(String packageName, boolean success) throws RemoteException {
+            public void onBackupCompleted(String packageName, boolean success)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMemorySaverBackupRestoreObserver.DESCRIPTOR);
@@ -190,7 +188,8 @@ public interface IMemorySaverBackupRestoreObserver extends IInterface {
             }
 
             @Override // android.app.backup.IMemorySaverBackupRestoreObserver
-            public void onRestoreCompleted(String packageName, boolean success) throws RemoteException {
+            public void onRestoreCompleted(String packageName, boolean success)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IMemorySaverBackupRestoreObserver.DESCRIPTOR);

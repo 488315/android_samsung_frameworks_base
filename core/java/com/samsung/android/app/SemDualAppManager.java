@@ -23,9 +23,10 @@ import android.util.Base64;
 import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
 import com.android.internal.R;
 import com.android.internal.app.chooser.DisplayResolveInfo;
-import com.samsung.android.app.ISemDualAppManager;
+
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
@@ -44,46 +45,105 @@ public class SemDualAppManager {
     private Map<ComponentName, Integer> mDuplicateInitialIntents = new HashMap();
     private static SemDualAppManager sDAInstance = null;
     private static ISemDualAppManager mService = null;
-    private static final String FACEBOOK_PACKAGE_NAME = decodeString("Y29tLmZhY2Vib29rLmthdGFuYQ==");
+    private static final String FACEBOOK_PACKAGE_NAME =
+            decodeString("Y29tLmZhY2Vib29rLmthdGFuYQ==");
     private static final String WHATSAPP_PACKAGE_NAME = decodeString("Y29tLndoYXRzYXBw");
-    private static final String FACEBOOKMESSENGER_PACKAGE_NAME = decodeString("Y29tLmZhY2Vib29rLm9yY2E=");
-    private static final String QQMOBILECHINA_PACKAGE_NAME = decodeString("Y29tLnRlbmNlbnQubW9iaWxlcXE=");
-    private static final String QQMOBILEINTERNATIONAL_PACKAGE_NAME = decodeString("Y29tLnRlbmNlbnQubW9iaWxlcXFp");
+    private static final String FACEBOOKMESSENGER_PACKAGE_NAME =
+            decodeString("Y29tLmZhY2Vib29rLm9yY2E=");
+    private static final String QQMOBILECHINA_PACKAGE_NAME =
+            decodeString("Y29tLnRlbmNlbnQubW9iaWxlcXE=");
+    private static final String QQMOBILEINTERNATIONAL_PACKAGE_NAME =
+            decodeString("Y29tLnRlbmNlbnQubW9iaWxlcXFp");
     private static final String WECHAT_PACKAGE_NAME = decodeString("Y29tLnRlbmNlbnQubW0=");
     private static final String SKYPE_PACKAGE_NAME = decodeString("Y29tLnNreXBlLnJhaWRlcg==");
     private static final String VIBER_PACKAGE_NAME = decodeString("Y29tLnZpYmVyLnZvaXA=");
     private static final String LINE_PACKAGE_NAME = decodeString("anAubmF2ZXIubGluZS5hbmRyb2lk");
     private static final String BLACKBERRYMESSENGER_PACKAGE_NAME = decodeString("Y29tLmJibQ==");
-    private static final String TELEGRAM_PACKAGE_NAME = decodeString("b3JnLnRlbGVncmFtLm1lc3Nlbmdlcg==");
+    private static final String TELEGRAM_PACKAGE_NAME =
+            decodeString("b3JnLnRlbGVncmFtLm1lc3Nlbmdlcg==");
     private static final String KAKAOTALK_PACKAGE_NAME = decodeString("Y29tLmtha2FvLnRhbGs=");
     private static final String HIKE_PACKAGE_NAME = decodeString("Y29tLmJzYi5oaWtl");
     private static final String ICQ_PACKAGE_NAME = decodeString("Y29tLmljcS5tb2JpbGUuY2xpZW50");
-    private static final String YAHOOMESSENGER_PACKAGE_NAME = decodeString("Y29tLnlhaG9vLm1vYmlsZS5jbGllbnQuYW5kcm9pZC5pbQ==");
+    private static final String YAHOOMESSENGER_PACKAGE_NAME =
+            decodeString("Y29tLnlhaG9vLm1vYmlsZS5jbGllbnQuYW5kcm9pZC5pbQ==");
     private static final String ZALO_PACKAGE_NAME = decodeString("Y29tLnppbmcuemFsbw==");
-    private static final String SNAPCHAT_PACKAGE_NAME = decodeString("Y29tLnNuYXBjaGF0LmFuZHJvaWQ=");
+    private static final String SNAPCHAT_PACKAGE_NAME =
+            decodeString("Y29tLnNuYXBjaGF0LmFuZHJvaWQ=");
     private static final String WEIBO_PACKAGE_NAME = decodeString("Y29tLnNpbmEud2VpYm8=");
     private static final String KIK_PACKAGE_NAME = decodeString("a2lrLmFuZHJvaWQ=");
-    private static final String SEC_LAUNCHER_PACKGE_NAME = decodeString("Y29tLnNlYy5hbmRyb2lkLmFwcC5sYXVuY2hlcg==");
-    private static final String SEC_EASY_LAUNCHER_PACKGE_NAME = decodeString("Y29tLnNlYy5hbmRyb2lkLmFwcC5lYXN5bGF1bmNoZXI=");
-    private static final String SEC_EMERGENCY_LAUNCHER_PACKGE_NAME = decodeString("Y29tLnNlYy5hbmRyb2lkLmVtZXJnZW5jeWxhdW5jaGVy");
-    private static final String SEC_DESKTOP_LAUNCHER_PACKGE_NAME = decodeString("Y29tLnNlYy5hbmRyb2lkLmFwcC5kZXNrdG9wbGF1bmNoZXI=");
-    private static final String GOOGLE_QUICKSEARCHBOX_PACKGE_NAME = decodeString("Y29tLmdvb2dsZS5hbmRyb2lkLmdvb2dsZXF1aWNrc2VhcmNoYm94");
-    private static final String NOVA_PACKAGE_NAME = decodeString("Y29tLnRlc2xhY29pbHN3LmxhdW5jaGVy");
-    private static final String MICROSOFT_PACKAGE_NAME = decodeString("Y29tLm1pY3Jvc29mdC5sYXVuY2hlcg==");
+    private static final String SEC_LAUNCHER_PACKGE_NAME =
+            decodeString("Y29tLnNlYy5hbmRyb2lkLmFwcC5sYXVuY2hlcg==");
+    private static final String SEC_EASY_LAUNCHER_PACKGE_NAME =
+            decodeString("Y29tLnNlYy5hbmRyb2lkLmFwcC5lYXN5bGF1bmNoZXI=");
+    private static final String SEC_EMERGENCY_LAUNCHER_PACKGE_NAME =
+            decodeString("Y29tLnNlYy5hbmRyb2lkLmVtZXJnZW5jeWxhdW5jaGVy");
+    private static final String SEC_DESKTOP_LAUNCHER_PACKGE_NAME =
+            decodeString("Y29tLnNlYy5hbmRyb2lkLmFwcC5kZXNrdG9wbGF1bmNoZXI=");
+    private static final String GOOGLE_QUICKSEARCHBOX_PACKGE_NAME =
+            decodeString("Y29tLmdvb2dsZS5hbmRyb2lkLmdvb2dsZXF1aWNrc2VhcmNoYm94");
+    private static final String NOVA_PACKAGE_NAME =
+            decodeString("Y29tLnRlc2xhY29pbHN3LmxhdW5jaGVy");
+    private static final String MICROSOFT_PACKAGE_NAME =
+            decodeString("Y29tLm1pY3Jvc29mdC5sYXVuY2hlcg==");
     private static final String ADW_PACKAGE_NAME = decodeString("b3JnLmFkdy5sYXVuY2hlcg==");
-    private static final String ACTION3_PACKAGE_NAME = decodeString("Y29tLmFjdGlvbmxhdW5jaGVyLnBsYXlzdG9yZQ==");
-    private static final String HOLO_PACKAGE_NAME = decodeString("Y29tLm1vYmludC5ob2xvbGF1bmNoZXI=");
+    private static final String ACTION3_PACKAGE_NAME =
+            decodeString("Y29tLmFjdGlvbmxhdW5jaGVyLnBsYXlzdG9yZQ==");
+    private static final String HOLO_PACKAGE_NAME =
+            decodeString("Y29tLm1vYmludC5ob2xvbGF1bmNoZXI=");
     private static final String SMART3_PACKAGE_NAME = decodeString("Z2lubGVtb24uZmxvd2VyZnJlZQ==");
     private static final String NOUGAT_PACKAGE_NAME = decodeString("Y29tLmNtbmxhdW5jaGVy");
     private static final String YANDEX_PACKAGE_NAME = decodeString("Y29tLnlhbmRleC5sYXVuY2hlcg==");
-    private static final String DCM_LIVEUX_PACKAGE_NAME = decodeString("Y29tLm50dGRvY29tby5hbmRyb2lkLmRob21l");
+    private static final String DCM_LIVEUX_PACKAGE_NAME =
+            decodeString("Y29tLm50dGRvY29tby5hbmRyb2lkLmRob21l");
     private static String mSalesCode = SemSystemProperties.getSalesCode();
     private static final String[] CHINA_SALES_CODES = {"CHN", "CHM", "CBK", "CTC", "CHU", "CHC"};
     private static boolean mIsChinaModel = isChinaModel();
-    static final String[] DUAL_APP_WHITELIST_PACKAGES = {FACEBOOK_PACKAGE_NAME, WHATSAPP_PACKAGE_NAME, FACEBOOKMESSENGER_PACKAGE_NAME, QQMOBILECHINA_PACKAGE_NAME, QQMOBILEINTERNATIONAL_PACKAGE_NAME, WECHAT_PACKAGE_NAME, WEIBO_PACKAGE_NAME, SKYPE_PACKAGE_NAME, VIBER_PACKAGE_NAME, LINE_PACKAGE_NAME, BLACKBERRYMESSENGER_PACKAGE_NAME, TELEGRAM_PACKAGE_NAME, KAKAOTALK_PACKAGE_NAME, HIKE_PACKAGE_NAME, ICQ_PACKAGE_NAME, YAHOOMESSENGER_PACKAGE_NAME, ZALO_PACKAGE_NAME, SNAPCHAT_PACKAGE_NAME, KIK_PACKAGE_NAME};
-    static final String[] DUAL_APP_WHITELIST_PACKAGES_FOR_CHINA = {WECHAT_PACKAGE_NAME, QQMOBILECHINA_PACKAGE_NAME, WEIBO_PACKAGE_NAME};
-    private static final String[] AFW_CAPABLE_LAUNCHER_APPS = {SEC_LAUNCHER_PACKGE_NAME, SEC_EASY_LAUNCHER_PACKGE_NAME, SEC_EMERGENCY_LAUNCHER_PACKGE_NAME, SEC_DESKTOP_LAUNCHER_PACKGE_NAME, GOOGLE_QUICKSEARCHBOX_PACKGE_NAME, NOVA_PACKAGE_NAME, ACTION3_PACKAGE_NAME, HOLO_PACKAGE_NAME, SMART3_PACKAGE_NAME, NOUGAT_PACKAGE_NAME, YANDEX_PACKAGE_NAME, DCM_LIVEUX_PACKAGE_NAME, MICROSOFT_PACKAGE_NAME, ADW_PACKAGE_NAME};
-    private static final String[] SAMSUNG_LAUNCHER_APPS = {SEC_LAUNCHER_PACKGE_NAME, SEC_EASY_LAUNCHER_PACKGE_NAME, SEC_EMERGENCY_LAUNCHER_PACKGE_NAME, SEC_DESKTOP_LAUNCHER_PACKGE_NAME};
+    static final String[] DUAL_APP_WHITELIST_PACKAGES = {
+        FACEBOOK_PACKAGE_NAME,
+        WHATSAPP_PACKAGE_NAME,
+        FACEBOOKMESSENGER_PACKAGE_NAME,
+        QQMOBILECHINA_PACKAGE_NAME,
+        QQMOBILEINTERNATIONAL_PACKAGE_NAME,
+        WECHAT_PACKAGE_NAME,
+        WEIBO_PACKAGE_NAME,
+        SKYPE_PACKAGE_NAME,
+        VIBER_PACKAGE_NAME,
+        LINE_PACKAGE_NAME,
+        BLACKBERRYMESSENGER_PACKAGE_NAME,
+        TELEGRAM_PACKAGE_NAME,
+        KAKAOTALK_PACKAGE_NAME,
+        HIKE_PACKAGE_NAME,
+        ICQ_PACKAGE_NAME,
+        YAHOOMESSENGER_PACKAGE_NAME,
+        ZALO_PACKAGE_NAME,
+        SNAPCHAT_PACKAGE_NAME,
+        KIK_PACKAGE_NAME
+    };
+    static final String[] DUAL_APP_WHITELIST_PACKAGES_FOR_CHINA = {
+        WECHAT_PACKAGE_NAME, QQMOBILECHINA_PACKAGE_NAME, WEIBO_PACKAGE_NAME
+    };
+    private static final String[] AFW_CAPABLE_LAUNCHER_APPS = {
+        SEC_LAUNCHER_PACKGE_NAME,
+        SEC_EASY_LAUNCHER_PACKGE_NAME,
+        SEC_EMERGENCY_LAUNCHER_PACKGE_NAME,
+        SEC_DESKTOP_LAUNCHER_PACKGE_NAME,
+        GOOGLE_QUICKSEARCHBOX_PACKGE_NAME,
+        NOVA_PACKAGE_NAME,
+        ACTION3_PACKAGE_NAME,
+        HOLO_PACKAGE_NAME,
+        SMART3_PACKAGE_NAME,
+        NOUGAT_PACKAGE_NAME,
+        YANDEX_PACKAGE_NAME,
+        DCM_LIVEUX_PACKAGE_NAME,
+        MICROSOFT_PACKAGE_NAME,
+        ADW_PACKAGE_NAME
+    };
+    private static final String[] SAMSUNG_LAUNCHER_APPS = {
+        SEC_LAUNCHER_PACKGE_NAME,
+        SEC_EASY_LAUNCHER_PACKGE_NAME,
+        SEC_EMERGENCY_LAUNCHER_PACKGE_NAME,
+        SEC_DESKTOP_LAUNCHER_PACKGE_NAME
+    };
 
     public interface DualAppVersion {
         public static final int DUAL_APP_VERSION_1_0_0 = 100;
@@ -111,8 +171,7 @@ public class SemDualAppManager {
         public static final int SEP_VER_9_0_INT = 90000;
     }
 
-    private SemDualAppManager() {
-    }
+    private SemDualAppManager() {}
 
     private static ISemDualAppManager getDualAppService() {
         if (mService == null) {
@@ -135,7 +194,10 @@ public class SemDualAppManager {
     public boolean isWhitelistedPackage(String pkgName) {
         String[] apps;
         int currentUserId = UserHandle.myUserId();
-        if ((currentUserId == 0 || isDualAppIdInternal(currentUserId)) && pkgName != null && !"".equalsIgnoreCase(pkgName) && (apps = getAllWhitelistedPackages()) != null) {
+        if ((currentUserId == 0 || isDualAppIdInternal(currentUserId))
+                && pkgName != null
+                && !"".equalsIgnoreCase(pkgName)
+                && (apps = getAllWhitelistedPackages()) != null) {
             for (String pkg : apps) {
                 if (pkg.equals(pkgName)) {
                     return true;
@@ -248,7 +310,10 @@ public class SemDualAppManager {
         }
         String uriScheme = uri.getScheme();
         String uriAuthority = uri.getAuthority();
-        if (!"content".equals(uriScheme) || "com.android.contacts".equals(uriAuthority) || "com.android.calendar".equals(uriAuthority) || "com.android.providers.downloads.documents".equals(uriAuthority)) {
+        if (!"content".equals(uriScheme)
+                || "com.android.contacts".equals(uriAuthority)
+                || "com.android.calendar".equals(uriAuthority)
+                || "com.android.providers.downloads.documents".equals(uriAuthority)) {
             return false;
         }
         return true;
@@ -259,12 +324,16 @@ public class SemDualAppManager {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void addDualAppAccounts(android.content.Context r20, android.widget.LinearLayout r21, int r22, int r23) {
+    public void addDualAppAccounts(
+            android.content.Context r20, android.widget.LinearLayout r21, int r22, int r23) {
         /*
             Method dump skipped, instructions count: 325
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.app.SemDualAppManager.addDualAppAccounts(android.content.Context, android.widget.LinearLayout, int, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.app.SemDualAppManager.addDualAppAccounts(android.content.Context,"
+                    + " android.widget.LinearLayout, int, int):void");
     }
 
     public static int getDualAppVersion() {
@@ -281,29 +350,54 @@ public class SemDualAppManager {
 
     public boolean isNeedAddResolveInfoForOtherUser(ActivityInfo ai, Intent ii) {
         int appUserId;
-        if (ai == null || (((appUserId = UserHandle.getUserId(ai.applicationInfo.uid)) != 0 && !isDualAppIdInternal(appUserId)) || ((ii instanceof LabeledIntent) && !isInstalledWhitelistedPackage(ai.packageName)))) {
+        if (ai == null
+                || (((appUserId = UserHandle.getUserId(ai.applicationInfo.uid)) != 0
+                                && !isDualAppIdInternal(appUserId))
+                        || ((ii instanceof LabeledIntent)
+                                && !isInstalledWhitelistedPackage(ai.packageName)))) {
             return false;
         }
         if (this.mDuplicateInitialIntents.containsKey(ai.getComponentName())) {
             Log.w(TAG, "Duplicate activity found for " + ii);
             return false;
         }
-        if (isInstalledWhitelistedPackage(ai.packageName) && (Intent.ACTION_SEND.equals(ii.getAction()) || Intent.ACTION_SEND_MULTIPLE.equals(ii.getAction()) || ((ii.getComponent() != null && isChooserRequired(ii.getComponent().getClassName())) || isChinaDualApp(ai.packageName) || ((ii.getData() != null && "mqqapi".equals(ii.getData().getScheme())) || isKakaoThemeIntent(ai.packageName, ii))))) {
+        if (isInstalledWhitelistedPackage(ai.packageName)
+                && (Intent.ACTION_SEND.equals(ii.getAction())
+                        || Intent.ACTION_SEND_MULTIPLE.equals(ii.getAction())
+                        || ((ii.getComponent() != null
+                                        && isChooserRequired(ii.getComponent().getClassName()))
+                                || isChinaDualApp(ai.packageName)
+                                || ((ii.getData() != null
+                                                && "mqqapi".equals(ii.getData().getScheme()))
+                                        || isKakaoThemeIntent(ai.packageName, ii))))) {
             this.mDuplicateInitialIntents.put(ai.getComponentName(), Integer.valueOf(appUserId));
             return true;
         }
         return false;
     }
 
-    public boolean isDuplicateEntry(PackageManager pm, List<DisplayResolveInfo> target, ActivityInfo ai, Intent ii) {
+    public boolean isDuplicateEntry(
+            PackageManager pm, List<DisplayResolveInfo> target, ActivityInfo ai, Intent ii) {
         int appUserId;
-        if (ai == null || (((appUserId = UserHandle.getUserId(ai.applicationInfo.uid)) != 0 && !isDualAppIdInternal(appUserId)) || ((ii instanceof LabeledIntent) && !isInstalledWhitelistedPackage(ai.packageName)))) {
+        if (ai == null
+                || (((appUserId = UserHandle.getUserId(ai.applicationInfo.uid)) != 0
+                                && !isDualAppIdInternal(appUserId))
+                        || ((ii instanceof LabeledIntent)
+                                && !isInstalledWhitelistedPackage(ai.packageName)))) {
             return false;
         }
         if (this.mDuplicateInitialIntents.containsKey(ai.getComponentName())) {
             return true;
         }
-        if (isInstalledWhitelistedPackage(ai.packageName) && (Intent.ACTION_SEND.equals(ii.getAction()) || Intent.ACTION_SEND_MULTIPLE.equals(ii.getAction()) || ((ii.getComponent() != null && isChooserRequired(ii.getComponent().getClassName())) || isChinaDualApp(ai.packageName) || ((ii.getData() != null && "mqqapi".equals(ii.getData().getScheme())) || isKakaoThemeIntent(ai.packageName, ii))))) {
+        if (isInstalledWhitelistedPackage(ai.packageName)
+                && (Intent.ACTION_SEND.equals(ii.getAction())
+                        || Intent.ACTION_SEND_MULTIPLE.equals(ii.getAction())
+                        || ((ii.getComponent() != null
+                                        && isChooserRequired(ii.getComponent().getClassName()))
+                                || isChinaDualApp(ai.packageName)
+                                || ((ii.getData() != null
+                                                && "mqqapi".equals(ii.getData().getScheme()))
+                                        || isKakaoThemeIntent(ai.packageName, ii))))) {
             this.mDuplicateInitialIntents.put(ai.getComponentName(), Integer.valueOf(appUserId));
             addResolveInfoFromOtherUser(pm, target, ai, ii);
         }
@@ -321,7 +415,11 @@ public class SemDualAppManager {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void addResolveInfoFromOtherUser(android.content.pm.PackageManager r17, java.util.List<com.android.internal.app.chooser.DisplayResolveInfo> r18, android.content.pm.ActivityInfo r19, android.content.Intent r20) {
+    private void addResolveInfoFromOtherUser(
+            android.content.pm.PackageManager r17,
+            java.util.List<com.android.internal.app.chooser.DisplayResolveInfo> r18,
+            android.content.pm.ActivityInfo r19,
+            android.content.Intent r20) {
         /*
             r16 = this;
             r1 = r19
@@ -412,28 +510,47 @@ public class SemDualAppManager {
         L96:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.app.SemDualAppManager.addResolveInfoFromOtherUser(android.content.pm.PackageManager, java.util.List, android.content.pm.ActivityInfo, android.content.Intent):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.app.SemDualAppManager.addResolveInfoFromOtherUser(android.content.pm.PackageManager,"
+                    + " java.util.List, android.content.pm.ActivityInfo,"
+                    + " android.content.Intent):void");
     }
 
-    public static void drawDualAppBadge(final Context context, final AppWidgetHostView view, UserHandle user) {
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() { // from class: com.samsung.android.app.SemDualAppManager.1
-            @Override // java.lang.Runnable
-            public void run() {
-                try {
-                    ImageView dualAppBadge = new ImageView(Context.this);
-                    int density = Context.this.getResources().getDisplayMetrics().densityDpi;
-                    Drawable badgeicon = Resources.getSystem().getDrawableForDensity(R.drawable.ic_dualapp_widget_badge, density);
-                    if (badgeicon != null) {
-                        dualAppBadge.setImageDrawable(badgeicon);
-                        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(badgeicon.getIntrinsicWidth(), badgeicon.getIntrinsicHeight());
-                        params.gravity = 85;
-                        view.addView(dualAppBadge, params);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }, 1000L);
+    public static void drawDualAppBadge(
+            final Context context, final AppWidgetHostView view, UserHandle user) {
+        new Handler(Looper.getMainLooper())
+                .postDelayed(
+                        new Runnable() { // from class: com.samsung.android.app.SemDualAppManager.1
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                try {
+                                    ImageView dualAppBadge = new ImageView(Context.this);
+                                    int density =
+                                            Context.this
+                                                    .getResources()
+                                                    .getDisplayMetrics()
+                                                    .densityDpi;
+                                    Drawable badgeicon =
+                                            Resources.getSystem()
+                                                    .getDrawableForDensity(
+                                                            R.drawable.ic_dualapp_widget_badge,
+                                                            density);
+                                    if (badgeicon != null) {
+                                        dualAppBadge.setImageDrawable(badgeicon);
+                                        FrameLayout.LayoutParams params =
+                                                new FrameLayout.LayoutParams(
+                                                        badgeicon.getIntrinsicWidth(),
+                                                        badgeicon.getIntrinsicHeight());
+                                        params.gravity = 85;
+                                        view.addView(dualAppBadge, params);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        },
+                        1000L);
     }
 
     public static boolean isAfwSupportLauncher(String launcherPkgName) {
@@ -459,21 +576,29 @@ public class SemDualAppManager {
     }
 
     public static boolean isChooserRequired(String clsName) {
-        if ("com.tencent.mm.plugin.base.stub.WXEntryActivity".equals(clsName) || "com.tencent.open.agent.AgentActivity".equals(clsName) || "com.tencent.mm.plugin.base.stub.WXPayEntryActivity".equals(clsName) || "com.sina.weibo.SSOActivity".equals(clsName)) {
+        if ("com.tencent.mm.plugin.base.stub.WXEntryActivity".equals(clsName)
+                || "com.tencent.open.agent.AgentActivity".equals(clsName)
+                || "com.tencent.mm.plugin.base.stub.WXPayEntryActivity".equals(clsName)
+                || "com.sina.weibo.SSOActivity".equals(clsName)) {
             return true;
         }
         return false;
     }
 
     public static boolean isChinaDualApp(String packageName) {
-        if (QQMOBILECHINA_PACKAGE_NAME.equals(packageName) || QQMOBILEINTERNATIONAL_PACKAGE_NAME.equals(packageName) || WEIBO_PACKAGE_NAME.equals(packageName) || WECHAT_PACKAGE_NAME.equals(packageName)) {
+        if (QQMOBILECHINA_PACKAGE_NAME.equals(packageName)
+                || QQMOBILEINTERNATIONAL_PACKAGE_NAME.equals(packageName)
+                || WEIBO_PACKAGE_NAME.equals(packageName)
+                || WECHAT_PACKAGE_NAME.equals(packageName)) {
             return true;
         }
         return false;
     }
 
     private static boolean isKakaoThemeIntent(String packageName, Intent intent) {
-        if (KAKAOTALK_PACKAGE_NAME.equals(packageName) && intent.getDataString() != null && intent.getDataString().contains(KAKAOTALK_SETTINGS_THEME_URI)) {
+        if (KAKAOTALK_PACKAGE_NAME.equals(packageName)
+                && intent.getDataString() != null
+                && intent.getDataString().contains(KAKAOTALK_SETTINGS_THEME_URI)) {
             return true;
         }
         return false;
@@ -497,7 +622,8 @@ public class SemDualAppManager {
 
     public static boolean shouldRemove(ResolveInfo resolveInfo) {
         if (isDualAppId(resolveInfo.userHandle.getIdentifier())) {
-            if (resolveInfo.activityInfo.packageName.equals("com.android.settings") || resolveInfo.activityInfo.packageName.equals("com.android.chrome")) {
+            if (resolveInfo.activityInfo.packageName.equals("com.android.settings")
+                    || resolveInfo.activityInfo.packageName.equals("com.android.chrome")) {
                 return true;
             }
             return false;

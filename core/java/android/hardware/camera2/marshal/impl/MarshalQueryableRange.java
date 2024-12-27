@@ -5,14 +5,15 @@ import android.hardware.camera2.marshal.MarshalRegistry;
 import android.hardware.camera2.marshal.Marshaler;
 import android.hardware.camera2.utils.TypeReference;
 import android.util.Range;
-import java.lang.Comparable;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.nio.ByteBuffer;
 
 /* loaded from: classes2.dex */
-public class MarshalQueryableRange<T extends Comparable<? super T>> implements MarshalQueryable<Range<T>> {
+public class MarshalQueryableRange<T extends Comparable<? super T>>
+        implements MarshalQueryable<Range<T>> {
     private static final int RANGE_COUNT = 2;
 
     private class MarshalerRange extends Marshaler<Range<T>> {
@@ -24,9 +25,15 @@ public class MarshalQueryableRange<T extends Comparable<? super T>> implements M
             super(MarshalQueryableRange.this, typeReference, i);
             this.mClass = typeReference.getRawType();
             try {
-                this.mNestedTypeMarshaler = MarshalRegistry.getMarshaler(TypeReference.createSpecializedTypeReference(((ParameterizedType) typeReference.getType()).getActualTypeArguments()[0]), this.mNativeType);
+                this.mNestedTypeMarshaler =
+                        MarshalRegistry.getMarshaler(
+                                TypeReference.createSpecializedTypeReference(
+                                        ((ParameterizedType) typeReference.getType())
+                                                .getActualTypeArguments()[0]),
+                                this.mNativeType);
                 try {
-                    this.mConstructor = this.mClass.getConstructor(Comparable.class, Comparable.class);
+                    this.mConstructor =
+                            this.mClass.getConstructor(Comparable.class, Comparable.class);
                 } catch (NoSuchMethodException e) {
                     throw new AssertionError(e);
                 }
@@ -80,7 +87,8 @@ public class MarshalQueryableRange<T extends Comparable<? super T>> implements M
     }
 
     @Override // android.hardware.camera2.marshal.MarshalQueryable
-    public Marshaler<Range<T>> createMarshaler(TypeReference<Range<T>> managedType, int nativeType) {
+    public Marshaler<Range<T>> createMarshaler(
+            TypeReference<Range<T>> managedType, int nativeType) {
         return new MarshalerRange(managedType, nativeType);
     }
 

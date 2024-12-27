@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class AudioProductStrategy implements Parcelable {
-    public static final Parcelable.Creator<AudioProductStrategy> CREATOR = new Parcelable.Creator<AudioProductStrategy>() { // from class: android.media.AudioProductStrategy.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioProductStrategy createFromParcel(Parcel _aidl_source) {
-            AudioProductStrategy _aidl_out = new AudioProductStrategy();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioProductStrategy> CREATOR =
+            new Parcelable.Creator<
+                    AudioProductStrategy>() { // from class: android.media.AudioProductStrategy.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioProductStrategy createFromParcel(Parcel _aidl_source) {
+                    AudioProductStrategy _aidl_out = new AudioProductStrategy();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioProductStrategy[] newArray(int _aidl_size) {
-            return new AudioProductStrategy[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioProductStrategy[] newArray(int _aidl_size) {
+                    return new AudioProductStrategy[_aidl_size];
+                }
+            };
     public AudioAttributesEx[] audioAttributes;
     public int id = 0;
     public String name;
@@ -67,7 +69,9 @@ public class AudioProductStrategy implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.audioAttributes = (AudioAttributesEx[]) _aidl_parcel.createTypedArray(AudioAttributesEx.CREATOR);
+                this.audioAttributes =
+                        (AudioAttributesEx[])
+                                _aidl_parcel.createTypedArray(AudioAttributesEx.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

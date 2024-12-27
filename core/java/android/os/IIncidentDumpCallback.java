@@ -8,8 +8,7 @@ public interface IIncidentDumpCallback extends IInterface {
 
     public static class Default implements IIncidentDumpCallback {
         @Override // android.os.IIncidentDumpCallback
-        public void onDumpSection(ParcelFileDescriptor fd) throws RemoteException {
-        }
+        public void onDumpSection(ParcelFileDescriptor fd) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -17,7 +16,7 @@ public interface IIncidentDumpCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IIncidentDumpCallback {
+    public abstract static class Stub extends Binder implements IIncidentDumpCallback {
         static final int TRANSACTION_onDumpSection = 1;
 
         public Stub() {
@@ -55,7 +54,8 @@ public interface IIncidentDumpCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IIncidentDumpCallback.DESCRIPTOR);
             }
@@ -65,7 +65,9 @@ public interface IIncidentDumpCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ParcelFileDescriptor _arg0 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg0 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     data.enforceNoDataAvail();
                     onDumpSection(_arg0);
                     return true;

@@ -9,7 +9,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public interface IJobCallback extends IInterface {
-    void acknowledgeGetTransferredDownloadBytesMessage(int i, int i2, long j) throws RemoteException;
+    void acknowledgeGetTransferredDownloadBytesMessage(int i, int i2, long j)
+            throws RemoteException;
 
     void acknowledgeGetTransferredUploadBytesMessage(int i, int i2, long j) throws RemoteException;
 
@@ -25,26 +26,26 @@ public interface IJobCallback extends IInterface {
 
     void setNotification(int i, int i2, Notification notification, int i3) throws RemoteException;
 
-    void updateEstimatedNetworkBytes(int i, JobWorkItem jobWorkItem, long j, long j2) throws RemoteException;
+    void updateEstimatedNetworkBytes(int i, JobWorkItem jobWorkItem, long j, long j2)
+            throws RemoteException;
 
-    void updateTransferredNetworkBytes(int i, JobWorkItem jobWorkItem, long j, long j2) throws RemoteException;
+    void updateTransferredNetworkBytes(int i, JobWorkItem jobWorkItem, long j, long j2)
+            throws RemoteException;
 
     public static class Default implements IJobCallback {
         @Override // android.app.job.IJobCallback
-        public void acknowledgeGetTransferredDownloadBytesMessage(int jobId, int workId, long transferredBytes) throws RemoteException {
-        }
+        public void acknowledgeGetTransferredDownloadBytesMessage(
+                int jobId, int workId, long transferredBytes) throws RemoteException {}
 
         @Override // android.app.job.IJobCallback
-        public void acknowledgeGetTransferredUploadBytesMessage(int jobId, int workId, long transferredBytes) throws RemoteException {
-        }
+        public void acknowledgeGetTransferredUploadBytesMessage(
+                int jobId, int workId, long transferredBytes) throws RemoteException {}
 
         @Override // android.app.job.IJobCallback
-        public void acknowledgeStartMessage(int jobId, boolean ongoing) throws RemoteException {
-        }
+        public void acknowledgeStartMessage(int jobId, boolean ongoing) throws RemoteException {}
 
         @Override // android.app.job.IJobCallback
-        public void acknowledgeStopMessage(int jobId, boolean reschedule) throws RemoteException {
-        }
+        public void acknowledgeStopMessage(int jobId, boolean reschedule) throws RemoteException {}
 
         @Override // android.app.job.IJobCallback
         public JobWorkItem dequeueWork(int jobId) throws RemoteException {
@@ -57,20 +58,28 @@ public interface IJobCallback extends IInterface {
         }
 
         @Override // android.app.job.IJobCallback
-        public void jobFinished(int jobId, boolean reschedule) throws RemoteException {
-        }
+        public void jobFinished(int jobId, boolean reschedule) throws RemoteException {}
 
         @Override // android.app.job.IJobCallback
-        public void updateEstimatedNetworkBytes(int jobId, JobWorkItem item, long downloadBytes, long uploadBytes) throws RemoteException {
-        }
+        public void updateEstimatedNetworkBytes(
+                int jobId, JobWorkItem item, long downloadBytes, long uploadBytes)
+                throws RemoteException {}
 
         @Override // android.app.job.IJobCallback
-        public void updateTransferredNetworkBytes(int jobId, JobWorkItem item, long transferredDownloadBytes, long transferredUploadBytes) throws RemoteException {
-        }
+        public void updateTransferredNetworkBytes(
+                int jobId,
+                JobWorkItem item,
+                long transferredDownloadBytes,
+                long transferredUploadBytes)
+                throws RemoteException {}
 
         @Override // android.app.job.IJobCallback
-        public void setNotification(int jobId, int notificationId, Notification notification, int jobEndNotificationPolicy) throws RemoteException {
-        }
+        public void setNotification(
+                int jobId,
+                int notificationId,
+                Notification notification,
+                int jobEndNotificationPolicy)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -78,7 +87,7 @@ public interface IJobCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IJobCallback {
+    public abstract static class Stub extends Binder implements IJobCallback {
         public static final String DESCRIPTOR = "android.app.job.IJobCallback";
         static final int TRANSACTION_acknowledgeGetTransferredDownloadBytesMessage = 1;
         static final int TRANSACTION_acknowledgeGetTransferredUploadBytesMessage = 2;
@@ -144,7 +153,8 @@ public interface IJobCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -254,7 +264,8 @@ public interface IJobCallback extends IInterface {
             }
 
             @Override // android.app.job.IJobCallback
-            public void acknowledgeGetTransferredDownloadBytesMessage(int jobId, int workId, long transferredBytes) throws RemoteException {
+            public void acknowledgeGetTransferredDownloadBytesMessage(
+                    int jobId, int workId, long transferredBytes) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -271,7 +282,8 @@ public interface IJobCallback extends IInterface {
             }
 
             @Override // android.app.job.IJobCallback
-            public void acknowledgeGetTransferredUploadBytesMessage(int jobId, int workId, long transferredBytes) throws RemoteException {
+            public void acknowledgeGetTransferredUploadBytesMessage(
+                    int jobId, int workId, long transferredBytes) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -304,7 +316,8 @@ public interface IJobCallback extends IInterface {
             }
 
             @Override // android.app.job.IJobCallback
-            public void acknowledgeStopMessage(int jobId, boolean reschedule) throws RemoteException {
+            public void acknowledgeStopMessage(int jobId, boolean reschedule)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -371,7 +384,9 @@ public interface IJobCallback extends IInterface {
             }
 
             @Override // android.app.job.IJobCallback
-            public void updateEstimatedNetworkBytes(int jobId, JobWorkItem item, long downloadBytes, long uploadBytes) throws RemoteException {
+            public void updateEstimatedNetworkBytes(
+                    int jobId, JobWorkItem item, long downloadBytes, long uploadBytes)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -389,7 +404,12 @@ public interface IJobCallback extends IInterface {
             }
 
             @Override // android.app.job.IJobCallback
-            public void updateTransferredNetworkBytes(int jobId, JobWorkItem item, long transferredDownloadBytes, long transferredUploadBytes) throws RemoteException {
+            public void updateTransferredNetworkBytes(
+                    int jobId,
+                    JobWorkItem item,
+                    long transferredDownloadBytes,
+                    long transferredUploadBytes)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -407,7 +427,12 @@ public interface IJobCallback extends IInterface {
             }
 
             @Override // android.app.job.IJobCallback
-            public void setNotification(int jobId, int notificationId, Notification notification, int jobEndNotificationPolicy) throws RemoteException {
+            public void setNotification(
+                    int jobId,
+                    int notificationId,
+                    Notification notification,
+                    int jobEndNotificationPolicy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

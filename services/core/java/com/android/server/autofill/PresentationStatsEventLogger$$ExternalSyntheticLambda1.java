@@ -1,11 +1,11 @@
 package com.android.server.autofill;
 
-import com.android.server.autofill.PresentationStatsEventLogger;
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class PresentationStatsEventLogger$$ExternalSyntheticLambda1 implements Consumer {
+public final /* synthetic */ class PresentationStatsEventLogger$$ExternalSyntheticLambda1
+        implements Consumer {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ int f$0;
 
@@ -23,7 +23,8 @@ public final /* synthetic */ class PresentationStatsEventLogger$$ExternalSynthet
     public final void accept(Object obj) {
         int i = this.$r8$classId;
         int i2 = this.f$0;
-        PresentationStatsEventLogger.PresentationStatsEventInternal presentationStatsEventInternal = (PresentationStatsEventLogger.PresentationStatsEventInternal) obj;
+        PresentationStatsEventLogger.PresentationStatsEventInternal presentationStatsEventInternal =
+                (PresentationStatsEventLogger.PresentationStatsEventInternal) obj;
         switch (i) {
             case 0:
                 presentationStatsEventInternal.mFieldClassificationRequestId = i2;
@@ -35,7 +36,8 @@ public final /* synthetic */ class PresentationStatsEventLogger$$ExternalSynthet
                 presentationStatsEventInternal.mAutofillServiceUid = i2;
                 break;
             case 3:
-                if (presentationStatsEventInternal.mCountShown == 0 && presentationStatsEventInternal.mNoPresentationReason == 0) {
+                if (presentationStatsEventInternal.mCountShown == 0
+                        && presentationStatsEventInternal.mNoPresentationReason == 0) {
                     presentationStatsEventInternal.mNoPresentationReason = i2;
                     break;
                 }

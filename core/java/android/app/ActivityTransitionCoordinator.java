@@ -22,7 +22,9 @@ import android.view.ViewRootImpl;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.widget.ImageView;
+
 import com.android.internal.view.OneShotPreDrawListener;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -69,7 +71,11 @@ abstract class ActivityTransitionCoordinator extends ResultReceiver {
 
     protected abstract Transition getViewsTransition();
 
-    public ActivityTransitionCoordinator(Window window, ArrayList<String> allSharedElementNames, SharedElementCallback listener, boolean isReturning) {
+    public ActivityTransitionCoordinator(
+            Window window,
+            ArrayList<String> allSharedElementNames,
+            SharedElementCallback listener,
+            boolean isReturning) {
         super(new Handler());
         this.mSharedElements = new ArrayList<>();
         this.mSharedElementNames = new ArrayList<>();
@@ -159,7 +165,10 @@ abstract class ActivityTransitionCoordinator extends ResultReceiver {
     protected void setEpicenter() {
         int index;
         View epicenter = null;
-        if (!this.mAllSharedElementNames.isEmpty() && !this.mSharedElementNames.isEmpty() && (index = this.mSharedElementNames.indexOf(this.mAllSharedElementNames.get(0))) >= 0) {
+        if (!this.mAllSharedElementNames.isEmpty()
+                && !this.mSharedElementNames.isEmpty()
+                && (index = this.mSharedElementNames.indexOf(this.mAllSharedElementNames.get(0)))
+                        >= 0) {
             epicenter = this.mSharedElements.get(index);
         }
         setEpicenter(epicenter);
@@ -221,7 +230,8 @@ abstract class ActivityTransitionCoordinator extends ResultReceiver {
         return null;
     }
 
-    protected Transition configureTransition(Transition transition, boolean includeTransitioningViews) {
+    protected Transition configureTransition(
+            Transition transition, boolean includeTransitioningViews) {
         if (transition != null) {
             Transition transition2 = transition.mo5201clone();
             transition2.setEpicenterCallback(this.mEpicenterCallback);
@@ -238,7 +248,8 @@ abstract class ActivityTransitionCoordinator extends ResultReceiver {
         views.addAll(included);
     }
 
-    private static void findIncludedViews(Transition transition, ArrayList<View> views, ArraySet<View> included) {
+    private static void findIncludedViews(
+            Transition transition, ArrayList<View> views, ArraySet<View> included) {
         if (transition instanceof TransitionSet) {
             TransitionSet set = (TransitionSet) transition;
             ArrayList<View> includedViews = new ArrayList<>();
@@ -277,7 +288,8 @@ abstract class ActivityTransitionCoordinator extends ResultReceiver {
         return transitionSet;
     }
 
-    protected ArrayMap<String, View> mapSharedElements(ArrayList<String> accepted, ArrayList<View> localViews) {
+    protected ArrayMap<String, View> mapSharedElements(
+            ArrayList<String> accepted, ArrayList<View> localViews) {
         ArrayMap<String, View> sharedElements = new ArrayMap<>();
         if (accepted != null) {
             for (int i = 0; i < accepted.size(); i++) {
@@ -296,7 +308,13 @@ abstract class ActivityTransitionCoordinator extends ResultReceiver {
         this.mResultReceiver = resultReceiver;
     }
 
-    private void setSharedElementState(View view, String name, Bundle transitionArgs, Matrix tempMatrix, RectF tempRect, int[] decorLoc) {
+    private void setSharedElementState(
+            View view,
+            String name,
+            Bundle transitionArgs,
+            Matrix tempMatrix,
+            RectF tempRect,
+            int[] decorLoc) {
         float left;
         float top;
         float right;
@@ -306,7 +324,8 @@ abstract class ActivityTransitionCoordinator extends ResultReceiver {
         if (sharedElementBundle == null) {
             return;
         }
-        if ((view instanceof ImageView) && (scaleTypeInt = sharedElementBundle.getInt(KEY_SCALE_TYPE, -1)) >= 0) {
+        if ((view instanceof ImageView)
+                && (scaleTypeInt = sharedElementBundle.getInt(KEY_SCALE_TYPE, -1)) >= 0) {
             ImageView imageView = (ImageView) view;
             ImageView.ScaleType scaleType = SCALE_TYPE_VALUES[scaleTypeInt];
             imageView.setScaleType(scaleType);
@@ -378,7 +397,8 @@ abstract class ActivityTransitionCoordinator extends ResultReceiver {
     }
 
     private void getSharedElementParentMatrix(View view, Matrix matrix) {
-        int index = this.mSharedElementParentMatrices == null ? -1 : this.mSharedElements.indexOf(view);
+        int index =
+                this.mSharedElementParentMatrices == null ? -1 : this.mSharedElements.indexOf(view);
         if (index < 0) {
             matrix.reset();
             ViewParent viewParent = view.getParent();
@@ -394,7 +414,8 @@ abstract class ActivityTransitionCoordinator extends ResultReceiver {
         matrix.set(parentMatrix);
     }
 
-    protected ArrayList<SharedElementOriginalState> setSharedElementState(Bundle sharedElementState, ArrayList<View> snapshots) {
+    protected ArrayList<SharedElementOriginalState> setSharedElementState(
+            Bundle sharedElementState, ArrayList<View> snapshots) {
         ArrayList<SharedElementOriginalState> originalImageState = new ArrayList<>();
         if (sharedElementState != null) {
             Matrix tempMatrix = new Matrix();
@@ -403,13 +424,16 @@ abstract class ActivityTransitionCoordinator extends ResultReceiver {
             for (int i = 0; i < numSharedElements; i++) {
                 View sharedElement = this.mSharedElements.get(i);
                 String name = this.mSharedElementNames.get(i);
-                SharedElementOriginalState originalState = getOldSharedElementState(sharedElement, name, sharedElementState);
+                SharedElementOriginalState originalState =
+                        getOldSharedElementState(sharedElement, name, sharedElementState);
                 originalImageState.add(originalState);
-                setSharedElementState(sharedElement, name, sharedElementState, tempMatrix, tempRect, null);
+                setSharedElementState(
+                        sharedElement, name, sharedElementState, tempMatrix, tempRect, null);
             }
         }
         if (this.mListener != null) {
-            this.mListener.onSharedElementStart(this.mSharedElementNames, this.mSharedElements, snapshots);
+            this.mListener.onSharedElementStart(
+                    this.mSharedElementNames, this.mSharedElements, snapshots);
         }
         return originalImageState;
     }
@@ -418,23 +442,29 @@ abstract class ActivityTransitionCoordinator extends ResultReceiver {
     /* renamed from: notifySharedElementEnd, reason: merged with bridge method [inline-methods] */
     public void lambda$scheduleSetSharedElementEnd$0(ArrayList<View> snapshots) {
         if (this.mListener != null) {
-            this.mListener.onSharedElementEnd(this.mSharedElementNames, this.mSharedElements, snapshots);
+            this.mListener.onSharedElementEnd(
+                    this.mSharedElementNames, this.mSharedElements, snapshots);
         }
     }
 
     protected void scheduleSetSharedElementEnd(final ArrayList<View> snapshots) {
         View decorView = getDecor();
         if (decorView != null) {
-            OneShotPreDrawListener.add(decorView, new Runnable() { // from class: android.app.ActivityTransitionCoordinator$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ActivityTransitionCoordinator.this.lambda$scheduleSetSharedElementEnd$0(snapshots);
-                }
-            });
+            OneShotPreDrawListener.add(
+                    decorView,
+                    new Runnable() { // from class:
+                        // android.app.ActivityTransitionCoordinator$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ActivityTransitionCoordinator.this.lambda$scheduleSetSharedElementEnd$0(
+                                    snapshots);
+                        }
+                    });
         }
     }
 
-    private static SharedElementOriginalState getOldSharedElementState(View view, String name, Bundle transitionArgs) {
+    private static SharedElementOriginalState getOldSharedElementState(
+            View view, String name, Bundle transitionArgs) {
         SharedElementOriginalState state = new SharedElementOriginalState();
         state.mLeft = view.getLeft();
         state.mTop = view.getTop();
@@ -498,7 +528,8 @@ abstract class ActivityTransitionCoordinator extends ResultReceiver {
         return snapshots;
     }
 
-    protected static void setOriginalSharedElementState(ArrayList<View> sharedElements, ArrayList<SharedElementOriginalState> originalState) {
+    protected static void setOriginalSharedElementState(
+            ArrayList<View> sharedElements, ArrayList<SharedElementOriginalState> originalState) {
         for (int i = 0; i < originalState.size(); i++) {
             View view = sharedElements.get(i);
             SharedElementOriginalState state = originalState.get(i);
@@ -579,7 +610,8 @@ abstract class ActivityTransitionCoordinator extends ResultReceiver {
         }
     }
 
-    protected void captureSharedElementState(View view, String name, Bundle transitionArgs, Matrix tempMatrix, RectF tempBounds) {
+    protected void captureSharedElementState(
+            View view, String name, Bundle transitionArgs, Matrix tempMatrix, RectF tempBounds) {
         Bundle sharedElementBundle = new Bundle();
         tempMatrix.reset();
         view.transformMatrixToGlobal(tempMatrix);
@@ -681,7 +713,9 @@ abstract class ActivityTransitionCoordinator extends ResultReceiver {
             listener.removeListener();
         }
         this.mGhostViewListeners.clear();
-        if (this.mWindow != null && this.mWindow.getSharedElementsUseOverlay() && (decor = getDecor()) != null) {
+        if (this.mWindow != null
+                && this.mWindow.getSharedElementsUseOverlay()
+                && (decor = getDecor()) != null) {
             decor.getOverlay();
             int count = this.mSharedElements.size();
             for (int i2 = 0; i2 < count; i2++) {
@@ -706,12 +740,16 @@ abstract class ActivityTransitionCoordinator extends ResultReceiver {
     protected void scheduleGhostVisibilityChange(final int visibility) {
         View decorView = getDecor();
         if (decorView != null) {
-            OneShotPreDrawListener.add(decorView, new Runnable() { // from class: android.app.ActivityTransitionCoordinator$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ActivityTransitionCoordinator.this.lambda$scheduleGhostVisibilityChange$1(visibility);
-                }
-            });
+            OneShotPreDrawListener.add(
+                    decorView,
+                    new Runnable() { // from class:
+                        // android.app.ActivityTransitionCoordinator$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ActivityTransitionCoordinator.this
+                                    .lambda$scheduleGhostVisibilityChange$1(visibility);
+                        }
+                    });
         }
     }
 
@@ -752,14 +790,13 @@ abstract class ActivityTransitionCoordinator extends ResultReceiver {
         }
     }
 
-    protected void onTransitionsComplete() {
-    }
+    protected void onTransitionsComplete() {}
 
     protected class ContinueTransitionListener extends TransitionListenerAdapter {
-        protected ContinueTransitionListener() {
-        }
+        protected ContinueTransitionListener() {}
 
-        @Override // android.transition.TransitionListenerAdapter, android.transition.Transition.TransitionListener
+        @Override // android.transition.TransitionListenerAdapter,
+        // android.transition.Transition.TransitionListener
         public void onTransitionStart(Transition transition) {
             ActivityTransitionCoordinator.this.mIsStartingTransition = false;
             Runnable pending = ActivityTransitionCoordinator.this.mPendingTransition;
@@ -769,7 +806,8 @@ abstract class ActivityTransitionCoordinator extends ResultReceiver {
             }
         }
 
-        @Override // android.transition.TransitionListenerAdapter, android.transition.Transition.TransitionListener
+        @Override // android.transition.TransitionListenerAdapter,
+        // android.transition.Transition.TransitionListener
         public void onTransitionEnd(Transition transition) {
             transition.removeListener(this);
         }
@@ -810,14 +848,17 @@ abstract class ActivityTransitionCoordinator extends ResultReceiver {
     }
 
     public boolean isTransitionRunning() {
-        return (this.mViewsTransitionComplete && this.mSharedElementTransitionComplete && this.mBackgroundAnimatorComplete) ? false : true;
+        return (this.mViewsTransitionComplete
+                        && this.mSharedElementTransitionComplete
+                        && this.mBackgroundAnimatorComplete)
+                ? false
+                : true;
     }
 
     private static class FixedEpicenterCallback extends Transition.EpicenterCallback {
         private Rect mEpicenter;
 
-        private FixedEpicenterCallback() {
-        }
+        private FixedEpicenterCallback() {}
 
         public void setEpicenter(Rect epicenter) {
             this.mEpicenter = epicenter;
@@ -829,7 +870,8 @@ abstract class ActivityTransitionCoordinator extends ResultReceiver {
         }
     }
 
-    private static class GhostViewListeners implements ViewTreeObserver.OnPreDrawListener, View.OnAttachStateChangeListener {
+    private static class GhostViewListeners
+            implements ViewTreeObserver.OnPreDrawListener, View.OnAttachStateChangeListener {
         private ViewGroup mDecor;
         private Matrix mMatrix = new Matrix();
         private View mParent;
@@ -891,7 +933,6 @@ abstract class ActivityTransitionCoordinator extends ResultReceiver {
         int mTop;
         float mTranslationZ;
 
-        SharedElementOriginalState() {
-        }
+        SharedElementOriginalState() {}
     }
 }

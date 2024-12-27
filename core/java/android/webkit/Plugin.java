@@ -83,17 +83,23 @@ public class Plugin {
     }
 
     @Deprecated
-    private class DefaultClickHandler implements PreferencesClickHandler, DialogInterface.OnClickListener {
+    private class DefaultClickHandler
+            implements PreferencesClickHandler, DialogInterface.OnClickListener {
         private AlertDialog mDialog;
 
-        private DefaultClickHandler() {
-        }
+        private DefaultClickHandler() {}
 
         @Override // android.webkit.Plugin.PreferencesClickHandler
         @Deprecated
         public void handleClickEvent(Context context) {
             if (this.mDialog == null) {
-                this.mDialog = new AlertDialog.Builder(context).setTitle(Plugin.this.mName).setMessage(Plugin.this.mDescription).setPositiveButton(17039370, this).setCancelable(false).show();
+                this.mDialog =
+                        new AlertDialog.Builder(context)
+                                .setTitle(Plugin.this.mName)
+                                .setMessage(Plugin.this.mDescription)
+                                .setPositiveButton(17039370, this)
+                                .setCancelable(false)
+                                .show();
             }
         }
 

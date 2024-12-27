@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.security.identity.ICredential;
 
 /* loaded from: classes3.dex */
 public interface ISession extends IInterface {
@@ -33,15 +32,14 @@ public interface ISession extends IInterface {
         }
 
         @Override // android.security.identity.ISession
-        public void setReaderEphemeralPublicKey(byte[] publicKey) throws RemoteException {
-        }
+        public void setReaderEphemeralPublicKey(byte[] publicKey) throws RemoteException {}
 
         @Override // android.security.identity.ISession
-        public void setSessionTranscript(byte[] sessionTranscript) throws RemoteException {
-        }
+        public void setSessionTranscript(byte[] sessionTranscript) throws RemoteException {}
 
         @Override // android.security.identity.ISession
-        public ICredential getCredentialForPresentation(String credentialName) throws RemoteException {
+        public ICredential getCredentialForPresentation(String credentialName)
+                throws RemoteException {
             return null;
         }
 
@@ -51,7 +49,7 @@ public interface ISession extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISession {
+    public abstract static class Stub extends Binder implements ISession {
         static final int TRANSACTION_getAuthChallenge = 2;
         static final int TRANSACTION_getCredentialForPresentation = 5;
         static final int TRANSACTION_getEphemeralKeyPair = 1;
@@ -101,7 +99,8 @@ public interface ISession extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISession.DESCRIPTOR);
             }
@@ -223,7 +222,8 @@ public interface ISession extends IInterface {
             }
 
             @Override // android.security.identity.ISession
-            public ICredential getCredentialForPresentation(String credentialName) throws RemoteException {
+            public ICredential getCredentialForPresentation(String credentialName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

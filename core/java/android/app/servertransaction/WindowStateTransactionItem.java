@@ -3,6 +3,7 @@ package android.app.servertransaction;
 import android.app.ClientTransactionHandler;
 import android.os.Parcel;
 import android.view.IWindow;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
@@ -13,13 +14,16 @@ public abstract class WindowStateTransactionItem extends ClientTransactionItem {
         void onExecutingWindowStateTransactionItem();
     }
 
-    public abstract void execute(ClientTransactionHandler clientTransactionHandler, IWindow iWindow, PendingTransactionActions pendingTransactionActions);
+    public abstract void execute(
+            ClientTransactionHandler clientTransactionHandler,
+            IWindow iWindow,
+            PendingTransactionActions pendingTransactionActions);
 
-    WindowStateTransactionItem() {
-    }
+    WindowStateTransactionItem() {}
 
     @Override // android.app.servertransaction.BaseClientRequest
-    public final void execute(ClientTransactionHandler client, PendingTransactionActions pendingActions) {
+    public final void execute(
+            ClientTransactionHandler client, PendingTransactionActions pendingActions) {
         IWindow iWindow = this.mWindow;
         if (iWindow instanceof TransactionListener) {
             TransactionListener listener = (TransactionListener) iWindow;

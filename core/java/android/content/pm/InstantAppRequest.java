@@ -17,7 +17,18 @@ public final class InstantAppRequest {
     public final int userId;
     public final Bundle verificationBundle;
 
-    public InstantAppRequest(AuxiliaryResolveInfo responseObj, Intent origIntent, String resolvedType, String callingPackage, String callingFeatureId, boolean isRequesterInstantApp, int userId, Bundle verificationBundle, boolean resolveForStart, int[] hostDigestPrefixSecure, String token) {
+    public InstantAppRequest(
+            AuxiliaryResolveInfo responseObj,
+            Intent origIntent,
+            String resolvedType,
+            String callingPackage,
+            String callingFeatureId,
+            boolean isRequesterInstantApp,
+            int userId,
+            Bundle verificationBundle,
+            boolean resolveForStart,
+            int[] hostDigestPrefixSecure,
+            String token) {
         this.responseObj = responseObj;
         this.origIntent = origIntent;
         this.resolvedType = resolvedType;

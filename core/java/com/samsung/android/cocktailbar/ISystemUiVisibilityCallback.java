@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface ISystemUiVisibilityCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.cocktailbar.ISystemUiVisibilityCallback";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.cocktailbar.ISystemUiVisibilityCallback";
 
     void onSystemUiVisibilityChanged(int i) throws RemoteException;
 
     public static class Default implements ISystemUiVisibilityCallback {
         @Override // com.samsung.android.cocktailbar.ISystemUiVisibilityCallback
-        public void onSystemUiVisibilityChanged(int visibility) throws RemoteException {
-        }
+        public void onSystemUiVisibilityChanged(int visibility) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface ISystemUiVisibilityCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISystemUiVisibilityCallback {
+    public abstract static class Stub extends Binder implements ISystemUiVisibilityCallback {
         static final int TRANSACTION_onSystemUiVisibilityChanged = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface ISystemUiVisibilityCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISystemUiVisibilityCallback.DESCRIPTOR);
             }

@@ -18,8 +18,7 @@ public interface ICameraInjectionCallback extends IInterface {
 
     public static class Default implements ICameraInjectionCallback {
         @Override // android.hardware.camera2.ICameraInjectionCallback
-        public void onInjectionError(int errorCode) throws RemoteException {
-        }
+        public void onInjectionError(int errorCode) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -27,7 +26,7 @@ public interface ICameraInjectionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICameraInjectionCallback {
+    public abstract static class Stub extends Binder implements ICameraInjectionCallback {
         static final int TRANSACTION_onInjectionError = 1;
 
         public Stub() {
@@ -65,7 +64,8 @@ public interface ICameraInjectionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICameraInjectionCallback.DESCRIPTOR);
             }

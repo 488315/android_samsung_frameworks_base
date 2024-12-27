@@ -47,6 +47,7 @@ import android.util.EventLog;
 import android.util.FeatureFlagUtils;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.infra.AndroidFuture;
 import com.android.internal.util.Preconditions;
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
@@ -56,7 +57,6 @@ import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.LocalServices;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
-import com.android.server.backup.TransportManager;
 import com.android.server.backup.fullbackup.FullBackupEntry;
 import com.android.server.backup.fullbackup.PerformFullTransportBackupTask;
 import com.android.server.backup.internal.BackupHandler;
@@ -86,8 +86,11 @@ import com.android.server.backup.utils.BackupManagerMonitorEventSender;
 import com.android.server.backup.utils.BackupObserverUtils;
 import com.android.server.clipboard.ClipboardService;
 import com.android.server.pm.PackageManagerShellCommandDataLoader;
-import com.google.android.collect.Sets;
+
 import dalvik.annotation.optimization.NeverCompile;
+
+import com.google.android.collect.Sets;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -201,7 +204,8 @@ public final class UserBackupManagerService {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ UserBackupManagerService this$0;
 
-        public /* synthetic */ AnonymousClass1(int i, UserBackupManagerService userBackupManagerService) {
+        public /* synthetic */ AnonymousClass1(
+                int i, UserBackupManagerService userBackupManagerService) {
             this.$r8$classId = i;
             this.this$0 = userBackupManagerService;
         }
@@ -214,23 +218,32 @@ public final class UserBackupManagerService {
                 case 0:
                     synchronized (this.this$0.mQueueLock) {
                         try {
-                            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(4096);
-                            DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
+                            ByteArrayOutputStream byteArrayOutputStream =
+                                    new ByteArrayOutputStream(4096);
+                            DataOutputStream dataOutputStream =
+                                    new DataOutputStream(byteArrayOutputStream);
                             dataOutputStream.writeInt(1);
                             int size = this.this$0.mFullBackupQueue.size();
                             dataOutputStream.writeInt(size);
                             for (int i = 0; i < size; i++) {
-                                FullBackupEntry fullBackupEntry = (FullBackupEntry) this.this$0.mFullBackupQueue.get(i);
+                                FullBackupEntry fullBackupEntry =
+                                        (FullBackupEntry) this.this$0.mFullBackupQueue.get(i);
                                 dataOutputStream.writeUTF(fullBackupEntry.packageName);
                                 dataOutputStream.writeLong(fullBackupEntry.lastBackup);
                             }
                             dataOutputStream.flush();
-                            AtomicFile atomicFile = new AtomicFile(this.this$0.mFullBackupScheduleFile);
+                            AtomicFile atomicFile =
+                                    new AtomicFile(this.this$0.mFullBackupScheduleFile);
                             FileOutputStream startWrite = atomicFile.startWrite();
                             startWrite.write(byteArrayOutputStream.toByteArray());
                             atomicFile.finishWrite(startWrite);
                         } catch (Exception e) {
-                            Slog.e("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(this.this$0.mUserId, "Unable to write backup schedule!"), e);
+                            Slog.e(
+                                    "BackupManagerService",
+                                    UserBackupManagerService.addUserIdToLogMessage(
+                                            this.this$0.mUserId,
+                                            "Unable to write backup schedule!"),
+                                    e);
                         } finally {
                         }
                     }
@@ -238,13 +251,18 @@ public final class UserBackupManagerService {
                 default:
                     synchronized (this.this$0.mQueueLock) {
                         userBackupManagerService = this.this$0;
-                        performFullTransportBackupTask = userBackupManagerService.mRunningFullBackupTask;
+                        performFullTransportBackupTask =
+                                userBackupManagerService.mRunningFullBackupTask;
                         if (performFullTransportBackupTask == null) {
                             performFullTransportBackupTask = null;
                         }
                     }
                     if (performFullTransportBackupTask != null) {
-                        Slog.i("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(userBackupManagerService.mUserId, "Telling running backup to stop"));
+                        Slog.i(
+                                "BackupManagerService",
+                                UserBackupManagerService.addUserIdToLogMessage(
+                                        userBackupManagerService.mUserId,
+                                        "Telling running backup to stop"));
                         performFullTransportBackupTask.handleCancel(true);
                         return;
                     }
@@ -256,8 +274,7 @@ public final class UserBackupManagerService {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.backup.UserBackupManagerService$2, reason: invalid class name */
     public final class AnonymousClass2 extends BroadcastReceiver {
-        public AnonymousClass2() {
-        }
+        public AnonymousClass2() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
@@ -266,15 +283,22 @@ public final class UserBackupManagerService {
             String action = intent.getAction();
             Bundle extras = intent.getExtras();
             boolean z2 = true;
-            if ("android.intent.action.PACKAGE_ADDED".equals(action) || "android.intent.action.PACKAGE_REMOVED".equals(action) || "android.intent.action.PACKAGE_CHANGED".equals(action)) {
+            if ("android.intent.action.PACKAGE_ADDED".equals(action)
+                    || "android.intent.action.PACKAGE_REMOVED".equals(action)
+                    || "android.intent.action.PACKAGE_CHANGED".equals(action)) {
                 Uri data = intent.getData();
                 if (data == null) {
                     return;
                 }
                 String schemeSpecificPart = data.getSchemeSpecificPart();
-                strArr = schemeSpecificPart != null ? new String[]{schemeSpecificPart} : null;
+                strArr = schemeSpecificPart != null ? new String[] {schemeSpecificPart} : null;
                 if ("android.intent.action.PACKAGE_CHANGED".equals(action)) {
-                    UserBackupManagerService.this.mBackupHandler.post(new UserBackupManagerService$$ExternalSyntheticLambda6(this, schemeSpecificPart, intent.getStringArrayExtra("android.intent.extra.changed_component_name_list")));
+                    UserBackupManagerService.this.mBackupHandler.post(
+                            new UserBackupManagerService$$ExternalSyntheticLambda6(
+                                    this,
+                                    schemeSpecificPart,
+                                    intent.getStringArrayExtra(
+                                            "android.intent.extra.changed_component_name_list")));
                     return;
                 } else {
                     z2 = "android.intent.action.PACKAGE_ADDED".equals(action);
@@ -284,7 +308,11 @@ public final class UserBackupManagerService {
                 strArr = intent.getStringArrayExtra("android.intent.extra.changed_package_list");
                 z = false;
             } else {
-                strArr = "android.intent.action.EXTERNAL_APPLICATIONS_UNAVAILABLE".equals(action) ? intent.getStringArrayExtra("android.intent.extra.changed_package_list") : null;
+                strArr =
+                        "android.intent.action.EXTERNAL_APPLICATIONS_UNAVAILABLE".equals(action)
+                                ? intent.getStringArrayExtra(
+                                        "android.intent.extra.changed_package_list")
+                                : null;
                 z = false;
                 z2 = false;
             }
@@ -295,48 +323,65 @@ public final class UserBackupManagerService {
             if (!z2) {
                 if (!z) {
                     synchronized (UserBackupManagerService.this.mBackupParticipants) {
-                        UserBackupManagerService.m303$$Nest$mremovePackageParticipantsLocked(UserBackupManagerService.this, strArr, i);
+                        UserBackupManagerService.m303$$Nest$mremovePackageParticipantsLocked(
+                                UserBackupManagerService.this, strArr, i);
                     }
                 }
                 for (String str : strArr) {
-                    UserBackupManagerService.this.mBackupHandler.post(new UserBackupManagerService$$ExternalSyntheticLambda11(str, 2, this));
+                    UserBackupManagerService.this.mBackupHandler.post(
+                            new UserBackupManagerService$$ExternalSyntheticLambda11(str, 2, this));
                 }
                 return;
             }
             synchronized (UserBackupManagerService.this.mBackupParticipants) {
                 if (z) {
                     try {
-                        UserBackupManagerService.m303$$Nest$mremovePackageParticipantsLocked(UserBackupManagerService.this, strArr, i);
+                        UserBackupManagerService.m303$$Nest$mremovePackageParticipantsLocked(
+                                UserBackupManagerService.this, strArr, i);
                     } finally {
                     }
                 }
                 UserBackupManagerService userBackupManagerService = UserBackupManagerService.this;
                 List allAgentPackages = userBackupManagerService.allAgentPackages();
                 for (String str2 : strArr) {
-                    userBackupManagerService.addPackageParticipantsLockedInner(str2, allAgentPackages);
+                    userBackupManagerService.addPackageParticipantsLockedInner(
+                            str2, allAgentPackages);
                 }
             }
             long currentTimeMillis = System.currentTimeMillis();
             for (String str3 : strArr) {
                 try {
-                    UserBackupManagerService userBackupManagerService2 = UserBackupManagerService.this;
-                    PackageInfo packageInfoAsUser = userBackupManagerService2.mPackageManager.getPackageInfoAsUser(str3, 0, userBackupManagerService2.mUserId);
-                    if (UserBackupManagerService.this.mScheduledBackupEligibility.appGetsFullBackup(packageInfoAsUser) && UserBackupManagerService.this.mScheduledBackupEligibility.appIsEligibleForBackup(packageInfoAsUser.applicationInfo)) {
+                    UserBackupManagerService userBackupManagerService2 =
+                            UserBackupManagerService.this;
+                    PackageInfo packageInfoAsUser =
+                            userBackupManagerService2.mPackageManager.getPackageInfoAsUser(
+                                    str3, 0, userBackupManagerService2.mUserId);
+                    if (UserBackupManagerService.this.mScheduledBackupEligibility.appGetsFullBackup(
+                                    packageInfoAsUser)
+                            && UserBackupManagerService.this.mScheduledBackupEligibility
+                                    .appIsEligibleForBackup(packageInfoAsUser.applicationInfo)) {
                         UserBackupManagerService.this.enqueueFullBackup(currentTimeMillis, str3);
                         UserBackupManagerService.this.scheduleNextFullBackupJob(0L);
                     } else {
                         synchronized (UserBackupManagerService.this.mQueueLock) {
                             UserBackupManagerService.this.dequeueFullBackupLocked(str3);
                         }
-                        UserBackupManagerService userBackupManagerService3 = UserBackupManagerService.this;
-                        AnonymousClass1 anonymousClass1 = userBackupManagerService3.mFullBackupScheduleWriter;
+                        UserBackupManagerService userBackupManagerService3 =
+                                UserBackupManagerService.this;
+                        AnonymousClass1 anonymousClass1 =
+                                userBackupManagerService3.mFullBackupScheduleWriter;
                         BackupHandler backupHandler = userBackupManagerService3.mBackupHandler;
                         backupHandler.removeCallbacks(anonymousClass1);
                         backupHandler.post(userBackupManagerService3.mFullBackupScheduleWriter);
                     }
-                    UserBackupManagerService.this.mBackupHandler.post(new UserBackupManagerService$$ExternalSyntheticLambda11(str3, 1, this));
+                    UserBackupManagerService.this.mBackupHandler.post(
+                            new UserBackupManagerService$$ExternalSyntheticLambda11(str3, 1, this));
                 } catch (PackageManager.NameNotFoundException unused) {
-                    Slog.w("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(UserBackupManagerService.this.mUserId, "Can't resolve new app " + str3));
+                    Slog.w(
+                            "BackupManagerService",
+                            UserBackupManagerService.addUserIdToLogMessage(
+                                    UserBackupManagerService.this.mUserId,
+                                    "Can't resolve new app " + str3));
                 }
             }
             UserBackupManagerService.this.dataChangedImpl("@pm@");
@@ -356,11 +401,20 @@ public final class UserBackupManagerService {
 
         public final synchronized void acquire() {
             if (this.mHasQuit) {
-                Slog.v("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(this.mUserId, "Ignore wakelock acquire after quit: " + this.mPowerManagerWakeLock.getTag()));
+                Slog.v(
+                        "BackupManagerService",
+                        UserBackupManagerService.addUserIdToLogMessage(
+                                this.mUserId,
+                                "Ignore wakelock acquire after quit: "
+                                        + this.mPowerManagerWakeLock.getTag()));
                 return;
             }
             this.mPowerManagerWakeLock.acquire();
-            Slog.i("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(this.mUserId, "Acquired wakelock:" + this.mPowerManagerWakeLock.getTag()));
+            Slog.i(
+                    "BackupManagerService",
+                    UserBackupManagerService.addUserIdToLogMessage(
+                            this.mUserId,
+                            "Acquired wakelock:" + this.mPowerManagerWakeLock.getTag()));
         }
 
         public final synchronized boolean isHeld() {
@@ -370,7 +424,11 @@ public final class UserBackupManagerService {
         public final synchronized void quit() {
             while (this.mPowerManagerWakeLock.isHeld()) {
                 try {
-                    Slog.v("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(this.mUserId, "Releasing wakelock: " + this.mPowerManagerWakeLock.getTag()));
+                    Slog.v(
+                            "BackupManagerService",
+                            UserBackupManagerService.addUserIdToLogMessage(
+                                    this.mUserId,
+                                    "Releasing wakelock: " + this.mPowerManagerWakeLock.getTag()));
                     this.mPowerManagerWakeLock.release();
                 } catch (Throwable th) {
                     throw th;
@@ -381,18 +439,28 @@ public final class UserBackupManagerService {
 
         public final synchronized void release() {
             if (this.mHasQuit) {
-                Slog.v("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(this.mUserId, "Ignore wakelock release after quit: " + this.mPowerManagerWakeLock.getTag()));
+                Slog.v(
+                        "BackupManagerService",
+                        UserBackupManagerService.addUserIdToLogMessage(
+                                this.mUserId,
+                                "Ignore wakelock release after quit: "
+                                        + this.mPowerManagerWakeLock.getTag()));
                 return;
             }
             if (this.mPowerManagerWakeLock.isHeld()) {
                 this.mPowerManagerWakeLock.release();
             }
-            Slog.i("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(this.mUserId, "Released wakelock:" + this.mPowerManagerWakeLock.getTag()));
+            Slog.i(
+                    "BackupManagerService",
+                    UserBackupManagerService.addUserIdToLogMessage(
+                            this.mUserId,
+                            "Released wakelock:" + this.mPowerManagerWakeLock.getTag()));
         }
     }
 
     /* renamed from: -$$Nest$mremovePackageParticipantsLocked, reason: not valid java name */
-    public static void m303$$Nest$mremovePackageParticipantsLocked(UserBackupManagerService userBackupManagerService, String[] strArr, int i) {
+    public static void m303$$Nest$mremovePackageParticipantsLocked(
+            UserBackupManagerService userBackupManagerService, String[] strArr, int i) {
         userBackupManagerService.getClass();
         for (String str : strArr) {
             HashSet hashSet = (HashSet) userBackupManagerService.mBackupParticipants.get(i);
@@ -414,7 +482,14 @@ public final class UserBackupManagerService {
         mSplitRestoreFlag = bool;
     }
 
-    public UserBackupManagerService(int i, Context context, BackupManagerService backupManagerService, HandlerThread handlerThread, File file, File file2, final TransportManager transportManager) {
+    public UserBackupManagerService(
+            int i,
+            Context context,
+            BackupManagerService backupManagerService,
+            HandlerThread handlerThread,
+            File file,
+            File file2,
+            final TransportManager transportManager) {
         this.mPendingInits = new ArraySet();
         SparseArray sparseArray = new SparseArray();
         this.mBackupParticipants = sparseArray;
@@ -429,7 +504,17 @@ public final class UserBackupManagerService {
         this.mSepTimeOut = false;
         this.mSepTimeoutMin = 30;
         this.mTransportFlagsForAdbBackup = 0;
-        this.mPrivilegePkgName = new String[]{"com.sec.android.easyMover", "com.sec.android.Kies", "com.samsung.android.da.daagent", "com.samsung.memorysaver", "com.samsung.knox.bnr", "com.samsung.knox.securefolder", "com.samsung.android.se.unit", "com.samsung.android.game.gamehome"};
+        this.mPrivilegePkgName =
+                new String[] {
+                    "com.sec.android.easyMover",
+                    "com.sec.android.Kies",
+                    "com.samsung.android.da.daagent",
+                    "com.samsung.memorysaver",
+                    "com.samsung.knox.bnr",
+                    "com.samsung.knox.securefolder",
+                    "com.samsung.android.se.unit",
+                    "com.samsung.android.game.gamehome"
+                };
         this.mAdbBackupRestoreConfirmations = new SparseArray();
         SecureRandom secureRandom = new SecureRandom();
         this.mRng = secureRandom;
@@ -449,32 +534,51 @@ public final class UserBackupManagerService {
         this.mPackageManager = packageManager;
         this.mPackageManagerBinder = AppGlobals.getPackageManager();
         this.mActivityManager = ActivityManager.getService();
-        this.mActivityManagerInternal = (ActivityManagerInternal) LocalServices.getService(ActivityManagerInternal.class);
-        this.mScheduledBackupEligibility = new BackupEligibilityRules(packageManager, (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class), i, context, 0, false);
+        this.mActivityManagerInternal =
+                (ActivityManagerInternal) LocalServices.getService(ActivityManagerInternal.class);
+        this.mScheduledBackupEligibility =
+                new BackupEligibilityRules(
+                        packageManager,
+                        (PackageManagerInternal)
+                                LocalServices.getService(PackageManagerInternal.class),
+                        i,
+                        context,
+                        0,
+                        false);
         this.mAlarmManager = (AlarmManager) context.getSystemService("alarm");
         this.mPowerManager = (PowerManager) context.getSystemService("power");
         Objects.requireNonNull(backupManagerService, "parent cannot be null");
-        this.mBackupManagerBinder = IBackupManager.Stub.asInterface(backupManagerService.asBinder());
-        BackupAgentTimeoutParameters backupAgentTimeoutParameters = new BackupAgentTimeoutParameters(Handler.getMain(), context.getContentResolver());
+        this.mBackupManagerBinder =
+                IBackupManager.Stub.asInterface(backupManagerService.asBinder());
+        BackupAgentTimeoutParameters backupAgentTimeoutParameters =
+                new BackupAgentTimeoutParameters(Handler.getMain(), context.getContentResolver());
         this.mAgentTimeoutParameters = backupAgentTimeoutParameters;
         backupAgentTimeoutParameters.start();
         LifecycleOperationStorage lifecycleOperationStorage = new LifecycleOperationStorage(i);
         this.mOperationStorage = lifecycleOperationStorage;
         Objects.requireNonNull(handlerThread, "userBackupThread cannot be null");
-        BackupHandler backupHandler = new BackupHandler(this, lifecycleOperationStorage, handlerThread);
+        BackupHandler backupHandler =
+                new BackupHandler(this, lifecycleOperationStorage, handlerThread);
         this.mBackupHandler = backupHandler;
         ContentResolver contentResolver = context.getContentResolver();
-        this.mSetupComplete = Settings.Secure.getIntForUser(context.getContentResolver(), "user_setup_complete", 0, i) != 0;
-        this.mAutoRestore = Settings.Secure.getIntForUser(contentResolver, "backup_auto_restore", 1, i) != 0;
+        this.mSetupComplete =
+                Settings.Secure.getIntForUser(
+                                context.getContentResolver(), "user_setup_complete", 0, i)
+                        != 0;
+        this.mAutoRestore =
+                Settings.Secure.getIntForUser(contentResolver, "backup_auto_restore", 1, i) != 0;
         SetupObserver setupObserver = new SetupObserver(this, backupHandler);
         this.mSetupObserver = setupObserver;
-        contentResolver.registerContentObserver(Settings.Secure.getUriFor("user_setup_complete"), false, setupObserver, i);
+        contentResolver.registerContentObserver(
+                Settings.Secure.getUriFor("user_setup_complete"), false, setupObserver, i);
         Objects.requireNonNull(file, "baseStateDir cannot be null");
         this.mBaseStateDir = file;
         if (i == 0) {
             file.mkdirs();
             if (!SELinux.restorecon(file)) {
-                Slog.w("BackupManagerService", addUserIdToLogMessage(i, "SELinux restorecon failed on " + file));
+                Slog.w(
+                        "BackupManagerService",
+                        addUserIdToLogMessage(i, "SELinux restorecon failed on " + file));
             }
         }
         Objects.requireNonNull(file2, "dataDir cannot be null");
@@ -482,13 +586,29 @@ public final class UserBackupManagerService {
         this.mBackupPasswordManager = new BackupPasswordManager(context, file, secureRandom);
         RunInitializeReceiver runInitializeReceiver = new RunInitializeReceiver(this);
         this.mRunInitReceiver = runInitializeReceiver;
-        context.registerReceiverAsUser(runInitializeReceiver, UserHandle.of(i), BatteryService$$ExternalSyntheticOutline0.m("android.app.backup.intent.INIT"), "android.permission.BACKUP", null);
-        this.mRunInitIntent = PendingIntent.getBroadcastAsUser(context, 0, BatteryService$$ExternalSyntheticOutline0.m(1073741824, "android.app.backup.intent.INIT"), 67108864, UserHandle.of(i));
+        context.registerReceiverAsUser(
+                runInitializeReceiver,
+                UserHandle.of(i),
+                BatteryService$$ExternalSyntheticOutline0.m("android.app.backup.intent.INIT"),
+                "android.permission.BACKUP",
+                null);
+        this.mRunInitIntent =
+                PendingIntent.getBroadcastAsUser(
+                        context,
+                        0,
+                        BatteryService$$ExternalSyntheticOutline0.m(
+                                1073741824, "android.app.backup.intent.INIT"),
+                        67108864,
+                        UserHandle.of(i));
         File file3 = new File(file, "pending");
         this.mJournalDir = file3;
         file3.mkdirs();
         this.mJournal = null;
-        BackupManagerConstants backupManagerConstants = new BackupManagerConstants(backupHandler, context.getContentResolver(), Settings.Secure.getUriFor("backup_manager_constants"));
+        BackupManagerConstants backupManagerConstants =
+                new BackupManagerConstants(
+                        backupHandler,
+                        context.getContentResolver(),
+                        Settings.Secure.getUriFor("backup_manager_constants"));
         this.mConstants = backupManagerConstants;
         backupManagerConstants.start();
         synchronized (sparseArray) {
@@ -496,178 +616,281 @@ public final class UserBackupManagerService {
         }
         Objects.requireNonNull(transportManager, "transportManager cannot be null");
         this.mTransportManager = transportManager;
-        transportManager.mOnTransportRegisteredListener = new OnTransportRegisteredListener() { // from class: com.android.server.backup.UserBackupManagerService$$ExternalSyntheticLambda1
-            @Override // com.android.server.backup.transport.OnTransportRegisteredListener
-            public final void onTransportRegistered(String str, String str2) {
-                UserBackupManagerService userBackupManagerService = UserBackupManagerService.this;
-                userBackupManagerService.getClass();
-                long elapsedRealtime = SystemClock.elapsedRealtime() - userBackupManagerService.mRegisterTransportsRequestedTime;
-                Slog.d("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(userBackupManagerService.mUserId, "Transport " + str + " registered " + elapsedRealtime + "ms after first request (delay = 3000ms)"));
-                File file4 = new File(userBackupManagerService.mBaseStateDir, str2);
-                file4.mkdirs();
-                if (new File(file4, "_need_init_").exists()) {
-                    synchronized (userBackupManagerService.mQueueLock) {
-                        userBackupManagerService.mPendingInits.add(str);
-                        userBackupManagerService.mAlarmManager.set(0, System.currentTimeMillis() + 60000, userBackupManagerService.mRunInitIntent);
+        transportManager.mOnTransportRegisteredListener =
+                new OnTransportRegisteredListener() { // from class:
+                                                      // com.android.server.backup.UserBackupManagerService$$ExternalSyntheticLambda1
+                    @Override // com.android.server.backup.transport.OnTransportRegisteredListener
+                    public final void onTransportRegistered(String str, String str2) {
+                        UserBackupManagerService userBackupManagerService =
+                                UserBackupManagerService.this;
+                        userBackupManagerService.getClass();
+                        long elapsedRealtime =
+                                SystemClock.elapsedRealtime()
+                                        - userBackupManagerService.mRegisterTransportsRequestedTime;
+                        Slog.d(
+                                "BackupManagerService",
+                                UserBackupManagerService.addUserIdToLogMessage(
+                                        userBackupManagerService.mUserId,
+                                        "Transport "
+                                                + str
+                                                + " registered "
+                                                + elapsedRealtime
+                                                + "ms after first request (delay = 3000ms)"));
+                        File file4 = new File(userBackupManagerService.mBaseStateDir, str2);
+                        file4.mkdirs();
+                        if (new File(file4, "_need_init_").exists()) {
+                            synchronized (userBackupManagerService.mQueueLock) {
+                                userBackupManagerService.mPendingInits.add(str);
+                                userBackupManagerService.mAlarmManager.set(
+                                        0,
+                                        System.currentTimeMillis() + 60000,
+                                        userBackupManagerService.mRunInitIntent);
+                            }
+                        }
                     }
-                }
-            }
-        };
+                };
         this.mRegisterTransportsRequestedTime = SystemClock.elapsedRealtime();
         final int i2 = 0;
-        backupHandler.postDelayed(new Runnable() { // from class: com.android.server.backup.UserBackupManagerService$$ExternalSyntheticLambda2
-            @Override // java.lang.Runnable
-            public final void run() {
-                int i3 = i2;
-                Object obj = transportManager;
-                switch (i3) {
-                    case 0:
-                        TransportManager transportManager2 = (TransportManager) obj;
-                        transportManager2.registerTransportsForIntent(transportManager2.mTransportServiceIntent, new TransportManager$$ExternalSyntheticLambda1());
-                        break;
-                    case 1:
-                        UserBackupManagerService userBackupManagerService = (UserBackupManagerService) obj;
-                        File file4 = userBackupManagerService.mJournalDir;
-                        ArrayList arrayList = new ArrayList();
-                        File[] listFiles = file4.listFiles();
-                        if (listFiles == null) {
-                            Slog.w("DataChangedJournal", "Failed to read journal files");
-                        } else {
-                            for (File file5 : listFiles) {
-                                arrayList.add(new DataChangedJournal(file5));
-                            }
+        backupHandler.postDelayed(
+                new Runnable() { // from class:
+                    // com.android.server.backup.UserBackupManagerService$$ExternalSyntheticLambda2
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        int i3 = i2;
+                        Object obj = transportManager;
+                        switch (i3) {
+                            case 0:
+                                TransportManager transportManager2 = (TransportManager) obj;
+                                transportManager2.registerTransportsForIntent(
+                                        transportManager2.mTransportServiceIntent,
+                                        new TransportManager$$ExternalSyntheticLambda1());
+                                break;
+                            case 1:
+                                UserBackupManagerService userBackupManagerService =
+                                        (UserBackupManagerService) obj;
+                                File file4 = userBackupManagerService.mJournalDir;
+                                ArrayList arrayList = new ArrayList();
+                                File[] listFiles = file4.listFiles();
+                                if (listFiles == null) {
+                                    Slog.w("DataChangedJournal", "Failed to read journal files");
+                                } else {
+                                    for (File file5 : listFiles) {
+                                        arrayList.add(new DataChangedJournal(file5));
+                                    }
+                                }
+                                arrayList.removeAll(
+                                        Collections.singletonList(
+                                                userBackupManagerService.mJournal));
+                                boolean isEmpty = arrayList.isEmpty();
+                                int i4 = userBackupManagerService.mUserId;
+                                if (!isEmpty) {
+                                    Slog.i(
+                                            "BackupManagerService",
+                                            UserBackupManagerService.addUserIdToLogMessage(
+                                                    i4,
+                                                    "Found "
+                                                            + arrayList.size()
+                                                            + " stale backup journal(s),"
+                                                            + " scheduling."));
+                                }
+                                LinkedHashSet linkedHashSet = new LinkedHashSet();
+                                Iterator it = arrayList.iterator();
+                                while (it.hasNext()) {
+                                    DataChangedJournal dataChangedJournal =
+                                            (DataChangedJournal) it.next();
+                                    try {
+                                        dataChangedJournal.forEach(
+                                                new UserBackupManagerService$$ExternalSyntheticLambda13(
+                                                        userBackupManagerService, linkedHashSet));
+                                    } catch (IOException e) {
+                                        Slog.e(
+                                                "BackupManagerService",
+                                                UserBackupManagerService.addUserIdToLogMessage(
+                                                        i4, "Can't read " + dataChangedJournal),
+                                                e);
+                                    }
+                                }
+                                if (!linkedHashSet.isEmpty()) {
+                                    Slog.i(
+                                            "BackupManagerService",
+                                            UserBackupManagerService.addUserIdToLogMessage(
+                                                    i4,
+                                                    "Stale backup journals: Scheduled "
+                                                            + linkedHashSet.size()
+                                                            + " package(s) total"));
+                                    break;
+                                }
+                                break;
+                            default:
+                                ((BackupManagerMonitorDumpsysUtils) obj).deleteExpiredBMMEvents();
+                                break;
                         }
-                        arrayList.removeAll(Collections.singletonList(userBackupManagerService.mJournal));
-                        boolean isEmpty = arrayList.isEmpty();
-                        int i4 = userBackupManagerService.mUserId;
-                        if (!isEmpty) {
-                            Slog.i("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(i4, "Found " + arrayList.size() + " stale backup journal(s), scheduling."));
-                        }
-                        LinkedHashSet linkedHashSet = new LinkedHashSet();
-                        Iterator it = arrayList.iterator();
-                        while (it.hasNext()) {
-                            DataChangedJournal dataChangedJournal = (DataChangedJournal) it.next();
-                            try {
-                                dataChangedJournal.forEach(new UserBackupManagerService$$ExternalSyntheticLambda13(userBackupManagerService, linkedHashSet));
-                            } catch (IOException e) {
-                                Slog.e("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(i4, "Can't read " + dataChangedJournal), e);
-                            }
-                        }
-                        if (!linkedHashSet.isEmpty()) {
-                            Slog.i("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(i4, "Stale backup journals: Scheduled " + linkedHashSet.size() + " package(s) total"));
-                            break;
-                        }
-                        break;
-                    default:
-                        ((BackupManagerMonitorDumpsysUtils) obj).deleteExpiredBMMEvents();
-                        break;
-                }
-            }
-        }, 3000L);
+                    }
+                },
+                3000L);
         final int i3 = 1;
-        backupHandler.postDelayed(new Runnable() { // from class: com.android.server.backup.UserBackupManagerService$$ExternalSyntheticLambda2
-            @Override // java.lang.Runnable
-            public final void run() {
-                int i32 = i3;
-                Object obj = this;
-                switch (i32) {
-                    case 0:
-                        TransportManager transportManager2 = (TransportManager) obj;
-                        transportManager2.registerTransportsForIntent(transportManager2.mTransportServiceIntent, new TransportManager$$ExternalSyntheticLambda1());
-                        break;
-                    case 1:
-                        UserBackupManagerService userBackupManagerService = (UserBackupManagerService) obj;
-                        File file4 = userBackupManagerService.mJournalDir;
-                        ArrayList arrayList = new ArrayList();
-                        File[] listFiles = file4.listFiles();
-                        if (listFiles == null) {
-                            Slog.w("DataChangedJournal", "Failed to read journal files");
-                        } else {
-                            for (File file5 : listFiles) {
-                                arrayList.add(new DataChangedJournal(file5));
-                            }
+        backupHandler.postDelayed(
+                new Runnable() { // from class:
+                    // com.android.server.backup.UserBackupManagerService$$ExternalSyntheticLambda2
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        int i32 = i3;
+                        Object obj = this;
+                        switch (i32) {
+                            case 0:
+                                TransportManager transportManager2 = (TransportManager) obj;
+                                transportManager2.registerTransportsForIntent(
+                                        transportManager2.mTransportServiceIntent,
+                                        new TransportManager$$ExternalSyntheticLambda1());
+                                break;
+                            case 1:
+                                UserBackupManagerService userBackupManagerService =
+                                        (UserBackupManagerService) obj;
+                                File file4 = userBackupManagerService.mJournalDir;
+                                ArrayList arrayList = new ArrayList();
+                                File[] listFiles = file4.listFiles();
+                                if (listFiles == null) {
+                                    Slog.w("DataChangedJournal", "Failed to read journal files");
+                                } else {
+                                    for (File file5 : listFiles) {
+                                        arrayList.add(new DataChangedJournal(file5));
+                                    }
+                                }
+                                arrayList.removeAll(
+                                        Collections.singletonList(
+                                                userBackupManagerService.mJournal));
+                                boolean isEmpty = arrayList.isEmpty();
+                                int i4 = userBackupManagerService.mUserId;
+                                if (!isEmpty) {
+                                    Slog.i(
+                                            "BackupManagerService",
+                                            UserBackupManagerService.addUserIdToLogMessage(
+                                                    i4,
+                                                    "Found "
+                                                            + arrayList.size()
+                                                            + " stale backup journal(s),"
+                                                            + " scheduling."));
+                                }
+                                LinkedHashSet linkedHashSet = new LinkedHashSet();
+                                Iterator it = arrayList.iterator();
+                                while (it.hasNext()) {
+                                    DataChangedJournal dataChangedJournal =
+                                            (DataChangedJournal) it.next();
+                                    try {
+                                        dataChangedJournal.forEach(
+                                                new UserBackupManagerService$$ExternalSyntheticLambda13(
+                                                        userBackupManagerService, linkedHashSet));
+                                    } catch (IOException e) {
+                                        Slog.e(
+                                                "BackupManagerService",
+                                                UserBackupManagerService.addUserIdToLogMessage(
+                                                        i4, "Can't read " + dataChangedJournal),
+                                                e);
+                                    }
+                                }
+                                if (!linkedHashSet.isEmpty()) {
+                                    Slog.i(
+                                            "BackupManagerService",
+                                            UserBackupManagerService.addUserIdToLogMessage(
+                                                    i4,
+                                                    "Stale backup journals: Scheduled "
+                                                            + linkedHashSet.size()
+                                                            + " package(s) total"));
+                                    break;
+                                }
+                                break;
+                            default:
+                                ((BackupManagerMonitorDumpsysUtils) obj).deleteExpiredBMMEvents();
+                                break;
                         }
-                        arrayList.removeAll(Collections.singletonList(userBackupManagerService.mJournal));
-                        boolean isEmpty = arrayList.isEmpty();
-                        int i4 = userBackupManagerService.mUserId;
-                        if (!isEmpty) {
-                            Slog.i("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(i4, "Found " + arrayList.size() + " stale backup journal(s), scheduling."));
-                        }
-                        LinkedHashSet linkedHashSet = new LinkedHashSet();
-                        Iterator it = arrayList.iterator();
-                        while (it.hasNext()) {
-                            DataChangedJournal dataChangedJournal = (DataChangedJournal) it.next();
-                            try {
-                                dataChangedJournal.forEach(new UserBackupManagerService$$ExternalSyntheticLambda13(userBackupManagerService, linkedHashSet));
-                            } catch (IOException e) {
-                                Slog.e("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(i4, "Can't read " + dataChangedJournal), e);
-                            }
-                        }
-                        if (!linkedHashSet.isEmpty()) {
-                            Slog.i("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(i4, "Stale backup journals: Scheduled " + linkedHashSet.size() + " package(s) total"));
-                            break;
-                        }
-                        break;
-                    default:
-                        ((BackupManagerMonitorDumpsysUtils) obj).deleteExpiredBMMEvents();
-                        break;
-                }
-            }
-        }, 3000L);
-        final BackupManagerMonitorDumpsysUtils backupManagerMonitorDumpsysUtils = new BackupManagerMonitorDumpsysUtils();
+                    }
+                },
+                3000L);
+        final BackupManagerMonitorDumpsysUtils backupManagerMonitorDumpsysUtils =
+                new BackupManagerMonitorDumpsysUtils();
         final int i4 = 2;
-        backupHandler.postDelayed(new Runnable() { // from class: com.android.server.backup.UserBackupManagerService$$ExternalSyntheticLambda2
-            @Override // java.lang.Runnable
-            public final void run() {
-                int i32 = i4;
-                Object obj = backupManagerMonitorDumpsysUtils;
-                switch (i32) {
-                    case 0:
-                        TransportManager transportManager2 = (TransportManager) obj;
-                        transportManager2.registerTransportsForIntent(transportManager2.mTransportServiceIntent, new TransportManager$$ExternalSyntheticLambda1());
-                        break;
-                    case 1:
-                        UserBackupManagerService userBackupManagerService = (UserBackupManagerService) obj;
-                        File file4 = userBackupManagerService.mJournalDir;
-                        ArrayList arrayList = new ArrayList();
-                        File[] listFiles = file4.listFiles();
-                        if (listFiles == null) {
-                            Slog.w("DataChangedJournal", "Failed to read journal files");
-                        } else {
-                            for (File file5 : listFiles) {
-                                arrayList.add(new DataChangedJournal(file5));
-                            }
+        backupHandler.postDelayed(
+                new Runnable() { // from class:
+                    // com.android.server.backup.UserBackupManagerService$$ExternalSyntheticLambda2
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        int i32 = i4;
+                        Object obj = backupManagerMonitorDumpsysUtils;
+                        switch (i32) {
+                            case 0:
+                                TransportManager transportManager2 = (TransportManager) obj;
+                                transportManager2.registerTransportsForIntent(
+                                        transportManager2.mTransportServiceIntent,
+                                        new TransportManager$$ExternalSyntheticLambda1());
+                                break;
+                            case 1:
+                                UserBackupManagerService userBackupManagerService =
+                                        (UserBackupManagerService) obj;
+                                File file4 = userBackupManagerService.mJournalDir;
+                                ArrayList arrayList = new ArrayList();
+                                File[] listFiles = file4.listFiles();
+                                if (listFiles == null) {
+                                    Slog.w("DataChangedJournal", "Failed to read journal files");
+                                } else {
+                                    for (File file5 : listFiles) {
+                                        arrayList.add(new DataChangedJournal(file5));
+                                    }
+                                }
+                                arrayList.removeAll(
+                                        Collections.singletonList(
+                                                userBackupManagerService.mJournal));
+                                boolean isEmpty = arrayList.isEmpty();
+                                int i42 = userBackupManagerService.mUserId;
+                                if (!isEmpty) {
+                                    Slog.i(
+                                            "BackupManagerService",
+                                            UserBackupManagerService.addUserIdToLogMessage(
+                                                    i42,
+                                                    "Found "
+                                                            + arrayList.size()
+                                                            + " stale backup journal(s),"
+                                                            + " scheduling."));
+                                }
+                                LinkedHashSet linkedHashSet = new LinkedHashSet();
+                                Iterator it = arrayList.iterator();
+                                while (it.hasNext()) {
+                                    DataChangedJournal dataChangedJournal =
+                                            (DataChangedJournal) it.next();
+                                    try {
+                                        dataChangedJournal.forEach(
+                                                new UserBackupManagerService$$ExternalSyntheticLambda13(
+                                                        userBackupManagerService, linkedHashSet));
+                                    } catch (IOException e) {
+                                        Slog.e(
+                                                "BackupManagerService",
+                                                UserBackupManagerService.addUserIdToLogMessage(
+                                                        i42, "Can't read " + dataChangedJournal),
+                                                e);
+                                    }
+                                }
+                                if (!linkedHashSet.isEmpty()) {
+                                    Slog.i(
+                                            "BackupManagerService",
+                                            UserBackupManagerService.addUserIdToLogMessage(
+                                                    i42,
+                                                    "Stale backup journals: Scheduled "
+                                                            + linkedHashSet.size()
+                                                            + " package(s) total"));
+                                    break;
+                                }
+                                break;
+                            default:
+                                ((BackupManagerMonitorDumpsysUtils) obj).deleteExpiredBMMEvents();
+                                break;
                         }
-                        arrayList.removeAll(Collections.singletonList(userBackupManagerService.mJournal));
-                        boolean isEmpty = arrayList.isEmpty();
-                        int i42 = userBackupManagerService.mUserId;
-                        if (!isEmpty) {
-                            Slog.i("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(i42, "Found " + arrayList.size() + " stale backup journal(s), scheduling."));
-                        }
-                        LinkedHashSet linkedHashSet = new LinkedHashSet();
-                        Iterator it = arrayList.iterator();
-                        while (it.hasNext()) {
-                            DataChangedJournal dataChangedJournal = (DataChangedJournal) it.next();
-                            try {
-                                dataChangedJournal.forEach(new UserBackupManagerService$$ExternalSyntheticLambda13(userBackupManagerService, linkedHashSet));
-                            } catch (IOException e) {
-                                Slog.e("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(i42, "Can't read " + dataChangedJournal), e);
-                            }
-                        }
-                        if (!linkedHashSet.isEmpty()) {
-                            Slog.i("BackupManagerService", UserBackupManagerService.addUserIdToLogMessage(i42, "Stale backup journals: Scheduled " + linkedHashSet.size() + " package(s) total"));
-                            break;
-                        }
-                        break;
-                    default:
-                        ((BackupManagerMonitorDumpsysUtils) obj).deleteExpiredBMMEvents();
-                        break;
-                }
-            }
-        }, 3000L);
+                    }
+                },
+                3000L);
         this.mBackupPreferences = new UserBackupPreferences(context, file);
         PowerManager powerManager = this.mPowerManager;
-        StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "*backup*-", PackageManagerShellCommandDataLoader.STDIN_PATH);
+        StringBuilder m =
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        i, "*backup*-", PackageManagerShellCommandDataLoader.STDIN_PATH);
         m.append(handlerThread.getThreadId());
         this.mWakelock = new BackupWakeLock(powerManager.newWakeLock(1, m.toString()), i);
         if (isYuvaSupported()) {
@@ -677,7 +900,9 @@ public final class UserBackupManagerService {
         this.mFullBackupScheduleFile = new File(file, "fb-schedule");
         this.mTokenFile = new File(file, "ancestral");
         try {
-            DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(new FileInputStream(this.mTokenFile)));
+            DataInputStream dataInputStream =
+                    new DataInputStream(
+                            new BufferedInputStream(new FileInputStream(this.mTokenFile)));
             try {
                 if (dataInputStream.readInt() == 1) {
                     this.mAncestralToken = dataInputStream.readLong();
@@ -694,11 +919,17 @@ public final class UserBackupManagerService {
             } finally {
             }
         } catch (FileNotFoundException unused) {
-            Slog.v("BackupManagerService", addUserIdToLogMessage(this.mUserId, "No ancestral data"));
+            Slog.v(
+                    "BackupManagerService",
+                    addUserIdToLogMessage(this.mUserId, "No ancestral data"));
         } catch (IOException e) {
-            Slog.w("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Unable to read token file"), e);
+            Slog.w(
+                    "BackupManagerService",
+                    addUserIdToLogMessage(this.mUserId, "Unable to read token file"),
+                    e);
         }
-        ProcessedPackagesJournal processedPackagesJournal = new ProcessedPackagesJournal(this.mBaseStateDir);
+        ProcessedPackagesJournal processedPackagesJournal =
+                new ProcessedPackagesJournal(this.mBaseStateDir);
         this.mProcessedPackagesJournal = processedPackagesJournal;
         synchronized (processedPackagesJournal.mProcessedPackages) {
             processedPackagesJournal.loadFromDisk();
@@ -711,11 +942,29 @@ public final class UserBackupManagerService {
         intentFilter.addAction("android.intent.action.PACKAGE_REMOVED");
         intentFilter.addAction("android.intent.action.PACKAGE_CHANGED");
         intentFilter.addDataScheme("package");
-        this.mContext.registerReceiverAsUser(this.mPackageTrackingReceiver, UserHandle.of(this.mUserId), intentFilter, null, null);
-        this.mContext.registerReceiverAsUser(this.mPackageTrackingReceiver, UserHandle.of(this.mUserId), DirEncryptServiceHelper$$ExternalSyntheticOutline0.m("android.intent.action.EXTERNAL_APPLICATIONS_AVAILABLE", "android.intent.action.EXTERNAL_APPLICATIONS_UNAVAILABLE"), null, null);
+        this.mContext.registerReceiverAsUser(
+                this.mPackageTrackingReceiver,
+                UserHandle.of(this.mUserId),
+                intentFilter,
+                null,
+                null);
+        this.mContext.registerReceiverAsUser(
+                this.mPackageTrackingReceiver,
+                UserHandle.of(this.mUserId),
+                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                        "android.intent.action.EXTERNAL_APPLICATIONS_AVAILABLE",
+                        "android.intent.action.EXTERNAL_APPLICATIONS_UNAVAILABLE"),
+                null,
+                null);
     }
 
-    public UserBackupManagerService(Context context, PackageManager packageManager, LifecycleOperationStorage lifecycleOperationStorage, TransportManager transportManager, BackupHandler backupHandler, BackupManagerConstants backupManagerConstants) {
+    public UserBackupManagerService(
+            Context context,
+            PackageManager packageManager,
+            LifecycleOperationStorage lifecycleOperationStorage,
+            TransportManager transportManager,
+            BackupHandler backupHandler,
+            BackupManagerConstants backupManagerConstants) {
         this.mPendingInits = new ArraySet();
         this.mBackupParticipants = new SparseArray();
         this.mPendingBackups = new HashMap();
@@ -729,7 +978,17 @@ public final class UserBackupManagerService {
         this.mSepTimeOut = false;
         this.mSepTimeoutMin = 30;
         this.mTransportFlagsForAdbBackup = 0;
-        this.mPrivilegePkgName = new String[]{"com.sec.android.easyMover", "com.sec.android.Kies", "com.samsung.android.da.daagent", "com.samsung.memorysaver", "com.samsung.knox.bnr", "com.samsung.knox.securefolder", "com.samsung.android.se.unit", "com.samsung.android.game.gamehome"};
+        this.mPrivilegePkgName =
+                new String[] {
+                    "com.sec.android.easyMover",
+                    "com.sec.android.Kies",
+                    "com.samsung.android.da.daagent",
+                    "com.samsung.memorysaver",
+                    "com.samsung.knox.bnr",
+                    "com.samsung.knox.securefolder",
+                    "com.samsung.android.se.unit",
+                    "com.samsung.android.game.gamehome"
+                };
         this.mAdbBackupRestoreConfirmations = new SparseArray();
         this.mRng = new SecureRandom();
         this.mPendingRestores = new ArrayDeque();
@@ -773,15 +1032,24 @@ public final class UserBackupManagerService {
         return AccessibilityManagerService$$ExternalSyntheticOutline0.m(i, "[UserID:", "] ", str);
     }
 
-    public static UserBackupManagerService createAndInitializeService(int i, Context context, BackupManagerService backupManagerService, HandlerThread handlerThread, File file, File file2, TransportManager transportManager) {
+    public static UserBackupManagerService createAndInitializeService(
+            int i,
+            Context context,
+            BackupManagerService backupManagerService,
+            HandlerThread handlerThread,
+            File file,
+            File file2,
+            TransportManager transportManager) {
         if (new BackupManagerMonitorDumpsysUtils().deleteExpiredBMMEvents()) {
             Slog.d("BackupManagerService", "BMM Events recorded for dumpsys have expired");
         }
-        return new UserBackupManagerService(i, context, backupManagerService, handlerThread, file, file2, transportManager);
+        return new UserBackupManagerService(
+                i, context, backupManagerService, handlerThread, file, file2, transportManager);
     }
 
     public static void dumpBMMEvents(PrintWriter printWriter) {
-        BackupManagerMonitorDumpsysUtils backupManagerMonitorDumpsysUtils = new BackupManagerMonitorDumpsysUtils();
+        BackupManagerMonitorDumpsysUtils backupManagerMonitorDumpsysUtils =
+                new BackupManagerMonitorDumpsysUtils();
         if (backupManagerMonitorDumpsysUtils.deleteExpiredBMMEvents()) {
             printWriter.println("BACKUP MANAGER MONITOR EVENTS HAVE EXPIRED");
             return;
@@ -792,10 +1060,14 @@ public final class UserBackupManagerService {
             return;
         }
         if (!backupManagerMonitorDumpsysUtils.mIsFileLargerThanSizeLimit) {
-            backupManagerMonitorDumpsysUtils.mIsFileLargerThanSizeLimit = bMMEventsFile.length() > backupManagerMonitorDumpsysUtils.getBMMEventsFileSizeLimit();
+            backupManagerMonitorDumpsysUtils.mIsFileLargerThanSizeLimit =
+                    bMMEventsFile.length()
+                            > backupManagerMonitorDumpsysUtils.getBMMEventsFileSizeLimit();
         }
         if (backupManagerMonitorDumpsysUtils.mIsFileLargerThanSizeLimit) {
-            printWriter.println("BACKUP MANAGER MONITOR EVENTS FILE OVER SIZE LIMIT - future events will not be recorded");
+            printWriter.println(
+                    "BACKUP MANAGER MONITOR EVENTS FILE OVER SIZE LIMIT - future events will not be"
+                        + " recorded");
         }
         printWriter.println("START OF BACKUP MANAGER MONITOR EVENTS");
         try {
@@ -837,16 +1109,27 @@ public final class UserBackupManagerService {
         }
     }
 
-    public final void acknowledgeAdbBackupOrRestore(int i, boolean z, String str, String str2, IFullBackupRestoreObserver iFullBackupRestoreObserver) {
+    public final void acknowledgeAdbBackupOrRestore(
+            int i,
+            boolean z,
+            String str,
+            String str2,
+            IFullBackupRestoreObserver iFullBackupRestoreObserver) {
         AdbParams adbParams;
-        Slog.d("BackupManagerService", addUserIdToLogMessage(this.mUserId, "acknowledgeAdbBackupOrRestore : token=" + i + " allow=" + z));
+        Slog.d(
+                "BackupManagerService",
+                addUserIdToLogMessage(
+                        this.mUserId,
+                        "acknowledgeAdbBackupOrRestore : token=" + i + " allow=" + z));
         synchronized (this.mAdbBackupRestoreConfirmations) {
             adbParams = (AdbParams) this.mAdbBackupRestoreConfirmations.get(i);
         }
         if (adbParams == null || !adbParams.privilegeApp) {
-            this.mContext.enforceCallingPermission("android.permission.BACKUP", "acknowledgeAdbBackupOrRestore");
+            this.mContext.enforceCallingPermission(
+                    "android.permission.BACKUP", "acknowledgeAdbBackupOrRestore");
         } else {
-            this.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "acknowledgeAdbBackupOrRestore");
+            this.mContext.enforceCallingOrSelfPermission(
+                    "android.permission.BACKUP", "acknowledgeAdbBackupOrRestore");
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
@@ -866,13 +1149,22 @@ public final class UserBackupManagerService {
                             }
                             this.mSepWakeLock = true;
                             this.mWakelock.acquire();
-                            this.mBackupHandler.sendMessage(this.mBackupHandler.obtainMessage(i2, adbParams2));
+                            this.mBackupHandler.sendMessage(
+                                    this.mBackupHandler.obtainMessage(i2, adbParams2));
                         } else {
-                            Slog.w("BackupManagerService", addUserIdToLogMessage(this.mUserId, "User rejected full backup/restore operation"));
+                            Slog.w(
+                                    "BackupManagerService",
+                                    addUserIdToLogMessage(
+                                            this.mUserId,
+                                            "User rejected full backup/restore operation"));
                             signalAdbBackupRestoreCompletion(adbParams2);
                         }
                     } else {
-                        Slog.w("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Attempted to ack full backup/restore with invalid token"));
+                        Slog.w(
+                                "BackupManagerService",
+                                addUserIdToLogMessage(
+                                        this.mUserId,
+                                        "Attempted to ack full backup/restore with invalid token"));
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -883,7 +1175,18 @@ public final class UserBackupManagerService {
         }
     }
 
-    public final void adbBackup(ParcelFileDescriptor parcelFileDescriptor, boolean z, boolean z2, boolean z3, boolean z4, boolean z5, boolean z6, boolean z7, boolean z8, String[] strArr, boolean z9) {
+    public final void adbBackup(
+            ParcelFileDescriptor parcelFileDescriptor,
+            boolean z,
+            boolean z2,
+            boolean z3,
+            boolean z4,
+            boolean z5,
+            boolean z6,
+            boolean z7,
+            boolean z8,
+            String[] strArr,
+            boolean z9) {
         long j;
         Throwable th;
         this.mContext.enforceCallingPermission("android.permission.BACKUP", "adbBackup");
@@ -891,16 +1194,39 @@ public final class UserBackupManagerService {
             throw new IllegalStateException("Backup supported only for the device owner");
         }
         if (!z5 && !z3 && (strArr == null || strArr.length == 0)) {
-            throw new IllegalArgumentException("Backup requested but neither shared nor any apps named");
+            throw new IllegalArgumentException(
+                    "Backup requested but neither shared nor any apps named");
         }
         int callingUid = Binder.getCallingUid();
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
                 if (this.mSetupComplete) {
-                    Slog.v("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Requesting backup: apks=" + z + " obb=" + z2 + " shared=" + z3 + " all=" + z5 + " system=" + z6 + " includekeyvalue=" + z8 + " pkgs=" + Arrays.toString(strArr)));
-                    Slog.i("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Beginning adb backup..."));
-                    BackupEligibilityRules eligibilityRulesForOperation = z9 ? getEligibilityRulesForOperation(2) : getEligibilityRulesForOperation(1);
+                    Slog.v(
+                            "BackupManagerService",
+                            addUserIdToLogMessage(
+                                    this.mUserId,
+                                    "Requesting backup: apks="
+                                            + z
+                                            + " obb="
+                                            + z2
+                                            + " shared="
+                                            + z3
+                                            + " all="
+                                            + z5
+                                            + " system="
+                                            + z6
+                                            + " includekeyvalue="
+                                            + z8
+                                            + " pkgs="
+                                            + Arrays.toString(strArr)));
+                    Slog.i(
+                            "BackupManagerService",
+                            addUserIdToLogMessage(this.mUserId, "Beginning adb backup..."));
+                    BackupEligibilityRules eligibilityRulesForOperation =
+                            z9
+                                    ? getEligibilityRulesForOperation(2)
+                                    : getEligibilityRulesForOperation(1);
                     int i = this.mExtraFlag;
                     String[] strArr2 = this.mSmartSwitchBackupPath;
                     AdbBackupParams adbBackupParams = new AdbBackupParams();
@@ -925,41 +1251,75 @@ public final class UserBackupManagerService {
                         adbBackupParams.privilegeApp = isPrivilegeBackupApp(callingUid);
                         int generateRandomIntegerToken = generateRandomIntegerToken();
                         synchronized (this.mAdbBackupRestoreConfirmations) {
-                            this.mAdbBackupRestoreConfirmations.put(generateRandomIntegerToken, adbBackupParams);
+                            this.mAdbBackupRestoreConfirmations.put(
+                                    generateRandomIntegerToken, adbBackupParams);
                         }
                         if (adbBackupParams.privilegeApp) {
-                            acknowledgeAdbBackupOrRestore(generateRandomIntegerToken, true, "", this.mEncPassword, null);
+                            acknowledgeAdbBackupOrRestore(
+                                    generateRandomIntegerToken, true, "", this.mEncPassword, null);
                         } else {
-                            Slog.d("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Starting backup confirmation UI, token=" + generateRandomIntegerToken));
+                            Slog.d(
+                                    "BackupManagerService",
+                                    addUserIdToLogMessage(
+                                            this.mUserId,
+                                            "Starting backup confirmation UI, token="
+                                                    + generateRandomIntegerToken));
                             if (startConfirmationUi(generateRandomIntegerToken, "fullback")) {
                                 this.mPowerManager.userActivity(SystemClock.uptimeMillis(), 0, 0);
                                 BackupHandler backupHandler = this.mBackupHandler;
-                                backupHandler.sendMessageDelayed(backupHandler.obtainMessage(9, generateRandomIntegerToken, 0, adbBackupParams), 60000L);
+                                backupHandler.sendMessageDelayed(
+                                        backupHandler.obtainMessage(
+                                                9, generateRandomIntegerToken, 0, adbBackupParams),
+                                        60000L);
                             } else {
-                                Slog.e("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Unable to launch backup confirmation UI"));
-                                this.mAdbBackupRestoreConfirmations.delete(generateRandomIntegerToken);
+                                Slog.e(
+                                        "BackupManagerService",
+                                        addUserIdToLogMessage(
+                                                this.mUserId,
+                                                "Unable to launch backup confirmation UI"));
+                                this.mAdbBackupRestoreConfirmations.delete(
+                                        generateRandomIntegerToken);
                                 try {
                                     parcelFileDescriptor.close();
                                 } catch (IOException e) {
-                                    Slog.e("BackupManagerService", addUserIdToLogMessage(this.mUserId, "IO error closing output for adb backup: " + e.getMessage()));
+                                    Slog.e(
+                                            "BackupManagerService",
+                                            addUserIdToLogMessage(
+                                                    this.mUserId,
+                                                    "IO error closing output for adb backup: "
+                                                            + e.getMessage()));
                                 }
                                 Binder.restoreCallingIdentity(j);
-                                Slog.d("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Adb backup processing complete."));
+                                Slog.d(
+                                        "BackupManagerService",
+                                        addUserIdToLogMessage(
+                                                this.mUserId, "Adb backup processing complete."));
                                 this.mSmartSwitchBackupPath = null;
                                 this.mSepTimeoutMin = 30;
                             }
                         }
-                        Slog.d("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Waiting for backup completion..."));
+                        Slog.d(
+                                "BackupManagerService",
+                                addUserIdToLogMessage(
+                                        this.mUserId, "Waiting for backup completion..."));
                         startSepTimeout(adbBackupParams);
                         waitForCompletion(adbBackupParams);
                         this.mBackupHandler.removeMessages(101, adbBackupParams);
                         try {
                             parcelFileDescriptor.close();
                         } catch (IOException e2) {
-                            Slog.e("BackupManagerService", addUserIdToLogMessage(this.mUserId, "IO error closing output for adb backup: " + e2.getMessage()));
+                            Slog.e(
+                                    "BackupManagerService",
+                                    addUserIdToLogMessage(
+                                            this.mUserId,
+                                            "IO error closing output for adb backup: "
+                                                    + e2.getMessage()));
                         }
                         Binder.restoreCallingIdentity(j);
-                        Slog.d("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Adb backup processing complete."));
+                        Slog.d(
+                                "BackupManagerService",
+                                addUserIdToLogMessage(
+                                        this.mUserId, "Adb backup processing complete."));
                         this.mSmartSwitchBackupPath = null;
                         this.mSepTimeoutMin = 30;
                         this.mSepTimeOut = false;
@@ -970,24 +1330,40 @@ public final class UserBackupManagerService {
                         try {
                             parcelFileDescriptor.close();
                         } catch (IOException e3) {
-                            Slog.e("BackupManagerService", addUserIdToLogMessage(this.mUserId, "IO error closing output for adb backup: " + e3.getMessage()));
+                            Slog.e(
+                                    "BackupManagerService",
+                                    addUserIdToLogMessage(
+                                            this.mUserId,
+                                            "IO error closing output for adb backup: "
+                                                    + e3.getMessage()));
                         }
                         Binder.restoreCallingIdentity(j);
-                        Slog.d("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Adb backup processing complete."));
+                        Slog.d(
+                                "BackupManagerService",
+                                addUserIdToLogMessage(
+                                        this.mUserId, "Adb backup processing complete."));
                         this.mSmartSwitchBackupPath = null;
                         this.mSepTimeoutMin = 30;
                         this.mSepTimeOut = false;
                         throw th;
                     }
                 }
-                Slog.i("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Backup not supported before setup"));
+                Slog.i(
+                        "BackupManagerService",
+                        addUserIdToLogMessage(this.mUserId, "Backup not supported before setup"));
                 try {
                     parcelFileDescriptor.close();
                 } catch (IOException e4) {
-                    Slog.e("BackupManagerService", addUserIdToLogMessage(this.mUserId, "IO error closing output for adb backup: " + e4.getMessage()));
+                    Slog.e(
+                            "BackupManagerService",
+                            addUserIdToLogMessage(
+                                    this.mUserId,
+                                    "IO error closing output for adb backup: " + e4.getMessage()));
                 }
                 Binder.restoreCallingIdentity(clearCallingIdentity);
-                Slog.d("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Adb backup processing complete."));
+                Slog.d(
+                        "BackupManagerService",
+                        addUserIdToLogMessage(this.mUserId, "Adb backup processing complete."));
                 this.mSmartSwitchBackupPath = null;
                 this.mSepTimeoutMin = 30;
                 this.mSepTimeOut = false;
@@ -996,7 +1372,9 @@ public final class UserBackupManagerService {
                 j = clearCallingIdentity;
                 parcelFileDescriptor.close();
                 Binder.restoreCallingIdentity(j);
-                Slog.d("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Adb backup processing complete."));
+                Slog.d(
+                        "BackupManagerService",
+                        addUserIdToLogMessage(this.mUserId, "Adb backup processing complete."));
                 this.mSmartSwitchBackupPath = null;
                 this.mSepTimeoutMin = 30;
                 this.mSepTimeOut = false;
@@ -1017,10 +1395,15 @@ public final class UserBackupManagerService {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             if (!this.mSetupComplete) {
-                Slog.i("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Full restore not permitted before setup"));
+                Slog.i(
+                        "BackupManagerService",
+                        addUserIdToLogMessage(
+                                this.mUserId, "Full restore not permitted before setup"));
                 return;
             }
-            Slog.i("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Beginning restore..."));
+            Slog.i(
+                    "BackupManagerService",
+                    addUserIdToLogMessage(this.mUserId, "Beginning restore..."));
             AdbRestoreParams adbRestoreParams = new AdbRestoreParams();
             adbRestoreParams.fd = parcelFileDescriptor;
             this.mAdbRestoreParams = adbRestoreParams;
@@ -1030,52 +1413,88 @@ public final class UserBackupManagerService {
             } else {
                 adbRestoreParams.typeMigration = true;
             }
-            Slog.i("BackupManagerService", addUserIdToLogMessage(this.mUserId, "params.typeMigration : " + adbRestoreParams.typeMigration));
+            Slog.i(
+                    "BackupManagerService",
+                    addUserIdToLogMessage(
+                            this.mUserId,
+                            "params.typeMigration : " + adbRestoreParams.typeMigration));
             int generateRandomIntegerToken = generateRandomIntegerToken();
             synchronized (this.mAdbBackupRestoreConfirmations) {
-                this.mAdbBackupRestoreConfirmations.put(generateRandomIntegerToken, adbRestoreParams);
+                this.mAdbBackupRestoreConfirmations.put(
+                        generateRandomIntegerToken, adbRestoreParams);
             }
             if (adbRestoreParams.privilegeApp) {
-                acknowledgeAdbBackupOrRestore(generateRandomIntegerToken, true, "", this.mEncPassword, null);
+                acknowledgeAdbBackupOrRestore(
+                        generateRandomIntegerToken, true, "", this.mEncPassword, null);
             } else {
-                Slog.d("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Starting restore confirmation UI, token=" + generateRandomIntegerToken));
+                Slog.d(
+                        "BackupManagerService",
+                        addUserIdToLogMessage(
+                                this.mUserId,
+                                "Starting restore confirmation UI, token="
+                                        + generateRandomIntegerToken));
                 if (!startConfirmationUi(generateRandomIntegerToken, "fullrest")) {
-                    Slog.e("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Unable to launch restore confirmation"));
+                    Slog.e(
+                            "BackupManagerService",
+                            addUserIdToLogMessage(
+                                    this.mUserId, "Unable to launch restore confirmation"));
                     this.mAdbBackupRestoreConfirmations.delete(generateRandomIntegerToken);
                     try {
                         parcelFileDescriptor.close();
                     } catch (IOException e) {
-                        Slog.w("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Error trying to close fd after adb restore: " + e));
+                        Slog.w(
+                                "BackupManagerService",
+                                addUserIdToLogMessage(
+                                        this.mUserId,
+                                        "Error trying to close fd after adb restore: " + e));
                     }
                     Binder.restoreCallingIdentity(clearCallingIdentity);
-                    Slog.i("BackupManagerService", addUserIdToLogMessage(this.mUserId, "adb restore processing complete."));
+                    Slog.i(
+                            "BackupManagerService",
+                            addUserIdToLogMessage(
+                                    this.mUserId, "adb restore processing complete."));
                     return;
                 }
                 this.mPowerManager.userActivity(SystemClock.uptimeMillis(), 0, 0);
                 BackupHandler backupHandler = this.mBackupHandler;
-                backupHandler.sendMessageDelayed(backupHandler.obtainMessage(9, generateRandomIntegerToken, 0, adbRestoreParams), 60000L);
+                backupHandler.sendMessageDelayed(
+                        backupHandler.obtainMessage(
+                                9, generateRandomIntegerToken, 0, adbRestoreParams),
+                        60000L);
             }
-            Slog.d("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Waiting for restore completion..."));
+            Slog.d(
+                    "BackupManagerService",
+                    addUserIdToLogMessage(this.mUserId, "Waiting for restore completion..."));
             startSepTimeout(adbRestoreParams);
             waitForCompletion(adbRestoreParams);
             this.mBackupHandler.removeMessages(101, adbRestoreParams);
             try {
                 parcelFileDescriptor.close();
             } catch (IOException e2) {
-                Slog.w("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Error trying to close fd after adb restore: " + e2));
+                Slog.w(
+                        "BackupManagerService",
+                        addUserIdToLogMessage(
+                                this.mUserId, "Error trying to close fd after adb restore: " + e2));
             }
             Binder.restoreCallingIdentity(clearCallingIdentity);
-            Slog.i("BackupManagerService", addUserIdToLogMessage(this.mUserId, "adb restore processing complete."));
+            Slog.i(
+                    "BackupManagerService",
+                    addUserIdToLogMessage(this.mUserId, "adb restore processing complete."));
             this.mSepTimeoutMin = 30;
             this.mSepTimeOut = false;
         } finally {
             try {
                 parcelFileDescriptor.close();
             } catch (IOException e3) {
-                Slog.w("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Error trying to close fd after adb restore: " + e3));
+                Slog.w(
+                        "BackupManagerService",
+                        addUserIdToLogMessage(
+                                this.mUserId, "Error trying to close fd after adb restore: " + e3));
             }
             Binder.restoreCallingIdentity(clearCallingIdentity);
-            Slog.i("BackupManagerService", addUserIdToLogMessage(this.mUserId, "adb restore processing complete."));
+            Slog.i(
+                    "BackupManagerService",
+                    addUserIdToLogMessage(this.mUserId, "adb restore processing complete."));
         }
     }
 
@@ -1112,8 +1531,12 @@ public final class UserBackupManagerService {
             } catch (PackageManager.NameNotFoundException unused) {
                 installedPackagesAsUser.remove(size);
             }
-            if ((32768 & i) != 0 && applicationInfo.backupAgentName != null && (67108864 & i) == 0) {
-                ApplicationInfo applicationInfoAsUser = this.mPackageManager.getApplicationInfoAsUser(packageInfo.packageName, 1024, i2);
+            if ((32768 & i) != 0
+                    && applicationInfo.backupAgentName != null
+                    && (67108864 & i) == 0) {
+                ApplicationInfo applicationInfoAsUser =
+                        this.mPackageManager.getApplicationInfoAsUser(
+                                packageInfo.packageName, 1024, i2);
                 ApplicationInfo applicationInfo2 = packageInfo.applicationInfo;
                 applicationInfo2.sharedLibraryFiles = applicationInfoAsUser.sharedLibraryFiles;
                 applicationInfo2.sharedLibraryInfos = applicationInfoAsUser.sharedLibraryInfos;
@@ -1128,14 +1551,19 @@ public final class UserBackupManagerService {
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             if (!this.mPowerManager.getPowerSaveState(5).batterySaverEnabled) {
-                Slog.v("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Scheduling immediate backup pass"));
+                Slog.v(
+                        "BackupManagerService",
+                        addUserIdToLogMessage(this.mUserId, "Scheduling immediate backup pass"));
                 synchronized (this.mQueueLock) {
                     if (this.mPendingInits.size() > 0) {
                         try {
                             this.mAlarmManager.cancel(this.mRunInitIntent);
                             this.mRunInitIntent.send();
                         } catch (PendingIntent.CanceledException unused) {
-                            Slog.w("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Run init intent cancelled"));
+                            Slog.w(
+                                    "BackupManagerService",
+                                    addUserIdToLogMessage(
+                                            this.mUserId, "Run init intent cancelled"));
                         }
                         Binder.restoreCallingIdentity(clearCallingIdentity);
                         return;
@@ -1144,12 +1572,22 @@ public final class UserBackupManagerService {
                         this.mBackupHandler.sendMessage(this.mBackupHandler.obtainMessage(1));
                         KeyValueBackupJob.cancel(this.mContext, this.mUserId);
                     }
-                    Slog.w("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Backup pass but enabled=" + this.mEnabled + " setupComplete=" + this.mSetupComplete));
+                    Slog.w(
+                            "BackupManagerService",
+                            addUserIdToLogMessage(
+                                    this.mUserId,
+                                    "Backup pass but enabled="
+                                            + this.mEnabled
+                                            + " setupComplete="
+                                            + this.mSetupComplete));
                     Binder.restoreCallingIdentity(clearCallingIdentity);
                     return;
                 }
             }
-            Slog.v("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Not running backup while in battery save mode"));
+            Slog.v(
+                    "BackupManagerService",
+                    addUserIdToLogMessage(
+                            this.mUserId, "Not running backup while in battery save mode"));
             KeyValueBackupJob.schedule(this.mUserId, this.mContext, this);
             Binder.restoreCallingIdentity(clearCallingIdentity);
         } catch (Throwable th) {
@@ -1158,30 +1596,46 @@ public final class UserBackupManagerService {
         }
     }
 
-    public final IBackupAgent bindToAgentSynchronous(ApplicationInfo applicationInfo, int i, int i2) {
+    public final IBackupAgent bindToAgentSynchronous(
+            ApplicationInfo applicationInfo, int i, int i2) {
         IBackupAgent iBackupAgent;
         synchronized (this.mAgentConnectLock) {
             this.mConnecting = true;
             iBackupAgent = null;
             this.mConnectedAgent = null;
             try {
-                if (this.mActivityManager.bindBackupAgent(applicationInfo.packageName, i, this.mUserId, i2)) {
-                    Slog.d("BackupManagerService", addUserIdToLogMessage(this.mUserId, "awaiting agent for " + applicationInfo));
+                if (this.mActivityManager.bindBackupAgent(
+                        applicationInfo.packageName, i, this.mUserId, i2)) {
+                    Slog.d(
+                            "BackupManagerService",
+                            addUserIdToLogMessage(
+                                    this.mUserId, "awaiting agent for " + applicationInfo));
                     long currentTimeMillis = System.currentTimeMillis() + 10000;
-                    while (this.mConnecting && this.mConnectedAgent == null && System.currentTimeMillis() < currentTimeMillis) {
+                    while (this.mConnecting
+                            && this.mConnectedAgent == null
+                            && System.currentTimeMillis() < currentTimeMillis) {
                         try {
                             this.mAgentConnectLock.wait(5000L);
                         } catch (InterruptedException e) {
-                            Slog.w("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Interrupted: " + e));
+                            Slog.w(
+                                    "BackupManagerService",
+                                    addUserIdToLogMessage(this.mUserId, "Interrupted: " + e));
                             this.mConnecting = false;
                             this.mConnectedAgent = null;
                         }
                     }
                     if (this.mConnecting) {
-                        Slog.w("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Timeout waiting for agent " + applicationInfo));
+                        Slog.w(
+                                "BackupManagerService",
+                                addUserIdToLogMessage(
+                                        this.mUserId,
+                                        "Timeout waiting for agent " + applicationInfo));
                         this.mConnectedAgent = null;
                     }
-                    Slog.i("BackupManagerService", addUserIdToLogMessage(this.mUserId, "got agent " + this.mConnectedAgent));
+                    Slog.i(
+                            "BackupManagerService",
+                            addUserIdToLogMessage(
+                                    this.mUserId, "got agent " + this.mConnectedAgent));
                     iBackupAgent = this.mConnectedAgent;
                 }
             } catch (RemoteException unused) {
@@ -1199,7 +1653,8 @@ public final class UserBackupManagerService {
 
     public final void clearApplicationDataSynchronous(String str, boolean z, boolean z2) {
         try {
-            ApplicationInfo applicationInfo = this.mPackageManager.getPackageInfoAsUser(str, 0, this.mUserId).applicationInfo;
+            ApplicationInfo applicationInfo =
+                    this.mPackageManager.getPackageInfoAsUser(str, 0, this.mUserId).applicationInfo;
             if (!z || applicationInfo.targetSdkVersion < 29) {
                 if ((applicationInfo.flags & 64) == 0) {
                     return;
@@ -1211,32 +1666,53 @@ public final class UserBackupManagerService {
             clearDataObserver.backupManagerService = this;
             synchronized (this.mClearDataLock) {
                 this.mClearingData = true;
-                this.mActivityManagerInternal.clearApplicationUserData(str, z2, true, clearDataObserver, this.mUserId);
+                this.mActivityManagerInternal.clearApplicationUserData(
+                        str, z2, true, clearDataObserver, this.mUserId);
                 long currentTimeMillis = System.currentTimeMillis() + 30000;
                 while (this.mClearingData && System.currentTimeMillis() < currentTimeMillis) {
                     try {
                         this.mClearDataLock.wait(5000L);
                     } catch (InterruptedException e) {
                         this.mClearingData = false;
-                        Slog.w("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Interrupted while waiting for " + str + " data to be cleared"), e);
+                        Slog.w(
+                                "BackupManagerService",
+                                addUserIdToLogMessage(
+                                        this.mUserId,
+                                        "Interrupted while waiting for "
+                                                + str
+                                                + " data to be cleared"),
+                                e);
                     }
                 }
                 if (this.mClearingData) {
-                    Slog.w("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Clearing app data for " + str + " timed out"));
+                    Slog.w(
+                            "BackupManagerService",
+                            addUserIdToLogMessage(
+                                    this.mUserId, "Clearing app data for " + str + " timed out"));
                 }
             }
         } catch (PackageManager.NameNotFoundException unused) {
-            Slog.w("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Tried to clear data for " + str + " but not found"));
+            Slog.w(
+                    "BackupManagerService",
+                    addUserIdToLogMessage(
+                            this.mUserId, "Tried to clear data for " + str + " but not found"));
         }
     }
 
     public final void clearBackupData(String str, String str2) {
         HashSet hashSet;
         Set set;
-        Slog.v("BackupManagerService", addUserIdToLogMessage(this.mUserId, "clearBackupData() of " + str2 + " on " + str));
+        Slog.v(
+                "BackupManagerService",
+                addUserIdToLogMessage(this.mUserId, "clearBackupData() of " + str2 + " on " + str));
         try {
-            PackageInfo packageInfoAsUser = this.mPackageManager.getPackageInfoAsUser(str2, 134217728, this.mUserId);
-            if (this.mContext.checkPermission("android.permission.BACKUP", Binder.getCallingPid(), Binder.getCallingUid()) == -1) {
+            PackageInfo packageInfoAsUser =
+                    this.mPackageManager.getPackageInfoAsUser(str2, 134217728, this.mUserId);
+            if (this.mContext.checkPermission(
+                            "android.permission.BACKUP",
+                            Binder.getCallingPid(),
+                            Binder.getCallingUid())
+                    == -1) {
                 set = (Set) this.mBackupParticipants.get(Binder.getCallingUid());
             } else {
                 ProcessedPackagesJournal processedPackagesJournal = this.mProcessedPackagesJournal;
@@ -1249,25 +1725,34 @@ public final class UserBackupManagerService {
                 this.mBackupHandler.removeMessages(12);
                 synchronized (this.mQueueLock) {
                     try {
-                        TransportConnection transportClient = this.mTransportManager.getTransportClient(str, "BMS.clearBackupData()");
+                        TransportConnection transportClient =
+                                this.mTransportManager.getTransportClient(
+                                        str, "BMS.clearBackupData()");
                         if (transportClient == null) {
                             BackupHandler backupHandler = this.mBackupHandler;
                             ClearRetryParams clearRetryParams = new ClearRetryParams();
                             clearRetryParams.transportName = str;
                             clearRetryParams.packageName = str2;
-                            this.mBackupHandler.sendMessageDelayed(backupHandler.obtainMessage(12, clearRetryParams), ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS);
+                            this.mBackupHandler.sendMessageDelayed(
+                                    backupHandler.obtainMessage(12, clearRetryParams),
+                                    ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS);
                             return;
                         }
                         long clearCallingIdentity = Binder.clearCallingIdentity();
                         try {
-                            UserBackupManagerService$$ExternalSyntheticLambda0 userBackupManagerService$$ExternalSyntheticLambda0 = new UserBackupManagerService$$ExternalSyntheticLambda0(this, transportClient, 2);
+                            UserBackupManagerService$$ExternalSyntheticLambda0
+                                    userBackupManagerService$$ExternalSyntheticLambda0 =
+                                            new UserBackupManagerService$$ExternalSyntheticLambda0(
+                                                    this, transportClient, 2);
                             this.mWakelock.acquire();
                             BackupHandler backupHandler2 = this.mBackupHandler;
                             ClearParams clearParams = new ClearParams();
                             clearParams.mTransportConnection = transportClient;
                             clearParams.packageInfo = packageInfoAsUser;
-                            clearParams.listener = userBackupManagerService$$ExternalSyntheticLambda0;
-                            this.mBackupHandler.sendMessage(backupHandler2.obtainMessage(4, clearParams));
+                            clearParams.listener =
+                                    userBackupManagerService$$ExternalSyntheticLambda0;
+                            this.mBackupHandler.sendMessage(
+                                    backupHandler2.obtainMessage(4, clearParams));
                         } finally {
                             Binder.restoreCallingIdentity(clearCallingIdentity);
                         }
@@ -1276,7 +1761,11 @@ public final class UserBackupManagerService {
                 }
             }
         } catch (PackageManager.NameNotFoundException unused) {
-            Slog.d("BackupManagerService", addUserIdToLogMessage(this.mUserId, "No such package '" + str2 + "' - not clearing backup data"));
+            Slog.d(
+                    "BackupManagerService",
+                    addUserIdToLogMessage(
+                            this.mUserId,
+                            "No such package '" + str2 + "' - not clearing backup data"));
         }
     }
 
@@ -1287,7 +1776,9 @@ public final class UserBackupManagerService {
     public final void dataChangedImpl(String str, HashSet hashSet) {
         if (hashSet == null) {
             int i = this.mUserId;
-            StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("dataChanged but no participant pkg='", str, "' uid=");
+            StringBuilder m =
+                    DumpUtils$$ExternalSyntheticOutline0.m(
+                            "dataChanged but no participant pkg='", str, "' uid=");
             m.append(Binder.getCallingUid());
             Slog.w("BackupManagerService", addUserIdToLogMessage(i, m.toString()));
             return;
@@ -1311,14 +1802,16 @@ public final class UserBackupManagerService {
     public final HashSet dataChangedTargets(String str) {
         HashSet hashSet;
         HashSet hashSet2;
-        if (this.mContext.checkPermission("android.permission.BACKUP", Binder.getCallingPid(), Binder.getCallingUid()) == -1) {
+        if (this.mContext.checkPermission(
+                        "android.permission.BACKUP", Binder.getCallingPid(), Binder.getCallingUid())
+                == -1) {
             synchronized (this.mBackupParticipants) {
                 hashSet2 = (HashSet) this.mBackupParticipants.get(Binder.getCallingUid());
             }
             return hashSet2;
         }
         if ("@pm@".equals(str)) {
-            return Sets.newHashSet(new String[]{"@pm@"});
+            return Sets.newHashSet(new String[] {"@pm@"});
         }
         synchronized (this.mBackupParticipants) {
             SparseArray sparseArray = this.mBackupParticipants;
@@ -1391,7 +1884,11 @@ public final class UserBackupManagerService {
         long j3;
         String str;
         Intent intent;
-        String m = this.mUserId == 0 ? "" : AmFmBandRange$$ExternalSyntheticOutline0.m(this.mUserId, new StringBuilder("User "), ":");
+        String m =
+                this.mUserId == 0
+                        ? ""
+                        : AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                this.mUserId, new StringBuilder("User "), ":");
         synchronized (this.mQueueLock) {
             try {
                 StringBuilder sb = new StringBuilder();
@@ -1404,13 +1901,24 @@ public final class UserBackupManagerService {
                 sb.append(this.mPendingInits.size() == 0 ? "not " : "");
                 sb.append("pending init");
                 printWriter.println(sb.toString());
-                printWriter.println("Auto-restore is ".concat(this.mAutoRestore ? "enabled" : "disabled"));
+                printWriter.println(
+                        "Auto-restore is ".concat(this.mAutoRestore ? "enabled" : "disabled"));
                 if (this.mBackupRunning) {
                     printWriter.println("Backup currently running");
                 }
-                printWriter.println(isBackupOperationInProgress() ? "Backup in progress" : "No backups running");
-                printWriter.println("Framework scheduling is ".concat(isFrameworkSchedulingEnabled() ? "enabled" : "disabled"));
-                printWriter.println("Last backup pass started: " + this.mLastBackupPass + " (now = " + System.currentTimeMillis() + ')');
+                printWriter.println(
+                        isBackupOperationInProgress()
+                                ? "Backup in progress"
+                                : "No backups running");
+                printWriter.println(
+                        "Framework scheduling is "
+                                .concat(isFrameworkSchedulingEnabled() ? "enabled" : "disabled"));
+                printWriter.println(
+                        "Last backup pass started: "
+                                + this.mLastBackupPass
+                                + " (now = "
+                                + System.currentTimeMillis()
+                                + ')');
                 StringBuilder sb2 = new StringBuilder("  next scheduled: ");
                 int i = this.mUserId;
                 ComponentName componentName = KeyValueBackupJob.sKeyValueJobService;
@@ -1427,16 +1935,25 @@ public final class UserBackupManagerService {
                 printWriter.println(m + "Available transports:");
                 for (String str2 : listAllTransports()) {
                     StringBuilder sb3 = new StringBuilder();
-                    sb3.append(str2.equals(this.mTransportManager.mCurrentTransportName) ? "  * " : "    ");
+                    sb3.append(
+                            str2.equals(this.mTransportManager.mCurrentTransportName)
+                                    ? "  * "
+                                    : "    ");
                     sb3.append(str2);
                     printWriter.println(sb3.toString());
                     try {
-                        File file = new File(this.mBaseStateDir, this.mTransportManager.getTransportDirName(str2));
+                        File file =
+                                new File(
+                                        this.mBaseStateDir,
+                                        this.mTransportManager.getTransportDirName(str2));
                         StringBuilder sb4 = new StringBuilder();
                         sb4.append("       destination: ");
                         TransportManager transportManager = this.mTransportManager;
                         synchronized (transportManager.mTransportLock) {
-                            str = transportManager.getRegisteredTransportDescriptionOrThrowLocked(str2).currentDestinationString;
+                            str =
+                                    transportManager.getRegisteredTransportDescriptionOrThrowLocked(
+                                                    str2)
+                                            .currentDestinationString;
                         }
                         sb4.append(str);
                         printWriter.println(sb4.toString());
@@ -1444,15 +1961,26 @@ public final class UserBackupManagerService {
                         sb5.append("       intent: ");
                         TransportManager transportManager2 = this.mTransportManager;
                         synchronized (transportManager2.mTransportLock) {
-                            intent = transportManager2.getRegisteredTransportDescriptionOrThrowLocked(str2).configurationIntent;
+                            intent =
+                                    transportManager2
+                                            .getRegisteredTransportDescriptionOrThrowLocked(str2)
+                                            .configurationIntent;
                         }
                         sb5.append(intent);
                         printWriter.println(sb5.toString());
                         for (File file2 : file.listFiles()) {
-                            printWriter.println("       " + file2.getName() + " - " + file2.length() + " state bytes");
+                            printWriter.println(
+                                    "       "
+                                            + file2.getName()
+                                            + " - "
+                                            + file2.length()
+                                            + " state bytes");
                         }
                     } catch (Exception e) {
-                        Slog.e("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Error in transport"), e);
+                        Slog.e(
+                                "BackupManagerService",
+                                addUserIdToLogMessage(this.mUserId, "Error in transport"),
+                                e);
                         printWriter.println("        Error: " + e);
                     }
                 }
@@ -1514,27 +2042,39 @@ public final class UserBackupManagerService {
                     printWriter.println(fullBackupEntry.packageName);
                 }
                 printWriter.println(m + "Agent timeouts:");
-                printWriter.println("    KvBackupAgentTimeoutMillis: " + this.mAgentTimeoutParameters.getKvBackupAgentTimeoutMillis());
-                printWriter.println("    FullBackupAgentTimeoutMillis: " + this.mAgentTimeoutParameters.getFullBackupAgentTimeoutMillis());
+                printWriter.println(
+                        "    KvBackupAgentTimeoutMillis: "
+                                + this.mAgentTimeoutParameters.getKvBackupAgentTimeoutMillis());
+                printWriter.println(
+                        "    FullBackupAgentTimeoutMillis: "
+                                + this.mAgentTimeoutParameters.getFullBackupAgentTimeoutMillis());
                 StringBuilder sb7 = new StringBuilder();
                 sb7.append("    SharedBackupAgentTimeoutMillis: ");
-                BackupAgentTimeoutParameters backupAgentTimeoutParameters = this.mAgentTimeoutParameters;
+                BackupAgentTimeoutParameters backupAgentTimeoutParameters =
+                        this.mAgentTimeoutParameters;
                 synchronized (backupAgentTimeoutParameters.mLock) {
                     j2 = backupAgentTimeoutParameters.mSharedBackupAgentTimeoutMillis;
                 }
                 sb7.append(j2);
                 printWriter.println(sb7.toString());
-                printWriter.println("    RestoreAgentTimeoutMillis (system): " + this.mAgentTimeoutParameters.getRestoreAgentTimeoutMillis(9999));
-                printWriter.println("    RestoreAgentTimeoutMillis: " + this.mAgentTimeoutParameters.getRestoreAgentTimeoutMillis(10000));
+                printWriter.println(
+                        "    RestoreAgentTimeoutMillis (system): "
+                                + this.mAgentTimeoutParameters.getRestoreAgentTimeoutMillis(9999));
+                printWriter.println(
+                        "    RestoreAgentTimeoutMillis: "
+                                + this.mAgentTimeoutParameters.getRestoreAgentTimeoutMillis(10000));
                 StringBuilder sb8 = new StringBuilder();
                 sb8.append("    RestoreAgentFinishedTimeoutMillis: ");
-                BackupAgentTimeoutParameters backupAgentTimeoutParameters2 = this.mAgentTimeoutParameters;
+                BackupAgentTimeoutParameters backupAgentTimeoutParameters2 =
+                        this.mAgentTimeoutParameters;
                 synchronized (backupAgentTimeoutParameters2.mLock) {
                     j3 = backupAgentTimeoutParameters2.mRestoreAgentFinishedTimeoutMillis;
                 }
                 sb8.append(j3);
                 printWriter.println(sb8.toString());
-                printWriter.println("    QuotaExceededTimeoutMillis: " + this.mAgentTimeoutParameters.getQuotaExceededTimeoutMillis());
+                printWriter.println(
+                        "    QuotaExceededTimeoutMillis: "
+                                + this.mAgentTimeoutParameters.getQuotaExceededTimeoutMillis());
             } catch (Throwable th) {
                 throw th;
             }
@@ -1584,7 +2124,10 @@ public final class UserBackupManagerService {
         while (it.hasNext()) {
             PackageInfo packageInfo = (PackageInfo) it.next();
             if (shouldSkipPackage(packageInfo.packageName)) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("Will skip backup/restore for "), packageInfo.packageName, "BackupManagerService");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("Will skip backup/restore for "),
+                        packageInfo.packageName,
+                        "BackupManagerService");
             } else {
                 arrayList.add(packageInfo);
             }
@@ -1597,22 +2140,39 @@ public final class UserBackupManagerService {
         boolean isTransportRegistered = transportManager.isTransportRegistered(str);
         int i = this.mUserId;
         if (!isTransportRegistered) {
-            Slog.w("BackupManagerService", addUserIdToLogMessage(i, "Transport not registered; full data backup not performed"));
+            Slog.w(
+                    "BackupManagerService",
+                    addUserIdToLogMessage(
+                            i, "Transport not registered; full data backup not performed"));
             return false;
         }
         try {
-            if (new File(new File(this.mBaseStateDir, transportManager.getTransportDirName(str)), "@pm@").length() > 0) {
+            if (new File(
+                                    new File(
+                                            this.mBaseStateDir,
+                                            transportManager.getTransportDirName(str)),
+                                    "@pm@")
+                            .length()
+                    > 0) {
                 return true;
             }
-            Slog.i("BackupManagerService", addUserIdToLogMessage(i, "Full backup requested but dataset not yet initialized"));
+            Slog.i(
+                    "BackupManagerService",
+                    addUserIdToLogMessage(
+                            i, "Full backup requested but dataset not yet initialized"));
             return false;
         } catch (Exception e) {
-            Slog.w("BackupManagerService", addUserIdToLogMessage(i, "Unable to get transport name: " + e.getMessage()));
+            Slog.w(
+                    "BackupManagerService",
+                    addUserIdToLogMessage(i, "Unable to get transport name: " + e.getMessage()));
             return false;
         }
     }
 
-    public final void fullRestoreCustomized(String str, String str2, IMemorySaverBackupRestoreObserver iMemorySaverBackupRestoreObserver) {
+    public final void fullRestoreCustomized(
+            String str,
+            String str2,
+            IMemorySaverBackupRestoreObserver iMemorySaverBackupRestoreObserver) {
         ParcelFileDescriptor open = ParcelFileDescriptor.open(new File(str), 805306368);
         BackupManagerYuva backupManagerYuva = mBackupManagerYuva;
         if (backupManagerYuva != null) {
@@ -1623,14 +2183,18 @@ public final class UserBackupManagerService {
             backupManagerYuva.mRestorePackageName = null;
         }
         String[] split = str.split("/");
-        String substring = split[split.length - 1].substring(0, split[split.length - 1].length() - 3);
+        String substring =
+                split[split.length - 1].substring(0, split[split.length - 1].length() - 3);
         BackupManagerYuva backupManagerYuva2 = mBackupManagerYuva;
         if (backupManagerYuva2 != null) {
             backupManagerYuva2.mRestorePackageName = substring;
             if (backupManagerYuva2.mMemorySaverObserver != null) {
                 try {
-                    Slog.d("BackupManagerYuva", "restore started " + backupManagerYuva2.mRestorePackageName);
-                    backupManagerYuva2.mMemorySaverObserver.onRestoreStart(backupManagerYuva2.mRestorePackageName);
+                    Slog.d(
+                            "BackupManagerYuva",
+                            "restore started " + backupManagerYuva2.mRestorePackageName);
+                    backupManagerYuva2.mMemorySaverObserver.onRestoreStart(
+                            backupManagerYuva2.mRestorePackageName);
                 } catch (RemoteException unused) {
                     Slog.w("BackupManagerYuva", "full restore observer went away: startRestore");
                     backupManagerYuva2.mMemorySaverObserver = null;
@@ -1648,18 +2212,22 @@ public final class UserBackupManagerService {
         if (nextInt < 0) {
             nextInt = -nextInt;
         }
-        return (this.mNextToken.incrementAndGet() & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT) | (nextInt & (-256));
+        return (this.mNextToken.incrementAndGet()
+                        & IDnsResolverUnsolicitedEventListener.DNS_HEALTH_RESULT_TIMEOUT)
+                | (nextInt & (-256));
     }
 
     public final long getAvailableRestoreToken(String str) {
         boolean contains;
-        this.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "getAvailableRestoreToken");
+        this.mContext.enforceCallingOrSelfPermission(
+                "android.permission.BACKUP", "getAvailableRestoreToken");
         long j = this.mAncestralToken;
         synchronized (this.mQueueLock) {
             if (this.mCurrentToken != 0) {
                 ProcessedPackagesJournal processedPackagesJournal = this.mProcessedPackagesJournal;
                 synchronized (processedPackagesJournal.mProcessedPackages) {
-                    contains = ((HashSet) processedPackagesJournal.mProcessedPackages).contains(str);
+                    contains =
+                            ((HashSet) processedPackagesJournal.mProcessedPackages).contains(str);
                 }
                 if (contains) {
                     j = this.mCurrentToken;
@@ -1669,17 +2237,23 @@ public final class UserBackupManagerService {
         return j;
     }
 
-    public BackupManagerMonitorEventSender getBMMEventSender(IBackupManagerMonitor iBackupManagerMonitor) {
+    public BackupManagerMonitorEventSender getBMMEventSender(
+            IBackupManagerMonitor iBackupManagerMonitor) {
         return new BackupManagerMonitorEventSender(iBackupManagerMonitor);
     }
 
-    public int getBackupDestinationFromTransport(TransportConnection transportConnection) throws TransportNotAvailableException, RemoteException {
+    public int getBackupDestinationFromTransport(TransportConnection transportConnection)
+            throws TransportNotAvailableException, RemoteException {
         if (!shouldUseNewBackupEligibilityRules()) {
             return 0;
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            if ((transportConnection.connectOrThrow("BMS.getBackupDestinationFromTransport").getTransportFlags() & 2) == 0) {
+            if ((transportConnection
+                                    .connectOrThrow("BMS.getBackupDestinationFromTransport")
+                                    .getTransportFlags()
+                            & 2)
+                    == 0) {
                 return 0;
             }
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -1690,7 +2264,13 @@ public final class UserBackupManagerService {
     }
 
     public final BackupEligibilityRules getEligibilityRulesForOperation(int i) {
-        return new BackupEligibilityRules(this.mPackageManager, (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class), this.mUserId, this.mContext, i, false);
+        return new BackupEligibilityRules(
+                this.mPackageManager,
+                (PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class),
+                this.mUserId,
+                this.mContext,
+                i,
+                false);
     }
 
     public final int getMessageIdForOperationType(int i) {
@@ -1700,7 +2280,11 @@ public final class UserBackupManagerService {
         if (i == 1) {
             return 18;
         }
-        Slog.wtf("BackupManagerService", addUserIdToLogMessage(this.mUserId, "getMessageIdForOperationType called on invalid operation type: " + i));
+        Slog.wtf(
+                "BackupManagerService",
+                addUserIdToLogMessage(
+                        this.mUserId,
+                        "getMessageIdForOperationType called on invalid operation type: " + i));
         return -1;
     }
 
@@ -1712,7 +2296,15 @@ public final class UserBackupManagerService {
         return this.mQueueLock;
     }
 
-    public BackupParams getRequestBackupParams(String[] strArr, IBackupObserver iBackupObserver, IBackupManagerMonitor iBackupManagerMonitor, int i, BackupEligibilityRules backupEligibilityRules, TransportConnection transportConnection, String str, OnTaskFinishedListener onTaskFinishedListener) {
+    public BackupParams getRequestBackupParams(
+            String[] strArr,
+            IBackupObserver iBackupObserver,
+            IBackupManagerMonitor iBackupManagerMonitor,
+            int i,
+            BackupEligibilityRules backupEligibilityRules,
+            TransportConnection transportConnection,
+            String str,
+            OnTaskFinishedListener onTaskFinishedListener) {
         ArrayList arrayList = new ArrayList();
         ArrayList arrayList2 = new ArrayList();
         for (String str2 : strArr) {
@@ -1720,8 +2312,11 @@ public final class UserBackupManagerService {
                 arrayList2.add(str2);
             } else {
                 try {
-                    PackageInfo packageInfoAsUser = this.mPackageManager.getPackageInfoAsUser(str2, 134217728, this.mUserId);
-                    if (!backupEligibilityRules.appIsEligibleForBackup(packageInfoAsUser.applicationInfo)) {
+                    PackageInfo packageInfoAsUser =
+                            this.mPackageManager.getPackageInfoAsUser(
+                                    str2, 134217728, this.mUserId);
+                    if (!backupEligibilityRules.appIsEligibleForBackup(
+                            packageInfoAsUser.applicationInfo)) {
                         BackupObserverUtils.sendBackupOnPackageResult(iBackupObserver, str2, -2001);
                     } else if (backupEligibilityRules.appGetsFullBackup(packageInfoAsUser)) {
                         arrayList.add(packageInfoAsUser.packageName);
@@ -1733,7 +2328,11 @@ public final class UserBackupManagerService {
                 }
             }
         }
-        EventLog.writeEvent(2828, Integer.valueOf(strArr.length), Integer.valueOf(arrayList2.size()), Integer.valueOf(arrayList.size()));
+        EventLog.writeEvent(
+                2828,
+                Integer.valueOf(strArr.length),
+                Integer.valueOf(arrayList2.size()),
+                Integer.valueOf(arrayList.size()));
         boolean z = (i & 1) != 0;
         BackupParams backupParams = new BackupParams();
         backupParams.mTransportConnection = transportConnection;
@@ -1761,17 +2360,29 @@ public final class UserBackupManagerService {
     }
 
     public final void initializeTransports(String[] strArr, IBackupObserver iBackupObserver) {
-        this.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "initializeTransport");
-        Slog.v("BackupManagerService", addUserIdToLogMessage(this.mUserId, "initializeTransport(): " + Arrays.asList(strArr)));
+        this.mContext.enforceCallingOrSelfPermission(
+                "android.permission.BACKUP", "initializeTransport");
+        Slog.v(
+                "BackupManagerService",
+                addUserIdToLogMessage(
+                        this.mUserId, "initializeTransport(): " + Arrays.asList(strArr)));
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             this.mWakelock.acquire();
-            this.mBackupHandler.post(new PerformInitializeTask(this, this.mTransportManager, strArr, iBackupObserver, new OnTaskFinishedListener() { // from class: com.android.server.backup.UserBackupManagerService$$ExternalSyntheticLambda10
-                @Override // com.android.server.backup.internal.OnTaskFinishedListener
-                public final void onFinished(String str) {
-                    UserBackupManagerService.this.mWakelock.release();
-                }
-            }, this.mBaseStateDir));
+            this.mBackupHandler.post(
+                    new PerformInitializeTask(
+                            this,
+                            this.mTransportManager,
+                            strArr,
+                            iBackupObserver,
+                            new OnTaskFinishedListener() { // from class:
+                                                           // com.android.server.backup.UserBackupManagerService$$ExternalSyntheticLambda10
+                                @Override // com.android.server.backup.internal.OnTaskFinishedListener
+                                public final void onFinished(String str) {
+                                    UserBackupManagerService.this.mWakelock.release();
+                                }
+                            },
+                            this.mBaseStateDir));
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
         }
@@ -1782,7 +2393,8 @@ public final class UserBackupManagerService {
         synchronized (lifecycleOperationStorage.mOperationsLock) {
             for (int i = 0; i < lifecycleOperationStorage.mOperations.size(); i++) {
                 try {
-                    Operation operation = (Operation) lifecycleOperationStorage.mOperations.valueAt(i);
+                    Operation operation =
+                            (Operation) lifecycleOperationStorage.mOperations.valueAt(i);
                     if (operation.type == 2 && operation.state == 0) {
                         return true;
                     }
@@ -1794,7 +2406,12 @@ public final class UserBackupManagerService {
     }
 
     public final synchronized boolean isFrameworkSchedulingEnabled() {
-        return Settings.Secure.getIntForUser(this.mContext.getContentResolver(), "backup_scheduling_enabled", 1, this.mUserId) == 1;
+        return Settings.Secure.getIntForUser(
+                        this.mContext.getContentResolver(),
+                        "backup_scheduling_enabled",
+                        1,
+                        this.mUserId)
+                == 1;
     }
 
     public final boolean isPrivilegeBackupApp(int i) {
@@ -1804,23 +2421,31 @@ public final class UserBackupManagerService {
         } catch (Exception unused) {
             Slog.d("BackupManagerService", "isPrivilegeBackupApp() error");
         }
-        if ((!nameForUid.equals("android.uid.system:1000") || this.mPackageManager.checkSignatures(1000, i) != 0) && (!nameForUid.equals("android.uid.samsungcloud:5009") || this.mPackageManager.checkSignatures(5009, i) != 0)) {
+        if ((!nameForUid.equals("android.uid.system:1000")
+                        || this.mPackageManager.checkSignatures(1000, i) != 0)
+                && (!nameForUid.equals("android.uid.samsungcloud:5009")
+                        || this.mPackageManager.checkSignatures(5009, i) != 0)) {
             for (String str : this.mPrivilegePkgName) {
-                if (!str.equals(nameForUid) || this.mPackageManager.checkSignatures("android", nameForUid) != 0) {
-                }
+                if (!str.equals(nameForUid)
+                        || this.mPackageManager.checkSignatures("android", nameForUid) != 0) {}
             }
-            Slog.d("BackupManagerService", "isPrivilegeBackupApp() pkg name is " + nameForUid + " value : " + z);
+            Slog.d(
+                    "BackupManagerService",
+                    "isPrivilegeBackupApp() pkg name is " + nameForUid + " value : " + z);
             return z;
         }
         z = true;
-        Slog.d("BackupManagerService", "isPrivilegeBackupApp() pkg name is " + nameForUid + " value : " + z);
+        Slog.d(
+                "BackupManagerService",
+                "isPrivilegeBackupApp() pkg name is " + nameForUid + " value : " + z);
         return z;
     }
 
     public final boolean isYuvaSupported() {
         if (SystemProperties.getInt("ro.product.first_api_level", 0) < 34) {
             try {
-                this.mPackageManager.getPackageInfoAsUser("com.samsung.memorysaver", 0, this.mUserId);
+                this.mPackageManager.getPackageInfoAsUser(
+                        "com.samsung.memorysaver", 0, this.mUserId);
                 Slog.d("BackupManagerService", "Memory Saver is there");
                 return true;
             } catch (PackageManager.NameNotFoundException unused) {
@@ -1832,12 +2457,14 @@ public final class UserBackupManagerService {
 
     public final String[] listAllTransports() {
         String[] strArr;
-        this.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "listAllTransports");
+        this.mContext.enforceCallingOrSelfPermission(
+                "android.permission.BACKUP", "listAllTransports");
         TransportManager transportManager = this.mTransportManager;
         synchronized (transportManager.mTransportLock) {
             try {
                 strArr = new String[transportManager.mRegisteredTransportsDescriptionMap.size()];
-                Iterator it = transportManager.mRegisteredTransportsDescriptionMap.values().iterator();
+                Iterator it =
+                        transportManager.mRegisteredTransportsDescriptionMap.values().iterator();
                 int i = 0;
                 while (it.hasNext()) {
                     strArr[i] = ((TransportManager.TransportDescription) it.next()).name;
@@ -1857,7 +2484,12 @@ public final class UserBackupManagerService {
         }
         BackupManagerConstants backupManagerConstants = this.mConstants;
         synchronized (backupManagerConstants) {
-            Slog.v("BackupManagerConstants", "getBackupFinishedNotificationReceivers(...) returns " + TextUtils.join(", ", backupManagerConstants.mBackupFinishedNotificationReceivers));
+            Slog.v(
+                    "BackupManagerConstants",
+                    "getBackupFinishedNotificationReceivers(...) returns "
+                            + TextUtils.join(
+                                    ", ",
+                                    backupManagerConstants.mBackupFinishedNotificationReceivers));
             strArr = backupManagerConstants.mBackupFinishedNotificationReceivers;
         }
         for (String str2 : strArr) {
@@ -1888,7 +2520,9 @@ public final class UserBackupManagerService {
                             throw th;
                         }
                     } catch (IOException unused) {
-                        Slog.e("ProcessedPackagesJournal", "Can't log backup of " + str + " to " + file);
+                        Slog.e(
+                                "ProcessedPackagesJournal",
+                                "Can't log backup of " + str + " to " + file);
                     }
                 }
             } finally {
@@ -1896,20 +2530,31 @@ public final class UserBackupManagerService {
         }
     }
 
-    public final void prepareOperationTimeout(int i, long j, BackupRestoreTask backupRestoreTask, int i2) {
+    public final void prepareOperationTimeout(
+            int i, long j, BackupRestoreTask backupRestoreTask, int i2) {
         if (this.mSepTimeOut) {
             j = this.mSepTimeoutMin * 60000;
         }
         if (i2 == 0 || i2 == 1) {
             LifecycleOperationStorage lifecycleOperationStorage = this.mOperationStorage;
             lifecycleOperationStorage.getClass();
-            lifecycleOperationStorage.registerOperationForPackages(i, Sets.newHashSet(), backupRestoreTask, i2);
+            lifecycleOperationStorage.registerOperationForPackages(
+                    i, Sets.newHashSet(), backupRestoreTask, i2);
             int messageIdForOperationType = getMessageIdForOperationType(i2);
             BackupHandler backupHandler = this.mBackupHandler;
-            backupHandler.sendMessageDelayed(backupHandler.obtainMessage(messageIdForOperationType, i, 0, backupRestoreTask), j);
+            backupHandler.sendMessageDelayed(
+                    backupHandler.obtainMessage(messageIdForOperationType, i, 0, backupRestoreTask),
+                    j);
             return;
         }
-        Slog.wtf("BackupManagerService", addUserIdToLogMessage(this.mUserId, "prepareOperationTimeout() doesn't support operation " + Integer.toHexString(i) + " of type " + i2));
+        Slog.wtf(
+                "BackupManagerService",
+                addUserIdToLogMessage(
+                        this.mUserId,
+                        "prepareOperationTimeout() doesn't support operation "
+                                + Integer.toHexString(i)
+                                + " of type "
+                                + i2));
     }
 
     public boolean readEnabledState() {
@@ -1933,7 +2578,9 @@ public final class UserBackupManagerService {
                 Slog.e("BackupManagerService", "Cannot read enable state; assuming disabled");
             }
         } else {
-            Slog.i("BackupManagerService", "isBackupEnabled() => false due to absent settings file");
+            Slog.i(
+                    "BackupManagerService",
+                    "isBackupEnabled() => false due to absent settings file");
         }
         Slog.d("BackupManagerService", "user:" + i + " readBackupEnableState enabled:" + z);
         return z;
@@ -1959,7 +2606,9 @@ public final class UserBackupManagerService {
             Method dump skipped, instructions count: 417
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.backup.UserBackupManagerService.readFullBackupSchedule():java.util.ArrayList");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.backup.UserBackupManagerService.readFullBackupSchedule():java.util.ArrayList");
     }
 
     public final void recordInitPending(String str, String str2, boolean z) {
@@ -1983,21 +2632,35 @@ public final class UserBackupManagerService {
     public final void reportDelayedRestoreResult(String str, List list) {
         String str2 = this.mTransportManager.mCurrentTransportName;
         if (str2 == null) {
-            Slog.w("BackupManagerService", "Failed to send delayed restore logs as no transport selected");
+            Slog.w(
+                    "BackupManagerService",
+                    "Failed to send delayed restore logs as no transport selected");
             return;
         }
         TransportConnection transportConnection = null;
         try {
             try {
-                PackageInfo packageInfoAsUser = this.mPackageManager.getPackageInfoAsUser(str, PackageManager.PackageInfoFlags.of(0L), this.mUserId);
-                transportConnection = this.mTransportManager.getTransportClientOrThrow(str2, "BMS.reportDelayedRestoreResult");
-                BackupManagerMonitorEventSender bMMEventSender = getBMMEventSender(transportConnection.connectOrThrow("BMS.reportDelayedRestoreResult").getBackupManagerMonitor());
+                PackageInfo packageInfoAsUser =
+                        this.mPackageManager.getPackageInfoAsUser(
+                                str, PackageManager.PackageInfoFlags.of(0L), this.mUserId);
+                transportConnection =
+                        this.mTransportManager.getTransportClientOrThrow(
+                                str2, "BMS.reportDelayedRestoreResult");
+                BackupManagerMonitorEventSender bMMEventSender =
+                        getBMMEventSender(
+                                transportConnection
+                                        .connectOrThrow("BMS.reportDelayedRestoreResult")
+                                        .getBackupManagerMonitor());
                 bMMEventSender.getClass();
                 Bundle bundle = new Bundle();
-                bundle.putParcelableList("android.app.backup.extra.LOG_AGENT_LOGGING_RESULTS", list);
+                bundle.putParcelableList(
+                        "android.app.backup.extra.LOG_AGENT_LOGGING_RESULTS", list);
                 bundle.putInt("android.app.backup.extra.OPERATION_TYPE", 1);
                 bMMEventSender.monitorEvent(52, packageInfoAsUser, 2, bundle);
-            } catch (PackageManager.NameNotFoundException | RemoteException | TransportNotAvailableException | TransportNotRegisteredException e) {
+            } catch (PackageManager.NameNotFoundException
+                    | RemoteException
+                    | TransportNotAvailableException
+                    | TransportNotRegisteredException e) {
                 Slog.w("BackupManagerService", "Failed to send delayed restore logs: " + e);
                 if (transportConnection == null) {
                     return;
@@ -2007,7 +2670,8 @@ public final class UserBackupManagerService {
             this.disposeOfTransportClient(transportConnection, "BMS.reportDelayedRestoreResult");
         } catch (Throwable th) {
             if (transportConnection != null) {
-                this.mTransportManager.mTransportConnectionManager.disposeOfTransportClient(transportConnection, "BMS.reportDelayedRestoreResult");
+                this.mTransportManager.mTransportConnectionManager.disposeOfTransportClient(
+                        transportConnection, "BMS.reportDelayedRestoreResult");
             }
             throw th;
         }
@@ -2053,11 +2717,25 @@ public final class UserBackupManagerService {
         synchronized (this.mQueueLock) {
             try {
                 if (this.mFullBackupQueue.size() > 0) {
-                    long currentTimeMillis = System.currentTimeMillis() - ((FullBackupEntry) this.mFullBackupQueue.get(0)).lastBackup;
-                    long fullBackupIntervalMilliseconds = this.mConstants.getFullBackupIntervalMilliseconds();
-                    FullBackupJob.schedule(this.mUserId, this.mContext, Math.max(j, currentTimeMillis < fullBackupIntervalMilliseconds ? fullBackupIntervalMilliseconds - currentTimeMillis : 0L), this);
+                    long currentTimeMillis =
+                            System.currentTimeMillis()
+                                    - ((FullBackupEntry) this.mFullBackupQueue.get(0)).lastBackup;
+                    long fullBackupIntervalMilliseconds =
+                            this.mConstants.getFullBackupIntervalMilliseconds();
+                    FullBackupJob.schedule(
+                            this.mUserId,
+                            this.mContext,
+                            Math.max(
+                                    j,
+                                    currentTimeMillis < fullBackupIntervalMilliseconds
+                                            ? fullBackupIntervalMilliseconds - currentTimeMillis
+                                            : 0L),
+                            this);
                 } else {
-                    Slog.i("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Full backup queue empty; not scheduling"));
+                    Slog.i(
+                            "BackupManagerService",
+                            addUserIdToLogMessage(
+                                    this.mUserId, "Full backup queue empty; not scheduling"));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -2070,8 +2748,11 @@ public final class UserBackupManagerService {
     }
 
     public final void setBackupEnabled(boolean z, boolean z2) {
-        this.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "setBackupEnabled");
-        Slog.i("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Backup enabled => " + z));
+        this.mContext.enforceCallingOrSelfPermission(
+                "android.permission.BACKUP", "setBackupEnabled");
+        Slog.i(
+                "BackupManagerService",
+                addUserIdToLogMessage(this.mUserId, "Backup enabled => " + z));
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             boolean z3 = this.mEnabled;
@@ -2112,17 +2793,22 @@ public final class UserBackupManagerService {
     }
 
     public boolean shouldSkipUserFacingData() {
-        return Settings.Secure.getInt(this.mContext.getContentResolver(), "backup_skip_user_facing_packages", 0) != 0;
+        return Settings.Secure.getInt(
+                        this.mContext.getContentResolver(), "backup_skip_user_facing_packages", 0)
+                != 0;
     }
 
     public boolean shouldUseNewBackupEligibilityRules() {
-        return FeatureFlagUtils.isEnabled(this.mContext, "settings_use_new_backup_eligibility_rules");
+        return FeatureFlagUtils.isEnabled(
+                this.mContext, "settings_use_new_backup_eligibility_rules");
     }
 
     public final boolean startConfirmationUi(int i, String str) {
         try {
             Intent intent = new Intent(str);
-            intent.setClassName("com.android.backupconfirm", "com.android.backupconfirm.BackupRestoreConfirmation");
+            intent.setClassName(
+                    "com.android.backupconfirm",
+                    "com.android.backupconfirm.BackupRestoreConfirmation");
             intent.putExtra("conftoken", i);
             intent.addFlags(536870912);
             this.mContext.startActivityAsUser(intent, UserHandle.SYSTEM);
@@ -2134,7 +2820,8 @@ public final class UserBackupManagerService {
 
     public final void startSepTimeout(AdbParams adbParams) {
         int i = this.mSepTimeoutMin * 60000;
-        AnyMotionDetector$$ExternalSyntheticOutline0.m(i, "Posting MSG_SEP_TIMEOUT msg, ", "BackupManagerService");
+        AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                i, "Posting MSG_SEP_TIMEOUT msg, ", "BackupManagerService");
         BackupHandler backupHandler = this.mBackupHandler;
         backupHandler.sendMessageDelayed(backupHandler.obtainMessage(101, adbParams), i);
     }
@@ -2145,12 +2832,16 @@ public final class UserBackupManagerService {
         }
         try {
             this.mActivityManager.unbindBackupAgent(applicationInfo);
-            if (UserHandle.isCore(applicationInfo.uid) || applicationInfo.packageName.equals("com.android.backupconfirm")) {
+            if (UserHandle.isCore(applicationInfo.uid)
+                    || applicationInfo.packageName.equals("com.android.backupconfirm")) {
                 return;
             }
-            this.mActivityManager.killApplicationProcess(applicationInfo.processName, applicationInfo.uid);
+            this.mActivityManager.killApplicationProcess(
+                    applicationInfo.processName, applicationInfo.uid);
         } catch (RemoteException unused) {
-            Slog.d("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Lost app trying to shut down"));
+            Slog.d(
+                    "BackupManagerService",
+                    addUserIdToLogMessage(this.mUserId, "Lost app trying to shut down"));
         }
     }
 
@@ -2168,23 +2859,32 @@ public final class UserBackupManagerService {
         int i = this.mUserId;
         Settings.Secure.putStringForUser(contentResolver, "backup_transport", str, i);
         TransportManager transportManager = this.mTransportManager;
-        TransportConnection transportClient = transportManager.getTransportClient(str, "BMS.updateStateForTransport()");
+        TransportConnection transportClient =
+                transportManager.getTransportClient(str, "BMS.updateStateForTransport()");
         if (transportClient == null) {
-            Slog.w("BackupManagerService", addUserIdToLogMessage(i, "Transport " + str + " not registered: current token = 0"));
+            Slog.w(
+                    "BackupManagerService",
+                    addUserIdToLogMessage(
+                            i, "Transport " + str + " not registered: current token = 0"));
             this.mCurrentToken = 0L;
             return;
         }
         try {
-            BackupTransportClient connectOrThrow = transportClient.connectOrThrow("BMS.updateStateForTransport()");
+            BackupTransportClient connectOrThrow =
+                    transportClient.connectOrThrow("BMS.updateStateForTransport()");
             AndroidFuture newFuture = connectOrThrow.mTransportFutures.newFuture();
             connectOrThrow.mTransportBinder.getCurrentRestoreSet(newFuture);
             Long l = (Long) connectOrThrow.getFutureResult(newFuture);
             this.mCurrentToken = l == null ? -1000L : l.longValue();
         } catch (Exception unused) {
             this.mCurrentToken = 0L;
-            Slog.w("BackupManagerService", addUserIdToLogMessage(i, "Transport " + str + " not available: current token = 0"));
+            Slog.w(
+                    "BackupManagerService",
+                    addUserIdToLogMessage(
+                            i, "Transport " + str + " not available: current token = 0"));
         }
-        transportManager.mTransportConnectionManager.disposeOfTransportClient(transportClient, "BMS.updateStateForTransport()");
+        transportManager.mTransportConnectionManager.disposeOfTransportClient(
+                transportClient, "BMS.updateStateForTransport()");
     }
 
     public void updateStateOnBackupEnabled(boolean z, boolean z2) {
@@ -2204,9 +2904,12 @@ public final class UserBackupManagerService {
                 if (z && this.mSetupComplete) {
                     ArrayList arrayList = new ArrayList();
                     ArrayList arrayList2 = new ArrayList();
-                    this.mTransportManager.forEachRegisteredTransport(new UserBackupManagerService$$ExternalSyntheticLambda7(this, arrayList, arrayList2, 1));
+                    this.mTransportManager.forEachRegisteredTransport(
+                            new UserBackupManagerService$$ExternalSyntheticLambda7(
+                                    this, arrayList, arrayList2, 1));
                     for (int i = 0; i < arrayList.size(); i++) {
-                        recordInitPending((String) arrayList.get(i), (String) arrayList2.get(i), true);
+                        recordInitPending(
+                                (String) arrayList.get(i), (String) arrayList2.get(i), true);
                     }
                     this.mAlarmManager.set(0, System.currentTimeMillis(), this.mRunInitIntent);
                 }
@@ -2214,19 +2917,33 @@ public final class UserBackupManagerService {
         }
     }
 
-    public void updateTransportAttributes(int i, ComponentName componentName, String str, Intent intent, String str2, Intent intent2, CharSequence charSequence) {
-        this.mContext.enforceCallingOrSelfPermission("android.permission.BACKUP", "updateTransportAttributes");
+    public void updateTransportAttributes(
+            int i,
+            ComponentName componentName,
+            String str,
+            Intent intent,
+            String str2,
+            Intent intent2,
+            CharSequence charSequence) {
+        this.mContext.enforceCallingOrSelfPermission(
+                "android.permission.BACKUP", "updateTransportAttributes");
         Objects.requireNonNull(componentName, "transportComponent can't be null");
         Objects.requireNonNull(str, "name can't be null");
         Objects.requireNonNull(str2, "currentDestinationString can't be null");
-        Preconditions.checkArgument((intent2 == null) == (charSequence == null), "dataManagementLabel should be null iff dataManagementIntent is null");
+        Preconditions.checkArgument(
+                (intent2 == null) == (charSequence == null),
+                "dataManagementLabel should be null iff dataManagementIntent is null");
         try {
-            if (i != this.mContext.getPackageManager().getPackageUidAsUser(componentName.getPackageName(), 0, this.mUserId)) {
+            if (i
+                    != this.mContext
+                            .getPackageManager()
+                            .getPackageUidAsUser(componentName.getPackageName(), 0, this.mUserId)) {
                 throw new SecurityException("Only the transport can change its description");
             }
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                this.mTransportManager.updateTransportAttributes(componentName, str, intent, str2, intent2, charSequence);
+                this.mTransportManager.updateTransportAttributes(
+                        componentName, str, intent, str2, intent2, charSequence);
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
@@ -2239,7 +2956,9 @@ public final class UserBackupManagerService {
         Operation operation;
         int i2;
         LifecycleOperationStorage lifecycleOperationStorage = this.mOperationStorage;
-        UserBackupManagerService$$ExternalSyntheticLambda14 userBackupManagerService$$ExternalSyntheticLambda14 = new UserBackupManagerService$$ExternalSyntheticLambda14(1, this);
+        UserBackupManagerService$$ExternalSyntheticLambda14
+                userBackupManagerService$$ExternalSyntheticLambda14 =
+                        new UserBackupManagerService$$ExternalSyntheticLambda14(1, this);
         synchronized (lifecycleOperationStorage.mOperationsLock) {
             while (true) {
                 operation = (Operation) lifecycleOperationStorage.mOperations.get(i);
@@ -2283,7 +3002,10 @@ public final class UserBackupManagerService {
                     randomAccessFile.writeInt(-1);
                 } else {
                     randomAccessFile.writeInt(set.size());
-                    Slog.v("BackupManagerService", addUserIdToLogMessage(i, "Ancestral packages:  " + this.mAncestralPackages.size()));
+                    Slog.v(
+                            "BackupManagerService",
+                            addUserIdToLogMessage(
+                                    i, "Ancestral packages:  " + this.mAncestralPackages.size()));
                     Iterator it = this.mAncestralPackages.iterator();
                     while (it.hasNext()) {
                         randomAccessFile.writeUTF((String) it.next());
@@ -2293,7 +3015,10 @@ public final class UserBackupManagerService {
             } finally {
             }
         } catch (IOException e) {
-            Slog.w("BackupManagerService", addUserIdToLogMessage(i, "Unable to write token file:"), e);
+            Slog.w(
+                    "BackupManagerService",
+                    addUserIdToLogMessage(i, "Unable to write token file:"),
+                    e);
         }
     }
 
@@ -2306,7 +3031,8 @@ public final class UserBackupManagerService {
             }
             DataChangedJournal dataChangedJournal = this.mJournal;
             dataChangedJournal.getClass();
-            RandomAccessFile randomAccessFile = new RandomAccessFile(dataChangedJournal.mFile, "rws");
+            RandomAccessFile randomAccessFile =
+                    new RandomAccessFile(dataChangedJournal.mFile, "rws");
             try {
                 randomAccessFile.seek(randomAccessFile.length());
                 randomAccessFile.writeUTF(str);
@@ -2314,7 +3040,11 @@ public final class UserBackupManagerService {
             } finally {
             }
         } catch (IOException e) {
-            Slog.e("BackupManagerService", addUserIdToLogMessage(this.mUserId, "Can't write " + str + " to backup journal"), e);
+            Slog.e(
+                    "BackupManagerService",
+                    addUserIdToLogMessage(
+                            this.mUserId, "Can't write " + str + " to backup journal"),
+                    e);
             this.mJournal = null;
         }
     }

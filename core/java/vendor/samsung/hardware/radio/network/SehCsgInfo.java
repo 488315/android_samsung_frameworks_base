@@ -3,24 +3,28 @@ package vendor.samsung.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes6.dex */
 public class SehCsgInfo implements Parcelable {
-    public static final Parcelable.Creator<SehCsgInfo> CREATOR = new Parcelable.Creator<SehCsgInfo>() { // from class: vendor.samsung.hardware.radio.network.SehCsgInfo.1
-        @Override // android.os.Parcelable.Creator
-        public SehCsgInfo createFromParcel(Parcel _aidl_source) {
-            SehCsgInfo _aidl_out = new SehCsgInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SehCsgInfo> CREATOR =
+            new Parcelable.Creator<
+                    SehCsgInfo>() { // from class:
+                                    // vendor.samsung.hardware.radio.network.SehCsgInfo.1
+                @Override // android.os.Parcelable.Creator
+                public SehCsgInfo createFromParcel(Parcel _aidl_source) {
+                    SehCsgInfo _aidl_out = new SehCsgInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehCsgInfo[] newArray(int _aidl_size) {
-            return new SehCsgInfo[_aidl_size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehCsgInfo[] newArray(int _aidl_size) {
+                    return new SehCsgInfo[_aidl_size];
+                }
+            };
     public String name;
     public String plmn;
     public int csgId = 0;

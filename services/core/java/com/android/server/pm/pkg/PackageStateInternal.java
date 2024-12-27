@@ -2,10 +2,12 @@ package com.android.server.pm.pkg;
 
 import android.content.pm.SigningDetails;
 import android.util.SparseArray;
+
 import com.android.internal.pm.parsing.pkg.AndroidPackageInternal;
 import com.android.server.pm.InstallSource;
 import com.android.server.pm.PackageKeySetData;
 import com.android.server.pm.permission.LegacyPermissionState;
+
 import java.util.Set;
 import java.util.UUID;
 
@@ -51,8 +53,11 @@ public interface PackageStateInternal extends PackageState {
 
     @Override // com.android.server.pm.pkg.PackageState
     default PackageUserStateInternal getUserStateOrDefault(int i) {
-        PackageUserStateInternal packageUserStateInternal = (PackageUserStateInternal) getUserStates().get(i);
-        return packageUserStateInternal == null ? PackageUserStateInternal.DEFAULT : packageUserStateInternal;
+        PackageUserStateInternal packageUserStateInternal =
+                (PackageUserStateInternal) getUserStates().get(i);
+        return packageUserStateInternal == null
+                ? PackageUserStateInternal.DEFAULT
+                : packageUserStateInternal;
     }
 
     @Override // com.android.server.pm.pkg.PackageState

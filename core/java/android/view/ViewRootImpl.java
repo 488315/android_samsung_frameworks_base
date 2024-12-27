@@ -83,26 +83,6 @@ import android.util.Slog;
 import android.util.SparseArray;
 import android.util.TypedValue;
 import android.util.proto.ProtoOutputStream;
-import android.view.ActionMode;
-import android.view.AttachedSurfaceControl;
-import android.view.Choreographer;
-import android.view.GestureDetector;
-import android.view.ISensitiveContentProtectionManager;
-import android.view.IWindow;
-import android.view.InputQueue;
-import android.view.InsetsSourceControl;
-import android.view.KeyCharacterMap;
-import android.view.ScrollCaptureResponse;
-import android.view.Surface;
-import android.view.SurfaceControl;
-import android.view.SurfaceHolder;
-import android.view.ThreadedRenderer;
-import android.view.View;
-import android.view.ViewRootImpl;
-import android.view.ViewTreeObserver;
-import android.view.Window;
-import android.view.WindowInsets;
-import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityInteractionClient;
 import android.view.accessibility.AccessibilityManager;
@@ -134,6 +114,7 @@ import android.window.ScreenCapture;
 import android.window.SurfaceSyncGroup;
 import android.window.TaskConstants;
 import android.window.WindowOnBackInvokedDispatcher;
+
 import com.android.internal.R;
 import com.android.internal.content.NativeLibraryHelper;
 import com.android.internal.graphics.drawable.BackgroundBlurDrawable;
@@ -148,6 +129,9 @@ import com.android.internal.view.BaseSurfaceHolder;
 import com.android.internal.view.RootViewSurfaceTaker;
 import com.android.internal.view.SurfaceCallbackHelper;
 import com.android.modules.expresslog.Counter;
+
+import libcore.io.IoUtils;
+
 import com.samsung.android.content.smartclip.SmartClipDataCropperImpl;
 import com.samsung.android.content.smartclip.SmartClipDataExtractionEvent;
 import com.samsung.android.content.smartclip.SmartClipRemoteRequestDispatcher;
@@ -162,6 +146,7 @@ import com.samsung.android.rune.InputRune;
 import com.samsung.android.rune.ViewRune;
 import com.samsung.android.util.SemViewUtils;
 import com.samsung.android.widget.SemPressGestureDetector;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -182,10 +167,13 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import libcore.io.IoUtils;
 
 /* loaded from: classes4.dex */
-public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks, ThreadedRenderer.DrawCallbacks, AttachedSurfaceControl {
+public final class ViewRootImpl
+        implements ViewParent,
+                View.AttachInfo.Callbacks,
+                ThreadedRenderer.DrawCallbacks,
+                AttachedSurfaceControl {
     private static final String AOD_SHOW_STATE = "aod_show_state";
     private static final int BOUNDS_SURFACE_SUB_LAYER = -3;
     public static final boolean CLIENT_IMMERSIVE_CONFIRMATION;
@@ -600,7 +588,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     private final SurfaceControl.Transaction mTouchHintTransaction;
     Region mTouchableRegion;
     private final SurfaceControl.Transaction mTransaction;
-    private ArrayList<AttachedSurfaceControl.OnBufferTransformHintChangedListener> mTransformHintListeners;
+    private ArrayList<AttachedSurfaceControl.OnBufferTransformHintChangedListener>
+            mTransformHintListeners;
     CompatibilityInfo.Translator mTranslator;
     final Region mTransparentRegion;
     int mTraversalBarrier;
@@ -671,7 +660,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         DEBUG_TRAVERSAL = SystemProperties.getInt("viewroot.debug.traversal", 0) != 0;
         DEBUG_TRAVERSAL_PACKAGE_NAME = SystemProperties.get("viewroot.debug.traversal_pkg", "");
         CLIENT_TRANSIENT = SystemProperties.getBoolean("persist.wm.debug.client_transient", false);
-        CLIENT_IMMERSIVE_CONFIRMATION = SystemProperties.getBoolean("persist.wm.debug.client_immersive_confirmation", false);
+        CLIENT_IMMERSIVE_CONFIRMATION =
+                SystemProperties.getBoolean(
+                        "persist.wm.debug.client_immersive_confirmation", false);
         sRunQueues = new ThreadLocal<>();
         sFirstDrawHandlers = new ArrayList<>();
         sFirstDrawComplete = false;
@@ -681,34 +672,40 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         sSyncProgressLock = new Object();
         sNumSyncsInProgress = 0;
         sAnrReported = false;
-        sTransactionHangCallback = new BLASTBufferQueue.TransactionHangCallback() { // from class: android.view.ViewRootImpl.1
-            @Override // android.graphics.BLASTBufferQueue.TransactionHangCallback
-            public void onTransactionHang(String reason) {
-                if (ViewRootImpl.sAnrReported) {
-                    return;
-                }
-                ViewRootImpl.sAnrReported = true;
-                long identityToken = Binder.clearCallingIdentity();
-                try {
-                    ActivityManager.getService().appNotResponding(reason);
-                } catch (RemoteException e) {
-                } catch (Throwable th) {
-                    Binder.restoreCallingIdentity(identityToken);
-                    throw th;
-                }
-                Binder.restoreCallingIdentity(identityToken);
-            }
-        };
+        sTransactionHangCallback =
+                new BLASTBufferQueue
+                        .TransactionHangCallback() { // from class: android.view.ViewRootImpl.1
+                    @Override // android.graphics.BLASTBufferQueue.TransactionHangCallback
+                    public void onTransactionHang(String reason) {
+                        if (ViewRootImpl.sAnrReported) {
+                            return;
+                        }
+                        ViewRootImpl.sAnrReported = true;
+                        long identityToken = Binder.clearCallingIdentity();
+                        try {
+                            ActivityManager.getService().appNotResponding(reason);
+                        } catch (RemoteException e) {
+                        } catch (Throwable th) {
+                            Binder.restoreCallingIdentity(identityToken);
+                            throw th;
+                        }
+                        Binder.restoreCallingIdentity(identityToken);
+                    }
+                };
         sSafeScheduleTraversals = false;
-        sToolkitFrameRateVelocityMappingReadOnlyFlagValue = Flags.toolkitFrameRateVelocityMappingReadOnly();
+        sToolkitFrameRateVelocityMappingReadOnlyFlagValue =
+                Flags.toolkitFrameRateVelocityMappingReadOnly();
         sToolkitEnableInvalidateCheckThreadFlagValue = Flags.enableInvalidateCheckThread();
-        sSurfaceFlingerBugfixFlagValue = com.android.graphics.surfaceflinger.flags.Flags.vrrBugfix24q4();
+        sSurfaceFlingerBugfixFlagValue =
+                com.android.graphics.surfaceflinger.flags.Flags.vrrBugfix24q4();
         sEnableVrr = ViewProperties.vrr_enabled().orElse(true).booleanValue();
         sToolkitSetFrameRateReadOnlyFlagValue = Flags.toolkitSetFrameRateReadOnly();
         sToolkitMetricsForFrameRateDecisionFlagValue = Flags.toolkitMetricsForFrameRateDecision();
         sToolkitFrameRateTypingReadOnlyFlagValue = Flags.toolkitFrameRateTypingReadOnly();
-        sToolkitFrameRateFunctionEnablingReadOnlyFlagValue = Flags.toolkitFrameRateFunctionEnablingReadOnly();
-        sToolkitFrameRateViewEnablingReadOnlyFlagValue = Flags.toolkitFrameRateViewEnablingReadOnly();
+        sToolkitFrameRateFunctionEnablingReadOnlyFlagValue =
+                Flags.toolkitFrameRateFunctionEnablingReadOnly();
+        sToolkitFrameRateViewEnablingReadOnlyFlagValue =
+                Flags.toolkitFrameRateViewEnablingReadOnly();
     }
 
     public interface ActivityConfigCallback {
@@ -716,7 +713,10 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             throw new IllegalStateException("Not implemented");
         }
 
-        default void onConfigurationChanged(Configuration overrideConfig, int newDisplayId, ActivityWindowInfo activityWindowInfo) {
+        default void onConfigurationChanged(
+                Configuration overrideConfig,
+                int newDisplayId,
+                ActivityWindowInfo activityWindowInfo) {
             onConfigurationChanged(overrideConfig, newDisplayId);
         }
     }
@@ -737,7 +737,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
         if (compatTranslatorEnabled && this.mCompatTranslator == null) {
             CompatTranslator parentTranslator = null;
-            if (this.mParentDecorView != null && this.mParentDecorView != this.mView && (parentViewRootImpl = this.mParentDecorView.getViewRootImpl()) != null) {
+            if (this.mParentDecorView != null
+                    && this.mParentDecorView != this.mView
+                    && (parentViewRootImpl = this.mParentDecorView.getViewRootImpl()) != null) {
                 parentTranslator = parentViewRootImpl.getCompatTranslator();
             }
             this.mCompatTranslator = new CompatTranslator(parentTranslator);
@@ -758,7 +760,10 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     private void updateCutoutRemoveNeeded(int flags) {
-        boolean isCutoutRemoveNeeded = (2097152 & flags) != 0 || (MultiWindowCoreState.MW_SPLIT_IMMERSIVE_MODE_ENABLED && getCompatWindowConfiguration().isSplitScreen());
+        boolean isCutoutRemoveNeeded =
+                (2097152 & flags) != 0
+                        || (MultiWindowCoreState.MW_SPLIT_IMMERSIVE_MODE_ENABLED
+                                && getCompatWindowConfiguration().isSplitScreen());
         if (this.mIsCutoutRemoveNeeded != isCutoutRemoveNeeded) {
             this.mIsCutoutRemoveNeeded = isCutoutRemoveNeeded;
             if (!isCutoutRemoveNeeded) {
@@ -782,8 +787,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         int localChanges;
         int localValue;
 
-        SystemUiVisibilityInfo() {
-        }
+        SystemUiVisibilityInfo() {}
     }
 
     public HandwritingInitiator getHandwritingInitiator() {
@@ -794,7 +798,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         this(context, display, WindowManagerGlobal.getWindowSession(), new WindowLayout());
     }
 
-    public ViewRootImpl(Context context, Display display, IWindowSession session, WindowLayout windowLayout) {
+    public ViewRootImpl(
+            Context context, Display display, IWindowSession session, WindowLayout windowLayout) {
         this.mTransformHintListeners = new ArrayList<>();
         this.mPreviousTransformHint = 0;
         this.mForceInvertEnabled = Integer.MIN_VALUE;
@@ -865,39 +870,55 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         this.mInvalidateForScreenshotRunnable = null;
         this.mForceModeInScreenshot = false;
         this.mResolvedPointerIcon = null;
-        this.mAccessibilityInteractionConnectionManager = new AccessibilityInteractionConnectionManager();
+        this.mAccessibilityInteractionConnectionManager =
+                new AccessibilityInteractionConnectionManager();
         this.mInLayout = false;
         this.mLayoutRequesters = new ArrayList<>();
         this.mHandlingLayoutInLayoutRequest = false;
-        this.mInputEventConsistencyVerifier = InputEventConsistencyVerifier.isInstrumentationEnabled() ? new InputEventConsistencyVerifier(this, 0) : null;
+        this.mInputEventConsistencyVerifier =
+                InputEventConsistencyVerifier.isInstrumentationEnabled()
+                        ? new InputEventConsistencyVerifier(this, 0)
+                        : null;
         this.mBlurRegionAggregator = new BackgroundBlurDrawable.Aggregator(this);
         this.mSmartClipDispatcherProxy = null;
         this.mCutoutPolicy = 0;
         this.mTmpAttrs = new WindowManager.LayoutParams();
-        this.mGestureExclusionTracker = new ViewRootRectTracker(new Function() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda18
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                List systemGestureExclusionRects;
-                systemGestureExclusionRects = ((View) obj).getSystemGestureExclusionRects();
-                return systemGestureExclusionRects;
-            }
-        });
-        this.mKeepClearRectsTracker = new ViewRootRectTracker(new Function() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda19
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                List collectPreferKeepClearRects;
-                collectPreferKeepClearRects = ((View) obj).collectPreferKeepClearRects();
-                return collectPreferKeepClearRects;
-            }
-        });
-        this.mUnrestrictedKeepClearRectsTracker = new ViewRootRectTracker(new Function() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda20
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                List collectUnrestrictedPreferKeepClearRects;
-                collectUnrestrictedPreferKeepClearRects = ((View) obj).collectUnrestrictedPreferKeepClearRects();
-                return collectUnrestrictedPreferKeepClearRects;
-            }
-        });
+        this.mGestureExclusionTracker =
+                new ViewRootRectTracker(
+                        new Function() { // from class:
+                                         // android.view.ViewRootImpl$$ExternalSyntheticLambda18
+                            @Override // java.util.function.Function
+                            public final Object apply(Object obj) {
+                                List systemGestureExclusionRects;
+                                systemGestureExclusionRects =
+                                        ((View) obj).getSystemGestureExclusionRects();
+                                return systemGestureExclusionRects;
+                            }
+                        });
+        this.mKeepClearRectsTracker =
+                new ViewRootRectTracker(
+                        new Function() { // from class:
+                                         // android.view.ViewRootImpl$$ExternalSyntheticLambda19
+                            @Override // java.util.function.Function
+                            public final Object apply(Object obj) {
+                                List collectPreferKeepClearRects;
+                                collectPreferKeepClearRects =
+                                        ((View) obj).collectPreferKeepClearRects();
+                                return collectPreferKeepClearRects;
+                            }
+                        });
+        this.mUnrestrictedKeepClearRectsTracker =
+                new ViewRootRectTracker(
+                        new Function() { // from class:
+                                         // android.view.ViewRootImpl$$ExternalSyntheticLambda20
+                            @Override // java.util.function.Function
+                            public final Object apply(Object obj) {
+                                List collectUnrestrictedPreferKeepClearRects;
+                                collectUnrestrictedPreferKeepClearRects =
+                                        ((View) obj).collectUnrestrictedPreferKeepClearRects();
+                                return collectUnrestrictedPreferKeepClearRects;
+                            }
+                        });
         this.mPreviousSyncSafeguardLock = new Object();
         this.mNumPausedForSync = 0;
         this.mScrollCaptureRequestTimeout = 2500L;
@@ -918,8 +939,17 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         this.mFrameRateCategoryHighHintCount = 0;
         this.mFrameRateCategoryNormalCount = 0;
         this.mFrameRateCategoryLowCount = 0;
-        this.mRelayoutBundle = com.android.window.flags.Flags.windowSessionRelayoutInfo() ? null : new Bundle();
-        this.mRelayoutResult = com.android.window.flags.Flags.windowSessionRelayoutInfo() ? new WindowRelayoutResult(this.mTmpFrames, this.mPendingMergedConfiguration, this.mSurfaceControl, this.mTempInsets, this.mTempControls) : null;
+        this.mRelayoutBundle =
+                com.android.window.flags.Flags.windowSessionRelayoutInfo() ? null : new Bundle();
+        this.mRelayoutResult =
+                com.android.window.flags.Flags.windowSessionRelayoutInfo()
+                        ? new WindowRelayoutResult(
+                                this.mTmpFrames,
+                                this.mPendingMergedConfiguration,
+                                this.mSurfaceControl,
+                                this.mTempInsets,
+                                this.mTempControls)
+                        : null;
         this.mChildBoundingInsets = new Rect();
         this.mChildBoundingInsetsChanged = false;
         this.mTag = TAG;
@@ -949,67 +979,102 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         this.mFlexPanelScrollY = 0.0f;
         this.mIsHRR = false;
         this.mProfile = false;
-        this.mDisplayListener = new DisplayManager.DisplayListener() { // from class: android.view.ViewRootImpl.4
-            @Override // android.hardware.display.DisplayManager.DisplayListener
-            public void onDisplayChanged(int displayId) {
-                if (ViewRootImpl.this.mExtraDisplayListenerLogging) {
-                    Slog.i(ViewRootImpl.this.mTag, "Received onDisplayChanged - " + ViewRootImpl.this.mView);
-                }
-                if (ViewRootImpl.this.mView != null && ViewRootImpl.this.mDisplay.getDisplayId() == displayId) {
-                    int oldDisplayState = ViewRootImpl.this.mAttachInfo.mDisplayState;
-                    int newDisplayState = ViewRootImpl.this.mDisplay.getState();
-                    Log.i(ViewRootImpl.this.mTag, "onDisplayChanged oldDisplayState=" + oldDisplayState + " newDisplayState=" + newDisplayState);
-                    if (ViewRootImpl.this.mExtraDisplayListenerLogging) {
-                        Slog.i(ViewRootImpl.this.mTag, "DisplayState - old: " + oldDisplayState + ", new: " + newDisplayState);
-                    }
-                    if (Trace.isTagEnabled(32L)) {
-                        Trace.traceCounter(32L, "vri#screenState[" + ViewRootImpl.this.mTag + "] state=", newDisplayState);
-                    }
-                    if (oldDisplayState != newDisplayState) {
-                        ViewRootImpl.this.mAttachInfo.mDisplayState = newDisplayState;
-                        ViewRootImpl.this.pokeDrawLockIfNeeded();
-                        if (oldDisplayState != 0) {
-                            int oldScreenState = toViewScreenState(oldDisplayState);
-                            int newScreenState = toViewScreenState(newDisplayState);
-                            if (oldScreenState != newScreenState) {
-                                ViewRootImpl.this.mView.dispatchScreenStateChanged(newScreenState);
+        this.mDisplayListener =
+                new DisplayManager.DisplayListener() { // from class: android.view.ViewRootImpl.4
+                    @Override // android.hardware.display.DisplayManager.DisplayListener
+                    public void onDisplayChanged(int displayId) {
+                        if (ViewRootImpl.this.mExtraDisplayListenerLogging) {
+                            Slog.i(
+                                    ViewRootImpl.this.mTag,
+                                    "Received onDisplayChanged - " + ViewRootImpl.this.mView);
+                        }
+                        if (ViewRootImpl.this.mView != null
+                                && ViewRootImpl.this.mDisplay.getDisplayId() == displayId) {
+                            int oldDisplayState = ViewRootImpl.this.mAttachInfo.mDisplayState;
+                            int newDisplayState = ViewRootImpl.this.mDisplay.getState();
+                            Log.i(
+                                    ViewRootImpl.this.mTag,
+                                    "onDisplayChanged oldDisplayState="
+                                            + oldDisplayState
+                                            + " newDisplayState="
+                                            + newDisplayState);
+                            if (ViewRootImpl.this.mExtraDisplayListenerLogging) {
+                                Slog.i(
+                                        ViewRootImpl.this.mTag,
+                                        "DisplayState - old: "
+                                                + oldDisplayState
+                                                + ", new: "
+                                                + newDisplayState);
                             }
-                            if (ViewRootImpl.DEBUG_TRAVERSAL && ViewRootImpl.DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
-                                Log.i(ViewRootImpl.this.mTag, "Traversal, [4] mView=" + ViewRootImpl.this.mView + " oldDisplayState=" + oldDisplayState);
+                            if (Trace.isTagEnabled(32L)) {
+                                Trace.traceCounter(
+                                        32L,
+                                        "vri#screenState[" + ViewRootImpl.this.mTag + "] state=",
+                                        newDisplayState);
                             }
-                            if (oldDisplayState == 1) {
-                                ViewRootImpl.this.mFullRedrawNeeded = true;
-                                ViewRootImpl.this.scheduleTraversals();
-                            } else if ((oldDisplayState == 3 || oldDisplayState == 4) && newDisplayState == 2 && displayId == 0 && (ViewRootImpl.this.mWindowAttributes.samsungFlags & 262144) == 0) {
-                                ViewRootImpl.this.mFullRedrawNeeded = true;
-                                ViewRootImpl.this.scheduleTraversals();
+                            if (oldDisplayState != newDisplayState) {
+                                ViewRootImpl.this.mAttachInfo.mDisplayState = newDisplayState;
+                                ViewRootImpl.this.pokeDrawLockIfNeeded();
+                                if (oldDisplayState != 0) {
+                                    int oldScreenState = toViewScreenState(oldDisplayState);
+                                    int newScreenState = toViewScreenState(newDisplayState);
+                                    if (oldScreenState != newScreenState) {
+                                        ViewRootImpl.this.mView.dispatchScreenStateChanged(
+                                                newScreenState);
+                                    }
+                                    if (ViewRootImpl.DEBUG_TRAVERSAL
+                                            && ViewRootImpl.DEBUG_TRAVERSAL_PACKAGE_NAME.equals(
+                                                    ActivityThread.currentPackageName())) {
+                                        Log.i(
+                                                ViewRootImpl.this.mTag,
+                                                "Traversal, [4] mView="
+                                                        + ViewRootImpl.this.mView
+                                                        + " oldDisplayState="
+                                                        + oldDisplayState);
+                                    }
+                                    if (oldDisplayState == 1) {
+                                        ViewRootImpl.this.mFullRedrawNeeded = true;
+                                        ViewRootImpl.this.scheduleTraversals();
+                                    } else if ((oldDisplayState == 3 || oldDisplayState == 4)
+                                            && newDisplayState == 2
+                                            && displayId == 0
+                                            && (ViewRootImpl.this.mWindowAttributes.samsungFlags
+                                                            & 262144)
+                                                    == 0) {
+                                        ViewRootImpl.this.mFullRedrawNeeded = true;
+                                        ViewRootImpl.this.scheduleTraversals();
+                                    }
+                                }
                             }
                         }
                     }
-                }
-            }
 
-            @Override // android.hardware.display.DisplayManager.DisplayListener
-            public void onDisplayRemoved(int displayId) {
-            }
+                    @Override // android.hardware.display.DisplayManager.DisplayListener
+                    public void onDisplayRemoved(int displayId) {}
 
-            @Override // android.hardware.display.DisplayManager.DisplayListener
-            public void onDisplayAdded(int displayId) {
-            }
+                    @Override // android.hardware.display.DisplayManager.DisplayListener
+                    public void onDisplayAdded(int displayId) {}
 
-            private int toViewScreenState(int displayState) {
-                return Settings.System.getInt(ViewRootImpl.this.mContentResolver, ViewRootImpl.AOD_SHOW_STATE, 0) != 0 ? displayState == 2 ? 1 : 0 : displayState == 1 ? 0 : 1;
-            }
-        };
+                    private int toViewScreenState(int displayState) {
+                        return Settings.System.getInt(
+                                                ViewRootImpl.this.mContentResolver,
+                                                ViewRootImpl.AOD_SHOW_STATE,
+                                                0)
+                                        != 0
+                                ? displayState == 2 ? 1 : 0
+                                : displayState == 1 ? 0 : 1;
+                    }
+                };
         this.mSurfaceChangedCallbacks = new ArrayList<>();
         this.mWebViewAttached = false;
         this.mHandler = new ViewRootHandler();
-        this.mExecutor = new Executor() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda21
-            @Override // java.util.concurrent.Executor
-            public final void execute(Runnable runnable) {
-                ViewRootImpl.this.lambda$new$10(runnable);
-            }
-        };
+        this.mExecutor =
+                new Executor() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda21
+                    @Override // java.util.concurrent.Executor
+                    public final void execute(Runnable runnable) {
+                        ViewRootImpl.this.lambda$new$10(runnable);
+                    }
+                };
         this.mIsDragging = false;
         this.mTraversalRunnable = new TraversalRunnable();
         this.mConsumedBatchedInputRunnable = new ConsumeBatchedInputRunnable();
@@ -1029,7 +1094,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
         this.mBasePackageName = context.getBasePackageName();
         String name = DisplayProperties.debug_vri_package().orElse(null);
-        this.mExtraDisplayListenerLogging = !TextUtils.isEmpty(name) && name.equals(this.mBasePackageName);
+        this.mExtraDisplayListenerLogging =
+                !TextUtils.isEmpty(name) && name.equals(this.mBasePackageName);
         this.mContentResolver = context.getContentResolver();
         this.mThread = Thread.currentThread();
         this.mHCTRelayoutHandler = new HCTRelayoutHandler();
@@ -1049,7 +1115,15 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         this.mFirst = true;
         this.mPerformContentCapture = true;
         this.mAdded = false;
-        this.mAttachInfo = new View.AttachInfo(this.mWindowSession, this.mWindow, display, this, this.mHandler, this, context);
+        this.mAttachInfo =
+                new View.AttachInfo(
+                        this.mWindowSession,
+                        this.mWindow,
+                        display,
+                        this,
+                        this.mHandler,
+                        this,
+                        context);
         this.mCompatibleVisibilityInfo = new SystemUiVisibilityInfo();
         this.mAccessibilityManager = AccessibilityManager.getInstance(context);
         this.mHighContrastTextManager = new HighContrastTextManager();
@@ -1059,17 +1133,28 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         this.mFallbackEventHandler = new PhoneFallbackEventHandler(context);
         this.mChoreographer = Choreographer.getInstance();
         this.mInsetsController = new InsetsController(new ViewRootInsetsControllerHost(this));
-        this.mImeBackAnimationController = new ImeBackAnimationController(this, this.mInsetsController);
-        this.mHandwritingInitiator = new HandwritingInitiator(this.mViewConfiguration, (InputMethodManager) this.mContext.getSystemService(InputMethodManager.class));
+        this.mImeBackAnimationController =
+                new ImeBackAnimationController(this, this.mInsetsController);
+        this.mHandwritingInitiator =
+                new HandwritingInitiator(
+                        this.mViewConfiguration,
+                        (InputMethodManager)
+                                this.mContext.getSystemService(InputMethodManager.class));
         this.mViewBoundsSandboxingEnabled = getViewBoundsSandboxingEnabled();
         this.mIsStylusPointerIconEnabled = InputSettings.isStylusPointerIconEnabled(this.mContext);
-        String processorOverrideName = context.getResources().getString(R.string.config_inputEventCompatProcessorOverrideClassName);
+        String processorOverrideName =
+                context.getResources()
+                        .getString(R.string.config_inputEventCompatProcessorOverrideClassName);
         if (processorOverrideName.isEmpty()) {
             this.mInputCompatProcessor = new InputEventCompatProcessor(context);
         } else {
             InputEventCompatProcessor compatProcessor = null;
             try {
-                compatProcessor = (InputEventCompatProcessor) Class.forName(processorOverrideName).getConstructor(Context.class).newInstance(context);
+                compatProcessor =
+                        (InputEventCompatProcessor)
+                                Class.forName(processorOverrideName)
+                                        .getConstructor(Context.class)
+                                        .newInstance(context);
             } catch (Exception e) {
                 Log.e(TAG, "Unable to create the InputEventCompatProcessor. ", e);
             } finally {
@@ -1089,15 +1174,25 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             }
         }
         if (CoreRune.FW_OVERLAPPING_WITH_CUTOUT_AS_DEFAULT) {
-            this.mMinimumSizeForOverlappingWithCutoutAsDefault = this.mContext.getResources().getDimensionPixelSize(R.dimen.samsung_minimum_size_for_overlapping_with_cutout_as_default);
+            this.mMinimumSizeForOverlappingWithCutoutAsDefault =
+                    this.mContext
+                            .getResources()
+                            .getDimensionPixelSize(
+                                    R.dimen
+                                            .samsung_minimum_size_for_overlapping_with_cutout_as_default);
         }
-        this.mInputManagerService = IInputManager.Stub.asInterface(ServiceManager.getService("input"));
+        this.mInputManagerService =
+                IInputManager.Stub.asInterface(ServiceManager.getService("input"));
         loadSystemProperties();
         this.mImeFocusController = new ImeFocusController(this);
         this.mScrollCaptureRequestTimeout = 2500L;
-        this.mOnBackInvokedDispatcher = new WindowOnBackInvokedDispatcher(context, Looper.myLooper());
+        this.mOnBackInvokedDispatcher =
+                new WindowOnBackInvokedDispatcher(context, Looper.myLooper());
         if (Flags.sensitiveContentAppProtection()) {
-            this.mSensitiveContentProtectionService = ISensitiveContentProtectionManager.Stub.asInterface(ServiceManager.getService(Context.SENSITIVE_CONTENT_PROTECTION_SERVICE));
+            this.mSensitiveContentProtectionService =
+                    ISensitiveContentProtectionManager.Stub.asInterface(
+                            ServiceManager.getService(
+                                    Context.SENSITIVE_CONTENT_PROTECTION_SERVICE));
             if (this.mSensitiveContentProtectionService == null) {
                 Log.e(TAG, "SensitiveContentProtectionService shouldn't be null");
             }
@@ -1118,7 +1213,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     private void updateDesktopMode() {
         int desktopModeEnabled;
         if (this.mDesktopModeManager == null) {
-            this.mDesktopModeManager = (SemDesktopModeManager) this.mContext.getSystemService(Context.SEM_DESKTOP_MODE_SERVICE);
+            this.mDesktopModeManager =
+                    (SemDesktopModeManager)
+                            this.mContext.getSystemService(Context.SEM_DESKTOP_MODE_SERVICE);
         }
         if (this.mDesktopModeManager != null) {
             SemDesktopModeState desktopModeState = this.mDesktopModeManager.getDesktopModeState();
@@ -1130,7 +1227,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 desktopModeEnabled = 2;
                 this.mDesktopModeStandAlone = false;
             }
-            if (this.mDisplay.getDisplayId() != 2 && (!this.mDesktopModeStandAlone || (desktopModeEnabled != 3 && desktopModeEnabled != 4))) {
+            if (this.mDisplay.getDisplayId() != 2
+                    && (!this.mDesktopModeStandAlone
+                            || (desktopModeEnabled != 3 && desktopModeEnabled != 4))) {
                 z = false;
             }
             this.mDesktopMode = z;
@@ -1171,7 +1270,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
     }
 
-    public void setOnContentApplyWindowInsetsListener(Window.OnContentApplyWindowInsetsListener listener) {
+    public void setOnContentApplyWindowInsetsListener(
+            Window.OnContentApplyWindowInsetsListener listener) {
         this.mAttachInfo.mContentOnApplyWindowInsetsListener = listener;
         if (!this.mFirst) {
             requestFitSystemWindows();
@@ -1208,7 +1308,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             if (this.mSurfaceHolderCallback != null) {
                 this.mSurfaceHolder.removeCallback(this.mSurfaceHolderCallback);
             }
-            this.mSurfaceHolderCallback = ((RootViewSurfaceTaker) this.mView).willYouTakeTheSurface();
+            this.mSurfaceHolderCallback =
+                    ((RootViewSurfaceTaker) this.mView).willYouTakeTheSurface();
             if (this.mSurfaceHolderCallback != null) {
                 this.mSurfaceHolder = new TakenSurfaceHolder();
                 this.mSurfaceHolder.setFormat(0);
@@ -1216,7 +1317,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             } else {
                 this.mSurfaceHolder = null;
             }
-            this.mInputQueueCallback = ((RootViewSurfaceTaker) this.mView).willYouTakeTheInputQueue();
+            this.mInputQueueCallback =
+                    ((RootViewSurfaceTaker) this.mView).willYouTakeTheInputQueue();
             if (this.mInputQueueCallback != null) {
                 this.mInputQueueCallback.onInputQueueCreated(this.mInputQueue);
             }
@@ -1255,22 +1357,32 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void setView(android.view.View r26, android.view.WindowManager.LayoutParams r27, android.view.View r28, int r29) {
+    public void setView(
+            android.view.View r26,
+            android.view.WindowManager.LayoutParams r27,
+            android.view.View r28,
+            int r29) {
         /*
             Method dump skipped, instructions count: 1698
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.ViewRootImpl.setView(android.view.View, android.view.WindowManager$LayoutParams, android.view.View, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.view.ViewRootImpl.setView(android.view.View,"
+                    + " android.view.WindowManager$LayoutParams, android.view.View, int):void");
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public void setAccessibilityWindowAttributesIfNeeded() {
         boolean registered = this.mAttachInfo.mAccessibilityWindowId != -1;
         if (registered) {
-            AccessibilityWindowAttributes attributes = new AccessibilityWindowAttributes(this.mWindowAttributes, this.mContext.getResources().getConfiguration().getLocales());
+            AccessibilityWindowAttributes attributes =
+                    new AccessibilityWindowAttributes(
+                            this.mWindowAttributes,
+                            this.mContext.getResources().getConfiguration().getLocales());
             if (!attributes.equals(this.mAccessibilityWindowAttributes)) {
                 this.mAccessibilityWindowAttributes = attributes;
-                this.mAccessibilityManager.setAccessibilityWindowAttributes(getDisplayId(), this.mAttachInfo.mAccessibilityWindowId, attributes);
+                this.mAccessibilityManager.setAccessibilityWindowAttributes(
+                        getDisplayId(), this.mAttachInfo.mAccessibilityWindowId, attributes);
             }
         }
     }
@@ -1285,7 +1397,12 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     /* JADX INFO: Access modifiers changed from: private */
     public void reloadForceInvertEnabled() {
         if (android.view.accessibility.Flags.forceInvertColor()) {
-            this.mForceInvertEnabled = Settings.Secure.getIntForUser(this.mContext.getContentResolver(), Settings.Secure.ACCESSIBILITY_FORCE_INVERT_COLOR_ENABLED, 0, UserHandle.myUserId());
+            this.mForceInvertEnabled =
+                    Settings.Secure.getIntForUser(
+                            this.mContext.getContentResolver(),
+                            Settings.Secure.ACCESSIBILITY_FORCE_INVERT_COLOR_ENABLED,
+                            0,
+                            UserHandle.myUserId());
         }
     }
 
@@ -1293,30 +1410,52 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         if (this.mExtraDisplayListenerLogging) {
             Slog.i(this.mTag, "Register listeners: " + this.mBasePackageName);
         }
-        this.mAccessibilityManager.addAccessibilityStateChangeListener(this.mAccessibilityInteractionConnectionManager, this.mHandler);
-        this.mAccessibilityManager.addHighTextContrastStateChangeListener(this.mHighContrastTextManager, this.mHandler);
-        DisplayManagerGlobal.getInstance().registerDisplayListener(this.mDisplayListener, this.mHandler, 7L, this.mBasePackageName);
-        if (android.view.accessibility.Flags.forceInvertColor() && this.mForceInvertObserver == null) {
-            this.mForceInvertObserver = new ContentObserver(this.mHandler) { // from class: android.view.ViewRootImpl.2
-                @Override // android.database.ContentObserver
-                public void onChange(boolean selfChange) {
-                    ViewRootImpl.this.reloadForceInvertEnabled();
-                    ViewRootImpl.this.updateForceDarkMode();
-                }
-            };
-            this.mContext.getContentResolver().registerContentObserver(Settings.Secure.getUriFor(Settings.Secure.ACCESSIBILITY_FORCE_INVERT_COLOR_ENABLED), false, this.mForceInvertObserver, UserHandle.myUserId());
+        this.mAccessibilityManager.addAccessibilityStateChangeListener(
+                this.mAccessibilityInteractionConnectionManager, this.mHandler);
+        this.mAccessibilityManager.addHighTextContrastStateChangeListener(
+                this.mHighContrastTextManager, this.mHandler);
+        DisplayManagerGlobal.getInstance()
+                .registerDisplayListener(
+                        this.mDisplayListener, this.mHandler, 7L, this.mBasePackageName);
+        if (android.view.accessibility.Flags.forceInvertColor()
+                && this.mForceInvertObserver == null) {
+            this.mForceInvertObserver =
+                    new ContentObserver(this.mHandler) { // from class: android.view.ViewRootImpl.2
+                        @Override // android.database.ContentObserver
+                        public void onChange(boolean selfChange) {
+                            ViewRootImpl.this.reloadForceInvertEnabled();
+                            ViewRootImpl.this.updateForceDarkMode();
+                        }
+                    };
+            this.mContext
+                    .getContentResolver()
+                    .registerContentObserver(
+                            Settings.Secure.getUriFor(
+                                    Settings.Secure.ACCESSIBILITY_FORCE_INVERT_COLOR_ENABLED),
+                            false,
+                            this.mForceInvertObserver,
+                            UserHandle.myUserId());
         }
-        if (this.mAttachInfo != null && this.mDisplay.getState() != this.mAttachInfo.mDisplayState && this.mAttachInfo.mDisplay != null && this.mAttachInfo.mDisplay.getDisplayId() == this.mDisplay.getDisplayId()) {
+        if (this.mAttachInfo != null
+                && this.mDisplay.getState() != this.mAttachInfo.mDisplayState
+                && this.mAttachInfo.mDisplay != null
+                && this.mAttachInfo.mDisplay.getDisplayId() == this.mDisplay.getDisplayId()) {
             this.mAttachInfo.mDisplayState = this.mDisplay.getState();
-            Log.i(this.mTag, "synced displayState. AttachInfo displayState=" + this.mAttachInfo.mDisplayState);
+            Log.i(
+                    this.mTag,
+                    "synced displayState. AttachInfo displayState="
+                            + this.mAttachInfo.mDisplayState);
         }
     }
 
     private void unregisterListeners() {
-        this.mAccessibilityManager.removeAccessibilityStateChangeListener(this.mAccessibilityInteractionConnectionManager);
-        this.mAccessibilityManager.removeHighTextContrastStateChangeListener(this.mHighContrastTextManager);
+        this.mAccessibilityManager.removeAccessibilityStateChangeListener(
+                this.mAccessibilityInteractionConnectionManager);
+        this.mAccessibilityManager.removeHighTextContrastStateChangeListener(
+                this.mHighContrastTextManager);
         DisplayManagerGlobal.getInstance().unregisterDisplayListener(this.mDisplayListener);
-        if (android.view.accessibility.Flags.forceInvertColor() && this.mForceInvertObserver != null) {
+        if (android.view.accessibility.Flags.forceInvertColor()
+                && this.mForceInvertObserver != null) {
             this.mContext.getContentResolver().unregisterContentObserver(this.mForceInvertObserver);
             this.mForceInvertObserver = null;
         }
@@ -1368,12 +1507,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         ThreadedRenderer renderer = this.mAttachInfo.mThreadedRenderer;
         if (renderer != null) {
             if (Looper.myLooper() != this.mAttachInfo.mHandler.getLooper()) {
-                this.mAttachInfo.mHandler.postAtFrontOfQueue(new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda17
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        ViewRootImpl.this.destroyHardwareResources();
-                    }
-                });
+                this.mAttachInfo.mHandler.postAtFrontOfQueue(
+                        new Runnable() { // from class:
+                                         // android.view.ViewRootImpl$$ExternalSyntheticLambda17
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                ViewRootImpl.this.destroyHardwareResources();
+                            }
+                        });
             } else {
                 renderer.destroyHardwareResources(this.mView);
                 renderer.destroy();
@@ -1395,11 +1536,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
     }
 
-    public void detachFunctor(long functor) {
-    }
+    public void detachFunctor(long functor) {}
 
-    public static void invokeFunctor(long functor, boolean waitForCompletion) {
-    }
+    public static void invokeFunctor(long functor, boolean waitForCompletion) {}
 
     public void registerAnimatingRenderNode(RenderNode animator) {
         if (this.mAttachInfo.mThreadedRenderer != null) {
@@ -1420,21 +1559,23 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     public void registerRtFrameCallback(final HardwareRenderer.FrameDrawingCallback callback) {
         if (this.mAttachInfo.mThreadedRenderer != null) {
-            this.mAttachInfo.mThreadedRenderer.registerRtFrameCallback(new HardwareRenderer.FrameDrawingCallback() { // from class: android.view.ViewRootImpl.3
-                @Override // android.graphics.HardwareRenderer.FrameDrawingCallback
-                public void onFrameDraw(long frame) {
-                }
+            this.mAttachInfo.mThreadedRenderer.registerRtFrameCallback(
+                    new HardwareRenderer
+                            .FrameDrawingCallback() { // from class: android.view.ViewRootImpl.3
+                        @Override // android.graphics.HardwareRenderer.FrameDrawingCallback
+                        public void onFrameDraw(long frame) {}
 
-                @Override // android.graphics.HardwareRenderer.FrameDrawingCallback
-                public HardwareRenderer.FrameCommitCallback onFrameDraw(int syncResult, long frame) {
-                    try {
-                        return callback.onFrameDraw(syncResult, frame);
-                    } catch (Exception e) {
-                        Log.e(ViewRootImpl.TAG, "Exception while executing onFrameDraw", e);
-                        return null;
-                    }
-                }
-            });
+                        @Override // android.graphics.HardwareRenderer.FrameDrawingCallback
+                        public HardwareRenderer.FrameCommitCallback onFrameDraw(
+                                int syncResult, long frame) {
+                            try {
+                                return callback.onFrameDraw(syncResult, frame);
+                            } catch (Exception e) {
+                                Log.e(ViewRootImpl.TAG, "Exception while executing onFrameDraw", e);
+                                return null;
+                            }
+                        }
+                    });
         }
     }
 
@@ -1454,9 +1595,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 this.mAttachInfo.mThreadedRenderer.destroy();
             }
             Rect insets = attrs.surfaceInsets;
-            boolean hasSurfaceInsets = (insets.left == 0 && insets.right == 0 && insets.top == 0 && insets.bottom == 0) ? false : true;
+            boolean hasSurfaceInsets =
+                    (insets.left == 0 && insets.right == 0 && insets.top == 0 && insets.bottom == 0)
+                            ? false
+                            : true;
             boolean translucent = attrs.format != -1 || hasSurfaceInsets;
-            ThreadedRenderer renderer = ThreadedRenderer.create(this.mContext, translucent, attrs.getTitle().toString());
+            ThreadedRenderer renderer =
+                    ThreadedRenderer.create(
+                            this.mContext, translucent, attrs.getTitle().toString());
             this.mAttachInfo.mThreadedRenderer = renderer;
             renderer.setSurfaceControl(this.mSurfaceControl, this.mBlastBufferQueue);
             updateColorModeIfNeeded(attrs.getColorMode(), attrs.getDesiredHdrHeadroom());
@@ -1483,7 +1629,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
         boolean useAutoDark = getNightMode() == 32;
         if (useAutoDark) {
-            boolean forceDarkAllowedDefault = SystemProperties.getBoolean(ThreadedRenderer.DEBUG_FORCE_DARK, false);
+            boolean forceDarkAllowedDefault =
+                    SystemProperties.getBoolean(ThreadedRenderer.DEBUG_FORCE_DARK, false);
             TypedArray a = this.mContext.obtainStyledAttributes(R.styleable.Theme);
             useAutoDark = a.getBoolean(279, true) && a.getBoolean(278, forceDarkAllowedDefault);
             a.recycle();
@@ -1493,7 +1640,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     /* JADX INFO: Access modifiers changed from: private */
     public void updateForceDarkMode() {
-        if (this.mAttachInfo.mThreadedRenderer != null && this.mAttachInfo.mThreadedRenderer.setForceDark(determineForceDarkType())) {
+        if (this.mAttachInfo.mThreadedRenderer != null
+                && this.mAttachInfo.mThreadedRenderer.setForceDark(determineForceDarkType())) {
             invalidateWorld(this.mView);
         }
     }
@@ -1514,7 +1662,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             int oldInsetBottom = this.mWindowAttributes.surfaceInsets.bottom;
             int oldSoftInputMode = this.mWindowAttributes.softInputMode;
             boolean oldHasManualSurfaceInsets = this.mWindowAttributes.hasManualSurfaceInsets;
-            if (DEBUG_KEEP_SCREEN_ON && (this.mClientWindowLayoutFlags & 128) != 0 && (attrs.flags & 128) == 0) {
+            if (DEBUG_KEEP_SCREEN_ON
+                    && (this.mClientWindowLayoutFlags & 128) != 0
+                    && (attrs.flags & 128) == 0) {
                 Slog.d(this.mTag, "setLayoutParams: FLAG_KEEP_SCREEN_ON from true to false!");
             }
             if ((this.mWindowAttributes.flags & 512) != 0 && (attrs.flags & 512) == 0) {
@@ -1546,9 +1696,13 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             this.mWindowAttributes.insetsFlags.appearance = appearance;
             this.mWindowAttributes.insetsFlags.behavior = behavior;
             if (this.mWindowAttributes.preservePreviousSurfaceInsets) {
-                this.mWindowAttributes.surfaceInsets.set(oldInsetLeft, oldInsetTop, oldInsetRight, oldInsetBottom);
+                this.mWindowAttributes.surfaceInsets.set(
+                        oldInsetLeft, oldInsetTop, oldInsetRight, oldInsetBottom);
                 this.mWindowAttributes.hasManualSurfaceInsets = oldHasManualSurfaceInsets;
-            } else if (this.mWindowAttributes.surfaceInsets.left != oldInsetLeft || this.mWindowAttributes.surfaceInsets.top != oldInsetTop || this.mWindowAttributes.surfaceInsets.right != oldInsetRight || this.mWindowAttributes.surfaceInsets.bottom != oldInsetBottom) {
+            } else if (this.mWindowAttributes.surfaceInsets.left != oldInsetLeft
+                    || this.mWindowAttributes.surfaceInsets.top != oldInsetTop
+                    || this.mWindowAttributes.surfaceInsets.right != oldInsetRight
+                    || this.mWindowAttributes.surfaceInsets.bottom != oldInsetBottom) {
                 this.mNeedsRendererSetup = true;
             }
             applyKeepScreenOnFlag(this.mWindowAttributes);
@@ -1557,12 +1711,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 requestLayout();
             }
             if ((attrs.softInputMode & 240) == 0) {
-                this.mWindowAttributes.softInputMode = (oldSoftInputMode & 240) | (this.mWindowAttributes.softInputMode & (-241));
+                this.mWindowAttributes.softInputMode =
+                        (oldSoftInputMode & 240) | (this.mWindowAttributes.softInputMode & (-241));
             }
             if (this.mWindowAttributes.softInputMode != oldSoftInputMode) {
                 requestFitSystemWindows();
             }
-            if (DEBUG_TRAVERSAL && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
+            if (DEBUG_TRAVERSAL
+                    && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
                 Log.i(this.mTag, "Traversal, [1] mView=" + this.mView);
             }
             this.mWindowAttributesChanged = true;
@@ -1573,31 +1729,61 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     private int adjustLayoutInDisplayCutoutMode(WindowManager.LayoutParams attrs) {
         int originalMode = attrs.layoutInDisplayCutoutMode;
-        if ((attrs.privateFlags & 264192) != 0 && attrs.isFullscreen() && attrs.getFitInsetsTypes() == 0 && attrs.getFitInsetsSides() == 0 && originalMode != 3) {
+        if ((attrs.privateFlags & 264192) != 0
+                && attrs.isFullscreen()
+                && attrs.getFitInsetsTypes() == 0
+                && attrs.getFitInsetsSides() == 0
+                && originalMode != 3) {
             attrs.layoutInDisplayCutoutMode = 3;
         }
         return originalMode;
     }
 
     private boolean isImpossibleRenderer() {
-        return this.mSemEarlyAppVisibilityChanged && this.mAppVisible && this.mStopped && !this.mSemEarlyAppVisibility;
+        return this.mSemEarlyAppVisibilityChanged
+                && this.mAppVisible
+                && this.mStopped
+                && !this.mSemEarlyAppVisibility;
     }
 
     void handleAppVisibility(boolean visible) {
         if (Trace.isTagEnabled(8L)) {
-            Trace.instant(8L, TextUtils.formatSimple("%s visibilityChanged oldVisibility=%b newVisibility=%b", this.mTag, Boolean.valueOf(this.mAppVisible), Boolean.valueOf(visible)));
+            Trace.instant(
+                    8L,
+                    TextUtils.formatSimple(
+                            "%s visibilityChanged oldVisibility=%b newVisibility=%b",
+                            this.mTag,
+                            Boolean.valueOf(this.mAppVisible),
+                            Boolean.valueOf(visible)));
         }
         this.mSemEarlyAppVisibilityChanged = false;
-        Log.i(this.mTag, "handleAppVisibility mAppVisible = " + this.mAppVisible + " visible = " + visible);
+        Log.i(
+                this.mTag,
+                "handleAppVisibility mAppVisible = " + this.mAppVisible + " visible = " + visible);
         if (this.mAppVisible != visible) {
             boolean previousVisible = getHostVisibility() == 0;
             this.mAppVisible = visible;
             boolean currentVisible = getHostVisibility() == 0;
-            if (DEBUG_TRAVERSAL && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
-                Log.i(this.mTag, "Traversal, [2] mView=" + this.mView + " visible=" + visible + " previousVisible=" + previousVisible + " currentVisible=" + currentVisible);
+            if (DEBUG_TRAVERSAL
+                    && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
+                Log.i(
+                        this.mTag,
+                        "Traversal, [2] mView="
+                                + this.mView
+                                + " visible="
+                                + visible
+                                + " previousVisible="
+                                + previousVisible
+                                + " currentVisible="
+                                + currentVisible);
             }
             if (previousVisible != currentVisible) {
-                Log.d(this.mTag, "visibilityChanged oldVisibility=" + previousVisible + " newVisibility=" + currentVisible);
+                Log.d(
+                        this.mTag,
+                        "visibilityChanged oldVisibility="
+                                + previousVisible
+                                + " newVisibility="
+                                + currentVisible);
                 this.mAppVisibilityChanged = true;
                 scheduleTraversals();
             }
@@ -1606,8 +1792,16 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 return;
             }
             Log.v(this.mTag, "handleAppVisibility() enabling visibility when removed");
-            if (DEBUG_TRAVERSAL && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
-                Log.i(this.mTag, "Traversal, [2] mView=" + this.mView + " mAppVisible=" + this.mAppVisible + " visible=" + visible);
+            if (DEBUG_TRAVERSAL
+                    && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
+                Log.i(
+                        this.mTag,
+                        "Traversal, [2] mView="
+                                + this.mView
+                                + " mAppVisible="
+                                + this.mAppVisible
+                                + " visible="
+                                + visible);
             }
         }
     }
@@ -1615,14 +1809,25 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     void handleGetNewSurface() {
         this.mNewSurfaceNeeded = true;
         this.mFullRedrawNeeded = true;
-        if (DEBUG_TRAVERSAL && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
+        if (DEBUG_TRAVERSAL
+                && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
             Log.i(this.mTag, "Traversal, [3]  mView=" + this.mView);
         }
         scheduleTraversals();
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void handleResized(ClientWindowFrames frames, boolean reportDraw, MergedConfiguration mergedConfiguration, InsetsState insetsState, boolean forceLayout, boolean alwaysConsumeSystemBars, int displayId, int syncSeqId, boolean dragResizing, ActivityWindowInfo activityWindowInfo) {
+    public void handleResized(
+            ClientWindowFrames frames,
+            boolean reportDraw,
+            MergedConfiguration mergedConfiguration,
+            InsetsState insetsState,
+            boolean forceLayout,
+            boolean alwaysConsumeSystemBars,
+            int displayId,
+            int syncSeqId,
+            boolean dragResizing,
+            ActivityWindowInfo activityWindowInfo) {
         boolean z;
         Rect attachedFrame;
         if (!this.mAdded) {
@@ -1646,15 +1851,51 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         this.mInsetsController.onStateChanged(insetsState);
         float compatScale = frames.compatScale;
         boolean frameChanged = !this.mWinFrame.equals(frame);
-        boolean shouldReportActivityWindowInfoChanged = (this.mLastReportedActivityWindowInfo == null || activityWindowInfo == null || this.mLastReportedActivityWindowInfo.equals(activityWindowInfo)) ? false : true;
-        boolean configChanged = !this.mLastReportedMergedConfiguration.equals(mergedConfiguration) || shouldReportActivityWindowInfoChanged;
-        boolean attachedFrameChanged = !Objects.equals(this.mTmpFrames.attachedFrame, attachedFrame2);
+        boolean shouldReportActivityWindowInfoChanged =
+                (this.mLastReportedActivityWindowInfo == null
+                                || activityWindowInfo == null
+                                || this.mLastReportedActivityWindowInfo.equals(activityWindowInfo))
+                        ? false
+                        : true;
+        boolean configChanged =
+                !this.mLastReportedMergedConfiguration.equals(mergedConfiguration)
+                        || shouldReportActivityWindowInfoChanged;
+        boolean attachedFrameChanged =
+                !Objects.equals(this.mTmpFrames.attachedFrame, attachedFrame2);
         boolean displayChanged = this.mDisplay.getDisplayId() != displayId;
         boolean compatScaleChanged = this.mTmpFrames.compatScale != compatScale;
         boolean shouldReportActivityWindowInfoChanged2 = this.mPendingDragResizing;
         boolean dragResizingChanged = shouldReportActivityWindowInfoChanged2 != dragResizing;
-        Log.i(this.mTag, "handleResized, frames=" + frames + " displayId=" + displayId + " dragResizing=" + dragResizing + " compatScale=" + compatScale + " frameChanged=" + frameChanged + " attachedFrameChanged=" + attachedFrameChanged + " configChanged=" + configChanged + " displayChanged=" + displayChanged + " compatScaleChanged=" + compatScaleChanged + " dragResizingChanged=" + dragResizingChanged);
-        if (!reportDraw && !frameChanged && !configChanged && !attachedFrameChanged && !displayChanged && !forceLayout && !compatScaleChanged && !dragResizingChanged) {
+        Log.i(
+                this.mTag,
+                "handleResized, frames="
+                        + frames
+                        + " displayId="
+                        + displayId
+                        + " dragResizing="
+                        + dragResizing
+                        + " compatScale="
+                        + compatScale
+                        + " frameChanged="
+                        + frameChanged
+                        + " attachedFrameChanged="
+                        + attachedFrameChanged
+                        + " configChanged="
+                        + configChanged
+                        + " displayChanged="
+                        + displayChanged
+                        + " compatScaleChanged="
+                        + compatScaleChanged
+                        + " dragResizingChanged="
+                        + dragResizingChanged);
+        if (!reportDraw
+                && !frameChanged
+                && !configChanged
+                && !attachedFrameChanged
+                && !displayChanged
+                && !forceLayout
+                && !compatScaleChanged
+                && !dragResizingChanged) {
             return;
         }
         this.mPendingDragResizing = dragResizing;
@@ -1662,7 +1903,11 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         this.mInvCompatScale = 1.0f / compatScale;
         if (configChanged) {
             z = false;
-            performConfigurationChange(mergedConfiguration, false, displayChanged ? displayId : -1, activityWindowInfo);
+            performConfigurationChange(
+                    mergedConfiguration,
+                    false,
+                    displayChanged ? displayId : -1,
+                    activityWindowInfo);
         } else {
             z = false;
             if (displayChanged) {
@@ -1681,7 +1926,13 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             boolean fullscreen = frame.equals(this.mPendingBackDropFrame);
             int i = this.mWindowCallbacks.size() - 1;
             while (i >= 0) {
-                this.mWindowCallbacks.get(i).onWindowSizeIsChanging(this.mPendingBackDropFrame, fullscreen, this.mAttachInfo.mVisibleInsets, this.mAttachInfo.mStableInsets);
+                this.mWindowCallbacks
+                        .get(i)
+                        .onWindowSizeIsChanging(
+                                this.mPendingBackDropFrame,
+                                fullscreen,
+                                this.mAttachInfo.mVisibleInsets,
+                                this.mAttachInfo.mStableInsets);
                 i--;
                 compatScaleChanged = compatScaleChanged;
             }
@@ -1700,7 +1951,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void handleInsetsControlChanged(InsetsState insetsState, InsetsSourceControl.Array activeControls) {
+    public void handleInsetsControlChanged(
+            InsetsState insetsState, InsetsSourceControl.Array activeControls) {
         InsetsSourceControl[] controls = activeControls.get();
         if (this.mTranslator != null) {
             this.mTranslator.translateInsetsStateInScreenToAppWindow(insetsState);
@@ -1725,7 +1977,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     private void updateInternalDisplay(int displayId, Resources resources) {
-        Display preferredDisplay = ResourcesManager.getInstance().getAdjustedDisplay(displayId, resources);
+        Display preferredDisplay =
+                ResourcesManager.getInstance().getAdjustedDisplay(displayId, resources);
         this.mHdrRenderState.stopListening();
         if (preferredDisplay == null) {
             Slog.w(TAG, "Cannot get desired display with Id: " + displayId);
@@ -1738,7 +1991,11 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     void pokeDrawLockIfNeeded() {
-        if (Display.isDozeState(this.mAttachInfo.mDisplayState) && this.mWindowAttributes.type == 1 && this.mAdded && this.mTraversalScheduled && this.mAttachInfo.mHasWindowFocus) {
+        if (Display.isDozeState(this.mAttachInfo.mDisplayState)
+                && this.mWindowAttributes.type == 1
+                && this.mAdded
+                && this.mTraversalScheduled
+                && this.mAttachInfo.mHasWindowFocus) {
             try {
                 this.mWindowSession.pokeDrawLock(this.mWindow);
             } catch (RemoteException e) {
@@ -1750,7 +2007,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     public void requestFitSystemWindows() {
         checkThread();
         this.mApplyInsetsRequested = true;
-        if (DEBUG_TRAVERSAL && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
+        if (DEBUG_TRAVERSAL
+                && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
             Log.i(this.mTag, "Traversal, [5] mView=" + this.mView);
         }
         scheduleTraversals();
@@ -1759,17 +2017,30 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     void notifyInsetsChanged() {
         InsetsSource imeSource = this.mInsetsController.getState().peekSource(InsetsSource.ID_IME);
         WindowConfiguration winConfig = getConfiguration().windowConfiguration;
-        boolean isBottomSplit = winConfig.isSplitScreen() && (winConfig.getStagePosition() & 64) != 0;
-        if ((winConfig.getWindowingMode() == 5 || isBottomSplit) && imeSource != null && imeSource.isVisible() && !imeSource.getFrame().isEmpty() && imeSource.getFrame().top < this.mWinFrame.top) {
+        boolean isBottomSplit =
+                winConfig.isSplitScreen() && (winConfig.getStagePosition() & 64) != 0;
+        if ((winConfig.getWindowingMode() == 5 || isBottomSplit)
+                && imeSource != null
+                && imeSource.isVisible()
+                && !imeSource.getFrame().isEmpty()
+                && imeSource.getFrame().top < this.mWinFrame.top) {
             return;
         }
         this.mApplyInsetsRequested = true;
         requestLayout();
-        if (View.sForceLayoutWhenInsetsChanged && this.mView != null && (this.mWindowAttributes.softInputMode & 240) == 16) {
+        if (View.sForceLayoutWhenInsetsChanged
+                && this.mView != null
+                && (this.mWindowAttributes.softInputMode & 240) == 16) {
             forceLayout(this.mView);
         }
-        if (DEBUG_TRAVERSAL && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
-            Log.i(this.mTag, "Traversal, [6] mView=" + this.mView + " mIsInTraversal=" + this.mIsInTraversal);
+        if (DEBUG_TRAVERSAL
+                && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
+            Log.i(
+                    this.mTag,
+                    "Traversal, [6] mView="
+                            + this.mView
+                            + " mIsInTraversal="
+                            + this.mIsInTraversal);
         }
         if (!this.mIsInTraversal) {
             scheduleTraversals();
@@ -1784,8 +2055,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     @Override // android.view.ViewParent
     public void requestLayout() {
-        if (DEBUG_TRAVERSAL && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
-            Log.i(this.mTag, "Traversal, [7] mView=" + this.mView + " mHandlingLayoutInLayoutRequest=" + this.mHandlingLayoutInLayoutRequest);
+        if (DEBUG_TRAVERSAL
+                && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
+            Log.i(
+                    this.mTag,
+                    "Traversal, [7] mView="
+                            + this.mView
+                            + " mHandlingLayoutInLayoutRequest="
+                            + this.mHandlingLayoutInLayoutRequest);
         }
         if (!this.mHandlingLayoutInLayoutRequest) {
             checkThread();
@@ -1811,8 +2088,11 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     void invalidate() {
-        if (DEBUG_TRAVERSAL && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
-            Log.i(this.mTag, "Traversal, [8] mView=" + this.mView + " mWillDrawSoon=" + this.mWillDrawSoon);
+        if (DEBUG_TRAVERSAL
+                && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
+            Log.i(
+                    this.mTag,
+                    "Traversal, [8] mView=" + this.mView + " mWillDrawSoon=" + this.mWillDrawSoon);
         }
         this.mDirty.set(0, 0, this.mWidth, this.mHeight);
         if (!this.mWillDrawSoon) {
@@ -1872,12 +2152,27 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         Rect localDirty = this.mDirty;
         localDirty.union(dirty.left, dirty.top, dirty.right, dirty.bottom);
         float appScale = this.mAttachInfo.mApplicationScale;
-        boolean intersected = localDirty.intersect(0, 0, (int) ((this.mWidth * appScale) + 0.5f), (int) ((this.mHeight * appScale) + 0.5f));
+        boolean intersected =
+                localDirty.intersect(
+                        0,
+                        0,
+                        (int) ((this.mWidth * appScale) + 0.5f),
+                        (int) ((this.mHeight * appScale) + 0.5f));
         if (!intersected) {
             localDirty.setEmpty();
         }
-        if (DEBUG_TRAVERSAL && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
-            Log.i(this.mTag, "Traversal, [9] mView=" + this.mView + " mWillDrawSoon=" + this.mWillDrawSoon + " intersected=" + intersected + " mIsAnimating=" + this.mIsAnimating);
+        if (DEBUG_TRAVERSAL
+                && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
+            Log.i(
+                    this.mTag,
+                    "Traversal, [9] mView="
+                            + this.mView
+                            + " mWillDrawSoon="
+                            + this.mWillDrawSoon
+                            + " intersected="
+                            + intersected
+                            + " mIsAnimating="
+                            + this.mIsAnimating);
         }
         if (this.mWillDrawSoon) {
             return;
@@ -1895,14 +2190,24 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     public void setWindowStopped(boolean stopped) {
         Log.i(this.mTag, "stopped(" + stopped + ") old = " + this.mStopped);
         checkThread();
-        if (DEBUG_TRAVERSAL && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
-            Log.i(this.mTag, "Traversal, [10] mView=" + this.mView + " mStopped=" + this.mStopped + " stopped=" + stopped);
+        if (DEBUG_TRAVERSAL
+                && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
+            Log.i(
+                    this.mTag,
+                    "Traversal, [10] mView="
+                            + this.mView
+                            + " mStopped="
+                            + this.mStopped
+                            + " stopped="
+                            + stopped);
         }
         if (this.mStopped != stopped) {
             this.mStopped = stopped;
             ThreadedRenderer renderer = this.mAttachInfo.mThreadedRenderer;
             if (renderer != null) {
-                Log.d(this.mTag, "WindowStopped on " + ((Object) getTitle()) + " set to " + this.mStopped);
+                Log.d(
+                        this.mTag,
+                        "WindowStopped on " + ((Object) getTitle()) + " set to " + this.mStopped);
                 renderer.setStopped(this.mStopped);
             }
             if (!this.mStopped) {
@@ -1934,8 +2239,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
         void surfaceReplaced(SurfaceControl.Transaction transaction);
 
-        default void vriDrawStarted(boolean isWmSync) {
-        }
+        default void vriDrawStarted(boolean isWmSync) {}
     }
 
     public void addSurfaceChangedCallback(SurfaceChangedCallback c) {
@@ -1972,15 +2276,30 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     public SurfaceControl updateAndGetBoundsLayer(SurfaceControl.Transaction t) {
         if (this.mBoundsLayer == null) {
-            WindowConfiguration winConfig = this.mContext.getResources().getConfiguration().windowConfiguration;
-            boolean needBoundsLayer = winConfig.getWindowingMode() == 5 && this.mWindowAttributes.type == 1 && this.mWindowAttributes.isFullscreen();
-            this.mBoundsLayer = new SurfaceControl.Builder(this.mSurfaceSession).setContainerLayer().setName("Bounds for - " + getTitle().toString() + "@" + this.mBoundsLayerCreatedCount).setParent(getSurfaceControl()).setColorLayer().setCallsite("ViewRootImpl.getBoundsLayer").build();
+            WindowConfiguration winConfig =
+                    this.mContext.getResources().getConfiguration().windowConfiguration;
+            boolean needBoundsLayer =
+                    winConfig.getWindowingMode() == 5
+                            && this.mWindowAttributes.type == 1
+                            && this.mWindowAttributes.isFullscreen();
+            this.mBoundsLayer =
+                    new SurfaceControl.Builder(this.mSurfaceSession)
+                            .setContainerLayer()
+                            .setName(
+                                    "Bounds for - "
+                                            + getTitle().toString()
+                                            + "@"
+                                            + this.mBoundsLayerCreatedCount)
+                            .setParent(getSurfaceControl())
+                            .setColorLayer()
+                            .setCallsite("ViewRootImpl.getBoundsLayer")
+                            .build();
             setBoundsLayerCrop(t);
             if (!needBoundsLayer) {
                 t.unsetColor(this.mBoundsLayer);
                 this.mIsBoundsColorLayer = false;
             } else {
-                t.setColor(this.mBoundsLayer, new float[]{0.0f, 0.0f, 0.0f});
+                t.setColor(this.mBoundsLayer, new float[] {0.0f, 0.0f, 0.0f});
                 t.setLayer(this.mBoundsLayer, -3);
                 this.mIsBoundsColorLayer = true;
             }
@@ -1995,14 +2314,25 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         if (!this.mSurfaceControl.isValid()) {
             return;
         }
-        if (this.mBlastBufferQueue != null && this.mBlastBufferQueue.isSameSurfaceControl(this.mSurfaceControl)) {
-            this.mBlastBufferQueue.update(this.mSurfaceControl, this.mSurfaceSize.x, this.mSurfaceSize.y, this.mWindowAttributes.format);
+        if (this.mBlastBufferQueue != null
+                && this.mBlastBufferQueue.isSameSurfaceControl(this.mSurfaceControl)) {
+            this.mBlastBufferQueue.update(
+                    this.mSurfaceControl,
+                    this.mSurfaceSize.x,
+                    this.mSurfaceSize.y,
+                    this.mWindowAttributes.format);
             return;
         }
         if (this.mBlastBufferQueue != null) {
             this.mBlastBufferQueue.destroy();
         }
-        this.mBlastBufferQueue = new BLASTBufferQueue(this.mTag, this.mSurfaceControl, this.mSurfaceSize.x, this.mSurfaceSize.y, this.mWindowAttributes.format);
+        this.mBlastBufferQueue =
+                new BLASTBufferQueue(
+                        this.mTag,
+                        this.mSurfaceControl,
+                        this.mSurfaceSize.x,
+                        this.mSurfaceSize.y,
+                        this.mWindowAttributes.format);
         this.mBlastBufferQueue.setTransactionHangCallback(sTransactionHangCallback);
         if (Flags.addSchandleToVriSurface()) {
             blastSurface = this.mBlastBufferQueue.createSurfaceWithHandle();
@@ -2018,8 +2348,16 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             return;
         }
         this.mTempRect.set(0, 0, this.mSurfaceSize.x, this.mSurfaceSize.y);
-        this.mTempRect.inset(this.mWindowAttributes.surfaceInsets.left, this.mWindowAttributes.surfaceInsets.top, this.mWindowAttributes.surfaceInsets.right, this.mWindowAttributes.surfaceInsets.bottom);
-        this.mTempRect.inset(this.mChildBoundingInsets.left, this.mChildBoundingInsets.top, this.mChildBoundingInsets.right, this.mChildBoundingInsets.bottom);
+        this.mTempRect.inset(
+                this.mWindowAttributes.surfaceInsets.left,
+                this.mWindowAttributes.surfaceInsets.top,
+                this.mWindowAttributes.surfaceInsets.right,
+                this.mWindowAttributes.surfaceInsets.bottom);
+        this.mTempRect.inset(
+                this.mChildBoundingInsets.left,
+                this.mChildBoundingInsets.top,
+                this.mChildBoundingInsets.right,
+                this.mChildBoundingInsets.bottom);
         t.setWindowCrop(this.mBoundsLayer, this.mTempRect);
     }
 
@@ -2028,12 +2366,23 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             return false;
         }
         setBoundsLayerCrop(t);
-        Log.i(this.mTag, "updateBoundsLayer: t=" + t + " sc=" + this.mBoundsLayer + " frame=" + this.mSurface.getNextFrameNumber());
+        Log.i(
+                this.mTag,
+                "updateBoundsLayer: t="
+                        + t
+                        + " sc="
+                        + this.mBoundsLayer
+                        + " frame="
+                        + this.mSurface.getNextFrameNumber());
         if (this.mAttachInfo.mDisplayState == 1) {
             this.mDeferTransactionRequested = true;
-            Log.i(this.mTag, "updateBoundsLayer: set mDeferTransactionRequested=" + this.mDeferTransactionRequested);
+            Log.i(
+                    this.mTag,
+                    "updateBoundsLayer: set mDeferTransactionRequested="
+                            + this.mDeferTransactionRequested);
         }
-        WindowConfiguration winConfig = this.mContext.getResources().getConfiguration().windowConfiguration;
+        WindowConfiguration winConfig =
+                this.mContext.getResources().getConfiguration().windowConfiguration;
         boolean isFreeform = winConfig.getWindowingMode() == 5;
         if (this.mWindowAttributes.type == 1 && this.mWindowAttributes.isFullscreen()) {
             if (!this.mIsWindowOpaque && isFreeform) {
@@ -2042,7 +2391,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 this.mIsBoundsColorLayer = false;
             } else if (!this.mIsBoundsColorLayer && isFreeform) {
                 t.setLayer(this.mBoundsLayer, -3);
-                t.setColor(this.mBoundsLayer, new float[]{0.0f, 0.0f, 0.0f});
+                t.setColor(this.mBoundsLayer, new float[] {0.0f, 0.0f, 0.0f});
                 this.mIsBoundsColorLayer = true;
             } else if (this.mIsBoundsColorLayer && !isFreeform) {
                 t.setLayer(this.mBoundsLayer, 0);
@@ -2064,7 +2413,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             if (shouldEnableDvrr()) {
                 try {
                     if (sToolkitFrameRateFunctionEnablingReadOnlyFlagValue) {
-                        this.mFrameRateTransaction.setFrameRateSelectionStrategy(sc, 2).applyAsyncUnsafe();
+                        this.mFrameRateTransaction
+                                .setFrameRateSelectionStrategy(sc, 2)
+                                .applyAsyncUnsafe();
                     }
                 } catch (Exception e) {
                     Log.e(this.mTag, "Unable to set frame rate selection strategy ", e);
@@ -2072,7 +2423,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             }
             if (CoreRune.FW_VRR_SEND_TOUCH_HINT) {
                 try {
-                    this.mTouchHintTransaction.setFrameRateSelectionStrategy(sc, 2).applyAsyncUnsafe();
+                    this.mTouchHintTransaction
+                            .setFrameRateSelectionStrategy(sc, 2)
+                            .applyAsyncUnsafe();
                 } catch (Exception e2) {
                     Log.e(this.mTag, "Unable to set frame rate selection strategy ", e2);
                 }
@@ -2119,18 +2472,28 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     @Override // android.view.ViewParent
-    public boolean getChildLocalHitRegion(View child, Region region, Matrix matrix, boolean isHover) {
+    public boolean getChildLocalHitRegion(
+            View child, Region region, Matrix matrix, boolean isHover) {
         if (child != this.mView) {
-            throw new IllegalArgumentException("child " + child + " is not the root view " + this.mView + " managed by this ViewRootImpl");
+            throw new IllegalArgumentException(
+                    "child "
+                            + child
+                            + " is not the root view "
+                            + this.mView
+                            + " managed by this ViewRootImpl");
         }
         RectF rectF = new RectF(0.0f, 0.0f, this.mWidth, this.mHeight);
         matrix.mapRect(rectF);
-        return region.op(Math.round(rectF.left), Math.round(rectF.top), Math.round(rectF.right), Math.round(rectF.bottom), Region.Op.INTERSECT);
+        return region.op(
+                Math.round(rectF.left),
+                Math.round(rectF.top),
+                Math.round(rectF.right),
+                Math.round(rectF.bottom),
+                Region.Op.INTERSECT);
     }
 
     @Override // android.view.ViewParent
-    public void bringChildToFront(View child) {
-    }
+    public void bringChildToFront(View child) {}
 
     int getHostVisibility() {
         if (this.mView == null || !(this.mAppVisible || this.mForceDecorViewVisibility)) {
@@ -2219,7 +2582,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         if (this.mAttachInfo.mKeepScreenOn) {
             params.flags |= 128;
         } else {
-            params.flags = (params.flags & PackageManager.INSTALL_FAILED_PRE_APPROVAL_NOT_AVAILABLE) | (this.mClientWindowLayoutFlags & 128);
+            params.flags =
+                    (params.flags & PackageManager.INSTALL_FAILED_PRE_APPROVAL_NOT_AVAILABLE)
+                            | (this.mClientWindowLayoutFlags & 128);
         }
     }
 
@@ -2234,13 +2599,18 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             this.mAttachInfo.mSystemUiVisibility &= ~this.mAttachInfo.mDisabledSystemUiVisibility;
             WindowManager.LayoutParams params = this.mWindowAttributes;
             this.mAttachInfo.mSystemUiVisibility |= getImpliedSystemUiVisibility(params);
-            this.mCompatibleVisibilityInfo.globalVisibility = (this.mCompatibleVisibilityInfo.globalVisibility & (-2)) | (this.mAttachInfo.mSystemUiVisibility & 1);
+            this.mCompatibleVisibilityInfo.globalVisibility =
+                    (this.mCompatibleVisibilityInfo.globalVisibility & (-2))
+                            | (this.mAttachInfo.mSystemUiVisibility & 1);
             dispatchDispatchSystemUiVisibilityChanged();
-            if (this.mAttachInfo.mKeepScreenOn != oldScreenOn || this.mAttachInfo.mSystemUiVisibility != params.subtreeSystemUiVisibility || this.mAttachInfo.mHasSystemUiListeners != params.hasSystemUiListeners) {
+            if (this.mAttachInfo.mKeepScreenOn != oldScreenOn
+                    || this.mAttachInfo.mSystemUiVisibility != params.subtreeSystemUiVisibility
+                    || this.mAttachInfo.mHasSystemUiListeners != params.hasSystemUiListeners) {
                 applyKeepScreenOnFlag(params);
                 params.subtreeSystemUiVisibility = this.mAttachInfo.mSystemUiVisibility;
                 params.hasSystemUiListeners = this.mAttachInfo.mHasSystemUiListeners;
-                this.mView.dispatchWindowSystemUiVisiblityChanged(this.mAttachInfo.mSystemUiVisibility);
+                this.mView.dispatchWindowSystemUiVisiblityChanged(
+                        this.mAttachInfo.mSystemUiVisibility);
                 return true;
             }
         }
@@ -2258,14 +2628,19 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         return vis;
     }
 
-    void updateCompatSysUiVisibility(int visibleTypes, int requestedVisibleTypes, int controllableTypes) {
-        int visibleTypes2 = (requestedVisibleTypes & controllableTypes) | ((~controllableTypes) & visibleTypes);
-        updateCompatSystemUiVisibilityInfo(4, WindowInsets.Type.statusBars(), visibleTypes2, controllableTypes);
-        updateCompatSystemUiVisibilityInfo(2, WindowInsets.Type.navigationBars(), visibleTypes2, controllableTypes);
+    void updateCompatSysUiVisibility(
+            int visibleTypes, int requestedVisibleTypes, int controllableTypes) {
+        int visibleTypes2 =
+                (requestedVisibleTypes & controllableTypes) | ((~controllableTypes) & visibleTypes);
+        updateCompatSystemUiVisibilityInfo(
+                4, WindowInsets.Type.statusBars(), visibleTypes2, controllableTypes);
+        updateCompatSystemUiVisibilityInfo(
+                2, WindowInsets.Type.navigationBars(), visibleTypes2, controllableTypes);
         dispatchDispatchSystemUiVisibilityChanged();
     }
 
-    private void updateCompatSystemUiVisibilityInfo(int systemUiFlag, int insetsType, int visibleTypes, int controllableTypes) {
+    private void updateCompatSystemUiVisibilityInfo(
+            int systemUiFlag, int insetsType, int visibleTypes, int controllableTypes) {
         SystemUiVisibilityInfo info = this.mCompatibleVisibilityInfo;
         boolean willBeVisible = (visibleTypes & insetsType) != 0;
         boolean hasControl = (controllableTypes & insetsType) != 0;
@@ -2285,7 +2660,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     /* JADX INFO: Access modifiers changed from: private */
     public void clearLowProfileModeIfNeeded(int showTypes, boolean fromIme) {
         SystemUiVisibilityInfo info = this.mCompatibleVisibilityInfo;
-        if ((WindowInsets.Type.systemBars() & showTypes) != 0 && !fromIme && (info.globalVisibility & 1) != 0) {
+        if ((WindowInsets.Type.systemBars() & showTypes) != 0
+                && !fromIme
+                && (info.globalVisibility & 1) != 0) {
             info.globalVisibility &= -2;
             info.localChanges |= 1;
             dispatchDispatchSystemUiVisibilityChanged();
@@ -2316,7 +2693,10 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
     }
 
-    public static void adjustLayoutParamsForCompatibility(WindowManager.LayoutParams inOutParams, int appearanceControlled, boolean behaviorControlled) {
+    public static void adjustLayoutParamsForCompatibility(
+            WindowManager.LayoutParams inOutParams,
+            int appearanceControlled,
+            boolean behaviorControlled) {
         int i;
         int i2;
         int sysUiVis = inOutParams.systemUiVisibility | inOutParams.subtreeSystemUiVisibility;
@@ -2385,11 +2765,15 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         boolean captionIsHiddenByFlags = false;
         boolean matchParent = params.width == -1 && params.height == -1;
         boolean nonAttachedAppWindow = params.type >= 1 && params.type <= 99;
-        boolean statusWasHiddenByFlags = (this.mTypesHiddenByFlags & WindowInsets.Type.statusBars()) != 0;
-        boolean statusIsHiddenByFlags = (sysUiVis & 4) != 0 || ((flags & 1024) != 0 && matchParent && nonAttachedAppWindow);
-        boolean navWasHiddenByFlags = (this.mTypesHiddenByFlags & WindowInsets.Type.navigationBars()) != 0;
+        boolean statusWasHiddenByFlags =
+                (this.mTypesHiddenByFlags & WindowInsets.Type.statusBars()) != 0;
+        boolean statusIsHiddenByFlags =
+                (sysUiVis & 4) != 0 || ((flags & 1024) != 0 && matchParent && nonAttachedAppWindow);
+        boolean navWasHiddenByFlags =
+                (this.mTypesHiddenByFlags & WindowInsets.Type.navigationBars()) != 0;
         boolean navIsHiddenByFlags = (sysUiVis & 2) != 0;
-        boolean captionWasHiddenByFlags = (this.mTypesHiddenByFlags & WindowInsets.Type.captionBar()) != 0;
+        boolean captionWasHiddenByFlags =
+                (this.mTypesHiddenByFlags & WindowInsets.Type.captionBar()) != 0;
         if ((sysUiVis & 4) != 0 || ((flags & 1024) != 0 && matchParent && nonAttachedAppWindow)) {
             captionIsHiddenByFlags = true;
         }
@@ -2420,10 +2804,24 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         this.mTypesHiddenByFlags &= ~typesToShow;
     }
 
-    private boolean measureHierarchy(View host, WindowManager.LayoutParams lp, Resources res, int desiredWindowWidth, int desiredWindowHeight, boolean forRootSizeOnly) {
+    private boolean measureHierarchy(
+            View host,
+            WindowManager.LayoutParams lp,
+            Resources res,
+            int desiredWindowWidth,
+            int desiredWindowHeight,
+            boolean forRootSizeOnly) {
         boolean windowSizeMayChange;
         if (DEBUG_ORIENTATION || DEBUG_LAYOUT) {
-            Log.v(this.mTag, "Measuring " + host + " in display " + desiredWindowWidth + "x" + desiredWindowHeight + Session.TRUNCATE_STRING);
+            Log.v(
+                    this.mTag,
+                    "Measuring "
+                            + host
+                            + " in display "
+                            + desiredWindowWidth
+                            + "x"
+                            + desiredWindowHeight
+                            + Session.TRUNCATE_STRING);
         }
         boolean goodMeasure = false;
         if (lp.width != -2) {
@@ -2448,21 +2846,43 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     this.mView.getWindowDisplayFrame(rect);
                     baseSize = (int) this.mTmpValue.getFraction(rect.width(), rect.width());
                 } else {
-                    baseSize = (int) this.mTmpValue.getFraction(packageMetrics.widthPixels, packageMetrics.widthPixels);
+                    baseSize =
+                            (int)
+                                    this.mTmpValue.getFraction(
+                                            packageMetrics.widthPixels, packageMetrics.widthPixels);
                 }
             }
             if (DEBUG_DIALOG) {
-                Log.v(this.mTag, "Window " + this.mView + ": baseSize=" + baseSize + ", desiredWindowWidth=" + desiredWindowWidth);
+                Log.v(
+                        this.mTag,
+                        "Window "
+                                + this.mView
+                                + ": baseSize="
+                                + baseSize
+                                + ", desiredWindowWidth="
+                                + desiredWindowWidth);
             }
             if (baseSize == 0 || desiredWindowWidth <= baseSize) {
                 windowSizeMayChange = false;
             } else {
                 int childWidthMeasureSpec = getRootMeasureSpec(baseSize, lp.width, lp.privateFlags);
-                int childHeightMeasureSpec = getRootMeasureSpec(desiredWindowHeight, lp.height, lp.privateFlags);
+                int childHeightMeasureSpec =
+                        getRootMeasureSpec(desiredWindowHeight, lp.height, lp.privateFlags);
                 performMeasure(childWidthMeasureSpec, childHeightMeasureSpec);
                 if (DEBUG_DIALOG) {
                     windowSizeMayChange = false;
-                    Log.v(this.mTag, "Window " + this.mView + ": measured (" + host.getMeasuredWidth() + "," + host.getMeasuredHeight() + ") from width spec: " + View.MeasureSpec.toString(childWidthMeasureSpec) + " and height spec: " + View.MeasureSpec.toString(childHeightMeasureSpec));
+                    Log.v(
+                            this.mTag,
+                            "Window "
+                                    + this.mView
+                                    + ": measured ("
+                                    + host.getMeasuredWidth()
+                                    + ","
+                                    + host.getMeasuredHeight()
+                                    + ") from width spec: "
+                                    + View.MeasureSpec.toString(childWidthMeasureSpec)
+                                    + " and height spec: "
+                                    + View.MeasureSpec.toString(childHeightMeasureSpec));
                 } else {
                     windowSizeMayChange = false;
                 }
@@ -2473,9 +2893,19 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     if (DEBUG_DIALOG) {
                         Log.v(this.mTag, "Window " + this.mView + ": next baseSize=" + baseSize2);
                     }
-                    performMeasure(getRootMeasureSpec(baseSize2, lp.width, lp.privateFlags), childHeightMeasureSpec);
+                    performMeasure(
+                            getRootMeasureSpec(baseSize2, lp.width, lp.privateFlags),
+                            childHeightMeasureSpec);
                     if (DEBUG_DIALOG) {
-                        Log.v(this.mTag, "Window " + this.mView + ": measured (" + host.getMeasuredWidth() + "," + host.getMeasuredHeight() + NavigationBarInflaterView.KEY_CODE_END);
+                        Log.v(
+                                this.mTag,
+                                "Window "
+                                        + this.mView
+                                        + ": measured ("
+                                        + host.getMeasuredWidth()
+                                        + ","
+                                        + host.getMeasuredHeight()
+                                        + NavigationBarInflaterView.KEY_CODE_END);
                     }
                     if ((host.getMeasuredWidthAndState() & 16777216) == 0) {
                         if (DEBUG_DIALOG) {
@@ -2487,14 +2917,19 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             }
         }
         if (!goodMeasure) {
-            int childWidthMeasureSpec2 = getRootMeasureSpec(desiredWindowWidth, lp.width, lp.privateFlags);
-            int childHeightMeasureSpec2 = getRootMeasureSpec(desiredWindowHeight, lp.height, lp.privateFlags);
-            if (forRootSizeOnly && setMeasuredRootSizeFromSpec(childWidthMeasureSpec2, childHeightMeasureSpec2)) {
+            int childWidthMeasureSpec2 =
+                    getRootMeasureSpec(desiredWindowWidth, lp.width, lp.privateFlags);
+            int childHeightMeasureSpec2 =
+                    getRootMeasureSpec(desiredWindowHeight, lp.height, lp.privateFlags);
+            if (forRootSizeOnly
+                    && setMeasuredRootSizeFromSpec(
+                            childWidthMeasureSpec2, childHeightMeasureSpec2)) {
                 this.mViewMeasureDeferred = true;
             } else {
                 performMeasure(childWidthMeasureSpec2, childHeightMeasureSpec2);
             }
-            if (this.mWidth != host.getMeasuredWidth() || this.mHeight != host.getMeasuredHeight()) {
+            if (this.mWidth != host.getMeasuredWidth()
+                    || this.mHeight != host.getMeasuredHeight()) {
                 return true;
             }
         }
@@ -2527,7 +2962,15 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     WindowInsets getWindowInsets(boolean forceConstruct, boolean removeCutout) {
         if (this.mLastWindowInsets == null || forceConstruct) {
             Configuration config = getConfiguration();
-            this.mLastWindowInsets = this.mInsetsController.calculateInsets(config.isScreenRound(), this.mWindowAttributes.type, config.windowConfiguration.getActivityType(), this.mWindowAttributes.softInputMode, this.mWindowAttributes.flags, this.mWindowAttributes.systemUiVisibility | this.mWindowAttributes.subtreeSystemUiVisibility);
+            this.mLastWindowInsets =
+                    this.mInsetsController.calculateInsets(
+                            config.isScreenRound(),
+                            this.mWindowAttributes.type,
+                            config.windowConfiguration.getActivityType(),
+                            this.mWindowAttributes.softInputMode,
+                            this.mWindowAttributes.flags,
+                            this.mWindowAttributes.systemUiVisibility
+                                    | this.mWindowAttributes.subtreeSystemUiVisibility);
             if (this.mIsCutoutRemoveNeeded || removeCutout) {
                 WindowInsets insets = this.mLastWindowInsets.removeCutoutInsets();
                 if (this.mIsCutoutRemoveNeeded) {
@@ -2535,13 +2978,28 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 } else {
                     this.mAttachInfo.mContentInsets.set(insets.getSystemWindowInsets().toRect());
                     this.mAttachInfo.mStableInsets.set(insets.getStableInsets().toRect());
-                    this.mAttachInfo.mVisibleInsets.set(this.mInsetsController.calculateVisibleInsets(this.mWindowAttributes.type, config.windowConfiguration.getWindowingMode(), this.mWindowAttributes.softInputMode, this.mWindowAttributes.flags).toRect());
+                    this.mAttachInfo.mVisibleInsets.set(
+                            this.mInsetsController
+                                    .calculateVisibleInsets(
+                                            this.mWindowAttributes.type,
+                                            config.windowConfiguration.getWindowingMode(),
+                                            this.mWindowAttributes.softInputMode,
+                                            this.mWindowAttributes.flags)
+                                    .toRect());
                     return insets;
                 }
             }
-            this.mAttachInfo.mContentInsets.set(this.mLastWindowInsets.getSystemWindowInsets().toRect());
+            this.mAttachInfo.mContentInsets.set(
+                    this.mLastWindowInsets.getSystemWindowInsets().toRect());
             this.mAttachInfo.mStableInsets.set(this.mLastWindowInsets.getStableInsets().toRect());
-            this.mAttachInfo.mVisibleInsets.set(this.mInsetsController.calculateVisibleInsets(this.mWindowAttributes.type, config.windowConfiguration.getActivityType(), this.mWindowAttributes.softInputMode, this.mWindowAttributes.flags).toRect());
+            this.mAttachInfo.mVisibleInsets.set(
+                    this.mInsetsController
+                            .calculateVisibleInsets(
+                                    this.mWindowAttributes.type,
+                                    config.windowConfiguration.getActivityType(),
+                                    this.mWindowAttributes.softInputMode,
+                                    this.mWindowAttributes.flags)
+                            .toRect());
         }
         return this.mLastWindowInsets;
     }
@@ -2549,12 +3007,17 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     public void dispatchApplyInsets(View host) {
         Trace.traceBegin(8L, "dispatchApplyInsets");
         this.mApplyInsetsRequested = false;
-        boolean splitImmersiveMode = MultiWindowCoreState.MW_SPLIT_IMMERSIVE_MODE_ENABLED && getCompatWindowConfiguration().isSplitScreen();
-        WindowInsets insets = getWindowInsets(true, this.mIsCutoutRemoveForDispatchNeeded || splitImmersiveMode);
+        boolean splitImmersiveMode =
+                MultiWindowCoreState.MW_SPLIT_IMMERSIVE_MODE_ENABLED
+                        && getCompatWindowConfiguration().isSplitScreen();
+        WindowInsets insets =
+                getWindowInsets(true, this.mIsCutoutRemoveForDispatchNeeded || splitImmersiveMode);
         if (!shouldDispatchCutout()) {
             insets = insets.consumeDisplayCutout();
         }
-        if (CoreRune.MW_CAPTION_SHELL_INSETS && (host instanceof DecorView) && ((DecorView) host).shouldConsumeCaptionInsets(insets)) {
+        if (CoreRune.MW_CAPTION_SHELL_INSETS
+                && (host instanceof DecorView)
+                && ((DecorView) host).shouldConsumeCaptionInsets(insets)) {
             insets = insets.consumeCaptionInsets();
         }
         if (DEBUG_WINDOW_INSETS) {
@@ -2564,16 +3027,20 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             ((DecorView) host).updateCaptionHeightIfNeeded(insets);
         }
         InsetsSource imeSource = this.mInsetsController.getState().peekSource(InsetsSource.ID_IME);
-        if (imeSource != null && imeSource.isVisible() && getConfiguration().windowConfiguration.isPopOver()) {
+        if (imeSource != null
+                && imeSource.isVisible()
+                && getConfiguration().windowConfiguration.isPopOver()) {
             this.mForceNextWindowRelayout = true;
         }
         host.dispatchApplyWindowInsets(insets);
-        this.mAttachInfo.delayNotifyContentCaptureInsetsEvent(insets.getInsets(WindowInsets.Type.all()));
+        this.mAttachInfo.delayNotifyContentCaptureInsetsEvent(
+                insets.getInsets(WindowInsets.Type.all()));
         Trace.traceEnd(8L);
     }
 
     private boolean shouldDispatchCutout() {
-        return this.mWindowAttributes.layoutInDisplayCutoutMode == 3 || this.mWindowAttributes.layoutInDisplayCutoutMode == 1;
+        return this.mWindowAttributes.layoutInDisplayCutoutMode == 3
+                || this.mWindowAttributes.layoutInDisplayCutoutMode == 1;
     }
 
     public InsetsController getInsetsController() {
@@ -2589,8 +3056,20 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     private Rect getWindowBoundsInsetSystemBars() {
-        Rect bounds = new Rect(this.mContext.getResources().getConfiguration().windowConfiguration.getBounds());
-        bounds.inset(this.mInsetsController.getState().calculateInsets(bounds, WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout(), false));
+        Rect bounds =
+                new Rect(
+                        this.mContext
+                                .getResources()
+                                .getConfiguration()
+                                .windowConfiguration
+                                .getBounds());
+        bounds.inset(
+                this.mInsetsController
+                        .getState()
+                        .calculateInsets(
+                                bounds,
+                                WindowInsets.Type.systemBars() | WindowInsets.Type.displayCutout(),
+                                false));
         return bounds;
     }
 
@@ -2601,169 +3080,169 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     /* JADX WARN: Can't wrap try/catch for region: R(196:22|(1:1044)(1:30)|31|(4:33|(1:35)(1:1042)|(1:37)(1:1041)|(188:39|40|(6:42|(1:44)(2:1027|(1:1032)(1:1031))|45|(1:47)|48|(1:52))(2:1033|(3:1037|(1:1039)|1040))|53|(5:55|(2:(1:58)(1:60)|59)|(1:68)|64|(1:67))|69|(1:71)|72|(1:74)|75|(1:1026)(1:81)|82|(3:84|(1:1024)(2:90|(1:92)(1:1023))|93)(1:1025)|94|(1:96)|97|(1:99)|100|(2:1006|(6:1008|(3:1010|(2:1012|1013)(1:1015)|1014)|1016|(1:1018)|1019|(1:1021))(1:1022))(1:104)|105|(2:107|(1:109)(1:1004))(1:1005)|(1:111)|(1:1003)(159:114|(1:1002)(2:118|(2:994|(2:996|(1:998))(1:1001))(1:124))|125|126|(1:993)(1:130)|131|(1:992)(1:135)|136|(1:138)(1:991)|139|(1:141)(1:990)|(4:143|(1:147)|148|(1:150))(1:989)|151|(1:988)(2:156|(1:158)(47:987|366|(1:368)|369|(1:682)(4:373|374|(1:376)|378)|(1:679)|(1:678)(1:392)|(1:677)(1:396)|(2:398|(8:400|(1:674)|404|(1:406)|407|(1:409)|410|(2:412|(1:414)))(1:675))(1:676)|415|(1:417)(1:(1:671)(1:(1:673)))|(1:419)|(1:421)|422|(3:424|(5:660|(1:662)(1:668)|663|(1:665)(1:667)|666)(1:428)|429)(1:669)|430|(1:659)(1:434)|435|(7:437|(4:439|(1:441)|442|(1:444))(1:647)|(1:446)(1:646)|(1:448)|(1:450)(1:(1:645))|451|452)(2:648|(3:652|653|654))|453|(1:637)(8:455|(4:630|(1:634)|473|(1:475))|460|(1:462)|463|(2:465|(2:467|(1:469))(2:470|(1:472)))|473|(0))|(2:627|(20:629|(1:482)|483|(1:626)(1:486)|487|(1:489)|(1:625)(1:492)|493|(1:624)(1:498)|(1:623)(4:500|(1:502)(1:622)|503|(1:507))|(1:621)|511|(1:515)|(5:517|(1:519)(1:581)|520|(4:524|(2:527|525)|528|529)|530)(2:582|(4:584|(3:586|(1:592)(1:590)|591)|(1:594)(1:596)|595)(8:597|(1:599)|600|(1:602)|603|(4:607|(2:610|608)|611|612)|613|(1:615)))|531|(1:533)|534|(4:536|(1:538)(1:542)|539|(1:541))|543|(14:545|(1:549)|550|(1:575)(1:556)|557|(1:559)(1:574)|560|(1:562)(1:573)|563|(1:565)(1:572)|566|(1:568)(1:571)|569|570)(2:576|(2:578|579)(1:580))))(1:479)|480|(0)|483|(0)|626|487|(0)|(0)|625|493|(1:496)|624|(0)(0)|(0)|616|621|511|(2:513|515)|(0)(0)|531|(0)|534|(0)|543|(0)(0)))|159|(3:161|(1:163)(1:985)|164)(1:986)|165|(1:984)(1:169)|170|(1:172)|173|174|175|(9:177|178|179|180|181|182|183|184|185)(1:978)|186|187|(1:958)|190|191|(1:193)(1:956)|194|195|196|197|198|199|200|201|202|(5:935|936|(1:938)|939|(1:941))|204|(1:206)(1:934)|207|(7:898|899|(1:903)|(1:905)|(1:928)(4:914|915|916|917)|918|(3:922|(1:924)(1:926)|925))(1:209)|210|211|(1:213)|214|(1:893)(1:218)|219|(1:891)(9:222|223|(1:225)(1:886)|226|(1:228)(1:880)|229|(4:231|232|233|234)(1:879)|235|236)|237|238|(2:240|241)|242|(1:244)(1:869)|245|(1:868)(1:249)|250|(2:252|(97:254|255|256|(2:862|(93:864|260|(6:262|263|264|265|266|267)(1:861)|(2:269|270)(1:851)|(3:840|841|(1:843))|272|273|274|275|276|(4:278|279|280|(89:721|722|723|724|725|726|727|728|729|730|731|732|733|734|735|736|(1:740)|742|284|(1:(5:287|(1:297)(1:291)|292|(1:294)(1:296)|295)(1:298))|299|(1:(1:302)(1:303))|304|(1:306)|307|308|(1:310)|311|(1:720)|315|(6:317|(1:319)|320|(2:322|(3:324|(1:326)|327))|(2:707|(3:709|(4:711|(1:713)|714|715)(1:717)|716)(1:718))(1:332)|(4:334|335|336|337))(1:719)|342|(3:353|(1:359)(1:357)|358)|360|(8:689|(1:691)|692|(1:694)(1:706)|695|(1:697)|(1:705)(3:699|(1:701)(1:704)|702)|703)(1:364)|365|366|(0)|369|(1:371)|682|(0)|679|(2:388|390)|678|(1:394)|677|(0)(0)|415|(0)(0)|(0)|(0)|422|(0)(0)|430|(1:432)|659|435|(0)(0)|453|(0)(0)|(1:477)|627|(0)|480|(0)|483|(0)|626|487|(0)|(0)|625|493|(0)|624|(0)(0)|(0)|616|621|511|(0)|(0)(0)|531|(0)|534|(0)|543|(0)(0))(1:282))(3:791|792|(8:794|(1:796)|797|(1:799)|800|(1:802)|803|(1:805))(1:(3:815|816|817)))|283|284|(0)|299|(0)|304|(0)|307|308|(0)|311|(1:313)|720|315|(0)(0)|342|(5:344|353|(1:355)|359|358)|360|(1:362)|683|689|(0)|692|(0)(0)|695|(0)|(0)(0)|703|365|366|(0)|369|(0)|682|(0)|679|(0)|678|(0)|677|(0)(0)|415|(0)(0)|(0)|(0)|422|(0)(0)|430|(0)|659|435|(0)(0)|453|(0)(0)|(0)|627|(0)|480|(0)|483|(0)|626|487|(0)|(0)|625|493|(0)|624|(0)(0)|(0)|616|621|511|(0)|(0)(0)|531|(0)|534|(0)|543|(0)(0)))|259|260|(0)(0)|(0)(0)|(0)|272|273|274|275|276|(0)(0)|283|284|(0)|299|(0)|304|(0)|307|308|(0)|311|(0)|720|315|(0)(0)|342|(0)|360|(0)|683|689|(0)|692|(0)(0)|695|(0)|(0)(0)|703|365|366|(0)|369|(0)|682|(0)|679|(0)|678|(0)|677|(0)(0)|415|(0)(0)|(0)|(0)|422|(0)(0)|430|(0)|659|435|(0)(0)|453|(0)(0)|(0)|627|(0)|480|(0)|483|(0)|626|487|(0)|(0)|625|493|(0)|624|(0)(0)|(0)|616|621|511|(0)|(0)(0)|531|(0)|534|(0)|543|(0)(0)))|867|255|256|(0)|862|(0)|259|260|(0)(0)|(0)(0)|(0)|272|273|274|275|276|(0)(0)|283|284|(0)|299|(0)|304|(0)|307|308|(0)|311|(0)|720|315|(0)(0)|342|(0)|360|(0)|683|689|(0)|692|(0)(0)|695|(0)|(0)(0)|703|365|366|(0)|369|(0)|682|(0)|679|(0)|678|(0)|677|(0)(0)|415|(0)(0)|(0)|(0)|422|(0)(0)|430|(0)|659|435|(0)(0)|453|(0)(0)|(0)|627|(0)|480|(0)|483|(0)|626|487|(0)|(0)|625|493|(0)|624|(0)(0)|(0)|616|621|511|(0)|(0)(0)|531|(0)|534|(0)|543|(0)(0))|1000|126|(1:128)|993|131|(1:133)|992|136|(0)(0)|139|(0)(0)|(0)(0)|151|(0)|988|159|(0)(0)|165|(1:167)|984|170|(0)|173|174|175|(0)(0)|186|187|(0)|958|190|191|(0)(0)|194|195|196|197|198|199|200|201|202|(0)|204|(0)(0)|207|(0)(0)|210|211|(0)|214|(1:216)|893|219|(0)|891|237|238|(0)|242|(0)(0)|245|(1:247)|868|250|(0)|867|255|256|(0)|862|(0)|259|260|(0)(0)|(0)(0)|(0)|272|273|274|275|276|(0)(0)|283|284|(0)|299|(0)|304|(0)|307|308|(0)|311|(0)|720|315|(0)(0)|342|(0)|360|(0)|683|689|(0)|692|(0)(0)|695|(0)|(0)(0)|703|365|366|(0)|369|(0)|682|(0)|679|(0)|678|(0)|677|(0)(0)|415|(0)(0)|(0)|(0)|422|(0)(0)|430|(0)|659|435|(0)(0)|453|(0)(0)|(0)|627|(0)|480|(0)|483|(0)|626|487|(0)|(0)|625|493|(0)|624|(0)(0)|(0)|616|621|511|(0)|(0)(0)|531|(0)|534|(0)|543|(0)(0)))|1043|40|(0)(0)|53|(0)|69|(0)|72|(0)|75|(2:77|79)|1026|82|(0)(0)|94|(0)|97|(0)|100|(1:102)|1006|(0)(0)|105|(0)(0)|(0)|(0)|1003|1000|126|(0)|993|131|(0)|992|136|(0)(0)|139|(0)(0)|(0)(0)|151|(0)|988|159|(0)(0)|165|(0)|984|170|(0)|173|174|175|(0)(0)|186|187|(0)|958|190|191|(0)(0)|194|195|196|197|198|199|200|201|202|(0)|204|(0)(0)|207|(0)(0)|210|211|(0)|214|(0)|893|219|(0)|891|237|238|(0)|242|(0)(0)|245|(0)|868|250|(0)|867|255|256|(0)|862|(0)|259|260|(0)(0)|(0)(0)|(0)|272|273|274|275|276|(0)(0)|283|284|(0)|299|(0)|304|(0)|307|308|(0)|311|(0)|720|315|(0)(0)|342|(0)|360|(0)|683|689|(0)|692|(0)(0)|695|(0)|(0)(0)|703|365|366|(0)|369|(0)|682|(0)|679|(0)|678|(0)|677|(0)(0)|415|(0)(0)|(0)|(0)|422|(0)(0)|430|(0)|659|435|(0)(0)|453|(0)(0)|(0)|627|(0)|480|(0)|483|(0)|626|487|(0)|(0)|625|493|(0)|624|(0)(0)|(0)|616|621|511|(0)|(0)(0)|531|(0)|534|(0)|543|(0)(0)) */
     /* JADX WARN: Code restructure failed: missing block: B:832:0x0ab4, code lost:
-    
-        r6 = r25;
-        r14 = r43;
-        r15 = r44;
-        r9 = 8;
-        r21 = r21;
-     */
+
+       r6 = r25;
+       r14 = r43;
+       r15 = r44;
+       r9 = 8;
+       r21 = r21;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:833:0x0aa9, code lost:
-    
-        r0 = move-exception;
-     */
+
+       r0 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:834:0x0aaa, code lost:
-    
-        r2 = r0;
-     */
+
+       r2 = r0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:837:0x0acc, code lost:
-    
-        r14 = r2;
-        r6 = r25;
-        r13 = r42;
-        r15 = r44;
-        r9 = 8;
-        r21 = r21;
-     */
+
+       r14 = r2;
+       r6 = r25;
+       r13 = r42;
+       r15 = r44;
+       r9 = 8;
+       r21 = r21;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:838:0x0abe, code lost:
-    
-        r0 = move-exception;
-     */
+
+       r0 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:839:0x0abf, code lost:
-    
-        r2 = r0;
-     */
+
+       r2 = r0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:844:0x0803, code lost:
-    
-        if (r61.mApplyInsetsRequested != false) goto L1028;
-     */
+
+       if (r61.mApplyInsetsRequested != false) goto L1028;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:871:0x0aec, code lost:
-    
-        r48 = r3;
-        r6 = r25;
-        r13 = r42;
-        r14 = r43;
-        r15 = r44;
-        r9 = 8;
-        r21 = r21;
-     */
+
+       r48 = r3;
+       r6 = r25;
+       r13 = r42;
+       r14 = r43;
+       r15 = r44;
+       r9 = 8;
+       r21 = r21;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:872:0x0ad9, code lost:
-    
-        r0 = move-exception;
-     */
+
+       r0 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:873:0x0ada, code lost:
-    
-        r2 = r0;
-     */
+
+       r2 = r0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:895:0x0b11, code lost:
-    
-        r48 = r3;
-        r6 = r25;
-        r13 = r42;
-        r14 = r43;
-        r9 = 8;
-        r21 = r21;
-     */
+
+       r48 = r3;
+       r6 = r25;
+       r13 = r42;
+       r14 = r43;
+       r9 = 8;
+       r21 = r21;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:896:0x0afe, code lost:
-    
-        r0 = move-exception;
-     */
+
+       r0 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:897:0x0aff, code lost:
-    
-        r2 = r0;
-     */
+
+       r2 = r0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:943:0x0b38, code lost:
-    
-        r48 = r3;
-        r6 = r13;
-        r13 = r42;
-        r14 = r43;
-        r9 = 8;
-        r21 = r21;
-     */
+
+       r48 = r3;
+       r6 = r13;
+       r13 = r42;
+       r14 = r43;
+       r9 = 8;
+       r21 = r21;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:944:0x0b23, code lost:
-    
-        r0 = move-exception;
-     */
+
+       r0 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:945:0x0b24, code lost:
-    
-        r2 = r0;
-     */
+
+       r2 = r0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:948:0x0b63, code lost:
-    
-        r48 = r3;
-        r46 = r10;
-        r6 = r13;
-        r13 = r42;
-        r14 = r43;
-        r9 = 8;
-        r21 = r21;
-     */
+
+       r48 = r3;
+       r46 = r10;
+       r6 = r13;
+       r13 = r42;
+       r14 = r43;
+       r9 = 8;
+       r21 = r21;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:949:0x0b4c, code lost:
-    
-        r0 = move-exception;
-     */
+
+       r0 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:950:0x0b4d, code lost:
-    
-        r2 = r0;
-     */
+
+       r2 = r0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:953:0x0b92, code lost:
-    
-        r48 = r3;
-        r46 = r10;
-        r6 = r13;
-        r13 = r42;
-        r14 = r43;
-        r9 = 8;
-        r21 = r21;
-     */
+
+       r48 = r3;
+       r46 = r10;
+       r6 = r13;
+       r13 = r42;
+       r14 = r43;
+       r9 = 8;
+       r21 = r21;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:954:0x0b79, code lost:
-    
-        r0 = move-exception;
-     */
+
+       r0 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:955:0x0b7a, code lost:
-    
-        r2 = r0;
-     */
+
+       r2 = r0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:960:0x0bc0, code lost:
-    
-        r48 = r3;
-        r46 = r10;
-        r6 = r38;
-        r13 = r42;
-        r14 = r43;
-        r15 = r44;
-        r9 = 8;
-        r21 = r21;
-     */
+
+       r48 = r3;
+       r46 = r10;
+       r6 = r38;
+       r13 = r42;
+       r14 = r43;
+       r15 = r44;
+       r9 = 8;
+       r21 = r21;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:961:0x0baa, code lost:
-    
-        r0 = move-exception;
-     */
+
+       r0 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:962:0x0bab, code lost:
-    
-        r2 = r0;
-     */
+
+       r2 = r0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:981:0x0bf6, code lost:
-    
-        r48 = r3;
-        r46 = r10;
-        r9 = 8;
-        r6 = r38;
-        r21 = r21;
-     */
+
+       r48 = r3;
+       r46 = r10;
+       r9 = 8;
+       r6 = r38;
+       r21 = r21;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:982:0x0bd5, code lost:
-    
-        r0 = move-exception;
-     */
+
+       r0 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:983:0x0bd6, code lost:
-    
-        r2 = r0;
-     */
+
+       r2 = r0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:999:0x031e, code lost:
-    
-        if (r30.height() != r61.mHeight) goto L171;
-     */
+
+       if (r30.height() != r61.mHeight) goto L171;
+    */
     /* JADX WARN: Removed duplicated region for block: B:1005:0x02d6  */
     /* JADX WARN: Removed duplicated region for block: B:1008:0x0272  */
     /* JADX WARN: Removed duplicated region for block: B:1022:0x02a8  */
@@ -2881,7 +3360,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             Method dump skipped, instructions count: 5357
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.ViewRootImpl.performTraversals():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.view.ViewRootImpl.performTraversals():void");
     }
 
     private void createSyncIfNeeded() {
@@ -2890,26 +3370,38 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
         final int seqId = this.mSyncSeqId;
         this.mWmsRequestSyncGroupState = 1;
-        this.mWmsRequestSyncGroup = new SurfaceSyncGroup("wmsSync-" + this.mTag, new Consumer() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda7
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                ViewRootImpl.this.lambda$createSyncIfNeeded$4(seqId, (SurfaceControl.Transaction) obj);
-            }
-        });
+        this.mWmsRequestSyncGroup =
+                new SurfaceSyncGroup(
+                        "wmsSync-" + this.mTag,
+                        new Consumer() { // from class:
+                                         // android.view.ViewRootImpl$$ExternalSyntheticLambda7
+                            @Override // java.util.function.Consumer
+                            public final void accept(Object obj) {
+                                ViewRootImpl.this.lambda$createSyncIfNeeded$4(
+                                        seqId, (SurfaceControl.Transaction) obj);
+                            }
+                        });
         if (this.mAppStartInfoTimestampsFlagValue && !this.mAppStartTrackingStarted) {
             this.mAppStartTrackingStarted = true;
             SurfaceControl.Transaction transaction = new SurfaceControl.Transaction();
-            transaction.addTransactionCompletedListener(this.mSimpleExecutor, new Consumer<SurfaceControl.TransactionStats>() { // from class: android.view.ViewRootImpl.5
-                @Override // java.util.function.Consumer
-                public void accept(SurfaceControl.TransactionStats transactionStats) {
-                    SyncFence presentFence = transactionStats.getPresentFence();
-                    if (presentFence.awaitForever() && ViewRootImpl.this.mFirstFramePresentedTimeNs == -1) {
-                        ViewRootImpl.this.mFirstFramePresentedTimeNs = presentFence.getSignalTime();
-                        ViewRootImpl.this.maybeSendAppStartTimes();
-                    }
-                    presentFence.close();
-                }
-            });
+            transaction.addTransactionCompletedListener(
+                    this.mSimpleExecutor,
+                    new Consumer<
+                            SurfaceControl
+                                    .TransactionStats>() { // from class:
+                                                           // android.view.ViewRootImpl.5
+                        @Override // java.util.function.Consumer
+                        public void accept(SurfaceControl.TransactionStats transactionStats) {
+                            SyncFence presentFence = transactionStats.getPresentFence();
+                            if (presentFence.awaitForever()
+                                    && ViewRootImpl.this.mFirstFramePresentedTimeNs == -1) {
+                                ViewRootImpl.this.mFirstFramePresentedTimeNs =
+                                        presentFence.getSignalTime();
+                                ViewRootImpl.this.maybeSendAppStartTimes();
+                            }
+                            presentFence.close();
+                        }
+                    });
             applyTransactionOnDraw(transaction);
         }
         if (DEBUG_BLAST) {
@@ -2919,7 +3411,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$createSyncIfNeeded$4(final int seqId, SurfaceControl.Transaction t) {
+    public /* synthetic */ void lambda$createSyncIfNeeded$4(
+            final int seqId, SurfaceControl.Transaction t) {
         if (CoreRune.FW_SURFACE_DEBUG_APPLY && t != null && !TextUtils.isEmpty(t.mDebugName)) {
             t.mDebugName += "_seqId<" + seqId + ">";
         }
@@ -2927,12 +3420,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         if (this.mWindowSession instanceof Binder) {
             final SurfaceControl.Transaction transactionCopy = new SurfaceControl.Transaction();
             transactionCopy.merge(t);
-            this.mHandler.postAtFrontOfQueue(new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda6
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ViewRootImpl.this.lambda$createSyncIfNeeded$3(transactionCopy, seqId);
-                }
-            });
+            this.mHandler.postAtFrontOfQueue(
+                    new Runnable() { // from class:
+                                     // android.view.ViewRootImpl$$ExternalSyntheticLambda6
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ViewRootImpl.this.lambda$createSyncIfNeeded$3(transactionCopy, seqId);
+                        }
+                    });
             return;
         }
         lambda$createSyncIfNeeded$3(t, seqId);
@@ -2943,19 +3438,23 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         if (this.mAppStartTimestampsSent.get()) {
             return;
         }
-        this.mHandler.post(new Runnable() { // from class: android.view.ViewRootImpl.6
-            @Override // java.lang.Runnable
-            public void run() {
-                if (ViewRootImpl.this.mRenderThreadDrawStartTimeNs == -1) {
-                    return;
-                }
-                try {
-                    ActivityManager.getService().reportStartInfoViewTimestamps(ViewRootImpl.this.mRenderThreadDrawStartTimeNs, ViewRootImpl.this.mFirstFramePresentedTimeNs);
-                    ViewRootImpl.this.mAppStartTimestampsSent.set(true);
-                } catch (RemoteException e) {
-                }
-            }
-        });
+        this.mHandler.post(
+                new Runnable() { // from class: android.view.ViewRootImpl.6
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        if (ViewRootImpl.this.mRenderThreadDrawStartTimeNs == -1) {
+                            return;
+                        }
+                        try {
+                            ActivityManager.getService()
+                                    .reportStartInfoViewTimestamps(
+                                            ViewRootImpl.this.mRenderThreadDrawStartTimeNs,
+                                            ViewRootImpl.this.mFirstFramePresentedTimeNs);
+                            ViewRootImpl.this.mAppStartTimestampsSent.set(true);
+                        } catch (RemoteException e) {
+                        }
+                    }
+                });
     }
 
     private void applySensitiveContentAppProtection(boolean enableProtection) {
@@ -2963,7 +3462,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             if (this.mSensitiveContentProtectionService == null) {
                 return;
             }
-            this.mSensitiveContentProtectionService.setSensitiveContentProtection(getWindowToken(), this.mContext.getPackageName(), enableProtection);
+            this.mSensitiveContentProtectionService.setSensitiveContentProtection(
+                    getWindowToken(), this.mContext.getPackageName(), enableProtection);
         } catch (RemoteException ex) {
             Log.e(TAG, "Unable to protect sensitive content during screen share", ex);
         }
@@ -2979,12 +3479,16 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             return;
         }
         SurfaceControl.Transaction t = new SurfaceControl.Transaction();
-        t.addTransactionCommittedListener(this.mExecutor, new SurfaceControl.TransactionCommittedListener() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda8
-            @Override // android.view.SurfaceControl.TransactionCommittedListener
-            public final void onTransactionCommitted() {
-                ViewRootImpl.this.lambda$removeSensitiveContentAppProtection$5();
-            }
-        });
+        t.addTransactionCommittedListener(
+                this.mExecutor,
+                new SurfaceControl
+                        .TransactionCommittedListener() { // from class:
+                                                          // android.view.ViewRootImpl$$ExternalSyntheticLambda8
+                    @Override // android.view.SurfaceControl.TransactionCommittedListener
+                    public final void onTransactionCommitted() {
+                        ViewRootImpl.this.lambda$removeSensitiveContentAppProtection$5();
+                    }
+                });
         applyTransactionOnDraw(t);
     }
 
@@ -3023,7 +3527,11 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     /* JADX INFO: Access modifiers changed from: private */
     public void maybeHandleWindowMove(Rect frame) {
-        boolean windowMoved = (this.mAttachInfo.mWindowLeft == frame.left && this.mAttachInfo.mWindowTop == frame.top) ? false : true;
+        boolean windowMoved =
+                (this.mAttachInfo.mWindowLeft == frame.left
+                                && this.mAttachInfo.mWindowTop == frame.top)
+                        ? false
+                        : true;
         if (windowMoved) {
             this.mAttachInfo.mWindowLeft = frame.left;
             this.mAttachInfo.mWindowTop = frame.top;
@@ -3058,10 +3566,12 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 }
                 if (this.mAdded) {
                     dispatchFocusEvent(hasWindowFocus, false);
-                    this.mImeFocusController.onPostWindowFocus(getFocusedViewOrNull(), hasWindowFocus, this.mWindowAttributes);
+                    this.mImeFocusController.onPostWindowFocus(
+                            getFocusedViewOrNull(), hasWindowFocus, this.mWindowAttributes);
                     if (hasWindowFocus) {
                         this.mWindowAttributes.softInputMode &= -257;
-                        ((WindowManager.LayoutParams) this.mView.getLayoutParams()).softInputMode &= -257;
+                        ((WindowManager.LayoutParams) this.mView.getLayoutParams()).softInputMode &=
+                                -257;
                         maybeFireAccessibilityWindowStateChangedEvent();
                         fireAccessibilityFocusEventIfHasFocusedNode();
                     } else if (this.mPointerCapture) {
@@ -3072,8 +3582,12 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 if (hasWindowFocus) {
                     handleContentCaptureFlush();
                 }
-                if (CoreRune.BIXBY_TOUCH && hasWindowFocus && this.mSemPressGestureDetector != null) {
-                    if (Settings.System.getInt(this.mContext.getContentResolver(), "bixby_touch_enable", 0) == 1) {
+                if (CoreRune.BIXBY_TOUCH
+                        && hasWindowFocus
+                        && this.mSemPressGestureDetector != null) {
+                    if (Settings.System.getInt(
+                                    this.mContext.getContentResolver(), "bixby_touch_enable", 0)
+                            == 1) {
                         bixbyTouchEnable = true;
                     }
                     this.mSemPressGestureDetector.setBixbyTouchEnable(bixbyTouchEnable);
@@ -3091,20 +3605,36 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         if (aboutToHaveFocus || alreadyHaveFocus) {
             return;
         }
-        EventLog.writeEvent(LOGTAG_INPUT_FOCUS, "Giving fake focus to " + this.mBasePackageName, "reason=unity bug workaround");
+        EventLog.writeEvent(
+                LOGTAG_INPUT_FOCUS,
+                "Giving fake focus to " + this.mBasePackageName,
+                "reason=unity bug workaround");
         dispatchFocusEvent(true, true);
-        EventLog.writeEvent(LOGTAG_INPUT_FOCUS, "Removing fake focus from " + this.mBasePackageName, "reason=timeout callback");
+        EventLog.writeEvent(
+                LOGTAG_INPUT_FOCUS,
+                "Removing fake focus from " + this.mBasePackageName,
+                "reason=timeout callback");
         dispatchFocusEvent(false, true);
     }
 
     private void dispatchFocusEvent(boolean hasWindowFocus, boolean fakeFocus) {
         profileRendering(hasWindowFocus);
-        if (hasWindowFocus && this.mAttachInfo.mThreadedRenderer != null && this.mSurface.isValid()) {
+        if (hasWindowFocus
+                && this.mAttachInfo.mThreadedRenderer != null
+                && this.mSurface.isValid()) {
             this.mFullRedrawNeeded = true;
             try {
                 Rect surfaceInsets = this.mWindowAttributes.surfaceInsets;
-                this.mAttachInfo.mThreadedRenderer.initializeIfNeeded(this.mWidth, this.mHeight, this.mAttachInfo, this.mSurface, surfaceInsets);
-                Log.d(this.mTag, String.format("mThreadedRenderer.initializeIfNeeded()#2 mSurface={%s}", "isValid=" + this.mSurface.isValid() + " 0x" + Long.toHexString(this.mSurface.mNativeObject)));
+                this.mAttachInfo.mThreadedRenderer.initializeIfNeeded(
+                        this.mWidth, this.mHeight, this.mAttachInfo, this.mSurface, surfaceInsets);
+                Log.d(
+                        this.mTag,
+                        String.format(
+                                "mThreadedRenderer.initializeIfNeeded()#2 mSurface={%s}",
+                                "isValid="
+                                        + this.mSurface.isValid()
+                                        + " 0x"
+                                        + Long.toHexString(this.mSurface.mNativeObject)));
             } catch (Surface.OutOfResourcesException e) {
                 Log.e(this.mTag, "OutOfResourcesException locking surface", e);
                 try {
@@ -3153,7 +3683,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     private void fireAccessibilityFocusEventIfHasFocusedNode() {
         View focusedView;
-        if (!this.mAccessibilityManager.isEnabled() || (focusedView = this.mView.findFocus()) == null) {
+        if (!this.mAccessibilityManager.isEnabled()
+                || (focusedView = this.mView.findFocus()) == null) {
             return;
         }
         AccessibilityNodeProvider provider = focusedView.getAccessibilityNodeProvider();
@@ -3163,7 +3694,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
         AccessibilityNodeInfo focusedNode = findFocusedVirtualNode(provider);
         if (focusedNode != null) {
-            int virtualId = AccessibilityNodeInfo.getVirtualDescendantId(focusedNode.getSourceNodeId());
+            int virtualId =
+                    AccessibilityNodeInfo.getVirtualDescendantId(focusedNode.getSourceNodeId());
             AccessibilityEvent event = AccessibilityEvent.obtain(8);
             event.setSource(focusedView, virtualId);
             event.setPackageName(focusedNode.getPackageName());
@@ -3183,7 +3715,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         if (focusedNode != null) {
             return focusedNode;
         }
-        if (!this.mContext.isAutofillCompatibilityEnabled() || (current = provider.createAccessibilityNodeInfo(-1)) == null) {
+        if (!this.mContext.isAutofillCompatibilityEnabled()
+                || (current = provider.createAccessibilityNodeInfo(-1)) == null) {
             return null;
         }
         if (current.isFocused()) {
@@ -3197,7 +3730,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             if (childNodeIds != null && childNodeIds.size() > 0) {
                 int childCount = childNodeIds.size();
                 for (int i = 0; i < childCount; i++) {
-                    int virtualId = AccessibilityNodeInfo.getVirtualDescendantId(childNodeIds.get(i));
+                    int virtualId =
+                            AccessibilityNodeInfo.getVirtualDescendantId(childNodeIds.get(i));
                     AccessibilityNodeInfo child = provider.createAccessibilityNodeInfo(virtualId);
                     if (child != null) {
                         if (child.isFocused()) {
@@ -3255,7 +3789,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         return !this.mHandlingLayoutInLayoutRequest;
     }
 
-    private void performLayout(WindowManager.LayoutParams lp, int desiredWindowWidth, int desiredWindowHeight) {
+    private void performLayout(
+            WindowManager.LayoutParams lp, int desiredWindowWidth, int desiredWindowHeight) {
         ArrayList<View> validLayoutRequesters;
         this.mScrollMayChange = true;
         this.mInLayout = true;
@@ -3264,38 +3799,67 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             return;
         }
         if (DEBUG_ORIENTATION || DEBUG_LAYOUT) {
-            Log.v(this.mTag, "Laying out " + host + " to (" + host.getMeasuredWidth() + ", " + host.getMeasuredHeight() + NavigationBarInflaterView.KEY_CODE_END);
+            Log.v(
+                    this.mTag,
+                    "Laying out "
+                            + host
+                            + " to ("
+                            + host.getMeasuredWidth()
+                            + ", "
+                            + host.getMeasuredHeight()
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         Trace.traceBegin(8L, TtmlUtils.TAG_LAYOUT);
         try {
             host.layout(0, 0, host.getMeasuredWidth(), host.getMeasuredHeight());
             this.mInLayout = false;
             int numViewsRequestingLayout = this.mLayoutRequesters.size();
-            if (numViewsRequestingLayout > 0 && (validLayoutRequesters = getValidLayoutRequesters(this.mLayoutRequesters, false)) != null) {
+            if (numViewsRequestingLayout > 0
+                    && (validLayoutRequesters =
+                                    getValidLayoutRequesters(this.mLayoutRequesters, false))
+                            != null) {
                 this.mHandlingLayoutInLayoutRequest = true;
                 int numValidRequests = validLayoutRequesters.size();
                 for (int i = 0; i < numValidRequests; i++) {
                     View view = validLayoutRequesters.get(i);
-                    Log.w("View", "requestLayout() improperly called by " + view + " during layout: running second layout pass");
+                    Log.w(
+                            "View",
+                            "requestLayout() improperly called by "
+                                    + view
+                                    + " during layout: running second layout pass");
                     view.requestLayout();
                 }
-                measureHierarchy(host, lp, this.mView.getContext().getResources(), desiredWindowWidth, desiredWindowHeight, false);
+                measureHierarchy(
+                        host,
+                        lp,
+                        this.mView.getContext().getResources(),
+                        desiredWindowWidth,
+                        desiredWindowHeight,
+                        false);
                 this.mInLayout = true;
                 host.layout(0, 0, host.getMeasuredWidth(), host.getMeasuredHeight());
                 this.mHandlingLayoutInLayoutRequest = false;
-                final ArrayList<View> validLayoutRequesters2 = getValidLayoutRequesters(this.mLayoutRequesters, true);
+                final ArrayList<View> validLayoutRequesters2 =
+                        getValidLayoutRequesters(this.mLayoutRequesters, true);
                 if (validLayoutRequesters2 != null) {
-                    getRunQueue().post(new Runnable() { // from class: android.view.ViewRootImpl.7
-                        @Override // java.lang.Runnable
-                        public void run() {
-                            int numValidRequests2 = validLayoutRequesters2.size();
-                            for (int i2 = 0; i2 < numValidRequests2; i2++) {
-                                View view2 = (View) validLayoutRequesters2.get(i2);
-                                Log.w("View", "requestLayout() improperly called by " + view2 + " during second layout pass: posting in next frame");
-                                view2.requestLayout();
-                            }
-                        }
-                    });
+                    getRunQueue()
+                            .post(
+                                    new Runnable() { // from class: android.view.ViewRootImpl.7
+                                        @Override // java.lang.Runnable
+                                        public void run() {
+                                            int numValidRequests2 = validLayoutRequesters2.size();
+                                            for (int i2 = 0; i2 < numValidRequests2; i2++) {
+                                                View view2 = (View) validLayoutRequesters2.get(i2);
+                                                Log.w(
+                                                        "View",
+                                                        "requestLayout() improperly called by "
+                                                                + view2
+                                                                + " during second layout pass:"
+                                                                + " posting in next frame");
+                                                view2.requestLayout();
+                                            }
+                                        }
+                                    });
                 }
             }
             Trace.traceEnd(8L);
@@ -3306,12 +3870,16 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
     }
 
-    private ArrayList<View> getValidLayoutRequesters(ArrayList<View> layoutRequesters, boolean secondLayoutRequests) {
+    private ArrayList<View> getValidLayoutRequesters(
+            ArrayList<View> layoutRequesters, boolean secondLayoutRequests) {
         int numViewsRequestingLayout = layoutRequesters.size();
         ArrayList<View> validLayoutRequesters = null;
         for (int i = 0; i < numViewsRequestingLayout; i++) {
             View view = layoutRequesters.get(i);
-            if (view != null && view.mAttachInfo != null && view.mParent != null && (secondLayoutRequests || (view.mPrivateFlags & 4096) == 4096)) {
+            if (view != null
+                    && view.mAttachInfo != null
+                    && view.mParent != null
+                    && (secondLayoutRequests || (view.mPrivateFlags & 4096) == 4096)) {
                 boolean gone = false;
                 View parent = view;
                 while (true) {
@@ -3383,7 +3951,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     @Override // android.view.ThreadedRenderer.DrawCallbacks
     public void onPreDraw(RecordingCanvas canvas) {
-        if (this.mCurScrollY != 0 && this.mHardwareYOffset != 0 && this.mAttachInfo.mThreadedRenderer.isOpaque()) {
+        if (this.mCurScrollY != 0
+                && this.mHardwareYOffset != 0
+                && this.mAttachInfo.mThreadedRenderer.isOpaque()) {
             canvas.drawColor(-16777216);
         }
         canvas.translate(-this.mHardwareXOffset, -this.mHardwareYOffset);
@@ -3412,19 +3982,30 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             }
             if (this.mRenderProfilingEnabled) {
                 if (this.mRenderProfiler == null) {
-                    this.mRenderProfiler = new Choreographer.FrameCallback() { // from class: android.view.ViewRootImpl.8
-                        @Override // android.view.Choreographer.FrameCallback
-                        public void doFrame(long frameTimeNanos) {
-                            ViewRootImpl.this.mDirty.set(0, 0, ViewRootImpl.this.mWidth, ViewRootImpl.this.mHeight);
-                            if (ViewRootImpl.DEBUG_TRAVERSAL && ViewRootImpl.DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
-                                Log.i(ViewRootImpl.this.mTag, "Traversal, [12] mView=" + ViewRootImpl.this.mView);
-                            }
-                            ViewRootImpl.this.scheduleTraversals();
-                            if (ViewRootImpl.this.mRenderProfilingEnabled) {
-                                ViewRootImpl.this.mChoreographer.postFrameCallback(ViewRootImpl.this.mRenderProfiler);
-                            }
-                        }
-                    };
+                    this.mRenderProfiler =
+                            new Choreographer
+                                    .FrameCallback() { // from class: android.view.ViewRootImpl.8
+                                @Override // android.view.Choreographer.FrameCallback
+                                public void doFrame(long frameTimeNanos) {
+                                    ViewRootImpl.this.mDirty.set(
+                                            0,
+                                            0,
+                                            ViewRootImpl.this.mWidth,
+                                            ViewRootImpl.this.mHeight);
+                                    if (ViewRootImpl.DEBUG_TRAVERSAL
+                                            && ViewRootImpl.DEBUG_TRAVERSAL_PACKAGE_NAME.equals(
+                                                    ActivityThread.currentPackageName())) {
+                                        Log.i(
+                                                ViewRootImpl.this.mTag,
+                                                "Traversal, [12] mView=" + ViewRootImpl.this.mView);
+                                    }
+                                    ViewRootImpl.this.scheduleTraversals();
+                                    if (ViewRootImpl.this.mRenderProfilingEnabled) {
+                                        ViewRootImpl.this.mChoreographer.postFrameCallback(
+                                                ViewRootImpl.this.mRenderProfiler);
+                                    }
+                                }
+                            };
                 }
                 this.mChoreographer.postFrameCallback(this.mRenderProfiler);
                 return;
@@ -3462,7 +4043,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             }
         } else {
             if (this.mPreviousFrameDrawnTime < 0) {
-                this.mPreviousFrameDrawnTime = this.mChoreographer.getExpectedPresentationTimeNanos();
+                this.mPreviousFrameDrawnTime =
+                        this.mChoreographer.getExpectedPresentationTimeNanos();
                 return;
             }
             long expectedDrawnTime = this.mChoreographer.getExpectedPresentationTimeNanos();
@@ -3508,7 +4090,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     public boolean isHardwareEnabled() {
-        return this.mAttachInfo.mThreadedRenderer != null && this.mAttachInfo.mThreadedRenderer.isEnabled();
+        return this.mAttachInfo.mThreadedRenderer != null
+                && this.mAttachInfo.mThreadedRenderer.isEnabled();
     }
 
     public boolean isInWMSRequestedSync() {
@@ -3519,29 +4102,38 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         if (!isHardwareEnabled()) {
             return;
         }
-        final ArrayList<Runnable> commitCallbacks = this.mAttachInfo.mTreeObserver.captureFrameCommitCallbacks();
+        final ArrayList<Runnable> commitCallbacks =
+                this.mAttachInfo.mTreeObserver.captureFrameCommitCallbacks();
         boolean needFrameCommitCallback = commitCallbacks != null && commitCallbacks.size() > 0;
         if (!needFrameCommitCallback) {
             return;
         }
-        Log.d(this.mTag, "Creating frameCommitCallback commitCallbacks size=" + commitCallbacks.size());
-        this.mAttachInfo.mThreadedRenderer.setFrameCommitCallback(new HardwareRenderer.FrameCommitCallback() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda16
-            @Override // android.graphics.HardwareRenderer.FrameCommitCallback
-            public final void onFrameCommit(boolean z) {
-                ViewRootImpl.this.lambda$addFrameCommitCallbackIfNeeded$7(commitCallbacks, z);
-            }
-        });
+        Log.d(
+                this.mTag,
+                "Creating frameCommitCallback commitCallbacks size=" + commitCallbacks.size());
+        this.mAttachInfo.mThreadedRenderer.setFrameCommitCallback(
+                new HardwareRenderer
+                        .FrameCommitCallback() { // from class:
+                                                 // android.view.ViewRootImpl$$ExternalSyntheticLambda16
+                    @Override // android.graphics.HardwareRenderer.FrameCommitCallback
+                    public final void onFrameCommit(boolean z) {
+                        ViewRootImpl.this.lambda$addFrameCommitCallbackIfNeeded$7(
+                                commitCallbacks, z);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$addFrameCommitCallbackIfNeeded$7(final ArrayList commitCallbacks, boolean didProduceBuffer) {
+    public /* synthetic */ void lambda$addFrameCommitCallbackIfNeeded$7(
+            final ArrayList commitCallbacks, boolean didProduceBuffer) {
         Log.d(this.mTag, "Received frameCommitCallback didProduceBuffer=" + didProduceBuffer);
-        this.mHandler.postAtFrontOfQueue(new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda12
-            @Override // java.lang.Runnable
-            public final void run() {
-                ViewRootImpl.lambda$addFrameCommitCallbackIfNeeded$6(commitCallbacks);
-            }
-        });
+        this.mHandler.postAtFrontOfQueue(
+                new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda12
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        ViewRootImpl.lambda$addFrameCommitCallbackIfNeeded$6(commitCallbacks);
+                    }
+                });
     }
 
     static /* synthetic */ void lambda$addFrameCommitCallbackIfNeeded$6(ArrayList commitCallbacks) {
@@ -3576,7 +4168,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 }
                 return null;
             }
-            return new HardwareRenderer.FrameCommitCallback() { // from class: android.view.ViewRootImpl$9$$ExternalSyntheticLambda0
+            return new HardwareRenderer
+                    .FrameCommitCallback() { // from class:
+                                             // android.view.ViewRootImpl$9$$ExternalSyntheticLambda0
                 @Override // android.graphics.HardwareRenderer.FrameCommitCallback
                 public final void onFrameCommit(boolean z) {
                     ViewRootImpl.AnonymousClass9.this.lambda$onFrameDraw$0(frame, z);
@@ -3592,8 +4186,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
 
         @Override // android.graphics.HardwareRenderer.FrameDrawingCallback
-        public void onFrameDraw(long frame) {
-        }
+        public void onFrameDraw(long frame) {}
     }
 
     private boolean performDraw(final SurfaceSyncGroup surfaceSyncGroup) {
@@ -3604,7 +4197,10 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 case 1:
                     if (this.mDeferTransactionRequested) {
                         this.mDeferTransactionRequested = false;
-                        Log.i(this.mTag, "performDraw() SCREEN_OFF but mDeferTransactionRequested = true break");
+                        Log.i(
+                                this.mTag,
+                                "performDraw() SCREEN_OFF but mDeferTransactionRequested = true"
+                                    + " break");
                         break;
                     } else {
                         this.mLastPerformDrawSkippedReason = "screen_off";
@@ -3616,8 +4212,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     }
                 case 3:
                 case 4:
-                    if (this.mDisplay.getDisplayId() == 0 && (this.mWindowAttributes.samsungFlags & 262144) == 0 && Settings.System.getInt(this.mContentResolver, AOD_SHOW_STATE, 0) != 0) {
-                        Log.i(this.mTag, "performDraw() was skipped by AOD_SHOW_STATE... DisplayState = " + this.mAttachInfo.mDisplayState);
+                    if (this.mDisplay.getDisplayId() == 0
+                            && (this.mWindowAttributes.samsungFlags & 262144) == 0
+                            && Settings.System.getInt(this.mContentResolver, AOD_SHOW_STATE, 0)
+                                    != 0) {
+                        Log.i(
+                                this.mTag,
+                                "performDraw() was skipped by AOD_SHOW_STATE... DisplayState = "
+                                        + this.mAttachInfo.mDisplayState);
                         return false;
                     }
                     break;
@@ -3670,12 +4272,16 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 }
                 if (this.mSurfaceHolder != null && this.mSurface.isValid()) {
                     usingAsyncReport = true;
-                    SurfaceCallbackHelper sch = new SurfaceCallbackHelper(new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda13
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            ViewRootImpl.this.lambda$performDraw$8(surfaceSyncGroup, pendingTransaction);
-                        }
-                    });
+                    SurfaceCallbackHelper sch =
+                            new SurfaceCallbackHelper(
+                                    new Runnable() { // from class:
+                                                     // android.view.ViewRootImpl$$ExternalSyntheticLambda13
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            ViewRootImpl.this.lambda$performDraw$8(
+                                                    surfaceSyncGroup, pendingTransaction);
+                                        }
+                                    });
                     SurfaceHolder.Callback[] callbacks = this.mSurfaceHolder.getCallbacks();
                     sch.dispatchSurfaceRedrawNeededAsync(this.mSurfaceHolder, callbacks);
                 } else if (!usingAsyncReport && this.mAttachInfo.mThreadedRenderer != null) {
@@ -3685,7 +4291,11 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 }
             }
             if (!usingAsyncReport) {
-                handleSyncRequestWhenNoAsyncDraw(surfaceSyncGroup, pendingTransaction != null, pendingTransaction, "no async report");
+                handleSyncRequestWhenNoAsyncDraw(
+                        surfaceSyncGroup,
+                        pendingTransaction != null,
+                        pendingTransaction,
+                        "no async report");
             }
             if (this.mPerformContentCapture) {
                 performContentCaptureInitialReport();
@@ -3699,11 +4309,17 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$performDraw$8(SurfaceSyncGroup surfaceSyncGroup, SurfaceControl.Transaction pendingTransaction) {
-        handleSyncRequestWhenNoAsyncDraw(surfaceSyncGroup, pendingTransaction != null, pendingTransaction, "SurfaceHolder");
+    public /* synthetic */ void lambda$performDraw$8(
+            SurfaceSyncGroup surfaceSyncGroup, SurfaceControl.Transaction pendingTransaction) {
+        handleSyncRequestWhenNoAsyncDraw(
+                surfaceSyncGroup, pendingTransaction != null, pendingTransaction, "SurfaceHolder");
     }
 
-    private void handleSyncRequestWhenNoAsyncDraw(SurfaceSyncGroup surfaceSyncGroup, boolean hasPendingTransaction, SurfaceControl.Transaction pendingTransaction, String logReason) {
+    private void handleSyncRequestWhenNoAsyncDraw(
+            SurfaceSyncGroup surfaceSyncGroup,
+            boolean hasPendingTransaction,
+            SurfaceControl.Transaction pendingTransaction,
+            String logReason) {
         if (surfaceSyncGroup != null) {
             if (hasPendingTransaction && pendingTransaction != null) {
                 surfaceSyncGroup.addTransaction(pendingTransaction);
@@ -3712,9 +4328,17 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             return;
         }
         if (hasPendingTransaction && pendingTransaction != null) {
-            Trace.instant(8L, "Transaction not synced due to " + logReason + NativeLibraryHelper.CLEAR_ABI_OVERRIDE + this.mTag);
+            Trace.instant(
+                    8L,
+                    "Transaction not synced due to "
+                            + logReason
+                            + NativeLibraryHelper.CLEAR_ABI_OVERRIDE
+                            + this.mTag);
             if (DEBUG_BLAST) {
-                Log.d(this.mTag, "Pending transaction will not be applied in sync with a draw due to " + logReason);
+                Log.d(
+                        this.mTag,
+                        "Pending transaction will not be applied in sync with a draw due to "
+                                + logReason);
             }
             pendingTransaction.apply();
         }
@@ -3731,7 +4355,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             case 2:
                 break;
             default:
-                Log.w(TAG, "isContentCaptureEnabled(): invalid state " + this.mContentCaptureEnabled);
+                Log.w(
+                        TAG,
+                        "isContentCaptureEnabled(): invalid state " + this.mContentCaptureEnabled);
                 break;
         }
         return false;
@@ -3739,7 +4365,11 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     private boolean isContentCaptureReallyEnabled() {
         ContentCaptureManager ccm;
-        return (this.mContext.getContentCaptureOptions() == null || (ccm = this.mAttachInfo.getContentCaptureManager(this.mContext)) == null || !ccm.isContentCaptureEnabled()) ? false : true;
+        return (this.mContext.getContentCaptureOptions() == null
+                        || (ccm = this.mAttachInfo.getContentCaptureManager(this.mContext)) == null
+                        || !ccm.isContentCaptureEnabled())
+                ? false
+                : true;
     }
 
     private void performContentCaptureInitialReport() {
@@ -3753,11 +4383,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             if (isContentCaptureEnabled()) {
                 traceDispatchCapture = Trace.isTagEnabled(8L);
                 if (traceDispatchCapture) {
-                    Trace.traceBegin(8L, "dispatchContentCapture() for " + getClass().getSimpleName());
+                    Trace.traceBegin(
+                            8L, "dispatchContentCapture() for " + getClass().getSimpleName());
                 }
                 if (this.mAttachInfo.mContentCaptureManager != null) {
-                    ContentCaptureSession session = this.mAttachInfo.mContentCaptureManager.getMainContentCaptureSession();
-                    session.notifyWindowBoundsChanged(session.getId(), getConfiguration().windowConfiguration.getBounds());
+                    ContentCaptureSession session =
+                            this.mAttachInfo.mContentCaptureManager.getMainContentCaptureSession();
+                    session.notifyWindowBoundsChanged(
+                            session.getId(), getConfiguration().windowConfiguration.getBounds());
                 }
                 rootView.dispatchInitialProvideContentCaptureStructure();
                 if (traceDispatchCapture) {
@@ -3809,7 +4442,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
     }
 
-    private boolean draw(boolean fullRedrawNeeded, SurfaceSyncGroup activeSyncGroup, boolean syncBuffer) {
+    private boolean draw(
+            boolean fullRedrawNeeded, SurfaceSyncGroup activeSyncGroup, boolean syncBuffer) {
         int curScrollY;
         boolean fullRedrawNeeded2;
         int xOffset;
@@ -3866,10 +4500,37 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             return false;
         }
         if (fullRedrawNeeded2) {
-            dirty.set(0, 0, (int) ((this.mWidth * appScale) + 0.5f), (int) ((this.mHeight * appScale) + 0.5f));
+            dirty.set(
+                    0,
+                    0,
+                    (int) ((this.mWidth * appScale) + 0.5f),
+                    (int) ((this.mHeight * appScale) + 0.5f));
         }
         if (DEBUG_ORIENTATION || DEBUG_DRAW) {
-            Log.v(this.mTag, "Draw " + this.mView + "/" + ((Object) this.mWindowAttributes.getTitle()) + ": dirty={" + dirty.left + "," + dirty.top + "," + dirty.right + "," + dirty.bottom + "} surface=" + surface + " surface.isValid()=" + surface.isValid() + ", appScale:" + appScale + ", width=" + this.mWidth + ", height=" + this.mHeight);
+            Log.v(
+                    this.mTag,
+                    "Draw "
+                            + this.mView
+                            + "/"
+                            + ((Object) this.mWindowAttributes.getTitle())
+                            + ": dirty={"
+                            + dirty.left
+                            + ","
+                            + dirty.top
+                            + ","
+                            + dirty.right
+                            + ","
+                            + dirty.bottom
+                            + "} surface="
+                            + surface
+                            + " surface.isValid()="
+                            + surface.isValid()
+                            + ", appScale:"
+                            + appScale
+                            + ", width="
+                            + this.mWidth
+                            + ", height="
+                            + this.mHeight);
         }
         this.mAttachInfo.mTreeObserver.dispatchOnDraw();
         int xOffset2 = -this.mCanvasOffsetX;
@@ -3892,21 +4553,57 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             }
         }
         this.mAttachInfo.mDrawingTime = this.mChoreographer.getFrameTimeNanos() / 1000000;
-        if (DEBUG_TRAVERSAL && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
-            Log.i(this.mTag, "Traversal, [13] mView=" + this.mView + " dirty.isEmpty=" + dirty.isEmpty() + " mIsAnimating=" + this.mIsAnimating + " accessibilityFocusDirty=" + accessibilityFocusDirty2 + " mForceDraw=" + this.mForceDraw);
+        if (DEBUG_TRAVERSAL
+                && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
+            Log.i(
+                    this.mTag,
+                    "Traversal, [13] mView="
+                            + this.mView
+                            + " dirty.isEmpty="
+                            + dirty.isEmpty()
+                            + " mIsAnimating="
+                            + this.mIsAnimating
+                            + " accessibilityFocusDirty="
+                            + accessibilityFocusDirty2
+                            + " mForceDraw="
+                            + this.mForceDraw);
         }
         boolean useAsyncReport = false;
         if (!dirty.isEmpty() || this.mIsAnimating || accessibilityFocusDirty2 || this.mForceDraw) {
             if (!isHardwareEnabled()) {
-                if (this.mAttachInfo.mThreadedRenderer != null && !this.mAttachInfo.mThreadedRenderer.isEnabled() && this.mAttachInfo.mThreadedRenderer.isRequested() && this.mSurface.isValid()) {
-                    if (DEBUG_TRAVERSAL && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
-                        Log.i(this.mTag, "Traversal, [13-1] mView=" + this.mView + " isImpossibleRenderer=" + isImpossibleRenderer());
+                if (this.mAttachInfo.mThreadedRenderer != null
+                        && !this.mAttachInfo.mThreadedRenderer.isEnabled()
+                        && this.mAttachInfo.mThreadedRenderer.isRequested()
+                        && this.mSurface.isValid()) {
+                    if (DEBUG_TRAVERSAL
+                            && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(
+                                    ActivityThread.currentPackageName())) {
+                        Log.i(
+                                this.mTag,
+                                "Traversal, [13-1] mView="
+                                        + this.mView
+                                        + " isImpossibleRenderer="
+                                        + isImpossibleRenderer());
                     }
                     if (!isImpossibleRenderer()) {
                         try {
-                            this.mAttachInfo.mThreadedRenderer.initializeIfNeeded(this.mWidth, this.mHeight, this.mAttachInfo, this.mSurface, surfaceInsets);
+                            this.mAttachInfo.mThreadedRenderer.initializeIfNeeded(
+                                    this.mWidth,
+                                    this.mHeight,
+                                    this.mAttachInfo,
+                                    this.mSurface,
+                                    surfaceInsets);
                             if (ViewRune.COMMON_IS_PRODUCT_DEV) {
-                                Log.d(this.mTag, String.format("mThreadedRenderer.initializeIfNeeded()#1 mSurface={%s}", "isValid=" + this.mSurface.isValid() + " 0x" + Long.toHexString(this.mSurface.mNativeObject)));
+                                Log.d(
+                                        this.mTag,
+                                        String.format(
+                                                "mThreadedRenderer.initializeIfNeeded()#1"
+                                                    + " mSurface={%s}",
+                                                "isValid="
+                                                        + this.mSurface.isValid()
+                                                        + " 0x"
+                                                        + Long.toHexString(
+                                                                this.mSurface.mNativeObject)));
                             }
                             this.mFullRedrawNeeded = true;
                             scheduleTraversals();
@@ -3921,7 +4618,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     scheduleTraversals();
                     return false;
                 }
-                if (!drawSoftware(surface, this.mAttachInfo, xOffset, yOffset, scalingRequired, dirty, surfaceInsets)) {
+                if (!drawSoftware(
+                        surface,
+                        this.mAttachInfo,
+                        xOffset,
+                        yOffset,
+                        scalingRequired,
+                        dirty,
+                        surfaceInsets)) {
                     return false;
                 }
             } else {
@@ -3950,7 +4654,11 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 useAsyncReport = true;
                 if (this.mHdrRenderState.updateForFrame(this.mAttachInfo.mDrawingTime)) {
                     float renderRatio = this.mHdrRenderState.getRenderHdrSdrRatio();
-                    applyTransactionOnDraw(this.mTransaction.setExtendedRangeBrightness(getSurfaceControl(), renderRatio, this.mHdrRenderState.getDesiredHdrSdrRatio()));
+                    applyTransactionOnDraw(
+                            this.mTransaction.setExtendedRangeBrightness(
+                                    getSurfaceControl(),
+                                    renderRatio,
+                                    this.mHdrRenderState.getDesiredHdrSdrRatio()));
                     this.mAttachInfo.mThreadedRenderer.setTargetHdrSdrRatio(renderRatio);
                 }
                 if (activeSyncGroup != null) {
@@ -3967,12 +4675,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 }
                 long timeNs = SystemClock.uptimeNanos();
                 this.mAttachInfo.mThreadedRenderer.draw(this.mView, this.mAttachInfo, this);
-                if (this.mAppStartInfoTimestampsFlagValue && this.mRenderThreadDrawStartTimeNs == -1) {
+                if (this.mAppStartInfoTimestampsFlagValue
+                        && this.mRenderThreadDrawStartTimeNs == -1) {
                     this.mRenderThreadDrawStartTimeNs = timeNs;
                 }
             }
         }
-        if (DEBUG_TRAVERSAL && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
+        if (DEBUG_TRAVERSAL
+                && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
             Log.i(this.mTag, "Traversal, [13-2] mView=" + this.mView + " animating=" + animating);
         }
         if (animating) {
@@ -3982,14 +4692,34 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         return useAsyncReport;
     }
 
-    private boolean drawSoftware(Surface surface, View.AttachInfo attachInfo, int xoff, int yoff, boolean scalingRequired, Rect dirty, Rect surfaceInsets) {
+    private boolean drawSoftware(
+            Surface surface,
+            View.AttachInfo attachInfo,
+            int xoff,
+            int yoff,
+            boolean scalingRequired,
+            Rect dirty,
+            Rect surfaceInsets) {
         try {
             Canvas canvas = this.mSurface.lockCanvas(dirty);
             canvas.setDensity(this.mDensity);
             try {
                 try {
                     if (DEBUG_ORIENTATION || DEBUG_DRAW) {
-                        Log.v(this.mTag, "Surface " + surface + " drawing to bitmap w=" + canvas.getWidth() + ", h=" + canvas.getHeight() + ", dirty: " + dirty + ", xOff=" + xoff + ", yOff=" + yoff);
+                        Log.v(
+                                this.mTag,
+                                "Surface "
+                                        + surface
+                                        + " drawing to bitmap w="
+                                        + canvas.getWidth()
+                                        + ", h="
+                                        + canvas.getHeight()
+                                        + ", dirty: "
+                                        + dirty
+                                        + ", xOff="
+                                        + xoff
+                                        + ", yOff="
+                                        + yoff);
                     }
                     if (!canvas.isOpaque() || yoff != 0 || xoff != 0) {
                         canvas.drawColor(0, PorterDuff.Mode.CLEAR);
@@ -3999,7 +4729,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     this.mView.mPrivateFlags |= 32;
                     if (DEBUG_DRAW) {
                         Context cxt = this.mView.getContext();
-                        Log.i(this.mTag, "Drawing: package:" + cxt.getPackageName() + ", metrics=" + cxt.getResources().getDisplayMetrics() + ", compatibilityInfo=" + cxt.getResources().getCompatibilityInfo());
+                        Log.i(
+                                this.mTag,
+                                "Drawing: package:"
+                                        + cxt.getPackageName()
+                                        + ", metrics="
+                                        + cxt.getResources().getDisplayMetrics()
+                                        + ", compatibilityInfo="
+                                        + cxt.getResources().getCompatibilityInfo());
                     }
                     canvas.translate(-xoff, -yoff);
                     if (this.mTranslator != null) {
@@ -4034,7 +4771,10 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         Rect bounds = this.mAttachInfo.mTmpInvalRect;
         boolean z = false;
         if (getAccessibilityFocusedRect(bounds)) {
-            if (this.mContext.getResources().getConfiguration().isScreenRound() && this.mContext.getPackageManager().hasSystemFeature(PackageManager.FEATURE_WATCH)) {
+            if (this.mContext.getResources().getConfiguration().isScreenRound()
+                    && this.mContext
+                            .getPackageManager()
+                            .hasSystemFeature(PackageManager.FEATURE_WATCH)) {
                 z = true;
             }
             boolean isRoundWatch = z;
@@ -4043,7 +4783,11 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 drawable.setBounds(bounds);
                 drawable.draw(canvas);
                 if (this.mDisplay != null && isRoundWatch) {
-                    drawAccessibilityFocusedBorderOnRoundDisplay(canvas, bounds, getRoundDisplayRadius(), getRoundDisplayAccessibilityHighlightPaint());
+                    drawAccessibilityFocusedBorderOnRoundDisplay(
+                            canvas,
+                            bounds,
+                            getRoundDisplayRadius(),
+                            getRoundDisplayAccessibilityHighlightPaint());
                     return;
                 }
                 return;
@@ -4067,15 +4811,26 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             this.mRoundDisplayAccessibilityHighlightPaint.setStyle(Paint.Style.STROKE);
             this.mRoundDisplayAccessibilityHighlightPaint.setAntiAlias(true);
         }
-        this.mRoundDisplayAccessibilityHighlightPaint.setStrokeWidth(this.mAccessibilityManager.getAccessibilityFocusStrokeWidth());
-        this.mRoundDisplayAccessibilityHighlightPaint.setColor(this.mAccessibilityManager.getAccessibilityFocusColor());
+        this.mRoundDisplayAccessibilityHighlightPaint.setStrokeWidth(
+                this.mAccessibilityManager.getAccessibilityFocusStrokeWidth());
+        this.mRoundDisplayAccessibilityHighlightPaint.setColor(
+                this.mAccessibilityManager.getAccessibilityFocusColor());
         return this.mRoundDisplayAccessibilityHighlightPaint;
     }
 
-    private void drawAccessibilityFocusedBorderOnRoundDisplay(Canvas canvas, Rect bounds, int roundDisplayRadius, Paint accessibilityFocusHighlightPaint) {
+    private void drawAccessibilityFocusedBorderOnRoundDisplay(
+            Canvas canvas,
+            Rect bounds,
+            int roundDisplayRadius,
+            Paint accessibilityFocusHighlightPaint) {
         int saveCount = canvas.save();
         canvas.clipRect(bounds);
-        canvas.drawCircle(roundDisplayRadius, roundDisplayRadius, roundDisplayRadius - (this.mAccessibilityManager.getAccessibilityFocusStrokeWidth() / 2.0f), accessibilityFocusHighlightPaint);
+        canvas.drawCircle(
+                roundDisplayRadius,
+                roundDisplayRadius,
+                roundDisplayRadius
+                        - (this.mAccessibilityManager.getAccessibilityFocusStrokeWidth() / 2.0f),
+                accessibilityFocusHighlightPaint);
         canvas.restoreToCount(saveCount);
     }
 
@@ -4085,7 +4840,10 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             Slog.w(TAG, "calling getAccessibilityFocusedRect() while the mView is null");
             return false;
         }
-        if (!this.mAccessibilityManager.isEnabled() || !this.mAccessibilityManager.isTouchExplorationEnabled() || (host = this.mAccessibilityFocusedHost) == null || host.mAttachInfo == null) {
+        if (!this.mAccessibilityManager.isEnabled()
+                || !this.mAccessibilityManager.isTouchExplorationEnabled()
+                || (host = this.mAccessibilityFocusedHost) == null
+                || host.mAttachInfo == null) {
             return false;
         }
         AccessibilityNodeProvider provider = host.getAccessibilityNodeProvider();
@@ -4100,7 +4858,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         View.AttachInfo attachInfo = this.mAttachInfo;
         bounds.offset(0, attachInfo.mViewRootImpl.mScrollY);
         bounds.offset(-attachInfo.mWindowLeft, -attachInfo.mWindowTop);
-        if (!bounds.intersect(0, 0, attachInfo.mViewRootImpl.mWidth, attachInfo.mViewRootImpl.mHeight)) {
+        if (!bounds.intersect(
+                0, 0, attachInfo.mViewRootImpl.mWidth, attachInfo.mViewRootImpl.mHeight)) {
             bounds.setEmpty();
         }
         return !bounds.isEmpty();
@@ -4109,14 +4868,22 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     private Drawable getAccessibilityFocusedDrawable() {
         if (this.mAttachInfo.mAccessibilityFocusDrawable == null) {
             TypedValue value = new TypedValue();
-            boolean resolved = this.mView.mContext.getTheme().resolveAttribute(R.attr.accessibilityFocusedDrawable, value, true);
+            boolean resolved =
+                    this.mView
+                            .mContext
+                            .getTheme()
+                            .resolveAttribute(R.attr.accessibilityFocusedDrawable, value, true);
             if (resolved) {
-                this.mAttachInfo.mAccessibilityFocusDrawable = this.mView.mContext.getDrawable(value.resourceId);
+                this.mAttachInfo.mAccessibilityFocusDrawable =
+                        this.mView.mContext.getDrawable(value.resourceId);
             }
         }
         if (this.mAttachInfo.mAccessibilityFocusDrawable instanceof GradientDrawable) {
-            GradientDrawable drawable = (GradientDrawable) this.mAttachInfo.mAccessibilityFocusDrawable;
-            drawable.setStroke(this.mAccessibilityManager.semGetAccessibilityFocusStrokeWidth(this.mContext), this.mAccessibilityManager.getAccessibilityFocusColor());
+            GradientDrawable drawable =
+                    (GradientDrawable) this.mAttachInfo.mAccessibilityFocusDrawable;
+            drawable.setStroke(
+                    this.mAccessibilityManager.semGetAccessibilityFocusStrokeWidth(this.mContext),
+                    this.mAccessibilityManager.getAccessibilityFocusColor());
         }
         return this.mAttachInfo.mAccessibilityFocusDrawable;
     }
@@ -4130,8 +4897,10 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         List<Rect> rectsForWindowManager = this.mGestureExclusionTracker.computeChangedRects();
         if (rectsForWindowManager != null && this.mView != null) {
             try {
-                this.mWindowSession.reportSystemGestureExclusionChanged(this.mWindow, rectsForWindowManager);
-                this.mAttachInfo.mTreeObserver.dispatchOnSystemGestureExclusionRectsChanged(rectsForWindowManager);
+                this.mWindowSession.reportSystemGestureExclusionChanged(
+                        this.mWindow, rectsForWindowManager);
+                this.mAttachInfo.mTreeObserver.dispatchOnSystemGestureExclusionRectsChanged(
+                        rectsForWindowManager);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -4145,7 +4914,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     void decorViewInterceptionChanged(boolean intercepted) {
         if (this.mView != null) {
             try {
-                this.mWindowSession.reportDecorViewGestureInterceptionChanged(this.mWindow, intercepted);
+                this.mWindowSession.reportDecorViewGestureInterceptionChanged(
+                        this.mWindow, intercepted);
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
@@ -4172,7 +4942,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             if (this.mKeepClearAccessibilityFocusRect == null) {
                 this.mKeepClearAccessibilityFocusRect = new Rect();
             }
-            boolean hasAccessibilityFocus = getAccessibilityFocusedRect(this.mKeepClearAccessibilityFocusRect);
+            boolean hasAccessibilityFocus =
+                    getAccessibilityFocusedRect(this.mKeepClearAccessibilityFocusRect);
             if (!hasAccessibilityFocus) {
                 this.mKeepClearAccessibilityFocusRect.setEmpty();
             }
@@ -4182,8 +4953,12 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     void keepClearRectsChanged(boolean accessibilityFocusRectChanged) {
         boolean restrictedKeepClearRectsChanged = this.mKeepClearRectsTracker.computeChanges();
-        boolean unrestrictedKeepClearRectsChanged = this.mUnrestrictedKeepClearRectsTracker.computeChanges();
-        if ((restrictedKeepClearRectsChanged || unrestrictedKeepClearRectsChanged || accessibilityFocusRectChanged) && this.mView != null) {
+        boolean unrestrictedKeepClearRectsChanged =
+                this.mUnrestrictedKeepClearRectsTracker.computeChanges();
+        if ((restrictedKeepClearRectsChanged
+                        || unrestrictedKeepClearRectsChanged
+                        || accessibilityFocusRectChanged)
+                && this.mView != null) {
             this.mHasPendingKeepClearAreaChange = true;
             if (!this.mHandler.hasMessages(36)) {
                 this.mHandler.sendEmptyMessageDelayed(36, 100L);
@@ -4198,13 +4973,16 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
         this.mHasPendingKeepClearAreaChange = false;
         List<Rect> restrictedKeepClearRects = this.mKeepClearRectsTracker.getLastComputedRects();
-        List<Rect> unrestrictedKeepClearRects = this.mUnrestrictedKeepClearRectsTracker.getLastComputedRects();
-        if (this.mKeepClearAccessibilityFocusRect != null && !this.mKeepClearAccessibilityFocusRect.isEmpty()) {
+        List<Rect> unrestrictedKeepClearRects =
+                this.mUnrestrictedKeepClearRectsTracker.getLastComputedRects();
+        if (this.mKeepClearAccessibilityFocusRect != null
+                && !this.mKeepClearAccessibilityFocusRect.isEmpty()) {
             restrictedKeepClearRects = new ArrayList(restrictedKeepClearRects);
             restrictedKeepClearRects.add(this.mKeepClearAccessibilityFocusRect);
         }
         try {
-            this.mWindowSession.reportKeepClearAreasChanged(this.mWindow, restrictedKeepClearRects, unrestrictedKeepClearRects);
+            this.mWindowSession.reportKeepClearAreasChanged(
+                    this.mWindow, restrictedKeepClearRects, unrestrictedKeepClearRects);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
@@ -4226,16 +5004,28 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             if (focus == null) {
                 return false;
             }
-            View lastScrolledFocus = this.mLastScrolledFocus != null ? this.mLastScrolledFocus.get() : null;
+            View lastScrolledFocus =
+                    this.mLastScrolledFocus != null ? this.mLastScrolledFocus.get() : null;
             if (focus != lastScrolledFocus) {
                 rectangle = null;
             }
             if (DEBUG_INPUT_RESIZE) {
-                Log.v(this.mTag, "Eval scroll: focus=" + focus + " rectangle=" + rectangle + " ci=" + ci + " vi=" + vi);
+                Log.v(
+                        this.mTag,
+                        "Eval scroll: focus="
+                                + focus
+                                + " rectangle="
+                                + rectangle
+                                + " ci="
+                                + ci
+                                + " vi="
+                                + vi);
             }
             if (focus == lastScrolledFocus && !this.mScrollMayChange && rectangle == null) {
                 if (DEBUG_INPUT_RESIZE) {
-                    Log.v(this.mTag, "Keeping scroll y=" + this.mScrollY + " vi=" + vi.toShortString());
+                    Log.v(
+                            this.mTag,
+                            "Keeping scroll y=" + this.mScrollY + " vi=" + vi.toShortString());
                 }
             } else {
                 this.mLastScrolledFocus = new WeakReference<>(focus);
@@ -4245,35 +5035,70 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 }
                 if (focus.getGlobalVisibleRect(this.mVisRect, null)) {
                     if (DEBUG_INPUT_RESIZE) {
-                        Log.v(this.mTag, "Root w=" + this.mView.getWidth() + " h=" + this.mView.getHeight() + " ci=" + ci.toShortString() + " vi=" + vi.toShortString());
+                        Log.v(
+                                this.mTag,
+                                "Root w="
+                                        + this.mView.getWidth()
+                                        + " h="
+                                        + this.mView.getHeight()
+                                        + " ci="
+                                        + ci.toShortString()
+                                        + " vi="
+                                        + vi.toShortString());
                     }
                     if (rectangle == null) {
                         focus.getFocusedRect(this.mTempRect);
                         if (DEBUG_INPUT_RESIZE) {
-                            Log.v(this.mTag, "Focus " + focus + ": focusRect=" + this.mTempRect.toShortString());
+                            Log.v(
+                                    this.mTag,
+                                    "Focus "
+                                            + focus
+                                            + ": focusRect="
+                                            + this.mTempRect.toShortString());
                         }
                         if (this.mView instanceof ViewGroup) {
                             try {
-                                ((ViewGroup) this.mView).offsetDescendantRectToMyCoords(focus, this.mTempRect);
+                                ((ViewGroup) this.mView)
+                                        .offsetDescendantRectToMyCoords(focus, this.mTempRect);
                             } catch (IllegalArgumentException ex) {
-                                Log.e(this.mTag, "offsetDescendantRectToMyCoords() error occurred. focus=" + focus + " mTempRect=" + this.mTempRect.toShortString() + " " + ex);
+                                Log.e(
+                                        this.mTag,
+                                        "offsetDescendantRectToMyCoords() error occurred. focus="
+                                                + focus
+                                                + " mTempRect="
+                                                + this.mTempRect.toShortString()
+                                                + " "
+                                                + ex);
                                 ex.printStackTrace();
                             }
                         }
                         if (DEBUG_INPUT_RESIZE) {
-                            Log.v(this.mTag, "Focus in window: focusRect=" + this.mTempRect.toShortString() + " visRect=" + this.mVisRect.toShortString());
+                            Log.v(
+                                    this.mTag,
+                                    "Focus in window: focusRect="
+                                            + this.mTempRect.toShortString()
+                                            + " visRect="
+                                            + this.mVisRect.toShortString());
                         }
                     } else {
                         this.mTempRect.set(rectangle);
                         if (DEBUG_INPUT_RESIZE) {
-                            Log.v(this.mTag, "Request scroll to rect: " + this.mTempRect.toShortString() + " visRect=" + this.mVisRect.toShortString());
+                            Log.v(
+                                    this.mTag,
+                                    "Request scroll to rect: "
+                                            + this.mTempRect.toShortString()
+                                            + " visRect="
+                                            + this.mVisRect.toShortString());
                         }
                     }
                     if (this.mTempRect.intersect(this.mVisRect)) {
                         if (DEBUG_INPUT_RESIZE) {
-                            Log.v(this.mTag, "Focus window visible rect: " + this.mTempRect.toShortString());
+                            Log.v(
+                                    this.mTag,
+                                    "Focus window visible rect: " + this.mTempRect.toShortString());
                         }
-                        if (this.mTempRect.height() > (this.mView.getHeight() - vi.top) - vi.bottom) {
+                        if (this.mTempRect.height()
+                                > (this.mView.getHeight() - vi.top) - vi.bottom) {
                             if (DEBUG_INPUT_RESIZE) {
                                 Log.v(this.mTag, "Too tall; leaving scrollY=" + scrollY2);
                             }
@@ -4284,7 +5109,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                                     Log.v(this.mTag, "Top covered; scrollY=" + scrollY);
                                 }
                             } else if (this.mTempRect.bottom > this.mView.getHeight() - vi.bottom) {
-                                scrollY = this.mTempRect.bottom - (this.mView.getHeight() - vi.bottom);
+                                scrollY =
+                                        this.mTempRect.bottom
+                                                - (this.mView.getHeight() - vi.bottom);
                                 if (DEBUG_INPUT_RESIZE) {
                                     Log.v(this.mTag, "Bottom covered; scrollY=" + scrollY);
                                 }
@@ -4345,7 +5172,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             if (provider != null) {
                 focusNode.getBoundsInParent(this.mTempRect);
                 focusHost.invalidate(this.mTempRect);
-                int virtualNodeId = AccessibilityNodeInfo.getVirtualDescendantId(focusNode.getSourceNodeId());
+                int virtualNodeId =
+                        AccessibilityNodeInfo.getVirtualDescendantId(focusNode.getSourceNodeId());
                 provider.performAction(virtualNodeId, 128, null);
             }
             focusNode.recycle();
@@ -4398,7 +5226,11 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         if (colorMode != 4 && !getConfiguration().isScreenWideColorGamut()) {
             colorMode = 0;
         }
-        if (CoreRune.FW_SCREENSHOT_FOR_HDR && this.mForceModeInScreenshot && this.mInvalidateForScreenshotRunnable != null && colorMode != 2 && colorMode != 3) {
+        if (CoreRune.FW_SCREENSHOT_FOR_HDR
+                && this.mForceModeInScreenshot
+                && this.mInvalidateForScreenshotRunnable != null
+                && colorMode != 2
+                && colorMode != 3) {
             Log.i(this.mTag, "removeCallbacks mInvalidateForScreenshotRunnable");
             this.mHandler.removeCallbacks(this.mInvalidateForScreenshotRunnable);
         }
@@ -4415,7 +5247,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             Log.v(this.mTag, "Request child focus: focus now " + focused);
         }
         checkThread();
-        if (DEBUG_TRAVERSAL && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
+        if (DEBUG_TRAVERSAL
+                && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
             Log.i(this.mTag, "Traversal, [14] mView=" + this.mView);
         }
         scheduleTraversals();
@@ -4427,7 +5260,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             Log.v(this.mTag, "Clearing child focus");
         }
         checkThread();
-        if (DEBUG_TRAVERSAL && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
+        if (DEBUG_TRAVERSAL
+                && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
             Log.i(this.mTag, "Traversal, [15] mView=" + this.mView);
         }
         scheduleTraversals();
@@ -4462,17 +5296,27 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     @Override // android.view.ViewParent
     public void recomputeViewAttributes(View child) {
         checkThread();
-        if (DEBUG_TRAVERSAL && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
-            Log.i(this.mTag, "Traversal, [16] mView=" + this.mView + " child=" + child + " mWillDrawSoon=" + this.mWillDrawSoon);
+        if (DEBUG_TRAVERSAL
+                && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
+            Log.i(
+                    this.mTag,
+                    "Traversal, [16] mView="
+                            + this.mView
+                            + " child="
+                            + child
+                            + " mWillDrawSoon="
+                            + this.mWillDrawSoon);
         }
         if (this.mView == child) {
             if (this.mIsInTraversal) {
-                this.mHandler.post(new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        ViewRootImpl.this.lambda$recomputeViewAttributes$9();
-                    }
-                });
+                this.mHandler.post(
+                        new Runnable() { // from class:
+                                         // android.view.ViewRootImpl$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                ViewRootImpl.this.lambda$recomputeViewAttributes$9();
+                            }
+                        });
             } else {
                 this.mAttachInfo.mRecomputeGlobalAttributes = true;
             }
@@ -4501,7 +5345,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         this.mAccessibilityInteractionConnectionManager.ensureNoConnection();
         this.mAccessibilityInteractionConnectionManager.ensureNoDirectConnection();
         removeSendWindowContentChangedCallback();
-        if (android.view.accessibility.Flags.preventLeakingViewrootimpl() && this.mAccessibilityInteractionController != null) {
+        if (android.view.accessibility.Flags.preventLeakingViewrootimpl()
+                && this.mAccessibilityInteractionController != null) {
             this.mAccessibilityInteractionController.destroy();
             this.mAccessibilityInteractionController = null;
         }
@@ -4515,7 +5360,10 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         this.mBlurRegionAggregator.setViewRoot(null);
         Log.i(this.mTag, "dispatchDetachedFromWindow");
         if (this.mThread != Thread.currentThread()) {
-            Log.w(this.mTag, "There is possible to occur CalledFromWrongThreadException. " + Debug.getCallers(10));
+            Log.w(
+                    this.mTag,
+                    "There is possible to occur CalledFromWrongThreadException. "
+                            + Debug.getCallers(10));
         }
         this.mAttachInfo.mRootView = null;
         destroySurface();
@@ -4542,12 +5390,21 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void performConfigurationChange(MergedConfiguration mergedConfiguration, boolean force, int newDisplayId, ActivityWindowInfo activityWindowInfo) {
+    public void performConfigurationChange(
+            MergedConfiguration mergedConfiguration,
+            boolean force,
+            int newDisplayId,
+            ActivityWindowInfo activityWindowInfo) {
         if (mergedConfiguration == null) {
             throw new IllegalArgumentException("No merged config provided.");
         }
-        int lastRotation = this.mLastReportedMergedConfiguration.getMergedConfiguration().windowConfiguration.getRotation();
-        int newRotation = mergedConfiguration.getMergedConfiguration().windowConfiguration.getRotation();
+        int lastRotation =
+                this.mLastReportedMergedConfiguration
+                        .getMergedConfiguration()
+                        .windowConfiguration
+                        .getRotation();
+        int newRotation =
+                mergedConfiguration.getMergedConfiguration().windowConfiguration.getRotation();
         if (lastRotation != newRotation) {
             this.mUpdateSurfaceNeeded = true;
             if (!this.mIsInTraversal) {
@@ -4557,30 +5414,48 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         Configuration globalConfig = mergedConfiguration.getGlobalConfiguration();
         Configuration overrideConfig = mergedConfiguration.getOverrideConfiguration();
         if (DEBUG_CONFIGURATION) {
-            Log.v(this.mTag, "Applying new config to window " + ((Object) this.mWindowAttributes.getTitle()) + ", globalConfig: " + globalConfig + ", overrideConfig: " + overrideConfig);
+            Log.v(
+                    this.mTag,
+                    "Applying new config to window "
+                            + ((Object) this.mWindowAttributes.getTitle())
+                            + ", globalConfig: "
+                            + globalConfig
+                            + ", overrideConfig: "
+                            + overrideConfig);
         }
         CompatibilityInfo ci = this.mDisplay.getDisplayAdjustments().getCompatibilityInfo();
         if (!ci.equals(CompatibilityInfo.DEFAULT_COMPATIBILITY_INFO)) {
             globalConfig = new Configuration(globalConfig);
             ci.applyToConfiguration(this.mNoncompatDensity, globalConfig);
         }
-        Configuration lastOverrideConfig = this.mLastReportedMergedConfiguration.getOverrideConfiguration();
+        Configuration lastOverrideConfig =
+                this.mLastReportedMergedConfiguration.getOverrideConfiguration();
         boolean changeNightDim = lastOverrideConfig.nightDim != globalConfig.nightDim;
         if (changeNightDim) {
-            boolean isDeskTopModeEnabled = this.mContext.getResources().getConfiguration().semDesktopModeEnabled == 1;
+            boolean isDeskTopModeEnabled =
+                    this.mContext.getResources().getConfiguration().semDesktopModeEnabled == 1;
             if (!isDeskTopModeEnabled) {
                 int nightDimLevel = globalConfig.nightDim;
                 ThreadedRenderer threadedRenderer = this.mAttachInfo.mThreadedRenderer;
                 ThreadedRenderer.setNightDimText(nightDimLevel);
-                Log.i(this.mTag, "performConfigurationChange setNightDimText nightDimLevel=" + nightDimLevel);
+                Log.i(
+                        this.mTag,
+                        "performConfigurationChange setNightDimText nightDimLevel="
+                                + nightDimLevel);
                 invalidateWorld(this.mView);
             }
         }
         boolean changeNightDim2 = CoreRune.MW_CAPTION_SHELL_BUG_FIX;
         if (changeNightDim2 && (this.mWindowSession instanceof WindowlessWindowManager)) {
-            Rect lastBounds = this.mLastReportedMergedConfiguration.getOverrideConfiguration().windowConfiguration.getBounds();
+            Rect lastBounds =
+                    this.mLastReportedMergedConfiguration
+                            .getOverrideConfiguration()
+                            .windowConfiguration
+                            .getBounds();
             Rect newBounds = overrideConfig.windowConfiguration.getBounds();
-            if (!lastBounds.equals(newBounds) && this.mAttachInfo != null && this.mAttachInfo.mThreadedRenderer != null) {
+            if (!lastBounds.equals(newBounds)
+                    && this.mAttachInfo != null
+                    && this.mAttachInfo.mThreadedRenderer != null) {
                 this.mAttachInfo.mThreadedRenderer.setLightCenter(this.mAttachInfo, newBounds);
             }
         }
@@ -4606,7 +5481,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
         this.mForceNextConfigUpdate = force;
         if (this.mActivityConfigCallback != null) {
-            this.mActivityConfigCallback.onConfigurationChanged(overrideConfig, newDisplayId, activityWindowInfo);
+            this.mActivityConfigCallback.onConfigurationChanged(
+                    overrideConfig, newDisplayId, activityWindowInfo);
         } else {
             updateConfiguration(newDisplayId);
         }
@@ -4636,7 +5512,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         int lastLayoutDirection = this.mLastConfigurationFromResources.getLayoutDirection();
         int currentLayoutDirection = resConfig.getLayoutDirection();
         this.mLastConfigurationFromResources.setTo(resConfig);
-        if (lastLayoutDirection != currentLayoutDirection && this.mView != null && this.mViewLayoutDirectionInitial == 2) {
+        if (lastLayoutDirection != currentLayoutDirection
+                && this.mView != null
+                && this.mViewLayoutDirectionInitial == 2) {
             this.mView.setLayoutDirection(currentLayoutDirection);
         }
     }
@@ -4669,8 +5547,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     final class ViewRootHandler extends Handler {
-        ViewRootHandler() {
-        }
+        ViewRootHandler() {}
 
         @Override // android.os.Handler
         public String getMessageName(Message message) {
@@ -4757,7 +5634,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         @Override // android.os.Handler
         public boolean sendMessageAtTime(Message msg, long uptimeMillis) {
             if (msg.what == 26 && msg.obj == null) {
-                throw new NullPointerException("Attempted to call MSG_REQUEST_KEYBOARD_SHORTCUTS with null receiver:");
+                throw new NullPointerException(
+                        "Attempted to call MSG_REQUEST_KEYBOARD_SHORTCUTS with null receiver:");
             }
             return super.sendMessageAtTime(msg, uptimeMillis);
         }
@@ -4801,7 +5679,17 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     int displayId = args.argi3;
                     int syncSeqId = args.argi4;
                     boolean dragResizing = args.argi5 != 0;
-                    ViewRootImpl.this.handleResized(frames, reportDraw, mergedConfiguration, insetsState, forceLayout, alwaysConsumeSystemBars, displayId, syncSeqId, dragResizing, activityWindowInfo);
+                    ViewRootImpl.this.handleResized(
+                            frames,
+                            reportDraw,
+                            mergedConfiguration,
+                            insetsState,
+                            forceLayout,
+                            alwaysConsumeSystemBars,
+                            displayId,
+                            syncSeqId,
+                            dragResizing,
+                            activityWindowInfo);
                     args.recycle();
                     return;
                 case 6:
@@ -4865,14 +5753,29 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     return;
                 case 18:
                     Configuration config = (Configuration) msg.obj;
-                    if (config.isOtherSeqNewer(ViewRootImpl.this.mLastReportedMergedConfiguration.getMergedConfiguration())) {
-                        config = ViewRootImpl.this.mLastReportedMergedConfiguration.getGlobalConfiguration();
+                    if (config.isOtherSeqNewer(
+                            ViewRootImpl.this.mLastReportedMergedConfiguration
+                                    .getMergedConfiguration())) {
+                        config =
+                                ViewRootImpl.this.mLastReportedMergedConfiguration
+                                        .getGlobalConfiguration();
                     }
-                    ViewRootImpl.this.mPendingMergedConfiguration.setConfiguration(config, ViewRootImpl.this.mLastReportedMergedConfiguration.getOverrideConfiguration());
+                    ViewRootImpl.this.mPendingMergedConfiguration.setConfiguration(
+                            config,
+                            ViewRootImpl.this.mLastReportedMergedConfiguration
+                                    .getOverrideConfiguration());
                     if (ViewRootImpl.this.mPendingActivityWindowInfo != null) {
-                        ViewRootImpl.this.mPendingActivityWindowInfo.set(ViewRootImpl.this.mLastReportedActivityWindowInfo);
+                        ViewRootImpl.this.mPendingActivityWindowInfo.set(
+                                ViewRootImpl.this.mLastReportedActivityWindowInfo);
                     }
-                    ViewRootImpl.this.performConfigurationChange(new MergedConfiguration(ViewRootImpl.this.mPendingMergedConfiguration), false, -1, ViewRootImpl.this.mPendingActivityWindowInfo != null ? new ActivityWindowInfo(ViewRootImpl.this.mPendingActivityWindowInfo) : null);
+                    ViewRootImpl.this.performConfigurationChange(
+                            new MergedConfiguration(ViewRootImpl.this.mPendingMergedConfiguration),
+                            false,
+                            -1,
+                            ViewRootImpl.this.mPendingActivityWindowInfo != null
+                                    ? new ActivityWindowInfo(
+                                            ViewRootImpl.this.mPendingActivityWindowInfo)
+                                    : null);
                     return;
                 case 19:
                     ViewRootImpl.this.mProcessInputEventsScheduled = false;
@@ -4921,7 +5824,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 case 29:
                     SomeArgs args3 = (SomeArgs) msg.obj;
                     InsetsState insetsState2 = (InsetsState) args3.arg1;
-                    InsetsSourceControl.Array activeControls = (InsetsSourceControl.Array) args3.arg2;
+                    InsetsSourceControl.Array activeControls =
+                            (InsetsSourceControl.Array) args3.arg2;
                     ViewRootImpl.this.handleInsetsControlChanged(insetsState2, activeControls);
                     args3.recycle();
                     return;
@@ -4932,7 +5836,12 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     ImeTracker.Token statsToken = (ImeTracker.Token) msg.obj;
                     ImeTracker.forLogging().onProgress(statsToken, 30);
                     if (ViewRootImpl.this.mView == null) {
-                        Log.e(ViewRootImpl.TAG, String.format("Calling showInsets(%d,%b) on window that no longer has views.", Integer.valueOf(msg.arg1), Boolean.valueOf(msg.arg2 == 1)));
+                        Log.e(
+                                ViewRootImpl.TAG,
+                                String.format(
+                                        "Calling showInsets(%d,%b) on window that no longer has"
+                                            + " views.",
+                                        Integer.valueOf(msg.arg1), Boolean.valueOf(msg.arg2 == 1)));
                     }
                     ViewRootImpl.this.clearLowProfileModeIfNeeded(msg.arg1, msg.arg2 == 1);
                     ViewRootImpl.this.mInsetsController.show(msg.arg1, msg.arg2 == 1, statsToken);
@@ -4943,7 +5852,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     ViewRootImpl.this.mInsetsController.hide(msg.arg1, msg.arg2 == 1, statsToken2);
                     return;
                 case 33:
-                    ViewRootImpl.this.handleScrollCaptureRequest((IScrollCaptureResponseListener) msg.obj);
+                    ViewRootImpl.this.handleScrollCaptureRequest(
+                            (IScrollCaptureResponseListener) msg.obj);
                     return;
                 case 34:
                     ViewRootImpl.this.handleWindowTouchModeChanged();
@@ -4963,7 +5873,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     ViewRootImpl.this.decorViewInterceptionChanged(msg.arg1 == 1);
                     return;
                 case 39:
-                    if (CoreRune.FW_DVRR_TOOLKIT_PROLONG_TOUCH_BOOST && ViewRootImpl.this.mIsDragging) {
+                    if (CoreRune.FW_DVRR_TOOLKIT_PROLONG_TOUCH_BOOST
+                            && ViewRootImpl.this.mIsDragging) {
                         ViewRootImpl.this.mHandler.removeMessages(39);
                         ViewRootImpl.this.mHandler.sendEmptyMessageDelayed(39, 750L);
                         ViewRootImpl.this.mIsDragging = false;
@@ -4980,8 +5891,12 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     }
                     return;
                 case 40:
-                    if (!ViewRootImpl.this.mIsTouchBoosting && !ViewRootImpl.this.mIsFrameRateBoosting && !ViewRootImpl.this.mInsetsAnimationRunning) {
-                        delta = (System.nanoTime() / 1000000) - ViewRootImpl.this.mLastUpdateTimeMillis;
+                    if (!ViewRootImpl.this.mIsTouchBoosting
+                            && !ViewRootImpl.this.mIsFrameRateBoosting
+                            && !ViewRootImpl.this.mInsetsAnimationRunning) {
+                        delta =
+                                (System.nanoTime() / 1000000)
+                                        - ViewRootImpl.this.mLastUpdateTimeMillis;
                     } else {
                         delta = 0;
                     }
@@ -4996,8 +5911,10 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                             ViewRootImpl.this.mFrameRateCategoryChangeReason = 201326592;
                         }
                         ViewRootImpl.this.updateFrameRateFromThreadedRendererViews();
-                        ViewRootImpl.this.setPreferredFrameRate(ViewRootImpl.this.mPreferredFrameRate);
-                        ViewRootImpl.this.setPreferredFrameRateCategory(ViewRootImpl.this.mPreferredFrameRateCategory);
+                        ViewRootImpl.this.setPreferredFrameRate(
+                                ViewRootImpl.this.mPreferredFrameRate);
+                        ViewRootImpl.this.setPreferredFrameRateCategory(
+                                ViewRootImpl.this.mPreferredFrameRateCategory);
                         ViewRootImpl.this.mInvalidationIdleMessagePosted = false;
                         ViewRootImpl.this.mIsPressedGesture = false;
                         return;
@@ -5071,7 +5988,12 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         try {
             return inTouchMode ? enterTouchMode() : leaveTouchMode();
         } catch (IllegalArgumentException ex) {
-            Log.e(TAG, "ensureTouchModeLocally() error occurred. inTouchMode=" + inTouchMode + " " + ex);
+            Log.e(
+                    TAG,
+                    "ensureTouchModeLocally() error occurred. inTouchMode="
+                            + inTouchMode
+                            + " "
+                            + ex);
             ex.printStackTrace();
             return false;
         }
@@ -5079,7 +6001,10 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     private boolean enterTouchMode() {
         View focused;
-        if (this.mView == null || !this.mView.hasFocus() || (focused = this.mView.findFocus()) == null || focused.isFocusableInTouchMode()) {
+        if (this.mView == null
+                || !this.mView.hasFocus()
+                || (focused = this.mView.findFocus()) == null
+                || focused.isFocusableInTouchMode()) {
             return false;
         }
         ViewGroup ancestorToTakeFocus = findAncestorToTakeFocusInTouchMode(focused);
@@ -5094,7 +6019,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         ViewParent parent = focused.getParent();
         while (parent instanceof ViewGroup) {
             ViewGroup vgParent = (ViewGroup) parent;
-            if (vgParent.getDescendantFocusability() == 262144 && vgParent.isFocusableInTouchMode()) {
+            if (vgParent.getDescendantFocusability() == 262144
+                    && vgParent.isFocusableInTouchMode()) {
                 return vgParent;
             }
             if (vgParent.isRootNamespace()) {
@@ -5111,7 +6037,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
         if (this.mView.hasFocus()) {
             View focusedView = this.mView.findFocus();
-            if (!(focusedView instanceof ViewGroup) || ((ViewGroup) focusedView).getDescendantFocusability() != 262144) {
+            if (!(focusedView instanceof ViewGroup)
+                    || ((ViewGroup) focusedView).getDescendantFocusability() != 262144) {
                 return false;
             }
         }
@@ -5147,7 +6074,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         int N = event.getPointerCount();
         float SvarX = 0.0f;
         if (this.mContext != null) {
-            WindowManager wm = (WindowManager) this.mContext.getSystemService(Context.WINDOW_SERVICE);
+            WindowManager wm =
+                    (WindowManager) this.mContext.getSystemService(Context.WINDOW_SERVICE);
             Display disp = wm.getDefaultDisplay();
             DisplayMetrics metrics = new DisplayMetrics();
             disp.getMetrics(metrics);
@@ -5169,8 +6097,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         while (i2 < N) {
             ArrayList<Float> xList2 = xList;
             ArrayList<Float> yList2 = yList;
-            SvarX += (float) Math.sqrt((xList.get(i2).floatValue() - SmeanX) * (xList.get(i2).floatValue() - SmeanX));
-            if (event.getPalm(i2) == 1.0f || event.getPalm(i2) == 2.0f || event.getPalm(i2) == 3.0f) {
+            SvarX +=
+                    (float)
+                            Math.sqrt(
+                                    (xList.get(i2).floatValue() - SmeanX)
+                                            * (xList.get(i2).floatValue() - SmeanX));
+            if (event.getPalm(i2) == 1.0f
+                    || event.getPalm(i2) == 2.0f
+                    || event.getPalm(i2) == 3.0f) {
                 bPalm = true;
             }
             i2++;
@@ -5182,10 +6116,24 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             Log.i(TAG, "[ViewRootImpl] action cancel - 1, eccen:" + SsumEccen);
             return true;
         }
-        if (event.getToolType(0) != 1 || SsumMajor < 100.0f || SsumEccen <= 2.0f || SvarX2 >= TILT_TO_ZOOM_XVAR / (N + 4)) {
+        if (event.getToolType(0) != 1
+                || SsumMajor < 100.0f
+                || SsumEccen <= 2.0f
+                || SvarX2 >= TILT_TO_ZOOM_XVAR / (N + 4)) {
             return false;
         }
-        Log.i(TAG, "[ViewRootImpl] action cancel - 2, Palm Sweep, SsumMajor:" + SsumMajor + " eccen:" + SsumEccen + " varX:" + SvarX2 + " TILT_TO_ZOOM_XVAR" + TILT_TO_ZOOM_XVAR + " N" + N);
+        Log.i(
+                TAG,
+                "[ViewRootImpl] action cancel - 2, Palm Sweep, SsumMajor:"
+                        + SsumMajor
+                        + " eccen:"
+                        + SsumEccen
+                        + " varX:"
+                        + SvarX2
+                        + " TILT_TO_ZOOM_XVAR"
+                        + TILT_TO_ZOOM_XVAR
+                        + " N"
+                        + N);
         return true;
     }
 
@@ -5276,15 +6224,30 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         protected boolean shouldDropInputEvent(QueuedInputEvent q) {
             String reason;
             if (ViewRootImpl.this.mView == null || !ViewRootImpl.this.mAdded) {
-                Slog.w(ViewRootImpl.this.mTag, "Dropping event due to root view being removed: " + q.mEvent);
-                Slog.e(ViewRootImpl.this.mTag, "mStopped=" + ViewRootImpl.this.mStopped + " mHasWindowFocus=" + ViewRootImpl.this.mAttachInfo.mHasWindowFocus + " mPausedForTransition=" + ViewRootImpl.this.mPausedForTransition);
+                Slog.w(
+                        ViewRootImpl.this.mTag,
+                        "Dropping event due to root view being removed: " + q.mEvent);
+                Slog.e(
+                        ViewRootImpl.this.mTag,
+                        "mStopped="
+                                + ViewRootImpl.this.mStopped
+                                + " mHasWindowFocus="
+                                + ViewRootImpl.this.mAttachInfo.mHasWindowFocus
+                                + " mPausedForTransition="
+                                + ViewRootImpl.this.mPausedForTransition);
                 return true;
             }
             boolean hasWindowFocus = ViewRootImpl.this.mAttachInfo.mHasWindowFocus;
-            if ((ViewRootImpl.this.mView instanceof DecorView) && (q.mEvent instanceof KeyEvent) && ((KeyEvent) q.mEvent).getKeyCode() == 4) {
+            if ((ViewRootImpl.this.mView instanceof DecorView)
+                    && (q.mEvent instanceof KeyEvent)
+                    && ((KeyEvent) q.mEvent).getKeyCode() == 4) {
                 hasWindowFocus |= ((DecorView) ViewRootImpl.this.mView).hasWindowFocusInTask();
             }
-            if (!hasWindowFocus && ((!ViewRootImpl.this.mProcessingBackKey || !isBack(q.mEvent)) && (ViewRootImpl.this.mWindowAttributes.samsungFlags & 65536) == 0 && !q.mEvent.isFromSource(2) && !ViewRootImpl.this.isAutofillUiShowing())) {
+            if (!hasWindowFocus
+                    && ((!ViewRootImpl.this.mProcessingBackKey || !isBack(q.mEvent))
+                            && (ViewRootImpl.this.mWindowAttributes.samsungFlags & 65536) == 0
+                            && !q.mEvent.isFromSource(2)
+                            && !ViewRootImpl.this.isAutofillUiShowing())) {
                 reason = "no window focus";
             } else if (ViewRootImpl.this.mStopped) {
                 reason = "window is stopped";
@@ -5299,11 +6262,25 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             if (ViewRootImpl.isTerminalInputEvent(q.mEvent)) {
                 q.mEvent.cancel();
                 Slog.w(ViewRootImpl.this.mTag, "Cancelling event (" + reason + "):" + q.mEvent);
-                Slog.e(ViewRootImpl.this.mTag, "mStopped=" + ViewRootImpl.this.mStopped + " mHasWindowFocus=" + ViewRootImpl.this.mAttachInfo.mHasWindowFocus + " mPausedForTransition=" + ViewRootImpl.this.mPausedForTransition);
+                Slog.e(
+                        ViewRootImpl.this.mTag,
+                        "mStopped="
+                                + ViewRootImpl.this.mStopped
+                                + " mHasWindowFocus="
+                                + ViewRootImpl.this.mAttachInfo.mHasWindowFocus
+                                + " mPausedForTransition="
+                                + ViewRootImpl.this.mPausedForTransition);
                 return false;
             }
             Slog.w(ViewRootImpl.this.mTag, "Dropping event (" + reason + "):" + q.mEvent);
-            Slog.e(ViewRootImpl.this.mTag, "mStopped=" + ViewRootImpl.this.mStopped + " mHasWindowFocus=" + ViewRootImpl.this.mAttachInfo.mHasWindowFocus + " mPausedForTransition=" + ViewRootImpl.this.mPausedForTransition);
+            Slog.e(
+                    ViewRootImpl.this.mTag,
+                    "mStopped="
+                            + ViewRootImpl.this.mStopped
+                            + " mHasWindowFocus="
+                            + ViewRootImpl.this.mAttachInfo.mHasWindowFocus
+                            + " mPausedForTransition="
+                            + ViewRootImpl.this.mPausedForTransition);
             return true;
         }
 
@@ -5324,7 +6301,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             if (this.mTracePrefix == null) {
                 this.mTracePrefix = getClass().getSimpleName();
             }
-            Trace.traceBegin(traceTag, this.mTracePrefix + " id=0x" + Integer.toHexString(q.mEvent.getId()));
+            Trace.traceBegin(
+                    traceTag, this.mTracePrefix + " id=0x" + Integer.toHexString(q.mEvent.getId()));
         }
     }
 
@@ -5437,7 +6415,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
     }
 
-    final class NativePreImeInputStage extends AsyncInputStage implements InputQueue.FinishedInputEventCallback {
+    final class NativePreImeInputStage extends AsyncInputStage
+            implements InputQueue.FinishedInputEventCallback {
         public NativePreImeInputStage(InputStage next, String traceCounter) {
             super(next, traceCounter);
         }
@@ -5453,7 +6432,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                         }
                         return 0;
                     }
-                    if (ViewRootImpl.this.mContext != null && ViewRootImpl.this.mOnBackInvokedDispatcher.isOnBackInvokedCallbackEnabled()) {
+                    if (ViewRootImpl.this.mContext != null
+                            && ViewRootImpl.this.mOnBackInvokedDispatcher
+                                    .isOnBackInvokedCallbackEnabled()) {
                         return doOnBackKeyEvent(keyEvent);
                     }
                 }
@@ -5467,12 +6448,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
         /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
         private int doOnBackKeyEvent(KeyEvent keyEvent) {
-            WindowOnBackInvokedDispatcher dispatcher = ViewRootImpl.this.getOnBackInvokedDispatcher();
+            WindowOnBackInvokedDispatcher dispatcher =
+                    ViewRootImpl.this.getOnBackInvokedDispatcher();
             OnBackInvokedCallback topCallback = dispatcher.getTopCallback();
             if (dispatcher.isBackGestureInProgress()) {
                 return 2;
             }
-            if ((topCallback instanceof OnBackAnimationCallback) && !(topCallback instanceof ImeBackAnimationController)) {
+            if ((topCallback instanceof OnBackAnimationCallback)
+                    && !(topCallback instanceof ImeBackAnimationController)) {
                 OnBackAnimationCallback animationCallback = (OnBackAnimationCallback) topCallback;
                 switch (keyEvent.getAction()) {
                     case 0:
@@ -5495,7 +6478,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     topCallback.onBackInvoked();
                     return 1;
                 }
-                Log.d(ViewRootImpl.this.mTag, "Skip onBackInvoked(), reason: keyEvent.isCanceled=true");
+                Log.d(
+                        ViewRootImpl.this.mTag,
+                        "Skip onBackInvoked(), reason: keyEvent.isCanceled=true");
             }
             return 2;
         }
@@ -5530,8 +6515,12 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         private int processKeyEvent(QueuedInputEvent q) {
             KeyEvent event = (KeyEvent) q.mEvent;
             if (ViewRootImpl.this.mDesktopMode) {
-                if (ViewRootImpl.this.mAttachInfo.mDragToken != null && event.getKeyCode() == 4 && event.getAction() == 0) {
-                    Log.i(ViewRootImpl.this.mTag, "Back key during drag in dex. Cancel drag and drop.");
+                if (ViewRootImpl.this.mAttachInfo.mDragToken != null
+                        && event.getKeyCode() == 4
+                        && event.getAction() == 0) {
+                    Log.i(
+                            ViewRootImpl.this.mTag,
+                            "Back key during drag in dex. Cancel drag and drop.");
                     this.mIsBackKeyDuringDrag = true;
                     ViewRootImpl.this.mView.cancelDragAndDrop();
                 }
@@ -5542,18 +6531,26 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     return 1;
                 }
             }
-            return ((ViewRune.WIDGET_PEN_SUPPORTED && ViewRootImpl.this.mView.dispatchKeyEventTextMultiSelection(event)) || ViewRootImpl.this.mView.dispatchKeyEventPreIme(event)) ? 1 : 0;
+            return ((ViewRune.WIDGET_PEN_SUPPORTED
+                                    && ViewRootImpl.this.mView.dispatchKeyEventTextMultiSelection(
+                                            event))
+                            || ViewRootImpl.this.mView.dispatchKeyEventPreIme(event))
+                    ? 1
+                    : 0;
         }
     }
 
-    final class ImeInputStage extends AsyncInputStage implements InputMethodManager.FinishedInputEventCallback {
+    final class ImeInputStage extends AsyncInputStage
+            implements InputMethodManager.FinishedInputEventCallback {
         public ImeInputStage(InputStage next, String traceCounter) {
             super(next, traceCounter);
         }
 
         @Override // android.view.ViewRootImpl.InputStage
         protected int onProcess(QueuedInputEvent q) {
-            int result = ViewRootImpl.this.mImeFocusController.onProcessImeInputStage(q, q.mEvent, ViewRootImpl.this.mWindowAttributes, this);
+            int result =
+                    ViewRootImpl.this.mImeFocusController.onProcessImeInputStage(
+                            q, q.mEvent, ViewRootImpl.this.mWindowAttributes, this);
             switch (result) {
                 case -1:
                     return 3;
@@ -5648,9 +6645,11 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 ViewRootImpl.this.mLastTouchDeviceId = event.getDeviceId();
                 ViewRootImpl.this.mLastTouchPointerId = event.getPointerId(0);
                 if (event.getActionMasked() == 1) {
-                    ViewRootImpl.this.mLastClickToolType = event.getToolType(event.getActionIndex());
+                    ViewRootImpl.this.mLastClickToolType =
+                            event.getToolType(event.getActionIndex());
                 }
-                if (event.mNeedWindowOffset && (translator = ViewRootImpl.this.getCompatTranslator()) != null) {
+                if (event.mNeedWindowOffset
+                        && (translator = ViewRootImpl.this.getCompatTranslator()) != null) {
                     translator.translateToScreen(ViewRootImpl.this.mLastTouchPoint);
                 }
             }
@@ -5658,7 +6657,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
     }
 
-    final class NativePostImeInputStage extends AsyncInputStage implements InputQueue.FinishedInputEventCallback {
+    final class NativePostImeInputStage extends AsyncInputStage
+            implements InputQueue.FinishedInputEventCallback {
         public NativePostImeInputStage(InputStage next, String traceCounter) {
             super(next, traceCounter);
         }
@@ -5705,7 +6705,10 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
         @Override // android.view.ViewRootImpl.InputStage
         protected void onDeliverToNext(QueuedInputEvent q) {
-            if (ViewRootImpl.this.mUnbufferedInputDispatch && (q.mEvent instanceof MotionEvent) && ((MotionEvent) q.mEvent).isTouchEvent() && ViewRootImpl.isTerminalInputEvent(q.mEvent)) {
+            if (ViewRootImpl.this.mUnbufferedInputDispatch
+                    && (q.mEvent instanceof MotionEvent)
+                    && ((MotionEvent) q.mEvent).isTouchEvent()
+                    && ViewRootImpl.isTerminalInputEvent(q.mEvent)) {
                 ViewRootImpl.this.mUnbufferedInputDispatch = false;
                 ViewRootImpl.this.scheduleConsumeBatchedInput();
             }
@@ -5760,12 +6763,17 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                         }
                         focused.getFocusedRect(ViewRootImpl.this.mTempRect);
                         if (ViewRootImpl.this.mView instanceof ViewGroup) {
-                            ((ViewGroup) ViewRootImpl.this.mView).offsetDescendantRectToMyCoords(focused, ViewRootImpl.this.mTempRect);
-                            ((ViewGroup) ViewRootImpl.this.mView).offsetRectIntoDescendantCoords(v, ViewRootImpl.this.mTempRect);
+                            ((ViewGroup) ViewRootImpl.this.mView)
+                                    .offsetDescendantRectToMyCoords(
+                                            focused, ViewRootImpl.this.mTempRect);
+                            ((ViewGroup) ViewRootImpl.this.mView)
+                                    .offsetRectIntoDescendantCoords(v, ViewRootImpl.this.mTempRect);
                         }
                         if (v.requestFocus(direction, ViewRootImpl.this.mTempRect)) {
                             boolean isFastScrolling = event.getRepeatCount() > 0;
-                            ViewRootImpl.this.playSoundEffect(SoundEffectConstants.getConstantForFocusDirection(direction, isFastScrolling));
+                            ViewRootImpl.this.playSoundEffect(
+                                    SoundEffectConstants.getConstantForFocusDirection(
+                                            direction, isFastScrolling));
                             return true;
                         }
                     } else if (moveFocusToAdjacentWindow(direction)) {
@@ -5774,7 +6782,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     if (ViewRootImpl.this.mView.dispatchUnhandledMove(focused, direction)) {
                         return true;
                     }
-                } else if (ViewRootImpl.this.mView.restoreDefaultFocus() || moveFocusToAdjacentWindow(direction)) {
+                } else if (ViewRootImpl.this.mView.restoreDefaultFocus()
+                        || moveFocusToAdjacentWindow(direction)) {
                     return true;
                 }
             }
@@ -5786,7 +6795,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 return false;
             }
             try {
-                return ViewRootImpl.this.mWindowSession.moveFocusToAdjacentWindow(ViewRootImpl.this.mWindow, direction);
+                return ViewRootImpl.this.mWindowSession.moveFocusToAdjacentWindow(
+                        ViewRootImpl.this.mWindow, direction);
             } catch (RemoteException e) {
                 return false;
             }
@@ -5811,12 +6821,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 if (!cluster.restoreFocusNotInCluster()) {
                     cluster = ViewRootImpl.this.keyboardNavigationClusterSearch(null, direction);
                 } else {
-                    ViewRootImpl.this.playSoundEffect(SoundEffectConstants.getContantForFocusDirection(direction));
+                    ViewRootImpl.this.playSoundEffect(
+                            SoundEffectConstants.getContantForFocusDirection(direction));
                     return true;
                 }
             }
             if (cluster != null && cluster.restoreFocusInCluster(realDirection)) {
-                ViewRootImpl.this.playSoundEffect(SoundEffectConstants.getContantForFocusDirection(direction));
+                ViewRootImpl.this.playSoundEffect(
+                        SoundEffectConstants.getContantForFocusDirection(direction));
                 return true;
             }
             return false;
@@ -5830,7 +6842,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             }
             Log.i(ViewRootImpl.this.mTag, "ViewPostIme key " + event.getAction());
             if (ViewRootImpl.this.mView.dispatchKeyEvent(event)) {
-                if (InputRune.KNOX_CAPTURE_XCOVER_OR_TOP_KEY && (((keycode = event.getKeyCode()) == 1015 || keycode == 1079) && SystemProperties.getInt("sys.datawedge.prop", 0) == 1)) {
+                if (InputRune.KNOX_CAPTURE_XCOVER_OR_TOP_KEY
+                        && (((keycode = event.getKeyCode()) == 1015 || keycode == 1079)
+                                && SystemProperties.getInt("sys.datawedge.prop", 0) == 1)) {
                     ViewRootImpl.this.mFallbackEventHandler.dispatchKeyEvent(event);
                 }
                 return 1;
@@ -5849,7 +6863,11 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     groupNavigationDirection = 1;
                 }
             }
-            if (event.getAction() == 0 && !KeyEvent.metaStateHasNoModifiers(event.getMetaState()) && event.getRepeatCount() == 0 && !KeyEvent.isModifierKey(event.getKeyCode()) && groupNavigationDirection == 0) {
+            if (event.getAction() == 0
+                    && !KeyEvent.metaStateHasNoModifiers(event.getMetaState())
+                    && event.getRepeatCount() == 0
+                    && !KeyEvent.isModifierKey(event.getKeyCode())
+                    && groupNavigationDirection == 0) {
                 if (ViewRootImpl.this.mView.dispatchKeyShortcutEvent(event)) {
                     return 1;
                 }
@@ -5886,7 +6904,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 ViewRootImpl.this.mMotionEventMonitor.dispatchInputEvent(q.mEvent);
             }
             boolean handled = false;
-            if (!com.android.text.flags.Flags.disableHandwritingInitiatorForIme() || ViewRootImpl.this.mWindowAttributes.type != 2011) {
+            if (!com.android.text.flags.Flags.disableHandwritingInitiatorForIme()
+                    || ViewRootImpl.this.mWindowAttributes.type != 2011) {
                 handled = ViewRootImpl.this.mHandwritingInitiator.onTouchEvent(event);
             }
             if (handled) {
@@ -5894,7 +6913,12 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             }
             if (ViewRootImpl.DEBUG_TOUCH_EVENT) {
                 Log.i(ViewRootImpl.this.mTag, "ViewPostIme pointer " + action);
-            } else if (action == 0 || action == 1 || (ViewRune.COMMON_IS_PRODUCT_DEV && action != 2 && action != 7 && action != 213)) {
+            } else if (action == 0
+                    || action == 1
+                    || (ViewRune.COMMON_IS_PRODUCT_DEV
+                            && action != 2
+                            && action != 7
+                            && action != 213)) {
                 Log.i(ViewRootImpl.this.mTag, "ViewPostIme pointer " + action);
             }
             if (CoreRune.MW_SPLIT_IS_FLEX_SCROLL_WHEEL && (event.getFlags() & 1048576) != 0) {
@@ -5906,13 +6930,16 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             maybeUpdatePointerIcon(event);
             ViewRootImpl.this.maybeUpdateTooltip(event);
             ViewRootImpl.this.mAttachInfo.mHandlingPointerEvent = false;
-            if (ViewRootImpl.this.mAttachInfo.mUnbufferedDispatchRequested && !ViewRootImpl.this.mUnbufferedInputDispatch) {
+            if (ViewRootImpl.this.mAttachInfo.mUnbufferedDispatchRequested
+                    && !ViewRootImpl.this.mUnbufferedInputDispatch) {
                 ViewRootImpl.this.mUnbufferedInputDispatch = true;
                 if (ViewRootImpl.this.mConsumeBatchedInputScheduled) {
                     ViewRootImpl.this.scheduleConsumeBatchedInputImmediately();
                 }
             }
-            if (handled2 && ViewRootImpl.this.shouldTouchBoost(action & 255, ViewRootImpl.this.mWindowAttributes.type)) {
+            if (handled2
+                    && ViewRootImpl.this.shouldTouchBoost(
+                            action & 255, ViewRootImpl.this.mWindowAttributes.type)) {
                 ViewRootImpl.this.mIsTouchBoosting = true;
                 if (action == 0) {
                     ViewRootImpl.this.mIsPressedGesture = true;
@@ -5930,7 +6957,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 ViewRootImpl.this.mHandler.sendEmptyMessageDelayed(39, 3000L);
             }
             if (CoreRune.FW_VRR_SEND_TOUCH_HINT) {
-                if (handled2 && ViewRootImpl.this.shouldTouchHint(action & 255, ViewRootImpl.this.mWindowAttributes.type)) {
+                if (handled2
+                        && ViewRootImpl.this.shouldTouchHint(
+                                action & 255, ViewRootImpl.this.mWindowAttributes.type)) {
                     ViewRootImpl.this.mIsTouchHint = true;
                     ViewRootImpl.this.setFrameRateCategoryForTouchHint(4);
                 }
@@ -5944,8 +6973,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
         private void maybeUpdatePointerIcon(MotionEvent event) {
             boolean needsStylusPointerIcon = true;
-            if (event.getPointerCount() != 1) {
-            }
+            if (event.getPointerCount() != 1) {}
             int action = event.getActionMasked();
             if (event.isStylusPointer()) {
                 if (!event.isHoverEvent() && event.getActionMasked() != 0) {
@@ -5960,7 +6988,10 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             if (action == 9 || action == 10) {
                 ViewRootImpl.this.mResolvedPointerIcon = null;
             }
-            if (action != 10 && action != 4 && !ViewRootImpl.this.updatePointerIcon(event) && action == 7) {
+            if (action != 10
+                    && action != 4
+                    && !ViewRootImpl.this.updatePointerIcon(event)
+                    && action == 7) {
                 ViewRootImpl.this.mResolvedPointerIcon = null;
             }
             switch (action) {
@@ -5981,12 +7012,23 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
         private int processTrackballEvent(QueuedInputEvent q) {
             MotionEvent event = (MotionEvent) q.mEvent;
-            return ((!event.isFromSource(InputDevice.SOURCE_MOUSE_RELATIVE) || (ViewRootImpl.this.hasPointerCapture() && !ViewRootImpl.this.mView.dispatchCapturedPointerEvent(event))) && !ViewRootImpl.this.mView.dispatchTrackballEvent(event)) ? 0 : 1;
+            return ((!event.isFromSource(InputDevice.SOURCE_MOUSE_RELATIVE)
+                                    || (ViewRootImpl.this.hasPointerCapture()
+                                            && !ViewRootImpl.this.mView
+                                                    .dispatchCapturedPointerEvent(event)))
+                            && !ViewRootImpl.this.mView.dispatchTrackballEvent(event))
+                    ? 0
+                    : 1;
         }
 
         private int processGenericMotionEvent(QueuedInputEvent q) {
             MotionEvent event = (MotionEvent) q.mEvent;
-            return ((event.isFromSource(InputDevice.SOURCE_TOUCHPAD) && ViewRootImpl.this.hasPointerCapture() && ViewRootImpl.this.mView.dispatchCapturedPointerEvent(event)) || ViewRootImpl.this.mView.dispatchGenericMotionEvent(event)) ? 1 : 0;
+            return ((event.isFromSource(InputDevice.SOURCE_TOUCHPAD)
+                                    && ViewRootImpl.this.hasPointerCapture()
+                                    && ViewRootImpl.this.mView.dispatchCapturedPointerEvent(event))
+                            || ViewRootImpl.this.mView.dispatchGenericMotionEvent(event))
+                    ? 1
+                    : 0;
         }
     }
 
@@ -6046,7 +7088,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             Method dump skipped, instructions count: 360
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.ViewRootImpl.updatePointerIcon(android.view.MotionEvent):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.view.ViewRootImpl.updatePointerIcon(android.view.MotionEvent):boolean");
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -6058,7 +7102,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         if (action != 9 && action != 7 && action != 10) {
             return;
         }
-        if (this.mAccessibilityManager.isEnabled() && this.mAccessibilityManager.isTouchExplorationEnabled()) {
+        if (this.mAccessibilityManager.isEnabled()
+                && this.mAccessibilityManager.isTouchExplorationEnabled()) {
             return;
         }
         if (this.mView == null) {
@@ -6175,8 +7220,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         private final TrackballAxis mX = new TrackballAxis();
         private final TrackballAxis mY = new TrackballAxis();
 
-        SyntheticTrackballHandler() {
-        }
+        SyntheticTrackballHandler() {}
 
         public void process(MotionEvent event) {
             long curTime;
@@ -6199,23 +7243,49 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     curTime = curTime3;
                     this.mX.reset(2);
                     this.mY.reset(2);
-                    ViewRootImpl.this.enqueueInputEvent(new KeyEvent(curTime, curTime, 0, 23, 0, metaState, -1, 0, 1024, 257));
+                    ViewRootImpl.this.enqueueInputEvent(
+                            new KeyEvent(curTime, curTime, 0, 23, 0, metaState, -1, 0, 1024, 257));
                     break;
                 case 1:
                     this.mX.reset(2);
                     this.mY.reset(2);
                     curTime = curTime3;
-                    ViewRootImpl.this.enqueueInputEvent(new KeyEvent(curTime3, curTime3, 1, 23, 0, metaState, -1, 0, 1024, 257));
+                    ViewRootImpl.this.enqueueInputEvent(
+                            new KeyEvent(
+                                    curTime3, curTime3, 1, 23, 0, metaState, -1, 0, 1024, 257));
                     break;
                 default:
                     curTime = curTime3;
                     break;
             }
             if (ViewRootImpl.DEBUG_TRACKBALL) {
-                Log.v(ViewRootImpl.this.mTag, "TB X=" + this.mX.position + " step=" + this.mX.step + " dir=" + this.mX.dir + " acc=" + this.mX.acceleration + " move=" + event.getX() + " / Y=" + this.mY.position + " step=" + this.mY.step + " dir=" + this.mY.dir + " acc=" + this.mY.acceleration + " move=" + event.getY());
+                Log.v(
+                        ViewRootImpl.this.mTag,
+                        "TB X="
+                                + this.mX.position
+                                + " step="
+                                + this.mX.step
+                                + " dir="
+                                + this.mX.dir
+                                + " acc="
+                                + this.mX.acceleration
+                                + " move="
+                                + event.getX()
+                                + " / Y="
+                                + this.mY.position
+                                + " step="
+                                + this.mY.step
+                                + " dir="
+                                + this.mY.dir
+                                + " acc="
+                                + this.mY.acceleration
+                                + " move="
+                                + event.getY());
             }
-            float xOff = this.mX.collect(event.getX(), event.getEventTime(), GnssSignalType.CODE_TYPE_X);
-            float yOff = this.mY.collect(event.getY(), event.getEventTime(), GnssSignalType.CODE_TYPE_Y);
+            float xOff =
+                    this.mX.collect(event.getX(), event.getEventTime(), GnssSignalType.CODE_TYPE_X);
+            float yOff =
+                    this.mY.collect(event.getY(), event.getEventTime(), GnssSignalType.CODE_TYPE_Y);
             int movement = 0;
             if (xOff > yOff) {
                 movement = this.mX.generate();
@@ -6251,7 +7321,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 }
                 int accelMovement = (int) (movement * accel);
                 if (ViewRootImpl.DEBUG_TRACKBALL) {
-                    Log.v(ViewRootImpl.this.mTag, "Move: movement=" + movement + " accelMovement=" + accelMovement + " accel=" + accel);
+                    Log.v(
+                            ViewRootImpl.this.mTag,
+                            "Move: movement="
+                                    + movement
+                                    + " accelMovement="
+                                    + accelMovement
+                                    + " accel="
+                                    + accel);
                 }
                 if (accelMovement <= movement) {
                     str = "Delivering fake DPAD: ";
@@ -6265,7 +7342,18 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     int repeatCount = accelMovement - movement2;
                     str = "Delivering fake DPAD: ";
                     keycode2 = keycode;
-                    ViewRootImpl.this.enqueueInputEvent(new KeyEvent(curTime, curTime, 2, keycode, repeatCount, metaState, -1, 0, 1024, 257));
+                    ViewRootImpl.this.enqueueInputEvent(
+                            new KeyEvent(
+                                    curTime,
+                                    curTime,
+                                    2,
+                                    keycode,
+                                    repeatCount,
+                                    metaState,
+                                    -1,
+                                    0,
+                                    1024,
+                                    257));
                     movement = movement2;
                     curTime2 = curTime;
                 }
@@ -6278,8 +7366,10 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     }
                     long curTime4 = SystemClock.uptimeMillis();
                     int i = keycode2;
-                    ViewRootImpl.this.enqueueInputEvent(new KeyEvent(curTime4, curTime4, 0, i, 0, metaState, -1, 0, 1024, 257));
-                    ViewRootImpl.this.enqueueInputEvent(new KeyEvent(curTime4, curTime4, 1, i, 0, metaState, -1, 0, 1024, 257));
+                    ViewRootImpl.this.enqueueInputEvent(
+                            new KeyEvent(curTime4, curTime4, 0, i, 0, metaState, -1, 0, 1024, 257));
+                    ViewRootImpl.this.enqueueInputEvent(
+                            new KeyEvent(curTime4, curTime4, 1, i, 0, metaState, -1, 0, 1024, 257));
                     movement--;
                     str = str2;
                     keycode2 = keycode2;
@@ -6311,8 +7401,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         float acceleration = 1.0f;
         long lastMoveTime = 0;
 
-        TrackballAxis() {
-        }
+        TrackballAxis() {}
 
         void reset(int _step) {
             this.position = 0.0f;
@@ -6361,7 +7450,19 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                         acc *= scale;
                     }
                     if (ViewRootImpl.DEBUG_TRACKBALL) {
-                        Log.v(ViewRootImpl.TAG, axis + " accelerate: off=" + off + " normTime=" + normTime + " delta=" + delta + " scale=" + scale + " acc=" + acc);
+                        Log.v(
+                                ViewRootImpl.TAG,
+                                axis
+                                        + " accelerate: off="
+                                        + off
+                                        + " normTime="
+                                        + normTime
+                                        + " delta="
+                                        + delta
+                                        + " scale="
+                                        + scale
+                                        + " acc="
+                                        + acc);
                     }
                     float f = MAX_ACCELERATION;
                     if (acc < MAX_ACCELERATION) {
@@ -6374,7 +7475,19 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                         acc /= scale2;
                     }
                     if (ViewRootImpl.DEBUG_TRACKBALL) {
-                        Log.v(ViewRootImpl.TAG, axis + " deccelerate: off=" + off + " normTime=" + normTime + " delta=" + delta + " scale=" + scale2 + " acc=" + acc);
+                        Log.v(
+                                ViewRootImpl.TAG,
+                                axis
+                                        + " deccelerate: off="
+                                        + off
+                                        + " normTime="
+                                        + normTime
+                                        + " delta="
+                                        + delta
+                                        + " scale="
+                                        + scale2
+                                        + " acc="
+                                        + acc);
                     }
                     this.acceleration = acc > 1.0f ? acc : 1.0f;
                 }
@@ -6439,7 +7552,11 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 case 2:
                     if (ViewRootImpl.this.mAttachInfo.mHasWindowFocus) {
                         KeyEvent oldEvent = (KeyEvent) msg.obj;
-                        KeyEvent e = KeyEvent.changeTimeRepeat(oldEvent, SystemClock.uptimeMillis(), oldEvent.getRepeatCount() + 1);
+                        KeyEvent e =
+                                KeyEvent.changeTimeRepeat(
+                                        oldEvent,
+                                        SystemClock.uptimeMillis(),
+                                        oldEvent.getRepeatCount() + 1);
                         ViewRootImpl.this.enqueueInputEvent(e);
                         Message m = obtainMessage(msg.what, e);
                         m.setAsynchronous(true);
@@ -6471,7 +7588,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             for (int i = 0; i < this.mDeviceKeyEvents.size(); i++) {
                 KeyEvent keyEvent = this.mDeviceKeyEvents.valueAt(i);
                 if (keyEvent != null) {
-                    ViewRootImpl.this.enqueueInputEvent(KeyEvent.changeTimeRepeat(keyEvent, SystemClock.uptimeMillis(), 0));
+                    ViewRootImpl.this.enqueueInputEvent(
+                            KeyEvent.changeTimeRepeat(keyEvent, SystemClock.uptimeMillis(), 0));
                 }
             }
             this.mDeviceKeyEvents.clear();
@@ -6482,10 +7600,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             int historySize = event.getHistorySize();
             for (int h = 0; h < historySize; h++) {
                 long time = event.getHistoricalEventTime(h);
-                this.mJoystickAxesState.updateStateForAxis(event, time, 0, event.getHistoricalAxisValue(0, 0, h));
-                this.mJoystickAxesState.updateStateForAxis(event, time, 1, event.getHistoricalAxisValue(1, 0, h));
-                this.mJoystickAxesState.updateStateForAxis(event, time, 15, event.getHistoricalAxisValue(15, 0, h));
-                this.mJoystickAxesState.updateStateForAxis(event, time, 16, event.getHistoricalAxisValue(16, 0, h));
+                this.mJoystickAxesState.updateStateForAxis(
+                        event, time, 0, event.getHistoricalAxisValue(0, 0, h));
+                this.mJoystickAxesState.updateStateForAxis(
+                        event, time, 1, event.getHistoricalAxisValue(1, 0, h));
+                this.mJoystickAxesState.updateStateForAxis(
+                        event, time, 15, event.getHistoricalAxisValue(15, 0, h));
+                this.mJoystickAxesState.updateStateForAxis(
+                        event, time, 16, event.getHistoricalAxisValue(16, 0, h));
             }
             long time2 = event.getEventTime();
             this.mJoystickAxesState.updateStateForAxis(event, time2, 0, event.getAxisValue(0));
@@ -6501,8 +7623,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             final int[] mAxisStatesHat = {0, 0};
             final int[] mAxisStatesStick = {0, 0};
 
-            JoystickAxesState() {
-            }
+            JoystickAxesState() {}
 
             void resetState() {
                 this.mAxisStatesHat[0] = 0;
@@ -6520,7 +7641,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     axisStateIndex = 0;
                     repeatMessage = 1;
                 } else if (!isYAxis(axis)) {
-                    Log.e(ViewRootImpl.this.mTag, "Unexpected axis " + axis + " in updateStateForAxis!");
+                    Log.e(
+                            ViewRootImpl.this.mTag,
+                            "Unexpected axis " + axis + " in updateStateForAxis!");
                     return;
                 } else {
                     axisStateIndex = 1;
@@ -6541,20 +7664,33 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 if (currentState == 1 || currentState == -1) {
                     int keyCode2 = joystickAxisAndStateToKeycode(axis, currentState);
                     if (keyCode2 != 0) {
-                        ViewRootImpl.this.enqueueInputEvent(new KeyEvent(time, time, 1, keyCode2, 0, metaState, deviceId, 0, 1024, source));
+                        ViewRootImpl.this.enqueueInputEvent(
+                                new KeyEvent(
+                                        time, time, 1, keyCode2, 0, metaState, deviceId, 0, 1024,
+                                        source));
                         deviceId = deviceId;
                         SyntheticJoystickHandler.this.mDeviceKeyEvents.put(deviceId, null);
                     }
                     SyntheticJoystickHandler.this.removeMessages(repeatMessage);
                 }
-                if ((newState == 1 || newState == -1) && (keyCode = joystickAxisAndStateToKeycode(axis, newState)) != 0) {
+                if ((newState == 1 || newState == -1)
+                        && (keyCode = joystickAxisAndStateToKeycode(axis, newState)) != 0) {
                     int deviceId2 = deviceId;
-                    KeyEvent keyEvent = new KeyEvent(time, time, 0, keyCode, 0, metaState, deviceId2, 0, 1024, source);
+                    KeyEvent keyEvent =
+                            new KeyEvent(
+                                    time, time, 0, keyCode, 0, metaState, deviceId2, 0, 1024,
+                                    source);
                     ViewRootImpl.this.enqueueInputEvent(keyEvent);
-                    Message m = SyntheticJoystickHandler.this.obtainMessage(repeatMessage, keyEvent);
+                    Message m =
+                            SyntheticJoystickHandler.this.obtainMessage(repeatMessage, keyEvent);
                     m.setAsynchronous(true);
-                    SyntheticJoystickHandler.this.sendMessageDelayed(m, ViewConfiguration.getKeyRepeatTimeout());
-                    SyntheticJoystickHandler.this.mDeviceKeyEvents.put(deviceId2, new KeyEvent(time, time, 1, keyCode, 0, metaState, deviceId2, 0, 1056, source));
+                    SyntheticJoystickHandler.this.sendMessageDelayed(
+                            m, ViewConfiguration.getKeyRepeatTimeout());
+                    SyntheticJoystickHandler.this.mDeviceKeyEvents.put(
+                            deviceId2,
+                            new KeyEvent(
+                                    time, time, 1, keyCode, 0, metaState, deviceId2, 0, 1056,
+                                    source));
                 }
                 if (axis == 0 || axis == 1) {
                     this.mAxisStatesStick[axisStateIndex] = newState;
@@ -6610,38 +7746,57 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         SyntheticTouchNavigationHandler() {
             super(true);
             this.mCurrentDeviceId = -1;
-            int gestureDetectorVelocityStrategy = android.companion.virtual.flags.Flags.impulseVelocityStrategyForTouchNavigation() ? 0 : -1;
-            this.mGestureDetector = new GestureDetector(ViewRootImpl.this.mContext, new GestureDetector.OnGestureListener() { // from class: android.view.ViewRootImpl.SyntheticTouchNavigationHandler.1
-                @Override // android.view.GestureDetector.OnGestureListener
-                public boolean onDown(MotionEvent e) {
-                    return true;
-                }
+            int gestureDetectorVelocityStrategy =
+                    android.companion.virtual.flags.Flags
+                                    .impulseVelocityStrategyForTouchNavigation()
+                            ? 0
+                            : -1;
+            this.mGestureDetector =
+                    new GestureDetector(
+                            ViewRootImpl.this.mContext,
+                            new GestureDetector
+                                    .OnGestureListener() { // from class:
+                                                           // android.view.ViewRootImpl.SyntheticTouchNavigationHandler.1
+                                @Override // android.view.GestureDetector.OnGestureListener
+                                public boolean onDown(MotionEvent e) {
+                                    return true;
+                                }
 
-                @Override // android.view.GestureDetector.OnGestureListener
-                public void onShowPress(MotionEvent e) {
-                }
+                                @Override // android.view.GestureDetector.OnGestureListener
+                                public void onShowPress(MotionEvent e) {}
 
-                @Override // android.view.GestureDetector.OnGestureListener
-                public boolean onSingleTapUp(MotionEvent e) {
-                    SyntheticTouchNavigationHandler.this.dispatchTap(e.getEventTime());
-                    return true;
-                }
+                                @Override // android.view.GestureDetector.OnGestureListener
+                                public boolean onSingleTapUp(MotionEvent e) {
+                                    SyntheticTouchNavigationHandler.this.dispatchTap(
+                                            e.getEventTime());
+                                    return true;
+                                }
 
-                @Override // android.view.GestureDetector.OnGestureListener
-                public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-                    return true;
-                }
+                                @Override // android.view.GestureDetector.OnGestureListener
+                                public boolean onScroll(
+                                        MotionEvent e1,
+                                        MotionEvent e2,
+                                        float distanceX,
+                                        float distanceY) {
+                                    return true;
+                                }
 
-                @Override // android.view.GestureDetector.OnGestureListener
-                public void onLongPress(MotionEvent e) {
-                }
+                                @Override // android.view.GestureDetector.OnGestureListener
+                                public void onLongPress(MotionEvent e) {}
 
-                @Override // android.view.GestureDetector.OnGestureListener
-                public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                    SyntheticTouchNavigationHandler.this.dispatchFling(velocityX, velocityY, e2.getEventTime());
-                    return true;
-                }
-            }, (Handler) null, gestureDetectorVelocityStrategy);
+                                @Override // android.view.GestureDetector.OnGestureListener
+                                public boolean onFling(
+                                        MotionEvent e1,
+                                        MotionEvent e2,
+                                        float velocityX,
+                                        float velocityY) {
+                                    SyntheticTouchNavigationHandler.this.dispatchFling(
+                                            velocityX, velocityY, e2.getEventTime());
+                                    return true;
+                                }
+                            },
+                            (Handler) null,
+                            gestureDetectorVelocityStrategy);
         }
 
         public void process(MotionEvent event) {
@@ -6673,14 +7828,35 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
 
         private void dispatchEvent(long time, int keyCode) {
-            ViewRootImpl.this.enqueueInputEvent(new KeyEvent(time, time, 0, keyCode, 0, this.mPendingKeyMetaState, this.mCurrentDeviceId, 0, 1024, this.mCurrentSource));
-            ViewRootImpl.this.enqueueInputEvent(new KeyEvent(time, time, 1, keyCode, 0, this.mPendingKeyMetaState, this.mCurrentDeviceId, 0, 1024, this.mCurrentSource));
+            ViewRootImpl.this.enqueueInputEvent(
+                    new KeyEvent(
+                            time,
+                            time,
+                            0,
+                            keyCode,
+                            0,
+                            this.mPendingKeyMetaState,
+                            this.mCurrentDeviceId,
+                            0,
+                            1024,
+                            this.mCurrentSource));
+            ViewRootImpl.this.enqueueInputEvent(
+                    new KeyEvent(
+                            time,
+                            time,
+                            1,
+                            keyCode,
+                            0,
+                            this.mPendingKeyMetaState,
+                            this.mCurrentDeviceId,
+                            0,
+                            1024,
+                            this.mCurrentSource));
         }
     }
 
     final class SyntheticKeyboardHandler {
-        SyntheticKeyboardHandler() {
-        }
+        SyntheticKeyboardHandler() {}
 
         public void process(KeyEvent event) {
             if ((event.getFlags() & 1024) != 0) {
@@ -6689,10 +7865,23 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             KeyCharacterMap kcm = event.getKeyCharacterMap();
             int keyCode = event.getKeyCode();
             int metaState = event.getMetaState();
-            KeyCharacterMap.FallbackAction fallbackAction = kcm.getFallbackAction(keyCode, metaState);
+            KeyCharacterMap.FallbackAction fallbackAction =
+                    kcm.getFallbackAction(keyCode, metaState);
             if (fallbackAction != null) {
                 int flags = event.getFlags() | 1024;
-                KeyEvent fallbackEvent = KeyEvent.obtain(event.getDownTime(), event.getEventTime(), event.getAction(), fallbackAction.keyCode, event.getRepeatCount(), fallbackAction.metaState, event.getDeviceId(), event.getScanCode(), flags, event.getSource(), null);
+                KeyEvent fallbackEvent =
+                        KeyEvent.obtain(
+                                event.getDownTime(),
+                                event.getEventTime(),
+                                event.getAction(),
+                                fallbackAction.keyCode,
+                                event.getRepeatCount(),
+                                fallbackAction.metaState,
+                                event.getDeviceId(),
+                                event.getScanCode(),
+                                flags,
+                                event.getSource(),
+                                null);
                 fallbackAction.recycle();
                 ViewRootImpl.this.enqueueInputEvent(fallbackEvent);
             }
@@ -6784,7 +7973,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 }
                 View prevDragView = this.mCurrentDragView;
                 if (what == 3 && event.mClipData != null) {
-                    event.mClipData.prepareToEnterProcess(this.mView.getContext().getAttributionSource());
+                    event.mClipData.prepareToEnterProcess(
+                            this.mView.getContext().getAttributionSource());
                 }
                 boolean result = this.mView.dispatchDragEvent(event);
                 if (!result && what == 1 && event.isStickyEvent()) {
@@ -6792,16 +7982,22 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     this.mSavedStickyDragEvent = DragEvent.obtain(event);
                 }
                 if (what == 1) {
-                    InputManagerGlobal.getInstance().setDragPointerInfo(getDragStateInputToken(), getDragDeviceId(), getDragPointerId());
+                    InputManagerGlobal.getInstance()
+                            .setDragPointerInfo(
+                                    getDragStateInputToken(),
+                                    getDragDeviceId(),
+                                    getDragPointerId());
                 } else if (what == 4) {
                     InputManagerGlobal.getInstance().clreaDragPointerInfo();
                 }
                 boolean ignoreEvent = event.isEavesDrop();
                 if (what == 2 && !ignoreEvent) {
                     if (event.mEventHandlerWasCalled) {
-                        InputManagerGlobal.getInstance().setDragPointerIcon(PointerIcon.getSystemIcon(this.mContext, 1021));
+                        InputManagerGlobal.getInstance()
+                                .setDragPointerIcon(PointerIcon.getSystemIcon(this.mContext, 1021));
                     } else {
-                        InputManagerGlobal.getInstance().setDragPointerIcon(PointerIcon.getSystemIcon(this.mContext, 1012));
+                        InputManagerGlobal.getInstance()
+                                .setDragPointerIcon(PointerIcon.getSystemIcon(this.mContext, 1012));
                         setDragFocus(null, event);
                     }
                     InputManagerGlobal.getInstance().updateDragPointerIcon(getDisplayId());
@@ -6809,14 +8005,17 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 if (prevDragView != this.mCurrentDragView) {
                     if (prevDragView != null) {
                         try {
-                            InputManagerGlobal.getInstance().setDragPointerIcon(PointerIcon.getSystemIcon(this.mContext, 1012));
+                            InputManagerGlobal.getInstance()
+                                    .setDragPointerIcon(
+                                            PointerIcon.getSystemIcon(this.mContext, 1012));
                             this.mWindowSession.dragRecipientExited(this.mWindow);
                         } catch (RemoteException e) {
                             Slog.e(this.mTag, "Unable to note drag target change");
                         }
                     }
                     if (this.mCurrentDragView != null) {
-                        InputManagerGlobal.getInstance().setDragPointerIcon(PointerIcon.getSystemIcon(this.mContext, 1021));
+                        InputManagerGlobal.getInstance()
+                                .setDragPointerIcon(PointerIcon.getSystemIcon(this.mContext, 1021));
                         this.mWindowSession.dragRecipientEntered(this.mWindow);
                     }
                     InputManagerGlobal.getInstance().updateDragPointerIcon(getDisplayId());
@@ -6832,7 +8031,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 if (what == 4) {
                     if (this.mStartedDragViewForA11y != null) {
                         if (!event.getResult()) {
-                            this.mStartedDragViewForA11y.sendWindowContentChangedAccessibilityEvent(512);
+                            this.mStartedDragViewForA11y.sendWindowContentChangedAccessibilityEvent(
+                                    512);
                         }
                         this.mStartedDragViewForA11y.setAccessibilityDragStarted(false);
                     }
@@ -6956,7 +8156,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
         if (this.mAudioManager == null) {
             this.mAudioManager = (AudioManager) this.mView.getContext().getSystemService("audio");
-            this.mFastScrollSoundEffectsEnabled = this.mAudioManager.areNavigationRepeatSoundEffectsEnabled();
+            this.mFastScrollSoundEffectsEnabled =
+                    this.mAudioManager.areNavigationRepeatSoundEffectsEnabled();
         }
         return this.mAudioManager;
     }
@@ -6966,7 +8167,11 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         if (this.mView instanceof ViewGroup) {
             ViewGroup decorView = (ViewGroup) this.mView;
             if (decorView.getChildCount() > 0) {
-                return (AutofillManager) decorView.getChildAt(0).getContext().getSystemService(AutofillManager.class);
+                return (AutofillManager)
+                        decorView
+                                .getChildAt(0)
+                                .getContext()
+                                .getSystemService(AutofillManager.class);
             }
             return null;
         }
@@ -6984,7 +8189,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     public AccessibilityInteractionController getAccessibilityInteractionController() {
         if (this.mView == null) {
-            throw new IllegalStateException("getAccessibilityInteractionController called when there is no mView");
+            throw new IllegalStateException(
+                    "getAccessibilityInteractionController called when there is no mView");
         }
         if (this.mAccessibilityInteractionController == null) {
             this.mAccessibilityInteractionController = new AccessibilityInteractionController(this);
@@ -6992,7 +8198,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         return this.mAccessibilityInteractionController;
     }
 
-    private boolean shouldNotLocalLayout(WindowConfiguration winConfig, WindowManager.LayoutParams params) {
+    private boolean shouldNotLocalLayout(
+            WindowConfiguration winConfig, WindowManager.LayoutParams params) {
         if (winConfig.isOverlappingWithCutout()) {
             return true;
         }
@@ -7000,8 +8207,12 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             return false;
         }
         DisplayCutout cutout = this.mInsetsController.getState().getDisplayCutout();
-        int largeCutoutSize = Math.max(Math.max(cutout.getSafeInsetLeft(), cutout.getSafeInsetRight()), Math.max(cutout.getSafeInsetTop(), cutout.getSafeInsetBottom()));
-        return largeCutoutSize > 0 && largeCutoutSize <= this.mMinimumSizeForOverlappingWithCutoutAsDefault;
+        int largeCutoutSize =
+                Math.max(
+                        Math.max(cutout.getSafeInsetLeft(), cutout.getSafeInsetRight()),
+                        Math.max(cutout.getSafeInsetTop(), cutout.getSafeInsetBottom()));
+        return largeCutoutSize > 0
+                && largeCutoutSize <= this.mMinimumSizeForOverlappingWithCutoutAsDefault;
     }
 
     private boolean shouldNotLocalLayoutEmbedded(WindowConfiguration winConfig) {
@@ -7010,7 +8221,10 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     private boolean shouldNotLocalLayoutPopOver(WindowConfiguration winConfig) {
         InsetsSource imeSource;
-        return winConfig.isPopOver() && (imeSource = this.mInsetsController.getState().peekSource(InsetsSource.ID_IME)) != null && imeSource.isVisible();
+        return winConfig.isPopOver()
+                && (imeSource = this.mInsetsController.getState().peekSource(InsetsSource.ID_IME))
+                        != null
+                && imeSource.isVisible();
     }
 
     /* JADX WARN: Multi-variable type inference failed */
@@ -7035,17 +8249,27 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private int relayoutWindow(android.view.WindowManager.LayoutParams r44, int r45, boolean r46) throws android.os.RemoteException {
+    private int relayoutWindow(android.view.WindowManager.LayoutParams r44, int r45, boolean r46)
+            throws android.os.RemoteException {
         /*
             Method dump skipped, instructions count: 1524
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.ViewRootImpl.relayoutWindow(android.view.WindowManager$LayoutParams, int, boolean):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.view.ViewRootImpl.relayoutWindow(android.view.WindowManager$LayoutParams,"
+                    + " int, boolean):int");
     }
 
-    private void updateOpacity(WindowManager.LayoutParams params, boolean dragResizing, boolean forceUpdate) {
+    private void updateOpacity(
+            WindowManager.LayoutParams params, boolean dragResizing, boolean forceUpdate) {
         boolean opaque = false;
-        if (!PixelFormat.formatHasAlpha(params.format) && params.surfaceInsets.left == 0 && params.surfaceInsets.top == 0 && params.surfaceInsets.right == 0 && params.surfaceInsets.bottom == 0 && !dragResizing) {
+        if (!PixelFormat.formatHasAlpha(params.format)
+                && params.surfaceInsets.left == 0
+                && params.surfaceInsets.top == 0
+                && params.surfaceInsets.right == 0
+                && params.surfaceInsets.bottom == 0
+                && !dragResizing) {
             opaque = true;
         }
         if (!forceUpdate && this.mIsSurfaceOpaque == opaque) {
@@ -7094,7 +8318,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
         rect2.set(rect);
         this.mPendingBackDropFrame.offsetTo(0, 0);
-        this.mInsetsController.onFrameChanged(this.mOverrideInsetsFrame != null ? this.mOverrideInsetsFrame : frame);
+        this.mInsetsController.onFrameChanged(
+                this.mOverrideInsetsFrame != null ? this.mOverrideInsetsFrame : frame);
     }
 
     void setOverrideInsetsFrame(Rect frame) {
@@ -7118,7 +8343,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     void applyInsetsHintSandboxingIfNeeded(InsetsSourceControl[] controls) {
-        CompatSandbox.applyInsetsHintSandboxingIfNeeded(this.mLastReportedMergedConfiguration.getMergedConfiguration(), controls);
+        CompatSandbox.applyInsetsHintSandboxingIfNeeded(
+                this.mLastReportedMergedConfiguration.getMergedConfiguration(), controls);
     }
 
     void applyViewBoundsSandboxingIfNeeded(Rect inOutRect) {
@@ -7137,7 +8363,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 return;
             }
         }
-        CompatSandbox.applyViewBoundsSandboxingIfNeeded(this.mLastReportedMergedConfiguration.getMergedConfiguration(), inOutRect, inverse);
+        CompatSandbox.applyViewBoundsSandboxingIfNeeded(
+                this.mLastReportedMergedConfiguration.getMergedConfiguration(), inOutRect, inverse);
     }
 
     public void applyViewLocationSandboxingIfNeeded(int[] outLocation) {
@@ -7147,7 +8374,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             outLocation[1] = outLocation[1] - bounds.top;
             return;
         }
-        CompatSandbox.applyViewLocationSandboxingIfNeeded(this.mLastReportedMergedConfiguration.getMergedConfiguration(), outLocation);
+        CompatSandbox.applyViewLocationSandboxingIfNeeded(
+                this.mLastReportedMergedConfiguration.getMergedConfiguration(), outLocation);
     }
 
     /* JADX WARN: Removed duplicated region for block: B:13:0x0035 A[RETURN] */
@@ -7194,7 +8422,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         L39:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.ViewRootImpl.getViewBoundsSandboxingEnabled():boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.view.ViewRootImpl.getViewBoundsSandboxingEnabled():boolean");
     }
 
     @Override // android.view.View.AttachInfo.Callbacks
@@ -7205,8 +8435,10 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         checkThread();
         try {
             AudioManager audioManager = getAudioManager();
-            if (this.mFastScrollSoundEffectsEnabled && SoundEffectConstants.isNavigationRepeat(effectId)) {
-                audioManager.playSoundEffect(SoundEffectConstants.nextNavigationRepeatSoundEffectId());
+            if (this.mFastScrollSoundEffectsEnabled
+                    && SoundEffectConstants.isNavigationRepeat(effectId)) {
+                audioManager.playSoundEffect(
+                        SoundEffectConstants.nextNavigationRepeatSoundEffectId());
                 return;
             }
             switch (effectId) {
@@ -7230,7 +8462,11 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     audioManager.playSoundEffect(2);
                     return;
                 default:
-                    throw new IllegalArgumentException("unknown effect id " + effectId + " not defined in " + SoundEffectConstants.class.getCanonicalName());
+                    throw new IllegalArgumentException(
+                            "unknown effect id "
+                                    + effectId
+                                    + " not defined in "
+                                    + SoundEffectConstants.class.getCanonicalName());
             }
         } catch (IllegalStateException e) {
             Log.e(this.mTag, "FATAL EXCEPTION when attempting to play sound effect: " + e);
@@ -7266,7 +8502,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     @Override // android.view.ViewParent
     public View keyboardNavigationClusterSearch(View currentCluster, int direction) {
         checkThread();
-        return FocusFinder.getInstance().findNextKeyboardNavigationCluster(this.mView, currentCluster, direction);
+        return FocusFinder.getInstance()
+                .findNextKeyboardNavigationCluster(this.mView, currentCluster, direction);
     }
 
     public void debug() {
@@ -7303,34 +8540,68 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         writer.println(innerPrefix + "mRemoved=" + this.mRemoved);
         writer.println(innerPrefix + "mStopped=" + this.mStopped);
         writer.println(innerPrefix + "mPausedForTransition=" + this.mPausedForTransition);
-        writer.println(innerPrefix + "mConsumeBatchedInputScheduled=" + this.mConsumeBatchedInputScheduled);
-        writer.println(innerPrefix + "mConsumeBatchedInputImmediatelyScheduled=" + this.mConsumeBatchedInputImmediatelyScheduled);
+        writer.println(
+                innerPrefix
+                        + "mConsumeBatchedInputScheduled="
+                        + this.mConsumeBatchedInputScheduled);
+        writer.println(
+                innerPrefix
+                        + "mConsumeBatchedInputImmediatelyScheduled="
+                        + this.mConsumeBatchedInputImmediatelyScheduled);
         writer.println(innerPrefix + "mPendingInputEventCount=" + this.mPendingInputEventCount);
-        writer.println(innerPrefix + "mProcessInputEventsScheduled=" + this.mProcessInputEventsScheduled);
+        writer.println(
+                innerPrefix + "mProcessInputEventsScheduled=" + this.mProcessInputEventsScheduled);
         writer.println(innerPrefix + "mTraversalScheduled=" + this.mTraversalScheduled);
         if (this.mTraversalScheduled) {
-            writer.println(innerPrefix + " (barrier=" + this.mTraversalBarrier + NavigationBarInflaterView.KEY_CODE_END);
+            writer.println(
+                    innerPrefix
+                            + " (barrier="
+                            + this.mTraversalBarrier
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         writer.println(innerPrefix + "mReportNextDraw=" + this.mReportNextDraw);
         if (this.mReportNextDraw) {
-            writer.println(innerPrefix + " (reason=" + this.mLastReportNextDrawReason + NavigationBarInflaterView.KEY_CODE_END);
+            writer.println(
+                    innerPrefix
+                            + " (reason="
+                            + this.mLastReportNextDrawReason
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         if (this.mLastPerformTraversalsSkipDrawReason != null) {
-            writer.println(innerPrefix + "mLastPerformTraversalsFailedReason=" + this.mLastPerformTraversalsSkipDrawReason);
+            writer.println(
+                    innerPrefix
+                            + "mLastPerformTraversalsFailedReason="
+                            + this.mLastPerformTraversalsSkipDrawReason);
         }
         if (this.mLastPerformDrawSkippedReason != null) {
-            writer.println(innerPrefix + "mLastPerformDrawFailedReason=" + this.mLastPerformDrawSkippedReason);
+            writer.println(
+                    innerPrefix
+                            + "mLastPerformDrawFailedReason="
+                            + this.mLastPerformDrawSkippedReason);
         }
         if (this.mWmsRequestSyncGroupState != 0) {
-            writer.println(innerPrefix + "mWmsRequestSyncGroupState=" + this.mWmsRequestSyncGroupState);
+            writer.println(
+                    innerPrefix + "mWmsRequestSyncGroupState=" + this.mWmsRequestSyncGroupState);
         }
-        writer.println(innerPrefix + "mLastReportedMergedConfiguration=" + this.mLastReportedMergedConfiguration);
-        writer.println(innerPrefix + "mLastConfigurationFromResources=" + this.mLastConfigurationFromResources);
+        writer.println(
+                innerPrefix
+                        + "mLastReportedMergedConfiguration="
+                        + this.mLastReportedMergedConfiguration);
+        writer.println(
+                innerPrefix
+                        + "mLastConfigurationFromResources="
+                        + this.mLastConfigurationFromResources);
         if (this.mLastReportedActivityWindowInfo != null) {
-            writer.println(innerPrefix + "mLastReportedActivityWindowInfo=" + this.mLastReportedActivityWindowInfo);
+            writer.println(
+                    innerPrefix
+                            + "mLastReportedActivityWindowInfo="
+                            + this.mLastReportedActivityWindowInfo);
         }
         writer.println(innerPrefix + "mIsAmbientMode=" + this.mIsAmbientMode);
-        writer.println(innerPrefix + "mUnbufferedInputSource=" + Integer.toHexString(this.mUnbufferedInputSource));
+        writer.println(
+                innerPrefix
+                        + "mUnbufferedInputSource="
+                        + Integer.toHexString(this.mUnbufferedInputSource));
         if (this.mAttachInfo != null) {
             writer.print(innerPrefix + "mAttachInfo= ");
             this.mAttachInfo.dump(innerPrefix, writer);
@@ -7373,8 +8644,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         public long renderNodeMemoryUsage;
         public int viewCount;
 
-        GfxInfo() {
-        }
+        GfxInfo() {}
 
         void add(GfxInfo other) {
             this.viewCount += other.viewCount;
@@ -7420,7 +8690,12 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         if (!this.mIsDrawing) {
             destroyHardwareRenderer();
         } else {
-            Log.e(this.mTag, "Attempting to destroy the window while drawing!\n  window=" + this + ", title=" + ((Object) this.mWindowAttributes.getTitle()));
+            Log.e(
+                    this.mTag,
+                    "Attempting to destroy the window while drawing!\n  window="
+                            + this
+                            + ", title="
+                            + ((Object) this.mWindowAttributes.getTitle()));
         }
         this.mHandler.sendEmptyMessage(3);
         return true;
@@ -7445,8 +8720,10 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     boolean viewVisibilityChanged = this.mViewVisibility != viewVisibility;
                     if (this.mWindowAttributesChanged || viewVisibilityChanged) {
                         try {
-                            if ((1 & relayoutWindow(this.mWindowAttributes, viewVisibility, false)) != 0) {
-                                this.mWindowSession.finishDrawing(this.mWindow, null, Integer.MAX_VALUE);
+                            if ((1 & relayoutWindow(this.mWindowAttributes, viewVisibility, false))
+                                    != 0) {
+                                this.mWindowSession.finishDrawing(
+                                        this.mWindow, null, Integer.MAX_VALUE);
                             }
                         } catch (RemoteException e) {
                         }
@@ -7457,7 +8734,11 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             this.mInsetsController.onControlsChanged(null);
             this.mAdded = false;
             AnimationHandler.removeRequestor(this);
-            handleSyncRequestWhenNoAsyncDraw(this.mActiveSurfaceSyncGroup, this.mHasPendingTransactions, this.mPendingTransaction, "shutting down VRI");
+            handleSyncRequestWhenNoAsyncDraw(
+                    this.mActiveSurfaceSyncGroup,
+                    this.mHasPendingTransactions,
+                    this.mPendingTransaction,
+                    "shutting down VRI");
             this.mHasPendingTransactions = false;
             WindowManagerGlobal.getInstance().doRemoveView(this);
         }
@@ -7469,23 +8750,30 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     public void loadSystemProperties() {
-        this.mHandler.post(new Runnable() { // from class: android.view.ViewRootImpl.10
-            @Override // java.lang.Runnable
-            public void run() {
-                ViewRootImpl.this.mProfileRendering = SystemProperties.getBoolean(ViewRootImpl.PROPERTY_PROFILE_RENDERING, false);
-                ViewRootImpl.this.profileRendering(ViewRootImpl.this.mAttachInfo.mHasWindowFocus);
-                if (ViewRootImpl.this.mAttachInfo.mThreadedRenderer != null && ViewRootImpl.this.mAttachInfo.mThreadedRenderer.loadSystemProperties()) {
-                    ViewRootImpl.this.invalidate();
-                }
-                boolean layout = DisplayProperties.debug_layout().orElse(false).booleanValue();
-                if (layout != ViewRootImpl.this.mAttachInfo.mDebugLayout) {
-                    ViewRootImpl.this.mAttachInfo.mDebugLayout = layout;
-                    if (!ViewRootImpl.this.mHandler.hasMessages(22)) {
-                        ViewRootImpl.this.mHandler.sendEmptyMessageDelayed(22, 200L);
+        this.mHandler.post(
+                new Runnable() { // from class: android.view.ViewRootImpl.10
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        ViewRootImpl.this.mProfileRendering =
+                                SystemProperties.getBoolean(
+                                        ViewRootImpl.PROPERTY_PROFILE_RENDERING, false);
+                        ViewRootImpl.this.profileRendering(
+                                ViewRootImpl.this.mAttachInfo.mHasWindowFocus);
+                        if (ViewRootImpl.this.mAttachInfo.mThreadedRenderer != null
+                                && ViewRootImpl.this.mAttachInfo.mThreadedRenderer
+                                        .loadSystemProperties()) {
+                            ViewRootImpl.this.invalidate();
+                        }
+                        boolean layout =
+                                DisplayProperties.debug_layout().orElse(false).booleanValue();
+                        if (layout != ViewRootImpl.this.mAttachInfo.mDebugLayout) {
+                            ViewRootImpl.this.mAttachInfo.mDebugLayout = layout;
+                            if (!ViewRootImpl.this.mHandler.hasMessages(22)) {
+                                ViewRootImpl.this.mHandler.sendEmptyMessageDelayed(22, 200L);
+                            }
+                        }
                     }
-                }
-            }
-        });
+                });
     }
 
     private void destroyHardwareRenderer() {
@@ -7509,10 +8797,31 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void dispatchResized(ClientWindowFrames clientWindowFrames, boolean z, MergedConfiguration mergedConfiguration, InsetsState insetsState, boolean z2, boolean z3, int i, int i2, boolean z4, ActivityWindowInfo activityWindowInfo) {
+    public void dispatchResized(
+            ClientWindowFrames clientWindowFrames,
+            boolean z,
+            MergedConfiguration mergedConfiguration,
+            InsetsState insetsState,
+            boolean z2,
+            boolean z3,
+            int i,
+            int i2,
+            boolean z4,
+            ActivityWindowInfo activityWindowInfo) {
         Message obtainMessage = this.mHandler.obtainMessage(z ? 5 : 4);
         SomeArgs obtain = SomeArgs.obtain();
-        Log.i(this.mTag, "Resizing " + this + ": frame = " + clientWindowFrames.frame.toShortString() + " reportDraw = " + z + " forceLayout = " + z2 + " syncSeqId = " + i2);
+        Log.i(
+                this.mTag,
+                "Resizing "
+                        + this
+                        + ": frame = "
+                        + clientWindowFrames.frame.toShortString()
+                        + " reportDraw = "
+                        + z
+                        + " forceLayout = "
+                        + z2
+                        + " syncSeqId = "
+                        + i2);
         if (this.mWindowAttributes.type == 1) {
             this.mPendingWinFrame = clientWindowFrames.frame;
         }
@@ -7530,7 +8839,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void dispatchInsetsControlChanged(InsetsState insetsState, InsetsSourceControl.Array activeControls) {
+    public void dispatchInsetsControlChanged(
+            InsetsState insetsState, InsetsSourceControl.Array activeControls) {
         SomeArgs args = SomeArgs.obtain();
         args.arg1 = insetsState;
         args.arg2 = activeControls;
@@ -7584,8 +8894,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         public QueuedInputEvent mNext;
         public InputEventReceiver mReceiver;
 
-        private QueuedInputEvent() {
-        }
+        private QueuedInputEvent() {}
 
         public boolean shouldSkipIme() {
             if ((this.mFlags & 1) != 0) {
@@ -7604,7 +8913,23 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         public String toString() {
             StringBuilder sb = new StringBuilder("QueuedInputEvent{flags=");
             boolean hasPrevious = flagToString("DELIVER_POST_IME", 1, false, sb);
-            if (!flagToString("UNHANDLED", 32, flagToString("RESYNTHESIZED", 16, flagToString("FINISHED_HANDLED", 8, flagToString("FINISHED", 4, flagToString("DEFERRED", 2, hasPrevious, sb), sb), sb), sb), sb)) {
+            if (!flagToString(
+                    "UNHANDLED",
+                    32,
+                    flagToString(
+                            "RESYNTHESIZED",
+                            16,
+                            flagToString(
+                                    "FINISHED_HANDLED",
+                                    8,
+                                    flagToString(
+                                            "FINISHED",
+                                            4,
+                                            flagToString("DEFERRED", 2, hasPrevious, sb),
+                                            sb),
+                                    sb),
+                            sb),
+                    sb)) {
                 sb.append("0");
             }
             sb.append(", hasNextQueuedEvent=" + (this.mEvent != null ? "true" : "false"));
@@ -7625,7 +8950,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
     }
 
-    private QueuedInputEvent obtainQueuedInputEvent(InputEvent event, InputEventReceiver receiver, int flags) {
+    private QueuedInputEvent obtainQueuedInputEvent(
+            InputEvent event, InputEventReceiver receiver, int flags) {
         QueuedInputEvent q = this.mQueuedInputEventPool;
         if (q != null) {
             this.mQueuedInputEventPoolSize--;
@@ -7654,20 +8980,29 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         enqueueInputEvent(event, null, 0, false);
     }
 
-    void enqueueInputEvent(InputEvent event, InputEventReceiver receiver, int flags, boolean processImmediately) {
-        if (CoreRune.FW_SPEN_HOVER && (event instanceof KeyEvent) && (((KeyEvent) event).getFlags() & 33554432) != 0) {
+    void enqueueInputEvent(
+            InputEvent event, InputEventReceiver receiver, int flags, boolean processImmediately) {
+        if (CoreRune.FW_SPEN_HOVER
+                && (event instanceof KeyEvent)
+                && (((KeyEvent) event).getFlags() & 33554432) != 0) {
             flags |= 1;
         }
         QueuedInputEvent q = obtainQueuedInputEvent(event, receiver, flags);
         if (event instanceof MotionEvent) {
             MotionEvent me = (MotionEvent) event;
             if (me.getAction() == 3) {
-                EventLog.writeEvent(EventLogTags.VIEW_ENQUEUE_INPUT_EVENT, "Motion - Cancel", getTitle().toString());
+                EventLog.writeEvent(
+                        EventLogTags.VIEW_ENQUEUE_INPUT_EVENT,
+                        "Motion - Cancel",
+                        getTitle().toString());
             }
         } else if (event instanceof KeyEvent) {
             KeyEvent ke = (KeyEvent) event;
             if (ke.isCanceled()) {
-                EventLog.writeEvent(EventLogTags.VIEW_ENQUEUE_INPUT_EVENT, "Key - Cancel", getTitle().toString());
+                EventLog.writeEvent(
+                        EventLogTags.VIEW_ENQUEUE_INPUT_EVENT,
+                        "Key - Cancel",
+                        getTitle().toString());
             }
         }
         QueuedInputEvent last = this.mPendingInputEventTail;
@@ -7679,7 +9014,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             this.mPendingInputEventTail = q;
         }
         this.mPendingInputEventCount++;
-        Trace.traceCounter(4L, this.mPendingInputEventQueueLengthCounterName, this.mPendingInputEventCount);
+        Trace.traceCounter(
+                4L, this.mPendingInputEventQueueLengthCounterName, this.mPendingInputEventCount);
         if (processImmediately) {
             doProcessInputEvents();
         } else {
@@ -7705,10 +9041,16 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             }
             q.mNext = null;
             this.mPendingInputEventCount--;
-            Trace.traceCounter(4L, this.mPendingInputEventQueueLengthCounterName, this.mPendingInputEventCount);
+            Trace.traceCounter(
+                    4L,
+                    this.mPendingInputEventQueueLengthCounterName,
+                    this.mPendingInputEventCount);
             if (q.mEvent instanceof MotionEvent) {
                 MotionEvent me = (MotionEvent) q.mEvent;
-                if (this.mView != null && ((this.mView.getTop() != 0 || this.mView.getLeft() != 0) && this.mWindowAttributes.layoutInDisplayCutoutMode == 1 && this.mWindowAttributes.type == 2)) {
+                if (this.mView != null
+                        && ((this.mView.getTop() != 0 || this.mView.getLeft() != 0)
+                                && this.mWindowAttributes.layoutInDisplayCutoutMode == 1
+                                && this.mWindowAttributes.type == 2)) {
                     me.offsetLocation(-this.mView.getLeft(), -this.mView.getTop());
                 }
             }
@@ -7722,21 +9064,21 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:48:0x00f4, code lost:
-    
-        r3 = move-exception;
-     */
+
+       r3 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:50:0x00f9, code lost:
-    
-        throw r3;
-     */
+
+       throw r3;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:73:0x013e, code lost:
-    
-        r3 = move-exception;
-     */
+
+       r3 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:75:0x0142, code lost:
-    
-        throw r3;
-     */
+
+       throw r3;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -7746,7 +9088,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             Method dump skipped, instructions count: 323
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.ViewRootImpl.deliverInputEvent(android.view.ViewRootImpl$QueuedInputEvent):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.view.ViewRootImpl.deliverInputEvent(android.view.ViewRootImpl$QueuedInputEvent):void");
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -7758,7 +9102,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             if (modified) {
                 Trace.traceBegin(8L, "processInputEventBeforeFinish");
                 try {
-                    InputEvent processedEvent = this.mInputCompatProcessor.processInputEventBeforeFinish(q.mEvent);
+                    InputEvent processedEvent =
+                            this.mInputCompatProcessor.processInputEventBeforeFinish(q.mEvent);
                     if (processedEvent != null) {
                         q.mReceiver.finishInputEvent(processedEvent, handled);
                     }
@@ -7780,7 +9125,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     private void logHandledSystemKey(KeyEvent event, boolean handled) {
         int keyCode = event.getKeyCode();
         if (keyCode == 264 && event.isDown() && event.getRepeatCount() == 0 && handled) {
-            Counter.logIncrementWithUid("input.value_app_handled_stem_primary_key_gestures_count", Process.myUid());
+            Counter.logIncrementWithUid(
+                    "input.value_app_handled_stem_primary_key_gestures_count", Process.myUid());
         }
     }
 
@@ -7831,8 +9177,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     final class TraversalRunnable implements Runnable {
-        TraversalRunnable() {
-        }
+        TraversalRunnable() {}
 
         @Override // java.lang.Runnable
         public void run() {
@@ -7849,7 +9194,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         public void onInputEvent(InputEvent event) {
             Trace.traceBegin(8L, "processInputEventForCompatibility");
             try {
-                List<InputEvent> processedEvents = ViewRootImpl.this.mInputCompatProcessor.processInputEventForCompatibility(event);
+                List<InputEvent> processedEvents =
+                        ViewRootImpl.this.mInputCompatProcessor.processInputEventForCompatibility(
+                                event);
                 Trace.traceEnd(8L);
                 if (processedEvents != null) {
                     if (processedEvents.isEmpty()) {
@@ -7864,12 +9211,16 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 String traceKey = null;
                 if (ViewRune.COMMON_IS_PRODUCT_DEV && (event instanceof MotionEvent)) {
                     MotionEvent motionEvent = (MotionEvent) event;
-                    traceKey = String.format("(X=%d, Y=%d, Action=%d)", Integer.valueOf((int) motionEvent.getX()), Integer.valueOf((int) motionEvent.getY()), Integer.valueOf(motionEvent.getAction()));
+                    traceKey =
+                            String.format(
+                                    "(X=%d, Y=%d, Action=%d)",
+                                    Integer.valueOf((int) motionEvent.getX()),
+                                    Integer.valueOf((int) motionEvent.getY()),
+                                    Integer.valueOf(motionEvent.getAction()));
                     Trace.traceBegin(8L, traceKey);
                 }
                 ViewRootImpl.this.enqueueInputEvent(event, this, 0, true);
-                if (traceKey != null) {
-                }
+                if (traceKey != null) {}
             } finally {
                 Trace.traceEnd(8L);
             }
@@ -7877,7 +9228,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
         @Override // android.view.InputEventReceiver
         public void onBatchedInputEventPending(int source) {
-            boolean unbuffered = ViewRootImpl.this.mUnbufferedInputDispatch || (ViewRootImpl.this.mUnbufferedInputSource & source) != 0;
+            boolean unbuffered =
+                    ViewRootImpl.this.mUnbufferedInputDispatch
+                            || (ViewRootImpl.this.mUnbufferedInputSource & source) != 0;
             if (unbuffered) {
                 if (ViewRootImpl.this.mConsumeBatchedInputScheduled) {
                     ViewRootImpl.this.unscheduleConsumeBatchedInput();
@@ -7905,7 +9258,20 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
         @Override // android.view.InputEventReceiver
         public void onDragEvent(boolean isExiting, float x, float y) {
-            DragEvent event = DragEvent.obtain(isExiting ? 6 : 2, x, y, 0.0f, 0.0f, 0, null, null, null, null, null, false);
+            DragEvent event =
+                    DragEvent.obtain(
+                            isExiting ? 6 : 2,
+                            x,
+                            y,
+                            0.0f,
+                            0.0f,
+                            0,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            false);
             ViewRootImpl.this.dispatchDragEvent(event);
         }
 
@@ -7916,11 +9282,11 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
     }
 
-    final class InputMetricsListener implements HardwareRendererObserver.OnFrameMetricsAvailableListener {
+    final class InputMetricsListener
+            implements HardwareRendererObserver.OnFrameMetricsAvailableListener {
         public long[] data = new long[23];
 
-        InputMetricsListener() {
-        }
+        InputMetricsListener() {}
 
         @Override // android.graphics.HardwareRendererObserver.OnFrameMetricsAvailableListener
         public void onFrameMetricsAvailable(int dropCountSinceLastInvocation) {
@@ -7939,23 +9305,31 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             if (gpuCompletedTime >= presentTime) {
                 double discrepancyMs = (gpuCompletedTime - presentTime) * 1.0E-6d;
                 long vsyncId = this.data[1];
-                Log.w(ViewRootImpl.TAG, "Not reporting timeline because gpuCompletedTime is " + discrepancyMs + "ms ahead of presentTime. FRAME_TIMELINE_VSYNC_ID=" + vsyncId + ", INPUT_EVENT_ID=" + inputEventId);
+                Log.w(
+                        ViewRootImpl.TAG,
+                        "Not reporting timeline because gpuCompletedTime is "
+                                + discrepancyMs
+                                + "ms ahead of presentTime. FRAME_TIMELINE_VSYNC_ID="
+                                + vsyncId
+                                + ", INPUT_EVENT_ID="
+                                + inputEventId);
                 return;
             }
-            ViewRootImpl.this.mInputEventReceiver.reportTimeline(inputEventId, gpuCompletedTime, presentTime);
+            ViewRootImpl.this.mInputEventReceiver.reportTimeline(
+                    inputEventId, gpuCompletedTime, presentTime);
         }
     }
 
     final class ConsumeBatchedInputRunnable implements Runnable {
-        ConsumeBatchedInputRunnable() {
-        }
+        ConsumeBatchedInputRunnable() {}
 
         @Override // java.lang.Runnable
         public void run() {
             Trace.traceBegin(8L, ViewRootImpl.this.mTag);
             try {
                 ViewRootImpl.this.mConsumeBatchedInputScheduled = false;
-                if (ViewRootImpl.this.doConsumeBatchedInput(ViewRootImpl.this.mChoreographer.getFrameTimeNanos())) {
+                if (ViewRootImpl.this.doConsumeBatchedInput(
+                        ViewRootImpl.this.mChoreographer.getFrameTimeNanos())) {
                     ViewRootImpl.this.scheduleConsumeBatchedInput();
                 }
             } finally {
@@ -7965,8 +9339,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     final class ConsumeBatchedInputImmediatelyRunnable implements Runnable {
-        ConsumeBatchedInputImmediatelyRunnable() {
-        }
+        ConsumeBatchedInputImmediatelyRunnable() {}
 
         @Override // java.lang.Runnable
         public void run() {
@@ -7982,8 +9355,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         private final ArrayList<View> mViews = new ArrayList<>();
         private final ArrayList<View.AttachInfo.InvalidateInfo> mViewRects = new ArrayList<>();
 
-        InvalidateOnAnimationRunnable() {
-        }
+        InvalidateOnAnimationRunnable() {}
 
         public void addView(View view) {
             synchronized (this) {
@@ -8036,12 +9408,23 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 this.mPosted = false;
                 viewCount = this.mViews.size();
                 if (viewCount != 0) {
-                    this.mTempViews = (View[]) this.mViews.toArray(this.mTempViews != null ? this.mTempViews : new View[viewCount]);
+                    this.mTempViews =
+                            (View[])
+                                    this.mViews.toArray(
+                                            this.mTempViews != null
+                                                    ? this.mTempViews
+                                                    : new View[viewCount]);
                     this.mViews.clear();
                 }
                 viewRectCount = this.mViewRects.size();
                 if (viewRectCount != 0) {
-                    this.mTempViewRects = (View.AttachInfo.InvalidateInfo[]) this.mViewRects.toArray(this.mTempViewRects != null ? this.mTempViewRects : new View.AttachInfo.InvalidateInfo[viewRectCount]);
+                    this.mTempViewRects =
+                            (View.AttachInfo.InvalidateInfo[])
+                                    this.mViewRects.toArray(
+                                            this.mTempViewRects != null
+                                                    ? this.mTempViewRects
+                                                    : new View.AttachInfo.InvalidateInfo
+                                                            [viewRectCount]);
                     this.mViewRects.clear();
                 }
             }
@@ -8069,7 +9452,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         this.mHandler.sendMessageDelayed(msg, delayMilliseconds);
     }
 
-    public void dispatchInvalidateRectDelayed(View.AttachInfo.InvalidateInfo info, long delayMilliseconds) {
+    public void dispatchInvalidateRectDelayed(
+            View.AttachInfo.InvalidateInfo info, long delayMilliseconds) {
         Message msg = this.mHandler.obtainMessage(2, info);
         this.mHandler.sendMessageDelayed(msg, delayMilliseconds);
     }
@@ -8214,7 +9598,20 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             offsetY = 0.0f;
         }
         SurfaceControl dragSurface = 6 == action ? null : event.getDragSurface();
-        DragEvent eventToRestart = DragEvent.obtain(action, x, y, offsetX, offsetY, event.getDragFlags(), event.mLocalState, event.getClipDescription(), event.mClipData, dragSurface, event.mDragAndDropPermissions, event.mDragResult);
+        DragEvent eventToRestart =
+                DragEvent.obtain(
+                        action,
+                        x,
+                        y,
+                        offsetX,
+                        offsetY,
+                        event.getDragFlags(),
+                        event.mLocalState,
+                        event.getClipDescription(),
+                        event.mClipData,
+                        dragSurface,
+                        event.mDragAndDropPermissions,
+                        event.mDragResult);
         this.mHandler.sendMessage(this.mHandler.obtainMessage(15, eventToRestart));
     }
 
@@ -8238,7 +9635,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     private void postSendWindowContentChangedCallback(View source, int changeType) {
         if (this.mSendWindowContentChangedAccessibilityEvent == null) {
-            this.mSendWindowContentChangedAccessibilityEvent = new SendWindowContentChangedAccessibilityEvent();
+            this.mSendWindowContentChangedAccessibilityEvent =
+                    new SendWindowContentChangedAccessibilityEvent();
         }
         this.mSendWindowContentChangedAccessibilityEvent.runOrPost(source, changeType);
     }
@@ -8269,17 +9667,16 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     @Override // android.view.ViewParent
-    public ActionMode startActionModeForChild(View originalView, ActionMode.Callback callback, int type) {
+    public ActionMode startActionModeForChild(
+            View originalView, ActionMode.Callback callback, int type) {
         return null;
     }
 
     @Override // android.view.ViewParent
-    public void createContextMenu(ContextMenu menu) {
-    }
+    public void createContextMenu(ContextMenu menu) {}
 
     @Override // android.view.ViewParent
-    public void childDrawableStateChanged(View child) {
-    }
+    public void childDrawableStateChanged(View child) {}
 
     @Override // android.view.ViewParent
     public boolean requestSendAccessibilityEvent(View child, AccessibilityEvent event) {
@@ -8287,7 +9684,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         if (this.mView == null || this.mStopped || this.mPausedForTransition) {
             return false;
         }
-        if (event.getEventType() != 2048 && this.mSendWindowContentChangedAccessibilityEvent != null && this.mSendWindowContentChangedAccessibilityEvent.mSource != null) {
+        if (event.getEventType() != 2048
+                && this.mSendWindowContentChangedAccessibilityEvent != null
+                && this.mSendWindowContentChangedAccessibilityEvent.mSource != null) {
             this.mSendWindowContentChangedAccessibilityEvent.removeCallbacksAndRun();
         }
         int eventType = event.getEventType();
@@ -8298,8 +9697,10 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 break;
             case 32768:
                 if (source != null && (provider = source.getAccessibilityNodeProvider()) != null) {
-                    int virtualNodeId = AccessibilityNodeInfo.getVirtualDescendantId(event.getSourceNodeId());
-                    AccessibilityNodeInfo node = provider.createAccessibilityNodeInfo(virtualNodeId);
+                    int virtualNodeId =
+                            AccessibilityNodeInfo.getVirtualDescendantId(event.getSourceNodeId());
+                    AccessibilityNodeInfo node =
+                            provider.createAccessibilityNodeInfo(virtualNodeId);
                     setAccessibilityFocus(source, node);
                     break;
                 }
@@ -8376,11 +9777,16 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         int focusedChildId = AccessibilityNodeInfo.getVirtualDescendantId(focusedSourceNodeId);
         Rect oldBounds = this.mTempRect;
         this.mAccessibilityFocusedVirtualView.getBoundsInScreen(oldBounds);
-        this.mAccessibilityFocusedVirtualView = provider.createAccessibilityNodeInfo(focusedChildId);
+        this.mAccessibilityFocusedVirtualView =
+                provider.createAccessibilityNodeInfo(focusedChildId);
         if (this.mAccessibilityFocusedVirtualView == null) {
             this.mAccessibilityFocusedHost = null;
             focusedHost.clearAccessibilityFocusNoCallbacks(0);
-            provider.performAction(focusedChildId, AccessibilityNodeInfo.AccessibilityAction.ACTION_CLEAR_ACCESSIBILITY_FOCUS.getId(), null);
+            provider.performAction(
+                    focusedChildId,
+                    AccessibilityNodeInfo.AccessibilityAction.ACTION_CLEAR_ACCESSIBILITY_FOCUS
+                            .getId(),
+                    null);
             invalidateRectOnScreen(oldBounds);
             return;
         }
@@ -8478,13 +9884,17 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     void checkThread() {
         Thread current = Thread.currentThread();
         if (this.mThread != current) {
-            throw new CalledFromWrongThreadException("Only the original thread that created a view hierarchy can touch its views. Expected: " + this.mThread.getName() + " Calling: " + current.getName());
+            throw new CalledFromWrongThreadException(
+                    "Only the original thread that created a view hierarchy can touch its views."
+                        + " Expected: "
+                            + this.mThread.getName()
+                            + " Calling: "
+                            + current.getName());
         }
     }
 
     @Override // android.view.ViewParent
-    public void requestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-    }
+    public void requestDisallowInterceptTouchEvent(boolean disallowIntercept) {}
 
     @Override // android.view.ViewParent
     public boolean requestChildRectangleOnScreen(View child, Rect rectangle, boolean immediate) {
@@ -8508,8 +9918,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     @Override // android.view.ViewParent
-    public void childHasTransientStateChanged(View child, boolean hasTransientState) {
-    }
+    public void childHasTransientStateChanged(View child, boolean hasTransientState) {}
 
     @Override // android.view.ViewParent
     public boolean onStartNestedScroll(View child, View target, int nestedScrollAxes) {
@@ -8517,20 +9926,17 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     @Override // android.view.ViewParent
-    public void onStopNestedScroll(View target) {
-    }
+    public void onStopNestedScroll(View target) {}
 
     @Override // android.view.ViewParent
-    public void onNestedScrollAccepted(View child, View target, int nestedScrollAxes) {
-    }
+    public void onNestedScrollAccepted(View child, View target, int nestedScrollAxes) {}
 
     @Override // android.view.ViewParent
-    public void onNestedScroll(View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
-    }
+    public void onNestedScroll(
+            View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {}
 
     @Override // android.view.ViewParent
-    public void onNestedPreScroll(View target, int dx, int dy, int[] consumed) {
-    }
+    public void onNestedPreScroll(View target, int dx, int dy, int[] consumed) {}
 
     @Override // android.view.ViewParent
     public boolean onNestedFling(View target, float velocityX, float velocityY, boolean consumed) {
@@ -8600,7 +10006,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     public void handleScrollCaptureRequest(final IScrollCaptureResponseListener listener) {
-        final ScrollCaptureSearchResults results = new ScrollCaptureSearchResults(this.mContext.getMainExecutor());
+        final ScrollCaptureSearchResults results =
+                new ScrollCaptureSearchResults(this.mContext.getMainExecutor());
         collectRootScrollCaptureTargets(results);
         View rootView = getView();
         if (rootView != null) {
@@ -8608,35 +10015,44 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             Rect rect = new Rect(0, 0, rootView.getWidth(), rootView.getHeight());
             getChildVisibleRect(rootView, rect, point);
             Objects.requireNonNull(results);
-            rootView.dispatchScrollCaptureSearch(rect, point, new Consumer() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda1
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    ScrollCaptureSearchResults.this.addTarget((ScrollCaptureTarget) obj);
-                }
-            });
+            rootView.dispatchScrollCaptureSearch(
+                    rect,
+                    point,
+                    new Consumer() { // from class:
+                                     // android.view.ViewRootImpl$$ExternalSyntheticLambda1
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            ScrollCaptureSearchResults.this.addTarget((ScrollCaptureTarget) obj);
+                        }
+                    });
         }
-        Runnable onComplete = new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda2
-            @Override // java.lang.Runnable
-            public final void run() {
-                ViewRootImpl.this.lambda$handleScrollCaptureRequest$11(listener, results);
-            }
-        };
+        Runnable onComplete =
+                new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda2
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        ViewRootImpl.this.lambda$handleScrollCaptureRequest$11(listener, results);
+                    }
+                };
         results.setOnCompleteListener(onComplete);
         if (!results.isComplete()) {
             ViewRootHandler viewRootHandler = this.mHandler;
             Objects.requireNonNull(results);
-            viewRootHandler.postDelayed(new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda3
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ScrollCaptureSearchResults.this.finish();
-                }
-            }, getScrollCaptureRequestTimeout());
+            viewRootHandler.postDelayed(
+                    new Runnable() { // from class:
+                                     // android.view.ViewRootImpl$$ExternalSyntheticLambda3
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ScrollCaptureSearchResults.this.finish();
+                        }
+                    },
+                    getScrollCaptureRequestTimeout());
         }
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     /* renamed from: dispatchScrollCaptureSearchResponse, reason: merged with bridge method [inline-methods] */
-    public void lambda$handleScrollCaptureRequest$11(IScrollCaptureResponseListener listener, ScrollCaptureSearchResults results) {
+    public void lambda$handleScrollCaptureRequest$11(
+            IScrollCaptureResponseListener listener, ScrollCaptureSearchResults results) {
         ScrollCaptureTarget selectedTarget = results.getTopResult();
         ScrollCaptureResponse.Builder response = new ScrollCaptureResponse.Builder();
         response.setWindowTitle(getTitle().toString());
@@ -8668,7 +10084,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         boundsOnScreen.set(0, 0, this.mView.getWidth(), this.mView.getHeight());
         boundsOnScreen.offset(this.mAttachInfo.mTmpLocation[0], this.mAttachInfo.mTmpLocation[1]);
         response.setWindowBounds(boundsOnScreen);
-        ScrollCaptureConnection connection = new ScrollCaptureConnection(this.mView.getContext().getMainExecutor(), selectedTarget);
+        ScrollCaptureConnection connection =
+                new ScrollCaptureConnection(
+                        this.mView.getContext().getMainExecutor(), selectedTarget);
         response.setConnection(connection);
         try {
             listener.onScrollCaptureResponse(response.build());
@@ -8690,7 +10108,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     public void setReportNextDraw(boolean syncBuffer, String reason) {
         if (syncBuffer) {
-            Log.i(this.mTag, "setReportNextDraw syncBuffer=" + syncBuffer + ", reason=" + reason + ", caller=" + Debug.getCallers(5));
+            Log.i(
+                    this.mTag,
+                    "setReportNextDraw syncBuffer="
+                            + syncBuffer
+                            + ", reason="
+                            + reason
+                            + ", caller="
+                            + Debug.getCallers(5));
         }
         this.mSyncBuffer = syncBuffer;
         reportNextDraw(reason);
@@ -8710,8 +10135,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     class TakenSurfaceHolder extends BaseSurfaceHolder {
-        TakenSurfaceHolder() {
-        }
+        TakenSurfaceHolder() {}
 
         @Override // com.android.internal.view.BaseSurfaceHolder
         public boolean onAllowLockCanvas() {
@@ -8719,8 +10143,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
 
         @Override // com.android.internal.view.BaseSurfaceHolder
-        public void onRelayoutContainer() {
-        }
+        public void onRelayoutContainer() {}
 
         @Override // com.android.internal.view.BaseSurfaceHolder, android.view.SurfaceHolder
         public void setFormat(int format) {
@@ -8769,7 +10192,17 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
 
         @Override // android.view.IWindow
-        public void resized(ClientWindowFrames frames, boolean reportDraw, MergedConfiguration mergedConfiguration, InsetsState insetsState, boolean forceLayout, boolean alwaysConsumeSystemBars, int displayId, int syncSeqId, boolean dragResizing, ActivityWindowInfo activityWindowInfo) {
+        public void resized(
+                ClientWindowFrames frames,
+                boolean reportDraw,
+                MergedConfiguration mergedConfiguration,
+                InsetsState insetsState,
+                boolean forceLayout,
+                boolean alwaysConsumeSystemBars,
+                int displayId,
+                int syncSeqId,
+                boolean dragResizing,
+                ActivityWindowInfo activityWindowInfo) {
             MergedConfiguration mergedConfiguration2;
             ClientWindowFrames frames2;
             InsetsState insetsState2 = insetsState;
@@ -8780,11 +10213,31 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             if (viewAncestor == null) {
                 return;
             }
-            if (insetsState2.isSourceOrDefaultVisible(InsetsSource.ID_IME, WindowInsets.Type.ime())) {
-                ImeTracing.getInstance().triggerClientDump("ViewRootImpl.W#resized", viewAncestor.getInsetsController().getHost().getInputMethodManager(), null);
+            if (insetsState2.isSourceOrDefaultVisible(
+                    InsetsSource.ID_IME, WindowInsets.Type.ime())) {
+                ImeTracing.getInstance()
+                        .triggerClientDump(
+                                "ViewRootImpl.W#resized",
+                                viewAncestor
+                                        .getInsetsController()
+                                        .getHost()
+                                        .getInputMethodManager(),
+                                null);
             }
-            if (isFromResizeItem && viewAncestor.mHandler.getLooper() == ActivityThread.currentActivityThread().getLooper()) {
-                viewAncestor.handleResized(frames, reportDraw, mergedConfiguration, insetsState, forceLayout, alwaysConsumeSystemBars, displayId, syncSeqId, dragResizing, activityWindowInfo);
+            if (isFromResizeItem
+                    && viewAncestor.mHandler.getLooper()
+                            == ActivityThread.currentActivityThread().getLooper()) {
+                viewAncestor.handleResized(
+                        frames,
+                        reportDraw,
+                        mergedConfiguration,
+                        insetsState,
+                        forceLayout,
+                        alwaysConsumeSystemBars,
+                        displayId,
+                        syncSeqId,
+                        dragResizing,
+                        activityWindowInfo);
                 return;
             }
             if (!isFromResizeItem && Binder.getCallingPid() == Process.myPid()) {
@@ -8799,11 +10252,22 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 insetsState2 = insetsState3;
                 mergedConfiguration2 = new MergedConfiguration(mergedConfiguration);
             }
-            viewAncestor.dispatchResized(frames2, reportDraw, mergedConfiguration2, insetsState2, forceLayout, alwaysConsumeSystemBars, displayId, syncSeqId, dragResizing, activityWindowInfo);
+            viewAncestor.dispatchResized(
+                    frames2,
+                    reportDraw,
+                    mergedConfiguration2,
+                    insetsState2,
+                    forceLayout,
+                    alwaysConsumeSystemBars,
+                    displayId,
+                    syncSeqId,
+                    dragResizing,
+                    activityWindowInfo);
         }
 
         @Override // android.view.IWindow
-        public void insetsControlChanged(InsetsState insetsState, InsetsSourceControl.Array activeControls) {
+        public void insetsControlChanged(
+                InsetsState insetsState, InsetsSourceControl.Array activeControls) {
             boolean isFromInsetsControlChangeItem;
             boolean needsCopy = false;
             if (com.android.window.flags.Flags.insetsControlChangedItem()) {
@@ -8820,10 +10284,20 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 }
                 return;
             }
-            if (insetsState.isSourceOrDefaultVisible(InsetsSource.ID_IME, WindowInsets.Type.ime())) {
-                ImeTracing.getInstance().triggerClientDump("ViewRootImpl#dispatchInsetsControlChanged", viewAncestor.getInsetsController().getHost().getInputMethodManager(), null);
+            if (insetsState.isSourceOrDefaultVisible(
+                    InsetsSource.ID_IME, WindowInsets.Type.ime())) {
+                ImeTracing.getInstance()
+                        .triggerClientDump(
+                                "ViewRootImpl#dispatchInsetsControlChanged",
+                                viewAncestor
+                                        .getInsetsController()
+                                        .getHost()
+                                        .getInputMethodManager(),
+                                null);
             }
-            if (isFromInsetsControlChangeItem && viewAncestor.mHandler.getLooper() == ActivityThread.currentActivityThread().getLooper()) {
+            if (isFromInsetsControlChangeItem
+                    && viewAncestor.mHandler.getLooper()
+                            == ActivityThread.currentActivityThread().getLooper()) {
                 viewAncestor.handleInsetsControlChanged(insetsState, activeControls);
                 return;
             }
@@ -8841,7 +10315,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         public void showInsets(int types, boolean fromIme, ImeTracker.Token statsToken) {
             ViewRootImpl viewAncestor = this.mViewAncestor.get();
             if (fromIme) {
-                ImeTracing.getInstance().triggerClientDump("ViewRootImpl.W#showInsets", viewAncestor.getInsetsController().getHost().getInputMethodManager(), null);
+                ImeTracing.getInstance()
+                        .triggerClientDump(
+                                "ViewRootImpl.W#showInsets",
+                                viewAncestor
+                                        .getInsetsController()
+                                        .getHost()
+                                        .getInputMethodManager(),
+                                null);
             }
             if (viewAncestor != null) {
                 ImeTracker.forLogging().onProgress(statsToken, 28);
@@ -8855,7 +10336,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         public void hideInsets(int types, boolean fromIme, ImeTracker.Token statsToken) {
             ViewRootImpl viewAncestor = this.mViewAncestor.get();
             if (fromIme) {
-                ImeTracing.getInstance().triggerClientDump("ViewRootImpl.W#hideInsets", viewAncestor.getInsetsController().getHost().getInputMethodManager(), null);
+                ImeTracing.getInstance()
+                        .triggerClientDump(
+                                "ViewRootImpl.W#hideInsets",
+                                viewAncestor
+                                        .getInsetsController()
+                                        .getHost()
+                                        .getInputMethodManager(),
+                                null);
             }
             if (viewAncestor != null) {
                 ImeTracker.forLogging().onProgress(statsToken, 29);
@@ -8891,7 +10379,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
         private static int checkCallingPermission(String permission) {
             try {
-                return ActivityManager.getService().checkPermission(permission, Binder.getCallingPid(), Binder.getCallingUid());
+                return ActivityManager.getService()
+                        .checkPermission(
+                                permission, Binder.getCallingPid(), Binder.getCallingUid());
             } catch (RemoteException e) {
                 return -1;
             }
@@ -8905,7 +10395,11 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 return;
             }
             if (checkCallingPermission(Manifest.permission.DUMP) != 0) {
-                throw new SecurityException("Insufficient permissions to invoke executeCommand() from pid=" + Binder.getCallingPid() + ", uid=" + Binder.getCallingUid());
+                throw new SecurityException(
+                        "Insufficient permissions to invoke executeCommand() from pid="
+                                + Binder.getCallingPid()
+                                + ", uid="
+                                + Binder.getCallingUid());
             }
             OutputStream clientStream = null;
             try {
@@ -8945,7 +10439,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
 
         @Override // android.view.IWindow
-        public void dispatchWallpaperOffsets(float x, float y, float xStep, float yStep, float zoom, boolean sync) {
+        public void dispatchWallpaperOffsets(
+                float x, float y, float xStep, float yStep, float zoom, boolean sync) {
             if (sync) {
                 try {
                     this.mWindowSession.wallpaperOffsetsComplete(asBinder());
@@ -8955,7 +10450,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
 
         @Override // android.view.IWindow
-        public void dispatchWallpaperCommand(String action, int x, int y, int z, Bundle extras, boolean sync) {
+        public void dispatchWallpaperCommand(
+                String action, int x, int y, int z, Bundle extras, boolean sync) {
             if (sync) {
                 try {
                     this.mWindowSession.wallpaperCommandComplete(asBinder(), null);
@@ -9002,15 +10498,19 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             if (viewAncestor == null) {
                 return;
             }
-            viewAncestor.mHandler.postAtFrontOfQueue(new Runnable() { // from class: android.view.ViewRootImpl$W$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ViewRootImpl.W.lambda$dumpWindow$0(ParcelFileDescriptor.this, viewAncestor);
-                }
-            });
+            viewAncestor.mHandler.postAtFrontOfQueue(
+                    new Runnable() { // from class:
+                                     // android.view.ViewRootImpl$W$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ViewRootImpl.W.lambda$dumpWindow$0(
+                                    ParcelFileDescriptor.this, viewAncestor);
+                        }
+                    });
         }
 
-        static /* synthetic */ void lambda$dumpWindow$0(ParcelFileDescriptor pfd, ViewRootImpl viewAncestor) {
+        static /* synthetic */ void lambda$dumpWindow$0(
+                ParcelFileDescriptor pfd, ViewRootImpl viewAncestor) {
             StrictMode.ThreadPolicy oldPolicy = StrictMode.allowThreadDiskWrites();
             try {
                 PrintWriter pw = new FastPrintWriter(new FileOutputStream(pfd.getFileDescriptor()));
@@ -9058,7 +10558,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         @Override // android.view.IWindow
         public void invalidateForScreenShot(boolean forceMode) {
             final ViewRootImpl viewAncestor = this.mViewAncestor.get();
-            final String tag = viewAncestor.getTag() != null ? viewAncestor.getTag() : ViewRootImpl.TAG;
+            final String tag =
+                    viewAncestor.getTag() != null ? viewAncestor.getTag() : ViewRootImpl.TAG;
             Log.i(tag, "invalidateForScreenShot forceMode=" + forceMode);
             viewAncestor.mForceModeInScreenshot = forceMode;
             if (forceMode) {
@@ -9066,16 +10567,18 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 viewAncestor.mAttachInfo.mThreadedRenderer.setTargetHdrSdrRatio(1.0f);
             } else {
                 viewAncestor.mAttachInfo.mThreadedRenderer.setColorMode(2);
-                viewAncestor.mAttachInfo.mThreadedRenderer.setTargetHdrSdrRatio(viewAncestor.mHdrRenderState.getRenderHdrSdrRatio());
+                viewAncestor.mAttachInfo.mThreadedRenderer.setTargetHdrSdrRatio(
+                        viewAncestor.mHdrRenderState.getRenderHdrSdrRatio());
             }
             if (viewAncestor.mInvalidateForScreenshotRunnable == null) {
-                viewAncestor.mInvalidateForScreenshotRunnable = new Runnable() { // from class: android.view.ViewRootImpl.W.1
-                    @Override // java.lang.Runnable
-                    public void run() {
-                        Log.i(tag, "invalidateForScreenShot post vri invalidate");
-                        viewAncestor.invalidate();
-                    }
-                };
+                viewAncestor.mInvalidateForScreenshotRunnable =
+                        new Runnable() { // from class: android.view.ViewRootImpl.W.1
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                Log.i(tag, "invalidateForScreenShot post vri invalidate");
+                                viewAncestor.invalidate();
+                            }
+                        };
             }
             viewAncestor.mAttachInfo.mHandler.post(viewAncestor.mInvalidateForScreenshotRunnable);
         }
@@ -9105,12 +10608,16 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         return rq2;
     }
 
-    private void startDragResizing(Rect initialBounds, boolean fullscreen, Rect systemInsets, Rect stableInsets) {
+    private void startDragResizing(
+            Rect initialBounds, boolean fullscreen, Rect systemInsets, Rect stableInsets) {
         if (!this.mDragResizing) {
             this.mDragResizing = true;
             if (this.mUseMTRenderer) {
                 for (int i = this.mWindowCallbacks.size() - 1; i >= 0; i--) {
-                    this.mWindowCallbacks.get(i).onWindowDragResizeStart(initialBounds, fullscreen, systemInsets, stableInsets);
+                    this.mWindowCallbacks
+                            .get(i)
+                            .onWindowDragResizeStart(
+                                    initialBounds, fullscreen, systemInsets, stableInsets);
                 }
             }
             this.mFullRedrawNeeded = true;
@@ -9133,7 +10640,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         boolean updated = false;
         if (this.mUseMTRenderer) {
             for (int i = this.mWindowCallbacks.size() - 1; i >= 0; i--) {
-                updated |= this.mWindowCallbacks.get(i).onContentDrawn(this.mWindowAttributes.surfaceInsets.left, this.mWindowAttributes.surfaceInsets.top, this.mWidth, this.mHeight);
+                updated |=
+                        this.mWindowCallbacks
+                                .get(i)
+                                .onContentDrawn(
+                                        this.mWindowAttributes.surfaceInsets.left,
+                                        this.mWindowAttributes.surfaceInsets.top,
+                                        this.mWidth,
+                                        this.mHeight);
             }
         }
         return updated | (this.mDragResizing && this.mReportNextDraw);
@@ -9166,7 +10680,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     public InputTransferToken getInputTransferToken() {
         IBinder inputToken = getInputToken();
         if (inputToken == null) {
-            throw new IllegalStateException("Called getInputTransferToken for Window with no input channel");
+            throw new IllegalStateException(
+                    "Called getInputTransferToken for Window with no input channel");
         }
         return new InputTransferToken(inputToken);
     }
@@ -9175,18 +10690,19 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         return this.mAttachInfo.mWindowToken;
     }
 
-    final class AccessibilityInteractionConnectionManager implements AccessibilityManager.AccessibilityStateChangeListener {
+    final class AccessibilityInteractionConnectionManager
+            implements AccessibilityManager.AccessibilityStateChangeListener {
         private int mDirectConnectionId = -1;
 
-        AccessibilityInteractionConnectionManager() {
-        }
+        AccessibilityInteractionConnectionManager() {}
 
         @Override // android.view.accessibility.AccessibilityManager.AccessibilityStateChangeListener
         public void onAccessibilityStateChanged(boolean enabled) {
             if (enabled) {
                 ensureConnection();
                 ViewRootImpl.this.setAccessibilityWindowAttributesIfNeeded();
-                if (ViewRootImpl.this.mAttachInfo.mHasWindowFocus && ViewRootImpl.this.mView != null) {
+                if (ViewRootImpl.this.mAttachInfo.mHasWindowFocus
+                        && ViewRootImpl.this.mView != null) {
                     ViewRootImpl.this.mView.sendAccessibilityEvent(32);
                     View focusedView = ViewRootImpl.this.mView.findFocus();
                     if (focusedView != null && focusedView != ViewRootImpl.this.mView) {
@@ -9194,7 +10710,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     }
                 }
                 if (ViewRootImpl.this.mAttachInfo.mLeashedParentToken != null) {
-                    ViewRootImpl.this.mAccessibilityManager.associateEmbeddedHierarchy(ViewRootImpl.this.mAttachInfo.mLeashedParentToken, ViewRootImpl.this.mLeashToken);
+                    ViewRootImpl.this.mAccessibilityManager.associateEmbeddedHierarchy(
+                            ViewRootImpl.this.mAttachInfo.mLeashedParentToken,
+                            ViewRootImpl.this.mLeashToken);
                     return;
                 }
                 return;
@@ -9206,7 +10724,13 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         public void ensureConnection() {
             boolean registered = ViewRootImpl.this.mAttachInfo.mAccessibilityWindowId != -1;
             if (!registered) {
-                ViewRootImpl.this.mAttachInfo.mAccessibilityWindowId = ViewRootImpl.this.mAccessibilityManager.addAccessibilityInteractionConnection(ViewRootImpl.this.mWindow, ViewRootImpl.this.mLeashToken, ViewRootImpl.this.mContext.getPackageName(), new AccessibilityInteractionConnection(ViewRootImpl.this));
+                ViewRootImpl.this.mAttachInfo.mAccessibilityWindowId =
+                        ViewRootImpl.this.mAccessibilityManager
+                                .addAccessibilityInteractionConnection(
+                                        ViewRootImpl.this.mWindow,
+                                        ViewRootImpl.this.mLeashToken,
+                                        ViewRootImpl.this.mContext.getPackageName(),
+                                        new AccessibilityInteractionConnection(ViewRootImpl.this));
             }
         }
 
@@ -9215,13 +10739,17 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             if (registered) {
                 ViewRootImpl.this.mAttachInfo.mAccessibilityWindowId = -1;
                 ViewRootImpl.this.mAccessibilityWindowAttributes = null;
-                ViewRootImpl.this.mAccessibilityManager.removeAccessibilityInteractionConnection(ViewRootImpl.this.mWindow);
+                ViewRootImpl.this.mAccessibilityManager.removeAccessibilityInteractionConnection(
+                        ViewRootImpl.this.mWindow);
             }
         }
 
         public int ensureDirectConnection() {
             if (this.mDirectConnectionId == -1) {
-                this.mDirectConnectionId = AccessibilityInteractionClient.addDirectConnection(new AccessibilityInteractionConnection(ViewRootImpl.this), ViewRootImpl.this.mAccessibilityManager);
+                this.mDirectConnectionId =
+                        AccessibilityInteractionClient.addDirectConnection(
+                                new AccessibilityInteractionConnection(ViewRootImpl.this),
+                                ViewRootImpl.this.mAccessibilityManager);
                 ViewRootImpl.this.mAccessibilityManager.notifyAccessibilityStateChanged();
             }
             return this.mDirectConnectionId;
@@ -9259,8 +10787,7 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     private final class HCTRelayoutHandler extends Handler {
         public static final int MSG_NEED_TO_DO_RELAYOUT = 1;
 
-        public HCTRelayoutHandler() {
-        }
+        public HCTRelayoutHandler() {}
 
         @Override // android.os.Handler
         public void handleMessage(Message message) {
@@ -9272,9 +10799,11 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
     }
 
-    final class HighContrastTextManager implements AccessibilityManager.HighTextContrastChangeListener {
+    final class HighContrastTextManager
+            implements AccessibilityManager.HighTextContrastChangeListener {
         HighContrastTextManager() {
-            ThreadedRenderer.setHighContrastText(ViewRootImpl.this.mAccessibilityManager.isHighTextContrastEnabled());
+            ThreadedRenderer.setHighContrastText(
+                    ViewRootImpl.this.mAccessibilityManager.isHighTextContrastEnabled());
         }
 
         @Override // android.view.accessibility.AccessibilityManager.HighTextContrastChangeListener
@@ -9284,7 +10813,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
     }
 
-    static final class AccessibilityInteractionConnection extends IAccessibilityInteractionConnection.Stub {
+    static final class AccessibilityInteractionConnection
+            extends IAccessibilityInteractionConnection.Stub {
         private final WeakReference<ViewRootImpl> mViewRootImpl;
 
         AccessibilityInteractionConnection(ViewRootImpl viewRootImpl) {
@@ -9292,10 +10822,32 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
 
         @Override // android.view.accessibility.IAccessibilityInteractionConnection
-        public void findAccessibilityNodeInfoByAccessibilityId(long accessibilityNodeId, Region interactiveRegion, int interactionId, IAccessibilityInteractionConnectionCallback callback, int flags, int interrogatingPid, long interrogatingTid, MagnificationSpec spec, float[] matrix, Bundle args) {
+        public void findAccessibilityNodeInfoByAccessibilityId(
+                long accessibilityNodeId,
+                Region interactiveRegion,
+                int interactionId,
+                IAccessibilityInteractionConnectionCallback callback,
+                int flags,
+                int interrogatingPid,
+                long interrogatingTid,
+                MagnificationSpec spec,
+                float[] matrix,
+                Bundle args) {
             ViewRootImpl viewRootImpl = this.mViewRootImpl.get();
             if (viewRootImpl != null && viewRootImpl.mView != null) {
-                viewRootImpl.getAccessibilityInteractionController().findAccessibilityNodeInfoByAccessibilityIdClientThread(accessibilityNodeId, interactiveRegion, interactionId, callback, flags, interrogatingPid, interrogatingTid, spec, matrix, args);
+                viewRootImpl
+                        .getAccessibilityInteractionController()
+                        .findAccessibilityNodeInfoByAccessibilityIdClientThread(
+                                accessibilityNodeId,
+                                interactiveRegion,
+                                interactionId,
+                                callback,
+                                flags,
+                                interrogatingPid,
+                                interrogatingTid,
+                                spec,
+                                matrix,
+                                args);
             } else {
                 try {
                     callback.setFindAccessibilityNodeInfosResult(null, interactionId);
@@ -9305,10 +10857,28 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
 
         @Override // android.view.accessibility.IAccessibilityInteractionConnection
-        public void performAccessibilityAction(long accessibilityNodeId, int action, Bundle arguments, int interactionId, IAccessibilityInteractionConnectionCallback callback, int flags, int interrogatingPid, long interrogatingTid) {
+        public void performAccessibilityAction(
+                long accessibilityNodeId,
+                int action,
+                Bundle arguments,
+                int interactionId,
+                IAccessibilityInteractionConnectionCallback callback,
+                int flags,
+                int interrogatingPid,
+                long interrogatingTid) {
             ViewRootImpl viewRootImpl = this.mViewRootImpl.get();
             if (viewRootImpl != null && viewRootImpl.mView != null) {
-                viewRootImpl.getAccessibilityInteractionController().performAccessibilityActionClientThread(accessibilityNodeId, action, arguments, interactionId, callback, flags, interrogatingPid, interrogatingTid);
+                viewRootImpl
+                        .getAccessibilityInteractionController()
+                        .performAccessibilityActionClientThread(
+                                accessibilityNodeId,
+                                action,
+                                arguments,
+                                interactionId,
+                                callback,
+                                flags,
+                                interrogatingPid,
+                                interrogatingTid);
             } else {
                 try {
                     callback.setPerformAccessibilityActionResult(false, interactionId);
@@ -9318,10 +10888,32 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
 
         @Override // android.view.accessibility.IAccessibilityInteractionConnection
-        public void findAccessibilityNodeInfosByViewId(long accessibilityNodeId, String viewId, Region interactiveRegion, int interactionId, IAccessibilityInteractionConnectionCallback callback, int flags, int interrogatingPid, long interrogatingTid, MagnificationSpec spec, float[] matrix) {
+        public void findAccessibilityNodeInfosByViewId(
+                long accessibilityNodeId,
+                String viewId,
+                Region interactiveRegion,
+                int interactionId,
+                IAccessibilityInteractionConnectionCallback callback,
+                int flags,
+                int interrogatingPid,
+                long interrogatingTid,
+                MagnificationSpec spec,
+                float[] matrix) {
             ViewRootImpl viewRootImpl = this.mViewRootImpl.get();
             if (viewRootImpl != null && viewRootImpl.mView != null) {
-                viewRootImpl.getAccessibilityInteractionController().findAccessibilityNodeInfosByViewIdClientThread(accessibilityNodeId, viewId, interactiveRegion, interactionId, callback, flags, interrogatingPid, interrogatingTid, spec, matrix);
+                viewRootImpl
+                        .getAccessibilityInteractionController()
+                        .findAccessibilityNodeInfosByViewIdClientThread(
+                                accessibilityNodeId,
+                                viewId,
+                                interactiveRegion,
+                                interactionId,
+                                callback,
+                                flags,
+                                interrogatingPid,
+                                interrogatingTid,
+                                spec,
+                                matrix);
             } else {
                 try {
                     callback.setFindAccessibilityNodeInfoResult(null, interactionId);
@@ -9331,10 +10923,32 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
 
         @Override // android.view.accessibility.IAccessibilityInteractionConnection
-        public void findAccessibilityNodeInfosByText(long accessibilityNodeId, String text, Region interactiveRegion, int interactionId, IAccessibilityInteractionConnectionCallback callback, int flags, int interrogatingPid, long interrogatingTid, MagnificationSpec spec, float[] matrix) {
+        public void findAccessibilityNodeInfosByText(
+                long accessibilityNodeId,
+                String text,
+                Region interactiveRegion,
+                int interactionId,
+                IAccessibilityInteractionConnectionCallback callback,
+                int flags,
+                int interrogatingPid,
+                long interrogatingTid,
+                MagnificationSpec spec,
+                float[] matrix) {
             ViewRootImpl viewRootImpl = this.mViewRootImpl.get();
             if (viewRootImpl != null && viewRootImpl.mView != null) {
-                viewRootImpl.getAccessibilityInteractionController().findAccessibilityNodeInfosByTextClientThread(accessibilityNodeId, text, interactiveRegion, interactionId, callback, flags, interrogatingPid, interrogatingTid, spec, matrix);
+                viewRootImpl
+                        .getAccessibilityInteractionController()
+                        .findAccessibilityNodeInfosByTextClientThread(
+                                accessibilityNodeId,
+                                text,
+                                interactiveRegion,
+                                interactionId,
+                                callback,
+                                flags,
+                                interrogatingPid,
+                                interrogatingTid,
+                                spec,
+                                matrix);
             } else {
                 try {
                     callback.setFindAccessibilityNodeInfosResult(null, interactionId);
@@ -9344,10 +10958,32 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
 
         @Override // android.view.accessibility.IAccessibilityInteractionConnection
-        public void findFocus(long accessibilityNodeId, int focusType, Region interactiveRegion, int interactionId, IAccessibilityInteractionConnectionCallback callback, int flags, int interrogatingPid, long interrogatingTid, MagnificationSpec spec, float[] matrix) {
+        public void findFocus(
+                long accessibilityNodeId,
+                int focusType,
+                Region interactiveRegion,
+                int interactionId,
+                IAccessibilityInteractionConnectionCallback callback,
+                int flags,
+                int interrogatingPid,
+                long interrogatingTid,
+                MagnificationSpec spec,
+                float[] matrix) {
             ViewRootImpl viewRootImpl = this.mViewRootImpl.get();
             if (viewRootImpl != null && viewRootImpl.mView != null) {
-                viewRootImpl.getAccessibilityInteractionController().findFocusClientThread(accessibilityNodeId, focusType, interactiveRegion, interactionId, callback, flags, interrogatingPid, interrogatingTid, spec, matrix);
+                viewRootImpl
+                        .getAccessibilityInteractionController()
+                        .findFocusClientThread(
+                                accessibilityNodeId,
+                                focusType,
+                                interactiveRegion,
+                                interactionId,
+                                callback,
+                                flags,
+                                interrogatingPid,
+                                interrogatingTid,
+                                spec,
+                                matrix);
             } else {
                 try {
                     callback.setFindAccessibilityNodeInfoResult(null, interactionId);
@@ -9357,10 +10993,32 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
 
         @Override // android.view.accessibility.IAccessibilityInteractionConnection
-        public void focusSearch(long accessibilityNodeId, int direction, Region interactiveRegion, int interactionId, IAccessibilityInteractionConnectionCallback callback, int flags, int interrogatingPid, long interrogatingTid, MagnificationSpec spec, float[] matrix) {
+        public void focusSearch(
+                long accessibilityNodeId,
+                int direction,
+                Region interactiveRegion,
+                int interactionId,
+                IAccessibilityInteractionConnectionCallback callback,
+                int flags,
+                int interrogatingPid,
+                long interrogatingTid,
+                MagnificationSpec spec,
+                float[] matrix) {
             ViewRootImpl viewRootImpl = this.mViewRootImpl.get();
             if (viewRootImpl != null && viewRootImpl.mView != null) {
-                viewRootImpl.getAccessibilityInteractionController().focusSearchClientThread(accessibilityNodeId, direction, interactiveRegion, interactionId, callback, flags, interrogatingPid, interrogatingTid, spec, matrix);
+                viewRootImpl
+                        .getAccessibilityInteractionController()
+                        .focusSearchClientThread(
+                                accessibilityNodeId,
+                                direction,
+                                interactiveRegion,
+                                interactionId,
+                                callback,
+                                flags,
+                                interrogatingPid,
+                                interrogatingTid,
+                                spec,
+                                matrix);
             } else {
                 try {
                     callback.setFindAccessibilityNodeInfoResult(null, interactionId);
@@ -9373,7 +11031,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         public void clearAccessibilityFocus() {
             ViewRootImpl viewRootImpl = this.mViewRootImpl.get();
             if (viewRootImpl != null && viewRootImpl.mView != null) {
-                viewRootImpl.getAccessibilityInteractionController().clearAccessibilityFocusClientThread();
+                viewRootImpl
+                        .getAccessibilityInteractionController()
+                        .clearAccessibilityFocusClientThread();
             }
         }
 
@@ -9381,15 +11041,22 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         public void notifyOutsideTouch() {
             ViewRootImpl viewRootImpl = this.mViewRootImpl.get();
             if (viewRootImpl != null && viewRootImpl.mView != null) {
-                viewRootImpl.getAccessibilityInteractionController().notifyOutsideTouchClientThread();
+                viewRootImpl
+                        .getAccessibilityInteractionController()
+                        .notifyOutsideTouchClientThread();
             }
         }
 
         @Override // android.view.accessibility.IAccessibilityInteractionConnection
-        public void takeScreenshotOfWindow(int interactionId, ScreenCapture.ScreenCaptureListener listener, IAccessibilityInteractionConnectionCallback callback) {
+        public void takeScreenshotOfWindow(
+                int interactionId,
+                ScreenCapture.ScreenCaptureListener listener,
+                IAccessibilityInteractionConnectionCallback callback) {
             ViewRootImpl viewRootImpl = this.mViewRootImpl.get();
             if (viewRootImpl != null && viewRootImpl.mView != null) {
-                viewRootImpl.getAccessibilityInteractionController().takeScreenshotOfWindowClientThread(interactionId, listener, callback);
+                viewRootImpl
+                        .getAccessibilityInteractionController()
+                        .takeScreenshotOfWindowClientThread(interactionId, listener, callback);
             } else {
                 try {
                     callback.sendTakeScreenshotOfWindowError(1, interactionId);
@@ -9399,10 +11066,16 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
 
         @Override // android.view.accessibility.IAccessibilityInteractionConnection
-        public void attachAccessibilityOverlayToWindow(SurfaceControl sc, int interactionId, IAccessibilityInteractionConnectionCallback callback) {
+        public void attachAccessibilityOverlayToWindow(
+                SurfaceControl sc,
+                int interactionId,
+                IAccessibilityInteractionConnectionCallback callback) {
             ViewRootImpl viewRootImpl = this.mViewRootImpl.get();
             if (viewRootImpl != null) {
-                viewRootImpl.getAccessibilityInteractionController().attachAccessibilityOverlayToWindowClientThread(sc, interactionId, callback);
+                viewRootImpl
+                        .getAccessibilityInteractionController()
+                        .attachAccessibilityOverlayToWindowClientThread(
+                                sc, interactionId, callback);
             }
         }
     }
@@ -9453,8 +11126,15 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
         public void runOrPost(View source, int changeType) {
             if (ViewRootImpl.this.mHandler.getLooper() != Looper.myLooper()) {
-                CalledFromWrongThreadException e = new CalledFromWrongThreadException("Only the original thread that created a view hierarchy can touch its views.");
-                Log.e(ViewRootImpl.TAG, "Accessibility content change on non-UI thread. Future Android versions will throw an exception.", e);
+                CalledFromWrongThreadException e =
+                        new CalledFromWrongThreadException(
+                                "Only the original thread that created a view hierarchy can touch"
+                                    + " its views.");
+                Log.e(
+                        ViewRootImpl.TAG,
+                        "Accessibility content change on non-UI thread. Future Android versions"
+                            + " will throw an exception.",
+                        e);
                 ViewRootImpl.this.mHandler.removeCallbacks(this);
                 if (this.mSource != null) {
                     run();
@@ -9485,7 +11165,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     this.mSource = predecessor != null ? predecessor : source;
                     this.mChangeTypes |= changeType;
                 }
-                int performingAction = ViewRootImpl.this.mAccessibilityManager.getPerformingAction();
+                int performingAction =
+                        ViewRootImpl.this.mAccessibilityManager.getPerformingAction();
                 if (performingAction != 0) {
                     if (this.mAction.isEmpty()) {
                         this.mAction = OptionalInt.of(performingAction);
@@ -9503,14 +11184,18 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             this.mSource = source;
             this.mChangeTypes = changeType;
             if (ViewRootImpl.this.mAccessibilityManager.getPerformingAction() != 0) {
-                this.mAction = OptionalInt.of(ViewRootImpl.this.mAccessibilityManager.getPerformingAction());
+                this.mAction =
+                        OptionalInt.of(
+                                ViewRootImpl.this.mAccessibilityManager.getPerformingAction());
             }
             long timeSinceLastMillis = SystemClock.uptimeMillis() - this.mLastEventTimeMillis;
-            long minEventIntervalMillis = ViewConfiguration.getSendRecurringAccessibilityEventsInterval();
+            long minEventIntervalMillis =
+                    ViewConfiguration.getSendRecurringAccessibilityEventsInterval();
             if (timeSinceLastMillis >= minEventIntervalMillis) {
                 removeCallbacksAndRun();
             } else {
-                ViewRootImpl.this.mHandler.postDelayed(this, minEventIntervalMillis - timeSinceLastMillis);
+                ViewRootImpl.this.mHandler.postDelayed(
+                        this, minEventIntervalMillis - timeSinceLastMillis);
             }
         }
 
@@ -9520,7 +11205,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
 
         private boolean canContinueThrottle(View source, int changeType) {
-            if (!android.view.accessibility.Flags.reduceWindowContentChangedEventThrottle() || this.mSource == null || this.mSource == source) {
+            if (!android.view.accessibility.Flags.reduceWindowContentChangedEventThrottle()
+                    || this.mSource == null
+                    || this.mSource == source) {
                 return true;
             }
             return changeType == 1 && this.mChangeTypes == 1;
@@ -9561,7 +11248,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         void preDispatch(KeyEvent event) {
             int idx;
             this.mCurrentReceiver = null;
-            if (event.getAction() == 1 && (idx = this.mCapturedKeys.indexOfKey(event.getKeyCode())) >= 0) {
+            if (event.getAction() == 1
+                    && (idx = this.mCapturedKeys.indexOfKey(event.getKeyCode())) >= 0) {
                 this.mCurrentReceiver = this.mCapturedKeys.valueAt(idx);
                 this.mCapturedKeys.removeAt(idx);
             }
@@ -9597,7 +11285,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     private void updateDisplayDecoration() {
-        this.mTransaction.setDisplayDecoration(this.mSurfaceControl, this.mDisplayDecorationCached).apply();
+        this.mTransaction
+                .setDisplayDecoration(this.mSurfaceControl, this.mDisplayDecorationCached)
+                .apply();
     }
 
     public void setSkipScreenshot(SurfaceControl.Transaction t, boolean skipScreenshot) {
@@ -9645,7 +11335,20 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     public void mergeWithNextTransaction(SurfaceControl.Transaction t, long frameNumber) {
-        Log.i(this.mTag, "mWNT: t=0x" + (t != null ? Long.toHexString(t.mNativeObject) : "null") + " mBlastBufferQueue=0x" + (this.mBlastBufferQueue != null ? Long.toHexString(this.mBlastBufferQueue.mNativeObject) : "null") + " fn= " + frameNumber + " HdrRenderState mRenderHdrSdrRatio=" + this.mHdrRenderState.getRenderHdrSdrRatio() + " caller= " + Debug.getCallers(3));
+        Log.i(
+                this.mTag,
+                "mWNT: t=0x"
+                        + (t != null ? Long.toHexString(t.mNativeObject) : "null")
+                        + " mBlastBufferQueue=0x"
+                        + (this.mBlastBufferQueue != null
+                                ? Long.toHexString(this.mBlastBufferQueue.mNativeObject)
+                                : "null")
+                        + " fn= "
+                        + frameNumber
+                        + " HdrRenderState mRenderHdrSdrRatio="
+                        + this.mHdrRenderState.getRenderHdrSdrRatio()
+                        + " caller= "
+                        + Debug.getCallers(3));
         if (this.mBlastBufferQueue != null) {
             this.mBlastBufferQueue.mergeWithNextTransaction(t, frameNumber);
         } else {
@@ -9687,16 +11390,20 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     @Override // android.view.AttachedSurfaceControl
-    public void addOnBufferTransformHintChangedListener(AttachedSurfaceControl.OnBufferTransformHintChangedListener listener) {
+    public void addOnBufferTransformHintChangedListener(
+            AttachedSurfaceControl.OnBufferTransformHintChangedListener listener) {
         Objects.requireNonNull(listener);
         if (this.mTransformHintListeners.contains(listener)) {
-            throw new IllegalArgumentException("attempt to call addOnBufferTransformHintChangedListener() with a previously registered listener");
+            throw new IllegalArgumentException(
+                    "attempt to call addOnBufferTransformHintChangedListener() with a previously"
+                        + " registered listener");
         }
         this.mTransformHintListeners.add(listener);
     }
 
     @Override // android.view.AttachedSurfaceControl
-    public void removeOnBufferTransformHintChangedListener(AttachedSurfaceControl.OnBufferTransformHintChangedListener listener) {
+    public void removeOnBufferTransformHintChangedListener(
+            AttachedSurfaceControl.OnBufferTransformHintChangedListener listener) {
         Objects.requireNonNull(listener);
         this.mTransformHintListeners.remove(listener);
     }
@@ -9705,7 +11412,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         if (this.mTransformHintListeners.isEmpty()) {
             return;
         }
-        ArrayList<AttachedSurfaceControl.OnBufferTransformHintChangedListener> listeners = (ArrayList) this.mTransformHintListeners.clone();
+        ArrayList<AttachedSurfaceControl.OnBufferTransformHintChangedListener> listeners =
+                (ArrayList) this.mTransformHintListeners.clone();
         for (int i = 0; i < listeners.size(); i++) {
             AttachedSurfaceControl.OnBufferTransformHintChangedListener listener = listeners.get(i);
             listener.onBufferTransformHintChanged(hint);
@@ -9718,7 +11426,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     void forceWmRelayout() {
         this.mForceNextWindowRelayout = true;
-        if (DEBUG_TRAVERSAL && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
+        if (DEBUG_TRAVERSAL
+                && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
             Log.i(this.mTag, "Traversal, [17] mView=" + this.mView);
         }
         scheduleTraversals();
@@ -9734,7 +11443,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     private void registerBackCallbackOnWindow() {
-        this.mOnBackInvokedDispatcher.attachToWindow(this.mWindowSession, this.mWindow, this.mImeBackAnimationController);
+        this.mOnBackInvokedDispatcher.attachToWindow(
+                this.mWindowSession, this.mWindow, this.mImeBackAnimationController);
     }
 
     private void sendBackKeyEvent(int action) {
@@ -9744,16 +11454,20 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     private void registerCompatOnBackInvokedCallback() {
-        this.mCompatOnBackInvokedCallback = new CompatOnBackInvokedCallback() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda15
-            @Override // android.window.CompatOnBackInvokedCallback, android.window.OnBackInvokedCallback
-            public final void onBackInvoked() {
-                ViewRootImpl.this.lambda$registerCompatOnBackInvokedCallback$12();
-            }
-        };
+        this.mCompatOnBackInvokedCallback =
+                new CompatOnBackInvokedCallback() { // from class:
+                                                    // android.view.ViewRootImpl$$ExternalSyntheticLambda15
+                    @Override // android.window.CompatOnBackInvokedCallback,
+                              // android.window.OnBackInvokedCallback
+                    public final void onBackInvoked() {
+                        ViewRootImpl.this.lambda$registerCompatOnBackInvokedCallback$12();
+                    }
+                };
         if (this.mOnBackInvokedDispatcher.hasImeOnBackInvokedDispatcher()) {
             Log.d(TAG, "Skip registering CompatOnBackInvokedCallback on IME dispatcher");
         } else {
-            this.mOnBackInvokedDispatcher.registerOnBackInvokedCallback(0, this.mCompatOnBackInvokedCallback);
+            this.mOnBackInvokedDispatcher.registerOnBackInvokedCallback(
+                    0, this.mCompatOnBackInvokedCallback);
         }
     }
 
@@ -9798,7 +11512,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         } else {
             t = null;
         }
-        this.mAttachInfo.mThreadedRenderer.registerRtFrameCallback(new AnonymousClass11(t, surfaceSyncGroup, syncBuffer));
+        this.mAttachInfo.mThreadedRenderer.registerRtFrameCallback(
+                new AnonymousClass11(t, surfaceSyncGroup, syncBuffer));
     }
 
     /* renamed from: android.view.ViewRootImpl$11, reason: invalid class name */
@@ -9807,27 +11522,36 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         final /* synthetic */ boolean val$syncBuffer;
         final /* synthetic */ SurfaceControl.Transaction val$t;
 
-        AnonymousClass11(SurfaceControl.Transaction transaction, SurfaceSyncGroup surfaceSyncGroup, boolean z) {
+        AnonymousClass11(
+                SurfaceControl.Transaction transaction,
+                SurfaceSyncGroup surfaceSyncGroup,
+                boolean z) {
             this.val$t = transaction;
             this.val$surfaceSyncGroup = surfaceSyncGroup;
             this.val$syncBuffer = z;
         }
 
         @Override // android.graphics.HardwareRenderer.FrameDrawingCallback
-        public void onFrameDraw(long frame) {
-        }
+        public void onFrameDraw(long frame) {}
 
         @Override // android.graphics.HardwareRenderer.FrameDrawingCallback
         public HardwareRenderer.FrameCommitCallback onFrameDraw(int syncResult, final long frame) {
             ViewRootImpl.this.mFrameNumber = frame;
             if (ViewRootImpl.DEBUG_BLAST) {
-                Log.d(ViewRootImpl.this.mTag, "Received frameDrawingCallback syncResult=" + syncResult + " frameNum=" + frame + MediaMetrics.SEPARATOR);
+                Log.d(
+                        ViewRootImpl.this.mTag,
+                        "Received frameDrawingCallback syncResult="
+                                + syncResult
+                                + " frameNum="
+                                + frame
+                                + MediaMetrics.SEPARATOR);
             }
             if (this.val$t != null) {
                 ViewRootImpl.this.mergeWithNextTransaction(this.val$t, frame);
             }
             if ((syncResult & 6) != 0) {
-                this.val$surfaceSyncGroup.addTransaction(ViewRootImpl.this.mBlastBufferQueue.gatherPendingTransactions(frame));
+                this.val$surfaceSyncGroup.addTransaction(
+                        ViewRootImpl.this.mBlastBufferQueue.gatherPendingTransactions(frame));
                 this.val$surfaceSyncGroup.markSyncReady();
                 return null;
             }
@@ -9837,53 +11561,77 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             if (this.val$syncBuffer) {
                 BLASTBufferQueue bLASTBufferQueue = ViewRootImpl.this.mBlastBufferQueue;
                 final SurfaceSyncGroup surfaceSyncGroup = this.val$surfaceSyncGroup;
-                boolean result = bLASTBufferQueue.syncNextTransaction(new Consumer() { // from class: android.view.ViewRootImpl$11$$ExternalSyntheticLambda2
-                    @Override // java.util.function.Consumer
-                    public final void accept(Object obj) {
-                        ViewRootImpl.AnonymousClass11.this.lambda$onFrameDraw$2(surfaceSyncGroup, (SurfaceControl.Transaction) obj);
-                    }
-                });
+                boolean result =
+                        bLASTBufferQueue.syncNextTransaction(
+                                new Consumer() { // from class:
+                                                 // android.view.ViewRootImpl$11$$ExternalSyntheticLambda2
+                                    @Override // java.util.function.Consumer
+                                    public final void accept(Object obj) {
+                                        ViewRootImpl.AnonymousClass11.this.lambda$onFrameDraw$2(
+                                                surfaceSyncGroup, (SurfaceControl.Transaction) obj);
+                                    }
+                                });
                 if (!result) {
-                    Log.w(ViewRootImpl.this.mTag, "Unable to syncNextTransaction. Possibly something else is trying to sync?");
+                    Log.w(
+                            ViewRootImpl.this.mTag,
+                            "Unable to syncNextTransaction. Possibly something else is trying to"
+                                + " sync?");
                     this.val$surfaceSyncGroup.markSyncReady();
                 }
             }
             final SurfaceSyncGroup surfaceSyncGroup2 = this.val$surfaceSyncGroup;
             final boolean z = this.val$syncBuffer;
-            return new HardwareRenderer.FrameCommitCallback() { // from class: android.view.ViewRootImpl$11$$ExternalSyntheticLambda3
+            return new HardwareRenderer
+                    .FrameCommitCallback() { // from class:
+                                             // android.view.ViewRootImpl$11$$ExternalSyntheticLambda3
                 @Override // android.graphics.HardwareRenderer.FrameCommitCallback
                 public final void onFrameCommit(boolean z2) {
-                    ViewRootImpl.AnonymousClass11.this.lambda$onFrameDraw$3(frame, surfaceSyncGroup2, z, z2);
+                    ViewRootImpl.AnonymousClass11.this.lambda$onFrameDraw$3(
+                            frame, surfaceSyncGroup2, z, z2);
                 }
             };
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onFrameDraw$2(SurfaceSyncGroup surfaceSyncGroup, SurfaceControl.Transaction transaction) {
+        public /* synthetic */ void lambda$onFrameDraw$2(
+                SurfaceSyncGroup surfaceSyncGroup, SurfaceControl.Transaction transaction) {
             if (CoreRune.FW_SURFACE_DEBUG_APPLY) {
                 transaction.addDebugName("syncBuffer_" + surfaceSyncGroup.getName());
-                Log.i(ViewRootImpl.this.mTag, "Received ready transaction from native, debugName=" + transaction.mDebugName);
+                Log.i(
+                        ViewRootImpl.this.mTag,
+                        "Received ready transaction from native, debugName="
+                                + transaction.mDebugName);
             }
-            final Runnable timeoutRunnable = new Runnable() { // from class: android.view.ViewRootImpl$11$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ViewRootImpl.AnonymousClass11.this.lambda$onFrameDraw$0();
-                }
-            };
-            ViewRootImpl.this.mHandler.postDelayed(timeoutRunnable, Build.HW_TIMEOUT_MULTIPLIER * 4000);
-            transaction.addTransactionCommittedListener(ViewRootImpl.this.mSimpleExecutor, new SurfaceControl.TransactionCommittedListener() { // from class: android.view.ViewRootImpl$11$$ExternalSyntheticLambda1
-                @Override // android.view.SurfaceControl.TransactionCommittedListener
-                public final void onTransactionCommitted() {
-                    ViewRootImpl.AnonymousClass11.this.lambda$onFrameDraw$1(timeoutRunnable);
-                }
-            });
+            final Runnable timeoutRunnable =
+                    new Runnable() { // from class:
+                                     // android.view.ViewRootImpl$11$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ViewRootImpl.AnonymousClass11.this.lambda$onFrameDraw$0();
+                        }
+                    };
+            ViewRootImpl.this.mHandler.postDelayed(
+                    timeoutRunnable, Build.HW_TIMEOUT_MULTIPLIER * 4000);
+            transaction.addTransactionCommittedListener(
+                    ViewRootImpl.this.mSimpleExecutor,
+                    new SurfaceControl
+                            .TransactionCommittedListener() { // from class:
+                                                              // android.view.ViewRootImpl$11$$ExternalSyntheticLambda1
+                        @Override // android.view.SurfaceControl.TransactionCommittedListener
+                        public final void onTransactionCommitted() {
+                            ViewRootImpl.AnonymousClass11.this.lambda$onFrameDraw$1(
+                                    timeoutRunnable);
+                        }
+                    });
             surfaceSyncGroup.addTransaction(transaction);
             surfaceSyncGroup.markSyncReady();
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$onFrameDraw$0() {
-            Log.e(ViewRootImpl.this.mTag, "Failed to submit the sync transaction after 4s. Likely to ANR soon");
+            Log.e(
+                    ViewRootImpl.this.mTag,
+                    "Failed to submit the sync transaction after 4s. Likely to ANR soon");
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -9892,13 +11640,23 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$onFrameDraw$3(long frame, SurfaceSyncGroup surfaceSyncGroup, boolean syncBuffer, boolean didProduceBuffer) {
+        public /* synthetic */ void lambda$onFrameDraw$3(
+                long frame,
+                SurfaceSyncGroup surfaceSyncGroup,
+                boolean syncBuffer,
+                boolean didProduceBuffer) {
             if (ViewRootImpl.DEBUG_BLAST) {
-                Log.i(ViewRootImpl.this.mTag, "Received frameCommittedCallback lastAttemptedDrawFrameNum=" + frame + " didProduceBuffer=" + didProduceBuffer);
+                Log.i(
+                        ViewRootImpl.this.mTag,
+                        "Received frameCommittedCallback lastAttemptedDrawFrameNum="
+                                + frame
+                                + " didProduceBuffer="
+                                + didProduceBuffer);
             }
             if (!didProduceBuffer) {
                 ViewRootImpl.this.mBlastBufferQueue.clearSyncTransaction();
-                surfaceSyncGroup.addTransaction(ViewRootImpl.this.mBlastBufferQueue.gatherPendingTransactions(frame));
+                surfaceSyncGroup.addTransaction(
+                        ViewRootImpl.this.mBlastBufferQueue.gatherPendingTransactions(frame));
                 surfaceSyncGroup.markSyncReady();
             } else if (!syncBuffer) {
                 surfaceSyncGroup.markSyncReady();
@@ -9913,22 +11671,29 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             if (this.mPreviousSyncSafeguard != null) {
                 activeSurfaceSyncGroup.add(this.mPreviousSyncSafeguard, (Runnable) null);
                 activeSurfaceSyncGroup.toggleTimeout(false);
-                this.mPreviousSyncSafeguard.addSyncCompleteCallback(this.mSimpleExecutor, new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda9
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SurfaceSyncGroup.this.toggleTimeout(true);
-                    }
-                });
+                this.mPreviousSyncSafeguard.addSyncCompleteCallback(
+                        this.mSimpleExecutor,
+                        new Runnable() { // from class:
+                                         // android.view.ViewRootImpl$$ExternalSyntheticLambda9
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SurfaceSyncGroup.this.toggleTimeout(true);
+                            }
+                        });
             }
             this.mPreviousSyncSafeguard = safeguardSsg;
         }
         SurfaceControl.Transaction t = new SurfaceControl.Transaction();
-        t.addTransactionCommittedListener(this.mSimpleExecutor, new SurfaceControl.TransactionCommittedListener() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda10
-            @Override // android.view.SurfaceControl.TransactionCommittedListener
-            public final void onTransactionCommitted() {
-                ViewRootImpl.this.lambda$safeguardOverlappingSyncs$14(safeguardSsg);
-            }
-        });
+        t.addTransactionCommittedListener(
+                this.mSimpleExecutor,
+                new SurfaceControl
+                        .TransactionCommittedListener() { // from class:
+                                                          // android.view.ViewRootImpl$$ExternalSyntheticLambda10
+                    @Override // android.view.SurfaceControl.TransactionCommittedListener
+                    public final void onTransactionCommitted() {
+                        ViewRootImpl.this.lambda$safeguardOverlappingSyncs$14(safeguardSsg);
+                    }
+                });
         activeSurfaceSyncGroup.addTransaction(t);
     }
 
@@ -9947,20 +11712,27 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         boolean newSyncGroup = false;
         if (this.mActiveSurfaceSyncGroup == null) {
             this.mActiveSurfaceSyncGroup = new SurfaceSyncGroup(this.mTag);
-            this.mActiveSurfaceSyncGroup.setAddedToSyncListener(new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda22
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ViewRootImpl.this.lambda$getOrCreateSurfaceSyncGroup$16();
-                }
-            });
+            this.mActiveSurfaceSyncGroup.setAddedToSyncListener(
+                    new Runnable() { // from class:
+                                     // android.view.ViewRootImpl$$ExternalSyntheticLambda22
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ViewRootImpl.this.lambda$getOrCreateSurfaceSyncGroup$16();
+                        }
+                    });
             newSyncGroup = true;
         }
         Trace.instant(8L, "getOrCreateSurfaceSyncGroup isNew=" + newSyncGroup + " " + this.mTag);
         if (DEBUG_BLAST) {
             if (newSyncGroup) {
-                Log.i(this.mTag, "Creating new active sync group " + this.mActiveSurfaceSyncGroup.getName());
+                Log.i(
+                        this.mTag,
+                        "Creating new active sync group " + this.mActiveSurfaceSyncGroup.getName());
             } else {
-                Log.d(this.mTag, "Return already created active sync group " + this.mActiveSurfaceSyncGroup.getName());
+                Log.d(
+                        this.mTag,
+                        "Return already created active sync group "
+                                + this.mActiveSurfaceSyncGroup.getName());
             }
         }
         this.mNumPausedForSync++;
@@ -9971,12 +11743,13 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     /* JADX INFO: Access modifiers changed from: private */
     public /* synthetic */ void lambda$getOrCreateSurfaceSyncGroup$16() {
-        Runnable runnable = new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda14
-            @Override // java.lang.Runnable
-            public final void run() {
-                ViewRootImpl.this.lambda$getOrCreateSurfaceSyncGroup$15();
-            }
-        };
+        Runnable runnable =
+                new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda14
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        ViewRootImpl.this.lambda$getOrCreateSurfaceSyncGroup$15();
+                    }
+                };
         if (Thread.currentThread() == this.mThread) {
             runnable.run();
         } else {
@@ -10008,12 +11781,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 HardwareRenderer.setRtAnimationsEnabled(false);
             }
         }
-        syncGroup.addSyncCompleteCallback(this.mSimpleExecutor, new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda11
-            @Override // java.lang.Runnable
-            public final void run() {
-                ViewRootImpl.lambda$updateSyncInProgressCount$17();
-            }
-        });
+        syncGroup.addSyncCompleteCallback(
+                this.mSimpleExecutor,
+                new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda11
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        ViewRootImpl.lambda$updateSyncInProgressCount$17();
+                    }
+                });
     }
 
     static /* synthetic */ void lambda$updateSyncInProgressCount$17() {
@@ -10067,7 +11842,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     /* JADX INFO: Access modifiers changed from: private */
     public void handleDispatchLetterboxDirectionChanged(int direction) {
         this.mRequestedLetterboxDirection = direction;
-        if (updateAppliedLetterboxDirection(this.mRequestedLetterboxDirection) && (this.mView instanceof DecorView)) {
+        if (updateAppliedLetterboxDirection(this.mRequestedLetterboxDirection)
+                && (this.mView instanceof DecorView)) {
             requestInvalidateRootRenderNode();
             this.mView.invalidate();
         }
@@ -10077,7 +11853,12 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         boolean updated = this.mAppliedLetterboxDirection != direction;
         if (updated) {
             this.mAppliedLetterboxDirection = direction;
-            Log.v(this.mTag, "updateAppliedLetterboxDirection, direction=" + this.mAppliedLetterboxDirection + ", Caller=" + Debug.getCaller());
+            Log.v(
+                    this.mTag,
+                    "updateAppliedLetterboxDirection, direction="
+                            + this.mAppliedLetterboxDirection
+                            + ", Caller="
+                            + Debug.getCaller());
         }
         return updated;
     }
@@ -10136,63 +11917,63 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     /* JADX INFO: Access modifiers changed from: private */
     /* JADX WARN: Code restructure failed: missing block: B:14:0x0054, code lost:
-    
-        if (r11.mSurfaceReplaced != false) goto L35;
-     */
+
+       if (r11.mSurfaceReplaced != false) goto L35;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:15:0x0056, code lost:
-    
-        r3 = android.os.Trace.isTagEnabled(8);
-     */
+
+       r3 = android.os.Trace.isTagEnabled(8);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:16:0x005b, code lost:
-    
-        if (r3 == false) goto L42;
-     */
+
+       if (r3 == false) goto L42;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:17:0x005d, code lost:
-    
-        r6 = reasonToString(r1);
-     */
+
+       r6 = reasonToString(r1);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:18:0x0061, code lost:
-    
-        if (r2 != null) goto L40;
-     */
+
+       if (r2 != null) goto L40;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:19:0x0063, code lost:
-    
-        r7 = com.android.internal.content.NativeLibraryHelper.CLEAR_ABI_OVERRIDE;
-     */
+
+       r7 = com.android.internal.content.NativeLibraryHelper.CLEAR_ABI_OVERRIDE;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:20:0x0067, code lost:
-    
-        r8 = categoryToString(r0);
-        android.os.Trace.traceBegin(8, "ViewRootImpl#setFrameRateCategory " + r8 + ", reason " + r6 + ", " + r7);
-     */
+
+       r8 = categoryToString(r0);
+       android.os.Trace.traceBegin(8, "ViewRootImpl#setFrameRateCategory " + r8 + ", reason " + r6 + ", " + r7);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:21:0x0066, code lost:
-    
-        r7 = r2;
-     */
+
+       r7 = r2;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:23:0x0097, code lost:
-    
-        if (android.view.ViewRootImpl.sToolkitFrameRateFunctionEnablingReadOnlyFlagValue == false) goto L45;
-     */
+
+       if (android.view.ViewRootImpl.sToolkitFrameRateFunctionEnablingReadOnlyFlagValue == false) goto L45;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:24:0x0099, code lost:
-    
-        android.util.Log.i(r11.mTag, "call setFrameRateCategory category=" + categoryToString(r0) + ", reason=" + reasonToString(r1) + ", vri=" + r11.mTag);
-        r11.mFrameRateTransaction.setFrameRateCategory(r11.mSurfaceControl, r0, false).applyAsyncUnsafe();
-     */
+
+       android.util.Log.i(r11.mTag, "call setFrameRateCategory category=" + categoryToString(r0) + ", reason=" + reasonToString(r1) + ", vri=" + r11.mTag);
+       r11.mFrameRateTransaction.setFrameRateCategory(r11.mSurfaceControl, r0, false).applyAsyncUnsafe();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:25:0x00d7, code lost:
-    
-        r11.mLastPreferredFrameRateCategory = r0;
-     */
+
+       r11.mLastPreferredFrameRateCategory = r0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:38:0x00d9, code lost:
-    
-        if (r3 == false) goto L54;
-     */
+
+       if (r3 == false) goto L54;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:39:0x00ed, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:42:0x0050, code lost:
-    
-        if (r11.mLastPreferredFrameRateCategory == r0) goto L33;
-     */
+
+       if (r11.mLastPreferredFrameRateCategory == r0) goto L33;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -10202,7 +11983,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             Method dump skipped, instructions count: 244
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.ViewRootImpl.setPreferredFrameRateCategory(int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.view.ViewRootImpl.setPreferredFrameRateCategory(int):void");
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -10219,8 +12002,17 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         if (frameRateCategory != 0) {
             try {
                 if (this.mLastPreferredFrameRateCategory != frameRateCategory) {
-                    Log.i(this.mTag, "call setFrameRateCategory for touch hint category=" + categoryToString(frameRateCategory) + ", reason=" + reasonToString(frameRateReason) + ", vri=" + this.mTag);
-                    this.mFrameRateTransaction.setFrameRateCategory(this.mSurfaceControl, frameRateCategory, false).applyAsyncUnsafe();
+                    Log.i(
+                            this.mTag,
+                            "call setFrameRateCategory for touch hint category="
+                                    + categoryToString(frameRateCategory)
+                                    + ", reason="
+                                    + reasonToString(frameRateReason)
+                                    + ", vri="
+                                    + this.mTag);
+                    this.mFrameRateTransaction
+                            .setFrameRateCategory(this.mSurfaceControl, frameRateCategory, false)
+                            .applyAsyncUnsafe();
                     this.mLastPreferredFrameRateCategory = frameRateCategory;
                 }
             } catch (Exception e) {
@@ -10291,12 +12083,27 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                 if (this.mLastPreferredFrameRate != preferredFrameRate || this.mSurfaceReplaced) {
                     traceFrameRate = Trace.isTagEnabled(8L);
                     if (traceFrameRate) {
-                        Trace.traceBegin(8L, "ViewRootImpl#setFrameRate " + preferredFrameRate + " compatibility " + this.mFrameRateCompatibility);
+                        Trace.traceBegin(
+                                8L,
+                                "ViewRootImpl#setFrameRate "
+                                        + preferredFrameRate
+                                        + " compatibility "
+                                        + this.mFrameRateCompatibility);
                     }
                     if (sToolkitFrameRateFunctionEnablingReadOnlyFlagValue) {
                         if (preferredFrameRate > 0.0f) {
-                            Log.i(this.mTag, "call setFrameRate frameRate=" + preferredFrameRate + ", compatibility=" + this.mFrameRateCompatibility + ", vri=" + this.mTag);
-                            this.mFrameRateTransaction.setFrameRate(this.mSurfaceControl, preferredFrameRate, this.mFrameRateCompatibility);
+                            Log.i(
+                                    this.mTag,
+                                    "call setFrameRate frameRate="
+                                            + preferredFrameRate
+                                            + ", compatibility="
+                                            + this.mFrameRateCompatibility
+                                            + ", vri="
+                                            + this.mTag);
+                            this.mFrameRateTransaction.setFrameRate(
+                                    this.mSurfaceControl,
+                                    preferredFrameRate,
+                                    this.mFrameRateCompatibility);
                         } else {
                             Log.d(this.mTag, "call clearFrameRate");
                             this.mFrameRateTransaction.clearFrameRate(this.mSurfaceControl);
@@ -10328,14 +12135,20 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     private boolean shouldSetFrameRate() {
-        return shouldEnableDvrr() && this.mSurface.isValid() && this.mPreferredFrameRate >= 0.0f && !this.mIsFrameRateConflicted;
+        return shouldEnableDvrr()
+                && this.mSurface.isValid()
+                && this.mPreferredFrameRate >= 0.0f
+                && !this.mIsFrameRateConflicted;
     }
 
     /* JADX INFO: Access modifiers changed from: private */
     public boolean shouldTouchBoost(int motionEventAction, int windowType) {
         boolean desiredAction = motionEventAction != 4;
         boolean undesiredType = windowType == 2011 && sToolkitFrameRateTypingReadOnlyFlagValue;
-        return desiredAction && !undesiredType && shouldEnableDvrr() && getFrameRateBoostOnTouchEnabled();
+        return desiredAction
+                && !undesiredType
+                && shouldEnableDvrr()
+                && getFrameRateBoostOnTouchEnabled();
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -10346,17 +12159,23 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     public void votePreferredFrameRateCategory(int frameRateCategory, int reason, View view) {
-        if (CoreRune.FW_DVRR_TOOLKIT_REQUESTED_REFRESH_RATE && this.mFrameRateCategoryChangeReason == 67108864) {
+        if (CoreRune.FW_DVRR_TOOLKIT_REQUESTED_REFRESH_RATE
+                && this.mFrameRateCategoryChangeReason == 67108864) {
             return;
         }
         if (reason == 67108864) {
             Log.i(this.mTag, "Requested frameRateCategory " + frameRateCategory + " by " + view);
         }
-        if ((CoreRune.FW_DVRR_TOOLKIT_REQUESTED_REFRESH_RATE && reason == 67108864) || frameRateCategory > this.mPreferredFrameRateCategory) {
+        if ((CoreRune.FW_DVRR_TOOLKIT_REQUESTED_REFRESH_RATE && reason == 67108864)
+                || frameRateCategory > this.mPreferredFrameRateCategory) {
             this.mPreferredFrameRateCategory = frameRateCategory;
             this.mFrameRateCategoryChangeReason = reason;
         }
-        if (((CoreRune.FW_DVRR_TOOLKIT_POLICY_FOR_SCROLL && this.mIsFlingState) || (CoreRune.FW_DVRR_TOOLKIT_SUPPORT_HRR && this.mIsHRR)) && CoreRune.FW_DVRR_TOOLKIT_SUPPORT_HIGH_FRAME_RATE && this.mPreferredFrameRateCategory == 5 && this.mFrameRateCategoryChangeReason == 218103808) {
+        if (((CoreRune.FW_DVRR_TOOLKIT_POLICY_FOR_SCROLL && this.mIsFlingState)
+                        || (CoreRune.FW_DVRR_TOOLKIT_SUPPORT_HRR && this.mIsHRR))
+                && CoreRune.FW_DVRR_TOOLKIT_SUPPORT_HIGH_FRAME_RATE
+                && this.mPreferredFrameRateCategory == 5
+                && this.mFrameRateCategoryChangeReason == 218103808) {
             this.mPreferredFrameRateCategory = 3;
             this.mFrameRateCategoryChangeReason = reason;
         }
@@ -10371,7 +12190,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     public void removeThreadedRendererView(View view) {
         this.mThreadedRendererViews.remove(view);
-        if (shouldEnableDvrr() && !this.mInvalidationIdleMessagePosted && sSurfaceFlingerBugfixFlagValue) {
+        if (shouldEnableDvrr()
+                && !this.mInvalidationIdleMessagePosted
+                && sSurfaceFlingerBugfixFlagValue) {
             this.mInvalidationIdleMessagePosted = true;
             this.mHandler.sendEmptyMessageDelayed(40, 750L);
         }
@@ -10392,7 +12213,10 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     public boolean shouldCheckFrameRate(boolean isDirect) {
-        return this.mPreferredFrameRate < 120.0f || !(isDirect || sToolkitFrameRateVelocityMappingReadOnlyFlagValue || this.mPreferredFrameRateCategory >= 5);
+        return this.mPreferredFrameRate < 120.0f
+                || !(isDirect
+                        || sToolkitFrameRateVelocityMappingReadOnlyFlagValue
+                        || this.mPreferredFrameRateCategory >= 5);
     }
 
     public void votePreferredFrameRate(float frameRate, int frameRateCompatibility) {
@@ -10427,13 +12251,17 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
             nextFrameRate = this.mPreferredFrameRate;
             nextFrameRateCompatibility = this.mFrameRateCompatibility;
         }
-        if (this.mPreferredFrameRate > 0.0f && this.mPreferredFrameRate % frameRate != 0.0f && frameRate % this.mPreferredFrameRate != 0.0f) {
+        if (this.mPreferredFrameRate > 0.0f
+                && this.mPreferredFrameRate % frameRate != 0.0f
+                && frameRate % this.mPreferredFrameRate != 0.0f) {
             this.mIsFrameRateConflicted = true;
             if (nextFrameRate > 60.0f && this.mFrameRateCategoryHighCount != 5) {
                 this.mFrameRateCategoryHighCount = 5;
                 this.mFrameRateCategoryChangeReason = 167772160;
                 this.mFrameRateCategoryView = null;
-            } else if (this.mFrameRateCategoryHighCount == 0 && this.mFrameRateCategoryHighHintCount == 0 && this.mFrameRateCategoryNormalCount < 5) {
+            } else if (this.mFrameRateCategoryHighCount == 0
+                    && this.mFrameRateCategoryHighHintCount == 0
+                    && this.mFrameRateCategoryNormalCount < 5) {
                 this.mFrameRateCategoryNormalCount = 5;
                 this.mFrameRateCategoryChangeReason = 167772160;
                 this.mFrameRateCategoryView = null;
@@ -10453,7 +12281,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     public float getPreferredFrameRate() {
-        return this.mPreferredFrameRate >= 0.0f ? this.mPreferredFrameRate : this.mLastPreferredFrameRate;
+        return this.mPreferredFrameRate >= 0.0f
+                ? this.mPreferredFrameRate
+                : this.mLastPreferredFrameRate;
     }
 
     public float getLastPreferredFrameRate() {
@@ -10516,7 +12346,10 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
     }
 
     private boolean shouldEnableDvrr() {
-        return sEnableVrr && sToolkitFrameRateViewEnablingReadOnlyFlagValue && sToolkitSetFrameRateReadOnlyFlagValue && isFrameRatePowerSavingsBalanced();
+        return sEnableVrr
+                && sToolkitFrameRateViewEnablingReadOnlyFlagValue
+                && sToolkitSetFrameRateReadOnlyFlagValue
+                && isFrameRatePowerSavingsBalanced();
     }
 
     private void removeVrrMessages() {
@@ -10531,13 +12364,16 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     private void updateInfrequentCount() {
         long currentTimeMillis = this.mAttachInfo.mDrawingTime;
-        int timeIntervalMillis = (int) Math.min(2147483647L, currentTimeMillis - this.mLastUpdateTimeMillis);
+        int timeIntervalMillis =
+                (int) Math.min(2147483647L, currentTimeMillis - this.mLastUpdateTimeMillis);
         this.mMinusTwoFrameIntervalMillis = this.mMinusOneFrameIntervalMillis;
         this.mMinusOneFrameIntervalMillis = timeIntervalMillis;
         this.mLastUpdateTimeMillis = currentTimeMillis;
-        if (this.mThreadedRendererViews.isEmpty() && this.mMinusTwoFrameIntervalMillis + timeIntervalMillis >= 100) {
+        if (this.mThreadedRendererViews.isEmpty()
+                && this.mMinusTwoFrameIntervalMillis + timeIntervalMillis >= 100) {
             int infrequentUpdateCount = this.mInfrequentUpdateCount;
-            this.mInfrequentUpdateCount = infrequentUpdateCount == 2 ? infrequentUpdateCount : infrequentUpdateCount + 1;
+            this.mInfrequentUpdateCount =
+                    infrequentUpdateCount == 2 ? infrequentUpdateCount : infrequentUpdateCount + 1;
         } else {
             this.mInfrequentUpdateCount = 0;
         }
@@ -10548,46 +12384,54 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         private Context mContext;
         private SmartClipRemoteRequestDispatcher mDispatcher;
         private final String TAG = "SmartClipRemoteRequestDispatcher_ViewRootImpl";
-        private SmartClipRemoteRequestDispatcher.ViewRootImplGateway mGateway = new SmartClipRemoteRequestDispatcher.ViewRootImplGateway() { // from class: android.view.ViewRootImpl.SmartClipRemoteRequestDispatcherProxy.1
-            @Override // com.samsung.android.content.smartclip.SmartClipRemoteRequestDispatcher.ViewRootImplGateway
-            public void enqueueInputEvent(InputEvent event, InputEventReceiver receiver, int flags, boolean processImmediately) {
-                ViewRootImpl.this.enqueueInputEvent(event, receiver, flags, processImmediately);
-            }
+        private SmartClipRemoteRequestDispatcher.ViewRootImplGateway mGateway =
+                new SmartClipRemoteRequestDispatcher
+                        .ViewRootImplGateway() { // from class:
+                                                 // android.view.ViewRootImpl.SmartClipRemoteRequestDispatcherProxy.1
+                    @Override // com.samsung.android.content.smartclip.SmartClipRemoteRequestDispatcher.ViewRootImplGateway
+                    public void enqueueInputEvent(
+                            InputEvent event,
+                            InputEventReceiver receiver,
+                            int flags,
+                            boolean processImmediately) {
+                        ViewRootImpl.this.enqueueInputEvent(
+                                event, receiver, flags, processImmediately);
+                    }
 
-            @Override // com.samsung.android.content.smartclip.SmartClipRemoteRequestDispatcher.ViewRootImplGateway
-            public PointF getScaleFactor() {
-                return new PointF(1.0f, 1.0f);
-            }
+                    @Override // com.samsung.android.content.smartclip.SmartClipRemoteRequestDispatcher.ViewRootImplGateway
+                    public PointF getScaleFactor() {
+                        return new PointF(1.0f, 1.0f);
+                    }
 
-            @Override // com.samsung.android.content.smartclip.SmartClipRemoteRequestDispatcher.ViewRootImplGateway
-            public View getRootView() {
-                return ViewRootImpl.this.mView;
-            }
+                    @Override // com.samsung.android.content.smartclip.SmartClipRemoteRequestDispatcher.ViewRootImplGateway
+                    public View getRootView() {
+                        return ViewRootImpl.this.mView;
+                    }
 
-            @Override // com.samsung.android.content.smartclip.SmartClipRemoteRequestDispatcher.ViewRootImplGateway
-            public Handler getHandler() {
-                return ViewRootImpl.this.mHandler;
-            }
+                    @Override // com.samsung.android.content.smartclip.SmartClipRemoteRequestDispatcher.ViewRootImplGateway
+                    public Handler getHandler() {
+                        return ViewRootImpl.this.mHandler;
+                    }
 
-            @Override // com.samsung.android.content.smartclip.SmartClipRemoteRequestDispatcher.ViewRootImplGateway
-            public ViewRootImpl getViewRootImpl() {
-                return ViewRootImpl.this;
-            }
+                    @Override // com.samsung.android.content.smartclip.SmartClipRemoteRequestDispatcher.ViewRootImplGateway
+                    public ViewRootImpl getViewRootImpl() {
+                        return ViewRootImpl.this;
+                    }
 
-            @Override // com.samsung.android.content.smartclip.SmartClipRemoteRequestDispatcher.ViewRootImplGateway
-            public PointF getTranslatedPoint() {
-                return null;
-            }
+                    @Override // com.samsung.android.content.smartclip.SmartClipRemoteRequestDispatcher.ViewRootImplGateway
+                    public PointF getTranslatedPoint() {
+                        return null;
+                    }
 
-            @Override // com.samsung.android.content.smartclip.SmartClipRemoteRequestDispatcher.ViewRootImplGateway
-            public void getTranslatedRectIfNeeded(Rect outRect) {
-                ViewRootImpl.this.applyViewBoundsSandboxingIfNeeded(outRect, true);
-                CompatTranslator translator = ViewRootImpl.this.getCompatTranslator();
-                if (translator != null) {
-                    translator.translateToScreen(outRect);
-                }
-            }
-        };
+                    @Override // com.samsung.android.content.smartclip.SmartClipRemoteRequestDispatcher.ViewRootImplGateway
+                    public void getTranslatedRectIfNeeded(Rect outRect) {
+                        ViewRootImpl.this.applyViewBoundsSandboxingIfNeeded(outRect, true);
+                        CompatTranslator translator = ViewRootImpl.this.getCompatTranslator();
+                        if (translator != null) {
+                            translator.translateToScreen(outRect);
+                        }
+                    }
+                };
 
         public SmartClipRemoteRequestDispatcherProxy(Context context) {
             this.DEBUG = false;
@@ -10598,17 +12442,32 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
         public void dispatchSmartClipRemoteRequest(final SmartClipRemoteRequestInfo request) {
             if (this.DEBUG) {
-                Log.i("SmartClipRemoteRequestDispatcher_ViewRootImpl", "dispatchSmartClipRemoteRequest : req id=" + request.mRequestId + " type=" + request.mRequestType + " pid=" + request.mCallerPid + " uid=" + request.mCallerUid);
+                Log.i(
+                        "SmartClipRemoteRequestDispatcher_ViewRootImpl",
+                        "dispatchSmartClipRemoteRequest : req id="
+                                + request.mRequestId
+                                + " type="
+                                + request.mRequestType
+                                + " pid="
+                                + request.mCallerPid
+                                + " uid="
+                                + request.mCallerUid);
             }
             switch (request.mRequestType) {
                 case 1:
-                    this.mDispatcher.checkPermission("com.samsung.android.permission.EXTRACT_SMARTCLIP_DATA", request.mCallerPid, request.mCallerUid);
-                    ViewRootImpl.this.mHandler.post(new Runnable() { // from class: android.view.ViewRootImpl.SmartClipRemoteRequestDispatcherProxy.2
-                        @Override // java.lang.Runnable
-                        public void run() {
-                            SmartClipRemoteRequestDispatcherProxy.this.dispatchSmartClipMetaDataExtraction(request);
-                        }
-                    });
+                    this.mDispatcher.checkPermission(
+                            "com.samsung.android.permission.EXTRACT_SMARTCLIP_DATA",
+                            request.mCallerPid,
+                            request.mCallerUid);
+                    ViewRootImpl.this.mHandler.post(
+                            new Runnable() { // from class:
+                                             // android.view.ViewRootImpl.SmartClipRemoteRequestDispatcherProxy.2
+                                @Override // java.lang.Runnable
+                                public void run() {
+                                    SmartClipRemoteRequestDispatcherProxy.this
+                                            .dispatchSmartClipMetaDataExtraction(request);
+                                }
+                            });
                     break;
                 default:
                     this.mDispatcher.dispatchSmartClipRemoteRequest(request);
@@ -10618,14 +12477,18 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
         /* JADX INFO: Access modifiers changed from: private */
         public void dispatchSmartClipMetaDataExtraction(SmartClipRemoteRequestInfo request) {
-            SmartClipDataExtractionEvent requestInfo = (SmartClipDataExtractionEvent) request.mRequestData;
+            SmartClipDataExtractionEvent requestInfo =
+                    (SmartClipDataExtractionEvent) request.mRequestData;
             requestInfo.mRequestId = request.mRequestId;
             requestInfo.mTargetWindowLayer = request.mTargetWindowLayer;
             if (ViewRootImpl.this.mView != null) {
-                SmartClipDataCropperImpl cropper = new SmartClipDataCropperImpl(ViewRootImpl.this.mView.getContext(), requestInfo);
+                SmartClipDataCropperImpl cropper =
+                        new SmartClipDataCropperImpl(
+                                ViewRootImpl.this.mView.getContext(), requestInfo);
                 cropper.doExtractSmartClipData(ViewRootImpl.this.mView);
             } else {
-                SmartClipDataCropperImpl cropper2 = new SmartClipDataCropperImpl(this.mContext, requestInfo);
+                SmartClipDataCropperImpl cropper2 =
+                        new SmartClipDataCropperImpl(this.mContext, requestInfo);
                 cropper2.sendExtractionResultToSmartClipService(null);
             }
         }
@@ -10635,7 +12498,12 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         if (this.mSmartClipDispatcherProxy != null) {
             this.mSmartClipDispatcherProxy.dispatchSmartClipRemoteRequest(request);
         } else {
-            Log.e(TAG, "dispatchSmartClipRemoteRequest : SmartClip dispatcher is null! req id=" + request.mRequestId + " type=" + request.mRequestType);
+            Log.e(
+                    TAG,
+                    "dispatchSmartClipRemoteRequest : SmartClip dispatcher is null! req id="
+                            + request.mRequestId
+                            + " type="
+                            + request.mRequestType);
         }
     }
 
@@ -10693,7 +12561,9 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         public void unregisterMotionEventMonitor(OnTouchListener listener) {
             this.mListeners.remove(listener);
             if (DEBUG) {
-                Log.i(TAG, "unregisterMotionEventMonitor : Listener count=" + this.mListeners.size());
+                Log.i(
+                        TAG,
+                        "unregisterMotionEventMonitor : Listener count=" + this.mListeners.size());
             }
         }
 
@@ -10762,7 +12632,8 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
                     this.mView.cancelLongPress();
                     return false;
                 }
-                if (Math.abs(event.getY() - this.mFlexPanelScrollY) > ViewConfiguration.get(this.mContext).getScaledTouchSlop() + 1) {
+                if (Math.abs(event.getY() - this.mFlexPanelScrollY)
+                        > ViewConfiguration.get(this.mContext).getScaledTouchSlop() + 1) {
                     this.mFlexPanelScrollEnabled = true;
                     MotionEvent downEvent = event.copy();
                     downEvent.setLocation(event.getX(), this.mFlexPanelScrollY);
@@ -10778,16 +12649,19 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
 
     public void requestRecomputeViewAttributes() {
         if (this.mIsInTraversal) {
-            this.mHandler.post(new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda4
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ViewRootImpl.this.lambda$requestRecomputeViewAttributes$18();
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // android.view.ViewRootImpl$$ExternalSyntheticLambda4
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ViewRootImpl.this.lambda$requestRecomputeViewAttributes$18();
+                        }
+                    });
         } else {
             this.mAttachInfo.mRecomputeGlobalAttributes = true;
         }
-        if (DEBUG_TRAVERSAL && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
+        if (DEBUG_TRAVERSAL
+                && DEBUG_TRAVERSAL_PACKAGE_NAME.equals(ActivityThread.currentPackageName())) {
             Log.i(this.mTag, "Traversal, [19] mView=" + this.mView);
         }
         scheduleTraversals();
@@ -10813,12 +12687,14 @@ public final class ViewRootImpl implements ViewParent, View.AttachInfo.Callbacks
         long firstEventTime = events.length > 0 ? events[0].getEventTime() : -1L;
         for (final InputEvent event : events) {
             if (event != null) {
-                Runnable runnable = new Runnable() { // from class: android.view.ViewRootImpl$$ExternalSyntheticLambda5
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        ViewRootImpl.this.lambda$handleDispatchSPenGestureEvent$19(event);
-                    }
-                };
+                Runnable runnable =
+                        new Runnable() { // from class:
+                                         // android.view.ViewRootImpl$$ExternalSyntheticLambda5
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                ViewRootImpl.this.lambda$handleDispatchSPenGestureEvent$19(event);
+                            }
+                        };
                 long delay = event.getEventTime() - firstEventTime;
                 if (delay > 0) {
                     this.mHandler.postDelayed(runnable, delay);

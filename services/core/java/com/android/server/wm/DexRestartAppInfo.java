@@ -13,7 +13,8 @@ public abstract class DexRestartAppInfo {
     public final Task mTargetTask;
     public final int mUid;
 
-    public DexRestartAppInfo(String str, int i, Task task, Task task2, ActivityOptions activityOptions, int i2) {
+    public DexRestartAppInfo(
+            String str, int i, Task task, Task task2, ActivityOptions activityOptions, int i2) {
         this.mProcessName = str;
         this.mUid = i;
         this.mReusedTask = task;

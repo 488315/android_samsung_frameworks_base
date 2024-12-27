@@ -15,50 +15,56 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface AuthenticationStateListener extends IInterface {
-    public static final String DESCRIPTOR = "android.hardware.biometrics.AuthenticationStateListener";
+    public static final String DESCRIPTOR =
+            "android.hardware.biometrics.AuthenticationStateListener";
 
-    void onAuthenticationAcquired(AuthenticationAcquiredInfo authenticationAcquiredInfo) throws RemoteException;
+    void onAuthenticationAcquired(AuthenticationAcquiredInfo authenticationAcquiredInfo)
+            throws RemoteException;
 
-    void onAuthenticationError(AuthenticationErrorInfo authenticationErrorInfo) throws RemoteException;
+    void onAuthenticationError(AuthenticationErrorInfo authenticationErrorInfo)
+            throws RemoteException;
 
-    void onAuthenticationFailed(AuthenticationFailedInfo authenticationFailedInfo) throws RemoteException;
+    void onAuthenticationFailed(AuthenticationFailedInfo authenticationFailedInfo)
+            throws RemoteException;
 
     void onAuthenticationHelp(AuthenticationHelpInfo authenticationHelpInfo) throws RemoteException;
 
-    void onAuthenticationStarted(AuthenticationStartedInfo authenticationStartedInfo) throws RemoteException;
+    void onAuthenticationStarted(AuthenticationStartedInfo authenticationStartedInfo)
+            throws RemoteException;
 
-    void onAuthenticationStopped(AuthenticationStoppedInfo authenticationStoppedInfo) throws RemoteException;
+    void onAuthenticationStopped(AuthenticationStoppedInfo authenticationStoppedInfo)
+            throws RemoteException;
 
-    void onAuthenticationSucceeded(AuthenticationSucceededInfo authenticationSucceededInfo) throws RemoteException;
+    void onAuthenticationSucceeded(AuthenticationSucceededInfo authenticationSucceededInfo)
+            throws RemoteException;
 
     public static class Default implements AuthenticationStateListener {
         @Override // android.hardware.biometrics.AuthenticationStateListener
-        public void onAuthenticationAcquired(AuthenticationAcquiredInfo authInfo) throws RemoteException {
-        }
+        public void onAuthenticationAcquired(AuthenticationAcquiredInfo authInfo)
+                throws RemoteException {}
 
         @Override // android.hardware.biometrics.AuthenticationStateListener
-        public void onAuthenticationError(AuthenticationErrorInfo authInfo) throws RemoteException {
-        }
+        public void onAuthenticationError(AuthenticationErrorInfo authInfo)
+                throws RemoteException {}
 
         @Override // android.hardware.biometrics.AuthenticationStateListener
-        public void onAuthenticationFailed(AuthenticationFailedInfo authInfo) throws RemoteException {
-        }
+        public void onAuthenticationFailed(AuthenticationFailedInfo authInfo)
+                throws RemoteException {}
 
         @Override // android.hardware.biometrics.AuthenticationStateListener
-        public void onAuthenticationHelp(AuthenticationHelpInfo authInfo) throws RemoteException {
-        }
+        public void onAuthenticationHelp(AuthenticationHelpInfo authInfo) throws RemoteException {}
 
         @Override // android.hardware.biometrics.AuthenticationStateListener
-        public void onAuthenticationStarted(AuthenticationStartedInfo authInfo) throws RemoteException {
-        }
+        public void onAuthenticationStarted(AuthenticationStartedInfo authInfo)
+                throws RemoteException {}
 
         @Override // android.hardware.biometrics.AuthenticationStateListener
-        public void onAuthenticationStopped(AuthenticationStoppedInfo authInfo) throws RemoteException {
-        }
+        public void onAuthenticationStopped(AuthenticationStoppedInfo authInfo)
+                throws RemoteException {}
 
         @Override // android.hardware.biometrics.AuthenticationStateListener
-        public void onAuthenticationSucceeded(AuthenticationSucceededInfo authInfo) throws RemoteException {
-        }
+        public void onAuthenticationSucceeded(AuthenticationSucceededInfo authInfo)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -66,7 +72,7 @@ public interface AuthenticationStateListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements AuthenticationStateListener {
+    public abstract static class Stub extends Binder implements AuthenticationStateListener {
         static final int TRANSACTION_onAuthenticationAcquired = 1;
         static final int TRANSACTION_onAuthenticationError = 2;
         static final int TRANSACTION_onAuthenticationFailed = 3;
@@ -122,7 +128,8 @@ public interface AuthenticationStateListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(AuthenticationStateListener.DESCRIPTOR);
             }
@@ -132,37 +139,51 @@ public interface AuthenticationStateListener extends IInterface {
             }
             switch (code) {
                 case 1:
-                    AuthenticationAcquiredInfo _arg0 = (AuthenticationAcquiredInfo) data.readTypedObject(AuthenticationAcquiredInfo.CREATOR);
+                    AuthenticationAcquiredInfo _arg0 =
+                            (AuthenticationAcquiredInfo)
+                                    data.readTypedObject(AuthenticationAcquiredInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onAuthenticationAcquired(_arg0);
                     return true;
                 case 2:
-                    AuthenticationErrorInfo _arg02 = (AuthenticationErrorInfo) data.readTypedObject(AuthenticationErrorInfo.CREATOR);
+                    AuthenticationErrorInfo _arg02 =
+                            (AuthenticationErrorInfo)
+                                    data.readTypedObject(AuthenticationErrorInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onAuthenticationError(_arg02);
                     return true;
                 case 3:
-                    AuthenticationFailedInfo _arg03 = (AuthenticationFailedInfo) data.readTypedObject(AuthenticationFailedInfo.CREATOR);
+                    AuthenticationFailedInfo _arg03 =
+                            (AuthenticationFailedInfo)
+                                    data.readTypedObject(AuthenticationFailedInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onAuthenticationFailed(_arg03);
                     return true;
                 case 4:
-                    AuthenticationHelpInfo _arg04 = (AuthenticationHelpInfo) data.readTypedObject(AuthenticationHelpInfo.CREATOR);
+                    AuthenticationHelpInfo _arg04 =
+                            (AuthenticationHelpInfo)
+                                    data.readTypedObject(AuthenticationHelpInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onAuthenticationHelp(_arg04);
                     return true;
                 case 5:
-                    AuthenticationStartedInfo _arg05 = (AuthenticationStartedInfo) data.readTypedObject(AuthenticationStartedInfo.CREATOR);
+                    AuthenticationStartedInfo _arg05 =
+                            (AuthenticationStartedInfo)
+                                    data.readTypedObject(AuthenticationStartedInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onAuthenticationStarted(_arg05);
                     return true;
                 case 6:
-                    AuthenticationStoppedInfo _arg06 = (AuthenticationStoppedInfo) data.readTypedObject(AuthenticationStoppedInfo.CREATOR);
+                    AuthenticationStoppedInfo _arg06 =
+                            (AuthenticationStoppedInfo)
+                                    data.readTypedObject(AuthenticationStoppedInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onAuthenticationStopped(_arg06);
                     return true;
                 case 7:
-                    AuthenticationSucceededInfo _arg07 = (AuthenticationSucceededInfo) data.readTypedObject(AuthenticationSucceededInfo.CREATOR);
+                    AuthenticationSucceededInfo _arg07 =
+                            (AuthenticationSucceededInfo)
+                                    data.readTypedObject(AuthenticationSucceededInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onAuthenticationSucceeded(_arg07);
                     return true;
@@ -188,7 +209,8 @@ public interface AuthenticationStateListener extends IInterface {
             }
 
             @Override // android.hardware.biometrics.AuthenticationStateListener
-            public void onAuthenticationAcquired(AuthenticationAcquiredInfo authInfo) throws RemoteException {
+            public void onAuthenticationAcquired(AuthenticationAcquiredInfo authInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(AuthenticationStateListener.DESCRIPTOR);
@@ -200,7 +222,8 @@ public interface AuthenticationStateListener extends IInterface {
             }
 
             @Override // android.hardware.biometrics.AuthenticationStateListener
-            public void onAuthenticationError(AuthenticationErrorInfo authInfo) throws RemoteException {
+            public void onAuthenticationError(AuthenticationErrorInfo authInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(AuthenticationStateListener.DESCRIPTOR);
@@ -212,7 +235,8 @@ public interface AuthenticationStateListener extends IInterface {
             }
 
             @Override // android.hardware.biometrics.AuthenticationStateListener
-            public void onAuthenticationFailed(AuthenticationFailedInfo authInfo) throws RemoteException {
+            public void onAuthenticationFailed(AuthenticationFailedInfo authInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(AuthenticationStateListener.DESCRIPTOR);
@@ -224,7 +248,8 @@ public interface AuthenticationStateListener extends IInterface {
             }
 
             @Override // android.hardware.biometrics.AuthenticationStateListener
-            public void onAuthenticationHelp(AuthenticationHelpInfo authInfo) throws RemoteException {
+            public void onAuthenticationHelp(AuthenticationHelpInfo authInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(AuthenticationStateListener.DESCRIPTOR);
@@ -236,7 +261,8 @@ public interface AuthenticationStateListener extends IInterface {
             }
 
             @Override // android.hardware.biometrics.AuthenticationStateListener
-            public void onAuthenticationStarted(AuthenticationStartedInfo authInfo) throws RemoteException {
+            public void onAuthenticationStarted(AuthenticationStartedInfo authInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(AuthenticationStateListener.DESCRIPTOR);
@@ -248,7 +274,8 @@ public interface AuthenticationStateListener extends IInterface {
             }
 
             @Override // android.hardware.biometrics.AuthenticationStateListener
-            public void onAuthenticationStopped(AuthenticationStoppedInfo authInfo) throws RemoteException {
+            public void onAuthenticationStopped(AuthenticationStoppedInfo authInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(AuthenticationStateListener.DESCRIPTOR);
@@ -260,7 +287,8 @@ public interface AuthenticationStateListener extends IInterface {
             }
 
             @Override // android.hardware.biometrics.AuthenticationStateListener
-            public void onAuthenticationSucceeded(AuthenticationSucceededInfo authInfo) throws RemoteException {
+            public void onAuthenticationSucceeded(AuthenticationSucceededInfo authInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(AuthenticationStateListener.DESCRIPTOR);

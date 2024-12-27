@@ -1,6 +1,7 @@
 package android.hardware.broadcastradio.V2_0;
 
 import android.os.HidlSupport;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -19,11 +20,16 @@ public final class Announcement {
             return false;
         }
         Announcement announcement = (Announcement) obj;
-        return HidlSupport.deepEquals(this.selector, announcement.selector) && this.type == announcement.type && HidlSupport.deepEquals(this.vendorInfo, announcement.vendorInfo);
+        return HidlSupport.deepEquals(this.selector, announcement.selector)
+                && this.type == announcement.type
+                && HidlSupport.deepEquals(this.vendorInfo, announcement.vendorInfo);
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.selector)), Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.type))), Integer.valueOf(HidlSupport.deepHashCode(this.vendorInfo)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(this.selector)),
+                Integer.valueOf(HidlSupport.deepHashCode(Byte.valueOf(this.type))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.vendorInfo)));
     }
 
     public final String toString() {

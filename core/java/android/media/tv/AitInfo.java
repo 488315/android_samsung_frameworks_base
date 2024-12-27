@@ -5,19 +5,20 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public final class AitInfo implements Parcelable {
-    public static final Parcelable.Creator<AitInfo> CREATOR = new Parcelable.Creator<AitInfo>() { // from class: android.media.tv.AitInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AitInfo createFromParcel(Parcel in) {
-            return new AitInfo(in);
-        }
+    public static final Parcelable.Creator<AitInfo> CREATOR =
+            new Parcelable.Creator<AitInfo>() { // from class: android.media.tv.AitInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AitInfo createFromParcel(Parcel in) {
+                    return new AitInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AitInfo[] newArray(int size) {
-            return new AitInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AitInfo[] newArray(int size) {
+                    return new AitInfo[size];
+                }
+            };
     static final String TAG = "AitInfo";
     private final int mType;
     private final int mVersion;

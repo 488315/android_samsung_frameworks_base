@@ -1,7 +1,7 @@
 package android.media.audiofx;
 
-import android.media.audiofx.AudioEffect;
 import android.util.Log;
+
 import java.util.StringTokenizer;
 
 /* loaded from: classes2.dex */
@@ -18,7 +18,11 @@ public class BassBoost extends AudioEffect {
         void onParameterChange(BassBoost bassBoost, int i, int i2, short s);
     }
 
-    public BassBoost(int priority, int audioSession) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException, RuntimeException {
+    public BassBoost(int priority, int audioSession)
+            throws IllegalStateException,
+                    IllegalArgumentException,
+                    UnsupportedOperationException,
+                    RuntimeException {
         super(EFFECT_TYPE_BASS_BOOST, EFFECT_TYPE_NULL, priority, audioSession);
         this.mStrengthSupported = false;
         this.mParamListener = null;
@@ -36,19 +40,20 @@ public class BassBoost extends AudioEffect {
         return this.mStrengthSupported;
     }
 
-    public void setStrength(short strength) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public void setStrength(short strength)
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         checkStatus(setParameter(1, strength));
     }
 
-    public short getRoundedStrength() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public short getRoundedStrength()
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         short[] value = new short[1];
         checkStatus(getParameter(1, value));
         return value[0];
     }
 
     private class BaseParameterListener implements AudioEffect.OnParameterChangeListener {
-        private BaseParameterListener() {
-        }
+        private BaseParameterListener() {}
 
         @Override // android.media.audiofx.AudioEffect.OnParameterChangeListener
         public void onParameterChange(AudioEffect effect, int status, byte[] param, byte[] value) {
@@ -87,8 +92,7 @@ public class BassBoost extends AudioEffect {
     public static class Settings {
         public short strength;
 
-        public Settings() {
-        }
+        public Settings() {}
 
         public Settings(String settings) {
             StringTokenizer st = new StringTokenizer(settings, "=;");
@@ -117,7 +121,8 @@ public class BassBoost extends AudioEffect {
         }
     }
 
-    public Settings getProperties() throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public Settings getProperties()
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         Settings settings = new Settings();
         short[] value = new short[1];
         checkStatus(getParameter(1, value));
@@ -125,7 +130,8 @@ public class BassBoost extends AudioEffect {
         return settings;
     }
 
-    public void setProperties(Settings settings) throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
+    public void setProperties(Settings settings)
+            throws IllegalStateException, IllegalArgumentException, UnsupportedOperationException {
         checkStatus(setParameter(1, settings.strength));
     }
 }

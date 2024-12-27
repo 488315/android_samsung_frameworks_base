@@ -9,7 +9,8 @@ import android.os.RemoteException;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public interface IOnBlobRetrievedListener extends IInterface {
-    public static final String DESCRIPTOR = "android$net$ipmemorystore$IOnBlobRetrievedListener".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$net$ipmemorystore$IOnBlobRetrievedListener".replace('$', '.');
     public static final String HASH = "d5ea5eb3ddbdaa9a986ce6ba70b0804ca3e39b0c";
     public static final int VERSION = 10;
 
@@ -31,8 +32,9 @@ public interface IOnBlobRetrievedListener extends IInterface {
         }
 
         @Override // android.net.ipmemorystore.IOnBlobRetrievedListener
-        public void onBlobRetrieved(StatusParcelable statusParcelable, String str, String str2, Blob blob) throws RemoteException {
-        }
+        public void onBlobRetrieved(
+                StatusParcelable statusParcelable, String str, String str2, Blob blob)
+                throws RemoteException {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -60,7 +62,8 @@ public interface IOnBlobRetrievedListener extends IInterface {
                         Parcel obtain2 = Parcel.obtain();
                         try {
                             obtain.writeInterfaceToken(IOnBlobRetrievedListener.DESCRIPTOR);
-                            this.mRemote.transact(Stub.TRANSACTION_getInterfaceHash, obtain, obtain2, 0);
+                            this.mRemote.transact(
+                                    Stub.TRANSACTION_getInterfaceHash, obtain, obtain2, 0);
                             obtain2.readException();
                             this.mCachedHash = obtain2.readString();
                             obtain2.recycle();
@@ -84,7 +87,8 @@ public interface IOnBlobRetrievedListener extends IInterface {
                     Parcel obtain2 = Parcel.obtain();
                     try {
                         obtain.writeInterfaceToken(IOnBlobRetrievedListener.DESCRIPTOR);
-                        this.mRemote.transact(Stub.TRANSACTION_getInterfaceVersion, obtain, obtain2, 0);
+                        this.mRemote.transact(
+                                Stub.TRANSACTION_getInterfaceVersion, obtain, obtain2, 0);
                         obtain2.readException();
                         this.mCachedVersion = obtain2.readInt();
                     } finally {
@@ -96,7 +100,8 @@ public interface IOnBlobRetrievedListener extends IInterface {
             }
 
             @Override // android.net.ipmemorystore.IOnBlobRetrievedListener
-            public final void onBlobRetrieved(StatusParcelable statusParcelable, String str, String str2, Blob blob) {
+            public final void onBlobRetrieved(
+                    StatusParcelable statusParcelable, String str, String str2, Blob blob) {
                 Parcel obtain = Parcel.obtain();
                 try {
                     obtain.writeInterfaceToken(IOnBlobRetrievedListener.DESCRIPTOR);
@@ -122,8 +127,10 @@ public interface IOnBlobRetrievedListener extends IInterface {
             if (iBinder == null) {
                 return null;
             }
-            IInterface queryLocalInterface = iBinder.queryLocalInterface(IOnBlobRetrievedListener.DESCRIPTOR);
-            if (queryLocalInterface != null && (queryLocalInterface instanceof IOnBlobRetrievedListener)) {
+            IInterface queryLocalInterface =
+                    iBinder.queryLocalInterface(IOnBlobRetrievedListener.DESCRIPTOR);
+            if (queryLocalInterface != null
+                    && (queryLocalInterface instanceof IOnBlobRetrievedListener)) {
                 return (IOnBlobRetrievedListener) queryLocalInterface;
             }
             Proxy proxy = new Proxy();
@@ -139,7 +146,8 @@ public interface IOnBlobRetrievedListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+                throws RemoteException {
             String str = IOnBlobRetrievedListener.DESCRIPTOR;
             if (i >= 1 && i <= TRANSACTION_getInterfaceVersion) {
                 parcel.enforceInterface(str);
@@ -161,7 +169,11 @@ public interface IOnBlobRetrievedListener extends IInterface {
             if (i != 1) {
                 return super.onTransact(i, parcel, parcel2, i2);
             }
-            onBlobRetrieved((StatusParcelable) parcel.readTypedObject(StatusParcelable.CREATOR), parcel.readString(), parcel.readString(), (Blob) parcel.readTypedObject(Blob.CREATOR));
+            onBlobRetrieved(
+                    (StatusParcelable) parcel.readTypedObject(StatusParcelable.CREATOR),
+                    parcel.readString(),
+                    parcel.readString(),
+                    (Blob) parcel.readTypedObject(Blob.CREATOR));
             return true;
         }
     }
@@ -170,5 +182,6 @@ public interface IOnBlobRetrievedListener extends IInterface {
 
     int getInterfaceVersion() throws RemoteException;
 
-    void onBlobRetrieved(StatusParcelable statusParcelable, String str, String str2, Blob blob) throws RemoteException;
+    void onBlobRetrieved(StatusParcelable statusParcelable, String str, String str2, Blob blob)
+            throws RemoteException;
 }

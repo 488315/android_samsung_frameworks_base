@@ -9,6 +9,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.Parcel;
 import android.util.Log;
+
 import java.lang.ref.WeakReference;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -17,9 +18,12 @@ import java.util.UUID;
 
 /* loaded from: classes2.dex */
 public class AudioEffect {
-    public static final String ACTION_CLOSE_AUDIO_EFFECT_CONTROL_SESSION = "android.media.action.CLOSE_AUDIO_EFFECT_CONTROL_SESSION";
-    public static final String ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL = "android.media.action.DISPLAY_AUDIO_EFFECT_CONTROL_PANEL";
-    public static final String ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION = "android.media.action.OPEN_AUDIO_EFFECT_CONTROL_SESSION";
+    public static final String ACTION_CLOSE_AUDIO_EFFECT_CONTROL_SESSION =
+            "android.media.action.CLOSE_AUDIO_EFFECT_CONTROL_SESSION";
+    public static final String ACTION_DISPLAY_AUDIO_EFFECT_CONTROL_PANEL =
+            "android.media.action.DISPLAY_AUDIO_EFFECT_CONTROL_PANEL";
+    public static final String ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION =
+            "android.media.action.OPEN_AUDIO_EFFECT_CONTROL_SESSION";
     public static final int ALREADY_EXISTS = -2;
     public static final int CONTENT_TYPE_GAME = 2;
     public static final int CONTENT_TYPE_MOVIE = 1;
@@ -109,7 +113,18 @@ public class AudioEffect {
 
     private final native int native_setParameter(int i, byte[] bArr, int i2, byte[] bArr2);
 
-    private final native int native_setup(Object obj, String str, String str2, int i, int i2, int i3, String str3, int[] iArr, Object[] objArr, Parcel parcel, boolean z);
+    private final native int native_setup(
+            Object obj,
+            String str,
+            String str2,
+            int i,
+            int i2,
+            int i3,
+            String str3,
+            int[] iArr,
+            Object[] objArr,
+            Parcel parcel,
+            boolean z);
 
     static {
         System.loadLibrary("audioeffect_jni");
@@ -135,10 +150,10 @@ public class AudioEffect {
         public UUID type;
         public UUID uuid;
 
-        public Descriptor() {
-        }
+        public Descriptor() {}
 
-        public Descriptor(String type, String uuid, String connectMode, String name, String implementor) {
+        public Descriptor(
+                String type, String uuid, String connectMode, String name, String implementor) {
             this.type = UUID.fromString(type);
             this.uuid = UUID.fromString(uuid);
             this.connectMode = connectMode;
@@ -155,7 +170,8 @@ public class AudioEffect {
         }
 
         public int hashCode() {
-            return Objects.hash(this.type, this.uuid, this.connectMode, this.name, this.implementor);
+            return Objects.hash(
+                    this.type, this.uuid, this.connectMode, this.name, this.implementor);
         }
 
         public void writeToParcel(Parcel dest) {
@@ -174,27 +190,46 @@ public class AudioEffect {
                 return false;
             }
             Descriptor that = (Descriptor) o;
-            if (this.type.equals(that.type) && this.uuid.equals(that.uuid) && this.connectMode.equals(that.connectMode) && this.name.equals(that.name) && this.implementor.equals(that.implementor)) {
+            if (this.type.equals(that.type)
+                    && this.uuid.equals(that.uuid)
+                    && this.connectMode.equals(that.connectMode)
+                    && this.name.equals(that.name)
+                    && this.implementor.equals(that.implementor)) {
                 return true;
             }
             return false;
         }
     }
 
-    public AudioEffect(UUID type, UUID uuid, int priority, int audioSession) throws IllegalArgumentException, UnsupportedOperationException, RuntimeException {
+    public AudioEffect(UUID type, UUID uuid, int priority, int audioSession)
+            throws IllegalArgumentException, UnsupportedOperationException, RuntimeException {
         this(type, uuid, priority, audioSession, null);
     }
 
     @SystemApi
     public AudioEffect(UUID uuid, AudioDeviceAttributes device) {
-        this(EFFECT_TYPE_NULL, (UUID) Objects.requireNonNull(uuid), 0, -2, (AudioDeviceAttributes) Objects.requireNonNull(device));
+        this(
+                EFFECT_TYPE_NULL,
+                (UUID) Objects.requireNonNull(uuid),
+                0,
+                -2,
+                (AudioDeviceAttributes) Objects.requireNonNull(device));
     }
 
-    private AudioEffect(UUID type, UUID uuid, int priority, int audioSession, AudioDeviceAttributes device) throws IllegalArgumentException, UnsupportedOperationException, RuntimeException {
+    private AudioEffect(
+            UUID type, UUID uuid, int priority, int audioSession, AudioDeviceAttributes device)
+            throws IllegalArgumentException, UnsupportedOperationException, RuntimeException {
         this(type, uuid, priority, audioSession, device, false);
     }
 
-    private AudioEffect(UUID type, UUID uuid, int priority, int audioSession, AudioDeviceAttributes device, boolean probe) throws IllegalArgumentException, UnsupportedOperationException, RuntimeException {
+    private AudioEffect(
+            UUID type,
+            UUID uuid,
+            int priority,
+            int audioSession,
+            AudioDeviceAttributes device,
+            boolean probe)
+            throws IllegalArgumentException, UnsupportedOperationException, RuntimeException {
         int deviceType;
         String deviceAddress;
         Throwable th;
@@ -216,19 +251,34 @@ public class AudioEffect {
             if (device.getRole() == 2) {
                 deviceType2 = AudioDeviceInfo.convertDeviceTypeToInternalDevice(device.getType());
             } else {
-                deviceType2 = AudioDeviceInfo.convertDeviceTypeToInternalInputDevice(device.getType(), device.getAddress());
+                deviceType2 =
+                        AudioDeviceInfo.convertDeviceTypeToInternalInputDevice(
+                                device.getType(), device.getAddress());
             }
             String deviceAddress2 = device.getAddress();
             deviceType = deviceType2;
             deviceAddress = deviceAddress2;
         }
-        AttributionSource.ScopedParcelState attributionSourceState = AttributionSource.myAttributionSource().asScopedParcelState();
+        AttributionSource.ScopedParcelState attributionSourceState =
+                AttributionSource.myAttributionSource().asScopedParcelState();
         try {
         } catch (Throwable th2) {
             th = th2;
         }
         try {
-            int initResult = native_setup(new WeakReference(this), type.toString(), uuid.toString(), priority, audioSession, deviceType, deviceAddress, id, desc, attributionSourceState.getParcel(), probe);
+            int initResult =
+                    native_setup(
+                            new WeakReference(this),
+                            type.toString(),
+                            uuid.toString(),
+                            priority,
+                            audioSession,
+                            deviceType,
+                            deviceAddress,
+                            id,
+                            desc,
+                            attributionSourceState.getParcel(),
+                            probe);
             if (attributionSourceState != null) {
                 attributionSourceState.close();
             }
@@ -250,7 +300,11 @@ public class AudioEffect {
                 case -4:
                     throw new IllegalArgumentException("Effect type: " + type + " not supported.");
                 default:
-                    throw new RuntimeException("Cannot initialize effect engine for type: " + type + " Error: " + initResult);
+                    throw new RuntimeException(
+                            "Cannot initialize effect engine for type: "
+                                    + type
+                                    + " Error: "
+                                    + initResult);
             }
         } catch (Throwable th3) {
             th = th3;
@@ -270,7 +324,14 @@ public class AudioEffect {
     @SystemApi
     public static boolean isEffectSupportedForDevice(UUID uuid, AudioDeviceAttributes device) {
         try {
-            AudioEffect fx = new AudioEffect(EFFECT_TYPE_NULL, (UUID) Objects.requireNonNull(uuid), 0, -2, (AudioDeviceAttributes) Objects.requireNonNull(device), true);
+            AudioEffect fx =
+                    new AudioEffect(
+                            EFFECT_TYPE_NULL,
+                            (UUID) Objects.requireNonNull(uuid),
+                            0,
+                            -2,
+                            (AudioDeviceAttributes) Objects.requireNonNull(device),
+                            true);
             fx.release();
             return true;
         } catch (Exception e) {
@@ -566,10 +627,12 @@ public class AudioEffect {
             switch (msg.what) {
                 case 0:
                     synchronized (AudioEffect.this.mListenerLock) {
-                        controlStatusChangeListener = this.mAudioEffect.mControlChangeStatusListener;
+                        controlStatusChangeListener =
+                                this.mAudioEffect.mControlChangeStatusListener;
                     }
                     if (controlStatusChangeListener != null) {
-                        controlStatusChangeListener.onControlStatusChange(this.mAudioEffect, msg.arg1 != 0);
+                        controlStatusChangeListener.onControlStatusChange(
+                                this.mAudioEffect, msg.arg1 != 0);
                         return;
                     }
                     return;
@@ -578,7 +641,8 @@ public class AudioEffect {
                         enableStatusChangeListener = this.mAudioEffect.mEnableStatusChangeListener;
                     }
                     if (enableStatusChangeListener != null) {
-                        enableStatusChangeListener.onEnableStatusChange(this.mAudioEffect, msg.arg1 != 0);
+                        enableStatusChangeListener.onEnableStatusChange(
+                                this.mAudioEffect, msg.arg1 != 0);
                         return;
                     }
                     return;
@@ -596,7 +660,8 @@ public class AudioEffect {
                         byte[] value = new byte[vsize];
                         System.arraycopy(p, 12, param, 0, psize);
                         System.arraycopy(p, vOffset, value, 0, vsize);
-                        parameterChangeListener.onParameterChange(this.mAudioEffect, status, param, value);
+                        parameterChangeListener.onParameterChange(
+                                this.mAudioEffect, status, param, value);
                         return;
                     }
                     return;
@@ -607,7 +672,8 @@ public class AudioEffect {
         }
     }
 
-    private static void postEventFromNative(Object effect_ref, int what, int arg1, int arg2, Object obj) {
+    private static void postEventFromNative(
+            Object effect_ref, int what, int arg1, int arg2, Object obj) {
         AudioEffect effect = (AudioEffect) ((WeakReference) effect_ref).get();
         if (effect != null && effect.mNativeEventHandler != null) {
             Message m = effect.mNativeEventHandler.obtainMessage(what, arg1, arg2, obj);
@@ -618,7 +684,8 @@ public class AudioEffect {
     public void checkState(String methodName) throws IllegalStateException {
         synchronized (this.mStateLock) {
             if (this.mState != 1) {
-                throw new IllegalStateException(methodName + " called on uninitialized AudioEffect.");
+                throw new IllegalStateException(
+                        methodName + " called on uninitialized AudioEffect.");
             }
         }
     }
@@ -627,7 +694,8 @@ public class AudioEffect {
         if (isError(status)) {
             switch (status) {
                 case -5:
-                    throw new UnsupportedOperationException("AudioEffect: invalid parameter operation");
+                    throw new UnsupportedOperationException(
+                            "AudioEffect: invalid parameter operation");
                 case -4:
                     throw new IllegalArgumentException("AudioEffect: bad parameter value");
                 default:

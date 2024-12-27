@@ -17,7 +17,8 @@ public interface AnalyzeStatusListener extends NativeInterfaceListener {
 
     void onAnalyzeStopped();
 
-    void onSolutionError(AnalyzeType analyzeType, AnalyzeSolutionErrorType analyzeSolutionErrorType);
+    void onSolutionError(
+            AnalyzeType analyzeType, AnalyzeSolutionErrorType analyzeSolutionErrorType);
 
     void onSolutionLoaded(AnalyzeType analyzeType);
 

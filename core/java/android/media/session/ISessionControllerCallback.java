@@ -2,7 +2,6 @@ package android.media.session;
 
 import android.content.pm.ParceledListSlice;
 import android.media.MediaMetadata;
-import android.media.session.MediaController;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -31,36 +30,28 @@ public interface ISessionControllerCallback extends IInterface {
 
     public static class Default implements ISessionControllerCallback {
         @Override // android.media.session.ISessionControllerCallback
-        public void onEvent(String event, Bundle extras) throws RemoteException {
-        }
+        public void onEvent(String event, Bundle extras) throws RemoteException {}
 
         @Override // android.media.session.ISessionControllerCallback
-        public void onSessionDestroyed() throws RemoteException {
-        }
+        public void onSessionDestroyed() throws RemoteException {}
 
         @Override // android.media.session.ISessionControllerCallback
-        public void onPlaybackStateChanged(PlaybackState state) throws RemoteException {
-        }
+        public void onPlaybackStateChanged(PlaybackState state) throws RemoteException {}
 
         @Override // android.media.session.ISessionControllerCallback
-        public void onMetadataChanged(MediaMetadata metadata) throws RemoteException {
-        }
+        public void onMetadataChanged(MediaMetadata metadata) throws RemoteException {}
 
         @Override // android.media.session.ISessionControllerCallback
-        public void onQueueChanged(ParceledListSlice queue) throws RemoteException {
-        }
+        public void onQueueChanged(ParceledListSlice queue) throws RemoteException {}
 
         @Override // android.media.session.ISessionControllerCallback
-        public void onQueueTitleChanged(CharSequence title) throws RemoteException {
-        }
+        public void onQueueTitleChanged(CharSequence title) throws RemoteException {}
 
         @Override // android.media.session.ISessionControllerCallback
-        public void onExtrasChanged(Bundle extras) throws RemoteException {
-        }
+        public void onExtrasChanged(Bundle extras) throws RemoteException {}
 
         @Override // android.media.session.ISessionControllerCallback
-        public void onVolumeInfoChanged(MediaController.PlaybackInfo info) throws RemoteException {
-        }
+        public void onVolumeInfoChanged(MediaController.PlaybackInfo info) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -68,7 +59,7 @@ public interface ISessionControllerCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISessionControllerCallback {
+    public abstract static class Stub extends Binder implements ISessionControllerCallback {
         public static final String DESCRIPTOR = "android.media.session.ISessionControllerCallback";
         static final int TRANSACTION_onEvent = 1;
         static final int TRANSACTION_onExtrasChanged = 7;
@@ -128,7 +119,8 @@ public interface ISessionControllerCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -147,22 +139,26 @@ public interface ISessionControllerCallback extends IInterface {
                     onSessionDestroyed();
                     return true;
                 case 3:
-                    PlaybackState _arg02 = (PlaybackState) data.readTypedObject(PlaybackState.CREATOR);
+                    PlaybackState _arg02 =
+                            (PlaybackState) data.readTypedObject(PlaybackState.CREATOR);
                     data.enforceNoDataAvail();
                     onPlaybackStateChanged(_arg02);
                     return true;
                 case 4:
-                    MediaMetadata _arg03 = (MediaMetadata) data.readTypedObject(MediaMetadata.CREATOR);
+                    MediaMetadata _arg03 =
+                            (MediaMetadata) data.readTypedObject(MediaMetadata.CREATOR);
                     data.enforceNoDataAvail();
                     onMetadataChanged(_arg03);
                     return true;
                 case 5:
-                    ParceledListSlice _arg04 = (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _arg04 =
+                            (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
                     data.enforceNoDataAvail();
                     onQueueChanged(_arg04);
                     return true;
                 case 6:
-                    CharSequence _arg05 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg05 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     onQueueTitleChanged(_arg05);
                     return true;
@@ -172,7 +168,9 @@ public interface ISessionControllerCallback extends IInterface {
                     onExtrasChanged(_arg06);
                     return true;
                 case 8:
-                    MediaController.PlaybackInfo _arg07 = (MediaController.PlaybackInfo) data.readTypedObject(MediaController.PlaybackInfo.CREATOR);
+                    MediaController.PlaybackInfo _arg07 =
+                            (MediaController.PlaybackInfo)
+                                    data.readTypedObject(MediaController.PlaybackInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onVolumeInfoChanged(_arg07);
                     return true;
@@ -287,7 +285,8 @@ public interface ISessionControllerCallback extends IInterface {
             }
 
             @Override // android.media.session.ISessionControllerCallback
-            public void onVolumeInfoChanged(MediaController.PlaybackInfo info) throws RemoteException {
+            public void onVolumeInfoChanged(MediaController.PlaybackInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

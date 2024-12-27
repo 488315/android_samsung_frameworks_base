@@ -17,8 +17,9 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceSpecificException;
 import android.os.SystemClock;
+
 import com.android.server.FgThread;
-import com.android.server.soundtrigger_middleware.ISoundTriggerHal;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -47,7 +48,9 @@ public class SoundTriggerHw3Compat implements ISoundTriggerHal {
             HandlerExecutor executor = FgThread.getExecutor();
             ISoundTriggerHal.GlobalCallback globalCallback = this.mDelegate;
             Objects.requireNonNull(globalCallback);
-            executor.execute(new SoundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda3(0, globalCallback));
+            executor.execute(
+                    new SoundTriggerHalConcurrentCaptureHandler$$ExternalSyntheticLambda3(
+                            0, globalCallback));
         }
     }
 
@@ -71,7 +74,8 @@ public class SoundTriggerHw3Compat implements ISoundTriggerHal {
             this.mDelegate.modelUnloaded(i);
         }
 
-        public final void phraseRecognitionCallback(int i, PhraseRecognitionEvent phraseRecognitionEvent) {
+        public final void phraseRecognitionCallback(
+                int i, PhraseRecognitionEvent phraseRecognitionEvent) {
             RecognitionEvent recognitionEvent = phraseRecognitionEvent.common;
             recognitionEvent.recognitionStillActive |= recognitionEvent.status == 3;
             PhraseRecognitionEventSys phraseRecognitionEventSys = new PhraseRecognitionEventSys();
@@ -95,16 +99,13 @@ public class SoundTriggerHw3Compat implements ISoundTriggerHal {
     }
 
     @Override // com.android.server.soundtrigger_middleware.ISoundTriggerHal
-    public void clientAttached(IBinder iBinder) {
-    }
+    public void clientAttached(IBinder iBinder) {}
 
     @Override // com.android.server.soundtrigger_middleware.ISoundTriggerHal
-    public void clientDetached(IBinder iBinder) {
-    }
+    public void clientDetached(IBinder iBinder) {}
 
     @Override // com.android.server.soundtrigger_middleware.ISoundTriggerHal
-    public void detach() {
-    }
+    public void detach() {}
 
     @Override // com.android.server.soundtrigger_middleware.ISoundTriggerHal
     public final void forceRecognitionEvent(int i) {
@@ -143,9 +144,11 @@ public class SoundTriggerHw3Compat implements ISoundTriggerHal {
     }
 
     @Override // com.android.server.soundtrigger_middleware.ISoundTriggerHal
-    public final int loadPhraseSoundModel(PhraseSoundModel phraseSoundModel, ISoundTriggerHal.ModelCallback modelCallback) {
+    public final int loadPhraseSoundModel(
+            PhraseSoundModel phraseSoundModel, ISoundTriggerHal.ModelCallback modelCallback) {
         try {
-            return this.mDriver.loadPhraseSoundModel(phraseSoundModel, new ModelCallbackAdaper(modelCallback));
+            return this.mDriver.loadPhraseSoundModel(
+                    phraseSoundModel, new ModelCallbackAdaper(modelCallback));
         } catch (RemoteException e) {
             throw e.rethrowAsRuntimeException();
         } catch (ServiceSpecificException e2) {
@@ -157,7 +160,8 @@ public class SoundTriggerHw3Compat implements ISoundTriggerHal {
     }
 
     @Override // com.android.server.soundtrigger_middleware.ISoundTriggerHal
-    public final int loadSoundModel(SoundModel soundModel, ISoundTriggerHal.ModelCallback modelCallback) {
+    public final int loadSoundModel(
+            SoundModel soundModel, ISoundTriggerHal.ModelCallback modelCallback) {
         try {
             return this.mDriver.loadSoundModel(soundModel, new ModelCallbackAdaper(modelCallback));
         } catch (RemoteException e) {

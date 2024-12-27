@@ -14,8 +14,7 @@ public final class DeviceStateRequest {
     private final int mRequestedState;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RequestFlags {
-    }
+    public @interface RequestFlags {}
 
     public static Builder newBuilder(int requestedState) {
         return new Builder(requestedState);
@@ -40,14 +39,11 @@ public final class DeviceStateRequest {
     }
 
     public interface Callback {
-        default void onRequestActivated(DeviceStateRequest request) {
-        }
+        default void onRequestActivated(DeviceStateRequest request) {}
 
-        default void onRequestSuspended(DeviceStateRequest request) {
-        }
+        default void onRequestSuspended(DeviceStateRequest request) {}
 
-        default void onRequestCanceled(DeviceStateRequest request) {
-        }
+        default void onRequestCanceled(DeviceStateRequest request) {}
     }
 
     private DeviceStateRequest(int requestedState, int flags) {

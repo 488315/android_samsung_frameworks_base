@@ -6,21 +6,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class TunerFrontendInfo implements Parcelable {
-    public static final Parcelable.Creator<TunerFrontendInfo> CREATOR = new Parcelable.Creator<TunerFrontendInfo>() { // from class: android.media.tv.tunerresourcemanager.TunerFrontendInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TunerFrontendInfo createFromParcel(Parcel _aidl_source) {
-            TunerFrontendInfo _aidl_out = new TunerFrontendInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<TunerFrontendInfo> CREATOR =
+            new Parcelable.Creator<
+                    TunerFrontendInfo>() { // from class:
+                                           // android.media.tv.tunerresourcemanager.TunerFrontendInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TunerFrontendInfo createFromParcel(Parcel _aidl_source) {
+                    TunerFrontendInfo _aidl_out = new TunerFrontendInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TunerFrontendInfo[] newArray(int _aidl_size) {
-            return new TunerFrontendInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TunerFrontendInfo[] newArray(int _aidl_size) {
+                    return new TunerFrontendInfo[_aidl_size];
+                }
+            };
     public int handle = 0;
     public int type = 0;
     public int exclusiveGroupId = 0;

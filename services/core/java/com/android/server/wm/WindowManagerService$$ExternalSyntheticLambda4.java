@@ -2,12 +2,13 @@ package com.android.server.wm;
 
 import android.os.SystemClock;
 import android.view.ViewRootImpl;
-import com.android.server.wm.ImmersiveModeConfirmation;
+
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class WindowManagerService$$ExternalSyntheticLambda4 implements Consumer {
+public final /* synthetic */ class WindowManagerService$$ExternalSyntheticLambda4
+        implements Consumer {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ boolean f$0;
 
@@ -28,9 +29,12 @@ public final /* synthetic */ class WindowManagerService$$ExternalSyntheticLambda
                 boolean z2 = false;
                 if (ViewRootImpl.CLIENT_TRANSIENT || ViewRootImpl.CLIENT_IMMERSIVE_CONFIRMATION) {
                     long elapsedRealtime = SystemClock.elapsedRealtime();
-                    boolean isImmersiveMode = displayPolicy.isImmersiveMode(displayPolicy.mSystemUiControllingWindow);
+                    boolean isImmersiveMode =
+                            displayPolicy.isImmersiveMode(displayPolicy.mSystemUiControllingWindow);
                     boolean z3 = (displayPolicy.mLastDisableFlags & 23068672) == 23068672;
-                    if (!z && elapsedRealtime - displayPolicy.mPanicTime < displayPolicy.mPanicThresholdMs) {
+                    if (!z
+                            && elapsedRealtime - displayPolicy.mPanicTime
+                                    < displayPolicy.mPanicThresholdMs) {
                         z2 = !displayPolicy.mImmersiveConfirmationWindowExists;
                     } else if (z && isImmersiveMode && !z3) {
                         displayPolicy.mPanicTime = elapsedRealtime;
@@ -39,11 +43,15 @@ public final /* synthetic */ class WindowManagerService$$ExternalSyntheticLambda
                     }
                 } else {
                     long elapsedRealtime2 = SystemClock.elapsedRealtime();
-                    boolean isImmersiveMode2 = displayPolicy.isImmersiveMode(displayPolicy.mSystemUiControllingWindow);
+                    boolean isImmersiveMode2 =
+                            displayPolicy.isImmersiveMode(displayPolicy.mSystemUiControllingWindow);
                     boolean z4 = (displayPolicy.mLastDisableFlags & 23068672) == 23068672;
-                    ImmersiveModeConfirmation immersiveModeConfirmation = displayPolicy.mImmersiveModeConfirmation;
+                    ImmersiveModeConfirmation immersiveModeConfirmation =
+                            displayPolicy.mImmersiveModeConfirmation;
                     immersiveModeConfirmation.getClass();
-                    if (!z && elapsedRealtime2 - immersiveModeConfirmation.mPanicTime < immersiveModeConfirmation.mPanicThresholdMs) {
+                    if (!z
+                            && elapsedRealtime2 - immersiveModeConfirmation.mPanicTime
+                                    < immersiveModeConfirmation.mPanicThresholdMs) {
                         z2 = immersiveModeConfirmation.mClingWindow == null;
                     } else if (z && isImmersiveMode2 && !z4) {
                         immersiveModeConfirmation.mPanicTime = elapsedRealtime2;
@@ -64,7 +72,8 @@ public final /* synthetic */ class WindowManagerService$$ExternalSyntheticLambda
                 DisplayPolicy displayPolicy2 = (DisplayPolicy) obj;
                 displayPolicy2.getClass();
                 if (!ViewRootImpl.CLIENT_TRANSIENT && !ViewRootImpl.CLIENT_IMMERSIVE_CONFIRMATION) {
-                    ImmersiveModeConfirmation immersiveModeConfirmation2 = displayPolicy2.mImmersiveModeConfirmation;
+                    ImmersiveModeConfirmation immersiveModeConfirmation2 =
+                            displayPolicy2.mImmersiveModeConfirmation;
                     immersiveModeConfirmation2.getClass();
                     if (z) {
                         ImmersiveModeConfirmation.H h = immersiveModeConfirmation2.mHandler;

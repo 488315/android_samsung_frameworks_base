@@ -5,19 +5,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class PresRlmiInfo implements Parcelable {
-    public static final Parcelable.Creator<PresRlmiInfo> CREATOR = new Parcelable.Creator<PresRlmiInfo>() { // from class: com.android.ims.internal.uce.presence.PresRlmiInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PresRlmiInfo createFromParcel(Parcel source) {
-            return new PresRlmiInfo(source);
-        }
+    public static final Parcelable.Creator<PresRlmiInfo> CREATOR =
+            new Parcelable.Creator<
+                    PresRlmiInfo>() { // from class:
+                                      // com.android.ims.internal.uce.presence.PresRlmiInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PresRlmiInfo createFromParcel(Parcel source) {
+                    return new PresRlmiInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PresRlmiInfo[] newArray(int size) {
-            return new PresRlmiInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PresRlmiInfo[] newArray(int size) {
+                    return new PresRlmiInfo[size];
+                }
+            };
     private boolean mFullState;
     private String mListName;
     private PresSubscriptionState mPresSubscriptionState;
@@ -125,7 +128,11 @@ public class PresRlmiInfo implements Parcelable {
         this.mFullState = source.readInt() != 0;
         this.mListName = source.readString();
         this.mRequestId = source.readInt();
-        this.mPresSubscriptionState = (PresSubscriptionState) source.readParcelable(PresSubscriptionState.class.getClassLoader(), PresSubscriptionState.class);
+        this.mPresSubscriptionState =
+                (PresSubscriptionState)
+                        source.readParcelable(
+                                PresSubscriptionState.class.getClassLoader(),
+                                PresSubscriptionState.class);
         this.mSubscriptionExpireTime = source.readInt();
         this.mSubscriptionTerminatedReason = source.readString();
     }

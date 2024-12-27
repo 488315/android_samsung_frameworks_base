@@ -9,20 +9,21 @@ import android.service.voice.VisualQueryAttentionResult;
 
 /* loaded from: classes5.dex */
 public interface IVisualQueryDetectionAttentionListener extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.app.IVisualQueryDetectionAttentionListener";
+    public static final String DESCRIPTOR =
+            "com.android.internal.app.IVisualQueryDetectionAttentionListener";
 
-    void onAttentionGained(VisualQueryAttentionResult visualQueryAttentionResult) throws RemoteException;
+    void onAttentionGained(VisualQueryAttentionResult visualQueryAttentionResult)
+            throws RemoteException;
 
     void onAttentionLost(int i) throws RemoteException;
 
     public static class Default implements IVisualQueryDetectionAttentionListener {
         @Override // com.android.internal.app.IVisualQueryDetectionAttentionListener
-        public void onAttentionGained(VisualQueryAttentionResult attentionResult) throws RemoteException {
-        }
+        public void onAttentionGained(VisualQueryAttentionResult attentionResult)
+                throws RemoteException {}
 
         @Override // com.android.internal.app.IVisualQueryDetectionAttentionListener
-        public void onAttentionLost(int interactionIntention) throws RemoteException {
-        }
+        public void onAttentionLost(int interactionIntention) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -30,7 +31,8 @@ public interface IVisualQueryDetectionAttentionListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVisualQueryDetectionAttentionListener {
+    public abstract static class Stub extends Binder
+            implements IVisualQueryDetectionAttentionListener {
         static final int TRANSACTION_onAttentionGained = 1;
         static final int TRANSACTION_onAttentionLost = 2;
 
@@ -42,7 +44,8 @@ public interface IVisualQueryDetectionAttentionListener extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(IVisualQueryDetectionAttentionListener.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(IVisualQueryDetectionAttentionListener.DESCRIPTOR);
             if (iin != null && (iin instanceof IVisualQueryDetectionAttentionListener)) {
                 return (IVisualQueryDetectionAttentionListener) iin;
             }
@@ -71,7 +74,8 @@ public interface IVisualQueryDetectionAttentionListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IVisualQueryDetectionAttentionListener.DESCRIPTOR);
             }
@@ -81,7 +85,9 @@ public interface IVisualQueryDetectionAttentionListener extends IInterface {
             }
             switch (code) {
                 case 1:
-                    VisualQueryAttentionResult _arg0 = (VisualQueryAttentionResult) data.readTypedObject(VisualQueryAttentionResult.CREATOR);
+                    VisualQueryAttentionResult _arg0 =
+                            (VisualQueryAttentionResult)
+                                    data.readTypedObject(VisualQueryAttentionResult.CREATOR);
                     data.enforceNoDataAvail();
                     onAttentionGained(_arg0);
                     return true;
@@ -112,7 +118,8 @@ public interface IVisualQueryDetectionAttentionListener extends IInterface {
             }
 
             @Override // com.android.internal.app.IVisualQueryDetectionAttentionListener
-            public void onAttentionGained(VisualQueryAttentionResult attentionResult) throws RemoteException {
+            public void onAttentionGained(VisualQueryAttentionResult attentionResult)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IVisualQueryDetectionAttentionListener.DESCRIPTOR);

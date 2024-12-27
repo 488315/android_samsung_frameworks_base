@@ -17,7 +17,8 @@ public interface INetworkPolicyListener extends IInterface {
 
     void onSubscriptionOverride(int i, int i2, int i3, int[] iArr) throws RemoteException;
 
-    void onSubscriptionPlansChanged(int i, SubscriptionPlan[] subscriptionPlanArr) throws RemoteException;
+    void onSubscriptionPlansChanged(int i, SubscriptionPlan[] subscriptionPlanArr)
+            throws RemoteException;
 
     void onUidPoliciesChanged(int i, int i2) throws RemoteException;
 
@@ -25,32 +26,30 @@ public interface INetworkPolicyListener extends IInterface {
 
     public static class Default implements INetworkPolicyListener {
         @Override // android.net.INetworkPolicyListener
-        public void onUidRulesChanged(int uid, int uidRules) throws RemoteException {
-        }
+        public void onUidRulesChanged(int uid, int uidRules) throws RemoteException {}
 
         @Override // android.net.INetworkPolicyListener
-        public void onMeteredIfacesChanged(String[] meteredIfaces) throws RemoteException {
-        }
+        public void onMeteredIfacesChanged(String[] meteredIfaces) throws RemoteException {}
 
         @Override // android.net.INetworkPolicyListener
-        public void onRestrictBackgroundChanged(boolean restrictBackground) throws RemoteException {
-        }
+        public void onRestrictBackgroundChanged(boolean restrictBackground)
+                throws RemoteException {}
 
         @Override // android.net.INetworkPolicyListener
-        public void onUidPoliciesChanged(int uid, int uidPolicies) throws RemoteException {
-        }
+        public void onUidPoliciesChanged(int uid, int uidPolicies) throws RemoteException {}
 
         @Override // android.net.INetworkPolicyListener
-        public void onSubscriptionOverride(int subId, int overrideMask, int overrideValue, int[] networkTypes) throws RemoteException {
-        }
+        public void onSubscriptionOverride(
+                int subId, int overrideMask, int overrideValue, int[] networkTypes)
+                throws RemoteException {}
 
         @Override // android.net.INetworkPolicyListener
-        public void onSubscriptionPlansChanged(int subId, SubscriptionPlan[] plans) throws RemoteException {
-        }
+        public void onSubscriptionPlansChanged(int subId, SubscriptionPlan[] plans)
+                throws RemoteException {}
 
         @Override // android.net.INetworkPolicyListener
-        public void onBlockedReasonChanged(int uid, int oldBlockedReason, int newBlockedReason) throws RemoteException {
-        }
+        public void onBlockedReasonChanged(int uid, int oldBlockedReason, int newBlockedReason)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -58,7 +57,7 @@ public interface INetworkPolicyListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements INetworkPolicyListener {
+    public abstract static class Stub extends Binder implements INetworkPolicyListener {
         public static final String DESCRIPTOR = "android.net.INetworkPolicyListener";
         static final int TRANSACTION_onBlockedReasonChanged = 7;
         static final int TRANSACTION_onMeteredIfacesChanged = 2;
@@ -115,7 +114,8 @@ public interface INetworkPolicyListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -156,7 +156,8 @@ public interface INetworkPolicyListener extends IInterface {
                     return true;
                 case 6:
                     int _arg06 = data.readInt();
-                    SubscriptionPlan[] _arg14 = (SubscriptionPlan[]) data.createTypedArray(SubscriptionPlan.CREATOR);
+                    SubscriptionPlan[] _arg14 =
+                            (SubscriptionPlan[]) data.createTypedArray(SubscriptionPlan.CREATOR);
                     data.enforceNoDataAvail();
                     onSubscriptionPlansChanged(_arg06, _arg14);
                     return true;
@@ -214,7 +215,8 @@ public interface INetworkPolicyListener extends IInterface {
             }
 
             @Override // android.net.INetworkPolicyListener
-            public void onRestrictBackgroundChanged(boolean restrictBackground) throws RemoteException {
+            public void onRestrictBackgroundChanged(boolean restrictBackground)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -239,7 +241,9 @@ public interface INetworkPolicyListener extends IInterface {
             }
 
             @Override // android.net.INetworkPolicyListener
-            public void onSubscriptionOverride(int subId, int overrideMask, int overrideValue, int[] networkTypes) throws RemoteException {
+            public void onSubscriptionOverride(
+                    int subId, int overrideMask, int overrideValue, int[] networkTypes)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -254,7 +258,8 @@ public interface INetworkPolicyListener extends IInterface {
             }
 
             @Override // android.net.INetworkPolicyListener
-            public void onSubscriptionPlansChanged(int subId, SubscriptionPlan[] plans) throws RemoteException {
+            public void onSubscriptionPlansChanged(int subId, SubscriptionPlan[] plans)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -267,7 +272,8 @@ public interface INetworkPolicyListener extends IInterface {
             }
 
             @Override // android.net.INetworkPolicyListener
-            public void onBlockedReasonChanged(int uid, int oldBlockedReason, int newBlockedReason) throws RemoteException {
+            public void onBlockedReasonChanged(int uid, int oldBlockedReason, int newBlockedReason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

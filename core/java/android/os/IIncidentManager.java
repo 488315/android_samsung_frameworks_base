@@ -1,8 +1,5 @@
 package android.os;
 
-import android.os.IIncidentDumpCallback;
-import android.os.IIncidentReportStatusListener;
-import android.os.IncidentManager;
 import java.io.FileDescriptor;
 import java.util.List;
 
@@ -12,17 +9,26 @@ public interface IIncidentManager extends IInterface {
 
     void deleteIncidentReports(String str, String str2, String str3) throws RemoteException;
 
-    IncidentManager.IncidentReport getIncidentReport(String str, String str2, String str3) throws RemoteException;
+    IncidentManager.IncidentReport getIncidentReport(String str, String str2, String str3)
+            throws RemoteException;
 
     List<String> getIncidentReportList(String str, String str2) throws RemoteException;
 
-    void registerSection(int i, String str, IIncidentDumpCallback iIncidentDumpCallback) throws RemoteException;
+    void registerSection(int i, String str, IIncidentDumpCallback iIncidentDumpCallback)
+            throws RemoteException;
 
     void reportIncident(IncidentReportArgs incidentReportArgs) throws RemoteException;
 
-    void reportIncidentToDumpstate(FileDescriptor fileDescriptor, IIncidentReportStatusListener iIncidentReportStatusListener) throws RemoteException;
+    void reportIncidentToDumpstate(
+            FileDescriptor fileDescriptor,
+            IIncidentReportStatusListener iIncidentReportStatusListener)
+            throws RemoteException;
 
-    void reportIncidentToStream(IncidentReportArgs incidentReportArgs, IIncidentReportStatusListener iIncidentReportStatusListener, FileDescriptor fileDescriptor) throws RemoteException;
+    void reportIncidentToStream(
+            IncidentReportArgs incidentReportArgs,
+            IIncidentReportStatusListener iIncidentReportStatusListener,
+            FileDescriptor fileDescriptor)
+            throws RemoteException;
 
     void systemRunning() throws RemoteException;
 
@@ -30,28 +36,29 @@ public interface IIncidentManager extends IInterface {
 
     public static class Default implements IIncidentManager {
         @Override // android.os.IIncidentManager
-        public void reportIncident(IncidentReportArgs args) throws RemoteException {
-        }
+        public void reportIncident(IncidentReportArgs args) throws RemoteException {}
 
         @Override // android.os.IIncidentManager
-        public void reportIncidentToStream(IncidentReportArgs args, IIncidentReportStatusListener listener, FileDescriptor stream) throws RemoteException {
-        }
+        public void reportIncidentToStream(
+                IncidentReportArgs args,
+                IIncidentReportStatusListener listener,
+                FileDescriptor stream)
+                throws RemoteException {}
 
         @Override // android.os.IIncidentManager
-        public void reportIncidentToDumpstate(FileDescriptor stream, IIncidentReportStatusListener listener) throws RemoteException {
-        }
+        public void reportIncidentToDumpstate(
+                FileDescriptor stream, IIncidentReportStatusListener listener)
+                throws RemoteException {}
 
         @Override // android.os.IIncidentManager
-        public void registerSection(int id, String name, IIncidentDumpCallback callback) throws RemoteException {
-        }
+        public void registerSection(int id, String name, IIncidentDumpCallback callback)
+                throws RemoteException {}
 
         @Override // android.os.IIncidentManager
-        public void unregisterSection(int id) throws RemoteException {
-        }
+        public void unregisterSection(int id) throws RemoteException {}
 
         @Override // android.os.IIncidentManager
-        public void systemRunning() throws RemoteException {
-        }
+        public void systemRunning() throws RemoteException {}
 
         @Override // android.os.IIncidentManager
         public List<String> getIncidentReportList(String pkg, String cls) throws RemoteException {
@@ -59,17 +66,17 @@ public interface IIncidentManager extends IInterface {
         }
 
         @Override // android.os.IIncidentManager
-        public IncidentManager.IncidentReport getIncidentReport(String pkg, String cls, String id) throws RemoteException {
+        public IncidentManager.IncidentReport getIncidentReport(String pkg, String cls, String id)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.os.IIncidentManager
-        public void deleteIncidentReports(String pkg, String cls, String id) throws RemoteException {
-        }
+        public void deleteIncidentReports(String pkg, String cls, String id)
+                throws RemoteException {}
 
         @Override // android.os.IIncidentManager
-        public void deleteAllIncidentReports(String pkg) throws RemoteException {
-        }
+        public void deleteAllIncidentReports(String pkg) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -77,7 +84,7 @@ public interface IIncidentManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IIncidentManager {
+    public abstract static class Stub extends Binder implements IIncidentManager {
         public static final String DESCRIPTOR = "android.os.IIncidentManager";
         static final int TRANSACTION_deleteAllIncidentReports = 10;
         static final int TRANSACTION_deleteIncidentReports = 9;
@@ -143,7 +150,8 @@ public interface IIncidentManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -153,27 +161,32 @@ public interface IIncidentManager extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IncidentReportArgs _arg0 = (IncidentReportArgs) data.readTypedObject(IncidentReportArgs.CREATOR);
+                    IncidentReportArgs _arg0 =
+                            (IncidentReportArgs) data.readTypedObject(IncidentReportArgs.CREATOR);
                     data.enforceNoDataAvail();
                     reportIncident(_arg0);
                     return true;
                 case 2:
-                    IncidentReportArgs _arg02 = (IncidentReportArgs) data.readTypedObject(IncidentReportArgs.CREATOR);
-                    IIncidentReportStatusListener _arg1 = IIncidentReportStatusListener.Stub.asInterface(data.readStrongBinder());
+                    IncidentReportArgs _arg02 =
+                            (IncidentReportArgs) data.readTypedObject(IncidentReportArgs.CREATOR);
+                    IIncidentReportStatusListener _arg1 =
+                            IIncidentReportStatusListener.Stub.asInterface(data.readStrongBinder());
                     FileDescriptor _arg2 = data.readRawFileDescriptor();
                     data.enforceNoDataAvail();
                     reportIncidentToStream(_arg02, _arg1, _arg2);
                     return true;
                 case 3:
                     FileDescriptor _arg03 = data.readRawFileDescriptor();
-                    IIncidentReportStatusListener _arg12 = IIncidentReportStatusListener.Stub.asInterface(data.readStrongBinder());
+                    IIncidentReportStatusListener _arg12 =
+                            IIncidentReportStatusListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     reportIncidentToDumpstate(_arg03, _arg12);
                     return true;
                 case 4:
                     int _arg04 = data.readInt();
                     String _arg13 = data.readString();
-                    IIncidentDumpCallback _arg22 = IIncidentDumpCallback.Stub.asInterface(data.readStrongBinder());
+                    IIncidentDumpCallback _arg22 =
+                            IIncidentDumpCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerSection(_arg04, _arg13, _arg22);
                     return true;
@@ -198,7 +211,8 @@ public interface IIncidentManager extends IInterface {
                     String _arg15 = data.readString();
                     String _arg23 = data.readString();
                     data.enforceNoDataAvail();
-                    IncidentManager.IncidentReport _result2 = getIncidentReport(_arg07, _arg15, _arg23);
+                    IncidentManager.IncidentReport _result2 =
+                            getIncidentReport(_arg07, _arg15, _arg23);
                     reply.writeNoException();
                     reply.writeTypedObject(_result2, 1);
                     return true;
@@ -250,7 +264,11 @@ public interface IIncidentManager extends IInterface {
             }
 
             @Override // android.os.IIncidentManager
-            public void reportIncidentToStream(IncidentReportArgs args, IIncidentReportStatusListener listener, FileDescriptor stream) throws RemoteException {
+            public void reportIncidentToStream(
+                    IncidentReportArgs args,
+                    IIncidentReportStatusListener listener,
+                    FileDescriptor stream)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -264,7 +282,9 @@ public interface IIncidentManager extends IInterface {
             }
 
             @Override // android.os.IIncidentManager
-            public void reportIncidentToDumpstate(FileDescriptor stream, IIncidentReportStatusListener listener) throws RemoteException {
+            public void reportIncidentToDumpstate(
+                    FileDescriptor stream, IIncidentReportStatusListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -277,7 +297,8 @@ public interface IIncidentManager extends IInterface {
             }
 
             @Override // android.os.IIncidentManager
-            public void registerSection(int id, String name, IIncidentDumpCallback callback) throws RemoteException {
+            public void registerSection(int id, String name, IIncidentDumpCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -314,7 +335,8 @@ public interface IIncidentManager extends IInterface {
             }
 
             @Override // android.os.IIncidentManager
-            public List<String> getIncidentReportList(String pkg, String cls) throws RemoteException {
+            public List<String> getIncidentReportList(String pkg, String cls)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -332,7 +354,8 @@ public interface IIncidentManager extends IInterface {
             }
 
             @Override // android.os.IIncidentManager
-            public IncidentManager.IncidentReport getIncidentReport(String pkg, String cls, String id) throws RemoteException {
+            public IncidentManager.IncidentReport getIncidentReport(
+                    String pkg, String cls, String id) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -342,7 +365,9 @@ public interface IIncidentManager extends IInterface {
                     _data.writeString(id);
                     this.mRemote.transact(8, _data, _reply, 0);
                     _reply.readException();
-                    IncidentManager.IncidentReport _result = (IncidentManager.IncidentReport) _reply.readTypedObject(IncidentManager.IncidentReport.CREATOR);
+                    IncidentManager.IncidentReport _result =
+                            (IncidentManager.IncidentReport)
+                                    _reply.readTypedObject(IncidentManager.IncidentReport.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -351,7 +376,8 @@ public interface IIncidentManager extends IInterface {
             }
 
             @Override // android.os.IIncidentManager
-            public void deleteIncidentReports(String pkg, String cls, String id) throws RemoteException {
+            public void deleteIncidentReports(String pkg, String cls, String id)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

@@ -8,19 +8,20 @@ import android.os.Parcelable;
 public final class PageRange implements Parcelable {
     public static final PageRange ALL_PAGES = new PageRange(0, Integer.MAX_VALUE);
     public static final PageRange[] ALL_PAGES_ARRAY = {ALL_PAGES};
-    public static final Parcelable.Creator<PageRange> CREATOR = new Parcelable.Creator<PageRange>() { // from class: android.print.PageRange.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PageRange createFromParcel(Parcel parcel) {
-            return new PageRange(parcel);
-        }
+    public static final Parcelable.Creator<PageRange> CREATOR =
+            new Parcelable.Creator<PageRange>() { // from class: android.print.PageRange.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PageRange createFromParcel(Parcel parcel) {
+                    return new PageRange(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PageRange[] newArray(int size) {
-            return new PageRange[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PageRange[] newArray(int size) {
+                    return new PageRange[size];
+                }
+            };
     private final int mEnd;
     private final int mStart;
 
@@ -93,7 +94,11 @@ public final class PageRange implements Parcelable {
             return "PageRange[<all pages>]";
         }
         StringBuilder builder = new StringBuilder();
-        builder.append("PageRange[").append(this.mStart).append(" - ").append(this.mEnd).append(NavigationBarInflaterView.SIZE_MOD_END);
+        builder.append("PageRange[")
+                .append(this.mStart)
+                .append(" - ")
+                .append(this.mEnd)
+                .append(NavigationBarInflaterView.SIZE_MOD_END);
         return builder.toString();
     }
 }

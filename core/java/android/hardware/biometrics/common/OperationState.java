@@ -7,19 +7,21 @@ import android.os.ParcelableHolder;
 
 /* loaded from: classes2.dex */
 public final class OperationState implements Parcelable {
-    public static final Parcelable.Creator<OperationState> CREATOR = new Parcelable.Creator<OperationState>() { // from class: android.hardware.biometrics.common.OperationState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OperationState createFromParcel(Parcel _aidl_source) {
-            return new OperationState(_aidl_source);
-        }
+    public static final Parcelable.Creator<OperationState> CREATOR =
+            new Parcelable.Creator<OperationState>() { // from class:
+                // android.hardware.biometrics.common.OperationState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OperationState createFromParcel(Parcel _aidl_source) {
+                    return new OperationState(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OperationState[] newArray(int _aidl_size) {
-            return new OperationState[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OperationState[] newArray(int _aidl_size) {
+                    return new OperationState[_aidl_size];
+                }
+            };
     public static final int faceOperationState = 1;
     public static final int fingerprintOperationState = 0;
     private int _tag;
@@ -96,11 +98,15 @@ public final class OperationState implements Parcelable {
         int _aidl_tag = _aidl_parcel.readInt();
         switch (_aidl_tag) {
             case 0:
-                FingerprintOperationState _aidl_value = (FingerprintOperationState) _aidl_parcel.readTypedObject(FingerprintOperationState.CREATOR);
+                FingerprintOperationState _aidl_value =
+                        (FingerprintOperationState)
+                                _aidl_parcel.readTypedObject(FingerprintOperationState.CREATOR);
                 _set(_aidl_tag, _aidl_value);
                 return;
             case 1:
-                FaceOperationState _aidl_value2 = (FaceOperationState) _aidl_parcel.readTypedObject(FaceOperationState.CREATOR);
+                FaceOperationState _aidl_value2 =
+                        (FaceOperationState)
+                                _aidl_parcel.readTypedObject(FaceOperationState.CREATOR);
                 _set(_aidl_tag, _aidl_value2);
                 return;
             default:
@@ -131,7 +137,12 @@ public final class OperationState implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 
@@ -152,21 +163,23 @@ public final class OperationState implements Parcelable {
     }
 
     public static class FingerprintOperationState implements Parcelable {
-        public static final Parcelable.Creator<FingerprintOperationState> CREATOR = new Parcelable.Creator<FingerprintOperationState>() { // from class: android.hardware.biometrics.common.OperationState.FingerprintOperationState.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public FingerprintOperationState createFromParcel(Parcel _aidl_source) {
-                FingerprintOperationState _aidl_out = new FingerprintOperationState();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<FingerprintOperationState> CREATOR =
+                new Parcelable.Creator<FingerprintOperationState>() { // from class:
+                    // android.hardware.biometrics.common.OperationState.FingerprintOperationState.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public FingerprintOperationState createFromParcel(Parcel _aidl_source) {
+                        FingerprintOperationState _aidl_out = new FingerprintOperationState();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public FingerprintOperationState[] newArray(int _aidl_size) {
-                return new FingerprintOperationState[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public FingerprintOperationState[] newArray(int _aidl_size) {
+                        return new FingerprintOperationState[_aidl_size];
+                    }
+                };
         public final ParcelableHolder extension = new ParcelableHolder(1);
         public boolean isHardwareIgnoringTouches = false;
 
@@ -240,21 +253,23 @@ public final class OperationState implements Parcelable {
     }
 
     public static class FaceOperationState implements Parcelable {
-        public static final Parcelable.Creator<FaceOperationState> CREATOR = new Parcelable.Creator<FaceOperationState>() { // from class: android.hardware.biometrics.common.OperationState.FaceOperationState.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public FaceOperationState createFromParcel(Parcel _aidl_source) {
-                FaceOperationState _aidl_out = new FaceOperationState();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<FaceOperationState> CREATOR =
+                new Parcelable.Creator<FaceOperationState>() { // from class:
+                    // android.hardware.biometrics.common.OperationState.FaceOperationState.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public FaceOperationState createFromParcel(Parcel _aidl_source) {
+                        FaceOperationState _aidl_out = new FaceOperationState();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public FaceOperationState[] newArray(int _aidl_size) {
-                return new FaceOperationState[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public FaceOperationState[] newArray(int _aidl_size) {
+                        return new FaceOperationState[_aidl_size];
+                    }
+                };
         public final ParcelableHolder extension = new ParcelableHolder(1);
 
         @Override // android.os.Parcelable

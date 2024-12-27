@@ -8,6 +8,7 @@ import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.ListView;
+
 import com.android.internal.app.AlertController;
 
 /* loaded from: classes5.dex */
@@ -50,7 +51,8 @@ public final class ActionsDialog extends Dialog implements DialogInterface {
     public boolean dispatchPopulateAccessibilityEvent(AccessibilityEvent event) {
         if (event.getEventType() == 32) {
             for (int i = 0; i < this.mAdapter.getCount(); i++) {
-                CharSequence label = this.mAdapter.getItem(i).getLabelForAccessibility(getContext());
+                CharSequence label =
+                        this.mAdapter.getItem(i).getLabelForAccessibility(getContext());
                 if (label != null) {
                     event.getText().add(label);
                 }

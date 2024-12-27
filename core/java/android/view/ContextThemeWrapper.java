@@ -35,7 +35,8 @@ public class ContextThemeWrapper extends ContextWrapper {
 
     public void applyOverrideConfiguration(Configuration overrideConfiguration) {
         if (this.mResources != null) {
-            throw new IllegalStateException("getResources() or getAssets() has already been called");
+            throw new IllegalStateException(
+                    "getResources() or getAssets() has already been called");
         }
         if (this.mOverrideConfiguration != null) {
             throw new IllegalStateException("Override configuration has already been set");
@@ -91,7 +92,9 @@ public class ContextThemeWrapper extends ContextWrapper {
         if (this.mTheme != null) {
             return this.mTheme;
         }
-        this.mThemeResource = Resources.selectDefaultTheme(this.mThemeResource, getApplicationInfo().targetSdkVersion);
+        this.mThemeResource =
+                Resources.selectDefaultTheme(
+                        this.mThemeResource, getApplicationInfo().targetSdkVersion);
         initializeTheme();
         return this.mTheme;
     }

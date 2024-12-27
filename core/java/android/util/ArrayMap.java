@@ -1,6 +1,7 @@
 package android.util;
 
 import com.android.internal.util.ArrayUtils;
+
 import java.util.Collection;
 import java.util.ConcurrentModificationException;
 import java.util.Map;
@@ -113,7 +114,12 @@ public final class ArrayMap<K, V> implements Map<K, V> {
                         mTwiceBaseCacheSize--;
                         return;
                     } else {
-                        Slog.wtf(TAG, "Found corrupt ArrayMap cache: [0]=" + array[0] + " [1]=" + array[1]);
+                        Slog.wtf(
+                                TAG,
+                                "Found corrupt ArrayMap cache: [0]="
+                                        + array[0]
+                                        + " [1]="
+                                        + array[1]);
                         mTwiceBaseCache = null;
                         mTwiceBaseCacheSize = 0;
                     }
@@ -135,7 +141,12 @@ public final class ArrayMap<K, V> implements Map<K, V> {
                         mBaseCacheSize--;
                         return;
                     } else {
-                        Slog.wtf(TAG, "Found corrupt ArrayMap cache: [0]=" + array2[0] + " [1]=" + array2[1]);
+                        Slog.wtf(
+                                TAG,
+                                "Found corrupt ArrayMap cache: [0]="
+                                        + array2[0]
+                                        + " [1]="
+                                        + array2[1]);
                         mBaseCache = null;
                         mBaseCacheSize = 0;
                     }
@@ -364,7 +375,8 @@ public final class ArrayMap<K, V> implements Map<K, V> {
         }
         if (i3 < i) {
             System.arraycopy(this.mHashes, i3, this.mHashes, i3 + 1, i - i3);
-            System.arraycopy(this.mArray, i3 << 1, this.mArray, (i3 + 1) << 1, (this.mSize - i3) << 1);
+            System.arraycopy(
+                    this.mArray, i3 << 1, this.mArray, (i3 + 1) << 1, (this.mSize - i3) << 1);
         }
         if (i != this.mSize || i3 >= this.mHashes.length) {
             throw new ConcurrentModificationException();
@@ -390,7 +402,16 @@ public final class ArrayMap<K, V> implements Map<K, V> {
         if (index > 0 && this.mHashes[index - 1] > hash) {
             RuntimeException e = new RuntimeException("here");
             e.fillInStackTrace();
-            Log.w(TAG, "New hash " + hash + " is before end of array hash " + this.mHashes[index - 1] + " at index " + index + "", e);
+            Log.w(
+                    TAG,
+                    "New hash "
+                            + hash
+                            + " is before end of array hash "
+                            + this.mHashes[index - 1]
+                            + " at index "
+                            + index
+                            + "",
+                    e);
             put(key, value);
             return;
         }
@@ -588,52 +609,53 @@ public final class ArrayMap<K, V> implements Map<K, V> {
 
     private MapCollections<K, V> getCollection() {
         if (this.mCollections == null) {
-            this.mCollections = new MapCollections<K, V>() { // from class: android.util.ArrayMap.1
-                @Override // android.util.MapCollections
-                protected int colGetSize() {
-                    return ArrayMap.this.mSize;
-                }
+            this.mCollections =
+                    new MapCollections<K, V>() { // from class: android.util.ArrayMap.1
+                        @Override // android.util.MapCollections
+                        protected int colGetSize() {
+                            return ArrayMap.this.mSize;
+                        }
 
-                @Override // android.util.MapCollections
-                protected Object colGetEntry(int index, int offset) {
-                    return ArrayMap.this.mArray[(index << 1) + offset];
-                }
+                        @Override // android.util.MapCollections
+                        protected Object colGetEntry(int index, int offset) {
+                            return ArrayMap.this.mArray[(index << 1) + offset];
+                        }
 
-                @Override // android.util.MapCollections
-                protected int colIndexOfKey(Object key) {
-                    return ArrayMap.this.indexOfKey(key);
-                }
+                        @Override // android.util.MapCollections
+                        protected int colIndexOfKey(Object key) {
+                            return ArrayMap.this.indexOfKey(key);
+                        }
 
-                @Override // android.util.MapCollections
-                protected int colIndexOfValue(Object value) {
-                    return ArrayMap.this.indexOfValue(value);
-                }
+                        @Override // android.util.MapCollections
+                        protected int colIndexOfValue(Object value) {
+                            return ArrayMap.this.indexOfValue(value);
+                        }
 
-                @Override // android.util.MapCollections
-                protected Map<K, V> colGetMap() {
-                    return ArrayMap.this;
-                }
+                        @Override // android.util.MapCollections
+                        protected Map<K, V> colGetMap() {
+                            return ArrayMap.this;
+                        }
 
-                @Override // android.util.MapCollections
-                protected void colPut(K key, V value) {
-                    ArrayMap.this.put(key, value);
-                }
+                        @Override // android.util.MapCollections
+                        protected void colPut(K key, V value) {
+                            ArrayMap.this.put(key, value);
+                        }
 
-                @Override // android.util.MapCollections
-                protected V colSetValue(int i, V v) {
-                    return (V) ArrayMap.this.setValueAt(i, v);
-                }
+                        @Override // android.util.MapCollections
+                        protected V colSetValue(int i, V v) {
+                            return (V) ArrayMap.this.setValueAt(i, v);
+                        }
 
-                @Override // android.util.MapCollections
-                protected void colRemoveAt(int index) {
-                    ArrayMap.this.removeAt(index);
-                }
+                        @Override // android.util.MapCollections
+                        protected void colRemoveAt(int index) {
+                            ArrayMap.this.removeAt(index);
+                        }
 
-                @Override // android.util.MapCollections
-                protected void colClear() {
-                    ArrayMap.this.clear();
-                }
-            };
+                        @Override // android.util.MapCollections
+                        protected void colClear() {
+                            ArrayMap.this.clear();
+                        }
+                    };
         }
         return this.mCollections;
     }

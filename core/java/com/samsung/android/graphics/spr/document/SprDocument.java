@@ -6,6 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Region;
 import android.util.Log;
 import android.util.SparseArray;
+
 import com.samsung.android.graphics.spr.animation.interpolator.SprTimeInterpolatorFactory;
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeAnimatorSet;
@@ -22,14 +23,16 @@ import com.samsung.android.graphics.spr.document.shape.SprObjectShapePath;
 import com.samsung.android.graphics.spr.document.shape.SprObjectShapeRectangle;
 import com.samsung.android.graphics.spr.document.shape.SprObjectShapeUse;
 import com.samsung.android.widget.SemHoverPopupWindow;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes6.dex */
 public class SprDocument implements Cloneable {
@@ -267,7 +270,8 @@ public class SprDocument implements Cloneable {
         this.mIsInitialized = true;
     }
 
-    public SprDocument(String docName, XmlPullParser parser) throws XmlPullParserException, IOException {
+    public SprDocument(String docName, XmlPullParser parser)
+            throws XmlPullParserException, IOException {
         int eventType;
         this.mIsInitialized = false;
         this.mFileAttributes = new ArrayList<>();
@@ -371,7 +375,8 @@ public class SprDocument implements Cloneable {
                 } else {
                     switch (attribute.mType) {
                         case 1:
-                            SprFileAttributeNinePatch ninePatch = (SprFileAttributeNinePatch) attribute;
+                            SprFileAttributeNinePatch ninePatch =
+                                    (SprFileAttributeNinePatch) attribute;
                             if (ninePatch.xSize == 1 && ninePatch.ySize == 1) {
                                 ninePatchLeft = ninePatch.xStart[0];
                                 ninePatchTop = ninePatch.yStart[0];
@@ -562,7 +567,10 @@ public class SprDocument implements Cloneable {
     }
 
     public boolean isNinePatch() {
-        return this.mNinePatchLeft > 0.0f || this.mNinePatchTop > 0.0f || this.mNinePatchRight > 0.0f || this.mNinePatchBottom > 0.0f;
+        return this.mNinePatchLeft > 0.0f
+                || this.mNinePatchTop > 0.0f
+                || this.mNinePatchRight > 0.0f
+                || this.mNinePatchBottom > 0.0f;
     }
 
     private void updateAnimationObjectList(SprObjectBase object) {
@@ -643,7 +651,9 @@ public class SprDocument implements Cloneable {
                             quotient = 86400000;
                             break;
                     }
-                    animatorSet.updateAnimatorInterpolator(SprTimeInterpolatorFactory.get(this.mAnimationMode, duration, type, quotient));
+                    animatorSet.updateAnimatorInterpolator(
+                            SprTimeInterpolatorFactory.get(
+                                    this.mAnimationMode, duration, type, quotient));
                 }
             }
         }
@@ -659,7 +669,8 @@ public class SprDocument implements Cloneable {
         while (it.hasNext()) {
             SprObjectShapeGroup group = it.next();
             document.mDocuments.add(group.mo8816clone());
-            document.updateAnimationObjectList(document.mDocuments.get(document.mDocuments.size() - 1));
+            document.updateAnimationObjectList(
+                    document.mDocuments.get(document.mDocuments.size() - 1));
         }
         if (this.mAnimationMode >= 1 && this.mAnimationMode <= 8) {
             applyTimeAnimationMode();
@@ -687,14 +698,20 @@ public class SprDocument implements Cloneable {
         return this.mIntrinsic == this;
     }
 
-    public void draw(Canvas canvas, int displayWidth, int displayHeight, int drawingGroupIdx, int dpi) {
+    public void draw(
+            Canvas canvas, int displayWidth, int displayHeight, int drawingGroupIdx, int dpi) {
         if (SprDebug.IsDebug) {
             SprDebug.drawRect(canvas, this, displayWidth, displayHeight);
         }
         float sx = displayWidth / (this.mRight - this.mLeft);
         float sy = displayHeight / (this.mBottom - this.mTop);
         canvas.save(31);
-        canvas.clipRect(this.mLeft, this.mTop, this.mLeft + displayWidth, this.mTop + displayHeight, Region.Op.INTERSECT);
+        canvas.clipRect(
+                this.mLeft,
+                this.mTop,
+                this.mLeft + displayWidth,
+                this.mTop + displayHeight,
+                Region.Op.INTERSECT);
         canvas.scale(sx, sy);
         if (drawingGroupIdx < 0) {
             getObject().draw(this, canvas, sx, sy, 1.0f);
@@ -720,9 +737,13 @@ public class SprDocument implements Cloneable {
         if (drawingGroupIdx < 0) {
             getObject().preDraw(this, strokePaint, fillPaint, false, false, null);
         } else if (drawingGroupIdx >= this.mDocuments.size()) {
-            this.mDocuments.get(this.mDocuments.size() - 1).preDraw(this, strokePaint, fillPaint, false, false, null);
+            this.mDocuments
+                    .get(this.mDocuments.size() - 1)
+                    .preDraw(this, strokePaint, fillPaint, false, false, null);
         } else {
-            this.mDocuments.get(drawingGroupIdx).preDraw(this, strokePaint, fillPaint, false, false, null);
+            this.mDocuments
+                    .get(drawingGroupIdx)
+                    .preDraw(this, strokePaint, fillPaint, false, false, null);
         }
         if (drawingGroupIdx <= 0) {
             this.isPredraw = true;

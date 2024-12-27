@@ -31,13 +31,18 @@ import android.util.TimingsTraceLog;
 import android.view.WindowManager;
 import android.webkit.WebViewFactory;
 import android.widget.TextView;
-import com.android.internal.os.RuntimeInit;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.internal.util.Preconditions;
-import com.samsung.ucm.keystore.KnoxUcmKeyStoreProvider;
-import com.samsung.ucm.keystore.UcmKeyStoreHelper;
+
 import dalvik.system.VMRuntime;
 import dalvik.system.ZygoteHooks;
+
+import libcore.io.IoUtils;
+
+import com.samsung.ucm.keystore.KnoxUcmKeyStoreProvider;
+import com.samsung.ucm.keystore.UcmKeyStoreHelper;
+
 import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.File;
@@ -50,7 +55,6 @@ import java.security.Provider;
 import java.security.Security;
 import java.util.ArrayList;
 import java.util.List;
-import libcore.io.IoUtils;
 
 /* loaded from: classes5.dex */
 public class ZygoteInit {
@@ -58,7 +62,8 @@ public class ZygoteInit {
     private static final int LOG_BOOT_PROGRESS_PRELOAD_END = 3030;
     private static final int LOG_BOOT_PROGRESS_PRELOAD_START = 3020;
     private static final String PRELOADED_CLASSES = "/system/etc/preloaded-classes";
-    private static final String PROPERTY_DISABLE_GRAPHICS_DRIVER_PRELOADING = "ro.zygote.disable_gl_preload";
+    private static final String PROPERTY_DISABLE_GRAPHICS_DRIVER_PRELOADING =
+            "ro.zygote.disable_gl_preload";
     private static final int ROOT_GID = 0;
     private static final int ROOT_UID = 0;
     private static final String SOCKET_NAME_ARG = "--socket-name=";
@@ -161,7 +166,8 @@ public class ZygoteInit {
     }
 
     private static void addUcmKeyStoreProvider() {
-        if (!SystemProperties.getBoolean(KnoxUcmKeyStoreProvider.PROPERTY_PERSIST_UCM_CRYPTO, false)) {
+        if (!SystemProperties.getBoolean(
+                KnoxUcmKeyStoreProvider.PROPERTY_PERSIST_UCM_CRYPTO, false)) {
             return;
         }
         UcmKeyStoreHelper.addUcmProvider();
@@ -171,7 +177,11 @@ public class ZygoteInit {
         long startTime = SystemClock.uptimeMillis();
         Trace.traceBegin(16384L, "Starting installation of AndroidKeyStoreProvider");
         AndroidKeyStoreProvider.install();
-        Log.i(TAG, "Installed AndroidKeyStoreProvider in " + (SystemClock.uptimeMillis() - startTime) + "ms.");
+        Log.i(
+                TAG,
+                "Installed AndroidKeyStoreProvider in "
+                        + (SystemClock.uptimeMillis() - startTime)
+                        + "ms.");
         Trace.traceEnd(16384L);
         addUcmKeyStoreProvider();
         long startTime2 = SystemClock.uptimeMillis();
@@ -179,13 +189,18 @@ public class ZygoteInit {
         for (Provider p : Security.getProviders()) {
             p.warmUpServiceProvision();
         }
-        Log.i(TAG, "Warmed up JCA providers in " + (SystemClock.uptimeMillis() - startTime2) + "ms.");
+        Log.i(
+                TAG,
+                "Warmed up JCA providers in " + (SystemClock.uptimeMillis() - startTime2) + "ms.");
         Trace.traceEnd(16384L);
     }
 
     private static boolean isExperimentEnabled(String experiment) {
-        boolean defaultValue = SystemProperties.getBoolean(ZygoteConfig.PROPERTY_PREFIX_SYSTEM + experiment, false);
-        return SystemProperties.getBoolean("persist.device_config.runtime_native_boot." + experiment, defaultValue);
+        boolean defaultValue =
+                SystemProperties.getBoolean(
+                        ZygoteConfig.PROPERTY_PREFIX_SYSTEM + experiment, false);
+        return SystemProperties.getBoolean(
+                "persist.device_config.runtime_native_boot." + experiment, defaultValue);
     }
 
     static boolean shouldProfileSystemServer() {
@@ -245,7 +260,12 @@ public class ZygoteInit {
                                     } catch (UnsatisfiedLinkError e2) {
                                         Log.w(TAG, "Problem preloading " + line2 + ": " + e2);
                                     } catch (Throwable t) {
-                                        Log.e(TAG, "Error preloading " + line2 + MediaMetrics.SEPARATOR, t);
+                                        Log.e(
+                                                TAG,
+                                                "Error preloading "
+                                                        + line2
+                                                        + MediaMetrics.SEPARATOR,
+                                                t);
                                         if (t instanceof Error) {
                                             throw ((Error) t);
                                         }
@@ -274,7 +294,8 @@ public class ZygoteInit {
                                             Os.setreuid(0, 0);
                                             Os.setregid(0, 0);
                                         } catch (ErrnoException ex2) {
-                                            throw new RuntimeException("Failed to restore root", ex2);
+                                            throw new RuntimeException(
+                                                    "Failed to restore root", ex2);
                                         }
                                     }
                                     throw ex;
@@ -312,7 +333,13 @@ public class ZygoteInit {
                     }
                 }
                 boolean droppedPriviliges3 = droppedPriviliges2;
-                Log.i(TAG, "...preloaded " + count + " classes in " + (SystemClock.uptimeMillis() - startTime) + "ms.");
+                Log.i(
+                        TAG,
+                        "...preloaded "
+                                + count
+                                + " classes in "
+                                + (SystemClock.uptimeMillis() - startTime)
+                                + "ms.");
                 if (LOGGING_DEBUG && missingLambdaCount != 0) {
                     Log.i(TAG, "Unresolved lambda preloads: " + missingLambdaCount);
                 }
@@ -347,16 +374,83 @@ public class ZygoteInit {
 
     private static void cacheNonBootClasspathClassLoaders() {
         List<SharedLibraryInfo> libs = new ArrayList<>();
-        libs.add(new SharedLibraryInfo("/system/framework/android.hidl.base-V1.0-java.jar", (String) null, (List<String>) null, (String) null, 0L, 0, (VersionedPackage) null, (List<VersionedPackage>) null, (List<SharedLibraryInfo>) null, false));
-        libs.add(new SharedLibraryInfo("/system/framework/android.hidl.manager-V1.0-java.jar", (String) null, (List<String>) null, (String) null, 0L, 0, (VersionedPackage) null, (List<VersionedPackage>) null, (List<SharedLibraryInfo>) null, false));
-        libs.add(new SharedLibraryInfo("/system/framework/android.test.base.jar", (String) null, (List<String>) null, (String) null, 0L, 0, (VersionedPackage) null, (List<VersionedPackage>) null, (List<SharedLibraryInfo>) null, false));
+        libs.add(
+                new SharedLibraryInfo(
+                        "/system/framework/android.hidl.base-V1.0-java.jar",
+                        (String) null,
+                        (List<String>) null,
+                        (String) null,
+                        0L,
+                        0,
+                        (VersionedPackage) null,
+                        (List<VersionedPackage>) null,
+                        (List<SharedLibraryInfo>) null,
+                        false));
+        libs.add(
+                new SharedLibraryInfo(
+                        "/system/framework/android.hidl.manager-V1.0-java.jar",
+                        (String) null,
+                        (List<String>) null,
+                        (String) null,
+                        0L,
+                        0,
+                        (VersionedPackage) null,
+                        (List<VersionedPackage>) null,
+                        (List<SharedLibraryInfo>) null,
+                        false));
+        libs.add(
+                new SharedLibraryInfo(
+                        "/system/framework/android.test.base.jar",
+                        (String) null,
+                        (List<String>) null,
+                        (String) null,
+                        0L,
+                        0,
+                        (VersionedPackage) null,
+                        (List<VersionedPackage>) null,
+                        (List<SharedLibraryInfo>) null,
+                        false));
         if (Flags.enableApacheHttpLegacyPreload()) {
-            libs.add(new SharedLibraryInfo("/system/framework/org.apache.http.legacy.jar", (String) null, (List<String>) null, (String) null, 0L, 0, (VersionedPackage) null, (List<VersionedPackage>) null, (List<SharedLibraryInfo>) null, false));
+            libs.add(
+                    new SharedLibraryInfo(
+                            "/system/framework/org.apache.http.legacy.jar",
+                            (String) null,
+                            (List<String>) null,
+                            (String) null,
+                            0L,
+                            0,
+                            (VersionedPackage) null,
+                            (List<VersionedPackage>) null,
+                            (List<SharedLibraryInfo>) null,
+                            false));
         }
         if (WindowManager.HAS_WINDOW_EXTENSIONS_ON_DEVICE) {
-            String systemExtFrameworkPath = new File(Environment.getSystemExtDirectory(), "framework").getPath();
-            libs.add(new SharedLibraryInfo(systemExtFrameworkPath + "/androidx.window.extensions.jar", "androidx.window.extensions", (List<String>) null, "androidx.window.extensions", -1L, 0, (VersionedPackage) null, (List<VersionedPackage>) null, (List<SharedLibraryInfo>) null, false));
-            libs.add(new SharedLibraryInfo(systemExtFrameworkPath + "/androidx.window.sidecar.jar", "androidx.window.sidecar", (List<String>) null, "androidx.window.sidecar", -1L, 0, (VersionedPackage) null, (List<VersionedPackage>) null, (List<SharedLibraryInfo>) null, false));
+            String systemExtFrameworkPath =
+                    new File(Environment.getSystemExtDirectory(), "framework").getPath();
+            libs.add(
+                    new SharedLibraryInfo(
+                            systemExtFrameworkPath + "/androidx.window.extensions.jar",
+                            "androidx.window.extensions",
+                            (List<String>) null,
+                            "androidx.window.extensions",
+                            -1L,
+                            0,
+                            (VersionedPackage) null,
+                            (List<VersionedPackage>) null,
+                            (List<SharedLibraryInfo>) null,
+                            false));
+            libs.add(
+                    new SharedLibraryInfo(
+                            systemExtFrameworkPath + "/androidx.window.sidecar.jar",
+                            "androidx.window.sidecar",
+                            (List<String>) null,
+                            "androidx.window.sidecar",
+                            -1L,
+                            0,
+                            (VersionedPackage) null,
+                            (List<VersionedPackage>) null,
+                            (List<SharedLibraryInfo>) null,
+                            false));
         }
         ApplicationLoaders.getDefault().createAndCacheNonBootclasspathSystemClassLoaders(libs);
     }
@@ -372,12 +466,15 @@ public class ZygoteInit {
             Process.setArgV0(parsedArgs.mNiceName);
         }
         String systemServerClasspath = Os.getenv("SYSTEMSERVERCLASSPATH");
-        if (systemServerClasspath != null && shouldProfileSystemServer() && (Build.IS_USERDEBUG || Build.IS_ENG)) {
+        if (systemServerClasspath != null
+                && shouldProfileSystemServer()
+                && (Build.IS_USERDEBUG || Build.IS_ENG)) {
             try {
                 Log.d(TAG, "Preparing system server profile");
                 String standaloneSystemServerJars = Os.getenv("STANDALONE_SYSTEMSERVER_JARS");
                 if (standaloneSystemServerJars != null) {
-                    systemServerPaths = String.join(":", systemServerClasspath, standaloneSystemServerJars);
+                    systemServerPaths =
+                            String.join(":", systemServerClasspath, standaloneSystemServerJars);
                 } else {
                     systemServerPaths = systemServerClasspath;
                 }
@@ -395,19 +492,30 @@ public class ZygoteInit {
                 System.arraycopy(args, 0, amendedArgs, 2, args.length);
                 args = amendedArgs;
             }
-            WrapperInit.execApplication(parsedArgs.mInvokeWith, parsedArgs.mNiceName, parsedArgs.mTargetSdkVersion, VMRuntime.getCurrentInstructionSet(), null, args);
+            WrapperInit.execApplication(
+                    parsedArgs.mInvokeWith,
+                    parsedArgs.mNiceName,
+                    parsedArgs.mTargetSdkVersion,
+                    VMRuntime.getCurrentInstructionSet(),
+                    null,
+                    args);
             throw new IllegalStateException("Unexpected return from WrapperInit.execApplication");
         }
         ClassLoader cl = getOrCreateSystemServerClassLoader();
         if (cl != null) {
             Thread.currentThread().setContextClassLoader(cl);
         }
-        return zygoteInit(parsedArgs.mTargetSdkVersion, parsedArgs.mDisabledCompatChanges, parsedArgs.mRemainingArgs, cl);
+        return zygoteInit(
+                parsedArgs.mTargetSdkVersion,
+                parsedArgs.mDisabledCompatChanges,
+                parsedArgs.mRemainingArgs,
+                cl);
     }
 
     private static ClassLoader getOrCreateSystemServerClassLoader() {
         String systemServerClasspath;
-        if (sCachedSystemServerClassLoader == null && (systemServerClasspath = Os.getenv("SYSTEMSERVERCLASSPATH")) != null) {
+        if (sCachedSystemServerClassLoader == null
+                && (systemServerClasspath = Os.getenv("SYSTEMSERVERCLASSPATH")) != null) {
             sCachedSystemServerClassLoader = createPathClassLoader(systemServerClasspath, 10000);
         }
         return sCachedSystemServerClassLoader;
@@ -423,20 +531,27 @@ public class ZygoteInit {
         }
         for (String jar : envStr.split(":")) {
             try {
-                SystemServerClassLoaderFactory.createClassLoader(jar, getOrCreateSystemServerClassLoader());
+                SystemServerClassLoaderFactory.createClassLoader(
+                        jar, getOrCreateSystemServerClassLoader());
             } catch (Error e) {
-                Log.e(TAG, String.format("Failed to prefetch standalone system server jar \"%s\": %s", jar, e.toString()));
+                Log.e(
+                        TAG,
+                        String.format(
+                                "Failed to prefetch standalone system server jar \"%s\": %s",
+                                jar, e.toString()));
             }
         }
     }
 
-    private static void prepareSystemServerProfile(String systemServerPaths) throws RemoteException {
+    private static void prepareSystemServerProfile(String systemServerPaths)
+            throws RemoteException {
         if (systemServerPaths.isEmpty()) {
             return;
         }
         String[] codePaths = systemServerPaths.split(":");
         IInstalld installd = IInstalld.Stub.asInterface(ServiceManager.getService("installd"));
-        installd.prepareAppProfile("android", 0, UserHandle.getAppId(1000), "primary.prof", codePaths[0], null);
+        installd.prepareAppProfile(
+                "android", 0, UserHandle.getAppId(1000), "primary.prof", codePaths[0], null);
         File curProfileDir = Environment.getDataProfilesDePackageDirectory(0, "android");
         String curProfilePath = new File(curProfileDir, "primary.prof").getAbsolutePath();
         File refProfileDir = Environment.getDataProfilesDePackageDirectory(0, "android");
@@ -460,16 +575,45 @@ public class ZygoteInit {
     static ClassLoader createPathClassLoader(String classPath, int targetSdkVersion) {
         String libraryPath = System.getProperty("java.library.path");
         ClassLoader parent = ClassLoader.getSystemClassLoader().getParent();
-        return ClassLoaderFactory.createClassLoader(classPath, libraryPath, libraryPath, parent, targetSdkVersion, true, null);
+        return ClassLoaderFactory.createClassLoader(
+                classPath, libraryPath, libraryPath, parent, targetSdkVersion, true, null);
     }
 
-    private static Runnable forkSystemServer(String abiList, String socketName, ZygoteServer zygoteServer) {
-        long capabilities = posixCapabilitiesAsBits(OsConstants.CAP_IPC_LOCK, OsConstants.CAP_KILL, OsConstants.CAP_NET_ADMIN, OsConstants.CAP_NET_BIND_SERVICE, OsConstants.CAP_NET_BROADCAST, OsConstants.CAP_NET_RAW, OsConstants.CAP_SYS_MODULE, OsConstants.CAP_SYS_NICE, OsConstants.CAP_SYS_PTRACE, OsConstants.CAP_SYS_TIME, OsConstants.CAP_SYS_TTY_CONFIG, OsConstants.CAP_WAKE_ALARM, OsConstants.CAP_BLOCK_SUSPEND);
-        StructCapUserHeader header = new StructCapUserHeader(OsConstants._LINUX_CAPABILITY_VERSION_3, 0);
+    private static Runnable forkSystemServer(
+            String abiList, String socketName, ZygoteServer zygoteServer) {
+        long capabilities =
+                posixCapabilitiesAsBits(
+                        OsConstants.CAP_IPC_LOCK,
+                        OsConstants.CAP_KILL,
+                        OsConstants.CAP_NET_ADMIN,
+                        OsConstants.CAP_NET_BIND_SERVICE,
+                        OsConstants.CAP_NET_BROADCAST,
+                        OsConstants.CAP_NET_RAW,
+                        OsConstants.CAP_SYS_MODULE,
+                        OsConstants.CAP_SYS_NICE,
+                        OsConstants.CAP_SYS_PTRACE,
+                        OsConstants.CAP_SYS_TIME,
+                        OsConstants.CAP_SYS_TTY_CONFIG,
+                        OsConstants.CAP_WAKE_ALARM,
+                        OsConstants.CAP_BLOCK_SUSPEND);
+        StructCapUserHeader header =
+                new StructCapUserHeader(OsConstants._LINUX_CAPABILITY_VERSION_3, 0);
         try {
             StructCapUserData[] data = Os.capget(header);
-            long capabilities2 = capabilities & (Integer.toUnsignedLong(data[0].effective) | (Integer.toUnsignedLong(data[1].effective) << 32));
-            String[] args = {"--setuid=1000", "--setgid=1000", "--setgroups=1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1018,1021,1023,1024,1032,1065,3001,3002,3003,3005,3006,3007,3009,3010,3011,3012,5666,5678", "--capabilities=" + capabilities2 + "," + capabilities2, "--nice-name=system_server", "--runtime-args", "--target-sdk-version=10000", "com.android.server.SystemServer"};
+            long capabilities2 =
+                    capabilities
+                            & (Integer.toUnsignedLong(data[0].effective)
+                                    | (Integer.toUnsignedLong(data[1].effective) << 32));
+            String[] args = {
+                "--setuid=1000",
+                "--setgid=1000",
+                "--setgroups=1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1018,1021,1023,1024,1032,1065,3001,3002,3003,3005,3006,3007,3009,3010,3011,3012,5666,5678",
+                "--capabilities=" + capabilities2 + "," + capabilities2,
+                "--nice-name=system_server",
+                "--runtime-args",
+                "--target-sdk-version=10000",
+                "com.android.server.SystemServer"
+            };
             try {
                 ZygoteCommandBuffer commandBuffer = new ZygoteCommandBuffer(args);
                 try {
@@ -478,7 +622,8 @@ public class ZygoteInit {
                     Zygote.applyDebuggerSystemProperty(parsedArgs);
                     Zygote.applyInvokeWithSystemProperty(parsedArgs);
                     if (Zygote.nativeSupportsMemoryTagging()) {
-                        String mode = SystemProperties.get("persist.arm64.memtag.system_server", "");
+                        String mode =
+                                SystemProperties.get("persist.arm64.memtag.system_server", "");
                         if (mode.isEmpty()) {
                             mode = SystemProperties.get("persist.arm64.memtag.default", "async");
                         }
@@ -488,7 +633,11 @@ public class ZygoteInit {
                             parsedArgs.mRuntimeFlags |= 1572864;
                         } else if (!mode.equals("off")) {
                             parsedArgs.mRuntimeFlags |= Zygote.nativeCurrentTaggingLevel();
-                            Slog.e(TAG, "Unknown memory tag level for the system server: \"" + mode + "\"");
+                            Slog.e(
+                                    TAG,
+                                    "Unknown memory tag level for the system server: \""
+                                            + mode
+                                            + "\"");
                         }
                     } else if (Zygote.nativeSupportsTaggedPointers()) {
                         parsedArgs.mRuntimeFlags |= 524288;
@@ -497,7 +646,15 @@ public class ZygoteInit {
                     if (shouldProfileSystemServer()) {
                         parsedArgs.mRuntimeFlags |= 16384;
                     }
-                    int pid = Zygote.forkSystemServer(parsedArgs.mUid, parsedArgs.mGid, parsedArgs.mGids, parsedArgs.mRuntimeFlags, null, parsedArgs.mPermittedCapabilities, parsedArgs.mEffectiveCapabilities);
+                    int pid =
+                            Zygote.forkSystemServer(
+                                    parsedArgs.mUid,
+                                    parsedArgs.mGid,
+                                    parsedArgs.mGids,
+                                    parsedArgs.mRuntimeFlags,
+                                    null,
+                                    parsedArgs.mPermittedCapabilities,
+                                    parsedArgs.mEffectiveCapabilities);
                     if (pid == 0) {
                         if (hasSecondZygote(abiList)) {
                             waitForSecondaryZygote(socketName);
@@ -507,7 +664,8 @@ public class ZygoteInit {
                     }
                     return null;
                 } catch (EOFException e) {
-                    throw new AssertionError("Unexpected argument error for forking system server", e);
+                    throw new AssertionError(
+                            "Unexpected argument error for forking system server", e);
                 }
             } catch (IllegalArgumentException ex) {
                 throw new RuntimeException(ex);
@@ -559,7 +717,8 @@ public class ZygoteInit {
                             if (abiList2.startsWith(SOCKET_NAME_ARG)) {
                                 zygoteSocketName = argv[i].substring(SOCKET_NAME_ARG.length());
                             } else {
-                                throw new RuntimeException("Unknown command line argument: " + argv[i]);
+                                throw new RuntimeException(
+                                        "Unknown command line argument: " + argv[i]);
                             }
                         }
                         i++;
@@ -591,7 +750,8 @@ public class ZygoteInit {
                 }
                 if (!enableLazyPreload) {
                     bootTimingsTraceLog.traceBegin("ZygotePreload");
-                    EventLog.writeEvent(LOG_BOOT_PROGRESS_PRELOAD_START, SystemClock.uptimeMillis());
+                    EventLog.writeEvent(
+                            LOG_BOOT_PROGRESS_PRELOAD_START, SystemClock.uptimeMillis());
                     preload(bootTimingsTraceLog);
                     EventLog.writeEvent(LOG_BOOT_PROGRESS_PRELOAD_END, SystemClock.uptimeMillis());
                     bootTimingsTraceLog.traceEnd();
@@ -648,15 +808,19 @@ public class ZygoteInit {
         return sPreloadComplete;
     }
 
-    private ZygoteInit() {
-    }
+    private ZygoteInit() {}
 
-    public static Runnable zygoteInit(int targetSdkVersion, long[] disabledCompatChanges, String[] argv, ClassLoader classLoader) {
+    public static Runnable zygoteInit(
+            int targetSdkVersion,
+            long[] disabledCompatChanges,
+            String[] argv,
+            ClassLoader classLoader) {
         Trace.traceBegin(64L, "ZygoteInit");
         RuntimeInit.redirectLogStreams();
         RuntimeInit.commonInit();
         nativeZygoteInit();
-        return RuntimeInit.applicationInit(targetSdkVersion, disabledCompatChanges, argv, classLoader);
+        return RuntimeInit.applicationInit(
+                targetSdkVersion, disabledCompatChanges, argv, classLoader);
     }
 
     static Runnable childZygoteInit(String[] argv) {

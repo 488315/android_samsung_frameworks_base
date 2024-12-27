@@ -1,6 +1,7 @@
 package android.sax;
 
 import android.media.MediaMetrics;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.Locator;
@@ -30,8 +31,7 @@ public class RootElement extends Element {
         Element current = null;
         StringBuilder bodyBuilder = null;
 
-        Handler() {
-        }
+        Handler() {}
 
         @Override // org.xml.sax.helpers.DefaultHandler, org.xml.sax.ContentHandler
         public void setDocumentLocator(Locator locator) {
@@ -39,7 +39,8 @@ public class RootElement extends Element {
         }
 
         @Override // org.xml.sax.helpers.DefaultHandler, org.xml.sax.ContentHandler
-        public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+        public void startElement(String uri, String localName, String qName, Attributes attributes)
+                throws SAXException {
             Children children;
             Element child;
             int depth = this.depth + 1;
@@ -49,9 +50,15 @@ public class RootElement extends Element {
                 return;
             }
             if (this.bodyBuilder != null) {
-                throw new BadXmlException("Encountered mixed content within text element named " + this.current + MediaMetrics.SEPARATOR, this.locator);
+                throw new BadXmlException(
+                        "Encountered mixed content within text element named "
+                                + this.current
+                                + MediaMetrics.SEPARATOR,
+                        this.locator);
             }
-            if (depth == this.current.depth + 1 && (children = this.current.children) != null && (child = children.get(uri, localName)) != null) {
+            if (depth == this.current.depth + 1
+                    && (children = this.current.children) != null
+                    && (child = children.get(uri, localName)) != null) {
                 start(child, attributes);
             }
         }
@@ -59,7 +66,12 @@ public class RootElement extends Element {
         void startRoot(String uri, String localName, Attributes attributes) throws SAXException {
             Element root = RootElement.this;
             if (root.uri.compareTo(uri) != 0 || root.localName.compareTo(localName) != 0) {
-                throw new BadXmlException("Root element name does not match. Expected: " + root + ", Got: " + Element.toString(uri, localName), this.locator);
+                throw new BadXmlException(
+                        "Root element name does not match. Expected: "
+                                + root
+                                + ", Got: "
+                                + Element.toString(uri, localName),
+                        this.locator);
             }
             start(root, attributes);
         }

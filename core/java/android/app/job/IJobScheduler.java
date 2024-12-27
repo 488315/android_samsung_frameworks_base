@@ -2,8 +2,6 @@ package android.app.job;
 
 import android.Manifest;
 import android.app.ActivityThread;
-import android.app.job.IJobScheduler;
-import android.app.job.IUserVisibleJobObserver;
 import android.content.pm.ParceledListSlice;
 import android.os.Binder;
 import android.os.IBinder;
@@ -12,6 +10,7 @@ import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
 import android.service.notification.ZenModeConfig;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,13 +46,16 @@ public interface IJobScheduler extends IInterface {
 
     void notePendingUserRequestedAppStop(String str, int i, String str2) throws RemoteException;
 
-    void registerUserVisibleJobObserver(IUserVisibleJobObserver iUserVisibleJobObserver) throws RemoteException;
+    void registerUserVisibleJobObserver(IUserVisibleJobObserver iUserVisibleJobObserver)
+            throws RemoteException;
 
     int schedule(String str, JobInfo jobInfo) throws RemoteException;
 
-    int scheduleAsPackage(String str, JobInfo jobInfo, String str2, int i, String str3) throws RemoteException;
+    int scheduleAsPackage(String str, JobInfo jobInfo, String str2, int i, String str3)
+            throws RemoteException;
 
-    void unregisterUserVisibleJobObserver(IUserVisibleJobObserver iUserVisibleJobObserver) throws RemoteException;
+    void unregisterUserVisibleJobObserver(IUserVisibleJobObserver iUserVisibleJobObserver)
+            throws RemoteException;
 
     public static class Default implements IJobScheduler {
         @Override // android.app.job.IJobScheduler
@@ -67,21 +69,20 @@ public interface IJobScheduler extends IInterface {
         }
 
         @Override // android.app.job.IJobScheduler
-        public int scheduleAsPackage(String namespace, JobInfo job, String packageName, int userId, String tag) throws RemoteException {
+        public int scheduleAsPackage(
+                String namespace, JobInfo job, String packageName, int userId, String tag)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.job.IJobScheduler
-        public void cancel(String namespace, int jobId) throws RemoteException {
-        }
+        public void cancel(String namespace, int jobId) throws RemoteException {}
 
         @Override // android.app.job.IJobScheduler
-        public void cancelAll() throws RemoteException {
-        }
+        public void cancelAll() throws RemoteException {}
 
         @Override // android.app.job.IJobScheduler
-        public void cancelAllInNamespace(String namespace) throws RemoteException {
-        }
+        public void cancelAllInNamespace(String namespace) throws RemoteException {}
 
         @Override // android.app.job.IJobScheduler
         public Map<String, ParceledListSlice<JobInfo>> getAllPendingJobs() throws RemoteException {
@@ -89,7 +90,8 @@ public interface IJobScheduler extends IInterface {
         }
 
         @Override // android.app.job.IJobScheduler
-        public ParceledListSlice<JobInfo> getAllPendingJobsInNamespace(String namespace) throws RemoteException {
+        public ParceledListSlice<JobInfo> getAllPendingJobsInNamespace(String namespace)
+                throws RemoteException {
             return null;
         }
 
@@ -109,7 +111,8 @@ public interface IJobScheduler extends IInterface {
         }
 
         @Override // android.app.job.IJobScheduler
-        public boolean hasRunUserInitiatedJobsPermission(String packageName, int userId) throws RemoteException {
+        public boolean hasRunUserInitiatedJobsPermission(String packageName, int userId)
+                throws RemoteException {
             return false;
         }
 
@@ -124,16 +127,16 @@ public interface IJobScheduler extends IInterface {
         }
 
         @Override // android.app.job.IJobScheduler
-        public void registerUserVisibleJobObserver(IUserVisibleJobObserver observer) throws RemoteException {
-        }
+        public void registerUserVisibleJobObserver(IUserVisibleJobObserver observer)
+                throws RemoteException {}
 
         @Override // android.app.job.IJobScheduler
-        public void unregisterUserVisibleJobObserver(IUserVisibleJobObserver observer) throws RemoteException {
-        }
+        public void unregisterUserVisibleJobObserver(IUserVisibleJobObserver observer)
+                throws RemoteException {}
 
         @Override // android.app.job.IJobScheduler
-        public void notePendingUserRequestedAppStop(String packageName, int userId, String debugReason) throws RemoteException {
-        }
+        public void notePendingUserRequestedAppStop(
+                String packageName, int userId, String debugReason) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -141,7 +144,7 @@ public interface IJobScheduler extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IJobScheduler {
+    public abstract static class Stub extends Binder implements IJobScheduler {
         public static final String DESCRIPTOR = "android.app.job.IJobScheduler";
         static final int TRANSACTION_canRunUserInitiatedJobs = 11;
         static final int TRANSACTION_cancel = 4;
@@ -161,9 +164,18 @@ public interface IJobScheduler extends IInterface {
         static final int TRANSACTION_scheduleAsPackage = 3;
         static final int TRANSACTION_unregisterUserVisibleJobObserver = 16;
         private final PermissionEnforcer mEnforcer;
-        static final String[] PERMISSIONS_registerUserVisibleJobObserver = {Manifest.permission.MANAGE_ACTIVITY_TASKS, Manifest.permission.INTERACT_ACROSS_USERS_FULL};
-        static final String[] PERMISSIONS_unregisterUserVisibleJobObserver = {Manifest.permission.MANAGE_ACTIVITY_TASKS, Manifest.permission.INTERACT_ACROSS_USERS_FULL};
-        static final String[] PERMISSIONS_notePendingUserRequestedAppStop = {Manifest.permission.MANAGE_ACTIVITY_TASKS, Manifest.permission.INTERACT_ACROSS_USERS_FULL};
+        static final String[] PERMISSIONS_registerUserVisibleJobObserver = {
+            Manifest.permission.MANAGE_ACTIVITY_TASKS,
+            Manifest.permission.INTERACT_ACROSS_USERS_FULL
+        };
+        static final String[] PERMISSIONS_unregisterUserVisibleJobObserver = {
+            Manifest.permission.MANAGE_ACTIVITY_TASKS,
+            Manifest.permission.INTERACT_ACROSS_USERS_FULL
+        };
+        static final String[] PERMISSIONS_notePendingUserRequestedAppStop = {
+            Manifest.permission.MANAGE_ACTIVITY_TASKS,
+            Manifest.permission.INTERACT_ACROSS_USERS_FULL
+        };
 
         public Stub(PermissionEnforcer enforcer) {
             attachInterface(this, DESCRIPTOR);
@@ -175,7 +187,9 @@ public interface IJobScheduler extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IJobScheduler asInterface(IBinder obj) {
@@ -241,7 +255,8 @@ public interface IJobScheduler extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, final Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, final Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -302,12 +317,17 @@ public interface IJobScheduler extends IInterface {
                         reply.writeInt(-1);
                     } else {
                         reply.writeInt(_result4.size());
-                        _result4.forEach(new BiConsumer() { // from class: android.app.job.IJobScheduler$Stub$$ExternalSyntheticLambda0
-                            @Override // java.util.function.BiConsumer
-                            public final void accept(Object obj, Object obj2) {
-                                IJobScheduler.Stub.lambda$onTransact$0(Parcel.this, (String) obj, (ParceledListSlice) obj2);
-                            }
-                        });
+                        _result4.forEach(
+                                new BiConsumer() { // from class:
+                                    // android.app.job.IJobScheduler$Stub$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.BiConsumer
+                                    public final void accept(Object obj, Object obj2) {
+                                        IJobScheduler.Stub.lambda$onTransact$0(
+                                                Parcel.this,
+                                                (String) obj,
+                                                (ParceledListSlice) obj2);
+                                    }
+                                });
                     }
                     return true;
                 case 8:
@@ -359,13 +379,15 @@ public interface IJobScheduler extends IInterface {
                     reply.writeTypedObject(_result11, 1);
                     return true;
                 case 15:
-                    IUserVisibleJobObserver _arg011 = IUserVisibleJobObserver.Stub.asInterface(data.readStrongBinder());
+                    IUserVisibleJobObserver _arg011 =
+                            IUserVisibleJobObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerUserVisibleJobObserver(_arg011);
                     reply.writeNoException();
                     return true;
                 case 16:
-                    IUserVisibleJobObserver _arg012 = IUserVisibleJobObserver.Stub.asInterface(data.readStrongBinder());
+                    IUserVisibleJobObserver _arg012 =
+                            IUserVisibleJobObserver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterUserVisibleJobObserver(_arg012);
                     reply.writeNoException();
@@ -383,7 +405,8 @@ public interface IJobScheduler extends IInterface {
             }
         }
 
-        static /* synthetic */ void lambda$onTransact$0(Parcel reply, String k, ParceledListSlice v) {
+        static /* synthetic */ void lambda$onTransact$0(
+                Parcel reply, String k, ParceledListSlice v) {
             reply.writeString(k);
             reply.writeTypedObject(v, 1);
         }
@@ -424,7 +447,8 @@ public interface IJobScheduler extends IInterface {
             }
 
             @Override // android.app.job.IJobScheduler
-            public int enqueue(String namespace, JobInfo job, JobWorkItem work) throws RemoteException {
+            public int enqueue(String namespace, JobInfo job, JobWorkItem work)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -443,7 +467,9 @@ public interface IJobScheduler extends IInterface {
             }
 
             @Override // android.app.job.IJobScheduler
-            public int scheduleAsPackage(String namespace, JobInfo job, String packageName, int userId, String tag) throws RemoteException {
+            public int scheduleAsPackage(
+                    String namespace, JobInfo job, String packageName, int userId, String tag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -509,7 +535,8 @@ public interface IJobScheduler extends IInterface {
             }
 
             @Override // android.app.job.IJobScheduler
-            public Map<String, ParceledListSlice<JobInfo>> getAllPendingJobs() throws RemoteException {
+            public Map<String, ParceledListSlice<JobInfo>> getAllPendingJobs()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 final Parcel _reply = Parcel.obtain();
                 try {
@@ -517,13 +544,18 @@ public interface IJobScheduler extends IInterface {
                     this.mRemote.transact(7, _data, _reply, 0);
                     _reply.readException();
                     int N = _reply.readInt();
-                    final Map<String, ParceledListSlice<JobInfo>> _result = N < 0 ? null : new HashMap<>();
-                    IntStream.range(0, N).forEach(new IntConsumer() { // from class: android.app.job.IJobScheduler$Stub$Proxy$$ExternalSyntheticLambda0
-                        @Override // java.util.function.IntConsumer
-                        public final void accept(int i) {
-                            IJobScheduler.Stub.Proxy.lambda$getAllPendingJobs$0(Parcel.this, _result, i);
-                        }
-                    });
+                    final Map<String, ParceledListSlice<JobInfo>> _result =
+                            N < 0 ? null : new HashMap<>();
+                    IntStream.range(0, N)
+                            .forEach(
+                                    new IntConsumer() { // from class:
+                                        // android.app.job.IJobScheduler$Stub$Proxy$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.IntConsumer
+                                        public final void accept(int i) {
+                                            IJobScheduler.Stub.Proxy.lambda$getAllPendingJobs$0(
+                                                    Parcel.this, _result, i);
+                                        }
+                                    });
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -531,14 +563,17 @@ public interface IJobScheduler extends IInterface {
                 }
             }
 
-            static /* synthetic */ void lambda$getAllPendingJobs$0(Parcel _reply, Map _result, int i) {
+            static /* synthetic */ void lambda$getAllPendingJobs$0(
+                    Parcel _reply, Map _result, int i) {
                 String k = _reply.readString();
-                ParceledListSlice<JobInfo> v = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                ParceledListSlice<JobInfo> v =
+                        (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                 _result.put(k, v);
             }
 
             @Override // android.app.job.IJobScheduler
-            public ParceledListSlice<JobInfo> getAllPendingJobsInNamespace(String namespace) throws RemoteException {
+            public ParceledListSlice<JobInfo> getAllPendingJobsInNamespace(String namespace)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -546,7 +581,8 @@ public interface IJobScheduler extends IInterface {
                     _data.writeString(namespace);
                     this.mRemote.transact(8, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice<JobInfo> _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice<JobInfo> _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -608,7 +644,8 @@ public interface IJobScheduler extends IInterface {
             }
 
             @Override // android.app.job.IJobScheduler
-            public boolean hasRunUserInitiatedJobsPermission(String packageName, int userId) throws RemoteException {
+            public boolean hasRunUserInitiatedJobsPermission(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -649,7 +686,8 @@ public interface IJobScheduler extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(14, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -658,7 +696,8 @@ public interface IJobScheduler extends IInterface {
             }
 
             @Override // android.app.job.IJobScheduler
-            public void registerUserVisibleJobObserver(IUserVisibleJobObserver observer) throws RemoteException {
+            public void registerUserVisibleJobObserver(IUserVisibleJobObserver observer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -673,7 +712,8 @@ public interface IJobScheduler extends IInterface {
             }
 
             @Override // android.app.job.IJobScheduler
-            public void unregisterUserVisibleJobObserver(IUserVisibleJobObserver observer) throws RemoteException {
+            public void unregisterUserVisibleJobObserver(IUserVisibleJobObserver observer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -688,7 +728,8 @@ public interface IJobScheduler extends IInterface {
             }
 
             @Override // android.app.job.IJobScheduler
-            public void notePendingUserRequestedAppStop(String packageName, int userId, String debugReason) throws RemoteException {
+            public void notePendingUserRequestedAppStop(
+                    String packageName, int userId, String debugReason) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -706,15 +747,20 @@ public interface IJobScheduler extends IInterface {
         }
 
         protected void registerUserVisibleJobObserver_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermissionAllOf(PERMISSIONS_registerUserVisibleJobObserver, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermissionAllOf(
+                    PERMISSIONS_registerUserVisibleJobObserver, getCallingPid(), getCallingUid());
         }
 
-        protected void unregisterUserVisibleJobObserver_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermissionAllOf(PERMISSIONS_unregisterUserVisibleJobObserver, getCallingPid(), getCallingUid());
+        protected void unregisterUserVisibleJobObserver_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermissionAllOf(
+                    PERMISSIONS_unregisterUserVisibleJobObserver, getCallingPid(), getCallingUid());
         }
 
-        protected void notePendingUserRequestedAppStop_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermissionAllOf(PERMISSIONS_notePendingUserRequestedAppStop, getCallingPid(), getCallingUid());
+        protected void notePendingUserRequestedAppStop_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermissionAllOf(
+                    PERMISSIONS_notePendingUserRequestedAppStop, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

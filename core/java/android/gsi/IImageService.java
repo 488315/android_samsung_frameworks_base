@@ -1,11 +1,11 @@
 package android.gsi;
 
-import android.gsi.IProgressCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -19,7 +19,8 @@ public interface IImageService extends IInterface {
 
     boolean backingImageExists(String str) throws RemoteException;
 
-    void createBackingImage(String str, long j, int i, IProgressCallback iProgressCallback) throws RemoteException;
+    void createBackingImage(String str, long j, int i, IProgressCallback iProgressCallback)
+            throws RemoteException;
 
     void deleteBackingImage(String str) throws RemoteException;
 
@@ -47,20 +48,19 @@ public interface IImageService extends IInterface {
 
     public static class Default implements IImageService {
         @Override // android.gsi.IImageService
-        public void createBackingImage(String name, long size, int flags, IProgressCallback on_progress) throws RemoteException {
-        }
+        public void createBackingImage(
+                String name, long size, int flags, IProgressCallback on_progress)
+                throws RemoteException {}
 
         @Override // android.gsi.IImageService
-        public void deleteBackingImage(String name) throws RemoteException {
-        }
+        public void deleteBackingImage(String name) throws RemoteException {}
 
         @Override // android.gsi.IImageService
-        public void mapImageDevice(String name, int timeout_ms, MappedImage mapping) throws RemoteException {
-        }
+        public void mapImageDevice(String name, int timeout_ms, MappedImage mapping)
+                throws RemoteException {}
 
         @Override // android.gsi.IImageService
-        public void unmapImageDevice(String name) throws RemoteException {
-        }
+        public void unmapImageDevice(String name) throws RemoteException {}
 
         @Override // android.gsi.IImageService
         public boolean backingImageExists(String name) throws RemoteException {
@@ -83,20 +83,16 @@ public interface IImageService extends IInterface {
         }
 
         @Override // android.gsi.IImageService
-        public void zeroFillNewImage(String name, long bytes) throws RemoteException {
-        }
+        public void zeroFillNewImage(String name, long bytes) throws RemoteException {}
 
         @Override // android.gsi.IImageService
-        public void removeAllImages() throws RemoteException {
-        }
+        public void removeAllImages() throws RemoteException {}
 
         @Override // android.gsi.IImageService
-        public void disableImage(String name) throws RemoteException {
-        }
+        public void disableImage(String name) throws RemoteException {}
 
         @Override // android.gsi.IImageService
-        public void removeDisabledImages() throws RemoteException {
-        }
+        public void removeDisabledImages() throws RemoteException {}
 
         @Override // android.gsi.IImageService
         public boolean isImageDisabled(String name) throws RemoteException {
@@ -114,7 +110,7 @@ public interface IImageService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImageService {
+    public abstract static class Stub extends Binder implements IImageService {
         static final int TRANSACTION_backingImageExists = 5;
         static final int TRANSACTION_createBackingImage = 1;
         static final int TRANSACTION_deleteBackingImage = 2;
@@ -191,7 +187,8 @@ public interface IImageService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IImageService.DESCRIPTOR);
             }
@@ -204,7 +201,8 @@ public interface IImageService extends IInterface {
                     String _arg0 = data.readString();
                     long _arg1 = data.readLong();
                     int _arg2 = data.readInt();
-                    IProgressCallback _arg3 = IProgressCallback.Stub.asInterface(data.readStrongBinder());
+                    IProgressCallback _arg3 =
+                            IProgressCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     createBackingImage(_arg0, _arg1, _arg2, _arg3);
                     reply.writeNoException();
@@ -315,7 +313,9 @@ public interface IImageService extends IInterface {
             }
 
             @Override // android.gsi.IImageService
-            public void createBackingImage(String name, long size, int flags, IProgressCallback on_progress) throws RemoteException {
+            public void createBackingImage(
+                    String name, long size, int flags, IProgressCallback on_progress)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -348,7 +348,8 @@ public interface IImageService extends IInterface {
             }
 
             @Override // android.gsi.IImageService
-            public void mapImageDevice(String name, int timeout_ms, MappedImage mapping) throws RemoteException {
+            public void mapImageDevice(String name, int timeout_ms, MappedImage mapping)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

@@ -3,31 +3,38 @@ package android.service.credentials;
 import android.annotation.NonNull;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Preconditions;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class BeginGetCredentialRequest implements Parcelable {
-    public static final Parcelable.Creator<BeginGetCredentialRequest> CREATOR = new Parcelable.Creator<BeginGetCredentialRequest>() { // from class: android.service.credentials.BeginGetCredentialRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BeginGetCredentialRequest createFromParcel(Parcel in) {
-            return new BeginGetCredentialRequest(in);
-        }
+    public static final Parcelable.Creator<BeginGetCredentialRequest> CREATOR =
+            new Parcelable.Creator<
+                    BeginGetCredentialRequest>() { // from class:
+                                                   // android.service.credentials.BeginGetCredentialRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BeginGetCredentialRequest createFromParcel(Parcel in) {
+                    return new BeginGetCredentialRequest(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BeginGetCredentialRequest[] newArray(int size) {
-            return new BeginGetCredentialRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BeginGetCredentialRequest[] newArray(int size) {
+                    return new BeginGetCredentialRequest[size];
+                }
+            };
     private final List<BeginGetCredentialOption> mBeginGetCredentialOptions;
     private final CallingAppInfo mCallingAppInfo;
 
-    private BeginGetCredentialRequest(CallingAppInfo callingAppInfo, List<BeginGetCredentialOption> getBeginCredentialOptions) {
+    private BeginGetCredentialRequest(
+            CallingAppInfo callingAppInfo,
+            List<BeginGetCredentialOption> getBeginCredentialOptions) {
         this.mCallingAppInfo = callingAppInfo;
         this.mBeginGetCredentialOptions = getBeginCredentialOptions;
     }
@@ -37,7 +44,10 @@ public final class BeginGetCredentialRequest implements Parcelable {
         ArrayList arrayList = new ArrayList();
         in.readTypedList(arrayList, BeginGetCredentialOption.CREATOR);
         this.mBeginGetCredentialOptions = arrayList;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBeginGetCredentialOptions);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mBeginGetCredentialOptions);
     }
 
     @Override // android.os.Parcelable
@@ -68,22 +78,29 @@ public final class BeginGetCredentialRequest implements Parcelable {
             return this;
         }
 
-        public Builder setBeginGetCredentialOptions(List<BeginGetCredentialOption> getBeginCredentialOptions) {
-            Preconditions.checkCollectionNotEmpty(getBeginCredentialOptions, "getBeginCredentialOptions");
-            Preconditions.checkCollectionElementsNotNull(getBeginCredentialOptions, "getBeginCredentialOptions");
+        public Builder setBeginGetCredentialOptions(
+                List<BeginGetCredentialOption> getBeginCredentialOptions) {
+            Preconditions.checkCollectionNotEmpty(
+                    getBeginCredentialOptions, "getBeginCredentialOptions");
+            Preconditions.checkCollectionElementsNotNull(
+                    getBeginCredentialOptions, "getBeginCredentialOptions");
             this.mBeginGetCredentialOptions = getBeginCredentialOptions;
             return this;
         }
 
-        public Builder addBeginGetCredentialOption(BeginGetCredentialOption beginGetCredentialOption) {
-            Objects.requireNonNull(beginGetCredentialOption, "beginGetCredentialOption must not be null");
+        public Builder addBeginGetCredentialOption(
+                BeginGetCredentialOption beginGetCredentialOption) {
+            Objects.requireNonNull(
+                    beginGetCredentialOption, "beginGetCredentialOption must not be null");
             this.mBeginGetCredentialOptions.add(beginGetCredentialOption);
             return this;
         }
 
         public BeginGetCredentialRequest build() {
-            Preconditions.checkCollectionNotEmpty(this.mBeginGetCredentialOptions, "beginGetCredentialOptions");
-            return new BeginGetCredentialRequest(this.mCallingAppInfo, this.mBeginGetCredentialOptions);
+            Preconditions.checkCollectionNotEmpty(
+                    this.mBeginGetCredentialOptions, "beginGetCredentialOptions");
+            return new BeginGetCredentialRequest(
+                    this.mCallingAppInfo, this.mBeginGetCredentialOptions);
         }
     }
 }

@@ -23,7 +23,7 @@ public interface IActivityPendingResult extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IActivityPendingResult {
+    public abstract static class Stub extends Binder implements IActivityPendingResult {
         public static final String DESCRIPTOR = "android.app.IActivityPendingResult";
         static final int TRANSACTION_sendResult = 1;
 
@@ -62,7 +62,8 @@ public interface IActivityPendingResult extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

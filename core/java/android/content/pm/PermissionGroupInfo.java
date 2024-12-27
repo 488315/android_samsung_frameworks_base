@@ -4,47 +4,48 @@ import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes.dex */
 public class PermissionGroupInfo extends PackageItemInfo implements Parcelable {
-    public static final Parcelable.Creator<PermissionGroupInfo> CREATOR = new Parcelable.Creator<PermissionGroupInfo>() { // from class: android.content.pm.PermissionGroupInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PermissionGroupInfo createFromParcel(Parcel source) {
-            return new PermissionGroupInfo(source);
-        }
+    public static final Parcelable.Creator<PermissionGroupInfo> CREATOR =
+            new Parcelable.Creator<
+                    PermissionGroupInfo>() { // from class: android.content.pm.PermissionGroupInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PermissionGroupInfo createFromParcel(Parcel source) {
+                    return new PermissionGroupInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PermissionGroupInfo[] newArray(int size) {
-            return new PermissionGroupInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PermissionGroupInfo[] newArray(int size) {
+                    return new PermissionGroupInfo[size];
+                }
+            };
     public static final int FLAG_PERSONAL_INFO = 1;
 
-    @SystemApi
-    public final int backgroundRequestDetailResourceId;
+    @SystemApi public final int backgroundRequestDetailResourceId;
 
-    @SystemApi
-    public final int backgroundRequestResourceId;
+    @SystemApi public final int backgroundRequestResourceId;
     public int descriptionRes;
     public int flags;
     public CharSequence nonLocalizedDescription;
     public int priority;
 
-    @SystemApi
-    public final int requestDetailResourceId;
+    @SystemApi public final int requestDetailResourceId;
 
-    @SystemApi
-    public int requestRes;
+    @SystemApi public int requestRes;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Flags {
-    }
+    public @interface Flags {}
 
-    public PermissionGroupInfo(int requestDetailResourceId, int backgroundRequestResourceId, int backgroundRequestDetailResourceId) {
+    public PermissionGroupInfo(
+            int requestDetailResourceId,
+            int backgroundRequestResourceId,
+            int backgroundRequestDetailResourceId) {
         this.requestDetailResourceId = requestDetailResourceId;
         this.backgroundRequestResourceId = backgroundRequestResourceId;
         this.backgroundRequestDetailResourceId = backgroundRequestDetailResourceId;
@@ -73,14 +74,21 @@ public class PermissionGroupInfo extends PackageItemInfo implements Parcelable {
         if (this.nonLocalizedDescription != null) {
             return this.nonLocalizedDescription;
         }
-        if (this.descriptionRes == 0 || (label = pm.getText(this.packageName, this.descriptionRes, null)) == null) {
+        if (this.descriptionRes == 0
+                || (label = pm.getText(this.packageName, this.descriptionRes, null)) == null) {
             return null;
         }
         return label;
     }
 
     public String toString() {
-        return "PermissionGroupInfo{" + Integer.toHexString(System.identityHashCode(this)) + " " + this.name + " flgs=0x" + Integer.toHexString(this.flags) + "}";
+        return "PermissionGroupInfo{"
+                + Integer.toHexString(System.identityHashCode(this))
+                + " "
+                + this.name
+                + " flgs=0x"
+                + Integer.toHexString(this.flags)
+                + "}";
     }
 
     @Override // android.os.Parcelable

@@ -7,7 +7,8 @@ import java.util.Arrays;
 public abstract class MessageNano {
     protected volatile int cachedSize = -1;
 
-    public abstract MessageNano mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano) throws IOException;
+    public abstract MessageNano mergeFrom(CodedInputByteBufferNano codedInputByteBufferNano)
+            throws IOException;
 
     public int getCachedSize() {
         if (this.cachedSize < 0) {
@@ -26,8 +27,7 @@ public abstract class MessageNano {
         return 0;
     }
 
-    public void writeTo(CodedOutputByteBufferNano output) throws IOException {
-    }
+    public void writeTo(CodedOutputByteBufferNano output) throws IOException {}
 
     public static final byte[] toByteArray(MessageNano msg) {
         byte[] result = new byte[msg.getSerializedSize()];
@@ -37,19 +37,23 @@ public abstract class MessageNano {
 
     public static final void toByteArray(MessageNano msg, byte[] data, int offset, int length) {
         try {
-            CodedOutputByteBufferNano output = CodedOutputByteBufferNano.newInstance(data, offset, length);
+            CodedOutputByteBufferNano output =
+                    CodedOutputByteBufferNano.newInstance(data, offset, length);
             msg.writeTo(output);
             output.checkNoSpaceLeft();
         } catch (IOException e) {
-            throw new RuntimeException("Serializing to a byte array threw an IOException (should never happen).", e);
+            throw new RuntimeException(
+                    "Serializing to a byte array threw an IOException (should never happen).", e);
         }
     }
 
-    public static final <T extends MessageNano> T mergeFrom(T t, byte[] bArr) throws InvalidProtocolBufferNanoException {
+    public static final <T extends MessageNano> T mergeFrom(T t, byte[] bArr)
+            throws InvalidProtocolBufferNanoException {
         return (T) mergeFrom(t, bArr, 0, bArr.length);
     }
 
-    public static final <T extends MessageNano> T mergeFrom(T msg, byte[] data, int off, int len) throws InvalidProtocolBufferNanoException {
+    public static final <T extends MessageNano> T mergeFrom(T msg, byte[] data, int off, int len)
+            throws InvalidProtocolBufferNanoException {
         try {
             CodedInputByteBufferNano input = CodedInputByteBufferNano.newInstance(data, off, len);
             msg.mergeFrom(input);
@@ -58,7 +62,8 @@ public abstract class MessageNano {
         } catch (InvalidProtocolBufferNanoException e) {
             throw e;
         } catch (IOException e2) {
-            throw new RuntimeException("Reading from a byte array threw an IOException (should never happen).");
+            throw new RuntimeException(
+                    "Reading from a byte array threw an IOException (should never happen).");
         }
     }
 
@@ -67,7 +72,10 @@ public abstract class MessageNano {
         if (a == b) {
             return true;
         }
-        if (a == null || b == null || a.getClass() != b.getClass() || b.getSerializedSize() != (serializedSize = a.getSerializedSize())) {
+        if (a == null
+                || b == null
+                || a.getClass() != b.getClass()
+                || b.getSerializedSize() != (serializedSize = a.getSerializedSize())) {
             return false;
         }
         byte[] aByteArray = new byte[serializedSize];
@@ -81,7 +89,7 @@ public abstract class MessageNano {
         return MessageNanoPrinter.print(this);
     }
 
-    @Override // 
+    @Override //
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
     public MessageNano mo7418clone() throws CloneNotSupportedException {
         return (MessageNano) super.clone();

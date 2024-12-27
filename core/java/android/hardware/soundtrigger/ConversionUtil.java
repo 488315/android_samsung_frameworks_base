@@ -1,6 +1,5 @@
 package android.hardware.soundtrigger;
 
-import android.hardware.soundtrigger.SoundTrigger;
 import android.media.AudioFormat;
 import android.media.audio.common.AidlConversion;
 import android.media.audio.common.AudioConfig;
@@ -20,6 +19,7 @@ import android.media.soundtrigger_middleware.SoundTriggerModuleDescriptor;
 import android.os.ParcelFileDescriptor;
 import android.os.SharedMemory;
 import android.system.ErrnoException;
+
 import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.Locale;
@@ -27,9 +27,26 @@ import java.util.UUID;
 
 /* loaded from: classes2.dex */
 public class ConversionUtil {
-    public static SoundTrigger.ModuleProperties aidl2apiModuleDescriptor(SoundTriggerModuleDescriptor aidlDesc) {
+    public static SoundTrigger.ModuleProperties aidl2apiModuleDescriptor(
+            SoundTriggerModuleDescriptor aidlDesc) {
         Properties properties = aidlDesc.properties;
-        return new SoundTrigger.ModuleProperties(aidlDesc.handle, properties.implementor, properties.description, properties.uuid, properties.version, properties.supportedModelArch, properties.maxSoundModels, properties.maxKeyPhrases, properties.maxUsers, aidl2apiRecognitionModes(properties.recognitionModes), properties.captureTransition, properties.maxBufferMs, properties.concurrentCapture, properties.powerConsumptionMw, properties.triggerInEvent, aidl2apiAudioCapabilities(properties.audioCapabilities));
+        return new SoundTrigger.ModuleProperties(
+                aidlDesc.handle,
+                properties.implementor,
+                properties.description,
+                properties.uuid,
+                properties.version,
+                properties.supportedModelArch,
+                properties.maxSoundModels,
+                properties.maxKeyPhrases,
+                properties.maxUsers,
+                aidl2apiRecognitionModes(properties.recognitionModes),
+                properties.captureTransition,
+                properties.maxBufferMs,
+                properties.concurrentCapture,
+                properties.powerConsumptionMw,
+                properties.triggerInEvent,
+                aidl2apiAudioCapabilities(properties.audioCapabilities));
     }
 
     public static int aidl2apiRecognitionModes(int aidlModes) {
@@ -85,7 +102,8 @@ public class ConversionUtil {
         return apiUuid.toString();
     }
 
-    public static PhraseSoundModel api2aidlPhraseSoundModel(SoundTrigger.KeyphraseSoundModel apiModel) {
+    public static PhraseSoundModel api2aidlPhraseSoundModel(
+            SoundTrigger.KeyphraseSoundModel apiModel) {
         PhraseSoundModel aidlModel = new PhraseSoundModel();
         aidlModel.common = api2aidlSoundModel(apiModel);
         aidlModel.phrases = new Phrase[apiModel.getKeyphrases().length];
@@ -106,23 +124,34 @@ public class ConversionUtil {
     }
 
     public static SoundTrigger.Keyphrase aidl2apiPhrase(Phrase aidlPhrase) {
-        return new SoundTrigger.Keyphrase(aidlPhrase.id, aidl2apiRecognitionModes(aidlPhrase.recognitionModes), new Locale.Builder().setLanguageTag(aidlPhrase.locale).build(), aidlPhrase.text, Arrays.copyOf(aidlPhrase.users, aidlPhrase.users.length));
+        return new SoundTrigger.Keyphrase(
+                aidlPhrase.id,
+                aidl2apiRecognitionModes(aidlPhrase.recognitionModes),
+                new Locale.Builder().setLanguageTag(aidlPhrase.locale).build(),
+                aidlPhrase.text,
+                Arrays.copyOf(aidlPhrase.users, aidlPhrase.users.length));
     }
 
-    public static RecognitionConfig api2aidlRecognitionConfig(SoundTrigger.RecognitionConfig apiConfig) {
+    public static RecognitionConfig api2aidlRecognitionConfig(
+            SoundTrigger.RecognitionConfig apiConfig) {
         RecognitionConfig aidlConfig = new RecognitionConfig();
         aidlConfig.captureRequested = apiConfig.captureRequested;
-        aidlConfig.phraseRecognitionExtras = new PhraseRecognitionExtra[apiConfig.keyphrases.length];
+        aidlConfig.phraseRecognitionExtras =
+                new PhraseRecognitionExtra[apiConfig.keyphrases.length];
         for (int i = 0; i < apiConfig.keyphrases.length; i++) {
-            aidlConfig.phraseRecognitionExtras[i] = api2aidlPhraseRecognitionExtra(apiConfig.keyphrases[i]);
+            aidlConfig.phraseRecognitionExtras[i] =
+                    api2aidlPhraseRecognitionExtra(apiConfig.keyphrases[i]);
         }
         aidlConfig.data = Arrays.copyOf(apiConfig.data, apiConfig.data.length);
         aidlConfig.audioCapabilities = api2aidlAudioCapabilities(apiConfig.audioCapabilities);
         return aidlConfig;
     }
 
-    public static SoundTrigger.RecognitionConfig aidl2apiRecognitionConfig(RecognitionConfig aidlConfig) {
-        SoundTrigger.KeyphraseRecognitionExtra[] keyphrases = new SoundTrigger.KeyphraseRecognitionExtra[aidlConfig.phraseRecognitionExtras.length];
+    public static SoundTrigger.RecognitionConfig aidl2apiRecognitionConfig(
+            RecognitionConfig aidlConfig) {
+        SoundTrigger.KeyphraseRecognitionExtra[] keyphrases =
+                new SoundTrigger.KeyphraseRecognitionExtra
+                        [aidlConfig.phraseRecognitionExtras.length];
         PhraseRecognitionExtra[] phraseRecognitionExtraArr = aidlConfig.phraseRecognitionExtras;
         int length = phraseRecognitionExtraArr.length;
         int i = 0;
@@ -133,10 +162,16 @@ public class ConversionUtil {
             i++;
             i2++;
         }
-        return new SoundTrigger.RecognitionConfig(aidlConfig.captureRequested, false, keyphrases, Arrays.copyOf(aidlConfig.data, aidlConfig.data.length), aidl2apiAudioCapabilities(aidlConfig.audioCapabilities));
+        return new SoundTrigger.RecognitionConfig(
+                aidlConfig.captureRequested,
+                false,
+                keyphrases,
+                Arrays.copyOf(aidlConfig.data, aidlConfig.data.length),
+                aidl2apiAudioCapabilities(aidlConfig.audioCapabilities));
     }
 
-    public static PhraseRecognitionExtra api2aidlPhraseRecognitionExtra(SoundTrigger.KeyphraseRecognitionExtra apiExtra) {
+    public static PhraseRecognitionExtra api2aidlPhraseRecognitionExtra(
+            SoundTrigger.KeyphraseRecognitionExtra apiExtra) {
         PhraseRecognitionExtra aidlExtra = new PhraseRecognitionExtra();
         aidlExtra.id = apiExtra.id;
         aidlExtra.recognitionModes = api2aidlRecognitionModes(apiExtra.recognitionModes);
@@ -148,12 +183,18 @@ public class ConversionUtil {
         return aidlExtra;
     }
 
-    public static SoundTrigger.KeyphraseRecognitionExtra aidl2apiPhraseRecognitionExtra(PhraseRecognitionExtra aidlExtra) {
-        SoundTrigger.ConfidenceLevel[] apiLevels = new SoundTrigger.ConfidenceLevel[aidlExtra.levels.length];
+    public static SoundTrigger.KeyphraseRecognitionExtra aidl2apiPhraseRecognitionExtra(
+            PhraseRecognitionExtra aidlExtra) {
+        SoundTrigger.ConfidenceLevel[] apiLevels =
+                new SoundTrigger.ConfidenceLevel[aidlExtra.levels.length];
         for (int i = 0; i < aidlExtra.levels.length; i++) {
             apiLevels[i] = aidl2apiConfidenceLevel(aidlExtra.levels[i]);
         }
-        return new SoundTrigger.KeyphraseRecognitionExtra(aidlExtra.id, aidl2apiRecognitionModes(aidlExtra.recognitionModes), aidlExtra.confidenceLevel, apiLevels);
+        return new SoundTrigger.KeyphraseRecognitionExtra(
+                aidlExtra.id,
+                aidl2apiRecognitionModes(aidlExtra.recognitionModes),
+                aidlExtra.confidenceLevel,
+                apiLevels);
     }
 
     public static ConfidenceLevel api2aidlConfidenceLevel(SoundTrigger.ConfidenceLevel apiLevel) {
@@ -167,27 +208,61 @@ public class ConversionUtil {
         return new SoundTrigger.ConfidenceLevel(apiLevel.userId, apiLevel.levelPercent);
     }
 
-    public static SoundTrigger.RecognitionEvent aidl2apiRecognitionEvent(int modelHandle, int captureSession, RecognitionEventSys aidlEvent) {
+    public static SoundTrigger.RecognitionEvent aidl2apiRecognitionEvent(
+            int modelHandle, int captureSession, RecognitionEventSys aidlEvent) {
         RecognitionEvent recognitionEvent = aidlEvent.recognitionEvent;
-        AudioFormat audioFormat = aidl2apiAudioFormatWithDefault(recognitionEvent.audioConfig, true);
-        return new SoundTrigger.GenericRecognitionEvent(recognitionEvent.status, modelHandle, recognitionEvent.captureAvailable, captureSession, recognitionEvent.captureDelayMs, recognitionEvent.capturePreambleMs, recognitionEvent.triggerInData, audioFormat, recognitionEvent.data, recognitionEvent.recognitionStillActive, aidlEvent.halEventReceivedMillis, aidlEvent.token);
+        AudioFormat audioFormat =
+                aidl2apiAudioFormatWithDefault(recognitionEvent.audioConfig, true);
+        return new SoundTrigger.GenericRecognitionEvent(
+                recognitionEvent.status,
+                modelHandle,
+                recognitionEvent.captureAvailable,
+                captureSession,
+                recognitionEvent.captureDelayMs,
+                recognitionEvent.capturePreambleMs,
+                recognitionEvent.triggerInData,
+                audioFormat,
+                recognitionEvent.data,
+                recognitionEvent.recognitionStillActive,
+                aidlEvent.halEventReceivedMillis,
+                aidlEvent.token);
     }
 
-    public static SoundTrigger.RecognitionEvent aidl2apiPhraseRecognitionEvent(int modelHandle, int captureSession, PhraseRecognitionEventSys aidlEvent) {
+    public static SoundTrigger.RecognitionEvent aidl2apiPhraseRecognitionEvent(
+            int modelHandle, int captureSession, PhraseRecognitionEventSys aidlEvent) {
         PhraseRecognitionEvent recognitionEvent = aidlEvent.phraseRecognitionEvent;
-        SoundTrigger.KeyphraseRecognitionExtra[] apiExtras = new SoundTrigger.KeyphraseRecognitionExtra[recognitionEvent.phraseExtras.length];
+        SoundTrigger.KeyphraseRecognitionExtra[] apiExtras =
+                new SoundTrigger.KeyphraseRecognitionExtra[recognitionEvent.phraseExtras.length];
         for (int i = 0; i < recognitionEvent.phraseExtras.length; i++) {
             apiExtras[i] = aidl2apiPhraseRecognitionExtra(recognitionEvent.phraseExtras[i]);
         }
-        AudioFormat audioFormat = aidl2apiAudioFormatWithDefault(recognitionEvent.common.audioConfig, true);
-        return new SoundTrigger.KeyphraseRecognitionEvent(recognitionEvent.common.status, modelHandle, recognitionEvent.common.captureAvailable, captureSession, recognitionEvent.common.captureDelayMs, recognitionEvent.common.capturePreambleMs, recognitionEvent.common.triggerInData, audioFormat, recognitionEvent.common.data, apiExtras, aidlEvent.halEventReceivedMillis, aidlEvent.token);
+        AudioFormat audioFormat =
+                aidl2apiAudioFormatWithDefault(recognitionEvent.common.audioConfig, true);
+        return new SoundTrigger.KeyphraseRecognitionEvent(
+                recognitionEvent.common.status,
+                modelHandle,
+                recognitionEvent.common.captureAvailable,
+                captureSession,
+                recognitionEvent.common.captureDelayMs,
+                recognitionEvent.common.capturePreambleMs,
+                recognitionEvent.common.triggerInData,
+                audioFormat,
+                recognitionEvent.common.data,
+                apiExtras,
+                aidlEvent.halEventReceivedMillis,
+                aidlEvent.token);
     }
 
-    public static AudioFormat aidl2apiAudioFormatWithDefault(AudioConfig audioConfig, boolean isInput) {
+    public static AudioFormat aidl2apiAudioFormatWithDefault(
+            AudioConfig audioConfig, boolean isInput) {
         if (audioConfig != null) {
             return AidlConversion.aidl2api_AudioConfig_AudioFormat(audioConfig, isInput);
         }
-        return new AudioFormat.Builder().setSampleRate(48000).setEncoding(2).setChannelMask(16).build();
+        return new AudioFormat.Builder()
+                .setSampleRate(48000)
+                .setEncoding(2)
+                .setChannelMask(16)
+                .build();
     }
 
     public static int api2aidlModelParameter(int apiParam) {
@@ -199,7 +274,8 @@ public class ConversionUtil {
         }
     }
 
-    public static SoundTrigger.ModelParamRange aidl2apiModelParameterRange(ModelParameterRange aidlRange) {
+    public static SoundTrigger.ModelParamRange aidl2apiModelParameterRange(
+            ModelParameterRange aidlRange) {
         if (aidlRange == null) {
             return null;
         }

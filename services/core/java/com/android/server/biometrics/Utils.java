@@ -27,14 +27,17 @@ import android.provider.Settings;
 import android.util.Slog;
 import android.view.HapticFeedbackConstants;
 import android.view.accessibility.AccessibilityManager;
+
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.MagnificationConnectionManager$$ExternalSyntheticOutline0;
 import com.android.server.biometrics.sensors.BaseClientMonitor;
+
 import com.samsung.android.app.SemDualAppManager;
 import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.vibrator.VibRune;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -67,7 +70,10 @@ public abstract class Utils {
             case 7:
                 return 11;
             case 8:
-                return com.android.internal.hidden_from_bootclasspath.android.hardware.biometrics.Flags.mandatoryBiometrics() ? 21 : 1;
+                return com.android.internal.hidden_from_bootclasspath.android.hardware.biometrics
+                                .Flags.mandatoryBiometrics()
+                        ? 21
+                        : 1;
             case 9:
                 return 14;
             case 10:
@@ -92,7 +98,8 @@ public abstract class Utils {
         if (i == 7) {
             return 1;
         }
-        throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Unsupported dismissal reason: "));
+        throw new IllegalArgumentException(
+                VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Unsupported dismissal reason: "));
     }
 
     public static String getClientName(BaseClientMonitor baseClientMonitor) {
@@ -101,7 +108,8 @@ public abstract class Utils {
 
     public static int getCurrentStrength(int i) {
         try {
-            return IBiometricService.Stub.asInterface(ServiceManager.getService("biometric")).getCurrentStrength(i);
+            return IBiometricService.Stub.asInterface(ServiceManager.getService("biometric"))
+                    .getCurrentStrength(i);
         } catch (RemoteException e) {
             Slog.e("BiometricUtils", "RemoteException", e);
             return 0;
@@ -111,10 +119,14 @@ public abstract class Utils {
     public static int getIntDb(Context context, int i, int i2, String str, boolean z) {
         ContentResolver contentResolver = context.getContentResolver();
         try {
-            i = z ? Settings.Secure.getIntForUser(contentResolver, str, i, i2) : Settings.System.getIntForUser(contentResolver, str, i, i2);
+            i =
+                    z
+                            ? Settings.Secure.getIntForUser(contentResolver, str, i, i2)
+                            : Settings.System.getIntForUser(contentResolver, str, i, i2);
             return i;
         } catch (Exception e) {
-            MagnificationConnectionManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("getIntDb: "), "BiometricUtils");
+            MagnificationConnectionManager$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("getIntDb: "), "BiometricUtils");
             return i;
         }
     }
@@ -155,7 +167,12 @@ public abstract class Utils {
             }
             int credentialOwnerProfile = userManager.getCredentialOwnerProfile(i2);
             if (i != credentialOwnerProfile) {
-                Slog.v("BiometricUtils", "getUserOrWorkProfileId: change userId,  " + i + " > " + credentialOwnerProfile);
+                Slog.v(
+                        "BiometricUtils",
+                        "getUserOrWorkProfileId: change userId,  "
+                                + i
+                                + " > "
+                                + credentialOwnerProfile);
             }
             return credentialOwnerProfile;
         } finally {
@@ -182,8 +199,11 @@ public abstract class Utils {
     }
 
     public static boolean isBackground(String str) {
-        Slog.v("BiometricUtils", "Checking if the authenticating is in background, clientPackage:" + str);
-        List<ActivityManager.RunningTaskInfo> tasks = ActivityTaskManager.getInstance().getTasks(Integer.MAX_VALUE);
+        Slog.v(
+                "BiometricUtils",
+                "Checking if the authenticating is in background, clientPackage:" + str);
+        List<ActivityManager.RunningTaskInfo> tasks =
+                ActivityTaskManager.getInstance().getTasks(Integer.MAX_VALUE);
         if (tasks == null || tasks.isEmpty()) {
             Slog.d("BiometricUtils", "No running tasks reported");
             return true;
@@ -195,7 +215,9 @@ public abstract class Utils {
                 if (packageName.contentEquals(str) && runningTaskInfo.isVisible()) {
                     return false;
                 }
-                StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("Running task, top: ", packageName, ", isVisible: ");
+                StringBuilder m =
+                        DumpUtils$$ExternalSyntheticOutline0.m(
+                                "Running task, top: ", packageName, ", isVisible: ");
                 m.append(runningTaskInfo.isVisible());
                 Slog.i("BiometricUtils", m.toString());
             }
@@ -215,7 +237,8 @@ public abstract class Utils {
         }
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            int[] enabledProfileIds = userManager.getEnabledProfileIds(ActivityManager.getCurrentUser());
+            int[] enabledProfileIds =
+                    userManager.getEnabledProfileIds(ActivityManager.getCurrentUser());
             if (enabledProfileIds != null && enabledProfileIds.length != 0) {
                 for (int i2 : enabledProfileIds) {
                     if (i2 == i) {
@@ -235,34 +258,60 @@ public abstract class Utils {
         if (i == -10000) {
             return false;
         }
-        return (Build.IS_ENG || Build.IS_USERDEBUG) && Settings.Secure.getIntForUser(context.getContentResolver(), "biometric_debug_enabled", 0, i) != 0;
+        return (Build.IS_ENG || Build.IS_USERDEBUG)
+                && Settings.Secure.getIntForUser(
+                                context.getContentResolver(), "biometric_debug_enabled", 0, i)
+                        != 0;
     }
 
     public static boolean isFingerprintVirtualEnabled(Context context) {
         if (Build.isDebuggable()) {
-            return Settings.Secure.getIntForUser(context.getContentResolver(), "biometric_fingerprint_virtual_enabled", 0, -2) == 1 || Settings.Secure.getIntForUser(context.getContentResolver(), "biometric_virtual_enabled", 0, -2) == 1;
+            return Settings.Secure.getIntForUser(
+                                    context.getContentResolver(),
+                                    "biometric_fingerprint_virtual_enabled",
+                                    0,
+                                    -2)
+                            == 1
+                    || Settings.Secure.getIntForUser(
+                                    context.getContentResolver(),
+                                    "biometric_virtual_enabled",
+                                    0,
+                                    -2)
+                            == 1;
         }
         return false;
     }
 
     public static boolean isFlipFolded(Context context) {
         InputManager inputManager;
-        return SemBiometricFeature.FEATURE_SUPPORT_FOLDABLE_TYPE_FLIP && (inputManager = (InputManager) context.getSystemService("input")) != null && inputManager.semGetLidState() == 1;
+        return SemBiometricFeature.FEATURE_SUPPORT_FOLDABLE_TYPE_FLIP
+                && (inputManager = (InputManager) context.getSystemService("input")) != null
+                && inputManager.semGetLidState() == 1;
     }
 
     public static boolean isFlipOpened(Context context) {
         InputManager inputManager;
-        return (!SemBiometricFeature.FEATURE_SUPPORT_FOLDABLE_TYPE_FLIP || (inputManager = (InputManager) context.getSystemService("input")) == null || inputManager.semGetLidState() == 1) ? false : true;
+        return (!SemBiometricFeature.FEATURE_SUPPORT_FOLDABLE_TYPE_FLIP
+                        || (inputManager = (InputManager) context.getSystemService("input")) == null
+                        || inputManager.semGetLidState() == 1)
+                ? false
+                : true;
     }
 
     public static boolean isFolderFolded(Context context) {
         InputManager inputManager;
-        return SemBiometricFeature.FEATURE_SUPPORT_FOLDABLE_TYPE_FOLD && (inputManager = (InputManager) context.getSystemService("input")) != null && inputManager.semGetLidState() == 1;
+        return SemBiometricFeature.FEATURE_SUPPORT_FOLDABLE_TYPE_FOLD
+                && (inputManager = (InputManager) context.getSystemService("input")) != null
+                && inputManager.semGetLidState() == 1;
     }
 
     public static boolean isFolderOpened(Context context) {
         InputManager inputManager;
-        return (!SemBiometricFeature.FEATURE_SUPPORT_FOLDABLE_TYPE_FOLD || (inputManager = (InputManager) context.getSystemService("input")) == null || inputManager.semGetLidState() == 1) ? false : true;
+        return (!SemBiometricFeature.FEATURE_SUPPORT_FOLDABLE_TYPE_FOLD
+                        || (inputManager = (InputManager) context.getSystemService("input")) == null
+                        || inputManager.semGetLidState() == 1)
+                ? false
+                : true;
     }
 
     public static boolean isForeground(int i, int i2) {
@@ -277,8 +326,11 @@ public abstract class Utils {
             return true;
         }
         for (int i3 = 0; i3 < runningAppProcesses.size(); i3++) {
-            ActivityManager.RunningAppProcessInfo runningAppProcessInfo = (ActivityManager.RunningAppProcessInfo) runningAppProcesses.get(i3);
-            if (runningAppProcessInfo.pid == i2 && runningAppProcessInfo.uid == i && runningAppProcessInfo.importance <= 125) {
+            ActivityManager.RunningAppProcessInfo runningAppProcessInfo =
+                    (ActivityManager.RunningAppProcessInfo) runningAppProcesses.get(i3);
+            if (runningAppProcessInfo.pid == i2
+                    && runningAppProcessInfo.uid == i
+                    && runningAppProcessInfo.importance <= 125) {
                 return true;
             }
         }
@@ -286,15 +338,23 @@ public abstract class Utils {
     }
 
     public static boolean isKeyguard(Context context, String str) {
-        boolean z = context.checkCallingOrSelfPermission("android.permission.USE_BIOMETRIC_INTERNAL") == 0;
-        ComponentName unflattenFromString = ComponentName.unflattenFromString(context.getResources().getString(R.string.emailTypeOther));
-        String packageName = unflattenFromString != null ? unflattenFromString.getPackageName() : null;
+        boolean z =
+                context.checkCallingOrSelfPermission("android.permission.USE_BIOMETRIC_INTERNAL")
+                        == 0;
+        ComponentName unflattenFromString =
+                ComponentName.unflattenFromString(
+                        context.getResources().getString(R.string.emailTypeOther));
+        String packageName =
+                unflattenFromString != null ? unflattenFromString.getPackageName() : null;
         return z && packageName != null && packageName.equals(str);
     }
 
     public static boolean isStrongBiometric(int i) {
         try {
-            return isAtLeastStrength(IBiometricService.Stub.asInterface(ServiceManager.getService("biometric")).getCurrentStrength(i), 15);
+            return isAtLeastStrength(
+                    IBiometricService.Stub.asInterface(ServiceManager.getService("biometric"))
+                            .getCurrentStrength(i),
+                    15);
         } catch (RemoteException e) {
             Slog.e("BiometricUtils", "RemoteException", e);
             return false;
@@ -302,11 +362,14 @@ public abstract class Utils {
     }
 
     public static boolean isSystem(Context context, String str) {
-        return context.checkCallingOrSelfPermission("android.permission.USE_BIOMETRIC_INTERNAL") == 0 && "android".equals(str);
+        return context.checkCallingOrSelfPermission("android.permission.USE_BIOMETRIC_INTERNAL")
+                        == 0
+                && "android".equals(str);
     }
 
     public static boolean isTalkBackEnabled(Context context) {
-        AccessibilityManager accessibilityManager = (AccessibilityManager) context.getSystemService("accessibility");
+        AccessibilityManager accessibilityManager =
+                (AccessibilityManager) context.getSystemService("accessibility");
         return accessibilityManager != null && accessibilityManager.semIsScreenReaderEnabled();
     }
 
@@ -314,8 +377,16 @@ public abstract class Utils {
         if (i == 0) {
             return true;
         }
-        if (((com.android.internal.hidden_from_bootclasspath.android.hardware.biometrics.Flags.mandatoryBiometrics() ? -131072 : -65536) & i) != 0) {
-            NandswapManager$$ExternalSyntheticOutline0.m(i, "Non-biometric, non-credential bits found. Authenticators: ", "BiometricService");
+        if (((com.android.internal.hidden_from_bootclasspath.android.hardware.biometrics.Flags
+                                        .mandatoryBiometrics()
+                                ? -131072
+                                : -65536)
+                        & i)
+                != 0) {
+            NandswapManager$$ExternalSyntheticOutline0.m(
+                    i,
+                    "Non-biometric, non-credential bits found. Authenticators: ",
+                    "BiometricService");
             return false;
         }
         int i2 = i & 32767;
@@ -323,10 +394,13 @@ public abstract class Utils {
             return true;
         }
         if ((65536 & i) != 0) {
-            context.enforceCallingOrSelfPermission("android.permission.SET_BIOMETRIC_DIALOG_ADVANCED", "Must have SET_BIOMETRIC_DIALOG_ADVANCED permission");
+            context.enforceCallingOrSelfPermission(
+                    "android.permission.SET_BIOMETRIC_DIALOG_ADVANCED",
+                    "Must have SET_BIOMETRIC_DIALOG_ADVANCED permission");
             return true;
         }
-        NandswapManager$$ExternalSyntheticOutline0.m(i, "Unsupported biometric flags. Authenticators: ", "BiometricService");
+        NandswapManager$$ExternalSyntheticOutline0.m(
+                i, "Unsupported biometric flags. Authenticators: ", "BiometricService");
         return false;
     }
 
@@ -369,7 +443,8 @@ public abstract class Utils {
         if (i == 2) {
             return 15;
         }
-        DeviceIdleController$$ExternalSyntheticOutline0.m(i, "propertyStrengthToAuthenticatorStrength: Unknown strength ", "BiometricUtils");
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                i, "propertyStrengthToAuthenticatorStrength: Unknown strength ", "BiometricUtils");
         return 4095;
     }
 
@@ -382,15 +457,18 @@ public abstract class Utils {
                 Settings.System.putIntForUser(contentResolver, str, i, -2);
             }
         } catch (Exception e) {
-            MagnificationConnectionManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("putIntDb: "), "BiometricUtils");
+            MagnificationConnectionManager$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("putIntDb: "), "BiometricUtils");
         }
     }
 
     public static void putLongDb(Context context, long j, int i) {
         try {
-            Settings.Secure.putLongForUser(context.getContentResolver(), "biometrics_strong_enroll_timestamp", j, i);
+            Settings.Secure.putLongForUser(
+                    context.getContentResolver(), "biometrics_strong_enroll_timestamp", j, i);
         } catch (Exception e) {
-            MagnificationConnectionManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("putIntDb: "), "BiometricUtils");
+            MagnificationConnectionManager$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("putIntDb: "), "BiometricUtils");
         }
     }
 
@@ -418,9 +496,15 @@ public abstract class Utils {
         return bArr;
     }
 
-    public static void registerBroadcastAsUser(Context context, BroadcastReceiver broadcastReceiver, IntentFilter intentFilter, UserHandle userHandle, Handler handler) {
+    public static void registerBroadcastAsUser(
+            Context context,
+            BroadcastReceiver broadcastReceiver,
+            IntentFilter intentFilter,
+            UserHandle userHandle,
+            Handler handler) {
         try {
-            context.registerReceiverAsUser(broadcastReceiver, userHandle, intentFilter, null, handler);
+            context.registerReceiverAsUser(
+                    broadcastReceiver, userHandle, intentFilter, null, handler);
         } catch (Exception e) {
             Slog.i("BiometricUtils", "registerBroadcast: failed to set receiver", e);
         }
@@ -432,13 +516,21 @@ public abstract class Utils {
             Slog.w("BiometricUtils", "semVibrate: No vibrator service");
             return;
         }
-        if (VibRune.SUPPORT_HAPTIC_FEEDBACK_ON_DC_MOTOR && vibrator.semGetSupportedVibrationType() == 1 && i == 113) {
+        if (VibRune.SUPPORT_HAPTIC_FEEDBACK_ON_DC_MOTOR
+                && vibrator.semGetSupportedVibrationType() == 1
+                && i == 113) {
             i = 100;
         }
         if (vibrator.semGetSupportedVibrationType() >= 1) {
-            vibrator.vibrate(VibrationEffect.semCreateWaveform(HapticFeedbackConstants.semGetVibrationIndex(i), -1, VibrationEffect.SemMagnitudeType.TYPE_TOUCH));
+            vibrator.vibrate(
+                    VibrationEffect.semCreateWaveform(
+                            HapticFeedbackConstants.semGetVibrationIndex(i),
+                            -1,
+                            VibrationEffect.SemMagnitudeType.TYPE_TOUCH));
         } else if (DEBUG) {
-            Slog.d("BiometricUtils", "semVibrate: supported type=" + vibrator.semGetSupportedVibrationType());
+            Slog.d(
+                    "BiometricUtils",
+                    "semVibrate: supported type=" + vibrator.semGetSupportedVibrationType());
         }
     }
 
@@ -446,7 +538,9 @@ public abstract class Utils {
         try {
             context.unregisterReceiver(broadcastReceiver);
         } catch (Exception e) {
-            Slog.i("BiometricUtils", "unregisterBroadcast: failed to set receiver" + e.getMessage());
+            Slog.i(
+                    "BiometricUtils",
+                    "unregisterBroadcast: failed to set receiver" + e.getMessage());
         }
     }
 

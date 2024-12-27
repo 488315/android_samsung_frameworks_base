@@ -68,7 +68,9 @@ public final class SehSelftestParameter implements Parcelable {
         int dataPosition = parcel.dataPosition();
         parcel.writeInt(0);
         parcel.writeInt(this.type);
-        int m = SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(parcel, this.cnt, dataPosition);
+        int m =
+                SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(
+                        parcel, this.cnt, dataPosition);
         SupportedStreamConfiguration$$ExternalSyntheticOutline0.m(m, dataPosition, parcel, m);
     }
 }

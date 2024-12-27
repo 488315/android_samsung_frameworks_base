@@ -11,11 +11,9 @@ final class AuthenticatorLog {
         throw new AssertionError();
     }
 
-    static void v(String tag, String msg) {
-    }
+    static void v(String tag, String msg) {}
 
-    static void d(String tag, String msg) {
-    }
+    static void d(String tag, String msg) {}
 
     static void i(String tag, String msg) {
         Log.i(TAG + tag, msg);

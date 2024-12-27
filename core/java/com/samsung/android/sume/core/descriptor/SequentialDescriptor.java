@@ -2,6 +2,7 @@ package com.samsung.android.sume.core.descriptor;
 
 import com.samsung.android.sume.core.evaluate.Evaluator;
 import com.samsung.android.sume.core.filter.collection.SequentialFilter;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -18,7 +19,10 @@ public class SequentialDescriptor extends MFDescriptorBase {
         setFilterId(type.name());
     }
 
-    public SequentialDescriptor(SequentialFilter.Type type, SequentialFilter.Mode mode, List<MFDescriptor> descriptors) {
+    public SequentialDescriptor(
+            SequentialFilter.Type type,
+            SequentialFilter.Mode mode,
+            List<MFDescriptor> descriptors) {
         this.sequentialType = type;
         this.sequentialMode = mode;
         this.descriptors = descriptors;
@@ -29,7 +33,8 @@ public class SequentialDescriptor extends MFDescriptorBase {
         return this.descriptors;
     }
 
-    @Override // com.samsung.android.sume.core.descriptor.MFDescriptorBase, com.samsung.android.sume.core.descriptor.MFDescriptor
+    @Override // com.samsung.android.sume.core.descriptor.MFDescriptorBase,
+              // com.samsung.android.sume.core.descriptor.MFDescriptor
     public Class<?> getFilterType() {
         return SequentialFilter.class;
     }

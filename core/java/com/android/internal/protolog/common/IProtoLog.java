@@ -6,7 +6,13 @@ public interface IProtoLog {
 
     boolean isProtoEnabled();
 
-    void log(LogLevel logLevel, IProtoLogGroup iProtoLogGroup, long j, int i, String str, Object[] objArr);
+    void log(
+            LogLevel logLevel,
+            IProtoLogGroup iProtoLogGroup,
+            long j,
+            int i,
+            String str,
+            Object[] objArr);
 
     int startLoggingToLogcat(String[] strArr, ILogger iLogger);
 

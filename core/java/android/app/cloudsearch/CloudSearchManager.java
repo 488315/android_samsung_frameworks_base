@@ -1,8 +1,7 @@
 package android.app.cloudsearch;
 
 import android.annotation.SystemApi;
-import android.app.cloudsearch.CloudSearchManager;
-import android.app.cloudsearch.SearchResponse;
+
 import java.util.concurrent.Executor;
 
 @SystemApi
@@ -16,12 +15,16 @@ public class CloudSearchManager {
     }
 
     @SystemApi
-    public void search(final SearchRequest request, Executor callbackExecutor, final CallBack callback) {
-        callbackExecutor.execute(new Runnable() { // from class: android.app.cloudsearch.CloudSearchManager$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                CloudSearchManager.CallBack.this.onSearchFailed(request, new SearchResponse.Builder(-1).build());
-            }
-        });
+    public void search(
+            final SearchRequest request, Executor callbackExecutor, final CallBack callback) {
+        callbackExecutor.execute(
+                new Runnable() { // from class:
+                    // android.app.cloudsearch.CloudSearchManager$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        CloudSearchManager.CallBack.this.onSearchFailed(
+                                request, new SearchResponse.Builder(-1).build());
+                    }
+                });
     }
 }

@@ -1,8 +1,9 @@
 package com.samsung.android.wallpaper.legibilitycolors;
 
 import android.hardware.scontext.SContextConstants;
+
 import com.android.internal.graphics.ColorUtils;
-import com.samsung.android.wallpaper.legibilitycolors.LegibilityDefinition;
+
 import com.samsung.android.wallpaper.legibilitycolors.utils.ColorExtractor;
 import com.samsung.android.wallpaper.legibilitycolors.utils.IUXColorUtils;
 
@@ -83,22 +84,56 @@ public class LegibilityColorByHSV {
                 sb = x + m;
                 break;
         }
-        double y = (sr < 0.04045d ? 0.01645510835913313d * sr : 0.2126d * Math.pow((sr / 1.055d) + 0.05213270142180095d, 2.4d)) + (sg < 0.04045d ? 0.05535603715170278d * sg : 0.7152d * Math.pow((sg / 1.055d) + 0.05213270142180095d, 2.4d)) + (sb < 0.04045d ? 0.005588235294117647d * sb : Math.pow((sb / 1.055d) + 0.05213270142180095d, 2.4d) * 0.0722d);
-        double sb2 = (116.0d * (y > XYZ_EPSILON ? Math.cbrt(y) : (7.787068965517241d * y) + 0.13793103448275862d)) - 16.0d;
+        double y =
+                (sr < 0.04045d
+                                ? 0.01645510835913313d * sr
+                                : 0.2126d * Math.pow((sr / 1.055d) + 0.05213270142180095d, 2.4d))
+                        + (sg < 0.04045d
+                                ? 0.05535603715170278d * sg
+                                : 0.7152d * Math.pow((sg / 1.055d) + 0.05213270142180095d, 2.4d))
+                        + (sb < 0.04045d
+                                ? 0.005588235294117647d * sb
+                                : Math.pow((sb / 1.055d) + 0.05213270142180095d, 2.4d) * 0.0722d);
+        double sb2 =
+                (116.0d
+                                * (y > XYZ_EPSILON
+                                        ? Math.cbrt(y)
+                                        : (7.787068965517241d * y) + 0.13793103448275862d))
+                        - 16.0d;
         return (float) Math.max(SContextConstants.ENVIRONMENT_VALUE_UNKNOWN, sb2);
     }
 
     public static LegibilityDefinition.ColorType getLegibilityColorType(float h, float s, float v) {
-        return BASE_LUMINANCE < getLABLfromHSV(h, s, v) ? LegibilityDefinition.ColorType.DARK : LegibilityDefinition.ColorType.LIGHT;
+        return BASE_LUMINANCE < getLABLfromHSV(h, s, v)
+                ? LegibilityDefinition.ColorType.DARK
+                : LegibilityDefinition.ColorType.LIGHT;
     }
 
-    public static LegibilityDefinition.ColorWeightType getLegibilityColorWeight(LegibilityDefinition.ColorType majorColorType, float majorH, float majorS, float majorV, LegibilityDefinition.ColorType minorColorType, float minorH, float minorS, float minorV) {
-        return mGetLegibilityColorWeight(majorColorType, majorH, majorS, majorV, minorColorType, minorH, minorS, minorV);
+    public static LegibilityDefinition.ColorWeightType getLegibilityColorWeight(
+            LegibilityDefinition.ColorType majorColorType,
+            float majorH,
+            float majorS,
+            float majorV,
+            LegibilityDefinition.ColorType minorColorType,
+            float minorH,
+            float minorS,
+            float minorV) {
+        return mGetLegibilityColorWeight(
+                majorColorType, majorH, majorS, majorV, minorColorType, minorH, minorS, minorV);
     }
 
-    private static LegibilityDefinition.ColorWeightType mGetLegibilityColorWeight(LegibilityDefinition.ColorType majorColorType, float majorH, float majorS, float majorV, LegibilityDefinition.ColorType minorColorType, float minorH, float minorS, float minorV) {
+    private static LegibilityDefinition.ColorWeightType mGetLegibilityColorWeight(
+            LegibilityDefinition.ColorType majorColorType,
+            float majorH,
+            float majorS,
+            float majorV,
+            LegibilityDefinition.ColorType minorColorType,
+            float minorH,
+            float minorS,
+            float minorV) {
         LegibilityDefinition.ColorWeightType ret = LegibilityDefinition.ColorWeightType.EACH;
-        if (Math.abs(majorV - minorV) >= DIFF_V || minorColorType != LegibilityDefinition.ColorType.LIGHT) {
+        if (Math.abs(majorV - minorV) >= DIFF_V
+                || minorColorType != LegibilityDefinition.ColorType.LIGHT) {
             return ret;
         }
         if (minorS < 0.9f && minorV > 90.0f) {
@@ -110,12 +145,16 @@ public class LegibilityColorByHSV {
     public static EdgeCaseResultForIndicator calcurateIndicatorLegibility(int[] pixels) {
         ColorHSV indicator_hsv = new ColorHSV();
         indicator_hsv.calcAvgColor(pixels);
-        LegibilityDefinition.ColorType colorType = getLegibilityColorType(indicator_hsv.getAvgH(), indicator_hsv.getAvgS(), indicator_hsv.getAvgV());
-        ColorExtractor.DominantColorResult[] result = ColorExtractor.kMeansHsv(pixels, ColorExtractor.makeClusterGroupColorBandBased2());
+        LegibilityDefinition.ColorType colorType =
+                getLegibilityColorType(
+                        indicator_hsv.getAvgH(), indicator_hsv.getAvgS(), indicator_hsv.getAvgV());
+        ColorExtractor.DominantColorResult[] result =
+                ColorExtractor.kMeansHsv(pixels, ColorExtractor.makeClusterGroupColorBandBased2());
         return checkEdgeCaseForIndicator(result, colorType);
     }
 
-    private static EdgeCaseResultForIndicator checkEdgeCaseForIndicator(ColorExtractor.DominantColorResult[] result, LegibilityDefinition.ColorType colorType) {
+    private static EdgeCaseResultForIndicator checkEdgeCaseForIndicator(
+            ColorExtractor.DominantColorResult[] result, LegibilityDefinition.ColorType colorType) {
         EdgeCaseResultForIndicator ret = new EdgeCaseResultForIndicator();
         ret.initColorType = colorType;
         ret.colorType = LegibilityDefinition.ColorType.NONE;
@@ -132,13 +171,15 @@ public class LegibilityColorByHSV {
             if (ColorUtils.calculateContrast(-1, dominantColorResult.color) < 1.2400000095367432d) {
                 white_contrast_percent += dominantColorResult.percentage;
             }
-            if (ColorUtils.calculateContrast(-16777216, dominantColorResult.color) < 1.340000033378601d) {
+            if (ColorUtils.calculateContrast(-16777216, dominantColorResult.color)
+                    < 1.340000033378601d) {
                 black_contrast_percent += dominantColorResult.percentage;
             }
         }
         ret.white_contrast_percent = white_contrast_percent;
         ret.black_contrast_percent = black_contrast_percent;
-        if (white_contrast_percent > PERCENTAGE_THRESHOLD && black_contrast_percent > PERCENTAGE_THRESHOLD) {
+        if (white_contrast_percent > PERCENTAGE_THRESHOLD
+                && black_contrast_percent > PERCENTAGE_THRESHOLD) {
             ret.isEdgeCase = true;
             if (white_contrast_percent >= black_contrast_percent) {
                 float[] color = {0.0f, 0.0f, ((black_contrast_percent / 0.5f) * 0.3f) + 0.2f};
@@ -169,7 +210,10 @@ public class LegibilityColorByHSV {
         return ret;
     }
 
-    private static boolean checkSimilarColor(ColorExtractor.DominantColorResult[] result, LegibilityDefinition.ColorType colorType, int refColor) {
+    private static boolean checkSimilarColor(
+            ColorExtractor.DominantColorResult[] result,
+            LegibilityDefinition.ColorType colorType,
+            int refColor) {
         for (ColorExtractor.DominantColorResult colorResult : result) {
             double tmpContrast = ColorUtils.calculateContrast(refColor, colorResult.color);
             if (tmpContrast < 1.7999999523162842d && colorResult.percentage > 0.1f) {
@@ -190,7 +234,6 @@ public class LegibilityColorByHSV {
         int color;
         LegibilityDefinition.ColorType colorType;
 
-        private SimilarColorResult() {
-        }
+        private SimilarColorResult() {}
     }
 }

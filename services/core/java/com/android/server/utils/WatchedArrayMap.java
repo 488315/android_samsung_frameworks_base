@@ -1,6 +1,7 @@
 package com.android.server.utils;
 
 import android.util.ArrayMap;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
@@ -20,12 +21,13 @@ public final class WatchedArrayMap extends WatchableImpl implements Map, Snappab
     /* JADX WARN: Type inference failed for: r1v0, types: [com.android.server.utils.WatchedArrayMap$1] */
     public WatchedArrayMap(int i) {
         this.mWatching = false;
-        this.mObserver = new Watcher() { // from class: com.android.server.utils.WatchedArrayMap.1
-            @Override // com.android.server.utils.Watcher
-            public final void onChange(Watchable watchable) {
-                WatchedArrayMap.this.dispatchChange(watchable);
-            }
-        };
+        this.mObserver =
+                new Watcher() { // from class: com.android.server.utils.WatchedArrayMap.1
+                    @Override // com.android.server.utils.Watcher
+                    public final void onChange(Watchable watchable) {
+                        WatchedArrayMap.this.dispatchChange(watchable);
+                    }
+                };
         this.mStorage = new ArrayMap(i, false);
     }
 
@@ -135,7 +137,9 @@ public final class WatchedArrayMap extends WatchableImpl implements Map, Snappab
     @Override // java.util.Map
     public final Object remove(Object obj) {
         Object remove = this.mStorage.remove(obj);
-        if (this.mWatching && (remove instanceof Watchable) && !this.mStorage.containsValue(remove)) {
+        if (this.mWatching
+                && (remove instanceof Watchable)
+                && !this.mStorage.containsValue(remove)) {
             ((Watchable) remove).unregisterObserver(this.mObserver);
         }
         dispatchChange(this);

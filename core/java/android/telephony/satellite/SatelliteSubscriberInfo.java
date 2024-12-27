@@ -2,26 +2,31 @@ package android.telephony.satellite;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.telephony.SemTelephonyUtils;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class SatelliteSubscriberInfo implements Parcelable {
-    public static final Parcelable.Creator<SatelliteSubscriberInfo> CREATOR = new Parcelable.Creator<SatelliteSubscriberInfo>() { // from class: android.telephony.satellite.SatelliteSubscriberInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SatelliteSubscriberInfo createFromParcel(Parcel in) {
-            return new SatelliteSubscriberInfo(in);
-        }
+    public static final Parcelable.Creator<SatelliteSubscriberInfo> CREATOR =
+            new Parcelable.Creator<
+                    SatelliteSubscriberInfo>() { // from class:
+                                                 // android.telephony.satellite.SatelliteSubscriberInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SatelliteSubscriberInfo createFromParcel(Parcel in) {
+                    return new SatelliteSubscriberInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SatelliteSubscriberInfo[] newArray(int size) {
-            return new SatelliteSubscriberInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SatelliteSubscriberInfo[] newArray(int size) {
+                    return new SatelliteSubscriberInfo[size];
+                }
+            };
     public static final int ICCID = 0;
     public static final int IMSI_MSISDN = 1;
     private int mCarrierId;
@@ -31,8 +36,7 @@ public final class SatelliteSubscriberInfo implements Parcelable {
     private int mSubscriberIdType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SubscriberIdType {
-    }
+    public @interface SubscriberIdType {}
 
     private SatelliteSubscriberInfo(Parcel in) {
         readFromParcel(in);
@@ -118,11 +122,25 @@ public final class SatelliteSubscriberInfo implements Parcelable {
     }
 
     public String toString() {
-        return "SubscriberId:" + SemTelephonyUtils.maskPii(this.mSubscriberId) + ",CarrierId:" + this.mCarrierId + ",NiddApn:" + this.mNiddApn + ",SubId:" + this.mSubId + ",SubscriberIdType:" + this.mSubscriberIdType;
+        return "SubscriberId:"
+                + SemTelephonyUtils.maskPii(this.mSubscriberId)
+                + ",CarrierId:"
+                + this.mCarrierId
+                + ",NiddApn:"
+                + this.mNiddApn
+                + ",SubId:"
+                + this.mSubId
+                + ",SubscriberIdType:"
+                + this.mSubscriberIdType;
     }
 
     public int hashCode() {
-        return Objects.hash(this.mSubscriberId, Integer.valueOf(this.mCarrierId), this.mNiddApn, Integer.valueOf(this.mSubId), Integer.valueOf(this.mSubscriberIdType));
+        return Objects.hash(
+                this.mSubscriberId,
+                Integer.valueOf(this.mCarrierId),
+                this.mNiddApn,
+                Integer.valueOf(this.mSubId),
+                Integer.valueOf(this.mSubscriberIdType));
     }
 
     public boolean equals(Object o) {
@@ -133,7 +151,11 @@ public final class SatelliteSubscriberInfo implements Parcelable {
             return false;
         }
         SatelliteSubscriberInfo that = (SatelliteSubscriberInfo) o;
-        return Objects.equals(this.mSubscriberId, that.mSubscriberId) && this.mCarrierId == that.mCarrierId && Objects.equals(this.mNiddApn, that.mNiddApn) && this.mSubId == that.mSubId && this.mSubscriberIdType == that.mSubscriberIdType;
+        return Objects.equals(this.mSubscriberId, that.mSubscriberId)
+                && this.mCarrierId == that.mCarrierId
+                && Objects.equals(this.mNiddApn, that.mNiddApn)
+                && this.mSubId == that.mSubId
+                && this.mSubscriberIdType == that.mSubscriberIdType;
     }
 
     private void readFromParcel(Parcel in) {

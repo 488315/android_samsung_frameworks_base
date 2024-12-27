@@ -16,11 +16,13 @@ import android.util.ArraySet;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.Xml;
+
 import com.android.internal.util.XmlUtils;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.HeimdAllFsService$$ExternalSyntheticOutline0;
+
 import java.io.File;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
@@ -55,8 +57,7 @@ public final class LocaleManagerBackupHelper {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class UserMonitor extends BroadcastReceiver {
-        public UserMonitor() {
-        }
+        public UserMonitor() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
@@ -65,18 +66,28 @@ public final class LocaleManagerBackupHelper {
                     int intExtra = intent.getIntExtra("android.intent.extra.user_handle", -10000);
                     synchronized (LocaleManagerBackupHelper.this.mStagedDataLock) {
                         LocaleManagerBackupHelper.this.deleteStagedDataLocked(intExtra);
-                        LocaleManagerBackupHelper localeManagerBackupHelper = LocaleManagerBackupHelper.this;
+                        LocaleManagerBackupHelper localeManagerBackupHelper =
+                                LocaleManagerBackupHelper.this;
                         localeManagerBackupHelper.getClass();
                         String num = Integer.toString(intExtra);
-                        SharedPreferences sharedPreferences = localeManagerBackupHelper.mDelegateAppLocalePackages;
+                        SharedPreferences sharedPreferences =
+                                localeManagerBackupHelper.mDelegateAppLocalePackages;
                         if (sharedPreferences != null && sharedPreferences.contains(num)) {
-                            if (!localeManagerBackupHelper.mDelegateAppLocalePackages.edit().remove(num).commit()) {
+                            if (!localeManagerBackupHelper
+                                    .mDelegateAppLocalePackages
+                                    .edit()
+                                    .remove(num)
+                                    .commit()) {
                                 Slog.e("LocaleManagerBkpHelper", "Failed to commit data!");
                             }
-                            LocaleManagerBackupHelper.m638$$Nest$mremoveArchivedPackagesForUser(LocaleManagerBackupHelper.this, intExtra);
+                            LocaleManagerBackupHelper.m638$$Nest$mremoveArchivedPackagesForUser(
+                                    LocaleManagerBackupHelper.this, intExtra);
                         }
-                        Slog.w("LocaleManagerBkpHelper", "The profile is not existed in the persisted info");
-                        LocaleManagerBackupHelper.m638$$Nest$mremoveArchivedPackagesForUser(LocaleManagerBackupHelper.this, intExtra);
+                        Slog.w(
+                                "LocaleManagerBkpHelper",
+                                "The profile is not existed in the persisted info");
+                        LocaleManagerBackupHelper.m638$$Nest$mremoveArchivedPackagesForUser(
+                                LocaleManagerBackupHelper.this, intExtra);
                     }
                 }
             } catch (Exception e) {
@@ -86,13 +97,17 @@ public final class LocaleManagerBackupHelper {
     }
 
     /* renamed from: -$$Nest$mremoveArchivedPackagesForUser, reason: not valid java name */
-    public static void m638$$Nest$mremoveArchivedPackagesForUser(LocaleManagerBackupHelper localeManagerBackupHelper, int i) {
+    public static void m638$$Nest$mremoveArchivedPackagesForUser(
+            LocaleManagerBackupHelper localeManagerBackupHelper, int i) {
         localeManagerBackupHelper.getClass();
         String num = Integer.toString(i);
         File archivedPackagesFile = localeManagerBackupHelper.getArchivedPackagesFile();
-        SharedPreferences archivedPackagesSp = localeManagerBackupHelper.getArchivedPackagesSp(archivedPackagesFile);
+        SharedPreferences archivedPackagesSp =
+                localeManagerBackupHelper.getArchivedPackagesSp(archivedPackagesFile);
         if (archivedPackagesSp == null || !archivedPackagesSp.contains(num)) {
-            Slog.w("LocaleManagerBkpHelper", "The profile is not existed in the archived package info");
+            Slog.w(
+                    "LocaleManagerBkpHelper",
+                    "The profile is not existed in the archived package info");
             return;
         }
         if (!archivedPackagesSp.edit().remove(num).commit()) {
@@ -103,20 +118,39 @@ public final class LocaleManagerBackupHelper {
         }
     }
 
-    public LocaleManagerBackupHelper(Context context, LocaleManagerService localeManagerService, PackageManager packageManager, Clock clock, HandlerThread handlerThread, SparseArray sparseArray, File file, SharedPreferences sharedPreferences) {
+    public LocaleManagerBackupHelper(
+            Context context,
+            LocaleManagerService localeManagerService,
+            PackageManager packageManager,
+            Clock clock,
+            HandlerThread handlerThread,
+            SparseArray sparseArray,
+            File file,
+            SharedPreferences sharedPreferences) {
         this.mContext = context;
         this.mLocaleManagerService = localeManagerService;
         this.mPackageManager = packageManager;
         this.mClock = clock;
         if (sharedPreferences == null) {
-            sharedPreferences = context.createDeviceProtectedStorageContext().getSharedPreferences(new File(Environment.getDataSystemDeDirectory(0), "LocalesFromDelegatePrefs.xml"), 0);
+            sharedPreferences =
+                    context.createDeviceProtectedStorageContext()
+                            .getSharedPreferences(
+                                    new File(
+                                            Environment.getDataSystemDeDirectory(0),
+                                            "LocalesFromDelegatePrefs.xml"),
+                                    0);
         }
         this.mDelegateAppLocalePackages = sharedPreferences;
         this.mArchivedPackagesFile = file;
         this.mStagedDataFiles = sparseArray;
         UserMonitor userMonitor = new UserMonitor();
         this.mUserMonitor = userMonitor;
-        context.registerReceiverAsUser(userMonitor, UserHandle.ALL, BatteryService$$ExternalSyntheticOutline0.m("android.intent.action.USER_REMOVED"), null, handlerThread.getThreadHandler());
+        context.registerReceiverAsUser(
+                userMonitor,
+                UserHandle.ALL,
+                BatteryService$$ExternalSyntheticOutline0.m("android.intent.action.USER_REMOVED"),
+                null,
+                handlerThread.getThreadHandler());
     }
 
     public static HashMap readFromXml(TypedXmlPullParser typedXmlPullParser) {
@@ -125,8 +159,11 @@ public final class LocaleManagerBackupHelper {
         while (XmlUtils.nextElementWithin(typedXmlPullParser, depth)) {
             if (typedXmlPullParser.getName().equals("package")) {
                 String attributeValue = typedXmlPullParser.getAttributeValue((String) null, "name");
-                String attributeValue2 = typedXmlPullParser.getAttributeValue((String) null, "locales");
-                boolean attributeBoolean = typedXmlPullParser.getAttributeBoolean((String) null, "delegate_selector", false);
+                String attributeValue2 =
+                        typedXmlPullParser.getAttributeValue((String) null, "locales");
+                boolean attributeBoolean =
+                        typedXmlPullParser.getAttributeBoolean(
+                                (String) null, "delegate_selector", false);
                 if (!TextUtils.isEmpty(attributeValue) && !TextUtils.isEmpty(attributeValue2)) {
                     hashMap.put(attributeValue, new LocalesInfo(attributeValue2, attributeBoolean));
                 }
@@ -146,8 +183,12 @@ public final class LocaleManagerBackupHelper {
         for (String str : hashMap.keySet()) {
             newFastSerializer.startTag((String) null, "package");
             newFastSerializer.attribute((String) null, "name", str);
-            newFastSerializer.attribute((String) null, "locales", ((LocalesInfo) hashMap.get(str)).mLocales);
-            newFastSerializer.attributeBoolean((String) null, "delegate_selector", ((LocalesInfo) hashMap.get(str)).mSetFromDelegate);
+            newFastSerializer.attribute(
+                    (String) null, "locales", ((LocalesInfo) hashMap.get(str)).mLocales);
+            newFastSerializer.attributeBoolean(
+                    (String) null,
+                    "delegate_selector",
+                    ((LocalesInfo) hashMap.get(str)).mSetFromDelegate);
             newFastSerializer.endTag((String) null, "package");
         }
         newFastSerializer.endTag((String) null, "locales");
@@ -159,12 +200,17 @@ public final class LocaleManagerBackupHelper {
             Slog.w("LocaleManagerBkpHelper", "Failed to persist data into the shared preference!");
             return false;
         }
-        return new ArraySet(this.mDelegateAppLocalePackages.getStringSet(Integer.toString(i), new ArraySet())).contains(str);
+        return new ArraySet(
+                        this.mDelegateAppLocalePackages.getStringSet(
+                                Integer.toString(i), new ArraySet()))
+                .contains(str);
     }
 
-    public final void checkExistingLocalesAndApplyRestore(int i, LocalesInfo localesInfo, String str) {
+    public final void checkExistingLocalesAndApplyRestore(
+            int i, LocalesInfo localesInfo, String str) {
         if (localesInfo == null) {
-            HeimdAllFsService$$ExternalSyntheticOutline0.m("No locales info for ", str, "LocaleManagerBkpHelper");
+            HeimdAllFsService$$ExternalSyntheticOutline0.m(
+                    "No locales info for ", str, "LocaleManagerBkpHelper");
             return;
         }
         try {
@@ -172,10 +218,18 @@ public final class LocaleManagerBackupHelper {
                 return;
             }
         } catch (RemoteException | IllegalArgumentException e) {
-            Slog.e("LocaleManagerBkpHelper", "Could not check for current locales before restoring", e);
+            Slog.e(
+                    "LocaleManagerBkpHelper",
+                    "Could not check for current locales before restoring",
+                    e);
         }
         try {
-            this.mLocaleManagerService.setApplicationLocales(str, i, LocaleList.forLanguageTags(localesInfo.mLocales), localesInfo.mSetFromDelegate, 3);
+            this.mLocaleManagerService.setApplicationLocales(
+                    str,
+                    i,
+                    LocaleList.forLanguageTags(localesInfo.mLocales),
+                    localesInfo.mSetFromDelegate,
+                    3);
         } catch (RemoteException | IllegalArgumentException e2) {
             Slog.e("LocaleManagerBkpHelper", "Could not restore locales for " + str, e2);
         }
@@ -209,8 +263,20 @@ public final class LocaleManagerBackupHelper {
 
     public final void deleteStagedDataLocked(int i) {
         SparseArray sparseArray = this.mStagedDataFiles;
-        File file = sparseArray == null ? new File(Environment.getDataSystemDeDirectory(i), "LocalesStagedDataPrefs.xml") : (File) sparseArray.get(i);
-        if (!(this.mStagedDataFiles == null ? this.mContext.createDeviceProtectedStorageContext().getSharedPreferences(file, 0) : this.mContext.getSharedPreferences(file, 0)).edit().clear().commit()) {
+        File file =
+                sparseArray == null
+                        ? new File(
+                                Environment.getDataSystemDeDirectory(i),
+                                "LocalesStagedDataPrefs.xml")
+                        : (File) sparseArray.get(i);
+        if (!(this.mStagedDataFiles == null
+                        ? this.mContext
+                                .createDeviceProtectedStorageContext()
+                                .getSharedPreferences(file, 0)
+                        : this.mContext.getSharedPreferences(file, 0))
+                .edit()
+                .clear()
+                .commit()) {
             Slog.e("LocaleManagerBkpHelper", "Failed to commit data!");
         }
         if (file.exists()) {
@@ -226,7 +292,12 @@ public final class LocaleManagerBackupHelper {
             packageInfo = null;
         }
         if (!(packageInfo != null)) {
-            Slog.e("LocaleManagerBkpHelper", str + " not installed for user " + i + ". Could not restore locales from stage data");
+            Slog.e(
+                    "LocaleManagerBkpHelper",
+                    str
+                            + " not installed for user "
+                            + i
+                            + ". Could not restore locales from stage data");
             return;
         }
         SharedPreferences stagedDataSp = getStagedDataSp(i);
@@ -237,13 +308,15 @@ public final class LocaleManagerBackupHelper {
                 Slog.e("LocaleManagerBkpHelper", "Failed to restore data");
                 return;
             } else {
-                checkExistingLocalesAndApplyRestore(i, new LocalesInfo(split[0], Boolean.parseBoolean(split[1])), str);
+                checkExistingLocalesAndApplyRestore(
+                        i, new LocalesInfo(split[0], Boolean.parseBoolean(split[1])), str);
                 if (!stagedDataSp.edit().remove(str).commit()) {
                     Slog.e("LocaleManagerBkpHelper", "Failed to commit data!");
                 }
             }
         }
-        if (stagedDataSp.getAll().size() != 1 || stagedDataSp.getLong("staged_data_time", -1L) == -1) {
+        if (stagedDataSp.getAll().size() != 1
+                || stagedDataSp.getLong("staged_data_time", -1L) == -1) {
             return;
         }
         deleteStagedDataLocked(i);
@@ -251,11 +324,15 @@ public final class LocaleManagerBackupHelper {
 
     public final File getArchivedPackagesFile() {
         File file = this.mArchivedPackagesFile;
-        return file == null ? new File(Environment.getDataSystemDeDirectory(0), "ArchivedPackagesPrefs.xml") : file;
+        return file == null
+                ? new File(Environment.getDataSystemDeDirectory(0), "ArchivedPackagesPrefs.xml")
+                : file;
     }
 
     public final SharedPreferences getArchivedPackagesSp(File file) {
-        return this.mArchivedPackagesFile == null ? this.mContext.createDeviceProtectedStorageContext().getSharedPreferences(file, 0) : this.mContext.getSharedPreferences(file, 0);
+        return this.mArchivedPackagesFile == null
+                ? this.mContext.createDeviceProtectedStorageContext().getSharedPreferences(file, 0)
+                : this.mContext.getSharedPreferences(file, 0);
     }
 
     public final SharedPreferences getStagedDataSp(int i) {
@@ -263,9 +340,16 @@ public final class LocaleManagerBackupHelper {
         if (sparseArray != null) {
             return this.mContext.getSharedPreferences((File) sparseArray.get(i), 0);
         }
-        Context createDeviceProtectedStorageContext = this.mContext.createDeviceProtectedStorageContext();
+        Context createDeviceProtectedStorageContext =
+                this.mContext.createDeviceProtectedStorageContext();
         SparseArray sparseArray2 = this.mStagedDataFiles;
-        return createDeviceProtectedStorageContext.getSharedPreferences(sparseArray2 == null ? new File(Environment.getDataSystemDeDirectory(i), "LocalesStagedDataPrefs.xml") : (File) sparseArray2.get(i), 0);
+        return createDeviceProtectedStorageContext.getSharedPreferences(
+                sparseArray2 == null
+                        ? new File(
+                                Environment.getDataSystemDeDirectory(i),
+                                "LocalesStagedDataPrefs.xml")
+                        : (File) sparseArray2.get(i),
+                0);
     }
 
     public BroadcastReceiver getUserMonitor() {
@@ -280,7 +364,8 @@ public final class LocaleManagerBackupHelper {
         }
         SharedPreferences.Editor edit = sharedPreferences.edit();
         String num = Integer.toString(i);
-        ArraySet arraySet = new ArraySet(this.mDelegateAppLocalePackages.getStringSet(num, new ArraySet()));
+        ArraySet arraySet =
+                new ArraySet(this.mDelegateAppLocalePackages.getStringSet(num, new ArraySet()));
         if (!z || z2) {
             if (arraySet.contains(str)) {
                 arraySet.remove(str);
@@ -327,7 +412,8 @@ public final class LocaleManagerBackupHelper {
             return;
         }
         String num = Integer.toString(i);
-        ArraySet arraySet = new ArraySet(this.mDelegateAppLocalePackages.getStringSet(num, new ArraySet()));
+        ArraySet arraySet =
+                new ArraySet(this.mDelegateAppLocalePackages.getStringSet(num, new ArraySet()));
         if (arraySet.contains(str)) {
             arraySet.remove(str);
             SharedPreferences.Editor edit = this.mDelegateAppLocalePackages.edit();
@@ -340,7 +426,12 @@ public final class LocaleManagerBackupHelper {
     }
 
     public final void storeStagedDataInfo(int i, LocalesInfo localesInfo, String str) {
-        if (getStagedDataSp(i).edit().putString(str, localesInfo.mLocales + " s:" + String.valueOf(localesInfo.mSetFromDelegate)).commit()) {
+        if (getStagedDataSp(i)
+                .edit()
+                .putString(
+                        str,
+                        localesInfo.mLocales + " s:" + String.valueOf(localesInfo.mSetFromDelegate))
+                .commit()) {
             return;
         }
         Slog.e("LocaleManagerBkpHelper", "Failed to commit data!");

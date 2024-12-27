@@ -13,23 +13,20 @@ public final class InputConnectionCallProto {
         public static final long FLAGS = 1120986464258L;
         public static final long LENGTH = 1120986464257L;
 
-        public GetTextBeforeCursor() {
-        }
+        public GetTextBeforeCursor() {}
     }
 
     public final class GetTextAfterCursor {
         public static final long FLAGS = 1120986464258L;
         public static final long LENGTH = 1120986464257L;
 
-        public GetTextAfterCursor() {
-        }
+        public GetTextAfterCursor() {}
     }
 
     public final class GetSelectedText {
         public static final long FLAGS = 1120986464257L;
 
-        public GetSelectedText() {
-        }
+        public GetSelectedText() {}
     }
 
     public final class GetSurroundingText {
@@ -38,16 +35,14 @@ public final class InputConnectionCallProto {
         public static final long FLAGS = 1120986464259L;
         public static final long RESULT = 1146756268036L;
 
-        public GetSurroundingText() {
-        }
+        public GetSurroundingText() {}
 
         public final class SurroundingText {
             public static final long OFFSET = 1120986464260L;
             public static final long SELECTION_END = 1120986464259L;
             public static final long SELECTION_START = 1120986464258L;
 
-            public SurroundingText() {
-            }
+            public SurroundingText() {}
         }
     }
 
@@ -55,16 +50,14 @@ public final class InputConnectionCallProto {
         public static final long REQ_MODES = 1120986464257L;
         public static final long RESULT = 1120986464258L;
 
-        public GetCursorCapsMode() {
-        }
+        public GetCursorCapsMode() {}
     }
 
     public final class GetExtractedText {
         public static final long FLAGS = 1120986464258L;
         public static final long REQUEST = 1146756268033L;
 
-        public GetExtractedText() {
-        }
+        public GetExtractedText() {}
 
         public final class ExtractedTextRequest {
             public static final long FLAGS = 1120986464258L;
@@ -72,8 +65,7 @@ public final class InputConnectionCallProto {
             public static final long HINT_MAX_LINES = 1120986464259L;
             public static final long TOKEN = 1120986464257L;
 
-            public ExtractedTextRequest() {
-            }
+            public ExtractedTextRequest() {}
         }
     }
 }

@@ -1,6 +1,5 @@
 package android.os;
 
-import android.os.IMessenger;
 import android.util.Log;
 import android.util.Printer;
 
@@ -20,8 +19,7 @@ public class Handler {
         boolean handleMessage(Message message);
     }
 
-    public void handleMessage(Message msg) {
-    }
+    public void handleMessage(Message msg) {}
 
     public void dispatchMessage(Message msg) {
         if (msg.callback != null) {
@@ -59,7 +57,10 @@ public class Handler {
     public Handler(Callback callback, boolean async) {
         this.mLooper = Looper.myLooper();
         if (this.mLooper == null) {
-            throw new RuntimeException("Can't create handler inside thread " + Thread.currentThread() + " that has not called Looper.prepare()");
+            throw new RuntimeException(
+                    "Can't create handler inside thread "
+                            + Thread.currentThread()
+                            + " that has not called Looper.prepare()");
         }
         this.mQueue = this.mLooper.mQueue;
         this.mCallback = callback;
@@ -229,7 +230,8 @@ public class Handler {
     public boolean sendMessageAtTime(Message msg, long uptimeMillis) {
         MessageQueue queue = this.mQueue;
         if (queue == null) {
-            RuntimeException e = new RuntimeException(this + " sendMessageAtTime() called with no mQueue");
+            RuntimeException e =
+                    new RuntimeException(this + " sendMessageAtTime() called with no mQueue");
             Log.w("Looper", e.getMessage(), e);
             return false;
         }
@@ -239,7 +241,9 @@ public class Handler {
     public final boolean sendMessageAtFrontOfQueue(Message msg) {
         MessageQueue queue = this.mQueue;
         if (queue == null) {
-            RuntimeException e = new RuntimeException(this + " sendMessageAtFrontOfQueue() called with no mQueue");
+            RuntimeException e =
+                    new RuntimeException(
+                            this + " sendMessageAtFrontOfQueue() called with no mQueue");
             Log.w("Looper", e.getMessage(), e);
             return false;
         }
@@ -265,7 +269,9 @@ public class Handler {
 
     private Object disallowNullArgumentIfShared(Object arg) {
         if (this.mIsShared && arg == null) {
-            throw new IllegalArgumentException("Null argument disallowed for shared handler. Consider creating your own Handler instance.");
+            throw new IllegalArgumentException(
+                    "Null argument disallowed for shared handler. Consider creating your own"
+                        + " Handler instance.");
         }
         return arg;
     }
@@ -333,7 +339,11 @@ public class Handler {
     }
 
     public String toString() {
-        return "Handler (" + getClass().getName() + ") {" + Integer.toHexString(System.identityHashCode(this)) + "}";
+        return "Handler ("
+                + getClass().getName()
+                + ") {"
+                + Integer.toHexString(System.identityHashCode(this))
+                + "}";
     }
 
     final IMessenger getIMessenger() {
@@ -347,8 +357,7 @@ public class Handler {
     }
 
     private final class MessengerImpl extends IMessenger.Stub {
-        private MessengerImpl() {
-        }
+        private MessengerImpl() {}
 
         @Override // android.os.IMessenger
         public void send(Message msg) {

@@ -4,6 +4,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+
 import java.io.Closeable;
 import java.util.concurrent.Executor;
 
@@ -26,7 +27,8 @@ public interface QuickAccessWalletClient extends Closeable {
 
     void addWalletServiceEventListener(WalletServiceEventListener walletServiceEventListener);
 
-    void addWalletServiceEventListener(Executor executor, WalletServiceEventListener walletServiceEventListener);
+    void addWalletServiceEventListener(
+            Executor executor, WalletServiceEventListener walletServiceEventListener);
 
     Intent createWalletIntent();
 
@@ -44,11 +46,17 @@ public interface QuickAccessWalletClient extends Closeable {
 
     Drawable getTileIcon();
 
-    void getWalletCards(GetWalletCardsRequest getWalletCardsRequest, OnWalletCardsRetrievedCallback onWalletCardsRetrievedCallback);
+    void getWalletCards(
+            GetWalletCardsRequest getWalletCardsRequest,
+            OnWalletCardsRetrievedCallback onWalletCardsRetrievedCallback);
 
-    void getWalletCards(Executor executor, GetWalletCardsRequest getWalletCardsRequest, OnWalletCardsRetrievedCallback onWalletCardsRetrievedCallback);
+    void getWalletCards(
+            Executor executor,
+            GetWalletCardsRequest getWalletCardsRequest,
+            OnWalletCardsRetrievedCallback onWalletCardsRetrievedCallback);
 
-    void getWalletPendingIntent(Executor executor, WalletPendingIntentCallback walletPendingIntentCallback);
+    void getWalletPendingIntent(
+            Executor executor, WalletPendingIntentCallback walletPendingIntentCallback);
 
     boolean isWalletFeatureAvailable();
 

@@ -18,20 +18,16 @@ public interface IRestoreObserver extends IInterface {
 
     public static class Default implements IRestoreObserver {
         @Override // android.app.backup.IRestoreObserver
-        public void restoreSetsAvailable(RestoreSet[] result) throws RemoteException {
-        }
+        public void restoreSetsAvailable(RestoreSet[] result) throws RemoteException {}
 
         @Override // android.app.backup.IRestoreObserver
-        public void restoreStarting(int numPackages) throws RemoteException {
-        }
+        public void restoreStarting(int numPackages) throws RemoteException {}
 
         @Override // android.app.backup.IRestoreObserver
-        public void onUpdate(int nowBeingRestored, String curentPackage) throws RemoteException {
-        }
+        public void onUpdate(int nowBeingRestored, String curentPackage) throws RemoteException {}
 
         @Override // android.app.backup.IRestoreObserver
-        public void restoreFinished(int error) throws RemoteException {
-        }
+        public void restoreFinished(int error) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -39,7 +35,7 @@ public interface IRestoreObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRestoreObserver {
+    public abstract static class Stub extends Binder implements IRestoreObserver {
         public static final String DESCRIPTOR = "android.app.backup.IRestoreObserver";
         static final int TRANSACTION_onUpdate = 3;
         static final int TRANSACTION_restoreFinished = 4;
@@ -87,7 +83,8 @@ public interface IRestoreObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -163,7 +160,8 @@ public interface IRestoreObserver extends IInterface {
             }
 
             @Override // android.app.backup.IRestoreObserver
-            public void onUpdate(int nowBeingRestored, String curentPackage) throws RemoteException {
+            public void onUpdate(int nowBeingRestored, String curentPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

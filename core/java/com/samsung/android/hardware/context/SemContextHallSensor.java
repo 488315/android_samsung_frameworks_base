@@ -6,19 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SemContextHallSensor extends SemContextEventContext {
-    public static final Parcelable.Creator<SemContextHallSensor> CREATOR = new Parcelable.Creator<SemContextHallSensor>() { // from class: com.samsung.android.hardware.context.SemContextHallSensor.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextHallSensor createFromParcel(Parcel in) {
-            return new SemContextHallSensor(in);
-        }
+    public static final Parcelable.Creator<SemContextHallSensor> CREATOR =
+            new Parcelable.Creator<
+                    SemContextHallSensor>() { // from class:
+                                              // com.samsung.android.hardware.context.SemContextHallSensor.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextHallSensor createFromParcel(Parcel in) {
+                    return new SemContextHallSensor(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextHallSensor[] newArray(int size) {
-            return new SemContextHallSensor[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextHallSensor[] newArray(int size) {
+                    return new SemContextHallSensor[size];
+                }
+            };
     public static final int MODE_CARRY = 0;
     public static final int MODE_KIOSK = 3;
     public static final int MODE_SMARTPHONE = 4;

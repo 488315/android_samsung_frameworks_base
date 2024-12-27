@@ -1,28 +1,29 @@
 package android.app;
 
-import android.app.BackStackRecord;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
+
 import java.util.ArrayList;
 
 /* compiled from: BackStackRecord.java */
 /* loaded from: classes.dex */
 final class BackStackState implements Parcelable {
-    public static final Parcelable.Creator<BackStackState> CREATOR = new Parcelable.Creator<BackStackState>() { // from class: android.app.BackStackState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BackStackState createFromParcel(Parcel in) {
-            return new BackStackState(in);
-        }
+    public static final Parcelable.Creator<BackStackState> CREATOR =
+            new Parcelable.Creator<BackStackState>() { // from class: android.app.BackStackState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BackStackState createFromParcel(Parcel in) {
+                    return new BackStackState(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BackStackState[] newArray(int size) {
-            return new BackStackState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BackStackState[] newArray(int size) {
+                    return new BackStackState[size];
+                }
+            };
     final int mBreadCrumbShortTitleRes;
     final CharSequence mBreadCrumbShortTitleText;
     final int mBreadCrumbTitleRes;
@@ -98,7 +99,14 @@ final class BackStackState implements Parcelable {
             int pos2 = pos + 1;
             op.cmd = this.mOps[pos];
             if (FragmentManagerImpl.DEBUG) {
-                Log.v("FragmentManager", "Instantiate " + bse + " op #" + num + " base fragment #" + this.mOps[pos2]);
+                Log.v(
+                        "FragmentManager",
+                        "Instantiate "
+                                + bse
+                                + " op #"
+                                + num
+                                + " base fragment #"
+                                + this.mOps[pos2]);
             }
             int pos3 = pos2 + 1;
             int findex = this.mOps[pos2];

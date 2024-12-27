@@ -20,7 +20,7 @@ public final class Usb10ASFormatI extends UsbASFormat {
         int i = byteStream.getByte();
         this.mSampleFreqType = i;
         if (i == 0) {
-            this.mSampleRates = new int[]{byteStream.unpackUsbTriple(), 0};
+            this.mSampleRates = new int[] {byteStream.unpackUsbTriple(), 0};
             this.mSampleRates[1] = byteStream.unpackUsbTriple();
         } else {
             this.mSampleRates = new int[i];
@@ -31,7 +31,9 @@ public final class Usb10ASFormatI extends UsbASFormat {
         return this.mLength;
     }
 
-    @Override // com.android.server.usb.descriptors.UsbASFormat, com.android.server.usb.descriptors.UsbACInterface, com.android.server.usb.descriptors.UsbDescriptor
+    @Override // com.android.server.usb.descriptors.UsbASFormat,
+              // com.android.server.usb.descriptors.UsbACInterface,
+              // com.android.server.usb.descriptors.UsbDescriptor
     public final void report(TextReportCanvas textReportCanvas) {
         super.report(textReportCanvas);
         textReportCanvas.openList();

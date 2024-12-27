@@ -10,7 +10,8 @@ import java.util.function.Predicate;
 /* loaded from: classes5.dex */
 public class CustomFeatureFlags implements FeatureFlags {
     private BiPredicate<String, Predicate<FeatureFlags>> mGetValueImpl;
-    private Set<String> mReadOnlyFlagsSet = new HashSet(Arrays.asList(Flags.FLAG_ADD_MEDIA_METRICS_EDITING, ""));
+    private Set<String> mReadOnlyFlagsSet =
+            new HashSet(Arrays.asList(Flags.FLAG_ADD_MEDIA_METRICS_EDITING, ""));
 
     public CustomFeatureFlags(BiPredicate<String, Predicate<FeatureFlags>> getValueImpl) {
         this.mGetValueImpl = getValueImpl;
@@ -18,12 +19,15 @@ public class CustomFeatureFlags implements FeatureFlags {
 
     @Override // com.android.internal.hidden_from_bootclasspath.com.android.media.editing.flags.FeatureFlags
     public boolean addMediaMetricsEditing() {
-        return getValue(Flags.FLAG_ADD_MEDIA_METRICS_EDITING, new Predicate() { // from class: com.android.internal.hidden_from_bootclasspath.com.android.media.editing.flags.CustomFeatureFlags$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return ((FeatureFlags) obj).addMediaMetricsEditing();
-            }
-        });
+        return getValue(
+                Flags.FLAG_ADD_MEDIA_METRICS_EDITING,
+                new Predicate() { // from class:
+                                  // com.android.internal.hidden_from_bootclasspath.com.android.media.editing.flags.CustomFeatureFlags$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        return ((FeatureFlags) obj).addMediaMetricsEditing();
+                    }
+                });
     }
 
     public boolean isFlagReadOnlyOptimized(String flagName) {

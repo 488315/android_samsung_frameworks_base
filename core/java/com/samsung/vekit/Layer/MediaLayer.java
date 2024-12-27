@@ -11,7 +11,15 @@ public class MediaLayer extends Layer {
     public MediaLayer(VEContext context, int id, String name) {
         super(context, LayerType.MEDIA, id, name);
         this.volume = 100;
-        this.availableTypes = new ItemType[]{ItemType.IMAGE, ItemType.VIDEO, ItemType.COLOR, ItemType.AUDIO, ItemType.EMPTY, ItemType.PORTRAIT_VIDEO};
+        this.availableTypes =
+                new ItemType[] {
+                    ItemType.IMAGE,
+                    ItemType.VIDEO,
+                    ItemType.COLOR,
+                    ItemType.AUDIO,
+                    ItemType.EMPTY,
+                    ItemType.PORTRAIT_VIDEO
+                };
     }
 
     public int getVolume() {

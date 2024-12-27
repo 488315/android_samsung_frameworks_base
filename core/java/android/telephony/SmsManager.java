@@ -15,6 +15,7 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Pair;
+
 import com.android.internal.telephony.EncodeException;
 import com.android.internal.telephony.GsmAlphabet;
 import com.android.internal.telephony.IIntegerConsumer;
@@ -25,7 +26,9 @@ import com.android.internal.telephony.SmsRawData;
 import com.android.internal.telephony.TelephonyFeatures;
 import com.android.internal.telephony.TelephonyProperties;
 import com.android.internal.telephony.uicc.IccUtils;
+
 import com.samsung.android.telephony.gsm.SemCbConfig;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -40,7 +43,8 @@ public final class SmsManager {
     public static final int CDMA_SMS_RECORD_LENGTH = 255;
     public static final String EXTRA_MMS_DATA = "android.telephony.extra.MMS_DATA";
     public static final String EXTRA_MMS_HTTP_STATUS = "android.telephony.extra.MMS_HTTP_STATUS";
-    public static final String EXTRA_SIM_SUBSCRIPTION_ID = "android.telephony.extra.SIM_SUBSCRIPTION_ID";
+    public static final String EXTRA_SIM_SUBSCRIPTION_ID =
+            "android.telephony.extra.SIM_SUBSCRIPTION_ID";
     public static final String EXTRA_SMS_MESSAGE = "android.telephony.extra.SMS_MESSAGE";
     public static final String EXTRA_STATUS = "android.telephony.extra.STATUS";
     private static final long GET_TARGET_SDK_VERSION_CODE_CHANGE = 145147528;
@@ -74,14 +78,18 @@ public final class SmsManager {
     public static final String MMS_CONFIG_NAI_SUFFIX = "naiSuffix";
     public static final String MMS_CONFIG_NOTIFY_WAP_MMSC_ENABLED = "enabledNotifyWapMMSC";
     public static final String MMS_CONFIG_RECIPIENT_LIMIT = "recipientLimit";
-    public static final String MMS_CONFIG_SEND_MULTIPART_SMS_AS_SEPARATE_MESSAGES = "sendMultipartSmsAsSeparateMessages";
-    public static final String MMS_CONFIG_SHOW_CELL_BROADCAST_APP_LINKS = "config_cellBroadcastAppLinks";
+    public static final String MMS_CONFIG_SEND_MULTIPART_SMS_AS_SEPARATE_MESSAGES =
+            "sendMultipartSmsAsSeparateMessages";
+    public static final String MMS_CONFIG_SHOW_CELL_BROADCAST_APP_LINKS =
+            "config_cellBroadcastAppLinks";
     public static final String MMS_CONFIG_SMS_DELIVERY_REPORT_ENABLED = "enableSMSDeliveryReports";
-    public static final String MMS_CONFIG_SMS_TO_MMS_TEXT_LENGTH_THRESHOLD = "smsToMmsTextLengthThreshold";
+    public static final String MMS_CONFIG_SMS_TO_MMS_TEXT_LENGTH_THRESHOLD =
+            "smsToMmsTextLengthThreshold";
     public static final String MMS_CONFIG_SMS_TO_MMS_TEXT_THRESHOLD = "smsToMmsTextThreshold";
     public static final String MMS_CONFIG_SUBJECT_MAX_LENGTH = "maxSubjectLength";
     public static final String MMS_CONFIG_SUPPORT_HTTP_CHARSET_HEADER = "supportHttpCharsetHeader";
-    public static final String MMS_CONFIG_SUPPORT_MMS_CONTENT_DISPOSITION = "supportMmsContentDisposition";
+    public static final String MMS_CONFIG_SUPPORT_MMS_CONTENT_DISPOSITION =
+            "supportMmsContentDisposition";
     public static final String MMS_CONFIG_UA_PROF_TAG_NAME = "uaProfTagName";
     public static final String MMS_CONFIG_UA_PROF_URL = "uaProfUrl";
     public static final String MMS_CONFIG_USER_AGENT = "userAgent";
@@ -99,17 +107,13 @@ public final class SmsManager {
     public static final int MMS_ERROR_UNABLE_CONNECT_MMS = 3;
     public static final int MMS_ERROR_UNSPECIFIED = 1;
 
-    @SystemApi
-    public static final int PREMIUM_SMS_CONSENT_ALWAYS_ALLOW = 3;
+    @SystemApi public static final int PREMIUM_SMS_CONSENT_ALWAYS_ALLOW = 3;
 
-    @SystemApi
-    public static final int PREMIUM_SMS_CONSENT_ASK_USER = 1;
+    @SystemApi public static final int PREMIUM_SMS_CONSENT_ASK_USER = 1;
 
-    @SystemApi
-    public static final int PREMIUM_SMS_CONSENT_NEVER_ALLOW = 2;
+    @SystemApi public static final int PREMIUM_SMS_CONSENT_NEVER_ALLOW = 2;
 
-    @SystemApi
-    public static final int PREMIUM_SMS_CONSENT_UNKNOWN = 0;
+    @SystemApi public static final int PREMIUM_SMS_CONSENT_UNKNOWN = 0;
     public static final String REGEX_PREFIX_DELIMITER = ",";
     public static final int RESULT_BLUETOOTH_DISCONNECTED = 27;
     public static final int RESULT_CANCELLED = 23;
@@ -236,32 +240,28 @@ public final class SmsManager {
     private int mSubId;
     private static final Object sLockObject = new Object();
     private static final Map<Pair<Context, Integer>, SmsManager> sSubInstances = new ArrayMap();
-    private static final SmsManager DEFAULT_INSTANCE = getSmsManagerForContextAndSubscriptionId(null, Integer.MAX_VALUE);
+    private static final SmsManager DEFAULT_INSTANCE =
+            getSmsManagerForContextAndSubscriptionId(null, Integer.MAX_VALUE);
     static int mMsgEncodingType = 0;
 
-    public static abstract class FinancialSmsCallback {
+    public abstract static class FinancialSmsCallback {
         public abstract void onFinancialSmsMessages(CursorWindow cursorWindow);
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PremiumSmsConsent {
-    }
+    public @interface PremiumSmsConsent {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Result {
-    }
+    public @interface Result {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SMS_RP_CAUSE {
-    }
+    public @interface SMS_RP_CAUSE {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SmsShortCodeCategory {
-    }
+    public @interface SmsShortCodeCategory {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StatusOnIcc {
-    }
+    public @interface StatusOnIcc {}
 
     private interface SubscriptionResolverResult {
         void onFailure();
@@ -284,19 +284,74 @@ public final class SmsManager {
         return this.mContext.getAttributionTag();
     }
 
-    public void sendTextMessage(String destinationAddress, String scAddress, String text, PendingIntent sentIntent, PendingIntent deliveryIntent) {
-        sendTextMessageInternal(destinationAddress, scAddress, text, sentIntent, deliveryIntent, true, getOpPackageName(), getAttributionTag(), 0L);
+    public void sendTextMessage(
+            String destinationAddress,
+            String scAddress,
+            String text,
+            PendingIntent sentIntent,
+            PendingIntent deliveryIntent) {
+        sendTextMessageInternal(
+                destinationAddress,
+                scAddress,
+                text,
+                sentIntent,
+                deliveryIntent,
+                true,
+                getOpPackageName(),
+                getAttributionTag(),
+                0L);
     }
 
-    public void sendTextMessage(String destinationAddress, String scAddress, String text, PendingIntent sentIntent, PendingIntent deliveryIntent, long messageId) {
-        sendTextMessageInternal(destinationAddress, scAddress, text, sentIntent, deliveryIntent, true, getOpPackageName(), getAttributionTag(), messageId);
+    public void sendTextMessage(
+            String destinationAddress,
+            String scAddress,
+            String text,
+            PendingIntent sentIntent,
+            PendingIntent deliveryIntent,
+            long messageId) {
+        sendTextMessageInternal(
+                destinationAddress,
+                scAddress,
+                text,
+                sentIntent,
+                deliveryIntent,
+                true,
+                getOpPackageName(),
+                getAttributionTag(),
+                messageId);
     }
 
-    public void sendTextMessage(String destinationAddress, String scAddress, String text, PendingIntent sentIntent, PendingIntent deliveryIntent, int priority, boolean expectMore, int validityPeriod) {
-        sendTextMessageInternal(destinationAddress, scAddress, text, sentIntent, deliveryIntent, true, priority, expectMore, validityPeriod);
+    public void sendTextMessage(
+            String destinationAddress,
+            String scAddress,
+            String text,
+            PendingIntent sentIntent,
+            PendingIntent deliveryIntent,
+            int priority,
+            boolean expectMore,
+            int validityPeriod) {
+        sendTextMessageInternal(
+                destinationAddress,
+                scAddress,
+                text,
+                sentIntent,
+                deliveryIntent,
+                true,
+                priority,
+                expectMore,
+                validityPeriod);
     }
 
-    private void sendTextMessageInternal(final String destinationAddress, final String scAddress, final String text, final PendingIntent sentIntent, final PendingIntent deliveryIntent, final boolean persistMessage, final String packageName, final String attributionTag, final long messageId) {
+    private void sendTextMessageInternal(
+            final String destinationAddress,
+            final String scAddress,
+            final String text,
+            final PendingIntent sentIntent,
+            final PendingIntent deliveryIntent,
+            final boolean persistMessage,
+            final String packageName,
+            final String attributionTag,
+            final long messageId) {
         if (TextUtils.isEmpty(destinationAddress)) {
             throw new IllegalArgumentException("Invalid destinationAddress");
         }
@@ -307,39 +362,93 @@ public final class SmsManager {
             throw new IllegalArgumentException("Invalid message body");
         }
         if (persistMessage) {
-            resolveSubscriptionForOperation(new SubscriptionResolverResult() { // from class: android.telephony.SmsManager.1
-                @Override // android.telephony.SmsManager.SubscriptionResolverResult
-                public void onSuccess(int subId) {
-                    ISms iSms = SmsManager.getISmsServiceOrThrow();
-                    try {
-                        iSms.sendTextForSubscriber(subId, packageName, attributionTag, destinationAddress, scAddress, text, sentIntent, deliveryIntent, persistMessage, messageId);
-                    } catch (RemoteException e) {
-                        Log.e(SmsManager.TAG, "sendTextMessageInternal: Couldn't send SMS, exception - " + e.getMessage() + " " + SmsManager.formatCrossStackMessageId(messageId));
-                        SmsManager.notifySmsError(sentIntent, 31);
-                    }
-                }
+            resolveSubscriptionForOperation(
+                    new SubscriptionResolverResult() { // from class: android.telephony.SmsManager.1
+                        @Override // android.telephony.SmsManager.SubscriptionResolverResult
+                        public void onSuccess(int subId) {
+                            ISms iSms = SmsManager.getISmsServiceOrThrow();
+                            try {
+                                iSms.sendTextForSubscriber(
+                                        subId,
+                                        packageName,
+                                        attributionTag,
+                                        destinationAddress,
+                                        scAddress,
+                                        text,
+                                        sentIntent,
+                                        deliveryIntent,
+                                        persistMessage,
+                                        messageId);
+                            } catch (RemoteException e) {
+                                Log.e(
+                                        SmsManager.TAG,
+                                        "sendTextMessageInternal: Couldn't send SMS, exception - "
+                                                + e.getMessage()
+                                                + " "
+                                                + SmsManager.formatCrossStackMessageId(messageId));
+                                SmsManager.notifySmsError(sentIntent, 31);
+                            }
+                        }
 
-                @Override // android.telephony.SmsManager.SubscriptionResolverResult
-                public void onFailure() {
-                    SmsManager.notifySmsError(sentIntent, 32);
-                }
-            });
+                        @Override // android.telephony.SmsManager.SubscriptionResolverResult
+                        public void onFailure() {
+                            SmsManager.notifySmsError(sentIntent, 32);
+                        }
+                    });
             return;
         }
         ISms iSms = getISmsServiceOrThrow();
         try {
-            iSms.sendTextForSubscriber(getSubscriptionId(), packageName, attributionTag, destinationAddress, scAddress, text, sentIntent, deliveryIntent, persistMessage, messageId);
+            iSms.sendTextForSubscriber(
+                    getSubscriptionId(),
+                    packageName,
+                    attributionTag,
+                    destinationAddress,
+                    scAddress,
+                    text,
+                    sentIntent,
+                    deliveryIntent,
+                    persistMessage,
+                    messageId);
         } catch (RemoteException e) {
-            Log.e(TAG, "sendTextMessageInternal (no persist): Couldn't send SMS, exception - " + e.getMessage() + " " + formatCrossStackMessageId(messageId));
+            Log.e(
+                    TAG,
+                    "sendTextMessageInternal (no persist): Couldn't send SMS, exception - "
+                            + e.getMessage()
+                            + " "
+                            + formatCrossStackMessageId(messageId));
             notifySmsError(sentIntent, 31);
         }
     }
 
-    public void sendTextMessageWithoutPersisting(String destinationAddress, String scAddress, String text, PendingIntent sentIntent, PendingIntent deliveryIntent) {
-        sendTextMessageInternal(destinationAddress, scAddress, text, sentIntent, deliveryIntent, false, getOpPackageName(), getAttributionTag(), 0L);
+    public void sendTextMessageWithoutPersisting(
+            String destinationAddress,
+            String scAddress,
+            String text,
+            PendingIntent sentIntent,
+            PendingIntent deliveryIntent) {
+        sendTextMessageInternal(
+                destinationAddress,
+                scAddress,
+                text,
+                sentIntent,
+                deliveryIntent,
+                false,
+                getOpPackageName(),
+                getAttributionTag(),
+                0L);
     }
 
-    private void sendTextMessageInternal(final String destinationAddress, final String scAddress, final String text, final PendingIntent sentIntent, final PendingIntent deliveryIntent, final boolean persistMessage, int priority, final boolean expectMore, int validityPeriod) {
+    private void sendTextMessageInternal(
+            final String destinationAddress,
+            final String scAddress,
+            final String text,
+            final PendingIntent sentIntent,
+            final PendingIntent deliveryIntent,
+            final boolean persistMessage,
+            int priority,
+            final boolean expectMore,
+            int validityPeriod) {
         int priority2;
         int validityPeriod2 = validityPeriod;
         if (TextUtils.isEmpty(destinationAddress)) {
@@ -361,41 +470,73 @@ public final class SmsManager {
         final int finalPriority = priority2;
         final int finalValidity = validityPeriod2;
         if (persistMessage) {
-            resolveSubscriptionForOperation(new SubscriptionResolverResult() { // from class: android.telephony.SmsManager.2
-                @Override // android.telephony.SmsManager.SubscriptionResolverResult
-                public void onSuccess(int subId) {
-                    try {
-                        ISms iSms = SmsManager.getISmsServiceOrThrow();
-                        if (iSms != null) {
-                            iSms.sendTextForSubscriberWithOptions(subId, null, SmsManager.this.getAttributionTag(), destinationAddress, scAddress, text, sentIntent, deliveryIntent, persistMessage, finalPriority, expectMore, finalValidity);
+            resolveSubscriptionForOperation(
+                    new SubscriptionResolverResult() { // from class: android.telephony.SmsManager.2
+                        @Override // android.telephony.SmsManager.SubscriptionResolverResult
+                        public void onSuccess(int subId) {
+                            try {
+                                ISms iSms = SmsManager.getISmsServiceOrThrow();
+                                if (iSms != null) {
+                                    iSms.sendTextForSubscriberWithOptions(
+                                            subId,
+                                            null,
+                                            SmsManager.this.getAttributionTag(),
+                                            destinationAddress,
+                                            scAddress,
+                                            text,
+                                            sentIntent,
+                                            deliveryIntent,
+                                            persistMessage,
+                                            finalPriority,
+                                            expectMore,
+                                            finalValidity);
+                                }
+                            } catch (RemoteException e) {
+                                Log.e(
+                                        SmsManager.TAG,
+                                        "sendTextMessageInternal: Couldn't send SMS, exception - "
+                                                + e.getMessage());
+                                SmsManager.notifySmsError(sentIntent, 31);
+                            }
                         }
-                    } catch (RemoteException e) {
-                        Log.e(SmsManager.TAG, "sendTextMessageInternal: Couldn't send SMS, exception - " + e.getMessage());
-                        SmsManager.notifySmsError(sentIntent, 31);
-                    }
-                }
 
-                @Override // android.telephony.SmsManager.SubscriptionResolverResult
-                public void onFailure() {
-                    SmsManager.notifySmsError(sentIntent, 32);
-                }
-            });
+                        @Override // android.telephony.SmsManager.SubscriptionResolverResult
+                        public void onFailure() {
+                            SmsManager.notifySmsError(sentIntent, 32);
+                        }
+                    });
             return;
         }
         try {
             ISms iSms = getISmsServiceOrThrow();
             if (iSms != null) {
-                iSms.sendTextForSubscriberWithOptions(getSubscriptionId(), null, getAttributionTag(), destinationAddress, scAddress, text, sentIntent, deliveryIntent, persistMessage, finalPriority, expectMore, finalValidity);
+                iSms.sendTextForSubscriberWithOptions(
+                        getSubscriptionId(),
+                        null,
+                        getAttributionTag(),
+                        destinationAddress,
+                        scAddress,
+                        text,
+                        sentIntent,
+                        deliveryIntent,
+                        persistMessage,
+                        finalPriority,
+                        expectMore,
+                        finalValidity);
             }
         } catch (RemoteException e) {
-            Log.e(TAG, "sendTextMessageInternal(no persist): Couldn't send SMS, exception - " + e.getMessage());
+            Log.e(
+                    TAG,
+                    "sendTextMessageInternal(no persist): Couldn't send SMS, exception - "
+                            + e.getMessage());
             notifySmsError(sentIntent, 31);
         }
     }
 
     public void injectSmsPdu(byte[] pdu, String format, PendingIntent receivedIntent) {
         if (!format.equals("3gpp") && !format.equals("3gpp2")) {
-            throw new IllegalArgumentException("Invalid pdu format. format must be either 3gpp or 3gpp2");
+            throw new IllegalArgumentException(
+                    "Invalid pdu format. format must be either 3gpp or 3gpp2");
         }
         try {
             ISms iSms = TelephonyManager.getSmsService();
@@ -419,19 +560,73 @@ public final class SmsManager {
         return SmsMessage.fragmentText(text, this);
     }
 
-    public void sendMultipartTextMessage(String destinationAddress, String scAddress, ArrayList<String> parts, ArrayList<PendingIntent> sentIntents, ArrayList<PendingIntent> deliveryIntents) {
-        sendMultipartTextMessageInternal(destinationAddress, scAddress, (List<String>) parts, (List<PendingIntent>) sentIntents, (List<PendingIntent>) deliveryIntents, true, getOpPackageName(), getAttributionTag(), 0L);
+    public void sendMultipartTextMessage(
+            String destinationAddress,
+            String scAddress,
+            ArrayList<String> parts,
+            ArrayList<PendingIntent> sentIntents,
+            ArrayList<PendingIntent> deliveryIntents) {
+        sendMultipartTextMessageInternal(
+                destinationAddress,
+                scAddress,
+                (List<String>) parts,
+                (List<PendingIntent>) sentIntents,
+                (List<PendingIntent>) deliveryIntents,
+                true,
+                getOpPackageName(),
+                getAttributionTag(),
+                0L);
     }
 
-    public void sendMultipartTextMessage(String destinationAddress, String scAddress, List<String> parts, List<PendingIntent> sentIntents, List<PendingIntent> deliveryIntents, long messageId) {
-        sendMultipartTextMessageInternal(destinationAddress, scAddress, parts, sentIntents, deliveryIntents, true, getOpPackageName(), getAttributionTag(), messageId);
+    public void sendMultipartTextMessage(
+            String destinationAddress,
+            String scAddress,
+            List<String> parts,
+            List<PendingIntent> sentIntents,
+            List<PendingIntent> deliveryIntents,
+            long messageId) {
+        sendMultipartTextMessageInternal(
+                destinationAddress,
+                scAddress,
+                parts,
+                sentIntents,
+                deliveryIntents,
+                true,
+                getOpPackageName(),
+                getAttributionTag(),
+                messageId);
     }
 
-    public void sendMultipartTextMessage(String destinationAddress, String scAddress, List<String> parts, List<PendingIntent> sentIntents, List<PendingIntent> deliveryIntents, String packageName, String attributionTag) {
-        sendMultipartTextMessageInternal(destinationAddress, scAddress, parts, sentIntents, deliveryIntents, true, packageName, attributionTag, 0L);
+    public void sendMultipartTextMessage(
+            String destinationAddress,
+            String scAddress,
+            List<String> parts,
+            List<PendingIntent> sentIntents,
+            List<PendingIntent> deliveryIntents,
+            String packageName,
+            String attributionTag) {
+        sendMultipartTextMessageInternal(
+                destinationAddress,
+                scAddress,
+                parts,
+                sentIntents,
+                deliveryIntents,
+                true,
+                packageName,
+                attributionTag,
+                0L);
     }
 
-    private void sendMultipartTextMessageInternal(final String destinationAddress, final String scAddress, final List<String> parts, final List<PendingIntent> sentIntents, final List<PendingIntent> deliveryIntents, final boolean persistMessage, final String packageName, final String attributionTag, final long messageId) {
+    private void sendMultipartTextMessageInternal(
+            final String destinationAddress,
+            final String scAddress,
+            final List<String> parts,
+            final List<PendingIntent> sentIntents,
+            final List<PendingIntent> deliveryIntents,
+            final boolean persistMessage,
+            final String packageName,
+            final String attributionTag,
+            final long messageId) {
         PendingIntent deliveryIntent;
         if (TextUtils.isEmpty(destinationAddress)) {
             throw new IllegalArgumentException("Invalid destinationAddress");
@@ -440,34 +635,70 @@ public final class SmsManager {
             if ((parts != null && parts.size() >= 1) || isSupportSendingEmptySms()) {
                 if (parts.size() > 1) {
                     if (persistMessage) {
-                        resolveSubscriptionForOperation(new SubscriptionResolverResult() { // from class: android.telephony.SmsManager.3
-                            @Override // android.telephony.SmsManager.SubscriptionResolverResult
-                            public void onSuccess(int subId) {
-                                try {
-                                    ISms iSms = SmsManager.getISmsServiceOrThrow();
-                                    iSms.sendMultipartTextForSubscriber(subId, packageName, attributionTag, destinationAddress, scAddress, parts, sentIntents, deliveryIntents, persistMessage, messageId);
-                                } catch (RemoteException e) {
-                                    Log.e(SmsManager.TAG, "sendMultipartTextMessageInternal: Couldn't send SMS - " + e.getMessage() + " " + SmsManager.formatCrossStackMessageId(messageId));
-                                    SmsManager.notifySmsError((List<PendingIntent>) sentIntents, 31);
-                                }
-                            }
+                        resolveSubscriptionForOperation(
+                                new SubscriptionResolverResult() { // from class:
+                                    // android.telephony.SmsManager.3
+                                    @Override // android.telephony.SmsManager.SubscriptionResolverResult
+                                    public void onSuccess(int subId) {
+                                        try {
+                                            ISms iSms = SmsManager.getISmsServiceOrThrow();
+                                            iSms.sendMultipartTextForSubscriber(
+                                                    subId,
+                                                    packageName,
+                                                    attributionTag,
+                                                    destinationAddress,
+                                                    scAddress,
+                                                    parts,
+                                                    sentIntents,
+                                                    deliveryIntents,
+                                                    persistMessage,
+                                                    messageId);
+                                        } catch (RemoteException e) {
+                                            Log.e(
+                                                    SmsManager.TAG,
+                                                    "sendMultipartTextMessageInternal: Couldn't"
+                                                        + " send SMS - "
+                                                            + e.getMessage()
+                                                            + " "
+                                                            + SmsManager.formatCrossStackMessageId(
+                                                                    messageId));
+                                            SmsManager.notifySmsError(
+                                                    (List<PendingIntent>) sentIntents, 31);
+                                        }
+                                    }
 
-                            @Override // android.telephony.SmsManager.SubscriptionResolverResult
-                            public void onFailure() {
-                                SmsManager.notifySmsError((List<PendingIntent>) sentIntents, 32);
-                            }
-                        });
+                                    @Override // android.telephony.SmsManager.SubscriptionResolverResult
+                                    public void onFailure() {
+                                        SmsManager.notifySmsError(
+                                                (List<PendingIntent>) sentIntents, 32);
+                                    }
+                                });
                         return;
                     }
                     try {
                         ISms iSms = getISmsServiceOrThrow();
                         if (iSms != null) {
-                            iSms.sendMultipartTextForSubscriber(getSubscriptionId(), packageName, attributionTag, destinationAddress, scAddress, parts, sentIntents, deliveryIntents, persistMessage, messageId);
+                            iSms.sendMultipartTextForSubscriber(
+                                    getSubscriptionId(),
+                                    packageName,
+                                    attributionTag,
+                                    destinationAddress,
+                                    scAddress,
+                                    parts,
+                                    sentIntents,
+                                    deliveryIntents,
+                                    persistMessage,
+                                    messageId);
                             return;
                         }
                         return;
                     } catch (RemoteException e) {
-                        Log.e(TAG, "sendMultipartTextMessageInternal: Couldn't send SMS - " + e.getMessage() + " " + formatCrossStackMessageId(messageId));
+                        Log.e(
+                                TAG,
+                                "sendMultipartTextMessageInternal: Couldn't send SMS - "
+                                        + e.getMessage()
+                                        + " "
+                                        + formatCrossStackMessageId(messageId));
                         notifySmsError(sentIntents, 31);
                         return;
                     }
@@ -482,7 +713,16 @@ public final class SmsManager {
                 } else {
                     deliveryIntent = null;
                 }
-                sendTextMessageInternal(destinationAddress, scAddress, parts.get(0), sentIntent, deliveryIntent, true, packageName, attributionTag, messageId);
+                sendTextMessageInternal(
+                        destinationAddress,
+                        scAddress,
+                        parts.get(0),
+                        sentIntent,
+                        deliveryIntent,
+                        true,
+                        packageName,
+                        attributionTag,
+                        messageId);
                 return;
             }
             throw new IllegalArgumentException("Invalid message body");
@@ -491,15 +731,55 @@ public final class SmsManager {
     }
 
     @SystemApi
-    public void sendMultipartTextMessageWithoutPersisting(String destinationAddress, String scAddress, List<String> parts, List<PendingIntent> sentIntents, List<PendingIntent> deliveryIntents) {
-        sendMultipartTextMessageInternal(destinationAddress, scAddress, parts, sentIntents, deliveryIntents, false, getOpPackageName(), getAttributionTag(), 0L);
+    public void sendMultipartTextMessageWithoutPersisting(
+            String destinationAddress,
+            String scAddress,
+            List<String> parts,
+            List<PendingIntent> sentIntents,
+            List<PendingIntent> deliveryIntents) {
+        sendMultipartTextMessageInternal(
+                destinationAddress,
+                scAddress,
+                parts,
+                sentIntents,
+                deliveryIntents,
+                false,
+                getOpPackageName(),
+                getAttributionTag(),
+                0L);
     }
 
-    public void sendMultipartTextMessage(String destinationAddress, String scAddress, ArrayList<String> parts, ArrayList<PendingIntent> sentIntents, ArrayList<PendingIntent> deliveryIntents, int priority, boolean expectMore, int validityPeriod) {
-        sendMultipartTextMessageInternal(destinationAddress, scAddress, (List<String>) parts, (List<PendingIntent>) sentIntents, (List<PendingIntent>) deliveryIntents, true, priority, expectMore, validityPeriod);
+    public void sendMultipartTextMessage(
+            String destinationAddress,
+            String scAddress,
+            ArrayList<String> parts,
+            ArrayList<PendingIntent> sentIntents,
+            ArrayList<PendingIntent> deliveryIntents,
+            int priority,
+            boolean expectMore,
+            int validityPeriod) {
+        sendMultipartTextMessageInternal(
+                destinationAddress,
+                scAddress,
+                (List<String>) parts,
+                (List<PendingIntent>) sentIntents,
+                (List<PendingIntent>) deliveryIntents,
+                true,
+                priority,
+                expectMore,
+                validityPeriod);
     }
 
-    private void sendMultipartTextMessageInternal(final String destinationAddress, final String scAddress, final List<String> parts, final List<PendingIntent> sentIntents, final List<PendingIntent> deliveryIntents, final boolean persistMessage, int priority, final boolean expectMore, int validityPeriod) {
+    private void sendMultipartTextMessageInternal(
+            final String destinationAddress,
+            final String scAddress,
+            final List<String> parts,
+            final List<PendingIntent> sentIntents,
+            final List<PendingIntent> deliveryIntents,
+            final boolean persistMessage,
+            int priority,
+            final boolean expectMore,
+            int validityPeriod) {
         int priority2;
         int validityPeriod2;
         List<PendingIntent> list;
@@ -525,25 +805,43 @@ public final class SmsManager {
             final int finalPriority = priority2;
             final int finalValidity = validityPeriod2;
             if (persistMessage) {
-                resolveSubscriptionForOperation(new SubscriptionResolverResult() { // from class: android.telephony.SmsManager.4
-                    @Override // android.telephony.SmsManager.SubscriptionResolverResult
-                    public void onSuccess(int subId) {
-                        try {
-                            ISms iSms = SmsManager.getISmsServiceOrThrow();
-                            if (iSms != null) {
-                                iSms.sendMultipartTextForSubscriberWithOptions(subId, null, null, destinationAddress, scAddress, parts, sentIntents, deliveryIntents, persistMessage, finalPriority, expectMore, finalValidity);
+                resolveSubscriptionForOperation(
+                        new SubscriptionResolverResult() { // from class:
+                                                           // android.telephony.SmsManager.4
+                            @Override // android.telephony.SmsManager.SubscriptionResolverResult
+                            public void onSuccess(int subId) {
+                                try {
+                                    ISms iSms = SmsManager.getISmsServiceOrThrow();
+                                    if (iSms != null) {
+                                        iSms.sendMultipartTextForSubscriberWithOptions(
+                                                subId,
+                                                null,
+                                                null,
+                                                destinationAddress,
+                                                scAddress,
+                                                parts,
+                                                sentIntents,
+                                                deliveryIntents,
+                                                persistMessage,
+                                                finalPriority,
+                                                expectMore,
+                                                finalValidity);
+                                    }
+                                } catch (RemoteException e) {
+                                    Log.e(
+                                            SmsManager.TAG,
+                                            "sendMultipartTextMessageInternal: Couldn't send SMS - "
+                                                    + e.getMessage());
+                                    SmsManager.notifySmsError(
+                                            (List<PendingIntent>) sentIntents, 31);
+                                }
                             }
-                        } catch (RemoteException e) {
-                            Log.e(SmsManager.TAG, "sendMultipartTextMessageInternal: Couldn't send SMS - " + e.getMessage());
-                            SmsManager.notifySmsError((List<PendingIntent>) sentIntents, 31);
-                        }
-                    }
 
-                    @Override // android.telephony.SmsManager.SubscriptionResolverResult
-                    public void onFailure() {
-                        SmsManager.notifySmsError((List<PendingIntent>) sentIntents, 32);
-                    }
-                });
+                            @Override // android.telephony.SmsManager.SubscriptionResolverResult
+                            public void onFailure() {
+                                SmsManager.notifySmsError((List<PendingIntent>) sentIntents, 32);
+                            }
+                        });
                 return;
             }
             try {
@@ -551,10 +849,26 @@ public final class SmsManager {
                 if (iSms != null) {
                     list = sentIntents;
                     try {
-                        iSms.sendMultipartTextForSubscriberWithOptions(getSubscriptionId(), null, null, destinationAddress, scAddress, parts, sentIntents, deliveryIntents, persistMessage, finalPriority, expectMore, finalValidity);
+                        iSms.sendMultipartTextForSubscriberWithOptions(
+                                getSubscriptionId(),
+                                null,
+                                null,
+                                destinationAddress,
+                                scAddress,
+                                parts,
+                                sentIntents,
+                                deliveryIntents,
+                                persistMessage,
+                                finalPriority,
+                                expectMore,
+                                finalValidity);
                     } catch (RemoteException e) {
                         e = e;
-                        Log.e(TAG, "sendMultipartTextMessageInternal (no persist): Couldn't send SMS - " + e.getMessage());
+                        Log.e(
+                                TAG,
+                                "sendMultipartTextMessageInternal (no persist): Couldn't send SMS -"
+                                    + " "
+                                        + e.getMessage());
                         notifySmsError(list, 31);
                     }
                 }
@@ -571,11 +885,26 @@ public final class SmsManager {
             if (deliveryIntents != null && deliveryIntents.size() > 0) {
                 deliveryIntent = deliveryIntents.get(0);
             }
-            sendTextMessageInternal(destinationAddress, scAddress, parts.get(0), sentIntent, deliveryIntent, persistMessage, priority2, expectMore, validityPeriod2);
+            sendTextMessageInternal(
+                    destinationAddress,
+                    scAddress,
+                    parts.get(0),
+                    sentIntent,
+                    deliveryIntent,
+                    persistMessage,
+                    priority2,
+                    expectMore,
+                    validityPeriod2);
         }
     }
 
-    public void sendDataMessage(final String destinationAddress, final String scAddress, final short destinationPort, final byte[] data, final PendingIntent sentIntent, final PendingIntent deliveryIntent) {
+    public void sendDataMessage(
+            final String destinationAddress,
+            final String scAddress,
+            final short destinationPort,
+            final byte[] data,
+            final PendingIntent sentIntent,
+            final PendingIntent deliveryIntent) {
         if (TextUtils.isEmpty(destinationAddress)) {
             throw new IllegalArgumentException("Invalid destinationAddress");
         }
@@ -585,23 +914,36 @@ public final class SmsManager {
         if (data == null || data.length == 0) {
             throw new IllegalArgumentException("Invalid message data");
         }
-        resolveSubscriptionForOperation(new SubscriptionResolverResult() { // from class: android.telephony.SmsManager.5
-            @Override // android.telephony.SmsManager.SubscriptionResolverResult
-            public void onSuccess(int subId) {
-                try {
-                    ISms iSms = SmsManager.getISmsServiceOrThrow();
-                    iSms.sendDataForSubscriber(subId, null, SmsManager.this.getAttributionTag(), destinationAddress, scAddress, destinationPort & 65535, data, sentIntent, deliveryIntent);
-                } catch (RemoteException e) {
-                    Log.e(SmsManager.TAG, "sendDataMessage: Couldn't send SMS - Exception: " + e.getMessage());
-                    SmsManager.notifySmsError(sentIntent, 31);
-                }
-            }
+        resolveSubscriptionForOperation(
+                new SubscriptionResolverResult() { // from class: android.telephony.SmsManager.5
+                    @Override // android.telephony.SmsManager.SubscriptionResolverResult
+                    public void onSuccess(int subId) {
+                        try {
+                            ISms iSms = SmsManager.getISmsServiceOrThrow();
+                            iSms.sendDataForSubscriber(
+                                    subId,
+                                    null,
+                                    SmsManager.this.getAttributionTag(),
+                                    destinationAddress,
+                                    scAddress,
+                                    destinationPort & 65535,
+                                    data,
+                                    sentIntent,
+                                    deliveryIntent);
+                        } catch (RemoteException e) {
+                            Log.e(
+                                    SmsManager.TAG,
+                                    "sendDataMessage: Couldn't send SMS - Exception: "
+                                            + e.getMessage());
+                            SmsManager.notifySmsError(sentIntent, 31);
+                        }
+                    }
 
-            @Override // android.telephony.SmsManager.SubscriptionResolverResult
-            public void onFailure() {
-                SmsManager.notifySmsError(sentIntent, 32);
-            }
-        });
+                    @Override // android.telephony.SmsManager.SubscriptionResolverResult
+                    public void onFailure() {
+                        SmsManager.notifySmsError(sentIntent, 32);
+                    }
+                });
     }
 
     @Deprecated
@@ -638,7 +980,9 @@ public final class SmsManager {
 
     public int getSubscriptionId() {
         try {
-            return this.mSubId == Integer.MAX_VALUE ? getISmsServiceOrThrow().getPreferredSmsSubscription() : this.mSubId;
+            return this.mSubId == Integer.MAX_VALUE
+                    ? getISmsServiceOrThrow().getPreferredSmsSubscription()
+                    : this.mSubId;
         } catch (RemoteException e) {
             return -1;
         }
@@ -656,14 +1000,23 @@ public final class SmsManager {
             Log.e(TAG, "resolveSubscriptionForOperation", ex);
         }
         if (isSmsSimPickActivityNeeded) {
-            Log.d(TAG, "resolveSubscriptionForOperation isSmsSimPickActivityNeeded is true for calling package. ");
+            Log.d(
+                    TAG,
+                    "resolveSubscriptionForOperation isSmsSimPickActivityNeeded is true for calling"
+                        + " package. ");
             try {
-                getITelephony().enqueueSmsPickResult(null, null, new IIntegerConsumer.Stub() { // from class: android.telephony.SmsManager.6
-                    @Override // com.android.internal.telephony.IIntegerConsumer
-                    public void accept(int subId2) {
-                        SmsManager.this.sendResolverResult(resolverResult, subId2, true);
-                    }
-                });
+                getITelephony()
+                        .enqueueSmsPickResult(
+                                null,
+                                null,
+                                new IIntegerConsumer
+                                        .Stub() { // from class: android.telephony.SmsManager.6
+                                    @Override // com.android.internal.telephony.IIntegerConsumer
+                                    public void accept(int subId2) {
+                                        SmsManager.this.sendResolverResult(
+                                                resolverResult, subId2, true);
+                                    }
+                                });
                 return;
             } catch (RemoteException ex2) {
                 Log.e(TAG, "Unable to launch activity", ex2);
@@ -675,10 +1028,12 @@ public final class SmsManager {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void sendResolverResult(SubscriptionResolverResult resolverResult, int subId, boolean pickActivityShown) {
+    public void sendResolverResult(
+            SubscriptionResolverResult resolverResult, int subId, boolean pickActivityShown) {
         if (SubscriptionManager.isValidSubscriptionId(subId)) {
             resolverResult.onSuccess(subId);
-        } else if (!Compatibility.isChangeEnabled(GET_TARGET_SDK_VERSION_CODE_CHANGE) && !pickActivityShown) {
+        } else if (!Compatibility.isChangeEnabled(GET_TARGET_SDK_VERSION_CODE_CHANGE)
+                && !pickActivityShown) {
             resolverResult.onSuccess(subId);
         } else {
             resolverResult.onFailure();
@@ -686,7 +1041,11 @@ public final class SmsManager {
     }
 
     private static ITelephony getITelephony() {
-        ITelephony binder = ITelephony.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getTelephonyServiceRegisterer().get());
+        ITelephony binder =
+                ITelephony.Stub.asInterface(
+                        TelephonyFrameworkInitializer.getTelephonyServiceManager()
+                                .getTelephonyServiceRegisterer()
+                                .get());
         if (binder == null) {
             throw new RuntimeException("Could not find Telephony Service.");
         }
@@ -734,7 +1093,9 @@ public final class SmsManager {
             if (iSms == null) {
                 return false;
             }
-            boolean success = iSms.copyMessageToIccEfForSubscriber(getSubscriptionId(), null, status, pdu, smsc);
+            boolean success =
+                    iSms.copyMessageToIccEfForSubscriber(
+                            getSubscriptionId(), null, status, pdu, smsc);
             return success;
         } catch (RemoteException e) {
             return false;
@@ -747,7 +1108,9 @@ public final class SmsManager {
             if (iSms == null) {
                 return false;
             }
-            boolean success = iSms.updateMessageOnIccEfForSubscriber(getSubscriptionId(), null, messageIndex, 0, null);
+            boolean success =
+                    iSms.updateMessageOnIccEfForSubscriber(
+                            getSubscriptionId(), null, messageIndex, 0, null);
             return success;
         } catch (RemoteException e) {
             return false;
@@ -760,7 +1123,9 @@ public final class SmsManager {
             if (iSms == null) {
                 return false;
             }
-            boolean success = iSms.updateMessageOnIccEfForSubscriber(getSubscriptionId(), null, messageIndex, newStatus, pdu);
+            boolean success =
+                    iSms.updateMessageOnIccEfForSubscriber(
+                            getSubscriptionId(), null, messageIndex, newStatus, pdu);
             return success;
         } catch (RemoteException e) {
             return false;
@@ -794,8 +1159,15 @@ public final class SmsManager {
             ISms iSms = getISmsService();
             if (iSms != null) {
                 int subId = getSubscriptionId();
-                success = iSms.enableCellBroadcastRangeForSubscriber(subId, startMessageId, endMessageId, ranType);
-                com.android.telephony.Rlog.d(TAG, "enableCellBroadcastRange: " + (success ? "succeeded" : "failed") + " at calling enableCellBroadcastRangeForSubscriber. subId = " + subId);
+                success =
+                        iSms.enableCellBroadcastRangeForSubscriber(
+                                subId, startMessageId, endMessageId, ranType);
+                com.android.telephony.Rlog.d(
+                        TAG,
+                        "enableCellBroadcastRange: "
+                                + (success ? "succeeded" : "failed")
+                                + " at calling enableCellBroadcastRangeForSubscriber. subId = "
+                                + subId);
             }
         } catch (RemoteException ex) {
             com.android.telephony.Rlog.d(TAG, "enableCellBroadcastRange: ", ex);
@@ -814,8 +1186,15 @@ public final class SmsManager {
             ISms iSms = getISmsService();
             if (iSms != null) {
                 int subId = getSubscriptionId();
-                success = iSms.disableCellBroadcastRangeForSubscriber(subId, startMessageId, endMessageId, ranType);
-                com.android.telephony.Rlog.d(TAG, "disableCellBroadcastRange: " + (success ? "succeeded" : "failed") + " at calling disableCellBroadcastRangeForSubscriber. subId = " + subId);
+                success =
+                        iSms.disableCellBroadcastRangeForSubscriber(
+                                subId, startMessageId, endMessageId, ranType);
+                com.android.telephony.Rlog.d(
+                        TAG,
+                        "disableCellBroadcastRange: "
+                                + (success ? "succeeded" : "failed")
+                                + " at calling disableCellBroadcastRangeForSubscriber. subId = "
+                                + subId);
             }
         } catch (RemoteException ex) {
             com.android.telephony.Rlog.d(TAG, "disableCellBroadcastRange: ", ex);
@@ -830,7 +1209,11 @@ public final class SmsManager {
             int count = records.size();
             for (int i = 0; i < count; i++) {
                 SmsRawData data = records.get(i);
-                if (data != null && (sms = SmsMessage.createFromEfRecord(i + 1, data.getBytes(), getSubscriptionId())) != null) {
+                if (data != null
+                        && (sms =
+                                        SmsMessage.createFromEfRecord(
+                                                i + 1, data.getBytes(), getSubscriptionId()))
+                                != null) {
                     messages.add(sms);
                 }
             }
@@ -899,35 +1282,65 @@ public final class SmsManager {
         }
     }
 
-    public void sendMultimediaMessage(Context context, Uri contentUri, String locationUrl, Bundle configOverrides, PendingIntent sentIntent) {
+    public void sendMultimediaMessage(
+            Context context,
+            Uri contentUri,
+            String locationUrl,
+            Bundle configOverrides,
+            PendingIntent sentIntent) {
         sendMultimediaMessage(context, contentUri, locationUrl, configOverrides, sentIntent, 0L);
     }
 
-    public void sendMultimediaMessage(Context context, final Uri contentUri, final String locationUrl, final Bundle configOverrides, final PendingIntent sentIntent, final long messageId) {
+    public void sendMultimediaMessage(
+            Context context,
+            final Uri contentUri,
+            final String locationUrl,
+            final Bundle configOverrides,
+            final PendingIntent sentIntent,
+            final long messageId) {
         if (contentUri == null) {
             throw new IllegalArgumentException("Uri contentUri null");
         }
         final MmsManager m = (MmsManager) context.getSystemService("mms");
         if (m != null) {
-            resolveSubscriptionForOperation(new SubscriptionResolverResult() { // from class: android.telephony.SmsManager.7
-                @Override // android.telephony.SmsManager.SubscriptionResolverResult
-                public void onSuccess(int subId) {
-                    m.sendMultimediaMessage(subId, contentUri, locationUrl, configOverrides, sentIntent, messageId);
-                }
+            resolveSubscriptionForOperation(
+                    new SubscriptionResolverResult() { // from class: android.telephony.SmsManager.7
+                        @Override // android.telephony.SmsManager.SubscriptionResolverResult
+                        public void onSuccess(int subId) {
+                            m.sendMultimediaMessage(
+                                    subId,
+                                    contentUri,
+                                    locationUrl,
+                                    configOverrides,
+                                    sentIntent,
+                                    messageId);
+                        }
 
-                @Override // android.telephony.SmsManager.SubscriptionResolverResult
-                public void onFailure() {
-                    SmsManager.notifySmsError(sentIntent, 32);
-                }
-            });
+                        @Override // android.telephony.SmsManager.SubscriptionResolverResult
+                        public void onFailure() {
+                            SmsManager.notifySmsError(sentIntent, 32);
+                        }
+                    });
         }
     }
 
-    public void downloadMultimediaMessage(Context context, String locationUrl, Uri contentUri, Bundle configOverrides, PendingIntent downloadedIntent) {
-        downloadMultimediaMessage(context, locationUrl, contentUri, configOverrides, downloadedIntent, 0L);
+    public void downloadMultimediaMessage(
+            Context context,
+            String locationUrl,
+            Uri contentUri,
+            Bundle configOverrides,
+            PendingIntent downloadedIntent) {
+        downloadMultimediaMessage(
+                context, locationUrl, contentUri, configOverrides, downloadedIntent, 0L);
     }
 
-    public void downloadMultimediaMessage(Context context, final String locationUrl, final Uri contentUri, final Bundle configOverrides, final PendingIntent downloadedIntent, final long messageId) {
+    public void downloadMultimediaMessage(
+            Context context,
+            final String locationUrl,
+            final Uri contentUri,
+            final Bundle configOverrides,
+            final PendingIntent downloadedIntent,
+            final long messageId) {
         if (TextUtils.isEmpty(locationUrl)) {
             throw new IllegalArgumentException("Empty MMS location URL");
         }
@@ -936,17 +1349,24 @@ public final class SmsManager {
         }
         final MmsManager m = (MmsManager) context.getSystemService("mms");
         if (m != null) {
-            resolveSubscriptionForOperation(new SubscriptionResolverResult() { // from class: android.telephony.SmsManager.8
-                @Override // android.telephony.SmsManager.SubscriptionResolverResult
-                public void onSuccess(int subId) {
-                    m.downloadMultimediaMessage(subId, locationUrl, contentUri, configOverrides, downloadedIntent, messageId);
-                }
+            resolveSubscriptionForOperation(
+                    new SubscriptionResolverResult() { // from class: android.telephony.SmsManager.8
+                        @Override // android.telephony.SmsManager.SubscriptionResolverResult
+                        public void onSuccess(int subId) {
+                            m.downloadMultimediaMessage(
+                                    subId,
+                                    locationUrl,
+                                    contentUri,
+                                    configOverrides,
+                                    downloadedIntent,
+                                    messageId);
+                        }
 
-                @Override // android.telephony.SmsManager.SubscriptionResolverResult
-                public void onFailure() {
-                    SmsManager.notifySmsError(downloadedIntent, 32);
-                }
-            });
+                        @Override // android.telephony.SmsManager.SubscriptionResolverResult
+                        public void onFailure() {
+                            SmsManager.notifySmsError(downloadedIntent, 32);
+                        }
+                    });
         }
     }
 
@@ -971,13 +1391,14 @@ public final class SmsManager {
         }
     }
 
-    public void getSmsMessagesForFinancialApp(Bundle params, Executor executor, FinancialSmsCallback callback) {
-    }
+    public void getSmsMessagesForFinancialApp(
+            Bundle params, Executor executor, FinancialSmsCallback callback) {}
 
     public String createAppSpecificSmsTokenWithPackageInfo(String prefixes, PendingIntent intent) {
         try {
             ISms iccSms = getISmsServiceOrThrow();
-            return iccSms.createAppSpecificSmsTokenWithPackageInfo(getSubscriptionId(), null, prefixes, intent);
+            return iccSms.createAppSpecificSmsTokenWithPackageInfo(
+                    getSubscriptionId(), null, prefixes, intent);
         } catch (RemoteException ex) {
             ex.rethrowFromSystemServer();
             return null;
@@ -988,7 +1409,8 @@ public final class SmsManager {
         try {
             ISms iccISms = getISmsServiceOrThrow();
             if (iccISms != null) {
-                iccISms.setStorageMonitorMemoryStatusOverride(getSubscriptionId(), storageAvailable);
+                iccISms.setStorageMonitorMemoryStatusOverride(
+                        getSubscriptionId(), storageAvailable);
             }
         } catch (RemoteException ex) {
             ex.rethrowFromSystemServer();
@@ -1010,7 +1432,8 @@ public final class SmsManager {
         try {
             ISms iccISms = getISmsServiceOrThrow();
             if (iccISms != null) {
-                return iccISms.checkSmsShortCodeDestination(getSubscriptionId(), null, null, destAddress, countryIso);
+                return iccISms.checkSmsShortCodeDestination(
+                        getSubscriptionId(), null, null, destAddress, countryIso);
             }
             return 0;
         } catch (RemoteException e) {
@@ -1065,7 +1488,8 @@ public final class SmsManager {
             if (iSms == null) {
                 return false;
             }
-            return iSms.setSmscAddressOnIccEfForSubscriber(IccUtils.bytesToHexString(encodedSmscAddress), getSubscriptionId(), null);
+            return iSms.setSmscAddressOnIccEfForSubscriber(
+                    IccUtils.bytesToHexString(encodedSmscAddress), getSubscriptionId(), null);
         } catch (RemoteException ex2) {
             throw new RuntimeException(ex2);
         }
@@ -1091,7 +1515,8 @@ public final class SmsManager {
         try {
             ISms iSms = getISmsService();
             if (iSms != null) {
-                if (ISIS_PACKAGE_NAME.equals(packageName) && getMnoName().toUpperCase().contains("VZW")) {
+                if (ISIS_PACKAGE_NAME.equals(packageName)
+                        && getMnoName().toUpperCase().contains("VZW")) {
                     permission = 3;
                     Log.i(TAG, "setPremiumSmsPermission() for ISIS_PACKAGE");
                 }
@@ -1168,7 +1593,8 @@ public final class SmsManager {
             com.android.telephony.Rlog.d(TAG, "[CB] Exception In getCbConfig of SmsManager");
         } catch (IllegalArgumentException ex) {
             ex.printStackTrace();
-            com.android.telephony.Rlog.d(TAG, "[CB] IllegalArgumentException Exception In getCbConfig of SmsManager");
+            com.android.telephony.Rlog.d(
+                    TAG, "[CB] IllegalArgumentException Exception In getCbConfig of SmsManager");
         } catch (NullPointerException e2) {
         }
         if (iccISms == null) {
@@ -1196,12 +1622,24 @@ public final class SmsManager {
                     msgIds[j] = (short) ((out[i] & 255) | ((out[i + 1] & 255) << 8));
                     i += 2;
                 } catch (ArrayIndexOutOfBoundsException e3) {
-                    com.android.telephony.Rlog.d(TAG, "[CB ] ArrayIndexOutOfBoundsException In getCbConfig of SmsManager.java");
+                    com.android.telephony.Rlog.d(
+                            TAG,
+                            "[CB ] ArrayIndexOutOfBoundsException In getCbConfig of"
+                                + " SmsManager.java");
                     return null;
                 }
             }
             cbConfig.msgIds = msgIds;
-            com.android.telephony.Rlog.d(TAG, "[SmsManger- CB] bCBEnabled = " + cbConfig.bCBEnabled + " selectedId = " + cbConfig.selectedId + " msgIdMaxCount = " + cbConfig.msgIdMaxCount + " msgIdCount = " + cbConfig.msgIdCount);
+            com.android.telephony.Rlog.d(
+                    TAG,
+                    "[SmsManger- CB] bCBEnabled = "
+                            + cbConfig.bCBEnabled
+                            + " selectedId = "
+                            + cbConfig.selectedId
+                            + " msgIdMaxCount = "
+                            + cbConfig.msgIdMaxCount
+                            + " msgIdCount = "
+                            + cbConfig.msgIdCount);
             for (int i2 = 0; i2 < cbConfig.msgIds.length; i2++) {
                 com.android.telephony.Rlog.d(TAG, "[CB] msgIDs =  " + cbConfig.msgIds[i2]);
             }
@@ -1211,7 +1649,16 @@ public final class SmsManager {
         return null;
     }
 
-    public void semSendMultipartTextMessage(String destinationAddress, String scAddress, ArrayList<String> parts, ArrayList<PendingIntent> sentIntents, ArrayList<PendingIntent> deliveryIntents, boolean replyPath, int expiry, int serviceType, int encodingType) {
+    public void semSendMultipartTextMessage(
+            String destinationAddress,
+            String scAddress,
+            ArrayList<String> parts,
+            ArrayList<PendingIntent> sentIntents,
+            ArrayList<PendingIntent> deliveryIntents,
+            boolean replyPath,
+            int expiry,
+            int serviceType,
+            int encodingType) {
         com.android.telephony.Rlog.i(TAG, "semSendMultipartTextMessage with encodiing type");
         if (TextUtils.isEmpty(destinationAddress)) {
             throw new IllegalArgumentException("Invalid destinationAddress");
@@ -1226,7 +1673,18 @@ public final class SmsManager {
             if (parts.size() > 1) {
                 try {
                     ISms iccISms = getISmsServiceOrThrow();
-                    iccISms.sendMultipartTextwithOptionsForSubscriber(getSubscriptionId(), ActivityThread.currentPackageName(), destinationAddress, scAddress, parts, sentIntents, deliveryIntents, replyPath, expiry, serviceType, encodingType);
+                    iccISms.sendMultipartTextwithOptionsForSubscriber(
+                            getSubscriptionId(),
+                            ActivityThread.currentPackageName(),
+                            destinationAddress,
+                            scAddress,
+                            parts,
+                            sentIntents,
+                            deliveryIntents,
+                            replyPath,
+                            expiry,
+                            serviceType,
+                            encodingType);
                     return;
                 } catch (RemoteException e) {
                     return;
@@ -1240,13 +1698,29 @@ public final class SmsManager {
             if (deliveryIntents != null && deliveryIntents.size() > 0) {
                 deliveryIntent = deliveryIntents.get(0);
             }
-            sendTextMessage(destinationAddress, scAddress, parts.get(0), sentIntent, deliveryIntent, replyPath, expiry, serviceType, encodingType);
+            sendTextMessage(
+                    destinationAddress,
+                    scAddress,
+                    parts.get(0),
+                    sentIntent,
+                    deliveryIntent,
+                    replyPath,
+                    expiry,
+                    serviceType,
+                    encodingType);
             return;
         }
         throw new IllegalArgumentException("Invalid destinationAddress");
     }
 
-    public void semSendMultipartTextMessage(String destinationAddress, String scAddress, ArrayList<String> parts, ArrayList<PendingIntent> sentIntents, ArrayList<PendingIntent> deliveryIntents, String callbackNumber, int priority) {
+    public void semSendMultipartTextMessage(
+            String destinationAddress,
+            String scAddress,
+            ArrayList<String> parts,
+            ArrayList<PendingIntent> sentIntents,
+            ArrayList<PendingIntent> deliveryIntents,
+            String callbackNumber,
+            int priority) {
         com.android.telephony.Rlog.i(TAG, "semSendMultipartTextMessage with priority");
         if (TextUtils.isEmpty(destinationAddress)) {
             throw new IllegalArgumentException("Invalid destinationAddress");
@@ -1264,7 +1738,16 @@ public final class SmsManager {
             try {
                 ISms iccISms = getISmsServiceOrThrow();
                 if (iccISms != null) {
-                    iccISms.sendMultipartTextwithCBPForSubscriber(getSubscriptionId(), ActivityThread.currentPackageName(), destinationAddress, scAddress, parts, sentIntents, deliveryIntents, callbackNumber, priority);
+                    iccISms.sendMultipartTextwithCBPForSubscriber(
+                            getSubscriptionId(),
+                            ActivityThread.currentPackageName(),
+                            destinationAddress,
+                            scAddress,
+                            parts,
+                            sentIntents,
+                            deliveryIntents,
+                            callbackNumber,
+                            priority);
                     return;
                 }
                 return;
@@ -1280,7 +1763,14 @@ public final class SmsManager {
         if (deliveryIntents != null && deliveryIntents.size() > 0) {
             deliveryIntent = deliveryIntents.get(0);
         }
-        sendTextMessage(destinationAddress, scAddress, parts.get(0), sentIntent, deliveryIntent, callbackNumber, priority);
+        sendTextMessage(
+                destinationAddress,
+                scAddress,
+                parts.get(0),
+                sentIntent,
+                deliveryIntent,
+                callbackNumber,
+                priority);
     }
 
     public boolean semGetSMSPAvailable() {
@@ -1308,7 +1798,17 @@ public final class SmsManager {
         return SmsMessage.fragmentText(text, encodingType, this);
     }
 
-    public void semSendMultipartTextMessage(String destinationAddress, String scAddress, ArrayList<String> parts, ArrayList<PendingIntent> sentIntents, ArrayList<PendingIntent> deliveryIntents, boolean replyPath, int expiry, int serviceType, int encodingType, int confirmId) {
+    public void semSendMultipartTextMessage(
+            String destinationAddress,
+            String scAddress,
+            ArrayList<String> parts,
+            ArrayList<PendingIntent> sentIntents,
+            ArrayList<PendingIntent> deliveryIntents,
+            boolean replyPath,
+            int expiry,
+            int serviceType,
+            int encodingType,
+            int confirmId) {
         com.android.telephony.Rlog.i(TAG, "semSendMultipartTextMessage with confirmId");
         if (TextUtils.isEmpty(destinationAddress)) {
             throw new IllegalArgumentException("Invalid destinationAddress");
@@ -1323,7 +1823,18 @@ public final class SmsManager {
             if (parts.size() > 1) {
                 try {
                     ISms iccISms = getISmsServiceOrThrow();
-                    iccISms.sendMultipartTextwithOptionsForSubscriber(getSubscriptionId(), ActivityThread.currentPackageName(), destinationAddress, scAddress, parts, sentIntents, deliveryIntents, replyPath, expiry, serviceType, encodingType);
+                    iccISms.sendMultipartTextwithOptionsForSubscriber(
+                            getSubscriptionId(),
+                            ActivityThread.currentPackageName(),
+                            destinationAddress,
+                            scAddress,
+                            parts,
+                            sentIntents,
+                            deliveryIntents,
+                            replyPath,
+                            expiry,
+                            serviceType,
+                            encodingType);
                     return;
                 } catch (RemoteException e) {
                     return;
@@ -1337,14 +1848,34 @@ public final class SmsManager {
             if (deliveryIntents != null && deliveryIntents.size() > 0) {
                 deliveryIntent = deliveryIntents.get(0);
             }
-            sendTextMessage(destinationAddress, scAddress, parts.get(0), sentIntent, deliveryIntent, replyPath, expiry, serviceType, encodingType, confirmId);
+            sendTextMessage(
+                    destinationAddress,
+                    scAddress,
+                    parts.get(0),
+                    sentIntent,
+                    deliveryIntent,
+                    replyPath,
+                    expiry,
+                    serviceType,
+                    encodingType,
+                    confirmId);
             return;
         }
         throw new IllegalArgumentException("Invalid destinationAddress");
     }
 
-    public void sendTextMessage(String destinationAddress, String scAddress, String text, PendingIntent sentIntent, PendingIntent deliveryIntent, boolean replyPath, int expiry, int serviceType, int encodingType) {
-        com.android.telephony.Rlog.i(TAG, "sendTextMessage with encoding Type: mno - " + getMnoName());
+    public void sendTextMessage(
+            String destinationAddress,
+            String scAddress,
+            String text,
+            PendingIntent sentIntent,
+            PendingIntent deliveryIntent,
+            boolean replyPath,
+            int expiry,
+            int serviceType,
+            int encodingType) {
+        com.android.telephony.Rlog.i(
+                TAG, "sendTextMessage with encoding Type: mno - " + getMnoName());
         if (TextUtils.isEmpty(destinationAddress)) {
             throw new IllegalArgumentException("Invalid destinationAddress");
         }
@@ -1356,12 +1887,30 @@ public final class SmsManager {
         }
         try {
             ISms iccISms = getISmsServiceOrThrow();
-            iccISms.sendTextwithOptionsForSubscriber(getSubscriptionId(), ActivityThread.currentPackageName(), destinationAddress, scAddress, text, sentIntent, deliveryIntent, replyPath, expiry, serviceType, encodingType);
+            iccISms.sendTextwithOptionsForSubscriber(
+                    getSubscriptionId(),
+                    ActivityThread.currentPackageName(),
+                    destinationAddress,
+                    scAddress,
+                    text,
+                    sentIntent,
+                    deliveryIntent,
+                    replyPath,
+                    expiry,
+                    serviceType,
+                    encodingType);
         } catch (RemoteException e) {
         }
     }
 
-    public void sendTextMessage(String destinationAddress, String scAddress, String text, PendingIntent sentIntent, PendingIntent deliveryIntent, String callbackNumber, int priority) {
+    public void sendTextMessage(
+            String destinationAddress,
+            String scAddress,
+            String text,
+            PendingIntent sentIntent,
+            PendingIntent deliveryIntent,
+            String callbackNumber,
+            int priority) {
         com.android.telephony.Rlog.i(TAG, "sendTextMessage with callbacknmber and priority");
         if (TextUtils.isEmpty(destinationAddress)) {
             throw new IllegalArgumentException("Invalid destinationAddress");
@@ -1372,13 +1921,32 @@ public final class SmsManager {
         try {
             ISms iccISms = getISmsServiceOrThrow();
             if (iccISms != null) {
-                iccISms.sendTextwithCBPForSubscriber(getSubscriptionId(), ActivityThread.currentPackageName(), destinationAddress, scAddress, text, sentIntent, deliveryIntent, callbackNumber, priority);
+                iccISms.sendTextwithCBPForSubscriber(
+                        getSubscriptionId(),
+                        ActivityThread.currentPackageName(),
+                        destinationAddress,
+                        scAddress,
+                        text,
+                        sentIntent,
+                        deliveryIntent,
+                        callbackNumber,
+                        priority);
             }
         } catch (RemoteException e) {
         }
     }
 
-    public void sendTextMessage(String destinationAddress, String scAddress, String text, PendingIntent sentIntent, PendingIntent deliveryIntent, boolean replyPath, int expiry, int serviceType, int encodingType, int confirmId) {
+    public void sendTextMessage(
+            String destinationAddress,
+            String scAddress,
+            String text,
+            PendingIntent sentIntent,
+            PendingIntent deliveryIntent,
+            boolean replyPath,
+            int expiry,
+            int serviceType,
+            int encodingType,
+            int confirmId) {
         com.android.telephony.Rlog.i(TAG, "sendTextMessage with confirmId");
         if (TextUtils.isEmpty(destinationAddress)) {
             throw new IllegalArgumentException("Invalid destinationAddress");
@@ -1391,7 +1959,19 @@ public final class SmsManager {
         }
         try {
             ISms iccISms = getISmsServiceOrThrow();
-            iccISms.sendTextwithOptionsReadconfirmForSubscriber(getSubscriptionId(), ActivityThread.currentPackageName(), destinationAddress, scAddress, text, sentIntent, deliveryIntent, replyPath, expiry, serviceType, encodingType, confirmId);
+            iccISms.sendTextwithOptionsReadconfirmForSubscriber(
+                    getSubscriptionId(),
+                    ActivityThread.currentPackageName(),
+                    destinationAddress,
+                    scAddress,
+                    text,
+                    sentIntent,
+                    deliveryIntent,
+                    replyPath,
+                    expiry,
+                    serviceType,
+                    encodingType,
+                    confirmId);
         } catch (RemoteException e) {
         }
     }
@@ -1431,19 +2011,24 @@ public final class SmsManager {
     }
 
     private boolean isSupportSendingEmptySms() {
-        final String matchedCode = SystemProperties.get("mdc.matched_code", SystemProperties.get("ro.csc.sales_code", ""));
+        final String matchedCode =
+                SystemProperties.get(
+                        "mdc.matched_code", SystemProperties.get("ro.csc.sales_code", ""));
         if (TextUtils.isEmpty(matchedCode)) {
             return false;
         }
         String[] supportCode = {"BST", "TEL", "TLP"};
-        return Arrays.stream(supportCode).anyMatch(new Predicate() { // from class: android.telephony.SmsManager$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                boolean equals;
-                equals = ((String) obj).equals(matchedCode);
-                return equals;
-            }
-        });
+        return Arrays.stream(supportCode)
+                .anyMatch(
+                        new Predicate() { // from class:
+                                          // android.telephony.SmsManager$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Predicate
+                            public final boolean test(Object obj) {
+                                boolean equals;
+                                equals = ((String) obj).equals(matchedCode);
+                                return equals;
+                            }
+                        });
     }
 
     private int getMessageStatusForIcc(int messageType, boolean isRead) {
@@ -1476,19 +2061,30 @@ public final class SmsManager {
                 ISms iccISms = getISmsService();
                 if (iccISms != null) {
                     TelephonyManager.getDefault();
-                    boolean isroaming = Boolean.parseBoolean(TelephonyManager.getTelephonyProperty(phoneId, TelephonyProperties.PROPERTY_OPERATOR_ISROAMING, "false"));
-                    boolean isCHN = TelephonyFeatures.isCountrySpecific(phoneId, "CHN", "HKG", "TPE");
+                    boolean isroaming =
+                            Boolean.parseBoolean(
+                                    TelephonyManager.getTelephonyProperty(
+                                            phoneId,
+                                            TelephonyProperties.PROPERTY_OPERATOR_ISROAMING,
+                                            "false"));
+                    boolean isCHN =
+                            TelephonyFeatures.isCountrySpecific(phoneId, "CHN", "HKG", "TPE");
                     String voiceTypeKey = phoneId == 0 ? "voicecall_type" : "voicecall_type2";
                     Context context = ActivityThread.currentApplication().getApplicationContext();
-                    boolean isCtcVolteOn2 = Settings.System.getInt(context.getContentResolver(), voiceTypeKey, -1) == 0;
-                    if ((iccType2 == 10 && !isroaming && !isCtcVolteOn2) || (iccType2 == 4 && ((isroaming || isCtcVolteOn2) && isCHN))) {
+                    boolean isCtcVolteOn2 =
+                            Settings.System.getInt(context.getContentResolver(), voiceTypeKey, -1)
+                                    == 0;
+                    if ((iccType2 == 10 && !isroaming && !isCtcVolteOn2)
+                            || (iccType2 == 4 && ((isroaming || isCtcVolteOn2) && isCHN))) {
                         TelephonyManager.isSelecttelecomDF = true;
                     }
-                    records = iccISms.getAllMessagesFromIccEfForSubscriber(getSubscriptionId(), null);
+                    records =
+                            iccISms.getAllMessagesFromIccEfForSubscriber(getSubscriptionId(), null);
                 }
                 isCtcVolteOn = false;
             } catch (RemoteException e) {
-                com.android.telephony.Rlog.d(TAG, "getAllMessagesFromIccSimType - exception - iccType:" + iccType2);
+                com.android.telephony.Rlog.d(
+                        TAG, "getAllMessagesFromIccSimType - exception - iccType:" + iccType2);
                 isCtcVolteOn = false;
             }
             TelephonyManager.isSelecttelecomDF = isCtcVolteOn;
@@ -1501,7 +2097,14 @@ public final class SmsManager {
             } else if (iccType2 == 3) {
                 format = "3gpp2";
             }
-            com.android.telephony.Rlog.d(TAG, "getAllMessagesFromIccSimType, subId = " + subId + " format = " + format + " iccType = " + iccType2);
+            com.android.telephony.Rlog.d(
+                    TAG,
+                    "getAllMessagesFromIccSimType, subId = "
+                            + subId
+                            + " format = "
+                            + format
+                            + " iccType = "
+                            + iccType2);
             return createMessageListFromRawRecords(records, format);
         } catch (Throwable th) {
             TelephonyManager.isSelecttelecomDF = false;
@@ -1509,7 +2112,8 @@ public final class SmsManager {
         }
     }
 
-    private static ArrayList<SmsMessage> createMessageListFromRawRecords(List<SmsRawData> records, String format) {
+    private static ArrayList<SmsMessage> createMessageListFromRawRecords(
+            List<SmsRawData> records, String format) {
         ArrayList<SmsMessage> messages = new ArrayList<>();
         if (records != null) {
             int count = records.size();
@@ -1542,12 +2146,24 @@ public final class SmsManager {
         }
         try {
             ISms iccISms = getISmsServiceOrThrow();
-            iccISms.sendOTADomesticForSubscriber(getSubscriptionId(), ActivityThread.currentPackageName(), destinationAddress, scAddress, text);
+            iccISms.sendOTADomesticForSubscriber(
+                    getSubscriptionId(),
+                    ActivityThread.currentPackageName(),
+                    destinationAddress,
+                    scAddress,
+                    text);
         } catch (RemoteException e) {
         }
     }
 
-    public void sendDataMessage(String destinationAddress, String scAddress, short destinationPort, short originationPort, byte[] data, PendingIntent sentIntent, PendingIntent deliveryIntent) {
+    public void sendDataMessage(
+            String destinationAddress,
+            String scAddress,
+            short destinationPort,
+            short originationPort,
+            byte[] data,
+            PendingIntent sentIntent,
+            PendingIntent deliveryIntent) {
         com.android.telephony.Rlog.i(TAG, "sendDataMessage");
         if (TextUtils.isEmpty(destinationAddress)) {
             throw new IllegalArgumentException("Invalid destinationAddress");
@@ -1560,27 +2176,71 @@ public final class SmsManager {
         }
         try {
             ISms iccISms = getISmsServiceOrThrow();
-            iccISms.sendDatawithOrigPortForSubscriber(getSubscriptionId(), null, destinationAddress, scAddress, destinationPort & 65535, originationPort & 65535, data, sentIntent, deliveryIntent);
+            iccISms.sendDatawithOrigPortForSubscriber(
+                    getSubscriptionId(),
+                    null,
+                    destinationAddress,
+                    scAddress,
+                    destinationPort & 65535,
+                    originationPort & 65535,
+                    data,
+                    sentIntent,
+                    deliveryIntent);
         } catch (RemoteException e) {
         }
     }
 
-    public void sendTextMessageNSRI(String destinationAddress, String scAddress, byte[] data, PendingIntent sentIntent, PendingIntent deliveryIntent, String from, int msgCount, int msgTotal) {
+    public void sendTextMessageNSRI(
+            String destinationAddress,
+            String scAddress,
+            byte[] data,
+            PendingIntent sentIntent,
+            PendingIntent deliveryIntent,
+            String from,
+            int msgCount,
+            int msgTotal) {
         com.android.telephony.Rlog.i(TAG, "sendTextMessageNSRI");
         if (TextUtils.isEmpty(destinationAddress)) {
             throw new IllegalArgumentException("Invalid destinationAddress");
         }
-        Log.d(TAG, "[NSRI_SMS] sendTextMessageNSRI Addr = " + destinationAddress + " Smsc = " + scAddress + " textLen = " + data.length + " from = " + from + " msgCount = " + msgCount + " msgTotal = " + msgTotal);
+        Log.d(
+                TAG,
+                "[NSRI_SMS] sendTextMessageNSRI Addr = "
+                        + destinationAddress
+                        + " Smsc = "
+                        + scAddress
+                        + " textLen = "
+                        + data.length
+                        + " from = "
+                        + from
+                        + " msgCount = "
+                        + msgCount
+                        + " msgTotal = "
+                        + msgTotal);
         try {
             ISms iccISms = getISmsService();
             if (iccISms != null) {
-                iccISms.sendTextNSRIForSubscriber(getSubscriptionId(), ActivityThread.currentPackageName(), destinationAddress, scAddress, data, sentIntent, deliveryIntent, msgCount, msgTotal);
+                iccISms.sendTextNSRIForSubscriber(
+                        getSubscriptionId(),
+                        ActivityThread.currentPackageName(),
+                        destinationAddress,
+                        scAddress,
+                        data,
+                        sentIntent,
+                        deliveryIntent,
+                        msgCount,
+                        msgTotal);
             }
         } catch (RemoteException e) {
         }
     }
 
-    public void sendTextMessageAutoLogin(String destinationAddress, String scAddress, String text, PendingIntent sentIntent, PendingIntent deliveryIntent) {
+    public void sendTextMessageAutoLogin(
+            String destinationAddress,
+            String scAddress,
+            String text,
+            PendingIntent sentIntent,
+            PendingIntent deliveryIntent) {
         com.android.telephony.Rlog.i(TAG, "sendTextMessageAutoLogin");
         if (TextUtils.isEmpty(destinationAddress)) {
             throw new IllegalArgumentException("Invalid destinationAddress");
@@ -1593,7 +2253,15 @@ public final class SmsManager {
         }
         try {
             ISms iccISms = getISmsServiceOrThrow();
-            iccISms.sendTextAutoLoginForSubscriber(getSubscriptionId(), ActivityThread.currentPackageName(), destinationAddress, scAddress, text, sentIntent, deliveryIntent, false);
+            iccISms.sendTextAutoLoginForSubscriber(
+                    getSubscriptionId(),
+                    ActivityThread.currentPackageName(),
+                    destinationAddress,
+                    scAddress,
+                    text,
+                    sentIntent,
+                    deliveryIntent,
+                    false);
         } catch (RemoteException e) {
         }
     }
@@ -1602,7 +2270,9 @@ public final class SmsManager {
         int subId = getSubscriptionId();
         int phoneId = SubscriptionManager.getPhoneId(subId);
         TelephonyManager.getDefault();
-        String mode = TelephonyManager.getTelephonyProperty(phoneId, TelephonyProperties.CURRENT_ACTIVE_PHONE, String.valueOf(1));
+        String mode =
+                TelephonyManager.getTelephonyProperty(
+                        phoneId, TelephonyProperties.CURRENT_ACTIVE_PHONE, String.valueOf(1));
         com.android.telephony.Rlog.d(TAG, "getCurrentFormat, subId = " + subId + " mode = " + mode);
         switch (Integer.parseInt(mode)) {
         }

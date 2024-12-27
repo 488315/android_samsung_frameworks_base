@@ -23,13 +23,14 @@ import android.util.LocalLog;
 import android.util.Pair;
 import android.util.Slog;
 import android.util.Xml;
+
 import com.android.internal.util.DumpUtils;
 import com.android.internal.util.FunctionalUtils;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.BrailleDisplayConnection$$ExternalSyntheticOutline0;
-import com.android.server.os.BugreportManagerServiceImpl;
 import com.android.server.utils.Slogf;
+
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -45,7 +46,8 @@ import java.util.concurrent.TimeUnit;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
-    public static final long DEFAULT_BUGREPORT_CONSENTLESS_GRACE_PERIOD_MILLIS = TimeUnit.MINUTES.toMillis(2);
+    public static final long DEFAULT_BUGREPORT_CONSENTLESS_GRACE_PERIOD_MILLIS =
+            TimeUnit.MINUTES.toMillis(2);
     public static final FeatureFlagsImpl sFeatureFlags = new FeatureFlagsImpl();
     public final AppOpsManager mAppOps;
     public final ArraySet mBugreportAllowlistedPackages;
@@ -73,7 +75,12 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
         }
 
         public static void throwInvalidBugreportFileForCallerException(String str, String str2) {
-            throw new IllegalArgumentException(BootReceiver$$ExternalSyntheticOutline0.m("File ", str, " was not generated on behalf of calling package ", str2));
+            throw new IllegalArgumentException(
+                    BootReceiver$$ExternalSyntheticOutline0.m(
+                            "File ",
+                            str,
+                            " was not generated on behalf of calling package ",
+                            str2));
         }
 
         public final void addBugreportMapping(Pair pair, String str) {
@@ -98,8 +105,16 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
                     if (!((HashMap) this.mConsentGranted).containsKey(str)) {
                         return false;
                     }
-                    if (((Long) ((Pair) ((HashMap) this.mConsentGranted).get(str)).first).longValue() + BugreportManagerServiceImpl.DEFAULT_BUGREPORT_CONSENTLESS_GRACE_PERIOD_MILLIS >= System.currentTimeMillis()) {
-                        return !z || ((Boolean) ((Pair) ((HashMap) this.mConsentGranted).get(str)).second).booleanValue();
+                    if (((Long) ((Pair) ((HashMap) this.mConsentGranted).get(str)).first)
+                                            .longValue()
+                                    + BugreportManagerServiceImpl
+                                            .DEFAULT_BUGREPORT_CONSENTLESS_GRACE_PERIOD_MILLIS
+                            >= System.currentTimeMillis()) {
+                        return !z
+                                || ((Boolean)
+                                                ((Pair) ((HashMap) this.mConsentGranted).get(str))
+                                                        .second)
+                                        .booleanValue();
                     }
                     ((HashMap) this.mConsentGranted).remove(str);
                     return false;
@@ -109,36 +124,69 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
             }
         }
 
-        public final void ensureCallerPreviouslyGeneratedFile(Context context, final PackageManager packageManager, final Pair pair, final int i, final String str) {
+        public final void ensureCallerPreviouslyGeneratedFile(
+                Context context,
+                final PackageManager packageManager,
+                final Pair pair,
+                final int i,
+                final String str) {
             synchronized (this.mLock) {
                 try {
                     if (Flags.onboardingBugreportV2Enabled()) {
-                        Integer num = (Integer) Binder.withCleanCallingIdentity(new FunctionalUtils.ThrowingSupplier() { // from class: com.android.server.os.BugreportManagerServiceImpl$BugreportFileManager$$ExternalSyntheticLambda0
-                            public final Object getOrThrow() {
-                                PackageManager packageManager2 = packageManager;
-                                Pair pair2 = pair;
-                                int i2 = i;
-                                String str2 = str;
-                                try {
-                                    return Integer.valueOf(packageManager2.getPackageUidAsUser((String) pair2.second, i2));
-                                } catch (PackageManager.NameNotFoundException unused) {
-                                    BugreportManagerServiceImpl.BugreportFileManager.throwInvalidBugreportFileForCallerException(str2, (String) pair2.second);
-                                    throw null;
-                                }
-                            }
-                        });
-                        if (num.intValue() != ((Integer) pair.first).intValue() && context.checkCallingOrSelfPermission("android.permission.INTERACT_ACROSS_USERS") != 0) {
-                            throw new SecurityException(((String) pair.second) + " does not hold the INTERACT_ACROSS_USERS permission to access cross-user bugreports.");
+                        Integer num =
+                                (Integer)
+                                        Binder.withCleanCallingIdentity(
+                                                new FunctionalUtils
+                                                        .ThrowingSupplier() { // from class:
+                                                                              // com.android.server.os.BugreportManagerServiceImpl$BugreportFileManager$$ExternalSyntheticLambda0
+                                                    public final Object getOrThrow() {
+                                                        PackageManager packageManager2 =
+                                                                packageManager;
+                                                        Pair pair2 = pair;
+                                                        int i2 = i;
+                                                        String str2 = str;
+                                                        try {
+                                                            return Integer.valueOf(
+                                                                    packageManager2
+                                                                            .getPackageUidAsUser(
+                                                                                    (String)
+                                                                                            pair2.second,
+                                                                                    i2));
+                                                        } catch (
+                                                                PackageManager.NameNotFoundException
+                                                                        unused) {
+                                                            BugreportManagerServiceImpl
+                                                                    .BugreportFileManager
+                                                                    .throwInvalidBugreportFileForCallerException(
+                                                                            str2,
+                                                                            (String) pair2.second);
+                                                            throw null;
+                                                        }
+                                                    }
+                                                });
+                        if (num.intValue() != ((Integer) pair.first).intValue()
+                                && context.checkCallingOrSelfPermission(
+                                                "android.permission.INTERACT_ACROSS_USERS")
+                                        != 0) {
+                            throw new SecurityException(
+                                    ((String) pair.second)
+                                            + " does not hold the INTERACT_ACROSS_USERS permission"
+                                            + " to access cross-user bugreports.");
                         }
                         if (!this.mReadBugreportMapping) {
                             readBugreportMappingLocked();
                         }
-                        ArraySet arraySet = (ArraySet) this.mBugreportFiles.get(new Pair(num, (String) pair.second));
+                        ArraySet arraySet =
+                                (ArraySet)
+                                        this.mBugreportFiles.get(
+                                                new Pair(num, (String) pair.second));
                         if (arraySet == null || !arraySet.contains(str)) {
                             throwInvalidBugreportFileForCallerException(str, (String) pair.second);
                             throw null;
                         }
-                        if (!(Flags.onboardingBugreportV2Enabled() ? this.mBugreportFilesToPersist.contains(str) : false)) {
+                        if (!(Flags.onboardingBugreportV2Enabled()
+                                ? this.mBugreportFilesToPersist.contains(str)
+                                : false)) {
                             arraySet.remove(str);
                         }
                     } else {
@@ -268,7 +316,9 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
             Lba:
                 return
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.os.BugreportManagerServiceImpl.BugreportFileManager.readBugreportMappingLocked():void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.os.BugreportManagerServiceImpl.BugreportFileManager.readBugreportMappingLocked():void");
         }
 
         public final void writeBugreportDataLocked() {
@@ -287,8 +337,12 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
                         while (it.hasNext()) {
                             String str = (String) it.next();
                             resolveSerializer.startTag((String) null, "bugreport-map");
-                            resolveSerializer.attributeInt((String) null, "calling-uid", ((Integer) pair.first).intValue());
-                            resolveSerializer.attribute((String) null, "calling-package", (String) pair.second);
+                            resolveSerializer.attributeInt(
+                                    (String) null,
+                                    "calling-uid",
+                                    ((Integer) pair.first).intValue());
+                            resolveSerializer.attribute(
+                                    (String) null, "calling-package", (String) pair.second);
                             resolveSerializer.attribute((String) null, "bugreport-file", str);
                             resolveSerializer.endTag((String) null, "bugreport-map");
                         }
@@ -313,7 +367,8 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class DumpstateListener extends IDumpstateListener.Stub implements IBinder.DeathRecipient {
+    public final class DumpstateListener extends IDumpstateListener.Stub
+            implements IBinder.DeathRecipient {
         public static int sNextId;
         public final Pair mCaller;
         public final boolean mConsentGranted;
@@ -327,17 +382,29 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
         public final boolean mReportFinishedFile;
 
         /* renamed from: -$$Nest$mdump, reason: not valid java name */
-        public static void m742$$Nest$mdump(DumpstateListener dumpstateListener, PrintWriter printWriter) {
+        public static void m742$$Nest$mdump(
+                DumpstateListener dumpstateListener, PrintWriter printWriter) {
             dumpstateListener.getClass();
             printWriter.println("DumpstateListener:");
             printWriter.printf("  id: %d\n", Integer.valueOf(dumpstateListener.mId));
-            printWriter.printf("  caller: %s\n", BugreportManagerServiceImpl.callerToString(dumpstateListener.mCaller));
-            printWriter.printf("  reports finished file: %b\n", Boolean.valueOf(dumpstateListener.mReportFinishedFile));
+            printWriter.printf(
+                    "  caller: %s\n",
+                    BugreportManagerServiceImpl.callerToString(dumpstateListener.mCaller));
+            printWriter.printf(
+                    "  reports finished file: %b\n",
+                    Boolean.valueOf(dumpstateListener.mReportFinishedFile));
             printWriter.printf("  progress: %d\n", Integer.valueOf(dumpstateListener.mProgress));
             printWriter.printf("  done: %b\n", Boolean.valueOf(dumpstateListener.mDone));
         }
 
-        public DumpstateListener(IDumpstateListener iDumpstateListener, IDumpstate iDumpstate, Pair pair, boolean z, boolean z2, boolean z3, boolean z4) {
+        public DumpstateListener(
+                IDumpstateListener iDumpstateListener,
+                IDumpstate iDumpstate,
+                Pair pair,
+                boolean z,
+                boolean z2,
+                boolean z3,
+                boolean z4) {
             int i = sNextId + 1;
             sNextId = i;
             this.mId = i;
@@ -351,7 +418,10 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
             try {
                 iDumpstate.asBinder().linkToDeath(this, 0);
             } catch (RemoteException e) {
-                Slog.e("BugreportManagerService", "Unable to register Death Recipient for IDumpstate", e);
+                Slog.e(
+                        "BugreportManagerService",
+                        "Unable to register Death Recipient for IDumpstate",
+                        e);
             }
         }
 
@@ -363,7 +433,9 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
             }
             synchronized (BugreportManagerServiceImpl.this.mLock) {
                 if (!this.mDone) {
-                    Slog.e("BugreportManagerService", "IDumpstate likely crashed. Notifying listener");
+                    Slog.e(
+                            "BugreportManagerService",
+                            "IDumpstate likely crashed. Notifying listener");
                     try {
                         this.mListener.onError(2);
                     } catch (RemoteException unused2) {
@@ -391,7 +463,8 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
                 reportFinishedLocked("File: " + str);
             }
             if (this.mReportFinishedFile) {
-                BugreportFileManager bugreportFileManager = BugreportManagerServiceImpl.this.mBugreportFileManager;
+                BugreportFileManager bugreportFileManager =
+                        BugreportManagerServiceImpl.this.mBugreportFileManager;
                 Pair pair = this.mCaller;
                 boolean z = this.mKeepBugreportOnRetrieval;
                 bugreportFileManager.addBugreportMapping(pair, str);
@@ -407,7 +480,8 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
                     }
                 }
             }
-            BugreportFileManager bugreportFileManager2 = BugreportManagerServiceImpl.this.mBugreportFileManager;
+            BugreportFileManager bugreportFileManager2 =
+                    BugreportManagerServiceImpl.this.mBugreportFileManager;
             String str2 = (String) this.mCaller.second;
             boolean z2 = this.mConsentGranted;
             boolean z3 = this.mIsDeferredReport;
@@ -416,12 +490,33 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
                 synchronized (bugreportFileManager2.mLock) {
                     try {
                         if (z2) {
-                            ((HashMap) bugreportFileManager2.mConsentGranted).put(str2, new Pair(Long.valueOf(System.currentTimeMillis()), Boolean.valueOf(z3)));
+                            ((HashMap) bugreportFileManager2.mConsentGranted)
+                                    .put(
+                                            str2,
+                                            new Pair(
+                                                    Long.valueOf(System.currentTimeMillis()),
+                                                    Boolean.valueOf(z3)));
                         } else if (!z3) {
-                            if (((HashMap) bugreportFileManager2.mConsentGranted).containsKey(str2)) {
-                                ((HashMap) bugreportFileManager2.mConsentGranted).put(str2, new Pair((Long) ((Pair) ((HashMap) bugreportFileManager2.mConsentGranted).get(str2)).first, Boolean.FALSE));
+                            if (((HashMap) bugreportFileManager2.mConsentGranted)
+                                    .containsKey(str2)) {
+                                ((HashMap) bugreportFileManager2.mConsentGranted)
+                                        .put(
+                                                str2,
+                                                new Pair(
+                                                        (Long)
+                                                                ((Pair)
+                                                                                ((HashMap)
+                                                                                                bugreportFileManager2
+                                                                                                        .mConsentGranted)
+                                                                                        .get(str2))
+                                                                        .first,
+                                                        Boolean.FALSE));
                             } else {
-                                Slog.e("BugreportManagerService", "Previous consent from package: " + str2 + " shouldhave been logged.");
+                                Slog.e(
+                                        "BugreportManagerService",
+                                        "Previous consent from package: "
+                                                + str2
+                                                + " shouldhave been logged.");
                             }
                         }
                     } finally {
@@ -449,18 +544,29 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
 
         public final void releaseItselfLocked() {
             this.mDone = true;
-            BugreportManagerServiceImpl bugreportManagerServiceImpl = BugreportManagerServiceImpl.this;
+            BugreportManagerServiceImpl bugreportManagerServiceImpl =
+                    BugreportManagerServiceImpl.this;
             if (bugreportManagerServiceImpl.mCurrentDumpstateListener == this) {
                 bugreportManagerServiceImpl.mCurrentDumpstateListener = null;
                 return;
             }
-            Slogf.w("BugreportManagerService", "releaseItselfLocked(): " + this + " is finished, but current listener is " + BugreportManagerServiceImpl.this.mCurrentDumpstateListener);
+            Slogf.w(
+                    "BugreportManagerService",
+                    "releaseItselfLocked(): "
+                            + this
+                            + " is finished, but current listener is "
+                            + BugreportManagerServiceImpl.this.mCurrentDumpstateListener);
         }
 
         public final void reportFinishedLocked(String str) {
-            BugreportManagerServiceImpl bugreportManagerServiceImpl = BugreportManagerServiceImpl.this;
+            BugreportManagerServiceImpl bugreportManagerServiceImpl =
+                    BugreportManagerServiceImpl.this;
             bugreportManagerServiceImpl.mNumberFinishedBugreports++;
-            bugreportManagerServiceImpl.mFinishedBugreports.log("Caller: " + BugreportManagerServiceImpl.callerToString(this.mCaller) + " " + str);
+            bugreportManagerServiceImpl.mFinishedBugreports.log(
+                    "Caller: "
+                            + BugreportManagerServiceImpl.callerToString(this.mCaller)
+                            + " "
+                            + str);
         }
 
         public final String toString() {
@@ -480,8 +586,7 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
 
         /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         public final class RoleManagerWrapper {
-            public RoleManagerWrapper() {
-            }
+            public RoleManagerWrapper() {}
         }
     }
 
@@ -490,7 +595,8 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
         Context context = injector.mContext;
         this.mContext = context;
         this.mAppOps = (AppOpsManager) context.getSystemService(AppOpsManager.class);
-        this.mTelephonyManager = (TelephonyManager) context.getSystemService(TelephonyManager.class);
+        this.mTelephonyManager =
+                (TelephonyManager) context.getSystemService(TelephonyManager.class);
         this.mBugreportFileManager = new BugreportFileManager(injector.mMappingFile);
         this.mBugreportAllowlistedPackages = injector.mAllowlistedPackages;
     }
@@ -506,7 +612,9 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
         try {
             iDumpstateListener.onError(i);
         } catch (RemoteException e) {
-            Slog.w("BugreportManagerService", "onError() transaction threw RemoteException: " + e.getMessage());
+            Slog.w(
+                    "BugreportManagerService",
+                    "onError() transaction threw RemoteException: " + e.getMessage());
         }
     }
 
@@ -514,11 +622,18 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
     public final void cancelBugreport(int i, String str) {
         int callingUid = Binder.getCallingUid();
         enforcePermission(callingUid, str, true);
-        Slogf.i("BugreportManagerService", "Cancelling bugreport for %s / %d", str, Integer.valueOf(callingUid));
+        Slogf.i(
+                "BugreportManagerService",
+                "Cancelling bugreport for %s / %d",
+                str,
+                Integer.valueOf(callingUid));
         synchronized (this.mLock) {
-            IDumpstate asInterface = IDumpstate.Stub.asInterface(ServiceManager.getService("dumpstate"));
+            IDumpstate asInterface =
+                    IDumpstate.Stub.asInterface(ServiceManager.getService("dumpstate"));
             if (asInterface == null) {
-                Slog.w("BugreportManagerService", "cancelBugreport: Could not find native dumpstate service");
+                Slog.w(
+                        "BugreportManagerService",
+                        "cancelBugreport: Could not find native dumpstate service");
                 return;
             }
             try {
@@ -531,7 +646,8 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
     }
 
     @Override // android.os.Binder
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         if (DumpUtils.checkDumpPermission(this.mContext, "BugreportManagerService", printWriter)) {
             printWriter.printf("Allow-listed packages: %s\n", this.mBugreportAllowlistedPackages);
             synchronized (this.mLock) {
@@ -554,7 +670,9 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
                     } else {
                         Integer valueOf = Integer.valueOf(i);
                         int i2 = this.mNumberFinishedBugreports;
-                        printWriter.printf("%d finished bugreport%s. Last %d:\n", valueOf, i2 > 1 ? "s" : "", Integer.valueOf(Math.min(i2, 20)));
+                        printWriter.printf(
+                                "%d finished bugreport%s. Last %d:\n",
+                                valueOf, i2 > 1 ? "s" : "", Integer.valueOf(Math.min(i2, 20)));
                         this.mFinishedBugreports.dump("  ", printWriter);
                     }
                 } finally {
@@ -566,10 +684,18 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
                         printWriter.println("Has not read bugreport mapping");
                     }
                     int size = this.mBugreportFileManager.mBugreportFiles.size();
-                    printWriter.printf("%d pending file%s", Integer.valueOf(size), size > 1 ? "s" : "");
+                    printWriter.printf(
+                            "%d pending file%s", Integer.valueOf(size), size > 1 ? "s" : "");
                     if (size > 0) {
                         for (int i3 = 0; i3 < size; i3++) {
-                            printWriter.printf("  %s: %s\n", callerToString((Pair) this.mBugreportFileManager.mBugreportFiles.keyAt(i3)), (ArraySet) this.mBugreportFileManager.mBugreportFiles.valueAt(i3));
+                            printWriter.printf(
+                                    "  %s: %s\n",
+                                    callerToString(
+                                            (Pair)
+                                                    this.mBugreportFileManager.mBugreportFiles
+                                                            .keyAt(i3)),
+                                    (ArraySet)
+                                            this.mBugreportFileManager.mBugreportFiles.valueAt(i3));
                         }
                     } else {
                         printWriter.println();
@@ -587,11 +713,15 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
         if (!contains) {
             clearCallingIdentity = Binder.clearCallingIdentity();
             try {
-                contains = ((RoleManager) Injector.this.mContext.getSystemService(RoleManager.class)).getRoleHolders("android.app.role.SYSTEM_AUTOMOTIVE_PROJECTION").contains(str);
+                contains =
+                        ((RoleManager) Injector.this.mContext.getSystemService(RoleManager.class))
+                                .getRoleHolders("android.app.role.SYSTEM_AUTOMOTIVE_PROJECTION")
+                                .contains(str);
             } finally {
             }
         }
-        if (contains && this.mContext.checkCallingOrSelfPermission("android.permission.DUMP") == 0) {
+        if (contains
+                && this.mContext.checkCallingOrSelfPermission("android.permission.DUMP") == 0) {
             return;
         }
         clearCallingIdentity = Binder.clearCallingIdentity();
@@ -606,7 +736,9 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
         Binder.restoreCallingIdentity(clearCallingIdentity);
         StringBuilder sb = new StringBuilder();
         sb.append(str);
-        sb.append(" does not hold the DUMP permission or is not bugreport-whitelisted or does not have an allowed role ");
+        sb.append(
+                " does not hold the DUMP permission or is not bugreport-whitelisted or does not"
+                    + " have an allowed role ");
         sb.append(z ? "and does not have carrier privileges " : "");
         sb.append("to request a bugreport");
         String sb2 = sb.toString();
@@ -625,10 +757,14 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
     public final void preDumpUiDataLocked(String str) {
         this.mPreDumpedDataUid = OptionalInt.empty();
         if (IDumpstate.Stub.asInterface(ServiceManager.getService("dumpstate")) != null) {
-            Slog.e("BugreportManagerService", "'dumpstate' is already running. Cannot pre-dump data while another operation is currently in progress.");
+            Slog.e(
+                    "BugreportManagerService",
+                    "'dumpstate' is already running. Cannot pre-dump data while another operation"
+                        + " is currently in progress.");
             return;
         }
-        IDumpstate startAndGetDumpstateBinderServiceLocked = startAndGetDumpstateBinderServiceLocked();
+        IDumpstate startAndGetDumpstateBinderServiceLocked =
+                startAndGetDumpstateBinderServiceLocked();
         if (startAndGetDumpstateBinderServiceLocked == null) {
             Slog.e("BugreportManagerService", "Unable to get bugreport service");
             return;
@@ -646,39 +782,90 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
     }
 
     @Override // android.os.IDumpstate
-    public final void retrieveBugreport(int i, String str, int i2, FileDescriptor fileDescriptor, String str2, boolean z, boolean z2, IDumpstateListener iDumpstateListener) {
+    public final void retrieveBugreport(
+            int i,
+            String str,
+            int i2,
+            FileDescriptor fileDescriptor,
+            String str2,
+            boolean z,
+            boolean z2,
+            IDumpstateListener iDumpstateListener) {
         int callingUid = Binder.getCallingUid();
         enforcePermission(callingUid, str, false);
-        Slogf.i("BugreportManagerService", "Retrieving bugreport for %s / %d", str, Integer.valueOf(callingUid));
+        Slogf.i(
+                "BugreportManagerService",
+                "Retrieving bugreport for %s / %d",
+                str,
+                Integer.valueOf(callingUid));
         try {
             BugreportFileManager bugreportFileManager = this.mBugreportFileManager;
             Context context = this.mContext;
-            bugreportFileManager.ensureCallerPreviouslyGeneratedFile(context, context.getPackageManager(), new Pair(Integer.valueOf(callingUid), str), i2, str2);
+            bugreportFileManager.ensureCallerPreviouslyGeneratedFile(
+                    context,
+                    context.getPackageManager(),
+                    new Pair(Integer.valueOf(callingUid), str),
+                    i2,
+                    str2);
             synchronized (this.mLock) {
                 try {
-                    if (IDumpstate.Stub.asInterface(ServiceManager.getService("dumpstate")) != null) {
-                        Slog.w("BugreportManagerService", "'dumpstate' is already running. Cannot retrieve a bugreport while another one is currently in progress.");
+                    if (IDumpstate.Stub.asInterface(ServiceManager.getService("dumpstate"))
+                            != null) {
+                        Slog.w(
+                                "BugreportManagerService",
+                                "'dumpstate' is already running. Cannot retrieve a bugreport while"
+                                    + " another one is currently in progress.");
                         reportError(iDumpstateListener, 5);
                         return;
                     }
-                    IDumpstate startAndGetDumpstateBinderServiceLocked = startAndGetDumpstateBinderServiceLocked();
+                    IDumpstate startAndGetDumpstateBinderServiceLocked =
+                            startAndGetDumpstateBinderServiceLocked();
                     if (startAndGetDumpstateBinderServiceLocked == null) {
                         Slog.w("BugreportManagerService", "Unable to get bugreport service");
                         reportError(iDumpstateListener, 2);
                         return;
                     }
-                    boolean canSkipConsentScreen = this.mBugreportFileManager.canSkipConsentScreen(str, false);
-                    DumpstateListener dumpstateListener = new DumpstateListener(iDumpstateListener, startAndGetDumpstateBinderServiceLocked, new Pair(Integer.valueOf(callingUid), str), true, false, !canSkipConsentScreen, true);
-                    boolean contains = Flags.onboardingBugreportV2Enabled() ? this.mBugreportFileManager.mBugreportFilesToPersist.contains(str2) : false;
+                    boolean canSkipConsentScreen =
+                            this.mBugreportFileManager.canSkipConsentScreen(str, false);
+                    DumpstateListener dumpstateListener =
+                            new DumpstateListener(
+                                    iDumpstateListener,
+                                    startAndGetDumpstateBinderServiceLocked,
+                                    new Pair(Integer.valueOf(callingUid), str),
+                                    true,
+                                    false,
+                                    !canSkipConsentScreen,
+                                    true);
+                    boolean contains =
+                            Flags.onboardingBugreportV2Enabled()
+                                    ? this.mBugreportFileManager.mBugreportFilesToPersist.contains(
+                                            str2)
+                                    : false;
                     DumpstateListener dumpstateListener2 = this.mCurrentDumpstateListener;
                     if (dumpstateListener2 != null) {
-                        Slogf.w("BugreportManagerService", "setCurrentDumpstateListenerLocked(%s): called when mCurrentDumpstateListener is already set (%s)", dumpstateListener, dumpstateListener2);
+                        Slogf.w(
+                                "BugreportManagerService",
+                                "setCurrentDumpstateListenerLocked(%s): called when"
+                                    + " mCurrentDumpstateListener is already set (%s)",
+                                dumpstateListener,
+                                dumpstateListener2);
                     }
                     this.mCurrentDumpstateListener = dumpstateListener;
                     try {
-                        startAndGetDumpstateBinderServiceLocked.retrieveBugreport(callingUid, str, i2, fileDescriptor, str2, contains, canSkipConsentScreen, dumpstateListener);
+                        startAndGetDumpstateBinderServiceLocked.retrieveBugreport(
+                                callingUid,
+                                str,
+                                i2,
+                                fileDescriptor,
+                                str2,
+                                contains,
+                                canSkipConsentScreen,
+                                dumpstateListener);
                     } catch (RemoteException e) {
-                        Slog.e("BugreportManagerService", "RemoteException in retrieveBugreport", e);
+                        Slog.e(
+                                "BugreportManagerService",
+                                "RemoteException in retrieveBugreport",
+                                e);
                     }
                 } catch (Throwable th) {
                     throw th;
@@ -707,13 +894,19 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
                 break;
             }
             SystemClock.sleep(i);
-            Slog.i("BugreportManagerService", "Waiting to get dumpstate service handle (" + i2 + "ms)");
+            Slog.i(
+                    "BugreportManagerService",
+                    "Waiting to get dumpstate service handle (" + i2 + "ms)");
             i2 += i;
             i *= 2;
             z = ((long) i2) > 30000;
         }
         if (z) {
-            BrailleDisplayConnection$$ExternalSyntheticOutline0.m(i2, "Timed out waiting to get dumpstate service handle (", "ms)", "BugreportManagerService");
+            BrailleDisplayConnection$$ExternalSyntheticOutline0.m(
+                    i2,
+                    "Timed out waiting to get dumpstate service handle (",
+                    "ms)",
+                    "BugreportManagerService");
         }
         return iDumpstate;
     }
@@ -729,12 +922,25 @@ public final class BugreportManagerServiceImpl extends IDumpstate.Stub {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void startBugreport(int r20, java.lang.String r21, java.io.FileDescriptor r22, java.io.FileDescriptor r23, int r24, int r25, android.os.IDumpstateListener r26, boolean r27, boolean r28) {
+    public final void startBugreport(
+            int r20,
+            java.lang.String r21,
+            java.io.FileDescriptor r22,
+            java.io.FileDescriptor r23,
+            int r24,
+            int r25,
+            android.os.IDumpstateListener r26,
+            boolean r27,
+            boolean r28) {
         /*
             Method dump skipped, instructions count: 477
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.os.BugreportManagerServiceImpl.startBugreport(int, java.lang.String, java.io.FileDescriptor, java.io.FileDescriptor, int, int, android.os.IDumpstateListener, boolean, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.os.BugreportManagerServiceImpl.startBugreport(int,"
+                    + " java.lang.String, java.io.FileDescriptor, java.io.FileDescriptor, int, int,"
+                    + " android.os.IDumpstateListener, boolean, boolean):void");
     }
 
     public final void stopDumpstateBinderServiceLocked() {

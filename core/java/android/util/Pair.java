@@ -21,7 +21,8 @@ public class Pair<F, S> {
     }
 
     public int hashCode() {
-        return (this.first == null ? 0 : this.first.hashCode()) ^ (this.second != null ? this.second.hashCode() : 0);
+        return (this.first == null ? 0 : this.first.hashCode())
+                ^ (this.second != null ? this.second.hashCode() : 0);
     }
 
     public String toString() {

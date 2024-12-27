@@ -80,7 +80,8 @@ public class ConnectivitySettingsUtils {
         if (mode != 1 && mode != 2 && mode != 3) {
             throw new IllegalArgumentException("Invalid private dns mode: " + mode);
         }
-        Settings.Global.putString(context.getContentResolver(), "private_dns_mode", getPrivateDnsModeAsString(mode));
+        Settings.Global.putString(
+                context.getContentResolver(), "private_dns_mode", getPrivateDnsModeAsString(mode));
     }
 
     public static String getPrivateDnsHostname(Context context) {

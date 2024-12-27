@@ -9,11 +9,13 @@ import android.view.autofill.AutofillId;
 import android.view.inputmethod.InlineSuggestion;
 import android.view.inputmethod.InlineSuggestionsRequest;
 import android.view.inputmethod.InlineSuggestionsResponse;
+
 import com.android.internal.inputmethod.IInlineSuggestionsRequestCallback;
 import com.android.internal.inputmethod.IInlineSuggestionsResponseCallback;
 import com.android.internal.inputmethod.InlineSuggestionsRequestInfo;
 import com.android.internal.util.function.TriConsumer;
 import com.android.internal.util.function.pooled.PooledLambda;
+
 import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.List;
@@ -23,7 +25,8 @@ import java.util.function.Supplier;
 
 /* loaded from: classes2.dex */
 class InlineSuggestionSession {
-    static final InlineSuggestionsResponse EMPTY_RESPONSE = new InlineSuggestionsResponse((List<InlineSuggestion>) Collections.emptyList());
+    static final InlineSuggestionsResponse EMPTY_RESPONSE =
+            new InlineSuggestionsResponse((List<InlineSuggestion>) Collections.emptyList());
     private static final String TAG = "ImsInlineSuggestionSession";
     private final IInlineSuggestionsRequestCallback mCallback;
     private boolean mCallbackInvoked = false;
@@ -36,7 +39,14 @@ class InlineSuggestionSession {
     private InlineSuggestionsResponseCallbackImpl mResponseCallback;
     private final Consumer<InlineSuggestionsResponse> mResponseConsumer;
 
-    InlineSuggestionSession(InlineSuggestionsRequestInfo requestInfo, IInlineSuggestionsRequestCallback callback, Function<Bundle, InlineSuggestionsRequest> requestSupplier, Supplier<IBinder> hostInputTokenSupplier, Consumer<InlineSuggestionsResponse> responseConsumer, InlineSuggestionSessionController inlineSuggestionSessionController, Handler mainThreadHandler) {
+    InlineSuggestionSession(
+            InlineSuggestionsRequestInfo requestInfo,
+            IInlineSuggestionsRequestCallback callback,
+            Function<Bundle, InlineSuggestionsRequest> requestSupplier,
+            Supplier<IBinder> hostInputTokenSupplier,
+            Consumer<InlineSuggestionsResponse> responseConsumer,
+            InlineSuggestionSessionController inlineSuggestionSessionController,
+            Handler mainThreadHandler) {
         this.mRequestInfo = requestInfo;
         this.mCallback = callback;
         this.mRequestSupplier = requestSupplier;
@@ -80,7 +90,8 @@ class InlineSuggestionSession {
             return;
         }
         try {
-            InlineSuggestionsRequest request = this.mRequestSupplier.apply(this.mRequestInfo.getUiExtras());
+            InlineSuggestionsRequest request =
+                    this.mRequestSupplier.apply(this.mRequestInfo.getUiExtras());
             if (request == null) {
                 this.mCallback.onInlineSuggestionsUnsupported();
             } else {
@@ -111,7 +122,8 @@ class InlineSuggestionSession {
         this.mResponseConsumer.accept(response);
     }
 
-    private static final class InlineSuggestionsResponseCallbackImpl extends IInlineSuggestionsResponseCallback.Stub {
+    private static final class InlineSuggestionsResponseCallbackImpl
+            extends IInlineSuggestionsResponseCallback.Stub {
         private volatile boolean mInvalid;
         private final WeakReference<InlineSuggestionSession> mSession;
 
@@ -125,15 +137,25 @@ class InlineSuggestionSession {
         }
 
         @Override // com.android.internal.inputmethod.IInlineSuggestionsResponseCallback
-        public void onInlineSuggestionsResponse(AutofillId fieldId, InlineSuggestionsResponse response) {
+        public void onInlineSuggestionsResponse(
+                AutofillId fieldId, InlineSuggestionsResponse response) {
             InlineSuggestionSession session;
             if (!this.mInvalid && (session = this.mSession.get()) != null) {
-                session.mMainThreadHandler.sendMessage(PooledLambda.obtainMessage(new TriConsumer() { // from class: android.inputmethodservice.InlineSuggestionSession$InlineSuggestionsResponseCallbackImpl$$ExternalSyntheticLambda0
-                    @Override // com.android.internal.util.function.TriConsumer
-                    public final void accept(Object obj, Object obj2, Object obj3) {
-                        ((InlineSuggestionSession) obj).handleOnInlineSuggestionsResponse((AutofillId) obj2, (InlineSuggestionsResponse) obj3);
-                    }
-                }, session, fieldId, response));
+                session.mMainThreadHandler.sendMessage(
+                        PooledLambda.obtainMessage(
+                                new TriConsumer() { // from class:
+                                    // android.inputmethodservice.InlineSuggestionSession$InlineSuggestionsResponseCallbackImpl$$ExternalSyntheticLambda0
+                                    @Override // com.android.internal.util.function.TriConsumer
+                                    public final void accept(Object obj, Object obj2, Object obj3) {
+                                        ((InlineSuggestionSession) obj)
+                                                .handleOnInlineSuggestionsResponse(
+                                                        (AutofillId) obj2,
+                                                        (InlineSuggestionsResponse) obj3);
+                                    }
+                                },
+                                session,
+                                fieldId,
+                                response));
             }
         }
     }

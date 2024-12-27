@@ -1,6 +1,5 @@
 package android.content.pm;
 
-import android.content.pm.IDataLoaderStatusListener;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -11,11 +10,17 @@ import android.os.RemoteException;
 public interface IDataLoader extends IInterface {
     public static final String DESCRIPTOR = "android.content.pm.IDataLoader";
 
-    void create(int i, DataLoaderParamsParcel dataLoaderParamsParcel, FileSystemControlParcel fileSystemControlParcel, IDataLoaderStatusListener iDataLoaderStatusListener) throws RemoteException;
+    void create(
+            int i,
+            DataLoaderParamsParcel dataLoaderParamsParcel,
+            FileSystemControlParcel fileSystemControlParcel,
+            IDataLoaderStatusListener iDataLoaderStatusListener)
+            throws RemoteException;
 
     void destroy(int i) throws RemoteException;
 
-    void prepareImage(int i, InstallationFileParcel[] installationFileParcelArr, String[] strArr) throws RemoteException;
+    void prepareImage(int i, InstallationFileParcel[] installationFileParcelArr, String[] strArr)
+            throws RemoteException;
 
     void start(int i) throws RemoteException;
 
@@ -23,24 +28,25 @@ public interface IDataLoader extends IInterface {
 
     public static class Default implements IDataLoader {
         @Override // android.content.pm.IDataLoader
-        public void create(int id, DataLoaderParamsParcel params, FileSystemControlParcel control, IDataLoaderStatusListener listener) throws RemoteException {
-        }
+        public void create(
+                int id,
+                DataLoaderParamsParcel params,
+                FileSystemControlParcel control,
+                IDataLoaderStatusListener listener)
+                throws RemoteException {}
 
         @Override // android.content.pm.IDataLoader
-        public void start(int id) throws RemoteException {
-        }
+        public void start(int id) throws RemoteException {}
 
         @Override // android.content.pm.IDataLoader
-        public void stop(int id) throws RemoteException {
-        }
+        public void stop(int id) throws RemoteException {}
 
         @Override // android.content.pm.IDataLoader
-        public void destroy(int id) throws RemoteException {
-        }
+        public void destroy(int id) throws RemoteException {}
 
         @Override // android.content.pm.IDataLoader
-        public void prepareImage(int id, InstallationFileParcel[] addedFiles, String[] removedFiles) throws RemoteException {
-        }
+        public void prepareImage(int id, InstallationFileParcel[] addedFiles, String[] removedFiles)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -48,7 +54,7 @@ public interface IDataLoader extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDataLoader {
+    public abstract static class Stub extends Binder implements IDataLoader {
         static final int TRANSACTION_create = 1;
         static final int TRANSACTION_destroy = 4;
         static final int TRANSACTION_prepareImage = 5;
@@ -98,7 +104,8 @@ public interface IDataLoader extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDataLoader.DESCRIPTOR);
             }
@@ -109,9 +116,14 @@ public interface IDataLoader extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    DataLoaderParamsParcel _arg1 = (DataLoaderParamsParcel) data.readTypedObject(DataLoaderParamsParcel.CREATOR);
-                    FileSystemControlParcel _arg2 = (FileSystemControlParcel) data.readTypedObject(FileSystemControlParcel.CREATOR);
-                    IDataLoaderStatusListener _arg3 = IDataLoaderStatusListener.Stub.asInterface(data.readStrongBinder());
+                    DataLoaderParamsParcel _arg1 =
+                            (DataLoaderParamsParcel)
+                                    data.readTypedObject(DataLoaderParamsParcel.CREATOR);
+                    FileSystemControlParcel _arg2 =
+                            (FileSystemControlParcel)
+                                    data.readTypedObject(FileSystemControlParcel.CREATOR);
+                    IDataLoaderStatusListener _arg3 =
+                            IDataLoaderStatusListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     create(_arg0, _arg1, _arg2, _arg3);
                     return true;
@@ -132,7 +144,9 @@ public interface IDataLoader extends IInterface {
                     return true;
                 case 5:
                     int _arg05 = data.readInt();
-                    InstallationFileParcel[] _arg12 = (InstallationFileParcel[]) data.createTypedArray(InstallationFileParcel.CREATOR);
+                    InstallationFileParcel[] _arg12 =
+                            (InstallationFileParcel[])
+                                    data.createTypedArray(InstallationFileParcel.CREATOR);
                     String[] _arg22 = data.createStringArray();
                     data.enforceNoDataAvail();
                     prepareImage(_arg05, _arg12, _arg22);
@@ -159,7 +173,12 @@ public interface IDataLoader extends IInterface {
             }
 
             @Override // android.content.pm.IDataLoader
-            public void create(int id, DataLoaderParamsParcel params, FileSystemControlParcel control, IDataLoaderStatusListener listener) throws RemoteException {
+            public void create(
+                    int id,
+                    DataLoaderParamsParcel params,
+                    FileSystemControlParcel control,
+                    IDataLoaderStatusListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDataLoader.DESCRIPTOR);
@@ -210,7 +229,9 @@ public interface IDataLoader extends IInterface {
             }
 
             @Override // android.content.pm.IDataLoader
-            public void prepareImage(int id, InstallationFileParcel[] addedFiles, String[] removedFiles) throws RemoteException {
+            public void prepareImage(
+                    int id, InstallationFileParcel[] addedFiles, String[] removedFiles)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDataLoader.DESCRIPTOR);

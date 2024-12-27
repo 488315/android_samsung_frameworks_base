@@ -8,13 +8,17 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface ISehRadioSatelliteIndication extends IInterface {
-    public static final String DESCRIPTOR = "vendor$samsung$hardware$radio$satellite$ISehRadioSatelliteIndication".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "vendor$samsung$hardware$radio$satellite$ISehRadioSatelliteIndication"
+                    .replace('$', '.');
     public static final String HASH = "ae6e84d3e4b8110a872e15980b70939aa6b152ef";
     public static final int VERSION = 1;
 
-    void callEndReasonUpdated(int i, SehSatCallEndReason sehSatCallEndReason) throws RemoteException;
+    void callEndReasonUpdated(int i, SehSatCallEndReason sehSatCallEndReason)
+            throws RemoteException;
 
-    void callNumberDisplayInfoUpdated(int i, SehSatCallDisplayInfo sehSatCallDisplayInfo) throws RemoteException;
+    void callNumberDisplayInfoUpdated(int i, SehSatCallDisplayInfo sehSatCallDisplayInfo)
+            throws RemoteException;
 
     void callStateChanged(int i) throws RemoteException;
 
@@ -28,60 +32,57 @@ public interface ISehRadioSatelliteIndication extends IInterface {
 
     void radioStateChanged(int i, int i2) throws RemoteException;
 
-    void registrationStateChanged(int i, SehSatRegStateResult sehSatRegStateResult) throws RemoteException;
+    void registrationStateChanged(int i, SehSatRegStateResult sehSatRegStateResult)
+            throws RemoteException;
 
     void requestGpsData(int i) throws RemoteException;
 
-    void requestIccSimAuthentication(int i, SehSatSimAuthReqData sehSatSimAuthReqData) throws RemoteException;
+    void requestIccSimAuthentication(int i, SehSatSimAuthReqData sehSatSimAuthReqData)
+            throws RemoteException;
 
-    void signalStrenghChanged(int i, SehSatSignalStrength sehSatSignalStrength) throws RemoteException;
+    void signalStrenghChanged(int i, SehSatSignalStrength sehSatSignalStrength)
+            throws RemoteException;
 
     void simAuthenticationFailed(int i) throws RemoteException;
 
     public static class Default implements ISehRadioSatelliteIndication {
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatelliteIndication
-        public void callStateChanged(int type) throws RemoteException {
-        }
+        public void callStateChanged(int type) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatelliteIndication
-        public void callEndReasonUpdated(int type, SehSatCallEndReason reason) throws RemoteException {
-        }
+        public void callEndReasonUpdated(int type, SehSatCallEndReason reason)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatelliteIndication
-        public void callNumberDisplayInfoUpdated(int type, SehSatCallDisplayInfo info) throws RemoteException {
-        }
+        public void callNumberDisplayInfoUpdated(int type, SehSatCallDisplayInfo info)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatelliteIndication
-        public void registrationStateChanged(int type, SehSatRegStateResult result) throws RemoteException {
-        }
+        public void registrationStateChanged(int type, SehSatRegStateResult result)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatelliteIndication
-        public void signalStrenghChanged(int type, SehSatSignalStrength signal) throws RemoteException {
-        }
+        public void signalStrenghChanged(int type, SehSatSignalStrength signal)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatelliteIndication
-        public void requestGpsData(int type) throws RemoteException {
-        }
+        public void requestGpsData(int type) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatelliteIndication
-        public void radioStateChanged(int type, int state) throws RemoteException {
-        }
+        public void radioStateChanged(int type, int state) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatelliteIndication
-        public void requestIccSimAuthentication(int type, SehSatSimAuthReqData data) throws RemoteException {
-        }
+        public void requestIccSimAuthentication(int type, SehSatSimAuthReqData data)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatelliteIndication
-        public void simAuthenticationFailed(int type) throws RemoteException {
-        }
+        public void simAuthenticationFailed(int type) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatelliteIndication
-        public void newSms(int type, byte[] pdu) throws RemoteException {
-        }
+        public void newSms(int type, byte[] pdu) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatelliteIndication
-        public void newSmsStatusReport(int type, SehSatStatusReport data) throws RemoteException {
-        }
+        public void newSmsStatusReport(int type, SehSatStatusReport data) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatelliteIndication
         public int getInterfaceVersion() {
@@ -99,7 +100,7 @@ public interface ISehRadioSatelliteIndication extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISehRadioSatelliteIndication {
+    public abstract static class Stub extends Binder implements ISehRadioSatelliteIndication {
         static final int TRANSACTION_callEndReasonUpdated = 2;
         static final int TRANSACTION_callNumberDisplayInfoUpdated = 3;
         static final int TRANSACTION_callStateChanged = 1;
@@ -136,7 +137,8 @@ public interface ISehRadioSatelliteIndication extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -163,25 +165,32 @@ public interface ISehRadioSatelliteIndication extends IInterface {
                     return true;
                 case 2:
                     int _arg02 = data.readInt();
-                    SehSatCallEndReason _arg1 = (SehSatCallEndReason) data.readTypedObject(SehSatCallEndReason.CREATOR);
+                    SehSatCallEndReason _arg1 =
+                            (SehSatCallEndReason) data.readTypedObject(SehSatCallEndReason.CREATOR);
                     data.enforceNoDataAvail();
                     callEndReasonUpdated(_arg02, _arg1);
                     return true;
                 case 3:
                     int _arg03 = data.readInt();
-                    SehSatCallDisplayInfo _arg12 = (SehSatCallDisplayInfo) data.readTypedObject(SehSatCallDisplayInfo.CREATOR);
+                    SehSatCallDisplayInfo _arg12 =
+                            (SehSatCallDisplayInfo)
+                                    data.readTypedObject(SehSatCallDisplayInfo.CREATOR);
                     data.enforceNoDataAvail();
                     callNumberDisplayInfoUpdated(_arg03, _arg12);
                     return true;
                 case 4:
                     int _arg04 = data.readInt();
-                    SehSatRegStateResult _arg13 = (SehSatRegStateResult) data.readTypedObject(SehSatRegStateResult.CREATOR);
+                    SehSatRegStateResult _arg13 =
+                            (SehSatRegStateResult)
+                                    data.readTypedObject(SehSatRegStateResult.CREATOR);
                     data.enforceNoDataAvail();
                     registrationStateChanged(_arg04, _arg13);
                     return true;
                 case 5:
                     int _arg05 = data.readInt();
-                    SehSatSignalStrength _arg14 = (SehSatSignalStrength) data.readTypedObject(SehSatSignalStrength.CREATOR);
+                    SehSatSignalStrength _arg14 =
+                            (SehSatSignalStrength)
+                                    data.readTypedObject(SehSatSignalStrength.CREATOR);
                     data.enforceNoDataAvail();
                     signalStrenghChanged(_arg05, _arg14);
                     return true;
@@ -198,7 +207,9 @@ public interface ISehRadioSatelliteIndication extends IInterface {
                     return true;
                 case 8:
                     int _arg08 = data.readInt();
-                    SehSatSimAuthReqData _arg16 = (SehSatSimAuthReqData) data.readTypedObject(SehSatSimAuthReqData.CREATOR);
+                    SehSatSimAuthReqData _arg16 =
+                            (SehSatSimAuthReqData)
+                                    data.readTypedObject(SehSatSimAuthReqData.CREATOR);
                     data.enforceNoDataAvail();
                     requestIccSimAuthentication(_arg08, _arg16);
                     return true;
@@ -215,7 +226,8 @@ public interface ISehRadioSatelliteIndication extends IInterface {
                     return true;
                 case 11:
                     int _arg011 = data.readInt();
-                    SehSatStatusReport _arg18 = (SehSatStatusReport) data.readTypedObject(SehSatStatusReport.CREATOR);
+                    SehSatStatusReport _arg18 =
+                            (SehSatStatusReport) data.readTypedObject(SehSatStatusReport.CREATOR);
                     data.enforceNoDataAvail();
                     newSmsStatusReport(_arg011, _arg18);
                     return true;
@@ -258,7 +270,8 @@ public interface ISehRadioSatelliteIndication extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatelliteIndication
-            public void callEndReasonUpdated(int type, SehSatCallEndReason reason) throws RemoteException {
+            public void callEndReasonUpdated(int type, SehSatCallEndReason reason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -274,7 +287,8 @@ public interface ISehRadioSatelliteIndication extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatelliteIndication
-            public void callNumberDisplayInfoUpdated(int type, SehSatCallDisplayInfo info) throws RemoteException {
+            public void callNumberDisplayInfoUpdated(int type, SehSatCallDisplayInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -282,7 +296,8 @@ public interface ISehRadioSatelliteIndication extends IInterface {
                     _data.writeTypedObject(info, 0);
                     boolean _status = this.mRemote.transact(3, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method callNumberDisplayInfoUpdated is unimplemented.");
+                        throw new RemoteException(
+                                "Method callNumberDisplayInfoUpdated is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -290,7 +305,8 @@ public interface ISehRadioSatelliteIndication extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatelliteIndication
-            public void registrationStateChanged(int type, SehSatRegStateResult result) throws RemoteException {
+            public void registrationStateChanged(int type, SehSatRegStateResult result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -298,7 +314,8 @@ public interface ISehRadioSatelliteIndication extends IInterface {
                     _data.writeTypedObject(result, 0);
                     boolean _status = this.mRemote.transact(4, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method registrationStateChanged is unimplemented.");
+                        throw new RemoteException(
+                                "Method registrationStateChanged is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -306,7 +323,8 @@ public interface ISehRadioSatelliteIndication extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatelliteIndication
-            public void signalStrenghChanged(int type, SehSatSignalStrength signal) throws RemoteException {
+            public void signalStrenghChanged(int type, SehSatSignalStrength signal)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -353,7 +371,8 @@ public interface ISehRadioSatelliteIndication extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatelliteIndication
-            public void requestIccSimAuthentication(int type, SehSatSimAuthReqData data) throws RemoteException {
+            public void requestIccSimAuthentication(int type, SehSatSimAuthReqData data)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -361,7 +380,8 @@ public interface ISehRadioSatelliteIndication extends IInterface {
                     _data.writeTypedObject(data, 0);
                     boolean _status = this.mRemote.transact(8, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method requestIccSimAuthentication is unimplemented.");
+                        throw new RemoteException(
+                                "Method requestIccSimAuthentication is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -376,7 +396,8 @@ public interface ISehRadioSatelliteIndication extends IInterface {
                     _data.writeInt(type);
                     boolean _status = this.mRemote.transact(9, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method simAuthenticationFailed is unimplemented.");
+                        throw new RemoteException(
+                                "Method simAuthenticationFailed is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -400,7 +421,8 @@ public interface ISehRadioSatelliteIndication extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.satellite.ISehRadioSatelliteIndication
-            public void newSmsStatusReport(int type, SehSatStatusReport data) throws RemoteException {
+            public void newSmsStatusReport(int type, SehSatStatusReport data)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);

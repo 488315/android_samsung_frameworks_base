@@ -5,34 +5,43 @@ import android.hardware.biometrics.BiometricRequestConstants;
 import android.hardware.biometrics.BiometricSourceType;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Annotation;
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public final class AuthenticationAcquiredInfo implements Parcelable {
-    public static final Parcelable.Creator<AuthenticationAcquiredInfo> CREATOR = new Parcelable.Creator<AuthenticationAcquiredInfo>() { // from class: android.hardware.biometrics.events.AuthenticationAcquiredInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AuthenticationAcquiredInfo[] newArray(int size) {
-            return new AuthenticationAcquiredInfo[size];
-        }
+    public static final Parcelable.Creator<AuthenticationAcquiredInfo> CREATOR =
+            new Parcelable.Creator<AuthenticationAcquiredInfo>() { // from class:
+                // android.hardware.biometrics.events.AuthenticationAcquiredInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AuthenticationAcquiredInfo[] newArray(int size) {
+                    return new AuthenticationAcquiredInfo[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AuthenticationAcquiredInfo createFromParcel(Parcel in) {
-            return new AuthenticationAcquiredInfo(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AuthenticationAcquiredInfo createFromParcel(Parcel in) {
+                    return new AuthenticationAcquiredInfo(in);
+                }
+            };
     private final int mAcquiredInfo;
     private final BiometricSourceType mBiometricSourceType;
     private final int mRequestReason;
 
-    AuthenticationAcquiredInfo(BiometricSourceType biometricSourceType, int requestReason, int acquiredInfo) {
+    AuthenticationAcquiredInfo(
+            BiometricSourceType biometricSourceType, int requestReason, int acquiredInfo) {
         this.mBiometricSourceType = biometricSourceType;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBiometricSourceType);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBiometricSourceType);
         this.mRequestReason = requestReason;
-        AnnotationValidations.validate((Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class, (Annotation) null, this.mRequestReason);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class,
+                (Annotation) null,
+                this.mRequestReason);
         this.mAcquiredInfo = acquiredInfo;
     }
 
@@ -56,7 +65,9 @@ public final class AuthenticationAcquiredInfo implements Parcelable {
             return false;
         }
         AuthenticationAcquiredInfo that = (AuthenticationAcquiredInfo) o;
-        if (Objects.equals(this.mBiometricSourceType, that.mBiometricSourceType) && this.mRequestReason == that.mRequestReason && this.mAcquiredInfo == that.mAcquiredInfo) {
+        if (Objects.equals(this.mBiometricSourceType, that.mBiometricSourceType)
+                && this.mRequestReason == that.mRequestReason
+                && this.mAcquiredInfo == that.mAcquiredInfo) {
             return true;
         }
         return false;
@@ -80,13 +91,18 @@ public final class AuthenticationAcquiredInfo implements Parcelable {
     }
 
     AuthenticationAcquiredInfo(Parcel in) {
-        BiometricSourceType biometricSourceType = (BiometricSourceType) in.readTypedObject(BiometricSourceType.CREATOR);
+        BiometricSourceType biometricSourceType =
+                (BiometricSourceType) in.readTypedObject(BiometricSourceType.CREATOR);
         int requestReason = in.readInt();
         int acquiredInfo = in.readInt();
         this.mBiometricSourceType = biometricSourceType;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBiometricSourceType);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBiometricSourceType);
         this.mRequestReason = requestReason;
-        AnnotationValidations.validate((Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class, (Annotation) null, this.mRequestReason);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class,
+                (Annotation) null,
+                this.mRequestReason);
         this.mAcquiredInfo = acquiredInfo;
     }
 
@@ -96,11 +112,18 @@ public final class AuthenticationAcquiredInfo implements Parcelable {
         private long mBuilderFieldsSet = 0;
         private int mRequestReason;
 
-        public Builder(BiometricSourceType biometricSourceType, int requestReason, int acquiredInfo) {
+        public Builder(
+                BiometricSourceType biometricSourceType, int requestReason, int acquiredInfo) {
             this.mBiometricSourceType = biometricSourceType;
-            AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mBiometricSourceType);
+            AnnotationValidations.validate(
+                    (Class<NonNull>) NonNull.class,
+                    (NonNull) null,
+                    (Object) this.mBiometricSourceType);
             this.mRequestReason = requestReason;
-            AnnotationValidations.validate((Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class, (Annotation) null, this.mRequestReason);
+            AnnotationValidations.validate(
+                    (Class<? extends Annotation>) BiometricRequestConstants.RequestReason.class,
+                    (Annotation) null,
+                    this.mRequestReason);
             this.mAcquiredInfo = acquiredInfo;
         }
 
@@ -128,18 +151,20 @@ public final class AuthenticationAcquiredInfo implements Parcelable {
         public AuthenticationAcquiredInfo build() {
             checkNotUsed();
             this.mBuilderFieldsSet |= 8;
-            AuthenticationAcquiredInfo o = new AuthenticationAcquiredInfo(this.mBiometricSourceType, this.mRequestReason, this.mAcquiredInfo);
+            AuthenticationAcquiredInfo o =
+                    new AuthenticationAcquiredInfo(
+                            this.mBiometricSourceType, this.mRequestReason, this.mAcquiredInfo);
             return o;
         }
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 8) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

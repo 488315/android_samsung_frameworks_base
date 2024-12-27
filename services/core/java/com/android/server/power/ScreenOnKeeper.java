@@ -11,8 +11,10 @@ import android.os.PowerManager;
 import android.os.PowerManagerInternal;
 import android.os.SystemClock;
 import android.provider.Settings;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.VcnManagementService$$ExternalSyntheticLambda10;
+
 import java.io.PrintWriter;
 import java.util.function.IntSupplier;
 
@@ -35,8 +37,7 @@ public final class ScreenOnKeeper {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ScreenOnKeeperHandlerCallback implements Handler.Callback {
-        public ScreenOnKeeperHandlerCallback() {
-        }
+        public ScreenOnKeeperHandlerCallback() {}
 
         @Override // android.os.Handler.Callback
         public final boolean handleMessage(Message message) {
@@ -47,12 +48,17 @@ public final class ScreenOnKeeper {
                     try {
                         screenOnKeeper.mClock.getClass();
                         long uptimeMillis = SystemClock.uptimeMillis();
-                        long j = screenOnKeeper.mLastScreenTouchTime + screenOnKeeper.mTouchOutCheckDuration;
+                        long j =
+                                screenOnKeeper.mLastScreenTouchTime
+                                        + screenOnKeeper.mTouchOutCheckDuration;
                         if (j <= uptimeMillis) {
                             screenOnKeeper.notifyKeepScreenOnExpiredLocked();
                         } else {
-                            Slog.d("ScreenOnKeeper", "checkKeepScreenOnDuration: wait next validation time");
-                            screenOnKeeper.mHandler.sendMessageAtTime(screenOnKeeper.mHandler.obtainMessage(1), j);
+                            Slog.d(
+                                    "ScreenOnKeeper",
+                                    "checkKeepScreenOnDuration: wait next validation time");
+                            screenOnKeeper.mHandler.sendMessageAtTime(
+                                    screenOnKeeper.mHandler.obtainMessage(1), j);
                         }
                     } finally {
                     }
@@ -88,20 +94,28 @@ public final class ScreenOnKeeper {
         int i;
         screenOnKeeper.getClass();
         try {
-            i = Settings.Global.getInt(screenOnKeeper.mContext.getContentResolver(), "screen_on_keeper");
+            i =
+                    Settings.Global.getInt(
+                            screenOnKeeper.mContext.getContentResolver(), "screen_on_keeper");
         } catch (Settings.SettingNotFoundException e) {
             int i2 = Slog.$r8$clinit;
             if (PowerManagerUtil.SEC_FEATURE_USE_PMS_LOG) {
-                Slog.addPMSLogList("D ScreenOnKeeper: handleSettingsChangedLocked: SettingNotFoundException=");
+                Slog.addPMSLogList(
+                        "D ScreenOnKeeper: handleSettingsChangedLocked: SettingNotFoundException=");
             }
-            android.util.Slog.d("ScreenOnKeeper", "handleSettingsChangedLocked: SettingNotFoundException=", e);
+            android.util.Slog.d(
+                    "ScreenOnKeeper", "handleSettingsChangedLocked: SettingNotFoundException=", e);
             i = 0;
         }
         Slog.d("ScreenOnKeeper", "handleSettingsChangedLocked: screenOnKeeperSettingValue=" + i);
         boolean z = i > 0;
         screenOnKeeper.mIsScreenOnKeeperEnabled = z;
         if (z && !PowerManagerInternal.isInteractive(screenOnKeeper.mWakefulness)) {
-            Slog.d("ScreenOnKeeper", "handleSettingsChangedLocked: disable keep screen on mWakefulness=" + PowerManagerInternal.wakefulnessToString(screenOnKeeper.mWakefulness));
+            Slog.d(
+                    "ScreenOnKeeper",
+                    "handleSettingsChangedLocked: disable keep screen on mWakefulness="
+                            + PowerManagerInternal.wakefulnessToString(
+                                    screenOnKeeper.mWakefulness));
             screenOnKeeper.disableScreenOnKeeper();
             screenOnKeeper.notifyScreenOnKeeperDisabledLocked(0);
             return;
@@ -122,11 +136,21 @@ public final class ScreenOnKeeper {
         }
         Message obtainMessage = handler.obtainMessage(1);
         screenOnKeeper.mClock.getClass();
-        handler.sendMessageAtTime(obtainMessage, SystemClock.uptimeMillis() + screenOnKeeper.mKeepScreenOnDuration);
+        handler.sendMessageAtTime(
+                obtainMessage, SystemClock.uptimeMillis() + screenOnKeeper.mKeepScreenOnDuration);
     }
 
-    public ScreenOnKeeper(Context context, Object obj, Looper looper, int i, PowerManagerService$$ExternalSyntheticLambda16 powerManagerService$$ExternalSyntheticLambda16, SystemPropertiesWrapper systemPropertiesWrapper) {
-        VcnManagementService$$ExternalSyntheticLambda10 vcnManagementService$$ExternalSyntheticLambda10 = new VcnManagementService$$ExternalSyntheticLambda10();
+    public ScreenOnKeeper(
+            Context context,
+            Object obj,
+            Looper looper,
+            int i,
+            PowerManagerService$$ExternalSyntheticLambda16
+                    powerManagerService$$ExternalSyntheticLambda16,
+            SystemPropertiesWrapper systemPropertiesWrapper) {
+        VcnManagementService$$ExternalSyntheticLambda10
+                vcnManagementService$$ExternalSyntheticLambda10 =
+                        new VcnManagementService$$ExternalSyntheticLambda10();
         this.mContext = context;
         this.mLock = obj;
         this.mHandler = new Handler(looper, new ScreenOnKeeperHandlerCallback());
@@ -134,10 +158,18 @@ public final class ScreenOnKeeper {
         this.mWakefulness = i;
         this.mWakeLockSummarySupplier = powerManagerService$$ExternalSyntheticLambda16;
         this.mSystemProperties = systemPropertiesWrapper;
-        this.mWakeLock = ((PowerManager) context.getSystemService("power")).newWakeLock(10, "ScreenOnKeeper");
+        this.mWakeLock =
+                ((PowerManager) context.getSystemService("power"))
+                        .newWakeLock(10, "ScreenOnKeeper");
         try {
-            long parseInt = Integer.parseInt(systemPropertiesWrapper.get("persist.debug.power.keep_screen_on_duration", "-1"));
-            long parseInt2 = Integer.parseInt(systemPropertiesWrapper.get("persist.debug.power.touch_out_duration", "-1"));
+            long parseInt =
+                    Integer.parseInt(
+                            systemPropertiesWrapper.get(
+                                    "persist.debug.power.keep_screen_on_duration", "-1"));
+            long parseInt2 =
+                    Integer.parseInt(
+                            systemPropertiesWrapper.get(
+                                    "persist.debug.power.touch_out_duration", "-1"));
             if (parseInt < 0) {
                 parseInt = 1800000;
             }
@@ -153,7 +185,8 @@ public final class ScreenOnKeeper {
         }
         disableScreenOnKeeper();
         Handler handler = this.mHandler;
-        ScreenOnKeeper$$ExternalSyntheticLambda1 screenOnKeeper$$ExternalSyntheticLambda1 = new ScreenOnKeeper$$ExternalSyntheticLambda1(this, 1);
+        ScreenOnKeeper$$ExternalSyntheticLambda1 screenOnKeeper$$ExternalSyntheticLambda1 =
+                new ScreenOnKeeper$$ExternalSyntheticLambda1(this, 1);
         getClass();
         handler.postAtTime(screenOnKeeper$$ExternalSyntheticLambda1, SystemClock.uptimeMillis());
     }
@@ -165,7 +198,24 @@ public final class ScreenOnKeeper {
     public final void dump(PrintWriter printWriter) {
         printWriter.println();
         printWriter.println("Screen On Keeper");
-        StringBuilder m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("  mKeepScreenOnDuration="), this.mKeepScreenOnDuration, printWriter, "  mTouchOutCheckDuration="), this.mTouchOutCheckDuration, printWriter, "  mIsScreenOnKeeperEnabled="), this.mIsScreenOnKeeperEnabled, printWriter, "  mLastScreenTouchTime="), this.mLastScreenTouchTime, printWriter, "  mWakeLock.isHeld()=");
+        StringBuilder m =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                                new StringBuilder("  mKeepScreenOnDuration="),
+                                                this.mKeepScreenOnDuration,
+                                                printWriter,
+                                                "  mTouchOutCheckDuration="),
+                                        this.mTouchOutCheckDuration,
+                                        printWriter,
+                                        "  mIsScreenOnKeeperEnabled="),
+                                this.mIsScreenOnKeeperEnabled,
+                                printWriter,
+                                "  mLastScreenTouchTime="),
+                        this.mLastScreenTouchTime,
+                        printWriter,
+                        "  mWakeLock.isHeld()=");
         m.append(this.mWakeLock.isHeld());
         printWriter.println(m.toString());
         printWriter.println();
@@ -173,7 +223,9 @@ public final class ScreenOnKeeper {
 
     public final void notifyKeepScreenOnExpiredLocked() {
         if ((this.mWakeLockSummarySupplier.getAsInt() & 2) == 0) {
-            Slog.d("ScreenOnKeeper", "notifyKeepScreenOnExpiredLocked: disable directly, wakelock exist");
+            Slog.d(
+                    "ScreenOnKeeper",
+                    "notifyKeepScreenOnExpiredLocked: disable directly, wakelock exist");
             disableScreenOnKeeper();
             notifyScreenOnKeeperDisabledLocked(3);
             return;
@@ -182,8 +234,10 @@ public final class ScreenOnKeeper {
         Intent intent = new Intent("android.intent.action.KEEP_SCREEN_ON_EXPIRED");
         intent.setPackage("com.samsung.android.displayassistant");
         Handler handler = this.mHandler;
-        ScreenOnKeeper$$ExternalSyntheticLambda0 screenOnKeeper$$ExternalSyntheticLambda0 = new ScreenOnKeeper$$ExternalSyntheticLambda0(this, intent, 1);
-        VcnManagementService$$ExternalSyntheticLambda10 vcnManagementService$$ExternalSyntheticLambda10 = this.mClock;
+        ScreenOnKeeper$$ExternalSyntheticLambda0 screenOnKeeper$$ExternalSyntheticLambda0 =
+                new ScreenOnKeeper$$ExternalSyntheticLambda0(this, intent, 1);
+        VcnManagementService$$ExternalSyntheticLambda10
+                vcnManagementService$$ExternalSyntheticLambda10 = this.mClock;
         vcnManagementService$$ExternalSyntheticLambda10.getClass();
         handler.postAtTime(screenOnKeeper$$ExternalSyntheticLambda0, SystemClock.uptimeMillis());
         Message obtainMessage = handler.obtainMessage(2);
@@ -196,7 +250,8 @@ public final class ScreenOnKeeper {
         intent.setPackage("com.samsung.android.displayassistant");
         intent.putExtra("reason", i);
         Handler handler = this.mHandler;
-        ScreenOnKeeper$$ExternalSyntheticLambda0 screenOnKeeper$$ExternalSyntheticLambda0 = new ScreenOnKeeper$$ExternalSyntheticLambda0(this, intent, 0);
+        ScreenOnKeeper$$ExternalSyntheticLambda0 screenOnKeeper$$ExternalSyntheticLambda0 =
+                new ScreenOnKeeper$$ExternalSyntheticLambda0(this, intent, 0);
         getClass();
         handler.postAtTime(screenOnKeeper$$ExternalSyntheticLambda0, SystemClock.uptimeMillis());
     }

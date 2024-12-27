@@ -30,6 +30,7 @@ public class SurfaceTextureTarget extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = "renderMode")
     private String mRenderModeString;
+
     private GLFrame mScreen;
 
     @GenerateFinalPort(name = "height")
@@ -40,6 +41,7 @@ public class SurfaceTextureTarget extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = "sourceQuad")
     private Quad mSourceQuad;
+
     private int mSurfaceId;
 
     @GenerateFinalPort(name = "surfaceTexture")
@@ -54,8 +56,18 @@ public class SurfaceTextureTarget extends Filter {
         this.RENDERMODE_FIT = 1;
         this.RENDERMODE_FILL_CROP = 2;
         this.RENDERMODE_CUSTOMIZE = 3;
-        this.mSourceQuad = new Quad(new Point(0.0f, 1.0f), new Point(1.0f, 1.0f), new Point(0.0f, 0.0f), new Point(1.0f, 0.0f));
-        this.mTargetQuad = new Quad(new Point(0.0f, 0.0f), new Point(1.0f, 0.0f), new Point(0.0f, 1.0f), new Point(1.0f, 1.0f));
+        this.mSourceQuad =
+                new Quad(
+                        new Point(0.0f, 1.0f),
+                        new Point(1.0f, 1.0f),
+                        new Point(0.0f, 0.0f),
+                        new Point(1.0f, 0.0f));
+        this.mTargetQuad =
+                new Quad(
+                        new Point(0.0f, 0.0f),
+                        new Point(1.0f, 0.0f),
+                        new Point(0.0f, 1.0f),
+                        new Point(1.0f, 1.0f));
         this.mRenderMode = 1;
         this.mAspectRatio = 1.0f;
         this.mLogVerbose = Log.isLoggable(TAG, 2);
@@ -108,11 +120,16 @@ public class SurfaceTextureTarget extends Filter {
     public synchronized void open(FilterContext context) {
         if (this.mSurfaceTexture == null) {
             Log.e(TAG, "SurfaceTexture is null!!");
-            throw new RuntimeException("Could not register SurfaceTexture: " + this.mSurfaceTexture);
+            throw new RuntimeException(
+                    "Could not register SurfaceTexture: " + this.mSurfaceTexture);
         }
-        this.mSurfaceId = context.getGLEnvironment().registerSurfaceTexture(this.mSurfaceTexture, this.mScreenWidth, this.mScreenHeight);
+        this.mSurfaceId =
+                context.getGLEnvironment()
+                        .registerSurfaceTexture(
+                                this.mSurfaceTexture, this.mScreenWidth, this.mScreenHeight);
         if (this.mSurfaceId <= 0) {
-            throw new RuntimeException("Could not register SurfaceTexture: " + this.mSurfaceTexture);
+            throw new RuntimeException(
+                    "Could not register SurfaceTexture: " + this.mSurfaceTexture);
         }
     }
 
@@ -151,7 +168,14 @@ public class SurfaceTextureTarget extends Filter {
         float currentAspectRatio = input.getFormat().getWidth() / input.getFormat().getHeight();
         if (currentAspectRatio != this.mAspectRatio) {
             if (this.mLogVerbose) {
-                Log.v(TAG, "Process. New aspect ratio: " + currentAspectRatio + ", previously: " + this.mAspectRatio + ". Thread: " + Thread.currentThread());
+                Log.v(
+                        TAG,
+                        "Process. New aspect ratio: "
+                                + currentAspectRatio
+                                + ", previously: "
+                                + this.mAspectRatio
+                                + ". Thread: "
+                                + Thread.currentThread());
             }
             this.mAspectRatio = currentAspectRatio;
             updateTargetRect();
@@ -195,7 +219,18 @@ public class SurfaceTextureTarget extends Filter {
             float screenAspectRatio = this.mScreenWidth / this.mScreenHeight;
             float relativeAspectRatio = screenAspectRatio / this.mAspectRatio;
             if (this.mLogVerbose) {
-                Log.v(TAG, "UTR. screen w = " + this.mScreenWidth + " x screen h = " + this.mScreenHeight + " Screen AR: " + screenAspectRatio + ", frame AR: " + this.mAspectRatio + ", relative AR: " + relativeAspectRatio);
+                Log.v(
+                        TAG,
+                        "UTR. screen w = "
+                                + this.mScreenWidth
+                                + " x screen h = "
+                                + this.mScreenHeight
+                                + " Screen AR: "
+                                + screenAspectRatio
+                                + ", frame AR: "
+                                + this.mAspectRatio
+                                + ", relative AR: "
+                                + relativeAspectRatio);
             }
             if (relativeAspectRatio == 1.0f && this.mRenderMode != 3) {
                 this.mProgram.setTargetRect(0.0f, 0.0f, 1.0f, 1.0f);

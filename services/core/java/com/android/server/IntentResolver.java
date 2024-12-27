@@ -12,10 +12,12 @@ import android.util.MutableInt;
 import android.util.PrintWriterPrinter;
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.hidden_from_bootclasspath.android.permission.flags.Flags;
 import com.android.internal.util.FastPrintWriter;
 import com.android.server.pm.Computer;
 import com.android.server.pm.snapshot.PackageDataSnapshot;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -82,7 +84,8 @@ public abstract class IntentResolver {
         }
     }
 
-    public static void writeProtoMap(ProtoOutputStream protoOutputStream, long j, ArrayMap arrayMap) {
+    public static void writeProtoMap(
+            ProtoOutputStream protoOutputStream, long j, ArrayMap arrayMap) {
         int size = arrayMap.size();
         for (int i = 0; i < size; i++) {
             long start = protoOutputStream.start(j);
@@ -123,7 +126,8 @@ public abstract class IntentResolver {
         String str;
         IntentFilter intentFilter = getIntentFilter(obj);
         this.mFilters.add(obj);
-        int register_intent_filter = register_intent_filter(obj, intentFilter.schemesIterator(), this.mSchemeToFilter);
+        int register_intent_filter =
+                register_intent_filter(obj, intentFilter.schemesIterator(), this.mSchemeToFilter);
         Iterator<String> typesIterator = getIntentFilter(obj).typesIterator();
         int i = 0;
         if (typesIterator != null) {
@@ -159,7 +163,18 @@ public abstract class IntentResolver {
         return true;
     }
 
-    public final void buildResolveList(Computer computer, Intent intent, FastImmutableArraySet fastImmutableArraySet, boolean z, boolean z2, String str, String str2, Object[] objArr, List list, int i, long j) {
+    public final void buildResolveList(
+            Computer computer,
+            Intent intent,
+            FastImmutableArraySet fastImmutableArraySet,
+            boolean z,
+            boolean z2,
+            String str,
+            String str2,
+            Object[] objArr,
+            List list,
+            int i,
+            long j) {
         FastPrintWriter fastPrintWriter;
         LogPrinter logPrinter;
         String str3;
@@ -197,10 +212,16 @@ public abstract class IntentResolver {
             } else if (str4 == null || isPackageForFilter(str4, obj)) {
                 IntentFilter intentFilter = getIntentFilter(obj);
                 if (intentFilter.getAutoVerify() && z) {
-                    Slog.v("IntentResolver", "  Filter verified: " + getIntentFilter(obj).isVerified());
+                    Slog.v(
+                            "IntentResolver",
+                            "  Filter verified: " + getIntentFilter(obj).isVerified());
                     int i5 = 0;
-                    for (int countDataAuthorities = intentFilter.countDataAuthorities(); i5 < countDataAuthorities; countDataAuthorities = countDataAuthorities) {
-                        Slog.v("IntentResolver", "   " + intentFilter.getDataAuthority(i5).getHost());
+                    for (int countDataAuthorities = intentFilter.countDataAuthorities();
+                            i5 < countDataAuthorities;
+                            countDataAuthorities = countDataAuthorities) {
+                        Slog.v(
+                                "IntentResolver",
+                                "   " + intentFilter.getDataAuthority(i5).getHost());
                         i5++;
                     }
                 }
@@ -210,10 +231,18 @@ public abstract class IntentResolver {
                     i2 = i4;
                     i3 = length;
                     fastPrintWriter2 = fastPrintWriter;
-                    int match = intentFilter.match(str5, str, str2, data, fastImmutableArraySet, "IntentResolver");
+                    int match =
+                            intentFilter.match(
+                                    str5, str, str2, data, fastImmutableArraySet, "IntentResolver");
                     if (match >= 0) {
                         if (z) {
-                            Slog.v("IntentResolver", "  Filter matched!  match=0x" + Integer.toHexString(match) + " hasDefault=" + intentFilter.hasCategory("android.intent.category.DEFAULT"));
+                            Slog.v(
+                                    "IntentResolver",
+                                    "  Filter matched!  match=0x"
+                                            + Integer.toHexString(match)
+                                            + " hasDefault="
+                                            + intentFilter.hasCategory(
+                                                    "android.intent.category.DEFAULT"));
                         }
                         if (!z2 || intentFilter.hasCategory("android.intent.category.DEFAULT")) {
                             Object newResult = newResult(computer, obj, match, i, j);
@@ -232,7 +261,19 @@ public abstract class IntentResolver {
                             z3 = true;
                         }
                     } else if (z) {
-                        Slog.v("IntentResolver", "  Filter did not match: ".concat(match != -4 ? match != -3 ? match != -2 ? match != -1 ? "unknown reason" : "type" : "data" : "action" : "category"));
+                        Slog.v(
+                                "IntentResolver",
+                                "  Filter did not match: "
+                                        .concat(
+                                                match != -4
+                                                        ? match != -3
+                                                                ? match != -2
+                                                                        ? match != -1
+                                                                                ? "unknown reason"
+                                                                                : "type"
+                                                                        : "data"
+                                                                : "action"
+                                                        : "category"));
                     }
                     i4 = i2 + 1;
                     objArr2 = objArr;
@@ -258,9 +299,13 @@ public abstract class IntentResolver {
         if (z && z3) {
             ArrayList arrayList = (ArrayList) list;
             if (arrayList.size() == 0) {
-                Slog.v("IntentResolver", "resolveIntent failed: found match, but none with CATEGORY_DEFAULT");
+                Slog.v(
+                        "IntentResolver",
+                        "resolveIntent failed: found match, but none with CATEGORY_DEFAULT");
             } else if (arrayList.size() > 1) {
-                Slog.v("IntentResolver", "resolveIntent: multiple matches, only some with CATEGORY_DEFAULT");
+                Slog.v(
+                        "IntentResolver",
+                        "resolveIntent: multiple matches, only some with CATEGORY_DEFAULT");
             }
         }
     }
@@ -313,26 +358,38 @@ public abstract class IntentResolver {
         }
     }
 
-    public final boolean dump(PrintWriter printWriter, String str, String str2, String str3, boolean z, boolean z2) {
+    public final boolean dump(
+            PrintWriter printWriter, String str, String str2, String str3, boolean z, boolean z2) {
         String concat = str2.concat("  ");
         String concat2 = "\n".concat(str2);
         String m = AnyMotionDetector$$ExternalSyntheticOutline0.m(str, "\n", str2);
         if (dumpMap(printWriter, m, "Full MIME Types:", concat, this.mTypeToFilter, str3, z, z2)) {
             m = concat2;
         }
-        if (dumpMap(printWriter, m, "Base MIME Types:", concat, this.mBaseTypeToFilter, str3, z, z2)) {
+        if (dumpMap(
+                printWriter, m, "Base MIME Types:", concat, this.mBaseTypeToFilter, str3, z, z2)) {
             m = concat2;
         }
-        if (dumpMap(printWriter, m, "Wild MIME Types:", concat, this.mWildTypeToFilter, str3, z, z2)) {
+        if (dumpMap(
+                printWriter, m, "Wild MIME Types:", concat, this.mWildTypeToFilter, str3, z, z2)) {
             m = concat2;
         }
         if (dumpMap(printWriter, m, "Schemes:", concat, this.mSchemeToFilter, str3, z, z2)) {
             m = concat2;
         }
-        if (dumpMap(printWriter, m, "Non-Data Actions:", concat, this.mActionToFilter, str3, z, z2)) {
+        if (dumpMap(
+                printWriter, m, "Non-Data Actions:", concat, this.mActionToFilter, str3, z, z2)) {
             m = concat2;
         }
-        if (dumpMap(printWriter, m, "MIME Typed Actions:", concat, this.mTypedActionToFilter, str3, z, z2)) {
+        if (dumpMap(
+                printWriter,
+                m,
+                "MIME Typed Actions:",
+                concat,
+                this.mTypedActionToFilter,
+                str3,
+                z,
+                z2)) {
             m = concat2;
         }
         return m == concat2;
@@ -350,7 +407,15 @@ public abstract class IntentResolver {
         printWriter.println(i);
     }
 
-    public final boolean dumpMap(PrintWriter printWriter, String str, String str2, String str3, ArrayMap arrayMap, String str4, boolean z, boolean z2) {
+    public final boolean dumpMap(
+            PrintWriter printWriter,
+            String str,
+            String str2,
+            String str3,
+            ArrayMap arrayMap,
+            String str4,
+            boolean z,
+            boolean z2) {
         boolean z3;
         String str5;
         Object obj;
@@ -447,7 +512,11 @@ public abstract class IntentResolver {
                         printWriter.println(":");
                         z7 = true;
                     }
-                    dumpFilterLabel(printWriter, m$12, arrayMap3.keyAt(i4), ((MutableInt) arrayMap3.valueAt(i4)).value);
+                    dumpFilterLabel(
+                            printWriter,
+                            m$12,
+                            arrayMap3.keyAt(i4),
+                            ((MutableInt) arrayMap3.valueAt(i4)).value);
                     i4++;
                     z3 = true;
                 }
@@ -464,8 +533,7 @@ public abstract class IntentResolver {
         return new IteratorWrapper(this.mFilters.iterator());
     }
 
-    public void filterResults(List list) {
-    }
+    public void filterResults(List list) {}
 
     public Object filterToLabel(Object obj) {
         return "IntentFilter";
@@ -500,26 +568,59 @@ public abstract class IntentResolver {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final java.util.List queryIntent(com.android.server.pm.snapshot.PackageDataSnapshot r24, android.content.Intent r25, java.lang.String r26, boolean r27, int r28, long r29) {
+    public final java.util.List queryIntent(
+            com.android.server.pm.snapshot.PackageDataSnapshot r24,
+            android.content.Intent r25,
+            java.lang.String r26,
+            boolean r27,
+            int r28,
+            long r29) {
         /*
             Method dump skipped, instructions count: 638
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.IntentResolver.queryIntent(com.android.server.pm.snapshot.PackageDataSnapshot, android.content.Intent, java.lang.String, boolean, int, long):java.util.List");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.IntentResolver.queryIntent(com.android.server.pm.snapshot.PackageDataSnapshot,"
+                    + " android.content.Intent, java.lang.String, boolean, int,"
+                    + " long):java.util.List");
     }
 
-    public final List queryIntentFromList(Computer computer, Intent intent, String str, boolean z, ArrayList arrayList, int i, long j) {
-        if ("android.intent.action.PROCESS_TEXT".equals(intent.getAction()) && Flags.ignoreProcessText()) {
+    public final List queryIntentFromList(
+            Computer computer,
+            Intent intent,
+            String str,
+            boolean z,
+            ArrayList arrayList,
+            int i,
+            long j) {
+        if ("android.intent.action.PROCESS_TEXT".equals(intent.getAction())
+                && Flags.ignoreProcessText()) {
             return Collections.emptyList();
         }
         ArrayList arrayList2 = new ArrayList();
         boolean z2 = (intent.getFlags() & 8) != 0;
         Set<String> categories = intent.getCategories();
-        FastImmutableArraySet fastImmutableArraySet = categories == null ? null : new FastImmutableArraySet((String[]) categories.toArray(new String[categories.size()]));
+        FastImmutableArraySet fastImmutableArraySet =
+                categories == null
+                        ? null
+                        : new FastImmutableArraySet(
+                                (String[]) categories.toArray(new String[categories.size()]));
         String scheme = intent.getScheme();
         int i2 = 0;
         for (int size = arrayList.size(); i2 < size; size = size) {
-            buildResolveList(computer, intent, fastImmutableArraySet, z2, z, str, scheme, (Object[]) arrayList.get(i2), arrayList2, i, j);
+            buildResolveList(
+                    computer,
+                    intent,
+                    fastImmutableArraySet,
+                    z2,
+                    z,
+                    str,
+                    scheme,
+                    (Object[]) arrayList.get(i2),
+                    arrayList2,
+                    i,
+                    j);
             i2++;
         }
         sortResults(arrayList2);
@@ -546,7 +647,8 @@ public abstract class IntentResolver {
     public void removeFilterInternal(Object obj) {
         String str;
         IntentFilter intentFilter = getIntentFilter(obj);
-        int unregister_intent_filter = unregister_intent_filter(obj, intentFilter.schemesIterator(), this.mSchemeToFilter);
+        int unregister_intent_filter =
+                unregister_intent_filter(obj, intentFilter.schemesIterator(), this.mSchemeToFilter);
         Iterator<String> typesIterator = getIntentFilter(obj).typesIterator();
         int i = 0;
         if (typesIterator != null) {
@@ -574,7 +676,8 @@ public abstract class IntentResolver {
             unregister_intent_filter(obj, intentFilter.actionsIterator(), this.mActionToFilter);
         }
         if (i != 0) {
-            unregister_intent_filter(obj, intentFilter.actionsIterator(), this.mTypedActionToFilter);
+            unregister_intent_filter(
+                    obj, intentFilter.actionsIterator(), this.mTypedActionToFilter);
         }
     }
 

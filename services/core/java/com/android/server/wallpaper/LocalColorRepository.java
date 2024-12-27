@@ -8,6 +8,7 @@ import android.os.RemoteException;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.SparseArray;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,18 +18,26 @@ public final class LocalColorRepository {
     public RemoteCallbackList mCallbacks;
     public ArrayMap mLocalColorAreas;
 
-    public final void addAreas(final ILocalWallpaperColorConsumer iLocalWallpaperColorConsumer, List list, int i) {
+    public final void addAreas(
+            final ILocalWallpaperColorConsumer iLocalWallpaperColorConsumer, List list, int i) {
         ArraySet arraySet;
         IBinder asBinder = iLocalWallpaperColorConsumer.asBinder();
         SparseArray sparseArray = (SparseArray) this.mLocalColorAreas.get(asBinder);
         if (sparseArray == null) {
             try {
-                iLocalWallpaperColorConsumer.asBinder().linkToDeath(new IBinder.DeathRecipient() { // from class: com.android.server.wallpaper.LocalColorRepository$$ExternalSyntheticLambda0
-                    @Override // android.os.IBinder.DeathRecipient
-                    public final void binderDied() {
-                        LocalColorRepository.this.mLocalColorAreas.remove(iLocalWallpaperColorConsumer.asBinder());
-                    }
-                }, 0);
+                iLocalWallpaperColorConsumer
+                        .asBinder()
+                        .linkToDeath(
+                                new IBinder
+                                        .DeathRecipient() { // from class:
+                                                            // com.android.server.wallpaper.LocalColorRepository$$ExternalSyntheticLambda0
+                                    @Override // android.os.IBinder.DeathRecipient
+                                    public final void binderDied() {
+                                        LocalColorRepository.this.mLocalColorAreas.remove(
+                                                iLocalWallpaperColorConsumer.asBinder());
+                                    }
+                                },
+                                0);
             } catch (RemoteException e) {
                 e.printStackTrace();
             }
@@ -52,7 +61,8 @@ public final class LocalColorRepository {
         return this.mLocalColorAreas.get(iLocalWallpaperColorConsumer.asBinder()) != null;
     }
 
-    public final List removeAreas(ILocalWallpaperColorConsumer iLocalWallpaperColorConsumer, List list, int i) {
+    public final List removeAreas(
+            ILocalWallpaperColorConsumer iLocalWallpaperColorConsumer, List list, int i) {
         IBinder asBinder = iLocalWallpaperColorConsumer.asBinder();
         SparseArray sparseArray = (SparseArray) this.mLocalColorAreas.get(asBinder);
         if (sparseArray != null) {
@@ -77,8 +87,18 @@ public final class LocalColorRepository {
         ArraySet arraySet2 = new ArraySet(list);
         for (int i3 = 0; i3 < this.mLocalColorAreas.size(); i3++) {
             for (int i4 = 0; i4 < ((SparseArray) this.mLocalColorAreas.valueAt(i3)).size(); i4++) {
-                for (int i5 = 0; i5 < ((ArraySet) ((SparseArray) this.mLocalColorAreas.valueAt(i3)).valueAt(i4)).size(); i5++) {
-                    arraySet2.remove(((ArraySet) ((SparseArray) this.mLocalColorAreas.valueAt(i3)).valueAt(i4)).valueAt(i5));
+                for (int i5 = 0;
+                        i5
+                                < ((ArraySet)
+                                                ((SparseArray) this.mLocalColorAreas.valueAt(i3))
+                                                        .valueAt(i4))
+                                        .size();
+                        i5++) {
+                    arraySet2.remove(
+                            ((ArraySet)
+                                            ((SparseArray) this.mLocalColorAreas.valueAt(i3))
+                                                    .valueAt(i4))
+                                    .valueAt(i5));
                 }
             }
         }

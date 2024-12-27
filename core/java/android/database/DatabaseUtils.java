@@ -22,6 +22,7 @@ import android.os.ParcelFileDescriptor;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
+
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.text.Collator;
@@ -50,7 +51,24 @@ public class DatabaseUtils {
     public static final int STATEMENT_UPDATE = 2;
     public static final int STATEMENT_WITH = 100;
     private static final String TAG = "DatabaseUtils";
-    private static final char[] DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', DateFormat.AM_PM, 'b', 'c', DateFormat.DATE, 'e', 'f'};
+    private static final char[] DIGITS = {
+        '0',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        DateFormat.AM_PM,
+        'b',
+        'c',
+        DateFormat.DATE,
+        'e',
+        'f'
+    };
     private static Collator mColl = null;
     private static final String PREFIX_REGEX = "(\\s+|--.*?\n|/\\*[\\w\\W]*?\\*/)*(\\w\\w\\w)";
     private static final Pattern sPrefixPattern = Pattern.compile(PREFIX_REGEX);
@@ -103,7 +121,8 @@ public class DatabaseUtils {
         readExceptionFromParcel(reply, msg, code);
     }
 
-    public static void readExceptionWithFileNotFoundExceptionFromParcel(Parcel reply) throws FileNotFoundException {
+    public static void readExceptionWithFileNotFoundExceptionFromParcel(Parcel reply)
+            throws FileNotFoundException {
         int code = reply.readExceptionCode();
         if (code == 0) {
             return;
@@ -115,7 +134,8 @@ public class DatabaseUtils {
         readExceptionFromParcel(reply, msg, code);
     }
 
-    public static void readExceptionWithOperationApplicationExceptionFromParcel(Parcel reply) throws OperationApplicationException {
+    public static void readExceptionWithOperationApplicationExceptionFromParcel(Parcel reply)
+            throws OperationApplicationException {
         int code = reply.readExceptionCode();
         if (code == 0) {
             return;
@@ -154,7 +174,8 @@ public class DatabaseUtils {
         }
     }
 
-    public static long executeInsert(SQLiteDatabase db, String sql, Object[] bindArgs) throws SQLException {
+    public static long executeInsert(SQLiteDatabase db, String sql, Object[] bindArgs)
+            throws SQLException {
         SQLiteStatement st = db.compileStatement(sql);
         try {
             bindArgs(st, bindArgs);
@@ -175,7 +196,8 @@ public class DatabaseUtils {
         }
     }
 
-    public static int executeUpdateDelete(SQLiteDatabase db, String sql, Object[] bindArgs) throws SQLException {
+    public static int executeUpdateDelete(SQLiteDatabase db, String sql, Object[] bindArgs)
+            throws SQLException {
         SQLiteStatement st = db.compileStatement(sql);
         try {
             bindArgs(st, bindArgs);
@@ -389,7 +411,10 @@ public class DatabaseUtils {
             java.lang.String r0 = r5.toString()
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.database.DatabaseUtils.bindSelection(java.lang.String, java.lang.Object[]):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                        + " android.database.DatabaseUtils.bindSelection(java.lang.String,"
+                        + " java.lang.Object[]):java.lang.String");
     }
 
     public static Object[] deepCopyOf(Object[] args) {
@@ -421,7 +446,10 @@ public class DatabaseUtils {
         if ((obj instanceof Float) || (obj instanceof Double)) {
             return 2;
         }
-        if ((obj instanceof Long) || (obj instanceof Integer) || (obj instanceof Short) || (obj instanceof Byte)) {
+        if ((obj instanceof Long)
+                || (obj instanceof Integer)
+                || (obj instanceof Short)
+                || (obj instanceof Byte)) {
             return 1;
         }
         return 3;
@@ -481,8 +509,7 @@ public class DatabaseUtils {
                             }
                         } else {
                             position++;
-                            if (!cursor.moveToNext()) {
-                            }
+                            if (!cursor.moveToNext()) {}
                         }
                     }
                 }
@@ -542,7 +569,11 @@ public class DatabaseUtils {
         if (TextUtils.isEmpty(b)) {
             return a;
         }
-        return NavigationBarInflaterView.KEY_CODE_START + a + ") AND (" + b + NavigationBarInflaterView.KEY_CODE_END;
+        return NavigationBarInflaterView.KEY_CODE_START
+                + a
+                + ") AND ("
+                + b
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 
     public static String getCollationKey(String name) {
@@ -666,15 +697,18 @@ public class DatabaseUtils {
         return sb.toString();
     }
 
-    public static void cursorStringToContentValues(Cursor cursor, String field, ContentValues values) {
+    public static void cursorStringToContentValues(
+            Cursor cursor, String field, ContentValues values) {
         cursorStringToContentValues(cursor, field, values, field);
     }
 
-    public static void cursorStringToInsertHelper(Cursor cursor, String field, InsertHelper inserter, int index) {
+    public static void cursorStringToInsertHelper(
+            Cursor cursor, String field, InsertHelper inserter, int index) {
         inserter.bind(index, cursor.getString(cursor.getColumnIndexOrThrow(field)));
     }
 
-    public static void cursorStringToContentValues(Cursor cursor, String field, ContentValues values, String key) {
+    public static void cursorStringToContentValues(
+            Cursor cursor, String field, ContentValues values, String key) {
         values.put(key, cursor.getString(cursor.getColumnIndexOrThrow(field)));
     }
 
@@ -682,7 +716,8 @@ public class DatabaseUtils {
         cursorIntToContentValues(cursor, field, values, field);
     }
 
-    public static void cursorIntToContentValues(Cursor cursor, String field, ContentValues values, String key) {
+    public static void cursorIntToContentValues(
+            Cursor cursor, String field, ContentValues values, String key) {
         int colIndex = cursor.getColumnIndex(field);
         if (!cursor.isNull(colIndex)) {
             values.put(key, Integer.valueOf(cursor.getInt(colIndex)));
@@ -691,11 +726,13 @@ public class DatabaseUtils {
         }
     }
 
-    public static void cursorLongToContentValues(Cursor cursor, String field, ContentValues values) {
+    public static void cursorLongToContentValues(
+            Cursor cursor, String field, ContentValues values) {
         cursorLongToContentValues(cursor, field, values, field);
     }
 
-    public static void cursorLongToContentValues(Cursor cursor, String field, ContentValues values, String key) {
+    public static void cursorLongToContentValues(
+            Cursor cursor, String field, ContentValues values, String key) {
         int colIndex = cursor.getColumnIndex(field);
         if (!cursor.isNull(colIndex)) {
             Long value = Long.valueOf(cursor.getLong(colIndex));
@@ -705,11 +742,13 @@ public class DatabaseUtils {
         }
     }
 
-    public static void cursorDoubleToCursorValues(Cursor cursor, String field, ContentValues values) {
+    public static void cursorDoubleToCursorValues(
+            Cursor cursor, String field, ContentValues values) {
         cursorDoubleToContentValues(cursor, field, values, field);
     }
 
-    public static void cursorDoubleToContentValues(Cursor cursor, String field, ContentValues values, String key) {
+    public static void cursorDoubleToContentValues(
+            Cursor cursor, String field, ContentValues values, String key) {
         int colIndex = cursor.getColumnIndex(field);
         if (!cursor.isNull(colIndex)) {
             values.put(key, Double.valueOf(cursor.getDouble(colIndex)));
@@ -730,7 +769,8 @@ public class DatabaseUtils {
         }
     }
 
-    public static int cursorPickFillWindowStartPosition(int cursorPosition, int cursorWindowCapacity) {
+    public static int cursorPickFillWindowStartPosition(
+            int cursorPosition, int cursorWindowCapacity) {
         return Math.max(cursorPosition - (cursorWindowCapacity / 3), 0);
     }
 
@@ -742,13 +782,20 @@ public class DatabaseUtils {
         return queryNumEntries(db, table, selection, null);
     }
 
-    public static long queryNumEntries(SQLiteDatabase db, String table, String selection, String[] selectionArgs) {
+    public static long queryNumEntries(
+            SQLiteDatabase db, String table, String selection, String[] selectionArgs) {
         String s = !TextUtils.isEmpty(selection) ? " where " + selection : "";
         return longForQuery(db, "select count(*) from " + table + s, selectionArgs);
     }
 
     public static boolean queryIsEmpty(SQLiteDatabase db, String table) {
-        long isEmpty = longForQuery(db, "select exists(select 1 from " + table + NavigationBarInflaterView.KEY_CODE_END, null);
+        long isEmpty =
+                longForQuery(
+                        db,
+                        "select exists(select 1 from "
+                                + table
+                                + NavigationBarInflaterView.KEY_CODE_END,
+                        null);
         return isEmpty == 0;
     }
 
@@ -780,7 +827,8 @@ public class DatabaseUtils {
         return prog.simpleQueryForString();
     }
 
-    public static ParcelFileDescriptor blobFileDescriptorForQuery(SQLiteDatabase db, String query, String[] selectionArgs) {
+    public static ParcelFileDescriptor blobFileDescriptorForQuery(
+            SQLiteDatabase db, String query, String[] selectionArgs) {
         SQLiteStatement prog = db.compileStatement(query);
         try {
             return blobFileDescriptorForQuery(prog, selectionArgs);
@@ -789,47 +837,54 @@ public class DatabaseUtils {
         }
     }
 
-    public static ParcelFileDescriptor blobFileDescriptorForQuery(SQLiteStatement prog, String[] selectionArgs) {
+    public static ParcelFileDescriptor blobFileDescriptorForQuery(
+            SQLiteStatement prog, String[] selectionArgs) {
         prog.bindAllArgsAsStrings(selectionArgs);
         return prog.simpleQueryForBlobFileDescriptor();
     }
 
-    public static void cursorStringToContentValuesIfPresent(Cursor cursor, ContentValues values, String column) {
+    public static void cursorStringToContentValuesIfPresent(
+            Cursor cursor, ContentValues values, String column) {
         int index = cursor.getColumnIndex(column);
         if (index != -1 && !cursor.isNull(index)) {
             values.put(column, cursor.getString(index));
         }
     }
 
-    public static void cursorLongToContentValuesIfPresent(Cursor cursor, ContentValues values, String column) {
+    public static void cursorLongToContentValuesIfPresent(
+            Cursor cursor, ContentValues values, String column) {
         int index = cursor.getColumnIndex(column);
         if (index != -1 && !cursor.isNull(index)) {
             values.put(column, Long.valueOf(cursor.getLong(index)));
         }
     }
 
-    public static void cursorShortToContentValuesIfPresent(Cursor cursor, ContentValues values, String column) {
+    public static void cursorShortToContentValuesIfPresent(
+            Cursor cursor, ContentValues values, String column) {
         int index = cursor.getColumnIndex(column);
         if (index != -1 && !cursor.isNull(index)) {
             values.put(column, Short.valueOf(cursor.getShort(index)));
         }
     }
 
-    public static void cursorIntToContentValuesIfPresent(Cursor cursor, ContentValues values, String column) {
+    public static void cursorIntToContentValuesIfPresent(
+            Cursor cursor, ContentValues values, String column) {
         int index = cursor.getColumnIndex(column);
         if (index != -1 && !cursor.isNull(index)) {
             values.put(column, Integer.valueOf(cursor.getInt(index)));
         }
     }
 
-    public static void cursorFloatToContentValuesIfPresent(Cursor cursor, ContentValues values, String column) {
+    public static void cursorFloatToContentValuesIfPresent(
+            Cursor cursor, ContentValues values, String column) {
         int index = cursor.getColumnIndex(column);
         if (index != -1 && !cursor.isNull(index)) {
             values.put(column, Float.valueOf(cursor.getFloat(index)));
         }
     }
 
-    public static void cursorDoubleToContentValuesIfPresent(Cursor cursor, ContentValues values, String column) {
+    public static void cursorDoubleToContentValuesIfPresent(
+            Cursor cursor, ContentValues values, String column) {
         int index = cursor.getColumnIndex(column);
         if (index != -1 && !cursor.isNull(index)) {
             values.put(column, Double.valueOf(cursor.getDouble(index)));
@@ -863,7 +918,12 @@ public class DatabaseUtils {
             int i = 1;
             Cursor cur = null;
             try {
-                cur = this.mDb.rawQuery("PRAGMA table_info(" + this.mTableName + NavigationBarInflaterView.KEY_CODE_END, null);
+                cur =
+                        this.mDb.rawQuery(
+                                "PRAGMA table_info("
+                                        + this.mTableName
+                                        + NavigationBarInflaterView.KEY_CODE_END,
+                                null);
                 this.mColumns = new HashMap<>(cur.getCount());
                 while (cur.moveToNext()) {
                     String columnName = cur.getString(1);
@@ -927,7 +987,10 @@ public class DatabaseUtils {
                     this.mDb.setTransactionSuccessful();
                     return result;
                 } catch (SQLException e2) {
-                    Log.e(DatabaseUtils.TAG, "Error inserting " + values + " into table  " + this.mTableName, e2);
+                    Log.e(
+                            DatabaseUtils.TAG,
+                            "Error inserting " + values + " into table  " + this.mTableName,
+                            e2);
                     this.mDb.endTransaction();
                     return -1L;
                 }
@@ -991,13 +1054,17 @@ public class DatabaseUtils {
 
         public long execute() {
             if (this.mPreparedStatement == null) {
-                throw new IllegalStateException("you must prepare this inserter before calling execute");
+                throw new IllegalStateException(
+                        "you must prepare this inserter before calling execute");
             }
             try {
                 try {
                     return this.mPreparedStatement.executeInsert();
                 } catch (SQLException e) {
-                    Log.e(DatabaseUtils.TAG, "Error executing InsertHelper with table " + this.mTableName, e);
+                    Log.e(
+                            DatabaseUtils.TAG,
+                            "Error executing InsertHelper with table " + this.mTableName,
+                            e);
                     this.mPreparedStatement = null;
                     return -1L;
                 }
@@ -1034,7 +1101,8 @@ public class DatabaseUtils {
         }
     }
 
-    public static void createDbFromSqlStatements(Context context, String dbName, int dbVersion, String sqlStatements) {
+    public static void createDbFromSqlStatements(
+            Context context, String dbName, int dbVersion, String sqlStatements) {
         SQLiteDatabase db = context.openOrCreateDatabase(dbName, 0, null);
         String[] statements = TextUtils.split(sqlStatements, ";\n");
         for (String statement : statements) {
@@ -1255,8 +1323,7 @@ public class DatabaseUtils {
             case 7:
                 break;
             case '\b':
-                if (sql.toUpperCase(Locale.ROOT).contains(" TO ")) {
-                }
+                if (sql.toUpperCase(Locale.ROOT).contains(" TO ")) {}
                 break;
             case '\t':
                 break;
@@ -1273,8 +1340,7 @@ public class DatabaseUtils {
             case 16:
                 break;
             default:
-                if (prefix.startsWith("--") || prefix.startsWith(IntentFilter.WILDCARD_PATH)) {
-                }
+                if (prefix.startsWith("--") || prefix.startsWith(IntentFilter.WILDCARD_PATH)) {}
                 break;
         }
         return 99;

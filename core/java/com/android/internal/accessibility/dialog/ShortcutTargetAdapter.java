@@ -11,9 +11,10 @@ import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.android.internal.R;
-import com.android.internal.accessibility.dialog.TargetAdapter;
 import com.android.internal.accessibility.util.AccessibilityUtils;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -49,18 +50,28 @@ class ShortcutTargetAdapter extends TargetAdapter {
         Context context = parent.getContext();
         boolean turnedOn = false;
         if (convertView == null) {
-            convertView2 = LayoutInflater.from(context).inflate(R.layout.accessibility_shortcut_chooser_item_samsung, parent, false);
+            convertView2 =
+                    LayoutInflater.from(context)
+                            .inflate(
+                                    R.layout.accessibility_shortcut_chooser_item_samsung,
+                                    parent,
+                                    false);
             holder = new TargetAdapter.ViewHolder();
-            holder.mIconView = (ImageView) convertView2.findViewById(R.id.accessibility_shortcut_target_icon);
-            holder.mLabelView = (TextView) convertView2.findViewById(R.id.accessibility_shortcut_target_label);
-            holder.mStatusView = (TextView) convertView2.findViewById(R.id.accessibility_shortcut_target_status);
+            holder.mIconView =
+                    (ImageView) convertView2.findViewById(R.id.accessibility_shortcut_target_icon);
+            holder.mLabelView =
+                    (TextView) convertView2.findViewById(R.id.accessibility_shortcut_target_label);
+            holder.mStatusView =
+                    (TextView) convertView2.findViewById(R.id.accessibility_shortcut_target_status);
             convertView2.setTag(holder);
         } else {
             holder = (TargetAdapter.ViewHolder) convertView.getTag();
             convertView2 = convertView;
         }
         AccessibilityTarget target = this.mTargets.get(position);
-        List<AccessibilityShortcutInfo> shortcutInfo = AccessibilityManager.getInstance(context).getInstalledAccessibilityShortcutListAsUser(context, 0);
+        List<AccessibilityShortcutInfo> shortcutInfo =
+                AccessibilityManager.getInstance(context)
+                        .getInstalledAccessibilityShortcutListAsUser(context, 0);
         if (shortcutInfo == null) {
             return convertView2;
         }
@@ -107,13 +118,15 @@ class ShortcutTargetAdapter extends TargetAdapter {
             }
             switch (c) {
                 case 0:
-                    if (Settings.System.getIntForUser(context.getContentResolver(), key, 0, -2) == 1) {
+                    if (Settings.System.getIntForUser(context.getContentResolver(), key, 0, -2)
+                            == 1) {
                         turnedOn = true;
                         break;
                     }
                     break;
                 case 1:
-                    if (Settings.Secure.getIntForUser(context.getContentResolver(), key, 0, -2) == 1) {
+                    if (Settings.Secure.getIntForUser(context.getContentResolver(), key, 0, -2)
+                            == 1) {
                         turnedOn = true;
                         break;
                     }
@@ -133,29 +146,41 @@ class ShortcutTargetAdapter extends TargetAdapter {
             } else {
                 this.mShortcutMenuMode = 4;
             }
-            if ("sip_speak_keyboard_input_aloud".equals(key) && AccessibilityManager.getInstance(context).semIsScreenReaderEnabled()) {
+            if ("sip_speak_keyboard_input_aloud".equals(key)
+                    && AccessibilityManager.getInstance(context).semIsScreenReaderEnabled()) {
                 this.mShortcutMenuMode = 5;
             }
         }
         convertView2.setMinimumWidth(parent.getMeasuredWidth());
         if (AccessibilityUtils.isFoldedLargeCoverScreen()) {
             if (AccessibilityUtils.disallowPerformInCoverScreen(target.getId())) {
-                convertView2.setContentDescription(((Object) target.getLabel()) + " " + context.getString(R.string.accessibility_shortcut_menu_item_status_disabled));
+                convertView2.setContentDescription(
+                        ((Object) target.getLabel())
+                                + " "
+                                + context.getString(
+                                        R.string.accessibility_shortcut_menu_item_status_disabled));
                 convertView2.setAlpha(0.4f);
             } else {
                 String targetSummary = "";
                 if (target.getStateDescription() == null) {
                     if (this.mShortcutMenuMode == 3) {
-                        targetSummary = context.getString(R.string.accessibility_shortcut_menu_item_status_on);
+                        targetSummary =
+                                context.getString(
+                                        R.string.accessibility_shortcut_menu_item_status_on);
                     } else if (this.mShortcutMenuMode == 4) {
-                        targetSummary = context.getString(R.string.accessibility_shortcut_menu_item_status_off);
+                        targetSummary =
+                                context.getString(
+                                        R.string.accessibility_shortcut_menu_item_status_off);
                     } else if (this.mShortcutMenuMode == 5) {
-                        targetSummary = context.getString(R.string.accessibility_shortcut_menu_item_status_disabled);
+                        targetSummary =
+                                context.getString(
+                                        R.string.accessibility_shortcut_menu_item_status_disabled);
                     }
                 } else {
                     targetSummary = (String) target.getStateDescription();
                 }
-                convertView2.setContentDescription(((Object) target.getLabel()) + " " + targetSummary);
+                convertView2.setContentDescription(
+                        ((Object) target.getLabel()) + " " + targetSummary);
                 convertView2.setAlpha(1.0f);
             }
         }

@@ -3,6 +3,7 @@ package com.android.server.backup;
 import android.app.backup.BlobBackupHelper;
 import android.permission.PermissionManagerInternal;
 import android.util.Slog;
+
 import com.android.server.LocalServices;
 
 /* loaded from: classes5.dex */
@@ -17,7 +18,9 @@ public class PermissionBackupHelper extends BlobBackupHelper {
     public PermissionBackupHelper(int userId) {
         super(1, KEY_PERMISSIONS);
         this.mUserId = userId;
-        this.mPermissionManager = (PermissionManagerInternal) LocalServices.getService(PermissionManagerInternal.class);
+        this.mPermissionManager =
+                (PermissionManagerInternal)
+                        LocalServices.getService(PermissionManagerInternal.class);
     }
 
     @Override // android.app.backup.BlobBackupHelper

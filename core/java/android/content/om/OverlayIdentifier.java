@@ -2,23 +2,26 @@ package android.content.om;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class OverlayIdentifier implements Parcelable {
-    public static final Parcelable.Creator<OverlayIdentifier> CREATOR = new Parcelable.Creator<OverlayIdentifier>() { // from class: android.content.om.OverlayIdentifier.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OverlayIdentifier[] newArray(int size) {
-            return new OverlayIdentifier[size];
-        }
+    public static final Parcelable.Creator<OverlayIdentifier> CREATOR =
+            new Parcelable.Creator<
+                    OverlayIdentifier>() { // from class: android.content.om.OverlayIdentifier.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OverlayIdentifier[] newArray(int size) {
+                    return new OverlayIdentifier[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public OverlayIdentifier createFromParcel(Parcel in) {
-            return new OverlayIdentifier(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public OverlayIdentifier createFromParcel(Parcel in) {
+                    return new OverlayIdentifier(in);
+                }
+            };
     private final String mOverlayName;
     private final String mPackageName;
 
@@ -33,7 +36,9 @@ public final class OverlayIdentifier implements Parcelable {
     }
 
     public String toString() {
-        return this.mOverlayName == null ? this.mPackageName : this.mPackageName + ":" + this.mOverlayName;
+        return this.mOverlayName == null
+                ? this.mPackageName
+                : this.mPackageName + ":" + this.mOverlayName;
     }
 
     public static OverlayIdentifier fromString(String text) {
@@ -60,7 +65,8 @@ public final class OverlayIdentifier implements Parcelable {
             return false;
         }
         OverlayIdentifier that = (OverlayIdentifier) o;
-        if (Objects.equals(this.mPackageName, that.mPackageName) && Objects.equals(this.mOverlayName, that.mOverlayName)) {
+        if (Objects.equals(this.mPackageName, that.mPackageName)
+                && Objects.equals(this.mOverlayName, that.mOverlayName)) {
             return true;
         }
         return false;
@@ -100,6 +106,5 @@ public final class OverlayIdentifier implements Parcelable {
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

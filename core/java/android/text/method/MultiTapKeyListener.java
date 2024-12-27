@@ -6,14 +6,14 @@ import android.text.Editable;
 import android.text.Selection;
 import android.text.SpanWatcher;
 import android.text.Spannable;
-import android.text.method.TextKeyListener;
 import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.View;
 
 /* loaded from: classes4.dex */
 public class MultiTapKeyListener extends BaseKeyListener implements SpanWatcher {
-    private static MultiTapKeyListener[] sInstance = new MultiTapKeyListener[TextKeyListener.Capitalize.values().length * 2];
+    private static MultiTapKeyListener[] sInstance =
+            new MultiTapKeyListener[TextKeyListener.Capitalize.values().length * 2];
     private static final SparseArray<String> sRecs = new SparseArray<>();
     private boolean mAutoText;
     private TextKeyListener.Capitalize mCapitalize;
@@ -37,7 +37,8 @@ public class MultiTapKeyListener extends BaseKeyListener implements SpanWatcher 
         this.mAutoText = autotext;
     }
 
-    public static MultiTapKeyListener getInstance(boolean z, TextKeyListener.Capitalize capitalize) {
+    public static MultiTapKeyListener getInstance(
+            boolean z, TextKeyListener.Capitalize capitalize) {
         int ordinal = (capitalize.ordinal() * 2) + (z ? 1 : 0);
         if (sInstance[ordinal] == null) {
             sInstance[ordinal] = new MultiTapKeyListener(capitalize, z);
@@ -50,7 +51,8 @@ public class MultiTapKeyListener extends BaseKeyListener implements SpanWatcher 
         return makeTextContentType(this.mCapitalize, this.mAutoText);
     }
 
-    @Override // android.text.method.BaseKeyListener, android.text.method.MetaKeyKeyListener, android.text.method.KeyListener
+    @Override // android.text.method.BaseKeyListener, android.text.method.MetaKeyKeyListener,
+              // android.text.method.KeyListener
     public boolean onKeyDown(View view, Editable content, int keyCode, KeyEvent event) {
         int pref;
         int rec;
@@ -69,7 +71,11 @@ public class MultiTapKeyListener extends BaseKeyListener implements SpanWatcher 
         int activeStart = content.getSpanStart(TextKeyListener.ACTIVE);
         int activeEnd = content.getSpanEnd(TextKeyListener.ACTIVE);
         int rec2 = (content.getSpanFlags(TextKeyListener.ACTIVE) & (-16777216)) >>> 24;
-        if (activeStart == selStart2 && activeEnd == selEnd && selEnd - selStart2 == 1 && rec2 >= 0 && rec2 < sRecs.size()) {
+        if (activeStart == selStart2
+                && activeEnd == selEnd
+                && selEnd - selStart2 == 1
+                && rec2 >= 0
+                && rec2 < sRecs.size()) {
             if (keyCode == 17) {
                 char current = content.charAt(selStart2);
                 if (Character.isLowerCase(current)) {
@@ -137,7 +143,8 @@ public class MultiTapKeyListener extends BaseKeyListener implements SpanWatcher 
             removeTimeouts(content);
             new Timeout(content);
             if (content.getSpanStart(this) < 0) {
-                Object[] methods = (KeyListener[]) content.getSpans(0, content.length(), KeyListener.class);
+                Object[] methods =
+                        (KeyListener[]) content.getSpans(0, content.length(), KeyListener.class);
                 for (Object method : methods) {
                     content.removeSpan(method);
                 }
@@ -157,7 +164,8 @@ public class MultiTapKeyListener extends BaseKeyListener implements SpanWatcher 
     }
 
     private static void removeTimeouts(Spannable spannable) {
-        for (Timeout timeout : (Timeout[]) spannable.getSpans(0, spannable.length(), Timeout.class)) {
+        for (Timeout timeout :
+                (Timeout[]) spannable.getSpans(0, spannable.length(), Timeout.class)) {
             timeout.removeCallbacks(timeout);
             timeout.mBuffer = null;
             spannable.removeSpan(timeout);
@@ -190,10 +198,8 @@ public class MultiTapKeyListener extends BaseKeyListener implements SpanWatcher 
     }
 
     @Override // android.text.SpanWatcher
-    public void onSpanAdded(Spannable s, Object what, int start, int end) {
-    }
+    public void onSpanAdded(Spannable s, Object what, int start, int end) {}
 
     @Override // android.text.SpanWatcher
-    public void onSpanRemoved(Spannable s, Object what, int start, int end) {
-    }
+    public void onSpanRemoved(Spannable s, Object what, int start, int end) {}
 }

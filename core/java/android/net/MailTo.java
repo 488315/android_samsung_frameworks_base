@@ -36,7 +36,9 @@ public class MailTo {
             for (String q : queries) {
                 String[] nameval = q.split("=");
                 if (nameval.length != 0) {
-                    m.mHeaders.put(Uri.decode(nameval[0]).toLowerCase(Locale.ROOT), nameval.length > 1 ? Uri.decode(nameval[1]) : null);
+                    m.mHeaders.put(
+                            Uri.decode(nameval[0]).toLowerCase(Locale.ROOT),
+                            nameval.length > 1 ? Uri.decode(nameval[1]) : null);
                 }
             }
         }
@@ -83,6 +85,5 @@ public class MailTo {
         return sb.toString();
     }
 
-    private MailTo() {
-    }
+    private MailTo() {}
 }

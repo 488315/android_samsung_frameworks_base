@@ -9,6 +9,7 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,9 +17,12 @@ import java.util.List;
 public interface IProcessStats extends IInterface {
     public static final String DESCRIPTOR = "com.android.internal.app.procstats.IProcessStats";
 
-    long getCommittedStats(long j, int i, boolean z, List<ParcelFileDescriptor> list) throws RemoteException;
+    long getCommittedStats(long j, int i, boolean z, List<ParcelFileDescriptor> list)
+            throws RemoteException;
 
-    long getCommittedStatsMerged(long j, int i, boolean z, List<ParcelFileDescriptor> list, ProcessStats processStats) throws RemoteException;
+    long getCommittedStatsMerged(
+            long j, int i, boolean z, List<ParcelFileDescriptor> list, ProcessStats processStats)
+            throws RemoteException;
 
     int getCurrentMemoryState() throws RemoteException;
 
@@ -45,12 +49,23 @@ public interface IProcessStats extends IInterface {
         }
 
         @Override // com.android.internal.app.procstats.IProcessStats
-        public long getCommittedStats(long highWaterMarkMs, int section, boolean doAggregate, List<ParcelFileDescriptor> committedStats) throws RemoteException {
+        public long getCommittedStats(
+                long highWaterMarkMs,
+                int section,
+                boolean doAggregate,
+                List<ParcelFileDescriptor> committedStats)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // com.android.internal.app.procstats.IProcessStats
-        public long getCommittedStatsMerged(long highWaterMarkMs, int section, boolean doAggregate, List<ParcelFileDescriptor> committedStats, ProcessStats mergedStats) throws RemoteException {
+        public long getCommittedStatsMerged(
+                long highWaterMarkMs,
+                int section,
+                boolean doAggregate,
+                List<ParcelFileDescriptor> committedStats,
+                ProcessStats mergedStats)
+                throws RemoteException {
             return 0L;
         }
 
@@ -65,7 +80,7 @@ public interface IProcessStats extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IProcessStats {
+    public abstract static class Stub extends Binder implements IProcessStats {
         static final int TRANSACTION_getCommittedStats = 4;
         static final int TRANSACTION_getCommittedStatsMerged = 5;
         static final int TRANSACTION_getCurrentMemoryState = 3;
@@ -84,7 +99,9 @@ public interface IProcessStats extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IProcessStats asInterface(IBinder obj) {
@@ -128,7 +145,8 @@ public interface IProcessStats extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IProcessStats.DESCRIPTOR);
             }
@@ -175,7 +193,8 @@ public interface IProcessStats extends IInterface {
                     ArrayList arrayList3 = new ArrayList();
                     ProcessStats _arg4 = new ProcessStats();
                     data.enforceNoDataAvail();
-                    long _result5 = getCommittedStatsMerged(_arg03, _arg12, _arg22, arrayList3, _arg4);
+                    long _result5 =
+                            getCommittedStatsMerged(_arg03, _arg12, _arg22, arrayList3, _arg4);
                     reply.writeNoException();
                     reply.writeLong(_result5);
                     reply.writeTypedList(arrayList3, 1);
@@ -208,7 +227,8 @@ public interface IProcessStats extends IInterface {
             }
 
             @Override // com.android.internal.app.procstats.IProcessStats
-            public byte[] getCurrentStats(List<ParcelFileDescriptor> historic) throws RemoteException {
+            public byte[] getCurrentStats(List<ParcelFileDescriptor> historic)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -233,7 +253,9 @@ public interface IProcessStats extends IInterface {
                     _data.writeLong(minTime);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -258,7 +280,12 @@ public interface IProcessStats extends IInterface {
             }
 
             @Override // com.android.internal.app.procstats.IProcessStats
-            public long getCommittedStats(long highWaterMarkMs, int section, boolean doAggregate, List<ParcelFileDescriptor> committedStats) throws RemoteException {
+            public long getCommittedStats(
+                    long highWaterMarkMs,
+                    int section,
+                    boolean doAggregate,
+                    List<ParcelFileDescriptor> committedStats)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -278,7 +305,13 @@ public interface IProcessStats extends IInterface {
             }
 
             @Override // com.android.internal.app.procstats.IProcessStats
-            public long getCommittedStatsMerged(long highWaterMarkMs, int section, boolean doAggregate, List<ParcelFileDescriptor> committedStats, ProcessStats mergedStats) throws RemoteException {
+            public long getCommittedStatsMerged(
+                    long highWaterMarkMs,
+                    int section,
+                    boolean doAggregate,
+                    List<ParcelFileDescriptor> committedStats,
+                    ProcessStats mergedStats)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -318,15 +351,18 @@ public interface IProcessStats extends IInterface {
         }
 
         protected void getCurrentStats_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.PACKAGE_USAGE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.PACKAGE_USAGE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void getStatsOverTime_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.PACKAGE_USAGE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.PACKAGE_USAGE_STATS, getCallingPid(), getCallingUid());
         }
 
         protected void getCommittedStatsMerged_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.PACKAGE_USAGE_STATS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.PACKAGE_USAGE_STATS, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

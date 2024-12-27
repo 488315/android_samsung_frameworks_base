@@ -5,25 +5,28 @@ import android.graphics.Rect;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.RemoteException;
-import android.view.IScrollCaptureConnection;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.util.ArrayList;
 
 /* loaded from: classes4.dex */
 public class ScrollCaptureResponse implements Parcelable {
-    public static final Parcelable.Creator<ScrollCaptureResponse> CREATOR = new Parcelable.Creator<ScrollCaptureResponse>() { // from class: android.view.ScrollCaptureResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ScrollCaptureResponse[] newArray(int size) {
-            return new ScrollCaptureResponse[size];
-        }
+    public static final Parcelable.Creator<ScrollCaptureResponse> CREATOR =
+            new Parcelable.Creator<
+                    ScrollCaptureResponse>() { // from class: android.view.ScrollCaptureResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ScrollCaptureResponse[] newArray(int size) {
+                    return new ScrollCaptureResponse[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ScrollCaptureResponse createFromParcel(Parcel in) {
-            return new ScrollCaptureResponse(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ScrollCaptureResponse createFromParcel(Parcel in) {
+                    return new ScrollCaptureResponse(in);
+                }
+            };
     private Rect mBoundsInWindow;
     private IScrollCaptureConnection mConnection;
     private String mDescription;
@@ -46,7 +49,14 @@ public class ScrollCaptureResponse implements Parcelable {
         }
     }
 
-    ScrollCaptureResponse(String description, IScrollCaptureConnection connection, Rect windowBounds, Rect boundsInWindow, String windowTitle, String packageName, ArrayList<String> messages) {
+    ScrollCaptureResponse(
+            String description,
+            IScrollCaptureConnection connection,
+            Rect windowBounds,
+            Rect boundsInWindow,
+            String windowTitle,
+            String packageName,
+            ArrayList<String> messages) {
         this.mDescription = "";
         this.mConnection = null;
         this.mWindowBounds = null;
@@ -55,14 +65,16 @@ public class ScrollCaptureResponse implements Parcelable {
         this.mPackageName = null;
         this.mMessages = new ArrayList<>();
         this.mDescription = description;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mDescription);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mDescription);
         this.mConnection = connection;
         this.mWindowBounds = windowBounds;
         this.mBoundsInWindow = boundsInWindow;
         this.mWindowTitle = windowTitle;
         this.mPackageName = packageName;
         this.mMessages = messages;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mMessages);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mMessages);
     }
 
     public String getDescription() {
@@ -94,7 +106,21 @@ public class ScrollCaptureResponse implements Parcelable {
     }
 
     public String toString() {
-        return "ScrollCaptureResponse { description = " + this.mDescription + ", connection = " + this.mConnection + ", windowBounds = " + this.mWindowBounds + ", boundsInWindow = " + this.mBoundsInWindow + ", windowTitle = " + this.mWindowTitle + ", packageName = " + this.mPackageName + ", messages = " + this.mMessages + " }";
+        return "ScrollCaptureResponse { description = "
+                + this.mDescription
+                + ", connection = "
+                + this.mConnection
+                + ", windowBounds = "
+                + this.mWindowBounds
+                + ", boundsInWindow = "
+                + this.mBoundsInWindow
+                + ", windowTitle = "
+                + this.mWindowTitle
+                + ", packageName = "
+                + this.mPackageName
+                + ", messages = "
+                + this.mMessages
+                + " }";
     }
 
     @Override // android.os.Parcelable
@@ -147,7 +173,10 @@ public class ScrollCaptureResponse implements Parcelable {
         this.mMessages = new ArrayList<>();
         byte flg = in.readByte();
         String description = in.readString();
-        IScrollCaptureConnection connection = (flg & 2) == 0 ? null : IScrollCaptureConnection.Stub.asInterface(in.readStrongBinder());
+        IScrollCaptureConnection connection =
+                (flg & 2) == 0
+                        ? null
+                        : IScrollCaptureConnection.Stub.asInterface(in.readStrongBinder());
         Rect windowBounds = (flg & 4) == 0 ? null : (Rect) in.readTypedObject(Rect.CREATOR);
         Rect boundsInWindow = (flg & 8) == 0 ? null : (Rect) in.readTypedObject(Rect.CREATOR);
         String windowTitle = (flg & 16) == 0 ? null : in.readString();
@@ -155,14 +184,16 @@ public class ScrollCaptureResponse implements Parcelable {
         ArrayList<String> messages = new ArrayList<>();
         in.readStringList(messages);
         this.mDescription = description;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mDescription);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mDescription);
         this.mConnection = connection;
         this.mWindowBounds = windowBounds;
         this.mBoundsInWindow = boundsInWindow;
         this.mWindowTitle = windowTitle;
         this.mPackageName = packageName;
         this.mMessages = messages;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mMessages);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mMessages);
     }
 
     public static class Builder {
@@ -256,18 +287,26 @@ public class ScrollCaptureResponse implements Parcelable {
             if ((this.mBuilderFieldsSet & 64) == 0) {
                 this.mMessages = new ArrayList<>();
             }
-            ScrollCaptureResponse o = new ScrollCaptureResponse(this.mDescription, this.mConnection, this.mWindowBounds, this.mBoundsInWindow, this.mWindowTitle, this.mPackageName, this.mMessages);
+            ScrollCaptureResponse o =
+                    new ScrollCaptureResponse(
+                            this.mDescription,
+                            this.mConnection,
+                            this.mWindowBounds,
+                            this.mBoundsInWindow,
+                            this.mWindowTitle,
+                            this.mPackageName,
+                            this.mMessages);
             return o;
         }
 
         private void checkNotUsed() {
             if ((this.mBuilderFieldsSet & 128) != 0) {
-                throw new IllegalStateException("This Builder should not be reused. Use a new Builder instance instead");
+                throw new IllegalStateException(
+                        "This Builder should not be reused. Use a new Builder instance instead");
             }
         }
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

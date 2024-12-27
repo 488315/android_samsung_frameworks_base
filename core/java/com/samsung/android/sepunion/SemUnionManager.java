@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import com.samsung.android.sepunion.IUnionManager;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -49,8 +49,14 @@ public class SemUnionManager {
         synchronized (mLock) {
             if (sNeedInitialize) {
                 int callingUid = Binder.getCallingUid();
-                Log.i(TAG, "initializeManagerMapData(" + callingUid + ") context = " + this.mContext.toString());
-                for (Map.Entry<String, String> entry : UnionConstants.sClassPathForManager.entrySet()) {
+                Log.i(
+                        TAG,
+                        "initializeManagerMapData("
+                                + callingUid
+                                + ") context = "
+                                + this.mContext.toString());
+                for (Map.Entry<String, String> entry :
+                        UnionConstants.sClassPathForManager.entrySet()) {
                     String key = entry.getKey();
                     Constructor constructor = getConstructor(entry.getValue());
                     if (constructor != null) {
@@ -63,7 +69,9 @@ public class SemUnionManager {
     }
 
     private IUnionManager getService() {
-        IUnionManager service = IUnionManager.Stub.asInterface(ServiceManager.getService(Context.SEP_UNION_SERVICE));
+        IUnionManager service =
+                IUnionManager.Stub.asInterface(
+                        ServiceManager.getService(Context.SEP_UNION_SERVICE));
         if (service == null) {
             Log.i(TAG, "IUnionManager is NULL");
         }

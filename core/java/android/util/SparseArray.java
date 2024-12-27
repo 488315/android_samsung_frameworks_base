@@ -2,6 +2,7 @@ package android.util;
 
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.GrowingArrayUtils;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
@@ -267,7 +268,8 @@ public class SparseArray<E> implements Cloneable {
             return false;
         }
         for (int index = 0; index < size; index++) {
-            if (this.mKeys[index] != other.mKeys[index] || !Objects.equals(this.mValues[index], other.mValues[index])) {
+            if (this.mKeys[index] != other.mKeys[index]
+                    || !Objects.equals(this.mValues[index], other.mValues[index])) {
                 return false;
             }
         }

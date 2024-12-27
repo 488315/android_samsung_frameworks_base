@@ -6,96 +6,139 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import android.telephony.data.IDataServiceCallback;
+
 import com.android.internal.telephony.IIntegerConsumer;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
 public interface IDataService extends IInterface {
-    void cancelHandover(int i, int i2, IDataServiceCallback iDataServiceCallback) throws RemoteException;
+    void cancelHandover(int i, int i2, IDataServiceCallback iDataServiceCallback)
+            throws RemoteException;
 
     void createDataServiceProvider(int i) throws RemoteException;
 
-    void deactivateDataCall(int i, int i2, int i3, IDataServiceCallback iDataServiceCallback) throws RemoteException;
+    void deactivateDataCall(int i, int i2, int i3, IDataServiceCallback iDataServiceCallback)
+            throws RemoteException;
 
-    void registerForDataCallListChanged(int i, IDataServiceCallback iDataServiceCallback) throws RemoteException;
+    void registerForDataCallListChanged(int i, IDataServiceCallback iDataServiceCallback)
+            throws RemoteException;
 
-    void registerForUnthrottleApn(int i, IDataServiceCallback iDataServiceCallback) throws RemoteException;
+    void registerForUnthrottleApn(int i, IDataServiceCallback iDataServiceCallback)
+            throws RemoteException;
 
     void removeDataServiceProvider(int i) throws RemoteException;
 
-    void requestDataCallList(int i, IDataServiceCallback iDataServiceCallback) throws RemoteException;
+    void requestDataCallList(int i, IDataServiceCallback iDataServiceCallback)
+            throws RemoteException;
 
-    void requestNetworkValidation(int i, int i2, IIntegerConsumer iIntegerConsumer) throws RemoteException;
+    void requestNetworkValidation(int i, int i2, IIntegerConsumer iIntegerConsumer)
+            throws RemoteException;
 
-    void setDataProfile(int i, List<DataProfile> list, boolean z, IDataServiceCallback iDataServiceCallback) throws RemoteException;
+    void setDataProfile(
+            int i, List<DataProfile> list, boolean z, IDataServiceCallback iDataServiceCallback)
+            throws RemoteException;
 
-    void setInitialAttachApn(int i, DataProfile dataProfile, boolean z, IDataServiceCallback iDataServiceCallback) throws RemoteException;
+    void setInitialAttachApn(
+            int i, DataProfile dataProfile, boolean z, IDataServiceCallback iDataServiceCallback)
+            throws RemoteException;
 
-    void setupDataCall(int i, int i2, DataProfile dataProfile, boolean z, boolean z2, int i3, LinkProperties linkProperties, int i4, NetworkSliceInfo networkSliceInfo, TrafficDescriptor trafficDescriptor, boolean z3, IDataServiceCallback iDataServiceCallback) throws RemoteException;
+    void setupDataCall(
+            int i,
+            int i2,
+            DataProfile dataProfile,
+            boolean z,
+            boolean z2,
+            int i3,
+            LinkProperties linkProperties,
+            int i4,
+            NetworkSliceInfo networkSliceInfo,
+            TrafficDescriptor trafficDescriptor,
+            boolean z3,
+            IDataServiceCallback iDataServiceCallback)
+            throws RemoteException;
 
-    void startHandover(int i, int i2, IDataServiceCallback iDataServiceCallback) throws RemoteException;
+    void startHandover(int i, int i2, IDataServiceCallback iDataServiceCallback)
+            throws RemoteException;
 
-    void unregisterForDataCallListChanged(int i, IDataServiceCallback iDataServiceCallback) throws RemoteException;
+    void unregisterForDataCallListChanged(int i, IDataServiceCallback iDataServiceCallback)
+            throws RemoteException;
 
-    void unregisterForUnthrottleApn(int i, IDataServiceCallback iDataServiceCallback) throws RemoteException;
+    void unregisterForUnthrottleApn(int i, IDataServiceCallback iDataServiceCallback)
+            throws RemoteException;
 
     public static class Default implements IDataService {
         @Override // android.telephony.data.IDataService
-        public void createDataServiceProvider(int slotId) throws RemoteException {
-        }
+        public void createDataServiceProvider(int slotId) throws RemoteException {}
 
         @Override // android.telephony.data.IDataService
-        public void removeDataServiceProvider(int slotId) throws RemoteException {
-        }
+        public void removeDataServiceProvider(int slotId) throws RemoteException {}
 
         @Override // android.telephony.data.IDataService
-        public void setupDataCall(int slotId, int accessNetwork, DataProfile dataProfile, boolean isRoaming, boolean allowRoaming, int reason, LinkProperties linkProperties, int pduSessionId, NetworkSliceInfo sliceInfo, TrafficDescriptor trafficDescriptor, boolean matchAllRuleAllowed, IDataServiceCallback callback) throws RemoteException {
-        }
+        public void setupDataCall(
+                int slotId,
+                int accessNetwork,
+                DataProfile dataProfile,
+                boolean isRoaming,
+                boolean allowRoaming,
+                int reason,
+                LinkProperties linkProperties,
+                int pduSessionId,
+                NetworkSliceInfo sliceInfo,
+                TrafficDescriptor trafficDescriptor,
+                boolean matchAllRuleAllowed,
+                IDataServiceCallback callback)
+                throws RemoteException {}
 
         @Override // android.telephony.data.IDataService
-        public void deactivateDataCall(int slotId, int cid, int reason, IDataServiceCallback callback) throws RemoteException {
-        }
+        public void deactivateDataCall(
+                int slotId, int cid, int reason, IDataServiceCallback callback)
+                throws RemoteException {}
 
         @Override // android.telephony.data.IDataService
-        public void setInitialAttachApn(int slotId, DataProfile dataProfile, boolean isRoaming, IDataServiceCallback callback) throws RemoteException {
-        }
+        public void setInitialAttachApn(
+                int slotId,
+                DataProfile dataProfile,
+                boolean isRoaming,
+                IDataServiceCallback callback)
+                throws RemoteException {}
 
         @Override // android.telephony.data.IDataService
-        public void setDataProfile(int slotId, List<DataProfile> dps, boolean isRoaming, IDataServiceCallback callback) throws RemoteException {
-        }
+        public void setDataProfile(
+                int slotId, List<DataProfile> dps, boolean isRoaming, IDataServiceCallback callback)
+                throws RemoteException {}
 
         @Override // android.telephony.data.IDataService
-        public void requestDataCallList(int slotId, IDataServiceCallback callback) throws RemoteException {
-        }
+        public void requestDataCallList(int slotId, IDataServiceCallback callback)
+                throws RemoteException {}
 
         @Override // android.telephony.data.IDataService
-        public void registerForDataCallListChanged(int slotId, IDataServiceCallback callback) throws RemoteException {
-        }
+        public void registerForDataCallListChanged(int slotId, IDataServiceCallback callback)
+                throws RemoteException {}
 
         @Override // android.telephony.data.IDataService
-        public void unregisterForDataCallListChanged(int slotId, IDataServiceCallback callback) throws RemoteException {
-        }
+        public void unregisterForDataCallListChanged(int slotId, IDataServiceCallback callback)
+                throws RemoteException {}
 
         @Override // android.telephony.data.IDataService
-        public void startHandover(int slotId, int cid, IDataServiceCallback callback) throws RemoteException {
-        }
+        public void startHandover(int slotId, int cid, IDataServiceCallback callback)
+                throws RemoteException {}
 
         @Override // android.telephony.data.IDataService
-        public void cancelHandover(int slotId, int cid, IDataServiceCallback callback) throws RemoteException {
-        }
+        public void cancelHandover(int slotId, int cid, IDataServiceCallback callback)
+                throws RemoteException {}
 
         @Override // android.telephony.data.IDataService
-        public void registerForUnthrottleApn(int slotIndex, IDataServiceCallback callback) throws RemoteException {
-        }
+        public void registerForUnthrottleApn(int slotIndex, IDataServiceCallback callback)
+                throws RemoteException {}
 
         @Override // android.telephony.data.IDataService
-        public void unregisterForUnthrottleApn(int slotIndex, IDataServiceCallback callback) throws RemoteException {
-        }
+        public void unregisterForUnthrottleApn(int slotIndex, IDataServiceCallback callback)
+                throws RemoteException {}
 
         @Override // android.telephony.data.IDataService
-        public void requestNetworkValidation(int slotId, int cid, IIntegerConsumer callback) throws RemoteException {
-        }
+        public void requestNetworkValidation(int slotId, int cid, IIntegerConsumer callback)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -103,7 +146,7 @@ public interface IDataService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDataService {
+    public abstract static class Stub extends Binder implements IDataService {
         public static final String DESCRIPTOR = "android.telephony.data.IDataService";
         static final int TRANSACTION_cancelHandover = 11;
         static final int TRANSACTION_createDataServiceProvider = 1;
@@ -181,7 +224,8 @@ public interface IDataService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -207,20 +251,27 @@ public interface IDataService extends IInterface {
                     boolean _arg3 = data.readBoolean();
                     boolean _arg4 = data.readBoolean();
                     int _arg5 = data.readInt();
-                    LinkProperties _arg6 = (LinkProperties) data.readTypedObject(LinkProperties.CREATOR);
+                    LinkProperties _arg6 =
+                            (LinkProperties) data.readTypedObject(LinkProperties.CREATOR);
                     int _arg7 = data.readInt();
-                    NetworkSliceInfo _arg8 = (NetworkSliceInfo) data.readTypedObject(NetworkSliceInfo.CREATOR);
-                    TrafficDescriptor _arg9 = (TrafficDescriptor) data.readTypedObject(TrafficDescriptor.CREATOR);
+                    NetworkSliceInfo _arg8 =
+                            (NetworkSliceInfo) data.readTypedObject(NetworkSliceInfo.CREATOR);
+                    TrafficDescriptor _arg9 =
+                            (TrafficDescriptor) data.readTypedObject(TrafficDescriptor.CREATOR);
                     boolean _arg10 = data.readBoolean();
-                    IDataServiceCallback _arg11 = IDataServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    IDataServiceCallback _arg11 =
+                            IDataServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
-                    setupDataCall(_arg03, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9, _arg10, _arg11);
+                    setupDataCall(
+                            _arg03, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9,
+                            _arg10, _arg11);
                     return true;
                 case 4:
                     int _arg04 = data.readInt();
                     int _arg12 = data.readInt();
                     int _arg22 = data.readInt();
-                    IDataServiceCallback _arg32 = IDataServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    IDataServiceCallback _arg32 =
+                            IDataServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     deactivateDataCall(_arg04, _arg12, _arg22, _arg32);
                     return true;
@@ -228,7 +279,8 @@ public interface IDataService extends IInterface {
                     int _arg05 = data.readInt();
                     DataProfile _arg13 = (DataProfile) data.readTypedObject(DataProfile.CREATOR);
                     boolean _arg23 = data.readBoolean();
-                    IDataServiceCallback _arg33 = IDataServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    IDataServiceCallback _arg33 =
+                            IDataServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setInitialAttachApn(_arg05, _arg13, _arg23, _arg33);
                     return true;
@@ -236,58 +288,67 @@ public interface IDataService extends IInterface {
                     int _arg06 = data.readInt();
                     List<DataProfile> _arg14 = data.createTypedArrayList(DataProfile.CREATOR);
                     boolean _arg24 = data.readBoolean();
-                    IDataServiceCallback _arg34 = IDataServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    IDataServiceCallback _arg34 =
+                            IDataServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setDataProfile(_arg06, _arg14, _arg24, _arg34);
                     return true;
                 case 7:
                     int _arg07 = data.readInt();
-                    IDataServiceCallback _arg15 = IDataServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    IDataServiceCallback _arg15 =
+                            IDataServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestDataCallList(_arg07, _arg15);
                     return true;
                 case 8:
                     int _arg08 = data.readInt();
-                    IDataServiceCallback _arg16 = IDataServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    IDataServiceCallback _arg16 =
+                            IDataServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerForDataCallListChanged(_arg08, _arg16);
                     return true;
                 case 9:
                     int _arg09 = data.readInt();
-                    IDataServiceCallback _arg17 = IDataServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    IDataServiceCallback _arg17 =
+                            IDataServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterForDataCallListChanged(_arg09, _arg17);
                     return true;
                 case 10:
                     int _arg010 = data.readInt();
                     int _arg18 = data.readInt();
-                    IDataServiceCallback _arg25 = IDataServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    IDataServiceCallback _arg25 =
+                            IDataServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     startHandover(_arg010, _arg18, _arg25);
                     return true;
                 case 11:
                     int _arg011 = data.readInt();
                     int _arg19 = data.readInt();
-                    IDataServiceCallback _arg26 = IDataServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    IDataServiceCallback _arg26 =
+                            IDataServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     cancelHandover(_arg011, _arg19, _arg26);
                     return true;
                 case 12:
                     int _arg012 = data.readInt();
-                    IDataServiceCallback _arg110 = IDataServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    IDataServiceCallback _arg110 =
+                            IDataServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerForUnthrottleApn(_arg012, _arg110);
                     return true;
                 case 13:
                     int _arg013 = data.readInt();
-                    IDataServiceCallback _arg111 = IDataServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    IDataServiceCallback _arg111 =
+                            IDataServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterForUnthrottleApn(_arg013, _arg111);
                     return true;
                 case 14:
                     int _arg014 = data.readInt();
                     int _arg112 = data.readInt();
-                    IIntegerConsumer _arg27 = IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
+                    IIntegerConsumer _arg27 =
+                            IIntegerConsumer.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestNetworkValidation(_arg014, _arg112, _arg27);
                     return true;
@@ -337,7 +398,20 @@ public interface IDataService extends IInterface {
             }
 
             @Override // android.telephony.data.IDataService
-            public void setupDataCall(int slotId, int accessNetwork, DataProfile dataProfile, boolean isRoaming, boolean allowRoaming, int reason, LinkProperties linkProperties, int pduSessionId, NetworkSliceInfo sliceInfo, TrafficDescriptor trafficDescriptor, boolean matchAllRuleAllowed, IDataServiceCallback callback) throws RemoteException {
+            public void setupDataCall(
+                    int slotId,
+                    int accessNetwork,
+                    DataProfile dataProfile,
+                    boolean isRoaming,
+                    boolean allowRoaming,
+                    int reason,
+                    LinkProperties linkProperties,
+                    int pduSessionId,
+                    NetworkSliceInfo sliceInfo,
+                    TrafficDescriptor trafficDescriptor,
+                    boolean matchAllRuleAllowed,
+                    IDataServiceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -425,7 +499,9 @@ public interface IDataService extends IInterface {
             }
 
             @Override // android.telephony.data.IDataService
-            public void deactivateDataCall(int slotId, int cid, int reason, IDataServiceCallback callback) throws RemoteException {
+            public void deactivateDataCall(
+                    int slotId, int cid, int reason, IDataServiceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -440,7 +516,12 @@ public interface IDataService extends IInterface {
             }
 
             @Override // android.telephony.data.IDataService
-            public void setInitialAttachApn(int slotId, DataProfile dataProfile, boolean isRoaming, IDataServiceCallback callback) throws RemoteException {
+            public void setInitialAttachApn(
+                    int slotId,
+                    DataProfile dataProfile,
+                    boolean isRoaming,
+                    IDataServiceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -455,7 +536,12 @@ public interface IDataService extends IInterface {
             }
 
             @Override // android.telephony.data.IDataService
-            public void setDataProfile(int slotId, List<DataProfile> dps, boolean isRoaming, IDataServiceCallback callback) throws RemoteException {
+            public void setDataProfile(
+                    int slotId,
+                    List<DataProfile> dps,
+                    boolean isRoaming,
+                    IDataServiceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -470,7 +556,8 @@ public interface IDataService extends IInterface {
             }
 
             @Override // android.telephony.data.IDataService
-            public void requestDataCallList(int slotId, IDataServiceCallback callback) throws RemoteException {
+            public void requestDataCallList(int slotId, IDataServiceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -483,7 +570,8 @@ public interface IDataService extends IInterface {
             }
 
             @Override // android.telephony.data.IDataService
-            public void registerForDataCallListChanged(int slotId, IDataServiceCallback callback) throws RemoteException {
+            public void registerForDataCallListChanged(int slotId, IDataServiceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -496,7 +584,8 @@ public interface IDataService extends IInterface {
             }
 
             @Override // android.telephony.data.IDataService
-            public void unregisterForDataCallListChanged(int slotId, IDataServiceCallback callback) throws RemoteException {
+            public void unregisterForDataCallListChanged(int slotId, IDataServiceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -509,7 +598,8 @@ public interface IDataService extends IInterface {
             }
 
             @Override // android.telephony.data.IDataService
-            public void startHandover(int slotId, int cid, IDataServiceCallback callback) throws RemoteException {
+            public void startHandover(int slotId, int cid, IDataServiceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -523,7 +613,8 @@ public interface IDataService extends IInterface {
             }
 
             @Override // android.telephony.data.IDataService
-            public void cancelHandover(int slotId, int cid, IDataServiceCallback callback) throws RemoteException {
+            public void cancelHandover(int slotId, int cid, IDataServiceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -537,7 +628,8 @@ public interface IDataService extends IInterface {
             }
 
             @Override // android.telephony.data.IDataService
-            public void registerForUnthrottleApn(int slotIndex, IDataServiceCallback callback) throws RemoteException {
+            public void registerForUnthrottleApn(int slotIndex, IDataServiceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -550,7 +642,8 @@ public interface IDataService extends IInterface {
             }
 
             @Override // android.telephony.data.IDataService
-            public void unregisterForUnthrottleApn(int slotIndex, IDataServiceCallback callback) throws RemoteException {
+            public void unregisterForUnthrottleApn(int slotIndex, IDataServiceCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -563,7 +656,8 @@ public interface IDataService extends IInterface {
             }
 
             @Override // android.telephony.data.IDataService
-            public void requestNetworkValidation(int slotId, int cid, IIntegerConsumer callback) throws RemoteException {
+            public void requestNetworkValidation(int slotId, int cid, IIntegerConsumer callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

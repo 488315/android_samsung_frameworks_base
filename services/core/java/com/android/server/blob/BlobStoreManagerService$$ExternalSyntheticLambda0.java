@@ -6,19 +6,22 @@ import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class BlobStoreManagerService$$ExternalSyntheticLambda0 implements Consumer {
+public final /* synthetic */ class BlobStoreManagerService$$ExternalSyntheticLambda0
+        implements Consumer {
     public final /* synthetic */ int $r8$classId = 1;
     public final /* synthetic */ String f$0;
     public final /* synthetic */ int f$1;
     public final /* synthetic */ Object f$2;
 
-    public /* synthetic */ BlobStoreManagerService$$ExternalSyntheticLambda0(int i, String str, ArrayList arrayList) {
+    public /* synthetic */ BlobStoreManagerService$$ExternalSyntheticLambda0(
+            int i, String str, ArrayList arrayList) {
         this.f$0 = str;
         this.f$1 = i;
         this.f$2 = arrayList;
     }
 
-    public /* synthetic */ BlobStoreManagerService$$ExternalSyntheticLambda0(String str, int i, AtomicLong atomicLong) {
+    public /* synthetic */ BlobStoreManagerService$$ExternalSyntheticLambda0(
+            String str, int i, AtomicLong atomicLong) {
         this.f$0 = str;
         this.f$1 = i;
         this.f$2 = atomicLong;

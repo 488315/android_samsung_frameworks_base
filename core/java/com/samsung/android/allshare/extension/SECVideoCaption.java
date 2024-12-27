@@ -2,6 +2,7 @@ package com.samsung.android.allshare.extension;
 
 import com.samsung.android.allshare.DLog;
 import com.samsung.android.share.SemShareConstants;
+
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -55,7 +56,8 @@ public class SECVideoCaption {
                 }
                 connection = null;
             } catch (IllegalArgumentException e2) {
-                DLog.w_api(SECVideoCaption.TAG_CLASS, "GetSECCaption : IllegalArgumentException", e2);
+                DLog.w_api(
+                        SECVideoCaption.TAG_CLASS, "GetSECCaption : IllegalArgumentException", e2);
                 if (connection != null) {
                     connection.disconnect();
                 }

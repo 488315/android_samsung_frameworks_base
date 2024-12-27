@@ -56,7 +56,8 @@ public class DrmErrorEvent extends DrmEvent {
         checkTypeValidity(type);
     }
 
-    public DrmErrorEvent(int uniqueId, int type, String message, HashMap<String, Object> attributes) {
+    public DrmErrorEvent(
+            int uniqueId, int type, String message, HashMap<String, Object> attributes) {
         super(uniqueId, type, message, attributes);
         checkTypeValidity(type);
     }

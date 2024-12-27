@@ -12,6 +12,7 @@ import android.provider.Settings;
 import android.system.OsConstants;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import com.android.server.ProfileService$1$$ExternalSyntheticOutline0;
 import com.android.server.SystemUpdateManagerService$$ExternalSyntheticOutline0;
 import com.android.server.backup.BackupAgentTimeoutParameters;
@@ -24,7 +25,9 @@ import com.android.server.backup.UserBackupManagerService;
 import com.android.server.backup.internal.LifecycleOperationStorage;
 import com.android.server.backup.utils.BackupEligibilityRules;
 import com.android.server.backup.utils.BackupManagerMonitorEventSender;
+
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
@@ -100,7 +103,17 @@ public final class FullRestoreEngine extends RestoreEngine {
         this.mOnlyPackage = null;
     }
 
-    public FullRestoreEngine(UserBackupManagerService userBackupManagerService, LifecycleOperationStorage lifecycleOperationStorage, BackupRestoreTask backupRestoreTask, IFullBackupRestoreObserver iFullBackupRestoreObserver, IBackupManagerMonitor iBackupManagerMonitor, PackageInfo packageInfo, boolean z, int i, boolean z2, BackupEligibilityRules backupEligibilityRules) {
+    public FullRestoreEngine(
+            UserBackupManagerService userBackupManagerService,
+            LifecycleOperationStorage lifecycleOperationStorage,
+            BackupRestoreTask backupRestoreTask,
+            IFullBackupRestoreObserver iFullBackupRestoreObserver,
+            IBackupManagerMonitor iBackupManagerMonitor,
+            PackageInfo packageInfo,
+            boolean z,
+            int i,
+            boolean z2,
+            BackupEligibilityRules backupEligibilityRules) {
         this.mDeleteObserver = new RestoreDeleteObserver();
         this.mPackagePolicies = new HashMap();
         this.mPackageInstallers = new HashMap();
@@ -121,10 +134,12 @@ public final class FullRestoreEngine extends RestoreEngine {
         this.mMonitorTask = backupRestoreTask;
         this.mObserver = iFullBackupRestoreObserver;
         this.mMonitor = iBackupManagerMonitor;
-        this.mBackupManagerMonitorEventSender = new BackupManagerMonitorEventSender(iBackupManagerMonitor);
+        this.mBackupManagerMonitorEventSender =
+                new BackupManagerMonitorEventSender(iBackupManagerMonitor);
         this.mOnlyPackage = packageInfo;
         this.mAllowApks = z;
-        BackupAgentTimeoutParameters backupAgentTimeoutParameters = userBackupManagerService.mAgentTimeoutParameters;
+        BackupAgentTimeoutParameters backupAgentTimeoutParameters =
+                userBackupManagerService.mAgentTimeoutParameters;
         Objects.requireNonNull(backupAgentTimeoutParameters, "Timeout parameters cannot be null");
         this.mAgentTimeoutParameters = backupAgentTimeoutParameters;
         this.mIsAdbRestore = z2;
@@ -152,12 +167,19 @@ public final class FullRestoreEngine extends RestoreEngine {
         if ("c".equals(fileMetadata.domain)) {
             return false;
         }
-        return ("r".equals(fileMetadata.domain) && fileMetadata.path.startsWith("no_backup/")) ? false : true;
+        return ("r".equals(fileMetadata.domain) && fileMetadata.path.startsWith("no_backup/"))
+                ? false
+                : true;
     }
 
     public final void logBMMEvent(int i, PackageInfo packageInfo) {
         if (Flags.enableIncreasedBmmLoggingForRestoreAtInstall()) {
-            this.mBackupManagerMonitorEventSender.monitorEvent(i, packageInfo, 3, SystemUpdateManagerService$$ExternalSyntheticOutline0.m(1, "android.app.backup.extra.OPERATION_TYPE"));
+            this.mBackupManagerMonitorEventSender.monitorEvent(
+                    i,
+                    packageInfo,
+                    3,
+                    SystemUpdateManagerService$$ExternalSyntheticOutline0.m(
+                            1, "android.app.backup.extra.OPERATION_TYPE"));
         }
     }
 
@@ -189,12 +211,23 @@ public final class FullRestoreEngine extends RestoreEngine {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void restoreOneFile(java.io.InputStream r43, boolean r44, byte[] r45, android.content.pm.PackageInfo r46, boolean r47, int r48, android.app.backup.IBackupManagerMonitor r49) {
+    public final void restoreOneFile(
+            java.io.InputStream r43,
+            boolean r44,
+            byte[] r45,
+            android.content.pm.PackageInfo r46,
+            boolean r47,
+            int r48,
+            android.app.backup.IBackupManagerMonitor r49) {
         /*
             Method dump skipped, instructions count: 1725
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.backup.restore.FullRestoreEngine.restoreOneFile(java.io.InputStream, boolean, byte[], android.content.pm.PackageInfo, boolean, int, android.app.backup.IBackupManagerMonitor):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.backup.restore.FullRestoreEngine.restoreOneFile(java.io.InputStream,"
+                    + " boolean, byte[], android.content.pm.PackageInfo, boolean, int,"
+                    + " android.app.backup.IBackupManagerMonitor):void");
     }
 
     public final void setUpPipes() {
@@ -205,7 +238,11 @@ public final class FullRestoreEngine extends RestoreEngine {
     }
 
     public final boolean shouldForceClearAppDataOnFullRestore(String str) {
-        String stringForUser = Settings.Secure.getStringForUser(this.mBackupManagerService.mContext.getContentResolver(), "packages_to_clear_data_before_full_restore", this.mUserId);
+        String stringForUser =
+                Settings.Secure.getStringForUser(
+                        this.mBackupManagerService.mContext.getContentResolver(),
+                        "packages_to_clear_data_before_full_restore",
+                        this.mUserId);
         if (TextUtils.isEmpty(stringForUser)) {
             return false;
         }
@@ -214,7 +251,9 @@ public final class FullRestoreEngine extends RestoreEngine {
 
     public final boolean shouldSkipReadOnlyDir(FileMetadata fileMetadata) {
         FileMetadata fileMetadata2 = this.mReadOnlyParent;
-        if (fileMetadata2 != null && fileMetadata.packageName.equals(fileMetadata2.packageName) && fileMetadata.domain.equals(fileMetadata2.domain)) {
+        if (fileMetadata2 != null
+                && fileMetadata.packageName.equals(fileMetadata2.packageName)
+                && fileMetadata.domain.equals(fileMetadata2.domain)) {
             String str = fileMetadata.path;
             String str2 = fileMetadata2.path;
             String str3 = File.separator;
@@ -230,7 +269,11 @@ public final class FullRestoreEngine extends RestoreEngine {
             return false;
         }
         this.mReadOnlyParent = fileMetadata;
-        ProfileService$1$$ExternalSyntheticOutline0.m(new StringBuilder("Skipping restore of "), fileMetadata.path, " and its contents as read-only dirs are currently not supported.", "BackupManagerService");
+        ProfileService$1$$ExternalSyntheticOutline0.m(
+                new StringBuilder("Skipping restore of "),
+                fileMetadata.path,
+                " and its contents as read-only dirs are currently not supported.",
+                "BackupManagerService");
         return true;
     }
 
@@ -239,17 +282,38 @@ public final class FullRestoreEngine extends RestoreEngine {
             UserBackupManagerService userBackupManagerService = this.mBackupManagerService;
             if (z) {
                 try {
-                    int generateRandomIntegerToken = userBackupManagerService.generateRandomIntegerToken();
-                    long fullBackupAgentTimeoutMillis = this.mAgentTimeoutParameters.getFullBackupAgentTimeoutMillis();
-                    AdbRestoreFinishedLatch adbRestoreFinishedLatch = new AdbRestoreFinishedLatch(userBackupManagerService, this.mOperationStorage, generateRandomIntegerToken);
-                    this.mBackupManagerService.prepareOperationTimeout(generateRandomIntegerToken, fullBackupAgentTimeoutMillis, adbRestoreFinishedLatch, 1);
+                    int generateRandomIntegerToken =
+                            userBackupManagerService.generateRandomIntegerToken();
+                    long fullBackupAgentTimeoutMillis =
+                            this.mAgentTimeoutParameters.getFullBackupAgentTimeoutMillis();
+                    AdbRestoreFinishedLatch adbRestoreFinishedLatch =
+                            new AdbRestoreFinishedLatch(
+                                    userBackupManagerService,
+                                    this.mOperationStorage,
+                                    generateRandomIntegerToken);
+                    this.mBackupManagerService.prepareOperationTimeout(
+                            generateRandomIntegerToken,
+                            fullBackupAgentTimeoutMillis,
+                            adbRestoreFinishedLatch,
+                            1);
                     if (this.mTargetApp.processName.equals("system")) {
-                        new Thread(new AdbRestoreFinishedRunnable(this.mAgent, generateRandomIntegerToken, userBackupManagerService), "restore-sys-finished-runner").start();
+                        new Thread(
+                                        new AdbRestoreFinishedRunnable(
+                                                this.mAgent,
+                                                generateRandomIntegerToken,
+                                                userBackupManagerService),
+                                        "restore-sys-finished-runner")
+                                .start();
                     } else {
-                        this.mAgent.doRestoreFinished(generateRandomIntegerToken, userBackupManagerService.mBackupManagerBinder);
+                        this.mAgent.doRestoreFinished(
+                                generateRandomIntegerToken,
+                                userBackupManagerService.mBackupManagerBinder);
                     }
                     try {
-                        adbRestoreFinishedLatch.mLatch.await(adbRestoreFinishedLatch.mAgentTimeoutParameters.getFullBackupAgentTimeoutMillis(), TimeUnit.MILLISECONDS);
+                        adbRestoreFinishedLatch.mLatch.await(
+                                adbRestoreFinishedLatch.mAgentTimeoutParameters
+                                        .getFullBackupAgentTimeoutMillis(),
+                                TimeUnit.MILLISECONDS);
                     } catch (InterruptedException unused) {
                         Slog.w("AdbRestoreFinishedLatch", "Interrupted!");
                     }

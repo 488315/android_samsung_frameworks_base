@@ -7,20 +7,22 @@ import android.os.SharedMemory;
 
 /* loaded from: classes3.dex */
 public final class TableResponse extends BroadcastInfoResponse implements Parcelable {
-    public static final Parcelable.Creator<TableResponse> CREATOR = new Parcelable.Creator<TableResponse>() { // from class: android.media.tv.TableResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TableResponse createFromParcel(Parcel source) {
-            source.readInt();
-            return TableResponse.createFromParcelBody(source);
-        }
+    public static final Parcelable.Creator<TableResponse> CREATOR =
+            new Parcelable.Creator<
+                    TableResponse>() { // from class: android.media.tv.TableResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TableResponse createFromParcel(Parcel source) {
+                    source.readInt();
+                    return TableResponse.createFromParcelBody(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TableResponse[] newArray(int size) {
-            return new TableResponse[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TableResponse[] newArray(int size) {
+                    return new TableResponse[size];
+                }
+            };
     private static final int RESPONSE_TYPE = 2;
     private final int mSize;
     private final byte[] mTableByteArray;
@@ -33,7 +35,8 @@ public final class TableResponse extends BroadcastInfoResponse implements Parcel
     }
 
     @Deprecated
-    public TableResponse(int requestId, int sequence, int responseResult, Uri tableUri, int version, int size) {
+    public TableResponse(
+            int requestId, int sequence, int responseResult, Uri tableUri, int version, int size) {
         super(2, requestId, sequence, responseResult);
         this.mVersion = version;
         this.mSize = size;
@@ -42,7 +45,15 @@ public final class TableResponse extends BroadcastInfoResponse implements Parcel
         this.mTableSharedMemory = null;
     }
 
-    private TableResponse(int requestId, int sequence, int responseResult, int version, int size, Uri tableUri, byte[] tableByteArray, SharedMemory tableSharedMemory) {
+    private TableResponse(
+            int requestId,
+            int sequence,
+            int responseResult,
+            int version,
+            int size,
+            Uri tableUri,
+            byte[] tableByteArray,
+            SharedMemory tableSharedMemory) {
         super(2, requestId, sequence, responseResult);
         this.mVersion = version;
         this.mSize = size;
@@ -91,7 +102,15 @@ public final class TableResponse extends BroadcastInfoResponse implements Parcel
         }
 
         public TableResponse build() {
-            return new TableResponse(this.mRequestId, this.mSequence, this.mResponseResult, this.mVersion, this.mSize, this.mTableUri, this.mTableByteArray, this.mTableSharedMemory);
+            return new TableResponse(
+                    this.mRequestId,
+                    this.mSequence,
+                    this.mResponseResult,
+                    this.mVersion,
+                    this.mSize,
+                    this.mTableUri,
+                    this.mTableByteArray,
+                    this.mTableSharedMemory);
         }
     }
 

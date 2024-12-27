@@ -10,8 +10,7 @@ class MidiPortImpl {
     private static final String TAG = "MidiPort";
     private static final int TIMESTAMP_SIZE = 8;
 
-    MidiPortImpl() {
-    }
+    MidiPortImpl() {}
 
     public static int packData(byte[] message, int offset, int size, long timestamp, byte[] dest) {
         if (size > 1015) {

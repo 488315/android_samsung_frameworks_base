@@ -13,8 +13,10 @@ import android.hardware.radio.RadioMetadata;
 import android.os.ParcelableException;
 import android.util.ArrayMap;
 import android.util.SparseArray;
+
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
 import com.android.server.utils.Slogf;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -54,7 +56,7 @@ public abstract class Convert {
             INT = metadataType;
             MetadataType metadataType2 = new MetadataType("STRING", 1);
             STRING = metadataType2;
-            $VALUES = new MetadataType[]{metadataType, metadataType2};
+            $VALUES = new MetadataType[] {metadataType, metadataType2};
         }
 
         public static MetadataType valueOf(String str) {
@@ -72,21 +74,40 @@ public abstract class Convert {
         MetadataType metadataType = MetadataType.STRING;
         sparseArray.put(1, new MetadataDef(metadataType, "android.hardware.radio.metadata.RDS_PS"));
         MetadataType metadataType2 = MetadataType.INT;
-        sparseArray.put(2, new MetadataDef(metadataType2, "android.hardware.radio.metadata.RDS_PTY"));
-        sparseArray.put(3, new MetadataDef(metadataType2, "android.hardware.radio.metadata.RBDS_PTY"));
+        sparseArray.put(
+                2, new MetadataDef(metadataType2, "android.hardware.radio.metadata.RDS_PTY"));
+        sparseArray.put(
+                3, new MetadataDef(metadataType2, "android.hardware.radio.metadata.RBDS_PTY"));
         sparseArray.put(4, new MetadataDef(metadataType, "android.hardware.radio.metadata.RDS_RT"));
         sparseArray.put(5, new MetadataDef(metadataType, "android.hardware.radio.metadata.TITLE"));
         sparseArray.put(6, new MetadataDef(metadataType, "android.hardware.radio.metadata.ARTIST"));
         sparseArray.put(7, new MetadataDef(metadataType, "android.hardware.radio.metadata.ALBUM"));
         sparseArray.put(8, new MetadataDef(metadataType2, "android.hardware.radio.metadata.ICON"));
         sparseArray.put(9, new MetadataDef(metadataType2, "android.hardware.radio.metadata.ART"));
-        sparseArray.put(10, new MetadataDef(metadataType, "android.hardware.radio.metadata.PROGRAM_NAME"));
-        sparseArray.put(11, new MetadataDef(metadataType, "android.hardware.radio.metadata.DAB_ENSEMBLE_NAME"));
-        sparseArray.put(12, new MetadataDef(metadataType, "android.hardware.radio.metadata.DAB_ENSEMBLE_NAME_SHORT"));
-        sparseArray.put(13, new MetadataDef(metadataType, "android.hardware.radio.metadata.DAB_SERVICE_NAME"));
-        sparseArray.put(14, new MetadataDef(metadataType, "android.hardware.radio.metadata.DAB_SERVICE_NAME_SHORT"));
-        sparseArray.put(15, new MetadataDef(metadataType, "android.hardware.radio.metadata.DAB_COMPONENT_NAME"));
-        sparseArray.put(16, new MetadataDef(metadataType, "android.hardware.radio.metadata.DAB_COMPONENT_NAME_SHORT"));
+        sparseArray.put(
+                10, new MetadataDef(metadataType, "android.hardware.radio.metadata.PROGRAM_NAME"));
+        sparseArray.put(
+                11,
+                new MetadataDef(metadataType, "android.hardware.radio.metadata.DAB_ENSEMBLE_NAME"));
+        sparseArray.put(
+                12,
+                new MetadataDef(
+                        metadataType, "android.hardware.radio.metadata.DAB_ENSEMBLE_NAME_SHORT"));
+        sparseArray.put(
+                13,
+                new MetadataDef(metadataType, "android.hardware.radio.metadata.DAB_SERVICE_NAME"));
+        sparseArray.put(
+                14,
+                new MetadataDef(
+                        metadataType, "android.hardware.radio.metadata.DAB_SERVICE_NAME_SHORT"));
+        sparseArray.put(
+                15,
+                new MetadataDef(
+                        metadataType, "android.hardware.radio.metadata.DAB_COMPONENT_NAME"));
+        sparseArray.put(
+                16,
+                new MetadataDef(
+                        metadataType, "android.hardware.radio.metadata.DAB_COMPONENT_NAME_SHORT"));
     }
 
     public static ProgramFilter programFilterToHal(ProgramList.Filter filter) {
@@ -96,14 +117,17 @@ public abstract class Convert {
         programFilter.identifiers = new ArrayList();
         programFilter.includeCategories = false;
         programFilter.excludeModifications = false;
-        filter.getIdentifierTypes().stream().forEachOrdered(new Convert$$ExternalSyntheticLambda5(1, arrayList));
-        filter.getIdentifiers().stream().forEachOrdered(new Convert$$ExternalSyntheticLambda5(2, programFilter));
+        filter.getIdentifierTypes().stream()
+                .forEachOrdered(new Convert$$ExternalSyntheticLambda5(1, arrayList));
+        filter.getIdentifiers().stream()
+                .forEachOrdered(new Convert$$ExternalSyntheticLambda5(2, programFilter));
         programFilter.includeCategories = filter.areCategoriesIncluded();
         programFilter.excludeModifications = filter.areModificationsExcluded();
         return programFilter;
     }
 
-    public static ProgramSelector.Identifier programIdentifierFromHal(ProgramIdentifier programIdentifier) {
+    public static ProgramSelector.Identifier programIdentifierFromHal(
+            ProgramIdentifier programIdentifier) {
         if (programIdentifier.type == 0) {
             return null;
         }
@@ -111,11 +135,17 @@ public abstract class Convert {
     }
 
     public static RadioManager.ProgramInfo programInfoFromHal(ProgramInfo programInfo) {
-        Collection collection = (Collection) programInfo.relatedContent.stream().map(new Convert$$ExternalSyntheticLambda0(0)).collect(Collectors.toList());
+        Collection collection =
+                (Collection)
+                        programInfo.relatedContent.stream()
+                                .map(new Convert$$ExternalSyntheticLambda0(0))
+                                .collect(Collectors.toList());
         ProgramSelector programSelectorFromHal = programSelectorFromHal(programInfo.selector);
         Objects.requireNonNull(programSelectorFromHal);
-        ProgramSelector.Identifier programIdentifierFromHal = programIdentifierFromHal(programInfo.logicallyTunedTo);
-        ProgramSelector.Identifier programIdentifierFromHal2 = programIdentifierFromHal(programInfo.physicallyTunedTo);
+        ProgramSelector.Identifier programIdentifierFromHal =
+                programIdentifierFromHal(programInfo.logicallyTunedTo);
+        ProgramSelector.Identifier programIdentifierFromHal2 =
+                programIdentifierFromHal(programInfo.physicallyTunedTo);
         int i = programInfo.infoFlags;
         int i2 = programInfo.signalQuality;
         ArrayList arrayList = programInfo.metadata;
@@ -127,7 +157,51 @@ public abstract class Convert {
             if (metadataDef == null) {
                 StringBuilder sb = new StringBuilder("Ignored unknown metadata entry: ");
                 int i3 = metadata.key;
-                sb.append(i3 == 1 ? "RDS_PS" : i3 == 2 ? "RDS_PTY" : i3 == 3 ? "RBDS_PTY" : i3 == 4 ? "RDS_RT" : i3 == 5 ? "SONG_TITLE" : i3 == 6 ? "SONG_ARTIST" : i3 == 7 ? "SONG_ALBUM" : i3 == 8 ? "STATION_ICON" : i3 == 9 ? "ALBUM_ART" : i3 == 10 ? "PROGRAM_NAME" : i3 == 11 ? "DAB_ENSEMBLE_NAME" : i3 == 12 ? "DAB_ENSEMBLE_NAME_SHORT" : i3 == 13 ? "DAB_SERVICE_NAME" : i3 == 14 ? "DAB_SERVICE_NAME_SHORT" : i3 == 15 ? "DAB_COMPONENT_NAME" : i3 == 16 ? "DAB_COMPONENT_NAME_SHORT" : AudioChannelMask$$ExternalSyntheticOutline0.m(new StringBuilder("0x"), i3));
+                sb.append(
+                        i3 == 1
+                                ? "RDS_PS"
+                                : i3 == 2
+                                        ? "RDS_PTY"
+                                        : i3 == 3
+                                                ? "RBDS_PTY"
+                                                : i3 == 4
+                                                        ? "RDS_RT"
+                                                        : i3 == 5
+                                                                ? "SONG_TITLE"
+                                                                : i3 == 6
+                                                                        ? "SONG_ARTIST"
+                                                                        : i3 == 7
+                                                                                ? "SONG_ALBUM"
+                                                                                : i3 == 8
+                                                                                        ? "STATION_ICON"
+                                                                                        : i3 == 9
+                                                                                                ? "ALBUM_ART"
+                                                                                                : i3
+                                                                                                                == 10
+                                                                                                        ? "PROGRAM_NAME"
+                                                                                                        : i3
+                                                                                                                        == 11
+                                                                                                                ? "DAB_ENSEMBLE_NAME"
+                                                                                                                : i3
+                                                                                                                                == 12
+                                                                                                                        ? "DAB_ENSEMBLE_NAME_SHORT"
+                                                                                                                        : i3
+                                                                                                                                        == 13
+                                                                                                                                ? "DAB_SERVICE_NAME"
+                                                                                                                                : i3
+                                                                                                                                                == 14
+                                                                                                                                        ? "DAB_SERVICE_NAME_SHORT"
+                                                                                                                                        : i3
+                                                                                                                                                        == 15
+                                                                                                                                                ? "DAB_COMPONENT_NAME"
+                                                                                                                                                : i3
+                                                                                                                                                                == 16
+                                                                                                                                                        ? "DAB_COMPONENT_NAME_SHORT"
+                                                                                                                                                        : AudioChannelMask$$ExternalSyntheticOutline0
+                                                                                                                                                                .m(
+                                                                                                                                                                        new StringBuilder(
+                                                                                                                                                                                "0x"),
+                                                                                                                                                                        i3));
                 Slogf.i("BcRadio2Srv.convert", sb.toString());
             } else {
                 MetadataType metadataType = MetadataType.STRING;
@@ -140,15 +214,31 @@ public abstract class Convert {
                 }
             }
         }
-        return new RadioManager.ProgramInfo(programSelectorFromHal, programIdentifierFromHal, programIdentifierFromHal2, collection, i, i2, builder.build(), vendorInfoFromHal(programInfo.vendorInfo));
+        return new RadioManager.ProgramInfo(
+                programSelectorFromHal,
+                programIdentifierFromHal,
+                programIdentifierFromHal2,
+                collection,
+                i,
+                i2,
+                builder.build(),
+                vendorInfoFromHal(programInfo.vendorInfo));
     }
 
-    public static ProgramSelector programSelectorFromHal(android.hardware.broadcastradio.V2_0.ProgramSelector programSelector) {
+    public static ProgramSelector programSelectorFromHal(
+            android.hardware.broadcastradio.V2_0.ProgramSelector programSelector) {
         ProgramIdentifier programIdentifier = programSelector.primaryId;
-        if (programIdentifier.type == 0 && programIdentifier.value == 0 && programSelector.secondaryIds.isEmpty()) {
+        if (programIdentifier.type == 0
+                && programIdentifier.value == 0
+                && programSelector.secondaryIds.isEmpty()) {
             return null;
         }
-        ProgramSelector.Identifier[] identifierArr = (ProgramSelector.Identifier[]) programSelector.secondaryIds.stream().map(new Convert$$ExternalSyntheticLambda0(1)).map(new Convert$$ExternalSyntheticLambda0(2)).toArray(new Convert$$ExternalSyntheticLambda3());
+        ProgramSelector.Identifier[] identifierArr =
+                (ProgramSelector.Identifier[])
+                        programSelector.secondaryIds.stream()
+                                .map(new Convert$$ExternalSyntheticLambda0(1))
+                                .map(new Convert$$ExternalSyntheticLambda0(2))
+                                .toArray(new Convert$$ExternalSyntheticLambda3());
         ProgramIdentifier programIdentifier2 = programSelector.primaryId;
         int i = programIdentifier2.type;
         switch (i) {
@@ -183,18 +273,23 @@ public abstract class Convert {
                 i = 7;
                 break;
         }
-        ProgramSelector.Identifier programIdentifierFromHal = programIdentifierFromHal(programIdentifier2);
+        ProgramSelector.Identifier programIdentifierFromHal =
+                programIdentifierFromHal(programIdentifier2);
         Objects.requireNonNull(programIdentifierFromHal);
         return new ProgramSelector(i, programIdentifierFromHal, identifierArr, (long[]) null);
     }
 
-    public static android.hardware.broadcastradio.V2_0.ProgramSelector programSelectorToHal(ProgramSelector programSelector) {
-        android.hardware.broadcastradio.V2_0.ProgramSelector programSelector2 = new android.hardware.broadcastradio.V2_0.ProgramSelector();
+    public static android.hardware.broadcastradio.V2_0.ProgramSelector programSelectorToHal(
+            ProgramSelector programSelector) {
+        android.hardware.broadcastradio.V2_0.ProgramSelector programSelector2 =
+                new android.hardware.broadcastradio.V2_0.ProgramSelector();
         ProgramIdentifier programIdentifier = programSelector2.primaryId;
         ProgramSelector.Identifier primaryId = programSelector.getPrimaryId();
         programIdentifier.type = primaryId.getType();
         programIdentifier.value = primaryId.getValue();
-        Stream map = Arrays.stream(programSelector.getSecondaryIds()).map(new Convert$$ExternalSyntheticLambda0(3));
+        Stream map =
+                Arrays.stream(programSelector.getSecondaryIds())
+                        .map(new Convert$$ExternalSyntheticLambda0(3));
         ArrayList arrayList = programSelector2.secondaryIds;
         Objects.requireNonNull(arrayList);
         map.forEachOrdered(new Convert$$ExternalSyntheticLambda5(0, arrayList));
@@ -207,17 +302,46 @@ public abstract class Convert {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static android.hardware.radio.RadioManager.ModuleProperties propertiesFromHal(int r33, java.lang.String r34, android.hardware.broadcastradio.V2_0.Properties r35, android.hardware.broadcastradio.V2_0.AmFmRegionConfig r36, java.util.List r37) {
+    public static android.hardware.radio.RadioManager.ModuleProperties propertiesFromHal(
+            int r33,
+            java.lang.String r34,
+            android.hardware.broadcastradio.V2_0.Properties r35,
+            android.hardware.broadcastradio.V2_0.AmFmRegionConfig r36,
+            java.util.List r37) {
         /*
             Method dump skipped, instructions count: 408
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.broadcastradio.hal2.Convert.propertiesFromHal(int, java.lang.String, android.hardware.broadcastradio.V2_0.Properties, android.hardware.broadcastradio.V2_0.AmFmRegionConfig, java.util.List):android.hardware.radio.RadioManager$ModuleProperties");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.broadcastradio.hal2.Convert.propertiesFromHal(int,"
+                    + " java.lang.String, android.hardware.broadcastradio.V2_0.Properties,"
+                    + " android.hardware.broadcastradio.V2_0.AmFmRegionConfig,"
+                    + " java.util.List):android.hardware.radio.RadioManager$ModuleProperties");
     }
 
     public static void throwOnError(int i, String str) {
         StringBuilder m = Preconditions$$ExternalSyntheticOutline0.m(str, ": ");
-        m.append(i == 0 ? "OK" : i == 1 ? "UNKNOWN_ERROR" : i == 2 ? "INTERNAL_ERROR" : i == 3 ? "INVALID_ARGUMENTS" : i == 4 ? "INVALID_STATE" : i == 5 ? "NOT_SUPPORTED" : i == 6 ? "TIMEOUT" : AudioChannelMask$$ExternalSyntheticOutline0.m(new StringBuilder("0x"), i));
+        m.append(
+                i == 0
+                        ? "OK"
+                        : i == 1
+                                ? "UNKNOWN_ERROR"
+                                : i == 2
+                                        ? "INTERNAL_ERROR"
+                                        : i == 3
+                                                ? "INVALID_ARGUMENTS"
+                                                : i == 4
+                                                        ? "INVALID_STATE"
+                                                        : i == 5
+                                                                ? "NOT_SUPPORTED"
+                                                                : i == 6
+                                                                        ? "TIMEOUT"
+                                                                        : AudioChannelMask$$ExternalSyntheticOutline0
+                                                                                .m(
+                                                                                        new StringBuilder(
+                                                                                                "0x"),
+                                                                                        i));
         String sb = m.toString();
         switch (i) {
             case 0:
@@ -233,7 +357,8 @@ public abstract class Convert {
             case 5:
                 throw new UnsupportedOperationException(sb);
             default:
-                throw new ParcelableException(new RuntimeException(str + ": unknown error (" + i + ")"));
+                throw new ParcelableException(
+                        new RuntimeException(str + ": unknown error (" + i + ")"));
         }
     }
 

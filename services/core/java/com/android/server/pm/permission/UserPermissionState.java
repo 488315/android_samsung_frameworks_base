@@ -13,7 +13,8 @@ public final class UserPermissionState {
 
     public static void checkAppId(int i) {
         if (UserHandle.getUserId(i) != 0) {
-            throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Invalid app ID "));
+            throw new IllegalArgumentException(
+                    VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Invalid app ID "));
         }
     }
 

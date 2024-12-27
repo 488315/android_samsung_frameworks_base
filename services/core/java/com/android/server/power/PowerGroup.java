@@ -4,8 +4,9 @@ import android.hardware.display.DisplayManagerInternal;
 import android.os.Handler;
 import android.os.PowerManagerInternal;
 import android.os.SystemClock;
+
 import com.android.server.input.InputManagerService;
-import com.android.server.power.PowerManagerService;
+
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
 import com.samsung.android.rune.CoreRune;
 
@@ -33,7 +34,13 @@ public final class PowerGroup {
     public int mWakefulness;
     public final PowerManagerService.AnonymousClass1 mWakefulnessListener;
 
-    public PowerGroup(int i, PowerManagerService.AnonymousClass1 anonymousClass1, Notifier notifier, DisplayManagerInternal displayManagerInternal, boolean z, long j) {
+    public PowerGroup(
+            int i,
+            PowerManagerService.AnonymousClass1 anonymousClass1,
+            Notifier notifier,
+            DisplayManagerInternal displayManagerInternal,
+            boolean z,
+            long j) {
         this.mDisplayPowerRequest = new DisplayManagerInternal.DisplayPowerRequest();
         this.mSuspendBlockerMonitor = new SuspendBlockerMonitor();
         this.mGroupId = i;
@@ -47,7 +54,11 @@ public final class PowerGroup {
         this.mLastSleepTime = j;
     }
 
-    public PowerGroup(PowerManagerService.AnonymousClass1 anonymousClass1, Notifier notifier, DisplayManagerInternal displayManagerInternal, long j) {
+    public PowerGroup(
+            PowerManagerService.AnonymousClass1 anonymousClass1,
+            Notifier notifier,
+            DisplayManagerInternal displayManagerInternal,
+            long j) {
         this.mDisplayPowerRequest = new DisplayManagerInternal.DisplayPowerRequest();
         this.mSuspendBlockerMonitor = new SuspendBlockerMonitor();
         this.mGroupId = 0;
@@ -61,11 +72,13 @@ public final class PowerGroup {
         this.mLastSleepTime = j;
     }
 
-    public int getDesiredScreenPolicyLocked(boolean z, boolean z2, boolean z3, boolean z4, boolean z5) {
+    public int getDesiredScreenPolicyLocked(
+            boolean z, boolean z2, boolean z3, boolean z4, boolean z5) {
         return getDesiredScreenPolicyLocked(z, z2, z3, z4, z5, -1L);
     }
 
-    public int getDesiredScreenPolicyLocked(boolean z, boolean z2, boolean z3, boolean z4, boolean z5, long j) {
+    public int getDesiredScreenPolicyLocked(
+            boolean z, boolean z2, boolean z3, boolean z4, boolean z5, long j) {
         int i = this.mWakefulness;
         int i2 = this.mWakeLockSummary;
         if (i == 0 || z) {
@@ -99,10 +112,13 @@ public final class PowerGroup {
         if ((suspendBlockerMonitor.mEvents & 240) == 0) {
             return "";
         }
-        return "    [Group] Id = " + String.valueOf(this.mGroupId) + suspendBlockerMonitor.toString();
+        return "    [Group] Id = "
+                + String.valueOf(this.mGroupId)
+                + suspendBlockerMonitor.toString();
     }
 
-    public final void setWakefulnessLocked(int i, long j, int i2, int i3, int i4, String str, String str2) {
+    public final void setWakefulnessLocked(
+            int i, long j, int i2, int i3, int i4, String str, String str2) {
         PowerManagerService.AnonymousClass1 anonymousClass1;
         int i5 = this.mWakefulness;
         if (i5 != i) {
@@ -110,7 +126,8 @@ public final class PowerGroup {
                 this.mLastPowerOnTime = j;
                 this.mPoweringOn = true;
                 this.mLastWakeTime = j;
-            } else if (PowerManagerInternal.isInteractive(i5) && !PowerManagerInternal.isInteractive(i)) {
+            } else if (PowerManagerInternal.isInteractive(i5)
+                    && !PowerManagerInternal.isInteractive(i)) {
                 this.mLastSleepTime = j;
             }
             this.mWakefulness = i;
@@ -120,55 +137,103 @@ public final class PowerGroup {
             powerManagerService.mDirty |= 2;
             int i6 = this.mGroupId;
             if (i == 1) {
-                powerManagerService.userActivityNoUpdateLocked((PowerGroup) powerManagerService.mPowerGroups.get(i6), j, 0, i3 == 13 ? 1 : 0, i2);
+                powerManagerService.userActivityNoUpdateLocked(
+                        (PowerGroup) powerManagerService.mPowerGroups.get(i6),
+                        j,
+                        0,
+                        i3 == 13 ? 1 : 0,
+                        i2);
             }
             PowerManagerService powerManagerService2 = PowerManagerService.this;
-            ScreenTimeoutOverridePolicy screenTimeoutOverridePolicy = powerManagerService2.mScreenTimeoutOverridePolicy;
-            if (screenTimeoutOverridePolicy != null && i6 == 0 && (powerManagerService2.mWakeLockSummary & 256) != 0 && i != 1) {
+            ScreenTimeoutOverridePolicy screenTimeoutOverridePolicy =
+                    powerManagerService2.mScreenTimeoutOverridePolicy;
+            if (screenTimeoutOverridePolicy != null
+                    && i6 == 0
+                    && (powerManagerService2.mWakeLockSummary & 256) != 0
+                    && i != 1) {
                 screenTimeoutOverridePolicy.releaseAllWakeLocks(1);
             }
-            powerManagerService2.mDirty |= EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT;
+            powerManagerService2.mDirty |=
+                    EndpointMonitorConst.FLAG_TRACING_NETWORK_EVENT_ABNORMAL_PKT;
             if (i6 == 0) {
-                InputManagerService.this.mNative.setInteractiveForInternalDisplay(PowerManagerInternal.isInteractive(i));
-                if (powerManagerService2.mIsDualViewMode && !PowerManagerInternal.isInteractive(i) && i3 == 4) {
+                InputManagerService.this.mNative.setInteractiveForInternalDisplay(
+                        PowerManagerInternal.isInteractive(i));
+                if (powerManagerService2.mIsDualViewMode
+                        && !PowerManagerInternal.isInteractive(i)
+                        && i3 == 4) {
                     Handler handler = powerManagerService2.mHandlerPmsMisc;
-                    PowerManagerService$LocalService$$ExternalSyntheticLambda0 powerManagerService$LocalService$$ExternalSyntheticLambda0 = new PowerManagerService$LocalService$$ExternalSyntheticLambda0(2, anonymousClass12);
+                    PowerManagerService$LocalService$$ExternalSyntheticLambda0
+                            powerManagerService$LocalService$$ExternalSyntheticLambda0 =
+                                    new PowerManagerService$LocalService$$ExternalSyntheticLambda0(
+                                            2, anonymousClass12);
                     powerManagerService2.mClock.getClass();
-                    handler.postAtTime(powerManagerService$LocalService$$ExternalSyntheticLambda0, SystemClock.uptimeMillis());
+                    handler.postAtTime(
+                            powerManagerService$LocalService$$ExternalSyntheticLambda0,
+                            SystemClock.uptimeMillis());
                 }
                 if (powerManagerService2.mSmartStayEnabledSetting) {
-                    SmartStayController smartStayController = powerManagerService2.mSmartStayController;
+                    SmartStayController smartStayController =
+                            powerManagerService2.mSmartStayController;
                     smartStayController.mWakefulness = i;
                     if (i != 1) {
                         smartStayController.mFaceDetectRequested.set(false);
                         smartStayController.mFaceDetected = false;
                     }
                 }
-                ScreenCurtainController screenCurtainController = powerManagerService2.mScreenCurtainController;
+                ScreenCurtainController screenCurtainController =
+                        powerManagerService2.mScreenCurtainController;
                 if (screenCurtainController != null) {
                     screenCurtainController.mWakefulness = i;
                 }
                 ScreenOnKeeper screenOnKeeper = powerManagerService2.mScreenOnKeeper;
                 if (screenOnKeeper != null) {
-                    Slog.d("ScreenOnKeeper", "onWakefulnessChangedLocked: wakefulness=" + PowerManagerInternal.wakefulnessToString(i));
+                    Slog.d(
+                            "ScreenOnKeeper",
+                            "onWakefulnessChangedLocked: wakefulness="
+                                    + PowerManagerInternal.wakefulnessToString(i));
                     screenOnKeeper.mWakefulness = i;
-                    if (screenOnKeeper.mIsScreenOnKeeperEnabled && !PowerManagerInternal.isInteractive(i)) {
+                    if (screenOnKeeper.mIsScreenOnKeeperEnabled
+                            && !PowerManagerInternal.isInteractive(i)) {
                         screenOnKeeper.disableScreenOnKeeper();
                         screenOnKeeper.notifyScreenOnKeeperDisabledLocked(0);
                     }
                 }
             }
             powerManagerService2.mNotifier.onGroupWakefulnessChangeStarted(i6, i, i3, j);
-            if (PowerManagerUtil.SEC_FEATURE_DEX_DUAL_VIEW && i6 == 0 && i == 1 && powerManagerService2.mIsDualViewMode && powerManagerService2.mPowerGroups.contains(2)) {
+            if (PowerManagerUtil.SEC_FEATURE_DEX_DUAL_VIEW
+                    && i6 == 0
+                    && i == 1
+                    && powerManagerService2.mIsDualViewMode
+                    && powerManagerService2.mPowerGroups.contains(2)) {
                 anonymousClass1 = anonymousClass12;
-                powerManagerService2.wakePowerGroupLocked((PowerGroup) powerManagerService2.mPowerGroups.get(2), j, 11, str2, i2, str, i4, false);
-                powerManagerService2.userActivityNoUpdateLocked((PowerGroup) powerManagerService2.mPowerGroups.get(2), j, 0, 0, i2);
+                powerManagerService2.wakePowerGroupLocked(
+                        (PowerGroup) powerManagerService2.mPowerGroups.get(2),
+                        j,
+                        11,
+                        str2,
+                        i2,
+                        str,
+                        i4,
+                        false);
+                powerManagerService2.userActivityNoUpdateLocked(
+                        (PowerGroup) powerManagerService2.mPowerGroups.get(2), j, 0, 0, i2);
             } else {
                 anonymousClass1 = anonymousClass12;
             }
-            if (CoreRune.CARLIFE_DISPLAY_GROUP && i6 == 0 && powerManagerService2.mPowerGroups.contains(4)) {
-                powerManagerService2.wakePowerGroupLocked((PowerGroup) powerManagerService2.mPowerGroups.get(4), j, 11, str2, i2, str, i4, false);
-                powerManagerService2.userActivityNoUpdateLocked((PowerGroup) powerManagerService2.mPowerGroups.get(4), j, 0, 0, i2);
+            if (CoreRune.CARLIFE_DISPLAY_GROUP
+                    && i6 == 0
+                    && powerManagerService2.mPowerGroups.contains(4)) {
+                powerManagerService2.wakePowerGroupLocked(
+                        (PowerGroup) powerManagerService2.mPowerGroups.get(4),
+                        j,
+                        11,
+                        str2,
+                        i2,
+                        str,
+                        i4,
+                        false);
+                powerManagerService2.userActivityNoUpdateLocked(
+                        (PowerGroup) powerManagerService2.mPowerGroups.get(4), j, 0, 0, i2);
             }
             PowerManagerService.this.updateGlobalWakefulnessLocked(i3, i2, str, str2, i4, j);
             powerManagerService2.updatePowerStateLocked();

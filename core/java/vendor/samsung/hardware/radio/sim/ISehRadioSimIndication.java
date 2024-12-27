@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface ISehRadioSimIndication extends IInterface {
-    public static final String DESCRIPTOR = "vendor$samsung$hardware$radio$sim$ISehRadioSimIndication".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "vendor$samsung$hardware$radio$sim$ISehRadioSimIndication".replace('$', '.');
     public static final String HASH = "e94363ef2041c98feabe84e756d983ad196394e8";
     public static final int VERSION = 1;
 
@@ -18,7 +19,8 @@ public interface ISehRadioSimIndication extends IInterface {
 
     void phonebookInitCompleteIndication(int i) throws RemoteException;
 
-    void releaseCompleteMessageIndication(int i, SehSsReleaseComplete sehSsReleaseComplete) throws RemoteException;
+    void releaseCompleteMessageIndication(int i, SehSsReleaseComplete sehSsReleaseComplete)
+            throws RemoteException;
 
     void sapNotify(int i, byte[] bArr) throws RemoteException;
 
@@ -36,40 +38,37 @@ public interface ISehRadioSimIndication extends IInterface {
 
     public static class Default implements ISehRadioSimIndication {
         @Override // vendor.samsung.hardware.radio.sim.ISehRadioSimIndication
-        public void simPhonebookReadyIndication(int indicationType) throws RemoteException {
-        }
+        public void simPhonebookReadyIndication(int indicationType) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.sim.ISehRadioSimIndication
-        public void phonebookInitCompleteIndication(int indicationType) throws RemoteException {
-        }
+        public void phonebookInitCompleteIndication(int indicationType) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.sim.ISehRadioSimIndication
-        public void stkSmsSendResultIndication(int indicationType, int result) throws RemoteException {
-        }
+        public void stkSmsSendResultIndication(int indicationType, int result)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.sim.ISehRadioSimIndication
-        public void stkCallControlResultIndication(int indicationType, String cmd) throws RemoteException {
-        }
+        public void stkCallControlResultIndication(int indicationType, String cmd)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.sim.ISehRadioSimIndication
-        public void simSwapStateChangedIndication(int indicationType, int state) throws RemoteException {
-        }
+        public void simSwapStateChangedIndication(int indicationType, int state)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.sim.ISehRadioSimIndication
-        public void simCountMismatchedIndication(int indicationType, int state) throws RemoteException {
-        }
+        public void simCountMismatchedIndication(int indicationType, int state)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.sim.ISehRadioSimIndication
-        public void simOnOffStateChangedNotify(int indicationType, int mode) throws RemoteException {
-        }
+        public void simOnOffStateChangedNotify(int indicationType, int mode)
+                throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.sim.ISehRadioSimIndication
-        public void releaseCompleteMessageIndication(int indicationType, SehSsReleaseComplete result) throws RemoteException {
-        }
+        public void releaseCompleteMessageIndication(
+                int indicationType, SehSsReleaseComplete result) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.sim.ISehRadioSimIndication
-        public void sapNotify(int indicationType, byte[] data) throws RemoteException {
-        }
+        public void sapNotify(int indicationType, byte[] data) throws RemoteException {}
 
         @Override // vendor.samsung.hardware.radio.sim.ISehRadioSimIndication
         public int getInterfaceVersion() {
@@ -87,7 +86,7 @@ public interface ISehRadioSimIndication extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISehRadioSimIndication {
+    public abstract static class Stub extends Binder implements ISehRadioSimIndication {
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
         static final int TRANSACTION_phonebookInitCompleteIndication = 2;
@@ -122,7 +121,8 @@ public interface ISehRadioSimIndication extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -184,7 +184,9 @@ public interface ISehRadioSimIndication extends IInterface {
                     return true;
                 case 8:
                     int _arg08 = data.readInt();
-                    SehSsReleaseComplete _arg16 = (SehSsReleaseComplete) data.readTypedObject(SehSsReleaseComplete.CREATOR);
+                    SehSsReleaseComplete _arg16 =
+                            (SehSsReleaseComplete)
+                                    data.readTypedObject(SehSsReleaseComplete.CREATOR);
                     data.enforceNoDataAvail();
                     releaseCompleteMessageIndication(_arg08, _arg16);
                     return true;
@@ -225,7 +227,8 @@ public interface ISehRadioSimIndication extends IInterface {
                     _data.writeInt(indicationType);
                     boolean _status = this.mRemote.transact(1, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method simPhonebookReadyIndication is unimplemented.");
+                        throw new RemoteException(
+                                "Method simPhonebookReadyIndication is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -240,7 +243,8 @@ public interface ISehRadioSimIndication extends IInterface {
                     _data.writeInt(indicationType);
                     boolean _status = this.mRemote.transact(2, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method phonebookInitCompleteIndication is unimplemented.");
+                        throw new RemoteException(
+                                "Method phonebookInitCompleteIndication is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -248,7 +252,8 @@ public interface ISehRadioSimIndication extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.sim.ISehRadioSimIndication
-            public void stkSmsSendResultIndication(int indicationType, int result) throws RemoteException {
+            public void stkSmsSendResultIndication(int indicationType, int result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -256,7 +261,8 @@ public interface ISehRadioSimIndication extends IInterface {
                     _data.writeInt(result);
                     boolean _status = this.mRemote.transact(3, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method stkSmsSendResultIndication is unimplemented.");
+                        throw new RemoteException(
+                                "Method stkSmsSendResultIndication is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -264,7 +270,8 @@ public interface ISehRadioSimIndication extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.sim.ISehRadioSimIndication
-            public void stkCallControlResultIndication(int indicationType, String cmd) throws RemoteException {
+            public void stkCallControlResultIndication(int indicationType, String cmd)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -272,7 +279,8 @@ public interface ISehRadioSimIndication extends IInterface {
                     _data.writeString(cmd);
                     boolean _status = this.mRemote.transact(4, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method stkCallControlResultIndication is unimplemented.");
+                        throw new RemoteException(
+                                "Method stkCallControlResultIndication is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -280,7 +288,8 @@ public interface ISehRadioSimIndication extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.sim.ISehRadioSimIndication
-            public void simSwapStateChangedIndication(int indicationType, int state) throws RemoteException {
+            public void simSwapStateChangedIndication(int indicationType, int state)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -288,7 +297,8 @@ public interface ISehRadioSimIndication extends IInterface {
                     _data.writeInt(state);
                     boolean _status = this.mRemote.transact(5, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method simSwapStateChangedIndication is unimplemented.");
+                        throw new RemoteException(
+                                "Method simSwapStateChangedIndication is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -296,7 +306,8 @@ public interface ISehRadioSimIndication extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.sim.ISehRadioSimIndication
-            public void simCountMismatchedIndication(int indicationType, int state) throws RemoteException {
+            public void simCountMismatchedIndication(int indicationType, int state)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -304,7 +315,8 @@ public interface ISehRadioSimIndication extends IInterface {
                     _data.writeInt(state);
                     boolean _status = this.mRemote.transact(6, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method simCountMismatchedIndication is unimplemented.");
+                        throw new RemoteException(
+                                "Method simCountMismatchedIndication is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -312,7 +324,8 @@ public interface ISehRadioSimIndication extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.sim.ISehRadioSimIndication
-            public void simOnOffStateChangedNotify(int indicationType, int mode) throws RemoteException {
+            public void simOnOffStateChangedNotify(int indicationType, int mode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -320,7 +333,8 @@ public interface ISehRadioSimIndication extends IInterface {
                     _data.writeInt(mode);
                     boolean _status = this.mRemote.transact(7, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method simOnOffStateChangedNotify is unimplemented.");
+                        throw new RemoteException(
+                                "Method simOnOffStateChangedNotify is unimplemented.");
                     }
                 } finally {
                     _data.recycle();
@@ -328,7 +342,8 @@ public interface ISehRadioSimIndication extends IInterface {
             }
 
             @Override // vendor.samsung.hardware.radio.sim.ISehRadioSimIndication
-            public void releaseCompleteMessageIndication(int indicationType, SehSsReleaseComplete result) throws RemoteException {
+            public void releaseCompleteMessageIndication(
+                    int indicationType, SehSsReleaseComplete result) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -336,7 +351,8 @@ public interface ISehRadioSimIndication extends IInterface {
                     _data.writeTypedObject(result, 0);
                     boolean _status = this.mRemote.transact(8, _data, null, 1);
                     if (!_status) {
-                        throw new RemoteException("Method releaseCompleteMessageIndication is unimplemented.");
+                        throw new RemoteException(
+                                "Method releaseCompleteMessageIndication is unimplemented.");
                     }
                 } finally {
                     _data.recycle();

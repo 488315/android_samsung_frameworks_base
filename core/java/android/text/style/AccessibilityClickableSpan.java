@@ -8,23 +8,27 @@ import android.text.Spanned;
 import android.view.View;
 import android.view.accessibility.AccessibilityInteractionClient;
 import android.view.accessibility.AccessibilityNodeInfo;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
 public class AccessibilityClickableSpan extends ClickableSpan implements ParcelableSpan {
-    public static final Parcelable.Creator<AccessibilityClickableSpan> CREATOR = new Parcelable.Creator<AccessibilityClickableSpan>() { // from class: android.text.style.AccessibilityClickableSpan.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AccessibilityClickableSpan createFromParcel(Parcel parcel) {
-            return new AccessibilityClickableSpan(parcel);
-        }
+    public static final Parcelable.Creator<AccessibilityClickableSpan> CREATOR =
+            new Parcelable.Creator<
+                    AccessibilityClickableSpan>() { // from class:
+                                                    // android.text.style.AccessibilityClickableSpan.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AccessibilityClickableSpan createFromParcel(Parcel parcel) {
+                    return new AccessibilityClickableSpan(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AccessibilityClickableSpan[] newArray(int size) {
-            return new AccessibilityClickableSpan[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AccessibilityClickableSpan[] newArray(int size) {
+                    return new AccessibilityClickableSpan[size];
+                }
+            };
     private final int mOriginalClickableSpanId;
     private int mWindowId = -1;
     private long mSourceNodeId = AccessibilityNodeInfo.UNDEFINED_NODE_ID;
@@ -86,11 +90,20 @@ public class AccessibilityClickableSpan extends ClickableSpan implements Parcela
     @Override // android.text.style.ClickableSpan
     public void onClick(View unused) {
         Bundle arguments = new Bundle();
-        arguments.putParcelable(AccessibilityNodeInfo.ACTION_ARGUMENT_ACCESSIBLE_CLICKABLE_SPAN, this);
-        if (this.mWindowId == -1 || this.mSourceNodeId == AccessibilityNodeInfo.UNDEFINED_NODE_ID || this.mConnectionId == -1) {
-            throw new RuntimeException("ClickableSpan for accessibility service not properly initialized");
+        arguments.putParcelable(
+                AccessibilityNodeInfo.ACTION_ARGUMENT_ACCESSIBLE_CLICKABLE_SPAN, this);
+        if (this.mWindowId == -1
+                || this.mSourceNodeId == AccessibilityNodeInfo.UNDEFINED_NODE_ID
+                || this.mConnectionId == -1) {
+            throw new RuntimeException(
+                    "ClickableSpan for accessibility service not properly initialized");
         }
         AccessibilityInteractionClient client = AccessibilityInteractionClient.getInstance();
-        client.performAccessibilityAction(this.mConnectionId, this.mWindowId, this.mSourceNodeId, R.id.accessibilityActionClickOnClickableSpan, arguments);
+        client.performAccessibilityAction(
+                this.mConnectionId,
+                this.mWindowId,
+                this.mSourceNodeId,
+                R.id.accessibilityActionClickOnClickableSpan,
+                arguments);
     }
 }

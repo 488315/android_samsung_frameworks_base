@@ -3,6 +3,7 @@ package android.view;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import java.io.PrintWriter;
 import java.util.Objects;
 
@@ -16,7 +17,11 @@ public final class ScrollCaptureTarget {
     private Rect mScrollBounds;
     private final int[] mTmpIntArr = new int[2];
 
-    public ScrollCaptureTarget(View scrollTarget, Rect localVisibleRect, Point positionInWindow, ScrollCaptureCallback callback) {
+    public ScrollCaptureTarget(
+            View scrollTarget,
+            Rect localVisibleRect,
+            Point positionInWindow,
+            ScrollCaptureCallback callback) {
         this.mContainingView = (View) Objects.requireNonNull(scrollTarget);
         this.mHint = this.mContainingView.getScrollCaptureHint();
         this.mCallback = (ScrollCaptureCallback) Objects.requireNonNull(callback);
@@ -50,7 +55,9 @@ public final class ScrollCaptureTarget {
 
     public void setScrollBounds(Rect scrollBounds) {
         this.mScrollBounds = Rect.copyOrNull(scrollBounds);
-        if (this.mScrollBounds != null && !this.mScrollBounds.intersect(0, 0, this.mContainingView.getWidth(), this.mContainingView.getHeight())) {
+        if (this.mScrollBounds != null
+                && !this.mScrollBounds.intersect(
+                        0, 0, this.mContainingView.getWidth(), this.mContainingView.getHeight())) {
             this.mScrollBounds.setEmpty();
         }
     }
@@ -62,7 +69,17 @@ public final class ScrollCaptureTarget {
     }
 
     public String toString() {
-        return "ScrollCaptureTarget{view=" + this.mContainingView + ", callback=" + this.mCallback + ", scrollBounds=" + this.mScrollBounds + ", localVisibleRect=" + this.mLocalVisibleRect + ", positionInWindow=" + this.mPositionInWindow + "}";
+        return "ScrollCaptureTarget{view="
+                + this.mContainingView
+                + ", callback="
+                + this.mCallback
+                + ", scrollBounds="
+                + this.mScrollBounds
+                + ", localVisibleRect="
+                + this.mLocalVisibleRect
+                + ", positionInWindow="
+                + this.mPositionInWindow
+                + "}";
     }
 
     void dump(PrintWriter writer) {
@@ -70,10 +87,24 @@ public final class ScrollCaptureTarget {
         writer.println("view: " + view);
         writer.println("hint: " + this.mHint);
         writer.println("callback: " + this.mCallback);
-        writer.println("scrollBounds: " + (this.mScrollBounds == null ? "null" : this.mScrollBounds.toShortString()));
+        writer.println(
+                "scrollBounds: "
+                        + (this.mScrollBounds == null
+                                ? "null"
+                                : this.mScrollBounds.toShortString()));
         Point inWindow = getPositionInWindow();
-        writer.println("positionInWindow: " + (inWindow == null ? "null" : NavigationBarInflaterView.SIZE_MOD_START + inWindow.x + "," + inWindow.y + NavigationBarInflaterView.SIZE_MOD_END));
+        writer.println(
+                "positionInWindow: "
+                        + (inWindow == null
+                                ? "null"
+                                : NavigationBarInflaterView.SIZE_MOD_START
+                                        + inWindow.x
+                                        + ","
+                                        + inWindow.y
+                                        + NavigationBarInflaterView.SIZE_MOD_END));
         Rect localVisible = getLocalVisibleRect();
-        writer.println("localVisibleRect: " + (localVisible != null ? localVisible.toShortString() : "null"));
+        writer.println(
+                "localVisibleRect: "
+                        + (localVisible != null ? localVisible.toShortString() : "null"));
     }
 }

@@ -7,8 +7,10 @@ import android.util.IntArray;
 import android.util.LongSparseLongArray;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
+
 import com.android.server.pm.PackageManagerShellCommandDataLoader;
 import com.android.server.utils.Slogf;
+
 import java.io.File;
 import java.nio.file.Files;
 import java.util.List;
@@ -26,8 +28,11 @@ public final class CpuInfoReader {
     public long mLastReadUptimeMillis;
     public final long mMinReadIntervalMillis;
     public File mProcStatFile;
-    public static final Pattern PROC_STAT_PATTERN = Pattern.compile("cpu(?<core>[0-9]+)\\s(?<userClockTicks>[0-9]+)\\s(?<niceClockTicks>[0-9]+)\\s(?<sysClockTicks>[0-9]+)\\s(?<idleClockTicks>[0-9]+)\\s(?<iowaitClockTicks>[0-9]+)\\s(?<irqClockTicks>[0-9]+)\\s(?<softirqClockTicks>[0-9]+)\\s(?<stealClockTicks>[0-9]+)\\s(?<guestClockTicks>[0-9]+)\\s(?<guestNiceClockTicks>[0-9]+)");
-    public static final Pattern TIME_IN_STATE_PATTERN = Pattern.compile("(?<freqKHz>[0-9]+)\\s(?<time>[0-9]+)");
+    public static final Pattern PROC_STAT_PATTERN =
+            Pattern.compile(
+                    "cpu(?<core>[0-9]+)\\s(?<userClockTicks>[0-9]+)\\s(?<niceClockTicks>[0-9]+)\\s(?<sysClockTicks>[0-9]+)\\s(?<idleClockTicks>[0-9]+)\\s(?<iowaitClockTicks>[0-9]+)\\s(?<irqClockTicks>[0-9]+)\\s(?<softirqClockTicks>[0-9]+)\\s(?<stealClockTicks>[0-9]+)\\s(?<guestClockTicks>[0-9]+)\\s(?<guestNiceClockTicks>[0-9]+)");
+    public static final Pattern TIME_IN_STATE_PATTERN =
+            Pattern.compile("(?<freqKHz>[0-9]+)\\s(?<time>[0-9]+)");
     public static final long MILLIS_PER_CLOCK_TICK = 1000 / Os.sysconf(OsConstants._SC_CLK_TCK);
     public final SparseIntArray mCpusetCategoriesByCpus = new SparseIntArray();
     public final SparseArray mCpuFreqPolicyDirsById = new SparseArray();
@@ -46,7 +51,15 @@ public final class CpuInfoReader {
         public final long mNormalizedAvailableCpuFreqKHz;
         public final long maxCpuFreqKHz;
 
-        public CpuInfo(int i, int i2, boolean z, long j, long j2, long j3, long j4, CpuUsageStats cpuUsageStats) {
+        public CpuInfo(
+                int i,
+                int i2,
+                boolean z,
+                long j,
+                long j2,
+                long j3,
+                long j4,
+                CpuUsageStats cpuUsageStats) {
             this.cpuCore = i;
             this.cpusetCategories = i2;
             this.isOnline = z;
@@ -57,21 +70,48 @@ public final class CpuInfoReader {
             this.mNormalizedAvailableCpuFreqKHz = j4;
         }
 
-        public CpuInfo(int i, int i2, boolean z, long j, long j2, long j3, CpuUsageStats cpuUsageStats) {
+        public CpuInfo(
+                int i, int i2, boolean z, long j, long j2, long j3, CpuUsageStats cpuUsageStats) {
             this(i, i2, z, j, j2, j3, 0L, cpuUsageStats);
             long j4 = 0;
             if (this.isOnline) {
                 CpuUsageStats cpuUsageStats2 = this.latestCpuUsageStats;
-                long j5 = cpuUsageStats2.userTimeMillis + cpuUsageStats2.niceTimeMillis + cpuUsageStats2.systemTimeMillis;
+                long j5 =
+                        cpuUsageStats2.userTimeMillis
+                                + cpuUsageStats2.niceTimeMillis
+                                + cpuUsageStats2.systemTimeMillis;
                 long j6 = cpuUsageStats2.idleTimeMillis;
-                long j7 = j5 + j6 + cpuUsageStats2.iowaitTimeMillis + cpuUsageStats2.irqTimeMillis + cpuUsageStats2.softirqTimeMillis + cpuUsageStats2.stealTimeMillis + cpuUsageStats2.guestTimeMillis + cpuUsageStats2.guestNiceTimeMillis;
+                long j7 =
+                        j5
+                                + j6
+                                + cpuUsageStats2.iowaitTimeMillis
+                                + cpuUsageStats2.irqTimeMillis
+                                + cpuUsageStats2.softirqTimeMillis
+                                + cpuUsageStats2.stealTimeMillis
+                                + cpuUsageStats2.guestTimeMillis
+                                + cpuUsageStats2.guestNiceTimeMillis;
                 if (j7 == 0) {
                     boolean z2 = CpuMonitorService.DEBUG;
-                    Slogf.wtf("CpuMonitorService", "Total CPU time millis is 0. This shouldn't happen unless stats are polled too frequently");
+                    Slogf.wtf(
+                            "CpuMonitorService",
+                            "Total CPU time millis is 0. This shouldn't happen unless stats are"
+                                + " polled too frequently");
                 } else {
                     double d = j7;
                     double d2 = this.maxCpuFreqKHz;
-                    j4 = (long) (((100.0d - (((((d - j6) * 100.0d) / d) * (this.avgTimeInStateCpuFreqKHz == 0 ? this.curCpuFreqKHz : r3)) / d2)) * d2) / 100.0d);
+                    j4 =
+                            (long)
+                                    (((100.0d
+                                                            - (((((d - j6) * 100.0d) / d)
+                                                                            * (this
+                                                                                                    .avgTimeInStateCpuFreqKHz
+                                                                                            == 0
+                                                                                    ? this
+                                                                                            .curCpuFreqKHz
+                                                                                    : r3))
+                                                                    / d2))
+                                                    * d2)
+                                            / 100.0d);
                 }
             }
             this.mNormalizedAvailableCpuFreqKHz = j4;
@@ -85,11 +125,27 @@ public final class CpuInfoReader {
                 return false;
             }
             CpuInfo cpuInfo = (CpuInfo) obj;
-            return this.cpuCore == cpuInfo.cpuCore && this.cpusetCategories == cpuInfo.cpusetCategories && this.isOnline == cpuInfo.isOnline && this.curCpuFreqKHz == cpuInfo.curCpuFreqKHz && this.maxCpuFreqKHz == cpuInfo.maxCpuFreqKHz && this.avgTimeInStateCpuFreqKHz == cpuInfo.avgTimeInStateCpuFreqKHz && this.latestCpuUsageStats.equals(cpuInfo.latestCpuUsageStats) && this.mNormalizedAvailableCpuFreqKHz == cpuInfo.mNormalizedAvailableCpuFreqKHz;
+            return this.cpuCore == cpuInfo.cpuCore
+                    && this.cpusetCategories == cpuInfo.cpusetCategories
+                    && this.isOnline == cpuInfo.isOnline
+                    && this.curCpuFreqKHz == cpuInfo.curCpuFreqKHz
+                    && this.maxCpuFreqKHz == cpuInfo.maxCpuFreqKHz
+                    && this.avgTimeInStateCpuFreqKHz == cpuInfo.avgTimeInStateCpuFreqKHz
+                    && this.latestCpuUsageStats.equals(cpuInfo.latestCpuUsageStats)
+                    && this.mNormalizedAvailableCpuFreqKHz
+                            == cpuInfo.mNormalizedAvailableCpuFreqKHz;
         }
 
         public final int hashCode() {
-            return Objects.hash(Integer.valueOf(this.cpuCore), Integer.valueOf(this.cpusetCategories), Boolean.valueOf(this.isOnline), Long.valueOf(this.curCpuFreqKHz), Long.valueOf(this.maxCpuFreqKHz), Long.valueOf(this.avgTimeInStateCpuFreqKHz), this.latestCpuUsageStats, Long.valueOf(this.mNormalizedAvailableCpuFreqKHz));
+            return Objects.hash(
+                    Integer.valueOf(this.cpuCore),
+                    Integer.valueOf(this.cpusetCategories),
+                    Boolean.valueOf(this.isOnline),
+                    Long.valueOf(this.curCpuFreqKHz),
+                    Long.valueOf(this.maxCpuFreqKHz),
+                    Long.valueOf(this.avgTimeInStateCpuFreqKHz),
+                    this.latestCpuUsageStats,
+                    Long.valueOf(this.mNormalizedAvailableCpuFreqKHz));
         }
 
         public final String toString() {
@@ -111,7 +167,8 @@ public final class CpuInfoReader {
             sb.append(", latestCpuUsageStats = ");
             sb.append(this.latestCpuUsageStats);
             sb.append(", mNormalizedAvailableCpuFreqKHz = ");
-            return AudioConfig$$ExternalSyntheticOutline0.m(sb, this.mNormalizedAvailableCpuFreqKHz, " }");
+            return AudioConfig$$ExternalSyntheticOutline0.m(
+                    sb, this.mNormalizedAvailableCpuFreqKHz, " }");
         }
     }
 
@@ -128,7 +185,17 @@ public final class CpuInfoReader {
         public final long systemTimeMillis;
         public final long userTimeMillis;
 
-        public CpuUsageStats(long j, long j2, long j3, long j4, long j5, long j6, long j7, long j8, long j9, long j10) {
+        public CpuUsageStats(
+                long j,
+                long j2,
+                long j3,
+                long j4,
+                long j5,
+                long j6,
+                long j7,
+                long j8,
+                long j9,
+                long j10) {
             this.userTimeMillis = j;
             this.niceTimeMillis = j2;
             this.systemTimeMillis = j3;
@@ -156,11 +223,30 @@ public final class CpuInfoReader {
                 return false;
             }
             CpuUsageStats cpuUsageStats = (CpuUsageStats) obj;
-            return this.userTimeMillis == cpuUsageStats.userTimeMillis && this.niceTimeMillis == cpuUsageStats.niceTimeMillis && this.systemTimeMillis == cpuUsageStats.systemTimeMillis && this.idleTimeMillis == cpuUsageStats.idleTimeMillis && this.iowaitTimeMillis == cpuUsageStats.iowaitTimeMillis && this.irqTimeMillis == cpuUsageStats.irqTimeMillis && this.softirqTimeMillis == cpuUsageStats.softirqTimeMillis && this.stealTimeMillis == cpuUsageStats.stealTimeMillis && this.guestTimeMillis == cpuUsageStats.guestTimeMillis && this.guestNiceTimeMillis == cpuUsageStats.guestNiceTimeMillis;
+            return this.userTimeMillis == cpuUsageStats.userTimeMillis
+                    && this.niceTimeMillis == cpuUsageStats.niceTimeMillis
+                    && this.systemTimeMillis == cpuUsageStats.systemTimeMillis
+                    && this.idleTimeMillis == cpuUsageStats.idleTimeMillis
+                    && this.iowaitTimeMillis == cpuUsageStats.iowaitTimeMillis
+                    && this.irqTimeMillis == cpuUsageStats.irqTimeMillis
+                    && this.softirqTimeMillis == cpuUsageStats.softirqTimeMillis
+                    && this.stealTimeMillis == cpuUsageStats.stealTimeMillis
+                    && this.guestTimeMillis == cpuUsageStats.guestTimeMillis
+                    && this.guestNiceTimeMillis == cpuUsageStats.guestNiceTimeMillis;
         }
 
         public final int hashCode() {
-            return Objects.hash(Long.valueOf(this.userTimeMillis), Long.valueOf(this.niceTimeMillis), Long.valueOf(this.systemTimeMillis), Long.valueOf(this.idleTimeMillis), Long.valueOf(this.iowaitTimeMillis), Long.valueOf(this.irqTimeMillis), Long.valueOf(this.softirqTimeMillis), Long.valueOf(this.stealTimeMillis), Long.valueOf(this.guestTimeMillis), Long.valueOf(this.guestNiceTimeMillis));
+            return Objects.hash(
+                    Long.valueOf(this.userTimeMillis),
+                    Long.valueOf(this.niceTimeMillis),
+                    Long.valueOf(this.systemTimeMillis),
+                    Long.valueOf(this.idleTimeMillis),
+                    Long.valueOf(this.iowaitTimeMillis),
+                    Long.valueOf(this.irqTimeMillis),
+                    Long.valueOf(this.softirqTimeMillis),
+                    Long.valueOf(this.stealTimeMillis),
+                    Long.valueOf(this.guestTimeMillis),
+                    Long.valueOf(this.guestNiceTimeMillis));
         }
 
         public final String toString() {
@@ -202,7 +288,15 @@ public final class CpuInfoReader {
         }
 
         public final String toString() {
-            return "DynamicPolicyInfo{curCpuFreqKHz = " + this.curCpuFreqKHz + ", maxCpuFreqKHz = " + this.maxCpuFreqKHz + ", avgTimeInStateCpuFreqKHz = " + this.avgTimeInStateCpuFreqKHz + ", affectedCpuCores = " + this.affectedCpuCores + '}';
+            return "DynamicPolicyInfo{curCpuFreqKHz = "
+                    + this.curCpuFreqKHz
+                    + ", maxCpuFreqKHz = "
+                    + this.maxCpuFreqKHz
+                    + ", avgTimeInStateCpuFreqKHz = "
+                    + this.avgTimeInStateCpuFreqKHz
+                    + ", affectedCpuCores = "
+                    + this.affectedCpuCores
+                    + '}';
         }
     }
 
@@ -248,7 +342,10 @@ public final class CpuInfoReader {
     public static IntArray readCpuCores(File file) {
         if (!file.exists()) {
             boolean z = CpuMonitorService.DEBUG;
-            Slogf.e("CpuMonitorService", "Failed to read CPU cores as the file '%s' doesn't exist", file.getAbsolutePath());
+            Slogf.e(
+                    "CpuMonitorService",
+                    "Failed to read CPU cores as the file '%s' doesn't exist",
+                    file.getAbsolutePath());
             return null;
         }
         try {
@@ -259,7 +356,8 @@ public final class CpuInfoReader {
                 if (!trim.isEmpty()) {
                     String[] split = trim.contains(",") ? trim.split(",") : trim.split(" ");
                     for (int i2 = 0; i2 < split.length; i2++) {
-                        String[] split2 = split[i2].split(PackageManagerShellCommandDataLoader.STDIN_PATH);
+                        String[] split2 =
+                                split[i2].split(PackageManagerShellCommandDataLoader.STDIN_PATH);
                         if (split2.length >= 2) {
                             int parseInt = Integer.parseInt(split2[0]);
                             int parseInt2 = Integer.parseInt(split2[1]);
@@ -273,7 +371,10 @@ public final class CpuInfoReader {
                             intArray.add(Integer.parseInt(split2[0]));
                         } else {
                             boolean z2 = CpuMonitorService.DEBUG;
-                            Slogf.w("CpuMonitorService", "Invalid CPU core range format %s", split[i2]);
+                            Slogf.w(
+                                    "CpuMonitorService",
+                                    "Invalid CPU core range format %s",
+                                    split[i2]);
                         }
                     }
                 }
@@ -281,11 +382,19 @@ public final class CpuInfoReader {
             return intArray;
         } catch (NumberFormatException e) {
             boolean z3 = CpuMonitorService.DEBUG;
-            Slogf.e("CpuMonitorService", e, "Failed to read CPU cores from %s due to incorrect file format", file.getAbsolutePath());
+            Slogf.e(
+                    "CpuMonitorService",
+                    e,
+                    "Failed to read CPU cores from %s due to incorrect file format",
+                    file.getAbsolutePath());
             return null;
         } catch (Exception e2) {
             boolean z4 = CpuMonitorService.DEBUG;
-            Slogf.e("CpuMonitorService", e2, "Failed to read CPU cores from %s", file.getAbsolutePath());
+            Slogf.e(
+                    "CpuMonitorService",
+                    e2,
+                    "Failed to read CPU cores from %s",
+                    file.getAbsolutePath());
             return null;
         }
     }
@@ -293,7 +402,10 @@ public final class CpuInfoReader {
     public static long readCpuFreqKHz(File file) {
         if (!file.exists()) {
             boolean z = CpuMonitorService.DEBUG;
-            Slogf.e("CpuMonitorService", "CPU frequency file %s doesn't exist", file.getAbsolutePath());
+            Slogf.e(
+                    "CpuMonitorService",
+                    "CPU frequency file %s doesn't exist",
+                    file.getAbsolutePath());
             return 0L;
         }
         try {
@@ -307,7 +419,11 @@ public final class CpuInfoReader {
             }
         } catch (Exception e) {
             boolean z2 = CpuMonitorService.DEBUG;
-            Slogf.e("CpuMonitorService", e, "Failed to read integer content from file: %s", file.getAbsolutePath());
+            Slogf.e(
+                    "CpuMonitorService",
+                    e,
+                    "Failed to read integer content from file: %s",
+                    file.getAbsolutePath());
         }
         return 0L;
     }
@@ -333,16 +449,20 @@ public final class CpuInfoReader {
             if (!substring.isEmpty()) {
                 this.mCpuFreqPolicyDirsById.append(Integer.parseInt(substring), file);
                 if (CpuMonitorService.DEBUG) {
-                    Slogf.d("CpuMonitorService", "Cached policy directory %s for policy id %s", file, substring);
+                    Slogf.d(
+                            "CpuMonitorService",
+                            "Cached policy directory %s for policy id %s",
+                            file,
+                            substring);
                 }
             }
         }
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:135:0x0423, code lost:
-    
-        if (r8.isOnline != false) goto L129;
-     */
+
+       if (r8.isOnline != false) goto L129;
+    */
     /* JADX WARN: Removed duplicated region for block: B:43:0x0290  */
     /* JADX WARN: Removed duplicated region for block: B:53:0x0322  */
     /*
@@ -354,14 +474,19 @@ public final class CpuInfoReader {
             Method dump skipped, instructions count: 1242
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.cpu.CpuInfoReader.readCpuInfos():android.util.SparseArray");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.cpu.CpuInfoReader.readCpuInfos():android.util.SparseArray");
     }
 
     public boolean setCpuFreqDir(File file) {
         File[] listFiles = file.listFiles(new CpuInfoReader$$ExternalSyntheticLambda0(0));
         if (listFiles == null || listFiles.length == 0) {
             boolean z = CpuMonitorService.DEBUG;
-            Slogf.w("CpuMonitorService", "Failed to set CPU frequency directory. Missing policy directories at %s", file.getAbsolutePath());
+            Slogf.w(
+                    "CpuMonitorService",
+                    "Failed to set CPU frequency directory. Missing policy directories at %s",
+                    file.getAbsolutePath());
             return false;
         }
         populateCpuFreqPolicyDirsById(listFiles);
@@ -372,7 +497,14 @@ public final class CpuInfoReader {
             return true;
         }
         boolean z2 = CpuMonitorService.DEBUG;
-        Slogf.e("CpuMonitorService", "Failed to set CPU frequency directory to %s. Total CPU frequency policies (%d) under new path is either 0 or not equal to initial total CPU frequency policies. Clearing CPU frequency policy directories", file.getAbsolutePath(), Integer.valueOf(size), Integer.valueOf(size2));
+        Slogf.e(
+                "CpuMonitorService",
+                "Failed to set CPU frequency directory to %s. Total CPU frequency policies (%d)"
+                    + " under new path is either 0 or not equal to initial total CPU frequency"
+                    + " policies. Clearing CPU frequency policy directories",
+                file.getAbsolutePath(),
+                Integer.valueOf(size),
+                Integer.valueOf(size2));
         this.mCpuFreqPolicyDirsById.clear();
         return false;
     }

@@ -3,8 +3,9 @@ package com.samsung.android.motionphoto.utils;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.util.Log;
 import android.util.Pair;
+
 import com.samsung.android.media.SemExtendedFormat;
-import com.samsung.android.motionphoto.utils.HEIFParser;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
@@ -150,13 +151,17 @@ public final class MotionPhotoVideoUtils {
         La9:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.motionphoto.utils.MotionPhotoVideoUtils.saveVideo(java.io.File, java.io.File):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.motionphoto.utils.MotionPhotoVideoUtils.saveVideo(java.io.File,"
+                    + " java.io.File):boolean");
     }
 
     public final boolean deleteVideo(File srcFile) {
         Log.i(TAG, "deleteVideo");
         try {
-            MotionPhotoInfo sEFDataPosition = getSEFDataPosition(srcFile, SemExtendedFormat.KeyName.MOTION_PHOTO_DATA);
+            MotionPhotoInfo sEFDataPosition =
+                    getSEFDataPosition(srcFile, SemExtendedFormat.KeyName.MOTION_PHOTO_DATA);
             if (sEFDataPosition != null) {
                 long offset = sEFDataPosition.getOffset();
                 long length = sEFDataPosition.getLength();
@@ -206,7 +211,8 @@ public final class MotionPhotoVideoUtils {
         Log.i(TAG, "deleteVideo");
         try {
             Files.copy(srcFile.toPath(), outFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-            MotionPhotoInfo sEFDataPosition = getSEFDataPosition(outFile, SemExtendedFormat.KeyName.MOTION_PHOTO_DATA);
+            MotionPhotoInfo sEFDataPosition =
+                    getSEFDataPosition(outFile, SemExtendedFormat.KeyName.MOTION_PHOTO_DATA);
             if (sEFDataPosition != null) {
                 long offset = sEFDataPosition.getOffset();
                 long length = sEFDataPosition.getLength();
@@ -296,12 +302,15 @@ public final class MotionPhotoVideoUtils {
                 fileInputStream.getChannel().position(0L);
                 fileInputStream.read(bArr, 0, 2);
                 while (fileInputStream.read(bArr, 0, 2) > 0) {
-                    Pair pair = new Pair(Integer.valueOf(bArr[0] & 255), Integer.valueOf(bArr[1] & 255));
+                    Pair pair =
+                            new Pair(
+                                    Integer.valueOf(bArr[0] & 255), Integer.valueOf(bArr[1] & 255));
                     if (!(((Number) pair.first).intValue() == 255)) {
                         Log.i(TAG, "this is not valid markers");
                         return 0L;
                     }
-                    if (208 > ((Number) pair.second).intValue() || 215 < ((Number) pair.second).intValue()) {
+                    if (208 > ((Number) pair.second).intValue()
+                            || 215 < ((Number) pair.second).intValue()) {
                         fileInputStream.read(bArr, 0, 2);
                         if (((Number) pair.second).intValue() != 221) {
                             fileInputStream.skip((((bArr[0] & 255) << 8) | (255 & bArr[1])) - 2);
@@ -330,9 +339,15 @@ public final class MotionPhotoVideoUtils {
             try {
                 try {
                     fileInputStream.getChannel().position(0L);
-                    HEIFParser.XMPInformation coverImageXMPOffsetAndSize = hEIFParser.getCoverImageXMPOffsetAndSize(fileInputStream);
+                    HEIFParser.XMPInformation coverImageXMPOffsetAndSize =
+                            hEIFParser.getCoverImageXMPOffsetAndSize(fileInputStream);
                     if (coverImageXMPOffsetAndSize != null) {
-                        Log.i(TAG, "XMP " + coverImageXMPOffsetAndSize.offset + ", " + coverImageXMPOffsetAndSize.size);
+                        Log.i(
+                                TAG,
+                                "XMP "
+                                        + coverImageXMPOffsetAndSize.offset
+                                        + ", "
+                                        + coverImageXMPOffsetAndSize.size);
                         j = coverImageXMPOffsetAndSize.offset;
                     } else {
                         Log.i(TAG, "Fail to get xmp information");
@@ -361,11 +376,21 @@ public final class MotionPhotoVideoUtils {
                         byte[] bArr2 = new byte[2];
                         fileInputStream.getChannel().read(ByteBuffer.wrap(bArr2));
                         long j = ((bArr2[1] & 255) | ((bArr2[0] & 255) << 8)) + 2;
-                        byteBuffer = ByteBuffer.allocateDirect((int) ((fileInputStream.getChannel().size() - xmpPosition) - j));
+                        byteBuffer =
+                                ByteBuffer.allocateDirect(
+                                        (int)
+                                                ((fileInputStream.getChannel().size() - xmpPosition)
+                                                        - j));
                         fileInputStream.getChannel().position(xmpPosition + j);
                         int read = fileInputStream.getChannel().read(byteBuffer);
                         if (!(read == byteBuffer.capacity())) {
-                            Log.i(TAG, "read bytes(" + read + ") differ from buffer size(" + byteBuffer.capacity() + ')');
+                            Log.i(
+                                    TAG,
+                                    "read bytes("
+                                            + read
+                                            + ") differ from buffer size("
+                                            + byteBuffer.capacity()
+                                            + ')');
                         }
                         byteBuffer.rewind();
                     }
@@ -419,7 +444,11 @@ public final class MotionPhotoVideoUtils {
         }
 
         public String toString() {
-            return "VideoInfo(videoOffset=" + this.videoOffset + ", videoLength=" + this.videoLength + NavigationBarInflaterView.KEY_CODE_END;
+            return "VideoInfo(videoOffset="
+                    + this.videoOffset
+                    + ", videoLength="
+                    + this.videoLength
+                    + NavigationBarInflaterView.KEY_CODE_END;
         }
     }
 
@@ -447,7 +476,13 @@ public final class MotionPhotoVideoUtils {
         }
 
         public String toString() {
-            return "MotionPhotoInfo(offset=" + this.offset + ", length=" + this.length + ", isMotionPhotoV2=" + this.isMotionPhotoV2 + NavigationBarInflaterView.KEY_CODE_END;
+            return "MotionPhotoInfo(offset="
+                    + this.offset
+                    + ", length="
+                    + this.length
+                    + ", isMotionPhotoV2="
+                    + this.isMotionPhotoV2
+                    + NavigationBarInflaterView.KEY_CODE_END;
         }
     }
 
@@ -455,7 +490,8 @@ public final class MotionPhotoVideoUtils {
         long j;
         long j2;
         try {
-            MotionPhotoInfo sEFDataPosition = getSEFDataPosition(srcFile, SemExtendedFormat.KeyName.MOTION_PHOTO_DATA);
+            MotionPhotoInfo sEFDataPosition =
+                    getSEFDataPosition(srcFile, SemExtendedFormat.KeyName.MOTION_PHOTO_DATA);
             if (sEFDataPosition == null) {
                 j = 0;
                 j2 = 0;
@@ -479,7 +515,8 @@ public final class MotionPhotoVideoUtils {
         long j4;
         long j5;
         try {
-            SemExtendedFormat.DataPosition dataPosition = SemExtendedFormat.getDataPosition(file, tag);
+            SemExtendedFormat.DataPosition dataPosition =
+                    SemExtendedFormat.getDataPosition(file, tag);
             boolean z3 = false;
             if (dataPosition != null) {
                 long j6 = dataPosition.offset;
@@ -498,15 +535,27 @@ public final class MotionPhotoVideoUtils {
                                 fileInputStream.read(bArr, 0, 4);
                                 j4 = bArr[3] & 255;
                                 try {
-                                    j4 = j4 | ((bArr[2] << 8) & 65280) | ((bArr[1] << 16) & 16711680) | (bArr[0] << 24);
+                                    j4 =
+                                            j4
+                                                    | ((bArr[2] << 8) & 65280)
+                                                    | ((bArr[1] << 16) & 16711680)
+                                                    | (bArr[0] << 24);
                                     fileInputStream.getChannel().position(j8 + 4);
                                     fileInputStream.read(bArr, 0, 4);
                                     long j9 = bArr[3] & 255;
                                     try {
-                                        j9 = j9 | ((bArr[2] << 8) & 65280) | ((bArr[1] << 16) & 16711680);
+                                        j9 =
+                                                j9
+                                                        | ((bArr[2] << 8) & 65280)
+                                                        | ((bArr[1] << 16) & 16711680);
                                         j5 = j9 | (bArr[0] << 24);
                                         try {
-                                            Log.d(TAG, "This file is a MotionPhoto V2 format - offset:" + j4 + " length:" + j5);
+                                            Log.d(
+                                                    TAG,
+                                                    "This file is a MotionPhoto V2 format - offset:"
+                                                            + j4
+                                                            + " length:"
+                                                            + j5);
                                         } catch (Exception e) {
                                             e = e;
                                             j3 = j5;
@@ -559,7 +608,12 @@ public final class MotionPhotoVideoUtils {
                             }
                         } else {
                             try {
-                                Log.d(TAG, "This file is not a MotionPhoto V2 format - offset:" + j6 + " length:" + j7);
+                                Log.d(
+                                        TAG,
+                                        "This file is not a MotionPhoto V2 format - offset:"
+                                                + j6
+                                                + " length:"
+                                                + j7);
                                 j4 = j6;
                                 j5 = j7;
                             } catch (Exception e5) {

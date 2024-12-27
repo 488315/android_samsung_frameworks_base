@@ -10,31 +10,39 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.UserHandle;
+
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class StatusHints implements Parcelable {
-    public static final Parcelable.Creator<StatusHints> CREATOR = new Parcelable.Creator<StatusHints>() { // from class: android.telecom.StatusHints.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StatusHints createFromParcel(Parcel in) {
-            return new StatusHints(in);
-        }
+    public static final Parcelable.Creator<StatusHints> CREATOR =
+            new Parcelable.Creator<StatusHints>() { // from class: android.telecom.StatusHints.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StatusHints createFromParcel(Parcel in) {
+                    return new StatusHints(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StatusHints[] newArray(int size) {
-            return new StatusHints[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StatusHints[] newArray(int size) {
+                    return new StatusHints[size];
+                }
+            };
     private final Bundle mExtras;
     private Icon mIcon;
     private final CharSequence mLabel;
 
     @SystemApi
     @Deprecated
-    public StatusHints(ComponentName packageName, CharSequence label, int iconResId, Bundle extras) {
-        this(label, iconResId == 0 ? null : Icon.createWithResource(packageName.getPackageName(), iconResId), extras);
+    public StatusHints(
+            ComponentName packageName, CharSequence label, int iconResId, Bundle extras) {
+        this(
+                label,
+                iconResId == 0
+                        ? null
+                        : Icon.createWithResource(packageName.getPackageName(), iconResId),
+                extras);
     }
 
     public StatusHints(CharSequence label, Icon icon, Bundle extras) {
@@ -90,7 +98,9 @@ public final class StatusHints implements Parcelable {
 
     public static Icon validateAccountIconUserBoundary(Icon icon, UserHandle callingUserHandle) {
         String encodedUser;
-        if (icon != null && ((icon.getType() == 4 || icon.getType() == 6) && (encodedUser = icon.getUri().getEncodedUserInfo()) != null)) {
+        if (icon != null
+                && ((icon.getType() == 4 || icon.getType() == 6)
+                        && (encodedUser = icon.getUri().getEncodedUserInfo()) != null)) {
             int userId = Integer.parseInt(encodedUser);
             if (userId != callingUserHandle.getIdentifier()) {
                 return null;
@@ -117,10 +127,14 @@ public final class StatusHints implements Parcelable {
             return false;
         }
         StatusHints otherHints = (StatusHints) other;
-        return Objects.equals(otherHints.getLabel(), getLabel()) && Objects.equals(otherHints.getIcon(), getIcon()) && Objects.equals(otherHints.getExtras(), getExtras());
+        return Objects.equals(otherHints.getLabel(), getLabel())
+                && Objects.equals(otherHints.getIcon(), getIcon())
+                && Objects.equals(otherHints.getExtras(), getExtras());
     }
 
     public int hashCode() {
-        return Objects.hashCode(this.mLabel) + Objects.hashCode(this.mIcon) + Objects.hashCode(this.mExtras);
+        return Objects.hashCode(this.mLabel)
+                + Objects.hashCode(this.mIcon)
+                + Objects.hashCode(this.mExtras);
     }
 }

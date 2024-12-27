@@ -6,6 +6,7 @@ import android.animation.ValueAnimator;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.animation.DecelerateInterpolator;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -39,10 +40,12 @@ public class DrawableHolder implements Animator.AnimatorListener {
         this.mX = x;
         this.mY = y;
         this.mDrawable.getPaint().setAntiAlias(true);
-        this.mDrawable.setBounds(0, 0, this.mDrawable.getIntrinsicWidth(), this.mDrawable.getIntrinsicHeight());
+        this.mDrawable.setBounds(
+                0, 0, this.mDrawable.getIntrinsicWidth(), this.mDrawable.getIntrinsicHeight());
     }
 
-    public ObjectAnimator addAnimTo(long duration, long delay, String property, float toValue, boolean replace) {
+    public ObjectAnimator addAnimTo(
+            long duration, long delay, String property, float toValue, boolean replace) {
         if (replace) {
             removeAnimationFor(property);
         }
@@ -158,8 +161,7 @@ public class DrawableHolder implements Animator.AnimatorListener {
     }
 
     @Override // android.animation.Animator.AnimatorListener
-    public void onAnimationCancel(Animator animation) {
-    }
+    public void onAnimationCancel(Animator animation) {}
 
     @Override // android.animation.Animator.AnimatorListener
     public void onAnimationEnd(Animator animation) {
@@ -167,10 +169,8 @@ public class DrawableHolder implements Animator.AnimatorListener {
     }
 
     @Override // android.animation.Animator.AnimatorListener
-    public void onAnimationRepeat(Animator animation) {
-    }
+    public void onAnimationRepeat(Animator animation) {}
 
     @Override // android.animation.Animator.AnimatorListener
-    public void onAnimationStart(Animator animation) {
-    }
+    public void onAnimationStart(Animator animation) {}
 }

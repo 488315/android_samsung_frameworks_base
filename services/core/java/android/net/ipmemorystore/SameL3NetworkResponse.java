@@ -1,6 +1,7 @@
 package android.net.ipmemorystore;
 
 import android.hardware.audio.common.V2_0.AudioOffloadInfo$$ExternalSyntheticOutline0;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -17,11 +18,13 @@ public class SameL3NetworkResponse {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     @Retention(RetentionPolicy.SOURCE)
-    public @interface NetworkSameness {
-    }
+    public @interface NetworkSameness {}
 
     public SameL3NetworkResponse(SameL3NetworkResponseParcelable sameL3NetworkResponseParcelable) {
-        this(sameL3NetworkResponseParcelable.l2Key1, sameL3NetworkResponseParcelable.l2Key2, sameL3NetworkResponseParcelable.confidence);
+        this(
+                sameL3NetworkResponseParcelable.l2Key1,
+                sameL3NetworkResponseParcelable.l2Key2,
+                sameL3NetworkResponseParcelable.confidence);
     }
 
     public SameL3NetworkResponse(String str, String str2, float f) {
@@ -35,7 +38,9 @@ public class SameL3NetworkResponse {
             return false;
         }
         SameL3NetworkResponse sameL3NetworkResponse = (SameL3NetworkResponse) obj;
-        return this.l2Key1.equals(sameL3NetworkResponse.l2Key1) && this.l2Key2.equals(sameL3NetworkResponse.l2Key2) && this.confidence == sameL3NetworkResponse.confidence;
+        return this.l2Key1.equals(sameL3NetworkResponse.l2Key1)
+                && this.l2Key2.equals(sameL3NetworkResponse.l2Key2)
+                && this.confidence == sameL3NetworkResponse.confidence;
     }
 
     public final int getNetworkSameness() {
@@ -51,7 +56,8 @@ public class SameL3NetworkResponse {
     }
 
     public SameL3NetworkResponseParcelable toParcelable() {
-        SameL3NetworkResponseParcelable sameL3NetworkResponseParcelable = new SameL3NetworkResponseParcelable();
+        SameL3NetworkResponseParcelable sameL3NetworkResponseParcelable =
+                new SameL3NetworkResponseParcelable();
         sameL3NetworkResponseParcelable.l2Key1 = this.l2Key1;
         sameL3NetworkResponseParcelable.l2Key2 = this.l2Key2;
         sameL3NetworkResponseParcelable.confidence = this.confidence;

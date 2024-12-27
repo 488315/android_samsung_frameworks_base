@@ -11,6 +11,7 @@ import android.util.IndentingPrintWriter;
 import android.util.Log;
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.server.desktopmode.DesktopModeService$$ExternalSyntheticOutline0;
 import com.android.server.job.JobSchedulerService;
 import com.android.server.job.JobSchedulerService$$ExternalSyntheticLambda5;
@@ -27,8 +28,7 @@ public final class StorageController extends StateController {
         public int mLastStorageSeq = -1;
         public boolean mStorageLow;
 
-        public StorageTracker() {
-        }
+        public StorageTracker() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
@@ -40,7 +40,8 @@ public final class StorageController extends StateController {
             this.mLastStorageSeq = intent.getIntExtra("seq", this.mLastStorageSeq);
             if ("android.intent.action.DEVICE_STORAGE_LOW".equals(action)) {
                 if (StorageController.DEBUG) {
-                    StringBuilder sb = new StringBuilder("Available storage too low to do work. @ ");
+                    StringBuilder sb =
+                            new StringBuilder("Available storage too low to do work. @ ");
                     JobSchedulerService.sElapsedRealtimeClock.getClass();
                     sb.append(SystemClock.elapsedRealtime());
                     Slog.d("JobScheduler.Storage", sb.toString());
@@ -51,7 +52,8 @@ public final class StorageController extends StateController {
             }
             if ("android.intent.action.DEVICE_STORAGE_OK".equals(action)) {
                 if (StorageController.DEBUG) {
-                    StringBuilder sb2 = new StringBuilder("Available storage high enough to do work. @ ");
+                    StringBuilder sb2 =
+                            new StringBuilder("Available storage high enough to do work. @ ");
                     JobSchedulerService.sElapsedRealtimeClock.getClass();
                     sb2.append(SystemClock.elapsedRealtime());
                     Slog.d("JobScheduler.Storage", sb2.toString());
@@ -73,7 +75,9 @@ public final class StorageController extends StateController {
             try {
                 z = false;
                 for (int size = storageController.mTrackedTasks.size() - 1; size >= 0; size--) {
-                    z |= ((JobStatus) storageController.mTrackedTasks.valueAt(size)).setConstraintSatisfied(8, elapsedRealtime, z2);
+                    z |=
+                            ((JobStatus) storageController.mTrackedTasks.valueAt(size))
+                                    .setConstraintSatisfied(8, elapsedRealtime, z2);
                 }
             } catch (Throwable th) {
                 throw th;
@@ -82,7 +86,8 @@ public final class StorageController extends StateController {
         if (z2) {
             storageController.mStateChangedListener.onRunJobNow(null);
         } else if (z) {
-            storageController.mStateChangedListener.onControllerStateChanged(storageController.mTrackedTasks);
+            storageController.mStateChangedListener.onControllerStateChanged(
+                    storageController.mTrackedTasks);
         }
     }
 
@@ -97,10 +102,15 @@ public final class StorageController extends StateController {
     }
 
     @Override // com.android.server.job.controllers.StateController
-    public final void dumpControllerStateLocked(IndentingPrintWriter indentingPrintWriter, JobSchedulerService$$ExternalSyntheticLambda5 jobSchedulerService$$ExternalSyntheticLambda5) {
+    public final void dumpControllerStateLocked(
+            IndentingPrintWriter indentingPrintWriter,
+            JobSchedulerService$$ExternalSyntheticLambda5
+                    jobSchedulerService$$ExternalSyntheticLambda5) {
         StringBuilder sb = new StringBuilder("Not low: ");
         StorageTracker storageTracker = this.mStorageTracker;
-        StringBuilder m = DesktopModeService$$ExternalSyntheticOutline0.m(sb, !storageTracker.mStorageLow, indentingPrintWriter, "Sequence: ");
+        StringBuilder m =
+                DesktopModeService$$ExternalSyntheticOutline0.m(
+                        sb, !storageTracker.mStorageLow, indentingPrintWriter, "Sequence: ");
         m.append(storageTracker.mLastStorageSeq);
         indentingPrintWriter.println(m.toString());
         indentingPrintWriter.println();
@@ -117,7 +127,10 @@ public final class StorageController extends StateController {
     }
 
     @Override // com.android.server.job.controllers.StateController
-    public final void dumpControllerStateLocked(ProtoOutputStream protoOutputStream, JobSchedulerService$$ExternalSyntheticLambda5 jobSchedulerService$$ExternalSyntheticLambda5) {
+    public final void dumpControllerStateLocked(
+            ProtoOutputStream protoOutputStream,
+            JobSchedulerService$$ExternalSyntheticLambda5
+                    jobSchedulerService$$ExternalSyntheticLambda5) {
         long start = protoOutputStream.start(2246267895812L);
         long start2 = protoOutputStream.start(1146756268039L);
         StorageTracker storageTracker = this.mStorageTracker;

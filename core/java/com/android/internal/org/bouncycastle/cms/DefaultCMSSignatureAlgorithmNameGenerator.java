@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.cms;
 
 import android.security.keystore.KeyProperties;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.internal.org.bouncycastle.asn1.eac.EACObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.nist.NISTObjectIdentifiers;
@@ -10,11 +11,13 @@ import com.android.internal.org.bouncycastle.asn1.teletrust.TeleTrusTObjectIdent
 import com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import com.android.internal.org.bouncycastle.asn1.x509.X509ObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.x9.X9ObjectIdentifiers;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /* loaded from: classes5.dex */
-public class DefaultCMSSignatureAlgorithmNameGenerator implements CMSSignatureAlgorithmNameGenerator {
+public class DefaultCMSSignatureAlgorithmNameGenerator
+        implements CMSSignatureAlgorithmNameGenerator {
     private final Map encryptionAlgs = new HashMap();
     private final Map digestAlgs = new HashMap();
 
@@ -81,20 +84,25 @@ public class DefaultCMSSignatureAlgorithmNameGenerator implements CMSSignatureAl
         return encryptionAlgOID.getId();
     }
 
-    protected void setSigningEncryptionAlgorithmMapping(ASN1ObjectIdentifier oid, String algorithmName) {
+    protected void setSigningEncryptionAlgorithmMapping(
+            ASN1ObjectIdentifier oid, String algorithmName) {
         this.encryptionAlgs.put(oid, algorithmName);
     }
 
-    protected void setSigningDigestAlgorithmMapping(ASN1ObjectIdentifier oid, String algorithmName) {
+    protected void setSigningDigestAlgorithmMapping(
+            ASN1ObjectIdentifier oid, String algorithmName) {
         this.digestAlgs.put(oid, algorithmName);
     }
 
     @Override // com.android.internal.org.bouncycastle.cms.CMSSignatureAlgorithmNameGenerator
-    public String getSignatureName(AlgorithmIdentifier digestAlg, AlgorithmIdentifier encryptionAlg) {
+    public String getSignatureName(
+            AlgorithmIdentifier digestAlg, AlgorithmIdentifier encryptionAlg) {
         String digestName = getDigestAlgName(encryptionAlg.getAlgorithm());
         if (!digestName.equals(encryptionAlg.getAlgorithm().getId())) {
             return digestName + "with" + getEncryptionAlgName(encryptionAlg.getAlgorithm());
         }
-        return getDigestAlgName(digestAlg.getAlgorithm()) + "with" + getEncryptionAlgName(encryptionAlg.getAlgorithm());
+        return getDigestAlgName(digestAlg.getAlgorithm())
+                + "with"
+                + getEncryptionAlgName(encryptionAlg.getAlgorithm());
     }
 }

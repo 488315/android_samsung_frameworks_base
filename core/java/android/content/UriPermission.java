@@ -6,19 +6,20 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public final class UriPermission implements Parcelable {
-    public static final Parcelable.Creator<UriPermission> CREATOR = new Parcelable.Creator<UriPermission>() { // from class: android.content.UriPermission.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UriPermission createFromParcel(Parcel source) {
-            return new UriPermission(source);
-        }
+    public static final Parcelable.Creator<UriPermission> CREATOR =
+            new Parcelable.Creator<UriPermission>() { // from class: android.content.UriPermission.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UriPermission createFromParcel(Parcel source) {
+                    return new UriPermission(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UriPermission[] newArray(int size) {
-            return new UriPermission[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UriPermission[] newArray(int size) {
+                    return new UriPermission[size];
+                }
+            };
     public static final long INVALID_TIME = Long.MIN_VALUE;
     private final int mModeFlags;
     private final long mPersistedTime;
@@ -53,7 +54,13 @@ public final class UriPermission implements Parcelable {
     }
 
     public String toString() {
-        return "UriPermission {uri=" + this.mUri + ", modeFlags=" + this.mModeFlags + ", persistedTime=" + this.mPersistedTime + "}";
+        return "UriPermission {uri="
+                + this.mUri
+                + ", modeFlags="
+                + this.mModeFlags
+                + ", persistedTime="
+                + this.mPersistedTime
+                + "}";
     }
 
     @Override // android.os.Parcelable

@@ -1,10 +1,10 @@
 package com.android.server.display.mode;
 
 import android.os.Trace;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
-import com.android.server.display.mode.RefreshRateVote;
-import com.android.server.display.mode.SupportedRefreshRatesVote;
+
 import java.util.Iterator;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -29,7 +29,12 @@ public final class VotesStatsReporter {
                     Iterator it = ((SupportedRefreshRatesVote) vote).mRefreshRates.iterator();
                     int i = 0;
                     while (it.hasNext()) {
-                        i = Math.max(i, (int) ((SupportedRefreshRatesVote.RefreshRates) it.next()).mPeakRefreshRate);
+                        i =
+                                Math.max(
+                                        i,
+                                        (int)
+                                                ((SupportedRefreshRatesVote.RefreshRates) it.next())
+                                                        .mPeakRefreshRate);
                     }
                     return i;
                 }
@@ -50,21 +55,30 @@ public final class VotesStatsReporter {
     public final void reportVoteChanged(int i, int i2, Vote vote) {
         boolean z = this.mFrameworkStatsLogReportingEnabled;
         if (vote == null) {
-            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "VotesStatsReporter.", ":");
+            StringBuilder m =
+                    BatteryService$$ExternalSyntheticOutline0.m(i, "VotesStatsReporter.", ":");
             m.append(Vote.priorityToString(i2));
             Trace.traceCounter(131072L, m.toString(), -1);
             if (z) {
-                FrameworkStatsLog.write(FrameworkStatsLog.DISPLAY_MODE_DIRECTOR_VOTE_CHANGED, i, i2, 3, -1, -1);
+                FrameworkStatsLog.write(
+                        FrameworkStatsLog.DISPLAY_MODE_DIRECTOR_VOTE_CHANGED, i, i2, 3, -1, -1);
                 return;
             }
             return;
         }
         int maxRefreshRate = getMaxRefreshRate(vote, this.mIgnoredRenderRate);
-        StringBuilder m2 = BatteryService$$ExternalSyntheticOutline0.m(i, "VotesStatsReporter.", ":");
+        StringBuilder m2 =
+                BatteryService$$ExternalSyntheticOutline0.m(i, "VotesStatsReporter.", ":");
         m2.append(Vote.priorityToString(i2));
         Trace.traceCounter(131072L, m2.toString(), maxRefreshRate);
         if (z) {
-            FrameworkStatsLog.write(FrameworkStatsLog.DISPLAY_MODE_DIRECTOR_VOTE_CHANGED, i, i2, 1, maxRefreshRate, -1);
+            FrameworkStatsLog.write(
+                    FrameworkStatsLog.DISPLAY_MODE_DIRECTOR_VOTE_CHANGED,
+                    i,
+                    i2,
+                    1,
+                    maxRefreshRate,
+                    -1);
         }
     }
 }

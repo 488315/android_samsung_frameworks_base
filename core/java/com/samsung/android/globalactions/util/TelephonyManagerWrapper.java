@@ -3,6 +3,7 @@ package com.samsung.android.globalactions.util;
 import android.content.Context;
 import android.os.SystemProperties;
 import android.telephony.TelephonyManager;
+
 import com.android.internal.telephony.TelephonyProperties;
 
 /* loaded from: classes6.dex */
@@ -56,7 +57,14 @@ public class TelephonyManagerWrapper {
     }
 
     private int getPersoLockedState(int slotId) {
-        return "PERSO_LOCKED".equals(getSimStateSystemProperty(TelephonyProperties.PROPERTY_SIM_STATE, slotId, "NOT_READY")) ? 12 : 0;
+        return "PERSO_LOCKED"
+                        .equals(
+                                getSimStateSystemProperty(
+                                        TelephonyProperties.PROPERTY_SIM_STATE,
+                                        slotId,
+                                        "NOT_READY"))
+                ? 12
+                : 0;
     }
 
     private String getSimStateSystemProperty(String property, int slot, String defaultVal) {

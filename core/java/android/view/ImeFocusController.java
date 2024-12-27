@@ -3,8 +3,8 @@ package android.view;
 import android.os.Debug;
 import android.util.Log;
 import android.util.proto.ProtoOutputStream;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+
 import com.android.internal.inputmethod.InputMethodDebug;
 
 /* loaded from: classes4.dex */
@@ -37,7 +37,11 @@ public final class ImeFocusController {
 
     private InputMethodManagerDelegate getImmDelegate() {
         if (this.mDelegate == null) {
-            this.mDelegate = ((InputMethodManager) this.mViewRootImpl.mContext.getSystemService(InputMethodManager.class)).getDelegate();
+            this.mDelegate =
+                    ((InputMethodManager)
+                                    this.mViewRootImpl.mContext.getSystemService(
+                                            InputMethodManager.class))
+                            .getDelegate();
         }
         return this.mDelegate;
     }
@@ -48,7 +52,9 @@ public final class ImeFocusController {
 
     void onTraversal(boolean hasWindowFocus, WindowManager.LayoutParams windowAttribute) {
         boolean hasImeFocus = WindowManager.LayoutParams.mayUseInputMethod(windowAttribute.flags);
-        if (!hasWindowFocus || isInLocalFocusMode(windowAttribute) || hasImeFocus == this.mHasImeFocus) {
+        if (!hasWindowFocus
+                || isInLocalFocusMode(windowAttribute)
+                || hasImeFocus == this.mHasImeFocus) {
             return;
         }
         this.mHasImeFocus = hasImeFocus;
@@ -73,14 +79,21 @@ public final class ImeFocusController {
         getImmDelegate().onPreWindowGainedFocus(this.mViewRootImpl);
     }
 
-    void onPostWindowFocus(View focusedView, boolean hasWindowFocus, WindowManager.LayoutParams windowAttribute) {
+    void onPostWindowFocus(
+            View focusedView, boolean hasWindowFocus, WindowManager.LayoutParams windowAttribute) {
         if (!hasWindowFocus || !this.mHasImeFocus || isInLocalFocusMode(windowAttribute)) {
             printLog("onPostWindowFocus: skipped", hasWindowFocus);
             return;
         }
         View viewForWindowFocus = focusedView != null ? focusedView : this.mViewRootImpl.mView;
         if (DEBUG) {
-            Log.v(TAG, "onWindowFocus: " + viewForWindowFocus + " softInputMode=" + InputMethodDebug.softInputModeToString(windowAttribute.softInputMode));
+            Log.v(
+                    TAG,
+                    "onWindowFocus: "
+                            + viewForWindowFocus
+                            + " softInputMode="
+                            + InputMethodDebug.softInputModeToString(
+                                    windowAttribute.softInputMode));
         }
         getImmDelegate().onPostWindowGainedFocus(viewForWindowFocus, windowAttribute);
     }
@@ -106,9 +119,19 @@ public final class ImeFocusController {
         return (windowAttribute.flags & 268435456) != 0;
     }
 
-    int onProcessImeInputStage(Object token, InputEvent event, WindowManager.LayoutParams windowAttribute, InputMethodManager.FinishedInputEventCallback callback) {
+    int onProcessImeInputStage(
+            Object token,
+            InputEvent event,
+            WindowManager.LayoutParams windowAttribute,
+            InputMethodManager.FinishedInputEventCallback callback) {
         InputMethodManager imm;
-        if (!this.mHasImeFocus || isInLocalFocusMode(windowAttribute) || (imm = (InputMethodManager) this.mViewRootImpl.mContext.getSystemService(InputMethodManager.class)) == null) {
+        if (!this.mHasImeFocus
+                || isInLocalFocusMode(windowAttribute)
+                || (imm =
+                                (InputMethodManager)
+                                        this.mViewRootImpl.mContext.getSystemService(
+                                                InputMethodManager.class))
+                        == null) {
             return 0;
         }
         return imm.dispatchInputEvent(event, token, callback, this.mViewRootImpl.mHandler);
@@ -125,6 +148,8 @@ public final class ImeFocusController {
     }
 
     private void printLog(String msg, boolean hasWindowFocus) {
-        Log.i(TAG, msg + " hasWindowFocus=" + hasWindowFocus + " mHasImeFocus=" + this.mHasImeFocus);
+        Log.i(
+                TAG,
+                msg + " hasWindowFocus=" + hasWindowFocus + " mHasImeFocus=" + this.mHasImeFocus);
     }
 }

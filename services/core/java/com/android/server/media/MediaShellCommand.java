@@ -15,9 +15,11 @@ import android.os.ShellCommand;
 import android.os.SystemClock;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.accounts.AccountManagerServiceShellCommand$$ExternalSyntheticOutline0;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,8 +40,7 @@ public final class MediaShellCommand extends ShellCommand {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ControllerCallback extends MediaController.Callback {
-        public ControllerCallback() {
-        }
+        public ControllerCallback() {}
 
         @Override // android.media.session.MediaController.Callback
         public final void onAudioInfoChanged(MediaController.PlaybackInfo playbackInfo) {
@@ -59,7 +60,8 @@ public final class MediaShellCommand extends ShellCommand {
             } else {
                 str = "title=" + mediaMetadata.getDescription();
             }
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m50m(MediaShellCommand.this.mWriter, "onMetadataChanged ", str);
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m50m(
+                    MediaShellCommand.this.mWriter, "onMetadataChanged ", str);
         }
 
         @Override // android.media.session.MediaController.Callback
@@ -92,7 +94,8 @@ public final class MediaShellCommand extends ShellCommand {
 
         @Override // android.media.session.MediaController.Callback
         public final void onSessionEvent(String str, Bundle bundle) {
-            MediaShellCommand.this.mWriter.println("onSessionEvent event=" + str + ", extras=" + bundle);
+            MediaShellCommand.this.mWriter.println(
+                    "onSessionEvent event=" + str + ", extras=" + bundle);
         }
     }
 
@@ -108,20 +111,48 @@ public final class MediaShellCommand extends ShellCommand {
 
         public final void dispatchKeyCode(int i) {
             long uptimeMillis = SystemClock.uptimeMillis();
-            KeyEvent keyEvent = new KeyEvent(uptimeMillis, uptimeMillis, 0, i, 0, 0, -1, 0, 0, FrameworkStatsLog.HDMI_CEC_MESSAGE_REPORTED__USER_CONTROL_PRESSED_COMMAND__UP);
-            KeyEvent keyEvent2 = new KeyEvent(uptimeMillis, uptimeMillis, 1, i, 0, 0, -1, 0, 0, FrameworkStatsLog.HDMI_CEC_MESSAGE_REPORTED__USER_CONTROL_PRESSED_COMMAND__UP);
+            KeyEvent keyEvent =
+                    new KeyEvent(
+                            uptimeMillis,
+                            uptimeMillis,
+                            0,
+                            i,
+                            0,
+                            0,
+                            -1,
+                            0,
+                            0,
+                            FrameworkStatsLog
+                                    .HDMI_CEC_MESSAGE_REPORTED__USER_CONTROL_PRESSED_COMMAND__UP);
+            KeyEvent keyEvent2 =
+                    new KeyEvent(
+                            uptimeMillis,
+                            uptimeMillis,
+                            1,
+                            i,
+                            0,
+                            0,
+                            -1,
+                            0,
+                            0,
+                            FrameworkStatsLog
+                                    .HDMI_CEC_MESSAGE_REPORTED__USER_CONTROL_PRESSED_COMMAND__UP);
             try {
                 this.mController.dispatchMediaButtonEvent(keyEvent);
                 this.mController.dispatchMediaButtonEvent(keyEvent2);
             } catch (RuntimeException unused) {
-                AccountManagerServiceShellCommand$$ExternalSyntheticOutline0.m(MediaShellCommand.this.mErrorWriter, "Failed to dispatch ", i);
+                AccountManagerServiceShellCommand$$ExternalSyntheticOutline0.m(
+                        MediaShellCommand.this.mErrorWriter, "Failed to dispatch ", i);
             }
         }
 
         public final void printUsageMessage() {
             MediaShellCommand mediaShellCommand = MediaShellCommand.this;
             try {
-                mediaShellCommand.mWriter.println("V2Monitoring session " + this.mController.getTag() + "...  available commands: play, pause, next, previous");
+                mediaShellCommand.mWriter.println(
+                        "V2Monitoring session "
+                                + this.mController.getTag()
+                                + "...  available commands: play, pause, next, previous");
             } catch (RuntimeException unused) {
                 mediaShellCommand.mWriter.println("Error trying to monitor session!");
             }
@@ -132,22 +163,28 @@ public final class MediaShellCommand extends ShellCommand {
             MediaController mediaController;
             boolean z;
             printUsageMessage();
-            HandlerThread handlerThread = new HandlerThread() { // from class: com.android.server.media.MediaShellCommand.ControllerMonitor.1
-                @Override // android.os.HandlerThread
-                public final void onLooperPrepared() {
-                    try {
-                        ControllerMonitor controllerMonitor = ControllerMonitor.this;
-                        controllerMonitor.mController.registerCallback(controllerMonitor.mControllerCallback);
-                    } catch (RuntimeException unused) {
-                        MediaShellCommand.this.mErrorWriter.println("Error registering monitor callback");
-                    }
-                }
-            };
+            HandlerThread handlerThread =
+                    new HandlerThread() { // from class:
+                                          // com.android.server.media.MediaShellCommand.ControllerMonitor.1
+                        @Override // android.os.HandlerThread
+                        public final void onLooperPrepared() {
+                            try {
+                                ControllerMonitor controllerMonitor = ControllerMonitor.this;
+                                controllerMonitor.mController.registerCallback(
+                                        controllerMonitor.mControllerCallback);
+                            } catch (RuntimeException unused) {
+                                MediaShellCommand.this.mErrorWriter.println(
+                                        "Error registering monitor callback");
+                            }
+                        }
+                    };
             handlerThread.start();
             try {
                 try {
                     try {
-                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(MediaShellCommand.this.mInput));
+                        BufferedReader bufferedReader =
+                                new BufferedReader(
+                                        new InputStreamReader(MediaShellCommand.this.mInput));
                         while (true) {
                             MediaShellCommand.this.mWriter.flush();
                             MediaShellCommand.this.mErrorWriter.flush();
@@ -166,7 +203,8 @@ public final class MediaShellCommand extends ShellCommand {
                                     } else if ("previous".equals(readLine)) {
                                         dispatchKeyCode(88);
                                     } else {
-                                        MediaShellCommand.this.mErrorWriter.println("Invalid command: " + readLine);
+                                        MediaShellCommand.this.mErrorWriter.println(
+                                                "Invalid command: " + readLine);
                                     }
                                     z = true;
                                 } else {
@@ -222,12 +260,18 @@ public final class MediaShellCommand extends ShellCommand {
             Looper.prepare();
             ActivityThread currentActivityThread = ActivityThread.currentActivityThread();
             sThread = currentActivityThread;
-            sMediaSessionManager = (MediaSessionManager) currentActivityThread.getSystemContext().getSystemService("media_session");
+            sMediaSessionManager =
+                    (MediaSessionManager)
+                            currentActivityThread
+                                    .getSystemContext()
+                                    .getSystemService("media_session");
         }
-        ISessionManager asInterface = ISessionManager.Stub.asInterface(ServiceManager.checkService("media_session"));
+        ISessionManager asInterface =
+                ISessionManager.Stub.asInterface(ServiceManager.checkService("media_session"));
         this.mSessionService = asInterface;
         if (asInterface == null) {
-            throw new IllegalStateException("Can't connect to media session service; is the system running?");
+            throw new IllegalStateException(
+                    "Can't connect to media session service; is the system running?");
         }
         try {
             if (str.equals("dispatch")) {
@@ -267,14 +311,16 @@ public final class MediaShellCommand extends ShellCommand {
         this.mWriter.println("       media_session expire-temp-engaged-sessions");
         this.mWriter.println();
         this.mWriter.println("media_session dispatch: dispatch a media key to the system.");
-        this.mWriter.println("                KEY may be: play, pause, play-pause, mute, headsethook,");
+        this.mWriter.println(
+                "                KEY may be: play, pause, play-pause, mute, headsethook,");
         this.mWriter.println("                stop, next, previous, rewind, record, fast-forward.");
         this.mWriter.println("media_session list-sessions: print a list of the current sessions.");
         this.mWriter.println("media_session monitor: monitor updates to the specified session.");
         this.mWriter.println("                       Use the tag from list-sessions.");
         this.mWriter.println("media_session volume:  ".concat(VolumeCtrl.USAGE));
         this.mWriter.println("media_session expire-temp-engaged-sessions: Expires any ongoing");
-        this.mWriter.println("                timers for media sessions in a temporary user-engaged");
+        this.mWriter.println(
+                "                timers for media sessions in a temporary user-engaged");
         this.mWriter.println("                state.");
         this.mWriter.println();
     }
@@ -312,11 +358,41 @@ public final class MediaShellCommand extends ShellCommand {
         long uptimeMillis = SystemClock.uptimeMillis();
         int i2 = i;
         try {
-            this.mSessionService.dispatchMediaKeyEvent(this.mPackageName, false, new KeyEvent(uptimeMillis, uptimeMillis, 0, i, 0, 0, -1, 0, 0, FrameworkStatsLog.HDMI_CEC_MESSAGE_REPORTED__USER_CONTROL_PRESSED_COMMAND__UP), false);
+            this.mSessionService.dispatchMediaKeyEvent(
+                    this.mPackageName,
+                    false,
+                    new KeyEvent(
+                            uptimeMillis,
+                            uptimeMillis,
+                            0,
+                            i,
+                            0,
+                            0,
+                            -1,
+                            0,
+                            0,
+                            FrameworkStatsLog
+                                    .HDMI_CEC_MESSAGE_REPORTED__USER_CONTROL_PRESSED_COMMAND__UP),
+                    false);
         } catch (RemoteException unused) {
         }
         try {
-            this.mSessionService.dispatchMediaKeyEvent(this.mPackageName, false, new KeyEvent(uptimeMillis, uptimeMillis, 1, i2, 0, 0, -1, 0, 0, FrameworkStatsLog.HDMI_CEC_MESSAGE_REPORTED__USER_CONTROL_PRESSED_COMMAND__UP), false);
+            this.mSessionService.dispatchMediaKeyEvent(
+                    this.mPackageName,
+                    false,
+                    new KeyEvent(
+                            uptimeMillis,
+                            uptimeMillis,
+                            1,
+                            i2,
+                            0,
+                            0,
+                            -1,
+                            0,
+                            0,
+                            FrameworkStatsLog
+                                    .HDMI_CEC_MESSAGE_REPORTED__USER_CONTROL_PRESSED_COMMAND__UP),
+                    false);
         } catch (RemoteException unused2) {
         }
     }
@@ -327,7 +403,11 @@ public final class MediaShellCommand extends ShellCommand {
             for (MediaController mediaController : sMediaSessionManager.getActiveSessions(null)) {
                 if (mediaController != null) {
                     try {
-                        this.mWriter.println("  tag=" + mediaController.getTag() + ", package=" + mediaController.getPackageName());
+                        this.mWriter.println(
+                                "  tag="
+                                        + mediaController.getTag()
+                                        + ", package="
+                                        + mediaController.getPackageName());
                     } catch (RuntimeException unused) {
                     }
                 }
@@ -375,7 +455,9 @@ public final class MediaShellCommand extends ShellCommand {
             Method dump skipped, instructions count: 780
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.media.MediaShellCommand.runVolume():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.media.MediaShellCommand.runVolume():void");
     }
 
     public final void showError(String str) {

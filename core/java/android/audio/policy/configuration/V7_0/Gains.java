@@ -1,12 +1,15 @@
 package android.audio.policy.configuration.V7_0;
 
 import com.samsung.android.media.AudioParameter;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.datatype.DatatypeConfigurationException;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public class Gains {
@@ -198,7 +201,8 @@ public class Gains {
             this.useForVolume = Boolean.valueOf(useForVolume);
         }
 
-        static Gain read(XmlPullParser _parser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+        static Gain read(XmlPullParser _parser)
+                throws XmlPullParserException, IOException, DatatypeConfigurationException {
             Gain _instance = new Gain();
             String _raw = _parser.getAttributeValue(null, "name");
             if (_raw != null) {
@@ -264,7 +268,8 @@ public class Gains {
         return this.gain;
     }
 
-    static Gains read(XmlPullParser _parser) throws XmlPullParserException, IOException, DatatypeConfigurationException {
+    static Gains read(XmlPullParser _parser)
+            throws XmlPullParserException, IOException, DatatypeConfigurationException {
         int type;
         Gains _instance = new Gains();
         _parser.getDepth();

@@ -2,6 +2,7 @@ package com.android.internal.org.bouncycastle.util;
 
 import com.android.internal.org.bouncycastle.math.raw.Mod;
 import com.android.internal.org.bouncycastle.math.raw.Nat;
+
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
@@ -12,7 +13,10 @@ public final class BigIntegers {
     public static final BigInteger ONE = BigInteger.valueOf(1);
     public static final BigInteger TWO = BigInteger.valueOf(2);
     private static final BigInteger THREE = BigInteger.valueOf(3);
-    private static final BigInteger SMALL_PRIMES_PRODUCT = new BigInteger("8138e8a0fcf3a4e84a771d40fd305d7f4aa59306d7251de54d98af8fe95729a1f73d893fa424cd2edc8636a6c3285e022b0e3866a565ae8108eed8591cd4fe8d2ce86165a978d719ebf647f362d33fca29cd179fb42401cbaf3df0c614056f9c8f3cfd51e474afb6bc6974f78db8aba8e9e517fded658591ab7502bd41849462f", 16);
+    private static final BigInteger SMALL_PRIMES_PRODUCT =
+            new BigInteger(
+                    "8138e8a0fcf3a4e84a771d40fd305d7f4aa59306d7251de54d98af8fe95729a1f73d893fa424cd2edc8636a6c3285e022b0e3866a565ae8108eed8591cd4fe8d2ce86165a978d719ebf647f362d33fca29cd179fb42401cbaf3df0c614056f9c8f3cfd51e474afb6bc6974f78db8aba8e9e517fded658591ab7502bd41849462f",
+                    16);
     private static final int MAX_SMALL = BigInteger.valueOf(743).bitLength();
 
     public static byte[] asUnsignedByteArray(BigInteger value) {
@@ -44,9 +48,9 @@ public final class BigIntegers {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:9:0x0012, code lost:
-    
-        if (r0.length != 1) goto L12;
-     */
+
+       if (r0.length != 1) goto L12;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -85,10 +89,14 @@ public final class BigIntegers {
             r2.<init>(r4)
             throw r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.org.bouncycastle.util.BigIntegers.asUnsignedByteArray(java.math.BigInteger, byte[], int, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.org.bouncycastle.util.BigIntegers.asUnsignedByteArray(java.math.BigInteger,"
+                    + " byte[], int, int):void");
     }
 
-    public static BigInteger createRandomInRange(BigInteger min, BigInteger max, SecureRandom random) {
+    public static BigInteger createRandomInRange(
+            BigInteger min, BigInteger max, SecureRandom random) {
         int cmp = min.compareTo(max);
         if (cmp >= 0) {
             if (cmp > 0) {
@@ -219,7 +227,8 @@ public final class BigIntegers {
         return rv;
     }
 
-    private static byte[] createRandom(int bitLength, SecureRandom random) throws IllegalArgumentException {
+    private static byte[] createRandom(int bitLength, SecureRandom random)
+            throws IllegalArgumentException {
         if (bitLength < 1) {
             throw new IllegalArgumentException("bitLength must be at least 1");
         }

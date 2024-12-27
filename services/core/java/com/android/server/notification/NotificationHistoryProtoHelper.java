@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.util.Slog;
 import android.util.proto.ProtoInputStream;
 import android.util.proto.ProtoOutputStream;
+
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -16,7 +17,10 @@ import java.util.List;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public abstract class NotificationHistoryProtoHelper {
-    public static void read(InputStream inputStream, NotificationHistory notificationHistory, NotificationHistoryFilter notificationHistoryFilter) {
+    public static void read(
+            InputStream inputStream,
+            NotificationHistory notificationHistory,
+            NotificationHistoryFilter notificationHistoryFilter) {
         ProtoInputStream protoInputStream = new ProtoInputStream(inputStream);
         ArrayList arrayList = new ArrayList();
         while (true) {
@@ -26,7 +30,10 @@ public abstract class NotificationHistoryProtoHelper {
             }
             if (nextField == 1) {
                 long start = protoInputStream.start(1146756268033L);
-                arrayList = protoInputStream.nextField(1120986464257L) ? new ArrayList(protoInputStream.readInt(1120986464257L)) : new ArrayList();
+                arrayList =
+                        protoInputStream.nextField(1120986464257L)
+                                ? new ArrayList(protoInputStream.readInt(1120986464257L))
+                                : new ArrayList();
                 while (protoInputStream.nextField() != -1) {
                     if (protoInputStream.getFieldNumber() == 2) {
                         arrayList.add(protoInputStream.readString(2237677961218L));
@@ -37,12 +44,19 @@ public abstract class NotificationHistoryProtoHelper {
                 long start2 = protoInputStream.start(2246267895811L);
                 try {
                     try {
-                        NotificationHistory.HistoricalNotification readNotification = readNotification(protoInputStream, arrayList);
+                        NotificationHistory.HistoricalNotification readNotification =
+                                readNotification(protoInputStream, arrayList);
                         if (notificationHistoryFilter.mSbnKey != null) {
-                            if (notificationHistoryFilter.matchesPackageAndSbnKeyFilter(readNotification) && notificationHistory.getHistoryCount() < notificationHistoryFilter.mNotificationCount) {
+                            if (notificationHistoryFilter.matchesPackageAndSbnKeyFilter(
+                                            readNotification)
+                                    && notificationHistory.getHistoryCount()
+                                            < notificationHistoryFilter.mNotificationCount) {
                                 notificationHistory.addNotificationToWrite(readNotification);
                             }
-                        } else if (notificationHistoryFilter.matchesPackageAndChannelFilter(readNotification) && notificationHistory.getHistoryCount() < notificationHistoryFilter.mNotificationCount) {
+                        } else if (notificationHistoryFilter.matchesPackageAndChannelFilter(
+                                        readNotification)
+                                && notificationHistory.getHistoryCount()
+                                        < notificationHistoryFilter.mNotificationCount) {
                             notificationHistory.addNotificationToWrite(readNotification);
                         }
                     } catch (Exception e) {
@@ -55,7 +69,9 @@ public abstract class NotificationHistoryProtoHelper {
                 }
             }
         }
-        if (notificationHistoryFilter.mPackage == null && notificationHistoryFilter.mChannel == null && notificationHistoryFilter.mNotificationCount >= Integer.MAX_VALUE) {
+        if (notificationHistoryFilter.mPackage == null
+                && notificationHistoryFilter.mChannel == null
+                && notificationHistoryFilter.mNotificationCount >= Integer.MAX_VALUE) {
             notificationHistory.addPooledStrings(arrayList);
         } else {
             notificationHistory.poolStringsFromNotifications();
@@ -64,10 +80,12 @@ public abstract class NotificationHistoryProtoHelper {
 
     /* JADX WARN: Failed to find 'out' block for switch in B:3:0x0018. Please report as an issue. */
     /* JADX WARN: Failed to find 'out' block for switch in B:42:0x00b0. Please report as an issue. */
-    public static NotificationHistory.HistoricalNotification readNotification(ProtoInputStream protoInputStream, List list) {
+    public static NotificationHistory.HistoricalNotification readNotification(
+            ProtoInputStream protoInputStream, List list) {
         String str;
         String str2;
-        NotificationHistory.HistoricalNotification.Builder builder = new NotificationHistory.HistoricalNotification.Builder();
+        NotificationHistory.HistoricalNotification.Builder builder =
+                new NotificationHistory.HistoricalNotification.Builder();
         String str3 = null;
         while (true) {
             switch (protoInputStream.nextField()) {
@@ -92,7 +110,8 @@ public abstract class NotificationHistoryProtoHelper {
                     str3 = str;
                 case 4:
                     str = str3;
-                    builder.setChannelName((String) list.get(protoInputStream.readInt(1120986464260L) - 1));
+                    builder.setChannelName(
+                            (String) list.get(protoInputStream.readInt(1120986464260L) - 1));
                     str3 = str;
                 case 5:
                     str = str3;
@@ -102,7 +121,8 @@ public abstract class NotificationHistoryProtoHelper {
                     str3 = str;
                 case 6:
                     str = str3;
-                    builder.setChannelId((String) list.get(protoInputStream.readInt(1120986464262L) - 1));
+                    builder.setChannelId(
+                            (String) list.get(protoInputStream.readInt(1120986464262L) - 1));
                     str3 = str;
                 case 7:
                     str = str3;
@@ -180,13 +200,16 @@ public abstract class NotificationHistoryProtoHelper {
                                 try {
                                     builder.setIcon(Icon.createWithData(bArr, i3, i4));
                                 } catch (IllegalArgumentException e) {
-                                    Slog.d("NotifHistoryProto", "loadIcon IllegalArgumentException " + e);
+                                    Slog.d(
+                                            "NotifHistoryProto",
+                                            "loadIcon IllegalArgumentException " + e);
                                     builder.setIcon(Icon.createWithResource("", 17304445));
                                 }
                             }
                         } else if (i == 2) {
                             if (i2 != 0) {
-                                builder.setIcon(Icon.createWithResource(str5 != null ? str5 : str, i2));
+                                builder.setIcon(
+                                        Icon.createWithResource(str5 != null ? str5 : str, i2));
                             }
                         } else if (i == 4 && str4 != null) {
                             builder.setIcon(Icon.createWithContentUri(str4));
@@ -201,7 +224,8 @@ public abstract class NotificationHistoryProtoHelper {
                     str = str3;
                     str3 = str;
                 case 14:
-                    builder.setConversationId((String) list.get(protoInputStream.readInt(1120986464270L) - 1));
+                    builder.setConversationId(
+                            (String) list.get(protoInputStream.readInt(1120986464270L) - 1));
                     str = str3;
                     str3 = str;
                 case 15:
@@ -234,7 +258,8 @@ public abstract class NotificationHistoryProtoHelper {
         }
     }
 
-    public static void write(OutputStream outputStream, NotificationHistory notificationHistory, int i) {
+    public static void write(
+            OutputStream outputStream, NotificationHistory notificationHistory, int i) {
         List list;
         ProtoOutputStream protoOutputStream = new ProtoOutputStream(outputStream);
         long j = 1120986464258L;
@@ -251,18 +276,28 @@ public abstract class NotificationHistoryProtoHelper {
         int size = notificationsToWrite.size();
         while (i2 < size) {
             String[] pooledStringsToWrite2 = notificationHistory.getPooledStringsToWrite();
-            NotificationHistory.HistoricalNotification historicalNotification = (NotificationHistory.HistoricalNotification) notificationsToWrite.get(i2);
+            NotificationHistory.HistoricalNotification historicalNotification =
+                    (NotificationHistory.HistoricalNotification) notificationsToWrite.get(i2);
             long start2 = protoOutputStream.start(2246267895811L);
             try {
                 try {
-                    int binarySearch = Arrays.binarySearch(pooledStringsToWrite2, historicalNotification.getPackage());
+                    int binarySearch =
+                            Arrays.binarySearch(
+                                    pooledStringsToWrite2, historicalNotification.getPackage());
                     if (binarySearch >= 0) {
                         protoOutputStream.write(j, binarySearch + 1);
                     } else {
-                        Slog.w("NotifHistoryProto", "notification package name (" + historicalNotification.getPackage() + ") not found in string cache");
-                        protoOutputStream.write(1138166333441L, historicalNotification.getPackage());
+                        Slog.w(
+                                "NotifHistoryProto",
+                                "notification package name ("
+                                        + historicalNotification.getPackage()
+                                        + ") not found in string cache");
+                        protoOutputStream.write(
+                                1138166333441L, historicalNotification.getPackage());
                     }
-                    int binarySearch2 = Arrays.binarySearch(pooledStringsToWrite2, historicalNotification.getChannelName());
+                    int binarySearch2 =
+                            Arrays.binarySearch(
+                                    pooledStringsToWrite2, historicalNotification.getChannelName());
                     if (binarySearch2 >= 0) {
                         list = notificationsToWrite;
                         try {
@@ -277,26 +312,39 @@ public abstract class NotificationHistoryProtoHelper {
                         }
                     } else {
                         list = notificationsToWrite;
-                        protoOutputStream.write(1138166333443L, historicalNotification.getChannelName());
+                        protoOutputStream.write(
+                                1138166333443L, historicalNotification.getChannelName());
                     }
-                    int binarySearch3 = Arrays.binarySearch(pooledStringsToWrite2, historicalNotification.getChannelId());
+                    int binarySearch3 =
+                            Arrays.binarySearch(
+                                    pooledStringsToWrite2, historicalNotification.getChannelId());
                     if (binarySearch3 >= 0) {
                         protoOutputStream.write(1120986464262L, binarySearch3 + 1);
                     } else {
-                        protoOutputStream.write(1138166333445L, historicalNotification.getChannelId());
+                        protoOutputStream.write(
+                                1138166333445L, historicalNotification.getChannelId());
                     }
                     if (!TextUtils.isEmpty(historicalNotification.getConversationId())) {
-                        int binarySearch4 = Arrays.binarySearch(pooledStringsToWrite2, historicalNotification.getConversationId());
+                        int binarySearch4 =
+                                Arrays.binarySearch(
+                                        pooledStringsToWrite2,
+                                        historicalNotification.getConversationId());
                         if (binarySearch4 >= 0) {
                             protoOutputStream.write(1120986464270L, binarySearch4 + 1);
                         } else {
-                            Slog.w("NotifHistoryProto", "notification conversation id (" + historicalNotification.getConversationId() + ") not found in string cache");
-                            protoOutputStream.write(1138166333453L, historicalNotification.getConversationId());
+                            Slog.w(
+                                    "NotifHistoryProto",
+                                    "notification conversation id ("
+                                            + historicalNotification.getConversationId()
+                                            + ") not found in string cache");
+                            protoOutputStream.write(
+                                    1138166333453L, historicalNotification.getConversationId());
                         }
                     }
                     protoOutputStream.write(1120986464263L, historicalNotification.getUid());
                     protoOutputStream.write(1120986464264L, historicalNotification.getUserId());
-                    protoOutputStream.write(1112396529673L, historicalNotification.getPostedTimeMs());
+                    protoOutputStream.write(
+                            1112396529673L, historicalNotification.getPostedTimeMs());
                     protoOutputStream.write(1138166333450L, historicalNotification.getTitle());
                     protoOutputStream.write(1138166333451L, historicalNotification.getText());
                     protoOutputStream.write(1138166333455L, historicalNotification.getSbnKey());
@@ -327,23 +375,33 @@ public abstract class NotificationHistoryProtoHelper {
         protoOutputStream.flush();
     }
 
-    public static void writeIcon(ProtoOutputStream protoOutputStream, NotificationHistory.HistoricalNotification historicalNotification) {
+    public static void writeIcon(
+            ProtoOutputStream protoOutputStream,
+            NotificationHistory.HistoricalNotification historicalNotification) {
         long start = protoOutputStream.start(1146756268044L);
         try {
             try {
                 protoOutputStream.write(1159641169921L, historicalNotification.getIcon().getType());
                 int type = historicalNotification.getIcon().getType();
                 if (type == 2) {
-                    protoOutputStream.write(1120986464259L, historicalNotification.getIcon().getResId());
-                    if (!historicalNotification.getPackage().equals(historicalNotification.getIcon().getResPackage())) {
-                        protoOutputStream.write(1138166333444L, historicalNotification.getIcon().getResPackage());
+                    protoOutputStream.write(
+                            1120986464259L, historicalNotification.getIcon().getResId());
+                    if (!historicalNotification
+                            .getPackage()
+                            .equals(historicalNotification.getIcon().getResPackage())) {
+                        protoOutputStream.write(
+                                1138166333444L, historicalNotification.getIcon().getResPackage());
                     }
                 } else if (type == 3) {
-                    protoOutputStream.write(1151051235333L, historicalNotification.getIcon().getDataBytes());
-                    protoOutputStream.write(1120986464262L, historicalNotification.getIcon().getDataLength());
-                    protoOutputStream.write(1120986464263L, historicalNotification.getIcon().getDataOffset());
+                    protoOutputStream.write(
+                            1151051235333L, historicalNotification.getIcon().getDataBytes());
+                    protoOutputStream.write(
+                            1120986464262L, historicalNotification.getIcon().getDataLength());
+                    protoOutputStream.write(
+                            1120986464263L, historicalNotification.getIcon().getDataOffset());
                 } else if (type == 4) {
-                    protoOutputStream.write(1138166333448L, historicalNotification.getIcon().getUriString());
+                    protoOutputStream.write(
+                            1138166333448L, historicalNotification.getIcon().getUriString());
                 }
             } catch (Exception e) {
                 Slog.e("NotifHistoryProto", "Error writing notification icon -", e);

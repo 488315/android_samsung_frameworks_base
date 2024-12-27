@@ -6,8 +6,8 @@ import android.os.Binder;
 import android.os.RemoteException;
 import android.service.euicc.EuiccProfileInfo;
 import android.telephony.TelephonyFrameworkInitializer;
-import android.telephony.euicc.EuiccCardManager;
 import android.util.Log;
+
 import com.android.internal.telephony.euicc.IAuthenticateServerCallback;
 import com.android.internal.telephony.euicc.ICancelSessionCallback;
 import com.android.internal.telephony.euicc.IDeleteProfileCallback;
@@ -31,6 +31,7 @@ import com.android.internal.telephony.euicc.IRetrieveNotificationListCallback;
 import com.android.internal.telephony.euicc.ISetDefaultSmdpAddressCallback;
 import com.android.internal.telephony.euicc.ISetNicknameCallback;
 import com.android.internal.telephony.euicc.ISwitchToProfileCallback;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
@@ -55,12 +56,10 @@ public class EuiccCardManager {
     private final Context mContext;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CancelReason {
-    }
+    public @interface CancelReason {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ResetOption {
-    }
+    public @interface ResetOption {}
 
     public interface ResultCallback<T> {
         void onComplete(int i, T t);
@@ -71,7 +70,10 @@ public class EuiccCardManager {
     }
 
     private IEuiccCardController getIEuiccCardController() {
-        return IEuiccCardController.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getEuiccCardControllerServiceRegisterer().get());
+        return IEuiccCardController.Stub.asInterface(
+                TelephonyFrameworkInitializer.getTelephonyServiceManager()
+                        .getEuiccCardControllerServiceRegisterer()
+                        .get());
     }
 
     /* renamed from: android.telephony.euicc.EuiccCardManager$1, reason: invalid class name */
@@ -90,21 +92,29 @@ public class EuiccCardManager {
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$1$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(resultCode, profiles);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.euicc.EuiccCardManager$1$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EuiccCardManager.ResultCallback.this.onComplete(
+                                        resultCode, profiles);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
     }
 
-    public void requestAllProfiles(String cardId, Executor executor, ResultCallback<EuiccProfileInfo[]> callback) {
+    public void requestAllProfiles(
+            String cardId, Executor executor, ResultCallback<EuiccProfileInfo[]> callback) {
         try {
-            getIEuiccCardController().getAllProfiles(this.mContext.getOpPackageName(), cardId, new AnonymousClass1(executor, callback));
+            getIEuiccCardController()
+                    .getAllProfiles(
+                            this.mContext.getOpPackageName(),
+                            cardId,
+                            new AnonymousClass1(executor, callback));
         } catch (RemoteException e) {
             Log.e(TAG, "Error calling getAllProfiles", e);
             throw e.rethrowFromSystemServer();
@@ -127,30 +137,51 @@ public class EuiccCardManager {
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$2$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(resultCode, profile);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.euicc.EuiccCardManager$2$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EuiccCardManager.ResultCallback.this.onComplete(
+                                        resultCode, profile);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
     }
 
-    public void requestProfile(String cardId, String iccid, Executor executor, ResultCallback<EuiccProfileInfo> callback) {
+    public void requestProfile(
+            String cardId,
+            String iccid,
+            Executor executor,
+            ResultCallback<EuiccProfileInfo> callback) {
         try {
-            getIEuiccCardController().getProfile(this.mContext.getOpPackageName(), cardId, iccid, new AnonymousClass2(executor, callback));
+            getIEuiccCardController()
+                    .getProfile(
+                            this.mContext.getOpPackageName(),
+                            cardId,
+                            iccid,
+                            new AnonymousClass2(executor, callback));
         } catch (RemoteException e) {
             Log.e(TAG, "Error calling getProfile", e);
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public void requestEnabledProfileForPort(String cardId, int portIndex, Executor executor, ResultCallback<EuiccProfileInfo> callback) {
+    public void requestEnabledProfileForPort(
+            String cardId,
+            int portIndex,
+            Executor executor,
+            ResultCallback<EuiccProfileInfo> callback) {
         try {
-            getIEuiccCardController().getEnabledProfile(this.mContext.getOpPackageName(), cardId, portIndex, new AnonymousClass3(executor, callback));
+            getIEuiccCardController()
+                    .getEnabledProfile(
+                            this.mContext.getOpPackageName(),
+                            cardId,
+                            portIndex,
+                            new AnonymousClass3(executor, callback));
         } catch (RemoteException e) {
             Log.e(TAG, "Error calling requestEnabledProfileForPort", e);
             throw e.rethrowFromSystemServer();
@@ -173,12 +204,15 @@ public class EuiccCardManager {
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$3$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(resultCode, profile);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.euicc.EuiccCardManager$3$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EuiccCardManager.ResultCallback.this.onComplete(
+                                        resultCode, profile);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
@@ -201,21 +235,34 @@ public class EuiccCardManager {
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$4$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(resultCode, null);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.euicc.EuiccCardManager$4$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EuiccCardManager.ResultCallback.this.onComplete(resultCode, null);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
     }
 
-    public void disableProfile(String cardId, String iccid, boolean refresh, Executor executor, ResultCallback<Void> callback) {
+    public void disableProfile(
+            String cardId,
+            String iccid,
+            boolean refresh,
+            Executor executor,
+            ResultCallback<Void> callback) {
         try {
-            getIEuiccCardController().disableProfile(this.mContext.getOpPackageName(), cardId, iccid, refresh, new AnonymousClass4(executor, callback));
+            getIEuiccCardController()
+                    .disableProfile(
+                            this.mContext.getOpPackageName(),
+                            cardId,
+                            iccid,
+                            refresh,
+                            new AnonymousClass4(executor, callback));
         } catch (RemoteException e) {
             Log.e(TAG, "Error calling disableProfile", e);
             throw e.rethrowFromSystemServer();
@@ -223,9 +270,21 @@ public class EuiccCardManager {
     }
 
     @Deprecated
-    public void switchToProfile(String cardId, String iccid, boolean refresh, Executor executor, ResultCallback<EuiccProfileInfo> callback) {
+    public void switchToProfile(
+            String cardId,
+            String iccid,
+            boolean refresh,
+            Executor executor,
+            ResultCallback<EuiccProfileInfo> callback) {
         try {
-            getIEuiccCardController().switchToProfile(this.mContext.getOpPackageName(), cardId, iccid, 0, refresh, new AnonymousClass5(executor, callback));
+            getIEuiccCardController()
+                    .switchToProfile(
+                            this.mContext.getOpPackageName(),
+                            cardId,
+                            iccid,
+                            0,
+                            refresh,
+                            new AnonymousClass5(executor, callback));
         } catch (RemoteException e) {
             Log.e(TAG, "Error calling switchToProfile", e);
             throw e.rethrowFromSystemServer();
@@ -248,12 +307,15 @@ public class EuiccCardManager {
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$5$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(resultCode, profile);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.euicc.EuiccCardManager$5$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EuiccCardManager.ResultCallback.this.onComplete(
+                                        resultCode, profile);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
@@ -276,21 +338,37 @@ public class EuiccCardManager {
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$6$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(resultCode, profile);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.euicc.EuiccCardManager$6$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EuiccCardManager.ResultCallback.this.onComplete(
+                                        resultCode, profile);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
     }
 
-    public void switchToProfile(String cardId, String iccid, int portIndex, boolean refresh, Executor executor, ResultCallback<EuiccProfileInfo> callback) {
+    public void switchToProfile(
+            String cardId,
+            String iccid,
+            int portIndex,
+            boolean refresh,
+            Executor executor,
+            ResultCallback<EuiccProfileInfo> callback) {
         try {
-            getIEuiccCardController().switchToProfile(this.mContext.getOpPackageName(), cardId, iccid, portIndex, refresh, new AnonymousClass6(executor, callback));
+            getIEuiccCardController()
+                    .switchToProfile(
+                            this.mContext.getOpPackageName(),
+                            cardId,
+                            iccid,
+                            portIndex,
+                            refresh,
+                            new AnonymousClass6(executor, callback));
         } catch (RemoteException e) {
             Log.e(TAG, "Error calling switchToProfile", e);
             throw e.rethrowFromSystemServer();
@@ -313,21 +391,34 @@ public class EuiccCardManager {
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$7$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(resultCode, null);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.euicc.EuiccCardManager$7$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EuiccCardManager.ResultCallback.this.onComplete(resultCode, null);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
     }
 
-    public void setNickname(String cardId, String iccid, String nickname, Executor executor, ResultCallback<Void> callback) {
+    public void setNickname(
+            String cardId,
+            String iccid,
+            String nickname,
+            Executor executor,
+            ResultCallback<Void> callback) {
         try {
-            getIEuiccCardController().setNickname(this.mContext.getOpPackageName(), cardId, iccid, nickname, new AnonymousClass7(executor, callback));
+            getIEuiccCardController()
+                    .setNickname(
+                            this.mContext.getOpPackageName(),
+                            cardId,
+                            iccid,
+                            nickname,
+                            new AnonymousClass7(executor, callback));
         } catch (RemoteException e) {
             Log.e(TAG, "Error calling setNickname", e);
             throw e.rethrowFromSystemServer();
@@ -350,21 +441,29 @@ public class EuiccCardManager {
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$8$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(resultCode, null);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.euicc.EuiccCardManager$8$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EuiccCardManager.ResultCallback.this.onComplete(resultCode, null);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
     }
 
-    public void deleteProfile(String cardId, String iccid, Executor executor, ResultCallback<Void> callback) {
+    public void deleteProfile(
+            String cardId, String iccid, Executor executor, ResultCallback<Void> callback) {
         try {
-            getIEuiccCardController().deleteProfile(this.mContext.getOpPackageName(), cardId, iccid, new AnonymousClass8(executor, callback));
+            getIEuiccCardController()
+                    .deleteProfile(
+                            this.mContext.getOpPackageName(),
+                            cardId,
+                            iccid,
+                            new AnonymousClass8(executor, callback));
         } catch (RemoteException e) {
             Log.e(TAG, "Error calling deleteProfile", e);
             throw e.rethrowFromSystemServer();
@@ -387,21 +486,29 @@ public class EuiccCardManager {
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$9$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(resultCode, null);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.euicc.EuiccCardManager$9$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EuiccCardManager.ResultCallback.this.onComplete(resultCode, null);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
     }
 
-    public void resetMemory(String cardId, int options, Executor executor, ResultCallback<Void> callback) {
+    public void resetMemory(
+            String cardId, int options, Executor executor, ResultCallback<Void> callback) {
         try {
-            getIEuiccCardController().resetMemory(this.mContext.getOpPackageName(), cardId, options, new AnonymousClass9(executor, callback));
+            getIEuiccCardController()
+                    .resetMemory(
+                            this.mContext.getOpPackageName(),
+                            cardId,
+                            options,
+                            new AnonymousClass9(executor, callback));
         } catch (RemoteException e) {
             Log.e(TAG, "Error calling resetMemory", e);
             throw e.rethrowFromSystemServer();
@@ -424,21 +531,29 @@ public class EuiccCardManager {
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$10$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(resultCode, address);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.euicc.EuiccCardManager$10$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EuiccCardManager.ResultCallback.this.onComplete(
+                                        resultCode, address);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
     }
 
-    public void requestDefaultSmdpAddress(String cardId, Executor executor, ResultCallback<String> callback) {
+    public void requestDefaultSmdpAddress(
+            String cardId, Executor executor, ResultCallback<String> callback) {
         try {
-            getIEuiccCardController().getDefaultSmdpAddress(this.mContext.getOpPackageName(), cardId, new AnonymousClass10(executor, callback));
+            getIEuiccCardController()
+                    .getDefaultSmdpAddress(
+                            this.mContext.getOpPackageName(),
+                            cardId,
+                            new AnonymousClass10(executor, callback));
         } catch (RemoteException e) {
             Log.e(TAG, "Error calling getDefaultSmdpAddress", e);
             throw e.rethrowFromSystemServer();
@@ -461,30 +576,47 @@ public class EuiccCardManager {
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$11$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(resultCode, address);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.euicc.EuiccCardManager$11$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EuiccCardManager.ResultCallback.this.onComplete(
+                                        resultCode, address);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
     }
 
-    public void requestSmdsAddress(String cardId, Executor executor, ResultCallback<String> callback) {
+    public void requestSmdsAddress(
+            String cardId, Executor executor, ResultCallback<String> callback) {
         try {
-            getIEuiccCardController().getSmdsAddress(this.mContext.getOpPackageName(), cardId, new AnonymousClass11(executor, callback));
+            getIEuiccCardController()
+                    .getSmdsAddress(
+                            this.mContext.getOpPackageName(),
+                            cardId,
+                            new AnonymousClass11(executor, callback));
         } catch (RemoteException e) {
             Log.e(TAG, "Error calling getSmdsAddress", e);
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public void setDefaultSmdpAddress(String cardId, String defaultSmdpAddress, Executor executor, ResultCallback<Void> callback) {
+    public void setDefaultSmdpAddress(
+            String cardId,
+            String defaultSmdpAddress,
+            Executor executor,
+            ResultCallback<Void> callback) {
         try {
-            getIEuiccCardController().setDefaultSmdpAddress(this.mContext.getOpPackageName(), cardId, defaultSmdpAddress, new AnonymousClass12(executor, callback));
+            getIEuiccCardController()
+                    .setDefaultSmdpAddress(
+                            this.mContext.getOpPackageName(),
+                            cardId,
+                            defaultSmdpAddress,
+                            new AnonymousClass12(executor, callback));
         } catch (RemoteException e) {
             Log.e(TAG, "Error calling setDefaultSmdpAddress", e);
             throw e.rethrowFromSystemServer();
@@ -507,12 +639,14 @@ public class EuiccCardManager {
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$12$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(resultCode, null);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.euicc.EuiccCardManager$12$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EuiccCardManager.ResultCallback.this.onComplete(resultCode, null);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
@@ -535,21 +669,28 @@ public class EuiccCardManager {
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$13$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(resultCode, rat);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.euicc.EuiccCardManager$13$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EuiccCardManager.ResultCallback.this.onComplete(resultCode, rat);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
     }
 
-    public void requestRulesAuthTable(String cardId, Executor executor, ResultCallback<EuiccRulesAuthTable> callback) {
+    public void requestRulesAuthTable(
+            String cardId, Executor executor, ResultCallback<EuiccRulesAuthTable> callback) {
         try {
-            getIEuiccCardController().getRulesAuthTable(this.mContext.getOpPackageName(), cardId, new AnonymousClass13(executor, callback));
+            getIEuiccCardController()
+                    .getRulesAuthTable(
+                            this.mContext.getOpPackageName(),
+                            cardId,
+                            new AnonymousClass13(executor, callback));
         } catch (RemoteException e) {
             Log.e(TAG, "Error calling getRulesAuthTable", e);
             throw e.rethrowFromSystemServer();
@@ -572,21 +713,29 @@ public class EuiccCardManager {
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$14$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(resultCode, challenge);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.euicc.EuiccCardManager$14$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EuiccCardManager.ResultCallback.this.onComplete(
+                                        resultCode, challenge);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
     }
 
-    public void requestEuiccChallenge(String cardId, Executor executor, ResultCallback<byte[]> callback) {
+    public void requestEuiccChallenge(
+            String cardId, Executor executor, ResultCallback<byte[]> callback) {
         try {
-            getIEuiccCardController().getEuiccChallenge(this.mContext.getOpPackageName(), cardId, new AnonymousClass14(executor, callback));
+            getIEuiccCardController()
+                    .getEuiccChallenge(
+                            this.mContext.getOpPackageName(),
+                            cardId,
+                            new AnonymousClass14(executor, callback));
         } catch (RemoteException e) {
             Log.e(TAG, "Error calling getEuiccChallenge", e);
             throw e.rethrowFromSystemServer();
@@ -609,21 +758,28 @@ public class EuiccCardManager {
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$15$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(resultCode, info);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.euicc.EuiccCardManager$15$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EuiccCardManager.ResultCallback.this.onComplete(resultCode, info);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
     }
 
-    public void requestEuiccInfo1(String cardId, Executor executor, ResultCallback<byte[]> callback) {
+    public void requestEuiccInfo1(
+            String cardId, Executor executor, ResultCallback<byte[]> callback) {
         try {
-            getIEuiccCardController().getEuiccInfo1(this.mContext.getOpPackageName(), cardId, new AnonymousClass15(executor, callback));
+            getIEuiccCardController()
+                    .getEuiccInfo1(
+                            this.mContext.getOpPackageName(),
+                            cardId,
+                            new AnonymousClass15(executor, callback));
         } catch (RemoteException e) {
             Log.e(TAG, "Error calling getEuiccInfo1", e);
             throw e.rethrowFromSystemServer();
@@ -646,34 +802,58 @@ public class EuiccCardManager {
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$16$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(resultCode, info);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.euicc.EuiccCardManager$16$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EuiccCardManager.ResultCallback.this.onComplete(resultCode, info);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
     }
 
-    public void requestEuiccInfo2(String cardId, Executor executor, ResultCallback<byte[]> callback) {
+    public void requestEuiccInfo2(
+            String cardId, Executor executor, ResultCallback<byte[]> callback) {
         try {
-            getIEuiccCardController().getEuiccInfo2(this.mContext.getOpPackageName(), cardId, new AnonymousClass16(executor, callback));
+            getIEuiccCardController()
+                    .getEuiccInfo2(
+                            this.mContext.getOpPackageName(),
+                            cardId,
+                            new AnonymousClass16(executor, callback));
         } catch (RemoteException e) {
             Log.e(TAG, "Error calling getEuiccInfo2", e);
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public void authenticateServer(String cardId, String matchingId, byte[] serverSigned1, byte[] serverSignature1, byte[] euiccCiPkIdToBeUsed, byte[] serverCertificate, Executor executor, ResultCallback<byte[]> callback) {
+    public void authenticateServer(
+            String cardId,
+            String matchingId,
+            byte[] serverSigned1,
+            byte[] serverSignature1,
+            byte[] euiccCiPkIdToBeUsed,
+            byte[] serverCertificate,
+            Executor executor,
+            ResultCallback<byte[]> callback) {
         try {
         } catch (RemoteException e) {
             e = e;
         }
         try {
-            getIEuiccCardController().authenticateServer(this.mContext.getOpPackageName(), cardId, matchingId, serverSigned1, serverSignature1, euiccCiPkIdToBeUsed, serverCertificate, new AnonymousClass17(executor, callback));
+            getIEuiccCardController()
+                    .authenticateServer(
+                            this.mContext.getOpPackageName(),
+                            cardId,
+                            matchingId,
+                            serverSigned1,
+                            serverSignature1,
+                            euiccCiPkIdToBeUsed,
+                            serverCertificate,
+                            new AnonymousClass17(executor, callback));
         } catch (RemoteException e2) {
             e = e2;
             Log.e(TAG, "Error calling authenticateServer", e);
@@ -697,21 +877,39 @@ public class EuiccCardManager {
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$17$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(resultCode, response);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.euicc.EuiccCardManager$17$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EuiccCardManager.ResultCallback.this.onComplete(
+                                        resultCode, response);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
     }
 
-    public void prepareDownload(String cardId, byte[] hashCc, byte[] smdpSigned2, byte[] smdpSignature2, byte[] smdpCertificate, Executor executor, ResultCallback<byte[]> callback) {
+    public void prepareDownload(
+            String cardId,
+            byte[] hashCc,
+            byte[] smdpSigned2,
+            byte[] smdpSignature2,
+            byte[] smdpCertificate,
+            Executor executor,
+            ResultCallback<byte[]> callback) {
         try {
-            getIEuiccCardController().prepareDownload(this.mContext.getOpPackageName(), cardId, hashCc, smdpSigned2, smdpSignature2, smdpCertificate, new AnonymousClass18(executor, callback));
+            getIEuiccCardController()
+                    .prepareDownload(
+                            this.mContext.getOpPackageName(),
+                            cardId,
+                            hashCc,
+                            smdpSigned2,
+                            smdpSignature2,
+                            smdpCertificate,
+                            new AnonymousClass18(executor, callback));
         } catch (RemoteException e) {
             Log.e(TAG, "Error calling prepareDownload", e);
             throw e.rethrowFromSystemServer();
@@ -734,21 +932,33 @@ public class EuiccCardManager {
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$18$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(resultCode, response);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.euicc.EuiccCardManager$18$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EuiccCardManager.ResultCallback.this.onComplete(
+                                        resultCode, response);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
     }
 
-    public void loadBoundProfilePackage(String cardId, byte[] boundProfilePackage, Executor executor, ResultCallback<byte[]> callback) {
+    public void loadBoundProfilePackage(
+            String cardId,
+            byte[] boundProfilePackage,
+            Executor executor,
+            ResultCallback<byte[]> callback) {
         try {
-            getIEuiccCardController().loadBoundProfilePackage(this.mContext.getOpPackageName(), cardId, boundProfilePackage, new AnonymousClass19(executor, callback));
+            getIEuiccCardController()
+                    .loadBoundProfilePackage(
+                            this.mContext.getOpPackageName(),
+                            cardId,
+                            boundProfilePackage,
+                            new AnonymousClass19(executor, callback));
         } catch (RemoteException e) {
             Log.e(TAG, "Error calling loadBoundProfilePackage", e);
             throw e.rethrowFromSystemServer();
@@ -771,21 +981,35 @@ public class EuiccCardManager {
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$19$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(resultCode, response);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.euicc.EuiccCardManager$19$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EuiccCardManager.ResultCallback.this.onComplete(
+                                        resultCode, response);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
     }
 
-    public void cancelSession(String cardId, byte[] transactionId, int reason, Executor executor, ResultCallback<byte[]> callback) {
+    public void cancelSession(
+            String cardId,
+            byte[] transactionId,
+            int reason,
+            Executor executor,
+            ResultCallback<byte[]> callback) {
         try {
-            getIEuiccCardController().cancelSession(this.mContext.getOpPackageName(), cardId, transactionId, reason, new AnonymousClass20(executor, callback));
+            getIEuiccCardController()
+                    .cancelSession(
+                            this.mContext.getOpPackageName(),
+                            cardId,
+                            transactionId,
+                            reason,
+                            new AnonymousClass20(executor, callback));
         } catch (RemoteException e) {
             Log.e(TAG, "Error calling cancelSession", e);
             throw e.rethrowFromSystemServer();
@@ -808,12 +1032,15 @@ public class EuiccCardManager {
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$20$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(resultCode, response);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.euicc.EuiccCardManager$20$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EuiccCardManager.ResultCallback.this.onComplete(
+                                        resultCode, response);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
@@ -836,21 +1063,33 @@ public class EuiccCardManager {
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$21$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(resultCode, notifications);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.euicc.EuiccCardManager$21$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EuiccCardManager.ResultCallback.this.onComplete(
+                                        resultCode, notifications);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
     }
 
-    public void listNotifications(String cardId, int events, Executor executor, ResultCallback<EuiccNotification[]> callback) {
+    public void listNotifications(
+            String cardId,
+            int events,
+            Executor executor,
+            ResultCallback<EuiccNotification[]> callback) {
         try {
-            getIEuiccCardController().listNotifications(this.mContext.getOpPackageName(), cardId, events, new AnonymousClass21(executor, callback));
+            getIEuiccCardController()
+                    .listNotifications(
+                            this.mContext.getOpPackageName(),
+                            cardId,
+                            events,
+                            new AnonymousClass21(executor, callback));
         } catch (RemoteException e) {
             Log.e(TAG, "Error calling listNotifications", e);
             throw e.rethrowFromSystemServer();
@@ -873,21 +1112,33 @@ public class EuiccCardManager {
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$22$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(resultCode, notifications);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.euicc.EuiccCardManager$22$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EuiccCardManager.ResultCallback.this.onComplete(
+                                        resultCode, notifications);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
     }
 
-    public void retrieveNotificationList(String cardId, int events, Executor executor, ResultCallback<EuiccNotification[]> callback) {
+    public void retrieveNotificationList(
+            String cardId,
+            int events,
+            Executor executor,
+            ResultCallback<EuiccNotification[]> callback) {
         try {
-            getIEuiccCardController().retrieveNotificationList(this.mContext.getOpPackageName(), cardId, events, new AnonymousClass22(executor, callback));
+            getIEuiccCardController()
+                    .retrieveNotificationList(
+                            this.mContext.getOpPackageName(),
+                            cardId,
+                            events,
+                            new AnonymousClass22(executor, callback));
         } catch (RemoteException e) {
             Log.e(TAG, "Error calling retrieveNotificationList", e);
             throw e.rethrowFromSystemServer();
@@ -910,30 +1161,48 @@ public class EuiccCardManager {
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$23$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(resultCode, notification);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.euicc.EuiccCardManager$23$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EuiccCardManager.ResultCallback.this.onComplete(
+                                        resultCode, notification);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }
         }
     }
 
-    public void retrieveNotification(String cardId, int seqNumber, Executor executor, ResultCallback<EuiccNotification> callback) {
+    public void retrieveNotification(
+            String cardId,
+            int seqNumber,
+            Executor executor,
+            ResultCallback<EuiccNotification> callback) {
         try {
-            getIEuiccCardController().retrieveNotification(this.mContext.getOpPackageName(), cardId, seqNumber, new AnonymousClass23(executor, callback));
+            getIEuiccCardController()
+                    .retrieveNotification(
+                            this.mContext.getOpPackageName(),
+                            cardId,
+                            seqNumber,
+                            new AnonymousClass23(executor, callback));
         } catch (RemoteException e) {
             Log.e(TAG, "Error calling retrieveNotification", e);
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public void removeNotificationFromList(String cardId, int seqNumber, Executor executor, ResultCallback<Void> callback) {
+    public void removeNotificationFromList(
+            String cardId, int seqNumber, Executor executor, ResultCallback<Void> callback) {
         try {
-            getIEuiccCardController().removeNotificationFromList(this.mContext.getOpPackageName(), cardId, seqNumber, new AnonymousClass24(executor, callback));
+            getIEuiccCardController()
+                    .removeNotificationFromList(
+                            this.mContext.getOpPackageName(),
+                            cardId,
+                            seqNumber,
+                            new AnonymousClass24(executor, callback));
         } catch (RemoteException e) {
             Log.e(TAG, "Error calling removeNotificationFromList", e);
             throw e.rethrowFromSystemServer();
@@ -956,12 +1225,14 @@ public class EuiccCardManager {
             try {
                 Executor executor = this.val$executor;
                 final ResultCallback resultCallback = this.val$callback;
-                executor.execute(new Runnable() { // from class: android.telephony.euicc.EuiccCardManager$24$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        EuiccCardManager.ResultCallback.this.onComplete(resultCode, null);
-                    }
-                });
+                executor.execute(
+                        new Runnable() { // from class:
+                                         // android.telephony.euicc.EuiccCardManager$24$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                EuiccCardManager.ResultCallback.this.onComplete(resultCode, null);
+                            }
+                        });
             } finally {
                 Binder.restoreCallingIdentity(token);
             }

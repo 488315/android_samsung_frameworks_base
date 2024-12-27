@@ -1,9 +1,11 @@
 package com.android.server.pm;
 
 import android.text.TextUtils;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
+
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -24,7 +26,14 @@ public final class ShareTargetInfo {
         public final String mPort;
         public final String mScheme;
 
-        public TargetData(String str, String str2, String str3, String str4, String str5, String str6, String str7) {
+        public TargetData(
+                String str,
+                String str2,
+                String str3,
+                String str4,
+                String str5,
+                String str6,
+                String str7) {
             this.mScheme = str;
             this.mHost = str2;
             this.mPort = str3;
@@ -103,7 +112,19 @@ public final class ShareTargetInfo {
                     name.getClass();
                     if (name.equals("data")) {
                         AtomicBoolean atomicBoolean2 = ShortcutService.sIsEmergencyMode;
-                        arrayList.add(new TargetData(typedXmlPullParser.getAttributeValue((String) null, "scheme"), typedXmlPullParser.getAttributeValue((String) null, "host"), typedXmlPullParser.getAttributeValue((String) null, "port"), typedXmlPullParser.getAttributeValue((String) null, "path"), typedXmlPullParser.getAttributeValue((String) null, "pathPattern"), typedXmlPullParser.getAttributeValue((String) null, "pathPrefix"), typedXmlPullParser.getAttributeValue((String) null, "mimeType")));
+                        arrayList.add(
+                                new TargetData(
+                                        typedXmlPullParser.getAttributeValue(
+                                                (String) null, "scheme"),
+                                        typedXmlPullParser.getAttributeValue((String) null, "host"),
+                                        typedXmlPullParser.getAttributeValue((String) null, "port"),
+                                        typedXmlPullParser.getAttributeValue((String) null, "path"),
+                                        typedXmlPullParser.getAttributeValue(
+                                                (String) null, "pathPattern"),
+                                        typedXmlPullParser.getAttributeValue(
+                                                (String) null, "pathPrefix"),
+                                        typedXmlPullParser.getAttributeValue(
+                                                (String) null, "mimeType")));
                     } else if (name.equals("category")) {
                         arrayList2.add(typedXmlPullParser.getAttributeValue((String) null, "name"));
                     }
@@ -115,7 +136,10 @@ public final class ShareTargetInfo {
         if (arrayList.isEmpty() || attributeValue == null || arrayList2.isEmpty()) {
             return null;
         }
-        return new ShareTargetInfo((TargetData[]) arrayList.toArray(new TargetData[arrayList.size()]), attributeValue, (String[]) arrayList2.toArray(new String[arrayList2.size()]));
+        return new ShareTargetInfo(
+                (TargetData[]) arrayList.toArray(new TargetData[arrayList.size()]),
+                attributeValue,
+                (String[]) arrayList2.toArray(new String[arrayList2.size()]));
     }
 
     public final void saveToXml(TypedXmlSerializer typedXmlSerializer) {
@@ -133,8 +157,10 @@ public final class ShareTargetInfo {
             ShortcutService.writeAttr(typedXmlSerializer, "host", targetDataArr[i2].mHost);
             ShortcutService.writeAttr(typedXmlSerializer, "port", targetDataArr[i2].mPort);
             ShortcutService.writeAttr(typedXmlSerializer, "path", targetDataArr[i2].mPath);
-            ShortcutService.writeAttr(typedXmlSerializer, "pathPattern", targetDataArr[i2].mPathPattern);
-            ShortcutService.writeAttr(typedXmlSerializer, "pathPrefix", targetDataArr[i2].mPathPrefix);
+            ShortcutService.writeAttr(
+                    typedXmlSerializer, "pathPattern", targetDataArr[i2].mPathPattern);
+            ShortcutService.writeAttr(
+                    typedXmlSerializer, "pathPrefix", targetDataArr[i2].mPathPrefix);
             ShortcutService.writeAttr(typedXmlSerializer, "mimeType", targetDataArr[i2].mMimeType);
             typedXmlSerializer.endTag((String) null, "data");
             i2++;

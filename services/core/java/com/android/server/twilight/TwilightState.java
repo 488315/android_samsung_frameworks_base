@@ -15,7 +15,10 @@ public final class TwilightState {
 
     public final boolean equals(Object obj) {
         TwilightState twilightState;
-        return (obj instanceof TwilightState) && (twilightState = (TwilightState) obj) != null && this.mSunriseTimeMillis == twilightState.mSunriseTimeMillis && this.mSunsetTimeMillis == twilightState.mSunsetTimeMillis;
+        return (obj instanceof TwilightState)
+                && (twilightState = (TwilightState) obj) != null
+                && this.mSunriseTimeMillis == twilightState.mSunriseTimeMillis
+                && this.mSunsetTimeMillis == twilightState.mSunsetTimeMillis;
     }
 
     public final int hashCode() {
@@ -24,10 +27,15 @@ public final class TwilightState {
 
     public final boolean isNight() {
         long currentTimeMillis = System.currentTimeMillis();
-        return currentTimeMillis >= this.mSunsetTimeMillis && currentTimeMillis < this.mSunriseTimeMillis;
+        return currentTimeMillis >= this.mSunsetTimeMillis
+                && currentTimeMillis < this.mSunriseTimeMillis;
     }
 
     public final String toString() {
-        return "TwilightState { sunrise=" + ((Object) DateFormat.format("MM-dd HH:mm", this.mSunriseTimeMillis)) + " sunset=" + ((Object) DateFormat.format("MM-dd HH:mm", this.mSunsetTimeMillis)) + " }";
+        return "TwilightState { sunrise="
+                + ((Object) DateFormat.format("MM-dd HH:mm", this.mSunriseTimeMillis))
+                + " sunset="
+                + ((Object) DateFormat.format("MM-dd HH:mm", this.mSunsetTimeMillis))
+                + " }";
     }
 }

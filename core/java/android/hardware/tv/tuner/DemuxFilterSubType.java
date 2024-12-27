@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class DemuxFilterSubType implements Parcelable {
-    public static final Parcelable.Creator<DemuxFilterSubType> CREATOR = new Parcelable.Creator<DemuxFilterSubType>() { // from class: android.hardware.tv.tuner.DemuxFilterSubType.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxFilterSubType createFromParcel(Parcel _aidl_source) {
-            return new DemuxFilterSubType(_aidl_source);
-        }
+    public static final Parcelable.Creator<DemuxFilterSubType> CREATOR =
+            new Parcelable.Creator<DemuxFilterSubType>() { // from class:
+                // android.hardware.tv.tuner.DemuxFilterSubType.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxFilterSubType createFromParcel(Parcel _aidl_source) {
+                    return new DemuxFilterSubType(_aidl_source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DemuxFilterSubType[] newArray(int _aidl_size) {
-            return new DemuxFilterSubType[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DemuxFilterSubType[] newArray(int _aidl_size) {
+                    return new DemuxFilterSubType[_aidl_size];
+                }
+            };
     public static final int alpFilterType = 4;
     public static final int ipFilterType = 2;
     public static final int mmtpFilterType = 1;
@@ -180,7 +182,12 @@ public final class DemuxFilterSubType implements Parcelable {
 
     private void _assertTag(int tag) {
         if (getTag() != tag) {
-            throw new IllegalStateException("bad access: " + _tagString(tag) + ", " + _tagString(getTag()) + " is available.");
+            throw new IllegalStateException(
+                    "bad access: "
+                            + _tagString(tag)
+                            + ", "
+                            + _tagString(getTag())
+                            + " is available.");
         }
     }
 

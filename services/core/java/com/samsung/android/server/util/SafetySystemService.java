@@ -26,7 +26,9 @@ public abstract class SafetySystemService {
         if (context != null) {
             return context.getSystemService(cls);
         }
-        Slog.w("SafetySystemService", cls.getSimpleName().concat(" should be called after system ready."));
+        Slog.w(
+                "SafetySystemService",
+                cls.getSimpleName().concat(" should be called after system ready."));
         return null;
     }
 }

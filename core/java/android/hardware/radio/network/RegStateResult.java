@@ -4,26 +4,29 @@ import android.hardware.radio.RadioTechnology$$;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class RegStateResult implements Parcelable {
-    public static final Parcelable.Creator<RegStateResult> CREATOR = new Parcelable.Creator<RegStateResult>() { // from class: android.hardware.radio.network.RegStateResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RegStateResult createFromParcel(Parcel _aidl_source) {
-            RegStateResult _aidl_out = new RegStateResult();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<RegStateResult> CREATOR =
+            new Parcelable.Creator<RegStateResult>() { // from class:
+                // android.hardware.radio.network.RegStateResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RegStateResult createFromParcel(Parcel _aidl_source) {
+                    RegStateResult _aidl_out = new RegStateResult();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RegStateResult[] newArray(int _aidl_size) {
-            return new RegStateResult[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RegStateResult[] newArray(int _aidl_size) {
+                    return new RegStateResult[_aidl_size];
+                }
+            };
     public AccessTechnologySpecificInfo accessTechnologySpecificInfo;
     public CellIdentity cellIdentity;
     public int rat;
@@ -105,7 +108,9 @@ public class RegStateResult implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.accessTechnologySpecificInfo = (AccessTechnologySpecificInfo) _aidl_parcel.readTypedObject(AccessTechnologySpecificInfo.CREATOR);
+                this.accessTechnologySpecificInfo =
+                        (AccessTechnologySpecificInfo)
+                                _aidl_parcel.readTypedObject(AccessTechnologySpecificInfo.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
@@ -127,7 +132,9 @@ public class RegStateResult implements Parcelable {
         _aidl_sj.add("reasonForDenial: " + RegistrationFailCause$$.toString(this.reasonForDenial));
         _aidl_sj.add("cellIdentity: " + Objects.toString(this.cellIdentity));
         _aidl_sj.add("registeredPlmn: " + Objects.toString(this.registeredPlmn));
-        _aidl_sj.add("accessTechnologySpecificInfo: " + Objects.toString(this.accessTechnologySpecificInfo));
+        _aidl_sj.add(
+                "accessTechnologySpecificInfo: "
+                        + Objects.toString(this.accessTechnologySpecificInfo));
         return "RegStateResult" + _aidl_sj.toString();
     }
 

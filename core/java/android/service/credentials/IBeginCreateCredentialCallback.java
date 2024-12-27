@@ -10,26 +10,25 @@ import android.text.TextUtils;
 
 /* loaded from: classes3.dex */
 public interface IBeginCreateCredentialCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.service.credentials.IBeginCreateCredentialCallback";
+    public static final String DESCRIPTOR =
+            "android.service.credentials.IBeginCreateCredentialCallback";
 
     void onCancellable(ICancellationSignal iCancellationSignal) throws RemoteException;
 
     void onFailure(String str, CharSequence charSequence) throws RemoteException;
 
-    void onSuccess(BeginCreateCredentialResponse beginCreateCredentialResponse) throws RemoteException;
+    void onSuccess(BeginCreateCredentialResponse beginCreateCredentialResponse)
+            throws RemoteException;
 
     public static class Default implements IBeginCreateCredentialCallback {
         @Override // android.service.credentials.IBeginCreateCredentialCallback
-        public void onSuccess(BeginCreateCredentialResponse request) throws RemoteException {
-        }
+        public void onSuccess(BeginCreateCredentialResponse request) throws RemoteException {}
 
         @Override // android.service.credentials.IBeginCreateCredentialCallback
-        public void onFailure(String errorType, CharSequence message) throws RemoteException {
-        }
+        public void onFailure(String errorType, CharSequence message) throws RemoteException {}
 
         @Override // android.service.credentials.IBeginCreateCredentialCallback
-        public void onCancellable(ICancellationSignal cancellation) throws RemoteException {
-        }
+        public void onCancellable(ICancellationSignal cancellation) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -37,7 +36,7 @@ public interface IBeginCreateCredentialCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IBeginCreateCredentialCallback {
+    public abstract static class Stub extends Binder implements IBeginCreateCredentialCallback {
         static final int TRANSACTION_onCancellable = 3;
         static final int TRANSACTION_onFailure = 2;
         static final int TRANSACTION_onSuccess = 1;
@@ -81,7 +80,8 @@ public interface IBeginCreateCredentialCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IBeginCreateCredentialCallback.DESCRIPTOR);
             }
@@ -91,18 +91,22 @@ public interface IBeginCreateCredentialCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    BeginCreateCredentialResponse _arg0 = (BeginCreateCredentialResponse) data.readTypedObject(BeginCreateCredentialResponse.CREATOR);
+                    BeginCreateCredentialResponse _arg0 =
+                            (BeginCreateCredentialResponse)
+                                    data.readTypedObject(BeginCreateCredentialResponse.CREATOR);
                     data.enforceNoDataAvail();
                     onSuccess(_arg0);
                     return true;
                 case 2:
                     String _arg02 = data.readString();
-                    CharSequence _arg1 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _arg1 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     onFailure(_arg02, _arg1);
                     return true;
                 case 3:
-                    ICancellationSignal _arg03 = ICancellationSignal.Stub.asInterface(data.readStrongBinder());
+                    ICancellationSignal _arg03 =
+                            ICancellationSignal.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onCancellable(_arg03);
                     return true;

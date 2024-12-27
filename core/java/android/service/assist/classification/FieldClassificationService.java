@@ -11,23 +11,25 @@ import android.os.IBinder;
 import android.os.ICancellationSignal;
 import android.os.OutcomeReceiver;
 import android.os.RemoteException;
-import android.service.assist.classification.IFieldClassificationService;
 import android.util.Log;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public abstract class FieldClassificationService extends Service {
-    public static final String SERVICE_INTERFACE = "android.service.assist.classification.FieldClassificationService";
+    public static final String SERVICE_INTERFACE =
+            "android.service.assist.classification.FieldClassificationService";
     private static final String TAG = FieldClassificationService.class.getSimpleName();
     static boolean sDebug = !Build.IS_USER;
     static boolean sVerbose = false;
     private ComponentName mServiceComponentName;
 
-    public abstract void onClassificationRequest(FieldClassificationRequest fieldClassificationRequest, CancellationSignal cancellationSignal, OutcomeReceiver<FieldClassificationResponse, Exception> outcomeReceiver);
+    public abstract void onClassificationRequest(
+            FieldClassificationRequest fieldClassificationRequest,
+            CancellationSignal cancellationSignal,
+            OutcomeReceiver<FieldClassificationResponse, Exception> outcomeReceiver);
 
     private final class FieldClassificationServiceImpl extends IFieldClassificationService.Stub {
-        private FieldClassificationServiceImpl() {
-        }
+        private FieldClassificationServiceImpl() {}
 
         @Override // android.service.assist.classification.IFieldClassificationService
         public void onConnected(boolean debug, boolean verbose) {
@@ -40,7 +42,8 @@ public abstract class FieldClassificationService extends Service {
         }
 
         @Override // android.service.assist.classification.IFieldClassificationService
-        public void onFieldClassificationRequest(FieldClassificationRequest request, IFieldClassificationCallback callback) {
+        public void onFieldClassificationRequest(
+                FieldClassificationRequest request, IFieldClassificationCallback callback) {
             FieldClassificationService.this.handleOnClassificationRequest(request, callback);
         }
     }
@@ -57,15 +60,17 @@ public abstract class FieldClassificationService extends Service {
             this.mServiceComponentName = intent.getComponent();
             return new FieldClassificationServiceImpl().asBinder();
         }
-        Log.w(TAG, "Tried to bind to wrong intent (should be android.service.assist.classification.FieldClassificationService: " + intent);
+        Log.w(
+                TAG,
+                "Tried to bind to wrong intent (should be"
+                    + " android.service.assist.classification.FieldClassificationService: "
+                        + intent);
         return null;
     }
 
-    public void onConnected() {
-    }
+    public void onConnected() {}
 
-    public void onDisconnected() {
-    }
+    public void onDisconnected() {}
 
     /* JADX INFO: Access modifiers changed from: private */
     public void handleOnConnected(boolean debug, boolean verbose) {
@@ -83,27 +88,34 @@ public abstract class FieldClassificationService extends Service {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void handleOnClassificationRequest(FieldClassificationRequest request, final IFieldClassificationCallback callback) {
+    public void handleOnClassificationRequest(
+            FieldClassificationRequest request, final IFieldClassificationCallback callback) {
         ICancellationSignal transport = CancellationSignal.createTransport();
         CancellationSignal cancellationSignal = CancellationSignal.fromTransport(transport);
-        onClassificationRequest(request, cancellationSignal, new OutcomeReceiver<FieldClassificationResponse, Exception>() { // from class: android.service.assist.classification.FieldClassificationService.1
-            @Override // android.os.OutcomeReceiver
-            public void onResult(FieldClassificationResponse result) {
-                try {
-                    callback.onSuccess(result);
-                } catch (RemoteException e) {
-                    e.rethrowFromSystemServer();
-                }
-            }
+        onClassificationRequest(
+                request,
+                cancellationSignal,
+                new OutcomeReceiver<
+                        FieldClassificationResponse,
+                        Exception>() { // from class:
+                                       // android.service.assist.classification.FieldClassificationService.1
+                    @Override // android.os.OutcomeReceiver
+                    public void onResult(FieldClassificationResponse result) {
+                        try {
+                            callback.onSuccess(result);
+                        } catch (RemoteException e) {
+                            e.rethrowFromSystemServer();
+                        }
+                    }
 
-            @Override // android.os.OutcomeReceiver
-            public void onError(Exception e) {
-                try {
-                    callback.onFailure();
-                } catch (RemoteException ex) {
-                    ex.rethrowFromSystemServer();
-                }
-            }
-        });
+                    @Override // android.os.OutcomeReceiver
+                    public void onError(Exception e) {
+                        try {
+                            callback.onFailure();
+                        } catch (RemoteException ex) {
+                            ex.rethrowFromSystemServer();
+                        }
+                    }
+                });
     }
 }

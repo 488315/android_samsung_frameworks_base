@@ -3,24 +3,27 @@ package android.content;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
+
 import java.io.PrintWriter;
 
 /* loaded from: classes.dex */
 public final class LocusId implements Parcelable {
-    public static final Parcelable.Creator<LocusId> CREATOR = new Parcelable.Creator<LocusId>() { // from class: android.content.LocusId.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LocusId createFromParcel(Parcel parcel) {
-            return new LocusId(parcel.readString());
-        }
+    public static final Parcelable.Creator<LocusId> CREATOR =
+            new Parcelable.Creator<LocusId>() { // from class: android.content.LocusId.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LocusId createFromParcel(Parcel parcel) {
+                    return new LocusId(parcel.readString());
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LocusId[] newArray(int size) {
-            return new LocusId[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LocusId[] newArray(int size) {
+                    return new LocusId[size];
+                }
+            };
     private final String mId;
 
     public LocusId(String id) {

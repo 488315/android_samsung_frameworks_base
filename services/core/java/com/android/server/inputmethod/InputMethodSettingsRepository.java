@@ -9,7 +9,9 @@ public abstract class InputMethodSettingsRepository {
 
     public static InputMethodSettings get(int i) {
         InputMethodSettings inputMethodSettings = (InputMethodSettings) sPerUserMap.get(i);
-        return inputMethodSettings != null ? inputMethodSettings : new InputMethodSettings(new InputMethodMap(InputMethodMap.EMPTY_MAP), i);
+        return inputMethodSettings != null
+                ? inputMethodSettings
+                : new InputMethodSettings(new InputMethodMap(InputMethodMap.EMPTY_MAP), i);
     }
 
     public static void put(int i, InputMethodSettings inputMethodSettings) {

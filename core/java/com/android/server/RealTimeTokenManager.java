@@ -3,7 +3,6 @@ package com.android.server;
 import android.os.IBinder;
 import android.os.ServiceManager;
 import android.util.Slog;
-import com.android.server.IRealTimeTokenService;
 
 /* loaded from: classes5.dex */
 public final class RealTimeTokenManager {

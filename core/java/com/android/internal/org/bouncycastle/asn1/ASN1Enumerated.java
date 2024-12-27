@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.asn1;
 
 import com.android.internal.org.bouncycastle.util.Arrays;
+
 import java.io.IOException;
 import java.math.BigInteger;
 
@@ -18,10 +19,12 @@ public class ASN1Enumerated extends ASN1Primitive {
             try {
                 return (ASN1Enumerated) fromByteArray((byte[]) obj);
             } catch (Exception e) {
-                throw new IllegalArgumentException("encoding error in getInstance: " + e.toString());
+                throw new IllegalArgumentException(
+                        "encoding error in getInstance: " + e.toString());
             }
         }
-        throw new IllegalArgumentException("illegal object in getInstance: " + obj.getClass().getName());
+        throw new IllegalArgumentException(
+                "illegal object in getInstance: " + obj.getClass().getName());
     }
 
     public static ASN1Enumerated getInstance(ASN1TaggedObject obj, boolean explicit) {
@@ -64,7 +67,9 @@ public class ASN1Enumerated extends ASN1Primitive {
     }
 
     public boolean hasValue(BigInteger x) {
-        return x != null && ASN1Integer.intValue(this.bytes, this.start, -1) == x.intValue() && getValue().equals(x);
+        return x != null
+                && ASN1Integer.intValue(this.bytes, this.start, -1) == x.intValue()
+                && getValue().equals(x);
     }
 
     public int intValueExact() {
@@ -99,7 +104,8 @@ public class ASN1Enumerated extends ASN1Primitive {
         return Arrays.areEqual(this.bytes, other.bytes);
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive, com.android.internal.org.bouncycastle.asn1.ASN1Object
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Object
     public int hashCode() {
         return Arrays.hashCode(this.bytes);
     }

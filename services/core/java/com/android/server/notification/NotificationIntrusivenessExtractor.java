@@ -16,14 +16,14 @@ public class NotificationIntrusivenessExtractor implements NotificationSignalExt
     public final class AnonymousClass1 extends RankingReconsideration {
         @Override // com.android.server.notification.RankingReconsideration
         public final void applyChangesLocked(NotificationRecord notificationRecord) {
-            if (System.currentTimeMillis() - notificationRecord.mLastIntrusive >= NotificationIntrusivenessExtractor.HANG_TIME_MS) {
+            if (System.currentTimeMillis() - notificationRecord.mLastIntrusive
+                    >= NotificationIntrusivenessExtractor.HANG_TIME_MS) {
                 notificationRecord.mRecentlyIntrusive = false;
             }
         }
 
         @Override // com.android.server.notification.RankingReconsideration
-        public final void work() {
-        }
+        public final void work() {}
     }
 
     @Override // com.android.server.notification.NotificationSignalExtractor
@@ -41,7 +41,8 @@ public class NotificationIntrusivenessExtractor implements NotificationSignalExt
             }
             return null;
         }
-        if (((int) (System.currentTimeMillis() - notificationRecord.mUpdateTimeMs)) < HANG_TIME_MS && notificationRecord.mImportance >= 3) {
+        if (((int) (System.currentTimeMillis() - notificationRecord.mUpdateTimeMs)) < HANG_TIME_MS
+                && notificationRecord.mImportance >= 3) {
             Uri uri = notificationRecord.mSound;
             if (uri != null && uri != Uri.EMPTY) {
                 notificationRecord.mRecentlyIntrusive = true;
@@ -63,10 +64,8 @@ public class NotificationIntrusivenessExtractor implements NotificationSignalExt
     }
 
     @Override // com.android.server.notification.NotificationSignalExtractor
-    public final void setConfig(RankingConfig rankingConfig) {
-    }
+    public final void setConfig(RankingConfig rankingConfig) {}
 
     @Override // com.android.server.notification.NotificationSignalExtractor
-    public final void setZenHelper(ZenModeHelper zenModeHelper) {
-    }
+    public final void setZenHelper(ZenModeHelper zenModeHelper) {}
 }

@@ -3,27 +3,30 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class AudioPortDeviceExt implements Parcelable {
-    public static final Parcelable.Creator<AudioPortDeviceExt> CREATOR = new Parcelable.Creator<AudioPortDeviceExt>() { // from class: android.media.audio.common.AudioPortDeviceExt.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioPortDeviceExt createFromParcel(Parcel _aidl_source) {
-            AudioPortDeviceExt _aidl_out = new AudioPortDeviceExt();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioPortDeviceExt> CREATOR =
+            new Parcelable.Creator<AudioPortDeviceExt>() { // from class:
+                // android.media.audio.common.AudioPortDeviceExt.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioPortDeviceExt createFromParcel(Parcel _aidl_source) {
+                    AudioPortDeviceExt _aidl_out = new AudioPortDeviceExt();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioPortDeviceExt[] newArray(int _aidl_size) {
-            return new AudioPortDeviceExt[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioPortDeviceExt[] newArray(int _aidl_size) {
+                    return new AudioPortDeviceExt[_aidl_size];
+                }
+            };
     public static final int FLAG_INDEX_DEFAULT_DEVICE = 0;
     public AudioDevice device;
     public AudioFormatDescription[] encodedFormats;
@@ -81,7 +84,9 @@ public class AudioPortDeviceExt implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.encodedFormats = (AudioFormatDescription[]) _aidl_parcel.createTypedArray(AudioFormatDescription.CREATOR);
+            this.encodedFormats =
+                    (AudioFormatDescription[])
+                            _aidl_parcel.createTypedArray(AudioFormatDescription.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -129,14 +134,29 @@ public class AudioPortDeviceExt implements Parcelable {
             return false;
         }
         AudioPortDeviceExt that = (AudioPortDeviceExt) other;
-        if (Objects.deepEquals(this.device, that.device) && Objects.deepEquals(Integer.valueOf(this.flags), Integer.valueOf(that.flags)) && Objects.deepEquals(this.encodedFormats, that.encodedFormats) && Objects.deepEquals(Integer.valueOf(this.encapsulationModes), Integer.valueOf(that.encapsulationModes)) && Objects.deepEquals(Integer.valueOf(this.encapsulationMetadataTypes), Integer.valueOf(that.encapsulationMetadataTypes))) {
+        if (Objects.deepEquals(this.device, that.device)
+                && Objects.deepEquals(Integer.valueOf(this.flags), Integer.valueOf(that.flags))
+                && Objects.deepEquals(this.encodedFormats, that.encodedFormats)
+                && Objects.deepEquals(
+                        Integer.valueOf(this.encapsulationModes),
+                        Integer.valueOf(that.encapsulationModes))
+                && Objects.deepEquals(
+                        Integer.valueOf(this.encapsulationMetadataTypes),
+                        Integer.valueOf(that.encapsulationMetadataTypes))) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(this.device, Integer.valueOf(this.flags), this.encodedFormats, Integer.valueOf(this.encapsulationModes), Integer.valueOf(this.encapsulationMetadataTypes)).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                this.device,
+                                Integer.valueOf(this.flags),
+                                this.encodedFormats,
+                                Integer.valueOf(this.encapsulationModes),
+                                Integer.valueOf(this.encapsulationMetadataTypes))
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

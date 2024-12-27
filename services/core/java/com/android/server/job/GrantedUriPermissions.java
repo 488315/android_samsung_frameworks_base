@@ -11,9 +11,11 @@ import android.os.RemoteException;
 import android.os.UserHandle;
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.server.LocalServices;
 import com.android.server.uri.UriGrantsManagerInternal;
 import com.android.server.uri.UriGrantsManagerService;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -31,34 +33,66 @@ public final class GrantedUriPermissions {
         this.mGrantFlags = i;
         this.mSourceUserId = UserHandle.getUserId(i2);
         this.mTag = str;
-        UriGrantsManagerInternal uriGrantsManagerInternal = (UriGrantsManagerInternal) LocalServices.getService(UriGrantsManagerInternal.class);
+        UriGrantsManagerInternal uriGrantsManagerInternal =
+                (UriGrantsManagerInternal) LocalServices.getService(UriGrantsManagerInternal.class);
         this.mUriGrantsManagerInternal = uriGrantsManagerInternal;
-        this.mPermissionOwner = ((UriGrantsManagerService.LocalService) uriGrantsManagerInternal).newUriPermissionOwner(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("job: ", str));
+        this.mPermissionOwner =
+                ((UriGrantsManagerService.LocalService) uriGrantsManagerInternal)
+                        .newUriPermissionOwner(
+                                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                        "job: ", str));
     }
 
-    public static GrantedUriPermissions grantClip(ClipData clipData, int i, String str, int i2, int i3, String str2, GrantedUriPermissions grantedUriPermissions) {
+    public static GrantedUriPermissions grantClip(
+            ClipData clipData,
+            int i,
+            String str,
+            int i2,
+            int i3,
+            String str2,
+            GrantedUriPermissions grantedUriPermissions) {
         int itemCount = clipData.getItemCount();
         GrantedUriPermissions grantedUriPermissions2 = grantedUriPermissions;
         for (int i4 = 0; i4 < itemCount; i4++) {
             ClipData.Item itemAt = clipData.getItemAt(i4);
             if (itemAt.getUri() != null) {
-                grantedUriPermissions2 = grantUri(itemAt.getUri(), i, str, i2, i3, str2, grantedUriPermissions2);
+                grantedUriPermissions2 =
+                        grantUri(itemAt.getUri(), i, str, i2, i3, str2, grantedUriPermissions2);
             }
             GrantedUriPermissions grantedUriPermissions3 = grantedUriPermissions2;
             Intent intent = itemAt.getIntent();
-            grantedUriPermissions2 = (intent == null || intent.getData() == null) ? grantedUriPermissions3 : grantUri(intent.getData(), i, str, i2, i3, str2, grantedUriPermissions3);
+            grantedUriPermissions2 =
+                    (intent == null || intent.getData() == null)
+                            ? grantedUriPermissions3
+                            : grantUri(
+                                    intent.getData(), i, str, i2, i3, str2, grantedUriPermissions3);
         }
         return grantedUriPermissions2;
     }
 
-    public static GrantedUriPermissions grantUri(Uri uri, int i, String str, int i2, int i3, String str2, GrantedUriPermissions grantedUriPermissions) {
+    public static GrantedUriPermissions grantUri(
+            Uri uri,
+            int i,
+            String str,
+            int i2,
+            int i3,
+            String str2,
+            GrantedUriPermissions grantedUriPermissions) {
         try {
             int userIdFromUri = ContentProvider.getUserIdFromUri(uri, UserHandle.getUserId(i));
             Uri uriWithoutUserId = ContentProvider.getUriWithoutUserId(uri);
             if (grantedUriPermissions == null) {
                 grantedUriPermissions = new GrantedUriPermissions(i3, i, str2);
             }
-            UriGrantsManager.getService().grantUriPermissionFromOwner(grantedUriPermissions.mPermissionOwner, i, str, uriWithoutUserId, i3, userIdFromUri, i2);
+            UriGrantsManager.getService()
+                    .grantUriPermissionFromOwner(
+                            grantedUriPermissions.mPermissionOwner,
+                            i,
+                            str,
+                            uriWithoutUserId,
+                            i3,
+                            userIdFromUri,
+                            i2);
             grantedUriPermissions.mUris.add(uriWithoutUserId);
         } catch (RemoteException unused) {
             Slog.e("JobScheduler", "AM dead");
@@ -100,7 +134,12 @@ public final class GrantedUriPermissions {
 
     public final void revoke() {
         for (int size = this.mUris.size() - 1; size >= 0; size--) {
-            ((UriGrantsManagerService.LocalService) this.mUriGrantsManagerInternal).revokeUriPermissionFromOwner(this.mPermissionOwner, (Uri) this.mUris.get(size), this.mGrantFlags, this.mSourceUserId);
+            ((UriGrantsManagerService.LocalService) this.mUriGrantsManagerInternal)
+                    .revokeUriPermissionFromOwner(
+                            this.mPermissionOwner,
+                            (Uri) this.mUris.get(size),
+                            this.mGrantFlags,
+                            this.mSourceUserId);
         }
         this.mUris.clear();
     }

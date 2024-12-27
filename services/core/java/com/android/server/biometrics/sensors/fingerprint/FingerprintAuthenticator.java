@@ -25,8 +25,10 @@ public final class FingerprintAuthenticator extends IBiometricAuthenticator.Stub
         this.mFingerprintService.cancelAuthenticationFromService(this.mSensorId, iBinder, str, j);
     }
 
-    public final ITestSession createTestSession(ITestSessionCallback iTestSessionCallback, String str) {
-        return this.mFingerprintService.createTestSession(this.mSensorId, iTestSessionCallback, str);
+    public final ITestSession createTestSession(
+            ITestSessionCallback iTestSessionCallback, String str) {
+        return this.mFingerprintService.createTestSession(
+                this.mSensorId, iTestSessionCallback, str);
     }
 
     public final byte[] dumpSensorServiceStateProto(boolean z) {
@@ -49,16 +51,42 @@ public final class FingerprintAuthenticator extends IBiometricAuthenticator.Stub
         return this.mFingerprintService.hasEnrolledFingerprints(this.mSensorId, i, str);
     }
 
-    public final void invalidateAuthenticatorId(int i, IInvalidationCallback iInvalidationCallback) {
-        this.mFingerprintService.invalidateAuthenticatorId(this.mSensorId, i, iInvalidationCallback);
+    public final void invalidateAuthenticatorId(
+            int i, IInvalidationCallback iInvalidationCallback) {
+        this.mFingerprintService.invalidateAuthenticatorId(
+                this.mSensorId, i, iInvalidationCallback);
     }
 
     public final boolean isHardwareDetected(String str) {
         return this.mFingerprintService.isHardwareDetected(this.mSensorId, str);
     }
 
-    public final void prepareForAuthentication(boolean z, IBinder iBinder, long j, int i, IBiometricSensorReceiver iBiometricSensorReceiver, String str, long j2, int i2, boolean z2, boolean z3, boolean z4) {
-        this.mFingerprintService.prepareForAuthentication(iBinder, j, iBiometricSensorReceiver, new FingerprintAuthenticateOptions.Builder().setSensorId(this.mSensorId).setUserId(i).setOpPackageName(str).setIsMandatoryBiometrics(z4).build(), j2, i2, z2, z3);
+    public final void prepareForAuthentication(
+            boolean z,
+            IBinder iBinder,
+            long j,
+            int i,
+            IBiometricSensorReceiver iBiometricSensorReceiver,
+            String str,
+            long j2,
+            int i2,
+            boolean z2,
+            boolean z3,
+            boolean z4) {
+        this.mFingerprintService.prepareForAuthentication(
+                iBinder,
+                j,
+                iBiometricSensorReceiver,
+                new FingerprintAuthenticateOptions.Builder()
+                        .setSensorId(this.mSensorId)
+                        .setUserId(i)
+                        .setOpPackageName(str)
+                        .setIsMandatoryBiometrics(z4)
+                        .build(),
+                j2,
+                i2,
+                z2,
+                z3);
     }
 
     public final void resetLockout(IBinder iBinder, String str, int i, byte[] bArr) {

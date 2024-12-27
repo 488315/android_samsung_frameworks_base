@@ -16,7 +16,10 @@ public class SafetyCareStrategy implements InitializationStrategy, DefaultAction
     boolean mLastEmergencyActionResult = false;
     private final LogWrapper mLogWrapper;
 
-    public SafetyCareStrategy(SamsungGlobalActions globalActions, ConditionChecker conditionChecker, LogWrapper logWrapper) {
+    public SafetyCareStrategy(
+            SamsungGlobalActions globalActions,
+            ConditionChecker conditionChecker,
+            LogWrapper logWrapper) {
         this.mGlobalActions = globalActions;
         this.mConditionChecker = conditionChecker;
         this.mLogWrapper = logWrapper;
@@ -25,7 +28,8 @@ public class SafetyCareStrategy implements InitializationStrategy, DefaultAction
     @Override // com.samsung.android.globalactions.presentation.strategies.InitializationStrategy
     public void onInitialize(boolean isKeyguardShowing) {
         if (this.mConditionChecker.isEnabled(SystemConditions.IS_MODIFYING)) {
-            this.mLogWrapper.elog(TAG, "Cannot use Global Action because Emergency mode entering..");
+            this.mLogWrapper.elog(
+                    TAG, "Cannot use Global Action because Emergency mode entering..");
             this.mGlobalActions.setDisabled();
         }
     }
@@ -39,7 +43,10 @@ public class SafetyCareStrategy implements InitializationStrategy, DefaultAction
                 this.mLastEmergencyActionResult = false;
                 return this.mLastEmergencyActionResult;
             }
-            if (!this.mConditionChecker.isEnabled(SystemConditions.IS_MISSING_PHONE_LOCK) && this.mConditionChecker.isEnabled(SystemConditions.CAN_SET_MODE) && !this.mConditionChecker.isEnabled(SystemConditions.IS_UPSM_ENABLED) && !this.mConditionChecker.isEnabled(SystemConditions.IS_KIDS_HOME_MODE)) {
+            if (!this.mConditionChecker.isEnabled(SystemConditions.IS_MISSING_PHONE_LOCK)
+                    && this.mConditionChecker.isEnabled(SystemConditions.CAN_SET_MODE)
+                    && !this.mConditionChecker.isEnabled(SystemConditions.IS_UPSM_ENABLED)
+                    && !this.mConditionChecker.isEnabled(SystemConditions.IS_KIDS_HOME_MODE)) {
                 this.mLastEmergencyActionResult = true;
             } else {
                 this.mLastEmergencyActionResult = false;

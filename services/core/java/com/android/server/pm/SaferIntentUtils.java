@@ -7,6 +7,7 @@ import android.content.pm.ComponentInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.os.UserHandle;
+
 import com.android.internal.pm.pkg.component.ParsedMainComponent;
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.LocalServices;
@@ -17,7 +18,8 @@ import com.android.server.pm.resolution.ComponentResolverApi;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public abstract class SaferIntentUtils {
-    public static final ThreadLocal DISABLE_ENFORCE_INTENTS_TO_MATCH_INTENT_FILTERS = ThreadLocal.withInitial(new SaferIntentUtils$$ExternalSyntheticLambda1());
+    public static final ThreadLocal DISABLE_ENFORCE_INTENTS_TO_MATCH_INTENT_FILTERS =
+            ThreadLocal.withInitial(new SaferIntentUtils$$ExternalSyntheticLambda1());
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IntentArgs {
@@ -49,12 +51,18 @@ public abstract class SaferIntentUtils {
             int i = this.callingUid;
             String[] packagesForUid = packageManager.getPackagesForUid(i);
             if (packagesForUid == null || packagesForUid.length == 0) {
-                z = ((CompatChange) platformCompat.mCompatConfig.mChanges.get(Long.valueOf(j))) == null ? true : !r8.getDisabled();
+                z =
+                        ((CompatChange) platformCompat.mCompatConfig.mChanges.get(Long.valueOf(j)))
+                                        == null
+                                ? true
+                                : !r8.getDisabled();
             } else {
                 int userId = UserHandle.getUserId(i);
                 z = true;
                 for (String str : packagesForUid) {
-                    z &= platformCompat.isChangeEnabledInternalNoLogging(j, PlatformCompat.getApplicationInfo(str, userId));
+                    z &=
+                            platformCompat.isChangeEnabledInternalNoLogging(
+                                    j, PlatformCompat.getApplicationInfo(str, userId));
                 }
             }
             return z;
@@ -62,28 +70,30 @@ public abstract class SaferIntentUtils {
 
         public final void reportEvent(int i, boolean z) {
             if (this.resolveForStart) {
-                SaferIntentUtils.reportUnsafeIntentEvent(i, this.callingUid, this.callingPid, this.intent, this.resolvedType, z);
+                SaferIntentUtils.reportUnsafeIntentEvent(
+                        i, this.callingUid, this.callingPid, this.intent, this.resolvedType, z);
             }
         }
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:23:0x0056, code lost:
-    
-        if (r8.intent.getAction() == null) goto L31;
-     */
+
+       if (r8.intent.getAction() == null) goto L31;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:24:0x0065, code lost:
-    
-        r6 = false;
-     */
+
+       r6 = false;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:39:0x0063, code lost:
-    
-        if (r8.intent.getAction() == null) goto L31;
-     */
+
+       if (r8.intent.getAction() == null) goto L31;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void blockNullAction(com.android.server.pm.SaferIntentUtils.IntentArgs r8, java.util.List r9) {
+    public static void blockNullAction(
+            com.android.server.pm.SaferIntentUtils.IntentArgs r8, java.util.List r9) {
         /*
             int r0 = r8.callingUid
             boolean r0 = android.app.ActivityManager.canAccessUnexportedComponents(r0)
@@ -159,7 +169,10 @@ public abstract class SaferIntentUtils {
         L8a:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.SaferIntentUtils.blockNullAction(com.android.server.pm.SaferIntentUtils$IntentArgs, java.util.List):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.SaferIntentUtils.blockNullAction(com.android.server.pm.SaferIntentUtils$IntentArgs,"
+                    + " java.util.List):void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:38:0x0095  */
@@ -170,12 +183,16 @@ public abstract class SaferIntentUtils {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void enforceIntentFilterMatching(com.android.server.pm.SaferIntentUtils.IntentArgs r24, java.util.List r25) {
+    public static void enforceIntentFilterMatching(
+            com.android.server.pm.SaferIntentUtils.IntentArgs r24, java.util.List r25) {
         /*
             Method dump skipped, instructions count: 429
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.SaferIntentUtils.enforceIntentFilterMatching(com.android.server.pm.SaferIntentUtils$IntentArgs, java.util.List):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.SaferIntentUtils.enforceIntentFilterMatching(com.android.server.pm.SaferIntentUtils$IntentArgs,"
+                    + " java.util.List):void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:15:0x004c  */
@@ -184,7 +201,8 @@ public abstract class SaferIntentUtils {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void filterNonExportedComponents(com.android.server.pm.SaferIntentUtils.IntentArgs r6, java.util.List r7) {
+    public static void filterNonExportedComponents(
+            com.android.server.pm.SaferIntentUtils.IntentArgs r6, java.util.List r7) {
         /*
             if (r7 == 0) goto L5a
             android.content.Intent r0 = r6.intent
@@ -239,12 +257,18 @@ public abstract class SaferIntentUtils {
         L5a:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.SaferIntentUtils.filterNonExportedComponents(com.android.server.pm.SaferIntentUtils$IntentArgs, java.util.List):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.SaferIntentUtils.filterNonExportedComponents(com.android.server.pm.SaferIntentUtils$IntentArgs,"
+                    + " java.util.List):void");
     }
 
-    public static ParsedMainComponent infoToComponent(ComponentInfo componentInfo, ComponentResolverApi componentResolverApi, boolean z) {
+    public static ParsedMainComponent infoToComponent(
+            ComponentInfo componentInfo, ComponentResolverApi componentResolverApi, boolean z) {
         if (componentInfo instanceof ActivityInfo) {
-            return z ? componentResolverApi.getReceiver(componentInfo.getComponentName()) : componentResolverApi.getActivity(componentInfo.getComponentName());
+            return z
+                    ? componentResolverApi.getReceiver(componentInfo.getComponentName())
+                    : componentResolverApi.getActivity(componentInfo.getComponentName());
         }
         if (componentInfo instanceof ServiceInfo) {
             return componentResolverApi.getService(componentInfo.getComponentName());
@@ -252,8 +276,24 @@ public abstract class SaferIntentUtils {
         throw new IllegalArgumentException("Unsupported component type");
     }
 
-    public static void reportUnsafeIntentEvent(int i, int i2, int i3, Intent intent, String str, boolean z) {
-        FrameworkStatsLog.write(FrameworkStatsLog.UNSAFE_INTENT_EVENT_REPORTED, i, i2, intent.getComponent() == null ? null : intent.getComponent().flattenToString(), intent.getPackage(), intent.getAction(), intent.getCategories() == null ? new String[0] : (String[]) intent.getCategories().toArray(new SaferIntentUtils$$ExternalSyntheticLambda0()), str, intent.getScheme(), z);
-        ((ActivityManagerInternal) LocalServices.getService(ActivityManagerInternal.class)).triggerUnsafeIntentStrictMode(i3, i, intent);
+    public static void reportUnsafeIntentEvent(
+            int i, int i2, int i3, Intent intent, String str, boolean z) {
+        FrameworkStatsLog.write(
+                FrameworkStatsLog.UNSAFE_INTENT_EVENT_REPORTED,
+                i,
+                i2,
+                intent.getComponent() == null ? null : intent.getComponent().flattenToString(),
+                intent.getPackage(),
+                intent.getAction(),
+                intent.getCategories() == null
+                        ? new String[0]
+                        : (String[])
+                                intent.getCategories()
+                                        .toArray(new SaferIntentUtils$$ExternalSyntheticLambda0()),
+                str,
+                intent.getScheme(),
+                z);
+        ((ActivityManagerInternal) LocalServices.getService(ActivityManagerInternal.class))
+                .triggerUnsafeIntentStrictMode(i3, i, intent);
     }
 }

@@ -2,7 +2,9 @@ package android.database.sqlite;
 
 import android.os.CancellationSignal;
 import android.util.Log;
+
 import com.android.internal.content.NativeLibraryHelper;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,17 +13,23 @@ public class SQLitePragma {
     private static final String TAG = "SQLitePragma";
     private final SQLiteDatabase mDatabase;
     private final String mSql;
-    private static final Pattern mPragmaPattern = Pattern.compile("^pragma\\s+(main\\.)?(case_sensitive_like|cache_size|automatic_index|busy_timeout|journal_mode)\\s*(=|\\()(.*)", 2);
+    private static final Pattern mPragmaPattern =
+            Pattern.compile(
+                    "^pragma\\s+(main\\.)?(case_sensitive_like|cache_size|automatic_index|busy_timeout|journal_mode)\\s*(=|\\()(.*)",
+                    2);
     private static final Pattern mTurnOnPattern = Pattern.compile("(on|yes|1|true)", 2);
-    private static final Pattern mNumberPattern = Pattern.compile("\\s*[`\"'\\[\\s]*\\s*(\\+|-)?\\s*(0x)?([0-9a-f]+)(.*)", 2);
-    private static final Pattern mJournalPattern = Pattern.compile("\\s*[`\"'\\[\\s]*\\s*(DELETE|TUNCATE|PERSIST|MEMORY|WAL|OFF)(.*)", 2);
+    private static final Pattern mNumberPattern =
+            Pattern.compile("\\s*[`\"'\\[\\s]*\\s*(\\+|-)?\\s*(0x)?([0-9a-f]+)(.*)", 2);
+    private static final Pattern mJournalPattern =
+            Pattern.compile("\\s*[`\"'\\[\\s]*\\s*(DELETE|TUNCATE|PERSIST|MEMORY|WAL|OFF)(.*)", 2);
 
     private SQLitePragma(SQLiteDatabase db, String sql) {
         this.mDatabase = db;
         this.mSql = sql;
     }
 
-    public static void checkAndSetSpecialPragma(SQLiteDatabase db, String sql, CancellationSignal cancellationSignal) {
+    public static void checkAndSetSpecialPragma(
+            SQLiteDatabase db, String sql, CancellationSignal cancellationSignal) {
         if (cancellationSignal != null) {
             cancellationSignal.throwIfCanceled();
         }
@@ -108,7 +116,9 @@ public class SQLitePragma {
         try {
             int size = extractIntFromValue(value);
             if (size >= 0 && size < 10) {
-                Log.e(TAG, "Invalied cache size (under 10) '" + size + "', ignore sql : " + this.mSql);
+                Log.e(
+                        TAG,
+                        "Invalied cache size (under 10) '" + size + "', ignore sql : " + this.mSql);
             } else {
                 this.mDatabase.setCacheSize(size);
             }
@@ -134,7 +144,11 @@ public class SQLitePragma {
             Log.w(TAG, "failed to get journal_mode value from this sql : " + this.mSql, ex);
         }
         if (journalMode != null && journalMode.length() != 0) {
-            Log.i(TAG, "PRAGMA journal_mode = " + journalMode + " is executed, and it is not recommended");
+            Log.i(
+                    TAG,
+                    "PRAGMA journal_mode = "
+                            + journalMode
+                            + " is executed, and it is not recommended");
             if (!"wal".equalsIgnoreCase(journalMode)) {
                 try {
                     this.mDatabase.disableWriteAheadLogging();

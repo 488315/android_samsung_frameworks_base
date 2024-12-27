@@ -34,7 +34,7 @@ public final class Column {
             BLOB = data_type4;
             DATA_TYPE data_type5 = new DATA_TYPE("REAL", 4);
             REAL = data_type5;
-            $VALUES = new DATA_TYPE[]{data_type, data_type2, data_type3, data_type4, data_type5};
+            $VALUES = new DATA_TYPE[] {data_type, data_type2, data_type3, data_type4, data_type5};
         }
 
         public static DATA_TYPE valueOf(String str) {
@@ -47,12 +47,16 @@ public final class Column {
     }
 
     public final String getSQLDeclaration() {
-        String m = BootReceiver$$ExternalSyntheticOutline0.m(new StringBuilder(), this.mColumnName, " ", this.mColumnType.toString());
+        String m =
+                BootReceiver$$ExternalSyntheticOutline0.m(
+                        new StringBuilder(), this.mColumnName, " ", this.mColumnType.toString());
         String str = this.mProperties;
         if (str != null) {
             m = AnyMotionDetector$$ExternalSyntheticOutline0.m(m, " ", str);
         }
         String str2 = this.mDefaultValue;
-        return str2 != null ? AnyMotionDetector$$ExternalSyntheticOutline0.m(m, " DEFAULT ", str2) : m;
+        return str2 != null
+                ? AnyMotionDetector$$ExternalSyntheticOutline0.m(m, " DEFAULT ", str2)
+                : m;
     }
 }

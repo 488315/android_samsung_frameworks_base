@@ -6,7 +6,9 @@ import android.security.keystore2.AndroidKeyStoreLoadStoreParameter;
 import android.system.keystore2.KeyDescriptor;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import com.android.internal.util.ArrayUtils;
+
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -15,6 +17,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidParameterSpecException;
 import java.util.Arrays;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -41,8 +44,15 @@ abstract class SyntheticPasswordCrypto {
 
     public static byte[] decrypt(byte[] bArr, byte[] bArr2, byte[] bArr3) {
         try {
-            return decrypt(bArr3, new SecretKeySpec(Arrays.copyOf(personalizedHash(bArr2, bArr), 32), "AES"));
-        } catch (InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
+            return decrypt(
+                    bArr3,
+                    new SecretKeySpec(Arrays.copyOf(personalizedHash(bArr2, bArr), 32), "AES"));
+        } catch (InvalidAlgorithmParameterException
+                | InvalidKeyException
+                | NoSuchAlgorithmException
+                | BadPaddingException
+                | IllegalBlockSizeException
+                | NoSuchPaddingException e) {
             Slog.e("SyntheticPasswordCrypto", "Failed to decrypt", e);
             return null;
         }
@@ -57,19 +67,31 @@ abstract class SyntheticPasswordCrypto {
         byte[] doFinal = cipher.doFinal(bArr);
         byte[] iv = cipher.getIV();
         if (iv.length != 12) {
-            throw new IllegalArgumentException(AmFmBandRange$$ExternalSyntheticOutline0.m(iv.length, new StringBuilder("Invalid iv length: "), " bytes"));
+            throw new IllegalArgumentException(
+                    AmFmBandRange$$ExternalSyntheticOutline0.m(
+                            iv.length, new StringBuilder("Invalid iv length: "), " bytes"));
         }
-        GCMParameterSpec gCMParameterSpec = (GCMParameterSpec) cipher.getParameters().getParameterSpec(GCMParameterSpec.class);
+        GCMParameterSpec gCMParameterSpec =
+                (GCMParameterSpec) cipher.getParameters().getParameterSpec(GCMParameterSpec.class);
         if (gCMParameterSpec.getTLen() == 128) {
-            return ArrayUtils.concat(new byte[][]{iv, doFinal});
+            return ArrayUtils.concat(new byte[][] {iv, doFinal});
         }
-        throw new IllegalArgumentException("Invalid tag length: " + gCMParameterSpec.getTLen() + " bits");
+        throw new IllegalArgumentException(
+                "Invalid tag length: " + gCMParameterSpec.getTLen() + " bits");
     }
 
     public static byte[] encrypt(byte[] bArr, byte[] bArr2, byte[] bArr3) {
         try {
-            return encrypt(bArr3, new SecretKeySpec(Arrays.copyOf(personalizedHash(bArr2, bArr), 32), "AES"));
-        } catch (IOException | InvalidKeyException | NoSuchAlgorithmException | InvalidParameterSpecException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
+            return encrypt(
+                    bArr3,
+                    new SecretKeySpec(Arrays.copyOf(personalizedHash(bArr2, bArr), 32), "AES"));
+        } catch (IOException
+                | InvalidKeyException
+                | NoSuchAlgorithmException
+                | InvalidParameterSpecException
+                | BadPaddingException
+                | IllegalBlockSizeException
+                | NoSuchPaddingException e) {
             Slog.e("SyntheticPasswordCrypto", "Failed to encrypt", e);
             return null;
         }
@@ -91,7 +113,8 @@ abstract class SyntheticPasswordCrypto {
         keyDescriptor2.nspace = 103;
         keyDescriptor2.alias = str;
         Slog.i("SyntheticPasswordCrypto", "Migrating key " + str);
-        int migrateKeyNamespace = AndroidKeyStoreMaintenance.migrateKeyNamespace(keyDescriptor, keyDescriptor2);
+        int migrateKeyNamespace =
+                AndroidKeyStoreMaintenance.migrateKeyNamespace(keyDescriptor, keyDescriptor2);
         if (migrateKeyNamespace == 0) {
             return true;
         }
@@ -103,7 +126,11 @@ abstract class SyntheticPasswordCrypto {
             Slog.i("SyntheticPasswordCrypto", "Key already exists");
             return true;
         }
-        Slog.e("SyntheticPasswordCrypto", TextUtils.formatSimple("Failed to migrate key: %d", new Object[]{Integer.valueOf(migrateKeyNamespace)}));
+        Slog.e(
+                "SyntheticPasswordCrypto",
+                TextUtils.formatSimple(
+                        "Failed to migrate key: %d",
+                        new Object[] {Integer.valueOf(migrateKeyNamespace)}));
         return false;
     }
 

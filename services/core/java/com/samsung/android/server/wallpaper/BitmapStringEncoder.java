@@ -1,7 +1,9 @@
 package com.samsung.android.server.wallpaper;
 
 import android.graphics.Bitmap;
+
 import com.android.internal.util.FrameworkStatsLog;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -48,7 +50,13 @@ public abstract class BitmapStringEncoder {
         for (int i8 = 0; i8 < 60; i8 += 2) {
             int i9 = iArr3[i8];
             int i10 = iArr3[i8 + 1];
-            iArr4[i8 / 2] = ((i9 & FrameworkStatsLog.INTEGRITY_RULES_PUSHED) << 13) | ((i9 & 16252928) << 7) | ((i9 & 63488) << 10) | ((16252928 & i10) >> 8) | ((i10 & 63488) >> 5) | ((i10 & FrameworkStatsLog.INTEGRITY_RULES_PUSHED) >> 2);
+            iArr4[i8 / 2] =
+                    ((i9 & FrameworkStatsLog.INTEGRITY_RULES_PUSHED) << 13)
+                            | ((i9 & 16252928) << 7)
+                            | ((i9 & 63488) << 10)
+                            | ((16252928 & i10) >> 8)
+                            | ((i10 & 63488) >> 5)
+                            | ((i10 & FrameworkStatsLog.INTEGRITY_RULES_PUSHED) >> 2);
         }
         iArr4[length + 34] = i;
         if (i > 0) {

@@ -1,12 +1,12 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.Writer;
 import java.io.IOException;
 import java.util.Arrays;
 
 /* loaded from: classes3.dex */
 public final class UnknownFieldSetLite {
-    private static final UnknownFieldSetLite DEFAULT_INSTANCE = new UnknownFieldSetLite(0, new int[0], new Object[0], false);
+    private static final UnknownFieldSetLite DEFAULT_INSTANCE =
+            new UnknownFieldSetLite(0, new int[0], new Object[0], false);
     private static final int MIN_CAPACITY = 8;
     private int count;
     private boolean isMutable;
@@ -22,7 +22,8 @@ public final class UnknownFieldSetLite {
         return new UnknownFieldSetLite();
     }
 
-    static UnknownFieldSetLite mutableCopyOf(UnknownFieldSetLite first, UnknownFieldSetLite second) {
+    static UnknownFieldSetLite mutableCopyOf(
+            UnknownFieldSetLite first, UnknownFieldSetLite second) {
         int count = first.count + second.count;
         int[] tags = Arrays.copyOf(first.tags, count);
         System.arraycopy(second.tags, 0, tags, first.count, second.count);
@@ -160,7 +161,9 @@ public final class UnknownFieldSetLite {
         for (int i = 0; i < this.count; i++) {
             int tag = this.tags[i];
             int fieldNumber = WireFormat.getTagFieldNumber(tag);
-            size2 += CodedOutputStream.computeRawMessageSetExtensionSize(fieldNumber, (ByteString) this.objects[i]);
+            size2 +=
+                    CodedOutputStream.computeRawMessageSetExtensionSize(
+                            fieldNumber, (ByteString) this.objects[i]);
         }
         this.memoizedSerializedSize = size2;
         return size2;
@@ -178,22 +181,33 @@ public final class UnknownFieldSetLite {
             int fieldNumber = WireFormat.getTagFieldNumber(tag);
             switch (WireFormat.getTagWireType(tag)) {
                 case 0:
-                    computeUInt64Size = CodedOutputStream.computeUInt64Size(fieldNumber, ((Long) this.objects[i]).longValue());
+                    computeUInt64Size =
+                            CodedOutputStream.computeUInt64Size(
+                                    fieldNumber, ((Long) this.objects[i]).longValue());
                     break;
                 case 1:
-                    computeUInt64Size = CodedOutputStream.computeFixed64Size(fieldNumber, ((Long) this.objects[i]).longValue());
+                    computeUInt64Size =
+                            CodedOutputStream.computeFixed64Size(
+                                    fieldNumber, ((Long) this.objects[i]).longValue());
                     break;
                 case 2:
-                    computeUInt64Size = CodedOutputStream.computeBytesSize(fieldNumber, (ByteString) this.objects[i]);
+                    computeUInt64Size =
+                            CodedOutputStream.computeBytesSize(
+                                    fieldNumber, (ByteString) this.objects[i]);
                     break;
                 case 3:
-                    computeUInt64Size = (CodedOutputStream.computeTagSize(fieldNumber) * 2) + ((UnknownFieldSetLite) this.objects[i]).getSerializedSize();
+                    computeUInt64Size =
+                            (CodedOutputStream.computeTagSize(fieldNumber) * 2)
+                                    + ((UnknownFieldSetLite) this.objects[i]).getSerializedSize();
                     break;
                 case 4:
                 default:
-                    throw new IllegalStateException(InvalidProtocolBufferException.invalidWireType());
+                    throw new IllegalStateException(
+                            InvalidProtocolBufferException.invalidWireType());
                 case 5:
-                    computeUInt64Size = CodedOutputStream.computeFixed32Size(fieldNumber, ((Integer) this.objects[i]).intValue());
+                    computeUInt64Size =
+                            CodedOutputStream.computeFixed32Size(
+                                    fieldNumber, ((Integer) this.objects[i]).intValue());
                     break;
             }
             size2 += computeUInt64Size;
@@ -228,7 +242,9 @@ public final class UnknownFieldSetLite {
             return false;
         }
         UnknownFieldSetLite other = (UnknownFieldSetLite) obj;
-        if (this.count == other.count && tagsEquals(this.tags, other.tags, this.count) && objectsEquals(this.objects, other.objects, this.count)) {
+        if (this.count == other.count
+                && tagsEquals(this.tags, other.tags, this.count)
+                && objectsEquals(this.objects, other.objects, this.count)) {
             return true;
         }
         return false;
@@ -252,13 +268,15 @@ public final class UnknownFieldSetLite {
 
     public int hashCode() {
         int hashCode = (17 * 31) + this.count;
-        return (((hashCode * 31) + hashCode(this.tags, this.count)) * 31) + hashCode(this.objects, this.count);
+        return (((hashCode * 31) + hashCode(this.tags, this.count)) * 31)
+                + hashCode(this.objects, this.count);
     }
 
     final void printWithIndent(StringBuilder buffer, int indent) {
         for (int i = 0; i < this.count; i++) {
             int fieldNumber = WireFormat.getTagFieldNumber(this.tags[i]);
-            MessageLiteToString.printField(buffer, indent, String.valueOf(fieldNumber), this.objects[i]);
+            MessageLiteToString.printField(
+                    buffer, indent, String.valueOf(fieldNumber), this.objects[i]);
         }
     }
 

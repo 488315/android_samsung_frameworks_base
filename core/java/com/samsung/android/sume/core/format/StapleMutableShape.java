@@ -3,25 +3,30 @@ package com.samsung.android.sume.core.format;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Pair;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.types.ShapeType;
+
 import java.util.Arrays;
 
 /* loaded from: classes6.dex */
 class StapleMutableShape implements MutableShape {
-    public static final Parcelable.Creator<StapleMutableShape> CREATOR = new Parcelable.Creator<StapleMutableShape>() { // from class: com.samsung.android.sume.core.format.StapleMutableShape.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StapleMutableShape createFromParcel(Parcel in) {
-            return new StapleMutableShape(in);
-        }
+    public static final Parcelable.Creator<StapleMutableShape> CREATOR =
+            new Parcelable.Creator<
+                    StapleMutableShape>() { // from class:
+                                            // com.samsung.android.sume.core.format.StapleMutableShape.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StapleMutableShape createFromParcel(Parcel in) {
+                    return new StapleMutableShape(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StapleMutableShape[] newArray(int size) {
-            return new StapleMutableShape[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StapleMutableShape[] newArray(int size) {
+                    return new StapleMutableShape[size];
+                }
+            };
     private int batch;
     private int channels;
     private int cols;
@@ -170,9 +175,9 @@ class StapleMutableShape implements MutableShape {
     @Override // com.samsung.android.sume.core.format.Shape
     public int[] toArray(int type) {
         if (type == 2) {
-            return new int[]{this.batch, this.cols, this.rows, this.channels};
+            return new int[] {this.batch, this.cols, this.rows, this.channels};
         }
-        return new int[]{this.batch, this.rows, this.cols, this.channels};
+        return new int[] {this.batch, this.rows, this.cols, this.channels};
     }
 
     @Override // com.samsung.android.sume.core.format.MutableShape
@@ -190,7 +195,13 @@ class StapleMutableShape implements MutableShape {
     }
 
     public String toString() {
-        return Def.tagOf(this) + Def.fmtstr("batch/rows/cols/channels=[%d %d %d %d]", Integer.valueOf(this.batch), Integer.valueOf(this.rows), Integer.valueOf(this.cols), Integer.valueOf(this.channels));
+        return Def.tagOf(this)
+                + Def.fmtstr(
+                        "batch/rows/cols/channels=[%d %d %d %d]",
+                        Integer.valueOf(this.batch),
+                        Integer.valueOf(this.rows),
+                        Integer.valueOf(this.cols),
+                        Integer.valueOf(this.channels));
     }
 
     @Override // java.lang.Comparable

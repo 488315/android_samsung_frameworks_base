@@ -19,6 +19,11 @@ import android.os.ShellCommand;
 import android.security.rkp.service.RegistrationProxy;
 import android.security.rkp.service.RemotelyProvisionedKey;
 import android.util.IndentingPrintWriter;
+
+import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
+import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
+import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
+
 import co.nstant.in.cbor.CborDecoder;
 import co.nstant.in.cbor.CborEncoder;
 import co.nstant.in.cbor.model.Array;
@@ -26,9 +31,7 @@ import co.nstant.in.cbor.model.ByteString;
 import co.nstant.in.cbor.model.Map;
 import co.nstant.in.cbor.model.SimpleValue;
 import co.nstant.in.cbor.model.UnsignedInteger;
-import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
-import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
-import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
@@ -62,18 +65,22 @@ public final class RemoteProvisioningShellCommand extends ShellCommand {
                 iRemotelyProvisionedComponent = null;
             } else {
                 IInterface queryLocalInterface = waitForDeclaredService.queryLocalInterface(str2);
-                if (queryLocalInterface == null || !(queryLocalInterface instanceof IRemotelyProvisionedComponent)) {
-                    IRemotelyProvisionedComponent.Stub.Proxy proxy = new IRemotelyProvisionedComponent.Stub.Proxy();
+                if (queryLocalInterface == null
+                        || !(queryLocalInterface instanceof IRemotelyProvisionedComponent)) {
+                    IRemotelyProvisionedComponent.Stub.Proxy proxy =
+                            new IRemotelyProvisionedComponent.Stub.Proxy();
                     proxy.mRemote = waitForDeclaredService;
                     iRemotelyProvisionedComponent = proxy;
                 } else {
-                    iRemotelyProvisionedComponent = (IRemotelyProvisionedComponent) queryLocalInterface;
+                    iRemotelyProvisionedComponent =
+                            (IRemotelyProvisionedComponent) queryLocalInterface;
                 }
             }
             if (iRemotelyProvisionedComponent != null) {
                 return iRemotelyProvisionedComponent;
             }
-            throw new IllegalArgumentException(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("failed to find ", m));
+            throw new IllegalArgumentException(
+                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("failed to find ", m));
         }
     }
 
@@ -108,13 +115,25 @@ public final class RemoteProvisioningShellCommand extends ShellCommand {
         Context context = this.mContext;
         int i = this.mCallerUid;
         injector.getClass();
-        String m = BootReceiver$$ExternalSyntheticOutline0.m(new StringBuilder(), IRemotelyProvisionedComponent.DESCRIPTOR, "/", nextArgRequired);
+        String m =
+                BootReceiver$$ExternalSyntheticOutline0.m(
+                        new StringBuilder(),
+                        IRemotelyProvisionedComponent.DESCRIPTOR,
+                        "/",
+                        nextArgRequired);
         OutcomeFuture outcomeFuture2 = new OutcomeFuture();
         RegistrationProxy.createAsync(context, i, m, BIND_TIMEOUT, mainExecutor, outcomeFuture2);
-        ((RegistrationProxy) outcomeFuture2.mFuture.join()).getKeyAsync(452436, cancellationSignal, mainExecutor, outcomeFuture);
-        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(((RemotelyProvisionedKey) outcomeFuture.mFuture.join()).getEncodedCertChain());
+        ((RegistrationProxy) outcomeFuture2.mFuture.join())
+                .getKeyAsync(452436, cancellationSignal, mainExecutor, outcomeFuture);
+        ByteArrayInputStream byteArrayInputStream =
+                new ByteArrayInputStream(
+                        ((RemotelyProvisionedKey) outcomeFuture.mFuture.join())
+                                .getEncodedCertChain());
         PrintWriter outPrintWriter = getOutPrintWriter();
-        Iterator<? extends Certificate> it = CertificateFactory.getInstance("X.509").generateCertificates(byteArrayInputStream).iterator();
+        Iterator<? extends Certificate> it =
+                CertificateFactory.getInstance("X.509")
+                        .generateCertificates(byteArrayInputStream)
+                        .iterator();
         while (it.hasNext()) {
             String encodeToString = Base64.getEncoder().encodeToString(it.next().getEncoded());
             outPrintWriter.println("-----BEGIN CERTIFICATE-----");
@@ -134,7 +153,9 @@ public final class RemoteProvisioningShellCommand extends ShellCommand {
             if (nextOption == null) {
                 String nextArgRequired = getNextArgRequired();
                 this.mInjector.getClass();
-                IRemotelyProvisionedComponent.Stub.Proxy proxy = (IRemotelyProvisionedComponent.Stub.Proxy) Injector.getIrpcBinder(nextArgRequired);
+                IRemotelyProvisionedComponent.Stub.Proxy proxy =
+                        (IRemotelyProvisionedComponent.Stub.Proxy)
+                                Injector.getIrpcBinder(nextArgRequired);
                 RpcHardwareInfo hardwareInfo = proxy.getHardwareInfo();
                 MacedPublicKey[] macedPublicKeyArr = new MacedPublicKey[0];
                 int i = hardwareInfo.versionNumber;
@@ -143,12 +164,20 @@ public final class RemoteProvisioningShellCommand extends ShellCommand {
                     ProtectedData protectedData = new ProtectedData();
                     int i2 = hardwareInfo.supportedEekCurve;
                     if (i2 == 1) {
-                        decode = Base64.getDecoder().decode("goRDoQEmoFhNpQECAyYgASFYIPcUituX9MxT79JkEcTjdR9mH6RxDGzP+glGgHSHVPKtIlggXn9b9uzk9hnM/xM3/Q+hyJPbGAZ2xF3m12p3hsMtr49YQC+XjkL7vgctlUeFR5NAsB/Um0ekxESp8qEHhxDHn8sR9L+f6Dvg5zRMFfx7w34zBfTRNDztAgRgehXgedOK/ySEQ6EBJqBYcaYBAgJYIDVztz+gioCJsSZn6ct8daGvAmH8bmUDkTvTS30UlD5GAzgYIAEhWCDgQc8vDzQPHDMsQbDP1wwwVTXSHmpHE0su0UiWfiScaCJYIB/ORcX7YbqBIfnlBZubOQ52hoZHuB4vRfHOr9o/gGjbWECMs7p+ID4ysGjfYNEdffCsOI5RvP9s4Wc7Snm8Vnizmdh8igfY2rW1f3H02GvfMyc0e2XRKuuGmZirOrSAqr1Q");
+                        decode =
+                                Base64.getDecoder()
+                                        .decode(
+                                                "goRDoQEmoFhNpQECAyYgASFYIPcUituX9MxT79JkEcTjdR9mH6RxDGzP+glGgHSHVPKtIlggXn9b9uzk9hnM/xM3/Q+hyJPbGAZ2xF3m12p3hsMtr49YQC+XjkL7vgctlUeFR5NAsB/Um0ekxESp8qEHhxDHn8sR9L+f6Dvg5zRMFfx7w34zBfTRNDztAgRgehXgedOK/ySEQ6EBJqBYcaYBAgJYIDVztz+gioCJsSZn6ct8daGvAmH8bmUDkTvTS30UlD5GAzgYIAEhWCDgQc8vDzQPHDMsQbDP1wwwVTXSHmpHE0su0UiWfiScaCJYIB/ORcX7YbqBIfnlBZubOQ52hoZHuB4vRfHOr9o/gGjbWECMs7p+ID4ysGjfYNEdffCsOI5RvP9s4Wc7Snm8Vnizmdh8igfY2rW1f3H02GvfMyc0e2XRKuuGmZirOrSAqr1Q");
                     } else {
                         if (i2 != 2) {
-                            throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(i2, "unsupported EEK curve: "));
+                            throw new IllegalArgumentException(
+                                    VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                            i2, "unsupported EEK curve: "));
                         }
-                        decode = Base64.getDecoder().decode("goRDoQEnoFgqpAEBAycgBiFYIJm57t1e5FL2hcZMYtw+YatXSH11NymtdoAy0rPLY1jZWEAeIghLpLekyNdOAw7+uK8UTKc7b6XN3Np5xitk/pk5r3bngPpmAIUNB5gqrJFcpyUUSQY0dcqKJ3rZ41pJ6wIDhEOhASegWE6lAQECWCDQrsEVyirPc65rzMvRlh1l6LHd10oaN7lDOpfVmd+YCAM4GCAEIVggvoXnRsSjQlpA2TY6phXQLFh+PdwzAjLS/F4ehyVfcmBYQJvPkOIuS6vRGLEOjl0gJ0uEWP78MpB+cgWDvNeCvvpkeC1UEEvAMb9r6B414vAtzmwvT/L1T6XUg62WovGHWAQ=");
+                        decode =
+                                Base64.getDecoder()
+                                        .decode(
+                                                "goRDoQEnoFgqpAEBAycgBiFYIJm57t1e5FL2hcZMYtw+YatXSH11NymtdoAy0rPLY1jZWEAeIghLpLekyNdOAw7+uK8UTKc7b6XN3Np5xitk/pk5r3bngPpmAIUNB5gqrJFcpyUUSQY0dcqKJ3rZ41pJ6wIDhEOhASegWE6lAQECWCDQrsEVyirPc65rzMvRlh1l6LHd10oaN7lDOpfVmd+YCAM4GCAEIVggvoXnRsSjQlpA2TY6phXQLFh+PdwzAjLS/F4ehyVfcmBYQJvPkOIuS6vRGLEOjl0gJ0uEWP78MpB+cgWDvNeCvvpkeC1UEEvAMb9r6B414vAtzmwvT/L1T6XUg62WovGHWAQ=");
                     }
                     obtain = Parcel.obtain(proxy.mRemote);
                     obtain2 = Parcel.obtain();
@@ -159,7 +188,8 @@ public final class RemoteProvisioningShellCommand extends ShellCommand {
                         obtain.writeByteArray(decode);
                         obtain.writeByteArray(bArr);
                         if (!proxy.mRemote.transact(3, obtain, obtain2, 0)) {
-                            throw new RemoteException("Method generateCertificateRequest is unimplemented.");
+                            throw new RemoteException(
+                                    "Method generateCertificateRequest is unimplemented.");
                         }
                         obtain2.readException();
                         byte[] createByteArray = obtain2.createByteArray();
@@ -172,7 +202,9 @@ public final class RemoteProvisioningShellCommand extends ShellCommand {
                         obtain2.recycle();
                         obtain.recycle();
                         Array array = new Array();
-                        array.objects.add(new CborDecoder(new ByteArrayInputStream(deviceInfo.deviceInfo)).decodeNext());
+                        array.objects.add(
+                                new CborDecoder(new ByteArrayInputStream(deviceInfo.deviceInfo))
+                                        .decodeNext());
                         array.objects.add(new Map());
                         Array array2 = new Array();
                         Map map = new Map();
@@ -189,7 +221,11 @@ public final class RemoteProvisioningShellCommand extends ShellCommand {
                         Array array3 = new Array();
                         array3.objects.add(array);
                         array3.objects.add(new ByteString(bArr));
-                        array3.objects.add(new CborDecoder(new ByteArrayInputStream(protectedData.protectedData)).decodeNext());
+                        array3.objects.add(
+                                new CborDecoder(
+                                                new ByteArrayInputStream(
+                                                        protectedData.protectedData))
+                                        .decodeNext());
                         array3.objects.add(array2);
                         ByteArrayOutputStream byteArrayOutputStream2 = new ByteArrayOutputStream();
                         new CborEncoder(byteArrayOutputStream2).encode(array3);
@@ -199,7 +235,10 @@ public final class RemoteProvisioningShellCommand extends ShellCommand {
                     }
                 } else {
                     if (i != 3) {
-                        AccessibilityManagerService$$ExternalSyntheticOutline0.m(new StringBuilder("error: unsupported hwVersion: "), hardwareInfo.versionNumber, getErrPrintWriter());
+                        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("error: unsupported hwVersion: "),
+                                hardwareInfo.versionNumber,
+                                getErrPrintWriter());
                         return -1;
                     }
                     obtain = Parcel.obtain(proxy.mRemote);
@@ -209,7 +248,8 @@ public final class RemoteProvisioningShellCommand extends ShellCommand {
                         obtain.writeTypedArray(macedPublicKeyArr, 0);
                         obtain.writeByteArray(bArr);
                         if (!proxy.mRemote.transact(4, obtain, obtain2, 0)) {
-                            throw new RemoteException("Method generateCertificateRequestV2 is unimplemented.");
+                            throw new RemoteException(
+                                    "Method generateCertificateRequestV2 is unimplemented.");
                         }
                         obtain2.readException();
                         byteArray = obtain2.createByteArray();
@@ -233,7 +273,8 @@ public final class RemoteProvisioningShellCommand extends ShellCommand {
         try {
             IndentingPrintWriter indentingPrintWriter = new IndentingPrintWriter(printWriter);
             this.mInjector.getClass();
-            for (String str : ServiceManager.getDeclaredInstances(IRemotelyProvisionedComponent.DESCRIPTOR)) {
+            for (String str :
+                    ServiceManager.getDeclaredInstances(IRemotelyProvisionedComponent.DESCRIPTOR)) {
                 indentingPrintWriter.println(str + ":");
                 indentingPrintWriter.increaseIndent();
                 dumpRpcInstance(indentingPrintWriter, str);
@@ -246,14 +287,30 @@ public final class RemoteProvisioningShellCommand extends ShellCommand {
 
     public final void dumpRpcInstance(PrintWriter printWriter, String str) {
         this.mInjector.getClass();
-        RpcHardwareInfo hardwareInfo = ((IRemotelyProvisionedComponent.Stub.Proxy) Injector.getIrpcBinder(str)).getHardwareInfo();
-        BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("hwVersion="), hardwareInfo.versionNumber, printWriter, "rpcAuthorName="), hardwareInfo.rpcAuthorName, printWriter);
+        RpcHardwareInfo hardwareInfo =
+                ((IRemotelyProvisionedComponent.Stub.Proxy) Injector.getIrpcBinder(str))
+                        .getHardwareInfo();
+        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("hwVersion="),
+                        hardwareInfo.versionNumber,
+                        printWriter,
+                        "rpcAuthorName="),
+                hardwareInfo.rpcAuthorName,
+                printWriter);
         if (hardwareInfo.versionNumber < 3) {
-            AccessibilityManagerService$$ExternalSyntheticOutline0.m(new StringBuilder("supportedEekCurve="), hardwareInfo.supportedEekCurve, printWriter);
+            AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("supportedEekCurve="),
+                    hardwareInfo.supportedEekCurve,
+                    printWriter);
         }
-        BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("uniqueId="), hardwareInfo.uniqueId, printWriter);
+        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                new StringBuilder("uniqueId="), hardwareInfo.uniqueId, printWriter);
         if (hardwareInfo.versionNumber >= 3) {
-            AccessibilityManagerService$$ExternalSyntheticOutline0.m(new StringBuilder("supportedNumKeysInCsr="), hardwareInfo.supportedNumKeysInCsr, printWriter);
+            AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("supportedNumKeysInCsr="),
+                    hardwareInfo.supportedNumKeysInCsr,
+                    printWriter);
         }
     }
 
@@ -338,10 +395,29 @@ public final class RemoteProvisioningShellCommand extends ShellCommand {
             r7.printStackTrace(r6)
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.security.rkp.RemoteProvisioningShellCommand.onCommand(java.lang.String):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.security.rkp.RemoteProvisioningShellCommand.onCommand(java.lang.String):int");
     }
 
     public final void onHelp() {
-        getOutPrintWriter().print("usage: cmd remote_provisioning SUBCOMMAND [ARGS]\nhelp\n  Show this message.\ndump\n  Dump service diagnostics.\nlist\n  List the names of the IRemotelyProvisionedComponent instances.\ncsr [--challenge CHALLENGE] NAME\n  Generate and print a base64-encoded CSR from the named\n  IRemotelyProvisionedComponent. A base64-encoded challenge can be provided,\n  or else it defaults to an empty challenge.\ncertify NAME\n  Output the PEM-encoded certificate chain provisioned for the named\n  IRemotelyProvisionedComponent.\n");
+        getOutPrintWriter()
+                .print(
+                        "usage: cmd remote_provisioning SUBCOMMAND [ARGS]\n"
+                            + "help\n"
+                            + "  Show this message.\n"
+                            + "dump\n"
+                            + "  Dump service diagnostics.\n"
+                            + "list\n"
+                            + "  List the names of the IRemotelyProvisionedComponent instances.\n"
+                            + "csr [--challenge CHALLENGE] NAME\n"
+                            + "  Generate and print a base64-encoded CSR from the named\n"
+                            + "  IRemotelyProvisionedComponent. A base64-encoded challenge can be"
+                            + " provided,\n"
+                            + "  or else it defaults to an empty challenge.\n"
+                            + "certify NAME\n"
+                            + "  Output the PEM-encoded certificate chain provisioned for the"
+                            + " named\n"
+                            + "  IRemotelyProvisionedComponent.\n");
     }
 }

@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class ProxyInfoWrapper implements Parcelable {
-    public static final Parcelable.Creator<ProxyInfoWrapper> CREATOR = new Parcelable.Creator<ProxyInfoWrapper>() { // from class: android.net.ProxyInfoWrapper.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ProxyInfoWrapper createFromParcel(Parcel in) {
-            return new ProxyInfoWrapper(in);
-        }
+    public static final Parcelable.Creator<ProxyInfoWrapper> CREATOR =
+            new Parcelable.Creator<
+                    ProxyInfoWrapper>() { // from class: android.net.ProxyInfoWrapper.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ProxyInfoWrapper createFromParcel(Parcel in) {
+                    return new ProxyInfoWrapper(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ProxyInfoWrapper[] newArray(int size) {
-            return new ProxyInfoWrapper[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ProxyInfoWrapper[] newArray(int size) {
+                    return new ProxyInfoWrapper[size];
+                }
+            };
     private ProxyInfo mProxyInfo;
 
     public ProxyInfoWrapper(ProxyInfo proxyInfo) {

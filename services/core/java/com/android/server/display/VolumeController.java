@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,14 +14,15 @@ public final class VolumeController {
     public final WifiDisplayController mDisplayController;
     public final DlnaController mDlnaController;
     public final Handler mHandler;
-    public final Map mKeyMap = new HashMap() { // from class: com.android.server.display.VolumeController.1
-        {
-            put(-1, 12);
-            put(1, 13);
-            put(2, 14);
-            put(3, 15);
-        }
-    };
+    public final Map mKeyMap =
+            new HashMap() { // from class: com.android.server.display.VolumeController.1
+                {
+                    put(-1, 12);
+                    put(1, 13);
+                    put(2, 14);
+                    put(3, 15);
+                }
+            };
     public int mMaxVolume;
     public int mMinVolume;
     public boolean mMuted;
@@ -29,8 +31,7 @@ public final class VolumeController {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.display.VolumeController$3, reason: invalid class name */
     public final class AnonymousClass3 implements Runnable {
-        public AnonymousClass3() {
-        }
+        public AnonymousClass3() {}
 
         @Override // java.lang.Runnable
         public final void run() {
@@ -45,22 +46,39 @@ public final class VolumeController {
         }
     }
 
-    public VolumeController(Handler handler, WifiDisplayController wifiDisplayController, DlnaController dlnaController) {
+    public VolumeController(
+            Handler handler,
+            WifiDisplayController wifiDisplayController,
+            DlnaController dlnaController) {
         this.mHandler = handler;
         this.mDisplayController = wifiDisplayController;
         this.mDlnaController = dlnaController;
     }
 
     public final void setVolumeKeyEvent(int i) {
-        Log.d("VolumeController", "sendDeviceVolumeKeyEvent : ".concat(i == -1 ? "VOLUME_KEY_DOWN" : i == 1 ? "VOLUME_KEY_UP" : i == 2 ? "VOLUME_MUTE" : i == 3 ? "VOLUME_UNMUTE" : ""));
+        Log.d(
+                "VolumeController",
+                "sendDeviceVolumeKeyEvent : "
+                        .concat(
+                                i == -1
+                                        ? "VOLUME_KEY_DOWN"
+                                        : i == 1
+                                                ? "VOLUME_KEY_UP"
+                                                : i == 2
+                                                        ? "VOLUME_MUTE"
+                                                        : i == 3 ? "VOLUME_UNMUTE" : ""));
         if (i != 0 && this.mDlnaController.mDevice.isConnected()) {
-            final int intValue = ((Integer) ((HashMap) this.mKeyMap).getOrDefault(Integer.valueOf(i), 0)).intValue();
-            this.mHandler.post(new Runnable() { // from class: com.android.server.display.VolumeController.2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    VolumeController.this.mHandler.sendMessage(VolumeController.this.mHandler.obtainMessage(23, intValue, 0));
-                }
-            });
+            final int intValue =
+                    ((Integer) ((HashMap) this.mKeyMap).getOrDefault(Integer.valueOf(i), 0))
+                            .intValue();
+            this.mHandler.post(
+                    new Runnable() { // from class: com.android.server.display.VolumeController.2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            VolumeController.this.mHandler.sendMessage(
+                                    VolumeController.this.mHandler.obtainMessage(23, intValue, 0));
+                        }
+                    });
             return;
         }
         WifiDisplayController wifiDisplayController = this.mDisplayController;

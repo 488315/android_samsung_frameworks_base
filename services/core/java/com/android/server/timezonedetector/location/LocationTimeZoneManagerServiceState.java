@@ -1,6 +1,7 @@
 package com.android.server.timezonedetector.location;
 
 import com.android.server.timezonedetector.LocationAlgorithmEvent;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -37,6 +38,16 @@ public final class LocationTimeZoneManagerServiceState {
     }
 
     public final String toString() {
-        return "LocationTimeZoneManagerServiceState{mControllerState=" + this.mControllerState + ", mLastEvent=" + this.mLastEvent + ", mControllerStates=" + this.mControllerStates + ", mPrimaryProviderStates=" + this.mPrimaryProviderStates + ", mSecondaryProviderStates=" + this.mSecondaryProviderStates + '}';
+        return "LocationTimeZoneManagerServiceState{mControllerState="
+                + this.mControllerState
+                + ", mLastEvent="
+                + this.mLastEvent
+                + ", mControllerStates="
+                + this.mControllerStates
+                + ", mPrimaryProviderStates="
+                + this.mPrimaryProviderStates
+                + ", mSecondaryProviderStates="
+                + this.mSecondaryProviderStates
+                + '}';
     }
 }

@@ -8,6 +8,7 @@ import android.sec.enterprise.IEDMProxy;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Slog;
+
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
@@ -51,12 +52,14 @@ public class SntpClient {
     }
 
     public SntpClient() {
-        this(new Supplier() { // from class: android.net.SntpClient$$ExternalSyntheticLambda0
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                return Instant.now();
-            }
-        }, defaultRandom());
+        this(
+                new Supplier() { // from class: android.net.SntpClient$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Supplier
+                    public final Object get() {
+                        return Instant.now();
+                    }
+                },
+                defaultRandom());
     }
 
     public SntpClient(Supplier<Instant> systemTimeSupplier, Random random) {
@@ -103,16 +106,25 @@ public class SntpClient {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public boolean requestTime(java.net.InetAddress r40, int r41, int r42, android.net.Network r43) {
+    public boolean requestTime(
+            java.net.InetAddress r40, int r41, int r42, android.net.Network r43) {
         /*
             Method dump skipped, instructions count: 400
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.net.SntpClient.requestTime(java.net.InetAddress, int, int, android.net.Network):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.net.SntpClient.requestTime(java.net.InetAddress,"
+                    + " int, int, android.net.Network):boolean");
     }
 
-    public static Duration calculateClockOffset(Timestamp64 clientRequestTimestamp, Timestamp64 serverReceiveTimestamp, Timestamp64 serverTransmitTimestamp, Timestamp64 clientResponseTimestamp) {
-        return Duration64.between(clientRequestTimestamp, serverReceiveTimestamp).plus(Duration64.between(clientResponseTimestamp, serverTransmitTimestamp)).dividedBy(2L);
+    public static Duration calculateClockOffset(
+            Timestamp64 clientRequestTimestamp,
+            Timestamp64 serverReceiveTimestamp,
+            Timestamp64 serverTransmitTimestamp,
+            Timestamp64 clientResponseTimestamp) {
+        return Duration64.between(clientRequestTimestamp, serverReceiveTimestamp)
+                .plus(Duration64.between(clientResponseTimestamp, serverTransmitTimestamp))
+                .dividedBy(2L);
     }
 
     @Deprecated
@@ -141,7 +153,15 @@ public class SntpClient {
         return this.mServerSocketAddress;
     }
 
-    private static void checkValidServerReply(byte leap, byte mode, int stratum, Timestamp64 transmitTimestamp, Timestamp64 referenceTimestamp, Timestamp64 randomizedRequestTimestamp, Timestamp64 originateTimestamp) throws InvalidServerReplyException {
+    private static void checkValidServerReply(
+            byte leap,
+            byte mode,
+            int stratum,
+            Timestamp64 transmitTimestamp,
+            Timestamp64 referenceTimestamp,
+            Timestamp64 randomizedRequestTimestamp,
+            Timestamp64 originateTimestamp)
+            throws InvalidServerReplyException {
         if (leap == 3) {
             throw new InvalidServerReplyException("unsynchronized server");
         }
@@ -152,7 +172,8 @@ public class SntpClient {
             throw new InvalidServerReplyException("untrusted stratum: " + stratum);
         }
         if (!randomizedRequestTimestamp.equals(originateTimestamp)) {
-            throw new InvalidServerReplyException("originateTimestamp != randomizedRequestTimestamp");
+            throw new InvalidServerReplyException(
+                    "originateTimestamp != randomizedRequestTimestamp");
         }
         if (transmitTimestamp.equals(Timestamp64.ZERO)) {
             throw new InvalidServerReplyException("zero transmitTimestamp");

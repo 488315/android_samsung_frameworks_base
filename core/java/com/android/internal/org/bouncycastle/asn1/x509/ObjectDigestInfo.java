@@ -34,7 +34,11 @@ public class ObjectDigestInfo extends ASN1Object {
         return getInstance(ASN1Sequence.getInstance(obj, explicit));
     }
 
-    public ObjectDigestInfo(int digestedObjectType, ASN1ObjectIdentifier otherObjectTypeID, AlgorithmIdentifier digestAlgorithm, byte[] objectDigest) {
+    public ObjectDigestInfo(
+            int digestedObjectType,
+            ASN1ObjectIdentifier otherObjectTypeID,
+            AlgorithmIdentifier digestAlgorithm,
+            byte[] objectDigest) {
         this.digestedObjectType = new ASN1Enumerated(digestedObjectType);
         if (digestedObjectType == 2) {
             this.otherObjectTypeID = otherObjectTypeID;
@@ -73,7 +77,8 @@ public class ObjectDigestInfo extends ASN1Object {
         return this.objectDigest;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(4);
         v.add(this.digestedObjectType);

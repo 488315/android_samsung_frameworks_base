@@ -1,14 +1,17 @@
 package com.android.server.knox.zt.devicetrust.data;
 
 import android.os.Bundle;
+
 import com.android.server.DirEncryptServiceHelper$$ExternalSyntheticOutline0;
 import com.android.server.SystemServiceManager$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -18,7 +21,8 @@ public final class SchedProcessForkData extends TracepointData {
     public final String parentComm;
     public final int parentPid;
 
-    public SchedProcessForkData(int i, long j, long j2, long j3, String str, String str2, int i2, String str3, int i3) {
+    public SchedProcessForkData(
+            int i, long j, long j2, long j3, String str, String str2, int i2, String str3, int i3) {
         super(i, j, j2, j3, str);
         this.parentComm = str2;
         this.parentPid = i2;
@@ -74,9 +78,12 @@ public final class SchedProcessForkData extends TracepointData {
         String str3 = this.childComm;
         int i4 = this.childPid;
         String readExtras = readExtras(true);
-        StringBuilder m = SystemServiceManager$$ExternalSyntheticOutline0.m(i, "when : ", j, " | what : ");
-        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(pid, i2, " | pid : ", " | uid : ", m);
-        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(m, " | comm : ", str, " | parent_comm : ", str2);
+        StringBuilder m =
+                SystemServiceManager$$ExternalSyntheticOutline0.m(i, "when : ", j, " | what : ");
+        AbstractAccessibilityServiceConnection$$ExternalSyntheticOutline0.m(
+                pid, i2, " | pid : ", " | uid : ", m);
+        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                m, " | comm : ", str, " | parent_comm : ", str2);
         m.append(" | parent_pid : ");
         m.append(i3);
         m.append(" | child_comm : ");

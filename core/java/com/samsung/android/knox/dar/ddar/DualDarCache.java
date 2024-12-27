@@ -3,6 +3,7 @@ package com.samsung.android.knox.dar.ddar;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+
 import com.samsung.android.knox.dar.ddar.proxy.KnoxProxyManager;
 
 /* loaded from: classes6.dex */
@@ -45,7 +46,10 @@ public class DualDarCache {
         bundle.putInt(DUAL_DAR_USER_ID, userId);
         bundle.putString(DUAL_DAR_KEY, key);
         bundle.putString(DUAL_DAR_VALUE, value);
-        Bundle resp = KnoxProxyManager.getInstance(this.mContext).relayMessage("SYSTEM_PROXY_AGENT", "DDAR_CACHE_SERVICE", SET_DATA_CMD, bundle);
+        Bundle resp =
+                KnoxProxyManager.getInstance(this.mContext)
+                        .relayMessage(
+                                "SYSTEM_PROXY_AGENT", "DDAR_CACHE_SERVICE", SET_DATA_CMD, bundle);
         if (resp != null && !resp.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE)) {
             Log.e(TAG, "Error: getData : failed");
         }
@@ -55,7 +59,10 @@ public class DualDarCache {
         Bundle bundle = new Bundle();
         bundle.putInt(DUAL_DAR_USER_ID, userId);
         bundle.putString(DUAL_DAR_KEY, key);
-        Bundle resp = KnoxProxyManager.getInstance(this.mContext).relayMessage("SYSTEM_PROXY_AGENT", "DDAR_CACHE_SERVICE", GET_DATA_CMD, bundle);
+        Bundle resp =
+                KnoxProxyManager.getInstance(this.mContext)
+                        .relayMessage(
+                                "SYSTEM_PROXY_AGENT", "DDAR_CACHE_SERVICE", GET_DATA_CMD, bundle);
         if (resp == null || !resp.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE)) {
             Log.e(TAG, "Error: getData : failed");
             return null;
@@ -67,7 +74,13 @@ public class DualDarCache {
         Bundle bundle = new Bundle();
         bundle.putInt(DUAL_DAR_USER_ID, userId);
         bundle.putString(DUAL_DAR_KEY, key);
-        Bundle resp = KnoxProxyManager.getInstance(this.mContext).relayMessage("SYSTEM_PROXY_AGENT", "DDAR_CACHE_SERVICE", DELETE_DATA_CMD, bundle);
+        Bundle resp =
+                KnoxProxyManager.getInstance(this.mContext)
+                        .relayMessage(
+                                "SYSTEM_PROXY_AGENT",
+                                "DDAR_CACHE_SERVICE",
+                                DELETE_DATA_CMD,
+                                bundle);
         if (resp != null && !resp.getBoolean(DualDarConstants.DUAL_DAR_RESPONSE)) {
             Log.e(TAG, "Error: deleteData : failed");
         }

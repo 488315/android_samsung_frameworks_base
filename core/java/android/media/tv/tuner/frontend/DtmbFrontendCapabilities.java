@@ -12,7 +12,13 @@ public final class DtmbFrontendCapabilities extends FrontendCapabilities {
     private final int mTimeInterleaveModeCap;
     private final int mTransmissionModeCap;
 
-    private DtmbFrontendCapabilities(int modulationCap, int transmissionModeCap, int guardIntervalCap, int timeInterleaveModeCap, int codeRateCap, int bandwidthCap) {
+    private DtmbFrontendCapabilities(
+            int modulationCap,
+            int transmissionModeCap,
+            int guardIntervalCap,
+            int timeInterleaveModeCap,
+            int codeRateCap,
+            int bandwidthCap) {
         this.mModulationCap = modulationCap;
         this.mTransmissionModeCap = transmissionModeCap;
         this.mGuardIntervalCap = guardIntervalCap;

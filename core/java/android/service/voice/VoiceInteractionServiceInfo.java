@@ -12,9 +12,12 @@ import android.os.RemoteException;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;
+
 import com.android.internal.R;
-import java.io.IOException;
+
 import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 
 /* loaded from: classes3.dex */
 public class VoiceInteractionServiceInfo {
@@ -30,13 +33,16 @@ public class VoiceInteractionServiceInfo {
     private boolean mSupportsLocalInteraction;
     private String mVisualQueryDetectionService;
 
-    public VoiceInteractionServiceInfo(PackageManager pm, ComponentName comp, int userHandle) throws PackageManager.NameNotFoundException {
+    public VoiceInteractionServiceInfo(PackageManager pm, ComponentName comp, int userHandle)
+            throws PackageManager.NameNotFoundException {
         this(pm, getServiceInfoOrThrow(comp, userHandle));
     }
 
-    private static ServiceInfo getServiceInfoOrThrow(ComponentName comp, int userHandle) throws PackageManager.NameNotFoundException {
+    private static ServiceInfo getServiceInfoOrThrow(ComponentName comp, int userHandle)
+            throws PackageManager.NameNotFoundException {
         try {
-            ServiceInfo si = AppGlobals.getPackageManager().getServiceInfo(comp, 786560L, userHandle);
+            ServiceInfo si =
+                    AppGlobals.getPackageManager().getServiceInfo(comp, 786560L, userHandle);
             if (si != null) {
                 return si;
             }
@@ -48,14 +54,17 @@ public class VoiceInteractionServiceInfo {
     public VoiceInteractionServiceInfo(PackageManager pm, ServiceInfo si) {
         int type;
         if (!Manifest.permission.BIND_VOICE_INTERACTION.equals(si.permission)) {
-            this.mParseError = "Service does not require permission android.permission.BIND_VOICE_INTERACTION";
+            this.mParseError =
+                    "Service does not require permission android.permission.BIND_VOICE_INTERACTION";
             return;
         }
         try {
-            XmlResourceParser parser = si.loadXmlMetaData(pm, VoiceInteractionService.SERVICE_META_DATA);
+            XmlResourceParser parser =
+                    si.loadXmlMetaData(pm, VoiceInteractionService.SERVICE_META_DATA);
             try {
                 if (parser == null) {
-                    this.mParseError = "No android.voice_interaction meta-data for " + si.packageName;
+                    this.mParseError =
+                            "No android.voice_interaction meta-data for " + si.packageName;
                     if (parser != null) {
                         parser.close();
                         return;
@@ -72,7 +81,8 @@ public class VoiceInteractionServiceInfo {
                 } while (type != 2);
                 String nodeName = parser.getName();
                 if (!"voice-interaction-service".equals(nodeName)) {
-                    this.mParseError = "Meta-data does not start with voice-interaction-service tag";
+                    this.mParseError =
+                            "Meta-data does not start with voice-interaction-service tag";
                     if (parser != null) {
                         parser.close();
                         return;

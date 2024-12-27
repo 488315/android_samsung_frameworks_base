@@ -4,7 +4,13 @@ import com.google.android.mms.InvalidHeaderValueException;
 
 /* loaded from: classes5.dex */
 public class ReadRecInd extends GenericPdu {
-    public ReadRecInd(EncodedStringValue from, byte[] messageId, int mmsVersion, int readStatus, EncodedStringValue[] to) throws InvalidHeaderValueException {
+    public ReadRecInd(
+            EncodedStringValue from,
+            byte[] messageId,
+            int mmsVersion,
+            int readStatus,
+            EncodedStringValue[] to)
+            throws InvalidHeaderValueException {
         setMessageType(135);
         setFrom(from);
         setMessageId(messageId);

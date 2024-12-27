@@ -10,7 +10,9 @@ import android.system.OsConstants;
 import android.system.StructPollfd;
 import android.util.Log;
 import android.util.Slog;
+
 import dalvik.system.ZygoteHooks;
+
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.FileDescriptor;
@@ -70,11 +72,16 @@ class ZygoteServer {
         this.mLastPropCheckTimestamp = 0L;
         this.mUsapPoolEventFD = Zygote.getUsapPoolEventFD();
         if (isPrimaryZygote) {
-            this.mZygoteSocket = Zygote.createManagedSocketFromInitSocket(Zygote.PRIMARY_SOCKET_NAME);
-            this.mUsapPoolSocket = Zygote.createManagedSocketFromInitSocket(Zygote.USAP_POOL_PRIMARY_SOCKET_NAME);
+            this.mZygoteSocket =
+                    Zygote.createManagedSocketFromInitSocket(Zygote.PRIMARY_SOCKET_NAME);
+            this.mUsapPoolSocket =
+                    Zygote.createManagedSocketFromInitSocket(Zygote.USAP_POOL_PRIMARY_SOCKET_NAME);
         } else {
-            this.mZygoteSocket = Zygote.createManagedSocketFromInitSocket(Zygote.SECONDARY_SOCKET_NAME);
-            this.mUsapPoolSocket = Zygote.createManagedSocketFromInitSocket(Zygote.USAP_POOL_SECONDARY_SOCKET_NAME);
+            this.mZygoteSocket =
+                    Zygote.createManagedSocketFromInitSocket(Zygote.SECONDARY_SOCKET_NAME);
+            this.mUsapPoolSocket =
+                    Zygote.createManagedSocketFromInitSocket(
+                            Zygote.USAP_POOL_SECONDARY_SOCKET_NAME);
         }
         this.mUsapPoolSupported = true;
         fetchUsapPoolPolicyProps();
@@ -94,7 +101,8 @@ class ZygoteServer {
                 this.mZygoteSocket = new LocalServerSocket(socketName);
                 this.mCloseSocketFd = false;
             } catch (IOException ex) {
-                throw new RuntimeException("Error binding to abstract socket '" + socketName + "'", ex);
+                throw new RuntimeException(
+                        "Error binding to abstract socket '" + socketName + "'", ex);
             }
         }
     }
@@ -107,7 +115,8 @@ class ZygoteServer {
         }
     }
 
-    protected ZygoteConnection createNewConnection(LocalSocket socket, String abiList) throws IOException {
+    protected ZygoteConnection createNewConnection(LocalSocket socket, String abiList)
+            throws IOException {
         return new ZygoteConnection(socket, abiList);
     }
 
@@ -134,12 +143,21 @@ class ZygoteServer {
 
     private void fetchUsapPoolPolicyProps() {
         if (this.mUsapPoolSupported) {
-            this.mUsapPoolSizeMax = Integer.min(ZygoteConfig.getInt(ZygoteConfig.USAP_POOL_SIZE_MAX, 3), 100);
-            this.mUsapPoolSizeMin = Integer.max(ZygoteConfig.getInt(ZygoteConfig.USAP_POOL_SIZE_MIN, 1), 1);
-            this.mUsapPoolRefillThreshold = Integer.min(ZygoteConfig.getInt(ZygoteConfig.USAP_POOL_REFILL_THRESHOLD, 1), this.mUsapPoolSizeMax);
-            this.mUsapPoolRefillDelayMs = ZygoteConfig.getInt(ZygoteConfig.USAP_POOL_REFILL_DELAY_MS, 3000);
+            this.mUsapPoolSizeMax =
+                    Integer.min(ZygoteConfig.getInt(ZygoteConfig.USAP_POOL_SIZE_MAX, 3), 100);
+            this.mUsapPoolSizeMin =
+                    Integer.max(ZygoteConfig.getInt(ZygoteConfig.USAP_POOL_SIZE_MIN, 1), 1);
+            this.mUsapPoolRefillThreshold =
+                    Integer.min(
+                            ZygoteConfig.getInt(ZygoteConfig.USAP_POOL_REFILL_THRESHOLD, 1),
+                            this.mUsapPoolSizeMax);
+            this.mUsapPoolRefillDelayMs =
+                    ZygoteConfig.getInt(ZygoteConfig.USAP_POOL_REFILL_DELAY_MS, 3000);
             if (this.mUsapPoolSizeMin >= this.mUsapPoolSizeMax) {
-                Log.w(TAG, "The max size of the USAP pool must be greater than the minimum size.  Restoring default values.");
+                Log.w(
+                        TAG,
+                        "The max size of the USAP pool must be greater than the minimum size. "
+                            + " Restoring default values.");
                 this.mUsapPoolSizeMax = 3;
                 this.mUsapPoolSizeMin = 1;
                 this.mUsapPoolRefillThreshold = this.mUsapPoolSizeMax / 2;
@@ -149,7 +167,8 @@ class ZygoteServer {
 
     private void fetchUsapPoolPolicyPropsWithMinInterval() {
         long currentTimestamp = SystemClock.elapsedRealtime();
-        if (this.mIsFirstPropertyCheck || currentTimestamp - this.mLastPropCheckTimestamp >= 60000) {
+        if (this.mIsFirstPropertyCheck
+                || currentTimestamp - this.mLastPropCheckTimestamp >= 60000) {
             this.mIsFirstPropertyCheck = false;
             this.mLastPropCheckTimestamp = currentTimestamp;
             fetchUsapPoolPolicyProps();
@@ -171,16 +190,22 @@ class ZygoteServer {
         int usapPoolCount = Zygote.getUsapPoolCount();
         if (isPriorityRefill) {
             numUsapsToSpawn = this.mUsapPoolSizeMin - usapPoolCount;
-            Log.i(Zygote.PRIMARY_SOCKET_NAME, "Priority USAP Pool refill. New USAPs: " + numUsapsToSpawn);
+            Log.i(
+                    Zygote.PRIMARY_SOCKET_NAME,
+                    "Priority USAP Pool refill. New USAPs: " + numUsapsToSpawn);
         } else {
             numUsapsToSpawn = this.mUsapPoolSizeMax - usapPoolCount;
-            Log.i(Zygote.PRIMARY_SOCKET_NAME, "Delayed USAP Pool refill. New USAPs: " + numUsapsToSpawn);
+            Log.i(
+                    Zygote.PRIMARY_SOCKET_NAME,
+                    "Delayed USAP Pool refill. New USAPs: " + numUsapsToSpawn);
         }
         ZygoteHooks.preFork();
         do {
             numUsapsToSpawn--;
             if (numUsapsToSpawn >= 0) {
-                caller = Zygote.forkUsap(this.mUsapPoolSocket, sessionSocketRawFDs, isPriorityRefill);
+                caller =
+                        Zygote.forkUsap(
+                                this.mUsapPoolSocket, sessionSocketRawFDs, isPriorityRefill);
             } else {
                 ZygoteHooks.postForkCommon();
                 resetUsapRefillState();
@@ -202,7 +227,7 @@ class ZygoteServer {
         Log.i(TAG, "USAP Pool status change: " + (newStatus ? "ENABLED" : "DISABLED"));
         this.mUsapPoolEnabled = newStatus;
         if (newStatus) {
-            return fillUsapPool(new int[]{sessionSocket.getFileDescriptor().getInt$()}, false);
+            return fillUsapPool(new int[] {sessionSocket.getFileDescriptor().getInt$()}, false);
         }
         Zygote.emptyUsapPool();
         return null;
@@ -269,7 +294,8 @@ class ZygoteServer {
             if (this.mUsapPoolRefillTriggerTimestamp == j) {
                 pollTimeoutMs = -1;
             } else {
-                long elapsedTimeMs = System.currentTimeMillis() - this.mUsapPoolRefillTriggerTimestamp;
+                long elapsedTimeMs =
+                        System.currentTimeMillis() - this.mUsapPoolRefillTriggerTimestamp;
                 if (elapsedTimeMs >= this.mUsapPoolRefillDelayMs) {
                     this.mUsapPoolRefillTriggerTimestamp = j;
                     this.mUsapPoolRefillAction = UsapPoolRefillAction.DELAYED;
@@ -302,11 +328,20 @@ class ZygoteServer {
                                     try {
                                         try {
                                             connection = peers.get(pollIndex6);
-                                            boolean multipleForksOK = !isUsapPoolEnabled() && ZygoteHooks.isIndefiniteThreadSuspensionSafe();
-                                            command = connection.processCommand(this, multipleForksOK);
+                                            boolean multipleForksOK =
+                                                    !isUsapPoolEnabled()
+                                                            && ZygoteHooks
+                                                                    .isIndefiniteThreadSuspensionSafe();
+                                            command =
+                                                    connection.processCommand(
+                                                            this, multipleForksOK);
                                         } catch (Exception e) {
                                             if (this.mIsForkChild) {
-                                                Log.e(TAG, "Caught post-fork exception in child process.", e);
+                                                Log.e(
+                                                        TAG,
+                                                        "Caught post-fork exception in child"
+                                                            + " process.",
+                                                        e);
                                                 throw e;
                                             }
                                             Slog.e(TAG, "Exception executing zygote command: ", e);
@@ -334,16 +369,29 @@ class ZygoteServer {
                                 } else {
                                     try {
                                         buffer = new byte[8];
-                                        readBytes = Os.read(pollFDs[pollIndex6].fd, buffer, 0, buffer.length);
+                                        readBytes =
+                                                Os.read(
+                                                        pollFDs[pollIndex6].fd,
+                                                        buffer,
+                                                        0,
+                                                        buffer.length);
                                     } catch (Exception ex) {
                                         if (pollIndex6 == usapPoolEventFDIndex) {
-                                            Log.e(TAG, "Failed to read from USAP pool event FD: " + ex.getMessage());
+                                            Log.e(
+                                                    TAG,
+                                                    "Failed to read from USAP pool event FD: "
+                                                            + ex.getMessage());
                                         } else {
-                                            Log.e(TAG, "Failed to read from USAP reporting pipe: " + ex.getMessage());
+                                            Log.e(
+                                                    TAG,
+                                                    "Failed to read from USAP reporting pipe: "
+                                                            + ex.getMessage());
                                         }
                                     }
                                     if (readBytes == 8) {
-                                        DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(buffer));
+                                        DataInputStream inputStream =
+                                                new DataInputStream(
+                                                        new ByteArrayInputStream(buffer));
                                         long messagePayload = inputStream.readLong();
                                         if (pollIndex6 > usapPoolEventFDIndex) {
                                             Zygote.removeUsapTableEntry((int) messagePayload);
@@ -351,7 +399,10 @@ class ZygoteServer {
                                         pollIndex4 = 1;
                                         pollIndex5 = pollIndex6;
                                     } else {
-                                        Log.e(TAG, "Incomplete read from USAP management FD of size " + readBytes);
+                                        Log.e(
+                                                TAG,
+                                                "Incomplete read from USAP management FD of size "
+                                                        + readBytes);
                                     }
                                 }
                             }
@@ -360,20 +411,27 @@ class ZygoteServer {
                             int usapPoolCount = Zygote.getUsapPoolCount();
                             if (usapPoolCount < this.mUsapPoolSizeMin) {
                                 this.mUsapPoolRefillAction = UsapPoolRefillAction.IMMEDIATE;
-                            } else if (this.mUsapPoolSizeMax - usapPoolCount >= this.mUsapPoolRefillThreshold) {
+                            } else if (this.mUsapPoolSizeMax - usapPoolCount
+                                    >= this.mUsapPoolRefillThreshold) {
                                 this.mUsapPoolRefillTriggerTimestamp = System.currentTimeMillis();
                             }
                         }
                     }
                 }
                 if (this.mUsapPoolRefillAction != UsapPoolRefillAction.NONE) {
-                    int[] sessionSocketRawFDs = socketFDs.subList(1, socketFDs.size()).stream().mapToInt(new ToIntFunction() { // from class: com.android.internal.os.ZygoteServer$$ExternalSyntheticLambda0
-                        @Override // java.util.function.ToIntFunction
-                        public final int applyAsInt(Object obj) {
-                            return ((FileDescriptor) obj).getInt$();
-                        }
-                    }).toArray();
-                    boolean isPriorityRefill = this.mUsapPoolRefillAction == UsapPoolRefillAction.IMMEDIATE;
+                    int[] sessionSocketRawFDs =
+                            socketFDs.subList(1, socketFDs.size()).stream()
+                                    .mapToInt(
+                                            new ToIntFunction() { // from class:
+                                                                  // com.android.internal.os.ZygoteServer$$ExternalSyntheticLambda0
+                                                @Override // java.util.function.ToIntFunction
+                                                public final int applyAsInt(Object obj) {
+                                                    return ((FileDescriptor) obj).getInt$();
+                                                }
+                                            })
+                                    .toArray();
+                    boolean isPriorityRefill =
+                            this.mUsapPoolRefillAction == UsapPoolRefillAction.IMMEDIATE;
                     Runnable command2 = fillUsapPool(sessionSocketRawFDs, isPriorityRefill);
                     if (command2 != null) {
                         return command2;

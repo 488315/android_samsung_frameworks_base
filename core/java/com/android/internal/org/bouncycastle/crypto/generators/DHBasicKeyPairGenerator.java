@@ -8,6 +8,7 @@ import com.android.internal.org.bouncycastle.crypto.params.DHKeyGenerationParame
 import com.android.internal.org.bouncycastle.crypto.params.DHParameters;
 import com.android.internal.org.bouncycastle.crypto.params.DHPrivateKeyParameters;
 import com.android.internal.org.bouncycastle.crypto.params.DHPublicKeyParameters;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
@@ -25,6 +26,8 @@ public class DHBasicKeyPairGenerator implements AsymmetricCipherKeyPairGenerator
         DHParameters dhp = this.param.getParameters();
         BigInteger x = helper.calculatePrivate(dhp, this.param.getRandom());
         BigInteger y = helper.calculatePublic(dhp, x);
-        return new AsymmetricCipherKeyPair((AsymmetricKeyParameter) new DHPublicKeyParameters(y, dhp), (AsymmetricKeyParameter) new DHPrivateKeyParameters(x, dhp));
+        return new AsymmetricCipherKeyPair(
+                (AsymmetricKeyParameter) new DHPublicKeyParameters(y, dhp),
+                (AsymmetricKeyParameter) new DHPrivateKeyParameters(x, dhp));
     }
 }

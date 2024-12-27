@@ -14,7 +14,8 @@ import android.widget.RemoteViews;
 
 @RemoteViews.RemoteView
 /* loaded from: classes5.dex */
-public class TextProgressBar extends RelativeLayout implements Chronometer.OnChronometerTickListener {
+public class TextProgressBar extends RelativeLayout
+        implements Chronometer.OnChronometerTickListener {
     static final int CHRONOMETER_ID = 16908308;
     static final int PROGRESSBAR_ID = 16908301;
     public static final String TAG = "TextProgressBar";
@@ -73,7 +74,8 @@ public class TextProgressBar extends RelativeLayout implements Chronometer.OnChr
             this.mChronometer = (Chronometer) child;
             this.mChronometer.setOnChronometerTickListener(this);
             this.mChronometerFollow = params.width == -2;
-            this.mChronometerGravity = this.mChronometer.getGravity() & Gravity.RELATIVE_HORIZONTAL_GRAVITY_MASK;
+            this.mChronometerGravity =
+                    this.mChronometer.getGravity() & Gravity.RELATIVE_HORIZONTAL_GRAVITY_MASK;
             return;
         }
         if (childId == 16908301 && (child instanceof ProgressBar)) {
@@ -85,7 +87,9 @@ public class TextProgressBar extends RelativeLayout implements Chronometer.OnChr
     public void setDurationBase(long durationBase) {
         this.mDurationBase = durationBase;
         if (this.mProgressBar == null || this.mChronometer == null) {
-            throw new RuntimeException("Expecting child ProgressBar with id 'android.R.id.progress' and Chronometer id 'android.R.id.text1'");
+            throw new RuntimeException(
+                    "Expecting child ProgressBar with id 'android.R.id.progress' and Chronometer id"
+                        + " 'android.R.id.text1'");
         }
         this.mDuration = (int) (durationBase - this.mChronometer.getBase());
         if (this.mDuration <= 0) {
@@ -97,7 +101,8 @@ public class TextProgressBar extends RelativeLayout implements Chronometer.OnChr
     @Override // android.widget.Chronometer.OnChronometerTickListener
     public void onChronometerTick(Chronometer chronometer) {
         if (this.mProgressBar == null) {
-            throw new RuntimeException("Expecting child ProgressBar with id 'android.R.id.progress'");
+            throw new RuntimeException(
+                    "Expecting child ProgressBar with id 'android.R.id.progress'");
         }
         long now = SystemClock.elapsedRealtime();
         if (now >= this.mDurationBase) {
@@ -106,9 +111,13 @@ public class TextProgressBar extends RelativeLayout implements Chronometer.OnChr
         int remaining = (int) (this.mDurationBase - now);
         this.mProgressBar.setProgress(this.mDuration - remaining);
         if (this.mChronometerFollow) {
-            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) this.mProgressBar.getLayoutParams();
-            int contentWidth = this.mProgressBar.getWidth() - (params.leftMargin + params.rightMargin);
-            int leadingEdge = ((this.mProgressBar.getProgress() * contentWidth) / this.mProgressBar.getMax()) + params.leftMargin;
+            RelativeLayout.LayoutParams params =
+                    (RelativeLayout.LayoutParams) this.mProgressBar.getLayoutParams();
+            int contentWidth =
+                    this.mProgressBar.getWidth() - (params.leftMargin + params.rightMargin);
+            int leadingEdge =
+                    ((this.mProgressBar.getProgress() * contentWidth) / this.mProgressBar.getMax())
+                            + params.leftMargin;
             int adjustLeft = 0;
             int textWidth = this.mChronometer.getWidth();
             if (this.mChronometerGravity == 8388613) {
@@ -123,7 +132,8 @@ public class TextProgressBar extends RelativeLayout implements Chronometer.OnChr
             } else if (leadingEdge2 > rightLimit) {
                 leadingEdge2 = rightLimit;
             }
-            ((RelativeLayout.LayoutParams) this.mChronometer.getLayoutParams()).leftMargin = leadingEdge2;
+            ((RelativeLayout.LayoutParams) this.mChronometer.getLayoutParams()).leftMargin =
+                    leadingEdge2;
             this.mChronometer.requestLayout();
         }
     }

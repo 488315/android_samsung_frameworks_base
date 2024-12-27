@@ -3,9 +3,6 @@ package android.media;
 import android.app.ActivityThread;
 import android.companion.virtual.VirtualDeviceManager;
 import android.content.Context;
-import android.media.IAudioService;
-import android.media.IPlayer;
-import android.media.VolumeShaper;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -13,8 +10,10 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.internal.app.IAppOpsCallback;
 import com.android.internal.app.IAppOpsService;
+
 import java.lang.ref.WeakReference;
 import java.util.Objects;
 
@@ -41,7 +40,8 @@ public abstract class PlayerBase {
     private float mPanMultiplierR = 1.0f;
     private float mVolMultiplier = 1.0f;
 
-    abstract int playerApplyVolumeShaper(VolumeShaper.Configuration configuration, VolumeShaper.Operation operation);
+    abstract int playerApplyVolumeShaper(
+            VolumeShaper.Configuration configuration, VolumeShaper.Operation operation);
 
     abstract VolumeShaper.State playerGetVolumeShaperState(int i);
 
@@ -74,7 +74,14 @@ public abstract class PlayerBase {
 
     protected void baseRegisterPlayer(int sessionId) {
         try {
-            this.mPlayerIId = getService().trackPlayer(new PlayerIdCard(this.mImplType, this.mAttributes, new IPlayerWrapper(this), sessionId));
+            this.mPlayerIId =
+                    getService()
+                            .trackPlayer(
+                                    new PlayerIdCard(
+                                            this.mImplType,
+                                            this.mAttributes,
+                                            new IPlayerWrapper(this),
+                                            sessionId));
         } catch (RemoteException e) {
             Log.e(TAG, "Error talking to audio service, player will not be tracked", e);
         }
@@ -115,7 +122,13 @@ public abstract class PlayerBase {
         try {
             getService().playerEvent(piid, 5, deviceId);
         } catch (RemoteException e) {
-            Log.e(TAG, "Error talking to audio service, " + deviceId + " device id will not be tracked for piid=" + piid, e);
+            Log.e(
+                    TAG,
+                    "Error talking to audio service, "
+                            + deviceId
+                            + " device id will not be tracked for piid="
+                            + piid,
+                    e);
         }
     }
 
@@ -129,7 +142,13 @@ public abstract class PlayerBase {
         try {
             getService().playerEvent(piid, state, deviceId);
         } catch (RemoteException e) {
-            Log.e(TAG, "Error talking to audio service, " + AudioPlaybackConfiguration.toLogFriendlyPlayerState(state) + " state will not be tracked for piid=" + piid, e);
+            Log.e(
+                    TAG,
+                    "Error talking to audio service, "
+                            + AudioPlaybackConfiguration.toLogFriendlyPlayerState(state)
+                            + " state will not be tracked for piid="
+                            + piid,
+                    e);
         }
     }
 
@@ -297,10 +316,13 @@ public abstract class PlayerBase {
         }
 
         @Override // android.media.IPlayer
-        public void applyVolumeShaper(VolumeShaperConfiguration configuration, VolumeShaperOperation operation) {
+        public void applyVolumeShaper(
+                VolumeShaperConfiguration configuration, VolumeShaperOperation operation) {
             PlayerBase pb = this.mWeakPB.get();
             if (pb != null) {
-                pb.playerApplyVolumeShaper(VolumeShaper.Configuration.fromParcelable(configuration), VolumeShaper.Operation.fromParcelable(operation));
+                pb.playerApplyVolumeShaper(
+                        VolumeShaper.Configuration.fromParcelable(configuration),
+                        VolumeShaper.Operation.fromParcelable(operation));
             }
         }
     }
@@ -308,19 +330,21 @@ public abstract class PlayerBase {
     public static class PlayerIdCard implements Parcelable {
         public static final int AUDIO_ATTRIBUTES_DEFINED = 1;
         public static final int AUDIO_ATTRIBUTES_NONE = 0;
-        public static final Parcelable.Creator<PlayerIdCard> CREATOR = new Parcelable.Creator<PlayerIdCard>() { // from class: android.media.PlayerBase.PlayerIdCard.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public PlayerIdCard createFromParcel(Parcel p) {
-                return new PlayerIdCard(p);
-            }
+        public static final Parcelable.Creator<PlayerIdCard> CREATOR =
+                new Parcelable.Creator<
+                        PlayerIdCard>() { // from class: android.media.PlayerBase.PlayerIdCard.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public PlayerIdCard createFromParcel(Parcel p) {
+                        return new PlayerIdCard(p);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public PlayerIdCard[] newArray(int size) {
-                return new PlayerIdCard[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public PlayerIdCard[] newArray(int size) {
+                        return new PlayerIdCard[size];
+                    }
+                };
         public final AudioAttributes mAttributes;
         public final IPlayer mIPlayer;
         public final int mPlayerType;
@@ -334,7 +358,8 @@ public abstract class PlayerBase {
         }
 
         public int hashCode() {
-            return Objects.hash(Integer.valueOf(this.mPlayerType), Integer.valueOf(this.mSessionId));
+            return Objects.hash(
+                    Integer.valueOf(this.mPlayerType), Integer.valueOf(this.mSessionId));
         }
 
         @Override // android.os.Parcelable
@@ -366,19 +391,30 @@ public abstract class PlayerBase {
                 return false;
             }
             PlayerIdCard that = (PlayerIdCard) o;
-            if (this.mPlayerType == that.mPlayerType && this.mAttributes.equals(that.mAttributes) && this.mSessionId == that.mSessionId) {
+            if (this.mPlayerType == that.mPlayerType
+                    && this.mAttributes.equals(that.mAttributes)
+                    && this.mSessionId == that.mSessionId) {
                 return true;
             }
             return false;
         }
     }
 
-    public static void deprecateStreamTypeForPlayback(int streamType, String className, String opName) throws IllegalArgumentException {
+    public static void deprecateStreamTypeForPlayback(
+            int streamType, String className, String opName) throws IllegalArgumentException {
         if (streamType == 10) {
-            throw new IllegalArgumentException("Use of STREAM_ACCESSIBILITY is reserved for volume control");
+            throw new IllegalArgumentException(
+                    "Use of STREAM_ACCESSIBILITY is reserved for volume control");
         }
-        Log.w(className, "Use of stream types is deprecated for operations other than volume control");
-        Log.w(className, "See the documentation of " + opName + " for what to use instead with android.media.AudioAttributes to qualify your playback use case");
+        Log.w(
+                className,
+                "Use of stream types is deprecated for operations other than volume control");
+        Log.w(
+                className,
+                "See the documentation of "
+                        + opName
+                        + " for what to use instead with android.media.AudioAttributes to qualify"
+                        + " your playback use case");
     }
 
     protected String getCurrentOpPackageName() {
@@ -391,7 +427,13 @@ public abstract class PlayerBase {
         if (requestedSessionId != 0) {
             return requestedSessionId;
         }
-        if (context == null || (deviceId = context.getDeviceId()) == 0 || (vdm = (VirtualDeviceManager) context.getSystemService(VirtualDeviceManager.class)) == null || vdm.getDevicePolicy(deviceId, 1) == 0) {
+        if (context == null
+                || (deviceId = context.getDeviceId()) == 0
+                || (vdm =
+                                (VirtualDeviceManager)
+                                        context.getSystemService(VirtualDeviceManager.class))
+                        == null
+                || vdm.getDevicePolicy(deviceId, 1) == 0) {
             return 0;
         }
         return vdm.getAudioPlaybackSessionId(deviceId);

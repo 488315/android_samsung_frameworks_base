@@ -4,7 +4,9 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.telephony.IBootstrapAuthenticationCallback;
+
 import com.android.internal.telephony.uicc.IccUtils;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 /* loaded from: classes4.dex */
@@ -17,38 +19,73 @@ public final class GbaAuthRequest implements Parcelable {
     private int mSubId;
     private int mToken;
     private static AtomicInteger sUniqueToken = new AtomicInteger(0);
-    public static final Parcelable.Creator<GbaAuthRequest> CREATOR = new Parcelable.Creator<GbaAuthRequest>() { // from class: android.telephony.gba.GbaAuthRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GbaAuthRequest createFromParcel(Parcel in) {
-            int token = in.readInt();
-            int subId = in.readInt();
-            int appType = in.readInt();
-            Uri nafUrl = (Uri) in.readParcelable(GbaAuthRequest.class.getClassLoader(), Uri.class);
-            int len = in.readInt();
-            byte[] protocol = new byte[len];
-            in.readByteArray(protocol);
-            boolean forceBootStrapping = in.readBoolean();
-            IBootstrapAuthenticationCallback callback = IBootstrapAuthenticationCallback.Stub.asInterface(in.readStrongBinder());
-            return new GbaAuthRequest(token, subId, appType, nafUrl, protocol, forceBootStrapping, callback);
-        }
+    public static final Parcelable.Creator<GbaAuthRequest> CREATOR =
+            new Parcelable.Creator<
+                    GbaAuthRequest>() { // from class: android.telephony.gba.GbaAuthRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GbaAuthRequest createFromParcel(Parcel in) {
+                    int token = in.readInt();
+                    int subId = in.readInt();
+                    int appType = in.readInt();
+                    Uri nafUrl =
+                            (Uri)
+                                    in.readParcelable(
+                                            GbaAuthRequest.class.getClassLoader(), Uri.class);
+                    int len = in.readInt();
+                    byte[] protocol = new byte[len];
+                    in.readByteArray(protocol);
+                    boolean forceBootStrapping = in.readBoolean();
+                    IBootstrapAuthenticationCallback callback =
+                            IBootstrapAuthenticationCallback.Stub.asInterface(
+                                    in.readStrongBinder());
+                    return new GbaAuthRequest(
+                            token, subId, appType, nafUrl, protocol, forceBootStrapping, callback);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GbaAuthRequest[] newArray(int size) {
-            return new GbaAuthRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GbaAuthRequest[] newArray(int size) {
+                    return new GbaAuthRequest[size];
+                }
+            };
 
-    public GbaAuthRequest(int subId, int appType, Uri nafUrl, byte[] securityProtocol, boolean forceBootStrapping, IBootstrapAuthenticationCallback callback) {
-        this(nextUniqueToken(), subId, appType, nafUrl, securityProtocol, forceBootStrapping, callback);
+    public GbaAuthRequest(
+            int subId,
+            int appType,
+            Uri nafUrl,
+            byte[] securityProtocol,
+            boolean forceBootStrapping,
+            IBootstrapAuthenticationCallback callback) {
+        this(
+                nextUniqueToken(),
+                subId,
+                appType,
+                nafUrl,
+                securityProtocol,
+                forceBootStrapping,
+                callback);
     }
 
     public GbaAuthRequest(GbaAuthRequest request) {
-        this(request.mToken, request.mSubId, request.mAppType, request.mNafUrl, request.mSecurityProtocol, request.mForceBootStrapping, request.mCallback);
+        this(
+                request.mToken,
+                request.mSubId,
+                request.mAppType,
+                request.mNafUrl,
+                request.mSecurityProtocol,
+                request.mForceBootStrapping,
+                request.mCallback);
     }
 
-    public GbaAuthRequest(int token, int subId, int appType, Uri nafUrl, byte[] securityProtocol, boolean forceBootStrapping, IBootstrapAuthenticationCallback callback) {
+    public GbaAuthRequest(
+            int token,
+            int subId,
+            int appType,
+            Uri nafUrl,
+            byte[] securityProtocol,
+            boolean forceBootStrapping,
+            IBootstrapAuthenticationCallback callback) {
         this.mToken = token;
         this.mSubId = subId;
         this.mAppType = appType;
@@ -108,11 +145,26 @@ public final class GbaAuthRequest implements Parcelable {
     }
 
     private static int nextUniqueToken() {
-        return (sUniqueToken.getAndIncrement() << 16) | (((int) System.currentTimeMillis()) & 65535);
+        return (sUniqueToken.getAndIncrement() << 16)
+                | (((int) System.currentTimeMillis()) & 65535);
     }
 
     public String toString() {
-        String str = "Token: " + this.mToken + "SubId:" + this.mSubId + ", AppType:" + this.mAppType + ", NafUrl:" + this.mNafUrl + ", SecurityProtocol:" + IccUtils.bytesToHexString(this.mSecurityProtocol) + ", ForceBootStrapping:" + this.mForceBootStrapping + ", CallBack:" + this.mCallback;
+        String str =
+                "Token: "
+                        + this.mToken
+                        + "SubId:"
+                        + this.mSubId
+                        + ", AppType:"
+                        + this.mAppType
+                        + ", NafUrl:"
+                        + this.mNafUrl
+                        + ", SecurityProtocol:"
+                        + IccUtils.bytesToHexString(this.mSecurityProtocol)
+                        + ", ForceBootStrapping:"
+                        + this.mForceBootStrapping
+                        + ", CallBack:"
+                        + this.mCallback;
         return str;
     }
 }

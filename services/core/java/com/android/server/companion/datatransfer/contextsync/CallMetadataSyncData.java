@@ -28,7 +28,9 @@ public final class CallMetadataSyncData {
 
         public final boolean equals(Object obj) {
             String str;
-            return (obj instanceof Call) && (str = this.mId) != null && str.equals(((Call) obj).mId);
+            return (obj instanceof Call)
+                    && (str = this.mId) != null
+                    && str.equals(((Call) obj).mId);
         }
 
         public final boolean hasControl(int i) {

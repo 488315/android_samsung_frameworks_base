@@ -1,17 +1,18 @@
 package com.android.server.biometrics;
 
 import android.util.Slog;
-import com.android.server.biometrics.BiometricService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class BiometricService$2$$ExternalSyntheticLambda4 implements Runnable {
+public final /* synthetic */ class BiometricService$2$$ExternalSyntheticLambda4
+        implements Runnable {
     public final /* synthetic */ BiometricService.AnonymousClass2 f$0;
     public final /* synthetic */ long f$1;
     public final /* synthetic */ int f$2;
     public final /* synthetic */ int f$3;
 
-    public /* synthetic */ BiometricService$2$$ExternalSyntheticLambda4(BiometricService.AnonymousClass2 anonymousClass2, long j, int i, int i2) {
+    public /* synthetic */ BiometricService$2$$ExternalSyntheticLambda4(
+            BiometricService.AnonymousClass2 anonymousClass2, long j, int i, int i2) {
         this.f$0 = anonymousClass2;
         this.f$1 = j;
         this.f$2 = i;

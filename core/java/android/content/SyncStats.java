@@ -6,19 +6,20 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class SyncStats implements Parcelable {
-    public static final Parcelable.Creator<SyncStats> CREATOR = new Parcelable.Creator<SyncStats>() { // from class: android.content.SyncStats.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SyncStats createFromParcel(Parcel in) {
-            return new SyncStats(in);
-        }
+    public static final Parcelable.Creator<SyncStats> CREATOR =
+            new Parcelable.Creator<SyncStats>() { // from class: android.content.SyncStats.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SyncStats createFromParcel(Parcel in) {
+                    return new SyncStats(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SyncStats[] newArray(int size) {
-            return new SyncStats[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SyncStats[] newArray(int size) {
+                    return new SyncStats[size];
+                }
+            };
     public long numAuthExceptions;
     public long numConflictDetectedExceptions;
     public long numDeletes;
@@ -66,7 +67,8 @@ public class SyncStats implements Parcelable {
             sb.append(" numParseExceptions: ").append(this.numParseExceptions);
         }
         if (this.numConflictDetectedExceptions > 0) {
-            sb.append(" numConflictDetectedExceptions: ").append(this.numConflictDetectedExceptions);
+            sb.append(" numConflictDetectedExceptions: ")
+                    .append(this.numConflictDetectedExceptions);
         }
         if (this.numInserts > 0) {
             sb.append(" numInserts: ").append(this.numInserts);

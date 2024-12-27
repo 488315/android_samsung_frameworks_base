@@ -21,8 +21,10 @@ public abstract class WindowProviderService extends Service implements WindowPro
     private boolean mInitialized;
     private WindowManager mWindowManager;
     private final WindowTokenClient mWindowToken = new WindowTokenClient();
-    private final WindowContextController mController = new WindowContextController(this.mWindowToken);
-    private final ComponentCallbacksController mCallbacksController = new ComponentCallbacksController();
+    private final WindowContextController mController =
+            new WindowContextController(this.mWindowToken);
+    private final ComponentCallbacksController mCallbacksController =
+            new ComponentCallbacksController();
     private final Bundle mOptions = new Bundle();
 
     public abstract int getWindowType();
@@ -31,7 +33,8 @@ public abstract class WindowProviderService extends Service implements WindowPro
         if (windowContextOptions == null) {
             return false;
         }
-        return windowContextOptions.getBoolean(WindowProvider.KEY_IS_WINDOW_PROVIDER_SERVICE, false);
+        return windowContextOptions.getBoolean(
+                WindowProvider.KEY_IS_WINDOW_PROVIDER_SERVICE, false);
     }
 
     public WindowProviderService() {
@@ -76,13 +79,19 @@ public abstract class WindowProviderService extends Service implements WindowPro
     }
 
     @Override // android.app.Service
-    public final Context createServiceBaseContext(ActivityThread mainThread, LoadedApk packageInfo) {
+    public final Context createServiceBaseContext(
+            ActivityThread mainThread, LoadedApk packageInfo) {
         Context context = super.createServiceBaseContext(mainThread, packageInfo);
-        DisplayManager displayManager = (DisplayManager) context.getSystemService(DisplayManager.class);
+        DisplayManager displayManager =
+                (DisplayManager) context.getSystemService(DisplayManager.class);
         int initialDisplayId = getInitialDisplayId();
         Display display = displayManager.getDisplay(initialDisplayId);
         if (display == null) {
-            Log.e(TAG, "Display with id " + initialDisplayId + " not found, falling back to DEFAULT_DISPLAY");
+            Log.e(
+                    TAG,
+                    "Display with id "
+                            + initialDisplayId
+                            + " not found, falling back to DEFAULT_DISPLAY");
             display = displayManager.getDisplay(0);
         }
         return context.createTokenContext(this.mWindowToken, display);
@@ -93,7 +102,8 @@ public abstract class WindowProviderService extends Service implements WindowPro
         super.attachBaseContext(newBase);
         if (!this.mInitialized) {
             this.mWindowToken.attachContext(this);
-            this.mController.attachToDisplayArea(getWindowType(), getDisplayId(), getWindowContextOptions());
+            this.mController.attachToDisplayArea(
+                    getWindowType(), getDisplayId(), getWindowContextOptions());
             this.mWindowManager = WindowManagerImpl.createWindowContextWindowManager(this);
             this.mInitialized = true;
         }

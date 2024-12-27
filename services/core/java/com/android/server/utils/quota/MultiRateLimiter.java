@@ -1,7 +1,7 @@
 package com.android.server.utils.quota;
 
 import android.content.Context;
-import com.android.server.utils.quota.QuotaTracker;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,8 @@ public final class MultiRateLimiter {
         public final Context mContext;
         public final QuotaTracker.Injector mInjector;
         public final List mQuotaTrackers = new ArrayList();
-        public final Categorizer$$ExternalSyntheticLambda0 mCategorizer = Categorizer.SINGLE_CATEGORIZER;
+        public final Categorizer$$ExternalSyntheticLambda0 mCategorizer =
+                Categorizer.SINGLE_CATEGORIZER;
         public final Category mCategory = Category.SINGLE_CATEGORY;
 
         public Builder(Context context, QuotaTracker.Injector injector) {
@@ -27,9 +28,15 @@ public final class MultiRateLimiter {
         }
 
         public final void addRateLimit(int i, Duration duration) {
-            Categorizer$$ExternalSyntheticLambda0 categorizer$$ExternalSyntheticLambda0 = this.mCategorizer;
+            Categorizer$$ExternalSyntheticLambda0 categorizer$$ExternalSyntheticLambda0 =
+                    this.mCategorizer;
             QuotaTracker.Injector injector = this.mInjector;
-            CountQuotaTracker countQuotaTracker = injector != null ? new CountQuotaTracker(this.mContext, categorizer$$ExternalSyntheticLambda0, injector) : new CountQuotaTracker(this.mContext, categorizer$$ExternalSyntheticLambda0);
+            CountQuotaTracker countQuotaTracker =
+                    injector != null
+                            ? new CountQuotaTracker(
+                                    this.mContext, categorizer$$ExternalSyntheticLambda0, injector)
+                            : new CountQuotaTracker(
+                                    this.mContext, categorizer$$ExternalSyntheticLambda0);
             countQuotaTracker.setCountLimit(this.mCategory, i, duration.toMillis());
             ((ArrayList) this.mQuotaTrackers).add(countQuotaTracker);
         }

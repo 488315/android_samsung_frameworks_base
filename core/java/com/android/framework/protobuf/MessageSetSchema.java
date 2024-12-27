@@ -1,8 +1,5 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.FieldSet;
-import com.android.framework.protobuf.LazyField;
-import com.android.framework.protobuf.WireFormat;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
@@ -15,14 +12,20 @@ final class MessageSetSchema<T> implements Schema<T> {
     private final boolean hasExtensions;
     private final UnknownFieldSchema<?, ?> unknownFieldSchema;
 
-    private MessageSetSchema(UnknownFieldSchema<?, ?> unknownFieldSchema, ExtensionSchema<?> extensionSchema, MessageLite defaultInstance) {
+    private MessageSetSchema(
+            UnknownFieldSchema<?, ?> unknownFieldSchema,
+            ExtensionSchema<?> extensionSchema,
+            MessageLite defaultInstance) {
         this.unknownFieldSchema = unknownFieldSchema;
         this.hasExtensions = extensionSchema.hasExtensions(defaultInstance);
         this.extensionSchema = extensionSchema;
         this.defaultInstance = defaultInstance;
     }
 
-    static <T> MessageSetSchema<T> newSchema(UnknownFieldSchema<?, ?> unknownFieldSchema, ExtensionSchema<?> extensionSchema, MessageLite defaultInstance) {
+    static <T> MessageSetSchema<T> newSchema(
+            UnknownFieldSchema<?, ?> unknownFieldSchema,
+            ExtensionSchema<?> extensionSchema,
+            MessageLite defaultInstance) {
         return new MessageSetSchema<>(unknownFieldSchema, extensionSchema, defaultInstance);
     }
 
@@ -74,11 +77,15 @@ final class MessageSetSchema<T> implements Schema<T> {
         while (iterator.hasNext()) {
             Map.Entry<?, Object> extension = iterator.next();
             FieldSet.FieldDescriptorLite<?> fd = (FieldSet.FieldDescriptorLite) extension.getKey();
-            if (fd.getLiteJavaType() != WireFormat.JavaType.MESSAGE || fd.isRepeated() || fd.isPacked()) {
+            if (fd.getLiteJavaType() != WireFormat.JavaType.MESSAGE
+                    || fd.isRepeated()
+                    || fd.isPacked()) {
                 throw new IllegalStateException("Found invalid MessageSet item.");
             }
             if (extension instanceof LazyField.LazyEntry) {
-                writer.writeMessageSetItem(fd.getNumber(), ((LazyField.LazyEntry) extension).getField().toByteString());
+                writer.writeMessageSetItem(
+                        fd.getNumber(),
+                        ((LazyField.LazyEntry) extension).getField().toByteString());
             } else {
                 writer.writeMessageSetItem(fd.getNumber(), extension.getValue());
             }
@@ -86,7 +93,9 @@ final class MessageSetSchema<T> implements Schema<T> {
         writeUnknownFieldsHelper(this.unknownFieldSchema, message, writer);
     }
 
-    private <UT, UB> void writeUnknownFieldsHelper(UnknownFieldSchema<UT, UB> unknownFieldSchema, T message, Writer writer) throws IOException {
+    private <UT, UB> void writeUnknownFieldsHelper(
+            UnknownFieldSchema<UT, UB> unknownFieldSchema, T message, Writer writer)
+            throws IOException {
         unknownFieldSchema.writeAsMessageSetTo(unknownFieldSchema.getFromMessage(message), writer);
     }
 
@@ -99,20 +108,38 @@ final class MessageSetSchema<T> implements Schema<T> {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public void mergeFrom(T r18, byte[] r19, int r20, int r21, com.android.framework.protobuf.ArrayDecoders.Registers r22) throws java.io.IOException {
+    public void mergeFrom(
+            T r18,
+            byte[] r19,
+            int r20,
+            int r21,
+            com.android.framework.protobuf.ArrayDecoders.Registers r22)
+            throws java.io.IOException {
         /*
             Method dump skipped, instructions count: 282
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.framework.protobuf.MessageSetSchema.mergeFrom(java.lang.Object, byte[], int, int, com.android.framework.protobuf.ArrayDecoders$Registers):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.framework.protobuf.MessageSetSchema.mergeFrom(java.lang.Object,"
+                    + " byte[], int, int,"
+                    + " com.android.framework.protobuf.ArrayDecoders$Registers):void");
     }
 
     @Override // com.android.framework.protobuf.Schema
-    public void mergeFrom(T message, Reader reader, ExtensionRegistryLite extensionRegistry) throws IOException {
-        mergeFromHelper(this.unknownFieldSchema, this.extensionSchema, message, reader, extensionRegistry);
+    public void mergeFrom(T message, Reader reader, ExtensionRegistryLite extensionRegistry)
+            throws IOException {
+        mergeFromHelper(
+                this.unknownFieldSchema, this.extensionSchema, message, reader, extensionRegistry);
     }
 
-    private <UT, UB, ET extends FieldSet.FieldDescriptorLite<ET>> void mergeFromHelper(UnknownFieldSchema<UT, UB> unknownFieldSchema, ExtensionSchema<ET> extensionSchema, T message, Reader reader, ExtensionRegistryLite extensionRegistry) throws IOException {
+    private <UT, UB, ET extends FieldSet.FieldDescriptorLite<ET>> void mergeFromHelper(
+            UnknownFieldSchema<UT, UB> unknownFieldSchema,
+            ExtensionSchema<ET> extensionSchema,
+            T message,
+            Reader reader,
+            ExtensionRegistryLite extensionRegistry)
+            throws IOException {
         UB unknownFields = unknownFieldSchema.getBuilderFromMessage(message);
         FieldSet<ET> extensions = extensionSchema.getMutableExtensions(message);
         do {
@@ -124,7 +151,13 @@ final class MessageSetSchema<T> implements Schema<T> {
             } finally {
                 unknownFieldSchema.setBuilderToMessage(message, unknownFields);
             }
-        } while (parseMessageSetItemOrUnknownField(reader, extensionRegistry, extensionSchema, extensions, unknownFieldSchema, unknownFields));
+        } while (parseMessageSetItemOrUnknownField(
+                reader,
+                extensionRegistry,
+                extensionSchema,
+                extensions,
+                unknownFieldSchema,
+                unknownFields));
     }
 
     @Override // com.android.framework.protobuf.Schema
@@ -138,7 +171,15 @@ final class MessageSetSchema<T> implements Schema<T> {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private <UT, UB, ET extends com.android.framework.protobuf.FieldSet.FieldDescriptorLite<ET>> boolean parseMessageSetItemOrUnknownField(com.android.framework.protobuf.Reader r9, com.android.framework.protobuf.ExtensionRegistryLite r10, com.android.framework.protobuf.ExtensionSchema<ET> r11, com.android.framework.protobuf.FieldSet<ET> r12, com.android.framework.protobuf.UnknownFieldSchema<UT, UB> r13, UB r14) throws java.io.IOException {
+    private <UT, UB, ET extends com.android.framework.protobuf.FieldSet.FieldDescriptorLite<ET>>
+            boolean parseMessageSetItemOrUnknownField(
+                    com.android.framework.protobuf.Reader r9,
+                    com.android.framework.protobuf.ExtensionRegistryLite r10,
+                    com.android.framework.protobuf.ExtensionSchema<ET> r11,
+                    com.android.framework.protobuf.FieldSet<ET> r12,
+                    com.android.framework.protobuf.UnknownFieldSchema<UT, UB> r13,
+                    UB r14)
+                    throws java.io.IOException {
         /*
             r8 = this;
             int r0 = r9.getTag()
@@ -207,7 +248,14 @@ final class MessageSetSchema<T> implements Schema<T> {
         L79:
             goto L2d
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.framework.protobuf.MessageSetSchema.parseMessageSetItemOrUnknownField(com.android.framework.protobuf.Reader, com.android.framework.protobuf.ExtensionRegistryLite, com.android.framework.protobuf.ExtensionSchema, com.android.framework.protobuf.FieldSet, com.android.framework.protobuf.UnknownFieldSchema, java.lang.Object):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.framework.protobuf.MessageSetSchema.parseMessageSetItemOrUnknownField(com.android.framework.protobuf.Reader,"
+                    + " com.android.framework.protobuf.ExtensionRegistryLite,"
+                    + " com.android.framework.protobuf.ExtensionSchema,"
+                    + " com.android.framework.protobuf.FieldSet,"
+                    + " com.android.framework.protobuf.UnknownFieldSchema,"
+                    + " java.lang.Object):boolean");
     }
 
     @Override // com.android.framework.protobuf.Schema
@@ -225,7 +273,8 @@ final class MessageSetSchema<T> implements Schema<T> {
         return size;
     }
 
-    private <UT, UB> int getUnknownFieldsSerializedSize(UnknownFieldSchema<UT, UB> schema, T message) {
+    private <UT, UB> int getUnknownFieldsSerializedSize(
+            UnknownFieldSchema<UT, UB> schema, T message) {
         UT unknowns = schema.getFromMessage(message);
         return schema.getSerializedSizeAsMessageSet(unknowns);
     }

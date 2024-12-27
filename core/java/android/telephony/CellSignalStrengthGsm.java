@@ -3,6 +3,7 @@ package android.telephony;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.PersistableBundle;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
@@ -21,19 +22,22 @@ public final class CellSignalStrengthGsm extends CellSignalStrength implements P
     private int mTimingAdvance;
     private static final int[] sRssiThresholds = {-107, -103, -97, -89};
     private static final CellSignalStrengthGsm sInvalid = new CellSignalStrengthGsm();
-    public static final Parcelable.Creator<CellSignalStrengthGsm> CREATOR = new Parcelable.Creator<CellSignalStrengthGsm>() { // from class: android.telephony.CellSignalStrengthGsm.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellSignalStrengthGsm createFromParcel(Parcel in) {
-            return new CellSignalStrengthGsm(in);
-        }
+    public static final Parcelable.Creator<CellSignalStrengthGsm> CREATOR =
+            new Parcelable.Creator<
+                    CellSignalStrengthGsm>() { // from class:
+                                               // android.telephony.CellSignalStrengthGsm.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellSignalStrengthGsm createFromParcel(Parcel in) {
+                    return new CellSignalStrengthGsm(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CellSignalStrengthGsm[] newArray(int size) {
-            return new CellSignalStrengthGsm[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CellSignalStrengthGsm[] newArray(int size) {
+                    return new CellSignalStrengthGsm[size];
+                }
+            };
 
     public CellSignalStrengthGsm() {
         setDefaultValues();
@@ -121,7 +125,10 @@ public final class CellSignalStrengthGsm extends CellSignalStrength implements P
 
     @Override // android.telephony.CellSignalStrength
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mRssi), Integer.valueOf(this.mBitErrorRate), Integer.valueOf(this.mTimingAdvance));
+        return Objects.hash(
+                Integer.valueOf(this.mRssi),
+                Integer.valueOf(this.mBitErrorRate),
+                Integer.valueOf(this.mTimingAdvance));
     }
 
     @Override // android.telephony.CellSignalStrength
@@ -135,11 +142,21 @@ public final class CellSignalStrengthGsm extends CellSignalStrength implements P
             return false;
         }
         CellSignalStrengthGsm s = (CellSignalStrengthGsm) o;
-        return this.mRssi == s.mRssi && this.mBitErrorRate == s.mBitErrorRate && this.mTimingAdvance == s.mTimingAdvance && this.mLevel == s.mLevel;
+        return this.mRssi == s.mRssi
+                && this.mBitErrorRate == s.mBitErrorRate
+                && this.mTimingAdvance == s.mTimingAdvance
+                && this.mLevel == s.mLevel;
     }
 
     public String toString() {
-        return "CellSignalStrengthGsm: rssi=" + this.mRssi + " ber=" + this.mBitErrorRate + " mTa=" + this.mTimingAdvance + " mLevel=" + this.mLevel;
+        return "CellSignalStrengthGsm: rssi="
+                + this.mRssi
+                + " ber="
+                + this.mBitErrorRate
+                + " mTa="
+                + this.mTimingAdvance
+                + " mLevel="
+                + this.mLevel;
     }
 
     @Override // android.os.Parcelable

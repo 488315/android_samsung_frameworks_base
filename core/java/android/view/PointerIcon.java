@@ -25,9 +25,12 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
 import android.util.SparseArray;
+
 import com.android.internal.R;
 import com.android.internal.util.XmlUtils;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -157,42 +160,50 @@ public final class PointerIcon implements Parcelable {
     private static float sPointerIconSizeScale = 1.0f;
     private static int sPointerIconColor = 16777215;
     private static final SparseArray<PointerIcon> SYSTEM_ICONS = new SparseArray<>();
-    public static final Parcelable.Creator<PointerIcon> CREATOR = new Parcelable.Creator<PointerIcon>() { // from class: android.view.PointerIcon.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PointerIcon createFromParcel(Parcel in) {
-            PointerIcon icon;
-            try {
-                int type = in.readInt();
-                if (type != -1 && type != 20000) {
-                    return PointerIcon.getSystemIcon(type);
+    public static final Parcelable.Creator<PointerIcon> CREATOR =
+            new Parcelable.Creator<PointerIcon>() { // from class: android.view.PointerIcon.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PointerIcon createFromParcel(Parcel in) {
+                    PointerIcon icon;
+                    try {
+                        int type = in.readInt();
+                        if (type != -1 && type != 20000) {
+                            return PointerIcon.getSystemIcon(type);
+                        }
+                        if (type == 20000) {
+                            icon =
+                                    PointerIcon.createSpenIcon(
+                                            Bitmap.CREATOR.createFromParcel(in),
+                                            in.readFloat(),
+                                            in.readFloat());
+                        } else {
+                            icon =
+                                    PointerIcon.create(
+                                            Bitmap.CREATOR.createFromParcel(in),
+                                            in.readFloat(),
+                                            in.readFloat());
+                        }
+                        icon.mDrawNativeDropShadow = in.readBoolean();
+                        return icon;
+                    } catch (IllegalStateException e) {
+                        e.printStackTrace();
+                        return PointerIcon.getSystemIcon(0);
+                    }
                 }
-                if (type == 20000) {
-                    icon = PointerIcon.createSpenIcon(Bitmap.CREATOR.createFromParcel(in), in.readFloat(), in.readFloat());
-                } else {
-                    icon = PointerIcon.create(Bitmap.CREATOR.createFromParcel(in), in.readFloat(), in.readFloat());
-                }
-                icon.mDrawNativeDropShadow = in.readBoolean();
-                return icon;
-            } catch (IllegalStateException e) {
-                e.printStackTrace();
-                return PointerIcon.getSystemIcon(0);
-            }
-        }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PointerIcon[] newArray(int size) {
-            return new PointerIcon[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PointerIcon[] newArray(int size) {
+                    return new PointerIcon[size];
+                }
+            };
     private int mDisplayIdForPointerIcon = 0;
     private float mPointerIconSizeScale = 1.0f;
     private int mPointerIconColor = 16777215;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PointerIconVectorStyleFill {
-    }
+    public @interface PointerIconVectorStyleFill {}
 
     private PointerIcon(int type) {
         this.mType = type;
@@ -241,7 +252,8 @@ public final class PointerIcon implements Parcelable {
         return icon;
     }
 
-    public static PointerIcon getLoadedSystemIcon(Context context, int type, boolean useLargeIcons, float pointerScale) {
+    public static PointerIcon getLoadedSystemIcon(
+            Context context, int type, boolean useLargeIcons, float pointerScale) {
         TypedArray a;
         int defStyle;
         if (type == 1) {
@@ -261,7 +273,12 @@ public final class PointerIcon implements Parcelable {
             }
         }
         if (type >= 10000 || (CoreRune.DIRECT_WRITING && type == 1022)) {
-            a = context.obtainStyledAttributes(null, R.styleable.DeviceDefault_Pointer, R.attr.zzz_DeviceDefaultPointerStyle, 0);
+            a =
+                    context.obtainStyledAttributes(
+                            null,
+                            R.styleable.DeviceDefault_Pointer,
+                            R.attr.zzz_DeviceDefaultPointerStyle,
+                            0);
         } else {
             if (useLargeIcons) {
                 defStyle = R.style.LargePointer;
@@ -285,7 +302,11 @@ public final class PointerIcon implements Parcelable {
     }
 
     private boolean isLoaded() {
-        return this.mBitmap != null && this.mHotSpotX >= 0.0f && this.mHotSpotX < ((float) this.mBitmap.getWidth()) && this.mHotSpotY >= 0.0f && this.mHotSpotY < ((float) this.mBitmap.getHeight());
+        return this.mBitmap != null
+                && this.mHotSpotX >= 0.0f
+                && this.mHotSpotX < ((float) this.mBitmap.getWidth())
+                && this.mHotSpotY >= 0.0f
+                && this.mHotSpotY < ((float) this.mBitmap.getHeight());
     }
 
     public static PointerIcon create(Bitmap bitmap, float hotSpotX, float hotSpotY) {
@@ -359,7 +380,11 @@ public final class PointerIcon implements Parcelable {
         if (this.mType != otherIcon.mType) {
             return false;
         }
-        if ((this.mBitmap == null || otherIcon.mBitmap.isRecycled() || this.mBitmap.sameAs(otherIcon.mBitmap)) && this.mHotSpotX == otherIcon.mHotSpotX && this.mHotSpotY == otherIcon.mHotSpotY) {
+        if ((this.mBitmap == null
+                        || otherIcon.mBitmap.isRecycled()
+                        || this.mBitmap.sameAs(otherIcon.mBitmap))
+                && this.mHotSpotX == otherIcon.mHotSpotX
+                && this.mHotSpotY == otherIcon.mHotSpotY) {
             return true;
         }
         return false;
@@ -384,15 +409,23 @@ public final class PointerIcon implements Parcelable {
         return scaled;
     }
 
-    private BitmapDrawable getBitmapDrawableFromVectorDrawable(Resources resources, VectorDrawable vectorDrawable, float pointerScale) {
-        Bitmap bitmap = Bitmap.createBitmap(resources.getDisplayMetrics(), (int) (vectorDrawable.getIntrinsicWidth() * pointerScale), (int) (vectorDrawable.getIntrinsicHeight() * pointerScale), Bitmap.Config.ARGB_8888, true);
+    private BitmapDrawable getBitmapDrawableFromVectorDrawable(
+            Resources resources, VectorDrawable vectorDrawable, float pointerScale) {
+        Bitmap bitmap =
+                Bitmap.createBitmap(
+                        resources.getDisplayMetrics(),
+                        (int) (vectorDrawable.getIntrinsicWidth() * pointerScale),
+                        (int) (vectorDrawable.getIntrinsicHeight() * pointerScale),
+                        Bitmap.Config.ARGB_8888,
+                        true);
         Canvas canvas = new Canvas(bitmap);
         vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         vectorDrawable.draw(canvas);
         return new BitmapDrawable(resources, bitmap);
     }
 
-    private void loadResource(Resources resources, int resourceId, Resources.Theme theme, float pointerScale) {
+    private void loadResource(
+            Resources resources, int resourceId, Resources.Theme theme, float pointerScale) {
         Bitmap bitmap;
         Drawable drawable;
         Drawable drawable2;
@@ -407,7 +440,8 @@ public final class PointerIcon implements Parcelable {
                 float hotSpotY = a.getDimension(2, 0.0f) * pointerScale;
                 a.recycle();
                 if (bitmapRes == 0) {
-                    throw new IllegalArgumentException("<pointer-icon> is missing bitmap attribute.");
+                    throw new IllegalArgumentException(
+                            "<pointer-icon> is missing bitmap attribute.");
                 }
                 Drawable drawable3 = resources2.getDrawable(bitmapRes, null);
                 if (this.mType >= 20000) {
@@ -433,32 +467,53 @@ public final class PointerIcon implements Parcelable {
                                 drawable2 = drawable4;
                             } else {
                                 if (!(drawableFrame instanceof VectorDrawable)) {
-                                    throw new IllegalArgumentException("Frame of an animated pointer icon must refer to a bitmap drawable or vector drawable.");
+                                    throw new IllegalArgumentException(
+                                            "Frame of an animated pointer icon must refer to a"
+                                                + " bitmap drawable or vector drawable.");
                                 }
                                 drawable2 = drawable4;
                             }
                             if (isVectorAnimation != (drawableFrame instanceof VectorDrawable)) {
-                                throw new IllegalArgumentException("The drawable of the " + i + "-th frame is a different type from the others. All frames should be the same type.");
+                                throw new IllegalArgumentException(
+                                        "The drawable of the "
+                                                + i
+                                                + "-th frame is a different type from the others."
+                                                + " All frames should be the same type.");
                             }
-                            if (drawableFrame.getIntrinsicWidth() != width || drawableFrame.getIntrinsicHeight() != height) {
-                                throw new IllegalArgumentException("The bitmap size of " + i + "-th frame is different. All frames should have the exact same size and share the same hotspot.");
+                            if (drawableFrame.getIntrinsicWidth() != width
+                                    || drawableFrame.getIntrinsicHeight() != height) {
+                                throw new IllegalArgumentException(
+                                        "The bitmap size of "
+                                                + i
+                                                + "-th frame is different. All frames should have"
+                                                + " the exact same size and share the same"
+                                                + " hotspot.");
                             }
                             if (isVectorAnimation) {
-                                drawableFrame = getBitmapDrawableFromVectorDrawable(resources2, (VectorDrawable) drawableFrame, pointerScale);
+                                drawableFrame =
+                                        getBitmapDrawableFromVectorDrawable(
+                                                resources2,
+                                                (VectorDrawable) drawableFrame,
+                                                pointerScale);
                             }
-                            this.mBitmapFrames[i - 1] = getBitmapFromDrawable((BitmapDrawable) drawableFrame);
+                            this.mBitmapFrames[i - 1] =
+                                    getBitmapFromDrawable((BitmapDrawable) drawableFrame);
                             i++;
                             resources2 = resources;
                             drawable4 = drawable2;
                         }
                         drawable = drawable4;
                     } else {
-                        Log.w(TAG, "Animation icon with single frame -- simply treating the first frame as a normal bitmap icon.");
+                        Log.w(
+                                TAG,
+                                "Animation icon with single frame -- simply treating the first"
+                                    + " frame as a normal bitmap icon.");
                         drawable = drawable4;
                     }
                     drawable3 = drawable;
                 }
-                boolean changeColor = sPointerIconColor != this.mPointerIconColor && this.mType < 20000;
+                boolean changeColor =
+                        sPointerIconColor != this.mPointerIconColor && this.mType < 20000;
                 if (drawable3 instanceof BitmapDrawable) {
                     BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable3;
                     Bitmap tempBitmap = getBitmapFromDrawable(bitmapDrawable);
@@ -466,7 +521,9 @@ public final class PointerIcon implements Parcelable {
                         bitmap = tempBitmap.copy(Bitmap.Config.ARGB_8888, true);
                         this.mPointerIconColor = sPointerIconColor;
                         Paint paint = new Paint();
-                        paint.setColorFilter(new PorterDuffColorFilter(this.mPointerIconColor, PorterDuff.Mode.MULTIPLY));
+                        paint.setColorFilter(
+                                new PorterDuffColorFilter(
+                                        this.mPointerIconColor, PorterDuff.Mode.MULTIPLY));
                         Canvas canvas = new Canvas(bitmap);
                         canvas.drawBitmap(bitmap, 0.0f, 0.0f, paint);
                     } else {
@@ -484,7 +541,9 @@ public final class PointerIcon implements Parcelable {
                     }
                     bitmap = getBitmapFromVectorDrawable(vectorDrawable);
                 } else {
-                    throw new IllegalArgumentException("<pointer-icon> bitmap attribute must refer to a bitmap or vector drawable.");
+                    throw new IllegalArgumentException(
+                            "<pointer-icon> bitmap attribute must refer to a bitmap or vector"
+                                + " drawable.");
                 }
                 float scaledHotSoptX = this.mPointerIconSizeScale * hotSpotX;
                 float scaledHotSoptY = this.mPointerIconSizeScale * hotSpotY;
@@ -501,11 +560,21 @@ public final class PointerIcon implements Parcelable {
     }
 
     public String toString() {
-        return "PointerIcon{type=" + typeToString(this.mType) + ", hotspotX=" + this.mHotSpotX + ", hotspotY=" + this.mHotSpotY + "}";
+        return "PointerIcon{type="
+                + typeToString(this.mType)
+                + ", hotspotX="
+                + this.mHotSpotX
+                + ", hotspotY="
+                + this.mHotSpotY
+                + "}";
     }
 
-    private static void validateHotSpot(Bitmap bitmap, float hotSpotX, float hotSpotY, boolean isScaled) {
-        if (hotSpotX < 0.0f || (!isScaled ? hotSpotX >= bitmap.getWidth() : ((int) hotSpotX) > bitmap.getWidth())) {
+    private static void validateHotSpot(
+            Bitmap bitmap, float hotSpotX, float hotSpotY, boolean isScaled) {
+        if (hotSpotX < 0.0f
+                || (!isScaled
+                        ? hotSpotX >= bitmap.getWidth()
+                        : ((int) hotSpotX) > bitmap.getWidth())) {
             throw new IllegalArgumentException("x hotspot lies outside of the bitmap area");
         }
         if (hotSpotY >= 0.0f) {
@@ -763,7 +832,12 @@ public final class PointerIcon implements Parcelable {
     public static void setCustomIcons(int color, float size) {
         sPointerIconColor = color;
         sPointerIconSizeScale = size;
-        Log.i(TAG, "Changes PoinerIcons color=0x" + Integer.toHexString(sPointerIconColor) + " size=" + sPointerIconSizeScale);
+        Log.i(
+                TAG,
+                "Changes PoinerIcons color=0x"
+                        + Integer.toHexString(sPointerIconColor)
+                        + " size="
+                        + sPointerIconSizeScale);
     }
 
     private static Bitmap resizeBitmap(Bitmap bitmap, float scaleSize) {
@@ -784,7 +858,8 @@ public final class PointerIcon implements Parcelable {
         return createIcon(bitmap, hotSpotX, hotSpotY, 20000);
     }
 
-    private static PointerIcon createDefaultIcon(Bitmap bitmap, float hotSpotX, float hotSpotY, int type) {
+    private static PointerIcon createDefaultIcon(
+            Bitmap bitmap, float hotSpotX, float hotSpotY, int type) {
         return createIcon(bitmap, hotSpotX, hotSpotY, type);
     }
 
@@ -804,17 +879,26 @@ public final class PointerIcon implements Parcelable {
         setDefaultPointerIconInternal(toolType, icon, false);
     }
 
-    public static void setDefaultPointerIconInternal(int toolType, PointerIcon icon, boolean forced) {
+    public static void setDefaultPointerIconInternal(
+            int toolType, PointerIcon icon, boolean forced) {
         try {
             if (getInputManagerService() == null) {
                 Log.d(TAG, "setDefaultPointerIconInternal failed to get IMS");
                 return;
             }
             int iconType = icon != null ? icon.mType : 0;
-            Log.d(TAG, "setDefaultPointerIconInternal toolType : " + toolType + ", icon : " + icon + ", forced : " + forced + ", calling pid = " + Binder.getCallingPid());
+            Log.d(
+                    TAG,
+                    "setDefaultPointerIconInternal toolType : "
+                            + toolType
+                            + ", icon : "
+                            + icon
+                            + ", forced : "
+                            + forced
+                            + ", calling pid = "
+                            + Binder.getCallingPid());
             boolean isToolTypeStylus = toolType == 2;
-            if (isToolTypeStylus) {
-            }
+            if (isToolTypeStylus) {}
             if (iconType == -1 && isToolTypeStylus) {
                 icon.mType = 20000;
             }
@@ -828,7 +912,8 @@ public final class PointerIcon implements Parcelable {
         IInputManager iInputManager;
         synchronized (sStaticInitInput) {
             if (sInputManagerService == null) {
-                sInputManagerService = IInputManager.Stub.asInterface(ServiceManager.getService("input"));
+                sInputManagerService =
+                        IInputManager.Stub.asInterface(ServiceManager.getService("input"));
             }
             iInputManager = sInputManagerService;
         }

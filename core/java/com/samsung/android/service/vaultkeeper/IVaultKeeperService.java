@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface IVaultKeeperService extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.service.vaultkeeper.IVaultKeeperService";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.service.vaultkeeper.IVaultKeeperService";
 
     int checkDataWritable(String str) throws RemoteException;
 
@@ -18,7 +19,8 @@ public interface IVaultKeeperService extends IInterface {
 
     int generateHotpCode(String str) throws RemoteException;
 
-    int initialize(String str, byte[] bArr, byte[] bArr2, byte[] bArr3, byte[] bArr4) throws RemoteException;
+    int initialize(String str, byte[] bArr, byte[] bArr2, byte[] bArr3, byte[] bArr4)
+            throws RemoteException;
 
     boolean isInitialized(String str) throws RemoteException;
 
@@ -39,12 +41,15 @@ public interface IVaultKeeperService extends IInterface {
         }
 
         @Override // com.samsung.android.service.vaultkeeper.IVaultKeeperService
-        public int initialize(String vaultName, byte[] key, byte[] initUnsheltered, byte[] cert, byte[] sig) throws RemoteException {
+        public int initialize(
+                String vaultName, byte[] key, byte[] initUnsheltered, byte[] cert, byte[] sig)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.service.vaultkeeper.IVaultKeeperService
-        public int destroy(String vaultName, byte[] hmac, byte[] cert, byte[] sig) throws RemoteException {
+        public int destroy(String vaultName, byte[] hmac, byte[] cert, byte[] sig)
+                throws RemoteException {
             return 0;
         }
 
@@ -54,12 +59,14 @@ public interface IVaultKeeperService extends IInterface {
         }
 
         @Override // com.samsung.android.service.vaultkeeper.IVaultKeeperService
-        public int write(String vaultName, int type, byte[] data, byte[] cert, byte[] sig) throws RemoteException {
+        public int write(String vaultName, int type, byte[] data, byte[] cert, byte[] sig)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.samsung.android.service.vaultkeeper.IVaultKeeperService
-        public byte[] sensitiveBox(String vaultName, int type, int[] errorCode) throws RemoteException {
+        public byte[] sensitiveBox(String vaultName, int type, int[] errorCode)
+                throws RemoteException {
             return null;
         }
 
@@ -94,7 +101,7 @@ public interface IVaultKeeperService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVaultKeeperService {
+    public abstract static class Stub extends Binder implements IVaultKeeperService {
         static final int TRANSACTION_checkDataWritable = 10;
         static final int TRANSACTION_destroy = 3;
         static final int TRANSACTION_encryptMessage = 7;
@@ -162,7 +169,8 @@ public interface IVaultKeeperService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             int[] _arg2;
             int[] _arg22;
             if (code >= 1 && code <= 16777215) {
@@ -318,7 +326,9 @@ public interface IVaultKeeperService extends IInterface {
             }
 
             @Override // com.samsung.android.service.vaultkeeper.IVaultKeeperService
-            public int initialize(String vaultName, byte[] key, byte[] initUnsheltered, byte[] cert, byte[] sig) throws RemoteException {
+            public int initialize(
+                    String vaultName, byte[] key, byte[] initUnsheltered, byte[] cert, byte[] sig)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -339,7 +349,8 @@ public interface IVaultKeeperService extends IInterface {
             }
 
             @Override // com.samsung.android.service.vaultkeeper.IVaultKeeperService
-            public int destroy(String vaultName, byte[] hmac, byte[] cert, byte[] sig) throws RemoteException {
+            public int destroy(String vaultName, byte[] hmac, byte[] cert, byte[] sig)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -379,7 +390,8 @@ public interface IVaultKeeperService extends IInterface {
             }
 
             @Override // com.samsung.android.service.vaultkeeper.IVaultKeeperService
-            public int write(String vaultName, int type, byte[] data, byte[] cert, byte[] sig) throws RemoteException {
+            public int write(String vaultName, int type, byte[] data, byte[] cert, byte[] sig)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -400,7 +412,8 @@ public interface IVaultKeeperService extends IInterface {
             }
 
             @Override // com.samsung.android.service.vaultkeeper.IVaultKeeperService
-            public byte[] sensitiveBox(String vaultName, int type, int[] errorCode) throws RemoteException {
+            public byte[] sensitiveBox(String vaultName, int type, int[] errorCode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

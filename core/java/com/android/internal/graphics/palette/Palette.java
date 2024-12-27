@@ -6,33 +6,35 @@ import android.graphics.Rect;
 import android.hardware.scontext.SContextConstants;
 import android.os.AsyncTask;
 import android.util.Log;
+
 import java.util.Collections;
 import java.util.List;
 
 /* loaded from: classes5.dex */
 public final class Palette {
     static final int DEFAULT_CALCULATE_NUMBER_COLORS = 16;
-    static final Filter DEFAULT_FILTER = new Filter() { // from class: com.android.internal.graphics.palette.Palette.1
-        private static final float BLACK_MAX_LIGHTNESS = 0.05f;
-        private static final float WHITE_MIN_LIGHTNESS = 0.95f;
+    static final Filter DEFAULT_FILTER =
+            new Filter() { // from class: com.android.internal.graphics.palette.Palette.1
+                private static final float BLACK_MAX_LIGHTNESS = 0.05f;
+                private static final float WHITE_MIN_LIGHTNESS = 0.95f;
 
-        @Override // com.android.internal.graphics.palette.Palette.Filter
-        public boolean isAllowed(int rgb, float[] hsl) {
-            return (isWhite(hsl) || isBlack(hsl) || isNearRedILine(hsl)) ? false : true;
-        }
+                @Override // com.android.internal.graphics.palette.Palette.Filter
+                public boolean isAllowed(int rgb, float[] hsl) {
+                    return (isWhite(hsl) || isBlack(hsl) || isNearRedILine(hsl)) ? false : true;
+                }
 
-        private boolean isBlack(float[] hslColor) {
-            return hslColor[2] <= BLACK_MAX_LIGHTNESS;
-        }
+                private boolean isBlack(float[] hslColor) {
+                    return hslColor[2] <= BLACK_MAX_LIGHTNESS;
+                }
 
-        private boolean isWhite(float[] hslColor) {
-            return hslColor[2] >= WHITE_MIN_LIGHTNESS;
-        }
+                private boolean isWhite(float[] hslColor) {
+                    return hslColor[2] >= WHITE_MIN_LIGHTNESS;
+                }
 
-        private boolean isNearRedILine(float[] hslColor) {
-            return hslColor[0] >= 10.0f && hslColor[0] <= 37.0f && hslColor[1] <= 0.82f;
-        }
-    };
+                private boolean isNearRedILine(float[] hslColor) {
+                    return hslColor[0] >= 10.0f && hslColor[0] <= 37.0f && hslColor[1] <= 0.82f;
+                }
+            };
     static final int DEFAULT_RESIZE_BITMAP_AREA = 12544;
     static final String LOG_TAG = "Palette";
     private final Swatch mDominantSwatch = findDominantSwatch();
@@ -98,7 +100,12 @@ public final class Palette {
         }
 
         public String toString() {
-            return getClass().getSimpleName() + " [" + this.mColor + "] [Population: " + this.mPopulation + ']';
+            return getClass().getSimpleName()
+                    + " ["
+                    + this.mColor
+                    + "] [Population: "
+                    + this.mPopulation
+                    + ']';
         }
 
         public boolean equals(Object o) {
@@ -109,7 +116,8 @@ public final class Palette {
                 return false;
             }
             Swatch swatch = (Swatch) o;
-            if (this.mPopulation == swatch.mPopulation && this.mColor.toArgb() == swatch.mColor.toArgb()) {
+            if (this.mPopulation == swatch.mPopulation
+                    && this.mColor.toArgb() == swatch.mColor.toArgb()) {
                 return true;
             }
             return false;
@@ -175,7 +183,8 @@ public final class Palette {
                 }
                 this.mRegion.set(0, 0, this.mBitmap.getWidth(), this.mBitmap.getHeight());
                 if (!this.mRegion.intersect(left, top, right, bottom)) {
-                    throw new IllegalArgumentException("The given region must intersect with the Bitmap's dimensions.");
+                    throw new IllegalArgumentException(
+                            "The given region must intersect with the Bitmap's dimensions.");
                 }
             }
             return this;
@@ -195,8 +204,10 @@ public final class Palette {
                     double scale = bitmap.getWidth() / this.mBitmap.getWidth();
                     region.left = (int) Math.floor(region.left * scale);
                     region.top = (int) Math.floor(region.top * scale);
-                    region.right = Math.min((int) Math.ceil(region.right * scale), bitmap.getWidth());
-                    region.bottom = Math.min((int) Math.ceil(region.bottom * scale), bitmap.getHeight());
+                    region.right =
+                            Math.min((int) Math.ceil(region.right * scale), bitmap.getWidth());
+                    region.bottom =
+                            Math.min((int) Math.ceil(region.bottom * scale), bitmap.getHeight());
                 }
                 this.mQuantizer.quantize(getPixelsFromBitmap(bitmap), this.mMaxColors);
                 if (bitmap != this.mBitmap) {
@@ -217,7 +228,11 @@ public final class Palette {
 
         @Deprecated
         public AsyncTask<Bitmap, Void, Palette> generate(final PaletteAsyncListener listener) {
-            return new AsyncTask<Bitmap, Void, Palette>() { // from class: com.android.internal.graphics.palette.Palette.Builder.1
+            return new AsyncTask<
+                    Bitmap,
+                    Void,
+                    Palette>() { // from class:
+                                 // com.android.internal.graphics.palette.Palette.Builder.1
                 /* JADX INFO: Access modifiers changed from: protected */
                 @Override // android.os.AsyncTask
                 public Palette doInBackground(Bitmap... params) {
@@ -249,7 +264,12 @@ public final class Palette {
             int regionHeight = this.mRegion.height();
             int[] subsetPixels = new int[regionWidth * regionHeight];
             for (int row = 0; row < regionHeight; row++) {
-                System.arraycopy(pixels, ((this.mRegion.top + row) * bitmapWidth) + this.mRegion.left, subsetPixels, row * regionWidth, regionWidth);
+                System.arraycopy(
+                        pixels,
+                        ((this.mRegion.top + row) * bitmapWidth) + this.mRegion.left,
+                        subsetPixels,
+                        row * regionWidth,
+                        regionWidth);
             }
             return subsetPixels;
         }
@@ -262,13 +282,19 @@ public final class Palette {
                 if (bitmapArea > this.mResizeArea) {
                     scaleRatio = Math.sqrt(this.mResizeArea / bitmapArea);
                 }
-            } else if (this.mResizeMaxDimension > 0 && (maxDimension = Math.max(bitmap.getWidth(), bitmap.getHeight())) > this.mResizeMaxDimension) {
+            } else if (this.mResizeMaxDimension > 0
+                    && (maxDimension = Math.max(bitmap.getWidth(), bitmap.getHeight()))
+                            > this.mResizeMaxDimension) {
                 scaleRatio = this.mResizeMaxDimension / maxDimension;
             }
             if (scaleRatio <= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
                 return bitmap;
             }
-            return Bitmap.createScaledBitmap(bitmap, (int) Math.ceil(bitmap.getWidth() * scaleRatio), (int) Math.ceil(bitmap.getHeight() * scaleRatio), false);
+            return Bitmap.createScaledBitmap(
+                    bitmap,
+                    (int) Math.ceil(bitmap.getWidth() * scaleRatio),
+                    (int) Math.ceil(bitmap.getHeight() * scaleRatio),
+                    false);
         }
     }
 }

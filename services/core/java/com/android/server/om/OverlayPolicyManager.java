@@ -1,6 +1,7 @@
 package com.android.server.om;
 
 import android.content.pm.overlay.OverlayPaths;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -16,7 +17,8 @@ public abstract class OverlayPolicyManager {
         boolean retainOverlay(String str, OverlayPaths overlayPaths, String str2);
     }
 
-    public static OverlayPaths filterByPolicy(OverlayPaths overlayPaths, OverlayPaths overlayPaths2, String str, int i) {
+    public static OverlayPaths filterByPolicy(
+            OverlayPaths overlayPaths, OverlayPaths overlayPaths2, String str, int i) {
         if (overlayPaths == null) {
             return new OverlayPaths.Builder().build();
         }

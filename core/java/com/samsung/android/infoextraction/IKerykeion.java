@@ -7,6 +7,7 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.view.ThreadedRenderer;
+
 import com.samsung.android.globalactions.presentation.viewmodel.DefaultActionNames;
 
 /* loaded from: classes6.dex */
@@ -31,36 +32,28 @@ public interface IKerykeion extends IInterface {
 
     public static class Default implements IKerykeion {
         @Override // com.samsung.android.infoextraction.IKerykeion
-        public void start(int key, KerykeionRequest kRequest, Rect rect) throws RemoteException {
-        }
+        public void start(int key, KerykeionRequest kRequest, Rect rect) throws RemoteException {}
 
         @Override // com.samsung.android.infoextraction.IKerykeion
-        public void stop(int key) throws RemoteException {
-        }
+        public void stop(int key) throws RemoteException {}
 
         @Override // com.samsung.android.infoextraction.IKerykeion
-        public void restart() throws RemoteException {
-        }
+        public void restart() throws RemoteException {}
 
         @Override // com.samsung.android.infoextraction.IKerykeion
-        public void setInfoExtractionListener(int key, IBinder iBinder) throws RemoteException {
-        }
+        public void setInfoExtractionListener(int key, IBinder iBinder) throws RemoteException {}
 
         @Override // com.samsung.android.infoextraction.IKerykeion
-        public void show(String urlStr, Rect rect) throws RemoteException {
-        }
+        public void show(String urlStr, Rect rect) throws RemoteException {}
 
         @Override // com.samsung.android.infoextraction.IKerykeion
-        public void dismiss() throws RemoteException {
-        }
+        public void dismiss() throws RemoteException {}
 
         @Override // com.samsung.android.infoextraction.IKerykeion
-        public void training(String source) throws RemoteException {
-        }
+        public void training(String source) throws RemoteException {}
 
         @Override // com.samsung.android.infoextraction.IKerykeion
-        public void addResultRule(int type, String source) throws RemoteException {
-        }
+        public void addResultRule(int type, String source) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -68,7 +61,7 @@ public interface IKerykeion extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IKerykeion {
+    public abstract static class Stub extends Binder implements IKerykeion {
         static final int TRANSACTION_addResultRule = 8;
         static final int TRANSACTION_dismiss = 6;
         static final int TRANSACTION_restart = 3;
@@ -127,7 +120,8 @@ public interface IKerykeion extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IKerykeion.DESCRIPTOR);
             }
@@ -138,7 +132,8 @@ public interface IKerykeion extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    KerykeionRequest _arg1 = (KerykeionRequest) data.readTypedObject(KerykeionRequest.CREATOR);
+                    KerykeionRequest _arg1 =
+                            (KerykeionRequest) data.readTypedObject(KerykeionRequest.CREATOR);
                     Rect _arg2 = (Rect) data.readTypedObject(Rect.CREATOR);
                     data.enforceNoDataAvail();
                     start(_arg0, _arg1, _arg2);
@@ -207,7 +202,8 @@ public interface IKerykeion extends IInterface {
             }
 
             @Override // com.samsung.android.infoextraction.IKerykeion
-            public void start(int key, KerykeionRequest kRequest, Rect rect) throws RemoteException {
+            public void start(int key, KerykeionRequest kRequest, Rect rect)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

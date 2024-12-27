@@ -6,6 +6,10 @@ import com.android.server.firewall.IntentFirewall;
 /* loaded from: classes2.dex */
 public class IntentFirewallInstallReceiver extends ConfigUpdateInstallReceiver {
     public IntentFirewallInstallReceiver() {
-        super(IntentFirewall.RULES_DIR.getAbsolutePath(), "ifw.xml", "metadata/", "gservices.version");
+        super(
+                IntentFirewall.RULES_DIR.getAbsolutePath(),
+                "ifw.xml",
+                "metadata/",
+                "gservices.version");
     }
 }

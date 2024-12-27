@@ -25,6 +25,7 @@ public final class PendingUi {
         sb.append(", sessionId=");
         sb.append(this.sessionId);
         sb.append(", state=");
-        return AudioOffloadInfo$$ExternalSyntheticOutline0.m(sb, DebugUtils.flagsToString(PendingUi.class, "STATE_", this.mState), "]");
+        return AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                sb, DebugUtils.flagsToString(PendingUi.class, "STATE_", this.mState), "]");
     }
 }

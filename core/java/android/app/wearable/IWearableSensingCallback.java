@@ -6,18 +6,20 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
+
 import com.android.internal.infra.AndroidFuture;
 
 /* loaded from: classes.dex */
 public interface IWearableSensingCallback extends IInterface {
     public static final String DESCRIPTOR = "android.app.wearable.IWearableSensingCallback";
 
-    void openFile(String str, AndroidFuture<ParcelFileDescriptor> androidFuture) throws RemoteException;
+    void openFile(String str, AndroidFuture<ParcelFileDescriptor> androidFuture)
+            throws RemoteException;
 
     public static class Default implements IWearableSensingCallback {
         @Override // android.app.wearable.IWearableSensingCallback
-        public void openFile(String filename, AndroidFuture<ParcelFileDescriptor> future) throws RemoteException {
-        }
+        public void openFile(String filename, AndroidFuture<ParcelFileDescriptor> future)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -25,7 +27,7 @@ public interface IWearableSensingCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWearableSensingCallback {
+    public abstract static class Stub extends Binder implements IWearableSensingCallback {
         static final int TRANSACTION_openFile = 1;
 
         public Stub() {
@@ -63,7 +65,8 @@ public interface IWearableSensingCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IWearableSensingCallback.DESCRIPTOR);
             }
@@ -74,7 +77,8 @@ public interface IWearableSensingCallback extends IInterface {
             switch (code) {
                 case 1:
                     String _arg0 = data.readString();
-                    AndroidFuture<ParcelFileDescriptor> _arg1 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<ParcelFileDescriptor> _arg1 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     openFile(_arg0, _arg1);
                     return true;
@@ -100,7 +104,8 @@ public interface IWearableSensingCallback extends IInterface {
             }
 
             @Override // android.app.wearable.IWearableSensingCallback
-            public void openFile(String filename, AndroidFuture<ParcelFileDescriptor> future) throws RemoteException {
+            public void openFile(String filename, AndroidFuture<ParcelFileDescriptor> future)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IWearableSensingCallback.DESCRIPTOR);

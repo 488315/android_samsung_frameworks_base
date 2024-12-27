@@ -10,7 +10,9 @@ import android.security.keystore2.AndroidKeyStoreProvider;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+
 import com.android.net.module.util.ProxyUtils;
+
 import java.net.InetAddress;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -28,6 +30,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -38,19 +41,21 @@ import javax.crypto.spec.IvParameterSpec;
 /* loaded from: classes5.dex */
 public final class KnoxVpnProfile implements Parcelable {
     private static final String ANDROID_BC_PROVIDER = "AndroidKeyStoreBCWorkaroundProvider";
-    public static final Parcelable.Creator<KnoxVpnProfile> CREATOR = new Parcelable.Creator<KnoxVpnProfile>() { // from class: com.android.internal.net.KnoxVpnProfile.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KnoxVpnProfile createFromParcel(Parcel in) {
-            return new KnoxVpnProfile(in);
-        }
+    public static final Parcelable.Creator<KnoxVpnProfile> CREATOR =
+            new Parcelable.Creator<
+                    KnoxVpnProfile>() { // from class: com.android.internal.net.KnoxVpnProfile.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KnoxVpnProfile createFromParcel(Parcel in) {
+                    return new KnoxVpnProfile(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public KnoxVpnProfile[] newArray(int size) {
-            return new KnoxVpnProfile[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public KnoxVpnProfile[] newArray(int size) {
+                    return new KnoxVpnProfile[size];
+                }
+            };
     private static final String ENCODED_NULL_PROXY_INFO = "\u0000\u0000\u0000\u0000";
     static final String LIST_DELIMITER = ",";
     public static final int PROXY_MANUAL = 1;
@@ -257,8 +262,11 @@ public final class KnoxVpnProfile implements Parcelable {
         }
         try {
             try {
-                String[] values = new String(value, StandardCharsets.UTF_8).split(VALUE_DELIMITER, -1);
-                if ((values.length < 18 || values.length > 23) && values.length != 28 && values.length != 29) {
+                String[] values =
+                        new String(value, StandardCharsets.UTF_8).split(VALUE_DELIMITER, -1);
+                if ((values.length < 18 || values.length > 23)
+                        && values.length != 28
+                        && values.length != 29) {
                     return null;
                 }
                 if (values.length >= 29) {
@@ -284,7 +292,8 @@ public final class KnoxVpnProfile implements Parcelable {
                     profile.ipsecCaCert = values[13];
                     profile.ipsecServerCert = values.length > 14 ? values[14] : "";
                     profile.ocspServerUrl = values.length > 15 ? values[15] : "";
-                    profile.isPFS = values.length > 16 ? Boolean.valueOf(values[16]).booleanValue() : false;
+                    profile.isPFS =
+                            values.length > 16 ? Boolean.valueOf(values[16]).booleanValue() : false;
                     profile.isPasswordIvParams = values.length > 17 ? values[17] : "";
                     profile.isIpsecSecretIvParams = values.length > 18 ? values[18] : "";
                     if (values.length > 19) {
@@ -297,7 +306,11 @@ public final class KnoxVpnProfile implements Parcelable {
                                 profile.proxy = ProxyInfo.buildPacProxy(Uri.parse(pacFileUrl));
                             }
                         }
-                        profile.proxy = ProxyInfo.buildDirectProxy(host, port.isEmpty() ? 0 : Integer.parseInt(port), ProxyUtils.exclusionStringAsList(exclList));
+                        profile.proxy =
+                                ProxyInfo.buildDirectProxy(
+                                        host,
+                                        port.isEmpty() ? 0 : Integer.parseInt(port),
+                                        ProxyUtils.exclusionStringAsList(exclList));
                     }
                     if (values.length >= 28) {
                         profile.mAllowedAlgorithms = Arrays.asList(values[23].split(","));
@@ -353,9 +366,15 @@ public final class KnoxVpnProfile implements Parcelable {
         builder.append(VALUE_DELIMITER).append(this.isPasswordIvParams);
         builder.append(VALUE_DELIMITER).append(this.isIpsecSecretIvParams);
         if (this.proxy != null) {
-            builder.append(VALUE_DELIMITER).append(this.proxy.getHost() != null ? this.proxy.getHost() : "");
+            builder.append(VALUE_DELIMITER)
+                    .append(this.proxy.getHost() != null ? this.proxy.getHost() : "");
             builder.append(VALUE_DELIMITER).append(this.proxy.getPort());
-            builder.append(VALUE_DELIMITER).append(ProxyUtils.exclusionListAsString(this.proxy.getExclusionList()) != null ? ProxyUtils.exclusionListAsString(this.proxy.getExclusionList()) : "");
+            builder.append(VALUE_DELIMITER)
+                    .append(
+                            ProxyUtils.exclusionListAsString(this.proxy.getExclusionList()) != null
+                                    ? ProxyUtils.exclusionListAsString(
+                                            this.proxy.getExclusionList())
+                                    : "");
             builder.append(VALUE_DELIMITER).append(this.proxy.getPacFileUrl().toString());
         } else {
             builder.append(ENCODED_NULL_PROXY_INFO);
@@ -382,7 +401,10 @@ public final class KnoxVpnProfile implements Parcelable {
     }
 
     private boolean isValidLockdownLegacyVpnProfile() {
-        return isLegacyType(this.type) && isServerAddressNumeric() && hasDns() && areDnsAddressesNumeric();
+        return isLegacyType(this.type)
+                && isServerAddressNumeric()
+                && hasDns()
+                && areDnsAddressesNumeric();
     }
 
     private boolean isValidLockdownPlatformVpnProfile() {
@@ -390,7 +412,8 @@ public final class KnoxVpnProfile implements Parcelable {
     }
 
     public boolean isValidLockdownProfile() {
-        return isTypeValidForLockdown() && (isValidLockdownLegacyVpnProfile() || isValidLockdownPlatformVpnProfile());
+        return isTypeValidForLockdown()
+                && (isValidLockdownLegacyVpnProfile() || isValidLockdownPlatformVpnProfile());
     }
 
     public boolean isTypeValidForLockdown() {
@@ -424,13 +447,37 @@ public final class KnoxVpnProfile implements Parcelable {
     public static void validateAllowedAlgorithms(List<String> allowedAlgorithms) {
         for (String alg : allowedAlgorithms) {
             if (alg.contains(VALUE_DELIMITER) || alg.contains(",")) {
-                throw new IllegalArgumentException("Algorithm contained illegal ('\u0000' or ',') character");
+                throw new IllegalArgumentException(
+                        "Algorithm contained illegal ('\u0000' or ',') character");
             }
         }
     }
 
     public int hashCode() {
-        return Objects.hash(this.key, Integer.valueOf(this.type), this.server, this.username, this.password, this.dnsServers, this.searchDomains, this.routes, Boolean.valueOf(this.mppe), this.l2tpSecret, this.ipsecIdentifier, this.ipsecSecret, this.ipsecUserCert, this.ipsecCaCert, this.ipsecServerCert, this.proxy, this.mAllowedAlgorithms, Boolean.valueOf(this.isBypassable), Boolean.valueOf(this.isMetered), Integer.valueOf(this.maxMtu), Boolean.valueOf(this.areAuthParamsInline), Boolean.valueOf(this.isRestrictedToTestNetworks), this.ipSecCACertValue);
+        return Objects.hash(
+                this.key,
+                Integer.valueOf(this.type),
+                this.server,
+                this.username,
+                this.password,
+                this.dnsServers,
+                this.searchDomains,
+                this.routes,
+                Boolean.valueOf(this.mppe),
+                this.l2tpSecret,
+                this.ipsecIdentifier,
+                this.ipsecSecret,
+                this.ipsecUserCert,
+                this.ipsecCaCert,
+                this.ipsecServerCert,
+                this.proxy,
+                this.mAllowedAlgorithms,
+                Boolean.valueOf(this.isBypassable),
+                Boolean.valueOf(this.isMetered),
+                Integer.valueOf(this.maxMtu),
+                Boolean.valueOf(this.areAuthParamsInline),
+                Boolean.valueOf(this.isRestrictedToTestNetworks),
+                this.ipSecCACertValue);
     }
 
     public boolean equals(Object obj) {
@@ -438,7 +485,30 @@ public final class KnoxVpnProfile implements Parcelable {
             return false;
         }
         KnoxVpnProfile other = (KnoxVpnProfile) obj;
-        return Objects.equals(this.key, other.key) && Objects.equals(this.name, other.name) && this.type == other.type && Objects.equals(this.server, other.server) && Objects.equals(this.username, other.username) && Objects.equals(this.password, other.password) && Objects.equals(this.dnsServers, other.dnsServers) && Objects.equals(this.searchDomains, other.searchDomains) && Objects.equals(this.routes, other.routes) && this.mppe == other.mppe && Objects.equals(this.l2tpSecret, other.l2tpSecret) && Objects.equals(this.ipsecIdentifier, other.ipsecIdentifier) && Objects.equals(this.ipsecSecret, other.ipsecSecret) && Objects.equals(this.ipsecUserCert, other.ipsecUserCert) && Objects.equals(this.ipsecCaCert, other.ipsecCaCert) && Objects.equals(this.ipsecServerCert, other.ipsecServerCert) && Objects.equals(this.proxy, other.proxy) && Objects.equals(this.mAllowedAlgorithms, other.mAllowedAlgorithms) && Objects.equals(this.ipSecCACertValue, other.ipSecCACertValue) && this.isBypassable == other.isBypassable && this.isMetered == other.isMetered && this.maxMtu == other.maxMtu && this.areAuthParamsInline == other.areAuthParamsInline && this.isRestrictedToTestNetworks == other.isRestrictedToTestNetworks;
+        return Objects.equals(this.key, other.key)
+                && Objects.equals(this.name, other.name)
+                && this.type == other.type
+                && Objects.equals(this.server, other.server)
+                && Objects.equals(this.username, other.username)
+                && Objects.equals(this.password, other.password)
+                && Objects.equals(this.dnsServers, other.dnsServers)
+                && Objects.equals(this.searchDomains, other.searchDomains)
+                && Objects.equals(this.routes, other.routes)
+                && this.mppe == other.mppe
+                && Objects.equals(this.l2tpSecret, other.l2tpSecret)
+                && Objects.equals(this.ipsecIdentifier, other.ipsecIdentifier)
+                && Objects.equals(this.ipsecSecret, other.ipsecSecret)
+                && Objects.equals(this.ipsecUserCert, other.ipsecUserCert)
+                && Objects.equals(this.ipsecCaCert, other.ipsecCaCert)
+                && Objects.equals(this.ipsecServerCert, other.ipsecServerCert)
+                && Objects.equals(this.proxy, other.proxy)
+                && Objects.equals(this.mAllowedAlgorithms, other.mAllowedAlgorithms)
+                && Objects.equals(this.ipSecCACertValue, other.ipSecCACertValue)
+                && this.isBypassable == other.isBypassable
+                && this.isMetered == other.isMetered
+                && this.maxMtu == other.maxMtu
+                && this.areAuthParamsInline == other.areAuthParamsInline
+                && this.isRestrictedToTestNetworks == other.isRestrictedToTestNetworks;
     }
 
     @Override // android.os.Parcelable
@@ -452,7 +522,8 @@ public final class KnoxVpnProfile implements Parcelable {
         }
         StringBuilder result = new StringBuilder(bytes.length * 2);
         for (int i = 0; i < bytes.length; i++) {
-            result.append("0123456789ABCDEF".charAt((bytes[i] >> 4) & 15)).append("0123456789ABCDEF".charAt(bytes[i] & 15));
+            result.append("0123456789ABCDEF".charAt((bytes[i] >> 4) & 15))
+                    .append("0123456789ABCDEF".charAt(bytes[i] & 15));
         }
         return result.toString();
     }
@@ -473,12 +544,21 @@ public final class KnoxVpnProfile implements Parcelable {
             byte[] plainBuffer = Base64.encode(plainValue.getBytes(StandardCharsets.UTF_8), 2);
             byte[] encryptedBuffer = cipher.doFinal(plainBuffer);
             String encryptedBase64 = Base64.encodeToString(encryptedBuffer, 2);
-            IvParameterSpec ivParamSpec = (IvParameterSpec) cipher.getParameters().getParameterSpec(IvParameterSpec.class);
+            IvParameterSpec ivParamSpec =
+                    (IvParameterSpec)
+                            cipher.getParameters().getParameterSpec(IvParameterSpec.class);
             byte[] ivBuffer = ivParamSpec.getIV();
             String ivHexStr = bytes2Hex(ivBuffer);
-            String ivHexBase64 = Base64.encodeToString(ivHexStr.getBytes(StandardCharsets.UTF_8), 2);
-            return new String[]{encryptedBase64, ivHexBase64};
-        } catch (NullPointerException | InvalidKeyException | NoSuchAlgorithmException | InvalidParameterSpecException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
+            String ivHexBase64 =
+                    Base64.encodeToString(ivHexStr.getBytes(StandardCharsets.UTF_8), 2);
+            return new String[] {encryptedBase64, ivHexBase64};
+        } catch (NullPointerException
+                | InvalidKeyException
+                | NoSuchAlgorithmException
+                | InvalidParameterSpecException
+                | BadPaddingException
+                | IllegalBlockSizeException
+                | NoSuchPaddingException e) {
             Log.e(TAG, "Failed to encrypt: " + e.toString());
             e.printStackTrace();
             return null;
@@ -495,7 +575,14 @@ public final class KnoxVpnProfile implements Parcelable {
             cipher.init(2, secretKey, ivParamSpec);
             byte[] decryptedBuffer = cipher.doFinal(encryptedBuffer);
             return new String(Base64.decode(decryptedBuffer, 2), StandardCharsets.UTF_8).intern();
-        } catch (IllegalArgumentException | NullPointerException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e) {
+        } catch (IllegalArgumentException
+                | NullPointerException
+                | InvalidAlgorithmParameterException
+                | InvalidKeyException
+                | NoSuchAlgorithmException
+                | BadPaddingException
+                | IllegalBlockSizeException
+                | NoSuchPaddingException e) {
             Log.e(TAG, "Failed to decrypt: " + e.toString());
             e.printStackTrace();
             return null;
@@ -509,7 +596,11 @@ public final class KnoxVpnProfile implements Parcelable {
             if (generate && !keyStore.containsAlias(VPN_SECRET_KEY)) {
                 try {
                     KeyGenerator keyGenerator = KeyGenerator.getInstance("AES", "AndroidKeyStore");
-                    keyGenerator.init(new KeyGenParameterSpec.Builder(VPN_SECRET_KEY, 3).setBlockModes(KeyProperties.BLOCK_MODE_CBC).setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_PKCS7).build());
+                    keyGenerator.init(
+                            new KeyGenParameterSpec.Builder(VPN_SECRET_KEY, 3)
+                                    .setBlockModes(KeyProperties.BLOCK_MODE_CBC)
+                                    .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_PKCS7)
+                                    .build());
                     keyGenerator.generateKey();
                 } catch (Exception e) {
                     Log.e(TAG, "Failed to create key: " + e.toString());
@@ -529,12 +620,15 @@ public final class KnoxVpnProfile implements Parcelable {
         Key secretKey;
         String[] ret;
         String[] ret2;
-        if ((!profile.ipsecSecret.isEmpty() || !profile.password.isEmpty()) && (secretKey = getSecretKey(true)) != null) {
-            if (!profile.ipsecSecret.isEmpty() && (ret2 = doEncrypt(secretKey, profile.ipsecSecret)) != null) {
+        if ((!profile.ipsecSecret.isEmpty() || !profile.password.isEmpty())
+                && (secretKey = getSecretKey(true)) != null) {
+            if (!profile.ipsecSecret.isEmpty()
+                    && (ret2 = doEncrypt(secretKey, profile.ipsecSecret)) != null) {
                 profile.ipsecSecret = ret2[0];
                 profile.isIpsecSecretIvParams = ret2[1];
             }
-            if (!profile.password.isEmpty() && (ret = doEncrypt(secretKey, profile.password)) != null) {
+            if (!profile.password.isEmpty()
+                    && (ret = doEncrypt(secretKey, profile.password)) != null) {
                 profile.password = ret[0];
                 profile.isPasswordIvParams = ret[1];
             }
@@ -554,10 +648,22 @@ public final class KnoxVpnProfile implements Parcelable {
                         AndroidKeyStoreProvider.install();
                         isSetBCProvider = true;
                     }
-                    if (!profile.ipsecSecret.isEmpty() && (ret2 = doDecrypt(secretKey, profile.ipsecSecret, profile.isIpsecSecretIvParams)) != null) {
+                    if (!profile.ipsecSecret.isEmpty()
+                            && (ret2 =
+                                            doDecrypt(
+                                                    secretKey,
+                                                    profile.ipsecSecret,
+                                                    profile.isIpsecSecretIvParams))
+                                    != null) {
                         profile.ipsecSecret = ret2;
                     }
-                    if (!profile.password.isEmpty() && (ret = doDecrypt(secretKey, profile.password, profile.isPasswordIvParams)) != null) {
+                    if (!profile.password.isEmpty()
+                            && (ret =
+                                            doDecrypt(
+                                                    secretKey,
+                                                    profile.password,
+                                                    profile.isPasswordIvParams))
+                                    != null) {
                         profile.password = ret;
                     }
                     if (isSetBCProvider) {

@@ -3,7 +3,9 @@ package android.service.controls.templates;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+
 import com.android.internal.util.Preconditions;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -25,25 +27,28 @@ public abstract class ControlTemplate {
     private final String mTemplateId;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TemplateType {
-    }
+    public @interface TemplateType {}
 
     public abstract int getTemplateType();
 
     static {
         String str = "";
-        NO_TEMPLATE = new ControlTemplate(str) { // from class: android.service.controls.templates.ControlTemplate.1
-            @Override // android.service.controls.templates.ControlTemplate
-            public int getTemplateType() {
-                return 0;
-            }
-        };
-        ERROR_TEMPLATE = new ControlTemplate(str) { // from class: android.service.controls.templates.ControlTemplate.2
-            @Override // android.service.controls.templates.ControlTemplate
-            public int getTemplateType() {
-                return -1;
-            }
-        };
+        NO_TEMPLATE =
+                new ControlTemplate(
+                        str) { // from class: android.service.controls.templates.ControlTemplate.1
+                    @Override // android.service.controls.templates.ControlTemplate
+                    public int getTemplateType() {
+                        return 0;
+                    }
+                };
+        ERROR_TEMPLATE =
+                new ControlTemplate(
+                        str) { // from class: android.service.controls.templates.ControlTemplate.2
+                    @Override // android.service.controls.templates.ControlTemplate
+                    public int getTemplateType() {
+                        return -1;
+                    }
+                };
     }
 
     public String getTemplateId() {
@@ -70,8 +75,7 @@ public abstract class ControlTemplate {
         this.mTemplateId = templateId;
     }
 
-    public void prepareTemplateForBinder(Context context) {
-    }
+    public void prepareTemplateForBinder(Context context) {}
 
     static ControlTemplate createTemplateFromBundle(Bundle bundle) {
         if (bundle == null) {

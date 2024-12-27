@@ -10,6 +10,5 @@ public interface VirtualCameraCallback {
 
     void onStreamConfigured(int i, Surface surface, int i2, int i3, int i4);
 
-    default void onProcessCaptureRequest(int streamId, long frameId) {
-    }
+    default void onProcessCaptureRequest(int streamId, long frameId) {}
 }

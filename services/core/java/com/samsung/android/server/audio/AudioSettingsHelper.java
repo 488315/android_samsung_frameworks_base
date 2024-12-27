@@ -17,12 +17,15 @@ import android.os.Vibrator;
 import android.provider.Settings;
 import android.util.Log;
 import android.util.Pair;
+
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
 import com.android.server.RCPManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
 import com.android.server.audio.AudioServiceExt$ResetSettingsReceiver$$ExternalSyntheticOutline0;
+
 import com.samsung.android.audio.Rune;
 import com.samsung.android.vibrator.VibRune;
+
 import java.io.File;
 import java.math.BigInteger;
 import java.nio.charset.Charset;
@@ -35,6 +38,7 @@ import java.util.Base64;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -51,20 +55,35 @@ public final class AudioSettingsHelper extends SQLiteOpenHelper {
     public CopyOnWriteArrayList mSoundAppPolicyAllowAppList;
 
     public AudioSettingsHelper(final Context context) {
-        super(context, "audioservice_sec.db", null, 14, new DatabaseErrorHandler() { // from class: com.samsung.android.server.audio.AudioSettingsHelper$$ExternalSyntheticLambda0
-            @Override // android.database.DatabaseErrorHandler
-            public final void onCorruption(SQLiteDatabase sQLiteDatabase) {
-                Context context2 = context;
-                try {
-                    Log.e("AudioService.DB", "database is corrupted= " + sQLiteDatabase.semIsDatabaseCorrupted());
-                    if (sQLiteDatabase.semIsDatabaseCorrupted()) {
-                        Log.e("AudioService.DB", "delete database " + context2.deleteDatabase("audioservice_sec.db"));
+        super(
+                context,
+                "audioservice_sec.db",
+                null,
+                14,
+                new DatabaseErrorHandler() { // from class:
+                                             // com.samsung.android.server.audio.AudioSettingsHelper$$ExternalSyntheticLambda0
+                    @Override // android.database.DatabaseErrorHandler
+                    public final void onCorruption(SQLiteDatabase sQLiteDatabase) {
+                        Context context2 = context;
+                        try {
+                            Log.e(
+                                    "AudioService.DB",
+                                    "database is corrupted= "
+                                            + sQLiteDatabase.semIsDatabaseCorrupted());
+                            if (sQLiteDatabase.semIsDatabaseCorrupted()) {
+                                Log.e(
+                                        "AudioService.DB",
+                                        "delete database "
+                                                + context2.deleteDatabase("audioservice_sec.db"));
+                            }
+                        } catch (Exception e) {
+                            RCPManagerService$$ExternalSyntheticOutline0.m(
+                                    e,
+                                    new StringBuilder("DatabaseErrorHandler "),
+                                    "AudioService.DB");
+                        }
                     }
-                } catch (Exception e) {
-                    RCPManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("DatabaseErrorHandler "), "AudioService.DB");
-                }
-            }
-        });
+                });
         this.mContext = context;
         this.mDatabase = getWritableDatabase();
         this.mSoundAppPolicyAllowAppList = new CopyOnWriteArrayList();
@@ -96,7 +115,8 @@ public final class AudioSettingsHelper extends SQLiteOpenHelper {
         try {
             this.mDatabase.insert(str, null, contentValues);
         } catch (Exception e) {
-            RCPManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("add error "), "AudioService.DB");
+            RCPManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("add error "), "AudioService.DB");
         }
     }
 
@@ -104,7 +124,8 @@ public final class AudioSettingsHelper extends SQLiteOpenHelper {
         if (this.mSoundAppPolicyAllowAppList.isEmpty()) {
             return false;
         }
-        return this.mSoundAppPolicyAllowAppList.stream().anyMatch(new AudioSettingsHelper$$ExternalSyntheticLambda1(str, str2));
+        return this.mSoundAppPolicyAllowAppList.stream()
+                .anyMatch(new AudioSettingsHelper$$ExternalSyntheticLambda1(str, str2));
     }
 
     public final void enableSyncParentSound() {
@@ -115,7 +136,11 @@ public final class AudioSettingsHelper extends SQLiteOpenHelper {
             }
             for (UserInfo userInfo : userManager.getProfiles(UserHandle.myUserId())) {
                 if (userInfo.isDualAppProfile()) {
-                    Settings.Secure.putIntForUser(this.mContext.getContentResolver(), "sync_parent_sounds", 1, userInfo.id);
+                    Settings.Secure.putIntForUser(
+                            this.mContext.getContentResolver(),
+                            "sync_parent_sounds",
+                            1,
+                            userInfo.id);
                     return;
                 }
             }
@@ -128,18 +153,30 @@ public final class AudioSettingsHelper extends SQLiteOpenHelper {
         Hashtable hashtable = new Hashtable();
         if (this.mSoundAppPolicyAllowAppList.isEmpty()) {
             try {
-                Cursor query = this.mDatabase.query("category_packages", new String[]{"_package", "_category"}, null, null, null, null, null);
+                Cursor query =
+                        this.mDatabase.query(
+                                "category_packages",
+                                new String[] {"_package", "_category"},
+                                null,
+                                null,
+                                null,
+                                null,
+                                null);
                 try {
                     if (query.moveToFirst()) {
                         do {
-                            this.mSoundAppPolicyAllowAppList.add(new Pair(query.getString(0), query.getString(1)));
+                            this.mSoundAppPolicyAllowAppList.add(
+                                    new Pair(query.getString(0), query.getString(1)));
                         } while (query.moveToNext());
                     }
                     query.close();
                 } finally {
                 }
             } catch (Exception e) {
-                RCPManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("getAllSoundAppPolicyAllowAppList error "), "AudioService.DB");
+                RCPManagerService$$ExternalSyntheticOutline0.m(
+                        e,
+                        new StringBuilder("getAllSoundAppPolicyAllowAppList error "),
+                        "AudioService.DB");
             }
         }
         Iterator it = this.mSoundAppPolicyAllowAppList.iterator();
@@ -162,19 +199,32 @@ public final class AudioSettingsHelper extends SQLiteOpenHelper {
             } finally {
             }
         } catch (Exception e) {
-            AudioServiceExt$ResetSettingsReceiver$$ExternalSyntheticOutline0.m(e, new StringBuilder("getInt error "), "AudioService.DB");
+            AudioServiceExt$ResetSettingsReceiver$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("getInt error "), "AudioService.DB");
         }
         return i;
     }
 
     public final int getIntValue(int i, String str) {
-        return getInt("audio_settings", new String[]{"_key", "_value"}, XmlUtils$$ExternalSyntheticOutline0.m("_key='", str, "'"), i);
+        return getInt(
+                "audio_settings",
+                new String[] {"_key", "_value"},
+                XmlUtils$$ExternalSyntheticOutline0.m("_key='", str, "'"),
+                i);
     }
 
     public final Hashtable getPackageList() {
         Hashtable hashtable = new Hashtable();
         try {
-            Cursor query = this.mDatabase.query("selectedpkg", new String[]{"_uid", "_package"}, null, null, null, null, null);
+            Cursor query =
+                    this.mDatabase.query(
+                            "selectedpkg",
+                            new String[] {"_uid", "_package"},
+                            null,
+                            null,
+                            null,
+                            null,
+                            null);
             try {
                 if (query.moveToFirst()) {
                     do {
@@ -186,31 +236,32 @@ public final class AudioSettingsHelper extends SQLiteOpenHelper {
             } finally {
             }
         } catch (Exception e) {
-            RCPManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("getPackageList error "), "AudioService.DB");
+            RCPManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("getPackageList error "), "AudioService.DB");
         }
         return hashtable;
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:17:0x0074, code lost:
-    
-        if (r8 == false) goto L31;
-     */
+
+       if (r8 == false) goto L31;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:18:0x0076, code lost:
-    
-        android.provider.Settings.System.putIntForUser(r10, r12, r11, -2);
-     */
+
+       android.provider.Settings.System.putIntForUser(r10, r12, r11, -2);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:19:0x007a, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:21:?, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:28:0x0071, code lost:
-    
-        if (r9 == null) goto L23;
-     */
+
+       if (r9 == null) goto L23;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -284,18 +335,33 @@ public final class AudioSettingsHelper extends SQLiteOpenHelper {
         L80:
             throw r10
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.server.audio.AudioSettingsHelper.initSystemVibration(int, java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.server.audio.AudioSettingsHelper.initSystemVibration(int,"
+                    + " java.lang.String):void");
     }
 
     @Override // android.database.sqlite.SQLiteOpenHelper
     public final void onCreate(SQLiteDatabase sQLiteDatabase) {
         try {
-            sQLiteDatabase.execSQL("CREATE TABLE audio_settings (_id INTEGER PRIMARY KEY AUTOINCREMENT, _key TEXT UNIQUE, _value INTEGER);");
-            sQLiteDatabase.execSQL("CREATE TABLE device_addr (_id INTEGER PRIMARY KEY AUTOINCREMENT, _addr TEXT UNIQUE, _index INTEGER);");
-            sQLiteDatabase.execSQL("CREATE TABLE app_volume (_id INTEGER PRIMARY KEY AUTOINCREMENT, _uid INTEGER UNIQUE, _index INTEGER);");
-            sQLiteDatabase.execSQL("CREATE TABLE selectedpkg (_id INTEGER PRIMARY KEY AUTOINCREMENT, _uid INTERGER, _package TEXT);");
-            sQLiteDatabase.execSQL("CREATE TABLE category_packages (_id INTEGER PRIMARY KEY AUTOINCREMENT, _package TEXT,_category TEXT);");
-            sQLiteDatabase.execSQL("CREATE TABLE call_policy_category_packages (_id INTEGER PRIMARY KEY AUTOINCREMENT, _package TEXT,_category TEXT);");
+            sQLiteDatabase.execSQL(
+                    "CREATE TABLE audio_settings (_id INTEGER PRIMARY KEY AUTOINCREMENT, _key TEXT"
+                        + " UNIQUE, _value INTEGER);");
+            sQLiteDatabase.execSQL(
+                    "CREATE TABLE device_addr (_id INTEGER PRIMARY KEY AUTOINCREMENT, _addr TEXT"
+                        + " UNIQUE, _index INTEGER);");
+            sQLiteDatabase.execSQL(
+                    "CREATE TABLE app_volume (_id INTEGER PRIMARY KEY AUTOINCREMENT, _uid INTEGER"
+                        + " UNIQUE, _index INTEGER);");
+            sQLiteDatabase.execSQL(
+                    "CREATE TABLE selectedpkg (_id INTEGER PRIMARY KEY AUTOINCREMENT, _uid"
+                        + " INTERGER, _package TEXT);");
+            sQLiteDatabase.execSQL(
+                    "CREATE TABLE category_packages (_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                        + " _package TEXT,_category TEXT);");
+            sQLiteDatabase.execSQL(
+                    "CREATE TABLE call_policy_category_packages (_id INTEGER PRIMARY KEY"
+                        + " AUTOINCREMENT, _package TEXT,_category TEXT);");
         } catch (Exception e) {
             Log.e("AudioService.DB", "Create DB Create failed ", e);
         }
@@ -306,7 +372,8 @@ public final class AudioSettingsHelper extends SQLiteOpenHelper {
         try {
             sQLiteDatabase.setVersion(i);
         } catch (Exception e) {
-            AudioServiceExt$ResetSettingsReceiver$$ExternalSyntheticOutline0.m(e, new StringBuilder("onDowngrade error "), "AudioService.DB");
+            AudioServiceExt$ResetSettingsReceiver$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("onDowngrade error "), "AudioService.DB");
         }
     }
 
@@ -317,15 +384,20 @@ public final class AudioSettingsHelper extends SQLiteOpenHelper {
         if (i3 == 1) {
             try {
                 sQLiteDatabase.execSQL("DROP TABLE IF EXISTS category_packages");
-                sQLiteDatabase.execSQL("CREATE TABLE selectedpkg (_id INTEGER PRIMARY KEY AUTOINCREMENT, _uid INTEGER, _package TEXT);");
+                sQLiteDatabase.execSQL(
+                        "CREATE TABLE selectedpkg (_id INTEGER PRIMARY KEY AUTOINCREMENT, _uid"
+                            + " INTEGER, _package TEXT);");
                 i3 = 2;
             } catch (Exception e) {
-                RCPManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("onUpgrade error "), "AudioService.DB");
+                RCPManagerService$$ExternalSyntheticOutline0.m(
+                        e, new StringBuilder("onUpgrade error "), "AudioService.DB");
                 return;
             }
         }
         if (i3 == 2) {
-            sQLiteDatabase.execSQL("CREATE TABLE category_packages (_id INTEGER PRIMARY KEY AUTOINCREMENT, _package TEXT,_category TEXT);");
+            sQLiteDatabase.execSQL(
+                    "CREATE TABLE category_packages (_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                        + " _package TEXT,_category TEXT);");
             i3 = 3;
         }
         if (i3 == 3) {
@@ -336,13 +408,17 @@ public final class AudioSettingsHelper extends SQLiteOpenHelper {
             i3 = 5;
         }
         if (i3 == 5) {
-            if (Settings.System.getIntForUser(this.mContext.getContentResolver(), "adjust_media_volume_only", -1, -2) == -1) {
-                Settings.System.putIntForUser(this.mContext.getContentResolver(), "adjust_media_volume_only", 0, -2);
+            if (Settings.System.getIntForUser(
+                            this.mContext.getContentResolver(), "adjust_media_volume_only", -1, -2)
+                    == -1) {
+                Settings.System.putIntForUser(
+                        this.mContext.getContentResolver(), "adjust_media_volume_only", 0, -2);
             }
             i3 = 6;
         }
         if (i3 == 6) {
-            sQLiteDatabase.execSQL("update audio_settings set _value = 0 where _key = 'APP_LIST_VERSION'");
+            sQLiteDatabase.execSQL(
+                    "update audio_settings set _value = 0 where _key = 'APP_LIST_VERSION'");
             i3 = 7;
         }
         if (i3 == 7) {
@@ -351,7 +427,9 @@ public final class AudioSettingsHelper extends SQLiteOpenHelper {
         }
         if (i3 == 8) {
             Vibrator vibrator = (Vibrator) this.mContext.getSystemService("vibrator");
-            if (vibrator != null && vibrator.hasVibrator() && vibrator.semGetSupportedVibrationType() == 1) {
+            if (vibrator != null
+                    && vibrator.hasVibrator()
+                    && vibrator.semGetSupportedVibrationType() == 1) {
                 if (VibRune.SUPPORT_HAPTIC_FEEDBACK_ON_DC_MOTOR) {
                     initSystemVibration(1, "haptic_feedback_enabled");
                 }
@@ -363,21 +441,40 @@ public final class AudioSettingsHelper extends SQLiteOpenHelper {
             i3 = 9;
         }
         if (i3 == 9) {
-            String string = Settings.Secure.getString(this.mContext.getContentResolver(), "volumelimit_secure_password");
+            String string =
+                    Settings.Secure.getString(
+                            this.mContext.getContentResolver(), "volumelimit_secure_password");
             if (string != null && !string.isEmpty()) {
                 try {
                     Charset charset = StandardCharsets.UTF_8;
-                    byte[] copyOf = Arrays.copyOf(MessageDigest.getInstance("SHA-1").digest("encrypt_password".getBytes(charset)), 16);
+                    byte[] copyOf =
+                            Arrays.copyOf(
+                                    MessageDigest.getInstance("SHA-1")
+                                            .digest("encrypt_password".getBytes(charset)),
+                                    16);
                     Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
                     cipher.init(2, new SecretKeySpec(copyOf, "AES"));
-                    String str = new String(cipher.doFinal(Base64.getDecoder().decode(string)), charset);
+                    String str =
+                            new String(cipher.doFinal(Base64.getDecoder().decode(string)), charset);
                     MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
                     messageDigest.update(str.getBytes(charset));
-                    Settings.Secure.putString(this.mContext.getContentResolver(), "volumelimit_secure_password", String.format("%064x", new BigInteger(1, messageDigest.digest())));
-                } catch (InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException e2) {
-                    Log.e("AudioService.DB", "Change of volume limiter pin encryption failed. Pin is initialized.", e2);
-                    Settings.Secure.putString(this.mContext.getContentResolver(), "volumelimit_secure_password", "");
-                    Settings.System.putInt(this.mContext.getContentResolver(), "volumelimit_set_password", 0);
+                    Settings.Secure.putString(
+                            this.mContext.getContentResolver(),
+                            "volumelimit_secure_password",
+                            String.format("%064x", new BigInteger(1, messageDigest.digest())));
+                } catch (InvalidKeyException
+                        | NoSuchAlgorithmException
+                        | BadPaddingException
+                        | IllegalBlockSizeException
+                        | NoSuchPaddingException e2) {
+                    Log.e(
+                            "AudioService.DB",
+                            "Change of volume limiter pin encryption failed. Pin is initialized.",
+                            e2);
+                    Settings.Secure.putString(
+                            this.mContext.getContentResolver(), "volumelimit_secure_password", "");
+                    Settings.System.putInt(
+                            this.mContext.getContentResolver(), "volumelimit_set_password", 0);
                 }
             }
             i3 = 10;
@@ -388,14 +485,38 @@ public final class AudioSettingsHelper extends SQLiteOpenHelper {
         if (i3 == 11) {
             if (VibRune.SUPPORT_ACH) {
                 int[] iArr = {1, 128, 2, 256};
-                String[] strArr = {"ringtone_CONSTANT_PATH", "ringtone_2_CONSTANT_PATH", "notification_sound_CONSTANT_PATH", "notification_sound_2_CONSTANT_PATH"};
-                String[] strArr2 = {"sync_vibration_with_ringtone", "sync_vibration_with_ringtone_2", "sync_vibration_with_notification", "sync_vibration_with_notification"};
+                String[] strArr = {
+                    "ringtone_CONSTANT_PATH",
+                    "ringtone_2_CONSTANT_PATH",
+                    "notification_sound_CONSTANT_PATH",
+                    "notification_sound_2_CONSTANT_PATH"
+                };
+                String[] strArr2 = {
+                    "sync_vibration_with_ringtone",
+                    "sync_vibration_with_ringtone_2",
+                    "sync_vibration_with_notification",
+                    "sync_vibration_with_notification"
+                };
                 for (int i4 = 0; i4 < 4; i4++) {
-                    if (RingtoneManager.isInternalRingtoneUri(RingtoneManager.getActualDefaultRingtoneUri(this.mContext, iArr[i4]))) {
+                    if (RingtoneManager.isInternalRingtoneUri(
+                            RingtoneManager.getActualDefaultRingtoneUri(this.mContext, iArr[i4]))) {
                         try {
-                            if (!AudioManager.hasHapticChannels(this.mContext, Uri.fromFile(new File(Uri.parse(Settings.System.getStringForUser(this.mContext.getContentResolver(), strArr[i4], this.mContext.getUserId())).getQueryParameter("path"))))) {
+                            if (!AudioManager.hasHapticChannels(
+                                    this.mContext,
+                                    Uri.fromFile(
+                                            new File(
+                                                    Uri.parse(
+                                                                    Settings.System
+                                                                            .getStringForUser(
+                                                                                    this.mContext
+                                                                                            .getContentResolver(),
+                                                                                    strArr[i4],
+                                                                                    this.mContext
+                                                                                            .getUserId()))
+                                                            .getQueryParameter("path"))))) {
                                 Log.i("AudioService.DB", strArr[i4] + " has not haptic channels");
-                                Settings.System.putInt(this.mContext.getContentResolver(), strArr2[i4], 0);
+                                Settings.System.putInt(
+                                        this.mContext.getContentResolver(), strArr2[i4], 0);
                             }
                         } catch (Exception e3) {
                             Log.e("AudioService.DB", "Uri error ", e3);
@@ -410,11 +531,14 @@ public final class AudioSettingsHelper extends SQLiteOpenHelper {
         if (i3 == 12) {
             sQLiteDatabase.execSQL("DELETE FROM selectedpkg");
             sQLiteDatabase.execSQL("DELETE FROM category_packages");
-            sQLiteDatabase.execSQL("update audio_settings set _value = 0 where _key = 'APP_LIST_VERSION'");
+            sQLiteDatabase.execSQL(
+                    "update audio_settings set _value = 0 where _key = 'APP_LIST_VERSION'");
             i3 = 13;
         }
         if (i3 == 13) {
-            sQLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS call_policy_category_packages (_id INTEGER PRIMARY KEY AUTOINCREMENT, _package TEXT,_category TEXT);");
+            sQLiteDatabase.execSQL(
+                    "CREATE TABLE IF NOT EXISTS call_policy_category_packages (_id INTEGER PRIMARY"
+                        + " KEY AUTOINCREMENT, _package TEXT,_category TEXT);");
         }
     }
 
@@ -430,7 +554,8 @@ public final class AudioSettingsHelper extends SQLiteOpenHelper {
         try {
             return this.mDatabase.delete(str, str2, null);
         } catch (Exception e) {
-            RCPManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("remove error "), "AudioService.DB");
+            RCPManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("remove error "), "AudioService.DB");
             return 0;
         }
     }
@@ -473,7 +598,8 @@ public final class AudioSettingsHelper extends SQLiteOpenHelper {
                 this.mDatabase.insert(str, null, contentValues);
             }
         } catch (Exception e) {
-            RCPManagerService$$ExternalSyntheticOutline0.m(e, new StringBuilder("set error "), "AudioService.DB");
+            RCPManagerService$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("set error "), "AudioService.DB");
         }
     }
 

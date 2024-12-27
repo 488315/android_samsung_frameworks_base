@@ -9,19 +9,21 @@ import android.os.Trace;
 
 /* loaded from: classes.dex */
 public class DestroyActivityItem extends ActivityLifecycleItem {
-    public static final Parcelable.Creator<DestroyActivityItem> CREATOR = new Parcelable.Creator<DestroyActivityItem>() { // from class: android.app.servertransaction.DestroyActivityItem.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DestroyActivityItem createFromParcel(Parcel in) {
-            return new DestroyActivityItem(in);
-        }
+    public static final Parcelable.Creator<DestroyActivityItem> CREATOR =
+            new Parcelable.Creator<DestroyActivityItem>() { // from class:
+                // android.app.servertransaction.DestroyActivityItem.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DestroyActivityItem createFromParcel(Parcel in) {
+                    return new DestroyActivityItem(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DestroyActivityItem[] newArray(int size) {
-            return new DestroyActivityItem[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DestroyActivityItem[] newArray(int size) {
+                    return new DestroyActivityItem[size];
+                }
+            };
     private boolean mFinished;
 
     @Override // android.app.servertransaction.BaseClientRequest
@@ -30,14 +32,18 @@ public class DestroyActivityItem extends ActivityLifecycleItem {
     }
 
     @Override // android.app.servertransaction.ActivityTransactionItem
-    public void execute(ClientTransactionHandler client, ActivityThread.ActivityClientRecord r, PendingTransactionActions pendingActions) {
+    public void execute(
+            ClientTransactionHandler client,
+            ActivityThread.ActivityClientRecord r,
+            PendingTransactionActions pendingActions) {
         Trace.traceBegin(64L, "activityDestroy");
         client.handleDestroyActivity(r, this.mFinished, false, "DestroyActivityItem");
         Trace.traceEnd(64L);
     }
 
     @Override // android.app.servertransaction.BaseClientRequest
-    public void postExecute(ClientTransactionHandler client, PendingTransactionActions pendingActions) {
+    public void postExecute(
+            ClientTransactionHandler client, PendingTransactionActions pendingActions) {
         client.getActivitiesToBeDestroyed().remove(getActivityToken());
     }
 
@@ -46,11 +52,11 @@ public class DestroyActivityItem extends ActivityLifecycleItem {
         return 6;
     }
 
-    private DestroyActivityItem() {
-    }
+    private DestroyActivityItem() {}
 
     public static DestroyActivityItem obtain(IBinder activityToken, boolean finished) {
-        DestroyActivityItem instance = (DestroyActivityItem) ObjectPool.obtain(DestroyActivityItem.class);
+        DestroyActivityItem instance =
+                (DestroyActivityItem) ObjectPool.obtain(DestroyActivityItem.class);
         if (instance == null) {
             instance = new DestroyActivityItem();
         }
@@ -59,7 +65,8 @@ public class DestroyActivityItem extends ActivityLifecycleItem {
         return instance;
     }
 
-    @Override // android.app.servertransaction.ActivityTransactionItem, android.app.servertransaction.ObjectPoolItem
+    @Override // android.app.servertransaction.ActivityTransactionItem,
+    // android.app.servertransaction.ObjectPoolItem
     public void recycle() {
         super.recycle();
         this.mFinished = false;

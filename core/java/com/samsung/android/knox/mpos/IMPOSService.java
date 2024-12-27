@@ -11,15 +11,28 @@ import android.os.RemoteException;
 public interface IMPOSService extends IInterface {
     public static final String DESCRIPTOR = "com.samsung.android.knox.mpos.IMPOSService";
 
-    boolean loadTa(int i, ParcelFileDescriptor parcelFileDescriptor, long j, long j2, MposTZServiceConfig mposTZServiceConfig) throws RemoteException;
+    boolean loadTa(
+            int i,
+            ParcelFileDescriptor parcelFileDescriptor,
+            long j,
+            long j2,
+            MposTZServiceConfig mposTZServiceConfig)
+            throws RemoteException;
 
-    TACommandResponse processTACommand(int i, TACommandRequest tACommandRequest) throws RemoteException;
+    TACommandResponse processTACommand(int i, TACommandRequest tACommandRequest)
+            throws RemoteException;
 
     boolean unloadTa(int i) throws RemoteException;
 
     public static class Default implements IMPOSService {
         @Override // com.samsung.android.knox.mpos.IMPOSService
-        public boolean loadTa(int taId, ParcelFileDescriptor pFd, long offset, long len, MposTZServiceConfig config) throws RemoteException {
+        public boolean loadTa(
+                int taId,
+                ParcelFileDescriptor pFd,
+                long offset,
+                long len,
+                MposTZServiceConfig config)
+                throws RemoteException {
             return false;
         }
 
@@ -29,7 +42,8 @@ public interface IMPOSService extends IInterface {
         }
 
         @Override // com.samsung.android.knox.mpos.IMPOSService
-        public TACommandResponse processTACommand(int taId, TACommandRequest request) throws RemoteException {
+        public TACommandResponse processTACommand(int taId, TACommandRequest request)
+                throws RemoteException {
             return null;
         }
 
@@ -39,7 +53,7 @@ public interface IMPOSService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMPOSService {
+    public abstract static class Stub extends Binder implements IMPOSService {
         static final int TRANSACTION_loadTa = 1;
         static final int TRANSACTION_processTACommand = 3;
         static final int TRANSACTION_unloadTa = 2;
@@ -83,7 +97,8 @@ public interface IMPOSService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IMPOSService.DESCRIPTOR);
             }
@@ -94,10 +109,13 @@ public interface IMPOSService extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    ParcelFileDescriptor _arg1 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg1 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     long _arg2 = data.readLong();
                     long _arg3 = data.readLong();
-                    MposTZServiceConfig _arg4 = (MposTZServiceConfig) data.readTypedObject(MposTZServiceConfig.CREATOR);
+                    MposTZServiceConfig _arg4 =
+                            (MposTZServiceConfig) data.readTypedObject(MposTZServiceConfig.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result = loadTa(_arg0, _arg1, _arg2, _arg3, _arg4);
                     reply.writeNoException();
@@ -112,7 +130,8 @@ public interface IMPOSService extends IInterface {
                     return true;
                 case 3:
                     int _arg03 = data.readInt();
-                    TACommandRequest _arg12 = (TACommandRequest) data.readTypedObject(TACommandRequest.CREATOR);
+                    TACommandRequest _arg12 =
+                            (TACommandRequest) data.readTypedObject(TACommandRequest.CREATOR);
                     data.enforceNoDataAvail();
                     TACommandResponse _result3 = processTACommand(_arg03, _arg12);
                     reply.writeNoException();
@@ -140,7 +159,13 @@ public interface IMPOSService extends IInterface {
             }
 
             @Override // com.samsung.android.knox.mpos.IMPOSService
-            public boolean loadTa(int taId, ParcelFileDescriptor pFd, long offset, long len, MposTZServiceConfig config) throws RemoteException {
+            public boolean loadTa(
+                    int taId,
+                    ParcelFileDescriptor pFd,
+                    long offset,
+                    long len,
+                    MposTZServiceConfig config)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -178,7 +203,8 @@ public interface IMPOSService extends IInterface {
             }
 
             @Override // com.samsung.android.knox.mpos.IMPOSService
-            public TACommandResponse processTACommand(int taId, TACommandRequest request) throws RemoteException {
+            public TACommandResponse processTACommand(int taId, TACommandRequest request)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -187,7 +213,8 @@ public interface IMPOSService extends IInterface {
                     _data.writeTypedObject(request, 0);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    TACommandResponse _result = (TACommandResponse) _reply.readTypedObject(TACommandResponse.CREATOR);
+                    TACommandResponse _result =
+                            (TACommandResponse) _reply.readTypedObject(TACommandResponse.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

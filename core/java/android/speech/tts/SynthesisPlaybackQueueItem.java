@@ -1,8 +1,8 @@
 package android.speech.tts;
 
 import android.media.AudioTrack;
-import android.speech.tts.TextToSpeechService;
 import android.util.Log;
+
 import java.util.LinkedList;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -11,7 +11,8 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /* loaded from: classes3.dex */
-final class SynthesisPlaybackQueueItem extends PlaybackQueueItem implements AudioTrack.OnPlaybackPositionUpdateListener {
+final class SynthesisPlaybackQueueItem extends PlaybackQueueItem
+        implements AudioTrack.OnPlaybackPositionUpdateListener {
     private static final boolean DBG = false;
     private static final long MAX_UNCONSUMED_AUDIO_MS = 500;
     private static final int NOT_RUN = 0;
@@ -31,7 +32,14 @@ final class SynthesisPlaybackQueueItem extends PlaybackQueueItem implements Audi
     private int mUnconsumedBytes;
     private ConcurrentLinkedQueue<ProgressMarker> markerList;
 
-    SynthesisPlaybackQueueItem(TextToSpeechService.AudioOutputParams audioParams, int sampleRate, int audioFormat, int channelCount, TextToSpeechService.UtteranceProgressDispatcher dispatcher, Object callerIdentity, AbstractEventLogger logger) {
+    SynthesisPlaybackQueueItem(
+            TextToSpeechService.AudioOutputParams audioParams,
+            int sampleRate,
+            int audioFormat,
+            int channelCount,
+            TextToSpeechService.UtteranceProgressDispatcher dispatcher,
+            Object callerIdentity,
+            AbstractEventLogger logger) {
         super(dispatcher, callerIdentity);
         this.mListLock = new ReentrantLock();
         this.mReadReady = this.mListLock.newCondition();
@@ -43,7 +51,8 @@ final class SynthesisPlaybackQueueItem extends PlaybackQueueItem implements Audi
         this.mStopped = false;
         this.mDone = false;
         this.mStatusCode = 0;
-        this.mAudioTrack = new BlockingAudioTrack(audioParams, sampleRate, audioFormat, channelCount);
+        this.mAudioTrack =
+                new BlockingAudioTrack(audioParams, sampleRate, audioFormat, channelCount);
         this.mLogger = logger;
     }
 
@@ -154,13 +163,14 @@ final class SynthesisPlaybackQueueItem extends PlaybackQueueItem implements Audi
     }
 
     @Override // android.media.AudioTrack.OnPlaybackPositionUpdateListener
-    public void onPeriodicNotification(AudioTrack track) {
-    }
+    public void onPeriodicNotification(AudioTrack track) {}
 
     void put(byte[] buffer) throws InterruptedException {
         try {
             this.mListLock.lock();
-            while (this.mAudioTrack.getAudioLengthMs(this.mUnconsumedBytes) > MAX_UNCONSUMED_AUDIO_MS && !this.mStopped) {
+            while (this.mAudioTrack.getAudioLengthMs(this.mUnconsumedBytes)
+                            > MAX_UNCONSUMED_AUDIO_MS
+                    && !this.mStopped) {
                 this.mNotFull.await();
             }
             if (this.mStopped) {

@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.media.tv.TvTrackInfo;
-import android.media.tv.ad.ITvAdService;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -26,7 +25,9 @@ import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+
 import com.android.internal.os.SomeArgs;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,46 +45,50 @@ public abstract class TvAdService extends Service {
 
     @Override // android.app.Service
     public final IBinder onBind(Intent intent) {
-        ITvAdService.Stub tvAdServiceBinder = new ITvAdService.Stub() { // from class: android.media.tv.ad.TvAdService.1
-            @Override // android.media.tv.ad.ITvAdService
-            public void registerCallback(ITvAdServiceCallback cb) {
-                if (cb != null) {
-                    TvAdService.this.mCallbacks.register(cb);
-                }
-            }
+        ITvAdService.Stub tvAdServiceBinder =
+                new ITvAdService.Stub() { // from class: android.media.tv.ad.TvAdService.1
+                    @Override // android.media.tv.ad.ITvAdService
+                    public void registerCallback(ITvAdServiceCallback cb) {
+                        if (cb != null) {
+                            TvAdService.this.mCallbacks.register(cb);
+                        }
+                    }
 
-            @Override // android.media.tv.ad.ITvAdService
-            public void unregisterCallback(ITvAdServiceCallback cb) {
-                if (cb != null) {
-                    TvAdService.this.mCallbacks.unregister(cb);
-                }
-            }
+                    @Override // android.media.tv.ad.ITvAdService
+                    public void unregisterCallback(ITvAdServiceCallback cb) {
+                        if (cb != null) {
+                            TvAdService.this.mCallbacks.unregister(cb);
+                        }
+                    }
 
-            @Override // android.media.tv.ad.ITvAdService
-            public void createSession(InputChannel channel, ITvAdSessionCallback cb, String serviceId, String type) {
-                if (cb == null) {
-                    return;
-                }
-                SomeArgs args = SomeArgs.obtain();
-                args.arg1 = channel;
-                args.arg2 = cb;
-                args.arg3 = serviceId;
-                args.arg4 = type;
-                TvAdService.this.mServiceHandler.obtainMessage(1, args).sendToTarget();
-            }
+                    @Override // android.media.tv.ad.ITvAdService
+                    public void createSession(
+                            InputChannel channel,
+                            ITvAdSessionCallback cb,
+                            String serviceId,
+                            String type) {
+                        if (cb == null) {
+                            return;
+                        }
+                        SomeArgs args = SomeArgs.obtain();
+                        args.arg1 = channel;
+                        args.arg2 = cb;
+                        args.arg3 = serviceId;
+                        args.arg4 = type;
+                        TvAdService.this.mServiceHandler.obtainMessage(1, args).sendToTarget();
+                    }
 
-            @Override // android.media.tv.ad.ITvAdService
-            public void sendAppLinkCommand(Bundle command) {
-                TvAdService.this.onAppLinkCommand(command);
-            }
-        };
+                    @Override // android.media.tv.ad.ITvAdService
+                    public void sendAppLinkCommand(Bundle command) {
+                        TvAdService.this.onAppLinkCommand(command);
+                    }
+                };
         return tvAdServiceBinder;
     }
 
-    public void onAppLinkCommand(Bundle command) {
-    }
+    public void onAppLinkCommand(Bundle command) {}
 
-    public static abstract class Session implements KeyEvent.Callback {
+    public abstract static class Session implements KeyEvent.Callback {
         private final Context mContext;
         final Handler mHandler;
         private Rect mMediaFrame;
@@ -111,23 +116,25 @@ public abstract class TvAdService extends Service {
         }
 
         public void setMediaViewEnabled(final boolean enable) {
-            this.mHandler.post(new Runnable() { // from class: android.media.tv.ad.TvAdService.Session.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    if (enable == Session.this.mMediaViewEnabled) {
-                        return;
-                    }
-                    Session.this.mMediaViewEnabled = enable;
-                    if (enable) {
-                        if (Session.this.mWindowToken != null) {
-                            Session.this.createMediaView(Session.this.mWindowToken, Session.this.mMediaFrame);
-                            return;
+            this.mHandler.post(
+                    new Runnable() { // from class: android.media.tv.ad.TvAdService.Session.1
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            if (enable == Session.this.mMediaViewEnabled) {
+                                return;
+                            }
+                            Session.this.mMediaViewEnabled = enable;
+                            if (enable) {
+                                if (Session.this.mWindowToken != null) {
+                                    Session.this.createMediaView(
+                                            Session.this.mWindowToken, Session.this.mMediaFrame);
+                                    return;
+                                }
+                                return;
+                            }
+                            Session.this.removeMediaView(false);
                         }
-                        return;
-                    }
-                    Session.this.removeMediaView(false);
-                }
-            });
+                    });
         }
 
         public boolean isMediaViewEnabled() {
@@ -147,14 +154,11 @@ public abstract class TvAdService extends Service {
             removeMediaView(true);
         }
 
-        public void onStartAdService() {
-        }
+        public void onStartAdService() {}
 
-        public void onStopAdService() {
-        }
+        public void onStopAdService() {}
 
-        public void onResetAdService() {
-        }
+        public void onResetAdService() {}
 
         void startAdService() {
             onStartAdService();
@@ -169,78 +173,88 @@ public abstract class TvAdService extends Service {
         }
 
         public void requestCurrentVideoBounds() {
-            executeOrPostRunnableOnMainThread(new Runnable() { // from class: android.media.tv.ad.TvAdService.Session.2
-                @Override // java.lang.Runnable
-                public void run() {
-                    try {
-                        if (Session.this.mSessionCallback != null) {
-                            Session.this.mSessionCallback.onRequestCurrentVideoBounds();
+            executeOrPostRunnableOnMainThread(
+                    new Runnable() { // from class: android.media.tv.ad.TvAdService.Session.2
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            try {
+                                if (Session.this.mSessionCallback != null) {
+                                    Session.this.mSessionCallback.onRequestCurrentVideoBounds();
+                                }
+                            } catch (RemoteException e) {
+                                Log.w(TvAdService.TAG, "error in requestCurrentVideoBounds", e);
+                            }
                         }
-                    } catch (RemoteException e) {
-                        Log.w(TvAdService.TAG, "error in requestCurrentVideoBounds", e);
-                    }
-                }
-            });
+                    });
         }
 
         public void requestCurrentChannelUri() {
-            executeOrPostRunnableOnMainThread(new Runnable() { // from class: android.media.tv.ad.TvAdService.Session.3
-                @Override // java.lang.Runnable
-                public void run() {
-                    try {
-                        if (Session.this.mSessionCallback != null) {
-                            Session.this.mSessionCallback.onRequestCurrentChannelUri();
+            executeOrPostRunnableOnMainThread(
+                    new Runnable() { // from class: android.media.tv.ad.TvAdService.Session.3
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            try {
+                                if (Session.this.mSessionCallback != null) {
+                                    Session.this.mSessionCallback.onRequestCurrentChannelUri();
+                                }
+                            } catch (RemoteException e) {
+                                Log.w(TvAdService.TAG, "error in requestCurrentChannelUri", e);
+                            }
                         }
-                    } catch (RemoteException e) {
-                        Log.w(TvAdService.TAG, "error in requestCurrentChannelUri", e);
-                    }
-                }
-            });
+                    });
         }
 
         public void requestTrackInfoList() {
-            executeOrPostRunnableOnMainThread(new Runnable() { // from class: android.media.tv.ad.TvAdService.Session.4
-                @Override // java.lang.Runnable
-                public void run() {
-                    try {
-                        if (Session.this.mSessionCallback != null) {
-                            Session.this.mSessionCallback.onRequestTrackInfoList();
+            executeOrPostRunnableOnMainThread(
+                    new Runnable() { // from class: android.media.tv.ad.TvAdService.Session.4
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            try {
+                                if (Session.this.mSessionCallback != null) {
+                                    Session.this.mSessionCallback.onRequestTrackInfoList();
+                                }
+                            } catch (RemoteException e) {
+                                Log.w(TvAdService.TAG, "error in requestTrackInfoList", e);
+                            }
                         }
-                    } catch (RemoteException e) {
-                        Log.w(TvAdService.TAG, "error in requestTrackInfoList", e);
-                    }
-                }
-            });
+                    });
         }
 
         public void requestCurrentTvInputId() {
-            executeOrPostRunnableOnMainThread(new Runnable() { // from class: android.media.tv.ad.TvAdService.Session.5
-                @Override // java.lang.Runnable
-                public void run() {
-                    try {
-                        if (Session.this.mSessionCallback != null) {
-                            Session.this.mSessionCallback.onRequestCurrentTvInputId();
+            executeOrPostRunnableOnMainThread(
+                    new Runnable() { // from class: android.media.tv.ad.TvAdService.Session.5
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            try {
+                                if (Session.this.mSessionCallback != null) {
+                                    Session.this.mSessionCallback.onRequestCurrentTvInputId();
+                                }
+                            } catch (RemoteException e) {
+                                Log.w(TvAdService.TAG, "error in requestCurrentTvInputId", e);
+                            }
                         }
-                    } catch (RemoteException e) {
-                        Log.w(TvAdService.TAG, "error in requestCurrentTvInputId", e);
-                    }
-                }
-            });
+                    });
         }
 
-        public void requestSigning(final String signingId, final String algorithm, final String alias, final byte[] data) {
-            executeOrPostRunnableOnMainThread(new Runnable() { // from class: android.media.tv.ad.TvAdService.Session.6
-                @Override // java.lang.Runnable
-                public void run() {
-                    try {
-                        if (Session.this.mSessionCallback != null) {
-                            Session.this.mSessionCallback.onRequestSigning(signingId, algorithm, alias, data);
+        public void requestSigning(
+                final String signingId,
+                final String algorithm,
+                final String alias,
+                final byte[] data) {
+            executeOrPostRunnableOnMainThread(
+                    new Runnable() { // from class: android.media.tv.ad.TvAdService.Session.6
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            try {
+                                if (Session.this.mSessionCallback != null) {
+                                    Session.this.mSessionCallback.onRequestSigning(
+                                            signingId, algorithm, alias, data);
+                                }
+                            } catch (RemoteException e) {
+                                Log.w(TvAdService.TAG, "error in requestSigning", e);
+                            }
                         }
-                    } catch (RemoteException e) {
-                        Log.w(TvAdService.TAG, "error in requestSigning", e);
-                    }
-                }
-            });
+                    });
         }
 
         @Override // android.view.KeyEvent.Callback
@@ -275,79 +289,73 @@ public abstract class TvAdService extends Service {
             return false;
         }
 
-        public void layoutSurface(final int left, final int top, final int right, final int bottom) {
+        public void layoutSurface(
+                final int left, final int top, final int right, final int bottom) {
             if (left > right || top > bottom) {
                 throw new IllegalArgumentException("Invalid parameter");
             }
-            executeOrPostRunnableOnMainThread(new Runnable() { // from class: android.media.tv.ad.TvAdService.Session.7
-                @Override // java.lang.Runnable
-                public void run() {
-                    try {
-                        if (Session.this.mSessionCallback != null) {
-                            Session.this.mSessionCallback.onLayoutSurface(left, top, right, bottom);
+            executeOrPostRunnableOnMainThread(
+                    new Runnable() { // from class: android.media.tv.ad.TvAdService.Session.7
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            try {
+                                if (Session.this.mSessionCallback != null) {
+                                    Session.this.mSessionCallback.onLayoutSurface(
+                                            left, top, right, bottom);
+                                }
+                            } catch (RemoteException e) {
+                                Log.w(TvAdService.TAG, "error in layoutSurface", e);
+                            }
                         }
-                    } catch (RemoteException e) {
-                        Log.w(TvAdService.TAG, "error in layoutSurface", e);
-                    }
-                }
-            });
+                    });
         }
 
-        public void onSurfaceChanged(int format, int width, int height) {
-        }
+        public void onSurfaceChanged(int format, int width, int height) {}
 
-        public void onCurrentVideoBounds(Rect bounds) {
-        }
+        public void onCurrentVideoBounds(Rect bounds) {}
 
-        public void onCurrentChannelUri(Uri channelUri) {
-        }
+        public void onCurrentChannelUri(Uri channelUri) {}
 
-        public void onTrackInfoList(List<TvTrackInfo> tracks) {
-        }
+        public void onTrackInfoList(List<TvTrackInfo> tracks) {}
 
-        public void onCurrentTvInputId(String inputId) {
-        }
+        public void onCurrentTvInputId(String inputId) {}
 
-        public void onSigningResult(String signingId, byte[] result) {
-        }
+        public void onSigningResult(String signingId, byte[] result) {}
 
-        public void onError(String errMsg, Bundle params) {
-        }
+        public void onError(String errMsg, Bundle params) {}
 
-        public void onTvMessage(int type, Bundle data) {
-        }
+        public void onTvMessage(int type, Bundle data) {}
 
-        public void onTvInputSessionData(String type, Bundle data) {
-        }
+        public void onTvInputSessionData(String type, Bundle data) {}
 
-        public void onMediaViewSizeChanged(int width, int height) {
-        }
+        public void onMediaViewSizeChanged(int width, int height) {}
 
         public View onCreateMediaView() {
             return null;
         }
 
         public void sendTvAdSessionData(final String type, final Bundle data) {
-            executeOrPostRunnableOnMainThread(new Runnable() { // from class: android.media.tv.ad.TvAdService.Session.8
-                @Override // java.lang.Runnable
-                public void run() {
-                    try {
-                        if (Session.this.mSessionCallback != null) {
-                            Session.this.mSessionCallback.onTvAdSessionData(type, data);
+            executeOrPostRunnableOnMainThread(
+                    new Runnable() { // from class: android.media.tv.ad.TvAdService.Session.8
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            try {
+                                if (Session.this.mSessionCallback != null) {
+                                    Session.this.mSessionCallback.onTvAdSessionData(type, data);
+                                }
+                            } catch (RemoteException e) {
+                                Log.w(TvAdService.TAG, "error in sendTvAdSessionData", e);
+                            }
                         }
-                    } catch (RemoteException e) {
-                        Log.w(TvAdService.TAG, "error in sendTvAdSessionData", e);
-                    }
-                }
-            });
+                    });
         }
 
         public void notifySessionStateChanged(final int state, final int err) {
-            executeOrPostRunnableOnMainThread(new Runnable() { // from class: android.media.tv.ad.TvAdService.Session.9
-                @Override // java.lang.Runnable
-                public void run() {
-                }
-            });
+            executeOrPostRunnableOnMainThread(
+                    new Runnable() { // from class: android.media.tv.ad.TvAdService.Session.9
+                        @Override // java.lang.Runnable
+                        public void run() {}
+                    });
         }
 
         int dispatchInputEvent(InputEvent event, InputEventReceiver receiver) {
@@ -358,7 +366,11 @@ public abstract class TvAdService extends Service {
             if (event instanceof MotionEvent) {
                 MotionEvent motionEvent = (MotionEvent) event;
                 int source = motionEvent.getSource();
-                return motionEvent.isTouchEvent() ? onTouchEvent(motionEvent) ? 1 : 0 : (source & 4) != 0 ? onTrackballEvent(motionEvent) ? 1 : 0 : onGenericMotionEvent(motionEvent) ? 1 : 0;
+                return motionEvent.isTouchEvent()
+                        ? onTouchEvent(motionEvent) ? 1 : 0
+                        : (source & 4) != 0
+                                ? onTrackballEvent(motionEvent) ? 1 : 0
+                                : onGenericMotionEvent(motionEvent) ? 1 : 0;
             }
             return 0;
         }
@@ -451,7 +463,15 @@ public abstract class TvAdService extends Service {
             this.mMediaViewContainer = new FrameLayout(this.mContext.getApplicationContext());
             this.mMediaViewContainer.addView(this.mMediaView);
             int flags = ActivityManager.isHighEndGfx() ? 536 | 16777216 : 536;
-            this.mWindowParams = new WindowManager.LayoutParams(frame.right - frame.left, frame.bottom - frame.top, frame.left, frame.top, 1001, flags, -2);
+            this.mWindowParams =
+                    new WindowManager.LayoutParams(
+                            frame.right - frame.left,
+                            frame.bottom - frame.top,
+                            frame.left,
+                            frame.top,
+                            1001,
+                            flags,
+                            -2);
             this.mWindowParams.privateFlags |= 64;
             this.mWindowParams.gravity = 8388659;
             this.mWindowParams.token = windowToken;
@@ -459,7 +479,9 @@ public abstract class TvAdService extends Service {
         }
 
         void relayoutMediaView(Rect frame) {
-            if (this.mMediaFrame == null || this.mMediaFrame.width() != frame.width() || this.mMediaFrame.height() != frame.height()) {
+            if (this.mMediaFrame == null
+                    || this.mMediaFrame.width() != frame.width()
+                    || this.mMediaFrame.height() != frame.height()) {
                 onMediaViewSizeChanged(frame.right - frame.left, frame.bottom - frame.top);
             }
             this.mMediaFrame = frame;
@@ -491,14 +513,14 @@ public abstract class TvAdService extends Service {
             View mediaViewParent = this.mMediaViewContainer;
             if (mediaViewParent != null) {
                 this.mMediaViewCleanUpTask = new MediaViewCleanUpTask();
-                this.mMediaViewCleanUpTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, mediaViewParent);
+                this.mMediaViewCleanUpTask.executeOnExecutor(
+                        AsyncTask.THREAD_POOL_EXECUTOR, mediaViewParent);
             }
         }
     }
 
     private static final class MediaViewCleanUpTask extends AsyncTask<View, Void, Void> {
-        private MediaViewCleanUpTask() {
-        }
+        private MediaViewCleanUpTask() {}
 
         /* JADX INFO: Access modifiers changed from: protected */
         @Override // android.os.AsyncTask
@@ -507,7 +529,10 @@ public abstract class TvAdService extends Service {
             try {
                 Thread.sleep(5000L);
                 if (!isCancelled() && mediaViewParent.isAttachedToWindow()) {
-                    Log.e(TvAdService.TAG, "Time out on releasing media view. Killing " + mediaViewParent.getContext().getPackageName());
+                    Log.e(
+                            TvAdService.TAG,
+                            "Time out on releasing media view. Killing "
+                                    + mediaViewParent.getContext().getPackageName());
                     Process.killProcess(Process.myPid());
                 }
                 return null;
@@ -521,8 +546,7 @@ public abstract class TvAdService extends Service {
         private static final int DO_CREATE_SESSION = 1;
         private static final int DO_NOTIFY_SESSION_CREATED = 2;
 
-        private ServiceHandler() {
-        }
+        private ServiceHandler() {}
 
         @Override // android.os.Handler
         public void handleMessage(Message msg) {
@@ -544,7 +568,8 @@ public abstract class TvAdService extends Service {
                             return;
                         }
                     } else {
-                        ITvAdSession stub = new ITvAdSessionWrapper(TvAdService.this, sessionImpl, channel);
+                        ITvAdSession stub =
+                                new ITvAdSessionWrapper(TvAdService.this, sessionImpl, channel);
                         SomeArgs someArgs = SomeArgs.obtain();
                         someArgs.arg1 = sessionImpl;
                         someArgs.arg2 = stub;

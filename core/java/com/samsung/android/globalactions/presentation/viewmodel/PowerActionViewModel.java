@@ -1,7 +1,9 @@
 package com.samsung.android.globalactions.presentation.viewmodel;
 
 import android.hardware.usb.UsbManager;
+
 import com.android.internal.R;
+
 import com.samsung.android.globalactions.presentation.SamsungGlobalActions;
 import com.samsung.android.globalactions.presentation.SamsungGlobalActionsManager;
 import com.samsung.android.globalactions.presentation.features.FeatureFactory;
@@ -15,6 +17,7 @@ import com.samsung.android.globalactions.util.SamsungGlobalActionsAnalytics;
 import com.samsung.android.globalactions.util.SystemConditions;
 import com.samsung.android.globalactions.util.ToastController;
 import com.samsung.android.globalactions.util.UsageStatsWrapper;
+
 import java.util.List;
 
 /* loaded from: classes6.dex */
@@ -36,7 +39,16 @@ public class PowerActionViewModel implements ActionViewModel {
     private boolean mIsLockNetworkAndSecurity = false;
     private boolean mIsCalledFromSecureLock = false;
 
-    public PowerActionViewModel(SamsungGlobalActions globalActions, ConditionChecker conditionChecker, SamsungGlobalActionsAnalytics samsungGlobalActionsAnalytics, SamsungGlobalActionsManager windowManagerFuncs, FeatureFactory featureFactory, ToastController toastController, KeyGuardManagerWrapper keyguardManagerWrapper, ResourcesWrapper resourcesWrapper, UsageStatsWrapper usageStatsWrapper) {
+    public PowerActionViewModel(
+            SamsungGlobalActions globalActions,
+            ConditionChecker conditionChecker,
+            SamsungGlobalActionsAnalytics samsungGlobalActionsAnalytics,
+            SamsungGlobalActionsManager windowManagerFuncs,
+            FeatureFactory featureFactory,
+            ToastController toastController,
+            KeyGuardManagerWrapper keyguardManagerWrapper,
+            ResourcesWrapper resourcesWrapper,
+            UsageStatsWrapper usageStatsWrapper) {
         this.mGlobalActions = globalActions;
         this.mConditionChecker = conditionChecker;
         this.mSAnalytics = samsungGlobalActionsAnalytics;
@@ -63,15 +75,20 @@ public class PowerActionViewModel implements ActionViewModel {
         boolean needSecureConfirm;
         int res;
         int res2;
-        List<ActionInteractionStrategy> strategies = this.mFeatureFactory.createActionInteractionStrategies(this.mInfo.getName());
+        List<ActionInteractionStrategy> strategies =
+                this.mFeatureFactory.createActionInteractionStrategies(this.mInfo.getName());
         for (ActionInteractionStrategy strategy : strategies) {
             if (strategy.onPressPowerAction()) {
                 return;
             }
         }
         if (!this.mGlobalActions.isActionConfirming()) {
-            if (this.mConditionChecker.isEnabled(SystemConditions.SUPPORT_SECONDARY_DISPLAY_AS_COVER) && this.mConditionChecker.isEnabled(SystemConditions.IS_FOLDED)) {
-                this.mSAnalytics.sendEventLog(SamsungGlobalActionsAnalytics.SID_FRONT_COVER_DEVICE_OPTIONS, SamsungGlobalActionsAnalytics.EID_FRONT_COVER_POWER_OFF);
+            if (this.mConditionChecker.isEnabled(
+                            SystemConditions.SUPPORT_SECONDARY_DISPLAY_AS_COVER)
+                    && this.mConditionChecker.isEnabled(SystemConditions.IS_FOLDED)) {
+                this.mSAnalytics.sendEventLog(
+                        SamsungGlobalActionsAnalytics.SID_FRONT_COVER_DEVICE_OPTIONS,
+                        SamsungGlobalActionsAnalytics.EID_FRONT_COVER_POWER_OFF);
             }
             this.mGlobalActions.confirmAction(this);
             return;
@@ -94,7 +111,9 @@ public class PowerActionViewModel implements ActionViewModel {
             this.mToastController.showToast(this.mResourcesWrapper.getString(res), 1);
             return;
         }
-        List<SecureConfirmStrategy> secureConfirmStrategies = this.mFeatureFactory.createSecureConfirmStrategy(this.mGlobalActions, this.mInfo.getName());
+        List<SecureConfirmStrategy> secureConfirmStrategies =
+                this.mFeatureFactory.createSecureConfirmStrategy(
+                        this.mGlobalActions, this.mInfo.getName());
         boolean hasCondition = false;
         for (SecureConfirmStrategy strategy2 : secureConfirmStrategies) {
             hasCondition |= strategy2.hasSecureConfirmCondition();
@@ -110,14 +129,20 @@ public class PowerActionViewModel implements ActionViewModel {
         if (needSecureConfirm) {
             boolean isNeedToRegister = true;
             for (SecureConfirmStrategy strategy4 : secureConfirmStrategies) {
-                isNeedToRegister &= strategy4.doActionBeforeSecureConfirm(this, this.mGlobalActions);
+                isNeedToRegister &=
+                        strategy4.doActionBeforeSecureConfirm(this, this.mGlobalActions);
             }
             if (isNeedToRegister) {
                 this.mGlobalActions.registerSecureConfirmAction(this);
-                this.mKeyguardManagerWrapper.setPendingIntentAfterUnlock(UsbManager.USB_FUNCTION_SHUTDOWN);
+                this.mKeyguardManagerWrapper.setPendingIntentAfterUnlock(
+                        UsbManager.USB_FUNCTION_SHUTDOWN);
                 this.mGlobalActions.hideDialogOnSecureConfirm();
-                if (this.mConditionChecker.isEnabled(SystemConditions.SUPPORT_SECONDARY_DISPLAY_AS_COVER) && this.mConditionChecker.isEnabled(SystemConditions.IS_FOLDED)) {
-                    this.mSAnalytics.sendEventLog(SamsungGlobalActionsAnalytics.SID_FRONT_COVER_DEVICE_OPTIONS, SamsungGlobalActionsAnalytics.EID_FRONT_COVER_SECURE_LOCK_NOTI);
+                if (this.mConditionChecker.isEnabled(
+                                SystemConditions.SUPPORT_SECONDARY_DISPLAY_AS_COVER)
+                        && this.mConditionChecker.isEnabled(SystemConditions.IS_FOLDED)) {
+                    this.mSAnalytics.sendEventLog(
+                            SamsungGlobalActionsAnalytics.SID_FRONT_COVER_DEVICE_OPTIONS,
+                            SamsungGlobalActionsAnalytics.EID_FRONT_COVER_SECURE_LOCK_NOTI);
                     return;
                 }
                 return;
@@ -128,7 +153,8 @@ public class PowerActionViewModel implements ActionViewModel {
 
     @Override // com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel
     public void onLongPress() {
-        List<ActionInteractionStrategy> strategies = this.mFeatureFactory.createActionInteractionStrategies(this.mInfo.getName());
+        List<ActionInteractionStrategy> strategies =
+                this.mFeatureFactory.createActionInteractionStrategies(this.mInfo.getName());
         for (ActionInteractionStrategy strategy : strategies) {
             if (strategy.onLongPressPowerAction()) {
                 return;
@@ -152,7 +178,9 @@ public class PowerActionViewModel implements ActionViewModel {
     }
 
     private void shutdown() {
-        List<WindowManagerFunctionStrategy> strategies = this.mFeatureFactory.createWindowManagerFunctionStrategy(this.mGlobalActions, WindowManagerFunctionStrategy.SHUTDOWN);
+        List<WindowManagerFunctionStrategy> strategies =
+                this.mFeatureFactory.createWindowManagerFunctionStrategy(
+                        this.mGlobalActions, WindowManagerFunctionStrategy.SHUTDOWN);
         for (WindowManagerFunctionStrategy strategy : strategies) {
             strategy.onShutdown();
         }
@@ -162,15 +190,24 @@ public class PowerActionViewModel implements ActionViewModel {
         this.mExtraInfo += (this.mIsSecureKeyguard ? " SECURE" : " secure");
         this.mExtraInfo += (this.mIsLockNetworkAndSecurity ? " NAS" : " nas");
         this.mExtraInfo += (this.mIsCalledFromSecureLock ? " LOCK)" : " lock)");
-        this.mSAnalytics.sendEventLog(SamsungGlobalActionsAnalytics.SID_DEVICE_OPTIONS, SamsungGlobalActionsAnalytics.EID_DEVICE_OPTIONS, SamsungGlobalActionsAnalytics.DID_POWER_OFF, 1L);
+        this.mSAnalytics.sendEventLog(
+                SamsungGlobalActionsAnalytics.SID_DEVICE_OPTIONS,
+                SamsungGlobalActionsAnalytics.EID_DEVICE_OPTIONS,
+                SamsungGlobalActionsAnalytics.DID_POWER_OFF,
+                1L);
         this.mWindowManagerFuncs.shutdown();
     }
 
     private boolean isNeedSecureConfirm() {
         this.mIsRMMLocked = this.mConditionChecker.isEnabled(SystemConditions.IS_RMM_LOCKED);
         this.mIsSIMLocked = this.mConditionChecker.isEnabled(SystemConditions.IS_SIM_LOCK);
-        this.mIsSecureKeyguard = this.mConditionChecker.isEnabled(SystemConditions.IS_SECURE_KEYGUARD);
-        this.mIsLockNetworkAndSecurity = this.mConditionChecker.isEnabled(SystemConditions.IS_LOCK_NETWORK_AND_SECURITY);
-        return !this.mIsRMMLocked && !this.mIsSIMLocked && this.mIsSecureKeyguard && this.mIsLockNetworkAndSecurity;
+        this.mIsSecureKeyguard =
+                this.mConditionChecker.isEnabled(SystemConditions.IS_SECURE_KEYGUARD);
+        this.mIsLockNetworkAndSecurity =
+                this.mConditionChecker.isEnabled(SystemConditions.IS_LOCK_NETWORK_AND_SECURITY);
+        return !this.mIsRMMLocked
+                && !this.mIsSIMLocked
+                && this.mIsSecureKeyguard
+                && this.mIsLockNetworkAndSecurity;
     }
 }

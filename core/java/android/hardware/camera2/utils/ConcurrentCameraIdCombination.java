@@ -4,23 +4,26 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArraySet;
 import android.util.Pair;
+
 import java.util.Set;
 
 /* loaded from: classes2.dex */
 public class ConcurrentCameraIdCombination implements Parcelable {
-    public static final Parcelable.Creator<ConcurrentCameraIdCombination> CREATOR = new Parcelable.Creator<ConcurrentCameraIdCombination>() { // from class: android.hardware.camera2.utils.ConcurrentCameraIdCombination.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ConcurrentCameraIdCombination createFromParcel(Parcel in) {
-            return new ConcurrentCameraIdCombination(in);
-        }
+    public static final Parcelable.Creator<ConcurrentCameraIdCombination> CREATOR =
+            new Parcelable.Creator<ConcurrentCameraIdCombination>() { // from class:
+                // android.hardware.camera2.utils.ConcurrentCameraIdCombination.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ConcurrentCameraIdCombination createFromParcel(Parcel in) {
+                    return new ConcurrentCameraIdCombination(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ConcurrentCameraIdCombination[] newArray(int size) {
-            return new ConcurrentCameraIdCombination[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ConcurrentCameraIdCombination[] newArray(int size) {
+                    return new ConcurrentCameraIdCombination[size];
+                }
+            };
     private final Set<Pair<String, Integer>> mConcurrentCameraIdDeviceIdPairs;
 
     private ConcurrentCameraIdCombination(Parcel in) {
@@ -46,7 +49,8 @@ public class ConcurrentCameraIdCombination implements Parcelable {
         this.mConcurrentCameraIdDeviceIdPairs.clear();
         int cameraCombinationSize = in.readInt();
         if (cameraCombinationSize < 0) {
-            throw new RuntimeException("cameraCombinationSize " + cameraCombinationSize + " should not be negative");
+            throw new RuntimeException(
+                    "cameraCombinationSize " + cameraCombinationSize + " should not be negative");
         }
         for (int i = 0; i < cameraCombinationSize; i++) {
             String cameraId = in.readString();
@@ -54,7 +58,8 @@ public class ConcurrentCameraIdCombination implements Parcelable {
                 throw new RuntimeException("Failed to read camera id from Parcel");
             }
             int deviceId = in.readInt();
-            this.mConcurrentCameraIdDeviceIdPairs.add(new Pair<>(cameraId, Integer.valueOf(deviceId)));
+            this.mConcurrentCameraIdDeviceIdPairs.add(
+                    new Pair<>(cameraId, Integer.valueOf(deviceId)));
         }
     }
 

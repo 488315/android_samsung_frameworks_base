@@ -3,6 +3,7 @@ package android.telephony.ims;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -10,19 +11,22 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes4.dex */
 public final class MediaQualityStatus implements Parcelable {
-    public static final Parcelable.Creator<MediaQualityStatus> CREATOR = new Parcelable.Creator<MediaQualityStatus>() { // from class: android.telephony.ims.MediaQualityStatus.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MediaQualityStatus createFromParcel(Parcel in) {
-            return new MediaQualityStatus(in);
-        }
+    public static final Parcelable.Creator<MediaQualityStatus> CREATOR =
+            new Parcelable.Creator<
+                    MediaQualityStatus>() { // from class:
+                                            // android.telephony.ims.MediaQualityStatus.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MediaQualityStatus createFromParcel(Parcel in) {
+                    return new MediaQualityStatus(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MediaQualityStatus[] newArray(int size) {
-            return new MediaQualityStatus[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MediaQualityStatus[] newArray(int size) {
+                    return new MediaQualityStatus[size];
+                }
+            };
     public static final int MEDIA_SESSION_TYPE_AUDIO = 1;
     public static final int MEDIA_SESSION_TYPE_VIDEO = 2;
     private final String mImsCallSessionId;
@@ -33,10 +37,15 @@ public final class MediaQualityStatus implements Parcelable {
     private final int mTransportType;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MediaSessionType {
-    }
+    public @interface MediaSessionType {}
 
-    public MediaQualityStatus(String imsCallSessionId, int mediaSessionType, int transportType, int rtpPacketLossRate, int rtpJitterMillis, long rptInactivityTimeMillis) {
+    public MediaQualityStatus(
+            String imsCallSessionId,
+            int mediaSessionType,
+            int transportType,
+            int rtpPacketLossRate,
+            int rtpJitterMillis,
+            long rptInactivityTimeMillis) {
         this.mImsCallSessionId = imsCallSessionId;
         this.mMediaSessionType = mediaSessionType;
         this.mTransportType = transportType;
@@ -101,17 +110,41 @@ public final class MediaQualityStatus implements Parcelable {
             return false;
         }
         MediaQualityStatus that = (MediaQualityStatus) o;
-        if (this.mImsCallSessionId != null && this.mImsCallSessionId.equals(that.mImsCallSessionId) && this.mMediaSessionType == that.mMediaSessionType && this.mTransportType == that.mTransportType && this.mRtpPacketLossRate == that.mRtpPacketLossRate && this.mRtpJitterMillis == that.mRtpJitterMillis && this.mRtpInactivityTimeMillis == that.mRtpInactivityTimeMillis) {
+        if (this.mImsCallSessionId != null
+                && this.mImsCallSessionId.equals(that.mImsCallSessionId)
+                && this.mMediaSessionType == that.mMediaSessionType
+                && this.mTransportType == that.mTransportType
+                && this.mRtpPacketLossRate == that.mRtpPacketLossRate
+                && this.mRtpJitterMillis == that.mRtpJitterMillis
+                && this.mRtpInactivityTimeMillis == that.mRtpInactivityTimeMillis) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(this.mImsCallSessionId, Integer.valueOf(this.mMediaSessionType), Integer.valueOf(this.mTransportType), Integer.valueOf(this.mRtpPacketLossRate), Integer.valueOf(this.mRtpJitterMillis), Long.valueOf(this.mRtpInactivityTimeMillis));
+        return Objects.hash(
+                this.mImsCallSessionId,
+                Integer.valueOf(this.mMediaSessionType),
+                Integer.valueOf(this.mTransportType),
+                Integer.valueOf(this.mRtpPacketLossRate),
+                Integer.valueOf(this.mRtpJitterMillis),
+                Long.valueOf(this.mRtpInactivityTimeMillis));
     }
 
     public String toString() {
-        return "MediaThreshold{mImsCallSessionId=" + this.mImsCallSessionId + ", mMediaSessionType=" + this.mMediaSessionType + ", mTransportType=" + this.mTransportType + ", mRtpPacketLossRate=" + this.mRtpPacketLossRate + ", mRtpJitterMillis=" + this.mRtpJitterMillis + ", mRtpInactivityTimeMillis=" + this.mRtpInactivityTimeMillis + "}";
+        return "MediaThreshold{mImsCallSessionId="
+                + this.mImsCallSessionId
+                + ", mMediaSessionType="
+                + this.mMediaSessionType
+                + ", mTransportType="
+                + this.mTransportType
+                + ", mRtpPacketLossRate="
+                + this.mRtpPacketLossRate
+                + ", mRtpJitterMillis="
+                + this.mRtpJitterMillis
+                + ", mRtpInactivityTimeMillis="
+                + this.mRtpInactivityTimeMillis
+                + "}";
     }
 }

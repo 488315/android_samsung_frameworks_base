@@ -36,6 +36,7 @@ import android.util.Slog;
 import android.view.Display;
 import android.view.IDisplayWindowListener;
 import android.view.OrientationEventListener;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
@@ -47,15 +48,14 @@ import com.android.server.VaultKeeperService$$ExternalSyntheticOutline0;
 import com.android.server.Watchdog$$ExternalSyntheticOutline0;
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
 import com.android.server.alarm.GmsAlarmManager$$ExternalSyntheticOutline0;
-import com.samsung.android.camera.CameraServiceWorker;
-import com.samsung.android.camera.ICameraServiceWorker;
-import com.samsung.android.camera.Logger;
+
 import com.samsung.android.camera.requestinjector.RequestInjectorService;
 import com.samsung.android.camera.requestinjector.VtCameraProviderObserver;
 import com.samsung.android.camera.scpm.ScpmList;
 import com.samsung.android.camera.scpm.ScpmReceiver;
 import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.knox.custom.LauncherConfigurationInternal;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.lang.invoke.MethodHandles;
@@ -72,7 +72,8 @@ import java.util.function.Function;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class CameraServiceWorker extends SystemService implements Handler.Callback, IBinder.DeathRecipient {
+public final class CameraServiceWorker extends SystemService
+        implements Handler.Callback, IBinder.DeathRecipient {
     public static final boolean DEBUG;
     public static final String[] DEVICE_INJECTOR_TEST_PACKAGES;
     public static final String[] DEVICE_INJECTOR_TEST_PACKAGES_FOR_BLOCK;
@@ -102,15 +103,17 @@ public final class CameraServiceWorker extends SystemService implements Handler.
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.samsung.android.camera.CameraServiceWorker$3, reason: invalid class name */
     public final class AnonymousClass3 extends ICameraServiceWorker.Stub {
-        public AnonymousClass3() {
-        }
+        public AnonymousClass3() {}
 
         public final IBinder acquireRequestInjector() {
             if (UserHandle.getAppId(Binder.getCallingUid()) == 1000) {
                 return CameraServiceWorker.this.mRequestInjectorService;
             }
-            Slog.e("CameraService_worker", "Only system user is allowed to call acquireRequestInjector");
-            throw new SecurityException("Only system user is allowed to call acquireRequestInjector");
+            Slog.e(
+                    "CameraService_worker",
+                    "Only system user is allowed to call acquireRequestInjector");
+            throw new SecurityException(
+                    "Only system user is allowed to call acquireRequestInjector");
         }
 
         /* JADX WARN: Removed duplicated region for block: B:17:0x0065 A[EXC_TOP_SPLITTER, SYNTHETIC] */
@@ -118,12 +121,16 @@ public final class CameraServiceWorker extends SystemService implements Handler.
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public final void dump(java.io.FileDescriptor r6, java.io.PrintWriter r7, java.lang.String[] r8) {
+        public final void dump(
+                java.io.FileDescriptor r6, java.io.PrintWriter r7, java.lang.String[] r8) {
             /*
                 Method dump skipped, instructions count: 301
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.camera.CameraServiceWorker.AnonymousClass3.dump(java.io.FileDescriptor, java.io.PrintWriter, java.lang.String[]):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.samsung.android.camera.CameraServiceWorker.AnonymousClass3.dump(java.io.FileDescriptor,"
+                        + " java.io.PrintWriter, java.lang.String[]):void");
         }
 
         public final boolean getDeviceInjectorOverride(String str, int i) {
@@ -146,25 +153,36 @@ public final class CameraServiceWorker extends SystemService implements Handler.
 
         public final int getDeviceOrientationForDeviceInjector(String str, int i) {
             if (Binder.getCallingUid() != 1047) {
-                Slog.e("CameraService_worker", "Calling UID: " + Binder.getCallingUid() + " doesn't match expected camera service UID!");
+                Slog.e(
+                        "CameraService_worker",
+                        "Calling UID: "
+                                + Binder.getCallingUid()
+                                + " doesn't match expected camera service UID!");
                 return 0;
             }
             TaskInfo taskInfo = CameraServiceWorker.getTaskInfo(i, str);
             if (taskInfo == null) {
                 return 0;
             }
-            DisplayManager displayManager = (DisplayManager) CameraServiceWorker.this.mContext.getSystemService(DisplayManager.class);
+            DisplayManager displayManager =
+                    (DisplayManager)
+                            CameraServiceWorker.this.mContext.getSystemService(
+                                    DisplayManager.class);
             if (displayManager == null) {
                 Slog.e("CameraService_worker", "Failed to query display manager!");
                 return 0;
             }
             if (displayManager.getDisplay(taskInfo.displayId) == null) {
-                VaultKeeperService$$ExternalSyntheticOutline0.m(new StringBuilder("Invalid display id: "), taskInfo.displayId, "CameraService_worker");
+                VaultKeeperService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("Invalid display id: "),
+                        taskInfo.displayId,
+                        "CameraService_worker");
                 return 0;
             }
             synchronized (CameraServiceWorker.this.mOrientationLock) {
                 try {
-                    WorkerOrientationListener workerOrientationListener = CameraServiceWorker.this.mOrientationEventListener;
+                    WorkerOrientationListener workerOrientationListener =
+                            CameraServiceWorker.this.mOrientationEventListener;
                     if (workerOrientationListener == null) {
                         return 0;
                     }
@@ -180,7 +198,11 @@ public final class CameraServiceWorker extends SystemService implements Handler.
 
         public final void notifyCameraSessionEvent(int i, String str) {
             if (Binder.getCallingUid() != 1047) {
-                Slog.e("CameraService_worker", "Calling UID: " + Binder.getCallingUid() + " doesn't match expected  camera service UID!");
+                Slog.e(
+                        "CameraService_worker",
+                        "Calling UID: "
+                                + Binder.getCallingUid()
+                                + " doesn't match expected  camera service UID!");
                 return;
             }
             if (CameraServiceWorker.DEBUG) {
@@ -208,7 +230,9 @@ public final class CameraServiceWorker extends SystemService implements Handler.
                             CameraServiceWorker.this.insertDMALog(null, "7508", str);
                             break;
                         default:
-                            Slog.e("CameraService_worker", "Non acceptable event type event " + i + ", details : " + str);
+                            Slog.e(
+                                    "CameraService_worker",
+                                    "Non acceptable event type event " + i + ", details : " + str);
                             break;
                     }
                 } catch (Throwable th) {
@@ -220,28 +244,53 @@ public final class CameraServiceWorker extends SystemService implements Handler.
         public final void notifyCameraState(String str, int i, int i2, String str2, int i3) {
             FileOutputStream fileOutputStream;
             if (Binder.getCallingUid() != 1047) {
-                Slog.e("CameraService_worker", "Calling UID: " + Binder.getCallingUid() + " doesn't match expected  camera service UID!");
+                Slog.e(
+                        "CameraService_worker",
+                        "Calling UID: "
+                                + Binder.getCallingUid()
+                                + " doesn't match expected  camera service UID!");
                 return;
             }
-            String str3 = i != 0 ? i != 1 ? i != 2 ? i != 3 ? i != 100 ? i != 101 ? "CAMERA_STATE_UNKNOWN" : "CAMERA_STATE_OPENING_FAILED" : "CAMERA_STATE_OPENING" : "CAMERA_STATE_CLOSED" : "CAMERA_STATE_IDLE" : "CAMERA_STATE_ACTIVE" : "CAMERA_STATE_OPEN";
-            String str4 = i2 != 0 ? i2 != 1 ? i2 != 2 ? "UnknownCamera" : "ExternalCamera" : "FrontCamera" : "BackCamera";
+            String str3 =
+                    i != 0
+                            ? i != 1
+                                    ? i != 2
+                                            ? i != 3
+                                                    ? i != 100
+                                                            ? i != 101
+                                                                    ? "CAMERA_STATE_UNKNOWN"
+                                                                    : "CAMERA_STATE_OPENING_FAILED"
+                                                            : "CAMERA_STATE_OPENING"
+                                                    : "CAMERA_STATE_CLOSED"
+                                            : "CAMERA_STATE_IDLE"
+                                    : "CAMERA_STATE_ACTIVE"
+                            : "CAMERA_STATE_OPEN";
+            String str4 =
+                    i2 != 0
+                            ? i2 != 1 ? i2 != 2 ? "UnknownCamera" : "ExternalCamera" : "FrontCamera"
+                            : "BackCamera";
             boolean z = CameraServiceWorker.DEBUG;
             if (z) {
-                StringBuilder m = InitialConfiguration$$ExternalSyntheticOutline0.m("Camera ", str, " facing ", str4, " state now ");
-                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(m, str3, " for client ", str2, " API Level ");
+                StringBuilder m =
+                        InitialConfiguration$$ExternalSyntheticOutline0.m(
+                                "Camera ", str, " facing ", str4, " state now ");
+                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                        m, str3, " for client ", str2, " API Level ");
                 GmsAlarmManager$$ExternalSyntheticOutline0.m(m, i3, "CameraService_worker");
             }
             CameraServiceWorker cameraServiceWorker = CameraServiceWorker.this;
             synchronized (cameraServiceWorker.mLock) {
                 try {
                     if (i == 0) {
-                        if (cameraServiceWorker.mBootCompleted && cameraServiceWorker.mEnableSurveyMode) {
+                        if (cameraServiceWorker.mBootCompleted
+                                && cameraServiceWorker.mEnableSurveyMode) {
                             String[] strArr = CameraServiceWorker.SAMSUNG_CAMERA_PACKAGES;
                             int length = strArr.length;
                             int i4 = 0;
                             while (true) {
                                 if (i4 >= length) {
-                                    cameraServiceWorker.insertDMALog(Long.valueOf(i2), "7501", str2);
+                                    cameraServiceWorker.insertDMALog(
+                                            Long.valueOf(i2), "7501", str2);
                                     break;
                                 } else if (strArr[i4].equals(str2)) {
                                     break;
@@ -256,18 +305,29 @@ public final class CameraServiceWorker extends SystemService implements Handler.
                         cameraServiceWorker.mActiveCameraUsage.put(str, new CameraUsageEvent());
                         if (new File("/sys/class/camera/rear/cam_wifi_info").exists()) {
                             long clearCallingIdentity = Binder.clearCallingIdentity();
-                            WifiManager wifiManager = (WifiManager) cameraServiceWorker.mContext.getSystemService("wifi");
+                            WifiManager wifiManager =
+                                    (WifiManager)
+                                            cameraServiceWorker.mContext.getSystemService("wifi");
                             String str5 = "00000";
                             if (wifiManager.isWifiEnabled()) {
                                 WifiInfo connectionInfo = wifiManager.getConnectionInfo();
                                 if (connectionInfo != null) {
-                                    str5 = String.format("%4d%1d", Integer.valueOf(connectionInfo.getFrequency()), Integer.valueOf(connectionInfo.getWifiStandard()));
+                                    str5 =
+                                            String.format(
+                                                    "%4d%1d",
+                                                    Integer.valueOf(connectionInfo.getFrequency()),
+                                                    Integer.valueOf(
+                                                            connectionInfo.getWifiStandard()));
                                 } else if (z) {
-                                    Slog.e("CameraService_worker", "wifiInfo is null So, can not save wifi info.");
+                                    Slog.e(
+                                            "CameraService_worker",
+                                            "wifiInfo is null So, can not save wifi info.");
                                 }
                             }
                             try {
-                                fileOutputStream = new FileOutputStream("/sys/class/camera/rear/cam_wifi_info");
+                                fileOutputStream =
+                                        new FileOutputStream(
+                                                "/sys/class/camera/rear/cam_wifi_info");
                             } catch (Exception e) {
                                 if (CameraServiceWorker.DEBUG) {
                                     Slog.v("CameraService_worker", "Can't save wifi info : " + e);
@@ -289,7 +349,8 @@ public final class CameraServiceWorker extends SystemService implements Handler.
                     } else if (i != 100 && i != 101) {
                         Slog.e("CameraService_worker", "Non acceptable state " + i);
                     }
-                    cameraServiceWorker.mIsCameraOpened = !cameraServiceWorker.mOpenCameraUsage.isEmpty();
+                    cameraServiceWorker.mIsCameraOpened =
+                            !cameraServiceWorker.mOpenCameraUsage.isEmpty();
                 } catch (Throwable th) {
                     throw th;
                 }
@@ -298,7 +359,11 @@ public final class CameraServiceWorker extends SystemService implements Handler.
 
         public final void pingForUpdate() {
             if (Binder.getCallingUid() != 1047 && Binder.getCallingPid() != Process.myPid()) {
-                Slog.e("CameraService_worker", "Calling UID: " + Binder.getCallingUid() + " doesn't match expected  camera service UID!");
+                Slog.e(
+                        "CameraService_worker",
+                        "Calling UID: "
+                                + Binder.getCallingUid()
+                                + " doesn't match expected  camera service UID!");
                 return;
             }
             long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -311,7 +376,8 @@ public final class CameraServiceWorker extends SystemService implements Handler.
                     scpmReceiver.notifyParamChangeRetryLocked(30, policyType);
                 }
                 try {
-                    CameraServiceWorker.this.mRequestInjectorService.sendAllExtraRequestsToRequestInjector();
+                    CameraServiceWorker.this.mRequestInjectorService
+                            .sendAllExtraRequestsToRequestInjector();
                 } catch (UnsupportedOperationException e) {
                     Slog.e("CameraService_worker", "pingForUpdate exception happen " + e);
                 }
@@ -324,30 +390,30 @@ public final class CameraServiceWorker extends SystemService implements Handler.
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:20:0x005c, code lost:
-        
-            r6 = r4.pkgList;
-         */
+
+           r6 = r4.pkgList;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:21:0x005e, code lost:
-        
-            if (r6 == null) goto L26;
-         */
+
+           if (r6 == null) goto L26;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:23:0x0062, code lost:
-        
-            if (r6.length != 1) goto L26;
-         */
+
+           if (r6.length != 1) goto L26;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:24:0x0064, code lost:
-        
-            android.util.Slog.i("CameraService_worker", "Package name = " + r4.pkgList[0]);
-            r6 = r4.pkgList[0];
-         */
+
+           android.util.Slog.i("CameraService_worker", "Package name = " + r4.pkgList[0]);
+           r6 = r4.pkgList[0];
+        */
         /* JADX WARN: Code restructure failed: missing block: B:25:0x0081, code lost:
-        
-            android.os.Binder.restoreCallingIdentity(r0);
-         */
+
+           android.os.Binder.restoreCallingIdentity(r0);
+        */
         /* JADX WARN: Code restructure failed: missing block: B:26:0x0084, code lost:
-        
-            return r6;
-         */
+
+           return r6;
+        */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -421,17 +487,25 @@ public final class CameraServiceWorker extends SystemService implements Handler.
                 android.os.Binder.restoreCallingIdentity(r0)
                 throw r6
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.camera.CameraServiceWorker.AnonymousClass3.queryPackageName(int, int):java.lang.String");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.samsung.android.camera.CameraServiceWorker.AnonymousClass3.queryPackageName(int,"
+                        + " int):java.lang.String");
         }
 
         public final void setDeviceOrientationListener(boolean z) {
             if (Binder.getCallingUid() != 1047) {
-                Slog.e("CameraService_worker", "Calling UID: " + Binder.getCallingUid() + " doesn't match expected camera service UID!");
+                Slog.e(
+                        "CameraService_worker",
+                        "Calling UID: "
+                                + Binder.getCallingUid()
+                                + " doesn't match expected camera service UID!");
                 return;
             }
             synchronized (CameraServiceWorker.this.mOrientationLock) {
                 try {
-                    WorkerOrientationListener workerOrientationListener = CameraServiceWorker.this.mOrientationEventListener;
+                    WorkerOrientationListener workerOrientationListener =
+                            CameraServiceWorker.this.mOrientationEventListener;
                     if (workerOrientationListener == null) {
                         return;
                     }
@@ -458,18 +532,23 @@ public final class CameraServiceWorker extends SystemService implements Handler.
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BootCompleteReceiver extends BroadcastReceiver {
         public BootCompleteReceiver() {
-            CameraServiceWorker.this.mContext.registerReceiver(this, DirEncryptServiceHelper$$ExternalSyntheticOutline0.m("android.intent.action.BOOT_COMPLETED", "com.samsung.intent.action.LAZY_BOOT_COMPLETE"), 2);
+            CameraServiceWorker.this.mContext.registerReceiver(
+                    this,
+                    DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                            "android.intent.action.BOOT_COMPLETED",
+                            "com.samsung.intent.action.LAZY_BOOT_COMPLETE"),
+                    2);
         }
 
         /* JADX WARN: Can't wrap try/catch for region: R(10:3|(2:4|5)|(6:31|30|21|22|23|24)|12|(3:14|(2:16|(2:19|20)(1:18))|29)|30|21|22|23|24) */
         /* JADX WARN: Code restructure failed: missing block: B:27:0x009f, code lost:
-        
-            r10 = move-exception;
-         */
+
+           r10 = move-exception;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:28:0x00a0, code lost:
-        
-            android.util.Slog.e("CameraService_worker", "BootCompleteReceiver exception happen " + r10);
-         */
+
+           android.util.Slog.e("CameraService_worker", "BootCompleteReceiver exception happen " + r10);
+        */
         @Override // android.content.BroadcastReceiver
         /*
             Code decompiled incorrectly, please refer to instructions dump.
@@ -583,7 +662,10 @@ public final class CameraServiceWorker extends SystemService implements Handler.
             Ld8:
                 return
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.camera.CameraServiceWorker.BootCompleteReceiver.onReceive(android.content.Context, android.content.Intent):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.samsung.android.camera.CameraServiceWorker.BootCompleteReceiver.onReceive(android.content.Context,"
+                        + " android.content.Intent):void");
         }
     }
 
@@ -592,7 +674,13 @@ public final class CameraServiceWorker extends SystemService implements Handler.
         public final String ACTION_RESET_CAMERAPROVIDER = "com.samsung.cmh.action.cameraprovider";
 
         public CPRCommandReceiver() {
-            CameraServiceWorker.this.mContext.registerReceiver(this, BatteryService$$ExternalSyntheticOutline0.m("com.samsung.cmh.action.cameraprovider"), null, CameraServiceWorker.this.mHandler, 2);
+            CameraServiceWorker.this.mContext.registerReceiver(
+                    this,
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            "com.samsung.cmh.action.cameraprovider"),
+                    null,
+                    CameraServiceWorker.this.mHandler,
+                    2);
         }
 
         @Override // android.content.BroadcastReceiver
@@ -605,8 +693,7 @@ public final class CameraServiceWorker extends SystemService implements Handler.
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public final class CameraUsageEvent {
-    }
+    public final class CameraUsageEvent {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeviceInjectorRequirementChecker extends BroadcastReceiver {
@@ -618,43 +705,89 @@ public final class CameraServiceWorker extends SystemService implements Handler.
         /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         /* renamed from: com.samsung.android.camera.CameraServiceWorker$DeviceInjectorRequirementChecker$1, reason: invalid class name */
         public final class AnonymousClass1 extends CameraManager.AvailabilityCallback {
-            public AnonymousClass1() {
-            }
+            public AnonymousClass1() {}
 
             public final void onSemCameraDeviceRawStatus(final String str, int i) {
                 synchronized (DeviceInjectorRequirementChecker.this) {
                     try {
-                        Slog.i("CameraService_worker", "DeviceInjector, onSemCameraDeviceRawStatus " + str + " " + i);
+                        Slog.i(
+                                "CameraService_worker",
+                                "DeviceInjector, onSemCameraDeviceRawStatus " + str + " " + i);
                         if (i == 0) {
                             DeviceInjectorRequirementChecker.this.mExternalDeviceMap.remove(str);
                         } else if (i == 1) {
-                            DeviceInjectorRequirementChecker.this.mExternalDeviceMap.computeIfAbsent(str, new Function() { // from class: com.samsung.android.camera.CameraServiceWorker$DeviceInjectorRequirementChecker$1$$ExternalSyntheticLambda0
-                                @Override // java.util.function.Function
-                                public final Object apply(Object obj) {
-                                    int i2;
-                                    CameraServiceWorker.DeviceInjectorRequirementChecker.AnonymousClass1 anonymousClass1 = CameraServiceWorker.DeviceInjectorRequirementChecker.AnonymousClass1.this;
-                                    String str2 = str;
-                                    try {
-                                        i2 = ((Integer) ((CameraManager) CameraServiceWorker.this.mContext.getSystemService(CameraManager.class)).getCameraCharacteristics(str2).get(CameraCharacteristics.LENS_FACING)).intValue();
-                                    } catch (Exception e) {
-                                        BootReceiver$$ExternalSyntheticOutline0.m(e, "DeviceInjector, Exception = ", "CameraService_worker");
-                                        i2 = 0;
-                                    }
-                                    Slog.i("CameraService_worker", "DeviceInjector, isExternalCamera = " + str2 + " facing = " + i2);
-                                    return Boolean.valueOf(i2 == 2);
-                                }
-                            });
+                            DeviceInjectorRequirementChecker.this.mExternalDeviceMap
+                                    .computeIfAbsent(
+                                            str,
+                                            new Function() { // from class:
+                                                             // com.samsung.android.camera.CameraServiceWorker$DeviceInjectorRequirementChecker$1$$ExternalSyntheticLambda0
+                                                @Override // java.util.function.Function
+                                                public final Object apply(Object obj) {
+                                                    int i2;
+                                                    CameraServiceWorker
+                                                                    .DeviceInjectorRequirementChecker
+                                                                    .AnonymousClass1
+                                                            anonymousClass1 =
+                                                                    CameraServiceWorker
+                                                                            .DeviceInjectorRequirementChecker
+                                                                            .AnonymousClass1.this;
+                                                    String str2 = str;
+                                                    try {
+                                                        i2 =
+                                                                ((Integer)
+                                                                                ((CameraManager)
+                                                                                                CameraServiceWorker
+                                                                                                        .this
+                                                                                                        .mContext
+                                                                                                        .getSystemService(
+                                                                                                                CameraManager
+                                                                                                                        .class))
+                                                                                        .getCameraCharacteristics(
+                                                                                                str2)
+                                                                                        .get(
+                                                                                                CameraCharacteristics
+                                                                                                        .LENS_FACING))
+                                                                        .intValue();
+                                                    } catch (Exception e) {
+                                                        BootReceiver$$ExternalSyntheticOutline0.m(
+                                                                e,
+                                                                "DeviceInjector, Exception = ",
+                                                                "CameraService_worker");
+                                                        i2 = 0;
+                                                    }
+                                                    Slog.i(
+                                                            "CameraService_worker",
+                                                            "DeviceInjector, isExternalCamera = "
+                                                                    + str2
+                                                                    + " facing = "
+                                                                    + i2);
+                                                    return Boolean.valueOf(i2 == 2);
+                                                }
+                                            });
                         }
-                        DeviceInjectorRequirementChecker deviceInjectorRequirementChecker = DeviceInjectorRequirementChecker.this;
+                        DeviceInjectorRequirementChecker deviceInjectorRequirementChecker =
+                                DeviceInjectorRequirementChecker.this;
                         boolean z = deviceInjectorRequirementChecker.mExternalCameraPresent;
                         ArrayMap arrayMap = deviceInjectorRequirementChecker.mExternalDeviceMap;
                         Boolean bool = Boolean.TRUE;
                         if (z != arrayMap.containsValue(bool)) {
-                            DeviceInjectorRequirementChecker deviceInjectorRequirementChecker2 = DeviceInjectorRequirementChecker.this;
-                            boolean containsValue = deviceInjectorRequirementChecker2.mExternalDeviceMap.containsValue(bool);
-                            Slog.i("CameraService_worker", "DeviceInjector, updateExternalCameraPresentAndNotify : mExternalCameraPresent = " + deviceInjectorRequirementChecker2.mExternalCameraPresent + " isExternalCameraPresent() = " + containsValue);
-                            deviceInjectorRequirementChecker2.mExternalCameraPresent = containsValue;
-                            deviceInjectorRequirementChecker2.notifyDeviceInjectorAvailabilityChanged();
+                            DeviceInjectorRequirementChecker deviceInjectorRequirementChecker2 =
+                                    DeviceInjectorRequirementChecker.this;
+                            boolean containsValue =
+                                    deviceInjectorRequirementChecker2.mExternalDeviceMap
+                                            .containsValue(bool);
+                            Slog.i(
+                                    "CameraService_worker",
+                                    "DeviceInjector, updateExternalCameraPresentAndNotify :"
+                                        + " mExternalCameraPresent = "
+                                            + deviceInjectorRequirementChecker2
+                                                    .mExternalCameraPresent
+                                            + " isExternalCameraPresent() = "
+                                            + containsValue);
+                            deviceInjectorRequirementChecker2.mExternalCameraPresent =
+                                    containsValue;
+                            deviceInjectorRequirementChecker2
+                                    .notifyDeviceInjectorAvailabilityChanged();
                         }
                     } catch (Throwable th) {
                         throw th;
@@ -667,8 +800,12 @@ public final class CameraServiceWorker extends SystemService implements Handler.
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction(UiModeManager.SEM_ACTION_ENTER_DESKTOP_MODE);
             intentFilter.addAction(UiModeManager.SEM_ACTION_EXIT_DESKTOP_MODE);
-            CameraServiceWorker.this.mContext.registerReceiver(this, intentFilter, null, CameraServiceWorker.this.mHandler, 2);
-            ((CameraManager) CameraServiceWorker.this.mContext.getSystemService(CameraManager.class)).registerAvailabilityCallback(new AnonymousClass1(), CameraServiceWorker.this.mHandler);
+            CameraServiceWorker.this.mContext.registerReceiver(
+                    this, intentFilter, null, CameraServiceWorker.this.mHandler, 2);
+            ((CameraManager)
+                            CameraServiceWorker.this.mContext.getSystemService(CameraManager.class))
+                    .registerAvailabilityCallback(
+                            new AnonymousClass1(), CameraServiceWorker.this.mHandler);
         }
 
         public final void notifyDeviceInjectorAvailabilityChanged() {
@@ -687,7 +824,10 @@ public final class CameraServiceWorker extends SystemService implements Handler.
                     z = true;
                 }
                 this.mRequirementMet = z;
-                Intent m = ExplicitHealthCheckController$$ExternalSyntheticOutline0.m("intentfilter.samsung.vtcamerasetting.deviceinjector.option", "com.samsung.android.vtcamerasettings");
+                Intent m =
+                        ExplicitHealthCheckController$$ExternalSyntheticOutline0.m(
+                                "intentfilter.samsung.vtcamerasetting.deviceinjector.option",
+                                "com.samsung.android.vtcamerasettings");
                 m.putExtra("dex_and_camera", this.mRequirementMet);
                 CameraServiceWorker.this.mContext.startServiceAsUser(m, UserHandle.CURRENT_OR_SELF);
             }
@@ -696,7 +836,8 @@ public final class CameraServiceWorker extends SystemService implements Handler.
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
             synchronized (this) {
-                this.mDexMode = UiModeManager.SEM_ACTION_ENTER_DESKTOP_MODE.equals(intent.getAction());
+                this.mDexMode =
+                        UiModeManager.SEM_ACTION_ENTER_DESKTOP_MODE.equals(intent.getAction());
                 Slog.i("CameraService_worker", "DeviceInjector, dex mode = " + this.mDexMode);
                 notifyDeviceInjectorAvailabilityChanged();
             }
@@ -705,8 +846,7 @@ public final class CameraServiceWorker extends SystemService implements Handler.
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DeviceStateListener implements DeviceStateManager.DeviceStateCallback {
-        public DeviceStateListener() {
-        }
+        public DeviceStateListener() {}
 
         public final void onDeviceStateChanged(DeviceState deviceState) {
             int identifier = deviceState.getIdentifier();
@@ -726,11 +866,9 @@ public final class CameraServiceWorker extends SystemService implements Handler.
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class DisplayWindowListener extends IDisplayWindowListener.Stub {
-        public DisplayWindowListener() {
-        }
+        public DisplayWindowListener() {}
 
-        public final void onDisplayAdded(int i) {
-        }
+        public final void onDisplayAdded(int i) {}
 
         public final void onDisplayConfigurationChanged(int i, Configuration configuration) {
             ICameraService cameraService = CameraServiceWorker.this.getCameraService();
@@ -740,21 +878,20 @@ public final class CameraServiceWorker extends SystemService implements Handler.
             try {
                 cameraService.notifyDeviceInjectorOrientationChange();
             } catch (RemoteException e) {
-                AccountManagerService$$ExternalSyntheticOutline0.m("Could not notify cameraserver, remote exception: ", e, "CameraService_worker");
+                AccountManagerService$$ExternalSyntheticOutline0.m(
+                        "Could not notify cameraserver, remote exception: ",
+                        e,
+                        "CameraService_worker");
             }
         }
 
-        public final void onDisplayRemoved(int i) {
-        }
+        public final void onDisplayRemoved(int i) {}
 
-        public final void onFixedRotationFinished(int i) {
-        }
+        public final void onFixedRotationFinished(int i) {}
 
-        public final void onFixedRotationStarted(int i, int i2) {
-        }
+        public final void onFixedRotationStarted(int i, int i2) {}
 
-        public final void onKeepClearAreasChanged(int i, List list, List list2) {
-        }
+        public final void onKeepClearAreasChanged(int i, List list, List list2) {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -777,17 +914,60 @@ public final class CameraServiceWorker extends SystemService implements Handler.
 
         @Override // java.lang.Record
         public final boolean equals(Object obj) {
-            return (boolean) ObjectMethods.bootstrap(MethodHandles.lookup(), "equals", MethodType.methodType(Boolean.TYPE, TaskInfo.class, Object.class), TaskInfo.class, "frontTaskId;isResizable;isFixedOrientationLandscape;isFixedOrientationPortrait;displayId;userId", "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->frontTaskId:I", "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->isResizable:Z", "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->isFixedOrientationLandscape:Z", "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->isFixedOrientationPortrait:Z", "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->displayId:I", "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->userId:I").dynamicInvoker().invoke(this, obj) /* invoke-custom */;
+            return (boolean)
+                    ObjectMethods.bootstrap(
+                                    MethodHandles.lookup(),
+                                    "equals",
+                                    MethodType.methodType(
+                                            Boolean.TYPE, TaskInfo.class, Object.class),
+                                    TaskInfo.class,
+                                    "frontTaskId;isResizable;isFixedOrientationLandscape;isFixedOrientationPortrait;displayId;userId",
+                                    "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->frontTaskId:I",
+                                    "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->isResizable:Z",
+                                    "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->isFixedOrientationLandscape:Z",
+                                    "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->isFixedOrientationPortrait:Z",
+                                    "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->displayId:I",
+                                    "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->userId:I")
+                            .dynamicInvoker()
+                            .invoke(this, obj) /* invoke-custom */;
         }
 
         @Override // java.lang.Record
         public final int hashCode() {
-            return (int) ObjectMethods.bootstrap(MethodHandles.lookup(), "hashCode", MethodType.methodType(Integer.TYPE, TaskInfo.class), TaskInfo.class, "frontTaskId;isResizable;isFixedOrientationLandscape;isFixedOrientationPortrait;displayId;userId", "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->frontTaskId:I", "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->isResizable:Z", "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->isFixedOrientationLandscape:Z", "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->isFixedOrientationPortrait:Z", "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->displayId:I", "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->userId:I").dynamicInvoker().invoke(this) /* invoke-custom */;
+            return (int)
+                    ObjectMethods.bootstrap(
+                                    MethodHandles.lookup(),
+                                    "hashCode",
+                                    MethodType.methodType(Integer.TYPE, TaskInfo.class),
+                                    TaskInfo.class,
+                                    "frontTaskId;isResizable;isFixedOrientationLandscape;isFixedOrientationPortrait;displayId;userId",
+                                    "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->frontTaskId:I",
+                                    "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->isResizable:Z",
+                                    "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->isFixedOrientationLandscape:Z",
+                                    "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->isFixedOrientationPortrait:Z",
+                                    "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->displayId:I",
+                                    "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->userId:I")
+                            .dynamicInvoker()
+                            .invoke(this) /* invoke-custom */;
         }
 
         @Override // java.lang.Record
         public final String toString() {
-            return (String) ObjectMethods.bootstrap(MethodHandles.lookup(), "toString", MethodType.methodType(String.class, TaskInfo.class), TaskInfo.class, "frontTaskId;isResizable;isFixedOrientationLandscape;isFixedOrientationPortrait;displayId;userId", "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->frontTaskId:I", "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->isResizable:Z", "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->isFixedOrientationLandscape:Z", "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->isFixedOrientationPortrait:Z", "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->displayId:I", "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->userId:I").dynamicInvoker().invoke(this) /* invoke-custom */;
+            return (String)
+                    ObjectMethods.bootstrap(
+                                    MethodHandles.lookup(),
+                                    "toString",
+                                    MethodType.methodType(String.class, TaskInfo.class),
+                                    TaskInfo.class,
+                                    "frontTaskId;isResizable;isFixedOrientationLandscape;isFixedOrientationPortrait;displayId;userId",
+                                    "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->frontTaskId:I",
+                                    "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->isResizable:Z",
+                                    "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->isFixedOrientationLandscape:Z",
+                                    "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->isFixedOrientationPortrait:Z",
+                                    "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->displayId:I",
+                                    "FIELD:Lcom/samsung/android/camera/CameraServiceWorker$TaskInfo;->userId:I")
+                            .dynamicInvoker()
+                            .invoke(this) /* invoke-custom */;
         }
     }
 
@@ -797,7 +977,10 @@ public final class CameraServiceWorker extends SystemService implements Handler.
 
         public WorkerOrientationListener(Context context) {
             super(context);
-            DisplayManager displayManager = (DisplayManager) CameraServiceWorker.this.mContext.getSystemService(DisplayManager.class);
+            DisplayManager displayManager =
+                    (DisplayManager)
+                            CameraServiceWorker.this.mContext.getSystemService(
+                                    DisplayManager.class);
             if (displayManager != null) {
                 Display display = displayManager.getDisplay(0);
                 if (display == null) {
@@ -806,7 +989,9 @@ public final class CameraServiceWorker extends SystemService implements Handler.
                 }
                 int rotation = display.getRotation();
                 if (rotation == 1) {
-                    this.mLatestOrientation = FrameworkStatsLog.CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_AI_CLEAR_ZOOM_MERGE_ZSL_ANCHOR_6;
+                    this.mLatestOrientation =
+                            FrameworkStatsLog
+                                    .CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_AI_CLEAR_ZOOM_MERGE_ZSL_ANCHOR_6;
                     return;
                 }
                 if (rotation == 2) {
@@ -831,7 +1016,10 @@ public final class CameraServiceWorker extends SystemService implements Handler.
                 try {
                     cameraService.notifyDeviceInjectorOrientationChange();
                 } catch (RemoteException e) {
-                    AccountManagerService$$ExternalSyntheticOutline0.m("Could not notify cameraserver, remote exception: ", e, "CameraService_worker");
+                    AccountManagerService$$ExternalSyntheticOutline0.m(
+                            "Could not notify cameraserver, remote exception: ",
+                            e,
+                            "CameraService_worker");
                 }
             }
         }
@@ -839,9 +1027,16 @@ public final class CameraServiceWorker extends SystemService implements Handler.
 
     static {
         DEBUG = !Build.TYPE.equals("user") || Debug.semIsProductDev();
-        SAMSUNG_CAMERA_PACKAGES = new String[]{"com.sec.android.app.camera", "com.samsung.android.smartface", "com.samsung.adaptivebrightnessgo", "com.samsung.android.sead"};
-        DEVICE_INJECTOR_TEST_PACKAGES = new String[]{"com.samsung.android.camera.test", "injector.test"};
-        DEVICE_INJECTOR_TEST_PACKAGES_FOR_BLOCK = new String[]{"injector.test.phone"};
+        SAMSUNG_CAMERA_PACKAGES =
+                new String[] {
+                    "com.sec.android.app.camera",
+                    "com.samsung.android.smartface",
+                    "com.samsung.adaptivebrightnessgo",
+                    "com.samsung.android.sead"
+                };
+        DEVICE_INJECTOR_TEST_PACKAGES =
+                new String[] {"com.samsung.android.camera.test", "injector.test"};
+        DEVICE_INJECTOR_TEST_PACKAGES_FOR_BLOCK = new String[] {"injector.test.phone"};
     }
 
     public CameraServiceWorker(Context context) {
@@ -862,7 +1057,9 @@ public final class CameraServiceWorker extends SystemService implements Handler.
         ServiceThread m = Watchdog$$ExternalSyntheticOutline0.m(-4, "CameraService_worker", false);
         Handler handler = new Handler(m.getLooper(), this);
         this.mHandler = handler;
-        boolean z = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_CONTEXTSERVICE_ENABLE_SURVEY_MODE");
+        boolean z =
+                SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_CONTEXTSERVICE_ENABLE_SURVEY_MODE");
         this.mEnableSurveyMode = z;
         if (DEBUG) {
             Slog.v("CameraService_worker", "enable survey mode is " + z);
@@ -878,7 +1075,8 @@ public final class CameraServiceWorker extends SystemService implements Handler.
     public static TaskInfo getTaskInfo(int i, String str) {
         TaskInfo taskInfo;
         try {
-            ParceledListSlice recentTasks = ActivityTaskManager.getService().getRecentTasks(2, 0, i);
+            ParceledListSlice recentTasks =
+                    ActivityTaskManager.getService().getRecentTasks(2, 0, i);
             if (recentTasks == null || recentTasks.getList().isEmpty()) {
                 Slog.e("CameraService_worker", "Recent task list is empty!");
                 return null;
@@ -889,18 +1087,31 @@ public final class CameraServiceWorker extends SystemService implements Handler.
                     taskInfo = null;
                     break;
                 }
-                ActivityManager.RecentTaskInfo recentTaskInfo = (ActivityManager.RecentTaskInfo) it.next();
+                ActivityManager.RecentTaskInfo recentTaskInfo =
+                        (ActivityManager.RecentTaskInfo) it.next();
                 ActivityInfo activityInfo = recentTaskInfo.topActivityInfo;
                 if (activityInfo != null && Objects.equals(str, activityInfo.packageName)) {
                     int i2 = recentTaskInfo.taskId;
                     ActivityInfo activityInfo2 = recentTaskInfo.topActivityInfo;
-                    taskInfo = new TaskInfo(i2, recentTaskInfo.displayId, recentTaskInfo.userId, activityInfo2.resizeMode != 0, ActivityInfo.isFixedOrientationLandscape(activityInfo2.screenOrientation), ActivityInfo.isFixedOrientationPortrait(recentTaskInfo.topActivityInfo.screenOrientation));
+                    taskInfo =
+                            new TaskInfo(
+                                    i2,
+                                    recentTaskInfo.displayId,
+                                    recentTaskInfo.userId,
+                                    activityInfo2.resizeMode != 0,
+                                    ActivityInfo.isFixedOrientationLandscape(
+                                            activityInfo2.screenOrientation),
+                                    ActivityInfo.isFixedOrientationPortrait(
+                                            recentTaskInfo.topActivityInfo.screenOrientation));
                 }
             }
             if (taskInfo != null) {
                 return taskInfo;
             }
-            BootReceiver$$ExternalSyntheticOutline0.m("Recent tasks don't include camera client package name: ", str, "CameraService_worker");
+            BootReceiver$$ExternalSyntheticOutline0.m(
+                    "Recent tasks don't include camera client package name: ",
+                    str,
+                    "CameraService_worker");
             return null;
         } catch (RemoteException unused) {
             Slog.e("CameraService_worker", "Failed to query recent tasks!");
@@ -920,7 +1131,8 @@ public final class CameraServiceWorker extends SystemService implements Handler.
             this.mIsCameraOpened = false;
             synchronized (this.mOrientationLock) {
                 try {
-                    WorkerOrientationListener workerOrientationListener = this.mOrientationEventListener;
+                    WorkerOrientationListener workerOrientationListener =
+                            this.mOrientationEventListener;
                     if (workerOrientationListener != null) {
                         workerOrientationListener.disable();
                     }
@@ -938,14 +1150,18 @@ public final class CameraServiceWorker extends SystemService implements Handler.
             if (this.mCameraServiceRaw == null) {
                 IBinder binderService = getBinderService("media.camera");
                 if (binderService == null) {
-                    Slog.w("CameraService_worker", "Could not notify mediaserver, camera service not available.");
+                    Slog.w(
+                            "CameraService_worker",
+                            "Could not notify mediaserver, camera service not available.");
                     return null;
                 }
                 try {
                     binderService.linkToDeath(this, 0);
                     this.mCameraServiceRaw = ICameraService.Stub.asInterface(binderService);
                 } catch (RemoteException unused) {
-                    Slog.w("CameraService_worker", "Could not link to death of native camera service");
+                    Slog.w(
+                            "CameraService_worker",
+                            "Could not link to death of native camera service");
                     return null;
                 }
             }
@@ -956,7 +1172,10 @@ public final class CameraServiceWorker extends SystemService implements Handler.
     @Override // android.os.Handler.Callback
     public final boolean handleMessage(Message message) {
         if (message.what != 3) {
-            VaultKeeperService$$ExternalSyntheticOutline0.m(new StringBuilder("CameraServiceWorker error, invalid message: "), message.what, "CameraService_worker");
+            VaultKeeperService$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("CameraServiceWorker error, invalid message: "),
+                    message.what,
+                    "CameraService_worker");
             return true;
         }
         synchronized (this.mLock) {
@@ -967,7 +1186,13 @@ public final class CameraServiceWorker extends SystemService implements Handler.
 
     public final void insertDMALog(Long l, String str, String str2) {
         if (DEBUG) {
-            StringBuilder m = InitialConfiguration$$ExternalSyntheticOutline0.m("insertDMALog: trackingId=4K3-399-1014897, feature=", str, ", extra=", str2, ", value=");
+            StringBuilder m =
+                    InitialConfiguration$$ExternalSyntheticOutline0.m(
+                            "insertDMALog: trackingId=4K3-399-1014897, feature=",
+                            str,
+                            ", extra=",
+                            str2,
+                            ", value=");
             m.append(l);
             Slog.v("CameraService_worker", m.toString());
         }
@@ -986,7 +1211,17 @@ public final class CameraServiceWorker extends SystemService implements Handler.
             HashMap hashMap = new HashMap();
             Locale locale = Locale.UK;
             int intValue = l.intValue();
-            hashMap.put("3PApp_Camera_Display", str2 + "_" + (intValue != 0 ? intValue != 1 ? intValue != 2 ? "UnknownCamera" : "ExternalCamera" : "FrontCamera" : "BackCamera") + "_" + (this.mDisplayId == 1 ? "SubDisplay" : "MainDisplay"));
+            hashMap.put(
+                    "3PApp_Camera_Display",
+                    str2
+                            + "_"
+                            + (intValue != 0
+                                    ? intValue != 1
+                                            ? intValue != 2 ? "UnknownCamera" : "ExternalCamera"
+                                            : "FrontCamera"
+                                    : "BackCamera")
+                            + "_"
+                            + (this.mDisplayId == 1 ? "SubDisplay" : "MainDisplay"));
             bundle.putSerializable("dimension", hashMap);
         }
         Intent intent = new Intent();
@@ -1016,20 +1251,32 @@ public final class CameraServiceWorker extends SystemService implements Handler.
     public final Pair notifyDeviceChangeLocked(long j, boolean z) {
         ICameraService cameraService = getCameraService();
         if (cameraService == null) {
-            Pair pair = new Pair(Boolean.FALSE, "Could not notify mediaserver, camera service not available.");
+            Pair pair =
+                    new Pair(
+                            Boolean.FALSE,
+                            "Could not notify mediaserver, camera service not available.");
             Slog.w("CameraService_worker", (String) pair.second);
             return pair;
         }
-        Slog.i("CameraService_worker", String.format("NotifyDeviceStateChange 0x%X, sync(%b)", Long.valueOf(j), Boolean.valueOf(z)));
+        Slog.i(
+                "CameraService_worker",
+                String.format(
+                        "NotifyDeviceStateChange 0x%X, sync(%b)",
+                        Long.valueOf(j), Boolean.valueOf(z)));
         try {
             if (z) {
                 cameraService.notifyDeviceStateChangeSync(j);
             } else {
                 cameraService.notifyDeviceStateChange(j);
             }
-            return new Pair(Boolean.TRUE, String.format("NotifyDeviceStateChange success: 0x%X", Long.valueOf(j)));
+            return new Pair(
+                    Boolean.TRUE,
+                    String.format("NotifyDeviceStateChange success: 0x%X", Long.valueOf(j)));
         } catch (RemoteException e) {
-            Pair pair2 = new Pair(Boolean.FALSE, "Could not notify device state change, remote exception: " + e);
+            Pair pair2 =
+                    new Pair(
+                            Boolean.FALSE,
+                            "Could not notify device state change, remote exception: " + e);
             Slog.w("CameraService_worker", (String) pair2.second);
             return pair2;
         }
@@ -1042,15 +1289,17 @@ public final class CameraServiceWorker extends SystemService implements Handler.
         if (i <= 0) {
             return;
         }
-        Slog.i("CameraService_worker", "Could not notify camera service of device state change, retrying...");
+        Slog.i(
+                "CameraService_worker",
+                "Could not notify camera service of device state change, retrying...");
         Handler handler = this.mHandler;
         handler.sendMessageDelayed(handler.obtainMessage(3, i - 1, 0, null), 20L);
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:20:0x0091, code lost:
-    
-        if (r2.isUpdatedSystemApp() != false) goto L36;
-     */
+
+       if (r2.isUpdatedSystemApp() != false) goto L36;
+    */
     @Override // com.android.server.SystemService
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -1171,7 +1420,9 @@ public final class CameraServiceWorker extends SystemService implements Handler.
         Ldd:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.camera.CameraServiceWorker.onBootPhase(int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.camera.CameraServiceWorker.onBootPhase(int):void");
     }
 
     @Override // com.android.server.SystemService

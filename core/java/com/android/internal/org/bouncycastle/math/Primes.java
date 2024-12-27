@@ -3,6 +3,7 @@ package com.android.internal.org.bouncycastle.math;
 import com.android.internal.org.bouncycastle.crypto.Digest;
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.BigIntegers;
+
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
@@ -87,7 +88,8 @@ public abstract class Primes {
         return implSTRandomPrime(hash, length, Arrays.clone(inputSeed));
     }
 
-    public static MROutput enhancedMRProbablePrimeTest(BigInteger candidate, SecureRandom random, int iterations) {
+    public static MROutput enhancedMRProbablePrimeTest(
+            BigInteger candidate, SecureRandom random, int iterations) {
         checkCandidate(candidate, "candidate");
         if (random == null) {
             throw new IllegalArgumentException("'random' cannot be null");
@@ -155,7 +157,8 @@ public abstract class Primes {
         return implHasAnySmallFactors(candidate);
     }
 
-    public static boolean isMRProbablePrime(BigInteger candidate, SecureRandom random, int iterations) {
+    public static boolean isMRProbablePrime(
+            BigInteger candidate, SecureRandom random, int iterations) {
         checkCandidate(candidate, "candidate");
         if (random == null) {
             throw new IllegalArgumentException("'random' cannot be null");
@@ -205,7 +208,15 @@ public abstract class Primes {
 
     private static boolean implHasAnySmallFactors(BigInteger x) {
         int r = x.mod(BigInteger.valueOf(223092870)).intValue();
-        if (r % 2 == 0 || r % 3 == 0 || r % 5 == 0 || r % 7 == 0 || r % 11 == 0 || r % 13 == 0 || r % 17 == 0 || r % 19 == 0 || r % 23 == 0) {
+        if (r % 2 == 0
+                || r % 3 == 0
+                || r % 5 == 0
+                || r % 7 == 0
+                || r % 11 == 0
+                || r % 13 == 0
+                || r % 17 == 0
+                || r % 19 == 0
+                || r % 23 == 0) {
             return true;
         }
         int r2 = x.mod(BigInteger.valueOf(58642669)).intValue();
@@ -244,7 +255,8 @@ public abstract class Primes {
         return r10 % 193 == 0 || r10 % 197 == 0 || r10 % 199 == 0 || r10 % 211 == 0;
     }
 
-    private static boolean implMRProbablePrimeToBase(BigInteger w, BigInteger wSubOne, BigInteger m, int a, BigInteger b) {
+    private static boolean implMRProbablePrimeToBase(
+            BigInteger w, BigInteger wSubOne, BigInteger m, int a, BigInteger b) {
         BigInteger z = b.modPow(m, w);
         if (z.equals(ONE) || z.equals(wSubOne)) {
             return true;
@@ -283,7 +295,8 @@ public abstract class Primes {
                     return new STOutput(BigInteger.valueOf(c64), primeSeed, primeGenCounter);
                 }
             } while (primeGenCounter <= length * 4);
-            throw new IllegalStateException("Too many iterations in Shawe-Taylor Random_Prime Routine");
+            throw new IllegalStateException(
+                    "Too many iterations in Shawe-Taylor Random_Prime Routine");
         }
         STOutput rec2 = implSTRandomPrime(digest, (length + 3) / 2, primeSeed);
         BigInteger c02 = rec2.getPrime();

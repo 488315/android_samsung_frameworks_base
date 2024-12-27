@@ -14,13 +14,16 @@ import android.view.InflateException;
 import android.view.animation.AnimationUtils;
 import android.view.animation.BaseInterpolator;
 import android.view.animation.Interpolator;
+
 import com.android.ims.ImsConfig;
 import com.android.internal.R;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public class AnimatorInflater {
@@ -35,28 +38,30 @@ public class AnimatorInflater {
     private static final int VALUE_TYPE_UNDEFINED = 4;
     private static final TypedValue sTmpTypedValue = new TypedValue();
 
-    public static Animator loadAnimator(Context context, int id) throws Resources.NotFoundException {
+    public static Animator loadAnimator(Context context, int id)
+            throws Resources.NotFoundException {
         return loadAnimator(context.getResources(), context.getTheme(), id);
     }
 
-    public static Animator loadAnimator(Resources resources, Resources.Theme theme, int id) throws Resources.NotFoundException {
+    public static Animator loadAnimator(Resources resources, Resources.Theme theme, int id)
+            throws Resources.NotFoundException {
         return loadAnimator(resources, theme, id, 1.0f);
     }
 
     /*  JADX ERROR: Types fix failed
-        java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.InsnArg.getType()" because "changeArg" is null
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.moveListener(TypeUpdate.java:439)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.runListeners(TypeUpdate.java:232)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.requestUpdate(TypeUpdate.java:212)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeForSsaVar(TypeUpdate.java:183)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeChecked(TypeUpdate.java:112)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:83)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:56)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryPossibleTypes(FixTypesVisitor.java:183)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.deduceType(FixTypesVisitor.java:242)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryDeduceTypes(FixTypesVisitor.java:221)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.visit(FixTypesVisitor.java:91)
-        */
+    java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.InsnArg.getType()" because "changeArg" is null
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.moveListener(TypeUpdate.java:439)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.runListeners(TypeUpdate.java:232)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.requestUpdate(TypeUpdate.java:212)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeForSsaVar(TypeUpdate.java:183)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeChecked(TypeUpdate.java:112)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:83)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:56)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryPossibleTypes(FixTypesVisitor.java:183)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.deduceType(FixTypesVisitor.java:242)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryDeduceTypes(FixTypesVisitor.java:221)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.visit(FixTypesVisitor.java:91)
+    */
     /* JADX WARN: Failed to apply debug info
     java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.InsnArg.getType()" because "changeArg" is null
     	at jadx.core.dex.visitors.typeinference.TypeUpdate.moveListener(TypeUpdate.java:439)
@@ -75,7 +80,12 @@ public class AnimatorInflater {
     	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.visit(DebugInfoApplyVisitor.java:55)
      */
     /* JADX WARN: Not initialized variable reg: 10, insn: 0x00a7: MOVE (r1 I:??[OBJECT, ARRAY]) = (r10 I:??[OBJECT, ARRAY] A[D('animator' android.animation.Animator)]), block:B:44:0x00a7 */
-    public static android.animation.Animator loadAnimator(android.content.res.Resources r12, android.content.res.Resources.Theme r13, int r14, float r15) throws android.content.res.Resources.NotFoundException {
+    public static android.animation.Animator loadAnimator(
+            android.content.res.Resources r12,
+            android.content.res.Resources.Theme r13,
+            int r14,
+            float r15)
+            throws android.content.res.Resources.NotFoundException {
         /*
             java.lang.String r0 = "Can't load animation resource ID #0x"
             android.content.res.ConfigurationBoundResourceCache r7 = r12.getAnimatorCache()
@@ -185,23 +195,27 @@ public class AnimatorInflater {
         Lad:
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.animation.AnimatorInflater.loadAnimator(android.content.res.Resources, android.content.res.Resources$Theme, int, float):android.animation.Animator");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.animation.AnimatorInflater.loadAnimator(android.content.res.Resources,"
+                    + " android.content.res.Resources$Theme, int,"
+                    + " float):android.animation.Animator");
     }
 
     /*  JADX ERROR: Types fix failed
-        java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.InsnArg.getType()" because "changeArg" is null
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.moveListener(TypeUpdate.java:439)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.runListeners(TypeUpdate.java:232)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.requestUpdate(TypeUpdate.java:212)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeForSsaVar(TypeUpdate.java:183)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeChecked(TypeUpdate.java:112)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:83)
-        	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:56)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryPossibleTypes(FixTypesVisitor.java:183)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.deduceType(FixTypesVisitor.java:242)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryDeduceTypes(FixTypesVisitor.java:221)
-        	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.visit(FixTypesVisitor.java:91)
-        */
+    java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.InsnArg.getType()" because "changeArg" is null
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.moveListener(TypeUpdate.java:439)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.runListeners(TypeUpdate.java:232)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.requestUpdate(TypeUpdate.java:212)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeForSsaVar(TypeUpdate.java:183)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.updateTypeChecked(TypeUpdate.java:112)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:83)
+    	at jadx.core.dex.visitors.typeinference.TypeUpdate.apply(TypeUpdate.java:56)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryPossibleTypes(FixTypesVisitor.java:183)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.deduceType(FixTypesVisitor.java:242)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.tryDeduceTypes(FixTypesVisitor.java:221)
+    	at jadx.core.dex.visitors.typeinference.FixTypesVisitor.visit(FixTypesVisitor.java:91)
+    */
     /* JADX WARN: Failed to apply debug info
     java.lang.NullPointerException: Cannot invoke "jadx.core.dex.instructions.args.InsnArg.getType()" because "changeArg" is null
     	at jadx.core.dex.visitors.typeinference.TypeUpdate.moveListener(TypeUpdate.java:439)
@@ -220,7 +234,9 @@ public class AnimatorInflater {
     	at jadx.core.dex.visitors.debuginfo.DebugInfoApplyVisitor.visit(DebugInfoApplyVisitor.java:55)
      */
     /* JADX WARN: Not initialized variable reg: 12, insn: 0x00b6: MOVE (r2 I:??[OBJECT, ARRAY]) = (r12 I:??[OBJECT, ARRAY] A[D('animator' android.animation.StateListAnimator)]), block:B:44:0x00b6 */
-    public static android.animation.StateListAnimator loadStateListAnimator(android.content.Context r14, int r15) throws android.content.res.Resources.NotFoundException {
+    public static android.animation.StateListAnimator loadStateListAnimator(
+            android.content.Context r14, int r15)
+            throws android.content.res.Resources.NotFoundException {
         /*
             java.lang.String r0 = "Can't load state list animator resource ID #0x"
             android.content.res.Resources r1 = r14.getResources()
@@ -333,10 +349,15 @@ public class AnimatorInflater {
         Lbc:
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.animation.AnimatorInflater.loadStateListAnimator(android.content.Context, int):android.animation.StateListAnimator");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.animation.AnimatorInflater.loadStateListAnimator(android.content.Context,"
+                    + " int):android.animation.StateListAnimator");
     }
 
-    private static StateListAnimator createStateListAnimatorFromXml(Context context, XmlPullParser parser, AttributeSet attributeSet) throws IOException, XmlPullParserException {
+    private static StateListAnimator createStateListAnimatorFromXml(
+            Context context, XmlPullParser parser, AttributeSet attributeSet)
+            throws IOException, XmlPullParserException {
         StateListAnimator stateListAnimator = new StateListAnimator();
         while (true) {
             int type = parser.next();
@@ -357,17 +378,27 @@ public class AnimatorInflater {
                                 animator = loadAnimator(context, animId);
                             } else {
                                 int stateIndex2 = stateIndex + 1;
-                                states[stateIndex] = attributeSet.getAttributeBooleanValue(i, false) ? attrName : -attrName;
+                                states[stateIndex] =
+                                        attributeSet.getAttributeBooleanValue(i, false)
+                                                ? attrName
+                                                : -attrName;
                                 stateIndex = stateIndex2;
                             }
                         }
                         if (animator == null) {
-                            animator = createAnimatorFromXml(context.getResources(), context.getTheme(), parser, 1.0f);
+                            animator =
+                                    createAnimatorFromXml(
+                                            context.getResources(),
+                                            context.getTheme(),
+                                            parser,
+                                            1.0f);
                         }
                         if (animator == null) {
-                            throw new Resources.NotFoundException("animation state item must have a valid animation");
+                            throw new Resources.NotFoundException(
+                                    "animation state item must have a valid animation");
                         }
-                        stateListAnimator.addState(StateSet.trimStateSet(states, stateIndex), animator);
+                        stateListAnimator.addState(
+                                StateSet.trimStateSet(states, stateIndex), animator);
                         break;
                     } else {
                         continue;
@@ -384,15 +415,25 @@ public class AnimatorInflater {
         }
 
         @Override // android.animation.TypeEvaluator
-        public PathParser.PathData evaluate(float fraction, PathParser.PathData startPathData, PathParser.PathData endPathData) {
-            if (!PathParser.interpolatePathData(this.mPathData, startPathData, endPathData, fraction)) {
-                throw new IllegalArgumentException("Can't interpolate between two incompatible pathData");
+        public PathParser.PathData evaluate(
+                float fraction,
+                PathParser.PathData startPathData,
+                PathParser.PathData endPathData) {
+            if (!PathParser.interpolatePathData(
+                    this.mPathData, startPathData, endPathData, fraction)) {
+                throw new IllegalArgumentException(
+                        "Can't interpolate between two incompatible pathData");
             }
             return this.mPathData;
         }
     }
 
-    private static PropertyValuesHolder getPVH(TypedArray styledAttributes, int valueType, int valueFromId, int valueToId, String propertyName) {
+    private static PropertyValuesHolder getPVH(
+            TypedArray styledAttributes,
+            int valueType,
+            int valueFromId,
+            int valueToId,
+            String propertyName) {
         int valueType2;
         PropertyValuesHolder returnValue;
         int valueTo;
@@ -422,8 +463,10 @@ public class AnimatorInflater {
         if (valueType2 == 2) {
             String fromString = styledAttributes.getString(valueFromId);
             String toString = styledAttributes.getString(valueToId);
-            PathParser.PathData nodesFrom = fromString == null ? null : new PathParser.PathData(fromString);
-            PathParser.PathData nodesTo = toString == null ? null : new PathParser.PathData(toString);
+            PathParser.PathData nodesFrom =
+                    fromString == null ? null : new PathParser.PathData(fromString);
+            PathParser.PathData nodesTo =
+                    toString == null ? null : new PathParser.PathData(toString);
             if (nodesFrom == null && nodesTo == null) {
                 toType = toType2;
                 propertyValuesHolder = null;
@@ -432,19 +475,25 @@ public class AnimatorInflater {
                     toType = toType2;
                     propertyValuesHolder = null;
                     if (nodesTo != null) {
-                        returnValue2 = PropertyValuesHolder.ofObject(propertyName, new PathDataEvaluator(), nodesTo);
+                        returnValue2 =
+                                PropertyValuesHolder.ofObject(
+                                        propertyName, new PathDataEvaluator(), nodesTo);
                     }
                 } else {
                     TypeEvaluator evaluator = new PathDataEvaluator();
                     if (nodesTo != null) {
                         if (!PathParser.canMorph(nodesFrom, nodesTo)) {
-                            throw new InflateException(" Can't morph from " + fromString + " to " + toString);
+                            throw new InflateException(
+                                    " Can't morph from " + fromString + " to " + toString);
                         }
-                        returnValue2 = PropertyValuesHolder.ofObject(propertyName, evaluator, nodesFrom, nodesTo);
+                        returnValue2 =
+                                PropertyValuesHolder.ofObject(
+                                        propertyName, evaluator, nodesFrom, nodesTo);
                         toType = toType2;
                     } else {
                         toType = toType2;
-                        returnValue2 = PropertyValuesHolder.ofObject(propertyName, evaluator, nodesFrom);
+                        returnValue2 =
+                                PropertyValuesHolder.ofObject(propertyName, evaluator, nodesFrom);
                     }
                 }
                 return returnValue2;
@@ -520,7 +569,11 @@ public class AnimatorInflater {
         return returnValue;
     }
 
-    private static void parseAnimatorFromTypeArray(ValueAnimator anim, TypedArray arrayAnimator, TypedArray arrayObjectAnimator, float pixelSize) {
+    private static void parseAnimatorFromTypeArray(
+            ValueAnimator anim,
+            TypedArray arrayAnimator,
+            TypedArray arrayObjectAnimator,
+            float pixelSize) {
         long duration = arrayAnimator.getInt(1, 300);
         long startDelay = arrayAnimator.getInt(2, 0);
         int valueType = arrayAnimator.getInt(7, 4);
@@ -544,16 +597,24 @@ public class AnimatorInflater {
         }
     }
 
-    private static TypeEvaluator setupAnimatorForPath(ValueAnimator anim, TypedArray arrayAnimator) {
+    private static TypeEvaluator setupAnimatorForPath(
+            ValueAnimator anim, TypedArray arrayAnimator) {
         String fromString = arrayAnimator.getString(5);
         String toString = arrayAnimator.getString(6);
-        PathParser.PathData pathDataFrom = fromString == null ? null : new PathParser.PathData(fromString);
-        PathParser.PathData pathDataTo = toString == null ? null : new PathParser.PathData(toString);
+        PathParser.PathData pathDataFrom =
+                fromString == null ? null : new PathParser.PathData(fromString);
+        PathParser.PathData pathDataTo =
+                toString == null ? null : new PathParser.PathData(toString);
         if (pathDataFrom != null) {
             if (pathDataTo != null) {
                 anim.setObjectValues(pathDataFrom, pathDataTo);
                 if (!PathParser.canMorph(pathDataFrom, pathDataTo)) {
-                    throw new InflateException(arrayAnimator.getPositionDescription() + " Can't morph from " + fromString + " to " + toString);
+                    throw new InflateException(
+                            arrayAnimator.getPositionDescription()
+                                    + " Can't morph from "
+                                    + fromString
+                                    + " to "
+                                    + toString);
                 }
             } else {
                 anim.setObjectValues(pathDataFrom);
@@ -569,7 +630,8 @@ public class AnimatorInflater {
         return evaluator2;
     }
 
-    private static void setupObjectAnimator(ValueAnimator anim, TypedArray arrayObjectAnimator, int valueType, float pixelSize) {
+    private static void setupObjectAnimator(
+            ValueAnimator anim, TypedArray arrayObjectAnimator, int valueType, float pixelSize) {
         Keyframes xKeyframes;
         Keyframes yKeyframes;
         int valueType2 = valueType;
@@ -582,7 +644,9 @@ public class AnimatorInflater {
                 valueType2 = 0;
             }
             if (propertyXName == null && propertyYName == null) {
-                throw new InflateException(arrayObjectAnimator.getPositionDescription() + " propertyXName or propertyYName is needed for PathData");
+                throw new InflateException(
+                        arrayObjectAnimator.getPositionDescription()
+                                + " propertyXName or propertyYName is needed for PathData");
             }
             Path path = PathParser.createPathFromPathData(pathData);
             float error = 0.5f * pixelSize;
@@ -617,7 +681,14 @@ public class AnimatorInflater {
         oa.setPropertyName(propertyName);
     }
 
-    private static void setupValues(ValueAnimator anim, TypedArray arrayAnimator, boolean getFloats, boolean hasFrom, int fromType, boolean hasTo, int toType) {
+    private static void setupValues(
+            ValueAnimator anim,
+            TypedArray arrayAnimator,
+            boolean getFloats,
+            boolean hasFrom,
+            int fromType,
+            boolean hasTo,
+            int toType) {
         int valueTo;
         int valueFrom;
         int valueTo2;
@@ -685,11 +756,22 @@ public class AnimatorInflater {
         }
     }
 
-    private static Animator createAnimatorFromXml(Resources res, Resources.Theme theme, XmlPullParser parser, float pixelSize) throws XmlPullParserException, IOException {
-        return createAnimatorFromXml(res, theme, parser, Xml.asAttributeSet(parser), null, 0, pixelSize);
+    private static Animator createAnimatorFromXml(
+            Resources res, Resources.Theme theme, XmlPullParser parser, float pixelSize)
+            throws XmlPullParserException, IOException {
+        return createAnimatorFromXml(
+                res, theme, parser, Xml.asAttributeSet(parser), null, 0, pixelSize);
     }
 
-    private static Animator createAnimatorFromXml(Resources res, Resources.Theme theme, XmlPullParser parser, AttributeSet attrs, AnimatorSet parent, int sequenceOrdering, float pixelSize) throws XmlPullParserException, IOException {
+    private static Animator createAnimatorFromXml(
+            Resources res,
+            Resources.Theme theme,
+            XmlPullParser parser,
+            AttributeSet attrs,
+            AnimatorSet parent,
+            int sequenceOrdering,
+            float pixelSize)
+            throws XmlPullParserException, IOException {
         TypedArray a;
         Animator anim = null;
         int depth = parser.getDepth();
@@ -713,14 +795,23 @@ public class AnimatorInflater {
                         }
                         anim2.appendChangingConfigurations(a.getChangingConfigurations());
                         int ordering = a.getInt(0, 0);
-                        createAnimatorFromXml(res, theme, parser, attrs, (AnimatorSet) anim2, ordering, pixelSize);
+                        createAnimatorFromXml(
+                                res,
+                                theme,
+                                parser,
+                                attrs,
+                                (AnimatorSet) anim2,
+                                ordering,
+                                pixelSize);
                         a.recycle();
                         anim = anim2;
                     } else {
                         if (!name.equals("propertyValuesHolder")) {
-                            throw new RuntimeException("Unknown animator name: " + parser.getName());
+                            throw new RuntimeException(
+                                    "Unknown animator name: " + parser.getName());
                         }
-                        PropertyValuesHolder[] values = loadValues(res, theme, parser, Xml.asAttributeSet(parser));
+                        PropertyValuesHolder[] values =
+                                loadValues(res, theme, parser, Xml.asAttributeSet(parser));
                         if (values != null && anim != null && (anim instanceof ValueAnimator)) {
                             ((ValueAnimator) anim).setValues(values);
                         }
@@ -753,7 +844,9 @@ public class AnimatorInflater {
         return anim;
     }
 
-    private static PropertyValuesHolder[] loadValues(Resources res, Resources.Theme theme, XmlPullParser parser, AttributeSet attrs) throws XmlPullParserException, IOException {
+    private static PropertyValuesHolder[] loadValues(
+            Resources res, Resources.Theme theme, XmlPullParser parser, AttributeSet attrs)
+            throws XmlPullParserException, IOException {
         TypedArray a;
         ArrayList<PropertyValuesHolder> values = null;
         while (true) {
@@ -767,7 +860,9 @@ public class AnimatorInflater {
                 String name = parser.getName();
                 if (name.equals("propertyValuesHolder")) {
                     if (theme != null) {
-                        a = theme.obtainStyledAttributes(attrs, R.styleable.PropertyValuesHolder, 0, 0);
+                        a =
+                                theme.obtainStyledAttributes(
+                                        attrs, R.styleable.PropertyValuesHolder, 0, 0);
                     } else {
                         a = res.obtainAttributes(attrs, R.styleable.PropertyValuesHolder);
                     }
@@ -799,7 +894,8 @@ public class AnimatorInflater {
         return valuesArray;
     }
 
-    private static int inferValueTypeOfKeyframe(Resources res, Resources.Theme theme, AttributeSet attrs) {
+    private static int inferValueTypeOfKeyframe(
+            Resources res, Resources.Theme theme, AttributeSet attrs) {
         TypedArray a;
         int valueType;
         if (theme != null) {
@@ -818,7 +914,8 @@ public class AnimatorInflater {
         return valueType;
     }
 
-    private static int inferValueTypeFromValues(TypedArray styledAttributes, int valueFromId, int valueToId) {
+    private static int inferValueTypeFromValues(
+            TypedArray styledAttributes, int valueFromId, int valueToId) {
         TypedValue tvFrom = styledAttributes.peekValue(valueFromId);
         boolean hasFrom = tvFrom != null;
         int fromType = hasFrom ? tvFrom.type : 0;
@@ -840,7 +937,16 @@ public class AnimatorInflater {
         for (int i = 0; i < count; i++) {
             Keyframe keyframe = (Keyframe) keyframes[i];
             Object obj = "null";
-            StringBuilder append = new StringBuilder().append("Keyframe ").append(i).append(": fraction ").append(keyframe.getFraction() < 0.0f ? "null" : Float.valueOf(keyframe.getFraction())).append(", , value : ");
+            StringBuilder append =
+                    new StringBuilder()
+                            .append("Keyframe ")
+                            .append(i)
+                            .append(": fraction ")
+                            .append(
+                                    keyframe.getFraction() < 0.0f
+                                            ? "null"
+                                            : Float.valueOf(keyframe.getFraction()))
+                            .append(", , value : ");
             if (keyframe.hasValue()) {
                 obj = keyframe.getValue();
             }
@@ -848,7 +954,13 @@ public class AnimatorInflater {
         }
     }
 
-    private static PropertyValuesHolder loadPvh(Resources res, Resources.Theme theme, XmlPullParser parser, String propertyName, int valueType) throws XmlPullParserException, IOException {
+    private static PropertyValuesHolder loadPvh(
+            Resources res,
+            Resources.Theme theme,
+            XmlPullParser parser,
+            String propertyName,
+            int valueType)
+            throws XmlPullParserException, IOException {
         int i;
         PropertyValuesHolder value = null;
         ArrayList<Keyframe> keyframes = null;
@@ -863,7 +975,8 @@ public class AnimatorInflater {
                 if (valueType2 == 4) {
                     valueType2 = inferValueTypeOfKeyframe(res, theme, Xml.asAttributeSet(parser));
                 }
-                Keyframe keyframe = loadKeyframe(res, theme, Xml.asAttributeSet(parser), valueType2);
+                Keyframe keyframe =
+                        loadKeyframe(res, theme, Xml.asAttributeSet(parser), valueType2);
                 if (keyframe != null) {
                     if (keyframes == null) {
                         keyframes = new ArrayList<>();
@@ -930,7 +1043,9 @@ public class AnimatorInflater {
                             j++;
                         }
                         int j2 = endIndex2 + 1;
-                        float gap = keyframeArray[j2].getFraction() - keyframeArray[startIndex2 - 1].getFraction();
+                        float gap =
+                                keyframeArray[j2].getFraction()
+                                        - keyframeArray[startIndex2 - 1].getFraction();
                         distributeKeyframes(keyframeArray, gap, startIndex2, endIndex2);
                     }
                     i2++;
@@ -956,7 +1071,8 @@ public class AnimatorInflater {
         return Keyframe.ofObject(fraction);
     }
 
-    private static void distributeKeyframes(Keyframe[] keyframes, float gap, int startIndex, int endIndex) {
+    private static void distributeKeyframes(
+            Keyframe[] keyframes, float gap, int startIndex, int endIndex) {
         int count = (endIndex - startIndex) + 2;
         float increment = gap / count;
         for (int i = startIndex; i <= endIndex; i++) {
@@ -964,7 +1080,9 @@ public class AnimatorInflater {
         }
     }
 
-    private static Keyframe loadKeyframe(Resources res, Resources.Theme theme, AttributeSet attrs, int valueType) throws XmlPullParserException, IOException {
+    private static Keyframe loadKeyframe(
+            Resources res, Resources.Theme theme, AttributeSet attrs, int valueType)
+            throws XmlPullParserException, IOException {
         TypedArray a;
         boolean hasValue;
         if (theme != null) {
@@ -1011,13 +1129,21 @@ public class AnimatorInflater {
         return keyframe;
     }
 
-    private static ObjectAnimator loadObjectAnimator(Resources res, Resources.Theme theme, AttributeSet attrs, float pathErrorScale) throws Resources.NotFoundException {
+    private static ObjectAnimator loadObjectAnimator(
+            Resources res, Resources.Theme theme, AttributeSet attrs, float pathErrorScale)
+            throws Resources.NotFoundException {
         ObjectAnimator anim = new ObjectAnimator();
         loadAnimator(res, theme, attrs, anim, pathErrorScale);
         return anim;
     }
 
-    private static ValueAnimator loadAnimator(Resources res, Resources.Theme theme, AttributeSet attrs, ValueAnimator anim, float pathErrorScale) throws Resources.NotFoundException {
+    private static ValueAnimator loadAnimator(
+            Resources res,
+            Resources.Theme theme,
+            AttributeSet attrs,
+            ValueAnimator anim,
+            float pathErrorScale)
+            throws Resources.NotFoundException {
         TypedArray arrayAnimator;
         TypedArray arrayObjectAnimator = null;
         if (theme != null) {
@@ -1027,7 +1153,8 @@ public class AnimatorInflater {
         }
         if (anim != null) {
             if (theme != null) {
-                arrayObjectAnimator = theme.obtainStyledAttributes(attrs, R.styleable.PropertyAnimator, 0, 0);
+                arrayObjectAnimator =
+                        theme.obtainStyledAttributes(attrs, R.styleable.PropertyAnimator, 0, 0);
             } else {
                 arrayObjectAnimator = res.obtainAttributes(attrs, R.styleable.PropertyAnimator);
             }
@@ -1042,7 +1169,8 @@ public class AnimatorInflater {
         if (resID > 0) {
             Interpolator interpolator = AnimationUtils.loadInterpolator(res, theme, resID);
             if (interpolator instanceof BaseInterpolator) {
-                anim.appendChangingConfigurations(((BaseInterpolator) interpolator).getChangingConfiguration());
+                anim.appendChangingConfigurations(
+                        ((BaseInterpolator) interpolator).getChangingConfiguration());
             }
             anim.setInterpolator(interpolator);
         }

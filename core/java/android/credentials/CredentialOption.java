@@ -6,27 +6,32 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArraySet;
+
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Preconditions;
+
 import java.util.Objects;
 import java.util.Set;
 
 /* loaded from: classes.dex */
 public final class CredentialOption implements Parcelable {
-    public static final Parcelable.Creator<CredentialOption> CREATOR = new Parcelable.Creator<CredentialOption>() { // from class: android.credentials.CredentialOption.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CredentialOption[] newArray(int size) {
-            return new CredentialOption[size];
-        }
+    public static final Parcelable.Creator<CredentialOption> CREATOR =
+            new Parcelable.Creator<
+                    CredentialOption>() { // from class: android.credentials.CredentialOption.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CredentialOption[] newArray(int size) {
+                    return new CredentialOption[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CredentialOption createFromParcel(Parcel in) {
-            return new CredentialOption(in);
-        }
-    };
-    public static final String SUPPORTED_ELEMENT_KEYS = "android.credentials.GetCredentialOption.SUPPORTED_ELEMENT_KEYS";
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CredentialOption createFromParcel(Parcel in) {
+                    return new CredentialOption(in);
+                }
+            };
+    public static final String SUPPORTED_ELEMENT_KEYS =
+            "android.credentials.GetCredentialOption.SUPPORTED_ELEMENT_KEYS";
     private final ArraySet<ComponentName> mAllowedProviders;
     private final Bundle mCandidateQueryData;
     private final Bundle mCredentialRetrievalData;
@@ -68,19 +73,52 @@ public final class CredentialOption implements Parcelable {
     }
 
     public String toString() {
-        return "CredentialOption {type=" + this.mType + ", requestData=" + this.mCredentialRetrievalData + ", candidateQueryData=" + this.mCandidateQueryData + ", isSystemProviderRequired=" + this.mIsSystemProviderRequired + ", allowedProviders=" + this.mAllowedProviders + "}";
+        return "CredentialOption {type="
+                + this.mType
+                + ", requestData="
+                + this.mCredentialRetrievalData
+                + ", candidateQueryData="
+                + this.mCandidateQueryData
+                + ", isSystemProviderRequired="
+                + this.mIsSystemProviderRequired
+                + ", allowedProviders="
+                + this.mAllowedProviders
+                + "}";
     }
 
-    private CredentialOption(String type, Bundle credentialRetrievalData, Bundle candidateQueryData, boolean isSystemProviderRequired, ArraySet<ComponentName> allowedProviders) {
+    private CredentialOption(
+            String type,
+            Bundle credentialRetrievalData,
+            Bundle candidateQueryData,
+            boolean isSystemProviderRequired,
+            ArraySet<ComponentName> allowedProviders) {
         this.mType = (String) Preconditions.checkStringNotEmpty(type, "type must not be empty");
-        this.mCredentialRetrievalData = (Bundle) Objects.requireNonNull(credentialRetrievalData, "requestData must not be null");
-        this.mCandidateQueryData = (Bundle) Objects.requireNonNull(candidateQueryData, "candidateQueryData must not be null");
+        this.mCredentialRetrievalData =
+                (Bundle)
+                        Objects.requireNonNull(
+                                credentialRetrievalData, "requestData must not be null");
+        this.mCandidateQueryData =
+                (Bundle)
+                        Objects.requireNonNull(
+                                candidateQueryData, "candidateQueryData must not be null");
         this.mIsSystemProviderRequired = isSystemProviderRequired;
-        this.mAllowedProviders = (ArraySet) Objects.requireNonNull(allowedProviders, "providerFilterSer mustnot be empty");
+        this.mAllowedProviders =
+                (ArraySet)
+                        Objects.requireNonNull(
+                                allowedProviders, "providerFilterSer mustnot be empty");
     }
 
-    public CredentialOption(String type, Bundle credentialRetrievalData, Bundle candidateQueryData, boolean isSystemProviderRequired) {
-        this(type, credentialRetrievalData, candidateQueryData, isSystemProviderRequired, new ArraySet());
+    public CredentialOption(
+            String type,
+            Bundle credentialRetrievalData,
+            Bundle candidateQueryData,
+            boolean isSystemProviderRequired) {
+        this(
+                type,
+                credentialRetrievalData,
+                candidateQueryData,
+                isSystemProviderRequired,
+                new ArraySet());
     }
 
     private CredentialOption(Parcel in) {
@@ -89,14 +127,20 @@ public final class CredentialOption implements Parcelable {
         Bundle candidateQueryData = in.readBundle();
         boolean isSystemProviderRequired = in.readBoolean();
         this.mType = type;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mType);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mType);
         this.mCredentialRetrievalData = data;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mCredentialRetrievalData);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mCredentialRetrievalData);
         this.mCandidateQueryData = candidateQueryData;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mCandidateQueryData);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mCandidateQueryData);
         this.mIsSystemProviderRequired = isSystemProviderRequired;
         this.mAllowedProviders = in.readArraySet(null);
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAllowedProviders);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mAllowedProviders);
     }
 
     public static final class Builder {
@@ -107,9 +151,19 @@ public final class CredentialOption implements Parcelable {
         private ArraySet<ComponentName> mAllowedProviders = new ArraySet<>();
 
         public Builder(String type, Bundle credentialRetrievalData, Bundle candidateQueryData) {
-            this.mType = (String) Preconditions.checkStringNotEmpty(type, "type must not be null, or empty");
-            this.mCredentialRetrievalData = (Bundle) Objects.requireNonNull(credentialRetrievalData, "credentialRetrievalData must not be null");
-            this.mCandidateQueryData = (Bundle) Objects.requireNonNull(candidateQueryData, "candidateQueryData must not be null");
+            this.mType =
+                    (String)
+                            Preconditions.checkStringNotEmpty(
+                                    type, "type must not be null, or empty");
+            this.mCredentialRetrievalData =
+                    (Bundle)
+                            Objects.requireNonNull(
+                                    credentialRetrievalData,
+                                    "credentialRetrievalData must not be null");
+            this.mCandidateQueryData =
+                    (Bundle)
+                            Objects.requireNonNull(
+                                    candidateQueryData, "candidateQueryData must not be null");
         }
 
         public Builder setIsSystemProviderRequired(boolean isSystemProviderRequired) {
@@ -118,7 +172,10 @@ public final class CredentialOption implements Parcelable {
         }
 
         public Builder addAllowedProvider(ComponentName allowedProvider) {
-            this.mAllowedProviders.add((ComponentName) Objects.requireNonNull(allowedProvider, "allowedProvider must not be null"));
+            this.mAllowedProviders.add(
+                    (ComponentName)
+                            Objects.requireNonNull(
+                                    allowedProvider, "allowedProvider must not be null"));
             return this;
         }
 
@@ -129,7 +186,12 @@ public final class CredentialOption implements Parcelable {
         }
 
         public CredentialOption build() {
-            return new CredentialOption(this.mType, this.mCredentialRetrievalData, this.mCandidateQueryData, this.mIsSystemProviderRequired, this.mAllowedProviders);
+            return new CredentialOption(
+                    this.mType,
+                    this.mCredentialRetrievalData,
+                    this.mCandidateQueryData,
+                    this.mIsSystemProviderRequired,
+                    this.mAllowedProviders);
         }
     }
 }

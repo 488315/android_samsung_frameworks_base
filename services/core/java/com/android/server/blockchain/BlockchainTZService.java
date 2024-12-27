@@ -10,12 +10,14 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.util.Log;
+
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
 import com.android.server.ServiceKeeper;
 import com.android.server.VpnManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.GestureWakeup$$ExternalSyntheticOutline0;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -41,8 +43,7 @@ public class BlockchainTZService extends IBlockchainManager.Stub {
         public final class ClientBinderDeathReceiver implements IBinder.DeathRecipient {
             public IBinder mReceiver;
 
-            public ClientBinderDeathReceiver() {
-            }
+            public ClientBinderDeathReceiver() {}
 
             @Override // android.os.IBinder.DeathRecipient
             public final void binderDied() {
@@ -51,9 +52,13 @@ public class BlockchainTZService extends IBlockchainManager.Stub {
             }
 
             public final synchronized void deleteClient() {
-                Log.e("BlockchainTZService", "Error: Client stopped. Clearing Databstructures for " + FrameworkClient.this.mPackageName);
+                Log.e(
+                        "BlockchainTZService",
+                        "Error: Client stopped. Clearing Databstructures for "
+                                + FrameworkClient.this.mPackageName);
                 for (Integer num : FrameworkClient.this.mCommnInfo.mTAs.keySet()) {
-                    TAController tAController = (TAController) FrameworkClient.this.mCommnInfo.mTAs.get(num);
+                    TAController tAController =
+                            (TAController) FrameworkClient.this.mCommnInfo.mTAs.get(num);
                     try {
                         if (num.intValue() == 257 && tAController.SET_QSEE_SECURE_UI) {
                             Utils.sendSecureUIAbortIntent(BlockchainTZService.mContext);
@@ -70,7 +75,9 @@ public class BlockchainTZService extends IBlockchainManager.Stub {
                                     try {
                                         Thread.sleep(100L);
                                     } catch (Exception unused) {
-                                        Log.e("BlockchainTZService", "Failed to put thread to sleep!");
+                                        Log.e(
+                                                "BlockchainTZService",
+                                                "Failed to put thread to sleep!");
                                     }
                                     i++;
                                 }
@@ -82,11 +89,16 @@ public class BlockchainTZService extends IBlockchainManager.Stub {
                     }
                 }
                 FrameworkClient frameworkClient = FrameworkClient.this;
-                ((HashMap) BlockchainTZService.this.mRegisteredFWKClientMap).remove(frameworkClient.mPackageName);
+                ((HashMap) BlockchainTZService.this.mRegisteredFWKClientMap)
+                        .remove(frameworkClient.mPackageName);
             }
         }
 
-        public FrameworkClient(BlockchainTZServiceConfig blockchainTZServiceConfig, BlockchainTZServiceCommnInfo blockchainTZServiceCommnInfo, int i, String str) {
+        public FrameworkClient(
+                BlockchainTZServiceConfig blockchainTZServiceConfig,
+                BlockchainTZServiceCommnInfo blockchainTZServiceCommnInfo,
+                int i,
+                String str) {
             this.mCommnInfo = blockchainTZServiceCommnInfo;
             this.mPid = i;
             this.mPackageName = str;
@@ -103,11 +115,25 @@ public class BlockchainTZService extends IBlockchainManager.Stub {
     }
 
     public static void checkCallerPermissionFor(String str) {
-        if (ServiceKeeper.isAuthorized(Binder.getCallingPid(), Binder.getCallingUid(), mContext, "BlockchainTZService", str) == 0) {
+        if (ServiceKeeper.isAuthorized(
+                        Binder.getCallingPid(),
+                        Binder.getCallingUid(),
+                        mContext,
+                        "BlockchainTZService",
+                        str)
+                == 0) {
             Log.d("BlockchainTZService", "BlockchainTZService() - Valid Caller");
             return;
         }
-        SecurityException securityException = new SecurityException("Security Exception Occurred while pid[" + Binder.getCallingPid() + "] with uid[" + Binder.getCallingUid() + "] trying to access methodName [" + str + "] in [BlockchainTZService] service");
+        SecurityException securityException =
+                new SecurityException(
+                        "Security Exception Occurred while pid["
+                                + Binder.getCallingPid()
+                                + "] with uid["
+                                + Binder.getCallingUid()
+                                + "] trying to access methodName ["
+                                + str
+                                + "] in [BlockchainTZService] service");
         Log.d("BlockchainTZService", "BlockchainTZService() - Invalid Caller");
         throw securityException;
     }
@@ -126,7 +152,9 @@ public class BlockchainTZService extends IBlockchainManager.Stub {
         int length;
         checkCallerPermissionFor("getMeasurementFile");
         File file = new File("/system/tima_measurement_info");
-        Log.d("com.android.server.blockchain.Utils", "In readFile - Path /system/tima_measurement_info");
+        Log.d(
+                "com.android.server.blockchain.Utils",
+                "In readFile - Path /system/tima_measurement_info");
         FileInputStream fileInputStream2 = null;
         byte[] bArr2 = null;
         fileInputStream2 = null;
@@ -138,7 +166,9 @@ public class BlockchainTZService extends IBlockchainManager.Stub {
             }
             try {
                 try {
-                    Log.d("com.android.server.blockchain.Utils", "File Read - Length = " + file.length());
+                    Log.d(
+                            "com.android.server.blockchain.Utils",
+                            "File Read - Length = " + file.length());
                     length = (int) file.length();
                     bArr = new byte[length];
                 } catch (Exception e) {
@@ -166,7 +196,9 @@ public class BlockchainTZService extends IBlockchainManager.Stub {
                         try {
                             fileInputStream2.close();
                         } catch (IOException unused2) {
-                            Log.d("com.android.server.blockchain.Utils", "Error closing InputStream");
+                            Log.d(
+                                    "com.android.server.blockchain.Utils",
+                                    "Error closing InputStream");
                         }
                     }
                     return bArr;
@@ -205,7 +237,8 @@ public class BlockchainTZService extends IBlockchainManager.Stub {
         return nativePutCredential(i, bArr);
     }
 
-    public final BlockchainTZServiceCommnInfo registerBlockchainFW(BlockchainTZServiceConfig blockchainTZServiceConfig) {
+    public final BlockchainTZServiceCommnInfo registerBlockchainFW(
+            BlockchainTZServiceConfig blockchainTZServiceConfig) {
         String str;
         Iterator it;
         int callingUid = Binder.getCallingUid();
@@ -213,7 +246,8 @@ public class BlockchainTZService extends IBlockchainManager.Stub {
         ActivityManager activityManager = (ActivityManager) mContext.getSystemService("activity");
         String str2 = "BlockchainTZService";
         if (activityManager.getRunningAppProcesses() != null) {
-            for (ActivityManager.RunningAppProcessInfo runningAppProcessInfo : activityManager.getRunningAppProcesses()) {
+            for (ActivityManager.RunningAppProcessInfo runningAppProcessInfo :
+                    activityManager.getRunningAppProcesses()) {
                 if (runningAppProcessInfo.pid == callingPid) {
                     str = runningAppProcessInfo.processName;
                     break;
@@ -228,29 +262,46 @@ public class BlockchainTZService extends IBlockchainManager.Stub {
             str = Integer.toString(callingUid);
         }
         String str3 = str;
-        VpnManagerService$$ExternalSyntheticOutline0.m(ArrayUtils$$ExternalSyntheticOutline0.m(callingUid, callingPid, "Inside registerBlockchainFW, uid: ", ", pid: ", ", package: "), str3, "BlockchainTZService");
+        VpnManagerService$$ExternalSyntheticOutline0.m(
+                ArrayUtils$$ExternalSyntheticOutline0.m(
+                        callingUid,
+                        callingPid,
+                        "Inside registerBlockchainFW, uid: ",
+                        ", pid: ",
+                        ", package: "),
+                str3,
+                "BlockchainTZService");
         if (((HashMap) this.mRegisteredFWKClientMap).containsKey(str3)) {
-            FrameworkClient frameworkClient = (FrameworkClient) ((HashMap) this.mRegisteredFWKClientMap).get(str3);
+            FrameworkClient frameworkClient =
+                    (FrameworkClient) ((HashMap) this.mRegisteredFWKClientMap).get(str3);
             if (callingPid == frameworkClient.mPid) {
-                Log.e("BlockchainTZService", "Error: Framework App is already registered. Re-Registration not allowed");
+                Log.e(
+                        "BlockchainTZService",
+                        "Error: Framework App is already registered. Re-Registration not allowed");
                 return null;
             }
             Log.e("BlockchainTZService", "Registered Client Died. Need to Rebind");
             frameworkClient.mBinderDeathReceiver.deleteClient();
         }
         checkCallerPermissionFor("registerBlockchainFW");
-        BlockchainTZServiceCommnInfo blockchainTZServiceCommnInfo = new BlockchainTZServiceCommnInfo();
+        BlockchainTZServiceCommnInfo blockchainTZServiceCommnInfo =
+                new BlockchainTZServiceCommnInfo();
         blockchainTZServiceCommnInfo.mServiceVersion = 1;
         Iterator it2 = blockchainTZServiceConfig.mTAConfigs.entrySet().iterator();
         while (it2.hasNext()) {
             Map.Entry entry = (Map.Entry) it2.next();
             Context context = mContext;
             int intValue = ((Integer) entry.getKey()).intValue();
-            BlockchainTZServiceConfig.TAConfig tAConfig = (BlockchainTZServiceConfig.TAConfig) entry.getValue();
+            BlockchainTZServiceConfig.TAConfig tAConfig =
+                    (BlockchainTZServiceConfig.TAConfig) entry.getValue();
             TAController tAController = new TAController();
             tAController.SET_QSEE_SECURE_UI = false;
             if (TAController.DEBUG) {
-                StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(intValue, "TAController constructor: taId = ", "; maxSendCmdSize = ");
+                StringBuilder m =
+                        BatteryService$$ExternalSyntheticOutline0.m(
+                                intValue,
+                                "TAController constructor: taId = ",
+                                "; maxSendCmdSize = ");
                 m.append(tAConfig.maxSendCmdSize);
                 m.append("; maxRecvRespSize = ");
                 GestureWakeup$$ExternalSyntheticOutline0.m(m, tAConfig.maxRecvRespSize, str2);
@@ -265,7 +316,8 @@ public class BlockchainTZService extends IBlockchainManager.Stub {
             BlockchainTZNative blockchainTZNative = new BlockchainTZNative();
             if (BlockchainTZNative.DEBUG) {
                 it = it2;
-                NetworkScorerAppManager$$ExternalSyntheticOutline0.m(intValue, "BlockchainTZNative constructor: taId = ", str2);
+                NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                        intValue, "BlockchainTZNative constructor: taId = ", str2);
             } else {
                 it = it2;
             }
@@ -282,8 +334,20 @@ public class BlockchainTZService extends IBlockchainManager.Stub {
             str2 = str2;
             it2 = it;
         }
-        ((HashMap) this.mRegisteredFWKClientMap).put(str3, new FrameworkClient(blockchainTZServiceConfig, blockchainTZServiceCommnInfo, callingPid, str3));
-        Log.d(str2, "callingApp: " + str3 + " is registered, current size: " + ((HashMap) this.mRegisteredFWKClientMap).size());
+        ((HashMap) this.mRegisteredFWKClientMap)
+                .put(
+                        str3,
+                        new FrameworkClient(
+                                blockchainTZServiceConfig,
+                                blockchainTZServiceCommnInfo,
+                                callingPid,
+                                str3));
+        Log.d(
+                str2,
+                "callingApp: "
+                        + str3
+                        + " is registered, current size: "
+                        + ((HashMap) this.mRegisteredFWKClientMap).size());
         return blockchainTZServiceCommnInfo;
     }
 

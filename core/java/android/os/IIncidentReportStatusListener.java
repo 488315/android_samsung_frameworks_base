@@ -15,20 +15,16 @@ public interface IIncidentReportStatusListener extends IInterface {
 
     public static class Default implements IIncidentReportStatusListener {
         @Override // android.os.IIncidentReportStatusListener
-        public void onReportStarted() throws RemoteException {
-        }
+        public void onReportStarted() throws RemoteException {}
 
         @Override // android.os.IIncidentReportStatusListener
-        public void onReportSectionStatus(int section, int status) throws RemoteException {
-        }
+        public void onReportSectionStatus(int section, int status) throws RemoteException {}
 
         @Override // android.os.IIncidentReportStatusListener
-        public void onReportFinished() throws RemoteException {
-        }
+        public void onReportFinished() throws RemoteException {}
 
         @Override // android.os.IIncidentReportStatusListener
-        public void onReportFailed() throws RemoteException {
-        }
+        public void onReportFailed() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -36,7 +32,7 @@ public interface IIncidentReportStatusListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IIncidentReportStatusListener {
+    public abstract static class Stub extends Binder implements IIncidentReportStatusListener {
         public static final String DESCRIPTOR = "android.os.IIncidentReportStatusListener";
         static final int TRANSACTION_onReportFailed = 4;
         static final int TRANSACTION_onReportFinished = 3;
@@ -84,7 +80,8 @@ public interface IIncidentReportStatusListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

@@ -11,19 +11,22 @@ public class SemContextAutoRotation extends SemContextEventContext {
     public static final int ANGLE_180 = 2;
     public static final int ANGLE_270 = 3;
     public static final int ANGLE_90 = 1;
-    public static final Parcelable.Creator<SemContextAutoRotation> CREATOR = new Parcelable.Creator<SemContextAutoRotation>() { // from class: com.samsung.android.hardware.context.SemContextAutoRotation.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextAutoRotation createFromParcel(Parcel in) {
-            return new SemContextAutoRotation(in);
-        }
+    public static final Parcelable.Creator<SemContextAutoRotation> CREATOR =
+            new Parcelable.Creator<
+                    SemContextAutoRotation>() { // from class:
+                                                // com.samsung.android.hardware.context.SemContextAutoRotation.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextAutoRotation createFromParcel(Parcel in) {
+                    return new SemContextAutoRotation(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextAutoRotation[] newArray(int size) {
-            return new SemContextAutoRotation[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextAutoRotation[] newArray(int size) {
+                    return new SemContextAutoRotation[size];
+                }
+            };
     public static final int DEVICE_TYPE_MOBILE = 0;
     public static final int DEVICE_TYPE_TABLET = 2;
     public static final int DEVICE_TYPE_WIDE_TABLET = 4;

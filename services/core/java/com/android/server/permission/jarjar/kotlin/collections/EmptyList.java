@@ -1,9 +1,11 @@
 package com.android.server.permission.jarjar.kotlin.collections;
 
 import android.frameworks.vibrator.VibrationParam$1$$ExternalSyntheticOutline0;
+
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.server.permission.jarjar.kotlin.jvm.internal.CollectionToArray;
 import com.android.server.permission.jarjar.kotlin.jvm.internal.Intrinsics;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
@@ -17,8 +19,7 @@ public final class EmptyList implements List, Serializable, RandomAccess {
     public static final EmptyList INSTANCE = new EmptyList();
     private static final long serialVersionUID = -7390468764508069838L;
 
-    private EmptyList() {
-    }
+    private EmptyList() {}
 
     private final Object readResolve() {
         return INSTANCE;
@@ -26,27 +27,32 @@ public final class EmptyList implements List, Serializable, RandomAccess {
 
     @Override // java.util.List
     public final /* bridge */ /* synthetic */ void add(int i, Object obj) {
-        throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        throw new UnsupportedOperationException(
+                "Operation is not supported for read-only collection");
     }
 
     @Override // java.util.List, java.util.Collection
     public final /* bridge */ /* synthetic */ boolean add(Object obj) {
-        throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        throw new UnsupportedOperationException(
+                "Operation is not supported for read-only collection");
     }
 
     @Override // java.util.List
     public final boolean addAll(int i, Collection collection) {
-        throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        throw new UnsupportedOperationException(
+                "Operation is not supported for read-only collection");
     }
 
     @Override // java.util.List, java.util.Collection
     public final boolean addAll(Collection collection) {
-        throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        throw new UnsupportedOperationException(
+                "Operation is not supported for read-only collection");
     }
 
     @Override // java.util.List, java.util.Collection
     public final void clear() {
-        throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        throw new UnsupportedOperationException(
+                "Operation is not supported for read-only collection");
     }
 
     @Override // java.util.List, java.util.Collection
@@ -71,7 +77,8 @@ public final class EmptyList implements List, Serializable, RandomAccess {
 
     @Override // java.util.List
     public final Object get(int i) {
-        throw new IndexOutOfBoundsException("Empty list doesn't contain element at index " + i + '.');
+        throw new IndexOutOfBoundsException(
+                "Empty list doesn't contain element at index " + i + '.');
     }
 
     @Override // java.util.List, java.util.Collection
@@ -117,32 +124,38 @@ public final class EmptyList implements List, Serializable, RandomAccess {
         if (i == 0) {
             return EmptyIterator.INSTANCE;
         }
-        throw new IndexOutOfBoundsException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Index: "));
+        throw new IndexOutOfBoundsException(
+                VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Index: "));
     }
 
     @Override // java.util.List
     public final /* bridge */ /* synthetic */ Object remove(int i) {
-        throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        throw new UnsupportedOperationException(
+                "Operation is not supported for read-only collection");
     }
 
     @Override // java.util.List, java.util.Collection
     public final boolean remove(Object obj) {
-        throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        throw new UnsupportedOperationException(
+                "Operation is not supported for read-only collection");
     }
 
     @Override // java.util.List, java.util.Collection
     public final boolean removeAll(Collection collection) {
-        throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        throw new UnsupportedOperationException(
+                "Operation is not supported for read-only collection");
     }
 
     @Override // java.util.List, java.util.Collection
     public final boolean retainAll(Collection collection) {
-        throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        throw new UnsupportedOperationException(
+                "Operation is not supported for read-only collection");
     }
 
     @Override // java.util.List
     public final /* bridge */ /* synthetic */ Object set(int i, Object obj) {
-        throw new UnsupportedOperationException("Operation is not supported for read-only collection");
+        throw new UnsupportedOperationException(
+                "Operation is not supported for read-only collection");
     }
 
     @Override // java.util.List, java.util.Collection
@@ -155,7 +168,8 @@ public final class EmptyList implements List, Serializable, RandomAccess {
         if (i == 0 && i2 == 0) {
             return this;
         }
-        throw new IndexOutOfBoundsException(ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "fromIndex: ", ", toIndex: "));
+        throw new IndexOutOfBoundsException(
+                ArrayUtils$$ExternalSyntheticOutline0.m(i, i2, "fromIndex: ", ", toIndex: "));
     }
 
     @Override // java.util.List, java.util.Collection

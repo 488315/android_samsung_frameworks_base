@@ -2,11 +2,12 @@ package com.samsung.android.sume.core.service;
 
 import android.content.Context;
 import android.os.IBinder;
+
 import com.samsung.android.sume.core.controller.MediaController;
 import com.samsung.android.sume.core.functional.ExceptionHandler;
 import com.samsung.android.sume.core.message.Request;
 import com.samsung.android.sume.core.message.Response;
-import com.samsung.android.sume.core.service.ServiceProxySupplier;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Future;
@@ -19,12 +20,10 @@ public interface ServiceProxy {
     public static final int OPTION_AS_FOREGROUND = 0;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Action {
-    }
+    public @interface Action {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Option {
-    }
+    public @interface Option {}
 
     IBinder getBinder();
 
@@ -42,11 +41,13 @@ public interface ServiceProxy {
         return new ServiceProxySupplier.PlaceHolderImpl(context);
     }
 
-    static ServiceProxySupplier of(Context context, Class<?> clazz) throws IllegalArgumentException {
+    static ServiceProxySupplier of(Context context, Class<?> clazz)
+            throws IllegalArgumentException {
         return new ServiceProxySupplier(context, clazz);
     }
 
-    static ServiceProxySupplier of(Context context, String className) throws ClassNotFoundException {
+    static ServiceProxySupplier of(Context context, String className)
+            throws ClassNotFoundException {
         return of(context, Class.forName(className));
     }
 

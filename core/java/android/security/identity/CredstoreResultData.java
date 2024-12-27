@@ -25,8 +25,7 @@ class CredstoreResultData extends ResultData {
         }
     }
 
-    CredstoreResultData() {
-    }
+    CredstoreResultData() {}
 
     @Override // android.security.identity.ResultData
     public byte[] getAuthenticatedData() {
@@ -109,7 +108,12 @@ class CredstoreResultData extends ResultData {
     static class Builder {
         private CredstoreResultData mResultData = new CredstoreResultData();
 
-        Builder(int featureVersion, byte[] staticAuthenticationData, byte[] authenticatedData, byte[] messageAuthenticationCode, byte[] signature) {
+        Builder(
+                int featureVersion,
+                byte[] staticAuthenticationData,
+                byte[] authenticatedData,
+                byte[] messageAuthenticationCode,
+                byte[] signature) {
             this.mResultData.mFeatureVersion = featureVersion;
             this.mResultData.mStaticAuthenticationData = staticAuthenticationData;
             this.mResultData.mAuthenticatedData = authenticatedData;

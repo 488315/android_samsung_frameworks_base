@@ -25,6 +25,7 @@ import android.util.SparseIntArray;
 import android.util.SparseLongArray;
 import android.util.SparseSetArray;
 import android.util.TimeUtils;
+
 import com.android.server.AppSchedulingModuleThread;
 import com.android.server.DeviceIdleInternal;
 import com.android.server.LocalServices;
@@ -34,9 +35,8 @@ import com.android.server.job.JobSchedulerService;
 import com.android.server.job.JobSchedulerService$$ExternalSyntheticLambda5;
 import com.android.server.job.JobSchedulerService$Constants$$ExternalSyntheticOutline0;
 import com.android.server.job.JobStore;
-import com.android.server.job.controllers.FlexibilityController;
-import com.android.server.job.controllers.PrefetchController;
 import com.android.server.utils.AlarmQueue;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -81,27 +81,39 @@ public final class FlexibilityController extends StateController {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.job.controllers.FlexibilityController$1, reason: invalid class name */
     public final class AnonymousClass1 implements PrefetchController.PrefetchChangedListener {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
 
-        public final void onPrefetchCacheUpdated(ArraySet arraySet, int i, String str, long j, long j2, long j3) {
+        public final void onPrefetchCacheUpdated(
+                ArraySet arraySet, int i, String str, long j, long j2, long j3) {
             synchronized (FlexibilityController.this.mLock) {
                 try {
-                    long launchTimeThresholdMs = FlexibilityController.this.mPrefetchController.getLaunchTimeThresholdMs();
+                    long launchTimeThresholdMs =
+                            FlexibilityController.this.mPrefetchController
+                                    .getLaunchTimeThresholdMs();
                     boolean z = true;
                     boolean z2 = j - launchTimeThresholdMs < j3;
                     if (j2 - launchTimeThresholdMs >= j3) {
                         z = false;
                     }
                     if (z != z2) {
-                        SparseArrayMap sparseArrayMap = FlexibilityController.this.mPrefetchLifeCycleStart;
-                        sparseArrayMap.add(i, str, Long.valueOf(Math.max(j3, ((Long) sparseArrayMap.getOrDefault(i, str, 0L)).longValue())));
+                        SparseArrayMap sparseArrayMap =
+                                FlexibilityController.this.mPrefetchLifeCycleStart;
+                        sparseArrayMap.add(
+                                i,
+                                str,
+                                Long.valueOf(
+                                        Math.max(
+                                                j3,
+                                                ((Long) sparseArrayMap.getOrDefault(i, str, 0L))
+                                                        .longValue())));
                     }
                     for (int i2 = 0; i2 < arraySet.size(); i2++) {
                         JobStatus jobStatus = (JobStatus) arraySet.valueAt(i2);
                         if (jobStatus.hasFlexibilityConstraint()) {
-                            FlexibilityController.this.mFlexibilityTracker.calculateNumDroppedConstraints(jobStatus, j3);
-                            FlexibilityController.this.mFlexibilityAlarmQueue.scheduleDropNumConstraintsAlarm(jobStatus, j3);
+                            FlexibilityController.this.mFlexibilityTracker
+                                    .calculateNumDroppedConstraints(jobStatus, j3);
+                            FlexibilityController.this.mFlexibilityAlarmQueue
+                                    .scheduleDropNumConstraintsAlarm(jobStatus, j3);
                         }
                     }
                 } catch (Throwable th) {
@@ -115,7 +127,8 @@ public final class FlexibilityController extends StateController {
     public final class FcConfig {
         static final long DEFAULT_DEADLINE_PROXIMITY_LIMIT_MS = 900000;
         public static final SparseLongArray DEFAULT_FALLBACK_FLEXIBILITY_DEADLINES;
-        public static final SparseLongArray DEFAULT_FALLBACK_FLEXIBILITY_DEADLINE_ADDITIONAL_SCORE_TIME_FACTORS;
+        public static final SparseLongArray
+                DEFAULT_FALLBACK_FLEXIBILITY_DEADLINE_ADDITIONAL_SCORE_TIME_FACTORS;
         static final long DEFAULT_FALLBACK_FLEXIBILITY_DEADLINE_MS = 86400000;
         public static final SparseIntArray DEFAULT_FALLBACK_FLEXIBILITY_DEADLINE_SCORES;
         static final SparseArray DEFAULT_PERCENTS_TO_DROP_FLEXIBLE_CONSTRAINTS;
@@ -132,7 +145,8 @@ public final class FlexibilityController extends StateController {
         public long UNSEEN_CONSTRAINT_GRACE_PERIOD_MS = DEFAULT_UNSEEN_CONSTRAINT_GRACE_PERIOD_MS;
         public final SparseLongArray FALLBACK_FLEXIBILITY_DEADLINES = new SparseLongArray();
         public final SparseIntArray FALLBACK_FLEXIBILITY_DEADLINE_SCORES = new SparseIntArray();
-        public final SparseLongArray FALLBACK_FLEXIBILITY_DEADLINE_ADDITIONAL_SCORE_TIME_FACTORS = new SparseLongArray();
+        public final SparseLongArray FALLBACK_FLEXIBILITY_DEADLINE_ADDITIONAL_SCORE_TIME_FACTORS =
+                new SparseLongArray();
 
         static {
             SparseLongArray sparseLongArray = new SparseLongArray();
@@ -158,11 +172,11 @@ public final class FlexibilityController extends StateController {
             sparseLongArray2.put(300, 120000L);
             sparseLongArray2.put(200, 60000L);
             sparseLongArray2.put(100, 60000L);
-            sparseArray.put(500, new int[]{1, 2, 3, 4});
-            sparseArray.put(400, new int[]{33, 50, 60, 75});
-            sparseArray.put(300, new int[]{50, 60, 70, 80});
-            sparseArray.put(200, new int[]{50, 60, 70, 80});
-            sparseArray.put(100, new int[]{55, 65, 75, 85});
+            sparseArray.put(500, new int[] {1, 2, 3, 4});
+            sparseArray.put(400, new int[] {33, 50, 60, 75});
+            sparseArray.put(300, new int[] {50, 60, 70, 80});
+            sparseArray.put(200, new int[] {50, 60, 70, 80});
+            sparseArray.put(100, new int[] {55, 65, 75, 85});
         }
 
         public FcConfig() {
@@ -173,7 +187,8 @@ public final class FlexibilityController extends StateController {
                 if (i2 >= sparseLongArray.size()) {
                     break;
                 }
-                this.FALLBACK_FLEXIBILITY_DEADLINES.put(sparseLongArray.keyAt(i2), sparseLongArray.valueAt(i2));
+                this.FALLBACK_FLEXIBILITY_DEADLINES.put(
+                        sparseLongArray.keyAt(i2), sparseLongArray.valueAt(i2));
                 i2++;
             }
             int i3 = 0;
@@ -182,16 +197,19 @@ public final class FlexibilityController extends StateController {
                 if (i3 >= sparseIntArray.size()) {
                     break;
                 }
-                this.FALLBACK_FLEXIBILITY_DEADLINE_SCORES.put(sparseIntArray.keyAt(i3), sparseIntArray.valueAt(i3));
+                this.FALLBACK_FLEXIBILITY_DEADLINE_SCORES.put(
+                        sparseIntArray.keyAt(i3), sparseIntArray.valueAt(i3));
                 i3++;
             }
             int i4 = 0;
             while (true) {
-                SparseLongArray sparseLongArray2 = DEFAULT_FALLBACK_FLEXIBILITY_DEADLINE_ADDITIONAL_SCORE_TIME_FACTORS;
+                SparseLongArray sparseLongArray2 =
+                        DEFAULT_FALLBACK_FLEXIBILITY_DEADLINE_ADDITIONAL_SCORE_TIME_FACTORS;
                 if (i4 >= sparseLongArray2.size()) {
                     break;
                 }
-                this.FALLBACK_FLEXIBILITY_DEADLINE_ADDITIONAL_SCORE_TIME_FACTORS.put(sparseLongArray2.keyAt(i4), sparseLongArray2.valueAt(i4));
+                this.FALLBACK_FLEXIBILITY_DEADLINE_ADDITIONAL_SCORE_TIME_FACTORS.put(
+                        sparseLongArray2.keyAt(i4), sparseLongArray2.valueAt(i4));
                 i4++;
             }
             while (true) {
@@ -199,7 +217,8 @@ public final class FlexibilityController extends StateController {
                 if (i >= sparseArray.size()) {
                     return;
                 }
-                this.PERCENTS_TO_DROP_FLEXIBLE_CONSTRAINTS.put(sparseArray.keyAt(i), (int[]) sparseArray.valueAt(i));
+                this.PERCENTS_TO_DROP_FLEXIBLE_CONSTRAINTS.put(
+                        sparseArray.keyAt(i), (int[]) sparseArray.valueAt(i));
                 i++;
             }
         }
@@ -221,7 +240,9 @@ public final class FlexibilityController extends StateController {
                     int parseInt = Integer.parseInt(split[i]);
                     iArr[i] = parseInt;
                     if (parseInt < i2) {
-                        Slog.wtf("JobScheduler.Flex", "Percents to drop constraints were not in increasing order.");
+                        Slog.wtf(
+                                "JobScheduler.Flex",
+                                "Percents to drop constraints were not in increasing order.");
                         return null;
                     }
                     if (parseInt > 100) {
@@ -238,7 +259,8 @@ public final class FlexibilityController extends StateController {
             return iArr;
         }
 
-        public static boolean parsePriorityToLongKeyValueString(String str, SparseLongArray sparseLongArray, SparseLongArray sparseLongArray2) {
+        public static boolean parsePriorityToLongKeyValueString(
+                String str, SparseLongArray sparseLongArray, SparseLongArray sparseLongArray2) {
             KeyValueListParser keyValueListParser = new KeyValueListParser(',');
             try {
                 keyValueListParser.setString(str);
@@ -284,11 +306,16 @@ public final class FlexibilityController extends StateController {
                         JobSchedulerService.sElapsedRealtimeClock.getClass();
                         long elapsedRealtime = SystemClock.elapsedRealtime();
                         ArraySet arraySet2 = new ArraySet();
-                        int bitCount = Integer.bitCount(FlexibilityController.this.mAppliedConstraints & 7);
+                        int bitCount =
+                                Integer.bitCount(
+                                        FlexibilityController.this.mAppliedConstraints & 7);
                         for (int i2 = 0; i2 <= bitCount; i2++) {
-                            FlexibilityTracker flexibilityTracker = FlexibilityController.this.mFlexibilityTracker;
+                            FlexibilityTracker flexibilityTracker =
+                                    FlexibilityController.this.mFlexibilityTracker;
                             if (i2 > flexibilityTracker.mTrackedJobs.size()) {
-                                Slog.wtfStack("JobScheduler.Flex", "Asked for a larger number of constraints than exists.");
+                                Slog.wtfStack(
+                                        "JobScheduler.Flex",
+                                        "Asked for a larger number of constraints than exists.");
                                 arraySet = null;
                             } else {
                                 arraySet = (ArraySet) flexibilityTracker.mTrackedJobs.get(i2);
@@ -296,14 +323,19 @@ public final class FlexibilityController extends StateController {
                             if (arraySet != null) {
                                 for (int i3 = 0; i3 < arraySet.size(); i3++) {
                                     JobStatus jobStatus = (JobStatus) arraySet.valueAt(i3);
-                                    if (jobStatus.setConstraintSatisfied(2097152, elapsedRealtime, FlexibilityController.this.isFlexibilitySatisfiedLocked(jobStatus))) {
+                                    if (jobStatus.setConstraintSatisfied(
+                                            2097152,
+                                            elapsedRealtime,
+                                            FlexibilityController.this.isFlexibilitySatisfiedLocked(
+                                                    jobStatus))) {
                                         arraySet2.add(jobStatus);
                                     }
                                 }
                             }
                         }
                         if (arraySet2.size() > 0) {
-                            FlexibilityController.this.mStateChangedListener.onControllerStateChanged(arraySet2);
+                            FlexibilityController.this.mStateChangedListener
+                                    .onControllerStateChanged(arraySet2);
                         }
                     } finally {
                     }
@@ -319,32 +351,52 @@ public final class FlexibilityController extends StateController {
                         JobSchedulerService.sElapsedRealtimeClock.getClass();
                         final long elapsedRealtime2 = SystemClock.elapsedRealtime();
                         final ArraySet arraySet3 = new ArraySet();
-                        FlexibilityController.this.mService.mJobs.forEachJob(new Predicate() { // from class: com.android.server.job.controllers.FlexibilityController$FcHandler$$ExternalSyntheticLambda0
-                            @Override // java.util.function.Predicate
-                            public final boolean test(Object obj) {
-                                JobStatus jobStatus2 = (JobStatus) obj;
-                                FlexibilityController flexibilityController = FlexibilityController.this;
-                                return flexibilityController.mPackagesToCheck.contains(jobStatus2.sourcePackageName) || flexibilityController.mPackagesToCheck.contains(jobStatus2.job.getService().getPackageName());
-                            }
-                        }, new Consumer() { // from class: com.android.server.job.controllers.FlexibilityController$FcHandler$$ExternalSyntheticLambda1
-                            @Override // java.util.function.Consumer
-                            public final void accept(Object obj) {
-                                FlexibilityController.FcHandler fcHandler = FlexibilityController.FcHandler.this;
-                                long j = elapsedRealtime2;
-                                ArraySet arraySet4 = arraySet3;
-                                JobStatus jobStatus2 = (JobStatus) obj;
-                                fcHandler.getClass();
-                                if (FlexibilityController.DEBUG) {
-                                    Slog.d("JobScheduler.Flex", "Checking on " + jobStatus2.toShortString());
-                                }
-                                if (jobStatus2.setConstraintSatisfied(2097152, j, FlexibilityController.this.isFlexibilitySatisfiedLocked(jobStatus2))) {
-                                    arraySet4.add(jobStatus2);
-                                }
-                            }
-                        });
+                        FlexibilityController.this.mService.mJobs.forEachJob(
+                                new Predicate() { // from class:
+                                                  // com.android.server.job.controllers.FlexibilityController$FcHandler$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        JobStatus jobStatus2 = (JobStatus) obj;
+                                        FlexibilityController flexibilityController =
+                                                FlexibilityController.this;
+                                        return flexibilityController.mPackagesToCheck.contains(
+                                                        jobStatus2.sourcePackageName)
+                                                || flexibilityController.mPackagesToCheck.contains(
+                                                        jobStatus2
+                                                                .job
+                                                                .getService()
+                                                                .getPackageName());
+                                    }
+                                },
+                                new Consumer() { // from class:
+                                                 // com.android.server.job.controllers.FlexibilityController$FcHandler$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.Consumer
+                                    public final void accept(Object obj) {
+                                        FlexibilityController.FcHandler fcHandler =
+                                                FlexibilityController.FcHandler.this;
+                                        long j = elapsedRealtime2;
+                                        ArraySet arraySet4 = arraySet3;
+                                        JobStatus jobStatus2 = (JobStatus) obj;
+                                        fcHandler.getClass();
+                                        if (FlexibilityController.DEBUG) {
+                                            Slog.d(
+                                                    "JobScheduler.Flex",
+                                                    "Checking on " + jobStatus2.toShortString());
+                                        }
+                                        if (jobStatus2.setConstraintSatisfied(
+                                                2097152,
+                                                j,
+                                                FlexibilityController.this
+                                                        .isFlexibilitySatisfiedLocked(
+                                                                jobStatus2))) {
+                                            arraySet4.add(jobStatus2);
+                                        }
+                                    }
+                                });
                         FlexibilityController.this.mPackagesToCheck.clear();
                         if (arraySet3.size() > 0) {
-                            FlexibilityController.this.mStateChangedListener.onControllerStateChanged(arraySet3);
+                            FlexibilityController.this.mStateChangedListener
+                                    .onControllerStateChanged(arraySet3);
                         }
                     } finally {
                     }
@@ -356,18 +408,28 @@ public final class FlexibilityController extends StateController {
                     JobSchedulerService.sElapsedRealtimeClock.getClass();
                     long elapsedRealtime3 = SystemClock.elapsedRealtime();
                     ArraySet arraySet4 = new ArraySet();
-                    for (int size = FlexibilityController.this.mJobsToCheck.size() - 1; size >= 0; size--) {
-                        JobStatus jobStatus2 = (JobStatus) FlexibilityController.this.mJobsToCheck.valueAt(size);
+                    for (int size = FlexibilityController.this.mJobsToCheck.size() - 1;
+                            size >= 0;
+                            size--) {
+                        JobStatus jobStatus2 =
+                                (JobStatus) FlexibilityController.this.mJobsToCheck.valueAt(size);
                         if (FlexibilityController.DEBUG) {
-                            Slog.d("JobScheduler.Flex", "Checking on " + jobStatus2.toShortString());
+                            Slog.d(
+                                    "JobScheduler.Flex",
+                                    "Checking on " + jobStatus2.toShortString());
                         }
-                        if (jobStatus2.setConstraintSatisfied(2097152, elapsedRealtime3, FlexibilityController.this.isFlexibilitySatisfiedLocked(jobStatus2))) {
+                        if (jobStatus2.setConstraintSatisfied(
+                                2097152,
+                                elapsedRealtime3,
+                                FlexibilityController.this.isFlexibilitySatisfiedLocked(
+                                        jobStatus2))) {
                             arraySet4.add(jobStatus2);
                         }
                     }
                     FlexibilityController.this.mJobsToCheck.clear();
                     if (arraySet4.size() > 0) {
-                        FlexibilityController.this.mStateChangedListener.onControllerStateChanged(arraySet4);
+                        FlexibilityController.this.mStateChangedListener.onControllerStateChanged(
+                                arraySet4);
                     }
                 } finally {
                 }
@@ -378,7 +440,13 @@ public final class FlexibilityController extends StateController {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     class FlexibilityAlarmQueue extends AlarmQueue {
         public FlexibilityAlarmQueue(Context context, Looper looper) {
-            super(context, looper, "*job.flexibility_check*", "Flexible Constraint Check", true, FlexibilityController.this.mMinTimeBetweenFlexibilityAlarmsMs);
+            super(
+                    context,
+                    looper,
+                    "*job.flexibility_check*",
+                    "Flexible Constraint Check",
+                    true,
+                    FlexibilityController.this.mMinTimeBetweenFlexibilityAlarmsMs);
         }
 
         @Override // com.android.server.utils.AlarmQueue
@@ -396,17 +464,25 @@ public final class FlexibilityController extends StateController {
                     for (int i = 0; i < arraySet.size(); i++) {
                         JobStatus jobStatus = (JobStatus) arraySet.valueAt(i);
                         if (FlexibilityController.DEBUG) {
-                            Slog.d("JobScheduler.Flex", "Alarm fired for " + jobStatus.toShortString());
+                            Slog.d(
+                                    "JobScheduler.Flex",
+                                    "Alarm fired for " + jobStatus.toShortString());
                         }
-                        FlexibilityController.this.mFlexibilityTracker.calculateNumDroppedConstraints(jobStatus, elapsedRealtime);
+                        FlexibilityController.this.mFlexibilityTracker
+                                .calculateNumDroppedConstraints(jobStatus, elapsedRealtime);
                         if (jobStatus.getNumRequiredFlexibleConstraints() > 0) {
                             scheduleDropNumConstraintsAlarm(jobStatus, elapsedRealtime);
                         }
-                        if (jobStatus.setConstraintSatisfied(2097152, elapsedRealtime, FlexibilityController.this.isFlexibilitySatisfiedLocked(jobStatus))) {
+                        if (jobStatus.setConstraintSatisfied(
+                                2097152,
+                                elapsedRealtime,
+                                FlexibilityController.this.isFlexibilitySatisfiedLocked(
+                                        jobStatus))) {
                             arraySet2.add(jobStatus);
                         }
                     }
-                    FlexibilityController.this.mStateChangedListener.onControllerStateChanged(arraySet2);
+                    FlexibilityController.this.mStateChangedListener.onControllerStateChanged(
+                            arraySet2);
                 } catch (Throwable th) {
                     throw th;
                 }
@@ -420,34 +496,65 @@ public final class FlexibilityController extends StateController {
             synchronized (obj2) {
                 try {
                     try {
-                        long lifeCycleBeginningElapsedLocked = FlexibilityController.this.getLifeCycleBeginningElapsedLocked(jobStatus);
-                        long lifeCycleEndElapsedLocked = FlexibilityController.this.getLifeCycleEndElapsedLocked(jobStatus, j, lifeCycleBeginningElapsedLocked);
+                        long lifeCycleBeginningElapsedLocked =
+                                FlexibilityController.this.getLifeCycleBeginningElapsedLocked(
+                                        jobStatus);
+                        long lifeCycleEndElapsedLocked =
+                                FlexibilityController.this.getLifeCycleEndElapsedLocked(
+                                        jobStatus, j, lifeCycleBeginningElapsedLocked);
                         if (lifeCycleEndElapsedLocked <= lifeCycleBeginningElapsedLocked) {
-                            Slog.wtf("JobScheduler.Flex", "Got invalid latest when scheduling alarm. prefetch=" + jobStatus.job.isPrefetch() + " periodic=" + jobStatus.job.isPeriodic());
-                            FlexibilityTracker flexibilityTracker = FlexibilityController.this.mFlexibilityTracker;
+                            Slog.wtf(
+                                    "JobScheduler.Flex",
+                                    "Got invalid latest when scheduling alarm. prefetch="
+                                            + jobStatus.job.isPrefetch()
+                                            + " periodic="
+                                            + jobStatus.job.isPeriodic());
+                            FlexibilityTracker flexibilityTracker =
+                                    FlexibilityController.this.mFlexibilityTracker;
                             int i = jobStatus.mNumAppliedFlexibleConstraints;
                             flexibilityTracker.getClass();
                             if (i != jobStatus.mNumDroppedFlexibleConstraints) {
-                                ((ArraySet) flexibilityTracker.mTrackedJobs.get(jobStatus.getNumRequiredFlexibleConstraints())).remove(jobStatus);
-                                jobStatus.mNumDroppedFlexibleConstraints = Math.max(0, Math.min(jobStatus.mNumAppliedFlexibleConstraints, i));
+                                ((ArraySet)
+                                                flexibilityTracker.mTrackedJobs.get(
+                                                        jobStatus
+                                                                .getNumRequiredFlexibleConstraints()))
+                                        .remove(jobStatus);
+                                jobStatus.mNumDroppedFlexibleConstraints =
+                                        Math.max(
+                                                0,
+                                                Math.min(
+                                                        jobStatus.mNumAppliedFlexibleConstraints,
+                                                        i));
                                 flexibilityTracker.add(jobStatus);
                             }
                             FlexibilityController.this.mJobsToCheck.add(jobStatus);
                             FlexibilityController.this.mHandler.sendEmptyMessage(1);
                             return;
                         }
-                        long nextConstraintDropTimeElapsedLocked = FlexibilityController.this.getNextConstraintDropTimeElapsedLocked(jobStatus, lifeCycleBeginningElapsedLocked, lifeCycleEndElapsedLocked);
+                        long nextConstraintDropTimeElapsedLocked =
+                                FlexibilityController.this.getNextConstraintDropTimeElapsedLocked(
+                                        jobStatus,
+                                        lifeCycleBeginningElapsedLocked,
+                                        lifeCycleEndElapsedLocked);
                         boolean z = FlexibilityController.DEBUG;
                         if (z) {
-                            StringBuilder sb = new StringBuilder("scheduleDropNumConstraintsAlarm: ");
+                            StringBuilder sb =
+                                    new StringBuilder("scheduleDropNumConstraintsAlarm: ");
                             sb.append(jobStatus.toShortString());
                             sb.append(" numApplied: ");
                             sb.append(jobStatus.mNumAppliedFlexibleConstraints);
                             sb.append(" numRequired: ");
                             sb.append(jobStatus.getNumRequiredFlexibleConstraints());
                             sb.append(" numSatisfied: ");
-                            FlexibilityController flexibilityController = FlexibilityController.this;
-                            sb.append(Integer.bitCount(flexibilityController.getRelevantAppliedConstraintsLocked(jobStatus) & flexibilityController.mSatisfiedFlexibleConstraints));
+                            FlexibilityController flexibilityController =
+                                    FlexibilityController.this;
+                            sb.append(
+                                    Integer.bitCount(
+                                            flexibilityController
+                                                            .getRelevantAppliedConstraintsLocked(
+                                                                    jobStatus)
+                                                    & flexibilityController
+                                                            .mSatisfiedFlexibleConstraints));
                             sb.append(" curTime: ");
                             sb.append(j);
                             sb.append(" earliest: ");
@@ -469,12 +576,22 @@ public final class FlexibilityController extends StateController {
                             if (z) {
                                 Slog.d("JobScheduler.Flex", "deadline proximity met: " + jobStatus);
                             }
-                            FlexibilityTracker flexibilityTracker2 = FlexibilityController.this.mFlexibilityTracker;
+                            FlexibilityTracker flexibilityTracker2 =
+                                    FlexibilityController.this.mFlexibilityTracker;
                             int i2 = jobStatus.mNumAppliedFlexibleConstraints;
                             flexibilityTracker2.getClass();
                             if (i2 != jobStatus.mNumDroppedFlexibleConstraints) {
-                                ((ArraySet) flexibilityTracker2.mTrackedJobs.get(jobStatus.getNumRequiredFlexibleConstraints())).remove(jobStatus);
-                                jobStatus.mNumDroppedFlexibleConstraints = Math.max(0, Math.min(jobStatus.mNumAppliedFlexibleConstraints, i2));
+                                ((ArraySet)
+                                                flexibilityTracker2.mTrackedJobs.get(
+                                                        jobStatus
+                                                                .getNumRequiredFlexibleConstraints()))
+                                        .remove(jobStatus);
+                                jobStatus.mNumDroppedFlexibleConstraints =
+                                        Math.max(
+                                                0,
+                                                Math.min(
+                                                        jobStatus.mNumAppliedFlexibleConstraints,
+                                                        i2));
                                 flexibilityTracker2.add(jobStatus);
                             }
                             FlexibilityController.this.mJobsToCheck.add(jobStatus);
@@ -491,7 +608,9 @@ public final class FlexibilityController extends StateController {
                             if (z) {
                                 Slog.d("JobScheduler.Flex", "last alarm set: " + jobStatus);
                             }
-                            addAlarm(j2 - FlexibilityController.this.mDeadlineProximityLimitMs, jobStatus);
+                            addAlarm(
+                                    j2 - FlexibilityController.this.mDeadlineProximityLimitMs,
+                                    jobStatus);
                         }
                     } catch (Throwable th) {
                         th = th;
@@ -519,14 +638,18 @@ public final class FlexibilityController extends StateController {
             if (jobStatus.getNumRequiredFlexibleConstraints() < 0) {
                 return;
             }
-            ((ArraySet) this.mTrackedJobs.get(jobStatus.getNumRequiredFlexibleConstraints())).add(jobStatus);
+            ((ArraySet) this.mTrackedJobs.get(jobStatus.getNumRequiredFlexibleConstraints()))
+                    .add(jobStatus);
         }
 
         public final void calculateNumDroppedConstraints(JobStatus jobStatus, long j) {
             FlexibilityController flexibilityController = FlexibilityController.this;
-            int curPercentOfLifecycleLocked = flexibilityController.getCurPercentOfLifecycleLocked(jobStatus, j);
+            int curPercentOfLifecycleLocked =
+                    flexibilityController.getCurPercentOfLifecycleLocked(jobStatus, j);
             int i = jobStatus.mNumAppliedFlexibleConstraints;
-            int[] percentsToDropConstraints = flexibilityController.getPercentsToDropConstraints(jobStatus.getEffectivePriority());
+            int[] percentsToDropConstraints =
+                    flexibilityController.getPercentsToDropConstraints(
+                            jobStatus.getEffectivePriority());
             int i2 = 0;
             for (int i3 = 0; i3 < i; i3++) {
                 if (curPercentOfLifecycleLocked >= percentsToDropConstraints[i3]) {
@@ -534,8 +657,10 @@ public final class FlexibilityController extends StateController {
                 }
             }
             if (i2 != jobStatus.mNumDroppedFlexibleConstraints) {
-                ((ArraySet) this.mTrackedJobs.get(jobStatus.getNumRequiredFlexibleConstraints())).remove(jobStatus);
-                jobStatus.mNumDroppedFlexibleConstraints = Math.max(0, Math.min(jobStatus.mNumAppliedFlexibleConstraints, i2));
+                ((ArraySet) this.mTrackedJobs.get(jobStatus.getNumRequiredFlexibleConstraints()))
+                        .remove(jobStatus);
+                jobStatus.mNumDroppedFlexibleConstraints =
+                        Math.max(0, Math.min(jobStatus.mNumAppliedFlexibleConstraints, i2));
                 add(jobStatus);
             }
         }
@@ -543,17 +668,23 @@ public final class FlexibilityController extends StateController {
         public final void updateFlexibleConstraints(JobStatus jobStatus, long j) {
             int numRequiredFlexibleConstraints = jobStatus.getNumRequiredFlexibleConstraints();
             FlexibilityController flexibilityController = FlexibilityController.this;
-            int bitCount = Integer.bitCount(flexibilityController.getRelevantAppliedConstraintsLocked(jobStatus));
+            int bitCount =
+                    Integer.bitCount(
+                            flexibilityController.getRelevantAppliedConstraintsLocked(jobStatus));
             jobStatus.mNumAppliedFlexibleConstraints = bitCount;
-            int[] percentsToDropConstraints = flexibilityController.getPercentsToDropConstraints(jobStatus.getEffectivePriority());
-            int curPercentOfLifecycleLocked = flexibilityController.getCurPercentOfLifecycleLocked(jobStatus, j);
+            int[] percentsToDropConstraints =
+                    flexibilityController.getPercentsToDropConstraints(
+                            jobStatus.getEffectivePriority());
+            int curPercentOfLifecycleLocked =
+                    flexibilityController.getCurPercentOfLifecycleLocked(jobStatus, j);
             int i = 0;
             for (int i2 = 0; i2 < bitCount; i2++) {
                 if (curPercentOfLifecycleLocked >= percentsToDropConstraints[i2]) {
                     i++;
                 }
             }
-            jobStatus.mNumDroppedFlexibleConstraints = Math.max(0, Math.min(jobStatus.mNumAppliedFlexibleConstraints, i));
+            jobStatus.mNumDroppedFlexibleConstraints =
+                    Math.max(0, Math.min(jobStatus.mNumAppliedFlexibleConstraints, i));
             if (numRequiredFlexibleConstraints == jobStatus.getNumRequiredFlexibleConstraints()) {
                 return;
             }
@@ -583,7 +714,12 @@ public final class FlexibilityController extends StateController {
                 jobScoreBucket = new JobScoreBucket();
                 jobScoreBucket.startTimeElapsed = j;
                 jobScoreBucketArr[i2] = jobScoreBucket;
-                this.mCachedScoreExpirationTimeElapsed = Math.min(this.mCachedScoreExpirationTimeElapsed, j + BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS);
+                this.mCachedScoreExpirationTimeElapsed =
+                        Math.min(
+                                this.mCachedScoreExpirationTimeElapsed,
+                                j
+                                        + BackupManagerConstants
+                                                .DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS);
             } else {
                 long j2 = jobScoreBucket.startTimeElapsed;
                 if (j2 < j - BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS) {
@@ -611,22 +747,28 @@ public final class FlexibilityController extends StateController {
         public final SparseSetArray mCarrierPrivilegedApps = new SparseSetArray();
         public final SparseArray mCarrierPrivilegedCallbacks = new SparseArray();
         public final ArraySet mPowerAllowlistedApps = new ArraySet();
-        public final AnonymousClass1 mBroadcastReceiver = new BroadcastReceiver() { // from class: com.android.server.job.controllers.FlexibilityController.SpecialAppTracker.1
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context, Intent intent) {
-                String action = intent.getAction();
-                action.getClass();
-                if (action.equals("android.os.action.POWER_SAVE_WHITELIST_CHANGED")) {
-                    SpecialAppTracker specialAppTracker = SpecialAppTracker.this;
-                    FlexibilityController.this.mHandler.post(new FlexibilityController$$ExternalSyntheticLambda1(2, specialAppTracker));
-                } else if (action.equals("android.telephony.action.MULTI_SIM_CONFIG_CHANGED")) {
-                    SpecialAppTracker.this.updateCarrierPrivilegedCallbackRegistration();
-                }
-            }
-        };
+        public final AnonymousClass1 mBroadcastReceiver =
+                new BroadcastReceiver() { // from class:
+                                          // com.android.server.job.controllers.FlexibilityController.SpecialAppTracker.1
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context, Intent intent) {
+                        String action = intent.getAction();
+                        action.getClass();
+                        if (action.equals("android.os.action.POWER_SAVE_WHITELIST_CHANGED")) {
+                            SpecialAppTracker specialAppTracker = SpecialAppTracker.this;
+                            FlexibilityController.this.mHandler.post(
+                                    new FlexibilityController$$ExternalSyntheticLambda1(
+                                            2, specialAppTracker));
+                        } else if (action.equals(
+                                "android.telephony.action.MULTI_SIM_CONFIG_CHANGED")) {
+                            SpecialAppTracker.this.updateCarrierPrivilegedCallbackRegistration();
+                        }
+                    }
+                };
 
         /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-        public final class LogicalIndexCarrierPrivilegesCallback implements TelephonyManager.CarrierPrivilegesCallback {
+        public final class LogicalIndexCarrierPrivilegesCallback
+                implements TelephonyManager.CarrierPrivilegesCallback {
             public final int logicalIndex;
 
             public LogicalIndexCarrierPrivilegesCallback(int i) {
@@ -637,7 +779,9 @@ public final class FlexibilityController extends StateController {
                 ArraySet arraySet = new ArraySet();
                 synchronized (SpecialAppTracker.this.mSatLock) {
                     try {
-                        ArraySet arraySet2 = SpecialAppTracker.this.mCarrierPrivilegedApps.get(this.logicalIndex);
+                        ArraySet arraySet2 =
+                                SpecialAppTracker.this.mCarrierPrivilegedApps.get(
+                                        this.logicalIndex);
                         if (arraySet2 != null) {
                             arraySet.addAll(arraySet2);
                             SpecialAppTracker.this.mCarrierPrivilegedApps.remove(this.logicalIndex);
@@ -645,7 +789,8 @@ public final class FlexibilityController extends StateController {
                         Iterator it = set.iterator();
                         while (it.hasNext()) {
                             String str = (String) it.next();
-                            SpecialAppTracker.this.mCarrierPrivilegedApps.add(this.logicalIndex, str);
+                            SpecialAppTracker.this.mCarrierPrivilegedApps.add(
+                                    this.logicalIndex, str);
                             if (!arraySet.remove(str)) {
                                 arraySet.add(str);
                             }
@@ -661,18 +806,24 @@ public final class FlexibilityController extends StateController {
         /* renamed from: -$$Nest$mstartTracking, reason: not valid java name */
         public static void m625$$Nest$mstartTracking(SpecialAppTracker specialAppTracker) {
             specialAppTracker.getClass();
-            IntentFilter intentFilter = new IntentFilter("android.os.action.POWER_SAVE_WHITELIST_CHANGED");
+            IntentFilter intentFilter =
+                    new IntentFilter("android.os.action.POWER_SAVE_WHITELIST_CHANGED");
             if (specialAppTracker.mHasFeatureTelephonySubscription) {
                 intentFilter.addAction("android.telephony.action.MULTI_SIM_CONFIG_CHANGED");
                 specialAppTracker.updateCarrierPrivilegedCallbackRegistration();
             }
-            FlexibilityController.this.mContext.registerReceiver(specialAppTracker.mBroadcastReceiver, intentFilter);
+            FlexibilityController.this.mContext.registerReceiver(
+                    specialAppTracker.mBroadcastReceiver, intentFilter);
             specialAppTracker.updatePowerAllowlistCache();
         }
 
         /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.job.controllers.FlexibilityController$SpecialAppTracker$1] */
         public SpecialAppTracker() {
-            this.mHasFeatureTelephonySubscription = FlexibilityController.this.mContext.getPackageManager().hasSystemFeature("android.hardware.telephony.subscription");
+            this.mHasFeatureTelephonySubscription =
+                    FlexibilityController.this
+                            .mContext
+                            .getPackageManager()
+                            .hasSystemFeature("android.hardware.telephony.subscription");
         }
 
         public final void updateCarrierPrivilegedCallbackRegistration() {
@@ -683,12 +834,15 @@ public final class FlexibilityController extends StateController {
                 synchronized (this.mSatLock) {
                     try {
                         IntArray intArray = new IntArray();
-                        for (int size = this.mCarrierPrivilegedCallbacks.size() - 1; size >= 0; size--) {
+                        for (int size = this.mCarrierPrivilegedCallbacks.size() - 1;
+                                size >= 0;
+                                size--) {
                             intArray.add(this.mCarrierPrivilegedCallbacks.keyAt(size));
                         }
                         Iterator it = simSlotMapping.iterator();
                         while (it.hasNext()) {
-                            int logicalSlotIndex = ((UiccSlotMapping) it.next()).getLogicalSlotIndex();
+                            int logicalSlotIndex =
+                                    ((UiccSlotMapping) it.next()).getLogicalSlotIndex();
                             if (this.mCarrierPrivilegedCallbacks.contains(logicalSlotIndex)) {
                                 int size2 = intArray.size() - 1;
                                 while (true) {
@@ -702,14 +856,23 @@ public final class FlexibilityController extends StateController {
                                     size2--;
                                 }
                             } else {
-                                LogicalIndexCarrierPrivilegesCallback logicalIndexCarrierPrivilegesCallback = new LogicalIndexCarrierPrivilegesCallback(logicalSlotIndex);
-                                this.mCarrierPrivilegedCallbacks.put(logicalSlotIndex, logicalIndexCarrierPrivilegesCallback);
-                                this.mTelephonyManager.registerCarrierPrivilegesCallback(logicalSlotIndex, AppSchedulingModuleThread.getExecutor(), logicalIndexCarrierPrivilegesCallback);
+                                LogicalIndexCarrierPrivilegesCallback
+                                        logicalIndexCarrierPrivilegesCallback =
+                                                new LogicalIndexCarrierPrivilegesCallback(
+                                                        logicalSlotIndex);
+                                this.mCarrierPrivilegedCallbacks.put(
+                                        logicalSlotIndex, logicalIndexCarrierPrivilegesCallback);
+                                this.mTelephonyManager.registerCarrierPrivilegesCallback(
+                                        logicalSlotIndex,
+                                        AppSchedulingModuleThread.getExecutor(),
+                                        logicalIndexCarrierPrivilegesCallback);
                             }
                         }
                         for (int size3 = intArray.size() - 1; size3 >= 0; size3--) {
                             int i = intArray.get(size3);
-                            this.mTelephonyManager.unregisterCarrierPrivilegesCallback((LogicalIndexCarrierPrivilegesCallback) this.mCarrierPrivilegedCallbacks.get(i));
+                            this.mTelephonyManager.unregisterCarrierPrivilegesCallback(
+                                    (LogicalIndexCarrierPrivilegesCallback)
+                                            this.mCarrierPrivilegedCallbacks.get(i));
                             this.mCarrierPrivilegedCallbacks.remove(i);
                             arraySet.addAll(this.mCarrierPrivilegedApps.get(i));
                             this.mCarrierPrivilegedApps.remove(i);
@@ -727,7 +890,8 @@ public final class FlexibilityController extends StateController {
             if (deviceIdleInternal == null) {
                 return;
             }
-            String[] fullPowerWhitelistExceptIdle = deviceIdleInternal.getFullPowerWhitelistExceptIdle();
+            String[] fullPowerWhitelistExceptIdle =
+                    deviceIdleInternal.getFullPowerWhitelistExceptIdle();
             ArraySet arraySet = new ArraySet();
             synchronized (this.mSatLock) {
                 try {
@@ -760,10 +924,12 @@ public final class FlexibilityController extends StateController {
                     synchronized (this.mSatLock) {
                         try {
                             if (!this.mPowerAllowlistedApps.contains(str)) {
-                                for (int size2 = this.mCarrierPrivilegedApps.size() - 1; size2 >= 0; size2--) {
+                                for (int size2 = this.mCarrierPrivilegedApps.size() - 1;
+                                        size2 >= 0;
+                                        size2--) {
                                     SparseSetArray sparseSetArray = this.mCarrierPrivilegedApps;
-                                    if (!sparseSetArray.contains(sparseSetArray.keyAt(size2), str)) {
-                                    }
+                                    if (!sparseSetArray.contains(
+                                            sparseSetArray.keyAt(size2), str)) {}
                                 }
                                 if (this.mSpecialApps.remove(-1, str)) {
                                     arraySet2.add(str);
@@ -790,14 +956,19 @@ public final class FlexibilityController extends StateController {
         DEBUG = JobSchedulerService.DEBUG || Log.isLoggable("JobScheduler.Flex", 3);
     }
 
-    public FlexibilityController(JobSchedulerService jobSchedulerService, PrefetchController prefetchController) {
+    public FlexibilityController(
+            JobSchedulerService jobSchedulerService, PrefetchController prefetchController) {
         super(jobSchedulerService);
-        this.mFallbackFlexibilityDeadlineMs = BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS;
+        this.mFallbackFlexibilityDeadlineMs =
+                BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS;
         this.mFallbackFlexibilityDeadlines = FcConfig.DEFAULT_FALLBACK_FLEXIBILITY_DEADLINES;
-        this.mFallbackFlexibilityDeadlineScores = FcConfig.DEFAULT_FALLBACK_FLEXIBILITY_DEADLINE_SCORES;
-        this.mFallbackFlexibilityAdditionalScoreTimeFactors = FcConfig.DEFAULT_FALLBACK_FLEXIBILITY_DEADLINE_ADDITIONAL_SCORE_TIME_FACTORS;
+        this.mFallbackFlexibilityDeadlineScores =
+                FcConfig.DEFAULT_FALLBACK_FLEXIBILITY_DEADLINE_SCORES;
+        this.mFallbackFlexibilityAdditionalScoreTimeFactors =
+                FcConfig.DEFAULT_FALLBACK_FLEXIBILITY_DEADLINE_ADDITIONAL_SCORE_TIME_FACTORS;
         this.mRescheduledJobDeadline = ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS;
-        this.mMaxRescheduledDeadline = BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS;
+        this.mMaxRescheduledDeadline =
+                BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS;
         this.mUnseenConstraintGracePeriodMs = 259200000L;
         this.mAppliedConstraints = 0;
         this.mMinTimeBetweenFlexibilityAlarmsMs = 60000L;
@@ -809,7 +980,10 @@ public final class FlexibilityController extends StateController {
         this.mJobsToCheck = new ArraySet();
         this.mPackagesToCheck = new ArraySet();
         this.mHandler = new FcHandler(AppSchedulingModuleThread.get().getLooper());
-        if (this.mContext.getPackageManager().hasSystemFeature("android.hardware.type.automotive") || this.mContext.getPackageManager().hasSystemFeature("android.hardware.type.embedded")) {
+        if (this.mContext.getPackageManager().hasSystemFeature("android.hardware.type.automotive")
+                || this.mContext
+                        .getPackageManager()
+                        .hasSystemFeature("android.hardware.type.embedded")) {
             this.mSupportedFlexConstraints = 0;
         } else {
             this.mSupportedFlexConstraints = FLEXIBLE_CONSTRAINTS;
@@ -819,7 +993,9 @@ public final class FlexibilityController extends StateController {
         this.mFlexibilityEnabled = (i & i2) != 0;
         this.mFlexibilityTracker = new FlexibilityTracker(Integer.bitCount(i2));
         this.mFcConfig = new FcConfig();
-        this.mFlexibilityAlarmQueue = new FlexibilityAlarmQueue(this.mContext, AppSchedulingModuleThread.get().getLooper());
+        this.mFlexibilityAlarmQueue =
+                new FlexibilityAlarmQueue(
+                        this.mContext, AppSchedulingModuleThread.get().getLooper());
         this.mPercentsToDropConstraints = FcConfig.DEFAULT_PERCENTS_TO_DROP_FLEXIBLE_CONSTRAINTS;
         this.mPrefetchController = prefetchController;
         SpecialAppTracker specialAppTracker = new SpecialAppTracker();
@@ -838,7 +1014,8 @@ public final class FlexibilityController extends StateController {
         indentingPrintWriter.print("FlexibilityController");
         indentingPrintWriter.println(":");
         indentingPrintWriter.increaseIndent();
-        indentingPrintWriter.print("fc_applied_constraints", Integer.valueOf(fcConfig.APPLIED_CONSTRAINTS));
+        indentingPrintWriter.print(
+                "fc_applied_constraints", Integer.valueOf(fcConfig.APPLIED_CONSTRAINTS));
         indentingPrintWriter.print("(");
         int i = fcConfig.APPLIED_CONSTRAINTS;
         if (i != 0) {
@@ -847,21 +1024,57 @@ public final class FlexibilityController extends StateController {
             indentingPrintWriter.print("nothing");
         }
         indentingPrintWriter.println(")");
-        JobSchedulerService$Constants$$ExternalSyntheticOutline0.m(fcConfig.DEADLINE_PROXIMITY_LIMIT_MS, indentingPrintWriter, "fc_flexibility_deadline_proximity_limit_ms");
-        JobSchedulerService$Constants$$ExternalSyntheticOutline0.m(fcConfig.FALLBACK_FLEXIBILITY_DEADLINE_MS, indentingPrintWriter, "fc_fallback_flexibility_deadline_ms");
-        indentingPrintWriter.print("fc_fallback_flexibility_deadlines", fcConfig.FALLBACK_FLEXIBILITY_DEADLINES).println();
-        indentingPrintWriter.print("fc_fallback_flexibility_deadline_scores", fcConfig.FALLBACK_FLEXIBILITY_DEADLINE_SCORES).println();
-        indentingPrintWriter.print("fc_fallback_flexibility_deadline_additional_score_time_factors", fcConfig.FALLBACK_FLEXIBILITY_DEADLINE_ADDITIONAL_SCORE_TIME_FACTORS).println();
-        JobSchedulerService$Constants$$ExternalSyntheticOutline0.m(fcConfig.MIN_TIME_BETWEEN_FLEXIBILITY_ALARMS_MS, indentingPrintWriter, "fc_min_time_between_flexibility_alarms_ms");
-        indentingPrintWriter.print("fc_percents_to_drop_flexible_constraints", fcConfig.PERCENTS_TO_DROP_FLEXIBLE_CONSTRAINTS).println();
-        JobSchedulerService$Constants$$ExternalSyntheticOutline0.m(fcConfig.RESCHEDULED_JOB_DEADLINE_MS, indentingPrintWriter, "fc_rescheduled_job_deadline_ms");
-        JobSchedulerService$Constants$$ExternalSyntheticOutline0.m(fcConfig.MAX_RESCHEDULED_DEADLINE_MS, indentingPrintWriter, "fc_max_rescheduled_deadline_ms");
-        indentingPrintWriter.print("fc_unseen_constraint_grace_period_ms", Long.valueOf(fcConfig.UNSEEN_CONSTRAINT_GRACE_PERIOD_MS)).println();
+        JobSchedulerService$Constants$$ExternalSyntheticOutline0.m(
+                fcConfig.DEADLINE_PROXIMITY_LIMIT_MS,
+                indentingPrintWriter,
+                "fc_flexibility_deadline_proximity_limit_ms");
+        JobSchedulerService$Constants$$ExternalSyntheticOutline0.m(
+                fcConfig.FALLBACK_FLEXIBILITY_DEADLINE_MS,
+                indentingPrintWriter,
+                "fc_fallback_flexibility_deadline_ms");
+        indentingPrintWriter
+                .print("fc_fallback_flexibility_deadlines", fcConfig.FALLBACK_FLEXIBILITY_DEADLINES)
+                .println();
+        indentingPrintWriter
+                .print(
+                        "fc_fallback_flexibility_deadline_scores",
+                        fcConfig.FALLBACK_FLEXIBILITY_DEADLINE_SCORES)
+                .println();
+        indentingPrintWriter
+                .print(
+                        "fc_fallback_flexibility_deadline_additional_score_time_factors",
+                        fcConfig.FALLBACK_FLEXIBILITY_DEADLINE_ADDITIONAL_SCORE_TIME_FACTORS)
+                .println();
+        JobSchedulerService$Constants$$ExternalSyntheticOutline0.m(
+                fcConfig.MIN_TIME_BETWEEN_FLEXIBILITY_ALARMS_MS,
+                indentingPrintWriter,
+                "fc_min_time_between_flexibility_alarms_ms");
+        indentingPrintWriter
+                .print(
+                        "fc_percents_to_drop_flexible_constraints",
+                        fcConfig.PERCENTS_TO_DROP_FLEXIBLE_CONSTRAINTS)
+                .println();
+        JobSchedulerService$Constants$$ExternalSyntheticOutline0.m(
+                fcConfig.RESCHEDULED_JOB_DEADLINE_MS,
+                indentingPrintWriter,
+                "fc_rescheduled_job_deadline_ms");
+        JobSchedulerService$Constants$$ExternalSyntheticOutline0.m(
+                fcConfig.MAX_RESCHEDULED_DEADLINE_MS,
+                indentingPrintWriter,
+                "fc_max_rescheduled_deadline_ms");
+        indentingPrintWriter
+                .print(
+                        "fc_unseen_constraint_grace_period_ms",
+                        Long.valueOf(fcConfig.UNSEEN_CONSTRAINT_GRACE_PERIOD_MS))
+                .println();
         indentingPrintWriter.decreaseIndent();
     }
 
     @Override // com.android.server.job.controllers.StateController
-    public final void dumpControllerStateLocked(final IndentingPrintWriter indentingPrintWriter, JobSchedulerService$$ExternalSyntheticLambda5 jobSchedulerService$$ExternalSyntheticLambda5) {
+    public final void dumpControllerStateLocked(
+            final IndentingPrintWriter indentingPrintWriter,
+            JobSchedulerService$$ExternalSyntheticLambda5
+                    jobSchedulerService$$ExternalSyntheticLambda5) {
         if (this.mLocalOverride) {
             indentingPrintWriter.println("Local override active");
         }
@@ -881,7 +1094,10 @@ public final class FlexibilityController extends StateController {
             if (keyAt == this.mSatisfiedFlexibleConstraints) {
                 indentingPrintWriter.print("0ms");
             } else {
-                TimeUtils.formatDuration(this.mLastSeenConstraintTimesElapsed.valueAt(i), elapsedRealtime, indentingPrintWriter);
+                TimeUtils.formatDuration(
+                        this.mLastSeenConstraintTimesElapsed.valueAt(i),
+                        elapsedRealtime,
+                        indentingPrintWriter);
             }
             indentingPrintWriter.print(":");
             if (keyAt != 0) {
@@ -936,12 +1152,17 @@ public final class FlexibilityController extends StateController {
                     indentingPrintWriter.print(jobStatus.getNumRequiredFlexibleConstraints());
                     indentingPrintWriter.print(", lifecycle=[");
                     FlexibilityController flexibilityController = FlexibilityController.this;
-                    long lifeCycleBeginningElapsedLocked = flexibilityController.getLifeCycleBeginningElapsedLocked(jobStatus);
+                    long lifeCycleBeginningElapsedLocked =
+                            flexibilityController.getLifeCycleBeginningElapsedLocked(jobStatus);
                     indentingPrintWriter.print(lifeCycleBeginningElapsedLocked);
                     indentingPrintWriter.print(", (");
-                    indentingPrintWriter.print(flexibilityController.getCurPercentOfLifecycleLocked(jobStatus, elapsedRealtime));
+                    indentingPrintWriter.print(
+                            flexibilityController.getCurPercentOfLifecycleLocked(
+                                    jobStatus, elapsedRealtime));
                     indentingPrintWriter.print("%), ");
-                    indentingPrintWriter.print(FlexibilityController.this.getLifeCycleEndElapsedLocked(jobStatus, elapsedRealtime, lifeCycleBeginningElapsedLocked));
+                    indentingPrintWriter.print(
+                            FlexibilityController.this.getLifeCycleEndElapsedLocked(
+                                    jobStatus, elapsedRealtime, lifeCycleBeginningElapsedLocked));
                     indentingPrintWriter.print("]");
                     indentingPrintWriter.println();
                 }
@@ -950,40 +1171,49 @@ public final class FlexibilityController extends StateController {
         indentingPrintWriter.println();
         indentingPrintWriter.println("Job scores:");
         indentingPrintWriter.increaseIndent();
-        this.mJobScoreTrackers.forEach(new SparseArrayMap.TriConsumer() { // from class: com.android.server.job.controllers.FlexibilityController$$ExternalSyntheticLambda0
-            public final void accept(int i6, Object obj, Object obj2) {
-                IndentingPrintWriter indentingPrintWriter2 = indentingPrintWriter;
-                long j = elapsedRealtime;
-                FlexibilityController.JobScoreTracker jobScoreTracker = (FlexibilityController.JobScoreTracker) obj2;
-                indentingPrintWriter2.print(i6);
-                indentingPrintWriter2.print("/");
-                indentingPrintWriter2.print((String) obj);
-                indentingPrintWriter2.print(": ");
-                jobScoreTracker.getClass();
-                indentingPrintWriter2.print("{");
-                int i7 = 0;
-                boolean z = false;
-                while (true) {
-                    FlexibilityController.JobScoreTracker.JobScoreBucket[] jobScoreBucketArr = jobScoreTracker.mScoreBuckets;
-                    if (i7 >= jobScoreBucketArr.length) {
-                        indentingPrintWriter2.print("}");
-                        indentingPrintWriter2.println();
-                        return;
-                    }
-                    FlexibilityController.JobScoreTracker.JobScoreBucket jobScoreBucket = jobScoreBucketArr[((jobScoreTracker.mScoreBucketIndex + 1) + i7) % jobScoreBucketArr.length];
-                    if (jobScoreBucket != null && jobScoreBucket.startTimeElapsed != 0) {
-                        if (z) {
-                            indentingPrintWriter2.print(", ");
+        this.mJobScoreTrackers.forEach(
+                new SparseArrayMap
+                        .TriConsumer() { // from class:
+                                         // com.android.server.job.controllers.FlexibilityController$$ExternalSyntheticLambda0
+                    public final void accept(int i6, Object obj, Object obj2) {
+                        IndentingPrintWriter indentingPrintWriter2 = indentingPrintWriter;
+                        long j = elapsedRealtime;
+                        FlexibilityController.JobScoreTracker jobScoreTracker =
+                                (FlexibilityController.JobScoreTracker) obj2;
+                        indentingPrintWriter2.print(i6);
+                        indentingPrintWriter2.print("/");
+                        indentingPrintWriter2.print((String) obj);
+                        indentingPrintWriter2.print(": ");
+                        jobScoreTracker.getClass();
+                        indentingPrintWriter2.print("{");
+                        int i7 = 0;
+                        boolean z = false;
+                        while (true) {
+                            FlexibilityController.JobScoreTracker.JobScoreBucket[]
+                                    jobScoreBucketArr = jobScoreTracker.mScoreBuckets;
+                            if (i7 >= jobScoreBucketArr.length) {
+                                indentingPrintWriter2.print("}");
+                                indentingPrintWriter2.println();
+                                return;
+                            }
+                            FlexibilityController.JobScoreTracker.JobScoreBucket jobScoreBucket =
+                                    jobScoreBucketArr[
+                                            ((jobScoreTracker.mScoreBucketIndex + 1) + i7)
+                                                    % jobScoreBucketArr.length];
+                            if (jobScoreBucket != null && jobScoreBucket.startTimeElapsed != 0) {
+                                if (z) {
+                                    indentingPrintWriter2.print(", ");
+                                }
+                                TimeUtils.formatDuration(
+                                        jobScoreBucket.startTimeElapsed, j, indentingPrintWriter2);
+                                indentingPrintWriter2.print("=");
+                                indentingPrintWriter2.print(jobScoreBucket.score);
+                                z = true;
+                            }
+                            i7++;
                         }
-                        TimeUtils.formatDuration(jobScoreBucket.startTimeElapsed, j, indentingPrintWriter2);
-                        indentingPrintWriter2.print("=");
-                        indentingPrintWriter2.print(jobScoreBucket.score);
-                        z = true;
                     }
-                    i7++;
-                }
-            }
-        });
+                });
         indentingPrintWriter.decreaseIndent();
         indentingPrintWriter.println();
         this.mFlexibilityAlarmQueue.dump(indentingPrintWriter);
@@ -991,14 +1221,18 @@ public final class FlexibilityController extends StateController {
 
     public int getCurPercentOfLifecycleLocked(JobStatus jobStatus, long j) {
         long lifeCycleBeginningElapsedLocked = getLifeCycleBeginningElapsedLocked(jobStatus);
-        long lifeCycleEndElapsedLocked = getLifeCycleEndElapsedLocked(jobStatus, j, lifeCycleBeginningElapsedLocked);
+        long lifeCycleEndElapsedLocked =
+                getLifeCycleEndElapsedLocked(jobStatus, j, lifeCycleBeginningElapsedLocked);
         if (lifeCycleEndElapsedLocked == Long.MAX_VALUE || lifeCycleBeginningElapsedLocked >= j) {
             return 0;
         }
-        if (j > lifeCycleEndElapsedLocked || lifeCycleEndElapsedLocked == lifeCycleBeginningElapsedLocked) {
+        if (j > lifeCycleEndElapsedLocked
+                || lifeCycleEndElapsedLocked == lifeCycleBeginningElapsedLocked) {
             return 100;
         }
-        return (int) (((j - lifeCycleBeginningElapsedLocked) * 100) / (lifeCycleEndElapsedLocked - lifeCycleBeginningElapsedLocked));
+        return (int)
+                (((j - lifeCycleBeginningElapsedLocked) * 100)
+                        / (lifeCycleEndElapsedLocked - lifeCycleBeginningElapsedLocked));
     }
 
     public FcConfig getFcConfig() {
@@ -1021,10 +1255,15 @@ public final class FlexibilityController extends StateController {
         long millis = JobSchedulerService.sSystemClock.millis();
         int i = jobStatus.sourceUserId;
         String str = jobStatus.sourcePackageName;
-        long nextEstimatedLaunchTimeLocked = prefetchController.getNextEstimatedLaunchTimeLocked(i, str, millis);
+        long nextEstimatedLaunchTimeLocked =
+                prefetchController.getNextEstimatedLaunchTimeLocked(i, str, millis);
         long longValue = ((Long) this.mPrefetchLifeCycleStart.getOrDefault(i, str, 0L)).longValue();
         if (nextEstimatedLaunchTimeLocked != Long.MAX_VALUE) {
-            longValue = Math.max(longValue, nextEstimatedLaunchTimeLocked - this.mPrefetchController.getLaunchTimeThresholdMs());
+            longValue =
+                    Math.max(
+                            longValue,
+                            nextEstimatedLaunchTimeLocked
+                                    - this.mPrefetchController.getLaunchTimeThresholdMs());
         }
         return Math.max(longValue, j);
     }
@@ -1035,23 +1274,43 @@ public final class FlexibilityController extends StateController {
         long j3 = jobStatus.latestRunTimeElapsedMillis;
         if (!isPrefetch) {
             if (jobStatus.getNumPreviousAttempts() > 1) {
-                return Math.min((long) Math.scalb(this.mRescheduledJobDeadline, jobStatus.getNumPreviousAttempts() - 2), this.mMaxRescheduledDeadline) + j2;
+                return Math.min(
+                                (long)
+                                        Math.scalb(
+                                                this.mRescheduledJobDeadline,
+                                                jobStatus.getNumPreviousAttempts() - 2),
+                                this.mMaxRescheduledDeadline)
+                        + j2;
             }
             int effectivePriority = jobStatus.getEffectivePriority();
             int scoreLocked = getScoreLocked(jobStatus.sourceUid, str, j);
             long j4 = this.mFallbackFlexibilityDeadlineMs;
-            long min = Math.min(3 * j4, (this.mFallbackFlexibilityAdditionalScoreTimeFactors.get(effectivePriority, 60000L) * scoreLocked) + this.mFallbackFlexibilityDeadlines.get(effectivePriority, j4)) + j2;
+            long min =
+                    Math.min(
+                                    3 * j4,
+                                    (this.mFallbackFlexibilityAdditionalScoreTimeFactors.get(
+                                                            effectivePriority, 60000L)
+                                                    * scoreLocked)
+                                            + this.mFallbackFlexibilityDeadlines.get(
+                                                    effectivePriority, j4))
+                            + j2;
             return j3 == Long.MAX_VALUE ? min : Math.max(min, j3);
         }
         PrefetchController prefetchController = this.mPrefetchController;
         prefetchController.getClass();
-        long nextEstimatedLaunchTimeLocked = prefetchController.getNextEstimatedLaunchTimeLocked(jobStatus.sourceUserId, str, JobSchedulerService.sSystemClock.millis());
+        long nextEstimatedLaunchTimeLocked =
+                prefetchController.getNextEstimatedLaunchTimeLocked(
+                        jobStatus.sourceUserId, str, JobSchedulerService.sSystemClock.millis());
         JobSchedulerService.Constants constants = this.mConstants;
         if (j3 != Long.MAX_VALUE) {
-            return Math.min(nextEstimatedLaunchTimeLocked - constants.PREFETCH_FORCE_BATCH_RELAX_THRESHOLD_MS, j3);
+            return Math.min(
+                    nextEstimatedLaunchTimeLocked
+                            - constants.PREFETCH_FORCE_BATCH_RELAX_THRESHOLD_MS,
+                    j3);
         }
         if (nextEstimatedLaunchTimeLocked != Long.MAX_VALUE) {
-            return nextEstimatedLaunchTimeLocked - constants.PREFETCH_FORCE_BATCH_RELAX_THRESHOLD_MS;
+            return nextEstimatedLaunchTimeLocked
+                    - constants.PREFETCH_FORCE_BATCH_RELAX_THRESHOLD_MS;
         }
         return Long.MAX_VALUE;
     }
@@ -1059,13 +1318,20 @@ public final class FlexibilityController extends StateController {
     public long getNextConstraintDropTimeElapsedLocked(JobStatus jobStatus) {
         long lifeCycleBeginningElapsedLocked = getLifeCycleBeginningElapsedLocked(jobStatus);
         JobSchedulerService.sElapsedRealtimeClock.getClass();
-        return getNextConstraintDropTimeElapsedLocked(jobStatus, lifeCycleBeginningElapsedLocked, getLifeCycleEndElapsedLocked(jobStatus, SystemClock.elapsedRealtime(), lifeCycleBeginningElapsedLocked));
+        return getNextConstraintDropTimeElapsedLocked(
+                jobStatus,
+                lifeCycleBeginningElapsedLocked,
+                getLifeCycleEndElapsedLocked(
+                        jobStatus, SystemClock.elapsedRealtime(), lifeCycleBeginningElapsedLocked));
     }
 
     public final long getNextConstraintDropTimeElapsedLocked(JobStatus jobStatus, long j, long j2) {
         int i;
-        int[] percentsToDropConstraints = getPercentsToDropConstraints(jobStatus.getEffectivePriority());
-        if (j2 == Long.MAX_VALUE || (i = jobStatus.mNumDroppedFlexibleConstraints) == percentsToDropConstraints.length) {
+        int[] percentsToDropConstraints =
+                getPercentsToDropConstraints(jobStatus.getEffectivePriority());
+        if (j2 == Long.MAX_VALUE
+                || (i = jobStatus.mNumDroppedFlexibleConstraints)
+                        == percentsToDropConstraints.length) {
             return Long.MAX_VALUE;
         }
         return (((j2 - j) * percentsToDropConstraints[i]) / 100) + j;
@@ -1077,11 +1343,12 @@ public final class FlexibilityController extends StateController {
             return iArr;
         }
         Slog.wtf("JobScheduler.Flex", "No %-to-drop for priority " + JobInfo.getPriorityString(i));
-        return new int[]{50, 60, 70, 80};
+        return new int[] {50, 60, 70, 80};
     }
 
     public int getRelevantAppliedConstraintsLocked(JobStatus jobStatus) {
-        return this.mAppliedConstraints & ((jobStatus.mCanApplyTransportAffinities ? 268435456 : 0) | 7);
+        return this.mAppliedConstraints
+                & ((jobStatus.mCanApplyTransportAffinities ? 268435456 : 0) | 7);
     }
 
     public int getScoreLocked(int i, String str, long j) {
@@ -1107,12 +1374,17 @@ public final class FlexibilityController extends StateController {
             }
         }
         jobScoreTracker.mCachedScore = i2;
-        jobScoreTracker.mCachedScoreExpirationTimeElapsed = j3 + BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS;
+        jobScoreTracker.mCachedScoreExpirationTimeElapsed =
+                j3 + BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS;
         return i2;
     }
 
     public boolean hasEnoughSatisfiedConstraintsLocked(JobStatus jobStatus) {
-        int bitCount = Integer.bitCount(this.mSatisfiedFlexibleConstraints & this.mAppliedConstraints & ((jobStatus.mTransportAffinitiesSatisfied ? 268435456 : 0) | 7));
+        int bitCount =
+                Integer.bitCount(
+                        this.mSatisfiedFlexibleConstraints
+                                & this.mAppliedConstraints
+                                & ((jobStatus.mTransportAffinitiesSatisfied ? 268435456 : 0) | 7));
         if (bitCount >= jobStatus.getNumRequiredFlexibleConstraints()) {
             return true;
         }
@@ -1125,7 +1397,9 @@ public final class FlexibilityController extends StateController {
         for (int size = this.mLastSeenConstraintTimesElapsed.size() - 1; size >= 0; size--) {
             int keyAt = this.mLastSeenConstraintTimesElapsed.keyAt(size);
             if ((keyAt & i) == 0) {
-                boolean z = elapsedRealtime - this.mLastSeenConstraintTimesElapsed.valueAt(size) <= this.mUnseenConstraintGracePeriodMs;
+                boolean z =
+                        elapsedRealtime - this.mLastSeenConstraintTimesElapsed.valueAt(size)
+                                <= this.mUnseenConstraintGracePeriodMs;
                 if (Integer.bitCount(keyAt) > bitCount && z) {
                     return false;
                 }
@@ -1139,7 +1413,10 @@ public final class FlexibilityController extends StateController {
     }
 
     public final boolean isFlexibilitySatisfiedLocked(JobStatus jobStatus) {
-        if (this.mFlexibilityEnabled && this.mService.getUidBias(jobStatus.sourceUid) != 40 && (this.mService.getUidBias(jobStatus.sourceUid) < 30 || jobStatus.getEffectivePriority() < 300)) {
+        if (this.mFlexibilityEnabled
+                && this.mService.getUidBias(jobStatus.sourceUid) != 40
+                && (this.mService.getUidBias(jobStatus.sourceUid) < 30
+                        || jobStatus.getEffectivePriority() < 300)) {
             if (jobStatus.getEffectivePriority() >= 300) {
                 SpecialAppTracker specialAppTracker = this.mSpecialAppTracker;
                 int i = jobStatus.sourceUserId;
@@ -1147,14 +1424,14 @@ public final class FlexibilityController extends StateController {
                 synchronized (specialAppTracker.mSatLock) {
                     try {
                         if (!specialAppTracker.mSpecialApps.contains(-1, str)) {
-                            if (specialAppTracker.mSpecialApps.contains(i, str)) {
-                            }
+                            if (specialAppTracker.mSpecialApps.contains(i, str)) {}
                         }
                     } finally {
                     }
                 }
             }
-            if (!hasEnoughSatisfiedConstraintsLocked(jobStatus) && !this.mService.isCurrentlyRunningLocked(jobStatus)) {
+            if (!hasEnoughSatisfiedConstraintsLocked(jobStatus)
+                    && !this.mService.isCurrentlyRunningLocked(jobStatus)) {
                 return false;
             }
         }
@@ -1170,8 +1447,10 @@ public final class FlexibilityController extends StateController {
                 jobStatus.setConstraintSatisfied(2097152, elapsedRealtime, true);
                 return;
             }
-            jobStatus.mNumAppliedFlexibleConstraints = Integer.bitCount(getRelevantAppliedConstraintsLocked(jobStatus));
-            jobStatus.setConstraintSatisfied(2097152, elapsedRealtime, isFlexibilitySatisfiedLocked(jobStatus));
+            jobStatus.mNumAppliedFlexibleConstraints =
+                    Integer.bitCount(getRelevantAppliedConstraintsLocked(jobStatus));
+            jobStatus.setConstraintSatisfied(
+                    2097152, elapsedRealtime, isFlexibilitySatisfiedLocked(jobStatus));
             this.mFlexibilityTracker.add(jobStatus);
             jobStatus.setTrackingController(128);
             this.mFlexibilityAlarmQueue.scheduleDropNumConstraintsAlarm(jobStatus, elapsedRealtime);
@@ -1182,7 +1461,10 @@ public final class FlexibilityController extends StateController {
     public final void maybeStopTrackingJobLocked(JobStatus jobStatus, JobStatus jobStatus2) {
         if (jobStatus.clearTrackingController(128)) {
             this.mFlexibilityAlarmQueue.removeAlarmForKey(jobStatus);
-            ((ArraySet) this.mFlexibilityTracker.mTrackedJobs.get(jobStatus.getNumRequiredFlexibleConstraints())).remove(jobStatus);
+            ((ArraySet)
+                            this.mFlexibilityTracker.mTrackedJobs.get(
+                                    jobStatus.getNumRequiredFlexibleConstraints()))
+                    .remove(jobStatus);
         }
         this.mJobsToCheck.remove(jobStatus);
     }
@@ -1198,7 +1480,9 @@ public final class FlexibilityController extends StateController {
         }
         for (int size = this.mJobsToCheck.size() - 1; size >= 0; size--) {
             JobStatus jobStatus = (JobStatus) this.mJobsToCheck.valueAt(size);
-            if ((jobStatus.sourceUid == i && jobStatus.sourcePackageName.equals(str)) || (jobStatus.callingUid == i && jobStatus.job.getService().getPackageName().equals(str))) {
+            if ((jobStatus.sourceUid == i && jobStatus.sourcePackageName.equals(str))
+                    || (jobStatus.callingUid == i
+                            && jobStatus.job.getService().getPackageName().equals(str))) {
                 this.mJobsToCheck.removeAt(size);
             }
         }
@@ -1207,7 +1491,8 @@ public final class FlexibilityController extends StateController {
     @Override // com.android.server.job.controllers.StateController
     public final void onConstantsUpdatedLocked() {
         if (this.mFcConfig.mShouldReevaluateConstraints) {
-            AppSchedulingModuleThread.getHandler().post(new FlexibilityController$$ExternalSyntheticLambda1(0, this));
+            AppSchedulingModuleThread.getHandler()
+                    .post(new FlexibilityController$$ExternalSyntheticLambda1(0, this));
         }
     }
 
@@ -1215,14 +1500,22 @@ public final class FlexibilityController extends StateController {
     public final void onSystemServicesReady() {
         SpecialAppTracker specialAppTracker = this.mSpecialAppTracker;
         specialAppTracker.getClass();
-        specialAppTracker.mDeviceIdleInternal = (DeviceIdleInternal) LocalServices.getService(DeviceIdleInternal.class);
-        specialAppTracker.mTelephonyManager = (TelephonyManager) FlexibilityController.this.mContext.getSystemService(TelephonyManager.class);
+        specialAppTracker.mDeviceIdleInternal =
+                (DeviceIdleInternal) LocalServices.getService(DeviceIdleInternal.class);
+        specialAppTracker.mTelephonyManager =
+                (TelephonyManager)
+                        FlexibilityController.this.mContext.getSystemService(
+                                TelephonyManager.class);
         synchronized (FlexibilityController.this.mLock) {
             try {
                 FlexibilityController flexibilityController = FlexibilityController.this;
                 if (flexibilityController.mFlexibilityEnabled) {
-                    flexibilityController.mHandler.post(new FlexibilityController$$ExternalSyntheticLambda1(1, specialAppTracker));
-                    FlexibilityController.this.mHandler.post(new FlexibilityController$$ExternalSyntheticLambda1(2, specialAppTracker));
+                    flexibilityController.mHandler.post(
+                            new FlexibilityController$$ExternalSyntheticLambda1(
+                                    1, specialAppTracker));
+                    FlexibilityController.this.mHandler.post(
+                            new FlexibilityController$$ExternalSyntheticLambda1(
+                                    2, specialAppTracker));
                 }
             } catch (Throwable th) {
                 throw th;
@@ -1244,7 +1537,8 @@ public final class FlexibilityController extends StateController {
             for (int i4 = 0; i4 < arraySet.size(); i4++) {
                 JobStatus jobStatus = (JobStatus) arraySet.valueAt(i4);
                 if (jobStatus.hasFlexibilityConstraint()) {
-                    jobStatus.setConstraintSatisfied(2097152, elapsedRealtime, isFlexibilitySatisfiedLocked(jobStatus));
+                    jobStatus.setConstraintSatisfied(
+                            2097152, elapsedRealtime, isFlexibilitySatisfiedLocked(jobStatus));
                     z |= jobStatus.job.isPrefetch();
                 }
             }
@@ -1257,7 +1551,14 @@ public final class FlexibilityController extends StateController {
                 for (int i5 = 0; i5 < packagesForUidLocked.size(); i5++) {
                     String str = (String) packagesForUidLocked.valueAt(i5);
                     SparseArrayMap sparseArrayMap = this.mPrefetchLifeCycleStart;
-                    sparseArrayMap.add(userId, str, Long.valueOf(Math.max(((Long) sparseArrayMap.getOrDefault(userId, str, 0L)).longValue(), elapsedRealtime)));
+                    sparseArrayMap.add(
+                            userId,
+                            str,
+                            Long.valueOf(
+                                    Math.max(
+                                            ((Long) sparseArrayMap.getOrDefault(userId, str, 0L))
+                                                    .longValue(),
+                                            elapsedRealtime)));
                 }
             }
         }
@@ -1277,7 +1578,8 @@ public final class FlexibilityController extends StateController {
         }
         for (int size = this.mJobsToCheck.size() - 1; size >= 0; size--) {
             JobStatus jobStatus = (JobStatus) this.mJobsToCheck.valueAt(size);
-            if (UserHandle.getUserId(jobStatus.sourceUid) == i || UserHandle.getUserId(jobStatus.callingUid) == i) {
+            if (UserHandle.getUserId(jobStatus.sourceUid) == i
+                    || UserHandle.getUserId(jobStatus.callingUid) == i) {
                 this.mJobsToCheck.removeAt(size);
             }
         }
@@ -1289,7 +1591,11 @@ public final class FlexibilityController extends StateController {
             return;
         }
         int priority = jobStatus.job.getPriority();
-        int i = this.mFallbackFlexibilityDeadlineScores.get(priority, FcConfig.DEFAULT_FALLBACK_FLEXIBILITY_DEADLINE_SCORES.get(priority, priority / 100));
+        int i =
+                this.mFallbackFlexibilityDeadlineScores.get(
+                        priority,
+                        FcConfig.DEFAULT_FALLBACK_FLEXIBILITY_DEADLINE_SCORES.get(
+                                priority, priority / 100));
         SparseArrayMap sparseArrayMap = this.mJobScoreTrackers;
         int i2 = jobStatus.sourceUid;
         String str = jobStatus.sourcePackageName;
@@ -1408,7 +1714,10 @@ public final class FlexibilityController extends StateController {
                 }
                 return;
             case 1:
-                long j2 = properties.getLong(str, BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS);
+                long j2 =
+                        properties.getLong(
+                                str,
+                                BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS);
                 fcConfig.MAX_RESCHEDULED_DEADLINE_MS = j2;
                 FlexibilityController flexibilityController2 = FlexibilityController.this;
                 if (flexibilityController2.mMaxRescheduledDeadline != j2) {
@@ -1420,7 +1729,8 @@ public final class FlexibilityController extends StateController {
             case 2:
                 String string = properties.getString(str, (String) null);
                 SparseIntArray sparseIntArray = fcConfig.FALLBACK_FLEXIBILITY_DEADLINE_SCORES;
-                SparseIntArray sparseIntArray2 = FcConfig.DEFAULT_FALLBACK_FLEXIBILITY_DEADLINE_SCORES;
+                SparseIntArray sparseIntArray2 =
+                        FcConfig.DEFAULT_FALLBACK_FLEXIBILITY_DEADLINE_SCORES;
                 KeyValueListParser keyValueListParser = new KeyValueListParser(',');
                 try {
                     keyValueListParser.setString(string);
@@ -1446,11 +1756,13 @@ public final class FlexibilityController extends StateController {
                 if (i == i6 && i2 == i7 && i3 == i8 && i4 == i9 && i5 == i10) {
                     return;
                 }
-                FlexibilityController.this.mFallbackFlexibilityDeadlineScores = fcConfig.FALLBACK_FLEXIBILITY_DEADLINE_SCORES;
+                FlexibilityController.this.mFallbackFlexibilityDeadlineScores =
+                        fcConfig.FALLBACK_FLEXIBILITY_DEADLINE_SCORES;
                 fcConfig.mShouldReevaluateConstraints = true;
                 return;
             case 3:
-                long j3 = properties.getLong(str, ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS);
+                long j3 =
+                        properties.getLong(str, ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS);
                 fcConfig.RESCHEDULED_JOB_DEADLINE_MS = j3;
                 FlexibilityController flexibilityController3 = FlexibilityController.this;
                 if (flexibilityController3.mRescheduledJobDeadline != j3) {
@@ -1460,8 +1772,12 @@ public final class FlexibilityController extends StateController {
                 }
                 return;
             case 4:
-                if (FcConfig.parsePriorityToLongKeyValueString(properties.getString(str, (String) null), fcConfig.FALLBACK_FLEXIBILITY_DEADLINES, FcConfig.DEFAULT_FALLBACK_FLEXIBILITY_DEADLINES)) {
-                    FlexibilityController.this.mFallbackFlexibilityDeadlines = fcConfig.FALLBACK_FLEXIBILITY_DEADLINES;
+                if (FcConfig.parsePriorityToLongKeyValueString(
+                        properties.getString(str, (String) null),
+                        fcConfig.FALLBACK_FLEXIBILITY_DEADLINES,
+                        FcConfig.DEFAULT_FALLBACK_FLEXIBILITY_DEADLINES)) {
+                    FlexibilityController.this.mFallbackFlexibilityDeadlines =
+                            fcConfig.FALLBACK_FLEXIBILITY_DEADLINES;
                     fcConfig.mShouldReevaluateConstraints = true;
                     return;
                 }
@@ -1492,11 +1808,21 @@ public final class FlexibilityController extends StateController {
                 int[] iArr3 = (int[]) sparseArray.get(300);
                 int[] iArr4 = (int[]) sparseArray.get(200);
                 int[] iArr5 = (int[]) sparseArray.get(100);
-                int[] parsePercentToDropString = FcConfig.parsePercentToDropString(keyValueListParser2.getString(String.valueOf(500), (String) null));
-                int[] parsePercentToDropString2 = FcConfig.parsePercentToDropString(keyValueListParser2.getString(String.valueOf(400), (String) null));
-                int[] parsePercentToDropString3 = FcConfig.parsePercentToDropString(keyValueListParser2.getString(String.valueOf(300), (String) null));
-                int[] parsePercentToDropString4 = FcConfig.parsePercentToDropString(keyValueListParser2.getString(String.valueOf(200), (String) null));
-                int[] parsePercentToDropString5 = FcConfig.parsePercentToDropString(keyValueListParser2.getString(String.valueOf(100), (String) null));
+                int[] parsePercentToDropString =
+                        FcConfig.parsePercentToDropString(
+                                keyValueListParser2.getString(String.valueOf(500), (String) null));
+                int[] parsePercentToDropString2 =
+                        FcConfig.parsePercentToDropString(
+                                keyValueListParser2.getString(String.valueOf(400), (String) null));
+                int[] parsePercentToDropString3 =
+                        FcConfig.parsePercentToDropString(
+                                keyValueListParser2.getString(String.valueOf(300), (String) null));
+                int[] parsePercentToDropString4 =
+                        FcConfig.parsePercentToDropString(
+                                keyValueListParser2.getString(String.valueOf(200), (String) null));
+                int[] parsePercentToDropString5 =
+                        FcConfig.parsePercentToDropString(
+                                keyValueListParser2.getString(String.valueOf(100), (String) null));
                 if (parsePercentToDropString == null) {
                     parsePercentToDropString = (int[]) sparseArray2.get(500);
                 }
@@ -1517,10 +1843,15 @@ public final class FlexibilityController extends StateController {
                     parsePercentToDropString5 = (int[]) sparseArray2.get(100);
                 }
                 sparseArray.put(100, parsePercentToDropString5);
-                if (Arrays.equals(iArr, (int[]) sparseArray.get(500)) && Arrays.equals(iArr2, (int[]) sparseArray.get(400)) && Arrays.equals(iArr3, (int[]) sparseArray.get(300)) && Arrays.equals(iArr4, (int[]) sparseArray.get(200)) && Arrays.equals(iArr5, (int[]) sparseArray.get(100))) {
+                if (Arrays.equals(iArr, (int[]) sparseArray.get(500))
+                        && Arrays.equals(iArr2, (int[]) sparseArray.get(400))
+                        && Arrays.equals(iArr3, (int[]) sparseArray.get(300))
+                        && Arrays.equals(iArr4, (int[]) sparseArray.get(200))
+                        && Arrays.equals(iArr5, (int[]) sparseArray.get(100))) {
                     return;
                 }
-                FlexibilityController.this.mPercentsToDropConstraints = fcConfig.PERCENTS_TO_DROP_FLEXIBLE_CONSTRAINTS;
+                FlexibilityController.this.mPercentsToDropConstraints =
+                        fcConfig.PERCENTS_TO_DROP_FLEXIBLE_CONSTRAINTS;
                 fcConfig.mShouldReevaluateConstraints = true;
                 return;
             case 7:
@@ -1534,8 +1865,13 @@ public final class FlexibilityController extends StateController {
                 }
                 return;
             case '\b':
-                if (FcConfig.parsePriorityToLongKeyValueString(properties.getString(str, (String) null), fcConfig.FALLBACK_FLEXIBILITY_DEADLINE_ADDITIONAL_SCORE_TIME_FACTORS, FcConfig.DEFAULT_FALLBACK_FLEXIBILITY_DEADLINE_ADDITIONAL_SCORE_TIME_FACTORS)) {
-                    FlexibilityController.this.mFallbackFlexibilityAdditionalScoreTimeFactors = fcConfig.FALLBACK_FLEXIBILITY_DEADLINE_ADDITIONAL_SCORE_TIME_FACTORS;
+                if (FcConfig.parsePriorityToLongKeyValueString(
+                        properties.getString(str, (String) null),
+                        fcConfig.FALLBACK_FLEXIBILITY_DEADLINE_ADDITIONAL_SCORE_TIME_FACTORS,
+                        FcConfig
+                                .DEFAULT_FALLBACK_FLEXIBILITY_DEADLINE_ADDITIONAL_SCORE_TIME_FACTORS)) {
+                    FlexibilityController.this.mFallbackFlexibilityAdditionalScoreTimeFactors =
+                            fcConfig.FALLBACK_FLEXIBILITY_DEADLINE_ADDITIONAL_SCORE_TIME_FACTORS;
                     fcConfig.mShouldReevaluateConstraints = true;
                     return;
                 }
@@ -1550,29 +1886,47 @@ public final class FlexibilityController extends StateController {
                     fcConfig.mShouldReevaluateConstraints = true;
                     if (i12 != 0) {
                         flexibilityController6.mFlexibilityEnabled = true;
-                        PrefetchController prefetchController = flexibilityController6.mPrefetchController;
-                        PrefetchController.PrefetchChangedListener prefetchChangedListener = flexibilityController6.mPrefetchChangedListener;
+                        PrefetchController prefetchController =
+                                flexibilityController6.mPrefetchController;
+                        PrefetchController.PrefetchChangedListener prefetchChangedListener =
+                                flexibilityController6.mPrefetchChangedListener;
                         synchronized (prefetchController.mLock) {
-                            prefetchController.mPrefetchChangedListeners.add(prefetchChangedListener);
+                            prefetchController.mPrefetchChangedListeners.add(
+                                    prefetchChangedListener);
                         }
-                        SpecialAppTracker.m625$$Nest$mstartTracking(FlexibilityController.this.mSpecialAppTracker);
+                        SpecialAppTracker.m625$$Nest$mstartTracking(
+                                FlexibilityController.this.mSpecialAppTracker);
                         return;
                     }
                     flexibilityController6.mFlexibilityEnabled = false;
-                    PrefetchController prefetchController2 = flexibilityController6.mPrefetchController;
-                    PrefetchController.PrefetchChangedListener prefetchChangedListener2 = flexibilityController6.mPrefetchChangedListener;
+                    PrefetchController prefetchController2 =
+                            flexibilityController6.mPrefetchController;
+                    PrefetchController.PrefetchChangedListener prefetchChangedListener2 =
+                            flexibilityController6.mPrefetchChangedListener;
                     synchronized (prefetchController2.mLock) {
-                        prefetchController2.mPrefetchChangedListeners.remove(prefetchChangedListener2);
+                        prefetchController2.mPrefetchChangedListeners.remove(
+                                prefetchChangedListener2);
                     }
-                    SpecialAppTracker specialAppTracker = FlexibilityController.this.mSpecialAppTracker;
-                    FlexibilityController.this.mContext.unregisterReceiver(specialAppTracker.mBroadcastReceiver);
+                    SpecialAppTracker specialAppTracker =
+                            FlexibilityController.this.mSpecialAppTracker;
+                    FlexibilityController.this.mContext.unregisterReceiver(
+                            specialAppTracker.mBroadcastReceiver);
                     synchronized (specialAppTracker.mSatLock) {
                         try {
                             specialAppTracker.mCarrierPrivilegedApps.clear();
                             specialAppTracker.mPowerAllowlistedApps.clear();
                             specialAppTracker.mSpecialApps.clear();
-                            for (int size = specialAppTracker.mCarrierPrivilegedCallbacks.size() - 1; size >= 0; size--) {
-                                specialAppTracker.mTelephonyManager.unregisterCarrierPrivilegesCallback((TelephonyManager.CarrierPrivilegesCallback) specialAppTracker.mCarrierPrivilegedCallbacks.valueAt(size));
+                            for (int size =
+                                            specialAppTracker.mCarrierPrivilegedCallbacks.size()
+                                                    - 1;
+                                    size >= 0;
+                                    size--) {
+                                specialAppTracker.mTelephonyManager
+                                        .unregisterCarrierPrivilegesCallback(
+                                                (TelephonyManager.CarrierPrivilegesCallback)
+                                                        specialAppTracker
+                                                                .mCarrierPrivilegedCallbacks
+                                                                .valueAt(size));
                             }
                             specialAppTracker.mCarrierPrivilegedCallbacks.clear();
                         } finally {
@@ -1582,7 +1936,10 @@ public final class FlexibilityController extends StateController {
                 }
                 return;
             case '\n':
-                long j6 = properties.getLong(str, BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS);
+                long j6 =
+                        properties.getLong(
+                                str,
+                                BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS);
                 fcConfig.FALLBACK_FLEXIBILITY_DEADLINE_MS = j6;
                 FlexibilityController flexibilityController7 = FlexibilityController.this;
                 if (flexibilityController7.mFallbackFlexibilityDeadlineMs != j6) {
@@ -1602,13 +1959,16 @@ public final class FlexibilityController extends StateController {
                     return;
                 }
                 if (DEBUG) {
-                    Slog.d("JobScheduler.Flex", "setConstraintSatisfied:  constraint: " + i + " state: " + z);
+                    Slog.d(
+                            "JobScheduler.Flex",
+                            "setConstraintSatisfied:  constraint: " + i + " state: " + z);
                 }
                 this.mLastSeenConstraintTimesElapsed.put(this.mSatisfiedFlexibleConstraints, j);
                 if (!z) {
                     this.mLastSeenConstraintTimesElapsed.put(i, j);
                 }
-                this.mSatisfiedFlexibleConstraints = (this.mSatisfiedFlexibleConstraints & (~i)) | (z ? i : 0);
+                this.mSatisfiedFlexibleConstraints =
+                        (this.mSatisfiedFlexibleConstraints & (~i)) | (z ? i : 0);
                 if ((i & 268435456) != 0) {
                     return;
                 }
@@ -1667,14 +2027,18 @@ public final class FlexibilityController extends StateController {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> Lf
             throw r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.job.controllers.FlexibilityController.setLocalPolicyForTesting(int, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.job.controllers.FlexibilityController.setLocalPolicyForTesting(int,"
+                    + " boolean):void");
     }
 
     @Override // com.android.server.job.controllers.StateController
     public final void startTrackingLocked() {
         if (this.mFlexibilityEnabled) {
             PrefetchController prefetchController = this.mPrefetchController;
-            PrefetchController.PrefetchChangedListener prefetchChangedListener = this.mPrefetchChangedListener;
+            PrefetchController.PrefetchChangedListener prefetchChangedListener =
+                    this.mPrefetchChangedListener;
             synchronized (prefetchController.mLock) {
                 prefetchController.mPrefetchChangedListeners.add(prefetchChangedListener);
             }
@@ -1686,13 +2050,20 @@ public final class FlexibilityController extends StateController {
         if (jobStatus.lastEvaluatedBias == 40) {
             return;
         }
-        JobScoreTracker jobScoreTracker = (JobScoreTracker) this.mJobScoreTrackers.get(jobStatus.sourceUid, jobStatus.sourcePackageName);
+        JobScoreTracker jobScoreTracker =
+                (JobScoreTracker)
+                        this.mJobScoreTrackers.get(
+                                jobStatus.sourceUid, jobStatus.sourcePackageName);
         if (jobScoreTracker == null) {
             Slog.e("JobScheduler.Flex", "Unprepared a job that didn't result in a score change");
             return;
         }
         int priority = jobStatus.job.getPriority();
-        int i = -this.mFallbackFlexibilityDeadlineScores.get(priority, FcConfig.DEFAULT_FALLBACK_FLEXIBILITY_DEADLINE_SCORES.get(priority, priority / 100));
+        int i =
+                -this.mFallbackFlexibilityDeadlineScores.get(
+                        priority,
+                        FcConfig.DEFAULT_FALLBACK_FLEXIBILITY_DEADLINE_SCORES.get(
+                                priority, priority / 100));
         JobSchedulerService.sElapsedRealtimeClock.getClass();
         jobScoreTracker.addScore(i, SystemClock.elapsedRealtime());
     }

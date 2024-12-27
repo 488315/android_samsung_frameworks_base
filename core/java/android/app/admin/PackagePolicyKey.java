@@ -5,29 +5,34 @@ import android.app.admin.flags.Flags;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.Objects;
-import org.xmlpull.v1.XmlPullParserException;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class PackagePolicyKey extends PolicyKey {
     private static final String ATTR_PACKAGE_NAME = "package-name";
-    public static final Parcelable.Creator<PackagePolicyKey> CREATOR = new Parcelable.Creator<PackagePolicyKey>() { // from class: android.app.admin.PackagePolicyKey.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PackagePolicyKey createFromParcel(Parcel source) {
-            return new PackagePolicyKey(source);
-        }
+    public static final Parcelable.Creator<PackagePolicyKey> CREATOR =
+            new Parcelable.Creator<
+                    PackagePolicyKey>() { // from class: android.app.admin.PackagePolicyKey.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PackagePolicyKey createFromParcel(Parcel source) {
+                    return new PackagePolicyKey(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PackagePolicyKey[] newArray(int size) {
-            return new PackagePolicyKey[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PackagePolicyKey[] newArray(int size) {
+                    return new PackagePolicyKey[size];
+                }
+            };
     private final String mPackageName;
 
     public PackagePolicyKey(String key, String packageName) {
@@ -59,7 +64,8 @@ public final class PackagePolicyKey extends PolicyKey {
     }
 
     @Override // android.app.admin.PolicyKey
-    public PackagePolicyKey readFromXml(TypedXmlPullParser parser) throws XmlPullParserException, IOException {
+    public PackagePolicyKey readFromXml(TypedXmlPullParser parser)
+            throws XmlPullParserException, IOException {
         String policyKey = parser.getAttributeValue(null, "policy-identifier");
         String packageName = parser.getAttributeValue(null, ATTR_PACKAGE_NAME);
         return new PackagePolicyKey(policyKey, packageName);
@@ -82,7 +88,8 @@ public final class PackagePolicyKey extends PolicyKey {
             return false;
         }
         PackagePolicyKey other = (PackagePolicyKey) o;
-        if (Objects.equals(getIdentifier(), other.getIdentifier()) && Objects.equals(this.mPackageName, other.mPackageName)) {
+        if (Objects.equals(getIdentifier(), other.getIdentifier())
+                && Objects.equals(this.mPackageName, other.mPackageName)) {
             return true;
         }
         return false;
@@ -94,7 +101,11 @@ public final class PackagePolicyKey extends PolicyKey {
     }
 
     public String toString() {
-        return "PackagePolicyKey{mPolicyKey= " + getIdentifier() + "; mPackageName= " + this.mPackageName + "}";
+        return "PackagePolicyKey{mPolicyKey= "
+                + getIdentifier()
+                + "; mPackageName= "
+                + this.mPackageName
+                + "}";
     }
 
     @Override // android.os.Parcelable

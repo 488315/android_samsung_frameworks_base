@@ -9,11 +9,14 @@ public interface DeviceIdleInternal {
         void onDeviceStationaryChanged(boolean z);
     }
 
-    void addPowerSaveTempWhitelistApp(int i, String str, long j, int i2, int i3, boolean z, int i4, String str2);
+    void addPowerSaveTempWhitelistApp(
+            int i, String str, long j, int i2, int i3, boolean z, int i4, String str2);
 
-    void addPowerSaveTempWhitelistApp(int i, String str, long j, int i2, boolean z, int i3, String str2);
+    void addPowerSaveTempWhitelistApp(
+            int i, String str, long j, int i2, boolean z, int i3, String str2);
 
-    void addPowerSaveTempWhitelistAppDirect(int i, long j, int i2, boolean z, int i3, String str, int i4);
+    void addPowerSaveTempWhitelistAppDirect(
+            int i, long j, int i2, boolean z, int i3, String str, int i4);
 
     void exitIdle(String str);
 
@@ -31,7 +34,8 @@ public interface DeviceIdleInternal {
 
     void onConstraintStateChanged(IDeviceIdleConstraint iDeviceIdleConstraint, boolean z);
 
-    void registerDeviceIdleConstraint(IDeviceIdleConstraint iDeviceIdleConstraint, String str, int i);
+    void registerDeviceIdleConstraint(
+            IDeviceIdleConstraint iDeviceIdleConstraint, String str, int i);
 
     void registerStationaryListener(StationaryListener stationaryListener);
 

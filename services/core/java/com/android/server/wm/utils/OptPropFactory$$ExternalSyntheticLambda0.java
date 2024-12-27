@@ -7,7 +7,8 @@ public final /* synthetic */ class OptPropFactory$$ExternalSyntheticLambda0 {
     public final /* synthetic */ OptPropFactory f$0;
     public final /* synthetic */ String f$1;
 
-    public /* synthetic */ OptPropFactory$$ExternalSyntheticLambda0(OptPropFactory optPropFactory, String str, int i) {
+    public /* synthetic */ OptPropFactory$$ExternalSyntheticLambda0(
+            OptPropFactory optPropFactory, String str, int i) {
         this.$r8$classId = i;
         this.f$0 = optPropFactory;
         this.f$1 = str;

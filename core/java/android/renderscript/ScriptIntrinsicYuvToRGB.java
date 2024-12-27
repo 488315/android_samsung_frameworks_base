@@ -1,6 +1,5 @@
 package android.renderscript;
 
-import android.renderscript.Script;
 
 @Deprecated
 /* loaded from: classes3.dex */

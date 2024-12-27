@@ -2,9 +2,6 @@ package android.app.backup;
 
 import android.Manifest;
 import android.annotation.SystemApi;
-import android.app.backup.IBackupManager;
-import android.app.backup.IBackupObserver;
-import android.app.backup.ISelectBackupTransportCallback;
 import android.app.compat.CompatChanges;
 import android.content.ComponentName;
 import android.content.Context;
@@ -17,56 +14,47 @@ import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.util.Log;
 import android.util.Pair;
+
 import java.util.List;
 import java.util.Map;
 
 /* loaded from: classes.dex */
 public class BackupManager {
 
-    @SystemApi
-    public static final int ERROR_AGENT_FAILURE = -1003;
+    @SystemApi public static final int ERROR_AGENT_FAILURE = -1003;
 
-    @SystemApi
-    public static final int ERROR_BACKUP_CANCELLED = -2003;
+    @SystemApi public static final int ERROR_BACKUP_CANCELLED = -2003;
 
-    @SystemApi
-    public static final int ERROR_BACKUP_NOT_ALLOWED = -2001;
+    @SystemApi public static final int ERROR_BACKUP_NOT_ALLOWED = -2001;
 
-    @SystemApi
-    public static final int ERROR_PACKAGE_NOT_FOUND = -2002;
+    @SystemApi public static final int ERROR_PACKAGE_NOT_FOUND = -2002;
 
-    @SystemApi
-    public static final int ERROR_TRANSPORT_ABORTED = -1000;
+    @SystemApi public static final int ERROR_TRANSPORT_ABORTED = -1000;
 
-    @SystemApi
-    public static final int ERROR_TRANSPORT_INVALID = -2;
+    @SystemApi public static final int ERROR_TRANSPORT_INVALID = -2;
 
-    @SystemApi
-    public static final int ERROR_TRANSPORT_PACKAGE_REJECTED = -1002;
+    @SystemApi public static final int ERROR_TRANSPORT_PACKAGE_REJECTED = -1002;
 
-    @SystemApi
-    public static final int ERROR_TRANSPORT_QUOTA_EXCEEDED = -1005;
+    @SystemApi public static final int ERROR_TRANSPORT_QUOTA_EXCEEDED = -1005;
 
-    @SystemApi
-    public static final int ERROR_TRANSPORT_UNAVAILABLE = -1;
+    @SystemApi public static final int ERROR_TRANSPORT_UNAVAILABLE = -1;
     public static final String EXTRA_BACKUP_SERVICES_AVAILABLE = "backup_services_available";
 
-    @SystemApi
-    public static final int FLAG_NON_INCREMENTAL_BACKUP = 1;
+    @SystemApi public static final int FLAG_NON_INCREMENTAL_BACKUP = 1;
     public static final long IS_BACKUP_SERVICE_ACTIVE_ENFORCE_PERMISSION_IN_SERVICE = 158482162;
 
-    @SystemApi
-    public static final String PACKAGE_MANAGER_SENTINEL = "@pm@";
+    @SystemApi public static final String PACKAGE_MANAGER_SENTINEL = "@pm@";
 
-    @SystemApi
-    public static final int SUCCESS = 0;
+    @SystemApi public static final int SUCCESS = 0;
     private static final String TAG = "BackupManager";
     public static IBackupManager sService;
     private Context mContext;
 
     private static void checkServiceBinder() {
         if (sService == null) {
-            sService = IBackupManager.Stub.asInterface(ServiceManager.getService(Context.BACKUP_SERVICE));
+            sService =
+                    IBackupManager.Stub.asInterface(
+                            ServiceManager.getService(Context.BACKUP_SERVICE));
         }
     }
 
@@ -115,7 +103,10 @@ public class BackupManager {
     @SystemApi
     @Deprecated
     public int requestRestore(RestoreObserver observer, BackupManagerMonitor monitor) {
-        Log.w(TAG, "requestRestore(): Since Android P app can no longer request restoring of its backup.");
+        Log.w(
+                TAG,
+                "requestRestore(): Since Android P app can no longer request restoring of its"
+                        + " backup.");
         return -1;
     }
 
@@ -126,7 +117,8 @@ public class BackupManager {
             return null;
         }
         try {
-            IRestoreSession binder = sService.beginRestoreSessionForUser(this.mContext.getUserId(), null, null);
+            IRestoreSession binder =
+                    sService.beginRestoreSessionForUser(this.mContext.getUserId(), null, null);
             if (binder == null) {
                 return null;
             }
@@ -180,8 +172,10 @@ public class BackupManager {
 
     @SystemApi
     public boolean isBackupServiceActive(UserHandle user) {
-        if (!CompatChanges.isChangeEnabled(IS_BACKUP_SERVICE_ACTIVE_ENFORCE_PERMISSION_IN_SERVICE)) {
-            this.mContext.enforceCallingOrSelfPermission(Manifest.permission.BACKUP, "isBackupServiceActive");
+        if (!CompatChanges.isChangeEnabled(
+                IS_BACKUP_SERVICE_ACTIVE_ENFORCE_PERMISSION_IN_SERVICE)) {
+            this.mContext.enforceCallingOrSelfPermission(
+                    Manifest.permission.BACKUP, "isBackupServiceActive");
         }
         checkServiceBinder();
         if (sService != null) {
@@ -251,16 +245,41 @@ public class BackupManager {
 
     @SystemApi
     @Deprecated
-    public void updateTransportAttributes(ComponentName transportComponent, String name, Intent configurationIntent, String currentDestinationString, Intent dataManagementIntent, String dataManagementLabel) {
-        updateTransportAttributes(transportComponent, name, configurationIntent, currentDestinationString, dataManagementIntent, (CharSequence) dataManagementLabel);
+    public void updateTransportAttributes(
+            ComponentName transportComponent,
+            String name,
+            Intent configurationIntent,
+            String currentDestinationString,
+            Intent dataManagementIntent,
+            String dataManagementLabel) {
+        updateTransportAttributes(
+                transportComponent,
+                name,
+                configurationIntent,
+                currentDestinationString,
+                dataManagementIntent,
+                (CharSequence) dataManagementLabel);
     }
 
     @SystemApi
-    public void updateTransportAttributes(ComponentName transportComponent, String name, Intent configurationIntent, String currentDestinationString, Intent dataManagementIntent, CharSequence dataManagementLabel) {
+    public void updateTransportAttributes(
+            ComponentName transportComponent,
+            String name,
+            Intent configurationIntent,
+            String currentDestinationString,
+            Intent dataManagementIntent,
+            CharSequence dataManagementLabel) {
         checkServiceBinder();
         if (sService != null) {
             try {
-                sService.updateTransportAttributesForUser(this.mContext.getUserId(), transportComponent, name, configurationIntent, currentDestinationString, dataManagementIntent, dataManagementLabel);
+                sService.updateTransportAttributesForUser(
+                        this.mContext.getUserId(),
+                        transportComponent,
+                        name,
+                        configurationIntent,
+                        currentDestinationString,
+                        dataManagementIntent,
+                        dataManagementLabel);
             } catch (RemoteException e) {
                 Log.e(TAG, "describeTransport() couldn't connect");
             }
@@ -283,7 +302,8 @@ public class BackupManager {
     }
 
     @SystemApi
-    public void selectBackupTransport(ComponentName transport, SelectBackupTransportCallback listener) {
+    public void selectBackupTransport(
+            ComponentName transport, SelectBackupTransportCallback listener) {
         SelectTransportListenerWrapper wrapper;
         checkServiceBinder();
         if (sService != null) {
@@ -297,7 +317,8 @@ public class BackupManager {
                     return;
                 }
             }
-            sService.selectBackupTransportAsyncForUser(this.mContext.getUserId(), transport, wrapper);
+            sService.selectBackupTransportAsyncForUser(
+                    this.mContext.getUserId(), transport, wrapper);
         }
     }
 
@@ -318,7 +339,8 @@ public class BackupManager {
         checkServiceBinder();
         if (sService != null) {
             try {
-                return sService.getAvailableRestoreTokenForUser(this.mContext.getUserId(), packageName);
+                return sService.getAvailableRestoreTokenForUser(
+                        this.mContext.getUserId(), packageName);
             } catch (RemoteException e) {
                 Log.e(TAG, "getAvailableRestoreToken() couldn't connect");
                 return 0L;
@@ -332,7 +354,8 @@ public class BackupManager {
         checkServiceBinder();
         if (sService != null) {
             try {
-                return sService.isAppEligibleForBackupForUser(this.mContext.getUserId(), packageName);
+                return sService.isAppEligibleForBackupForUser(
+                        this.mContext.getUserId(), packageName);
             } catch (RemoteException e) {
                 Log.e(TAG, "isAppEligibleForBackup(pkg) couldn't connect");
                 return false;
@@ -347,7 +370,8 @@ public class BackupManager {
     }
 
     @SystemApi
-    public int requestBackup(String[] packages, BackupObserver observer, BackupManagerMonitor monitor, int flags) {
+    public int requestBackup(
+            String[] packages, BackupObserver observer, BackupManagerMonitor monitor, int flags) {
         BackupObserverWrapper observerWrapper;
         checkServiceBinder();
         if (sService != null) {
@@ -412,7 +436,8 @@ public class BackupManager {
         checkServiceBinder();
         if (sService != null) {
             try {
-                return sService.getConfigurationIntentForUser(this.mContext.getUserId(), transportName);
+                return sService.getConfigurationIntentForUser(
+                        this.mContext.getUserId(), transportName);
             } catch (RemoteException e) {
                 Log.e(TAG, "getConfigurationIntent() couldn't connect");
                 return null;
@@ -426,7 +451,8 @@ public class BackupManager {
         checkServiceBinder();
         if (sService != null) {
             try {
-                return sService.getDestinationStringForUser(this.mContext.getUserId(), transportName);
+                return sService.getDestinationStringForUser(
+                        this.mContext.getUserId(), transportName);
             } catch (RemoteException e) {
                 Log.e(TAG, "getDestinationString() couldn't connect");
                 return null;
@@ -440,7 +466,8 @@ public class BackupManager {
         checkServiceBinder();
         if (sService != null) {
             try {
-                return sService.getDataManagementIntentForUser(this.mContext.getUserId(), transportName);
+                return sService.getDataManagementIntentForUser(
+                        this.mContext.getUserId(), transportName);
             } catch (RemoteException e) {
                 Log.e(TAG, "getDataManagementIntent() couldn't connect");
                 return null;
@@ -464,7 +491,8 @@ public class BackupManager {
         checkServiceBinder();
         if (sService != null) {
             try {
-                return sService.getDataManagementLabelForUser(this.mContext.getUserId(), transportName);
+                return sService.getDataManagementLabelForUser(
+                        this.mContext.getUserId(), transportName);
             } catch (RemoteException e) {
                 Log.e(TAG, "getDataManagementIntentLabel() couldn't connect");
                 return null;
@@ -473,7 +501,8 @@ public class BackupManager {
         return null;
     }
 
-    public Map<String, Object> semBackupPackage(ParcelFileDescriptor fd, String[] packageNames, String password, int flag) {
+    public Map<String, Object> semBackupPackage(
+            ParcelFileDescriptor fd, String[] packageNames, String password, int flag) {
         checkServiceBinder();
         if (sService != null) {
             try {
@@ -487,7 +516,12 @@ public class BackupManager {
         return null;
     }
 
-    public Map<String, Object> semBackupPackagePath(ParcelFileDescriptor fd, String[] packageNames, String password, int flag, String[] paths) {
+    public Map<String, Object> semBackupPackagePath(
+            ParcelFileDescriptor fd,
+            String[] packageNames,
+            String password,
+            int flag,
+            String[] paths) {
         checkServiceBinder();
         if (sService != null) {
             try {
@@ -636,7 +670,8 @@ public class BackupManager {
     public BackupRestoreEventLogger getBackupRestoreEventLogger(BackupAgent backupAgent) {
         BackupRestoreEventLogger logger = backupAgent.getBackupRestoreEventLogger();
         if (logger == null) {
-            throw new IllegalStateException("Attempting to get logger on an uninitialised BackupAgent");
+            throw new IllegalStateException(
+                    "Attempting to get logger on an uninitialised BackupAgent");
         }
         return backupAgent.getBackupRestoreEventLogger();
     }
@@ -651,7 +686,8 @@ public class BackupManager {
         checkServiceBinder();
         if (sService != null) {
             try {
-                sService.reportDelayedRestoreResult(this.mContext.getPackageName(), logger.getLoggingResults());
+                sService.reportDelayedRestoreResult(
+                        this.mContext.getPackageName(), logger.getLoggingResults());
             } catch (RemoteException e) {
                 Log.w(TAG, "reportDelayedRestoreResult() couldn't connect");
             }
@@ -666,32 +702,37 @@ public class BackupManager {
         final BackupObserver mObserver;
 
         BackupObserverWrapper(Context context, BackupObserver observer) {
-            this.mHandler = new Handler(context.getMainLooper()) { // from class: android.app.backup.BackupManager.BackupObserverWrapper.1
-                @Override // android.os.Handler
-                public void handleMessage(Message msg) {
-                    switch (msg.what) {
-                        case 1:
-                            Pair<String, BackupProgress> obj = (Pair) msg.obj;
-                            BackupObserverWrapper.this.mObserver.onUpdate(obj.first, obj.second);
-                            break;
-                        case 2:
-                            BackupObserverWrapper.this.mObserver.onResult((String) msg.obj, msg.arg1);
-                            break;
-                        case 3:
-                            BackupObserverWrapper.this.mObserver.backupFinished(msg.arg1);
-                            break;
-                        default:
-                            Log.w(BackupManager.TAG, "Unknown message: " + msg);
-                            break;
-                    }
-                }
-            };
+            this.mHandler =
+                    new Handler(context.getMainLooper()) { // from class:
+                        // android.app.backup.BackupManager.BackupObserverWrapper.1
+                        @Override // android.os.Handler
+                        public void handleMessage(Message msg) {
+                            switch (msg.what) {
+                                case 1:
+                                    Pair<String, BackupProgress> obj = (Pair) msg.obj;
+                                    BackupObserverWrapper.this.mObserver.onUpdate(
+                                            obj.first, obj.second);
+                                    break;
+                                case 2:
+                                    BackupObserverWrapper.this.mObserver.onResult(
+                                            (String) msg.obj, msg.arg1);
+                                    break;
+                                case 3:
+                                    BackupObserverWrapper.this.mObserver.backupFinished(msg.arg1);
+                                    break;
+                                default:
+                                    Log.w(BackupManager.TAG, "Unknown message: " + msg);
+                                    break;
+                            }
+                        }
+                    };
             this.mObserver = observer;
         }
 
         @Override // android.app.backup.IBackupObserver
         public void onUpdate(String currentPackage, BackupProgress backupProgress) {
-            this.mHandler.sendMessage(this.mHandler.obtainMessage(1, Pair.create(currentPackage, backupProgress)));
+            this.mHandler.sendMessage(
+                    this.mHandler.obtainMessage(1, Pair.create(currentPackage, backupProgress)));
         }
 
         @Override // android.app.backup.IBackupObserver
@@ -716,22 +757,26 @@ public class BackupManager {
 
         @Override // android.app.backup.ISelectBackupTransportCallback
         public void onSuccess(final String transportName) {
-            this.mHandler.post(new Runnable() { // from class: android.app.backup.BackupManager.SelectTransportListenerWrapper.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    SelectTransportListenerWrapper.this.mListener.onSuccess(transportName);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                        // android.app.backup.BackupManager.SelectTransportListenerWrapper.1
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SelectTransportListenerWrapper.this.mListener.onSuccess(transportName);
+                        }
+                    });
         }
 
         @Override // android.app.backup.ISelectBackupTransportCallback
         public void onFailure(final int reason) {
-            this.mHandler.post(new Runnable() { // from class: android.app.backup.BackupManager.SelectTransportListenerWrapper.2
-                @Override // java.lang.Runnable
-                public void run() {
-                    SelectTransportListenerWrapper.this.mListener.onFailure(reason);
-                }
-            });
+            this.mHandler.post(
+                    new Runnable() { // from class:
+                        // android.app.backup.BackupManager.SelectTransportListenerWrapper.2
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            SelectTransportListenerWrapper.this.mListener.onFailure(reason);
+                        }
+                    });
         }
     }
 }

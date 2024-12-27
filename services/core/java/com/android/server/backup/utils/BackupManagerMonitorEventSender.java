@@ -6,8 +6,10 @@ import android.content.pm.PackageInfo;
 import android.os.Bundle;
 import android.os.RemoteException;
 import android.util.Slog;
+
 import com.android.internal.infra.AndroidFuture;
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -23,7 +25,9 @@ public final class BackupManagerMonitorEventSender {
         this.mBackupManagerMonitorDumpsysUtils = new BackupManagerMonitorDumpsysUtils();
     }
 
-    public BackupManagerMonitorEventSender(IBackupManagerMonitor iBackupManagerMonitor, BackupManagerMonitorDumpsysUtils backupManagerMonitorDumpsysUtils) {
+    public BackupManagerMonitorEventSender(
+            IBackupManagerMonitor iBackupManagerMonitor,
+            BackupManagerMonitorDumpsysUtils backupManagerMonitorDumpsysUtils) {
         this.mMonitor = iBackupManagerMonitor;
         this.mBackupManagerMonitorDumpsysUtils = backupManagerMonitorDumpsysUtils;
     }
@@ -32,9 +36,12 @@ public final class BackupManagerMonitorEventSender {
         return AccountManagerService$$ExternalSyntheticOutline0.m142m(str, str2);
     }
 
-    public final void monitorAgentLoggingResults(PackageInfo packageInfo, IBackupAgent iBackupAgent) {
+    public final void monitorAgentLoggingResults(
+            PackageInfo packageInfo, IBackupAgent iBackupAgent) {
         if (this.mMonitor == null) {
-            Slog.i("BackupManagerService", "backup manager monitor is null unable to send event" + packageInfo);
+            Slog.i(
+                    "BackupManagerService",
+                    "backup manager monitor is null unable to send event" + packageInfo);
         }
         try {
             AndroidFuture androidFuture = new AndroidFuture();
@@ -49,7 +56,10 @@ public final class BackupManagerMonitorEventSender {
             bundle.putInt("android.app.backup.extra.OPERATION_TYPE", intValue);
             monitorEvent(52, packageInfo, 2, bundle);
         } catch (TimeoutException e) {
-            Slog.w("BackupManagerService", "Timeout while waiting to retrieve logging results from agent", e);
+            Slog.w(
+                    "BackupManagerService",
+                    "Timeout while waiting to retrieve logging results from agent",
+                    e);
         } catch (Exception e2) {
             Slog.w("BackupManagerService", "Failed to retrieve logging results from agent", e2);
         }
@@ -61,21 +71,30 @@ public final class BackupManagerMonitorEventSender {
             bundle2.putInt("android.app.backup.extra.LOG_EVENT_ID", i);
             bundle2.putInt("android.app.backup.extra.LOG_EVENT_CATEGORY", i2);
             if (packageInfo != null) {
-                bundle2.putString("android.app.backup.extra.LOG_EVENT_PACKAGE_NAME", packageInfo.packageName);
-                bundle2.putInt("android.app.backup.extra.LOG_EVENT_PACKAGE_VERSION", packageInfo.versionCode);
-                bundle2.putLong("android.app.backup.extra.LOG_EVENT_PACKAGE_FULL_VERSION", packageInfo.getLongVersionCode());
+                bundle2.putString(
+                        "android.app.backup.extra.LOG_EVENT_PACKAGE_NAME", packageInfo.packageName);
+                bundle2.putInt(
+                        "android.app.backup.extra.LOG_EVENT_PACKAGE_VERSION",
+                        packageInfo.versionCode);
+                bundle2.putLong(
+                        "android.app.backup.extra.LOG_EVENT_PACKAGE_FULL_VERSION",
+                        packageInfo.getLongVersionCode());
             }
             if (bundle != null) {
                 bundle2.putAll(bundle);
-                if (bundle.containsKey("android.app.backup.extra.OPERATION_TYPE") && bundle.getInt("android.app.backup.extra.OPERATION_TYPE") == 1) {
-                    this.mBackupManagerMonitorDumpsysUtils.parseBackupManagerMonitorRestoreEventForDumpsys(bundle2);
+                if (bundle.containsKey("android.app.backup.extra.OPERATION_TYPE")
+                        && bundle.getInt("android.app.backup.extra.OPERATION_TYPE") == 1) {
+                    this.mBackupManagerMonitorDumpsysUtils
+                            .parseBackupManagerMonitorRestoreEventForDumpsys(bundle2);
                 }
             }
             IBackupManagerMonitor iBackupManagerMonitor = this.mMonitor;
             if (iBackupManagerMonitor != null) {
                 iBackupManagerMonitor.onEvent(bundle2);
             } else {
-                Slog.w("BackupManagerService", "backup manager monitor is null unable to send event");
+                Slog.w(
+                        "BackupManagerService",
+                        "backup manager monitor is null unable to send event");
             }
         } catch (RemoteException unused) {
             this.mMonitor = null;

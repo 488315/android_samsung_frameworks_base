@@ -19,8 +19,7 @@ public abstract class CloudSearchService extends Service {
         super.onCreate();
     }
 
-    public final void returnResults(String requestId, SearchResponse response) {
-    }
+    public final void returnResults(String requestId, SearchResponse response) {}
 
     @Override // android.app.Service
     public final IBinder onBind(Intent intent) {

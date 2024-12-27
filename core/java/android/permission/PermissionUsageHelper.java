@@ -20,8 +20,11 @@ import android.telephony.TelephonyManager;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Slog;
+
 import com.android.internal.hidden_from_bootclasspath.android.permission.flags.Flags;
+
 import com.samsung.android.knox.zt.internal.KnoxZtInternalConst;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -31,11 +34,13 @@ import java.util.Objects;
 import java.util.function.Function;
 
 /* loaded from: classes3.dex */
-public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedListener, AppOpsManager.OnOpStartedListener {
+public class PermissionUsageHelper
+        implements AppOpsManager.OnOpActiveChangedListener, AppOpsManager.OnOpStartedListener {
     private static final long DEFAULT_RECENT_TIME_MS = 15000;
     private static final long DEFAULT_RUNNING_TIME_MS = 5000;
     private static final String PROPERTY_CAMERA_MIC_ICONS_ENABLED = "camera_mic_icons_enabled";
-    private static final String PROPERTY_LOCATION_INDICATORS_ENABLED = "location_indicators_enabled";
+    private static final String PROPERTY_LOCATION_INDICATORS_ENABLED =
+            "location_indicators_enabled";
     private static final String RECENT_ACCESS_TIME_MS = "recent_access_time_ms";
     private static final String RUNNING_ACCESS_TIME_MS = "running_access_time_ms";
     private static final String SYSTEM_PKG = "android";
@@ -44,26 +49,41 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
     private PackageManager mPkgManager;
     private VirtualDeviceManager mVirtualDeviceManager;
     private static final String LOG_TAG = PermissionUsageHelper.class.getName();
-    private static final List<String> LOCATION_OPS = List.of(AppOpsManager.OPSTR_COARSE_LOCATION, AppOpsManager.OPSTR_FINE_LOCATION);
-    private static final List<String> MIC_OPS = List.of(AppOpsManager.OPSTR_PHONE_CALL_MICROPHONE, AppOpsManager.OPSTR_RECEIVE_AMBIENT_TRIGGER_AUDIO, AppOpsManager.OPSTR_RECORD_AUDIO);
-    private static final List<String> CAMERA_OPS = List.of(AppOpsManager.OPSTR_PHONE_CALL_CAMERA, AppOpsManager.OPSTR_CAMERA);
-    private final ArrayMap<Integer, ArrayList<AccessChainLink>> mAttributionChains = new ArrayMap<>();
+    private static final List<String> LOCATION_OPS =
+            List.of(AppOpsManager.OPSTR_COARSE_LOCATION, AppOpsManager.OPSTR_FINE_LOCATION);
+    private static final List<String> MIC_OPS =
+            List.of(
+                    AppOpsManager.OPSTR_PHONE_CALL_MICROPHONE,
+                    AppOpsManager.OPSTR_RECEIVE_AMBIENT_TRIGGER_AUDIO,
+                    AppOpsManager.OPSTR_RECORD_AUDIO);
+    private static final List<String> CAMERA_OPS =
+            List.of(AppOpsManager.OPSTR_PHONE_CALL_CAMERA, AppOpsManager.OPSTR_CAMERA);
+    private final ArrayMap<Integer, ArrayList<AccessChainLink>> mAttributionChains =
+            new ArrayMap<>();
     private ArrayMap<UserHandle, Context> mUserContexts = new ArrayMap<>();
 
     private static boolean shouldShowIndicators() {
-        return DeviceConfig.getBoolean(KnoxZtInternalConst.Event.LogKeys.PRIVACY, "camera_mic_icons_enabled", true);
+        return DeviceConfig.getBoolean(
+                KnoxZtInternalConst.Event.LogKeys.PRIVACY, "camera_mic_icons_enabled", true);
     }
 
     private static boolean shouldShowLocationIndicator() {
-        return DeviceConfig.getBoolean(KnoxZtInternalConst.Event.LogKeys.PRIVACY, "location_indicators_enabled", false);
+        return DeviceConfig.getBoolean(
+                KnoxZtInternalConst.Event.LogKeys.PRIVACY, "location_indicators_enabled", false);
     }
 
     private static long getRecentThreshold(Long now) {
-        return now.longValue() - DeviceConfig.getLong(KnoxZtInternalConst.Event.LogKeys.PRIVACY, RECENT_ACCESS_TIME_MS, DEFAULT_RECENT_TIME_MS);
+        return now.longValue()
+                - DeviceConfig.getLong(
+                        KnoxZtInternalConst.Event.LogKeys.PRIVACY,
+                        RECENT_ACCESS_TIME_MS,
+                        DEFAULT_RECENT_TIME_MS);
     }
 
     private static long getRunningThreshold(Long now) {
-        return now.longValue() - DeviceConfig.getLong(KnoxZtInternalConst.Event.LogKeys.PRIVACY, RUNNING_ACCESS_TIME_MS, 5000L);
+        return now.longValue()
+                - DeviceConfig.getLong(
+                        KnoxZtInternalConst.Event.LogKeys.PRIVACY, RUNNING_ACCESS_TIME_MS, 5000L);
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
@@ -144,7 +164,8 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
         this.mContext = context;
         this.mPkgManager = context.getPackageManager();
         this.mAppOpsManager = (AppOpsManager) context.getSystemService(AppOpsManager.class);
-        this.mVirtualDeviceManager = (VirtualDeviceManager) context.getSystemService(VirtualDeviceManager.class);
+        this.mVirtualDeviceManager =
+                (VirtualDeviceManager) context.getSystemService(VirtualDeviceManager.class);
         this.mUserContexts.put(Process.myUserHandle(), this.mContext);
         String[] opStrs = {AppOpsManager.OPSTR_CAMERA, AppOpsManager.OPSTR_RECORD_AUDIO};
         this.mAppOpsManager.startWatchingActive(opStrs, context.getMainExecutor(), this);
@@ -165,11 +186,17 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
     }
 
     @Override // android.app.AppOpsManager.OnOpActiveChangedListener
-    public void onOpActiveChanged(String op, int uid, String packageName, boolean active) {
-    }
+    public void onOpActiveChanged(String op, int uid, String packageName, boolean active) {}
 
     @Override // android.app.AppOpsManager.OnOpActiveChangedListener
-    public void onOpActiveChanged(String op, int uid, String packageName, String attributionTag, boolean active, int attributionFlags, int attributionChainId) {
+    public void onOpActiveChanged(
+            String op,
+            int uid,
+            String packageName,
+            String attributionTag,
+            boolean active,
+            int attributionFlags,
+            int attributionChainId) {
         if (active) {
             return;
         }
@@ -187,7 +214,8 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
                         if (j < chainSize) {
                             AccessChainLink link = chain.get(j);
                             try {
-                                if (!link.packageAndOpEquals(op, packageName, attributionTag, uid)) {
+                                if (!link.packageAndOpEquals(
+                                        op, packageName, attributionTag, uid)) {
                                     j++;
                                 } else {
                                     toRemove.add(Integer.valueOf(chainId));
@@ -208,11 +236,20 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
     }
 
     @Override // android.app.AppOpsManager.OnOpStartedListener
-    public void onOpStarted(int op, int uid, String packageName, String attributionTag, int flags, int result) {
-    }
+    public void onOpStarted(
+            int op, int uid, String packageName, String attributionTag, int flags, int result) {}
 
     @Override // android.app.AppOpsManager.OnOpStartedListener
-    public void onOpStarted(int op, int uid, String packageName, String attributionTag, int flags, int result, int startedType, int attributionFlags, int attributionChainId) {
+    public void onOpStarted(
+            int op,
+            int uid,
+            String packageName,
+            String attributionTag,
+            int flags,
+            int result,
+            int startedType,
+            int attributionFlags,
+            int attributionChainId) {
         if (startedType != 0) {
             if (attributionChainId == -1 || attributionFlags == 0) {
                 return;
@@ -221,19 +258,37 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
                 return;
             }
             synchronized (this.mAttributionChains) {
-                addLinkToChainIfNotPresentLocked(AppOpsManager.opToPublicName(op), packageName, uid, attributionTag, attributionFlags, attributionChainId);
+                addLinkToChainIfNotPresentLocked(
+                        AppOpsManager.opToPublicName(op),
+                        packageName,
+                        uid,
+                        attributionTag,
+                        attributionFlags,
+                        attributionChainId);
             }
         }
     }
 
-    private void addLinkToChainIfNotPresentLocked(String op, String packageName, int uid, String attributionTag, int attributionFlags, int attributionChainId) {
-        ArrayList<AccessChainLink> currentChain = this.mAttributionChains.computeIfAbsent(Integer.valueOf(attributionChainId), new Function() { // from class: android.permission.PermissionUsageHelper$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return PermissionUsageHelper.lambda$addLinkToChainIfNotPresentLocked$0((Integer) obj);
-            }
-        });
-        AccessChainLink link = new AccessChainLink(op, packageName, attributionTag, uid, attributionFlags);
+    private void addLinkToChainIfNotPresentLocked(
+            String op,
+            String packageName,
+            int uid,
+            String attributionTag,
+            int attributionFlags,
+            int attributionChainId) {
+        ArrayList<AccessChainLink> currentChain =
+                this.mAttributionChains.computeIfAbsent(
+                        Integer.valueOf(attributionChainId),
+                        new Function() { // from class:
+                                         // android.permission.PermissionUsageHelper$$ExternalSyntheticLambda0
+                            @Override // java.util.function.Function
+                            public final Object apply(Object obj) {
+                                return PermissionUsageHelper
+                                        .lambda$addLinkToChainIfNotPresentLocked$0((Integer) obj);
+                            }
+                        });
+        AccessChainLink link =
+                new AccessChainLink(op, packageName, attributionTag, uid, attributionFlags);
         if (currentChain.contains(link)) {
             return;
         }
@@ -251,7 +306,8 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
         return new ArrayList();
     }
 
-    public List<PermissionGroupUsage> getOpUsageDataByDevice(boolean includeMicrophoneUsage, String deviceId) {
+    public List<PermissionGroupUsage> getOpUsageDataByDevice(
+            boolean includeMicrophoneUsage, String deviceId) {
         boolean isPhone;
         String permGroup;
         PermissionUsageHelper permissionUsageHelper = this;
@@ -266,18 +322,27 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
         if (includeMicrophoneUsage) {
             ops.addAll(MIC_OPS);
         }
-        Map<String, List<OpUsage>> rawUsages = permissionUsageHelper.getOpUsagesByDevice(ops, deviceId);
+        Map<String, List<OpUsage>> rawUsages =
+                permissionUsageHelper.getOpUsagesByDevice(ops, deviceId);
         ArrayList<String> usedPermGroups = new ArrayList<>(rawUsages.keySet());
-        AudioManager audioManager = (AudioManager) permissionUsageHelper.mContext.getSystemService(AudioManager.class);
+        AudioManager audioManager =
+                (AudioManager) permissionUsageHelper.mContext.getSystemService(AudioManager.class);
         String str = AppOpsManager.OPSTR_PHONE_CALL_CAMERA;
         boolean contains = usedPermGroups.contains(AppOpsManager.OPSTR_PHONE_CALL_CAMERA);
         String str2 = AppOpsManager.OPSTR_PHONE_CALL_MICROPHONE;
-        boolean hasPhoneCall = contains || usedPermGroups.contains(AppOpsManager.OPSTR_PHONE_CALL_MICROPHONE);
-        if (hasPhoneCall && usedPermGroups.contains(Manifest.permission_group.MICROPHONE) && audioManager.getMode() == 3) {
-            TelephonyManager telephonyManager = (TelephonyManager) permissionUsageHelper.mContext.getSystemService(TelephonyManager.class);
+        boolean hasPhoneCall =
+                contains || usedPermGroups.contains(AppOpsManager.OPSTR_PHONE_CALL_MICROPHONE);
+        if (hasPhoneCall
+                && usedPermGroups.contains(Manifest.permission_group.MICROPHONE)
+                && audioManager.getMode() == 3) {
+            TelephonyManager telephonyManager =
+                    (TelephonyManager)
+                            permissionUsageHelper.mContext.getSystemService(TelephonyManager.class);
             List<OpUsage> permUsages = rawUsages.get(Manifest.permission_group.MICROPHONE);
             for (int usageNum = 0; usageNum < permUsages.size(); usageNum++) {
-                if (telephonyManager.checkCarrierPrivilegesForPackage(permUsages.get(usageNum).packageName) == 1) {
+                if (telephonyManager.checkCarrierPrivilegesForPackage(
+                                permUsages.get(usageNum).packageName)
+                        == 1) {
                     usedPermGroups.remove(AppOpsManager.OPSTR_PHONE_CALL_CAMERA);
                     usedPermGroups.remove(AppOpsManager.OPSTR_PHONE_CALL_MICROPHONE);
                 }
@@ -287,8 +352,11 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
         int permGroupNum = 0;
         while (permGroupNum < usedPermGroups.size()) {
             String permGroup2 = usedPermGroups.get(permGroupNum);
-            ArrayMap<OpUsage, CharSequence> usagesWithLabels = permissionUsageHelper.getUniqueUsagesWithLabels(permGroup2, rawUsages.get(permGroup2));
-            permissionUsageHelper.updateSubattributionLabelsMap(rawUsages.get(permGroup2), subAttributionLabelsMap);
+            ArrayMap<OpUsage, CharSequence> usagesWithLabels =
+                    permissionUsageHelper.getUniqueUsagesWithLabels(
+                            permGroup2, rawUsages.get(permGroup2));
+            permissionUsageHelper.updateSubattributionLabelsMap(
+                    rawUsages.get(permGroup2), subAttributionLabelsMap);
             if (permGroup2.equals(str2)) {
                 isPhone = true;
                 permGroup = Manifest.permission_group.MICROPHONE;
@@ -302,8 +370,22 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
             int usageNum2 = 0;
             while (usageNum2 < usagesWithLabels.size()) {
                 OpUsage usage = usagesWithLabels.keyAt(usageNum2);
-                String attributionLabel = subAttributionLabelsMap.getOrDefault(usage.packageName, new ArrayMap()).getOrDefault(usage.attributionTag, null);
-                usages.add(new PermissionGroupUsage(usage.packageName, usage.uid, usage.lastAccessTime, permGroup, usage.isRunning, isPhone, usage.attributionTag, attributionLabel, usagesWithLabels.valueAt(usageNum2), deviceId));
+                String attributionLabel =
+                        subAttributionLabelsMap
+                                .getOrDefault(usage.packageName, new ArrayMap())
+                                .getOrDefault(usage.attributionTag, null);
+                usages.add(
+                        new PermissionGroupUsage(
+                                usage.packageName,
+                                usage.uid,
+                                usage.lastAccessTime,
+                                permGroup,
+                                usage.isRunning,
+                                isPhone,
+                                usage.attributionTag,
+                                attributionLabel,
+                                usagesWithLabels.valueAt(usageNum2),
+                                deviceId));
                 usageNum2++;
                 subAttributionLabelsMap = subAttributionLabelsMap;
                 usagesWithLabels = usagesWithLabels;
@@ -330,30 +412,41 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
         }
         persistentDeviceIds.add(VirtualDeviceManager.PERSISTENT_DEVICE_ID_DEFAULT);
         for (int index = 0; index < persistentDeviceIds.size(); index++) {
-            allUsages.addAll(getOpUsageDataByDevice(includeMicrophoneUsage, persistentDeviceIds.valueAt(index)));
+            allUsages.addAll(
+                    getOpUsageDataByDevice(
+                            includeMicrophoneUsage, persistentDeviceIds.valueAt(index)));
         }
         return allUsages;
     }
 
-    private void updateSubattributionLabelsMap(List<OpUsage> usages, ArrayMap<String, Map<String, String>> subAttributionLabelsMap) {
+    private void updateSubattributionLabelsMap(
+            List<OpUsage> usages, ArrayMap<String, Map<String, String>> subAttributionLabelsMap) {
         if (usages == null || usages.isEmpty()) {
             return;
         }
         for (OpUsage usage : usages) {
-            if (usage.attributionTag != null && !subAttributionLabelsMap.containsKey(usage.packageName)) {
-                subAttributionLabelsMap.put(usage.packageName, getSubattributionLabelsForPackage(usage.packageName, usage.uid));
+            if (usage.attributionTag != null
+                    && !subAttributionLabelsMap.containsKey(usage.packageName)) {
+                subAttributionLabelsMap.put(
+                        usage.packageName,
+                        getSubattributionLabelsForPackage(usage.packageName, usage.uid));
             }
         }
     }
 
-    private ArrayMap<String, String> getSubattributionLabelsForPackage(String packageName, int uid) {
+    private ArrayMap<String, String> getSubattributionLabelsForPackage(
+            String packageName, int uid) {
         ArrayMap<String, String> attributionLabelMap = new ArrayMap<>();
         UserHandle user = UserHandle.getUserHandleForUid(uid);
         if (!isSubattributionSupported(packageName, uid)) {
             return attributionLabelMap;
         }
         Context userContext = getUserContext(user);
-        PackageInfo packageInfo = userContext.getPackageManager().getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(2147487744L));
+        PackageInfo packageInfo =
+                userContext
+                        .getPackageManager()
+                        .getPackageInfo(
+                                packageName, PackageManager.PackageInfoFlags.of(2147487744L));
         Context pkgContext = userContext.createPackageContext(packageInfo.packageName, 0);
         for (Attribution attribution : packageInfo.attributions) {
             try {
@@ -370,8 +463,13 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
             if (!isLocationProvider(packageName)) {
                 return false;
             }
-            PackageManager userPkgManager = getUserContext(UserHandle.getUserHandleForUid(uid)).getPackageManager();
-            ApplicationInfo appInfo = userPkgManager.getApplicationInfoAsUser(packageName, PackageManager.ApplicationInfoFlags.of(0L), UserHandle.getUserId(uid));
+            PackageManager userPkgManager =
+                    getUserContext(UserHandle.getUserHandleForUid(uid)).getPackageManager();
+            ApplicationInfo appInfo =
+                    userPkgManager.getApplicationInfoAsUser(
+                            packageName,
+                            PackageManager.ApplicationInfoFlags.of(0L),
+                            UserHandle.getUserId(uid));
             if (appInfo == null) {
                 return false;
             }
@@ -382,7 +480,11 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
     }
 
     private boolean isLocationProvider(String packageName) {
-        return ((LocationManager) Objects.requireNonNull((LocationManager) this.mContext.getSystemService(LocationManager.class))).isProviderPackage(packageName);
+        return ((LocationManager)
+                        Objects.requireNonNull(
+                                (LocationManager)
+                                        this.mContext.getSystemService(LocationManager.class)))
+                .isProviderPackage(packageName);
     }
 
     private Map<String, List<OpUsage>> getOpUsagesByDevice(List<String> opNames, String deviceId) {
@@ -395,13 +497,20 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
         long recentThreshold;
         try {
             if (Flags.deviceAwarePermissionApisEnabled()) {
-                ops = this.mAppOpsManager.getPackagesForOps((String[]) opNames.toArray(new String[opNames.size()]), deviceId);
+                ops =
+                        this.mAppOpsManager.getPackagesForOps(
+                                (String[]) opNames.toArray(new String[opNames.size()]), deviceId);
             } else {
                 if (!Objects.equals(deviceId, VirtualDeviceManager.PERSISTENT_DEVICE_ID_DEFAULT)) {
-                    Slog.w(LOG_TAG, "device_aware_permission_apis_enabled flag not enabled when deviceId is not default");
+                    Slog.w(
+                            LOG_TAG,
+                            "device_aware_permission_apis_enabled flag not enabled when deviceId is"
+                                + " not default");
                     return Collections.emptyMap();
                 }
-                ops = this.mAppOpsManager.getPackagesForOps((String[]) opNames.toArray(new String[opNames.size()]));
+                ops =
+                        this.mAppOpsManager.getPackagesForOps(
+                                (String[]) opNames.toArray(new String[opNames.size()]));
             }
             long now2 = System.currentTimeMillis();
             long recentThreshold2 = getRecentThreshold(Long.valueOf(now2));
@@ -420,7 +529,8 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
                 while (opEntryNum < numOpEntries2) {
                     AppOpsManager.OpEntry opEntry2 = pkgOps.getOps().get(opEntryNum);
                     String op = opEntry2.getOpStr();
-                    List<String> attributionTags = new ArrayList<>(opEntry2.getAttributedOpEntries().keySet());
+                    List<String> attributionTags =
+                            new ArrayList<>(opEntry2.getAttributedOpEntries().keySet());
                     int numAttrEntries = opEntry2.getAttributedOpEntries().size();
                     int numPkgOps2 = numPkgOps;
                     int numPkgOps3 = 0;
@@ -428,7 +538,8 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
                         List<String> attributionTags2 = attributionTags;
                         String attributionTag = attributionTags.get(numPkgOps3);
                         int numAttrEntries2 = numAttrEntries;
-                        AppOpsManager.AttributedOpEntry attrOpEntry = opEntry2.getAttributedOpEntries().get(attributionTag);
+                        AppOpsManager.AttributedOpEntry attrOpEntry =
+                                opEntry2.getAttributedOpEntries().get(attributionTag);
                         long lastAccessTime2 = attrOpEntry.getLastAccessTime(13);
                         if (!attrOpEntry.isRunning()) {
                             lastAccessTime = lastAccessTime2;
@@ -442,10 +553,19 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
                             recentThreshold = recentThreshold2;
                             numOpEntries = numOpEntries2;
                         } else {
-                            boolean isRunning = attrOpEntry.isRunning() || lastAccessTime >= runningThreshold;
+                            boolean isRunning =
+                                    attrOpEntry.isRunning() || lastAccessTime >= runningThreshold;
                             AppOpsManager.OpEventProxyInfo proxy = attrOpEntry.getLastProxyInfo(13);
                             if (proxy != null && proxy.getPackageName() != null) {
-                                OpUsage proxyUsage2 = new OpUsage(proxy.getPackageName(), proxy.getAttributionTag(), op, proxy.getUid(), lastAccessTime, isRunning, null);
+                                OpUsage proxyUsage2 =
+                                        new OpUsage(
+                                                proxy.getPackageName(),
+                                                proxy.getAttributionTag(),
+                                                op,
+                                                proxy.getUid(),
+                                                lastAccessTime,
+                                                isRunning,
+                                                null);
                                 proxyUsage = proxyUsage2;
                             } else {
                                 proxyUsage = null;
@@ -453,7 +573,15 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
                             opEntry = opEntry2;
                             String permGroupName = getGroupForOp(op);
                             numOpEntries = numOpEntries2;
-                            OpUsage usage = new OpUsage(packageName, attributionTag, op, uid, lastAccessTime, isRunning, proxyUsage);
+                            OpUsage usage =
+                                    new OpUsage(
+                                            packageName,
+                                            attributionTag,
+                                            op,
+                                            uid,
+                                            lastAccessTime,
+                                            isRunning,
+                                            proxyUsage);
                             Integer packageAttr = Integer.valueOf(usage.getPackageIdHash());
                             if (!usages.containsKey(permGroupName)) {
                                 ArrayMap<Integer, OpUsage> map = new ArrayMap<>();
@@ -471,7 +599,8 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
                                     now = now2;
                                     long now3 = usage.lastAccessTime;
                                     recentThreshold = recentThreshold2;
-                                    long recentThreshold3 = permGroupUsages.get(packageAttr).lastAccessTime;
+                                    long recentThreshold3 =
+                                            permGroupUsages.get(packageAttr).lastAccessTime;
                                     if (now3 > recentThreshold3) {
                                         permGroupUsages.put(packageAttr, usage);
                                     }
@@ -496,7 +625,8 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
             List<String> permGroups = new ArrayList<>(usages.keySet());
             for (int i = 0; i < permGroups.size(); i++) {
                 String permGroupName2 = permGroups.get(i);
-                flattenedUsages.put(permGroupName2, new ArrayList<>(usages.get(permGroupName2).values()));
+                flattenedUsages.put(
+                        permGroupName2, new ArrayList<>(usages.get(permGroupName2).values()));
             }
             return flattenedUsages;
         } catch (NullPointerException e) {
@@ -508,7 +638,8 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
         return ListFormatter.getInstance().format(labels);
     }
 
-    private ArrayMap<OpUsage, CharSequence> getUniqueUsagesWithLabels(String permGroup, List<OpUsage> usages) {
+    private ArrayMap<OpUsage, CharSequence> getUniqueUsagesWithLabels(
+            String permGroup, List<OpUsage> usages) {
         ArrayMap<OpUsage, CharSequence> usagesAndLabels;
         OpUsage currentUsage;
         ArrayMap<OpUsage, CharSequence> usagesAndLabels2;
@@ -541,7 +672,9 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
                 usagesAndLabels2 = usagesAndLabels3;
             } else {
                 int usageAttr = usage2.getPackageIdHash();
-                if (!proxies.containsKey(Integer.valueOf(usageAttr)) && usage2.proxy != null && !Manifest.permission_group.MICROPHONE.equals(str)) {
+                if (!proxies.containsKey(Integer.valueOf(usageAttr))
+                        && usage2.proxy != null
+                        && !Manifest.permission_group.MICROPHONE.equals(str)) {
                     proxyLabels.put(usage2, new ArrayList<>());
                     proxyPackages.add(Integer.valueOf(usage2.getPackageIdHash()));
                 }
@@ -552,8 +685,7 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
                 } else {
                     if (lastMostRecent != null) {
                         usagesAndLabels2 = usagesAndLabels3;
-                        if (usage2.lastAccessTime <= lastMostRecent.lastAccessTime) {
-                        }
+                        if (usage2.lastAccessTime <= lastMostRecent.lastAccessTime) {}
                     } else {
                         usagesAndLabels2 = usagesAndLabels3;
                     }
@@ -583,8 +715,11 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
                 int iterNum = 0;
                 int maxUsages = allUsages.size();
                 while (currentUsage2.proxy != null) {
-                    if (allUsages.containsKey(Integer.valueOf(currentUsage2.proxy.getPackageIdHash()))) {
-                        currentUsage = allUsages.get(Integer.valueOf(currentUsage2.proxy.getPackageIdHash()));
+                    if (allUsages.containsKey(
+                            Integer.valueOf(currentUsage2.proxy.getPackageIdHash()))) {
+                        currentUsage =
+                                allUsages.get(
+                                        Integer.valueOf(currentUsage2.proxy.getPackageIdHash()));
                     } else {
                         OpUsage proxy = currentUsage2.proxy;
                         if (!permissionUsageHelper.shouldShowPackage(proxy.packageName)) {
@@ -593,14 +728,21 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
                         maxUsages++;
                         currentUsage = proxy;
                     }
-                    if (currentUsage == null || iterNum == maxUsages || currentUsage.getPackageIdHash() == start.getPackageIdHash()) {
+                    if (currentUsage == null
+                            || iterNum == maxUsages
+                            || currentUsage.getPackageIdHash() == start.getPackageIdHash()) {
                         break;
                     }
                     proxyPackages.add(Integer.valueOf(currentUsage.getPackageIdHash()));
-                    if (!currentUsage.packageName.equals(start.packageName) && permissionUsageHelper.shouldShowPackage(currentUsage.packageName)) {
+                    if (!currentUsage.packageName.equals(start.packageName)
+                            && permissionUsageHelper.shouldShowPackage(currentUsage.packageName)) {
                         try {
-                            PackageManager userPkgManager = permissionUsageHelper.getUserContext(currentUsage.getUser()).getPackageManager();
-                            ApplicationInfo appInfo = userPkgManager.getApplicationInfo(currentUsage.packageName, i2);
+                            PackageManager userPkgManager =
+                                    permissionUsageHelper
+                                            .getUserContext(currentUsage.getUser())
+                                            .getPackageManager();
+                            ApplicationInfo appInfo =
+                                    userPkgManager.getApplicationInfo(currentUsage.packageName, i2);
                             CharSequence appLabel = appInfo.loadLabel(userPkgManager);
                             if (!proxyLabelList.contains(appLabel)) {
                                 proxyLabelList.add(appLabel);
@@ -616,7 +758,11 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
                     usagesAndLabels = usagesAndLabels4;
                 } else {
                     usagesAndLabels = usagesAndLabels4;
-                    usagesAndLabels.put(start, proxyLabelList.isEmpty() ? null : permissionUsageHelper.formatLabelList(proxyLabelList));
+                    usagesAndLabels.put(
+                            start,
+                            proxyLabelList.isEmpty()
+                                    ? null
+                                    : permissionUsageHelper.formatLabelList(proxyLabelList));
                 }
             }
             numStart++;
@@ -626,26 +772,36 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
         synchronized (permissionUsageHelper.mAttributionChains) {
             int i3 = 0;
             while (i3 < permissionUsageHelper.mAttributionChains.size()) {
-                List<AccessChainLink> usageList = permissionUsageHelper.mAttributionChains.valueAt(i3);
+                List<AccessChainLink> usageList =
+                        permissionUsageHelper.mAttributionChains.valueAt(i3);
                 int lastVisible = usageList.size() - 1;
                 if (!usageList.isEmpty() && usageList.get(lastVisible).isEnd()) {
-                    if (usageList.get(0).isStart() && str.equals(getGroupForOp(usageList.get(0).usage.op)) && Manifest.permission_group.MICROPHONE.equals(str)) {
+                    if (usageList.get(0).isStart()
+                            && str.equals(getGroupForOp(usageList.get(0).usage.op))
+                            && Manifest.permission_group.MICROPHONE.equals(str)) {
                         for (AccessChainLink link : usageList) {
                             proxyPackages.add(Integer.valueOf(link.usage.getPackageIdHash()));
                         }
                         AccessChainLink start2 = usageList.get(0);
                         AccessChainLink lastVisibleLink = usageList.get(lastVisible);
                         int lastVisible2 = lastVisible;
-                        while (lastVisible2 > 0 && !permissionUsageHelper.shouldShowPackage(lastVisibleLink.usage.packageName)) {
+                        while (lastVisible2 > 0
+                                && !permissionUsageHelper.shouldShowPackage(
+                                        lastVisibleLink.usage.packageName)) {
                             lastVisible2--;
                             lastVisibleLink = usageList.get(lastVisible2);
                         }
                         String proxyLabel = null;
                         if (!lastVisibleLink.usage.packageName.equals(start2.usage.packageName)) {
                             try {
-                                PackageManager userPkgManager2 = permissionUsageHelper.getUserContext(lastVisibleLink.usage.getUser()).getPackageManager();
+                                PackageManager userPkgManager2 =
+                                        permissionUsageHelper
+                                                .getUserContext(lastVisibleLink.usage.getUser())
+                                                .getPackageManager();
                                 try {
-                                    ApplicationInfo appInfo2 = userPkgManager2.getApplicationInfo(lastVisibleLink.usage.packageName, 0);
+                                    ApplicationInfo appInfo2 =
+                                            userPkgManager2.getApplicationInfo(
+                                                    lastVisibleLink.usage.packageName, 0);
                                     proxyLabel = appInfo2.loadLabel(userPkgManager2).toString();
                                 } catch (PackageManager.NameNotFoundException e2) {
                                 }
@@ -683,7 +839,14 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
         public final OpUsage proxy;
         public final int uid;
 
-        OpUsage(String packageName, String attributionTag, String op, int uid, long lastAccessTime, boolean isRunning, OpUsage proxy) {
+        OpUsage(
+                String packageName,
+                String attributionTag,
+                String op,
+                int uid,
+                long lastAccessTime,
+                boolean isRunning,
+                OpUsage proxy) {
             this.packageName = packageName;
             this.attributionTag = attributionTag;
             this.op = op;
@@ -702,7 +865,13 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
         }
 
         public int hashCode() {
-            return Objects.hash(this.packageName, this.attributionTag, this.op, Integer.valueOf(this.uid), Long.valueOf(this.lastAccessTime), Boolean.valueOf(this.isRunning));
+            return Objects.hash(
+                    this.packageName,
+                    this.attributionTag,
+                    this.op,
+                    Integer.valueOf(this.uid),
+                    Long.valueOf(this.lastAccessTime),
+                    Boolean.valueOf(this.isRunning));
         }
 
         public boolean equals(Object obj) {
@@ -710,7 +879,12 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
                 return false;
             }
             OpUsage other = (OpUsage) obj;
-            return Objects.equals(this.packageName, other.packageName) && Objects.equals(this.attributionTag, other.attributionTag) && Objects.equals(this.op, other.op) && this.uid == other.uid && this.lastAccessTime == other.lastAccessTime && this.isRunning == other.isRunning;
+            return Objects.equals(this.packageName, other.packageName)
+                    && Objects.equals(this.attributionTag, other.attributionTag)
+                    && Objects.equals(this.op, other.op)
+                    && this.uid == other.uid
+                    && this.lastAccessTime == other.lastAccessTime
+                    && this.isRunning == other.isRunning;
         }
     }
 
@@ -719,7 +893,15 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
         public final OpUsage usage;
 
         AccessChainLink(String op, String packageName, String attributionTag, int uid, int flags) {
-            this.usage = new OpUsage(packageName, attributionTag, op, uid, System.currentTimeMillis(), true, null);
+            this.usage =
+                    new OpUsage(
+                            packageName,
+                            attributionTag,
+                            op,
+                            uid,
+                            System.currentTimeMillis(),
+                            true,
+                            null);
             this.flags = flags;
         }
 
@@ -736,11 +918,20 @@ public class PermissionUsageHelper implements AppOpsManager.OnOpActiveChangedLis
                 return false;
             }
             AccessChainLink other = (AccessChainLink) obj;
-            return other.flags == this.flags && packageAndOpEquals(other.usage.op, other.usage.packageName, other.usage.attributionTag, other.usage.uid);
+            return other.flags == this.flags
+                    && packageAndOpEquals(
+                            other.usage.op,
+                            other.usage.packageName,
+                            other.usage.attributionTag,
+                            other.usage.uid);
         }
 
-        public boolean packageAndOpEquals(String op, String packageName, String attributionTag, int uid) {
-            return Objects.equals(op, this.usage.op) && Objects.equals(packageName, this.usage.packageName) && Objects.equals(attributionTag, this.usage.attributionTag) && uid == this.usage.uid;
+        public boolean packageAndOpEquals(
+                String op, String packageName, String attributionTag, int uid) {
+            return Objects.equals(op, this.usage.op)
+                    && Objects.equals(packageName, this.usage.packageName)
+                    && Objects.equals(attributionTag, this.usage.attributionTag)
+                    && uid == this.usage.uid;
         }
     }
 }

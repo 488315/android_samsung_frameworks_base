@@ -15,8 +15,7 @@ class IAFDRepair {
     public static final int EXP_REPAIR_ISOLABLE = 2;
     public static final int EXP_REPAIR_PILE = 1;
 
-    IAFDRepair() {
-    }
+    IAFDRepair() {}
 
     public boolean repairHandle(Context ct, Bundle bundle) {
         boolean result = false;
@@ -77,7 +76,11 @@ class IAFDRepair {
 
     private boolean repair_NoSettingsProvidersForDual(Context mContext, int dualuid) {
         try {
-            Runtime.getRuntime().exec("pm install-existing --user " + String.valueOf(dualuid) + " com.android.providers.settings");
+            Runtime.getRuntime()
+                    .exec(
+                            "pm install-existing --user "
+                                    + String.valueOf(dualuid)
+                                    + " com.android.providers.settings");
             return true;
         } catch (Exception e) {
             e.printStackTrace();

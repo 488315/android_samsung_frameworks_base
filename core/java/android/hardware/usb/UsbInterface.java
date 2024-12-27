@@ -3,32 +3,37 @@ package android.hardware.usb;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes2.dex */
 public class UsbInterface implements Parcelable {
-    public static final Parcelable.Creator<UsbInterface> CREATOR = new Parcelable.Creator<UsbInterface>() { // from class: android.hardware.usb.UsbInterface.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UsbInterface createFromParcel(Parcel in) {
-            int id = in.readInt();
-            int alternateSetting = in.readInt();
-            String name = in.readString();
-            int Class = in.readInt();
-            int subClass = in.readInt();
-            int protocol = in.readInt();
-            Parcelable[] endpoints = in.readParcelableArray(UsbEndpoint.class.getClassLoader());
-            UsbInterface intf = new UsbInterface(id, alternateSetting, name, Class, subClass, protocol);
-            intf.setEndpoints(endpoints);
-            return intf;
-        }
+    public static final Parcelable.Creator<UsbInterface> CREATOR =
+            new Parcelable.Creator<
+                    UsbInterface>() { // from class: android.hardware.usb.UsbInterface.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UsbInterface createFromParcel(Parcel in) {
+                    int id = in.readInt();
+                    int alternateSetting = in.readInt();
+                    String name = in.readString();
+                    int Class = in.readInt();
+                    int subClass = in.readInt();
+                    int protocol = in.readInt();
+                    Parcelable[] endpoints =
+                            in.readParcelableArray(UsbEndpoint.class.getClassLoader());
+                    UsbInterface intf =
+                            new UsbInterface(id, alternateSetting, name, Class, subClass, protocol);
+                    intf.setEndpoints(endpoints);
+                    return intf;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UsbInterface[] newArray(int size) {
-            return new UsbInterface[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UsbInterface[] newArray(int size) {
+                    return new UsbInterface[size];
+                }
+            };
     private final int mAlternateSetting;
     private final int mClass;
     private Parcelable[] mEndpoints;
@@ -37,7 +42,8 @@ public class UsbInterface implements Parcelable {
     private final int mProtocol;
     private final int mSubclass;
 
-    public UsbInterface(int id, int alternateSetting, String name, int Class, int subClass, int protocol) {
+    public UsbInterface(
+            int id, int alternateSetting, String name, int Class, int subClass, int protocol) {
         this.mId = id;
         this.mAlternateSetting = alternateSetting;
         this.mName = name;
@@ -79,11 +85,26 @@ public class UsbInterface implements Parcelable {
     }
 
     public void setEndpoints(Parcelable[] endpoints) {
-        this.mEndpoints = (Parcelable[]) Preconditions.checkArrayElementsNotNull(endpoints, "endpoints");
+        this.mEndpoints =
+                (Parcelable[]) Preconditions.checkArrayElementsNotNull(endpoints, "endpoints");
     }
 
     public String toString() {
-        StringBuilder builder = new StringBuilder("UsbInterface[mId=" + this.mId + ",mAlternateSetting=" + this.mAlternateSetting + ",mName=" + this.mName + ",mClass=" + this.mClass + ",mSubclass=" + this.mSubclass + ",mProtocol=" + this.mProtocol + ",mEndpoints=[");
+        StringBuilder builder =
+                new StringBuilder(
+                        "UsbInterface[mId="
+                                + this.mId
+                                + ",mAlternateSetting="
+                                + this.mAlternateSetting
+                                + ",mName="
+                                + this.mName
+                                + ",mClass="
+                                + this.mClass
+                                + ",mSubclass="
+                                + this.mSubclass
+                                + ",mProtocol="
+                                + this.mProtocol
+                                + ",mEndpoints=[");
         for (int i = 0; i < this.mEndpoints.length; i++) {
             builder.append("\n");
             builder.append(this.mEndpoints[i].toString());

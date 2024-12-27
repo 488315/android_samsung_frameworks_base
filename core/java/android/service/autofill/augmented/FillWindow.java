@@ -5,15 +5,16 @@ import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.RemoteException;
-import android.service.autofill.augmented.AugmentedAutofillService;
-import android.service.autofill.augmented.PresentationParams;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.autofill.IAutofillWindowPresenter;
+
 import com.android.internal.util.function.pooled.PooledLambda;
+
 import dalvik.system.CloseGuard;
+
 import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
 import java.util.Objects;
@@ -57,14 +58,17 @@ public final class FillWindow implements AutoCloseable {
             this.mProxy = area.proxy;
             this.mWm = (WindowManager) rootView.getContext().getSystemService(WindowManager.class);
             this.mFillView = rootView;
-            this.mFillView.setOnTouchListener(new View.OnTouchListener() { // from class: android.service.autofill.augmented.FillWindow$$ExternalSyntheticLambda0
-                @Override // android.view.View.OnTouchListener
-                public final boolean onTouch(View view, MotionEvent motionEvent) {
-                    boolean lambda$update$0;
-                    lambda$update$0 = FillWindow.this.lambda$update$0(view, motionEvent);
-                    return lambda$update$0;
-                }
-            });
+            this.mFillView.setOnTouchListener(
+                    new View
+                            .OnTouchListener() { // from class:
+                                                 // android.service.autofill.augmented.FillWindow$$ExternalSyntheticLambda0
+                        @Override // android.view.View.OnTouchListener
+                        public final boolean onTouch(View view, MotionEvent motionEvent) {
+                            boolean lambda$update$0;
+                            lambda$update$0 = FillWindow.this.lambda$update$0(view, motionEvent);
+                            return lambda$update$0;
+                        }
+                    });
             this.mShowing = false;
             this.mBounds = new Rect(area.getBounds());
             if (AugmentedAutofillService.sDebug) {
@@ -100,7 +104,11 @@ public final class FillWindow implements AutoCloseable {
             }
             if (this.mProxy != null) {
                 try {
-                    this.mProxy.requestShowFillUi(this.mBounds.right - this.mBounds.left, this.mBounds.bottom - this.mBounds.top, null, new FillWindowPresenter(this));
+                    this.mProxy.requestShowFillUi(
+                            this.mBounds.right - this.mBounds.left,
+                            this.mBounds.bottom - this.mBounds.top,
+                            null,
+                            new FillWindowPresenter(this));
                 } catch (RemoteException e) {
                     Log.w(TAG, "Error requesting to show fill window", e);
                 }
@@ -177,7 +185,14 @@ public final class FillWindow implements AutoCloseable {
 
     public void destroy() {
         if (AugmentedAutofillService.sDebug) {
-            Log.d(TAG, "destroy(): mDestroyed=" + this.mDestroyed + " mShowing=" + this.mShowing + " mFillView=" + this.mFillView);
+            Log.d(
+                    TAG,
+                    "destroy(): mDestroyed="
+                            + this.mDestroyed
+                            + " mShowing="
+                            + this.mShowing
+                            + " mFillView="
+                            + this.mFillView);
         }
         synchronized (this.mLock) {
             if (this.mDestroyed) {
@@ -247,18 +262,28 @@ public final class FillWindow implements AutoCloseable {
         }
 
         @Override // android.view.autofill.IAutofillWindowPresenter
-        public void show(WindowManager.LayoutParams p, Rect transitionEpicenter, boolean fitsSystemWindows, int layoutDirection) {
+        public void show(
+                WindowManager.LayoutParams p,
+                Rect transitionEpicenter,
+                boolean fitsSystemWindows,
+                int layoutDirection) {
             if (AugmentedAutofillService.sDebug) {
                 Log.d(FillWindow.TAG, "FillWindowPresenter.show()");
             }
             FillWindow fillWindow = this.mFillWindowReference.get();
             if (fillWindow != null) {
-                fillWindow.mUiThreadHandler.sendMessage(PooledLambda.obtainMessage(new BiConsumer() { // from class: android.service.autofill.augmented.FillWindow$FillWindowPresenter$$ExternalSyntheticLambda0
-                    @Override // java.util.function.BiConsumer
-                    public final void accept(Object obj, Object obj2) {
-                        ((FillWindow) obj).handleShow((WindowManager.LayoutParams) obj2);
-                    }
-                }, fillWindow, p));
+                fillWindow.mUiThreadHandler.sendMessage(
+                        PooledLambda.obtainMessage(
+                                new BiConsumer() { // from class:
+                                                   // android.service.autofill.augmented.FillWindow$FillWindowPresenter$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.BiConsumer
+                                    public final void accept(Object obj, Object obj2) {
+                                        ((FillWindow) obj)
+                                                .handleShow((WindowManager.LayoutParams) obj2);
+                                    }
+                                },
+                                fillWindow,
+                                p));
             }
         }
 
@@ -269,12 +294,16 @@ public final class FillWindow implements AutoCloseable {
             }
             FillWindow fillWindow = this.mFillWindowReference.get();
             if (fillWindow != null) {
-                fillWindow.mUiThreadHandler.sendMessage(PooledLambda.obtainMessage(new Consumer() { // from class: android.service.autofill.augmented.FillWindow$FillWindowPresenter$$ExternalSyntheticLambda1
-                    @Override // java.util.function.Consumer
-                    public final void accept(Object obj) {
-                        ((FillWindow) obj).handleHide();
-                    }
-                }, fillWindow));
+                fillWindow.mUiThreadHandler.sendMessage(
+                        PooledLambda.obtainMessage(
+                                new Consumer() { // from class:
+                                                 // android.service.autofill.augmented.FillWindow$FillWindowPresenter$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.Consumer
+                                    public final void accept(Object obj) {
+                                        ((FillWindow) obj).handleHide();
+                                    }
+                                },
+                                fillWindow));
             }
         }
     }

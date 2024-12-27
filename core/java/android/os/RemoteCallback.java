@@ -1,25 +1,24 @@
 package android.os;
 
 import android.annotation.SystemApi;
-import android.os.IRemoteCallback;
-import android.os.Parcelable;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class RemoteCallback implements Parcelable {
-    public static final Parcelable.Creator<RemoteCallback> CREATOR = new Parcelable.Creator<RemoteCallback>() { // from class: android.os.RemoteCallback.3
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RemoteCallback createFromParcel(Parcel parcel) {
-            return new RemoteCallback(parcel);
-        }
+    public static final Parcelable.Creator<RemoteCallback> CREATOR =
+            new Parcelable.Creator<RemoteCallback>() { // from class: android.os.RemoteCallback.3
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RemoteCallback createFromParcel(Parcel parcel) {
+                    return new RemoteCallback(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RemoteCallback[] newArray(int size) {
-            return new RemoteCallback[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RemoteCallback[] newArray(int size) {
+                    return new RemoteCallback[size];
+                }
+            };
     private final IRemoteCallback mCallback;
     private final Handler mHandler;
     private final OnResultListener mListener;
@@ -38,12 +37,13 @@ public final class RemoteCallback implements Parcelable {
         }
         this.mListener = listener;
         this.mHandler = handler;
-        this.mCallback = new IRemoteCallback.Stub() { // from class: android.os.RemoteCallback.1
-            @Override // android.os.IRemoteCallback
-            public void sendResult(Bundle data) {
-                RemoteCallback.this.sendResult(data);
-            }
-        };
+        this.mCallback =
+                new IRemoteCallback.Stub() { // from class: android.os.RemoteCallback.1
+                    @Override // android.os.IRemoteCallback
+                    public void sendResult(Bundle data) {
+                        RemoteCallback.this.sendResult(data);
+                    }
+                };
     }
 
     RemoteCallback(Parcel parcel) {
@@ -55,12 +55,13 @@ public final class RemoteCallback implements Parcelable {
     public void sendResult(final Bundle result) {
         if (this.mListener != null) {
             if (this.mHandler != null) {
-                this.mHandler.post(new Runnable() { // from class: android.os.RemoteCallback.2
-                    @Override // java.lang.Runnable
-                    public void run() {
-                        RemoteCallback.this.mListener.onResult(result);
-                    }
-                });
+                this.mHandler.post(
+                        new Runnable() { // from class: android.os.RemoteCallback.2
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                RemoteCallback.this.mListener.onResult(result);
+                            }
+                        });
                 return;
             } else {
                 this.mListener.onResult(result);

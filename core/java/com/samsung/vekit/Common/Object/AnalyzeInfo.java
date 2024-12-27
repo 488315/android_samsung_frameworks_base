@@ -13,14 +13,19 @@ public class AnalyzeInfo implements AnalyzeStatusListener {
     private String extension;
     private Element target;
 
-    public AnalyzeInfo(AnalyzeType analyzeType, Content targetContent, String analyzedDataPath, String extension) {
+    public AnalyzeInfo(
+            AnalyzeType analyzeType,
+            Content targetContent,
+            String analyzedDataPath,
+            String extension) {
         this.analyzeType = analyzeType;
         this.target = targetContent;
         this.analyzedDataPath = analyzedDataPath;
         this.extension = extension;
     }
 
-    public AnalyzeInfo(AnalyzeType analyzeType, Item targetItem, String analyzedDataPath, String extension) {
+    public AnalyzeInfo(
+            AnalyzeType analyzeType, Item targetItem, String analyzedDataPath, String extension) {
         this.analyzeType = analyzeType;
         this.target = targetItem;
         this.analyzedDataPath = analyzedDataPath;
@@ -60,38 +65,29 @@ public class AnalyzeInfo implements AnalyzeStatusListener {
     }
 
     @Override // com.samsung.vekit.Listener.AnalyzeStatusListener
-    public void onAnalyzeStarted() {
-    }
+    public void onAnalyzeStarted() {}
 
     @Override // com.samsung.vekit.Listener.AnalyzeStatusListener
-    public void onAnalyzeResumed() {
-    }
+    public void onAnalyzeResumed() {}
 
     @Override // com.samsung.vekit.Listener.AnalyzeStatusListener
-    public void onAnalyzePaused() {
-    }
+    public void onAnalyzePaused() {}
 
     @Override // com.samsung.vekit.Listener.AnalyzeStatusListener
-    public void onAnalyzeCompleted() {
-    }
+    public void onAnalyzeCompleted() {}
 
     @Override // com.samsung.vekit.Listener.AnalyzeStatusListener
-    public void onAnalyzeStopped() {
-    }
+    public void onAnalyzeStopped() {}
 
     @Override // com.samsung.vekit.Listener.AnalyzeStatusListener
-    public void onAnalyzeFailed() {
-    }
+    public void onAnalyzeFailed() {}
 
     @Override // com.samsung.vekit.Listener.AnalyzeStatusListener
-    public void onSolutionLoaded(AnalyzeType type) {
-    }
+    public void onSolutionLoaded(AnalyzeType type) {}
 
     @Override // com.samsung.vekit.Listener.AnalyzeStatusListener
-    public void onSolutionUnloaded(AnalyzeType type) {
-    }
+    public void onSolutionUnloaded(AnalyzeType type) {}
 
     @Override // com.samsung.vekit.Listener.AnalyzeStatusListener
-    public void onSolutionError(AnalyzeType type, AnalyzeSolutionErrorType errorType) {
-    }
+    public void onSolutionError(AnalyzeType type, AnalyzeSolutionErrorType errorType) {}
 }

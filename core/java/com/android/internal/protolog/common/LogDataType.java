@@ -14,7 +14,8 @@ public class LogDataType {
 
     public static int logDataTypesToBitMask(List<Integer> types) {
         if (types.size() > 16) {
-            throw new BitmaskConversionException("Too many log call parameters - max 16 parameters supported");
+            throw new BitmaskConversionException(
+                    "Too many log call parameters - max 16 parameters supported");
         }
         int mask = 0;
         for (int i = 0; i < types.size(); i++) {
@@ -62,7 +63,8 @@ public class LogDataType {
                         i += 2;
                         break;
                     default:
-                        throw new InvalidFormatStringException("Invalid format string field %${messageString[i + 1]}");
+                        throw new InvalidFormatStringException(
+                                "Invalid format string field %${messageString[i + 1]}");
                 }
             } else {
                 i++;

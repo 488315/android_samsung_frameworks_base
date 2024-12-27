@@ -1,6 +1,7 @@
 package android.hardware.camera2.params;
 
 import android.hardware.camera2.utils.HashCodeHelpers;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -16,24 +17,29 @@ public final class DeviceStateSensorOrientationMap {
     private final long[] mElements;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DeviceState {
-    }
+    public @interface DeviceState {}
 
     public DeviceStateSensorOrientationMap(long[] elements) {
         this.mElements = (long[]) Objects.requireNonNull(elements, "elements must not be null");
         this.mDeviceStateOrientationMap = new HashMap<>();
         if (elements.length % 2 != 0) {
-            throw new IllegalArgumentException("Device state sensor orientation map length " + elements.length + " is not even!");
+            throw new IllegalArgumentException(
+                    "Device state sensor orientation map length "
+                            + elements.length
+                            + " is not even!");
         }
         for (int i = 0; i < elements.length; i += 2) {
             if (elements[i + 1] % 90 != 0) {
-                throw new IllegalArgumentException("Sensor orientation not divisible by 90: " + elements[i + 1]);
+                throw new IllegalArgumentException(
+                        "Sensor orientation not divisible by 90: " + elements[i + 1]);
             }
-            this.mDeviceStateOrientationMap.put(Long.valueOf(elements[i]), Integer.valueOf(Math.toIntExact(elements[i + 1])));
+            this.mDeviceStateOrientationMap.put(
+                    Long.valueOf(elements[i]), Integer.valueOf(Math.toIntExact(elements[i + 1])));
         }
     }
 
-    private DeviceStateSensorOrientationMap(ArrayList<Long> elements, HashMap<Long, Integer> deviceStateOrientationMap) {
+    private DeviceStateSensorOrientationMap(
+            ArrayList<Long> elements, HashMap<Long, Integer> deviceStateOrientationMap) {
         this.mElements = new long[elements.size()];
         for (int i = 0; i < elements.size(); i++) {
             this.mElements[i] = elements.get(i).longValue();
@@ -72,9 +78,11 @@ public final class DeviceStateSensorOrientationMap {
 
         public Builder addOrientationForState(long deviceState, long angle) {
             if (angle % 90 != 0) {
-                throw new IllegalArgumentException("Sensor orientation not divisible by 90: " + angle);
+                throw new IllegalArgumentException(
+                        "Sensor orientation not divisible by 90: " + angle);
             }
-            this.mDeviceStateOrientationMap.put(Long.valueOf(deviceState), Integer.valueOf(Math.toIntExact(angle)));
+            this.mDeviceStateOrientationMap.put(
+                    Long.valueOf(deviceState), Integer.valueOf(Math.toIntExact(angle)));
             this.mElements.add(Long.valueOf(deviceState));
             this.mElements.add(Long.valueOf(angle));
             return this;
@@ -82,9 +90,11 @@ public final class DeviceStateSensorOrientationMap {
 
         public DeviceStateSensorOrientationMap build() {
             if (this.mElements.size() == 0) {
-                throw new IllegalStateException("Cannot build a DeviceStateSensorOrientationMap with zero elements.");
+                throw new IllegalStateException(
+                        "Cannot build a DeviceStateSensorOrientationMap with zero elements.");
             }
-            return new DeviceStateSensorOrientationMap(this.mElements, this.mDeviceStateOrientationMap);
+            return new DeviceStateSensorOrientationMap(
+                    this.mElements, this.mDeviceStateOrientationMap);
         }
     }
 }

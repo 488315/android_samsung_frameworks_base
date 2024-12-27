@@ -4,8 +4,11 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.util.ArrayMap;
+
 import com.android.server.am.mars.filter.IFilter;
+
 import com.samsung.android.knox.SemPersonaManager;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -29,8 +32,7 @@ public final class DeviceAdminPackageFilter implements IFilter {
     }
 
     @Override // com.android.server.am.mars.filter.IFilter
-    public final void deInit() {
-    }
+    public final void deInit() {}
 
     @Override // com.android.server.am.mars.filter.IFilter
     public final int filter(int i, int i2, int i3, String str) {
@@ -48,7 +50,9 @@ public final class DeviceAdminPackageFilter implements IFilter {
         synchronized (this.mActiveAdmins) {
             try {
                 ArrayList arrayList = (ArrayList) this.mActiveAdmins.get(Integer.valueOf(i));
-                List<ComponentName> activeAdmins = ((DevicePolicyManager) this.mContext.getSystemService("device_policy")).getActiveAdmins();
+                List<ComponentName> activeAdmins =
+                        ((DevicePolicyManager) this.mContext.getSystemService("device_policy"))
+                                .getActiveAdmins();
                 if (arrayList == null) {
                     arrayList = new ArrayList();
                 }
@@ -72,7 +76,8 @@ public final class DeviceAdminPackageFilter implements IFilter {
     public final void init(Context context) {
         this.mContext = context;
         getActiveAdminsPackages(context.getUserId());
-        SemPersonaManager semPersonaManager = (SemPersonaManager) this.mContext.getSystemService("persona");
+        SemPersonaManager semPersonaManager =
+                (SemPersonaManager) this.mContext.getSystemService("persona");
         if (semPersonaManager != null) {
             int knoxId = semPersonaManager.getKnoxId(2, true);
             if (this.mContext.getUserId() != 0 || knoxId < 150 || knoxId > 160) {

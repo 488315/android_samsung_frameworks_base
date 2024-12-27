@@ -2,6 +2,7 @@ package android.text;
 
 import android.graphics.Paint;
 import android.util.Pair;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +33,8 @@ public class Highlights {
 
         public Builder addRange(Paint paint, int start, int end) {
             if (start > end) {
-                throw new IllegalArgumentException("start must not be larger than end: " + start + ", " + end);
+                throw new IllegalArgumentException(
+                        "start must not be larger than end: " + start + ", " + end);
             }
             Objects.requireNonNull(paint);
             int[] range = {start, end};
@@ -42,13 +44,15 @@ public class Highlights {
 
         public Builder addRanges(Paint paint, int... ranges) {
             if (ranges.length % 2 == 1) {
-                throw new IllegalArgumentException("Flatten ranges must have even numbered elements");
+                throw new IllegalArgumentException(
+                        "Flatten ranges must have even numbered elements");
             }
             for (int j = 0; j < ranges.length / 2; j++) {
                 int start = ranges[j * 2];
                 int end = ranges[(j * 2) + 1];
                 if (start > end) {
-                    throw new IllegalArgumentException("Reverse range found in the flatten range: " + Arrays.toString(ranges));
+                    throw new IllegalArgumentException(
+                            "Reverse range found in the flatten range: " + Arrays.toString(ranges));
                 }
             }
             Objects.requireNonNull(paint);

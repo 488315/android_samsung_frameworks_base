@@ -2,19 +2,20 @@ package android.opengl;
 
 /* loaded from: classes3.dex */
 public class Matrix {
-    private static final ThreadLocal<float[]> ThreadTmp = new ThreadLocal() { // from class: android.opengl.Matrix.1
-        /* JADX INFO: Access modifiers changed from: protected */
-        @Override // java.lang.ThreadLocal
-        public float[] initialValue() {
-            return new float[32];
-        }
-    };
+    private static final ThreadLocal<float[]> ThreadTmp =
+            new ThreadLocal() { // from class: android.opengl.Matrix.1
+                /* JADX INFO: Access modifiers changed from: protected */
+                @Override // java.lang.ThreadLocal
+                public float[] initialValue() {
+                    return new float[32];
+                }
+            };
 
     @Deprecated
-    public Matrix() {
-    }
+    public Matrix() {}
 
-    private static boolean overlap(float[] a, int aStart, int aLength, float[] b, int bStart, int bLength) {
+    private static boolean overlap(
+            float[] a, int aStart, int aLength, float[] b, int bStart, int bLength) {
         int aEnd;
         int bEnd;
         if (a != b) {
@@ -38,7 +39,13 @@ public class Matrix {
         return true;
     }
 
-    public static void multiplyMM(float[] result, int resultOffset, float[] lhs, int lhsOffset, float[] rhs, int rhsOffset) {
+    public static void multiplyMM(
+            float[] result,
+            int resultOffset,
+            float[] lhs,
+            int lhsOffset,
+            float[] rhs,
+            int rhsOffset) {
         if (result == null) {
             throw new IllegalArgumentException("result == null");
         }
@@ -66,7 +73,8 @@ public class Matrix {
         if (rhs.length < rhsOffset + 16) {
             throw new IllegalArgumentException("rhs.length < rhsOffset + 16");
         }
-        if (overlap(result, resultOffset, 16, lhs, lhsOffset, 16) || overlap(result, resultOffset, 16, rhs, rhsOffset, 16)) {
+        if (overlap(result, resultOffset, 16, lhs, lhsOffset, 16)
+                || overlap(result, resultOffset, 16, rhs, rhsOffset, 16)) {
             float[] tmp = ThreadTmp.get();
             for (int i = 0; i < 4; i++) {
                 float rhs_i0 = rhs[(i * 4) + 0 + rhsOffset];
@@ -113,7 +121,13 @@ public class Matrix {
         }
     }
 
-    public static void multiplyMV(float[] resultVec, int resultVecOffset, float[] lhsMat, int lhsMatOffset, float[] rhsVec, int rhsVecOffset) {
+    public static void multiplyMV(
+            float[] resultVec,
+            int resultVecOffset,
+            float[] lhsMat,
+            int lhsMatOffset,
+            float[] rhsVec,
+            int rhsVecOffset) {
         if (resultVec == null) {
             throw new IllegalArgumentException("resultVec == null");
         }
@@ -141,10 +155,26 @@ public class Matrix {
         if (rhsVec.length < rhsVecOffset + 4) {
             throw new IllegalArgumentException("rhsVec.length < rhsVecOffset + 4");
         }
-        float tmp0 = (lhsMat[lhsMatOffset + 0] * rhsVec[rhsVecOffset + 0]) + (lhsMat[lhsMatOffset + 4] * rhsVec[rhsVecOffset + 1]) + (lhsMat[lhsMatOffset + 8] * rhsVec[rhsVecOffset + 2]) + (lhsMat[lhsMatOffset + 12] * rhsVec[rhsVecOffset + 3]);
-        float tmp1 = (lhsMat[lhsMatOffset + 1] * rhsVec[rhsVecOffset + 0]) + (lhsMat[lhsMatOffset + 5] * rhsVec[rhsVecOffset + 1]) + (lhsMat[lhsMatOffset + 9] * rhsVec[rhsVecOffset + 2]) + (lhsMat[lhsMatOffset + 13] * rhsVec[rhsVecOffset + 3]);
-        float tmp2 = (lhsMat[lhsMatOffset + 2] * rhsVec[rhsVecOffset + 0]) + (lhsMat[lhsMatOffset + 6] * rhsVec[rhsVecOffset + 1]) + (lhsMat[lhsMatOffset + 10] * rhsVec[rhsVecOffset + 2]) + (lhsMat[lhsMatOffset + 14] * rhsVec[rhsVecOffset + 3]);
-        float tmp3 = (lhsMat[lhsMatOffset + 3] * rhsVec[rhsVecOffset + 0]) + (lhsMat[lhsMatOffset + 7] * rhsVec[rhsVecOffset + 1]) + (lhsMat[lhsMatOffset + 11] * rhsVec[rhsVecOffset + 2]) + (lhsMat[lhsMatOffset + 15] * rhsVec[rhsVecOffset + 3]);
+        float tmp0 =
+                (lhsMat[lhsMatOffset + 0] * rhsVec[rhsVecOffset + 0])
+                        + (lhsMat[lhsMatOffset + 4] * rhsVec[rhsVecOffset + 1])
+                        + (lhsMat[lhsMatOffset + 8] * rhsVec[rhsVecOffset + 2])
+                        + (lhsMat[lhsMatOffset + 12] * rhsVec[rhsVecOffset + 3]);
+        float tmp1 =
+                (lhsMat[lhsMatOffset + 1] * rhsVec[rhsVecOffset + 0])
+                        + (lhsMat[lhsMatOffset + 5] * rhsVec[rhsVecOffset + 1])
+                        + (lhsMat[lhsMatOffset + 9] * rhsVec[rhsVecOffset + 2])
+                        + (lhsMat[lhsMatOffset + 13] * rhsVec[rhsVecOffset + 3]);
+        float tmp2 =
+                (lhsMat[lhsMatOffset + 2] * rhsVec[rhsVecOffset + 0])
+                        + (lhsMat[lhsMatOffset + 6] * rhsVec[rhsVecOffset + 1])
+                        + (lhsMat[lhsMatOffset + 10] * rhsVec[rhsVecOffset + 2])
+                        + (lhsMat[lhsMatOffset + 14] * rhsVec[rhsVecOffset + 3]);
+        float tmp3 =
+                (lhsMat[lhsMatOffset + 3] * rhsVec[rhsVecOffset + 0])
+                        + (lhsMat[lhsMatOffset + 7] * rhsVec[rhsVecOffset + 1])
+                        + (lhsMat[lhsMatOffset + 11] * rhsVec[rhsVecOffset + 2])
+                        + (lhsMat[lhsMatOffset + 15] * rhsVec[rhsVecOffset + 3]);
         resultVec[resultVecOffset + 0] = tmp0;
         resultVec[resultVecOffset + 1] = tmp1;
         resultVec[resultVecOffset + 2] = tmp2;
@@ -190,14 +220,30 @@ public class Matrix {
         float atmp9 = src10 * src12;
         float atmp10 = src8 * src13;
         float atmp11 = src9 * src12;
-        float dst0 = (((atmp0 * src5) + (atmp3 * src6)) + (atmp4 * src7)) - (((atmp1 * src5) + (atmp2 * src6)) + (atmp5 * src7));
-        float dst1 = (((atmp1 * src4) + (atmp6 * src6)) + (atmp9 * src7)) - (((atmp0 * src4) + (atmp7 * src6)) + (atmp8 * src7));
-        float dst2 = (((atmp2 * src4) + (atmp7 * src5)) + (atmp10 * src7)) - (((atmp3 * src4) + (atmp6 * src5)) + (atmp11 * src7));
-        float dst3 = (((atmp5 * src4) + (atmp8 * src5)) + (atmp11 * src6)) - (((atmp4 * src4) + (atmp9 * src5)) + (atmp10 * src6));
-        float dst4 = (((atmp1 * src1) + (atmp2 * src2)) + (atmp5 * src3)) - (((atmp0 * src1) + (atmp3 * src2)) + (atmp4 * src3));
-        float dst5 = (((atmp0 * src0) + (atmp7 * src2)) + (atmp8 * src3)) - (((atmp1 * src0) + (atmp6 * src2)) + (atmp9 * src3));
-        float dst6 = (((atmp3 * src0) + (atmp6 * src1)) + (atmp11 * src3)) - (((atmp2 * src0) + (atmp7 * src1)) + (atmp10 * src3));
-        float dst7 = (((atmp4 * src0) + (atmp9 * src1)) + (atmp10 * src2)) - (((atmp5 * src0) + (atmp8 * src1)) + (atmp11 * src2));
+        float dst0 =
+                (((atmp0 * src5) + (atmp3 * src6)) + (atmp4 * src7))
+                        - (((atmp1 * src5) + (atmp2 * src6)) + (atmp5 * src7));
+        float dst1 =
+                (((atmp1 * src4) + (atmp6 * src6)) + (atmp9 * src7))
+                        - (((atmp0 * src4) + (atmp7 * src6)) + (atmp8 * src7));
+        float dst2 =
+                (((atmp2 * src4) + (atmp7 * src5)) + (atmp10 * src7))
+                        - (((atmp3 * src4) + (atmp6 * src5)) + (atmp11 * src7));
+        float dst3 =
+                (((atmp5 * src4) + (atmp8 * src5)) + (atmp11 * src6))
+                        - (((atmp4 * src4) + (atmp9 * src5)) + (atmp10 * src6));
+        float dst4 =
+                (((atmp1 * src1) + (atmp2 * src2)) + (atmp5 * src3))
+                        - (((atmp0 * src1) + (atmp3 * src2)) + (atmp4 * src3));
+        float dst5 =
+                (((atmp0 * src0) + (atmp7 * src2)) + (atmp8 * src3))
+                        - (((atmp1 * src0) + (atmp6 * src2)) + (atmp9 * src3));
+        float dst6 =
+                (((atmp3 * src0) + (atmp6 * src1)) + (atmp11 * src3))
+                        - (((atmp2 * src0) + (atmp7 * src1)) + (atmp10 * src3));
+        float dst7 =
+                (((atmp4 * src0) + (atmp9 * src1)) + (atmp10 * src2))
+                        - (((atmp5 * src0) + (atmp8 * src1)) + (atmp11 * src2));
         float btmp0 = src2 * src7;
         float btmp1 = src3 * src6;
         float btmp2 = src1 * src7;
@@ -210,14 +256,30 @@ public class Matrix {
         float btmp9 = src2 * src4;
         float btmp10 = src0 * src5;
         float btmp11 = src1 * src4;
-        float dst8 = (((btmp0 * src13) + (btmp3 * src14)) + (btmp4 * src15)) - (((btmp1 * src13) + (btmp2 * src14)) + (btmp5 * src15));
-        float dst9 = (((btmp1 * src12) + (btmp6 * src14)) + (btmp9 * src15)) - (((btmp0 * src12) + (btmp7 * src14)) + (btmp8 * src15));
-        float dst10 = (((btmp2 * src12) + (btmp7 * src13)) + (btmp10 * src15)) - (((btmp3 * src12) + (btmp6 * src13)) + (btmp11 * src15));
-        float dst11 = (((btmp5 * src12) + (btmp8 * src13)) + (btmp11 * src14)) - (((btmp4 * src12) + (btmp9 * src13)) + (btmp10 * src14));
-        float dst12 = (((btmp2 * src10) + (btmp5 * src11)) + (btmp1 * src9)) - (((btmp4 * src11) + (btmp0 * src9)) + (btmp3 * src10));
-        float dst13 = (((btmp8 * src11) + (btmp0 * src8)) + (btmp7 * src10)) - (((btmp6 * src10) + (btmp9 * src11)) + (btmp1 * src8));
-        float dst14 = (((btmp6 * src9) + (btmp11 * src11)) + (btmp3 * src8)) - (((btmp10 * src11) + (btmp2 * src8)) + (btmp7 * src9));
-        float dst15 = (((btmp10 * src10) + (btmp4 * src8)) + (btmp9 * src9)) - (((btmp8 * src9) + (btmp11 * src10)) + (btmp5 * src8));
+        float dst8 =
+                (((btmp0 * src13) + (btmp3 * src14)) + (btmp4 * src15))
+                        - (((btmp1 * src13) + (btmp2 * src14)) + (btmp5 * src15));
+        float dst9 =
+                (((btmp1 * src12) + (btmp6 * src14)) + (btmp9 * src15))
+                        - (((btmp0 * src12) + (btmp7 * src14)) + (btmp8 * src15));
+        float dst10 =
+                (((btmp2 * src12) + (btmp7 * src13)) + (btmp10 * src15))
+                        - (((btmp3 * src12) + (btmp6 * src13)) + (btmp11 * src15));
+        float dst11 =
+                (((btmp5 * src12) + (btmp8 * src13)) + (btmp11 * src14))
+                        - (((btmp4 * src12) + (btmp9 * src13)) + (btmp10 * src14));
+        float dst12 =
+                (((btmp2 * src10) + (btmp5 * src11)) + (btmp1 * src9))
+                        - (((btmp4 * src11) + (btmp0 * src9)) + (btmp3 * src10));
+        float dst13 =
+                (((btmp8 * src11) + (btmp0 * src8)) + (btmp7 * src10))
+                        - (((btmp6 * src10) + (btmp9 * src11)) + (btmp1 * src8));
+        float dst14 =
+                (((btmp6 * src9) + (btmp11 * src11)) + (btmp3 * src8))
+                        - (((btmp10 * src11) + (btmp2 * src8)) + (btmp7 * src9));
+        float dst15 =
+                (((btmp10 * src10) + (btmp4 * src8)) + (btmp9 * src9))
+                        - (((btmp8 * src9) + (btmp11 * src10)) + (btmp5 * src8));
         float det = (src0 * dst0) + (src1 * dst1) + (src2 * dst2) + (src3 * dst3);
         if (det == 0.0f) {
             return false;
@@ -242,7 +304,15 @@ public class Matrix {
         return true;
     }
 
-    public static void orthoM(float[] m, int mOffset, float left, float right, float bottom, float top, float near, float far) {
+    public static void orthoM(
+            float[] m,
+            int mOffset,
+            float left,
+            float right,
+            float bottom,
+            float top,
+            float near,
+            float far) {
         if (left == right) {
             throw new IllegalArgumentException("left == right");
         }
@@ -279,7 +349,15 @@ public class Matrix {
         m[mOffset + 11] = 0.0f;
     }
 
-    public static void frustumM(float[] m, int offset, float left, float right, float bottom, float top, float near, float far) {
+    public static void frustumM(
+            float[] m,
+            int offset,
+            float left,
+            float right,
+            float bottom,
+            float top,
+            float near,
+            float far) {
         if (left == right) {
             throw new IllegalArgumentException("left == right");
         }
@@ -322,7 +400,8 @@ public class Matrix {
         m[offset + 15] = 0.0f;
     }
 
-    public static void perspectiveM(float[] m, int offset, float fovy, float aspect, float zNear, float zFar) {
+    public static void perspectiveM(
+            float[] m, int offset, float fovy, float aspect, float zNear, float zFar) {
         float f = 1.0f / ((float) Math.tan(fovy * 0.008726646259971648d));
         float rangeReciprocal = 1.0f / (zNear - zFar);
         m[offset + 0] = f / aspect;
@@ -356,7 +435,8 @@ public class Matrix {
         }
     }
 
-    public static void scaleM(float[] sm, int smOffset, float[] m, int mOffset, float x, float y, float z) {
+    public static void scaleM(
+            float[] sm, int smOffset, float[] m, int mOffset, float x, float y, float z) {
         for (int i = 0; i < 4; i++) {
             int smi = smOffset + i;
             int mi = mOffset + i;
@@ -378,7 +458,8 @@ public class Matrix {
         }
     }
 
-    public static void translateM(float[] tm, int tmOffset, float[] m, int mOffset, float x, float y, float z) {
+    public static void translateM(
+            float[] tm, int tmOffset, float[] m, int mOffset, float x, float y, float z) {
         for (int i = 0; i < 12; i++) {
             tm[tmOffset + i] = m[mOffset + i];
         }
@@ -397,7 +478,8 @@ public class Matrix {
         }
     }
 
-    public static void rotateM(float[] rm, int rmOffset, float[] m, int mOffset, float a, float x, float y, float z) {
+    public static void rotateM(
+            float[] rm, int rmOffset, float[] m, int mOffset, float a, float x, float y, float z) {
         float[] tmp = ThreadTmp.get();
         setRotateM(tmp, 16, a, x, y, z);
         multiplyMM(rm, rmOffset, m, mOffset, tmp, 16);
@@ -552,7 +634,18 @@ public class Matrix {
         rm[rmOffset + 15] = 1.0f;
     }
 
-    public static void setLookAtM(float[] rm, int rmOffset, float eyeX, float eyeY, float eyeZ, float centerX, float centerY, float centerZ, float upX, float upY, float upZ) {
+    public static void setLookAtM(
+            float[] rm,
+            int rmOffset,
+            float eyeX,
+            float eyeY,
+            float eyeZ,
+            float centerX,
+            float centerY,
+            float centerZ,
+            float upX,
+            float upY,
+            float upZ) {
         float fx = centerX - eyeX;
         float fy = centerY - eyeY;
         float fz = centerZ - eyeZ;

@@ -86,7 +86,9 @@ public class ASN1OutputStream {
         write(contents, 0, contents.length);
     }
 
-    final void writeEncoded(boolean withTag, int tag, byte[] contents, int contentsOff, int contentsLen) throws IOException {
+    final void writeEncoded(
+            boolean withTag, int tag, byte[] contents, int contentsOff, int contentsLen)
+            throws IOException {
         if (withTag) {
             write(tag);
         }
@@ -94,7 +96,8 @@ public class ASN1OutputStream {
         write(contents, contentsOff, contentsLen);
     }
 
-    final void writeEncoded(boolean withTag, int tag, byte headByte, byte[] tailBytes) throws IOException {
+    final void writeEncoded(boolean withTag, int tag, byte headByte, byte[] tailBytes)
+            throws IOException {
         if (withTag) {
             write(tag);
         }
@@ -103,7 +106,15 @@ public class ASN1OutputStream {
         write(tailBytes, 0, tailBytes.length);
     }
 
-    final void writeEncoded(boolean withTag, int tag, byte headByte, byte[] body, int bodyOff, int bodyLen, byte tailByte) throws IOException {
+    final void writeEncoded(
+            boolean withTag,
+            int tag,
+            byte headByte,
+            byte[] body,
+            int bodyOff,
+            int bodyLen,
+            byte tailByte)
+            throws IOException {
         if (withTag) {
             write(tag);
         }
@@ -113,13 +124,15 @@ public class ASN1OutputStream {
         write(tailByte);
     }
 
-    final void writeEncoded(boolean withTag, int flags, int tagNo, byte[] contents) throws IOException {
+    final void writeEncoded(boolean withTag, int flags, int tagNo, byte[] contents)
+            throws IOException {
         writeTag(withTag, flags, tagNo);
         writeLength(contents.length);
         write(contents, 0, contents.length);
     }
 
-    final void writeEncodedIndef(boolean withTag, int flags, int tagNo, byte[] contents) throws IOException {
+    final void writeEncodedIndef(boolean withTag, int flags, int tagNo, byte[] contents)
+            throws IOException {
         writeTag(withTag, flags, tagNo);
         write(128);
         write(contents, 0, contents.length);
@@ -127,7 +140,8 @@ public class ASN1OutputStream {
         write(0);
     }
 
-    final void writeEncodedIndef(boolean withTag, int tag, ASN1Encodable[] elements) throws IOException {
+    final void writeEncodedIndef(boolean withTag, int tag, ASN1Encodable[] elements)
+            throws IOException {
         if (withTag) {
             write(tag);
         }
@@ -137,7 +151,8 @@ public class ASN1OutputStream {
         write(0);
     }
 
-    final void writeEncodedIndef(boolean withTag, int tag, Enumeration elements) throws IOException {
+    final void writeEncodedIndef(boolean withTag, int tag, Enumeration elements)
+            throws IOException {
         if (withTag) {
             write(tag);
         }
@@ -199,8 +214,7 @@ public class ASN1OutputStream {
         this.os.flush();
     }
 
-    void flushInternal() throws IOException {
-    }
+    void flushInternal() throws IOException {}
 
     DEROutputStream getDERSubStream() {
         return new DEROutputStream(this.os);

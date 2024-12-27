@@ -1,8 +1,10 @@
 package com.android.server.chimera;
 
 import android.util.ArraySet;
+
 import com.samsung.android.game.IGameManagerService;
 import com.samsung.android.game.SemGameManager;
+
 import java.util.Set;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -11,16 +13,17 @@ public final class ICollectionCache$GameAppsCache {
     public final SystemRepository mSystemRepository;
     public final Set gameApps = new ArraySet();
     public final Set notGameApps = new ArraySet();
-    public IGameManagerService gms = IGameManagerService.Stub.asInterface(SemGameManager.getGMSBinder());
+    public IGameManagerService gms =
+            IGameManagerService.Stub.asInterface(SemGameManager.getGMSBinder());
 
     public ICollectionCache$GameAppsCache(SystemRepository systemRepository) {
         this.mSystemRepository = systemRepository;
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:11:0x0026, code lost:
-    
-        if (r0 == null) goto L12;
-     */
+
+       if (r0 == null) goto L12;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -80,6 +83,8 @@ public final class ICollectionCache$GameAppsCache {
         L60:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.chimera.ICollectionCache$GameAppsCache.contains(java.lang.String):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.chimera.ICollectionCache$GameAppsCache.contains(java.lang.String):boolean");
     }
 }

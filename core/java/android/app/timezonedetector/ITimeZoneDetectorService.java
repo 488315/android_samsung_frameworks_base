@@ -24,11 +24,14 @@ public interface ITimeZoneDetectorService extends IInterface {
 
     void removeListener(ITimeZoneDetectorListener iTimeZoneDetectorListener) throws RemoteException;
 
-    boolean setManualTimeZone(ManualTimeZoneSuggestion manualTimeZoneSuggestion) throws RemoteException;
+    boolean setManualTimeZone(ManualTimeZoneSuggestion manualTimeZoneSuggestion)
+            throws RemoteException;
 
-    boolean suggestManualTimeZone(ManualTimeZoneSuggestion manualTimeZoneSuggestion) throws RemoteException;
+    boolean suggestManualTimeZone(ManualTimeZoneSuggestion manualTimeZoneSuggestion)
+            throws RemoteException;
 
-    void suggestTelephonyTimeZone(TelephonyTimeZoneSuggestion telephonyTimeZoneSuggestion) throws RemoteException;
+    void suggestTelephonyTimeZone(TelephonyTimeZoneSuggestion telephonyTimeZoneSuggestion)
+            throws RemoteException;
 
     boolean updateConfiguration(TimeZoneConfiguration timeZoneConfiguration) throws RemoteException;
 
@@ -39,15 +42,14 @@ public interface ITimeZoneDetectorService extends IInterface {
         }
 
         @Override // android.app.timezonedetector.ITimeZoneDetectorService
-        public void addListener(ITimeZoneDetectorListener listener) throws RemoteException {
-        }
+        public void addListener(ITimeZoneDetectorListener listener) throws RemoteException {}
 
         @Override // android.app.timezonedetector.ITimeZoneDetectorService
-        public void removeListener(ITimeZoneDetectorListener listener) throws RemoteException {
-        }
+        public void removeListener(ITimeZoneDetectorListener listener) throws RemoteException {}
 
         @Override // android.app.timezonedetector.ITimeZoneDetectorService
-        public boolean updateConfiguration(TimeZoneConfiguration configuration) throws RemoteException {
+        public boolean updateConfiguration(TimeZoneConfiguration configuration)
+                throws RemoteException {
             return false;
         }
 
@@ -62,18 +64,20 @@ public interface ITimeZoneDetectorService extends IInterface {
         }
 
         @Override // android.app.timezonedetector.ITimeZoneDetectorService
-        public boolean setManualTimeZone(ManualTimeZoneSuggestion timeZoneSuggestion) throws RemoteException {
+        public boolean setManualTimeZone(ManualTimeZoneSuggestion timeZoneSuggestion)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.timezonedetector.ITimeZoneDetectorService
-        public boolean suggestManualTimeZone(ManualTimeZoneSuggestion timeZoneSuggestion) throws RemoteException {
+        public boolean suggestManualTimeZone(ManualTimeZoneSuggestion timeZoneSuggestion)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.timezonedetector.ITimeZoneDetectorService
-        public void suggestTelephonyTimeZone(TelephonyTimeZoneSuggestion timeZoneSuggestion) throws RemoteException {
-        }
+        public void suggestTelephonyTimeZone(TelephonyTimeZoneSuggestion timeZoneSuggestion)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -81,7 +85,7 @@ public interface ITimeZoneDetectorService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITimeZoneDetectorService {
+    public abstract static class Stub extends Binder implements ITimeZoneDetectorService {
         static final int TRANSACTION_addListener = 2;
         static final int TRANSACTION_confirmTimeZone = 6;
         static final int TRANSACTION_getCapabilitiesAndConfig = 1;
@@ -143,7 +147,8 @@ public interface ITimeZoneDetectorService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITimeZoneDetectorService.DESCRIPTOR);
             }
@@ -158,19 +163,23 @@ public interface ITimeZoneDetectorService extends IInterface {
                     reply.writeTypedObject(_result, 1);
                     return true;
                 case 2:
-                    ITimeZoneDetectorListener _arg0 = ITimeZoneDetectorListener.Stub.asInterface(data.readStrongBinder());
+                    ITimeZoneDetectorListener _arg0 =
+                            ITimeZoneDetectorListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addListener(_arg0);
                     reply.writeNoException();
                     return true;
                 case 3:
-                    ITimeZoneDetectorListener _arg02 = ITimeZoneDetectorListener.Stub.asInterface(data.readStrongBinder());
+                    ITimeZoneDetectorListener _arg02 =
+                            ITimeZoneDetectorListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeListener(_arg02);
                     reply.writeNoException();
                     return true;
                 case 4:
-                    TimeZoneConfiguration _arg03 = (TimeZoneConfiguration) data.readTypedObject(TimeZoneConfiguration.CREATOR);
+                    TimeZoneConfiguration _arg03 =
+                            (TimeZoneConfiguration)
+                                    data.readTypedObject(TimeZoneConfiguration.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result2 = updateConfiguration(_arg03);
                     reply.writeNoException();
@@ -189,21 +198,27 @@ public interface ITimeZoneDetectorService extends IInterface {
                     reply.writeBoolean(_result4);
                     return true;
                 case 7:
-                    ManualTimeZoneSuggestion _arg05 = (ManualTimeZoneSuggestion) data.readTypedObject(ManualTimeZoneSuggestion.CREATOR);
+                    ManualTimeZoneSuggestion _arg05 =
+                            (ManualTimeZoneSuggestion)
+                                    data.readTypedObject(ManualTimeZoneSuggestion.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result5 = setManualTimeZone(_arg05);
                     reply.writeNoException();
                     reply.writeBoolean(_result5);
                     return true;
                 case 8:
-                    ManualTimeZoneSuggestion _arg06 = (ManualTimeZoneSuggestion) data.readTypedObject(ManualTimeZoneSuggestion.CREATOR);
+                    ManualTimeZoneSuggestion _arg06 =
+                            (ManualTimeZoneSuggestion)
+                                    data.readTypedObject(ManualTimeZoneSuggestion.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result6 = suggestManualTimeZone(_arg06);
                     reply.writeNoException();
                     reply.writeBoolean(_result6);
                     return true;
                 case 9:
-                    TelephonyTimeZoneSuggestion _arg07 = (TelephonyTimeZoneSuggestion) data.readTypedObject(TelephonyTimeZoneSuggestion.CREATOR);
+                    TelephonyTimeZoneSuggestion _arg07 =
+                            (TelephonyTimeZoneSuggestion)
+                                    data.readTypedObject(TelephonyTimeZoneSuggestion.CREATOR);
                     data.enforceNoDataAvail();
                     suggestTelephonyTimeZone(_arg07);
                     reply.writeNoException();
@@ -237,7 +252,9 @@ public interface ITimeZoneDetectorService extends IInterface {
                     _data.writeInterfaceToken(ITimeZoneDetectorService.DESCRIPTOR);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    TimeZoneCapabilitiesAndConfig _result = (TimeZoneCapabilitiesAndConfig) _reply.readTypedObject(TimeZoneCapabilitiesAndConfig.CREATOR);
+                    TimeZoneCapabilitiesAndConfig _result =
+                            (TimeZoneCapabilitiesAndConfig)
+                                    _reply.readTypedObject(TimeZoneCapabilitiesAndConfig.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -276,7 +293,8 @@ public interface ITimeZoneDetectorService extends IInterface {
             }
 
             @Override // android.app.timezonedetector.ITimeZoneDetectorService
-            public boolean updateConfiguration(TimeZoneConfiguration configuration) throws RemoteException {
+            public boolean updateConfiguration(TimeZoneConfiguration configuration)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -300,7 +318,8 @@ public interface ITimeZoneDetectorService extends IInterface {
                     _data.writeInterfaceToken(ITimeZoneDetectorService.DESCRIPTOR);
                     this.mRemote.transact(5, _data, _reply, 0);
                     _reply.readException();
-                    TimeZoneState _result = (TimeZoneState) _reply.readTypedObject(TimeZoneState.CREATOR);
+                    TimeZoneState _result =
+                            (TimeZoneState) _reply.readTypedObject(TimeZoneState.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -326,7 +345,8 @@ public interface ITimeZoneDetectorService extends IInterface {
             }
 
             @Override // android.app.timezonedetector.ITimeZoneDetectorService
-            public boolean setManualTimeZone(ManualTimeZoneSuggestion timeZoneSuggestion) throws RemoteException {
+            public boolean setManualTimeZone(ManualTimeZoneSuggestion timeZoneSuggestion)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -343,7 +363,8 @@ public interface ITimeZoneDetectorService extends IInterface {
             }
 
             @Override // android.app.timezonedetector.ITimeZoneDetectorService
-            public boolean suggestManualTimeZone(ManualTimeZoneSuggestion timeZoneSuggestion) throws RemoteException {
+            public boolean suggestManualTimeZone(ManualTimeZoneSuggestion timeZoneSuggestion)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -360,7 +381,8 @@ public interface ITimeZoneDetectorService extends IInterface {
             }
 
             @Override // android.app.timezonedetector.ITimeZoneDetectorService
-            public void suggestTelephonyTimeZone(TelephonyTimeZoneSuggestion timeZoneSuggestion) throws RemoteException {
+            public void suggestTelephonyTimeZone(TelephonyTimeZoneSuggestion timeZoneSuggestion)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

@@ -14,7 +14,10 @@ public final class FirewallExemption {
 
     public final String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("FirewallExemption for " + this.mExemptionRule.getApplication().getPackageName() + ", ");
+        sb.append(
+                "FirewallExemption for "
+                        + this.mExemptionRule.getApplication().getPackageName()
+                        + ", ");
         sb.append("for address " + this.mExemptionRule.getIpAddress() + ". ");
         StringBuilder sb2 = new StringBuilder("isApplied: ");
         sb2.append(this.mIsApplied);

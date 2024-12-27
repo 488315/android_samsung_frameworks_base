@@ -14,12 +14,26 @@ class TextTrackRegion {
     float mAnchorPointY = 100.0f;
     int mScrollValue = 300;
 
-    TextTrackRegion() {
-    }
+    TextTrackRegion() {}
 
     public String toString() {
         String str;
-        StringBuilder append = new StringBuilder(" {id:\"").append(this.mId).append("\", width:").append(this.mWidth).append(", lines:").append(this.mLines).append(", anchorPoint:(").append(this.mAnchorPointX).append(", ").append(this.mAnchorPointY).append("), viewportAnchorPoints:").append(this.mViewportAnchorPointX).append(", ").append(this.mViewportAnchorPointY).append("), scrollValue:");
+        StringBuilder append =
+                new StringBuilder(" {id:\"")
+                        .append(this.mId)
+                        .append("\", width:")
+                        .append(this.mWidth)
+                        .append(", lines:")
+                        .append(this.mLines)
+                        .append(", anchorPoint:(")
+                        .append(this.mAnchorPointX)
+                        .append(", ")
+                        .append(this.mAnchorPointY)
+                        .append("), viewportAnchorPoints:")
+                        .append(this.mViewportAnchorPointX)
+                        .append(", ")
+                        .append(this.mViewportAnchorPointY)
+                        .append("), scrollValue:");
         if (this.mScrollValue == 300) {
             str = "none";
         } else {

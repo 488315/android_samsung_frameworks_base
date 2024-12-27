@@ -2,6 +2,7 @@ package android.telephony.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -10,19 +11,22 @@ import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class RouteSelectionDescriptor implements Parcelable {
-    public static final Parcelable.Creator<RouteSelectionDescriptor> CREATOR = new Parcelable.Creator<RouteSelectionDescriptor>() { // from class: android.telephony.data.RouteSelectionDescriptor.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RouteSelectionDescriptor createFromParcel(Parcel source) {
-            return new RouteSelectionDescriptor(source);
-        }
+    public static final Parcelable.Creator<RouteSelectionDescriptor> CREATOR =
+            new Parcelable.Creator<
+                    RouteSelectionDescriptor>() { // from class:
+                                                  // android.telephony.data.RouteSelectionDescriptor.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RouteSelectionDescriptor createFromParcel(Parcel source) {
+                    return new RouteSelectionDescriptor(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RouteSelectionDescriptor[] newArray(int size) {
-            return new RouteSelectionDescriptor[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RouteSelectionDescriptor[] newArray(int size) {
+                    return new RouteSelectionDescriptor[size];
+                }
+            };
     public static final int MAX_ROUTE_PRECEDENCE = 255;
     public static final int MAX_ROUTE_SSC_MODE = 3;
     public static final int MIN_ROUTE_PRECEDENCE = 0;
@@ -40,14 +44,17 @@ public final class RouteSelectionDescriptor implements Parcelable {
     private final int mSscMode;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RouteSessionType {
-    }
+    public @interface RouteSessionType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RouteSscMode {
-    }
+    public @interface RouteSscMode {}
 
-    public RouteSelectionDescriptor(int precedence, int sessionType, int sscMode, List<NetworkSliceInfo> sliceInfo, List<String> dnn) {
+    public RouteSelectionDescriptor(
+            int precedence,
+            int sessionType,
+            int sscMode,
+            List<NetworkSliceInfo> sliceInfo,
+            List<String> dnn) {
         this.mPrecedence = precedence;
         this.mSessionType = sessionType;
         this.mSscMode = sscMode;
@@ -108,17 +115,38 @@ public final class RouteSelectionDescriptor implements Parcelable {
             return false;
         }
         RouteSelectionDescriptor that = (RouteSelectionDescriptor) o;
-        if (this.mPrecedence == that.mPrecedence && this.mSessionType == that.mSessionType && this.mSscMode == that.mSscMode && this.mSliceInfo.size() == that.mSliceInfo.size() && this.mSliceInfo.containsAll(that.mSliceInfo) && this.mDnn.size() == that.mDnn.size() && this.mDnn.containsAll(that.mDnn)) {
+        if (this.mPrecedence == that.mPrecedence
+                && this.mSessionType == that.mSessionType
+                && this.mSscMode == that.mSscMode
+                && this.mSliceInfo.size() == that.mSliceInfo.size()
+                && this.mSliceInfo.containsAll(that.mSliceInfo)
+                && this.mDnn.size() == that.mDnn.size()
+                && this.mDnn.containsAll(that.mDnn)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mPrecedence), Integer.valueOf(this.mSessionType), Integer.valueOf(this.mSscMode), this.mSliceInfo, this.mDnn);
+        return Objects.hash(
+                Integer.valueOf(this.mPrecedence),
+                Integer.valueOf(this.mSessionType),
+                Integer.valueOf(this.mSscMode),
+                this.mSliceInfo,
+                this.mDnn);
     }
 
     public String toString() {
-        return "{.precedence = " + this.mPrecedence + ", .sessionType = " + this.mSessionType + ", .sscMode = " + this.mSscMode + ", .sliceInfo = " + this.mSliceInfo + ", .dnn = " + this.mDnn + "}";
+        return "{.precedence = "
+                + this.mPrecedence
+                + ", .sessionType = "
+                + this.mSessionType
+                + ", .sscMode = "
+                + this.mSscMode
+                + ", .sliceInfo = "
+                + this.mSliceInfo
+                + ", .dnn = "
+                + this.mDnn
+                + "}";
     }
 }

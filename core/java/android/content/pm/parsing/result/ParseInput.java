@@ -34,7 +34,9 @@ public interface ParseInput {
         public static final long RESOURCES_ARSC_COMPRESSED = 132742131;
 
         public static int getTargetSdkForChange(long changeId) {
-            if (changeId == MISSING_APP_TAG || changeId == EMPTY_INTENT_ACTION_CATEGORY || changeId == RESOURCES_ARSC_COMPRESSED) {
+            if (changeId == MISSING_APP_TAG
+                    || changeId == EMPTY_INTENT_ACTION_CATEGORY
+                    || changeId == RESOURCES_ARSC_COMPRESSED) {
                 return 29;
             }
             if (changeId == MISSING_EXPORTED_FLAG) {

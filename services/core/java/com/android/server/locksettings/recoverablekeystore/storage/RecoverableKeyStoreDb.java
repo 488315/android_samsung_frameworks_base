@@ -6,10 +6,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
+
 import com.android.server.am.Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0;
 import com.android.server.locksettings.recoverablekeystore.TestOnlyInsecureCertificateHelper;
 import com.android.server.locksettings.recoverablekeystore.WrappedKey;
+
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
+
 import java.security.cert.CertPath;
 import java.security.cert.CertificateEncodingException;
 import java.util.ArrayList;
@@ -22,7 +25,8 @@ import java.util.Map;
 /* loaded from: classes.dex */
 public final class RecoverableKeyStoreDb {
     public final RecoverableKeyStoreDbHelper mKeyStoreDbHelper;
-    public final TestOnlyInsecureCertificateHelper mTestOnlyInsecureCertificateHelper = new TestOnlyInsecureCertificateHelper();
+    public final TestOnlyInsecureCertificateHelper mTestOnlyInsecureCertificateHelper =
+            new TestOnlyInsecureCertificateHelper();
 
     public RecoverableKeyStoreDb(RecoverableKeyStoreDbHelper recoverableKeyStoreDbHelper) {
         this.mKeyStoreDbHelper = recoverableKeyStoreDbHelper;
@@ -31,14 +35,16 @@ public final class RecoverableKeyStoreDb {
     public final void ensureRecoveryServiceMetadataEntryExists(int i, int i2) {
         SQLiteDatabase writableDatabase = this.mKeyStoreDbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(i, contentValues, "user_id", i2, "uid");
+        Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(
+                i, contentValues, "user_id", i2, "uid");
         writableDatabase.insertWithOnConflict("recovery_service_metadata", null, contentValues, 4);
     }
 
     public final void ensureRootOfTrustEntryExists(int i, int i2, String str) {
         SQLiteDatabase writableDatabase = this.mKeyStoreDbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(i, contentValues, "user_id", i2, "uid");
+        Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(
+                i, contentValues, "user_id", i2, "uid");
         contentValues.put("root_alias", str);
         writableDatabase.insertWithOnConflict("root_of_trust", null, contentValues, 4);
     }
@@ -51,7 +57,22 @@ public final class RecoverableKeyStoreDb {
     }
 
     public final String getActiveRootOfTrust(int i, int i2) {
-        Cursor query = this.mKeyStoreDbHelper.getReadableDatabase().query("recovery_service_metadata", new String[]{KnoxCustomManagerService.ID, "user_id", "uid", "active_root_of_trust"}, "user_id = ? AND uid = ?", new String[]{Integer.toString(i), Integer.toString(i2)}, null, null, null);
+        Cursor query =
+                this.mKeyStoreDbHelper
+                        .getReadableDatabase()
+                        .query(
+                                "recovery_service_metadata",
+                                new String[] {
+                                    KnoxCustomManagerService.ID,
+                                    "user_id",
+                                    "uid",
+                                    "active_root_of_trust"
+                                },
+                                "user_id = ? AND uid = ?",
+                                new String[] {Integer.toString(i), Integer.toString(i2)},
+                                null,
+                                null,
+                                null);
         try {
             int count = query.getCount();
             if (count == 0) {
@@ -60,7 +81,14 @@ public final class RecoverableKeyStoreDb {
             }
             if (count > 1) {
                 Locale locale = Locale.US;
-                Log.wtf("RecoverableKeyStoreDb", count + " deviceId entries found for userId=" + i + " uid=" + i2 + ". Should only ever be 0 or 1.");
+                Log.wtf(
+                        "RecoverableKeyStoreDb",
+                        count
+                                + " deviceId entries found for userId="
+                                + i
+                                + " uid="
+                                + i2
+                                + ". Should only ever be 0 or 1.");
                 query.close();
                 return null;
             }
@@ -90,7 +118,26 @@ public final class RecoverableKeyStoreDb {
     }
 
     public final Map getAllKeys(int i, int i2, int i3) {
-        Cursor query = this.mKeyStoreDbHelper.getReadableDatabase().query("keys", new String[]{KnoxCustomManagerService.ID, "nonce", "wrapped_key", "alias", "recovery_status", "key_metadata"}, "user_id = ? AND uid = ? AND platform_key_generation_id = ?", new String[]{Integer.toString(i), Integer.toString(i2), Integer.toString(i3)}, null, null, null);
+        Cursor query =
+                this.mKeyStoreDbHelper
+                        .getReadableDatabase()
+                        .query(
+                                "keys",
+                                new String[] {
+                                    KnoxCustomManagerService.ID,
+                                    "nonce",
+                                    "wrapped_key",
+                                    "alias",
+                                    "recovery_status",
+                                    "key_metadata"
+                                },
+                                "user_id = ? AND uid = ? AND platform_key_generation_id = ?",
+                                new String[] {
+                                    Integer.toString(i), Integer.toString(i2), Integer.toString(i3)
+                                },
+                                null,
+                                null,
+                                null);
         try {
             HashMap hashMap = new HashMap();
             while (query.moveToNext()) {
@@ -99,7 +146,16 @@ public final class RecoverableKeyStoreDb {
                 String string = query.getString(query.getColumnIndexOrThrow("alias"));
                 int i4 = query.getInt(query.getColumnIndexOrThrow("recovery_status"));
                 int columnIndexOrThrow = query.getColumnIndexOrThrow("key_metadata");
-                hashMap.put(string, new WrappedKey(blob, blob2, query.isNull(columnIndexOrThrow) ? null : query.getBlob(columnIndexOrThrow), i3, i4));
+                hashMap.put(
+                        string,
+                        new WrappedKey(
+                                blob,
+                                blob2,
+                                query.isNull(columnIndexOrThrow)
+                                        ? null
+                                        : query.getBlob(columnIndexOrThrow),
+                                i3,
+                                i4));
             }
             query.close();
             return hashMap;
@@ -116,7 +172,17 @@ public final class RecoverableKeyStoreDb {
     }
 
     public final int getBadRemoteGuessCounter(int i) {
-        Cursor query = this.mKeyStoreDbHelper.getReadableDatabase().query("user_metadata", new String[]{"bad_remote_guess_counter"}, "user_id = ?", new String[]{Integer.toString(i)}, null, null, null);
+        Cursor query =
+                this.mKeyStoreDbHelper
+                        .getReadableDatabase()
+                        .query(
+                                "user_metadata",
+                                new String[] {"bad_remote_guess_counter"},
+                                "user_id = ?",
+                                new String[] {Integer.toString(i)},
+                                null,
+                                null,
+                                null);
         try {
             if (query.getCount() == 0) {
                 query.close();
@@ -139,7 +205,17 @@ public final class RecoverableKeyStoreDb {
     }
 
     public final byte[] getBytes(int i, int i2, String str) {
-        Cursor query = this.mKeyStoreDbHelper.getReadableDatabase().query("recovery_service_metadata", new String[]{KnoxCustomManagerService.ID, "user_id", "uid", str}, "user_id = ? AND uid = ?", new String[]{Integer.toString(i), Integer.toString(i2)}, null, null, null);
+        Cursor query =
+                this.mKeyStoreDbHelper
+                        .getReadableDatabase()
+                        .query(
+                                "recovery_service_metadata",
+                                new String[] {KnoxCustomManagerService.ID, "user_id", "uid", str},
+                                "user_id = ? AND uid = ?",
+                                new String[] {Integer.toString(i), Integer.toString(i2)},
+                                null,
+                                null,
+                                null);
         try {
             int count = query.getCount();
             if (count == 0) {
@@ -158,7 +234,14 @@ public final class RecoverableKeyStoreDb {
                 return blob;
             }
             Locale locale = Locale.US;
-            Log.wtf("RecoverableKeyStoreDb", count + " entries found for userId=" + i + " uid=" + i2 + ". Should only ever be 0 or 1.");
+            Log.wtf(
+                    "RecoverableKeyStoreDb",
+                    count
+                            + " entries found for userId="
+                            + i
+                            + " uid="
+                            + i2
+                            + ". Should only ever be 0 or 1.");
             query.close();
             return null;
         } catch (Throwable th) {
@@ -174,7 +257,17 @@ public final class RecoverableKeyStoreDb {
     }
 
     public final Long getLong(int i, int i2, String str) {
-        Cursor query = this.mKeyStoreDbHelper.getReadableDatabase().query("recovery_service_metadata", new String[]{KnoxCustomManagerService.ID, "user_id", "uid", str}, "user_id = ? AND uid = ?", new String[]{Integer.toString(i), Integer.toString(i2)}, null, null, null);
+        Cursor query =
+                this.mKeyStoreDbHelper
+                        .getReadableDatabase()
+                        .query(
+                                "recovery_service_metadata",
+                                new String[] {KnoxCustomManagerService.ID, "user_id", "uid", str},
+                                "user_id = ? AND uid = ?",
+                                new String[] {Integer.toString(i), Integer.toString(i2)},
+                                null,
+                                null,
+                                null);
         try {
             int count = query.getCount();
             if (count == 0) {
@@ -193,7 +286,14 @@ public final class RecoverableKeyStoreDb {
                 return valueOf;
             }
             Locale locale = Locale.US;
-            Log.wtf("RecoverableKeyStoreDb", count + " entries found for userId=" + i + " uid=" + i2 + ". Should only ever be 0 or 1.");
+            Log.wtf(
+                    "RecoverableKeyStoreDb",
+                    count
+                            + " entries found for userId="
+                            + i
+                            + " uid="
+                            + i2
+                            + ". Should only ever be 0 or 1.");
             query.close();
             return null;
         } catch (Throwable th) {
@@ -209,7 +309,17 @@ public final class RecoverableKeyStoreDb {
     }
 
     public final int getPlatformKeyGenerationId(int i) {
-        Cursor query = this.mKeyStoreDbHelper.getReadableDatabase().query("user_metadata", new String[]{"platform_key_generation_id"}, "user_id = ?", new String[]{Integer.toString(i)}, null, null, null);
+        Cursor query =
+                this.mKeyStoreDbHelper
+                        .getReadableDatabase()
+                        .query(
+                                "user_metadata",
+                                new String[] {"platform_key_generation_id"},
+                                "user_id = ?",
+                                new String[] {Integer.toString(i)},
+                                null,
+                                null,
+                                null);
         try {
             if (query.getCount() == 0) {
                 query.close();
@@ -232,7 +342,17 @@ public final class RecoverableKeyStoreDb {
     }
 
     public final List getRecoveryAgents(int i) {
-        Cursor query = this.mKeyStoreDbHelper.getReadableDatabase().query("recovery_service_metadata", new String[]{"uid"}, "user_id = ?", new String[]{Integer.toString(i)}, null, null, null);
+        Cursor query =
+                this.mKeyStoreDbHelper
+                        .getReadableDatabase()
+                        .query(
+                                "recovery_service_metadata",
+                                new String[] {"uid"},
+                                "user_id = ?",
+                                new String[] {Integer.toString(i)},
+                                null,
+                                null,
+                                null);
         try {
             ArrayList arrayList = new ArrayList(query.getCount());
             while (query.moveToNext()) {
@@ -253,7 +373,19 @@ public final class RecoverableKeyStoreDb {
     }
 
     public final int[] getRecoverySecretTypes(int i, int i2) {
-        Cursor query = this.mKeyStoreDbHelper.getReadableDatabase().query("recovery_service_metadata", new String[]{KnoxCustomManagerService.ID, "user_id", "uid", "secret_types"}, "user_id = ? AND uid = ?", new String[]{Integer.toString(i), Integer.toString(i2)}, null, null, null);
+        Cursor query =
+                this.mKeyStoreDbHelper
+                        .getReadableDatabase()
+                        .query(
+                                "recovery_service_metadata",
+                                new String[] {
+                                    KnoxCustomManagerService.ID, "user_id", "uid", "secret_types"
+                                },
+                                "user_id = ? AND uid = ?",
+                                new String[] {Integer.toString(i), Integer.toString(i2)},
+                                null,
+                                null,
+                                null);
         try {
             int count = query.getCount();
             if (count == 0) {
@@ -263,7 +395,14 @@ public final class RecoverableKeyStoreDb {
             }
             if (count > 1) {
                 Locale locale = Locale.US;
-                Log.wtf("RecoverableKeyStoreDb", count + " deviceId entries found for userId=" + i + " uid=" + i2 + ". Should only ever be 0 or 1.");
+                Log.wtf(
+                        "RecoverableKeyStoreDb",
+                        count
+                                + " deviceId entries found for userId="
+                                + i
+                                + " uid="
+                                + i2
+                                + ". Should only ever be 0 or 1.");
                 int[] iArr2 = new int[0];
                 query.close();
                 return iArr2;
@@ -305,11 +444,24 @@ public final class RecoverableKeyStoreDb {
     }
 
     public final Map getUserSerialNumbers() {
-        Cursor query = this.mKeyStoreDbHelper.getReadableDatabase().query("user_metadata", new String[]{"user_id", "user_serial_number"}, null, new String[0], null, null, null);
+        Cursor query =
+                this.mKeyStoreDbHelper
+                        .getReadableDatabase()
+                        .query(
+                                "user_metadata",
+                                new String[] {"user_id", "user_serial_number"},
+                                null,
+                                new String[0],
+                                null,
+                                null,
+                                null);
         try {
             ArrayMap arrayMap = new ArrayMap();
             while (query.moveToNext()) {
-                arrayMap.put(Integer.valueOf(query.getInt(query.getColumnIndexOrThrow("user_id"))), Long.valueOf(query.getLong(query.getColumnIndexOrThrow("user_serial_number"))));
+                arrayMap.put(
+                        Integer.valueOf(query.getInt(query.getColumnIndexOrThrow("user_id"))),
+                        Long.valueOf(
+                                query.getLong(query.getColumnIndexOrThrow("user_serial_number"))));
             }
             query.close();
             return arrayMap;
@@ -328,12 +480,14 @@ public final class RecoverableKeyStoreDb {
     public final long insertKey(int i, int i2, String str, WrappedKey wrappedKey) {
         SQLiteDatabase writableDatabase = this.mKeyStoreDbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(i, contentValues, "user_id", i2, "uid");
+        Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(
+                i, contentValues, "user_id", i2, "uid");
         contentValues.put("alias", str);
         contentValues.put("nonce", wrappedKey.mNonce);
         contentValues.put("wrapped_key", wrappedKey.mKeyMaterial);
         contentValues.put("last_synced_at", (Integer) (-1));
-        contentValues.put("platform_key_generation_id", Integer.valueOf(wrappedKey.mPlatformKeyGenerationId));
+        contentValues.put(
+                "platform_key_generation_id", Integer.valueOf(wrappedKey.mPlatformKeyGenerationId));
         contentValues.put("recovery_status", Integer.valueOf(wrappedKey.mRecoveryStatus));
         byte[] bArr = wrappedKey.mKeyMetadata;
         if (bArr == null) {
@@ -347,7 +501,8 @@ public final class RecoverableKeyStoreDb {
     public final void setBadRemoteGuessCounter(int i, int i2) {
         SQLiteDatabase writableDatabase = this.mKeyStoreDbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(i, contentValues, "user_id", i2, "bad_remote_guess_counter");
+        Pageboost$PageboostFileDBHelper$$ExternalSyntheticOutline0.m(
+                i, contentValues, "user_id", i2, "bad_remote_guess_counter");
         String[] strArr = {String.valueOf(i)};
         ensureUserMetadataEntryExists(i);
         writableDatabase.update("user_metadata", contentValues, "user_id = ?", strArr);
@@ -358,7 +513,8 @@ public final class RecoverableKeyStoreDb {
         new ContentValues().put(str, Long.valueOf(j));
         String[] strArr = {Integer.toString(i), Integer.toString(i2)};
         ensureRecoveryServiceMetadataEntryExists(i, i2);
-        return writableDatabase.update("recovery_service_metadata", r1, "user_id = ? AND uid = ?", strArr);
+        return writableDatabase.update(
+                "recovery_service_metadata", r1, "user_id = ? AND uid = ?", strArr);
     }
 
     public final long setRecoveryServiceCertPath(int i, int i2, String str, CertPath certPath) {
@@ -367,22 +523,30 @@ public final class RecoverableKeyStoreDb {
         }
         byte[] encoded = certPath.getEncoded("PkiPath");
         this.mTestOnlyInsecureCertificateHelper.getClass();
-        String defaultCertificateAliasIfEmpty = TestOnlyInsecureCertificateHelper.getDefaultCertificateAliasIfEmpty(str);
+        String defaultCertificateAliasIfEmpty =
+                TestOnlyInsecureCertificateHelper.getDefaultCertificateAliasIfEmpty(str);
         SQLiteDatabase writableDatabase = this.mKeyStoreDbHelper.getWritableDatabase();
         new ContentValues().put("cert_path", encoded);
-        String[] strArr = {Integer.toString(i), Integer.toString(i2), defaultCertificateAliasIfEmpty};
+        String[] strArr = {
+            Integer.toString(i), Integer.toString(i2), defaultCertificateAliasIfEmpty
+        };
         ensureRootOfTrustEntryExists(i, i2, defaultCertificateAliasIfEmpty);
-        return writableDatabase.update("root_of_trust", r1, "user_id = ? AND uid = ? AND root_alias = ?", strArr);
+        return writableDatabase.update(
+                "root_of_trust", r1, "user_id = ? AND uid = ? AND root_alias = ?", strArr);
     }
 
     public final long setRecoveryServiceCertSerial(int i, int i2, long j, String str) {
         this.mTestOnlyInsecureCertificateHelper.getClass();
-        String defaultCertificateAliasIfEmpty = TestOnlyInsecureCertificateHelper.getDefaultCertificateAliasIfEmpty(str);
+        String defaultCertificateAliasIfEmpty =
+                TestOnlyInsecureCertificateHelper.getDefaultCertificateAliasIfEmpty(str);
         SQLiteDatabase writableDatabase = this.mKeyStoreDbHelper.getWritableDatabase();
         new ContentValues().put("cert_serial", Long.valueOf(j));
-        String[] strArr = {Integer.toString(i), Integer.toString(i2), defaultCertificateAliasIfEmpty};
+        String[] strArr = {
+            Integer.toString(i), Integer.toString(i2), defaultCertificateAliasIfEmpty
+        };
         ensureRootOfTrustEntryExists(i, i2, defaultCertificateAliasIfEmpty);
-        return writableDatabase.update("root_of_trust", r1, "user_id = ? AND uid = ? AND root_alias = ?", strArr);
+        return writableDatabase.update(
+                "root_of_trust", r1, "user_id = ? AND uid = ? AND root_alias = ?", strArr);
     }
 
     public final long setShouldCreateSnapshot(int i, int i2) {

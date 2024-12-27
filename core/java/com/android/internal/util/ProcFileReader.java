@@ -196,11 +196,16 @@ public class ProcFileReader implements Closeable {
         L45:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.util.ProcFileReader.parseAndConsumeLong(int, boolean):long");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.util.ProcFileReader.parseAndConsumeLong(int,"
+                    + " boolean):long");
     }
 
     private NumberFormatException invalidLong(int tokenIndex) {
-        return new NumberFormatException("invalid long: " + new String(this.mBuffer, 0, tokenIndex, StandardCharsets.US_ASCII));
+        return new NumberFormatException(
+                "invalid long: "
+                        + new String(this.mBuffer, 0, tokenIndex, StandardCharsets.US_ASCII));
     }
 
     public int nextInt() throws IOException {

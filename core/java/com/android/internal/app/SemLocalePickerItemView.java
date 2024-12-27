@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
 import com.android.internal.R;
 
 /* loaded from: classes5.dex */
@@ -22,7 +23,11 @@ public class SemLocalePickerItemView extends LinearLayout {
     private void init(LayoutInflater li) {
         View view;
         if (this.mItemType == 0) {
-            view = li.inflate(R.layout.sem_language_picker_section_header_category, (ViewGroup) this, false);
+            view =
+                    li.inflate(
+                            R.layout.sem_language_picker_section_header_category,
+                            (ViewGroup) this,
+                            false);
         } else {
             view = li.inflate(R.layout.language_picker_item, (ViewGroup) this, false);
         }

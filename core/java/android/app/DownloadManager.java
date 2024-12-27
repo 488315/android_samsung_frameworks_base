@@ -25,6 +25,7 @@ import android.util.Log;
 import android.util.LongSparseArray;
 import android.util.Pair;
 import android.webkit.MimeTypeMap;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -40,10 +41,14 @@ public class DownloadManager {
     public static final String ACTION_DOWNLOAD_COMPLETE = "android.intent.action.DOWNLOAD_COMPLETE";
 
     @SystemApi
-    public static final String ACTION_DOWNLOAD_COMPLETED = "android.intent.action.DOWNLOAD_COMPLETED";
-    public static final String ACTION_NOTIFICATION_CLICKED = "android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED";
+    public static final String ACTION_DOWNLOAD_COMPLETED =
+            "android.intent.action.DOWNLOAD_COMPLETED";
+
+    public static final String ACTION_NOTIFICATION_CLICKED =
+            "android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED";
     public static final String ACTION_VIEW_DOWNLOADS = "android.intent.action.VIEW_DOWNLOADS";
-    public static final String ACTION_VIEW_SEC_DOWNLOADS = "android.intent.action.VIEW_SEC_DOWNLOADS";
+    public static final String ACTION_VIEW_SEC_DOWNLOADS =
+            "android.intent.action.VIEW_SEC_DOWNLOADS";
     public static final String COLUMN_ALLOW_WRITE = "allow_write";
     public static final String COLUMN_DD_CONTENT_SIZE = "dd_contentSize";
     public static final String COLUMN_DD_FILE_DESCRIPTION = "dd_description";
@@ -80,8 +85,10 @@ public class DownloadManager {
     public static final int ERROR_UNKNOWN = 1000;
     public static final String EXTRA_DOWNLOAD_ID = "extra_download_id";
     public static final String EXTRA_NOTIFICATION_CLICK_DOWNLOAD_IDS = "extra_click_download_ids";
-    public static final String INTENT_EXTRAS_SORT_BY_SIZE = "android.app.DownloadManager.extra_sortBySize";
-    private static final String NON_DOWNLOADMANAGER_DOWNLOAD = "non-dwnldmngr-download-dont-retry2download";
+    public static final String INTENT_EXTRAS_SORT_BY_SIZE =
+            "android.app.DownloadManager.extra_sortBySize";
+    private static final String NON_DOWNLOADMANAGER_DOWNLOAD =
+            "non-dwnldmngr-download-dont-retry2download";
     public static final int PAUSED_BY_APP = 5;
     public static final int PAUSED_QUEUED_FOR_WIFI = 3;
     public static final int PAUSED_UNKNOWN = 4;
@@ -109,21 +116,108 @@ public class DownloadManager {
     public static final String COLUMN_BYTES_DOWNLOADED_SO_FAR = "bytes_so_far";
     public static final String COLUMN_LAST_MODIFIED_TIMESTAMP = "last_modified_timestamp";
 
-    @Deprecated
-    public static final String COLUMN_LOCAL_FILENAME = "local_filename";
+    @Deprecated public static final String COLUMN_LOCAL_FILENAME = "local_filename";
     public static final String COLUMN_STORAGE_TYPE = "storage_type";
-    private static final String[] SEC_COLUMNS = {"_id", "mediaprovider_uri", "title", "description", "uri", COLUMN_MEDIA_TYPE, COLUMN_TOTAL_SIZE_BYTES, COLUMN_LOCAL_URI, "status", "reason", COLUMN_BYTES_DOWNLOADED_SO_FAR, COLUMN_LAST_MODIFIED_TIMESTAMP, "dd_fileName", "dd_vendor", "dd_description", "dd_majorVersion", "dd_primaryMimeType", "dd_contentSize", "state", "downloadmethod", COLUMN_LOCAL_FILENAME, COLUMN_STORAGE_TYPE};
-    public static final String[] UNDERLYING_COLUMNS = {"_id", COLUMN_LOCAL_FILENAME, "mediaprovider_uri", "destination", "title", "description", "uri", "status", "hint", COLUMN_MEDIA_TYPE, COLUMN_TOTAL_SIZE_BYTES, COLUMN_LAST_MODIFIED_TIMESTAMP, COLUMN_BYTES_DOWNLOADED_SO_FAR, "allow_write", "notificationpackage", "dd_primaryMimeType", "dd_fileName", "dd_vendor", "dd_description", "dd_contentSize", "dd_objUrl", "dd_majorVersion", "range_start", "range_end", "range_first_end", COLUMN_LOCAL_URI, "reason"};
-    private static final String[] SEC_UNDERLYING_COLUMNS = {"_id", "title", "status", "state", Downloads.Impl.COLUMN_TOTAL_BYTES, Downloads.Impl.COLUMN_CURRENT_BYTES, "_data", "description", "mimetype", Downloads.Impl.COLUMN_LAST_MODIFICATION, "visibility", "downloadmethod", "uri", "destination", "dd_primaryMimeType", Downloads.Impl.COLUMN_DD_SECONDARY_MIMETYPE1, Downloads.Impl.COLUMN_DD_SECONDARY_MIMETYPE2, "dd_fileName", "dd_vendor", "dd_description", "dd_contentSize", "dd_objUrl", Downloads.Impl.COLUMN_DD_NOTIFY_URL, "dd_majorVersion", Downloads.Impl.COLUMN_STORAGE_TYPE};
-    private static final Set<String> LONG_COLUMNS = new HashSet(Arrays.asList("_id", COLUMN_TOTAL_SIZE_BYTES, "status", "reason", COLUMN_BYTES_DOWNLOADED_SO_FAR, COLUMN_LAST_MODIFIED_TIMESTAMP, "dd_contentSize", "state", "downloadmethod", COLUMN_STORAGE_TYPE));
+    private static final String[] SEC_COLUMNS = {
+        "_id",
+        "mediaprovider_uri",
+        "title",
+        "description",
+        "uri",
+        COLUMN_MEDIA_TYPE,
+        COLUMN_TOTAL_SIZE_BYTES,
+        COLUMN_LOCAL_URI,
+        "status",
+        "reason",
+        COLUMN_BYTES_DOWNLOADED_SO_FAR,
+        COLUMN_LAST_MODIFIED_TIMESTAMP,
+        "dd_fileName",
+        "dd_vendor",
+        "dd_description",
+        "dd_majorVersion",
+        "dd_primaryMimeType",
+        "dd_contentSize",
+        "state",
+        "downloadmethod",
+        COLUMN_LOCAL_FILENAME,
+        COLUMN_STORAGE_TYPE
+    };
+    public static final String[] UNDERLYING_COLUMNS = {
+        "_id",
+        COLUMN_LOCAL_FILENAME,
+        "mediaprovider_uri",
+        "destination",
+        "title",
+        "description",
+        "uri",
+        "status",
+        "hint",
+        COLUMN_MEDIA_TYPE,
+        COLUMN_TOTAL_SIZE_BYTES,
+        COLUMN_LAST_MODIFIED_TIMESTAMP,
+        COLUMN_BYTES_DOWNLOADED_SO_FAR,
+        "allow_write",
+        "notificationpackage",
+        "dd_primaryMimeType",
+        "dd_fileName",
+        "dd_vendor",
+        "dd_description",
+        "dd_contentSize",
+        "dd_objUrl",
+        "dd_majorVersion",
+        "range_start",
+        "range_end",
+        "range_first_end",
+        COLUMN_LOCAL_URI,
+        "reason"
+    };
+    private static final String[] SEC_UNDERLYING_COLUMNS = {
+        "_id",
+        "title",
+        "status",
+        "state",
+        Downloads.Impl.COLUMN_TOTAL_BYTES,
+        Downloads.Impl.COLUMN_CURRENT_BYTES,
+        "_data",
+        "description",
+        "mimetype",
+        Downloads.Impl.COLUMN_LAST_MODIFICATION,
+        "visibility",
+        "downloadmethod",
+        "uri",
+        "destination",
+        "dd_primaryMimeType",
+        Downloads.Impl.COLUMN_DD_SECONDARY_MIMETYPE1,
+        Downloads.Impl.COLUMN_DD_SECONDARY_MIMETYPE2,
+        "dd_fileName",
+        "dd_vendor",
+        "dd_description",
+        "dd_contentSize",
+        "dd_objUrl",
+        Downloads.Impl.COLUMN_DD_NOTIFY_URL,
+        "dd_majorVersion",
+        Downloads.Impl.COLUMN_STORAGE_TYPE
+    };
+    private static final Set<String> LONG_COLUMNS =
+            new HashSet(
+                    Arrays.asList(
+                            "_id",
+                            COLUMN_TOTAL_SIZE_BYTES,
+                            "status",
+                            "reason",
+                            COLUMN_BYTES_DOWNLOADED_SO_FAR,
+                            COLUMN_LAST_MODIFIED_TIMESTAMP,
+                            "dd_contentSize",
+                            "state",
+                            "downloadmethod",
+                            COLUMN_STORAGE_TYPE));
     private Uri mBaseUri = Downloads.Impl.CONTENT_URI;
     private Uri mSecBaseUri = Downloads.Impl.CONTENT_CDURI;
 
     public static class Request {
         static final /* synthetic */ boolean $assertionsDisabled = false;
 
-        @Deprecated
-        public static final int NETWORK_BLUETOOTH = 4;
+        @Deprecated public static final int NETWORK_BLUETOOTH = 4;
         public static final int NETWORK_ETHERNET = 512;
         public static final int NETWORK_MOBILE = 1;
         public static final int NETWORK_WIFI = 2;
@@ -154,7 +248,9 @@ public class DownloadManager {
                 throw new NullPointerException();
             }
             String scheme = uri.getScheme();
-            if (scheme == null || (!scheme.equals(IntentFilter.SCHEME_HTTP) && !scheme.equals(IntentFilter.SCHEME_HTTPS))) {
+            if (scheme == null
+                    || (!scheme.equals(IntentFilter.SCHEME_HTTP)
+                            && !scheme.equals(IntentFilter.SCHEME_HTTPS))) {
                 throw new IllegalArgumentException("Can only download HTTP/HTTPS URIs: " + uri);
             }
             this.mUri = uri;
@@ -174,17 +270,20 @@ public class DownloadManager {
             return this;
         }
 
-        public Request setDestinationInExternalFilesDir(Context context, String dirType, String subPath) {
+        public Request setDestinationInExternalFilesDir(
+                Context context, String dirType, String subPath) {
             File file = context.getExternalFilesDir(dirType);
             if (file == null) {
                 throw new IllegalStateException("Failed to get external storage files directory");
             }
             if (file.exists()) {
                 if (!file.isDirectory()) {
-                    throw new IllegalStateException(file.getAbsolutePath() + " already exists and is not a directory");
+                    throw new IllegalStateException(
+                            file.getAbsolutePath() + " already exists and is not a directory");
                 }
             } else if (!file.mkdirs()) {
-                throw new IllegalStateException("Unable to create directory: " + file.getAbsolutePath());
+                throw new IllegalStateException(
+                        "Unable to create directory: " + file.getAbsolutePath());
             }
             setDestinationFromBase(file, subPath);
             return this;
@@ -196,12 +295,16 @@ public class DownloadManager {
                 throw new IllegalStateException("Failed to get external storage public directory");
             }
             Context context = AppGlobals.getInitialApplication();
-            if (context.getApplicationInfo().targetSdkVersion >= 29 || !Environment.isExternalStorageLegacy()) {
+            if (context.getApplicationInfo().targetSdkVersion >= 29
+                    || !Environment.isExternalStorageLegacy()) {
                 try {
-                    ContentProviderClient client = context.getContentResolver().acquireContentProviderClient("downloads");
+                    ContentProviderClient client =
+                            context.getContentResolver().acquireContentProviderClient("downloads");
                     try {
                         if (client == null) {
-                            Log.i("DownloadManager", "client is null maybe due to download provider disabled");
+                            Log.i(
+                                    "DownloadManager",
+                                    "client is null maybe due to download provider disabled");
                             if (client != null) {
                                 client.close();
                             }
@@ -216,14 +319,17 @@ public class DownloadManager {
                     } finally {
                     }
                 } catch (RemoteException e) {
-                    throw new IllegalStateException("Unable to create directory: " + file.getAbsolutePath(), e);
+                    throw new IllegalStateException(
+                            "Unable to create directory: " + file.getAbsolutePath(), e);
                 }
             } else if (file.exists()) {
                 if (!file.isDirectory()) {
-                    throw new IllegalStateException(file.getAbsolutePath() + " already exists and is not a directory");
+                    throw new IllegalStateException(
+                            file.getAbsolutePath() + " already exists and is not a directory");
                 }
             } else if (!file.mkdirs()) {
-                throw new IllegalStateException("Unable to create directory: " + file.getAbsolutePath());
+                throw new IllegalStateException(
+                        "Unable to create directory: " + file.getAbsolutePath());
             }
             setDestinationFromBase(file, subPath);
             return this;
@@ -335,7 +441,8 @@ public class DownloadManager {
             } else {
                 values.put("destination", (Integer) 2);
             }
-            values.put(Downloads.Impl.COLUMN_MEDIA_SCANNED, Integer.valueOf(this.mScannable ? 0 : 2));
+            values.put(
+                    Downloads.Impl.COLUMN_MEDIA_SCANNED, Integer.valueOf(this.mScannable ? 0 : 2));
             if (!this.mRequestHeaders.isEmpty()) {
                 encodeHttpHeaders(values);
             }
@@ -347,7 +454,9 @@ public class DownloadManager {
             values.put(Downloads.Impl.COLUMN_ALLOW_ROAMING, Boolean.valueOf(this.mRoamingAllowed));
             values.put("allow_metered", Boolean.valueOf(this.mMeteredAllowed));
             values.put("flags", Integer.valueOf(this.mFlags));
-            values.put(Downloads.Impl.COLUMN_IS_VISIBLE_IN_DOWNLOADS_UI, Boolean.valueOf(this.mIsVisibleInDownloadsUi));
+            values.put(
+                    Downloads.Impl.COLUMN_IS_VISIBLE_IN_DOWNLOADS_UI,
+                    Boolean.valueOf(this.mIsVisibleInDownloadsUi));
             return values;
         }
 
@@ -359,7 +468,8 @@ public class DownloadManager {
             if (this.mDestinationUri != null) {
                 values.put("hint", this.mDestinationUri.toString());
             }
-            values.put(Downloads.Impl.COLUMN_MEDIA_SCANNED, Integer.valueOf(this.mScannable ? 0 : 2));
+            values.put(
+                    Downloads.Impl.COLUMN_MEDIA_SCANNED, Integer.valueOf(this.mScannable ? 0 : 2));
             if (!this.mRequestHeaders.isEmpty()) {
                 encodeHttpHeaders(values);
             }
@@ -370,7 +480,9 @@ public class DownloadManager {
             values.put("allowed_network_types", Integer.valueOf(this.mAllowedNetworkTypes));
             values.put(Downloads.Impl.COLUMN_ALLOW_ROAMING, Boolean.valueOf(this.mRoamingAllowed));
             values.put("allow_metered", Boolean.valueOf(this.mMeteredAllowed));
-            values.put(Downloads.Impl.COLUMN_IS_VISIBLE_IN_DOWNLOADS_UI, Boolean.valueOf(this.mIsVisibleInDownloadsUi));
+            values.put(
+                    Downloads.Impl.COLUMN_IS_VISIBLE_IN_DOWNLOADS_UI,
+                    Boolean.valueOf(this.mIsVisibleInDownloadsUi));
             values.put(Downloads.Impl.COLUMN_STORAGE_TYPE, Integer.valueOf(this.mStorageType));
             return values;
         }
@@ -568,7 +680,12 @@ public class DownloadManager {
                     parts.add(statusClause("=", 200));
                 }
                 if ((this.mStatusFlags.intValue() & 16) != 0) {
-                    parts.add(NavigationBarInflaterView.KEY_CODE_START + statusClause(">=", 400) + " AND " + statusClause("<", 600) + NavigationBarInflaterView.KEY_CODE_END);
+                    parts.add(
+                            NavigationBarInflaterView.KEY_CODE_START
+                                    + statusClause(">=", 400)
+                                    + " AND "
+                                    + statusClause("<", 600)
+                                    + NavigationBarInflaterView.KEY_CODE_END);
                 }
                 selectionParts.add(joinStrings(" OR ", parts));
             }
@@ -627,10 +744,13 @@ public class DownloadManager {
     @SystemApi
     public void onMediaStoreDownloadsDeleted(LongSparseArray<String> idToMime) {
         try {
-            ContentProviderClient client = this.mResolver.acquireUnstableContentProviderClient(this.mBaseUri);
+            ContentProviderClient client =
+                    this.mResolver.acquireUnstableContentProviderClient(this.mBaseUri);
             try {
                 if (client == null) {
-                    Log.i("DownloadManager", "client is null maybe due to download provider disabled");
+                    Log.i(
+                            "DownloadManager",
+                            "client is null maybe due to download provider disabled");
                     if (client != null) {
                         client.close();
                         return;
@@ -670,7 +790,8 @@ public class DownloadManager {
         if (ids == null || ids.length == 0) {
             throw new IllegalArgumentException("input param 'ids' can't be null");
         }
-        return this.mResolver.delete(this.mBaseUri, getWhereClauseForIds(ids), getWhereArgsForIds(ids));
+        return this.mResolver.delete(
+                this.mBaseUri, getWhereClauseForIds(ids), getWhereArgsForIds(ids));
     }
 
     public int remove(long... ids) {
@@ -683,7 +804,11 @@ public class DownloadManager {
         }
         ContentValues values = new ContentValues();
         values.put("deleted", (Integer) 1);
-        return this.mResolver.update(ContentUris.withAppendedId(Downloads.Impl.CONTENT_CDURI, ids[0]), values, null, null);
+        return this.mResolver.update(
+                ContentUris.withAppendedId(Downloads.Impl.CONTENT_CDURI, ids[0]),
+                values,
+                null,
+                null);
     }
 
     private String joinStrings(String joiner, Iterable<String> parts) {
@@ -723,7 +848,8 @@ public class DownloadManager {
     }
 
     public Cursor secquery(SecQuery query) {
-        Cursor underlyingCursor = query.runQuery(this.mResolver, SEC_UNDERLYING_COLUMNS, this.mSecBaseUri);
+        Cursor underlyingCursor =
+                query.runQuery(this.mResolver, SEC_UNDERLYING_COLUMNS, this.mSecBaseUri);
         if (underlyingCursor == null) {
             return null;
         }
@@ -745,7 +871,9 @@ public class DownloadManager {
             if (cursor.moveToFirst()) {
                 int status = cursor.getInt(cursor.getColumnIndexOrThrow("status"));
                 if (8 == status) {
-                    Uri withAppendedId = ContentUris.withAppendedId(Downloads.Impl.ALL_DOWNLOADS_CONTENT_URI, id);
+                    Uri withAppendedId =
+                            ContentUris.withAppendedId(
+                                    Downloads.Impl.ALL_DOWNLOADS_CONTENT_URI, id);
                     if (cursor != null) {
                         cursor.close();
                     }
@@ -811,7 +939,8 @@ public class DownloadManager {
             values.put("range_start", (Long) 0L);
             values.put("range_end", (Long) 0L);
             values.put("range_first_end", (Long) 0L);
-            this.mResolver.update(this.mBaseUri, values, getWhereClauseForIds(ids), getWhereArgsForIds(ids));
+            this.mResolver.update(
+                    this.mBaseUri, values, getWhereClauseForIds(ids), getWhereArgsForIds(ids));
             return true;
         } finally {
             cursor.close();
@@ -852,7 +981,8 @@ public class DownloadManager {
             values.put("state", (Integer) 0);
             values.put("visibility", (Integer) 1);
             values.put("status", (Integer) 190);
-            this.mResolver.update(this.mSecBaseUri, values, getWhereClauseForIds(ids), getWhereArgsForIds(ids));
+            this.mResolver.update(
+                    this.mSecBaseUri, values, getWhereClauseForIds(ids), getWhereArgsForIds(ids));
             return true;
         } finally {
             cursor.close();
@@ -864,12 +994,16 @@ public class DownloadManager {
         values.put("status", (Integer) 190);
         values.put(Downloads.Impl.COLUMN_CONTROL, (Integer) 0);
         values.put(Downloads.Impl.COLUMN_BYPASS_RECOMMENDED_SIZE_LIMIT, (Integer) 1);
-        this.mResolver.update(this.mBaseUri, values, getWhereClauseForIds(ids), getWhereArgsForIds(ids));
+        this.mResolver.update(
+                this.mBaseUri, values, getWhereClauseForIds(ids), getWhereArgsForIds(ids));
     }
 
     public static Long getMaxBytesOverMobile(Context context) {
         try {
-            return Long.valueOf(Settings.Global.getLong(context.getContentResolver(), Settings.Global.DOWNLOAD_MAX_BYTES_OVER_MOBILE));
+            return Long.valueOf(
+                    Settings.Global.getLong(
+                            context.getContentResolver(),
+                            Settings.Global.DOWNLOAD_MAX_BYTES_OVER_MOBILE));
         } catch (Settings.SettingNotFoundException e) {
             return null;
         }
@@ -888,14 +1022,21 @@ public class DownloadManager {
             if (cursor.moveToFirst()) {
                 int status = cursor.getInt(cursor.getColumnIndexOrThrow("status"));
                 if (status != 8) {
-                    throw new IllegalStateException("Download is not completed yet: " + DatabaseUtils.dumpCurrentRowToString(cursor));
+                    throw new IllegalStateException(
+                            "Download is not completed yet: "
+                                    + DatabaseUtils.dumpCurrentRowToString(cursor));
                 }
-                String filePath = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_LOCAL_FILENAME));
+                String filePath =
+                        cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_LOCAL_FILENAME));
                 if (filePath == null) {
-                    throw new IllegalStateException("Download doesn't have a valid file path: " + DatabaseUtils.dumpCurrentRowToString(cursor));
+                    throw new IllegalStateException(
+                            "Download doesn't have a valid file path: "
+                                    + DatabaseUtils.dumpCurrentRowToString(cursor));
                 }
                 if (!new File(filePath).exists()) {
-                    throw new IllegalStateException("Downloaded file doesn't exist anymore: " + DatabaseUtils.dumpCurrentRowToString(cursor));
+                    throw new IllegalStateException(
+                            "Downloaded file doesn't exist anymore: "
+                                    + DatabaseUtils.dumpCurrentRowToString(cursor));
                 }
                 if (cursor != null) {
                     cursor.close();
@@ -906,7 +1047,8 @@ public class DownloadManager {
                     throw new IllegalStateException("File already exists: " + after);
                 }
                 if (!before.renameTo(after)) {
-                    throw new IllegalStateException("Failed to rename file from " + before + " to " + after);
+                    throw new IllegalStateException(
+                            "Failed to rename file from " + before + " to " + after);
                 }
                 MediaStore.scanFile(this.mResolver, before);
                 MediaStore.scanFile(this.mResolver, after);
@@ -915,7 +1057,12 @@ public class DownloadManager {
                 values.put("_data", after.toString());
                 values.putNull("mediaprovider_uri");
                 long[] ids = {id};
-                return this.mResolver.update(this.mBaseUri, values, getWhereClauseForIds(ids), getWhereArgsForIds(ids)) == 1;
+                return this.mResolver.update(
+                                this.mBaseUri,
+                                values,
+                                getWhereClauseForIds(ids),
+                                getWhereArgsForIds(ids))
+                        == 1;
             }
             throw new IllegalStateException("Missing download id=" + id);
         } finally {
@@ -924,7 +1071,10 @@ public class DownloadManager {
 
     public static Long getRecommendedMaxBytesOverMobile(Context context) {
         try {
-            return Long.valueOf(Settings.Global.getLong(context.getContentResolver(), Settings.Global.DOWNLOAD_RECOMMENDED_MAX_BYTES_OVER_MOBILE));
+            return Long.valueOf(
+                    Settings.Global.getLong(
+                            context.getContentResolver(),
+                            Settings.Global.DOWNLOAD_RECOMMENDED_MAX_BYTES_OVER_MOBILE));
         } catch (Settings.SettingNotFoundException e) {
             return null;
         }
@@ -939,22 +1089,86 @@ public class DownloadManager {
     }
 
     @Deprecated
-    public long addCompletedDownload(String title, String description, boolean isMediaScannerScannable, String mimeType, String path, long length, boolean showNotification) {
-        return addCompletedDownload(title, description, isMediaScannerScannable, mimeType, path, length, showNotification, false, null, null);
+    public long addCompletedDownload(
+            String title,
+            String description,
+            boolean isMediaScannerScannable,
+            String mimeType,
+            String path,
+            long length,
+            boolean showNotification) {
+        return addCompletedDownload(
+                title,
+                description,
+                isMediaScannerScannable,
+                mimeType,
+                path,
+                length,
+                showNotification,
+                false,
+                null,
+                null);
     }
 
     @Deprecated
-    public long addCompletedDownload(String title, String description, boolean isMediaScannerScannable, String mimeType, String path, long length, boolean showNotification, Uri uri, Uri referer) {
-        return addCompletedDownload(title, description, isMediaScannerScannable, mimeType, path, length, showNotification, false, uri, referer);
+    public long addCompletedDownload(
+            String title,
+            String description,
+            boolean isMediaScannerScannable,
+            String mimeType,
+            String path,
+            long length,
+            boolean showNotification,
+            Uri uri,
+            Uri referer) {
+        return addCompletedDownload(
+                title,
+                description,
+                isMediaScannerScannable,
+                mimeType,
+                path,
+                length,
+                showNotification,
+                false,
+                uri,
+                referer);
     }
 
     @Deprecated
-    public long addCompletedDownload(String title, String description, boolean isMediaScannerScannable, String mimeType, String path, long length, boolean showNotification, boolean allowWrite) {
-        return addCompletedDownload(title, description, isMediaScannerScannable, mimeType, path, length, showNotification, allowWrite, null, null);
+    public long addCompletedDownload(
+            String title,
+            String description,
+            boolean isMediaScannerScannable,
+            String mimeType,
+            String path,
+            long length,
+            boolean showNotification,
+            boolean allowWrite) {
+        return addCompletedDownload(
+                title,
+                description,
+                isMediaScannerScannable,
+                mimeType,
+                path,
+                length,
+                showNotification,
+                allowWrite,
+                null,
+                null);
     }
 
     @Deprecated
-    public long addCompletedDownload(String str, String str2, boolean z, String str3, String str4, long j, boolean z2, boolean z3, Uri uri, Uri uri2) {
+    public long addCompletedDownload(
+            String str,
+            String str2,
+            boolean z,
+            String str3,
+            String str4,
+            long j,
+            boolean z2,
+            boolean z3,
+            Uri uri,
+            Uri uri2) {
         Request request;
         validateArgumentIsNonEmpty("title", str);
         validateArgumentIsNonEmpty("description", str2);
@@ -972,7 +1186,11 @@ public class DownloadManager {
         if (uri2 != null) {
             request.addRequestHeader("Referer", uri2.toString());
         }
-        ContentValues contentValues = request.toContentValues(this.mPackageName.contains(SBROWSER_PACKAGE_NAME) ? this.mPackageName : null);
+        ContentValues contentValues =
+                request.toContentValues(
+                        this.mPackageName.contains(SBROWSER_PACKAGE_NAME)
+                                ? this.mPackageName
+                                : null);
         contentValues.put("destination", (Integer) 6);
         contentValues.put("_data", str4);
         contentValues.put("mimetype", resolveMimeType(new File(str4)));
@@ -996,7 +1214,12 @@ public class DownloadManager {
     private static String resolveMimeType(File file) {
         String mimeType;
         String extension = extractFileExtension(file.getPath());
-        if (extension == null || (mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension.toLowerCase(Locale.ROOT))) == null) {
+        if (extension == null
+                || (mimeType =
+                                MimeTypeMap.getSingleton()
+                                        .getMimeTypeFromExtension(
+                                                extension.toLowerCase(Locale.ROOT)))
+                        == null) {
             return "application/octet-stream";
         }
         return mimeType;
@@ -1024,7 +1247,14 @@ public class DownloadManager {
         return data2.substring(lastDot + 1);
     }
 
-    public long secAddCompletedDownload(String title, String description, boolean isMediaScannerScannable, String mimeType, String path, long length, boolean showNotification) {
+    public long secAddCompletedDownload(
+            String title,
+            String description,
+            boolean isMediaScannerScannable,
+            String mimeType,
+            String path,
+            long length,
+            boolean showNotification) {
         validateArgumentIsNonEmpty("title", title);
         validateArgumentIsNonEmpty("description", description);
         validateArgumentIsNonEmpty("path", path);
@@ -1032,7 +1262,11 @@ public class DownloadManager {
         if (length < 0) {
             throw new IllegalArgumentException(" invalid value for param: totalBytes");
         }
-        Request request = new Request(NON_DOWNLOADMANAGER_DOWNLOAD).setTitle(title).setDescription(description).setMimeType(mimeType);
+        Request request =
+                new Request(NON_DOWNLOADMANAGER_DOWNLOAD)
+                        .setTitle(title)
+                        .setDescription(description)
+                        .setMimeType(mimeType);
         ContentValues values = request.sectoContentValues(null);
         values.put("destination", (Integer) 0);
         values.put("_data", path);
@@ -1040,7 +1274,9 @@ public class DownloadManager {
         values.put("state", (Integer) 10);
         values.put(Downloads.Impl.COLUMN_STORAGE_TYPE, (Integer) 1);
         values.put(Downloads.Impl.COLUMN_TOTAL_BYTES, Long.valueOf(length));
-        values.put(Downloads.Impl.COLUMN_MEDIA_SCANNED, Integer.valueOf(isMediaScannerScannable ? 0 : 2));
+        values.put(
+                Downloads.Impl.COLUMN_MEDIA_SCANNED,
+                Integer.valueOf(isMediaScannerScannable ? 0 : 2));
         values.put("visibility", Integer.valueOf(showNotification ? 1 : 2));
         Uri downloadUri = this.mResolver.insert(Downloads.Impl.CONTENT_CDURI, values);
         if (downloadUri == null) {
@@ -1141,7 +1377,9 @@ public class DownloadManager {
                     return getLocalUri();
                 case 1:
                     if (!this.mAccessFilename) {
-                        throw new SecurityException("COLUMN_LOCAL_FILENAME is deprecated; use ContentResolver.openFileDescriptor() instead");
+                        throw new SecurityException(
+                                "COLUMN_LOCAL_FILENAME is deprecated; use"
+                                        + " ContentResolver.openFileDescriptor() instead");
                     }
                     break;
             }
@@ -1151,14 +1389,16 @@ public class DownloadManager {
         private String getLocalUri() {
             long destinationType = getLong(getColumnIndex("destination"));
             if (destinationType == 4 || destinationType == 0 || destinationType == 6) {
-                String localPath = super.getString(getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME));
+                String localPath =
+                        super.getString(getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME));
                 if (localPath == null) {
                     return null;
                 }
                 return Uri.fromFile(new File(localPath)).toString();
             }
             long downloadId = getLong(getColumnIndex("_id"));
-            return ContentUris.withAppendedId(Downloads.Impl.ALL_DOWNLOADS_CONTENT_URI, downloadId).toString();
+            return ContentUris.withAppendedId(Downloads.Impl.ALL_DOWNLOADS_CONTENT_URI, downloadId)
+                    .toString();
         }
 
         private long getReason(int status) {
@@ -1248,7 +1488,12 @@ public class DownloadManager {
         public String getColumnName(int columnIndex) {
             int numColumns = DownloadManager.SEC_COLUMNS.length;
             if (columnIndex < 0 || columnIndex >= numColumns) {
-                throw new IllegalArgumentException("Invalid column index " + columnIndex + ", " + numColumns + " columns exist");
+                throw new IllegalArgumentException(
+                        "Invalid column index "
+                                + columnIndex
+                                + ", "
+                                + numColumns
+                                + " columns exist");
             }
             return DownloadManager.SEC_COLUMNS[columnIndex];
         }
@@ -1256,7 +1501,12 @@ public class DownloadManager {
         @Override // android.database.CursorWrapper, android.database.Cursor
         public String[] getColumnNames() {
             String[] returnColumns = new String[DownloadManager.SEC_COLUMNS.length];
-            System.arraycopy(DownloadManager.SEC_COLUMNS, 0, returnColumns, 0, DownloadManager.SEC_COLUMNS.length);
+            System.arraycopy(
+                    DownloadManager.SEC_COLUMNS,
+                    0,
+                    returnColumns,
+                    0,
+                    DownloadManager.SEC_COLUMNS.length);
             return returnColumns;
         }
 
@@ -1354,7 +1604,8 @@ public class DownloadManager {
                 return Uri.fromFile(new File(localPath)).toString();
             }
             if (destinationType == 6) {
-                String localPath2 = getString(getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME));
+                String localPath2 =
+                        getString(getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME));
                 if (localPath2 == null) {
                     return null;
                 }

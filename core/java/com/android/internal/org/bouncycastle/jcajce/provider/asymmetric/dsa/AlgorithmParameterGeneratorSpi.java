@@ -7,6 +7,7 @@ import com.android.internal.org.bouncycastle.crypto.params.DSAParameterGeneratio
 import com.android.internal.org.bouncycastle.crypto.params.DSAParameters;
 import com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseAlgorithmParameterGeneratorSpi;
 import com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.PrimeCertaintyCalculator;
+
 import java.security.AlgorithmParameters;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidParameterException;
@@ -26,18 +27,22 @@ public class AlgorithmParameterGeneratorSpi extends BaseAlgorithmParameterGenera
             throw new InvalidParameterException("strength must be from 512 - 3072");
         }
         if (strength <= 1024 && strength % 64 != 0) {
-            throw new InvalidParameterException("strength must be a multiple of 64 below 1024 bits.");
+            throw new InvalidParameterException(
+                    "strength must be a multiple of 64 below 1024 bits.");
         }
         if (strength > 1024 && strength % 1024 != 0) {
-            throw new InvalidParameterException("strength must be a multiple of 1024 above 1024 bits.");
+            throw new InvalidParameterException(
+                    "strength must be a multiple of 1024 above 1024 bits.");
         }
         this.strength = strength;
         this.random = random;
     }
 
     @Override // java.security.AlgorithmParameterGeneratorSpi
-    protected void engineInit(AlgorithmParameterSpec genParamSpec, SecureRandom random) throws InvalidAlgorithmParameterException {
-        throw new InvalidAlgorithmParameterException("No supported AlgorithmParameterSpec for DSA parameter generation.");
+    protected void engineInit(AlgorithmParameterSpec genParamSpec, SecureRandom random)
+            throws InvalidAlgorithmParameterException {
+        throw new InvalidAlgorithmParameterException(
+                "No supported AlgorithmParameterSpec for DSA parameter generation.");
     }
 
     @Override // java.security.AlgorithmParameterGeneratorSpi
@@ -56,7 +61,9 @@ public class AlgorithmParameterGeneratorSpi extends BaseAlgorithmParameterGenera
             this.params = new DSAParameterGenerationParameters(1024, 160, certainty, this.random);
             pGen.init(this.params);
         } else if (this.strength > 1024) {
-            this.params = new DSAParameterGenerationParameters(this.strength, 256, certainty, this.random);
+            this.params =
+                    new DSAParameterGenerationParameters(
+                            this.strength, 256, certainty, this.random);
             pGen.init(this.params);
         } else {
             pGen.init(this.strength, certainty, this.random);

@@ -16,12 +16,10 @@ public interface IGameManagerCallback extends IInterface {
 
     public static class Default implements IGameManagerCallback {
         @Override // com.samsung.android.game.IGameManagerCallback
-        public void onGameFocusIn(String pkgName) throws RemoteException {
-        }
+        public void onGameFocusIn(String pkgName) throws RemoteException {}
 
         @Override // com.samsung.android.game.IGameManagerCallback
-        public void onGameFocusOut(String pkgName) throws RemoteException {
-        }
+        public void onGameFocusOut(String pkgName) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface IGameManagerCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGameManagerCallback {
+    public abstract static class Stub extends Binder implements IGameManagerCallback {
         static final int TRANSACTION_onGameFocusIn = 1;
         static final int TRANSACTION_onGameFocusOut = 2;
 
@@ -70,7 +68,8 @@ public interface IGameManagerCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IGameManagerCallback.DESCRIPTOR);
             }

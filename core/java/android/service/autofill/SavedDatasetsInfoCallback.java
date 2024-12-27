@@ -11,8 +11,7 @@ public interface SavedDatasetsInfoCallback {
     public static final int ERROR_UNSUPPORTED = 1;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Error {
-    }
+    public @interface Error {}
 
     void onError(int i);
 

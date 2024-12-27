@@ -1,8 +1,6 @@
 package android.app;
 
 import android.Manifest;
-import android.app.IGameModeListener;
-import android.app.IGameStateListener;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -42,7 +40,8 @@ public interface IGameManagerService extends IInterface {
 
     void toggleGameDefaultFrameRate(boolean z) throws RemoteException;
 
-    void updateCustomGameModeConfiguration(String str, GameModeConfiguration gameModeConfiguration, int i) throws RemoteException;
+    void updateCustomGameModeConfiguration(
+            String str, GameModeConfiguration gameModeConfiguration, int i) throws RemoteException;
 
     void updateResolutionScalingFactor(String str, int i, float f, int i2) throws RemoteException;
 
@@ -53,8 +52,8 @@ public interface IGameManagerService extends IInterface {
         }
 
         @Override // android.app.IGameManagerService
-        public void setGameMode(String packageName, int gameMode, int userId) throws RemoteException {
-        }
+        public void setGameMode(String packageName, int gameMode, int userId)
+                throws RemoteException {}
 
         @Override // android.app.IGameManagerService
         public int[] getAvailableGameModes(String packageName, int userId) throws RemoteException {
@@ -67,12 +66,12 @@ public interface IGameManagerService extends IInterface {
         }
 
         @Override // android.app.IGameManagerService
-        public void notifyGraphicsEnvironmentSetup(String packageName, int userId) throws RemoteException {
-        }
+        public void notifyGraphicsEnvironmentSetup(String packageName, int userId)
+                throws RemoteException {}
 
         @Override // android.app.IGameManagerService
-        public void setGameState(String packageName, GameState gameState, int userId) throws RemoteException {
-        }
+        public void setGameState(String packageName, GameState gameState, int userId)
+                throws RemoteException {}
 
         @Override // android.app.IGameManagerService
         public GameModeInfo getGameModeInfo(String packageName, int userId) throws RemoteException {
@@ -80,41 +79,42 @@ public interface IGameManagerService extends IInterface {
         }
 
         @Override // android.app.IGameManagerService
-        public void setGameServiceProvider(String packageName) throws RemoteException {
-        }
+        public void setGameServiceProvider(String packageName) throws RemoteException {}
 
         @Override // android.app.IGameManagerService
-        public void updateResolutionScalingFactor(String packageName, int gameMode, float scalingFactor, int userId) throws RemoteException {
-        }
+        public void updateResolutionScalingFactor(
+                String packageName, int gameMode, float scalingFactor, int userId)
+                throws RemoteException {}
 
         @Override // android.app.IGameManagerService
-        public float getResolutionScalingFactor(String packageName, int gameMode, int userId) throws RemoteException {
+        public float getResolutionScalingFactor(String packageName, int gameMode, int userId)
+                throws RemoteException {
             return 0.0f;
         }
 
         @Override // android.app.IGameManagerService
-        public void updateCustomGameModeConfiguration(String packageName, GameModeConfiguration gameModeConfig, int userId) throws RemoteException {
-        }
+        public void updateCustomGameModeConfiguration(
+                String packageName, GameModeConfiguration gameModeConfig, int userId)
+                throws RemoteException {}
 
         @Override // android.app.IGameManagerService
-        public void addGameModeListener(IGameModeListener gameModeListener) throws RemoteException {
-        }
+        public void addGameModeListener(IGameModeListener gameModeListener)
+                throws RemoteException {}
 
         @Override // android.app.IGameManagerService
-        public void removeGameModeListener(IGameModeListener gameModeListener) throws RemoteException {
-        }
+        public void removeGameModeListener(IGameModeListener gameModeListener)
+                throws RemoteException {}
 
         @Override // android.app.IGameManagerService
-        public void addGameStateListener(IGameStateListener gameStateListener) throws RemoteException {
-        }
+        public void addGameStateListener(IGameStateListener gameStateListener)
+                throws RemoteException {}
 
         @Override // android.app.IGameManagerService
-        public void removeGameStateListener(IGameStateListener gameStateListener) throws RemoteException {
-        }
+        public void removeGameStateListener(IGameStateListener gameStateListener)
+                throws RemoteException {}
 
         @Override // android.app.IGameManagerService
-        public void toggleGameDefaultFrameRate(boolean isEnabled) throws RemoteException {
-        }
+        public void toggleGameDefaultFrameRate(boolean isEnabled) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -122,7 +122,7 @@ public interface IGameManagerService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGameManagerService {
+    public abstract static class Stub extends Binder implements IGameManagerService {
         static final int TRANSACTION_addGameModeListener = 12;
         static final int TRANSACTION_addGameStateListener = 14;
         static final int TRANSACTION_getAvailableGameModes = 3;
@@ -151,7 +151,9 @@ public interface IGameManagerService extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IGameManagerService asInterface(IBinder obj) {
@@ -215,7 +217,8 @@ public interface IGameManagerService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IGameManagerService.DESCRIPTOR);
             }
@@ -305,32 +308,38 @@ public interface IGameManagerService extends IInterface {
                     return true;
                 case 11:
                     String _arg011 = data.readString();
-                    GameModeConfiguration _arg110 = (GameModeConfiguration) data.readTypedObject(GameModeConfiguration.CREATOR);
+                    GameModeConfiguration _arg110 =
+                            (GameModeConfiguration)
+                                    data.readTypedObject(GameModeConfiguration.CREATOR);
                     int _arg25 = data.readInt();
                     data.enforceNoDataAvail();
                     updateCustomGameModeConfiguration(_arg011, _arg110, _arg25);
                     reply.writeNoException();
                     return true;
                 case 12:
-                    IGameModeListener _arg012 = IGameModeListener.Stub.asInterface(data.readStrongBinder());
+                    IGameModeListener _arg012 =
+                            IGameModeListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addGameModeListener(_arg012);
                     reply.writeNoException();
                     return true;
                 case 13:
-                    IGameModeListener _arg013 = IGameModeListener.Stub.asInterface(data.readStrongBinder());
+                    IGameModeListener _arg013 =
+                            IGameModeListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeGameModeListener(_arg013);
                     reply.writeNoException();
                     return true;
                 case 14:
-                    IGameStateListener _arg014 = IGameStateListener.Stub.asInterface(data.readStrongBinder());
+                    IGameStateListener _arg014 =
+                            IGameStateListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addGameStateListener(_arg014);
                     reply.writeNoException();
                     return true;
                 case 15:
-                    IGameStateListener _arg015 = IGameStateListener.Stub.asInterface(data.readStrongBinder());
+                    IGameStateListener _arg015 =
+                            IGameStateListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeGameStateListener(_arg015);
                     reply.writeNoException();
@@ -381,7 +390,8 @@ public interface IGameManagerService extends IInterface {
             }
 
             @Override // android.app.IGameManagerService
-            public void setGameMode(String packageName, int gameMode, int userId) throws RemoteException {
+            public void setGameMode(String packageName, int gameMode, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -398,7 +408,8 @@ public interface IGameManagerService extends IInterface {
             }
 
             @Override // android.app.IGameManagerService
-            public int[] getAvailableGameModes(String packageName, int userId) throws RemoteException {
+            public int[] getAvailableGameModes(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -434,7 +445,8 @@ public interface IGameManagerService extends IInterface {
             }
 
             @Override // android.app.IGameManagerService
-            public void notifyGraphicsEnvironmentSetup(String packageName, int userId) throws RemoteException {
+            public void notifyGraphicsEnvironmentSetup(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -450,7 +462,8 @@ public interface IGameManagerService extends IInterface {
             }
 
             @Override // android.app.IGameManagerService
-            public void setGameState(String packageName, GameState gameState, int userId) throws RemoteException {
+            public void setGameState(String packageName, GameState gameState, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -467,7 +480,8 @@ public interface IGameManagerService extends IInterface {
             }
 
             @Override // android.app.IGameManagerService
-            public GameModeInfo getGameModeInfo(String packageName, int userId) throws RemoteException {
+            public GameModeInfo getGameModeInfo(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -476,7 +490,8 @@ public interface IGameManagerService extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(7, _data, _reply, 0);
                     _reply.readException();
-                    GameModeInfo _result = (GameModeInfo) _reply.readTypedObject(GameModeInfo.CREATOR);
+                    GameModeInfo _result =
+                            (GameModeInfo) _reply.readTypedObject(GameModeInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -500,7 +515,9 @@ public interface IGameManagerService extends IInterface {
             }
 
             @Override // android.app.IGameManagerService
-            public void updateResolutionScalingFactor(String packageName, int gameMode, float scalingFactor, int userId) throws RemoteException {
+            public void updateResolutionScalingFactor(
+                    String packageName, int gameMode, float scalingFactor, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -518,7 +535,8 @@ public interface IGameManagerService extends IInterface {
             }
 
             @Override // android.app.IGameManagerService
-            public float getResolutionScalingFactor(String packageName, int gameMode, int userId) throws RemoteException {
+            public float getResolutionScalingFactor(String packageName, int gameMode, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -537,7 +555,9 @@ public interface IGameManagerService extends IInterface {
             }
 
             @Override // android.app.IGameManagerService
-            public void updateCustomGameModeConfiguration(String packageName, GameModeConfiguration gameModeConfig, int userId) throws RemoteException {
+            public void updateCustomGameModeConfiguration(
+                    String packageName, GameModeConfiguration gameModeConfig, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -554,7 +574,8 @@ public interface IGameManagerService extends IInterface {
             }
 
             @Override // android.app.IGameManagerService
-            public void addGameModeListener(IGameModeListener gameModeListener) throws RemoteException {
+            public void addGameModeListener(IGameModeListener gameModeListener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -569,7 +590,8 @@ public interface IGameManagerService extends IInterface {
             }
 
             @Override // android.app.IGameManagerService
-            public void removeGameModeListener(IGameModeListener gameModeListener) throws RemoteException {
+            public void removeGameModeListener(IGameModeListener gameModeListener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -584,7 +606,8 @@ public interface IGameManagerService extends IInterface {
             }
 
             @Override // android.app.IGameManagerService
-            public void addGameStateListener(IGameStateListener gameStateListener) throws RemoteException {
+            public void addGameStateListener(IGameStateListener gameStateListener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -599,7 +622,8 @@ public interface IGameManagerService extends IInterface {
             }
 
             @Override // android.app.IGameManagerService
-            public void removeGameStateListener(IGameStateListener gameStateListener) throws RemoteException {
+            public void removeGameStateListener(IGameStateListener gameStateListener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -630,7 +654,8 @@ public interface IGameManagerService extends IInterface {
         }
 
         protected void toggleGameDefaultFrameRate_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_GAME_MODE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_GAME_MODE, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

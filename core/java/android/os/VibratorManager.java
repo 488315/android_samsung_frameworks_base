@@ -3,6 +3,7 @@ package android.os;
 import android.app.ActivityThread;
 import android.content.Context;
 import android.util.Log;
+
 import com.samsung.android.vibrator.VibrationDebugInfo;
 
 /* loaded from: classes3.dex */
@@ -26,7 +27,12 @@ public abstract class VibratorManager {
 
     public abstract int semGetSupportedVibrationType();
 
-    public abstract void vibrate(int i, String str, CombinedVibration combinedVibration, String str2, VibrationAttributes vibrationAttributes);
+    public abstract void vibrate(
+            int i,
+            String str,
+            CombinedVibration combinedVibration,
+            String str2,
+            VibrationAttributes vibrationAttributes);
 
     public VibratorManager() {
         this.mPackageName = ActivityThread.currentPackageName();
@@ -36,7 +42,12 @@ public abstract class VibratorManager {
         this.mPackageName = context.getOpPackageName();
     }
 
-    public boolean setAlwaysOnEffect(int uid, String opPkg, int alwaysOnId, CombinedVibration effect, VibrationAttributes attributes) {
+    public boolean setAlwaysOnEffect(
+            int uid,
+            String opPkg,
+            int alwaysOnId,
+            CombinedVibration effect,
+            VibrationAttributes attributes) {
         Log.w(TAG, "Always-on effects aren't supported");
         return false;
     }
@@ -49,7 +60,8 @@ public abstract class VibratorManager {
         vibrate(Process.myUid(), this.mPackageName, effect, null, attributes);
     }
 
-    public void performHapticFeedback(int constant, boolean always, String reason, boolean fromIme) {
+    public void performHapticFeedback(
+            int constant, boolean always, String reason, boolean fromIme) {
         Log.w(TAG, "performHapticFeedback is not supported");
     }
 }

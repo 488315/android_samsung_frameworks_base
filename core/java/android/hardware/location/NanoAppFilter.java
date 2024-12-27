@@ -9,19 +9,21 @@ import android.os.Parcelable;
 /* loaded from: classes2.dex */
 public class NanoAppFilter implements Parcelable {
     public static final int APP_ANY = -1;
-    public static final Parcelable.Creator<NanoAppFilter> CREATOR = new Parcelable.Creator<NanoAppFilter>() { // from class: android.hardware.location.NanoAppFilter.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NanoAppFilter createFromParcel(Parcel in) {
-            return new NanoAppFilter(in);
-        }
+    public static final Parcelable.Creator<NanoAppFilter> CREATOR =
+            new Parcelable.Creator<
+                    NanoAppFilter>() { // from class: android.hardware.location.NanoAppFilter.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NanoAppFilter createFromParcel(Parcel in) {
+                    return new NanoAppFilter(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NanoAppFilter[] newArray(int size) {
-            return new NanoAppFilter[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NanoAppFilter[] newArray(int size) {
+                    return new NanoAppFilter[size];
+                }
+            };
     public static final int FLAGS_VERSION_ANY = -1;
     public static final int FLAGS_VERSION_GREAT_THAN = 2;
     public static final int FLAGS_VERSION_LESS_THAN = 4;
@@ -69,10 +71,20 @@ public class NanoAppFilter implements Parcelable {
     }
 
     public boolean testMatch(NanoAppInstanceInfo info) {
-        return (this.mContextHubId == -1 || info.getContexthubId() == this.mContextHubId) && (this.mAppId == -1 || info.getAppId() == this.mAppId) && versionsMatch(this.mVersionRestrictionMask, this.mAppVersion, info.getAppVersion());
+        return (this.mContextHubId == -1 || info.getContexthubId() == this.mContextHubId)
+                && (this.mAppId == -1 || info.getAppId() == this.mAppId)
+                && versionsMatch(
+                        this.mVersionRestrictionMask, this.mAppVersion, info.getAppVersion());
     }
 
     public String toString() {
-        return "nanoAppId: 0x" + Long.toHexString(this.mAppId) + ", nanoAppVersion: 0x" + Integer.toHexString(this.mAppVersion) + ", versionMask: " + this.mVersionRestrictionMask + ", vendorMask: " + this.mAppIdVendorMask;
+        return "nanoAppId: 0x"
+                + Long.toHexString(this.mAppId)
+                + ", nanoAppVersion: 0x"
+                + Integer.toHexString(this.mAppVersion)
+                + ", versionMask: "
+                + this.mVersionRestrictionMask
+                + ", vendorMask: "
+                + this.mAppIdVendorMask;
     }
 }

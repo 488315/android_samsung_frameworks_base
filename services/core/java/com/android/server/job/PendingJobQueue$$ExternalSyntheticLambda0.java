@@ -8,21 +8,21 @@ public final /* synthetic */ class PendingJobQueue$$ExternalSyntheticLambda0 imp
     public final /* synthetic */ int $r8$classId;
 
     /* JADX WARN: Code restructure failed: missing block: B:14:0x002f, code lost:
-    
-        if (r6 != false) goto L16;
-     */
+
+       if (r6 != false) goto L16;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:16:?, code lost:
-    
-        return -1;
-     */
+
+       return -1;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:18:?, code lost:
-    
-        return 1;
-     */
+
+       return 1;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:21:0x003f, code lost:
-    
-        if (r6 != false) goto L16;
-     */
+
+       if (r6 != false) goto L16;
+    */
     @Override // java.util.Comparator
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -127,6 +127,9 @@ public final /* synthetic */ class PendingJobQueue$$ExternalSyntheticLambda0 imp
         La2:
             return r6
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.job.PendingJobQueue$$ExternalSyntheticLambda0.compare(java.lang.Object, java.lang.Object):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.job.PendingJobQueue$$ExternalSyntheticLambda0.compare(java.lang.Object,"
+                    + " java.lang.Object):int");
     }
 }

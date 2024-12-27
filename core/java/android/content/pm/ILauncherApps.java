@@ -4,12 +4,6 @@ import android.app.IApplicationThread;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.IntentSender;
-import android.content.pm.ILauncherApps;
-import android.content.pm.IOnAppsChangedListener;
-import android.content.pm.IPackageInstallerCallback;
-import android.content.pm.IShortcutChangeCallback;
-import android.content.pm.LauncherApps;
-import android.content.pm.PackageInstaller;
 import android.graphics.Rect;
 import android.os.Binder;
 import android.os.Bundle;
@@ -20,7 +14,9 @@ import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.window.IDumpCallback;
+
 import com.android.internal.infra.AndroidFuture;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,25 +26,33 @@ import java.util.stream.IntStream;
 
 /* loaded from: classes.dex */
 public interface ILauncherApps extends IInterface {
-    void addOnAppsChangedListener(String str, IOnAppsChangedListener iOnAppsChangedListener) throws RemoteException;
+    void addOnAppsChangedListener(String str, IOnAppsChangedListener iOnAppsChangedListener)
+            throws RemoteException;
 
-    void cacheShortcuts(String str, String str2, List<String> list, UserHandle userHandle, int i) throws RemoteException;
+    void cacheShortcuts(String str, String str2, List<String> list, UserHandle userHandle, int i)
+            throws RemoteException;
 
     void changePackageIcon(String str, int i) throws RemoteException;
 
-    PendingIntent getActivityLaunchIntent(String str, ComponentName componentName, UserHandle userHandle) throws RemoteException;
+    PendingIntent getActivityLaunchIntent(
+            String str, ComponentName componentName, UserHandle userHandle) throws RemoteException;
 
-    Map<String, LauncherActivityInfoInternal> getActivityOverrides(String str, int i) throws RemoteException;
+    Map<String, LauncherActivityInfoInternal> getActivityOverrides(String str, int i)
+            throws RemoteException;
 
     ParceledListSlice getAllSessions(String str) throws RemoteException;
 
-    IntentSender getAppMarketActivityIntent(String str, String str2, UserHandle userHandle) throws RemoteException;
+    IntentSender getAppMarketActivityIntent(String str, String str2, UserHandle userHandle)
+            throws RemoteException;
 
-    LauncherApps.AppUsageLimit getAppUsageLimit(String str, String str2, UserHandle userHandle) throws RemoteException;
+    LauncherApps.AppUsageLimit getAppUsageLimit(String str, String str2, UserHandle userHandle)
+            throws RemoteException;
 
-    ApplicationInfo getApplicationInfo(String str, String str2, int i, UserHandle userHandle) throws RemoteException;
+    ApplicationInfo getApplicationInfo(String str, String str2, int i, UserHandle userHandle)
+            throws RemoteException;
 
-    ParceledListSlice getLauncherActivities(String str, String str2, UserHandle userHandle) throws RemoteException;
+    ParceledListSlice getLauncherActivities(String str, String str2, UserHandle userHandle)
+            throws RemoteException;
 
     LauncherUserInfo getLauncherUserInfo(UserHandle userHandle) throws RemoteException;
 
@@ -56,43 +60,65 @@ public interface ILauncherApps extends IInterface {
 
     IntentSender getPrivateSpaceSettingsIntent() throws RemoteException;
 
-    ParceledListSlice getShortcutConfigActivities(String str, String str2, UserHandle userHandle) throws RemoteException;
+    ParceledListSlice getShortcutConfigActivities(String str, String str2, UserHandle userHandle)
+            throws RemoteException;
 
-    IntentSender getShortcutConfigActivityIntent(String str, ComponentName componentName, UserHandle userHandle) throws RemoteException;
+    IntentSender getShortcutConfigActivityIntent(
+            String str, ComponentName componentName, UserHandle userHandle) throws RemoteException;
 
-    ParcelFileDescriptor getShortcutIconFd(String str, String str2, String str3, int i) throws RemoteException;
+    ParcelFileDescriptor getShortcutIconFd(String str, String str2, String str3, int i)
+            throws RemoteException;
 
     int getShortcutIconResId(String str, String str2, String str3, int i) throws RemoteException;
 
     String getShortcutIconUri(String str, String str2, String str3, int i) throws RemoteException;
 
-    PendingIntent getShortcutIntent(String str, String str2, String str3, Bundle bundle, UserHandle userHandle) throws RemoteException;
+    PendingIntent getShortcutIntent(
+            String str, String str2, String str3, Bundle bundle, UserHandle userHandle)
+            throws RemoteException;
 
-    ParceledListSlice getShortcuts(String str, ShortcutQueryWrapper shortcutQueryWrapper, UserHandle userHandle) throws RemoteException;
+    ParceledListSlice getShortcuts(
+            String str, ShortcutQueryWrapper shortcutQueryWrapper, UserHandle userHandle)
+            throws RemoteException;
 
-    void getShortcutsAsync(String str, ShortcutQueryWrapper shortcutQueryWrapper, UserHandle userHandle, AndroidFuture<List<ShortcutInfo>> androidFuture) throws RemoteException;
+    void getShortcutsAsync(
+            String str,
+            ShortcutQueryWrapper shortcutQueryWrapper,
+            UserHandle userHandle,
+            AndroidFuture<List<ShortcutInfo>> androidFuture)
+            throws RemoteException;
 
-    Bundle getSuspendedPackageLauncherExtras(String str, UserHandle userHandle) throws RemoteException;
+    Bundle getSuspendedPackageLauncherExtras(String str, UserHandle userHandle)
+            throws RemoteException;
 
     List<UserHandle> getUserProfiles() throws RemoteException;
 
     boolean hasShortcutHostPermission(String str) throws RemoteException;
 
-    boolean isActivityEnabled(String str, ComponentName componentName, UserHandle userHandle) throws RemoteException;
+    boolean isActivityEnabled(String str, ComponentName componentName, UserHandle userHandle)
+            throws RemoteException;
 
     boolean isPackageEnabled(String str, String str2, UserHandle userHandle) throws RemoteException;
 
-    void pinShortcuts(String str, String str2, List<String> list, UserHandle userHandle) throws RemoteException;
+    void pinShortcuts(String str, String str2, List<String> list, UserHandle userHandle)
+            throws RemoteException;
 
     void registerDumpCallback(IDumpCallback iDumpCallback) throws RemoteException;
 
-    void registerPackageInstallerCallback(String str, IPackageInstallerCallback iPackageInstallerCallback) throws RemoteException;
+    void registerPackageInstallerCallback(
+            String str, IPackageInstallerCallback iPackageInstallerCallback) throws RemoteException;
 
-    void registerShortcutChangeCallback(String str, ShortcutQueryWrapper shortcutQueryWrapper, IShortcutChangeCallback iShortcutChangeCallback) throws RemoteException;
+    void registerShortcutChangeCallback(
+            String str,
+            ShortcutQueryWrapper shortcutQueryWrapper,
+            IShortcutChangeCallback iShortcutChangeCallback)
+            throws RemoteException;
 
-    void removeOnAppsChangedListener(IOnAppsChangedListener iOnAppsChangedListener) throws RemoteException;
+    void removeOnAppsChangedListener(IOnAppsChangedListener iOnAppsChangedListener)
+            throws RemoteException;
 
-    LauncherActivityInfoInternal resolveLauncherActivityInternal(String str, ComponentName componentName, UserHandle userHandle) throws RemoteException;
+    LauncherActivityInfoInternal resolveLauncherActivityInternal(
+            String str, ComponentName componentName, UserHandle userHandle) throws RemoteException;
 
     void saveViewCaptureData() throws RemoteException;
 
@@ -100,49 +126,96 @@ public interface ILauncherApps extends IInterface {
 
     boolean shouldHideFromSuggestions(String str, UserHandle userHandle) throws RemoteException;
 
-    void showAppDetailsAsUser(IApplicationThread iApplicationThread, String str, String str2, ComponentName componentName, Rect rect, Bundle bundle, UserHandle userHandle) throws RemoteException;
+    void showAppDetailsAsUser(
+            IApplicationThread iApplicationThread,
+            String str,
+            String str2,
+            ComponentName componentName,
+            Rect rect,
+            Bundle bundle,
+            UserHandle userHandle)
+            throws RemoteException;
 
-    void startActivityAsUser(IApplicationThread iApplicationThread, String str, String str2, ComponentName componentName, Rect rect, Bundle bundle, UserHandle userHandle) throws RemoteException;
+    void startActivityAsUser(
+            IApplicationThread iApplicationThread,
+            String str,
+            String str2,
+            ComponentName componentName,
+            Rect rect,
+            Bundle bundle,
+            UserHandle userHandle)
+            throws RemoteException;
 
-    void startSessionDetailsActivityAsUser(IApplicationThread iApplicationThread, String str, String str2, PackageInstaller.SessionInfo sessionInfo, Rect rect, Bundle bundle, UserHandle userHandle) throws RemoteException;
+    void startSessionDetailsActivityAsUser(
+            IApplicationThread iApplicationThread,
+            String str,
+            String str2,
+            PackageInstaller.SessionInfo sessionInfo,
+            Rect rect,
+            Bundle bundle,
+            UserHandle userHandle)
+            throws RemoteException;
 
-    boolean startShortcut(String str, String str2, String str3, String str4, Rect rect, Bundle bundle, int i) throws RemoteException;
+    boolean startShortcut(
+            String str, String str2, String str3, String str4, Rect rect, Bundle bundle, int i)
+            throws RemoteException;
 
     void unRegisterDumpCallback(IDumpCallback iDumpCallback) throws RemoteException;
 
-    void uncacheShortcuts(String str, String str2, List<String> list, UserHandle userHandle, int i) throws RemoteException;
+    void uncacheShortcuts(String str, String str2, List<String> list, UserHandle userHandle, int i)
+            throws RemoteException;
 
-    void unregisterShortcutChangeCallback(String str, IShortcutChangeCallback iShortcutChangeCallback) throws RemoteException;
+    void unregisterShortcutChangeCallback(
+            String str, IShortcutChangeCallback iShortcutChangeCallback) throws RemoteException;
 
     public static class Default implements ILauncherApps {
         @Override // android.content.pm.ILauncherApps
-        public void addOnAppsChangedListener(String callingPackage, IOnAppsChangedListener listener) throws RemoteException {
-        }
+        public void addOnAppsChangedListener(String callingPackage, IOnAppsChangedListener listener)
+                throws RemoteException {}
 
         @Override // android.content.pm.ILauncherApps
-        public void removeOnAppsChangedListener(IOnAppsChangedListener listener) throws RemoteException {
-        }
+        public void removeOnAppsChangedListener(IOnAppsChangedListener listener)
+                throws RemoteException {}
 
         @Override // android.content.pm.ILauncherApps
-        public ParceledListSlice getLauncherActivities(String callingPackage, String packageName, UserHandle user) throws RemoteException {
+        public ParceledListSlice getLauncherActivities(
+                String callingPackage, String packageName, UserHandle user) throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.ILauncherApps
-        public LauncherActivityInfoInternal resolveLauncherActivityInternal(String callingPackage, ComponentName component, UserHandle user) throws RemoteException {
+        public LauncherActivityInfoInternal resolveLauncherActivityInternal(
+                String callingPackage, ComponentName component, UserHandle user)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.ILauncherApps
-        public void startSessionDetailsActivityAsUser(IApplicationThread caller, String callingPackage, String callingFeatureId, PackageInstaller.SessionInfo sessionInfo, Rect sourceBounds, Bundle opts, UserHandle user) throws RemoteException {
-        }
+        public void startSessionDetailsActivityAsUser(
+                IApplicationThread caller,
+                String callingPackage,
+                String callingFeatureId,
+                PackageInstaller.SessionInfo sessionInfo,
+                Rect sourceBounds,
+                Bundle opts,
+                UserHandle user)
+                throws RemoteException {}
 
         @Override // android.content.pm.ILauncherApps
-        public void startActivityAsUser(IApplicationThread caller, String callingPackage, String callingFeatureId, ComponentName component, Rect sourceBounds, Bundle opts, UserHandle user) throws RemoteException {
-        }
+        public void startActivityAsUser(
+                IApplicationThread caller,
+                String callingPackage,
+                String callingFeatureId,
+                ComponentName component,
+                Rect sourceBounds,
+                Bundle opts,
+                UserHandle user)
+                throws RemoteException {}
 
         @Override // android.content.pm.ILauncherApps
-        public PendingIntent getActivityLaunchIntent(String callingPackage, ComponentName component, UserHandle user) throws RemoteException {
+        public PendingIntent getActivityLaunchIntent(
+                String callingPackage, ComponentName component, UserHandle user)
+                throws RemoteException {
             return null;
         }
 
@@ -157,7 +230,8 @@ public interface ILauncherApps extends IInterface {
         }
 
         @Override // android.content.pm.ILauncherApps
-        public IntentSender getAppMarketActivityIntent(String callingPackage, String packageName, UserHandle user) throws RemoteException {
+        public IntentSender getAppMarketActivityIntent(
+                String callingPackage, String packageName, UserHandle user) throws RemoteException {
             return null;
         }
 
@@ -167,59 +241,95 @@ public interface ILauncherApps extends IInterface {
         }
 
         @Override // android.content.pm.ILauncherApps
-        public void showAppDetailsAsUser(IApplicationThread caller, String callingPackage, String callingFeatureId, ComponentName component, Rect sourceBounds, Bundle opts, UserHandle user) throws RemoteException {
-        }
+        public void showAppDetailsAsUser(
+                IApplicationThread caller,
+                String callingPackage,
+                String callingFeatureId,
+                ComponentName component,
+                Rect sourceBounds,
+                Bundle opts,
+                UserHandle user)
+                throws RemoteException {}
 
         @Override // android.content.pm.ILauncherApps
-        public boolean isPackageEnabled(String callingPackage, String packageName, UserHandle user) throws RemoteException {
+        public boolean isPackageEnabled(String callingPackage, String packageName, UserHandle user)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.ILauncherApps
-        public Bundle getSuspendedPackageLauncherExtras(String packageName, UserHandle user) throws RemoteException {
+        public Bundle getSuspendedPackageLauncherExtras(String packageName, UserHandle user)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.ILauncherApps
-        public boolean isActivityEnabled(String callingPackage, ComponentName component, UserHandle user) throws RemoteException {
+        public boolean isActivityEnabled(
+                String callingPackage, ComponentName component, UserHandle user)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.ILauncherApps
-        public ApplicationInfo getApplicationInfo(String callingPackage, String packageName, int flags, UserHandle user) throws RemoteException {
+        public ApplicationInfo getApplicationInfo(
+                String callingPackage, String packageName, int flags, UserHandle user)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.ILauncherApps
-        public LauncherApps.AppUsageLimit getAppUsageLimit(String callingPackage, String packageName, UserHandle user) throws RemoteException {
+        public LauncherApps.AppUsageLimit getAppUsageLimit(
+                String callingPackage, String packageName, UserHandle user) throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.ILauncherApps
-        public ParceledListSlice getShortcuts(String callingPackage, ShortcutQueryWrapper query, UserHandle user) throws RemoteException {
+        public ParceledListSlice getShortcuts(
+                String callingPackage, ShortcutQueryWrapper query, UserHandle user)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.ILauncherApps
-        public void getShortcutsAsync(String callingPackage, ShortcutQueryWrapper query, UserHandle user, AndroidFuture<List<ShortcutInfo>> cb) throws RemoteException {
-        }
+        public void getShortcutsAsync(
+                String callingPackage,
+                ShortcutQueryWrapper query,
+                UserHandle user,
+                AndroidFuture<List<ShortcutInfo>> cb)
+                throws RemoteException {}
 
         @Override // android.content.pm.ILauncherApps
-        public void pinShortcuts(String callingPackage, String packageName, List<String> shortcutIds, UserHandle user) throws RemoteException {
-        }
+        public void pinShortcuts(
+                String callingPackage,
+                String packageName,
+                List<String> shortcutIds,
+                UserHandle user)
+                throws RemoteException {}
 
         @Override // android.content.pm.ILauncherApps
-        public boolean startShortcut(String callingPackage, String packageName, String featureId, String id, Rect sourceBounds, Bundle startActivityOptions, int userId) throws RemoteException {
+        public boolean startShortcut(
+                String callingPackage,
+                String packageName,
+                String featureId,
+                String id,
+                Rect sourceBounds,
+                Bundle startActivityOptions,
+                int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.ILauncherApps
-        public int getShortcutIconResId(String callingPackage, String packageName, String id, int userId) throws RemoteException {
+        public int getShortcutIconResId(
+                String callingPackage, String packageName, String id, int userId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.content.pm.ILauncherApps
-        public ParcelFileDescriptor getShortcutIconFd(String callingPackage, String packageName, String id, int userId) throws RemoteException {
+        public ParcelFileDescriptor getShortcutIconFd(
+                String callingPackage, String packageName, String id, int userId)
+                throws RemoteException {
             return null;
         }
 
@@ -229,28 +339,38 @@ public interface ILauncherApps extends IInterface {
         }
 
         @Override // android.content.pm.ILauncherApps
-        public boolean shouldHideFromSuggestions(String packageName, UserHandle user) throws RemoteException {
+        public boolean shouldHideFromSuggestions(String packageName, UserHandle user)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.content.pm.ILauncherApps
-        public ParceledListSlice getShortcutConfigActivities(String callingPackage, String packageName, UserHandle user) throws RemoteException {
+        public ParceledListSlice getShortcutConfigActivities(
+                String callingPackage, String packageName, UserHandle user) throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.ILauncherApps
-        public IntentSender getShortcutConfigActivityIntent(String callingPackage, ComponentName component, UserHandle user) throws RemoteException {
+        public IntentSender getShortcutConfigActivityIntent(
+                String callingPackage, ComponentName component, UserHandle user)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.ILauncherApps
-        public PendingIntent getShortcutIntent(String callingPackage, String packageName, String shortcutId, Bundle opts, UserHandle user) throws RemoteException {
+        public PendingIntent getShortcutIntent(
+                String callingPackage,
+                String packageName,
+                String shortcutId,
+                Bundle opts,
+                UserHandle user)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.ILauncherApps
-        public void registerPackageInstallerCallback(String callingPackage, IPackageInstallerCallback callback) throws RemoteException {
-        }
+        public void registerPackageInstallerCallback(
+                String callingPackage, IPackageInstallerCallback callback) throws RemoteException {}
 
         @Override // android.content.pm.ILauncherApps
         public ParceledListSlice getAllSessions(String callingPackage) throws RemoteException {
@@ -258,42 +378,55 @@ public interface ILauncherApps extends IInterface {
         }
 
         @Override // android.content.pm.ILauncherApps
-        public void registerShortcutChangeCallback(String callingPackage, ShortcutQueryWrapper query, IShortcutChangeCallback callback) throws RemoteException {
-        }
+        public void registerShortcutChangeCallback(
+                String callingPackage, ShortcutQueryWrapper query, IShortcutChangeCallback callback)
+                throws RemoteException {}
 
         @Override // android.content.pm.ILauncherApps
-        public void unregisterShortcutChangeCallback(String callingPackage, IShortcutChangeCallback callback) throws RemoteException {
-        }
+        public void unregisterShortcutChangeCallback(
+                String callingPackage, IShortcutChangeCallback callback) throws RemoteException {}
 
         @Override // android.content.pm.ILauncherApps
-        public void cacheShortcuts(String callingPackage, String packageName, List<String> shortcutIds, UserHandle user, int cacheFlags) throws RemoteException {
-        }
+        public void cacheShortcuts(
+                String callingPackage,
+                String packageName,
+                List<String> shortcutIds,
+                UserHandle user,
+                int cacheFlags)
+                throws RemoteException {}
 
         @Override // android.content.pm.ILauncherApps
-        public void uncacheShortcuts(String callingPackage, String packageName, List<String> shortcutIds, UserHandle user, int cacheFlags) throws RemoteException {
-        }
+        public void uncacheShortcuts(
+                String callingPackage,
+                String packageName,
+                List<String> shortcutIds,
+                UserHandle user,
+                int cacheFlags)
+                throws RemoteException {}
 
         @Override // android.content.pm.ILauncherApps
-        public String getShortcutIconUri(String callingPackage, String packageName, String shortcutId, int userId) throws RemoteException {
+        public String getShortcutIconUri(
+                String callingPackage, String packageName, String shortcutId, int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.ILauncherApps
-        public Map<String, LauncherActivityInfoInternal> getActivityOverrides(String callingPackage, int userId) throws RemoteException {
+        public Map<String, LauncherActivityInfoInternal> getActivityOverrides(
+                String callingPackage, int userId) throws RemoteException {
             return null;
         }
 
         @Override // android.content.pm.ILauncherApps
-        public void registerDumpCallback(IDumpCallback cb) throws RemoteException {
-        }
+        public void registerDumpCallback(IDumpCallback cb) throws RemoteException {}
 
         @Override // android.content.pm.ILauncherApps
-        public void unRegisterDumpCallback(IDumpCallback cb) throws RemoteException {
-        }
+        public void unRegisterDumpCallback(IDumpCallback cb) throws RemoteException {}
 
         @Override // android.content.pm.ILauncherApps
-        public void setArchiveCompatibilityOptions(boolean enableIconOverlay, boolean enableUnarchivalConfirmation) throws RemoteException {
-        }
+        public void setArchiveCompatibilityOptions(
+                boolean enableIconOverlay, boolean enableUnarchivalConfirmation)
+                throws RemoteException {}
 
         @Override // android.content.pm.ILauncherApps
         public List<UserHandle> getUserProfiles() throws RemoteException {
@@ -301,12 +434,10 @@ public interface ILauncherApps extends IInterface {
         }
 
         @Override // android.content.pm.ILauncherApps
-        public void saveViewCaptureData() throws RemoteException {
-        }
+        public void saveViewCaptureData() throws RemoteException {}
 
         @Override // android.content.pm.ILauncherApps
-        public void changePackageIcon(String packageName, int userId) throws RemoteException {
-        }
+        public void changePackageIcon(String packageName, int userId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -314,7 +445,7 @@ public interface ILauncherApps extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ILauncherApps {
+    public abstract static class Stub extends Binder implements ILauncherApps {
         public static final String DESCRIPTOR = "android.content.pm.ILauncherApps";
         static final int TRANSACTION_addOnAppsChangedListener = 1;
         static final int TRANSACTION_cacheShortcuts = 33;
@@ -476,7 +607,8 @@ public interface ILauncherApps extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, final Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, final Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -487,13 +619,15 @@ public interface ILauncherApps extends IInterface {
             switch (code) {
                 case 1:
                     String _arg0 = data.readString();
-                    IOnAppsChangedListener _arg1 = IOnAppsChangedListener.Stub.asInterface(data.readStrongBinder());
+                    IOnAppsChangedListener _arg1 =
+                            IOnAppsChangedListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addOnAppsChangedListener(_arg0, _arg1);
                     reply.writeNoException();
                     return true;
                 case 2:
-                    IOnAppsChangedListener _arg02 = IOnAppsChangedListener.Stub.asInterface(data.readStrongBinder());
+                    IOnAppsChangedListener _arg02 =
+                            IOnAppsChangedListener.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeOnAppsChangedListener(_arg02);
                     reply.writeNoException();
@@ -509,30 +643,38 @@ public interface ILauncherApps extends IInterface {
                     return true;
                 case 4:
                     String _arg04 = data.readString();
-                    ComponentName _arg13 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg13 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     UserHandle _arg22 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     data.enforceNoDataAvail();
-                    LauncherActivityInfoInternal _result2 = resolveLauncherActivityInternal(_arg04, _arg13, _arg22);
+                    LauncherActivityInfoInternal _result2 =
+                            resolveLauncherActivityInternal(_arg04, _arg13, _arg22);
                     reply.writeNoException();
                     reply.writeTypedObject(_result2, 1);
                     return true;
                 case 5:
-                    IApplicationThread _arg05 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    IApplicationThread _arg05 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     String _arg14 = data.readString();
                     String _arg23 = data.readString();
-                    PackageInstaller.SessionInfo _arg3 = (PackageInstaller.SessionInfo) data.readTypedObject(PackageInstaller.SessionInfo.CREATOR);
+                    PackageInstaller.SessionInfo _arg3 =
+                            (PackageInstaller.SessionInfo)
+                                    data.readTypedObject(PackageInstaller.SessionInfo.CREATOR);
                     Rect _arg4 = (Rect) data.readTypedObject(Rect.CREATOR);
                     Bundle _arg5 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     UserHandle _arg6 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     data.enforceNoDataAvail();
-                    startSessionDetailsActivityAsUser(_arg05, _arg14, _arg23, _arg3, _arg4, _arg5, _arg6);
+                    startSessionDetailsActivityAsUser(
+                            _arg05, _arg14, _arg23, _arg3, _arg4, _arg5, _arg6);
                     reply.writeNoException();
                     return true;
                 case 6:
-                    IApplicationThread _arg06 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    IApplicationThread _arg06 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     String _arg15 = data.readString();
                     String _arg24 = data.readString();
-                    ComponentName _arg32 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg32 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     Rect _arg42 = (Rect) data.readTypedObject(Rect.CREATOR);
                     Bundle _arg52 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     UserHandle _arg62 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
@@ -542,7 +684,8 @@ public interface ILauncherApps extends IInterface {
                     return true;
                 case 7:
                     String _arg07 = data.readString();
-                    ComponentName _arg16 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg16 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     UserHandle _arg25 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     data.enforceNoDataAvail();
                     PendingIntent _result3 = getActivityLaunchIntent(_arg07, _arg16, _arg25);
@@ -578,10 +721,12 @@ public interface ILauncherApps extends IInterface {
                     reply.writeTypedObject(_result7, 1);
                     return true;
                 case 12:
-                    IApplicationThread _arg011 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
+                    IApplicationThread _arg011 =
+                            IApplicationThread.Stub.asInterface(data.readStrongBinder());
                     String _arg18 = data.readString();
                     String _arg27 = data.readString();
-                    ComponentName _arg33 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg33 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     Rect _arg43 = (Rect) data.readTypedObject(Rect.CREATOR);
                     Bundle _arg53 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     UserHandle _arg63 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
@@ -608,7 +753,8 @@ public interface ILauncherApps extends IInterface {
                     return true;
                 case 15:
                     String _arg014 = data.readString();
-                    ComponentName _arg111 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg111 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     UserHandle _arg29 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result10 = isActivityEnabled(_arg014, _arg111, _arg29);
@@ -621,7 +767,8 @@ public interface ILauncherApps extends IInterface {
                     int _arg210 = data.readInt();
                     UserHandle _arg34 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     data.enforceNoDataAvail();
-                    ApplicationInfo _result11 = getApplicationInfo(_arg015, _arg112, _arg210, _arg34);
+                    ApplicationInfo _result11 =
+                            getApplicationInfo(_arg015, _arg112, _arg210, _arg34);
                     reply.writeNoException();
                     reply.writeTypedObject(_result11, 1);
                     return true;
@@ -630,13 +777,16 @@ public interface ILauncherApps extends IInterface {
                     String _arg113 = data.readString();
                     UserHandle _arg211 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     data.enforceNoDataAvail();
-                    LauncherApps.AppUsageLimit _result12 = getAppUsageLimit(_arg016, _arg113, _arg211);
+                    LauncherApps.AppUsageLimit _result12 =
+                            getAppUsageLimit(_arg016, _arg113, _arg211);
                     reply.writeNoException();
                     reply.writeTypedObject(_result12, 1);
                     return true;
                 case 18:
                     String _arg017 = data.readString();
-                    ShortcutQueryWrapper _arg114 = (ShortcutQueryWrapper) data.readTypedObject(ShortcutQueryWrapper.CREATOR);
+                    ShortcutQueryWrapper _arg114 =
+                            (ShortcutQueryWrapper)
+                                    data.readTypedObject(ShortcutQueryWrapper.CREATOR);
                     UserHandle _arg212 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     data.enforceNoDataAvail();
                     ParceledListSlice _result13 = getShortcuts(_arg017, _arg114, _arg212);
@@ -645,9 +795,12 @@ public interface ILauncherApps extends IInterface {
                     return true;
                 case 19:
                     String _arg018 = data.readString();
-                    ShortcutQueryWrapper _arg115 = (ShortcutQueryWrapper) data.readTypedObject(ShortcutQueryWrapper.CREATOR);
+                    ShortcutQueryWrapper _arg115 =
+                            (ShortcutQueryWrapper)
+                                    data.readTypedObject(ShortcutQueryWrapper.CREATOR);
                     UserHandle _arg213 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
-                    AndroidFuture<List<ShortcutInfo>> _arg35 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<List<ShortcutInfo>> _arg35 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     getShortcutsAsync(_arg018, _arg115, _arg213, _arg35);
                     reply.writeNoException();
@@ -670,7 +823,9 @@ public interface ILauncherApps extends IInterface {
                     Bundle _arg54 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     int _arg64 = data.readInt();
                     data.enforceNoDataAvail();
-                    boolean _result14 = startShortcut(_arg020, _arg117, _arg215, _arg37, _arg44, _arg54, _arg64);
+                    boolean _result14 =
+                            startShortcut(
+                                    _arg020, _arg117, _arg215, _arg37, _arg44, _arg54, _arg64);
                     reply.writeNoException();
                     reply.writeBoolean(_result14);
                     return true;
@@ -690,7 +845,8 @@ public interface ILauncherApps extends IInterface {
                     String _arg217 = data.readString();
                     int _arg39 = data.readInt();
                     data.enforceNoDataAvail();
-                    ParcelFileDescriptor _result16 = getShortcutIconFd(_arg022, _arg119, _arg217, _arg39);
+                    ParcelFileDescriptor _result16 =
+                            getShortcutIconFd(_arg022, _arg119, _arg217, _arg39);
                     reply.writeNoException();
                     reply.writeTypedObject(_result16, 1);
                     return true;
@@ -714,16 +870,19 @@ public interface ILauncherApps extends IInterface {
                     String _arg121 = data.readString();
                     UserHandle _arg218 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     data.enforceNoDataAvail();
-                    ParceledListSlice _result19 = getShortcutConfigActivities(_arg025, _arg121, _arg218);
+                    ParceledListSlice _result19 =
+                            getShortcutConfigActivities(_arg025, _arg121, _arg218);
                     reply.writeNoException();
                     reply.writeTypedObject(_result19, 1);
                     return true;
                 case 27:
                     String _arg026 = data.readString();
-                    ComponentName _arg122 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg122 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     UserHandle _arg219 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     data.enforceNoDataAvail();
-                    IntentSender _result20 = getShortcutConfigActivityIntent(_arg026, _arg122, _arg219);
+                    IntentSender _result20 =
+                            getShortcutConfigActivityIntent(_arg026, _arg122, _arg219);
                     reply.writeNoException();
                     reply.writeTypedObject(_result20, 1);
                     return true;
@@ -734,13 +893,15 @@ public interface ILauncherApps extends IInterface {
                     Bundle _arg310 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     UserHandle _arg45 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     data.enforceNoDataAvail();
-                    PendingIntent _result21 = getShortcutIntent(_arg027, _arg123, _arg220, _arg310, _arg45);
+                    PendingIntent _result21 =
+                            getShortcutIntent(_arg027, _arg123, _arg220, _arg310, _arg45);
                     reply.writeNoException();
                     reply.writeTypedObject(_result21, 1);
                     return true;
                 case 29:
                     String _arg028 = data.readString();
-                    IPackageInstallerCallback _arg124 = IPackageInstallerCallback.Stub.asInterface(data.readStrongBinder());
+                    IPackageInstallerCallback _arg124 =
+                            IPackageInstallerCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerPackageInstallerCallback(_arg028, _arg124);
                     reply.writeNoException();
@@ -754,15 +915,19 @@ public interface ILauncherApps extends IInterface {
                     return true;
                 case 31:
                     String _arg030 = data.readString();
-                    ShortcutQueryWrapper _arg125 = (ShortcutQueryWrapper) data.readTypedObject(ShortcutQueryWrapper.CREATOR);
-                    IShortcutChangeCallback _arg221 = IShortcutChangeCallback.Stub.asInterface(data.readStrongBinder());
+                    ShortcutQueryWrapper _arg125 =
+                            (ShortcutQueryWrapper)
+                                    data.readTypedObject(ShortcutQueryWrapper.CREATOR);
+                    IShortcutChangeCallback _arg221 =
+                            IShortcutChangeCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerShortcutChangeCallback(_arg030, _arg125, _arg221);
                     reply.writeNoException();
                     return true;
                 case 32:
                     String _arg031 = data.readString();
-                    IShortcutChangeCallback _arg126 = IShortcutChangeCallback.Stub.asInterface(data.readStrongBinder());
+                    IShortcutChangeCallback _arg126 =
+                            IShortcutChangeCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterShortcutChangeCallback(_arg031, _arg126);
                     reply.writeNoException();
@@ -801,18 +966,24 @@ public interface ILauncherApps extends IInterface {
                     String _arg035 = data.readString();
                     int _arg130 = data.readInt();
                     data.enforceNoDataAvail();
-                    Map<String, LauncherActivityInfoInternal> _result24 = getActivityOverrides(_arg035, _arg130);
+                    Map<String, LauncherActivityInfoInternal> _result24 =
+                            getActivityOverrides(_arg035, _arg130);
                     reply.writeNoException();
                     if (_result24 == null) {
                         reply.writeInt(-1);
                     } else {
                         reply.writeInt(_result24.size());
-                        _result24.forEach(new BiConsumer() { // from class: android.content.pm.ILauncherApps$Stub$$ExternalSyntheticLambda0
-                            @Override // java.util.function.BiConsumer
-                            public final void accept(Object obj, Object obj2) {
-                                ILauncherApps.Stub.lambda$onTransact$0(Parcel.this, (String) obj, (LauncherActivityInfoInternal) obj2);
-                            }
-                        });
+                        _result24.forEach(
+                                new BiConsumer() { // from class:
+                                    // android.content.pm.ILauncherApps$Stub$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.BiConsumer
+                                    public final void accept(Object obj, Object obj2) {
+                                        ILauncherApps.Stub.lambda$onTransact$0(
+                                                Parcel.this,
+                                                (String) obj,
+                                                (LauncherActivityInfoInternal) obj2);
+                                    }
+                                });
                     }
                     return true;
                 case 37:
@@ -855,7 +1026,8 @@ public interface ILauncherApps extends IInterface {
             }
         }
 
-        static /* synthetic */ void lambda$onTransact$0(Parcel reply, String k, LauncherActivityInfoInternal v) {
+        static /* synthetic */ void lambda$onTransact$0(
+                Parcel reply, String k, LauncherActivityInfoInternal v) {
             reply.writeString(k);
             reply.writeTypedObject(v, 1);
         }
@@ -878,7 +1050,8 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public void addOnAppsChangedListener(String callingPackage, IOnAppsChangedListener listener) throws RemoteException {
+            public void addOnAppsChangedListener(
+                    String callingPackage, IOnAppsChangedListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -894,7 +1067,8 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public void removeOnAppsChangedListener(IOnAppsChangedListener listener) throws RemoteException {
+            public void removeOnAppsChangedListener(IOnAppsChangedListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -909,7 +1083,9 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public ParceledListSlice getLauncherActivities(String callingPackage, String packageName, UserHandle user) throws RemoteException {
+            public ParceledListSlice getLauncherActivities(
+                    String callingPackage, String packageName, UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -919,7 +1095,8 @@ public interface ILauncherApps extends IInterface {
                     _data.writeTypedObject(user, 0);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -928,7 +1105,9 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public LauncherActivityInfoInternal resolveLauncherActivityInternal(String callingPackage, ComponentName component, UserHandle user) throws RemoteException {
+            public LauncherActivityInfoInternal resolveLauncherActivityInternal(
+                    String callingPackage, ComponentName component, UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -938,7 +1117,9 @@ public interface ILauncherApps extends IInterface {
                     _data.writeTypedObject(user, 0);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    LauncherActivityInfoInternal _result = (LauncherActivityInfoInternal) _reply.readTypedObject(LauncherActivityInfoInternal.CREATOR);
+                    LauncherActivityInfoInternal _result =
+                            (LauncherActivityInfoInternal)
+                                    _reply.readTypedObject(LauncherActivityInfoInternal.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -947,7 +1128,15 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public void startSessionDetailsActivityAsUser(IApplicationThread caller, String callingPackage, String callingFeatureId, PackageInstaller.SessionInfo sessionInfo, Rect sourceBounds, Bundle opts, UserHandle user) throws RemoteException {
+            public void startSessionDetailsActivityAsUser(
+                    IApplicationThread caller,
+                    String callingPackage,
+                    String callingFeatureId,
+                    PackageInstaller.SessionInfo sessionInfo,
+                    Rect sourceBounds,
+                    Bundle opts,
+                    UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -968,7 +1157,15 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public void startActivityAsUser(IApplicationThread caller, String callingPackage, String callingFeatureId, ComponentName component, Rect sourceBounds, Bundle opts, UserHandle user) throws RemoteException {
+            public void startActivityAsUser(
+                    IApplicationThread caller,
+                    String callingPackage,
+                    String callingFeatureId,
+                    ComponentName component,
+                    Rect sourceBounds,
+                    Bundle opts,
+                    UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -989,7 +1186,9 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public PendingIntent getActivityLaunchIntent(String callingPackage, ComponentName component, UserHandle user) throws RemoteException {
+            public PendingIntent getActivityLaunchIntent(
+                    String callingPackage, ComponentName component, UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -999,7 +1198,8 @@ public interface ILauncherApps extends IInterface {
                     _data.writeTypedObject(user, 0);
                     this.mRemote.transact(7, _data, _reply, 0);
                     _reply.readException();
-                    PendingIntent _result = (PendingIntent) _reply.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _result =
+                            (PendingIntent) _reply.readTypedObject(PendingIntent.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1016,7 +1216,8 @@ public interface ILauncherApps extends IInterface {
                     _data.writeTypedObject(user, 0);
                     this.mRemote.transact(8, _data, _reply, 0);
                     _reply.readException();
-                    LauncherUserInfo _result = (LauncherUserInfo) _reply.readTypedObject(LauncherUserInfo.CREATOR);
+                    LauncherUserInfo _result =
+                            (LauncherUserInfo) _reply.readTypedObject(LauncherUserInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1025,7 +1226,8 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public List<String> getPreInstalledSystemPackages(UserHandle user) throws RemoteException {
+            public List<String> getPreInstalledSystemPackages(UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1042,7 +1244,9 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public IntentSender getAppMarketActivityIntent(String callingPackage, String packageName, UserHandle user) throws RemoteException {
+            public IntentSender getAppMarketActivityIntent(
+                    String callingPackage, String packageName, UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1052,7 +1256,8 @@ public interface ILauncherApps extends IInterface {
                     _data.writeTypedObject(user, 0);
                     this.mRemote.transact(10, _data, _reply, 0);
                     _reply.readException();
-                    IntentSender _result = (IntentSender) _reply.readTypedObject(IntentSender.CREATOR);
+                    IntentSender _result =
+                            (IntentSender) _reply.readTypedObject(IntentSender.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1068,7 +1273,8 @@ public interface ILauncherApps extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(11, _data, _reply, 0);
                     _reply.readException();
-                    IntentSender _result = (IntentSender) _reply.readTypedObject(IntentSender.CREATOR);
+                    IntentSender _result =
+                            (IntentSender) _reply.readTypedObject(IntentSender.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1077,7 +1283,15 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public void showAppDetailsAsUser(IApplicationThread caller, String callingPackage, String callingFeatureId, ComponentName component, Rect sourceBounds, Bundle opts, UserHandle user) throws RemoteException {
+            public void showAppDetailsAsUser(
+                    IApplicationThread caller,
+                    String callingPackage,
+                    String callingFeatureId,
+                    ComponentName component,
+                    Rect sourceBounds,
+                    Bundle opts,
+                    UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1098,7 +1312,9 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public boolean isPackageEnabled(String callingPackage, String packageName, UserHandle user) throws RemoteException {
+            public boolean isPackageEnabled(
+                    String callingPackage, String packageName, UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1117,7 +1333,8 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public Bundle getSuspendedPackageLauncherExtras(String packageName, UserHandle user) throws RemoteException {
+            public Bundle getSuspendedPackageLauncherExtras(String packageName, UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1135,7 +1352,9 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public boolean isActivityEnabled(String callingPackage, ComponentName component, UserHandle user) throws RemoteException {
+            public boolean isActivityEnabled(
+                    String callingPackage, ComponentName component, UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1154,7 +1373,9 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public ApplicationInfo getApplicationInfo(String callingPackage, String packageName, int flags, UserHandle user) throws RemoteException {
+            public ApplicationInfo getApplicationInfo(
+                    String callingPackage, String packageName, int flags, UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1165,7 +1386,8 @@ public interface ILauncherApps extends IInterface {
                     _data.writeTypedObject(user, 0);
                     this.mRemote.transact(16, _data, _reply, 0);
                     _reply.readException();
-                    ApplicationInfo _result = (ApplicationInfo) _reply.readTypedObject(ApplicationInfo.CREATOR);
+                    ApplicationInfo _result =
+                            (ApplicationInfo) _reply.readTypedObject(ApplicationInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1174,7 +1396,9 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public LauncherApps.AppUsageLimit getAppUsageLimit(String callingPackage, String packageName, UserHandle user) throws RemoteException {
+            public LauncherApps.AppUsageLimit getAppUsageLimit(
+                    String callingPackage, String packageName, UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1184,7 +1408,9 @@ public interface ILauncherApps extends IInterface {
                     _data.writeTypedObject(user, 0);
                     this.mRemote.transact(17, _data, _reply, 0);
                     _reply.readException();
-                    LauncherApps.AppUsageLimit _result = (LauncherApps.AppUsageLimit) _reply.readTypedObject(LauncherApps.AppUsageLimit.CREATOR);
+                    LauncherApps.AppUsageLimit _result =
+                            (LauncherApps.AppUsageLimit)
+                                    _reply.readTypedObject(LauncherApps.AppUsageLimit.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1193,7 +1419,9 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public ParceledListSlice getShortcuts(String callingPackage, ShortcutQueryWrapper query, UserHandle user) throws RemoteException {
+            public ParceledListSlice getShortcuts(
+                    String callingPackage, ShortcutQueryWrapper query, UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1203,7 +1431,8 @@ public interface ILauncherApps extends IInterface {
                     _data.writeTypedObject(user, 0);
                     this.mRemote.transact(18, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1212,7 +1441,12 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public void getShortcutsAsync(String callingPackage, ShortcutQueryWrapper query, UserHandle user, AndroidFuture<List<ShortcutInfo>> cb) throws RemoteException {
+            public void getShortcutsAsync(
+                    String callingPackage,
+                    ShortcutQueryWrapper query,
+                    UserHandle user,
+                    AndroidFuture<List<ShortcutInfo>> cb)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1230,7 +1464,12 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public void pinShortcuts(String callingPackage, String packageName, List<String> shortcutIds, UserHandle user) throws RemoteException {
+            public void pinShortcuts(
+                    String callingPackage,
+                    String packageName,
+                    List<String> shortcutIds,
+                    UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1248,7 +1487,15 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public boolean startShortcut(String callingPackage, String packageName, String featureId, String id, Rect sourceBounds, Bundle startActivityOptions, int userId) throws RemoteException {
+            public boolean startShortcut(
+                    String callingPackage,
+                    String packageName,
+                    String featureId,
+                    String id,
+                    Rect sourceBounds,
+                    Bundle startActivityOptions,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1271,7 +1518,9 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public int getShortcutIconResId(String callingPackage, String packageName, String id, int userId) throws RemoteException {
+            public int getShortcutIconResId(
+                    String callingPackage, String packageName, String id, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1291,7 +1540,9 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public ParcelFileDescriptor getShortcutIconFd(String callingPackage, String packageName, String id, int userId) throws RemoteException {
+            public ParcelFileDescriptor getShortcutIconFd(
+                    String callingPackage, String packageName, String id, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1302,7 +1553,9 @@ public interface ILauncherApps extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(23, _data, _reply, 0);
                     _reply.readException();
-                    ParcelFileDescriptor _result = (ParcelFileDescriptor) _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _result =
+                            (ParcelFileDescriptor)
+                                    _reply.readTypedObject(ParcelFileDescriptor.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1328,7 +1581,8 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public boolean shouldHideFromSuggestions(String packageName, UserHandle user) throws RemoteException {
+            public boolean shouldHideFromSuggestions(String packageName, UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1346,7 +1600,9 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public ParceledListSlice getShortcutConfigActivities(String callingPackage, String packageName, UserHandle user) throws RemoteException {
+            public ParceledListSlice getShortcutConfigActivities(
+                    String callingPackage, String packageName, UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1356,7 +1612,8 @@ public interface ILauncherApps extends IInterface {
                     _data.writeTypedObject(user, 0);
                     this.mRemote.transact(26, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1365,7 +1622,9 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public IntentSender getShortcutConfigActivityIntent(String callingPackage, ComponentName component, UserHandle user) throws RemoteException {
+            public IntentSender getShortcutConfigActivityIntent(
+                    String callingPackage, ComponentName component, UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1375,7 +1634,8 @@ public interface ILauncherApps extends IInterface {
                     _data.writeTypedObject(user, 0);
                     this.mRemote.transact(27, _data, _reply, 0);
                     _reply.readException();
-                    IntentSender _result = (IntentSender) _reply.readTypedObject(IntentSender.CREATOR);
+                    IntentSender _result =
+                            (IntentSender) _reply.readTypedObject(IntentSender.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1384,7 +1644,13 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public PendingIntent getShortcutIntent(String callingPackage, String packageName, String shortcutId, Bundle opts, UserHandle user) throws RemoteException {
+            public PendingIntent getShortcutIntent(
+                    String callingPackage,
+                    String packageName,
+                    String shortcutId,
+                    Bundle opts,
+                    UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1396,7 +1662,8 @@ public interface ILauncherApps extends IInterface {
                     _data.writeTypedObject(user, 0);
                     this.mRemote.transact(28, _data, _reply, 0);
                     _reply.readException();
-                    PendingIntent _result = (PendingIntent) _reply.readTypedObject(PendingIntent.CREATOR);
+                    PendingIntent _result =
+                            (PendingIntent) _reply.readTypedObject(PendingIntent.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1405,7 +1672,9 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public void registerPackageInstallerCallback(String callingPackage, IPackageInstallerCallback callback) throws RemoteException {
+            public void registerPackageInstallerCallback(
+                    String callingPackage, IPackageInstallerCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1429,7 +1698,8 @@ public interface ILauncherApps extends IInterface {
                     _data.writeString(callingPackage);
                     this.mRemote.transact(30, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1438,7 +1708,11 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public void registerShortcutChangeCallback(String callingPackage, ShortcutQueryWrapper query, IShortcutChangeCallback callback) throws RemoteException {
+            public void registerShortcutChangeCallback(
+                    String callingPackage,
+                    ShortcutQueryWrapper query,
+                    IShortcutChangeCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1455,7 +1729,9 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public void unregisterShortcutChangeCallback(String callingPackage, IShortcutChangeCallback callback) throws RemoteException {
+            public void unregisterShortcutChangeCallback(
+                    String callingPackage, IShortcutChangeCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1471,7 +1747,13 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public void cacheShortcuts(String callingPackage, String packageName, List<String> shortcutIds, UserHandle user, int cacheFlags) throws RemoteException {
+            public void cacheShortcuts(
+                    String callingPackage,
+                    String packageName,
+                    List<String> shortcutIds,
+                    UserHandle user,
+                    int cacheFlags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1490,7 +1772,13 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public void uncacheShortcuts(String callingPackage, String packageName, List<String> shortcutIds, UserHandle user, int cacheFlags) throws RemoteException {
+            public void uncacheShortcuts(
+                    String callingPackage,
+                    String packageName,
+                    List<String> shortcutIds,
+                    UserHandle user,
+                    int cacheFlags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1509,7 +1797,9 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public String getShortcutIconUri(String callingPackage, String packageName, String shortcutId, int userId) throws RemoteException {
+            public String getShortcutIconUri(
+                    String callingPackage, String packageName, String shortcutId, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1529,7 +1819,8 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public Map<String, LauncherActivityInfoInternal> getActivityOverrides(String callingPackage, int userId) throws RemoteException {
+            public Map<String, LauncherActivityInfoInternal> getActivityOverrides(
+                    String callingPackage, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 final Parcel _reply = Parcel.obtain();
                 try {
@@ -1539,13 +1830,18 @@ public interface ILauncherApps extends IInterface {
                     this.mRemote.transact(36, _data, _reply, 0);
                     _reply.readException();
                     int N = _reply.readInt();
-                    final Map<String, LauncherActivityInfoInternal> _result = N < 0 ? null : new HashMap<>();
-                    IntStream.range(0, N).forEach(new IntConsumer() { // from class: android.content.pm.ILauncherApps$Stub$Proxy$$ExternalSyntheticLambda0
-                        @Override // java.util.function.IntConsumer
-                        public final void accept(int i) {
-                            ILauncherApps.Stub.Proxy.lambda$getActivityOverrides$0(Parcel.this, _result, i);
-                        }
-                    });
+                    final Map<String, LauncherActivityInfoInternal> _result =
+                            N < 0 ? null : new HashMap<>();
+                    IntStream.range(0, N)
+                            .forEach(
+                                    new IntConsumer() { // from class:
+                                        // android.content.pm.ILauncherApps$Stub$Proxy$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.IntConsumer
+                                        public final void accept(int i) {
+                                            ILauncherApps.Stub.Proxy.lambda$getActivityOverrides$0(
+                                                    Parcel.this, _result, i);
+                                        }
+                                    });
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1553,9 +1849,12 @@ public interface ILauncherApps extends IInterface {
                 }
             }
 
-            static /* synthetic */ void lambda$getActivityOverrides$0(Parcel _reply, Map _result, int i) {
+            static /* synthetic */ void lambda$getActivityOverrides$0(
+                    Parcel _reply, Map _result, int i) {
                 String k = _reply.readString();
-                LauncherActivityInfoInternal v = (LauncherActivityInfoInternal) _reply.readTypedObject(LauncherActivityInfoInternal.CREATOR);
+                LauncherActivityInfoInternal v =
+                        (LauncherActivityInfoInternal)
+                                _reply.readTypedObject(LauncherActivityInfoInternal.CREATOR);
                 _result.put(k, v);
             }
 
@@ -1590,7 +1889,9 @@ public interface ILauncherApps extends IInterface {
             }
 
             @Override // android.content.pm.ILauncherApps
-            public void setArchiveCompatibilityOptions(boolean enableIconOverlay, boolean enableUnarchivalConfirmation) throws RemoteException {
+            public void setArchiveCompatibilityOptions(
+                    boolean enableIconOverlay, boolean enableUnarchivalConfirmation)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

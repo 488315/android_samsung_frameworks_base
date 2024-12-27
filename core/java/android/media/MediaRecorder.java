@@ -5,10 +5,6 @@ import android.app.ActivityThread;
 import android.content.AttributionSource;
 import android.content.Context;
 import android.hardware.Camera;
-import android.media.AudioManager;
-import android.media.AudioRouting;
-import android.media.EncoderProfiles;
-import android.media.MediaCodec;
 import android.media.metrics.LogSessionId;
 import android.os.Handler;
 import android.os.Looper;
@@ -20,7 +16,9 @@ import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Pair;
 import android.view.Surface;
+
 import com.android.internal.util.Preconditions;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.IOException;
@@ -36,7 +34,11 @@ import java.util.Objects;
 import java.util.concurrent.Executor;
 
 /* loaded from: classes2.dex */
-public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, AudioRecordingMonitorClient, MicrophoneDirection {
+public class MediaRecorder
+        implements AudioRouting,
+                AudioRecordingMonitor,
+                AudioRecordingMonitorClient,
+                MicrophoneDirection {
     public static final int MEDIA_ERROR_SERVER_DIED = 100;
     public static final int MEDIA_RECORDER_ERROR_UNKNOWN = 1;
     public static final int MEDIA_RECORDER_INFO_MAX_DURATION_REACHED = 800;
@@ -79,12 +81,12 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
     private String mPath;
     private AudioDeviceInfo mPreferredDevice;
     AudioRecordingMonitorImpl mRecordingInfoImpl;
-    private ArrayMap<AudioRouting.OnRoutingChangedListener, NativeRoutingEventHandlerDelegate> mRoutingChangeListeners;
+    private ArrayMap<AudioRouting.OnRoutingChangedListener, NativeRoutingEventHandlerDelegate>
+            mRoutingChangeListeners;
     private Surface mSurface;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AudioEncoderValues {
-    }
+    public @interface AudioEncoderValues {}
 
     public interface OnErrorListener {
         void onError(MediaRecorder mediaRecorder, int i, int i2);
@@ -95,26 +97,24 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface OutputFormatValues {
-    }
+    public @interface OutputFormatValues {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Source {
-    }
+    public @interface Source {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SystemSource {
-    }
+    public @interface SystemSource {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface VideoEncoderValues {
-    }
+    public @interface VideoEncoderValues {}
 
     private native void _prepare() throws IllegalStateException, IOException;
 
-    private native void _setNextOutputFile(FileDescriptor fileDescriptor) throws IllegalStateException, IOException;
+    private native void _setNextOutputFile(FileDescriptor fileDescriptor)
+            throws IllegalStateException, IOException;
 
-    private native void _setOutputFile(FileDescriptor fileDescriptor) throws IllegalStateException, IOException;
+    private native void _setOutputFile(FileDescriptor fileDescriptor)
+            throws IllegalStateException, IOException;
 
     private static final native SemPersistentSurface native_createSemPersistentSurface();
 
@@ -137,9 +137,11 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
 
     private native void native_reset();
 
-    private native void native_semCreatePersistentSurfaceTrack(String str, String[] strArr, Object[] objArr, Surface surface);
+    private native void native_semCreatePersistentSurfaceTrack(
+            String str, String[] strArr, Object[] objArr, Surface surface);
 
-    private native Surface native_semCreateSurfaceTrack(String str, String[] strArr, Object[] objArr);
+    private native Surface native_semCreateSurfaceTrack(
+            String str, String[] strArr, Object[] objArr);
 
     private final native boolean native_setInputDevice(int i);
 
@@ -149,7 +151,8 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
 
     private native int native_setPreferredMicrophoneFieldDimension(float f);
 
-    private native void native_setup(Object obj, String str, Parcel parcel) throws IllegalStateException;
+    private native void native_setup(Object obj, String str, Parcel parcel)
+            throws IllegalStateException;
 
     private static native boolean semNativeIsRecording();
 
@@ -229,9 +232,13 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
             }
         }
         this.mChannelCount = 1;
-        AttributionSource.ScopedParcelState attributionSourceState = context.getAttributionSource().asScopedParcelState();
+        AttributionSource.ScopedParcelState attributionSourceState =
+                context.getAttributionSource().asScopedParcelState();
         try {
-            native_setup(new WeakReference(this), ActivityThread.currentPackageName(), attributionSourceState.getParcel());
+            native_setup(
+                    new WeakReference(this),
+                    ActivityThread.currentPackageName(),
+                    attributionSourceState.getParcel());
             if (attributionSourceState != null) {
                 attributionSourceState.close();
             }
@@ -274,15 +281,12 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
         public static final int CAMCORDER = 5;
         public static final int DEFAULT = 0;
 
-        @SystemApi
-        public static final int ECHO_REFERENCE = 1997;
+        @SystemApi public static final int ECHO_REFERENCE = 1997;
 
-        @SystemApi
-        public static final int HOTWORD = 1999;
+        @SystemApi public static final int HOTWORD = 1999;
         public static final int MIC = 1;
 
-        @SystemApi
-        public static final int RADIO_TUNER = 1998;
+        @SystemApi public static final int RADIO_TUNER = 1998;
         public static final int REMOTE_SUBMIX = 8;
         public static final int SEC_2MIC_SVOICE_DRIVING = 14;
         public static final int SEC_2MIC_SVOICE_NORMAL = 15;
@@ -305,8 +309,7 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
         public static final int SEM_VOICE_COMMUNICATION = 4;
         public static final int SEM_VOICE_RECOGNITION = 3;
 
-        @SystemApi
-        public static final int ULTRASOUND = 2000;
+        @SystemApi public static final int ULTRASOUND = 2000;
         public static final int UNPROCESSED = 9;
         public static final int VOICE_CALL = 4;
         public static final int VOICE_COMMUNICATION = 7;
@@ -315,8 +318,7 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
         public static final int VOICE_RECOGNITION = 6;
         public static final int VOICE_UPLINK = 2;
 
-        private AudioSource() {
-        }
+        private AudioSource() {}
     }
 
     public static boolean isSystemOnlyAudioSource(int source) {
@@ -418,8 +420,7 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
         public static final int DEFAULT = 0;
         public static final int SURFACE = 2;
 
-        private VideoSource() {
-        }
+        private VideoSource() {}
     }
 
     public final class OutputFormat {
@@ -437,8 +438,7 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
         public static final int THREE_GPP = 1;
         public static final int WEBM = 9;
 
-        private OutputFormat() {
-        }
+        private OutputFormat() {}
     }
 
     public final class AudioEncoder {
@@ -451,8 +451,7 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
         public static final int OPUS = 7;
         public static final int VORBIS = 6;
 
-        private AudioEncoder() {
-        }
+        private AudioEncoder() {}
     }
 
     public final class VideoEncoder {
@@ -466,8 +465,7 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
         public static final int VP8 = 4;
         public static final int VP9 = 6;
 
-        private VideoEncoder() {
-        }
+        private VideoEncoder() {}
     }
 
     public static final int getAudioSourceMax() {
@@ -646,7 +644,11 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
             throw new IOException("No valid output file");
         }
         _prepare();
-        Log.i(TAG, "prepare elapsed time : " + (SystemClock.uptimeMillis() - startuptimeMillis) + " ms");
+        Log.i(
+                TAG,
+                "prepare elapsed time : "
+                        + (SystemClock.uptimeMillis() - startuptimeMillis)
+                        + " ms");
     }
 
     public void reset() {
@@ -689,21 +691,24 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
                 case 1:
                 case 100:
                     if (MediaRecorder.this.mOnErrorListener != null) {
-                        MediaRecorder.this.mOnErrorListener.onError(this.mMediaRecorder, msg.arg1, msg.arg2);
+                        MediaRecorder.this.mOnErrorListener.onError(
+                                this.mMediaRecorder, msg.arg1, msg.arg2);
                         return;
                     }
                     return;
                 case 2:
                 case 101:
                     if (MediaRecorder.this.mOnInfoListener != null) {
-                        MediaRecorder.this.mOnInfoListener.onInfo(this.mMediaRecorder, msg.arg1, msg.arg2);
+                        MediaRecorder.this.mOnInfoListener.onInfo(
+                                this.mMediaRecorder, msg.arg1, msg.arg2);
                         return;
                     }
                     return;
                 case 10000:
                     AudioManager.resetAudioPortGeneration();
                     synchronized (MediaRecorder.this.mRoutingChangeListeners) {
-                        for (NativeRoutingEventHandlerDelegate delegate : MediaRecorder.this.mRoutingChangeListeners.values()) {
+                        for (NativeRoutingEventHandlerDelegate delegate :
+                                MediaRecorder.this.mRoutingChangeListeners.values()) {
                             delegate.notifyClient();
                         }
                     }
@@ -757,12 +762,18 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
     }
 
     @Override // android.media.AudioRouting
-    public void addOnRoutingChangedListener(AudioRouting.OnRoutingChangedListener listener, Handler handler) {
+    public void addOnRoutingChangedListener(
+            AudioRouting.OnRoutingChangedListener listener, Handler handler) {
         synchronized (this.mRoutingChangeListeners) {
             if (listener != null) {
                 if (!this.mRoutingChangeListeners.containsKey(listener)) {
                     enableNativeRoutingCallbacksLocked(true);
-                    this.mRoutingChangeListeners.put(listener, new NativeRoutingEventHandlerDelegate(this, listener, handler != null ? handler : this.mEventHandler));
+                    this.mRoutingChangeListeners.put(
+                            listener,
+                            new NativeRoutingEventHandlerDelegate(
+                                    this,
+                                    listener,
+                                    handler != null ? handler : this.mEventHandler));
                 }
             }
         }
@@ -808,12 +819,14 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
 
     @Override // android.media.MicrophoneDirection
     public boolean setPreferredMicrophoneFieldDimension(float zoom) {
-        Preconditions.checkArgument(zoom >= -1.0f && zoom <= 1.0f, "Argument must fall between -1 & 1 (inclusive)");
+        Preconditions.checkArgument(
+                zoom >= -1.0f && zoom <= 1.0f, "Argument must fall between -1 & 1 (inclusive)");
         return native_setPreferredMicrophoneFieldDimension(zoom) == 0;
     }
 
     @Override // android.media.AudioRecordingMonitor
-    public void registerAudioRecordingCallback(Executor executor, AudioManager.AudioRecordingCallback cb) {
+    public void registerAudioRecordingCallback(
+            Executor executor, AudioManager.AudioRecordingCallback cb) {
         this.mRecordingInfoImpl.registerAudioRecordingCallback(executor, cb);
     }
 
@@ -835,7 +848,8 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
         return native_getPortId();
     }
 
-    private static void postEventFromNative(Object mediarecorder_ref, int what, int arg1, int arg2, Object obj) {
+    private static void postEventFromNative(
+            Object mediarecorder_ref, int what, int arg1, int arg2, Object obj) {
         MediaRecorder mr = (MediaRecorder) ((WeakReference) mediarecorder_ref).get();
         if (mr != null && mr.mEventHandler != null) {
             Message m = mr.mEventHandler.obtainMessage(what, arg1, arg2, obj);
@@ -843,9 +857,12 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
         }
     }
 
-    private void native_setup(Object mediarecorderThis, String clientName, String opPackageName) throws IllegalStateException {
-        AttributionSource attributionSource = AttributionSource.myAttributionSource().withPackageName(opPackageName);
-        AttributionSource.ScopedParcelState attributionSourceState = attributionSource.asScopedParcelState();
+    private void native_setup(Object mediarecorderThis, String clientName, String opPackageName)
+            throws IllegalStateException {
+        AttributionSource attributionSource =
+                AttributionSource.myAttributionSource().withPackageName(opPackageName);
+        AttributionSource.ScopedParcelState attributionSourceState =
+                attributionSource.asScopedParcelState();
         try {
             native_setup(mediarecorderThis, clientName, attributionSourceState.getParcel());
             if (attributionSourceState != null) {
@@ -875,23 +892,26 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
     public static final class MetricsConstants {
         public static final String AUDIO_BITRATE = "android.media.mediarecorder.audio-bitrate";
         public static final String AUDIO_CHANNELS = "android.media.mediarecorder.audio-channels";
-        public static final String AUDIO_SAMPLERATE = "android.media.mediarecorder.audio-samplerate";
+        public static final String AUDIO_SAMPLERATE =
+                "android.media.mediarecorder.audio-samplerate";
         public static final String AUDIO_TIMESCALE = "android.media.mediarecorder.audio-timescale";
         public static final String CAPTURE_FPS = "android.media.mediarecorder.capture-fps";
-        public static final String CAPTURE_FPS_ENABLE = "android.media.mediarecorder.capture-fpsenable";
+        public static final String CAPTURE_FPS_ENABLE =
+                "android.media.mediarecorder.capture-fpsenable";
         public static final String FRAMERATE = "android.media.mediarecorder.frame-rate";
         public static final String HEIGHT = "android.media.mediarecorder.height";
         public static final String MOVIE_TIMESCALE = "android.media.mediarecorder.movie-timescale";
         public static final String ROTATION = "android.media.mediarecorder.rotation";
         public static final String VIDEO_BITRATE = "android.media.mediarecorder.video-bitrate";
-        public static final String VIDEO_IFRAME_INTERVAL = "android.media.mediarecorder.video-iframe-interval";
+        public static final String VIDEO_IFRAME_INTERVAL =
+                "android.media.mediarecorder.video-iframe-interval";
         public static final String VIDEO_LEVEL = "android.media.mediarecorder.video-encoder-level";
-        public static final String VIDEO_PROFILE = "android.media.mediarecorder.video-encoder-profile";
+        public static final String VIDEO_PROFILE =
+                "android.media.mediarecorder.video-encoder-profile";
         public static final String VIDEO_TIMESCALE = "android.media.mediarecorder.video-timescale";
         public static final String WIDTH = "android.media.mediarecorder.width";
 
-        private MetricsConstants() {
-        }
+        private MetricsConstants() {}
     }
 
     public static int semGetInputSource(int samsung_source) {
@@ -992,8 +1012,7 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
     static class SemPersistentSurface extends Surface {
         private long mPersistentObject;
 
-        SemPersistentSurface() {
-        }
+        SemPersistentSurface() {}
 
         @Override // android.view.Surface
         public void release() {
@@ -1010,7 +1029,9 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
         }
     }
 
-    public void semCreatePersistentSurfaceTrack(String trackMime, MediaFormat format, Surface surface) throws IllegalArgumentException, IllegalStateException {
+    public void semCreatePersistentSurfaceTrack(
+            String trackMime, MediaFormat format, Surface surface)
+            throws IllegalArgumentException, IllegalStateException {
         Log.d(TAG, "semCreatePersistentSurfaceTrack");
         String[] keys = null;
         Object[] values = null;
@@ -1028,7 +1049,8 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
         native_semCreatePersistentSurfaceTrack(trackMime, keys, values, surface);
     }
 
-    public Surface semCreateSurfaceTrack(String trackMime, MediaFormat format) throws IllegalArgumentException, IllegalStateException {
+    public Surface semCreateSurfaceTrack(String trackMime, MediaFormat format)
+            throws IllegalArgumentException, IllegalStateException {
         Log.d(TAG, "semCreateSurfaceTrack");
         String[] keys = null;
         Object[] values = null;
@@ -1046,7 +1068,8 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
         return native_semCreateSurfaceTrack(trackMime, keys, values);
     }
 
-    public SemTrack semCreateTrack(String trackMime, MediaFormat format) throws IllegalArgumentException, IllegalStateException {
+    public SemTrack semCreateTrack(String trackMime, MediaFormat format)
+            throws IllegalArgumentException, IllegalStateException {
         Log.d(TAG, "semCreateTrack");
         return new SemTrack(this, trackMime, format);
     }
@@ -1056,11 +1079,19 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
         private long mNativeContext;
         private MediaRecorder mRecorder;
 
-        private native void nativeWriteSampleData(long j, MediaRecorder mediaRecorder, ByteBuffer byteBuffer, int i, int i2, long j2, int i3);
+        private native void nativeWriteSampleData(
+                long j,
+                MediaRecorder mediaRecorder,
+                ByteBuffer byteBuffer,
+                int i,
+                int i2,
+                long j2,
+                int i3);
 
         private native void native_release();
 
-        private native void native_setup(MediaRecorder mediaRecorder, String[] strArr, Object[] objArr);
+        private native void native_setup(
+                MediaRecorder mediaRecorder, String[] strArr, Object[] objArr);
 
         private SemTrack(MediaRecorder recorder, String trackMime, MediaFormat format) {
             this.mRecorder = recorder;
@@ -1082,13 +1113,23 @@ public class MediaRecorder implements AudioRouting, AudioRecordingMonitor, Audio
         }
 
         public void writeSampleData(ByteBuffer byteBuf, MediaCodec.BufferInfo bufferInfo) {
-            if (bufferInfo.size < 0 || bufferInfo.offset < 0 || bufferInfo.offset + bufferInfo.size > byteBuf.capacity()) {
-                throw new IllegalArgumentException("bufferInfo must specify a valid buffer offset and size");
+            if (bufferInfo.size < 0
+                    || bufferInfo.offset < 0
+                    || bufferInfo.offset + bufferInfo.size > byteBuf.capacity()) {
+                throw new IllegalArgumentException(
+                        "bufferInfo must specify a valid buffer offset and size");
             }
             if (this.mNativeContext == 0) {
                 throw new IllegalStateException("source has been released!");
             }
-            nativeWriteSampleData(this.mNativeContext, this.mRecorder, byteBuf, bufferInfo.offset, bufferInfo.size, bufferInfo.presentationTimeUs, bufferInfo.flags);
+            nativeWriteSampleData(
+                    this.mNativeContext,
+                    this.mRecorder,
+                    byteBuf,
+                    bufferInfo.offset,
+                    bufferInfo.size,
+                    bufferInfo.presentationTimeUs,
+                    bufferInfo.flags);
         }
 
         protected void finalize() {

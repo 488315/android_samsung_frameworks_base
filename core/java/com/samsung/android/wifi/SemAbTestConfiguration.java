@@ -5,6 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.text.SimpleDateFormat;
@@ -18,30 +19,33 @@ import java.util.Map;
 
 /* loaded from: classes6.dex */
 public class SemAbTestConfiguration implements Parcelable {
-    public static final Parcelable.Creator<SemAbTestConfiguration> CREATOR = new Parcelable.Creator<SemAbTestConfiguration>() { // from class: com.samsung.android.wifi.SemAbTestConfiguration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemAbTestConfiguration createFromParcel(Parcel in) {
-            SemAbTestConfiguration config = new SemAbTestConfiguration();
-            config.id = in.readString();
-            config.moduleName = in.readString();
-            config.startDate = in.readString();
-            config.endDate = in.readString();
-            config.mSalesModelAllowList = in.readArrayList(null, String.class);
-            config.mSalesModelBlockList = in.readArrayList(null, String.class);
-            config.abTestGroupAllocation = in.readInt();
-            config.mTestParamList = in.readArrayList(TestParam.class.getClassLoader());
-            config.mGroupSize = SemAbTestConfiguration.readGroup(in);
-            config.mTestOutputList = in.readArrayList(TestOutput.class.getClassLoader());
-            return config;
-        }
+    public static final Parcelable.Creator<SemAbTestConfiguration> CREATOR =
+            new Parcelable.Creator<
+                    SemAbTestConfiguration>() { // from class:
+                                                // com.samsung.android.wifi.SemAbTestConfiguration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemAbTestConfiguration createFromParcel(Parcel in) {
+                    SemAbTestConfiguration config = new SemAbTestConfiguration();
+                    config.id = in.readString();
+                    config.moduleName = in.readString();
+                    config.startDate = in.readString();
+                    config.endDate = in.readString();
+                    config.mSalesModelAllowList = in.readArrayList(null, String.class);
+                    config.mSalesModelBlockList = in.readArrayList(null, String.class);
+                    config.abTestGroupAllocation = in.readInt();
+                    config.mTestParamList = in.readArrayList(TestParam.class.getClassLoader());
+                    config.mGroupSize = SemAbTestConfiguration.readGroup(in);
+                    config.mTestOutputList = in.readArrayList(TestOutput.class.getClassLoader());
+                    return config;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemAbTestConfiguration[] newArray(int size) {
-            return new SemAbTestConfiguration[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemAbTestConfiguration[] newArray(int size) {
+                    return new SemAbTestConfiguration[size];
+                }
+            };
     public static final int TESTGROUP_A = 0;
     public static final int TESTGROUP_B = 1;
     public static final int TESTGROUP_C = 2;
@@ -58,8 +62,7 @@ public class SemAbTestConfiguration implements Parcelable {
     public String startDate;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AbTestGroupAllocation {
-    }
+    public @interface AbTestGroupAllocation {}
 
     public static class Group {
         public String groupA;
@@ -67,29 +70,41 @@ public class SemAbTestConfiguration implements Parcelable {
         public String groupC;
 
         public String toString() {
-            return "{groupA='" + this.groupA + DateFormat.QUOTE + ", groupB='" + this.groupB + DateFormat.QUOTE + ", groupC='" + this.groupC + DateFormat.QUOTE + '}';
+            return "{groupA='"
+                    + this.groupA
+                    + DateFormat.QUOTE
+                    + ", groupB='"
+                    + this.groupB
+                    + DateFormat.QUOTE
+                    + ", groupC='"
+                    + this.groupC
+                    + DateFormat.QUOTE
+                    + '}';
         }
     }
 
     public static class TestParam implements Parcelable {
-        public static final Parcelable.Creator<TestParam> CREATOR = new Parcelable.Creator<TestParam>() { // from class: com.samsung.android.wifi.SemAbTestConfiguration.TestParam.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public TestParam createFromParcel(Parcel in) {
-                TestParam testParam = new TestParam();
-                testParam.name = in.readString();
-                testParam.group.groupA = in.readString();
-                testParam.group.groupB = in.readString();
-                testParam.group.groupC = in.readString();
-                return testParam;
-            }
+        public static final Parcelable.Creator<TestParam> CREATOR =
+                new Parcelable.Creator<
+                        TestParam>() { // from class:
+                                       // com.samsung.android.wifi.SemAbTestConfiguration.TestParam.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public TestParam createFromParcel(Parcel in) {
+                        TestParam testParam = new TestParam();
+                        testParam.name = in.readString();
+                        testParam.group.groupA = in.readString();
+                        testParam.group.groupB = in.readString();
+                        testParam.group.groupC = in.readString();
+                        return testParam;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public TestParam[] newArray(int size) {
-                return new TestParam[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public TestParam[] newArray(int size) {
+                        return new TestParam[size];
+                    }
+                };
         public Group group = new Group();
         public String name;
 
@@ -99,7 +114,12 @@ public class SemAbTestConfiguration implements Parcelable {
         }
 
         public String toString() {
-            return "TestParam{name='" + this.name + DateFormat.QUOTE + ", group=" + this.group + '}';
+            return "TestParam{name='"
+                    + this.name
+                    + DateFormat.QUOTE
+                    + ", group="
+                    + this.group
+                    + '}';
         }
 
         @Override // android.os.Parcelable
@@ -110,27 +130,30 @@ public class SemAbTestConfiguration implements Parcelable {
     }
 
     public static class TestOutput implements Parcelable {
-        public static final Parcelable.Creator<TestOutput> CREATOR = new Parcelable.Creator<TestOutput>() { // from class: com.samsung.android.wifi.SemAbTestConfiguration.TestOutput.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public TestOutput createFromParcel(Parcel in) {
-                TestOutput testOutput = new TestOutput();
-                testOutput.name = in.readString();
-                testOutput.event.groupA = in.readString();
-                testOutput.event.groupB = in.readString();
-                testOutput.event.groupC = in.readString();
-                testOutput.dimension.groupA = in.readString();
-                testOutput.dimension.groupB = in.readString();
-                testOutput.dimension.groupC = in.readString();
-                return testOutput;
-            }
+        public static final Parcelable.Creator<TestOutput> CREATOR =
+                new Parcelable.Creator<
+                        TestOutput>() { // from class:
+                                        // com.samsung.android.wifi.SemAbTestConfiguration.TestOutput.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public TestOutput createFromParcel(Parcel in) {
+                        TestOutput testOutput = new TestOutput();
+                        testOutput.name = in.readString();
+                        testOutput.event.groupA = in.readString();
+                        testOutput.event.groupB = in.readString();
+                        testOutput.event.groupC = in.readString();
+                        testOutput.dimension.groupA = in.readString();
+                        testOutput.dimension.groupB = in.readString();
+                        testOutput.dimension.groupC = in.readString();
+                        return testOutput;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public TestOutput[] newArray(int size) {
-                return new TestOutput[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public TestOutput[] newArray(int size) {
+                        return new TestOutput[size];
+                    }
+                };
         public String name;
         public Group event = new Group();
         public Group dimension = new Group();
@@ -141,7 +164,14 @@ public class SemAbTestConfiguration implements Parcelable {
         }
 
         public String toString() {
-            return "TestOutput{name='" + this.name + DateFormat.QUOTE + ", event=" + this.event + ", dimension=" + this.dimension + '}';
+            return "TestOutput{name='"
+                    + this.name
+                    + DateFormat.QUOTE
+                    + ", event="
+                    + this.event
+                    + ", dimension="
+                    + this.dimension
+                    + '}';
         }
 
         @Override // android.os.Parcelable

@@ -1,7 +1,5 @@
 package android.media.tv.ad;
 
-import android.media.tv.ad.ITvAdServiceCallback;
-import android.media.tv.ad.ITvAdSessionCallback;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -14,7 +12,12 @@ import android.view.InputChannel;
 public interface ITvAdService extends IInterface {
     public static final String DESCRIPTOR = "android.media.tv.ad.ITvAdService";
 
-    void createSession(InputChannel inputChannel, ITvAdSessionCallback iTvAdSessionCallback, String str, String str2) throws RemoteException;
+    void createSession(
+            InputChannel inputChannel,
+            ITvAdSessionCallback iTvAdSessionCallback,
+            String str,
+            String str2)
+            throws RemoteException;
 
     void registerCallback(ITvAdServiceCallback iTvAdServiceCallback) throws RemoteException;
 
@@ -24,20 +27,18 @@ public interface ITvAdService extends IInterface {
 
     public static class Default implements ITvAdService {
         @Override // android.media.tv.ad.ITvAdService
-        public void registerCallback(ITvAdServiceCallback callback) throws RemoteException {
-        }
+        public void registerCallback(ITvAdServiceCallback callback) throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdService
-        public void unregisterCallback(ITvAdServiceCallback callback) throws RemoteException {
-        }
+        public void unregisterCallback(ITvAdServiceCallback callback) throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdService
-        public void createSession(InputChannel channel, ITvAdSessionCallback callback, String serviceId, String type) throws RemoteException {
-        }
+        public void createSession(
+                InputChannel channel, ITvAdSessionCallback callback, String serviceId, String type)
+                throws RemoteException {}
 
         @Override // android.media.tv.ad.ITvAdService
-        public void sendAppLinkCommand(Bundle command) throws RemoteException {
-        }
+        public void sendAppLinkCommand(Bundle command) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -45,7 +46,7 @@ public interface ITvAdService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITvAdService {
+    public abstract static class Stub extends Binder implements ITvAdService {
         static final int TRANSACTION_createSession = 3;
         static final int TRANSACTION_registerCallback = 1;
         static final int TRANSACTION_sendAppLinkCommand = 4;
@@ -92,7 +93,8 @@ public interface ITvAdService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ITvAdService.DESCRIPTOR);
             }
@@ -102,18 +104,21 @@ public interface ITvAdService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ITvAdServiceCallback _arg0 = ITvAdServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    ITvAdServiceCallback _arg0 =
+                            ITvAdServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerCallback(_arg0);
                     return true;
                 case 2:
-                    ITvAdServiceCallback _arg02 = ITvAdServiceCallback.Stub.asInterface(data.readStrongBinder());
+                    ITvAdServiceCallback _arg02 =
+                            ITvAdServiceCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterCallback(_arg02);
                     return true;
                 case 3:
                     InputChannel _arg03 = (InputChannel) data.readTypedObject(InputChannel.CREATOR);
-                    ITvAdSessionCallback _arg1 = ITvAdSessionCallback.Stub.asInterface(data.readStrongBinder());
+                    ITvAdSessionCallback _arg1 =
+                            ITvAdSessionCallback.Stub.asInterface(data.readStrongBinder());
                     String _arg2 = data.readString();
                     String _arg3 = data.readString();
                     data.enforceNoDataAvail();
@@ -170,7 +175,12 @@ public interface ITvAdService extends IInterface {
             }
 
             @Override // android.media.tv.ad.ITvAdService
-            public void createSession(InputChannel channel, ITvAdSessionCallback callback, String serviceId, String type) throws RemoteException {
+            public void createSession(
+                    InputChannel channel,
+                    ITvAdSessionCallback callback,
+                    String serviceId,
+                    String type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ITvAdService.DESCRIPTOR);

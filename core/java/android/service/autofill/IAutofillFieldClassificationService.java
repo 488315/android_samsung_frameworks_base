@@ -8,17 +8,35 @@ import android.os.Parcel;
 import android.os.RemoteCallback;
 import android.os.RemoteException;
 import android.view.autofill.AutofillValue;
+
 import java.util.List;
 import java.util.Map;
 
 /* loaded from: classes3.dex */
 public interface IAutofillFieldClassificationService extends IInterface {
-    void calculateScores(RemoteCallback remoteCallback, List<AutofillValue> list, String[] strArr, String[] strArr2, String str, Bundle bundle, Map map, Map map2) throws RemoteException;
+    void calculateScores(
+            RemoteCallback remoteCallback,
+            List<AutofillValue> list,
+            String[] strArr,
+            String[] strArr2,
+            String str,
+            Bundle bundle,
+            Map map,
+            Map map2)
+            throws RemoteException;
 
     public static class Default implements IAutofillFieldClassificationService {
         @Override // android.service.autofill.IAutofillFieldClassificationService
-        public void calculateScores(RemoteCallback callback, List<AutofillValue> actualValues, String[] userDataValues, String[] categoryIds, String defaultAlgorithm, Bundle defaultArgs, Map algorithms, Map args) throws RemoteException {
-        }
+        public void calculateScores(
+                RemoteCallback callback,
+                List<AutofillValue> actualValues,
+                String[] userDataValues,
+                String[] categoryIds,
+                String defaultAlgorithm,
+                Bundle defaultArgs,
+                Map algorithms,
+                Map args)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -26,8 +44,10 @@ public interface IAutofillFieldClassificationService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAutofillFieldClassificationService {
-        public static final String DESCRIPTOR = "android.service.autofill.IAutofillFieldClassificationService";
+    public abstract static class Stub extends Binder
+            implements IAutofillFieldClassificationService {
+        public static final String DESCRIPTOR =
+                "android.service.autofill.IAutofillFieldClassificationService";
         static final int TRANSACTION_calculateScores = 1;
 
         public Stub() {
@@ -65,7 +85,8 @@ public interface IAutofillFieldClassificationService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -75,7 +96,8 @@ public interface IAutofillFieldClassificationService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    RemoteCallback _arg0 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg0 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     List<AutofillValue> _arg1 = data.createTypedArrayList(AutofillValue.CREATOR);
                     String[] _arg2 = data.createStringArray();
                     String[] _arg3 = data.createStringArray();
@@ -109,7 +131,16 @@ public interface IAutofillFieldClassificationService extends IInterface {
             }
 
             @Override // android.service.autofill.IAutofillFieldClassificationService
-            public void calculateScores(RemoteCallback callback, List<AutofillValue> actualValues, String[] userDataValues, String[] categoryIds, String defaultAlgorithm, Bundle defaultArgs, Map algorithms, Map args) throws RemoteException {
+            public void calculateScores(
+                    RemoteCallback callback,
+                    List<AutofillValue> actualValues,
+                    String[] userDataValues,
+                    String[] categoryIds,
+                    String defaultAlgorithm,
+                    Bundle defaultArgs,
+                    Map algorithms,
+                    Map args)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

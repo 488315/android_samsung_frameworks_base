@@ -6,6 +6,7 @@ import android.filterfw.core.FilterGraph;
 import android.filterfw.core.KeyValueMap;
 import android.filterfw.core.ProtocolException;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.regex.Pattern;
@@ -66,7 +67,8 @@ public class TextGraphReader extends GraphReader {
         @Override // android.filterfw.io.TextGraphReader.Command
         public void execute(TextGraphReader reader) throws GraphIOException {
             try {
-                Filter filter = reader.mFactory.createFilterByClassName(this.mClassName, this.mFilterName);
+                Filter filter =
+                        reader.mFactory.createFilterByClassName(this.mClassName, this.mFilterName);
                 reader.mCurrentFilter = filter;
             } catch (IllegalArgumentException e) {
                 throw new GraphIOException(e.getMessage());
@@ -99,7 +101,8 @@ public class TextGraphReader extends GraphReader {
         private String mTargetFilter;
         private String mTargetName;
 
-        public ConnectCommand(String sourceFilter, String sourcePort, String targetFilter, String targetName) {
+        public ConnectCommand(
+                String sourceFilter, String sourcePort, String targetFilter, String targetName) {
             this.mSourceFilter = sourceFilter;
             this.mSourcePort = sourcePort;
             this.mTargetFilter = targetFilter;
@@ -108,7 +111,8 @@ public class TextGraphReader extends GraphReader {
 
         @Override // android.filterfw.io.TextGraphReader.Command
         public void execute(TextGraphReader reader) {
-            reader.mCurrentGraph.connect(this.mSourceFilter, this.mSourcePort, this.mTargetFilter, this.mTargetName);
+            reader.mCurrentGraph.connect(
+                    this.mSourceFilter, this.mSourcePort, this.mTargetFilter, this.mTargetName);
         }
     }
 
@@ -367,7 +371,12 @@ public class TextGraphReader extends GraphReader {
                     wordPattern = wordPattern2;
                     semicolonPattern = commandPattern2;
                     str = str2;
-                    this.mCommands.add(new ConnectCommand(curSourceFilterName, curSourcePortName, curTargetFilterName, curTargetPortName));
+                    this.mCommands.add(
+                            new ConnectCommand(
+                                    curSourceFilterName,
+                                    curSourcePortName,
+                                    curTargetFilterName,
+                                    curTargetPortName));
                     state = 16;
                     semicolonPattern2 = commandPattern15;
                     packageNamePattern = packageNamePattern2;
@@ -465,31 +474,36 @@ public class TextGraphReader extends GraphReader {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:11:0x0183, code lost:
-    
-        if (r2 != 3) goto L47;
-     */
+
+       if (r2 != 3) goto L47;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:13:0x01a8, code lost:
-    
-        throw new android.filterfw.io.GraphIOException("Unexpected end of assignments on line " + r24.lineNo() + "!");
-     */
+
+       throw new android.filterfw.io.GraphIOException("Unexpected end of assignments on line " + r24.lineNo() + "!");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:15:0x01a9, code lost:
-    
-        return r5;
-     */
+
+       return r5;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:9:0x0180, code lost:
-    
-        if (r2 == 0) goto L49;
-     */
+
+       if (r2 == 0) goto L49;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private android.filterfw.core.KeyValueMap readKeyValueAssignments(android.filterfw.io.PatternScanner r24, java.util.regex.Pattern r25) throws android.filterfw.io.GraphIOException {
+    private android.filterfw.core.KeyValueMap readKeyValueAssignments(
+            android.filterfw.io.PatternScanner r24, java.util.regex.Pattern r25)
+            throws android.filterfw.io.GraphIOException {
         /*
             Method dump skipped, instructions count: 438
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.filterfw.io.TextGraphReader.readKeyValueAssignments(android.filterfw.io.PatternScanner, java.util.regex.Pattern):android.filterfw.core.KeyValueMap");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.filterfw.io.TextGraphReader.readKeyValueAssignments(android.filterfw.io.PatternScanner,"
+                    + " java.util.regex.Pattern):android.filterfw.core.KeyValueMap");
     }
 
     private void bindExternal(String name) throws GraphIOException {
@@ -498,13 +512,20 @@ public class TextGraphReader extends GraphReader {
             this.mBoundReferences.put(name, value);
             return;
         }
-        throw new GraphIOException("Unknown external variable '" + name + "'! You must add a reference to this external in the host program using addReference(...)!");
+        throw new GraphIOException(
+                "Unknown external variable '"
+                        + name
+                        + "'! You must add a reference to this external in the host program using"
+                        + " addReference(...)!");
     }
 
     private void checkReferences() throws GraphIOException {
         for (String reference : this.mReferences.keySet()) {
             if (!this.mBoundReferences.containsKey(reference)) {
-                throw new GraphIOException("Host program specifies reference to '" + reference + "', which is not declared @external in graph file!");
+                throw new GraphIOException(
+                        "Host program specifies reference to '"
+                                + reference
+                                + "', which is not declared @external in graph file!");
             }
         }
     }
@@ -532,9 +553,17 @@ public class TextGraphReader extends GraphReader {
         }
     }
 
-    private void expectSettingClass(String setting, Object value, Class expectedClass) throws GraphIOException {
+    private void expectSettingClass(String setting, Object value, Class expectedClass)
+            throws GraphIOException {
         if (value.getClass() != expectedClass) {
-            throw new GraphIOException("Setting '" + setting + "' must have a value of type " + expectedClass.getSimpleName() + ", but found a value of type " + value.getClass().getSimpleName() + "!");
+            throw new GraphIOException(
+                    "Setting '"
+                            + setting
+                            + "' must have a value of type "
+                            + expectedClass.getSimpleName()
+                            + ", but found a value of type "
+                            + value.getClass().getSimpleName()
+                            + "!");
         }
     }
 

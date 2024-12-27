@@ -3,6 +3,7 @@ package com.android.internal.inputmethod;
 import android.view.KeyEvent;
 import android.view.inputmethod.SurroundingText;
 import android.view.inputmethod.TextAttribute;
+
 import java.util.concurrent.CompletableFuture;
 
 /* loaded from: classes5.dex */
@@ -12,12 +13,14 @@ public final class RemoteAccessibilityInputConnection {
     private final CancellationGroup mCancellationGroup;
     IRemoteAccessibilityInputConnectionInvoker mInvoker;
 
-    public RemoteAccessibilityInputConnection(IRemoteAccessibilityInputConnection connection, CancellationGroup cancellationGroup) {
+    public RemoteAccessibilityInputConnection(
+            IRemoteAccessibilityInputConnection connection, CancellationGroup cancellationGroup) {
         this.mInvoker = IRemoteAccessibilityInputConnectionInvoker.create(connection);
         this.mCancellationGroup = cancellationGroup;
     }
 
-    public RemoteAccessibilityInputConnection(RemoteAccessibilityInputConnection original, int sessionId) {
+    public RemoteAccessibilityInputConnection(
+            RemoteAccessibilityInputConnection original, int sessionId) {
         this.mInvoker = original.mInvoker.cloneWithSessionId(sessionId);
         this.mCancellationGroup = original.mCancellationGroup;
     }
@@ -38,8 +41,11 @@ public final class RemoteAccessibilityInputConnection {
         if (this.mCancellationGroup.isCanceled()) {
             return null;
         }
-        CompletableFuture<SurroundingText> value = this.mInvoker.getSurroundingText(beforeLength, afterLength, flags);
-        return (SurroundingText) CompletableFutureUtil.getResultOrNull(value, TAG, "getSurroundingText()", this.mCancellationGroup, 2000L);
+        CompletableFuture<SurroundingText> value =
+                this.mInvoker.getSurroundingText(beforeLength, afterLength, flags);
+        return (SurroundingText)
+                CompletableFutureUtil.getResultOrNull(
+                        value, TAG, "getSurroundingText()", this.mCancellationGroup, 2000L);
     }
 
     public void deleteSurroundingText(int beforeLength, int afterLength) {
@@ -63,7 +69,8 @@ public final class RemoteAccessibilityInputConnection {
             return 0;
         }
         CompletableFuture<Integer> value = this.mInvoker.getCursorCapsMode(reqModes);
-        return CompletableFutureUtil.getResultOrZero(value, TAG, "getCursorCapsMode()", this.mCancellationGroup, 2000L);
+        return CompletableFutureUtil.getResultOrZero(
+                value, TAG, "getCursorCapsMode()", this.mCancellationGroup, 2000L);
     }
 
     public void clearMetaKeyStates(int states) {

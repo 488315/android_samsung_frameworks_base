@@ -27,27 +27,25 @@ public interface IKeystoreAuthorization extends IInterface {
 
     public static class Default implements IKeystoreAuthorization {
         @Override // android.security.authorization.IKeystoreAuthorization
-        public void addAuthToken(HardwareAuthToken authToken) throws RemoteException {
-        }
+        public void addAuthToken(HardwareAuthToken authToken) throws RemoteException {}
 
         @Override // android.security.authorization.IKeystoreAuthorization
-        public void onDeviceUnlocked(int userId, byte[] password) throws RemoteException {
-        }
+        public void onDeviceUnlocked(int userId, byte[] password) throws RemoteException {}
 
         @Override // android.security.authorization.IKeystoreAuthorization
-        public void onDeviceLocked(int userId, long[] unlockingSids, boolean weakUnlockEnabled) throws RemoteException {
-        }
+        public void onDeviceLocked(int userId, long[] unlockingSids, boolean weakUnlockEnabled)
+                throws RemoteException {}
 
         @Override // android.security.authorization.IKeystoreAuthorization
-        public void onWeakUnlockMethodsExpired(int userId) throws RemoteException {
-        }
+        public void onWeakUnlockMethodsExpired(int userId) throws RemoteException {}
 
         @Override // android.security.authorization.IKeystoreAuthorization
-        public void onNonLskfUnlockMethodsExpired(int userId) throws RemoteException {
-        }
+        public void onNonLskfUnlockMethodsExpired(int userId) throws RemoteException {}
 
         @Override // android.security.authorization.IKeystoreAuthorization
-        public AuthorizationTokens getAuthTokensForCredStore(long challenge, long secureUserId, long authTokenMaxAgeMillis) throws RemoteException {
+        public AuthorizationTokens getAuthTokensForCredStore(
+                long challenge, long secureUserId, long authTokenMaxAgeMillis)
+                throws RemoteException {
             return null;
         }
 
@@ -62,7 +60,7 @@ public interface IKeystoreAuthorization extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IKeystoreAuthorization {
+    public abstract static class Stub extends Binder implements IKeystoreAuthorization {
         static final int TRANSACTION_addAuthToken = 1;
         static final int TRANSACTION_getAuthTokensForCredStore = 6;
         static final int TRANSACTION_getLastAuthTime = 7;
@@ -118,7 +116,8 @@ public interface IKeystoreAuthorization extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IKeystoreAuthorization.DESCRIPTOR);
             }
@@ -128,7 +127,8 @@ public interface IKeystoreAuthorization extends IInterface {
             }
             switch (code) {
                 case 1:
-                    HardwareAuthToken _arg0 = (HardwareAuthToken) data.readTypedObject(HardwareAuthToken.CREATOR);
+                    HardwareAuthToken _arg0 =
+                            (HardwareAuthToken) data.readTypedObject(HardwareAuthToken.CREATOR);
                     data.enforceNoDataAvail();
                     addAuthToken(_arg0);
                     reply.writeNoException();
@@ -232,7 +232,8 @@ public interface IKeystoreAuthorization extends IInterface {
             }
 
             @Override // android.security.authorization.IKeystoreAuthorization
-            public void onDeviceLocked(int userId, long[] unlockingSids, boolean weakUnlockEnabled) throws RemoteException {
+            public void onDeviceLocked(int userId, long[] unlockingSids, boolean weakUnlockEnabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -282,7 +283,9 @@ public interface IKeystoreAuthorization extends IInterface {
             }
 
             @Override // android.security.authorization.IKeystoreAuthorization
-            public AuthorizationTokens getAuthTokensForCredStore(long challenge, long secureUserId, long authTokenMaxAgeMillis) throws RemoteException {
+            public AuthorizationTokens getAuthTokensForCredStore(
+                    long challenge, long secureUserId, long authTokenMaxAgeMillis)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 _data.markSensitive();
                 Parcel _reply = Parcel.obtain();
@@ -293,7 +296,9 @@ public interface IKeystoreAuthorization extends IInterface {
                     _data.writeLong(authTokenMaxAgeMillis);
                     this.mRemote.transact(6, _data, _reply, 32);
                     _reply.readException();
-                    AuthorizationTokens _result = (AuthorizationTokens) _reply.readTypedObject(AuthorizationTokens.CREATOR);
+                    AuthorizationTokens _result =
+                            (AuthorizationTokens)
+                                    _reply.readTypedObject(AuthorizationTokens.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

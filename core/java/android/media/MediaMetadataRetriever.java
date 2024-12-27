@@ -12,7 +12,9 @@ import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
 import android.os.SystemProperties;
 import android.util.Log;
+
 import com.samsung.android.audio.SoundTheme;
+
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -63,6 +65,7 @@ public class MediaMetadataRetriever implements AutoCloseable {
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
     public static final int METADATA_KEY_VIDEO_CODEC_MIME_TYPE = 40;
+
     public static final int METADATA_KEY_VIDEO_FRAME_COUNT = 32;
     public static final int METADATA_KEY_VIDEO_HEIGHT = 19;
     public static final int METADATA_KEY_VIDEO_ROTATION = 24;
@@ -98,13 +101,161 @@ public class MediaMetadataRetriever implements AutoCloseable {
     public static final int SEM_METADATA_KEY_VIDEO_SYNC_FRAME_TIME_INFO = 1030;
     public static final int SEM_OPTION_HW_CODEC = 0;
     public static final int SEM_OPTION_SW_CODEC = 1;
-    private static final String[] STANDARD_GENRES = {"Blues", "Classic Rock", "Country", "Dance", "Disco", "Funk", "Grunge", "Hip-Hop", "Jazz", "Metal", "New Age", "Oldies", "Other", "Pop", "R&B", "Rap", "Reggae", "Rock", "Techno", "Industrial", "Alternative", "Ska", "Death Metal", "Pranks", "Soundtrack", "Euro-Techno", "Ambient", "Trip-Hop", "Vocal", "Jazz+Funk", "Fusion", "Trance", "Classical", "Instrumental", "Acid", "House", "Game", "Sound Clip", "Gospel", "Noise", "AlternRock", "Bass", "Soul", "Punk", "Space", "Meditative", "Instrumental Pop", "Instrumental Rock", "Ethnic", "Gothic", "Darkwave", "Techno-Industrial", "Electronic", "Pop-Folk", "Eurodance", "Dream", "Southern Rock", "Comedy", "Cult", "Gangsta", "Top 40", "Christian Rap", "Pop/Funk", "Jungle", "Native American", "Cabaret", "New Wave", "Psychadelic", "Rave", "Showtunes", "Trailer", "Lo-Fi", "Tribal", "Acid Punk", "Acid Jazz", "Polka", SoundTheme.Retro, "Musical", "Rock & Roll", "Hard Rock", "Folk", "Folk-Rock", "National Folk", "Swing", "Fast Fusion", "Bebob", "Latin", "Revival", "Celtic", "Bluegrass", "Avantgarde", "Gothic Rock", "Progressive Rock", "Psychedelic Rock", "Symphonic Rock", "Slow Rock", "Big Band", "Chorus", "Easy Listening", "Acoustic", "Humour", "Speech", "Chanson", "Opera", "Chamber Music", "Sonata", "Symphony", "Booty Bass", "Primus", "Porn Groove", "Satire", "Slow Jam", "Club", "Tango", "Samba", "Folklore", "Ballad", "Power Ballad", "Rhythmic Soul", "Freestyle", "Duet", "Punk Rock", "Drum Solo", "A capella", "Euro-House", "Dance Hall", "Goa", "Drum & Bass", "Club-House", "Hardcore", "Terror", "Indie", "BritPop", "Afro-Punk", "Polsk Punk", "Beat", "Christian Gangsta Rap", "Heavy Metal", "Black Metal", "Crossover", "Contemporary Christian", "Christian Rock", "Merengue", "Salsa", "Thrash Metal", "Anime", "Jpop", "Synthpop"};
+    private static final String[] STANDARD_GENRES = {
+        "Blues",
+        "Classic Rock",
+        "Country",
+        "Dance",
+        "Disco",
+        "Funk",
+        "Grunge",
+        "Hip-Hop",
+        "Jazz",
+        "Metal",
+        "New Age",
+        "Oldies",
+        "Other",
+        "Pop",
+        "R&B",
+        "Rap",
+        "Reggae",
+        "Rock",
+        "Techno",
+        "Industrial",
+        "Alternative",
+        "Ska",
+        "Death Metal",
+        "Pranks",
+        "Soundtrack",
+        "Euro-Techno",
+        "Ambient",
+        "Trip-Hop",
+        "Vocal",
+        "Jazz+Funk",
+        "Fusion",
+        "Trance",
+        "Classical",
+        "Instrumental",
+        "Acid",
+        "House",
+        "Game",
+        "Sound Clip",
+        "Gospel",
+        "Noise",
+        "AlternRock",
+        "Bass",
+        "Soul",
+        "Punk",
+        "Space",
+        "Meditative",
+        "Instrumental Pop",
+        "Instrumental Rock",
+        "Ethnic",
+        "Gothic",
+        "Darkwave",
+        "Techno-Industrial",
+        "Electronic",
+        "Pop-Folk",
+        "Eurodance",
+        "Dream",
+        "Southern Rock",
+        "Comedy",
+        "Cult",
+        "Gangsta",
+        "Top 40",
+        "Christian Rap",
+        "Pop/Funk",
+        "Jungle",
+        "Native American",
+        "Cabaret",
+        "New Wave",
+        "Psychadelic",
+        "Rave",
+        "Showtunes",
+        "Trailer",
+        "Lo-Fi",
+        "Tribal",
+        "Acid Punk",
+        "Acid Jazz",
+        "Polka",
+        SoundTheme.Retro,
+        "Musical",
+        "Rock & Roll",
+        "Hard Rock",
+        "Folk",
+        "Folk-Rock",
+        "National Folk",
+        "Swing",
+        "Fast Fusion",
+        "Bebob",
+        "Latin",
+        "Revival",
+        "Celtic",
+        "Bluegrass",
+        "Avantgarde",
+        "Gothic Rock",
+        "Progressive Rock",
+        "Psychedelic Rock",
+        "Symphonic Rock",
+        "Slow Rock",
+        "Big Band",
+        "Chorus",
+        "Easy Listening",
+        "Acoustic",
+        "Humour",
+        "Speech",
+        "Chanson",
+        "Opera",
+        "Chamber Music",
+        "Sonata",
+        "Symphony",
+        "Booty Bass",
+        "Primus",
+        "Porn Groove",
+        "Satire",
+        "Slow Jam",
+        "Club",
+        "Tango",
+        "Samba",
+        "Folklore",
+        "Ballad",
+        "Power Ballad",
+        "Rhythmic Soul",
+        "Freestyle",
+        "Duet",
+        "Punk Rock",
+        "Drum Solo",
+        "A capella",
+        "Euro-House",
+        "Dance Hall",
+        "Goa",
+        "Drum & Bass",
+        "Club-House",
+        "Hardcore",
+        "Terror",
+        "Indie",
+        "BritPop",
+        "Afro-Punk",
+        "Polsk Punk",
+        "Beat",
+        "Christian Gangsta Rap",
+        "Heavy Metal",
+        "Black Metal",
+        "Crossover",
+        "Contemporary Christian",
+        "Christian Rock",
+        "Merengue",
+        "Salsa",
+        "Thrash Metal",
+        "Anime",
+        "Jpop",
+        "Synthpop"
+    };
     private static final String TAG = "MediaMetadataRetriever";
     private long mNativeContext;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Option {
-    }
+    public @interface Option {}
 
     private native List<Bitmap> _getFrameAtIndex(int i, int i2, BitmapParams bitmapParams);
 
@@ -112,11 +263,15 @@ public class MediaMetadataRetriever implements AutoCloseable {
 
     private native Bitmap _getImageAtIndex(int i, BitmapParams bitmapParams);
 
-    private native void _setDataSource(MediaDataSource mediaDataSource) throws IllegalArgumentException;
+    private native void _setDataSource(MediaDataSource mediaDataSource)
+            throws IllegalArgumentException;
 
-    private native void _setDataSource(IBinder iBinder, String str, String[] strArr, String[] strArr2) throws IllegalArgumentException;
+    private native void _setDataSource(
+            IBinder iBinder, String str, String[] strArr, String[] strArr2)
+            throws IllegalArgumentException;
 
-    private native void _setDataSource(FileDescriptor fileDescriptor, long j, long j2) throws IllegalArgumentException;
+    private native void _setDataSource(FileDescriptor fileDescriptor, long j, long j2)
+            throws IllegalArgumentException;
 
     private native void detailedThumbnailMode(boolean z, int i);
 
@@ -175,7 +330,8 @@ public class MediaMetadataRetriever implements AutoCloseable {
         }
     }
 
-    public void setDataSource(String uri, Map<String, String> headers) throws IllegalArgumentException {
+    public void setDataSource(String uri, Map<String, String> headers)
+            throws IllegalArgumentException {
         int i = 0;
         String[] keys = new String[headers.size()];
         String[] values = new String[headers.size()];
@@ -187,7 +343,8 @@ public class MediaMetadataRetriever implements AutoCloseable {
         _setDataSource(MediaHTTPService.createHttpServiceBinderIfNecessary(uri), uri, keys, values);
     }
 
-    public void setDataSource(FileDescriptor fd, long offset, long length) throws IllegalArgumentException {
+    public void setDataSource(FileDescriptor fd, long offset, long length)
+            throws IllegalArgumentException {
         try {
             ParcelFileDescriptor modernFd = FileUtils.convertToModernFd(fd);
             try {
@@ -210,7 +367,8 @@ public class MediaMetadataRetriever implements AutoCloseable {
         setDataSource(fd, 0L, 576460752303423487L);
     }
 
-    public void setDataSource(Context context, Uri uri) throws IllegalArgumentException, SecurityException {
+    public void setDataSource(Context context, Uri uri)
+            throws IllegalArgumentException, SecurityException {
         if (uri == null) {
             Log.e(TAG, "setDataSource - uri is null");
             throw new IllegalArgumentException("null uri");
@@ -224,10 +382,14 @@ public class MediaMetadataRetriever implements AutoCloseable {
         try {
             ContentResolver resolver = context.getContentResolver();
             try {
-                boolean optimize = SystemProperties.getBoolean("fuse.sys.transcode_retriever_optimize", false);
+                boolean optimize =
+                        SystemProperties.getBoolean("fuse.sys.transcode_retriever_optimize", false);
                 Bundle opts = new Bundle();
                 opts.putBoolean("android.provider.extra.ACCEPT_ORIGINAL_MEDIA_FORMAT", true);
-                AssetFileDescriptor fd2 = optimize ? resolver.openTypedAssetFileDescriptor(uri, "*/*", opts) : resolver.openAssetFileDescriptor(uri, "r");
+                AssetFileDescriptor fd2 =
+                        optimize
+                                ? resolver.openTypedAssetFileDescriptor(uri, "*/*", opts)
+                                : resolver.openAssetFileDescriptor(uri, "r");
                 if (fd2 == null) {
                     Log.e(TAG, "setDataSource - fd is null");
                     throw new IllegalArgumentException("got null FileDescriptor for " + uri);
@@ -288,9 +450,9 @@ public class MediaMetadataRetriever implements AutoCloseable {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:46:0x00cf, code lost:
-    
-        return null;
-     */
+
+       return null;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -416,7 +578,9 @@ public class MediaMetadataRetriever implements AutoCloseable {
             java.lang.String r8 = ""
             goto L28
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.media.MediaMetadataRetriever.convertGenreTag(java.lang.String):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.media.MediaMetadataRetriever.convertGenreTag(java.lang.String):java.lang.String");
     }
 
     public Bitmap getFrameAtTime(long timeUs, int option) {
@@ -438,7 +602,8 @@ public class MediaMetadataRetriever implements AutoCloseable {
         return _getFrameAtTime(timeUs, option, dstWidth, dstHeight, null);
     }
 
-    public Bitmap getScaledFrameAtTime(long timeUs, int option, int dstWidth, int dstHeight, BitmapParams params) {
+    public Bitmap getScaledFrameAtTime(
+            long timeUs, int option, int dstWidth, int dstHeight, BitmapParams params) {
         validate(option, dstWidth, dstHeight);
         return _getFrameAtTime(timeUs, option, dstWidth, dstHeight, params);
     }
@@ -501,13 +666,18 @@ public class MediaMetadataRetriever implements AutoCloseable {
         return getFramesAtIndexInternal(frameIndex, numFrames, null);
     }
 
-    private List<Bitmap> getFramesAtIndexInternal(int frameIndex, int numFrames, BitmapParams params) {
+    private List<Bitmap> getFramesAtIndexInternal(
+            int frameIndex, int numFrames, BitmapParams params) {
         if (!"yes".equals(extractMetadata(17))) {
             throw new IllegalStateException("Does not contain video or image sequences");
         }
         int frameCount = Integer.parseInt(extractMetadata(32));
-        if (frameIndex < 0 || numFrames < 1 || frameIndex >= frameCount || frameIndex > frameCount - numFrames) {
-            throw new IllegalArgumentException("Invalid frameIndex or numFrames: " + frameIndex + ", " + numFrames);
+        if (frameIndex < 0
+                || numFrames < 1
+                || frameIndex >= frameCount
+                || frameIndex > frameCount - numFrames) {
+            throw new IllegalArgumentException(
+                    "Invalid frameIndex or numFrames: " + frameIndex + ", " + numFrames);
         }
         return _getFrameAtIndex(frameIndex, numFrames, params);
     }

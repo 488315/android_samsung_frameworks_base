@@ -4,6 +4,7 @@ import android.R;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.UserHandle;
+
 import java.util.function.Supplier;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -27,7 +28,11 @@ public final /* synthetic */ class ActivityRecord$$ExternalSyntheticLambda23 imp
                 activityRecord.getClass();
                 Context context = null;
                 try {
-                    context = activityRecord.mAtmService.mContext.createPackageContextAsUser(activityRecord.info.packageName, 4, UserHandle.of(activityRecord.mUserId));
+                    context =
+                            activityRecord.mAtmService.mContext.createPackageContextAsUser(
+                                    activityRecord.info.packageName,
+                                    4,
+                                    UserHandle.of(activityRecord.mUserId));
                     context.setTheme(activityRecord.theme);
                     return context;
                 } catch (PackageManager.NameNotFoundException unused) {

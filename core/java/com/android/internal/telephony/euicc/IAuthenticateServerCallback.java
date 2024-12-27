@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface IAuthenticateServerCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.telephony.euicc.IAuthenticateServerCallback";
+    public static final String DESCRIPTOR =
+            "com.android.internal.telephony.euicc.IAuthenticateServerCallback";
 
     void onComplete(int i, byte[] bArr) throws RemoteException;
 
     public static class Default implements IAuthenticateServerCallback {
         @Override // com.android.internal.telephony.euicc.IAuthenticateServerCallback
-        public void onComplete(int resultCode, byte[] response) throws RemoteException {
-        }
+        public void onComplete(int resultCode, byte[] response) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IAuthenticateServerCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAuthenticateServerCallback {
+    public abstract static class Stub extends Binder implements IAuthenticateServerCallback {
         static final int TRANSACTION_onComplete = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface IAuthenticateServerCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IAuthenticateServerCallback.DESCRIPTOR);
             }

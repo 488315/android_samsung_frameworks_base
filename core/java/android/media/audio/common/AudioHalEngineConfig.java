@@ -3,27 +3,30 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class AudioHalEngineConfig implements Parcelable {
-    public static final Parcelable.Creator<AudioHalEngineConfig> CREATOR = new Parcelable.Creator<AudioHalEngineConfig>() { // from class: android.media.audio.common.AudioHalEngineConfig.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioHalEngineConfig createFromParcel(Parcel _aidl_source) {
-            AudioHalEngineConfig _aidl_out = new AudioHalEngineConfig();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<AudioHalEngineConfig> CREATOR =
+            new Parcelable.Creator<AudioHalEngineConfig>() { // from class:
+                // android.media.audio.common.AudioHalEngineConfig.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioHalEngineConfig createFromParcel(Parcel _aidl_source) {
+                    AudioHalEngineConfig _aidl_out = new AudioHalEngineConfig();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AudioHalEngineConfig[] newArray(int _aidl_size) {
-            return new AudioHalEngineConfig[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AudioHalEngineConfig[] newArray(int _aidl_size) {
+                    return new AudioHalEngineConfig[_aidl_size];
+                }
+            };
     public CapSpecificConfig capSpecificConfig;
     public int defaultProductStrategyId = -1;
     public AudioHalProductStrategy[] productStrategies;
@@ -70,7 +73,9 @@ public class AudioHalEngineConfig implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.productStrategies = (AudioHalProductStrategy[]) _aidl_parcel.createTypedArray(AudioHalProductStrategy.CREATOR);
+            this.productStrategies =
+                    (AudioHalProductStrategy[])
+                            _aidl_parcel.createTypedArray(AudioHalProductStrategy.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -78,14 +83,17 @@ public class AudioHalEngineConfig implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.volumeGroups = (AudioHalVolumeGroup[]) _aidl_parcel.createTypedArray(AudioHalVolumeGroup.CREATOR);
+            this.volumeGroups =
+                    (AudioHalVolumeGroup[])
+                            _aidl_parcel.createTypedArray(AudioHalVolumeGroup.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.capSpecificConfig = (CapSpecificConfig) _aidl_parcel.readTypedObject(CapSpecificConfig.CREATOR);
+                this.capSpecificConfig =
+                        (CapSpecificConfig) _aidl_parcel.readTypedObject(CapSpecificConfig.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
@@ -117,20 +125,33 @@ public class AudioHalEngineConfig implements Parcelable {
             return false;
         }
         AudioHalEngineConfig that = (AudioHalEngineConfig) other;
-        if (Objects.deepEquals(Integer.valueOf(this.defaultProductStrategyId), Integer.valueOf(that.defaultProductStrategyId)) && Objects.deepEquals(this.productStrategies, that.productStrategies) && Objects.deepEquals(this.volumeGroups, that.volumeGroups) && Objects.deepEquals(this.capSpecificConfig, that.capSpecificConfig)) {
+        if (Objects.deepEquals(
+                        Integer.valueOf(this.defaultProductStrategyId),
+                        Integer.valueOf(that.defaultProductStrategyId))
+                && Objects.deepEquals(this.productStrategies, that.productStrategies)
+                && Objects.deepEquals(this.volumeGroups, that.volumeGroups)
+                && Objects.deepEquals(this.capSpecificConfig, that.capSpecificConfig)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this.defaultProductStrategyId), this.productStrategies, this.volumeGroups, this.capSpecificConfig).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                Integer.valueOf(this.defaultProductStrategyId),
+                                this.productStrategies,
+                                this.volumeGroups,
+                                this.capSpecificConfig)
+                        .toArray());
     }
 
     @Override // android.os.Parcelable
     public int describeContents() {
         int _mask = 0 | describeContents(this.productStrategies);
-        return _mask | describeContents(this.volumeGroups) | describeContents(this.capSpecificConfig);
+        return _mask
+                | describeContents(this.volumeGroups)
+                | describeContents(this.capSpecificConfig);
     }
 
     private int describeContents(Object _v) {
@@ -151,21 +172,23 @@ public class AudioHalEngineConfig implements Parcelable {
     }
 
     public static class CapSpecificConfig implements Parcelable {
-        public static final Parcelable.Creator<CapSpecificConfig> CREATOR = new Parcelable.Creator<CapSpecificConfig>() { // from class: android.media.audio.common.AudioHalEngineConfig.CapSpecificConfig.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public CapSpecificConfig createFromParcel(Parcel _aidl_source) {
-                CapSpecificConfig _aidl_out = new CapSpecificConfig();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<CapSpecificConfig> CREATOR =
+                new Parcelable.Creator<CapSpecificConfig>() { // from class:
+                    // android.media.audio.common.AudioHalEngineConfig.CapSpecificConfig.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public CapSpecificConfig createFromParcel(Parcel _aidl_source) {
+                        CapSpecificConfig _aidl_out = new CapSpecificConfig();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public CapSpecificConfig[] newArray(int _aidl_size) {
-                return new CapSpecificConfig[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public CapSpecificConfig[] newArray(int _aidl_size) {
+                        return new CapSpecificConfig[_aidl_size];
+                    }
+                };
         public AudioHalCapCriterion[] criteria;
         public AudioHalCapCriterionType[] criterionTypes;
 
@@ -200,14 +223,18 @@ public class AudioHalEngineConfig implements Parcelable {
                     _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                     return;
                 }
-                this.criteria = (AudioHalCapCriterion[]) _aidl_parcel.createTypedArray(AudioHalCapCriterion.CREATOR);
+                this.criteria =
+                        (AudioHalCapCriterion[])
+                                _aidl_parcel.createTypedArray(AudioHalCapCriterion.CREATOR);
                 if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                     if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
                     }
                     _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 } else {
-                    this.criterionTypes = (AudioHalCapCriterionType[]) _aidl_parcel.createTypedArray(AudioHalCapCriterionType.CREATOR);
+                    this.criterionTypes =
+                            (AudioHalCapCriterionType[])
+                                    _aidl_parcel.createTypedArray(AudioHalCapCriterionType.CREATOR);
                     if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                         throw new BadParcelableException("Overflow in the size of parcelable");
                     }

@@ -6,7 +6,7 @@ import android.os.RemoteException;
 import android.util.Log;
 import android.util.StatsEvent;
 import android.util.StatsLog;
-import com.android.server.location.contexthub.ContextHubEventLogger;
+
 import java.util.ArrayDeque;
 import java.util.Collections;
 import java.util.Iterator;
@@ -25,10 +25,12 @@ public final class ContextHubTransactionManager {
     public final NanoAppStateManager mNanoAppStateManager;
     public final ArrayDeque mTransactionQueue = new ArrayDeque();
     public final AtomicInteger mNextAvailableId = new AtomicInteger();
-    public final AtomicInteger mNextAvailableMessageSequenceNumber = new AtomicInteger(new Random().nextInt(1073741823));
+    public final AtomicInteger mNextAvailableMessageSequenceNumber =
+            new AtomicInteger(new Random().nextInt(1073741823));
     public final ScheduledThreadPoolExecutor mTimeoutExecutor = new ScheduledThreadPoolExecutor(1);
     public ScheduledFuture mTimeoutFuture = null;
-    public final ConcurrentLinkedEvictingDeque mTransactionRecordDeque = new ConcurrentLinkedEvictingDeque();
+    public final ConcurrentLinkedEvictingDeque mTransactionRecordDeque =
+            new ConcurrentLinkedEvictingDeque();
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.location.contexthub.ContextHubTransactionManager$1, reason: invalid class name */
@@ -38,7 +40,13 @@ public final class ContextHubTransactionManager {
         public final /* synthetic */ IContextHubTransactionCallback val$onCompleteCallback;
 
         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-        public AnonymousClass1(int i, long j, String str, int i2, NanoAppBinary nanoAppBinary, IContextHubTransactionCallback iContextHubTransactionCallback) {
+        public AnonymousClass1(
+                int i,
+                long j,
+                String str,
+                int i2,
+                NanoAppBinary nanoAppBinary,
+                IContextHubTransactionCallback iContextHubTransactionCallback) {
             super(i, 0, j, str);
             this.val$contextHubId = i2;
             this.val$nanoAppBinary = nanoAppBinary;
@@ -48,9 +56,14 @@ public final class ContextHubTransactionManager {
         @Override // com.android.server.location.contexthub.ContextHubServiceTransaction
         public final int onTransact() {
             try {
-                return ContextHubTransactionManager.this.mContextHubProxy.loadNanoapp(this.val$contextHubId, this.val$nanoAppBinary, this.mTransactionId);
+                return ContextHubTransactionManager.this.mContextHubProxy.loadNanoapp(
+                        this.val$contextHubId, this.val$nanoAppBinary, this.mTransactionId);
             } catch (RemoteException e) {
-                Log.e("ContextHubTransactionManager", "RemoteException while trying to load nanoapp with ID 0x" + Long.toHexString(this.val$nanoAppBinary.getNanoAppId()), e);
+                Log.e(
+                        "ContextHubTransactionManager",
+                        "RemoteException while trying to load nanoapp with ID 0x"
+                                + Long.toHexString(this.val$nanoAppBinary.getNanoAppId()),
+                        e);
                 return 1;
             }
         }
@@ -106,25 +119,43 @@ public final class ContextHubTransactionManager {
             long length = this.val$nanoAppBinary.getBinary().length;
             boolean z = i == 0;
             synchronized (contextHubEventLogger) {
-                ContextHubEventLogger.NanoappLoadEvent nanoappLoadEvent = new ContextHubEventLogger.NanoappLoadEvent(System.currentTimeMillis(), i3, nanoAppId2, nanoAppVersion2, length, z);
+                ContextHubEventLogger.NanoappLoadEvent nanoappLoadEvent =
+                        new ContextHubEventLogger.NanoappLoadEvent(
+                                System.currentTimeMillis(),
+                                i3,
+                                nanoAppId2,
+                                nanoAppVersion2,
+                                length,
+                                z);
                 if (!contextHubEventLogger.mNanoappLoadEventQueue.add(nanoappLoadEvent)) {
-                    Log.e("ContextHubEventLogger", "Unable to add nanoapp load event to queue: " + nanoappLoadEvent);
+                    Log.e(
+                            "ContextHubEventLogger",
+                            "Unable to add nanoapp load event to queue: " + nanoappLoadEvent);
                 }
             }
             if (i == 0) {
-                ContextHubTransactionManager.this.mNanoAppStateManager.addNanoAppInstance(this.val$contextHubId, this.val$nanoAppBinary.getNanoAppVersion(), this.val$nanoAppBinary.getNanoAppId());
+                ContextHubTransactionManager.this.mNanoAppStateManager.addNanoAppInstance(
+                        this.val$contextHubId,
+                        this.val$nanoAppBinary.getNanoAppVersion(),
+                        this.val$nanoAppBinary.getNanoAppId());
             }
             try {
                 this.val$onCompleteCallback.onTransactionComplete(i);
                 if (i == 0) {
-                    ContextHubClientManager contextHubClientManager = ContextHubTransactionManager.this.mClientManager;
+                    ContextHubClientManager contextHubClientManager =
+                            ContextHubTransactionManager.this.mClientManager;
                     int i4 = this.val$contextHubId;
                     long nanoAppId3 = this.val$nanoAppBinary.getNanoAppId();
                     contextHubClientManager.getClass();
-                    contextHubClientManager.forEachClientOfHub(i4, new ContextHubClientManager$$ExternalSyntheticLambda3(nanoAppId3, 1));
+                    contextHubClientManager.forEachClientOfHub(
+                            i4,
+                            new ContextHubClientManager$$ExternalSyntheticLambda3(nanoAppId3, 1));
                 }
             } catch (RemoteException e) {
-                Log.e("ContextHubTransactionManager", "RemoteException while calling client onTransactionComplete", e);
+                Log.e(
+                        "ContextHubTransactionManager",
+                        "RemoteException while calling client onTransactionComplete",
+                        e);
             }
         }
     }
@@ -139,7 +170,14 @@ public final class ContextHubTransactionManager {
         public final /* synthetic */ IContextHubTransactionCallback val$onCompleteCallback;
 
         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-        public AnonymousClass2(ContextHubTransactionManager contextHubTransactionManager, int i, long j, String str, int i2, long j2, IContextHubTransactionCallback iContextHubTransactionCallback) {
+        public AnonymousClass2(
+                ContextHubTransactionManager contextHubTransactionManager,
+                int i,
+                long j,
+                String str,
+                int i2,
+                long j2,
+                IContextHubTransactionCallback iContextHubTransactionCallback) {
             super(i, 1, j, str);
             this.$r8$classId = 0;
             this.this$0 = contextHubTransactionManager;
@@ -149,7 +187,14 @@ public final class ContextHubTransactionManager {
         }
 
         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-        public AnonymousClass2(ContextHubTransactionManager contextHubTransactionManager, int i, String str, int i2, long j, IContextHubTransactionCallback iContextHubTransactionCallback, int i3) {
+        public AnonymousClass2(
+                ContextHubTransactionManager contextHubTransactionManager,
+                int i,
+                String str,
+                int i2,
+                long j,
+                IContextHubTransactionCallback iContextHubTransactionCallback,
+                int i3) {
             super(i, 2, str);
             this.$r8$classId = i3;
             switch (i3) {
@@ -177,7 +222,11 @@ public final class ContextHubTransactionManager {
                     try {
                         break;
                     } catch (RemoteException e) {
-                        Log.e("ContextHubTransactionManager", "RemoteException while trying to unload nanoapp with ID 0x" + Long.toHexString(j), e);
+                        Log.e(
+                                "ContextHubTransactionManager",
+                                "RemoteException while trying to unload nanoapp with ID 0x"
+                                        + Long.toHexString(j),
+                                e);
                         return 1;
                     }
                 case 1:
@@ -185,7 +234,11 @@ public final class ContextHubTransactionManager {
                     try {
                         break;
                     } catch (RemoteException e2) {
-                        Log.e("ContextHubTransactionManager", "RemoteException while trying to enable nanoapp with ID 0x" + Long.toHexString(j2), e2);
+                        Log.e(
+                                "ContextHubTransactionManager",
+                                "RemoteException while trying to enable nanoapp with ID 0x"
+                                        + Long.toHexString(j2),
+                                e2);
                         return 1;
                     }
                 default:
@@ -193,7 +246,11 @@ public final class ContextHubTransactionManager {
                     try {
                         break;
                     } catch (RemoteException e3) {
-                        Log.e("ContextHubTransactionManager", "RemoteException while trying to disable nanoapp with ID 0x" + Long.toHexString(j3), e3);
+                        Log.e(
+                                "ContextHubTransactionManager",
+                                "RemoteException while trying to disable nanoapp with ID 0x"
+                                        + Long.toHexString(j3),
+                                e3);
                         return 1;
                     }
             }
@@ -245,14 +302,21 @@ public final class ContextHubTransactionManager {
                     newBuilder.writeInt(i2);
                     newBuilder.usePooledBuffer();
                     StatsLog.write(newBuilder.build());
-                    ContextHubEventLogger contextHubEventLogger = ContextHubEventLogger.getInstance();
+                    ContextHubEventLogger contextHubEventLogger =
+                            ContextHubEventLogger.getInstance();
                     int i3 = this.val$contextHubId;
                     long j2 = this.val$nanoAppId;
                     boolean z = i == 0;
                     synchronized (contextHubEventLogger) {
-                        ContextHubEventLogger.NanoappUnloadEvent nanoappUnloadEvent = new ContextHubEventLogger.NanoappUnloadEvent(i3, System.currentTimeMillis(), j2, z);
-                        if (!contextHubEventLogger.mNanoappUnloadEventQueue.add(nanoappUnloadEvent)) {
-                            Log.e("ContextHubEventLogger", "Unable to add nanoapp unload event to queue: " + nanoappUnloadEvent);
+                        ContextHubEventLogger.NanoappUnloadEvent nanoappUnloadEvent =
+                                new ContextHubEventLogger.NanoappUnloadEvent(
+                                        i3, System.currentTimeMillis(), j2, z);
+                        if (!contextHubEventLogger.mNanoappUnloadEventQueue.add(
+                                nanoappUnloadEvent)) {
+                            Log.e(
+                                    "ContextHubEventLogger",
+                                    "Unable to add nanoapp unload event to queue: "
+                                            + nanoappUnloadEvent);
                         }
                     }
                     if (i == 0) {
@@ -260,22 +324,29 @@ public final class ContextHubTransactionManager {
                         int i4 = this.val$contextHubId;
                         long j3 = this.val$nanoAppId;
                         synchronized (nanoAppStateManager) {
-                            nanoAppStateManager.mNanoAppHash.remove(Integer.valueOf(nanoAppStateManager.getNanoAppHandle(i4, j3)));
+                            nanoAppStateManager.mNanoAppHash.remove(
+                                    Integer.valueOf(nanoAppStateManager.getNanoAppHandle(i4, j3)));
                         }
                     }
                     try {
                         this.val$onCompleteCallback.onTransactionComplete(i);
                         if (i == 0) {
-                            ContextHubClientManager contextHubClientManager = this.this$0.mClientManager;
+                            ContextHubClientManager contextHubClientManager =
+                                    this.this$0.mClientManager;
                             int i5 = this.val$contextHubId;
                             long j4 = this.val$nanoAppId;
                             contextHubClientManager.getClass();
-                            contextHubClientManager.forEachClientOfHub(i5, new ContextHubClientManager$$ExternalSyntheticLambda3(j4, 0));
+                            contextHubClientManager.forEachClientOfHub(
+                                    i5,
+                                    new ContextHubClientManager$$ExternalSyntheticLambda3(j4, 0));
                             return;
                         }
                         return;
                     } catch (RemoteException e) {
-                        Log.e("ContextHubTransactionManager", "RemoteException while calling client onTransactionComplete", e);
+                        Log.e(
+                                "ContextHubTransactionManager",
+                                "RemoteException while calling client onTransactionComplete",
+                                e);
                         return;
                     }
                 case 1:
@@ -283,7 +354,10 @@ public final class ContextHubTransactionManager {
                         this.val$onCompleteCallback.onTransactionComplete(i);
                         return;
                     } catch (RemoteException e2) {
-                        Log.e("ContextHubTransactionManager", "RemoteException while calling client onTransactionComplete", e2);
+                        Log.e(
+                                "ContextHubTransactionManager",
+                                "RemoteException while calling client onTransactionComplete",
+                                e2);
                         return;
                     }
                 default:
@@ -291,7 +365,10 @@ public final class ContextHubTransactionManager {
                         this.val$onCompleteCallback.onTransactionComplete(i);
                         return;
                     } catch (RemoteException e3) {
-                        Log.e("ContextHubTransactionManager", "RemoteException while calling client onTransactionComplete", e3);
+                        Log.e(
+                                "ContextHubTransactionManager",
+                                "RemoteException while calling client onTransactionComplete",
+                                e3);
                         return;
                     }
             }
@@ -305,7 +382,11 @@ public final class ContextHubTransactionManager {
         public final /* synthetic */ IContextHubTransactionCallback val$onCompleteCallback;
 
         /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-        public AnonymousClass6(int i, String str, int i2, IContextHubTransactionCallback iContextHubTransactionCallback) {
+        public AnonymousClass6(
+                int i,
+                String str,
+                int i2,
+                IContextHubTransactionCallback iContextHubTransactionCallback) {
             super(i, 4, str);
             this.val$contextHubId = i2;
             this.val$onCompleteCallback = iContextHubTransactionCallback;
@@ -316,16 +397,23 @@ public final class ContextHubTransactionManager {
             try {
                 this.val$onCompleteCallback.onQueryResponse(i, list);
             } catch (RemoteException e) {
-                Log.e("ContextHubTransactionManager", "RemoteException while calling client onQueryComplete", e);
+                Log.e(
+                        "ContextHubTransactionManager",
+                        "RemoteException while calling client onQueryComplete",
+                        e);
             }
         }
 
         @Override // com.android.server.location.contexthub.ContextHubServiceTransaction
         public final int onTransact() {
             try {
-                return ContextHubTransactionManager.this.mContextHubProxy.queryNanoapps(this.val$contextHubId);
+                return ContextHubTransactionManager.this.mContextHubProxy.queryNanoapps(
+                        this.val$contextHubId);
             } catch (RemoteException e) {
-                Log.e("ContextHubTransactionManager", "RemoteException while trying to query for nanoapps", e);
+                Log.e(
+                        "ContextHubTransactionManager",
+                        "RemoteException while trying to query for nanoapps",
+                        e);
                 return 1;
             }
         }
@@ -346,22 +434,29 @@ public final class ContextHubTransactionManager {
         }
 
         public final String toString() {
-            return ContextHubServiceUtil.formatDateFromTimestamp(this.mTimestamp) + " " + this.mTransaction;
+            return ContextHubServiceUtil.formatDateFromTimestamp(this.mTimestamp)
+                    + " "
+                    + this.mTransaction;
         }
     }
 
-    public ContextHubTransactionManager(IContextHubWrapper iContextHubWrapper, ContextHubClientManager contextHubClientManager, NanoAppStateManager nanoAppStateManager) {
+    public ContextHubTransactionManager(
+            IContextHubWrapper iContextHubWrapper,
+            ContextHubClientManager contextHubClientManager,
+            NanoAppStateManager nanoAppStateManager) {
         this.mContextHubProxy = iContextHubWrapper;
         this.mClientManager = contextHubClientManager;
         this.mNanoAppStateManager = nanoAppStateManager;
     }
 
-    public final synchronized void addTransaction(ContextHubServiceTransaction contextHubServiceTransaction) {
+    public final synchronized void addTransaction(
+            ContextHubServiceTransaction contextHubServiceTransaction) {
         if (this.mTransactionQueue.size() == 10000) {
             throw new IllegalStateException("Transaction queue is full (capacity = 10000)");
         }
         this.mTransactionQueue.add(contextHubServiceTransaction);
-        this.mTransactionRecordDeque.add(new TransactionRecord(contextHubServiceTransaction.toString()));
+        this.mTransactionRecordDeque.add(
+                new TransactionRecord(contextHubServiceTransaction.toString()));
         if (this.mTransactionQueue.size() == 1) {
             startNextTransaction();
         }
@@ -383,36 +478,53 @@ public final class ContextHubTransactionManager {
     public final void startNextTransaction() {
         int i = 1;
         while (i != 0 && !this.mTransactionQueue.isEmpty()) {
-            final ContextHubServiceTransaction contextHubServiceTransaction = (ContextHubServiceTransaction) this.mTransactionQueue.peek();
+            final ContextHubServiceTransaction contextHubServiceTransaction =
+                    (ContextHubServiceTransaction) this.mTransactionQueue.peek();
             int onTransact = contextHubServiceTransaction.onTransact();
             if (onTransact == 0) {
-                Runnable runnable = new Runnable() { // from class: com.android.server.location.contexthub.ContextHubTransactionManager$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        ContextHubTransactionManager contextHubTransactionManager = ContextHubTransactionManager.this;
-                        ContextHubServiceTransaction contextHubServiceTransaction2 = contextHubServiceTransaction;
-                        synchronized (contextHubTransactionManager) {
-                            try {
-                                if (!contextHubServiceTransaction2.mIsComplete) {
-                                    Log.d("ContextHubTransactionManager", contextHubServiceTransaction2 + " timed out");
-                                    contextHubServiceTransaction2.onTransactionComplete(6);
-                                    contextHubTransactionManager.removeTransactionAndStartNext();
+                Runnable runnable =
+                        new Runnable() { // from class:
+                                         // com.android.server.location.contexthub.ContextHubTransactionManager$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                ContextHubTransactionManager contextHubTransactionManager =
+                                        ContextHubTransactionManager.this;
+                                ContextHubServiceTransaction contextHubServiceTransaction2 =
+                                        contextHubServiceTransaction;
+                                synchronized (contextHubTransactionManager) {
+                                    try {
+                                        if (!contextHubServiceTransaction2.mIsComplete) {
+                                            Log.d(
+                                                    "ContextHubTransactionManager",
+                                                    contextHubServiceTransaction2 + " timed out");
+                                            contextHubServiceTransaction2.onTransactionComplete(6);
+                                            contextHubTransactionManager
+                                                    .removeTransactionAndStartNext();
+                                        }
+                                    } catch (Throwable th) {
+                                        throw th;
+                                    }
                                 }
-                            } catch (Throwable th) {
-                                throw th;
                             }
-                        }
-                    }
-                };
+                        };
                 TimeUnit timeUnit = TimeUnit.MILLISECONDS;
                 int i2 = contextHubServiceTransaction.mTransactionType;
                 try {
-                    this.mTimeoutFuture = this.mTimeoutExecutor.schedule(runnable, i2 != 0 ? i2 != 5 ? timeUnit.convert(5L, TimeUnit.SECONDS) : timeUnit.convert(1000L, timeUnit) : timeUnit.convert(30L, TimeUnit.SECONDS), timeUnit);
+                    this.mTimeoutFuture =
+                            this.mTimeoutExecutor.schedule(
+                                    runnable,
+                                    i2 != 0
+                                            ? i2 != 5
+                                                    ? timeUnit.convert(5L, TimeUnit.SECONDS)
+                                                    : timeUnit.convert(1000L, timeUnit)
+                                            : timeUnit.convert(30L, TimeUnit.SECONDS),
+                                    timeUnit);
                 } catch (Exception e) {
                     Log.e("ContextHubTransactionManager", "Error when schedule a timer", e);
                 }
             } else {
-                contextHubServiceTransaction.onTransactionComplete(ContextHubServiceUtil.toTransactionResult(onTransact));
+                contextHubServiceTransaction.onTransactionComplete(
+                        ContextHubServiceUtil.toTransactionResult(onTransact));
                 this.mTransactionQueue.remove();
             }
             i = onTransact;
@@ -424,7 +536,9 @@ public final class ContextHubTransactionManager {
         ContextHubServiceTransaction[] contextHubServiceTransactionArr;
         StringBuilder sb = new StringBuilder(100);
         synchronized (this) {
-            contextHubServiceTransactionArr = (ContextHubServiceTransaction[]) this.mTransactionQueue.toArray(new ContextHubServiceTransaction[0]);
+            contextHubServiceTransactionArr =
+                    (ContextHubServiceTransaction[])
+                            this.mTransactionQueue.toArray(new ContextHubServiceTransaction[0]);
         }
         for (i = 0; i < contextHubServiceTransactionArr.length; i++) {
             sb.append(i + ": " + contextHubServiceTransactionArr[i] + "\n");

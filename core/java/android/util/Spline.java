@@ -8,7 +8,8 @@ public abstract class Spline {
 
     public static Spline createSpline(float[] x, float[] y) {
         if (!isStrictlyIncreasing(x)) {
-            throw new IllegalArgumentException("The control points must all have strictly increasing X values.");
+            throw new IllegalArgumentException(
+                    "The control points must all have strictly increasing X values.");
         }
         if (isMonotonic(y)) {
             return createMonotoneCubicSpline(x, y);
@@ -61,7 +62,9 @@ public abstract class Spline {
 
         public MonotoneCubicSpline(float[] x, float[] y) {
             if (x == null || y == null || x.length != y.length || x.length < 2) {
-                throw new IllegalArgumentException("There must be at least two control points and the arrays must be of equal length.");
+                throw new IllegalArgumentException(
+                        "There must be at least two control points and the arrays must be of equal"
+                            + " length.");
             }
             int n = x.length;
             float[] d = new float[n - 1];
@@ -69,7 +72,8 @@ public abstract class Spline {
             for (int i = 0; i < n - 1; i++) {
                 float h = x[i + 1] - x[i];
                 if (h <= 0.0f) {
-                    throw new IllegalArgumentException("The control points must all have strictly increasing X values.");
+                    throw new IllegalArgumentException(
+                            "The control points must all have strictly increasing X values.");
                 }
                 d[i] = (y[i + 1] - y[i]) / h;
             }
@@ -87,7 +91,8 @@ public abstract class Spline {
                     float a = m[i4] / d[i4];
                     float b = m[i4 + 1] / d[i4];
                     if (a < 0.0f || b < 0.0f) {
-                        throw new IllegalArgumentException("The control points must have monotonic Y values.");
+                        throw new IllegalArgumentException(
+                                "The control points must have monotonic Y values.");
                     }
                     float h2 = (float) Math.hypot(a, b);
                     if (h2 > 3.0f) {
@@ -124,7 +129,12 @@ public abstract class Spline {
             }
             float h = this.mX[i + 1] - this.mX[i];
             float t = (x - this.mX[i]) / h;
-            return (((this.mY[i] * ((t * 2.0f) + 1.0f)) + (this.mM[i] * h * t)) * (1.0f - t) * (1.0f - t)) + (((this.mY[i + 1] * (3.0f - (2.0f * t))) + (this.mM[i + 1] * h * (t - 1.0f))) * t * t);
+            return (((this.mY[i] * ((t * 2.0f) + 1.0f)) + (this.mM[i] * h * t))
+                            * (1.0f - t)
+                            * (1.0f - t))
+                    + (((this.mY[i + 1] * (3.0f - (2.0f * t))) + (this.mM[i + 1] * h * (t - 1.0f)))
+                            * t
+                            * t);
         }
 
         public String toString() {
@@ -151,7 +161,9 @@ public abstract class Spline {
 
         public LinearSpline(float[] x, float[] y) {
             if (x == null || y == null || x.length != y.length || x.length < 2) {
-                throw new IllegalArgumentException("There must be at least two control points and the arrays must be of equal length.");
+                throw new IllegalArgumentException(
+                        "There must be at least two control points and the arrays must be of equal"
+                            + " length.");
             }
             int N = x.length;
             this.mM = new float[N - 1];

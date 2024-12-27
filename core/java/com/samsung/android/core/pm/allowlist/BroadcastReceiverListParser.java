@@ -6,6 +6,10 @@ import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Xml;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,8 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BiConsumer;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes6.dex */
 public class BroadcastReceiverListParser {
@@ -49,16 +51,20 @@ public class BroadcastReceiverListParser {
 
     public Map<String, Set<String>> getPackageMap() {
         final Map<String, Set<String>> packageMap = new ArrayMap<>();
-        this.mIntentMap.forEach(new BiConsumer() { // from class: com.samsung.android.core.pm.allowlist.BroadcastReceiverListParser$$ExternalSyntheticLambda0
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                BroadcastReceiverListParser.lambda$getPackageMap$0(packageMap, (String) obj, (Set) obj2);
-            }
-        });
+        this.mIntentMap.forEach(
+                new BiConsumer() { // from class:
+                                   // com.samsung.android.core.pm.allowlist.BroadcastReceiverListParser$$ExternalSyntheticLambda0
+                    @Override // java.util.function.BiConsumer
+                    public final void accept(Object obj, Object obj2) {
+                        BroadcastReceiverListParser.lambda$getPackageMap$0(
+                                packageMap, (String) obj, (Set) obj2);
+                    }
+                });
         return packageMap;
     }
 
-    static /* synthetic */ void lambda$getPackageMap$0(Map packageMap, String actionName, Set packages) {
+    static /* synthetic */ void lambda$getPackageMap$0(
+            Map packageMap, String actionName, Set packages) {
         if (packages != null && !packages.isEmpty()) {
             Iterator it = packages.iterator();
             while (it.hasNext()) {
@@ -106,7 +112,13 @@ public class BroadcastReceiverListParser {
         if (isPackageXXXIntent(action) && hasPackageSSP(filter)) {
             return true;
         }
-        Log.e(TAG, "isInAllowList() Intent=" + action + " Package=" + pkgName + " is not in allowlist!");
+        Log.e(
+                TAG,
+                "isInAllowList() Intent="
+                        + action
+                        + " Package="
+                        + pkgName
+                        + " is not in allowlist!");
         return false;
     }
 
@@ -180,19 +192,22 @@ public class BroadcastReceiverListParser {
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:86:0x0062, code lost:
-    
-        if (r5.equals("intent") != false) goto L35;
-     */
+
+       if (r5.equals("intent") != false) goto L35;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private void parseAllowListElement(org.xmlpull.v1.XmlPullParser r11) throws java.io.IOException, org.xmlpull.v1.XmlPullParserException {
+    private void parseAllowListElement(org.xmlpull.v1.XmlPullParser r11)
+            throws java.io.IOException, org.xmlpull.v1.XmlPullParserException {
         /*
             Method dump skipped, instructions count: 334
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.core.pm.allowlist.BroadcastReceiverListParser.parseAllowListElement(org.xmlpull.v1.XmlPullParser):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.core.pm.allowlist.BroadcastReceiverListParser.parseAllowListElement(org.xmlpull.v1.XmlPullParser):void");
     }
 
     List<String> parsePackages(XmlPullParser parser) throws IOException, XmlPullParserException {
@@ -216,7 +231,8 @@ public class BroadcastReceiverListParser {
         return packages;
     }
 
-    private List<String> parseIntents(XmlPullParser parser) throws IOException, XmlPullParserException {
+    private List<String> parseIntents(XmlPullParser parser)
+            throws IOException, XmlPullParserException {
         int outerDepth = parser.getDepth();
         List<String> packages = new ArrayList<>();
         while (true) {
@@ -242,6 +258,8 @@ public class BroadcastReceiverListParser {
     }
 
     public static boolean hasPackageSSP(IntentFilter filter) {
-        return filter != null && filter.hasDataScheme("package") && filter.countDataSchemeSpecificParts() > 0;
+        return filter != null
+                && filter.hasDataScheme("package")
+                && filter.countDataSchemeSpecificParts() > 0;
     }
 }

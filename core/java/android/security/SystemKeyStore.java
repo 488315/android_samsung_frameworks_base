@@ -3,14 +3,17 @@ package android.security;
 import android.os.Environment;
 import android.os.FileUtils;
 import android.os.StrictMode;
+
+import libcore.io.IoUtils;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
-import libcore.io.IoUtils;
 
 /* loaded from: classes3.dex */
 public class SystemKeyStore {
@@ -18,8 +21,7 @@ public class SystemKeyStore {
     private static final String SYSTEM_KEYSTORE_DIRECTORY = "misc/systemkeys";
     private static SystemKeyStore mInstance = new SystemKeyStore();
 
-    private SystemKeyStore() {
-    }
+    private SystemKeyStore() {}
 
     public static SystemKeyStore getInstance() {
         return mInstance;
@@ -42,11 +44,13 @@ public class SystemKeyStore {
         return sb.toString();
     }
 
-    public String generateNewKeyHexString(int numBits, String algName, String keyName) throws NoSuchAlgorithmException {
+    public String generateNewKeyHexString(int numBits, String algName, String keyName)
+            throws NoSuchAlgorithmException {
         return toHexString(generateNewKey(numBits, algName, keyName));
     }
 
-    public byte[] generateNewKey(int numBits, String algName, String keyName) throws NoSuchAlgorithmException {
+    public byte[] generateNewKey(int numBits, String algName, String keyName)
+            throws NoSuchAlgorithmException {
         StrictMode.noteDiskWrite();
         File keyFile = getKeyFile(keyName);
         if (keyFile.exists()) {

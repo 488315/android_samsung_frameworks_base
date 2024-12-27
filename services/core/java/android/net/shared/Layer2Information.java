@@ -2,6 +2,7 @@ package android.net.shared;
 
 import android.net.Layer2InformationParcelable;
 import android.net.MacAddress;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -17,11 +18,15 @@ public class Layer2Information {
         this.mBssid = macAddress;
     }
 
-    public static Layer2Information fromStableParcelable(Layer2InformationParcelable layer2InformationParcelable) {
+    public static Layer2Information fromStableParcelable(
+            Layer2InformationParcelable layer2InformationParcelable) {
         if (layer2InformationParcelable == null) {
             return null;
         }
-        return new Layer2Information(layer2InformationParcelable.l2Key, layer2InformationParcelable.cluster, layer2InformationParcelable.bssid);
+        return new Layer2Information(
+                layer2InformationParcelable.l2Key,
+                layer2InformationParcelable.cluster,
+                layer2InformationParcelable.bssid);
     }
 
     public boolean equals(Object obj) {
@@ -29,7 +34,9 @@ public class Layer2Information {
             return false;
         }
         Layer2Information layer2Information = (Layer2Information) obj;
-        return Objects.equals(this.mL2Key, layer2Information.mL2Key) && Objects.equals(this.mCluster, layer2Information.mCluster) && Objects.equals(this.mBssid, layer2Information.mBssid);
+        return Objects.equals(this.mL2Key, layer2Information.mL2Key)
+                && Objects.equals(this.mCluster, layer2Information.mCluster)
+                && Objects.equals(this.mBssid, layer2Information.mBssid);
     }
 
     public int hashCode() {

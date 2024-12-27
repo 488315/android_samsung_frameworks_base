@@ -3,7 +3,6 @@ package android.media.projection;
 import android.Manifest;
 import android.app.ActivityOptions;
 import android.app.ActivityThread;
-import android.media.projection.IMediaProjectionCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -39,16 +38,15 @@ public interface IMediaProjection extends IInterface {
 
     void stop() throws RemoteException;
 
-    void unregisterCallback(IMediaProjectionCallback iMediaProjectionCallback) throws RemoteException;
+    void unregisterCallback(IMediaProjectionCallback iMediaProjectionCallback)
+            throws RemoteException;
 
     public static class Default implements IMediaProjection {
         @Override // android.media.projection.IMediaProjection
-        public void start(IMediaProjectionCallback callback) throws RemoteException {
-        }
+        public void start(IMediaProjectionCallback callback) throws RemoteException {}
 
         @Override // android.media.projection.IMediaProjection
-        public void stop() throws RemoteException {
-        }
+        public void stop() throws RemoteException {}
 
         @Override // android.media.projection.IMediaProjection
         public boolean canProjectAudio() throws RemoteException {
@@ -71,12 +69,10 @@ public interface IMediaProjection extends IInterface {
         }
 
         @Override // android.media.projection.IMediaProjection
-        public void registerCallback(IMediaProjectionCallback callback) throws RemoteException {
-        }
+        public void registerCallback(IMediaProjectionCallback callback) throws RemoteException {}
 
         @Override // android.media.projection.IMediaProjection
-        public void unregisterCallback(IMediaProjectionCallback callback) throws RemoteException {
-        }
+        public void unregisterCallback(IMediaProjectionCallback callback) throws RemoteException {}
 
         @Override // android.media.projection.IMediaProjection
         public ActivityOptions.LaunchCookie getLaunchCookie() throws RemoteException {
@@ -89,12 +85,11 @@ public interface IMediaProjection extends IInterface {
         }
 
         @Override // android.media.projection.IMediaProjection
-        public void setLaunchCookie(ActivityOptions.LaunchCookie launchCookie) throws RemoteException {
-        }
+        public void setLaunchCookie(ActivityOptions.LaunchCookie launchCookie)
+                throws RemoteException {}
 
         @Override // android.media.projection.IMediaProjection
-        public void setTaskId(int taskId) throws RemoteException {
-        }
+        public void setTaskId(int taskId) throws RemoteException {}
 
         @Override // android.media.projection.IMediaProjection
         public boolean isValid() throws RemoteException {
@@ -102,8 +97,7 @@ public interface IMediaProjection extends IInterface {
         }
 
         @Override // android.media.projection.IMediaProjection
-        public void notifyVirtualDisplayCreated(int displayId) throws RemoteException {
-        }
+        public void notifyVirtualDisplayCreated(int displayId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -111,7 +105,7 @@ public interface IMediaProjection extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMediaProjection {
+    public abstract static class Stub extends Binder implements IMediaProjection {
         public static final String DESCRIPTOR = "android.media.projection.IMediaProjection";
         static final int TRANSACTION_applyVirtualDisplayFlags = 6;
         static final int TRANSACTION_canProjectAudio = 3;
@@ -139,7 +133,9 @@ public interface IMediaProjection extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IMediaProjection asInterface(IBinder obj) {
@@ -199,7 +195,8 @@ public interface IMediaProjection extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -209,7 +206,8 @@ public interface IMediaProjection extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IMediaProjectionCallback _arg0 = IMediaProjectionCallback.Stub.asInterface(data.readStrongBinder());
+                    IMediaProjectionCallback _arg0 =
+                            IMediaProjectionCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     start(_arg0);
                     reply.writeNoException();
@@ -241,13 +239,15 @@ public interface IMediaProjection extends IInterface {
                     reply.writeInt(_result4);
                     return true;
                 case 7:
-                    IMediaProjectionCallback _arg03 = IMediaProjectionCallback.Stub.asInterface(data.readStrongBinder());
+                    IMediaProjectionCallback _arg03 =
+                            IMediaProjectionCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerCallback(_arg03);
                     reply.writeNoException();
                     return true;
                 case 8:
-                    IMediaProjectionCallback _arg04 = IMediaProjectionCallback.Stub.asInterface(data.readStrongBinder());
+                    IMediaProjectionCallback _arg04 =
+                            IMediaProjectionCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterCallback(_arg04);
                     reply.writeNoException();
@@ -263,7 +263,9 @@ public interface IMediaProjection extends IInterface {
                     reply.writeInt(_result6);
                     return true;
                 case 11:
-                    ActivityOptions.LaunchCookie _arg05 = (ActivityOptions.LaunchCookie) data.readTypedObject(ActivityOptions.LaunchCookie.CREATOR);
+                    ActivityOptions.LaunchCookie _arg05 =
+                            (ActivityOptions.LaunchCookie)
+                                    data.readTypedObject(ActivityOptions.LaunchCookie.CREATOR);
                     data.enforceNoDataAvail();
                     setLaunchCookie(_arg05);
                     reply.writeNoException();
@@ -416,7 +418,8 @@ public interface IMediaProjection extends IInterface {
             }
 
             @Override // android.media.projection.IMediaProjection
-            public void unregisterCallback(IMediaProjectionCallback callback) throws RemoteException {
+            public void unregisterCallback(IMediaProjectionCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -438,7 +441,9 @@ public interface IMediaProjection extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(9, _data, _reply, 0);
                     _reply.readException();
-                    ActivityOptions.LaunchCookie _result = (ActivityOptions.LaunchCookie) _reply.readTypedObject(ActivityOptions.LaunchCookie.CREATOR);
+                    ActivityOptions.LaunchCookie _result =
+                            (ActivityOptions.LaunchCookie)
+                                    _reply.readTypedObject(ActivityOptions.LaunchCookie.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -463,7 +468,8 @@ public interface IMediaProjection extends IInterface {
             }
 
             @Override // android.media.projection.IMediaProjection
-            public void setLaunchCookie(ActivityOptions.LaunchCookie launchCookie) throws RemoteException {
+            public void setLaunchCookie(ActivityOptions.LaunchCookie launchCookie)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -525,31 +531,38 @@ public interface IMediaProjection extends IInterface {
         }
 
         protected void applyVirtualDisplayFlags_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
         }
 
         protected void getLaunchCookie_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
         }
 
         protected void getTaskId_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
         }
 
         protected void setLaunchCookie_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
         }
 
         protected void setTaskId_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
         }
 
         protected void isValid_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
         }
 
         protected void notifyVirtualDisplayCreated_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

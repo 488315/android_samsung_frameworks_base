@@ -5,27 +5,30 @@ import android.os.BadParcelableException;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class PhraseRecognitionEventSys implements Parcelable {
-    public static final Parcelable.Creator<PhraseRecognitionEventSys> CREATOR = new Parcelable.Creator<PhraseRecognitionEventSys>() { // from class: android.media.soundtrigger_middleware.PhraseRecognitionEventSys.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PhraseRecognitionEventSys createFromParcel(Parcel _aidl_source) {
-            PhraseRecognitionEventSys _aidl_out = new PhraseRecognitionEventSys();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<PhraseRecognitionEventSys> CREATOR =
+            new Parcelable.Creator<PhraseRecognitionEventSys>() { // from class:
+                // android.media.soundtrigger_middleware.PhraseRecognitionEventSys.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PhraseRecognitionEventSys createFromParcel(Parcel _aidl_source) {
+                    PhraseRecognitionEventSys _aidl_out = new PhraseRecognitionEventSys();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PhraseRecognitionEventSys[] newArray(int _aidl_size) {
-            return new PhraseRecognitionEventSys[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PhraseRecognitionEventSys[] newArray(int _aidl_size) {
+                    return new PhraseRecognitionEventSys[_aidl_size];
+                }
+            };
     public long halEventReceivedMillis = -1;
     public PhraseRecognitionEvent phraseRecognitionEvent;
     public IBinder token;
@@ -57,7 +60,9 @@ public class PhraseRecognitionEventSys implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.phraseRecognitionEvent = (PhraseRecognitionEvent) _aidl_parcel.readTypedObject(PhraseRecognitionEvent.CREATOR);
+            this.phraseRecognitionEvent =
+                    (PhraseRecognitionEvent)
+                            _aidl_parcel.readTypedObject(PhraseRecognitionEvent.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -103,14 +108,23 @@ public class PhraseRecognitionEventSys implements Parcelable {
             return false;
         }
         PhraseRecognitionEventSys that = (PhraseRecognitionEventSys) other;
-        if (Objects.deepEquals(this.phraseRecognitionEvent, that.phraseRecognitionEvent) && Objects.deepEquals(Long.valueOf(this.halEventReceivedMillis), Long.valueOf(that.halEventReceivedMillis)) && Objects.deepEquals(this.token, that.token)) {
+        if (Objects.deepEquals(this.phraseRecognitionEvent, that.phraseRecognitionEvent)
+                && Objects.deepEquals(
+                        Long.valueOf(this.halEventReceivedMillis),
+                        Long.valueOf(that.halEventReceivedMillis))
+                && Objects.deepEquals(this.token, that.token)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(this.phraseRecognitionEvent, Long.valueOf(this.halEventReceivedMillis), this.token).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(
+                                this.phraseRecognitionEvent,
+                                Long.valueOf(this.halEventReceivedMillis),
+                                this.token)
+                        .toArray());
     }
 
     @Override // android.os.Parcelable

@@ -6,12 +6,13 @@ import android.content.pm.IPackageDataObserver;
 import android.os.RemoteException;
 import android.util.Log;
 import android.util.Slog;
-import com.android.server.pm.PackageManagerService;
+
 import java.io.IOException;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class PackageManagerService$IPackageManagerImpl$$ExternalSyntheticLambda10 implements Runnable {
+public final /* synthetic */
+class PackageManagerService$IPackageManagerImpl$$ExternalSyntheticLambda10 implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ PackageManagerService.IPackageManagerImpl f$0;
     public final /* synthetic */ String f$1;
@@ -19,7 +20,13 @@ public final /* synthetic */ class PackageManagerService$IPackageManagerImpl$$Ex
     public final /* synthetic */ int f$3;
     public final /* synthetic */ Object f$4;
 
-    public /* synthetic */ PackageManagerService$IPackageManagerImpl$$ExternalSyntheticLambda10(PackageManagerService.IPackageManagerImpl iPackageManagerImpl, String str, long j, int i, Object obj, int i2) {
+    public /* synthetic */ PackageManagerService$IPackageManagerImpl$$ExternalSyntheticLambda10(
+            PackageManagerService.IPackageManagerImpl iPackageManagerImpl,
+            String str,
+            long j,
+            int i,
+            Object obj,
+            int i2) {
         this.$r8$classId = i2;
         this.f$0 = iPackageManagerImpl;
         this.f$1 = str;
@@ -49,7 +56,13 @@ public final /* synthetic */ class PackageManagerService$IPackageManagerImpl$$Ex
                 }
                 if (iPackageDataObserver != null) {
                     try {
-                        Log.d("PackageManager", "result of freeStorageAndNotify: " + z + "{" + iPackageDataObserver.hashCode() + "}");
+                        Log.d(
+                                "PackageManager",
+                                "result of freeStorageAndNotify: "
+                                        + z
+                                        + "{"
+                                        + iPackageDataObserver.hashCode()
+                                        + "}");
                         iPackageDataObserver.onRemoveCompleted((String) null, z);
                         break;
                     } catch (RemoteException e2) {
@@ -76,7 +89,8 @@ public final /* synthetic */ class PackageManagerService$IPackageManagerImpl$$Ex
                     try {
                         BroadcastOptions makeBasic = BroadcastOptions.makeBasic();
                         makeBasic.setPendingIntentBackgroundActivityLaunchAllowed(false);
-                        intentSender.sendIntent(null, i, null, null, null, null, makeBasic.toBundle());
+                        intentSender.sendIntent(
+                                null, i, null, null, null, null, makeBasic.toBundle());
                         break;
                     } catch (IntentSender.SendIntentException e4) {
                         Slog.w("PackageManager", e4);

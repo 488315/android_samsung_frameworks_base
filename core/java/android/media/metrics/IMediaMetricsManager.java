@@ -23,24 +23,30 @@ public interface IMediaMetricsManager extends IInterface {
 
     void releaseSessionId(String str, int i) throws RemoteException;
 
-    void reportBundleMetrics(String str, PersistableBundle persistableBundle, int i) throws RemoteException;
+    void reportBundleMetrics(String str, PersistableBundle persistableBundle, int i)
+            throws RemoteException;
 
-    void reportEditingEndedEvent(String str, EditingEndedEvent editingEndedEvent, int i) throws RemoteException;
+    void reportEditingEndedEvent(String str, EditingEndedEvent editingEndedEvent, int i)
+            throws RemoteException;
 
     void reportNetworkEvent(String str, NetworkEvent networkEvent, int i) throws RemoteException;
 
-    void reportPlaybackErrorEvent(String str, PlaybackErrorEvent playbackErrorEvent, int i) throws RemoteException;
+    void reportPlaybackErrorEvent(String str, PlaybackErrorEvent playbackErrorEvent, int i)
+            throws RemoteException;
 
-    void reportPlaybackMetrics(String str, PlaybackMetrics playbackMetrics, int i) throws RemoteException;
+    void reportPlaybackMetrics(String str, PlaybackMetrics playbackMetrics, int i)
+            throws RemoteException;
 
-    void reportPlaybackStateEvent(String str, PlaybackStateEvent playbackStateEvent, int i) throws RemoteException;
+    void reportPlaybackStateEvent(String str, PlaybackStateEvent playbackStateEvent, int i)
+            throws RemoteException;
 
-    void reportTrackChangeEvent(String str, TrackChangeEvent trackChangeEvent, int i) throws RemoteException;
+    void reportTrackChangeEvent(String str, TrackChangeEvent trackChangeEvent, int i)
+            throws RemoteException;
 
     public static class Default implements IMediaMetricsManager {
         @Override // android.media.metrics.IMediaMetricsManager
-        public void reportPlaybackMetrics(String sessionId, PlaybackMetrics metrics, int userId) throws RemoteException {
-        }
+        public void reportPlaybackMetrics(String sessionId, PlaybackMetrics metrics, int userId)
+                throws RemoteException {}
 
         @Override // android.media.metrics.IMediaMetricsManager
         public String getPlaybackSessionId(int userId) throws RemoteException {
@@ -53,24 +59,24 @@ public interface IMediaMetricsManager extends IInterface {
         }
 
         @Override // android.media.metrics.IMediaMetricsManager
-        public void reportNetworkEvent(String sessionId, NetworkEvent event, int userId) throws RemoteException {
-        }
+        public void reportNetworkEvent(String sessionId, NetworkEvent event, int userId)
+                throws RemoteException {}
 
         @Override // android.media.metrics.IMediaMetricsManager
-        public void reportPlaybackErrorEvent(String sessionId, PlaybackErrorEvent event, int userId) throws RemoteException {
-        }
+        public void reportPlaybackErrorEvent(String sessionId, PlaybackErrorEvent event, int userId)
+                throws RemoteException {}
 
         @Override // android.media.metrics.IMediaMetricsManager
-        public void reportPlaybackStateEvent(String sessionId, PlaybackStateEvent event, int userId) throws RemoteException {
-        }
+        public void reportPlaybackStateEvent(String sessionId, PlaybackStateEvent event, int userId)
+                throws RemoteException {}
 
         @Override // android.media.metrics.IMediaMetricsManager
-        public void reportTrackChangeEvent(String sessionId, TrackChangeEvent event, int userId) throws RemoteException {
-        }
+        public void reportTrackChangeEvent(String sessionId, TrackChangeEvent event, int userId)
+                throws RemoteException {}
 
         @Override // android.media.metrics.IMediaMetricsManager
-        public void reportEditingEndedEvent(String sessionId, EditingEndedEvent event, int userId) throws RemoteException {
-        }
+        public void reportEditingEndedEvent(String sessionId, EditingEndedEvent event, int userId)
+                throws RemoteException {}
 
         @Override // android.media.metrics.IMediaMetricsManager
         public String getTranscodingSessionId(int userId) throws RemoteException {
@@ -88,12 +94,11 @@ public interface IMediaMetricsManager extends IInterface {
         }
 
         @Override // android.media.metrics.IMediaMetricsManager
-        public void reportBundleMetrics(String sessionId, PersistableBundle metrics, int userId) throws RemoteException {
-        }
+        public void reportBundleMetrics(String sessionId, PersistableBundle metrics, int userId)
+                throws RemoteException {}
 
         @Override // android.media.metrics.IMediaMetricsManager
-        public void releaseSessionId(String sessionId, int userId) throws RemoteException {
-        }
+        public void releaseSessionId(String sessionId, int userId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -101,7 +106,7 @@ public interface IMediaMetricsManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMediaMetricsManager {
+    public abstract static class Stub extends Binder implements IMediaMetricsManager {
         static final int TRANSACTION_getBundleSessionId = 11;
         static final int TRANSACTION_getEditingSessionId = 10;
         static final int TRANSACTION_getPlaybackSessionId = 2;
@@ -175,7 +180,8 @@ public interface IMediaMetricsManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IMediaMetricsManager.DESCRIPTOR);
             }
@@ -186,7 +192,8 @@ public interface IMediaMetricsManager extends IInterface {
             switch (code) {
                 case 1:
                     String _arg0 = data.readString();
-                    PlaybackMetrics _arg1 = (PlaybackMetrics) data.readTypedObject(PlaybackMetrics.CREATOR);
+                    PlaybackMetrics _arg1 =
+                            (PlaybackMetrics) data.readTypedObject(PlaybackMetrics.CREATOR);
                     int _arg2 = data.readInt();
                     data.enforceNoDataAvail();
                     reportPlaybackMetrics(_arg0, _arg1, _arg2);
@@ -216,7 +223,8 @@ public interface IMediaMetricsManager extends IInterface {
                     return true;
                 case 5:
                     String _arg05 = data.readString();
-                    PlaybackErrorEvent _arg13 = (PlaybackErrorEvent) data.readTypedObject(PlaybackErrorEvent.CREATOR);
+                    PlaybackErrorEvent _arg13 =
+                            (PlaybackErrorEvent) data.readTypedObject(PlaybackErrorEvent.CREATOR);
                     int _arg23 = data.readInt();
                     data.enforceNoDataAvail();
                     reportPlaybackErrorEvent(_arg05, _arg13, _arg23);
@@ -224,7 +232,8 @@ public interface IMediaMetricsManager extends IInterface {
                     return true;
                 case 6:
                     String _arg06 = data.readString();
-                    PlaybackStateEvent _arg14 = (PlaybackStateEvent) data.readTypedObject(PlaybackStateEvent.CREATOR);
+                    PlaybackStateEvent _arg14 =
+                            (PlaybackStateEvent) data.readTypedObject(PlaybackStateEvent.CREATOR);
                     int _arg24 = data.readInt();
                     data.enforceNoDataAvail();
                     reportPlaybackStateEvent(_arg06, _arg14, _arg24);
@@ -232,7 +241,8 @@ public interface IMediaMetricsManager extends IInterface {
                     return true;
                 case 7:
                     String _arg07 = data.readString();
-                    TrackChangeEvent _arg15 = (TrackChangeEvent) data.readTypedObject(TrackChangeEvent.CREATOR);
+                    TrackChangeEvent _arg15 =
+                            (TrackChangeEvent) data.readTypedObject(TrackChangeEvent.CREATOR);
                     int _arg25 = data.readInt();
                     data.enforceNoDataAvail();
                     reportTrackChangeEvent(_arg07, _arg15, _arg25);
@@ -240,7 +250,8 @@ public interface IMediaMetricsManager extends IInterface {
                     return true;
                 case 8:
                     String _arg08 = data.readString();
-                    EditingEndedEvent _arg16 = (EditingEndedEvent) data.readTypedObject(EditingEndedEvent.CREATOR);
+                    EditingEndedEvent _arg16 =
+                            (EditingEndedEvent) data.readTypedObject(EditingEndedEvent.CREATOR);
                     int _arg26 = data.readInt();
                     data.enforceNoDataAvail();
                     reportEditingEndedEvent(_arg08, _arg16, _arg26);
@@ -269,7 +280,8 @@ public interface IMediaMetricsManager extends IInterface {
                     return true;
                 case 12:
                     String _arg012 = data.readString();
-                    PersistableBundle _arg17 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _arg17 =
+                            (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
                     int _arg27 = data.readInt();
                     data.enforceNoDataAvail();
                     reportBundleMetrics(_arg012, _arg17, _arg27);
@@ -304,7 +316,8 @@ public interface IMediaMetricsManager extends IInterface {
             }
 
             @Override // android.media.metrics.IMediaMetricsManager
-            public void reportPlaybackMetrics(String sessionId, PlaybackMetrics metrics, int userId) throws RemoteException {
+            public void reportPlaybackMetrics(String sessionId, PlaybackMetrics metrics, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -355,7 +368,8 @@ public interface IMediaMetricsManager extends IInterface {
             }
 
             @Override // android.media.metrics.IMediaMetricsManager
-            public void reportNetworkEvent(String sessionId, NetworkEvent event, int userId) throws RemoteException {
+            public void reportNetworkEvent(String sessionId, NetworkEvent event, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -372,7 +386,8 @@ public interface IMediaMetricsManager extends IInterface {
             }
 
             @Override // android.media.metrics.IMediaMetricsManager
-            public void reportPlaybackErrorEvent(String sessionId, PlaybackErrorEvent event, int userId) throws RemoteException {
+            public void reportPlaybackErrorEvent(
+                    String sessionId, PlaybackErrorEvent event, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -389,7 +404,8 @@ public interface IMediaMetricsManager extends IInterface {
             }
 
             @Override // android.media.metrics.IMediaMetricsManager
-            public void reportPlaybackStateEvent(String sessionId, PlaybackStateEvent event, int userId) throws RemoteException {
+            public void reportPlaybackStateEvent(
+                    String sessionId, PlaybackStateEvent event, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -406,7 +422,8 @@ public interface IMediaMetricsManager extends IInterface {
             }
 
             @Override // android.media.metrics.IMediaMetricsManager
-            public void reportTrackChangeEvent(String sessionId, TrackChangeEvent event, int userId) throws RemoteException {
+            public void reportTrackChangeEvent(String sessionId, TrackChangeEvent event, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -423,7 +440,8 @@ public interface IMediaMetricsManager extends IInterface {
             }
 
             @Override // android.media.metrics.IMediaMetricsManager
-            public void reportEditingEndedEvent(String sessionId, EditingEndedEvent event, int userId) throws RemoteException {
+            public void reportEditingEndedEvent(
+                    String sessionId, EditingEndedEvent event, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -491,7 +509,8 @@ public interface IMediaMetricsManager extends IInterface {
             }
 
             @Override // android.media.metrics.IMediaMetricsManager
-            public void reportBundleMetrics(String sessionId, PersistableBundle metrics, int userId) throws RemoteException {
+            public void reportBundleMetrics(String sessionId, PersistableBundle metrics, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

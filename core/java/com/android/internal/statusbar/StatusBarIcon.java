@@ -8,19 +8,21 @@ import android.text.TextUtils;
 
 /* loaded from: classes5.dex */
 public class StatusBarIcon implements Parcelable {
-    public static final Parcelable.Creator<StatusBarIcon> CREATOR = new Parcelable.Creator<StatusBarIcon>() { // from class: com.android.internal.statusbar.StatusBarIcon.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StatusBarIcon createFromParcel(Parcel parcel) {
-            return new StatusBarIcon(parcel);
-        }
+    public static final Parcelable.Creator<StatusBarIcon> CREATOR =
+            new Parcelable.Creator<
+                    StatusBarIcon>() { // from class: com.android.internal.statusbar.StatusBarIcon.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StatusBarIcon createFromParcel(Parcel parcel) {
+                    return new StatusBarIcon(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public StatusBarIcon[] newArray(int size) {
-            return new StatusBarIcon[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public StatusBarIcon[] newArray(int size) {
+                    return new StatusBarIcon[size];
+                }
+            };
     public CharSequence contentDescription;
     public Icon icon;
     public int iconLevel;
@@ -37,7 +39,14 @@ public class StatusBarIcon implements Parcelable {
         SystemIcon
     }
 
-    public StatusBarIcon(UserHandle user, String resPackage, Icon icon, int iconLevel, int number, CharSequence contentDescription, Type type) {
+    public StatusBarIcon(
+            UserHandle user,
+            String resPackage,
+            Icon icon,
+            int iconLevel,
+            int number,
+            CharSequence contentDescription,
+            Type type) {
         this.visible = true;
         if (icon.getType() == 2 && TextUtils.isEmpty(icon.getResPackage())) {
             icon = Icon.createWithResource(resPackage, icon.getResId());
@@ -51,17 +60,46 @@ public class StatusBarIcon implements Parcelable {
         this.type = type;
     }
 
-    public StatusBarIcon(String iconPackage, UserHandle user, int iconId, int iconLevel, int number, CharSequence contentDescription, Type type) {
-        this(user, iconPackage, Icon.createWithResource(iconPackage, iconId), iconLevel, number, contentDescription, type);
+    public StatusBarIcon(
+            String iconPackage,
+            UserHandle user,
+            int iconId,
+            int iconLevel,
+            int number,
+            CharSequence contentDescription,
+            Type type) {
+        this(
+                user,
+                iconPackage,
+                Icon.createWithResource(iconPackage, iconId),
+                iconLevel,
+                number,
+                contentDescription,
+                type);
     }
 
     public String toString() {
-        return "StatusBarIcon(icon=" + this.icon + (this.iconLevel != 0 ? " level=" + this.iconLevel : "") + (this.visible ? " visible" : "") + " user=" + this.user.getIdentifier() + (this.number != 0 ? " num=" + this.number : "") + " )";
+        return "StatusBarIcon(icon="
+                + this.icon
+                + (this.iconLevel != 0 ? " level=" + this.iconLevel : "")
+                + (this.visible ? " visible" : "")
+                + " user="
+                + this.user.getIdentifier()
+                + (this.number != 0 ? " num=" + this.number : "")
+                + " )";
     }
 
     /* renamed from: clone, reason: merged with bridge method [inline-methods] */
     public StatusBarIcon m7925clone() {
-        StatusBarIcon that = new StatusBarIcon(this.user, this.pkg, this.icon, this.iconLevel, this.number, this.contentDescription, this.type);
+        StatusBarIcon that =
+                new StatusBarIcon(
+                        this.user,
+                        this.pkg,
+                        this.icon,
+                        this.iconLevel,
+                        this.number,
+                        this.contentDescription,
+                        this.type);
         that.visible = this.visible;
         return that;
     }

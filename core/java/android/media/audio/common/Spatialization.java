@@ -3,26 +3,29 @@ package android.media.audio.common;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class Spatialization implements Parcelable {
-    public static final Parcelable.Creator<Spatialization> CREATOR = new Parcelable.Creator<Spatialization>() { // from class: android.media.audio.common.Spatialization.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Spatialization createFromParcel(Parcel _aidl_source) {
-            Spatialization _aidl_out = new Spatialization();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<Spatialization> CREATOR =
+            new Parcelable.Creator<
+                    Spatialization>() { // from class: android.media.audio.common.Spatialization.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Spatialization createFromParcel(Parcel _aidl_source) {
+                    Spatialization _aidl_out = new Spatialization();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Spatialization[] newArray(int _aidl_size) {
-            return new Spatialization[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Spatialization[] newArray(int _aidl_size) {
+                    return new Spatialization[_aidl_size];
+                }
+            };
 
     public @interface Level {
         public static final byte BED_PLUS_OBJECTS = 2;

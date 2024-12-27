@@ -3,6 +3,7 @@ package android.hardware.radio.V1_0;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -23,18 +24,45 @@ public final class CardStatus {
             return false;
         }
         CardStatus other = (CardStatus) otherObject;
-        if (this.cardState == other.cardState && this.universalPinState == other.universalPinState && this.gsmUmtsSubscriptionAppIndex == other.gsmUmtsSubscriptionAppIndex && this.cdmaSubscriptionAppIndex == other.cdmaSubscriptionAppIndex && this.imsSubscriptionAppIndex == other.imsSubscriptionAppIndex && HidlSupport.deepEquals(this.applications, other.applications)) {
+        if (this.cardState == other.cardState
+                && this.universalPinState == other.universalPinState
+                && this.gsmUmtsSubscriptionAppIndex == other.gsmUmtsSubscriptionAppIndex
+                && this.cdmaSubscriptionAppIndex == other.cdmaSubscriptionAppIndex
+                && this.imsSubscriptionAppIndex == other.imsSubscriptionAppIndex
+                && HidlSupport.deepEquals(this.applications, other.applications)) {
             return true;
         }
         return false;
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.cardState))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.universalPinState))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.gsmUmtsSubscriptionAppIndex))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.cdmaSubscriptionAppIndex))), Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.imsSubscriptionAppIndex))), Integer.valueOf(HidlSupport.deepHashCode(this.applications)));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.cardState))),
+                Integer.valueOf(HidlSupport.deepHashCode(Integer.valueOf(this.universalPinState))),
+                Integer.valueOf(
+                        HidlSupport.deepHashCode(
+                                Integer.valueOf(this.gsmUmtsSubscriptionAppIndex))),
+                Integer.valueOf(
+                        HidlSupport.deepHashCode(Integer.valueOf(this.cdmaSubscriptionAppIndex))),
+                Integer.valueOf(
+                        HidlSupport.deepHashCode(Integer.valueOf(this.imsSubscriptionAppIndex))),
+                Integer.valueOf(HidlSupport.deepHashCode(this.applications)));
     }
 
     public final String toString() {
-        return "{.cardState = " + CardState.toString(this.cardState) + ", .universalPinState = " + PinState.toString(this.universalPinState) + ", .gsmUmtsSubscriptionAppIndex = " + this.gsmUmtsSubscriptionAppIndex + ", .cdmaSubscriptionAppIndex = " + this.cdmaSubscriptionAppIndex + ", .imsSubscriptionAppIndex = " + this.imsSubscriptionAppIndex + ", .applications = " + this.applications + "}";
+        return "{.cardState = "
+                + CardState.toString(this.cardState)
+                + ", .universalPinState = "
+                + PinState.toString(this.universalPinState)
+                + ", .gsmUmtsSubscriptionAppIndex = "
+                + this.gsmUmtsSubscriptionAppIndex
+                + ", .cdmaSubscriptionAppIndex = "
+                + this.cdmaSubscriptionAppIndex
+                + ", .imsSubscriptionAppIndex = "
+                + this.imsSubscriptionAppIndex
+                + ", .applications = "
+                + this.applications
+                + "}";
     }
 
     public final void readFromParcel(HwParcel parcel) {
@@ -46,7 +74,8 @@ public final class CardStatus {
         ArrayList<CardStatus> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 40, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 40, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             CardStatus _hidl_vec_element = new CardStatus();
@@ -56,14 +85,17 @@ public final class CardStatus {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.cardState = _hidl_blob.getInt32(_hidl_offset + 0);
         this.universalPinState = _hidl_blob.getInt32(_hidl_offset + 4);
         this.gsmUmtsSubscriptionAppIndex = _hidl_blob.getInt32(_hidl_offset + 8);
         this.cdmaSubscriptionAppIndex = _hidl_blob.getInt32(_hidl_offset + 12);
         this.imsSubscriptionAppIndex = _hidl_blob.getInt32(_hidl_offset + 16);
         int _hidl_vec_size = _hidl_blob.getInt32(_hidl_offset + 24 + 8);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 64, _hidl_blob.handle(), _hidl_offset + 24 + 0, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(
+                        _hidl_vec_size * 64, _hidl_blob.handle(), _hidl_offset + 24 + 0, true);
         this.applications.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             AppStatus _hidl_vec_element = new AppStatus();

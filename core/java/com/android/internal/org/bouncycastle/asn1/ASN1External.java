@@ -32,7 +32,9 @@ public abstract class ASN1External extends ASN1Primitive {
             throw new IllegalArgumentException("input vector too large");
         }
         if (!(enc instanceof ASN1TaggedObject)) {
-            throw new IllegalArgumentException("No tagged object found in vector. Structure doesn't seem to be of type External");
+            throw new IllegalArgumentException(
+                    "No tagged object found in vector. Structure doesn't seem to be of type"
+                        + " External");
         }
         ASN1TaggedObject obj = (ASN1TaggedObject) enc;
         setEncoding(obj.getTagNo());
@@ -46,11 +48,25 @@ public abstract class ASN1External extends ASN1Primitive {
         return v.get(index).toASN1Primitive();
     }
 
-    public ASN1External(ASN1ObjectIdentifier directReference, ASN1Integer indirectReference, ASN1Primitive dataValueDescriptor, DERTaggedObject externalData) {
-        this(directReference, indirectReference, dataValueDescriptor, externalData.getTagNo(), externalData.toASN1Primitive());
+    public ASN1External(
+            ASN1ObjectIdentifier directReference,
+            ASN1Integer indirectReference,
+            ASN1Primitive dataValueDescriptor,
+            DERTaggedObject externalData) {
+        this(
+                directReference,
+                indirectReference,
+                dataValueDescriptor,
+                externalData.getTagNo(),
+                externalData.toASN1Primitive());
     }
 
-    public ASN1External(ASN1ObjectIdentifier directReference, ASN1Integer indirectReference, ASN1Primitive dataValueDescriptor, int encoding, ASN1Primitive externalData) {
+    public ASN1External(
+            ASN1ObjectIdentifier directReference,
+            ASN1Integer indirectReference,
+            ASN1Primitive dataValueDescriptor,
+            int encoding,
+            ASN1Primitive externalData) {
         setDirectReference(directReference);
         setIndirectReference(indirectReference);
         setDataValueDescriptor(dataValueDescriptor);
@@ -60,15 +76,26 @@ public abstract class ASN1External extends ASN1Primitive {
 
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     ASN1Primitive toDERObject() {
-        return new DERExternal(this.directReference, this.indirectReference, this.dataValueDescriptor, this.encoding, this.externalContent);
+        return new DERExternal(
+                this.directReference,
+                this.indirectReference,
+                this.dataValueDescriptor,
+                this.encoding,
+                this.externalContent);
     }
 
     @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     ASN1Primitive toDLObject() {
-        return new DLExternal(this.directReference, this.indirectReference, this.dataValueDescriptor, this.encoding, this.externalContent);
+        return new DLExternal(
+                this.directReference,
+                this.indirectReference,
+                this.dataValueDescriptor,
+                this.encoding,
+                this.externalContent);
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive, com.android.internal.org.bouncycastle.asn1.ASN1Object
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Object
     public int hashCode() {
         int ret = 0;
         if (this.directReference != null) {
@@ -102,13 +129,20 @@ public abstract class ASN1External extends ASN1Primitive {
             return true;
         }
         ASN1External other = (ASN1External) o;
-        if (this.directReference != null && (other.directReference == null || !other.directReference.equals((ASN1Primitive) this.directReference))) {
+        if (this.directReference != null
+                && (other.directReference == null
+                        || !other.directReference.equals((ASN1Primitive) this.directReference))) {
             return false;
         }
-        if (this.indirectReference != null && (other.indirectReference == null || !other.indirectReference.equals((ASN1Primitive) this.indirectReference))) {
+        if (this.indirectReference != null
+                && (other.indirectReference == null
+                        || !other.indirectReference.equals(
+                                (ASN1Primitive) this.indirectReference))) {
             return false;
         }
-        if (this.dataValueDescriptor == null || (other.dataValueDescriptor != null && other.dataValueDescriptor.equals(this.dataValueDescriptor))) {
+        if (this.dataValueDescriptor == null
+                || (other.dataValueDescriptor != null
+                        && other.dataValueDescriptor.equals(this.dataValueDescriptor))) {
             return this.externalContent.equals(other.externalContent);
         }
         return false;

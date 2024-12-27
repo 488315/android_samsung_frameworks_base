@@ -4,8 +4,10 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.media.AudioSystem;
 import android.util.Log;
+
 import com.android.server.ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0;
 import com.android.server.desktopmode.DesktopModeSettings;
+
 import com.samsung.android.audio.Rune;
 import com.samsung.android.desktopmode.SemDesktopModeManager;
 import com.samsung.android.desktopmode.SemDesktopModeState;
@@ -16,27 +18,40 @@ import com.samsung.android.media.SemAudioSystem;
 public final class DesktopModeHelper {
     public static DesktopModeHelper sInstance;
     public final Context mContext;
-    public final AnonymousClass1 mDesktopModeListener = new SemDesktopModeManager.DesktopModeListener() { // from class: com.samsung.android.server.audio.DesktopModeHelper.1
-        public final void onDesktopModeStateChanged(SemDesktopModeState semDesktopModeState) {
-            int i = semDesktopModeState.enabled;
-            if (i == 1) {
-                return;
-            }
-            boolean z = i == 4;
-            boolean settingsAsUser = DesktopModeSettings.getSettingsAsUser(DesktopModeHelper.this.mResolver, "audio_output_to_display", false, DesktopModeSettings.sCurrentUserId);
-            Log.d("AS.DesktopModeHelper", "DEX enabled : " + z + ", isAudioOutputToDisplay : " + settingsAsUser);
-            if (z && settingsAsUser) {
-                z = !z;
-            }
-            DesktopModeHelper desktopModeHelper = DesktopModeHelper.this;
-            if (desktopModeHelper.mDexState != z) {
-                desktopModeHelper.mDexState = z;
-                desktopModeHelper.mIsDesktopMode = semDesktopModeState.getDisplayType() != 0;
-                DesktopModeHelper desktopModeHelper2 = DesktopModeHelper.this;
-                desktopModeHelper2.setDexPolicyParameter(desktopModeHelper2.mDexState ? "dex" : "none");
-            }
-        }
-    };
+    public final AnonymousClass1 mDesktopModeListener =
+            new SemDesktopModeManager
+                    .DesktopModeListener() { // from class:
+                                             // com.samsung.android.server.audio.DesktopModeHelper.1
+                public final void onDesktopModeStateChanged(
+                        SemDesktopModeState semDesktopModeState) {
+                    int i = semDesktopModeState.enabled;
+                    if (i == 1) {
+                        return;
+                    }
+                    boolean z = i == 4;
+                    boolean settingsAsUser =
+                            DesktopModeSettings.getSettingsAsUser(
+                                    DesktopModeHelper.this.mResolver,
+                                    "audio_output_to_display",
+                                    false,
+                                    DesktopModeSettings.sCurrentUserId);
+                    Log.d(
+                            "AS.DesktopModeHelper",
+                            "DEX enabled : " + z + ", isAudioOutputToDisplay : " + settingsAsUser);
+                    if (z && settingsAsUser) {
+                        z = !z;
+                    }
+                    DesktopModeHelper desktopModeHelper = DesktopModeHelper.this;
+                    if (desktopModeHelper.mDexState != z) {
+                        desktopModeHelper.mDexState = z;
+                        desktopModeHelper.mIsDesktopMode =
+                                semDesktopModeState.getDisplayType() != 0;
+                        DesktopModeHelper desktopModeHelper2 = DesktopModeHelper.this;
+                        desktopModeHelper2.setDexPolicyParameter(
+                                desktopModeHelper2.mDexState ? "dex" : "none");
+                    }
+                }
+            };
     public final SemDesktopModeManager mDesktopModeManager;
     public boolean mDexConnectedState;
     public boolean mDexPadConnectedState;
@@ -82,7 +97,8 @@ public final class DesktopModeHelper {
     public final void setDexParameter(String str, boolean z) {
         AudioSystem.setParameters("l_dex_key;type=" + str + ";connected=" + z);
         if (Rune.SEC_AUDIO_MIC_MODE_FOR_QUICK_PANEL_UI) {
-            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m("updateDexState to micModeManager : ", "AS.DesktopModeHelper", z);
+            ExtendedEthernetServiceImpl$1$$ExternalSyntheticOutline0.m(
+                    "updateDexState to micModeManager : ", "AS.DesktopModeHelper", z);
             MicModeManager.getInstance(this.mContext).updateState(4, z);
         }
     }

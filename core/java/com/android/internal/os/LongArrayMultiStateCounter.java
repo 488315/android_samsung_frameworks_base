@@ -3,12 +3,16 @@ package com.android.internal.os;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
+
 import dalvik.annotation.optimization.CriticalNative;
 import dalvik.annotation.optimization.FastNative;
+
+import libcore.util.NativeAllocationRegistry;
+
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicReference;
-import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes5.dex */
 public final class LongArrayMultiStateCounter implements Parcelable {
@@ -16,20 +20,24 @@ public final class LongArrayMultiStateCounter implements Parcelable {
     private final int mLength;
     final long mNativeObject;
     private final int mStateCount;
-    private static final AtomicReference<LongArrayContainer> sTmpArrayContainer = new AtomicReference<>();
-    public static final Parcelable.Creator<LongArrayMultiStateCounter> CREATOR = new Parcelable.Creator<LongArrayMultiStateCounter>() { // from class: com.android.internal.os.LongArrayMultiStateCounter.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LongArrayMultiStateCounter createFromParcel(Parcel in) {
-            return new LongArrayMultiStateCounter(in);
-        }
+    private static final AtomicReference<LongArrayContainer> sTmpArrayContainer =
+            new AtomicReference<>();
+    public static final Parcelable.Creator<LongArrayMultiStateCounter> CREATOR =
+            new Parcelable.Creator<
+                    LongArrayMultiStateCounter>() { // from class:
+                                                    // com.android.internal.os.LongArrayMultiStateCounter.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LongArrayMultiStateCounter createFromParcel(Parcel in) {
+                    return new LongArrayMultiStateCounter(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LongArrayMultiStateCounter[] newArray(int size) {
-            return new LongArrayMultiStateCounter[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LongArrayMultiStateCounter[] newArray(int size) {
+                    return new LongArrayMultiStateCounter[size];
+                }
+            };
 
     @CriticalNative
     private static native void native_addCounts(long j, long j2);
@@ -109,33 +117,38 @@ public final class LongArrayMultiStateCounter implements Parcelable {
             if (sRegistry == null) {
                 synchronized (LongArrayMultiStateCounter.class) {
                     if (sRegistry == null) {
-                        sRegistry = NativeAllocationRegistry.createMalloced(LongArrayContainer.class.getClassLoader(), native_getReleaseFunc());
+                        sRegistry =
+                                NativeAllocationRegistry.createMalloced(
+                                        LongArrayContainer.class.getClassLoader(),
+                                        native_getReleaseFunc());
                     }
                 }
             }
             sRegistry.registerNativeAllocation(this, this.mNativeObject);
         }
 
-        private void registerNativeAllocation$ravenwood() {
-        }
+        private void registerNativeAllocation$ravenwood() {}
 
         public void setValues(long[] array) {
             if (array.length != this.mLength) {
-                throw new IllegalArgumentException("Invalid array length: " + array.length + ", expected: " + this.mLength);
+                throw new IllegalArgumentException(
+                        "Invalid array length: " + array.length + ", expected: " + this.mLength);
             }
             native_setValues(this.mNativeObject, array);
         }
 
         public void getValues(long[] array) {
             if (array.length != this.mLength) {
-                throw new IllegalArgumentException("Invalid array length: " + array.length + ", expected: " + this.mLength);
+                throw new IllegalArgumentException(
+                        "Invalid array length: " + array.length + ", expected: " + this.mLength);
             }
             native_getValues(this.mNativeObject, array);
         }
 
         public boolean combineValues(long[] array, int[] indexMap) {
             if (indexMap.length != this.mLength) {
-                throw new IllegalArgumentException("Wrong index map size " + indexMap.length + ", expected " + this.mLength);
+                throw new IllegalArgumentException(
+                        "Wrong index map size " + indexMap.length + ", expected " + this.mLength);
             }
             return native_combineValues(this.mNativeObject, array, indexMap);
         }
@@ -159,15 +172,17 @@ public final class LongArrayMultiStateCounter implements Parcelable {
         if (sRegistry == null) {
             synchronized (LongArrayMultiStateCounter.class) {
                 if (sRegistry == null) {
-                    sRegistry = NativeAllocationRegistry.createMalloced(LongArrayMultiStateCounter.class.getClassLoader(), native_getReleaseFunc());
+                    sRegistry =
+                            NativeAllocationRegistry.createMalloced(
+                                    LongArrayMultiStateCounter.class.getClassLoader(),
+                                    native_getReleaseFunc());
                 }
             }
         }
         sRegistry.registerNativeAllocation(this, this.mNativeObject);
     }
 
-    private void registerNativeAllocation$ravenwood() {
-    }
+    private void registerNativeAllocation$ravenwood() {}
 
     private LongArrayMultiStateCounter(Parcel in) {
         this.mNativeObject = native_initFromParcel(in);
@@ -190,24 +205,39 @@ public final class LongArrayMultiStateCounter implements Parcelable {
 
     public void setState(int state, long timestampMs) {
         if (state < 0 || state >= this.mStateCount) {
-            throw new IllegalArgumentException("State: " + state + ", outside the range: [0-" + (this.mStateCount - 1) + NavigationBarInflaterView.SIZE_MOD_END);
+            throw new IllegalArgumentException(
+                    "State: "
+                            + state
+                            + ", outside the range: [0-"
+                            + (this.mStateCount - 1)
+                            + NavigationBarInflaterView.SIZE_MOD_END);
         }
         native_setState(this.mNativeObject, state, timestampMs);
     }
 
     public void copyStatesFrom(LongArrayMultiStateCounter counter) {
         if (this.mStateCount != counter.mStateCount) {
-            throw new IllegalArgumentException("State count is not the same: " + this.mStateCount + " vs. " + counter.mStateCount);
+            throw new IllegalArgumentException(
+                    "State count is not the same: "
+                            + this.mStateCount
+                            + " vs. "
+                            + counter.mStateCount);
         }
         native_copyStatesFrom(this.mNativeObject, counter.mNativeObject);
     }
 
     public void setValues(int state, long[] values) {
         if (state < 0 || state >= this.mStateCount) {
-            throw new IllegalArgumentException("State: " + state + ", outside the range: [0-" + (this.mStateCount - 1) + NavigationBarInflaterView.SIZE_MOD_END);
+            throw new IllegalArgumentException(
+                    "State: "
+                            + state
+                            + ", outside the range: [0-"
+                            + (this.mStateCount - 1)
+                            + NavigationBarInflaterView.SIZE_MOD_END);
         }
         if (values.length != this.mLength) {
-            throw new IllegalArgumentException("Invalid array length: " + values.length + ", expected: " + this.mLength);
+            throw new IllegalArgumentException(
+                    "Invalid array length: " + values.length + ", expected: " + this.mLength);
         }
         LongArrayContainer container = sTmpArrayContainer.getAndSet(null);
         if (container == null || container.mLength != values.length) {
@@ -240,14 +270,19 @@ public final class LongArrayMultiStateCounter implements Parcelable {
 
     public void updateValues(LongArrayContainer longArrayContainer, long timestampMs) {
         if (longArrayContainer.mLength != this.mLength) {
-            throw new IllegalArgumentException("Invalid array length: " + longArrayContainer.mLength + ", expected: " + this.mLength);
+            throw new IllegalArgumentException(
+                    "Invalid array length: "
+                            + longArrayContainer.mLength
+                            + ", expected: "
+                            + this.mLength);
         }
         native_updateValues(this.mNativeObject, longArrayContainer.mNativeObject, timestampMs);
     }
 
     public void addCounts(LongArrayContainer counts) {
         if (counts.mLength != this.mLength) {
-            throw new IllegalArgumentException("Invalid array length: " + counts.mLength + ", expected: " + this.mLength);
+            throw new IllegalArgumentException(
+                    "Invalid array length: " + counts.mLength + ", expected: " + this.mLength);
         }
         native_addCounts(this.mNativeObject, counts.mNativeObject);
     }
@@ -268,10 +303,19 @@ public final class LongArrayMultiStateCounter implements Parcelable {
 
     public void getCounts(LongArrayContainer longArrayContainer, int state) {
         if (state < 0 || state >= this.mStateCount) {
-            throw new IllegalArgumentException("State: " + state + ", outside the range: [0-" + this.mStateCount + NavigationBarInflaterView.SIZE_MOD_END);
+            throw new IllegalArgumentException(
+                    "State: "
+                            + state
+                            + ", outside the range: [0-"
+                            + this.mStateCount
+                            + NavigationBarInflaterView.SIZE_MOD_END);
         }
         if (longArrayContainer.mLength != this.mLength) {
-            throw new IllegalArgumentException("Invalid array length: " + longArrayContainer.mLength + ", expected: " + this.mLength);
+            throw new IllegalArgumentException(
+                    "Invalid array length: "
+                            + longArrayContainer.mLength
+                            + ", expected: "
+                            + this.mLength);
         }
         native_getCounts(this.mNativeObject, longArrayContainer.mNativeObject, state);
     }

@@ -12,10 +12,12 @@ import android.util.ArrayMap;
 import android.util.Slog;
 import android.view.autofill.AutofillId;
 import android.widget.RemoteViews;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.BrailleDisplayConnection$$ExternalSyntheticOutline0;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -30,7 +32,8 @@ public abstract class Helper {
     public static Boolean sFullScreenMode;
     public static boolean sVerbose;
 
-    public static void addAutofillableIds(AssistStructure.ViewNode viewNode, ArrayList arrayList, boolean z) {
+    public static void addAutofillableIds(
+            AssistStructure.ViewNode viewNode, ArrayList arrayList, boolean z) {
         if (!z || viewNode.getAutofillType() != 0) {
             arrayList.add(viewNode.getAutofillId());
         }
@@ -48,7 +51,8 @@ public abstract class Helper {
         int length = sanitizerKeys.length;
         ArrayMap arrayMap = new ArrayMap(length);
         if (sDebug) {
-            DeviceIdleController$$ExternalSyntheticOutline0.m(length, "Service provided ", " sanitizers", "AutofillHelper");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    length, "Service provided ", " sanitizers", "AutofillHelper");
         }
         AutofillId[][] sanitizerValues = saveInfo.getSanitizerValues();
         for (int i = 0; i < length; i++) {
@@ -60,7 +64,8 @@ public abstract class Helper {
                 sb.append(" (");
                 sb.append(internalSanitizer);
                 sb.append(") for ids ");
-                BootReceiver$$ExternalSyntheticOutline0.m(sb, Arrays.toString(autofillIdArr), "AutofillHelper");
+                BootReceiver$$ExternalSyntheticOutline0.m(
+                        sb, Arrays.toString(autofillIdArr), "AutofillHelper");
             }
             for (AutofillId autofillId : autofillIdArr) {
                 arrayMap.put(autofillId, internalSanitizer);
@@ -69,7 +74,9 @@ public abstract class Helper {
         return arrayMap;
     }
 
-    public static AssistStructure.ViewNode findViewNode(AssistStructure assistStructure, Helper$$ExternalSyntheticLambda0 helper$$ExternalSyntheticLambda0) {
+    public static AssistStructure.ViewNode findViewNode(
+            AssistStructure assistStructure,
+            Helper$$ExternalSyntheticLambda0 helper$$ExternalSyntheticLambda0) {
         boolean equals;
         ArrayDeque arrayDeque = new ArrayDeque();
         int windowNodeCount = assistStructure.getWindowNodeCount();
@@ -80,10 +87,15 @@ public abstract class Helper {
             AssistStructure.ViewNode viewNode = (AssistStructure.ViewNode) arrayDeque.removeFirst();
             switch (helper$$ExternalSyntheticLambda0.$r8$classId) {
                 case 0:
-                    equals = ((AutofillId) helper$$ExternalSyntheticLambda0.f$0).equals(viewNode.getAutofillId());
+                    equals =
+                            ((AutofillId) helper$$ExternalSyntheticLambda0.f$0)
+                                    .equals(viewNode.getAutofillId());
                     break;
                 default:
-                    equals = ArrayUtils.contains((String[]) helper$$ExternalSyntheticLambda0.f$0, viewNode.getIdEntry());
+                    equals =
+                            ArrayUtils.contains(
+                                    (String[]) helper$$ExternalSyntheticLambda0.f$0,
+                                    viewNode.getIdEntry());
                     break;
             }
             if (equals) {
@@ -106,15 +118,18 @@ public abstract class Helper {
     }
 
     public static LogMaker newLogMaker(int i, int i2, String str, boolean z) {
-        LogMaker addTaggedData = new LogMaker(i).addTaggedData(908, str).addTaggedData(1456, Integer.toString(i2));
+        LogMaker addTaggedData =
+                new LogMaker(i).addTaggedData(908, str).addTaggedData(1456, Integer.toString(i2));
         if (z) {
             addTaggedData.addTaggedData(1414, 1);
         }
         return addTaggedData;
     }
 
-    public static LogMaker newLogMaker(int i, ComponentName componentName, String str, int i2, boolean z) {
-        return newLogMaker(i, i2, str, z).setComponentName(new ComponentName(componentName.getPackageName(), ""));
+    public static LogMaker newLogMaker(
+            int i, ComponentName componentName, String str, int i2, boolean z) {
+        return newLogMaker(i, i2, str, z)
+                .setComponentName(new ComponentName(componentName.getPackageName(), ""));
     }
 
     public static RemoteViews sanitizeRemoteView(RemoteViews remoteViews) {
@@ -123,17 +138,25 @@ public abstract class Helper {
         }
         final int currentUser = ActivityManager.getCurrentUser();
         final AtomicBoolean atomicBoolean = new AtomicBoolean(true);
-        remoteViews.visitUris(new Consumer() { // from class: com.android.server.autofill.Helper$$ExternalSyntheticLambda2
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                int i = currentUser;
-                AtomicBoolean atomicBoolean2 = atomicBoolean;
-                atomicBoolean2.set(ContentProvider.getUserIdFromUri((Uri) obj, i) == i && atomicBoolean2.get());
-            }
-        });
+        remoteViews.visitUris(
+                new Consumer() { // from class:
+                                 // com.android.server.autofill.Helper$$ExternalSyntheticLambda2
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        int i = currentUser;
+                        AtomicBoolean atomicBoolean2 = atomicBoolean;
+                        atomicBoolean2.set(
+                                ContentProvider.getUserIdFromUri((Uri) obj, i) == i
+                                        && atomicBoolean2.get());
+                    }
+                });
         boolean z = atomicBoolean.get();
         if (!z) {
-            BrailleDisplayConnection$$ExternalSyntheticOutline0.m(currentUser, "sanitizeRemoteView() user: ", " tried accessing resource that does not belong to them", "AutofillHelper");
+            BrailleDisplayConnection$$ExternalSyntheticOutline0.m(
+                    currentUser,
+                    "sanitizeRemoteView() user: ",
+                    " tried accessing resource that does not belong to them",
+                    "AutofillHelper");
         }
         if (z) {
             return remoteViews;
@@ -141,8 +164,10 @@ public abstract class Helper {
         return null;
     }
 
-    public static AssistStructure.ViewNode sanitizeUrlBar(AssistStructure assistStructure, String[] strArr) {
-        AssistStructure.ViewNode findViewNode = findViewNode(assistStructure, new Helper$$ExternalSyntheticLambda0(1, strArr));
+    public static AssistStructure.ViewNode sanitizeUrlBar(
+            AssistStructure assistStructure, String[] strArr) {
+        AssistStructure.ViewNode findViewNode =
+                findViewNode(assistStructure, new Helper$$ExternalSyntheticLambda0(1, strArr));
         if (findViewNode != null) {
             String charSequence = findViewNode.getText().toString();
             if (charSequence.isEmpty()) {
@@ -154,7 +179,12 @@ public abstract class Helper {
             }
             findViewNode.setWebDomain(charSequence);
             if (sDebug) {
-                Slog.d("AutofillHelper", "sanitizeUrlBar(): id=" + findViewNode.getIdEntry() + ", domain=" + findViewNode.getWebDomain());
+                Slog.d(
+                        "AutofillHelper",
+                        "sanitizeUrlBar(): id="
+                                + findViewNode.getIdEntry()
+                                + ", domain="
+                                + findViewNode.getWebDomain());
             }
         }
         return findViewNode;
@@ -163,7 +193,9 @@ public abstract class Helper {
     public static Object weakDeref(WeakReference weakReference, String str) {
         Object obj = weakReference.get();
         if (obj == null) {
-            Slog.wtf("AutofillRemoteFieldClassificationService", str + "fail to deref " + weakReference);
+            Slog.wtf(
+                    "AutofillRemoteFieldClassificationService",
+                    str + "fail to deref " + weakReference);
         }
         return obj;
     }

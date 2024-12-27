@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -17,16 +18,13 @@ public interface IMbmsDownloadSessionCallback extends IInterface {
 
     public static class Default implements IMbmsDownloadSessionCallback {
         @Override // android.telephony.mbms.IMbmsDownloadSessionCallback
-        public void onError(int errorCode, String message) throws RemoteException {
-        }
+        public void onError(int errorCode, String message) throws RemoteException {}
 
         @Override // android.telephony.mbms.IMbmsDownloadSessionCallback
-        public void onFileServicesUpdated(List<FileServiceInfo> services) throws RemoteException {
-        }
+        public void onFileServicesUpdated(List<FileServiceInfo> services) throws RemoteException {}
 
         @Override // android.telephony.mbms.IMbmsDownloadSessionCallback
-        public void onMiddlewareReady() throws RemoteException {
-        }
+        public void onMiddlewareReady() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -34,8 +32,9 @@ public interface IMbmsDownloadSessionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMbmsDownloadSessionCallback {
-        public static final String DESCRIPTOR = "android.telephony.mbms.IMbmsDownloadSessionCallback";
+    public abstract static class Stub extends Binder implements IMbmsDownloadSessionCallback {
+        public static final String DESCRIPTOR =
+                "android.telephony.mbms.IMbmsDownloadSessionCallback";
         static final int TRANSACTION_onError = 1;
         static final int TRANSACTION_onFileServicesUpdated = 2;
         static final int TRANSACTION_onMiddlewareReady = 3;
@@ -79,7 +78,8 @@ public interface IMbmsDownloadSessionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -95,7 +95,8 @@ public interface IMbmsDownloadSessionCallback extends IInterface {
                     onError(_arg0, _arg1);
                     return true;
                 case 2:
-                    List<FileServiceInfo> _arg02 = data.createTypedArrayList(FileServiceInfo.CREATOR);
+                    List<FileServiceInfo> _arg02 =
+                            data.createTypedArrayList(FileServiceInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onFileServicesUpdated(_arg02);
                     return true;
@@ -137,7 +138,8 @@ public interface IMbmsDownloadSessionCallback extends IInterface {
             }
 
             @Override // android.telephony.mbms.IMbmsDownloadSessionCallback
-            public void onFileServicesUpdated(List<FileServiceInfo> services) throws RemoteException {
+            public void onFileServicesUpdated(List<FileServiceInfo> services)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

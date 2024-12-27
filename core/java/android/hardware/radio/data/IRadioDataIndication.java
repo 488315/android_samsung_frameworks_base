@@ -8,11 +8,13 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IRadioDataIndication extends IInterface {
-    public static final String DESCRIPTOR = "android$hardware$radio$data$IRadioDataIndication".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "android$hardware$radio$data$IRadioDataIndication".replace('$', '.');
     public static final String HASH = "cd8913a3f9d39f1cc0a5fcf9e90257be94ec38df";
     public static final int VERSION = 3;
 
-    void dataCallListChanged(int i, SetupDataCallResult[] setupDataCallResultArr) throws RemoteException;
+    void dataCallListChanged(int i, SetupDataCallResult[] setupDataCallResultArr)
+            throws RemoteException;
 
     String getInterfaceHash() throws RemoteException;
 
@@ -28,24 +30,22 @@ public interface IRadioDataIndication extends IInterface {
 
     public static class Default implements IRadioDataIndication {
         @Override // android.hardware.radio.data.IRadioDataIndication
-        public void dataCallListChanged(int type, SetupDataCallResult[] dcList) throws RemoteException {
-        }
+        public void dataCallListChanged(int type, SetupDataCallResult[] dcList)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioDataIndication
-        public void keepaliveStatus(int type, KeepaliveStatus status) throws RemoteException {
-        }
+        public void keepaliveStatus(int type, KeepaliveStatus status) throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioDataIndication
-        public void pcoData(int type, PcoDataInfo pco) throws RemoteException {
-        }
+        public void pcoData(int type, PcoDataInfo pco) throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioDataIndication
-        public void unthrottleApn(int type, DataProfileInfo dataProfileInfo) throws RemoteException {
-        }
+        public void unthrottleApn(int type, DataProfileInfo dataProfileInfo)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioDataIndication
-        public void slicingConfigChanged(int type, SlicingConfig slicingConfig) throws RemoteException {
-        }
+        public void slicingConfigChanged(int type, SlicingConfig slicingConfig)
+                throws RemoteException {}
 
         @Override // android.hardware.radio.data.IRadioDataIndication
         public int getInterfaceVersion() {
@@ -63,7 +63,7 @@ public interface IRadioDataIndication extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRadioDataIndication {
+    public abstract static class Stub extends Binder implements IRadioDataIndication {
         static final int TRANSACTION_dataCallListChanged = 1;
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
@@ -94,7 +94,8 @@ public interface IRadioDataIndication extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -116,13 +117,16 @@ public interface IRadioDataIndication extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    SetupDataCallResult[] _arg1 = (SetupDataCallResult[]) data.createTypedArray(SetupDataCallResult.CREATOR);
+                    SetupDataCallResult[] _arg1 =
+                            (SetupDataCallResult[])
+                                    data.createTypedArray(SetupDataCallResult.CREATOR);
                     data.enforceNoDataAvail();
                     dataCallListChanged(_arg0, _arg1);
                     return true;
                 case 2:
                     int _arg02 = data.readInt();
-                    KeepaliveStatus _arg12 = (KeepaliveStatus) data.readTypedObject(KeepaliveStatus.CREATOR);
+                    KeepaliveStatus _arg12 =
+                            (KeepaliveStatus) data.readTypedObject(KeepaliveStatus.CREATOR);
                     data.enforceNoDataAvail();
                     keepaliveStatus(_arg02, _arg12);
                     return true;
@@ -134,13 +138,15 @@ public interface IRadioDataIndication extends IInterface {
                     return true;
                 case 4:
                     int _arg04 = data.readInt();
-                    DataProfileInfo _arg14 = (DataProfileInfo) data.readTypedObject(DataProfileInfo.CREATOR);
+                    DataProfileInfo _arg14 =
+                            (DataProfileInfo) data.readTypedObject(DataProfileInfo.CREATOR);
                     data.enforceNoDataAvail();
                     unthrottleApn(_arg04, _arg14);
                     return true;
                 case 5:
                     int _arg05 = data.readInt();
-                    SlicingConfig _arg15 = (SlicingConfig) data.readTypedObject(SlicingConfig.CREATOR);
+                    SlicingConfig _arg15 =
+                            (SlicingConfig) data.readTypedObject(SlicingConfig.CREATOR);
                     data.enforceNoDataAvail();
                     slicingConfigChanged(_arg05, _arg15);
                     return true;
@@ -168,7 +174,8 @@ public interface IRadioDataIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.data.IRadioDataIndication
-            public void dataCallListChanged(int type, SetupDataCallResult[] dcList) throws RemoteException {
+            public void dataCallListChanged(int type, SetupDataCallResult[] dcList)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -216,7 +223,8 @@ public interface IRadioDataIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.data.IRadioDataIndication
-            public void unthrottleApn(int type, DataProfileInfo dataProfileInfo) throws RemoteException {
+            public void unthrottleApn(int type, DataProfileInfo dataProfileInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);
@@ -232,7 +240,8 @@ public interface IRadioDataIndication extends IInterface {
             }
 
             @Override // android.hardware.radio.data.IRadioDataIndication
-            public void slicingConfigChanged(int type, SlicingConfig slicingConfig) throws RemoteException {
+            public void slicingConfigChanged(int type, SlicingConfig slicingConfig)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(DESCRIPTOR);

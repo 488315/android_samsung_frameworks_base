@@ -32,9 +32,11 @@ import android.view.accessibility.AccessibilityEvent;
 import android.view.inspector.InspectionCompanion;
 import android.view.inspector.PropertyMapper;
 import android.view.inspector.PropertyReader;
-import android.widget.RemoteViews;
+
 import com.android.internal.R;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.io.IOException;
 
 @RemoteViews.RemoteView
@@ -78,10 +80,25 @@ public class ImageView extends View {
     private Uri mUri;
     private final int mViewAlphaScale;
     private Xfermode mXfermode;
-    private static final ScaleType[] sScaleTypeArray = {ScaleType.MATRIX, ScaleType.FIT_XY, ScaleType.FIT_START, ScaleType.FIT_CENTER, ScaleType.FIT_END, ScaleType.CENTER, ScaleType.CENTER_CROP, ScaleType.CENTER_INSIDE};
-    private static final Matrix.ScaleToFit[] sS2FArray = {Matrix.ScaleToFit.FILL, Matrix.ScaleToFit.START, Matrix.ScaleToFit.CENTER, Matrix.ScaleToFit.END};
+    private static final ScaleType[] sScaleTypeArray = {
+        ScaleType.MATRIX,
+        ScaleType.FIT_XY,
+        ScaleType.FIT_START,
+        ScaleType.FIT_CENTER,
+        ScaleType.FIT_END,
+        ScaleType.CENTER,
+        ScaleType.CENTER_CROP,
+        ScaleType.CENTER_INSIDE
+    };
+    private static final Matrix.ScaleToFit[] sS2FArray = {
+        Matrix.ScaleToFit.FILL,
+        Matrix.ScaleToFit.START,
+        Matrix.ScaleToFit.CENTER,
+        Matrix.ScaleToFit.END
+    };
 
-    public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<ImageView> {
+    public final class InspectionCompanion
+            implements android.view.inspector.InspectionCompanion<ImageView> {
         private int mAdjustViewBoundsId;
         private int mBaselineAlignBottomId;
         private int mBaselineId;
@@ -99,7 +116,8 @@ public class ImageView extends View {
         public void mapProperties(PropertyMapper propertyMapper) {
             this.mAdjustViewBoundsId = propertyMapper.mapBoolean("adjustViewBounds", 16843038);
             this.mBaselineId = propertyMapper.mapInt("baseline", 16843548);
-            this.mBaselineAlignBottomId = propertyMapper.mapBoolean("baselineAlignBottom", 16843042);
+            this.mBaselineAlignBottomId =
+                    propertyMapper.mapBoolean("baselineAlignBottom", 16843042);
             this.mBlendModeId = propertyMapper.mapObject("blendMode", 9);
             this.mCropToPaddingId = propertyMapper.mapBoolean("cropToPadding", 16843043);
             this.mMaxHeightId = propertyMapper.mapInt("maxHeight", 16843040);
@@ -198,8 +216,11 @@ public class ImageView extends View {
         this.mBaseline = -1;
         this.mBaselineAlignBottom = false;
         initImageView();
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ImageView, defStyleAttr, defStyleRes);
-        saveAttributeDataForStyleable(context, R.styleable.ImageView, attrs, a, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.ImageView, defStyleAttr, defStyleRes);
+        saveAttributeDataForStyleable(
+                context, R.styleable.ImageView, attrs, a, defStyleAttr, defStyleRes);
         Drawable d = a.getDrawable(0);
         if (d != null) {
             setImageDrawable(d);
@@ -220,7 +241,8 @@ public class ImageView extends View {
             this.mHasDrawableBlendMode = true;
         }
         if (a.hasValue(9)) {
-            this.mDrawableBlendMode = Drawable.parseBlendMode(a.getInt(9, -1), this.mDrawableBlendMode);
+            this.mDrawableBlendMode =
+                    Drawable.parseBlendMode(a.getInt(9, -1), this.mDrawableBlendMode);
             this.mHasDrawableBlendMode = true;
         }
         applyImageTint();
@@ -401,7 +423,9 @@ public class ImageView extends View {
     }
 
     public Runnable setImageURIAsync(Uri uri) {
-        if (this.mResource == 0 && (this.mUri == uri || (uri != null && this.mUri != null && uri.equals(this.mUri)))) {
+        if (this.mResource == 0
+                && (this.mUri == uri
+                        || (uri != null && this.mUri != null && uri.equals(this.mUri)))) {
             return null;
         }
         Drawable d = uri != null ? getDrawableFromUri(uri) : null;
@@ -431,7 +455,8 @@ public class ImageView extends View {
     }
 
     public Runnable setImageIconAsync(Icon icon) {
-        return new ImageDrawableCallback(icon == null ? null : icon.loadDrawable(this.mContext), null, 0);
+        return new ImageDrawableCallback(
+                icon == null ? null : icon.loadDrawable(this.mContext), null, 0);
     }
 
     @RemotableViewMethod
@@ -563,7 +588,8 @@ public class ImageView extends View {
         if (matrix != null && matrix.isIdentity()) {
             matrix = null;
         }
-        if ((matrix == null && !this.mMatrix.isIdentity()) || (matrix != null && !this.mMatrix.equals(matrix))) {
+        if ((matrix == null && !this.mMatrix.isIdentity())
+                || (matrix != null && !this.mMatrix.equals(matrix))) {
             this.mMatrix.set(matrix);
             configureBounds();
             invalidate();
@@ -610,7 +636,8 @@ public class ImageView extends View {
         String scheme = uri.getScheme();
         if (ContentResolver.SCHEME_ANDROID_RESOURCE.equals(scheme)) {
             try {
-                ContentResolver.OpenResourceIdResult r = this.mContext.getContentResolver().getResourceId(uri);
+                ContentResolver.OpenResourceIdResult r =
+                        this.mContext.getContentResolver().getResourceId(uri);
                 return r.r.getDrawable(r.id, this.mContext.getTheme());
             } catch (Exception e) {
                 Log.w(LOG_TAG, "Unable to open content: " + uri, e);
@@ -618,13 +645,21 @@ public class ImageView extends View {
         } else if ("content".equals(scheme) || "file".equals(scheme)) {
             try {
                 Resources res = sCompatUseCorrectStreamDensity ? getResources() : null;
-                ImageDecoder.Source src = ImageDecoder.createSource(this.mContext.getContentResolver(), uri, res);
-                return ImageDecoder.decodeDrawable(src, new ImageDecoder.OnHeaderDecodedListener() { // from class: android.widget.ImageView$$ExternalSyntheticLambda0
-                    @Override // android.graphics.ImageDecoder.OnHeaderDecodedListener
-                    public final void onHeaderDecoded(ImageDecoder imageDecoder, ImageDecoder.ImageInfo imageInfo, ImageDecoder.Source source) {
-                        imageDecoder.setAllocator(1);
-                    }
-                });
+                ImageDecoder.Source src =
+                        ImageDecoder.createSource(this.mContext.getContentResolver(), uri, res);
+                return ImageDecoder.decodeDrawable(
+                        src,
+                        new ImageDecoder
+                                .OnHeaderDecodedListener() { // from class:
+                                                             // android.widget.ImageView$$ExternalSyntheticLambda0
+                            @Override // android.graphics.ImageDecoder.OnHeaderDecodedListener
+                            public final void onHeaderDecoded(
+                                    ImageDecoder imageDecoder,
+                                    ImageDecoder.ImageInfo imageInfo,
+                                    ImageDecoder.Source source) {
+                                imageDecoder.setAllocator(1);
+                            }
+                        });
             } catch (IOException e2) {
                 Log.w(LOG_TAG, "Unable to open content: " + uri, e2);
             }
@@ -642,7 +677,8 @@ public class ImageView extends View {
         if (!this.mMergeState) {
             return this.mState;
         }
-        return mergeDrawableStates(super.onCreateDrawableState(this.mState.length + extraSpace), this.mState);
+        return mergeDrawableStates(
+                super.onCreateDrawableState(this.mState.length + extraSpace), this.mState);
     }
 
     private void updateDrawable(Drawable d) {
@@ -779,12 +815,16 @@ public class ImageView extends View {
                 if (Math.abs(actualAspect - desiredAspect) > 1.0E-7d) {
                     boolean done2 = false;
                     if (resizeWidth) {
-                        int newWidth = ((int) (((heightSize - ptop) - pbottom) * desiredAspect)) + pleft + pright;
+                        int newWidth =
+                                ((int) (((heightSize - ptop) - pbottom) * desiredAspect))
+                                        + pleft
+                                        + pright;
                         if (resizeHeight || sCompatAdjustViewBounds) {
                             done = false;
                         } else {
                             done = false;
-                            widthSize = resolveAdjustedSize(newWidth, this.mMaxWidth, widthMeasureSpec);
+                            widthSize =
+                                    resolveAdjustedSize(newWidth, this.mMaxWidth, widthMeasureSpec);
                         }
                         if (newWidth > widthSize) {
                             done2 = done;
@@ -794,9 +834,14 @@ public class ImageView extends View {
                         }
                     }
                     if (!done2 && resizeHeight) {
-                        int newHeight = ((int) (((widthSize - pleft) - pright) / desiredAspect)) + ptop + pbottom;
+                        int newHeight =
+                                ((int) (((widthSize - pleft) - pright) / desiredAspect))
+                                        + ptop
+                                        + pbottom;
                         if (!resizeWidth && !sCompatAdjustViewBounds) {
-                            heightSize = resolveAdjustedSize(newHeight, this.mMaxHeight, heightMeasureSpec);
+                            heightSize =
+                                    resolveAdjustedSize(
+                                            newHeight, this.mMaxHeight, heightMeasureSpec);
                         }
                         if (newHeight <= heightSize) {
                             heightSize = newHeight;
@@ -870,7 +915,8 @@ public class ImageView extends View {
         }
         if (ScaleType.CENTER == this.mScaleType) {
             this.mDrawMatrix = this.mMatrix;
-            this.mDrawMatrix.setTranslate(Math.round((vwidth - dwidth) * 0.5f), Math.round((vheight - dheight) * 0.5f));
+            this.mDrawMatrix.setTranslate(
+                    Math.round((vwidth - dwidth) * 0.5f), Math.round((vheight - dheight) * 0.5f));
             return;
         }
         if (ScaleType.CENTER_CROP == this.mScaleType) {
@@ -906,7 +952,8 @@ public class ImageView extends View {
         this.mTempSrc.set(0.0f, 0.0f, dwidth, dheight);
         this.mTempDst.set(0.0f, 0.0f, vwidth, vheight);
         this.mDrawMatrix = this.mMatrix;
-        this.mDrawMatrix.setRectToRect(this.mTempSrc, this.mTempDst, scaleTypeToScaleToFit(this.mScaleType));
+        this.mDrawMatrix.setRectToRect(
+                this.mTempSrc, this.mTempDst, scaleTypeToScaleToFit(this.mScaleType));
     }
 
     @Override // android.view.View
@@ -960,7 +1007,11 @@ public class ImageView extends View {
         if (this.mCropToPadding) {
             int scrollX = this.mScrollX;
             int scrollY = this.mScrollY;
-            canvas.clipRect(this.mPaddingLeft + scrollX, this.mPaddingTop + scrollY, ((this.mRight + scrollX) - this.mLeft) - this.mPaddingRight, ((this.mBottom + scrollY) - this.mTop) - this.mPaddingBottom);
+            canvas.clipRect(
+                    this.mPaddingLeft + scrollX,
+                    this.mPaddingTop + scrollY,
+                    ((this.mRight + scrollX) - this.mLeft) - this.mPaddingRight,
+                    ((this.mBottom + scrollY) - this.mTop) - this.mPaddingBottom);
         }
         canvas.translate(this.mPaddingLeft, this.mPaddingTop);
         if (this.mDrawMatrix != null) {
@@ -1076,7 +1127,12 @@ public class ImageView extends View {
 
     @Override // android.view.View
     public boolean isOpaque() {
-        return super.isOpaque() || (this.mDrawable != null && this.mXfermode == null && this.mDrawable.getOpacity() == -1 && ((this.mAlpha * 256) >> 8) == 255 && isFilledByImage());
+        return super.isOpaque()
+                || (this.mDrawable != null
+                        && this.mXfermode == null
+                        && this.mDrawable.getOpacity() == -1
+                        && ((this.mAlpha * 256) >> 8) == 255
+                        && isFilledByImage());
     }
 
     private boolean isFilledByImage() {
@@ -1086,7 +1142,10 @@ public class ImageView extends View {
         Rect bounds = this.mDrawable.getBounds();
         Matrix matrix = this.mDrawMatrix;
         if (matrix == null) {
-            return bounds.left <= 0 && bounds.top <= 0 && bounds.right >= getWidth() && bounds.bottom >= getHeight();
+            return bounds.left <= 0
+                    && bounds.top <= 0
+                    && bounds.right >= getWidth()
+                    && bounds.bottom >= getHeight();
         }
         if (!matrix.rectStaysRect()) {
             return false;
@@ -1095,7 +1154,10 @@ public class ImageView extends View {
         RectF boundsDst = this.mTempDst;
         boundsSrc.set(bounds);
         matrix.mapRect(boundsDst, boundsSrc);
-        return boundsDst.left <= 0.0f && boundsDst.top <= 0.0f && boundsDst.right >= ((float) getWidth()) && boundsDst.bottom >= ((float) getHeight());
+        return boundsDst.left <= 0.0f
+                && boundsDst.top <= 0.0f
+                && boundsDst.right >= ((float) getWidth())
+                && boundsDst.bottom >= ((float) getHeight());
     }
 
     @Override // android.view.View
@@ -1144,7 +1206,12 @@ public class ImageView extends View {
 
     @Override // android.view.View
     public boolean isDefaultFocusHighlightNeeded(Drawable background, Drawable foreground) {
-        boolean lackFocusState = (this.mDrawable != null && this.mDrawable.isStateful() && this.mDrawable.hasFocusStateSpecified()) ? false : true;
+        boolean lackFocusState =
+                (this.mDrawable != null
+                                && this.mDrawable.isStateful()
+                                && this.mDrawable.hasFocusStateSpecified())
+                        ? false
+                        : true;
         return super.isDefaultFocusHighlightNeeded(background, foreground) && lackFocusState;
     }
 

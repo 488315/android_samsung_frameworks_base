@@ -7,6 +7,7 @@ import com.android.internal.org.bouncycastle.math.ec.ECCurve;
 import com.android.internal.org.bouncycastle.math.ec.ECPoint;
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.BigIntegers;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
@@ -85,7 +86,8 @@ public class ECDomainParameters implements ECConstants {
 
     public int hashCode() {
         int hc = 4 * 257;
-        return ((((hc ^ this.curve.hashCode()) * 257) ^ this.G.hashCode()) * 257) ^ this.n.hashCode();
+        return ((((hc ^ this.curve.hashCode()) * 257) ^ this.G.hashCode()) * 257)
+                ^ this.n.hashCode();
     }
 
     public BigInteger validatePrivateScalar(BigInteger d) {

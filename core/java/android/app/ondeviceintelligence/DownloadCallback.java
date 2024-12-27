@@ -2,6 +2,7 @@ package android.app.ondeviceintelligence;
 
 import android.annotation.SystemApi;
 import android.os.PersistableBundle;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -15,16 +16,13 @@ public interface DownloadCallback {
     public static final int DOWNLOAD_FAILURE_STATUS_UNKNOWN = 0;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DownloadFailureStatus {
-    }
+    public @interface DownloadFailureStatus {}
 
     void onDownloadCompleted(PersistableBundle persistableBundle);
 
     void onDownloadFailed(int i, String str, PersistableBundle persistableBundle);
 
-    default void onDownloadStarted(long bytesToDownload) {
-    }
+    default void onDownloadStarted(long bytesToDownload) {}
 
-    default void onDownloadProgress(long totalBytesDownloaded) {
-    }
+    default void onDownloadProgress(long totalBytesDownloaded) {}
 }

@@ -6,21 +6,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class TunerCiCamRequest implements Parcelable {
-    public static final Parcelable.Creator<TunerCiCamRequest> CREATOR = new Parcelable.Creator<TunerCiCamRequest>() { // from class: android.media.tv.tunerresourcemanager.TunerCiCamRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TunerCiCamRequest createFromParcel(Parcel _aidl_source) {
-            TunerCiCamRequest _aidl_out = new TunerCiCamRequest();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<TunerCiCamRequest> CREATOR =
+            new Parcelable.Creator<
+                    TunerCiCamRequest>() { // from class:
+                                           // android.media.tv.tunerresourcemanager.TunerCiCamRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TunerCiCamRequest createFromParcel(Parcel _aidl_source) {
+                    TunerCiCamRequest _aidl_out = new TunerCiCamRequest();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TunerCiCamRequest[] newArray(int _aidl_size) {
-            return new TunerCiCamRequest[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TunerCiCamRequest[] newArray(int _aidl_size) {
+                    return new TunerCiCamRequest[_aidl_size];
+                }
+            };
     public int clientId = 0;
     public int ciCamId = 0;
 

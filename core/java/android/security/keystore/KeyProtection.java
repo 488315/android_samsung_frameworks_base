@@ -32,13 +32,38 @@ public final class KeyProtection implements KeyStore.ProtectionParameter, UserAu
     private final boolean mUserConfirmationRequired;
     private final boolean mUserPresenceRequred;
 
-    private KeyProtection(Date keyValidityStart, Date keyValidityForOriginationEnd, Date keyValidityForConsumptionEnd, int purposes, String[] encryptionPaddings, String[] signaturePaddings, String[] digests, Set<String> mgf1Digests, String[] blockModes, boolean randomizedEncryptionRequired, boolean userAuthenticationRequired, int userAuthenticationType, int userAuthenticationValidityDurationSeconds, boolean userPresenceRequred, boolean userAuthenticationValidWhileOnBody, boolean invalidatedByBiometricEnrollment, long boundToSecureUserId, boolean criticalToDeviceEncryption, boolean userConfirmationRequired, boolean unlockedDeviceRequired, boolean isStrongBoxBacked, int maxUsageCount, boolean rollbackResistant) {
+    private KeyProtection(
+            Date keyValidityStart,
+            Date keyValidityForOriginationEnd,
+            Date keyValidityForConsumptionEnd,
+            int purposes,
+            String[] encryptionPaddings,
+            String[] signaturePaddings,
+            String[] digests,
+            Set<String> mgf1Digests,
+            String[] blockModes,
+            boolean randomizedEncryptionRequired,
+            boolean userAuthenticationRequired,
+            int userAuthenticationType,
+            int userAuthenticationValidityDurationSeconds,
+            boolean userPresenceRequred,
+            boolean userAuthenticationValidWhileOnBody,
+            boolean invalidatedByBiometricEnrollment,
+            long boundToSecureUserId,
+            boolean criticalToDeviceEncryption,
+            boolean userConfirmationRequired,
+            boolean unlockedDeviceRequired,
+            boolean isStrongBoxBacked,
+            int maxUsageCount,
+            boolean rollbackResistant) {
         this.mKeyValidityStart = Utils.cloneIfNotNull(keyValidityStart);
         this.mKeyValidityForOriginationEnd = Utils.cloneIfNotNull(keyValidityForOriginationEnd);
         this.mKeyValidityForConsumptionEnd = Utils.cloneIfNotNull(keyValidityForConsumptionEnd);
         this.mPurposes = purposes;
-        this.mEncryptionPaddings = ArrayUtils.cloneIfNotEmpty(ArrayUtils.nullToEmpty(encryptionPaddings));
-        this.mSignaturePaddings = ArrayUtils.cloneIfNotEmpty(ArrayUtils.nullToEmpty(signaturePaddings));
+        this.mEncryptionPaddings =
+                ArrayUtils.cloneIfNotEmpty(ArrayUtils.nullToEmpty(encryptionPaddings));
+        this.mSignaturePaddings =
+                ArrayUtils.cloneIfNotEmpty(ArrayUtils.nullToEmpty(signaturePaddings));
         this.mDigests = ArrayUtils.cloneIfNotEmpty(digests);
         this.mMgf1Digests = mgf1Digests;
         this.mBlockModes = ArrayUtils.cloneIfNotEmpty(ArrayUtils.nullToEmpty(blockModes));
@@ -333,7 +358,30 @@ public final class KeyProtection implements KeyStore.ProtectionParameter, UserAu
         }
 
         public KeyProtection build() {
-            return new KeyProtection(this.mKeyValidityStart, this.mKeyValidityForOriginationEnd, this.mKeyValidityForConsumptionEnd, this.mPurposes, this.mEncryptionPaddings, this.mSignaturePaddings, this.mDigests, this.mMgf1Digests, this.mBlockModes, this.mRandomizedEncryptionRequired, this.mUserAuthenticationRequired, this.mUserAuthenticationType, this.mUserAuthenticationValidityDurationSeconds, this.mUserPresenceRequired, this.mUserAuthenticationValidWhileOnBody, this.mInvalidatedByBiometricEnrollment, this.mBoundToSecureUserId, this.mCriticalToDeviceEncryption, this.mUserConfirmationRequired, this.mUnlockedDeviceRequired, this.mIsStrongBoxBacked, this.mMaxUsageCount, this.mRollbackResistant);
+            return new KeyProtection(
+                    this.mKeyValidityStart,
+                    this.mKeyValidityForOriginationEnd,
+                    this.mKeyValidityForConsumptionEnd,
+                    this.mPurposes,
+                    this.mEncryptionPaddings,
+                    this.mSignaturePaddings,
+                    this.mDigests,
+                    this.mMgf1Digests,
+                    this.mBlockModes,
+                    this.mRandomizedEncryptionRequired,
+                    this.mUserAuthenticationRequired,
+                    this.mUserAuthenticationType,
+                    this.mUserAuthenticationValidityDurationSeconds,
+                    this.mUserPresenceRequired,
+                    this.mUserAuthenticationValidWhileOnBody,
+                    this.mInvalidatedByBiometricEnrollment,
+                    this.mBoundToSecureUserId,
+                    this.mCriticalToDeviceEncryption,
+                    this.mUserConfirmationRequired,
+                    this.mUnlockedDeviceRequired,
+                    this.mIsStrongBoxBacked,
+                    this.mMaxUsageCount,
+                    this.mRollbackResistant);
         }
     }
 }

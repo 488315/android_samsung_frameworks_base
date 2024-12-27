@@ -15,7 +15,8 @@ public class KioskMode {
         try {
             IEDMProxy lService = EnterpriseDeviceManager.EDMProxyServiceHelper.getService();
             if (lService != null) {
-                return EnterpriseDeviceManager.EDMProxyServiceHelper.getService().isTaskManagerAllowed(showMsg);
+                return EnterpriseDeviceManager.EDMProxyServiceHelper.getService()
+                        .isTaskManagerAllowed(showMsg);
             }
             return true;
         } catch (Exception e) {

@@ -2,6 +2,7 @@ package com.android.server.trust;
 
 import android.content.ComponentName;
 import android.os.SystemClock;
+
 import java.util.ArrayDeque;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -20,7 +21,8 @@ public final class TrustArchive {
         public final int type;
         public final int userId;
 
-        public Event(int i, int i2, ComponentName componentName, String str, long j, int i3, boolean z) {
+        public Event(
+                int i, int i2, ComponentName componentName, String str, long j, int i3, boolean z) {
             this.type = i;
             this.userId = i2;
             this.agent = componentName;

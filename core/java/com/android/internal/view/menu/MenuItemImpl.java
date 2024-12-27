@@ -20,8 +20,8 @@ import android.view.ViewConfiguration;
 import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
 import com.android.internal.R;
-import com.android.internal.view.menu.MenuView;
 
 /* loaded from: classes5.dex */
 public final class MenuItemImpl implements MenuItem, SemMenuItem {
@@ -67,7 +67,14 @@ public final class MenuItemImpl implements MenuItem, SemMenuItem {
     private int mFlags = 16;
     private boolean mIsActionViewExpanded = false;
 
-    MenuItemImpl(MenuBuilder menu, int group, int id, int categoryOrder, int ordering, CharSequence title, int showAsAction) {
+    MenuItemImpl(
+            MenuBuilder menu,
+            int group,
+            int id,
+            int categoryOrder,
+            int ordering,
+            CharSequence title,
+            int showAsAction) {
         this.mShowAsAction = 0;
         this.mMenu = menu;
         this.mId = id;
@@ -79,7 +86,8 @@ public final class MenuItemImpl implements MenuItem, SemMenuItem {
     }
 
     public boolean invoke() {
-        if ((this.mClickListener != null && this.mClickListener.onMenuItemClick(this)) || this.mMenu.dispatchMenuItemSelected(this.mMenu, this)) {
+        if ((this.mClickListener != null && this.mClickListener.onMenuItemClick(this))
+                || this.mMenu.dispatchMenuItemSelected(this.mMenu, this)) {
             return true;
         }
         if (this.mItemCallback != null) {
@@ -175,7 +183,8 @@ public final class MenuItemImpl implements MenuItem, SemMenuItem {
 
     @Override // android.view.MenuItem
     public MenuItem setAlphabeticShortcut(char alphaChar, int alphaModifiers) {
-        if (this.mShortcutAlphabeticChar == alphaChar && this.mShortcutAlphabeticModifiers == alphaModifiers) {
+        if (this.mShortcutAlphabeticChar == alphaChar
+                && this.mShortcutAlphabeticModifiers == alphaModifiers) {
             return this;
         }
         this.mShortcutAlphabeticChar = Character.toLowerCase(alphaChar);
@@ -206,7 +215,8 @@ public final class MenuItemImpl implements MenuItem, SemMenuItem {
 
     @Override // android.view.MenuItem
     public MenuItem setNumericShortcut(char numericChar, int numericModifiers) {
-        if (this.mShortcutNumericChar == numericChar && this.mShortcutNumericModifiers == numericModifiers) {
+        if (this.mShortcutNumericChar == numericChar
+                && this.mShortcutNumericModifiers == numericModifiers) {
             return this;
         }
         this.mShortcutNumericChar = numericChar;
@@ -224,7 +234,8 @@ public final class MenuItemImpl implements MenuItem, SemMenuItem {
     }
 
     @Override // android.view.MenuItem
-    public MenuItem setShortcut(char numericChar, char alphaChar, int numericModifiers, int alphaModifiers) {
+    public MenuItem setShortcut(
+            char numericChar, char alphaChar, int numericModifiers, int alphaModifiers) {
         this.mShortcutNumericChar = numericChar;
         this.mShortcutNumericModifiers = KeyEvent.normalizeMetaState(numericModifiers);
         this.mShortcutAlphabeticChar = Character.toLowerCase(alphaChar);
@@ -247,7 +258,10 @@ public final class MenuItemImpl implements MenuItem, SemMenuItem {
         if (ViewConfiguration.get(this.mMenu.getContext()).hasPermanentMenuKey()) {
             sb.append(res.getString(R.string.prepend_shortcut_label));
         }
-        int modifiers = this.mMenu.isQwertyMode() ? this.mShortcutAlphabeticModifiers : this.mShortcutNumericModifiers;
+        int modifiers =
+                this.mMenu.isQwertyMode()
+                        ? this.mShortcutAlphabeticModifiers
+                        : this.mShortcutNumericModifiers;
         appendModifier(sb, modifiers, 65536, res.getString(R.string.menu_meta_shortcut_label));
         appendModifier(sb, modifiers, 4096, res.getString(R.string.menu_ctrl_shortcut_label));
         appendModifier(sb, modifiers, 2, res.getString(R.string.menu_alt_shortcut_label));
@@ -400,7 +414,9 @@ public final class MenuItemImpl implements MenuItem, SemMenuItem {
     }
 
     private Drawable applyIconTintIfNecessary(Drawable icon) {
-        if (icon != null && this.mNeedToApplyIconTint && (this.mHasIconTint || this.mHasIconTintMode)) {
+        if (icon != null
+                && this.mNeedToApplyIconTint
+                && (this.mHasIconTint || this.mHasIconTintMode)) {
             icon = icon.mutate();
             if (this.mHasIconTint) {
                 icon.setTintList(this.mIconTintList);
@@ -461,7 +477,9 @@ public final class MenuItemImpl implements MenuItem, SemMenuItem {
 
     @Override // android.view.MenuItem
     public boolean isVisible() {
-        return (this.mActionProvider == null || !this.mActionProvider.overridesItemVisibility()) ? (this.mFlags & 8) == 0 : (this.mFlags & 8) == 0 && this.mActionProvider.isVisible();
+        return (this.mActionProvider == null || !this.mActionProvider.overridesItemVisibility())
+                ? (this.mFlags & 8) == 0
+                : (this.mFlags & 8) == 0 && this.mActionProvider.isVisible();
     }
 
     boolean setVisibleInt(boolean shown) {
@@ -548,7 +566,9 @@ public final class MenuItemImpl implements MenuItem, SemMenuItem {
                 this.mMenu.onItemActionRequestChanged(this);
                 return;
             default:
-                throw new IllegalArgumentException("SHOW_AS_ACTION_ALWAYS, SHOW_AS_ACTION_IF_ROOM, and SHOW_AS_ACTION_NEVER are mutually exclusive.");
+                throw new IllegalArgumentException(
+                        "SHOW_AS_ACTION_ALWAYS, SHOW_AS_ACTION_IF_ROOM, and SHOW_AS_ACTION_NEVER"
+                            + " are mutually exclusive.");
         }
     }
 
@@ -597,12 +617,15 @@ public final class MenuItemImpl implements MenuItem, SemMenuItem {
         this.mActionProvider = actionProvider;
         this.mMenu.onItemsChanged(true);
         if (this.mActionProvider != null) {
-            this.mActionProvider.setVisibilityListener(new ActionProvider.VisibilityListener() { // from class: com.android.internal.view.menu.MenuItemImpl.1
-                @Override // android.view.ActionProvider.VisibilityListener
-                public void onActionProviderVisibilityChanged(boolean isVisible) {
-                    MenuItemImpl.this.mMenu.onItemVisibleChanged(MenuItemImpl.this);
-                }
-            });
+            this.mActionProvider.setVisibilityListener(
+                    new ActionProvider
+                            .VisibilityListener() { // from class:
+                                                    // com.android.internal.view.menu.MenuItemImpl.1
+                        @Override // android.view.ActionProvider.VisibilityListener
+                        public void onActionProviderVisibilityChanged(boolean isVisible) {
+                            MenuItemImpl.this.mMenu.onItemVisibleChanged(MenuItemImpl.this);
+                        }
+                    });
         }
         return this;
     }
@@ -618,7 +641,8 @@ public final class MenuItemImpl implements MenuItem, SemMenuItem {
         if (!hasCollapsibleActionView()) {
             return false;
         }
-        if (this.mOnActionExpandListener == null || this.mOnActionExpandListener.onMenuItemActionExpand(this)) {
+        if (this.mOnActionExpandListener == null
+                || this.mOnActionExpandListener.onMenuItemActionExpand(this)) {
             return this.mMenu.expandItemActionView(this);
         }
         return false;
@@ -632,7 +656,8 @@ public final class MenuItemImpl implements MenuItem, SemMenuItem {
         if (this.mActionView == null) {
             return true;
         }
-        if (this.mOnActionExpandListener == null || this.mOnActionExpandListener.onMenuItemActionCollapse(this)) {
+        if (this.mOnActionExpandListener == null
+                || this.mOnActionExpandListener.onMenuItemActionCollapse(this)) {
             return this.mMenu.collapseItemActionView(this);
         }
         return false;

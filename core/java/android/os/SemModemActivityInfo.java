@@ -1,40 +1,52 @@
 package android.os;
 
-import android.os.Parcelable;
 import java.util.Arrays;
 
 /* loaded from: classes3.dex */
 public class SemModemActivityInfo implements Parcelable {
-    public static final Parcelable.Creator<SemModemActivityInfo> CREATOR = new Parcelable.Creator<SemModemActivityInfo>() { // from class: android.os.SemModemActivityInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemModemActivityInfo createFromParcel(Parcel in) {
-            return new SemModemActivityInfo(in);
-        }
+    public static final Parcelable.Creator<SemModemActivityInfo> CREATOR =
+            new Parcelable.Creator<
+                    SemModemActivityInfo>() { // from class: android.os.SemModemActivityInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemModemActivityInfo createFromParcel(Parcel in) {
+                    return new SemModemActivityInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemModemActivityInfo[] newArray(int size) {
-            return new SemModemActivityInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemModemActivityInfo[] newArray(int size) {
+                    return new SemModemActivityInfo[size];
+                }
+            };
     public static final int TX_POWER_LEVELS = 5;
     private int mIdleTimeMs;
     private int mSleepTimeMs;
     MobileActivity mNr = new MobileActivity(5);
     MobileActivity mLc = new MobileActivity(5);
 
-    public SemModemActivityInfo(int sleepTimeMs, int idleTimeMs, MobileActivity nr, MobileActivity lc) {
+    public SemModemActivityInfo(
+            int sleepTimeMs, int idleTimeMs, MobileActivity nr, MobileActivity lc) {
         this.mSleepTimeMs = sleepTimeMs;
         this.mIdleTimeMs = idleTimeMs;
         if (nr != null) {
-            System.arraycopy(nr.getTxTimeMillis(), 0, this.mNr.getTxTimeMillis(), 0, Math.min(nr.getTxTimeLength(), 5));
+            System.arraycopy(
+                    nr.getTxTimeMillis(),
+                    0,
+                    this.mNr.getTxTimeMillis(),
+                    0,
+                    Math.min(nr.getTxTimeLength(), 5));
         }
         this.mNr.setRxTimeMillis(nr.getRxTimeMillis());
         this.mNr.setTxBytes(nr.getTxBytes());
         this.mNr.setRxBytes(nr.getRxBytes());
         if (lc != null) {
-            System.arraycopy(lc.getTxTimeMillis(), 0, this.mLc.getTxTimeMillis(), 0, Math.min(lc.getTxTimeLength(), 5));
+            System.arraycopy(
+                    lc.getTxTimeMillis(),
+                    0,
+                    this.mLc.getTxTimeMillis(),
+                    0,
+                    Math.min(lc.getTxTimeLength(), 5));
         }
         this.mLc.setRxTimeMillis(lc.getRxTimeMillis());
         this.mLc.setTxBytes(lc.getTxBytes());
@@ -42,7 +54,15 @@ public class SemModemActivityInfo implements Parcelable {
     }
 
     public String toString() {
-        return "SemModemActivityInfo{ SleepTimeMs=" + this.mSleepTimeMs + " IdleTimeMs=" + this.mIdleTimeMs + " mNr=" + this.mNr.toString() + " mLc=" + this.mLc.toString() + " }";
+        return "SemModemActivityInfo{ SleepTimeMs="
+                + this.mSleepTimeMs
+                + " IdleTimeMs="
+                + this.mIdleTimeMs
+                + " mNr="
+                + this.mNr.toString()
+                + " mLc="
+                + this.mLc.toString()
+                + " }";
     }
 
     @Override // android.os.Parcelable
@@ -160,7 +180,15 @@ public class SemModemActivityInfo implements Parcelable {
                 return false;
             }
         }
-        return getIdleTimeMillis() >= 0 && getSleepTimeMillis() >= 0 && this.mNr.getRxTimeMillis() >= 0 && this.mNr.getTxBytes() >= 0 && this.mNr.getRxBytes() >= 0 && this.mLc.getRxTimeMillis() >= 0 && this.mLc.getTxBytes() >= 0 && this.mLc.getRxBytes() >= 0 && !isEmpty();
+        return getIdleTimeMillis() >= 0
+                && getSleepTimeMillis() >= 0
+                && this.mNr.getRxTimeMillis() >= 0
+                && this.mNr.getTxBytes() >= 0
+                && this.mNr.getRxBytes() >= 0
+                && this.mLc.getRxTimeMillis() >= 0
+                && this.mLc.getTxBytes() >= 0
+                && this.mLc.getRxBytes() >= 0
+                && !isEmpty();
     }
 
     private boolean isEmpty() {
@@ -174,23 +202,33 @@ public class SemModemActivityInfo implements Parcelable {
                 return false;
             }
         }
-        return getIdleTimeMillis() == 0 && getSleepTimeMillis() == 0 && this.mNr.getRxTimeMillis() == 0 && this.mNr.getTxBytes() == 0 && this.mNr.getRxBytes() == 0 && this.mLc.getRxTimeMillis() == 0 && this.mLc.getTxBytes() == 0 && this.mLc.getRxBytes() == 0;
+        return getIdleTimeMillis() == 0
+                && getSleepTimeMillis() == 0
+                && this.mNr.getRxTimeMillis() == 0
+                && this.mNr.getTxBytes() == 0
+                && this.mNr.getRxBytes() == 0
+                && this.mLc.getRxTimeMillis() == 0
+                && this.mLc.getTxBytes() == 0
+                && this.mLc.getRxBytes() == 0;
     }
 
     public static class MobileActivity implements Parcelable {
-        public static final Parcelable.Creator<MobileActivity> CREATOR = new Parcelable.Creator<MobileActivity>() { // from class: android.os.SemModemActivityInfo.MobileActivity.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public MobileActivity createFromParcel(Parcel in) {
-                return new MobileActivity(in);
-            }
+        public static final Parcelable.Creator<MobileActivity> CREATOR =
+                new Parcelable.Creator<
+                        MobileActivity>() { // from class:
+                                            // android.os.SemModemActivityInfo.MobileActivity.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public MobileActivity createFromParcel(Parcel in) {
+                        return new MobileActivity(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public MobileActivity[] newArray(int size) {
-                return new MobileActivity[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public MobileActivity[] newArray(int size) {
+                        return new MobileActivity[size];
+                    }
+                };
         private long mRxBytes;
         private int mRxTimeMs;
         private long mTxBytes;
@@ -204,7 +242,15 @@ public class SemModemActivityInfo implements Parcelable {
         }
 
         public String toString() {
-            return "MobileActivity{ txTimeMs[]=" + Arrays.toString(this.mTxTimeMs) + " rxTimeMs=" + this.mRxTimeMs + " txBytes=" + this.mTxBytes + " rxBytes=" + this.mRxBytes + " }";
+            return "MobileActivity{ txTimeMs[]="
+                    + Arrays.toString(this.mTxTimeMs)
+                    + " rxTimeMs="
+                    + this.mRxTimeMs
+                    + " txBytes="
+                    + this.mTxBytes
+                    + " rxBytes="
+                    + this.mRxBytes
+                    + " }";
         }
 
         public int getTxTimeLength() {

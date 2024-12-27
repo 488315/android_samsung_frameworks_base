@@ -2,6 +2,7 @@ package com.android.server.devicepolicy;
 
 import android.app.admin.IntegerPolicyValue;
 import android.app.admin.PolicyValue;
+
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Objects;
@@ -23,7 +24,10 @@ public final class FlagUnion extends ResolutionMechanism {
         Integer num = 0;
         Iterator it = linkedHashMap.values().iterator();
         while (it.hasNext()) {
-            num = Integer.valueOf(num.intValue() | ((Integer) ((PolicyValue) it.next()).getValue()).intValue());
+            num =
+                    Integer.valueOf(
+                            num.intValue()
+                                    | ((Integer) ((PolicyValue) it.next()).getValue()).intValue());
         }
         return new IntegerPolicyValue(num.intValue());
     }

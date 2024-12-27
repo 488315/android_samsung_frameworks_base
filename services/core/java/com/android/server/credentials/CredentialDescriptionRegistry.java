@@ -1,6 +1,7 @@
 package com.android.server.credentials;
 
 import android.util.SparseArray;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,7 +46,8 @@ public final class CredentialDescriptionRegistry {
         reentrantLock.lock();
         try {
             SparseArray sparseArray = sCredentialDescriptionSessionPerUser;
-            CredentialDescriptionRegistry credentialDescriptionRegistry = (CredentialDescriptionRegistry) sparseArray.get(i, null);
+            CredentialDescriptionRegistry credentialDescriptionRegistry =
+                    (CredentialDescriptionRegistry) sparseArray.get(i, null);
             if (credentialDescriptionRegistry == null) {
                 credentialDescriptionRegistry = new CredentialDescriptionRegistry();
                 credentialDescriptionRegistry.mCredentialDescriptions = new HashMap();
@@ -60,7 +62,8 @@ public final class CredentialDescriptionRegistry {
         }
     }
 
-    public static void setSession(int i, CredentialDescriptionRegistry credentialDescriptionRegistry) {
+    public static void setSession(
+            int i, CredentialDescriptionRegistry credentialDescriptionRegistry) {
         ReentrantLock reentrantLock = sLock;
         reentrantLock.lock();
         try {

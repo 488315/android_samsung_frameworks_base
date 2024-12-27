@@ -7,8 +7,7 @@ import java.io.FileDescriptor;
 /* loaded from: classes.dex */
 public interface DropBoxManagerInternal$EntrySource extends Closeable {
     @Override // java.io.Closeable, java.lang.AutoCloseable
-    default void close() {
-    }
+    default void close() {}
 
     default long length() {
         return 0L;

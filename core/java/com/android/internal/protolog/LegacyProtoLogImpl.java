@@ -8,12 +8,14 @@ import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.protolog.common.ILogger;
 import com.android.internal.protolog.common.IProtoLog;
 import com.android.internal.protolog.common.IProtoLogGroup;
 import com.android.internal.protolog.common.LogDataType;
 import com.android.internal.protolog.common.LogLevel;
 import com.android.internal.util.TraceBuffer;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -43,11 +45,29 @@ public class LegacyProtoLogImpl implements IProtoLog {
     private boolean mProtoLogEnabledLockFree;
     private final LegacyProtoLogViewerConfigReader mViewerConfig;
 
-    public LegacyProtoLogImpl(String outputFile, String viewerConfigFilename, TreeMap<String, IProtoLogGroup> logGroups, Runnable cacheUpdater) {
-        this(new File(outputFile), viewerConfigFilename, 1048576, new LegacyProtoLogViewerConfigReader(), 1024, logGroups, cacheUpdater);
+    public LegacyProtoLogImpl(
+            String outputFile,
+            String viewerConfigFilename,
+            TreeMap<String, IProtoLogGroup> logGroups,
+            Runnable cacheUpdater) {
+        this(
+                new File(outputFile),
+                viewerConfigFilename,
+                1048576,
+                new LegacyProtoLogViewerConfigReader(),
+                1024,
+                logGroups,
+                cacheUpdater);
     }
 
-    public LegacyProtoLogImpl(File file, String viewerConfigFilename, int bufferCapacity, LegacyProtoLogViewerConfigReader viewerConfig, int perChunkSize, TreeMap<String, IProtoLogGroup> logGroups, Runnable cacheUpdater) {
+    public LegacyProtoLogImpl(
+            File file,
+            String viewerConfigFilename,
+            int bufferCapacity,
+            LegacyProtoLogViewerConfigReader viewerConfig,
+            int perChunkSize,
+            TreeMap<String, IProtoLogGroup> logGroups,
+            Runnable cacheUpdater) {
         this.mProtoLogEnabledLock = new Object();
         this.mLogFile = file;
         this.mBuffer = new TraceBuffer(bufferCapacity);
@@ -59,7 +79,13 @@ public class LegacyProtoLogImpl implements IProtoLog {
     }
 
     @Override // com.android.internal.protolog.common.IProtoLog
-    public void log(LogLevel level, IProtoLogGroup group, long messageHash, int paramsMask, String messageString, Object[] args) {
+    public void log(
+            LogLevel level,
+            IProtoLogGroup group,
+            long messageHash,
+            int paramsMask,
+            String messageString,
+            Object[] args) {
         if (group.isLogToProto()) {
             logToProto(messageHash, paramsMask, args);
         }
@@ -68,7 +94,8 @@ public class LegacyProtoLogImpl implements IProtoLog {
         }
     }
 
-    private void logToLogcat(String tag, LogLevel level, long messageHash, String messageString, Object[] args) {
+    private void logToLogcat(
+            String tag, LogLevel level, long messageHash, String messageString, Object[] args) {
         String message = null;
         if (messageString == null) {
             messageString = this.mViewerConfig.getViewerString(messageHash);
@@ -85,7 +112,11 @@ public class LegacyProtoLogImpl implements IProtoLog {
             }
         }
         if (message == null) {
-            StringBuilder builder = new StringBuilder("UNKNOWN MESSAGE (" + messageHash + NavigationBarInflaterView.KEY_CODE_END);
+            StringBuilder builder =
+                    new StringBuilder(
+                            "UNKNOWN MESSAGE ("
+                                    + messageHash
+                                    + NavigationBarInflaterView.KEY_CODE_END);
             for (Object o : args) {
                 builder.append(" ").append(o);
             }
@@ -192,24 +223,36 @@ public class LegacyProtoLogImpl implements IProtoLog {
                 return;
             }
             if (longParams.size() > 0) {
-                os.writePackedSInt64(ProtoLogMessage.SINT64_PARAMS, longParams.stream().mapToLong(new ToLongFunction() { // from class: com.android.internal.protolog.LegacyProtoLogImpl$$ExternalSyntheticLambda4
-                    @Override // java.util.function.ToLongFunction
-                    public final long applyAsLong(Object obj) {
-                        long longValue;
-                        longValue = ((Long) obj).longValue();
-                        return longValue;
-                    }
-                }).toArray());
+                os.writePackedSInt64(
+                        ProtoLogMessage.SINT64_PARAMS,
+                        longParams.stream()
+                                .mapToLong(
+                                        new ToLongFunction() { // from class:
+                                                               // com.android.internal.protolog.LegacyProtoLogImpl$$ExternalSyntheticLambda4
+                                            @Override // java.util.function.ToLongFunction
+                                            public final long applyAsLong(Object obj) {
+                                                long longValue;
+                                                longValue = ((Long) obj).longValue();
+                                                return longValue;
+                                            }
+                                        })
+                                .toArray());
             }
             if (doubleParams.size() > 0) {
-                os.writePackedDouble(ProtoLogMessage.DOUBLE_PARAMS, doubleParams.stream().mapToDouble(new ToDoubleFunction() { // from class: com.android.internal.protolog.LegacyProtoLogImpl$$ExternalSyntheticLambda5
-                    @Override // java.util.function.ToDoubleFunction
-                    public final double applyAsDouble(Object obj) {
-                        double doubleValue;
-                        doubleValue = ((Double) obj).doubleValue();
-                        return doubleValue;
-                    }
-                }).toArray());
+                os.writePackedDouble(
+                        ProtoLogMessage.DOUBLE_PARAMS,
+                        doubleParams.stream()
+                                .mapToDouble(
+                                        new ToDoubleFunction() { // from class:
+                                                                 // com.android.internal.protolog.LegacyProtoLogImpl$$ExternalSyntheticLambda5
+                                            @Override // java.util.function.ToDoubleFunction
+                                            public final double applyAsDouble(Object obj) {
+                                                double doubleValue;
+                                                doubleValue = ((Double) obj).doubleValue();
+                                                return doubleValue;
+                                            }
+                                        })
+                                .toArray());
             }
             if (booleanParams.size() > 0) {
                 boolean[] arr = new boolean[booleanParams.size()];
@@ -260,7 +303,8 @@ public class LegacyProtoLogImpl implements IProtoLog {
         return this.mProtoLogEnabledLockFree;
     }
 
-    private int setLogging(boolean setTextLogging, boolean value, ILogger logger, String... groups) {
+    private int setLogging(
+            boolean setTextLogging, boolean value, ILogger logger, String... groups) {
         for (String group : groups) {
             IProtoLogGroup g = this.mLogGroups.get(group);
             if (g != null) {
@@ -306,12 +350,14 @@ public class LegacyProtoLogImpl implements IProtoLog {
             }
             args.add(arg);
         }
-        ILogger logger = new ILogger() { // from class: com.android.internal.protolog.LegacyProtoLogImpl$$ExternalSyntheticLambda3
-            @Override // com.android.internal.protolog.common.ILogger
-            public final void log(String str) {
-                LegacyProtoLogImpl.logAndPrintln(pw, str);
-            }
-        };
+        ILogger logger =
+                new ILogger() { // from class:
+                                // com.android.internal.protolog.LegacyProtoLogImpl$$ExternalSyntheticLambda3
+                    @Override // com.android.internal.protolog.common.ILogger
+                    public final void log(String str) {
+                        LegacyProtoLogImpl.logAndPrintln(pw, str);
+                    }
+                };
         String[] groups = (String[]) args.toArray(new String[args.size()]);
         switch (cmd.hashCode()) {
             case -1475003593:
@@ -385,27 +431,52 @@ public class LegacyProtoLogImpl implements IProtoLog {
     }
 
     public String getStatus() {
-        return "ProtoLog status: " + (isProtoEnabled() ? "Enabled" : "Disabled") + "\nEnabled log groups: \n  Proto: " + ((String) this.mLogGroups.values().stream().filter(new Predicate() { // from class: com.android.internal.protolog.LegacyProtoLogImpl$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return LegacyProtoLogImpl.lambda$getStatus$3((IProtoLogGroup) obj);
-            }
-        }).map(new Function() { // from class: com.android.internal.protolog.LegacyProtoLogImpl$$ExternalSyntheticLambda1
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return ((IProtoLogGroup) obj).name();
-            }
-        }).collect(Collectors.joining(" "))) + "\n  Logcat: " + ((String) this.mLogGroups.values().stream().filter(new Predicate() { // from class: com.android.internal.protolog.LegacyProtoLogImpl$$ExternalSyntheticLambda2
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return LegacyProtoLogImpl.lambda$getStatus$4((IProtoLogGroup) obj);
-            }
-        }).map(new Function() { // from class: com.android.internal.protolog.LegacyProtoLogImpl$$ExternalSyntheticLambda1
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return ((IProtoLogGroup) obj).name();
-            }
-        }).collect(Collectors.joining(" "))) + "\nLogging definitions loaded: " + this.mViewerConfig.knownViewerStringsNumber();
+        return "ProtoLog status: "
+                + (isProtoEnabled() ? "Enabled" : "Disabled")
+                + "\nEnabled log groups: \n  Proto: "
+                + ((String)
+                        this.mLogGroups.values().stream()
+                                .filter(
+                                        new Predicate() { // from class:
+                                                          // com.android.internal.protolog.LegacyProtoLogImpl$$ExternalSyntheticLambda0
+                                            @Override // java.util.function.Predicate
+                                            public final boolean test(Object obj) {
+                                                return LegacyProtoLogImpl.lambda$getStatus$3(
+                                                        (IProtoLogGroup) obj);
+                                            }
+                                        })
+                                .map(
+                                        new Function() { // from class:
+                                                         // com.android.internal.protolog.LegacyProtoLogImpl$$ExternalSyntheticLambda1
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                return ((IProtoLogGroup) obj).name();
+                                            }
+                                        })
+                                .collect(Collectors.joining(" ")))
+                + "\n  Logcat: "
+                + ((String)
+                        this.mLogGroups.values().stream()
+                                .filter(
+                                        new Predicate() { // from class:
+                                                          // com.android.internal.protolog.LegacyProtoLogImpl$$ExternalSyntheticLambda2
+                                            @Override // java.util.function.Predicate
+                                            public final boolean test(Object obj) {
+                                                return LegacyProtoLogImpl.lambda$getStatus$4(
+                                                        (IProtoLogGroup) obj);
+                                            }
+                                        })
+                                .map(
+                                        new Function() { // from class:
+                                                         // com.android.internal.protolog.LegacyProtoLogImpl$$ExternalSyntheticLambda1
+                                            @Override // java.util.function.Function
+                                            public final Object apply(Object obj) {
+                                                return ((IProtoLogGroup) obj).name();
+                                            }
+                                        })
+                                .collect(Collectors.joining(" ")))
+                + "\nLogging definitions loaded: "
+                + this.mViewerConfig.knownViewerStringsNumber();
     }
 
     static /* synthetic */ boolean lambda$getStatus$3(IProtoLogGroup it) {
@@ -418,7 +489,8 @@ public class LegacyProtoLogImpl implements IProtoLog {
 
     private void writeProtoLogToFileLocked() {
         try {
-            long offset = System.currentTimeMillis() - (SystemClock.elapsedRealtimeNanos() / 1000000);
+            long offset =
+                    System.currentTimeMillis() - (SystemClock.elapsedRealtimeNanos() / 1000000);
             ProtoOutputStream proto = new ProtoOutputStream(this.mPerChunkSize);
             proto.write(1125281431553L, MAGIC_NUMBER_VALUE);
             proto.write(1138166333442L, PROTOLOG_VERSION);

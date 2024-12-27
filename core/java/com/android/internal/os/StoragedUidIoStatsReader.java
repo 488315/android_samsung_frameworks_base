@@ -3,6 +3,7 @@ package com.android.internal.os;
 import android.os.StrictMode;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -14,11 +15,21 @@ public class StoragedUidIoStatsReader {
     private static String sUidIoFile = "/proc/uid_io/stats";
 
     public interface Callback {
-        void onUidStorageStats(int i, long j, long j2, long j3, long j4, long j5, long j6, long j7, long j8, long j9, long j10);
+        void onUidStorageStats(
+                int i,
+                long j,
+                long j2,
+                long j3,
+                long j4,
+                long j5,
+                long j6,
+                long j7,
+                long j8,
+                long j9,
+                long j10);
     }
 
-    public StoragedUidIoStatsReader() {
-    }
+    public StoragedUidIoStatsReader() {}
 
     public StoragedUidIoStatsReader(String file) {
         sUidIoFile = file;
@@ -60,9 +71,25 @@ public class StoragedUidIoStatsReader {
                             long bgBytesWrite = Long.parseLong(fields[8], 10);
                             long fgFsync = Long.parseLong(fields[9], 10);
                             long bgFsync = Long.parseLong(fields[10], 10);
-                            callback.onUidStorageStats(uid, fgCharsRead, fgCharsWrite, fgBytesRead, fgBytesWrite, bgCharsRead, bgCharsWrite, bgBytesRead, bgBytesWrite, fgFsync, bgFsync);
+                            callback.onUidStorageStats(
+                                    uid,
+                                    fgCharsRead,
+                                    fgCharsWrite,
+                                    fgBytesRead,
+                                    fgBytesWrite,
+                                    bgCharsRead,
+                                    bgCharsWrite,
+                                    bgBytesRead,
+                                    bgBytesWrite,
+                                    fgFsync,
+                                    bgFsync);
                         } catch (NumberFormatException e) {
-                            Slog.e(TAG, "Could not parse entry in " + sUidIoFile + ": " + e.getMessage());
+                            Slog.e(
+                                    TAG,
+                                    "Could not parse entry in "
+                                            + sUidIoFile
+                                            + ": "
+                                            + e.getMessage());
                         }
                     }
                 } finally {

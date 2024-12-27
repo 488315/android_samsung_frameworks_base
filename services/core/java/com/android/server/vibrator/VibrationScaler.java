@@ -7,7 +7,9 @@ import android.os.vibrator.Flags;
 import android.util.IndentingPrintWriter;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
+
 import java.util.Locale;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -34,7 +36,8 @@ public final class VibrationScaler {
 
     public VibrationScaler(Context context, VibrationSettings vibrationSettings) {
         this.mSettingsController = vibrationSettings;
-        this.mDefaultVibrationAmplitude = context.getResources().getInteger(R.integer.config_dreamOpenAnimationDuration);
+        this.mDefaultVibrationAmplitude =
+                context.getResources().getInteger(R.integer.config_dreamOpenAnimationDuration);
         SparseArray sparseArray = new SparseArray();
         this.mScaleLevels = sparseArray;
         sparseArray.put(-2, new ScaleLevel(0.6f));
@@ -45,18 +48,28 @@ public final class VibrationScaler {
     }
 
     public static String scaleLevelToString(int i) {
-        return i != -2 ? i != -1 ? i != 0 ? i != 1 ? i != 2 ? String.valueOf(i) : "VERY_HIGH" : "HIGH" : "NONE" : "LOW" : "VERY_LOW";
+        return i != -2
+                ? i != -1
+                        ? i != 0
+                                ? i != 1 ? i != 2 ? String.valueOf(i) : "VERY_HIGH" : "HIGH"
+                                : "NONE"
+                        : "LOW"
+                : "VERY_LOW";
     }
 
     public final void dump(IndentingPrintWriter indentingPrintWriter) {
         indentingPrintWriter.println("VibrationScaler:");
         indentingPrintWriter.increaseIndent();
-        indentingPrintWriter.println("defaultVibrationAmplitude = " + this.mDefaultVibrationAmplitude);
+        indentingPrintWriter.println(
+                "defaultVibrationAmplitude = " + this.mDefaultVibrationAmplitude);
         indentingPrintWriter.println("ScaleLevels:");
         indentingPrintWriter.increaseIndent();
         for (int i = 0; i < this.mScaleLevels.size(); i++) {
             int keyAt = this.mScaleLevels.keyAt(i);
-            indentingPrintWriter.println(scaleLevelToString(keyAt) + " = " + ((ScaleLevel) this.mScaleLevels.valueAt(i)));
+            indentingPrintWriter.println(
+                    scaleLevelToString(keyAt)
+                            + " = "
+                            + ((ScaleLevel) this.mScaleLevels.valueAt(i)));
         }
         indentingPrintWriter.decreaseIndent();
         indentingPrintWriter.println("AdaptiveHapticsScales:");
@@ -65,7 +78,10 @@ public final class VibrationScaler {
             int keyAt2 = this.mAdaptiveHapticsScales.keyAt(i2);
             Float f = (Float) this.mAdaptiveHapticsScales.valueAt(i2);
             f.getClass();
-            indentingPrintWriter.println(VibrationAttributes.usageToString(keyAt2) + " = " + String.format(Locale.ROOT, "%.2f", f));
+            indentingPrintWriter.println(
+                    VibrationAttributes.usageToString(keyAt2)
+                            + " = "
+                            + String.format(Locale.ROOT, "%.2f", f));
         }
         indentingPrintWriter.decreaseIndent();
         indentingPrintWriter.decreaseIndent();
@@ -91,14 +107,16 @@ public final class VibrationScaler {
             return 1;
         }
         if (currentIntensity != 3) {
-            DeviceIdleController$$ExternalSyntheticOutline0.m(currentIntensity, "Got unexpected vibration intensity: ", "VibrationScaler");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    currentIntensity, "Got unexpected vibration intensity: ", "VibrationScaler");
         }
         return 2;
     }
 
     public final int getScaleLevel(int i) {
         VibrationSettings vibrationSettings = this.mSettingsController;
-        int defaultVibrationIntensity = vibrationSettings.mVibrationConfig.getDefaultVibrationIntensity(i);
+        int defaultVibrationIntensity =
+                vibrationSettings.mVibrationConfig.getDefaultVibrationIntensity(i);
         int currentIntensity = vibrationSettings.getCurrentIntensity(i);
         if (currentIntensity == 0) {
             return 0;
@@ -107,11 +125,22 @@ public final class VibrationScaler {
         if (i2 >= -2 && i2 <= 2) {
             return i2;
         }
-        Slog.wtf("VibrationScaler", "Error in scaling calculations, ended up with invalid scale level " + i2 + " for vibration with usage " + i);
+        Slog.wtf(
+                "VibrationScaler",
+                "Error in scaling calculations, ended up with invalid scale level "
+                        + i2
+                        + " for vibration with usage "
+                        + i);
         return 0;
     }
 
     public final String toString() {
-        return "VibrationScaler{mScaleLevels=" + this.mScaleLevels + ", mDefaultVibrationAmplitude=" + this.mDefaultVibrationAmplitude + ", mAdaptiveHapticsScales=" + this.mAdaptiveHapticsScales + '}';
+        return "VibrationScaler{mScaleLevels="
+                + this.mScaleLevels
+                + ", mDefaultVibrationAmplitude="
+                + this.mDefaultVibrationAmplitude
+                + ", mAdaptiveHapticsScales="
+                + this.mAdaptiveHapticsScales
+                + '}';
     }
 }

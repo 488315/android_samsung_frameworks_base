@@ -1,6 +1,7 @@
 package android.app.job;
 
 import android.annotation.SystemApi;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
@@ -31,12 +32,10 @@ public abstract class JobScheduler {
     public static final long THROW_ON_INVALID_DATA_TRANSFER_IMPLEMENTATION = 255371817;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PendingJobReason {
-    }
+    public @interface PendingJobReason {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Result {
-    }
+    public @interface Result {}
 
     public abstract void cancel(int i);
 
@@ -96,12 +95,10 @@ public abstract class JobScheduler {
         return null;
     }
 
-    public void registerUserVisibleJobObserver(IUserVisibleJobObserver observer) {
-    }
+    public void registerUserVisibleJobObserver(IUserVisibleJobObserver observer) {}
 
-    public void unregisterUserVisibleJobObserver(IUserVisibleJobObserver observer) {
-    }
+    public void unregisterUserVisibleJobObserver(IUserVisibleJobObserver observer) {}
 
-    public void notePendingUserRequestedAppStop(String packageName, int userId, String debugReason) {
-    }
+    public void notePendingUserRequestedAppStop(
+            String packageName, int userId, String debugReason) {}
 }

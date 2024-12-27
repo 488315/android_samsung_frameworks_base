@@ -7,8 +7,7 @@ public class SemMemRequest {
     private final int mSize;
     private final int mType;
 
-    public @interface MemType {
-    }
+    public @interface MemType {}
 
     public SemMemRequest(int type, int size) {
         this.mType = type;

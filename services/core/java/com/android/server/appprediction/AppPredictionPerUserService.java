@@ -15,19 +15,20 @@ import android.provider.DeviceConfig;
 import android.service.appprediction.IPredictionService;
 import android.util.ArrayMap;
 import android.util.Slog;
+
 import com.android.internal.infra.AbstractRemoteService;
 import com.android.server.LocalServices;
 import com.android.server.ambientcontext.AmbientContextManagerPerUserService$$ExternalSyntheticOutline0;
-import com.android.server.appprediction.AppPredictionPerUserService;
-import com.android.server.appprediction.RemoteAppPredictionService;
 import com.android.server.infra.AbstractMasterSystemService;
 import com.android.server.infra.AbstractPerUserSystemService;
 import com.android.server.people.PeopleServiceInternal;
+
 import java.util.function.Consumer;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class AppPredictionPerUserService extends AbstractPerUserSystemService implements RemoteAppPredictionService.RemoteAppPredictionServiceCallbacks {
+public final class AppPredictionPerUserService extends AbstractPerUserSystemService
+        implements RemoteAppPredictionService.RemoteAppPredictionServiceCallbacks {
     public RemoteAppPredictionService mRemoteService;
     public final ArrayMap mSessionInfos;
     public boolean mZombie;
@@ -41,7 +42,13 @@ public final class AppPredictionPerUserService extends AbstractPerUserSystemServ
         public final IBinder mToken;
         public final boolean mUsesPeopleService;
 
-        public AppPredictionSessionInfo(AppPredictionSessionId appPredictionSessionId, AppPredictionContext appPredictionContext, boolean z, IBinder iBinder, AppPredictionPerUserService$$ExternalSyntheticLambda2 appPredictionPerUserService$$ExternalSyntheticLambda2) {
+        public AppPredictionSessionInfo(
+                AppPredictionSessionId appPredictionSessionId,
+                AppPredictionContext appPredictionContext,
+                boolean z,
+                IBinder iBinder,
+                AppPredictionPerUserService$$ExternalSyntheticLambda2
+                        appPredictionPerUserService$$ExternalSyntheticLambda2) {
             this.mSessionId = appPredictionSessionId;
             this.mPredictionContext = appPredictionContext;
             this.mUsesPeopleService = z;
@@ -50,7 +57,8 @@ public final class AppPredictionPerUserService extends AbstractPerUserSystemServ
         }
     }
 
-    public AppPredictionPerUserService(AppPredictionManagerService appPredictionManagerService, Object obj, int i) {
+    public AppPredictionPerUserService(
+            AppPredictionManagerService appPredictionManagerService, Object obj, int i) {
         super(appPredictionManagerService, obj, i);
         this.mSessionInfos = new ArrayMap();
     }
@@ -88,10 +96,19 @@ public final class AppPredictionPerUserService extends AbstractPerUserSystemServ
                 Slog.v("AppPredictionPerUserService", "getRemoteServiceLocked(): not set");
                 return null;
             }
-            ComponentName unflattenFromString = ComponentName.unflattenFromString(componentNameLocked);
+            ComponentName unflattenFromString =
+                    ComponentName.unflattenFromString(componentNameLocked);
             Context context = abstractMasterSystemService.getContext();
-            AppPredictionManagerService appPredictionManagerService = (AppPredictionManagerService) abstractMasterSystemService;
-            this.mRemoteService = new RemoteAppPredictionService(context, unflattenFromString, this.mUserId, this, appPredictionManagerService.isBindInstantServiceAllowed(), appPredictionManagerService.verbose);
+            AppPredictionManagerService appPredictionManagerService =
+                    (AppPredictionManagerService) abstractMasterSystemService;
+            this.mRemoteService =
+                    new RemoteAppPredictionService(
+                            context,
+                            unflattenFromString,
+                            this.mUserId,
+                            this,
+                            appPredictionManagerService.isBindInstantServiceAllowed(),
+                            appPredictionManagerService.verbose);
         }
         return this.mRemoteService;
     }
@@ -101,43 +118,87 @@ public final class AppPredictionPerUserService extends AbstractPerUserSystemServ
         try {
             return AppGlobals.getPackageManager().getServiceInfo(componentName, 128L, this.mUserId);
         } catch (RemoteException unused) {
-            throw new PackageManager.NameNotFoundException(AmbientContextManagerPerUserService$$ExternalSyntheticOutline0.m(componentName, "Could not get service for "));
+            throw new PackageManager.NameNotFoundException(
+                    AmbientContextManagerPerUserService$$ExternalSyntheticOutline0.m(
+                            componentName, "Could not get service for "));
         }
     }
 
     /* JADX WARN: Type inference failed for: r8v0, types: [com.android.server.appprediction.AppPredictionPerUserService$$ExternalSyntheticLambda2] */
-    public final void onCreatePredictionSessionLocked(AppPredictionContext appPredictionContext, final AppPredictionSessionId appPredictionSessionId, IBinder iBinder) {
-        boolean z = (appPredictionContext.getExtras() != null && appPredictionContext.getExtras().getBoolean("remote_app_predictor", false) && DeviceConfig.getBoolean("systemui", "dark_launch_remote_prediction_service_enabled", false)) ? false : DeviceConfig.getBoolean("systemui", "predict_using_people_service_" + appPredictionContext.getUiSurface(), false);
-        if (!resolveService(true, z, new AppPredictionPerUserService$$ExternalSyntheticLambda1(appPredictionContext, appPredictionSessionId)) || this.mSessionInfos.containsKey(appPredictionSessionId)) {
+    public final void onCreatePredictionSessionLocked(
+            AppPredictionContext appPredictionContext,
+            final AppPredictionSessionId appPredictionSessionId,
+            IBinder iBinder) {
+        boolean z =
+                (appPredictionContext.getExtras() != null
+                                && appPredictionContext
+                                        .getExtras()
+                                        .getBoolean("remote_app_predictor", false)
+                                && DeviceConfig.getBoolean(
+                                        "systemui",
+                                        "dark_launch_remote_prediction_service_enabled",
+                                        false))
+                        ? false
+                        : DeviceConfig.getBoolean(
+                                "systemui",
+                                "predict_using_people_service_"
+                                        + appPredictionContext.getUiSurface(),
+                                false);
+        if (!resolveService(
+                        true,
+                        z,
+                        new AppPredictionPerUserService$$ExternalSyntheticLambda1(
+                                appPredictionContext, appPredictionSessionId))
+                || this.mSessionInfos.containsKey(appPredictionSessionId)) {
             return;
         }
-        AppPredictionSessionInfo appPredictionSessionInfo = new AppPredictionSessionInfo(appPredictionSessionId, appPredictionContext, z, iBinder, new IBinder.DeathRecipient() { // from class: com.android.server.appprediction.AppPredictionPerUserService$$ExternalSyntheticLambda2
-            @Override // android.os.IBinder.DeathRecipient
-            public final void binderDied() {
-                AppPredictionPerUserService appPredictionPerUserService = AppPredictionPerUserService.this;
-                AppPredictionSessionId appPredictionSessionId2 = appPredictionSessionId;
-                synchronized (appPredictionPerUserService.mLock) {
-                    appPredictionPerUserService.onDestroyPredictionSessionLocked(appPredictionSessionId2);
-                }
-            }
-        });
+        AppPredictionSessionInfo appPredictionSessionInfo =
+                new AppPredictionSessionInfo(
+                        appPredictionSessionId,
+                        appPredictionContext,
+                        z,
+                        iBinder,
+                        new IBinder
+                                .DeathRecipient() { // from class:
+                                                    // com.android.server.appprediction.AppPredictionPerUserService$$ExternalSyntheticLambda2
+                            @Override // android.os.IBinder.DeathRecipient
+                            public final void binderDied() {
+                                AppPredictionPerUserService appPredictionPerUserService =
+                                        AppPredictionPerUserService.this;
+                                AppPredictionSessionId appPredictionSessionId2 =
+                                        appPredictionSessionId;
+                                synchronized (appPredictionPerUserService.mLock) {
+                                    appPredictionPerUserService.onDestroyPredictionSessionLocked(
+                                            appPredictionSessionId2);
+                                }
+                            }
+                        });
         try {
-            appPredictionSessionInfo.mToken.linkToDeath(appPredictionSessionInfo.mDeathRecipient, 0);
+            appPredictionSessionInfo.mToken.linkToDeath(
+                    appPredictionSessionInfo.mDeathRecipient, 0);
             this.mSessionInfos.put(appPredictionSessionId, appPredictionSessionInfo);
         } catch (RemoteException unused) {
             onDestroyPredictionSessionLocked(appPredictionSessionId);
         }
     }
 
-    public final void onDestroyPredictionSessionLocked(AppPredictionSessionId appPredictionSessionId) {
+    public final void onDestroyPredictionSessionLocked(
+            AppPredictionSessionId appPredictionSessionId) {
         if (this.mMaster.debug) {
-            Slog.d("AppPredictionPerUserService", "onDestroyPredictionSessionLocked(): sessionId=" + appPredictionSessionId);
+            Slog.d(
+                    "AppPredictionPerUserService",
+                    "onDestroyPredictionSessionLocked(): sessionId=" + appPredictionSessionId);
         }
-        AppPredictionSessionInfo appPredictionSessionInfo = (AppPredictionSessionInfo) this.mSessionInfos.remove(appPredictionSessionId);
+        AppPredictionSessionInfo appPredictionSessionInfo =
+                (AppPredictionSessionInfo) this.mSessionInfos.remove(appPredictionSessionId);
         if (appPredictionSessionInfo == null) {
             return;
         }
-        resolveService(false, appPredictionSessionInfo.mUsesPeopleService, new AppPredictionPerUserService$$ExternalSyntheticLambda3(appPredictionSessionId, 0));
+        resolveService(
+                false,
+                appPredictionSessionInfo.mUsesPeopleService,
+                new AppPredictionPerUserService$$ExternalSyntheticLambda3(
+                        appPredictionSessionId, 0));
         IBinder iBinder = appPredictionSessionInfo.mToken;
         if (iBinder != null) {
             iBinder.unlinkToDeath(appPredictionSessionInfo.mDeathRecipient, 0);
@@ -148,24 +209,34 @@ public final class AppPredictionPerUserService extends AbstractPerUserSystemServ
     public final void onServiceDied(Object obj) {
         RemoteAppPredictionService remoteAppPredictionService = (RemoteAppPredictionService) obj;
         if (this.mMaster.debug) {
-            Slog.w("AppPredictionPerUserService", "onServiceDied(): service=" + remoteAppPredictionService);
+            Slog.w(
+                    "AppPredictionPerUserService",
+                    "onServiceDied(): service=" + remoteAppPredictionService);
         }
         synchronized (this.mLock) {
             this.mZombie = true;
         }
     }
 
-    public final void registerPredictionUpdatesLocked(AppPredictionSessionId appPredictionSessionId, IPredictionCallback iPredictionCallback) {
-        AppPredictionSessionInfo appPredictionSessionInfo = (AppPredictionSessionInfo) this.mSessionInfos.get(appPredictionSessionId);
+    public final void registerPredictionUpdatesLocked(
+            AppPredictionSessionId appPredictionSessionId,
+            IPredictionCallback iPredictionCallback) {
+        AppPredictionSessionInfo appPredictionSessionInfo =
+                (AppPredictionSessionInfo) this.mSessionInfos.get(appPredictionSessionId);
         if (appPredictionSessionInfo == null) {
             return;
         }
-        if (resolveService(true, appPredictionSessionInfo.mUsesPeopleService, new AppPredictionPerUserService$$ExternalSyntheticLambda4(appPredictionSessionId, iPredictionCallback, 0))) {
+        if (resolveService(
+                true,
+                appPredictionSessionInfo.mUsesPeopleService,
+                new AppPredictionPerUserService$$ExternalSyntheticLambda4(
+                        appPredictionSessionId, iPredictionCallback, 0))) {
             appPredictionSessionInfo.mCallbacks.register(iPredictionCallback);
         }
     }
 
-    public final boolean resolveService(boolean z, boolean z2, AbstractRemoteService.AsyncRequest asyncRequest) {
+    public final boolean resolveService(
+            boolean z, boolean z2, AbstractRemoteService.AsyncRequest asyncRequest) {
         if (!z2) {
             RemoteAppPredictionService remoteServiceLocked = getRemoteServiceLocked();
             if (remoteServiceLocked != null) {
@@ -177,12 +248,16 @@ public final class AppPredictionPerUserService extends AbstractPerUserSystemServ
             }
             return remoteServiceLocked != null;
         }
-        IPredictionService iPredictionService = (IPredictionService) LocalServices.getService(PeopleServiceInternal.class);
+        IPredictionService iPredictionService =
+                (IPredictionService) LocalServices.getService(PeopleServiceInternal.class);
         if (iPredictionService != null) {
             try {
                 asyncRequest.run(iPredictionService);
             } catch (RemoteException e) {
-                Slog.w("AppPredictionPerUserService", "Failed to invoke service:" + iPredictionService, e);
+                Slog.w(
+                        "AppPredictionPerUserService",
+                        "Failed to invoke service:" + iPredictionService,
+                        e);
             }
         }
         return iPredictionService != null;
@@ -191,18 +266,33 @@ public final class AppPredictionPerUserService extends AbstractPerUserSystemServ
     public final void resurrectSessionsLocked() {
         int size = this.mSessionInfos.size();
         if (this.mMaster.debug) {
-            Slog.d("AppPredictionPerUserService", "Resurrecting remote service (" + this.mRemoteService + ") on " + size + " sessions.");
+            Slog.d(
+                    "AppPredictionPerUserService",
+                    "Resurrecting remote service ("
+                            + this.mRemoteService
+                            + ") on "
+                            + size
+                            + " sessions.");
         }
-        for (final AppPredictionSessionInfo appPredictionSessionInfo : this.mSessionInfos.values()) {
+        for (final AppPredictionSessionInfo appPredictionSessionInfo :
+                this.mSessionInfos.values()) {
             IBinder iBinder = appPredictionSessionInfo.mToken;
             appPredictionSessionInfo.mCallbacks.getRegisteredCallbackCount();
-            onCreatePredictionSessionLocked(appPredictionSessionInfo.mPredictionContext, appPredictionSessionInfo.mSessionId, iBinder);
-            appPredictionSessionInfo.mCallbacks.broadcast(new Consumer() { // from class: com.android.server.appprediction.AppPredictionPerUserService$AppPredictionSessionInfo$$ExternalSyntheticLambda0
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    this.registerPredictionUpdatesLocked(AppPredictionPerUserService.AppPredictionSessionInfo.this.mSessionId, (IPredictionCallback) obj);
-                }
-            });
+            onCreatePredictionSessionLocked(
+                    appPredictionSessionInfo.mPredictionContext,
+                    appPredictionSessionInfo.mSessionId,
+                    iBinder);
+            appPredictionSessionInfo.mCallbacks.broadcast(
+                    new Consumer() { // from class:
+                                     // com.android.server.appprediction.AppPredictionPerUserService$AppPredictionSessionInfo$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            this.registerPredictionUpdatesLocked(
+                                    AppPredictionPerUserService.AppPredictionSessionInfo.this
+                                            .mSessionId,
+                                    (IPredictionCallback) obj);
+                        }
+                    });
         }
     }
 

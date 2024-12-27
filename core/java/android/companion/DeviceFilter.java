@@ -1,6 +1,7 @@
 package android.companion;
 
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -11,8 +12,7 @@ public interface DeviceFilter<D extends Parcelable> extends Parcelable {
     public static final int MEDIUM_TYPE_WIFI = 2;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MediumType {
-    }
+    public @interface MediumType {}
 
     String getDeviceDisplayName(D d);
 

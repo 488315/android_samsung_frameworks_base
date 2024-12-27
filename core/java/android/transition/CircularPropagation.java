@@ -16,7 +16,11 @@ public class CircularPropagation extends VisibilityPropagation {
     }
 
     @Override // android.transition.TransitionPropagation
-    public long getStartDelay(ViewGroup sceneRoot, Transition transition, TransitionValues startValues, TransitionValues endValues) {
+    public long getStartDelay(
+            ViewGroup sceneRoot,
+            Transition transition,
+            TransitionValues startValues,
+            TransitionValues endValues) {
         TransitionValues positionValues;
         int epicenterY;
         int epicenterX;
@@ -39,8 +43,10 @@ public class CircularPropagation extends VisibilityPropagation {
         } else {
             int[] loc = new int[2];
             sceneRoot.getLocationOnScreen(loc);
-            int epicenterX2 = Math.round(loc[0] + (sceneRoot.getWidth() / 2) + sceneRoot.getTranslationX());
-            epicenterY = Math.round(loc[1] + (sceneRoot.getHeight() / 2) + sceneRoot.getTranslationY());
+            int epicenterX2 =
+                    Math.round(loc[0] + (sceneRoot.getWidth() / 2) + sceneRoot.getTranslationX());
+            epicenterY =
+                    Math.round(loc[1] + (sceneRoot.getHeight() / 2) + sceneRoot.getTranslationY());
             epicenterX = epicenterX2;
         }
         double distance = distance(viewCenterX, viewCenterY, epicenterX, epicenterY);
@@ -50,7 +56,8 @@ public class CircularPropagation extends VisibilityPropagation {
         if (duration < 0) {
             duration = 300;
         }
-        return Math.round(((directionMultiplier * duration) / this.mPropagationSpeed) * distanceFraction);
+        return Math.round(
+                ((directionMultiplier * duration) / this.mPropagationSpeed) * distanceFraction);
     }
 
     private static double distance(float x1, float y1, float x2, float y2) {

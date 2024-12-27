@@ -10,12 +10,13 @@ import android.os.RemoteException;
 public interface IApplicationStartInfoCompleteListener extends IInterface {
     public static final String DESCRIPTOR = "android.app.IApplicationStartInfoCompleteListener";
 
-    void onApplicationStartInfoComplete(ApplicationStartInfo applicationStartInfo) throws RemoteException;
+    void onApplicationStartInfoComplete(ApplicationStartInfo applicationStartInfo)
+            throws RemoteException;
 
     public static class Default implements IApplicationStartInfoCompleteListener {
         @Override // android.app.IApplicationStartInfoCompleteListener
-        public void onApplicationStartInfoComplete(ApplicationStartInfo applicationStartInfo) throws RemoteException {
-        }
+        public void onApplicationStartInfoComplete(ApplicationStartInfo applicationStartInfo)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +24,8 @@ public interface IApplicationStartInfoCompleteListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IApplicationStartInfoCompleteListener {
+    public abstract static class Stub extends Binder
+            implements IApplicationStartInfoCompleteListener {
         static final int TRANSACTION_onApplicationStartInfoComplete = 1;
 
         public Stub() {
@@ -34,7 +36,8 @@ public interface IApplicationStartInfoCompleteListener extends IInterface {
             if (obj == null) {
                 return null;
             }
-            IInterface iin = obj.queryLocalInterface(IApplicationStartInfoCompleteListener.DESCRIPTOR);
+            IInterface iin =
+                    obj.queryLocalInterface(IApplicationStartInfoCompleteListener.DESCRIPTOR);
             if (iin != null && (iin instanceof IApplicationStartInfoCompleteListener)) {
                 return (IApplicationStartInfoCompleteListener) iin;
             }
@@ -61,7 +64,8 @@ public interface IApplicationStartInfoCompleteListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IApplicationStartInfoCompleteListener.DESCRIPTOR);
             }
@@ -71,7 +75,9 @@ public interface IApplicationStartInfoCompleteListener extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ApplicationStartInfo _arg0 = (ApplicationStartInfo) data.readTypedObject(ApplicationStartInfo.CREATOR);
+                    ApplicationStartInfo _arg0 =
+                            (ApplicationStartInfo)
+                                    data.readTypedObject(ApplicationStartInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onApplicationStartInfoComplete(_arg0);
                     reply.writeNoException();
@@ -98,7 +104,8 @@ public interface IApplicationStartInfoCompleteListener extends IInterface {
             }
 
             @Override // android.app.IApplicationStartInfoCompleteListener
-            public void onApplicationStartInfoComplete(ApplicationStartInfo applicationStartInfo) throws RemoteException {
+            public void onApplicationStartInfoComplete(ApplicationStartInfo applicationStartInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

@@ -1,14 +1,13 @@
 package android.app;
 
 import android.Manifest;
-import android.app.IOnProjectionStateChangedListener;
-import android.app.IUiModeManagerCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.PermissionEnforcer;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -17,7 +16,9 @@ public interface IUiModeManager extends IInterface {
 
     void addNightPriorityAllowedPackageFromShell(String str) throws RemoteException;
 
-    void addOnProjectionStateChangedListener(IOnProjectionStateChangedListener iOnProjectionStateChangedListener, int i) throws RemoteException;
+    void addOnProjectionStateChangedListener(
+            IOnProjectionStateChangedListener iOnProjectionStateChangedListener, int i)
+            throws RemoteException;
 
     void disableCarMode(int i) throws RemoteException;
 
@@ -53,7 +54,9 @@ public interface IUiModeManager extends IInterface {
 
     boolean releaseProjection(int i, String str) throws RemoteException;
 
-    void removeOnProjectionStateChangedListener(IOnProjectionStateChangedListener iOnProjectionStateChangedListener) throws RemoteException;
+    void removeOnProjectionStateChangedListener(
+            IOnProjectionStateChangedListener iOnProjectionStateChangedListener)
+            throws RemoteException;
 
     boolean requestProjection(IBinder iBinder, int i, String str) throws RemoteException;
 
@@ -83,20 +86,18 @@ public interface IUiModeManager extends IInterface {
 
     public static class Default implements IUiModeManager {
         @Override // android.app.IUiModeManager
-        public void addCallback(IUiModeManagerCallback callback) throws RemoteException {
-        }
+        public void addCallback(IUiModeManagerCallback callback) throws RemoteException {}
 
         @Override // android.app.IUiModeManager
-        public void enableCarMode(int flags, int priority, String callingPackage) throws RemoteException {
-        }
+        public void enableCarMode(int flags, int priority, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.app.IUiModeManager
-        public void disableCarMode(int flags) throws RemoteException {
-        }
+        public void disableCarMode(int flags) throws RemoteException {}
 
         @Override // android.app.IUiModeManager
-        public void disableCarModeByCallingPackage(int flags, String callingPackage) throws RemoteException {
-        }
+        public void disableCarModeByCallingPackage(int flags, String callingPackage)
+                throws RemoteException {}
 
         @Override // android.app.IUiModeManager
         public int getCurrentModeType() throws RemoteException {
@@ -104,8 +105,7 @@ public interface IUiModeManager extends IInterface {
         }
 
         @Override // android.app.IUiModeManager
-        public void setNightMode(int mode) throws RemoteException {
-        }
+        public void setNightMode(int mode) throws RemoteException {}
 
         @Override // android.app.IUiModeManager
         public int getNightMode() throws RemoteException {
@@ -113,8 +113,7 @@ public interface IUiModeManager extends IInterface {
         }
 
         @Override // android.app.IUiModeManager
-        public void setNightModeCustomType(int nightModeCustomType) throws RemoteException {
-        }
+        public void setNightModeCustomType(int nightModeCustomType) throws RemoteException {}
 
         @Override // android.app.IUiModeManager
         public int getNightModeCustomType() throws RemoteException {
@@ -122,8 +121,8 @@ public interface IUiModeManager extends IInterface {
         }
 
         @Override // android.app.IUiModeManager
-        public void setAttentionModeThemeOverlay(int attentionModeThemeOverlayType) throws RemoteException {
-        }
+        public void setAttentionModeThemeOverlay(int attentionModeThemeOverlayType)
+                throws RemoteException {}
 
         @Override // android.app.IUiModeManager
         public int getAttentionModeThemeOverlay() throws RemoteException {
@@ -131,12 +130,11 @@ public interface IUiModeManager extends IInterface {
         }
 
         @Override // android.app.IUiModeManager
-        public void setApplicationNightMode(int mode) throws RemoteException {
-        }
+        public void setApplicationNightMode(int mode) throws RemoteException {}
 
         @Override // android.app.IUiModeManager
-        public void setPackageNightMode(String packageName, int userId, int mode) throws RemoteException {
-        }
+        public void setPackageNightMode(String packageName, int userId, int mode)
+                throws RemoteException {}
 
         @Override // android.app.IUiModeManager
         public int getPackageNightMode(String packageName, int userId) throws RemoteException {
@@ -144,8 +142,8 @@ public interface IUiModeManager extends IInterface {
         }
 
         @Override // android.app.IUiModeManager
-        public void setNightPriorityAllowedPackagesFromScpm(List<String> packages) throws RemoteException {
-        }
+        public void setNightPriorityAllowedPackagesFromScpm(List<String> packages)
+                throws RemoteException {}
 
         @Override // android.app.IUiModeManager
         public List<String> getNightPriorityAllowedPackagesFromScpm() throws RemoteException {
@@ -153,12 +151,11 @@ public interface IUiModeManager extends IInterface {
         }
 
         @Override // android.app.IUiModeManager
-        public void addNightPriorityAllowedPackageFromShell(String packageName) throws RemoteException {
-        }
+        public void addNightPriorityAllowedPackageFromShell(String packageName)
+                throws RemoteException {}
 
         @Override // android.app.IUiModeManager
-        public void resetNightPriorityAppliedPackages(int userId) throws RemoteException {
-        }
+        public void resetNightPriorityAppliedPackages(int userId) throws RemoteException {}
 
         @Override // android.app.IUiModeManager
         public boolean isUiModeLocked() throws RemoteException {
@@ -171,7 +168,8 @@ public interface IUiModeManager extends IInterface {
         }
 
         @Override // android.app.IUiModeManager
-        public boolean setNightModeActivatedForCustomMode(int nightModeCustom, boolean active) throws RemoteException {
+        public boolean setNightModeActivatedForCustomMode(int nightModeCustom, boolean active)
+                throws RemoteException {
             return false;
         }
 
@@ -186,8 +184,7 @@ public interface IUiModeManager extends IInterface {
         }
 
         @Override // android.app.IUiModeManager
-        public void setCustomNightModeStart(long time) throws RemoteException {
-        }
+        public void setCustomNightModeStart(long time) throws RemoteException {}
 
         @Override // android.app.IUiModeManager
         public long getCustomNightModeEnd() throws RemoteException {
@@ -195,26 +192,28 @@ public interface IUiModeManager extends IInterface {
         }
 
         @Override // android.app.IUiModeManager
-        public void setCustomNightModeEnd(long time) throws RemoteException {
-        }
+        public void setCustomNightModeEnd(long time) throws RemoteException {}
 
         @Override // android.app.IUiModeManager
-        public boolean requestProjection(IBinder binder, int projectionType, String callingPackage) throws RemoteException {
+        public boolean requestProjection(IBinder binder, int projectionType, String callingPackage)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IUiModeManager
-        public boolean releaseProjection(int projectionType, String callingPackage) throws RemoteException {
+        public boolean releaseProjection(int projectionType, String callingPackage)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.IUiModeManager
-        public void addOnProjectionStateChangedListener(IOnProjectionStateChangedListener listener, int projectionType) throws RemoteException {
-        }
+        public void addOnProjectionStateChangedListener(
+                IOnProjectionStateChangedListener listener, int projectionType)
+                throws RemoteException {}
 
         @Override // android.app.IUiModeManager
-        public void removeOnProjectionStateChangedListener(IOnProjectionStateChangedListener listener) throws RemoteException {
-        }
+        public void removeOnProjectionStateChangedListener(
+                IOnProjectionStateChangedListener listener) throws RemoteException {}
 
         @Override // android.app.IUiModeManager
         public List<String> getProjectingPackages(int projectionType) throws RemoteException {
@@ -232,8 +231,7 @@ public interface IUiModeManager extends IInterface {
         }
 
         @Override // android.app.IUiModeManager
-        public void setDesktopMode(boolean enabled) throws RemoteException {
-        }
+        public void setDesktopMode(boolean enabled) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -241,7 +239,7 @@ public interface IUiModeManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUiModeManager {
+    public abstract static class Stub extends Binder implements IUiModeManager {
         public static final String DESCRIPTOR = "android.app.IUiModeManager";
         static final int TRANSACTION_addCallback = 1;
         static final int TRANSACTION_addNightPriorityAllowedPackageFromShell = 17;
@@ -289,7 +287,9 @@ public interface IUiModeManager extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IUiModeManager asInterface(IBinder obj) {
@@ -389,7 +389,8 @@ public interface IUiModeManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -399,7 +400,8 @@ public interface IUiModeManager extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IUiModeManagerCallback _arg0 = IUiModeManagerCallback.Stub.asInterface(data.readStrongBinder());
+                    IUiModeManagerCallback _arg0 =
+                            IUiModeManagerCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addCallback(_arg0);
                     reply.writeNoException();
@@ -573,14 +575,18 @@ public interface IUiModeManager extends IInterface {
                     reply.writeBoolean(_result14);
                     return true;
                 case 29:
-                    IOnProjectionStateChangedListener _arg020 = IOnProjectionStateChangedListener.Stub.asInterface(data.readStrongBinder());
+                    IOnProjectionStateChangedListener _arg020 =
+                            IOnProjectionStateChangedListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     int _arg18 = data.readInt();
                     data.enforceNoDataAvail();
                     addOnProjectionStateChangedListener(_arg020, _arg18);
                     reply.writeNoException();
                     return true;
                 case 30:
-                    IOnProjectionStateChangedListener _arg021 = IOnProjectionStateChangedListener.Stub.asInterface(data.readStrongBinder());
+                    IOnProjectionStateChangedListener _arg021 =
+                            IOnProjectionStateChangedListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeOnProjectionStateChangedListener(_arg021);
                     reply.writeNoException();
@@ -645,7 +651,8 @@ public interface IUiModeManager extends IInterface {
             }
 
             @Override // android.app.IUiModeManager
-            public void enableCarMode(int flags, int priority, String callingPackage) throws RemoteException {
+            public void enableCarMode(int flags, int priority, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -677,7 +684,8 @@ public interface IUiModeManager extends IInterface {
             }
 
             @Override // android.app.IUiModeManager
-            public void disableCarModeByCallingPackage(int flags, String callingPackage) throws RemoteException {
+            public void disableCarModeByCallingPackage(int flags, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -771,7 +779,8 @@ public interface IUiModeManager extends IInterface {
             }
 
             @Override // android.app.IUiModeManager
-            public void setAttentionModeThemeOverlay(int attentionModeThemeOverlayType) throws RemoteException {
+            public void setAttentionModeThemeOverlay(int attentionModeThemeOverlayType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -817,7 +826,8 @@ public interface IUiModeManager extends IInterface {
             }
 
             @Override // android.app.IUiModeManager
-            public void setPackageNightMode(String packageName, int userId, int mode) throws RemoteException {
+            public void setPackageNightMode(String packageName, int userId, int mode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -852,7 +862,8 @@ public interface IUiModeManager extends IInterface {
             }
 
             @Override // android.app.IUiModeManager
-            public void setNightPriorityAllowedPackagesFromScpm(List<String> packages) throws RemoteException {
+            public void setNightPriorityAllowedPackagesFromScpm(List<String> packages)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -883,7 +894,8 @@ public interface IUiModeManager extends IInterface {
             }
 
             @Override // android.app.IUiModeManager
-            public void addNightPriorityAllowedPackageFromShell(String packageName) throws RemoteException {
+            public void addNightPriorityAllowedPackageFromShell(String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -945,7 +957,8 @@ public interface IUiModeManager extends IInterface {
             }
 
             @Override // android.app.IUiModeManager
-            public boolean setNightModeActivatedForCustomMode(int nightModeCustom, boolean active) throws RemoteException {
+            public boolean setNightModeActivatedForCustomMode(int nightModeCustom, boolean active)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1042,7 +1055,9 @@ public interface IUiModeManager extends IInterface {
             }
 
             @Override // android.app.IUiModeManager
-            public boolean requestProjection(IBinder binder, int projectionType, String callingPackage) throws RemoteException {
+            public boolean requestProjection(
+                    IBinder binder, int projectionType, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1061,7 +1076,8 @@ public interface IUiModeManager extends IInterface {
             }
 
             @Override // android.app.IUiModeManager
-            public boolean releaseProjection(int projectionType, String callingPackage) throws RemoteException {
+            public boolean releaseProjection(int projectionType, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1079,7 +1095,9 @@ public interface IUiModeManager extends IInterface {
             }
 
             @Override // android.app.IUiModeManager
-            public void addOnProjectionStateChangedListener(IOnProjectionStateChangedListener listener, int projectionType) throws RemoteException {
+            public void addOnProjectionStateChangedListener(
+                    IOnProjectionStateChangedListener listener, int projectionType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1095,7 +1113,8 @@ public interface IUiModeManager extends IInterface {
             }
 
             @Override // android.app.IUiModeManager
-            public void removeOnProjectionStateChangedListener(IOnProjectionStateChangedListener listener) throws RemoteException {
+            public void removeOnProjectionStateChangedListener(
+                    IOnProjectionStateChangedListener listener) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1175,35 +1194,45 @@ public interface IUiModeManager extends IInterface {
         }
 
         protected void setNightModeCustomType_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DAY_NIGHT_MODE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DAY_NIGHT_MODE, getCallingPid(), getCallingUid());
         }
 
         protected void getNightModeCustomType_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DAY_NIGHT_MODE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DAY_NIGHT_MODE, getCallingPid(), getCallingUid());
         }
 
         protected void setAttentionModeThemeOverlay_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DAY_NIGHT_MODE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DAY_NIGHT_MODE, getCallingPid(), getCallingUid());
         }
 
         protected void getAttentionModeThemeOverlay_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MODIFY_DAY_NIGHT_MODE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MODIFY_DAY_NIGHT_MODE, getCallingPid(), getCallingUid());
         }
 
-        protected void addOnProjectionStateChangedListener_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.READ_PROJECTION_STATE, getCallingPid(), getCallingUid());
+        protected void addOnProjectionStateChangedListener_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.READ_PROJECTION_STATE, getCallingPid(), getCallingUid());
         }
 
-        protected void removeOnProjectionStateChangedListener_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.READ_PROJECTION_STATE, getCallingPid(), getCallingUid());
+        protected void removeOnProjectionStateChangedListener_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.READ_PROJECTION_STATE, getCallingPid(), getCallingUid());
         }
 
         protected void getProjectingPackages_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.READ_PROJECTION_STATE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.READ_PROJECTION_STATE, getCallingPid(), getCallingUid());
         }
 
         protected void getActiveProjectionTypes_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.READ_PROJECTION_STATE, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.READ_PROJECTION_STATE, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

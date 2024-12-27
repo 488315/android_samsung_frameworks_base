@@ -16,12 +16,10 @@ public interface ISetEnabledProvidersCallback extends IInterface {
 
     public static class Default implements ISetEnabledProvidersCallback {
         @Override // android.credentials.ISetEnabledProvidersCallback
-        public void onResponse() throws RemoteException {
-        }
+        public void onResponse() throws RemoteException {}
 
         @Override // android.credentials.ISetEnabledProvidersCallback
-        public void onError(String errorType, String message) throws RemoteException {
-        }
+        public void onError(String errorType, String message) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface ISetEnabledProvidersCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISetEnabledProvidersCallback {
+    public abstract static class Stub extends Binder implements ISetEnabledProvidersCallback {
         static final int TRANSACTION_onError = 2;
         static final int TRANSACTION_onResponse = 1;
 
@@ -70,7 +68,8 @@ public interface ISetEnabledProvidersCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISetEnabledProvidersCallback.DESCRIPTOR);
             }

@@ -1,6 +1,7 @@
 package com.android.server.usb.descriptors;
 
 import android.hardware.audio.common.V2_0.AudioChannelMask$$ExternalSyntheticOutline0;
+
 import com.android.server.usb.descriptors.report.TextReportCanvas;
 import com.android.server.usb.descriptors.report.UsbStrings;
 
@@ -23,7 +24,8 @@ public abstract class UsbACTerminal extends UsbACInterface {
         return this.mLength;
     }
 
-    @Override // com.android.server.usb.descriptors.UsbACInterface, com.android.server.usb.descriptors.UsbDescriptor
+    @Override // com.android.server.usb.descriptors.UsbACInterface,
+              // com.android.server.usb.descriptors.UsbDescriptor
     public void report(TextReportCanvas textReportCanvas) {
         super.report(textReportCanvas);
         textReportCanvas.openList();
@@ -33,12 +35,15 @@ public abstract class UsbACTerminal extends UsbACInterface {
         sb.append(": ");
         String str = (String) UsbStrings.sTerminalNames.get(Integer.valueOf(i));
         if (str == null) {
-            str = AudioChannelMask$$ExternalSyntheticOutline0.m(new StringBuilder("Unknown Terminal Type 0x"), i);
+            str =
+                    AudioChannelMask$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("Unknown Terminal Type 0x"), i);
         }
         sb.append(str);
         textReportCanvas.writeListItem(sb.toString());
         textReportCanvas.writeListItem("ID: " + TextReportCanvas.getHexString(getTerminalID()));
-        textReportCanvas.writeListItem("Associated terminal: " + TextReportCanvas.getHexString(this.mAssocTerminal));
+        textReportCanvas.writeListItem(
+                "Associated terminal: " + TextReportCanvas.getHexString(this.mAssocTerminal));
         textReportCanvas.closeList();
     }
 }

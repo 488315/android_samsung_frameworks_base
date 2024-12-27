@@ -25,7 +25,8 @@ public final class FaceAuthenticator extends IBiometricAuthenticator.Stub {
         this.mFaceService.cancelAuthenticationFromService(this.mSensorId, iBinder, str, j);
     }
 
-    public final ITestSession createTestSession(ITestSessionCallback iTestSessionCallback, String str) {
+    public final ITestSession createTestSession(
+            ITestSessionCallback iTestSessionCallback, String str) {
         return this.mFaceService.createTestSession(this.mSensorId, iTestSessionCallback, str);
     }
 
@@ -49,7 +50,8 @@ public final class FaceAuthenticator extends IBiometricAuthenticator.Stub {
         return this.mFaceService.hasEnrolledFaces(this.mSensorId, i, str);
     }
 
-    public final void invalidateAuthenticatorId(int i, IInvalidationCallback iInvalidationCallback) {
+    public final void invalidateAuthenticatorId(
+            int i, IInvalidationCallback iInvalidationCallback) {
         this.mFaceService.invalidateAuthenticatorId(this.mSensorId, i, iInvalidationCallback);
     }
 
@@ -57,8 +59,32 @@ public final class FaceAuthenticator extends IBiometricAuthenticator.Stub {
         return this.mFaceService.isHardwareDetected(this.mSensorId, str);
     }
 
-    public final void prepareForAuthentication(boolean z, IBinder iBinder, long j, int i, IBiometricSensorReceiver iBiometricSensorReceiver, String str, long j2, int i2, boolean z2, boolean z3, boolean z4) {
-        this.mFaceService.prepareForAuthentication(z, iBinder, j, iBiometricSensorReceiver, new FaceAuthenticateOptions.Builder().setUserId(i).setSensorId(this.mSensorId).setOpPackageName(str).setIsMandatoryBiometrics(z4).build(), j2, i2, z2);
+    public final void prepareForAuthentication(
+            boolean z,
+            IBinder iBinder,
+            long j,
+            int i,
+            IBiometricSensorReceiver iBiometricSensorReceiver,
+            String str,
+            long j2,
+            int i2,
+            boolean z2,
+            boolean z3,
+            boolean z4) {
+        this.mFaceService.prepareForAuthentication(
+                z,
+                iBinder,
+                j,
+                iBiometricSensorReceiver,
+                new FaceAuthenticateOptions.Builder()
+                        .setUserId(i)
+                        .setSensorId(this.mSensorId)
+                        .setOpPackageName(str)
+                        .setIsMandatoryBiometrics(z4)
+                        .build(),
+                j2,
+                i2,
+                z2);
     }
 
     public final void resetLockout(IBinder iBinder, String str, int i, byte[] bArr) {

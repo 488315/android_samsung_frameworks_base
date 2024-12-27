@@ -9,7 +9,6 @@ import android.content.UriMatcher;
 import android.content.pm.ProviderInfo;
 import android.database.Cursor;
 import android.net.Uri;
-import android.provider.SearchIndexablesContract;
 import android.util.Log;
 
 @SystemApi
@@ -40,7 +39,8 @@ public abstract class SearchIndexablesProvider extends ContentProvider {
         this.mMatcher.addURI(this.mAuthority, SearchIndexablesContract.NON_INDEXABLES_KEYS_PATH, 3);
         this.mMatcher.addURI(this.mAuthority, SearchIndexablesContract.SITE_MAP_PAIRS_PATH, 4);
         this.mMatcher.addURI(this.mAuthority, SearchIndexablesContract.SLICE_URI_PAIRS_PATH, 5);
-        this.mMatcher.addURI(this.mAuthority, SearchIndexablesContract.DYNAMIC_INDEXABLES_RAW_PATH, 6);
+        this.mMatcher.addURI(
+                this.mAuthority, SearchIndexablesContract.DYNAMIC_INDEXABLES_RAW_PATH, 6);
         if (!info.exported) {
             throw new SecurityException("Provider must be exported");
         }
@@ -54,7 +54,12 @@ public abstract class SearchIndexablesProvider extends ContentProvider {
     }
 
     @Override // android.content.ContentProvider
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(
+            Uri uri,
+            String[] projection,
+            String selection,
+            String[] selectionArgs,
+            String sortOrder) {
         try {
             switch (this.mMatcher.match(uri)) {
                 case 1:
@@ -120,7 +125,8 @@ public abstract class SearchIndexablesProvider extends ContentProvider {
     }
 
     @Override // android.content.ContentProvider
-    public final int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+    public final int update(
+            Uri uri, ContentValues values, String selection, String[] selectionArgs) {
         throw new UnsupportedOperationException("Update not supported");
     }
 }

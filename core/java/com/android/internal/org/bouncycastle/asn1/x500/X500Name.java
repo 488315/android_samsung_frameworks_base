@@ -9,6 +9,7 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.asn1.x500.style.BCStyle;
+
 import java.util.Enumeration;
 
 /* loaded from: classes5.dex */
@@ -132,7 +133,8 @@ public class X500Name extends ASN1Object implements ASN1Choice {
         return res;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         return this.rdnSeq;
     }
@@ -160,7 +162,10 @@ public class X500Name extends ASN1Object implements ASN1Choice {
             return true;
         }
         try {
-            return this.style.areEqual(this, new X500Name(ASN1Sequence.getInstance(((ASN1Encodable) obj).toASN1Primitive())));
+            return this.style.areEqual(
+                    this,
+                    new X500Name(
+                            ASN1Sequence.getInstance(((ASN1Encodable) obj).toASN1Primitive())));
         } catch (Exception e) {
             return false;
         }

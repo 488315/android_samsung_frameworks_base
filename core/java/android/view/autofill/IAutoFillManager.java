@@ -9,13 +9,20 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.service.autofill.UserData;
-import android.view.autofill.IAutoFillManagerClient;
+
 import com.android.internal.os.IResultReceiver;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
 public interface IAutoFillManager extends IInterface {
-    void addClient(IAutoFillManagerClient iAutoFillManagerClient, ComponentName componentName, int i, IResultReceiver iResultReceiver, boolean z) throws RemoteException;
+    void addClient(
+            IAutoFillManagerClient iAutoFillManagerClient,
+            ComponentName componentName,
+            int i,
+            IResultReceiver iResultReceiver,
+            boolean z)
+            throws RemoteException;
 
     void cancelSession(int i, int i2) throws RemoteException;
 
@@ -25,9 +32,11 @@ public interface IAutoFillManager extends IInterface {
 
     void getAutofillServiceComponentName(IResultReceiver iResultReceiver) throws RemoteException;
 
-    void getAvailableFieldClassificationAlgorithms(IResultReceiver iResultReceiver) throws RemoteException;
+    void getAvailableFieldClassificationAlgorithms(IResultReceiver iResultReceiver)
+            throws RemoteException;
 
-    void getDefaultFieldClassificationAlgorithm(IResultReceiver iResultReceiver) throws RemoteException;
+    void getDefaultFieldClassificationAlgorithm(IResultReceiver iResultReceiver)
+            throws RemoteException;
 
     void getFillEventHistory(IResultReceiver iResultReceiver) throws RemoteException;
 
@@ -37,7 +46,8 @@ public interface IAutoFillManager extends IInterface {
 
     void isFieldClassificationEnabled(IResultReceiver iResultReceiver) throws RemoteException;
 
-    void isServiceEnabled(int i, String str, IResultReceiver iResultReceiver) throws RemoteException;
+    void isServiceEnabled(int i, String str, IResultReceiver iResultReceiver)
+            throws RemoteException;
 
     void isServiceSupported(int i, IResultReceiver iResultReceiver) throws RemoteException;
 
@@ -45,9 +55,12 @@ public interface IAutoFillManager extends IInterface {
 
     void removeClient(IAutoFillManagerClient iAutoFillManagerClient, int i) throws RemoteException;
 
-    void restoreSession(int i, IBinder iBinder, IBinder iBinder2, IResultReceiver iResultReceiver) throws RemoteException;
+    void restoreSession(int i, IBinder iBinder, IBinder iBinder2, IResultReceiver iResultReceiver)
+            throws RemoteException;
 
-    void setAugmentedAutofillWhitelist(List<String> list, List<ComponentName> list2, IResultReceiver iResultReceiver) throws RemoteException;
+    void setAugmentedAutofillWhitelist(
+            List<String> list, List<ComponentName> list2, IResultReceiver iResultReceiver)
+            throws RemoteException;
 
     void setAuthenticationResult(Bundle bundle, int i, int i2, int i3) throws RemoteException;
 
@@ -59,106 +72,143 @@ public interface IAutoFillManager extends IInterface {
 
     void setViewAutofilled(int i, AutofillId autofillId, int i2) throws RemoteException;
 
-    void startSession(IBinder iBinder, IBinder iBinder2, AutofillId autofillId, Rect rect, AutofillValue autofillValue, int i, boolean z, int i2, ComponentName componentName, boolean z2, IResultReceiver iResultReceiver) throws RemoteException;
+    void startSession(
+            IBinder iBinder,
+            IBinder iBinder2,
+            AutofillId autofillId,
+            Rect rect,
+            AutofillValue autofillValue,
+            int i,
+            boolean z,
+            int i2,
+            ComponentName componentName,
+            boolean z2,
+            IResultReceiver iResultReceiver)
+            throws RemoteException;
 
-    void updateSession(int i, AutofillId autofillId, Rect rect, AutofillValue autofillValue, int i2, int i3, int i4) throws RemoteException;
+    void updateSession(
+            int i,
+            AutofillId autofillId,
+            Rect rect,
+            AutofillValue autofillValue,
+            int i2,
+            int i3,
+            int i4)
+            throws RemoteException;
 
     public static class Default implements IAutoFillManager {
         @Override // android.view.autofill.IAutoFillManager
-        public void addClient(IAutoFillManagerClient client, ComponentName componentName, int userId, IResultReceiver result, boolean credmanRequested) throws RemoteException {
-        }
+        public void addClient(
+                IAutoFillManagerClient client,
+                ComponentName componentName,
+                int userId,
+                IResultReceiver result,
+                boolean credmanRequested)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManager
-        public void removeClient(IAutoFillManagerClient client, int userId) throws RemoteException {
-        }
+        public void removeClient(IAutoFillManagerClient client, int userId)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManager
-        public void startSession(IBinder activityToken, IBinder appCallback, AutofillId autoFillId, Rect bounds, AutofillValue value, int userId, boolean hasCallback, int flags, ComponentName componentName, boolean compatMode, IResultReceiver result) throws RemoteException {
-        }
+        public void startSession(
+                IBinder activityToken,
+                IBinder appCallback,
+                AutofillId autoFillId,
+                Rect bounds,
+                AutofillValue value,
+                int userId,
+                boolean hasCallback,
+                int flags,
+                ComponentName componentName,
+                boolean compatMode,
+                IResultReceiver result)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManager
-        public void getFillEventHistory(IResultReceiver result) throws RemoteException {
-        }
+        public void getFillEventHistory(IResultReceiver result) throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManager
-        public void restoreSession(int sessionId, IBinder activityToken, IBinder appCallback, IResultReceiver result) throws RemoteException {
-        }
+        public void restoreSession(
+                int sessionId, IBinder activityToken, IBinder appCallback, IResultReceiver result)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManager
-        public void updateSession(int sessionId, AutofillId id, Rect bounds, AutofillValue value, int action, int flags, int userId) throws RemoteException {
-        }
+        public void updateSession(
+                int sessionId,
+                AutofillId id,
+                Rect bounds,
+                AutofillValue value,
+                int action,
+                int flags,
+                int userId)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManager
-        public void setAutofillFailure(int sessionId, List<AutofillId> ids, int userId) throws RemoteException {
-        }
+        public void setAutofillFailure(int sessionId, List<AutofillId> ids, int userId)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManager
-        public void setViewAutofilled(int sessionId, AutofillId id, int userId) throws RemoteException {
-        }
+        public void setViewAutofilled(int sessionId, AutofillId id, int userId)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManager
-        public void finishSession(int sessionId, int userId, int commitReason) throws RemoteException {
-        }
+        public void finishSession(int sessionId, int userId, int commitReason)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManager
-        public void cancelSession(int sessionId, int userId) throws RemoteException {
-        }
+        public void cancelSession(int sessionId, int userId) throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManager
-        public void setAuthenticationResult(Bundle data, int sessionId, int authenticationId, int userId) throws RemoteException {
-        }
+        public void setAuthenticationResult(
+                Bundle data, int sessionId, int authenticationId, int userId)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManager
-        public void setHasCallback(int sessionId, int userId, boolean hasIt) throws RemoteException {
-        }
+        public void setHasCallback(int sessionId, int userId, boolean hasIt)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManager
-        public void disableOwnedAutofillServices(int userId) throws RemoteException {
-        }
+        public void disableOwnedAutofillServices(int userId) throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManager
-        public void isServiceSupported(int userId, IResultReceiver result) throws RemoteException {
-        }
+        public void isServiceSupported(int userId, IResultReceiver result) throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManager
-        public void isServiceEnabled(int userId, String packageName, IResultReceiver result) throws RemoteException {
-        }
+        public void isServiceEnabled(int userId, String packageName, IResultReceiver result)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManager
-        public void onPendingSaveUi(int operation, IBinder token) throws RemoteException {
-        }
+        public void onPendingSaveUi(int operation, IBinder token) throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManager
-        public void getUserData(IResultReceiver result) throws RemoteException {
-        }
+        public void getUserData(IResultReceiver result) throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManager
-        public void getUserDataId(IResultReceiver result) throws RemoteException {
-        }
+        public void getUserDataId(IResultReceiver result) throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManager
-        public void setUserData(UserData userData) throws RemoteException {
-        }
+        public void setUserData(UserData userData) throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManager
-        public void isFieldClassificationEnabled(IResultReceiver result) throws RemoteException {
-        }
+        public void isFieldClassificationEnabled(IResultReceiver result) throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManager
-        public void getAutofillServiceComponentName(IResultReceiver result) throws RemoteException {
-        }
+        public void getAutofillServiceComponentName(IResultReceiver result)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManager
-        public void getAvailableFieldClassificationAlgorithms(IResultReceiver result) throws RemoteException {
-        }
+        public void getAvailableFieldClassificationAlgorithms(IResultReceiver result)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManager
-        public void getDefaultFieldClassificationAlgorithm(IResultReceiver result) throws RemoteException {
-        }
+        public void getDefaultFieldClassificationAlgorithm(IResultReceiver result)
+                throws RemoteException {}
 
         @Override // android.view.autofill.IAutoFillManager
-        public void setAugmentedAutofillWhitelist(List<String> packages, List<ComponentName> activities, IResultReceiver result) throws RemoteException {
-        }
+        public void setAugmentedAutofillWhitelist(
+                List<String> packages, List<ComponentName> activities, IResultReceiver result)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -166,7 +216,7 @@ public interface IAutoFillManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IAutoFillManager {
+    public abstract static class Stub extends Binder implements IAutoFillManager {
         public static final String DESCRIPTOR = "android.view.autofill.IAutoFillManager";
         static final int TRANSACTION_addClient = 1;
         static final int TRANSACTION_cancelSession = 10;
@@ -274,7 +324,8 @@ public interface IAutoFillManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -284,16 +335,20 @@ public interface IAutoFillManager extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IAutoFillManagerClient _arg0 = IAutoFillManagerClient.Stub.asInterface(data.readStrongBinder());
-                    ComponentName _arg1 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    IAutoFillManagerClient _arg0 =
+                            IAutoFillManagerClient.Stub.asInterface(data.readStrongBinder());
+                    ComponentName _arg1 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg2 = data.readInt();
-                    IResultReceiver _arg3 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg3 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     boolean _arg4 = data.readBoolean();
                     data.enforceNoDataAvail();
                     addClient(_arg0, _arg1, _arg2, _arg3, _arg4);
                     return true;
                 case 2:
-                    IAutoFillManagerClient _arg02 = IAutoFillManagerClient.Stub.asInterface(data.readStrongBinder());
+                    IAutoFillManagerClient _arg02 =
+                            IAutoFillManagerClient.Stub.asInterface(data.readStrongBinder());
                     int _arg12 = data.readInt();
                     data.enforceNoDataAvail();
                     removeClient(_arg02, _arg12);
@@ -303,18 +358,24 @@ public interface IAutoFillManager extends IInterface {
                     IBinder _arg13 = data.readStrongBinder();
                     AutofillId _arg22 = (AutofillId) data.readTypedObject(AutofillId.CREATOR);
                     Rect _arg32 = (Rect) data.readTypedObject(Rect.CREATOR);
-                    AutofillValue _arg42 = (AutofillValue) data.readTypedObject(AutofillValue.CREATOR);
+                    AutofillValue _arg42 =
+                            (AutofillValue) data.readTypedObject(AutofillValue.CREATOR);
                     int _arg5 = data.readInt();
                     boolean _arg6 = data.readBoolean();
                     int _arg7 = data.readInt();
-                    ComponentName _arg8 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg8 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     boolean _arg9 = data.readBoolean();
-                    IResultReceiver _arg10 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg10 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
-                    startSession(_arg03, _arg13, _arg22, _arg32, _arg42, _arg5, _arg6, _arg7, _arg8, _arg9, _arg10);
+                    startSession(
+                            _arg03, _arg13, _arg22, _arg32, _arg42, _arg5, _arg6, _arg7, _arg8,
+                            _arg9, _arg10);
                     return true;
                 case 4:
-                    IResultReceiver _arg04 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg04 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getFillEventHistory(_arg04);
                     return true;
@@ -322,7 +383,8 @@ public interface IAutoFillManager extends IInterface {
                     int _arg05 = data.readInt();
                     IBinder _arg14 = data.readStrongBinder();
                     IBinder _arg23 = data.readStrongBinder();
-                    IResultReceiver _arg33 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg33 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     restoreSession(_arg05, _arg14, _arg23, _arg33);
                     return true;
@@ -330,7 +392,8 @@ public interface IAutoFillManager extends IInterface {
                     int _arg06 = data.readInt();
                     AutofillId _arg15 = (AutofillId) data.readTypedObject(AutofillId.CREATOR);
                     Rect _arg24 = (Rect) data.readTypedObject(Rect.CREATOR);
-                    AutofillValue _arg34 = (AutofillValue) data.readTypedObject(AutofillValue.CREATOR);
+                    AutofillValue _arg34 =
+                            (AutofillValue) data.readTypedObject(AutofillValue.CREATOR);
                     int _arg43 = data.readInt();
                     int _arg52 = data.readInt();
                     int _arg62 = data.readInt();
@@ -386,14 +449,16 @@ public interface IAutoFillManager extends IInterface {
                     return true;
                 case 14:
                     int _arg014 = data.readInt();
-                    IResultReceiver _arg112 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg112 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     isServiceSupported(_arg014, _arg112);
                     return true;
                 case 15:
                     int _arg015 = data.readInt();
                     String _arg113 = data.readString();
-                    IResultReceiver _arg210 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg210 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     isServiceEnabled(_arg015, _arg113, _arg210);
                     return true;
@@ -404,12 +469,14 @@ public interface IAutoFillManager extends IInterface {
                     onPendingSaveUi(_arg016, _arg114);
                     return true;
                 case 17:
-                    IResultReceiver _arg017 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg017 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getUserData(_arg017);
                     return true;
                 case 18:
-                    IResultReceiver _arg018 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg018 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getUserDataId(_arg018);
                     return true;
@@ -419,29 +486,34 @@ public interface IAutoFillManager extends IInterface {
                     setUserData(_arg019);
                     return true;
                 case 20:
-                    IResultReceiver _arg020 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg020 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     isFieldClassificationEnabled(_arg020);
                     return true;
                 case 21:
-                    IResultReceiver _arg021 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg021 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getAutofillServiceComponentName(_arg021);
                     return true;
                 case 22:
-                    IResultReceiver _arg022 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg022 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getAvailableFieldClassificationAlgorithms(_arg022);
                     return true;
                 case 23:
-                    IResultReceiver _arg023 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg023 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     getDefaultFieldClassificationAlgorithm(_arg023);
                     return true;
                 case 24:
                     List<String> _arg024 = data.createStringArrayList();
                     List<ComponentName> _arg115 = data.createTypedArrayList(ComponentName.CREATOR);
-                    IResultReceiver _arg211 = IResultReceiver.Stub.asInterface(data.readStrongBinder());
+                    IResultReceiver _arg211 =
+                            IResultReceiver.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setAugmentedAutofillWhitelist(_arg024, _arg115, _arg211);
                     return true;
@@ -467,7 +539,13 @@ public interface IAutoFillManager extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManager
-            public void addClient(IAutoFillManagerClient client, ComponentName componentName, int userId, IResultReceiver result, boolean credmanRequested) throws RemoteException {
+            public void addClient(
+                    IAutoFillManagerClient client,
+                    ComponentName componentName,
+                    int userId,
+                    IResultReceiver result,
+                    boolean credmanRequested)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -483,7 +561,8 @@ public interface IAutoFillManager extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManager
-            public void removeClient(IAutoFillManagerClient client, int userId) throws RemoteException {
+            public void removeClient(IAutoFillManagerClient client, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -496,7 +575,19 @@ public interface IAutoFillManager extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManager
-            public void startSession(IBinder activityToken, IBinder appCallback, AutofillId autoFillId, Rect bounds, AutofillValue value, int userId, boolean hasCallback, int flags, ComponentName componentName, boolean compatMode, IResultReceiver result) throws RemoteException {
+            public void startSession(
+                    IBinder activityToken,
+                    IBinder appCallback,
+                    AutofillId autoFillId,
+                    Rect bounds,
+                    AutofillValue value,
+                    int userId,
+                    boolean hasCallback,
+                    int flags,
+                    ComponentName componentName,
+                    boolean compatMode,
+                    IResultReceiver result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -595,7 +686,12 @@ public interface IAutoFillManager extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManager
-            public void restoreSession(int sessionId, IBinder activityToken, IBinder appCallback, IResultReceiver result) throws RemoteException {
+            public void restoreSession(
+                    int sessionId,
+                    IBinder activityToken,
+                    IBinder appCallback,
+                    IResultReceiver result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -610,7 +706,15 @@ public interface IAutoFillManager extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManager
-            public void updateSession(int sessionId, AutofillId id, Rect bounds, AutofillValue value, int action, int flags, int userId) throws RemoteException {
+            public void updateSession(
+                    int sessionId,
+                    AutofillId id,
+                    Rect bounds,
+                    AutofillValue value,
+                    int action,
+                    int flags,
+                    int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -628,7 +732,8 @@ public interface IAutoFillManager extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManager
-            public void setAutofillFailure(int sessionId, List<AutofillId> ids, int userId) throws RemoteException {
+            public void setAutofillFailure(int sessionId, List<AutofillId> ids, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -642,7 +747,8 @@ public interface IAutoFillManager extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManager
-            public void setViewAutofilled(int sessionId, AutofillId id, int userId) throws RemoteException {
+            public void setViewAutofilled(int sessionId, AutofillId id, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -656,7 +762,8 @@ public interface IAutoFillManager extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManager
-            public void finishSession(int sessionId, int userId, int commitReason) throws RemoteException {
+            public void finishSession(int sessionId, int userId, int commitReason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -683,7 +790,9 @@ public interface IAutoFillManager extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManager
-            public void setAuthenticationResult(Bundle data, int sessionId, int authenticationId, int userId) throws RemoteException {
+            public void setAuthenticationResult(
+                    Bundle data, int sessionId, int authenticationId, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -698,7 +807,8 @@ public interface IAutoFillManager extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManager
-            public void setHasCallback(int sessionId, int userId, boolean hasIt) throws RemoteException {
+            public void setHasCallback(int sessionId, int userId, boolean hasIt)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -724,7 +834,8 @@ public interface IAutoFillManager extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManager
-            public void isServiceSupported(int userId, IResultReceiver result) throws RemoteException {
+            public void isServiceSupported(int userId, IResultReceiver result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -737,7 +848,8 @@ public interface IAutoFillManager extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManager
-            public void isServiceEnabled(int userId, String packageName, IResultReceiver result) throws RemoteException {
+            public void isServiceEnabled(int userId, String packageName, IResultReceiver result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -800,7 +912,8 @@ public interface IAutoFillManager extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManager
-            public void isFieldClassificationEnabled(IResultReceiver result) throws RemoteException {
+            public void isFieldClassificationEnabled(IResultReceiver result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -812,7 +925,8 @@ public interface IAutoFillManager extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManager
-            public void getAutofillServiceComponentName(IResultReceiver result) throws RemoteException {
+            public void getAutofillServiceComponentName(IResultReceiver result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -824,7 +938,8 @@ public interface IAutoFillManager extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManager
-            public void getAvailableFieldClassificationAlgorithms(IResultReceiver result) throws RemoteException {
+            public void getAvailableFieldClassificationAlgorithms(IResultReceiver result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -836,7 +951,8 @@ public interface IAutoFillManager extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManager
-            public void getDefaultFieldClassificationAlgorithm(IResultReceiver result) throws RemoteException {
+            public void getDefaultFieldClassificationAlgorithm(IResultReceiver result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -848,7 +964,9 @@ public interface IAutoFillManager extends IInterface {
             }
 
             @Override // android.view.autofill.IAutoFillManager
-            public void setAugmentedAutofillWhitelist(List<String> packages, List<ComponentName> activities, IResultReceiver result) throws RemoteException {
+            public void setAugmentedAutofillWhitelist(
+                    List<String> packages, List<ComponentName> activities, IResultReceiver result)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

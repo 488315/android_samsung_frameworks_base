@@ -9,6 +9,7 @@ import android.util.ArrayMap;
 import android.util.Log;
 import android.util.TimeUtils;
 import android.util.proto.ProtoOutputStream;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -20,29 +21,38 @@ public class ClipDescription implements Parcelable {
     public static final int CLASSIFICATION_COMPLETE = 3;
     public static final int CLASSIFICATION_NOT_COMPLETE = 1;
     public static final int CLASSIFICATION_NOT_PERFORMED = 2;
-    public static final Parcelable.Creator<ClipDescription> CREATOR = new Parcelable.Creator<ClipDescription>() { // from class: android.content.ClipDescription.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ClipDescription createFromParcel(Parcel source) {
-            return new ClipDescription(source);
-        }
+    public static final Parcelable.Creator<ClipDescription> CREATOR =
+            new Parcelable.Creator<
+                    ClipDescription>() { // from class: android.content.ClipDescription.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ClipDescription createFromParcel(Parcel source) {
+                    return new ClipDescription(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ClipDescription[] newArray(int size) {
-            return new ClipDescription[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ClipDescription[] newArray(int size) {
+                    return new ClipDescription[size];
+                }
+            };
     public static final String EXTRA_ACTIVITY_OPTIONS = "android.intent.extra.ACTIVITY_OPTIONS";
-    public static final String EXTRA_DRAG_AND_DROP_CLIENT = "com.samsung.android.intent.extra.DRAG_AND_DROP_CLIENT";
-    public static final String EXTRA_DRAG_AND_DROP_IGNORE_LEFT_EDGE = "com.samsung.android.content.clipdescription.extra.IGNORE_LEFT_EDGE";
-    public static final String EXTRA_DRAG_AND_DROP_IGNORE_RIGHT_EDGE = "com.samsung.android.content.clipdescription.extra.IGNORE_RIGHT_EDGE";
-    public static final String EXTRA_DRAG_AND_DROP_REQUESTER = "com.samsung.android.intent.extra.DRAG_AND_DROP_REQUESTER";
-    public static final String EXTRA_DRAG_FROM_RECENT = "com.samsung.android.content.clipdescription.extra.DRAG_FROM_RECENT";
-    public static final String EXTRA_HIDE_DRAG_SOURCE_TASK_ID = "android.intent.extra.HIDE_DRAG_SOURCE_TASK_ID";
+    public static final String EXTRA_DRAG_AND_DROP_CLIENT =
+            "com.samsung.android.intent.extra.DRAG_AND_DROP_CLIENT";
+    public static final String EXTRA_DRAG_AND_DROP_IGNORE_LEFT_EDGE =
+            "com.samsung.android.content.clipdescription.extra.IGNORE_LEFT_EDGE";
+    public static final String EXTRA_DRAG_AND_DROP_IGNORE_RIGHT_EDGE =
+            "com.samsung.android.content.clipdescription.extra.IGNORE_RIGHT_EDGE";
+    public static final String EXTRA_DRAG_AND_DROP_REQUESTER =
+            "com.samsung.android.intent.extra.DRAG_AND_DROP_REQUESTER";
+    public static final String EXTRA_DRAG_FROM_RECENT =
+            "com.samsung.android.content.clipdescription.extra.DRAG_FROM_RECENT";
+    public static final String EXTRA_HIDE_DRAG_SOURCE_TASK_ID =
+            "android.intent.extra.HIDE_DRAG_SOURCE_TASK_ID";
     public static final String EXTRA_IS_REMOTE_DEVICE = "android.content.extra.IS_REMOTE_DEVICE";
     public static final String EXTRA_IS_SENSITIVE = "android.content.extra.IS_SENSITIVE";
-    public static final String EXTRA_LOGGING_INSTANCE_ID = "android.intent.extra.LOGGING_INSTANCE_ID";
+    public static final String EXTRA_LOGGING_INSTANCE_ID =
+            "android.intent.extra.LOGGING_INSTANCE_ID";
     public static final String EXTRA_PENDING_INTENT = "android.intent.extra.PENDING_INTENT";
     public static final String MIMETYPE_APPLICATION_ACTIVITY = "application/vnd.android.activity";
     public static final String MIMETYPE_APPLICATION_SHORTCUT = "application/vnd.android.shortcut";
@@ -61,8 +71,7 @@ public class ClipDescription implements Parcelable {
     private long mTimeStamp;
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface ClassificationStatus {
-    }
+    @interface ClassificationStatus {}
 
     public ClipDescription(CharSequence label, String[] mimeTypes) {
         this.mEntityConfidence = new ArrayMap<>();
@@ -337,7 +346,9 @@ public class ClipDescription implements Parcelable {
         Bundle bundle = new Bundle();
         int size = this.mEntityConfidence.size();
         for (int i = 0; i < size; i++) {
-            bundle.putFloat(this.mEntityConfidence.keyAt(i), this.mEntityConfidence.valueAt(i).floatValue());
+            bundle.putFloat(
+                    this.mEntityConfidence.keyAt(i),
+                    this.mEntityConfidence.valueAt(i).floatValue());
         }
         return bundle;
     }

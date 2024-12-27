@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
 import android.view.View;
+
 import com.samsung.android.knox.analytics.database.Contract;
 import com.samsung.android.widget.SemTipPopup;
 
@@ -62,12 +63,15 @@ public class SemTipPopupWrapper {
             this.mPopup.setExpanded(false);
         }
         this.mPopup.show(direction);
-        this.mPopup.setOnStateChangeListener(new SemTipPopup.OnStateChangeListener() { // from class: com.samsung.android.globalactions.util.SemTipPopupWrapper$$ExternalSyntheticLambda0
-            @Override // com.samsung.android.widget.SemTipPopup.OnStateChangeListener
-            public final void onStateChanged(int i) {
-                SemTipPopupWrapper.this.lambda$show$0(i);
-            }
-        });
+        this.mPopup.setOnStateChangeListener(
+                new SemTipPopup
+                        .OnStateChangeListener() { // from class:
+                                                   // com.samsung.android.globalactions.util.SemTipPopupWrapper$$ExternalSyntheticLambda0
+                    @Override // com.samsung.android.widget.SemTipPopup.OnStateChangeListener
+                    public final void onStateChanged(int i) {
+                        SemTipPopupWrapper.this.lambda$show$0(i);
+                    }
+                });
         addCount(count);
     }
 

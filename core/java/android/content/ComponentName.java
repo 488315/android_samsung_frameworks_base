@@ -4,23 +4,25 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.proto.ProtoOutputStream;
+
 import java.io.PrintWriter;
 
 /* loaded from: classes.dex */
 public final class ComponentName implements Parcelable, Cloneable, Comparable<ComponentName> {
-    public static final Parcelable.Creator<ComponentName> CREATOR = new Parcelable.Creator<ComponentName>() { // from class: android.content.ComponentName.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ComponentName createFromParcel(Parcel in) {
-            return new ComponentName(in);
-        }
+    public static final Parcelable.Creator<ComponentName> CREATOR =
+            new Parcelable.Creator<ComponentName>() { // from class: android.content.ComponentName.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ComponentName createFromParcel(Parcel in) {
+                    return new ComponentName(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ComponentName[] newArray(int size) {
-            return new ComponentName[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ComponentName[] newArray(int size) {
+                    return new ComponentName[size];
+                }
+            };
     private final String mClass;
     private final String mPackage;
 
@@ -86,16 +88,21 @@ public final class ComponentName implements Parcelable, Cloneable, Comparable<Co
     public String getShortClassName() {
         int PN;
         int CN;
-        if (this.mClass.startsWith(this.mPackage) && (CN = this.mClass.length()) > (PN = this.mPackage.length()) && this.mClass.charAt(PN) == '.') {
+        if (this.mClass.startsWith(this.mPackage)
+                && (CN = this.mClass.length()) > (PN = this.mPackage.length())
+                && this.mClass.charAt(PN) == '.') {
             return this.mClass.substring(PN, CN);
         }
         return this.mClass;
     }
 
-    private static void appendShortClassName(StringBuilder sb, String packageName, String className) {
+    private static void appendShortClassName(
+            StringBuilder sb, String packageName, String className) {
         int PN;
         int CN;
-        if (className.startsWith(packageName) && (CN = className.length()) > (PN = packageName.length()) && className.charAt(PN) == '.') {
+        if (className.startsWith(packageName)
+                && (CN = className.length()) > (PN = packageName.length())
+                && className.charAt(PN) == '.') {
             sb.append((CharSequence) className, PN, CN);
         } else {
             sb.append(className);
@@ -105,7 +112,9 @@ public final class ComponentName implements Parcelable, Cloneable, Comparable<Co
     private static void printShortClassName(PrintWriter pw, String packageName, String className) {
         int PN;
         int CN;
-        if (className.startsWith(packageName) && (CN = className.length()) > (PN = packageName.length()) && className.charAt(PN) == '.') {
+        if (className.startsWith(packageName)
+                && (CN = className.length()) > (PN = packageName.length())
+                && className.charAt(PN) == '.') {
             pw.write(className, PN, CN - PN);
         } else {
             pw.print(className);

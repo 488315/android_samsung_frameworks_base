@@ -3,6 +3,7 @@ package android.hardware.input;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -15,30 +16,30 @@ public final class VirtualStylusButtonEvent implements Parcelable {
     public static final int BUTTON_PRIMARY = 32;
     public static final int BUTTON_SECONDARY = 64;
     public static final int BUTTON_UNKNOWN = -1;
-    public static final Parcelable.Creator<VirtualStylusButtonEvent> CREATOR = new Parcelable.Creator<VirtualStylusButtonEvent>() { // from class: android.hardware.input.VirtualStylusButtonEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualStylusButtonEvent createFromParcel(Parcel source) {
-            return new VirtualStylusButtonEvent(source);
-        }
+    public static final Parcelable.Creator<VirtualStylusButtonEvent> CREATOR =
+            new Parcelable.Creator<VirtualStylusButtonEvent>() { // from class:
+                // android.hardware.input.VirtualStylusButtonEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualStylusButtonEvent createFromParcel(Parcel source) {
+                    return new VirtualStylusButtonEvent(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VirtualStylusButtonEvent[] newArray(int size) {
-            return new VirtualStylusButtonEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VirtualStylusButtonEvent[] newArray(int size) {
+                    return new VirtualStylusButtonEvent[size];
+                }
+            };
     private final int mAction;
     private final int mButtonCode;
     private final long mEventTimeNanos;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Action {
-    }
+    public @interface Action {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Button {
-    }
+    public @interface Button {}
 
     private VirtualStylusButtonEvent(int action, int buttonCode, long eventTimeNanos) {
         this.mAction = action;
@@ -83,17 +84,21 @@ public final class VirtualStylusButtonEvent implements Parcelable {
 
         public VirtualStylusButtonEvent build() {
             if (this.mAction == -1) {
-                throw new IllegalArgumentException("Cannot build stylus button event with unset action");
+                throw new IllegalArgumentException(
+                        "Cannot build stylus button event with unset action");
             }
             if (this.mButtonCode == -1) {
-                throw new IllegalArgumentException("Cannot build stylus button event with unset button code");
+                throw new IllegalArgumentException(
+                        "Cannot build stylus button event with unset button code");
             }
-            return new VirtualStylusButtonEvent(this.mAction, this.mButtonCode, this.mEventTimeNanos);
+            return new VirtualStylusButtonEvent(
+                    this.mAction, this.mButtonCode, this.mEventTimeNanos);
         }
 
         public Builder setButtonCode(int buttonCode) {
             if (buttonCode != 32 && buttonCode != 64) {
-                throw new IllegalArgumentException("Unsupported stylus button code : " + buttonCode);
+                throw new IllegalArgumentException(
+                        "Unsupported stylus button code : " + buttonCode);
             }
             this.mButtonCode = buttonCode;
             return this;

@@ -6,19 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SemContextFlipMotion extends SemContextEventContext {
-    public static final Parcelable.Creator<SemContextFlipMotion> CREATOR = new Parcelable.Creator<SemContextFlipMotion>() { // from class: com.samsung.android.hardware.context.SemContextFlipMotion.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextFlipMotion createFromParcel(Parcel in) {
-            return new SemContextFlipMotion(in);
-        }
+    public static final Parcelable.Creator<SemContextFlipMotion> CREATOR =
+            new Parcelable.Creator<
+                    SemContextFlipMotion>() { // from class:
+                                              // com.samsung.android.hardware.context.SemContextFlipMotion.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextFlipMotion createFromParcel(Parcel in) {
+                    return new SemContextFlipMotion(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextFlipMotion[] newArray(int size) {
-            return new SemContextFlipMotion[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextFlipMotion[] newArray(int size) {
+                    return new SemContextFlipMotion[size];
+                }
+            };
     public static final int STATUS_BACK = 2;
     public static final int STATUS_FRONT = 1;
     public static final int STATUS_RESET = 4;

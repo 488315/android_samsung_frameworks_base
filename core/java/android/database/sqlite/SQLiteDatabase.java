@@ -10,7 +10,6 @@ import android.database.DatabaseErrorHandler;
 import android.database.DatabaseUtils;
 import android.database.DefaultDatabaseErrorHandler;
 import android.database.SQLException;
-import android.database.sqlite.SQLiteDebug;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.CancellationSignal;
 import android.os.Looper;
@@ -21,9 +20,12 @@ import android.util.EventLog;
 import android.util.Log;
 import android.util.Pair;
 import android.util.Printer;
+
 import com.android.internal.util.Preconditions;
+
 import dalvik.annotation.optimization.NeverCompile;
 import dalvik.system.CloseGuard;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileFilter;
@@ -95,17 +97,23 @@ public final class SQLiteDatabase extends SQLiteClosable {
     private final DatabaseErrorHandler mErrorHandler;
     private boolean mHasAttachedDbsLocked;
     private SQLiteUserDataRecovery udr;
-    private static final boolean DEBUG_CLOSE_IDLE_CONNECTIONS = SystemProperties.getBoolean("persist.debug.sqlite.close_idle_connections", false);
+    private static final boolean DEBUG_CLOSE_IDLE_CONNECTIONS =
+            SystemProperties.getBoolean("persist.debug.sqlite.close_idle_connections", false);
     private static WeakHashMap<SQLiteDatabase, Object> sActiveDatabases = new WeakHashMap<>();
     private static HashSet<String> sDbDirectories = new HashSet<>();
     private static final Object mSecureLock = new Object();
-    public static final String[] CONFLICT_VALUES = {"", " OR ROLLBACK ", " OR ABORT ", " OR FAIL ", " OR IGNORE ", " OR REPLACE "};
-    private final ThreadLocal<SQLiteSession> mThreadSession = ThreadLocal.withInitial(new Supplier() { // from class: android.database.sqlite.SQLiteDatabase$$ExternalSyntheticLambda3
-        @Override // java.util.function.Supplier
-        public final Object get() {
-            return SQLiteDatabase.this.createSession();
-        }
-    });
+    public static final String[] CONFLICT_VALUES = {
+        "", " OR ROLLBACK ", " OR ABORT ", " OR FAIL ", " OR IGNORE ", " OR REPLACE "
+    };
+    private final ThreadLocal<SQLiteSession> mThreadSession =
+            ThreadLocal.withInitial(
+                    new Supplier() { // from class:
+                        // android.database.sqlite.SQLiteDatabase$$ExternalSyntheticLambda3
+                        @Override // java.util.function.Supplier
+                        public final Object get() {
+                            return SQLiteDatabase.this.createSession();
+                        }
+                    });
     private boolean mInCorruptionHandling = false;
     private boolean mIsDatabaseCorrupted = false;
     private String mIntegrityErrorString = null;
@@ -116,7 +124,11 @@ public final class SQLiteDatabase extends SQLiteClosable {
     private int mCorruptCode = 0;
 
     public interface CursorFactory {
-        Cursor newCursor(SQLiteDatabase sQLiteDatabase, SQLiteCursorDriver sQLiteCursorDriver, String str, SQLiteQuery sQLiteQuery);
+        Cursor newCursor(
+                SQLiteDatabase sQLiteDatabase,
+                SQLiteCursorDriver sQLiteCursorDriver,
+                String str,
+                SQLiteQuery sQLiteQuery);
     }
 
     public interface CustomFunction {
@@ -124,18 +136,27 @@ public final class SQLiteDatabase extends SQLiteClosable {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DatabaseOpenFlags {
-    }
+    public @interface DatabaseOpenFlags {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface JournalMode {
-    }
+    public @interface JournalMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SyncMode {
-    }
+    public @interface SyncMode {}
 
-    private SQLiteDatabase(String path, int openFlags, CursorFactory cursorFactory, DatabaseErrorHandler errorHandler, int lookasideSlotSize, int lookasideSlotCount, long idleConnectionTimeoutMs, long idleConnectionShrinkTimeoutMs, String journalMode, String syncMode, int cacheSize, boolean userDataRecovery) {
+    private SQLiteDatabase(
+            String path,
+            int openFlags,
+            CursorFactory cursorFactory,
+            DatabaseErrorHandler errorHandler,
+            int lookasideSlotSize,
+            int lookasideSlotCount,
+            long idleConnectionTimeoutMs,
+            long idleConnectionShrinkTimeoutMs,
+            String journalMode,
+            String syncMode,
+            int cacheSize,
+            boolean userDataRecovery) {
         this.udr = null;
         this.mDbDump = SQLiteDump.DUMMY_DB_DUMP;
         this.mCursorFactory = cursorFactory;
@@ -143,10 +164,12 @@ public final class SQLiteDatabase extends SQLiteClosable {
         this.mConfigurationLocked = new SQLiteDatabaseConfiguration(path, openFlags);
         this.mConfigurationLocked.lookasideSlotSize = lookasideSlotSize;
         this.mConfigurationLocked.lookasideSlotCount = lookasideSlotCount;
-        if (!this.mConfigurationLocked.isInMemoryDb() && this.mConfigurationLocked.sharedConfig.useDumpCorruptByDefault) {
+        if (!this.mConfigurationLocked.isInMemoryDb()
+                && this.mConfigurationLocked.sharedConfig.useDumpCorruptByDefault) {
             this.mDbDump = new SQLiteDump(path);
         }
-        DefaultDatabaseErrorHandler defaultErrorHandler = new DefaultDatabaseErrorHandler(this.mDbDump);
+        DefaultDatabaseErrorHandler defaultErrorHandler =
+                new DefaultDatabaseErrorHandler(this.mDbDump);
         defaultErrorHandler.setDeleteDatabaseIfCorrupted(this.mErrorHandler == null);
         this.mDefaultErrorHandler = defaultErrorHandler;
         if (ActivityManager.isLowRamDeviceStatic()) {
@@ -217,7 +240,8 @@ public final class SQLiteDatabase extends SQLiteClosable {
 
     private void releaseConnectionMemory() {
         synchronized (this.mLock) {
-            if ((this.mConfigurationLocked.openFlags & 4096) != 0 && this.mConnectionPoolLocked != null) {
+            if ((this.mConfigurationLocked.openFlags & 4096) != 0
+                    && this.mConnectionPoolLocked != null) {
                 this.mConnectionPoolLocked.releaseConnectionMemory();
             }
         }
@@ -233,8 +257,7 @@ public final class SQLiteDatabase extends SQLiteClosable {
     }
 
     @Deprecated
-    public void setLockingEnabled(boolean lockingEnabled) {
-    }
+    public void setLockingEnabled(boolean lockingEnabled) {}
 
     String getLabel() {
         String str;
@@ -376,15 +399,18 @@ public final class SQLiteDatabase extends SQLiteClosable {
         beginTransaction(transactionListener, true);
     }
 
-    public void beginTransactionWithListenerNonExclusive(SQLiteTransactionListener transactionListener) {
+    public void beginTransactionWithListenerNonExclusive(
+            SQLiteTransactionListener transactionListener) {
         beginTransaction(transactionListener, false);
     }
 
-    public void beginTransactionWithListenerReadOnly(SQLiteTransactionListener transactionListener) {
+    public void beginTransactionWithListenerReadOnly(
+            SQLiteTransactionListener transactionListener) {
         beginTransaction(transactionListener, 0);
     }
 
-    private void beginTransaction(SQLiteTransactionListener transactionListener, boolean exclusive) {
+    private void beginTransaction(
+            SQLiteTransactionListener transactionListener, boolean exclusive) {
         beginTransaction(transactionListener, exclusive ? 2 : 1);
     }
 
@@ -393,7 +419,9 @@ public final class SQLiteDatabase extends SQLiteClosable {
         boolean readOnly = mode == 0;
         try {
             try {
-                getThreadSession().beginTransaction(mode, listener, getThreadDefaultConnectionFlags(readOnly), null);
+                getThreadSession()
+                        .beginTransaction(
+                                mode, listener, getThreadDefaultConnectionFlags(readOnly), null);
             } catch (SQLiteDatabaseCorruptException ex) {
                 onCorruption(ex.getCorruptCode());
                 throw ex;
@@ -466,7 +494,8 @@ public final class SQLiteDatabase extends SQLiteClosable {
         acquireReference();
         try {
             try {
-                return getThreadSession().yieldTransaction(sleepAfterYieldDelay, throwIfUnsafe, null);
+                return getThreadSession()
+                        .yieldTransaction(sleepAfterYieldDelay, throwIfUnsafe, null);
             } catch (SQLiteDatabaseCorruptException ex) {
                 onCorruption(ex.getCorruptCode());
                 throw ex;
@@ -495,14 +524,30 @@ public final class SQLiteDatabase extends SQLiteClosable {
 
     public static SQLiteDatabase openDatabase(String path, OpenParams openParams, Context context) {
         Preconditions.checkArgument(openParams != null, "OpenParams cannot be null");
-        SQLiteDatabase db = new SQLiteDatabase(path, openParams.mOpenFlags, openParams.mCursorFactory, openParams.mErrorHandler, openParams.mLookasideSlotSize, openParams.mLookasideSlotCount, openParams.mIdleConnectionTimeout, openParams.mIdleConnectionShrinkTimeout, openParams.mJournalMode, openParams.mSyncMode, openParams.mCacheSize, openParams.mUserDataRecovery);
+        SQLiteDatabase db =
+                new SQLiteDatabase(
+                        path,
+                        openParams.mOpenFlags,
+                        openParams.mCursorFactory,
+                        openParams.mErrorHandler,
+                        openParams.mLookasideSlotSize,
+                        openParams.mLookasideSlotCount,
+                        openParams.mIdleConnectionTimeout,
+                        openParams.mIdleConnectionShrinkTimeout,
+                        openParams.mJournalMode,
+                        openParams.mSyncMode,
+                        openParams.mCacheSize,
+                        openParams.mUserDataRecovery);
         db.setContext(context);
         db.open();
         return db;
     }
 
-    public static SQLiteDatabase openDatabase(String path, CursorFactory factory, int flags, DatabaseErrorHandler errorHandler) {
-        SQLiteDatabase db = new SQLiteDatabase(path, flags, factory, errorHandler, -1, -1, -1L, -1L, null, null, 0, false);
+    public static SQLiteDatabase openDatabase(
+            String path, CursorFactory factory, int flags, DatabaseErrorHandler errorHandler) {
+        SQLiteDatabase db =
+                new SQLiteDatabase(
+                        path, flags, factory, errorHandler, -1, -1, -1L, -1L, null, null, 0, false);
         db.open();
         return db;
     }
@@ -515,40 +560,78 @@ public final class SQLiteDatabase extends SQLiteClosable {
         return openDatabase(path, factory, 268435456, null);
     }
 
-    public static SQLiteDatabase openOrCreateDatabase(String path, CursorFactory factory, DatabaseErrorHandler errorHandler) {
+    public static SQLiteDatabase openOrCreateDatabase(
+            String path, CursorFactory factory, DatabaseErrorHandler errorHandler) {
         return openDatabase(path, factory, 268435456, errorHandler);
     }
 
-    public static SQLiteDatabase openSecureDatabase(String path, OpenParams openParams, byte[] password, Context context) {
+    public static SQLiteDatabase openSecureDatabase(
+            String path, OpenParams openParams, byte[] password, Context context) {
         Preconditions.checkArgument(openParams != null, "OpenParams cannot be null");
         if (password == null) {
             Log.e(TAG, "Could not open a secure database with null password.");
-            throw new IllegalArgumentException("Could not open a secure database with null password.");
+            throw new IllegalArgumentException(
+                    "Could not open a secure database with null password.");
         }
         if (password.length == 0) {
             Log.e(TAG, "Could not open a secure database with empty password.");
-            throw new IllegalArgumentException("Could not open a secure database with empty password.");
+            throw new IllegalArgumentException(
+                    "Could not open a secure database with empty password.");
         }
-        SQLiteDatabase db = new SQLiteDatabase(path, openParams.mOpenFlags | 256 | 512, openParams.mCursorFactory, openParams.mErrorHandler, openParams.mLookasideSlotSize, openParams.mLookasideSlotCount, openParams.mIdleConnectionTimeout, openParams.mIdleConnectionShrinkTimeout, openParams.mJournalMode, openParams.mSyncMode, openParams.mCacheSize, openParams.mUserDataRecovery);
+        SQLiteDatabase db =
+                new SQLiteDatabase(
+                        path,
+                        openParams.mOpenFlags | 256 | 512,
+                        openParams.mCursorFactory,
+                        openParams.mErrorHandler,
+                        openParams.mLookasideSlotSize,
+                        openParams.mLookasideSlotCount,
+                        openParams.mIdleConnectionTimeout,
+                        openParams.mIdleConnectionShrinkTimeout,
+                        openParams.mJournalMode,
+                        openParams.mSyncMode,
+                        openParams.mCacheSize,
+                        openParams.mUserDataRecovery);
         db.setContext(context);
         db.openSecureDatabase(password);
         return db;
     }
 
-    public static SQLiteDatabase openSecureDatabase(File file, OpenParams openParams, byte[] password, Context context) {
+    public static SQLiteDatabase openSecureDatabase(
+            File file, OpenParams openParams, byte[] password, Context context) {
         return openSecureDatabase(file.getPath(), openParams, password, context);
     }
 
-    public static SQLiteDatabase openSecureDatabase(String path, CursorFactory factory, int flags, DatabaseErrorHandler errorHandler, byte[] password) {
+    public static SQLiteDatabase openSecureDatabase(
+            String path,
+            CursorFactory factory,
+            int flags,
+            DatabaseErrorHandler errorHandler,
+            byte[] password) {
         if (password == null) {
             Log.e(TAG, "Could not open a secure database with null password.");
-            throw new IllegalArgumentException("Could not open a secure database with null password.");
+            throw new IllegalArgumentException(
+                    "Could not open a secure database with null password.");
         }
         if (password.length == 0) {
             Log.e(TAG, "Could not open a secure database with empty password.");
-            throw new IllegalArgumentException("Could not open a secure database with empty password.");
+            throw new IllegalArgumentException(
+                    "Could not open a secure database with empty password.");
         }
-        SQLiteDatabase db = new SQLiteDatabase(path, flags | 768, factory, errorHandler, -1, -1, -1L, -1L, null, null, 0, false);
+        SQLiteDatabase db =
+                new SQLiteDatabase(
+                        path,
+                        flags | 768,
+                        factory,
+                        errorHandler,
+                        -1,
+                        -1,
+                        -1L,
+                        -1L,
+                        null,
+                        null,
+                        0,
+                        false);
         db.openSecureDatabase(password);
         return db;
     }
@@ -566,7 +649,8 @@ public final class SQLiteDatabase extends SQLiteClosable {
         return sb.toString();
     }
 
-    public static void convertToPlainDatabase(File sourceDbFile, File destDbFile, byte[] password) throws Exception {
+    public static void convertToPlainDatabase(File sourceDbFile, File destDbFile, byte[] password)
+            throws Exception {
         if (sourceDbFile == null || destDbFile == null || password == null) {
             Log.e(TAG, "convertToPlainDatabase() parameters should not be null.");
             throw new IllegalStateException("parameters should not be null.");
@@ -578,18 +662,29 @@ public final class SQLiteDatabase extends SQLiteClosable {
                 deleteDatabase(destDbFile);
             }
             SQLiteDatabase destDb = null;
-            SQLiteDatabase sourceDb = openSecureDatabase(sourceDbFile.getAbsolutePath(), null, 16, null, password);
+            SQLiteDatabase sourceDb =
+                    openSecureDatabase(sourceDbFile.getAbsolutePath(), null, 16, null, password);
             try {
                 int sourceDbVer = sourceDb.getVersion();
                 try {
                     try {
                         destDb = openDatabase(destDbFile.getAbsolutePath(), null, 268435472, null);
-                        destDb.execSQL(String.format("attach database '%s' as secureDb key x'%s'", sourceDbFile.getAbsolutePath(), convertByte2HexString(password)));
+                        destDb.execSQL(
+                                String.format(
+                                        "attach database '%s' as secureDb key x'%s'",
+                                        sourceDbFile.getAbsolutePath(),
+                                        convertByte2HexString(password)));
                         destDb.exportDB("secureDb");
                         destDb.execSQL("detach database secureDb");
                         int destDbVer = destDb.getVersion();
                         if (destDbVer != sourceDbVer) {
-                            Log.w(TAG, "Note: sourceDb version was changed during conversion (" + sourceDbVer + " -> " + destDbVer + NavigationBarInflaterView.KEY_CODE_END);
+                            Log.w(
+                                    TAG,
+                                    "Note: sourceDb version was changed during conversion ("
+                                            + sourceDbVer
+                                            + " -> "
+                                            + destDbVer
+                                            + NavigationBarInflaterView.KEY_CODE_END);
                         }
                         Log.d(TAG, "convertToPlainDatabase() finished");
                     } finally {
@@ -608,7 +703,8 @@ public final class SQLiteDatabase extends SQLiteClosable {
         }
     }
 
-    public static void convertToSecureDatabase(File sourceDbFile, File destDbFile, byte[] password) throws Exception {
+    public static void convertToSecureDatabase(File sourceDbFile, File destDbFile, byte[] password)
+            throws Exception {
         if (sourceDbFile == null || destDbFile == null || password == null) {
             Log.e(TAG, "convertToSecureDatabase() parameters should not be null.");
             throw new IllegalStateException("parameters should not be null.");
@@ -625,13 +721,28 @@ public final class SQLiteDatabase extends SQLiteClosable {
                 int sourceDbVer = sourceDb.getVersion();
                 try {
                     try {
-                        destDb = openSecureDatabase(destDbFile.getAbsolutePath(), null, 268435472, null, password);
-                        destDb.execSQL(String.format("attach database '%s' as plainDb key ''", sourceDbFile.getAbsolutePath()));
+                        destDb =
+                                openSecureDatabase(
+                                        destDbFile.getAbsolutePath(),
+                                        null,
+                                        268435472,
+                                        null,
+                                        password);
+                        destDb.execSQL(
+                                String.format(
+                                        "attach database '%s' as plainDb key ''",
+                                        sourceDbFile.getAbsolutePath()));
                         destDb.exportDB("plainDb");
                         destDb.execSQL("detach database plainDb");
                         int destDbVer = destDb.getVersion();
                         if (destDbVer != sourceDbVer) {
-                            Log.w(TAG, "Note: sourceDb version was changed during conversion (" + sourceDbVer + " -> " + destDbVer + NavigationBarInflaterView.KEY_CODE_END);
+                            Log.w(
+                                    TAG,
+                                    "Note: sourceDb version was changed during conversion ("
+                                            + sourceDbVer
+                                            + " -> "
+                                            + destDbVer
+                                            + NavigationBarInflaterView.KEY_CODE_END);
                         }
                     } finally {
                         if (destDb != null && destDb.isOpen()) {
@@ -687,17 +798,27 @@ public final class SQLiteDatabase extends SQLiteClosable {
         if (file == null) {
             throw new IllegalArgumentException("file must not be null");
         }
-        boolean deleted = false | file.delete() | new File(file.getPath() + "-journal").delete() | new File(file.getPath() + "-shm").delete() | new File(file.getPath() + "-wal").delete() | new File(file.getPath() + "-se").delete() | new File(file.getPath() + "-udr").delete();
+        boolean deleted =
+                false
+                        | file.delete()
+                        | new File(file.getPath() + "-journal").delete()
+                        | new File(file.getPath() + "-shm").delete()
+                        | new File(file.getPath() + "-wal").delete()
+                        | new File(file.getPath() + "-se").delete()
+                        | new File(file.getPath() + "-udr").delete();
         new File(file.getPath() + "-wipecheck").delete();
         File dir = file.getParentFile();
         if (dir != null) {
             final String prefix = file.getName() + "-mj";
-            File[] files = dir.listFiles(new FileFilter() { // from class: android.database.sqlite.SQLiteDatabase.1
-                @Override // java.io.FileFilter
-                public boolean accept(File candidate) {
-                    return candidate.getName().startsWith(prefix);
-                }
-            });
+            File[] files =
+                    dir.listFiles(
+                            new FileFilter() { // from class:
+                                // android.database.sqlite.SQLiteDatabase.1
+                                @Override // java.io.FileFilter
+                                public boolean accept(File candidate) {
+                                    return candidate.getName().startsWith(prefix);
+                                }
+                            });
             if (files != null) {
                 for (File masterJournal : files) {
                     deleted |= masterJournal.delete();
@@ -712,7 +833,8 @@ public final class SQLiteDatabase extends SQLiteClosable {
             throwIfNotOpenLocked();
             if (isReadOnlyLocked()) {
                 int oldOpenFlags = this.mConfigurationLocked.openFlags;
-                this.mConfigurationLocked.openFlags = (this.mConfigurationLocked.openFlags & (-2)) | 0;
+                this.mConfigurationLocked.openFlags =
+                        (this.mConfigurationLocked.openFlags & (-2)) | 0;
                 try {
                     this.mConnectionPoolLocked.reconfigure(this.mConfigurationLocked);
                 } catch (RuntimeException ex) {
@@ -766,8 +888,7 @@ public final class SQLiteDatabase extends SQLiteClosable {
         }
     }
 
-    public void setSdpDatabase() {
-    }
+    public void setSdpDatabase() {}
 
     private void openInner() {
         synchronized (sDbDirectories) {
@@ -787,7 +908,8 @@ public final class SQLiteDatabase extends SQLiteClosable {
             sDbDirectories.add(new File(this.mConfigurationLocked.path).getParent());
         }
         synchronized (this.mLock) {
-            this.mConnectionPoolLocked = SQLiteConnectionPool.openSecure(this, this.mConfigurationLocked, password);
+            this.mConnectionPoolLocked =
+                    SQLiteConnectionPool.openSecure(this, this.mConfigurationLocked, password);
             this.mCloseGuardLocked.open("close");
         }
         synchronized (sActiveDatabases) {
@@ -807,14 +929,18 @@ public final class SQLiteDatabase extends SQLiteClosable {
     }
 
     public static SQLiteDatabase createInMemory(OpenParams openParams) {
-        return openDatabase(SQLiteDatabaseConfiguration.MEMORY_DB_PATH, openParams.toBuilder().addOpenFlags(268435456).build());
+        return openDatabase(
+                SQLiteDatabaseConfiguration.MEMORY_DB_PATH,
+                openParams.toBuilder().addOpenFlags(268435456).build());
     }
 
     public static SQLiteDatabase createSecureDatabase(CursorFactory factory, byte[] password) {
-        return openSecureDatabase(SQLiteDatabaseConfiguration.MEMORY_DB_PATH, factory, 268435456, null, password);
+        return openSecureDatabase(
+                SQLiteDatabaseConfiguration.MEMORY_DB_PATH, factory, 268435456, null, password);
     }
 
-    public void setCustomScalarFunction(String functionName, UnaryOperator<String> scalarFunction) throws SQLiteException {
+    public void setCustomScalarFunction(String functionName, UnaryOperator<String> scalarFunction)
+            throws SQLiteException {
         Objects.requireNonNull(functionName);
         Objects.requireNonNull(scalarFunction);
         synchronized (this.mLock) {
@@ -829,7 +955,8 @@ public final class SQLiteDatabase extends SQLiteClosable {
         }
     }
 
-    public void setCustomAggregateFunction(String functionName, BinaryOperator<String> aggregateFunction) throws SQLiteException {
+    public void setCustomAggregateFunction(
+            String functionName, BinaryOperator<String> aggregateFunction) throws SQLiteException {
         Objects.requireNonNull(functionName);
         Objects.requireNonNull(aggregateFunction);
         synchronized (this.mLock) {
@@ -861,7 +988,8 @@ public final class SQLiteDatabase extends SQLiteClosable {
     }
 
     public int getVersion() {
-        return Long.valueOf(DatabaseUtils.longForQuery(this, "PRAGMA user_version;", null)).intValue();
+        return Long.valueOf(DatabaseUtils.longForQuery(this, "PRAGMA user_version;", null))
+                .intValue();
     }
 
     public void setVersion(int version) {
@@ -879,7 +1007,8 @@ public final class SQLiteDatabase extends SQLiteClosable {
         if (numBytes % pageSize != 0) {
             numPages++;
         }
-        long newPageCount = DatabaseUtils.longForQuery(this, "PRAGMA max_page_count = " + numPages, null);
+        long newPageCount =
+                DatabaseUtils.longForQuery(this, "PRAGMA max_page_count = " + numPages, null);
         return newPageCount * pageSize;
     }
 
@@ -892,12 +1021,10 @@ public final class SQLiteDatabase extends SQLiteClosable {
     }
 
     @Deprecated
-    public void markTableSyncable(String table, String deletedTable) {
-    }
+    public void markTableSyncable(String table, String deletedTable) {}
 
     @Deprecated
-    public void markTableSyncable(String table, String foreignKey, String updateTable) {
-    }
+    public void markTableSyncable(String table, String foreignKey, String updateTable) {}
 
     public static String findEditTable(String tables) {
         if (!TextUtils.isEmpty(tables)) {
@@ -923,53 +1050,155 @@ public final class SQLiteDatabase extends SQLiteClosable {
         }
     }
 
-    public Cursor query(boolean distinct, String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy, String limit) {
-        return queryWithFactory(null, distinct, table, columns, selection, selectionArgs, groupBy, having, orderBy, limit, null);
+    public Cursor query(
+            boolean distinct,
+            String table,
+            String[] columns,
+            String selection,
+            String[] selectionArgs,
+            String groupBy,
+            String having,
+            String orderBy,
+            String limit) {
+        return queryWithFactory(
+                null,
+                distinct,
+                table,
+                columns,
+                selection,
+                selectionArgs,
+                groupBy,
+                having,
+                orderBy,
+                limit,
+                null);
     }
 
-    public Cursor query(boolean distinct, String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy, String limit, CancellationSignal cancellationSignal) {
-        return queryWithFactory(null, distinct, table, columns, selection, selectionArgs, groupBy, having, orderBy, limit, cancellationSignal);
+    public Cursor query(
+            boolean distinct,
+            String table,
+            String[] columns,
+            String selection,
+            String[] selectionArgs,
+            String groupBy,
+            String having,
+            String orderBy,
+            String limit,
+            CancellationSignal cancellationSignal) {
+        return queryWithFactory(
+                null,
+                distinct,
+                table,
+                columns,
+                selection,
+                selectionArgs,
+                groupBy,
+                having,
+                orderBy,
+                limit,
+                cancellationSignal);
     }
 
-    public Cursor queryWithFactory(CursorFactory cursorFactory, boolean distinct, String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy, String limit) {
-        return queryWithFactory(cursorFactory, distinct, table, columns, selection, selectionArgs, groupBy, having, orderBy, limit, null);
+    public Cursor queryWithFactory(
+            CursorFactory cursorFactory,
+            boolean distinct,
+            String table,
+            String[] columns,
+            String selection,
+            String[] selectionArgs,
+            String groupBy,
+            String having,
+            String orderBy,
+            String limit) {
+        return queryWithFactory(
+                cursorFactory,
+                distinct,
+                table,
+                columns,
+                selection,
+                selectionArgs,
+                groupBy,
+                having,
+                orderBy,
+                limit,
+                null);
     }
 
-    public Cursor queryWithFactory(CursorFactory cursorFactory, boolean distinct, String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy, String limit, CancellationSignal cancellationSignal) {
+    public Cursor queryWithFactory(
+            CursorFactory cursorFactory,
+            boolean distinct,
+            String table,
+            String[] columns,
+            String selection,
+            String[] selectionArgs,
+            String groupBy,
+            String having,
+            String orderBy,
+            String limit,
+            CancellationSignal cancellationSignal) {
         acquireReference();
         try {
-            String sql = SQLiteQueryBuilder.buildQueryString(distinct, table, columns, selection, groupBy, having, orderBy, limit);
-            return rawQueryWithFactory(cursorFactory, sql, selectionArgs, findEditTable(table), cancellationSignal);
+            String sql =
+                    SQLiteQueryBuilder.buildQueryString(
+                            distinct, table, columns, selection, groupBy, having, orderBy, limit);
+            return rawQueryWithFactory(
+                    cursorFactory, sql, selectionArgs, findEditTable(table), cancellationSignal);
         } finally {
             releaseReference();
         }
     }
 
-    public Cursor query(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
-        return query(false, table, columns, selection, selectionArgs, groupBy, having, orderBy, null);
+    public Cursor query(
+            String table,
+            String[] columns,
+            String selection,
+            String[] selectionArgs,
+            String groupBy,
+            String having,
+            String orderBy) {
+        return query(
+                false, table, columns, selection, selectionArgs, groupBy, having, orderBy, null);
     }
 
-    public Cursor query(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy, String limit) {
-        return query(false, table, columns, selection, selectionArgs, groupBy, having, orderBy, limit);
+    public Cursor query(
+            String table,
+            String[] columns,
+            String selection,
+            String[] selectionArgs,
+            String groupBy,
+            String having,
+            String orderBy,
+            String limit) {
+        return query(
+                false, table, columns, selection, selectionArgs, groupBy, having, orderBy, limit);
     }
 
     public Cursor rawQuery(String sql, String[] selectionArgs) {
         return rawQueryWithFactory(null, sql, selectionArgs, null, null);
     }
 
-    public Cursor rawQuery(String sql, String[] selectionArgs, CancellationSignal cancellationSignal) {
+    public Cursor rawQuery(
+            String sql, String[] selectionArgs, CancellationSignal cancellationSignal) {
         return rawQueryWithFactory(null, sql, selectionArgs, null, cancellationSignal);
     }
 
-    public Cursor rawQueryWithFactory(CursorFactory cursorFactory, String sql, String[] selectionArgs, String editTable) {
+    public Cursor rawQueryWithFactory(
+            CursorFactory cursorFactory, String sql, String[] selectionArgs, String editTable) {
         return rawQueryWithFactory(cursorFactory, sql, selectionArgs, editTable, null);
     }
 
-    public Cursor rawQueryWithFactory(CursorFactory cursorFactory, String sql, String[] selectionArgs, String editTable, CancellationSignal cancellationSignal) {
+    public Cursor rawQueryWithFactory(
+            CursorFactory cursorFactory,
+            String sql,
+            String[] selectionArgs,
+            String editTable,
+            CancellationSignal cancellationSignal) {
         acquireReference();
         try {
-            SQLiteCursorDriver driver = new SQLiteDirectCursorDriver(this, sql, editTable, cancellationSignal);
-            return driver.query(cursorFactory != null ? cursorFactory : this.mCursorFactory, selectionArgs);
+            SQLiteCursorDriver driver =
+                    new SQLiteDirectCursorDriver(this, sql, editTable, cancellationSignal);
+            return driver.query(
+                    cursorFactory != null ? cursorFactory : this.mCursorFactory, selectionArgs);
         } finally {
             releaseReference();
         }
@@ -984,7 +1213,8 @@ public final class SQLiteDatabase extends SQLiteClosable {
         }
     }
 
-    public long insertOrThrow(String table, String nullColumnHack, ContentValues values) throws SQLException {
+    public long insertOrThrow(String table, String nullColumnHack, ContentValues values)
+            throws SQLException {
         return insertWithOnConflict(table, nullColumnHack, values, 0);
     }
 
@@ -997,11 +1227,16 @@ public final class SQLiteDatabase extends SQLiteClosable {
         }
     }
 
-    public long replaceOrThrow(String table, String nullColumnHack, ContentValues initialValues) throws SQLException {
+    public long replaceOrThrow(String table, String nullColumnHack, ContentValues initialValues)
+            throws SQLException {
         return insertWithOnConflict(table, nullColumnHack, initialValues, 5);
     }
 
-    public long insertWithOnConflict(String table, String nullColumnHack, ContentValues initialValues, int conflictAlgorithm) {
+    public long insertWithOnConflict(
+            String table,
+            String nullColumnHack,
+            ContentValues initialValues,
+            int conflictAlgorithm) {
         acquireReference();
         try {
             StringBuilder sql = new StringBuilder();
@@ -1011,7 +1246,8 @@ public final class SQLiteDatabase extends SQLiteClosable {
             sql.append(table);
             sql.append('(');
             Object[] bindArgs = null;
-            int size = (initialValues == null || initialValues.isEmpty()) ? 0 : initialValues.size();
+            int size =
+                    (initialValues == null || initialValues.isEmpty()) ? 0 : initialValues.size();
             if (size > 0) {
                 bindArgs = new Object[size];
                 int i = 0;
@@ -1046,7 +1282,15 @@ public final class SQLiteDatabase extends SQLiteClosable {
     public int delete(String table, String whereClause, String[] whereArgs) {
         acquireReference();
         try {
-            SQLiteStatement statement = new SQLiteStatement(this, "DELETE FROM " + table + (!TextUtils.isEmpty(whereClause) ? " WHERE " + whereClause : ""), whereArgs);
+            SQLiteStatement statement =
+                    new SQLiteStatement(
+                            this,
+                            "DELETE FROM "
+                                    + table
+                                    + (!TextUtils.isEmpty(whereClause)
+                                            ? " WHERE " + whereClause
+                                            : ""),
+                            whereArgs);
             try {
                 return statement.executeUpdateDelete();
             } finally {
@@ -1061,7 +1305,12 @@ public final class SQLiteDatabase extends SQLiteClosable {
         return updateWithOnConflict(table, values, whereClause, whereArgs, 0);
     }
 
-    public int updateWithOnConflict(String table, ContentValues values, String whereClause, String[] whereArgs, int conflictAlgorithm) {
+    public int updateWithOnConflict(
+            String table,
+            ContentValues values,
+            String whereClause,
+            String[] whereArgs,
+            int conflictAlgorithm) {
         if (values == null || values.isEmpty()) {
             throw new IllegalArgumentException("Empty values");
         }
@@ -1141,7 +1390,8 @@ public final class SQLiteDatabase extends SQLiteClosable {
                 }
             } finally {
                 if (statementType == 8) {
-                    this.mConnectionPoolLocked.closeAvailableNonPrimaryConnectionsAndLogExceptions();
+                    this.mConnectionPoolLocked
+                            .closeAvailableNonPrimaryConnectionsAndLogExceptions();
                     this.mConnectionPoolLocked.clearAcquiredConnectionsPreparedStatementCache();
                 }
             }
@@ -1168,7 +1418,8 @@ public final class SQLiteDatabase extends SQLiteClosable {
     }
 
     public void validateSql(String sql, CancellationSignal cancellationSignal) {
-        getThreadSession().prepare(sql, getThreadDefaultConnectionFlags(true), cancellationSignal, null);
+        getThreadSession()
+                .prepare(sql, getThreadDefaultConnectionFlags(true), cancellationSignal, null);
     }
 
     public boolean isReadOnly() {
@@ -1286,7 +1537,11 @@ public final class SQLiteDatabase extends SQLiteClosable {
             }
             if (this.mHasAttachedDbsLocked) {
                 if (Log.isLoggable(TAG, 3)) {
-                    Log.d(TAG, "this database: " + this.mConfigurationLocked.label + " has attached databases. can't  enable WAL.");
+                    Log.d(
+                            TAG,
+                            "this database: "
+                                    + this.mConfigurationLocked.label
+                                    + " has attached databases. can't  enable WAL.");
                 }
                 return false;
             }
@@ -1324,7 +1579,10 @@ public final class SQLiteDatabase extends SQLiteClosable {
         boolean equalsIgnoreCase;
         synchronized (this.mLock) {
             throwIfNotOpenLocked();
-            equalsIgnoreCase = this.mConfigurationLocked.resolveJournalMode().equalsIgnoreCase(JOURNAL_MODE_WAL);
+            equalsIgnoreCase =
+                    this.mConfigurationLocked
+                            .resolveJournalMode()
+                            .equalsIgnoreCase(JOURNAL_MODE_WAL);
         }
         return equalsIgnoreCase;
     }
@@ -1359,7 +1617,8 @@ public final class SQLiteDatabase extends SQLiteClosable {
     }
 
     @Deprecated
-    public static int semRestoreSecureDatabaseFile(String srcPath, String dstPath, byte[] password) {
+    public static int semRestoreSecureDatabaseFile(
+            String srcPath, String dstPath, byte[] password) {
         int rc;
         if (srcPath == null || dstPath == null || password == null) {
             Log.e(TAG, "path and password should not be null.");
@@ -1533,7 +1792,9 @@ public final class SQLiteDatabase extends SQLiteClosable {
             for (File file : dumpFiles) {
                 if (file.isFile()) {
                     try {
-                        BufferedReader br = Files.newBufferedReader(Paths.get(file.getAbsolutePath(), new String[0]));
+                        BufferedReader br =
+                                Files.newBufferedReader(
+                                        Paths.get(file.getAbsolutePath(), new String[0]));
                         try {
                             printer.println("");
                             while (true) {
@@ -1570,14 +1831,19 @@ public final class SQLiteDatabase extends SQLiteClosable {
         long totalStatementsTimeInMs = 0;
         long totalStatementsCount = 0;
         ArrayList<SQLiteConnectionPool> activeConnectionPools = getActiveDatabasePools();
-        activeConnectionPools.sort(new Comparator() { // from class: android.database.sqlite.SQLiteDatabase$$ExternalSyntheticLambda0
-            @Override // java.util.Comparator
-            public final int compare(Object obj, Object obj2) {
-                int compare;
-                compare = Long.compare(((SQLiteConnectionPool) obj2).getTotalStatementsCount(), ((SQLiteConnectionPool) obj).getTotalStatementsCount());
-                return compare;
-            }
-        });
+        activeConnectionPools.sort(
+                new Comparator() { // from class:
+                    // android.database.sqlite.SQLiteDatabase$$ExternalSyntheticLambda0
+                    @Override // java.util.Comparator
+                    public final int compare(Object obj, Object obj2) {
+                        int compare;
+                        compare =
+                                Long.compare(
+                                        ((SQLiteConnectionPool) obj2).getTotalStatementsCount(),
+                                        ((SQLiteConnectionPool) obj).getTotalStatementsCount());
+                        return compare;
+                    }
+                });
         Iterator<SQLiteConnectionPool> it = activeConnectionPools.iterator();
         while (it.hasNext()) {
             SQLiteConnectionPool dbPool = it.next();
@@ -1594,27 +1860,37 @@ public final class SQLiteDatabase extends SQLiteClosable {
             Iterator<SQLiteConnectionPool> it2 = activeConnectionPools.iterator();
             while (it2.hasNext()) {
                 SQLiteConnectionPool dbPool2 = it2.next();
-                printer.println("  " + dbPool2.getPath() + " :    " + dbPool2.getTotalStatementsCount());
+                printer.println(
+                        "  " + dbPool2.getPath() + " :    " + dbPool2.getTotalStatementsCount());
             }
             printer.println("");
-            printer.println("Total Statements Executed for all Active Databases: " + totalStatementsCount);
-            activeConnectionPools.sort(new Comparator() { // from class: android.database.sqlite.SQLiteDatabase$$ExternalSyntheticLambda1
-                @Override // java.util.Comparator
-                public final int compare(Object obj, Object obj2) {
-                    int compare;
-                    compare = Long.compare(((SQLiteConnectionPool) obj2).getTotalStatementsTime(), ((SQLiteConnectionPool) obj).getTotalStatementsTime());
-                    return compare;
-                }
-            });
+            printer.println(
+                    "Total Statements Executed for all Active Databases: " + totalStatementsCount);
+            activeConnectionPools.sort(
+                    new Comparator() { // from class:
+                        // android.database.sqlite.SQLiteDatabase$$ExternalSyntheticLambda1
+                        @Override // java.util.Comparator
+                        public final int compare(Object obj, Object obj2) {
+                            int compare;
+                            compare =
+                                    Long.compare(
+                                            ((SQLiteConnectionPool) obj2).getTotalStatementsTime(),
+                                            ((SQLiteConnectionPool) obj).getTotalStatementsTime());
+                            return compare;
+                        }
+                    });
             printer.println("");
             printer.println("");
             printer.println("Statement Time per Database (ms)");
             Iterator<SQLiteConnectionPool> it3 = activeConnectionPools.iterator();
             while (it3.hasNext()) {
                 SQLiteConnectionPool dbPool3 = it3.next();
-                printer.println("  " + dbPool3.getPath() + " :    " + dbPool3.getTotalStatementsTime());
+                printer.println(
+                        "  " + dbPool3.getPath() + " :    " + dbPool3.getTotalStatementsTime());
             }
-            printer.println("Total Statements Time for all Active Databases (ms): " + totalStatementsTimeInMs);
+            printer.println(
+                    "Total Statements Time for all Active Databases (ms): "
+                            + totalStatementsTimeInMs);
         }
         if (directories.size() > 0) {
             String[] dirs = (String[]) directories.toArray(new String[directories.size()]);
@@ -1654,22 +1930,39 @@ public final class SQLiteDatabase extends SQLiteClosable {
             pw.println("  [none]");
             return;
         }
-        Arrays.sort(files, new Comparator() { // from class: android.database.sqlite.SQLiteDatabase$$ExternalSyntheticLambda2
-            @Override // java.util.Comparator
-            public final int compare(Object obj, Object obj2) {
-                int compareTo;
-                compareTo = ((File) obj).getName().compareTo(((File) obj2).getName());
-                return compareTo;
-            }
-        });
+        Arrays.sort(
+                files,
+                new Comparator() { // from class:
+                    // android.database.sqlite.SQLiteDatabase$$ExternalSyntheticLambda2
+                    @Override // java.util.Comparator
+                    public final int compare(Object obj, Object obj2) {
+                        int compareTo;
+                        compareTo = ((File) obj).getName().compareTo(((File) obj2).getName());
+                        return compareTo;
+                    }
+                });
         int length = files.length;
         while (i < length) {
             File f = files[i];
             if (isSystem) {
                 String name = f.getName();
-                i = (name.endsWith(".db") || name.endsWith(".db-wal") || name.endsWith(".db-journal") || name.endsWith("-wipecheck")) ? 0 : i + 1;
+                i =
+                        (name.endsWith(".db")
+                                        || name.endsWith(".db-wal")
+                                        || name.endsWith(".db-journal")
+                                        || name.endsWith("-wipecheck"))
+                                ? 0
+                                : i + 1;
             }
-            pw.println(String.format("  %-40s %7db %s%s", f.getName(), Long.valueOf(f.length()), getFileTimestamps(f.getAbsolutePath()), SQLiteUserDataRecovery.isDbUdrRecovered(f.getAbsolutePath()) ? " (R)" : ""));
+            pw.println(
+                    String.format(
+                            "  %-40s %7db %s%s",
+                            f.getName(),
+                            Long.valueOf(f.length()),
+                            getFileTimestamps(f.getAbsolutePath()),
+                            SQLiteUserDataRecovery.isDbUdrRecovered(f.getAbsolutePath())
+                                    ? " (R)"
+                                    : ""));
         }
     }
 
@@ -1718,8 +2011,17 @@ public final class SQLiteDatabase extends SQLiteClosable {
                 attachedDbs.add(new Pair<>("main", getPath()));
             }
             if (attachedDbs == null) {
-                this.mDbDump.addDumpLog(TAG, "databaselist for: " + getPath() + " couldn't be retrieved. probably because the database is closed");
-                throw new IllegalStateException("databaselist for: " + getPath() + " couldn't be retrieved. probably because the database is closed");
+                this.mDbDump.addDumpLog(
+                        TAG,
+                        "databaselist for: "
+                                + getPath()
+                                + " couldn't be retrieved. probably because the database is"
+                                + " closed");
+                throw new IllegalStateException(
+                        "databaselist for: "
+                                + getPath()
+                                + " couldn't be retrieved. probably because the database is"
+                                + " closed");
             }
             for (int i = 0; i < attachedDbs.size(); i++) {
                 Pair<String, String> p = attachedDbs.get(i);
@@ -1748,7 +2050,8 @@ public final class SQLiteDatabase extends SQLiteClosable {
                 this.mIntegrityErrorString = null;
                 if (rslt != null && !rslt.equalsIgnoreCase("ok")) {
                     this.mIntegrityErrorString = rslt;
-                    this.mDbDump.logAndDump(TAG, "PRAGMA integrity_check on " + p.second + " returned: " + rslt);
+                    this.mDbDump.logAndDump(
+                            TAG, "PRAGMA integrity_check on " + p.second + " returned: " + rslt);
                     if (prog != null) {
                         prog.close();
                     }
@@ -1772,7 +2075,8 @@ public final class SQLiteDatabase extends SQLiteClosable {
     public void closeAndDiscardNonPrimaryConnections(boolean needDiscard, boolean fixPoolSize) {
         synchronized (this.mLock) {
             throwIfNotOpenLocked();
-            this.mConnectionPoolLocked.closeAndDiscardNonPrimaryConnections(needDiscard, fixPoolSize);
+            this.mConnectionPoolLocked.closeAndDiscardNonPrimaryConnections(
+                    needDiscard, fixPoolSize);
         }
     }
 
@@ -1794,7 +2098,8 @@ public final class SQLiteDatabase extends SQLiteClosable {
         try {
             cleanCacheAndReOpen();
             if (isDatabaseIntegrityOk(getCorruptCode() == 1035)) {
-                this.mDbDump.logAndDump(TAG, "!@ Integrity Check for corrupted DB file gets OK as result");
+                this.mDbDump.logAndDump(
+                        TAG, "!@ Integrity Check for corrupted DB file gets OK as result");
                 return true;
             }
         } catch (SQLiteException e) {
@@ -1829,7 +2134,8 @@ public final class SQLiteDatabase extends SQLiteClosable {
 
     private void throwIfNotOpenLocked() {
         if (this.mConnectionPoolLocked == null) {
-            throw new IllegalStateException("The database '" + this.mConfigurationLocked.label + "' is not open.");
+            throw new IllegalStateException(
+                    "The database '" + this.mConfigurationLocked.label + "' is not open.");
         }
     }
 
@@ -1846,7 +2152,18 @@ public final class SQLiteDatabase extends SQLiteClosable {
         private final String mSyncMode;
         private final boolean mUserDataRecovery;
 
-        private OpenParams(int openFlags, CursorFactory cursorFactory, DatabaseErrorHandler errorHandler, int lookasideSlotSize, int lookasideSlotCount, long idleConnectionTimeout, long idleConnectionShrinkTimeout, String journalMode, String syncMode, int cacheSize, boolean userDataRecovery) {
+        private OpenParams(
+                int openFlags,
+                CursorFactory cursorFactory,
+                DatabaseErrorHandler errorHandler,
+                int lookasideSlotSize,
+                int lookasideSlotCount,
+                long idleConnectionTimeout,
+                long idleConnectionShrinkTimeout,
+                String journalMode,
+                String syncMode,
+                int cacheSize,
+                boolean userDataRecovery) {
             this.mCursorFactory = cursorFactory;
             this.mErrorHandler = errorHandler;
             this.mLookasideSlotSize = lookasideSlotSize;
@@ -1859,7 +2176,8 @@ public final class SQLiteDatabase extends SQLiteClosable {
             this.mUserDataRecovery = userDataRecovery;
             if ((536870912 & openFlags) != 0) {
                 this.mOpenFlags = openFlags & (-1025);
-            } else if (this.mJournalMode != null && !this.mJournalMode.equalsIgnoreCase(SQLiteDatabase.JOURNAL_MODE_WAL)) {
+            } else if (this.mJournalMode != null
+                    && !this.mJournalMode.equalsIgnoreCase(SQLiteDatabase.JOURNAL_MODE_WAL)) {
                 this.mOpenFlags = openFlags | 1024;
             } else {
                 this.mOpenFlags = openFlags;
@@ -1947,7 +2265,11 @@ public final class SQLiteDatabase extends SQLiteClosable {
                 if ((slotSize <= 0 || slotCount <= 0) && (slotCount != 0 || slotSize != 0)) {
                     z = false;
                 }
-                Preconditions.checkArgument(z, "Invalid configuration: %d, %d", Integer.valueOf(slotSize), Integer.valueOf(slotCount));
+                Preconditions.checkArgument(
+                        z,
+                        "Invalid configuration: %d, %d",
+                        Integer.valueOf(slotSize),
+                        Integer.valueOf(slotCount));
                 this.mLookasideSlotSize = slotSize;
                 this.mLookasideSlotCount = slotCount;
                 return this;
@@ -1995,7 +2317,8 @@ public final class SQLiteDatabase extends SQLiteClosable {
 
             @Deprecated
             public Builder setIdleConnectionTimeout(long idleConnectionTimeoutMs) {
-                Preconditions.checkArgument(idleConnectionTimeoutMs >= 0, "idle connection timeout cannot be negative");
+                Preconditions.checkArgument(
+                        idleConnectionTimeoutMs >= 0, "idle connection timeout cannot be negative");
                 this.mIdleConnectionTimeout = idleConnectionTimeoutMs;
                 return this;
             }
@@ -2015,7 +2338,10 @@ public final class SQLiteDatabase extends SQLiteClosable {
             @Deprecated
             public Builder semSetCacheSize(int cacheSizeByte) {
                 if (cacheSizeByte < 0 || cacheSizeByte > 8388608) {
-                    throw new IllegalArgumentException("The cache size should not be negative value. Also, it should be less than soft heap size (8M). Now: " + cacheSizeByte);
+                    throw new IllegalArgumentException(
+                            "The cache size should not be negative value. Also, it should be less"
+                                    + " than soft heap size (8M). Now: "
+                                    + cacheSizeByte);
                 }
                 this.mCacheSize = cacheSizeByte / SQLiteGlobal.getDefaultPageSize();
                 return this;
@@ -2031,7 +2357,9 @@ public final class SQLiteDatabase extends SQLiteClosable {
             }
 
             public Builder semSetIdleConnectionShrinkTimeout(long idleConnectionShrinkTimeoutMs) {
-                Preconditions.checkArgument(idleConnectionShrinkTimeoutMs >= 0, "idle connection shrink timeout cannot be negative");
+                Preconditions.checkArgument(
+                        idleConnectionShrinkTimeoutMs >= 0,
+                        "idle connection shrink timeout cannot be negative");
                 this.mIdleConnectionShrinkTimeout = idleConnectionShrinkTimeoutMs;
                 return this;
             }
@@ -2042,19 +2370,51 @@ public final class SQLiteDatabase extends SQLiteClosable {
             }
 
             public OpenParams build() {
-                return new OpenParams(this.mOpenFlags, this.mCursorFactory, this.mErrorHandler, this.mLookasideSlotSize, this.mLookasideSlotCount, this.mIdleConnectionTimeout, this.mIdleConnectionShrinkTimeout, this.mJournalMode, this.mSyncMode, this.mCacheSize, this.mUserDataRecovery);
+                return new OpenParams(
+                        this.mOpenFlags,
+                        this.mCursorFactory,
+                        this.mErrorHandler,
+                        this.mLookasideSlotSize,
+                        this.mLookasideSlotCount,
+                        this.mIdleConnectionTimeout,
+                        this.mIdleConnectionShrinkTimeout,
+                        this.mJournalMode,
+                        this.mSyncMode,
+                        this.mCacheSize,
+                        this.mUserDataRecovery);
             }
         }
     }
 
     public static void wipeDetected(String filename, String reason) {
-        wtfAsSystemServer(TAG, "DB wipe detected: package=" + ActivityThread.currentPackageName() + " reason=" + reason + " file=" + filename + " " + getFileTimestamps(filename) + " checkfile " + getFileTimestamps(filename + "-wipecheck"), new Throwable("STACKTRACE"));
+        wtfAsSystemServer(
+                TAG,
+                "DB wipe detected: package="
+                        + ActivityThread.currentPackageName()
+                        + " reason="
+                        + reason
+                        + " file="
+                        + filename
+                        + " "
+                        + getFileTimestamps(filename)
+                        + " checkfile "
+                        + getFileTimestamps(filename + "-wipecheck"),
+                new Throwable("STACKTRACE"));
     }
 
     public static String getFileTimestamps(String path) {
         try {
-            BasicFileAttributes attr = Files.readAttributes(FileSystems.getDefault().getPath(path, new String[0]), (Class<BasicFileAttributes>) BasicFileAttributes.class, new LinkOption[0]);
-            return "ctime=" + attr.creationTime() + " mtime=" + attr.lastModifiedTime() + " atime=" + attr.lastAccessTime();
+            BasicFileAttributes attr =
+                    Files.readAttributes(
+                            FileSystems.getDefault().getPath(path, new String[0]),
+                            (Class<BasicFileAttributes>) BasicFileAttributes.class,
+                            new LinkOption[0]);
+            return "ctime="
+                    + attr.creationTime()
+                    + " mtime="
+                    + attr.lastModifiedTime()
+                    + " atime="
+                    + attr.lastAccessTime();
         } catch (IOException e) {
             return "[unable to obtain timestamp]";
         }
@@ -2176,8 +2536,10 @@ public final class SQLiteDatabase extends SQLiteClosable {
                 return;
             }
             synchronized (this.mLock) {
-                if (this.mConnectionPoolLocked != null && !this.mConnectionPoolLocked.isConnectionAcquired()) {
-                    this.mBackgroundCheckpoint.tryBackgroundCheckpoint(this, new File(getPath() + "-wal"));
+                if (this.mConnectionPoolLocked != null
+                        && !this.mConnectionPoolLocked.isConnectionAcquired()) {
+                    this.mBackgroundCheckpoint.tryBackgroundCheckpoint(
+                            this, new File(getPath() + "-wal"));
                 }
             }
         } catch (Exception e) {
@@ -2211,7 +2573,8 @@ public final class SQLiteDatabase extends SQLiteClosable {
         synchronized (this.mLock) {
             if (this.mConfigurationLocked.sharedConfig.isMediaStoreDb) {
                 try {
-                    long reservedSpace = DatabaseUtils.longForQuery(this, "PRAGMA wal_reserve_space=1", null);
+                    long reservedSpace =
+                            DatabaseUtils.longForQuery(this, "PRAGMA wal_reserve_space=1", null);
                     if (reservedSpace < 0) {
                         Log.d(TAG, "Failed to set wal reserve size");
                     }
@@ -2226,7 +2589,10 @@ public final class SQLiteDatabase extends SQLiteClosable {
         boolean isSecureDb = this.mConfigurationLocked.sharedConfig.isSecureDb;
         boolean isNoLocalized = (this.mConfigurationLocked.openFlags & 16) != 0;
         if (this.udr != null) {
-            return this.udr.doRecovery(getPath(), isSecureDb ? getConnectionKey() : null, isNoLocalized ? null : this.mConfigurationLocked.locale.toString());
+            return this.udr.doRecovery(
+                    getPath(),
+                    isSecureDb ? getConnectionKey() : null,
+                    isNoLocalized ? null : this.mConfigurationLocked.locale.toString());
         }
         return false;
     }

@@ -193,7 +193,8 @@ public class WireBuffer {
     public byte[] readBuffer(int maxSize) {
         int count = readInt();
         if (count < 0 || count > maxSize) {
-            throw new RuntimeException("attempt read a buff of invalid size 0 <= " + count + " > " + maxSize);
+            throw new RuntimeException(
+                    "attempt read a buff of invalid size 0 <= " + count + " > " + maxSize);
         }
         byte[] b = Arrays.copyOfRange(this.mBuffer, this.mIndex, this.mIndex + count);
         this.mIndex += count;

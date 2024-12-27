@@ -3,20 +3,26 @@ package com.android.server.biometrics;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+
 import com.android.server.accounts.AccountManagerService$$ExternalSyntheticOutline0;
-import com.android.server.biometrics.SemBioAnalyticsManager;
 import com.android.server.clipboard.ClipboardService;
+
 import com.samsung.android.knox.custom.LauncherConfigurationInternal;
+
 import java.util.LinkedHashMap;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class SemBioAnalyticsManager$$ExternalSyntheticLambda0 implements Runnable {
+public final /* synthetic */ class SemBioAnalyticsManager$$ExternalSyntheticLambda0
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ SemBioAnalyticsManager f$0;
     public final /* synthetic */ SemBioAnalyticsManager.EventData f$1;
 
-    public /* synthetic */ SemBioAnalyticsManager$$ExternalSyntheticLambda0(SemBioAnalyticsManager semBioAnalyticsManager, SemBioAnalyticsManager.EventData eventData, int i) {
+    public /* synthetic */ SemBioAnalyticsManager$$ExternalSyntheticLambda0(
+            SemBioAnalyticsManager semBioAnalyticsManager,
+            SemBioAnalyticsManager.EventData eventData,
+            int i) {
         this.$r8$classId = i;
         this.f$0 = semBioAnalyticsManager;
         this.f$1 = eventData;
@@ -39,16 +45,35 @@ public final /* synthetic */ class SemBioAnalyticsManager$$ExternalSyntheticLamb
                     if (dQAManager != null && (eventData.mType & 2) != 0) {
                         if (dQAManager.mFaceBigDataNameMap.containsKey(eventData.mFeature)) {
                             if (dQAManager.isUsingPackageNameAsExtra(eventData.mFeature)) {
-                                dQAManager.mFaceBigDataNameMap.put(eventData.mFeature, dQAManager.updateAppCountNum((String) ((LinkedHashMap) dQAManager.mFaceBigDataNameMap).get(eventData.mFeature), eventData.mExtra));
+                                dQAManager.mFaceBigDataNameMap.put(
+                                        eventData.mFeature,
+                                        dQAManager.updateAppCountNum(
+                                                (String)
+                                                        ((LinkedHashMap)
+                                                                        dQAManager
+                                                                                .mFaceBigDataNameMap)
+                                                                .get(eventData.mFeature),
+                                                eventData.mExtra));
                             } else {
-                                String str = (String) ((LinkedHashMap) dQAManager.mFaceBigDataNameMap).get(eventData.mFeature);
-                                dQAManager.mFaceBigDataNameMap.put(eventData.mFeature, String.valueOf((str == "" ? 0 : Integer.parseInt(str)) + 1));
+                                String str =
+                                        (String)
+                                                ((LinkedHashMap) dQAManager.mFaceBigDataNameMap)
+                                                        .get(eventData.mFeature);
+                                dQAManager.mFaceBigDataNameMap.put(
+                                        eventData.mFeature,
+                                        String.valueOf(
+                                                (str == "" ? 0 : Integer.parseInt(str)) + 1));
                             }
                             long currentTimeMillis = System.currentTimeMillis();
                             long j = dQAManager.mPreviousSavedTime;
-                            if (j == 0 || currentTimeMillis - j > ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS) {
+                            if (j == 0
+                                    || currentTimeMillis - j
+                                            > ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS) {
                                 dQAManager.mPreviousSavedTime = currentTimeMillis;
-                                SemBioAnalyticsManager.DQAManager.writeDqaDataToFile("settings_face_ext_bigdata.xml", SemBioAnalyticsManager.DQAManager.getDqaDataFormatToSave(dQAManager.mFaceBigDataNameMap));
+                                SemBioAnalyticsManager.DQAManager.writeDqaDataToFile(
+                                        "settings_face_ext_bigdata.xml",
+                                        SemBioAnalyticsManager.DQAManager.getDqaDataFormatToSave(
+                                                dQAManager.mFaceBigDataNameMap));
                             }
                         } else {
                             dQAManager.sendFaceBigData(eventData.mFeature, eventData.mExtra);
@@ -56,8 +81,11 @@ public final /* synthetic */ class SemBioAnalyticsManager$$ExternalSyntheticLamb
                     }
                     if (SemBiometricFeature.FEATURE_LOGGING_MODE && (eventData.mType & 1) != 0) {
                         Intent intent = new Intent();
-                        Bundle m142m = AccountManagerService$$ExternalSyntheticOutline0.m142m("tracking_id", "4G3-399-5448102");
-                        m142m.putString(LauncherConfigurationInternal.KEY_FEATURE_INT, eventData.mFeature);
+                        Bundle m142m =
+                                AccountManagerService$$ExternalSyntheticOutline0.m142m(
+                                        "tracking_id", "4G3-399-5448102");
+                        m142m.putString(
+                                LauncherConfigurationInternal.KEY_FEATURE_INT, eventData.mFeature);
                         String str2 = eventData.mExtra;
                         if (str2 != null) {
                             m142m.putString("extra", str2);
@@ -69,14 +97,17 @@ public final /* synthetic */ class SemBioAnalyticsManager$$ExternalSyntheticLamb
                         m142m.putString("pkg_name", "com.android.server.biometrics.sensors.face");
                         m142m.putString("type", "ev");
                         m142m.putString("is_summary", "true");
-                        intent.setAction("com.sec.android.diagmonagent.intent.USE_APP_FEATURE_SURVEY");
+                        intent.setAction(
+                                "com.sec.android.diagmonagent.intent.USE_APP_FEATURE_SURVEY");
                         intent.putExtras(m142m);
                         intent.setPackage("com.sec.android.diagmonagent");
                         try {
                             semBioAnalyticsManager.mContext.sendBroadcast(intent);
                             break;
                         } catch (Exception e) {
-                            Log.w("BiometricService.AM", "SemAnalyticsManager.insertLog: " + e.getMessage());
+                            Log.w(
+                                    "BiometricService.AM",
+                                    "SemAnalyticsManager.insertLog: " + e.getMessage());
                             return;
                         }
                     }

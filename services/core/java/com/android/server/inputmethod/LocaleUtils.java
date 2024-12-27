@@ -5,6 +5,7 @@ import android.os.LocaleList;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.view.inputmethod.InputMethodSubtype;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -76,7 +77,8 @@ public abstract class LocaleUtils {
         int i = 0;
         while (i < size2) {
             InputMethodSubtype inputMethodSubtype = (InputMethodSubtype) list.get(i);
-            Locale localeObject = inputMethodSubtype != null ? inputMethodSubtype.getLocaleObject() : null;
+            Locale localeObject =
+                    inputMethodSubtype != null ? inputMethodSubtype.getLocaleObject() : null;
             if (localeObject != null) {
                 int i2 = b3;
                 boolean z = true;
@@ -96,12 +98,18 @@ public abstract class LocaleUtils {
                                 b4 = 1;
                             } else {
                                 String country = uLocale.getCountry();
-                                if (country.isEmpty() || !country.equals(addLikelySubtags.getCountry())) {
+                                if (country.isEmpty()
+                                        || !country.equals(addLikelySubtags.getCountry())) {
                                     b4 = 2;
                                 } else {
                                     String script2 = forLocale.getScript();
                                     String country2 = forLocale.getCountry();
-                                    if ((!script2.isEmpty() && !script2.equals(addLikelySubtags.getScript())) || (!country2.isEmpty() && !country2.equals(addLikelySubtags.getCountry()))) {
+                                    if ((!script2.isEmpty()
+                                                    && !script2.equals(
+                                                            addLikelySubtags.getScript()))
+                                            || (!country2.isEmpty()
+                                                    && !country2.equals(
+                                                            addLikelySubtags.getCountry()))) {
                                         b4 = 3;
                                     }
                                 }

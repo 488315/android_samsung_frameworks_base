@@ -4,15 +4,22 @@ import android.content.Context;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.samsung.android.media.codec.IVideoTranscodingService;
 import com.samsung.android.media.codec.ImgCsConverter;
 import com.samsung.android.media.codec.SemVideoTranscodingService;
+
 import java.io.IOException;
 import java.util.Map;
 
 /* loaded from: classes6.dex */
 public class ImgCsConverterClient extends ClientImpl {
-    public ImgCsConverterClient(IVideoTranscodingService transcodingService, String id, int mode, Map args, SemVideoTranscodingService.ProgressCallback progressCallback) {
+    public ImgCsConverterClient(
+            IVideoTranscodingService transcodingService,
+            String id,
+            int mode,
+            Map args,
+            SemVideoTranscodingService.ProgressCallback progressCallback) {
         super(transcodingService, id, mode, args, progressCallback);
     }
 
@@ -20,7 +27,9 @@ public class ImgCsConverterClient extends ClientImpl {
     public void stop() {
         this.mIgnoreError = true;
         if (this.mIsRunning) {
-            Log.i(Context.SEM_VIDEO_TRANSCODING_SERVICE, "stop running client id(" + this.mID + NavigationBarInflaterView.KEY_CODE_END);
+            Log.i(
+                    Context.SEM_VIDEO_TRANSCODING_SERVICE,
+                    "stop running client id(" + this.mID + NavigationBarInflaterView.KEY_CODE_END);
             this.mIsRunning = false;
         }
         try {
@@ -38,9 +47,13 @@ public class ImgCsConverterClient extends ClientImpl {
             thread.start();
         } catch (Exception e) {
             e.printStackTrace();
-            Log.w(Context.SEM_VIDEO_TRANSCODING_SERVICE, "Task(" + this.mID + ") has been terminated unexpectedly");
+            Log.w(
+                    Context.SEM_VIDEO_TRANSCODING_SERVICE,
+                    "Task(" + this.mID + ") has been terminated unexpectedly");
             if (this.mIgnoreError) {
-                Log.i(Context.SEM_VIDEO_TRANSCODING_SERVICE, "Client has stopped " + this.mID + ", Ignore this error.");
+                Log.i(
+                        Context.SEM_VIDEO_TRANSCODING_SERVICE,
+                        "Client has stopped " + this.mID + ", Ignore this error.");
             } else {
                 try {
                     this.mIsRunning = false;
@@ -79,8 +92,14 @@ public class ImgCsConverterClient extends ClientImpl {
                     try {
                         ImgCsConverterClient.this.mIsRunning = true;
                         ImgCsConverterClient.this.mProgressCallback.onStarted();
-                        String inputPath = (String) ImgCsConverterClient.this.mArgs.get(SemVideoTranscodingService.KEY_INPUT_PATH);
-                        String outputPath = (String) ImgCsConverterClient.this.mArgs.get(SemVideoTranscodingService.KEY_OUTPUT_PATH);
+                        String inputPath =
+                                (String)
+                                        ImgCsConverterClient.this.mArgs.get(
+                                                SemVideoTranscodingService.KEY_INPUT_PATH);
+                        String outputPath =
+                                (String)
+                                        ImgCsConverterClient.this.mArgs.get(
+                                                SemVideoTranscodingService.KEY_OUTPUT_PATH);
                         boolean ret = ImgCsConverter.convertToSRGB(inputPath, outputPath);
                         if (ret) {
                             ImgCsConverterClient.this.mProgressCallback.onProgressChanged(100);
@@ -89,12 +108,21 @@ public class ImgCsConverterClient extends ClientImpl {
                             ImgCsConverterClient.this.mProgressCallback.onError();
                         }
                         ImgCsConverterClient.this.mIsRunning = false;
-                        ImgCsConverterClient.this.mTranscodingService.stopTask(ImgCsConverterClient.this.mID);
+                        ImgCsConverterClient.this.mTranscodingService.stopTask(
+                                ImgCsConverterClient.this.mID);
                     } catch (Exception e) {
                         e.printStackTrace();
-                        Log.w(Context.SEM_VIDEO_TRANSCODING_SERVICE, "Task(" + ImgCsConverterClient.this.mID + ") has been terminated unexpectedly");
+                        Log.w(
+                                Context.SEM_VIDEO_TRANSCODING_SERVICE,
+                                "Task("
+                                        + ImgCsConverterClient.this.mID
+                                        + ") has been terminated unexpectedly");
                         if (ImgCsConverterClient.this.mIgnoreError) {
-                            Log.i(Context.SEM_VIDEO_TRANSCODING_SERVICE, "Client has stopped " + ImgCsConverterClient.this.mID + ", Ignore this error.");
+                            Log.i(
+                                    Context.SEM_VIDEO_TRANSCODING_SERVICE,
+                                    "Client has stopped "
+                                            + ImgCsConverterClient.this.mID
+                                            + ", Ignore this error.");
                         } else {
                             try {
                                 ImgCsConverterClient.this.mProgressCallback.onError();
@@ -103,7 +131,8 @@ public class ImgCsConverterClient extends ClientImpl {
                             }
                         }
                         ImgCsConverterClient.this.mIsRunning = false;
-                        ImgCsConverterClient.this.mTranscodingService.stopTask(ImgCsConverterClient.this.mID);
+                        ImgCsConverterClient.this.mTranscodingService.stopTask(
+                                ImgCsConverterClient.this.mID);
                     }
                 } catch (RemoteException e2) {
                     e2.printStackTrace();
@@ -111,7 +140,8 @@ public class ImgCsConverterClient extends ClientImpl {
             } catch (Throwable th) {
                 ImgCsConverterClient.this.mIsRunning = false;
                 try {
-                    ImgCsConverterClient.this.mTranscodingService.stopTask(ImgCsConverterClient.this.mID);
+                    ImgCsConverterClient.this.mTranscodingService.stopTask(
+                            ImgCsConverterClient.this.mID);
                 } catch (RemoteException e3) {
                     e3.printStackTrace();
                 }

@@ -23,20 +23,16 @@ public interface IOneHandService extends IInterface {
 
     public static class Default implements IOneHandService {
         @Override // com.samsung.android.sepunion.IOneHandService
-        public void registerListener(String packageName, IBinder cb) throws RemoteException {
-        }
+        public void registerListener(String packageName, IBinder cb) throws RemoteException {}
 
         @Override // com.samsung.android.sepunion.IOneHandService
-        public void unRegisterListener(String packageName, IBinder cb) throws RemoteException {
-        }
+        public void unRegisterListener(String packageName, IBinder cb) throws RemoteException {}
 
         @Override // com.samsung.android.sepunion.IOneHandService
-        public void clickTile(String componentName) throws RemoteException {
-        }
+        public void clickTile(String componentName) throws RemoteException {}
 
         @Override // com.samsung.android.sepunion.IOneHandService
-        public void writeSetting(String type, String key, int value) throws RemoteException {
-        }
+        public void writeSetting(String type, String key, int value) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -44,7 +40,7 @@ public interface IOneHandService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IOneHandService {
+    public abstract static class Stub extends Binder implements IOneHandService {
         static final int TRANSACTION_clickTile = 3;
         static final int TRANSACTION_registerListener = 1;
         static final int TRANSACTION_unRegisterListener = 2;
@@ -61,7 +57,9 @@ public interface IOneHandService extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IOneHandService asInterface(IBinder obj) {
@@ -101,7 +99,8 @@ public interface IOneHandService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IOneHandService.DESCRIPTOR);
             }
@@ -209,19 +208,23 @@ public interface IOneHandService extends IInterface {
         }
 
         protected void registerListener_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
         }
 
         protected void unRegisterListener_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
         }
 
         protected void clickTile_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
         }
 
         protected void writeSetting_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.WRITE_SECURE_SETTINGS, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

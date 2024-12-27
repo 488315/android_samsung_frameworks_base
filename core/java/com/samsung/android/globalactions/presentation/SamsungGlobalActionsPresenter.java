@@ -3,6 +3,7 @@ package com.samsung.android.globalactions.presentation;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.Uri;
 import android.view.KeyEvent;
+
 import com.samsung.android.globalactions.presentation.features.FeatureFactory;
 import com.samsung.android.globalactions.presentation.strategies.ActionUpdateStrategy;
 import com.samsung.android.globalactions.presentation.strategies.ActionsCreationStrategy;
@@ -23,6 +24,7 @@ import com.samsung.android.globalactions.util.SamsungGlobalActionsAnalytics;
 import com.samsung.android.globalactions.util.SystemConditions;
 import com.samsung.android.globalactions.util.SystemController;
 import com.samsung.android.globalactions.util.ThemeChecker;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -53,14 +55,28 @@ public class SamsungGlobalActionsPresenter implements SamsungGlobalActions {
     ActionViewModelFactory mViewModelFactory;
     SamsungGlobalActionsManager mWindowManagerFuncs;
     private static int NOT_SIDE_KEY_MODELS = -1;
-    public static Comparator<ActionViewModel> sViewPositionComparator = new Comparator() { // from class: com.samsung.android.globalactions.presentation.SamsungGlobalActionsPresenter$$ExternalSyntheticLambda0
-        @Override // java.util.Comparator
-        public final int compare(Object obj, Object obj2) {
-            return SamsungGlobalActionsPresenter.lambda$static$4((ActionViewModel) obj, (ActionViewModel) obj2);
-        }
-    };
+    public static Comparator<ActionViewModel> sViewPositionComparator =
+            new Comparator() { // from class:
+                               // com.samsung.android.globalactions.presentation.SamsungGlobalActionsPresenter$$ExternalSyntheticLambda0
+                @Override // java.util.Comparator
+                public final int compare(Object obj, Object obj2) {
+                    return SamsungGlobalActionsPresenter.lambda$static$4(
+                            (ActionViewModel) obj, (ActionViewModel) obj2);
+                }
+            };
 
-    public SamsungGlobalActionsPresenter(ExtendableGlobalActionsView view, FeatureFactory factory, ActionViewModelFactory viewModelFactory, SamsungGlobalActionsManager windowManagerFuncs, BroadcastManager broadcastManager, SystemController systemController, ConditionChecker conditionChecker, LogWrapper logWrapper, ThemeChecker themeChecker, ContentObserverWrapper contentObserverWrapper, SamsungGlobalActionsAnalytics samsungGlobalActionsAnalytics) {
+    public SamsungGlobalActionsPresenter(
+            ExtendableGlobalActionsView view,
+            FeatureFactory factory,
+            ActionViewModelFactory viewModelFactory,
+            SamsungGlobalActionsManager windowManagerFuncs,
+            BroadcastManager broadcastManager,
+            SystemController systemController,
+            ConditionChecker conditionChecker,
+            LogWrapper logWrapper,
+            ThemeChecker themeChecker,
+            ContentObserverWrapper contentObserverWrapper,
+            SamsungGlobalActionsAnalytics samsungGlobalActionsAnalytics) {
         this.mView = view;
         this.mFactory = factory;
         this.mViewModelFactory = viewModelFactory;
@@ -80,21 +96,24 @@ public class SamsungGlobalActionsPresenter implements SamsungGlobalActions {
         this.mIsRegistered = false;
         this.mActionConfirming = null;
         this.mActions.clear();
-        List<InitializationStrategy> initStrategies = this.mFactory.createInitializationStrategies(this);
+        List<InitializationStrategy> initStrategies =
+                this.mFactory.createInitializationStrategies(this);
         for (InitializationStrategy decorator : initStrategies) {
             decorator.onInitialize(this.mIsKeyguardShowing);
         }
     }
 
     public void createActions() {
-        List<ActionsCreationStrategy> actionsCreationStrategies = this.mFactory.createActionsCreationStrategies(this);
+        List<ActionsCreationStrategy> actionsCreationStrategies =
+                this.mFactory.createActionsCreationStrategies(this);
         for (ActionsCreationStrategy decorator : actionsCreationStrategies) {
             decorator.onCreateActions(this);
         }
         if (!this.mIsOverrideDefaultActions) {
             createDefaultActions();
         }
-        List<ActionUpdateStrategy> actionUpdateStrategies = this.mFactory.createActionUpdateStrategies();
+        List<ActionUpdateStrategy> actionUpdateStrategies =
+                this.mFactory.createActionUpdateStrategies();
         for (ActionUpdateStrategy strategy : actionUpdateStrategies) {
             for (ActionViewModel viewModel : this.mActions) {
                 strategy.onUpdateAction(viewModel);
@@ -105,8 +124,11 @@ public class SamsungGlobalActionsPresenter implements SamsungGlobalActions {
     public void createDefaultActions() {
         this.mLogWrapper.i(TAG, "createDefaultActions()");
         addAction(this.mViewModelFactory.createActionViewModel(this, "power"));
-        addAction(this.mViewModelFactory.createActionViewModel(this, DefaultActionNames.ACTION_RESTART));
-        List<DefaultActionsCreationStrategy> creationStrategies = this.mFactory.createDefaultActionsCreationStrategy(this, "bug_report");
+        addAction(
+                this.mViewModelFactory.createActionViewModel(
+                        this, DefaultActionNames.ACTION_RESTART));
+        List<DefaultActionsCreationStrategy> creationStrategies =
+                this.mFactory.createDefaultActionsCreationStrategy(this, "bug_report");
         if (this.mSystemCondition.isEnabled(SystemConditions.IS_BUG_REPORT_MODE)) {
             boolean skipBugReport = false;
             Iterator<DefaultActionsCreationStrategy> it = creationStrategies.iterator();
@@ -124,11 +146,16 @@ public class SamsungGlobalActionsPresenter implements SamsungGlobalActions {
                 addAction(this.mViewModelFactory.createActionViewModel(this, "bug_report"));
             }
         }
-        if (this.mSystemCondition.isEnabled(SystemConditions.IS_LOGOUT_ENABLED) && !this.mSystemCondition.isEnabled(SystemConditions.IS_DEVICE_OWNER)) {
-            addAction(this.mViewModelFactory.createActionViewModel(this, DefaultActionNames.ACTION_LOGOUT));
+        if (this.mSystemCondition.isEnabled(SystemConditions.IS_LOGOUT_ENABLED)
+                && !this.mSystemCondition.isEnabled(SystemConditions.IS_DEVICE_OWNER)) {
+            addAction(
+                    this.mViewModelFactory.createActionViewModel(
+                            this, DefaultActionNames.ACTION_LOGOUT));
         }
         if (this.mSystemCondition.isEnabled(SystemConditions.IS_SUPPORT_EMERGENCY_CALL)) {
-            List<DefaultActionsCreationStrategy> creationStrategies2 = this.mFactory.createDefaultActionsCreationStrategy(this, DefaultActionNames.ACTION_EMERGENCY_CALL);
+            List<DefaultActionsCreationStrategy> creationStrategies2 =
+                    this.mFactory.createDefaultActionsCreationStrategy(
+                            this, DefaultActionNames.ACTION_EMERGENCY_CALL);
             boolean skipEmergencyCall = false;
             Iterator<DefaultActionsCreationStrategy> it2 = creationStrategies2.iterator();
             while (true) {
@@ -142,11 +169,16 @@ public class SamsungGlobalActionsPresenter implements SamsungGlobalActions {
                 }
             }
             if (!skipEmergencyCall) {
-                addAction(this.mViewModelFactory.createActionViewModel(this, DefaultActionNames.ACTION_EMERGENCY_CALL));
+                addAction(
+                        this.mViewModelFactory.createActionViewModel(
+                                this, DefaultActionNames.ACTION_EMERGENCY_CALL));
             }
         }
-        if (this.mSystemCondition.isEnabled(SystemConditions.IS_SUPPORT_MEDICAL_INFO) && this.mSystemCondition.isEnabled(SystemConditions.IS_SUPPORT_EMERGENCY_CALL)) {
-            List<DefaultActionsCreationStrategy> creationStrategies3 = this.mFactory.createDefaultActionsCreationStrategy(this, DefaultActionNames.ACTION_MEDICAL_INFO);
+        if (this.mSystemCondition.isEnabled(SystemConditions.IS_SUPPORT_MEDICAL_INFO)
+                && this.mSystemCondition.isEnabled(SystemConditions.IS_SUPPORT_EMERGENCY_CALL)) {
+            List<DefaultActionsCreationStrategy> creationStrategies3 =
+                    this.mFactory.createDefaultActionsCreationStrategy(
+                            this, DefaultActionNames.ACTION_MEDICAL_INFO);
             boolean skipMedicalInfo = false;
             Iterator<DefaultActionsCreationStrategy> it3 = creationStrategies3.iterator();
             while (true) {
@@ -160,11 +192,14 @@ public class SamsungGlobalActionsPresenter implements SamsungGlobalActions {
                 }
             }
             if (!skipMedicalInfo) {
-                addAction(this.mViewModelFactory.createActionViewModel(this, DefaultActionNames.ACTION_MEDICAL_INFO));
+                addAction(
+                        this.mViewModelFactory.createActionViewModel(
+                                this, DefaultActionNames.ACTION_MEDICAL_INFO));
             }
         }
         if (this.mSystemCondition.isEnabled(SystemConditions.IS_SUPPORT_EMERGENCY_MODE)) {
-            List<DefaultActionsCreationStrategy> creationStrategies4 = this.mFactory.createDefaultActionsCreationStrategy(this, "emergency");
+            List<DefaultActionsCreationStrategy> creationStrategies4 =
+                    this.mFactory.createDefaultActionsCreationStrategy(this, "emergency");
             boolean skipEmergencyMode = false;
             Iterator<DefaultActionsCreationStrategy> it4 = creationStrategies4.iterator();
             while (true) {
@@ -222,7 +257,11 @@ public class SamsungGlobalActionsPresenter implements SamsungGlobalActions {
         this.mIsKeyguardShowing = keyguardShowing;
     }
 
-    public boolean onStart(boolean keyguardShowing, boolean deviceProvisioned, boolean fromSystemServer, int sideKeyType) {
+    public boolean onStart(
+            boolean keyguardShowing,
+            boolean deviceProvisioned,
+            boolean fromSystemServer,
+            int sideKeyType) {
         this.mLogWrapper.i(TAG, "onStart()");
         this.mSideKeyType = sideKeyType;
         if (this.mIsShowing) {
@@ -250,7 +289,8 @@ public class SamsungGlobalActionsPresenter implements SamsungGlobalActions {
     }
 
     public void onPrepareWindow() {
-        List<WindowDecorationStrategy> strategies = this.mFactory.createWindowDecorationStrategies(this);
+        List<WindowDecorationStrategy> strategies =
+                this.mFactory.createWindowDecorationStrategies(this);
         for (WindowDecorationStrategy strategy : strategies) {
             this.mView.addWindowDecorator(strategy);
         }
@@ -277,7 +317,11 @@ public class SamsungGlobalActionsPresenter implements SamsungGlobalActions {
     public void addAction(ActionViewModel action) {
         if (action != null) {
             this.mActions.add(action);
-            this.mLogWrapper.i(TAG, "addAction (" + action.getActionInfo().getName() + NavigationBarInflaterView.KEY_CODE_END);
+            this.mLogWrapper.i(
+                    TAG,
+                    "addAction ("
+                            + action.getActionInfo().getName()
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
     }
 
@@ -288,14 +332,20 @@ public class SamsungGlobalActionsPresenter implements SamsungGlobalActions {
 
     @Override // com.samsung.android.globalactions.presentation.SamsungGlobalActions
     public void clearActions(final String actionName) {
-        Predicate<ActionViewModel> actionPredicate = new Predicate() { // from class: com.samsung.android.globalactions.presentation.SamsungGlobalActionsPresenter$$ExternalSyntheticLambda3
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                boolean equals;
-                equals = ((ActionViewModel) obj).getActionInfo().getName().equals(actionName);
-                return equals;
-            }
-        };
+        Predicate<ActionViewModel> actionPredicate =
+                new Predicate() { // from class:
+                                  // com.samsung.android.globalactions.presentation.SamsungGlobalActionsPresenter$$ExternalSyntheticLambda3
+                    @Override // java.util.function.Predicate
+                    public final boolean test(Object obj) {
+                        boolean equals;
+                        equals =
+                                ((ActionViewModel) obj)
+                                        .getActionInfo()
+                                        .getName()
+                                        .equals(actionName);
+                        return equals;
+                    }
+                };
         this.mActions.removeIf(actionPredicate);
     }
 
@@ -308,25 +358,36 @@ public class SamsungGlobalActionsPresenter implements SamsungGlobalActions {
     public void onShowDialog() {
         this.mLogWrapper.i(TAG, "onShowDialog()");
         if (this.mSideKeyType != NOT_SIDE_KEY_MODELS) {
-            if (this.mSystemCondition.isEnabled(SystemConditions.SUPPORT_SECONDARY_DISPLAY_AS_COVER) && this.mSystemCondition.isEnabled(SystemConditions.IS_FOLDED)) {
-                this.mSamsungGlobalActionsAnalytics.sendEventLog(SamsungGlobalActionsAnalytics.SID_FRONT_COVER_DEVICE_OPTIONS, SamsungGlobalActionsAnalytics.EID_FRONT_COVER_DEVICE_OPTIONS);
+            if (this.mSystemCondition.isEnabled(SystemConditions.SUPPORT_SECONDARY_DISPLAY_AS_COVER)
+                    && this.mSystemCondition.isEnabled(SystemConditions.IS_FOLDED)) {
+                this.mSamsungGlobalActionsAnalytics.sendEventLog(
+                        SamsungGlobalActionsAnalytics.SID_FRONT_COVER_DEVICE_OPTIONS,
+                        SamsungGlobalActionsAnalytics.EID_FRONT_COVER_DEVICE_OPTIONS);
             } else {
-                this.mSamsungGlobalActionsAnalytics.sendEventLog(SamsungGlobalActionsAnalytics.SID_DEVICE_OPTIONS, SamsungGlobalActionsAnalytics.EID_SIDE_KEY_TYPE, SamsungGlobalActionsAnalytics.DID_SIDE_KEY_TYPE, this.mSideKeyType);
+                this.mSamsungGlobalActionsAnalytics.sendEventLog(
+                        SamsungGlobalActionsAnalytics.SID_DEVICE_OPTIONS,
+                        SamsungGlobalActionsAnalytics.EID_SIDE_KEY_TYPE,
+                        SamsungGlobalActionsAnalytics.DID_SIDE_KEY_TYPE,
+                        this.mSideKeyType);
             }
         }
         this.mWindowManagerFuncs.onGlobalActionsShown();
         this.mIsShowing = true;
-        this.mBroadcastManager.registerDismissActions(new Runnable() { // from class: com.samsung.android.globalactions.presentation.SamsungGlobalActionsPresenter$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                SamsungGlobalActionsPresenter.this.lambda$onShowDialog$1();
-            }
-        }, new Runnable() { // from class: com.samsung.android.globalactions.presentation.SamsungGlobalActionsPresenter$$ExternalSyntheticLambda2
-            @Override // java.lang.Runnable
-            public final void run() {
-                SamsungGlobalActionsPresenter.this.lambda$onShowDialog$2();
-            }
-        });
+        this.mBroadcastManager.registerDismissActions(
+                new Runnable() { // from class:
+                                 // com.samsung.android.globalactions.presentation.SamsungGlobalActionsPresenter$$ExternalSyntheticLambda1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        SamsungGlobalActionsPresenter.this.lambda$onShowDialog$1();
+                    }
+                },
+                new Runnable() { // from class:
+                                 // com.samsung.android.globalactions.presentation.SamsungGlobalActionsPresenter$$ExternalSyntheticLambda2
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        SamsungGlobalActionsPresenter.this.lambda$onShowDialog$2();
+                    }
+                });
         hideQuickPanel();
     }
 
@@ -344,12 +405,14 @@ public class SamsungGlobalActionsPresenter implements SamsungGlobalActions {
     public void registerSecureConfirmAction(final ActionViewModel viewModel) {
         if (!this.mIsRegistered) {
             this.mIsRegistered = true;
-            this.mBroadcastManager.registerSecureConfirmAction(new Runnable() { // from class: com.samsung.android.globalactions.presentation.SamsungGlobalActionsPresenter$$ExternalSyntheticLambda4
-                @Override // java.lang.Runnable
-                public final void run() {
-                    ActionViewModel.this.onPressSecureConfirm();
-                }
-            });
+            this.mBroadcastManager.registerSecureConfirmAction(
+                    new Runnable() { // from class:
+                                     // com.samsung.android.globalactions.presentation.SamsungGlobalActionsPresenter$$ExternalSyntheticLambda4
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            ActionViewModel.this.onPressSecureConfirm();
+                        }
+                    });
         }
     }
 
@@ -386,7 +449,9 @@ public class SamsungGlobalActionsPresenter implements SamsungGlobalActions {
 
     @Override // com.samsung.android.globalactions.presentation.SamsungGlobalActions
     public void confirmSafeMode(int index) {
-        ActionViewModel safeModeViewModel = this.mViewModelFactory.createActionViewModel(this, DefaultActionNames.ACTION_SAFE_MODE);
+        ActionViewModel safeModeViewModel =
+                this.mViewModelFactory.createActionViewModel(
+                        this, DefaultActionNames.ACTION_SAFE_MODE);
         if (safeModeViewModel != null) {
             safeModeViewModel.getActionInfo().setViewIndex(index);
             confirmAction(safeModeViewModel);
@@ -404,7 +469,10 @@ public class SamsungGlobalActionsPresenter implements SamsungGlobalActions {
     }
 
     static /* synthetic */ int lambda$static$4(ActionViewModel p1, ActionViewModel p2) {
-        return p1.getActionInfo().getViewType().getValue() < p2.getActionInfo().getViewType().getValue() ? -1 : 1;
+        return p1.getActionInfo().getViewType().getValue()
+                        < p2.getActionInfo().getViewType().getValue()
+                ? -1
+                : 1;
     }
 
     public List<ActionViewModel> getValidActions() {
@@ -423,7 +491,8 @@ public class SamsungGlobalActionsPresenter implements SamsungGlobalActions {
     }
 
     public void hideQuickPanel(String sender) {
-        this.mLogWrapper.v(TAG, "hideQuickPanelBackground(" + sender + NavigationBarInflaterView.KEY_CODE_END);
+        this.mLogWrapper.v(
+                TAG, "hideQuickPanelBackground(" + sender + NavigationBarInflaterView.KEY_CODE_END);
         this.mSystemController.hideQuickPanel(sender);
     }
 

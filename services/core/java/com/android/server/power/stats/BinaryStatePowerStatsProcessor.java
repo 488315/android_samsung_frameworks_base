@@ -3,8 +3,9 @@ package com.android.server.power.stats;
 import android.os.BatteryStats;
 import android.os.PersistableBundle;
 import android.util.SparseArray;
+
 import com.android.internal.os.PowerStats;
-import com.android.server.power.stats.PowerStatsProcessor;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -33,11 +34,16 @@ public abstract class BinaryStatePowerStatsProcessor extends PowerStatsProcessor
         public double power;
     }
 
-    public BinaryStatePowerStatsProcessor(int i, PowerStatsUidResolver powerStatsUidResolver, double d) {
+    public BinaryStatePowerStatsProcessor(
+            int i, PowerStatsUidResolver powerStatsUidResolver, double d) {
         this(i, powerStatsUidResolver, d, new BinaryStatePowerStatsLayout());
     }
 
-    public BinaryStatePowerStatsProcessor(int i, PowerStatsUidResolver powerStatsUidResolver, double d, BinaryStatePowerStatsLayout binaryStatePowerStatsLayout) {
+    public BinaryStatePowerStatsProcessor(
+            int i,
+            PowerStatsUidResolver powerStatsUidResolver,
+            double d,
+            BinaryStatePowerStatsLayout binaryStatePowerStatsLayout) {
         this.mInitiatingUid = -1;
         this.mLastState = 0;
         this.mPowerComponentId = i;
@@ -47,7 +53,10 @@ public abstract class BinaryStatePowerStatsProcessor extends PowerStatsProcessor
     }
 
     @Override // com.android.server.power.stats.PowerStatsProcessor
-    public final void addPowerStats(PowerComponentAggregatedPowerStats powerComponentAggregatedPowerStats, PowerStats powerStats, long j) {
+    public final void addPowerStats(
+            PowerComponentAggregatedPowerStats powerComponentAggregatedPowerStats,
+            PowerStats powerStats,
+            long j) {
         ensureInitialized();
         if (this.mLastState == 1) {
             recordUsageDuration(this.mPowerStats, this.mInitiatingUid, j);
@@ -57,21 +66,38 @@ public abstract class BinaryStatePowerStatsProcessor extends PowerStatsProcessor
         long consumedEnergy = binaryStatePowerStatsLayout.getConsumedEnergy(0, jArr);
         if (consumedEnergy != -1) {
             this.mEnergyConsumerSupported = true;
-            binaryStatePowerStatsLayout.setConsumedEnergy(this.mPowerStats.stats, 0, consumedEnergy);
+            binaryStatePowerStatsLayout.setConsumedEnergy(
+                    this.mPowerStats.stats, 0, consumedEnergy);
         }
         flushPowerStats(powerComponentAggregatedPowerStats, j);
     }
 
-    public void computeDevicePowerEstimates(PowerComponentAggregatedPowerStats powerComponentAggregatedPowerStats, PowerStatsProcessor.PowerEstimationPlan powerEstimationPlan, boolean z) {
-        for (int size = ((ArrayList) powerEstimationPlan.deviceStateEstimations).size() - 1; size >= 0; size--) {
-            PowerStatsProcessor.DeviceStateEstimation deviceStateEstimation = (PowerStatsProcessor.DeviceStateEstimation) ((ArrayList) powerEstimationPlan.deviceStateEstimations).get(size);
-            if (powerComponentAggregatedPowerStats.getDeviceStats(deviceStateEstimation.stateValues, this.mTmpDeviceStatsArray)) {
+    public void computeDevicePowerEstimates(
+            PowerComponentAggregatedPowerStats powerComponentAggregatedPowerStats,
+            PowerStatsProcessor.PowerEstimationPlan powerEstimationPlan,
+            boolean z) {
+        for (int size = ((ArrayList) powerEstimationPlan.deviceStateEstimations).size() - 1;
+                size >= 0;
+                size--) {
+            PowerStatsProcessor.DeviceStateEstimation deviceStateEstimation =
+                    (PowerStatsProcessor.DeviceStateEstimation)
+                            ((ArrayList) powerEstimationPlan.deviceStateEstimations).get(size);
+            if (powerComponentAggregatedPowerStats.getDeviceStats(
+                    deviceStateEstimation.stateValues, this.mTmpDeviceStatsArray)) {
                 long[] jArr = this.mTmpDeviceStatsArray;
                 BinaryStatePowerStatsLayout binaryStatePowerStatsLayout = this.mStatsLayout;
                 long j = jArr[binaryStatePowerStatsLayout.mDeviceDurationPosition];
                 if (j > 0) {
-                    binaryStatePowerStatsLayout.setDevicePowerEstimate(jArr, z ? jArr[binaryStatePowerStatsLayout.mDeviceEnergyConsumerPosition] * 2.777777777777778E-7d : j * this.mUsageBasedPowerEstimator.mAveragePowerMahPerMs);
-                    powerComponentAggregatedPowerStats.setDeviceStats(deviceStateEstimation.stateValues, this.mTmpDeviceStatsArray);
+                    binaryStatePowerStatsLayout.setDevicePowerEstimate(
+                            jArr,
+                            z
+                                    ? jArr[
+                                                    binaryStatePowerStatsLayout
+                                                            .mDeviceEnergyConsumerPosition]
+                                            * 2.777777777777778E-7d
+                                    : j * this.mUsageBasedPowerEstimator.mAveragePowerMahPerMs);
+                    powerComponentAggregatedPowerStats.setDeviceStats(
+                            deviceStateEstimation.stateValues, this.mTmpDeviceStatsArray);
                 }
             }
         }
@@ -84,7 +110,14 @@ public abstract class BinaryStatePowerStatsProcessor extends PowerStatsProcessor
         PersistableBundle persistableBundle = new PersistableBundle();
         BinaryStatePowerStatsLayout binaryStatePowerStatsLayout = this.mStatsLayout;
         binaryStatePowerStatsLayout.toExtras(persistableBundle);
-        this.mDescriptor = new PowerStats.Descriptor(this.mPowerComponentId, binaryStatePowerStatsLayout.mDeviceStatsArrayLength, (SparseArray) null, 0, binaryStatePowerStatsLayout.mUidStatsArrayLength, persistableBundle);
+        this.mDescriptor =
+                new PowerStats.Descriptor(
+                        this.mPowerComponentId,
+                        binaryStatePowerStatsLayout.mDeviceStatsArrayLength,
+                        (SparseArray) null,
+                        0,
+                        binaryStatePowerStatsLayout.mUidStatsArrayLength,
+                        persistableBundle);
         PowerStats powerStats = new PowerStats(this.mDescriptor);
         this.mPowerStats = powerStats;
         PowerStats.Descriptor descriptor = this.mDescriptor;
@@ -95,7 +128,8 @@ public abstract class BinaryStatePowerStatsProcessor extends PowerStatsProcessor
     }
 
     @Override // com.android.server.power.stats.PowerStatsProcessor
-    public final void finish(PowerComponentAggregatedPowerStats powerComponentAggregatedPowerStats, long j) {
+    public final void finish(
+            PowerComponentAggregatedPowerStats powerComponentAggregatedPowerStats, long j) {
         BinaryStatePowerStatsLayout binaryStatePowerStatsLayout;
         BinaryStatePowerStatsLayout binaryStatePowerStatsLayout2;
         int i = 1;
@@ -104,57 +138,103 @@ public abstract class BinaryStatePowerStatsProcessor extends PowerStatsProcessor
         }
         flushPowerStats(powerComponentAggregatedPowerStats, j);
         if (this.mPlan == null) {
-            this.mPlan = new PowerStatsProcessor.PowerEstimationPlan(powerComponentAggregatedPowerStats.mConfig);
+            this.mPlan =
+                    new PowerStatsProcessor.PowerEstimationPlan(
+                            powerComponentAggregatedPowerStats.mConfig);
         }
-        computeDevicePowerEstimates(powerComponentAggregatedPowerStats, this.mPlan, this.mEnergyConsumerSupported);
+        computeDevicePowerEstimates(
+                powerComponentAggregatedPowerStats, this.mPlan, this.mEnergyConsumerSupported);
         int size = ((ArrayList) this.mPlan.combinedDeviceStateEstimations).size() - 1;
         while (true) {
             binaryStatePowerStatsLayout = this.mStatsLayout;
             if (size < 0) {
                 break;
             }
-            PowerStatsProcessor.CombinedDeviceStateEstimate combinedDeviceStateEstimate = (PowerStatsProcessor.CombinedDeviceStateEstimate) ((ArrayList) this.mPlan.combinedDeviceStateEstimations).get(size);
+            PowerStatsProcessor.CombinedDeviceStateEstimate combinedDeviceStateEstimate =
+                    (PowerStatsProcessor.CombinedDeviceStateEstimate)
+                            ((ArrayList) this.mPlan.combinedDeviceStateEstimations).get(size);
             Intermediates intermediates = new Intermediates();
             combinedDeviceStateEstimate.intermediates = intermediates;
-            for (int size2 = ((ArrayList) combinedDeviceStateEstimate.deviceStateEstimations).size() - 1; size2 >= 0; size2--) {
-                if (powerComponentAggregatedPowerStats.getDeviceStats(((PowerStatsProcessor.DeviceStateEstimation) ((ArrayList) combinedDeviceStateEstimate.deviceStateEstimations).get(size2)).stateValues, this.mTmpDeviceStatsArray)) {
-                    intermediates.power = (this.mTmpDeviceStatsArray[binaryStatePowerStatsLayout.mDevicePowerEstimatePosition] / 1000000.0d) + intermediates.power;
+            for (int size2 =
+                            ((ArrayList) combinedDeviceStateEstimate.deviceStateEstimations).size()
+                                    - 1;
+                    size2 >= 0;
+                    size2--) {
+                if (powerComponentAggregatedPowerStats.getDeviceStats(
+                        ((PowerStatsProcessor.DeviceStateEstimation)
+                                        ((ArrayList)
+                                                        combinedDeviceStateEstimate
+                                                                .deviceStateEstimations)
+                                                .get(size2))
+                                .stateValues,
+                        this.mTmpDeviceStatsArray)) {
+                    intermediates.power =
+                            (this.mTmpDeviceStatsArray[
+                                                    binaryStatePowerStatsLayout
+                                                            .mDevicePowerEstimatePosition]
+                                            / 1000000.0d)
+                                    + intermediates.power;
                 }
             }
             size--;
         }
         ArrayList arrayList = new ArrayList();
         powerComponentAggregatedPowerStats.collectUids(arrayList);
-        for (int size3 = ((ArrayList) this.mPlan.uidStateEstimates).size() - 1; size3 >= 0; size3--) {
-            PowerStatsProcessor.UidStateEstimate uidStateEstimate = (PowerStatsProcessor.UidStateEstimate) ((ArrayList) this.mPlan.uidStateEstimates).get(size3);
-            Intermediates intermediates2 = (Intermediates) uidStateEstimate.combinedDeviceStateEstimate.intermediates;
+        for (int size3 = ((ArrayList) this.mPlan.uidStateEstimates).size() - 1;
+                size3 >= 0;
+                size3--) {
+            PowerStatsProcessor.UidStateEstimate uidStateEstimate =
+                    (PowerStatsProcessor.UidStateEstimate)
+                            ((ArrayList) this.mPlan.uidStateEstimates).get(size3);
+            Intermediates intermediates2 =
+                    (Intermediates) uidStateEstimate.combinedDeviceStateEstimate.intermediates;
             for (int size4 = arrayList.size() - 1; size4 >= 0; size4--) {
                 int intValue = ((Integer) arrayList.get(size4)).intValue();
                 Iterator it = ((ArrayList) uidStateEstimate.proportionalEstimates).iterator();
                 while (it.hasNext()) {
-                    if (powerComponentAggregatedPowerStats.getUidStats(intValue, ((PowerStatsProcessor.UidStateProportionalEstimate) it.next()).stateValues, this.mTmpUidStatsArray)) {
-                        intermediates2.duration += this.mTmpUidStatsArray[binaryStatePowerStatsLayout.mUidDurationPosition];
+                    if (powerComponentAggregatedPowerStats.getUidStats(
+                            intValue,
+                            ((PowerStatsProcessor.UidStateProportionalEstimate) it.next())
+                                    .stateValues,
+                            this.mTmpUidStatsArray)) {
+                        intermediates2.duration +=
+                                this.mTmpUidStatsArray[
+                                        binaryStatePowerStatsLayout.mUidDurationPosition];
                     }
                 }
             }
         }
         int size5 = ((ArrayList) this.mPlan.uidStateEstimates).size() - 1;
         while (size5 >= 0) {
-            PowerStatsProcessor.UidStateEstimate uidStateEstimate2 = (PowerStatsProcessor.UidStateEstimate) ((ArrayList) this.mPlan.uidStateEstimates).get(size5);
-            Intermediates intermediates3 = (Intermediates) uidStateEstimate2.combinedDeviceStateEstimate.intermediates;
+            PowerStatsProcessor.UidStateEstimate uidStateEstimate2 =
+                    (PowerStatsProcessor.UidStateEstimate)
+                            ((ArrayList) this.mPlan.uidStateEstimates).get(size5);
+            Intermediates intermediates3 =
+                    (Intermediates) uidStateEstimate2.combinedDeviceStateEstimate.intermediates;
             if (intermediates3.duration != 0) {
                 ArrayList arrayList2 = (ArrayList) uidStateEstimate2.proportionalEstimates;
                 int size6 = arrayList2.size() - i;
                 while (size6 >= 0) {
-                    PowerStatsProcessor.UidStateProportionalEstimate uidStateProportionalEstimate = (PowerStatsProcessor.UidStateProportionalEstimate) arrayList2.get(size6);
+                    PowerStatsProcessor.UidStateProportionalEstimate uidStateProportionalEstimate =
+                            (PowerStatsProcessor.UidStateProportionalEstimate)
+                                    arrayList2.get(size6);
                     int size7 = arrayList.size() - i;
                     while (size7 >= 0) {
                         int intValue2 = ((Integer) arrayList.get(size7)).intValue();
-                        if (powerComponentAggregatedPowerStats.getUidStats(intValue2, uidStateProportionalEstimate.stateValues, this.mTmpUidStatsArray)) {
+                        if (powerComponentAggregatedPowerStats.getUidStats(
+                                intValue2,
+                                uidStateProportionalEstimate.stateValues,
+                                this.mTmpUidStatsArray)) {
                             double d = intermediates3.power;
                             binaryStatePowerStatsLayout2 = binaryStatePowerStatsLayout;
-                            binaryStatePowerStatsLayout2.setUidPowerEstimate(this.mTmpUidStatsArray, (d * r14[binaryStatePowerStatsLayout.mUidDurationPosition]) / intermediates3.duration);
-                            powerComponentAggregatedPowerStats.setUidStats(intValue2, uidStateProportionalEstimate.stateValues, this.mTmpUidStatsArray);
+                            binaryStatePowerStatsLayout2.setUidPowerEstimate(
+                                    this.mTmpUidStatsArray,
+                                    (d * r14[binaryStatePowerStatsLayout.mUidDurationPosition])
+                                            / intermediates3.duration);
+                            powerComponentAggregatedPowerStats.setUidStats(
+                                    intValue2,
+                                    uidStateProportionalEstimate.stateValues,
+                                    this.mTmpUidStatsArray);
                         } else {
                             binaryStatePowerStatsLayout2 = binaryStatePowerStatsLayout;
                         }
@@ -171,7 +251,8 @@ public abstract class BinaryStatePowerStatsProcessor extends PowerStatsProcessor
         }
     }
 
-    public final void flushPowerStats(PowerComponentAggregatedPowerStats powerComponentAggregatedPowerStats, long j) {
+    public final void flushPowerStats(
+            PowerComponentAggregatedPowerStats powerComponentAggregatedPowerStats, long j) {
         PowerStats powerStats = this.mPowerStats;
         powerStats.durationMs = j - this.mLastUpdateTimestamp;
         powerComponentAggregatedPowerStats.addProcessedPowerStats(powerStats, j);
@@ -183,7 +264,9 @@ public abstract class BinaryStatePowerStatsProcessor extends PowerStatsProcessor
     public abstract int getBinaryState(BatteryStats.HistoryItem historyItem);
 
     @Override // com.android.server.power.stats.PowerStatsProcessor
-    public final void noteStateChange(PowerComponentAggregatedPowerStats powerComponentAggregatedPowerStats, BatteryStats.HistoryItem historyItem) {
+    public final void noteStateChange(
+            PowerComponentAggregatedPowerStats powerComponentAggregatedPowerStats,
+            BatteryStats.HistoryItem historyItem) {
         int binaryState = getBinaryState(historyItem);
         if (binaryState == this.mLastState) {
             return;
@@ -223,7 +306,8 @@ public abstract class BinaryStatePowerStatsProcessor extends PowerStatsProcessor
     }
 
     @Override // com.android.server.power.stats.PowerStatsProcessor
-    public final void start(PowerComponentAggregatedPowerStats powerComponentAggregatedPowerStats, long j) {
+    public final void start(
+            PowerComponentAggregatedPowerStats powerComponentAggregatedPowerStats, long j) {
         ensureInitialized();
         this.mLastState = 0;
         this.mLastStateTimestamp = j;

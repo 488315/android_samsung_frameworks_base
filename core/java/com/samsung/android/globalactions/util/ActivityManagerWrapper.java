@@ -12,6 +12,8 @@ public class ActivityManagerWrapper {
     }
 
     public boolean isInLockTaskMode() {
-        return (this.mActivityManager == null || this.mActivityManager.getLockTaskModeState() == 0) ? false : true;
+        return (this.mActivityManager == null || this.mActivityManager.getLockTaskModeState() == 0)
+                ? false
+                : true;
     }
 }

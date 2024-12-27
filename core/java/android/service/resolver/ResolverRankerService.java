@@ -7,8 +7,8 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.IBinder;
 import android.os.RemoteException;
-import android.service.resolver.IResolverRankerService;
 import android.util.Log;
+
 import java.util.List;
 
 @SystemApi
@@ -17,18 +17,17 @@ public abstract class ResolverRankerService extends Service {
     public static final String BIND_PERMISSION = "android.permission.BIND_RESOLVER_RANKER_SERVICE";
     private static final boolean DEBUG = false;
     private static final String HANDLER_THREAD_NAME = "RESOLVER_RANKER_SERVICE";
-    public static final String HOLD_PERMISSION = "android.permission.PROVIDE_RESOLVER_RANKER_SERVICE";
+    public static final String HOLD_PERMISSION =
+            "android.permission.PROVIDE_RESOLVER_RANKER_SERVICE";
     public static final String SERVICE_INTERFACE = "android.service.resolver.ResolverRankerService";
     private static final String TAG = "ResolverRankerService";
     private volatile Handler mHandler;
     private HandlerThread mHandlerThread;
     private ResolverRankerServiceWrapper mWrapper = null;
 
-    public void onPredictSharingProbabilities(List<ResolverTarget> targets) {
-    }
+    public void onPredictSharingProbabilities(List<ResolverTarget> targets) {}
 
-    public void onTrainRankingModel(List<ResolverTarget> targets, int selectedPosition) {
-    }
+    public void onTrainRankingModel(List<ResolverTarget> targets, int selectedPosition) {}
 
     @Override // android.app.Service
     public IBinder onBind(Intent intent) {
@@ -65,23 +64,28 @@ public abstract class ResolverRankerService extends Service {
     }
 
     private class ResolverRankerServiceWrapper extends IResolverRankerService.Stub {
-        private ResolverRankerServiceWrapper() {
-        }
+        private ResolverRankerServiceWrapper() {}
 
         @Override // android.service.resolver.IResolverRankerService
-        public void predict(final List<ResolverTarget> targets, final IResolverRankerResult result) throws RemoteException {
-            Runnable predictRunnable = new Runnable() { // from class: android.service.resolver.ResolverRankerService.ResolverRankerServiceWrapper.1
-                @Override // java.lang.Runnable
-                public void run() {
-                    try {
-                        ResolverRankerService.this.onPredictSharingProbabilities(targets);
-                        ResolverRankerService.sendResult(targets, result);
-                    } catch (Exception e) {
-                        Log.e(ResolverRankerService.TAG, "onPredictSharingProbabilities failed; send null results: " + e);
-                        ResolverRankerService.sendResult(null, result);
-                    }
-                }
-            };
+        public void predict(final List<ResolverTarget> targets, final IResolverRankerResult result)
+                throws RemoteException {
+            Runnable predictRunnable =
+                    new Runnable() { // from class:
+                                     // android.service.resolver.ResolverRankerService.ResolverRankerServiceWrapper.1
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            try {
+                                ResolverRankerService.this.onPredictSharingProbabilities(targets);
+                                ResolverRankerService.sendResult(targets, result);
+                            } catch (Exception e) {
+                                Log.e(
+                                        ResolverRankerService.TAG,
+                                        "onPredictSharingProbabilities failed; send null results: "
+                                                + e);
+                                ResolverRankerService.sendResult(null, result);
+                            }
+                        }
+                    };
             Handler h = ResolverRankerService.this.mHandler;
             if (h != null) {
                 h.post(predictRunnable);
@@ -89,17 +93,23 @@ public abstract class ResolverRankerService extends Service {
         }
 
         @Override // android.service.resolver.IResolverRankerService
-        public void train(final List<ResolverTarget> targets, final int selectedPosition) throws RemoteException {
-            Runnable trainRunnable = new Runnable() { // from class: android.service.resolver.ResolverRankerService.ResolverRankerServiceWrapper.2
-                @Override // java.lang.Runnable
-                public void run() {
-                    try {
-                        ResolverRankerService.this.onTrainRankingModel(targets, selectedPosition);
-                    } catch (Exception e) {
-                        Log.e(ResolverRankerService.TAG, "onTrainRankingModel failed; skip train: " + e);
-                    }
-                }
-            };
+        public void train(final List<ResolverTarget> targets, final int selectedPosition)
+                throws RemoteException {
+            Runnable trainRunnable =
+                    new Runnable() { // from class:
+                                     // android.service.resolver.ResolverRankerService.ResolverRankerServiceWrapper.2
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            try {
+                                ResolverRankerService.this.onTrainRankingModel(
+                                        targets, selectedPosition);
+                            } catch (Exception e) {
+                                Log.e(
+                                        ResolverRankerService.TAG,
+                                        "onTrainRankingModel failed; skip train: " + e);
+                            }
+                        }
+                    };
             Handler h = ResolverRankerService.this.mHandler;
             if (h != null) {
                 h.post(trainRunnable);

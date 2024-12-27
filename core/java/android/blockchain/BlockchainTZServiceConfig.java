@@ -1,10 +1,10 @@
 package android.blockchain;
 
-import android.blockchain.IBlockchainClient;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,19 +18,21 @@ public class BlockchainTZServiceConfig implements Parcelable {
     public IBinder mClient;
     public Map<Integer, TAConfig> mTAConfigs;
     private static final boolean bQC = Build.BOARD.matches("(?i)(msm[a-z0-9]*)|(sdm[a-z0-9]*)");
-    public static final Parcelable.Creator<BlockchainTZServiceConfig> CREATOR = new Parcelable.Creator<BlockchainTZServiceConfig>() { // from class: android.blockchain.BlockchainTZServiceConfig.2
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BlockchainTZServiceConfig createFromParcel(Parcel in) {
-            return new BlockchainTZServiceConfig(in);
-        }
+    public static final Parcelable.Creator<BlockchainTZServiceConfig> CREATOR =
+            new Parcelable.Creator<BlockchainTZServiceConfig>() { // from class:
+                // android.blockchain.BlockchainTZServiceConfig.2
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BlockchainTZServiceConfig createFromParcel(Parcel in) {
+                    return new BlockchainTZServiceConfig(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BlockchainTZServiceConfig[] newArray(int size) {
-            return new BlockchainTZServiceConfig[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BlockchainTZServiceConfig[] newArray(int size) {
+                    return new BlockchainTZServiceConfig[size];
+                }
+            };
 
     public static class TAConfig {
         public int maxRecvRespSize;
@@ -42,12 +44,16 @@ public class BlockchainTZServiceConfig implements Parcelable {
         public TAConfig(int sendsize, int recvsize) {
             this.taTechnology = "unknown";
             this.rootName = BlockchainTZServiceConfig.bQC ? "unknown" : "0";
-            this.processName = BlockchainTZServiceConfig.bQC ? "unknown" : BlockchainTZServiceConfig.TBASE_UNKNOWN_PROCESS;
+            this.processName =
+                    BlockchainTZServiceConfig.bQC
+                            ? "unknown"
+                            : BlockchainTZServiceConfig.TBASE_UNKNOWN_PROCESS;
             this.maxSendCmdSize = sendsize;
             this.maxRecvRespSize = recvsize;
         }
 
-        public TAConfig(String _taTechnology, String root, String process, int sendsize, int recvsize) {
+        public TAConfig(
+                String _taTechnology, String root, String process, int sendsize, int recvsize) {
             this.taTechnology = _taTechnology;
             this.rootName = root;
             this.processName = process;
@@ -69,14 +75,18 @@ public class BlockchainTZServiceConfig implements Parcelable {
     }
 
     public BlockchainTZServiceConfig() {
-        this.mClient = new IBlockchainClient.Stub() { // from class: android.blockchain.BlockchainTZServiceConfig.1
-        };
+        this.mClient =
+                new IBlockchainClient
+                        .Stub() { // from class: android.blockchain.BlockchainTZServiceConfig.1
+                };
         this.mTAConfigs = new HashMap();
     }
 
     private BlockchainTZServiceConfig(Parcel in) {
-        this.mClient = new IBlockchainClient.Stub() { // from class: android.blockchain.BlockchainTZServiceConfig.1
-        };
+        this.mClient =
+                new IBlockchainClient
+                        .Stub() { // from class: android.blockchain.BlockchainTZServiceConfig.1
+                };
         this.mTAConfigs = new HashMap();
         readFromParcel(in);
     }
@@ -99,7 +109,14 @@ public class BlockchainTZServiceConfig implements Parcelable {
         this.mClient = in.readStrongBinder();
         int count = in.readInt();
         for (int i = 0; i < count; i++) {
-            this.mTAConfigs.put(Integer.valueOf(in.readInt()), new TAConfig(in.readString(), in.readString(), in.readString(), in.readInt(), in.readInt()));
+            this.mTAConfigs.put(
+                    Integer.valueOf(in.readInt()),
+                    new TAConfig(
+                            in.readString(),
+                            in.readString(),
+                            in.readString(),
+                            in.readInt(),
+                            in.readInt()));
         }
     }
 

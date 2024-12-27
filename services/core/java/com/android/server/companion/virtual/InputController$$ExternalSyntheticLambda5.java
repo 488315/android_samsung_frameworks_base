@@ -14,7 +14,15 @@ public final /* synthetic */ class InputController$$ExternalSyntheticLambda5 imp
     public final /* synthetic */ int f$5;
     public final /* synthetic */ int f$6;
 
-    public /* synthetic */ InputController$$ExternalSyntheticLambda5(InputController inputController, String str, int i, int i2, String str2, int i3, int i4, int i5) {
+    public /* synthetic */ InputController$$ExternalSyntheticLambda5(
+            InputController inputController,
+            String str,
+            int i,
+            int i2,
+            String str2,
+            int i3,
+            int i4,
+            int i5) {
         this.$r8$classId = i5;
         this.f$0 = inputController;
         this.f$1 = str;
@@ -37,7 +45,9 @@ public final /* synthetic */ class InputController$$ExternalSyntheticLambda5 imp
                 int i3 = this.f$5;
                 int i4 = this.f$6;
                 inputController.mNativeWrapper.getClass();
-                return Long.valueOf(InputController.m355$$Nest$smnativeOpenUinputTouchscreen(i, i2, i3, str, str2, i4));
+                return Long.valueOf(
+                        InputController.m355$$Nest$smnativeOpenUinputTouchscreen(
+                                i, i2, i3, str, str2, i4));
             case 1:
                 InputController inputController2 = this.f$0;
                 String str3 = this.f$1;
@@ -47,7 +57,9 @@ public final /* synthetic */ class InputController$$ExternalSyntheticLambda5 imp
                 int i7 = this.f$5;
                 int i8 = this.f$6;
                 inputController2.mNativeWrapper.getClass();
-                return Long.valueOf(InputController.m355$$Nest$smnativeOpenUinputTouchscreen(i5, i6, i7, str3, str4, i8));
+                return Long.valueOf(
+                        InputController.m355$$Nest$smnativeOpenUinputTouchscreen(
+                                i5, i6, i7, str3, str4, i8));
             default:
                 InputController inputController3 = this.f$0;
                 String str5 = this.f$1;
@@ -57,7 +69,9 @@ public final /* synthetic */ class InputController$$ExternalSyntheticLambda5 imp
                 int i11 = this.f$5;
                 int i12 = this.f$6;
                 inputController3.mNativeWrapper.getClass();
-                return Long.valueOf(InputController.m354$$Nest$smnativeOpenUinputStylus(i9, i10, i11, str5, str6, i12));
+                return Long.valueOf(
+                        InputController.m354$$Nest$smnativeOpenUinputStylus(
+                                i9, i10, i11, str5, str6, i12));
         }
     }
 }

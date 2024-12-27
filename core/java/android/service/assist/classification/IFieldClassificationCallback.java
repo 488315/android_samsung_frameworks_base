@@ -9,7 +9,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes3.dex */
 public interface IFieldClassificationCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.service.assist.classification.IFieldClassificationCallback";
+    public static final String DESCRIPTOR =
+            "android.service.assist.classification.IFieldClassificationCallback";
 
     void cancel() throws RemoteException;
 
@@ -23,16 +24,13 @@ public interface IFieldClassificationCallback extends IInterface {
 
     public static class Default implements IFieldClassificationCallback {
         @Override // android.service.assist.classification.IFieldClassificationCallback
-        public void onCancellable(ICancellationSignal cancellation) throws RemoteException {
-        }
+        public void onCancellable(ICancellationSignal cancellation) throws RemoteException {}
 
         @Override // android.service.assist.classification.IFieldClassificationCallback
-        public void onSuccess(FieldClassificationResponse response) throws RemoteException {
-        }
+        public void onSuccess(FieldClassificationResponse response) throws RemoteException {}
 
         @Override // android.service.assist.classification.IFieldClassificationCallback
-        public void onFailure() throws RemoteException {
-        }
+        public void onFailure() throws RemoteException {}
 
         @Override // android.service.assist.classification.IFieldClassificationCallback
         public boolean isCompleted() throws RemoteException {
@@ -40,8 +38,7 @@ public interface IFieldClassificationCallback extends IInterface {
         }
 
         @Override // android.service.assist.classification.IFieldClassificationCallback
-        public void cancel() throws RemoteException {
-        }
+        public void cancel() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -49,7 +46,7 @@ public interface IFieldClassificationCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFieldClassificationCallback {
+    public abstract static class Stub extends Binder implements IFieldClassificationCallback {
         static final int TRANSACTION_cancel = 5;
         static final int TRANSACTION_isCompleted = 4;
         static final int TRANSACTION_onCancellable = 1;
@@ -99,7 +96,8 @@ public interface IFieldClassificationCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IFieldClassificationCallback.DESCRIPTOR);
             }
@@ -109,13 +107,16 @@ public interface IFieldClassificationCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ICancellationSignal _arg0 = ICancellationSignal.Stub.asInterface(data.readStrongBinder());
+                    ICancellationSignal _arg0 =
+                            ICancellationSignal.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     onCancellable(_arg0);
                     reply.writeNoException();
                     return true;
                 case 2:
-                    FieldClassificationResponse _arg02 = (FieldClassificationResponse) data.readTypedObject(FieldClassificationResponse.CREATOR);
+                    FieldClassificationResponse _arg02 =
+                            (FieldClassificationResponse)
+                                    data.readTypedObject(FieldClassificationResponse.CREATOR);
                     data.enforceNoDataAvail();
                     onSuccess(_arg02);
                     reply.writeNoException();

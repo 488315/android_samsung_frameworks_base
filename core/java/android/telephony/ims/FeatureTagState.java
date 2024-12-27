@@ -3,24 +3,27 @@ package android.telephony.ims;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes4.dex */
 public final class FeatureTagState implements Parcelable {
-    public static final Parcelable.Creator<FeatureTagState> CREATOR = new Parcelable.Creator<FeatureTagState>() { // from class: android.telephony.ims.FeatureTagState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FeatureTagState createFromParcel(Parcel source) {
-            return new FeatureTagState(source);
-        }
+    public static final Parcelable.Creator<FeatureTagState> CREATOR =
+            new Parcelable.Creator<
+                    FeatureTagState>() { // from class: android.telephony.ims.FeatureTagState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FeatureTagState createFromParcel(Parcel source) {
+                    return new FeatureTagState(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FeatureTagState[] newArray(int size) {
-            return new FeatureTagState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FeatureTagState[] newArray(int size) {
+                    return new FeatureTagState[size];
+                }
+            };
     private final String mFeatureTag;
     private final int mState;
 

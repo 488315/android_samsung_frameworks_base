@@ -6,11 +6,13 @@ import android.preference.GenericInflater.Parent;
 import android.util.AttributeSet;
 import android.util.Xml;
 import android.view.InflateException;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 @Deprecated
 /* loaded from: classes3.dex */
@@ -127,7 +129,11 @@ abstract class GenericInflater<T, P extends Parent> {
                 } catch (InflateException e) {
                     throw e;
                 } catch (IOException e2) {
-                    InflateException inflateException = new InflateException(xmlPullParser.getPositionDescription() + ": " + e2.getMessage());
+                    InflateException inflateException =
+                            new InflateException(
+                                    xmlPullParser.getPositionDescription()
+                                            + ": "
+                                            + e2.getMessage());
                     inflateException.initCause(e2);
                     throw inflateException;
                 } catch (XmlPullParserException e3) {
@@ -137,30 +143,52 @@ abstract class GenericInflater<T, P extends Parent> {
                 }
             } while (next != 1);
             if (next != 2) {
-                throw new InflateException(xmlPullParser.getPositionDescription() + ": No start tag found!");
+                throw new InflateException(
+                        xmlPullParser.getPositionDescription() + ": No start tag found!");
             }
-            t = (T) onMergeRoots(p, z, (Parent) createItemFromTag(xmlPullParser, xmlPullParser.getName(), asAttributeSet));
+            t =
+                    (T)
+                            onMergeRoots(
+                                    p,
+                                    z,
+                                    (Parent)
+                                            createItemFromTag(
+                                                    xmlPullParser,
+                                                    xmlPullParser.getName(),
+                                                    asAttributeSet));
             rInflate(xmlPullParser, t, asAttributeSet);
         }
         return t;
     }
 
-    public final T createItem(String name, String prefix, AttributeSet attrs) throws ClassNotFoundException, InflateException {
+    public final T createItem(String name, String prefix, AttributeSet attrs)
+            throws ClassNotFoundException, InflateException {
         Constructor constructor = (Constructor) sConstructorMap.get(name);
         if (constructor == null) {
             try {
-                Class clazz = this.mContext.getClassLoader().loadClass(prefix != null ? prefix + name : name);
+                Class clazz =
+                        this.mContext
+                                .getClassLoader()
+                                .loadClass(prefix != null ? prefix + name : name);
                 constructor = clazz.getConstructor(mConstructorSignature);
                 constructor.setAccessible(true);
                 sConstructorMap.put(name, constructor);
             } catch (ClassNotFoundException e) {
                 throw e;
             } catch (NoSuchMethodException e2) {
-                InflateException ie = new InflateException(attrs.getPositionDescription() + ": Error inflating class " + (prefix != null ? prefix + name : name));
+                InflateException ie =
+                        new InflateException(
+                                attrs.getPositionDescription()
+                                        + ": Error inflating class "
+                                        + (prefix != null ? prefix + name : name));
                 ie.initCause(e2);
                 throw ie;
             } catch (Exception e3) {
-                InflateException ie2 = new InflateException(attrs.getPositionDescription() + ": Error inflating class " + constructor.getDeclaringClass().getName());
+                InflateException ie2 =
+                        new InflateException(
+                                attrs.getPositionDescription()
+                                        + ": Error inflating class "
+                                        + constructor.getDeclaringClass().getName());
                 ie2.initCause(e3);
                 throw ie2;
             }
@@ -176,7 +204,10 @@ abstract class GenericInflater<T, P extends Parent> {
 
     private final T createItemFromTag(XmlPullParser parser, String name, AttributeSet attrs) {
         try {
-            T item = this.mFactory == null ? null : this.mFactory.onCreateItem(name, this.mContext, attrs);
+            T item =
+                    this.mFactory == null
+                            ? null
+                            : this.mFactory.onCreateItem(name, this.mContext, attrs);
             if (item == null) {
                 if (-1 == name.indexOf(46)) {
                     return onCreateItem(name, attrs);
@@ -187,17 +218,22 @@ abstract class GenericInflater<T, P extends Parent> {
         } catch (InflateException e) {
             throw e;
         } catch (ClassNotFoundException e2) {
-            InflateException ie = new InflateException(attrs.getPositionDescription() + ": Error inflating class " + name);
+            InflateException ie =
+                    new InflateException(
+                            attrs.getPositionDescription() + ": Error inflating class " + name);
             ie.initCause(e2);
             throw ie;
         } catch (Exception e3) {
-            InflateException ie2 = new InflateException(attrs.getPositionDescription() + ": Error inflating class " + name);
+            InflateException ie2 =
+                    new InflateException(
+                            attrs.getPositionDescription() + ": Error inflating class " + name);
             ie2.initCause(e3);
             throw ie2;
         }
     }
 
-    private void rInflate(XmlPullParser parser, T parent, AttributeSet attrs) throws XmlPullParserException, IOException {
+    private void rInflate(XmlPullParser parser, T parent, AttributeSet attrs)
+            throws XmlPullParserException, IOException {
         int depth = parser.getDepth();
         while (true) {
             int type = parser.next();
@@ -214,7 +250,8 @@ abstract class GenericInflater<T, P extends Parent> {
         }
     }
 
-    protected boolean onCreateCustomFromTag(XmlPullParser parser, T parent, AttributeSet attrs) throws XmlPullParserException {
+    protected boolean onCreateCustomFromTag(XmlPullParser parser, T parent, AttributeSet attrs)
+            throws XmlPullParserException {
         return false;
     }
 

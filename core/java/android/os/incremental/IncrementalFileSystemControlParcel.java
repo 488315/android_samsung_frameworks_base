@@ -7,21 +7,25 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class IncrementalFileSystemControlParcel implements Parcelable {
-    public static final Parcelable.Creator<IncrementalFileSystemControlParcel> CREATOR = new Parcelable.Creator<IncrementalFileSystemControlParcel>() { // from class: android.os.incremental.IncrementalFileSystemControlParcel.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IncrementalFileSystemControlParcel createFromParcel(Parcel _aidl_source) {
-            IncrementalFileSystemControlParcel _aidl_out = new IncrementalFileSystemControlParcel();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<IncrementalFileSystemControlParcel> CREATOR =
+            new Parcelable.Creator<
+                    IncrementalFileSystemControlParcel>() { // from class:
+                                                            // android.os.incremental.IncrementalFileSystemControlParcel.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IncrementalFileSystemControlParcel createFromParcel(Parcel _aidl_source) {
+                    IncrementalFileSystemControlParcel _aidl_out =
+                            new IncrementalFileSystemControlParcel();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IncrementalFileSystemControlParcel[] newArray(int _aidl_size) {
-            return new IncrementalFileSystemControlParcel[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IncrementalFileSystemControlParcel[] newArray(int _aidl_size) {
+                    return new IncrementalFileSystemControlParcel[_aidl_size];
+                }
+            };
     public ParcelFileDescriptor blocksWritten;
     public ParcelFileDescriptor cmd;
     public ParcelFileDescriptor log;
@@ -55,7 +59,9 @@ public class IncrementalFileSystemControlParcel implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.cmd = (ParcelFileDescriptor) _aidl_parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
+            this.cmd =
+                    (ParcelFileDescriptor)
+                            _aidl_parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -63,7 +69,9 @@ public class IncrementalFileSystemControlParcel implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.pendingReads = (ParcelFileDescriptor) _aidl_parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
+            this.pendingReads =
+                    (ParcelFileDescriptor)
+                            _aidl_parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -71,14 +79,18 @@ public class IncrementalFileSystemControlParcel implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.log = (ParcelFileDescriptor) _aidl_parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
+            this.log =
+                    (ParcelFileDescriptor)
+                            _aidl_parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.blocksWritten = (ParcelFileDescriptor) _aidl_parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
+                this.blocksWritten =
+                        (ParcelFileDescriptor)
+                                _aidl_parcel.readTypedObject(ParcelFileDescriptor.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
@@ -96,7 +108,10 @@ public class IncrementalFileSystemControlParcel implements Parcelable {
     @Override // android.os.Parcelable
     public int describeContents() {
         int _mask = 0 | describeContents(this.cmd);
-        return _mask | describeContents(this.pendingReads) | describeContents(this.log) | describeContents(this.blocksWritten);
+        return _mask
+                | describeContents(this.pendingReads)
+                | describeContents(this.log)
+                | describeContents(this.blocksWritten);
     }
 
     private int describeContents(Object _v) {

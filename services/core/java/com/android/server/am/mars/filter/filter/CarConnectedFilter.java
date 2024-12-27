@@ -9,9 +9,11 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.util.ArrayMap;
 import android.util.Slog;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.am.mars.MARsUtils;
 import com.android.server.am.mars.filter.IFilter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -25,13 +27,13 @@ public final class CarConnectedFilter implements IFilter {
     public final AtomicBoolean isCarConnected = new AtomicBoolean();
     public CarConnectionReceiver carConnectionReceiver = null;
     public final ArrayMap userIdPackageListSelfLocked = new ArrayMap();
-    public final ArrayList logExcludeList = new ArrayList(List.of("com.google.android.projection.gearhead"));
+    public final ArrayList logExcludeList =
+            new ArrayList(List.of("com.google.android.projection.gearhead"));
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.am.mars.filter.filter.CarConnectedFilter$1, reason: invalid class name */
     public final class AnonymousClass1 {
-        public AnonymousClass1() {
-        }
+        public AnonymousClass1() {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -79,8 +81,7 @@ public final class CarConnectedFilter implements IFilter {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class CarConnectionReceiver extends BroadcastReceiver {
-        public CarConnectionReceiver() {
-        }
+        public CarConnectionReceiver() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
@@ -106,7 +107,8 @@ public final class CarConnectedFilter implements IFilter {
         }
         synchronized (this.userIdPackageListSelfLocked) {
             try {
-                ArrayList arrayList = (ArrayList) this.userIdPackageListSelfLocked.get(Integer.valueOf(i));
+                ArrayList arrayList =
+                        (ArrayList) this.userIdPackageListSelfLocked.get(Integer.valueOf(i));
                 if (arrayList == null) {
                     return 0;
                 }
@@ -120,9 +122,12 @@ public final class CarConnectedFilter implements IFilter {
     @Override // com.android.server.am.mars.filter.IFilter
     public final void init(Context context) {
         this.mContext = context;
-        this.carConnectionQueryHandler = new CarConnectionQueryHandler(context.getContentResolver());
+        this.carConnectionQueryHandler =
+                new CarConnectionQueryHandler(context.getContentResolver());
         listener = new AnonymousClass1();
-        IntentFilter m = BatteryService$$ExternalSyntheticOutline0.m("androidx.car.app.connection.action.CAR_CONNECTION_UPDATED");
+        IntentFilter m =
+                BatteryService$$ExternalSyntheticOutline0.m(
+                        "androidx.car.app.connection.action.CAR_CONNECTION_UPDATED");
         CarConnectionReceiver carConnectionReceiver = new CarConnectionReceiver();
         this.carConnectionReceiver = carConnectionReceiver;
         this.mContext.registerReceiver(carConnectionReceiver, m, 2);
@@ -130,6 +135,16 @@ public final class CarConnectedFilter implements IFilter {
     }
 
     public final void queryForState() {
-        this.carConnectionQueryHandler.startQuery(42, null, new Uri.Builder().scheme("content").authority("androidx.car.app.connection").build(), new String[]{"CarConnectionState"}, null, null, null);
+        this.carConnectionQueryHandler.startQuery(
+                42,
+                null,
+                new Uri.Builder()
+                        .scheme("content")
+                        .authority("androidx.car.app.connection")
+                        .build(),
+                new String[] {"CarConnectionState"},
+                null,
+                null,
+                null);
     }
 }

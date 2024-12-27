@@ -6,6 +6,7 @@ import android.net.NattKeepalivePacketDataParcelable;
 import android.net.TcpKeepalivePacketData;
 import android.net.TcpKeepalivePacketDataParcelable;
 import android.util.Log;
+
 import java.net.InetAddress;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -18,11 +19,15 @@ public final class KeepalivePacketDataUtil {
     private static final String TAG = "KeepalivePacketDataUtil";
 
     @Deprecated
-    public static TcpKeepalivePacketDataParcelable parseTcpKeepalivePacketData(KeepalivePacketData keepalivePacketData) {
+    public static TcpKeepalivePacketDataParcelable parseTcpKeepalivePacketData(
+            KeepalivePacketData keepalivePacketData) {
         if (keepalivePacketData == null) {
             return null;
         }
-        Log.wtf(TAG, "parseTcpKeepalivePacketData should not be used after R, use TcpKeepalivePacketData instead.");
+        Log.wtf(
+                TAG,
+                "parseTcpKeepalivePacketData should not be used after R, use TcpKeepalivePacketData"
+                    + " instead.");
         ByteBuffer wrap = ByteBuffer.wrap(keepalivePacketData.getPacket());
         wrap.order(ByteOrder.BIG_ENDIAN);
         try {
@@ -31,10 +36,13 @@ public final class KeepalivePacketDataUtil {
             short s = wrap.getShort(34);
             byte b = wrap.get(1);
             byte b2 = wrap.get(8);
-            TcpKeepalivePacketDataParcelable tcpKeepalivePacketDataParcelable = new TcpKeepalivePacketDataParcelable();
-            tcpKeepalivePacketDataParcelable.srcAddress = keepalivePacketData.getSrcAddress().getAddress();
+            TcpKeepalivePacketDataParcelable tcpKeepalivePacketDataParcelable =
+                    new TcpKeepalivePacketDataParcelable();
+            tcpKeepalivePacketDataParcelable.srcAddress =
+                    keepalivePacketData.getSrcAddress().getAddress();
             tcpKeepalivePacketDataParcelable.srcPort = keepalivePacketData.getSrcPort();
-            tcpKeepalivePacketDataParcelable.dstAddress = keepalivePacketData.getDstAddress().getAddress();
+            tcpKeepalivePacketDataParcelable.dstAddress =
+                    keepalivePacketData.getDstAddress().getAddress();
             tcpKeepalivePacketDataParcelable.dstPort = keepalivePacketData.getDstPort();
             tcpKeepalivePacketDataParcelable.seq = i;
             tcpKeepalivePacketDataParcelable.ack = i2;
@@ -48,8 +56,10 @@ public final class KeepalivePacketDataUtil {
         }
     }
 
-    public static NattKeepalivePacketDataParcelable toStableParcelable(NattKeepalivePacketData nattKeepalivePacketData) {
-        NattKeepalivePacketDataParcelable nattKeepalivePacketDataParcelable = new NattKeepalivePacketDataParcelable();
+    public static NattKeepalivePacketDataParcelable toStableParcelable(
+            NattKeepalivePacketData nattKeepalivePacketData) {
+        NattKeepalivePacketDataParcelable nattKeepalivePacketDataParcelable =
+                new NattKeepalivePacketDataParcelable();
         InetAddress srcAddress = nattKeepalivePacketData.getSrcAddress();
         InetAddress dstAddress = nattKeepalivePacketData.getDstAddress();
         nattKeepalivePacketDataParcelable.srcAddress = srcAddress.getAddress();
@@ -59,8 +69,10 @@ public final class KeepalivePacketDataUtil {
         return nattKeepalivePacketDataParcelable;
     }
 
-    public static TcpKeepalivePacketDataParcelable toStableParcelable(TcpKeepalivePacketData tcpKeepalivePacketData) {
-        TcpKeepalivePacketDataParcelable tcpKeepalivePacketDataParcelable = new TcpKeepalivePacketDataParcelable();
+    public static TcpKeepalivePacketDataParcelable toStableParcelable(
+            TcpKeepalivePacketData tcpKeepalivePacketData) {
+        TcpKeepalivePacketDataParcelable tcpKeepalivePacketDataParcelable =
+                new TcpKeepalivePacketDataParcelable();
         InetAddress srcAddress = tcpKeepalivePacketData.getSrcAddress();
         InetAddress dstAddress = tcpKeepalivePacketData.getDstAddress();
         tcpKeepalivePacketDataParcelable.srcAddress = srcAddress.getAddress();

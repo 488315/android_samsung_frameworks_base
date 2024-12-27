@@ -2,6 +2,7 @@ package android.service.autofill.augmented;
 
 import android.content.ComponentName;
 import android.metrics.LogMaker;
+
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.logging.nano.MetricsProto;
 
@@ -9,9 +10,25 @@ import com.android.internal.logging.nano.MetricsProto;
 public final class Helper {
     private static final MetricsLogger sMetricsLogger = new MetricsLogger();
 
-    public static void logResponse(int type, String servicePackageName, ComponentName componentName, int mSessionId, long durationMs) {
-        ComponentName sanitizedComponentName = new ComponentName(componentName.getPackageName(), "");
-        LogMaker log = new LogMaker(MetricsProto.MetricsEvent.AUTOFILL_AUGMENTED_RESPONSE).setType(type).setComponentName(sanitizedComponentName).addTaggedData(MetricsProto.MetricsEvent.FIELD_AUTOFILL_SESSION_ID, Integer.valueOf(mSessionId)).addTaggedData(908, servicePackageName).addTaggedData(MetricsProto.MetricsEvent.FIELD_AUTOFILL_DURATION, Long.valueOf(durationMs));
+    public static void logResponse(
+            int type,
+            String servicePackageName,
+            ComponentName componentName,
+            int mSessionId,
+            long durationMs) {
+        ComponentName sanitizedComponentName =
+                new ComponentName(componentName.getPackageName(), "");
+        LogMaker log =
+                new LogMaker(MetricsProto.MetricsEvent.AUTOFILL_AUGMENTED_RESPONSE)
+                        .setType(type)
+                        .setComponentName(sanitizedComponentName)
+                        .addTaggedData(
+                                MetricsProto.MetricsEvent.FIELD_AUTOFILL_SESSION_ID,
+                                Integer.valueOf(mSessionId))
+                        .addTaggedData(908, servicePackageName)
+                        .addTaggedData(
+                                MetricsProto.MetricsEvent.FIELD_AUTOFILL_DURATION,
+                                Long.valueOf(durationMs));
         sMetricsLogger.write(log);
     }
 

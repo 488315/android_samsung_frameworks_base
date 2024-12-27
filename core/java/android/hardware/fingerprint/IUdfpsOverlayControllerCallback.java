@@ -8,14 +8,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IUdfpsOverlayControllerCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.hardware.fingerprint.IUdfpsOverlayControllerCallback";
+    public static final String DESCRIPTOR =
+            "android.hardware.fingerprint.IUdfpsOverlayControllerCallback";
 
     void onUserCanceled() throws RemoteException;
 
     public static class Default implements IUdfpsOverlayControllerCallback {
         @Override // android.hardware.fingerprint.IUdfpsOverlayControllerCallback
-        public void onUserCanceled() throws RemoteException {
-        }
+        public void onUserCanceled() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +23,7 @@ public interface IUdfpsOverlayControllerCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUdfpsOverlayControllerCallback {
+    public abstract static class Stub extends Binder implements IUdfpsOverlayControllerCallback {
         static final int TRANSACTION_onUserCanceled = 1;
 
         public Stub() {
@@ -61,7 +61,8 @@ public interface IUdfpsOverlayControllerCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IUdfpsOverlayControllerCallback.DESCRIPTOR);
             }

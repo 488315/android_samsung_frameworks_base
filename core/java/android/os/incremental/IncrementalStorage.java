@@ -4,7 +4,7 @@ import android.content.pm.DataLoaderParams;
 import android.content.pm.IDataLoaderStatusListener;
 import android.os.PersistableBundle;
 import android.os.RemoteException;
-import android.os.incremental.V4Signature;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -93,7 +93,15 @@ public final class IncrementalStorage {
         }
     }
 
-    public void makeFile(String path, long size, int mode, UUID id, byte[] metadata, byte[] v4signatureBytes, byte[] content) throws IOException {
+    public void makeFile(
+            String path,
+            long size,
+            int mode,
+            UUID id,
+            byte[] metadata,
+            byte[] v4signatureBytes,
+            byte[] content)
+            throws IOException {
         try {
             if (id == null && metadata == null) {
                 throw new IOException("File ID and metadata cannot both be null");
@@ -113,9 +121,12 @@ public final class IncrementalStorage {
         }
     }
 
-    public void makeFileFromRange(String destPath, String sourcePath, long rangeStart, long rangeEnd) throws IOException {
+    public void makeFileFromRange(
+            String destPath, String sourcePath, long rangeStart, long rangeEnd) throws IOException {
         try {
-            int res = this.mService.makeFileFromRange(this.mId, destPath, sourcePath, rangeStart, rangeEnd);
+            int res =
+                    this.mService.makeFileFromRange(
+                            this.mId, destPath, sourcePath, rangeStart, rangeEnd);
             if (res < 0) {
                 throw new IOException("makeFileFromRange() failed, errno " + (-res));
             }
@@ -124,7 +135,8 @@ public final class IncrementalStorage {
         }
     }
 
-    public void makeLink(String sourcePath, IncrementalStorage destStorage, String destPath) throws IOException {
+    public void makeLink(String sourcePath, IncrementalStorage destStorage, String destPath)
+            throws IOException {
         try {
             int res = this.mService.makeLink(this.mId, sourcePath, destStorage.getId(), destPath);
             if (res < 0) {
@@ -200,7 +212,8 @@ public final class IncrementalStorage {
             if (res >= 0) {
                 return res == 0;
             }
-            throw new IOException("isFullyLoaded() failed at querying loading progress, errno " + (-res));
+            throw new IOException(
+                    "isFullyLoaded() failed at querying loading progress, errno " + (-res));
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
             return false;
@@ -211,7 +224,9 @@ public final class IncrementalStorage {
         try {
             float res = this.mService.getLoadingProgress(this.mId);
             if (res < 0.0f) {
-                throw new IOException("getLoadingProgress() failed at querying loading progress, errno " + (-res));
+                throw new IOException(
+                        "getLoadingProgress() failed at querying loading progress, errno "
+                                + (-res));
             }
             return res;
         } catch (RemoteException e) {
@@ -239,10 +254,21 @@ public final class IncrementalStorage {
         }
     }
 
-    public boolean startLoading(DataLoaderParams dataLoaderParams, IDataLoaderStatusListener statusListener, StorageHealthCheckParams healthCheckParams, IStorageHealthListener healthListener, PerUidReadTimeouts[] perUidReadTimeouts) {
+    public boolean startLoading(
+            DataLoaderParams dataLoaderParams,
+            IDataLoaderStatusListener statusListener,
+            StorageHealthCheckParams healthCheckParams,
+            IStorageHealthListener healthListener,
+            PerUidReadTimeouts[] perUidReadTimeouts) {
         Objects.requireNonNull(perUidReadTimeouts);
         try {
-            return this.mService.startLoading(this.mId, dataLoaderParams.getData(), statusListener, healthCheckParams, healthListener, perUidReadTimeouts);
+            return this.mService.startLoading(
+                    this.mId,
+                    dataLoaderParams.getData(),
+                    statusListener,
+                    healthCheckParams,
+                    healthListener,
+                    perUidReadTimeouts);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
             return false;
@@ -292,15 +318,19 @@ public final class IncrementalStorage {
         try {
             V4Signature signature = V4Signature.readFrom(v4signatureBytes);
             if (!signature.isVersionSupported()) {
-                throw new IOException("v4 signature version " + signature.version + " is not supported");
+                throw new IOException(
+                        "v4 signature version " + signature.version + " is not supported");
             }
-            V4Signature.HashingInfo hashingInfo = V4Signature.HashingInfo.fromByteArray(signature.hashingInfo);
-            V4Signature.SigningInfos signingInfos = V4Signature.SigningInfos.fromByteArray(signature.signingInfos);
+            V4Signature.HashingInfo hashingInfo =
+                    V4Signature.HashingInfo.fromByteArray(signature.hashingInfo);
+            V4Signature.SigningInfos signingInfos =
+                    V4Signature.SigningInfos.fromByteArray(signature.signingInfos);
             if (hashingInfo.hashAlgorithm != 1) {
                 throw new IOException("Unsupported hashAlgorithm: " + hashingInfo.hashAlgorithm);
             }
             if (hashingInfo.log2BlockSize != 12) {
-                throw new IOException("Unsupported log2BlockSize: " + ((int) hashingInfo.log2BlockSize));
+                throw new IOException(
+                        "Unsupported log2BlockSize: " + ((int) hashingInfo.log2BlockSize));
             }
             if (hashingInfo.salt != null && hashingInfo.salt.length > 0) {
                 throw new IOException("Unsupported salt: " + Arrays.toString(hashingInfo.salt));
@@ -316,9 +346,11 @@ public final class IncrementalStorage {
         }
     }
 
-    public boolean configureNativeBinaries(String apkFullPath, String libDirRelativePath, String abi, boolean extractNativeLibs) {
+    public boolean configureNativeBinaries(
+            String apkFullPath, String libDirRelativePath, String abi, boolean extractNativeLibs) {
         try {
-            return this.mService.configureNativeBinaries(this.mId, apkFullPath, libDirRelativePath, abi, extractNativeLibs);
+            return this.mService.configureNativeBinaries(
+                    this.mId, apkFullPath, libDirRelativePath, abi, extractNativeLibs);
         } catch (RemoteException e) {
             e.rethrowFromSystemServer();
             return false;

@@ -5,7 +5,9 @@ import android.view.InputEvent;
 import android.view.InputEventReceiver;
 import android.view.MotionEvent;
 import android.view.WindowManagerPolicyConstants;
+
 import com.android.server.UiThread;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -36,7 +38,10 @@ public final class PointerEventDispatcher extends InputEventReceiver {
                 synchronized (this.mListeners) {
                     try {
                         if (this.mListenersArray == null) {
-                            WindowManagerPolicyConstants.PointerEventListener[] pointerEventListenerArr2 = new WindowManagerPolicyConstants.PointerEventListener[this.mListeners.size()];
+                            WindowManagerPolicyConstants.PointerEventListener[]
+                                    pointerEventListenerArr2 =
+                                            new WindowManagerPolicyConstants.PointerEventListener
+                                                    [this.mListeners.size()];
                             this.mListenersArray = pointerEventListenerArr2;
                             this.mListeners.toArray(pointerEventListenerArr2);
                         }
@@ -45,7 +50,8 @@ public final class PointerEventDispatcher extends InputEventReceiver {
                         throw th;
                     }
                 }
-                for (WindowManagerPolicyConstants.PointerEventListener pointerEventListener : pointerEventListenerArr) {
+                for (WindowManagerPolicyConstants.PointerEventListener pointerEventListener :
+                        pointerEventListenerArr) {
                     pointerEventListener.onPointerEvent(motionEvent);
                 }
             }

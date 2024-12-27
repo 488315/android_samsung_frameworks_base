@@ -4,7 +4,9 @@ import android.content.ContentValues;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.server.enterprise.storage.EdmStorageProvider;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -17,7 +19,12 @@ public abstract class LicenseLog {
             Bundle bundle = new Bundle();
             ContentValues contentValues = new ContentValues();
             contentValues.put("pkgName", str);
-            ArrayList arrayList = (ArrayList) LicenseLogService.mEdmStorageProvider.getValuesList("LICENSE_LOG", new String[]{"date", "id", "value"}, contentValues);
+            ArrayList arrayList =
+                    (ArrayList)
+                            LicenseLogService.mEdmStorageProvider.getValuesList(
+                                    "LICENSE_LOG",
+                                    new String[] {"date", "id", "value"},
+                                    contentValues);
             if (arrayList.isEmpty()) {
                 return null;
             }

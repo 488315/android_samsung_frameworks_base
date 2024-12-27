@@ -11,19 +11,22 @@ public class SemPackageConfiguration implements Parcelable {
     public static final int CATEGORY_NON_GAME_NORMAL = 0;
     public static final int CATEGORY_NON_GAME_TUNABLE = 2;
     public static final int CATEGORY_UNDEFINED = -1;
-    public static final Parcelable.Creator<SemPackageConfiguration> CREATOR = new Parcelable.Creator<SemPackageConfiguration>() { // from class: com.samsung.android.game.SemPackageConfiguration.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemPackageConfiguration createFromParcel(Parcel in) {
-            return new SemPackageConfiguration(in);
-        }
+    public static final Parcelable.Creator<SemPackageConfiguration> CREATOR =
+            new Parcelable.Creator<
+                    SemPackageConfiguration>() { // from class:
+                                                 // com.samsung.android.game.SemPackageConfiguration.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemPackageConfiguration createFromParcel(Parcel in) {
+                    return new SemPackageConfiguration(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemPackageConfiguration[] newArray(int size) {
-            return new SemPackageConfiguration[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemPackageConfiguration[] newArray(int size) {
+                    return new SemPackageConfiguration[size];
+                }
+            };
     private static final String TAG = "SemPackageConfiguration";
     private int category;
     private int categoryByUser;
@@ -88,7 +91,9 @@ public class SemPackageConfiguration implements Parcelable {
 
     public void setOptimalAspectRatio(float optimalAspectRatio) {
         if (optimalAspectRatio < 0.0f || 5.0f < optimalAspectRatio) {
-            GmsLog.e(TAG, "setOptimalAspectRatio(), invalid optimalAspectRatio: " + optimalAspectRatio);
+            GmsLog.e(
+                    TAG,
+                    "setOptimalAspectRatio(), invalid optimalAspectRatio: " + optimalAspectRatio);
         } else {
             this.optimalAspectRatio = optimalAspectRatio;
         }
@@ -100,7 +105,10 @@ public class SemPackageConfiguration implements Parcelable {
 
     public void setDynamicSurfaceScaling(float dynamicSurfaceScaling) {
         if (dynamicSurfaceScaling < 0.0f || 1.0f < dynamicSurfaceScaling) {
-            GmsLog.e(TAG, "setDynamicSurfaceScaling(), invalid dynamicSurfaceScaling: " + dynamicSurfaceScaling);
+            GmsLog.e(
+                    TAG,
+                    "setDynamicSurfaceScaling(), invalid dynamicSurfaceScaling: "
+                            + dynamicSurfaceScaling);
         } else {
             this.dynamicSurfaceScaling = dynamicSurfaceScaling;
         }

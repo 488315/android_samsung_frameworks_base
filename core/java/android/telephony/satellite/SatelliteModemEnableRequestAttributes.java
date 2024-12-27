@@ -2,29 +2,37 @@ package android.telephony.satellite;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class SatelliteModemEnableRequestAttributes implements Parcelable {
-    public static final Parcelable.Creator<SatelliteModemEnableRequestAttributes> CREATOR = new Parcelable.Creator<SatelliteModemEnableRequestAttributes>() { // from class: android.telephony.satellite.SatelliteModemEnableRequestAttributes.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SatelliteModemEnableRequestAttributes createFromParcel(Parcel in) {
-            return new SatelliteModemEnableRequestAttributes(in);
-        }
+    public static final Parcelable.Creator<SatelliteModemEnableRequestAttributes> CREATOR =
+            new Parcelable.Creator<
+                    SatelliteModemEnableRequestAttributes>() { // from class:
+                                                               // android.telephony.satellite.SatelliteModemEnableRequestAttributes.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SatelliteModemEnableRequestAttributes createFromParcel(Parcel in) {
+                    return new SatelliteModemEnableRequestAttributes(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SatelliteModemEnableRequestAttributes[] newArray(int size) {
-            return new SatelliteModemEnableRequestAttributes[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SatelliteModemEnableRequestAttributes[] newArray(int size) {
+                    return new SatelliteModemEnableRequestAttributes[size];
+                }
+            };
     private final boolean mIsDemoMode;
     private final boolean mIsEmergencyMode;
     private final boolean mIsEnabled;
     private final SatelliteSubscriptionInfo mSatelliteSubscriptionInfo;
 
-    public SatelliteModemEnableRequestAttributes(boolean isEnabled, boolean isDemoMode, boolean isEmergencyMode, SatelliteSubscriptionInfo satelliteSubscriptionInfo) {
+    public SatelliteModemEnableRequestAttributes(
+            boolean isEnabled,
+            boolean isDemoMode,
+            boolean isEmergencyMode,
+            SatelliteSubscriptionInfo satelliteSubscriptionInfo) {
         this.mIsEnabled = isEnabled;
         this.mIsDemoMode = isDemoMode;
         this.mIsEmergencyMode = isEmergencyMode;
@@ -35,7 +43,11 @@ public final class SatelliteModemEnableRequestAttributes implements Parcelable {
         this.mIsEnabled = in.readBoolean();
         this.mIsDemoMode = in.readBoolean();
         this.mIsEmergencyMode = in.readBoolean();
-        this.mSatelliteSubscriptionInfo = (SatelliteSubscriptionInfo) in.readParcelable(SatelliteSubscriptionInfo.class.getClassLoader(), SatelliteSubscriptionInfo.class);
+        this.mSatelliteSubscriptionInfo =
+                (SatelliteSubscriptionInfo)
+                        in.readParcelable(
+                                SatelliteSubscriptionInfo.class.getClassLoader(),
+                                SatelliteSubscriptionInfo.class);
     }
 
     @Override // android.os.Parcelable
@@ -52,7 +64,15 @@ public final class SatelliteModemEnableRequestAttributes implements Parcelable {
     }
 
     public String toString() {
-        return "SatelliteModemEnableRequestAttributes{, mIsEnabled=" + this.mIsEnabled + ", mIsDemoMode=" + this.mIsDemoMode + ", mIsEmergencyMode=" + this.mIsEmergencyMode + "mSatelliteSubscriptionInfo=" + this.mSatelliteSubscriptionInfo + "}";
+        return "SatelliteModemEnableRequestAttributes{, mIsEnabled="
+                + this.mIsEnabled
+                + ", mIsDemoMode="
+                + this.mIsDemoMode
+                + ", mIsEmergencyMode="
+                + this.mIsEmergencyMode
+                + "mSatelliteSubscriptionInfo="
+                + this.mSatelliteSubscriptionInfo
+                + "}";
     }
 
     public boolean equals(Object o) {
@@ -63,14 +83,21 @@ public final class SatelliteModemEnableRequestAttributes implements Parcelable {
             return false;
         }
         SatelliteModemEnableRequestAttributes that = (SatelliteModemEnableRequestAttributes) o;
-        if (this.mIsEnabled == that.mIsEnabled && this.mIsDemoMode == that.mIsDemoMode && this.mIsEmergencyMode == that.mIsEmergencyMode && this.mSatelliteSubscriptionInfo.equals(that.mSatelliteSubscriptionInfo)) {
+        if (this.mIsEnabled == that.mIsEnabled
+                && this.mIsDemoMode == that.mIsDemoMode
+                && this.mIsEmergencyMode == that.mIsEmergencyMode
+                && this.mSatelliteSubscriptionInfo.equals(that.mSatelliteSubscriptionInfo)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Boolean.valueOf(this.mIsEnabled), Boolean.valueOf(this.mIsDemoMode), Boolean.valueOf(this.mIsEmergencyMode), this.mSatelliteSubscriptionInfo);
+        return Objects.hash(
+                Boolean.valueOf(this.mIsEnabled),
+                Boolean.valueOf(this.mIsDemoMode),
+                Boolean.valueOf(this.mIsEmergencyMode),
+                this.mSatelliteSubscriptionInfo);
     }
 
     public boolean isEnabled() {

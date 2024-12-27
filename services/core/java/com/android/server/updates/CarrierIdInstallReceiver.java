@@ -14,6 +14,11 @@ public class CarrierIdInstallReceiver extends ConfigUpdateInstallReceiver {
 
     @Override // com.android.server.updates.ConfigUpdateInstallReceiver
     public final void postInstall(Context context) {
-        context.getContentResolver().update(Uri.withAppendedPath(Telephony.CarrierId.All.CONTENT_URI, "update_db"), new ContentValues(), null, null);
+        context.getContentResolver()
+                .update(
+                        Uri.withAppendedPath(Telephony.CarrierId.All.CONTENT_URI, "update_db"),
+                        new ContentValues(),
+                        null,
+                        null);
     }
 }

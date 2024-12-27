@@ -5,18 +5,14 @@ import java.io.OutputStream;
 
 /* loaded from: classes5.dex */
 class NullOutputStream extends OutputStream {
-    NullOutputStream() {
-    }
+    NullOutputStream() {}
 
     @Override // java.io.OutputStream
-    public void write(byte[] buf) throws IOException {
-    }
+    public void write(byte[] buf) throws IOException {}
 
     @Override // java.io.OutputStream
-    public void write(byte[] buf, int off, int len) throws IOException {
-    }
+    public void write(byte[] buf, int off, int len) throws IOException {}
 
     @Override // java.io.OutputStream
-    public void write(int b) throws IOException {
-    }
+    public void write(int b) throws IOException {}
 }

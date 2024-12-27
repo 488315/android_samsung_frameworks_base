@@ -1,6 +1,7 @@
 package com.android.net.module.util;
 
 import android.net.IpPrefix;
+
 import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -23,8 +24,11 @@ public final class IpRange {
         if (!startAddr.getClass().equals(endAddr.getClass())) {
             throw new IllegalArgumentException("Invalid range: Address family mismatch");
         }
-        if (addrToBigInteger(startAddr.getAddress()).compareTo(addrToBigInteger(endAddr.getAddress())) >= 0) {
-            throw new IllegalArgumentException("Invalid range; start address must be before end address");
+        if (addrToBigInteger(startAddr.getAddress())
+                        .compareTo(addrToBigInteger(endAddr.getAddress()))
+                >= 0) {
+            throw new IllegalArgumentException(
+                    "Invalid range; start address must be before end address");
         }
         this.mStartAddr = startAddr.getAddress();
         this.mEndAddr = endAddr.getAddress();
@@ -34,7 +38,9 @@ public final class IpRange {
         Objects.requireNonNull(prefix, "prefix must not be null");
         this.mStartAddr = prefix.getRawAddress();
         this.mEndAddr = prefix.getRawAddress();
-        for (int bitIndex = prefix.getPrefixLength(); bitIndex < this.mEndAddr.length * 8; bitIndex++) {
+        for (int bitIndex = prefix.getPrefixLength();
+                bitIndex < this.mEndAddr.length * 8;
+                bitIndex++) {
             byte[] bArr = this.mEndAddr;
             int i = bitIndex / 8;
             bArr[i] = (byte) (bArr[i] | ((byte) (128 >> (bitIndex % 8))));
@@ -61,7 +67,10 @@ public final class IpRange {
         boolean isIpv6 = this.mStartAddr.length == 16;
         List<IpPrefix> result = new ArrayList<>();
         Queue<IpPrefix> workingSet = new LinkedList<>();
-        workingSet.add(new IpPrefix(isIpv6 ? getAsInetAddress(new byte[16]) : getAsInetAddress(new byte[4]), 0));
+        workingSet.add(
+                new IpPrefix(
+                        isIpv6 ? getAsInetAddress(new byte[16]) : getAsInetAddress(new byte[4]),
+                        0));
         while (!workingSet.isEmpty()) {
             IpPrefix workingPrefix = workingSet.poll();
             IpRange workingRange = new IpRange(workingPrefix);
@@ -79,21 +88,27 @@ public final class IpRange {
         int currentPrefixLen = prefix.getPrefixLength();
         result.add(new IpPrefix(prefix.getAddress(), currentPrefixLen + 1));
         byte[] other = prefix.getRawAddress();
-        other[currentPrefixLen / 8] = (byte) (other[currentPrefixLen / 8] ^ (128 >> (currentPrefixLen % 8)));
+        other[currentPrefixLen / 8] =
+                (byte) (other[currentPrefixLen / 8] ^ (128 >> (currentPrefixLen % 8)));
         result.add(new IpPrefix(getAsInetAddress(other), currentPrefixLen + 1));
         return result;
     }
 
     public boolean containsRange(IpRange other) {
-        return addrToBigInteger(this.mStartAddr).compareTo(addrToBigInteger(other.mStartAddr)) <= 0 && addrToBigInteger(this.mEndAddr).compareTo(addrToBigInteger(other.mEndAddr)) >= 0;
+        return addrToBigInteger(this.mStartAddr).compareTo(addrToBigInteger(other.mStartAddr)) <= 0
+                && addrToBigInteger(this.mEndAddr).compareTo(addrToBigInteger(other.mEndAddr)) >= 0;
     }
 
     public boolean overlapsRange(IpRange other) {
-        return addrToBigInteger(this.mStartAddr).compareTo(addrToBigInteger(other.mEndAddr)) <= 0 && addrToBigInteger(other.mStartAddr).compareTo(addrToBigInteger(this.mEndAddr)) <= 0;
+        return addrToBigInteger(this.mStartAddr).compareTo(addrToBigInteger(other.mEndAddr)) <= 0
+                && addrToBigInteger(other.mStartAddr).compareTo(addrToBigInteger(this.mEndAddr))
+                        <= 0;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(Arrays.hashCode(this.mStartAddr)), Integer.valueOf(Arrays.hashCode(this.mEndAddr)));
+        return Objects.hash(
+                Integer.valueOf(Arrays.hashCode(this.mStartAddr)),
+                Integer.valueOf(Arrays.hashCode(this.mEndAddr)));
     }
 
     public boolean equals(Object obj) {
@@ -101,7 +116,8 @@ public final class IpRange {
             return false;
         }
         IpRange other = (IpRange) obj;
-        return Arrays.equals(this.mStartAddr, other.mStartAddr) && Arrays.equals(this.mEndAddr, other.mEndAddr);
+        return Arrays.equals(this.mStartAddr, other.mStartAddr)
+                && Arrays.equals(this.mEndAddr, other.mEndAddr);
     }
 
     private static BigInteger addrToBigInteger(byte[] addr) {

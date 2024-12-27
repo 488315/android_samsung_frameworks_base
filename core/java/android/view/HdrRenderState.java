@@ -1,7 +1,9 @@
 package android.view;
 
 import android.os.SystemClock;
+
 import com.android.graphics.hwui.flags.Flags;
+
 import java.util.function.Consumer;
 
 /* loaded from: classes4.dex */
@@ -41,8 +43,12 @@ class HdrRenderState implements Consumer<Display> {
     }
 
     void startListening() {
-        if (isHdrEnabled() && !this.mIsListenerRegistered && this.mViewRoot.mDisplay != null && this.mViewRoot.mDisplay.isHdrSdrRatioAvailable()) {
-            this.mViewRoot.mDisplay.registerHdrSdrRatioChangedListener(this.mViewRoot.mExecutor, this);
+        if (isHdrEnabled()
+                && !this.mIsListenerRegistered
+                && this.mViewRoot.mDisplay != null
+                && this.mViewRoot.mDisplay.isHdrSdrRatioAvailable()) {
+            this.mViewRoot.mDisplay.registerHdrSdrRatioChangedListener(
+                    this.mViewRoot.mExecutor, this);
             this.mIsListenerRegistered = true;
         }
     }
@@ -64,7 +70,10 @@ class HdrRenderState implements Consumer<Display> {
                 }
                 this.mPreviousRenderRatio = this.mRenderHdrSdrRatio;
                 if (this.mTargetDesiredHdrSdrRatio < this.mDesiredHdrSdrRatio) {
-                    this.mDesiredHdrSdrRatio = Math.max(this.mTargetDesiredHdrSdrRatio, this.mDesiredHdrSdrRatio - maxStep);
+                    this.mDesiredHdrSdrRatio =
+                            Math.max(
+                                    this.mTargetDesiredHdrSdrRatio,
+                                    this.mDesiredHdrSdrRatio - maxStep);
                     if (this.mDesiredHdrSdrRatio != this.mTargetDesiredHdrSdrRatio) {
                         this.mUpdateHdrSdrRatioInfo = true;
                         this.mViewRoot.invalidate();
@@ -88,7 +97,8 @@ class HdrRenderState implements Consumer<Display> {
 
     void forceUpdateHdrSdrRatio() {
         if (isHdrEnabled()) {
-            this.mTargetHdrSdrRatio = Math.min(this.mDesiredHdrSdrRatio, this.mViewRoot.mDisplay.getHdrSdrRatio());
+            this.mTargetHdrSdrRatio =
+                    Math.min(this.mDesiredHdrSdrRatio, this.mViewRoot.mDisplay.getHdrSdrRatio());
         } else {
             this.mTargetHdrSdrRatio = 1.0f;
         }
@@ -100,7 +110,8 @@ class HdrRenderState implements Consumer<Display> {
         this.mLastUpdateMillis = SystemClock.uptimeMillis();
         if (desiredRatio != this.mTargetDesiredHdrSdrRatio) {
             this.mTargetDesiredHdrSdrRatio = desiredRatio;
-            if (this.mTargetDesiredHdrSdrRatio > this.mDesiredHdrSdrRatio || !FLAG_ANIMATE_ENABLED) {
+            if (this.mTargetDesiredHdrSdrRatio > this.mDesiredHdrSdrRatio
+                    || !FLAG_ANIMATE_ENABLED) {
                 this.mDesiredHdrSdrRatio = this.mTargetDesiredHdrSdrRatio;
             }
             forceUpdateHdrSdrRatio();

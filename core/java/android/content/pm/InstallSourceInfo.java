@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public final class InstallSourceInfo implements Parcelable {
-    public static final Parcelable.Creator<InstallSourceInfo> CREATOR = new Parcelable.Creator<InstallSourceInfo>() { // from class: android.content.pm.InstallSourceInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InstallSourceInfo createFromParcel(Parcel source) {
-            return new InstallSourceInfo(source);
-        }
+    public static final Parcelable.Creator<InstallSourceInfo> CREATOR =
+            new Parcelable.Creator<
+                    InstallSourceInfo>() { // from class: android.content.pm.InstallSourceInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InstallSourceInfo createFromParcel(Parcel source) {
+                    return new InstallSourceInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InstallSourceInfo[] newArray(int size) {
-            return new InstallSourceInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InstallSourceInfo[] newArray(int size) {
+                    return new InstallSourceInfo[size];
+                }
+            };
     private final String mInitiatingPackageName;
     private final SigningInfo mInitiatingPackageSigningInfo;
     private final String mInstallingPackageName;
@@ -25,11 +27,27 @@ public final class InstallSourceInfo implements Parcelable {
     private final int mPackageSource;
     private final String mUpdateOwnerPackageName;
 
-    public InstallSourceInfo(String initiatingPackageName, SigningInfo initiatingPackageSigningInfo, String originatingPackageName, String installingPackageName) {
-        this(initiatingPackageName, initiatingPackageSigningInfo, originatingPackageName, installingPackageName, null, 0);
+    public InstallSourceInfo(
+            String initiatingPackageName,
+            SigningInfo initiatingPackageSigningInfo,
+            String originatingPackageName,
+            String installingPackageName) {
+        this(
+                initiatingPackageName,
+                initiatingPackageSigningInfo,
+                originatingPackageName,
+                installingPackageName,
+                null,
+                0);
     }
 
-    public InstallSourceInfo(String initiatingPackageName, SigningInfo initiatingPackageSigningInfo, String originatingPackageName, String installingPackageName, String updateOwnerPackageName, int packageSource) {
+    public InstallSourceInfo(
+            String initiatingPackageName,
+            SigningInfo initiatingPackageSigningInfo,
+            String originatingPackageName,
+            String installingPackageName,
+            String updateOwnerPackageName,
+            int packageSource) {
         this.mInitiatingPackageName = initiatingPackageName;
         this.mInitiatingPackageSigningInfo = initiatingPackageSigningInfo;
         this.mOriginatingPackageName = originatingPackageName;
@@ -58,7 +76,10 @@ public final class InstallSourceInfo implements Parcelable {
 
     private InstallSourceInfo(Parcel source) {
         this.mInitiatingPackageName = source.readString();
-        this.mInitiatingPackageSigningInfo = (SigningInfo) source.readParcelable(SigningInfo.class.getClassLoader(), SigningInfo.class);
+        this.mInitiatingPackageSigningInfo =
+                (SigningInfo)
+                        source.readParcelable(
+                                SigningInfo.class.getClassLoader(), SigningInfo.class);
         this.mOriginatingPackageName = source.readString();
         this.mInstallingPackageName = source.readString();
         this.mUpdateOwnerPackageName = source.readString8();

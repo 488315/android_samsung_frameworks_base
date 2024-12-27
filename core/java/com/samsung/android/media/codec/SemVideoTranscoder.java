@@ -3,9 +3,10 @@ package com.samsung.android.media.codec;
 import android.content.Context;
 import android.net.Uri;
 import android.os.RemoteException;
-import com.samsung.android.media.codec.SemVideoTranscodingService;
+
 import com.samsung.android.transcode.core.Encode;
 import com.samsung.android.transcode.core.EncodeVideo;
+
 import java.io.IOException;
 
 /* loaded from: classes6.dex */
@@ -36,8 +37,7 @@ public class SemVideoTranscoder {
         public static final int VIDEO_CODEC_H264 = 4;
         public static final int VIDEO_CODEC_H265 = 5;
 
-        private CodecType() {
-        }
+        private CodecType() {}
     }
 
     public static final class ConfigType {
@@ -49,8 +49,7 @@ public class SemVideoTranscoder {
         public static final int maxSize = 3;
         public static final int videoCodec = 1;
 
-        private ConfigType() {
-        }
+        private ConfigType() {}
     }
 
     public void encode() throws IOException {
@@ -65,11 +64,15 @@ public class SemVideoTranscoder {
         this.mEncodeVideo.stop();
     }
 
-    public void initialize(String outputFilePath, int outputWidth, int outputHeight, String inputFilePath) throws IOException {
+    public void initialize(
+            String outputFilePath, int outputWidth, int outputHeight, String inputFilePath)
+            throws IOException {
         this.mEncodeVideo.initialize(outputFilePath, outputWidth, outputHeight, inputFilePath);
     }
 
-    public void initialize(String outputFilePath, int outputWidth, int outputHeight, Context context, Uri inputUri) throws IOException {
+    public void initialize(
+            String outputFilePath, int outputWidth, int outputHeight, Context context, Uri inputUri)
+            throws IOException {
         this.mEncodeVideo.initialize(outputFilePath, outputWidth, outputHeight, context, inputUri);
     }
 
@@ -91,72 +94,84 @@ public class SemVideoTranscoder {
 
     public void setProgressEventListener(ProgressEventListener listner) {
         this.mProgressEventListener = listner;
-        this.mEncodeVideo.setProgressUpdateListener(new Encode.EncodeEventListener() { // from class: com.samsung.android.media.codec.SemVideoTranscoder.1
-            @Override // com.samsung.android.transcode.core.Encode.EncodeEventListener
-            public void onStarted() {
-                SemVideoTranscoder.this.mProgressEventListener.onStarted();
-            }
+        this.mEncodeVideo.setProgressUpdateListener(
+                new Encode
+                        .EncodeEventListener() { // from class:
+                                                 // com.samsung.android.media.codec.SemVideoTranscoder.1
+                    @Override // com.samsung.android.transcode.core.Encode.EncodeEventListener
+                    public void onStarted() {
+                        SemVideoTranscoder.this.mProgressEventListener.onStarted();
+                    }
 
-            @Override // com.samsung.android.transcode.core.Encode.EncodeEventListener
-            public void onCompleted() {
-                SemVideoTranscoder.this.mProgressEventListener.onCompleted();
-            }
-        });
+                    @Override // com.samsung.android.transcode.core.Encode.EncodeEventListener
+                    public void onCompleted() {
+                        SemVideoTranscoder.this.mProgressEventListener.onCompleted();
+                    }
+                });
     }
 
     public void setProgressListener(ProgressListener listener) {
         this.mProgressListener = listener;
-        this.mEncodeVideo.setEncodeProgressListener(new Encode.EncodeProgressListener() { // from class: com.samsung.android.media.codec.SemVideoTranscoder.2
-            @Override // com.samsung.android.transcode.core.Encode.EncodeProgressListener
-            public void onStarted() {
-                SemVideoTranscoder.this.mProgressListener.onStarted();
-            }
+        this.mEncodeVideo.setEncodeProgressListener(
+                new Encode
+                        .EncodeProgressListener() { // from class:
+                                                    // com.samsung.android.media.codec.SemVideoTranscoder.2
+                    @Override // com.samsung.android.transcode.core.Encode.EncodeProgressListener
+                    public void onStarted() {
+                        SemVideoTranscoder.this.mProgressListener.onStarted();
+                    }
 
-            @Override // com.samsung.android.transcode.core.Encode.EncodeProgressListener
-            public void onProgressChanged(int progress) {
-                SemVideoTranscoder.this.mProgressListener.onProgressChanged(progress);
-            }
+                    @Override // com.samsung.android.transcode.core.Encode.EncodeProgressListener
+                    public void onProgressChanged(int progress) {
+                        SemVideoTranscoder.this.mProgressListener.onProgressChanged(progress);
+                    }
 
-            @Override // com.samsung.android.transcode.core.Encode.EncodeProgressListener
-            public void onCompleted() {
-                SemVideoTranscoder.this.mProgressListener.onCompleted();
-            }
-        });
+                    @Override // com.samsung.android.transcode.core.Encode.EncodeProgressListener
+                    public void onCompleted() {
+                        SemVideoTranscoder.this.mProgressListener.onCompleted();
+                    }
+                });
     }
 
-    public void setVideoTranscodingServiceCallback(SemVideoTranscodingService.ProgressCallback callback) {
+    public void setVideoTranscodingServiceCallback(
+            SemVideoTranscodingService.ProgressCallback callback) {
         this.mVideoTranscodingServiceCallback = callback;
-        this.mEncodeVideo.setEncodeProgressListener(new Encode.EncodeProgressListener() { // from class: com.samsung.android.media.codec.SemVideoTranscoder.3
-            @Override // com.samsung.android.transcode.core.Encode.EncodeProgressListener
-            public void onStarted() {
-                try {
-                    SemVideoTranscoder.this.mVideoTranscodingServiceCallback.onStarted();
-                } catch (RemoteException e) {
-                    e.printStackTrace();
-                }
-            }
+        this.mEncodeVideo.setEncodeProgressListener(
+                new Encode
+                        .EncodeProgressListener() { // from class:
+                                                    // com.samsung.android.media.codec.SemVideoTranscoder.3
+                    @Override // com.samsung.android.transcode.core.Encode.EncodeProgressListener
+                    public void onStarted() {
+                        try {
+                            SemVideoTranscoder.this.mVideoTranscodingServiceCallback.onStarted();
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                        }
+                    }
 
-            @Override // com.samsung.android.transcode.core.Encode.EncodeProgressListener
-            public void onProgressChanged(int progress) {
-                try {
-                    SemVideoTranscoder.this.mVideoTranscodingServiceCallback.onProgressChanged(progress);
-                } catch (RemoteException e) {
-                    e.printStackTrace();
-                }
-            }
+                    @Override // com.samsung.android.transcode.core.Encode.EncodeProgressListener
+                    public void onProgressChanged(int progress) {
+                        try {
+                            SemVideoTranscoder.this.mVideoTranscodingServiceCallback
+                                    .onProgressChanged(progress);
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                        }
+                    }
 
-            @Override // com.samsung.android.transcode.core.Encode.EncodeProgressListener
-            public void onCompleted() {
-                try {
-                    SemVideoTranscoder.this.mVideoTranscodingServiceCallback.onCompleted();
-                } catch (RemoteException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+                    @Override // com.samsung.android.transcode.core.Encode.EncodeProgressListener
+                    public void onCompleted() {
+                        try {
+                            SemVideoTranscoder.this.mVideoTranscodingServiceCallback.onCompleted();
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
     }
 
-    public static int getMaxEncodingDuration(int maxSizeKB, int width, int height, int audioCodecType) {
+    public static int getMaxEncodingDuration(
+            int maxSizeKB, int width, int height, int audioCodecType) {
         return EncodeVideo.getMaxEncodingDuration(maxSizeKB, width, height, audioCodecType);
     }
 

@@ -23,7 +23,11 @@ public class SidePropagation extends VisibilityPropagation {
     }
 
     @Override // android.transition.TransitionPropagation
-    public long getStartDelay(ViewGroup sceneRoot, Transition transition, TransitionValues startValues, TransitionValues endValues) {
+    public long getStartDelay(
+            ViewGroup sceneRoot,
+            Transition transition,
+            TransitionValues startValues,
+            TransitionValues endValues) {
         int directionMultiplier;
         TransitionValues positionValues;
         int epicenterY;
@@ -57,17 +61,37 @@ public class SidePropagation extends VisibilityPropagation {
             epicenterY = (top + bottom) / 2;
             epicenterX = epicenterX3;
         }
-        float distance = distance(sceneRoot, viewCenterX, viewCenterY, epicenterX, epicenterY, left, top, right, bottom);
+        float distance =
+                distance(
+                        sceneRoot,
+                        viewCenterX,
+                        viewCenterY,
+                        epicenterX,
+                        epicenterY,
+                        left,
+                        top,
+                        right,
+                        bottom);
         float maxDistance = getMaxDistance(sceneRoot);
         float distanceFraction = distance / maxDistance;
         long duration = transition.getDuration();
         if (duration < 0) {
             duration = 300;
         }
-        return Math.round(((directionMultiplier * duration) / this.mPropagationSpeed) * distanceFraction);
+        return Math.round(
+                ((directionMultiplier * duration) / this.mPropagationSpeed) * distanceFraction);
     }
 
-    private int distance(View sceneRoot, int viewX, int viewY, int epicenterX, int epicenterY, int left, int top, int right, int bottom) {
+    private int distance(
+            View sceneRoot,
+            int viewX,
+            int viewY,
+            int epicenterX,
+            int epicenterY,
+            int left,
+            int top,
+            int right,
+            int bottom) {
         int side;
         if (this.mSide == 8388611) {
             boolean isRtl = sceneRoot.getLayoutDirection() == 1;

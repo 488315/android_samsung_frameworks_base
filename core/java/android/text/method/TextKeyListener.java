@@ -11,10 +11,10 @@ import android.text.Selection;
 import android.text.SpanWatcher;
 import android.text.Spannable;
 import android.text.TextUtils;
-import android.text.method.QwertyKeyListener;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.View;
+
 import java.lang.ref.WeakReference;
 
 /* loaded from: classes4.dex */
@@ -29,7 +29,8 @@ public class TextKeyListener extends BaseKeyListener implements SpanWatcher {
     private int mPrefs;
     private boolean mPrefsInited;
     private WeakReference<ContentResolver> mResolver;
-    private static TextKeyListener[] sInstance = new TextKeyListener[Capitalize.values().length * 2];
+    private static TextKeyListener[] sInstance =
+            new TextKeyListener[Capitalize.values().length * 2];
     static final Object ACTIVE = new NoCopySpan.Concrete();
     static final Object CAPPED = new NoCopySpan.Concrete();
     static final Object INHIBIT_REPLACEMENT = new NoCopySpan.Concrete();
@@ -74,7 +75,8 @@ public class TextKeyListener extends BaseKeyListener implements SpanWatcher {
         return makeTextContentType(this.mAutoCap, this.mAutoText);
     }
 
-    @Override // android.text.method.BaseKeyListener, android.text.method.MetaKeyKeyListener, android.text.method.KeyListener
+    @Override // android.text.method.BaseKeyListener, android.text.method.MetaKeyKeyListener,
+              // android.text.method.KeyListener
     public boolean onKeyDown(View view, Editable content, int keyCode, KeyEvent event) {
         KeyListener im = getKeyListener(event);
         return im.onKeyDown(view, content, keyCode, event);
@@ -98,19 +100,19 @@ public class TextKeyListener extends BaseKeyListener implements SpanWatcher {
         e.removeSpan(CAPPED);
         e.removeSpan(INHIBIT_REPLACEMENT);
         e.removeSpan(LAST_TYPED);
-        QwertyKeyListener.Replaced[] repl = (QwertyKeyListener.Replaced[]) e.getSpans(0, e.length(), QwertyKeyListener.Replaced.class);
+        QwertyKeyListener.Replaced[] repl =
+                (QwertyKeyListener.Replaced[])
+                        e.getSpans(0, e.length(), QwertyKeyListener.Replaced.class);
         for (QwertyKeyListener.Replaced replaced : repl) {
             e.removeSpan(replaced);
         }
     }
 
     @Override // android.text.SpanWatcher
-    public void onSpanAdded(Spannable s, Object what, int start, int end) {
-    }
+    public void onSpanAdded(Spannable s, Object what, int start, int end) {}
 
     @Override // android.text.SpanWatcher
-    public void onSpanRemoved(Spannable s, Object what, int start, int end) {
-    }
+    public void onSpanRemoved(Spannable s, Object what, int start, int end) {}
 
     @Override // android.text.SpanWatcher
     public void onSpanChanged(Spannable s, Object what, int start, int end, int st, int en) {
@@ -137,8 +139,7 @@ public class TextKeyListener extends BaseKeyListener implements SpanWatcher {
     private static class NullKeyListener implements KeyListener {
         private static NullKeyListener sInstance;
 
-        private NullKeyListener() {
-        }
+        private NullKeyListener() {}
 
         @Override // android.text.method.KeyListener
         public int getInputType() {
@@ -161,8 +162,7 @@ public class TextKeyListener extends BaseKeyListener implements SpanWatcher {
         }
 
         @Override // android.text.method.KeyListener
-        public void clearMetaKeyState(View view, Editable content, int states) {
-        }
+        public void clearMetaKeyState(View view, Editable content, int states) {}
 
         public static NullKeyListener getInstance() {
             if (sInstance != null) {
@@ -191,7 +191,8 @@ public class TextKeyListener extends BaseKeyListener implements SpanWatcher {
         this.mResolver = new WeakReference<>(contentResolver);
         if (this.mObserver == null) {
             this.mObserver = new SettingsObserver();
-            contentResolver.registerContentObserver(Settings.System.CONTENT_URI, true, this.mObserver);
+            contentResolver.registerContentObserver(
+                    Settings.System.CONTENT_URI, true, this.mObserver);
         }
         updatePrefs(contentResolver);
         this.mPrefsInited = true;
@@ -205,7 +206,8 @@ public class TextKeyListener extends BaseKeyListener implements SpanWatcher {
         @Override // android.database.ContentObserver
         public void onChange(boolean selfChange) {
             if (TextKeyListener.this.mResolver != null) {
-                ContentResolver contentResolver = (ContentResolver) TextKeyListener.this.mResolver.get();
+                ContentResolver contentResolver =
+                        (ContentResolver) TextKeyListener.this.mResolver.get();
                 if (contentResolver == null) {
                     TextKeyListener.this.mPrefsInited = false;
                     return;
@@ -222,7 +224,8 @@ public class TextKeyListener extends BaseKeyListener implements SpanWatcher {
     public void updatePrefs(ContentResolver resolver) {
         boolean cap = Settings.System.getInt(resolver, Settings.System.TEXT_AUTO_CAPS, 1) > 0;
         boolean text = Settings.System.getInt(resolver, Settings.System.TEXT_AUTO_REPLACE, 1) > 0;
-        boolean period = Settings.System.getInt(resolver, Settings.System.TEXT_AUTO_PUNCTUATE, 1) > 0;
+        boolean period =
+                Settings.System.getInt(resolver, Settings.System.TEXT_AUTO_PUNCTUATE, 1) > 0;
         boolean pw = Settings.System.getInt(resolver, Settings.System.TEXT_SHOW_PASSWORD, 1) > 0;
         this.mPrefs = (cap ? 1 : 0) | (text ? 2 : 0) | (period ? 4 : 0) | (pw ? 8 : 0);
     }

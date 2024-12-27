@@ -3,24 +3,28 @@ package vendor.samsung.hardware.radio.messaging;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 /* loaded from: classes6.dex */
 public class SehCdmaSmsSubaddress implements Parcelable {
-    public static final Parcelable.Creator<SehCdmaSmsSubaddress> CREATOR = new Parcelable.Creator<SehCdmaSmsSubaddress>() { // from class: vendor.samsung.hardware.radio.messaging.SehCdmaSmsSubaddress.1
-        @Override // android.os.Parcelable.Creator
-        public SehCdmaSmsSubaddress createFromParcel(Parcel _aidl_source) {
-            SehCdmaSmsSubaddress _aidl_out = new SehCdmaSmsSubaddress();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SehCdmaSmsSubaddress> CREATOR =
+            new Parcelable.Creator<
+                    SehCdmaSmsSubaddress>() { // from class:
+                                              // vendor.samsung.hardware.radio.messaging.SehCdmaSmsSubaddress.1
+                @Override // android.os.Parcelable.Creator
+                public SehCdmaSmsSubaddress createFromParcel(Parcel _aidl_source) {
+                    SehCdmaSmsSubaddress _aidl_out = new SehCdmaSmsSubaddress();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehCdmaSmsSubaddress[] newArray(int _aidl_size) {
-            return new SehCdmaSmsSubaddress[_aidl_size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehCdmaSmsSubaddress[] newArray(int _aidl_size) {
+                    return new SehCdmaSmsSubaddress[_aidl_size];
+                }
+            };
     public static final int SUBADDRESS_TYPE_NSAP = 0;
     public static final int SUBADDRESS_TYPE_USER_SPECIFIED = 1;
     public byte[] digits;

@@ -15,8 +15,8 @@ public interface ICancellationCallback extends IInterface {
 
     public static class Default implements ICancellationCallback {
         @Override // android.app.appfunctions.ICancellationCallback
-        public void sendCancellationTransport(ICancellationSignal cancellationTransport) throws RemoteException {
-        }
+        public void sendCancellationTransport(ICancellationSignal cancellationTransport)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +24,7 @@ public interface ICancellationCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICancellationCallback {
+    public abstract static class Stub extends Binder implements ICancellationCallback {
         static final int TRANSACTION_sendCancellationTransport = 1;
 
         public Stub() {
@@ -62,7 +62,8 @@ public interface ICancellationCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICancellationCallback.DESCRIPTOR);
             }
@@ -72,7 +73,8 @@ public interface ICancellationCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ICancellationSignal _arg0 = ICancellationSignal.Stub.asInterface(data.readStrongBinder());
+                    ICancellationSignal _arg0 =
+                            ICancellationSignal.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     sendCancellationTransport(_arg0);
                     return true;
@@ -98,7 +100,8 @@ public interface ICancellationCallback extends IInterface {
             }
 
             @Override // android.app.appfunctions.ICancellationCallback
-            public void sendCancellationTransport(ICancellationSignal cancellationTransport) throws RemoteException {
+            public void sendCancellationTransport(ICancellationSignal cancellationTransport)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ICancellationCallback.DESCRIPTOR);

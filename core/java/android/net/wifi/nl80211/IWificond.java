@@ -1,14 +1,11 @@
 package android.net.wifi.nl80211;
 
-import android.net.wifi.nl80211.IApInterface;
-import android.net.wifi.nl80211.IClientInterface;
-import android.net.wifi.nl80211.IInterfaceEventCallback;
-import android.net.wifi.nl80211.IWificondEventCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -41,7 +38,8 @@ public interface IWificond extends IInterface {
 
     void notifyCountryCodeChanged() throws RemoteException;
 
-    void registerWificondEventCallback(IWificondEventCallback iWificondEventCallback) throws RemoteException;
+    void registerWificondEventCallback(IWificondEventCallback iWificondEventCallback)
+            throws RemoteException;
 
     boolean tearDownApInterface(String str) throws RemoteException;
 
@@ -49,7 +47,8 @@ public interface IWificond extends IInterface {
 
     void tearDownInterfaces() throws RemoteException;
 
-    void unregisterWificondEventCallback(IWificondEventCallback iWificondEventCallback) throws RemoteException;
+    void unregisterWificondEventCallback(IWificondEventCallback iWificondEventCallback)
+            throws RemoteException;
 
     public static class Default implements IWificond {
         @Override // android.net.wifi.nl80211.IWificond
@@ -73,8 +72,7 @@ public interface IWificond extends IInterface {
         }
 
         @Override // android.net.wifi.nl80211.IWificond
-        public void tearDownInterfaces() throws RemoteException {
-        }
+        public void tearDownInterfaces() throws RemoteException {}
 
         @Override // android.net.wifi.nl80211.IWificond
         public List<IBinder> GetClientInterfaces() throws RemoteException {
@@ -112,29 +110,27 @@ public interface IWificond extends IInterface {
         }
 
         @Override // android.net.wifi.nl80211.IWificond
-        public void RegisterCallback(IInterfaceEventCallback callback) throws RemoteException {
-        }
+        public void RegisterCallback(IInterfaceEventCallback callback) throws RemoteException {}
 
         @Override // android.net.wifi.nl80211.IWificond
-        public void UnregisterCallback(IInterfaceEventCallback callback) throws RemoteException {
-        }
+        public void UnregisterCallback(IInterfaceEventCallback callback) throws RemoteException {}
 
         @Override // android.net.wifi.nl80211.IWificond
-        public void registerWificondEventCallback(IWificondEventCallback callback) throws RemoteException {
-        }
+        public void registerWificondEventCallback(IWificondEventCallback callback)
+                throws RemoteException {}
 
         @Override // android.net.wifi.nl80211.IWificond
-        public void unregisterWificondEventCallback(IWificondEventCallback callback) throws RemoteException {
-        }
+        public void unregisterWificondEventCallback(IWificondEventCallback callback)
+                throws RemoteException {}
 
         @Override // android.net.wifi.nl80211.IWificond
-        public DeviceWiphyCapabilities getDeviceWiphyCapabilities(String iface_name) throws RemoteException {
+        public DeviceWiphyCapabilities getDeviceWiphyCapabilities(String iface_name)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.net.wifi.nl80211.IWificond
-        public void notifyCountryCodeChanged() throws RemoteException {
-        }
+        public void notifyCountryCodeChanged() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -142,7 +138,7 @@ public interface IWificond extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IWificond {
+    public abstract static class Stub extends Binder implements IWificond {
         static final int TRANSACTION_GetApInterfaces = 7;
         static final int TRANSACTION_GetClientInterfaces = 6;
         static final int TRANSACTION_RegisterCallback = 13;
@@ -231,7 +227,8 @@ public interface IWificond extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IWificond.DESCRIPTOR);
             }
@@ -308,22 +305,26 @@ public interface IWificond extends IInterface {
                     reply.writeIntArray(_result11);
                     return true;
                 case 13:
-                    IInterfaceEventCallback _arg05 = IInterfaceEventCallback.Stub.asInterface(data.readStrongBinder());
+                    IInterfaceEventCallback _arg05 =
+                            IInterfaceEventCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     RegisterCallback(_arg05);
                     return true;
                 case 14:
-                    IInterfaceEventCallback _arg06 = IInterfaceEventCallback.Stub.asInterface(data.readStrongBinder());
+                    IInterfaceEventCallback _arg06 =
+                            IInterfaceEventCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     UnregisterCallback(_arg06);
                     return true;
                 case 15:
-                    IWificondEventCallback _arg07 = IWificondEventCallback.Stub.asInterface(data.readStrongBinder());
+                    IWificondEventCallback _arg07 =
+                            IWificondEventCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     registerWificondEventCallback(_arg07);
                     return true;
                 case 16:
-                    IWificondEventCallback _arg08 = IWificondEventCallback.Stub.asInterface(data.readStrongBinder());
+                    IWificondEventCallback _arg08 =
+                            IWificondEventCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     unregisterWificondEventCallback(_arg08);
                     return true;
@@ -376,7 +377,8 @@ public interface IWificond extends IInterface {
             }
 
             @Override // android.net.wifi.nl80211.IWificond
-            public IClientInterface createClientInterface(String iface_name) throws RemoteException {
+            public IClientInterface createClientInterface(String iface_name)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -384,7 +386,8 @@ public interface IWificond extends IInterface {
                     _data.writeString(iface_name);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    IClientInterface _result = IClientInterface.Stub.asInterface(_reply.readStrongBinder());
+                    IClientInterface _result =
+                            IClientInterface.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -565,7 +568,8 @@ public interface IWificond extends IInterface {
             }
 
             @Override // android.net.wifi.nl80211.IWificond
-            public void UnregisterCallback(IInterfaceEventCallback callback) throws RemoteException {
+            public void UnregisterCallback(IInterfaceEventCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IWificond.DESCRIPTOR);
@@ -577,7 +581,8 @@ public interface IWificond extends IInterface {
             }
 
             @Override // android.net.wifi.nl80211.IWificond
-            public void registerWificondEventCallback(IWificondEventCallback callback) throws RemoteException {
+            public void registerWificondEventCallback(IWificondEventCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IWificond.DESCRIPTOR);
@@ -589,7 +594,8 @@ public interface IWificond extends IInterface {
             }
 
             @Override // android.net.wifi.nl80211.IWificond
-            public void unregisterWificondEventCallback(IWificondEventCallback callback) throws RemoteException {
+            public void unregisterWificondEventCallback(IWificondEventCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IWificond.DESCRIPTOR);
@@ -601,7 +607,8 @@ public interface IWificond extends IInterface {
             }
 
             @Override // android.net.wifi.nl80211.IWificond
-            public DeviceWiphyCapabilities getDeviceWiphyCapabilities(String iface_name) throws RemoteException {
+            public DeviceWiphyCapabilities getDeviceWiphyCapabilities(String iface_name)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -609,7 +616,9 @@ public interface IWificond extends IInterface {
                     _data.writeString(iface_name);
                     this.mRemote.transact(17, _data, _reply, 0);
                     _reply.readException();
-                    DeviceWiphyCapabilities _result = (DeviceWiphyCapabilities) _reply.readTypedObject(DeviceWiphyCapabilities.CREATOR);
+                    DeviceWiphyCapabilities _result =
+                            (DeviceWiphyCapabilities)
+                                    _reply.readTypedObject(DeviceWiphyCapabilities.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();

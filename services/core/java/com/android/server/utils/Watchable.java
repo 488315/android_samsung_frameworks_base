@@ -2,7 +2,9 @@ package com.android.server.utils;
 
 import android.os.Build;
 import android.util.Log;
+
 import com.android.internal.util.jobs.XmlUtils$$ExternalSyntheticOutline0;
+
 import java.lang.reflect.Field;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -29,14 +31,20 @@ public interface Watchable {
                         } else if (watched.manual()) {
                             continue;
                         } else {
-                            String str3 = "@Watched annotated field " + str + " is not a watchable type and is not flagged for manual watching.";
+                            String str3 =
+                                    "@Watched annotated field "
+                                            + str
+                                            + " is not a watchable type and is not flagged for"
+                                            + " manual watching.";
                             if (!z) {
                                 throw new RuntimeException(str3);
                             }
                             Log.e("Watchable", str3);
                         }
                     } catch (IllegalAccessException unused) {
-                        String m = XmlUtils$$ExternalSyntheticOutline0.m("Watchable ", str, " not visible");
+                        String m =
+                                XmlUtils$$ExternalSyntheticOutline0.m(
+                                        "Watchable ", str, " not visible");
                         if (!z) {
                             throw new RuntimeException(m);
                         }

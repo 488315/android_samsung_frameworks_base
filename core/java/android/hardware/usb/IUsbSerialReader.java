@@ -24,7 +24,7 @@ public interface IUsbSerialReader extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IUsbSerialReader {
+    public abstract static class Stub extends Binder implements IUsbSerialReader {
         static final int TRANSACTION_getSerial = 1;
 
         public Stub() {
@@ -62,7 +62,8 @@ public interface IUsbSerialReader extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IUsbSerialReader.DESCRIPTOR);
             }

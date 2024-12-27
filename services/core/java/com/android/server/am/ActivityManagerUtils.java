@@ -4,7 +4,9 @@ import android.app.ActivityThread;
 import android.content.ContentResolver;
 import android.provider.Settings;
 import android.util.ArrayMap;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -21,8 +23,11 @@ public abstract class ActivityManagerUtils {
 
     public static int getAndroidIdHash() {
         if (sAndroidIdHash == null) {
-            ContentResolver contentResolver = ActivityThread.currentApplication().getContentResolver();
-            String stringForUser = Settings.Secure.getStringForUser(contentResolver, "android_id", contentResolver.getUserId());
+            ContentResolver contentResolver =
+                    ActivityThread.currentApplication().getContentResolver();
+            String stringForUser =
+                    Settings.Secure.getStringForUser(
+                            contentResolver, "android_id", contentResolver.getUserId());
             String str = sInjectedAndroidId;
             if (str != null) {
                 stringForUser = str;
@@ -68,10 +73,16 @@ public abstract class ActivityManagerUtils {
         if (f <= FullScreenMagnificationGestureHandler.MAX_SCALE) {
             return false;
         }
-        return f >= 1.0f || ((double) (getUnsignedHashCached(str) ^ getAndroidIdHash())) / 2.147483647E9d <= ((double) f);
+        return f >= 1.0f
+                || ((double) (getUnsignedHashCached(str) ^ getAndroidIdHash())) / 2.147483647E9d
+                        <= ((double) f);
     }
 
     public static int unsignedIntFromBytes(byte[] bArr) {
-        return (extractByte(3, bArr) | extractByte(0, bArr) | extractByte(1, bArr) | extractByte(2, bArr)) & Integer.MAX_VALUE;
+        return (extractByte(3, bArr)
+                        | extractByte(0, bArr)
+                        | extractByte(1, bArr)
+                        | extractByte(2, bArr))
+                & Integer.MAX_VALUE;
     }
 }

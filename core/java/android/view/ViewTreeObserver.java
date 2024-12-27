@@ -5,7 +5,9 @@ import android.graphics.Rect;
 import android.graphics.Region;
 import android.util.Log;
 import android.util.NtpTrustedTime;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -22,7 +24,8 @@ public final class ViewTreeObserver {
     String mLog;
     private CopyOnWriteArray<OnComputeInternalInsetsListener> mOnComputeInternalInsetsListeners;
     private ArrayList<OnDrawListener> mOnDrawListeners;
-    private CopyOnWriteArrayList<OnEnterAnimationCompleteListener> mOnEnterAnimationCompleteListeners;
+    private CopyOnWriteArrayList<OnEnterAnimationCompleteListener>
+            mOnEnterAnimationCompleteListeners;
     private ArrayList<Runnable> mOnFrameCommitListeners;
     private CopyOnWriteArrayList<OnGlobalFocusChangeListener> mOnGlobalFocusListeners;
     private CopyOnWriteArray<OnGlobalLayoutListener> mOnGlobalLayoutListeners;
@@ -116,12 +119,18 @@ public final class ViewTreeObserver {
         }
 
         boolean isEmpty() {
-            return this.contentInsets.isEmpty() && this.visibleInsets.isEmpty() && this.touchableRegion.isEmpty() && this.mTouchableInsets == 0;
+            return this.contentInsets.isEmpty()
+                    && this.visibleInsets.isEmpty()
+                    && this.touchableRegion.isEmpty()
+                    && this.mTouchableInsets == 0;
         }
 
         public int hashCode() {
             int result = this.contentInsets.hashCode();
-            return (((((result * 31) + this.visibleInsets.hashCode()) * 31) + this.touchableRegion.hashCode()) * 31) + this.mTouchableInsets;
+            return (((((result * 31) + this.visibleInsets.hashCode()) * 31)
+                                    + this.touchableRegion.hashCode())
+                            * 31)
+                    + this.mTouchableInsets;
         }
 
         public boolean equals(Object o) {
@@ -132,7 +141,12 @@ public final class ViewTreeObserver {
                 return false;
             }
             InternalInsetsInfo other = (InternalInsetsInfo) o;
-            if (this.mTouchableInsets == other.mTouchableInsets && this.contentInsets.equals(other.contentInsets) && this.visibleInsets.equals(other.visibleInsets) && this.touchableRegion.equals(other.touchableRegion) && (!CoreRune.FW_MINIMIZED_IME_INSET_ANIM || this.minimizedInsets.equals(other.minimizedInsets))) {
+            if (this.mTouchableInsets == other.mTouchableInsets
+                    && this.contentInsets.equals(other.contentInsets)
+                    && this.visibleInsets.equals(other.visibleInsets)
+                    && this.touchableRegion.equals(other.touchableRegion)
+                    && (!CoreRune.FW_MINIMIZED_IME_INSET_ANIM
+                            || this.minimizedInsets.equals(other.minimizedInsets))) {
                 return true;
             }
             return false;
@@ -219,7 +233,8 @@ public final class ViewTreeObserver {
         }
         if (observer.mOnComputeInternalInsetsListeners != null) {
             if (this.mOnComputeInternalInsetsListeners != null) {
-                this.mOnComputeInternalInsetsListeners.addAll(observer.mOnComputeInternalInsetsListeners);
+                this.mOnComputeInternalInsetsListeners.addAll(
+                        observer.mOnComputeInternalInsetsListeners);
             } else {
                 this.mOnComputeInternalInsetsListeners = observer.mOnComputeInternalInsetsListeners;
             }
@@ -381,7 +396,8 @@ public final class ViewTreeObserver {
             this.mOnDrawListeners = new ArrayList<>();
         }
         if (this.mInDispatchOnDraw) {
-            IllegalStateException ex = new IllegalStateException("Cannot call addOnDrawListener inside of onDraw");
+            IllegalStateException ex =
+                    new IllegalStateException("Cannot call addOnDrawListener inside of onDraw");
             if (sIllegalOnDrawModificationIsFatal) {
                 throw ex;
             }
@@ -396,7 +412,8 @@ public final class ViewTreeObserver {
             return;
         }
         if (this.mInDispatchOnDraw) {
-            IllegalStateException ex = new IllegalStateException("Cannot call removeOnDrawListener inside of onDraw");
+            IllegalStateException ex =
+                    new IllegalStateException("Cannot call removeOnDrawListener inside of onDraw");
             if (sIllegalOnDrawModificationIsFatal) {
                 throw ex;
             }
@@ -509,7 +526,8 @@ public final class ViewTreeObserver {
 
     private void checkIsAlive() {
         if (!this.mAlive) {
-            throw new IllegalStateException("This ViewTreeObserver is not alive, call getViewTreeObserver() again");
+            throw new IllegalStateException(
+                    "This ViewTreeObserver is not alive, call getViewTreeObserver() again");
         }
     }
 
@@ -548,7 +566,8 @@ public final class ViewTreeObserver {
     }
 
     void dispatchOnWindowVisibilityChange(int visibility) {
-        CopyOnWriteArrayList<OnWindowVisibilityChangeListener> listeners = this.mOnWindowVisibilityListeners;
+        CopyOnWriteArrayList<OnWindowVisibilityChangeListener> listeners =
+                this.mOnWindowVisibilityListeners;
         if (listeners != null && listeners.size() > 0) {
             Iterator<OnWindowVisibilityChangeListener> it = listeners.iterator();
             while (it.hasNext()) {
@@ -604,9 +623,12 @@ public final class ViewTreeObserver {
                     if (listenerCanceledDraw) {
                         String className = preDrawListener.getClass().getName();
                         if (this.mLastDispatchOnPreDrawCanceledReason == null) {
-                            this.mLastDispatchOnPreDrawCanceledReason = new StringBuilder(className);
+                            this.mLastDispatchOnPreDrawCanceledReason =
+                                    new StringBuilder(className);
                         } else {
-                            this.mLastDispatchOnPreDrawCanceledReason.append(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER).append(className);
+                            this.mLastDispatchOnPreDrawCanceledReason
+                                    .append(NtpTrustedTime.NTP_SETTING_SERVER_NAME_DELIMITER)
+                                    .append(className);
                         }
                         if (CoreRune.IS_DEBUG_LEVEL_MID || CoreRune.IS_DEBUG_LEVEL_HIGH) {
                             this.mLog += preDrawListener.toString() + " ";
@@ -656,7 +678,8 @@ public final class ViewTreeObserver {
     }
 
     final void dispatchOnTouchModeChanged(boolean inTouchMode) {
-        CopyOnWriteArrayList<OnTouchModeChangeListener> listeners = this.mOnTouchModeChangeListeners;
+        CopyOnWriteArrayList<OnTouchModeChangeListener> listeners =
+                this.mOnTouchModeChangeListeners;
         if (listeners != null && listeners.size() > 0) {
             Iterator<OnTouchModeChangeListener> it = listeners.iterator();
             while (it.hasNext()) {
@@ -682,12 +705,14 @@ public final class ViewTreeObserver {
     }
 
     final boolean hasComputeInternalInsetsListeners() {
-        CopyOnWriteArray<OnComputeInternalInsetsListener> listeners = this.mOnComputeInternalInsetsListeners;
+        CopyOnWriteArray<OnComputeInternalInsetsListener> listeners =
+                this.mOnComputeInternalInsetsListeners;
         return listeners != null && listeners.size() > 0;
     }
 
     final void dispatchOnComputeInternalInsets(InternalInsetsInfo inoutInfo) {
-        CopyOnWriteArray<OnComputeInternalInsetsListener> listeners = this.mOnComputeInternalInsetsListeners;
+        CopyOnWriteArray<OnComputeInternalInsetsListener> listeners =
+                this.mOnComputeInternalInsetsListeners;
         if (listeners != null && listeners.size() > 0) {
             CopyOnWriteArray.Access<OnComputeInternalInsetsListener> access = listeners.start();
             try {
@@ -702,7 +727,8 @@ public final class ViewTreeObserver {
     }
 
     public final void dispatchOnEnterAnimationComplete() {
-        CopyOnWriteArrayList<OnEnterAnimationCompleteListener> listeners = this.mOnEnterAnimationCompleteListeners;
+        CopyOnWriteArrayList<OnEnterAnimationCompleteListener> listeners =
+                this.mOnEnterAnimationCompleteListeners;
         if (listeners != null && !listeners.isEmpty()) {
             Iterator<OnEnterAnimationCompleteListener> it = listeners.iterator();
             while (it.hasNext()) {
@@ -737,8 +763,7 @@ public final class ViewTreeObserver {
             private ArrayList<T> mData;
             private int mSize;
 
-            Access() {
-            }
+            Access() {}
 
             T get(int index) {
                 return this.mData.get(index);
@@ -749,8 +774,7 @@ public final class ViewTreeObserver {
             }
         }
 
-        CopyOnWriteArray() {
-        }
+        CopyOnWriteArray() {}
 
         private ArrayList<T> getArray() {
             if (this.mStart) {
@@ -824,8 +848,10 @@ public final class ViewTreeObserver {
     }
 
     public final void dispatchOnPenButtonEventListener(MotionEvent event) {
-        if (this.mOnStylusButtonEventListeners != null && this.mOnStylusButtonEventListeners.size() > 0) {
-            ArrayList<SemOnStylusButtonEventListener> listeners = (ArrayList) this.mOnStylusButtonEventListeners.clone();
+        if (this.mOnStylusButtonEventListeners != null
+                && this.mOnStylusButtonEventListeners.size() > 0) {
+            ArrayList<SemOnStylusButtonEventListener> listeners =
+                    (ArrayList) this.mOnStylusButtonEventListeners.clone();
             int numListeners = listeners.size();
             for (int i = 0; i < numListeners; i++) {
                 listeners.get(i).onStylusButtonEvent(event);

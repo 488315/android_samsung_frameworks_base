@@ -8,11 +8,14 @@ import android.os.Handler;
 import android.os.Parcelable;
 import android.telephony.SmsCbMessage;
 import android.text.TextUtils;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
+
 import com.att.iqi.lib.IQIManager;
 import com.att.iqi.lib.metrics.ea.EA12;
 import com.att.iqi.lib.metrics.ea.EA13;
 import com.att.iqi.lib.metrics.ea.EA14;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -27,8 +30,10 @@ public class CellBroadcastObserver extends ContentObserver {
     private final IQIManager mIQIManager;
     private final Set pendingReadList;
     private static final Uri CELLBROADCASTS_CONTENT_URI = Uri.parse("content://cellbroadcasts/");
-    private static final Uri CELLBROADCASTS_DISPLAYED_CONTENT_URI = Uri.parse("content://cellbroadcasts/displayed");
-    private static final Uri CELLBROADCASTS_APP_CONTENT_URI = Uri.parse("content://cellbroadcasts-app/");
+    private static final Uri CELLBROADCASTS_DISPLAYED_CONTENT_URI =
+            Uri.parse("content://cellbroadcasts/displayed");
+    private static final Uri CELLBROADCASTS_APP_CONTENT_URI =
+            Uri.parse("content://cellbroadcasts-app/");
 
     public CellBroadcastObserver(Context context, Handler handler) {
         super(handler);
@@ -52,13 +57,24 @@ public class CellBroadcastObserver extends ContentObserver {
     private void checkAndMaybeReportReadMessages() {
         if (this.pendingReadList.size() >= 1) {
             try {
-                Cursor query = this.mContext.getContentResolver().query(CELLBROADCASTS_APP_CONTENT_URI, null, buildQuerySelection(this.pendingReadList), null, null);
+                Cursor query =
+                        this.mContext
+                                .getContentResolver()
+                                .query(
+                                        CELLBROADCASTS_APP_CONTENT_URI,
+                                        null,
+                                        buildQuerySelection(this.pendingReadList),
+                                        null,
+                                        null);
                 while (query.moveToNext()) {
                     try {
                         long j = query.getLong(query.getColumnIndex("date"));
                         if (this.pendingReadList.contains(Long.valueOf(j))) {
                             int i = query.getInt(query.getColumnIndex("serial_number"));
-                            this.mIQIManager.submitMetric(new EA14(query.getInt(query.getColumnIndex("service_category")), i));
+                            this.mIQIManager.submitMetric(
+                                    new EA14(
+                                            query.getInt(query.getColumnIndex("service_category")),
+                                            i));
                             this.pendingReadList.remove(Long.valueOf(j));
                             LogUtil.logd("CB with serial #: " + i + " read");
                         }
@@ -74,13 +90,25 @@ public class CellBroadcastObserver extends ContentObserver {
 
     private void reportNewMessageReceivedAndDisplayed(String str) {
         try {
-            Cursor query = this.mContext.getContentResolver().query(CELLBROADCASTS_CONTENT_URI, null, "_id=?", new String[]{str}, null);
+            Cursor query =
+                    this.mContext
+                            .getContentResolver()
+                            .query(
+                                    CELLBROADCASTS_CONTENT_URI,
+                                    null,
+                                    "_id=?",
+                                    new String[] {str},
+                                    null);
             while (query.moveToNext()) {
                 try {
                     SmsCbMessage createFromCursor = SmsCbMessage.createFromCursor(query);
-                    LogUtil.logd("New CB Message [ID: " + str + "] was displayed: " + createFromCursor);
+                    LogUtil.logd(
+                            "New CB Message [ID: " + str + "] was displayed: " + createFromCursor);
                     EA12 ea12 = new EA12((Parcelable) createFromCursor);
-                    EA13 ea13 = new EA13(createFromCursor.getServiceCategory(), createFromCursor.getSerialNumber());
+                    EA13 ea13 =
+                            new EA13(
+                                    createFromCursor.getServiceCategory(),
+                                    createFromCursor.getSerialNumber());
                     this.mIQIManager.submitMetric(ea12);
                     this.mIQIManager.submitMetric(ea13);
                     this.pendingReadList.add(Long.valueOf(createFromCursor.getReceivedTime()));
@@ -126,8 +154,12 @@ public class CellBroadcastObserver extends ContentObserver {
     }
 
     public final void register() {
-        this.mContext.getContentResolver().registerContentObserver(CELLBROADCASTS_DISPLAYED_CONTENT_URI, true, this);
-        this.mContext.getContentResolver().registerContentObserver(CELLBROADCASTS_APP_CONTENT_URI, true, this);
+        this.mContext
+                .getContentResolver()
+                .registerContentObserver(CELLBROADCASTS_DISPLAYED_CONTENT_URI, true, this);
+        this.mContext
+                .getContentResolver()
+                .registerContentObserver(CELLBROADCASTS_APP_CONTENT_URI, true, this);
         LogUtil.logd("CB observers registered");
     }
 

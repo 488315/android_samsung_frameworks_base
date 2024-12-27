@@ -9,29 +9,35 @@ import android.util.Log;
 import android.view.IWindow;
 import android.view.InsetsSourceControl;
 import android.view.InsetsState;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public class WindowStateInsetsControlChangeItem extends WindowStateTransactionItem {
-    public static final Parcelable.Creator<WindowStateInsetsControlChangeItem> CREATOR = new Parcelable.Creator<WindowStateInsetsControlChangeItem>() { // from class: android.app.servertransaction.WindowStateInsetsControlChangeItem.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WindowStateInsetsControlChangeItem createFromParcel(Parcel in) {
-            return new WindowStateInsetsControlChangeItem(in);
-        }
+    public static final Parcelable.Creator<WindowStateInsetsControlChangeItem> CREATOR =
+            new Parcelable.Creator<WindowStateInsetsControlChangeItem>() { // from class:
+                // android.app.servertransaction.WindowStateInsetsControlChangeItem.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WindowStateInsetsControlChangeItem createFromParcel(Parcel in) {
+                    return new WindowStateInsetsControlChangeItem(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WindowStateInsetsControlChangeItem[] newArray(int size) {
-            return new WindowStateInsetsControlChangeItem[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WindowStateInsetsControlChangeItem[] newArray(int size) {
+                    return new WindowStateInsetsControlChangeItem[size];
+                }
+            };
     private static final String TAG = "WindowStateInsetsControlChangeItem";
     public InsetsSourceControl.Array mActiveControls;
     private InsetsState mInsetsState;
 
     @Override // android.app.servertransaction.WindowStateTransactionItem
-    public void execute(ClientTransactionHandler client, IWindow window, PendingTransactionActions pendingActions) {
+    public void execute(
+            ClientTransactionHandler client,
+            IWindow window,
+            PendingTransactionActions pendingActions) {
         Trace.traceBegin(32L, "windowInsetsControlChanged");
         try {
             window.insetsControlChanged(this.mInsetsState, this.mActiveControls);
@@ -42,11 +48,13 @@ public class WindowStateInsetsControlChangeItem extends WindowStateTransactionIt
         Trace.traceEnd(32L);
     }
 
-    private WindowStateInsetsControlChangeItem() {
-    }
+    private WindowStateInsetsControlChangeItem() {}
 
-    public static WindowStateInsetsControlChangeItem obtain(IWindow window, InsetsState insetsState, InsetsSourceControl.Array activeControls) {
-        WindowStateInsetsControlChangeItem instance = (WindowStateInsetsControlChangeItem) ObjectPool.obtain(WindowStateInsetsControlChangeItem.class);
+    public static WindowStateInsetsControlChangeItem obtain(
+            IWindow window, InsetsState insetsState, InsetsSourceControl.Array activeControls) {
+        WindowStateInsetsControlChangeItem instance =
+                (WindowStateInsetsControlChangeItem)
+                        ObjectPool.obtain(WindowStateInsetsControlChangeItem.class);
         if (instance == null) {
             instance = new WindowStateInsetsControlChangeItem();
         }
@@ -57,7 +65,8 @@ public class WindowStateInsetsControlChangeItem extends WindowStateTransactionIt
         return instance;
     }
 
-    @Override // android.app.servertransaction.WindowStateTransactionItem, android.app.servertransaction.ObjectPoolItem
+    @Override // android.app.servertransaction.WindowStateTransactionItem,
+    // android.app.servertransaction.ObjectPoolItem
     public void recycle() {
         super.recycle();
         this.mInsetsState = null;
@@ -75,7 +84,8 @@ public class WindowStateInsetsControlChangeItem extends WindowStateTransactionIt
     private WindowStateInsetsControlChangeItem(Parcel in) {
         super(in);
         this.mInsetsState = (InsetsState) in.readTypedObject(InsetsState.CREATOR);
-        this.mActiveControls = (InsetsSourceControl.Array) in.readTypedObject(InsetsSourceControl.Array.CREATOR);
+        this.mActiveControls =
+                (InsetsSourceControl.Array) in.readTypedObject(InsetsSourceControl.Array.CREATOR);
     }
 
     @Override // android.app.servertransaction.WindowStateTransactionItem
@@ -87,13 +97,15 @@ public class WindowStateInsetsControlChangeItem extends WindowStateTransactionIt
             return false;
         }
         WindowStateInsetsControlChangeItem other = (WindowStateInsetsControlChangeItem) o;
-        return Objects.equals(this.mInsetsState, other.mInsetsState) && Objects.equals(this.mActiveControls, other.mActiveControls);
+        return Objects.equals(this.mInsetsState, other.mInsetsState)
+                && Objects.equals(this.mActiveControls, other.mActiveControls);
     }
 
     @Override // android.app.servertransaction.WindowStateTransactionItem
     public int hashCode() {
         int result = (17 * 31) + super.hashCode();
-        return (((result * 31) + Objects.hashCode(this.mInsetsState)) * 31) + Objects.hashCode(this.mActiveControls);
+        return (((result * 31) + Objects.hashCode(this.mInsetsState)) * 31)
+                + Objects.hashCode(this.mActiveControls);
     }
 
     @Override // android.app.servertransaction.WindowStateTransactionItem

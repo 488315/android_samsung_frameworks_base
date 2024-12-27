@@ -3,6 +3,7 @@ package android.media;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
@@ -14,21 +15,27 @@ public final class VolumePolicy implements Parcelable {
     public final boolean volumeDownToEnterSilent;
     public final boolean volumeUpToExitSilent;
     public static final VolumePolicy DEFAULT = new VolumePolicy(false, false, false, 400);
-    public static final Parcelable.Creator<VolumePolicy> CREATOR = new Parcelable.Creator<VolumePolicy>() { // from class: android.media.VolumePolicy.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VolumePolicy createFromParcel(Parcel p) {
-            return new VolumePolicy(p.readInt() != 0, p.readInt() != 0, p.readInt() != 0, p.readInt());
-        }
+    public static final Parcelable.Creator<VolumePolicy> CREATOR =
+            new Parcelable.Creator<VolumePolicy>() { // from class: android.media.VolumePolicy.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VolumePolicy createFromParcel(Parcel p) {
+                    return new VolumePolicy(
+                            p.readInt() != 0, p.readInt() != 0, p.readInt() != 0, p.readInt());
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VolumePolicy[] newArray(int size) {
-            return new VolumePolicy[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VolumePolicy[] newArray(int size) {
+                    return new VolumePolicy[size];
+                }
+            };
 
-    public VolumePolicy(boolean volumeDownToEnterSilent, boolean volumeUpToExitSilent, boolean doNotDisturbWhenSilent, int vibrateToSilentDebounce) {
+    public VolumePolicy(
+            boolean volumeDownToEnterSilent,
+            boolean volumeUpToExitSilent,
+            boolean doNotDisturbWhenSilent,
+            int vibrateToSilentDebounce) {
         this.volumeDownToEnterSilent = volumeDownToEnterSilent;
         this.volumeUpToExitSilent = volumeUpToExitSilent;
         this.doNotDisturbWhenSilent = doNotDisturbWhenSilent;
@@ -36,11 +43,23 @@ public final class VolumePolicy implements Parcelable {
     }
 
     public String toString() {
-        return "VolumePolicy[volumeDownToEnterSilent=" + this.volumeDownToEnterSilent + ",volumeUpToExitSilent=" + this.volumeUpToExitSilent + ",doNotDisturbWhenSilent=" + this.doNotDisturbWhenSilent + ",vibrateToSilentDebounce=" + this.vibrateToSilentDebounce + NavigationBarInflaterView.SIZE_MOD_END;
+        return "VolumePolicy[volumeDownToEnterSilent="
+                + this.volumeDownToEnterSilent
+                + ",volumeUpToExitSilent="
+                + this.volumeUpToExitSilent
+                + ",doNotDisturbWhenSilent="
+                + this.doNotDisturbWhenSilent
+                + ",vibrateToSilentDebounce="
+                + this.vibrateToSilentDebounce
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     public int hashCode() {
-        return Objects.hash(Boolean.valueOf(this.volumeDownToEnterSilent), Boolean.valueOf(this.volumeUpToExitSilent), Boolean.valueOf(this.doNotDisturbWhenSilent), Integer.valueOf(this.vibrateToSilentDebounce));
+        return Objects.hash(
+                Boolean.valueOf(this.volumeDownToEnterSilent),
+                Boolean.valueOf(this.volumeUpToExitSilent),
+                Boolean.valueOf(this.doNotDisturbWhenSilent),
+                Integer.valueOf(this.vibrateToSilentDebounce));
     }
 
     public boolean equals(Object o) {
@@ -51,7 +70,10 @@ public final class VolumePolicy implements Parcelable {
             return true;
         }
         VolumePolicy other = (VolumePolicy) o;
-        return other.volumeDownToEnterSilent == this.volumeDownToEnterSilent && other.volumeUpToExitSilent == this.volumeUpToExitSilent && other.doNotDisturbWhenSilent == this.doNotDisturbWhenSilent && other.vibrateToSilentDebounce == this.vibrateToSilentDebounce;
+        return other.volumeDownToEnterSilent == this.volumeDownToEnterSilent
+                && other.volumeUpToExitSilent == this.volumeUpToExitSilent
+                && other.doNotDisturbWhenSilent == this.doNotDisturbWhenSilent
+                && other.vibrateToSilentDebounce == this.vibrateToSilentDebounce;
     }
 
     @Override // android.os.Parcelable

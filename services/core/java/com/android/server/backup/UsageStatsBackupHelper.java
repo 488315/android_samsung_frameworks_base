@@ -2,7 +2,9 @@ package com.android.server.backup;
 
 import android.app.backup.BlobBackupHelper;
 import android.app.usage.UsageStatsManagerInternal;
+
 import com.android.server.LocalServices;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
@@ -15,13 +17,15 @@ public final class UsageStatsBackupHelper extends BlobBackupHelper {
     public final int mUserId;
 
     public UsageStatsBackupHelper(int i) {
-        super(1, new String[]{"usage_stats"});
+        super(1, new String[] {"usage_stats"});
         this.mUserId = i;
     }
 
     public final void applyRestoredPayload(String str, byte[] bArr) {
         if ("usage_stats".equals(str)) {
-            UsageStatsManagerInternal usageStatsManagerInternal = (UsageStatsManagerInternal) LocalServices.getService(UsageStatsManagerInternal.class);
+            UsageStatsManagerInternal usageStatsManagerInternal =
+                    (UsageStatsManagerInternal)
+                            LocalServices.getService(UsageStatsManagerInternal.class);
             DataInputStream dataInputStream = new DataInputStream(new ByteArrayInputStream(bArr));
             try {
                 dataInputStream.readInt();
@@ -38,7 +42,9 @@ public final class UsageStatsBackupHelper extends BlobBackupHelper {
         if (!"usage_stats".equals(str)) {
             return null;
         }
-        UsageStatsManagerInternal usageStatsManagerInternal = (UsageStatsManagerInternal) LocalServices.getService(UsageStatsManagerInternal.class);
+        UsageStatsManagerInternal usageStatsManagerInternal =
+                (UsageStatsManagerInternal)
+                        LocalServices.getService(UsageStatsManagerInternal.class);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
         try {

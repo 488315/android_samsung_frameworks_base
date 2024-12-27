@@ -29,9 +29,12 @@ import android.view.View;
 import android.view.WindowInsets;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
 import com.android.internal.R;
-import java.util.Random;
+
 import org.json.JSONObject;
+
+import java.util.Random;
 
 /* loaded from: classes5.dex */
 public class PlatLogoActivity extends Activity {
@@ -51,43 +54,56 @@ public class PlatLogoActivity extends Activity {
     private Starfield mStarfield;
     private ObjectAnimator mWarpAnim;
     private boolean mAnimationsEnabled = true;
-    private final View.OnTouchListener mTouchListener = new View.OnTouchListener() { // from class: com.android.internal.app.PlatLogoActivity.1
-        @Override // android.view.View.OnTouchListener
-        public boolean onTouch(View v, MotionEvent event) {
-            switch (event.getActionMasked()) {
-                case 0:
-                    PlatLogoActivity.this.measureTouchPressure(event);
-                    PlatLogoActivity.this.startWarp();
-                    break;
-                case 1:
-                case 3:
-                    PlatLogoActivity.this.stopWarp();
-                    break;
-            }
-            return true;
-        }
-    };
-    private final Runnable mLaunchNextStage = new Runnable() { // from class: com.android.internal.app.PlatLogoActivity$$ExternalSyntheticLambda0
-        @Override // java.lang.Runnable
-        public final void run() {
-            PlatLogoActivity.this.lambda$new$0();
-        }
-    };
-    private final TimeAnimator.TimeListener mTimeListener = new TimeAnimator.TimeListener() { // from class: com.android.internal.app.PlatLogoActivity.2
-        @Override // android.animation.TimeAnimator.TimeListener
-        public void onTimeUpdate(TimeAnimator animation, long totalTime, long deltaTime) {
-            PlatLogoActivity.this.mStarfield.update(deltaTime);
-            float warpFrac = (PlatLogoActivity.this.mStarfield.getWarp() - 1.0f) / 9.0f;
-            if (PlatLogoActivity.this.mAnimationsEnabled) {
-                PlatLogoActivity.this.mLogo.setTranslationX(PlatLogoActivity.this.mRandom.nextFloat() * warpFrac * 5.0f * PlatLogoActivity.this.mDp);
-                PlatLogoActivity.this.mLogo.setTranslationY(PlatLogoActivity.this.mRandom.nextFloat() * warpFrac * 5.0f * PlatLogoActivity.this.mDp);
-            }
-            if (warpFrac > 0.0f) {
-                PlatLogoActivity.this.mRumble.rumble(warpFrac);
-            }
-            PlatLogoActivity.this.mLayout.postInvalidate();
-        }
-    };
+    private final View.OnTouchListener mTouchListener =
+            new View.OnTouchListener() { // from class: com.android.internal.app.PlatLogoActivity.1
+                @Override // android.view.View.OnTouchListener
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getActionMasked()) {
+                        case 0:
+                            PlatLogoActivity.this.measureTouchPressure(event);
+                            PlatLogoActivity.this.startWarp();
+                            break;
+                        case 1:
+                        case 3:
+                            PlatLogoActivity.this.stopWarp();
+                            break;
+                    }
+                    return true;
+                }
+            };
+    private final Runnable mLaunchNextStage =
+            new Runnable() { // from class:
+                             // com.android.internal.app.PlatLogoActivity$$ExternalSyntheticLambda0
+                @Override // java.lang.Runnable
+                public final void run() {
+                    PlatLogoActivity.this.lambda$new$0();
+                }
+            };
+    private final TimeAnimator.TimeListener mTimeListener =
+            new TimeAnimator
+                    .TimeListener() { // from class: com.android.internal.app.PlatLogoActivity.2
+                @Override // android.animation.TimeAnimator.TimeListener
+                public void onTimeUpdate(TimeAnimator animation, long totalTime, long deltaTime) {
+                    PlatLogoActivity.this.mStarfield.update(deltaTime);
+                    float warpFrac = (PlatLogoActivity.this.mStarfield.getWarp() - 1.0f) / 9.0f;
+                    if (PlatLogoActivity.this.mAnimationsEnabled) {
+                        PlatLogoActivity.this.mLogo.setTranslationX(
+                                PlatLogoActivity.this.mRandom.nextFloat()
+                                        * warpFrac
+                                        * 5.0f
+                                        * PlatLogoActivity.this.mDp);
+                        PlatLogoActivity.this.mLogo.setTranslationY(
+                                PlatLogoActivity.this.mRandom.nextFloat()
+                                        * warpFrac
+                                        * 5.0f
+                                        * PlatLogoActivity.this.mDp);
+                    }
+                    if (warpFrac > 0.0f) {
+                        PlatLogoActivity.this.mRumble.rumble(warpFrac);
+                    }
+                    PlatLogoActivity.this.mLayout.postInvalidate();
+                }
+            };
     double mPressureMin = SContextConstants.ENVIRONMENT_VALUE_UNKNOWN;
     double mPressureMax = -1.0d;
 
@@ -118,15 +134,21 @@ public class PlatLogoActivity extends Activity {
             }
             if (msg.getWhen() > this.mLastVibe + 50) {
                 this.mLastVibe = msg.getWhen();
-                this.mVibeMan.vibrate(CombinedVibration.createParallel(VibrationEffect.startComposition().addPrimitive(3, (float) Math.pow(warpFrac, 3.0d)).compose()));
+                this.mVibeMan.vibrate(
+                        CombinedVibration.createParallel(
+                                VibrationEffect.startComposition()
+                                        .addPrimitive(3, (float) Math.pow(warpFrac, 3.0d))
+                                        .compose()));
                 return false;
             }
             return false;
         }
 
         RumblePack() {
-            this.mVibeMan = (VibratorManager) PlatLogoActivity.this.getSystemService(VibratorManager.class);
-            this.mSpinPrimitiveSupported = this.mVibeMan.getDefaultVibrator().areAllPrimitivesSupported(3);
+            this.mVibeMan =
+                    (VibratorManager) PlatLogoActivity.this.getSystemService(VibratorManager.class);
+            this.mSpinPrimitiveSupported =
+                    this.mVibeMan.getDefaultVibrator().areAllPrimitivesSupported(3);
             this.mVibeThread.start();
             this.mVibeHandler = Handler.createAsync(this.mVibeThread.getLooper(), this);
         }
@@ -165,7 +187,9 @@ public class PlatLogoActivity extends Activity {
             ab.hide();
         }
         try {
-            this.mAnimationsEnabled = Settings.Global.getFloat(getContentResolver(), "animator_duration_scale") > 0.0f;
+            this.mAnimationsEnabled =
+                    Settings.Global.getFloat(getContentResolver(), "animator_duration_scale")
+                            > 0.0f;
         } catch (Settings.SettingNotFoundException e) {
             this.mAnimationsEnabled = true;
         }
@@ -174,7 +198,9 @@ public class PlatLogoActivity extends Activity {
         this.mRandom = new Random();
         this.mDp = getResources().getDisplayMetrics().density;
         this.mStarfield = new Starfield(this.mRandom, this.mDp * 2.0f);
-        this.mStarfield.setVelocity((this.mRandom.nextFloat() - 0.5f) * 200.0f, (this.mRandom.nextFloat() - 0.5f) * 200.0f);
+        this.mStarfield.setVelocity(
+                (this.mRandom.nextFloat() - 0.5f) * 200.0f,
+                (this.mRandom.nextFloat() - 0.5f) * 200.0f);
         this.mLayout.setBackground(this.mStarfield);
         DisplayMetrics dm = getResources().getDisplayMetrics();
         float f = dm.density;
@@ -226,7 +252,8 @@ public class PlatLogoActivity extends Activity {
     /* JADX INFO: Access modifiers changed from: private */
     public void startWarp() {
         stopWarp();
-        this.mWarpAnim = ObjectAnimator.ofFloat(this.mStarfield, "warp", 1.0f, MAX_WARP).setDuration(5000L);
+        this.mWarpAnim =
+                ObjectAnimator.ofFloat(this.mStarfield, "warp", 1.0f, MAX_WARP).setDuration(5000L);
         this.mWarpAnim.start();
         this.mLogo.postDelayed(this.mLaunchNextStage, 6000L);
     }
@@ -265,13 +292,17 @@ public class PlatLogoActivity extends Activity {
             if (shouldWriteSettings()) {
                 Log.v(TAG, "Saving egg locked=" + locked);
                 syncTouchPressure();
-                Settings.System.putLong(cr, EGG_UNLOCK_SETTING, locked ? 0L : System.currentTimeMillis());
+                Settings.System.putLong(
+                        cr, EGG_UNLOCK_SETTING, locked ? 0L : System.currentTimeMillis());
             }
         } catch (RuntimeException e) {
             Log.e(TAG, "Can't write settings", e);
         }
         try {
-            Intent eggActivity = new Intent(Intent.ACTION_MAIN).setFlags(268468224).addCategory("com.android.internal.category.PLATLOGO");
+            Intent eggActivity =
+                    new Intent(Intent.ACTION_MAIN)
+                            .setFlags(268468224)
+                            .addCategory("com.android.internal.category.PLATLOGO");
             Log.v(TAG, "launching: " + eggActivity);
             startActivity(eggActivity);
         } catch (ActivityNotFoundException e2) {
@@ -317,7 +348,8 @@ public class PlatLogoActivity extends Activity {
                 touchData.put("min", this.mPressureMin);
                 touchData.put("max", this.mPressureMax);
                 if (shouldWriteSettings()) {
-                    Settings.System.putString(getContentResolver(), TOUCH_STATS, touchData.toString());
+                    Settings.System.putString(
+                            getContentResolver(), TOUCH_STATS, touchData.toString());
                 }
             }
         } catch (Exception e) {
@@ -396,16 +428,28 @@ public class PlatLogoActivity extends Activity {
             boolean inWarp = this.mWarp > 1.0f;
             canvas.drawColor(-16777216);
             if (this.mDt > 0 && this.mDt < 1000) {
-                canvas.translate((-this.mBuffer) + (this.mRng.nextFloat() * (this.mWarp - 1.0f)), (-this.mBuffer) + (this.mRng.nextFloat() * (this.mWarp - 1.0f)));
+                canvas.translate(
+                        (-this.mBuffer) + (this.mRng.nextFloat() * (this.mWarp - 1.0f)),
+                        (-this.mBuffer) + (this.mRng.nextFloat() * (this.mWarp - 1.0f)));
                 float w = this.mSpace.width();
                 float h = this.mSpace.height();
                 int i3 = 0;
                 while (i3 < 34) {
                     int plane = ((int) ((i3 / 34.0f) * 2.0f)) + i2;
-                    this.mStars[(i3 * 4) + 2] = ((this.mStars[(i3 * 4) + 2] + (plane * dx)) + w) % w;
-                    this.mStars[(i3 * 4) + 3] = ((this.mStars[(i3 * 4) + 3] + (plane * dy)) + h) % h;
-                    this.mStars[(i3 * 4) + i] = inWarp ? this.mStars[(i3 * 4) + 2] - (((this.mWarp * dx) * 2.0f) * plane) : -100.0f;
-                    this.mStars[(i3 * 4) + 1] = inWarp ? this.mStars[(i3 * 4) + 3] - (((this.mWarp * dy) * 2.0f) * plane) : -100.0f;
+                    this.mStars[(i3 * 4) + 2] =
+                            ((this.mStars[(i3 * 4) + 2] + (plane * dx)) + w) % w;
+                    this.mStars[(i3 * 4) + 3] =
+                            ((this.mStars[(i3 * 4) + 3] + (plane * dy)) + h) % h;
+                    this.mStars[(i3 * 4) + i] =
+                            inWarp
+                                    ? this.mStars[(i3 * 4) + 2]
+                                            - (((this.mWarp * dx) * 2.0f) * plane)
+                                    : -100.0f;
+                    this.mStars[(i3 * 4) + 1] =
+                            inWarp
+                                    ? this.mStars[(i3 * 4) + 3]
+                                            - (((this.mWarp * dy) * 2.0f) * plane)
+                                    : -100.0f;
                     i3++;
                     i = 0;
                     i2 = 1;
@@ -422,12 +466,10 @@ public class PlatLogoActivity extends Activity {
         }
 
         @Override // android.graphics.drawable.Drawable
-        public void setAlpha(int alpha) {
-        }
+        public void setAlpha(int alpha) {}
 
         @Override // android.graphics.drawable.Drawable
-        public void setColorFilter(ColorFilter colorFilter) {
-        }
+        public void setColorFilter(ColorFilter colorFilter) {}
 
         @Override // android.graphics.drawable.Drawable
         public int getOpacity() {

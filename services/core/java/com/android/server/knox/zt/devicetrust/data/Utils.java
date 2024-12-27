@@ -3,6 +3,7 @@ package com.android.server.knox.zt.devicetrust.data;
 import android.content.pm.IPackageManager;
 import android.os.SELinux;
 import android.os.ServiceManager;
+
 import com.samsung.android.server.pm.PmServerUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -55,7 +56,9 @@ public final class Utils {
         Lf:
             return r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.knox.zt.devicetrust.data.Utils.getPackageNameForUid(int):java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.knox.zt.devicetrust.data.Utils.getPackageNameForUid(int):java.lang.String");
     }
 
     public final String getProcessNameForPid(int i) {

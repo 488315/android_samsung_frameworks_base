@@ -6,6 +6,7 @@ import android.filterfw.core.Frame;
 import android.filterfw.core.FrameFormat;
 import android.filterfw.core.Program;
 import android.filterfw.format.ImageFormat;
+
 import java.lang.reflect.Field;
 
 /* loaded from: classes.dex */
@@ -20,7 +21,8 @@ public abstract class ImageCombineFilter extends Filter {
 
     protected abstract Program getShaderProgram(FilterContext filterContext);
 
-    public ImageCombineFilter(String name, String[] inputNames, String outputName, String parameterName) {
+    public ImageCombineFilter(
+            String name, String[] inputNames, String outputName, String parameterName) {
         super(name);
         this.mCurrentTarget = 0;
         this.mInputNames = inputNames;
@@ -33,7 +35,8 @@ public abstract class ImageCombineFilter extends Filter {
         if (this.mParameterName != null) {
             try {
                 Field programField = ImageCombineFilter.class.getDeclaredField("mProgram");
-                addProgramPort(this.mParameterName, this.mParameterName, programField, Float.TYPE, false);
+                addProgramPort(
+                        this.mParameterName, this.mParameterName, programField, Float.TYPE, false);
             } catch (NoSuchFieldException e) {
                 throw new RuntimeException("Internal Error: mProgram field not found!");
             }
@@ -53,7 +56,10 @@ public abstract class ImageCombineFilter extends Filter {
         int target = getInputFormat(this.mInputNames[0]).getTarget();
         for (String inputName : this.mInputNames) {
             if (target != getInputFormat(inputName).getTarget()) {
-                throw new RuntimeException("Type mismatch of input formats in filter " + this + ". All input frames must have the same target!");
+                throw new RuntimeException(
+                        "Type mismatch of input formats in filter "
+                                + this
+                                + ". All input frames must have the same target!");
             }
         }
     }
@@ -92,7 +98,8 @@ public abstract class ImageCombineFilter extends Filter {
                     break;
             }
             if (this.mProgram == null) {
-                throw new RuntimeException("Could not create a program for image filter " + this + "!");
+                throw new RuntimeException(
+                        "Could not create a program for image filter " + this + "!");
             }
             initProgramInputs(this.mProgram, context);
             this.mCurrentTarget = target;

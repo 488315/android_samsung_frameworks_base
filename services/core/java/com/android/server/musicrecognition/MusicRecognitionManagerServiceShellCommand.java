@@ -1,8 +1,10 @@
 package com.android.server.musicrecognition;
 
 import android.os.ShellCommand;
+
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.am.ActiveServices$$ExternalSyntheticOutline0;
+
 import java.io.PrintWriter;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -10,7 +12,8 @@ import java.io.PrintWriter;
 public final class MusicRecognitionManagerServiceShellCommand extends ShellCommand {
     public final MusicRecognitionManagerService mService;
 
-    public MusicRecognitionManagerServiceShellCommand(MusicRecognitionManagerService musicRecognitionManagerService) {
+    public MusicRecognitionManagerServiceShellCommand(
+            MusicRecognitionManagerService musicRecognitionManagerService) {
         this.mService = musicRecognitionManagerService;
     }
 
@@ -24,7 +27,8 @@ public final class MusicRecognitionManagerServiceShellCommand extends ShellComma
         }
         String nextArgRequired = getNextArgRequired();
         if (!"temporary-service".equals(nextArgRequired)) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m50m(outPrintWriter, "Invalid set: ", nextArgRequired);
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m50m(
+                    outPrintWriter, "Invalid set: ", nextArgRequired);
             return -1;
         }
         int parseInt = Integer.parseInt(getNextArgRequired());
@@ -34,7 +38,13 @@ public final class MusicRecognitionManagerServiceShellCommand extends ShellComma
         } else {
             int parseInt2 = Integer.parseInt(getNextArgRequired());
             this.mService.setTemporaryService(parseInt, nextArg, parseInt2);
-            outPrintWriter.println(ActiveServices$$ExternalSyntheticOutline0.m(parseInt2, nextArg, " for ", "ms", new StringBuilder("MusicRecognitionService temporarily set to ")));
+            outPrintWriter.println(
+                    ActiveServices$$ExternalSyntheticOutline0.m(
+                            parseInt2,
+                            nextArg,
+                            " for ",
+                            "ms",
+                            new StringBuilder("MusicRecognitionService temporarily set to ")));
         }
         return 0;
     }
@@ -47,7 +57,8 @@ public final class MusicRecognitionManagerServiceShellCommand extends ShellComma
             outPrintWriter.println("    Prints this help text.");
             outPrintWriter.println("");
             outPrintWriter.println("  set temporary-service USER_ID [COMPONENT_NAME DURATION]");
-            outPrintWriter.println("    Temporarily (for DURATION ms) changes the service implementation.");
+            outPrintWriter.println(
+                    "    Temporarily (for DURATION ms) changes the service implementation.");
             outPrintWriter.println("    To reset, call with just the USER_ID argument.");
             outPrintWriter.println("");
             outPrintWriter.close();

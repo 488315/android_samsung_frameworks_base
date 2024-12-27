@@ -3,26 +3,29 @@ package android.hardware.radio.messaging;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class GsmSmsMessage implements Parcelable {
-    public static final Parcelable.Creator<GsmSmsMessage> CREATOR = new Parcelable.Creator<GsmSmsMessage>() { // from class: android.hardware.radio.messaging.GsmSmsMessage.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GsmSmsMessage createFromParcel(Parcel _aidl_source) {
-            GsmSmsMessage _aidl_out = new GsmSmsMessage();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<GsmSmsMessage> CREATOR =
+            new Parcelable.Creator<GsmSmsMessage>() { // from class:
+                // android.hardware.radio.messaging.GsmSmsMessage.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GsmSmsMessage createFromParcel(Parcel _aidl_source) {
+                    GsmSmsMessage _aidl_out = new GsmSmsMessage();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GsmSmsMessage[] newArray(int _aidl_size) {
-            return new GsmSmsMessage[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GsmSmsMessage[] newArray(int _aidl_size) {
+                    return new GsmSmsMessage[_aidl_size];
+                }
+            };
     public String pdu;
     public String smscPdu;
 

@@ -22,27 +22,65 @@ import com.android.internal.util.function.TriFunction;
 import com.android.internal.util.function.TriPredicate;
 import com.android.internal.util.function.UndecConsumer;
 import com.android.internal.util.function.UndecFunction;
-import com.android.internal.util.function.pooled.PooledSupplier;
+
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 
 /* loaded from: classes5.dex */
-abstract class OmniFunction<A, B, C, D, E, F, G, H, I, J, K, R> implements BiFunction<A, B, R>, TriFunction<A, B, C, R>, QuadFunction<A, B, C, D, R>, QuintFunction<A, B, C, D, E, R>, HexFunction<A, B, C, D, E, F, R>, HeptFunction<A, B, C, D, E, F, G, R>, OctFunction<A, B, C, D, E, F, G, H, R>, NonaFunction<A, B, C, D, E, F, G, H, I, R>, DecFunction<A, B, C, D, E, F, G, H, I, J, R>, UndecFunction<A, B, C, D, E, F, G, H, I, J, K, R>, BiConsumer<A, B>, TriConsumer<A, B, C>, QuadConsumer<A, B, C, D>, QuintConsumer<A, B, C, D, E>, HexConsumer<A, B, C, D, E, F>, HeptConsumer<A, B, C, D, E, F, G>, OctConsumer<A, B, C, D, E, F, G, H>, NonaConsumer<A, B, C, D, E, F, G, H, I>, DecConsumer<A, B, C, D, E, F, G, H, I, J>, UndecConsumer<A, B, C, D, E, F, G, H, I, J, K>, PooledPredicate<A>, BiPredicate<A, B>, TriPredicate<A, B, C>, QuadPredicate<A, B, C, D>, QuintPredicate<A, B, C, D, E>, PooledSupplier<R>, PooledRunnable, FunctionalUtils.ThrowingRunnable, FunctionalUtils.ThrowingSupplier<R>, PooledSupplier.OfInt, PooledSupplier.OfLong, PooledSupplier.OfDouble {
+abstract class OmniFunction<A, B, C, D, E, F, G, H, I, J, K, R>
+        implements BiFunction<A, B, R>,
+                TriFunction<A, B, C, R>,
+                QuadFunction<A, B, C, D, R>,
+                QuintFunction<A, B, C, D, E, R>,
+                HexFunction<A, B, C, D, E, F, R>,
+                HeptFunction<A, B, C, D, E, F, G, R>,
+                OctFunction<A, B, C, D, E, F, G, H, R>,
+                NonaFunction<A, B, C, D, E, F, G, H, I, R>,
+                DecFunction<A, B, C, D, E, F, G, H, I, J, R>,
+                UndecFunction<A, B, C, D, E, F, G, H, I, J, K, R>,
+                BiConsumer<A, B>,
+                TriConsumer<A, B, C>,
+                QuadConsumer<A, B, C, D>,
+                QuintConsumer<A, B, C, D, E>,
+                HexConsumer<A, B, C, D, E, F>,
+                HeptConsumer<A, B, C, D, E, F, G>,
+                OctConsumer<A, B, C, D, E, F, G, H>,
+                NonaConsumer<A, B, C, D, E, F, G, H, I>,
+                DecConsumer<A, B, C, D, E, F, G, H, I, J>,
+                UndecConsumer<A, B, C, D, E, F, G, H, I, J, K>,
+                PooledPredicate<A>,
+                BiPredicate<A, B>,
+                TriPredicate<A, B, C>,
+                QuadPredicate<A, B, C, D>,
+                QuintPredicate<A, B, C, D, E>,
+                PooledSupplier<R>,
+                PooledRunnable,
+                FunctionalUtils.ThrowingRunnable,
+                FunctionalUtils.ThrowingSupplier<R>,
+                PooledSupplier.OfInt,
+                PooledSupplier.OfLong,
+                PooledSupplier.OfDouble {
     @Override // java.util.function.BiFunction
-    public abstract <V> OmniFunction<A, B, C, D, E, F, G, H, I, J, K, V> andThen(Function<? super R, ? extends V> function);
+    public abstract <V> OmniFunction<A, B, C, D, E, F, G, H, I, J, K, V> andThen(
+            Function<? super R, ? extends V> function);
 
     abstract R invoke(A a, B b, C c, D d, E e, F f, G g, H h, I i, J j, K k);
 
     @Override // java.util.function.Predicate, java.util.function.BiPredicate
     public abstract OmniFunction<A, B, C, D, E, F, G, H, I, J, K, R> negate();
 
-    @Override // com.android.internal.util.function.pooled.PooledPredicate, com.android.internal.util.function.pooled.PooledLambda, com.android.internal.util.function.pooled.PooledSupplier, com.android.internal.util.function.pooled.PooledRunnable, com.android.internal.util.function.pooled.PooledSupplier.OfInt, com.android.internal.util.function.pooled.PooledSupplier.OfLong, com.android.internal.util.function.pooled.PooledSupplier.OfDouble
+    @Override // com.android.internal.util.function.pooled.PooledPredicate,
+              // com.android.internal.util.function.pooled.PooledLambda,
+              // com.android.internal.util.function.pooled.PooledSupplier,
+              // com.android.internal.util.function.pooled.PooledRunnable,
+              // com.android.internal.util.function.pooled.PooledSupplier.OfInt,
+              // com.android.internal.util.function.pooled.PooledSupplier.OfLong,
+              // com.android.internal.util.function.pooled.PooledSupplier.OfDouble
     public abstract OmniFunction<A, B, C, D, E, F, G, H, I, J, K, R> recycleOnUse();
 
-    OmniFunction() {
-    }
+    OmniFunction() {}
 
     @Override // java.util.function.BiFunction
     public R apply(A o, B o2) {
@@ -59,7 +97,8 @@ abstract class OmniFunction<A, B, C, D, E, F, G, H, I, J, K, R> implements BiFun
         invoke(null, null, null, null, null, null, null, null, null, null, null);
     }
 
-    @Override // java.util.function.Supplier, com.android.internal.util.FunctionalUtils.ThrowingSupplier
+    @Override // java.util.function.Supplier,
+              // com.android.internal.util.FunctionalUtils.ThrowingSupplier
     public R get() {
         return invoke(null, null, null, null, null, null, null, null, null, null, null);
     }
@@ -71,22 +110,26 @@ abstract class OmniFunction<A, B, C, D, E, F, G, H, I, J, K, R> implements BiFun
 
     @Override // com.android.internal.util.function.QuadPredicate
     public boolean test(A a, B b, C c, D d) {
-        return ((Boolean) invoke(a, b, c, d, null, null, null, null, null, null, null)).booleanValue();
+        return ((Boolean) invoke(a, b, c, d, null, null, null, null, null, null, null))
+                .booleanValue();
     }
 
     @Override // com.android.internal.util.function.TriPredicate
     public boolean test(A a, B b, C c) {
-        return ((Boolean) invoke(a, b, c, null, null, null, null, null, null, null, null)).booleanValue();
+        return ((Boolean) invoke(a, b, c, null, null, null, null, null, null, null, null))
+                .booleanValue();
     }
 
     @Override // java.util.function.BiPredicate
     public boolean test(A a, B b) {
-        return ((Boolean) invoke(a, b, null, null, null, null, null, null, null, null, null)).booleanValue();
+        return ((Boolean) invoke(a, b, null, null, null, null, null, null, null, null, null))
+                .booleanValue();
     }
 
     @Override // java.util.function.Predicate
     public boolean test(A a) {
-        return ((Boolean) invoke(a, null, null, null, null, null, null, null, null, null, null)).booleanValue();
+        return ((Boolean) invoke(a, null, null, null, null, null, null, null, null, null, null))
+                .booleanValue();
     }
 
     @Override // com.android.internal.util.function.pooled.PooledSupplier

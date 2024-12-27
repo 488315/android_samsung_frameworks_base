@@ -15,14 +15,17 @@ import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.server.DualAppManagerService$$ExternalSyntheticOutline0;
 import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
 import com.android.server.enterprise.EnterpriseServiceCallback;
+
 import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.EnterpriseDeviceManager;
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
 import com.samsung.android.knox.net.apn.ApnSettings;
 import com.samsung.android.knox.net.apn.IApnSettingsPolicy;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -31,7 +34,8 @@ import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class ApnSettingsPolicy extends IApnSettingsPolicy.Stub implements EnterpriseServiceCallback {
+public final class ApnSettingsPolicy extends IApnSettingsPolicy.Stub
+        implements EnterpriseServiceCallback {
     public Context mContext;
     public EnterpriseDeviceManager mEDM;
     public int mMDMConfigVersion;
@@ -71,11 +75,13 @@ public final class ApnSettingsPolicy extends IApnSettingsPolicy.Stub implements 
         if (TextUtils.isEmpty(str2)) {
             str2 = TelephonyManager.getTelephonyProperty(i, str, "0");
         }
-        DualAppManagerService$$ExternalSyntheticOutline0.m("getTelephonyProperty : ", str2, "ApnSettingsPolicyService");
+        DualAppManagerService$$ExternalSyntheticOutline0.m(
+                "getTelephonyProperty : ", str2, "ApnSettingsPolicyService");
         return str2;
     }
 
-    public static void setColumnValue(boolean z, ContentValues contentValues, String str, String str2) {
+    public static void setColumnValue(
+            boolean z, ContentValues contentValues, String str, String str2) {
         if (z) {
             contentValues.put(str, str2 == null ? "" : str2.trim());
         } else if (str2 != null) {
@@ -107,12 +113,18 @@ public final class ApnSettingsPolicy extends IApnSettingsPolicy.Stub implements 
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final synchronized long addUpdateApn(com.samsung.android.knox.ContextInfo r30, boolean r31, com.samsung.android.knox.net.apn.ApnSettings r32) {
+    public final synchronized long addUpdateApn(
+            com.samsung.android.knox.ContextInfo r30,
+            boolean r31,
+            com.samsung.android.knox.net.apn.ApnSettings r32) {
         /*
             Method dump skipped, instructions count: 1156
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.apn.ApnSettingsPolicy.addUpdateApn(com.samsung.android.knox.ContextInfo, boolean, com.samsung.android.knox.net.apn.ApnSettings):long");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.apn.ApnSettingsPolicy.addUpdateApn(com.samsung.android.knox.ContextInfo,"
+                    + " boolean, com.samsung.android.knox.net.apn.ApnSettings):long");
     }
 
     public final synchronized boolean deleteApn(ContextInfo contextInfo, long j) {
@@ -125,8 +137,16 @@ public final class ApnSettingsPolicy extends IApnSettingsPolicy.Stub implements 
         int i = -1;
         try {
             try {
-                i = this.mContext.getContentResolver().delete(ContentUris.withAppendedId(Carriers.CONTENT_URI, j), null, null);
-                Log.w("ApnSettingsPolicyService", "deleteAp : deleted rowCount from ApTable : " + i);
+                i =
+                        this.mContext
+                                .getContentResolver()
+                                .delete(
+                                        ContentUris.withAppendedId(Carriers.CONTENT_URI, j),
+                                        null,
+                                        null);
+                Log.w(
+                        "ApnSettingsPolicyService",
+                        "deleteAp : deleted rowCount from ApTable : " + i);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -140,7 +160,9 @@ public final class ApnSettingsPolicy extends IApnSettingsPolicy.Stub implements 
         if (this.mEDM == null) {
             this.mEDM = EnterpriseDeviceManager.getInstance(this.mContext);
         }
-        this.mEDM.enforceOwnerOnlyAndActiveAdminPermission(contextInfo, new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_APN")));
+        this.mEDM.enforceOwnerOnlyAndActiveAdminPermission(
+                contextInfo,
+                new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_APN")));
     }
 
     public final List getApnList(ContextInfo contextInfo, int i) {
@@ -154,12 +176,42 @@ public final class ApnSettingsPolicy extends IApnSettingsPolicy.Stub implements 
             long clearCallingIdentity = Binder.clearCallingIdentity();
             Cursor cursor = null;
             try {
-                String[] strArr = {KnoxCustomManagerService.ID, "name", "mcc", "mnc", "apn", "user", "server", "password", "proxy", "port", "mmsproxy", "mmsport", "mmsc", "authtype", "type", "protocol", "roaming_protocol", "mvno_type", "mvno_match_data"};
-                cursor = this.mContext.getContentResolver().query(getApnListUri(getFirstSlotIndex()), strArr, getWhereClause(), null, null);
+                String[] strArr = {
+                    KnoxCustomManagerService.ID,
+                    "name",
+                    "mcc",
+                    "mnc",
+                    "apn",
+                    "user",
+                    "server",
+                    "password",
+                    "proxy",
+                    "port",
+                    "mmsproxy",
+                    "mmsport",
+                    "mmsc",
+                    "authtype",
+                    "type",
+                    "protocol",
+                    "roaming_protocol",
+                    "mvno_type",
+                    "mvno_match_data"
+                };
+                cursor =
+                        this.mContext
+                                .getContentResolver()
+                                .query(
+                                        getApnListUri(getFirstSlotIndex()),
+                                        strArr,
+                                        getWhereClause(),
+                                        null,
+                                        null);
                 if (cursor != null && cursor.moveToFirst()) {
                     do {
                         ApnSettings apnSettings = new ApnSettings();
-                        apnSettings.setId(Long.parseLong(getColumnValue(KnoxCustomManagerService.ID, cursor)));
+                        apnSettings.setId(
+                                Long.parseLong(
+                                        getColumnValue(KnoxCustomManagerService.ID, cursor)));
                         apnSettings.setName(getColumnValue("name", cursor));
                         apnSettings.setMcc(getColumnValue("mcc", cursor));
                         apnSettings.setMnc(getColumnValue("mnc", cursor));
@@ -182,7 +234,8 @@ public final class ApnSettingsPolicy extends IApnSettingsPolicy.Stub implements 
                         apnSettings.setType(getColumnValue("type", cursor));
                         if (this.mMDMConfigVersion >= 17) {
                             apnSettings.protocol = getColumnValue("protocol", cursor);
-                            apnSettings.roamingProtocol = getColumnValue("roaming_protocol", cursor);
+                            apnSettings.roamingProtocol =
+                                    getColumnValue("roaming_protocol", cursor);
                         }
                         String columnValue3 = getColumnValue("mvno_type", cursor);
                         if (!columnValue3.isEmpty()) {
@@ -208,9 +261,16 @@ public final class ApnSettingsPolicy extends IApnSettingsPolicy.Stub implements 
                 throw th;
             }
         }
-        if (arrayList.size() >= com.samsung.android.knox.net.apn.ApnSettingsPolicy.MAXIMUM_APNS_OVER_IPC) {
-            this.mPendingGetApnList.put(Integer.valueOf(i), arrayList.subList(com.samsung.android.knox.net.apn.ApnSettingsPolicy.MAXIMUM_APNS_OVER_IPC, arrayList.size()));
-            return arrayList.subList(0, com.samsung.android.knox.net.apn.ApnSettingsPolicy.MAXIMUM_APNS_OVER_IPC);
+        if (arrayList.size()
+                >= com.samsung.android.knox.net.apn.ApnSettingsPolicy.MAXIMUM_APNS_OVER_IPC) {
+            this.mPendingGetApnList.put(
+                    Integer.valueOf(i),
+                    arrayList.subList(
+                            com.samsung.android.knox.net.apn.ApnSettingsPolicy
+                                    .MAXIMUM_APNS_OVER_IPC,
+                            arrayList.size()));
+            return arrayList.subList(
+                    0, com.samsung.android.knox.net.apn.ApnSettingsPolicy.MAXIMUM_APNS_OVER_IPC);
         }
         this.mPendingGetApnList.remove(Integer.valueOf(i));
         return arrayList.subList(0, arrayList.size());
@@ -223,46 +283,72 @@ public final class ApnSettingsPolicy extends IApnSettingsPolicy.Stub implements 
             Log.w("ApnSettingsPolicyService", "No SIM ");
             return Carriers.CONTENT_URI;
         }
-        SubscriptionInfo activeSubscriptionInfo = SubscriptionManager.from(this.mContext).getActiveSubscriptionInfo((i == -1 || SubscriptionManager.getSubId(i) == null) ? -1 : SubscriptionManager.getSubId(i)[0]);
-        return Uri.withAppendedPath(Telephony.Carriers.SIM_APN_URI, String.valueOf(activeSubscriptionInfo != null ? activeSubscriptionInfo.getSubscriptionId() : -1));
+        SubscriptionInfo activeSubscriptionInfo =
+                SubscriptionManager.from(this.mContext)
+                        .getActiveSubscriptionInfo(
+                                (i == -1 || SubscriptionManager.getSubId(i) == null)
+                                        ? -1
+                                        : SubscriptionManager.getSubId(i)[0]);
+        return Uri.withAppendedPath(
+                Telephony.Carriers.SIM_APN_URI,
+                String.valueOf(
+                        activeSubscriptionInfo != null
+                                ? activeSubscriptionInfo.getSubscriptionId()
+                                : -1));
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:10:0x012a, code lost:
-    
-        if (r10 != null) goto L33;
-     */
+
+       if (r10 != null) goto L33;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:11:0x012c, code lost:
-    
-        r10.close();
-     */
+
+       r10.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:12:0x012f, code lost:
-    
-        android.os.Binder.restoreCallingIdentity(r1);
-     */
+
+       android.os.Binder.restoreCallingIdentity(r1);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:13:0x013d, code lost:
-    
-        return null;
-     */
+
+       return null;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:38:0x013a, code lost:
-    
-        if (r10 == null) goto L34;
-     */
+
+       if (r10 == null) goto L34;
+    */
     /* JADX WARN: Removed duplicated region for block: B:43:0x0140  */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final com.samsung.android.knox.net.apn.ApnSettings getApnSettings(com.samsung.android.knox.ContextInfo r10, long r11) {
+    public final com.samsung.android.knox.net.apn.ApnSettings getApnSettings(
+            com.samsung.android.knox.ContextInfo r10, long r11) {
         /*
             Method dump skipped, instructions count: 327
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.apn.ApnSettingsPolicy.getApnSettings(com.samsung.android.knox.ContextInfo, long):com.samsung.android.knox.net.apn.ApnSettings");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.apn.ApnSettingsPolicy.getApnSettings(com.samsung.android.knox.ContextInfo,"
+                    + " long):com.samsung.android.knox.net.apn.ApnSettings");
     }
 
     public final int getFirstSlotIndex() {
-        int i = (!(Settings.Global.getInt(this.mContext.getContentResolver(), "phone1_on", 1) == 1) || "0".equals(getTelephonyProperty(0, "ril.ICC_TYPE0"))) ? (!(Settings.Global.getInt(this.mContext.getContentResolver(), "phone2_on", 1) == 1) || "0".equals(getTelephonyProperty(1, "ril.ICC_TYPE1"))) ? -1 : 1 : 0;
-        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(i, "getFirstSlotIndex : ", "ApnSettingsPolicyService");
+        int i =
+                (!(Settings.Global.getInt(this.mContext.getContentResolver(), "phone1_on", 1) == 1)
+                                || "0".equals(getTelephonyProperty(0, "ril.ICC_TYPE0")))
+                        ? (!(Settings.Global.getInt(
+                                                        this.mContext.getContentResolver(),
+                                                        "phone2_on",
+                                                        1)
+                                                == 1)
+                                        || "0".equals(getTelephonyProperty(1, "ril.ICC_TYPE1")))
+                                ? -1
+                                : 1
+                        : 0;
+        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                i, "getFirstSlotIndex : ", "ApnSettingsPolicyService");
         return i;
     }
 
@@ -272,7 +358,8 @@ public final class ApnSettingsPolicy extends IApnSettingsPolicy.Stub implements 
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final synchronized com.samsung.android.knox.net.apn.ApnSettings getPreferredApn(com.samsung.android.knox.ContextInfo r13) {
+    public final synchronized com.samsung.android.knox.net.apn.ApnSettings getPreferredApn(
+            com.samsung.android.knox.ContextInfo r13) {
         /*
             r12 = this;
             java.lang.String r0 = "getPreferredApn Ex: "
@@ -358,20 +445,28 @@ public final class ApnSettingsPolicy extends IApnSettingsPolicy.Stub implements 
             monitor-exit(r12)
             throw r13
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.apn.ApnSettingsPolicy.getPreferredApn(com.samsung.android.knox.ContextInfo):com.samsung.android.knox.net.apn.ApnSettings");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.apn.ApnSettingsPolicy.getPreferredApn(com.samsung.android.knox.ContextInfo):com.samsung.android.knox.net.apn.ApnSettings");
     }
 
     public final String getWhereClause() {
         Log.d("ApnSettingsPolicyService", "getWhereClause");
         StringBuilder sb = new StringBuilder("NOT (type='ia' AND (apn=\"\" OR apn IS NULL))");
-        int slotIndex = SubscriptionManager.getSlotIndex(SubscriptionManager.getDefaultDataSubscriptionId());
+        int slotIndex =
+                SubscriptionManager.getSlotIndex(
+                        SubscriptionManager.getDefaultDataSubscriptionId());
         boolean z = false;
-        boolean z2 = Settings.Global.getInt(this.mContext.getContentResolver(), "phone1_on", 1) == 1 && !"0".equals(getTelephonyProperty(0, "ril.ICC_TYPE0"));
+        boolean z2 =
+                Settings.Global.getInt(this.mContext.getContentResolver(), "phone1_on", 1) == 1
+                        && !"0".equals(getTelephonyProperty(0, "ril.ICC_TYPE0"));
         int phoneCount = TelephonyManager.getDefault().getPhoneCount();
-        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(phoneCount, "simSlotCnt : ", "ApnSettingsPolicyService");
+        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                phoneCount, "simSlotCnt : ", "ApnSettingsPolicyService");
         if (phoneCount > 1) {
             String telephonyProperty = getTelephonyProperty(1, "ril.ICC_TYPE1");
-            if (Settings.System.getInt(this.mContext.getContentResolver(), "phone2_on", 1) == 1 && !"0".equals(telephonyProperty)) {
+            if (Settings.System.getInt(this.mContext.getContentResolver(), "phone2_on", 1) == 1
+                    && !"0".equals(telephonyProperty)) {
                 z = true;
             }
             if (z2 && slotIndex == 0) {
@@ -386,21 +481,21 @@ public final class ApnSettingsPolicy extends IApnSettingsPolicy.Stub implements 
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:26:0x00f7, code lost:
-    
-        if (r6.getString(2).equals("mms") != false) goto L35;
-     */
+
+       if (r6.getString(2).equals("mms") != false) goto L35;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:28:0x00fe, code lost:
-    
-        if (r6 == null) goto L44;
-     */
+
+       if (r6 == null) goto L44;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:29:0x0100, code lost:
-    
-        r6.close();
-     */
+
+       r6.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:35:0x0107, code lost:
-    
-        if (r6 == null) goto L44;
-     */
+
+       if (r6 == null) goto L44;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -410,24 +505,22 @@ public final class ApnSettingsPolicy extends IApnSettingsPolicy.Stub implements 
             Method dump skipped, instructions count: 291
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.apn.ApnSettingsPolicy.isValidApnId(long):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.enterprise.apn.ApnSettingsPolicy.isValidApnId(long):boolean");
     }
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void notifyToAddSystemService(String str, IBinder iBinder) {
-    }
+    public final void notifyToAddSystemService(String str, IBinder iBinder) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void onAdminAdded(int i) {
-    }
+    public final void onAdminAdded(int i) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void onAdminRemoved(int i) {
-    }
+    public final void onAdminRemoved(int i) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void onPreAdminRemoval(int i) {
-    }
+    public final void onPreAdminRemoval(int i) {}
 
     public final synchronized boolean setPreferredApn(ContextInfo contextInfo, long j) {
         boolean z;
@@ -443,7 +536,10 @@ public final class ApnSettingsPolicy extends IApnSettingsPolicy.Stub implements 
                         j = -1;
                     }
                     contentValues.put("apn_id", Long.valueOf(j));
-                    int update = this.mContext.getContentResolver().update(Carriers.PREFERAPN_URI, contentValues, null, null);
+                    int update =
+                            this.mContext
+                                    .getContentResolver()
+                                    .update(Carriers.PREFERAPN_URI, contentValues, null, null);
                     z = update > 0;
                     Log.w("ApnSettingsPolicyService", "setPreferedAp() row count : " + update);
                 }
@@ -459,6 +555,5 @@ public final class ApnSettingsPolicy extends IApnSettingsPolicy.Stub implements 
     }
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void systemReady() {
-    }
+    public final void systemReady() {}
 }

@@ -7,6 +7,7 @@ import android.os.Message;
 import android.util.Slog;
 import android.view.Display;
 import android.view.DisplayInfo;
+
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.ServiceKeeper$$ExternalSyntheticOutline0;
 
@@ -31,17 +32,38 @@ public final class MultiWindowFoldController implements IController {
             if (message.what != 1) {
                 return;
             }
-            WindowManagerGlobalLock windowManagerGlobalLock = MultiWindowFoldController.this.mGlobalLock;
+            WindowManagerGlobalLock windowManagerGlobalLock =
+                    MultiWindowFoldController.this.mGlobalLock;
             WindowManagerService.boostPriorityForLockedSection();
             synchronized (windowManagerGlobalLock) {
                 try {
-                    MultiWindowFoldController multiWindowFoldController = MultiWindowFoldController.this;
-                    if (multiWindowFoldController.mFoldingState == 1 && multiWindowFoldController.mAtm.mRootWindowContainer.mDefaultDisplay.getDefaultTaskDisplayArea().isSplitScreenModeActivated()) {
-                        ActivityTaskManagerService activityTaskManagerService = multiWindowFoldController.mAtm;
-                        if (!activityTaskManagerService.mTaskSupervisor.mKeyguardController.isKeyguardShowing(0)) {
-                            Task topMostTask = multiWindowFoldController.mAtm.mRootWindowContainer.mDefaultDisplay.getDefaultTaskDisplayArea().getTopMostTask();
+                    MultiWindowFoldController multiWindowFoldController =
+                            MultiWindowFoldController.this;
+                    if (multiWindowFoldController.mFoldingState == 1
+                            && multiWindowFoldController
+                                    .mAtm
+                                    .mRootWindowContainer
+                                    .mDefaultDisplay
+                                    .getDefaultTaskDisplayArea()
+                                    .isSplitScreenModeActivated()) {
+                        ActivityTaskManagerService activityTaskManagerService =
+                                multiWindowFoldController.mAtm;
+                        if (!activityTaskManagerService.mTaskSupervisor.mKeyguardController
+                                .isKeyguardShowing(0)) {
+                            Task topMostTask =
+                                    multiWindowFoldController
+                                            .mAtm
+                                            .mRootWindowContainer
+                                            .mDefaultDisplay
+                                            .getDefaultTaskDisplayArea()
+                                            .getTopMostTask();
                             if ((topMostTask != null ? topMostTask.getWindowingMode() : 0) != 1) {
-                                activityTaskManagerService.mRootWindowContainer.startHomeOnDisplay("MultiWindowFoldController:wakeup", activityTaskManagerService.mAmInternal.getCurrentUserId(), 0, false, false);
+                                activityTaskManagerService.mRootWindowContainer.startHomeOnDisplay(
+                                        "MultiWindowFoldController:wakeup",
+                                        activityTaskManagerService.mAmInternal.getCurrentUserId(),
+                                        0,
+                                        false,
+                                        false);
                             }
                             multiWindowFoldController.setFoldingState(0, "start_home_by_wakeup");
                         }
@@ -73,7 +95,9 @@ public final class MultiWindowFoldController implements IController {
         } else {
             updateMainDisplayBounds(displayInfo.logicalWidth, displayInfo.logicalHeight);
         }
-        Slog.d("MultiWindowFoldController", "initDisplayBounds: " + displayInfo + ", isCoverDisplay=" + z);
+        Slog.d(
+                "MultiWindowFoldController",
+                "initDisplayBounds: " + displayInfo + ", isCoverDisplay=" + z);
     }
 
     @Override // com.android.server.wm.IController
@@ -84,7 +108,8 @@ public final class MultiWindowFoldController implements IController {
     public final void setFoldingState(int i, String str) {
         if (this.mFoldingState != i) {
             StringBuilder sb = new StringBuilder("setFoldingState: ");
-            ServiceKeeper$$ExternalSyntheticOutline0.m(this.mFoldingState, i, "->", ", reason=", sb);
+            ServiceKeeper$$ExternalSyntheticOutline0.m(
+                    this.mFoldingState, i, "->", ", reason=", sb);
             BootReceiver$$ExternalSyntheticOutline0.m(sb, str, "MultiWindowFoldController");
             this.mFoldingState = i;
         }

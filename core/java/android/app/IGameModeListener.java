@@ -14,8 +14,9 @@ public interface IGameModeListener extends IInterface {
 
     public static class Default implements IGameModeListener {
         @Override // android.app.IGameModeListener
-        public void onGameModeChanged(String packageName, int gameModeFrom, int gameModeTo, int userId) throws RemoteException {
-        }
+        public void onGameModeChanged(
+                String packageName, int gameModeFrom, int gameModeTo, int userId)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +24,7 @@ public interface IGameModeListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGameModeListener {
+    public abstract static class Stub extends Binder implements IGameModeListener {
         static final int TRANSACTION_onGameModeChanged = 1;
 
         public Stub() {
@@ -61,7 +62,8 @@ public interface IGameModeListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IGameModeListener.DESCRIPTOR);
             }
@@ -101,7 +103,9 @@ public interface IGameModeListener extends IInterface {
             }
 
             @Override // android.app.IGameModeListener
-            public void onGameModeChanged(String packageName, int gameModeFrom, int gameModeTo, int userId) throws RemoteException {
+            public void onGameModeChanged(
+                    String packageName, int gameModeFrom, int gameModeTo, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

@@ -7,10 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.android.internal.R;
 import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.org.bouncycastle.asn1.x509.X509Name;
 import com.android.internal.util.HexDump;
+
 import java.io.ByteArrayInputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -75,24 +77,41 @@ public class SslCertificate {
                 x509Certificate = null;
             }
         }
-        return new SslCertificate(bundle.getString(ISSUED_TO), bundle.getString(ISSUED_BY), parseDate(bundle.getString(VALID_NOT_BEFORE)), parseDate(bundle.getString(VALID_NOT_AFTER)), x509Certificate);
+        return new SslCertificate(
+                bundle.getString(ISSUED_TO),
+                bundle.getString(ISSUED_BY),
+                parseDate(bundle.getString(VALID_NOT_BEFORE)),
+                parseDate(bundle.getString(VALID_NOT_AFTER)),
+                x509Certificate);
     }
 
     @Deprecated
-    public SslCertificate(String issuedTo, String issuedBy, String validNotBefore, String validNotAfter) {
+    public SslCertificate(
+            String issuedTo, String issuedBy, String validNotBefore, String validNotAfter) {
         this(issuedTo, issuedBy, parseDate(validNotBefore), parseDate(validNotAfter), null);
     }
 
     @Deprecated
-    public SslCertificate(String issuedTo, String issuedBy, Date validNotBefore, Date validNotAfter) {
+    public SslCertificate(
+            String issuedTo, String issuedBy, Date validNotBefore, Date validNotAfter) {
         this(issuedTo, issuedBy, validNotBefore, validNotAfter, null);
     }
 
     public SslCertificate(X509Certificate certificate) {
-        this(certificate.getSubjectDN().getName(), certificate.getIssuerDN().getName(), certificate.getNotBefore(), certificate.getNotAfter(), certificate);
+        this(
+                certificate.getSubjectDN().getName(),
+                certificate.getIssuerDN().getName(),
+                certificate.getNotBefore(),
+                certificate.getNotAfter(),
+                certificate);
     }
 
-    private SslCertificate(String issuedTo, String issuedBy, Date validNotBefore, Date validNotAfter, X509Certificate x509Certificate) {
+    private SslCertificate(
+            String issuedTo,
+            String issuedBy,
+            Date validNotBefore,
+            Date validNotAfter,
+            X509Certificate x509Certificate) {
         this.mIssuedTo = new DName(issuedTo);
         this.mIssuedBy = new DName(issuedBy);
         this.mValidNotBefore = cloneDate(validNotBefore);
@@ -170,7 +189,11 @@ public class SslCertificate {
     }
 
     public String toString() {
-        return "Issued to: " + this.mIssuedTo.getDName() + ";\nIssued by: " + this.mIssuedBy.getDName() + ";\n";
+        return "Issued to: "
+                + this.mIssuedTo.getDName()
+                + ";\nIssued by: "
+                + this.mIssuedBy.getDName()
+                + ";\n";
     }
 
     private static Date parseDate(String string) {
@@ -246,23 +269,32 @@ public class SslCertificate {
         View certificateView = factory.inflate(R.layout.ssl_certificate, (ViewGroup) null);
         DName issuedTo = getIssuedTo();
         if (issuedTo != null) {
-            ((TextView) certificateView.findViewById(R.id.to_common)).lambda$setTextAsync$0(issuedTo.getCName());
-            ((TextView) certificateView.findViewById(R.id.to_org)).lambda$setTextAsync$0(issuedTo.getOName());
-            ((TextView) certificateView.findViewById(R.id.to_org_unit)).lambda$setTextAsync$0(issuedTo.getUName());
+            ((TextView) certificateView.findViewById(R.id.to_common))
+                    .lambda$setTextAsync$0(issuedTo.getCName());
+            ((TextView) certificateView.findViewById(R.id.to_org))
+                    .lambda$setTextAsync$0(issuedTo.getOName());
+            ((TextView) certificateView.findViewById(R.id.to_org_unit))
+                    .lambda$setTextAsync$0(issuedTo.getUName());
         }
-        ((TextView) certificateView.findViewById(R.id.serial_number)).lambda$setTextAsync$0(getSerialNumber(this.mX509Certificate));
+        ((TextView) certificateView.findViewById(R.id.serial_number))
+                .lambda$setTextAsync$0(getSerialNumber(this.mX509Certificate));
         DName issuedBy = getIssuedBy();
         if (issuedBy != null) {
-            ((TextView) certificateView.findViewById(R.id.by_common)).lambda$setTextAsync$0(issuedBy.getCName());
-            ((TextView) certificateView.findViewById(R.id.by_org)).lambda$setTextAsync$0(issuedBy.getOName());
-            ((TextView) certificateView.findViewById(R.id.by_org_unit)).lambda$setTextAsync$0(issuedBy.getUName());
+            ((TextView) certificateView.findViewById(R.id.by_common))
+                    .lambda$setTextAsync$0(issuedBy.getCName());
+            ((TextView) certificateView.findViewById(R.id.by_org))
+                    .lambda$setTextAsync$0(issuedBy.getOName());
+            ((TextView) certificateView.findViewById(R.id.by_org_unit))
+                    .lambda$setTextAsync$0(issuedBy.getUName());
         }
         String issuedOn = formatCertificateDate(context, getValidNotBeforeDate());
         ((TextView) certificateView.findViewById(R.id.issued_on)).lambda$setTextAsync$0(issuedOn);
         String expiresOn = formatCertificateDate(context, getValidNotAfterDate());
         ((TextView) certificateView.findViewById(R.id.expires_on)).lambda$setTextAsync$0(expiresOn);
-        ((TextView) certificateView.findViewById(R.id.sha256_fingerprint)).lambda$setTextAsync$0(getDigest(this.mX509Certificate, "SHA256"));
-        ((TextView) certificateView.findViewById(R.id.sha1_fingerprint)).lambda$setTextAsync$0(getDigest(this.mX509Certificate, "SHA1"));
+        ((TextView) certificateView.findViewById(R.id.sha256_fingerprint))
+                .lambda$setTextAsync$0(getDigest(this.mX509Certificate, "SHA256"));
+        ((TextView) certificateView.findViewById(R.id.sha1_fingerprint))
+                .lambda$setTextAsync$0(getDigest(this.mX509Certificate, "SHA1"));
         return certificateView;
     }
 

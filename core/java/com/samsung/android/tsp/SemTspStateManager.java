@@ -27,7 +27,8 @@ public final class SemTspStateManager {
 
     public static void setDeadZone(View decorView, Bundle deadZone) {
         if (decorView == null) {
-            throw new IllegalArgumentException("The argument is null. decorView=" + decorView + ", deadZone=" + deadZone);
+            throw new IllegalArgumentException(
+                    "The argument is null. decorView=" + decorView + ", deadZone=" + deadZone);
         }
         if (deadZone != null) {
             String v2 = deadZone.getString("deadzone_v2");
@@ -51,7 +52,9 @@ public final class SemTspStateManager {
             throw new IllegalArgumentException("deadZoneHole is null or empty");
         }
         try {
-            IWindowManager windowManager = IWindowManager.Stub.asInterface(ServiceManager.getService(Context.WINDOW_SERVICE));
+            IWindowManager windowManager =
+                    IWindowManager.Stub.asInterface(
+                            ServiceManager.getService(Context.WINDOW_SERVICE));
             windowManager.setDeadzoneHole(deadZoneHole);
         } catch (RemoteException e) {
             e.printStackTrace();

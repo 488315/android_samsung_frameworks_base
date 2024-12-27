@@ -5,9 +5,10 @@ import android.graphics.PointF;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
+
 import com.android.internal.util.Preconditions;
-import com.android.server.accessibility.gestures.GestureMatcher;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -23,7 +24,12 @@ public class MultiFingerMultiTap extends GestureMatcher {
     public final int mTargetTapCount;
     public final int mTouchSlop;
 
-    public MultiFingerMultiTap(Context context, int i, int i2, int i3, GestureMatcher.StateChangeListener stateChangeListener) {
+    public MultiFingerMultiTap(
+            Context context,
+            int i,
+            int i2,
+            int i3,
+            GestureMatcher.StateChangeListener stateChangeListener) {
         super(i3, new Handler(context.getMainLooper()), stateChangeListener);
         int i4 = 0;
         this.mIsTargetFingerCountReached = false;
@@ -81,11 +87,13 @@ public class MultiFingerMultiTap extends GestureMatcher {
                 return pointF;
             }
             PointF pointF2 = pointFArr[i];
-            if ((!Float.isNaN(pointF2.x) || !Float.isNaN(pointF2.y)) && (!z || !this.mExcludedPointsForDownSlopChecked.contains(pointF2))) {
+            if ((!Float.isNaN(pointF2.x) || !Float.isNaN(pointF2.y))
+                    && (!z || !this.mExcludedPointsForDownSlopChecked.contains(pointF2))) {
                 int actionIndex = motionEvent.getActionIndex();
                 float x = pointF2.x - motionEvent.getX(actionIndex);
                 float y = pointF2.y - motionEvent.getY(actionIndex);
-                if (x == FullScreenMagnificationGestureHandler.MAX_SCALE && y == FullScreenMagnificationGestureHandler.MAX_SCALE) {
+                if (x == FullScreenMagnificationGestureHandler.MAX_SCALE
+                        && y == FullScreenMagnificationGestureHandler.MAX_SCALE) {
                     if (z) {
                         this.mExcludedPointsForDownSlopChecked.add(pointF2);
                     }
@@ -170,7 +178,10 @@ public class MultiFingerMultiTap extends GestureMatcher {
             setState(3, motionEvent, motionEvent2, i);
             return;
         }
-        PointF initBaseLocation = this.mCompletedTapCount == 0 ? initBaseLocation(motionEvent2) : findNearestPoint(motionEvent2, this.mDoubleTapSlop, true);
+        PointF initBaseLocation =
+                this.mCompletedTapCount == 0
+                        ? initBaseLocation(motionEvent2)
+                        : findNearestPoint(motionEvent2, this.mDoubleTapSlop, true);
         int i3 = this.mState;
         if ((i3 != 1 && i3 != 0) || initBaseLocation == null) {
             setState(3, motionEvent, motionEvent2, i);

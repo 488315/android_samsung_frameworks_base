@@ -31,12 +31,12 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.ElasticCustom;
 import android.view.animation.Interpolator;
 import android.view.animation.PathInterpolator;
-import android.widget.AdapterView;
-import android.widget.FrameLayout;
-import android.widget.SemExpandableListConnector;
+
 import com.android.internal.R;
+
 import com.samsung.android.animation.SemAnimatorUtils;
 import com.samsung.android.rune.ViewRune;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -128,13 +128,20 @@ public class SemExpandableListView extends ListView {
     private static final int[] GROUP_EXPANDED_STATE_SET = {16842920};
     private static final int[] GROUP_EMPTY_STATE_SET = {16842921};
     private static final int[] GROUP_EXPANDED_EMPTY_STATE_SET = {16842920, 16842921};
-    private static final int[][] GROUP_STATE_SETS = {EMPTY_STATE_SET, GROUP_EXPANDED_STATE_SET, GROUP_EMPTY_STATE_SET, GROUP_EXPANDED_EMPTY_STATE_SET};
+    private static final int[][] GROUP_STATE_SETS = {
+        EMPTY_STATE_SET,
+        GROUP_EXPANDED_STATE_SET,
+        GROUP_EMPTY_STATE_SET,
+        GROUP_EXPANDED_EMPTY_STATE_SET
+    };
     private static final int[] CHILD_LAST_STATE_SET = {16842918};
-    private static Interpolator EXPAND_COLLAPSE_INTERPOLATOR = new PathInterpolator(0.33f, 0.0f, 0.2f, 1.0f);
+    private static Interpolator EXPAND_COLLAPSE_INTERPOLATOR =
+            new PathInterpolator(0.33f, 0.0f, 0.2f, 1.0f);
     private static ElasticCustom mExpandInterpolator = new ElasticCustom(1.0f, 0.8f);
 
     public interface OnChildClickListener {
-        boolean onChildClick(SemExpandableListView semExpandableListView, View view, int i, int i2, long j);
+        boolean onChildClick(
+                SemExpandableListView semExpandableListView, View view, int i, int i2, long j);
     }
 
     public interface OnGroupClickListener {
@@ -161,7 +168,8 @@ public class SemExpandableListView extends ListView {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public SemExpandableListView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public SemExpandableListView(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.mBlockTouchEvent = false;
         this.mAnimationEnabled = true;
@@ -181,211 +189,306 @@ public class SemExpandableListView extends ListView {
         this.mExpandCollapseAllState = 0;
         this.mIndicatorAnimationType = 1;
         this.mGroupIndicatorColor = -16777216;
-        this.mItemDecorator = new SemExpandableListConnector.ItemDecorator() { // from class: android.widget.SemExpandableListView.1
-            static final int WRAPPING_VIEW_ID = 2147482647;
+        this.mItemDecorator =
+                new SemExpandableListConnector
+                        .ItemDecorator() { // from class: android.widget.SemExpandableListView.1
+                    static final int WRAPPING_VIEW_ID = 2147482647;
 
-            @Override // android.widget.SemExpandableListConnector.ItemDecorator
-            public View onItemDecorate(View convertView, View itemView, SemExpandableListConnector.PositionMetadata pos) {
-                int indicatorLeft;
-                int indicatorRight;
-                int indicatorLeft2;
-                int indicatorRight2;
-                Drawable indicator;
-                FrameLayout.LayoutParams lp;
-                boolean isLastChild = pos.position.flatListPos == SemExpandableListView.this.mConnector.getCount() - 1;
-                int dividerHeight = SemExpandableListView.this.mExpListDividerHeight[0];
-                if (convertView != null && (convertView instanceof ViewGroup) && ((ViewGroup) convertView).getChildAt(0) == itemView) {
-                    if (convertView.getId() != WRAPPING_VIEW_ID || !(convertView instanceof FrameLayout)) {
-                        throw new IllegalStateException("convertView is neither null nor the wrapping FrameLayout");
-                    }
-                    DecoratedItemViewHolder holder = (DecoratedItemViewHolder) convertView.getTag(SemExpandableListView.DECORATED_VIEW_TAG);
-                    Drawable indicator2 = SemExpandableListView.this.getIndicator(pos);
-                    if (holder != null) {
-                        if (holder.indicatorImgView != null) {
-                            holder.indicatorImgView.setIndicatorPos(pos.position);
-                            if (SemExpandableListView.this.mChildIndicator == null && SemExpandableListView.this.mGroupIndicator == null) {
-                                holder.indicatorImgView.setVisibility(8);
+                    @Override // android.widget.SemExpandableListConnector.ItemDecorator
+                    public View onItemDecorate(
+                            View convertView,
+                            View itemView,
+                            SemExpandableListConnector.PositionMetadata pos) {
+                        int indicatorLeft;
+                        int indicatorRight;
+                        int indicatorLeft2;
+                        int indicatorRight2;
+                        Drawable indicator;
+                        FrameLayout.LayoutParams lp;
+                        boolean isLastChild =
+                                pos.position.flatListPos
+                                        == SemExpandableListView.this.mConnector.getCount() - 1;
+                        int dividerHeight = SemExpandableListView.this.mExpListDividerHeight[0];
+                        if (convertView != null
+                                && (convertView instanceof ViewGroup)
+                                && ((ViewGroup) convertView).getChildAt(0) == itemView) {
+                            if (convertView.getId() != WRAPPING_VIEW_ID
+                                    || !(convertView instanceof FrameLayout)) {
+                                throw new IllegalStateException(
+                                        "convertView is neither null nor the wrapping FrameLayout");
+                            }
+                            DecoratedItemViewHolder holder =
+                                    (DecoratedItemViewHolder)
+                                            convertView.getTag(
+                                                    SemExpandableListView.DECORATED_VIEW_TAG);
+                            Drawable indicator2 = SemExpandableListView.this.getIndicator(pos);
+                            if (holder != null) {
+                                if (holder.indicatorImgView != null) {
+                                    holder.indicatorImgView.setIndicatorPos(pos.position);
+                                    if (SemExpandableListView.this.mChildIndicator == null
+                                            && SemExpandableListView.this.mGroupIndicator == null) {
+                                        holder.indicatorImgView.setVisibility(8);
+                                    } else {
+                                        holder.indicatorImgView.setVisibility(0);
+                                    }
+                                    holder.indicatorImgView.refreshDrawableState();
+                                    holder.indicatorImgView.setContentDescription(
+                                            pos.isExpanded()
+                                                    ? SemExpandableListView.this
+                                                            .mDescriptionCollapse
+                                                    : SemExpandableListView.this
+                                                            .mDescriptionExpand);
+                                    initIndicatorImageLayoutParams(
+                                            (FrameLayout.LayoutParams)
+                                                    holder.indicatorImgView.getLayoutParams());
+                                } else if (indicator2 != null) {
+                                    IndicatorImageView indicatorImgView =
+                                            SemExpandableListView.this
+                                            .new IndicatorImageView(
+                                                    SemExpandableListView.this.mContext);
+                                    indicatorImgView.setIndicatorPos(pos.position);
+                                    indicatorImgView.setImageDrawable(
+                                            indicator2.getConstantState().newDrawable());
+                                    indicatorImgView.refreshDrawableState();
+                                    FrameLayout.LayoutParams lp2 =
+                                            new FrameLayout.LayoutParams(-2, -2);
+                                    initIndicatorImageLayoutParams(lp2);
+                                    indicatorImgView.setLayoutParams(lp2);
+                                    ((FrameLayout) convertView).addView(indicatorImgView);
+                                    holder.indicatorImgView = indicatorImgView;
+                                    holder.indicatorImgView.setContentDescription(
+                                            pos.isExpanded()
+                                                    ? SemExpandableListView.this
+                                                            .mDescriptionCollapse
+                                                    : SemExpandableListView.this
+                                                            .mDescriptionExpand);
+                                }
+                                adjustDivider(holder, isLastChild);
+                            }
+                            return convertView;
+                        }
+                        FrameLayout frameLayout =
+                                new FrameLayout(SemExpandableListView.this.mContext);
+                        DecoratedItemViewHolder holder2 = new DecoratedItemViewHolder();
+                        frameLayout.setTag(SemExpandableListView.DECORATED_VIEW_TAG, holder2);
+                        frameLayout.setId(WRAPPING_VIEW_ID);
+                        frameLayout.addView(itemView);
+                        holder2.itemView = itemView;
+                        int t = itemView.getTop();
+                        int b = itemView.getBottom();
+                        int myB = SemExpandableListView.this.mBottom;
+                        if (b < 0 || t > myB) {
+                            return frameLayout;
+                        }
+                        boolean isLayoutRtl = SemExpandableListView.this.isLayoutRtl();
+                        int width = SemExpandableListView.this.getWidth();
+                        if (pos.position.type == 1) {
+                            if (SemExpandableListView.this.mChildIndicatorLeft != -1) {
+                                indicatorLeft = SemExpandableListView.this.mChildIndicatorLeft;
                             } else {
-                                holder.indicatorImgView.setVisibility(0);
+                                indicatorLeft = SemExpandableListView.this.mIndicatorLeft;
                             }
-                            holder.indicatorImgView.refreshDrawableState();
-                            holder.indicatorImgView.setContentDescription(pos.isExpanded() ? SemExpandableListView.this.mDescriptionCollapse : SemExpandableListView.this.mDescriptionExpand);
-                            initIndicatorImageLayoutParams((FrameLayout.LayoutParams) holder.indicatorImgView.getLayoutParams());
-                        } else if (indicator2 != null) {
-                            IndicatorImageView indicatorImgView = SemExpandableListView.this.new IndicatorImageView(SemExpandableListView.this.mContext);
-                            indicatorImgView.setIndicatorPos(pos.position);
-                            indicatorImgView.setImageDrawable(indicator2.getConstantState().newDrawable());
-                            indicatorImgView.refreshDrawableState();
-                            FrameLayout.LayoutParams lp2 = new FrameLayout.LayoutParams(-2, -2);
-                            initIndicatorImageLayoutParams(lp2);
-                            indicatorImgView.setLayoutParams(lp2);
-                            ((FrameLayout) convertView).addView(indicatorImgView);
-                            holder.indicatorImgView = indicatorImgView;
-                            holder.indicatorImgView.setContentDescription(pos.isExpanded() ? SemExpandableListView.this.mDescriptionCollapse : SemExpandableListView.this.mDescriptionExpand);
-                        }
-                        adjustDivider(holder, isLastChild);
-                    }
-                    return convertView;
-                }
-                FrameLayout frameLayout = new FrameLayout(SemExpandableListView.this.mContext);
-                DecoratedItemViewHolder holder2 = new DecoratedItemViewHolder();
-                frameLayout.setTag(SemExpandableListView.DECORATED_VIEW_TAG, holder2);
-                frameLayout.setId(WRAPPING_VIEW_ID);
-                frameLayout.addView(itemView);
-                holder2.itemView = itemView;
-                int t = itemView.getTop();
-                int b = itemView.getBottom();
-                int myB = SemExpandableListView.this.mBottom;
-                if (b < 0 || t > myB) {
-                    return frameLayout;
-                }
-                boolean isLayoutRtl = SemExpandableListView.this.isLayoutRtl();
-                int width = SemExpandableListView.this.getWidth();
-                if (pos.position.type == 1) {
-                    if (SemExpandableListView.this.mChildIndicatorLeft != -1) {
-                        indicatorLeft = SemExpandableListView.this.mChildIndicatorLeft;
-                    } else {
-                        indicatorLeft = SemExpandableListView.this.mIndicatorLeft;
-                    }
-                    if (SemExpandableListView.this.mChildIndicatorRight != -1) {
-                        indicatorRight = SemExpandableListView.this.mChildIndicatorRight;
-                    } else {
-                        indicatorRight = SemExpandableListView.this.mIndicatorRight;
-                    }
-                } else {
-                    indicatorLeft = SemExpandableListView.this.mIndicatorLeft;
-                    indicatorRight = SemExpandableListView.this.mIndicatorRight;
-                }
-                if (!isLayoutRtl) {
-                    indicatorLeft2 = indicatorLeft + SemExpandableListView.this.mPaddingLeft;
-                    indicatorRight2 = indicatorRight + SemExpandableListView.this.mPaddingLeft;
-                } else {
-                    int temp = indicatorLeft;
-                    int indicatorLeft3 = width - indicatorRight;
-                    int indicatorRight3 = width - temp;
-                    indicatorLeft2 = indicatorLeft3 - SemExpandableListView.this.mPaddingRight;
-                    indicatorRight2 = indicatorRight3 - SemExpandableListView.this.mPaddingRight;
-                }
-                if (indicatorLeft2 != indicatorRight2 && (indicator = SemExpandableListView.this.getIndicator(pos)) != null) {
-                    IndicatorImageView indicatorImgView2 = SemExpandableListView.this.new IndicatorImageView(SemExpandableListView.this.mContext);
-                    indicatorImgView2.setIndicatorPos(pos.position);
-                    indicatorImgView2.setImageDrawable(indicator.getConstantState().newDrawable());
-                    indicatorImgView2.refreshDrawableState();
-                    if (SemExpandableListView.this.mIndicatorAnimationType == 1) {
-                        lp = new FrameLayout.LayoutParams(-2, -2);
-                    } else {
-                        int paddingHeight = Math.round(SemExpandableListView.this.mIndicatorPaddingHeight * 2.0f);
-                        if (SemExpandableListView.DEBUGGABLE_LOW) {
-                            Log.d(SemExpandableListView.TAG, "onItemDecorate : mGroupIndicatorWidth = " + SemExpandableListView.this.mGroupIndicatorWidth + ", mGroupIndicatorHeight = " + SemExpandableListView.this.mGroupIndicatorHeight);
-                            Log.d(SemExpandableListView.TAG, "onItemDecorate : paddingHeight = " + paddingHeight);
-                        }
-                        lp = new FrameLayout.LayoutParams(SemExpandableListView.this.mGroupIndicatorWidth, SemExpandableListView.this.mGroupIndicatorHeight + paddingHeight);
-                    }
-                    initIndicatorImageLayoutParams(lp);
-                    indicatorImgView2.setLayoutParams(lp);
-                    frameLayout.addView(indicatorImgView2);
-                    holder2.indicatorImgView = indicatorImgView2;
-                    holder2.indicatorImgView.setContentDescription(pos.isExpanded() ? SemExpandableListView.this.mDescriptionCollapse : SemExpandableListView.this.mDescriptionExpand);
-                }
-                if (dividerHeight > 0) {
-                    View dividerView = new View(SemExpandableListView.this.mContext);
-                    dividerView.setFocusable(false);
-                    FrameLayout.LayoutParams lp3 = new FrameLayout.LayoutParams(-1, dividerHeight);
-                    lp3.gravity = 80;
-                    dividerView.setLayoutParams(lp3);
-                    Drawable dividerDrawable = SemExpandableListView.this.getDivider(pos);
-                    dividerView.setBackground(dividerDrawable);
-                    frameLayout.addView(dividerView);
-                    holder2.dividerView = dividerView;
-                    adjustDivider(holder2, isLastChild);
-                }
-                return frameLayout;
-            }
-
-            private void initIndicatorImageLayoutParams(FrameLayout.LayoutParams lp) {
-                lp.gravity = SemExpandableListView.this.mIndicatorGravity | 16;
-                lp.leftMargin = SemExpandableListView.this.mIndicatorPaddingLeft;
-                lp.rightMargin = SemExpandableListView.this.mIndicatorPaddingRight;
-            }
-
-            private void adjustDivider(DecoratedItemViewHolder holder, boolean isLastChild) {
-                if (holder.dividerView == null) {
-                    return;
-                }
-                ViewGroup.MarginLayoutParams itemViewLayoutParams = (ViewGroup.MarginLayoutParams) holder.itemView.getLayoutParams();
-                int dividerHeight = SemExpandableListView.this.mExpListDividerHeight[0];
-                int dividerVisibility = isLastChild ? 8 : 0;
-                int bottomMargin = isLastChild ? 0 : dividerHeight;
-                holder.dividerView.setVisibility(dividerVisibility);
-                itemViewLayoutParams.bottomMargin = bottomMargin;
-                if (holder.indicatorImgView != null) {
-                    FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams) holder.indicatorImgView.getLayoutParams();
-                    lp.bottomMargin = bottomMargin / 2;
-                }
-            }
-
-            @Override // android.widget.SemExpandableListConnector.ItemDecorator
-            public View unfoldDecoratedView(View convertView) {
-                if (convertView == null) {
-                    return null;
-                }
-                if (convertView.getId() == WRAPPING_VIEW_ID && (convertView instanceof FrameLayout)) {
-                    return ((FrameLayout) convertView).getChildAt(0);
-                }
-                return convertView;
-            }
-        };
-        this.mBitmapUpdateListener = new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.SemExpandableListView.9
-            @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-            public void onAnimationUpdate(ValueAnimator anim) {
-                float fraction = anim.getAnimatedFraction();
-                int ghostViewCount = SemExpandableListView.this.mGhostViews.size();
-                int ghostExpandingViewsCount = SemExpandableListView.this.mGhostExpandCollapseChildViews.size();
-                if (SemExpandableListView.this.mAnimationState == 2) {
-                    SemExpandableListView.this.mGhostViewsVisibleArea.bottom = SemExpandableListView.this.mGhostViewsVisibleArea.top + (SemExpandableListView.this.mTranslationOffset * fraction);
-                } else if (SemExpandableListView.this.mAnimationState == 3) {
-                    SemExpandableListView.this.mGhostViewsVisibleArea.top = SemExpandableListView.this.mCollapsedGroupTopStart + ((SemExpandableListView.this.mCollapsedGroupTopEnd - SemExpandableListView.this.mCollapsedGroupTopStart) * fraction);
-                    SemExpandableListView.this.mGhostViewsVisibleArea.bottom = SemExpandableListView.this.mGhostViewsVisibleArea.top + (SemExpandableListView.this.mTranslationOffset * (1.0f - fraction));
-                } else {
-                    int i = 0;
-                    if (SemExpandableListView.this.mAnimationState == 4 && SemExpandableListView.this.mExpandingRects != null) {
-                        ExpandingRect[] expandingRectArr = SemExpandableListView.this.mExpandingRects;
-                        int length = expandingRectArr.length;
-                        while (i < length) {
-                            ExpandingRect expRect = expandingRectArr[i];
-                            if (expRect != null) {
-                                expRect.update(fraction);
+                            if (SemExpandableListView.this.mChildIndicatorRight != -1) {
+                                indicatorRight = SemExpandableListView.this.mChildIndicatorRight;
+                            } else {
+                                indicatorRight = SemExpandableListView.this.mIndicatorRight;
                             }
-                            i++;
+                        } else {
+                            indicatorLeft = SemExpandableListView.this.mIndicatorLeft;
+                            indicatorRight = SemExpandableListView.this.mIndicatorRight;
                         }
-                    } else if (SemExpandableListView.this.mAnimationState == 5 && SemExpandableListView.this.mCollapsingRects != null) {
-                        CollapsingRect[] collapsingRectArr = SemExpandableListView.this.mCollapsingRects;
-                        int length2 = collapsingRectArr.length;
-                        while (i < length2) {
-                            CollapsingRect collapsingRect = collapsingRectArr[i];
-                            if (collapsingRect != null) {
-                                collapsingRect.update(fraction);
+                        if (!isLayoutRtl) {
+                            indicatorLeft2 =
+                                    indicatorLeft + SemExpandableListView.this.mPaddingLeft;
+                            indicatorRight2 =
+                                    indicatorRight + SemExpandableListView.this.mPaddingLeft;
+                        } else {
+                            int temp = indicatorLeft;
+                            int indicatorLeft3 = width - indicatorRight;
+                            int indicatorRight3 = width - temp;
+                            indicatorLeft2 =
+                                    indicatorLeft3 - SemExpandableListView.this.mPaddingRight;
+                            indicatorRight2 =
+                                    indicatorRight3 - SemExpandableListView.this.mPaddingRight;
+                        }
+                        if (indicatorLeft2 != indicatorRight2
+                                && (indicator = SemExpandableListView.this.getIndicator(pos))
+                                        != null) {
+                            IndicatorImageView indicatorImgView2 =
+                                    SemExpandableListView.this
+                                    .new IndicatorImageView(SemExpandableListView.this.mContext);
+                            indicatorImgView2.setIndicatorPos(pos.position);
+                            indicatorImgView2.setImageDrawable(
+                                    indicator.getConstantState().newDrawable());
+                            indicatorImgView2.refreshDrawableState();
+                            if (SemExpandableListView.this.mIndicatorAnimationType == 1) {
+                                lp = new FrameLayout.LayoutParams(-2, -2);
+                            } else {
+                                int paddingHeight =
+                                        Math.round(
+                                                SemExpandableListView.this.mIndicatorPaddingHeight
+                                                        * 2.0f);
+                                if (SemExpandableListView.DEBUGGABLE_LOW) {
+                                    Log.d(
+                                            SemExpandableListView.TAG,
+                                            "onItemDecorate : mGroupIndicatorWidth = "
+                                                    + SemExpandableListView.this
+                                                            .mGroupIndicatorWidth
+                                                    + ", mGroupIndicatorHeight = "
+                                                    + SemExpandableListView.this
+                                                            .mGroupIndicatorHeight);
+                                    Log.d(
+                                            SemExpandableListView.TAG,
+                                            "onItemDecorate : paddingHeight = " + paddingHeight);
+                                }
+                                lp =
+                                        new FrameLayout.LayoutParams(
+                                                SemExpandableListView.this.mGroupIndicatorWidth,
+                                                SemExpandableListView.this.mGroupIndicatorHeight
+                                                        + paddingHeight);
                             }
-                            i++;
+                            initIndicatorImageLayoutParams(lp);
+                            indicatorImgView2.setLayoutParams(lp);
+                            frameLayout.addView(indicatorImgView2);
+                            holder2.indicatorImgView = indicatorImgView2;
+                            holder2.indicatorImgView.setContentDescription(
+                                    pos.isExpanded()
+                                            ? SemExpandableListView.this.mDescriptionCollapse
+                                            : SemExpandableListView.this.mDescriptionExpand);
+                        }
+                        if (dividerHeight > 0) {
+                            View dividerView = new View(SemExpandableListView.this.mContext);
+                            dividerView.setFocusable(false);
+                            FrameLayout.LayoutParams lp3 =
+                                    new FrameLayout.LayoutParams(-1, dividerHeight);
+                            lp3.gravity = 80;
+                            dividerView.setLayoutParams(lp3);
+                            Drawable dividerDrawable = SemExpandableListView.this.getDivider(pos);
+                            dividerView.setBackground(dividerDrawable);
+                            frameLayout.addView(dividerView);
+                            holder2.dividerView = dividerView;
+                            adjustDivider(holder2, isLastChild);
+                        }
+                        return frameLayout;
+                    }
+
+                    private void initIndicatorImageLayoutParams(FrameLayout.LayoutParams lp) {
+                        lp.gravity = SemExpandableListView.this.mIndicatorGravity | 16;
+                        lp.leftMargin = SemExpandableListView.this.mIndicatorPaddingLeft;
+                        lp.rightMargin = SemExpandableListView.this.mIndicatorPaddingRight;
+                    }
+
+                    private void adjustDivider(
+                            DecoratedItemViewHolder holder, boolean isLastChild) {
+                        if (holder.dividerView == null) {
+                            return;
+                        }
+                        ViewGroup.MarginLayoutParams itemViewLayoutParams =
+                                (ViewGroup.MarginLayoutParams) holder.itemView.getLayoutParams();
+                        int dividerHeight = SemExpandableListView.this.mExpListDividerHeight[0];
+                        int dividerVisibility = isLastChild ? 8 : 0;
+                        int bottomMargin = isLastChild ? 0 : dividerHeight;
+                        holder.dividerView.setVisibility(dividerVisibility);
+                        itemViewLayoutParams.bottomMargin = bottomMargin;
+                        if (holder.indicatorImgView != null) {
+                            FrameLayout.LayoutParams lp =
+                                    (FrameLayout.LayoutParams)
+                                            holder.indicatorImgView.getLayoutParams();
+                            lp.bottomMargin = bottomMargin / 2;
                         }
                     }
-                }
-                if (ghostViewCount + ghostExpandingViewsCount == 0) {
-                    return;
-                }
-                SemExpandableListView.this.mBitmapUpdateBounds.setEmpty();
-                for (int i2 = 0; i2 < ghostViewCount; i2++) {
-                    ViewInfo vInfo = (ViewInfo) SemExpandableListView.this.mGhostViews.get(i2);
-                    SemExpandableListView.this.mBitmapUpdateBounds.union(vInfo.snapshot.getBounds());
-                }
-                for (int i3 = 0; i3 < ghostExpandingViewsCount; i3++) {
-                    ViewInfo vInfo2 = (ViewInfo) SemExpandableListView.this.mGhostExpandCollapseChildViews.get(i3);
-                    SemExpandableListView.this.mBitmapUpdateBounds.union(vInfo2.snapshot.getBounds());
-                }
-                SemExpandableListView.this.invalidate(SemExpandableListView.this.mBitmapUpdateBounds);
-            }
-        };
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ExpandableListView, defStyleAttr, defStyleRes);
+
+                    @Override // android.widget.SemExpandableListConnector.ItemDecorator
+                    public View unfoldDecoratedView(View convertView) {
+                        if (convertView == null) {
+                            return null;
+                        }
+                        if (convertView.getId() == WRAPPING_VIEW_ID
+                                && (convertView instanceof FrameLayout)) {
+                            return ((FrameLayout) convertView).getChildAt(0);
+                        }
+                        return convertView;
+                    }
+                };
+        this.mBitmapUpdateListener =
+                new ValueAnimator
+                        .AnimatorUpdateListener() { // from class:
+                                                    // android.widget.SemExpandableListView.9
+                    @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                    public void onAnimationUpdate(ValueAnimator anim) {
+                        float fraction = anim.getAnimatedFraction();
+                        int ghostViewCount = SemExpandableListView.this.mGhostViews.size();
+                        int ghostExpandingViewsCount =
+                                SemExpandableListView.this.mGhostExpandCollapseChildViews.size();
+                        if (SemExpandableListView.this.mAnimationState == 2) {
+                            SemExpandableListView.this.mGhostViewsVisibleArea.bottom =
+                                    SemExpandableListView.this.mGhostViewsVisibleArea.top
+                                            + (SemExpandableListView.this.mTranslationOffset
+                                                    * fraction);
+                        } else if (SemExpandableListView.this.mAnimationState == 3) {
+                            SemExpandableListView.this.mGhostViewsVisibleArea.top =
+                                    SemExpandableListView.this.mCollapsedGroupTopStart
+                                            + ((SemExpandableListView.this.mCollapsedGroupTopEnd
+                                                            - SemExpandableListView.this
+                                                                    .mCollapsedGroupTopStart)
+                                                    * fraction);
+                            SemExpandableListView.this.mGhostViewsVisibleArea.bottom =
+                                    SemExpandableListView.this.mGhostViewsVisibleArea.top
+                                            + (SemExpandableListView.this.mTranslationOffset
+                                                    * (1.0f - fraction));
+                        } else {
+                            int i = 0;
+                            if (SemExpandableListView.this.mAnimationState == 4
+                                    && SemExpandableListView.this.mExpandingRects != null) {
+                                ExpandingRect[] expandingRectArr =
+                                        SemExpandableListView.this.mExpandingRects;
+                                int length = expandingRectArr.length;
+                                while (i < length) {
+                                    ExpandingRect expRect = expandingRectArr[i];
+                                    if (expRect != null) {
+                                        expRect.update(fraction);
+                                    }
+                                    i++;
+                                }
+                            } else if (SemExpandableListView.this.mAnimationState == 5
+                                    && SemExpandableListView.this.mCollapsingRects != null) {
+                                CollapsingRect[] collapsingRectArr =
+                                        SemExpandableListView.this.mCollapsingRects;
+                                int length2 = collapsingRectArr.length;
+                                while (i < length2) {
+                                    CollapsingRect collapsingRect = collapsingRectArr[i];
+                                    if (collapsingRect != null) {
+                                        collapsingRect.update(fraction);
+                                    }
+                                    i++;
+                                }
+                            }
+                        }
+                        if (ghostViewCount + ghostExpandingViewsCount == 0) {
+                            return;
+                        }
+                        SemExpandableListView.this.mBitmapUpdateBounds.setEmpty();
+                        for (int i2 = 0; i2 < ghostViewCount; i2++) {
+                            ViewInfo vInfo =
+                                    (ViewInfo) SemExpandableListView.this.mGhostViews.get(i2);
+                            SemExpandableListView.this.mBitmapUpdateBounds.union(
+                                    vInfo.snapshot.getBounds());
+                        }
+                        for (int i3 = 0; i3 < ghostExpandingViewsCount; i3++) {
+                            ViewInfo vInfo2 =
+                                    (ViewInfo)
+                                            SemExpandableListView.this
+                                                    .mGhostExpandCollapseChildViews.get(i3);
+                            SemExpandableListView.this.mBitmapUpdateBounds.union(
+                                    vInfo2.snapshot.getBounds());
+                        }
+                        SemExpandableListView.this.invalidate(
+                                SemExpandableListView.this.mBitmapUpdateBounds);
+                    }
+                };
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.ExpandableListView, defStyleAttr, defStyleRes);
         this.mGroupIndicator = a.getDrawable(0);
         this.mChildIndicator = a.getDrawable(1);
         this.mIndicatorLeft = a.getDimensionPixelSize(2, 0);
@@ -406,17 +509,43 @@ public class SemExpandableListView extends ListView {
         if (this.mExpListDividerHeight == null) {
             this.mExpListDividerHeight = new int[1];
         }
-        this.mDescriptionExpand = this.mContext.getResources().getString(R.string.expandablelist_indicator_description, this.mContext.getResources().getString(R.string.expandablelist_expand));
-        this.mDescriptionCollapse = this.mContext.getResources().getString(R.string.expandablelist_indicator_description, this.mContext.getResources().getString(R.string.expandablelist_collapse));
-        this.mGroupIndicatorWidth = (int) this.mContext.getResources().getDimension(R.dimen.expandablelist_indicator_width);
-        this.mGroupIndicatorHeight = (int) this.mContext.getResources().getDimension(R.dimen.expandablelist_indicator_height);
-        this.mIndicatorPaddingHeight = this.mContext.getResources().getDimension(R.dimen.expandablelist_indicator_padding_height);
+        this.mDescriptionExpand =
+                this.mContext
+                        .getResources()
+                        .getString(
+                                R.string.expandablelist_indicator_description,
+                                this.mContext
+                                        .getResources()
+                                        .getString(R.string.expandablelist_expand));
+        this.mDescriptionCollapse =
+                this.mContext
+                        .getResources()
+                        .getString(
+                                R.string.expandablelist_indicator_description,
+                                this.mContext
+                                        .getResources()
+                                        .getString(R.string.expandablelist_collapse));
+        this.mGroupIndicatorWidth =
+                (int)
+                        this.mContext
+                                .getResources()
+                                .getDimension(R.dimen.expandablelist_indicator_width);
+        this.mGroupIndicatorHeight =
+                (int)
+                        this.mContext
+                                .getResources()
+                                .getDimension(R.dimen.expandablelist_indicator_height);
+        this.mIndicatorPaddingHeight =
+                this.mContext
+                        .getResources()
+                        .getDimension(R.dimen.expandablelist_indicator_padding_height);
         this.mGroupIndicatorPaint = new Paint();
         this.mGroupIndicatorPaint.setAntiAlias(true);
         this.mGroupIndicatorPaint.setColor(this.mGroupIndicatorColor);
         this.mGroupIndicatorPaint.setAlpha(127);
         this.mGroupIndicatorPaint.setStyle(Paint.Style.STROKE);
-        int strokeSize = (int) ((this.mContext.getResources().getDisplayMetrics().density * 2.0f) + 0.5f);
+        int strokeSize =
+                (int) ((this.mContext.getResources().getDisplayMetrics().density * 2.0f) + 0.5f);
         this.mGroupIndicatorPaint.setStrokeWidth(strokeSize);
     }
 
@@ -494,7 +623,8 @@ public class SemExpandableListView extends ListView {
         }
     }
 
-    @Override // android.widget.ListView, android.widget.AbsListView, android.view.ViewGroup, android.view.View
+    @Override // android.widget.ListView, android.widget.AbsListView, android.view.ViewGroup,
+              // android.view.View
     protected void dispatchDraw(Canvas canvas) {
         if (this.mAnimationState == 3 || this.mAnimationState == 5) {
             drawGhostViews(canvas);
@@ -567,12 +697,24 @@ public class SemExpandableListView extends ListView {
         if (positionMetadata.position.type == 2) {
             drawable = this.mGroupIndicator;
             if (drawable != null && drawable.isStateful()) {
-                drawable.setState(GROUP_STATE_SETS[(positionMetadata.groupMetadata == null || positionMetadata.groupMetadata.lastChildFlPos == positionMetadata.groupMetadata.flPos ? 2 : 0) | (positionMetadata.isExpanded() ? 1 : 0)]);
+                drawable.setState(
+                        GROUP_STATE_SETS[
+                                (positionMetadata.groupMetadata == null
+                                                        || positionMetadata
+                                                                        .groupMetadata
+                                                                        .lastChildFlPos
+                                                                == positionMetadata
+                                                                        .groupMetadata
+                                                                        .flPos
+                                                ? 2
+                                                : 0)
+                                        | (positionMetadata.isExpanded() ? 1 : 0)]);
             }
         } else {
             drawable = this.mChildIndicator;
             if (drawable != null && drawable.isStateful()) {
-                if (positionMetadata.position.flatListPos == positionMetadata.groupMetadata.lastChildFlPos) {
+                if (positionMetadata.position.flatListPos
+                        == positionMetadata.groupMetadata.lastChildFlPos) {
                     iArr = CHILD_LAST_STATE_SET;
                 } else {
                     iArr = EMPTY_STATE_SET;
@@ -592,8 +734,11 @@ public class SemExpandableListView extends ListView {
         int flatListPosition = this.mFirstPosition + childIndex;
         if (flatListPosition >= 0) {
             int adjustedPosition = getFlatPositionForConnector(flatListPosition);
-            SemExpandableListConnector.PositionMetadata pos = this.mConnector.getUnflattenedPos(adjustedPosition);
-            if (pos.position.type == 1 || (pos.isExpanded() && pos.groupMetadata.lastChildFlPos != pos.groupMetadata.flPos)) {
+            SemExpandableListConnector.PositionMetadata pos =
+                    this.mConnector.getUnflattenedPos(adjustedPosition);
+            if (pos.position.type == 1
+                    || (pos.isExpanded()
+                            && pos.groupMetadata.lastChildFlPos != pos.groupMetadata.flPos)) {
                 Drawable divider = this.mChildDivider;
                 divider.setBounds(bounds);
                 divider.draw(canvas);
@@ -615,7 +760,9 @@ public class SemExpandableListView extends ListView {
 
     @Override // android.widget.ListView, android.widget.AbsListView, android.widget.AdapterView
     public void setAdapter(ListAdapter adapter) {
-        throw new RuntimeException("For ExpandableListView, use setAdapter(ExpandableListAdapter) instead of setAdapter(ListAdapter)");
+        throw new RuntimeException(
+                "For ExpandableListView, use setAdapter(ExpandableListAdapter) instead of"
+                    + " setAdapter(ListAdapter)");
     }
 
     @Override // android.widget.ListView, android.widget.AdapterView
@@ -671,10 +818,13 @@ public class SemExpandableListView extends ListView {
 
     boolean handleItemClick(View view, int position, long id) {
         boolean returnValue;
-        SemExpandableListConnector.PositionMetadata posMetadata = this.mConnector.getUnflattenedPos(position);
+        SemExpandableListConnector.PositionMetadata posMetadata =
+                this.mConnector.getUnflattenedPos(position);
         long id2 = getChildOrGroupId(posMetadata.position);
         if (posMetadata.position.type == 2) {
-            if (this.mOnGroupClickListener != null && this.mOnGroupClickListener.onGroupClick(this, view, posMetadata.position.groupPos, id2)) {
+            if (this.mOnGroupClickListener != null
+                    && this.mOnGroupClickListener.onGroupClick(
+                            this, view, posMetadata.position.groupPos, id2)) {
                 playSoundEffect(0);
                 posMetadata.recycle();
                 return true;
@@ -684,24 +834,27 @@ public class SemExpandableListView extends ListView {
             }
             final int groupPos = posMetadata.position.groupPos;
             if (posMetadata.isExpanded()) {
-                Runnable animationEndRunnable = new Runnable() { // from class: android.widget.SemExpandableListView.2
-                    @Override // java.lang.Runnable
-                    public void run() {
-                        if (SemExpandableListView.this.mOnGroupCollapseListener != null) {
-                            SemExpandableListView.this.mOnGroupCollapseListener.onGroupCollapse(groupPos);
-                        }
-                    }
-                };
+                Runnable animationEndRunnable =
+                        new Runnable() { // from class: android.widget.SemExpandableListView.2
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                if (SemExpandableListView.this.mOnGroupCollapseListener != null) {
+                                    SemExpandableListView.this.mOnGroupCollapseListener
+                                            .onGroupCollapse(groupPos);
+                                }
+                            }
+                        };
                 if (this.mAnimationEnabled) {
                     startCollapseAnimation(groupPos, animationEndRunnable);
                 }
                 this.mConnector.collapseGroup(posMetadata);
-                post(new Runnable() { // from class: android.widget.SemExpandableListView.3
-                    @Override // java.lang.Runnable
-                    public void run() {
-                        SemExpandableListView.this.requestLayout();
-                    }
-                });
+                post(
+                        new Runnable() { // from class: android.widget.SemExpandableListView.3
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                SemExpandableListView.this.requestLayout();
+                            }
+                        });
                 playSoundEffect(0);
                 if (!this.mAnimationEnabled) {
                     animationEndRunnable.run();
@@ -709,14 +862,16 @@ public class SemExpandableListView extends ListView {
             } else {
                 this.mConnector.expandGroup(posMetadata);
                 playSoundEffect(0);
-                Runnable animationEndRunnable2 = new Runnable() { // from class: android.widget.SemExpandableListView.4
-                    @Override // java.lang.Runnable
-                    public void run() {
-                        if (SemExpandableListView.this.mOnGroupExpandListener != null) {
-                            SemExpandableListView.this.mOnGroupExpandListener.onGroupExpand(groupPos);
-                        }
-                    }
-                };
+                Runnable animationEndRunnable2 =
+                        new Runnable() { // from class: android.widget.SemExpandableListView.4
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                if (SemExpandableListView.this.mOnGroupExpandListener != null) {
+                                    SemExpandableListView.this.mOnGroupExpandListener.onGroupExpand(
+                                            groupPos);
+                                }
+                            }
+                        };
                 if (this.mAnimationEnabled) {
                     startExpandAnimation(groupPos, animationEndRunnable2);
                 } else {
@@ -727,7 +882,12 @@ public class SemExpandableListView extends ListView {
         } else {
             if (this.mOnChildClickListener != null) {
                 playSoundEffect(0);
-                return this.mOnChildClickListener.onChildClick(this, view, posMetadata.position.groupPos, posMetadata.position.childPos, id2);
+                return this.mOnChildClickListener.onChildClick(
+                        this,
+                        view,
+                        posMetadata.position.groupPos,
+                        posMetadata.position.childPos,
+                        id2);
             }
             returnValue = false;
         }
@@ -737,125 +897,196 @@ public class SemExpandableListView extends ListView {
 
     private void startExpandAnimation(final int groupPos, final Runnable animationEndRunnable) {
         this.mBlockTouchEvent = true;
-        getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() { // from class: android.widget.SemExpandableListView.5
-            @Override // android.view.ViewTreeObserver.OnPreDrawListener
-            public boolean onPreDraw() {
-                long nextExpGroupPackedPosition;
-                boolean z;
-                SemExpandableListView.this.getViewTreeObserver().removeOnPreDrawListener(this);
-                int childCount = SemExpandableListView.this.getChildCount();
-                if (childCount == 0) {
-                    SemExpandableListView.this.resetExpandAnimationState();
-                    animationEndRunnable.run();
-                    return true;
-                }
-                long expGroupPackedPosition = SemExpandableListView.getPackedPositionForGroup(groupPos);
-                long nextExpGroupPackedPosition2 = SemExpandableListView.getPackedPositionForGroup(groupPos + 1);
-                int expGroupFlatPos = SemExpandableListView.this.getFlatListPosition(expGroupPackedPosition);
-                int nextExpGroupFlatPos = SemExpandableListView.this.getFlatListPosition(nextExpGroupPackedPosition2);
-                int firstVisiblePos = SemExpandableListView.this.getFirstVisiblePosition();
-                View expandedGroup = SemExpandableListView.this.getChildAt(expGroupFlatPos - firstVisiblePos);
-                if (expandedGroup == null) {
-                    Log.e(SemExpandableListView.TAG, "startExpandAnimation() groupPos=" + groupPos + ", firstPos=" + firstVisiblePos + ", expGroupFlatPos=" + expGroupFlatPos);
-                    SemExpandableListView.this.resetExpandAnimationState();
-                    animationEndRunnable.run();
-                    return true;
-                }
-                View nextExpandedGroup = SemExpandableListView.this.getChildAt(nextExpGroupFlatPos - firstVisiblePos);
-                if (nextExpandedGroup == null) {
-                    int listBottom = Math.min(SemExpandableListView.this.getHeight(), SemExpandableListView.this.getChildAt(SemExpandableListView.this.getChildCount() - 1).getBottom());
-                    SemExpandableListView.this.mTranslationOffset = listBottom - expandedGroup.getBottom();
-                } else {
-                    SemExpandableListView.this.mTranslationOffset = nextExpandedGroup.getTop() - expandedGroup.getBottom();
-                }
-                SemExpandableListView.this.mGhostViewsVisibleArea.left = 0.0f;
-                SemExpandableListView.this.mGhostViewsVisibleArea.right = SemExpandableListView.this.getWidth();
-                SemExpandableListView.this.mGhostViewsVisibleArea.top = expandedGroup.getBottom();
-                SemExpandableListView.this.mGhostViewsVisibleArea.bottom = SemExpandableListView.this.mGhostViewsVisibleArea.top;
-                int animationDuration = SemExpandableListView.this.getExpandCollapseDuration();
-                ArrayList<Animator> animations = new ArrayList<>();
-                int i = 0;
-                while (i < childCount) {
-                    int position = i + firstVisiblePos;
-                    View child = SemExpandableListView.this.getChildAt(i);
-                    int childCount2 = childCount;
-                    long expGroupPackedPosition2 = expGroupPackedPosition;
-                    long packedPos = SemExpandableListView.this.getExpandableListPosition(position);
-                    ViewInfo oldViewInfo = (ViewInfo) SemExpandableListView.this.mViewSnapshots.get(packedPos);
-                    if (oldViewInfo != null) {
-                        nextExpGroupPackedPosition = nextExpGroupPackedPosition2;
-                        SemExpandableListView.this.mViewSnapshots.remove(packedPos);
-                        if (child.getTop() == oldViewInfo.top) {
-                            z = false;
-                        } else {
-                            child.setTranslationY(-SemExpandableListView.this.mTranslationOffset);
-                            ObjectAnimator translateAnim = ObjectAnimator.ofFloat(child, View.TRANSLATION_Y, 0.0f);
-                            animations.add(translateAnim);
-                            z = false;
-                        }
-                    } else {
-                        nextExpGroupPackedPosition = nextExpGroupPackedPosition2;
-                        if (child.getWidth() == 0) {
-                            z = false;
-                        } else if (child.getHeight() == 0) {
-                            z = false;
-                        } else {
-                            int adjustedPosition = SemExpandableListView.this.getFlatPositionForConnector(position);
-                            SemExpandableListConnector.PositionMetadata pos = SemExpandableListView.this.mConnector.getUnflattenedPos(adjustedPosition);
-                            if (pos.isExpanded()) {
-                                int i2 = pos.position.groupPos;
-                                int adjustedPosition2 = groupPos;
-                                if (i2 != adjustedPosition2 || pos.position.childPos == -1) {
-                                    z = false;
-                                } else {
-                                    SemExpandableListView.this.mGhostExpandCollapseChildViews.add(new ViewInfo(child));
-                                    z = false;
-                                    child.setAlpha(0.0f);
+        getViewTreeObserver()
+                .addOnPreDrawListener(
+                        new ViewTreeObserver
+                                .OnPreDrawListener() { // from class:
+                                                       // android.widget.SemExpandableListView.5
+                            @Override // android.view.ViewTreeObserver.OnPreDrawListener
+                            public boolean onPreDraw() {
+                                long nextExpGroupPackedPosition;
+                                boolean z;
+                                SemExpandableListView.this
+                                        .getViewTreeObserver()
+                                        .removeOnPreDrawListener(this);
+                                int childCount = SemExpandableListView.this.getChildCount();
+                                if (childCount == 0) {
+                                    SemExpandableListView.this.resetExpandAnimationState();
+                                    animationEndRunnable.run();
+                                    return true;
                                 }
-                            } else {
-                                z = false;
-                            }
-                            pos.recycle();
-                        }
-                    }
-                    i++;
-                    childCount = childCount2;
-                    expGroupPackedPosition = expGroupPackedPosition2;
-                    nextExpGroupPackedPosition2 = nextExpGroupPackedPosition;
-                }
-                SemExpandableListView.this.startIndicatorAnimation(expandedGroup, true, animationDuration);
-                int viewSnapshotsCount = SemExpandableListView.this.mViewSnapshots.size();
-                for (int i3 = 0; i3 < viewSnapshotsCount; i3++) {
-                    ViewInfo viewInfo = (ViewInfo) SemExpandableListView.this.mViewSnapshots.valueAt(i3);
-                    ObjectAnimator animBounds = SemExpandableListView.this.createViewSnapshotAnimation(SemExpandableListView.this.mTranslationOffset, viewInfo);
-                    animations.add(animBounds);
-                    SemExpandableListView.this.mGhostViews.add(viewInfo);
-                }
-                ValueAnimator anim = ValueAnimator.ofFloat(0.0f, 1.0f);
-                anim.addUpdateListener(SemExpandableListView.this.mBitmapUpdateListener);
-                animations.add(anim);
-                AnimatorSet set = new AnimatorSet();
-                set.playTogether(animations);
-                set.setDuration(animationDuration);
-                set.setInterpolator(SemExpandableListView.EXPAND_COLLAPSE_INTERPOLATOR);
-                set.addListener(new AnimatorListenerAdapter() { // from class: android.widget.SemExpandableListView.5.1
-                    @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                    public void onAnimationStart(Animator animation) {
-                        SemExpandableListView.this.mAnimationState = 2;
-                    }
+                                long expGroupPackedPosition =
+                                        SemExpandableListView.getPackedPositionForGroup(groupPos);
+                                long nextExpGroupPackedPosition2 =
+                                        SemExpandableListView.getPackedPositionForGroup(
+                                                groupPos + 1);
+                                int expGroupFlatPos =
+                                        SemExpandableListView.this.getFlatListPosition(
+                                                expGroupPackedPosition);
+                                int nextExpGroupFlatPos =
+                                        SemExpandableListView.this.getFlatListPosition(
+                                                nextExpGroupPackedPosition2);
+                                int firstVisiblePos =
+                                        SemExpandableListView.this.getFirstVisiblePosition();
+                                View expandedGroup =
+                                        SemExpandableListView.this.getChildAt(
+                                                expGroupFlatPos - firstVisiblePos);
+                                if (expandedGroup == null) {
+                                    Log.e(
+                                            SemExpandableListView.TAG,
+                                            "startExpandAnimation() groupPos="
+                                                    + groupPos
+                                                    + ", firstPos="
+                                                    + firstVisiblePos
+                                                    + ", expGroupFlatPos="
+                                                    + expGroupFlatPos);
+                                    SemExpandableListView.this.resetExpandAnimationState();
+                                    animationEndRunnable.run();
+                                    return true;
+                                }
+                                View nextExpandedGroup =
+                                        SemExpandableListView.this.getChildAt(
+                                                nextExpGroupFlatPos - firstVisiblePos);
+                                if (nextExpandedGroup == null) {
+                                    int listBottom =
+                                            Math.min(
+                                                    SemExpandableListView.this.getHeight(),
+                                                    SemExpandableListView.this
+                                                            .getChildAt(
+                                                                    SemExpandableListView.this
+                                                                                    .getChildCount()
+                                                                            - 1)
+                                                            .getBottom());
+                                    SemExpandableListView.this.mTranslationOffset =
+                                            listBottom - expandedGroup.getBottom();
+                                } else {
+                                    SemExpandableListView.this.mTranslationOffset =
+                                            nextExpandedGroup.getTop() - expandedGroup.getBottom();
+                                }
+                                SemExpandableListView.this.mGhostViewsVisibleArea.left = 0.0f;
+                                SemExpandableListView.this.mGhostViewsVisibleArea.right =
+                                        SemExpandableListView.this.getWidth();
+                                SemExpandableListView.this.mGhostViewsVisibleArea.top =
+                                        expandedGroup.getBottom();
+                                SemExpandableListView.this.mGhostViewsVisibleArea.bottom =
+                                        SemExpandableListView.this.mGhostViewsVisibleArea.top;
+                                int animationDuration =
+                                        SemExpandableListView.this.getExpandCollapseDuration();
+                                ArrayList<Animator> animations = new ArrayList<>();
+                                int i = 0;
+                                while (i < childCount) {
+                                    int position = i + firstVisiblePos;
+                                    View child = SemExpandableListView.this.getChildAt(i);
+                                    int childCount2 = childCount;
+                                    long expGroupPackedPosition2 = expGroupPackedPosition;
+                                    long packedPos =
+                                            SemExpandableListView.this.getExpandableListPosition(
+                                                    position);
+                                    ViewInfo oldViewInfo =
+                                            (ViewInfo)
+                                                    SemExpandableListView.this.mViewSnapshots.get(
+                                                            packedPos);
+                                    if (oldViewInfo != null) {
+                                        nextExpGroupPackedPosition = nextExpGroupPackedPosition2;
+                                        SemExpandableListView.this.mViewSnapshots.remove(packedPos);
+                                        if (child.getTop() == oldViewInfo.top) {
+                                            z = false;
+                                        } else {
+                                            child.setTranslationY(
+                                                    -SemExpandableListView.this.mTranslationOffset);
+                                            ObjectAnimator translateAnim =
+                                                    ObjectAnimator.ofFloat(
+                                                            child, View.TRANSLATION_Y, 0.0f);
+                                            animations.add(translateAnim);
+                                            z = false;
+                                        }
+                                    } else {
+                                        nextExpGroupPackedPosition = nextExpGroupPackedPosition2;
+                                        if (child.getWidth() == 0) {
+                                            z = false;
+                                        } else if (child.getHeight() == 0) {
+                                            z = false;
+                                        } else {
+                                            int adjustedPosition =
+                                                    SemExpandableListView.this
+                                                            .getFlatPositionForConnector(position);
+                                            SemExpandableListConnector.PositionMetadata pos =
+                                                    SemExpandableListView.this.mConnector
+                                                            .getUnflattenedPos(adjustedPosition);
+                                            if (pos.isExpanded()) {
+                                                int i2 = pos.position.groupPos;
+                                                int adjustedPosition2 = groupPos;
+                                                if (i2 != adjustedPosition2
+                                                        || pos.position.childPos == -1) {
+                                                    z = false;
+                                                } else {
+                                                    SemExpandableListView.this
+                                                            .mGhostExpandCollapseChildViews.add(
+                                                            new ViewInfo(child));
+                                                    z = false;
+                                                    child.setAlpha(0.0f);
+                                                }
+                                            } else {
+                                                z = false;
+                                            }
+                                            pos.recycle();
+                                        }
+                                    }
+                                    i++;
+                                    childCount = childCount2;
+                                    expGroupPackedPosition = expGroupPackedPosition2;
+                                    nextExpGroupPackedPosition2 = nextExpGroupPackedPosition;
+                                }
+                                SemExpandableListView.this.startIndicatorAnimation(
+                                        expandedGroup, true, animationDuration);
+                                int viewSnapshotsCount =
+                                        SemExpandableListView.this.mViewSnapshots.size();
+                                for (int i3 = 0; i3 < viewSnapshotsCount; i3++) {
+                                    ViewInfo viewInfo =
+                                            (ViewInfo)
+                                                    SemExpandableListView.this.mViewSnapshots
+                                                            .valueAt(i3);
+                                    ObjectAnimator animBounds =
+                                            SemExpandableListView.this.createViewSnapshotAnimation(
+                                                    SemExpandableListView.this.mTranslationOffset,
+                                                    viewInfo);
+                                    animations.add(animBounds);
+                                    SemExpandableListView.this.mGhostViews.add(viewInfo);
+                                }
+                                ValueAnimator anim = ValueAnimator.ofFloat(0.0f, 1.0f);
+                                anim.addUpdateListener(
+                                        SemExpandableListView.this.mBitmapUpdateListener);
+                                animations.add(anim);
+                                AnimatorSet set = new AnimatorSet();
+                                set.playTogether(animations);
+                                set.setDuration(animationDuration);
+                                set.setInterpolator(
+                                        SemExpandableListView.EXPAND_COLLAPSE_INTERPOLATOR);
+                                set.addListener(
+                                        new AnimatorListenerAdapter() { // from class:
+                                                                        // android.widget.SemExpandableListView.5.1
+                                            @Override // android.animation.AnimatorListenerAdapter,
+                                                      // android.animation.Animator.AnimatorListener
+                                            public void onAnimationStart(Animator animation) {
+                                                SemExpandableListView.this.mAnimationState = 2;
+                                            }
 
-                    @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                    public void onAnimationEnd(Animator animation) {
-                        Log.d(SemExpandableListView.TAG, "expand animation finished");
-                        animationEndRunnable.run();
-                        SemExpandableListView.this.resetExpandAnimationState();
-                    }
-                });
-                set.start();
-                SemExpandableListView.this.mViewSnapshots.clear();
-                return false;
-            }
-        });
+                                            @Override // android.animation.AnimatorListenerAdapter,
+                                                      // android.animation.Animator.AnimatorListener
+                                            public void onAnimationEnd(Animator animation) {
+                                                Log.d(
+                                                        SemExpandableListView.TAG,
+                                                        "expand animation finished");
+                                                animationEndRunnable.run();
+                                                SemExpandableListView.this
+                                                        .resetExpandAnimationState();
+                                            }
+                                        });
+                                set.start();
+                                SemExpandableListView.this.mViewSnapshots.clear();
+                                return false;
+                            }
+                        });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -873,24 +1104,30 @@ public class SemExpandableListView extends ListView {
         }
     }
 
-    private void startExpandAllAnimation(final boolean[] expanded, final Runnable animationEndRunnable) {
+    private void startExpandAllAnimation(
+            final boolean[] expanded, final Runnable animationEndRunnable) {
         this.mBlockTouchEvent = true;
-        getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() { // from class: android.widget.SemExpandableListView.6
-            /* JADX WARN: Removed duplicated region for block: B:24:0x00f4  */
-            /* JADX WARN: Removed duplicated region for block: B:43:0x01bb  */
-            @Override // android.view.ViewTreeObserver.OnPreDrawListener
-            /*
-                Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
-            */
-            public boolean onPreDraw() {
-                /*
-                    Method dump skipped, instructions count: 668
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: android.widget.SemExpandableListView.AnonymousClass6.onPreDraw():boolean");
-            }
-        });
+        getViewTreeObserver()
+                .addOnPreDrawListener(
+                        new ViewTreeObserver.OnPreDrawListener() { // from class:
+                            // android.widget.SemExpandableListView.6
+                            /* JADX WARN: Removed duplicated region for block: B:24:0x00f4  */
+                            /* JADX WARN: Removed duplicated region for block: B:43:0x01bb  */
+                            @Override // android.view.ViewTreeObserver.OnPreDrawListener
+                            /*
+                                Code decompiled incorrectly, please refer to instructions dump.
+                                To view partially-correct code enable 'Show inconsistent code' option in preferences
+                            */
+                            public boolean onPreDraw() {
+                                /*
+                                    Method dump skipped, instructions count: 668
+                                    To view this dump change 'Code comments level' option to 'DEBUG'
+                                */
+                                throw new UnsupportedOperationException(
+                                        "Method not decompiled:"
+                                            + " android.widget.SemExpandableListView.AnonymousClass6.onPreDraw():boolean");
+                            }
+                        });
     }
 
     private static class ExpandingRect {
@@ -908,7 +1145,8 @@ public class SemExpandableListView extends ListView {
             this.destinationRect.left = this.endRect.left;
             this.destinationRect.right = this.endRect.right;
             this.destinationRect.top = this.startY + ((this.endRect.top - this.startY) * fraction);
-            this.destinationRect.bottom = this.destinationRect.top + (this.endRect.height() * fraction);
+            this.destinationRect.bottom =
+                    this.destinationRect.top + (this.endRect.height() * fraction);
         }
     }
 
@@ -929,8 +1167,10 @@ public class SemExpandableListView extends ListView {
         void update(float fraction) {
             this.destinationRect.left = this.startRect.left;
             this.destinationRect.right = this.startRect.right;
-            this.destinationRect.top = this.startRect.top + ((this.finishY - this.startRect.top) * fraction);
-            this.destinationRect.bottom = this.destinationRect.top + (this.startRect.height() * (1.0f - fraction));
+            this.destinationRect.top =
+                    this.startRect.top + ((this.finishY - this.startRect.top) * fraction);
+            this.destinationRect.bottom =
+                    this.destinationRect.top + (this.startRect.height() * (1.0f - fraction));
         }
     }
 
@@ -954,7 +1194,8 @@ public class SemExpandableListView extends ListView {
         }
     }
 
-    private void startCollapseAnimation(final int groupPosBefore, final Runnable animationEndRunnable) {
+    private void startCollapseAnimation(
+            final int groupPosBefore, final Runnable animationEndRunnable) {
         long collapsedGroupPackedPosition = getPackedPositionForGroup(groupPosBefore);
         long nextCollapsedGroupPackedPosition = getPackedPositionForGroup(groupPosBefore + 1);
         final int collapsedGroupFlatPosBefore = getFlatListPosition(collapsedGroupPackedPosition);
@@ -962,7 +1203,14 @@ public class SemExpandableListView extends ListView {
         final int firstVisiblePosBefore = getFirstVisiblePosition();
         View collapsedGroupBefore = getChildAt(collapsedGroupFlatPosBefore - firstVisiblePosBefore);
         if (collapsedGroupBefore == null) {
-            Log.e(TAG, "startCollapseAnimation() BEFORE: groupPos=" + groupPosBefore + ", flatPos=" + collapsedGroupFlatPosBefore + ", firstPos=" + firstVisiblePosBefore);
+            Log.e(
+                    TAG,
+                    "startCollapseAnimation() BEFORE: groupPos="
+                            + groupPosBefore
+                            + ", flatPos="
+                            + collapsedGroupFlatPosBefore
+                            + ", firstPos="
+                            + firstVisiblePosBefore);
             resetCollapseAnimationState();
             animationEndRunnable.run();
             return;
@@ -973,7 +1221,8 @@ public class SemExpandableListView extends ListView {
             int listBottom = Math.min(getHeight(), getChildAt(getChildCount() - 1).getBottom());
             this.mTranslationOffset = listBottom - collapsedGroupBefore.getBottom();
         } else {
-            this.mTranslationOffset = nextCollapsedGroup.getTop() - collapsedGroupBefore.getBottom();
+            this.mTranslationOffset =
+                    nextCollapsedGroup.getTop() - collapsedGroupBefore.getBottom();
         }
         final int groupCountBefore = this.mAdapter.getGroupCount();
         final int listTotalChildrenCountBefore = getChildCount();
@@ -981,112 +1230,182 @@ public class SemExpandableListView extends ListView {
         this.mGhostViewsVisibleArea.right = getWidth();
         this.mCollapsedGroupTopStart = collapsedGroupBefore.getBottom();
         this.mBlockTouchEvent = true;
-        getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() { // from class: android.widget.SemExpandableListView.7
-            @Override // android.view.ViewTreeObserver.OnPreDrawListener
-            public boolean onPreDraw() {
-                int groupPosAfter;
-                int childCount;
-                int firstVisiblePosAfter;
-                int childCount2;
-                SemExpandableListView.this.getViewTreeObserver().removeOnPreDrawListener(this);
-                int childCount3 = SemExpandableListView.this.getChildCount();
-                if (childCount3 == 0) {
-                    SemExpandableListView.this.resetCollapseAnimationState();
-                    animationEndRunnable.run();
-                    return true;
-                }
-                int animationDuration = SemExpandableListView.this.getExpandCollapseDuration();
-                ArrayList<Animator> animations = new ArrayList<>();
-                int firstVisiblePosAfter2 = SemExpandableListView.this.getFirstVisiblePosition();
-                int collapsedGroupFlatPosAfter = SemExpandableListView.this.getFlatListPosition(SemExpandableListView.getPackedPositionForGroup(groupPosBefore));
-                View collapsedGroupAfter = SemExpandableListView.this.getChildAt(collapsedGroupFlatPosAfter - firstVisiblePosAfter2);
-                if (collapsedGroupAfter == null) {
-                    Log.e(SemExpandableListView.TAG, "startCollapseAnimation() BEFORE: groupPos=" + groupPosBefore + ", flatPos=" + collapsedGroupFlatPosBefore + ", groupCount=" + groupCountBefore + ", firstPos=" + firstVisiblePosBefore + ", totalListChildrenCount=" + listTotalChildrenCountBefore + "; AFTER: flatPos=" + collapsedGroupFlatPosAfter + ", groupCount=" + SemExpandableListView.this.mAdapter.getGroupCount() + ", firstPos=" + firstVisiblePosAfter2 + ", totalListChildrenCount=" + SemExpandableListView.this.getChildCount());
-                    SemExpandableListView.this.resetCollapseAnimationState();
-                    animationEndRunnable.run();
-                    return true;
-                }
-                int collapsedGroupTopAfter = collapsedGroupAfter.getTop();
-                int collapsedGroupShift = collapsedGroupTopAfter - collapsedGroupTopBefore;
-                int i = 0;
-                while (i < childCount3) {
-                    View child = SemExpandableListView.this.getChildAt(i);
-                    long packedPos = SemExpandableListView.this.getExpandableListPosition(i + firstVisiblePosAfter2);
-                    ViewInfo oldViewInfo = (ViewInfo) SemExpandableListView.this.mViewSnapshots.get(packedPos);
-                    if (oldViewInfo != null) {
-                        SemExpandableListView.this.mViewSnapshots.remove(packedPos);
-                        groupPosAfter = oldViewInfo.top - child.getTop();
-                    } else {
-                        int groupPosAfter2 = SemExpandableListView.getPackedPositionGroup(packedPos);
-                        if (groupPosAfter2 == -3) {
-                            groupPosAfter = SemExpandableListView.this.mTranslationOffset - collapsedGroupShift;
-                        } else if (groupPosAfter2 == -2) {
-                            groupPosAfter = -collapsedGroupShift;
-                        } else {
-                            int offset = groupPosBefore;
-                            if (groupPosAfter2 > offset) {
-                                groupPosAfter = SemExpandableListView.this.mTranslationOffset - collapsedGroupShift;
-                            } else {
-                                int offset2 = -collapsedGroupShift;
-                                groupPosAfter = offset2;
-                            }
-                        }
-                    }
-                    if (groupPosAfter == 0) {
-                        childCount = childCount3;
-                        firstVisiblePosAfter = firstVisiblePosAfter2;
-                        childCount2 = 1;
-                    } else {
-                        if (i + firstVisiblePosAfter2 == collapsedGroupFlatPosAfter && SemExpandableListView.this.mSelectorRect != null) {
-                            animations.add(SemExpandableListView.this.getSelectorRectAnim(groupPosAfter));
-                        }
-                        child.setTranslationY(groupPosAfter);
-                        childCount = childCount3;
-                        firstVisiblePosAfter = firstVisiblePosAfter2;
-                        childCount2 = 1;
-                        ObjectAnimator translateAnim = ObjectAnimator.ofFloat(child, View.TRANSLATION_Y, 0.0f);
-                        animations.add(translateAnim);
-                    }
-                    i++;
-                    firstVisiblePosAfter2 = firstVisiblePosAfter;
-                    childCount3 = childCount;
-                }
-                SemExpandableListView.this.startIndicatorAnimation(collapsedGroupAfter, false, animationDuration);
-                int viewSnapshotsCount = SemExpandableListView.this.mViewSnapshots.size();
-                for (int i2 = 0; i2 < viewSnapshotsCount; i2++) {
-                    ViewInfo viewInfo = (ViewInfo) SemExpandableListView.this.mViewSnapshots.valueAt(i2);
-                    ObjectAnimator animBounds = SemExpandableListView.this.createViewSnapshotAnimation(collapsedGroupShift, viewInfo);
-                    SemExpandableListView.this.mGhostViews.add(viewInfo);
-                    animations.add(animBounds);
-                }
-                if (viewSnapshotsCount > 0) {
-                    ValueAnimator anim = ValueAnimator.ofFloat(0.0f, 1.0f);
-                    anim.addUpdateListener(SemExpandableListView.this.mBitmapUpdateListener);
-                    animations.add(anim);
-                }
-                SemExpandableListView.this.mCollapsedGroupTopEnd = SemExpandableListView.this.mCollapsedGroupTopStart + collapsedGroupShift;
-                AnimatorSet set = new AnimatorSet();
-                set.playTogether(animations);
-                set.setDuration(animationDuration);
-                set.setInterpolator(SemExpandableListView.EXPAND_COLLAPSE_INTERPOLATOR);
-                set.addListener(new AnimatorListenerAdapter() { // from class: android.widget.SemExpandableListView.7.1
-                    @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                    public void onAnimationStart(Animator animation) {
-                        SemExpandableListView.this.mAnimationState = 3;
-                    }
+        getViewTreeObserver()
+                .addOnPreDrawListener(
+                        new ViewTreeObserver
+                                .OnPreDrawListener() { // from class:
+                                                       // android.widget.SemExpandableListView.7
+                            @Override // android.view.ViewTreeObserver.OnPreDrawListener
+                            public boolean onPreDraw() {
+                                int groupPosAfter;
+                                int childCount;
+                                int firstVisiblePosAfter;
+                                int childCount2;
+                                SemExpandableListView.this
+                                        .getViewTreeObserver()
+                                        .removeOnPreDrawListener(this);
+                                int childCount3 = SemExpandableListView.this.getChildCount();
+                                if (childCount3 == 0) {
+                                    SemExpandableListView.this.resetCollapseAnimationState();
+                                    animationEndRunnable.run();
+                                    return true;
+                                }
+                                int animationDuration =
+                                        SemExpandableListView.this.getExpandCollapseDuration();
+                                ArrayList<Animator> animations = new ArrayList<>();
+                                int firstVisiblePosAfter2 =
+                                        SemExpandableListView.this.getFirstVisiblePosition();
+                                int collapsedGroupFlatPosAfter =
+                                        SemExpandableListView.this.getFlatListPosition(
+                                                SemExpandableListView.getPackedPositionForGroup(
+                                                        groupPosBefore));
+                                View collapsedGroupAfter =
+                                        SemExpandableListView.this.getChildAt(
+                                                collapsedGroupFlatPosAfter - firstVisiblePosAfter2);
+                                if (collapsedGroupAfter == null) {
+                                    Log.e(
+                                            SemExpandableListView.TAG,
+                                            "startCollapseAnimation() BEFORE: groupPos="
+                                                    + groupPosBefore
+                                                    + ", flatPos="
+                                                    + collapsedGroupFlatPosBefore
+                                                    + ", groupCount="
+                                                    + groupCountBefore
+                                                    + ", firstPos="
+                                                    + firstVisiblePosBefore
+                                                    + ", totalListChildrenCount="
+                                                    + listTotalChildrenCountBefore
+                                                    + "; AFTER: flatPos="
+                                                    + collapsedGroupFlatPosAfter
+                                                    + ", groupCount="
+                                                    + SemExpandableListView.this.mAdapter
+                                                            .getGroupCount()
+                                                    + ", firstPos="
+                                                    + firstVisiblePosAfter2
+                                                    + ", totalListChildrenCount="
+                                                    + SemExpandableListView.this.getChildCount());
+                                    SemExpandableListView.this.resetCollapseAnimationState();
+                                    animationEndRunnable.run();
+                                    return true;
+                                }
+                                int collapsedGroupTopAfter = collapsedGroupAfter.getTop();
+                                int collapsedGroupShift =
+                                        collapsedGroupTopAfter - collapsedGroupTopBefore;
+                                int i = 0;
+                                while (i < childCount3) {
+                                    View child = SemExpandableListView.this.getChildAt(i);
+                                    long packedPos =
+                                            SemExpandableListView.this.getExpandableListPosition(
+                                                    i + firstVisiblePosAfter2);
+                                    ViewInfo oldViewInfo =
+                                            (ViewInfo)
+                                                    SemExpandableListView.this.mViewSnapshots.get(
+                                                            packedPos);
+                                    if (oldViewInfo != null) {
+                                        SemExpandableListView.this.mViewSnapshots.remove(packedPos);
+                                        groupPosAfter = oldViewInfo.top - child.getTop();
+                                    } else {
+                                        int groupPosAfter2 =
+                                                SemExpandableListView.getPackedPositionGroup(
+                                                        packedPos);
+                                        if (groupPosAfter2 == -3) {
+                                            groupPosAfter =
+                                                    SemExpandableListView.this.mTranslationOffset
+                                                            - collapsedGroupShift;
+                                        } else if (groupPosAfter2 == -2) {
+                                            groupPosAfter = -collapsedGroupShift;
+                                        } else {
+                                            int offset = groupPosBefore;
+                                            if (groupPosAfter2 > offset) {
+                                                groupPosAfter =
+                                                        SemExpandableListView.this
+                                                                        .mTranslationOffset
+                                                                - collapsedGroupShift;
+                                            } else {
+                                                int offset2 = -collapsedGroupShift;
+                                                groupPosAfter = offset2;
+                                            }
+                                        }
+                                    }
+                                    if (groupPosAfter == 0) {
+                                        childCount = childCount3;
+                                        firstVisiblePosAfter = firstVisiblePosAfter2;
+                                        childCount2 = 1;
+                                    } else {
+                                        if (i + firstVisiblePosAfter2 == collapsedGroupFlatPosAfter
+                                                && SemExpandableListView.this.mSelectorRect
+                                                        != null) {
+                                            animations.add(
+                                                    SemExpandableListView.this.getSelectorRectAnim(
+                                                            groupPosAfter));
+                                        }
+                                        child.setTranslationY(groupPosAfter);
+                                        childCount = childCount3;
+                                        firstVisiblePosAfter = firstVisiblePosAfter2;
+                                        childCount2 = 1;
+                                        ObjectAnimator translateAnim =
+                                                ObjectAnimator.ofFloat(
+                                                        child, View.TRANSLATION_Y, 0.0f);
+                                        animations.add(translateAnim);
+                                    }
+                                    i++;
+                                    firstVisiblePosAfter2 = firstVisiblePosAfter;
+                                    childCount3 = childCount;
+                                }
+                                SemExpandableListView.this.startIndicatorAnimation(
+                                        collapsedGroupAfter, false, animationDuration);
+                                int viewSnapshotsCount =
+                                        SemExpandableListView.this.mViewSnapshots.size();
+                                for (int i2 = 0; i2 < viewSnapshotsCount; i2++) {
+                                    ViewInfo viewInfo =
+                                            (ViewInfo)
+                                                    SemExpandableListView.this.mViewSnapshots
+                                                            .valueAt(i2);
+                                    ObjectAnimator animBounds =
+                                            SemExpandableListView.this.createViewSnapshotAnimation(
+                                                    collapsedGroupShift, viewInfo);
+                                    SemExpandableListView.this.mGhostViews.add(viewInfo);
+                                    animations.add(animBounds);
+                                }
+                                if (viewSnapshotsCount > 0) {
+                                    ValueAnimator anim = ValueAnimator.ofFloat(0.0f, 1.0f);
+                                    anim.addUpdateListener(
+                                            SemExpandableListView.this.mBitmapUpdateListener);
+                                    animations.add(anim);
+                                }
+                                SemExpandableListView.this.mCollapsedGroupTopEnd =
+                                        SemExpandableListView.this.mCollapsedGroupTopStart
+                                                + collapsedGroupShift;
+                                AnimatorSet set = new AnimatorSet();
+                                set.playTogether(animations);
+                                set.setDuration(animationDuration);
+                                set.setInterpolator(
+                                        SemExpandableListView.EXPAND_COLLAPSE_INTERPOLATOR);
+                                set.addListener(
+                                        new AnimatorListenerAdapter() { // from class:
+                                                                        // android.widget.SemExpandableListView.7.1
+                                            @Override // android.animation.AnimatorListenerAdapter,
+                                                      // android.animation.Animator.AnimatorListener
+                                            public void onAnimationStart(Animator animation) {
+                                                SemExpandableListView.this.mAnimationState = 3;
+                                            }
 
-                    @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                    public void onAnimationEnd(Animator animation) {
-                        Log.d(SemExpandableListView.TAG, "expand animation finished");
-                        animationEndRunnable.run();
-                        SemExpandableListView.this.resetCollapseAnimationState();
-                    }
-                });
-                set.start();
-                SemExpandableListView.this.mViewSnapshots.clear();
-                return false;
-            }
-        });
+                                            @Override // android.animation.AnimatorListenerAdapter,
+                                                      // android.animation.Animator.AnimatorListener
+                                            public void onAnimationEnd(Animator animation) {
+                                                Log.d(
+                                                        SemExpandableListView.TAG,
+                                                        "expand animation finished");
+                                                animationEndRunnable.run();
+                                                SemExpandableListView.this
+                                                        .resetCollapseAnimationState();
+                                            }
+                                        });
+                                set.start();
+                                SemExpandableListView.this.mViewSnapshots.clear();
+                                return false;
+                            }
+                        });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -1107,11 +1426,18 @@ public class SemExpandableListView extends ListView {
         Rect newViewBounds = new Rect(this.mSelectorRect);
         Rect oldViewBounds = new Rect(newViewBounds);
         oldViewBounds.offset(0, offset);
-        ObjectAnimator animBounds = ObjectAnimator.ofObject(this.mSelectorRect, "", SemAnimatorUtils.BOUNDS_EVALUATOR, oldViewBounds, newViewBounds);
+        ObjectAnimator animBounds =
+                ObjectAnimator.ofObject(
+                        this.mSelectorRect,
+                        "",
+                        SemAnimatorUtils.BOUNDS_EVALUATOR,
+                        oldViewBounds,
+                        newViewBounds);
         return animBounds;
     }
 
-    private void startCollapseAllAnimation(final boolean[] expanded, final Runnable animationEndRunnable) {
+    private void startCollapseAllAnimation(
+            final boolean[] expanded, final Runnable animationEndRunnable) {
         RectF startRect;
         int firstVisiblePos = getFirstVisiblePosition();
         int lastValidPos = getLastNonFooterPosition();
@@ -1133,19 +1459,32 @@ public class SemExpandableListView extends ListView {
             long groupPackedPos = getPackedPositionForGroup(i);
             int pos = getFlatListPosition(groupPackedPos);
             View groupView = getChildAt(pos);
-            groupOffsets[i] = (groupOffsets[i - 1] + groupView.getTop()) - lastGroupView2.getBottom();
+            groupOffsets[i] =
+                    (groupOffsets[i - 1] + groupView.getTop()) - lastGroupView2.getBottom();
             int pos2 = lastGroupView2.getLeft();
-            RectF startRect2 = new RectF(pos2, lastGroupView2.getBottom(), lastGroupView2.getRight(), groupView.getTop());
+            RectF startRect2 =
+                    new RectF(
+                            pos2,
+                            lastGroupView2.getBottom(),
+                            lastGroupView2.getRight(),
+                            groupView.getTop());
             this.mGhostViewsVisibleAreas[i - 1] = new RectF();
-            this.mCollapsingRects[i - 1] = new CollapsingRect(startRect2, this.mGhostViewsVisibleAreas[i - 1]);
+            this.mCollapsingRects[i - 1] =
+                    new CollapsingRect(startRect2, this.mGhostViewsVisibleAreas[i - 1]);
             lastGroupView2 = groupView;
             i++;
             firstGroupPosition = firstGroupPosition;
         }
         View lastChild = getChildAt(lastValidPos);
-        RectF startRect3 = new RectF(lastChild.getLeft(), lastGroupView2.getBottom(), lastChild.getRight(), lastChild.getBottom());
+        RectF startRect3 =
+                new RectF(
+                        lastChild.getLeft(),
+                        lastGroupView2.getBottom(),
+                        lastChild.getRight(),
+                        lastChild.getBottom());
         this.mGhostViewsVisibleAreas[lastGroupIdBefore] = new RectF();
-        this.mCollapsingRects[lastGroupIdBefore] = new CollapsingRect(startRect3, this.mGhostViewsVisibleAreas[lastGroupIdBefore]);
+        this.mCollapsingRects[lastGroupIdBefore] =
+                new CollapsingRect(startRect3, this.mGhostViewsVisibleAreas[lastGroupIdBefore]);
         final ArrayList<Animator> animations = new ArrayList<>();
         int i2 = 0;
         while (true) {
@@ -1163,7 +1502,8 @@ public class SemExpandableListView extends ListView {
                         startRect = startRect3;
                         this.mGhostExpandCollapseChildViews.add(viewInfo);
                         this.mViewSnapshots.remove(expandableListPos);
-                        ObjectAnimator animBounds = createViewSnapshotAnimation(-groupOffsets[groupId], viewInfo);
+                        ObjectAnimator animBounds =
+                                createViewSnapshotAnimation(-groupOffsets[groupId], viewInfo);
                         animations.add(animBounds);
                     }
                 }
@@ -1171,89 +1511,145 @@ public class SemExpandableListView extends ListView {
                 startRect3 = startRect;
             } else {
                 this.mBlockTouchEvent = true;
-                getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() { // from class: android.widget.SemExpandableListView.8
-                    @Override // android.view.ViewTreeObserver.OnPreDrawListener
-                    public boolean onPreDraw() {
-                        int offset;
-                        int childCount2;
-                        boolean z;
-                        SemExpandableListView.this.getViewTreeObserver().removeOnPreDrawListener(this);
-                        int childCount3 = SemExpandableListView.this.getChildCount();
-                        if (childCount3 != 0) {
-                            int previousLastGroupPos = SemExpandableListView.this.getAbsoluteFlatPosition(lastGroupIdBefore);
-                            SemExpandableListView.this.mTranslationOffset = lastPositionBottomBefore - SemExpandableListView.this.getChildAt(previousLastGroupPos).getBottom();
-                            int firstVisiblePos2 = SemExpandableListView.this.getFirstVisiblePosition();
-                            boolean allCollapsed = true;
-                            int i3 = 0;
-                            while (i3 < childCount3) {
-                                boolean isHeaderOrFooter = SemExpandableListView.this.isHeaderOrFooterPosition(i3 + firstVisiblePos2);
-                                View child = SemExpandableListView.this.getChildAt(i3);
-                                long packedPos = SemExpandableListView.this.getExpandableListPosition(i3);
-                                ViewInfo oldViewInfo = (ViewInfo) SemExpandableListView.this.mViewSnapshots.get(packedPos);
-                                if (oldViewInfo != null) {
-                                    offset = oldViewInfo.top - child.getTop();
-                                } else {
-                                    offset = SemExpandableListView.this.mTranslationOffset;
-                                }
-                                int groupId2 = SemExpandableListView.getPackedPositionGroup(packedPos);
-                                if (!isHeaderOrFooter && groupId2 <= lastGroupIdBefore) {
-                                    SemExpandableListView.this.mCollapsingRects[groupId2].setFinishY(child.getBottom());
-                                }
-                                SemExpandableListView.this.mViewSnapshots.remove(packedPos);
-                                if (!isHeaderOrFooter && groupId2 < expanded.length) {
-                                    boolean allCollapsed2 = (!expanded[groupId2]) & allCollapsed;
-                                    if (expanded[groupId2]) {
-                                        SemExpandableListView.this.startIndicatorAnimation(child, false, 700);
-                                    }
-                                    allCollapsed = allCollapsed2;
-                                }
-                                if (offset == 0) {
-                                    childCount2 = childCount3;
-                                    z = true;
-                                } else {
-                                    child.setTranslationY(offset);
-                                    childCount2 = childCount3;
-                                    z = true;
-                                    ObjectAnimator translateAnim = ObjectAnimator.ofFloat(child, View.TRANSLATION_Y, 0.0f);
-                                    animations.add(translateAnim);
-                                }
-                                i3++;
-                                childCount3 = childCount2;
-                            }
-                            Animator.AnimatorListener listener = new AnimatorListenerAdapter() { // from class: android.widget.SemExpandableListView.8.1
-                                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                                public void onAnimationStart(Animator animation) {
-                                    SemExpandableListView.this.mAnimationState = 5;
-                                }
+                getViewTreeObserver()
+                        .addOnPreDrawListener(
+                                new ViewTreeObserver
+                                        .OnPreDrawListener() { // from class:
+                                                               // android.widget.SemExpandableListView.8
+                                    @Override // android.view.ViewTreeObserver.OnPreDrawListener
+                                    public boolean onPreDraw() {
+                                        int offset;
+                                        int childCount2;
+                                        boolean z;
+                                        SemExpandableListView.this
+                                                .getViewTreeObserver()
+                                                .removeOnPreDrawListener(this);
+                                        int childCount3 =
+                                                SemExpandableListView.this.getChildCount();
+                                        if (childCount3 != 0) {
+                                            int previousLastGroupPos =
+                                                    SemExpandableListView.this
+                                                            .getAbsoluteFlatPosition(
+                                                                    lastGroupIdBefore);
+                                            SemExpandableListView.this.mTranslationOffset =
+                                                    lastPositionBottomBefore
+                                                            - SemExpandableListView.this
+                                                                    .getChildAt(
+                                                                            previousLastGroupPos)
+                                                                    .getBottom();
+                                            int firstVisiblePos2 =
+                                                    SemExpandableListView.this
+                                                            .getFirstVisiblePosition();
+                                            boolean allCollapsed = true;
+                                            int i3 = 0;
+                                            while (i3 < childCount3) {
+                                                boolean isHeaderOrFooter =
+                                                        SemExpandableListView.this
+                                                                .isHeaderOrFooterPosition(
+                                                                        i3 + firstVisiblePos2);
+                                                View child =
+                                                        SemExpandableListView.this.getChildAt(i3);
+                                                long packedPos =
+                                                        SemExpandableListView.this
+                                                                .getExpandableListPosition(i3);
+                                                ViewInfo oldViewInfo =
+                                                        (ViewInfo)
+                                                                SemExpandableListView.this
+                                                                        .mViewSnapshots.get(
+                                                                        packedPos);
+                                                if (oldViewInfo != null) {
+                                                    offset = oldViewInfo.top - child.getTop();
+                                                } else {
+                                                    offset =
+                                                            SemExpandableListView.this
+                                                                    .mTranslationOffset;
+                                                }
+                                                int groupId2 =
+                                                        SemExpandableListView
+                                                                .getPackedPositionGroup(packedPos);
+                                                if (!isHeaderOrFooter
+                                                        && groupId2 <= lastGroupIdBefore) {
+                                                    SemExpandableListView.this
+                                                            .mCollapsingRects[groupId2].setFinishY(
+                                                            child.getBottom());
+                                                }
+                                                SemExpandableListView.this.mViewSnapshots.remove(
+                                                        packedPos);
+                                                if (!isHeaderOrFooter
+                                                        && groupId2 < expanded.length) {
+                                                    boolean allCollapsed2 =
+                                                            (!expanded[groupId2]) & allCollapsed;
+                                                    if (expanded[groupId2]) {
+                                                        SemExpandableListView.this
+                                                                .startIndicatorAnimation(
+                                                                        child, false, 700);
+                                                    }
+                                                    allCollapsed = allCollapsed2;
+                                                }
+                                                if (offset == 0) {
+                                                    childCount2 = childCount3;
+                                                    z = true;
+                                                } else {
+                                                    child.setTranslationY(offset);
+                                                    childCount2 = childCount3;
+                                                    z = true;
+                                                    ObjectAnimator translateAnim =
+                                                            ObjectAnimator.ofFloat(
+                                                                    child,
+                                                                    View.TRANSLATION_Y,
+                                                                    0.0f);
+                                                    animations.add(translateAnim);
+                                                }
+                                                i3++;
+                                                childCount3 = childCount2;
+                                            }
+                                            Animator.AnimatorListener listener =
+                                                    new AnimatorListenerAdapter() { // from class:
+                                                                                    // android.widget.SemExpandableListView.8.1
+                                                        @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+                                                        public void onAnimationStart(
+                                                                Animator animation) {
+                                                            SemExpandableListView.this
+                                                                            .mAnimationState =
+                                                                    5;
+                                                        }
 
-                                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                                public void onAnimationEnd(Animator animation) {
-                                    Log.d(SemExpandableListView.TAG, "expand animation finished");
-                                    animationEndRunnable.run();
-                                    SemExpandableListView.this.resetCollapseAnimationState();
-                                }
-                            };
-                            if (allCollapsed) {
-                                listener.onAnimationEnd(null);
-                                return false;
-                            }
-                            ValueAnimator anim = ValueAnimator.ofFloat(0.0f, 1.0f);
-                            anim.addUpdateListener(SemExpandableListView.this.mBitmapUpdateListener);
-                            animations.add(anim);
-                            AnimatorSet set = new AnimatorSet();
-                            set.playTogether(animations);
-                            set.setDuration(700);
-                            set.setInterpolator(SemExpandableListView.EXPAND_COLLAPSE_INTERPOLATOR);
-                            set.addListener(listener);
-                            set.start();
-                            SemExpandableListView.this.mViewSnapshots.clear();
-                            return false;
-                        }
-                        animationEndRunnable.run();
-                        SemExpandableListView.this.resetCollapseAnimationState();
-                        return true;
-                    }
-                });
+                                                        @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+                                                        public void onAnimationEnd(
+                                                                Animator animation) {
+                                                            Log.d(
+                                                                    SemExpandableListView.TAG,
+                                                                    "expand animation finished");
+                                                            animationEndRunnable.run();
+                                                            SemExpandableListView.this
+                                                                    .resetCollapseAnimationState();
+                                                        }
+                                                    };
+                                            if (allCollapsed) {
+                                                listener.onAnimationEnd(null);
+                                                return false;
+                                            }
+                                            ValueAnimator anim = ValueAnimator.ofFloat(0.0f, 1.0f);
+                                            anim.addUpdateListener(
+                                                    SemExpandableListView.this
+                                                            .mBitmapUpdateListener);
+                                            animations.add(anim);
+                                            AnimatorSet set = new AnimatorSet();
+                                            set.playTogether(animations);
+                                            set.setDuration(700);
+                                            set.setInterpolator(
+                                                    SemExpandableListView
+                                                            .EXPAND_COLLAPSE_INTERPOLATOR);
+                                            set.addListener(listener);
+                                            set.start();
+                                            SemExpandableListView.this.mViewSnapshots.clear();
+                                            return false;
+                                        }
+                                        animationEndRunnable.run();
+                                        SemExpandableListView.this.resetCollapseAnimationState();
+                                        return true;
+                                    }
+                                });
                 return;
             }
         }
@@ -1267,25 +1663,40 @@ public class SemExpandableListView extends ListView {
         }
         DecoratedItemViewHolder holder = (DecoratedItemViewHolder) child.getTag(DECORATED_VIEW_TAG);
         if (holder == null || holder.indicatorImgView == null) {
-            Log.e(TAG, "startIndicatorAnimation() holder or indicatorImgView is null, startAngle=" + startAngle);
+            Log.e(
+                    TAG,
+                    "startIndicatorAnimation() holder or indicatorImgView is null, startAngle="
+                            + startAngle);
             return;
         }
         IndicatorImageView img = holder.indicatorImgView;
         if (this.mIndicatorAnimationType == 1) {
             img.setRotation(startAngle);
-            img.animate().rotation(0.0f).setInterpolator(EXPAND_COLLAPSE_INTERPOLATOR).setDuration(duration).withLayer();
+            img.animate()
+                    .rotation(0.0f)
+                    .setInterpolator(EXPAND_COLLAPSE_INTERPOLATOR)
+                    .setDuration(duration)
+                    .withLayer();
         } else {
             img.startIndicatorMorphAimation();
         }
-        img.setContentDescription(isExpanding ? this.mDescriptionCollapse : this.mDescriptionExpand);
+        img.setContentDescription(
+                isExpanding ? this.mDescriptionCollapse : this.mDescriptionExpand);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public ObjectAnimator createViewSnapshotAnimationReverse(int translationOffset, ViewInfo viewInfo) {
+    public ObjectAnimator createViewSnapshotAnimationReverse(
+            int translationOffset, ViewInfo viewInfo) {
         Rect newViewBounds = new Rect(viewInfo.left, viewInfo.top, viewInfo.right, viewInfo.bottom);
         Rect oldViewBounds = new Rect(newViewBounds);
         oldViewBounds.offset(0, translationOffset);
-        ObjectAnimator animBounds = ObjectAnimator.ofObject(viewInfo.snapshot, "bounds", SemAnimatorUtils.BOUNDS_EVALUATOR, oldViewBounds, newViewBounds);
+        ObjectAnimator animBounds =
+                ObjectAnimator.ofObject(
+                        viewInfo.snapshot,
+                        "bounds",
+                        SemAnimatorUtils.BOUNDS_EVALUATOR,
+                        oldViewBounds,
+                        newViewBounds);
         return animBounds;
     }
 
@@ -1294,7 +1705,13 @@ public class SemExpandableListView extends ListView {
         Rect oldViewBounds = new Rect(viewInfo.left, viewInfo.top, viewInfo.right, viewInfo.bottom);
         Rect newViewBounds = new Rect(oldViewBounds);
         newViewBounds.offset(0, translationOffset);
-        ObjectAnimator animBounds = ObjectAnimator.ofObject(viewInfo.snapshot, "bounds", SemAnimatorUtils.BOUNDS_EVALUATOR, oldViewBounds, newViewBounds);
+        ObjectAnimator animBounds =
+                ObjectAnimator.ofObject(
+                        viewInfo.snapshot,
+                        "bounds",
+                        SemAnimatorUtils.BOUNDS_EVALUATOR,
+                        oldViewBounds,
+                        newViewBounds);
         return animBounds;
     }
 
@@ -1335,8 +1752,10 @@ public class SemExpandableListView extends ListView {
     }
 
     public boolean expandGroup(int groupPos, boolean animate) {
-        SemExpandableListPosition elGroupPos = SemExpandableListPosition.obtain(2, groupPos, -1, -1);
-        SemExpandableListConnector.PositionMetadata pm = this.mConnector.getFlattenedPos(elGroupPos);
+        SemExpandableListPosition elGroupPos =
+                SemExpandableListPosition.obtain(2, groupPos, -1, -1);
+        SemExpandableListConnector.PositionMetadata pm =
+                this.mConnector.getFlattenedPos(elGroupPos);
         if (pm == null) {
             return false;
         }
@@ -1348,7 +1767,9 @@ public class SemExpandableListView extends ListView {
         if (animate) {
             int groupFlatPos = pm.position.flatListPos;
             int shiftedGroupPosition = getHeaderViewsCount() + groupFlatPos;
-            smoothScrollToPosition(this.mAdapter.getChildrenCount(groupPos) + shiftedGroupPosition, shiftedGroupPosition);
+            smoothScrollToPosition(
+                    this.mAdapter.getChildrenCount(groupPos) + shiftedGroupPosition,
+                    shiftedGroupPosition);
         }
         pm.recycle();
         return retValue;
@@ -1383,18 +1804,21 @@ public class SemExpandableListView extends ListView {
             return getHeaderFooterPackedPosition(flatListPosition);
         }
         int adjustedPosition = getFlatPositionForConnector(flatListPosition);
-        SemExpandableListConnector.PositionMetadata pm = this.mConnector.getUnflattenedPos(adjustedPosition);
+        SemExpandableListConnector.PositionMetadata pm =
+                this.mConnector.getUnflattenedPos(adjustedPosition);
         long packedPos = pm.position.getPackedPosition();
         pm.recycle();
         return packedPos;
     }
 
     public int getFlatListPosition(long packedPosition) {
-        SemExpandableListPosition elPackedPos = SemExpandableListPosition.obtainPosition(packedPosition);
+        SemExpandableListPosition elPackedPos =
+                SemExpandableListPosition.obtainPosition(packedPosition);
         if (elPackedPos == null) {
             return -1;
         }
-        SemExpandableListConnector.PositionMetadata pm = this.mConnector.getFlattenedPos(elPackedPos);
+        SemExpandableListConnector.PositionMetadata pm =
+                this.mConnector.getFlattenedPos(elPackedPos);
         elPackedPos.recycle();
         if (pm == null) {
             return -1;
@@ -1422,8 +1846,10 @@ public class SemExpandableListView extends ListView {
     }
 
     public void setSelectedGroup(int groupPosition) {
-        SemExpandableListPosition elGroupPos = SemExpandableListPosition.obtainGroupPosition(groupPosition);
-        SemExpandableListConnector.PositionMetadata pm = this.mConnector.getFlattenedPos(elGroupPos);
+        SemExpandableListPosition elGroupPos =
+                SemExpandableListPosition.obtainGroupPosition(groupPosition);
+        SemExpandableListConnector.PositionMetadata pm =
+                this.mConnector.getFlattenedPos(elGroupPos);
         if (pm == null) {
             return;
         }
@@ -1433,9 +1859,12 @@ public class SemExpandableListView extends ListView {
         pm.recycle();
     }
 
-    public boolean setSelectedChild(int groupPosition, int childPosition, boolean shouldExpandGroup) {
-        SemExpandableListPosition elChildPos = SemExpandableListPosition.obtainChildPosition(groupPosition, childPosition);
-        SemExpandableListConnector.PositionMetadata flatChildPos = this.mConnector.getFlattenedPos(elChildPos);
+    public boolean setSelectedChild(
+            int groupPosition, int childPosition, boolean shouldExpandGroup) {
+        SemExpandableListPosition elChildPos =
+                SemExpandableListPosition.obtainChildPosition(groupPosition, childPosition);
+        SemExpandableListConnector.PositionMetadata flatChildPos =
+                this.mConnector.getFlattenedPos(elChildPos);
         if (flatChildPos == null) {
             if (!shouldExpandGroup) {
                 return false;
@@ -1468,7 +1897,8 @@ public class SemExpandableListView extends ListView {
     }
 
     public static int getPackedPositionGroup(long packedPosition) {
-        if ((packedPosition & PACKED_POSITION_FOOTER_VIEW_BASE) == PACKED_POSITION_FOOTER_VIEW_BASE) {
+        if ((packedPosition & PACKED_POSITION_FOOTER_VIEW_BASE)
+                == PACKED_POSITION_FOOTER_VIEW_BASE) {
             return -3;
         }
         if ((packedPosition & 9223372032559808512L) == 9223372032559808512L) {
@@ -1485,7 +1915,9 @@ public class SemExpandableListView extends ListView {
     }
 
     public static long getPackedPositionForChild(int groupPosition, int childPosition) {
-        return ((groupPosition & PACKED_POSITION_INT_MASK_GROUP) << 32) | Long.MIN_VALUE | (childPosition & (-1));
+        return ((groupPosition & PACKED_POSITION_INT_MASK_GROUP) << 32)
+                | Long.MIN_VALUE
+                | (childPosition & (-1));
     }
 
     public static long getPackedPositionForGroup(int groupPosition) {
@@ -1506,7 +1938,8 @@ public class SemExpandableListView extends ListView {
     ContextMenu.ContextMenuInfo createContextMenuInfo(View view, int flatListPosition, long id) {
         if (!isHeaderOrFooterPosition(flatListPosition)) {
             int adjustedPosition = getFlatPositionForConnector(flatListPosition);
-            SemExpandableListConnector.PositionMetadata pm = this.mConnector.getUnflattenedPos(adjustedPosition);
+            SemExpandableListConnector.PositionMetadata pm =
+                    this.mConnector.getUnflattenedPos(adjustedPosition);
             SemExpandableListPosition pos = pm.position;
             long id2 = getChildOrGroupId(pos);
             long packedPosition = pos.getPackedPosition();
@@ -1575,22 +2008,27 @@ public class SemExpandableListView extends ListView {
     }
 
     static class SavedState extends View.BaseSavedState {
-        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() { // from class: android.widget.SemExpandableListView.SavedState.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SavedState createFromParcel(Parcel in) {
-                return new SavedState(in);
-            }
+        public static final Parcelable.Creator<SavedState> CREATOR =
+                new Parcelable.Creator<
+                        SavedState>() { // from class:
+                                        // android.widget.SemExpandableListView.SavedState.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SavedState createFromParcel(Parcel in) {
+                        return new SavedState(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SavedState[] newArray(int size) {
-                return new SavedState[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SavedState[] newArray(int size) {
+                        return new SavedState[size];
+                    }
+                };
         ArrayList<SemExpandableListConnector.GroupMetadata> expandedGroupMetadataList;
 
-        SavedState(Parcelable superState, ArrayList<SemExpandableListConnector.GroupMetadata> expandedGroupMetadataList) {
+        SavedState(
+                Parcelable superState,
+                ArrayList<SemExpandableListConnector.GroupMetadata> expandedGroupMetadataList) {
             super(superState);
             this.expandedGroupMetadataList = expandedGroupMetadataList;
         }
@@ -1598,10 +2036,13 @@ public class SemExpandableListView extends ListView {
         private SavedState(Parcel in) {
             super(in, SemExpandableListConnector.class.getClassLoader());
             this.expandedGroupMetadataList = new ArrayList<>();
-            in.readList(this.expandedGroupMetadataList, SemExpandableListConnector.class.getClassLoader());
+            in.readList(
+                    this.expandedGroupMetadataList,
+                    SemExpandableListConnector.class.getClassLoader());
         }
 
-        @Override // android.view.View.BaseSavedState, android.view.AbsSavedState, android.os.Parcelable
+        @Override // android.view.View.BaseSavedState, android.view.AbsSavedState,
+                  // android.os.Parcelable
         public void writeToParcel(Parcel out, int flags) {
             super.writeToParcel(out, flags);
             out.writeList(this.expandedGroupMetadataList);
@@ -1611,7 +2052,9 @@ public class SemExpandableListView extends ListView {
     @Override // android.widget.AbsListView, android.view.View
     public Parcelable onSaveInstanceState() {
         Parcelable superState = super.onSaveInstanceState();
-        return new SavedState(superState, this.mConnector != null ? this.mConnector.getExpandedGroupMetadataList() : null);
+        return new SavedState(
+                superState,
+                this.mConnector != null ? this.mConnector.getExpandedGroupMetadataList() : null);
     }
 
     @Override // android.widget.AbsListView, android.view.View
@@ -1692,44 +2135,55 @@ public class SemExpandableListView extends ListView {
             this.mMorphingAnimatedValue = 0.0f;
             this.ARROW_PADDING = SemExpandableListView.this.mIndicatorPaddingHeight;
             this.mIndicatorArrowHeight = 0.0f;
-            this.mUpdateListener = new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.SemExpandableListView.IndicatorImageView.1
-                @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-                public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    float val = ((Float) valueAnimator.getAnimatedValue()).floatValue();
-                    IndicatorImageView.this.mMorphingAnimatedValue = val;
-                    IndicatorImageView.this.invalidate();
-                }
-            };
-            this.mAnimatorListener = new Animator.AnimatorListener() { // from class: android.widget.SemExpandableListView.IndicatorImageView.2
-                @Override // android.animation.Animator.AnimatorListener
-                public void onAnimationCancel(Animator animation) {
-                    if (SemExpandableListView.DEBUGGABLE_LOW) {
-                        Log.d(SemExpandableListView.TAG, "mAnimatorListener : onAnimationCancel");
-                        IndicatorImageView.this.printAnimationInfo(animation);
-                    }
-                }
+            this.mUpdateListener =
+                    new ValueAnimator
+                            .AnimatorUpdateListener() { // from class:
+                                                        // android.widget.SemExpandableListView.IndicatorImageView.1
+                        @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                        public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                            float val = ((Float) valueAnimator.getAnimatedValue()).floatValue();
+                            IndicatorImageView.this.mMorphingAnimatedValue = val;
+                            IndicatorImageView.this.invalidate();
+                        }
+                    };
+            this.mAnimatorListener =
+                    new Animator
+                            .AnimatorListener() { // from class:
+                                                  // android.widget.SemExpandableListView.IndicatorImageView.2
+                        @Override // android.animation.Animator.AnimatorListener
+                        public void onAnimationCancel(Animator animation) {
+                            if (SemExpandableListView.DEBUGGABLE_LOW) {
+                                Log.d(
+                                        SemExpandableListView.TAG,
+                                        "mAnimatorListener : onAnimationCancel");
+                                IndicatorImageView.this.printAnimationInfo(animation);
+                            }
+                        }
 
-                @Override // android.animation.Animator.AnimatorListener
-                public void onAnimationEnd(Animator animation) {
-                    if (SemExpandableListView.DEBUGGABLE_LOW) {
-                        Log.d(SemExpandableListView.TAG, "mAnimatorListener : onAnimationEnd");
-                        IndicatorImageView.this.printAnimationInfo(animation);
-                    }
-                    IndicatorImageView.this.mMorphingAnimatedValue = 0.0f;
-                }
+                        @Override // android.animation.Animator.AnimatorListener
+                        public void onAnimationEnd(Animator animation) {
+                            if (SemExpandableListView.DEBUGGABLE_LOW) {
+                                Log.d(
+                                        SemExpandableListView.TAG,
+                                        "mAnimatorListener : onAnimationEnd");
+                                IndicatorImageView.this.printAnimationInfo(animation);
+                            }
+                            IndicatorImageView.this.mMorphingAnimatedValue = 0.0f;
+                        }
 
-                @Override // android.animation.Animator.AnimatorListener
-                public void onAnimationRepeat(Animator animation) {
-                }
+                        @Override // android.animation.Animator.AnimatorListener
+                        public void onAnimationRepeat(Animator animation) {}
 
-                @Override // android.animation.Animator.AnimatorListener
-                public void onAnimationStart(Animator animation) {
-                    if (SemExpandableListView.DEBUGGABLE_LOW) {
-                        Log.d(SemExpandableListView.TAG, "mAnimatorListener : onAnimationStart");
-                        IndicatorImageView.this.printAnimationInfo(animation);
-                    }
-                }
-            };
+                        @Override // android.animation.Animator.AnimatorListener
+                        public void onAnimationStart(Animator animation) {
+                            if (SemExpandableListView.DEBUGGABLE_LOW) {
+                                Log.d(
+                                        SemExpandableListView.TAG,
+                                        "mAnimatorListener : onAnimationStart");
+                                IndicatorImageView.this.printAnimationInfo(animation);
+                            }
+                        }
+                    };
             semSetHoverPopupType(1);
         }
 
@@ -1741,7 +2195,8 @@ public class SemExpandableListView extends ListView {
         @Override // android.widget.ImageView, android.view.View
         public int[] onCreateDrawableState(int extraSpace) {
             int[] result = super.onCreateDrawableState(extraSpace + 1);
-            if (this.childPos == -1 && SemExpandableListView.this.mConnector.isGroupExpanded(this.groupPos)) {
+            if (this.childPos == -1
+                    && SemExpandableListView.this.mConnector.isGroupExpanded(this.groupPos)) {
                 mergeDrawableStates(result, SemExpandableListView.GROUP_EXPANDED_STATE_SET);
             }
             return result;
@@ -1762,7 +2217,14 @@ public class SemExpandableListView extends ListView {
                     sb.append(", ");
                 }
             }
-            Log.i(SemExpandableListView.TAG, "drawableStateChanged() gr=" + this.groupPos + ", child=" + this.childPos + ", state=" + sb.toString());
+            Log.i(
+                    SemExpandableListView.TAG,
+                    "drawableStateChanged() gr="
+                            + this.groupPos
+                            + ", child="
+                            + this.childPos
+                            + ", state="
+                            + sb.toString());
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -1770,9 +2232,13 @@ public class SemExpandableListView extends ListView {
             if (animation != null) {
                 Log.d(SemExpandableListView.TAG, "printAnimationInfo : animation = " + animation);
                 if (animation.equals(this.mMorphingAnimationToDown)) {
-                    Log.d(SemExpandableListView.TAG, "printAnimationInfo : this animation => mMorphingAnimationToDown");
+                    Log.d(
+                            SemExpandableListView.TAG,
+                            "printAnimationInfo : this animation => mMorphingAnimationToDown");
                 } else if (animation.equals(this.mMorphingAnimationToUp)) {
-                    Log.d(SemExpandableListView.TAG, "printAnimationInfo : this animation => mMorphingAnimationToUp");
+                    Log.d(
+                            SemExpandableListView.TAG,
+                            "printAnimationInfo : this animation => mMorphingAnimationToUp");
                 }
             }
         }
@@ -1792,18 +2258,26 @@ public class SemExpandableListView extends ListView {
             this.mIndicatorArrowHeight = morphingEndValue;
             this.mMorphingAnimationToDown = ValueAnimator.ofFloat(0.0f, morphingEndValue);
             if (SemExpandableListView.DEBUGGABLE_LOW) {
-                Log.d(SemExpandableListView.TAG, "IndicatorImageView : initArrow : mMorphingAnimationToDown = " + this.mMorphingAnimationToDown);
+                Log.d(
+                        SemExpandableListView.TAG,
+                        "IndicatorImageView : initArrow : mMorphingAnimationToDown = "
+                                + this.mMorphingAnimationToDown);
             }
-            this.mMorphingAnimationToDown.setInterpolator(AnimationUtils.loadInterpolator(getContext(), 17563654));
+            this.mMorphingAnimationToDown.setInterpolator(
+                    AnimationUtils.loadInterpolator(getContext(), 17563654));
             this.mMorphingAnimationToDown.setDuration(300L);
             this.mMorphingAnimationToDown.addUpdateListener(this.mUpdateListener);
             this.mMorphingAnimationToDown.addListener(this.mAnimatorListener);
             float morphingStartValue = this.mHeight - (this.mPaddingValue * 2.0f);
             this.mMorphingAnimationToUp = ValueAnimator.ofFloat(morphingStartValue, 0.0f);
             if (SemExpandableListView.DEBUGGABLE_LOW) {
-                Log.d(SemExpandableListView.TAG, "IndicatorImageView : initArrow : mMorphingAnimationToUp = " + this.mMorphingAnimationToUp);
+                Log.d(
+                        SemExpandableListView.TAG,
+                        "IndicatorImageView : initArrow : mMorphingAnimationToUp = "
+                                + this.mMorphingAnimationToUp);
             }
-            this.mMorphingAnimationToUp.setInterpolator(AnimationUtils.loadInterpolator(getContext(), 17563654));
+            this.mMorphingAnimationToUp.setInterpolator(
+                    AnimationUtils.loadInterpolator(getContext(), 17563654));
             this.mMorphingAnimationToUp.setDuration(300L);
             this.mMorphingAnimationToUp.addUpdateListener(this.mUpdateListener);
             this.mMorphingAnimationToUp.addListener(this.mAnimatorListener);
@@ -1818,15 +2292,24 @@ public class SemExpandableListView extends ListView {
                 if (this.mPath != null) {
                     this.mPath.reset();
                     this.mPath.moveTo(this.mStartPointX, this.mStartPointY);
-                    if (!this.mMorphingAnimationToDown.isRunning() && !this.mMorphingAnimationToUp.isRunning()) {
+                    if (!this.mMorphingAnimationToDown.isRunning()
+                            && !this.mMorphingAnimationToUp.isRunning()) {
                         if (SemExpandableListView.this.mConnector.isGroupExpanded(this.groupPos)) {
                             if (SemExpandableListView.DEBUGGABLE_LOW) {
-                                Log.d(SemExpandableListView.TAG, "IndicatorImageView : onDraw : group(" + this.groupPos + ") collapse !!");
+                                Log.d(
+                                        SemExpandableListView.TAG,
+                                        "IndicatorImageView : onDraw : group("
+                                                + this.groupPos
+                                                + ") collapse !!");
                             }
                             this.mMorphingAnimatedValue = 0.0f;
                         } else {
                             if (SemExpandableListView.DEBUGGABLE_LOW) {
-                                Log.d(SemExpandableListView.TAG, "IndicatorImageView : onDraw : group(" + this.groupPos + ") expand !!");
+                                Log.d(
+                                        SemExpandableListView.TAG,
+                                        "IndicatorImageView : onDraw : group("
+                                                + this.groupPos
+                                                + ") expand !!");
                             }
                             this.mMorphingAnimatedValue = this.mIndicatorArrowHeight;
                         }
@@ -1843,11 +2326,20 @@ public class SemExpandableListView extends ListView {
 
         public void startIndicatorMorphAimation() {
             if (this.mMorphingAnimationToUp == null || !this.mMorphingAnimationToUp.isRunning()) {
-                if ((this.mMorphingAnimationToDown == null || !this.mMorphingAnimationToDown.isRunning()) && SemExpandableListView.this.mConnector != null) {
+                if ((this.mMorphingAnimationToDown == null
+                                || !this.mMorphingAnimationToDown.isRunning())
+                        && SemExpandableListView.this.mConnector != null) {
                     if (SemExpandableListView.this.mConnector.isGroupExpanded(this.groupPos)) {
                         if (SemExpandableListView.DEBUGGABLE_LOW) {
-                            Log.d(SemExpandableListView.TAG, "IndicatorImageView : startIndicatorMorphAimation : group(" + this.groupPos + ") collapse !!");
-                            Log.d(SemExpandableListView.TAG, "IndicatorImageView : startIndicatorMorphAimation : start morphingAnimation to UP");
+                            Log.d(
+                                    SemExpandableListView.TAG,
+                                    "IndicatorImageView : startIndicatorMorphAimation : group("
+                                            + this.groupPos
+                                            + ") collapse !!");
+                            Log.d(
+                                    SemExpandableListView.TAG,
+                                    "IndicatorImageView : startIndicatorMorphAimation : start"
+                                        + " morphingAnimation to UP");
                         }
                         if (this.mMorphingAnimationToUp != null) {
                             this.mMorphingAnimationToUp.start();
@@ -1856,8 +2348,15 @@ public class SemExpandableListView extends ListView {
                         return;
                     }
                     if (SemExpandableListView.DEBUGGABLE_LOW) {
-                        Log.d(SemExpandableListView.TAG, "IndicatorImageView : startIndicatorMorphAimation : group(" + this.groupPos + ") expand !!");
-                        Log.d(SemExpandableListView.TAG, "IndicatorImageView : startIndicatorMorphAimation : start morphingAnimation to DOWN");
+                        Log.d(
+                                SemExpandableListView.TAG,
+                                "IndicatorImageView : startIndicatorMorphAimation : group("
+                                        + this.groupPos
+                                        + ") expand !!");
+                        Log.d(
+                                SemExpandableListView.TAG,
+                                "IndicatorImageView : startIndicatorMorphAimation : start"
+                                    + " morphingAnimation to DOWN");
                     }
                     if (this.mMorphingAnimationToDown != null) {
                         this.mMorphingAnimationToDown.start();
@@ -1872,8 +2371,7 @@ public class SemExpandableListView extends ListView {
         IndicatorImageView indicatorImgView;
         View itemView;
 
-        private DecoratedItemViewHolder() {
-        }
+        private DecoratedItemViewHolder() {}
     }
 
     private String printArrays(int[] arr) {
@@ -1922,33 +2420,36 @@ public class SemExpandableListView extends ListView {
             captureViewsPriorAnimation();
             boolean[] expanded = getExpandedState();
             expandAllGroups();
-            Runnable animationEndRunnable = new Runnable() { // from class: android.widget.SemExpandableListView.10
-                @Override // java.lang.Runnable
-                public void run() {
-                    if (SemExpandableListView.this.mOnGroupExpandListener == null) {
-                        return;
-                    }
-                    int groupCount = SemExpandableListView.this.mAdapter.getGroupCount();
-                    for (int i = 0; i < groupCount; i++) {
-                        SemExpandableListView.this.mOnGroupExpandListener.onGroupExpand(i);
-                    }
-                }
-            };
+            Runnable animationEndRunnable =
+                    new Runnable() { // from class: android.widget.SemExpandableListView.10
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            if (SemExpandableListView.this.mOnGroupExpandListener == null) {
+                                return;
+                            }
+                            int groupCount = SemExpandableListView.this.mAdapter.getGroupCount();
+                            for (int i = 0; i < groupCount; i++) {
+                                SemExpandableListView.this.mOnGroupExpandListener.onGroupExpand(i);
+                            }
+                        }
+                    };
             startExpandAllAnimation(expanded, animationEndRunnable);
         } else if (this.mExpandCollapseAllState == 2) {
             captureViewsPriorAnimation();
-            Runnable animationEndRunnable2 = new Runnable() { // from class: android.widget.SemExpandableListView.11
-                @Override // java.lang.Runnable
-                public void run() {
-                    if (SemExpandableListView.this.mOnGroupCollapseListener == null) {
-                        return;
-                    }
-                    int groupCount = SemExpandableListView.this.mAdapter.getGroupCount();
-                    for (int i = 0; i < groupCount; i++) {
-                        SemExpandableListView.this.mOnGroupCollapseListener.onGroupCollapse(i);
-                    }
-                }
-            };
+            Runnable animationEndRunnable2 =
+                    new Runnable() { // from class: android.widget.SemExpandableListView.11
+                        @Override // java.lang.Runnable
+                        public void run() {
+                            if (SemExpandableListView.this.mOnGroupCollapseListener == null) {
+                                return;
+                            }
+                            int groupCount = SemExpandableListView.this.mAdapter.getGroupCount();
+                            for (int i = 0; i < groupCount; i++) {
+                                SemExpandableListView.this.mOnGroupCollapseListener.onGroupCollapse(
+                                        i);
+                            }
+                        }
+                    };
             boolean[] expanded2 = getExpandedState();
             startCollapseAllAnimation(expanded2, animationEndRunnable2);
             collapseAllGroups();
@@ -2007,7 +2508,12 @@ public class SemExpandableListView extends ListView {
 
     public void setIndicatorGravity(int gravity) {
         this.mIndicatorGravity = gravity;
-        Log.i(TAG, "setIndicatorGravity() gravity=" + gravity + ", mIndicatorGravity=" + this.mIndicatorGravity);
+        Log.i(
+                TAG,
+                "setIndicatorGravity() gravity="
+                        + gravity
+                        + ", mIndicatorGravity="
+                        + this.mIndicatorGravity);
     }
 
     public void setGroupIndicatorColor(int color) {
@@ -2046,7 +2552,8 @@ public class SemExpandableListView extends ListView {
         }
     }
 
-    @Override // android.widget.ListView, android.widget.AbsListView, android.widget.AdapterView, android.view.ViewGroup, android.view.View
+    @Override // android.widget.ListView, android.widget.AbsListView, android.widget.AdapterView,
+              // android.view.ViewGroup, android.view.View
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         if (this.mConnector != null) {
@@ -2057,32 +2564,49 @@ public class SemExpandableListView extends ListView {
     @Override // android.view.View
     protected void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        this.mDescriptionExpand = this.mContext.getResources().getString(R.string.expandablelist_indicator_description, this.mContext.getResources().getString(R.string.expandablelist_expand));
-        this.mDescriptionCollapse = this.mContext.getResources().getString(R.string.expandablelist_indicator_description, this.mContext.getResources().getString(R.string.expandablelist_collapse));
+        this.mDescriptionExpand =
+                this.mContext
+                        .getResources()
+                        .getString(
+                                R.string.expandablelist_indicator_description,
+                                this.mContext
+                                        .getResources()
+                                        .getString(R.string.expandablelist_expand));
+        this.mDescriptionCollapse =
+                this.mContext
+                        .getResources()
+                        .getString(
+                                R.string.expandablelist_indicator_description,
+                                this.mContext
+                                        .getResources()
+                                        .getString(R.string.expandablelist_collapse));
         if (this.mGroupIndicatorPaint != null) {
-            int strokeSize = (int) ((this.mContext.getResources().getDisplayMetrics().density * 2.0f) + 0.5f);
+            int strokeSize =
+                    (int)
+                            ((this.mContext.getResources().getDisplayMetrics().density * 2.0f)
+                                    + 0.5f);
             this.mGroupIndicatorPaint.setStrokeWidth(strokeSize);
         }
     }
 
     @Deprecated
-    public void setExpandSpeedFactor(float expandSpeedFactor) {
-    }
+    public void setExpandSpeedFactor(float expandSpeedFactor) {}
 
     @Deprecated
-    public void setCollapseSpeedFactor(float collapseSpeedFactor) {
-    }
+    public void setCollapseSpeedFactor(float collapseSpeedFactor) {}
 
     @Deprecated
-    public void setExpandAllSpeedFactor(float expandAllSpeedFactor) {
-    }
+    public void setExpandAllSpeedFactor(float expandAllSpeedFactor) {}
 
     @Deprecated
-    public void setCollapseAllSpeedFactor(float collapseAllSpeedFactor) {
-    }
+    public void setCollapseAllSpeedFactor(float collapseAllSpeedFactor) {}
 
     @Deprecated
-    public boolean scrollTo(View v, int groupPos, int expandingChildCount, SemExpandableListConnector.PositionMetadata pos) {
+    public boolean scrollTo(
+            View v,
+            int groupPos,
+            int expandingChildCount,
+            SemExpandableListConnector.PositionMetadata pos) {
         return false;
     }
 

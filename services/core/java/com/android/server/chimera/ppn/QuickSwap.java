@@ -5,12 +5,14 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.util.Slog;
+
 import com.android.internal.util.MemInfoReader;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.ServiceThread;
 import com.android.server.chimera.SystemRepository;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,7 +23,12 @@ import java.util.concurrent.ThreadPoolExecutor;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class QuickSwap {
-    public static final List QUICKSWAP_BLOCKLIST = Arrays.asList("com.google.android.aicore", "com.samsung.android.wallpaper.magician", "com.samsung.android.offline.languagemodel", "com.android.bluetooth");
+    public static final List QUICKSWAP_BLOCKLIST =
+            Arrays.asList(
+                    "com.google.android.aicore",
+                    "com.samsung.android.wallpaper.magician",
+                    "com.samsung.android.offline.languagemodel",
+                    "com.android.bluetooth");
     public final PerProcessNandswap mPPN;
     public final QuickSwapHandler mQuickSwapHandler;
     public final ServiceThread mQuickSwapThread;
@@ -39,8 +46,10 @@ public final class QuickSwap {
     public ArrayList mGenieDump = null;
     public boolean isDoingQuickSwap = false;
     public final Object isDoingQuickSwapLock = new Object();
-    public final boolean mIsNandswapOn = SystemProperties.getBoolean("ro.sys.kernelmemory.nandswap.quickswap.nandswap", true);
-    public final ThreadPoolExecutor mThreadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(4);
+    public final boolean mIsNandswapOn =
+            SystemProperties.getBoolean("ro.sys.kernelmemory.nandswap.quickswap.nandswap", true);
+    public final ThreadPoolExecutor mThreadPoolExecutor =
+            (ThreadPoolExecutor) Executors.newFixedThreadPool(4);
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class QuickSwapHandler extends Handler {
@@ -98,14 +107,15 @@ public final class QuickSwap {
         long j = rawInfo[26];
         long j2 = rawInfo[27];
         long j3 = j + j2;
-        BatteryService$$ExternalSyntheticOutline0.m(BatteryService$$ExternalSyntheticOutline0.m(" af ", j, " + if "), j2, "QuickSwap");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                BatteryService$$ExternalSyntheticOutline0.m(" af ", j, " + if "), j2, "QuickSwap");
         return j3;
     }
 
     public final void doQuickSwap(int i, long j) {
         try {
             try {
-                doQuickSwap(j, new int[]{0, -900}, i);
+                doQuickSwap(j, new int[] {0, -900}, i);
                 synchronized (this.isDoingQuickSwapLock) {
                     this.isDoingQuickSwap = false;
                 }
@@ -141,7 +151,9 @@ public final class QuickSwap {
             Method dump skipped, instructions count: 1333
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.chimera.ppn.QuickSwap.doQuickSwap(long, int[], int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: com.android.server.chimera.ppn.QuickSwap.doQuickSwap(long,"
+                    + " int[], int):void");
     }
 
     public final void dump(PrintWriter printWriter) {
@@ -149,11 +161,51 @@ public final class QuickSwap {
         printWriter.println("      threadpoolsize: 4");
         printWriter.println("      NS: " + this.mIsNandswapOn);
         printWriter.println("    stats");
-        StringBuilder m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("      triggerd_cnt: "), this.mTriggeredCnt, printWriter, "      PO_cnt: "), this.mPageoutCnt, printWriter, "      WB_cnt: ");
+        StringBuilder m =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("      triggerd_cnt: "),
+                                this.mTriggeredCnt,
+                                printWriter,
+                                "      PO_cnt: "),
+                        this.mPageoutCnt,
+                        printWriter,
+                        "      WB_cnt: ");
         m.append(this.mWritebackCnt);
         printWriter.println(m.toString());
         printWriter.println("    latest");
-        StringBuilder m2 = BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(printWriter, this.mLatestResult, "      PO_cnt: ", BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("      type: "), this.mLatestQuickSwapType, printWriter, "      Result: ")), this.mLatestPageoutCnt, printWriter, "      WB_cnt: "), this.mLatestWritebackCnt, printWriter, "      anonZramDiff: "), this.mLatestAnonZramDiff, printWriter, "      latency: "), this.mLatestLatency, printWriter, "      time: ");
+        StringBuilder m2 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                                BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                        .m(
+                                                                printWriter,
+                                                                this.mLatestResult,
+                                                                "      PO_cnt: ",
+                                                                BinaryTransparencyService$$ExternalSyntheticOutline0
+                                                                        .m(
+                                                                                new StringBuilder(
+                                                                                        "     "
+                                                                                            + " type:"
+                                                                                            + " "),
+                                                                                this
+                                                                                        .mLatestQuickSwapType,
+                                                                                printWriter,
+                                                                                "      Result: ")),
+                                                this.mLatestPageoutCnt,
+                                                printWriter,
+                                                "      WB_cnt: "),
+                                        this.mLatestWritebackCnt,
+                                        printWriter,
+                                        "      anonZramDiff: "),
+                                this.mLatestAnonZramDiff,
+                                printWriter,
+                                "      latency: "),
+                        this.mLatestLatency,
+                        printWriter,
+                        "      time: ");
         m2.append(SystemClock.uptimeMillis() - this.mLatestTimestampMS);
         printWriter.println(m2.toString());
     }

@@ -7,11 +7,13 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Bundle;
 import android.os.SystemProperties;
 import android.os.UserHandle;
+
 import java.util.HashMap;
 
 /* loaded from: classes6.dex */
 public final class Sender {
-    private static final String ACTION_USE_APP_FEATURE_SURVEY = "com.sec.android.diagmonagent.intent.USE_APP_FEATURE_SURVEY";
+    private static final String ACTION_USE_APP_FEATURE_SURVEY =
+            "com.sec.android.diagmonagent.intent.USE_APP_FEATURE_SURVEY";
     private static final String COMMERCIALIZED_DEVICE_KEY = "C";
     private static final String DETAIL_KEY = "det";
     private static final String DIAGMONDAGENT_PACKAGE = "com.sec.android.diagmonagent";
@@ -36,7 +38,11 @@ public final class Sender {
     public Sender(Context context) {
         DsmsLog.d(SUBTAG, "Created. context=" + context);
         if (context != null) {
-            DsmsLog.d(SUBTAG, "context.packageName=[" + context.getPackageName() + NavigationBarInflaterView.SIZE_MOD_END);
+            DsmsLog.d(
+                    SUBTAG,
+                    "context.packageName=["
+                            + context.getPackageName()
+                            + NavigationBarInflaterView.SIZE_MOD_END);
             this.mContext = context;
             if ("factory".equals(SystemProperties.get("ro.factory.factory_binary"))) {
                 DsmsLog.d(SUBTAG, "DSMS disabled");
@@ -76,12 +82,14 @@ public final class Sender {
             DsmsLog.e(SUBTAG, "Unauthorized caller");
             return -1;
         }
-        DsmsThreadPoolExecutor.getInstance().execute(new Runnable() { // from class: com.samsung.android.jdsms.Sender.1
-            @Override // java.lang.Runnable
-            public void run() {
-                Sender.this.sendMessage(message);
-            }
-        });
+        DsmsThreadPoolExecutor.getInstance()
+                .execute(
+                        new Runnable() { // from class: com.samsung.android.jdsms.Sender.1
+                            @Override // java.lang.Runnable
+                            public void run() {
+                                Sender.this.sendMessage(message);
+                            }
+                        });
         return 0;
     }
 

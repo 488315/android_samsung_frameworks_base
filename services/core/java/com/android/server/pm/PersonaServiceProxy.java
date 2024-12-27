@@ -6,13 +6,16 @@ import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
 import android.util.Log;
+
 import com.android.internal.widget.LockPatternUtils;
 import com.android.server.ContainerServiceInfo;
 import com.android.server.ContainerServiceWrapper;
 import com.android.server.RCPManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.GestureWakeup$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knox.SemPersonaManager;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,7 +41,8 @@ public final class PersonaServiceProxy {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void m773$$Nest$mfindAndConnectToContainerService(com.android.server.pm.PersonaServiceProxy r9, int r10) {
+    public static void m773$$Nest$mfindAndConnectToContainerService(
+            com.android.server.pm.PersonaServiceProxy r9, int r10) {
         /*
             java.lang.String r0 = "package:com.samsung.android.knox.containercore not found user:"
             java.lang.String r1 = "Finding container service in user - "
@@ -137,7 +141,10 @@ public final class PersonaServiceProxy {
         Lce:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.PersonaServiceProxy.m773$$Nest$mfindAndConnectToContainerService(com.android.server.pm.PersonaServiceProxy, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.PersonaServiceProxy.m773$$Nest$mfindAndConnectToContainerService(com.android.server.pm.PersonaServiceProxy,"
+                    + " int):void");
     }
 
     public final boolean isKnoxProfileExist() {
@@ -145,7 +152,10 @@ public final class PersonaServiceProxy {
         List<UserInfo> users = this.mUserManager.getUsers(true);
         if (users != null) {
             for (UserInfo userInfo : users) {
-                GestureWakeup$$ExternalSyntheticOutline0.m(new StringBuilder("Profile id - "), userInfo.id, "PersonaManagerService::Proxy");
+                GestureWakeup$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("Profile id - "),
+                        userInfo.id,
+                        "PersonaManagerService::Proxy");
                 if (SemPersonaManager.isKnoxId(userInfo.id)) {
                     Log.d("PersonaManagerService::Proxy", "Knox Profile exist on device");
                     break;
@@ -153,7 +163,8 @@ public final class PersonaServiceProxy {
             }
         }
         z = false;
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("isKnoxProfileExist status - ", "PersonaManagerService::Proxy", z);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "isKnoxProfileExist status - ", "PersonaManagerService::Proxy", z);
         return z;
     }
 
@@ -161,29 +172,40 @@ public final class PersonaServiceProxy {
         StringBuilder sb = new StringBuilder("connectContainerService is called for ");
         sb.append(containerServiceInfo.toString());
         sb.append(", mIsDoEnabled - ");
-        RCPManagerService$$ExternalSyntheticOutline0.m("PersonaManagerService::Proxy", sb, this.mIsDoEnabled);
+        RCPManagerService$$ExternalSyntheticOutline0.m(
+                "PersonaManagerService::Proxy", sb, this.mIsDoEnabled);
         if (!this.mIsDoEnabled && !isKnoxProfileExist()) {
             Log.d("PersonaManagerService::Proxy", "Not starting Container service...");
             return;
         }
-        Log.d("PersonaManagerService::Proxy", "Starting Container service because either Do/Po exist on device...");
+        Log.d(
+                "PersonaManagerService::Proxy",
+                "Starting Container service because either Do/Po exist on device...");
         synchronized (this.mContainerServiceLock) {
             try {
                 if (!this.mContainerServices.containsKey(containerServiceInfo)) {
                     Log.i("PersonaManagerService::Proxy", "Service don't exist on cache...");
                 } else {
-                    if (((ContainerServiceWrapper) this.mContainerServices.get(containerServiceInfo)).mBound) {
-                        Log.e("PersonaManagerService::Proxy", "Container service already bound " + containerServiceInfo.toString());
+                    if (((ContainerServiceWrapper)
+                                    this.mContainerServices.get(containerServiceInfo))
+                            .mBound) {
+                        Log.e(
+                                "PersonaManagerService::Proxy",
+                                "Container service already bound "
+                                        + containerServiceInfo.toString());
                         return;
                     }
                     this.mContainerServices.remove(containerServiceInfo);
                 }
-                ContainerServiceWrapper containerServiceWrapper = new ContainerServiceWrapper(this.mContext, this, containerServiceInfo);
+                ContainerServiceWrapper containerServiceWrapper =
+                        new ContainerServiceWrapper(this.mContext, this, containerServiceInfo);
                 if (containerServiceWrapper.connect()) {
                     this.mContainerServices.put(containerServiceInfo, containerServiceWrapper);
                     return;
                 }
-                Log.e("PersonaManagerService::Proxy", "Failed to bind " + containerServiceInfo.toString());
+                Log.e(
+                        "PersonaManagerService::Proxy",
+                        "Failed to bind " + containerServiceInfo.toString());
             } catch (Throwable th) {
                 throw th;
             }

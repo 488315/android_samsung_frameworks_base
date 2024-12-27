@@ -54,7 +54,12 @@ public final class HardKeyReport implements Parcelable {
     }
 
     public final String toString() {
-        return "descr:0 mKeyCode:" + this.mKeyCode + " mReportType:" + this.mReportType + " mBlock:" + this.mBlock;
+        return "descr:0 mKeyCode:"
+                + this.mKeyCode
+                + " mReportType:"
+                + this.mReportType
+                + " mBlock:"
+                + this.mBlock;
     }
 
     @Override // android.os.Parcelable

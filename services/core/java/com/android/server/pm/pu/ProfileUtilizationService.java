@@ -6,6 +6,7 @@ import android.os.CancellationSignal;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Slog;
+
 import com.android.internal.util.IndentingPrintWriter;
 import com.android.server.ServiceThread;
 import com.android.server.SystemServerInitThreadPool$$ExternalSyntheticLambda0;
@@ -14,7 +15,7 @@ import com.android.server.art.model.DexoptResult;
 import com.android.server.pm.DexOptHelper;
 import com.android.server.pm.PackageManagerService;
 import com.android.server.pm.dex.DexoptOptions;
-import com.android.server.pm.pu.DeviceStatusWatcher;
+
 import java.io.File;
 import java.util.Date;
 import java.util.Iterator;
@@ -67,7 +68,7 @@ public class ProfileUtilizationService extends SystemService {
                 CANCELLED = state4;
                 State state5 = new State("REMOVED", 4);
                 REMOVED = state5;
-                $VALUES = new State[]{state, state2, state3, state4, state5};
+                $VALUES = new State[] {state, state2, state3, state4, state5};
             }
 
             public static State valueOf(String str) {
@@ -100,7 +101,9 @@ public class ProfileUtilizationService extends SystemService {
                 sb.append(this.mResult.getFinalStatus());
                 Iterator it = this.mResult.getPackageDexoptResults().iterator();
                 while (it.hasNext()) {
-                    for (DexoptResult.DexContainerFileDexoptResult dexContainerFileDexoptResult : ((DexoptResult.PackageDexoptResult) it.next()).getDexContainerFileDexoptResults()) {
+                    for (DexoptResult.DexContainerFileDexoptResult dexContainerFileDexoptResult :
+                            ((DexoptResult.PackageDexoptResult) it.next())
+                                    .getDexContainerFileDexoptResults()) {
                         sb.append(", dex2oatTimeMs=");
                         sb.append(dexContainerFileDexoptResult.getDex2oatWallTimeMillis());
                         sb.append(", filter=");
@@ -161,7 +164,8 @@ public class ProfileUtilizationService extends SystemService {
         for (String str : profileUtilizationStorage.mSharedPrefsDumps.getAll().keySet()) {
             indentingPrintWriter.println(str + ":");
             indentingPrintWriter.increaseIndent();
-            indentingPrintWriter.println(profileUtilizationStorage.mSharedPrefsDumps.getString(str, "no data stored"));
+            indentingPrintWriter.println(
+                    profileUtilizationStorage.mSharedPrefsDumps.getString(str, "no data stored"));
             indentingPrintWriter.decreaseIndent();
         }
         indentingPrintWriter.decreaseIndent();
@@ -191,18 +195,28 @@ public class ProfileUtilizationService extends SystemService {
         ServiceThread serviceThread = new ServiceThread(10, "PU_StatusWatcher", false);
         deviceStatusWatcher.mHandlerThread = serviceThread;
         serviceThread.start();
-        deviceStatusWatcher.mHandler = new Handler(deviceStatusWatcher.mHandlerThread.getLooper(), null, true);
+        deviceStatusWatcher.mHandler =
+                new Handler(deviceStatusWatcher.mHandlerThread.getLooper(), null, true);
         DeviceStatusWatcher.ReceiverController receiverController = deviceStatusWatcher.mController;
         DeviceStatusWatcher deviceStatusWatcher2 = DeviceStatusWatcher.this;
-        deviceStatusWatcher2.mService.mContext.registerReceiver(receiverController.mStatusReceiver, receiverController.mStatusFilter, null, deviceStatusWatcher2.mHandler);
-        DexOptHelper.getArtManagerLocal().addDexoptDoneCallback(false, new SystemServerInitThreadPool$$ExternalSyntheticLambda0(), deviceStatusWatcher.mDexoptDoneHandler);
+        deviceStatusWatcher2.mService.mContext.registerReceiver(
+                receiverController.mStatusReceiver,
+                receiverController.mStatusFilter,
+                null,
+                deviceStatusWatcher2.mHandler);
+        DexOptHelper.getArtManagerLocal()
+                .addDexoptDoneCallback(
+                        false,
+                        new SystemServerInitThreadPool$$ExternalSyntheticLambda0(),
+                        deviceStatusWatcher.mDexoptDoneHandler);
     }
 
     @Override // com.android.server.SystemService
     public void onStart() {
         Slog.i(TAG_PU, "Profile utilization service started");
         DeviceStatusWatcher.ReceiverController receiverController = this.mWatcher.mController;
-        DeviceStatusWatcher.this.mService.mContext.registerReceiver(receiverController.mShutdownReceiver, receiverController.mShutdownFilter);
+        DeviceStatusWatcher.this.mService.mContext.registerReceiver(
+                receiverController.mShutdownReceiver, receiverController.mShutdownFilter);
     }
 
     public String toString() {

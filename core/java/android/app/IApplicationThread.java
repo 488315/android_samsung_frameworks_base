@@ -1,8 +1,5 @@
 package android.app;
 
-import android.app.ActivityOptions;
-import android.app.IInstrumentationWatcher;
-import android.app.IUiAutomationConnection;
 import android.app.servertransaction.ClientTransaction;
 import android.content.AutofillOptions;
 import android.content.ComponentName;
@@ -33,7 +30,9 @@ import android.view.translation.TranslationSpec;
 import android.view.translation.UiTranslationSpec;
 import android.window.ITaskFragmentOrganizer;
 import android.window.TaskFragmentTransaction;
+
 import com.android.internal.app.IVoiceInteractor;
+
 import java.util.List;
 import java.util.Map;
 
@@ -43,7 +42,37 @@ public interface IApplicationThread extends IInterface {
 
     void attachStartupAgents(String str) throws RemoteException;
 
-    void bindApplication(String str, ApplicationInfo applicationInfo, String str2, String str3, boolean z, ProviderInfoList providerInfoList, ComponentName componentName, ProfilerInfo profilerInfo, Bundle bundle, IInstrumentationWatcher iInstrumentationWatcher, IUiAutomationConnection iUiAutomationConnection, int i, boolean z2, boolean z3, boolean z4, boolean z5, Configuration configuration, CompatibilityInfo compatibilityInfo, Map map, Bundle bundle2, String str4, AutofillOptions autofillOptions, ContentCaptureOptions contentCaptureOptions, long[] jArr, long[] jArr2, SharedMemory sharedMemory, long j, long j2, boolean z6) throws RemoteException;
+    void bindApplication(
+            String str,
+            ApplicationInfo applicationInfo,
+            String str2,
+            String str3,
+            boolean z,
+            ProviderInfoList providerInfoList,
+            ComponentName componentName,
+            ProfilerInfo profilerInfo,
+            Bundle bundle,
+            IInstrumentationWatcher iInstrumentationWatcher,
+            IUiAutomationConnection iUiAutomationConnection,
+            int i,
+            boolean z2,
+            boolean z3,
+            boolean z4,
+            boolean z5,
+            Configuration configuration,
+            CompatibilityInfo compatibilityInfo,
+            Map map,
+            Bundle bundle2,
+            String str4,
+            AutofillOptions autofillOptions,
+            ContentCaptureOptions contentCaptureOptions,
+            long[] jArr,
+            long[] jArr2,
+            SharedMemory sharedMemory,
+            long j,
+            long j2,
+            boolean z6)
+            throws RemoteException;
 
     void clearDnsCache() throws RemoteException;
 
@@ -51,37 +80,85 @@ public interface IApplicationThread extends IInterface {
 
     void dispatchPackageBroadcast(int i, String[] strArr) throws RemoteException;
 
-    void dumpActivity(ParcelFileDescriptor parcelFileDescriptor, IBinder iBinder, String str, String[] strArr) throws RemoteException;
+    void dumpActivity(
+            ParcelFileDescriptor parcelFileDescriptor, IBinder iBinder, String str, String[] strArr)
+            throws RemoteException;
 
-    void dumpCacheInfo(ParcelFileDescriptor parcelFileDescriptor, String[] strArr) throws RemoteException;
+    void dumpCacheInfo(ParcelFileDescriptor parcelFileDescriptor, String[] strArr)
+            throws RemoteException;
 
-    void dumpDbInfo(ParcelFileDescriptor parcelFileDescriptor, String[] strArr) throws RemoteException;
+    void dumpDbInfo(ParcelFileDescriptor parcelFileDescriptor, String[] strArr)
+            throws RemoteException;
 
-    void dumpGfxInfo(ParcelFileDescriptor parcelFileDescriptor, String[] strArr) throws RemoteException;
+    void dumpGfxInfo(ParcelFileDescriptor parcelFileDescriptor, String[] strArr)
+            throws RemoteException;
 
-    void dumpHeap(boolean z, boolean z2, boolean z3, String str, String str2, ParcelFileDescriptor parcelFileDescriptor, RemoteCallback remoteCallback) throws RemoteException;
+    void dumpHeap(
+            boolean z,
+            boolean z2,
+            boolean z3,
+            String str,
+            String str2,
+            ParcelFileDescriptor parcelFileDescriptor,
+            RemoteCallback remoteCallback)
+            throws RemoteException;
 
-    void dumpMemInfo(ParcelFileDescriptor parcelFileDescriptor, Debug.MemoryInfo memoryInfo, boolean z, boolean z2, boolean z3, boolean z4, boolean z5, boolean z6, String[] strArr) throws RemoteException;
+    void dumpMemInfo(
+            ParcelFileDescriptor parcelFileDescriptor,
+            Debug.MemoryInfo memoryInfo,
+            boolean z,
+            boolean z2,
+            boolean z3,
+            boolean z4,
+            boolean z5,
+            boolean z6,
+            String[] strArr)
+            throws RemoteException;
 
-    void dumpMemInfoProto(ParcelFileDescriptor parcelFileDescriptor, Debug.MemoryInfo memoryInfo, boolean z, boolean z2, boolean z3, boolean z4, String[] strArr) throws RemoteException;
+    void dumpMemInfoProto(
+            ParcelFileDescriptor parcelFileDescriptor,
+            Debug.MemoryInfo memoryInfo,
+            boolean z,
+            boolean z2,
+            boolean z3,
+            boolean z4,
+            String[] strArr)
+            throws RemoteException;
 
-    void dumpProvider(ParcelFileDescriptor parcelFileDescriptor, IBinder iBinder, String[] strArr) throws RemoteException;
+    void dumpProvider(ParcelFileDescriptor parcelFileDescriptor, IBinder iBinder, String[] strArr)
+            throws RemoteException;
 
-    void dumpResources(ParcelFileDescriptor parcelFileDescriptor, RemoteCallback remoteCallback) throws RemoteException;
+    void dumpResources(ParcelFileDescriptor parcelFileDescriptor, RemoteCallback remoteCallback)
+            throws RemoteException;
 
-    void dumpService(ParcelFileDescriptor parcelFileDescriptor, IBinder iBinder, String[] strArr) throws RemoteException;
+    void dumpService(ParcelFileDescriptor parcelFileDescriptor, IBinder iBinder, String[] strArr)
+            throws RemoteException;
 
     void getProfileLength(String str) throws RemoteException;
 
     void handleTrustStorageUpdate() throws RemoteException;
 
-    void instrumentWithoutRestart(ComponentName componentName, Bundle bundle, IInstrumentationWatcher iInstrumentationWatcher, IUiAutomationConnection iUiAutomationConnection, ApplicationInfo applicationInfo) throws RemoteException;
+    void instrumentWithoutRestart(
+            ComponentName componentName,
+            Bundle bundle,
+            IInstrumentationWatcher iInstrumentationWatcher,
+            IUiAutomationConnection iUiAutomationConnection,
+            ApplicationInfo applicationInfo)
+            throws RemoteException;
 
     void notifyCleartextNetwork(byte[] bArr) throws RemoteException;
 
-    void notifyContentProviderPublishStatus(ContentProviderHolder contentProviderHolder, String str, int i, boolean z) throws RemoteException;
+    void notifyContentProviderPublishStatus(
+            ContentProviderHolder contentProviderHolder, String str, int i, boolean z)
+            throws RemoteException;
 
-    void performDirectAction(IBinder iBinder, String str, Bundle bundle, RemoteCallback remoteCallback, RemoteCallback remoteCallback2) throws RemoteException;
+    void performDirectAction(
+            IBinder iBinder,
+            String str,
+            Bundle bundle,
+            RemoteCallback remoteCallback,
+            RemoteCallback remoteCallback2)
+            throws RemoteException;
 
     void processInBackground() throws RemoteException;
 
@@ -89,21 +166,31 @@ public interface IApplicationThread extends IInterface {
 
     void relaunchActivityIfWebViewAttached(IBinder iBinder) throws RemoteException;
 
-    void requestAssistContextExtras(IBinder iBinder, IBinder iBinder2, int i, int i2, int i3) throws RemoteException;
+    void requestAssistContextExtras(IBinder iBinder, IBinder iBinder2, int i, int i2, int i3)
+            throws RemoteException;
 
-    void requestDirectActions(IBinder iBinder, IVoiceInteractor iVoiceInteractor, RemoteCallback remoteCallback, RemoteCallback remoteCallback2) throws RemoteException;
+    void requestDirectActions(
+            IBinder iBinder,
+            IVoiceInteractor iVoiceInteractor,
+            RemoteCallback remoteCallback,
+            RemoteCallback remoteCallback2)
+            throws RemoteException;
 
     void runIsolatedEntryPoint(String str, String[] strArr) throws RemoteException;
 
     void scheduleApplicationInfoChanged(ApplicationInfo applicationInfo) throws RemoteException;
 
-    void scheduleBindService(IBinder iBinder, Intent intent, boolean z, int i, long j) throws RemoteException;
+    void scheduleBindService(IBinder iBinder, Intent intent, boolean z, int i, long j)
+            throws RemoteException;
 
     void scheduleCrash(String str, int i, Bundle bundle) throws RemoteException;
 
-    void scheduleCreateBackupAgent(ApplicationInfo applicationInfo, int i, int i2, int i3) throws RemoteException;
+    void scheduleCreateBackupAgent(ApplicationInfo applicationInfo, int i, int i2, int i3)
+            throws RemoteException;
 
-    void scheduleCreateService(IBinder iBinder, ServiceInfo serviceInfo, CompatibilityInfo compatibilityInfo, int i) throws RemoteException;
+    void scheduleCreateService(
+            IBinder iBinder, ServiceInfo serviceInfo, CompatibilityInfo compatibilityInfo, int i)
+            throws RemoteException;
 
     void scheduleDestroyBackupAgent(ApplicationInfo applicationInfo, int i) throws RemoteException;
 
@@ -113,27 +200,60 @@ public interface IApplicationThread extends IInterface {
 
     void scheduleInstallProvider(ProviderInfo providerInfo) throws RemoteException;
 
-    void scheduleLocalVoiceInteractionStarted(IBinder iBinder, IVoiceInteractor iVoiceInteractor) throws RemoteException;
+    void scheduleLocalVoiceInteractionStarted(IBinder iBinder, IVoiceInteractor iVoiceInteractor)
+            throws RemoteException;
 
     void scheduleLowMemory() throws RemoteException;
 
-    void scheduleOnNewSceneTransitionInfo(IBinder iBinder, ActivityOptions.SceneTransitionInfo sceneTransitionInfo) throws RemoteException;
+    void scheduleOnNewSceneTransitionInfo(
+            IBinder iBinder, ActivityOptions.SceneTransitionInfo sceneTransitionInfo)
+            throws RemoteException;
 
     void schedulePing(RemoteCallback remoteCallback) throws RemoteException;
 
-    void scheduleReceiver(Intent intent, ActivityInfo activityInfo, CompatibilityInfo compatibilityInfo, int i, String str, Bundle bundle, boolean z, boolean z2, int i2, int i3, int i4, String str2) throws RemoteException;
+    void scheduleReceiver(
+            Intent intent,
+            ActivityInfo activityInfo,
+            CompatibilityInfo compatibilityInfo,
+            int i,
+            String str,
+            Bundle bundle,
+            boolean z,
+            boolean z2,
+            int i2,
+            int i3,
+            int i4,
+            String str2)
+            throws RemoteException;
 
     void scheduleReceiverList(List<ReceiverInfo> list) throws RemoteException;
 
-    void scheduleRegisteredReceiver(IIntentReceiver iIntentReceiver, Intent intent, int i, String str, Bundle bundle, boolean z, boolean z2, boolean z3, int i2, int i3, int i4, String str2) throws RemoteException;
+    void scheduleRegisteredReceiver(
+            IIntentReceiver iIntentReceiver,
+            Intent intent,
+            int i,
+            String str,
+            Bundle bundle,
+            boolean z,
+            boolean z2,
+            boolean z3,
+            int i2,
+            int i3,
+            int i4,
+            String str2)
+            throws RemoteException;
 
-    void scheduleServiceArgs(IBinder iBinder, ParceledListSlice parceledListSlice) throws RemoteException;
+    void scheduleServiceArgs(IBinder iBinder, ParceledListSlice parceledListSlice)
+            throws RemoteException;
 
     void scheduleStopService(IBinder iBinder) throws RemoteException;
 
     void scheduleSuicide() throws RemoteException;
 
-    void scheduleTaskFragmentTransaction(ITaskFragmentOrganizer iTaskFragmentOrganizer, TaskFragmentTransaction taskFragmentTransaction) throws RemoteException;
+    void scheduleTaskFragmentTransaction(
+            ITaskFragmentOrganizer iTaskFragmentOrganizer,
+            TaskFragmentTransaction taskFragmentTransaction)
+            throws RemoteException;
 
     void scheduleTimeoutService(IBinder iBinder, int i) throws RemoteException;
 
@@ -161,298 +281,378 @@ public interface IApplicationThread extends IInterface {
 
     void startBinderTracking() throws RemoteException;
 
-    void stopBinderTrackingAndDump(ParcelFileDescriptor parcelFileDescriptor) throws RemoteException;
+    void stopBinderTrackingAndDump(ParcelFileDescriptor parcelFileDescriptor)
+            throws RemoteException;
 
-    void stopBinderTrackingAndDumpSystemServer(ParcelFileDescriptor parcelFileDescriptor, String str, String str2, int i, int i2) throws RemoteException;
+    void stopBinderTrackingAndDumpSystemServer(
+            ParcelFileDescriptor parcelFileDescriptor, String str, String str2, int i, int i2)
+            throws RemoteException;
 
     void unstableProviderDied(IBinder iBinder) throws RemoteException;
 
     void updateHttpProxy() throws RemoteException;
 
-    void updatePackageCompatibilityInfo(String str, CompatibilityInfo compatibilityInfo) throws RemoteException;
+    void updatePackageCompatibilityInfo(String str, CompatibilityInfo compatibilityInfo)
+            throws RemoteException;
 
     void updateTimePrefs(int i) throws RemoteException;
 
     void updateTimeZone() throws RemoteException;
 
-    void updateUiTranslationState(IBinder iBinder, int i, TranslationSpec translationSpec, TranslationSpec translationSpec2, List<AutofillId> list, UiTranslationSpec uiTranslationSpec) throws RemoteException;
+    void updateUiTranslationState(
+            IBinder iBinder,
+            int i,
+            TranslationSpec translationSpec,
+            TranslationSpec translationSpec2,
+            List<AutofillId> list,
+            UiTranslationSpec uiTranslationSpec)
+            throws RemoteException;
 
     public static class Default implements IApplicationThread {
         @Override // android.app.IApplicationThread
-        public void scheduleReceiver(Intent intent, ActivityInfo info, CompatibilityInfo compatInfo, int resultCode, String data, Bundle extras, boolean ordered, boolean assumeDelivered, int sendingUser, int processState, int sentFromUid, String sentFromPackage) throws RemoteException {
-        }
+        public void scheduleReceiver(
+                Intent intent,
+                ActivityInfo info,
+                CompatibilityInfo compatInfo,
+                int resultCode,
+                String data,
+                Bundle extras,
+                boolean ordered,
+                boolean assumeDelivered,
+                int sendingUser,
+                int processState,
+                int sentFromUid,
+                String sentFromPackage)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void scheduleReceiverList(List<ReceiverInfo> info) throws RemoteException {
-        }
+        public void scheduleReceiverList(List<ReceiverInfo> info) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void scheduleCreateService(IBinder token, ServiceInfo info, CompatibilityInfo compatInfo, int processState) throws RemoteException {
-        }
+        public void scheduleCreateService(
+                IBinder token, ServiceInfo info, CompatibilityInfo compatInfo, int processState)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void scheduleStopService(IBinder token) throws RemoteException {
-        }
+        public void scheduleStopService(IBinder token) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void bindApplication(String packageName, ApplicationInfo info, String sdkSandboxClientAppVolumeUuid, String sdkSandboxClientAppPackage, boolean isSdkInSandbox, ProviderInfoList providerList, ComponentName testName, ProfilerInfo profilerInfo, Bundle testArguments, IInstrumentationWatcher testWatcher, IUiAutomationConnection uiAutomationConnection, int debugMode, boolean enableBinderTracking, boolean trackAllocation, boolean restrictedBackupMode, boolean persistent, Configuration config, CompatibilityInfo compatInfo, Map services, Bundle coreSettings, String buildSerial, AutofillOptions autofillOptions, ContentCaptureOptions contentCaptureOptions, long[] disabledCompatChanges, long[] loggableCompatChanges, SharedMemory serializedSystemFontMap, long startRequestedElapsedTime, long startRequestedUptime, boolean fixedAppContextDisplay) throws RemoteException {
-        }
+        public void bindApplication(
+                String packageName,
+                ApplicationInfo info,
+                String sdkSandboxClientAppVolumeUuid,
+                String sdkSandboxClientAppPackage,
+                boolean isSdkInSandbox,
+                ProviderInfoList providerList,
+                ComponentName testName,
+                ProfilerInfo profilerInfo,
+                Bundle testArguments,
+                IInstrumentationWatcher testWatcher,
+                IUiAutomationConnection uiAutomationConnection,
+                int debugMode,
+                boolean enableBinderTracking,
+                boolean trackAllocation,
+                boolean restrictedBackupMode,
+                boolean persistent,
+                Configuration config,
+                CompatibilityInfo compatInfo,
+                Map services,
+                Bundle coreSettings,
+                String buildSerial,
+                AutofillOptions autofillOptions,
+                ContentCaptureOptions contentCaptureOptions,
+                long[] disabledCompatChanges,
+                long[] loggableCompatChanges,
+                SharedMemory serializedSystemFontMap,
+                long startRequestedElapsedTime,
+                long startRequestedUptime,
+                boolean fixedAppContextDisplay)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void runIsolatedEntryPoint(String entryPoint, String[] entryPointArgs) throws RemoteException {
-        }
+        public void runIsolatedEntryPoint(String entryPoint, String[] entryPointArgs)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void scheduleExit() throws RemoteException {
-        }
+        public void scheduleExit() throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void scheduleServiceArgs(IBinder token, ParceledListSlice args) throws RemoteException {
-        }
+        public void scheduleServiceArgs(IBinder token, ParceledListSlice args)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void updateTimeZone() throws RemoteException {
-        }
+        public void updateTimeZone() throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void processInBackground() throws RemoteException {
-        }
+        public void processInBackground() throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void scheduleBindService(IBinder token, Intent intent, boolean rebind, int processState, long bindSeq) throws RemoteException {
-        }
+        public void scheduleBindService(
+                IBinder token, Intent intent, boolean rebind, int processState, long bindSeq)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void scheduleUnbindService(IBinder token, Intent intent) throws RemoteException {
-        }
+        public void scheduleUnbindService(IBinder token, Intent intent) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void dumpService(ParcelFileDescriptor fd, IBinder servicetoken, String[] args) throws RemoteException {
-        }
+        public void dumpService(ParcelFileDescriptor fd, IBinder servicetoken, String[] args)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void scheduleRegisteredReceiver(IIntentReceiver receiver, Intent intent, int resultCode, String data, Bundle extras, boolean ordered, boolean sticky, boolean assumeDelivered, int sendingUser, int processState, int sentFromUid, String sentFromPackage) throws RemoteException {
-        }
+        public void scheduleRegisteredReceiver(
+                IIntentReceiver receiver,
+                Intent intent,
+                int resultCode,
+                String data,
+                Bundle extras,
+                boolean ordered,
+                boolean sticky,
+                boolean assumeDelivered,
+                int sendingUser,
+                int processState,
+                int sentFromUid,
+                String sentFromPackage)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void scheduleLowMemory() throws RemoteException {
-        }
+        public void scheduleLowMemory() throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void profilerControl(boolean start, ProfilerInfo profilerInfo, int profileType) throws RemoteException {
-        }
+        public void profilerControl(boolean start, ProfilerInfo profilerInfo, int profileType)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void setSchedulingGroup(int group) throws RemoteException {
-        }
+        public void setSchedulingGroup(int group) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void scheduleCreateBackupAgent(ApplicationInfo app, int backupMode, int userId, int operationType) throws RemoteException {
-        }
+        public void scheduleCreateBackupAgent(
+                ApplicationInfo app, int backupMode, int userId, int operationType)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void scheduleDestroyBackupAgent(ApplicationInfo app, int userId) throws RemoteException {
-        }
+        public void scheduleDestroyBackupAgent(ApplicationInfo app, int userId)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void scheduleOnNewSceneTransitionInfo(IBinder token, ActivityOptions.SceneTransitionInfo info) throws RemoteException {
-        }
+        public void scheduleOnNewSceneTransitionInfo(
+                IBinder token, ActivityOptions.SceneTransitionInfo info) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void scheduleSuicide() throws RemoteException {
-        }
+        public void scheduleSuicide() throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void dispatchPackageBroadcast(int cmd, String[] packages) throws RemoteException {
-        }
+        public void dispatchPackageBroadcast(int cmd, String[] packages) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void scheduleCrash(String msg, int typeId, Bundle extras) throws RemoteException {
-        }
+        public void scheduleCrash(String msg, int typeId, Bundle extras) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void dumpHeap(boolean managed, boolean mallocInfo, boolean runGc, String dumpBitmaps, String path, ParcelFileDescriptor fd, RemoteCallback finishCallback) throws RemoteException {
-        }
+        public void dumpHeap(
+                boolean managed,
+                boolean mallocInfo,
+                boolean runGc,
+                String dumpBitmaps,
+                String path,
+                ParcelFileDescriptor fd,
+                RemoteCallback finishCallback)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void dumpActivity(ParcelFileDescriptor fd, IBinder servicetoken, String prefix, String[] args) throws RemoteException {
-        }
+        public void dumpActivity(
+                ParcelFileDescriptor fd, IBinder servicetoken, String prefix, String[] args)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void dumpResources(ParcelFileDescriptor fd, RemoteCallback finishCallback) throws RemoteException {
-        }
+        public void dumpResources(ParcelFileDescriptor fd, RemoteCallback finishCallback)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void clearDnsCache() throws RemoteException {
-        }
+        public void clearDnsCache() throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void updateHttpProxy() throws RemoteException {
-        }
+        public void updateHttpProxy() throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void setHttpProxyInfo(ProxyInfoWrapper wrapper) throws RemoteException {
-        }
+        public void setHttpProxyInfo(ProxyInfoWrapper wrapper) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void setCoreSettings(Bundle coreSettings) throws RemoteException {
-        }
+        public void setCoreSettings(Bundle coreSettings) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void updatePackageCompatibilityInfo(String pkg, CompatibilityInfo info) throws RemoteException {
-        }
+        public void updatePackageCompatibilityInfo(String pkg, CompatibilityInfo info)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void scheduleTrimMemory(int level) throws RemoteException {
-        }
+        public void scheduleTrimMemory(int level) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void dumpMemInfo(ParcelFileDescriptor fd, Debug.MemoryInfo mem, boolean checkin, boolean dumpInfo, boolean dumpDalvik, boolean dumpSummaryOnly, boolean dumpUnreachable, boolean dumpAllocatorLogs, String[] args) throws RemoteException {
-        }
+        public void dumpMemInfo(
+                ParcelFileDescriptor fd,
+                Debug.MemoryInfo mem,
+                boolean checkin,
+                boolean dumpInfo,
+                boolean dumpDalvik,
+                boolean dumpSummaryOnly,
+                boolean dumpUnreachable,
+                boolean dumpAllocatorLogs,
+                String[] args)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void dumpMemInfoProto(ParcelFileDescriptor fd, Debug.MemoryInfo mem, boolean dumpInfo, boolean dumpDalvik, boolean dumpSummaryOnly, boolean dumpUnreachable, String[] args) throws RemoteException {
-        }
+        public void dumpMemInfoProto(
+                ParcelFileDescriptor fd,
+                Debug.MemoryInfo mem,
+                boolean dumpInfo,
+                boolean dumpDalvik,
+                boolean dumpSummaryOnly,
+                boolean dumpUnreachable,
+                String[] args)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void dumpGfxInfo(ParcelFileDescriptor fd, String[] args) throws RemoteException {
-        }
+        public void dumpGfxInfo(ParcelFileDescriptor fd, String[] args) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void dumpCacheInfo(ParcelFileDescriptor fd, String[] args) throws RemoteException {
-        }
+        public void dumpCacheInfo(ParcelFileDescriptor fd, String[] args) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void dumpProvider(ParcelFileDescriptor fd, IBinder servicetoken, String[] args) throws RemoteException {
-        }
+        public void dumpProvider(ParcelFileDescriptor fd, IBinder servicetoken, String[] args)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void dumpDbInfo(ParcelFileDescriptor fd, String[] args) throws RemoteException {
-        }
+        public void dumpDbInfo(ParcelFileDescriptor fd, String[] args) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void unstableProviderDied(IBinder provider) throws RemoteException {
-        }
+        public void unstableProviderDied(IBinder provider) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void requestAssistContextExtras(IBinder activityToken, IBinder requestToken, int requestType, int sessionId, int flags) throws RemoteException {
-        }
+        public void requestAssistContextExtras(
+                IBinder activityToken,
+                IBinder requestToken,
+                int requestType,
+                int sessionId,
+                int flags)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void scheduleTranslucentConversionComplete(IBinder token, boolean timeout) throws RemoteException {
-        }
+        public void scheduleTranslucentConversionComplete(IBinder token, boolean timeout)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void setProcessState(int state) throws RemoteException {
-        }
+        public void setProcessState(int state) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void scheduleInstallProvider(ProviderInfo provider) throws RemoteException {
-        }
+        public void scheduleInstallProvider(ProviderInfo provider) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void updateTimePrefs(int timeFormatPreference) throws RemoteException {
-        }
+        public void updateTimePrefs(int timeFormatPreference) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void scheduleEnterAnimationComplete(IBinder token) throws RemoteException {
-        }
+        public void scheduleEnterAnimationComplete(IBinder token) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void notifyCleartextNetwork(byte[] firstPacket) throws RemoteException {
-        }
+        public void notifyCleartextNetwork(byte[] firstPacket) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void startBinderTracking() throws RemoteException {
-        }
+        public void startBinderTracking() throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void stopBinderTrackingAndDump(ParcelFileDescriptor fd) throws RemoteException {
-        }
+        public void stopBinderTrackingAndDump(ParcelFileDescriptor fd) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void stopBinderTrackingAndDumpSystemServer(ParcelFileDescriptor fd, String processName, String packageName, int pid, int uid) throws RemoteException {
-        }
+        public void stopBinderTrackingAndDumpSystemServer(
+                ParcelFileDescriptor fd, String processName, String packageName, int pid, int uid)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void scheduleLocalVoiceInteractionStarted(IBinder token, IVoiceInteractor voiceInteractor) throws RemoteException {
-        }
+        public void scheduleLocalVoiceInteractionStarted(
+                IBinder token, IVoiceInteractor voiceInteractor) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void handleTrustStorageUpdate() throws RemoteException {
-        }
+        public void handleTrustStorageUpdate() throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void attachAgent(String path) throws RemoteException {
-        }
+        public void attachAgent(String path) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void attachStartupAgents(String dataDir) throws RemoteException {
-        }
+        public void attachStartupAgents(String dataDir) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void scheduleApplicationInfoChanged(ApplicationInfo ai) throws RemoteException {
-        }
+        public void scheduleApplicationInfoChanged(ApplicationInfo ai) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void setNetworkBlockSeq(long procStateSeq) throws RemoteException {
-        }
+        public void setNetworkBlockSeq(long procStateSeq) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void scheduleTransaction(ClientTransaction transaction) throws RemoteException {
-        }
+        public void scheduleTransaction(ClientTransaction transaction) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void scheduleTaskFragmentTransaction(ITaskFragmentOrganizer organizer, TaskFragmentTransaction transaction) throws RemoteException {
-        }
+        public void scheduleTaskFragmentTransaction(
+                ITaskFragmentOrganizer organizer, TaskFragmentTransaction transaction)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void requestDirectActions(IBinder activityToken, IVoiceInteractor intractor, RemoteCallback cancellationCallback, RemoteCallback callback) throws RemoteException {
-        }
+        public void requestDirectActions(
+                IBinder activityToken,
+                IVoiceInteractor intractor,
+                RemoteCallback cancellationCallback,
+                RemoteCallback callback)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void performDirectAction(IBinder activityToken, String actionId, Bundle arguments, RemoteCallback cancellationCallback, RemoteCallback resultCallback) throws RemoteException {
-        }
+        public void performDirectAction(
+                IBinder activityToken,
+                String actionId,
+                Bundle arguments,
+                RemoteCallback cancellationCallback,
+                RemoteCallback resultCallback)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void notifyContentProviderPublishStatus(ContentProviderHolder holder, String authorities, int userId, boolean published) throws RemoteException {
-        }
+        public void notifyContentProviderPublishStatus(
+                ContentProviderHolder holder, String authorities, int userId, boolean published)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void instrumentWithoutRestart(ComponentName instrumentationName, Bundle instrumentationArgs, IInstrumentationWatcher instrumentationWatcher, IUiAutomationConnection instrumentationUiConnection, ApplicationInfo targetInfo) throws RemoteException {
-        }
+        public void instrumentWithoutRestart(
+                ComponentName instrumentationName,
+                Bundle instrumentationArgs,
+                IInstrumentationWatcher instrumentationWatcher,
+                IUiAutomationConnection instrumentationUiConnection,
+                ApplicationInfo targetInfo)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void updateUiTranslationState(IBinder activityToken, int state, TranslationSpec sourceSpec, TranslationSpec targetSpec, List<AutofillId> viewIds, UiTranslationSpec uiTranslationSpec) throws RemoteException {
-        }
+        public void updateUiTranslationState(
+                IBinder activityToken,
+                int state,
+                TranslationSpec sourceSpec,
+                TranslationSpec targetSpec,
+                List<AutofillId> viewIds,
+                UiTranslationSpec uiTranslationSpec)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void scheduleTimeoutService(IBinder token, int startId) throws RemoteException {
-        }
+        public void scheduleTimeoutService(IBinder token, int startId) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void scheduleTimeoutServiceForType(IBinder token, int startId, int fgsType) throws RemoteException {
-        }
+        public void scheduleTimeoutServiceForType(IBinder token, int startId, int fgsType)
+                throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void schedulePing(RemoteCallback pong) throws RemoteException {
-        }
+        public void schedulePing(RemoteCallback pong) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void getProfileLength(String pkgName) throws RemoteException {
-        }
+        public void getProfileLength(String pkgName) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void setFlingerFlag(String pkgName) throws RemoteException {
-        }
+        public void setFlingerFlag(String pkgName) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void clearIdsTrainingData(boolean flag) throws RemoteException {
-        }
+        public void clearIdsTrainingData(boolean flag) throws RemoteException {}
 
         @Override // android.app.IApplicationThread
-        public void relaunchActivityIfWebViewAttached(IBinder token) throws RemoteException {
-        }
+        public void relaunchActivityIfWebViewAttached(IBinder token) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -460,7 +660,7 @@ public interface IApplicationThread extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IApplicationThread {
+    public abstract static class Stub extends Binder implements IApplicationThread {
         public static final String DESCRIPTOR = "android.app.IApplicationThread";
         static final int TRANSACTION_attachAgent = 52;
         static final int TRANSACTION_attachStartupAgents = 53;
@@ -703,7 +903,8 @@ public interface IApplicationThread extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -715,7 +916,8 @@ public interface IApplicationThread extends IInterface {
                 case 1:
                     Intent _arg0 = (Intent) data.readTypedObject(Intent.CREATOR);
                     ActivityInfo _arg1 = (ActivityInfo) data.readTypedObject(ActivityInfo.CREATOR);
-                    CompatibilityInfo _arg2 = (CompatibilityInfo) data.readTypedObject(CompatibilityInfo.CREATOR);
+                    CompatibilityInfo _arg2 =
+                            (CompatibilityInfo) data.readTypedObject(CompatibilityInfo.CREATOR);
                     int _arg3 = data.readInt();
                     String _arg4 = data.readString();
                     Bundle _arg5 = (Bundle) data.readTypedObject(Bundle.CREATOR);
@@ -726,7 +928,9 @@ public interface IApplicationThread extends IInterface {
                     int _arg10 = data.readInt();
                     String _arg11 = data.readString();
                     data.enforceNoDataAvail();
-                    scheduleReceiver(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9, _arg10, _arg11);
+                    scheduleReceiver(
+                            _arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7, _arg8, _arg9,
+                            _arg10, _arg11);
                     return true;
                 case 2:
                     List<ReceiverInfo> _arg02 = data.createTypedArrayList(ReceiverInfo.CREATOR);
@@ -736,7 +940,8 @@ public interface IApplicationThread extends IInterface {
                 case 3:
                     IBinder _arg03 = data.readStrongBinder();
                     ServiceInfo _arg12 = (ServiceInfo) data.readTypedObject(ServiceInfo.CREATOR);
-                    CompatibilityInfo _arg22 = (CompatibilityInfo) data.readTypedObject(CompatibilityInfo.CREATOR);
+                    CompatibilityInfo _arg22 =
+                            (CompatibilityInfo) data.readTypedObject(CompatibilityInfo.CREATOR);
                     int _arg32 = data.readInt();
                     data.enforceNoDataAvail();
                     scheduleCreateService(_arg03, _arg12, _arg22, _arg32);
@@ -748,29 +953,39 @@ public interface IApplicationThread extends IInterface {
                     return true;
                 case 5:
                     String _arg05 = data.readString();
-                    ApplicationInfo _arg13 = (ApplicationInfo) data.readTypedObject(ApplicationInfo.CREATOR);
+                    ApplicationInfo _arg13 =
+                            (ApplicationInfo) data.readTypedObject(ApplicationInfo.CREATOR);
                     String _arg23 = data.readString();
                     String _arg33 = data.readString();
                     boolean _arg42 = data.readBoolean();
-                    ProviderInfoList _arg52 = (ProviderInfoList) data.readTypedObject(ProviderInfoList.CREATOR);
-                    ComponentName _arg62 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ProviderInfoList _arg52 =
+                            (ProviderInfoList) data.readTypedObject(ProviderInfoList.CREATOR);
+                    ComponentName _arg62 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     ProfilerInfo _arg72 = (ProfilerInfo) data.readTypedObject(ProfilerInfo.CREATOR);
                     Bundle _arg82 = (Bundle) data.readTypedObject(Bundle.CREATOR);
-                    IInstrumentationWatcher _arg92 = IInstrumentationWatcher.Stub.asInterface(data.readStrongBinder());
-                    IUiAutomationConnection _arg102 = IUiAutomationConnection.Stub.asInterface(data.readStrongBinder());
+                    IInstrumentationWatcher _arg92 =
+                            IInstrumentationWatcher.Stub.asInterface(data.readStrongBinder());
+                    IUiAutomationConnection _arg102 =
+                            IUiAutomationConnection.Stub.asInterface(data.readStrongBinder());
                     int _arg112 = data.readInt();
                     boolean _arg122 = data.readBoolean();
                     boolean _arg132 = data.readBoolean();
                     boolean _arg14 = data.readBoolean();
                     boolean _arg15 = data.readBoolean();
-                    Configuration _arg16 = (Configuration) data.readTypedObject(Configuration.CREATOR);
-                    CompatibilityInfo _arg17 = (CompatibilityInfo) data.readTypedObject(CompatibilityInfo.CREATOR);
+                    Configuration _arg16 =
+                            (Configuration) data.readTypedObject(Configuration.CREATOR);
+                    CompatibilityInfo _arg17 =
+                            (CompatibilityInfo) data.readTypedObject(CompatibilityInfo.CREATOR);
                     ClassLoader cl = getClass().getClassLoader();
                     Map _arg18 = data.readHashMap(cl);
                     Bundle _arg19 = (Bundle) data.readTypedObject(Bundle.CREATOR);
                     String _arg20 = data.readString();
-                    AutofillOptions _arg21 = (AutofillOptions) data.readTypedObject(AutofillOptions.CREATOR);
-                    ContentCaptureOptions _arg222 = (ContentCaptureOptions) data.readTypedObject(ContentCaptureOptions.CREATOR);
+                    AutofillOptions _arg21 =
+                            (AutofillOptions) data.readTypedObject(AutofillOptions.CREATOR);
+                    ContentCaptureOptions _arg222 =
+                            (ContentCaptureOptions)
+                                    data.readTypedObject(ContentCaptureOptions.CREATOR);
                     long[] _arg232 = data.createLongArray();
                     long[] _arg24 = data.createLongArray();
                     SharedMemory _arg25 = (SharedMemory) data.readTypedObject(SharedMemory.CREATOR);
@@ -778,7 +993,11 @@ public interface IApplicationThread extends IInterface {
                     long _arg27 = data.readLong();
                     boolean _arg28 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    bindApplication(_arg05, _arg13, _arg23, _arg33, _arg42, _arg52, _arg62, _arg72, _arg82, _arg92, _arg102, _arg112, _arg122, _arg132, _arg14, _arg15, _arg16, _arg17, _arg18, _arg19, _arg20, _arg21, _arg222, _arg232, _arg24, _arg25, _arg26, _arg27, _arg28);
+                    bindApplication(
+                            _arg05, _arg13, _arg23, _arg33, _arg42, _arg52, _arg62, _arg72, _arg82,
+                            _arg92, _arg102, _arg112, _arg122, _arg132, _arg14, _arg15, _arg16,
+                            _arg17, _arg18, _arg19, _arg20, _arg21, _arg222, _arg232, _arg24,
+                            _arg25, _arg26, _arg27, _arg28);
                     return true;
                 case 6:
                     String _arg06 = data.readString();
@@ -791,7 +1010,8 @@ public interface IApplicationThread extends IInterface {
                     return true;
                 case 8:
                     IBinder _arg07 = data.readStrongBinder();
-                    ParceledListSlice _arg111 = (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _arg111 =
+                            (ParceledListSlice) data.readTypedObject(ParceledListSlice.CREATOR);
                     data.enforceNoDataAvail();
                     scheduleServiceArgs(_arg07, _arg111);
                     return true;
@@ -817,14 +1037,17 @@ public interface IApplicationThread extends IInterface {
                     scheduleUnbindService(_arg09, _arg114);
                     return true;
                 case 13:
-                    ParcelFileDescriptor _arg010 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg010 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     IBinder _arg115 = data.readStrongBinder();
                     String[] _arg210 = data.createStringArray();
                     data.enforceNoDataAvail();
                     dumpService(_arg010, _arg115, _arg210);
                     return true;
                 case 14:
-                    IIntentReceiver _arg011 = IIntentReceiver.Stub.asInterface(data.readStrongBinder());
+                    IIntentReceiver _arg011 =
+                            IIntentReceiver.Stub.asInterface(data.readStrongBinder());
                     Intent _arg116 = (Intent) data.readTypedObject(Intent.CREATOR);
                     int _arg211 = data.readInt();
                     String _arg35 = data.readString();
@@ -837,14 +1060,17 @@ public interface IApplicationThread extends IInterface {
                     int _arg103 = data.readInt();
                     String _arg117 = data.readString();
                     data.enforceNoDataAvail();
-                    scheduleRegisteredReceiver(_arg011, _arg116, _arg211, _arg35, _arg44, _arg53, _arg63, _arg73, _arg83, _arg93, _arg103, _arg117);
+                    scheduleRegisteredReceiver(
+                            _arg011, _arg116, _arg211, _arg35, _arg44, _arg53, _arg63, _arg73,
+                            _arg83, _arg93, _arg103, _arg117);
                     return true;
                 case 15:
                     scheduleLowMemory();
                     return true;
                 case 16:
                     boolean _arg012 = data.readBoolean();
-                    ProfilerInfo _arg118 = (ProfilerInfo) data.readTypedObject(ProfilerInfo.CREATOR);
+                    ProfilerInfo _arg118 =
+                            (ProfilerInfo) data.readTypedObject(ProfilerInfo.CREATOR);
                     int _arg212 = data.readInt();
                     data.enforceNoDataAvail();
                     profilerControl(_arg012, _arg118, _arg212);
@@ -855,7 +1081,8 @@ public interface IApplicationThread extends IInterface {
                     setSchedulingGroup(_arg013);
                     return true;
                 case 18:
-                    ApplicationInfo _arg014 = (ApplicationInfo) data.readTypedObject(ApplicationInfo.CREATOR);
+                    ApplicationInfo _arg014 =
+                            (ApplicationInfo) data.readTypedObject(ApplicationInfo.CREATOR);
                     int _arg119 = data.readInt();
                     int _arg213 = data.readInt();
                     int _arg36 = data.readInt();
@@ -863,14 +1090,18 @@ public interface IApplicationThread extends IInterface {
                     scheduleCreateBackupAgent(_arg014, _arg119, _arg213, _arg36);
                     return true;
                 case 19:
-                    ApplicationInfo _arg015 = (ApplicationInfo) data.readTypedObject(ApplicationInfo.CREATOR);
+                    ApplicationInfo _arg015 =
+                            (ApplicationInfo) data.readTypedObject(ApplicationInfo.CREATOR);
                     int _arg120 = data.readInt();
                     data.enforceNoDataAvail();
                     scheduleDestroyBackupAgent(_arg015, _arg120);
                     return true;
                 case 20:
                     IBinder _arg016 = data.readStrongBinder();
-                    ActivityOptions.SceneTransitionInfo _arg121 = (ActivityOptions.SceneTransitionInfo) data.readTypedObject(ActivityOptions.SceneTransitionInfo.CREATOR);
+                    ActivityOptions.SceneTransitionInfo _arg121 =
+                            (ActivityOptions.SceneTransitionInfo)
+                                    data.readTypedObject(
+                                            ActivityOptions.SceneTransitionInfo.CREATOR);
                     data.enforceNoDataAvail();
                     scheduleOnNewSceneTransitionInfo(_arg016, _arg121);
                     return true;
@@ -896,13 +1127,18 @@ public interface IApplicationThread extends IInterface {
                     boolean _arg215 = data.readBoolean();
                     String _arg37 = data.readString();
                     String _arg45 = data.readString();
-                    ParcelFileDescriptor _arg54 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    RemoteCallback _arg64 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    ParcelFileDescriptor _arg54 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    RemoteCallback _arg64 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     dumpHeap(_arg019, _arg125, _arg215, _arg37, _arg45, _arg54, _arg64);
                     return true;
                 case 25:
-                    ParcelFileDescriptor _arg020 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg020 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     IBinder _arg126 = data.readStrongBinder();
                     String _arg216 = data.readString();
                     String[] _arg38 = data.createStringArray();
@@ -910,8 +1146,11 @@ public interface IApplicationThread extends IInterface {
                     dumpActivity(_arg020, _arg126, _arg216, _arg38);
                     return true;
                 case 26:
-                    ParcelFileDescriptor _arg021 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    RemoteCallback _arg127 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    ParcelFileDescriptor _arg021 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    RemoteCallback _arg127 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     dumpResources(_arg021, _arg127);
                     return true;
@@ -922,7 +1161,8 @@ public interface IApplicationThread extends IInterface {
                     updateHttpProxy();
                     return true;
                 case 29:
-                    ProxyInfoWrapper _arg022 = (ProxyInfoWrapper) data.readTypedObject(ProxyInfoWrapper.CREATOR);
+                    ProxyInfoWrapper _arg022 =
+                            (ProxyInfoWrapper) data.readTypedObject(ProxyInfoWrapper.CREATOR);
                     data.enforceNoDataAvail();
                     setHttpProxyInfo(_arg022);
                     return true;
@@ -933,7 +1173,8 @@ public interface IApplicationThread extends IInterface {
                     return true;
                 case 31:
                     String _arg024 = data.readString();
-                    CompatibilityInfo _arg128 = (CompatibilityInfo) data.readTypedObject(CompatibilityInfo.CREATOR);
+                    CompatibilityInfo _arg128 =
+                            (CompatibilityInfo) data.readTypedObject(CompatibilityInfo.CREATOR);
                     data.enforceNoDataAvail();
                     updatePackageCompatibilityInfo(_arg024, _arg128);
                     return true;
@@ -943,8 +1184,11 @@ public interface IApplicationThread extends IInterface {
                     scheduleTrimMemory(_arg025);
                     return true;
                 case 33:
-                    ParcelFileDescriptor _arg026 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    Debug.MemoryInfo _arg129 = (Debug.MemoryInfo) data.readTypedObject(Debug.MemoryInfo.CREATOR);
+                    ParcelFileDescriptor _arg026 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    Debug.MemoryInfo _arg129 =
+                            (Debug.MemoryInfo) data.readTypedObject(Debug.MemoryInfo.CREATOR);
                     boolean _arg217 = data.readBoolean();
                     boolean _arg39 = data.readBoolean();
                     boolean _arg46 = data.readBoolean();
@@ -953,11 +1197,16 @@ public interface IApplicationThread extends IInterface {
                     boolean _arg74 = data.readBoolean();
                     String[] _arg84 = data.createStringArray();
                     data.enforceNoDataAvail();
-                    dumpMemInfo(_arg026, _arg129, _arg217, _arg39, _arg46, _arg55, _arg65, _arg74, _arg84);
+                    dumpMemInfo(
+                            _arg026, _arg129, _arg217, _arg39, _arg46, _arg55, _arg65, _arg74,
+                            _arg84);
                     return true;
                 case 34:
-                    ParcelFileDescriptor _arg027 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
-                    Debug.MemoryInfo _arg130 = (Debug.MemoryInfo) data.readTypedObject(Debug.MemoryInfo.CREATOR);
+                    ParcelFileDescriptor _arg027 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    Debug.MemoryInfo _arg130 =
+                            (Debug.MemoryInfo) data.readTypedObject(Debug.MemoryInfo.CREATOR);
                     boolean _arg218 = data.readBoolean();
                     boolean _arg310 = data.readBoolean();
                     boolean _arg47 = data.readBoolean();
@@ -967,26 +1216,34 @@ public interface IApplicationThread extends IInterface {
                     dumpMemInfoProto(_arg027, _arg130, _arg218, _arg310, _arg47, _arg56, _arg66);
                     return true;
                 case 35:
-                    ParcelFileDescriptor _arg028 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg028 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     String[] _arg131 = data.createStringArray();
                     data.enforceNoDataAvail();
                     dumpGfxInfo(_arg028, _arg131);
                     return true;
                 case 36:
-                    ParcelFileDescriptor _arg029 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg029 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     String[] _arg133 = data.createStringArray();
                     data.enforceNoDataAvail();
                     dumpCacheInfo(_arg029, _arg133);
                     return true;
                 case 37:
-                    ParcelFileDescriptor _arg030 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg030 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     IBinder _arg134 = data.readStrongBinder();
                     String[] _arg219 = data.createStringArray();
                     data.enforceNoDataAvail();
                     dumpProvider(_arg030, _arg134, _arg219);
                     return true;
                 case 38:
-                    ParcelFileDescriptor _arg031 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg031 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     String[] _arg135 = data.createStringArray();
                     data.enforceNoDataAvail();
                     dumpDbInfo(_arg031, _arg135);
@@ -1017,7 +1274,8 @@ public interface IApplicationThread extends IInterface {
                     setProcessState(_arg035);
                     return true;
                 case 43:
-                    ProviderInfo _arg036 = (ProviderInfo) data.readTypedObject(ProviderInfo.CREATOR);
+                    ProviderInfo _arg036 =
+                            (ProviderInfo) data.readTypedObject(ProviderInfo.CREATOR);
                     data.enforceNoDataAvail();
                     scheduleInstallProvider(_arg036);
                     return true;
@@ -1040,22 +1298,28 @@ public interface IApplicationThread extends IInterface {
                     startBinderTracking();
                     return true;
                 case 48:
-                    ParcelFileDescriptor _arg040 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg040 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     data.enforceNoDataAvail();
                     stopBinderTrackingAndDump(_arg040);
                     return true;
                 case 49:
-                    ParcelFileDescriptor _arg041 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg041 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     String _arg138 = data.readString();
                     String _arg221 = data.readString();
                     int _arg312 = data.readInt();
                     int _arg49 = data.readInt();
                     data.enforceNoDataAvail();
-                    stopBinderTrackingAndDumpSystemServer(_arg041, _arg138, _arg221, _arg312, _arg49);
+                    stopBinderTrackingAndDumpSystemServer(
+                            _arg041, _arg138, _arg221, _arg312, _arg49);
                     return true;
                 case 50:
                     IBinder _arg042 = data.readStrongBinder();
-                    IVoiceInteractor _arg139 = IVoiceInteractor.Stub.asInterface(data.readStrongBinder());
+                    IVoiceInteractor _arg139 =
+                            IVoiceInteractor.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     scheduleLocalVoiceInteractionStarted(_arg042, _arg139);
                     return true;
@@ -1073,7 +1337,8 @@ public interface IApplicationThread extends IInterface {
                     attachStartupAgents(_arg044);
                     return true;
                 case 54:
-                    ApplicationInfo _arg045 = (ApplicationInfo) data.readTypedObject(ApplicationInfo.CREATOR);
+                    ApplicationInfo _arg045 =
+                            (ApplicationInfo) data.readTypedObject(ApplicationInfo.CREATOR);
                     data.enforceNoDataAvail();
                     scheduleApplicationInfoChanged(_arg045);
                     return true;
@@ -1083,22 +1348,29 @@ public interface IApplicationThread extends IInterface {
                     setNetworkBlockSeq(_arg046);
                     return true;
                 case 56:
-                    ClientTransaction _arg047 = (ClientTransaction) data.readTypedObject(ClientTransaction.CREATOR);
+                    ClientTransaction _arg047 =
+                            (ClientTransaction) data.readTypedObject(ClientTransaction.CREATOR);
                     data.enforceNoDataAvail();
                     scheduleTransaction(_arg047);
                     return true;
                 case 57:
                     IBinder _arg048 = data.readStrongBinder();
-                    ITaskFragmentOrganizer _arg049 = ITaskFragmentOrganizer.Stub.asInterface(_arg048);
-                    TaskFragmentTransaction _arg140 = (TaskFragmentTransaction) data.readTypedObject(TaskFragmentTransaction.CREATOR);
+                    ITaskFragmentOrganizer _arg049 =
+                            ITaskFragmentOrganizer.Stub.asInterface(_arg048);
+                    TaskFragmentTransaction _arg140 =
+                            (TaskFragmentTransaction)
+                                    data.readTypedObject(TaskFragmentTransaction.CREATOR);
                     data.enforceNoDataAvail();
                     scheduleTaskFragmentTransaction(_arg049, _arg140);
                     return true;
                 case 58:
                     IBinder _arg050 = data.readStrongBinder();
-                    IVoiceInteractor _arg141 = IVoiceInteractor.Stub.asInterface(data.readStrongBinder());
-                    RemoteCallback _arg223 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
-                    RemoteCallback _arg313 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    IVoiceInteractor _arg141 =
+                            IVoiceInteractor.Stub.asInterface(data.readStrongBinder());
+                    RemoteCallback _arg223 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg313 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     requestDirectActions(_arg050, _arg141, _arg223, _arg313);
                     return true;
@@ -1106,13 +1378,17 @@ public interface IApplicationThread extends IInterface {
                     IBinder _arg051 = data.readStrongBinder();
                     String _arg142 = data.readString();
                     Bundle _arg224 = (Bundle) data.readTypedObject(Bundle.CREATOR);
-                    RemoteCallback _arg314 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
-                    RemoteCallback _arg410 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg314 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg410 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     performDirectAction(_arg051, _arg142, _arg224, _arg314, _arg410);
                     return true;
                 case 60:
-                    ContentProviderHolder _arg052 = (ContentProviderHolder) data.readTypedObject(ContentProviderHolder.CREATOR);
+                    ContentProviderHolder _arg052 =
+                            (ContentProviderHolder)
+                                    data.readTypedObject(ContentProviderHolder.CREATOR);
                     String _arg143 = data.readString();
                     int _arg225 = data.readInt();
                     boolean _arg315 = data.readBoolean();
@@ -1120,21 +1396,28 @@ public interface IApplicationThread extends IInterface {
                     notifyContentProviderPublishStatus(_arg052, _arg143, _arg225, _arg315);
                     return true;
                 case 61:
-                    ComponentName _arg053 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg053 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     Bundle _arg144 = (Bundle) data.readTypedObject(Bundle.CREATOR);
-                    IInstrumentationWatcher _arg226 = IInstrumentationWatcher.Stub.asInterface(data.readStrongBinder());
-                    IUiAutomationConnection _arg316 = IUiAutomationConnection.Stub.asInterface(data.readStrongBinder());
-                    ApplicationInfo _arg411 = (ApplicationInfo) data.readTypedObject(ApplicationInfo.CREATOR);
+                    IInstrumentationWatcher _arg226 =
+                            IInstrumentationWatcher.Stub.asInterface(data.readStrongBinder());
+                    IUiAutomationConnection _arg316 =
+                            IUiAutomationConnection.Stub.asInterface(data.readStrongBinder());
+                    ApplicationInfo _arg411 =
+                            (ApplicationInfo) data.readTypedObject(ApplicationInfo.CREATOR);
                     data.enforceNoDataAvail();
                     instrumentWithoutRestart(_arg053, _arg144, _arg226, _arg316, _arg411);
                     return true;
                 case 62:
                     IBinder _arg054 = data.readStrongBinder();
                     int _arg145 = data.readInt();
-                    TranslationSpec _arg227 = (TranslationSpec) data.readTypedObject(TranslationSpec.CREATOR);
-                    TranslationSpec _arg317 = (TranslationSpec) data.readTypedObject(TranslationSpec.CREATOR);
+                    TranslationSpec _arg227 =
+                            (TranslationSpec) data.readTypedObject(TranslationSpec.CREATOR);
+                    TranslationSpec _arg317 =
+                            (TranslationSpec) data.readTypedObject(TranslationSpec.CREATOR);
                     List<AutofillId> _arg412 = data.createTypedArrayList(AutofillId.CREATOR);
-                    UiTranslationSpec _arg57 = (UiTranslationSpec) data.readTypedObject(UiTranslationSpec.CREATOR);
+                    UiTranslationSpec _arg57 =
+                            (UiTranslationSpec) data.readTypedObject(UiTranslationSpec.CREATOR);
                     data.enforceNoDataAvail();
                     updateUiTranslationState(_arg054, _arg145, _arg227, _arg317, _arg412, _arg57);
                     return true;
@@ -1152,7 +1435,8 @@ public interface IApplicationThread extends IInterface {
                     scheduleTimeoutServiceForType(_arg056, _arg147, _arg228);
                     return true;
                 case 65:
-                    RemoteCallback _arg057 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg057 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     schedulePing(_arg057);
                     return true;
@@ -1198,7 +1482,20 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void scheduleReceiver(Intent intent, ActivityInfo info, CompatibilityInfo compatInfo, int resultCode, String data, Bundle extras, boolean ordered, boolean assumeDelivered, int sendingUser, int processState, int sentFromUid, String sentFromPackage) throws RemoteException {
+            public void scheduleReceiver(
+                    Intent intent,
+                    ActivityInfo info,
+                    CompatibilityInfo compatInfo,
+                    int resultCode,
+                    String data,
+                    Bundle extras,
+                    boolean ordered,
+                    boolean assumeDelivered,
+                    int sendingUser,
+                    int processState,
+                    int sentFromUid,
+                    String sentFromPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1304,7 +1601,9 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void scheduleCreateService(IBinder token, ServiceInfo info, CompatibilityInfo compatInfo, int processState) throws RemoteException {
+            public void scheduleCreateService(
+                    IBinder token, ServiceInfo info, CompatibilityInfo compatInfo, int processState)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1331,7 +1630,37 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void bindApplication(String packageName, ApplicationInfo info, String sdkSandboxClientAppVolumeUuid, String sdkSandboxClientAppPackage, boolean isSdkInSandbox, ProviderInfoList providerList, ComponentName testName, ProfilerInfo profilerInfo, Bundle testArguments, IInstrumentationWatcher testWatcher, IUiAutomationConnection uiAutomationConnection, int debugMode, boolean enableBinderTracking, boolean trackAllocation, boolean restrictedBackupMode, boolean persistent, Configuration config, CompatibilityInfo compatInfo, Map services, Bundle coreSettings, String buildSerial, AutofillOptions autofillOptions, ContentCaptureOptions contentCaptureOptions, long[] disabledCompatChanges, long[] loggableCompatChanges, SharedMemory serializedSystemFontMap, long startRequestedElapsedTime, long startRequestedUptime, boolean fixedAppContextDisplay) throws RemoteException {
+            public void bindApplication(
+                    String packageName,
+                    ApplicationInfo info,
+                    String sdkSandboxClientAppVolumeUuid,
+                    String sdkSandboxClientAppPackage,
+                    boolean isSdkInSandbox,
+                    ProviderInfoList providerList,
+                    ComponentName testName,
+                    ProfilerInfo profilerInfo,
+                    Bundle testArguments,
+                    IInstrumentationWatcher testWatcher,
+                    IUiAutomationConnection uiAutomationConnection,
+                    int debugMode,
+                    boolean enableBinderTracking,
+                    boolean trackAllocation,
+                    boolean restrictedBackupMode,
+                    boolean persistent,
+                    Configuration config,
+                    CompatibilityInfo compatInfo,
+                    Map services,
+                    Bundle coreSettings,
+                    String buildSerial,
+                    AutofillOptions autofillOptions,
+                    ContentCaptureOptions contentCaptureOptions,
+                    long[] disabledCompatChanges,
+                    long[] loggableCompatChanges,
+                    SharedMemory serializedSystemFontMap,
+                    long startRequestedElapsedTime,
+                    long startRequestedUptime,
+                    boolean fixedAppContextDisplay)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1438,7 +1767,8 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void runIsolatedEntryPoint(String entryPoint, String[] entryPointArgs) throws RemoteException {
+            public void runIsolatedEntryPoint(String entryPoint, String[] entryPointArgs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1462,7 +1792,8 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void scheduleServiceArgs(IBinder token, ParceledListSlice args) throws RemoteException {
+            public void scheduleServiceArgs(IBinder token, ParceledListSlice args)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1497,7 +1828,9 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void scheduleBindService(IBinder token, Intent intent, boolean rebind, int processState, long bindSeq) throws RemoteException {
+            public void scheduleBindService(
+                    IBinder token, Intent intent, boolean rebind, int processState, long bindSeq)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1526,7 +1859,8 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void dumpService(ParcelFileDescriptor fd, IBinder servicetoken, String[] args) throws RemoteException {
+            public void dumpService(ParcelFileDescriptor fd, IBinder servicetoken, String[] args)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1540,7 +1874,20 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void scheduleRegisteredReceiver(IIntentReceiver receiver, Intent intent, int resultCode, String data, Bundle extras, boolean ordered, boolean sticky, boolean assumeDelivered, int sendingUser, int processState, int sentFromUid, String sentFromPackage) throws RemoteException {
+            public void scheduleRegisteredReceiver(
+                    IIntentReceiver receiver,
+                    Intent intent,
+                    int resultCode,
+                    String data,
+                    Bundle extras,
+                    boolean ordered,
+                    boolean sticky,
+                    boolean assumeDelivered,
+                    int sendingUser,
+                    int processState,
+                    int sentFromUid,
+                    String sentFromPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1639,7 +1986,8 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void profilerControl(boolean start, ProfilerInfo profilerInfo, int profileType) throws RemoteException {
+            public void profilerControl(boolean start, ProfilerInfo profilerInfo, int profileType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1665,7 +2013,9 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void scheduleCreateBackupAgent(ApplicationInfo app, int backupMode, int userId, int operationType) throws RemoteException {
+            public void scheduleCreateBackupAgent(
+                    ApplicationInfo app, int backupMode, int userId, int operationType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1680,7 +2030,8 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void scheduleDestroyBackupAgent(ApplicationInfo app, int userId) throws RemoteException {
+            public void scheduleDestroyBackupAgent(ApplicationInfo app, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1693,7 +2044,9 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void scheduleOnNewSceneTransitionInfo(IBinder token, ActivityOptions.SceneTransitionInfo info) throws RemoteException {
+            public void scheduleOnNewSceneTransitionInfo(
+                    IBinder token, ActivityOptions.SceneTransitionInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1717,7 +2070,8 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void dispatchPackageBroadcast(int cmd, String[] packages) throws RemoteException {
+            public void dispatchPackageBroadcast(int cmd, String[] packages)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1730,7 +2084,8 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void scheduleCrash(String msg, int typeId, Bundle extras) throws RemoteException {
+            public void scheduleCrash(String msg, int typeId, Bundle extras)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1744,7 +2099,15 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void dumpHeap(boolean managed, boolean mallocInfo, boolean runGc, String dumpBitmaps, String path, ParcelFileDescriptor fd, RemoteCallback finishCallback) throws RemoteException {
+            public void dumpHeap(
+                    boolean managed,
+                    boolean mallocInfo,
+                    boolean runGc,
+                    String dumpBitmaps,
+                    String path,
+                    ParcelFileDescriptor fd,
+                    RemoteCallback finishCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1762,7 +2125,9 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void dumpActivity(ParcelFileDescriptor fd, IBinder servicetoken, String prefix, String[] args) throws RemoteException {
+            public void dumpActivity(
+                    ParcelFileDescriptor fd, IBinder servicetoken, String prefix, String[] args)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1777,7 +2142,8 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void dumpResources(ParcelFileDescriptor fd, RemoteCallback finishCallback) throws RemoteException {
+            public void dumpResources(ParcelFileDescriptor fd, RemoteCallback finishCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1836,7 +2202,8 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void updatePackageCompatibilityInfo(String pkg, CompatibilityInfo info) throws RemoteException {
+            public void updatePackageCompatibilityInfo(String pkg, CompatibilityInfo info)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1861,7 +2228,17 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void dumpMemInfo(ParcelFileDescriptor fd, Debug.MemoryInfo mem, boolean checkin, boolean dumpInfo, boolean dumpDalvik, boolean dumpSummaryOnly, boolean dumpUnreachable, boolean dumpAllocatorLogs, String[] args) throws RemoteException {
+            public void dumpMemInfo(
+                    ParcelFileDescriptor fd,
+                    Debug.MemoryInfo mem,
+                    boolean checkin,
+                    boolean dumpInfo,
+                    boolean dumpDalvik,
+                    boolean dumpSummaryOnly,
+                    boolean dumpUnreachable,
+                    boolean dumpAllocatorLogs,
+                    String[] args)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1881,7 +2258,15 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void dumpMemInfoProto(ParcelFileDescriptor fd, Debug.MemoryInfo mem, boolean dumpInfo, boolean dumpDalvik, boolean dumpSummaryOnly, boolean dumpUnreachable, String[] args) throws RemoteException {
+            public void dumpMemInfoProto(
+                    ParcelFileDescriptor fd,
+                    Debug.MemoryInfo mem,
+                    boolean dumpInfo,
+                    boolean dumpDalvik,
+                    boolean dumpSummaryOnly,
+                    boolean dumpUnreachable,
+                    String[] args)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1912,7 +2297,8 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void dumpCacheInfo(ParcelFileDescriptor fd, String[] args) throws RemoteException {
+            public void dumpCacheInfo(ParcelFileDescriptor fd, String[] args)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1925,7 +2311,8 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void dumpProvider(ParcelFileDescriptor fd, IBinder servicetoken, String[] args) throws RemoteException {
+            public void dumpProvider(ParcelFileDescriptor fd, IBinder servicetoken, String[] args)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1964,7 +2351,13 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void requestAssistContextExtras(IBinder activityToken, IBinder requestToken, int requestType, int sessionId, int flags) throws RemoteException {
+            public void requestAssistContextExtras(
+                    IBinder activityToken,
+                    IBinder requestToken,
+                    int requestType,
+                    int sessionId,
+                    int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1980,7 +2373,8 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void scheduleTranslucentConversionComplete(IBinder token, boolean timeout) throws RemoteException {
+            public void scheduleTranslucentConversionComplete(IBinder token, boolean timeout)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -2076,7 +2470,13 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void stopBinderTrackingAndDumpSystemServer(ParcelFileDescriptor fd, String processName, String packageName, int pid, int uid) throws RemoteException {
+            public void stopBinderTrackingAndDumpSystemServer(
+                    ParcelFileDescriptor fd,
+                    String processName,
+                    String packageName,
+                    int pid,
+                    int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -2092,7 +2492,8 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void scheduleLocalVoiceInteractionStarted(IBinder token, IVoiceInteractor voiceInteractor) throws RemoteException {
+            public void scheduleLocalVoiceInteractionStarted(
+                    IBinder token, IVoiceInteractor voiceInteractor) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -2176,7 +2577,9 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void scheduleTaskFragmentTransaction(ITaskFragmentOrganizer organizer, TaskFragmentTransaction transaction) throws RemoteException {
+            public void scheduleTaskFragmentTransaction(
+                    ITaskFragmentOrganizer organizer, TaskFragmentTransaction transaction)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -2189,7 +2592,12 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void requestDirectActions(IBinder activityToken, IVoiceInteractor intractor, RemoteCallback cancellationCallback, RemoteCallback callback) throws RemoteException {
+            public void requestDirectActions(
+                    IBinder activityToken,
+                    IVoiceInteractor intractor,
+                    RemoteCallback cancellationCallback,
+                    RemoteCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -2204,7 +2612,13 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void performDirectAction(IBinder activityToken, String actionId, Bundle arguments, RemoteCallback cancellationCallback, RemoteCallback resultCallback) throws RemoteException {
+            public void performDirectAction(
+                    IBinder activityToken,
+                    String actionId,
+                    Bundle arguments,
+                    RemoteCallback cancellationCallback,
+                    RemoteCallback resultCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -2220,7 +2634,9 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void notifyContentProviderPublishStatus(ContentProviderHolder holder, String authorities, int userId, boolean published) throws RemoteException {
+            public void notifyContentProviderPublishStatus(
+                    ContentProviderHolder holder, String authorities, int userId, boolean published)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -2235,7 +2651,13 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void instrumentWithoutRestart(ComponentName instrumentationName, Bundle instrumentationArgs, IInstrumentationWatcher instrumentationWatcher, IUiAutomationConnection instrumentationUiConnection, ApplicationInfo targetInfo) throws RemoteException {
+            public void instrumentWithoutRestart(
+                    ComponentName instrumentationName,
+                    Bundle instrumentationArgs,
+                    IInstrumentationWatcher instrumentationWatcher,
+                    IUiAutomationConnection instrumentationUiConnection,
+                    ApplicationInfo targetInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -2251,7 +2673,14 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void updateUiTranslationState(IBinder activityToken, int state, TranslationSpec sourceSpec, TranslationSpec targetSpec, List<AutofillId> viewIds, UiTranslationSpec uiTranslationSpec) throws RemoteException {
+            public void updateUiTranslationState(
+                    IBinder activityToken,
+                    int state,
+                    TranslationSpec sourceSpec,
+                    TranslationSpec targetSpec,
+                    List<AutofillId> viewIds,
+                    UiTranslationSpec uiTranslationSpec)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -2281,7 +2710,8 @@ public interface IApplicationThread extends IInterface {
             }
 
             @Override // android.app.IApplicationThread
-            public void scheduleTimeoutServiceForType(IBinder token, int startId, int fgsType) throws RemoteException {
+            public void scheduleTimeoutServiceForType(IBinder token, int startId, int fgsType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

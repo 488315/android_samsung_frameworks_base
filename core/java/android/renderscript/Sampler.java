@@ -209,7 +209,10 @@ public class Sampler extends BaseObj {
         }
 
         public void setMinification(Value v) {
-            if (v == Value.NEAREST || v == Value.LINEAR || v == Value.LINEAR_MIP_LINEAR || v == Value.LINEAR_MIP_NEAREST) {
+            if (v == Value.NEAREST
+                    || v == Value.LINEAR
+                    || v == Value.LINEAR_MIP_LINEAR
+                    || v == Value.LINEAR_MIP_NEAREST) {
                 this.mMin = v;
                 return;
             }
@@ -250,7 +253,14 @@ public class Sampler extends BaseObj {
 
         public Sampler create() {
             this.mRS.validate();
-            long id = this.mRS.nSamplerCreate(this.mMag.mID, this.mMin.mID, this.mWrapS.mID, this.mWrapT.mID, this.mWrapR.mID, this.mAniso);
+            long id =
+                    this.mRS.nSamplerCreate(
+                            this.mMag.mID,
+                            this.mMin.mID,
+                            this.mWrapS.mID,
+                            this.mWrapT.mID,
+                            this.mWrapR.mID,
+                            this.mAniso);
             Sampler sampler = new Sampler(id, this.mRS);
             sampler.mMin = this.mMin;
             sampler.mMag = this.mMag;

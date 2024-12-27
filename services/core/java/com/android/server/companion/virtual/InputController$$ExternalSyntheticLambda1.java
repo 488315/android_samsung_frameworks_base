@@ -12,7 +12,8 @@ public final /* synthetic */ class InputController$$ExternalSyntheticLambda1 imp
     public final /* synthetic */ int f$3;
     public final /* synthetic */ String f$4;
 
-    public /* synthetic */ InputController$$ExternalSyntheticLambda1(InputController inputController, String str, int i, int i2, String str2, int i3) {
+    public /* synthetic */ InputController$$ExternalSyntheticLambda1(
+            InputController inputController, String str, int i, int i2, String str2, int i3) {
         this.$r8$classId = i3;
         this.f$0 = inputController;
         this.f$1 = str;
@@ -31,7 +32,8 @@ public final /* synthetic */ class InputController$$ExternalSyntheticLambda1 imp
                 int i2 = this.f$3;
                 String str2 = this.f$4;
                 inputController.mNativeWrapper.getClass();
-                return Long.valueOf(InputController.m352$$Nest$smnativeOpenUinputKeyboard(i, i2, str, str2));
+                return Long.valueOf(
+                        InputController.m352$$Nest$smnativeOpenUinputKeyboard(i, i2, str, str2));
             case 1:
                 InputController inputController2 = this.f$0;
                 String str3 = this.f$1;
@@ -39,7 +41,8 @@ public final /* synthetic */ class InputController$$ExternalSyntheticLambda1 imp
                 int i4 = this.f$3;
                 String str4 = this.f$4;
                 inputController2.mNativeWrapper.getClass();
-                return Long.valueOf(InputController.m353$$Nest$smnativeOpenUinputMouse(i3, i4, str3, str4));
+                return Long.valueOf(
+                        InputController.m353$$Nest$smnativeOpenUinputMouse(i3, i4, str3, str4));
             default:
                 InputController inputController3 = this.f$0;
                 String str5 = this.f$1;
@@ -47,7 +50,8 @@ public final /* synthetic */ class InputController$$ExternalSyntheticLambda1 imp
                 int i6 = this.f$3;
                 String str6 = this.f$4;
                 inputController3.mNativeWrapper.getClass();
-                return Long.valueOf(InputController.m351$$Nest$smnativeOpenUinputDpad(i5, i6, str5, str6));
+                return Long.valueOf(
+                        InputController.m351$$Nest$smnativeOpenUinputDpad(i5, i6, str5, str6));
         }
     }
 }

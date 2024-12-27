@@ -12,8 +12,7 @@ public interface IFingerprintClientActiveCallback extends IInterface {
 
     public static class Default implements IFingerprintClientActiveCallback {
         @Override // android.hardware.fingerprint.IFingerprintClientActiveCallback
-        public void onClientActiveChanged(boolean isActive) throws RemoteException {
-        }
+        public void onClientActiveChanged(boolean isActive) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,8 +20,9 @@ public interface IFingerprintClientActiveCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFingerprintClientActiveCallback {
-        public static final String DESCRIPTOR = "android.hardware.fingerprint.IFingerprintClientActiveCallback";
+    public abstract static class Stub extends Binder implements IFingerprintClientActiveCallback {
+        public static final String DESCRIPTOR =
+                "android.hardware.fingerprint.IFingerprintClientActiveCallback";
         static final int TRANSACTION_onClientActiveChanged = 1;
 
         public Stub() {
@@ -60,7 +60,8 @@ public interface IFingerprintClientActiveCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

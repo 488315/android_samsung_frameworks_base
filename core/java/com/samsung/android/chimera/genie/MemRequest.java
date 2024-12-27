@@ -5,26 +5,27 @@ import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public final class MemRequest implements Parcelable {
-    public static final Parcelable.Creator<MemRequest> CREATOR = new Parcelable.Creator<MemRequest>() { // from class: com.samsung.android.chimera.genie.MemRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MemRequest createFromParcel(Parcel in) {
-            return new MemRequest(in);
-        }
+    public static final Parcelable.Creator<MemRequest> CREATOR =
+            new Parcelable.Creator<
+                    MemRequest>() { // from class: com.samsung.android.chimera.genie.MemRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MemRequest createFromParcel(Parcel in) {
+                    return new MemRequest(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MemRequest[] newArray(int size) {
-            return new MemRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MemRequest[] newArray(int size) {
+                    return new MemRequest[size];
+                }
+            };
     public static final int MEMTYPE_CONTIGUOUS = 1;
     public static final int MEMTYPE_DEFAULT = 0;
     private final int mSize;
     private final int mType;
 
-    public @interface MemType {
-    }
+    public @interface MemType {}
 
     public MemRequest(int type, int size) {
         this.mType = type;

@@ -3,10 +3,12 @@ package com.samsung.android.rune;
 import android.os.Build;
 import android.os.SystemProperties;
 import android.util.ArraySet;
+
 import com.samsung.android.core.pm.PmUtils;
 import com.samsung.android.core.pm.multiuser.MultiUserSupportsHelper;
 import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.feature.SemFloatingFeature;
+
 import java.util.Arrays;
 
 /* loaded from: classes6.dex */
@@ -150,7 +152,12 @@ public class PMRune {
     public static final boolean PM_NAL_GET_APP_LIST = isChinaDevice();
 
     static {
-        PM_LDU = PmUtils.isLduSkuBinary() || "factory".equalsIgnoreCase(SystemProperties.get("ro.factory.factory_binary", "Unknown"));
+        PM_LDU =
+                PmUtils.isLduSkuBinary()
+                        || "factory"
+                                .equalsIgnoreCase(
+                                        SystemProperties.get(
+                                                "ro.factory.factory_binary", "Unknown"));
         isSwaRegionDevice();
         PM_INSTALL_TO_SDCARD = false;
         isIndiaRegionDevice();
@@ -159,11 +166,16 @@ public class PMRune {
         PM_WA_PARCELED_LIST = isChinaDevice();
         PM_WA_WORK_COMP_CHANGED = Build.VERSION.DEVICE_INITIAL_SDK_INT >= 34;
         PM_ENABLE_GMS = isChinaDevice() && Build.VERSION.DEVICE_INITIAL_SDK_INT >= 32;
-        PM_GRANT_ALL_RUNTIME_PERMISSION_UNPACK = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_UNPACK");
+        PM_GRANT_ALL_RUNTIME_PERMISSION_UNPACK =
+                SemFloatingFeature.getInstance()
+                        .getBoolean("SEC_FLOATING_FEATURE_COMMON_SUPPORT_UNPACK");
         PERM_CHINA_COMPAT_LOW_SDK = isChinaDevice();
-        UM_BMODE = SemCscFeature.getInstance().getBoolean("CscFeature_Common_SupportTwoPhoneService", false);
+        UM_BMODE =
+                SemCscFeature.getInstance()
+                        .getBoolean("CscFeature_Common_SupportTwoPhoneService", false);
         UM_USER_SWITCH_SETTING = !MultiUserSupportsHelper.IS_TABLET;
-        THEME_WALLPAPER_THEMING_DEBUG = SystemProperties.getBoolean("debug.wallpaper.theme.enable", false);
+        THEME_WALLPAPER_THEMING_DEBUG =
+                SystemProperties.getBoolean("debug.wallpaper.theme.enable", false);
     }
 
     private static boolean isChinaDevice() {
@@ -180,7 +192,9 @@ public class PMRune {
     }
 
     private static boolean isSwaRegionDevice() {
-        ArraySet<String> swaSalesCode = new ArraySet<>(Arrays.asList("INS", "INU", "NPB", "NPL", "SLK", "SLI", "BNG", "BKD"));
+        ArraySet<String> swaSalesCode =
+                new ArraySet<>(
+                        Arrays.asList("INS", "INU", "NPB", "NPL", "SLK", "SLI", "BNG", "BKD"));
         return swaSalesCode.contains(SystemProperties.get("ro.csc.sales_code"));
     }
 }

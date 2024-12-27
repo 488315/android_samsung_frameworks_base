@@ -8,21 +8,23 @@ import android.widget.RemoteViews;
 
 /* loaded from: classes5.dex */
 public class Cocktail implements Parcelable {
-    public static final Parcelable.Creator<Cocktail> CREATOR = new Parcelable.Creator<Cocktail>() { // from class: com.samsung.android.cocktailbar.Cocktail.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Cocktail createFromParcel(Parcel in) {
-            Cocktail data = new Cocktail();
-            data.readFromParcel(in);
-            return data;
-        }
+    public static final Parcelable.Creator<Cocktail> CREATOR =
+            new Parcelable.Creator<
+                    Cocktail>() { // from class: com.samsung.android.cocktailbar.Cocktail.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Cocktail createFromParcel(Parcel in) {
+                    Cocktail data = new Cocktail();
+                    data.readFromParcel(in);
+                    return data;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Cocktail[] newArray(int size) {
-            return new Cocktail[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Cocktail[] newArray(int size) {
+                    return new Cocktail[size];
+                }
+            };
     public static final int STATE_DISABLE = 2;
     public static final int STATE_ENABLE = 1;
     public static final int STATE_NONE = 0;
@@ -170,7 +172,15 @@ public class Cocktail implements Parcelable {
     }
 
     public String dump() {
-        String dumpResult = "[CocktailId:" + this.mCocktailId + " uid:" + this.mUid + " version:" + this.mVersion + " state:" + this.mState;
+        String dumpResult =
+                "[CocktailId:"
+                        + this.mCocktailId
+                        + " uid:"
+                        + this.mUid
+                        + " version:"
+                        + this.mVersion
+                        + " state:"
+                        + this.mState;
         if (this.mBroadcast != null) {
             dumpResult = dumpResult + " has broadcast";
         }
@@ -208,7 +218,8 @@ public class Cocktail implements Parcelable {
         this.mVersion = in.readInt();
         this.mState = in.readInt();
         this.mBroadcast = (PendingIntent) in.readParcelable(PendingIntent.class.getClassLoader());
-        this.mProviderInfo = (CocktailProviderInfo) in.readParcelable(ComponentName.class.getClassLoader());
+        this.mProviderInfo =
+                (CocktailProviderInfo) in.readParcelable(ComponentName.class.getClassLoader());
         this.mCocktailInfo = (CocktailInfo) in.readParcelable(CocktailInfo.class.getClassLoader());
         this.mIsPackageUpdated = in.readByte() == 1;
         this.mIsPackageSuspended = in.readByte() == 1;

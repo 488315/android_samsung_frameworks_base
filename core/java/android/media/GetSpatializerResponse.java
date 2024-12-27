@@ -1,27 +1,28 @@
 package android.media;
 
-import android.media.ISpatializer;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class GetSpatializerResponse implements Parcelable {
-    public static final Parcelable.Creator<GetSpatializerResponse> CREATOR = new Parcelable.Creator<GetSpatializerResponse>() { // from class: android.media.GetSpatializerResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GetSpatializerResponse createFromParcel(Parcel _aidl_source) {
-            GetSpatializerResponse _aidl_out = new GetSpatializerResponse();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<GetSpatializerResponse> CREATOR =
+            new Parcelable.Creator<GetSpatializerResponse>() { // from class:
+                // android.media.GetSpatializerResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GetSpatializerResponse createFromParcel(Parcel _aidl_source) {
+                    GetSpatializerResponse _aidl_out = new GetSpatializerResponse();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GetSpatializerResponse[] newArray(int _aidl_size) {
-            return new GetSpatializerResponse[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GetSpatializerResponse[] newArray(int _aidl_size) {
+                    return new GetSpatializerResponse[_aidl_size];
+                }
+            };
     public ISpatializer spatializer;
 
     @Override // android.os.Parcelable

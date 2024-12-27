@@ -7,19 +7,21 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes2.dex */
 public class SContextSpecificPoseAlert extends SContextEventContext {
-    public static final Parcelable.Creator<SContextSpecificPoseAlert> CREATOR = new Parcelable.Creator<SContextSpecificPoseAlert>() { // from class: android.hardware.scontext.SContextSpecificPoseAlert.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextSpecificPoseAlert createFromParcel(Parcel in) {
-            return new SContextSpecificPoseAlert(in);
-        }
+    public static final Parcelable.Creator<SContextSpecificPoseAlert> CREATOR =
+            new Parcelable.Creator<SContextSpecificPoseAlert>() { // from class:
+                // android.hardware.scontext.SContextSpecificPoseAlert.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextSpecificPoseAlert createFromParcel(Parcel in) {
+                    return new SContextSpecificPoseAlert(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextSpecificPoseAlert[] newArray(int size) {
-            return new SContextSpecificPoseAlert[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextSpecificPoseAlert[] newArray(int size) {
+                    return new SContextSpecificPoseAlert[size];
+                }
+            };
     private Bundle mContext;
 
     SContextSpecificPoseAlert() {
@@ -34,7 +36,8 @@ public class SContextSpecificPoseAlert extends SContextEventContext {
         return this.mContext.getInt("Action");
     }
 
-    @Override // android.hardware.scontext.SContextEventContext, com.samsung.android.hardware.context.SemContextEventContext
+    @Override // android.hardware.scontext.SContextEventContext,
+    // com.samsung.android.hardware.context.SemContextEventContext
     public void setValues(Bundle context) {
         this.mContext = context;
     }

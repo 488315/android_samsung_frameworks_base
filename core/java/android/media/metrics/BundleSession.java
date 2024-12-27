@@ -2,7 +2,9 @@ package android.media.metrics;
 
 import android.annotation.NonNull;
 import android.os.PersistableBundle;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
@@ -15,8 +17,10 @@ public final class BundleSession implements AutoCloseable {
     public BundleSession(String id, MediaMetricsManager manager) {
         this.mId = id;
         this.mManager = manager;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mId);
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mManager);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mId);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mManager);
         this.mLogSessionId = new LogSessionId(this.mId);
     }
 

@@ -7,6 +7,7 @@ import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.util.Pair;
 import android.util.Slog;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -35,7 +36,9 @@ public abstract class BiometricServiceRegistry {
         if (register && z) {
             broadcastAllAuthenticatorsRegistered();
         } else if (!register) {
-            Slog.e("BiometricServiceRegistry", "addAllRegisteredCallback failed to register callback");
+            Slog.e(
+                    "BiometricServiceRegistry",
+                    "addAllRegisteredCallback failed to register callback");
         }
     }
 
@@ -53,7 +56,10 @@ public abstract class BiometricServiceRegistry {
                     throw th;
                 }
             } catch (RemoteException e) {
-                Slog.e("BiometricServiceRegistry", "Remote exception in broadcastAllAuthenticatorsRegistered", e);
+                Slog.e(
+                        "BiometricServiceRegistry",
+                        "Remote exception in broadcastAllAuthenticatorsRegistered",
+                        e);
                 remoteCallbackList = this.mRegisteredCallbacks;
             }
             remoteCallbackList.unregister(broadcastItem);
@@ -89,7 +95,10 @@ public abstract class BiometricServiceRegistry {
         }
         try {
             if (this.mAllProps.size() > 1) {
-                Slog.e("BiometricServiceRegistry", "getSingleProvider() called but multiple sensors present: " + this.mAllProps.size());
+                Slog.e(
+                        "BiometricServiceRegistry",
+                        "getSingleProvider() called but multiple sensors present: "
+                                + this.mAllProps.size());
             }
             int i = ((SensorPropertiesInternal) this.mAllProps.get(0)).sensorId;
             BiometricServiceProvider providerForSensor = getProviderForSensor(i);
@@ -116,18 +125,22 @@ public abstract class BiometricServiceRegistry {
         if (list == null) {
             list = new ArrayList();
         }
-        IBiometricService iBiometricService = (IBiometricService) this.mBiometricServiceSupplier.get();
+        IBiometricService iBiometricService =
+                (IBiometricService) this.mBiometricServiceSupplier.get();
         if (iBiometricService == null) {
             throw new IllegalStateException("biometric service cannot be null");
         }
         ArrayList arrayList = new ArrayList();
         for (BiometricServiceProvider biometricServiceProvider : list) {
-            Slog.d("BiometricServiceRegistry", "registerAllInBackground: " + biometricServiceProvider);
+            Slog.d(
+                    "BiometricServiceRegistry",
+                    "registerAllInBackground: " + biometricServiceProvider);
             if (biometricServiceProvider != null) {
                 List sensorProperties = biometricServiceProvider.getSensorProperties();
                 Iterator it = ((ArrayList) sensorProperties).iterator();
                 while (it.hasNext()) {
-                    SensorPropertiesInternal sensorPropertiesInternal = (SensorPropertiesInternal) it.next();
+                    SensorPropertiesInternal sensorPropertiesInternal =
+                            (SensorPropertiesInternal) it.next();
                     if (sensorPropertiesInternal != null) {
                         registerService(iBiometricService, sensorPropertiesInternal);
                     }
@@ -142,5 +155,6 @@ public abstract class BiometricServiceRegistry {
         }
     }
 
-    public abstract void registerService(IBiometricService iBiometricService, SensorPropertiesInternal sensorPropertiesInternal);
+    public abstract void registerService(
+            IBiometricService iBiometricService, SensorPropertiesInternal sensorPropertiesInternal);
 }

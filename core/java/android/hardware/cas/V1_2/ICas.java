@@ -11,9 +11,12 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import com.android.internal.midi.MidiConstants;
+
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -28,39 +31,51 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
         void onValues(int i, ArrayList<Byte> arrayList);
     }
 
-    @Override // android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+    @Override // android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas,
+    // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
     IHwBinder asBinder();
 
-    @Override // android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas,
+    // android.internal.hidl.base.V1_0.IBase
     void debug(NativeHandle nativeHandle, ArrayList<String> arrayList) throws RemoteException;
 
-    @Override // android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas,
+    // android.internal.hidl.base.V1_0.IBase
     DebugInfo getDebugInfo() throws RemoteException;
 
-    @Override // android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas,
+    // android.internal.hidl.base.V1_0.IBase
     ArrayList<byte[]> getHashChain() throws RemoteException;
 
-    @Override // android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas,
+    // android.internal.hidl.base.V1_0.IBase
     ArrayList<String> interfaceChain() throws RemoteException;
 
-    @Override // android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas,
+    // android.internal.hidl.base.V1_0.IBase
     String interfaceDescriptor() throws RemoteException;
 
-    @Override // android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas,
+    // android.internal.hidl.base.V1_0.IBase
     boolean linkToDeath(IHwBinder.DeathRecipient deathRecipient, long j) throws RemoteException;
 
-    @Override // android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas,
+    // android.internal.hidl.base.V1_0.IBase
     void notifySyspropsChanged() throws RemoteException;
 
-    void openSession_1_2(int i, int i2, openSession_1_2Callback opensession_1_2callback) throws RemoteException;
+    void openSession_1_2(int i, int i2, openSession_1_2Callback opensession_1_2callback)
+            throws RemoteException;
 
-    @Override // android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas,
+    // android.internal.hidl.base.V1_0.IBase
     void ping() throws RemoteException;
 
-    @Override // android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas,
+    // android.internal.hidl.base.V1_0.IBase
     void setHALInstrumentation() throws RemoteException;
 
-    @Override // android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+    @Override // android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas,
+    // android.internal.hidl.base.V1_0.IBase
     boolean unlinkToDeath(IHwBinder.DeathRecipient deathRecipient) throws RemoteException;
 
     static ICas asInterface(IHwBinder binder) {
@@ -117,7 +132,9 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
             this.mRemote = (IHwBinder) Objects.requireNonNull(remote);
         }
 
-        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas,
+        // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase,
+        // android.os.IHwInterface
         public IHwBinder asBinder() {
             return this.mRemote;
         }
@@ -190,7 +207,8 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
         }
 
         @Override // android.hardware.cas.V1_0.ICas
-        public int setSessionPrivateData(ArrayList<Byte> sessionId, ArrayList<Byte> pvtData) throws RemoteException {
+        public int setSessionPrivateData(ArrayList<Byte> sessionId, ArrayList<Byte> pvtData)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.cas.V1_0.ICas.kInterfaceName);
             _hidl_request.writeInt8Vector(sessionId);
@@ -208,7 +226,8 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
         }
 
         @Override // android.hardware.cas.V1_0.ICas
-        public int processEcm(ArrayList<Byte> sessionId, ArrayList<Byte> ecm) throws RemoteException {
+        public int processEcm(ArrayList<Byte> sessionId, ArrayList<Byte> ecm)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.cas.V1_0.ICas.kInterfaceName);
             _hidl_request.writeInt8Vector(sessionId);
@@ -279,7 +298,8 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
         }
 
         @Override // android.hardware.cas.V1_0.ICas
-        public int refreshEntitlements(int refreshType, ArrayList<Byte> refreshData) throws RemoteException {
+        public int refreshEntitlements(int refreshType, ArrayList<Byte> refreshData)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.cas.V1_0.ICas.kInterfaceName);
             _hidl_request.writeInt32(refreshType);
@@ -313,7 +333,9 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
         }
 
         @Override // android.hardware.cas.V1_1.ICas
-        public int sendSessionEvent(ArrayList<Byte> sessionId, int event, int arg, ArrayList<Byte> eventData) throws RemoteException {
+        public int sendSessionEvent(
+                ArrayList<Byte> sessionId, int event, int arg, ArrayList<Byte> eventData)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(android.hardware.cas.V1_1.ICas.kInterfaceName);
             _hidl_request.writeInt8Vector(sessionId);
@@ -333,7 +355,8 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
         }
 
         @Override // android.hardware.cas.V1_2.ICas
-        public void openSession_1_2(int intent, int mode, openSession_1_2Callback _hidl_cb) throws RemoteException {
+        public void openSession_1_2(int intent, int mode, openSession_1_2Callback _hidl_cb)
+                throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(ICas.kInterfaceName);
             _hidl_request.writeInt32(intent);
@@ -351,7 +374,8 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
             }
         }
 
-        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas,
+        // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
         public ArrayList<String> interfaceChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -367,7 +391,8 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
             }
         }
 
-        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas,
+        // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
         public void debug(NativeHandle fd, ArrayList<String> options) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -383,7 +408,8 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
             }
         }
 
-        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas,
+        // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
         public String interfaceDescriptor() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -399,7 +425,8 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
             }
         }
 
-        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas,
+        // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
         public ArrayList<byte[]> getHashChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -411,7 +438,9 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
                 ArrayList<byte[]> _hidl_out_hashchain = new ArrayList<>();
                 HwBlob _hidl_blob = _hidl_reply.readBuffer(16L);
                 int _hidl_vec_size = _hidl_blob.getInt32(8L);
-                HwBlob childBlob = _hidl_reply.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
+                HwBlob childBlob =
+                        _hidl_reply.readEmbeddedBuffer(
+                                _hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
                 _hidl_out_hashchain.clear();
                 for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                     byte[] _hidl_vec_element = new byte[32];
@@ -425,7 +454,8 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
             }
         }
 
-        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas,
+        // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
         public void setHALInstrumentation() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -438,12 +468,15 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
             }
         }
 
-        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
-        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) throws RemoteException {
+        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas,
+        // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie)
+                throws RemoteException {
             return this.mRemote.linkToDeath(recipient, cookie);
         }
 
-        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas,
+        // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
         public void ping() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -457,7 +490,8 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
             }
         }
 
-        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas,
+        // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
         public DebugInfo getDebugInfo() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -474,7 +508,8 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
             }
         }
 
-        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas,
+        // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
         public void notifySyspropsChanged() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -487,51 +522,201 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
             }
         }
 
-        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas,
+        // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
         public boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) throws RemoteException {
             return this.mRemote.unlinkToDeath(recipient);
         }
     }
 
-    public static abstract class Stub extends HwBinder implements ICas {
-        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+    public abstract static class Stub extends HwBinder implements ICas {
+        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas,
+        // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase,
+        // android.os.IHwInterface
         public IHwBinder asBinder() {
             return this;
         }
 
-        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas,
+        // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
         public final ArrayList<String> interfaceChain() {
-            return new ArrayList<>(Arrays.asList(ICas.kInterfaceName, android.hardware.cas.V1_1.ICas.kInterfaceName, android.hardware.cas.V1_0.ICas.kInterfaceName, IBase.kInterfaceName));
+            return new ArrayList<>(
+                    Arrays.asList(
+                            ICas.kInterfaceName,
+                            android.hardware.cas.V1_1.ICas.kInterfaceName,
+                            android.hardware.cas.V1_0.ICas.kInterfaceName,
+                            IBase.kInterfaceName));
         }
 
-        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
-        public void debug(NativeHandle fd, ArrayList<String> options) {
-        }
+        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas,
+        // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        public void debug(NativeHandle fd, ArrayList<String> options) {}
 
-        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas,
+        // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
         public final String interfaceDescriptor() {
             return ICas.kInterfaceName;
         }
 
-        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas,
+        // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
         public final ArrayList<byte[]> getHashChain() {
-            return new ArrayList<>(Arrays.asList(new byte[]{-63, -86, 80, -115, 0, -74, 110, -43, -2, -17, -22, 57, -113, -43, -19, MidiConstants.STATUS_SONG_POSITION, -113, -90, 81, -84, -119, 119, 58, -38, -41, -33, -38, 78, 10, 115, -87, 82}, new byte[]{68, -56, -119, 84, -77, -62, 1, -78, 111, 100, -4, -37, 111, SprAnimatorBase.INTERPOLATOR_TYPE_SINEEASEINOUT, Byte.MIN_VALUE, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, -85, 58, -82, -122, 74, -98, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEINOUT, -57, 14, -118, 116, SprAnimatorBase.INTERPOLATOR_TYPE_SINEEASEINOUT, 74, -23, -42, -86}, new byte[]{14, 101, 107, -95, -70, -63, 20, SprAttributeBase.TYPE_ANIMATOR_SET, -95, SprAttributeBase.TYPE_SHADOW, -106, -17, 117, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33, 105, -46, 75, 0, 13, -126, 14, -11, 101, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT80, 1, 80, MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH, -7, 115, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEOUT, 84, -62}, new byte[]{-20, Byte.MAX_VALUE, -41, -98, MidiConstants.STATUS_CHANNEL_PRESSURE, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60, -6, -123, -68, 73, -108, 38, -83, -82, 62, -66, 35, -17, 5, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, MidiConstants.STATUS_SONG_SELECT, -51, 105, 87, 19, -109, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, -72, 59, 24, -54, 76}));
+            return new ArrayList<>(
+                    Arrays.asList(
+                            new byte[] {
+                                -63,
+                                -86,
+                                80,
+                                -115,
+                                0,
+                                -74,
+                                110,
+                                -43,
+                                -2,
+                                -17,
+                                -22,
+                                57,
+                                -113,
+                                -43,
+                                -19,
+                                MidiConstants.STATUS_SONG_POSITION,
+                                -113,
+                                -90,
+                                81,
+                                -84,
+                                -119,
+                                119,
+                                58,
+                                -38,
+                                -41,
+                                -33,
+                                -38,
+                                78,
+                                10,
+                                115,
+                                -87,
+                                82
+                            },
+                            new byte[] {
+                                68,
+                                -56,
+                                -119,
+                                84,
+                                -77,
+                                -62,
+                                1,
+                                -78,
+                                111,
+                                100,
+                                -4,
+                                -37,
+                                111,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEEASEINOUT,
+                                Byte.MIN_VALUE,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                -85,
+                                58,
+                                -82,
+                                -122,
+                                74,
+                                -98,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEINOUT,
+                                -57,
+                                14,
+                                -118,
+                                116,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEEASEINOUT,
+                                74,
+                                -23,
+                                -42,
+                                -86
+                            },
+                            new byte[] {
+                                14,
+                                101,
+                                107,
+                                -95,
+                                -70,
+                                -63,
+                                20,
+                                SprAttributeBase.TYPE_ANIMATOR_SET,
+                                -95,
+                                SprAttributeBase.TYPE_SHADOW,
+                                -106,
+                                -17,
+                                117,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT33,
+                                105,
+                                -46,
+                                75,
+                                0,
+                                13,
+                                -126,
+                                14,
+                                -11,
+                                101,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT80,
+                                1,
+                                80,
+                                MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH,
+                                -7,
+                                115,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEOUT,
+                                84,
+                                -62
+                            },
+                            new byte[] {
+                                -20,
+                                Byte.MAX_VALUE,
+                                -41,
+                                -98,
+                                MidiConstants.STATUS_CHANNEL_PRESSURE,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60,
+                                -6,
+                                -123,
+                                -68,
+                                73,
+                                -108,
+                                38,
+                                -83,
+                                -82,
+                                62,
+                                -66,
+                                35,
+                                -17,
+                                5,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                MidiConstants.STATUS_SONG_SELECT,
+                                -51,
+                                105,
+                                87,
+                                19,
+                                -109,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                -72,
+                                59,
+                                24,
+                                -54,
+                                76
+                            }));
         }
 
-        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
-        public final void setHALInstrumentation() {
-        }
+        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas,
+        // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        public final void setHALInstrumentation() {}
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) {
             return true;
         }
 
-        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
-        public final void ping() {
-        }
+        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas,
+        // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        public final void ping() {}
 
-        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas,
+        // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
         public final DebugInfo getDebugInfo() {
             DebugInfo info = new DebugInfo();
             info.pid = HidlSupport.getPidIfSharable();
@@ -540,12 +725,14 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
             return info;
         }
 
-        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.cas.V1_2.ICas, android.hardware.cas.V1_1.ICas,
+        // android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
         public final void notifySyspropsChanged() {
             HwBinder.enableInstrumentation();
         }
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) {
             return true;
         }
@@ -567,7 +754,9 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
         }
 
         @Override // android.os.HwBinder
-        public void onTransact(int _hidl_code, HwParcel _hidl_request, final HwParcel _hidl_reply, int _hidl_flags) throws RemoteException {
+        public void onTransact(
+                int _hidl_code, HwParcel _hidl_request, final HwParcel _hidl_reply, int _hidl_flags)
+                throws RemoteException {
             switch (_hidl_code) {
                 case 1:
                     _hidl_request.enforceInterface(android.hardware.cas.V1_0.ICas.kInterfaceName);
@@ -579,15 +768,17 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
                     return;
                 case 2:
                     _hidl_request.enforceInterface(android.hardware.cas.V1_0.ICas.kInterfaceName);
-                    openSession(new ICas.openSessionCallback() { // from class: android.hardware.cas.V1_2.ICas.Stub.1
-                        @Override // android.hardware.cas.V1_0.ICas.openSessionCallback
-                        public void onValues(int status, ArrayList<Byte> sessionId) {
-                            _hidl_reply.writeStatus(0);
-                            _hidl_reply.writeInt32(status);
-                            _hidl_reply.writeInt8Vector(sessionId);
-                            _hidl_reply.send();
-                        }
-                    });
+                    openSession(
+                            new ICas.openSessionCallback() { // from class:
+                                // android.hardware.cas.V1_2.ICas.Stub.1
+                                @Override // android.hardware.cas.V1_0.ICas.openSessionCallback
+                                public void onValues(int status, ArrayList<Byte> sessionId) {
+                                    _hidl_reply.writeStatus(0);
+                                    _hidl_reply.writeInt32(status);
+                                    _hidl_reply.writeInt8Vector(sessionId);
+                                    _hidl_reply.send();
+                                }
+                            });
                     return;
                 case 3:
                     _hidl_request.enforceInterface(android.hardware.cas.V1_0.ICas.kInterfaceName);
@@ -672,15 +863,19 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
                     _hidl_request.enforceInterface(ICas.kInterfaceName);
                     int intent = _hidl_request.readInt32();
                     int mode = _hidl_request.readInt32();
-                    openSession_1_2(intent, mode, new openSession_1_2Callback() { // from class: android.hardware.cas.V1_2.ICas.Stub.2
-                        @Override // android.hardware.cas.V1_2.ICas.openSession_1_2Callback
-                        public void onValues(int status, ArrayList<Byte> sessionId5) {
-                            _hidl_reply.writeStatus(0);
-                            _hidl_reply.writeInt32(status);
-                            _hidl_reply.writeInt8Vector(sessionId5);
-                            _hidl_reply.send();
-                        }
-                    });
+                    openSession_1_2(
+                            intent,
+                            mode,
+                            new openSession_1_2Callback() { // from class:
+                                // android.hardware.cas.V1_2.ICas.Stub.2
+                                @Override // android.hardware.cas.V1_2.ICas.openSession_1_2Callback
+                                public void onValues(int status, ArrayList<Byte> sessionId5) {
+                                    _hidl_reply.writeStatus(0);
+                                    _hidl_reply.writeInt32(status);
+                                    _hidl_reply.writeInt8Vector(sessionId5);
+                                    _hidl_reply.send();
+                                }
+                            });
                     return;
                 case 256067662:
                     _hidl_request.enforceInterface(IBase.kInterfaceName);
@@ -717,7 +912,8 @@ public interface ICas extends android.hardware.cas.V1_1.ICas {
                         long _hidl_array_offset_1 = _hidl_index_0 * 32;
                         byte[] _hidl_array_item_1 = _hidl_out_hashchain.get(_hidl_index_0);
                         if (_hidl_array_item_1 == null || _hidl_array_item_1.length != 32) {
-                            throw new IllegalArgumentException("Array element is not of the expected length");
+                            throw new IllegalArgumentException(
+                                    "Array element is not of the expected length");
                         }
                         childBlob.putInt8Array(_hidl_array_offset_1, _hidl_array_item_1);
                     }

@@ -6,7 +6,9 @@ import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
+
 import com.android.server.power.Slog;
+
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -29,14 +31,23 @@ public abstract class SleepModeUtil {
         try {
             Bundle bundle = new Bundle();
             bundle.putString("request_id", "sleepmode");
-            Bundle call = context.getContentResolver().call("com.samsung.android.sm.dcapi", str, (String) null, bundle);
+            Bundle call =
+                    context.getContentResolver()
+                            .call("com.samsung.android.sm.dcapi", str, (String) null, bundle);
             if (call == null) {
                 Slog.d("SleepModeUtil", "wrong result");
                 return false;
             }
             boolean z2 = call.getBoolean(KnoxCustomManagerService.SPCM_KEY_RESULT);
             if (!z2) {
-                Slog.e("SleepModeUtil", "result " + z2 + ", errId " + call.getInt("error_id", -1) + ", errMsg " + call.getString("error_msg", ""));
+                Slog.e(
+                        "SleepModeUtil",
+                        "result "
+                                + z2
+                                + ", errId "
+                                + call.getInt("error_id", -1)
+                                + ", errMsg "
+                                + call.getString("error_msg", ""));
             }
             Slog.d("SleepModeUtil", str + " " + z2 + ", version " + call.getInt("version", -1));
             return z2;
@@ -54,13 +65,17 @@ public abstract class SleepModeUtil {
     }
 
     public static boolean isPowerConnected(Context context) {
-        Intent registerReceiver = context.registerReceiver(null, new IntentFilter("android.intent.action.BATTERY_CHANGED"), 2);
+        Intent registerReceiver =
+                context.registerReceiver(
+                        null, new IntentFilter("android.intent.action.BATTERY_CHANGED"), 2);
         boolean z = false;
         if (registerReceiver == null) {
             return false;
         }
         int intExtra = registerReceiver.getIntExtra("plugged", -1);
-        if (DEBUG ? intExtra == 1 || intExtra == 4 : intExtra == 1 || intExtra == 2 || intExtra == 4) {
+        if (DEBUG
+                ? intExtra == 1 || intExtra == 4
+                : intExtra == 1 || intExtra == 2 || intExtra == 4) {
             z = true;
         }
         Slog.d("SleepModeUtil", "charging is " + z);

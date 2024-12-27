@@ -15,12 +15,10 @@ public interface ISnapshotRuntimeProfileCallback extends IInterface {
 
     public static class Default implements ISnapshotRuntimeProfileCallback {
         @Override // android.content.pm.dex.ISnapshotRuntimeProfileCallback
-        public void onSuccess(ParcelFileDescriptor profileReadFd) throws RemoteException {
-        }
+        public void onSuccess(ParcelFileDescriptor profileReadFd) throws RemoteException {}
 
         @Override // android.content.pm.dex.ISnapshotRuntimeProfileCallback
-        public void onError(int errCode) throws RemoteException {
-        }
+        public void onError(int errCode) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -28,8 +26,9 @@ public interface ISnapshotRuntimeProfileCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISnapshotRuntimeProfileCallback {
-        public static final String DESCRIPTOR = "android.content.pm.dex.ISnapshotRuntimeProfileCallback";
+    public abstract static class Stub extends Binder implements ISnapshotRuntimeProfileCallback {
+        public static final String DESCRIPTOR =
+                "android.content.pm.dex.ISnapshotRuntimeProfileCallback";
         static final int TRANSACTION_onError = 2;
         static final int TRANSACTION_onSuccess = 1;
 
@@ -70,7 +69,8 @@ public interface ISnapshotRuntimeProfileCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -80,7 +80,9 @@ public interface ISnapshotRuntimeProfileCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ParcelFileDescriptor _arg0 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+                    ParcelFileDescriptor _arg0 =
+                            (ParcelFileDescriptor)
+                                    data.readTypedObject(ParcelFileDescriptor.CREATOR);
                     data.enforceNoDataAvail();
                     onSuccess(_arg0);
                     return true;

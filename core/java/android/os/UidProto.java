@@ -35,8 +35,7 @@ public final class UidProto {
         public static final long NAME = 1138166333441L;
         public static final long SERVICES = 2246267895810L;
 
-        public Package() {
-        }
+        public Package() {}
 
         public final class Service {
             public static final long LAUNCH_COUNT = 1120986464260L;
@@ -44,8 +43,7 @@ public final class UidProto {
             public static final long START_COUNT = 1120986464259L;
             public static final long START_DURATION_MS = 1112396529666L;
 
-            public Service() {
-            }
+            public Service() {}
         }
     }
 
@@ -57,8 +55,7 @@ public final class UidProto {
         public static final long BLE_SCAN_RESULT_COUNT = 1120986464261L;
         public static final long UNOPTIMIZED_BLE_SCAN = 1146756268035L;
 
-        public BluetoothMisc() {
-        }
+        public BluetoothMisc() {}
     }
 
     public final class Cpu {
@@ -74,24 +71,21 @@ public final class UidProto {
         public static final int TOP_SLEEPING = 4;
         public static final long USER_DURATION_MS = 1112396529665L;
 
-        public Cpu() {
-        }
+        public Cpu() {}
 
         public final class ByFrequency {
             public static final long FREQUENCY_INDEX = 1120986464257L;
             public static final long SCREEN_OFF_DURATION_MS = 1112396529667L;
             public static final long TOTAL_DURATION_MS = 1112396529666L;
 
-            public ByFrequency() {
-            }
+            public ByFrequency() {}
         }
 
         public final class ByProcessState {
             public static final long BY_FREQUENCY = 2246267895810L;
             public static final long PROCESS_STATE = 1159641169921L;
 
-            public ByProcessState() {
-            }
+            public ByProcessState() {}
         }
     }
 
@@ -100,23 +94,20 @@ public final class UidProto {
         public static final long NAME = 1138166333441L;
         public static final long TOTAL = 1146756268034L;
 
-        public Job() {
-        }
+        public Job() {}
     }
 
     public final class JobCompletion {
         public static final long NAME = 1138166333441L;
         public static final long REASON_COUNT = 2246267895810L;
 
-        public JobCompletion() {
-        }
+        public JobCompletion() {}
 
         public final class ReasonCount {
             public static final long COUNT = 1120986464258L;
             public static final long NAME = 1159641169921L;
 
-            public ReasonCount() {
-            }
+            public ReasonCount() {}
         }
     }
 
@@ -144,8 +135,7 @@ public final class UidProto {
         public static final long WIFI_PACKETS_TX = 1112396529674L;
         public static final long WIFI_WAKEUP_COUNT = 1120986464270L;
 
-        public Network() {
-        }
+        public Network() {}
     }
 
     public final class PowerUseItem {
@@ -154,8 +144,7 @@ public final class UidProto {
         public static final long SCREEN_POWER_MAH = 1103806595075L;
         public static final long SHOULD_HIDE = 1133871366146L;
 
-        public PowerUseItem() {
-        }
+        public PowerUseItem() {}
     }
 
     public final class Process {
@@ -167,8 +156,7 @@ public final class UidProto {
         public static final long SYSTEM_DURATION_MS = 1112396529667L;
         public static final long USER_DURATION_MS = 1112396529666L;
 
-        public Process() {
-        }
+        public Process() {}
     }
 
     public final class StateTime {
@@ -182,8 +170,7 @@ public final class UidProto {
         public static final int PROCESS_STATE_TOP_SLEEPING = 4;
         public static final long STATE = 1159641169921L;
 
-        public StateTime() {
-        }
+        public StateTime() {}
     }
 
     public final class Sensor {
@@ -191,8 +178,7 @@ public final class UidProto {
         public static final long BACKGROUND = 1146756268035L;
         public static final long ID = 1120986464257L;
 
-        public Sensor() {
-        }
+        public Sensor() {}
     }
 
     public final class Sync {
@@ -200,24 +186,21 @@ public final class UidProto {
         public static final long NAME = 1138166333441L;
         public static final long TOTAL = 1146756268034L;
 
-        public Sync() {
-        }
+        public Sync() {}
     }
 
     public final class UserActivity {
         public static final long COUNT = 1120986464258L;
         public static final long NAME = 1159641169921L;
 
-        public UserActivity() {
-        }
+        public UserActivity() {}
     }
 
     public final class AggregatedWakelock {
         public static final long BACKGROUND_PARTIAL_DURATION_MS = 1112396529666L;
         public static final long PARTIAL_DURATION_MS = 1112396529665L;
 
-        public AggregatedWakelock() {
-        }
+        public AggregatedWakelock() {}
     }
 
     public final class Wakelock {
@@ -227,16 +210,14 @@ public final class UidProto {
         public static final long PARTIAL = 1146756268035L;
         public static final long WINDOW = 1146756268037L;
 
-        public Wakelock() {
-        }
+        public Wakelock() {}
     }
 
     public final class WakeupAlarm {
         public static final long COUNT = 1120986464258L;
         public static final long NAME = 1138166333441L;
 
-        public WakeupAlarm() {
-        }
+        public WakeupAlarm() {}
     }
 
     public final class Wifi {
@@ -245,7 +226,6 @@ public final class UidProto {
         public static final long FULL_WIFI_LOCK_DURATION_MS = 1112396529665L;
         public static final long RUNNING_DURATION_MS = 1112396529666L;
 
-        public Wifi() {
-        }
+        public Wifi() {}
     }
 }

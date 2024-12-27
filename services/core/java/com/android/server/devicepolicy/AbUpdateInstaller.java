@@ -5,6 +5,7 @@ import android.os.PowerManager;
 import android.os.UpdateEngine;
 import android.os.UpdateEngineCallback;
 import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -44,14 +45,26 @@ public final class AbUpdateInstaller extends UpdateInstaller {
                 if (file != null && file.exists()) {
                     updateInstaller.mCopiedUpdateFile.delete();
                 }
-                ((PowerManager) updateInstaller.mInjector.mContext.getSystemService(PowerManager.class)).reboot("deviceowner");
+                ((PowerManager)
+                                updateInstaller.mInjector.mContext.getSystemService(
+                                        PowerManager.class))
+                        .reboot("deviceowner");
                 return;
             }
-            this.mUpdateInstaller.notifyCallbackOnError(((Integer) ((HashMap) AbUpdateInstaller.errorCodesMap).getOrDefault(Integer.valueOf(i), 1)).intValue(), (String) ((HashMap) AbUpdateInstaller.errorStringsMap).getOrDefault(Integer.valueOf(i), VibrationParam$1$$ExternalSyntheticOutline0.m(i, "Unknown error with error code = ")));
+            this.mUpdateInstaller.notifyCallbackOnError(
+                    ((Integer)
+                                    ((HashMap) AbUpdateInstaller.errorCodesMap)
+                                            .getOrDefault(Integer.valueOf(i), 1))
+                            .intValue(),
+                    (String)
+                            ((HashMap) AbUpdateInstaller.errorStringsMap)
+                                    .getOrDefault(
+                                            Integer.valueOf(i),
+                                            VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                                    i, "Unknown error with error code = ")));
         }
 
-        public final void onStatusUpdate(int i, float f) {
-        }
+        public final void onStatusUpdate(int i, float f) {}
     }
 
     static {
@@ -70,11 +83,33 @@ public final class AbUpdateInstaller extends UpdateInstaller {
         hashMap.put(52, 1);
         errorCodesMap = hashMap;
         HashMap hashMap2 = new HashMap();
-        AbUpdateInstaller$$ExternalSyntheticOutline0.m(1, hashMap2, "Unknown error with error code = ", 20, "The delta update payload was targeted for another version or the source partitionwas modified after it was installed");
-        AbUpdateInstaller$$ExternalSyntheticOutline0.m(5, hashMap2, "Failed to finish the configured postinstall works.", 7, "Failed to open one of the partitions it tried to write to or read data from.");
-        AbUpdateInstaller$$ExternalSyntheticOutline0.m(6, hashMap2, "Payload mismatch error.", 9, "Failed to read the payload data from the given URL.");
-        AbUpdateInstaller$$ExternalSyntheticOutline0.m(10, hashMap2, "Payload hash error.", 11, "Payload size mismatch error.");
-        AbUpdateInstaller$$ExternalSyntheticOutline0.m(12, hashMap2, "Failed to verify the signature of the payload.", 52, "The payload has been successfully installed,but the active slot was not flipped.");
+        AbUpdateInstaller$$ExternalSyntheticOutline0.m(
+                1,
+                hashMap2,
+                "Unknown error with error code = ",
+                20,
+                "The delta update payload was targeted for another version or the source"
+                    + " partitionwas modified after it was installed");
+        AbUpdateInstaller$$ExternalSyntheticOutline0.m(
+                5,
+                hashMap2,
+                "Failed to finish the configured postinstall works.",
+                7,
+                "Failed to open one of the partitions it tried to write to or read data from.");
+        AbUpdateInstaller$$ExternalSyntheticOutline0.m(
+                6,
+                hashMap2,
+                "Payload mismatch error.",
+                9,
+                "Failed to read the payload data from the given URL.");
+        AbUpdateInstaller$$ExternalSyntheticOutline0.m(
+                10, hashMap2, "Payload hash error.", 11, "Payload size mismatch error.");
+        AbUpdateInstaller$$ExternalSyntheticOutline0.m(
+                12,
+                hashMap2,
+                "Failed to verify the signature of the payload.",
+                52,
+                "The payload has been successfully installed,but the active slot was not flipped.");
         errorStringsMap = hashMap2;
     }
 
@@ -83,7 +118,11 @@ public final class AbUpdateInstaller extends UpdateInstaller {
         while (this.mEntries.hasMoreElements()) {
             ZipEntry zipEntry = (ZipEntry) this.mEntries.nextElement();
             String name = zipEntry.getName();
-            j += zipEntry.getCompressedSize() + name.length() + 30 + (zipEntry.getExtra() == null ? 0 : zipEntry.getExtra().length);
+            j +=
+                    zipEntry.getCompressedSize()
+                            + name.length()
+                            + 30
+                            + (zipEntry.getExtra() == null ? 0 : zipEntry.getExtra().length);
             if (zipEntry.isDirectory()) {
                 j -= zipEntry.getCompressedSize();
             } else if ("payload.bin".equals(name)) {
@@ -96,7 +135,10 @@ public final class AbUpdateInstaller extends UpdateInstaller {
                     this.mOffsetForUpdate = j - zipEntry.getCompressedSize();
                 }
             } else if ("payload_properties.txt".equals(name)) {
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(this.mPackedUpdateFile.getInputStream(zipEntry)));
+                BufferedReader bufferedReader =
+                        new BufferedReader(
+                                new InputStreamReader(
+                                        this.mPackedUpdateFile.getInputStream(zipEntry)));
                 while (true) {
                     try {
                         String readLine = bufferedReader.readLine();
@@ -119,14 +161,18 @@ public final class AbUpdateInstaller extends UpdateInstaller {
                 continue;
             }
         }
-        String[] strArr = (String[]) this.mProperties.stream().toArray(new AbUpdateInstaller$$ExternalSyntheticLambda1());
+        String[] strArr =
+                (String[])
+                        this.mProperties.stream()
+                                .toArray(new AbUpdateInstaller$$ExternalSyntheticLambda1());
         if (this.mSizeForUpdate == -1) {
             Log.w("UpdateInstaller", "Failed to find payload entry in the given package.");
             notifyCallbackOnError(3, "Failed to find payload entry in the given package.");
             return;
         }
         UpdateEngine updateEngine = new UpdateEngine();
-        DelegatingUpdateEngineCallback delegatingUpdateEngineCallback = new DelegatingUpdateEngineCallback();
+        DelegatingUpdateEngineCallback delegatingUpdateEngineCallback =
+                new DelegatingUpdateEngineCallback();
         delegatingUpdateEngineCallback.mUpdateInstaller = this;
         delegatingUpdateEngineCallback.mUpdateEngine = updateEngine;
         updateEngine.bind(delegatingUpdateEngineCallback);
@@ -145,7 +191,10 @@ public final class AbUpdateInstaller extends UpdateInstaller {
         }
         try {
             setState();
-            applyPayload(Paths.get(this.mCopiedUpdateFile.getAbsolutePath(), new String[0]).toUri().toString());
+            applyPayload(
+                    Paths.get(this.mCopiedUpdateFile.getAbsolutePath(), new String[0])
+                            .toUri()
+                            .toString());
         } catch (ZipException e) {
             Log.w("UpdateInstaller", e);
             notifyCallbackOnError(3, Log.getStackTraceString(e));

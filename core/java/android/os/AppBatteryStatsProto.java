@@ -8,8 +8,7 @@ public final class AppBatteryStatsProto {
         public static final long PROCESS_STATE_STATS = 2246267895810L;
         public static final long UID = 1120986464257L;
 
-        public UidStats() {
-        }
+        public UidStats() {}
 
         public final class ProcessStateStats {
             public static final int BACKGROUND = 2;
@@ -21,8 +20,7 @@ public final class AppBatteryStatsProto {
             public static final long PROCESS_STATE = 1159641169921L;
             public static final int UNSPECIFIED = 0;
 
-            public ProcessStateStats() {
-            }
+            public ProcessStateStats() {}
         }
     }
 }

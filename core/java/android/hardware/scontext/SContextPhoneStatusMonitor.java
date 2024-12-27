@@ -7,19 +7,21 @@ import android.os.Parcelable;
 @Deprecated
 /* loaded from: classes2.dex */
 public class SContextPhoneStatusMonitor extends SContextEventContext {
-    public static final Parcelable.Creator<SContextPhoneStatusMonitor> CREATOR = new Parcelable.Creator<SContextPhoneStatusMonitor>() { // from class: android.hardware.scontext.SContextPhoneStatusMonitor.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextPhoneStatusMonitor createFromParcel(Parcel in) {
-            return new SContextPhoneStatusMonitor(in);
-        }
+    public static final Parcelable.Creator<SContextPhoneStatusMonitor> CREATOR =
+            new Parcelable.Creator<SContextPhoneStatusMonitor>() { // from class:
+                // android.hardware.scontext.SContextPhoneStatusMonitor.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextPhoneStatusMonitor createFromParcel(Parcel in) {
+                    return new SContextPhoneStatusMonitor(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SContextPhoneStatusMonitor[] newArray(int size) {
-            return new SContextPhoneStatusMonitor[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SContextPhoneStatusMonitor[] newArray(int size) {
+                    return new SContextPhoneStatusMonitor[size];
+                }
+            };
     private Bundle mContext;
 
     SContextPhoneStatusMonitor() {
@@ -46,7 +48,8 @@ public class SContextPhoneStatusMonitor extends SContextEventContext {
         return this.mContext.getLong("timestamp");
     }
 
-    @Override // android.hardware.scontext.SContextEventContext, com.samsung.android.hardware.context.SemContextEventContext
+    @Override // android.hardware.scontext.SContextEventContext,
+    // com.samsung.android.hardware.context.SemContextEventContext
     public void setValues(Bundle context) {
         this.mContext = context;
     }

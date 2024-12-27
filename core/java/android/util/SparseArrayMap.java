@@ -59,7 +59,9 @@ public class SparseArrayMap<K, V> {
 
     public V getOrDefault(int key, K mapKey, V defaultValue) {
         ArrayMap<K, V> data;
-        if (this.mData.contains(key) && (data = this.mData.get(key)) != null && data.containsKey(mapKey)) {
+        if (this.mData.contains(key)
+                && (data = this.mData.get(key)) != null
+                && data.containsKey(mapKey)) {
             return data.get(mapKey);
         }
         return defaultValue;

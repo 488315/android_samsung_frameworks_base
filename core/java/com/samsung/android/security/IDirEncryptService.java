@@ -6,7 +6,6 @@ import android.os.IInterface;
 import android.os.IVoldTaskListener;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.samsung.android.security.IDirEncryptServiceListener;
 
 /* loaded from: classes6.dex */
 public interface IDirEncryptService extends IInterface {
@@ -24,7 +23,8 @@ public interface IDirEncryptService extends IInterface {
 
     int isStorageCardEncryptionPoliciesApplied() throws RemoteException;
 
-    void registerListener(IDirEncryptServiceListener iDirEncryptServiceListener) throws RemoteException;
+    void registerListener(IDirEncryptServiceListener iDirEncryptServiceListener)
+            throws RemoteException;
 
     void setMountSDcardToHelper(boolean z) throws RemoteException;
 
@@ -38,9 +38,10 @@ public interface IDirEncryptService extends IInterface {
 
     void unmountSDCardByAdmin() throws RemoteException;
 
-    void unregisterListener(IDirEncryptServiceListener iDirEncryptServiceListener) throws RemoteException;
+    void unregisterListener(IDirEncryptServiceListener iDirEncryptServiceListener)
+            throws RemoteException;
 
-    public static abstract class Stub extends Binder implements IDirEncryptService {
+    public abstract static class Stub extends Binder implements IDirEncryptService {
         private static final String DESCRIPTOR = "IDirEncryptService";
         static final int TRANSACTION_encryptStorage = 9;
         static final int TRANSACTION_getAdditionalSpaceRequired = 8;
@@ -75,7 +76,8 @@ public interface IDirEncryptService extends IInterface {
             }
 
             @Override // com.samsung.android.security.IDirEncryptService
-            public void registerListener(IDirEncryptServiceListener listener) throws RemoteException {
+            public void registerListener(IDirEncryptServiceListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain();
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -90,7 +92,8 @@ public interface IDirEncryptService extends IInterface {
             }
 
             @Override // com.samsung.android.security.IDirEncryptService
-            public void unregisterListener(IDirEncryptServiceListener listener) throws RemoteException {
+            public void unregisterListener(IDirEncryptServiceListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain();
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -105,7 +108,8 @@ public interface IDirEncryptService extends IInterface {
             }
 
             @Override // com.samsung.android.security.IDirEncryptService
-            public int setStorageCardEncryptionPolicy(int encType, int fullEnc, int excludeMediaFiles) throws RemoteException {
+            public int setStorageCardEncryptionPolicy(
+                    int encType, int fullEnc, int excludeMediaFiles) throws RemoteException {
                 Parcel _data = Parcel.obtain();
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -124,7 +128,8 @@ public interface IDirEncryptService extends IInterface {
             }
 
             @Override // com.samsung.android.security.IDirEncryptService
-            public int setSdCardEncryptionPolicy(int isPolicy, int status, String uuid) throws RemoteException {
+            public int setSdCardEncryptionPolicy(int isPolicy, int status, String uuid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain();
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -318,7 +323,8 @@ public interface IDirEncryptService extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(43, _data, _reply, 0);
                     _reply.readException();
-                    IVoldTaskListener _result = IVoldTaskListener.Stub.asInterface(_reply.readStrongBinder());
+                    IVoldTaskListener _result =
+                            IVoldTaskListener.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -348,11 +354,13 @@ public interface IDirEncryptService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2)
+                throws RemoteException {
             switch (i) {
                 case 1:
                     parcel.enforceInterface(DESCRIPTOR);
-                    IDirEncryptServiceListener asInterface = IDirEncryptServiceListener.Stub.asInterface(parcel.readStrongBinder());
+                    IDirEncryptServiceListener asInterface =
+                            IDirEncryptServiceListener.Stub.asInterface(parcel.readStrongBinder());
                     if (asInterface == null) {
                         return false;
                     }
@@ -361,7 +369,8 @@ public interface IDirEncryptService extends IInterface {
                     return true;
                 case 2:
                     parcel.enforceInterface(DESCRIPTOR);
-                    IDirEncryptServiceListener asInterface2 = IDirEncryptServiceListener.Stub.asInterface(parcel.readStrongBinder());
+                    IDirEncryptServiceListener asInterface2 =
+                            IDirEncryptServiceListener.Stub.asInterface(parcel.readStrongBinder());
                     if (asInterface2 == null) {
                         return false;
                     }
@@ -370,13 +379,16 @@ public interface IDirEncryptService extends IInterface {
                     return true;
                 case 3:
                     parcel.enforceInterface(DESCRIPTOR);
-                    int storageCardEncryptionPolicy = setStorageCardEncryptionPolicy(parcel.readInt(), parcel.readInt(), parcel.readInt());
+                    int storageCardEncryptionPolicy =
+                            setStorageCardEncryptionPolicy(
+                                    parcel.readInt(), parcel.readInt(), parcel.readInt());
                     parcel2.writeNoException();
                     parcel2.writeInt(storageCardEncryptionPolicy);
                     return true;
                 case 4:
                     parcel.enforceInterface(DESCRIPTOR);
-                    int isStorageCardEncryptionPoliciesApplied = isStorageCardEncryptionPoliciesApplied();
+                    int isStorageCardEncryptionPoliciesApplied =
+                            isStorageCardEncryptionPoliciesApplied();
                     parcel2.writeNoException();
                     parcel2.writeInt(isStorageCardEncryptionPoliciesApplied);
                     return true;
@@ -417,7 +429,9 @@ public interface IDirEncryptService extends IInterface {
                     return true;
                 case 11:
                     parcel.enforceInterface(DESCRIPTOR);
-                    int sdCardEncryptionPolicy = setSdCardEncryptionPolicy(parcel.readInt(), parcel.readInt(), parcel.readString());
+                    int sdCardEncryptionPolicy =
+                            setSdCardEncryptionPolicy(
+                                    parcel.readInt(), parcel.readInt(), parcel.readString());
                     parcel2.writeNoException();
                     parcel2.writeInt(sdCardEncryptionPolicy);
                     return true;

@@ -6,19 +6,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SemContextSlocationArDistance extends SemContextEventContext {
-    public static final Parcelable.Creator<SemContextSlocationArDistance> CREATOR = new Parcelable.Creator<SemContextSlocationArDistance>() { // from class: com.samsung.android.hardware.context.SemContextSlocationArDistance.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextSlocationArDistance createFromParcel(Parcel in) {
-            return new SemContextSlocationArDistance(in);
-        }
+    public static final Parcelable.Creator<SemContextSlocationArDistance> CREATOR =
+            new Parcelable.Creator<
+                    SemContextSlocationArDistance>() { // from class:
+                                                       // com.samsung.android.hardware.context.SemContextSlocationArDistance.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextSlocationArDistance createFromParcel(Parcel in) {
+                    return new SemContextSlocationArDistance(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemContextSlocationArDistance[] newArray(int size) {
-            return new SemContextSlocationArDistance[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemContextSlocationArDistance[] newArray(int size) {
+                    return new SemContextSlocationArDistance[size];
+                }
+            };
     public static final int MODE_AR_DISTANCE_CMD = 1;
     public static final int MODE_UNKNOWN = -1;
     private Bundle mContext;

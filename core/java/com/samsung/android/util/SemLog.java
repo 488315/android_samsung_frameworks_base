@@ -51,8 +51,7 @@ public final class SemLog {
         mEnabledWtf = z;
     }
 
-    private SemLog() {
-    }
+    private SemLog() {}
 
     public static int v(String tag, String msg) {
         if (mEnabledV) {

@@ -8,13 +8,15 @@ import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Slog;
+
 import com.android.internal.pm.parsing.pkg.AndroidPackageHidden;
 import com.android.internal.util.ArrayUtils;
 import com.android.server.PinnerService$$ExternalSyntheticOutline0;
-import com.android.server.pm.PackageAbiHelper;
 import com.android.server.pm.pkg.AndroidPackage;
 import com.android.server.pm.pkg.PackageStateInternal;
+
 import dalvik.system.VMRuntime;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -65,7 +67,9 @@ public final class PackageAbiHelperImpl implements PackageAbiHelper {
                     canonicalFile = parentFile;
                     parentFile = parentFile2;
                 }
-                Slog.w("PackageManager", "Unrecognized code path " + file + " - using " + canonicalFile);
+                Slog.w(
+                        "PackageManager",
+                        "Unrecognized code path " + file + " - using " + canonicalFile);
             } catch (IOException unused) {
                 Slog.w("PackageManager", "Can't canonicalize code path " + file);
                 return Environment.getRootDirectory().getPath();
@@ -86,11 +90,13 @@ public final class PackageAbiHelperImpl implements PackageAbiHelper {
         if (name.endsWith(".apk") || name.endsWith(".tmp")) {
             return name.substring(0, name.lastIndexOf(46));
         }
-        PinnerService$$ExternalSyntheticOutline0.m("Odd, ", str, " doesn't look like an APK", "PackageManager");
+        PinnerService$$ExternalSyntheticOutline0.m(
+                "Odd, ", str, " doesn't look like an APK", "PackageManager");
         return null;
     }
 
-    public static PackageAbiHelper.NativeLibraryPaths deriveNativeLibraryPaths(PackageAbiHelper.Abis abis, File file, String str, String str2, boolean z, boolean z2) {
+    public static PackageAbiHelper.NativeLibraryPaths deriveNativeLibraryPaths(
+            PackageAbiHelper.Abis abis, File file, String str, String str2, boolean z, boolean z2) {
         String absolutePath;
         String absolutePath2;
         File file2 = new File(str);
@@ -103,11 +109,29 @@ public final class PackageAbiHelperImpl implements PackageAbiHelper {
             if (z4) {
                 String calculateBundledApkRoot = calculateBundledApkRoot(str2);
                 String str5 = InstructionSets.PREFERRED_INSTRUCTION_SET;
-                boolean is64BitInstructionSet = VMRuntime.is64BitInstructionSet(str4 == null ? InstructionSets.PREFERRED_INSTRUCTION_SET : VMRuntime.getInstructionSet(str4));
+                boolean is64BitInstructionSet =
+                        VMRuntime.is64BitInstructionSet(
+                                str4 == null
+                                        ? InstructionSets.PREFERRED_INSTRUCTION_SET
+                                        : VMRuntime.getInstructionSet(str4));
                 String deriveCodePathName = deriveCodePathName(str);
-                absolutePath = Environment.buildPath(new File(calculateBundledApkRoot), new String[]{is64BitInstructionSet ? "lib64" : "lib", deriveCodePathName}).getAbsolutePath();
+                absolutePath =
+                        Environment.buildPath(
+                                        new File(calculateBundledApkRoot),
+                                        new String[] {
+                                            is64BitInstructionSet ? "lib64" : "lib",
+                                            deriveCodePathName
+                                        })
+                                .getAbsolutePath();
                 if (str3 != null) {
-                    r4 = Environment.buildPath(new File(calculateBundledApkRoot), new String[]{is64BitInstructionSet ? "lib" : "lib64", deriveCodePathName}).getAbsolutePath();
+                    r4 =
+                            Environment.buildPath(
+                                            new File(calculateBundledApkRoot),
+                                            new String[] {
+                                                is64BitInstructionSet ? "lib" : "lib64",
+                                                deriveCodePathName
+                                            })
+                                    .getAbsolutePath();
                 }
             } else {
                 absolutePath = new File(file, deriveCodePathName(str)).getAbsolutePath();
@@ -116,8 +140,18 @@ public final class PackageAbiHelperImpl implements PackageAbiHelper {
         } else {
             absolutePath = new File(file2, "lib").getAbsolutePath();
             String str6 = InstructionSets.PREFERRED_INSTRUCTION_SET;
-            absolutePath2 = new File(absolutePath, str4 == null ? InstructionSets.PREFERRED_INSTRUCTION_SET : VMRuntime.getInstructionSet(str4)).getAbsolutePath();
-            r4 = str3 != null ? new File(absolutePath, VMRuntime.getInstructionSet(str3)).getAbsolutePath() : null;
+            absolutePath2 =
+                    new File(
+                                    absolutePath,
+                                    str4 == null
+                                            ? InstructionSets.PREFERRED_INSTRUCTION_SET
+                                            : VMRuntime.getInstructionSet(str4))
+                            .getAbsolutePath();
+            r4 =
+                    str3 != null
+                            ? new File(absolutePath, VMRuntime.getInstructionSet(str3))
+                                    .getAbsolutePath()
+                            : null;
             z3 = true;
         }
         return new PackageAbiHelper.NativeLibraryPaths(absolutePath, z3, absolutePath2, r4);
@@ -126,7 +160,8 @@ public final class PackageAbiHelperImpl implements PackageAbiHelper {
     public static String[] getNativelySupportedAbis(String[] strArr) {
         ArrayList arrayList = new ArrayList();
         for (String str : strArr) {
-            if (TextUtils.isEmpty(SystemProperties.get("ro.dalvik.vm.isa." + VMRuntime.getInstructionSet(str)))) {
+            if (TextUtils.isEmpty(
+                    SystemProperties.get("ro.dalvik.vm.isa." + VMRuntime.getInstructionSet(str)))) {
                 arrayList.add(str);
             }
         }
@@ -139,54 +174,87 @@ public final class PackageAbiHelperImpl implements PackageAbiHelper {
                 throw new PackageManagerException(i, str);
             }
             if (z && i == -113) {
-                throw new PackageManagerException(-131, "The multiArch app's native libs don't support all the natively supported ABIs of the device.");
+                throw new PackageManagerException(
+                        -131,
+                        "The multiArch app's native libs don't support all the natively supported"
+                            + " ABIs of the device.");
             }
         }
     }
 
     @Override // com.android.server.pm.PackageAbiHelper
-    public final PackageAbiHelper.NativeLibraryPaths deriveNativeLibraryPaths(AndroidPackage androidPackage, boolean z, boolean z2, File file) {
+    public final PackageAbiHelper.NativeLibraryPaths deriveNativeLibraryPaths(
+            AndroidPackage androidPackage, boolean z, boolean z2, File file) {
         AndroidPackageHidden androidPackageHidden = (AndroidPackageHidden) androidPackage;
-        return deriveNativeLibraryPaths(new PackageAbiHelper.Abis(androidPackageHidden.getPrimaryCpuAbi(), androidPackageHidden.getSecondaryCpuAbi()), file, androidPackage.getPath(), androidPackage.getBaseApkPath(), z, z2);
+        return deriveNativeLibraryPaths(
+                new PackageAbiHelper.Abis(
+                        androidPackageHidden.getPrimaryCpuAbi(),
+                        androidPackageHidden.getSecondaryCpuAbi()),
+                file,
+                androidPackage.getPath(),
+                androidPackage.getBaseApkPath(),
+                z,
+                z2);
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:131:0x01d9, code lost:
-    
-        if (com.android.server.pm.parsing.pkg.AndroidPackageUtils.isLibrary(r20) != false) goto L135;
-     */
+
+       if (com.android.server.pm.parsing.pkg.AndroidPackageUtils.isLibrary(r20) != false) goto L135;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:132:0x01db, code lost:
-    
-        r0 = r4[r6];
-     */
+
+       r0 = r4[r6];
+    */
     /* JADX WARN: Code restructure failed: missing block: B:134:0x01e8, code lost:
-    
-        throw new com.android.server.pm.PackageManagerException(-110, "Shared library with native libs must be multiarch");
-     */
+
+       throw new com.android.server.pm.PackageManagerException(-110, "Shared library with native libs must be multiarch");
+    */
     /* JADX WARN: Multi-variable type inference failed */
     @Override // com.android.server.pm.PackageAbiHelper
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final android.util.Pair derivePackageAbi(com.android.server.pm.pkg.AndroidPackage r20, boolean r21, boolean r22, java.lang.String r23, java.io.File r24) {
+    public final android.util.Pair derivePackageAbi(
+            com.android.server.pm.pkg.AndroidPackage r20,
+            boolean r21,
+            boolean r22,
+            java.lang.String r23,
+            java.io.File r24) {
         /*
             Method dump skipped, instructions count: 576
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.PackageAbiHelperImpl.derivePackageAbi(com.android.server.pm.pkg.AndroidPackage, boolean, boolean, java.lang.String, java.io.File):android.util.Pair");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.PackageAbiHelperImpl.derivePackageAbi(com.android.server.pm.pkg.AndroidPackage,"
+                    + " boolean, boolean, java.lang.String, java.io.File):android.util.Pair");
     }
 
     @Override // com.android.server.pm.PackageAbiHelper
-    public final String getAdjustedAbiForSharedUser(ArraySet arraySet, AndroidPackage androidPackage) {
+    public final String getAdjustedAbiForSharedUser(
+            ArraySet arraySet, AndroidPackage androidPackage) {
         String primaryCpuAbi;
-        String instructionSet = (androidPackage == null || (primaryCpuAbi = ((AndroidPackageHidden) androidPackage).getPrimaryCpuAbi()) == null) ? null : VMRuntime.getInstructionSet(primaryCpuAbi);
+        String instructionSet =
+                (androidPackage == null
+                                || (primaryCpuAbi =
+                                                ((AndroidPackageHidden) androidPackage)
+                                                        .getPrimaryCpuAbi())
+                                        == null)
+                        ? null
+                        : VMRuntime.getInstructionSet(primaryCpuAbi);
         Iterator it = arraySet.iterator();
         PackageStateInternal packageStateInternal = null;
         while (it.hasNext()) {
             PackageStateInternal packageStateInternal2 = (PackageStateInternal) it.next();
-            if (androidPackage == null || !androidPackage.getPackageName().equals(packageStateInternal2.getPackageName())) {
+            if (androidPackage == null
+                    || !androidPackage
+                            .getPackageName()
+                            .equals(packageStateInternal2.getPackageName())) {
                 if (packageStateInternal2.getPrimaryCpuAbiLegacy() != null) {
-                    String instructionSet2 = VMRuntime.getInstructionSet(packageStateInternal2.getPrimaryCpuAbiLegacy());
+                    String instructionSet2 =
+                            VMRuntime.getInstructionSet(
+                                    packageStateInternal2.getPrimaryCpuAbiLegacy());
                     if (instructionSet != null && !instructionSet.equals(instructionSet2)) {
                         StringBuilder sb = new StringBuilder("Instruction set mismatch, ");
                         sb.append(packageStateInternal == null ? "[caller]" : packageStateInternal);
@@ -208,7 +276,9 @@ public final class PackageAbiHelperImpl implements PackageAbiHelper {
         if (instructionSet == null) {
             return null;
         }
-        return packageStateInternal != null ? packageStateInternal.getPrimaryCpuAbiLegacy() : ((AndroidPackageHidden) androidPackage).getPrimaryCpuAbi();
+        return packageStateInternal != null
+                ? packageStateInternal.getPrimaryCpuAbiLegacy()
+                : ((AndroidPackageHidden) androidPackage).getPrimaryCpuAbi();
     }
 
     @Override // com.android.server.pm.PackageAbiHelper
@@ -221,14 +291,26 @@ public final class PackageAbiHelperImpl implements PackageAbiHelper {
         String calculateBundledApkRoot = calculateBundledApkRoot(androidPackage.getBaseApkPath());
         File file = new File(androidPackage.getPath());
         if (ApkLiteParseUtils.isApkFile(file)) {
-            exists = new File(calculateBundledApkRoot, new File("lib64", deriveCodePathName).getPath()).exists();
-            exists2 = new File(calculateBundledApkRoot, new File("lib", deriveCodePathName).getPath()).exists();
+            exists =
+                    new File(
+                                    calculateBundledApkRoot,
+                                    new File("lib64", deriveCodePathName).getPath())
+                            .exists();
+            exists2 =
+                    new File(calculateBundledApkRoot, new File("lib", deriveCodePathName).getPath())
+                            .exists();
         } else {
             File file2 = new File(file, "lib");
             String[] strArr = Build.SUPPORTED_64_BIT_ABIS;
-            exists = (ArrayUtils.isEmpty(strArr) || TextUtils.isEmpty(strArr[0])) ? false : new File(file2, VMRuntime.getInstructionSet(strArr[0])).exists();
+            exists =
+                    (ArrayUtils.isEmpty(strArr) || TextUtils.isEmpty(strArr[0]))
+                            ? false
+                            : new File(file2, VMRuntime.getInstructionSet(strArr[0])).exists();
             String[] strArr2 = Build.SUPPORTED_32_BIT_ABIS;
-            exists2 = (ArrayUtils.isEmpty(strArr2) || TextUtils.isEmpty(strArr2[0])) ? false : new File(file2, VMRuntime.getInstructionSet(strArr2[0])).exists();
+            exists2 =
+                    (ArrayUtils.isEmpty(strArr2) || TextUtils.isEmpty(strArr2[0]))
+                            ? false
+                            : new File(file2, VMRuntime.getInstructionSet(strArr2[0])).exists();
         }
         String str3 = null;
         if (exists && !exists2) {
@@ -237,9 +319,14 @@ public final class PackageAbiHelperImpl implements PackageAbiHelper {
             if (!exists2 || exists) {
                 if (exists2 && exists) {
                     if (!androidPackage.isMultiArch()) {
-                        Slog.e("PackageManager", "Package " + androidPackage + " has multiple bundled libs, but is not multiarch.");
+                        Slog.e(
+                                "PackageManager",
+                                "Package "
+                                        + androidPackage
+                                        + " has multiple bundled libs, but is not multiarch.");
                     }
-                    if (VMRuntime.is64BitInstructionSet(InstructionSets.PREFERRED_INSTRUCTION_SET)) {
+                    if (VMRuntime.is64BitInstructionSet(
+                            InstructionSets.PREFERRED_INSTRUCTION_SET)) {
                         str3 = Build.SUPPORTED_64_BIT_ABIS[0];
                         str = Build.SUPPORTED_32_BIT_ABIS[0];
                     } else {

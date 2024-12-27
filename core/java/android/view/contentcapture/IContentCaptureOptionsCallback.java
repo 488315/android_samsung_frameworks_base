@@ -9,14 +9,16 @@ import android.os.RemoteException;
 
 /* loaded from: classes4.dex */
 public interface IContentCaptureOptionsCallback extends IInterface {
-    public static final String DESCRIPTOR = "android.view.contentcapture.IContentCaptureOptionsCallback";
+    public static final String DESCRIPTOR =
+            "android.view.contentcapture.IContentCaptureOptionsCallback";
 
-    void setContentCaptureOptions(ContentCaptureOptions contentCaptureOptions) throws RemoteException;
+    void setContentCaptureOptions(ContentCaptureOptions contentCaptureOptions)
+            throws RemoteException;
 
     public static class Default implements IContentCaptureOptionsCallback {
         @Override // android.view.contentcapture.IContentCaptureOptionsCallback
-        public void setContentCaptureOptions(ContentCaptureOptions options) throws RemoteException {
-        }
+        public void setContentCaptureOptions(ContentCaptureOptions options)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +26,7 @@ public interface IContentCaptureOptionsCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IContentCaptureOptionsCallback {
+    public abstract static class Stub extends Binder implements IContentCaptureOptionsCallback {
         static final int TRANSACTION_setContentCaptureOptions = 1;
 
         public Stub() {
@@ -62,7 +64,8 @@ public interface IContentCaptureOptionsCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IContentCaptureOptionsCallback.DESCRIPTOR);
             }
@@ -72,7 +75,9 @@ public interface IContentCaptureOptionsCallback extends IInterface {
             }
             switch (code) {
                 case 1:
-                    ContentCaptureOptions _arg0 = (ContentCaptureOptions) data.readTypedObject(ContentCaptureOptions.CREATOR);
+                    ContentCaptureOptions _arg0 =
+                            (ContentCaptureOptions)
+                                    data.readTypedObject(ContentCaptureOptions.CREATOR);
                     data.enforceNoDataAvail();
                     setContentCaptureOptions(_arg0);
                     return true;
@@ -98,7 +103,8 @@ public interface IContentCaptureOptionsCallback extends IInterface {
             }
 
             @Override // android.view.contentcapture.IContentCaptureOptionsCallback
-            public void setContentCaptureOptions(ContentCaptureOptions options) throws RemoteException {
+            public void setContentCaptureOptions(ContentCaptureOptions options)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IContentCaptureOptionsCallback.DESCRIPTOR);

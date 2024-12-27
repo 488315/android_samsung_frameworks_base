@@ -6,32 +6,36 @@ import android.os.VibratorInfo;
 
 /* loaded from: classes3.dex */
 public abstract class VibrationEffectSegment implements Parcelable {
-    public static final Parcelable.Creator<VibrationEffectSegment> CREATOR = new Parcelable.Creator<VibrationEffectSegment>() { // from class: android.os.vibrator.VibrationEffectSegment.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VibrationEffectSegment createFromParcel(Parcel in) {
-            switch (in.readInt()) {
-                case 1:
-                    return new PrebakedSegment(in);
-                case 2:
-                    return new PrimitiveSegment(in);
-                case 3:
-                    return new StepSegment(in);
-                case 4:
-                    return new RampSegment(in);
-                case 5:
-                    return new SemHapticSegment(in);
-                default:
-                    throw new IllegalStateException("Unexpected vibration event type token in parcel.");
-            }
-        }
+    public static final Parcelable.Creator<VibrationEffectSegment> CREATOR =
+            new Parcelable.Creator<
+                    VibrationEffectSegment>() { // from class:
+                                                // android.os.vibrator.VibrationEffectSegment.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VibrationEffectSegment createFromParcel(Parcel in) {
+                    switch (in.readInt()) {
+                        case 1:
+                            return new PrebakedSegment(in);
+                        case 2:
+                            return new PrimitiveSegment(in);
+                        case 3:
+                            return new StepSegment(in);
+                        case 4:
+                            return new RampSegment(in);
+                        case 5:
+                            return new SemHapticSegment(in);
+                        default:
+                            throw new IllegalStateException(
+                                    "Unexpected vibration event type token in parcel.");
+                    }
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VibrationEffectSegment[] newArray(int size) {
-            return new VibrationEffectSegment[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VibrationEffectSegment[] newArray(int size) {
+                    return new VibrationEffectSegment[size];
+                }
+            };
     static final int PARCEL_TOKEN_PREBAKED = 1;
     static final int PARCEL_TOKEN_PRIMITIVE = 2;
     static final int PARCEL_TOKEN_RAMP = 4;
@@ -56,8 +60,7 @@ public abstract class VibrationEffectSegment implements Parcelable {
 
     public abstract void validate();
 
-    VibrationEffectSegment() {
-    }
+    VibrationEffectSegment() {}
 
     public static void checkFrequencyArgument(float value, String name) {
         if (Float.isNaN(value)) {

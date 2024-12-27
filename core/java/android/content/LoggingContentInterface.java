@@ -10,6 +10,7 @@ import android.os.CancellationSignal;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.util.Log;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,11 +63,17 @@ public class LoggingContentInterface implements ContentInterface {
     }
 
     @Override // android.content.ContentInterface
-    public Cursor query(Uri uri, String[] projection, Bundle queryArgs, CancellationSignal cancellationSignal) throws RemoteException {
+    public Cursor query(
+            Uri uri, String[] projection, Bundle queryArgs, CancellationSignal cancellationSignal)
+            throws RemoteException {
         Logger l = new Logger("query", uri, projection, queryArgs, cancellationSignal);
         try {
             try {
-                Cursor cursor = (Cursor) l.setResult(this.delegate.query(uri, projection, queryArgs, cancellationSignal));
+                Cursor cursor =
+                        (Cursor)
+                                l.setResult(
+                                        this.delegate.query(
+                                                uri, projection, queryArgs, cancellationSignal));
                 l.close();
                 return cursor;
             } catch (Throwable th) {
@@ -110,7 +117,8 @@ public class LoggingContentInterface implements ContentInterface {
         Logger l = new Logger("getStreamTypes", uri, mimeTypeFilter);
         try {
             try {
-                String[] strArr = (String[]) l.setResult(this.delegate.getStreamTypes(uri, mimeTypeFilter));
+                String[] strArr =
+                        (String[]) l.setResult(this.delegate.getStreamTypes(uri, mimeTypeFilter));
                 l.close();
                 return strArr;
             } catch (Throwable th) {
@@ -172,11 +180,18 @@ public class LoggingContentInterface implements ContentInterface {
     }
 
     @Override // android.content.ContentInterface
-    public boolean refresh(Uri uri, Bundle args, CancellationSignal cancellationSignal) throws RemoteException {
+    public boolean refresh(Uri uri, Bundle args, CancellationSignal cancellationSignal)
+            throws RemoteException {
         Logger l = new Logger("refresh", uri, args, cancellationSignal);
         try {
             try {
-                boolean booleanValue = ((Boolean) l.setResult(Boolean.valueOf(this.delegate.refresh(uri, args, cancellationSignal)))).booleanValue();
+                boolean booleanValue =
+                        ((Boolean)
+                                        l.setResult(
+                                                Boolean.valueOf(
+                                                        this.delegate.refresh(
+                                                                uri, args, cancellationSignal))))
+                                .booleanValue();
                 l.close();
                 return booleanValue;
             } catch (Exception res) {
@@ -195,10 +210,21 @@ public class LoggingContentInterface implements ContentInterface {
 
     @Override // android.content.ContentInterface
     public int checkUriPermission(Uri uri, int uid, int modeFlags) throws RemoteException {
-        Logger l = new Logger("checkUriPermission", uri, Integer.valueOf(uid), Integer.valueOf(modeFlags));
+        Logger l =
+                new Logger(
+                        "checkUriPermission",
+                        uri,
+                        Integer.valueOf(uid),
+                        Integer.valueOf(modeFlags));
         try {
             try {
-                int intValue = ((Integer) l.setResult(Integer.valueOf(this.delegate.checkUriPermission(uri, uid, modeFlags)))).intValue();
+                int intValue =
+                        ((Integer)
+                                        l.setResult(
+                                                Integer.valueOf(
+                                                        this.delegate.checkUriPermission(
+                                                                uri, uid, modeFlags))))
+                                .intValue();
                 l.close();
                 return intValue;
             } catch (Throwable th) {
@@ -242,7 +268,13 @@ public class LoggingContentInterface implements ContentInterface {
         Logger l = new Logger("bulkInsert", uri, initialValues);
         try {
             try {
-                int intValue = ((Integer) l.setResult(Integer.valueOf(this.delegate.bulkInsert(uri, initialValues)))).intValue();
+                int intValue =
+                        ((Integer)
+                                        l.setResult(
+                                                Integer.valueOf(
+                                                        this.delegate.bulkInsert(
+                                                                uri, initialValues))))
+                                .intValue();
                 l.close();
                 return intValue;
             } catch (Exception res) {
@@ -264,7 +296,9 @@ public class LoggingContentInterface implements ContentInterface {
         Logger l = new Logger("delete", uri, extras);
         try {
             try {
-                int intValue = ((Integer) l.setResult(Integer.valueOf(this.delegate.delete(uri, extras)))).intValue();
+                int intValue =
+                        ((Integer) l.setResult(Integer.valueOf(this.delegate.delete(uri, extras))))
+                                .intValue();
                 l.close();
                 return intValue;
             } catch (Exception res) {
@@ -286,7 +320,12 @@ public class LoggingContentInterface implements ContentInterface {
         Logger l = new Logger("update", uri, values, extras);
         try {
             try {
-                int intValue = ((Integer) l.setResult(Integer.valueOf(this.delegate.update(uri, values, extras)))).intValue();
+                int intValue =
+                        ((Integer)
+                                        l.setResult(
+                                                Integer.valueOf(
+                                                        this.delegate.update(uri, values, extras))))
+                                .intValue();
                 l.close();
                 return intValue;
             } catch (Exception res) {
@@ -304,11 +343,14 @@ public class LoggingContentInterface implements ContentInterface {
     }
 
     @Override // android.content.ContentInterface
-    public ParcelFileDescriptor openFile(Uri uri, String mode, CancellationSignal signal) throws RemoteException, FileNotFoundException {
+    public ParcelFileDescriptor openFile(Uri uri, String mode, CancellationSignal signal)
+            throws RemoteException, FileNotFoundException {
         Logger l = new Logger("openFile", uri, mode, signal);
         try {
             try {
-                ParcelFileDescriptor parcelFileDescriptor = (ParcelFileDescriptor) l.setResult(this.delegate.openFile(uri, mode, signal));
+                ParcelFileDescriptor parcelFileDescriptor =
+                        (ParcelFileDescriptor)
+                                l.setResult(this.delegate.openFile(uri, mode, signal));
                 l.close();
                 return parcelFileDescriptor;
             } catch (Throwable th) {
@@ -326,11 +368,14 @@ public class LoggingContentInterface implements ContentInterface {
     }
 
     @Override // android.content.ContentInterface
-    public AssetFileDescriptor openAssetFile(Uri uri, String mode, CancellationSignal signal) throws RemoteException, FileNotFoundException {
+    public AssetFileDescriptor openAssetFile(Uri uri, String mode, CancellationSignal signal)
+            throws RemoteException, FileNotFoundException {
         Logger l = new Logger("openAssetFile", uri, mode, signal);
         try {
             try {
-                AssetFileDescriptor assetFileDescriptor = (AssetFileDescriptor) l.setResult(this.delegate.openAssetFile(uri, mode, signal));
+                AssetFileDescriptor assetFileDescriptor =
+                        (AssetFileDescriptor)
+                                l.setResult(this.delegate.openAssetFile(uri, mode, signal));
                 l.close();
                 return assetFileDescriptor;
             } catch (Throwable th) {
@@ -348,11 +393,17 @@ public class LoggingContentInterface implements ContentInterface {
     }
 
     @Override // android.content.ContentInterface
-    public AssetFileDescriptor openTypedAssetFile(Uri uri, String mimeTypeFilter, Bundle opts, CancellationSignal signal) throws RemoteException, FileNotFoundException {
+    public AssetFileDescriptor openTypedAssetFile(
+            Uri uri, String mimeTypeFilter, Bundle opts, CancellationSignal signal)
+            throws RemoteException, FileNotFoundException {
         Logger l = new Logger("openTypedAssetFile", uri, mimeTypeFilter, opts, signal);
         try {
             try {
-                AssetFileDescriptor assetFileDescriptor = (AssetFileDescriptor) l.setResult(this.delegate.openTypedAssetFile(uri, mimeTypeFilter, opts, signal));
+                AssetFileDescriptor assetFileDescriptor =
+                        (AssetFileDescriptor)
+                                l.setResult(
+                                        this.delegate.openTypedAssetFile(
+                                                uri, mimeTypeFilter, opts, signal));
                 l.close();
                 return assetFileDescriptor;
             } catch (Throwable th) {
@@ -370,11 +421,15 @@ public class LoggingContentInterface implements ContentInterface {
     }
 
     @Override // android.content.ContentInterface
-    public ContentProviderResult[] applyBatch(String authority, ArrayList<ContentProviderOperation> operations) throws RemoteException, OperationApplicationException {
+    public ContentProviderResult[] applyBatch(
+            String authority, ArrayList<ContentProviderOperation> operations)
+            throws RemoteException, OperationApplicationException {
         Logger l = new Logger("applyBatch", authority, operations);
         try {
             try {
-                ContentProviderResult[] contentProviderResultArr = (ContentProviderResult[]) l.setResult(this.delegate.applyBatch(authority, operations));
+                ContentProviderResult[] contentProviderResultArr =
+                        (ContentProviderResult[])
+                                l.setResult(this.delegate.applyBatch(authority, operations));
                 l.close();
                 return contentProviderResultArr;
             } catch (Throwable th) {
@@ -392,11 +447,13 @@ public class LoggingContentInterface implements ContentInterface {
     }
 
     @Override // android.content.ContentInterface
-    public Bundle call(String authority, String method, String arg, Bundle extras) throws RemoteException {
+    public Bundle call(String authority, String method, String arg, Bundle extras)
+            throws RemoteException {
         Logger l = new Logger("call", authority, method, arg, extras);
         try {
             try {
-                Bundle bundle = (Bundle) l.setResult(this.delegate.call(authority, method, arg, extras));
+                Bundle bundle =
+                        (Bundle) l.setResult(this.delegate.call(authority, method, arg, extras));
                 l.close();
                 return bundle;
             } catch (Throwable th) {

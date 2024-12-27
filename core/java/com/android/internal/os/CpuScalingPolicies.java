@@ -1,9 +1,12 @@
 package com.android.internal.os;
 
 import android.util.SparseArray;
-import com.samsung.android.core.pm.runtimemanifest.RuntimeManifestUtils;
-import java.util.Arrays;
+
 import libcore.util.EmptyArray;
+
+import com.samsung.android.core.pm.runtimemanifest.RuntimeManifestUtils;
+
+import java.util.Arrays;
 
 /* loaded from: classes5.dex */
 public class CpuScalingPolicies {
@@ -46,7 +49,13 @@ public class CpuScalingPolicies {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (int policy : this.mPolicies) {
-            sb.append(RuntimeManifestUtils.TAG_POLICY).append(policy).append("\n CPUs: ").append(Arrays.toString(this.mCpusByPolicy.get(policy))).append("\n freqs: ").append(Arrays.toString(this.mFreqsByPolicy.get(policy))).append("\n");
+            sb.append(RuntimeManifestUtils.TAG_POLICY)
+                    .append(policy)
+                    .append("\n CPUs: ")
+                    .append(Arrays.toString(this.mCpusByPolicy.get(policy)))
+                    .append("\n freqs: ")
+                    .append(Arrays.toString(this.mFreqsByPolicy.get(policy)))
+                    .append("\n");
         }
         return sb.toString();
     }

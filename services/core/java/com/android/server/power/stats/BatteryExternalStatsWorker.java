@@ -12,8 +12,10 @@ import android.telephony.TelephonyManager;
 import android.util.IntArray;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.server.HeapdumpWatcher$$ExternalSyntheticOutline0;
 import com.android.server.powerstats.PowerStatsService;
+
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -38,7 +40,9 @@ public final class BatteryExternalStatsWorker {
     public final AnonymousClass1 mSyncTask;
     public Future mWakelockChangesUpdate;
     public final AnonymousClass1 mWriteTask;
-    public final ScheduledExecutorService mExecutorService = Executors.newSingleThreadScheduledExecutor(new BatteryExternalStatsWorker$$ExternalSyntheticLambda0());
+    public final ScheduledExecutorService mExecutorService =
+            Executors.newSingleThreadScheduledExecutor(
+                    new BatteryExternalStatsWorker$$ExternalSyntheticLambda0());
     public int mUpdateFlags = 0;
     public Future mCurrentFuture = null;
     public String mCurrentReason = null;
@@ -71,25 +75,25 @@ public final class BatteryExternalStatsWorker {
 
     /* JADX WARN: Can't wrap try/catch for region: R(20:0|1|(5:3|(1:158)(1:7)|8|52|13)(1:159)|14|(2:16|(1:18)(2:19|(13:21|22|(3:24|(1:26)(2:39|(1:41))|(3:28|cd|33))|42|(1:44)|45|46|47|48|49|(1:146)(5:52|131|58|59|60)|61|17f)))|153|22|(0)|42|(0)|45|46|47|48|49|(0)|146|61|17f|(1:(0))) */
     /* JADX WARN: Code restructure failed: missing block: B:148:0x0104, code lost:
-    
-        r0 = move-exception;
-     */
+
+       r0 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:149:0x011e, code lost:
-    
-        com.android.server.WallpaperUpdateReceiver$$ExternalSyntheticOutline0.m(r0, "timeout or interrupt reading modem stats: ", "BatteryExternalStatsWorker");
-     */
+
+       com.android.server.WallpaperUpdateReceiver$$ExternalSyntheticOutline0.m(r0, "timeout or interrupt reading modem stats: ", "BatteryExternalStatsWorker");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:150:0x0126, code lost:
-    
-        r17 = null;
-     */
+
+       r17 = null;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:151:0x0102, code lost:
-    
-        r0 = move-exception;
-     */
+
+       r0 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:152:0x0106, code lost:
-    
-        android.util.Slog.w("BatteryExternalStatsWorker", "exception reading modem stats: " + r0.getCause());
-     */
+
+       android.util.Slog.w("BatteryExternalStatsWorker", "exception reading modem stats: " + r0.getCause());
+    */
     /* JADX WARN: Removed duplicated region for block: B:24:0x009e  */
     /* JADX WARN: Removed duplicated region for block: B:44:0x00e3  */
     /* JADX WARN: Removed duplicated region for block: B:51:0x012c A[ADDED_TO_REGION] */
@@ -99,259 +103,309 @@ public final class BatteryExternalStatsWorker {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void m834$$Nest$mupdateExternalStatsLocked(com.android.server.power.stats.BatteryExternalStatsWorker r31, java.lang.String r32, int r33, boolean r34, boolean r35, int[] r36, boolean r37) {
+    public static void m834$$Nest$mupdateExternalStatsLocked(
+            com.android.server.power.stats.BatteryExternalStatsWorker r31,
+            java.lang.String r32,
+            int r33,
+            boolean r34,
+            boolean r35,
+            int[] r36,
+            boolean r37) {
         /*
             Method dump skipped, instructions count: 781
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.power.stats.BatteryExternalStatsWorker.m834$$Nest$mupdateExternalStatsLocked(com.android.server.power.stats.BatteryExternalStatsWorker, java.lang.String, int, boolean, boolean, int[], boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.power.stats.BatteryExternalStatsWorker.m834$$Nest$mupdateExternalStatsLocked(com.android.server.power.stats.BatteryExternalStatsWorker,"
+                    + " java.lang.String, int, boolean, boolean, int[], boolean):void");
     }
 
     /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.power.stats.BatteryExternalStatsWorker$1] */
     /* JADX WARN: Type inference failed for: r0v5, types: [com.android.server.power.stats.BatteryExternalStatsWorker$1] */
     public BatteryExternalStatsWorker(Injector injector, BatteryStatsImpl batteryStatsImpl) {
         final int i = 0;
-        this.mSyncTask = new Runnable(this) { // from class: com.android.server.power.stats.BatteryExternalStatsWorker.1
-            public final /* synthetic */ BatteryExternalStatsWorker this$0;
+        this.mSyncTask =
+                new Runnable(
+                        this) { // from class:
+                                // com.android.server.power.stats.BatteryExternalStatsWorker.1
+                    public final /* synthetic */ BatteryExternalStatsWorker this$0;
 
-            {
-                this.this$0 = this;
-            }
-
-            private final void run$com$android$server$power$stats$BatteryExternalStatsWorker$1() {
-                int i2;
-                String str;
-                boolean z;
-                boolean z2;
-                int[] iArr;
-                boolean z3;
-                int i3;
-                int i4;
-                Future future;
-                synchronized (this.this$0) {
-                    try {
-                        BatteryExternalStatsWorker batteryExternalStatsWorker = this.this$0;
-                        i2 = batteryExternalStatsWorker.mUpdateFlags;
-                        str = batteryExternalStatsWorker.mCurrentReason;
-                        z = batteryExternalStatsWorker.mOnBattery;
-                        z2 = batteryExternalStatsWorker.mOnBatteryScreenOff;
-                        iArr = batteryExternalStatsWorker.mPerDisplayScreenStates;
-                        z3 = batteryExternalStatsWorker.mUseLatestStates;
-                        batteryExternalStatsWorker.mUpdateFlags = 0;
-                        batteryExternalStatsWorker.mCurrentReason = null;
-                        batteryExternalStatsWorker.mCurrentFuture = null;
-                        batteryExternalStatsWorker.mUseLatestStates = true;
-                        i3 = i2 & 127;
-                        if (i3 == 127 && (future = batteryExternalStatsWorker.mBatteryLevelSync) != null) {
-                            future.cancel(false);
-                            batteryExternalStatsWorker.mBatteryLevelSync = null;
-                        }
-                        i4 = i2 & 1;
-                        if (i4 != 0) {
-                            BatteryExternalStatsWorker batteryExternalStatsWorker2 = this.this$0;
-                            synchronized (batteryExternalStatsWorker2) {
-                                Future future2 = batteryExternalStatsWorker2.mWakelockChangesUpdate;
-                                if (future2 != null) {
-                                    future2.cancel(false);
-                                    batteryExternalStatsWorker2.mWakelockChangesUpdate = null;
-                                }
-                            }
-                        }
-                        if ((i2 & 14) == 14) {
-                            this.this$0.cancelSyncDueToProcessStateChange();
-                        }
-                    } catch (Throwable th) {
-                        throw th;
-                    } finally {
+                    {
+                        this.this$0 = this;
                     }
-                }
-                try {
-                    synchronized (this.this$0.mWorkerLock) {
-                        try {
+
+                    private final void
+                            run$com$android$server$power$stats$BatteryExternalStatsWorker$1() {
+                        int i2;
+                        String str;
+                        boolean z;
+                        boolean z2;
+                        int[] iArr;
+                        boolean z3;
+                        int i3;
+                        int i4;
+                        Future future;
+                        synchronized (this.this$0) {
                             try {
-                                BatteryExternalStatsWorker.m834$$Nest$mupdateExternalStatsLocked(this.this$0, str, i2, z, z2, iArr, z3);
-                                if (i3 == 127) {
-                                    synchronized (this.this$0.mStats) {
-                                        BatteryStatsImpl batteryStatsImpl2 = this.this$0.mStats;
-                                        synchronized (batteryStatsImpl2) {
-                                            batteryStatsImpl2.mIgnoreNextExternalStats = false;
+                                BatteryExternalStatsWorker batteryExternalStatsWorker = this.this$0;
+                                i2 = batteryExternalStatsWorker.mUpdateFlags;
+                                str = batteryExternalStatsWorker.mCurrentReason;
+                                z = batteryExternalStatsWorker.mOnBattery;
+                                z2 = batteryExternalStatsWorker.mOnBatteryScreenOff;
+                                iArr = batteryExternalStatsWorker.mPerDisplayScreenStates;
+                                z3 = batteryExternalStatsWorker.mUseLatestStates;
+                                batteryExternalStatsWorker.mUpdateFlags = 0;
+                                batteryExternalStatsWorker.mCurrentReason = null;
+                                batteryExternalStatsWorker.mCurrentFuture = null;
+                                batteryExternalStatsWorker.mUseLatestStates = true;
+                                i3 = i2 & 127;
+                                if (i3 == 127
+                                        && (future = batteryExternalStatsWorker.mBatteryLevelSync)
+                                                != null) {
+                                    future.cancel(false);
+                                    batteryExternalStatsWorker.mBatteryLevelSync = null;
+                                }
+                                i4 = i2 & 1;
+                                if (i4 != 0) {
+                                    BatteryExternalStatsWorker batteryExternalStatsWorker2 =
+                                            this.this$0;
+                                    synchronized (batteryExternalStatsWorker2) {
+                                        Future future2 =
+                                                batteryExternalStatsWorker2.mWakelockChangesUpdate;
+                                        if (future2 != null) {
+                                            future2.cancel(false);
+                                            batteryExternalStatsWorker2.mWakelockChangesUpdate =
+                                                    null;
                                         }
                                     }
                                 }
-                            } catch (Throwable th2) {
-                                if (i3 == 127) {
-                                    synchronized (this.this$0.mStats) {
-                                        BatteryStatsImpl batteryStatsImpl3 = this.this$0.mStats;
-                                        synchronized (batteryStatsImpl3) {
-                                            batteryStatsImpl3.mIgnoreNextExternalStats = false;
-                                        }
-                                    }
+                                if ((i2 & 14) == 14) {
+                                    this.this$0.cancelSyncDueToProcessStateChange();
                                 }
-                                throw th2;
+                            } catch (Throwable th) {
+                                throw th;
+                            } finally {
                             }
-                        } finally {
+                        }
+                        try {
+                            synchronized (this.this$0.mWorkerLock) {
+                                try {
+                                    try {
+                                        BatteryExternalStatsWorker
+                                                .m834$$Nest$mupdateExternalStatsLocked(
+                                                        this.this$0, str, i2, z, z2, iArr, z3);
+                                        if (i3 == 127) {
+                                            synchronized (this.this$0.mStats) {
+                                                BatteryStatsImpl batteryStatsImpl2 =
+                                                        this.this$0.mStats;
+                                                synchronized (batteryStatsImpl2) {
+                                                    batteryStatsImpl2.mIgnoreNextExternalStats =
+                                                            false;
+                                                }
+                                            }
+                                        }
+                                    } catch (Throwable th2) {
+                                        if (i3 == 127) {
+                                            synchronized (this.this$0.mStats) {
+                                                BatteryStatsImpl batteryStatsImpl3 =
+                                                        this.this$0.mStats;
+                                                synchronized (batteryStatsImpl3) {
+                                                    batteryStatsImpl3.mIgnoreNextExternalStats =
+                                                            false;
+                                                }
+                                            }
+                                        }
+                                        throw th2;
+                                    }
+                                } finally {
+                                }
+                            }
+                            if (i4 != 0) {
+                                this.this$0.mStats.updateCpuTimesForAllUids();
+                            }
+                            synchronized (this.this$0.mStats) {
+                                this.this$0.mStats.clearPendingRemovedUidsLocked();
+                            }
+                        } catch (Exception e) {
+                            Slog.wtf(
+                                    "BatteryExternalStatsWorker",
+                                    "Error updating external stats: ",
+                                    e);
+                        }
+                        if ((i2 & 128) != 0) {
+                            synchronized (this.this$0) {
+                                this.this$0.mLastCollectionTimeStamp = 0L;
+                            }
+                        } else if (i3 == 127) {
+                            synchronized (this.this$0) {
+                                this.this$0.mLastCollectionTimeStamp =
+                                        SystemClock.elapsedRealtime();
+                            }
                         }
                     }
-                    if (i4 != 0) {
-                        this.this$0.mStats.updateCpuTimesForAllUids();
-                    }
-                    synchronized (this.this$0.mStats) {
-                        this.this$0.mStats.clearPendingRemovedUidsLocked();
-                    }
-                } catch (Exception e) {
-                    Slog.wtf("BatteryExternalStatsWorker", "Error updating external stats: ", e);
-                }
-                if ((i2 & 128) != 0) {
-                    synchronized (this.this$0) {
-                        this.this$0.mLastCollectionTimeStamp = 0L;
-                    }
-                } else if (i3 == 127) {
-                    synchronized (this.this$0) {
-                        this.this$0.mLastCollectionTimeStamp = SystemClock.elapsedRealtime();
-                    }
-                }
-            }
 
-            @Override // java.lang.Runnable
-            public final void run() {
-                switch (i) {
-                    case 0:
-                        run$com$android$server$power$stats$BatteryExternalStatsWorker$1();
-                        return;
-                    default:
-                        synchronized (this.this$0.mStats) {
-                            this.this$0.mStats.writeAsyncLocked();
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        switch (i) {
+                            case 0:
+                                run$com$android$server$power$stats$BatteryExternalStatsWorker$1();
+                                return;
+                            default:
+                                synchronized (this.this$0.mStats) {
+                                    this.this$0.mStats.writeAsyncLocked();
+                                }
+                                return;
                         }
-                        return;
-                }
-            }
-        };
+                    }
+                };
         final int i2 = 1;
-        this.mWriteTask = new Runnable(this) { // from class: com.android.server.power.stats.BatteryExternalStatsWorker.1
-            public final /* synthetic */ BatteryExternalStatsWorker this$0;
+        this.mWriteTask =
+                new Runnable(
+                        this) { // from class:
+                                // com.android.server.power.stats.BatteryExternalStatsWorker.1
+                    public final /* synthetic */ BatteryExternalStatsWorker this$0;
 
-            {
-                this.this$0 = this;
-            }
-
-            private final void run$com$android$server$power$stats$BatteryExternalStatsWorker$1() {
-                int i22;
-                String str;
-                boolean z;
-                boolean z2;
-                int[] iArr;
-                boolean z3;
-                int i3;
-                int i4;
-                Future future;
-                synchronized (this.this$0) {
-                    try {
-                        BatteryExternalStatsWorker batteryExternalStatsWorker = this.this$0;
-                        i22 = batteryExternalStatsWorker.mUpdateFlags;
-                        str = batteryExternalStatsWorker.mCurrentReason;
-                        z = batteryExternalStatsWorker.mOnBattery;
-                        z2 = batteryExternalStatsWorker.mOnBatteryScreenOff;
-                        iArr = batteryExternalStatsWorker.mPerDisplayScreenStates;
-                        z3 = batteryExternalStatsWorker.mUseLatestStates;
-                        batteryExternalStatsWorker.mUpdateFlags = 0;
-                        batteryExternalStatsWorker.mCurrentReason = null;
-                        batteryExternalStatsWorker.mCurrentFuture = null;
-                        batteryExternalStatsWorker.mUseLatestStates = true;
-                        i3 = i22 & 127;
-                        if (i3 == 127 && (future = batteryExternalStatsWorker.mBatteryLevelSync) != null) {
-                            future.cancel(false);
-                            batteryExternalStatsWorker.mBatteryLevelSync = null;
-                        }
-                        i4 = i22 & 1;
-                        if (i4 != 0) {
-                            BatteryExternalStatsWorker batteryExternalStatsWorker2 = this.this$0;
-                            synchronized (batteryExternalStatsWorker2) {
-                                Future future2 = batteryExternalStatsWorker2.mWakelockChangesUpdate;
-                                if (future2 != null) {
-                                    future2.cancel(false);
-                                    batteryExternalStatsWorker2.mWakelockChangesUpdate = null;
-                                }
-                            }
-                        }
-                        if ((i22 & 14) == 14) {
-                            this.this$0.cancelSyncDueToProcessStateChange();
-                        }
-                    } catch (Throwable th) {
-                        throw th;
-                    } finally {
+                    {
+                        this.this$0 = this;
                     }
-                }
-                try {
-                    synchronized (this.this$0.mWorkerLock) {
-                        try {
+
+                    private final void
+                            run$com$android$server$power$stats$BatteryExternalStatsWorker$1() {
+                        int i22;
+                        String str;
+                        boolean z;
+                        boolean z2;
+                        int[] iArr;
+                        boolean z3;
+                        int i3;
+                        int i4;
+                        Future future;
+                        synchronized (this.this$0) {
                             try {
-                                BatteryExternalStatsWorker.m834$$Nest$mupdateExternalStatsLocked(this.this$0, str, i22, z, z2, iArr, z3);
-                                if (i3 == 127) {
-                                    synchronized (this.this$0.mStats) {
-                                        BatteryStatsImpl batteryStatsImpl2 = this.this$0.mStats;
-                                        synchronized (batteryStatsImpl2) {
-                                            batteryStatsImpl2.mIgnoreNextExternalStats = false;
+                                BatteryExternalStatsWorker batteryExternalStatsWorker = this.this$0;
+                                i22 = batteryExternalStatsWorker.mUpdateFlags;
+                                str = batteryExternalStatsWorker.mCurrentReason;
+                                z = batteryExternalStatsWorker.mOnBattery;
+                                z2 = batteryExternalStatsWorker.mOnBatteryScreenOff;
+                                iArr = batteryExternalStatsWorker.mPerDisplayScreenStates;
+                                z3 = batteryExternalStatsWorker.mUseLatestStates;
+                                batteryExternalStatsWorker.mUpdateFlags = 0;
+                                batteryExternalStatsWorker.mCurrentReason = null;
+                                batteryExternalStatsWorker.mCurrentFuture = null;
+                                batteryExternalStatsWorker.mUseLatestStates = true;
+                                i3 = i22 & 127;
+                                if (i3 == 127
+                                        && (future = batteryExternalStatsWorker.mBatteryLevelSync)
+                                                != null) {
+                                    future.cancel(false);
+                                    batteryExternalStatsWorker.mBatteryLevelSync = null;
+                                }
+                                i4 = i22 & 1;
+                                if (i4 != 0) {
+                                    BatteryExternalStatsWorker batteryExternalStatsWorker2 =
+                                            this.this$0;
+                                    synchronized (batteryExternalStatsWorker2) {
+                                        Future future2 =
+                                                batteryExternalStatsWorker2.mWakelockChangesUpdate;
+                                        if (future2 != null) {
+                                            future2.cancel(false);
+                                            batteryExternalStatsWorker2.mWakelockChangesUpdate =
+                                                    null;
                                         }
                                     }
                                 }
-                            } catch (Throwable th2) {
-                                if (i3 == 127) {
-                                    synchronized (this.this$0.mStats) {
-                                        BatteryStatsImpl batteryStatsImpl3 = this.this$0.mStats;
-                                        synchronized (batteryStatsImpl3) {
-                                            batteryStatsImpl3.mIgnoreNextExternalStats = false;
-                                        }
-                                    }
+                                if ((i22 & 14) == 14) {
+                                    this.this$0.cancelSyncDueToProcessStateChange();
                                 }
-                                throw th2;
+                            } catch (Throwable th) {
+                                throw th;
+                            } finally {
                             }
-                        } finally {
+                        }
+                        try {
+                            synchronized (this.this$0.mWorkerLock) {
+                                try {
+                                    try {
+                                        BatteryExternalStatsWorker
+                                                .m834$$Nest$mupdateExternalStatsLocked(
+                                                        this.this$0, str, i22, z, z2, iArr, z3);
+                                        if (i3 == 127) {
+                                            synchronized (this.this$0.mStats) {
+                                                BatteryStatsImpl batteryStatsImpl2 =
+                                                        this.this$0.mStats;
+                                                synchronized (batteryStatsImpl2) {
+                                                    batteryStatsImpl2.mIgnoreNextExternalStats =
+                                                            false;
+                                                }
+                                            }
+                                        }
+                                    } catch (Throwable th2) {
+                                        if (i3 == 127) {
+                                            synchronized (this.this$0.mStats) {
+                                                BatteryStatsImpl batteryStatsImpl3 =
+                                                        this.this$0.mStats;
+                                                synchronized (batteryStatsImpl3) {
+                                                    batteryStatsImpl3.mIgnoreNextExternalStats =
+                                                            false;
+                                                }
+                                            }
+                                        }
+                                        throw th2;
+                                    }
+                                } finally {
+                                }
+                            }
+                            if (i4 != 0) {
+                                this.this$0.mStats.updateCpuTimesForAllUids();
+                            }
+                            synchronized (this.this$0.mStats) {
+                                this.this$0.mStats.clearPendingRemovedUidsLocked();
+                            }
+                        } catch (Exception e) {
+                            Slog.wtf(
+                                    "BatteryExternalStatsWorker",
+                                    "Error updating external stats: ",
+                                    e);
+                        }
+                        if ((i22 & 128) != 0) {
+                            synchronized (this.this$0) {
+                                this.this$0.mLastCollectionTimeStamp = 0L;
+                            }
+                        } else if (i3 == 127) {
+                            synchronized (this.this$0) {
+                                this.this$0.mLastCollectionTimeStamp =
+                                        SystemClock.elapsedRealtime();
+                            }
                         }
                     }
-                    if (i4 != 0) {
-                        this.this$0.mStats.updateCpuTimesForAllUids();
-                    }
-                    synchronized (this.this$0.mStats) {
-                        this.this$0.mStats.clearPendingRemovedUidsLocked();
-                    }
-                } catch (Exception e) {
-                    Slog.wtf("BatteryExternalStatsWorker", "Error updating external stats: ", e);
-                }
-                if ((i22 & 128) != 0) {
-                    synchronized (this.this$0) {
-                        this.this$0.mLastCollectionTimeStamp = 0L;
-                    }
-                } else if (i3 == 127) {
-                    synchronized (this.this$0) {
-                        this.this$0.mLastCollectionTimeStamp = SystemClock.elapsedRealtime();
-                    }
-                }
-            }
 
-            @Override // java.lang.Runnable
-            public final void run() {
-                switch (i2) {
-                    case 0:
-                        run$com$android$server$power$stats$BatteryExternalStatsWorker$1();
-                        return;
-                    default:
-                        synchronized (this.this$0.mStats) {
-                            this.this$0.mStats.writeAsyncLocked();
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        switch (i2) {
+                            case 0:
+                                run$com$android$server$power$stats$BatteryExternalStatsWorker$1();
+                                return;
+                            default:
+                                synchronized (this.this$0.mStats) {
+                                    this.this$0.mStats.writeAsyncLocked();
+                                }
+                                return;
                         }
-                        return;
-                }
-            }
-        };
+                    }
+                };
         this.mInjector = injector;
         this.mStats = batteryStatsImpl;
     }
 
-    public static Parcelable awaitControllerInfo(SynchronousResultReceiver synchronousResultReceiver) {
+    public static Parcelable awaitControllerInfo(
+            SynchronousResultReceiver synchronousResultReceiver) {
         if (synchronousResultReceiver == null) {
             return null;
         }
         try {
-            SynchronousResultReceiver.Result awaitResult = synchronousResultReceiver.awaitResult(2000L);
+            SynchronousResultReceiver.Result awaitResult =
+                    synchronousResultReceiver.awaitResult(2000L);
             Bundle bundle = awaitResult.bundle;
             if (bundle != null) {
                 bundle.setDefusable(true);
@@ -361,7 +415,9 @@ public final class BatteryExternalStatsWorker {
                 }
             }
         } catch (TimeoutException unused) {
-            Slog.w("BatteryExternalStatsWorker", "timeout reading " + synchronousResultReceiver.getName() + " stats");
+            Slog.w(
+                    "BatteryExternalStatsWorker",
+                    "timeout reading " + synchronousResultReceiver.getName() + " stats");
         }
         return null;
     }
@@ -422,7 +478,8 @@ public final class BatteryExternalStatsWorker {
         }
     }
 
-    public WifiActivityEnergyInfo extractDeltaLocked(WifiActivityEnergyInfo wifiActivityEnergyInfo) {
+    public WifiActivityEnergyInfo extractDeltaLocked(
+            WifiActivityEnergyInfo wifiActivityEnergyInfo) {
         long j;
         long j2;
         long j3;
@@ -435,24 +492,41 @@ public final class BatteryExternalStatsWorker {
         if (this.mLastWifiInfo == null) {
             this.mLastWifiInfo = wifiActivityEnergyInfo;
         }
-        long timeSinceBootMillis = wifiActivityEnergyInfo.getTimeSinceBootMillis() - this.mLastWifiInfo.getTimeSinceBootMillis();
+        long timeSinceBootMillis =
+                wifiActivityEnergyInfo.getTimeSinceBootMillis()
+                        - this.mLastWifiInfo.getTimeSinceBootMillis();
         long controllerScanDurationMillis = this.mLastWifiInfo.getControllerScanDurationMillis();
         long controllerIdleDurationMillis = this.mLastWifiInfo.getControllerIdleDurationMillis();
         long controllerTxDurationMillis = this.mLastWifiInfo.getControllerTxDurationMillis();
         long controllerRxDurationMillis = this.mLastWifiInfo.getControllerRxDurationMillis();
-        long controllerEnergyUsedMicroJoules = this.mLastWifiInfo.getControllerEnergyUsedMicroJoules();
+        long controllerEnergyUsedMicroJoules =
+                this.mLastWifiInfo.getControllerEnergyUsedMicroJoules();
         long timeSinceBootMillis2 = wifiActivityEnergyInfo.getTimeSinceBootMillis();
         int stackState = wifiActivityEnergyInfo.getStackState();
-        long controllerTxDurationMillis2 = wifiActivityEnergyInfo.getControllerTxDurationMillis() - controllerTxDurationMillis;
-        long controllerRxDurationMillis2 = wifiActivityEnergyInfo.getControllerRxDurationMillis() - controllerRxDurationMillis;
-        long controllerIdleDurationMillis2 = wifiActivityEnergyInfo.getControllerIdleDurationMillis() - controllerIdleDurationMillis;
-        long controllerScanDurationMillis2 = wifiActivityEnergyInfo.getControllerScanDurationMillis() - controllerScanDurationMillis;
+        long controllerTxDurationMillis2 =
+                wifiActivityEnergyInfo.getControllerTxDurationMillis() - controllerTxDurationMillis;
+        long controllerRxDurationMillis2 =
+                wifiActivityEnergyInfo.getControllerRxDurationMillis() - controllerRxDurationMillis;
+        long controllerIdleDurationMillis2 =
+                wifiActivityEnergyInfo.getControllerIdleDurationMillis()
+                        - controllerIdleDurationMillis;
+        long controllerScanDurationMillis2 =
+                wifiActivityEnergyInfo.getControllerScanDurationMillis()
+                        - controllerScanDurationMillis;
         long j9 = 0;
-        if (controllerTxDurationMillis2 < 0 || controllerRxDurationMillis2 < 0 || controllerScanDurationMillis2 < 0 || controllerIdleDurationMillis2 < 0) {
-            if (wifiActivityEnergyInfo.getControllerIdleDurationMillis() + wifiActivityEnergyInfo.getControllerRxDurationMillis() + wifiActivityEnergyInfo.getControllerTxDurationMillis() <= timeSinceBootMillis + 750) {
-                long controllerEnergyUsedMicroJoules2 = wifiActivityEnergyInfo.getControllerEnergyUsedMicroJoules();
+        if (controllerTxDurationMillis2 < 0
+                || controllerRxDurationMillis2 < 0
+                || controllerScanDurationMillis2 < 0
+                || controllerIdleDurationMillis2 < 0) {
+            if (wifiActivityEnergyInfo.getControllerIdleDurationMillis()
+                            + wifiActivityEnergyInfo.getControllerRxDurationMillis()
+                            + wifiActivityEnergyInfo.getControllerTxDurationMillis()
+                    <= timeSinceBootMillis + 750) {
+                long controllerEnergyUsedMicroJoules2 =
+                        wifiActivityEnergyInfo.getControllerEnergyUsedMicroJoules();
                 j = wifiActivityEnergyInfo.getControllerRxDurationMillis();
-                long controllerTxDurationMillis3 = wifiActivityEnergyInfo.getControllerTxDurationMillis();
+                long controllerTxDurationMillis3 =
+                        wifiActivityEnergyInfo.getControllerTxDurationMillis();
                 j3 = wifiActivityEnergyInfo.getControllerIdleDurationMillis();
                 j4 = wifiActivityEnergyInfo.getControllerScanDurationMillis();
                 j9 = controllerTxDurationMillis3;
@@ -471,22 +545,38 @@ public final class BatteryExternalStatsWorker {
             z = true;
         } else {
             z = false;
-            j6 = Math.max(0L, wifiActivityEnergyInfo.getControllerEnergyUsedMicroJoules() - controllerEnergyUsedMicroJoules);
+            j6 =
+                    Math.max(
+                            0L,
+                            wifiActivityEnergyInfo.getControllerEnergyUsedMicroJoules()
+                                    - controllerEnergyUsedMicroJoules);
             j8 = controllerScanDurationMillis2;
             j5 = controllerRxDurationMillis2;
             j7 = controllerIdleDurationMillis2;
         }
         this.mLastWifiInfo = wifiActivityEnergyInfo;
-        WifiActivityEnergyInfo wifiActivityEnergyInfo2 = new WifiActivityEnergyInfo(timeSinceBootMillis2, stackState, controllerTxDurationMillis2, j5, j8, j7, j6);
+        WifiActivityEnergyInfo wifiActivityEnergyInfo2 =
+                new WifiActivityEnergyInfo(
+                        timeSinceBootMillis2,
+                        stackState,
+                        controllerTxDurationMillis2,
+                        j5,
+                        j8,
+                        j7,
+                        j6);
         if (z) {
-            Slog.v("BatteryExternalStatsWorker", "WiFi energy data was reset, new WiFi energy data is " + wifiActivityEnergyInfo2);
+            Slog.v(
+                    "BatteryExternalStatsWorker",
+                    "WiFi energy data was reset, new WiFi energy data is "
+                            + wifiActivityEnergyInfo2);
         }
         return wifiActivityEnergyInfo2;
     }
 
     public CompletableFuture getEnergyConsumersLocked(int i) {
         PowerStatsService.LocalService localService;
-        if (this.mEnergyConsumerSnapshot == null || (localService = this.mPowerStatsInternal) == null) {
+        if (this.mEnergyConsumerSnapshot == null
+                || (localService = this.mPowerStatsInternal) == null) {
             return null;
         }
         if (i == 127) {
@@ -524,12 +614,16 @@ public final class BatteryExternalStatsWorker {
         if (localService == null) {
             return null;
         }
-        EnergyConsumer[] energyConsumerInfo = PowerStatsService.this.getPowerStatsHal().getEnergyConsumerInfo();
+        EnergyConsumer[] energyConsumerInfo =
+                PowerStatsService.this.getPowerStatsHal().getEnergyConsumerInfo();
         if (energyConsumerInfo != null && energyConsumerInfo.length != 0) {
             sparseArray = new SparseArray(energyConsumerInfo.length);
             SparseArray sparseArray2 = new SparseArray();
             for (EnergyConsumer energyConsumer : energyConsumerInfo) {
-                if (energyConsumer.ordinal == 0 || (b = energyConsumer.type) == 0 || b == 2 || b == 3) {
+                if (energyConsumer.ordinal == 0
+                        || (b = energyConsumer.type) == 0
+                        || b == 2
+                        || b == 3) {
                     sparseArray.put(energyConsumer.id, energyConsumer);
                     IntArray intArray = (IntArray) sparseArray2.get(energyConsumer.type);
                     if (intArray == null) {
@@ -543,13 +637,15 @@ public final class BatteryExternalStatsWorker {
                     sb.append("' has unexpected ordinal ");
                     sb.append(energyConsumer.ordinal);
                     sb.append(" for type ");
-                    HeapdumpWatcher$$ExternalSyntheticOutline0.m(sb, energyConsumer.type, "BatteryExternalStatsWorker");
+                    HeapdumpWatcher$$ExternalSyntheticOutline0.m(
+                            sb, energyConsumer.type, "BatteryExternalStatsWorker");
                 }
             }
             this.mEnergyConsumerTypeToIdMap = new SparseArray(sparseArray2.size());
             int size = sparseArray2.size();
             for (int i = 0; i < size; i++) {
-                this.mEnergyConsumerTypeToIdMap.put(sparseArray2.keyAt(i), ((IntArray) sparseArray2.valueAt(i)).toArray());
+                this.mEnergyConsumerTypeToIdMap.put(
+                        sparseArray2.keyAt(i), ((IntArray) sparseArray2.valueAt(i)).toArray());
             }
         }
         return sparseArray;
@@ -557,7 +653,11 @@ public final class BatteryExternalStatsWorker {
 
     public final void scheduleCpuSyncDueToWakelockChange(long j) {
         synchronized (this) {
-            this.mWakelockChangesUpdate = scheduleDelayedSyncLocked(this.mWakelockChangesUpdate, new BatteryExternalStatsWorker$$ExternalSyntheticLambda1(0, this), j);
+            this.mWakelockChangesUpdate =
+                    scheduleDelayedSyncLocked(
+                            this.mWakelockChangesUpdate,
+                            new BatteryExternalStatsWorker$$ExternalSyntheticLambda1(0, this),
+                            j);
         }
     }
 

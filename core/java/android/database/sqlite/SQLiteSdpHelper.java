@@ -4,6 +4,7 @@ import android.database.DatabaseUtils;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
+
 import com.samsung.android.knox.dar.IDarManagerService;
 
 /* loaded from: classes.dex */
@@ -22,13 +23,11 @@ public class SQLiteSdpHelper {
         this.mDatabase = db;
     }
 
-    private void prepare() {
-    }
+    private void prepare() {}
 
     /* renamed from: android.database.sqlite.SQLiteSdpHelper$1, reason: invalid class name */
     class AnonymousClass1 extends SQLiteSdpListener {
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         @Override // com.samsung.android.knox.dar.sdp.ISdpListener
         public void onStateChange(int state) throws RemoteException {
@@ -43,8 +42,7 @@ public class SQLiteSdpHelper {
         }
 
         @Override // com.samsung.android.knox.dar.sdp.ISdpListener
-        public void onEngineRemoved() throws RemoteException {
-        }
+        public void onEngineRemoved() throws RemoteException {}
     }
 
     private static synchronized IDarManagerService getDarService() {
@@ -62,7 +60,11 @@ public class SQLiteSdpHelper {
         long ret = -1;
         try {
             if (this.mDatabase != null) {
-                ret = Long.valueOf(DatabaseUtils.longForQuery(this.mDatabase, "PRAGMA sdp_get_engine_id;", null)).intValue();
+                ret =
+                        Long.valueOf(
+                                        DatabaseUtils.longForQuery(
+                                                this.mDatabase, "PRAGMA sdp_get_engine_id;", null))
+                                .intValue();
             }
         } catch (Exception e) {
             e.printStackTrace();

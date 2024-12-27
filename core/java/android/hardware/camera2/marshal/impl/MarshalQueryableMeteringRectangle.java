@@ -4,6 +4,7 @@ import android.hardware.camera2.marshal.MarshalQueryable;
 import android.hardware.camera2.marshal.Marshaler;
 import android.hardware.camera2.params.MeteringRectangle;
 import android.hardware.camera2.utils.TypeReference;
+
 import java.nio.ByteBuffer;
 
 /* loaded from: classes2.dex */
@@ -11,7 +12,8 @@ public class MarshalQueryableMeteringRectangle implements MarshalQueryable<Meter
     private static final int SIZE = 20;
 
     private class MarshalerMeteringRectangle extends Marshaler<MeteringRectangle> {
-        protected MarshalerMeteringRectangle(TypeReference<MeteringRectangle> typeReference, int nativeType) {
+        protected MarshalerMeteringRectangle(
+                TypeReference<MeteringRectangle> typeReference, int nativeType) {
             super(MarshalQueryableMeteringRectangle.this, typeReference, nativeType);
         }
 
@@ -49,12 +51,14 @@ public class MarshalQueryableMeteringRectangle implements MarshalQueryable<Meter
     }
 
     @Override // android.hardware.camera2.marshal.MarshalQueryable
-    public Marshaler<MeteringRectangle> createMarshaler(TypeReference<MeteringRectangle> managedType, int nativeType) {
+    public Marshaler<MeteringRectangle> createMarshaler(
+            TypeReference<MeteringRectangle> managedType, int nativeType) {
         return new MarshalerMeteringRectangle(managedType, nativeType);
     }
 
     @Override // android.hardware.camera2.marshal.MarshalQueryable
-    public boolean isTypeMappingSupported(TypeReference<MeteringRectangle> managedType, int nativeType) {
+    public boolean isTypeMappingSupported(
+            TypeReference<MeteringRectangle> managedType, int nativeType) {
         return nativeType == 1 && MeteringRectangle.class.equals(managedType.getType());
     }
 }

@@ -3,6 +3,7 @@ package android.service.controls.templates;
 import android.content.Context;
 import android.graphics.drawable.Icon;
 import android.os.Bundle;
+
 import com.android.internal.R;
 import com.android.internal.util.Preconditions;
 
@@ -16,7 +17,8 @@ public final class ThumbnailTemplate extends ControlTemplate {
     private final CharSequence mContentDescription;
     private final Icon mThumbnail;
 
-    public ThumbnailTemplate(String templateId, boolean active, Icon thumbnail, CharSequence contentDescription) {
+    public ThumbnailTemplate(
+            String templateId, boolean active, Icon thumbnail, CharSequence contentDescription) {
         super(templateId);
         Preconditions.checkNotNull(thumbnail);
         Preconditions.checkNotNull(contentDescription);
@@ -51,8 +53,12 @@ public final class ThumbnailTemplate extends ControlTemplate {
 
     @Override // android.service.controls.templates.ControlTemplate
     public void prepareTemplateForBinder(Context context) {
-        int width = context.getResources().getDimensionPixelSize(R.dimen.controls_thumbnail_image_max_width);
-        int height = context.getResources().getDimensionPixelSize(R.dimen.controls_thumbnail_image_max_height);
+        int width =
+                context.getResources()
+                        .getDimensionPixelSize(R.dimen.controls_thumbnail_image_max_width);
+        int height =
+                context.getResources()
+                        .getDimensionPixelSize(R.dimen.controls_thumbnail_image_max_height);
         rescaleThumbnail(width, height);
     }
 

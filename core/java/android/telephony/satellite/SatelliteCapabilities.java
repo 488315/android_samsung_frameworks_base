@@ -3,6 +3,7 @@ package android.telephony.satellite;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -13,26 +14,34 @@ import java.util.Set;
 @SystemApi
 /* loaded from: classes4.dex */
 public final class SatelliteCapabilities implements Parcelable {
-    public static final Parcelable.Creator<SatelliteCapabilities> CREATOR = new Parcelable.Creator<SatelliteCapabilities>() { // from class: android.telephony.satellite.SatelliteCapabilities.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SatelliteCapabilities createFromParcel(Parcel in) {
-            return new SatelliteCapabilities(in);
-        }
+    public static final Parcelable.Creator<SatelliteCapabilities> CREATOR =
+            new Parcelable.Creator<
+                    SatelliteCapabilities>() { // from class:
+                                               // android.telephony.satellite.SatelliteCapabilities.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SatelliteCapabilities createFromParcel(Parcel in) {
+                    return new SatelliteCapabilities(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SatelliteCapabilities[] newArray(int size) {
-            return new SatelliteCapabilities[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SatelliteCapabilities[] newArray(int size) {
+                    return new SatelliteCapabilities[size];
+                }
+            };
     private Map<Integer, AntennaPosition> mAntennaPositionMap;
     private boolean mIsPointingRequired;
     private int mMaxBytesPerOutgoingDatagram;
     private Set<Integer> mSupportedRadioTechnologies;
 
-    public SatelliteCapabilities(Set<Integer> supportedRadioTechnologies, boolean isPointingRequired, int maxBytesPerOutgoingDatagram, Map<Integer, AntennaPosition> antennaPositionMap) {
-        this.mSupportedRadioTechnologies = supportedRadioTechnologies == null ? new HashSet<>() : supportedRadioTechnologies;
+    public SatelliteCapabilities(
+            Set<Integer> supportedRadioTechnologies,
+            boolean isPointingRequired,
+            int maxBytesPerOutgoingDatagram,
+            Map<Integer, AntennaPosition> antennaPositionMap) {
+        this.mSupportedRadioTechnologies =
+                supportedRadioTechnologies == null ? new HashSet<>() : supportedRadioTechnologies;
         this.mIsPointingRequired = isPointingRequired;
         this.mMaxBytesPerOutgoingDatagram = maxBytesPerOutgoingDatagram;
         this.mAntennaPositionMap = antennaPositionMap;
@@ -49,7 +58,8 @@ public final class SatelliteCapabilities implements Parcelable {
 
     @Override // android.os.Parcelable
     public void writeToParcel(Parcel out, int flags) {
-        if (this.mSupportedRadioTechnologies != null && !this.mSupportedRadioTechnologies.isEmpty()) {
+        if (this.mSupportedRadioTechnologies != null
+                && !this.mSupportedRadioTechnologies.isEmpty()) {
             out.writeInt(this.mSupportedRadioTechnologies.size());
             Iterator<Integer> it = this.mSupportedRadioTechnologies.iterator();
             while (it.hasNext()) {
@@ -76,7 +86,8 @@ public final class SatelliteCapabilities implements Parcelable {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("SupportedRadioTechnology:");
-        if (this.mSupportedRadioTechnologies != null && !this.mSupportedRadioTechnologies.isEmpty()) {
+        if (this.mSupportedRadioTechnologies != null
+                && !this.mSupportedRadioTechnologies.isEmpty()) {
             Iterator<Integer> it = this.mSupportedRadioTechnologies.iterator();
             while (it.hasNext()) {
                 int technology = it.next().intValue();
@@ -105,14 +116,21 @@ public final class SatelliteCapabilities implements Parcelable {
             return false;
         }
         SatelliteCapabilities that = (SatelliteCapabilities) o;
-        if (Objects.equals(this.mSupportedRadioTechnologies, that.mSupportedRadioTechnologies) && this.mIsPointingRequired == that.mIsPointingRequired && this.mMaxBytesPerOutgoingDatagram == that.mMaxBytesPerOutgoingDatagram && Objects.equals(this.mAntennaPositionMap, that.mAntennaPositionMap)) {
+        if (Objects.equals(this.mSupportedRadioTechnologies, that.mSupportedRadioTechnologies)
+                && this.mIsPointingRequired == that.mIsPointingRequired
+                && this.mMaxBytesPerOutgoingDatagram == that.mMaxBytesPerOutgoingDatagram
+                && Objects.equals(this.mAntennaPositionMap, that.mAntennaPositionMap)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(this.mSupportedRadioTechnologies, Boolean.valueOf(this.mIsPointingRequired), Integer.valueOf(this.mMaxBytesPerOutgoingDatagram), this.mAntennaPositionMap);
+        return Objects.hash(
+                this.mSupportedRadioTechnologies,
+                Boolean.valueOf(this.mIsPointingRequired),
+                Integer.valueOf(this.mMaxBytesPerOutgoingDatagram),
+                this.mAntennaPositionMap);
     }
 
     public Set<Integer> getSupportedRadioTechnologies() {
@@ -149,7 +167,10 @@ public final class SatelliteCapabilities implements Parcelable {
         int antennaPositionMapSize = in.readInt();
         for (int i2 = 0; i2 < antennaPositionMapSize; i2++) {
             int key = in.readInt();
-            AntennaPosition antennaPosition = (AntennaPosition) in.readParcelable(AntennaPosition.class.getClassLoader(), AntennaPosition.class);
+            AntennaPosition antennaPosition =
+                    (AntennaPosition)
+                            in.readParcelable(
+                                    AntennaPosition.class.getClassLoader(), AntennaPosition.class);
             this.mAntennaPositionMap.put(Integer.valueOf(key), antennaPosition);
         }
     }

@@ -2,7 +2,9 @@ package com.android.server.devicepolicy;
 
 import android.app.admin.PolicyValue;
 import android.util.IndentingPrintWriter;
+
 import com.android.modules.utils.TypedXmlSerializer;
+
 import java.util.LinkedHashMap;
 import java.util.Objects;
 
@@ -19,7 +21,10 @@ public final class PolicyState {
         this.mPolicyDefinition = policyDefinition;
     }
 
-    public PolicyState(PolicyDefinition policyDefinition, LinkedHashMap linkedHashMap, PolicyValue policyValue) {
+    public PolicyState(
+            PolicyDefinition policyDefinition,
+            LinkedHashMap linkedHashMap,
+            PolicyValue policyValue) {
         LinkedHashMap linkedHashMap2 = new LinkedHashMap();
         this.mPoliciesSetByAdmins = linkedHashMap2;
         this.mPolicyDefinition = policyDefinition;
@@ -33,12 +38,15 @@ public final class PolicyState {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static com.android.server.devicepolicy.PolicyState readFromXml(com.android.modules.utils.TypedXmlPullParser r12) {
+    public static com.android.server.devicepolicy.PolicyState readFromXml(
+            com.android.modules.utils.TypedXmlPullParser r12) {
         /*
             Method dump skipped, instructions count: 372
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.devicepolicy.PolicyState.readFromXml(com.android.modules.utils.TypedXmlPullParser):com.android.server.devicepolicy.PolicyState");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.devicepolicy.PolicyState.readFromXml(com.android.modules.utils.TypedXmlPullParser):com.android.server.devicepolicy.PolicyState");
     }
 
     public final boolean addPolicy(EnforcingAdmin enforcingAdmin, PolicyValue policyValue) {
@@ -49,7 +57,8 @@ public final class PolicyState {
         if (policyDefinition.isNonCoexistablePolicy()) {
             return false;
         }
-        PolicyValue resolve = policyDefinition.mResolutionMechanism.resolve(this.mPoliciesSetByAdmins);
+        PolicyValue resolve =
+                policyDefinition.mResolutionMechanism.resolve(this.mPoliciesSetByAdmins);
         boolean z = !Objects.equals(resolve, this.mCurrentResolvedPolicy);
         this.mCurrentResolvedPolicy = resolve;
         return z;
@@ -72,7 +81,9 @@ public final class PolicyState {
             }
         }
         indentingPrintWriter.decreaseIndent();
-        indentingPrintWriter.printf("Resolved Policy (%s):\n", new Object[]{policyDefinition.mResolutionMechanism.getClass().getSimpleName()});
+        indentingPrintWriter.printf(
+                "Resolved Policy (%s):\n",
+                new Object[] {policyDefinition.mResolutionMechanism.getClass().getSimpleName()});
         indentingPrintWriter.increaseIndent();
         indentingPrintWriter.println(this.mCurrentResolvedPolicy);
         indentingPrintWriter.decreaseIndent();
@@ -82,9 +93,14 @@ public final class PolicyState {
     public final android.app.admin.PolicyState getParcelablePolicyState() {
         LinkedHashMap linkedHashMap = new LinkedHashMap();
         for (EnforcingAdmin enforcingAdmin : this.mPoliciesSetByAdmins.keySet()) {
-            linkedHashMap.put(enforcingAdmin.getParcelableAdmin(), (PolicyValue) this.mPoliciesSetByAdmins.get(enforcingAdmin));
+            linkedHashMap.put(
+                    enforcingAdmin.getParcelableAdmin(),
+                    (PolicyValue) this.mPoliciesSetByAdmins.get(enforcingAdmin));
         }
-        return new android.app.admin.PolicyState(linkedHashMap, this.mCurrentResolvedPolicy, this.mPolicyDefinition.mResolutionMechanism.getParcelableResolutionMechanism());
+        return new android.app.admin.PolicyState(
+                linkedHashMap,
+                this.mCurrentResolvedPolicy,
+                this.mPolicyDefinition.mResolutionMechanism.getParcelableResolutionMechanism());
     }
 
     public final LinkedHashMap getPoliciesSetByAdmins() {
@@ -120,7 +136,9 @@ public final class PolicyState {
             typedXmlSerializer.startTag((String) null, "admin-policy-entry");
             if (this.mPoliciesSetByAdmins.get(enforcingAdmin) != null) {
                 typedXmlSerializer.startTag((String) null, "policy-value-entry");
-                policySerializer.saveToXml(((PolicyValue) this.mPoliciesSetByAdmins.get(enforcingAdmin)).getValue(), typedXmlSerializer);
+                policySerializer.saveToXml(
+                        ((PolicyValue) this.mPoliciesSetByAdmins.get(enforcingAdmin)).getValue(),
+                        typedXmlSerializer);
                 typedXmlSerializer.endTag((String) null, "policy-value-entry");
             }
             typedXmlSerializer.startTag((String) null, "enforcing-admin-entry");

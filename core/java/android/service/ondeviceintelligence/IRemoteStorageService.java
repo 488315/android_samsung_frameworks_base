@@ -8,24 +8,29 @@ import android.os.Parcel;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteCallback;
 import android.os.RemoteException;
+
 import com.android.internal.infra.AndroidFuture;
 
 /* loaded from: classes3.dex */
 public interface IRemoteStorageService extends IInterface {
-    public static final String DESCRIPTOR = "android.service.ondeviceintelligence.IRemoteStorageService";
+    public static final String DESCRIPTOR =
+            "android.service.ondeviceintelligence.IRemoteStorageService";
 
-    void getReadOnlyFeatureFileDescriptorMap(Feature feature, RemoteCallback remoteCallback) throws RemoteException;
+    void getReadOnlyFeatureFileDescriptorMap(Feature feature, RemoteCallback remoteCallback)
+            throws RemoteException;
 
-    void getReadOnlyFileDescriptor(String str, AndroidFuture<ParcelFileDescriptor> androidFuture) throws RemoteException;
+    void getReadOnlyFileDescriptor(String str, AndroidFuture<ParcelFileDescriptor> androidFuture)
+            throws RemoteException;
 
     public static class Default implements IRemoteStorageService {
         @Override // android.service.ondeviceintelligence.IRemoteStorageService
-        public void getReadOnlyFileDescriptor(String filePath, AndroidFuture<ParcelFileDescriptor> future) throws RemoteException {
-        }
+        public void getReadOnlyFileDescriptor(
+                String filePath, AndroidFuture<ParcelFileDescriptor> future)
+                throws RemoteException {}
 
         @Override // android.service.ondeviceintelligence.IRemoteStorageService
-        public void getReadOnlyFeatureFileDescriptorMap(Feature feature, RemoteCallback remoteCallback) throws RemoteException {
-        }
+        public void getReadOnlyFeatureFileDescriptorMap(
+                Feature feature, RemoteCallback remoteCallback) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -33,7 +38,7 @@ public interface IRemoteStorageService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IRemoteStorageService {
+    public abstract static class Stub extends Binder implements IRemoteStorageService {
         static final int TRANSACTION_getReadOnlyFeatureFileDescriptorMap = 2;
         static final int TRANSACTION_getReadOnlyFileDescriptor = 1;
 
@@ -74,7 +79,8 @@ public interface IRemoteStorageService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IRemoteStorageService.DESCRIPTOR);
             }
@@ -85,13 +91,15 @@ public interface IRemoteStorageService extends IInterface {
             switch (code) {
                 case 1:
                     String _arg0 = data.readString();
-                    AndroidFuture<ParcelFileDescriptor> _arg1 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<ParcelFileDescriptor> _arg1 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     getReadOnlyFileDescriptor(_arg0, _arg1);
                     return true;
                 case 2:
                     Feature _arg02 = (Feature) data.readTypedObject(Feature.CREATOR);
-                    RemoteCallback _arg12 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
+                    RemoteCallback _arg12 =
+                            (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
                     data.enforceNoDataAvail();
                     getReadOnlyFeatureFileDescriptorMap(_arg02, _arg12);
                     return true;
@@ -117,7 +125,9 @@ public interface IRemoteStorageService extends IInterface {
             }
 
             @Override // android.service.ondeviceintelligence.IRemoteStorageService
-            public void getReadOnlyFileDescriptor(String filePath, AndroidFuture<ParcelFileDescriptor> future) throws RemoteException {
+            public void getReadOnlyFileDescriptor(
+                    String filePath, AndroidFuture<ParcelFileDescriptor> future)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRemoteStorageService.DESCRIPTOR);
@@ -130,7 +140,8 @@ public interface IRemoteStorageService extends IInterface {
             }
 
             @Override // android.service.ondeviceintelligence.IRemoteStorageService
-            public void getReadOnlyFeatureFileDescriptorMap(Feature feature, RemoteCallback remoteCallback) throws RemoteException {
+            public void getReadOnlyFeatureFileDescriptorMap(
+                    Feature feature, RemoteCallback remoteCallback) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IRemoteStorageService.DESCRIPTOR);

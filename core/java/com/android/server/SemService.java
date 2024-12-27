@@ -11,10 +11,12 @@ import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+
 import com.android.internal.midi.MidiConstants;
-import com.android.server.SemServiceAccessControl;
+
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
 import com.samsung.android.service.SemService.ISemService;
+
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -35,6 +37,7 @@ import java.util.Arrays;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
+
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
@@ -99,7 +102,18 @@ public final class SemService extends ISemService.Stub {
 
     public native int deactivateCards(int i, byte[][] bArr, int[] iArr, int i2);
 
-    public native int deactivateCardsAID(int i, int i2, byte[][] bArr, int[] iArr, int i3, byte[][] bArr2, int[] iArr2, int i4, byte[][] bArr3, int[] iArr3, int i5);
+    public native int deactivateCardsAID(
+            int i,
+            int i2,
+            byte[][] bArr,
+            int[] iArr,
+            int i3,
+            byte[][] bArr2,
+            int[] iArr2,
+            int i4,
+            byte[][] bArr3,
+            int[] iArr3,
+            int i5);
 
     public native int eSEAidFactoryReset(byte[] bArr, int i);
 
@@ -159,7 +173,8 @@ public final class SemService extends ISemService.Stub {
 
     public native int startRequestCredentials(byte[] bArr, byte[] bArr2, String str, byte[] bArr3);
 
-    public native int startRequestCredentialsList(byte[] bArr, byte[] bArr2, String str, byte[] bArr3, byte[] bArr4, byte[] bArr5);
+    public native int startRequestCredentialsList(
+            byte[] bArr, byte[] bArr2, String str, byte[] bArr3, byte[] bArr4, byte[] bArr5);
 
     public native int startattestation(byte[] bArr, int i, byte[] bArr2, int i2);
 
@@ -193,7 +208,8 @@ public final class SemService extends ISemService.Stub {
             setCosNameProperty();
         }
         this.secureBuffer = new StringBuffer();
-        this.connectivityManager = (ConnectivityManager) this.mContext.getSystemService(ConnectivityManager.class);
+        this.connectivityManager =
+                (ConnectivityManager) this.mContext.getSystemService(ConnectivityManager.class);
     }
 
     private void readSkuProperty() {
@@ -267,7 +283,12 @@ public final class SemService extends ISemService.Stub {
         if (this.spiOpenPackageName.equals(packageName)) {
             return true;
         }
-        Log.e(TAG, "The package name currently using SPI does not match, opened : " + this.spiOpenPackageName + ", requested : " + packageName);
+        Log.e(
+                TAG,
+                "The package name currently using SPI does not match, opened : "
+                        + this.spiOpenPackageName
+                        + ", requested : "
+                        + packageName);
         return false;
     }
 
@@ -280,7 +301,12 @@ public final class SemService extends ISemService.Stub {
                     return true;
                 }
             }
-            Log.d(TAG, "SPI is currently in use by " + this.spiOpenPackageName + ", wait for 0.5 sec. Retry count : " + i);
+            Log.d(
+                    TAG,
+                    "SPI is currently in use by "
+                            + this.spiOpenPackageName
+                            + ", wait for 0.5 sec. Retry count : "
+                            + i);
             try {
                 Thread.sleep(500L);
             } catch (Exception e) {
@@ -302,8 +328,7 @@ public final class SemService extends ISemService.Stub {
     }
 
     class SPITimeoutTask extends TimerTask {
-        SPITimeoutTask() {
-        }
+        SPITimeoutTask() {}
 
         @Override // java.util.TimerTask, java.lang.Runnable
         public void run() {
@@ -349,7 +374,8 @@ public final class SemService extends ISemService.Stub {
     public String getCPLC14mode() {
         Log.i(TAG, "Start GetCPLC14mode");
         byte[] get_cplc_data = new byte[100];
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MFactoryPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MFactoryPkgList)) {
             Log.e(TAG, "getCPLC14mode Permission Error");
             return ERROR_NO_PERMISSION_STRING;
         }
@@ -380,7 +406,8 @@ public final class SemService extends ISemService.Stub {
     public String get_ESEA() {
         Log.i(TAG, "Start get_ESEA");
         byte[] getESEAData = new byte[1024];
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MFactoryPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MFactoryPkgList)) {
             Log.e(TAG, "get_ESEA Permission Error");
             return ERROR_NO_PERMISSION_STRING;
         }
@@ -411,7 +438,8 @@ public final class SemService extends ISemService.Stub {
 
     public String get_DPDLog() {
         Log.i(TAG, "Start get_DPDLog");
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MFactoryPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MFactoryPkgList)) {
             Log.e(TAG, "get_DPDLog Permission Error");
             return ERROR_NO_PERMISSION_STRING;
         }
@@ -433,7 +461,9 @@ public final class SemService extends ISemService.Stub {
     @Override // com.samsung.android.service.SemService.ISemService
     public void sem_factory() {
         Log.i(TAG, "sem_factory");
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MFactoryPkgList) || !requestSpiUsage()) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                        SemServiceAccessControl.PackageList.MFactoryPkgList)
+                || !requestSpiUsage()) {
             return;
         }
         try {
@@ -452,7 +482,8 @@ public final class SemService extends ISemService.Stub {
     public int esek_certificate_check() {
         int ret;
         Log.i(TAG, "Start esek_certificate_check");
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MFactoryPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MFactoryPkgList)) {
             Log.e(TAG, "esek_certificate_check Permission Error");
             return -91;
         }
@@ -487,7 +518,8 @@ public final class SemService extends ISemService.Stub {
     public int scp11_certificate_check() {
         int ret;
         Log.i(TAG, "Start scp11_certificate_check");
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MFactoryPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MFactoryPkgList)) {
             Log.e(TAG, "scp11_certificate_check Permission Error");
             return -91;
         }
@@ -522,7 +554,8 @@ public final class SemService extends ISemService.Stub {
     public int handle_CCMScp11c(byte[] ccmData, int ccmDataLen) {
         Log.i(TAG, "Start handle_CCM11c");
         int ret = -1;
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MFactoryPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MFactoryPkgList)) {
             Log.e(TAG, "handle_CCMScp11c Permission Error");
             return -91;
         }
@@ -555,7 +588,8 @@ public final class SemService extends ISemService.Stub {
     public String[] handle_CCM(byte[] ccmData, int ccmDataLen) {
         Log.i(TAG, "Start handle_CCM");
         String[] ret = null;
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MLccmPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MLccmPkgList)) {
             Log.e(TAG, "handle_CCM Permission Error");
             return null;
         }
@@ -584,7 +618,8 @@ public final class SemService extends ISemService.Stub {
     public String[] handle_CCMCB(byte[] ccmData, int ccmDataLen, byte[] respData, int respLen) {
         Log.i(TAG, "Start handle_CCM");
         String[] ret = null;
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MLccmPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MLccmPkgList)) {
             Log.e(TAG, "handle_CCM Permission Error");
             return null;
         }
@@ -612,7 +647,8 @@ public final class SemService extends ISemService.Stub {
     @Override // com.samsung.android.service.SemService.ISemService
     public int isLccmSwp() {
         int ret;
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MLccmPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MLccmPkgList)) {
             Log.e(TAG, "isLccmSwp Permission Error");
             return -91;
         }
@@ -694,7 +730,9 @@ public final class SemService extends ISemService.Stub {
                                 int offset3 = offset2 + 1;
                                 try {
                                     int dateLength = SemServiceTools.checkLength(ccmData, offset2);
-                                    byte[] scriptDate = Arrays.copyOfRange(ccmData, offset3, offset3 + dateLength);
+                                    byte[] scriptDate =
+                                            Arrays.copyOfRange(
+                                                    ccmData, offset3, offset3 + dateLength);
                                     int offset4 = offset3 + dateLength;
                                     Log.d(TAG, "Date : " + SemServiceTools.bytesToHex(scriptDate));
                                     if (ccmData[offset4] != -31) {
@@ -711,7 +749,8 @@ public final class SemService extends ISemService.Stub {
                                         Log.e(TAG, "Tag 'E2' read error");
                                         return false;
                                     }
-                                    int tagETLen = SemServiceTools.checkLength(ccmData, offset6 + 1);
+                                    int tagETLen =
+                                            SemServiceTools.checkLength(ccmData, offset6 + 1);
                                     if (tagETLen <= 0) {
                                         Log.e(TAG, "not supported tag e2");
                                         return false;
@@ -725,7 +764,9 @@ public final class SemService extends ISemService.Stub {
                                     } else if (ccmData[offset6 + 1] == -125) {
                                         offset6 += 5;
                                     }
-                                    this.bodyData = Arrays.copyOfRange(ccmData, offset6, offset6 + tagETLen);
+                                    this.bodyData =
+                                            Arrays.copyOfRange(
+                                                    ccmData, offset6, offset6 + tagETLen);
                                     int offset7 = offset6 + tagETLen;
                                     if (ccmData[offset7] != -22) {
                                         Log.e(TAG, "Invalid script: No signature");
@@ -734,7 +775,8 @@ public final class SemService extends ISemService.Stub {
                                     int offset8 = offset7 + 1;
                                     offset3 = offset8 + 1;
                                     try {
-                                        int tagEALen = SemServiceTools.checkLength(ccmData, offset8);
+                                        int tagEALen =
+                                                SemServiceTools.checkLength(ccmData, offset8);
                                         if (tagEALen <= 0) {
                                             Log.e(TAG, "not supported tag ea");
                                             return false;
@@ -743,7 +785,9 @@ public final class SemService extends ISemService.Stub {
                                             Log.e(TAG, "wrong length!");
                                             return false;
                                         }
-                                        byte[] signature = Arrays.copyOfRange(ccmData, offset3, offset3 + tagEALen);
+                                        byte[] signature =
+                                                Arrays.copyOfRange(
+                                                        ccmData, offset3, offset3 + tagEALen);
                                         byte[] message = Arrays.copyOfRange(ccmData, 0, msgLength);
                                         if (SemServiceTools.ccmVerify(message, signature)) {
                                             return true;
@@ -780,7 +824,8 @@ public final class SemService extends ISemService.Stub {
     public int get_HQMMemory(byte[] hw_memory_data) {
         Log.i(TAG, "Start get_HQMMemory");
         int dataLen = 0;
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MHWParamPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MHWParamPkgList)) {
             Log.e(TAG, "get_HQMMemory Permission Error");
             return 0;
         }
@@ -809,11 +854,13 @@ public final class SemService extends ISemService.Stub {
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
-    public int deactivate_Cards(int RequestType, String[] package_name_list, int[] package_len, int arrayLen) {
+    public int deactivate_Cards(
+            int RequestType, String[] package_name_list, int[] package_len, int arrayLen) {
         Log.i(TAG, "Start deactivate_Cards");
         int ret = 0;
         byte[][] package_name = new byte[arrayLen][];
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MSKMSCardPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MSKMSCardPkgList)) {
             Log.e(TAG, "deactivate_Cards Permission Error");
             return -91;
         }
@@ -854,7 +901,8 @@ public final class SemService extends ISemService.Stub {
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
-    public int deactivate_CardsAID(int RequestType, int bean, String[] package_aid, int[] package_len, int arrayLen) {
+    public int deactivate_CardsAID(
+            int RequestType, int bean, String[] package_aid, int[] package_len, int arrayLen) {
         Log.i(TAG, "Start deactivate_Cards");
         int ret = 0;
         byte[][] package_name = new byte[arrayLen][];
@@ -862,7 +910,8 @@ public final class SemService extends ISemService.Stub {
         byte[][] package_name_Sharp = new byte[arrayLen][];
         int[] package_len_Star = new int[arrayLen];
         int[] package_len_Sharp = new int[arrayLen];
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MSKMSCardPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MSKMSCardPkgList)) {
             Log.e(TAG, "deactivate_CardsAID Permission Error");
             return -91;
         }
@@ -928,7 +977,19 @@ public final class SemService extends ISemService.Stub {
             e = e5;
         }
         try {
-            ret = deactivateCardsAID(RequestType, bean, package_name, package_len, name_cnt, package_name_Star, package_len_Star, star_cnt, package_name_Sharp, package_len_Sharp, sharp_cnt);
+            ret =
+                    deactivateCardsAID(
+                            RequestType,
+                            bean,
+                            package_name,
+                            package_len,
+                            name_cnt,
+                            package_name_Star,
+                            package_len_Star,
+                            star_cnt,
+                            package_name_Sharp,
+                            package_len_Sharp,
+                            sharp_cnt);
         } catch (Exception e6) {
             e = e6;
             Log.e(TAG, "Failed to deactivate_Cards, " + e.toString());
@@ -952,7 +1013,8 @@ public final class SemService extends ISemService.Stub {
     @Override // com.samsung.android.service.SemService.ISemService
     public int eSE_FactoryReset() {
         int factoryResetResult;
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MFactoryResetList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MFactoryResetList)) {
             return -91;
         }
         if (!requestSpiUsage()) {
@@ -988,7 +1050,8 @@ public final class SemService extends ISemService.Stub {
     @Override // com.samsung.android.service.SemService.ISemService
     public int eSE_LowFactoryReset() {
         int factoryResetResult;
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MFactoryResetList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MFactoryResetList)) {
             return -91;
         }
         if (!requestSpiUsage()) {
@@ -1024,7 +1087,8 @@ public final class SemService extends ISemService.Stub {
     @Override // com.samsung.android.service.SemService.ISemService
     public int eSE_FullFactoryReset() {
         int factoryResetResult;
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MFactoryResetList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MFactoryResetList)) {
             return -91;
         }
         if (!requestSpiUsage()) {
@@ -1060,7 +1124,8 @@ public final class SemService extends ISemService.Stub {
     @Override // com.samsung.android.service.SemService.ISemService
     public int eSE_AidFactoryReset(byte[] aid, int aidLen) {
         int factoryResetResult;
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MFactoryResetList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MFactoryResetList)) {
             return -91;
         }
         if (!requestSpiUsage()) {
@@ -1095,7 +1160,8 @@ public final class SemService extends ISemService.Stub {
 
     @Override // com.samsung.android.service.SemService.ISemService
     public void check_Network(int type) {
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MFactoryResetList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MFactoryResetList)) {
             return;
         }
         if (!this.mSemServiceAccessControl.checkStatus()) {
@@ -1105,16 +1171,21 @@ public final class SemService extends ISemService.Stub {
         try {
             if (type == 0) {
                 Log.i(TAG, "F-R-NC");
-                this.CMCallback = new ConnectivityManager.NetworkCallback() { // from class: com.android.server.SemService.1
-                    @Override // android.net.ConnectivityManager.NetworkCallback
-                    public void onAvailable(Network network) {
-                        Log.e(SemService.TAG, "F-NC : " + network);
-                        Intent BRIntent = new Intent("com.sec.action.SKMS_NETWORK");
-                        BRIntent.putExtra("com.sec.action.SKMS_NETWORK_VALUE", 1);
-                        BRIntent.setPackage("com.skms.android.agent");
-                        SemService.this.mContext.sendBroadcastAsUser(BRIntent, Process.myUserHandle(), "com.samsung.permission.ESE_SYSTEM_PROTECTION");
-                    }
-                };
+                this.CMCallback =
+                        new ConnectivityManager
+                                .NetworkCallback() { // from class: com.android.server.SemService.1
+                            @Override // android.net.ConnectivityManager.NetworkCallback
+                            public void onAvailable(Network network) {
+                                Log.e(SemService.TAG, "F-NC : " + network);
+                                Intent BRIntent = new Intent("com.sec.action.SKMS_NETWORK");
+                                BRIntent.putExtra("com.sec.action.SKMS_NETWORK_VALUE", 1);
+                                BRIntent.setPackage("com.skms.android.agent");
+                                SemService.this.mContext.sendBroadcastAsUser(
+                                        BRIntent,
+                                        Process.myUserHandle(),
+                                        "com.samsung.permission.ESE_SYSTEM_PROTECTION");
+                            }
+                        };
                 this.connectivityManager.registerDefaultNetworkCallback(this.CMCallback);
             } else if (type == 1) {
                 Log.i(TAG, "F-UR-NC");
@@ -1130,7 +1201,8 @@ public final class SemService extends ISemService.Stub {
 
     @Override // com.samsung.android.service.SemService.ISemService
     public int ICD() {
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MJavaPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MJavaPkgList)) {
             Log.e(TAG, "ICD Permission Error");
             return -91;
         }
@@ -1153,7 +1225,8 @@ public final class SemService extends ISemService.Stub {
     public int start_attestation(byte[] drRsp, int drLen, byte[] svRsp, int svLen) {
         int result;
         Log.i(TAG, "start_attestation");
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MJavaPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MJavaPkgList)) {
             return -91;
         }
         if (!requestSpiUsage()) {
@@ -1184,7 +1257,8 @@ public final class SemService extends ISemService.Stub {
     public int continue_attestation(String data, int dataLen, byte[] rspData) {
         int result;
         Log.i(TAG, "continue_atteestation");
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MJavaPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MJavaPkgList)) {
             return -91;
         }
         if (!requestSpiUsage()) {
@@ -1236,30 +1310,56 @@ public final class SemService extends ISemService.Stub {
                                 try {
                                     IvParameterSpec ivAES = new IvParameterSpec(bIv);
                                     try {
-                                        Cipher cipherAES = Cipher.getInstance("AES/CBC/PKCS7Padding");
+                                        Cipher cipherAES =
+                                                Cipher.getInstance("AES/CBC/PKCS7Padding");
                                         try {
                                             cipherAES.init(1, encryptKey2, ivAES);
                                             KeyFactory fac = KeyFactory.getInstance("RSA");
                                             try {
-                                                byte[] encKeyDataSKMS2 = this.bytePublicKeyDataSecurity;
-                                                X509EncodedKeySpec publicKeySpecSecurity = new X509EncodedKeySpec(encKeyDataSKMS2);
-                                                PublicKey publicKeySecurity = fac.generatePublic(publicKeySpecSecurity);
+                                                byte[] encKeyDataSKMS2 =
+                                                        this.bytePublicKeyDataSecurity;
+                                                X509EncodedKeySpec publicKeySpecSecurity =
+                                                        new X509EncodedKeySpec(encKeyDataSKMS2);
+                                                PublicKey publicKeySecurity =
+                                                        fac.generatePublic(publicKeySpecSecurity);
                                                 try {
-                                                    byte[] encKeyDataSecurity2 = this.bytePublicKeyDataSKMS;
-                                                    X509EncodedKeySpec publicKeySpecSKMS = new X509EncodedKeySpec(encKeyDataSecurity2);
-                                                    PublicKey publicKeySKMS = fac.generatePublic(publicKeySpecSKMS);
+                                                    byte[] encKeyDataSecurity2 =
+                                                            this.bytePublicKeyDataSKMS;
+                                                    X509EncodedKeySpec publicKeySpecSKMS =
+                                                            new X509EncodedKeySpec(
+                                                                    encKeyDataSecurity2);
+                                                    PublicKey publicKeySKMS =
+                                                            fac.generatePublic(publicKeySpecSKMS);
                                                     byte[] AESIVKeyValue = new byte[48];
                                                     try {
-                                                        System.arraycopy(ivAES.getIV(), 0, AESIVKeyValue, 0, 16);
+                                                        System.arraycopy(
+                                                                ivAES.getIV(),
+                                                                0,
+                                                                AESIVKeyValue,
+                                                                0,
+                                                                16);
                                                         try {
-                                                            System.arraycopy(encryptKey2.getEncoded(), 0, AESIVKeyValue, 16, 32);
-                                                            Cipher cipherRSA = Cipher.getInstance("RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING");
+                                                            System.arraycopy(
+                                                                    encryptKey2.getEncoded(),
+                                                                    0,
+                                                                    AESIVKeyValue,
+                                                                    16,
+                                                                    32);
+                                                            Cipher cipherRSA =
+                                                                    Cipher.getInstance(
+                                                                            "RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING");
                                                             cipherRSA.init(1, publicKeySecurity);
-                                                            byte[] encKeyDataSecurity3 = cipherRSA.doFinal(AESIVKeyValue);
+                                                            byte[] encKeyDataSecurity3 =
+                                                                    cipherRSA.doFinal(
+                                                                            AESIVKeyValue);
                                                             try {
-                                                                Cipher cipherRSA2 = Cipher.getInstance("RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING");
+                                                                Cipher cipherRSA2 =
+                                                                        Cipher.getInstance(
+                                                                                "RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING");
                                                                 cipherRSA2.init(1, publicKeySKMS);
-                                                                byte[] encKeyDataSKMS3 = cipherRSA2.doFinal(AESIVKeyValue);
+                                                                byte[] encKeyDataSKMS3 =
+                                                                        cipherRSA2.doFinal(
+                                                                                AESIVKeyValue);
                                                             } catch (Error e) {
                                                                 e = e;
                                                             } catch (NullPointerException e2) {
@@ -1289,12 +1389,15 @@ public final class SemService extends ISemService.Stub {
                                                     e = e12;
                                                 }
                                                 try {
-                                                    byte[] byteEncBuffer = cipherAES.doFinal(msg.getBytes());
-                                                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                                                    byte[] byteEncBuffer =
+                                                            cipherAES.doFinal(msg.getBytes());
+                                                    ByteArrayOutputStream outputStream =
+                                                            new ByteArrayOutputStream();
                                                     outputStream.write(encKeyDataSecurity3);
                                                     outputStream.write(encKeyDataSKMS3);
                                                     outputStream.write(byteEncBuffer);
-                                                    byte[] byteLogbuffer = outputStream.toByteArray();
+                                                    byte[] byteLogbuffer =
+                                                            outputStream.toByteArray();
                                                     outputStream.close();
                                                     return Base64.encodeToString(byteLogbuffer, 2);
                                                 } catch (Error e13) {
@@ -1367,7 +1470,8 @@ public final class SemService extends ISemService.Stub {
                 this.bytePublicKeySKMSLen = pkResultSKMS;
                 int pkResultSKMS2 = this.bytePublicKeySecurityLen;
                 this.bytePublicKeyDataSecurity = Arrays.copyOf(getPKDataSecurity, pkResultSKMS2);
-                this.bytePublicKeyDataSKMS = Arrays.copyOf(getPKDataSKMS, this.bytePublicKeySKMSLen);
+                this.bytePublicKeyDataSKMS =
+                        Arrays.copyOf(getPKDataSKMS, this.bytePublicKeySKMSLen);
                 if (this.bytePublicKeyDataSKMS == null || this.bytePublicKeyDataSecurity == null) {
                     encryptKey = null;
                     encKeyDataSKMS = null;
@@ -1389,18 +1493,23 @@ public final class SemService extends ISemService.Stub {
                             cipherAES2.init(1, encryptKey22, ivAES2);
                             KeyFactory fac2 = KeyFactory.getInstance("RSA");
                             byte[] encKeyDataSKMS22 = this.bytePublicKeyDataSecurity;
-                            X509EncodedKeySpec publicKeySpecSecurity2 = new X509EncodedKeySpec(encKeyDataSKMS22);
-                            PublicKey publicKeySecurity2 = fac2.generatePublic(publicKeySpecSecurity2);
+                            X509EncodedKeySpec publicKeySpecSecurity2 =
+                                    new X509EncodedKeySpec(encKeyDataSKMS22);
+                            PublicKey publicKeySecurity2 =
+                                    fac2.generatePublic(publicKeySpecSecurity2);
                             byte[] encKeyDataSecurity22 = this.bytePublicKeyDataSKMS;
-                            X509EncodedKeySpec publicKeySpecSKMS2 = new X509EncodedKeySpec(encKeyDataSecurity22);
+                            X509EncodedKeySpec publicKeySpecSKMS2 =
+                                    new X509EncodedKeySpec(encKeyDataSecurity22);
                             PublicKey publicKeySKMS2 = fac2.generatePublic(publicKeySpecSKMS2);
                             byte[] AESIVKeyValue2 = new byte[48];
                             System.arraycopy(ivAES2.getIV(), 0, AESIVKeyValue2, 0, 16);
                             System.arraycopy(encryptKey22.getEncoded(), 0, AESIVKeyValue2, 16, 32);
-                            Cipher cipherRSA3 = Cipher.getInstance("RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING");
+                            Cipher cipherRSA3 =
+                                    Cipher.getInstance("RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING");
                             cipherRSA3.init(1, publicKeySecurity2);
                             byte[] encKeyDataSecurity32 = cipherRSA3.doFinal(AESIVKeyValue2);
-                            Cipher cipherRSA22 = Cipher.getInstance("RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING");
+                            Cipher cipherRSA22 =
+                                    Cipher.getInstance("RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING");
                             cipherRSA22.init(1, publicKeySKMS2);
                             byte[] encKeyDataSKMS32 = cipherRSA22.doFinal(AESIVKeyValue2);
                             byte[] byteEncBuffer2 = cipherAES2.doFinal(msg.getBytes());
@@ -1466,9 +1575,15 @@ public final class SemService extends ISemService.Stub {
     }
 
     private String getSCRSActivationList() {
-        byte[] APDU_SCRS_SELECT = {0, -92, 4, 0, 9, MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH, 0, 0, 1, 81, 67, 82, 83, 0};
-        byte[] APDU_GETSTATUS_FIRST = {Byte.MIN_VALUE, MidiConstants.STATUS_SONG_POSITION, 64, 0, 2, 79, 0, 0};
-        byte[] APDU_GETSTATUS_REMAINED = {Byte.MIN_VALUE, MidiConstants.STATUS_SONG_POSITION, 64, 1, 2, 79, 0, 0};
+        byte[] APDU_SCRS_SELECT = {
+            0, -92, 4, 0, 9, MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH, 0, 0, 1, 81, 67, 82, 83, 0
+        };
+        byte[] APDU_GETSTATUS_FIRST = {
+            Byte.MIN_VALUE, MidiConstants.STATUS_SONG_POSITION, 64, 0, 2, 79, 0, 0
+        };
+        byte[] APDU_GETSTATUS_REMAINED = {
+            Byte.MIN_VALUE, MidiConstants.STATUS_SONG_POSITION, 64, 1, 2, 79, 0, 0
+        };
         byte[] ListByteData = new byte[9216];
         int ListByteDataLen = 0;
         try {
@@ -1482,7 +1597,11 @@ public final class SemService extends ISemService.Stub {
                     return null;
                 }
                 byte[] res2 = Arrays.copyOf(res, resLen);
-                Log.d(TAG, "Select SW : " + SemServiceTools.byteToHex(res2[resLen - 2]) + SemServiceTools.byteToHex(res2[resLen - 1]));
+                Log.d(
+                        TAG,
+                        "Select SW : "
+                                + SemServiceTools.byteToHex(res2[resLen - 2])
+                                + SemServiceTools.byteToHex(res2[resLen - 1]));
                 if (resLen >= 2 && res2[resLen - 2] == -112 && res2[resLen - 1] == 0) {
                     int i = 0;
                     while (true) {
@@ -1490,14 +1609,31 @@ public final class SemService extends ISemService.Stub {
                             break;
                         }
                         byte[] res3 = new byte[9216];
-                        int resLen2 = i == 0 ? send_Data(APDU_GETSTATUS_FIRST, APDU_GETSTATUS_FIRST.length, res3, 0) : send_Data(APDU_GETSTATUS_REMAINED, APDU_GETSTATUS_REMAINED.length, res3, 0);
+                        int resLen2 =
+                                i == 0
+                                        ? send_Data(
+                                                APDU_GETSTATUS_FIRST,
+                                                APDU_GETSTATUS_FIRST.length,
+                                                res3,
+                                                0)
+                                        : send_Data(
+                                                APDU_GETSTATUS_REMAINED,
+                                                APDU_GETSTATUS_REMAINED.length,
+                                                res3,
+                                                0);
                         if (res3.length < 2) {
                             Log.e(TAG, "Select Error");
                             close_Spi(0);
                             return null;
                         }
                         byte[] res4 = Arrays.copyOf(res3, resLen2);
-                        Log.i(TAG, "SEND SW[" + i + "] : " + SemServiceTools.byteToHex(res4[resLen2 - 2]) + SemServiceTools.byteToHex(res4[resLen2 - 1]));
+                        Log.i(
+                                TAG,
+                                "SEND SW["
+                                        + i
+                                        + "] : "
+                                        + SemServiceTools.byteToHex(res4[resLen2 - 2])
+                                        + SemServiceTools.byteToHex(res4[resLen2 - 1]));
                         if (resLen2 >= 2 && res4[resLen2 - 2] == -112 && res4[resLen2 - 1] == 0) {
                             Log.i(TAG, "GET DATA FINISH");
                             int resLen3 = resLen2 - 2;
@@ -1519,7 +1655,8 @@ public final class SemService extends ISemService.Stub {
                     return null;
                 }
                 close_Spi(0);
-                String resultList = SemServiceTools.bytesToHex(Arrays.copyOf(ListByteData, ListByteDataLen));
+                String resultList =
+                        SemServiceTools.bytesToHex(Arrays.copyOf(ListByteData, ListByteDataLen));
                 return resultList;
             }
             Log.i(TAG, "S-LOG SCRS Open Fail");
@@ -1535,7 +1672,9 @@ public final class SemService extends ISemService.Stub {
     }
 
     private String getAccessRule() {
-        byte[] APDU_ARAM_SELECT = {0, -92, 4, 0, 9, MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH, 0, 0, 1, 81, 65, 67, 76, 0};
+        byte[] APDU_ARAM_SELECT = {
+            0, -92, 4, 0, 9, MidiConstants.STATUS_POLYPHONIC_AFTERTOUCH, 0, 0, 1, 81, 65, 67, 76, 0
+        };
         byte[] APDU_GETRULE_FIRST = {Byte.MIN_VALUE, -54, -1, 64, 0};
         byte[] APDU_GETRULE_REMAINED = {Byte.MIN_VALUE, -54, -1, SprAttributeBase.TYPE_DURATION, 0};
         byte[] ListByteData = new byte[9216];
@@ -1555,14 +1694,31 @@ public final class SemService extends ISemService.Stub {
                     int i = 0;
                     while (i < 50) {
                         byte[] res3 = new byte[9216];
-                        int resLen2 = i == 0 ? send_Data(APDU_GETRULE_FIRST, APDU_GETRULE_FIRST.length, res3, 0) : send_Data(APDU_GETRULE_REMAINED, APDU_GETRULE_REMAINED.length, res3, 0);
+                        int resLen2 =
+                                i == 0
+                                        ? send_Data(
+                                                APDU_GETRULE_FIRST,
+                                                APDU_GETRULE_FIRST.length,
+                                                res3,
+                                                0)
+                                        : send_Data(
+                                                APDU_GETRULE_REMAINED,
+                                                APDU_GETRULE_REMAINED.length,
+                                                res3,
+                                                0);
                         if (res3.length < 2) {
                             Log.e(TAG, "Select Error");
                             close_Spi(0);
                             return null;
                         }
                         byte[] res4 = Arrays.copyOf(res3, resLen2);
-                        Log.i(TAG, "SEND SW[" + i + "] : " + SemServiceTools.byteToHex(res4[resLen2 - 2]) + SemServiceTools.byteToHex(res4[resLen2 - 1]));
+                        Log.i(
+                                TAG,
+                                "SEND SW["
+                                        + i
+                                        + "] : "
+                                        + SemServiceTools.byteToHex(res4[resLen2 - 2])
+                                        + SemServiceTools.byteToHex(res4[resLen2 - 1]));
                         if (resLen2 >= 2 && res4[resLen2 - 2] == 105 && res4[resLen2 - 1] == -123) {
                             break;
                         }
@@ -1579,7 +1735,8 @@ public final class SemService extends ISemService.Stub {
                     }
                 }
                 close_Spi(0);
-                String resultList = SemServiceTools.bytesToHex(Arrays.copyOf(ListByteData, ListByteDataLen));
+                String resultList =
+                        SemServiceTools.bytesToHex(Arrays.copyOf(ListByteData, ListByteDataLen));
                 return resultList;
             }
             Log.e(TAG, "S-LOG Open Fail");
@@ -1612,19 +1769,21 @@ public final class SemService extends ISemService.Stub {
             Method dump skipped, instructions count: 383
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.SemService.appCheckLog():java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.SemService.appCheckLog():java.lang.String");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:38:0x0174, code lost:
-    
-        close_Spi(0);
-        r12 = android.util.Base64.encodeToString(java.util.Arrays.copyOf(r8, r9), 2);
-        android.util.Log.d(com.android.server.SemService.TAG, "SEMSVC[4] : " + r12);
-     */
+
+       close_Spi(0);
+       r12 = android.util.Base64.encodeToString(java.util.Arrays.copyOf(r8, r9), 2);
+       android.util.Log.d(com.android.server.SemService.TAG, "SEMSVC[4] : " + r12);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:39:0x019b, code lost:
-    
-        return r12;
-     */
+
+       return r12;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1634,12 +1793,15 @@ public final class SemService extends ISemService.Stub {
             Method dump skipped, instructions count: 475
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.SemService.getEncodedDCKLog():java.lang.String");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.SemService.getEncodedDCKLog():java.lang.String");
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
     public void secureLog(String msg) {
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MJavaPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MJavaPkgList)) {
             Log.e(TAG, "SecureLog Permission Error");
             return;
         }
@@ -1657,7 +1819,8 @@ public final class SemService extends ISemService.Stub {
         Log.i(TAG, "Start_SLOG");
         byte[] getPKDataSecurity = new byte[300];
         byte[] getPKDataSKMS = new byte[300];
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MJavaPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MJavaPkgList)) {
             Log.e(TAG, "Start_SLOG Permission Error");
             return;
         }
@@ -1666,7 +1829,8 @@ public final class SemService extends ISemService.Stub {
             int resultSKMS = getpkSKMS(getPKDataSKMS);
             this.bytePublicKeySecurityLen = resultSecurity;
             this.bytePublicKeySKMSLen = resultSKMS;
-            this.bytePublicKeyDataSecurity = Arrays.copyOf(getPKDataSecurity, this.bytePublicKeySecurityLen);
+            this.bytePublicKeyDataSecurity =
+                    Arrays.copyOf(getPKDataSecurity, this.bytePublicKeySecurityLen);
             this.bytePublicKeyDataSKMS = Arrays.copyOf(getPKDataSKMS, this.bytePublicKeySKMSLen);
         } catch (UnsatisfiedLinkError e) {
             Log.e(TAG, "USLE Exception : " + e);
@@ -1731,171 +1895,171 @@ public final class SemService extends ISemService.Stub {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:13:0x008f, code lost:
-    
-        if (r9 != null) goto L18;
-     */
+
+       if (r9 != null) goto L18;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:14:0x0091, code lost:
-    
-        r9.destroy();
-     */
+
+       r9.destroy();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:16:0x00cb, code lost:
-    
-        android.util.Log.i(com.android.server.SemService.TAG, "Buffer Init");
-        r14.secureBuffer.delete(0, r14.secureBuffer.length());
-        r14.secureBuffer.setLength(0);
-     */
+
+       android.util.Log.i(com.android.server.SemService.TAG, "Buffer Init");
+       r14.secureBuffer.delete(0, r14.secureBuffer.length());
+       r14.secureBuffer.setLength(0);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:17:0x00e1, code lost:
-    
-        if (r7 == null) goto L32;
-     */
+
+       if (r7 == null) goto L32;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:18:0x00ed, code lost:
-    
-        if (r6 == null) goto L87;
-     */
+
+       if (r6 == null) goto L87;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:19:0x00ef, code lost:
-    
-        r6.flush();
-        r6.close();
-     */
+
+       r6.flush();
+       r6.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:21:?, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:23:0x00eb, code lost:
-    
-        r10 = e;
-     */
+
+       r10 = e;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:25:0x00f8, code lost:
-    
-        r11 = new java.lang.StringBuilder();
-     */
+
+       r11 = new java.lang.StringBuilder();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:26:0x0142, code lost:
-    
-        android.util.Log.e(com.android.server.SemService.TAG, r11.append("Close Exception ").append(r10).toString());
-     */
+
+       android.util.Log.e(com.android.server.SemService.TAG, r11.append("Close Exception ").append(r10).toString());
+    */
     /* JADX WARN: Code restructure failed: missing block: B:27:0x0153, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:28:?, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:30:0x00e3, code lost:
-    
-        r7.flush();
-        r7.close();
-     */
+
+       r7.flush();
+       r7.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:32:0x00fe, code lost:
-    
-        r10 = move-exception;
-     */
+
+       r10 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:33:0x0154, code lost:
-    
-        if (r7 != null) goto L81;
-     */
+
+       if (r7 != null) goto L81;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:34:0x0160, code lost:
-    
-        if (r6 != null) goto L66;
-     */
+
+       if (r6 != null) goto L66;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:35:0x0162, code lost:
-    
-        r6.flush();
-        r6.close();
-     */
+
+       r6.flush();
+       r6.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:38:0x015e, code lost:
-    
-        r11 = move-exception;
-     */
+
+       r11 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:40:0x016b, code lost:
-    
-        android.util.Log.e(com.android.server.SemService.TAG, "Close Exception " + r11);
-     */
+
+       android.util.Log.e(com.android.server.SemService.TAG, "Close Exception " + r11);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:41:0x0181, code lost:
-    
-        throw r10;
-     */
+
+       throw r10;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:43:0x0156, code lost:
-    
-        r7.flush();
-        r7.close();
-     */
+
+       r7.flush();
+       r7.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:45:0x0101, code lost:
-    
-        android.util.Log.e(com.android.server.SemService.TAG, "Buffer Error");
-     */
+
+       android.util.Log.e(com.android.server.SemService.TAG, "Buffer Error");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:46:0x0106, code lost:
-    
-        if (r7 != null) goto L79;
-     */
+
+       if (r7 != null) goto L79;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:47:0x0112, code lost:
-    
-        if (r6 != null) goto L45;
-     */
+
+       if (r6 != null) goto L45;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:48:0x0114, code lost:
-    
-        r6.flush();
-        r6.close();
-     */
+
+       r6.flush();
+       r6.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:50:?, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:52:0x0110, code lost:
-    
-        r10 = e;
-     */
+
+       r10 = e;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:54:0x011b, code lost:
-    
-        r11 = new java.lang.StringBuilder();
-     */
+
+       r11 = new java.lang.StringBuilder();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:55:?, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:57:0x0108, code lost:
-    
-        r7.flush();
-        r7.close();
-     */
+
+       r7.flush();
+       r7.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:59:0x0122, code lost:
-    
-        android.util.Log.e(com.android.server.SemService.TAG, "Buffer Exception");
-     */
+
+       android.util.Log.e(com.android.server.SemService.TAG, "Buffer Exception");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:60:0x0127, code lost:
-    
-        if (r7 != null) goto L77;
-     */
+
+       if (r7 != null) goto L77;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:61:0x0133, code lost:
-    
-        if (r6 != null) goto L55;
-     */
+
+       if (r6 != null) goto L55;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:62:0x0135, code lost:
-    
-        r6.flush();
-        r6.close();
-     */
+
+       r6.flush();
+       r6.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:64:0x0131, code lost:
-    
-        r10 = e;
-     */
+
+       r10 = e;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:66:0x013d, code lost:
-    
-        r11 = new java.lang.StringBuilder();
-     */
+
+       r11 = new java.lang.StringBuilder();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:67:?, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:69:0x0129, code lost:
-    
-        r7.flush();
-        r7.close();
-     */
+
+       r7.flush();
+       r7.close();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:80:0x00c8, code lost:
-    
-        if (0 == 0) goto L85;
-     */
+
+       if (0 == 0) goto L85;
+    */
     @Override // com.samsung.android.service.SemService.ISemService
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -1906,14 +2070,16 @@ public final class SemService extends ISemService.Stub {
             Method dump skipped, instructions count: 392
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.SemService.stop_SLOG():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: com.android.server.SemService.stop_SLOG():void");
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
     public void agent_SLOG(String logStr) {
         StringBuilder sb;
         BufferedWriter bw;
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MJavaPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MJavaPkgList)) {
             Log.e(TAG, "Agent_SLOG Permission Error");
             return;
         }
@@ -1926,7 +2092,8 @@ public final class SemService extends ISemService.Stub {
             int resultSKMSLen = getpkSKMS(getPKDataSKMS);
             this.bytePublicKeySecurityLen = resultSecurityLen;
             this.bytePublicKeySKMSLen = resultSKMSLen;
-            this.bytePublicKeyDataSecurity = Arrays.copyOf(getPKDataSecurity, this.bytePublicKeySecurityLen);
+            this.bytePublicKeyDataSecurity =
+                    Arrays.copyOf(getPKDataSecurity, this.bytePublicKeySecurityLen);
             this.bytePublicKeyDataSKMS = Arrays.copyOf(getPKDataSKMS, this.bytePublicKeySKMSLen);
         } catch (Exception e) {
             Log.e(TAG, "Get SL Key ex " + e);
@@ -2043,8 +2210,10 @@ public final class SemService extends ISemService.Stub {
                 sb.append("\n[SCRS LIST]");
                 int uid = Binder.getCallingUid();
                 String packageName = this.mSemServiceAccessControl.getPackageName();
-                this.mSemServiceAccessControl.addAllowedPackage(packageName, uid, SemServiceAccessControl.PackageList.MJavaPkgList);
-                this.mSemServiceAccessControl.addAllowedPackage(packageName, uid, SemServiceAccessControl.PackageList.MFactoryPkgList);
+                this.mSemServiceAccessControl.addAllowedPackage(
+                        packageName, uid, SemServiceAccessControl.PackageList.MJavaPkgList);
+                this.mSemServiceAccessControl.addAllowedPackage(
+                        packageName, uid, SemServiceAccessControl.PackageList.MFactoryPkgList);
                 String SCRSInfo = getSCRSActivationList();
                 String ARAInfo = getAccessRule();
                 String CPLCInfo = getCPLC14mode();
@@ -2055,8 +2224,12 @@ public final class SemService extends ISemService.Stub {
                 String ESEKCert2 = null;
                 String SCP11Cert = null;
                 if (this.supportEsek) {
-                    String ESEKCert3 = SemServiceTools.readFileBytes(Paths.get("/efs/sec_efs/esek/esek_cert.dat", new String[0]));
-                    SCP11Cert = SemServiceTools.readFileBytes(Paths.get("/efs/sec_efs/esek/scp11_cert.dat", new String[0]));
+                    String ESEKCert3 =
+                            SemServiceTools.readFileBytes(
+                                    Paths.get("/efs/sec_efs/esek/esek_cert.dat", new String[0]));
+                    SCP11Cert =
+                            SemServiceTools.readFileBytes(
+                                    Paths.get("/efs/sec_efs/esek/scp11_cert.dat", new String[0]));
                     ESEKCert2 = ESEKCert3;
                 }
                 start_SLOG();
@@ -2107,8 +2280,10 @@ public final class SemService extends ISemService.Stub {
                             sb.append("\nSCP11 Cert : " + ESEKCert);
                         }
                     }
-                    this.mSemServiceAccessControl.removeAllowedPackage(packageName, SemServiceAccessControl.PackageList.MJavaPkgList);
-                    this.mSemServiceAccessControl.removeAllowedPackage(packageName, SemServiceAccessControl.PackageList.MFactoryPkgList);
+                    this.mSemServiceAccessControl.removeAllowedPackage(
+                            packageName, SemServiceAccessControl.PackageList.MJavaPkgList);
+                    this.mSemServiceAccessControl.removeAllowedPackage(
+                            packageName, SemServiceAccessControl.PackageList.MFactoryPkgList);
                     pw.println(sb.toString());
                 } catch (Error e) {
                     e = e;
@@ -2133,7 +2308,8 @@ public final class SemService extends ISemService.Stub {
 
     private String getDate() {
         try {
-            return new SimpleDateFormat("yyyy/MM/dd hh:mm:ss.SSS", Locale.getDefault()).format(Long.valueOf(System.currentTimeMillis()));
+            return new SimpleDateFormat("yyyy/MM/dd hh:mm:ss.SSS", Locale.getDefault())
+                    .format(Long.valueOf(System.currentTimeMillis()));
         } catch (Exception e) {
             return "";
         }
@@ -2142,7 +2318,8 @@ public final class SemService extends ISemService.Stub {
     @Override // com.samsung.android.service.SemService.ISemService
     public int getAtr_Spi() {
         Log.i(TAG, "Start getAtr");
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MCosPatchPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MCosPatchPkgList)) {
             Log.e(TAG, "getAtr Permission Error");
             return -91;
         }
@@ -2166,7 +2343,8 @@ public final class SemService extends ISemService.Stub {
 
     @Override // com.samsung.android.service.SemService.ISemService
     public int resetForCOSU() {
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MCosPatchPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MCosPatchPkgList)) {
             Log.e(TAG, "resetForCOSU Permission Error");
             return -91;
         }
@@ -2285,7 +2463,8 @@ public final class SemService extends ISemService.Stub {
     public int check_SeState(byte[] appletAid, byte[] associatedAid) {
         int ret;
         Log.i(TAG, "Start checkSeState");
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MScpKmPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MScpKmPkgList)) {
             return -91;
         }
         if (!requestSpiUsage()) {
@@ -2313,11 +2492,13 @@ public final class SemService extends ISemService.Stub {
     }
 
     @Override // com.samsung.android.service.SemService.ISemService
-    public int start_request_credentials(byte[] appletAid, byte[] associatedAid, String serviceName, byte[] key_blob) {
+    public int start_request_credentials(
+            byte[] appletAid, byte[] associatedAid, String serviceName, byte[] key_blob) {
         int ret;
         byte[] teeAllowList;
         Log.i(TAG, "Start start_request_credentials");
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MScpKmPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MScpKmPkgList)) {
             return -91;
         }
         if (!requestSpiUsage()) {
@@ -2331,7 +2512,8 @@ public final class SemService extends ISemService.Stub {
         try {
             if (this.mSemServiceAccessControl.getScpkmDAFileSupport()) {
                 try {
-                    byte[] teeAllowListSignature = this.mSemServiceAccessControl.getScpkmTeeSigData();
+                    byte[] teeAllowListSignature =
+                            this.mSemServiceAccessControl.getScpkmTeeSigData();
                     try {
                         teeAllowList = this.mSemServiceAccessControl.getScpkmTeeListData();
                     } catch (Exception e) {
@@ -2345,26 +2527,39 @@ public final class SemService extends ISemService.Stub {
                         if (teeAllowListSignature == null || teeAllowList == null) {
                             Log.e(TAG, "Data Error");
                         } else {
-                            int ret2 = startRequestCredentialsList(appletAid, associatedAid, serviceName, teeAllowListSignature, teeAllowList, key_blob);
+                            int ret2 =
+                                    startRequestCredentialsList(
+                                            appletAid,
+                                            associatedAid,
+                                            serviceName,
+                                            teeAllowListSignature,
+                                            teeAllowList,
+                                            key_blob);
                             releaseSpiUsage();
                             return ret2;
                         }
                     } catch (Exception e4) {
                         e = e4;
                         Log.e(TAG, "Get tList Ex " + e);
-                        ret = startRequestCredentials(appletAid, associatedAid, serviceName, key_blob);
+                        ret =
+                                startRequestCredentials(
+                                        appletAid, associatedAid, serviceName, key_blob);
                         releaseSpiUsage();
                         return ret;
                     } catch (NoClassDefFoundError e5) {
                         e = e5;
                         Log.e(TAG, "Get tList NoClassDef " + e);
-                        ret = startRequestCredentials(appletAid, associatedAid, serviceName, key_blob);
+                        ret =
+                                startRequestCredentials(
+                                        appletAid, associatedAid, serviceName, key_blob);
                         releaseSpiUsage();
                         return ret;
                     } catch (UnsatisfiedLinkError e6) {
                         e = e6;
                         Log.e(TAG, "Get tList Unsatisfield " + e);
-                        ret = startRequestCredentials(appletAid, associatedAid, serviceName, key_blob);
+                        ret =
+                                startRequestCredentials(
+                                        appletAid, associatedAid, serviceName, key_blob);
                         releaseSpiUsage();
                         return ret;
                     }
@@ -2394,7 +2589,8 @@ public final class SemService extends ISemService.Stub {
     @Override // com.samsung.android.service.SemService.ISemService
     public void stop_request_credentials() {
         Log.i(TAG, "Start stop_request_credentials");
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MScpKmPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MScpKmPkgList)) {
             return;
         }
         try {
@@ -2419,7 +2615,8 @@ public final class SemService extends ISemService.Stub {
         if (!isGRDMSupported()) {
             return -10;
         }
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MGrdmPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MGrdmPkgList)) {
             return -91;
         }
         try {
@@ -2453,7 +2650,8 @@ public final class SemService extends ISemService.Stub {
         if (!isGRDMSupported()) {
             return -10;
         }
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MGrdmPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MGrdmPkgList)) {
             return -91;
         }
         try {
@@ -2482,7 +2680,8 @@ public final class SemService extends ISemService.Stub {
         if (!isGRDMSupported()) {
             return -10;
         }
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MGrdmPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MGrdmPkgList)) {
             return -91;
         }
         try {
@@ -2514,7 +2713,8 @@ public final class SemService extends ISemService.Stub {
         if (!isGRDMSupported()) {
             return -10;
         }
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MGrdmPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MGrdmPkgList)) {
             return -91;
         }
         try {
@@ -2539,7 +2739,9 @@ public final class SemService extends ISemService.Stub {
     @Override // com.samsung.android.service.SemService.ISemService
     public synchronized String grdm_check_restricted_mode() {
         Log.i(TAG, "Start grdm_check_restricted_mode");
-        if (!isGRDMSupported() || !this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MGrdmPkgList)) {
+        if (!isGRDMSupported()
+                || !this.mSemServiceAccessControl.hasAccessPermission(
+                        SemServiceAccessControl.PackageList.MGrdmPkgList)) {
             return ERROR_NO_PERMISSION_STRING;
         }
         try {
@@ -2551,7 +2753,8 @@ public final class SemService extends ISemService.Stub {
                     return null;
                 }
                 if (dataLen < 1000) {
-                    String data = new String(Arrays.copyOf(dataBuf, dataLen), StandardCharsets.UTF_8);
+                    String data =
+                            new String(Arrays.copyOf(dataBuf, dataLen), StandardCharsets.UTF_8);
                     Log.i(TAG, "grdm_check_restricted_mode Return : " + data);
                     return data;
                 }
@@ -2577,7 +2780,8 @@ public final class SemService extends ISemService.Stub {
         if (!isGRDMSupported()) {
             return -10;
         }
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MGrdmPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MGrdmPkgList)) {
             return -91;
         }
         try {
@@ -2603,7 +2807,8 @@ public final class SemService extends ISemService.Stub {
     public int openSpiDriver() {
         int openResult;
         Log.i(TAG, "openSpiDriver");
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MJavaPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MJavaPkgList)) {
             Log.e(TAG, "openSpiDriver Permission Error");
             return -91;
         }
@@ -2635,7 +2840,8 @@ public final class SemService extends ISemService.Stub {
     public int closeSpiDriver() {
         int closeResult;
         Log.i(TAG, "closeSpiDriver");
-        if (!this.mSemServiceAccessControl.hasAccessPermission(SemServiceAccessControl.PackageList.MJavaPkgList)) {
+        if (!this.mSemServiceAccessControl.hasAccessPermission(
+                SemServiceAccessControl.PackageList.MJavaPkgList)) {
             Log.e(TAG, "closeSpiDriver Permission Error");
             return -91;
         }

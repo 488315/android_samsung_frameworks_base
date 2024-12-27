@@ -2,9 +2,9 @@ package android.database.sqlite.trace;
 
 import android.database.sqlite.SQLiteConnection;
 import android.database.sqlite.SQLiteDebug;
-import android.database.sqlite.trace.SQLiteTrace;
 import android.os.Process;
 import android.os.SystemProperties;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,12 +66,15 @@ public class SQLiteTrace {
 
         /* JADX INFO: Access modifiers changed from: private */
         public void start(final String dbPath) {
-            Thread session = new Thread(new Runnable() { // from class: android.database.sqlite.trace.SQLiteTrace$SQLiteTraceSession$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    SQLiteTrace.SQLiteTraceSession.this.lambda$start$0(dbPath);
-                }
-            });
+            Thread session =
+                    new Thread(
+                            new Runnable() { // from class:
+                                // android.database.sqlite.trace.SQLiteTrace$SQLiteTraceSession$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    SQLiteTrace.SQLiteTraceSession.this.lambda$start$0(dbPath);
+                                }
+                            });
             session.start();
         }
 

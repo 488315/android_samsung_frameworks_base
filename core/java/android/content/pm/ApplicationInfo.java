@@ -3,8 +3,6 @@ package android.content.pm;
 import android.annotation.SystemApi;
 import android.app.compat.CompatChanges;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
@@ -19,9 +17,11 @@ import android.util.ArraySet;
 import android.util.Printer;
 import android.util.SparseArray;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.R;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.Parcelling;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.text.Collator;
@@ -63,8 +63,7 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
     public static final int FLAG_INSTALLED = 8388608;
     public static final int FLAG_IS_DATA_ONLY = 16777216;
 
-    @Deprecated
-    public static final int FLAG_IS_GAME = 33554432;
+    @Deprecated public static final int FLAG_IS_GAME = 33554432;
     public static final int FLAG_KILL_AFTER_RESTORE = 65536;
     public static final int FLAG_LARGE_HEAP = 1048576;
     public static final int FLAG_MULTIARCH = Integer.MIN_VALUE;
@@ -76,8 +75,7 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
     public static final int FLAG_SUPPORTS_NORMAL_SCREENS = 1024;
     public static final int FLAG_SUPPORTS_RTL = 4194304;
 
-    @Deprecated
-    public static final int FLAG_SUPPORTS_SCREEN_DENSITIES = 8192;
+    @Deprecated public static final int FLAG_SUPPORTS_SCREEN_DENSITIES = 8192;
     public static final int FLAG_SUPPORTS_SMALL_SCREENS = 512;
     public static final int FLAG_SUPPORTS_XLARGE_SCREENS = 524288;
     public static final int FLAG_SUSPENDED = 1073741824;
@@ -101,6 +99,7 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
     public static final int HIDDEN_API_ENFORCEMENT_JUST_WARN = 1;
+
     private static final int HIDDEN_API_ENFORCEMENT_MAX = 2;
     private static final int HIDDEN_API_ENFORCEMENT_MIN = -1;
     public static final int MEMTAG_ASYNC = 1;
@@ -163,8 +162,7 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
     public String compileSdkVersionCodename;
     public long createTimestamp;
 
-    @SystemApi
-    public String credentialProtectedDataDir;
+    @SystemApi public String credentialProtectedDataDir;
     public boolean crossProfile;
     public String dataDir;
     public int dataExtractionRulesRes;
@@ -222,53 +220,47 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
     public String[] splitSourceDirs;
     public UUID storageUuid;
 
-    @SystemApi
-    public int targetSandboxVersion;
+    @SystemApi public int targetSandboxVersion;
     public int targetSdkVersion;
     public String taskAffinity;
     public int theme;
     public int uiOptions;
     public int uid;
 
-    @Deprecated
-    public int versionCode;
+    @Deprecated public int versionCode;
     public String volumeUuid;
     public String zygotePreloadName;
-    private static final Parcelling.BuiltIn.ForBoolean sForBoolean = (Parcelling.BuiltIn.ForBoolean) Parcelling.Cache.getOrCreate(Parcelling.BuiltIn.ForBoolean.class);
-    private static final Parcelling.BuiltIn.ForStringSet sForStringSet = (Parcelling.BuiltIn.ForStringSet) Parcelling.Cache.getOrCreate(Parcelling.BuiltIn.ForStringSet.class);
+    private static final Parcelling.BuiltIn.ForBoolean sForBoolean =
+            (Parcelling.BuiltIn.ForBoolean)
+                    Parcelling.Cache.getOrCreate(Parcelling.BuiltIn.ForBoolean.class);
+    private static final Parcelling.BuiltIn.ForStringSet sForStringSet =
+            (Parcelling.BuiltIn.ForStringSet)
+                    Parcelling.Cache.getOrCreate(Parcelling.BuiltIn.ForStringSet.class);
     public static final Parcelable.Creator<ApplicationInfo> CREATOR = new AnonymousClass1();
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ApplicationInfoPrivateFlags {
-    }
+    public @interface ApplicationInfoPrivateFlags {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ApplicationInfoPrivateFlagsExt {
-    }
+    public @interface ApplicationInfoPrivateFlagsExt {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Category {
-    }
+    public @interface Category {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface GwpAsanMode {
-    }
+    public @interface GwpAsanMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface HiddenApiEnforcementPolicy {
-    }
+    public @interface HiddenApiEnforcementPolicy {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MemtagMode {
-    }
+    public @interface MemtagMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface NativeHeapZeroInitialized {
-    }
+    public @interface NativeHeapZeroInitialized {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface RawExternalStorage {
-    }
+    public @interface RawExternalStorage {}
 
     public static CharSequence getCategoryTitle(Context context, int category) {
         switch (category) {
@@ -310,7 +302,12 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
                 pw.println(prefix + "className=" + this.className);
             }
             for (int i = 0; i < ArrayUtils.size(this.mAppClassNamesByProcess); i++) {
-                pw.println(prefix + "  process=" + this.mAppClassNamesByProcess.keyAt(i) + " className=" + this.mAppClassNamesByProcess.valueAt(i));
+                pw.println(
+                        prefix
+                                + "  process="
+                                + this.mAppClassNamesByProcess.keyAt(i)
+                                + " className="
+                                + this.mAppClassNamesByProcess.valueAt(i));
             }
         }
         if (this.permission != null) {
@@ -320,9 +317,25 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
         if ((dumpFlags & 1) != 0) {
             pw.println(prefix + "taskAffinity=" + this.taskAffinity);
         }
-        pw.println(prefix + "uid=" + this.uid + " flags=0x" + Integer.toHexString(this.flags) + " privateFlags=0x" + Integer.toHexString(this.privateFlags) + " theme=0x" + Integer.toHexString(this.theme));
+        pw.println(
+                prefix
+                        + "uid="
+                        + this.uid
+                        + " flags=0x"
+                        + Integer.toHexString(this.flags)
+                        + " privateFlags=0x"
+                        + Integer.toHexString(this.privateFlags)
+                        + " theme=0x"
+                        + Integer.toHexString(this.theme));
         if ((dumpFlags & 1) != 0) {
-            pw.println(prefix + "requiresSmallestWidthDp=" + this.requiresSmallestWidthDp + " compatibleWidthLimitDp=" + this.compatibleWidthLimitDp + " largestWidthLimitDp=" + this.largestWidthLimitDp);
+            pw.println(
+                    prefix
+                            + "requiresSmallestWidthDp="
+                            + this.requiresSmallestWidthDp
+                            + " compatibleWidthLimitDp="
+                            + this.compatibleWidthLimitDp
+                            + " largestWidthLimitDp="
+                            + this.largestWidthLimitDp);
         }
         pw.println(prefix + "sourceDir=" + this.sourceDir);
         if (!Objects.equals(this.sourceDir, this.publicSourceDir)) {
@@ -331,8 +344,12 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
         if (!ArrayUtils.isEmpty(this.splitSourceDirs)) {
             pw.println(prefix + "splitSourceDirs=" + Arrays.toString(this.splitSourceDirs));
         }
-        if (!ArrayUtils.isEmpty(this.splitPublicSourceDirs) && !Arrays.equals(this.splitSourceDirs, this.splitPublicSourceDirs)) {
-            pw.println(prefix + "splitPublicSourceDirs=" + Arrays.toString(this.splitPublicSourceDirs));
+        if (!ArrayUtils.isEmpty(this.splitPublicSourceDirs)
+                && !Arrays.equals(this.splitSourceDirs, this.splitPublicSourceDirs)) {
+            pw.println(
+                    prefix
+                            + "splitPublicSourceDirs="
+                            + Arrays.toString(this.splitPublicSourceDirs));
         }
         if (this.resourceDirs != null) {
             pw.println(prefix + "resourceDirs=" + Arrays.toString(this.resourceDirs));
@@ -349,16 +366,31 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
             pw.println(prefix + "deviceProtectedDataDir=" + this.deviceProtectedDataDir);
             pw.println(prefix + "credentialProtectedDataDir=" + this.credentialProtectedDataDir);
             if (this.sharedLibraryFiles != null) {
-                pw.println(prefix + "sharedLibraryFiles=" + Arrays.toString(this.sharedLibraryFiles));
+                pw.println(
+                        prefix + "sharedLibraryFiles=" + Arrays.toString(this.sharedLibraryFiles));
             }
         }
         if (this.classLoaderName != null) {
             pw.println(prefix + "classLoaderName=" + this.classLoaderName);
         }
         if (!ArrayUtils.isEmpty(this.splitClassLoaderNames)) {
-            pw.println(prefix + "splitClassLoaderNames=" + Arrays.toString(this.splitClassLoaderNames));
+            pw.println(
+                    prefix
+                            + "splitClassLoaderNames="
+                            + Arrays.toString(this.splitClassLoaderNames));
         }
-        pw.println(prefix + "enabled=" + this.enabled + " minSdkVersion=" + this.minSdkVersion + " targetSdkVersion=" + this.targetSdkVersion + " versionCode=" + this.longVersionCode + " targetSandboxVersion=" + this.targetSandboxVersion);
+        pw.println(
+                prefix
+                        + "enabled="
+                        + this.enabled
+                        + " minSdkVersion="
+                        + this.minSdkVersion
+                        + " targetSdkVersion="
+                        + this.targetSdkVersion
+                        + " versionCode="
+                        + this.longVersionCode
+                        + " targetSandboxVersion="
+                        + this.targetSandboxVersion);
         if ((dumpFlags & 1) != 0) {
             if (this.manageSpaceActivityName != null) {
                 pw.println(prefix + "manageSpaceActivityName=" + this.manageSpaceActivityName);
@@ -373,21 +405,30 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
             if (this.fullBackupContent > 0) {
                 pw.println(prefix + "fullBackupContent=@xml/" + this.fullBackupContent);
             } else {
-                pw.println(prefix + "fullBackupContent=" + (this.fullBackupContent < 0 ? "false" : "true"));
+                pw.println(
+                        prefix
+                                + "fullBackupContent="
+                                + (this.fullBackupContent < 0 ? "false" : "true"));
             }
             if (this.dataExtractionRulesRes != 0) {
                 pw.println(prefix + "dataExtractionRules=@xml/" + this.dataExtractionRulesRes);
             }
             pw.println(prefix + "crossProfile=" + (this.crossProfile ? "true" : "false"));
             if (this.networkSecurityConfigRes != 0) {
-                pw.println(prefix + "networkSecurityConfigRes=0x" + Integer.toHexString(this.networkSecurityConfigRes));
+                pw.println(
+                        prefix
+                                + "networkSecurityConfigRes=0x"
+                                + Integer.toHexString(this.networkSecurityConfigRes));
             }
             if (this.category != -1) {
                 pw.println(prefix + "category=" + this.category);
             }
             pw.println(prefix + "HiddenApiEnforcementPolicy=" + getHiddenApiEnforcementPolicy());
             pw.println(prefix + "usesNonSdkApi=" + usesNonSdkApi());
-            pw.println(prefix + "allowsPlaybackCapture=" + (isAudioPlaybackCaptureAllowed() ? "true" : "false"));
+            pw.println(
+                    prefix
+                            + "allowsPlaybackCapture="
+                            + (isAudioPlaybackCaptureAllowed() ? "true" : "false"));
             if (this.gwpAsanMode != -1) {
                 pw.println(prefix + "gwpAsanMode=" + this.gwpAsanMode);
             }
@@ -398,13 +439,20 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
                 pw.println(prefix + "nativeHeapZeroInitialized=" + this.nativeHeapZeroInitialized);
             }
             if (this.requestRawExternalStorageAccess != null) {
-                pw.println(prefix + "requestRawExternalStorageAccess=" + this.requestRawExternalStorageAccess);
+                pw.println(
+                        prefix
+                                + "requestRawExternalStorageAccess="
+                                + this.requestRawExternalStorageAccess);
             }
             if (this.localeConfigRes != 0) {
-                pw.println(prefix + "localeConfigRes=0x" + Integer.toHexString(this.localeConfigRes));
+                pw.println(
+                        prefix + "localeConfigRes=0x" + Integer.toHexString(this.localeConfigRes));
             }
             pw.println(prefix + "enableOnBackInvokedCallback=" + isOnBackInvokedCallbackEnabled());
-            pw.println(prefix + "allowCrossUidActivitySwitchFromBelow=" + this.allowCrossUidActivitySwitchFromBelow);
+            pw.println(
+                    prefix
+                            + "allowCrossUidActivitySwitchFromBelow="
+                            + this.allowCrossUidActivitySwitchFromBelow);
         }
         pw.println(prefix + "createTimestamp=" + this.createTimestamp);
         if (this.mKnownActivityEmbeddingCerts != null) {
@@ -432,7 +480,8 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
                 proto.write(2237677961226L, dir);
             }
         }
-        if (!ArrayUtils.isEmpty(this.splitPublicSourceDirs) && !Arrays.equals(this.splitSourceDirs, this.splitPublicSourceDirs)) {
+        if (!ArrayUtils.isEmpty(this.splitPublicSourceDirs)
+                && !Arrays.equals(this.splitSourceDirs, this.splitPublicSourceDirs)) {
             for (String dir2 : this.splitPublicSourceDirs) {
                 proto.write(2237677961227L, dir2);
             }
@@ -665,7 +714,11 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
     }
 
     public String toString() {
-        return "ApplicationInfo{" + Integer.toHexString(System.identityHashCode(this)) + " " + this.packageName + "}";
+        return "ApplicationInfo{"
+                + Integer.toHexString(System.identityHashCode(this))
+                + " "
+                + this.packageName
+                + "}";
     }
 
     @Override // android.os.Parcelable
@@ -771,22 +824,26 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
     /* renamed from: android.content.pm.ApplicationInfo$1, reason: invalid class name */
     class AnonymousClass1 implements Parcelable.Creator<ApplicationInfo> {
         /* renamed from: $r8$lambda$1E1P6HJEl7Ns7qcxzJ0zM-xcHGA, reason: not valid java name */
-        public static /* synthetic */ ApplicationInfo m925$r8$lambda$1E1P6HJEl7Ns7qcxzJ0zMxcHGA(Parcel parcel) {
+        public static /* synthetic */ ApplicationInfo m925$r8$lambda$1E1P6HJEl7Ns7qcxzJ0zMxcHGA(
+                Parcel parcel) {
             return new ApplicationInfo(parcel);
         }
 
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public ApplicationInfo createFromParcel(Parcel source) {
-            return (ApplicationInfo) source.readSquashed(new Parcel.SquashReadHelper() { // from class: android.content.pm.ApplicationInfo$1$$ExternalSyntheticLambda0
-                @Override // android.os.Parcel.SquashReadHelper
-                public final Object readRawParceled(Parcel parcel) {
-                    return ApplicationInfo.AnonymousClass1.m925$r8$lambda$1E1P6HJEl7Ns7qcxzJ0zMxcHGA(parcel);
-                }
-            });
+            return (ApplicationInfo)
+                    source.readSquashed(
+                            new Parcel.SquashReadHelper() { // from class:
+                                // android.content.pm.ApplicationInfo$1$$ExternalSyntheticLambda0
+                                @Override // android.os.Parcel.SquashReadHelper
+                                public final Object readRawParceled(Parcel parcel) {
+                                    return ApplicationInfo.AnonymousClass1
+                                            .m925$r8$lambda$1E1P6HJEl7Ns7qcxzJ0zMxcHGA(parcel);
+                                }
+                            });
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
@@ -921,7 +978,8 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
 
     public CharSequence loadDescription(PackageManager pm) {
         CharSequence label;
-        if (this.descriptionRes != 0 && (label = pm.getText(this.packageName, this.descriptionRes, this)) != null) {
+        if (this.descriptionRes != 0
+                && (label = pm.getText(this.packageName, this.descriptionRes, this)) != null) {
             return label;
         }
         return null;
@@ -941,8 +999,12 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
             this.dataDir = Environment.getDataSystemDirectory().getAbsolutePath();
             return;
         }
-        this.deviceProtectedDataDir = Environment.getDataUserDePackageDirectory(this.volumeUuid, userId, this.packageName).getAbsolutePath();
-        this.credentialProtectedDataDir = Environment.getDataUserCePackageDirectory(this.volumeUuid, userId, this.packageName).getAbsolutePath();
+        this.deviceProtectedDataDir =
+                Environment.getDataUserDePackageDirectory(this.volumeUuid, userId, this.packageName)
+                        .getAbsolutePath();
+        this.credentialProtectedDataDir =
+                Environment.getDataUserCePackageDirectory(this.volumeUuid, userId, this.packageName)
+                        .getAbsolutePath();
         if ((this.privateFlags & 32) != 0) {
             this.dataDir = this.deviceProtectedDataDir;
         } else {
@@ -1156,7 +1218,8 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
     }
 
     public boolean isChangeEnabled(long changeId) {
-        return CompatChanges.isChangeEnabled(changeId, this.packageName, UserHandle.getUserHandleForUid(this.uid));
+        return CompatChanges.isChangeEnabled(
+                changeId, this.packageName, UserHandle.getUserHandleForUid(this.uid));
     }
 
     public boolean hasRequestForegroundServiceExemption() {
@@ -1173,7 +1236,9 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
     }
 
     public String[] getAllApkPaths() {
-        String[][] inputLists = {this.splitSourceDirs, this.sharedLibraryFiles, this.resourceDirs, this.overlayPaths};
+        String[][] inputLists = {
+            this.splitSourceDirs, this.sharedLibraryFiles, this.resourceDirs, this.overlayPaths
+        };
         List<String> output = new ArrayList<>(10);
         if (this.sourceDir != null) {
             output.add(this.sourceDir);
@@ -1274,7 +1339,8 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
 
     public String getCustomApplicationClassNameForProcess(String processName) {
         String byProcess;
-        if (this.mAppClassNamesByProcess != null && (byProcess = this.mAppClassNamesByProcess.get(processName)) != null) {
+        if (this.mAppClassNamesByProcess != null
+                && (byProcess = this.mAppClassNamesByProcess.get(processName)) != null) {
             return byProcess;
         }
         return this.className;
@@ -1305,7 +1371,9 @@ public class ApplicationInfo extends PackageItemInfo implements Parcelable {
     }
 
     public Set<String> getKnownActivityEmbeddingCerts() {
-        return this.mKnownActivityEmbeddingCerts == null ? Collections.emptySet() : this.mKnownActivityEmbeddingCerts;
+        return this.mKnownActivityEmbeddingCerts == null
+                ? Collections.emptySet()
+                : this.mKnownActivityEmbeddingCerts;
     }
 
     public void setKnownActivityEmbeddingCerts(Set<String> knownActivityEmbeddingCerts) {

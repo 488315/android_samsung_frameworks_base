@@ -3,6 +3,7 @@ package com.android.server.pm;
 import com.android.internal.pm.parsing.PackageParser2;
 import com.android.internal.pm.parsing.PackageParserException;
 import com.android.internal.pm.parsing.pkg.ParsedPackage;
+
 import java.io.File;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
@@ -23,7 +24,13 @@ public final class ParallelPackageParser {
         public Throwable throwable;
 
         public final String toString() {
-            return "ParseResult{parsedPackage=" + this.parsedPackage + ", scanFile=" + this.scanFile + ", throwable=" + this.throwable + '}';
+            return "ParseResult{parsedPackage="
+                    + this.parsedPackage
+                    + ", scanFile="
+                    + this.scanFile
+                    + ", throwable="
+                    + this.throwable
+                    + '}';
         }
     }
 

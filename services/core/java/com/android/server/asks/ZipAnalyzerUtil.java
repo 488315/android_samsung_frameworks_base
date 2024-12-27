@@ -57,7 +57,8 @@ public abstract class ZipAnalyzerUtil {
             byte[] bArr = new byte[i];
             randomAccessFile.readFully(bArr);
             for (int i2 = i - 22; i2 >= 0; i2--) {
-                if (ByteBuffer.wrap(bArr, i2, 4).order(ByteOrder.LITTLE_ENDIAN).getInt() == 101010256) {
+                if (ByteBuffer.wrap(bArr, i2, 4).order(ByteOrder.LITTLE_ENDIAN).getInt()
+                        == 101010256) {
                     long j2 = j + i2;
                     randomAccessFile.close();
                     return j2;

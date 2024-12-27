@@ -7,7 +7,9 @@ import android.os.ParcelDuration;
 import android.os.RemoteException;
 import android.service.timezone.TimeZoneProviderService;
 import android.util.Log;
+
 import com.android.internal.infra.AndroidFuture;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -40,51 +42,70 @@ public class AttestationVerificationManager {
     private final IAttestationVerificationManagerService mService;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface AttestationProfileId {
-    }
+    public @interface AttestationProfileId {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LocalBindingType {
-    }
+    public @interface LocalBindingType {}
 
     @Target({ElementType.TYPE_PARAMETER, ElementType.TYPE_USE})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface VerificationResult {
-    }
+    public @interface VerificationResult {}
 
-    public void verifyAttestation(AttestationProfile profile, int localBindingType, Bundle requirements, byte[] attestation, final Executor executor, final BiConsumer<Integer, VerificationToken> callback) {
+    public void verifyAttestation(
+            AttestationProfile profile,
+            int localBindingType,
+            Bundle requirements,
+            byte[] attestation,
+            final Executor executor,
+            final BiConsumer<Integer, VerificationToken> callback) {
         try {
             AndroidFuture<IVerificationResult> resultCallback = new AndroidFuture<>();
-            resultCallback.thenAccept(new Consumer() { // from class: android.security.attestationverification.AttestationVerificationManager$$ExternalSyntheticLambda0
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    AttestationVerificationManager.lambda$verifyAttestation$1(executor, callback, (IVerificationResult) obj);
-                }
-            });
-            this.mService.verifyAttestation(profile, localBindingType, requirements, attestation, resultCallback);
+            resultCallback.thenAccept(
+                    new Consumer() { // from class:
+                                     // android.security.attestationverification.AttestationVerificationManager$$ExternalSyntheticLambda0
+                        @Override // java.util.function.Consumer
+                        public final void accept(Object obj) {
+                            AttestationVerificationManager.lambda$verifyAttestation$1(
+                                    executor, callback, (IVerificationResult) obj);
+                        }
+                    });
+            this.mService.verifyAttestation(
+                    profile, localBindingType, requirements, attestation, resultCallback);
         } catch (RemoteException e) {
             throw e.rethrowFromSystemServer();
         }
     }
 
-    static /* synthetic */ void lambda$verifyAttestation$1(Executor executor, final BiConsumer callback, final IVerificationResult result) {
+    static /* synthetic */ void lambda$verifyAttestation$1(
+            Executor executor, final BiConsumer callback, final IVerificationResult result) {
         Log.d(TAG, "verifyAttestation result: " + result.resultCode + " / " + result.token);
-        executor.execute(new Runnable() { // from class: android.security.attestationverification.AttestationVerificationManager$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                callback.accept(Integer.valueOf(r1.resultCode), result.token);
-            }
-        });
+        executor.execute(
+                new Runnable() { // from class:
+                                 // android.security.attestationverification.AttestationVerificationManager$$ExternalSyntheticLambda1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        callback.accept(Integer.valueOf(r1.resultCode), result.token);
+                    }
+                });
     }
 
-    public int verifyToken(AttestationProfile profile, int localBindingType, Bundle requirements, VerificationToken token, Duration maximumAge) {
+    public int verifyToken(
+            AttestationProfile profile,
+            int localBindingType,
+            Bundle requirements,
+            VerificationToken token,
+            Duration maximumAge) {
         Duration usedMaximumAge;
         if (maximumAge == null) {
             usedMaximumAge = MAX_TOKEN_AGE;
         } else {
             Duration usedMaximumAge2 = MAX_TOKEN_AGE;
             if (maximumAge.compareTo(usedMaximumAge2) > 0) {
-                throw new IllegalArgumentException("maximumAge cannot be greater than " + MAX_TOKEN_AGE + "; was " + maximumAge);
+                throw new IllegalArgumentException(
+                        "maximumAge cannot be greater than "
+                                + MAX_TOKEN_AGE
+                                + "; was "
+                                + maximumAge);
             }
             usedMaximumAge = maximumAge;
         }
@@ -100,7 +121,8 @@ public class AttestationVerificationManager {
         }
     }
 
-    public AttestationVerificationManager(Context context, IAttestationVerificationManagerService service) {
+    public AttestationVerificationManager(
+            Context context, IAttestationVerificationManagerService service) {
         this.mContext = context;
         this.mService = service;
     }
@@ -123,7 +145,10 @@ public class AttestationVerificationManager {
             default:
                 return Integer.toString(localBindingType);
         }
-        return text + NavigationBarInflaterView.KEY_CODE_START + localBindingType + NavigationBarInflaterView.KEY_CODE_END;
+        return text
+                + NavigationBarInflaterView.KEY_CODE_START
+                + localBindingType
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 
     public static String verificationResultCodeToString(int resultCode) {
@@ -141,6 +166,9 @@ public class AttestationVerificationManager {
             default:
                 return Integer.toString(resultCode);
         }
-        return text + NavigationBarInflaterView.KEY_CODE_START + resultCode + NavigationBarInflaterView.KEY_CODE_END;
+        return text
+                + NavigationBarInflaterView.KEY_CODE_START
+                + resultCode
+                + NavigationBarInflaterView.KEY_CODE_END;
     }
 }

@@ -22,25 +22,43 @@ import android.telephony.ims.MediaQualityStatus;
 import android.telephony.satellite.NtnSignalStrength;
 import android.telephony.satellite.SemSatelliteServiceState;
 import android.telephony.satellite.SemSatelliteSignalStrength;
-import com.android.internal.telephony.ICarrierConfigChangeListener;
-import com.android.internal.telephony.ICarrierPrivilegesCallback;
-import com.android.internal.telephony.IOnSubscriptionsChangedListener;
-import com.android.internal.telephony.IPhoneStateListener;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
 public interface ITelephonyRegistry extends IInterface {
-    void addCarrierConfigChangeListener(ICarrierConfigChangeListener iCarrierConfigChangeListener, String str, String str2) throws RemoteException;
+    void addCarrierConfigChangeListener(
+            ICarrierConfigChangeListener iCarrierConfigChangeListener, String str, String str2)
+            throws RemoteException;
 
-    void addCarrierPrivilegesCallback(int i, ICarrierPrivilegesCallback iCarrierPrivilegesCallback, String str, String str2) throws RemoteException;
+    void addCarrierPrivilegesCallback(
+            int i, ICarrierPrivilegesCallback iCarrierPrivilegesCallback, String str, String str2)
+            throws RemoteException;
 
-    void addOnOpportunisticSubscriptionsChangedListener(String str, String str2, IOnSubscriptionsChangedListener iOnSubscriptionsChangedListener) throws RemoteException;
+    void addOnOpportunisticSubscriptionsChangedListener(
+            String str,
+            String str2,
+            IOnSubscriptionsChangedListener iOnSubscriptionsChangedListener)
+            throws RemoteException;
 
-    void addOnSubscriptionsChangedListener(String str, String str2, IOnSubscriptionsChangedListener iOnSubscriptionsChangedListener) throws RemoteException;
+    void addOnSubscriptionsChangedListener(
+            String str,
+            String str2,
+            IOnSubscriptionsChangedListener iOnSubscriptionsChangedListener)
+            throws RemoteException;
 
     void clearPreciseDataConnectionStates(int i) throws RemoteException;
 
-    void listenWithEventList(boolean z, boolean z2, int i, String str, String str2, IPhoneStateListener iPhoneStateListener, int[] iArr, boolean z3) throws RemoteException;
+    void listenWithEventList(
+            boolean z,
+            boolean z2,
+            int i,
+            String str,
+            String str2,
+            IPhoneStateListener iPhoneStateListener,
+            int[] iArr,
+            boolean z3)
+            throws RemoteException;
 
     void notifyActiveDataSubIdChanged(int i) throws RemoteException;
 
@@ -52,7 +70,8 @@ public interface ITelephonyRegistry extends IInterface {
 
     void notifyCallForwardingChangedForSubscriber(int i, boolean z) throws RemoteException;
 
-    void notifyCallQualityChanged(CallQuality callQuality, int i, int i2, int i3) throws RemoteException;
+    void notifyCallQualityChanged(CallQuality callQuality, int i, int i2, int i3)
+            throws RemoteException;
 
     void notifyCallState(int i, int i2, int i3, String str) throws RemoteException;
 
@@ -68,7 +87,8 @@ public interface ITelephonyRegistry extends IInterface {
 
     void notifyCarrierNetworkChangeWithSubId(int i, boolean z) throws RemoteException;
 
-    void notifyCarrierPrivilegesChanged(int i, List<String> list, int[] iArr) throws RemoteException;
+    void notifyCarrierPrivilegesChanged(int i, List<String> list, int[] iArr)
+            throws RemoteException;
 
     void notifyCarrierRoamingNtnAvailableServicesChanged(int i, int[] iArr) throws RemoteException;
 
@@ -76,7 +96,8 @@ public interface ITelephonyRegistry extends IInterface {
 
     void notifyCarrierRoamingNtnModeChanged(int i, boolean z) throws RemoteException;
 
-    void notifyCarrierRoamingNtnSignalStrengthChanged(int i, NtnSignalStrength ntnSignalStrength) throws RemoteException;
+    void notifyCarrierRoamingNtnSignalStrengthChanged(int i, NtnSignalStrength ntnSignalStrength)
+            throws RemoteException;
 
     void notifyCarrierServiceChanged(int i, String str, int i2) throws RemoteException;
 
@@ -90,21 +111,26 @@ public interface ITelephonyRegistry extends IInterface {
 
     void notifyDataActivityForSubscriberWithSlot(int i, int i2, int i3) throws RemoteException;
 
-    void notifyDataConnectionForSubscriber(int i, int i2, PreciseDataConnectionState preciseDataConnectionState) throws RemoteException;
+    void notifyDataConnectionForSubscriber(
+            int i, int i2, PreciseDataConnectionState preciseDataConnectionState)
+            throws RemoteException;
 
     void notifyDataEnabled(int i, int i2, boolean z, int i3) throws RemoteException;
 
     void notifyDisconnectCause(int i, int i2, int i3, int i4) throws RemoteException;
 
-    void notifyDisplayInfoChanged(int i, int i2, TelephonyDisplayInfo telephonyDisplayInfo) throws RemoteException;
+    void notifyDisplayInfoChanged(int i, int i2, TelephonyDisplayInfo telephonyDisplayInfo)
+            throws RemoteException;
 
     void notifyEmergencyNumberList(int i, int i2) throws RemoteException;
 
     void notifyImsDisconnectCause(int i, ImsReasonInfo imsReasonInfo) throws RemoteException;
 
-    void notifyLinkCapacityEstimateChanged(int i, int i2, List<LinkCapacityEstimate> list) throws RemoteException;
+    void notifyLinkCapacityEstimateChanged(int i, int i2, List<LinkCapacityEstimate> list)
+            throws RemoteException;
 
-    void notifyMediaQualityStatusChanged(int i, int i2, MediaQualityStatus mediaQualityStatus) throws RemoteException;
+    void notifyMediaQualityStatusChanged(int i, int i2, MediaQualityStatus mediaQualityStatus)
+            throws RemoteException;
 
     void notifyMessageWaitingChangedForPhoneId(int i, int i2, boolean z) throws RemoteException;
 
@@ -112,29 +138,43 @@ public interface ITelephonyRegistry extends IInterface {
 
     void notifyOpportunisticSubscriptionInfoChanged() throws RemoteException;
 
-    void notifyOutgoingEmergencyCall(int i, int i2, EmergencyNumber emergencyNumber) throws RemoteException;
+    void notifyOutgoingEmergencyCall(int i, int i2, EmergencyNumber emergencyNumber)
+            throws RemoteException;
 
-    void notifyOutgoingEmergencySms(int i, int i2, EmergencyNumber emergencyNumber) throws RemoteException;
+    void notifyOutgoingEmergencySms(int i, int i2, EmergencyNumber emergencyNumber)
+            throws RemoteException;
 
     void notifyPhoneCapabilityChanged(PhoneCapability phoneCapability) throws RemoteException;
 
-    void notifyPhysicalChannelConfigForSubscriber(int i, int i2, List<PhysicalChannelConfig> list) throws RemoteException;
+    void notifyPhysicalChannelConfigForSubscriber(int i, int i2, List<PhysicalChannelConfig> list)
+            throws RemoteException;
 
-    void notifyPreciseCallState(int i, int i2, int[] iArr, String[] strArr, int[] iArr2, int[] iArr3) throws RemoteException;
+    void notifyPreciseCallState(
+            int i, int i2, int[] iArr, String[] strArr, int[] iArr2, int[] iArr3)
+            throws RemoteException;
 
     void notifyRadioPowerStateChanged(int i, int i2, int i3) throws RemoteException;
 
-    void notifyRegistrationFailed(int i, int i2, CellIdentity cellIdentity, String str, int i3, int i4, int i5) throws RemoteException;
+    void notifyRegistrationFailed(
+            int i, int i2, CellIdentity cellIdentity, String str, int i3, int i4, int i5)
+            throws RemoteException;
 
-    void notifySemSatelliteServiceStateChanged(int i, int i2, SemSatelliteServiceState semSatelliteServiceState) throws RemoteException;
+    void notifySemSatelliteServiceStateChanged(
+            int i, int i2, SemSatelliteServiceState semSatelliteServiceState)
+            throws RemoteException;
 
-    void notifySemSatelliteSignalStrengthChanged(int i, int i2, SemSatelliteSignalStrength semSatelliteSignalStrength) throws RemoteException;
+    void notifySemSatelliteSignalStrengthChanged(
+            int i, int i2, SemSatelliteSignalStrength semSatelliteSignalStrength)
+            throws RemoteException;
 
-    void notifyServiceStateForPhoneId(int i, int i2, ServiceState serviceState) throws RemoteException;
+    void notifyServiceStateForPhoneId(int i, int i2, ServiceState serviceState)
+            throws RemoteException;
 
-    void notifySignalStrengthForPhoneId(int i, int i2, SignalStrength signalStrength) throws RemoteException;
+    void notifySignalStrengthForPhoneId(int i, int i2, SignalStrength signalStrength)
+            throws RemoteException;
 
-    void notifySimActivationStateChangedForPhoneId(int i, int i2, int i3, int i4) throws RemoteException;
+    void notifySimActivationStateChangedForPhoneId(int i, int i2, int i3, int i4)
+            throws RemoteException;
 
     void notifySimultaneousCellularCallingSubscriptionsChanged(int[] iArr) throws RemoteException;
 
@@ -142,254 +182,288 @@ public interface ITelephonyRegistry extends IInterface {
 
     void notifySubscriptionInfoChanged() throws RemoteException;
 
-    void notifyUserMobileDataStateChangedForPhoneId(int i, int i2, boolean z) throws RemoteException;
+    void notifyUserMobileDataStateChangedForPhoneId(int i, int i2, boolean z)
+            throws RemoteException;
 
-    void removeCarrierConfigChangeListener(ICarrierConfigChangeListener iCarrierConfigChangeListener, String str) throws RemoteException;
+    void removeCarrierConfigChangeListener(
+            ICarrierConfigChangeListener iCarrierConfigChangeListener, String str)
+            throws RemoteException;
 
-    void removeCarrierPrivilegesCallback(ICarrierPrivilegesCallback iCarrierPrivilegesCallback, String str) throws RemoteException;
+    void removeCarrierPrivilegesCallback(
+            ICarrierPrivilegesCallback iCarrierPrivilegesCallback, String str)
+            throws RemoteException;
 
-    void removeOnSubscriptionsChangedListener(String str, IOnSubscriptionsChangedListener iOnSubscriptionsChangedListener) throws RemoteException;
+    void removeOnSubscriptionsChangedListener(
+            String str, IOnSubscriptionsChangedListener iOnSubscriptionsChangedListener)
+            throws RemoteException;
 
     public static class Default implements ITelephonyRegistry {
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void addOnSubscriptionsChangedListener(String pkg, String featureId, IOnSubscriptionsChangedListener callback) throws RemoteException {
-        }
+        public void addOnSubscriptionsChangedListener(
+                String pkg, String featureId, IOnSubscriptionsChangedListener callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void addOnOpportunisticSubscriptionsChangedListener(String pkg, String featureId, IOnSubscriptionsChangedListener callback) throws RemoteException {
-        }
+        public void addOnOpportunisticSubscriptionsChangedListener(
+                String pkg, String featureId, IOnSubscriptionsChangedListener callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void removeOnSubscriptionsChangedListener(String pkg, IOnSubscriptionsChangedListener callback) throws RemoteException {
-        }
+        public void removeOnSubscriptionsChangedListener(
+                String pkg, IOnSubscriptionsChangedListener callback) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void listenWithEventList(boolean renounceFineLocationAccess, boolean renounceCoarseLocationAccess, int subId, String pkg, String featureId, IPhoneStateListener callback, int[] events, boolean notifyNow) throws RemoteException {
-        }
+        public void listenWithEventList(
+                boolean renounceFineLocationAccess,
+                boolean renounceCoarseLocationAccess,
+                int subId,
+                String pkg,
+                String featureId,
+                IPhoneStateListener callback,
+                int[] events,
+                boolean notifyNow)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyCallStateForAllSubs(int state, String incomingNumber) throws RemoteException {
-        }
+        public void notifyCallStateForAllSubs(int state, String incomingNumber)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyCallState(int phoneId, int subId, int state, String incomingNumber) throws RemoteException {
-        }
+        public void notifyCallState(int phoneId, int subId, int state, String incomingNumber)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyServiceStateForPhoneId(int phoneId, int subId, ServiceState state) throws RemoteException {
-        }
+        public void notifyServiceStateForPhoneId(int phoneId, int subId, ServiceState state)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifySignalStrengthForPhoneId(int phoneId, int subId, SignalStrength signalStrength) throws RemoteException {
-        }
+        public void notifySignalStrengthForPhoneId(
+                int phoneId, int subId, SignalStrength signalStrength) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyMessageWaitingChangedForPhoneId(int phoneId, int subId, boolean mwi) throws RemoteException {
-        }
+        public void notifyMessageWaitingChangedForPhoneId(int phoneId, int subId, boolean mwi)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyCallForwardingChanged(boolean cfi) throws RemoteException {
-        }
+        public void notifyCallForwardingChanged(boolean cfi) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyCallForwardingChangedForSubscriber(int subId, boolean cfi) throws RemoteException {
-        }
+        public void notifyCallForwardingChangedForSubscriber(int subId, boolean cfi)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyDataActivityForSubscriber(int subId, int state) throws RemoteException {
-        }
+        public void notifyDataActivityForSubscriber(int subId, int state) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyDataActivityForSubscriberWithSlot(int phoneId, int subId, int state) throws RemoteException {
-        }
+        public void notifyDataActivityForSubscriberWithSlot(int phoneId, int subId, int state)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyDataConnectionForSubscriber(int phoneId, int subId, PreciseDataConnectionState preciseState) throws RemoteException {
-        }
+        public void notifyDataConnectionForSubscriber(
+                int phoneId, int subId, PreciseDataConnectionState preciseState)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyCellLocationForSubscriber(int subId, CellIdentity cellLocation) throws RemoteException {
-        }
+        public void notifyCellLocationForSubscriber(int subId, CellIdentity cellLocation)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyCellInfo(List<CellInfo> cellInfo) throws RemoteException {
-        }
+        public void notifyCellInfo(List<CellInfo> cellInfo) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyPreciseCallState(int phoneId, int subId, int[] callStates, String[] imsCallIds, int[] imsCallServiceTypes, int[] imsCallTypes) throws RemoteException {
-        }
+        public void notifyPreciseCallState(
+                int phoneId,
+                int subId,
+                int[] callStates,
+                String[] imsCallIds,
+                int[] imsCallServiceTypes,
+                int[] imsCallTypes)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyDisconnectCause(int phoneId, int subId, int disconnectCause, int preciseDisconnectCause) throws RemoteException {
-        }
+        public void notifyDisconnectCause(
+                int phoneId, int subId, int disconnectCause, int preciseDisconnectCause)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyCellInfoForSubscriber(int subId, List<CellInfo> cellInfo) throws RemoteException {
-        }
+        public void notifyCellInfoForSubscriber(int subId, List<CellInfo> cellInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifySrvccStateChanged(int subId, int lteState) throws RemoteException {
-        }
+        public void notifySrvccStateChanged(int subId, int lteState) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifySimActivationStateChangedForPhoneId(int phoneId, int subId, int activationState, int activationType) throws RemoteException {
-        }
+        public void notifySimActivationStateChangedForPhoneId(
+                int phoneId, int subId, int activationState, int activationType)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyOemHookRawEventForSubscriber(int phoneId, int subId, byte[] rawData) throws RemoteException {
-        }
+        public void notifyOemHookRawEventForSubscriber(int phoneId, int subId, byte[] rawData)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifySubscriptionInfoChanged() throws RemoteException {
-        }
+        public void notifySubscriptionInfoChanged() throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyOpportunisticSubscriptionInfoChanged() throws RemoteException {
-        }
+        public void notifyOpportunisticSubscriptionInfoChanged() throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyCarrierNetworkChange(boolean active) throws RemoteException {
-        }
+        public void notifyCarrierNetworkChange(boolean active) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyCarrierNetworkChangeWithSubId(int subId, boolean active) throws RemoteException {
-        }
+        public void notifyCarrierNetworkChangeWithSubId(int subId, boolean active)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyUserMobileDataStateChangedForPhoneId(int phoneId, int subId, boolean state) throws RemoteException {
-        }
+        public void notifyUserMobileDataStateChangedForPhoneId(
+                int phoneId, int subId, boolean state) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyDisplayInfoChanged(int slotIndex, int subId, TelephonyDisplayInfo telephonyDisplayInfo) throws RemoteException {
-        }
+        public void notifyDisplayInfoChanged(
+                int slotIndex, int subId, TelephonyDisplayInfo telephonyDisplayInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyPhoneCapabilityChanged(PhoneCapability capability) throws RemoteException {
-        }
+        public void notifyPhoneCapabilityChanged(PhoneCapability capability)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyActiveDataSubIdChanged(int activeDataSubId) throws RemoteException {
-        }
+        public void notifyActiveDataSubIdChanged(int activeDataSubId) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyRadioPowerStateChanged(int phoneId, int subId, int state) throws RemoteException {
-        }
+        public void notifyRadioPowerStateChanged(int phoneId, int subId, int state)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyEmergencyNumberList(int phoneId, int subId) throws RemoteException {
-        }
+        public void notifyEmergencyNumberList(int phoneId, int subId) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyOutgoingEmergencyCall(int phoneId, int subId, EmergencyNumber emergencyNumber) throws RemoteException {
-        }
+        public void notifyOutgoingEmergencyCall(
+                int phoneId, int subId, EmergencyNumber emergencyNumber) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyOutgoingEmergencySms(int phoneId, int subId, EmergencyNumber emergencyNumber) throws RemoteException {
-        }
+        public void notifyOutgoingEmergencySms(
+                int phoneId, int subId, EmergencyNumber emergencyNumber) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyCallQualityChanged(CallQuality callQuality, int phoneId, int subId, int callNetworkType) throws RemoteException {
-        }
+        public void notifyCallQualityChanged(
+                CallQuality callQuality, int phoneId, int subId, int callNetworkType)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyMediaQualityStatusChanged(int phoneId, int subId, MediaQualityStatus status) throws RemoteException {
-        }
+        public void notifyMediaQualityStatusChanged(
+                int phoneId, int subId, MediaQualityStatus status) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyImsDisconnectCause(int subId, ImsReasonInfo imsReasonInfo) throws RemoteException {
-        }
+        public void notifyImsDisconnectCause(int subId, ImsReasonInfo imsReasonInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyRegistrationFailed(int slotIndex, int subId, CellIdentity cellIdentity, String chosenPlmn, int domain, int causeCode, int additionalCauseCode) throws RemoteException {
-        }
+        public void notifyRegistrationFailed(
+                int slotIndex,
+                int subId,
+                CellIdentity cellIdentity,
+                String chosenPlmn,
+                int domain,
+                int causeCode,
+                int additionalCauseCode)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyBarringInfoChanged(int slotIndex, int subId, BarringInfo barringInfo) throws RemoteException {
-        }
+        public void notifyBarringInfoChanged(int slotIndex, int subId, BarringInfo barringInfo)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyPhysicalChannelConfigForSubscriber(int phoneId, int subId, List<PhysicalChannelConfig> configs) throws RemoteException {
-        }
+        public void notifyPhysicalChannelConfigForSubscriber(
+                int phoneId, int subId, List<PhysicalChannelConfig> configs)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyDataEnabled(int phoneId, int subId, boolean enabled, int reason) throws RemoteException {
-        }
+        public void notifyDataEnabled(int phoneId, int subId, boolean enabled, int reason)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyAllowedNetworkTypesChanged(int phoneId, int subId, int reason, long allowedNetworkType) throws RemoteException {
-        }
+        public void notifyAllowedNetworkTypesChanged(
+                int phoneId, int subId, int reason, long allowedNetworkType)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyLinkCapacityEstimateChanged(int phoneId, int subId, List<LinkCapacityEstimate> linkCapacityEstimateList) throws RemoteException {
-        }
+        public void notifyLinkCapacityEstimateChanged(
+                int phoneId, int subId, List<LinkCapacityEstimate> linkCapacityEstimateList)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifySimultaneousCellularCallingSubscriptionsChanged(int[] subIds) throws RemoteException {
-        }
+        public void notifySimultaneousCellularCallingSubscriptionsChanged(int[] subIds)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void addCarrierPrivilegesCallback(int phoneId, ICarrierPrivilegesCallback callback, String pkg, String featureId) throws RemoteException {
-        }
+        public void addCarrierPrivilegesCallback(
+                int phoneId, ICarrierPrivilegesCallback callback, String pkg, String featureId)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void removeCarrierPrivilegesCallback(ICarrierPrivilegesCallback callback, String pkg) throws RemoteException {
-        }
+        public void removeCarrierPrivilegesCallback(ICarrierPrivilegesCallback callback, String pkg)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyCarrierPrivilegesChanged(int phoneId, List<String> privilegedPackageNames, int[] privilegedUids) throws RemoteException {
-        }
+        public void notifyCarrierPrivilegesChanged(
+                int phoneId, List<String> privilegedPackageNames, int[] privilegedUids)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyCarrierServiceChanged(int phoneId, String packageName, int uid) throws RemoteException {
-        }
+        public void notifyCarrierServiceChanged(int phoneId, String packageName, int uid)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void addCarrierConfigChangeListener(ICarrierConfigChangeListener listener, String pkg, String featureId) throws RemoteException {
-        }
+        public void addCarrierConfigChangeListener(
+                ICarrierConfigChangeListener listener, String pkg, String featureId)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void removeCarrierConfigChangeListener(ICarrierConfigChangeListener listener, String pkg) throws RemoteException {
-        }
+        public void removeCarrierConfigChangeListener(
+                ICarrierConfigChangeListener listener, String pkg) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyCarrierConfigChanged(int phoneId, int subId, int carrierId, int specificCarrierId) throws RemoteException {
-        }
+        public void notifyCarrierConfigChanged(
+                int phoneId, int subId, int carrierId, int specificCarrierId)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyCallbackModeStarted(int phoneId, int subId, int type) throws RemoteException {
-        }
+        public void notifyCallbackModeStarted(int phoneId, int subId, int type)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyCallbackModeStopped(int phoneId, int subId, int type, int reason) throws RemoteException {
-        }
+        public void notifyCallbackModeStopped(int phoneId, int subId, int type, int reason)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyCarrierRoamingNtnModeChanged(int subId, boolean active) throws RemoteException {
-        }
+        public void notifyCarrierRoamingNtnModeChanged(int subId, boolean active)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyCarrierRoamingNtnEligibleStateChanged(int subId, boolean eligible) throws RemoteException {
-        }
+        public void notifyCarrierRoamingNtnEligibleStateChanged(int subId, boolean eligible)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyCarrierRoamingNtnAvailableServicesChanged(int subId, int[] availableServices) throws RemoteException {
-        }
+        public void notifyCarrierRoamingNtnAvailableServicesChanged(
+                int subId, int[] availableServices) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifyCarrierRoamingNtnSignalStrengthChanged(int subId, NtnSignalStrength ntnSignalStrength) throws RemoteException {
-        }
+        public void notifyCarrierRoamingNtnSignalStrengthChanged(
+                int subId, NtnSignalStrength ntnSignalStrength) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void clearPreciseDataConnectionStates(int phoneId) throws RemoteException {
-        }
+        public void clearPreciseDataConnectionStates(int phoneId) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifySemSatelliteServiceStateChanged(int phoneId, int subId, SemSatelliteServiceState serviceState) throws RemoteException {
-        }
+        public void notifySemSatelliteServiceStateChanged(
+                int phoneId, int subId, SemSatelliteServiceState serviceState)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ITelephonyRegistry
-        public void notifySemSatelliteSignalStrengthChanged(int phoneId, int subId, SemSatelliteSignalStrength signalStrength) throws RemoteException {
-        }
+        public void notifySemSatelliteSignalStrengthChanged(
+                int phoneId, int subId, SemSatelliteSignalStrength signalStrength)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -397,7 +471,7 @@ public interface ITelephonyRegistry extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ITelephonyRegistry {
+    public abstract static class Stub extends Binder implements ITelephonyRegistry {
         public static final String DESCRIPTOR = "com.android.internal.telephony.ITelephonyRegistry";
         static final int TRANSACTION_addCarrierConfigChangeListener = 49;
         static final int TRANSACTION_addCarrierPrivilegesCallback = 45;
@@ -613,7 +687,8 @@ public interface ITelephonyRegistry extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -625,7 +700,9 @@ public interface ITelephonyRegistry extends IInterface {
                 case 1:
                     String _arg0 = data.readString();
                     String _arg1 = data.readString();
-                    IOnSubscriptionsChangedListener _arg2 = IOnSubscriptionsChangedListener.Stub.asInterface(data.readStrongBinder());
+                    IOnSubscriptionsChangedListener _arg2 =
+                            IOnSubscriptionsChangedListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addOnSubscriptionsChangedListener(_arg0, _arg1, _arg2);
                     reply.writeNoException();
@@ -633,14 +710,18 @@ public interface ITelephonyRegistry extends IInterface {
                 case 2:
                     String _arg02 = data.readString();
                     String _arg12 = data.readString();
-                    IOnSubscriptionsChangedListener _arg22 = IOnSubscriptionsChangedListener.Stub.asInterface(data.readStrongBinder());
+                    IOnSubscriptionsChangedListener _arg22 =
+                            IOnSubscriptionsChangedListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     addOnOpportunisticSubscriptionsChangedListener(_arg02, _arg12, _arg22);
                     reply.writeNoException();
                     return true;
                 case 3:
                     String _arg03 = data.readString();
-                    IOnSubscriptionsChangedListener _arg13 = IOnSubscriptionsChangedListener.Stub.asInterface(data.readStrongBinder());
+                    IOnSubscriptionsChangedListener _arg13 =
+                            IOnSubscriptionsChangedListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeOnSubscriptionsChangedListener(_arg03, _arg13);
                     reply.writeNoException();
@@ -651,7 +732,8 @@ public interface ITelephonyRegistry extends IInterface {
                     int _arg23 = data.readInt();
                     String _arg3 = data.readString();
                     String _arg4 = data.readString();
-                    IPhoneStateListener _arg5 = IPhoneStateListener.Stub.asInterface(data.readStrongBinder());
+                    IPhoneStateListener _arg5 =
+                            IPhoneStateListener.Stub.asInterface(data.readStrongBinder());
                     int[] _arg6 = data.createIntArray();
                     boolean _arg7 = data.readBoolean();
                     data.enforceNoDataAvail();
@@ -685,7 +767,8 @@ public interface ITelephonyRegistry extends IInterface {
                 case 8:
                     int _arg08 = data.readInt();
                     int _arg18 = data.readInt();
-                    SignalStrength _arg26 = (SignalStrength) data.readTypedObject(SignalStrength.CREATOR);
+                    SignalStrength _arg26 =
+                            (SignalStrength) data.readTypedObject(SignalStrength.CREATOR);
                     data.enforceNoDataAvail();
                     notifySignalStrengthForPhoneId(_arg08, _arg18, _arg26);
                     reply.writeNoException();
@@ -729,14 +812,17 @@ public interface ITelephonyRegistry extends IInterface {
                 case 14:
                     int _arg014 = data.readInt();
                     int _arg113 = data.readInt();
-                    PreciseDataConnectionState _arg29 = (PreciseDataConnectionState) data.readTypedObject(PreciseDataConnectionState.CREATOR);
+                    PreciseDataConnectionState _arg29 =
+                            (PreciseDataConnectionState)
+                                    data.readTypedObject(PreciseDataConnectionState.CREATOR);
                     data.enforceNoDataAvail();
                     notifyDataConnectionForSubscriber(_arg014, _arg113, _arg29);
                     reply.writeNoException();
                     return true;
                 case 15:
                     int _arg015 = data.readInt();
-                    CellIdentity _arg114 = (CellIdentity) data.readTypedObject(CellIdentity.CREATOR);
+                    CellIdentity _arg114 =
+                            (CellIdentity) data.readTypedObject(CellIdentity.CREATOR);
                     data.enforceNoDataAvail();
                     notifyCellLocationForSubscriber(_arg015, _arg114);
                     reply.writeNoException();
@@ -830,13 +916,16 @@ public interface ITelephonyRegistry extends IInterface {
                 case 28:
                     int _arg026 = data.readInt();
                     int _arg123 = data.readInt();
-                    TelephonyDisplayInfo _arg215 = (TelephonyDisplayInfo) data.readTypedObject(TelephonyDisplayInfo.CREATOR);
+                    TelephonyDisplayInfo _arg215 =
+                            (TelephonyDisplayInfo)
+                                    data.readTypedObject(TelephonyDisplayInfo.CREATOR);
                     data.enforceNoDataAvail();
                     notifyDisplayInfoChanged(_arg026, _arg123, _arg215);
                     reply.writeNoException();
                     return true;
                 case 29:
-                    PhoneCapability _arg027 = (PhoneCapability) data.readTypedObject(PhoneCapability.CREATOR);
+                    PhoneCapability _arg027 =
+                            (PhoneCapability) data.readTypedObject(PhoneCapability.CREATOR);
                     data.enforceNoDataAvail();
                     notifyPhoneCapabilityChanged(_arg027);
                     reply.writeNoException();
@@ -865,7 +954,8 @@ public interface ITelephonyRegistry extends IInterface {
                 case 33:
                     int _arg031 = data.readInt();
                     int _arg126 = data.readInt();
-                    EmergencyNumber _arg217 = (EmergencyNumber) data.readTypedObject(EmergencyNumber.CREATOR);
+                    EmergencyNumber _arg217 =
+                            (EmergencyNumber) data.readTypedObject(EmergencyNumber.CREATOR);
                     data.enforceNoDataAvail();
                     notifyOutgoingEmergencyCall(_arg031, _arg126, _arg217);
                     reply.writeNoException();
@@ -873,7 +963,8 @@ public interface ITelephonyRegistry extends IInterface {
                 case 34:
                     int _arg032 = data.readInt();
                     int _arg127 = data.readInt();
-                    EmergencyNumber _arg218 = (EmergencyNumber) data.readTypedObject(EmergencyNumber.CREATOR);
+                    EmergencyNumber _arg218 =
+                            (EmergencyNumber) data.readTypedObject(EmergencyNumber.CREATOR);
                     data.enforceNoDataAvail();
                     notifyOutgoingEmergencySms(_arg032, _arg127, _arg218);
                     reply.writeNoException();
@@ -890,14 +981,16 @@ public interface ITelephonyRegistry extends IInterface {
                 case 36:
                     int _arg034 = data.readInt();
                     int _arg129 = data.readInt();
-                    MediaQualityStatus _arg220 = (MediaQualityStatus) data.readTypedObject(MediaQualityStatus.CREATOR);
+                    MediaQualityStatus _arg220 =
+                            (MediaQualityStatus) data.readTypedObject(MediaQualityStatus.CREATOR);
                     data.enforceNoDataAvail();
                     notifyMediaQualityStatusChanged(_arg034, _arg129, _arg220);
                     reply.writeNoException();
                     return true;
                 case 37:
                     int _arg035 = data.readInt();
-                    ImsReasonInfo _arg130 = (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
+                    ImsReasonInfo _arg130 =
+                            (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
                     data.enforceNoDataAvail();
                     notifyImsDisconnectCause(_arg035, _arg130);
                     reply.writeNoException();
@@ -905,13 +998,15 @@ public interface ITelephonyRegistry extends IInterface {
                 case 38:
                     int _arg036 = data.readInt();
                     int _arg131 = data.readInt();
-                    CellIdentity _arg221 = (CellIdentity) data.readTypedObject(CellIdentity.CREATOR);
+                    CellIdentity _arg221 =
+                            (CellIdentity) data.readTypedObject(CellIdentity.CREATOR);
                     String _arg37 = data.readString();
                     int _arg43 = data.readInt();
                     int _arg53 = data.readInt();
                     int _arg62 = data.readInt();
                     data.enforceNoDataAvail();
-                    notifyRegistrationFailed(_arg036, _arg131, _arg221, _arg37, _arg43, _arg53, _arg62);
+                    notifyRegistrationFailed(
+                            _arg036, _arg131, _arg221, _arg37, _arg43, _arg53, _arg62);
                     reply.writeNoException();
                     return true;
                 case 39:
@@ -925,7 +1020,8 @@ public interface ITelephonyRegistry extends IInterface {
                 case 40:
                     int _arg038 = data.readInt();
                     int _arg133 = data.readInt();
-                    List<PhysicalChannelConfig> _arg223 = data.createTypedArrayList(PhysicalChannelConfig.CREATOR);
+                    List<PhysicalChannelConfig> _arg223 =
+                            data.createTypedArrayList(PhysicalChannelConfig.CREATOR);
                     data.enforceNoDataAvail();
                     notifyPhysicalChannelConfigForSubscriber(_arg038, _arg133, _arg223);
                     reply.writeNoException();
@@ -951,7 +1047,8 @@ public interface ITelephonyRegistry extends IInterface {
                 case 43:
                     int _arg041 = data.readInt();
                     int _arg136 = data.readInt();
-                    List<LinkCapacityEstimate> _arg226 = data.createTypedArrayList(LinkCapacityEstimate.CREATOR);
+                    List<LinkCapacityEstimate> _arg226 =
+                            data.createTypedArrayList(LinkCapacityEstimate.CREATOR);
                     data.enforceNoDataAvail();
                     notifyLinkCapacityEstimateChanged(_arg041, _arg136, _arg226);
                     reply.writeNoException();
@@ -964,7 +1061,8 @@ public interface ITelephonyRegistry extends IInterface {
                     return true;
                 case 45:
                     int _arg043 = data.readInt();
-                    ICarrierPrivilegesCallback _arg137 = ICarrierPrivilegesCallback.Stub.asInterface(data.readStrongBinder());
+                    ICarrierPrivilegesCallback _arg137 =
+                            ICarrierPrivilegesCallback.Stub.asInterface(data.readStrongBinder());
                     String _arg227 = data.readString();
                     String _arg310 = data.readString();
                     data.enforceNoDataAvail();
@@ -972,7 +1070,8 @@ public interface ITelephonyRegistry extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 46:
-                    ICarrierPrivilegesCallback _arg044 = ICarrierPrivilegesCallback.Stub.asInterface(data.readStrongBinder());
+                    ICarrierPrivilegesCallback _arg044 =
+                            ICarrierPrivilegesCallback.Stub.asInterface(data.readStrongBinder());
                     String _arg138 = data.readString();
                     data.enforceNoDataAvail();
                     removeCarrierPrivilegesCallback(_arg044, _arg138);
@@ -995,7 +1094,8 @@ public interface ITelephonyRegistry extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 49:
-                    ICarrierConfigChangeListener _arg047 = ICarrierConfigChangeListener.Stub.asInterface(data.readStrongBinder());
+                    ICarrierConfigChangeListener _arg047 =
+                            ICarrierConfigChangeListener.Stub.asInterface(data.readStrongBinder());
                     String _arg141 = data.readString();
                     String _arg230 = data.readString();
                     data.enforceNoDataAvail();
@@ -1003,7 +1103,8 @@ public interface ITelephonyRegistry extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 50:
-                    ICarrierConfigChangeListener _arg048 = ICarrierConfigChangeListener.Stub.asInterface(data.readStrongBinder());
+                    ICarrierConfigChangeListener _arg048 =
+                            ICarrierConfigChangeListener.Stub.asInterface(data.readStrongBinder());
                     String _arg142 = data.readString();
                     data.enforceNoDataAvail();
                     removeCarrierConfigChangeListener(_arg048, _arg142);
@@ -1058,7 +1159,8 @@ public interface ITelephonyRegistry extends IInterface {
                     return true;
                 case 57:
                     int _arg055 = data.readInt();
-                    NtnSignalStrength _arg149 = (NtnSignalStrength) data.readTypedObject(NtnSignalStrength.CREATOR);
+                    NtnSignalStrength _arg149 =
+                            (NtnSignalStrength) data.readTypedObject(NtnSignalStrength.CREATOR);
                     data.enforceNoDataAvail();
                     notifyCarrierRoamingNtnSignalStrengthChanged(_arg055, _arg149);
                     reply.writeNoException();
@@ -1072,7 +1174,9 @@ public interface ITelephonyRegistry extends IInterface {
                 case 59:
                     int _arg057 = data.readInt();
                     int _arg150 = data.readInt();
-                    SemSatelliteServiceState _arg234 = (SemSatelliteServiceState) data.readTypedObject(SemSatelliteServiceState.CREATOR);
+                    SemSatelliteServiceState _arg234 =
+                            (SemSatelliteServiceState)
+                                    data.readTypedObject(SemSatelliteServiceState.CREATOR);
                     data.enforceNoDataAvail();
                     notifySemSatelliteServiceStateChanged(_arg057, _arg150, _arg234);
                     reply.writeNoException();
@@ -1080,7 +1184,9 @@ public interface ITelephonyRegistry extends IInterface {
                 case 60:
                     int _arg058 = data.readInt();
                     int _arg151 = data.readInt();
-                    SemSatelliteSignalStrength _arg235 = (SemSatelliteSignalStrength) data.readTypedObject(SemSatelliteSignalStrength.CREATOR);
+                    SemSatelliteSignalStrength _arg235 =
+                            (SemSatelliteSignalStrength)
+                                    data.readTypedObject(SemSatelliteSignalStrength.CREATOR);
                     data.enforceNoDataAvail();
                     notifySemSatelliteSignalStrengthChanged(_arg058, _arg151, _arg235);
                     reply.writeNoException();
@@ -1107,7 +1213,9 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void addOnSubscriptionsChangedListener(String pkg, String featureId, IOnSubscriptionsChangedListener callback) throws RemoteException {
+            public void addOnSubscriptionsChangedListener(
+                    String pkg, String featureId, IOnSubscriptionsChangedListener callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1124,7 +1232,9 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void addOnOpportunisticSubscriptionsChangedListener(String pkg, String featureId, IOnSubscriptionsChangedListener callback) throws RemoteException {
+            public void addOnOpportunisticSubscriptionsChangedListener(
+                    String pkg, String featureId, IOnSubscriptionsChangedListener callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1141,7 +1251,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void removeOnSubscriptionsChangedListener(String pkg, IOnSubscriptionsChangedListener callback) throws RemoteException {
+            public void removeOnSubscriptionsChangedListener(
+                    String pkg, IOnSubscriptionsChangedListener callback) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1157,7 +1268,16 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void listenWithEventList(boolean renounceFineLocationAccess, boolean renounceCoarseLocationAccess, int subId, String pkg, String featureId, IPhoneStateListener callback, int[] events, boolean notifyNow) throws RemoteException {
+            public void listenWithEventList(
+                    boolean renounceFineLocationAccess,
+                    boolean renounceCoarseLocationAccess,
+                    int subId,
+                    String pkg,
+                    String featureId,
+                    IPhoneStateListener callback,
+                    int[] events,
+                    boolean notifyNow)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1179,7 +1299,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyCallStateForAllSubs(int state, String incomingNumber) throws RemoteException {
+            public void notifyCallStateForAllSubs(int state, String incomingNumber)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1195,7 +1316,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyCallState(int phoneId, int subId, int state, String incomingNumber) throws RemoteException {
+            public void notifyCallState(int phoneId, int subId, int state, String incomingNumber)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1213,7 +1335,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyServiceStateForPhoneId(int phoneId, int subId, ServiceState state) throws RemoteException {
+            public void notifyServiceStateForPhoneId(int phoneId, int subId, ServiceState state)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1230,7 +1353,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifySignalStrengthForPhoneId(int phoneId, int subId, SignalStrength signalStrength) throws RemoteException {
+            public void notifySignalStrengthForPhoneId(
+                    int phoneId, int subId, SignalStrength signalStrength) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1247,7 +1371,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyMessageWaitingChangedForPhoneId(int phoneId, int subId, boolean mwi) throws RemoteException {
+            public void notifyMessageWaitingChangedForPhoneId(int phoneId, int subId, boolean mwi)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1279,7 +1404,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyCallForwardingChangedForSubscriber(int subId, boolean cfi) throws RemoteException {
+            public void notifyCallForwardingChangedForSubscriber(int subId, boolean cfi)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1295,7 +1421,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyDataActivityForSubscriber(int subId, int state) throws RemoteException {
+            public void notifyDataActivityForSubscriber(int subId, int state)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1311,7 +1438,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyDataActivityForSubscriberWithSlot(int phoneId, int subId, int state) throws RemoteException {
+            public void notifyDataActivityForSubscriberWithSlot(int phoneId, int subId, int state)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1328,7 +1456,9 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyDataConnectionForSubscriber(int phoneId, int subId, PreciseDataConnectionState preciseState) throws RemoteException {
+            public void notifyDataConnectionForSubscriber(
+                    int phoneId, int subId, PreciseDataConnectionState preciseState)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1345,7 +1475,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyCellLocationForSubscriber(int subId, CellIdentity cellLocation) throws RemoteException {
+            public void notifyCellLocationForSubscriber(int subId, CellIdentity cellLocation)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1376,7 +1507,14 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyPreciseCallState(int phoneId, int subId, int[] callStates, String[] imsCallIds, int[] imsCallServiceTypes, int[] imsCallTypes) throws RemoteException {
+            public void notifyPreciseCallState(
+                    int phoneId,
+                    int subId,
+                    int[] callStates,
+                    String[] imsCallIds,
+                    int[] imsCallServiceTypes,
+                    int[] imsCallTypes)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1396,7 +1534,9 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyDisconnectCause(int phoneId, int subId, int disconnectCause, int preciseDisconnectCause) throws RemoteException {
+            public void notifyDisconnectCause(
+                    int phoneId, int subId, int disconnectCause, int preciseDisconnectCause)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1414,7 +1554,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyCellInfoForSubscriber(int subId, List<CellInfo> cellInfo) throws RemoteException {
+            public void notifyCellInfoForSubscriber(int subId, List<CellInfo> cellInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1446,7 +1587,9 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifySimActivationStateChangedForPhoneId(int phoneId, int subId, int activationState, int activationType) throws RemoteException {
+            public void notifySimActivationStateChangedForPhoneId(
+                    int phoneId, int subId, int activationState, int activationType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1464,7 +1607,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyOemHookRawEventForSubscriber(int phoneId, int subId, byte[] rawData) throws RemoteException {
+            public void notifyOemHookRawEventForSubscriber(int phoneId, int subId, byte[] rawData)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1524,7 +1668,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyCarrierNetworkChangeWithSubId(int subId, boolean active) throws RemoteException {
+            public void notifyCarrierNetworkChangeWithSubId(int subId, boolean active)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1540,7 +1685,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyUserMobileDataStateChangedForPhoneId(int phoneId, int subId, boolean state) throws RemoteException {
+            public void notifyUserMobileDataStateChangedForPhoneId(
+                    int phoneId, int subId, boolean state) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1557,7 +1703,9 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyDisplayInfoChanged(int slotIndex, int subId, TelephonyDisplayInfo telephonyDisplayInfo) throws RemoteException {
+            public void notifyDisplayInfoChanged(
+                    int slotIndex, int subId, TelephonyDisplayInfo telephonyDisplayInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1574,7 +1722,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyPhoneCapabilityChanged(PhoneCapability capability) throws RemoteException {
+            public void notifyPhoneCapabilityChanged(PhoneCapability capability)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1604,7 +1753,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyRadioPowerStateChanged(int phoneId, int subId, int state) throws RemoteException {
+            public void notifyRadioPowerStateChanged(int phoneId, int subId, int state)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1637,7 +1787,9 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyOutgoingEmergencyCall(int phoneId, int subId, EmergencyNumber emergencyNumber) throws RemoteException {
+            public void notifyOutgoingEmergencyCall(
+                    int phoneId, int subId, EmergencyNumber emergencyNumber)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1654,7 +1806,9 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyOutgoingEmergencySms(int phoneId, int subId, EmergencyNumber emergencyNumber) throws RemoteException {
+            public void notifyOutgoingEmergencySms(
+                    int phoneId, int subId, EmergencyNumber emergencyNumber)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1671,7 +1825,9 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyCallQualityChanged(CallQuality callQuality, int phoneId, int subId, int callNetworkType) throws RemoteException {
+            public void notifyCallQualityChanged(
+                    CallQuality callQuality, int phoneId, int subId, int callNetworkType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1689,7 +1845,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyMediaQualityStatusChanged(int phoneId, int subId, MediaQualityStatus status) throws RemoteException {
+            public void notifyMediaQualityStatusChanged(
+                    int phoneId, int subId, MediaQualityStatus status) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1706,7 +1863,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyImsDisconnectCause(int subId, ImsReasonInfo imsReasonInfo) throws RemoteException {
+            public void notifyImsDisconnectCause(int subId, ImsReasonInfo imsReasonInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1722,7 +1880,15 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyRegistrationFailed(int slotIndex, int subId, CellIdentity cellIdentity, String chosenPlmn, int domain, int causeCode, int additionalCauseCode) throws RemoteException {
+            public void notifyRegistrationFailed(
+                    int slotIndex,
+                    int subId,
+                    CellIdentity cellIdentity,
+                    String chosenPlmn,
+                    int domain,
+                    int causeCode,
+                    int additionalCauseCode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1743,7 +1909,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyBarringInfoChanged(int slotIndex, int subId, BarringInfo barringInfo) throws RemoteException {
+            public void notifyBarringInfoChanged(int slotIndex, int subId, BarringInfo barringInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1760,7 +1927,9 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyPhysicalChannelConfigForSubscriber(int phoneId, int subId, List<PhysicalChannelConfig> configs) throws RemoteException {
+            public void notifyPhysicalChannelConfigForSubscriber(
+                    int phoneId, int subId, List<PhysicalChannelConfig> configs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1777,7 +1946,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyDataEnabled(int phoneId, int subId, boolean enabled, int reason) throws RemoteException {
+            public void notifyDataEnabled(int phoneId, int subId, boolean enabled, int reason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1795,7 +1965,9 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyAllowedNetworkTypesChanged(int phoneId, int subId, int reason, long allowedNetworkType) throws RemoteException {
+            public void notifyAllowedNetworkTypesChanged(
+                    int phoneId, int subId, int reason, long allowedNetworkType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1813,7 +1985,9 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyLinkCapacityEstimateChanged(int phoneId, int subId, List<LinkCapacityEstimate> linkCapacityEstimateList) throws RemoteException {
+            public void notifyLinkCapacityEstimateChanged(
+                    int phoneId, int subId, List<LinkCapacityEstimate> linkCapacityEstimateList)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1830,7 +2004,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifySimultaneousCellularCallingSubscriptionsChanged(int[] subIds) throws RemoteException {
+            public void notifySimultaneousCellularCallingSubscriptionsChanged(int[] subIds)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1845,7 +2020,9 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void addCarrierPrivilegesCallback(int phoneId, ICarrierPrivilegesCallback callback, String pkg, String featureId) throws RemoteException {
+            public void addCarrierPrivilegesCallback(
+                    int phoneId, ICarrierPrivilegesCallback callback, String pkg, String featureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1863,7 +2040,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void removeCarrierPrivilegesCallback(ICarrierPrivilegesCallback callback, String pkg) throws RemoteException {
+            public void removeCarrierPrivilegesCallback(
+                    ICarrierPrivilegesCallback callback, String pkg) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1879,7 +2057,9 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyCarrierPrivilegesChanged(int phoneId, List<String> privilegedPackageNames, int[] privilegedUids) throws RemoteException {
+            public void notifyCarrierPrivilegesChanged(
+                    int phoneId, List<String> privilegedPackageNames, int[] privilegedUids)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1896,7 +2076,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyCarrierServiceChanged(int phoneId, String packageName, int uid) throws RemoteException {
+            public void notifyCarrierServiceChanged(int phoneId, String packageName, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1913,7 +2094,9 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void addCarrierConfigChangeListener(ICarrierConfigChangeListener listener, String pkg, String featureId) throws RemoteException {
+            public void addCarrierConfigChangeListener(
+                    ICarrierConfigChangeListener listener, String pkg, String featureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1930,7 +2113,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void removeCarrierConfigChangeListener(ICarrierConfigChangeListener listener, String pkg) throws RemoteException {
+            public void removeCarrierConfigChangeListener(
+                    ICarrierConfigChangeListener listener, String pkg) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1946,7 +2130,9 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyCarrierConfigChanged(int phoneId, int subId, int carrierId, int specificCarrierId) throws RemoteException {
+            public void notifyCarrierConfigChanged(
+                    int phoneId, int subId, int carrierId, int specificCarrierId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1964,7 +2150,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyCallbackModeStarted(int phoneId, int subId, int type) throws RemoteException {
+            public void notifyCallbackModeStarted(int phoneId, int subId, int type)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1981,7 +2168,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyCallbackModeStopped(int phoneId, int subId, int type, int reason) throws RemoteException {
+            public void notifyCallbackModeStopped(int phoneId, int subId, int type, int reason)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1999,7 +2187,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyCarrierRoamingNtnModeChanged(int subId, boolean active) throws RemoteException {
+            public void notifyCarrierRoamingNtnModeChanged(int subId, boolean active)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2015,7 +2204,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyCarrierRoamingNtnEligibleStateChanged(int subId, boolean eligible) throws RemoteException {
+            public void notifyCarrierRoamingNtnEligibleStateChanged(int subId, boolean eligible)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2031,7 +2221,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyCarrierRoamingNtnAvailableServicesChanged(int subId, int[] availableServices) throws RemoteException {
+            public void notifyCarrierRoamingNtnAvailableServicesChanged(
+                    int subId, int[] availableServices) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2047,7 +2238,8 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifyCarrierRoamingNtnSignalStrengthChanged(int subId, NtnSignalStrength ntnSignalStrength) throws RemoteException {
+            public void notifyCarrierRoamingNtnSignalStrengthChanged(
+                    int subId, NtnSignalStrength ntnSignalStrength) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2078,7 +2270,9 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifySemSatelliteServiceStateChanged(int phoneId, int subId, SemSatelliteServiceState serviceState) throws RemoteException {
+            public void notifySemSatelliteServiceStateChanged(
+                    int phoneId, int subId, SemSatelliteServiceState serviceState)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2095,7 +2289,9 @@ public interface ITelephonyRegistry extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ITelephonyRegistry
-            public void notifySemSatelliteSignalStrengthChanged(int phoneId, int subId, SemSatelliteSignalStrength signalStrength) throws RemoteException {
+            public void notifySemSatelliteSignalStrengthChanged(
+                    int phoneId, int subId, SemSatelliteSignalStrength signalStrength)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

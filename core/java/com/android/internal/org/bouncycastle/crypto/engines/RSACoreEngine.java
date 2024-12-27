@@ -6,6 +6,7 @@ import com.android.internal.org.bouncycastle.crypto.params.ParametersWithRandom;
 import com.android.internal.org.bouncycastle.crypto.params.RSAKeyParameters;
 import com.android.internal.org.bouncycastle.crypto.params.RSAPrivateCrtKeyParameters;
 import com.android.internal.org.bouncycastle.util.Arrays;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
@@ -13,8 +14,7 @@ class RSACoreEngine {
     private boolean forEncryption;
     private RSAKeyParameters key;
 
-    RSACoreEngine() {
-    }
+    RSACoreEngine() {}
 
     public void init(boolean forEncryption, CipherParameters param) {
         if (param instanceof ParametersWithRandom) {

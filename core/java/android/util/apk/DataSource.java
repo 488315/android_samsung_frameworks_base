@@ -1,13 +1,15 @@
 package android.util.apk;
 
 import android.os.incremental.IncrementalManager;
+
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.security.DigestException;
 
 /* loaded from: classes4.dex */
 interface DataSource {
-    void feedIntoDataDigester(DataDigester dataDigester, long j, int i) throws IOException, DigestException;
+    void feedIntoDataDigester(DataDigester dataDigester, long j, int i)
+            throws IOException, DigestException;
 
     long size();
 

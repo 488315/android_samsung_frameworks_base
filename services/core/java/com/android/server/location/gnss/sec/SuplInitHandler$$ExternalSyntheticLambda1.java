@@ -7,20 +7,21 @@ public final /* synthetic */ class SuplInitHandler$$ExternalSyntheticLambda1 imp
     public final /* synthetic */ SuplInitHandler f$0;
     public final /* synthetic */ Object f$1;
 
-    public /* synthetic */ SuplInitHandler$$ExternalSyntheticLambda1(SuplInitHandler suplInitHandler, Object obj, int i) {
+    public /* synthetic */ SuplInitHandler$$ExternalSyntheticLambda1(
+            SuplInitHandler suplInitHandler, Object obj, int i) {
         this.$r8$classId = i;
         this.f$0 = suplInitHandler;
         this.f$1 = obj;
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:11:0x0048, code lost:
-    
-        if (android.telephony.SubscriptionManager.isValidSubscriptionId(r10) != false) goto L15;
-     */
+
+       if (android.telephony.SubscriptionManager.isValidSubscriptionId(r10) != false) goto L15;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:63:0x017f, code lost:
-    
-        if (android.telephony.SubscriptionManager.isValidSubscriptionId(r6) != false) goto L68;
-     */
+
+       if (android.telephony.SubscriptionManager.isValidSubscriptionId(r6) != false) goto L68;
+    */
     @Override // java.lang.Runnable
     /*
         Code decompiled incorrectly, please refer to instructions dump.
@@ -31,6 +32,8 @@ public final /* synthetic */ class SuplInitHandler$$ExternalSyntheticLambda1 imp
             Method dump skipped, instructions count: 530
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.location.gnss.sec.SuplInitHandler$$ExternalSyntheticLambda1.run():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.location.gnss.sec.SuplInitHandler$$ExternalSyntheticLambda1.run():void");
     }
 }

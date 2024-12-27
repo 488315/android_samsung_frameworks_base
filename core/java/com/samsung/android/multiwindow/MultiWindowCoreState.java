@@ -36,14 +36,20 @@ public class MultiWindowCoreState {
     public static final class Key {
         public static final String DEX_FONT_SCALE = "dex_font_scale";
         public static final String MW_ENABLED = "mw_enabled";
-        public static final String MW_FREEFORM_CORNER_GESTURE_CUSTOM_VALUE = "corner_gesture_custom_value";
+        public static final String MW_FREEFORM_CORNER_GESTURE_CUSTOM_VALUE =
+                "corner_gesture_custom_value";
         public static final String MW_FREEFORM_CORNER_GESTURE_ENABLED = "open_in_pop_up_view";
-        public static final String MW_MULTISTAR_BLOCKED_MINIMIZED_FREEFORM_ENABLED = "mw_blocked_minimized_freeform";
+        public static final String MW_MULTISTAR_BLOCKED_MINIMIZED_FREEFORM_ENABLED =
+                "mw_blocked_minimized_freeform";
         public static final String MW_MULTISTAR_CUSTOM_DENSITY_DYNAMIC_ENABLED = "custom_density";
-        public static final String MW_MULTISTAR_ENSURE_LAUNCH_SPLIT_ENABLED = "mw_ensure_launch_split";
-        public static final String MW_MULTISTAR_STAY_FOCUS_ACTIVITY_DYNAMIC_ENABLED = "stay_focus_activity";
-        public static final String MW_MULTISTAR_STAY_TOP_RESUMED_ACTIVITY_DYNAMIC_ENABLED = "stay_top_resumed_activity";
-        public static final String MW_NAVISTAR_SPLIT_IMMERSIVE_MODE_ENABLED = "mw_navibar_immersive_mode";
+        public static final String MW_MULTISTAR_ENSURE_LAUNCH_SPLIT_ENABLED =
+                "mw_ensure_launch_split";
+        public static final String MW_MULTISTAR_STAY_FOCUS_ACTIVITY_DYNAMIC_ENABLED =
+                "stay_focus_activity";
+        public static final String MW_MULTISTAR_STAY_TOP_RESUMED_ACTIVITY_DYNAMIC_ENABLED =
+                "stay_top_resumed_activity";
+        public static final String MW_NAVISTAR_SPLIT_IMMERSIVE_MODE_ENABLED =
+                "mw_navibar_immersive_mode";
         public static final String MW_SPLIT_IMMERSIVE_MODE_ENABLED = "mw_immersive_mode";
     }
 
@@ -54,8 +60,7 @@ public class MultiWindowCoreState {
     private static class LazyHolder {
         private static final MultiWindowCoreState sInstance = new MultiWindowCoreState();
 
-        private LazyHolder() {
-        }
+        private LazyHolder() {}
     }
 
     public static MultiWindowCoreState getInstance() {
@@ -69,7 +74,18 @@ public class MultiWindowCoreState {
         }
         synchronized (this.mLock) {
             int changes2 = 0 | updateMultiWindowEnabledState(state);
-            changes = changes2 | updateCornerGestureState(state) | updateCornerGestureCustomValue(state) | updateMultiStarSupportCustomDensityState(state) | updateSplitImmersiveModeState(state) | updateNaviStarSplitImmersiveModeState(state) | updateMultiStarSupportStayFocusActivity(state) | updateMultiStarSupportStayTopResumedActivity(state) | updateMultiStarBlockedMinimizeFreeformState(state) | updateMultiStarEnsureLaunchSplitState(state) | updateDexFontScale(state);
+            changes =
+                    changes2
+                            | updateCornerGestureState(state)
+                            | updateCornerGestureCustomValue(state)
+                            | updateMultiStarSupportCustomDensityState(state)
+                            | updateSplitImmersiveModeState(state)
+                            | updateNaviStarSplitImmersiveModeState(state)
+                            | updateMultiStarSupportStayFocusActivity(state)
+                            | updateMultiStarSupportStayTopResumedActivity(state)
+                            | updateMultiStarBlockedMinimizeFreeformState(state)
+                            | updateMultiStarEnsureLaunchSplitState(state)
+                            | updateDexFontScale(state);
         }
         return changes;
     }
@@ -84,9 +100,9 @@ public class MultiWindowCoreState {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:4:0x000e, code lost:
-    
-        if (r5.getInt("open_in_pop_up_view", 0) == 1) goto L8;
-     */
+
+       if (r5.getInt("open_in_pop_up_view", 0) == 1) goto L8;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -115,7 +131,9 @@ public class MultiWindowCoreState {
         L1c:
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.multiwindow.MultiWindowCoreState.updateCornerGestureState(android.os.Bundle):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.multiwindow.MultiWindowCoreState.updateCornerGestureState(android.os.Bundle):int");
     }
 
     private int updateMultiWindowEnabledState(Bundle state) {
@@ -144,7 +162,8 @@ public class MultiWindowCoreState {
 
     private int updateMultiStarBlockedMinimizeFreeformState(Bundle state) {
         boolean wasEnabled = MW_MULTISTAR_BLOCKED_MINIMIZED_FREEFORM_ENABLED;
-        MW_MULTISTAR_BLOCKED_MINIMIZED_FREEFORM_ENABLED = state.getInt(Key.MW_MULTISTAR_BLOCKED_MINIMIZED_FREEFORM_ENABLED, 0) == 1;
+        MW_MULTISTAR_BLOCKED_MINIMIZED_FREEFORM_ENABLED =
+                state.getInt(Key.MW_MULTISTAR_BLOCKED_MINIMIZED_FREEFORM_ENABLED, 0) == 1;
         return MW_MULTISTAR_BLOCKED_MINIMIZED_FREEFORM_ENABLED != wasEnabled ? 2048 : 0;
     }
 
@@ -156,14 +175,17 @@ public class MultiWindowCoreState {
 
     private int updateNaviStarSplitImmersiveModeState(Bundle state) {
         boolean lastNaviOnlyImmersiveModeEnabled = MW_NAVISTAR_SPLIT_IMMERSIVE_MODE_ENABLED;
-        MW_NAVISTAR_SPLIT_IMMERSIVE_MODE_ENABLED = state.getInt(Key.MW_NAVISTAR_SPLIT_IMMERSIVE_MODE_ENABLED, 0) == 1;
-        return MW_NAVISTAR_SPLIT_IMMERSIVE_MODE_ENABLED != lastNaviOnlyImmersiveModeEnabled ? 1024 : 0;
+        MW_NAVISTAR_SPLIT_IMMERSIVE_MODE_ENABLED =
+                state.getInt(Key.MW_NAVISTAR_SPLIT_IMMERSIVE_MODE_ENABLED, 0) == 1;
+        return MW_NAVISTAR_SPLIT_IMMERSIVE_MODE_ENABLED != lastNaviOnlyImmersiveModeEnabled
+                ? 1024
+                : 0;
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:4:0x000e, code lost:
-    
-        if (r5.getInt(com.samsung.android.multiwindow.MultiWindowCoreState.Key.MW_MULTISTAR_STAY_FOCUS_ACTIVITY_DYNAMIC_ENABLED, 0) == 1) goto L8;
-     */
+
+       if (r5.getInt(com.samsung.android.multiwindow.MultiWindowCoreState.Key.MW_MULTISTAR_STAY_FOCUS_ACTIVITY_DYNAMIC_ENABLED, 0) == 1) goto L8;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -192,13 +214,15 @@ public class MultiWindowCoreState {
         L1c:
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.multiwindow.MultiWindowCoreState.updateMultiStarSupportStayFocusActivity(android.os.Bundle):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.multiwindow.MultiWindowCoreState.updateMultiStarSupportStayFocusActivity(android.os.Bundle):int");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:4:0x000e, code lost:
-    
-        if (r5.getInt(com.samsung.android.multiwindow.MultiWindowCoreState.Key.MW_MULTISTAR_STAY_TOP_RESUMED_ACTIVITY_DYNAMIC_ENABLED, 0) == 1) goto L8;
-     */
+
+       if (r5.getInt(com.samsung.android.multiwindow.MultiWindowCoreState.Key.MW_MULTISTAR_STAY_TOP_RESUMED_ACTIVITY_DYNAMIC_ENABLED, 0) == 1) goto L8;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -227,18 +251,24 @@ public class MultiWindowCoreState {
         L1c:
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.multiwindow.MultiWindowCoreState.updateMultiStarSupportStayTopResumedActivity(android.os.Bundle):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.multiwindow.MultiWindowCoreState.updateMultiStarSupportStayTopResumedActivity(android.os.Bundle):int");
     }
 
     private int updateMultiStarSupportCustomDensityState(Bundle state) {
         int lastCustomDensityEnabledFlags = MW_MULTISTAR_CUSTOM_DENSITY_DYNAMIC_ENABLED;
-        MW_MULTISTAR_CUSTOM_DENSITY_DYNAMIC_ENABLED = state.getInt(Key.MW_MULTISTAR_CUSTOM_DENSITY_DYNAMIC_ENABLED, 0);
-        return MW_MULTISTAR_CUSTOM_DENSITY_DYNAMIC_ENABLED != lastCustomDensityEnabledFlags ? 32 : 0;
+        MW_MULTISTAR_CUSTOM_DENSITY_DYNAMIC_ENABLED =
+                state.getInt(Key.MW_MULTISTAR_CUSTOM_DENSITY_DYNAMIC_ENABLED, 0);
+        return MW_MULTISTAR_CUSTOM_DENSITY_DYNAMIC_ENABLED != lastCustomDensityEnabledFlags
+                ? 32
+                : 0;
     }
 
     private int updateMultiStarEnsureLaunchSplitState(Bundle state) {
         boolean lastEnsureLaunchSplitEnabled = MW_MULTISTAR_ENSURE_LAUNCH_SPLIT_ENABLED;
-        MW_MULTISTAR_ENSURE_LAUNCH_SPLIT_ENABLED = state.getInt(Key.MW_MULTISTAR_ENSURE_LAUNCH_SPLIT_ENABLED, 0) == 1;
+        MW_MULTISTAR_ENSURE_LAUNCH_SPLIT_ENABLED =
+                state.getInt(Key.MW_MULTISTAR_ENSURE_LAUNCH_SPLIT_ENABLED, 0) == 1;
         return MW_MULTISTAR_ENSURE_LAUNCH_SPLIT_ENABLED != lastEnsureLaunchSplitEnabled ? 16384 : 0;
     }
 

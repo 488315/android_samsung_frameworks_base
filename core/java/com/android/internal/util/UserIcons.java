@@ -5,11 +5,22 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+
 import com.android.internal.R;
 
 /* loaded from: classes5.dex */
 public class UserIcons {
-    private static final int[] USER_ICON_COLORS = {R.color.user_icon_1, R.color.user_icon_2, R.color.user_icon_3, R.color.user_icon_4, R.color.user_icon_5, R.color.user_icon_6, R.color.user_icon_7, R.color.user_icon_8, R.color.user_icon_9};
+    private static final int[] USER_ICON_COLORS = {
+        R.color.user_icon_1,
+        R.color.user_icon_2,
+        R.color.user_icon_3,
+        R.color.user_icon_4,
+        R.color.user_icon_5,
+        R.color.user_icon_6,
+        R.color.user_icon_7,
+        R.color.user_icon_8,
+        R.color.user_icon_9
+    };
 
     public static Bitmap convertToBitmap(Drawable icon) {
         return convertToBitmapAtSize(icon, icon.getIntrinsicWidth(), icon.getIntrinsicHeight());

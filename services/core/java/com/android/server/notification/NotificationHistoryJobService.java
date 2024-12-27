@@ -8,8 +8,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.os.CancellationSignal;
 import android.util.Slog;
+
 import com.android.server.LocalServices;
-import com.android.server.notification.NotificationManagerService;
+
 import java.util.concurrent.TimeUnit;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -21,7 +22,19 @@ public class NotificationHistoryJobService extends JobService {
 
     public static void scheduleJob(Context context) {
         JobScheduler jobScheduler = (JobScheduler) context.getSystemService(JobScheduler.class);
-        if (jobScheduler.getPendingJob(237039804) != null || jobScheduler.schedule(new JobInfo.Builder(237039804, new ComponentName(context, (Class<?>) NotificationHistoryJobService.class)).setRequiresDeviceIdle(false).setPeriodic(JOB_RUN_INTERVAL).build()) == 1) {
+        if (jobScheduler.getPendingJob(237039804) != null
+                || jobScheduler.schedule(
+                                new JobInfo.Builder(
+                                                237039804,
+                                                new ComponentName(
+                                                        context,
+                                                        (Class<?>)
+                                                                NotificationHistoryJobService
+                                                                        .class))
+                                        .setRequiresDeviceIdle(false)
+                                        .setPeriodic(JOB_RUN_INTERVAL)
+                                        .build())
+                        == 1) {
             return;
         }
         Slog.w("NotificationHistoryJob", "Failed to schedule history cleanup job");
@@ -35,33 +48,56 @@ public class NotificationHistoryJobService extends JobService {
     @Override // android.app.job.JobService
     public final boolean onStartJob(final JobParameters jobParameters) {
         this.mSignal = new CancellationSignal();
-        new Thread(new Runnable() { // from class: com.android.server.notification.NotificationHistoryJobService$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                NotificationHistoryDatabase notificationHistoryDatabase;
-                NotificationHistoryJobService notificationHistoryJobService = NotificationHistoryJobService.this;
-                JobParameters jobParameters2 = jobParameters;
-                int i = NotificationHistoryJobService.$r8$clinit;
-                notificationHistoryJobService.getClass();
-                NotificationManagerService.AnonymousClass17 anonymousClass17 = (NotificationManagerService.AnonymousClass17) ((NotificationManagerInternal) LocalServices.getService(NotificationManagerInternal.class));
-                anonymousClass17.this$0.getClass();
-                NotificationManagerService.checkCallerIsSystem();
-                NotificationHistoryManager notificationHistoryManager = anonymousClass17.this$0.mHistoryManager;
-                synchronized (notificationHistoryManager.mLock) {
-                    try {
-                        int size = notificationHistoryManager.mUserUnlockedStates.size();
-                        for (int i2 = 0; i2 < size; i2++) {
-                            if (notificationHistoryManager.mUserUnlockedStates.valueAt(i2) && (notificationHistoryDatabase = (NotificationHistoryDatabase) notificationHistoryManager.mUserState.get(notificationHistoryManager.mUserUnlockedStates.keyAt(i2))) != null) {
-                                notificationHistoryDatabase.prune();
+        new Thread(
+                        new Runnable() { // from class:
+                                         // com.android.server.notification.NotificationHistoryJobService$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                NotificationHistoryDatabase notificationHistoryDatabase;
+                                NotificationHistoryJobService notificationHistoryJobService =
+                                        NotificationHistoryJobService.this;
+                                JobParameters jobParameters2 = jobParameters;
+                                int i = NotificationHistoryJobService.$r8$clinit;
+                                notificationHistoryJobService.getClass();
+                                NotificationManagerService.AnonymousClass17 anonymousClass17 =
+                                        (NotificationManagerService.AnonymousClass17)
+                                                ((NotificationManagerInternal)
+                                                        LocalServices.getService(
+                                                                NotificationManagerInternal.class));
+                                anonymousClass17.this$0.getClass();
+                                NotificationManagerService.checkCallerIsSystem();
+                                NotificationHistoryManager notificationHistoryManager =
+                                        anonymousClass17.this$0.mHistoryManager;
+                                synchronized (notificationHistoryManager.mLock) {
+                                    try {
+                                        int size =
+                                                notificationHistoryManager.mUserUnlockedStates
+                                                        .size();
+                                        for (int i2 = 0; i2 < size; i2++) {
+                                            if (notificationHistoryManager.mUserUnlockedStates
+                                                            .valueAt(i2)
+                                                    && (notificationHistoryDatabase =
+                                                                    (NotificationHistoryDatabase)
+                                                                            notificationHistoryManager
+                                                                                    .mUserState.get(
+                                                                                    notificationHistoryManager
+                                                                                            .mUserUnlockedStates
+                                                                                            .keyAt(
+                                                                                                    i2)))
+                                                            != null) {
+                                                notificationHistoryDatabase.prune();
+                                            }
+                                        }
+                                    } catch (Throwable th) {
+                                        throw th;
+                                    }
+                                }
+                                notificationHistoryJobService.jobFinished(
+                                        jobParameters2,
+                                        notificationHistoryJobService.mSignal.isCanceled());
                             }
-                        }
-                    } catch (Throwable th) {
-                        throw th;
-                    }
-                }
-                notificationHistoryJobService.jobFinished(jobParameters2, notificationHistoryJobService.mSignal.isCanceled());
-            }
-        }).start();
+                        })
+                .start();
         return true;
     }
 

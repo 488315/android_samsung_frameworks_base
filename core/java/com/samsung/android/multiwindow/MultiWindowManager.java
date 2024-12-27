@@ -16,7 +16,9 @@ import android.util.Log;
 import android.util.Singleton;
 import android.view.MotionEvent;
 import android.window.WindowContainerToken;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Collections;
@@ -24,13 +26,18 @@ import java.util.List;
 
 /* loaded from: classes6.dex */
 public class MultiWindowManager {
-    public static final String ACTION_AUTORUN_FLEX_PANEL = "android.intent.action.AUTORUN_FLEX_PANEL";
-    public static final String ACTION_COLLAPSE_FLEX_PANEL = "android.intent.action.COLLAPSE_FLEX_PANEL";
-    public static final String ACTION_ENTER_CONTENTS_TO_WINDOW = "com.samsung.android.action.ENTER_CONTENTS_TO_WINDOW";
+    public static final String ACTION_AUTORUN_FLEX_PANEL =
+            "android.intent.action.AUTORUN_FLEX_PANEL";
+    public static final String ACTION_COLLAPSE_FLEX_PANEL =
+            "android.intent.action.COLLAPSE_FLEX_PANEL";
+    public static final String ACTION_ENTER_CONTENTS_TO_WINDOW =
+            "com.samsung.android.action.ENTER_CONTENTS_TO_WINDOW";
     public static final String ACTION_EXPAND_FLEX_PANEL = "android.intent.action.EXPAND_FLEX_PANEL";
     public static final String ACTION_MINIMIZE_ALL = "com.samsung.android.multiwindow.MINIMIZE_ALL";
-    public static final String ACTION_MINIMIZE_ALL_BY_SYSTEM = "com.samsung.android.multiwindow.MINIMIZE_ALL_BY_SYSTEM";
-    public static final String ACTION_MULTI_WINDOW_ENABLE_CHANGED = "com.samsung.android.action.MULTI_WINDOW_ENABLE_CHANGED";
+    public static final String ACTION_MINIMIZE_ALL_BY_SYSTEM =
+            "com.samsung.android.multiwindow.MINIMIZE_ALL_BY_SYSTEM";
+    public static final String ACTION_MULTI_WINDOW_ENABLE_CHANGED =
+            "com.samsung.android.action.MULTI_WINDOW_ENABLE_CHANGED";
     public static final int ASSISTANT_HOT_KEY_MODE_FREEFORM = 3;
     public static final int ASSISTANT_HOT_KEY_MODE_FULL = 1;
     public static final int ASSISTANT_HOT_KEY_MODE_SPLIT = 2;
@@ -55,10 +62,14 @@ public class MultiWindowManager {
     public static final String EXTRA_AI_HOT_KEY_LAUNCH_FREEFORM = "ai_hot_key_launch_freeform";
     public static final String EXTRA_AI_LAUNCH_MODE = "ai_launch_mode";
     public static final String EXTRA_AI_LAUNCH_SPLIT_RATIO = "ai_launch_split_ratio";
-    public static final String EXTRA_IN_MULTI_WINDOW_MODE = "com.samsung.android.extra.IN_MULTI_WINDOW_MODE";
-    public static final String EXTRA_MULTI_WINDOW_ENABLED = "com.samsung.android.extra.MULTI_WINDOW_ENABLED";
-    public static final String EXTRA_MULTI_WINDOW_ENABLED_USER_ID = "com.samsung.android.extra.MULTI_WINDOW_ENABLED_USER_ID";
-    public static final String EXTRA_MULTI_WINDOW_ENABLE_REQUESTER = "com.samsung.android.extra.MULTI_WINDOW_ENABLE_REQUESTER";
+    public static final String EXTRA_IN_MULTI_WINDOW_MODE =
+            "com.samsung.android.extra.IN_MULTI_WINDOW_MODE";
+    public static final String EXTRA_MULTI_WINDOW_ENABLED =
+            "com.samsung.android.extra.MULTI_WINDOW_ENABLED";
+    public static final String EXTRA_MULTI_WINDOW_ENABLED_USER_ID =
+            "com.samsung.android.extra.MULTI_WINDOW_ENABLED_USER_ID";
+    public static final String EXTRA_MULTI_WINDOW_ENABLE_REQUESTER =
+            "com.samsung.android.extra.MULTI_WINDOW_ENABLE_REQUESTER";
     public static final String FLEX_MODE_PANEL_ENABLED = "flex_mode_panel_enabled";
     public static final int FORCE_HIDING_TRANSIT_ENTER = 1;
     public static final int FORCE_HIDING_TRANSIT_ENTER_WITHOUT_ANIMATION = 3;
@@ -72,18 +83,21 @@ public class MultiWindowManager {
     public static final int FREEFORM_TRANSIT_MINIMIZE = 1;
     public static final int FREEFORM_TRANSIT_NONE = 0;
     public static final int FREEFORM_TRANSIT_RESTORE = 2;
-    private static final Singleton<IMultiTaskingBinder> IMultiTaskingBinderSingleton = new Singleton<IMultiTaskingBinder>() { // from class: com.samsung.android.multiwindow.MultiWindowManager.1
-        /* JADX INFO: Access modifiers changed from: protected */
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.util.Singleton
-        public IMultiTaskingBinder create() {
-            try {
-                return ActivityTaskManager.getService().getMultiTaskingBinder();
-            } catch (RemoteException e) {
-                return null;
-            }
-        }
-    };
+    private static final Singleton<IMultiTaskingBinder> IMultiTaskingBinderSingleton =
+            new Singleton<
+                    IMultiTaskingBinder>() { // from class:
+                                             // com.samsung.android.multiwindow.MultiWindowManager.1
+                /* JADX INFO: Access modifiers changed from: protected */
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.util.Singleton
+                public IMultiTaskingBinder create() {
+                    try {
+                        return ActivityTaskManager.getService().getMultiTaskingBinder();
+                    } catch (RemoteException e) {
+                        return null;
+                    }
+                }
+            };
     public static final int INVALID_POSITION = -1;
     public static final int LAUNCH_OVER_FOCUSED_TASK_ID = -10000;
     private static final long META_MASK = 281474976710656L;
@@ -109,7 +123,8 @@ public class MultiWindowManager {
     public static final int MW_NEW_DEX_MINIMIZE_ANIMATION_DURATION = 450;
     public static final int NATURAL_SWITCHING_SUPPORT = 2048;
     public static final int OUT_OF_SCREEN_POSITION = -2;
-    public static final String PERMISSION_MULTI_WINDOW_MONITOR = "com.samsung.android.permission.MULTI_WINDOW_MONITOR";
+    public static final String PERMISSION_MULTI_WINDOW_MONITOR =
+            "com.samsung.android.permission.MULTI_WINDOW_MONITOR";
     public static final int RESIZE_HANDLE_FOR_POINTER_WIDTH_IN_DP = 10;
     public static final int RESIZE_HANDLE_INNER_WIDTH_IN_DP = 4;
     public static final int RESIZE_HANDLE_WIDTH_IN_PX = 48;
@@ -124,37 +139,27 @@ public class MultiWindowManager {
     public static final int TYPE_LONG_PRESS = 1;
     private static MultiWindowManager sInstance;
 
-    public @interface AssistantHotKeyMode {
-    }
+    public @interface AssistantHotKeyMode {}
 
-    public @interface ChangeFreeformStashMode {
-    }
+    public @interface ChangeFreeformStashMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ChangeTransitionFlags {
-    }
+    public @interface ChangeTransitionFlags {}
 
-    public @interface ChangeTransitionMode {
-    }
+    public @interface ChangeTransitionMode {}
 
-    public @interface ForceHidingTransit {
-    }
+    public @interface ForceHidingTransit {}
 
-    public @interface FreeformCaptionType {
-    }
+    public @interface FreeformCaptionType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface MultiSplitFlags {
-    }
+    public @interface MultiSplitFlags {}
 
-    public @interface SplitActivityPackageEnabledState {
-    }
+    public @interface SplitActivityPackageEnabledState {}
 
-    public @interface SplitFeasibleMode {
-    }
+    public @interface SplitFeasibleMode {}
 
-    public @interface embedActivityPackageEnabledState {
-    }
+    public @interface embedActivityPackageEnabledState {}
 
     public static String changeTransitModeToString(int changeTransitMode) {
         switch (changeTransitMode) {
@@ -456,7 +461,8 @@ public class MultiWindowManager {
         setMultiWindowEnabledForUser(key, reason, enabled, UserHandle.myUserId());
     }
 
-    public void setMultiWindowEnabledForUser(String key, String reason, boolean enabled, int userId) {
+    public void setMultiWindowEnabledForUser(
+            String key, String reason, boolean enabled, int userId) {
         try {
             getDefault().setMultiWindowEnabledForUser(key, reason, enabled, userId);
         } catch (RemoteException e) {
@@ -714,9 +720,12 @@ public class MultiWindowManager {
         }
     }
 
-    public void setStayFocusAndTopResumedActivityEnabled(boolean stayFocusEnabled, boolean stayTopResumedEnabled) {
+    public void setStayFocusAndTopResumedActivityEnabled(
+            boolean stayFocusEnabled, boolean stayTopResumedEnabled) {
         try {
-            getDefault().setStayFocusAndTopResumedActivityEnabled(stayFocusEnabled, stayTopResumedEnabled);
+            getDefault()
+                    .setStayFocusAndTopResumedActivityEnabled(
+                            stayFocusEnabled, stayTopResumedEnabled);
         } catch (RemoteException e) {
             warningException(e);
         }
@@ -1014,8 +1023,7 @@ public class MultiWindowManager {
         }
     }
 
-    public void startAssistantActivityToSplit(Intent assistantActivityIntent, float splitRatio) {
-    }
+    public void startAssistantActivityToSplit(Intent assistantActivityIntent, float splitRatio) {}
 
     public void registerDexTransientDelayListener(IDexTransientCaptionDelayListener listener) {
         try {

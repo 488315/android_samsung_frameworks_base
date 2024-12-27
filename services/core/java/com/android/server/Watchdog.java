@@ -24,13 +24,14 @@ import android.provider.Settings;
 import android.util.Dumpable;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.os.ProcessCpuTracker;
 import com.android.internal.util.jobs.Preconditions$$ExternalSyntheticOutline0;
-import com.android.server.FileDescriptorWatcher;
 import com.android.server.am.ActivityManagerService;
 import com.android.server.am.TraceErrorLogger;
 import com.android.server.wm.SurfaceAnimationThread;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
@@ -135,7 +136,8 @@ public final class Watchdog implements Dumpable {
             this.mPauseEndTimeMillis = this.mClock.millis() + 20000;
             this.mCompleted = true;
             StringBuilder sb = new StringBuilder("Pausing of HandlerChecker: ");
-            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(sb, this.mName, " for reason: ", str, ". Pause end time: ");
+            DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                    sb, this.mName, " for reason: ", str, ". Pause end time: ");
             sb.append(this.mPauseEndTimeMillis);
             Slog.i("Watchdog", sb.toString());
         }
@@ -147,7 +149,8 @@ public final class Watchdog implements Dumpable {
             } else {
                 this.mPauseCount = i - 1;
                 StringBuilder sb = new StringBuilder("Resuming HandlerChecker: ");
-                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(sb, this.mName, " for reason: ", str, ". Pause count: ");
+                DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                        sb, this.mName, " for reason: ", str, ". Pause count: ");
                 SystemServiceManager$$ExternalSyntheticOutline0.m(sb, this.mPauseCount, "Watchdog");
             }
         }
@@ -177,7 +180,8 @@ public final class Watchdog implements Dumpable {
             }
             long millis = this.mClock.millis();
             boolean z = this.mPauseCount > 0 || this.mPauseEndTimeMillis > millis;
-            if ((this.mMonitors.size() == 0 && this.mHandler.getLooper().getQueue().isPolling()) || z) {
+            if ((this.mMonitors.size() == 0 && this.mHandler.getLooper().getQueue().isPolling())
+                    || z) {
                 this.mCompleted = true;
                 return;
             }
@@ -217,8 +221,7 @@ public final class Watchdog implements Dumpable {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class RebootRequestReceiver extends BroadcastReceiver {
-        public RebootRequestReceiver() {
-        }
+        public RebootRequestReceiver() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
@@ -228,7 +231,8 @@ public final class Watchdog implements Dumpable {
                 Watchdog.this.getClass();
                 Slog.i("Watchdog", "Rebooting system because: Received ACTION_REBOOT broadcast");
                 try {
-                    ServiceManager.getService("power").reboot(false, "Received ACTION_REBOOT broadcast", false);
+                    ServiceManager.getService("power")
+                            .reboot(false, "Received ACTION_REBOOT broadcast", false);
                 } catch (RemoteException unused) {
                 }
             }
@@ -252,13 +256,21 @@ public final class Watchdog implements Dumpable {
         public final void onChange() {
             try {
                 Watchdog watchdog = this.mWatchdog;
-                long j = Settings.Global.getLong(this.mContext.getContentResolver(), "system_server_watchdog_timeout_ms", 60000L);
+                long j =
+                        Settings.Global.getLong(
+                                this.mContext.getContentResolver(),
+                                "system_server_watchdog_timeout_ms",
+                                60000L);
                 watchdog.getClass();
                 if (!Build.IS_USERDEBUG && j <= 20000) {
                     j = 20001;
                 }
                 watchdog.mWatchdogTimeoutMillis = j;
-                Slog.i("Watchdog", "Watchdog timeout updated to " + watchdog.mWatchdogTimeoutMillis + " millis");
+                Slog.i(
+                        "Watchdog",
+                        "Watchdog timeout updated to "
+                                + watchdog.mWatchdogTimeoutMillis
+                                + " millis");
             } catch (RuntimeException e) {
                 Slog.e("Watchdog", "Exception while reading settings " + e.getMessage(), e);
             }
@@ -273,9 +285,94 @@ public final class Watchdog implements Dumpable {
     }
 
     static {
-        NATIVE_STACKS_OF_INTEREST = new String[]{"/system/bin/audioserver", "/system/bin/cameraserver", "/system/bin/drmserver", "/system/bin/keystore2", "/system/bin/mediadrmserver", "/system/bin/mediaserver", "/system/bin/mediaserver32", "/system/bin/mediaserver64", "/system/bin/netd", "/system/bin/sdcard", "/system/bin/servicemanager", "/system/bin/surfaceflinger", "/system/bin/vold", "/system/bin/installd", "media.extractor", "media.metrics", "media.codec", "media.swcodec", "media.transcoding", "com.android.bluetooth", "/apex/com.android.art/bin/artd", "/apex/com.android.os.statsd/bin/statsd", "/apex/com.samsung.android.spqr/bin/spqr", !SystemProperties.get("ro.product.cpu.abilist64").isEmpty() ? SystemProperties.get("dalvik.vm.dex2oat64.enabled").equals("true") : false ? "/apex/com.android.art/bin/dex2oat64" : "/apex/com.android.art/bin/dex2oat32", "zygote64", "zygote", "webview_zygote", "/vendor/bin/hw/vendor.samsung.hardware.camera.provider-service_64"};
-        HAL_INTERFACES_OF_INTEREST = Arrays.asList("android.hardware.audio@4.0::IDevicesFactory", "android.hardware.audio@5.0::IDevicesFactory", "android.hardware.audio@6.0::IDevicesFactory", "android.hardware.audio@7.0::IDevicesFactory", "android.hardware.biometrics.face@1.0::IBiometricsFace", "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint", "android.hardware.bluetooth@1.0::IBluetoothHci", "android.hardware.camera.provider@2.7::ICameraProvider", "android.hardware.gnss@1.0::IGnss", "android.hardware.graphics.allocator@2.0::IAllocator", "android.hardware.graphics.allocator@4.0::IAllocator", "android.hardware.graphics.composer@2.1::IComposer", "android.hardware.health@2.0::IHealth", "android.hardware.light@2.0::ILight", "android.hardware.media.c2@1.0::IComponentStore", "android.hardware.media.omx@1.0::IOmx", "android.hardware.media.omx@1.0::IOmxStore", "android.hardware.neuralnetworks@1.0::IDevice", "android.hardware.power@1.0::IPower", "android.hardware.power.stats@1.0::IPowerStats", "android.hardware.sensors@1.0::ISensors", "android.hardware.sensors@2.0::ISensors", "android.hardware.sensors@2.1::ISensors", "android.hardware.vibrator@1.0::IVibrator", "android.hardware.vr@1.0::IVr", "android.system.suspend@1.0::ISystemSuspend");
-        AIDL_INTERFACE_PREFIXES_OF_INTEREST = new String[]{"android.hardware.audio.core.IModule/", "android.hardware.audio.core.IConfig/", "android.hardware.audio.effect.IFactory/", "android.hardware.biometrics.face.IFace/", "android.hardware.biometrics.fingerprint.IFingerprint/", "android.hardware.bluetooth.IBluetoothHci/", "android.hardware.camera.provider.ICameraProvider/", "android.hardware.drm.IDrmFactory/", "android.hardware.gnss.IGnss/", "android.hardware.graphics.allocator.IAllocator/", "android.hardware.graphics.composer3.IComposer/", "android.hardware.health.IHealth/", "android.hardware.input.processor.IInputProcessor/", "android.hardware.light.ILights/", "android.hardware.neuralnetworks.IDevice/", "android.hardware.power.IPower/", "android.hardware.power.stats.IPowerStats/", "android.hardware.sensors.ISensors/", "android.hardware.vibrator.IVibrator/", "android.hardware.vibrator.IVibratorManager/", "android.system.suspend.ISystemSuspend/", "android.hardware.thermal.IThermal/"};
+        NATIVE_STACKS_OF_INTEREST =
+                new String[] {
+                    "/system/bin/audioserver",
+                    "/system/bin/cameraserver",
+                    "/system/bin/drmserver",
+                    "/system/bin/keystore2",
+                    "/system/bin/mediadrmserver",
+                    "/system/bin/mediaserver",
+                    "/system/bin/mediaserver32",
+                    "/system/bin/mediaserver64",
+                    "/system/bin/netd",
+                    "/system/bin/sdcard",
+                    "/system/bin/servicemanager",
+                    "/system/bin/surfaceflinger",
+                    "/system/bin/vold",
+                    "/system/bin/installd",
+                    "media.extractor",
+                    "media.metrics",
+                    "media.codec",
+                    "media.swcodec",
+                    "media.transcoding",
+                    "com.android.bluetooth",
+                    "/apex/com.android.art/bin/artd",
+                    "/apex/com.android.os.statsd/bin/statsd",
+                    "/apex/com.samsung.android.spqr/bin/spqr",
+                    !SystemProperties.get("ro.product.cpu.abilist64").isEmpty()
+                            ? SystemProperties.get("dalvik.vm.dex2oat64.enabled").equals("true")
+                            : false
+                                    ? "/apex/com.android.art/bin/dex2oat64"
+                                    : "/apex/com.android.art/bin/dex2oat32",
+                    "zygote64",
+                    "zygote",
+                    "webview_zygote",
+                    "/vendor/bin/hw/vendor.samsung.hardware.camera.provider-service_64"
+                };
+        HAL_INTERFACES_OF_INTEREST =
+                Arrays.asList(
+                        "android.hardware.audio@4.0::IDevicesFactory",
+                        "android.hardware.audio@5.0::IDevicesFactory",
+                        "android.hardware.audio@6.0::IDevicesFactory",
+                        "android.hardware.audio@7.0::IDevicesFactory",
+                        "android.hardware.biometrics.face@1.0::IBiometricsFace",
+                        "android.hardware.biometrics.fingerprint@2.1::IBiometricsFingerprint",
+                        "android.hardware.bluetooth@1.0::IBluetoothHci",
+                        "android.hardware.camera.provider@2.7::ICameraProvider",
+                        "android.hardware.gnss@1.0::IGnss",
+                        "android.hardware.graphics.allocator@2.0::IAllocator",
+                        "android.hardware.graphics.allocator@4.0::IAllocator",
+                        "android.hardware.graphics.composer@2.1::IComposer",
+                        "android.hardware.health@2.0::IHealth",
+                        "android.hardware.light@2.0::ILight",
+                        "android.hardware.media.c2@1.0::IComponentStore",
+                        "android.hardware.media.omx@1.0::IOmx",
+                        "android.hardware.media.omx@1.0::IOmxStore",
+                        "android.hardware.neuralnetworks@1.0::IDevice",
+                        "android.hardware.power@1.0::IPower",
+                        "android.hardware.power.stats@1.0::IPowerStats",
+                        "android.hardware.sensors@1.0::ISensors",
+                        "android.hardware.sensors@2.0::ISensors",
+                        "android.hardware.sensors@2.1::ISensors",
+                        "android.hardware.vibrator@1.0::IVibrator",
+                        "android.hardware.vr@1.0::IVr",
+                        "android.system.suspend@1.0::ISystemSuspend");
+        AIDL_INTERFACE_PREFIXES_OF_INTEREST =
+                new String[] {
+                    "android.hardware.audio.core.IModule/",
+                    "android.hardware.audio.core.IConfig/",
+                    "android.hardware.audio.effect.IFactory/",
+                    "android.hardware.biometrics.face.IFace/",
+                    "android.hardware.biometrics.fingerprint.IFingerprint/",
+                    "android.hardware.bluetooth.IBluetoothHci/",
+                    "android.hardware.camera.provider.ICameraProvider/",
+                    "android.hardware.drm.IDrmFactory/",
+                    "android.hardware.gnss.IGnss/",
+                    "android.hardware.graphics.allocator.IAllocator/",
+                    "android.hardware.graphics.composer3.IComposer/",
+                    "android.hardware.health.IHealth/",
+                    "android.hardware.input.processor.IInputProcessor/",
+                    "android.hardware.light.ILights/",
+                    "android.hardware.neuralnetworks.IDevice/",
+                    "android.hardware.power.IPower/",
+                    "android.hardware.power.stats.IPowerStats/",
+                    "android.hardware.sensors.ISensors/",
+                    "android.hardware.vibrator.IVibrator/",
+                    "android.hardware.vibrator.IVibratorManager/",
+                    "android.system.suspend.ISystemSuspend/",
+                    "android.hardware.thermal.IThermal/"
+                };
         syncCount = 0L;
         mPrevTotalBlockingGcCount = 0L;
         mPrevTotalTimeWaitingForGc = 0L;
@@ -298,34 +395,64 @@ public final class Watchdog implements Dumpable {
         ArrayList arrayList2 = new ArrayList();
         this.mInterestingJavaPids = arrayList2;
         this.mSemHqmManager = null;
-        this.mThread = new Thread(new Runnable() { // from class: com.android.server.Watchdog$$ExternalSyntheticLambda1
-            /* JADX WARN: Code restructure failed: missing block: B:135:0x0503, code lost:
-            
-                if ("CONFIGURED".equals(android.os.FileUtils.readTextFile(new java.io.File("/sys/class/android_usb/android0/state"), 128, null).trim()) == false) goto L165;
-             */
-            @Override // java.lang.Runnable
-            /*
-                Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
-            */
-            public final void run() {
-                /*
-                    Method dump skipped, instructions count: 1562
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.server.Watchdog$$ExternalSyntheticLambda1.run():void");
-            }
-        }, "watchdog");
-        HandlerChecker handlerChecker = new HandlerChecker(new Handler(Watchdog$$ExternalSyntheticOutline0.m(0, "watchdog.monitor", true).getLooper()), "monitor thread", obj);
+        this.mThread =
+                new Thread(
+                        new Runnable() { // from class:
+                            // com.android.server.Watchdog$$ExternalSyntheticLambda1
+                            /* JADX WARN: Code restructure failed: missing block: B:135:0x0503, code lost:
+
+                               if ("CONFIGURED".equals(android.os.FileUtils.readTextFile(new java.io.File("/sys/class/android_usb/android0/state"), 128, null).trim()) == false) goto L165;
+                            */
+                            @Override // java.lang.Runnable
+                            /*
+                                Code decompiled incorrectly, please refer to instructions dump.
+                                To view partially-correct code enable 'Show inconsistent code' option in preferences
+                            */
+                            public final void run() {
+                                /*
+                                    Method dump skipped, instructions count: 1562
+                                    To view this dump change 'Code comments level' option to 'DEBUG'
+                                */
+                                throw new UnsupportedOperationException(
+                                        "Method not decompiled:"
+                                            + " com.android.server.Watchdog$$ExternalSyntheticLambda1.run():void");
+                            }
+                        },
+                        "watchdog");
+        HandlerChecker handlerChecker =
+                new HandlerChecker(
+                        new Handler(
+                                Watchdog$$ExternalSyntheticOutline0.m(0, "watchdog.monitor", true)
+                                        .getLooper()),
+                        "monitor thread",
+                        obj);
         this.mMonitorChecker = handlerChecker;
         arrayList.add(HandlerCheckerAndTimeout.withDefaultTimeout(handlerChecker));
-        arrayList.add(HandlerCheckerAndTimeout.withDefaultTimeout(new HandlerChecker(FgThread.getHandler(), "foreground thread", obj)));
-        arrayList.add(HandlerCheckerAndTimeout.withDefaultTimeout(new HandlerChecker(new Handler(Looper.getMainLooper()), "main thread", obj)));
-        arrayList.add(HandlerCheckerAndTimeout.withDefaultTimeout(new HandlerChecker(UiThread.getHandler(), "ui thread", obj)));
-        arrayList.add(HandlerCheckerAndTimeout.withDefaultTimeout(new HandlerChecker(IoThread.getHandler(), "i/o thread", obj)));
-        arrayList.add(HandlerCheckerAndTimeout.withDefaultTimeout(new HandlerChecker(DisplayThread.getHandler(), "display thread", obj)));
-        arrayList.add(HandlerCheckerAndTimeout.withDefaultTimeout(new HandlerChecker(AnimationThread.getHandler(), "animation thread", obj)));
-        arrayList.add(HandlerCheckerAndTimeout.withDefaultTimeout(new HandlerChecker(SurfaceAnimationThread.getHandler(), "surface animation thread", obj)));
+        arrayList.add(
+                HandlerCheckerAndTimeout.withDefaultTimeout(
+                        new HandlerChecker(FgThread.getHandler(), "foreground thread", obj)));
+        arrayList.add(
+                HandlerCheckerAndTimeout.withDefaultTimeout(
+                        new HandlerChecker(
+                                new Handler(Looper.getMainLooper()), "main thread", obj)));
+        arrayList.add(
+                HandlerCheckerAndTimeout.withDefaultTimeout(
+                        new HandlerChecker(UiThread.getHandler(), "ui thread", obj)));
+        arrayList.add(
+                HandlerCheckerAndTimeout.withDefaultTimeout(
+                        new HandlerChecker(IoThread.getHandler(), "i/o thread", obj)));
+        arrayList.add(
+                HandlerCheckerAndTimeout.withDefaultTimeout(
+                        new HandlerChecker(DisplayThread.getHandler(), "display thread", obj)));
+        arrayList.add(
+                HandlerCheckerAndTimeout.withDefaultTimeout(
+                        new HandlerChecker(AnimationThread.getHandler(), "animation thread", obj)));
+        arrayList.add(
+                HandlerCheckerAndTimeout.withDefaultTimeout(
+                        new HandlerChecker(
+                                SurfaceAnimationThread.getHandler(),
+                                "surface animation thread",
+                                obj)));
         ProcessCpuTracker processCpuTracker = new ProcessCpuTracker(false);
         this.mProcessCpuTracker = processCpuTracker;
         processCpuTracker.init();
@@ -358,7 +485,10 @@ public final class Watchdog implements Dumpable {
             }
             HandlerChecker handlerChecker = (HandlerChecker) arrayList.get(i);
             Monitor monitor = handlerChecker.mCurrentMonitor;
-            String concat = monitor == null ? "Blocked in handler" : "Blocked in monitor ".concat(monitor.getClass().getName());
+            String concat =
+                    monitor == null
+                            ? "Blocked in handler"
+                            : "Blocked in monitor ".concat(monitor.getClass().getName());
             long millis = (handlerChecker.mClock.millis() - handlerChecker.mStartTimeMillis) / 1000;
             StringBuilder m = Preconditions$$ExternalSyntheticOutline0.m(concat, " on ");
             m.append(handlerChecker.mName);
@@ -416,8 +546,10 @@ public final class Watchdog implements Dumpable {
         try {
             Iterator it = IServiceManager.getService().debugDump().iterator();
             while (it.hasNext()) {
-                IServiceManager.InstanceDebugInfo instanceDebugInfo = (IServiceManager.InstanceDebugInfo) it.next();
-                if (instanceDebugInfo.pid != -1 && HAL_INTERFACES_OF_INTEREST.contains(instanceDebugInfo.interfaceName)) {
+                IServiceManager.InstanceDebugInfo instanceDebugInfo =
+                        (IServiceManager.InstanceDebugInfo) it.next();
+                if (instanceDebugInfo.pid != -1
+                        && HAL_INTERFACES_OF_INTEREST.contains(instanceDebugInfo.interfaceName)) {
                     hashSet.add(Integer.valueOf(instanceDebugInfo.pid));
                 }
             }
@@ -443,7 +575,8 @@ public final class Watchdog implements Dumpable {
                     try {
                         InputStream inputStream = exec.getInputStream();
                         charset = StandardCharsets.UTF_8;
-                        bufferedReader = new BufferedReader(new InputStreamReader(inputStream, charset));
+                        bufferedReader =
+                                new BufferedReader(new InputStreamReader(inputStream, charset));
                     } catch (IOException unused) {
                         Slog.e("Watchdog", "Failed to write watchdog_ps");
                     }
@@ -490,7 +623,9 @@ public final class Watchdog implements Dumpable {
     public static void writeTimeoutHistory(Iterable iterable) {
         String join = String.join(",", (Iterable<? extends CharSequence>) iterable);
         try {
-            FileWriter fileWriter = new FileWriter("/data/system/watchdog-timeout-history.txt", StandardCharsets.UTF_8);
+            FileWriter fileWriter =
+                    new FileWriter(
+                            "/data/system/watchdog-timeout-history.txt", StandardCharsets.UTF_8);
             try {
                 fileWriter.write(SystemProperties.get("ro.boottime.zygote"));
                 fileWriter.write(":");
@@ -511,13 +646,22 @@ public final class Watchdog implements Dumpable {
 
     public final void addThread(Handler handler) {
         synchronized (this.mLock) {
-            this.mHandlerCheckers.add(HandlerCheckerAndTimeout.withDefaultTimeout(new HandlerChecker(handler, handler.getLooper().getThread().getName(), this.mLock)));
+            this.mHandlerCheckers.add(
+                    HandlerCheckerAndTimeout.withDefaultTimeout(
+                            new HandlerChecker(
+                                    handler,
+                                    handler.getLooper().getThread().getName(),
+                                    this.mLock)));
         }
     }
 
     public final void addThread(Handler handler, long j) {
         synchronized (this.mLock) {
-            this.mHandlerCheckers.add(new HandlerCheckerAndTimeout(new HandlerChecker(handler, handler.getLooper().getThread().getName(), this.mLock), Optional.of(Long.valueOf(j))));
+            this.mHandlerCheckers.add(
+                    new HandlerCheckerAndTimeout(
+                            new HandlerChecker(
+                                    handler, handler.getLooper().getThread().getName(), this.mLock),
+                            Optional.of(Long.valueOf(j))));
         }
     }
 
@@ -530,7 +674,8 @@ public final class Watchdog implements Dumpable {
     public final ArrayList getCheckersWithStateLocked(int i) {
         ArrayList arrayList = new ArrayList();
         for (int i2 = 0; i2 < this.mHandlerCheckers.size(); i2++) {
-            HandlerChecker handlerChecker = ((HandlerCheckerAndTimeout) this.mHandlerCheckers.get(i2)).mHandler;
+            HandlerChecker handlerChecker =
+                    ((HandlerCheckerAndTimeout) this.mHandlerCheckers.get(i2)).mHandler;
             if (handlerChecker.getCompletionStateLocked() == i) {
                 arrayList.add(handlerChecker);
             }
@@ -544,12 +689,15 @@ public final class Watchdog implements Dumpable {
                 Iterator it = this.mHandlerCheckers.iterator();
                 while (it.hasNext()) {
                     HandlerChecker handlerChecker = ((HandlerCheckerAndTimeout) it.next()).mHandler;
-                    if (Thread.currentThread().equals(handlerChecker.mHandler.getLooper().getThread())) {
+                    if (Thread.currentThread()
+                            .equals(handlerChecker.mHandler.getLooper().getThread())) {
                         handlerChecker.mPauseCount++;
                         handlerChecker.mCompleted = true;
                         StringBuilder sb = new StringBuilder("Pausing HandlerChecker: ");
-                        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(sb, handlerChecker.mName, " for reason: ", str, ". Pause count: ");
-                        SystemServiceManager$$ExternalSyntheticOutline0.m(sb, handlerChecker.mPauseCount, "Watchdog");
+                        DirEncryptServiceHelper$$ExternalSyntheticOutline0.m(
+                                sb, handlerChecker.mName, " for reason: ", str, ". Pause count: ");
+                        SystemServiceManager$$ExternalSyntheticOutline0.m(
+                                sb, handlerChecker.mPauseCount, "Watchdog");
                     }
                 }
             } catch (Throwable th) {
@@ -564,7 +712,8 @@ public final class Watchdog implements Dumpable {
                 Iterator it = this.mHandlerCheckers.iterator();
                 while (it.hasNext()) {
                     HandlerChecker handlerChecker = ((HandlerCheckerAndTimeout) it.next()).mHandler;
-                    if (Thread.currentThread().equals(handlerChecker.mHandler.getLooper().getThread())) {
+                    if (Thread.currentThread()
+                            .equals(handlerChecker.mHandler.getLooper().getThread())) {
                         handlerChecker.pauseForLocked(str);
                     }
                 }
@@ -599,11 +748,14 @@ public final class Watchdog implements Dumpable {
             sb3.append(" / ");
             sb3.append(mTotalMemory);
             sb3.append(" FD: ");
-            NandswapManager$$ExternalSyntheticOutline0.m(sb3, this.fdWatcher.mFdCount, sb2, "Watchdog");
+            NandswapManager$$ExternalSyntheticOutline0.m(
+                    sb3, this.fdWatcher.mFdCount, sb2, "Watchdog");
         } else {
-            long parseLong = Long.parseLong(Debug.getRuntimeStat("art.gc.total-time-waiting-for-gc"));
+            long parseLong =
+                    Long.parseLong(Debug.getRuntimeStat("art.gc.total-time-waiting-for-gc"));
             long parseLong2 = Long.parseLong(Debug.getRuntimeStat("art.gc.blocking-gc-count"));
-            mCurrentTimeWaitingForGc = TimeUnit.NANOSECONDS.toMillis(parseLong - mPrevTotalTimeWaitingForGc);
+            mCurrentTimeWaitingForGc =
+                    TimeUnit.NANOSECONDS.toMillis(parseLong - mPrevTotalTimeWaitingForGc);
             mCurrentBlockGcCount = parseLong2 - mPrevTotalBlockingGcCount;
             mPrevTotalTimeWaitingForGc = parseLong;
             mPrevTotalBlockingGcCount = parseLong2;
@@ -635,23 +787,34 @@ public final class Watchdog implements Dumpable {
                 public final void run() {
                     Watchdog watchdog = Watchdog.this;
                     if (watchdog.mSemHqmManager == null) {
-                        watchdog.mSemHqmManager = (SemHqmManager) Watchdog.mContext.getSystemService("HqmManagerService");
+                        watchdog.mSemHqmManager =
+                                (SemHqmManager)
+                                        Watchdog.mContext.getSystemService("HqmManagerService");
                     }
                     if (Watchdog.this.mSemHqmManager != null) {
                         StringBuilder sb5 = new StringBuilder();
                         sb5.append("\"SYNC\":\"" + Watchdog.syncCount + "\",");
-                        sb5.append("\"HEAP\":\"" + Watchdog.mAllocatedMemory + "/" + Watchdog.mTotalMemory + "\",");
+                        sb5.append(
+                                "\"HEAP\":\""
+                                        + Watchdog.mAllocatedMemory
+                                        + "/"
+                                        + Watchdog.mTotalMemory
+                                        + "\",");
                         StringBuilder sb6 = new StringBuilder("\"OBJECTS\":\"");
                         sb6.append(Debug.getRuntimeStat("art.gc.objects-allocated"));
                         sb6.append("\",");
                         sb5.append(sb6.toString());
                         sb5.append("\"WAITTIME\":\"" + Watchdog.mCurrentTimeWaitingForGc + "\",");
                         sb5.append("\"GCCNT\":\"" + Watchdog.mCurrentBlockGcCount + "\",");
-                        sb5.append("\"FULLGC\":\"" + Debug.getRuntimeStat("art.gc.pre-oome-gc-count") + "\",");
+                        sb5.append(
+                                "\"FULLGC\":\""
+                                        + Debug.getRuntimeStat("art.gc.pre-oome-gc-count")
+                                        + "\",");
                         sb5.append("\"FD\":\"" + Watchdog.this.fdWatcher.mFdCount + "\",");
                         sb5.append("\"MIN\":\"" + Watchdog.mMinHeap + "\",");
                         sb5.append("\"MAX\":\"" + Watchdog.mMaxHeap + "\"");
-                        Watchdog.this.mSemHqmManager.sendHWParamToHQM(0, "AP", "SSHS", "ph", "0.0", "", "", sb5.toString(), "");
+                        Watchdog.this.mSemHqmManager.sendHWParamToHQM(
+                                0, "AP", "SSHS", "ph", "0.0", "", "", sb5.toString(), "");
                         Slog.i("Watchdog", "sent SSHS info to HQM");
                     }
                     Watchdog.mMinHeap = Long.MAX_VALUE;
@@ -674,19 +837,30 @@ public final class Watchdog implements Dumpable {
             return;
         }
         heapdumpWatcher2.mOverThresholdCnt++;
-        VaultKeeperService$$ExternalSyntheticOutline0.m(new StringBuilder("!@ The heap has been allocated excessively. OverThresholdCnt : "), heapdumpWatcher2.mOverThresholdCnt, "Watchdog:HeapdumpWatcher");
+        VaultKeeperService$$ExternalSyntheticOutline0.m(
+                new StringBuilder(
+                        "!@ The heap has been allocated excessively. OverThresholdCnt : "),
+                heapdumpWatcher2.mOverThresholdCnt,
+                "Watchdog:HeapdumpWatcher");
         int i = heapdumpWatcher2.mOverThresholdCnt;
         if (i < 20) {
             if (i == 2) {
                 heapdumpWatcher2.makeHeapDump();
             }
-        } else if (heapdumpWatcher2.checkScreenOff() && heapdumpWatcher2.checkBackgroundAudio() && heapdumpWatcher2.checkCall()) {
-            throw new OutOfMemoryError(AudioConfig$$ExternalSyntheticOutline0.m(new StringBuilder("HeapFull, "), heapdumpWatcher2.mAllocatedMemory, "MB was used"));
+        } else if (heapdumpWatcher2.checkScreenOff()
+                && heapdumpWatcher2.checkBackgroundAudio()
+                && heapdumpWatcher2.checkCall()) {
+            throw new OutOfMemoryError(
+                    AudioConfig$$ExternalSyntheticOutline0.m(
+                            new StringBuilder("HeapFull, "),
+                            heapdumpWatcher2.mAllocatedMemory,
+                            "MB was used"));
         }
     }
 
     public final void processStarted(int i, String str) {
-        if (str.equals(StorageManagerService.sMediaStoreAuthorityProcessName) || str.equals("com.android.phone")) {
+        if (str.equals(StorageManagerService.sMediaStoreAuthorityProcessName)
+                || str.equals("com.android.phone")) {
             Slog.i("Watchdog", "Interesting Java process " + str + " started. Pid " + i);
             synchronized (this.mLock) {
                 ((ArrayList) this.mInterestingJavaPids).add(Integer.valueOf(i));
@@ -700,7 +874,8 @@ public final class Watchdog implements Dumpable {
                 Iterator it = this.mHandlerCheckers.iterator();
                 while (it.hasNext()) {
                     HandlerChecker handlerChecker = ((HandlerCheckerAndTimeout) it.next()).mHandler;
-                    if (Thread.currentThread().equals(handlerChecker.mHandler.getLooper().getThread())) {
+                    if (Thread.currentThread()
+                            .equals(handlerChecker.mHandler.getLooper().getThread())) {
                         handlerChecker.resumeLocked(str);
                     }
                 }

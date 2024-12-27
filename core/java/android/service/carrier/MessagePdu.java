@@ -2,34 +2,37 @@ package android.service.carrier;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes3.dex */
 public final class MessagePdu implements Parcelable {
-    public static final Parcelable.Creator<MessagePdu> CREATOR = new Parcelable.Creator<MessagePdu>() { // from class: android.service.carrier.MessagePdu.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MessagePdu createFromParcel(Parcel source) {
-            List<byte[]> pduList;
-            int size = source.readInt();
-            if (size == -1) {
-                pduList = null;
-            } else {
-                pduList = new ArrayList<>(size);
-                for (int i = 0; i < size; i++) {
-                    pduList.add(source.createByteArray());
+    public static final Parcelable.Creator<MessagePdu> CREATOR =
+            new Parcelable.Creator<
+                    MessagePdu>() { // from class: android.service.carrier.MessagePdu.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MessagePdu createFromParcel(Parcel source) {
+                    List<byte[]> pduList;
+                    int size = source.readInt();
+                    if (size == -1) {
+                        pduList = null;
+                    } else {
+                        pduList = new ArrayList<>(size);
+                        for (int i = 0; i < size; i++) {
+                            pduList.add(source.createByteArray());
+                        }
+                    }
+                    return new MessagePdu(pduList);
                 }
-            }
-            return new MessagePdu(pduList);
-        }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MessagePdu[] newArray(int size) {
-            return new MessagePdu[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MessagePdu[] newArray(int size) {
+                    return new MessagePdu[size];
+                }
+            };
     private static final int NULL_LENGTH = -1;
     private final List<byte[]> mPduList;
 

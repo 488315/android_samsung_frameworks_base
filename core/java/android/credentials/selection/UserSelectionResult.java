@@ -3,6 +3,7 @@ package android.credentials.selection;
 import android.annotation.SystemApi;
 import android.os.Bundle;
 import android.os.ResultReceiver;
+
 import com.android.internal.util.Preconditions;
 
 @SystemApi
@@ -13,14 +14,19 @@ public final class UserSelectionResult {
     private final String mProviderId;
     private ProviderPendingIntentResponse mProviderPendingIntentResponse;
 
-    public static void sendUserSelectionResult(ResultReceiver resultReceiver, UserSelectionResult userSelectionResult) {
+    public static void sendUserSelectionResult(
+            ResultReceiver resultReceiver, UserSelectionResult userSelectionResult) {
         UserSelectionDialogResult result = userSelectionResult.toUserSelectionDialogResult();
         Bundle resultData = new Bundle();
         UserSelectionDialogResult.addToBundle(result, resultData);
         resultReceiver.send(2, resultData);
     }
 
-    public UserSelectionResult(String providerId, String entryKey, String entrySubkey, ProviderPendingIntentResponse providerPendingIntentResponse) {
+    public UserSelectionResult(
+            String providerId,
+            String entryKey,
+            String entrySubkey,
+            ProviderPendingIntentResponse providerPendingIntentResponse) {
         this.mProviderId = (String) Preconditions.checkStringNotEmpty(providerId);
         this.mEntryKey = (String) Preconditions.checkStringNotEmpty(entryKey);
         this.mEntrySubkey = (String) Preconditions.checkStringNotEmpty(entrySubkey);
@@ -44,6 +50,11 @@ public final class UserSelectionResult {
     }
 
     UserSelectionDialogResult toUserSelectionDialogResult() {
-        return new UserSelectionDialogResult(null, this.mProviderId, this.mEntryKey, this.mEntrySubkey, this.mProviderPendingIntentResponse);
+        return new UserSelectionDialogResult(
+                null,
+                this.mProviderId,
+                this.mEntryKey,
+                this.mEntrySubkey,
+                this.mProviderPendingIntentResponse);
     }
 }

@@ -52,12 +52,16 @@ public abstract class TunnelModeEnabledListener {
         nativeUnregister(listener.mNativeListener);
     }
 
-    public static void dispatchOnTunnelModeEnabledChanged(final TunnelModeEnabledListener listener, final boolean tunnelModeEnabled) {
-        listener.mExecutor.execute(new Runnable() { // from class: android.view.TunnelModeEnabledListener$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                TunnelModeEnabledListener.this.onTunnelModeEnabledChanged(tunnelModeEnabled);
-            }
-        });
+    public static void dispatchOnTunnelModeEnabledChanged(
+            final TunnelModeEnabledListener listener, final boolean tunnelModeEnabled) {
+        listener.mExecutor.execute(
+                new Runnable() { // from class:
+                                 // android.view.TunnelModeEnabledListener$$ExternalSyntheticLambda0
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        TunnelModeEnabledListener.this.onTunnelModeEnabledChanged(
+                                tunnelModeEnabled);
+                    }
+                });
     }
 }

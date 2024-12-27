@@ -7,7 +7,7 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.print.PrintJobInfo;
 import android.print.PrinterId;
-import android.printservice.IPrintServiceClient;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -36,48 +36,37 @@ public interface IPrintService extends IInterface {
 
     public static class Default implements IPrintService {
         @Override // android.printservice.IPrintService
-        public void setClient(IPrintServiceClient client) throws RemoteException {
-        }
+        public void setClient(IPrintServiceClient client) throws RemoteException {}
 
         @Override // android.printservice.IPrintService
-        public void requestCancelPrintJob(PrintJobInfo printJobInfo) throws RemoteException {
-        }
+        public void requestCancelPrintJob(PrintJobInfo printJobInfo) throws RemoteException {}
 
         @Override // android.printservice.IPrintService
-        public void onPrintJobQueued(PrintJobInfo printJobInfo) throws RemoteException {
-        }
+        public void onPrintJobQueued(PrintJobInfo printJobInfo) throws RemoteException {}
 
         @Override // android.printservice.IPrintService
-        public void createPrinterDiscoverySession() throws RemoteException {
-        }
+        public void createPrinterDiscoverySession() throws RemoteException {}
 
         @Override // android.printservice.IPrintService
-        public void startPrinterDiscovery(List<PrinterId> priorityList) throws RemoteException {
-        }
+        public void startPrinterDiscovery(List<PrinterId> priorityList) throws RemoteException {}
 
         @Override // android.printservice.IPrintService
-        public void stopPrinterDiscovery() throws RemoteException {
-        }
+        public void stopPrinterDiscovery() throws RemoteException {}
 
         @Override // android.printservice.IPrintService
-        public void validatePrinters(List<PrinterId> printerIds) throws RemoteException {
-        }
+        public void validatePrinters(List<PrinterId> printerIds) throws RemoteException {}
 
         @Override // android.printservice.IPrintService
-        public void startPrinterStateTracking(PrinterId printerId) throws RemoteException {
-        }
+        public void startPrinterStateTracking(PrinterId printerId) throws RemoteException {}
 
         @Override // android.printservice.IPrintService
-        public void requestCustomPrinterIcon(PrinterId printerId) throws RemoteException {
-        }
+        public void requestCustomPrinterIcon(PrinterId printerId) throws RemoteException {}
 
         @Override // android.printservice.IPrintService
-        public void stopPrinterStateTracking(PrinterId printerId) throws RemoteException {
-        }
+        public void stopPrinterStateTracking(PrinterId printerId) throws RemoteException {}
 
         @Override // android.printservice.IPrintService
-        public void destroyPrinterDiscoverySession() throws RemoteException {
-        }
+        public void destroyPrinterDiscoverySession() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -85,7 +74,7 @@ public interface IPrintService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPrintService {
+    public abstract static class Stub extends Binder implements IPrintService {
         public static final String DESCRIPTOR = "android.printservice.IPrintService";
         static final int TRANSACTION_createPrinterDiscoverySession = 4;
         static final int TRANSACTION_destroyPrinterDiscoverySession = 11;
@@ -154,7 +143,8 @@ public interface IPrintService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -164,7 +154,8 @@ public interface IPrintService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IPrintServiceClient _arg0 = IPrintServiceClient.Stub.asInterface(data.readStrongBinder());
+                    IPrintServiceClient _arg0 =
+                            IPrintServiceClient.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setClient(_arg0);
                     return true;

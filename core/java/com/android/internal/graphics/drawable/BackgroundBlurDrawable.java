@@ -23,9 +23,11 @@ import android.view.View;
 import android.view.ViewParent;
 import android.view.ViewRootImpl;
 import android.view.ViewTreeObserver;
+
 import com.android.internal.R;
-import com.android.internal.graphics.drawable.BackgroundBlurDrawable;
+
 import com.samsung.android.rune.CoreRune;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -57,9 +59,9 @@ public final class BackgroundBlurDrawable extends Drawable {
     private boolean mVisible;
 
     /* JADX WARN: Code restructure failed: missing block: B:4:0x0019, code lost:
-    
-        if (android.os.SystemProperties.getInt("viewroot.debug.blur", 0) != 0) goto L6;
-     */
+
+       if (android.os.SystemProperties.getInt("viewroot.debug.blur", 0) != 0) goto L6;
+    */
     static {
         /*
             java.lang.Class<com.android.internal.graphics.drawable.BackgroundBlurDrawable> r0 = com.android.internal.graphics.drawable.BackgroundBlurDrawable.class
@@ -79,57 +81,111 @@ public final class BackgroundBlurDrawable extends Drawable {
             com.android.internal.graphics.drawable.BackgroundBlurDrawable.DEBUG = r1
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.graphics.drawable.BackgroundBlurDrawable.<clinit>():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.graphics.drawable.BackgroundBlurDrawable.<clinit>():void");
     }
 
     /* renamed from: com.android.internal.graphics.drawable.BackgroundBlurDrawable$1, reason: invalid class name */
     class AnonymousClass1 implements RenderNode.PositionUpdateListener {
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         @Override // android.graphics.RenderNode.PositionUpdateListener
-        public void positionChanged(final long frameNumber, final int left, final int top, final int right, final int bottom) {
+        public void positionChanged(
+                final long frameNumber,
+                final int left,
+                final int top,
+                final int right,
+                final int bottom) {
             final boolean showDebug = BackgroundBlurDrawable.this.mShowDebug;
             BackgroundBlurDrawable.this.mRect.set(left, top, right, bottom);
             if (BackgroundBlurDrawable.DEBUG || showDebug) {
-                Log.i(BackgroundBlurDrawable.TAG, "positionChanged fn=" + frameNumber + " drawable=" + BackgroundBlurDrawable.this + ", left : " + left + ", top : " + top + ", right : " + right + ", bottom : " + bottom);
+                Log.i(
+                        BackgroundBlurDrawable.TAG,
+                        "positionChanged fn="
+                                + frameNumber
+                                + " drawable="
+                                + BackgroundBlurDrawable.this
+                                + ", left : "
+                                + left
+                                + ", top : "
+                                + top
+                                + ", right : "
+                                + right
+                                + ", bottom : "
+                                + bottom);
                 Drawable.Callback callback = BackgroundBlurDrawable.this.getCallback();
                 if (callback instanceof View) {
                     View attachedView = (View) callback;
                     ViewRootImpl viewRoot = attachedView.getViewRootImpl();
-                    Log.i(BackgroundBlurDrawable.TAG, "positionChanged attached View=" + attachedView + ", viewRoot=" + ((Object) (viewRoot != null ? viewRoot.getTag() : viewRoot)));
+                    Log.i(
+                            BackgroundBlurDrawable.TAG,
+                            "positionChanged attached View="
+                                    + attachedView
+                                    + ", viewRoot="
+                                    + ((Object) (viewRoot != null ? viewRoot.getTag() : viewRoot)));
                 } else {
-                    Log.i(BackgroundBlurDrawable.TAG, "positionChanged attached callback=" + callback);
+                    Log.i(
+                            BackgroundBlurDrawable.TAG,
+                            "positionChanged attached callback=" + callback);
                 }
             }
-            BackgroundBlurDrawable.this.mAggregator.onRenderNodePositionChanged(frameNumber, new Runnable() { // from class: com.android.internal.graphics.drawable.BackgroundBlurDrawable$1$$ExternalSyntheticLambda2
-                @Override // java.lang.Runnable
-                public final void run() {
-                    BackgroundBlurDrawable.AnonymousClass1.this.lambda$positionChanged$1(showDebug, frameNumber, left, top, right, bottom);
-                }
-            });
+            BackgroundBlurDrawable.this.mAggregator.onRenderNodePositionChanged(
+                    frameNumber,
+                    new Runnable() { // from class:
+                                     // com.android.internal.graphics.drawable.BackgroundBlurDrawable$1$$ExternalSyntheticLambda2
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            BackgroundBlurDrawable.AnonymousClass1.this.lambda$positionChanged$1(
+                                    showDebug, frameNumber, left, top, right, bottom);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$positionChanged$1(final boolean showDebug, final long frameNumber, int left, int top, int right, int bottom) {
+        public /* synthetic */ void lambda$positionChanged$1(
+                final boolean showDebug,
+                final long frameNumber,
+                int left,
+                int top,
+                int right,
+                int bottom) {
             if (BackgroundBlurDrawable.DEBUG || showDebug) {
-                Log.i(BackgroundBlurDrawable.TAG, "positionChanged$run fn=" + frameNumber + " dr=BackgroundBlurDrawable@" + BackgroundBlurDrawable.this.hashCode() + " rect=" + BackgroundBlurDrawable.this.mRect);
+                Log.i(
+                        BackgroundBlurDrawable.TAG,
+                        "positionChanged$run fn="
+                                + frameNumber
+                                + " dr=BackgroundBlurDrawable@"
+                                + BackgroundBlurDrawable.this.hashCode()
+                                + " rect="
+                                + BackgroundBlurDrawable.this.mRect);
             }
-            BackgroundBlurDrawable.this.mHandler.post(new Runnable() { // from class: com.android.internal.graphics.drawable.BackgroundBlurDrawable$1$$ExternalSyntheticLambda1
-                @Override // java.lang.Runnable
-                public final void run() {
-                    BackgroundBlurDrawable.AnonymousClass1.this.lambda$positionChanged$0(showDebug, frameNumber);
-                }
-            });
+            BackgroundBlurDrawable.this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // com.android.internal.graphics.drawable.BackgroundBlurDrawable$1$$ExternalSyntheticLambda1
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            BackgroundBlurDrawable.AnonymousClass1.this.lambda$positionChanged$0(
+                                    showDebug, frameNumber);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$positionChanged$0(boolean showDebug, long frameNumber) {
             if (BackgroundBlurDrawable.DEBUG || showDebug) {
-                Log.i(BackgroundBlurDrawable.TAG, "positionChanged$run#2 fn=" + frameNumber + " dr=BackgroundBlurDrawable@" + BackgroundBlurDrawable.this.hashCode() + " rect=" + BackgroundBlurDrawable.this.mRect);
+                Log.i(
+                        BackgroundBlurDrawable.TAG,
+                        "positionChanged$run#2 fn="
+                                + frameNumber
+                                + " dr=BackgroundBlurDrawable@"
+                                + BackgroundBlurDrawable.this.hashCode()
+                                + " rect="
+                                + BackgroundBlurDrawable.this.mRect);
             }
             BackgroundBlurDrawable.this.invalidateSelf();
-            BackgroundBlurDrawable.this.mAggregator.onBlurDrawableUpdated(BackgroundBlurDrawable.this);
+            BackgroundBlurDrawable.this.mAggregator.onBlurDrawableUpdated(
+                    BackgroundBlurDrawable.this);
         }
 
         @Override // android.graphics.RenderNode.PositionUpdateListener
@@ -137,36 +193,66 @@ public final class BackgroundBlurDrawable extends Drawable {
             final boolean showDebug = BackgroundBlurDrawable.this.mShowDebug;
             BackgroundBlurDrawable.this.mRect.setEmpty();
             if (BackgroundBlurDrawable.DEBUG || showDebug) {
-                Log.i(BackgroundBlurDrawable.TAG, "positionLost fn=" + frameNumber + " dr=BackgroundBlurDrawable@" + BackgroundBlurDrawable.this.hashCode() + " rect=" + BackgroundBlurDrawable.this.mRect);
+                Log.i(
+                        BackgroundBlurDrawable.TAG,
+                        "positionLost fn="
+                                + frameNumber
+                                + " dr=BackgroundBlurDrawable@"
+                                + BackgroundBlurDrawable.this.hashCode()
+                                + " rect="
+                                + BackgroundBlurDrawable.this.mRect);
             }
-            BackgroundBlurDrawable.this.mAggregator.onRenderNodePositionChanged(frameNumber, new Runnable() { // from class: com.android.internal.graphics.drawable.BackgroundBlurDrawable$1$$ExternalSyntheticLambda0
-                @Override // java.lang.Runnable
-                public final void run() {
-                    BackgroundBlurDrawable.AnonymousClass1.this.lambda$positionLost$3(showDebug, frameNumber);
-                }
-            });
+            BackgroundBlurDrawable.this.mAggregator.onRenderNodePositionChanged(
+                    frameNumber,
+                    new Runnable() { // from class:
+                                     // com.android.internal.graphics.drawable.BackgroundBlurDrawable$1$$ExternalSyntheticLambda0
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            BackgroundBlurDrawable.AnonymousClass1.this.lambda$positionLost$3(
+                                    showDebug, frameNumber);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$positionLost$3(final boolean showDebug, final long frameNumber) {
+        public /* synthetic */ void lambda$positionLost$3(
+                final boolean showDebug, final long frameNumber) {
             if (BackgroundBlurDrawable.DEBUG || showDebug) {
-                Log.i(BackgroundBlurDrawable.TAG, "positionLost$run fn=" + frameNumber + " dr=BackgroundBlurDrawable@" + BackgroundBlurDrawable.this.hashCode() + " rect=" + BackgroundBlurDrawable.this.mRect);
+                Log.i(
+                        BackgroundBlurDrawable.TAG,
+                        "positionLost$run fn="
+                                + frameNumber
+                                + " dr=BackgroundBlurDrawable@"
+                                + BackgroundBlurDrawable.this.hashCode()
+                                + " rect="
+                                + BackgroundBlurDrawable.this.mRect);
             }
-            BackgroundBlurDrawable.this.mHandler.post(new Runnable() { // from class: com.android.internal.graphics.drawable.BackgroundBlurDrawable$1$$ExternalSyntheticLambda3
-                @Override // java.lang.Runnable
-                public final void run() {
-                    BackgroundBlurDrawable.AnonymousClass1.this.lambda$positionLost$2(showDebug, frameNumber);
-                }
-            });
+            BackgroundBlurDrawable.this.mHandler.post(
+                    new Runnable() { // from class:
+                                     // com.android.internal.graphics.drawable.BackgroundBlurDrawable$1$$ExternalSyntheticLambda3
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            BackgroundBlurDrawable.AnonymousClass1.this.lambda$positionLost$2(
+                                    showDebug, frameNumber);
+                        }
+                    });
         }
 
         /* JADX INFO: Access modifiers changed from: private */
         public /* synthetic */ void lambda$positionLost$2(boolean showDebug, long frameNumber) {
             if (BackgroundBlurDrawable.DEBUG || showDebug) {
-                Log.i(BackgroundBlurDrawable.TAG, "positionLost$run#2 fn=" + frameNumber + " dr=BackgroundBlurDrawable@" + BackgroundBlurDrawable.this.hashCode() + " rect=" + BackgroundBlurDrawable.this.mRect);
+                Log.i(
+                        BackgroundBlurDrawable.TAG,
+                        "positionLost$run#2 fn="
+                                + frameNumber
+                                + " dr=BackgroundBlurDrawable@"
+                                + BackgroundBlurDrawable.this.hashCode()
+                                + " rect="
+                                + BackgroundBlurDrawable.this.mRect);
             }
             BackgroundBlurDrawable.this.invalidateSelf();
-            BackgroundBlurDrawable.this.mAggregator.onBlurDrawableUpdated(BackgroundBlurDrawable.this);
+            BackgroundBlurDrawable.this.mAggregator.onBlurDrawableUpdated(
+                    BackgroundBlurDrawable.this);
         }
     }
 
@@ -232,13 +318,36 @@ public final class BackgroundBlurDrawable extends Drawable {
     public void draw(Canvas canvas) {
         if (this.mRectPath.isEmpty() || !isVisible() || getAlpha() == 0) {
             if (this.mShowDebug) {
-                Log.i(TAG, "draw: BackgroundBlurDrawable@" + hashCode() + " bounds=" + getBounds() + ", mRectPath.isEmpty()=" + this.mRectPath.isEmpty() + " isVisible()=" + isVisible() + " getAlpha()=" + getAlpha() + " mAlpha=" + this.mAlpha + " return");
+                Log.i(
+                        TAG,
+                        "draw: BackgroundBlurDrawable@"
+                                + hashCode()
+                                + " bounds="
+                                + getBounds()
+                                + ", mRectPath.isEmpty()="
+                                + this.mRectPath.isEmpty()
+                                + " isVisible()="
+                                + isVisible()
+                                + " getAlpha()="
+                                + getAlpha()
+                                + " mAlpha="
+                                + this.mAlpha
+                                + " return");
             }
         } else {
             if (canvas.isHardwareAccelerated()) {
                 canvas.drawPath(this.mRectPath, this.mPaint);
                 if (this.mShowDebug) {
-                    Log.i(TAG, "draw: BackgroundBlurDrawable@" + hashCode() + " bounds=" + getBounds() + ", drawRenderNode w=" + this.mRenderNode.getWidth() + " h=" + this.mRenderNode.getHeight());
+                    Log.i(
+                            TAG,
+                            "draw: BackgroundBlurDrawable@"
+                                    + hashCode()
+                                    + " bounds="
+                                    + getBounds()
+                                    + ", drawRenderNode w="
+                                    + this.mRenderNode.getWidth()
+                                    + " h="
+                                    + this.mRenderNode.getHeight());
                 }
                 canvas.drawRenderNode(this.mRenderNode);
                 return;
@@ -255,11 +364,21 @@ public final class BackgroundBlurDrawable extends Drawable {
     public boolean setVisible(boolean visible, boolean restart) {
         boolean changed = super.setVisible(visible, restart);
         if (this.mShowDebug) {
-            Log.i(TAG, "setVisible: visible=" + visible + " BackgroundBlurDrawable@" + hashCode() + " Callers=" + Debug.getCallers(10));
+            Log.i(
+                    TAG,
+                    "setVisible: visible="
+                            + visible
+                            + " BackgroundBlurDrawable@"
+                            + hashCode()
+                            + " Callers="
+                            + Debug.getCallers(10));
         }
         if (changed) {
             this.mVisible = visible;
-            if (this.mIsTargetView && this.mVisible && getAlpha() != 0 && this.mRectPath.isEmpty()) {
+            if (this.mIsTargetView
+                    && this.mVisible
+                    && getAlpha() != 0
+                    && this.mRectPath.isEmpty()) {
                 Log.i(TAG, "setVisible: mRectPath is empty, need to call updatePath");
                 updatePath();
             }
@@ -272,9 +391,19 @@ public final class BackgroundBlurDrawable extends Drawable {
     public void setAlpha(int alpha) {
         if (this.mAlpha != alpha / 255.0f) {
             this.mAlpha = alpha / 255.0f;
-            if (this.mIsTargetView && getAlpha() != 0 && this.mVisible && this.mRectPath.isEmpty()) {
+            if (this.mIsTargetView
+                    && getAlpha() != 0
+                    && this.mVisible
+                    && this.mRectPath.isEmpty()) {
                 if (this.mShowDebug) {
-                    Log.i(TAG, "setAlpha: mRectPath is empty, need to call updatePath mAlpha=" + this.mAlpha + " BackgroundBlurDrawable@" + hashCode() + " Callers=" + Debug.getCallers(10));
+                    Log.i(
+                            TAG,
+                            "setAlpha: mRectPath is empty, need to call updatePath mAlpha="
+                                    + this.mAlpha
+                                    + " BackgroundBlurDrawable@"
+                                    + hashCode()
+                                    + " Callers="
+                                    + Debug.getCallers(10));
                 }
                 updatePath();
             }
@@ -303,8 +432,15 @@ public final class BackgroundBlurDrawable extends Drawable {
         setCornerRadius(cornerRadius, cornerRadius, cornerRadius, cornerRadius);
     }
 
-    public void setCornerRadius(float cornerRadiusTL, float cornerRadiusTR, float cornerRadiusBL, float cornerRadiusBR) {
-        if (this.mCornerRadiusTL != cornerRadiusTL || this.mCornerRadiusTR != cornerRadiusTR || this.mCornerRadiusBL != cornerRadiusBL || this.mCornerRadiusBR != cornerRadiusBR) {
+    public void setCornerRadius(
+            float cornerRadiusTL,
+            float cornerRadiusTR,
+            float cornerRadiusBL,
+            float cornerRadiusBR) {
+        if (this.mCornerRadiusTL != cornerRadiusTL
+                || this.mCornerRadiusTR != cornerRadiusTR
+                || this.mCornerRadiusBL != cornerRadiusBL
+                || this.mCornerRadiusBR != cornerRadiusBR) {
             this.mCornerRadiusTL = cornerRadiusTL;
             this.mCornerRadiusTR = cornerRadiusTR;
             this.mCornerRadiusBL = cornerRadiusBL;
@@ -319,7 +455,21 @@ public final class BackgroundBlurDrawable extends Drawable {
     public void setBounds(int left, int top, int right, int bottom) {
         super.setBounds(left, top, right, bottom);
         if (this.mShowDebug) {
-            Log.i(TAG, "setBounds: BackgroundBlurDrawable@" + hashCode() + " setPosition(" + left + ", " + top + ", " + right + ", " + bottom + NavigationBarInflaterView.KEY_CODE_END + " Callers=" + Debug.getCallers(10));
+            Log.i(
+                    TAG,
+                    "setBounds: BackgroundBlurDrawable@"
+                            + hashCode()
+                            + " setPosition("
+                            + left
+                            + ", "
+                            + top
+                            + ", "
+                            + right
+                            + ", "
+                            + bottom
+                            + NavigationBarInflaterView.KEY_CODE_END
+                            + " Callers="
+                            + Debug.getCallers(10));
         }
         this.mRenderNode.setPosition(left, top, right, bottom);
         updatePath();
@@ -351,7 +501,13 @@ public final class BackgroundBlurDrawable extends Drawable {
             return;
         }
         Rect bounds = getBounds();
-        this.mRectPath.addRoundRect(bounds.left, bounds.top, bounds.right, bounds.bottom, this.mTmpRadii, Path.Direction.CW);
+        this.mRectPath.addRoundRect(
+                bounds.left,
+                bounds.top,
+                bounds.right,
+                bounds.bottom,
+                this.mTmpRadii,
+                Path.Direction.CW);
     }
 
     @Override // android.graphics.drawable.Drawable
@@ -365,7 +521,26 @@ public final class BackgroundBlurDrawable extends Drawable {
     }
 
     public String toString() {
-        return "BackgroundBlurDrawable{@" + hashCode() + " blurRadius=" + this.mBlurRadius + ", corners={" + this.mCornerRadiusTL + "," + this.mCornerRadiusTR + "," + this.mCornerRadiusBL + "," + this.mCornerRadiusBR + "}, alpha=" + this.mAlpha + ", visible=" + this.mVisible + ", rect=" + this.mRect + (this.mColorCurve != null ? ", blurColorCurve=" + this.mColorCurve : "") + "}";
+        return "BackgroundBlurDrawable{@"
+                + hashCode()
+                + " blurRadius="
+                + this.mBlurRadius
+                + ", corners={"
+                + this.mCornerRadiusTL
+                + ","
+                + this.mCornerRadiusTR
+                + ","
+                + this.mCornerRadiusBL
+                + ","
+                + this.mCornerRadiusBR
+                + "}, alpha="
+                + this.mAlpha
+                + ", visible="
+                + this.mVisible
+                + ", rect="
+                + this.mRect
+                + (this.mColorCurve != null ? ", blurColorCurve=" + this.mColorCurve : "")
+                + "}";
     }
 
     public static final class Aggregator {
@@ -389,37 +564,69 @@ public final class BackgroundBlurDrawable extends Drawable {
 
         public BackgroundBlurDrawable createBackgroundBlurDrawable(Context context) {
             BackgroundBlurDrawable drawable = new BackgroundBlurDrawable(this);
-            drawable.setBlurRadius(context.getResources().getDimensionPixelSize(R.dimen.default_background_blur_radius));
+            drawable.setBlurRadius(
+                    context.getResources()
+                            .getDimensionPixelSize(R.dimen.default_background_blur_radius));
             return drawable;
         }
 
-        public BackgroundBlurDrawable createBackgroundBlurDrawable(Context context, boolean showDebug) {
+        public BackgroundBlurDrawable createBackgroundBlurDrawable(
+                Context context, boolean showDebug) {
             BackgroundBlurDrawable drawable = new BackgroundBlurDrawable(this, showDebug);
-            drawable.setBlurRadius(context.getResources().getDimensionPixelSize(R.dimen.default_background_blur_radius));
+            drawable.setBlurRadius(
+                    context.getResources()
+                            .getDimensionPixelSize(R.dimen.default_background_blur_radius));
             return drawable;
         }
 
         void onBlurDrawableUpdated(BackgroundBlurDrawable drawable) {
             boolean showDebug = false;
-            boolean shouldBeDrawn = drawable.mAlpha != 0.0f && drawable.mBlurRadius > 0 && drawable.mVisible;
+            boolean shouldBeDrawn =
+                    drawable.mAlpha != 0.0f && drawable.mBlurRadius > 0 && drawable.mVisible;
             boolean isDrawn = this.mDrawables.contains(drawable);
-            if (drawable.isShowDebug() && ((shouldBeDrawn && !isDrawn) || (!shouldBeDrawn && isDrawn))) {
+            if (drawable.isShowDebug()
+                    && ((shouldBeDrawn && !isDrawn) || (!shouldBeDrawn && isDrawn))) {
                 showDebug = true;
             }
             if (BackgroundBlurDrawable.DEBUG || showDebug) {
-                Log.i(BackgroundBlurDrawable.TAG, "onBlurDrawableUpdated BackgroundBlurDrawable@" + drawable.hashCode() + " rect=" + drawable.mRect + " bounds=" + drawable.getBounds() + ", renderNode w=" + drawable.mRenderNode.getWidth() + " h=" + drawable.mRenderNode.getHeight() + ", shouldBeDrawn=" + shouldBeDrawn + ", isDrawn=" + shouldBeDrawn + ", size=" + this.mDrawables.size() + ", visible=" + drawable.mVisible + ", Callers=" + Debug.getCallers(5));
+                Log.i(
+                        BackgroundBlurDrawable.TAG,
+                        "onBlurDrawableUpdated BackgroundBlurDrawable@"
+                                + drawable.hashCode()
+                                + " rect="
+                                + drawable.mRect
+                                + " bounds="
+                                + drawable.getBounds()
+                                + ", renderNode w="
+                                + drawable.mRenderNode.getWidth()
+                                + " h="
+                                + drawable.mRenderNode.getHeight()
+                                + ", shouldBeDrawn="
+                                + shouldBeDrawn
+                                + ", isDrawn="
+                                + shouldBeDrawn
+                                + ", size="
+                                + this.mDrawables.size()
+                                + ", visible="
+                                + drawable.mVisible
+                                + ", Callers="
+                                + Debug.getCallers(5));
             }
             if (shouldBeDrawn) {
                 this.mHasUiUpdates = true;
                 if (!isDrawn) {
                     this.mDrawables.add(drawable);
                     if (showDebug) {
-                        Log.i(BackgroundBlurDrawable.TAG, "Add BackgroundBlurDrawable@" + drawable.hashCode());
+                        Log.i(
+                                BackgroundBlurDrawable.TAG,
+                                "Add BackgroundBlurDrawable@" + drawable.hashCode());
                     } else if (BackgroundBlurDrawable.DEBUG) {
                         Log.d(BackgroundBlurDrawable.TAG, "Add " + drawable);
                     }
                 } else if (showDebug) {
-                    Log.i(BackgroundBlurDrawable.TAG, "Update BackgroundBlurDrawable@" + drawable.hashCode());
+                    Log.i(
+                            BackgroundBlurDrawable.TAG,
+                            "Update BackgroundBlurDrawable@" + drawable.hashCode());
                 } else if (BackgroundBlurDrawable.DEBUG) {
                     Log.d(BackgroundBlurDrawable.TAG, "Update " + drawable);
                 }
@@ -427,12 +634,17 @@ public final class BackgroundBlurDrawable extends Drawable {
                 this.mHasUiUpdates = true;
                 this.mDrawables.remove(drawable);
                 if (showDebug) {
-                    Log.i(BackgroundBlurDrawable.TAG, "Remove BackgroundBlurDrawable@" + drawable.hashCode());
+                    Log.i(
+                            BackgroundBlurDrawable.TAG,
+                            "Remove BackgroundBlurDrawable@" + drawable.hashCode());
                 } else if (BackgroundBlurDrawable.DEBUG) {
                     Log.d(BackgroundBlurDrawable.TAG, "Remove " + drawable);
                 }
             }
-            if (this.mOnPreDrawListener == null && this.mViewRoot != null && this.mViewRoot.getView() != null && hasRegions()) {
+            if (this.mOnPreDrawListener == null
+                    && this.mViewRoot != null
+                    && this.mViewRoot.getView() != null
+                    && hasRegions()) {
                 if (showDebug) {
                     Log.i(BackgroundBlurDrawable.TAG, "registerPreDrawListener");
                 }
@@ -441,15 +653,23 @@ public final class BackgroundBlurDrawable extends Drawable {
         }
 
         private void registerPreDrawListener(final boolean showDebug) {
-            this.mOnPreDrawListener = new ViewTreeObserver.OnPreDrawListener() { // from class: com.android.internal.graphics.drawable.BackgroundBlurDrawable$Aggregator$$ExternalSyntheticLambda2
-                @Override // android.view.ViewTreeObserver.OnPreDrawListener
-                public final boolean onPreDraw() {
-                    boolean lambda$registerPreDrawListener$1;
-                    lambda$registerPreDrawListener$1 = BackgroundBlurDrawable.Aggregator.this.lambda$registerPreDrawListener$1(showDebug);
-                    return lambda$registerPreDrawListener$1;
-                }
-            };
-            this.mViewRoot.getView().getViewTreeObserver().addOnPreDrawListener(this.mOnPreDrawListener);
+            this.mOnPreDrawListener =
+                    new ViewTreeObserver
+                            .OnPreDrawListener() { // from class:
+                                                   // com.android.internal.graphics.drawable.BackgroundBlurDrawable$Aggregator$$ExternalSyntheticLambda2
+                        @Override // android.view.ViewTreeObserver.OnPreDrawListener
+                        public final boolean onPreDraw() {
+                            boolean lambda$registerPreDrawListener$1;
+                            lambda$registerPreDrawListener$1 =
+                                    BackgroundBlurDrawable.Aggregator.this
+                                            .lambda$registerPreDrawListener$1(showDebug);
+                            return lambda$registerPreDrawListener$1;
+                        }
+                    };
+            this.mViewRoot
+                    .getView()
+                    .getViewTreeObserver()
+                    .addOnPreDrawListener(this.mOnPreDrawListener);
         }
 
         /* JADX INFO: Access modifiers changed from: private */
@@ -457,15 +677,23 @@ public final class BackgroundBlurDrawable extends Drawable {
             final boolean hasUiUpdates = hasUpdates();
             if (hasUiUpdates || hasRegions()) {
                 final BlurRegion[] blurRegionsForNextFrame = getBlurRegionsCopyForRT();
-                this.mViewRoot.registerRtFrameCallback(new HardwareRenderer.FrameDrawingCallback() { // from class: com.android.internal.graphics.drawable.BackgroundBlurDrawable$Aggregator$$ExternalSyntheticLambda1
-                    @Override // android.graphics.HardwareRenderer.FrameDrawingCallback
-                    public final void onFrameDraw(long j) {
-                        BackgroundBlurDrawable.Aggregator.this.lambda$registerPreDrawListener$0(blurRegionsForNextFrame, hasUiUpdates, j);
-                    }
-                });
+                this.mViewRoot.registerRtFrameCallback(
+                        new HardwareRenderer
+                                .FrameDrawingCallback() { // from class:
+                                                          // com.android.internal.graphics.drawable.BackgroundBlurDrawable$Aggregator$$ExternalSyntheticLambda1
+                            @Override // android.graphics.HardwareRenderer.FrameDrawingCallback
+                            public final void onFrameDraw(long j) {
+                                BackgroundBlurDrawable.Aggregator.this
+                                        .lambda$registerPreDrawListener$0(
+                                                blurRegionsForNextFrame, hasUiUpdates, j);
+                            }
+                        });
             }
             if (!hasRegions() && this.mViewRoot.getView() != null) {
-                this.mViewRoot.getView().getViewTreeObserver().removeOnPreDrawListener(this.mOnPreDrawListener);
+                this.mViewRoot
+                        .getView()
+                        .getViewTreeObserver()
+                        .removeOnPreDrawListener(this.mOnPreDrawListener);
                 this.mOnPreDrawListener = null;
                 if (debug) {
                     Log.i(BackgroundBlurDrawable.TAG, "removeOnPreDrawListener");
@@ -477,7 +705,8 @@ public final class BackgroundBlurDrawable extends Drawable {
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$registerPreDrawListener$0(BlurRegion[] blurRegionsForNextFrame, boolean hasUiUpdates, long frame) {
+        public /* synthetic */ void lambda$registerPreDrawListener$0(
+                BlurRegion[] blurRegionsForNextFrame, boolean hasUiUpdates, long frame) {
             synchronized (this.mRtLock) {
                 this.mLastFrameNumber = frame;
                 this.mLastFrameBlurRegions = blurRegionsForNextFrame;
@@ -494,7 +723,8 @@ public final class BackgroundBlurDrawable extends Drawable {
                 }
                 frameRtUpdates.add(update);
                 if (this.mLastFrameNumber == frameNumber) {
-                    handleDispatchBlurTransactionLocked(frameNumber, this.mLastFrameBlurRegions, true);
+                    handleDispatchBlurTransactionLocked(
+                            frameNumber, this.mLastFrameBlurRegions, true);
                 }
             }
         }
@@ -521,15 +751,26 @@ public final class BackgroundBlurDrawable extends Drawable {
                     this.mTmpBlurRegionsForFrame[i] = new BlurRegion(itr.next());
                 }
                 if (CoreRune.FW_STACKED_BLUR_SUPPORTED) {
-                    Arrays.sort(this.mTmpBlurRegionsForFrame, new Comparator() { // from class: com.android.internal.graphics.drawable.BackgroundBlurDrawable$Aggregator$$ExternalSyntheticLambda0
-                        @Override // java.util.Comparator
-                        public final int compare(Object obj, Object obj2) {
-                            return BackgroundBlurDrawable.Aggregator.lambda$getBlurRegionsCopyForRT$2((BackgroundBlurDrawable.BlurRegion) obj, (BackgroundBlurDrawable.BlurRegion) obj2);
-                        }
-                    });
+                    Arrays.sort(
+                            this.mTmpBlurRegionsForFrame,
+                            new Comparator() { // from class:
+                                               // com.android.internal.graphics.drawable.BackgroundBlurDrawable$Aggregator$$ExternalSyntheticLambda0
+                                @Override // java.util.Comparator
+                                public final int compare(Object obj, Object obj2) {
+                                    return BackgroundBlurDrawable.Aggregator
+                                            .lambda$getBlurRegionsCopyForRT$2(
+                                                    (BackgroundBlurDrawable.BlurRegion) obj,
+                                                    (BackgroundBlurDrawable.BlurRegion) obj2);
+                                }
+                            });
                     if (BackgroundBlurDrawable.DEBUG) {
                         for (int i2 = 0; i2 < this.mDrawables.size(); i2++) {
-                            Log.d(BackgroundBlurDrawable.TAG, "getBlurRegionsCopyForRT_" + i2 + ", " + this.mTmpBlurRegionsForFrame[i2]);
+                            Log.d(
+                                    BackgroundBlurDrawable.TAG,
+                                    "getBlurRegionsCopyForRT_"
+                                            + i2
+                                            + ", "
+                                            + this.mTmpBlurRegionsForFrame[i2]);
                         }
                     }
                 }
@@ -538,15 +779,20 @@ public final class BackgroundBlurDrawable extends Drawable {
             return this.mTmpBlurRegionsForFrame;
         }
 
-        static /* synthetic */ int lambda$getBlurRegionsCopyForRT$2(BlurRegion br0, BlurRegion br1) {
+        static /* synthetic */ int lambda$getBlurRegionsCopyForRT$2(
+                BlurRegion br0, BlurRegion br1) {
             return br0.mTranslationZ - br1.mTranslationZ;
         }
 
-        public float[][] getBlurRegionsForFrameLocked(long frameNumber, BlurRegion[] blurRegionsForFrame, boolean forceUpdate) {
-            if (!forceUpdate && (this.mFrameRtUpdates.size() == 0 || this.mFrameRtUpdates.keyAt(0) > frameNumber)) {
+        public float[][] getBlurRegionsForFrameLocked(
+                long frameNumber, BlurRegion[] blurRegionsForFrame, boolean forceUpdate) {
+            if (!forceUpdate
+                    && (this.mFrameRtUpdates.size() == 0
+                            || this.mFrameRtUpdates.keyAt(0) > frameNumber)) {
                 return null;
             }
-            while (this.mFrameRtUpdates.size() != 0 && this.mFrameRtUpdates.keyAt(0) <= frameNumber) {
+            while (this.mFrameRtUpdates.size() != 0
+                    && this.mFrameRtUpdates.keyAt(0) <= frameNumber) {
                 ArraySet<Runnable> frameUpdates = this.mFrameRtUpdates.valueAt(0);
                 this.mFrameRtUpdates.removeAt(0);
                 for (int i = 0; i < frameUpdates.size(); i++) {
@@ -554,7 +800,9 @@ public final class BackgroundBlurDrawable extends Drawable {
                 }
             }
             if (BackgroundBlurDrawable.DEBUG) {
-                Log.d(BackgroundBlurDrawable.TAG, "Dispatching " + blurRegionsForFrame.length + " blur regions:");
+                Log.d(
+                        BackgroundBlurDrawable.TAG,
+                        "Dispatching " + blurRegionsForFrame.length + " blur regions:");
             }
             float[][] blurRegionsArray = new float[blurRegionsForFrame.length][];
             for (int i2 = 0; i2 < blurRegionsArray.length; i2++) {
@@ -566,8 +814,10 @@ public final class BackgroundBlurDrawable extends Drawable {
             return blurRegionsArray;
         }
 
-        private void handleDispatchBlurTransactionLocked(long frameNumber, BlurRegion[] blurRegions, boolean forceUpdate) {
-            float[][] blurRegionsArray = getBlurRegionsForFrameLocked(frameNumber, blurRegions, forceUpdate);
+        private void handleDispatchBlurTransactionLocked(
+                long frameNumber, BlurRegion[] blurRegions, boolean forceUpdate) {
+            float[][] blurRegionsArray =
+                    getBlurRegionsForFrameLocked(frameNumber, blurRegions, forceUpdate);
             if (blurRegionsArray != null && this.mViewRoot != null) {
                 this.mViewRoot.dispatchBlurRegions(blurRegionsArray, frameNumber);
             }
@@ -609,7 +859,14 @@ public final class BackgroundBlurDrawable extends Drawable {
                 }
             }
             if (BackgroundBlurDrawable.DEBUG) {
-                Log.d("BackgroundBlurDrawable", "scale : " + scaleValue + ",translationZ : " + translationZ + ", " + drawable);
+                Log.d(
+                        "BackgroundBlurDrawable",
+                        "scale : "
+                                + scaleValue
+                                + ",translationZ : "
+                                + translationZ
+                                + ", "
+                                + drawable);
             }
             this.mTranslationZ = (int) translationZ;
             this.cornerRadiusTL = drawable.mCornerRadiusTL * scaleValue;
@@ -620,7 +877,9 @@ public final class BackgroundBlurDrawable extends Drawable {
             this.colorCurve = drawable.mColorCurve;
             this.showDebug = drawable.isShowDebug();
             if (this.showDebug) {
-                Log.i(BackgroundBlurDrawable.TAG, "BlurRegion@" + hashCode() + " drawable=" + drawable);
+                Log.i(
+                        BackgroundBlurDrawable.TAG,
+                        "BlurRegion@" + hashCode() + " drawable=" + drawable);
             }
         }
 
@@ -646,13 +905,34 @@ public final class BackgroundBlurDrawable extends Drawable {
                 floatArray[15] = this.colorCurve.mSaturation;
             }
             if (this.showDebug) {
-                Log.i(BackgroundBlurDrawable.TAG, "toFloatArray: BlurRegion@" + hashCode() + " rect=" + this.rect);
+                Log.i(
+                        BackgroundBlurDrawable.TAG,
+                        "toFloatArray: BlurRegion@" + hashCode() + " rect=" + this.rect);
             }
             return floatArray;
         }
 
         public String toString() {
-            return "BlurRegion{@" + hashCode() + " blurRadius=" + this.blurRadius + ", corners={" + this.cornerRadiusTL + "," + this.cornerRadiusTR + "," + this.cornerRadiusBL + "," + this.cornerRadiusBR + "}, alpha=" + this.alpha + ", rect=" + this.rect + ", mTranslationZ=" + this.mTranslationZ + (this.colorCurve != null ? ", blurColorCurve=" + this.colorCurve : "") + "}";
+            return "BlurRegion{@"
+                    + hashCode()
+                    + " blurRadius="
+                    + this.blurRadius
+                    + ", corners={"
+                    + this.cornerRadiusTL
+                    + ","
+                    + this.cornerRadiusTR
+                    + ","
+                    + this.cornerRadiusBL
+                    + ","
+                    + this.cornerRadiusBR
+                    + "}, alpha="
+                    + this.alpha
+                    + ", rect="
+                    + this.rect
+                    + ", mTranslationZ="
+                    + this.mTranslationZ
+                    + (this.colorCurve != null ? ", blurColorCurve=" + this.colorCurve : "")
+                    + "}";
         }
     }
 }

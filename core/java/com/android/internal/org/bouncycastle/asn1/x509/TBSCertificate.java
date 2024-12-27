@@ -12,6 +12,7 @@ import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 import com.android.internal.org.bouncycastle.asn1.x500.X500Name;
 import com.android.internal.org.bouncycastle.util.BigIntegers;
 import com.android.internal.org.bouncycastle.util.Properties;
+
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
@@ -84,12 +85,14 @@ public class TBSCertificate extends ASN1Object {
                     break;
                 case 3:
                     if (isV2) {
-                        throw new IllegalArgumentException("version 2 certificate cannot contain extensions");
+                        throw new IllegalArgumentException(
+                                "version 2 certificate cannot contain extensions");
                     }
                     this.extensions = Extensions.getInstance(ASN1Sequence.getInstance(extra, true));
                     break;
                 default:
-                    throw new IllegalArgumentException("Unknown tag encountered in structure: " + extra.getTagNo());
+                    throw new IllegalArgumentException(
+                            "Unknown tag encountered in structure: " + extra.getTagNo());
             }
             extras--;
         }
@@ -143,10 +146,14 @@ public class TBSCertificate extends ASN1Object {
         return this.extensions;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
-        if (Properties.getPropertyValue("com.android.internal.org.bouncycastle.x509.allow_non-der_tbscert") != null) {
-            if (Properties.isOverrideSet("com.android.internal.org.bouncycastle.x509.allow_non-der_tbscert")) {
+        if (Properties.getPropertyValue(
+                        "com.android.internal.org.bouncycastle.x509.allow_non-der_tbscert")
+                != null) {
+            if (Properties.isOverrideSet(
+                    "com.android.internal.org.bouncycastle.x509.allow_non-der_tbscert")) {
                 return this.seq;
             }
             ASN1EncodableVector v = new ASN1EncodableVector();

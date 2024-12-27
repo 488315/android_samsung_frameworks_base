@@ -10,8 +10,7 @@ final class CallerVerifier {
     private static final String SUBTAG = "[CallPolicy] ";
     private static final CallerAllowList mAllowList = new CallerAllowList();
 
-    CallerVerifier() {
-    }
+    CallerVerifier() {}
 
     final boolean wasCallerValid() {
         StackTraceElement callFrame = extractCaller();
@@ -21,10 +20,16 @@ final class CallerVerifier {
         }
         String cannonCallerName = mountFrameCannonName(callFrame);
         if (!mAllowList.contains(cannonCallerName)) {
-            DsmsLog.e("[CallPolicy] DENY callerName [" + cannonCallerName + NavigationBarInflaterView.SIZE_MOD_END);
+            DsmsLog.e(
+                    "[CallPolicy] DENY callerName ["
+                            + cannonCallerName
+                            + NavigationBarInflaterView.SIZE_MOD_END);
             return false;
         }
-        DsmsLog.d("[CallPolicy] ALLOW callerName [" + cannonCallerName + NavigationBarInflaterView.SIZE_MOD_END);
+        DsmsLog.d(
+                "[CallPolicy] ALLOW callerName ["
+                        + cannonCallerName
+                        + NavigationBarInflaterView.SIZE_MOD_END);
         return true;
     }
 
@@ -44,11 +49,20 @@ final class CallerVerifier {
     }
 
     private static Integer findBaseIndex(StackTraceElement[] frames) {
-        DsmsLog.d(SUBTAG + String.format("Frames length Inside: %d", Integer.valueOf(frames.length)));
+        DsmsLog.d(
+                SUBTAG + String.format("Frames length Inside: %d", Integer.valueOf(frames.length)));
         for (int index = 0; index < frames.length; index++) {
             StackTraceElement frame = frames[index];
-            DsmsLog.d(SUBTAG + String.format("Frame#%d/%d: %s %s", Integer.valueOf(index), Integer.valueOf(frames.length), frame.getClassName(), frame.getMethodName()));
-            if (BASE_CLASS.equals(frame.getClassName()) && BASE_METHOD.equals(frame.getMethodName())) {
+            DsmsLog.d(
+                    SUBTAG
+                            + String.format(
+                                    "Frame#%d/%d: %s %s",
+                                    Integer.valueOf(index),
+                                    Integer.valueOf(frames.length),
+                                    frame.getClassName(),
+                                    frame.getMethodName()));
+            if (BASE_CLASS.equals(frame.getClassName())
+                    && BASE_METHOD.equals(frame.getMethodName())) {
                 return Integer.valueOf(index);
             }
         }

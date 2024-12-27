@@ -31,14 +31,16 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.IWindow;
 import android.view.SurfaceControl;
-import android.view.accessibility.AccessibilityManager;
-import android.view.accessibility.IAccessibilityManager;
-import android.view.accessibility.IAccessibilityManagerClient;
+
 import com.android.internal.R;
 import com.android.internal.util.IntPair;
+
 import com.samsung.android.sepunion.ISemExclusiveTaskManager;
 import com.samsung.android.sepunion.SemUnionManager;
 import com.samsung.android.sepunion.UnionConstants;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -48,11 +50,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Executor;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes4.dex */
 public final class AccessibilityManager {
-    public static final String ACTION_CHOOSE_ACCESSIBILITY_BUTTON = "com.android.internal.intent.action.CHOOSE_ACCESSIBILITY_BUTTON";
+    public static final String ACTION_CHOOSE_ACCESSIBILITY_BUTTON =
+            "com.android.internal.intent.action.CHOOSE_ACCESSIBILITY_BUTTON";
     public static final int AUTOCLICK_DELAY_DEFAULT = 600;
     public static final int AUTO_ACTION_DELAY_DEFAULT = 600;
     public static final int AUTO_ACTION_TYPE_DEFAULT = 0;
@@ -120,25 +122,33 @@ public final class AccessibilityManager {
     int mRelevantEventTypes = -1;
     int mAccessibilityTracingState = 0;
     private int mPerformingAction = 0;
-    private final ArrayMap<AccessibilityStateChangeListener, Handler> mAccessibilityStateChangeListeners = new ArrayMap<>();
-    private final ArrayMap<TouchExplorationStateChangeListener, Handler> mTouchExplorationStateChangeListeners = new ArrayMap<>();
-    private final ArrayMap<HighTextContrastChangeListener, Handler> mHighTextContrastStateChangeListeners = new ArrayMap<>();
-    private final ArrayMap<AccessibilityServicesStateChangeListener, Executor> mServicesStateChangeListeners = new ArrayMap<>();
-    private final ArrayMap<AudioDescriptionRequestedChangeListener, Executor> mAudioDescriptionRequestedChangeListeners = new ArrayMap<>();
+    private final ArrayMap<AccessibilityStateChangeListener, Handler>
+            mAccessibilityStateChangeListeners = new ArrayMap<>();
+    private final ArrayMap<TouchExplorationStateChangeListener, Handler>
+            mTouchExplorationStateChangeListeners = new ArrayMap<>();
+    private final ArrayMap<HighTextContrastChangeListener, Handler>
+            mHighTextContrastStateChangeListeners = new ArrayMap<>();
+    private final ArrayMap<AccessibilityServicesStateChangeListener, Executor>
+            mServicesStateChangeListeners = new ArrayMap<>();
+    private final ArrayMap<AudioDescriptionRequestedChangeListener, Executor>
+            mAudioDescriptionRequestedChangeListeners = new ArrayMap<>();
     private final Binder mBinder = new Binder();
     private final IAccessibilityManagerClient.Stub mClient = new AnonymousClass1();
     final Handler.Callback mCallback = new MyCallback();
 
     public interface AccessibilityPolicy {
-        List<AccessibilityServiceInfo> getEnabledAccessibilityServiceList(int i, List<AccessibilityServiceInfo> list);
+        List<AccessibilityServiceInfo> getEnabledAccessibilityServiceList(
+                int i, List<AccessibilityServiceInfo> list);
 
-        List<AccessibilityServiceInfo> getInstalledAccessibilityServiceList(List<AccessibilityServiceInfo> list);
+        List<AccessibilityServiceInfo> getInstalledAccessibilityServiceList(
+                List<AccessibilityServiceInfo> list);
 
         int getRelevantEventTypes(int i);
 
         boolean isEnabled(boolean z);
 
-        AccessibilityEvent onAccessibilityEvent(AccessibilityEvent accessibilityEvent, boolean z, int i);
+        AccessibilityEvent onAccessibilityEvent(
+                AccessibilityEvent accessibilityEvent, boolean z, int i);
     }
 
     public interface AccessibilityServicesStateChangeListener {
@@ -154,20 +164,17 @@ public final class AccessibilityManager {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ContentFlag {
-    }
+    public @interface ContentFlag {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface FlashNotificationReason {
-    }
+    public @interface FlashNotificationReason {}
 
     public interface HighTextContrastChangeListener {
         void onHighTextContrastStateChanged(boolean z);
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SemFlashNotificationReason {
-    }
+    public @interface SemFlashNotificationReason {}
 
     public interface TouchExplorationStateChangeListener {
         void onTouchExplorationStateChanged(boolean z);
@@ -175,8 +182,7 @@ public final class AccessibilityManager {
 
     /* renamed from: android.view.accessibility.AccessibilityManager$1, reason: invalid class name */
     class AnonymousClass1 extends IAccessibilityManagerClient.Stub {
-        AnonymousClass1() {
-        }
+        AnonymousClass1() {}
 
         @Override // android.view.accessibility.IAccessibilityManagerClient
         public void setState(int state) {
@@ -190,22 +196,33 @@ public final class AccessibilityManager {
                 if (AccessibilityManager.this.mServicesStateChangeListeners.isEmpty()) {
                     return;
                 }
-                ArrayMap<AccessibilityServicesStateChangeListener, Executor> listeners = new ArrayMap<>((ArrayMap<AccessibilityServicesStateChangeListener, Executor>) AccessibilityManager.this.mServicesStateChangeListeners);
+                ArrayMap<AccessibilityServicesStateChangeListener, Executor> listeners =
+                        new ArrayMap<>(
+                                (ArrayMap<AccessibilityServicesStateChangeListener, Executor>)
+                                        AccessibilityManager.this.mServicesStateChangeListeners);
                 int numListeners = listeners.size();
                 for (int i = 0; i < numListeners; i++) {
-                    final AccessibilityServicesStateChangeListener listener = (AccessibilityServicesStateChangeListener) AccessibilityManager.this.mServicesStateChangeListeners.keyAt(i);
-                    ((Executor) AccessibilityManager.this.mServicesStateChangeListeners.valueAt(i)).execute(new Runnable() { // from class: android.view.accessibility.AccessibilityManager$1$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            AccessibilityManager.AnonymousClass1.this.lambda$notifyServicesStateChanged$0(listener);
-                        }
-                    });
+                    final AccessibilityServicesStateChangeListener listener =
+                            (AccessibilityServicesStateChangeListener)
+                                    AccessibilityManager.this.mServicesStateChangeListeners.keyAt(
+                                            i);
+                    ((Executor) AccessibilityManager.this.mServicesStateChangeListeners.valueAt(i))
+                            .execute(
+                                    new Runnable() { // from class:
+                                                     // android.view.accessibility.AccessibilityManager$1$$ExternalSyntheticLambda0
+                                        @Override // java.lang.Runnable
+                                        public final void run() {
+                                            AccessibilityManager.AnonymousClass1.this
+                                                    .lambda$notifyServicesStateChanged$0(listener);
+                                        }
+                                    });
                 }
             }
         }
 
         /* JADX INFO: Access modifiers changed from: private */
-        public /* synthetic */ void lambda$notifyServicesStateChanged$0(AccessibilityServicesStateChangeListener listener) {
+        public /* synthetic */ void lambda$notifyServicesStateChanged$0(
+                AccessibilityServicesStateChangeListener listener) {
             listener.onAccessibilityServicesStateChanged(AccessibilityManager.this);
         }
 
@@ -226,7 +243,13 @@ public final class AccessibilityManager {
         int userId;
         synchronized (sInstanceSync) {
             if (sInstance == null) {
-                if (Binder.getCallingUid() != 1000 && context.checkCallingOrSelfPermission(Manifest.permission.INTERACT_ACROSS_USERS) != 0 && context.checkCallingOrSelfPermission(Manifest.permission.INTERACT_ACROSS_USERS_FULL) != 0) {
+                if (Binder.getCallingUid() != 1000
+                        && context.checkCallingOrSelfPermission(
+                                        Manifest.permission.INTERACT_ACROSS_USERS)
+                                != 0
+                        && context.checkCallingOrSelfPermission(
+                                        Manifest.permission.INTERACT_ACROSS_USERS_FULL)
+                                != 0) {
                     userId = context.getUserId();
                     sInstance = new AccessibilityManager(context, null, userId);
                 }
@@ -246,7 +269,12 @@ public final class AccessibilityManager {
         }
     }
 
-    public AccessibilityManager(Context context, Handler handler, IAccessibilityManager service, int userId, boolean serviceConnect) {
+    public AccessibilityManager(
+            Context context,
+            Handler handler,
+            IAccessibilityManager service,
+            int userId,
+            boolean serviceConnect) {
         this.mHandler = handler;
         this.mUserId = userId;
         synchronized (this.mLock) {
@@ -283,7 +311,11 @@ public final class AccessibilityManager {
     public boolean isEnabled() {
         boolean z;
         synchronized (this.mLock) {
-            z = this.mIsEnabled || hasAnyDirectConnection() || (this.mAccessibilityPolicy != null && this.mAccessibilityPolicy.isEnabled(this.mIsEnabled));
+            z =
+                    this.mIsEnabled
+                            || hasAnyDirectConnection()
+                            || (this.mAccessibilityPolicy != null
+                                    && this.mAccessibilityPolicy.isEnabled(this.mIsEnabled));
         }
         return z;
     }
@@ -313,13 +345,13 @@ public final class AccessibilityManager {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:41:0x009e, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:53:0x009b, code lost:
-    
-        if (r8 == r2) goto L38;
-     */
+
+       if (r8 == r2) goto L38;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -421,7 +453,9 @@ public final class AccessibilityManager {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> La8
             throw r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.view.accessibility.AccessibilityManager.sendAccessibilityEvent(android.view.accessibility.AccessibilityEvent):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " android.view.accessibility.AccessibilityManager.sendAccessibilityEvent(android.view.accessibility.AccessibilityEvent):void");
     }
 
     public void interrupt() {
@@ -433,7 +467,8 @@ public final class AccessibilityManager {
             if (!isEnabled()) {
                 Looper myLooper = Looper.myLooper();
                 if (myLooper == Looper.getMainLooper()) {
-                    throw new IllegalStateException("Accessibility off. Did you forget to check that?");
+                    throw new IllegalStateException(
+                            "Accessibility off. Did you forget to check that?");
                 }
                 Log.e(LOG_TAG, "Interrupt called with accessibility disabled");
                 return;
@@ -482,7 +517,8 @@ public final class AccessibilityManager {
         }
     }
 
-    public List<AccessibilityServiceInfo> getEnabledAccessibilityServiceList(int feedbackTypeFlags) {
+    public List<AccessibilityServiceInfo> getEnabledAccessibilityServiceList(
+            int feedbackTypeFlags) {
         synchronized (this.mLock) {
             IAccessibilityManager service = getServiceLocked();
             if (service == null) {
@@ -496,7 +532,9 @@ public final class AccessibilityManager {
                 Log.e(LOG_TAG, "Error while obtaining the enabled AccessibilityServices. ", re);
             }
             if (this.mAccessibilityPolicy != null) {
-                services = this.mAccessibilityPolicy.getEnabledAccessibilityServiceList(feedbackTypeFlags, services);
+                services =
+                        this.mAccessibilityPolicy.getEnabledAccessibilityServiceList(
+                                feedbackTypeFlags, services);
             }
             if (services != null) {
                 return Collections.unmodifiableList(services);
@@ -525,13 +563,16 @@ public final class AccessibilityManager {
         return true;
     }
 
-    public void addAccessibilityStateChangeListener(AccessibilityStateChangeListener listener, Handler handler) {
+    public void addAccessibilityStateChangeListener(
+            AccessibilityStateChangeListener listener, Handler handler) {
         synchronized (this.mLock) {
-            this.mAccessibilityStateChangeListeners.put(listener, handler == null ? this.mHandler : handler);
+            this.mAccessibilityStateChangeListeners.put(
+                    listener, handler == null ? this.mHandler : handler);
         }
     }
 
-    public boolean removeAccessibilityStateChangeListener(AccessibilityStateChangeListener listener) {
+    public boolean removeAccessibilityStateChangeListener(
+            AccessibilityStateChangeListener listener) {
         boolean z;
         synchronized (this.mLock) {
             int index = this.mAccessibilityStateChangeListeners.indexOfKey(listener);
@@ -541,18 +582,22 @@ public final class AccessibilityManager {
         return z;
     }
 
-    public boolean addTouchExplorationStateChangeListener(TouchExplorationStateChangeListener listener) {
+    public boolean addTouchExplorationStateChangeListener(
+            TouchExplorationStateChangeListener listener) {
         addTouchExplorationStateChangeListener(listener, null);
         return true;
     }
 
-    public void addTouchExplorationStateChangeListener(TouchExplorationStateChangeListener listener, Handler handler) {
+    public void addTouchExplorationStateChangeListener(
+            TouchExplorationStateChangeListener listener, Handler handler) {
         synchronized (this.mLock) {
-            this.mTouchExplorationStateChangeListeners.put(listener, handler == null ? this.mHandler : handler);
+            this.mTouchExplorationStateChangeListeners.put(
+                    listener, handler == null ? this.mHandler : handler);
         }
     }
 
-    public boolean removeTouchExplorationStateChangeListener(TouchExplorationStateChangeListener listener) {
+    public boolean removeTouchExplorationStateChangeListener(
+            TouchExplorationStateChangeListener listener) {
         boolean z;
         synchronized (this.mLock) {
             int index = this.mTouchExplorationStateChangeListeners.indexOfKey(listener);
@@ -562,17 +607,20 @@ public final class AccessibilityManager {
         return z;
     }
 
-    public void addAccessibilityServicesStateChangeListener(Executor executor, AccessibilityServicesStateChangeListener listener) {
+    public void addAccessibilityServicesStateChangeListener(
+            Executor executor, AccessibilityServicesStateChangeListener listener) {
         synchronized (this.mLock) {
             this.mServicesStateChangeListeners.put(listener, executor);
         }
     }
 
-    public void addAccessibilityServicesStateChangeListener(AccessibilityServicesStateChangeListener listener) {
+    public void addAccessibilityServicesStateChangeListener(
+            AccessibilityServicesStateChangeListener listener) {
         addAccessibilityServicesStateChangeListener(new HandlerExecutor(this.mHandler), listener);
     }
 
-    public boolean removeAccessibilityServicesStateChangeListener(AccessibilityServicesStateChangeListener listener) {
+    public boolean removeAccessibilityServicesStateChangeListener(
+            AccessibilityServicesStateChangeListener listener) {
         boolean z;
         synchronized (this.mLock) {
             z = this.mServicesStateChangeListeners.remove(listener) != null;
@@ -604,7 +652,11 @@ public final class AccessibilityManager {
     public void removeAccessibilityRequestPreparer(AccessibilityRequestPreparer preparer) {
         int viewId;
         List<AccessibilityRequestPreparer> requestPreparerList;
-        if (this.mRequestPreparerLists != null && (requestPreparerList = this.mRequestPreparerLists.get((viewId = preparer.getAccessibilityViewId()))) != null) {
+        if (this.mRequestPreparerLists != null
+                && (requestPreparerList =
+                                this.mRequestPreparerLists.get(
+                                        (viewId = preparer.getAccessibilityViewId())))
+                        != null) {
             requestPreparerList.remove(preparer);
             if (requestPreparerList.isEmpty()) {
                 this.mRequestPreparerLists.remove(viewId);
@@ -614,7 +666,8 @@ public final class AccessibilityManager {
 
     public int getRecommendedTimeoutMillis(int originalTimeout, int uiContentFlags) {
         boolean hasControls = (uiContentFlags & 4) != 0;
-        boolean hasIconsOrText = ((uiContentFlags & 1) == 0 && (uiContentFlags & 2) == 0) ? false : true;
+        boolean hasIconsOrText =
+                ((uiContentFlags & 1) == 0 && (uiContentFlags & 2) == 0) ? false : true;
         int recommendedTimeout = originalTimeout;
         if (hasControls) {
             recommendedTimeout = Math.max(recommendedTimeout, this.mInteractiveUiTimeout);
@@ -718,9 +771,11 @@ public final class AccessibilityManager {
         return this.mPerformingAction;
     }
 
-    public void addHighTextContrastStateChangeListener(HighTextContrastChangeListener listener, Handler handler) {
+    public void addHighTextContrastStateChangeListener(
+            HighTextContrastChangeListener listener, Handler handler) {
         synchronized (this.mLock) {
-            this.mHighTextContrastStateChangeListeners.put(listener, handler == null ? this.mHandler : handler);
+            this.mHighTextContrastStateChangeListeners.put(
+                    listener, handler == null ? this.mHandler : handler);
         }
     }
 
@@ -730,13 +785,15 @@ public final class AccessibilityManager {
         }
     }
 
-    public void addAudioDescriptionRequestedChangeListener(Executor executor, AudioDescriptionRequestedChangeListener listener) {
+    public void addAudioDescriptionRequestedChangeListener(
+            Executor executor, AudioDescriptionRequestedChangeListener listener) {
         synchronized (this.mLock) {
             this.mAudioDescriptionRequestedChangeListeners.put(listener, executor);
         }
     }
 
-    public boolean removeAudioDescriptionRequestedChangeListener(AudioDescriptionRequestedChangeListener listener) {
+    public boolean removeAudioDescriptionRequestedChangeListener(
+            AudioDescriptionRequestedChangeListener listener) {
         boolean z;
         synchronized (this.mLock) {
             z = this.mAudioDescriptionRequestedChangeListeners.remove(listener) != null;
@@ -850,8 +907,10 @@ public final class AccessibilityManager {
         updateAccessibilityTracingState(stateFlags);
     }
 
-    public AccessibilityServiceInfo getInstalledServiceInfoWithComponentName(ComponentName componentName) {
-        List<AccessibilityServiceInfo> installedServiceInfos = getInstalledAccessibilityServiceList();
+    public AccessibilityServiceInfo getInstalledServiceInfoWithComponentName(
+            ComponentName componentName) {
+        List<AccessibilityServiceInfo> installedServiceInfos =
+                getInstalledAccessibilityServiceList();
         if (installedServiceInfos == null || componentName == null) {
             return null;
         }
@@ -863,7 +922,11 @@ public final class AccessibilityManager {
         return null;
     }
 
-    public int addAccessibilityInteractionConnection(IWindow windowToken, IBinder leashToken, String packageName, IAccessibilityInteractionConnection connection) {
+    public int addAccessibilityInteractionConnection(
+            IWindow windowToken,
+            IBinder leashToken,
+            String packageName,
+            IAccessibilityInteractionConnection connection) {
         synchronized (this.mLock) {
             IAccessibilityManager service = getServiceLocked();
             if (service == null) {
@@ -871,7 +934,8 @@ public final class AccessibilityManager {
             }
             int userId = this.mUserId;
             try {
-                return service.addAccessibilityInteractionConnection(windowToken, leashToken, connection, packageName, userId);
+                return service.addAccessibilityInteractionConnection(
+                        windowToken, leashToken, connection, packageName, userId);
             } catch (RemoteException re) {
                 Log.e(LOG_TAG, "Error while adding an accessibility interaction connection. ", re);
                 return -1;
@@ -888,7 +952,10 @@ public final class AccessibilityManager {
             try {
                 service.removeAccessibilityInteractionConnection(windowToken);
             } catch (RemoteException re) {
-                Log.e(LOG_TAG, "Error while removing an accessibility interaction connection. ", re);
+                Log.e(
+                        LOG_TAG,
+                        "Error while removing an accessibility interaction connection. ",
+                        re);
             }
         }
     }
@@ -912,14 +979,16 @@ public final class AccessibilityManager {
         }
     }
 
-    public void enableShortcutsForTargets(boolean enable, int shortcutTypes, Set<String> targets, int userId) {
+    public void enableShortcutsForTargets(
+            boolean enable, int shortcutTypes, Set<String> targets, int userId) {
         synchronized (this.mLock) {
             IAccessibilityManager service = getServiceLocked();
             if (service == null) {
                 return;
             }
             try {
-                service.enableShortcutsForTargets(enable, shortcutTypes, targets.stream().toList(), userId);
+                service.enableShortcutsForTargets(
+                        enable, shortcutTypes, targets.stream().toList(), userId);
             } catch (RemoteException re) {
                 throw re.rethrowFromSystemServer();
             }
@@ -938,7 +1007,12 @@ public final class AccessibilityManager {
                 Bundle a11yFeatureToTile = service.getA11yFeatureToTileMap(userId);
                 for (String key : a11yFeatureToTile.keySet()) {
                     ComponentName feature = ComponentName.unflattenFromString(key);
-                    if (feature != null && (tileService = (ComponentName) a11yFeatureToTile.getParcelable(key, ComponentName.class)) != null) {
+                    if (feature != null
+                            && (tileService =
+                                            (ComponentName)
+                                                    a11yFeatureToTile.getParcelable(
+                                                            key, ComponentName.class))
+                                    != null) {
                         a11yFeatureToTileMap.put(feature, tileService);
                     }
                 }
@@ -959,7 +1033,10 @@ public final class AccessibilityManager {
             try {
                 service.registerSystemAction(action, actionId);
             } catch (RemoteException re) {
-                Log.e(LOG_TAG, "Error registering system action " + ((Object) action.getTitle()) + " ", re);
+                Log.e(
+                        LOG_TAG,
+                        "Error registering system action " + ((Object) action.getTitle()) + " ",
+                        re);
             }
         }
     }
@@ -974,7 +1051,10 @@ public final class AccessibilityManager {
             try {
                 service.unregisterSystemAction(actionId);
             } catch (RemoteException re) {
-                Log.e(LOG_TAG, "Error unregistering system action with actionId " + actionId + " ", re);
+                Log.e(
+                        LOG_TAG,
+                        "Error unregistering system action with actionId " + actionId + " ",
+                        re);
             }
         }
     }
@@ -1006,7 +1086,10 @@ public final class AccessibilityManager {
             try {
                 service.notifyAccessibilityButtonVisibilityChanged(shown);
             } catch (RemoteException re) {
-                Log.e(LOG_TAG, "Error while dispatching accessibility button visibility change", re);
+                Log.e(
+                        LOG_TAG,
+                        "Error while dispatching accessibility button visibility change",
+                        re);
             }
         }
     }
@@ -1049,7 +1132,8 @@ public final class AccessibilityManager {
         return service;
     }
 
-    public void setPictureInPictureActionReplacingConnection(IAccessibilityInteractionConnection connection) {
+    public void setPictureInPictureActionReplacingConnection(
+            IAccessibilityInteractionConnection connection) {
         synchronized (this.mLock) {
             IAccessibilityManager service = getServiceLocked();
             if (service == null) {
@@ -1078,14 +1162,17 @@ public final class AccessibilityManager {
         return Collections.emptyList();
     }
 
-    public List<AccessibilityShortcutInfo> getInstalledAccessibilityShortcutListAsUser(Context context, int userId) {
+    public List<AccessibilityShortcutInfo> getInstalledAccessibilityShortcutListAsUser(
+            Context context, int userId) {
         List<AccessibilityShortcutInfo> shortcutInfos = new ArrayList<>();
         Intent actionMain = new Intent(Intent.ACTION_MAIN);
         actionMain.addCategory(Intent.CATEGORY_ACCESSIBILITY_SHORTCUT_TARGET);
         PackageManager packageManager = context.getPackageManager();
-        List<ResolveInfo> installedShortcutList = packageManager.queryIntentActivitiesAsUser(actionMain, 819329, userId);
+        List<ResolveInfo> installedShortcutList =
+                packageManager.queryIntentActivitiesAsUser(actionMain, 819329, userId);
         for (int i = 0; i < installedShortcutList.size(); i++) {
-            AccessibilityShortcutInfo shortcutInfo = getShortcutInfo(context, installedShortcutList.get(i));
+            AccessibilityShortcutInfo shortcutInfo =
+                    getShortcutInfo(context, installedShortcutList.get(i));
             if (shortcutInfo != null) {
                 shortcutInfos.add(shortcutInfo);
             }
@@ -1093,9 +1180,11 @@ public final class AccessibilityManager {
         return shortcutInfos;
     }
 
-    public List<SemAccessibilityShortcutInfo> semGetInstalledAccessibilityShortcutInfoAsUser(Context context, int userId) {
+    public List<SemAccessibilityShortcutInfo> semGetInstalledAccessibilityShortcutInfoAsUser(
+            Context context, int userId) {
         List<SemAccessibilityShortcutInfo> semAccessibilityShortcutInfos = new ArrayList<>();
-        List<AccessibilityShortcutInfo> accessibilityShortcutInfos = getInstalledAccessibilityShortcutListAsUser(context, userId);
+        List<AccessibilityShortcutInfo> accessibilityShortcutInfos =
+                getInstalledAccessibilityShortcutListAsUser(context, userId);
         PackageManager packageManager = context.getPackageManager();
         for (AccessibilityShortcutInfo info : accessibilityShortcutInfos) {
             String title = info.getActivityInfo().loadLabel(packageManager).toString();
@@ -1105,7 +1194,8 @@ public final class AccessibilityManager {
         return semAccessibilityShortcutInfos;
     }
 
-    public void semPerformAccessibilityButtonClick(int displayId, int shortcutType, String targetName) {
+    public void semPerformAccessibilityButtonClick(
+            int displayId, int shortcutType, String targetName) {
         synchronized (this.mLock) {
             IAccessibilityManager service = getServiceLocked();
             if (service == null) {
@@ -1121,7 +1211,9 @@ public final class AccessibilityManager {
 
     private AccessibilityShortcutInfo getShortcutInfo(Context context, ResolveInfo resolveInfo) {
         ActivityInfo activityInfo = resolveInfo.activityInfo;
-        if (activityInfo == null || activityInfo.metaData == null || activityInfo.metaData.getInt(AccessibilityShortcutInfo.META_DATA) == 0) {
+        if (activityInfo == null
+                || activityInfo.metaData == null
+                || activityInfo.metaData.getInt(AccessibilityShortcutInfo.META_DATA) == 0) {
             return null;
         }
         try {
@@ -1212,14 +1304,16 @@ public final class AccessibilityManager {
         }
     }
 
-    public void setAccessibilityWindowAttributes(int displayId, int windowId, AccessibilityWindowAttributes attributes) {
+    public void setAccessibilityWindowAttributes(
+            int displayId, int windowId, AccessibilityWindowAttributes attributes) {
         synchronized (this.mLock) {
             IAccessibilityManager service = getServiceLocked();
             if (service == null) {
                 return;
             }
             try {
-                service.setAccessibilityWindowAttributes(displayId, windowId, this.mUserId, attributes);
+                service.setAccessibilityWindowAttributes(
+                        displayId, windowId, this.mUserId, attributes);
             } catch (RemoteException re) {
                 re.rethrowFromSystemServer();
             }
@@ -1264,7 +1358,8 @@ public final class AccessibilityManager {
                 return false;
             }
             try {
-                return service.startFlashNotificationSequence(context.getOpPackageName(), reason, this.mBinder);
+                return service.startFlashNotificationSequence(
+                        context.getOpPackageName(), reason, this.mBinder);
             } catch (RemoteException re) {
                 Log.e(LOG_TAG, "Error while start flash notification sequence", re);
                 return false;
@@ -1318,7 +1413,8 @@ public final class AccessibilityManager {
                 return false;
             }
             try {
-                return service.startFlashNotificationEvent(context.getOpPackageName(), reason, reasonPkg);
+                return service.startFlashNotificationEvent(
+                        context.getOpPackageName(), reason, reasonPkg);
             } catch (RemoteException re) {
                 Log.e(LOG_TAG, "Error while start flash notification event", re);
                 return false;
@@ -1390,16 +1486,22 @@ public final class AccessibilityManager {
                 return;
             }
             final boolean isEnabled = isEnabled();
-            ArrayMap<AccessibilityStateChangeListener, Handler> listeners = new ArrayMap<>(this.mAccessibilityStateChangeListeners);
+            ArrayMap<AccessibilityStateChangeListener, Handler> listeners =
+                    new ArrayMap<>(this.mAccessibilityStateChangeListeners);
             int numListeners = listeners.size();
             for (int i = 0; i < numListeners; i++) {
                 final AccessibilityStateChangeListener listener = listeners.keyAt(i);
-                listeners.valueAt(i).post(new Runnable() { // from class: android.view.accessibility.AccessibilityManager$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        AccessibilityManager.AccessibilityStateChangeListener.this.onAccessibilityStateChanged(isEnabled);
-                    }
-                });
+                listeners
+                        .valueAt(i)
+                        .post(
+                                new Runnable() { // from class:
+                                                 // android.view.accessibility.AccessibilityManager$$ExternalSyntheticLambda0
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        AccessibilityManager.AccessibilityStateChangeListener.this
+                                                .onAccessibilityStateChanged(isEnabled);
+                                    }
+                                });
             }
         }
     }
@@ -1410,16 +1512,24 @@ public final class AccessibilityManager {
                 return;
             }
             final boolean isTouchExplorationEnabled = this.mIsTouchExplorationEnabled;
-            ArrayMap<TouchExplorationStateChangeListener, Handler> listeners = new ArrayMap<>(this.mTouchExplorationStateChangeListeners);
+            ArrayMap<TouchExplorationStateChangeListener, Handler> listeners =
+                    new ArrayMap<>(this.mTouchExplorationStateChangeListeners);
             int numListeners = listeners.size();
             for (int i = 0; i < numListeners; i++) {
                 final TouchExplorationStateChangeListener listener = listeners.keyAt(i);
-                listeners.valueAt(i).post(new Runnable() { // from class: android.view.accessibility.AccessibilityManager$$ExternalSyntheticLambda2
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        AccessibilityManager.TouchExplorationStateChangeListener.this.onTouchExplorationStateChanged(isTouchExplorationEnabled);
-                    }
-                });
+                listeners
+                        .valueAt(i)
+                        .post(
+                                new Runnable() { // from class:
+                                                 // android.view.accessibility.AccessibilityManager$$ExternalSyntheticLambda2
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        AccessibilityManager.TouchExplorationStateChangeListener
+                                                .this
+                                                .onTouchExplorationStateChanged(
+                                                        isTouchExplorationEnabled);
+                                    }
+                                });
             }
         }
     }
@@ -1430,16 +1540,23 @@ public final class AccessibilityManager {
                 return;
             }
             final boolean isHighTextContrastEnabled = this.mIsHighTextContrastEnabled;
-            ArrayMap<HighTextContrastChangeListener, Handler> listeners = new ArrayMap<>(this.mHighTextContrastStateChangeListeners);
+            ArrayMap<HighTextContrastChangeListener, Handler> listeners =
+                    new ArrayMap<>(this.mHighTextContrastStateChangeListeners);
             int numListeners = listeners.size();
             for (int i = 0; i < numListeners; i++) {
                 final HighTextContrastChangeListener listener = listeners.keyAt(i);
-                listeners.valueAt(i).post(new Runnable() { // from class: android.view.accessibility.AccessibilityManager$$ExternalSyntheticLambda1
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        AccessibilityManager.HighTextContrastChangeListener.this.onHighTextContrastStateChanged(isHighTextContrastEnabled);
-                    }
-                });
+                listeners
+                        .valueAt(i)
+                        .post(
+                                new Runnable() { // from class:
+                                                 // android.view.accessibility.AccessibilityManager$$ExternalSyntheticLambda1
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        AccessibilityManager.HighTextContrastChangeListener.this
+                                                .onHighTextContrastStateChanged(
+                                                        isHighTextContrastEnabled);
+                                    }
+                                });
             }
         }
     }
@@ -1449,17 +1566,26 @@ public final class AccessibilityManager {
             if (this.mAudioDescriptionRequestedChangeListeners.isEmpty()) {
                 return;
             }
-            final boolean isAudioDescriptionByDefaultRequested = this.mIsAudioDescriptionByDefaultRequested;
-            ArrayMap<AudioDescriptionRequestedChangeListener, Executor> listeners = new ArrayMap<>(this.mAudioDescriptionRequestedChangeListeners);
+            final boolean isAudioDescriptionByDefaultRequested =
+                    this.mIsAudioDescriptionByDefaultRequested;
+            ArrayMap<AudioDescriptionRequestedChangeListener, Executor> listeners =
+                    new ArrayMap<>(this.mAudioDescriptionRequestedChangeListeners);
             int numListeners = listeners.size();
             for (int i = 0; i < numListeners; i++) {
                 final AudioDescriptionRequestedChangeListener listener = listeners.keyAt(i);
-                listeners.valueAt(i).execute(new Runnable() { // from class: android.view.accessibility.AccessibilityManager$$ExternalSyntheticLambda3
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        AccessibilityManager.AudioDescriptionRequestedChangeListener.this.onAudioDescriptionRequestedChanged(isAudioDescriptionByDefaultRequested);
-                    }
-                });
+                listeners
+                        .valueAt(i)
+                        .execute(
+                                new Runnable() { // from class:
+                                                 // android.view.accessibility.AccessibilityManager$$ExternalSyntheticLambda3
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        AccessibilityManager.AudioDescriptionRequestedChangeListener
+                                                .this
+                                                .onAudioDescriptionRequestedChanged(
+                                                        isAudioDescriptionByDefaultRequested);
+                                    }
+                                });
             }
         }
     }
@@ -1487,12 +1613,18 @@ public final class AccessibilityManager {
 
     private void initialFocusAppearanceLocked(Resources resource) {
         try {
-            this.mFocusStrokeWidth = resource.getDimensionPixelSize(R.dimen.accessibility_focus_highlight_stroke_width);
+            this.mFocusStrokeWidth =
+                    resource.getDimensionPixelSize(
+                            R.dimen.accessibility_focus_highlight_stroke_width);
             this.mFocusColor = resource.getColor(R.color.accessibility_focus_highlight_color);
         } catch (Resources.NotFoundException re) {
             this.mFocusStrokeWidth = (int) (resource.getDisplayMetrics().density * 4.0f);
             this.mFocusColor = -1086737152;
-            Log.e(LOG_TAG, "Error while initialing the focus appearance data then setting to default value by hardcoded", re);
+            Log.e(
+                    LOG_TAG,
+                    "Error while initialing the focus appearance data then setting to default value"
+                        + " by hardcoded",
+                    re);
         }
     }
 
@@ -1504,8 +1636,7 @@ public final class AccessibilityManager {
     private final class MyCallback implements Handler.Callback {
         public static final int MSG_SET_STATE = 1;
 
-        private MyCallback() {
-        }
+        private MyCallback() {}
 
         @Override // android.os.Handler.Callback
         public boolean handleMessage(Message message) {
@@ -1522,7 +1653,8 @@ public final class AccessibilityManager {
         }
     }
 
-    public IAccessibilityManager.WindowTransformationSpec getWindowTransformationSpec(int windowId) {
+    public IAccessibilityManager.WindowTransformationSpec getWindowTransformationSpec(
+            int windowId) {
         synchronized (this.mLock) {
             IAccessibilityManager service = getServiceLocked();
             if (service == null) {
@@ -1550,7 +1682,8 @@ public final class AccessibilityManager {
         }
     }
 
-    public void notifyQuickSettingsTilesChanged(int userId, List<ComponentName> tileComponentNames) {
+    public void notifyQuickSettingsTilesChanged(
+            int userId, List<ComponentName> tileComponentNames) {
         synchronized (this.mLock) {
             IAccessibilityManager service = getServiceLocked();
             if (service == null) {
@@ -1753,7 +1886,10 @@ public final class AccessibilityManager {
                 throw new IllegalStateException("Accessibility off. Did you forget to check that?");
             }
             try {
-                Log.i(LOG_TAG, "AccessibilityManager - semSetTwoFingerGestureRecognitionEnabled: " + enable);
+                Log.i(
+                        LOG_TAG,
+                        "AccessibilityManager - semSetTwoFingerGestureRecognitionEnabled: "
+                                + enable);
                 service.semSetTwoFingerGestureRecognitionEnabled(enable);
             } catch (RemoteException re) {
                 Log.e(LOG_TAG, "semSetTwoFingerGestureRecognitionEnabled Exception:", re);

@@ -11,10 +11,14 @@ import android.util.Xml;
 import android.util.proto.ProtoInputStream;
 import android.util.proto.ProtoOutputStream;
 import android.util.proto.WireTypeMismatchException;
+
 import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.util.XmlUtils;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -25,23 +29,24 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Map;
 import java.util.Objects;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public final class ApplicationStartInfo implements Parcelable {
-    public static final Parcelable.Creator<ApplicationStartInfo> CREATOR = new Parcelable.Creator<ApplicationStartInfo>() { // from class: android.app.ApplicationStartInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ApplicationStartInfo createFromParcel(Parcel in) {
-            return new ApplicationStartInfo(in);
-        }
+    public static final Parcelable.Creator<ApplicationStartInfo> CREATOR =
+            new Parcelable.Creator<
+                    ApplicationStartInfo>() { // from class: android.app.ApplicationStartInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ApplicationStartInfo createFromParcel(Parcel in) {
+                    return new ApplicationStartInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ApplicationStartInfo[] newArray(int size) {
-            return new ApplicationStartInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ApplicationStartInfo[] newArray(int size) {
+                    return new ApplicationStartInfo[size];
+                }
+            };
     public static final int LAUNCH_MODE_SINGLE_INSTANCE = 2;
     public static final int LAUNCH_MODE_SINGLE_INSTANCE_PER_TASK = 4;
     public static final int LAUNCH_MODE_SINGLE_TASK = 3;
@@ -97,20 +102,16 @@ public final class ApplicationStartInfo implements Parcelable {
     private boolean mWasForceStopped;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LaunchMode {
-    }
+    public @interface LaunchMode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StartReason {
-    }
+    public @interface StartReason {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StartType {
-    }
+    public @interface StartType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StartupState {
-    }
+    public @interface StartupState {}
 
     public void setStartupState(int startupState) {
         this.mStartupState = startupState;
@@ -265,8 +266,7 @@ public final class ApplicationStartInfo implements Parcelable {
         dest.writeBoolean(this.mWasForceStopped);
     }
 
-    public ApplicationStartInfo() {
-    }
+    public ApplicationStartInfo() {}
 
     public ApplicationStartInfo(ApplicationStartInfo other) {
         this.mStartupState = other.mStartupState;
@@ -331,12 +331,16 @@ public final class ApplicationStartInfo implements Parcelable {
             for (int i = 0; i < this.mStartupTimestampsNs.size(); i++) {
                 serializer.startTag(null, "timestamp");
                 serializer.attributeInt(null, "key", this.mStartupTimestampsNs.keyAt(i).intValue());
-                serializer.attributeLong(null, PROTO_SERIALIZER_ATTRIBUTE_TS, this.mStartupTimestampsNs.valueAt(i).longValue());
+                serializer.attributeLong(
+                        null,
+                        PROTO_SERIALIZER_ATTRIBUTE_TS,
+                        this.mStartupTimestampsNs.valueAt(i).longValue());
                 serializer.endTag(null, "timestamp");
             }
             serializer.endTag(null, "timestamps");
             serializer.endDocument();
-            proto.write(ApplicationStartInfoProto.STARTUP_TIMESTAMPS, timestampsBytes.toByteArray());
+            proto.write(
+                    ApplicationStartInfoProto.STARTUP_TIMESTAMPS, timestampsBytes.toByteArray());
             timestampsOut.close();
         }
         proto.write(1159641169929L, this.mStartType);
@@ -357,7 +361,8 @@ public final class ApplicationStartInfo implements Parcelable {
         proto.end(token);
     }
 
-    public void readFromProto(ProtoInputStream proto, long fieldId) throws IOException, WireTypeMismatchException, ClassNotFoundException {
+    public void readFromProto(ProtoInputStream proto, long fieldId)
+            throws IOException, WireTypeMismatchException, ClassNotFoundException {
         long token = proto.start(fieldId);
         while (proto.nextField() != -1) {
             switch (proto.getFieldNumber()) {
@@ -383,7 +388,9 @@ public final class ApplicationStartInfo implements Parcelable {
                     this.mReason = proto.readInt(1159641169927L);
                     break;
                 case 8:
-                    ByteArrayInputStream timestampsBytes = new ByteArrayInputStream(proto.readBytes(ApplicationStartInfoProto.STARTUP_TIMESTAMPS));
+                    ByteArrayInputStream timestampsBytes =
+                            new ByteArrayInputStream(
+                                    proto.readBytes(ApplicationStartInfoProto.STARTUP_TIMESTAMPS));
                     ObjectInputStream timestampsIn = new ObjectInputStream(timestampsBytes);
                     this.mStartupTimestampsNs = new ArrayMap<>();
                     try {
@@ -393,8 +400,11 @@ public final class ApplicationStartInfo implements Parcelable {
                         while (XmlUtils.nextElementWithin(parser, depth)) {
                             if ("timestamp".equals(parser.getName())) {
                                 int key = parser.getAttributeInt(null, "key");
-                                long ts = parser.getAttributeLong(null, PROTO_SERIALIZER_ATTRIBUTE_TS);
-                                this.mStartupTimestampsNs.put(Integer.valueOf(key), Long.valueOf(ts));
+                                long ts =
+                                        parser.getAttributeLong(
+                                                null, PROTO_SERIALIZER_ATTRIBUTE_TS);
+                                this.mStartupTimestampsNs.put(
+                                        Integer.valueOf(key), Long.valueOf(ts));
                             }
                         }
                     } catch (XmlPullParserException e) {
@@ -405,7 +415,9 @@ public final class ApplicationStartInfo implements Parcelable {
                     this.mStartType = proto.readInt(1159641169929L);
                     break;
                 case 10:
-                    ByteArrayInputStream intentBytes = new ByteArrayInputStream(proto.readBytes(ApplicationStartInfoProto.START_INTENT));
+                    ByteArrayInputStream intentBytes =
+                            new ByteArrayInputStream(
+                                    proto.readBytes(ApplicationStartInfoProto.START_INTENT));
                     ObjectInputStream intentIn = new ObjectInputStream(intentBytes);
                     try {
                         TypedXmlPullParser parser2 = Xml.resolvePullParser(intentIn);
@@ -428,14 +440,47 @@ public final class ApplicationStartInfo implements Parcelable {
 
     public void dump(PrintWriter pw, String prefix, String seqSuffix, SimpleDateFormat sdf) {
         StringBuilder sb = new StringBuilder();
-        sb.append(prefix).append("ApplicationStartInfo ").append(seqSuffix).append(ShortcutConstants.SERVICES_SEPARATOR).append('\n').append(" pid=").append(this.mPid).append(" realUid=").append(this.mRealUid).append(" packageUid=").append(this.mPackageUid).append(" definingUid=").append(this.mDefiningUid).append(" user=").append(UserHandle.getUserId(this.mPackageUid)).append('\n').append(" package=").append(this.mPackageName).append(" process=").append(this.mProcessName).append(" startupState=").append(this.mStartupState).append(" reason=").append(reasonToString(this.mReason)).append(" startType=").append(startTypeToString(this.mStartType)).append(" launchMode=").append(this.mLaunchMode).append(" wasForceStopped=").append(this.mWasForceStopped).append('\n');
+        sb.append(prefix)
+                .append("ApplicationStartInfo ")
+                .append(seqSuffix)
+                .append(ShortcutConstants.SERVICES_SEPARATOR)
+                .append('\n')
+                .append(" pid=")
+                .append(this.mPid)
+                .append(" realUid=")
+                .append(this.mRealUid)
+                .append(" packageUid=")
+                .append(this.mPackageUid)
+                .append(" definingUid=")
+                .append(this.mDefiningUid)
+                .append(" user=")
+                .append(UserHandle.getUserId(this.mPackageUid))
+                .append('\n')
+                .append(" package=")
+                .append(this.mPackageName)
+                .append(" process=")
+                .append(this.mProcessName)
+                .append(" startupState=")
+                .append(this.mStartupState)
+                .append(" reason=")
+                .append(reasonToString(this.mReason))
+                .append(" startType=")
+                .append(startTypeToString(this.mStartType))
+                .append(" launchMode=")
+                .append(this.mLaunchMode)
+                .append(" wasForceStopped=")
+                .append(this.mWasForceStopped)
+                .append('\n');
         if (this.mStartIntent != null) {
             sb.append(" intent=").append(this.mStartIntent.toString()).append('\n');
         }
         if (this.mStartupTimestampsNs != null && this.mStartupTimestampsNs.size() > 0) {
             sb.append(" timestamps: ");
             for (int i = 0; i < this.mStartupTimestampsNs.size(); i++) {
-                sb.append(this.mStartupTimestampsNs.keyAt(i)).append("=").append(this.mStartupTimestampsNs.valueAt(i)).append(" ");
+                sb.append(this.mStartupTimestampsNs.keyAt(i))
+                        .append("=")
+                        .append(this.mStartupTimestampsNs.valueAt(i))
+                        .append(" ");
             }
             sb.append('\n');
         }
@@ -493,11 +538,31 @@ public final class ApplicationStartInfo implements Parcelable {
             return false;
         }
         ApplicationStartInfo o = (ApplicationStartInfo) other;
-        return this.mPid == o.mPid && this.mRealUid == o.mRealUid && this.mPackageUid == o.mPackageUid && this.mDefiningUid == o.mDefiningUid && this.mReason == o.mReason && this.mStartupState == o.mStartupState && this.mStartType == o.mStartType && this.mLaunchMode == o.mLaunchMode && TextUtils.equals(this.mProcessName, o.mProcessName) && timestampsEquals(o) && this.mWasForceStopped == o.mWasForceStopped;
+        return this.mPid == o.mPid
+                && this.mRealUid == o.mRealUid
+                && this.mPackageUid == o.mPackageUid
+                && this.mDefiningUid == o.mDefiningUid
+                && this.mReason == o.mReason
+                && this.mStartupState == o.mStartupState
+                && this.mStartType == o.mStartType
+                && this.mLaunchMode == o.mLaunchMode
+                && TextUtils.equals(this.mProcessName, o.mProcessName)
+                && timestampsEquals(o)
+                && this.mWasForceStopped == o.mWasForceStopped;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mPid), Integer.valueOf(this.mRealUid), Integer.valueOf(this.mPackageUid), Integer.valueOf(this.mDefiningUid), Integer.valueOf(this.mReason), Integer.valueOf(this.mStartupState), Integer.valueOf(this.mStartType), Integer.valueOf(this.mLaunchMode), this.mProcessName, this.mStartupTimestampsNs);
+        return Objects.hash(
+                Integer.valueOf(this.mPid),
+                Integer.valueOf(this.mRealUid),
+                Integer.valueOf(this.mPackageUid),
+                Integer.valueOf(this.mDefiningUid),
+                Integer.valueOf(this.mReason),
+                Integer.valueOf(this.mStartupState),
+                Integer.valueOf(this.mStartType),
+                Integer.valueOf(this.mLaunchMode),
+                this.mProcessName,
+                this.mStartupTimestampsNs);
     }
 
     private boolean timestampsEquals(ApplicationStartInfo other) {

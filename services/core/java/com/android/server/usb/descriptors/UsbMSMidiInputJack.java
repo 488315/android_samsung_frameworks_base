@@ -13,9 +13,16 @@ public final class UsbMSMidiInputJack extends UsbACInterface {
         return i2;
     }
 
-    @Override // com.android.server.usb.descriptors.UsbACInterface, com.android.server.usb.descriptors.UsbDescriptor
+    @Override // com.android.server.usb.descriptors.UsbACInterface,
+              // com.android.server.usb.descriptors.UsbDescriptor
     public final void report(TextReportCanvas textReportCanvas) {
         super.report(textReportCanvas);
-        textReportCanvas.writeHeader("MS Midi Input Jack: " + TextReportCanvas.getHexString(this.mType) + " SubType: " + TextReportCanvas.getHexString(this.mSubclass) + " Length: " + this.mLength);
+        textReportCanvas.writeHeader(
+                "MS Midi Input Jack: "
+                        + TextReportCanvas.getHexString(this.mType)
+                        + " SubType: "
+                        + TextReportCanvas.getHexString(this.mSubclass)
+                        + " Length: "
+                        + this.mLength);
     }
 }

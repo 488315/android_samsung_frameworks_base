@@ -5,12 +5,14 @@ import android.content.ClipData;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.IBinder;
+
 import com.android.internal.view.IDragAndDropPermissions;
 import com.android.server.LocalServices;
 import com.android.server.uri.UriGrantsManagerInternal;
 import com.android.server.uri.UriGrantsManagerService;
 import com.android.server.uri.UriPermissionOwner;
 import com.android.server.uri.UriPermissionOwner.ExternalToken;
+
 import java.util.ArrayList;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -26,7 +28,14 @@ public final class DragAndDropPermissionsHandler extends IDragAndDropPermissions
     public final int mTargetUserId;
     public final ArrayList mUris;
 
-    public DragAndDropPermissionsHandler(WindowManagerGlobalLock windowManagerGlobalLock, ClipData clipData, int i, String str, int i2, int i3, int i4) {
+    public DragAndDropPermissionsHandler(
+            WindowManagerGlobalLock windowManagerGlobalLock,
+            ClipData clipData,
+            int i,
+            String str,
+            int i2,
+            int i3,
+            int i4) {
         ArrayList arrayList = new ArrayList();
         this.mUris = arrayList;
         this.mActivityToken = null;
@@ -44,7 +53,15 @@ public final class DragAndDropPermissionsHandler extends IDragAndDropPermissions
         long clearCallingIdentity = Binder.clearCallingIdentity();
         for (int i = 0; i < this.mUris.size(); i++) {
             try {
-                UriGrantsManager.getService().grantUriPermissionFromOwner(iBinder, this.mSourceUid, this.mTargetPackage, (Uri) this.mUris.get(i), this.mMode, this.mSourceUserId, this.mTargetUserId);
+                UriGrantsManager.getService()
+                        .grantUriPermissionFromOwner(
+                                iBinder,
+                                this.mSourceUid,
+                                this.mTargetPackage,
+                                (Uri) this.mUris.get(i),
+                                this.mMode,
+                                this.mSourceUserId,
+                                this.mTargetUserId);
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             }
@@ -73,7 +90,8 @@ public final class DragAndDropPermissionsHandler extends IDragAndDropPermissions
                 if (isInRootTaskLocked == null) {
                     throw new IllegalArgumentException("Activity does not exist; token=" + iBinder);
                 }
-                UriPermissionOwner uriPermissionsLocked = isInRootTaskLocked.getUriPermissionsLocked();
+                UriPermissionOwner uriPermissionsLocked =
+                        isInRootTaskLocked.getUriPermissionsLocked();
                 if (uriPermissionsLocked.externalToken == null) {
                     uriPermissionsLocked.externalToken = uriPermissionsLocked.new ExternalToken();
                 }
@@ -105,9 +123,15 @@ public final class DragAndDropPermissionsHandler extends IDragAndDropPermissions
             uriPermissionOwnerForActivity = this.mPermissionOwnerToken;
             this.mPermissionOwnerToken = null;
         }
-        UriGrantsManagerInternal uriGrantsManagerInternal = (UriGrantsManagerInternal) LocalServices.getService(UriGrantsManagerInternal.class);
+        UriGrantsManagerInternal uriGrantsManagerInternal =
+                (UriGrantsManagerInternal) LocalServices.getService(UriGrantsManagerInternal.class);
         for (int i = 0; i < this.mUris.size(); i++) {
-            ((UriGrantsManagerService.LocalService) uriGrantsManagerInternal).revokeUriPermissionFromOwner(uriPermissionOwnerForActivity, (Uri) this.mUris.get(i), this.mMode, this.mSourceUserId);
+            ((UriGrantsManagerService.LocalService) uriGrantsManagerInternal)
+                    .revokeUriPermissionFromOwner(
+                            uriPermissionOwnerForActivity,
+                            (Uri) this.mUris.get(i),
+                            this.mMode,
+                            this.mSourceUserId);
         }
     }
 
@@ -120,7 +144,12 @@ public final class DragAndDropPermissionsHandler extends IDragAndDropPermissions
 
     public final void takeTransient() {
         if (this.mActivityToken == null && this.mPermissionOwnerToken == null) {
-            IBinder newUriPermissionOwner = ((UriGrantsManagerService.LocalService) ((UriGrantsManagerInternal) LocalServices.getService(UriGrantsManagerInternal.class))).newUriPermissionOwner("drop");
+            IBinder newUriPermissionOwner =
+                    ((UriGrantsManagerService.LocalService)
+                                    ((UriGrantsManagerInternal)
+                                            LocalServices.getService(
+                                                    UriGrantsManagerInternal.class)))
+                            .newUriPermissionOwner("drop");
             this.mPermissionOwnerToken = newUriPermissionOwner;
             doTake(newUriPermissionOwner);
         }

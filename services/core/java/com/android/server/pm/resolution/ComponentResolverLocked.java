@@ -3,6 +3,7 @@ package com.android.server.pm.resolution;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.ProviderInfo;
+
 import com.android.internal.pm.pkg.component.ParsedActivity;
 import com.android.internal.pm.pkg.component.ParsedProvider;
 import com.android.internal.pm.pkg.component.ParsedService;
@@ -11,6 +12,7 @@ import com.android.server.pm.DumpState;
 import com.android.server.pm.PackageManagerService;
 import com.android.server.pm.PackageManagerTracedLock;
 import com.android.server.pm.UserManagerService;
+
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -24,7 +26,8 @@ public abstract class ComponentResolverLocked extends ComponentResolverBase {
         this.mLock = new PackageManagerTracedLock(null);
     }
 
-    @Override // com.android.server.pm.resolution.ComponentResolverBase, com.android.server.pm.resolution.ComponentResolverApi
+    @Override // com.android.server.pm.resolution.ComponentResolverBase,
+              // com.android.server.pm.resolution.ComponentResolverApi
     public final boolean componentExists(ComponentName componentName) {
         boolean componentExists;
         PackageManagerTracedLock packageManagerTracedLock = this.mLock;
@@ -40,8 +43,10 @@ public abstract class ComponentResolverLocked extends ComponentResolverBase {
         return componentExists;
     }
 
-    @Override // com.android.server.pm.resolution.ComponentResolverBase, com.android.server.pm.resolution.ComponentResolverApi
-    public final void dumpActivityResolvers(DumpState dumpState, PrintWriter printWriter, String str) {
+    @Override // com.android.server.pm.resolution.ComponentResolverBase,
+              // com.android.server.pm.resolution.ComponentResolverApi
+    public final void dumpActivityResolvers(
+            DumpState dumpState, PrintWriter printWriter, String str) {
         PackageManagerTracedLock packageManagerTracedLock = this.mLock;
         boolean z = PackageManagerService.DEBUG_COMPRESSION;
         synchronized (packageManagerTracedLock) {
@@ -54,8 +59,10 @@ public abstract class ComponentResolverLocked extends ComponentResolverBase {
         }
     }
 
-    @Override // com.android.server.pm.resolution.ComponentResolverBase, com.android.server.pm.resolution.ComponentResolverApi
-    public final void dumpContentProviders(Computer computer, PrintWriter printWriter, DumpState dumpState, String str) {
+    @Override // com.android.server.pm.resolution.ComponentResolverBase,
+              // com.android.server.pm.resolution.ComponentResolverApi
+    public final void dumpContentProviders(
+            Computer computer, PrintWriter printWriter, DumpState dumpState, String str) {
         PackageManagerTracedLock packageManagerTracedLock = this.mLock;
         boolean z = PackageManagerService.DEBUG_COMPRESSION;
         synchronized (packageManagerTracedLock) {
@@ -68,8 +75,10 @@ public abstract class ComponentResolverLocked extends ComponentResolverBase {
         }
     }
 
-    @Override // com.android.server.pm.resolution.ComponentResolverBase, com.android.server.pm.resolution.ComponentResolverApi
-    public final void dumpProviderResolvers(DumpState dumpState, PrintWriter printWriter, String str) {
+    @Override // com.android.server.pm.resolution.ComponentResolverBase,
+              // com.android.server.pm.resolution.ComponentResolverApi
+    public final void dumpProviderResolvers(
+            DumpState dumpState, PrintWriter printWriter, String str) {
         PackageManagerTracedLock packageManagerTracedLock = this.mLock;
         boolean z = PackageManagerService.DEBUG_COMPRESSION;
         synchronized (packageManagerTracedLock) {
@@ -82,8 +91,10 @@ public abstract class ComponentResolverLocked extends ComponentResolverBase {
         }
     }
 
-    @Override // com.android.server.pm.resolution.ComponentResolverBase, com.android.server.pm.resolution.ComponentResolverApi
-    public final void dumpReceiverResolvers(DumpState dumpState, PrintWriter printWriter, String str) {
+    @Override // com.android.server.pm.resolution.ComponentResolverBase,
+              // com.android.server.pm.resolution.ComponentResolverApi
+    public final void dumpReceiverResolvers(
+            DumpState dumpState, PrintWriter printWriter, String str) {
         PackageManagerTracedLock packageManagerTracedLock = this.mLock;
         boolean z = PackageManagerService.DEBUG_COMPRESSION;
         synchronized (packageManagerTracedLock) {
@@ -96,7 +107,8 @@ public abstract class ComponentResolverLocked extends ComponentResolverBase {
         }
     }
 
-    @Override // com.android.server.pm.resolution.ComponentResolverBase, com.android.server.pm.resolution.ComponentResolverApi
+    @Override // com.android.server.pm.resolution.ComponentResolverBase,
+              // com.android.server.pm.resolution.ComponentResolverApi
     public final void dumpServicePermissions(PrintWriter printWriter, DumpState dumpState) {
         PackageManagerTracedLock packageManagerTracedLock = this.mLock;
         boolean z = PackageManagerService.DEBUG_COMPRESSION;
@@ -110,8 +122,10 @@ public abstract class ComponentResolverLocked extends ComponentResolverBase {
         }
     }
 
-    @Override // com.android.server.pm.resolution.ComponentResolverBase, com.android.server.pm.resolution.ComponentResolverApi
-    public final void dumpServiceResolvers(DumpState dumpState, PrintWriter printWriter, String str) {
+    @Override // com.android.server.pm.resolution.ComponentResolverBase,
+              // com.android.server.pm.resolution.ComponentResolverApi
+    public final void dumpServiceResolvers(
+            DumpState dumpState, PrintWriter printWriter, String str) {
         PackageManagerTracedLock packageManagerTracedLock = this.mLock;
         boolean z = PackageManagerService.DEBUG_COMPRESSION;
         synchronized (packageManagerTracedLock) {
@@ -124,7 +138,8 @@ public abstract class ComponentResolverLocked extends ComponentResolverBase {
         }
     }
 
-    @Override // com.android.server.pm.resolution.ComponentResolverBase, com.android.server.pm.resolution.ComponentResolverApi
+    @Override // com.android.server.pm.resolution.ComponentResolverBase,
+              // com.android.server.pm.resolution.ComponentResolverApi
     public final ParsedActivity getActivity(ComponentName componentName) {
         ParsedActivity activity;
         PackageManagerTracedLock packageManagerTracedLock = this.mLock;
@@ -140,7 +155,8 @@ public abstract class ComponentResolverLocked extends ComponentResolverBase {
         return activity;
     }
 
-    @Override // com.android.server.pm.resolution.ComponentResolverBase, com.android.server.pm.resolution.ComponentResolverApi
+    @Override // com.android.server.pm.resolution.ComponentResolverBase,
+              // com.android.server.pm.resolution.ComponentResolverApi
     public final ParsedProvider getProvider(ComponentName componentName) {
         ParsedProvider provider;
         PackageManagerTracedLock packageManagerTracedLock = this.mLock;
@@ -156,7 +172,8 @@ public abstract class ComponentResolverLocked extends ComponentResolverBase {
         return provider;
     }
 
-    @Override // com.android.server.pm.resolution.ComponentResolverBase, com.android.server.pm.resolution.ComponentResolverApi
+    @Override // com.android.server.pm.resolution.ComponentResolverBase,
+              // com.android.server.pm.resolution.ComponentResolverApi
     public final ParsedActivity getReceiver(ComponentName componentName) {
         ParsedActivity receiver;
         PackageManagerTracedLock packageManagerTracedLock = this.mLock;
@@ -172,7 +189,8 @@ public abstract class ComponentResolverLocked extends ComponentResolverBase {
         return receiver;
     }
 
-    @Override // com.android.server.pm.resolution.ComponentResolverBase, com.android.server.pm.resolution.ComponentResolverApi
+    @Override // com.android.server.pm.resolution.ComponentResolverBase,
+              // com.android.server.pm.resolution.ComponentResolverApi
     public final ParsedService getService(ComponentName componentName) {
         ParsedService service;
         PackageManagerTracedLock packageManagerTracedLock = this.mLock;
@@ -188,7 +206,8 @@ public abstract class ComponentResolverLocked extends ComponentResolverBase {
         return service;
     }
 
-    @Override // com.android.server.pm.resolution.ComponentResolverBase, com.android.server.pm.resolution.ComponentResolverApi
+    @Override // com.android.server.pm.resolution.ComponentResolverBase,
+              // com.android.server.pm.resolution.ComponentResolverApi
     public final List queryActivities(Computer computer, Intent intent, String str, long j, int i) {
         List queryIntent;
         PackageManagerTracedLock packageManagerTracedLock = this.mLock;
@@ -204,14 +223,17 @@ public abstract class ComponentResolverLocked extends ComponentResolverBase {
         return queryIntent;
     }
 
-    @Override // com.android.server.pm.resolution.ComponentResolverBase, com.android.server.pm.resolution.ComponentResolverApi
-    public final List queryActivities(Computer computer, Intent intent, String str, long j, List list, int i) {
+    @Override // com.android.server.pm.resolution.ComponentResolverBase,
+              // com.android.server.pm.resolution.ComponentResolverApi
+    public final List queryActivities(
+            Computer computer, Intent intent, String str, long j, List list, int i) {
         List queryIntentForPackage;
         PackageManagerTracedLock packageManagerTracedLock = this.mLock;
         boolean z = PackageManagerService.DEBUG_COMPRESSION;
         synchronized (packageManagerTracedLock) {
             try {
-                queryIntentForPackage = this.mActivities.queryIntentForPackage(computer, intent, str, j, list, i);
+                queryIntentForPackage =
+                        this.mActivities.queryIntentForPackage(computer, intent, str, j, list, i);
             } catch (Throwable th) {
                 boolean z2 = PackageManagerService.DEBUG_COMPRESSION;
                 throw th;
@@ -220,7 +242,8 @@ public abstract class ComponentResolverLocked extends ComponentResolverBase {
         return queryIntentForPackage;
     }
 
-    @Override // com.android.server.pm.resolution.ComponentResolverBase, com.android.server.pm.resolution.ComponentResolverApi
+    @Override // com.android.server.pm.resolution.ComponentResolverBase,
+              // com.android.server.pm.resolution.ComponentResolverApi
     public final ProviderInfo queryProvider(Computer computer, String str, long j, int i) {
         ProviderInfo queryProvider;
         PackageManagerTracedLock packageManagerTracedLock = this.mLock;
@@ -236,7 +259,8 @@ public abstract class ComponentResolverLocked extends ComponentResolverBase {
         return queryProvider;
     }
 
-    @Override // com.android.server.pm.resolution.ComponentResolverBase, com.android.server.pm.resolution.ComponentResolverApi
+    @Override // com.android.server.pm.resolution.ComponentResolverBase,
+              // com.android.server.pm.resolution.ComponentResolverApi
     public final List queryProviders(Computer computer, Intent intent, String str, long j, int i) {
         List queryProviders;
         PackageManagerTracedLock packageManagerTracedLock = this.mLock;
@@ -252,8 +276,10 @@ public abstract class ComponentResolverLocked extends ComponentResolverBase {
         return queryProviders;
     }
 
-    @Override // com.android.server.pm.resolution.ComponentResolverBase, com.android.server.pm.resolution.ComponentResolverApi
-    public final List queryProviders(Computer computer, Intent intent, String str, long j, List list, int i) {
+    @Override // com.android.server.pm.resolution.ComponentResolverBase,
+              // com.android.server.pm.resolution.ComponentResolverApi
+    public final List queryProviders(
+            Computer computer, Intent intent, String str, long j, List list, int i) {
         List queryProviders;
         PackageManagerTracedLock packageManagerTracedLock = this.mLock;
         boolean z = PackageManagerService.DEBUG_COMPRESSION;
@@ -268,8 +294,10 @@ public abstract class ComponentResolverLocked extends ComponentResolverBase {
         return queryProviders;
     }
 
-    @Override // com.android.server.pm.resolution.ComponentResolverBase, com.android.server.pm.resolution.ComponentResolverApi
-    public final List queryProviders(Computer computer, String str, String str2, int i, long j, int i2) {
+    @Override // com.android.server.pm.resolution.ComponentResolverBase,
+              // com.android.server.pm.resolution.ComponentResolverApi
+    public final List queryProviders(
+            Computer computer, String str, String str2, int i, long j, int i2) {
         List queryProviders;
         PackageManagerTracedLock packageManagerTracedLock = this.mLock;
         boolean z = PackageManagerService.DEBUG_COMPRESSION;
@@ -284,7 +312,8 @@ public abstract class ComponentResolverLocked extends ComponentResolverBase {
         return queryProviders;
     }
 
-    @Override // com.android.server.pm.resolution.ComponentResolverBase, com.android.server.pm.resolution.ComponentResolverApi
+    @Override // com.android.server.pm.resolution.ComponentResolverBase,
+              // com.android.server.pm.resolution.ComponentResolverApi
     public final List queryReceivers(Computer computer, Intent intent, String str, long j, int i) {
         List queryIntent;
         PackageManagerTracedLock packageManagerTracedLock = this.mLock;
@@ -300,14 +329,17 @@ public abstract class ComponentResolverLocked extends ComponentResolverBase {
         return queryIntent;
     }
 
-    @Override // com.android.server.pm.resolution.ComponentResolverBase, com.android.server.pm.resolution.ComponentResolverApi
-    public final List queryReceivers(Computer computer, Intent intent, String str, long j, List list, int i) {
+    @Override // com.android.server.pm.resolution.ComponentResolverBase,
+              // com.android.server.pm.resolution.ComponentResolverApi
+    public final List queryReceivers(
+            Computer computer, Intent intent, String str, long j, List list, int i) {
         List queryIntentForPackage;
         PackageManagerTracedLock packageManagerTracedLock = this.mLock;
         boolean z = PackageManagerService.DEBUG_COMPRESSION;
         synchronized (packageManagerTracedLock) {
             try {
-                queryIntentForPackage = this.mReceivers.queryIntentForPackage(computer, intent, str, j, list, i);
+                queryIntentForPackage =
+                        this.mReceivers.queryIntentForPackage(computer, intent, str, j, list, i);
             } catch (Throwable th) {
                 boolean z2 = PackageManagerService.DEBUG_COMPRESSION;
                 throw th;
@@ -316,7 +348,8 @@ public abstract class ComponentResolverLocked extends ComponentResolverBase {
         return queryIntentForPackage;
     }
 
-    @Override // com.android.server.pm.resolution.ComponentResolverBase, com.android.server.pm.resolution.ComponentResolverApi
+    @Override // com.android.server.pm.resolution.ComponentResolverBase,
+              // com.android.server.pm.resolution.ComponentResolverApi
     public final List queryServices(Computer computer, Intent intent, String str, long j, int i) {
         List queryServices;
         PackageManagerTracedLock packageManagerTracedLock = this.mLock;
@@ -332,8 +365,10 @@ public abstract class ComponentResolverLocked extends ComponentResolverBase {
         return queryServices;
     }
 
-    @Override // com.android.server.pm.resolution.ComponentResolverBase, com.android.server.pm.resolution.ComponentResolverApi
-    public final List queryServices(Computer computer, Intent intent, String str, long j, List list, int i) {
+    @Override // com.android.server.pm.resolution.ComponentResolverBase,
+              // com.android.server.pm.resolution.ComponentResolverApi
+    public final List queryServices(
+            Computer computer, Intent intent, String str, long j, List list, int i) {
         List queryServices;
         PackageManagerTracedLock packageManagerTracedLock = this.mLock;
         boolean z = PackageManagerService.DEBUG_COMPRESSION;
@@ -348,8 +383,10 @@ public abstract class ComponentResolverLocked extends ComponentResolverBase {
         return queryServices;
     }
 
-    @Override // com.android.server.pm.resolution.ComponentResolverBase, com.android.server.pm.resolution.ComponentResolverApi
-    public final void querySyncProviders(Computer computer, List list, List list2, boolean z, int i) {
+    @Override // com.android.server.pm.resolution.ComponentResolverBase,
+              // com.android.server.pm.resolution.ComponentResolverApi
+    public final void querySyncProviders(
+            Computer computer, List list, List list2, boolean z, int i) {
         PackageManagerTracedLock packageManagerTracedLock = this.mLock;
         boolean z2 = PackageManagerService.DEBUG_COMPRESSION;
         synchronized (packageManagerTracedLock) {

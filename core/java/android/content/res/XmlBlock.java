@@ -2,13 +2,17 @@ package android.content.res;
 
 import android.system.OsConstants;
 import android.util.TypedValue;
+
 import com.android.internal.util.XmlUtils;
+
 import dalvik.annotation.optimization.CriticalNative;
 import dalvik.annotation.optimization.FastNative;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public final class XmlBlock implements AutoCloseable {
@@ -189,10 +193,12 @@ public final class XmlBlock implements AutoCloseable {
 
         @Override // org.xmlpull.v1.XmlPullParser
         public void setFeature(String name, boolean state) throws XmlPullParserException {
-            if ("http://xmlpull.org/v1/doc/features.html#process-namespaces".equals(name) && state) {
+            if ("http://xmlpull.org/v1/doc/features.html#process-namespaces".equals(name)
+                    && state) {
                 return;
             }
-            if ("http://xmlpull.org/v1/doc/features.html#report-namespace-prefixes".equals(name) && state) {
+            if ("http://xmlpull.org/v1/doc/features.html#report-namespace-prefixes".equals(name)
+                    && state) {
             } else {
                 throw new XmlPullParserException("Unsupported feature: " + name);
             }
@@ -200,7 +206,9 @@ public final class XmlBlock implements AutoCloseable {
 
         @Override // org.xmlpull.v1.XmlPullParser
         public boolean getFeature(String name) {
-            return "http://xmlpull.org/v1/doc/features.html#process-namespaces".equals(name) || "http://xmlpull.org/v1/doc/features.html#report-namespace-prefixes".equals(name);
+            return "http://xmlpull.org/v1/doc/features.html#process-namespaces".equals(name)
+                    || "http://xmlpull.org/v1/doc/features.html#report-namespace-prefixes"
+                            .equals(name);
         }
 
         @Override // org.xmlpull.v1.XmlPullParser
@@ -219,12 +227,14 @@ public final class XmlBlock implements AutoCloseable {
         }
 
         @Override // org.xmlpull.v1.XmlPullParser
-        public void setInput(InputStream inputStream, String inputEncoding) throws XmlPullParserException {
+        public void setInput(InputStream inputStream, String inputEncoding)
+                throws XmlPullParserException {
             throw new XmlPullParserException("setInput() not supported");
         }
 
         @Override // org.xmlpull.v1.XmlPullParser
-        public void defineEntityReplacementText(String entityName, String replacementText) throws XmlPullParserException {
+        public void defineEntityReplacementText(String entityName, String replacementText)
+                throws XmlPullParserException {
             throw new XmlPullParserException("defineEntityReplacementText() not supported");
         }
 
@@ -329,7 +339,8 @@ public final class XmlBlock implements AutoCloseable {
             return null;
         }
 
-        @Override // android.content.res.XmlResourceParser, org.xmlpull.v1.XmlPullParser, android.util.AttributeSet
+        @Override // android.content.res.XmlResourceParser, org.xmlpull.v1.XmlPullParser,
+        // android.util.AttributeSet
         public String getAttributeNamespace(int index) {
             int id = XmlBlock.nativeGetAttributeNamespace(this.mParseState, index);
             if (id == -2147483640) {
@@ -465,29 +476,44 @@ public final class XmlBlock implements AutoCloseable {
         }
 
         @Override // org.xmlpull.v1.XmlPullParser
-        public void require(int type, String namespace, String name) throws XmlPullParserException, IOException {
-            if (type != getEventType() || ((namespace != null && !namespace.equals(getNamespace())) || (name != null && !name.equals(getName())))) {
-                throw new XmlPullParserException("expected " + TYPES[type] + getPositionDescription());
+        public void require(int type, String namespace, String name)
+                throws XmlPullParserException, IOException {
+            if (type != getEventType()
+                    || ((namespace != null && !namespace.equals(getNamespace()))
+                            || (name != null && !name.equals(getName())))) {
+                throw new XmlPullParserException(
+                        "expected " + TYPES[type] + getPositionDescription());
             }
         }
 
         @Override // org.xmlpull.v1.XmlPullParser
         public String nextText() throws XmlPullParserException, IOException {
             if (getEventType() != 2) {
-                throw new XmlPullParserException(getPositionDescription() + ": parser must be on START_TAG to read next text", this, null);
+                throw new XmlPullParserException(
+                        getPositionDescription()
+                                + ": parser must be on START_TAG to read next text",
+                        this,
+                        null);
             }
             int eventType = next();
             if (eventType == 4) {
                 String result = getText();
                 if (next() != 3) {
-                    throw new XmlPullParserException(getPositionDescription() + ": event TEXT it must be immediately followed by END_TAG", this, null);
+                    throw new XmlPullParserException(
+                            getPositionDescription()
+                                    + ": event TEXT it must be immediately followed by END_TAG",
+                            this,
+                            null);
                 }
                 return result;
             }
             if (eventType == 3) {
                 return "";
             }
-            throw new XmlPullParserException(getPositionDescription() + ": parser must be on START_TAG or TEXT to read text", this, null);
+            throw new XmlPullParserException(
+                    getPositionDescription() + ": parser must be on START_TAG or TEXT to read text",
+                    this,
+                    null);
         }
 
         @Override // org.xmlpull.v1.XmlPullParser
@@ -497,7 +523,8 @@ public final class XmlBlock implements AutoCloseable {
                 eventType = next();
             }
             if (eventType != 2 && eventType != 3) {
-                throw new XmlPullParserException(getPositionDescription() + ": expected start or end tag", this, null);
+                throw new XmlPullParserException(
+                        getPositionDescription() + ": expected start or end tag", this, null);
             }
             return eventType;
         }
@@ -512,7 +539,8 @@ public final class XmlBlock implements AutoCloseable {
         }
 
         @Override // android.util.AttributeSet
-        public int getAttributeListValue(String namespace, String attribute, String[] options, int defaultValue) {
+        public int getAttributeListValue(
+                String namespace, String attribute, String[] options, int defaultValue) {
             int idx = XmlBlock.nativeGetAttributeIndex(this.mParseState, namespace, attribute);
             if (idx >= 0) {
                 return getAttributeListValue(idx, options, defaultValue);
@@ -521,7 +549,8 @@ public final class XmlBlock implements AutoCloseable {
         }
 
         @Override // android.util.AttributeSet
-        public boolean getAttributeBooleanValue(String namespace, String attribute, boolean defaultValue) {
+        public boolean getAttributeBooleanValue(
+                String namespace, String attribute, boolean defaultValue) {
             int idx = XmlBlock.nativeGetAttributeIndex(this.mParseState, namespace, attribute);
             if (idx >= 0) {
                 return getAttributeBooleanValue(idx, defaultValue);
@@ -548,7 +577,8 @@ public final class XmlBlock implements AutoCloseable {
         }
 
         @Override // android.util.AttributeSet
-        public int getAttributeUnsignedIntValue(String namespace, String attribute, int defaultValue) {
+        public int getAttributeUnsignedIntValue(
+                String namespace, String attribute, int defaultValue) {
             int idx = XmlBlock.nativeGetAttributeIndex(this.mParseState, namespace, attribute);
             if (idx >= 0) {
                 return getAttributeUnsignedIntValue(idx, defaultValue);
@@ -557,7 +587,8 @@ public final class XmlBlock implements AutoCloseable {
         }
 
         @Override // android.util.AttributeSet
-        public float getAttributeFloatValue(String namespace, String attribute, float defaultValue) {
+        public float getAttributeFloatValue(
+                String namespace, String attribute, float defaultValue) {
             int idx = XmlBlock.nativeGetAttributeIndex(this.mParseState, namespace, attribute);
             if (idx >= 0) {
                 return getAttributeFloatValue(idx, defaultValue);
@@ -576,7 +607,8 @@ public final class XmlBlock implements AutoCloseable {
                 throw new NullPointerException("Null document");
             }
             if (t == 3) {
-                return XmlUtils.convertValueToList(XmlBlock.this.mStrings.getSequence(v), options, defaultValue);
+                return XmlUtils.convertValueToList(
+                        XmlBlock.this.mStrings.getSequence(v), options, defaultValue);
             }
             return v;
         }
@@ -701,7 +733,8 @@ public final class XmlBlock implements AutoCloseable {
 
         private String getSequenceString(CharSequence str) {
             if (str == null) {
-                throw new IllegalStateException("Retrieving a string from the StringPool of an XmlBlock should never fail");
+                throw new IllegalStateException(
+                        "Retrieving a string from the StringPool of an XmlBlock should never fail");
             }
             return str.toString();
         }

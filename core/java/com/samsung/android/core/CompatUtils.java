@@ -60,7 +60,9 @@ public class CompatUtils {
     }
 
     public static void adjustBoundsToCenter(Rect sourceBounds, Rect inOutBounds) {
-        inOutBounds.offsetTo(sourceBounds.left + ((sourceBounds.width() - inOutBounds.width()) >> 1), sourceBounds.top + ((sourceBounds.height() - inOutBounds.height()) >> 1));
+        inOutBounds.offsetTo(
+                sourceBounds.left + ((sourceBounds.width() - inOutBounds.width()) >> 1),
+                sourceBounds.top + ((sourceBounds.height() - inOutBounds.height()) >> 1));
     }
 
     public static float getCompatScale(Rect containingBounds, Rect containerBounds) {

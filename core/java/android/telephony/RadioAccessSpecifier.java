@@ -3,24 +3,27 @@ package android.telephony;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.telephony.AccessNetworkConstants;
+
 import java.util.Arrays;
 
 /* loaded from: classes4.dex */
 public final class RadioAccessSpecifier implements Parcelable {
-    public static final Parcelable.Creator<RadioAccessSpecifier> CREATOR = new Parcelable.Creator<RadioAccessSpecifier>() { // from class: android.telephony.RadioAccessSpecifier.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RadioAccessSpecifier createFromParcel(Parcel in) {
-            return new RadioAccessSpecifier(in);
-        }
+    public static final Parcelable.Creator<RadioAccessSpecifier> CREATOR =
+            new Parcelable.Creator<
+                    RadioAccessSpecifier>() { // from class:
+                                              // android.telephony.RadioAccessSpecifier.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RadioAccessSpecifier createFromParcel(Parcel in) {
+                    return new RadioAccessSpecifier(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RadioAccessSpecifier[] newArray(int size) {
-            return new RadioAccessSpecifier[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RadioAccessSpecifier[] newArray(int size) {
+                    return new RadioAccessSpecifier[size];
+                }
+            };
     private int[] mBands;
     private int[] mChannels;
     private int mRadioAccessNetwork;
@@ -78,17 +81,28 @@ public final class RadioAccessSpecifier implements Parcelable {
     public boolean equals(Object o) {
         try {
             RadioAccessSpecifier ras = (RadioAccessSpecifier) o;
-            return o != null && this.mRadioAccessNetwork == ras.mRadioAccessNetwork && Arrays.equals(this.mBands, ras.mBands) && Arrays.equals(this.mChannels, ras.mChannels);
+            return o != null
+                    && this.mRadioAccessNetwork == ras.mRadioAccessNetwork
+                    && Arrays.equals(this.mBands, ras.mBands)
+                    && Arrays.equals(this.mChannels, ras.mChannels);
         } catch (ClassCastException e) {
             return false;
         }
     }
 
     public int hashCode() {
-        return (this.mRadioAccessNetwork * 31) + (Arrays.hashCode(this.mBands) * 37) + (Arrays.hashCode(this.mChannels) * 39);
+        return (this.mRadioAccessNetwork * 31)
+                + (Arrays.hashCode(this.mBands) * 37)
+                + (Arrays.hashCode(this.mChannels) * 39);
     }
 
     public String toString() {
-        return "RadioAccessSpecifier[mRadioAccessNetwork=" + AccessNetworkConstants.AccessNetworkType.toString(this.mRadioAccessNetwork) + ", mBands=" + Arrays.toString(this.mBands) + ", mChannels=" + Arrays.toString(this.mChannels) + NavigationBarInflaterView.SIZE_MOD_END;
+        return "RadioAccessSpecifier[mRadioAccessNetwork="
+                + AccessNetworkConstants.AccessNetworkType.toString(this.mRadioAccessNetwork)
+                + ", mBands="
+                + Arrays.toString(this.mBands)
+                + ", mChannels="
+                + Arrays.toString(this.mChannels)
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 }

@@ -1,6 +1,7 @@
 package com.samsung.android.sume.solution.filter;
 
 import android.util.Log;
+
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.MediaBuffer;
 import com.samsung.android.sume.core.buffer.MutableMediaBuffer;
@@ -13,6 +14,7 @@ import com.samsung.android.sume.core.types.ColorSpace;
 import com.samsung.android.sume.core.types.FlipType;
 import com.samsung.android.sume.core.types.ImgpType;
 import com.samsung.android.sume.core.types.MediaType;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -22,7 +24,8 @@ public class NativeImgpFilterAdapter implements Operator {
     private static final String TAG = Def.tagOf((Class<?>) NativeImgpFilterAdapter.class);
     private final NativeUniImgpPlugin plugin;
 
-    public NativeImgpFilterAdapter(MediaFormat inputFormat, MediaFormat outputFormat, ColorFormat preferredColorFormat) {
+    public NativeImgpFilterAdapter(
+            MediaFormat inputFormat, MediaFormat outputFormat, ColorFormat preferredColorFormat) {
         Log.d(TAG, "inputFormat=" + inputFormat);
         Log.d(TAG, "outputFormat=" + outputFormat);
         Log.d(TAG, "preferred-ColorFormat=" + preferredColorFormat);
@@ -45,10 +48,14 @@ public class NativeImgpFilterAdapter implements Operator {
         if (preferredColorFormat != null && preferredColorFormat != ColorFormat.NONE) {
             opList.add(ImgpType.CVT_COLOR);
         }
-        if (inputFormat != null && inputFormat.getColorFormat() != outputFormat.getColorFormat() && inputFormat.getColorFormat() != ColorFormat.NONE && outputFormat.getColorFormat() != ColorFormat.NONE) {
+        if (inputFormat != null
+                && inputFormat.getColorFormat() != outputFormat.getColorFormat()
+                && inputFormat.getColorFormat() != ColorFormat.NONE
+                && outputFormat.getColorFormat() != ColorFormat.NONE) {
             opList.add(ImgpType.CVT_COLOR);
         }
-        if (outputFormat.getColorSpace() != null && outputFormat.getColorSpace() != ColorSpace.NONE) {
+        if (outputFormat.getColorSpace() != null
+                && outputFormat.getColorSpace() != ColorSpace.NONE) {
             opList.add(ImgpType.CVT_GAMUT);
         }
         if (outputFormat.getRotation() != 0) {
@@ -57,7 +64,8 @@ public class NativeImgpFilterAdapter implements Operator {
         if (outputFormat.getFlipType() != FlipType.NONE) {
             opList.add(ImgpType.FLIP);
         }
-        if (outputFormat.getMediaType() == MediaType.COMPRESSED_IMAGE && outputFormat.contains("codec-type")) {
+        if (outputFormat.getMediaType() == MediaType.COMPRESSED_IMAGE
+                && outputFormat.contains("codec-type")) {
             if (outputFormat.contains("encode-hdr")) {
                 opList.add(ImgpType.ENCODE_HDR);
             } else {
@@ -65,11 +73,17 @@ public class NativeImgpFilterAdapter implements Operator {
             }
         }
         Log.d(TAG, "opList=" + opList.size());
-        this.plugin = new NativeUniImgpPlugin((List) Objects.requireNonNull(opList), inputFormat, outputFormat, preferredColorFormat);
+        this.plugin =
+                new NativeUniImgpPlugin(
+                        (List) Objects.requireNonNull(opList),
+                        inputFormat,
+                        outputFormat,
+                        preferredColorFormat);
     }
 
     @Override // com.samsung.android.sume.core.functional.Operator
-    public MutableMediaBuffer run(MediaBuffer ibuf, MutableMediaBuffer obuf) throws UnsupportedOperationException {
+    public MutableMediaBuffer run(MediaBuffer ibuf, MutableMediaBuffer obuf)
+            throws UnsupportedOperationException {
         return this.plugin.run(ibuf, obuf);
     }
 

@@ -5,7 +5,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.samsung.android.wifi.stdp.IStandardPlusCallback;
 
 /* loaded from: classes6.dex */
 public interface IStandardPlusManager extends IInterface {
@@ -15,7 +14,8 @@ public interface IStandardPlusManager extends IInterface {
 
     void enableUsdNearby(int i) throws RemoteException;
 
-    boolean registerCallback(int i, IStandardPlusCallback iStandardPlusCallback) throws RemoteException;
+    boolean registerCallback(int i, IStandardPlusCallback iStandardPlusCallback)
+            throws RemoteException;
 
     void startBleScan() throws RemoteException;
 
@@ -27,27 +27,23 @@ public interface IStandardPlusManager extends IInterface {
 
     public static class Default implements IStandardPlusManager {
         @Override // com.samsung.android.wifi.stdp.IStandardPlusManager
-        public void startBleScan() throws RemoteException {
-        }
+        public void startBleScan() throws RemoteException {}
 
         @Override // com.samsung.android.wifi.stdp.IStandardPlusManager
-        public void stopBleScan() throws RemoteException {
-        }
+        public void stopBleScan() throws RemoteException {}
 
         @Override // com.samsung.android.wifi.stdp.IStandardPlusManager
-        public void stopBleAdvertising() throws RemoteException {
-        }
+        public void stopBleAdvertising() throws RemoteException {}
 
         @Override // com.samsung.android.wifi.stdp.IStandardPlusManager
-        public void enableUsdNearby(int duration) throws RemoteException {
-        }
+        public void enableUsdNearby(int duration) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.stdp.IStandardPlusManager
-        public void disableUsdNearby(int duration) throws RemoteException {
-        }
+        public void disableUsdNearby(int duration) throws RemoteException {}
 
         @Override // com.samsung.android.wifi.stdp.IStandardPlusManager
-        public boolean registerCallback(int hash, IStandardPlusCallback callback) throws RemoteException {
+        public boolean registerCallback(int hash, IStandardPlusCallback callback)
+                throws RemoteException {
             return false;
         }
 
@@ -62,7 +58,7 @@ public interface IStandardPlusManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IStandardPlusManager {
+    public abstract static class Stub extends Binder implements IStandardPlusManager {
         static final int TRANSACTION_disableUsdNearby = 5;
         static final int TRANSACTION_enableUsdNearby = 4;
         static final int TRANSACTION_registerCallback = 6;
@@ -118,7 +114,8 @@ public interface IStandardPlusManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IStandardPlusManager.DESCRIPTOR);
             }
@@ -153,7 +150,8 @@ public interface IStandardPlusManager extends IInterface {
                     return true;
                 case 6:
                     int _arg03 = data.readInt();
-                    IStandardPlusCallback _arg1 = IStandardPlusCallback.Stub.asInterface(data.readStrongBinder());
+                    IStandardPlusCallback _arg1 =
+                            IStandardPlusCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result = registerCallback(_arg03, _arg1);
                     reply.writeNoException();
@@ -260,7 +258,8 @@ public interface IStandardPlusManager extends IInterface {
             }
 
             @Override // com.samsung.android.wifi.stdp.IStandardPlusManager
-            public boolean registerCallback(int hash, IStandardPlusCallback callback) throws RemoteException {
+            public boolean registerCallback(int hash, IStandardPlusCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

@@ -12,7 +12,9 @@ import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+
 import com.android.internal.telephony.util.TelephonyUtils;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -68,7 +70,8 @@ public class SmsNumberUtils {
         }
     }
 
-    private static String formatNumber(Context context, String number, String activeMcc, int networkType) {
+    private static String formatNumber(
+            Context context, String number, String activeMcc, int networkType) {
         if (number == null) {
             throw new IllegalArgumentException("number is null");
         }
@@ -107,7 +110,8 @@ public class SmsNumberUtils {
                 return networkPortionNumber.substring(iddLength2);
             }
         }
-        int internationalState = checkInternationalNumberPlan(context, numberEntry, allIDDs, NANP_IDD);
+        int internationalState =
+                checkInternationalNumberPlan(context, numberEntry, allIDDs, NANP_IDD);
         if (DBG) {
             Log.d(TAG, "International type: " + getNumberPlanType(internationalState));
         }
@@ -133,13 +137,16 @@ public class SmsNumberUtils {
                 }
             case 104:
                 int countryCode = numberEntry.countryCode;
-                if (!inExceptionListForNpCcAreaLocal(numberEntry) && networkPortionNumber.length() >= 11 && countryCode != 1) {
+                if (!inExceptionListForNpCcAreaLocal(numberEntry)
+                        && networkPortionNumber.length() >= 11
+                        && countryCode != 1) {
                     returnNumber = NANP_IDD + networkPortionNumber;
                     break;
                 }
                 break;
             default:
-                if (networkPortionNumber.startsWith(PLUS_SIGN) && (networkType == 1 || networkType == 2)) {
+                if (networkPortionNumber.startsWith(PLUS_SIGN)
+                        && (networkType == 1 || networkType == 2)) {
                     if (!networkPortionNumber.startsWith("+011")) {
                         returnNumber = NANP_IDD + networkPortionNumber.substring(1);
                         break;
@@ -157,30 +164,31 @@ public class SmsNumberUtils {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:25:0x0062, code lost:
-    
-        com.android.internal.telephony.SmsNumberUtils.IDDS_MAPS.put(r12, r2);
-     */
+
+       com.android.internal.telephony.SmsNumberUtils.IDDS_MAPS.put(r12, r2);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:26:0x0069, code lost:
-    
-        if (com.android.internal.telephony.SmsNumberUtils.DBG == false) goto L28;
-     */
+
+       if (com.android.internal.telephony.SmsNumberUtils.DBG == false) goto L28;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:27:0x006b, code lost:
-    
-        android.util.Log.d(com.android.internal.telephony.SmsNumberUtils.TAG, "MCC = " + r12 + ", all IDDs = " + r2);
-     */
+
+       android.util.Log.d(com.android.internal.telephony.SmsNumberUtils.TAG, "MCC = " + r12 + ", all IDDs = " + r2);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:28:0x008b, code lost:
-    
-        return r2;
-     */
+
+       return r2;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:31:0x005f, code lost:
-    
-        if (r10 == null) goto L25;
-     */
+
+       if (r10 == null) goto L25;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private static java.util.ArrayList<java.lang.String> getAllIDDs(android.content.Context r11, java.lang.String r12) {
+    private static java.util.ArrayList<java.lang.String> getAllIDDs(
+            android.content.Context r11, java.lang.String r12) {
         /*
             java.lang.String r0 = "SmsNumberUtils"
             java.util.HashMap<java.lang.String, java.util.ArrayList<java.lang.String>> r1 = com.android.internal.telephony.SmsNumberUtils.IDDS_MAPS
@@ -259,7 +267,10 @@ public class SmsNumberUtils {
         L91:
             throw r0
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.telephony.SmsNumberUtils.getAllIDDs(android.content.Context, java.lang.String):java.util.ArrayList");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.telephony.SmsNumberUtils.getAllIDDs(android.content.Context,"
+                    + " java.lang.String):java.util.ArrayList");
     }
 
     private static int checkNANP(NumberEntry numberEntry, ArrayList<String> allIDDs) {
@@ -301,14 +312,19 @@ public class SmsNumberUtils {
                 if (isNANP(number3)) {
                     return 4;
                 }
-            } else if (number3.startsWith(NANP_IDD) && number3.length() == 14 && isNANP(number3.substring(3))) {
+            } else if (number3.startsWith(NANP_IDD)
+                    && number3.length() == 14
+                    && isNANP(number3.substring(3))) {
                 return 6;
             }
         } else {
             Iterator<String> it = allIDDs.iterator();
             while (it.hasNext()) {
                 String idd = it.next();
-                if (number.startsWith(idd) && (number2 = number.substring(idd.length())) != null && number2.startsWith(String.valueOf(1)) && isNANP(number2)) {
+                if (number.startsWith(idd)
+                        && (number2 = number.substring(idd.length())) != null
+                        && number2.startsWith(String.valueOf(1))
+                        && isNANP(number2)) {
                     numberEntry.IDD = idd;
                     return 5;
                 }
@@ -343,7 +359,8 @@ public class SmsNumberUtils {
         return false;
     }
 
-    private static int checkInternationalNumberPlan(Context context, NumberEntry numberEntry, ArrayList<String> allIDDs, String homeIDD) {
+    private static int checkInternationalNumberPlan(
+            Context context, NumberEntry numberEntry, ArrayList<String> allIDDs, String homeIDD) {
         int countryCode;
         String number = numberEntry.number;
         if (number.startsWith(PLUS_SIGN)) {
@@ -416,13 +433,13 @@ public class SmsNumberUtils {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:24:0x0066, code lost:
-    
-        return com.android.internal.telephony.SmsNumberUtils.ALL_COUNTRY_CODES;
-     */
+
+       return com.android.internal.telephony.SmsNumberUtils.ALL_COUNTRY_CODES;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:27:0x0061, code lost:
-    
-        if (r0 == null) goto L24;
-     */
+
+       if (r0 == null) goto L24;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -491,12 +508,18 @@ public class SmsNumberUtils {
         L6c:
             throw r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.telephony.SmsNumberUtils.getAllCountryCodes(android.content.Context):int[]");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.telephony.SmsNumberUtils.getAllCountryCodes(android.content.Context):int[]");
     }
 
     private static boolean inExceptionListForNpCcAreaLocal(NumberEntry numberEntry) {
         int countryCode = numberEntry.countryCode;
-        return numberEntry.number.length() == 12 && (countryCode == 7 || countryCode == 20 || countryCode == 65 || countryCode == 90);
+        return numberEntry.number.length() == 12
+                && (countryCode == 7
+                        || countryCode == 20
+                        || countryCode == 65
+                        || countryCode == 90);
     }
 
     private static String getNumberPlanType(int state) {
@@ -544,18 +567,32 @@ public class SmsNumberUtils {
             Log.d(TAG, "enter filterDestAddr. destAddr=\"" + pii(TAG, destAddr) + "\"");
         }
         if (destAddr == null || !PhoneNumberUtils.isGlobalPhoneNumber(destAddr)) {
-            Log.w(TAG, "destAddr" + pii(TAG, destAddr) + " is not a global phone number! Nothing changed.");
+            Log.w(
+                    TAG,
+                    "destAddr"
+                            + pii(TAG, destAddr)
+                            + " is not a global phone number! Nothing changed.");
             return destAddr;
         }
-        TelephonyManager telephonyManager = ((TelephonyManager) context.getSystemService("phone")).createForSubscriptionId(subId);
+        TelephonyManager telephonyManager =
+                ((TelephonyManager) context.getSystemService("phone"))
+                        .createForSubscriptionId(subId);
         String networkOperator = telephonyManager.getNetworkOperator();
         String result = null;
-        if (needToConvert(context, subId) && (networkType = getNetworkType(telephonyManager)) != -1 && !TextUtils.isEmpty(networkOperator) && (networkMcc = networkOperator.substring(0, 3)) != null && networkMcc.trim().length() > 0) {
+        if (needToConvert(context, subId)
+                && (networkType = getNetworkType(telephonyManager)) != -1
+                && !TextUtils.isEmpty(networkOperator)
+                && (networkMcc = networkOperator.substring(0, 3)) != null
+                && networkMcc.trim().length() > 0) {
             result = formatNumber(context, destAddr, networkMcc, networkType);
         }
         if (DBG) {
             Log.d(TAG, "destAddr is " + (result != null ? "formatted." : "not formatted."));
-            Log.d(TAG, "leave filterDestAddr, new destAddr=\"" + (result != null ? pii(TAG, result) : pii(TAG, destAddr)) + "\"");
+            Log.d(
+                    TAG,
+                    "leave filterDestAddr, new destAddr=\""
+                            + (result != null ? pii(TAG, result) : pii(TAG, destAddr))
+                            + "\"");
         }
         return result != null ? result : destAddr;
     }
@@ -581,7 +618,12 @@ public class SmsNumberUtils {
     private static boolean isInternationalRoaming(TelephonyManager telephonyManager) {
         String operatorIsoCountry = telephonyManager.getNetworkCountryIso();
         String simIsoCountry = telephonyManager.getSimCountryIso();
-        boolean internationalRoaming = (TextUtils.isEmpty(operatorIsoCountry) || TextUtils.isEmpty(simIsoCountry) || simIsoCountry.equals(operatorIsoCountry)) ? false : true;
+        boolean internationalRoaming =
+                (TextUtils.isEmpty(operatorIsoCountry)
+                                || TextUtils.isEmpty(simIsoCountry)
+                                || simIsoCountry.equals(operatorIsoCountry))
+                        ? false
+                        : true;
         if (internationalRoaming) {
             if (XmlTags.ATTR_USER_ID.equals(simIsoCountry)) {
                 return true ^ "vi".equals(operatorIsoCountry);
@@ -598,9 +640,12 @@ public class SmsNumberUtils {
         PersistableBundle bundle;
         long identity = Binder.clearCallingIdentity();
         try {
-            CarrierConfigManager configManager = (CarrierConfigManager) context.getSystemService("carrier_config");
-            if (configManager != null && (bundle = configManager.getConfigForSubId(subId)) != null) {
-                return bundle.getBoolean(CarrierConfigManager.KEY_SMS_REQUIRES_DESTINATION_NUMBER_CONVERSION_BOOL);
+            CarrierConfigManager configManager =
+                    (CarrierConfigManager) context.getSystemService("carrier_config");
+            if (configManager != null
+                    && (bundle = configManager.getConfigForSubId(subId)) != null) {
+                return bundle.getBoolean(
+                        CarrierConfigManager.KEY_SMS_REQUIRES_DESTINATION_NUMBER_CONVERSION_BOOL);
             }
             Binder.restoreCallingIdentity(identity);
             return false;
@@ -614,7 +659,9 @@ public class SmsNumberUtils {
         if (pii == null || TextUtils.isEmpty(val) || Log.isLoggable(tag, 2)) {
             return val;
         }
-        return NavigationBarInflaterView.SIZE_MOD_START + secureHash(val.getBytes()) + NavigationBarInflaterView.SIZE_MOD_END;
+        return NavigationBarInflaterView.SIZE_MOD_START
+                + secureHash(val.getBytes())
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     private static String secureHash(byte[] input) {

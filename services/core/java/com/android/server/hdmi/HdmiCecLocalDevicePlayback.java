@@ -13,13 +13,11 @@ import android.os.PowerManager;
 import android.os.SystemProperties;
 import android.sysprop.HdmiProperties;
 import android.util.Slog;
+
 import com.android.internal.app.LocalePicker;
 import com.android.internal.util.IndentingPrintWriter;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
-import com.android.server.hdmi.DeviceDiscoveryAction;
-import com.android.server.hdmi.HdmiCecLocalDevice;
-import com.android.server.hdmi.HdmiControlService;
-import com.android.server.hdmi.PowerManagerWrapper;
+
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -34,14 +32,16 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
     public Handler mDelayedPopupOnActiveSourceLostHandler;
     public Handler mDelayedStandbyHandler;
     public Handler mDelayedStandbyOnActiveSourceLostHandler;
-    protected HdmiProperties.playback_device_action_on_routing_control_values mPlaybackDeviceActionOnRoutingControl;
+    protected HdmiProperties.playback_device_action_on_routing_control_values
+            mPlaybackDeviceActionOnRoutingControl;
     public ActiveWakeLock mWakeLock;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.hdmi.HdmiCecLocalDevicePlayback$1, reason: invalid class name */
-    public final class AnonymousClass1 implements HdmiControlService.SendMessageCallback, DeviceDiscoveryAction.DeviceDiscoveryCallback {
-        public /* synthetic */ AnonymousClass1() {
-        }
+    public final class AnonymousClass1
+            implements HdmiControlService.SendMessageCallback,
+                    DeviceDiscoveryAction.DeviceDiscoveryCallback {
+        public /* synthetic */ AnonymousClass1() {}
 
         @Override // com.android.server.hdmi.DeviceDiscoveryAction.DeviceDiscoveryCallback
         public void onDeviceDiscoveryDone(List list) {
@@ -53,21 +53,27 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
                 if (!hasNext) {
                     break;
                 }
-                hdmiCecLocalDevicePlayback.mService.mHdmiCecNetwork.addCecDevice((HdmiDeviceInfo) it.next());
+                hdmiCecLocalDevicePlayback.mService.mHdmiCecNetwork.addCecDevice(
+                        (HdmiDeviceInfo) it.next());
             }
-            Iterator it2 = ((ArrayList) hdmiCecLocalDevicePlayback.mService.getAllCecLocalDevices()).iterator();
+            Iterator it2 =
+                    ((ArrayList) hdmiCecLocalDevicePlayback.mService.getAllCecLocalDevices())
+                            .iterator();
             while (it2.hasNext()) {
-                hdmiCecLocalDevicePlayback.mService.mHdmiCecNetwork.addCecDevice(((HdmiCecLocalDevice) it2.next()).getDeviceInfo());
+                hdmiCecLocalDevicePlayback.mService.mHdmiCecNetwork.addCecDevice(
+                        ((HdmiCecLocalDevice) it2.next()).getDeviceInfo());
             }
             if (hdmiCecLocalDevicePlayback.getActions(HotplugDetectionAction.class).isEmpty()) {
-                hdmiCecLocalDevicePlayback.addAndStartAction(new HotplugDetectionAction(hdmiCecLocalDevicePlayback));
+                hdmiCecLocalDevicePlayback.addAndStartAction(
+                        new HotplugDetectionAction(hdmiCecLocalDevicePlayback));
             }
         }
 
         @Override // com.android.server.hdmi.HdmiControlService.SendMessageCallback
         public void onSendCompleted(int i) {
             if (i == 1) {
-                HdmiLogger.debug("AVR did not respond to <Give System Audio Mode Status>", new Object[0]);
+                HdmiLogger.debug(
+                        "AVR did not respond to <Give System Audio Mode Status>", new Object[0]);
                 HdmiCecLocalDevicePlayback.this.mService.setSystemAudioActivated(false);
             }
         }
@@ -75,11 +81,14 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.hdmi.HdmiCecLocalDevicePlayback$3, reason: invalid class name */
-    public final class AnonymousClass3 implements HdmiControlService.SendMessageCallback, ActiveWakeLock {
+    public final class AnonymousClass3
+            implements HdmiControlService.SendMessageCallback, ActiveWakeLock {
         public final Object val$callback;
 
         public AnonymousClass3() {
-            PowerManager.WakeLock newWakeLock = HdmiCecLocalDevicePlayback.this.mService.mPowerManager.mPowerManager.newWakeLock(1, "HdmiCecLocalDevicePlayback");
+            PowerManager.WakeLock newWakeLock =
+                    HdmiCecLocalDevicePlayback.this.mService.mPowerManager.mPowerManager
+                            .newWakeLock(1, "HdmiCecLocalDevicePlayback");
             this.val$callback = new PowerManagerWrapper.DefaultWakeLockWrapper(newWakeLock);
             newWakeLock.setReferenceCounted(false);
         }
@@ -91,17 +100,21 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
         @Override // com.android.server.hdmi.HdmiCecLocalDevicePlayback.ActiveWakeLock
         public void acquire() {
             ((PowerManagerWrapper.DefaultWakeLockWrapper) this.val$callback).mWakeLock.acquire();
-            HdmiLogger.debug("active source: %b. Wake lock acquired", Boolean.valueOf(HdmiCecLocalDevicePlayback.this.isActiveSource()));
+            HdmiLogger.debug(
+                    "active source: %b. Wake lock acquired",
+                    Boolean.valueOf(HdmiCecLocalDevicePlayback.this.isActiveSource()));
         }
 
         @Override // com.android.server.hdmi.HdmiCecLocalDevicePlayback.ActiveWakeLock
         public boolean isHeld() {
-            return ((PowerManagerWrapper.DefaultWakeLockWrapper) this.val$callback).mWakeLock.isHeld();
+            return ((PowerManagerWrapper.DefaultWakeLockWrapper) this.val$callback)
+                    .mWakeLock.isHeld();
         }
 
         @Override // com.android.server.hdmi.HdmiControlService.SendMessageCallback
         public void onSendCompleted(int i) {
-            HdmiCecLocalDevicePlayback.this.invokeStandbyCompletedCallback((HdmiCecLocalDevice.StandbyCompletedCallback) this.val$callback);
+            HdmiCecLocalDevicePlayback.this.invokeStandbyCompletedCallback(
+                    (HdmiCecLocalDevice.StandbyCompletedCallback) this.val$callback);
         }
 
         @Override // com.android.server.hdmi.HdmiCecLocalDevicePlayback.ActiveWakeLock
@@ -116,7 +129,10 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
     public final class AnonymousClass4 extends IHdmiControlCallback.Stub {
         public final void onComplete(int i) {
             if (i != 0) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m(i, "Failed to complete One Touch Play. result=", "HdmiCecLocalDevicePlayback");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        i,
+                        "Failed to complete One Touch Play. result=",
+                        "HdmiCecLocalDevicePlayback");
             }
         }
     }
@@ -125,8 +141,7 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
     /* renamed from: com.android.server.hdmi.HdmiCecLocalDevicePlayback$5, reason: invalid class name */
     public final class AnonymousClass5 implements ActiveWakeLock {
         @Override // com.android.server.hdmi.HdmiCecLocalDevicePlayback.ActiveWakeLock
-        public final void acquire() {
-        }
+        public final void acquire() {}
 
         @Override // com.android.server.hdmi.HdmiCecLocalDevicePlayback.ActiveWakeLock
         public final boolean isHeld() {
@@ -134,8 +149,7 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
         }
 
         @Override // com.android.server.hdmi.HdmiCecLocalDevicePlayback.ActiveWakeLock
-        public final void release() {
-        }
+        public final void release() {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -144,7 +158,8 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ HdmiCecLocalDevicePlayback this$0;
 
-        public /* synthetic */ AnonymousClass6(HdmiCecLocalDevicePlayback hdmiCecLocalDevicePlayback, int i) {
+        public /* synthetic */ AnonymousClass6(
+                HdmiCecLocalDevicePlayback hdmiCecLocalDevicePlayback, int i) {
             this.$r8$classId = i;
             this.this$0 = hdmiCecLocalDevicePlayback;
         }
@@ -155,25 +170,35 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
                 case 0:
                     if (!this.this$0.isActiveSource()) {
                         this.this$0.startHdmiCecActiveSourceLostActivity();
-                        this.this$0.mDelayedStandbyOnActiveSourceLostHandler.removeCallbacksAndMessages(null);
+                        this.this$0.mDelayedStandbyOnActiveSourceLostHandler
+                                .removeCallbacksAndMessages(null);
                         HdmiCecLocalDevicePlayback hdmiCecLocalDevicePlayback = this.this$0;
-                        hdmiCecLocalDevicePlayback.mDelayedStandbyOnActiveSourceLostHandler.postDelayed(new AnonymousClass6(hdmiCecLocalDevicePlayback, 1), 30000L);
+                        hdmiCecLocalDevicePlayback.mDelayedStandbyOnActiveSourceLostHandler
+                                .postDelayed(
+                                        new AnonymousClass6(hdmiCecLocalDevicePlayback, 1), 30000L);
                         break;
                     }
                     break;
                 case 1:
-                    if (!this.this$0.mService.mPowerManagerInternal.mPowerManagerInternal.wasDeviceIdleFor(30000L)) {
+                    if (!this.this$0.mService.mPowerManagerInternal.mPowerManagerInternal
+                            .wasDeviceIdleFor(30000L)) {
                         HdmiControlService hdmiControlService = this.this$0.mService;
-                        hdmiControlService.setAndBroadcastActiveSource(hdmiControlService.mHdmiCecNetwork.getPhysicalAddress(), this.this$0.getDeviceInfo().getDeviceType(), 0, "DelayedActiveSourceLostStandbyRunnable");
+                        hdmiControlService.setAndBroadcastActiveSource(
+                                hdmiControlService.mHdmiCecNetwork.getPhysicalAddress(),
+                                this.this$0.getDeviceInfo().getDeviceType(),
+                                0,
+                                "DelayedActiveSourceLostStandbyRunnable");
                         break;
                     } else {
                         this.this$0.mService.standby();
                         break;
                     }
                 default:
-                    if (!this.this$0.mService.mPowerManagerInternal.mPowerManagerInternal.wasDeviceIdleFor(30000L)) {
+                    if (!this.this$0.mService.mPowerManagerInternal.mPowerManagerInternal
+                            .wasDeviceIdleFor(30000L)) {
                         HdmiCecLocalDevicePlayback hdmiCecLocalDevicePlayback2 = this.this$0;
-                        hdmiCecLocalDevicePlayback2.mDelayedStandbyHandler.postDelayed(new AnonymousClass6(hdmiCecLocalDevicePlayback2, 2), 30000L);
+                        hdmiCecLocalDevicePlayback2.mDelayedStandbyHandler.postDelayed(
+                                new AnonymousClass6(hdmiCecLocalDevicePlayback2, 2), 30000L);
                         break;
                     } else {
                         this.this$0.mService.standby();
@@ -186,21 +211,36 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     /* renamed from: com.android.server.hdmi.HdmiCecLocalDevicePlayback$7, reason: invalid class name */
     public abstract /* synthetic */ class AnonymousClass7 {
-        public static final /* synthetic */ int[] $SwitchMap$android$sysprop$HdmiProperties$playback_device_action_on_routing_control_values;
+        public static final /* synthetic */ int[]
+                $SwitchMap$android$sysprop$HdmiProperties$playback_device_action_on_routing_control_values;
 
         static {
-            int[] iArr = new int[HdmiProperties.playback_device_action_on_routing_control_values.values().length];
-            $SwitchMap$android$sysprop$HdmiProperties$playback_device_action_on_routing_control_values = iArr;
+            int[] iArr =
+                    new int
+                            [HdmiProperties.playback_device_action_on_routing_control_values
+                                    .values()
+                                    .length];
+            $SwitchMap$android$sysprop$HdmiProperties$playback_device_action_on_routing_control_values =
+                    iArr;
             try {
-                iArr[HdmiProperties.playback_device_action_on_routing_control_values.WAKE_UP_AND_SEND_ACTIVE_SOURCE.ordinal()] = 1;
+                iArr[
+                                HdmiProperties.playback_device_action_on_routing_control_values
+                                        .WAKE_UP_AND_SEND_ACTIVE_SOURCE.ordinal()] =
+                        1;
             } catch (NoSuchFieldError unused) {
             }
             try {
-                $SwitchMap$android$sysprop$HdmiProperties$playback_device_action_on_routing_control_values[HdmiProperties.playback_device_action_on_routing_control_values.WAKE_UP_ONLY.ordinal()] = 2;
+                $SwitchMap$android$sysprop$HdmiProperties$playback_device_action_on_routing_control_values[
+                                HdmiProperties.playback_device_action_on_routing_control_values
+                                        .WAKE_UP_ONLY.ordinal()] =
+                        2;
             } catch (NoSuchFieldError unused2) {
             }
             try {
-                $SwitchMap$android$sysprop$HdmiProperties$playback_device_action_on_routing_control_values[HdmiProperties.playback_device_action_on_routing_control_values.NONE.ordinal()] = 3;
+                $SwitchMap$android$sysprop$HdmiProperties$playback_device_action_on_routing_control_values[
+                                HdmiProperties.playback_device_action_on_routing_control_values.NONE
+                                        .ordinal()] =
+                        3;
             } catch (NoSuchFieldError unused3) {
             }
         }
@@ -220,8 +260,11 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
         return !getWakeLock().isHeld();
     }
 
-    @Override // com.android.server.hdmi.HdmiCecLocalDeviceSource, com.android.server.hdmi.HdmiCecLocalDevice
-    public final void disableDevice(boolean z, HdmiCecLocalDevice.PendingActionClearedCallback pendingActionClearedCallback) {
+    @Override // com.android.server.hdmi.HdmiCecLocalDeviceSource,
+              // com.android.server.hdmi.HdmiCecLocalDevice
+    public final void disableDevice(
+            boolean z,
+            HdmiCecLocalDevice.PendingActionClearedCallback pendingActionClearedCallback) {
         assertRunOnServiceThread();
         removeAction(DeviceDiscoveryAction.class);
         removeAction(HotplugDetectionAction.class);
@@ -267,10 +310,12 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
         return this.mWakeLock;
     }
 
-    @Override // com.android.server.hdmi.HdmiCecLocalDeviceSource, com.android.server.hdmi.HdmiCecLocalDevice
+    @Override // com.android.server.hdmi.HdmiCecLocalDeviceSource,
+              // com.android.server.hdmi.HdmiCecLocalDevice
     public final int handleRoutingChange(HdmiCecMessage hdmiCecMessage) {
         assertRunOnServiceThread();
-        handleRoutingChangeAndInformation(HdmiUtils.twoBytesToInt(2, hdmiCecMessage.mParams), hdmiCecMessage);
+        handleRoutingChangeAndInformation(
+                HdmiUtils.twoBytesToInt(2, hdmiCecMessage.mParams), hdmiCecMessage);
         return -1;
     }
 
@@ -278,23 +323,36 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
     public final void handleRoutingChangeAndInformation(int i, HdmiCecMessage hdmiCecMessage) {
         assertRunOnServiceThread();
         HdmiControlService hdmiControlService = this.mService;
-        if (HdmiUtils.isInActiveRoutingPath(hdmiControlService.mHdmiCecNetwork.getPhysicalAddress(), i) && i != 0 && isActiveSource()) {
+        if (HdmiUtils.isInActiveRoutingPath(
+                        hdmiControlService.mHdmiCecNetwork.getPhysicalAddress(), i)
+                && i != 0
+                && isActiveSource()) {
             return;
         }
         if (i != hdmiControlService.mHdmiCecNetwork.getPhysicalAddress()) {
             assertRunOnServiceThread();
-            setActiveSource(-1, i, "HdmiCecLocalDevicePlayback#handleRoutingChangeAndInformation()");
+            setActiveSource(
+                    -1, i, "HdmiCecLocalDevicePlayback#handleRoutingChangeAndInformation()");
             return;
         }
         if (!isActiveSource()) {
             assertRunOnServiceThread();
-            setActiveSource(-1, i, "HdmiCecLocalDevicePlayback#handleRoutingChangeAndInformation()");
+            setActiveSource(
+                    -1, i, "HdmiCecLocalDevicePlayback#handleRoutingChangeAndInformation()");
         }
         assertRunOnServiceThread();
-        hdmiControlService.sendBroadcastAsUser(new Intent("android.hardware.hdmi.action.ON_ACTIVE_SOURCE_RECOVERED_DISMISS_UI"));
-        int i2 = AnonymousClass7.$SwitchMap$android$sysprop$HdmiProperties$playback_device_action_on_routing_control_values[this.mPlaybackDeviceActionOnRoutingControl.ordinal()];
+        hdmiControlService.sendBroadcastAsUser(
+                new Intent("android.hardware.hdmi.action.ON_ACTIVE_SOURCE_RECOVERED_DISMISS_UI"));
+        int i2 =
+                AnonymousClass7
+                        .$SwitchMap$android$sysprop$HdmiProperties$playback_device_action_on_routing_control_values[
+                        this.mPlaybackDeviceActionOnRoutingControl.ordinal()];
         if (i2 == 1) {
-            hdmiControlService.setAndBroadcastActiveSource(i, getDeviceInfo().getDeviceType(), hdmiCecMessage.mSource, "HdmiCecLocalDevicePlayback#handleRoutingChangeAndInformation()");
+            hdmiControlService.setAndBroadcastActiveSource(
+                    i,
+                    getDeviceInfo().getDeviceType(),
+                    hdmiCecMessage.mSource,
+                    "HdmiCecLocalDevicePlayback#handleRoutingChangeAndInformation()");
         } else {
             if (i2 != 2) {
                 return;
@@ -303,16 +361,23 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
         }
     }
 
-    @Override // com.android.server.hdmi.HdmiCecLocalDeviceSource, com.android.server.hdmi.HdmiCecLocalDevice
+    @Override // com.android.server.hdmi.HdmiCecLocalDeviceSource,
+              // com.android.server.hdmi.HdmiCecLocalDevice
     public final int handleRoutingInformation(HdmiCecMessage hdmiCecMessage) {
         assertRunOnServiceThread();
         int twoBytesToInt = HdmiUtils.twoBytesToInt(hdmiCecMessage.mParams);
-        HdmiDeviceInfo cecDeviceInfo = this.mService.mHdmiCecNetwork.getCecDeviceInfo(hdmiCecMessage.mSource);
-        if (cecDeviceInfo == null || cecDeviceInfo.getLogicalAddress() == 0 || cecDeviceInfo.getPhysicalAddress() != twoBytesToInt) {
+        HdmiDeviceInfo cecDeviceInfo =
+                this.mService.mHdmiCecNetwork.getCecDeviceInfo(hdmiCecMessage.mSource);
+        if (cecDeviceInfo == null
+                || cecDeviceInfo.getLogicalAddress() == 0
+                || cecDeviceInfo.getPhysicalAddress() != twoBytesToInt) {
             handleRoutingChangeAndInformation(twoBytesToInt, hdmiCecMessage);
             return -1;
         }
-        Slog.d("HdmiCecLocalDevicePlayback", "<Routing Information> is ignored, it is pointing to the same physical address as the message sender");
+        Slog.d(
+                "HdmiCecLocalDevicePlayback",
+                "<Routing Information> is ignored, it is pointing to the same physical address as"
+                    + " the message sender");
         return -1;
     }
 
@@ -325,12 +390,20 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
         }
         try {
             String str = new String(hdmiCecMessage.mParams, 0, 3, "US-ASCII");
-            String localeToMenuLanguage = HdmiControlService.localeToMenuLanguage(hdmiControlService.getContext().getResources().getConfiguration().locale);
-            HdmiLogger.debug("handleSetMenuLanguage " + str + " cur:" + localeToMenuLanguage, new Object[0]);
+            String localeToMenuLanguage =
+                    HdmiControlService.localeToMenuLanguage(
+                            hdmiControlService
+                                    .getContext()
+                                    .getResources()
+                                    .getConfiguration()
+                                    .locale);
+            HdmiLogger.debug(
+                    "handleSetMenuLanguage " + str + " cur:" + localeToMenuLanguage, new Object[0]);
             if (localeToMenuLanguage.equals(str)) {
                 return -1;
             }
-            for (LocalePicker.LocaleInfo localeInfo : LocalePicker.getAllAssetLocales(hdmiControlService.getContext(), false)) {
+            for (LocalePicker.LocaleInfo localeInfo :
+                    LocalePicker.getAllAssetLocales(hdmiControlService.getContext(), false)) {
                 if (HdmiControlService.localeToMenuLanguage(localeInfo.getLocale()).equals(str)) {
                     startSetMenuLanguageActivity(localeInfo.getLocale());
                     return -1;
@@ -349,7 +422,10 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
         boolean parseCommandParamSystemAudioStatus;
         if (hdmiCecMessage.mDestination == 15 && hdmiCecMessage.mSource == 5) {
             HdmiControlService hdmiControlService = this.mService;
-            if (hdmiControlService.audioSystem() == null && hdmiControlService.isSystemAudioActivated() != (parseCommandParamSystemAudioStatus = HdmiUtils.parseCommandParamSystemAudioStatus(hdmiCecMessage))) {
+            if (hdmiControlService.audioSystem() == null
+                    && hdmiControlService.isSystemAudioActivated()
+                            != (parseCommandParamSystemAudioStatus =
+                                    HdmiUtils.parseCommandParamSystemAudioStatus(hdmiCecMessage))) {
                 hdmiControlService.setSystemAudioActivated(parseCommandParamSystemAudioStatus);
             }
         }
@@ -358,10 +434,12 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
 
     @Override // com.android.server.hdmi.HdmiCecLocalDevice
     public final int handleSystemAudioModeStatus(HdmiCecMessage hdmiCecMessage) {
-        if (hdmiCecMessage.mDestination != getDeviceInfo().getLogicalAddress() || hdmiCecMessage.mSource != 5) {
+        if (hdmiCecMessage.mDestination != getDeviceInfo().getLogicalAddress()
+                || hdmiCecMessage.mSource != 5) {
             return -1;
         }
-        boolean parseCommandParamSystemAudioStatus = HdmiUtils.parseCommandParamSystemAudioStatus(hdmiCecMessage);
+        boolean parseCommandParamSystemAudioStatus =
+                HdmiUtils.parseCommandParamSystemAudioStatus(hdmiCecMessage);
         HdmiControlService hdmiControlService = this.mService;
         if (hdmiControlService.isSystemAudioActivated() == parseCommandParamSystemAudioStatus) {
             return -1;
@@ -378,7 +456,8 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
     }
 
     @Override // com.android.server.hdmi.HdmiCecLocalDevice
-    public /* bridge */ /* synthetic */ void invokeStandbyCompletedCallback(HdmiCecLocalDevice.StandbyCompletedCallback standbyCompletedCallback) {
+    public /* bridge */ /* synthetic */ void invokeStandbyCompletedCallback(
+            HdmiCecLocalDevice.StandbyCompletedCallback standbyCompletedCallback) {
         super.invokeStandbyCompletedCallback(standbyCompletedCallback);
     }
 
@@ -387,7 +466,10 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
         assertRunOnServiceThread();
         HdmiControlService hdmiControlService = this.mService;
         hdmiControlService.pauseActiveMediaSessions();
-        String stringValue = hdmiControlService.getHdmiCecConfig().getStringValue("power_state_change_on_active_source_lost");
+        String stringValue =
+                hdmiControlService
+                        .getHdmiCecConfig()
+                        .getStringValue("power_state_change_on_active_source_lost");
         stringValue.getClass();
         if (stringValue.equals("standby_now")) {
             Handler handler = this.mDelayedPopupOnActiveSourceLostHandler;
@@ -401,19 +483,35 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
         assertRunOnServiceThread();
         HdmiControlService hdmiControlService = this.mService;
         if (i == 0) {
-            hdmiControlService.setAndBroadcastActiveSource(hdmiControlService.mHdmiCecNetwork.getPhysicalAddress(), getDeviceInfo().getDeviceType(), 15, "HdmiCecLocalDevicePlayback#onAddressAllocated()");
+            hdmiControlService.setAndBroadcastActiveSource(
+                    hdmiControlService.mHdmiCecNetwork.getPhysicalAddress(),
+                    getDeviceInfo().getDeviceType(),
+                    15,
+                    "HdmiCecLocalDevicePlayback#onAddressAllocated()");
         }
-        hdmiControlService.sendCecCommand(HdmiCecMessageBuilder.buildReportPhysicalAddressCommand(getDeviceInfo().getLogicalAddress(), hdmiControlService.mHdmiCecNetwork.getPhysicalAddress(), this.mDeviceType), null);
-        hdmiControlService.sendCecCommand(HdmiCecMessageBuilder.buildDeviceVendorIdCommand(getDeviceInfo().getLogicalAddress(), hdmiControlService.getVendorId()), null);
+        hdmiControlService.sendCecCommand(
+                HdmiCecMessageBuilder.buildReportPhysicalAddressCommand(
+                        getDeviceInfo().getLogicalAddress(),
+                        hdmiControlService.mHdmiCecNetwork.getPhysicalAddress(),
+                        this.mDeviceType),
+                null);
+        hdmiControlService.sendCecCommand(
+                HdmiCecMessageBuilder.buildDeviceVendorIdCommand(
+                        getDeviceInfo().getLogicalAddress(), hdmiControlService.getVendorId()),
+                null);
         buildAndSendSetOsdName(0);
         if (hdmiControlService.audioSystem() == null) {
-            hdmiControlService.sendCecCommand(HdmiCecMessage.build(getDeviceInfo().getLogicalAddress(), 5, 125), new AnonymousClass1());
+            hdmiControlService.sendCecCommand(
+                    HdmiCecMessage.build(getDeviceInfo().getLogicalAddress(), 5, 125),
+                    new AnonymousClass1());
         }
         assertRunOnServiceThread();
         assertRunOnServiceThread();
         hdmiControlService.mHdmiCecNetwork.clearDeviceList();
         if (hasAction(DeviceDiscoveryAction.class)) {
-            Slog.i("HdmiCecLocalDevicePlayback", "Device Discovery Action is in progress. Restarting.");
+            Slog.i(
+                    "HdmiCecLocalDevicePlayback",
+                    "Device Discovery Action is in progress. Restarting.");
             removeAction(DeviceDiscoveryAction.class);
         }
         addAndStartAction(new DeviceDiscoveryAction(this, new AnonymousClass1()));
@@ -435,7 +533,10 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
         ArrayList arrayList = new ArrayList();
         for (int i2 = 0; i2 < hdmiCecNetwork.mDeviceInfos.size(); i2++) {
             int keyAt = hdmiCecNetwork.mDeviceInfos.keyAt(i2);
-            int physicalAddressToPortId = hdmiCecNetwork.physicalAddressToPortId(((HdmiDeviceInfo) hdmiCecNetwork.mDeviceInfos.get(keyAt)).getPhysicalAddress());
+            int physicalAddressToPortId =
+                    hdmiCecNetwork.physicalAddressToPortId(
+                            ((HdmiDeviceInfo) hdmiCecNetwork.mDeviceInfos.get(keyAt))
+                                    .getPhysicalAddress());
             if (physicalAddressToPortId == i || physicalAddressToPortId == -1) {
                 arrayList.add(Integer.valueOf(keyAt));
             }
@@ -450,22 +551,27 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
 
     @Override // com.android.server.hdmi.HdmiCecLocalDevice
     public final void onInitializeCecComplete(int i) {
-        if (i == 2 && !this.mService.getHdmiCecConfig().getStringValue("power_control_mode").equals("none")) {
+        if (i == 2
+                && !this.mService
+                        .getHdmiCecConfig()
+                        .getStringValue("power_control_mode")
+                        .equals("none")) {
             oneTouchPlay(new AnonymousClass4());
         }
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:40:0x0098, code lost:
-    
-        if (r9.equals(android.net.INetd.IF_FLAG_BROADCAST) == false) goto L21;
-     */
+
+       if (r9.equals(android.net.INetd.IF_FLAG_BROADCAST) == false) goto L21;
+    */
     @Override // com.android.server.hdmi.HdmiCecLocalDevice
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onStandby(boolean r8, int r9, com.android.server.hdmi.HdmiControlService.AnonymousClass27 r10) {
+    public final void onStandby(
+            boolean r8, int r9, com.android.server.hdmi.HdmiControlService.AnonymousClass27 r10) {
         /*
             r7 = this;
             r0 = 1
@@ -599,7 +705,10 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
         L104:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.hdmi.HdmiCecLocalDevicePlayback.onStandby(boolean, int, com.android.server.hdmi.HdmiControlService$27):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.hdmi.HdmiCecLocalDevicePlayback.onStandby(boolean, int,"
+                    + " com.android.server.hdmi.HdmiControlService$27):void");
     }
 
     @Override // com.android.server.hdmi.HdmiCecLocalDevice
@@ -615,7 +724,8 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
         }
     }
 
-    @Override // com.android.server.hdmi.HdmiCecLocalDeviceSource, com.android.server.hdmi.HdmiCecLocalDevice
+    @Override // com.android.server.hdmi.HdmiCecLocalDeviceSource,
+              // com.android.server.hdmi.HdmiCecLocalDevice
     public void setActiveSource(int i, int i2, String str) {
         assertRunOnServiceThread();
         super.setActiveSource(i, i2, str);
@@ -629,7 +739,8 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
     @Override // com.android.server.hdmi.HdmiCecLocalDevice
     public final void setPreferredAddress(int i) {
         assertRunOnServiceThread();
-        this.mService.writeStringSystemProperty("persist.sys.hdmi.addr.playback", String.valueOf(i));
+        this.mService.writeStringSystemProperty(
+                "persist.sys.hdmi.addr.playback", String.valueOf(i));
     }
 
     public void startHdmiCecActiveSourceLostActivity() {
@@ -638,11 +749,17 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
             try {
                 Context context = this.mService.getContext();
                 Intent intent = new Intent();
-                intent.setComponent(ComponentName.unflattenFromString(context.getResources().getString(R.string.dynamic_mode_notification_channel_name)));
+                intent.setComponent(
+                        ComponentName.unflattenFromString(
+                                context.getResources()
+                                        .getString(
+                                                R.string.dynamic_mode_notification_channel_name)));
                 intent.addFlags(268435456);
                 context.startActivityAsUser(intent, context.getUser());
             } catch (ActivityNotFoundException unused) {
-                Slog.e("HdmiCecLocalDevicePlayback", "Unable to start HdmiCecActiveSourceLostActivity");
+                Slog.e(
+                        "HdmiCecLocalDevicePlayback",
+                        "Unable to start HdmiCecActiveSourceLostActivity");
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -656,11 +773,16 @@ public final class HdmiCecLocalDevicePlayback extends HdmiCecLocalDeviceSource {
                 Context context = this.mService.getContext();
                 Intent intent = new Intent();
                 intent.putExtra("android.hardware.hdmi.extra.LOCALE", locale.toLanguageTag());
-                intent.setComponent(ComponentName.unflattenFromString(context.getResources().getString(R.string.dynamic_mode_notification_summary)));
+                intent.setComponent(
+                        ComponentName.unflattenFromString(
+                                context.getResources()
+                                        .getString(R.string.dynamic_mode_notification_summary)));
                 intent.addFlags(268435456);
                 context.startActivityAsUser(intent, context.getUser());
             } catch (ActivityNotFoundException unused) {
-                Slog.e("HdmiCecLocalDevicePlayback", "unable to start HdmiCecSetMenuLanguageActivity");
+                Slog.e(
+                        "HdmiCecLocalDevicePlayback",
+                        "unable to start HdmiCecSetMenuLanguageActivity");
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);

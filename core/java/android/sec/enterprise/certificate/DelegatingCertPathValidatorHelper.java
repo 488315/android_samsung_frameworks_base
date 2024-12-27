@@ -3,6 +3,7 @@ package android.sec.enterprise.certificate;
 import android.os.UserHandle;
 import android.sec.enterprise.EnterpriseDeviceManager;
 import android.util.Log;
+
 import java.io.ByteArrayOutputStream;
 import java.security.cert.PKIXCertPathChecker;
 import java.security.cert.PKIXParameters;
@@ -51,7 +52,8 @@ public class DelegatingCertPathValidatorHelper {
         return ret;
     }
 
-    public static void setRevocationChecker(PKIXRevocationChecker revChecker, PKIXParameters params) {
+    public static void setRevocationChecker(
+            PKIXRevocationChecker revChecker, PKIXParameters params) {
         if (DEBUG) {
             Log.d(TAG, "setRevocationChecker");
         }
@@ -90,7 +92,9 @@ public class DelegatingCertPathValidatorHelper {
                     certByteStream.write(java.util.Base64.getEncoder().encode(cert.getEncoded()));
                     certByteStream.write(PEM_CERT_END.getBytes());
                 }
-                ret = cp.isCaCertificateTrustedAsUser(certByteStream.toByteArray(), false, false, userId);
+                ret =
+                        cp.isCaCertificateTrustedAsUser(
+                                certByteStream.toByteArray(), false, false, userId);
             }
         } catch (Exception e) {
             Log.e(TAG, "Failed to call isCaCertificateTrustedAsUser() " + e.getMessage());

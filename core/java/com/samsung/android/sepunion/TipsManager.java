@@ -2,7 +2,6 @@ package com.samsung.android.sepunion;
 
 import android.content.Context;
 import android.os.IBinder;
-import com.samsung.android.sepunion.ITipsManager;
 
 /* loaded from: classes6.dex */
 public class TipsManager {
@@ -17,7 +16,8 @@ public class TipsManager {
 
     private ITipsManager getService() {
         if (this.mService == null) {
-            SemUnionManager um = (SemUnionManager) this.mContext.getSystemService(Context.SEP_UNION_SERVICE);
+            SemUnionManager um =
+                    (SemUnionManager) this.mContext.getSystemService(Context.SEP_UNION_SERVICE);
             IBinder b = um.getSemSystemService(UnionConstants.SERVICE_TIPS);
             this.mService = ITipsManager.Stub.asInterface(b);
         }

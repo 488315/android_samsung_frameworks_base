@@ -7,6 +7,7 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.telephony.mbms.IGroupCallCallback;
 import android.telephony.mbms.IMbmsGroupCallSessionCallback;
+
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -15,9 +16,11 @@ public interface IMbmsGroupCallService extends IInterface {
 
     void dispose(int i) throws RemoteException;
 
-    int initialize(IMbmsGroupCallSessionCallback iMbmsGroupCallSessionCallback, int i) throws RemoteException;
+    int initialize(IMbmsGroupCallSessionCallback iMbmsGroupCallSessionCallback, int i)
+            throws RemoteException;
 
-    int startGroupCall(int i, long j, List list, List list2, IGroupCallCallback iGroupCallCallback) throws RemoteException;
+    int startGroupCall(int i, long j, List list, List list2, IGroupCallCallback iGroupCallCallback)
+            throws RemoteException;
 
     void stopGroupCall(int i, long j) throws RemoteException;
 
@@ -25,26 +28,31 @@ public interface IMbmsGroupCallService extends IInterface {
 
     public static class Default implements IMbmsGroupCallService {
         @Override // android.telephony.mbms.vendor.IMbmsGroupCallService
-        public int initialize(IMbmsGroupCallSessionCallback callback, int subId) throws RemoteException {
+        public int initialize(IMbmsGroupCallSessionCallback callback, int subId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.telephony.mbms.vendor.IMbmsGroupCallService
-        public void stopGroupCall(int subId, long tmgi) throws RemoteException {
-        }
+        public void stopGroupCall(int subId, long tmgi) throws RemoteException {}
 
         @Override // android.telephony.mbms.vendor.IMbmsGroupCallService
-        public void updateGroupCall(int subscriptionId, long tmgi, List saiList, List frequencyList) throws RemoteException {
-        }
+        public void updateGroupCall(int subscriptionId, long tmgi, List saiList, List frequencyList)
+                throws RemoteException {}
 
         @Override // android.telephony.mbms.vendor.IMbmsGroupCallService
-        public int startGroupCall(int subscriptionId, long tmgi, List saiList, List frequencyList, IGroupCallCallback callback) throws RemoteException {
+        public int startGroupCall(
+                int subscriptionId,
+                long tmgi,
+                List saiList,
+                List frequencyList,
+                IGroupCallCallback callback)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.telephony.mbms.vendor.IMbmsGroupCallService
-        public void dispose(int subId) throws RemoteException {
-        }
+        public void dispose(int subId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -52,7 +60,7 @@ public interface IMbmsGroupCallService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMbmsGroupCallService {
+    public abstract static class Stub extends Binder implements IMbmsGroupCallService {
         static final int TRANSACTION_dispose = 5;
         static final int TRANSACTION_initialize = 1;
         static final int TRANSACTION_startGroupCall = 4;
@@ -102,7 +110,8 @@ public interface IMbmsGroupCallService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IMbmsGroupCallService.DESCRIPTOR);
             }
@@ -112,7 +121,8 @@ public interface IMbmsGroupCallService extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IMbmsGroupCallSessionCallback _arg0 = IMbmsGroupCallSessionCallback.Stub.asInterface(data.readStrongBinder());
+                    IMbmsGroupCallSessionCallback _arg0 =
+                            IMbmsGroupCallSessionCallback.Stub.asInterface(data.readStrongBinder());
                     int _arg1 = data.readInt();
                     data.enforceNoDataAvail();
                     int _result = initialize(_arg0, _arg1);
@@ -142,7 +152,8 @@ public interface IMbmsGroupCallService extends IInterface {
                     ClassLoader cl2 = getClass().getClassLoader();
                     List _arg22 = data.readArrayList(cl2);
                     List _arg32 = data.readArrayList(cl2);
-                    IGroupCallCallback _arg4 = IGroupCallCallback.Stub.asInterface(data.readStrongBinder());
+                    IGroupCallCallback _arg4 =
+                            IGroupCallCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result2 = startGroupCall(_arg04, _arg14, _arg22, _arg32, _arg4);
                     reply.writeNoException();
@@ -176,7 +187,8 @@ public interface IMbmsGroupCallService extends IInterface {
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsGroupCallService
-            public int initialize(IMbmsGroupCallSessionCallback callback, int subId) throws RemoteException {
+            public int initialize(IMbmsGroupCallSessionCallback callback, int subId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -210,7 +222,9 @@ public interface IMbmsGroupCallService extends IInterface {
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsGroupCallService
-            public void updateGroupCall(int subscriptionId, long tmgi, List saiList, List frequencyList) throws RemoteException {
+            public void updateGroupCall(
+                    int subscriptionId, long tmgi, List saiList, List frequencyList)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -228,7 +242,13 @@ public interface IMbmsGroupCallService extends IInterface {
             }
 
             @Override // android.telephony.mbms.vendor.IMbmsGroupCallService
-            public int startGroupCall(int subscriptionId, long tmgi, List saiList, List frequencyList, IGroupCallCallback callback) throws RemoteException {
+            public int startGroupCall(
+                    int subscriptionId,
+                    long tmgi,
+                    List saiList,
+                    List frequencyList,
+                    IGroupCallCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

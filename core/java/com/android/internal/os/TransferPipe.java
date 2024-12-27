@@ -7,6 +7,9 @@ import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.os.SystemClock;
 import android.util.Slog;
+
+import libcore.io.IoUtils;
+
 import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
 import java.io.FileDescriptor;
@@ -14,7 +17,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import libcore.io.IoUtils;
 
 /* loaded from: classes5.dex */
 public class TransferPipe implements Runnable, Closeable {
@@ -30,7 +32,8 @@ public class TransferPipe implements Runnable, Closeable {
     final Thread mThread;
 
     interface Caller {
-        void go(IInterface iInterface, FileDescriptor fileDescriptor, String str, String[] strArr) throws RemoteException;
+        void go(IInterface iInterface, FileDescriptor fileDescriptor, String str, String[] strArr)
+                throws RemoteException;
     }
 
     public TransferPipe() throws IOException {
@@ -59,11 +62,13 @@ public class TransferPipe implements Runnable, Closeable {
         this.mBufferPrefix = prefix;
     }
 
-    public static void dumpAsync(IBinder binder, FileDescriptor out, String[] args) throws IOException, RemoteException {
+    public static void dumpAsync(IBinder binder, FileDescriptor out, String[] args)
+            throws IOException, RemoteException {
         goDump(binder, out, args);
     }
 
-    public static byte[] dumpAsync(IBinder binder, String... args) throws IOException, RemoteException {
+    public static byte[] dumpAsync(IBinder binder, String... args)
+            throws IOException, RemoteException {
         ParcelFileDescriptor[] pipe = ParcelFileDescriptor.createPipe();
         try {
             dumpAsync(binder, pipe[1].getFileDescriptor(), args);
@@ -95,11 +100,20 @@ public class TransferPipe implements Runnable, Closeable {
         }
     }
 
-    static void go(Caller caller, IInterface iface, FileDescriptor out, String prefix, String[] args) throws IOException, RemoteException {
+    static void go(
+            Caller caller, IInterface iface, FileDescriptor out, String prefix, String[] args)
+            throws IOException, RemoteException {
         go(caller, iface, out, prefix, args, 5000L);
     }
 
-    static void go(Caller caller, IInterface iface, FileDescriptor out, String prefix, String[] args, long timeout) throws IOException, RemoteException {
+    static void go(
+            Caller caller,
+            IInterface iface,
+            FileDescriptor out,
+            String prefix,
+            String[] args,
+            long timeout)
+            throws IOException, RemoteException {
         if (iface.asBinder() instanceof Binder) {
             try {
                 caller.go(iface, out, prefix, args);
@@ -123,11 +137,13 @@ public class TransferPipe implements Runnable, Closeable {
         }
     }
 
-    static void goDump(IBinder binder, FileDescriptor out, String[] args) throws IOException, RemoteException {
+    static void goDump(IBinder binder, FileDescriptor out, String[] args)
+            throws IOException, RemoteException {
         goDump(binder, out, args, 5000L);
     }
 
-    static void goDump(IBinder binder, FileDescriptor out, String[] args, long timeout) throws IOException, RemoteException {
+    static void goDump(IBinder binder, FileDescriptor out, String[] args, long timeout)
+            throws IOException, RemoteException {
         if (binder instanceof Binder) {
             try {
                 binder.dump(out, args);

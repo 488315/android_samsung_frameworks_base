@@ -47,6 +47,5 @@ public class DecoderCapabilities {
         return decoderList;
     }
 
-    private DecoderCapabilities() {
-    }
+    private DecoderCapabilities() {}
 }

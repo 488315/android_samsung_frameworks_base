@@ -6,8 +6,7 @@ import android.view.animation.Interpolator;
 public class BackEaseOut implements Interpolator {
     private float overshot;
 
-    public BackEaseOut() {
-    }
+    public BackEaseOut() {}
 
     public BackEaseOut(float overshot) {
         this.overshot = overshot;

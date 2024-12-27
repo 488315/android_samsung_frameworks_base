@@ -16,12 +16,13 @@ public interface IInputSensorEventListener extends IInterface {
 
     public static class Default implements IInputSensorEventListener {
         @Override // android.hardware.input.IInputSensorEventListener
-        public void onInputSensorChanged(int deviceId, int sensorId, int accuracy, long timestamp, float[] values) throws RemoteException {
-        }
+        public void onInputSensorChanged(
+                int deviceId, int sensorId, int accuracy, long timestamp, float[] values)
+                throws RemoteException {}
 
         @Override // android.hardware.input.IInputSensorEventListener
-        public void onInputSensorAccuracyChanged(int deviceId, int sensorId, int accuracy) throws RemoteException {
-        }
+        public void onInputSensorAccuracyChanged(int deviceId, int sensorId, int accuracy)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +30,7 @@ public interface IInputSensorEventListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInputSensorEventListener {
+    public abstract static class Stub extends Binder implements IInputSensorEventListener {
         static final int TRANSACTION_onInputSensorAccuracyChanged = 2;
         static final int TRANSACTION_onInputSensorChanged = 1;
 
@@ -70,7 +71,8 @@ public interface IInputSensorEventListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IInputSensorEventListener.DESCRIPTOR);
             }
@@ -117,7 +119,9 @@ public interface IInputSensorEventListener extends IInterface {
             }
 
             @Override // android.hardware.input.IInputSensorEventListener
-            public void onInputSensorChanged(int deviceId, int sensorId, int accuracy, long timestamp, float[] values) throws RemoteException {
+            public void onInputSensorChanged(
+                    int deviceId, int sensorId, int accuracy, long timestamp, float[] values)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputSensorEventListener.DESCRIPTOR);
@@ -133,7 +137,8 @@ public interface IInputSensorEventListener extends IInterface {
             }
 
             @Override // android.hardware.input.IInputSensorEventListener
-            public void onInputSensorAccuracyChanged(int deviceId, int sensorId, int accuracy) throws RemoteException {
+            public void onInputSensorAccuracyChanged(int deviceId, int sensorId, int accuracy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IInputSensorEventListener.DESCRIPTOR);

@@ -62,7 +62,8 @@ public final class SoundAction extends CornerActionType {
                     return;
                 case 1:
                     int ringerModeInternal = this.mAudioManager.getRingerModeInternal() - 1;
-                    this.mAudioManager.setRingerModeInternal(ringerModeInternal >= 0 ? ringerModeInternal : 2);
+                    this.mAudioManager.setRingerModeInternal(
+                            ringerModeInternal >= 0 ? ringerModeInternal : 2);
                     return;
                 case 2:
                     this.mAudioManager.adjustStreamVolume(3, 0, 1);

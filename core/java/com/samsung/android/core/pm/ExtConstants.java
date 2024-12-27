@@ -2,7 +2,8 @@ package com.samsung.android.core.pm;
 
 /* loaded from: classes6.dex */
 public class ExtConstants {
-    public static final String ACTION_PACKAGE_SET_APPCATEGORY = "com.samsung.android.intent.action.SET_APPCATEGORY";
+    public static final String ACTION_PACKAGE_SET_APPCATEGORY =
+            "com.samsung.android.intent.action.SET_APPCATEGORY";
     public static final int BLOCK_DETAIL_GLOBAL_1 = 150;
     public static final String EXTRA_APP_CATEGORY = "app_category";
     public static final boolean FW_BR_ALLOW_LIST_WITH_SCPM = true;

@@ -8,8 +8,15 @@ public abstract class Reflection {
     static {
         ReflectionFactory reflectionFactory = null;
         try {
-            reflectionFactory = (ReflectionFactory) Class.forName("com.android.server.permission.jarjar.kotlin.reflect.jvm.internal.ReflectionFactoryImpl").newInstance();
-        } catch (ClassCastException | ClassNotFoundException | IllegalAccessException | InstantiationException unused) {
+            reflectionFactory =
+                    (ReflectionFactory)
+                            Class.forName(
+                                            "com.android.server.permission.jarjar.kotlin.reflect.jvm.internal.ReflectionFactoryImpl")
+                                    .newInstance();
+        } catch (ClassCastException
+                | ClassNotFoundException
+                | IllegalAccessException
+                | InstantiationException unused) {
         }
         if (reflectionFactory == null) {
             reflectionFactory = new ReflectionFactory();

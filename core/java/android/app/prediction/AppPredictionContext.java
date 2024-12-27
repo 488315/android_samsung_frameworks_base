@@ -5,30 +5,34 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class AppPredictionContext implements Parcelable {
-    public static final Parcelable.Creator<AppPredictionContext> CREATOR = new Parcelable.Creator<AppPredictionContext>() { // from class: android.app.prediction.AppPredictionContext.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppPredictionContext createFromParcel(Parcel parcel) {
-            return new AppPredictionContext(parcel);
-        }
+    public static final Parcelable.Creator<AppPredictionContext> CREATOR =
+            new Parcelable.Creator<AppPredictionContext>() { // from class:
+                // android.app.prediction.AppPredictionContext.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppPredictionContext createFromParcel(Parcel parcel) {
+                    return new AppPredictionContext(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppPredictionContext[] newArray(int size) {
-            return new AppPredictionContext[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppPredictionContext[] newArray(int size) {
+                    return new AppPredictionContext[size];
+                }
+            };
     private final Bundle mExtras;
     private final String mPackageName;
     private final int mPredictedTargetCount;
     private final String mUiSurface;
 
-    private AppPredictionContext(String uiSurface, int numPredictedTargets, String packageName, Bundle extras) {
+    private AppPredictionContext(
+            String uiSurface, int numPredictedTargets, String packageName, Bundle extras) {
         this.mUiSurface = uiSurface;
         this.mPredictedTargetCount = numPredictedTargets;
         this.mPackageName = packageName;
@@ -66,7 +70,9 @@ public final class AppPredictionContext implements Parcelable {
             return false;
         }
         AppPredictionContext other = (AppPredictionContext) o;
-        return this.mPredictedTargetCount == other.mPredictedTargetCount && this.mUiSurface.equals(other.mUiSurface) && this.mPackageName.equals(other.mPackageName);
+        return this.mPredictedTargetCount == other.mPredictedTargetCount
+                && this.mUiSurface.equals(other.mUiSurface)
+                && this.mPackageName.equals(other.mPackageName);
     }
 
     public int hashCode() {
@@ -115,7 +121,8 @@ public final class AppPredictionContext implements Parcelable {
         }
 
         public AppPredictionContext build() {
-            return new AppPredictionContext(this.mUiSurface, this.mPredictedTargetCount, this.mPackageName, this.mExtras);
+            return new AppPredictionContext(
+                    this.mUiSurface, this.mPredictedTargetCount, this.mPackageName, this.mExtras);
         }
     }
 }

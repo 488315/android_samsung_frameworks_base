@@ -3,7 +3,9 @@ package com.android.internal.os;
 import android.os.Process;
 import android.util.IntArray;
 import android.util.Slog;
+
 import com.android.internal.util.Preconditions;
+
 import java.io.IOException;
 import java.nio.file.DirectoryIteratorException;
 import java.nio.file.DirectoryStream;
@@ -32,9 +34,16 @@ public class KernelCpuThreadReader {
     private final ProcTimeInStateReader mProcTimeInStateReader;
     private Predicate<Integer> mUidPredicate;
     private static final Path DEFAULT_PROC_PATH = Paths.get("/proc", new String[0]);
-    private static final Path DEFAULT_INITIAL_TIME_IN_STATE_PATH = DEFAULT_PROC_PATH.resolve("self/time_in_state");
+    private static final Path DEFAULT_INITIAL_TIME_IN_STATE_PATH =
+            DEFAULT_PROC_PATH.resolve("self/time_in_state");
 
-    public KernelCpuThreadReader(int numBuckets, Predicate<Integer> uidPredicate, Path procPath, Path initialTimeInStatePath, Injector injector) throws IOException {
+    public KernelCpuThreadReader(
+            int numBuckets,
+            Predicate<Integer> uidPredicate,
+            Path procPath,
+            Path initialTimeInStatePath,
+            Injector injector)
+            throws IOException {
         this.mUidPredicate = uidPredicate;
         this.mProcPath = procPath;
         this.mProcTimeInStateReader = new ProcTimeInStateReader(initialTimeInStatePath);
@@ -44,7 +53,12 @@ public class KernelCpuThreadReader {
 
     public static KernelCpuThreadReader create(int numBuckets, Predicate<Integer> uidPredicate) {
         try {
-            return new KernelCpuThreadReader(numBuckets, uidPredicate, DEFAULT_PROC_PATH, DEFAULT_INITIAL_TIME_IN_STATE_PATH, new Injector());
+            return new KernelCpuThreadReader(
+                    numBuckets,
+                    uidPredicate,
+                    DEFAULT_PROC_PATH,
+                    DEFAULT_INITIAL_TIME_IN_STATE_PATH,
+                    new Injector());
         } catch (IOException e) {
             Slog.e(TAG, "Failed to initialize KernelCpuThreadReader", e);
             return null;
@@ -55,12 +69,17 @@ public class KernelCpuThreadReader {
         ProcessCpuUsage processCpuUsage;
         ArrayList<ProcessCpuUsage> processCpuUsages = new ArrayList<>();
         try {
-            DirectoryStream<Path> processPaths = Files.newDirectoryStream(this.mProcPath, PROCESS_DIRECTORY_FILTER);
+            DirectoryStream<Path> processPaths =
+                    Files.newDirectoryStream(this.mProcPath, PROCESS_DIRECTORY_FILTER);
             try {
                 for (Path processPath : processPaths) {
                     int processId = getProcessId(processPath);
                     int uid = this.mInjector.getUidForPid(processId);
-                    if (uid != -1 && processId != -1 && this.mUidPredicate.test(Integer.valueOf(uid)) && (processCpuUsage = getProcessCpuUsage(processPath, processId, uid)) != null) {
+                    if (uid != -1
+                            && processId != -1
+                            && this.mUidPredicate.test(Integer.valueOf(uid))
+                            && (processCpuUsage = getProcessCpuUsage(processPath, processId, uid))
+                                    != null) {
                         processCpuUsages.add(processCpuUsage);
                     }
                 }
@@ -68,7 +87,10 @@ public class KernelCpuThreadReader {
                     processPaths.close();
                 }
                 if (processCpuUsages.isEmpty()) {
-                    Slog.w(TAG, "Didn't successfully get any process CPU information for UIDs specified");
+                    Slog.w(
+                            TAG,
+                            "Didn't successfully get any process CPU information for UIDs"
+                                + " specified");
                     return null;
                 }
                 return processCpuUsages;
@@ -123,7 +145,8 @@ public class KernelCpuThreadReader {
                 if (threadCpuUsages.isEmpty()) {
                     return null;
                 }
-                return new ProcessCpuUsage(processId, getProcessName(processPath), uid, threadCpuUsages);
+                return new ProcessCpuUsage(
+                        processId, getProcessName(processPath), uid, threadCpuUsages);
             } catch (Throwable th) {
                 if (threadPaths != null) {
                     try {
@@ -146,7 +169,8 @@ public class KernelCpuThreadReader {
             int threadId = Integer.parseInt(directoryName);
             String threadName = getThreadName(threadDirectory);
             Path threadCpuStatPath = threadDirectory.resolve(CPU_STATISTICS_FILENAME);
-            long[] cpuUsagesLong = this.mProcTimeInStateReader.getUsageTimesMillis(threadCpuStatPath);
+            long[] cpuUsagesLong =
+                    this.mProcTimeInStateReader.getUsageTimesMillis(threadCpuStatPath);
             if (cpuUsagesLong == null) {
                 return null;
             }
@@ -201,7 +225,9 @@ public class KernelCpuThreadReader {
         public FrequencyBucketCreator(long[] frequencies, int targetNumBuckets) {
             this.mNumFrequencies = frequencies.length;
             int[] clusterStartIndices = getClusterStartIndices(frequencies);
-            this.mBucketStartIndices = getBucketStartIndices(clusterStartIndices, targetNumBuckets, this.mNumFrequencies);
+            this.mBucketStartIndices =
+                    getBucketStartIndices(
+                            clusterStartIndices, targetNumBuckets, this.mNumFrequencies);
             this.mNumBuckets = this.mBucketStartIndices.length;
         }
 
@@ -210,7 +236,8 @@ public class KernelCpuThreadReader {
             int[] buckets = new int[this.mNumBuckets];
             for (int bucketIdx = 0; bucketIdx < this.mNumBuckets; bucketIdx++) {
                 int bucketStartIdx = getLowerBound(bucketIdx, this.mBucketStartIndices);
-                int bucketEndIdx = getUpperBound(bucketIdx, this.mBucketStartIndices, values.length);
+                int bucketEndIdx =
+                        getUpperBound(bucketIdx, this.mBucketStartIndices, values.length);
                 for (int valuesIdx = bucketStartIdx; valuesIdx < bucketEndIdx; valuesIdx++) {
                     buckets[bucketIdx] = (int) (buckets[bucketIdx] + values[valuesIdx]);
                 }
@@ -238,7 +265,8 @@ public class KernelCpuThreadReader {
             return indices.toArray();
         }
 
-        private static int[] getBucketStartIndices(int[] clusterStartIndices, int targetNumBuckets, int numFrequencies) {
+        private static int[] getBucketStartIndices(
+                int[] clusterStartIndices, int targetNumBuckets, int numFrequencies) {
             int previousBucketsInCluster;
             int numClusters = clusterStartIndices.length;
             if (numClusters > targetNumBuckets) {
@@ -252,10 +280,12 @@ public class KernelCpuThreadReader {
                     previousBucketsInCluster = targetNumBuckets / numClusters;
                 } else {
                     int numBucketsInCluster = targetNumBuckets / numClusters;
-                    previousBucketsInCluster = targetNumBuckets - ((numClusters - 1) * numBucketsInCluster);
+                    previousBucketsInCluster =
+                            targetNumBuckets - ((numClusters - 1) * numBucketsInCluster);
                 }
                 int numFrequenciesInCluster = clusterEndIdx - clusterStartIdx;
-                int numFrequenciesInBucket = Math.max(1, numFrequenciesInCluster / previousBucketsInCluster);
+                int numFrequenciesInBucket =
+                        Math.max(1, numFrequenciesInCluster / previousBucketsInCluster);
                 for (int bucketIdx = 0; bucketIdx < previousBucketsInCluster; bucketIdx++) {
                     int bucketStartIdx = (bucketIdx * numFrequenciesInBucket) + clusterStartIdx;
                     if (bucketStartIdx >= clusterEndIdx) {
@@ -285,7 +315,11 @@ public class KernelCpuThreadReader {
         public ArrayList<ThreadCpuUsage> threadCpuUsages;
         public final int uid;
 
-        public ProcessCpuUsage(int processId, String processName, int uid, ArrayList<ThreadCpuUsage> threadCpuUsages) {
+        public ProcessCpuUsage(
+                int processId,
+                String processName,
+                int uid,
+                ArrayList<ThreadCpuUsage> threadCpuUsages) {
             this.processId = processId;
             this.processName = processName;
             this.uid = uid;

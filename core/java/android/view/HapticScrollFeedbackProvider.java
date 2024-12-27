@@ -20,7 +20,8 @@ public class HapticScrollFeedbackProvider implements ScrollFeedbackProvider {
         this(view, ViewConfiguration.get(view.getContext()), true);
     }
 
-    public HapticScrollFeedbackProvider(View view, ViewConfiguration viewConfig, boolean disabledIfViewPlaysScrollHaptics) {
+    public HapticScrollFeedbackProvider(
+            View view, ViewConfiguration viewConfig, boolean disabledIfViewPlaysScrollHaptics) {
         this.mDeviceId = -1;
         this.mAxis = -1;
         this.mSource = -1;
@@ -74,14 +75,17 @@ public class HapticScrollFeedbackProvider implements ScrollFeedbackProvider {
 
     private void maybeUpdateCurrentConfig(int deviceId, int source, int axis) {
         if (this.mAxis != axis || this.mSource != source || this.mDeviceId != deviceId) {
-            if (this.mDisabledIfViewPlaysScrollHaptics && source == 4194304 && this.mViewConfig.isViewBasedRotaryEncoderHapticScrollFeedbackEnabled()) {
+            if (this.mDisabledIfViewPlaysScrollHaptics
+                    && source == 4194304
+                    && this.mViewConfig.isViewBasedRotaryEncoderHapticScrollFeedbackEnabled()) {
                 this.mHapticScrollFeedbackEnabled = false;
                 return;
             }
             this.mSource = source;
             this.mAxis = axis;
             this.mDeviceId = deviceId;
-            this.mHapticScrollFeedbackEnabled = this.mViewConfig.isHapticScrollFeedbackEnabled(deviceId, axis, source);
+            this.mHapticScrollFeedbackEnabled =
+                    this.mViewConfig.isHapticScrollFeedbackEnabled(deviceId, axis, source);
             this.mCanPlayLimitFeedback = false;
             this.mTotalScrollPixels = 0;
             updateTickIntervals(deviceId, source, axis);

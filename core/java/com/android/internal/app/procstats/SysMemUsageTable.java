@@ -1,7 +1,7 @@
 package com.android.internal.app.procstats;
 
 import android.util.DebugUtils;
-import com.android.internal.app.procstats.SparseMappingTable;
+
 import java.io.PrintWriter;
 
 /* loaded from: classes5.dex */
@@ -56,7 +56,11 @@ public class SysMemUsageTable extends SparseMappingTable.Table {
                 if (dstData[dstOff + i2] > addData[addOff + i2]) {
                     dstData[dstOff + i2] = addData[addOff + i2];
                 }
-                dstData[dstOff + i2 + 1] = (long) (((dstData[(dstOff + i2) + 1] * dstCount) + (addData[(addOff + i2) + 1] * addCount)) / (dstCount + addCount));
+                dstData[dstOff + i2 + 1] =
+                        (long)
+                                (((dstData[(dstOff + i2) + 1] * dstCount)
+                                                + (addData[(addOff + i2) + 1] * addCount))
+                                        / (dstCount + addCount));
                 if (dstData[dstOff + i2 + 2] < addData[addOff + i2 + 2]) {
                     dstData[dstOff + i2 + 2] = addData[addOff + i2 + 2];
                 }

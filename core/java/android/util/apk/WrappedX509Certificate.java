@@ -44,12 +44,14 @@ class WrappedX509Certificate extends X509Certificate {
     }
 
     @Override // java.security.cert.X509Certificate
-    public void checkValidity() throws CertificateExpiredException, CertificateNotYetValidException {
+    public void checkValidity()
+            throws CertificateExpiredException, CertificateNotYetValidException {
         this.mWrapped.checkValidity();
     }
 
     @Override // java.security.cert.X509Certificate
-    public void checkValidity(Date date) throws CertificateExpiredException, CertificateNotYetValidException {
+    public void checkValidity(Date date)
+            throws CertificateExpiredException, CertificateNotYetValidException {
         this.mWrapped.checkValidity(date);
     }
 
@@ -134,12 +136,22 @@ class WrappedX509Certificate extends X509Certificate {
     }
 
     @Override // java.security.cert.Certificate
-    public void verify(PublicKey key) throws CertificateException, NoSuchAlgorithmException, InvalidKeyException, NoSuchProviderException, SignatureException {
+    public void verify(PublicKey key)
+            throws CertificateException,
+                    NoSuchAlgorithmException,
+                    InvalidKeyException,
+                    NoSuchProviderException,
+                    SignatureException {
         this.mWrapped.verify(key);
     }
 
     @Override // java.security.cert.Certificate
-    public void verify(PublicKey key, String sigProvider) throws CertificateException, NoSuchAlgorithmException, InvalidKeyException, NoSuchProviderException, SignatureException {
+    public void verify(PublicKey key, String sigProvider)
+            throws CertificateException,
+                    NoSuchAlgorithmException,
+                    InvalidKeyException,
+                    NoSuchProviderException,
+                    SignatureException {
         this.mWrapped.verify(key, sigProvider);
     }
 

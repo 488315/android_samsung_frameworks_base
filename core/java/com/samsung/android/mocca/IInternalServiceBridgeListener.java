@@ -9,14 +9,14 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface IInternalServiceBridgeListener extends IInterface {
-    public static final String DESCRIPTOR = "com.samsung.android.mocca.IInternalServiceBridgeListener";
+    public static final String DESCRIPTOR =
+            "com.samsung.android.mocca.IInternalServiceBridgeListener";
 
     void onUpdated(String str, Bundle bundle) throws RemoteException;
 
     public static class Default implements IInternalServiceBridgeListener {
         @Override // com.samsung.android.mocca.IInternalServiceBridgeListener
-        public void onUpdated(String type, Bundle value) throws RemoteException {
-        }
+        public void onUpdated(String type, Bundle value) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +24,7 @@ public interface IInternalServiceBridgeListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInternalServiceBridgeListener {
+    public abstract static class Stub extends Binder implements IInternalServiceBridgeListener {
         static final int TRANSACTION_onUpdated = 1;
 
         public Stub() {
@@ -62,7 +62,8 @@ public interface IInternalServiceBridgeListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IInternalServiceBridgeListener.DESCRIPTOR);
             }

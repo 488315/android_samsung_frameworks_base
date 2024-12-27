@@ -10,6 +10,7 @@ import com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.Key
 import com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.PKCS12BagAttributeCarrierImpl;
 import com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier;
 import com.android.internal.org.bouncycastle.util.Strings;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -67,7 +68,9 @@ public class BCRSAPrivateKey implements RSAPrivateKey, PKCS12BagAttributeCarrier
         this.rsaPrivateKey = new RSAKeyParameters(true, this.modulus, this.privateExponent);
     }
 
-    BCRSAPrivateKey(AlgorithmIdentifier algID, com.android.internal.org.bouncycastle.asn1.pkcs.RSAPrivateKey key) {
+    BCRSAPrivateKey(
+            AlgorithmIdentifier algID,
+            com.android.internal.org.bouncycastle.asn1.pkcs.RSAPrivateKey key) {
         this.algorithmIdentifierEnc = getEncoding(BCRSAPublicKey.DEFAULT_ALGORITHM_IDENTIFIER);
         this.algorithmIdentifier = BCRSAPublicKey.DEFAULT_ALGORITHM_IDENTIFIER;
         this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
@@ -90,7 +93,9 @@ public class BCRSAPrivateKey implements RSAPrivateKey, PKCS12BagAttributeCarrier
 
     @Override // java.security.Key
     public String getAlgorithm() {
-        if (this.algorithmIdentifier.getAlgorithm().equals((ASN1Primitive) PKCSObjectIdentifiers.id_RSASSA_PSS)) {
+        if (this.algorithmIdentifier
+                .getAlgorithm()
+                .equals((ASN1Primitive) PKCSObjectIdentifiers.id_RSASSA_PSS)) {
             return "RSASSA-PSS";
         }
         return "RSA";
@@ -107,7 +112,10 @@ public class BCRSAPrivateKey implements RSAPrivateKey, PKCS12BagAttributeCarrier
 
     @Override // java.security.Key
     public byte[] getEncoded() {
-        return KeyUtil.getEncodedPrivateKeyInfo(this.algorithmIdentifier, new com.android.internal.org.bouncycastle.asn1.pkcs.RSAPrivateKey(getModulus(), ZERO, getPrivateExponent(), ZERO, ZERO, ZERO, ZERO, ZERO));
+        return KeyUtil.getEncodedPrivateKeyInfo(
+                this.algorithmIdentifier,
+                new com.android.internal.org.bouncycastle.asn1.pkcs.RSAPrivateKey(
+                        getModulus(), ZERO, getPrivateExponent(), ZERO, ZERO, ZERO, ZERO, ZERO));
     }
 
     public boolean equals(Object o) {
@@ -118,7 +126,8 @@ public class BCRSAPrivateKey implements RSAPrivateKey, PKCS12BagAttributeCarrier
             return true;
         }
         RSAPrivateKey key = (RSAPrivateKey) o;
-        return getModulus().equals(key.getModulus()) && getPrivateExponent().equals(key.getPrivateExponent());
+        return getModulus().equals(key.getModulus())
+                && getPrivateExponent().equals(key.getPrivateExponent());
     }
 
     public int hashCode() {
@@ -157,7 +166,10 @@ public class BCRSAPrivateKey implements RSAPrivateKey, PKCS12BagAttributeCarrier
     public String toString() {
         StringBuffer buf = new StringBuffer();
         String nl = Strings.lineSeparator();
-        buf.append("RSA Private Key [").append(RSAUtil.generateKeyFingerprint(getModulus())).append("],[]").append(nl);
+        buf.append("RSA Private Key [")
+                .append(RSAUtil.generateKeyFingerprint(getModulus()))
+                .append("],[]")
+                .append(nl);
         buf.append("            modulus: ").append(getModulus().toString(16)).append(nl);
         return buf.toString();
     }

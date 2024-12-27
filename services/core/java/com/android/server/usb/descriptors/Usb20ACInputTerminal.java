@@ -14,7 +14,8 @@ public final class Usb20ACInputTerminal extends UsbACTerminal implements UsbAudi
         return this.mNumChannels;
     }
 
-    @Override // com.android.server.usb.descriptors.UsbACTerminal, com.android.server.usb.descriptors.UsbDescriptor
+    @Override // com.android.server.usb.descriptors.UsbACTerminal,
+              // com.android.server.usb.descriptors.UsbDescriptor
     public final int parseRawDescriptors(ByteStream byteStream) {
         super.parseRawDescriptors(byteStream);
         this.mClkSourceID = byteStream.getByte();
@@ -26,12 +27,18 @@ public final class Usb20ACInputTerminal extends UsbACTerminal implements UsbAudi
         return this.mLength;
     }
 
-    @Override // com.android.server.usb.descriptors.UsbACTerminal, com.android.server.usb.descriptors.UsbACInterface, com.android.server.usb.descriptors.UsbDescriptor
+    @Override // com.android.server.usb.descriptors.UsbACTerminal,
+              // com.android.server.usb.descriptors.UsbACInterface,
+              // com.android.server.usb.descriptors.UsbDescriptor
     public final void report(TextReportCanvas textReportCanvas) {
         super.report(textReportCanvas);
         textReportCanvas.openList();
         textReportCanvas.writeListItem("Clock Source: " + ((int) this.mClkSourceID));
-        textReportCanvas.writeListItem("" + ((int) this.mNumChannels) + " Channels. Config: " + TextReportCanvas.getHexString(this.mChanConfig));
+        textReportCanvas.writeListItem(
+                ""
+                        + ((int) this.mNumChannels)
+                        + " Channels. Config: "
+                        + TextReportCanvas.getHexString(this.mChanConfig));
         textReportCanvas.closeList();
     }
 }

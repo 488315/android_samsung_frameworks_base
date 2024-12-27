@@ -24,8 +24,8 @@ public interface IConsumerIrService extends IInterface {
         }
 
         @Override // android.hardware.IConsumerIrService
-        public void transmit(String packageName, int carrierFrequency, int[] pattern) throws RemoteException {
-        }
+        public void transmit(String packageName, int carrierFrequency, int[] pattern)
+                throws RemoteException {}
 
         @Override // android.hardware.IConsumerIrService
         public int[] getCarrierFrequencies() throws RemoteException {
@@ -38,7 +38,7 @@ public interface IConsumerIrService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IConsumerIrService {
+    public abstract static class Stub extends Binder implements IConsumerIrService {
         public static final String DESCRIPTOR = "android.hardware.IConsumerIrService";
         static final int TRANSACTION_getCarrierFrequencies = 3;
         static final int TRANSACTION_hasIrEmitter = 1;
@@ -55,7 +55,9 @@ public interface IConsumerIrService extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IConsumerIrService asInterface(IBinder obj) {
@@ -93,7 +95,8 @@ public interface IConsumerIrService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -158,7 +161,8 @@ public interface IConsumerIrService extends IInterface {
             }
 
             @Override // android.hardware.IConsumerIrService
-            public void transmit(String packageName, int carrierFrequency, int[] pattern) throws RemoteException {
+            public void transmit(String packageName, int carrierFrequency, int[] pattern)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -192,11 +196,13 @@ public interface IConsumerIrService extends IInterface {
         }
 
         protected void transmit_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.TRANSMIT_IR, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.TRANSMIT_IR, getCallingPid(), getCallingUid());
         }
 
         protected void getCarrierFrequencies_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.TRANSMIT_IR, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.TRANSMIT_IR, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

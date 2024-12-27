@@ -6,9 +6,12 @@ import android.content.pm.parsing.PackageLite;
 import android.content.pm.parsing.result.ParseResult;
 import android.content.pm.parsing.result.ParseTypeImpl;
 import android.util.Slog;
+
 import com.android.internal.policy.AttributeCache;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.core.pm.containerservice.PackageHelperExt;
+
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
@@ -21,7 +24,8 @@ public final class AsecInstallArgs {
     public final PackageManagerService mPm;
     public String packagePath;
 
-    public AsecInstallArgs(int i, InstallSource installSource, PackageManagerService packageManagerService) {
+    public AsecInstallArgs(
+            int i, InstallSource installSource, PackageManagerService packageManagerService) {
         this.mPm = packageManagerService;
         this.mInstallFlags = i;
     }
@@ -32,7 +36,9 @@ public final class AsecInstallArgs {
         if (z) {
             File file = new File(this.packagePath);
             if (file.exists()) {
-                ParseResult parsePackageLite = ApkLiteParseUtils.parsePackageLite(ParseTypeImpl.forDefaultParsing().reset(), file, 0);
+                ParseResult parsePackageLite =
+                        ApkLiteParseUtils.parsePackageLite(
+                                ParseTypeImpl.forDefaultParsing().reset(), file, 0);
                 if (parsePackageLite.isSuccess()) {
                     ((PackageLite) parsePackageLite.getResult()).getAllApkPaths();
                 }
@@ -41,7 +47,9 @@ public final class AsecInstallArgs {
         String str = this.cid;
         boolean isContainerMounted = PackageHelperExt.isContainerMounted(str);
         if (isContainerMounted) {
-            StringBuilder m = BatteryService$$ExternalSyntheticOutline0.m(i, "AsecInstallArgs.doPostDeleteLI(", "): ");
+            StringBuilder m =
+                    BatteryService$$ExternalSyntheticOutline0.m(
+                            i, "AsecInstallArgs.doPostDeleteLI(", "): ");
             m.append(AsecInstallHelper.getAsecPackageName(str));
             m.append(", codePath: ");
             m.append(this.packagePath);
@@ -53,27 +61,34 @@ public final class AsecInstallArgs {
             if (!PackageHelperExt.unMountSdDir(str, !z)) {
                 if (z) {
                     if (i < 5) {
-                        this.mPm.mHandler.postDelayed(new Runnable() { // from class: com.android.server.pm.AsecInstallArgs$$ExternalSyntheticLambda0
-                            @Override // java.lang.Runnable
-                            public final void run() {
-                                AsecInstallArgs asecInstallArgs = AsecInstallArgs.this;
-                                boolean z3 = z;
-                                int i2 = i;
-                                PackageManagerTracedLock packageManagerTracedLock = asecInstallArgs.mPm.mInstallLock;
-                                boolean z4 = PackageManagerService.DEBUG_COMPRESSION;
-                                synchronized (packageManagerTracedLock) {
-                                    try {
-                                        asecInstallArgs.pendingPostDeleteLI(i2 + 1, z3);
-                                    } catch (Throwable th) {
-                                        boolean z5 = PackageManagerService.DEBUG_COMPRESSION;
-                                        throw th;
+                        this.mPm.mHandler.postDelayed(
+                                new Runnable() { // from class:
+                                                 // com.android.server.pm.AsecInstallArgs$$ExternalSyntheticLambda0
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        AsecInstallArgs asecInstallArgs = AsecInstallArgs.this;
+                                        boolean z3 = z;
+                                        int i2 = i;
+                                        PackageManagerTracedLock packageManagerTracedLock =
+                                                asecInstallArgs.mPm.mInstallLock;
+                                        boolean z4 = PackageManagerService.DEBUG_COMPRESSION;
+                                        synchronized (packageManagerTracedLock) {
+                                            try {
+                                                asecInstallArgs.pendingPostDeleteLI(i2 + 1, z3);
+                                            } catch (Throwable th) {
+                                                boolean z5 =
+                                                        PackageManagerService.DEBUG_COMPRESSION;
+                                                throw th;
+                                            }
+                                        }
                                     }
-                                }
-                            }
-                        }, 60000 * i);
+                                },
+                                60000 * i);
                     }
                     if (i == 4) {
-                        PackageManagerServiceUtils.logCriticalInfo(5, "ASEC unmount failed and will try for last chance: ".concat(str));
+                        PackageManagerServiceUtils.logCriticalInfo(
+                                5,
+                                "ASEC unmount failed and will try for last chance: ".concat(str));
                     }
                 }
             }

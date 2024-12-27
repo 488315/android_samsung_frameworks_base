@@ -1,12 +1,15 @@
 package com.android.server.am;
 
 import android.os.WorkSource;
+
 import com.android.server.power.stats.BatteryStatsImpl;
+
 import java.util.List;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda48 implements Runnable {
+public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda48
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ BatteryStatsService f$0;
     public final /* synthetic */ WorkSource f$1;
@@ -15,7 +18,14 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda4
     public final /* synthetic */ long f$4;
     public final /* synthetic */ long f$5;
 
-    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda48(BatteryStatsService batteryStatsService, WorkSource workSource, boolean z, int i, long j, long j2, int i2) {
+    public /* synthetic */ BatteryStatsService$$ExternalSyntheticLambda48(
+            BatteryStatsService batteryStatsService,
+            WorkSource workSource,
+            boolean z,
+            int i,
+            long j,
+            long j2,
+            int i2) {
         this.$r8$classId = i2;
         this.f$0 = batteryStatsService;
         this.f$1 = workSource;
@@ -47,7 +57,8 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda4
                                 BatteryStatsImpl batteryStatsImpl3 = batteryStatsImpl;
                                 int i3 = i2;
                                 long j3 = j2;
-                                batteryStatsImpl2.noteBluetoothDutyScanStoppedLocked(null, workSource.get(i2), z, i, j, j2);
+                                batteryStatsImpl2.noteBluetoothDutyScanStoppedLocked(
+                                        null, workSource.get(i2), z, i, j, j2);
                                 i2 = i3 + 1;
                                 batteryStatsImpl = batteryStatsImpl3;
                                 j2 = j3;
@@ -57,7 +68,13 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda4
                             List workChains = workSource.getWorkChains();
                             if (workChains != null) {
                                 for (int i4 = 0; i4 < workChains.size(); i4++) {
-                                    batteryStatsImpl2.noteBluetoothDutyScanStoppedLocked((WorkSource.WorkChain) workChains.get(i4), -1, z, i, j, j4);
+                                    batteryStatsImpl2.noteBluetoothDutyScanStoppedLocked(
+                                            (WorkSource.WorkChain) workChains.get(i4),
+                                            -1,
+                                            z,
+                                            i,
+                                            j,
+                                            j4);
                                 }
                             }
                             return;
@@ -90,7 +107,8 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda4
                                 BatteryStatsImpl batteryStatsImpl8 = batteryStatsImpl6;
                                 int i7 = i6;
                                 long j7 = j6;
-                                batteryStatsImpl7.noteBluetoothDutyScanStartedLocked(null, workSource2.get(i6), z2, i5, j5, j6);
+                                batteryStatsImpl7.noteBluetoothDutyScanStartedLocked(
+                                        null, workSource2.get(i6), z2, i5, j5, j6);
                                 i6 = i7 + 1;
                                 batteryStatsImpl6 = batteryStatsImpl8;
                                 j6 = j7;
@@ -100,7 +118,13 @@ public final /* synthetic */ class BatteryStatsService$$ExternalSyntheticLambda4
                             List workChains2 = workSource2.getWorkChains();
                             if (workChains2 != null) {
                                 for (int i8 = 0; i8 < workChains2.size(); i8++) {
-                                    batteryStatsImpl7.noteBluetoothDutyScanStartedLocked((WorkSource.WorkChain) workChains2.get(i8), -1, z2, i5, j5, j8);
+                                    batteryStatsImpl7.noteBluetoothDutyScanStartedLocked(
+                                            (WorkSource.WorkChain) workChains2.get(i8),
+                                            -1,
+                                            z2,
+                                            i5,
+                                            j5,
+                                            j8);
                                 }
                             }
                             return;

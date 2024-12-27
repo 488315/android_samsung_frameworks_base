@@ -14,8 +14,7 @@ public interface IEdgeLightingResponse extends IInterface {
 
     public static class Default implements IEdgeLightingResponse {
         @Override // com.samsung.android.edge.IEdgeLightingResponse
-        public void onFinished() throws RemoteException {
-        }
+        public void onFinished() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IEdgeLightingResponse extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IEdgeLightingResponse {
+    public abstract static class Stub extends Binder implements IEdgeLightingResponse {
         static final int TRANSACTION_onFinished = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IEdgeLightingResponse extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IEdgeLightingResponse.DESCRIPTOR);
             }

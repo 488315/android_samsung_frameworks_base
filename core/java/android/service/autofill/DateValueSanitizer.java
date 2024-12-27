@@ -7,24 +7,31 @@ import android.os.Parcelable;
 import android.util.Log;
 import android.view.autofill.AutofillValue;
 import android.view.autofill.Helper;
+
 import java.util.Date;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class DateValueSanitizer extends InternalSanitizer implements Sanitizer, Parcelable {
-    public static final Parcelable.Creator<DateValueSanitizer> CREATOR = new Parcelable.Creator<DateValueSanitizer>() { // from class: android.service.autofill.DateValueSanitizer.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DateValueSanitizer createFromParcel(Parcel parcel) {
-            return new DateValueSanitizer((DateFormat) parcel.readSerializable(DateFormat.class.getClassLoader(), DateFormat.class));
-        }
+    public static final Parcelable.Creator<DateValueSanitizer> CREATOR =
+            new Parcelable.Creator<
+                    DateValueSanitizer>() { // from class:
+                                            // android.service.autofill.DateValueSanitizer.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DateValueSanitizer createFromParcel(Parcel parcel) {
+                    return new DateValueSanitizer(
+                            (DateFormat)
+                                    parcel.readSerializable(
+                                            DateFormat.class.getClassLoader(), DateFormat.class));
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DateValueSanitizer[] newArray(int size) {
-            return new DateValueSanitizer[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DateValueSanitizer[] newArray(int size) {
+                    return new DateValueSanitizer[size];
+                }
+            };
     private static final String TAG = "DateValueSanitizer";
     private final DateFormat mDateFormat;
 
@@ -62,7 +69,11 @@ public final class DateValueSanitizer extends InternalSanitizer implements Sanit
     }
 
     public String toString() {
-        return !Helper.sDebug ? super.toString() : "DateValueSanitizer: [dateFormat=" + this.mDateFormat + NavigationBarInflaterView.SIZE_MOD_END;
+        return !Helper.sDebug
+                ? super.toString()
+                : "DateValueSanitizer: [dateFormat="
+                        + this.mDateFormat
+                        + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
     @Override // android.os.Parcelable

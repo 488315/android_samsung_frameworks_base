@@ -4,17 +4,21 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.view.InflateException;
+
 import com.samsung.android.location.SemLocationManager;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public final class DrawableInflater {
-    private static final HashMap<String, Constructor<? extends Drawable>> CONSTRUCTOR_MAP = new HashMap<>();
+    private static final HashMap<String, Constructor<? extends Drawable>> CONSTRUCTOR_MAP =
+            new HashMap<>();
     private final ClassLoader mClassLoader;
     private final Resources mRes;
 
@@ -31,11 +35,19 @@ public final class DrawableInflater {
         this.mClassLoader = classLoader;
     }
 
-    public Drawable inflateFromXml(String name, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
+    public Drawable inflateFromXml(
+            String name, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         return inflateFromXmlForDensity(name, parser, attrs, 0, theme);
     }
 
-    Drawable inflateFromXmlForDensity(String name, XmlPullParser parser, AttributeSet attrs, int density, Resources.Theme theme) throws XmlPullParserException, IOException {
+    Drawable inflateFromXmlForDensity(
+            String name,
+            XmlPullParser parser,
+            AttributeSet attrs,
+            int density,
+            Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         if (name.equals("drawable") && (name = attrs.getAttributeValue(null, "class")) == null) {
             throw new InflateException("<drawable> tag must specify class attribute");
         }
@@ -251,7 +263,11 @@ public final class DrawableInflater {
             synchronized (CONSTRUCTOR_MAP) {
                 constructor = CONSTRUCTOR_MAP.get(className);
                 if (constructor == null) {
-                    constructor = this.mClassLoader.loadClass(className).asSubclass(Drawable.class).getConstructor(new Class[0]);
+                    constructor =
+                            this.mClassLoader
+                                    .loadClass(className)
+                                    .asSubclass(Drawable.class)
+                                    .getConstructor(new Class[0]);
                     CONSTRUCTOR_MAP.put(className, constructor);
                 }
             }
@@ -275,13 +291,16 @@ public final class DrawableInflater {
         }
     }
 
-    private Drawable inflateSpr(String name, XmlPullParser parser, AttributeSet attrs) throws XmlPullParserException, IOException {
+    private Drawable inflateSpr(String name, XmlPullParser parser, AttributeSet attrs)
+            throws XmlPullParserException, IOException {
         if (!"bitmap".equalsIgnoreCase(name)) {
             return null;
         }
         boolean isSpr = false;
         boolean z = false;
-        int id = attrs.getAttributeResourceValue("http://schemas.android.com/apk/res/android", "src", 0);
+        int id =
+                attrs.getAttributeResourceValue(
+                        "http://schemas.android.com/apk/res/android", "src", 0);
         if (id != 0) {
             InputStream is = null;
             byte[] b = new byte[3];
@@ -302,12 +321,14 @@ public final class DrawableInflater {
             return null;
         }
         try {
-            Class<?> spr = Class.forName("com.samsung.android.graphics.spr.SemPathRenderingDrawable");
+            Class<?> spr =
+                    Class.forName("com.samsung.android.graphics.spr.SemPathRenderingDrawable");
             Drawable drawable = (Drawable) spr.newInstance();
             return drawable;
         } catch (Exception e) {
             e.printStackTrace();
-            throw new XmlPullParserException(parser.getPositionDescription() + ": unable to load spr." + name);
+            throw new XmlPullParserException(
+                    parser.getPositionDescription() + ": unable to load spr." + name);
         }
     }
 }

@@ -1,19 +1,22 @@
 package android.sec.enterprise;
 
 import android.os.ServiceManager;
-import android.sec.enterprise.IEDMProxy;
 import android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback;
 import android.sec.enterprise.auditlog.AuditLog;
 import android.sec.enterprise.certificate.CertificatePolicy;
 import android.sec.enterprise.kioskmode.KioskMode;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
 public class EnterpriseDeviceManager {
-    public static final String ACTION_KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL = "com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL";
-    private static final String EDM_CLASS_NAME_NEW = "com.samsung.android.knox.EnterpriseDeviceManager";
+    public static final String ACTION_KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL =
+            "com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL";
+    private static final String EDM_CLASS_NAME_NEW =
+            "com.samsung.android.knox.EnterpriseDeviceManager";
     public static final String ENTERPRISE_PROXY_SERVICE = "edm_proxy";
-    public static final String EXTRA_USER_ID_INTERNAL = "com.samsung.android.knox.intent.extra.USER_ID_INTERNAL";
+    public static final String EXTRA_USER_ID_INTERNAL =
+            "com.samsung.android.knox.intent.extra.USER_ID_INTERNAL";
     private static final String TAG = "EnterpriseDeviceManager";
     private static EnterpriseDeviceManager mInstance;
     private static boolean mInstanceCreated;
@@ -37,7 +40,10 @@ public class EnterpriseDeviceManager {
 
         public static IEDMProxy getService() {
             if (mService == null) {
-                mService = IEDMProxy.Stub.asInterface(ServiceManager.getService(EnterpriseDeviceManager.ENTERPRISE_PROXY_SERVICE));
+                mService =
+                        IEDMProxy.Stub.asInterface(
+                                ServiceManager.getService(
+                                        EnterpriseDeviceManager.ENTERPRISE_PROXY_SERVICE));
             }
             return mService;
         }
@@ -78,7 +84,8 @@ public class EnterpriseDeviceManager {
             synchronized (this) {
                 result = this.mApplicationRestrictionsManager;
                 if (result == null) {
-                    ApplicationRestrictionsManager applicationRestrictionsManager = new ApplicationRestrictionsManager();
+                    ApplicationRestrictionsManager applicationRestrictionsManager =
+                            new ApplicationRestrictionsManager();
                     result = applicationRestrictionsManager;
                     this.mApplicationRestrictionsManager = applicationRestrictionsManager;
                 }

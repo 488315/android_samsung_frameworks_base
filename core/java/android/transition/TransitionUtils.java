@@ -105,7 +105,8 @@ public class TransitionUtils {
         return Bitmap.createBitmap(picture);
     }
 
-    public static Bitmap createViewBitmap(View view, Matrix matrix, RectF bounds, ViewGroup sceneRoot) {
+    public static Bitmap createViewBitmap(
+            View view, Matrix matrix, RectF bounds, ViewGroup sceneRoot) {
         boolean addToOverlay = !view.isAttachedToWindow();
         ViewGroup parent = null;
         int indexInParent = 0;
@@ -125,7 +126,9 @@ public class TransitionUtils {
             matrix.postTranslate(-bounds.left, -bounds.top);
             matrix.postScale(scale, scale);
             Picture picture = new Picture();
-            Canvas canvas = picture.beginRecording((int) (bitmapWidth * scale), (int) (bitmapHeight * scale));
+            Canvas canvas =
+                    picture.beginRecording(
+                            (int) (bitmapWidth * scale), (int) (bitmapHeight * scale));
             canvas.concat(matrix);
             view.draw(canvas);
             picture.endRecording();

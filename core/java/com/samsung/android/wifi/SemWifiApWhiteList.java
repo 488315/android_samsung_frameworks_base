@@ -1,6 +1,7 @@
 package com.samsung.android.wifi;
 
 import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -80,7 +81,11 @@ public class SemWifiApWhiteList {
                 e.printStackTrace();
             }
             try {
-                String[] cmd = {"/system/bin/sh", "-c", "/system/bin/chmod 665 /data/misc/wifi_hostapd/hostapd.accept"};
+                String[] cmd = {
+                    "/system/bin/sh",
+                    "-c",
+                    "/system/bin/chmod 665 /data/misc/wifi_hostapd/hostapd.accept"
+                };
                 Process p = Runtime.getRuntime().exec(cmd);
                 try {
                     p.waitFor();
@@ -99,7 +104,12 @@ public class SemWifiApWhiteList {
         BufferedReader buf = null;
         try {
             try {
-                buf = new BufferedReader(new FileReader("/data/misc/wifi_hostapd/hostapd.accept", StandardCharsets.UTF_8), 64);
+                buf =
+                        new BufferedReader(
+                                new FileReader(
+                                        "/data/misc/wifi_hostapd/hostapd.accept",
+                                        StandardCharsets.UTF_8),
+                                64);
                 while (true) {
                     String bufReadLine = buf.readLine();
                     if (bufReadLine == null) {
@@ -150,7 +160,10 @@ public class SemWifiApWhiteList {
         try {
             try {
                 try {
-                    fw = new FileWriter("/data/misc/wifi_hostapd/hostapd.accept", StandardCharsets.UTF_8);
+                    fw =
+                            new FileWriter(
+                                    "/data/misc/wifi_hostapd/hostapd.accept",
+                                    StandardCharsets.UTF_8);
                     Iterator<WhiteList> it = this.mWhiteList.iterator();
                     while (it.hasNext()) {
                         WhiteList wl = it.next();
@@ -273,7 +286,10 @@ public class SemWifiApWhiteList {
     }
 
     private boolean isMacAddress(String macAddressCandidate) {
-        Pattern macPattern = Pattern.compile("[0-9a-fA-F]{2}[-:][0-9a-fA-F]{2}[-:][0-9a-fA-F]{2}[-:][0-9a-fA-F]{2}[-:][0 -9a-fA-F]{2}[-:][0-9a-fA-F]{2}");
+        Pattern macPattern =
+                Pattern.compile(
+                        "[0-9a-fA-F]{2}[-:][0-9a-fA-F]{2}[-:][0-9a-fA-F]{2}[-:][0-9a-fA-F]{2}[-:][0"
+                            + " -9a-fA-F]{2}[-:][0-9a-fA-F]{2}");
         Matcher m = macPattern.matcher(macAddressCandidate);
         return m.matches();
     }

@@ -6,8 +6,9 @@ import android.content.pm.PackageManager;
 import android.content.pm.ProviderInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
+
 import com.android.server.wallpaper.WallpaperData;
-import com.samsung.server.wallpaper.SemWallpaperManagerService;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -31,7 +32,9 @@ public final class PreloadedLiveWallpaperHelper {
         if (wallpaperData.wallpaperComponent != null) {
             return;
         }
-        Log.d("PreloadedLiveWallpaperHelper", "recoverComponentNameIfMissed: ComponentName is null. Recovering...");
+        Log.d(
+                "PreloadedLiveWallpaperHelper",
+                "recoverComponentNameIfMissed: ComponentName is null. Recovering...");
         SemWallpaperData semWallpaperData = wallpaperData.mSemWallpaperData;
         if (semWallpaperData == null || (bundle = semWallpaperData.mExternalParams) == null) {
             return;
@@ -56,9 +59,13 @@ public final class PreloadedLiveWallpaperHelper {
                 break;
         }
         if (str != null) {
-            wallpaperData.wallpaperComponent = new ComponentName("com.samsung.android.wallpaper.live", str);
+            wallpaperData.wallpaperComponent =
+                    new ComponentName("com.samsung.android.wallpaper.live", str);
         } else {
-            Log.d("PreloadedLiveWallpaperHelper", "recoverComponentNameIfMissed: Failed to recover ComponentName. contentType = ".concat(string));
+            Log.d(
+                    "PreloadedLiveWallpaperHelper",
+                    "recoverComponentNameIfMissed: Failed to recover ComponentName. contentType = "
+                            .concat(string));
         }
     }
 
@@ -73,7 +80,10 @@ public final class PreloadedLiveWallpaperHelper {
             Method dump skipped, instructions count: 330
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.server.wallpaper.PreloadedLiveWallpaperHelper.fetchThumbnailFile(int, int, int):android.os.ParcelFileDescriptor");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.server.wallpaper.PreloadedLiveWallpaperHelper.fetchThumbnailFile(int,"
+                    + " int, int):android.os.ParcelFileDescriptor");
     }
 
     public final boolean supportsSamsungLiveWallpaperProvider(WallpaperData wallpaperData) {
@@ -103,7 +113,11 @@ public final class PreloadedLiveWallpaperHelper {
         if (context == null) {
             return false;
         }
-        List<ProviderInfo> queryContentProviders = packageManager.queryContentProviders(context.getApplicationInfo().processName, context.getApplicationInfo().uid, 0);
+        List<ProviderInfo> queryContentProviders =
+                packageManager.queryContentProviders(
+                        context.getApplicationInfo().processName,
+                        context.getApplicationInfo().uid,
+                        0);
         this.mProviderRequester.getClass();
         String str = packageName + ".provider.sepwallpaper";
         Iterator<ProviderInfo> it = queryContentProviders.iterator();

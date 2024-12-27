@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.service.timezone.TimeZoneProviderStatus;
 import android.text.TextUtils;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -23,34 +24,56 @@ public final class LocationTimeZoneAlgorithmStatus implements Parcelable {
     private final TimeZoneProviderStatus mSecondaryProviderReportedStatus;
     private final int mSecondaryProviderStatus;
     private final int mStatus;
-    public static final LocationTimeZoneAlgorithmStatus NOT_SUPPORTED = new LocationTimeZoneAlgorithmStatus(1, 1, null, 1, null);
-    public static final LocationTimeZoneAlgorithmStatus RUNNING_NOT_REPORTED = new LocationTimeZoneAlgorithmStatus(2, 2, null, 2, null);
-    public static final LocationTimeZoneAlgorithmStatus NOT_RUNNING = new LocationTimeZoneAlgorithmStatus(2, 2, null, 2, null);
-    public static final Parcelable.Creator<LocationTimeZoneAlgorithmStatus> CREATOR = new Parcelable.Creator<LocationTimeZoneAlgorithmStatus>() { // from class: android.app.time.LocationTimeZoneAlgorithmStatus.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LocationTimeZoneAlgorithmStatus createFromParcel(Parcel in) {
-            int algorithmStatus = in.readInt();
-            int primaryProviderStatus = in.readInt();
-            TimeZoneProviderStatus primaryProviderReportedStatus = (TimeZoneProviderStatus) in.readParcelable(getClass().getClassLoader(), TimeZoneProviderStatus.class);
-            int secondaryProviderStatus = in.readInt();
-            TimeZoneProviderStatus secondaryProviderReportedStatus = (TimeZoneProviderStatus) in.readParcelable(getClass().getClassLoader(), TimeZoneProviderStatus.class);
-            return new LocationTimeZoneAlgorithmStatus(algorithmStatus, primaryProviderStatus, primaryProviderReportedStatus, secondaryProviderStatus, secondaryProviderReportedStatus);
-        }
+    public static final LocationTimeZoneAlgorithmStatus NOT_SUPPORTED =
+            new LocationTimeZoneAlgorithmStatus(1, 1, null, 1, null);
+    public static final LocationTimeZoneAlgorithmStatus RUNNING_NOT_REPORTED =
+            new LocationTimeZoneAlgorithmStatus(2, 2, null, 2, null);
+    public static final LocationTimeZoneAlgorithmStatus NOT_RUNNING =
+            new LocationTimeZoneAlgorithmStatus(2, 2, null, 2, null);
+    public static final Parcelable.Creator<LocationTimeZoneAlgorithmStatus> CREATOR =
+            new Parcelable.Creator<LocationTimeZoneAlgorithmStatus>() { // from class:
+                // android.app.time.LocationTimeZoneAlgorithmStatus.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LocationTimeZoneAlgorithmStatus createFromParcel(Parcel in) {
+                    int algorithmStatus = in.readInt();
+                    int primaryProviderStatus = in.readInt();
+                    TimeZoneProviderStatus primaryProviderReportedStatus =
+                            (TimeZoneProviderStatus)
+                                    in.readParcelable(
+                                            getClass().getClassLoader(),
+                                            TimeZoneProviderStatus.class);
+                    int secondaryProviderStatus = in.readInt();
+                    TimeZoneProviderStatus secondaryProviderReportedStatus =
+                            (TimeZoneProviderStatus)
+                                    in.readParcelable(
+                                            getClass().getClassLoader(),
+                                            TimeZoneProviderStatus.class);
+                    return new LocationTimeZoneAlgorithmStatus(
+                            algorithmStatus,
+                            primaryProviderStatus,
+                            primaryProviderReportedStatus,
+                            secondaryProviderStatus,
+                            secondaryProviderReportedStatus);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LocationTimeZoneAlgorithmStatus[] newArray(int size) {
-            return new LocationTimeZoneAlgorithmStatus[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LocationTimeZoneAlgorithmStatus[] newArray(int size) {
+                    return new LocationTimeZoneAlgorithmStatus[size];
+                }
+            };
 
     @Target({ElementType.TYPE_USE})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ProviderStatus {
-    }
+    public @interface ProviderStatus {}
 
-    public LocationTimeZoneAlgorithmStatus(int status, int primaryProviderStatus, TimeZoneProviderStatus primaryProviderReportedStatus, int secondaryProviderStatus, TimeZoneProviderStatus secondaryProviderReportedStatus) {
+    public LocationTimeZoneAlgorithmStatus(
+            int status,
+            int primaryProviderStatus,
+            TimeZoneProviderStatus primaryProviderReportedStatus,
+            int secondaryProviderStatus,
+            TimeZoneProviderStatus secondaryProviderReportedStatus) {
         this.mStatus = DetectorStatusTypes.requireValidDetectionAlgorithmStatus(status);
         this.mPrimaryProviderStatus = requireValidProviderStatus(primaryProviderStatus);
         this.mPrimaryProviderReportedStatus = primaryProviderReportedStatus;
@@ -59,16 +82,30 @@ public final class LocationTimeZoneAlgorithmStatus implements Parcelable {
         boolean primaryProviderHasReported = hasProviderReported(primaryProviderStatus);
         boolean primaryProviderReportedStatusPresent = primaryProviderReportedStatus != null;
         if (!primaryProviderHasReported && primaryProviderReportedStatusPresent) {
-            throw new IllegalArgumentException("primaryProviderReportedStatus=" + primaryProviderReportedStatus + ", primaryProviderStatus=" + providerStatusToString(primaryProviderStatus));
+            throw new IllegalArgumentException(
+                    "primaryProviderReportedStatus="
+                            + primaryProviderReportedStatus
+                            + ", primaryProviderStatus="
+                            + providerStatusToString(primaryProviderStatus));
         }
         boolean secondaryProviderHasReported = hasProviderReported(secondaryProviderStatus);
         boolean secondaryProviderReportedStatusPresent = secondaryProviderReportedStatus != null;
         if (!secondaryProviderHasReported && secondaryProviderReportedStatusPresent) {
-            throw new IllegalArgumentException("secondaryProviderReportedStatus=" + secondaryProviderReportedStatus + ", secondaryProviderStatus=" + providerStatusToString(secondaryProviderStatus));
+            throw new IllegalArgumentException(
+                    "secondaryProviderReportedStatus="
+                            + secondaryProviderReportedStatus
+                            + ", secondaryProviderStatus="
+                            + providerStatusToString(secondaryProviderStatus));
         }
         if (status != 3) {
             if (primaryProviderHasReported || secondaryProviderHasReported) {
-                throw new IllegalArgumentException("algorithmStatus=" + DetectorStatusTypes.detectionAlgorithmStatusToString(status) + ", primaryProviderReportedStatus=" + primaryProviderReportedStatus + ", secondaryProviderReportedStatus=" + secondaryProviderReportedStatus);
+                throw new IllegalArgumentException(
+                        "algorithmStatus="
+                                + DetectorStatusTypes.detectionAlgorithmStatusToString(status)
+                                + ", primaryProviderReportedStatus="
+                                + primaryProviderReportedStatus
+                                + ", secondaryProviderReportedStatus="
+                                + secondaryProviderReportedStatus);
             }
         }
     }
@@ -94,28 +131,54 @@ public final class LocationTimeZoneAlgorithmStatus implements Parcelable {
     }
 
     public String toString() {
-        return "LocationTimeZoneAlgorithmStatus{mAlgorithmStatus=" + DetectorStatusTypes.detectionAlgorithmStatusToString(this.mStatus) + ", mPrimaryProviderStatus=" + providerStatusToString(this.mPrimaryProviderStatus) + ", mPrimaryProviderReportedStatus=" + this.mPrimaryProviderReportedStatus + ", mSecondaryProviderStatus=" + providerStatusToString(this.mSecondaryProviderStatus) + ", mSecondaryProviderReportedStatus=" + this.mSecondaryProviderReportedStatus + '}';
+        return "LocationTimeZoneAlgorithmStatus{mAlgorithmStatus="
+                + DetectorStatusTypes.detectionAlgorithmStatusToString(this.mStatus)
+                + ", mPrimaryProviderStatus="
+                + providerStatusToString(this.mPrimaryProviderStatus)
+                + ", mPrimaryProviderReportedStatus="
+                + this.mPrimaryProviderReportedStatus
+                + ", mSecondaryProviderStatus="
+                + providerStatusToString(this.mSecondaryProviderStatus)
+                + ", mSecondaryProviderReportedStatus="
+                + this.mSecondaryProviderReportedStatus
+                + '}';
     }
 
     public static LocationTimeZoneAlgorithmStatus parseCommandlineArg(String arg) {
-        Pattern pattern = Pattern.compile("LocationTimeZoneAlgorithmStatus\\{mAlgorithmStatus=(.+), mPrimaryProviderStatus=([^,]+), mPrimaryProviderReportedStatus=(null|TimeZoneProviderStatus\\{[^}]+\\}), mSecondaryProviderStatus=([^,]+), mSecondaryProviderReportedStatus=(null|TimeZoneProviderStatus\\{[^}]+\\})\\}");
+        Pattern pattern =
+                Pattern.compile(
+                        "LocationTimeZoneAlgorithmStatus\\{mAlgorithmStatus=(.+),"
+                            + " mPrimaryProviderStatus=([^,]+),"
+                            + " mPrimaryProviderReportedStatus=(null|TimeZoneProviderStatus\\{[^}]+\\}),"
+                            + " mSecondaryProviderStatus=([^,]+),"
+                            + " mSecondaryProviderReportedStatus=(null|TimeZoneProviderStatus\\{[^}]+\\})\\}");
         Matcher matcher = pattern.matcher(arg);
         if (!matcher.matches()) {
             throw new IllegalArgumentException("Unable to parse algorithm status arg: " + arg);
         }
-        int algorithmStatus = DetectorStatusTypes.detectionAlgorithmStatusFromString(matcher.group(1));
+        int algorithmStatus =
+                DetectorStatusTypes.detectionAlgorithmStatusFromString(matcher.group(1));
         int primaryProviderStatus = providerStatusFromString(matcher.group(2));
-        TimeZoneProviderStatus primaryProviderReportedStatus = parseTimeZoneProviderStatusOrNull(matcher.group(3));
+        TimeZoneProviderStatus primaryProviderReportedStatus =
+                parseTimeZoneProviderStatusOrNull(matcher.group(3));
         int secondaryProviderStatus = providerStatusFromString(matcher.group(4));
-        TimeZoneProviderStatus secondaryProviderReportedStatus = parseTimeZoneProviderStatusOrNull(matcher.group(5));
-        return new LocationTimeZoneAlgorithmStatus(algorithmStatus, primaryProviderStatus, primaryProviderReportedStatus, secondaryProviderStatus, secondaryProviderReportedStatus);
+        TimeZoneProviderStatus secondaryProviderReportedStatus =
+                parseTimeZoneProviderStatusOrNull(matcher.group(5));
+        return new LocationTimeZoneAlgorithmStatus(
+                algorithmStatus,
+                primaryProviderStatus,
+                primaryProviderReportedStatus,
+                secondaryProviderStatus,
+                secondaryProviderReportedStatus);
     }
 
-    private static TimeZoneProviderStatus parseTimeZoneProviderStatusOrNull(String providerReportedStatusString) {
+    private static TimeZoneProviderStatus parseTimeZoneProviderStatusOrNull(
+            String providerReportedStatusString) {
         if ("null".equals(providerReportedStatusString)) {
             return null;
         }
-        TimeZoneProviderStatus providerReportedStatus = TimeZoneProviderStatus.parseProviderStatus(providerReportedStatusString);
+        TimeZoneProviderStatus providerReportedStatus =
+                TimeZoneProviderStatus.parseProviderStatus(providerReportedStatusString);
         return providerReportedStatus;
     }
 
@@ -141,14 +204,26 @@ public final class LocationTimeZoneAlgorithmStatus implements Parcelable {
             return false;
         }
         LocationTimeZoneAlgorithmStatus that = (LocationTimeZoneAlgorithmStatus) o;
-        if (this.mStatus == that.mStatus && this.mPrimaryProviderStatus == that.mPrimaryProviderStatus && Objects.equals(this.mPrimaryProviderReportedStatus, that.mPrimaryProviderReportedStatus) && this.mSecondaryProviderStatus == that.mSecondaryProviderStatus && Objects.equals(this.mSecondaryProviderReportedStatus, that.mSecondaryProviderReportedStatus)) {
+        if (this.mStatus == that.mStatus
+                && this.mPrimaryProviderStatus == that.mPrimaryProviderStatus
+                && Objects.equals(
+                        this.mPrimaryProviderReportedStatus, that.mPrimaryProviderReportedStatus)
+                && this.mSecondaryProviderStatus == that.mSecondaryProviderStatus
+                && Objects.equals(
+                        this.mSecondaryProviderReportedStatus,
+                        that.mSecondaryProviderReportedStatus)) {
             return true;
         }
         return false;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mStatus), Integer.valueOf(this.mPrimaryProviderStatus), this.mPrimaryProviderReportedStatus, Integer.valueOf(this.mSecondaryProviderStatus), this.mSecondaryProviderReportedStatus);
+        return Objects.hash(
+                Integer.valueOf(this.mStatus),
+                Integer.valueOf(this.mPrimaryProviderStatus),
+                this.mPrimaryProviderReportedStatus,
+                Integer.valueOf(this.mSecondaryProviderStatus),
+                this.mSecondaryProviderReportedStatus);
     }
 
     public boolean couldEnableTelephonyFallback() {
@@ -158,14 +233,18 @@ public final class LocationTimeZoneAlgorithmStatus implements Parcelable {
         boolean primarySuggestsFallback = false;
         if (this.mPrimaryProviderStatus == 1) {
             primarySuggestsFallback = true;
-        } else if (this.mPrimaryProviderStatus == 4 && this.mPrimaryProviderReportedStatus != null) {
-            primarySuggestsFallback = this.mPrimaryProviderReportedStatus.couldEnableTelephonyFallback();
+        } else if (this.mPrimaryProviderStatus == 4
+                && this.mPrimaryProviderReportedStatus != null) {
+            primarySuggestsFallback =
+                    this.mPrimaryProviderReportedStatus.couldEnableTelephonyFallback();
         }
         boolean secondarySuggestsFallback = false;
         if (this.mSecondaryProviderStatus == 1) {
             secondarySuggestsFallback = true;
-        } else if (this.mSecondaryProviderStatus == 4 && this.mSecondaryProviderReportedStatus != null) {
-            secondarySuggestsFallback = this.mSecondaryProviderReportedStatus.couldEnableTelephonyFallback();
+        } else if (this.mSecondaryProviderStatus == 4
+                && this.mSecondaryProviderReportedStatus != null) {
+            secondarySuggestsFallback =
+                    this.mSecondaryProviderReportedStatus.couldEnableTelephonyFallback();
         }
         return primarySuggestsFallback && secondarySuggestsFallback;
     }

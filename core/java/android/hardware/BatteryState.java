@@ -12,8 +12,7 @@ public abstract class BatteryState {
     public static final int STATUS_UNKNOWN = 1;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BatteryStatus {
-    }
+    public @interface BatteryStatus {}
 
     public abstract float getCapacity();
 

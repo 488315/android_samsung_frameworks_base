@@ -5,6 +5,7 @@ import android.provider.DeviceConfig;
 import android.util.IndentingPrintWriter;
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;
+
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.ProxyManager$$ExternalSyntheticOutline0;
@@ -77,72 +78,61 @@ public abstract class StateController {
         } else {
             i2 = 2;
         }
-        FrameworkStatsLog.write(FrameworkStatsLog.DEVICE_WIDE_JOB_CONSTRAINT_CHANGED, i2, z ? 2 : 1);
+        FrameworkStatsLog.write(
+                FrameworkStatsLog.DEVICE_WIDE_JOB_CONSTRAINT_CHANGED, i2, z ? 2 : 1);
     }
 
     public static String packageToString(int i, String str) {
         return AccessibilityManagerService$$ExternalSyntheticOutline0.m(i, "<", ">", str);
     }
 
-    public void dumpConstants(IndentingPrintWriter indentingPrintWriter) {
-    }
+    public void dumpConstants(IndentingPrintWriter indentingPrintWriter) {}
 
-    public void dumpConstants(ProtoOutputStream protoOutputStream) {
-    }
+    public void dumpConstants(ProtoOutputStream protoOutputStream) {}
 
-    public abstract void dumpControllerStateLocked(IndentingPrintWriter indentingPrintWriter, JobSchedulerService$$ExternalSyntheticLambda5 jobSchedulerService$$ExternalSyntheticLambda5);
+    public abstract void dumpControllerStateLocked(
+            IndentingPrintWriter indentingPrintWriter,
+            JobSchedulerService$$ExternalSyntheticLambda5
+                    jobSchedulerService$$ExternalSyntheticLambda5);
 
-    public void dumpControllerStateLocked(ProtoOutputStream protoOutputStream, JobSchedulerService$$ExternalSyntheticLambda5 jobSchedulerService$$ExternalSyntheticLambda5) {
-    }
+    public void dumpControllerStateLocked(
+            ProtoOutputStream protoOutputStream,
+            JobSchedulerService$$ExternalSyntheticLambda5
+                    jobSchedulerService$$ExternalSyntheticLambda5) {}
 
-    public void evaluateStateLocked(JobStatus jobStatus) {
-    }
+    public void evaluateStateLocked(JobStatus jobStatus) {}
 
     public abstract void maybeStartTrackingJobLocked(JobStatus jobStatus, JobStatus jobStatus2);
 
     public abstract void maybeStopTrackingJobLocked(JobStatus jobStatus, JobStatus jobStatus2);
 
-    public void onAppRemovedLocked(int i, String str) {
-    }
+    public void onAppRemovedLocked(int i, String str) {}
 
-    public void onBatteryStateChangedLocked() {
-    }
+    public void onBatteryStateChangedLocked() {}
 
-    public void onConstantsUpdatedLocked() {
-    }
+    public void onConstantsUpdatedLocked() {}
 
-    public void onSystemServicesReady() {
-    }
+    public void onSystemServicesReady() {}
 
-    public void onUidBiasChangedLocked(int i, int i2, int i3) {
-    }
+    public void onUidBiasChangedLocked(int i, int i2, int i3) {}
 
-    public void onUserAddedLocked(int i) {
-    }
+    public void onUserAddedLocked(int i) {}
 
-    public void onUserRemovedLocked(int i) {
-    }
+    public void onUserRemovedLocked(int i) {}
 
-    public void prepareForExecutionLocked(JobStatus jobStatus) {
-    }
+    public void prepareForExecutionLocked(JobStatus jobStatus) {}
 
-    public void prepareForUpdatedConstantsLocked() {
-    }
+    public void prepareForUpdatedConstantsLocked() {}
 
-    public void processConstantLocked(DeviceConfig.Properties properties, String str) {
-    }
+    public void processConstantLocked(DeviceConfig.Properties properties, String str) {}
 
-    public void reevaluateStateLocked(int i) {
-    }
+    public void reevaluateStateLocked(int i) {}
 
-    public void rescheduleForFailureLocked(JobStatus jobStatus, JobStatus jobStatus2) {
-    }
+    public void rescheduleForFailureLocked(JobStatus jobStatus, JobStatus jobStatus2) {}
 
-    public void startTrackingLocked() {
-    }
+    public void startTrackingLocked() {}
 
-    public void unprepareFromExecutionLocked(JobStatus jobStatus) {
-    }
+    public void unprepareFromExecutionLocked(JobStatus jobStatus) {}
 
     public final boolean wouldBeReadyWithConstraintLocked(JobStatus jobStatus, int i) {
         boolean readinessStatusWithConstraint = jobStatus.readinessStatusWithConstraint(i, true);
@@ -153,7 +143,8 @@ public abstract class StateController {
             sb.append(" constraint=");
             sb.append(i);
             sb.append(" readyWithConstraint=");
-            ProxyManager$$ExternalSyntheticOutline0.m("JobScheduler.SC", sb, readinessStatusWithConstraint);
+            ProxyManager$$ExternalSyntheticOutline0.m(
+                    "JobScheduler.SC", sb, readinessStatusWithConstraint);
         }
         if (!readinessStatusWithConstraint) {
             return false;
@@ -163,7 +154,16 @@ public abstract class StateController {
         boolean areUsersStartedLocked = jobSchedulerService.areUsersStartedLocked(jobStatus);
         boolean z2 = jobSchedulerService.mBackingUpUids.get(jobStatus.sourceUid);
         if (z) {
-            Slog.v("JobScheduler", "areComponentsInPlaceLocked: " + jobStatus.toShortString() + " exists=" + containsJob + " userStarted=" + areUsersStartedLocked + " backingUp=" + z2);
+            Slog.v(
+                    "JobScheduler",
+                    "areComponentsInPlaceLocked: "
+                            + jobStatus.toShortString()
+                            + " exists="
+                            + containsJob
+                            + " userStarted="
+                            + areUsersStartedLocked
+                            + " backingUp="
+                            + z2);
         }
         if (!containsJob || !areUsersStartedLocked || z2) {
             return false;
@@ -178,7 +178,8 @@ public abstract class StateController {
         StringBuilder sb2 = new StringBuilder("areComponentsInPlaceLocked: ");
         sb2.append(jobStatus.toShortString());
         sb2.append(" restricted due to ");
-        GmsAlarmManager$$ExternalSyntheticOutline0.m(sb2, checkIfRestricted.mInternalReason, "JobScheduler");
+        GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                sb2, checkIfRestricted.mInternalReason, "JobScheduler");
         return false;
     }
 }

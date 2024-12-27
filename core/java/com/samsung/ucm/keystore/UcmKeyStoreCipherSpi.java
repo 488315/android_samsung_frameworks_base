@@ -5,7 +5,9 @@ import android.os.RemoteException;
 import android.sec.enterprise.EnterpriseDeviceManager;
 import android.sec.enterprise.IEDMProxy;
 import android.util.Log;
+
 import com.samsung.android.security.mdf.MdfUtils;
+
 import java.security.AlgorithmParameters;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -19,6 +21,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Arrays;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.CipherSpi;
 import javax.crypto.IllegalBlockSizeException;
@@ -87,7 +90,8 @@ public abstract class UcmKeyStoreCipherSpi extends CipherSpi {
     @Override // javax.crypto.CipherSpi
     public byte[] engineGetIV() {
         if (!this.mIsDoFinalCalled && this.mEncrypting) {
-            throw new UnsupportedOperationException("getIV can be supported after performing doFinal");
+            throw new UnsupportedOperationException(
+                    "getIV can be supported after performing doFinal");
         }
         return this.mIV;
     }
@@ -97,10 +101,11 @@ public abstract class UcmKeyStoreCipherSpi extends CipherSpi {
         return null;
     }
 
-    void doCryptoInit(AlgorithmParameterSpec spec) throws InvalidAlgorithmParameterException, InvalidKeyException {
-    }
+    void doCryptoInit(AlgorithmParameterSpec spec)
+            throws InvalidAlgorithmParameterException, InvalidKeyException {}
 
-    void engineInitInternal(int opmode, Key key, AlgorithmParameterSpec spec) throws InvalidKeyException, InvalidAlgorithmParameterException {
+    void engineInitInternal(int opmode, Key key, AlgorithmParameterSpec spec)
+            throws InvalidKeyException, InvalidAlgorithmParameterException {
         parseEncryptionMode(opmode);
         if (key == null) {
             throw new InvalidKeyException("Key is null");
@@ -111,7 +116,8 @@ public abstract class UcmKeyStoreCipherSpi extends CipherSpi {
         this.mUcmGenericCipher.init(key);
     }
 
-    private void parseParameterSpec(AlgorithmParameterSpec spec) throws InvalidAlgorithmParameterException {
+    private void parseParameterSpec(AlgorithmParameterSpec spec)
+            throws InvalidAlgorithmParameterException {
         byte[] iv = null;
         if (spec instanceof IvParameterSpec) {
             iv = ((IvParameterSpec) spec).getIV();
@@ -146,15 +152,18 @@ public abstract class UcmKeyStoreCipherSpi extends CipherSpi {
     }
 
     @Override // javax.crypto.CipherSpi
-    public void engineInit(int opmode, Key key, AlgorithmParameterSpec params, SecureRandom random) throws InvalidKeyException, InvalidAlgorithmParameterException {
+    public void engineInit(int opmode, Key key, AlgorithmParameterSpec params, SecureRandom random)
+            throws InvalidKeyException, InvalidAlgorithmParameterException {
         parseEncryptionMode(opmode);
         engineInitInternal(opmode, key, params);
     }
 
     @Override // javax.crypto.CipherSpi
-    public void engineInit(int opmode, Key key, AlgorithmParameters params, SecureRandom random) throws InvalidKeyException, InvalidAlgorithmParameterException {
+    public void engineInit(int opmode, Key key, AlgorithmParameters params, SecureRandom random)
+            throws InvalidKeyException, InvalidAlgorithmParameterException {
         if (params != null) {
-            throw new InvalidAlgorithmParameterException("unknown param type: " + params.getClass().getName());
+            throw new InvalidAlgorithmParameterException(
+                    "unknown param type: " + params.getClass().getName());
         }
         parseEncryptionMode(opmode);
         engineInitInternal(opmode, key, null);
@@ -167,7 +176,9 @@ public abstract class UcmKeyStoreCipherSpi extends CipherSpi {
     }
 
     @Override // javax.crypto.CipherSpi
-    public int engineUpdate(byte[] input, int inputOffset, int inputLen, byte[] output, int outputOffset) throws ShortBufferException {
+    public int engineUpdate(
+            byte[] input, int inputOffset, int inputLen, byte[] output, int outputOffset)
+            throws ShortBufferException {
         engineUpdate(input, inputOffset, inputLen);
         return 0;
     }
@@ -178,7 +189,8 @@ public abstract class UcmKeyStoreCipherSpi extends CipherSpi {
     }
 
     @Override // javax.crypto.CipherSpi
-    public byte[] engineDoFinal(byte[] input, int inputOffset, int inputLen) throws IllegalBlockSizeException, BadPaddingException {
+    public byte[] engineDoFinal(byte[] input, int inputOffset, int inputLen)
+            throws IllegalBlockSizeException, BadPaddingException {
         byte[] output;
         if (input != null) {
             engineUpdate(input, inputOffset, inputLen);
@@ -249,11 +261,14 @@ public abstract class UcmKeyStoreCipherSpi extends CipherSpi {
     }
 
     @Override // javax.crypto.CipherSpi
-    public int engineDoFinal(byte[] input, int inputOffset, int inputLen, byte[] output, int outputOffset) throws ShortBufferException, IllegalBlockSizeException, BadPaddingException {
+    public int engineDoFinal(
+            byte[] input, int inputOffset, int inputLen, byte[] output, int outputOffset)
+            throws ShortBufferException, IllegalBlockSizeException, BadPaddingException {
         byte[] b = engineDoFinal(input, inputOffset, inputLen);
         int lastOffset = b.length + outputOffset;
         if (lastOffset > output.length) {
-            throw new ShortBufferException("output buffer is too small " + output.length + " < " + lastOffset);
+            throw new ShortBufferException(
+                    "output buffer is too small " + output.length + " < " + lastOffset);
         }
         System.arraycopy(b, 0, output, outputOffset, b.length);
         return b.length;
@@ -272,7 +287,8 @@ public abstract class UcmKeyStoreCipherSpi extends CipherSpi {
     }
 
     @Override // javax.crypto.CipherSpi
-    public Key engineUnwrap(byte[] wrappedKey, String wrappedKeyAlgorithm, int wrappedKeyType) throws InvalidKeyException, NoSuchAlgorithmException {
+    public Key engineUnwrap(byte[] wrappedKey, String wrappedKeyAlgorithm, int wrappedKeyType)
+            throws InvalidKeyException, NoSuchAlgorithmException {
         try {
             byte[] encoded = engineDoFinal(wrappedKey, 0, wrappedKey.length);
             switch (wrappedKeyType) {

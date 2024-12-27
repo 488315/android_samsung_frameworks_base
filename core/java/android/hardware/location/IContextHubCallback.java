@@ -8,12 +8,13 @@ import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IContextHubCallback extends IInterface {
-    void onMessageReceipt(int i, int i2, ContextHubMessage contextHubMessage) throws RemoteException;
+    void onMessageReceipt(int i, int i2, ContextHubMessage contextHubMessage)
+            throws RemoteException;
 
     public static class Default implements IContextHubCallback {
         @Override // android.hardware.location.IContextHubCallback
-        public void onMessageReceipt(int hubId, int nanoAppId, ContextHubMessage msg) throws RemoteException {
-        }
+        public void onMessageReceipt(int hubId, int nanoAppId, ContextHubMessage msg)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +22,7 @@ public interface IContextHubCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IContextHubCallback {
+    public abstract static class Stub extends Binder implements IContextHubCallback {
         public static final String DESCRIPTOR = "android.hardware.location.IContextHubCallback";
         static final int TRANSACTION_onMessageReceipt = 1;
 
@@ -60,7 +61,8 @@ public interface IContextHubCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -72,7 +74,8 @@ public interface IContextHubCallback extends IInterface {
                 case 1:
                     int _arg0 = data.readInt();
                     int _arg1 = data.readInt();
-                    ContextHubMessage _arg2 = (ContextHubMessage) data.readTypedObject(ContextHubMessage.CREATOR);
+                    ContextHubMessage _arg2 =
+                            (ContextHubMessage) data.readTypedObject(ContextHubMessage.CREATOR);
                     data.enforceNoDataAvail();
                     onMessageReceipt(_arg0, _arg1, _arg2);
                     return true;
@@ -98,7 +101,8 @@ public interface IContextHubCallback extends IInterface {
             }
 
             @Override // android.hardware.location.IContextHubCallback
-            public void onMessageReceipt(int hubId, int nanoAppId, ContextHubMessage msg) throws RemoteException {
+            public void onMessageReceipt(int hubId, int nanoAppId, ContextHubMessage msg)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

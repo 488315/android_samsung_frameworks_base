@@ -11,15 +11,13 @@ public final class QuotaTrackerProto {
         public static final long ALARMS = 2246267895810L;
         public static final long TRIGGER_TIME_ELAPSED = 1112396529665L;
 
-        public InQuotaAlarmListener() {
-        }
+        public InQuotaAlarmListener() {}
 
         public final class Alarm {
             public static final long IN_QUOTA_TIME_ELAPSED = 1112396529666L;
             public static final long UPTC = 1146756268033L;
 
-            public Alarm() {
-            }
+            public Alarm() {}
         }
     }
 }

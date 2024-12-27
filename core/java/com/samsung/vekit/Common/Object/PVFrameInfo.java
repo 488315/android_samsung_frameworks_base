@@ -29,7 +29,16 @@ public class PVFrameInfo {
         this.detectionInfoList = new ArrayList<>();
     }
 
-    public PVFrameInfo(String version, long timestamp, int deviceRoll, int focusX, int focusY, int objectCount, int mainObjectId, int blurLevel, ArrayList<PVDetectionInfo> detectionInfoList) {
+    public PVFrameInfo(
+            String version,
+            long timestamp,
+            int deviceRoll,
+            int focusX,
+            int focusY,
+            int objectCount,
+            int mainObjectId,
+            int blurLevel,
+            ArrayList<PVDetectionInfo> detectionInfoList) {
         this.version = version;
         this.timestamp = timestamp;
         this.deviceRoll = deviceRoll;

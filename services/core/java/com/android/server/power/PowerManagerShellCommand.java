@@ -7,11 +7,13 @@ import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.ShellCommand;
 import android.util.SparseArray;
+
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.UiModeManagerService$13$$ExternalSyntheticOutline0;
-import com.android.server.power.PowerManagerService;
+
 import com.att.iqi.lib.BuildConfig;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +25,8 @@ public final class PowerManagerShellCommand extends ShellCommand {
     public final SparseArray mProxWakelocks = new SparseArray();
     public final PowerManagerService.BinderService mService;
 
-    public PowerManagerShellCommand(Context context, PowerManagerService.BinderService binderService) {
+    public PowerManagerShellCommand(
+            Context context, PowerManagerService.BinderService binderService) {
         this.mContext = context;
         this.mService = binderService;
     }
@@ -92,7 +95,8 @@ public final class PowerManagerShellCommand extends ShellCommand {
             }
             switch (c) {
                 case 0:
-                    this.mService.setAdaptivePowerSaveEnabled(Boolean.parseBoolean(getNextArgRequired()));
+                    this.mService.setAdaptivePowerSaveEnabled(
+                            Boolean.parseBoolean(getNextArgRequired()));
                     return 0;
                 case 1:
                     PrintWriter outPrintWriter2 = getOutPrintWriter();
@@ -109,17 +113,22 @@ public final class PowerManagerShellCommand extends ShellCommand {
                         return -1;
                     }
                 case 2:
-                    boolean powerModeChecked = this.mService.setPowerModeChecked(3, Boolean.parseBoolean(getNextArgRequired()));
+                    boolean powerModeChecked =
+                            this.mService.setPowerModeChecked(
+                                    3, Boolean.parseBoolean(getNextArgRequired()));
                     if (!powerModeChecked) {
                         PrintWriter errPrintWriter = getErrPrintWriter();
                         errPrintWriter.println("Failed to set FIXED_PERFORMANCE mode");
-                        errPrintWriter.println("This is likely because Power HAL AIDL is not implemented on this device");
+                        errPrintWriter.println(
+                                "This is likely because Power HAL AIDL is not implemented on this"
+                                    + " device");
                     }
                     return powerModeChecked ? 0 : -1;
                 case 3:
                     PrintWriter outPrintWriter3 = getOutPrintWriter();
                     try {
-                        this.mService.suppressAmbientDisplay(getNextArgRequired(), Boolean.parseBoolean(getNextArgRequired()));
+                        this.mService.suppressAmbientDisplay(
+                                getNextArgRequired(), Boolean.parseBoolean(getNextArgRequired()));
                         return 0;
                     } catch (RuntimeException e2) {
                         outPrintWriter3.println("Error: " + e2.toString());
@@ -145,10 +154,12 @@ public final class PowerManagerShellCommand extends ShellCommand {
                     return handleDefaultCommands(str);
             }
         } catch (RemoteException e4) {
-            UiModeManagerService$13$$ExternalSyntheticOutline0.m("Remote exception: ", e4, outPrintWriter);
+            UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                    "Remote exception: ", e4, outPrintWriter);
             return -1;
         }
-        UiModeManagerService$13$$ExternalSyntheticOutline0.m("Remote exception: ", e4, outPrintWriter);
+        UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                "Remote exception: ", e4, outPrintWriter);
         return -1;
     }
 
@@ -158,11 +169,32 @@ public final class PowerManagerShellCommand extends ShellCommand {
         outPrintWriter.println("  help");
         outPrintWriter.println("    Print this help text.");
         outPrintWriter.println("");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  set-adaptive-power-saver-enabled [true|false]", "    enables or disables adaptive power saver.", "  set-mode MODE", "    sets the power mode of the device to MODE.");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    1 turns low power mode on and 0 turns low power mode off.", "  set-fixed-performance-mode-enabled [true|false]", "    enables or disables fixed performance mode", "    note: this will affect system performance and should only be used");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "          during development", "  suppress-ambient-display <token> [true|false]", "    suppresses the current ambient display configuration and disables", "    ambient display");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "  list-ambient-display-suppression-tokens", "    prints the tokens used to suppress ambient display", "  set-prox [list|acquire|release] (-d <display_id>)", "    Acquires the proximity sensor wakelock. Wakelock is associated with");
-        outPrintWriter.println("    a specific display if specified. 'list' lists wakelocks previously");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  set-adaptive-power-saver-enabled [true|false]",
+                "    enables or disables adaptive power saver.",
+                "  set-mode MODE",
+                "    sets the power mode of the device to MODE.");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    1 turns low power mode on and 0 turns low power mode off.",
+                "  set-fixed-performance-mode-enabled [true|false]",
+                "    enables or disables fixed performance mode",
+                "    note: this will affect system performance and should only be used");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "          during development",
+                "  suppress-ambient-display <token> [true|false]",
+                "    suppresses the current ambient display configuration and disables",
+                "    ambient display");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "  list-ambient-display-suppression-tokens",
+                "    prints the tokens used to suppress ambient display",
+                "  set-prox [list|acquire|release] (-d <display_id>)",
+                "    Acquires the proximity sensor wakelock. Wakelock is associated with");
+        outPrintWriter.println(
+                "    a specific display if specified. 'list' lists wakelocks previously");
         outPrintWriter.println("    created by set-prox including their held status.");
         outPrintWriter.println("  set-face-down-detector [true|false]");
         outPrintWriter.println("    sets whether we use face down detector timeouts or not");
@@ -177,12 +209,15 @@ public final class PowerManagerShellCommand extends ShellCommand {
         int callingUid = Binder.getCallingUid();
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            List suppressionTokens = PowerManagerService.this.mAmbientDisplaySuppressionController.getSuppressionTokens(callingUid);
+            List suppressionTokens =
+                    PowerManagerService.this.mAmbientDisplaySuppressionController
+                            .getSuppressionTokens(callingUid);
             Binder.restoreCallingIdentity(clearCallingIdentity);
             if (((ArrayList) suppressionTokens).isEmpty()) {
                 outPrintWriter.println("none");
             } else {
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(outPrintWriter, "[", String.join(", ", suppressionTokens), "]");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        outPrintWriter, "[", String.join(", ", suppressionTokens), "]");
             }
         } catch (Throwable th) {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -243,7 +278,11 @@ public final class PowerManagerShellCommand extends ShellCommand {
             String nextArg = getNextArg();
             int parseInt = Integer.parseInt(nextArg);
             if (parseInt < 0) {
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(outPrintWriter, "Error: Specified displayId (", nextArg, ") must a non-negative int.");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        outPrintWriter,
+                        "Error: Specified displayId (",
+                        nextArg,
+                        ") must a non-negative int.");
                 return -1;
             }
             i = parseInt;
@@ -251,7 +290,13 @@ public final class PowerManagerShellCommand extends ShellCommand {
         int i2 = 1 + i;
         PowerManager.WakeLock wakeLock = (PowerManager.WakeLock) this.mProxWakelocks.get(i2);
         if (wakeLock == null) {
-            wakeLock = ((PowerManager) this.mContext.getSystemService(PowerManager.class)).newWakeLock(32, BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "PowerManagerShellCommand[", "]"), i);
+            wakeLock =
+                    ((PowerManager) this.mContext.getSystemService(PowerManager.class))
+                            .newWakeLock(
+                                    32,
+                                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                            i, "PowerManagerShellCommand[", "]"),
+                                    i);
             this.mProxWakelocks.put(i2, wakeLock);
         }
         if (z) {

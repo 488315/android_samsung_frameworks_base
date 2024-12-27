@@ -6,7 +6,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.samsung.android.mocca.IInternalServiceBridgeListener;
 
 /* loaded from: classes6.dex */
 public interface IInternalServiceBridge extends IInterface {
@@ -18,7 +17,8 @@ public interface IInternalServiceBridge extends IInterface {
 
     boolean isAvailable(String str) throws RemoteException;
 
-    void setListener(String str, IInternalServiceBridgeListener iInternalServiceBridgeListener) throws RemoteException;
+    void setListener(String str, IInternalServiceBridgeListener iInternalServiceBridgeListener)
+            throws RemoteException;
 
     void start() throws RemoteException;
 
@@ -26,12 +26,10 @@ public interface IInternalServiceBridge extends IInterface {
 
     public static class Default implements IInternalServiceBridge {
         @Override // com.samsung.android.mocca.IInternalServiceBridge
-        public void start() throws RemoteException {
-        }
+        public void start() throws RemoteException {}
 
         @Override // com.samsung.android.mocca.IInternalServiceBridge
-        public void stop() throws RemoteException {
-        }
+        public void stop() throws RemoteException {}
 
         @Override // com.samsung.android.mocca.IInternalServiceBridge
         public boolean isAvailable(String type) throws RemoteException {
@@ -44,12 +42,11 @@ public interface IInternalServiceBridge extends IInterface {
         }
 
         @Override // com.samsung.android.mocca.IInternalServiceBridge
-        public void setListener(String type, IInternalServiceBridgeListener listener) throws RemoteException {
-        }
+        public void setListener(String type, IInternalServiceBridgeListener listener)
+                throws RemoteException {}
 
         @Override // com.samsung.android.mocca.IInternalServiceBridge
-        public void clearAllListeners() throws RemoteException {
-        }
+        public void clearAllListeners() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -57,7 +54,7 @@ public interface IInternalServiceBridge extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IInternalServiceBridge {
+    public abstract static class Stub extends Binder implements IInternalServiceBridge {
         static final int TRANSACTION_clearAllListeners = 6;
         static final int TRANSACTION_getValue = 4;
         static final int TRANSACTION_isAvailable = 3;
@@ -110,7 +107,8 @@ public interface IInternalServiceBridge extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IInternalServiceBridge.DESCRIPTOR);
             }
@@ -143,7 +141,9 @@ public interface IInternalServiceBridge extends IInterface {
                     return true;
                 case 5:
                     String _arg03 = data.readString();
-                    IInternalServiceBridgeListener _arg1 = IInternalServiceBridgeListener.Stub.asInterface(data.readStrongBinder());
+                    IInternalServiceBridgeListener _arg1 =
+                            IInternalServiceBridgeListener.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setListener(_arg03, _arg1);
                     reply.writeNoException();
@@ -236,7 +236,8 @@ public interface IInternalServiceBridge extends IInterface {
             }
 
             @Override // com.samsung.android.mocca.IInternalServiceBridge
-            public void setListener(String type, IInternalServiceBridgeListener listener) throws RemoteException {
+            public void setListener(String type, IInternalServiceBridgeListener listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

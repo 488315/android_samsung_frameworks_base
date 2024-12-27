@@ -50,10 +50,18 @@ public final class MutableUserState implements WritableState, Immutable {
             r0.<init>(r1, r2, r3, r4, r5, r6)
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.permission.access.MutableUserState.<init>():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.permission.access.MutableUserState.<init>():void");
     }
 
-    public MutableUserState(MutableReference mutableReference, MutableReference mutableReference2, MutableReference mutableReference3, MutableReference mutableReference4, MutableReference mutableReference5, String str) {
+    public MutableUserState(
+            MutableReference mutableReference,
+            MutableReference mutableReference2,
+            MutableReference mutableReference3,
+            MutableReference mutableReference4,
+            MutableReference mutableReference5,
+            String str) {
         this.packageVersionsReference = mutableReference;
         this.appIdPermissionFlagsReference = mutableReference2;
         this.appIdDevicePermissionFlagsReference = mutableReference3;
@@ -94,6 +102,12 @@ public final class MutableUserState implements WritableState, Immutable {
 
     @Override // com.android.server.permission.access.immutable.Immutable
     public final Object toMutable() {
-        return new MutableUserState(this.packageVersionsReference.toImmutable(), this.appIdPermissionFlagsReference.toImmutable(), this.appIdDevicePermissionFlagsReference.toImmutable(), this.appIdAppOpModesReference.toImmutable(), this.packageAppOpModesReference.toImmutable(), this.defaultPermissionGrantFingerprint);
+        return new MutableUserState(
+                this.packageVersionsReference.toImmutable(),
+                this.appIdPermissionFlagsReference.toImmutable(),
+                this.appIdDevicePermissionFlagsReference.toImmutable(),
+                this.appIdAppOpModesReference.toImmutable(),
+                this.packageAppOpModesReference.toImmutable(),
+                this.defaultPermissionGrantFingerprint);
     }
 }

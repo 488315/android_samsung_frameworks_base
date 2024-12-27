@@ -4,6 +4,7 @@ import com.android.internal.org.bouncycastle.math.raw.Mod;
 import com.android.internal.org.bouncycastle.math.raw.Nat;
 import com.android.internal.org.bouncycastle.math.raw.Nat192;
 import com.android.internal.org.bouncycastle.util.Pack;
+
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
@@ -25,7 +26,8 @@ public class SecP192K1Field {
 
     public static void addExt(int[] xx, int[] yy, int[] zz) {
         int c = Nat.add(12, xx, yy, zz);
-        if ((c != 0 || (zz[11] == -1 && Nat.gte(12, zz, PExt))) && Nat.addTo(PExtInv.length, PExtInv, zz) != 0) {
+        if ((c != 0 || (zz[11] == -1 && Nat.gte(12, zz, PExt)))
+                && Nat.addTo(PExtInv.length, PExtInv, zz) != 0) {
             Nat.incAt(12, zz, PExtInv.length);
         }
     }
@@ -75,7 +77,8 @@ public class SecP192K1Field {
 
     public static void multiplyAddToExt(int[] x, int[] y, int[] zz) {
         int c = Nat192.mulAddTo(x, y, zz);
-        if ((c != 0 || (zz[11] == -1 && Nat.gte(12, zz, PExt))) && Nat.addTo(PExtInv.length, PExtInv, zz) != 0) {
+        if ((c != 0 || (zz[11] == -1 && Nat.gte(12, zz, PExt)))
+                && Nat.addTo(PExtInv.length, PExtInv, zz) != 0) {
             Nat.incAt(12, zz, PExtInv.length);
         }
     }
@@ -111,7 +114,8 @@ public class SecP192K1Field {
     }
 
     public static void reduce32(int x, int[] z) {
-        if ((x != 0 && Nat192.mul33WordAdd(PInv33, x, z, 0) != 0) || (z[5] == -1 && Nat192.gte(z, P))) {
+        if ((x != 0 && Nat192.mul33WordAdd(PInv33, x, z, 0) != 0)
+                || (z[5] == -1 && Nat192.gte(z, P))) {
             Nat.add33To(6, PInv33, z);
         }
     }

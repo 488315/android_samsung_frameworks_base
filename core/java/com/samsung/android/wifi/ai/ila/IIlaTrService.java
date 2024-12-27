@@ -14,8 +14,7 @@ public interface IIlaTrService extends IInterface {
 
     public static class Default implements IIlaTrService {
         @Override // com.samsung.android.wifi.ai.ila.IIlaTrService
-        public void train(String bssid) throws RemoteException {
-        }
+        public void train(String bssid) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IIlaTrService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IIlaTrService {
+    public abstract static class Stub extends Binder implements IIlaTrService {
         static final int TRANSACTION_train = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IIlaTrService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IIlaTrService.DESCRIPTOR);
             }

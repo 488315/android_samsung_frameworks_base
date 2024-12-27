@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public class PointingInfo implements Parcelable {
-    public static final Parcelable.Creator<PointingInfo> CREATOR = new Parcelable.Creator<PointingInfo>() { // from class: android.telephony.satellite.stub.PointingInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PointingInfo createFromParcel(Parcel _aidl_source) {
-            PointingInfo _aidl_out = new PointingInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<PointingInfo> CREATOR =
+            new Parcelable.Creator<
+                    PointingInfo>() { // from class: android.telephony.satellite.stub.PointingInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PointingInfo createFromParcel(Parcel _aidl_source) {
+                    PointingInfo _aidl_out = new PointingInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public PointingInfo[] newArray(int _aidl_size) {
-            return new PointingInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public PointingInfo[] newArray(int _aidl_size) {
+                    return new PointingInfo[_aidl_size];
+                }
+            };
     public float satelliteAzimuth = 0.0f;
     public float satelliteElevation = 0.0f;
 

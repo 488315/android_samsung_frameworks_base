@@ -10,9 +10,12 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
+
 import com.android.internal.midi.MidiConstants;
+
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -20,7 +23,8 @@ import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public interface IGnssVisibilityControl extends IBase {
-    public static final String kInterfaceName = "android.hardware.gnss.visibility_control@1.0::IGnssVisibilityControl";
+    public static final String kInterfaceName =
+            "android.hardware.gnss.visibility_control@1.0::IGnssVisibilityControl";
 
     @Override // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
     IHwBinder asBinder();
@@ -51,7 +55,8 @@ public interface IGnssVisibilityControl extends IBase {
     @Override // android.internal.hidl.base.V1_0.IBase
     void ping() throws RemoteException;
 
-    boolean setCallback(IGnssVisibilityControlCallback iGnssVisibilityControlCallback) throws RemoteException;
+    boolean setCallback(IGnssVisibilityControlCallback iGnssVisibilityControlCallback)
+            throws RemoteException;
 
     @Override // android.internal.hidl.base.V1_0.IBase
     void setHALInstrumentation() throws RemoteException;
@@ -88,7 +93,8 @@ public interface IGnssVisibilityControl extends IBase {
         return asInterface(iface.asBinder());
     }
 
-    static IGnssVisibilityControl getService(String serviceName, boolean retry) throws RemoteException {
+    static IGnssVisibilityControl getService(String serviceName, boolean retry)
+            throws RemoteException {
         return asInterface(HwBinder.getService(kInterfaceName, serviceName, retry));
     }
 
@@ -113,7 +119,8 @@ public interface IGnssVisibilityControl extends IBase {
             this.mRemote = (IHwBinder) Objects.requireNonNull(remote);
         }
 
-        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl,
+        // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
         public IHwBinder asBinder() {
             return this.mRemote;
         }
@@ -122,7 +129,8 @@ public interface IGnssVisibilityControl extends IBase {
             try {
                 return interfaceDescriptor() + "@Proxy";
             } catch (RemoteException e) {
-                return "[class or subclass of android.hardware.gnss.visibility_control@1.0::IGnssVisibilityControl]@Proxy";
+                return "[class or subclass of"
+                           + " android.hardware.gnss.visibility_control@1.0::IGnssVisibilityControl]@Proxy";
             }
         }
 
@@ -168,7 +176,8 @@ public interface IGnssVisibilityControl extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl,
+        // android.internal.hidl.base.V1_0.IBase
         public ArrayList<String> interfaceChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -184,7 +193,8 @@ public interface IGnssVisibilityControl extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl,
+        // android.internal.hidl.base.V1_0.IBase
         public void debug(NativeHandle fd, ArrayList<String> options) throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -200,7 +210,8 @@ public interface IGnssVisibilityControl extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl,
+        // android.internal.hidl.base.V1_0.IBase
         public String interfaceDescriptor() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -216,7 +227,8 @@ public interface IGnssVisibilityControl extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl,
+        // android.internal.hidl.base.V1_0.IBase
         public ArrayList<byte[]> getHashChain() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -228,7 +240,9 @@ public interface IGnssVisibilityControl extends IBase {
                 ArrayList<byte[]> _hidl_out_hashchain = new ArrayList<>();
                 HwBlob _hidl_blob = _hidl_reply.readBuffer(16L);
                 int _hidl_vec_size = _hidl_blob.getInt32(8L);
-                HwBlob childBlob = _hidl_reply.readEmbeddedBuffer(_hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
+                HwBlob childBlob =
+                        _hidl_reply.readEmbeddedBuffer(
+                                _hidl_vec_size * 32, _hidl_blob.handle(), 0L, true);
                 _hidl_out_hashchain.clear();
                 for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
                     byte[] _hidl_vec_element = new byte[32];
@@ -242,7 +256,8 @@ public interface IGnssVisibilityControl extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl,
+        // android.internal.hidl.base.V1_0.IBase
         public void setHALInstrumentation() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -255,12 +270,15 @@ public interface IGnssVisibilityControl extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl, android.internal.hidl.base.V1_0.IBase
-        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) throws RemoteException {
+        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl,
+        // android.internal.hidl.base.V1_0.IBase
+        public boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie)
+                throws RemoteException {
             return this.mRemote.linkToDeath(recipient, cookie);
         }
 
-        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl,
+        // android.internal.hidl.base.V1_0.IBase
         public void ping() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -274,7 +292,8 @@ public interface IGnssVisibilityControl extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl,
+        // android.internal.hidl.base.V1_0.IBase
         public DebugInfo getDebugInfo() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -291,7 +310,8 @@ public interface IGnssVisibilityControl extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl,
+        // android.internal.hidl.base.V1_0.IBase
         public void notifySyspropsChanged() throws RemoteException {
             HwParcel _hidl_request = new HwParcel();
             _hidl_request.writeInterfaceToken(IBase.kInterfaceName);
@@ -304,51 +324,128 @@ public interface IGnssVisibilityControl extends IBase {
             }
         }
 
-        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl,
+        // android.internal.hidl.base.V1_0.IBase
         public boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) throws RemoteException {
             return this.mRemote.unlinkToDeath(recipient);
         }
     }
 
-    public static abstract class Stub extends HwBinder implements IGnssVisibilityControl {
-        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl, android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
+    public abstract static class Stub extends HwBinder implements IGnssVisibilityControl {
+        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl,
+        // android.internal.hidl.base.V1_0.IBase, android.os.IHwInterface
         public IHwBinder asBinder() {
             return this;
         }
 
-        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl,
+        // android.internal.hidl.base.V1_0.IBase
         public final ArrayList<String> interfaceChain() {
-            return new ArrayList<>(Arrays.asList(IGnssVisibilityControl.kInterfaceName, IBase.kInterfaceName));
+            return new ArrayList<>(
+                    Arrays.asList(IGnssVisibilityControl.kInterfaceName, IBase.kInterfaceName));
         }
 
-        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl, android.internal.hidl.base.V1_0.IBase
-        public void debug(NativeHandle fd, ArrayList<String> options) {
-        }
+        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl,
+        // android.internal.hidl.base.V1_0.IBase
+        public void debug(NativeHandle fd, ArrayList<String> options) {}
 
-        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl,
+        // android.internal.hidl.base.V1_0.IBase
         public final String interfaceDescriptor() {
             return IGnssVisibilityControl.kInterfaceName;
         }
 
-        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl,
+        // android.internal.hidl.base.V1_0.IBase
         public final ArrayList<byte[]> getHashChain() {
-            return new ArrayList<>(Arrays.asList(new byte[]{13, SprAnimatorBase.INTERPOLATOR_TYPE_SINEEASEINOUT, -119, 86, -41, -4, 111, -33, -100, -87, -60, 41, 98, -1, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60, 115, -106, 123, -69, SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN, -97, 11, 62, 11, 88, -41, 27, SprAttributeBase.TYPE_SHADOW, -107, -62, -122, -68}, new byte[]{-20, Byte.MAX_VALUE, -41, -98, MidiConstants.STATUS_CHANNEL_PRESSURE, SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60, -6, -123, -68, 73, -108, 38, -83, -82, 62, -66, 35, -17, 5, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, MidiConstants.STATUS_SONG_SELECT, -51, 105, 87, 19, -109, SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT, -72, 59, 24, -54, 76}));
+            return new ArrayList<>(
+                    Arrays.asList(
+                            new byte[] {
+                                13,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEEASEINOUT,
+                                -119,
+                                86,
+                                -41,
+                                -4,
+                                111,
+                                -33,
+                                -100,
+                                -87,
+                                -60,
+                                41,
+                                98,
+                                -1,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60,
+                                115,
+                                -106,
+                                123,
+                                -69,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUADEASEIN,
+                                -97,
+                                11,
+                                62,
+                                11,
+                                88,
+                                -41,
+                                27,
+                                SprAttributeBase.TYPE_SHADOW,
+                                -107,
+                                -62,
+                                -122,
+                                -68
+                            },
+                            new byte[] {
+                                -20,
+                                Byte.MAX_VALUE,
+                                -41,
+                                -98,
+                                MidiConstants.STATUS_CHANNEL_PRESSURE,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_SINEINOUT60,
+                                -6,
+                                -123,
+                                -68,
+                                73,
+                                -108,
+                                38,
+                                -83,
+                                -82,
+                                62,
+                                -66,
+                                35,
+                                -17,
+                                5,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                MidiConstants.STATUS_SONG_SELECT,
+                                -51,
+                                105,
+                                87,
+                                19,
+                                -109,
+                                SprAnimatorBase.INTERPOLATOR_TYPE_QUINTEASEINOUT,
+                                -72,
+                                59,
+                                24,
+                                -54,
+                                76
+                            }));
         }
 
-        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl, android.internal.hidl.base.V1_0.IBase
-        public final void setHALInstrumentation() {
-        }
+        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl,
+        // android.internal.hidl.base.V1_0.IBase
+        public final void setHALInstrumentation() {}
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean linkToDeath(IHwBinder.DeathRecipient recipient, long cookie) {
             return true;
         }
 
-        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl, android.internal.hidl.base.V1_0.IBase
-        public final void ping() {
-        }
+        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl,
+        // android.internal.hidl.base.V1_0.IBase
+        public final void ping() {}
 
-        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl,
+        // android.internal.hidl.base.V1_0.IBase
         public final DebugInfo getDebugInfo() {
             DebugInfo info = new DebugInfo();
             info.pid = HidlSupport.getPidIfSharable();
@@ -357,12 +454,14 @@ public interface IGnssVisibilityControl extends IBase {
             return info;
         }
 
-        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl, android.internal.hidl.base.V1_0.IBase
+        @Override // android.hardware.gnss.visibility_control.V1_0.IGnssVisibilityControl,
+        // android.internal.hidl.base.V1_0.IBase
         public final void notifySyspropsChanged() {
             HwBinder.enableInstrumentation();
         }
 
-        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas, android.internal.hidl.base.V1_0.IBase
+        @Override // android.os.IHwBinder, android.hardware.cas.V1_0.ICas,
+        // android.internal.hidl.base.V1_0.IBase
         public final boolean unlinkToDeath(IHwBinder.DeathRecipient recipient) {
             return true;
         }
@@ -384,7 +483,9 @@ public interface IGnssVisibilityControl extends IBase {
         }
 
         @Override // android.os.HwBinder
-        public void onTransact(int _hidl_code, HwParcel _hidl_request, HwParcel _hidl_reply, int _hidl_flags) throws RemoteException {
+        public void onTransact(
+                int _hidl_code, HwParcel _hidl_request, HwParcel _hidl_reply, int _hidl_flags)
+                throws RemoteException {
             switch (_hidl_code) {
                 case 1:
                     _hidl_request.enforceInterface(IGnssVisibilityControl.kInterfaceName);
@@ -396,7 +497,9 @@ public interface IGnssVisibilityControl extends IBase {
                     return;
                 case 2:
                     _hidl_request.enforceInterface(IGnssVisibilityControl.kInterfaceName);
-                    IGnssVisibilityControlCallback callback = IGnssVisibilityControlCallback.asInterface(_hidl_request.readStrongBinder());
+                    IGnssVisibilityControlCallback callback =
+                            IGnssVisibilityControlCallback.asInterface(
+                                    _hidl_request.readStrongBinder());
                     boolean _hidl_out_success2 = setCallback(callback);
                     _hidl_reply.writeStatus(0);
                     _hidl_reply.writeBool(_hidl_out_success2);
@@ -437,7 +540,8 @@ public interface IGnssVisibilityControl extends IBase {
                         long _hidl_array_offset_1 = _hidl_index_0 * 32;
                         byte[] _hidl_array_item_1 = _hidl_out_hashchain.get(_hidl_index_0);
                         if (_hidl_array_item_1 == null || _hidl_array_item_1.length != 32) {
-                            throw new IllegalArgumentException("Array element is not of the expected length");
+                            throw new IllegalArgumentException(
+                                    "Array element is not of the expected length");
                         }
                         childBlob.putInt8Array(_hidl_array_offset_1, _hidl_array_item_1);
                     }

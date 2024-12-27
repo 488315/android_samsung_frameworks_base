@@ -3,23 +3,27 @@ package vendor.samsung.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.StringJoiner;
 
 /* loaded from: classes6.dex */
 public class SehExtendedRegStateResult implements Parcelable {
-    public static final Parcelable.Creator<SehExtendedRegStateResult> CREATOR = new Parcelable.Creator<SehExtendedRegStateResult>() { // from class: vendor.samsung.hardware.radio.network.SehExtendedRegStateResult.1
-        @Override // android.os.Parcelable.Creator
-        public SehExtendedRegStateResult createFromParcel(Parcel _aidl_source) {
-            SehExtendedRegStateResult _aidl_out = new SehExtendedRegStateResult();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SehExtendedRegStateResult> CREATOR =
+            new Parcelable.Creator<
+                    SehExtendedRegStateResult>() { // from class:
+                                                   // vendor.samsung.hardware.radio.network.SehExtendedRegStateResult.1
+                @Override // android.os.Parcelable.Creator
+                public SehExtendedRegStateResult createFromParcel(Parcel _aidl_source) {
+                    SehExtendedRegStateResult _aidl_out = new SehExtendedRegStateResult();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        @Override // android.os.Parcelable.Creator
-        public SehExtendedRegStateResult[] newArray(int _aidl_size) {
-            return new SehExtendedRegStateResult[_aidl_size];
-        }
-    };
+                @Override // android.os.Parcelable.Creator
+                public SehExtendedRegStateResult[] newArray(int _aidl_size) {
+                    return new SehExtendedRegStateResult[_aidl_size];
+                }
+            };
     public int unprocessedDataRegState;
     public int unprocessedVoiceRegState;
     public boolean isValid = false;
@@ -140,11 +144,14 @@ public class SehExtendedRegStateResult implements Parcelable {
         StringJoiner _aidl_sj = new StringJoiner(", ", "{", "}");
         _aidl_sj.add("isValid: " + this.isValid);
         _aidl_sj.add("snapshotStatus: " + this.snapshotStatus);
-        _aidl_sj.add("unprocessedDataRegState: " + SehRegState$$.toString(this.unprocessedDataRegState));
+        _aidl_sj.add(
+                "unprocessedDataRegState: " + SehRegState$$.toString(this.unprocessedDataRegState));
         _aidl_sj.add("unprocessedDataRat: " + this.unprocessedDataRat);
         _aidl_sj.add("mobileOptionalRat: " + this.mobileOptionalRat);
         _aidl_sj.add("imsEmergencyCallBarring: " + this.imsEmergencyCallBarring);
-        _aidl_sj.add("unprocessedVoiceRegState: " + SehRegState$$.toString(this.unprocessedVoiceRegState));
+        _aidl_sj.add(
+                "unprocessedVoiceRegState: "
+                        + SehRegState$$.toString(this.unprocessedVoiceRegState));
         _aidl_sj.add("isPsOnlyReg: " + this.isPsOnlyReg);
         return "SehExtendedRegStateResult" + _aidl_sj.toString();
     }

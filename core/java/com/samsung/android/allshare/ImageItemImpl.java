@@ -5,26 +5,29 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
-import com.samsung.android.allshare.Item;
+
 import com.sec.android.allshare.iface.IBundleHolder;
 import com.sec.android.allshare.iface.message.AllShareKey;
+
 import java.util.ArrayList;
 
 /* loaded from: classes3.dex */
 final class ImageItemImpl extends Item implements IBundleHolder {
-    public static final Parcelable.Creator<ImageItemImpl> CREATOR = new Parcelable.Creator<ImageItemImpl>() { // from class: com.samsung.android.allshare.ImageItemImpl.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImageItemImpl createFromParcel(Parcel src) {
-            return new ImageItemImpl(src);
-        }
+    public static final Parcelable.Creator<ImageItemImpl> CREATOR =
+            new Parcelable.Creator<
+                    ImageItemImpl>() { // from class: com.samsung.android.allshare.ImageItemImpl.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImageItemImpl createFromParcel(Parcel src) {
+                    return new ImageItemImpl(src);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ImageItemImpl[] newArray(int size) {
-            return new ImageItemImpl[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ImageItemImpl[] newArray(int size) {
+                    return new ImageItemImpl[size];
+                }
+            };
     private final ItemImpl mItemImpl;
 
     ImageItemImpl(Bundle bundle) {
@@ -33,25 +36,43 @@ final class ImageItemImpl extends Item implements IBundleHolder {
 
     @Override // com.samsung.android.allshare.Item
     public Uri getThumbnail() {
-        return (Uri) (this.mItemImpl.getBundle() == null ? null : this.mItemImpl.getBundle().getParcelable(AllShareKey.BUNDLE_PARCELABLE_IMAGE_ITEM_THUMBNAIL));
+        return (Uri)
+                (this.mItemImpl.getBundle() == null
+                        ? null
+                        : this.mItemImpl
+                                .getBundle()
+                                .getParcelable(AllShareKey.BUNDLE_PARCELABLE_IMAGE_ITEM_THUMBNAIL));
     }
 
     public String getResolution() {
-        return this.mItemImpl.getBundle() == null ? "" : this.mItemImpl.getBundle().getString(AllShareKey.BUNDLE_STRING_IMAGE_ITEM_RESOLUTION);
+        return this.mItemImpl.getBundle() == null
+                ? ""
+                : this.mItemImpl
+                        .getBundle()
+                        .getString(AllShareKey.BUNDLE_STRING_IMAGE_ITEM_RESOLUTION);
     }
 
     public Location getLocation() {
-        return (Location) (this.mItemImpl.getBundle() == null ? null : this.mItemImpl.getBundle().getParcelable(AllShareKey.BUNDLE_PARCELABLE_IMAGE_ITEM_LOCATION));
+        return (Location)
+                (this.mItemImpl.getBundle() == null
+                        ? null
+                        : this.mItemImpl
+                                .getBundle()
+                                .getParcelable(AllShareKey.BUNDLE_PARCELABLE_IMAGE_ITEM_LOCATION));
     }
 
     @Override // com.samsung.android.allshare.Item
     public String getMimetype() {
-        return this.mItemImpl.getBundle() == null ? "" : this.mItemImpl.getBundle().getString(AllShareKey.BUNDLE_STRING_ITEM_MIMETYPE);
+        return this.mItemImpl.getBundle() == null
+                ? ""
+                : this.mItemImpl.getBundle().getString(AllShareKey.BUNDLE_STRING_ITEM_MIMETYPE);
     }
 
     @Override // com.samsung.android.allshare.Item
     public String getExtension() {
-        return this.mItemImpl.getBundle() == null ? "" : this.mItemImpl.getBundle().getString(AllShareKey.BUNDLE_STRING_ITEM_EXTENSION);
+        return this.mItemImpl.getBundle() == null
+                ? ""
+                : this.mItemImpl.getBundle().getString(AllShareKey.BUNDLE_STRING_ITEM_EXTENSION);
     }
 
     @Override // com.samsung.android.allshare.Item

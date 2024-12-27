@@ -1,14 +1,17 @@
 package com.android.server.locksettings.recoverablekeystore;
 
 import android.util.Pair;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.security.SecureBox;
+
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.crypto.SecretKey;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -24,7 +27,8 @@ public abstract class KeySyncUtils {
     static {
         Charset charset = StandardCharsets.UTF_8;
         THM_ENCRYPTED_RECOVERY_KEY_HEADER = "V1 THM_encrypted_recovery_key".getBytes(charset);
-        LOCALLY_ENCRYPTED_RECOVERY_KEY_HEADER = "V1 locally_encrypted_recovery_key".getBytes(charset);
+        LOCALLY_ENCRYPTED_RECOVERY_KEY_HEADER =
+                "V1 locally_encrypted_recovery_key".getBytes(charset);
         ENCRYPTED_APPLICATION_KEY_HEADER = "V1 encrypted_application_key".getBytes(charset);
         RECOVERY_CLAIM_HEADER = "V1 KF_claim".getBytes(charset);
         RECOVERY_RESPONSE_HEADER = "V1 reencrypted_recovery_key".getBytes(charset);
@@ -38,14 +42,19 @@ public abstract class KeySyncUtils {
             byte[] bArr = (byte[]) ((Pair) map.get(str)).second;
             byte[] bArr2 = ENCRYPTED_APPLICATION_KEY_HEADER;
             if (bArr != null) {
-                bArr2 = ArrayUtils.concat(new byte[][]{bArr2, bArr});
+                bArr2 = ArrayUtils.concat(new byte[][] {bArr2, bArr});
             }
-            hashMap.put(str, SecureBox.encrypt(null, secretKey.getEncoded(), bArr2, secretKey2.getEncoded()));
+            hashMap.put(
+                    str,
+                    SecureBox.encrypt(
+                            null, secretKey.getEncoded(), bArr2, secretKey2.getEncoded()));
         }
         return hashMap;
     }
 
-    public static byte[] locallyEncryptRecoveryKey(byte[] bArr, SecretKey secretKey) throws NoSuchAlgorithmException, InvalidKeyException {
-        return SecureBox.encrypt(null, bArr, LOCALLY_ENCRYPTED_RECOVERY_KEY_HEADER, secretKey.getEncoded());
+    public static byte[] locallyEncryptRecoveryKey(byte[] bArr, SecretKey secretKey)
+            throws NoSuchAlgorithmException, InvalidKeyException {
+        return SecureBox.encrypt(
+                null, bArr, LOCALLY_ENCRYPTED_RECOVERY_KEY_HEADER, secretKey.getEncoded());
     }
 }

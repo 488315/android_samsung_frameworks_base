@@ -1,17 +1,17 @@
 package android.os;
 
 import android.hardware.scontext.SContextConstants;
-import android.os.BatteryConsumer;
-import android.os.BatteryStats;
-import android.os.BatteryUsageStats;
 import android.text.TextUtils;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes3.dex */
 public final class UidBatteryConsumer extends BatteryConsumer {
@@ -26,8 +26,7 @@ public final class UidBatteryConsumer extends BatteryConsumer {
     public static final int STATE_FOREGROUND = 0;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface State {
-    }
+    public @interface State {}
 
     UidBatteryConsumer(BatteryConsumer.BatteryConsumerData data) {
         super(data);
@@ -93,7 +92,9 @@ public final class UidBatteryConsumer extends BatteryConsumer {
                 if (!this.mData.layout.powerStateDataIncluded || powerState != 0) {
                     for (int screenState = 0; screenState < 3; screenState++) {
                         if (!this.mData.layout.screenStateDataIncluded || screenState != 0) {
-                            double consumedPower = this.mPowerComponents.getConsumedPower(-1, 0, screenState, powerState);
+                            double consumedPower =
+                                    this.mPowerComponents.getConsumedPower(
+                                            -1, 0, screenState, powerState);
                             if (consumedPower != SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
                                 pw.print("      (");
                                 if (powerState != 0) {
@@ -107,7 +108,8 @@ public final class UidBatteryConsumer extends BatteryConsumer {
                                     pw.print(BatteryConsumer.screenStateToString(screenState));
                                 }
                                 pw.print(") ");
-                                this.mPowerComponents.dump(pw, screenState, powerState, skipEmptyComponents);
+                                this.mPowerComponents.dump(
+                                        pw, screenState, powerState, skipEmptyComponents);
                             }
                         }
                     }
@@ -116,13 +118,17 @@ public final class UidBatteryConsumer extends BatteryConsumer {
         }
     }
 
-    private void appendProcessStateData(StringBuilder sb, int processState, boolean skipEmptyComponents) {
+    private void appendProcessStateData(
+            StringBuilder sb, int processState, boolean skipEmptyComponents) {
         BatteryConsumer.Dimensions dimensions = new BatteryConsumer.Dimensions(-1, processState);
         double power = this.mPowerComponents.getConsumedPower(dimensions);
         if (power == SContextConstants.ENVIRONMENT_VALUE_UNKNOWN && skipEmptyComponents) {
             return;
         }
-        sb.append(" ").append(processStateToString(processState)).append(": ").append(BatteryStats.formatCharge(power));
+        sb.append(" ")
+                .append(processStateToString(processState))
+                .append(": ")
+                .append(BatteryStats.formatCharge(power));
     }
 
     void writeToXml(TypedXmlSerializer serializer) throws IOException {
@@ -142,17 +148,22 @@ public final class UidBatteryConsumer extends BatteryConsumer {
         serializer.endTag(null, "uid");
     }
 
-    static void createFromXml(TypedXmlPullParser parser, BatteryUsageStats.Builder builder) throws XmlPullParserException, IOException {
+    static void createFromXml(TypedXmlPullParser parser, BatteryUsageStats.Builder builder)
+            throws XmlPullParserException, IOException {
         int uid = parser.getAttributeInt(null, "uid");
         Builder consumerBuilder = builder.getOrCreateUidBatteryConsumerBuilder(uid);
         int eventType = parser.getEventType();
         if (eventType != 2 || !parser.getName().equals("uid")) {
             throw new XmlPullParserException("Invalid XML parser state");
         }
-        consumerBuilder.setPackageWithHighestDrain(parser.getAttributeValue(null, "highest_drain_package"));
-        consumerBuilder.setTimeInProcessStateMs(1, parser.getAttributeLong(null, "time_in_foreground"));
-        consumerBuilder.setTimeInProcessStateMs(2, parser.getAttributeLong(null, "time_in_background"));
-        consumerBuilder.setTimeInProcessStateMs(3, parser.getAttributeLong(null, "time_in_foreground_service"));
+        consumerBuilder.setPackageWithHighestDrain(
+                parser.getAttributeValue(null, "highest_drain_package"));
+        consumerBuilder.setTimeInProcessStateMs(
+                1, parser.getAttributeLong(null, "time_in_foreground"));
+        consumerBuilder.setTimeInProcessStateMs(
+                2, parser.getAttributeLong(null, "time_in_background"));
+        consumerBuilder.setTimeInProcessStateMs(
+                3, parser.getAttributeLong(null, "time_in_foreground_service"));
         while (true) {
             if ((eventType != 3 || !parser.getName().equals("uid")) && eventType != 1) {
                 if (eventType == 2 && parser.getName().equals("power_components")) {
@@ -181,13 +192,15 @@ public final class UidBatteryConsumer extends BatteryConsumer {
 
         /* JADX WARN: Type inference failed for: r1v1, types: [android.os.BatteryConsumer$BaseBuilder, android.os.UidBatteryConsumer$Builder] */
         @Override // android.os.BatteryConsumer.BaseBuilder
-        public /* bridge */ /* synthetic */ Builder addConsumedPower(BatteryConsumer.Key key, double d, int i) {
+        public /* bridge */ /* synthetic */ Builder addConsumedPower(
+                BatteryConsumer.Key key, double d, int i) {
             return super.addConsumedPower(key, d, i);
         }
 
         /* JADX WARN: Type inference failed for: r1v1, types: [android.os.BatteryConsumer$BaseBuilder, android.os.UidBatteryConsumer$Builder] */
         @Override // android.os.BatteryConsumer.BaseBuilder
-        public /* bridge */ /* synthetic */ Builder addConsumedPowerForCustomComponent(int i, double d) {
+        public /* bridge */ /* synthetic */ Builder addConsumedPowerForCustomComponent(
+                int i, double d) {
             return super.addConsumedPowerForCustomComponent(i, d);
         }
 
@@ -197,7 +210,8 @@ public final class UidBatteryConsumer extends BatteryConsumer {
         }
 
         @Override // android.os.BatteryConsumer.BaseBuilder
-        public /* bridge */ /* synthetic */ BatteryConsumer.Key getKey(int i, int i2, int i3, int i4) {
+        public /* bridge */ /* synthetic */ BatteryConsumer.Key getKey(
+                int i, int i2, int i3, int i4) {
             return super.getKey(i, i2, i3, i4);
         }
 
@@ -225,19 +239,22 @@ public final class UidBatteryConsumer extends BatteryConsumer {
 
         /* JADX WARN: Type inference failed for: r1v1, types: [android.os.BatteryConsumer$BaseBuilder, android.os.UidBatteryConsumer$Builder] */
         @Override // android.os.BatteryConsumer.BaseBuilder
-        public /* bridge */ /* synthetic */ Builder setConsumedPower(BatteryConsumer.Key key, double d, int i) {
+        public /* bridge */ /* synthetic */ Builder setConsumedPower(
+                BatteryConsumer.Key key, double d, int i) {
             return super.setConsumedPower(key, d, i);
         }
 
         /* JADX WARN: Type inference failed for: r1v1, types: [android.os.BatteryConsumer$BaseBuilder, android.os.UidBatteryConsumer$Builder] */
         @Override // android.os.BatteryConsumer.BaseBuilder
-        public /* bridge */ /* synthetic */ Builder setConsumedPowerForCustomComponent(int i, double d) {
+        public /* bridge */ /* synthetic */ Builder setConsumedPowerForCustomComponent(
+                int i, double d) {
             return super.setConsumedPowerForCustomComponent(i, d);
         }
 
         /* JADX WARN: Type inference failed for: r1v1, types: [android.os.BatteryConsumer$BaseBuilder, android.os.UidBatteryConsumer$Builder] */
         @Override // android.os.BatteryConsumer.BaseBuilder
-        public /* bridge */ /* synthetic */ Builder setUsageDurationForCustomComponentMillis(int i, long j) {
+        public /* bridge */ /* synthetic */ Builder setUsageDurationForCustomComponentMillis(
+                int i, long j) {
             return super.setUsageDurationForCustomComponentMillis(i, j);
         }
 
@@ -249,19 +266,30 @@ public final class UidBatteryConsumer extends BatteryConsumer {
 
         /* JADX WARN: Type inference failed for: r1v1, types: [android.os.BatteryConsumer$BaseBuilder, android.os.UidBatteryConsumer$Builder] */
         @Override // android.os.BatteryConsumer.BaseBuilder
-        public /* bridge */ /* synthetic */ Builder setUsageDurationMillis(BatteryConsumer.Key key, long j) {
+        public /* bridge */ /* synthetic */ Builder setUsageDurationMillis(
+                BatteryConsumer.Key key, long j) {
             return super.setUsageDurationMillis(key, j);
         }
 
-        public Builder(BatteryConsumer.BatteryConsumerData data, BatteryStats.Uid batteryStatsUid, double minConsumedPowerThreshold) {
+        public Builder(
+                BatteryConsumer.BatteryConsumerData data,
+                BatteryStats.Uid batteryStatsUid,
+                double minConsumedPowerThreshold) {
             this(data, batteryStatsUid, batteryStatsUid.getUid(), minConsumedPowerThreshold);
         }
 
-        public Builder(BatteryConsumer.BatteryConsumerData data, int uid, double minConsumedPowerThreshold) {
+        public Builder(
+                BatteryConsumer.BatteryConsumerData data,
+                int uid,
+                double minConsumedPowerThreshold) {
             this(data, null, uid, minConsumedPowerThreshold);
         }
 
-        private Builder(BatteryConsumer.BatteryConsumerData data, BatteryStats.Uid batteryStatsUid, int uid, double minConsumedPowerThreshold) {
+        private Builder(
+                BatteryConsumer.BatteryConsumerData data,
+                BatteryStats.Uid batteryStatsUid,
+                int uid,
+                double minConsumedPowerThreshold) {
             super(data, 1, minConsumedPowerThreshold);
             this.mPackageWithHighestDrain = "";
             this.mBatteryStatsUid = batteryStatsUid;
@@ -272,7 +300,8 @@ public final class UidBatteryConsumer extends BatteryConsumer {
 
         public BatteryStats.Uid getBatteryStatsUid() {
             if (this.mBatteryStatsUid == null) {
-                throw new IllegalStateException("UidBatteryConsumer.Builder was initialized without a BatteryStats.Uid");
+                throw new IllegalStateException(
+                        "UidBatteryConsumer.Builder was initialized without a BatteryStats.Uid");
             }
             return this.mBatteryStatsUid;
         }
@@ -332,7 +361,8 @@ public final class UidBatteryConsumer extends BatteryConsumer {
             setTimeInProcessStateMs(3, this.mData.getLong(5) + consumer.getTimeInProcessStateMs(3));
             if (this.mPackageWithHighestDrain == "") {
                 this.mPackageWithHighestDrain = consumer.getPackageWithHighestDrain();
-            } else if (!TextUtils.equals(this.mPackageWithHighestDrain, consumer.getPackageWithHighestDrain())) {
+            } else if (!TextUtils.equals(
+                    this.mPackageWithHighestDrain, consumer.getPackageWithHighestDrain())) {
                 this.mPackageWithHighestDrain = null;
             }
             return this;

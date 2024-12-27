@@ -3,8 +3,6 @@ package android.app.admin;
 import android.accounts.Account;
 import android.app.IApplicationThread;
 import android.app.IServiceConnection;
-import android.app.admin.IAuditLogEventsCallback;
-import android.app.admin.StartInstallingUpdateCallback;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -29,7 +27,9 @@ import android.security.keymaster.KeymasterCertificateChain;
 import android.security.keystore.ParcelableKeyGenParameterSpec;
 import android.telephony.data.ApnSetting;
 import android.text.TextUtils;
+
 import com.android.internal.infra.AndroidFuture;
+
 import java.util.List;
 import java.util.Map;
 
@@ -39,17 +39,33 @@ public interface IDevicePolicyManager extends IInterface {
 
     void acknowledgeNewUserDisclaimer(int i) throws RemoteException;
 
-    void addCrossProfileIntentFilter(ComponentName componentName, String str, IntentFilter intentFilter, int i) throws RemoteException;
+    void addCrossProfileIntentFilter(
+            ComponentName componentName, String str, IntentFilter intentFilter, int i)
+            throws RemoteException;
 
-    boolean addCrossProfileWidgetProvider(ComponentName componentName, String str, String str2) throws RemoteException;
+    boolean addCrossProfileWidgetProvider(ComponentName componentName, String str, String str2)
+            throws RemoteException;
 
     int addOverrideApn(ComponentName componentName, ApnSetting apnSetting) throws RemoteException;
 
-    void addPersistentPreferredActivity(ComponentName componentName, String str, IntentFilter intentFilter, ComponentName componentName2) throws RemoteException;
+    void addPersistentPreferredActivity(
+            ComponentName componentName,
+            String str,
+            IntentFilter intentFilter,
+            ComponentName componentName2)
+            throws RemoteException;
 
     boolean approveCaCert(String str, int i, boolean z) throws RemoteException;
 
-    boolean bindDeviceAdminServiceAsUser(ComponentName componentName, IApplicationThread iApplicationThread, IBinder iBinder, Intent intent, IServiceConnection iServiceConnection, long j, int i) throws RemoteException;
+    boolean bindDeviceAdminServiceAsUser(
+            ComponentName componentName,
+            IApplicationThread iApplicationThread,
+            IBinder iBinder,
+            Intent intent,
+            IServiceConnection iServiceConnection,
+            long j,
+            int i)
+            throws RemoteException;
 
     void calculateHasIncompatibleAccounts() throws RemoteException;
 
@@ -65,15 +81,19 @@ public interface IDevicePolicyManager extends IInterface {
 
     void choosePrivateKeyAlias(int i, Uri uri, String str, IBinder iBinder) throws RemoteException;
 
-    void clearApplicationUserData(ComponentName componentName, String str, IPackageDataObserver iPackageDataObserver) throws RemoteException;
+    void clearApplicationUserData(
+            ComponentName componentName, String str, IPackageDataObserver iPackageDataObserver)
+            throws RemoteException;
 
-    void clearCrossProfileIntentFilters(ComponentName componentName, String str) throws RemoteException;
+    void clearCrossProfileIntentFilters(ComponentName componentName, String str)
+            throws RemoteException;
 
     void clearDeviceOwner(String str) throws RemoteException;
 
     void clearOrganizationIdForUser(int i) throws RemoteException;
 
-    void clearPackagePersistentPreferredActivities(ComponentName componentName, String str, String str2) throws RemoteException;
+    void clearPackagePersistentPreferredActivities(
+            ComponentName componentName, String str, String str2) throws RemoteException;
 
     void clearProfileOwner(ComponentName componentName) throws RemoteException;
 
@@ -85,17 +105,28 @@ public interface IDevicePolicyManager extends IInterface {
 
     Intent createAdminSupportIntent(String str) throws RemoteException;
 
-    UserHandle createAndManageUser(ComponentName componentName, String str, ComponentName componentName2, PersistableBundle persistableBundle, int i) throws RemoteException;
+    UserHandle createAndManageUser(
+            ComponentName componentName,
+            String str,
+            ComponentName componentName2,
+            PersistableBundle persistableBundle,
+            int i)
+            throws RemoteException;
 
-    UserHandle createAndProvisionManagedProfile(ManagedProfileProvisioningParams managedProfileProvisioningParams, String str) throws RemoteException;
+    UserHandle createAndProvisionManagedProfile(
+            ManagedProfileProvisioningParams managedProfileProvisioningParams, String str)
+            throws RemoteException;
 
-    void enableSystemApp(ComponentName componentName, String str, String str2) throws RemoteException;
+    void enableSystemApp(ComponentName componentName, String str, String str2)
+            throws RemoteException;
 
-    int enableSystemAppWithIntent(ComponentName componentName, String str, Intent intent) throws RemoteException;
+    int enableSystemAppWithIntent(ComponentName componentName, String str, Intent intent)
+            throws RemoteException;
 
     void enforceCanManageCaCerts(ComponentName componentName, String str) throws RemoteException;
 
-    void finalizeWorkProfileProvisioning(UserHandle userHandle, Account account) throws RemoteException;
+    void finalizeWorkProfileProvisioning(UserHandle userHandle, Account account)
+            throws RemoteException;
 
     long forceNetworkLogs() throws RemoteException;
 
@@ -107,11 +138,19 @@ public interface IDevicePolicyManager extends IInterface {
 
     void forceUpdateUserSetupComplete(int i) throws RemoteException;
 
-    boolean generateKeyPair(ComponentName componentName, String str, String str2, ParcelableKeyGenParameterSpec parcelableKeyGenParameterSpec, int i, KeymasterCertificateChain keymasterCertificateChain) throws RemoteException;
+    boolean generateKeyPair(
+            ComponentName componentName,
+            String str,
+            String str2,
+            ParcelableKeyGenParameterSpec parcelableKeyGenParameterSpec,
+            int i,
+            KeymasterCertificateChain keymasterCertificateChain)
+            throws RemoteException;
 
     String[] getAccountTypesWithManagementDisabled(String str) throws RemoteException;
 
-    String[] getAccountTypesWithManagementDisabledAsUser(int i, String str, boolean z) throws RemoteException;
+    String[] getAccountTypesWithManagementDisabledAsUser(int i, String str, boolean z)
+            throws RemoteException;
 
     List<ComponentName> getActiveAdmins(int i) throws RemoteException;
 
@@ -121,7 +160,8 @@ public interface IDevicePolicyManager extends IInterface {
 
     List<String> getAllCrossProfilePackages(int i) throws RemoteException;
 
-    List<String> getAlwaysOnVpnLockdownAllowlist(ComponentName componentName) throws RemoteException;
+    List<String> getAlwaysOnVpnLockdownAllowlist(ComponentName componentName)
+            throws RemoteException;
 
     String getAlwaysOnVpnPackage(ComponentName componentName) throws RemoteException;
 
@@ -129,11 +169,14 @@ public interface IDevicePolicyManager extends IInterface {
 
     int[] getApplicationExemptions(String str) throws RemoteException;
 
-    Bundle getApplicationRestrictions(ComponentName componentName, String str, String str2, boolean z) throws RemoteException;
+    Bundle getApplicationRestrictions(
+            ComponentName componentName, String str, String str2, boolean z) throws RemoteException;
 
-    Bundle getApplicationRestrictionsMDM(ComponentName componentName, String str, int i) throws RemoteException;
+    Bundle getApplicationRestrictionsMDM(ComponentName componentName, String str, int i)
+            throws RemoteException;
 
-    String getApplicationRestrictionsManagingPackage(ComponentName componentName) throws RemoteException;
+    String getApplicationRestrictionsManagingPackage(ComponentName componentName)
+            throws RemoteException;
 
     boolean getAutoTimeEnabled(ComponentName componentName, String str) throws RemoteException;
 
@@ -141,13 +184,15 @@ public interface IDevicePolicyManager extends IInterface {
 
     boolean getAutoTimeZoneEnabled(ComponentName componentName, String str) throws RemoteException;
 
-    List<UserHandle> getBindDeviceAdminTargetUsers(ComponentName componentName) throws RemoteException;
+    List<UserHandle> getBindDeviceAdminTargetUsers(ComponentName componentName)
+            throws RemoteException;
 
     boolean getBluetoothContactSharingDisabled(ComponentName componentName) throws RemoteException;
 
     boolean getBluetoothContactSharingDisabledForUser(int i) throws RemoteException;
 
-    boolean getCameraDisabled(ComponentName componentName, String str, int i, boolean z) throws RemoteException;
+    boolean getCameraDisabled(ComponentName componentName, String str, int i, boolean z)
+            throws RemoteException;
 
     String getCertInstallerPackage(ComponentName componentName) throws RemoteException;
 
@@ -155,7 +200,8 @@ public interface IDevicePolicyManager extends IInterface {
 
     PackagePolicy getCredentialManagerPolicy(int i) throws RemoteException;
 
-    List<String> getCrossProfileCalendarPackages(ComponentName componentName) throws RemoteException;
+    List<String> getCrossProfileCalendarPackages(ComponentName componentName)
+            throws RemoteException;
 
     List<String> getCrossProfileCalendarPackagesForUser(int i) throws RemoteException;
 
@@ -163,13 +209,15 @@ public interface IDevicePolicyManager extends IInterface {
 
     boolean getCrossProfileCallerIdDisabledForUser(int i) throws RemoteException;
 
-    boolean getCrossProfileContactsSearchDisabled(ComponentName componentName) throws RemoteException;
+    boolean getCrossProfileContactsSearchDisabled(ComponentName componentName)
+            throws RemoteException;
 
     boolean getCrossProfileContactsSearchDisabledForUser(int i) throws RemoteException;
 
     List<String> getCrossProfilePackages(ComponentName componentName) throws RemoteException;
 
-    List<String> getCrossProfileWidgetProviders(ComponentName componentName, String str) throws RemoteException;
+    List<String> getCrossProfileWidgetProviders(ComponentName componentName, String str)
+            throws RemoteException;
 
     int getCurrentFailedBiometricAttempts(int i) throws RemoteException;
 
@@ -177,7 +225,8 @@ public interface IDevicePolicyManager extends IInterface {
 
     List<String> getDefaultCrossProfilePackages() throws RemoteException;
 
-    List<String> getDelegatePackages(ComponentName componentName, String str) throws RemoteException;
+    List<String> getDelegatePackages(ComponentName componentName, String str)
+            throws RemoteException;
 
     Map getDelegatedPackages(int i) throws RemoteException;
 
@@ -199,7 +248,8 @@ public interface IDevicePolicyManager extends IInterface {
 
     DevicePolicyState getDevicePolicyState() throws RemoteException;
 
-    List<String> getDisallowedSystemApps(ComponentName componentName, int i, String str) throws RemoteException;
+    List<String> getDisallowedSystemApps(ComponentName componentName, int i, String str)
+            throws RemoteException;
 
     boolean getDoNotAskCredentialsOnBoot() throws RemoteException;
 
@@ -213,7 +263,8 @@ public interface IDevicePolicyManager extends IInterface {
 
     String getEnrollmentSpecificId(String str) throws RemoteException;
 
-    FactoryResetProtectionPolicy getFactoryResetProtectionPolicy(ComponentName componentName) throws RemoteException;
+    FactoryResetProtectionPolicy getFactoryResetProtectionPolicy(ComponentName componentName)
+            throws RemoteException;
 
     String getFinancedDeviceKioskRoleHolder(String str) throws RemoteException;
 
@@ -227,11 +278,13 @@ public interface IDevicePolicyManager extends IInterface {
 
     int getHeadlessDeviceOwnerMode(String str) throws RemoteException;
 
-    List<String> getKeepUninstalledPackages(ComponentName componentName, String str) throws RemoteException;
+    List<String> getKeepUninstalledPackages(ComponentName componentName, String str)
+            throws RemoteException;
 
     ParcelableGranteeMap getKeyPairGrants(String str, String str2) throws RemoteException;
 
-    int getKeyguardDisabledFeatures(ComponentName componentName, int i, boolean z) throws RemoteException;
+    int getKeyguardDisabledFeatures(ComponentName componentName, int i, boolean z)
+            throws RemoteException;
 
     long getLastBugReportRequestTime() throws RemoteException;
 
@@ -247,7 +300,8 @@ public interface IDevicePolicyManager extends IInterface {
 
     CharSequence getLongSupportMessage(ComponentName componentName) throws RemoteException;
 
-    CharSequence getLongSupportMessageForUser(ComponentName componentName, int i) throws RemoteException;
+    CharSequence getLongSupportMessageForUser(ComponentName componentName, int i)
+            throws RemoteException;
 
     PackagePolicy getManagedProfileCallerIdAccessPolicy() throws RemoteException;
 
@@ -259,7 +313,8 @@ public interface IDevicePolicyManager extends IInterface {
 
     int getMaxPolicyStorageLimit(String str) throws RemoteException;
 
-    int getMaximumFailedPasswordsForWipe(ComponentName componentName, int i, boolean z) throws RemoteException;
+    int getMaximumFailedPasswordsForWipe(ComponentName componentName, int i, boolean z)
+            throws RemoteException;
 
     long getMaximumTimeToLock(ComponentName componentName, int i, boolean z) throws RemoteException;
 
@@ -277,7 +332,8 @@ public interface IDevicePolicyManager extends IInterface {
 
     int getOrganizationColorForUser(int i) throws RemoteException;
 
-    CharSequence getOrganizationName(ComponentName componentName, String str) throws RemoteException;
+    CharSequence getOrganizationName(ComponentName componentName, String str)
+            throws RemoteException;
 
     CharSequence getOrganizationNameForUser(int i) throws RemoteException;
 
@@ -287,43 +343,58 @@ public interface IDevicePolicyManager extends IInterface {
 
     int getPasswordComplexity(boolean z) throws RemoteException;
 
-    long getPasswordExpiration(ComponentName componentName, int i, boolean z) throws RemoteException;
+    long getPasswordExpiration(ComponentName componentName, int i, boolean z)
+            throws RemoteException;
 
-    long getPasswordExpirationTimeout(ComponentName componentName, int i, boolean z) throws RemoteException;
+    long getPasswordExpirationTimeout(ComponentName componentName, int i, boolean z)
+            throws RemoteException;
 
-    int getPasswordHistoryLength(ComponentName componentName, int i, boolean z) throws RemoteException;
+    int getPasswordHistoryLength(ComponentName componentName, int i, boolean z)
+            throws RemoteException;
 
-    int getPasswordMinimumLength(ComponentName componentName, int i, boolean z) throws RemoteException;
+    int getPasswordMinimumLength(ComponentName componentName, int i, boolean z)
+            throws RemoteException;
 
-    int getPasswordMinimumLetters(ComponentName componentName, int i, boolean z) throws RemoteException;
+    int getPasswordMinimumLetters(ComponentName componentName, int i, boolean z)
+            throws RemoteException;
 
-    int getPasswordMinimumLowerCase(ComponentName componentName, int i, boolean z) throws RemoteException;
+    int getPasswordMinimumLowerCase(ComponentName componentName, int i, boolean z)
+            throws RemoteException;
 
     PasswordMetrics getPasswordMinimumMetrics(int i, boolean z) throws RemoteException;
 
-    int getPasswordMinimumNonLetter(ComponentName componentName, int i, boolean z) throws RemoteException;
+    int getPasswordMinimumNonLetter(ComponentName componentName, int i, boolean z)
+            throws RemoteException;
 
-    int getPasswordMinimumNumeric(ComponentName componentName, int i, boolean z) throws RemoteException;
+    int getPasswordMinimumNumeric(ComponentName componentName, int i, boolean z)
+            throws RemoteException;
 
-    int getPasswordMinimumSymbols(ComponentName componentName, int i, boolean z) throws RemoteException;
+    int getPasswordMinimumSymbols(ComponentName componentName, int i, boolean z)
+            throws RemoteException;
 
-    int getPasswordMinimumUpperCase(ComponentName componentName, int i, boolean z) throws RemoteException;
+    int getPasswordMinimumUpperCase(ComponentName componentName, int i, boolean z)
+            throws RemoteException;
 
     int getPasswordQuality(ComponentName componentName, int i, boolean z) throws RemoteException;
 
-    SystemUpdateInfo getPendingSystemUpdate(ComponentName componentName, String str) throws RemoteException;
+    SystemUpdateInfo getPendingSystemUpdate(ComponentName componentName, String str)
+            throws RemoteException;
 
-    int getPermissionGrantState(ComponentName componentName, String str, String str2, String str3) throws RemoteException;
+    int getPermissionGrantState(ComponentName componentName, String str, String str2, String str3)
+            throws RemoteException;
 
     int getPermissionPolicy(ComponentName componentName) throws RemoteException;
 
-    List<String> getPermittedAccessibilityServices(ComponentName componentName) throws RemoteException;
+    List<String> getPermittedAccessibilityServices(ComponentName componentName)
+            throws RemoteException;
 
     List<String> getPermittedAccessibilityServicesForUser(int i) throws RemoteException;
 
-    List<String> getPermittedCrossProfileNotificationListeners(ComponentName componentName) throws RemoteException;
+    List<String> getPermittedCrossProfileNotificationListeners(ComponentName componentName)
+            throws RemoteException;
 
-    List<String> getPermittedInputMethods(ComponentName componentName, String str, boolean z) throws RemoteException;
+    List<String> getPermittedInputMethods(ComponentName componentName, String str, boolean z)
+            throws RemoteException;
 
     List<String> getPermittedInputMethodsAsUser(int i) throws RemoteException;
 
@@ -333,33 +404,41 @@ public interface IDevicePolicyManager extends IInterface {
 
     int getPolicySizeForAdmin(String str, EnforcingAdmin enforcingAdmin) throws RemoteException;
 
-    List<PreferentialNetworkServiceConfig> getPreferentialNetworkServiceConfigs() throws RemoteException;
+    List<PreferentialNetworkServiceConfig> getPreferentialNetworkServiceConfigs()
+            throws RemoteException;
 
     ComponentName getProfileOwnerAsUser(int i) throws RemoteException;
 
     String getProfileOwnerName(int i) throws RemoteException;
 
-    ComponentName getProfileOwnerOrDeviceOwnerSupervisionComponent(UserHandle userHandle) throws RemoteException;
+    ComponentName getProfileOwnerOrDeviceOwnerSupervisionComponent(UserHandle userHandle)
+            throws RemoteException;
 
     int getProfileWithMinimumFailedPasswordsForWipe(int i, boolean z) throws RemoteException;
 
-    void getRemoveWarning(ComponentName componentName, RemoteCallback remoteCallback, int i) throws RemoteException;
+    void getRemoveWarning(ComponentName componentName, RemoteCallback remoteCallback, int i)
+            throws RemoteException;
 
     int getRequiredPasswordComplexity(String str, boolean z) throws RemoteException;
 
-    long getRequiredStrongAuthTimeout(ComponentName componentName, int i, boolean z) throws RemoteException;
+    long getRequiredStrongAuthTimeout(ComponentName componentName, int i, boolean z)
+            throws RemoteException;
 
     ComponentName getRestrictionsProvider(int i) throws RemoteException;
 
-    boolean getSamsungSDcardEncryptionStatus(ComponentName componentName, int i) throws RemoteException;
+    boolean getSamsungSDcardEncryptionStatus(ComponentName componentName, int i)
+            throws RemoteException;
 
-    boolean getScreenCaptureDisabled(ComponentName componentName, int i, boolean z) throws RemoteException;
+    boolean getScreenCaptureDisabled(ComponentName componentName, int i, boolean z)
+            throws RemoteException;
 
     List<UserHandle> getSecondaryUsers(ComponentName componentName) throws RemoteException;
 
-    CharSequence getShortSupportMessage(ComponentName componentName, String str) throws RemoteException;
+    CharSequence getShortSupportMessage(ComponentName componentName, String str)
+            throws RemoteException;
 
-    CharSequence getShortSupportMessageForUser(ComponentName componentName, int i) throws RemoteException;
+    CharSequence getShortSupportMessageForUser(ComponentName componentName, int i)
+            throws RemoteException;
 
     CharSequence getStartUserSessionMessage(ComponentName componentName) throws RemoteException;
 
@@ -375,13 +454,17 @@ public interface IDevicePolicyManager extends IInterface {
 
     PersistableBundle getTransferOwnershipBundle() throws RemoteException;
 
-    List<PersistableBundle> getTrustAgentConfiguration(ComponentName componentName, ComponentName componentName2, int i, boolean z) throws RemoteException;
+    List<PersistableBundle> getTrustAgentConfiguration(
+            ComponentName componentName, ComponentName componentName2, int i, boolean z)
+            throws RemoteException;
 
-    List<String> getUserControlDisabledPackages(ComponentName componentName, String str) throws RemoteException;
+    List<String> getUserControlDisabledPackages(ComponentName componentName, String str)
+            throws RemoteException;
 
     int getUserProvisioningState(int i) throws RemoteException;
 
-    Bundle getUserRestrictions(ComponentName componentName, String str, boolean z) throws RemoteException;
+    Bundle getUserRestrictions(ComponentName componentName, String str, boolean z)
+            throws RemoteException;
 
     Bundle getUserRestrictionsGlobally(String str) throws RemoteException;
 
@@ -405,15 +488,32 @@ public interface IDevicePolicyManager extends IInterface {
 
     boolean hasUserSetupCompleted() throws RemoteException;
 
-    boolean installCaCert(ComponentName componentName, String str, byte[] bArr) throws RemoteException;
+    boolean installCaCert(ComponentName componentName, String str, byte[] bArr)
+            throws RemoteException;
 
-    boolean installExistingPackage(ComponentName componentName, String str, String str2) throws RemoteException;
+    boolean installExistingPackage(ComponentName componentName, String str, String str2)
+            throws RemoteException;
 
-    boolean installKeyPair(ComponentName componentName, String str, byte[] bArr, byte[] bArr2, byte[] bArr3, String str2, boolean z, boolean z2) throws RemoteException;
+    boolean installKeyPair(
+            ComponentName componentName,
+            String str,
+            byte[] bArr,
+            byte[] bArr2,
+            byte[] bArr3,
+            String str2,
+            boolean z,
+            boolean z2)
+            throws RemoteException;
 
-    void installUpdateFromFile(ComponentName componentName, String str, ParcelFileDescriptor parcelFileDescriptor, StartInstallingUpdateCallback startInstallingUpdateCallback) throws RemoteException;
+    void installUpdateFromFile(
+            ComponentName componentName,
+            String str,
+            ParcelFileDescriptor parcelFileDescriptor,
+            StartInstallingUpdateCallback startInstallingUpdateCallback)
+            throws RemoteException;
 
-    boolean isAccessibilityServicePermittedByAdmin(ComponentName componentName, String str, int i) throws RemoteException;
+    boolean isAccessibilityServicePermittedByAdmin(ComponentName componentName, String str, int i)
+            throws RemoteException;
 
     boolean isActivePasswordSufficient(String str, int i, boolean z) throws RemoteException;
 
@@ -427,7 +527,8 @@ public interface IDevicePolicyManager extends IInterface {
 
     boolean isAlwaysOnVpnLockdownEnabledForUser(int i) throws RemoteException;
 
-    boolean isApplicationHidden(ComponentName componentName, String str, String str2, boolean z) throws RemoteException;
+    boolean isApplicationHidden(ComponentName componentName, String str, String str2, boolean z)
+            throws RemoteException;
 
     boolean isAuditLogEnabled(String str) throws RemoteException;
 
@@ -459,7 +560,8 @@ public interface IDevicePolicyManager extends IInterface {
 
     boolean isFactoryResetProtectionPolicySupported() throws RemoteException;
 
-    boolean isInputMethodPermittedByAdmin(ComponentName componentName, String str, int i, boolean z) throws RemoteException;
+    boolean isInputMethodPermittedByAdmin(ComponentName componentName, String str, int i, boolean z)
+            throws RemoteException;
 
     boolean isKeyPairGrantedToWifiAuth(String str, String str2) throws RemoteException;
 
@@ -473,7 +575,8 @@ public interface IDevicePolicyManager extends IInterface {
 
     boolean isMasterVolumeMuted(ComponentName componentName) throws RemoteException;
 
-    boolean isMeteredDataDisabledPackageForUser(ComponentName componentName, String str, int i) throws RemoteException;
+    boolean isMeteredDataDisabledPackageForUser(ComponentName componentName, String str, int i)
+            throws RemoteException;
 
     boolean isNetworkLoggingEnabled(ComponentName componentName, String str) throws RemoteException;
 
@@ -487,7 +590,8 @@ public interface IDevicePolicyManager extends IInterface {
 
     boolean isPackageAllowedToAccessCalendarForUser(String str, int i) throws RemoteException;
 
-    boolean isPackageSuspended(ComponentName componentName, String str, String str2) throws RemoteException;
+    boolean isPackageSuspended(ComponentName componentName, String str, String str2)
+            throws RemoteException;
 
     boolean isPasswordSufficientAfterProfileUnification(int i, int i2) throws RemoteException;
 
@@ -497,15 +601,18 @@ public interface IDevicePolicyManager extends IInterface {
 
     boolean isRemovingAdmin(ComponentName componentName, int i) throws RemoteException;
 
-    boolean isResetPasswordTokenActive(ComponentName componentName, String str) throws RemoteException;
+    boolean isResetPasswordTokenActive(ComponentName componentName, String str)
+            throws RemoteException;
 
-    boolean isResetPasswordTokenActiveMDM(ComponentName componentName, int i) throws RemoteException;
+    boolean isResetPasswordTokenActiveMDM(ComponentName componentName, int i)
+            throws RemoteException;
 
     boolean isSafeOperation(int i) throws RemoteException;
 
     boolean isSecondaryLockscreenEnabled(UserHandle userHandle) throws RemoteException;
 
-    boolean isSecurityLoggingEnabled(ComponentName componentName, String str) throws RemoteException;
+    boolean isSecurityLoggingEnabled(ComponentName componentName, String str)
+            throws RemoteException;
 
     boolean isStatusBarDisabled(String str) throws RemoteException;
 
@@ -537,15 +644,19 @@ public interface IDevicePolicyManager extends IInterface {
 
     boolean packageHasActiveAdmins(String str, int i) throws RemoteException;
 
-    void provisionFullyManagedDevice(FullyManagedDeviceProvisioningParams fullyManagedDeviceProvisioningParams, String str) throws RemoteException;
+    void provisionFullyManagedDevice(
+            FullyManagedDeviceProvisioningParams fullyManagedDeviceProvisioningParams, String str)
+            throws RemoteException;
 
     void reboot(ComponentName componentName) throws RemoteException;
 
     void removeActiveAdmin(ComponentName componentName, int i) throws RemoteException;
 
-    boolean removeCrossProfileWidgetProvider(ComponentName componentName, String str, String str2) throws RemoteException;
+    boolean removeCrossProfileWidgetProvider(ComponentName componentName, String str, String str2)
+            throws RemoteException;
 
-    boolean removeKeyPair(ComponentName componentName, String str, String str2) throws RemoteException;
+    boolean removeKeyPair(ComponentName componentName, String str, String str2)
+            throws RemoteException;
 
     boolean removeOverrideApn(ComponentName componentName, int i) throws RemoteException;
 
@@ -555,7 +666,8 @@ public interface IDevicePolicyManager extends IInterface {
 
     void reportFailedPasswordAttempt(int i, boolean z) throws RemoteException;
 
-    void reportFailedPasswordAttemptWithFailureCount(int i, int i2, boolean z) throws RemoteException;
+    void reportFailedPasswordAttemptWithFailureCount(int i, int i2, boolean z)
+            throws RemoteException;
 
     void reportKeyguardDismissed(int i) throws RemoteException;
 
@@ -575,19 +687,27 @@ public interface IDevicePolicyManager extends IInterface {
 
     boolean resetPassword(String str, int i) throws RemoteException;
 
-    boolean resetPasswordWithToken(ComponentName componentName, String str, String str2, byte[] bArr, int i) throws RemoteException;
+    boolean resetPasswordWithToken(
+            ComponentName componentName, String str, String str2, byte[] bArr, int i)
+            throws RemoteException;
 
-    boolean resetPasswordWithTokenMDM(ComponentName componentName, String str, byte[] bArr, int i, int i2) throws RemoteException;
+    boolean resetPasswordWithTokenMDM(
+            ComponentName componentName, String str, byte[] bArr, int i, int i2)
+            throws RemoteException;
 
-    void resetShouldAllowBypassingDevicePolicyManagementRoleQualificationState() throws RemoteException;
+    void resetShouldAllowBypassingDevicePolicyManagementRoleQualificationState()
+            throws RemoteException;
 
     void resetStrings(List<String> list) throws RemoteException;
 
-    List<NetworkEvent> retrieveNetworkLogs(ComponentName componentName, String str, long j) throws RemoteException;
+    List<NetworkEvent> retrieveNetworkLogs(ComponentName componentName, String str, long j)
+            throws RemoteException;
 
-    ParceledListSlice retrievePreRebootSecurityLogs(ComponentName componentName, String str) throws RemoteException;
+    ParceledListSlice retrievePreRebootSecurityLogs(ComponentName componentName, String str)
+            throws RemoteException;
 
-    ParceledListSlice retrieveSecurityLogs(ComponentName componentName, String str) throws RemoteException;
+    ParceledListSlice retrieveSecurityLogs(ComponentName componentName, String str)
+            throws RemoteException;
 
     int semGetAllowBluetoothMode(ComponentName componentName, int i) throws RemoteException;
 
@@ -607,7 +727,8 @@ public interface IDevicePolicyManager extends IInterface {
 
     boolean semGetAllowWifi(ComponentName componentName, int i) throws RemoteException;
 
-    boolean semGetRequireStorageCardEncryption(ComponentName componentName, int i, boolean z) throws RemoteException;
+    boolean semGetRequireStorageCardEncryption(ComponentName componentName, int i, boolean z)
+            throws RemoteException;
 
     boolean semIsActivePasswordSufficient(int i) throws RemoteException;
 
@@ -631,11 +752,13 @@ public interface IDevicePolicyManager extends IInterface {
 
     void semSetAllowWifi(ComponentName componentName, boolean z) throws RemoteException;
 
-    void semSetChangeNotificationEnabled(ComponentName componentName, boolean z) throws RemoteException;
+    void semSetChangeNotificationEnabled(ComponentName componentName, boolean z)
+            throws RemoteException;
 
     void semSetKeyguardDisabledFeatures(ComponentName componentName, int i) throws RemoteException;
 
-    void semSetPasswordExpirationTimeout(ComponentName componentName, long j) throws RemoteException;
+    void semSetPasswordExpirationTimeout(ComponentName componentName, long j)
+            throws RemoteException;
 
     void semSetPasswordHistoryLength(ComponentName componentName, int i) throws RemoteException;
 
@@ -649,75 +772,101 @@ public interface IDevicePolicyManager extends IInterface {
 
     void semSetPasswordQuality(ComponentName componentName, int i) throws RemoteException;
 
-    void semSetRequireStorageCardEncryption(ComponentName componentName, boolean z, boolean z2) throws RemoteException;
+    void semSetRequireStorageCardEncryption(ComponentName componentName, boolean z, boolean z2)
+            throws RemoteException;
 
     void semSetSimplePasswordEnabled(ComponentName componentName, boolean z) throws RemoteException;
 
     void sendLostModeLocationUpdate(AndroidFuture<Boolean> androidFuture) throws RemoteException;
 
-    void setAccountManagementDisabled(ComponentName componentName, String str, String str2, boolean z, boolean z2) throws RemoteException;
+    void setAccountManagementDisabled(
+            ComponentName componentName, String str, String str2, boolean z, boolean z2)
+            throws RemoteException;
 
     void setActiveAdmin(ComponentName componentName, boolean z, int i) throws RemoteException;
 
     void setAffiliationIds(ComponentName componentName, List<String> list) throws RemoteException;
 
-    boolean setAlwaysOnVpnPackage(ComponentName componentName, String str, boolean z, List<String> list) throws RemoteException;
+    boolean setAlwaysOnVpnPackage(
+            ComponentName componentName, String str, boolean z, List<String> list)
+            throws RemoteException;
 
     void setApplicationExemptions(String str, String str2, int[] iArr) throws RemoteException;
 
-    boolean setApplicationHidden(ComponentName componentName, String str, String str2, boolean z, boolean z2) throws RemoteException;
+    boolean setApplicationHidden(
+            ComponentName componentName, String str, String str2, boolean z, boolean z2)
+            throws RemoteException;
 
-    void setApplicationRestrictions(ComponentName componentName, String str, String str2, Bundle bundle, boolean z) throws RemoteException;
+    void setApplicationRestrictions(
+            ComponentName componentName, String str, String str2, Bundle bundle, boolean z)
+            throws RemoteException;
 
-    void setApplicationRestrictionsMDM(ComponentName componentName, String str, Bundle bundle, int i) throws RemoteException;
+    void setApplicationRestrictionsMDM(
+            ComponentName componentName, String str, Bundle bundle, int i) throws RemoteException;
 
-    boolean setApplicationRestrictionsManagingPackage(ComponentName componentName, String str) throws RemoteException;
+    boolean setApplicationRestrictionsManagingPackage(ComponentName componentName, String str)
+            throws RemoteException;
 
     void setAuditLogEnabled(String str, boolean z) throws RemoteException;
 
-    void setAuditLogEventsCallback(String str, IAuditLogEventsCallback iAuditLogEventsCallback) throws RemoteException;
+    void setAuditLogEventsCallback(String str, IAuditLogEventsCallback iAuditLogEventsCallback)
+            throws RemoteException;
 
-    void setAutoTimeEnabled(ComponentName componentName, String str, boolean z) throws RemoteException;
+    void setAutoTimeEnabled(ComponentName componentName, String str, boolean z)
+            throws RemoteException;
 
     void setAutoTimeRequired(ComponentName componentName, boolean z) throws RemoteException;
 
-    void setAutoTimeZoneEnabled(ComponentName componentName, String str, boolean z) throws RemoteException;
+    void setAutoTimeZoneEnabled(ComponentName componentName, String str, boolean z)
+            throws RemoteException;
 
     void setBackupServiceEnabled(ComponentName componentName, boolean z) throws RemoteException;
 
-    void setBluetoothContactSharingDisabled(ComponentName componentName, boolean z) throws RemoteException;
+    void setBluetoothContactSharingDisabled(ComponentName componentName, boolean z)
+            throws RemoteException;
 
-    void setCameraDisabled(ComponentName componentName, String str, boolean z, boolean z2) throws RemoteException;
+    void setCameraDisabled(ComponentName componentName, String str, boolean z, boolean z2)
+            throws RemoteException;
 
     void setCertInstallerPackage(ComponentName componentName, String str) throws RemoteException;
 
-    void setCommonCriteriaModeEnabled(ComponentName componentName, String str, boolean z) throws RemoteException;
+    void setCommonCriteriaModeEnabled(ComponentName componentName, String str, boolean z)
+            throws RemoteException;
 
-    void setConfiguredNetworksLockdownState(ComponentName componentName, String str, boolean z) throws RemoteException;
+    void setConfiguredNetworksLockdownState(ComponentName componentName, String str, boolean z)
+            throws RemoteException;
 
-    void setContentProtectionPolicy(ComponentName componentName, String str, int i) throws RemoteException;
+    void setContentProtectionPolicy(ComponentName componentName, String str, int i)
+            throws RemoteException;
 
     void setCredentialManagerPolicy(PackagePolicy packagePolicy) throws RemoteException;
 
     void setCrossProfileAppToIgnored(int i, String str) throws RemoteException;
 
-    void setCrossProfileCalendarPackages(ComponentName componentName, List<String> list) throws RemoteException;
+    void setCrossProfileCalendarPackages(ComponentName componentName, List<String> list)
+            throws RemoteException;
 
-    void setCrossProfileCallerIdDisabled(ComponentName componentName, boolean z) throws RemoteException;
+    void setCrossProfileCallerIdDisabled(ComponentName componentName, boolean z)
+            throws RemoteException;
 
-    void setCrossProfileContactsSearchDisabled(ComponentName componentName, boolean z) throws RemoteException;
+    void setCrossProfileContactsSearchDisabled(ComponentName componentName, boolean z)
+            throws RemoteException;
 
-    void setCrossProfilePackages(ComponentName componentName, List<String> list) throws RemoteException;
+    void setCrossProfilePackages(ComponentName componentName, List<String> list)
+            throws RemoteException;
 
     void setDefaultDialerApplication(String str) throws RemoteException;
 
-    void setDefaultSmsApplication(ComponentName componentName, String str, String str2, boolean z) throws RemoteException;
+    void setDefaultSmsApplication(ComponentName componentName, String str, String str2, boolean z)
+            throws RemoteException;
 
-    void setDelegatedScopes(ComponentName componentName, String str, List<String> list) throws RemoteException;
+    void setDelegatedScopes(ComponentName componentName, String str, List<String> list)
+            throws RemoteException;
 
     boolean setDeviceOwner(ComponentName componentName, int i, boolean z) throws RemoteException;
 
-    void setDeviceOwnerLockScreenInfo(ComponentName componentName, CharSequence charSequence) throws RemoteException;
+    void setDeviceOwnerLockScreenInfo(ComponentName componentName, CharSequence charSequence)
+            throws RemoteException;
 
     void setDeviceOwnerType(ComponentName componentName, int i) throws RemoteException;
 
@@ -727,63 +876,90 @@ public interface IDevicePolicyManager extends IInterface {
 
     void setDrawables(List<DevicePolicyDrawableResource> list) throws RemoteException;
 
-    void setEndUserSessionMessage(ComponentName componentName, CharSequence charSequence) throws RemoteException;
+    void setEndUserSessionMessage(ComponentName componentName, CharSequence charSequence)
+            throws RemoteException;
 
-    void setFactoryResetProtectionPolicy(ComponentName componentName, String str, FactoryResetProtectionPolicy factoryResetProtectionPolicy) throws RemoteException;
+    void setFactoryResetProtectionPolicy(
+            ComponentName componentName,
+            String str,
+            FactoryResetProtectionPolicy factoryResetProtectionPolicy)
+            throws RemoteException;
 
     void setForceEphemeralUsers(ComponentName componentName, boolean z) throws RemoteException;
 
     int setGlobalPrivateDns(ComponentName componentName, int i, String str) throws RemoteException;
 
-    ComponentName setGlobalProxy(ComponentName componentName, String str, String str2) throws RemoteException;
+    ComponentName setGlobalProxy(ComponentName componentName, String str, String str2)
+            throws RemoteException;
 
-    void setGlobalSetting(ComponentName componentName, String str, String str2) throws RemoteException;
+    void setGlobalSetting(ComponentName componentName, String str, String str2)
+            throws RemoteException;
 
-    void setKeepUninstalledPackages(ComponentName componentName, String str, List<String> list) throws RemoteException;
+    void setKeepUninstalledPackages(ComponentName componentName, String str, List<String> list)
+            throws RemoteException;
 
-    boolean setKeyGrantForApp(ComponentName componentName, String str, String str2, String str3, boolean z) throws RemoteException;
+    boolean setKeyGrantForApp(
+            ComponentName componentName, String str, String str2, String str3, boolean z)
+            throws RemoteException;
 
     boolean setKeyGrantToWifiAuth(String str, String str2, boolean z) throws RemoteException;
 
-    boolean setKeyPairCertificate(ComponentName componentName, String str, String str2, byte[] bArr, byte[] bArr2, boolean z) throws RemoteException;
+    boolean setKeyPairCertificate(
+            ComponentName componentName,
+            String str,
+            String str2,
+            byte[] bArr,
+            byte[] bArr2,
+            boolean z)
+            throws RemoteException;
 
     boolean setKeyguardDisabled(ComponentName componentName, boolean z) throws RemoteException;
 
-    void setKeyguardDisabledFeatures(ComponentName componentName, String str, int i, boolean z) throws RemoteException;
+    void setKeyguardDisabledFeatures(ComponentName componentName, String str, int i, boolean z)
+            throws RemoteException;
 
-    void setKeyguardDisabledFeaturesMDM(ComponentName componentName, int i, int i2) throws RemoteException;
+    void setKeyguardDisabledFeaturesMDM(ComponentName componentName, int i, int i2)
+            throws RemoteException;
 
     void setLocationEnabled(ComponentName componentName, boolean z) throws RemoteException;
 
     void setLockTaskFeatures(ComponentName componentName, String str, int i) throws RemoteException;
 
-    void setLockTaskPackages(ComponentName componentName, String str, String[] strArr) throws RemoteException;
+    void setLockTaskPackages(ComponentName componentName, String str, String[] strArr)
+            throws RemoteException;
 
     void setLogoutEnabled(ComponentName componentName, boolean z) throws RemoteException;
 
-    void setLongSupportMessage(ComponentName componentName, CharSequence charSequence) throws RemoteException;
+    void setLongSupportMessage(ComponentName componentName, CharSequence charSequence)
+            throws RemoteException;
 
     void setManagedProfileCallerIdAccessPolicy(PackagePolicy packagePolicy) throws RemoteException;
 
     void setManagedProfileContactsAccessPolicy(PackagePolicy packagePolicy) throws RemoteException;
 
-    void setManagedProfileMaximumTimeOff(ComponentName componentName, long j) throws RemoteException;
+    void setManagedProfileMaximumTimeOff(ComponentName componentName, long j)
+            throws RemoteException;
 
-    void setManagedSubscriptionsPolicy(ManagedSubscriptionsPolicy managedSubscriptionsPolicy) throws RemoteException;
+    void setManagedSubscriptionsPolicy(ManagedSubscriptionsPolicy managedSubscriptionsPolicy)
+            throws RemoteException;
 
     void setMasterVolumeMuted(ComponentName componentName, boolean z) throws RemoteException;
 
     void setMaxPolicyStorageLimit(String str, int i) throws RemoteException;
 
-    void setMaximumFailedPasswordsForWipe(ComponentName componentName, String str, int i, boolean z) throws RemoteException;
+    void setMaximumFailedPasswordsForWipe(ComponentName componentName, String str, int i, boolean z)
+            throws RemoteException;
 
-    void setMaximumFailedPasswordsForWipeMDM(ComponentName componentName, int i, int i2) throws RemoteException;
+    void setMaximumFailedPasswordsForWipeMDM(ComponentName componentName, int i, int i2)
+            throws RemoteException;
 
-    void setMaximumTimeToLock(ComponentName componentName, String str, long j, boolean z) throws RemoteException;
+    void setMaximumTimeToLock(ComponentName componentName, String str, long j, boolean z)
+            throws RemoteException;
 
     void setMaximumTimeToLockMDM(ComponentName componentName, long j, int i) throws RemoteException;
 
-    List<String> setMeteredDataDisabledPackages(ComponentName componentName, List<String> list) throws RemoteException;
+    List<String> setMeteredDataDisabledPackages(ComponentName componentName, List<String> list)
+            throws RemoteException;
 
     void setMinimumRequiredWifiSecurityLevel(String str, int i) throws RemoteException;
 
@@ -793,7 +969,8 @@ public interface IDevicePolicyManager extends IInterface {
 
     void setNearbyNotificationStreamingPolicy(int i) throws RemoteException;
 
-    void setNetworkLoggingEnabled(ComponentName componentName, String str, boolean z) throws RemoteException;
+    void setNetworkLoggingEnabled(ComponentName componentName, String str, boolean z)
+            throws RemoteException;
 
     void setNextOperationSafety(int i, int i2) throws RemoteException;
 
@@ -803,65 +980,98 @@ public interface IDevicePolicyManager extends IInterface {
 
     void setOrganizationIdForUser(String str, String str2, int i) throws RemoteException;
 
-    void setOrganizationName(ComponentName componentName, String str, CharSequence charSequence) throws RemoteException;
+    void setOrganizationName(ComponentName componentName, String str, CharSequence charSequence)
+            throws RemoteException;
 
     void setOverrideApnsEnabled(ComponentName componentName, boolean z) throws RemoteException;
 
-    String[] setPackagesSuspended(ComponentName componentName, String str, String[] strArr, boolean z) throws RemoteException;
+    String[] setPackagesSuspended(
+            ComponentName componentName, String str, String[] strArr, boolean z)
+            throws RemoteException;
 
-    void setPasswordExpirationTimeout(ComponentName componentName, String str, long j, boolean z) throws RemoteException;
+    void setPasswordExpirationTimeout(ComponentName componentName, String str, long j, boolean z)
+            throws RemoteException;
 
-    void setPasswordExpirationTimeoutMDM(ComponentName componentName, long j, int i) throws RemoteException;
+    void setPasswordExpirationTimeoutMDM(ComponentName componentName, long j, int i)
+            throws RemoteException;
 
-    void setPasswordHistoryLength(ComponentName componentName, int i, boolean z) throws RemoteException;
+    void setPasswordHistoryLength(ComponentName componentName, int i, boolean z)
+            throws RemoteException;
 
-    void setPasswordHistoryLengthMDM(ComponentName componentName, int i, int i2) throws RemoteException;
+    void setPasswordHistoryLengthMDM(ComponentName componentName, int i, int i2)
+            throws RemoteException;
 
-    void setPasswordMinimumLength(ComponentName componentName, int i, boolean z) throws RemoteException;
+    void setPasswordMinimumLength(ComponentName componentName, int i, boolean z)
+            throws RemoteException;
 
-    void setPasswordMinimumLengthMDM(ComponentName componentName, int i, int i2) throws RemoteException;
+    void setPasswordMinimumLengthMDM(ComponentName componentName, int i, int i2)
+            throws RemoteException;
 
-    void setPasswordMinimumLetters(ComponentName componentName, int i, boolean z) throws RemoteException;
+    void setPasswordMinimumLetters(ComponentName componentName, int i, boolean z)
+            throws RemoteException;
 
-    void setPasswordMinimumLettersMDM(ComponentName componentName, int i, int i2) throws RemoteException;
+    void setPasswordMinimumLettersMDM(ComponentName componentName, int i, int i2)
+            throws RemoteException;
 
-    void setPasswordMinimumLowerCase(ComponentName componentName, int i, boolean z) throws RemoteException;
+    void setPasswordMinimumLowerCase(ComponentName componentName, int i, boolean z)
+            throws RemoteException;
 
-    void setPasswordMinimumLowerCaseMDM(ComponentName componentName, int i, int i2) throws RemoteException;
+    void setPasswordMinimumLowerCaseMDM(ComponentName componentName, int i, int i2)
+            throws RemoteException;
 
-    void setPasswordMinimumNonLetter(ComponentName componentName, int i, boolean z) throws RemoteException;
+    void setPasswordMinimumNonLetter(ComponentName componentName, int i, boolean z)
+            throws RemoteException;
 
-    void setPasswordMinimumNonLetterMDM(ComponentName componentName, int i, int i2) throws RemoteException;
+    void setPasswordMinimumNonLetterMDM(ComponentName componentName, int i, int i2)
+            throws RemoteException;
 
-    void setPasswordMinimumNumeric(ComponentName componentName, int i, boolean z) throws RemoteException;
+    void setPasswordMinimumNumeric(ComponentName componentName, int i, boolean z)
+            throws RemoteException;
 
-    void setPasswordMinimumNumericMDM(ComponentName componentName, int i, int i2) throws RemoteException;
+    void setPasswordMinimumNumericMDM(ComponentName componentName, int i, int i2)
+            throws RemoteException;
 
-    void setPasswordMinimumSymbols(ComponentName componentName, int i, boolean z) throws RemoteException;
+    void setPasswordMinimumSymbols(ComponentName componentName, int i, boolean z)
+            throws RemoteException;
 
-    void setPasswordMinimumSymbolsMDM(ComponentName componentName, int i, int i2) throws RemoteException;
+    void setPasswordMinimumSymbolsMDM(ComponentName componentName, int i, int i2)
+            throws RemoteException;
 
-    void setPasswordMinimumUpperCase(ComponentName componentName, int i, boolean z) throws RemoteException;
+    void setPasswordMinimumUpperCase(ComponentName componentName, int i, boolean z)
+            throws RemoteException;
 
-    void setPasswordMinimumUpperCaseMDM(ComponentName componentName, int i, int i2) throws RemoteException;
+    void setPasswordMinimumUpperCaseMDM(ComponentName componentName, int i, int i2)
+            throws RemoteException;
 
     void setPasswordQuality(ComponentName componentName, int i, boolean z) throws RemoteException;
 
     void setPasswordQualityMDM(ComponentName componentName, int i, int i2) throws RemoteException;
 
-    void setPermissionGrantState(ComponentName componentName, String str, String str2, String str3, int i, RemoteCallback remoteCallback) throws RemoteException;
+    void setPermissionGrantState(
+            ComponentName componentName,
+            String str,
+            String str2,
+            String str3,
+            int i,
+            RemoteCallback remoteCallback)
+            throws RemoteException;
 
     void setPermissionPolicy(ComponentName componentName, String str, int i) throws RemoteException;
 
-    boolean setPermittedAccessibilityServices(ComponentName componentName, List<String> list) throws RemoteException;
+    boolean setPermittedAccessibilityServices(ComponentName componentName, List<String> list)
+            throws RemoteException;
 
-    boolean setPermittedCrossProfileNotificationListeners(ComponentName componentName, List<String> list) throws RemoteException;
+    boolean setPermittedCrossProfileNotificationListeners(
+            ComponentName componentName, List<String> list) throws RemoteException;
 
-    boolean setPermittedInputMethods(ComponentName componentName, String str, List<String> list, boolean z) throws RemoteException;
+    boolean setPermittedInputMethods(
+            ComponentName componentName, String str, List<String> list, boolean z)
+            throws RemoteException;
 
     void setPersonalAppsSuspended(ComponentName componentName, boolean z) throws RemoteException;
 
-    void setPreferentialNetworkServiceConfigs(List<PreferentialNetworkServiceConfig> list) throws RemoteException;
+    void setPreferentialNetworkServiceConfigs(List<PreferentialNetworkServiceConfig> list)
+            throws RemoteException;
 
     void setProfileEnabled(ComponentName componentName) throws RemoteException;
 
@@ -869,63 +1079,96 @@ public interface IDevicePolicyManager extends IInterface {
 
     boolean setProfileOwner(ComponentName componentName, int i) throws RemoteException;
 
-    void setProfileOwnerOnOrganizationOwnedDevice(ComponentName componentName, int i, boolean z) throws RemoteException;
+    void setProfileOwnerOnOrganizationOwnedDevice(ComponentName componentName, int i, boolean z)
+            throws RemoteException;
 
-    void setRecommendedGlobalProxy(ComponentName componentName, ProxyInfo proxyInfo) throws RemoteException;
+    void setRecommendedGlobalProxy(ComponentName componentName, ProxyInfo proxyInfo)
+            throws RemoteException;
 
     void setRequiredPasswordComplexity(String str, int i, boolean z) throws RemoteException;
 
-    void setRequiredStrongAuthTimeout(ComponentName componentName, String str, long j, boolean z) throws RemoteException;
+    void setRequiredStrongAuthTimeout(ComponentName componentName, String str, long j, boolean z)
+            throws RemoteException;
 
-    boolean setResetPasswordToken(ComponentName componentName, String str, byte[] bArr) throws RemoteException;
+    boolean setResetPasswordToken(ComponentName componentName, String str, byte[] bArr)
+            throws RemoteException;
 
-    boolean setResetPasswordTokenMDM(ComponentName componentName, byte[] bArr, int i) throws RemoteException;
+    boolean setResetPasswordTokenMDM(ComponentName componentName, byte[] bArr, int i)
+            throws RemoteException;
 
-    void setRestrictionsProvider(ComponentName componentName, ComponentName componentName2) throws RemoteException;
+    void setRestrictionsProvider(ComponentName componentName, ComponentName componentName2)
+            throws RemoteException;
 
-    void setScreenCaptureDisabled(ComponentName componentName, String str, boolean z, boolean z2) throws RemoteException;
+    void setScreenCaptureDisabled(ComponentName componentName, String str, boolean z, boolean z2)
+            throws RemoteException;
 
-    void setSecondaryLockscreenEnabled(ComponentName componentName, boolean z) throws RemoteException;
+    void setSecondaryLockscreenEnabled(ComponentName componentName, boolean z)
+            throws RemoteException;
 
-    void setSecureSetting(ComponentName componentName, String str, String str2) throws RemoteException;
+    void setSecureSetting(ComponentName componentName, String str, String str2)
+            throws RemoteException;
 
-    void setSecurityLoggingEnabled(ComponentName componentName, String str, boolean z) throws RemoteException;
+    void setSecurityLoggingEnabled(ComponentName componentName, String str, boolean z)
+            throws RemoteException;
 
-    void setShortSupportMessage(ComponentName componentName, String str, CharSequence charSequence) throws RemoteException;
+    void setShortSupportMessage(ComponentName componentName, String str, CharSequence charSequence)
+            throws RemoteException;
 
-    void setStartUserSessionMessage(ComponentName componentName, CharSequence charSequence) throws RemoteException;
+    void setStartUserSessionMessage(ComponentName componentName, CharSequence charSequence)
+            throws RemoteException;
 
-    boolean setStatusBarDisabled(ComponentName componentName, String str, boolean z) throws RemoteException;
+    boolean setStatusBarDisabled(ComponentName componentName, String str, boolean z)
+            throws RemoteException;
 
     int setStorageEncryption(ComponentName componentName, boolean z) throws RemoteException;
 
     void setStrings(List<DevicePolicyStringResource> list) throws RemoteException;
 
-    void setSystemSetting(ComponentName componentName, String str, String str2, boolean z) throws RemoteException;
+    void setSystemSetting(ComponentName componentName, String str, String str2, boolean z)
+            throws RemoteException;
 
-    void setSystemUpdatePolicy(ComponentName componentName, String str, SystemUpdatePolicy systemUpdatePolicy) throws RemoteException;
+    void setSystemUpdatePolicy(
+            ComponentName componentName, String str, SystemUpdatePolicy systemUpdatePolicy)
+            throws RemoteException;
 
     boolean setTime(ComponentName componentName, String str, long j) throws RemoteException;
 
-    boolean setTimeZone(ComponentName componentName, String str, String str2) throws RemoteException;
+    boolean setTimeZone(ComponentName componentName, String str, String str2)
+            throws RemoteException;
 
-    void setTrustAgentConfiguration(ComponentName componentName, String str, ComponentName componentName2, PersistableBundle persistableBundle, boolean z) throws RemoteException;
+    void setTrustAgentConfiguration(
+            ComponentName componentName,
+            String str,
+            ComponentName componentName2,
+            PersistableBundle persistableBundle,
+            boolean z)
+            throws RemoteException;
 
-    void setTrustAgentConfigurationMDM(int i, ComponentName componentName, ComponentName componentName2, PersistableBundle persistableBundle) throws RemoteException;
+    void setTrustAgentConfigurationMDM(
+            int i,
+            ComponentName componentName,
+            ComponentName componentName2,
+            PersistableBundle persistableBundle)
+            throws RemoteException;
 
-    void setUninstallBlocked(ComponentName componentName, String str, String str2, boolean z) throws RemoteException;
+    void setUninstallBlocked(ComponentName componentName, String str, String str2, boolean z)
+            throws RemoteException;
 
     void setUsbDataSignalingEnabled(String str, boolean z) throws RemoteException;
 
-    void setUserControlDisabledPackages(ComponentName componentName, String str, List<String> list) throws RemoteException;
+    void setUserControlDisabledPackages(ComponentName componentName, String str, List<String> list)
+            throws RemoteException;
 
     void setUserIcon(ComponentName componentName, Bitmap bitmap) throws RemoteException;
 
     void setUserProvisioningState(int i, int i2) throws RemoteException;
 
-    void setUserRestriction(ComponentName componentName, String str, String str2, boolean z, boolean z2) throws RemoteException;
+    void setUserRestriction(
+            ComponentName componentName, String str, String str2, boolean z, boolean z2)
+            throws RemoteException;
 
-    void setUserRestrictionForKnox(ComponentName componentName, String str, boolean z, int i) throws RemoteException;
+    void setUserRestrictionForKnox(ComponentName componentName, String str, boolean z, int i)
+            throws RemoteException;
 
     void setUserRestrictionGlobally(String str, String str2) throws RemoteException;
 
@@ -933,131 +1176,155 @@ public interface IDevicePolicyManager extends IInterface {
 
     boolean shouldAllowBypassingDevicePolicyManagementRoleQualification() throws RemoteException;
 
-    void startManagedQuickContact(String str, long j, boolean z, long j2, Intent intent) throws RemoteException;
+    void startManagedQuickContact(String str, long j, boolean z, long j2, Intent intent)
+            throws RemoteException;
 
-    int startUserInBackground(ComponentName componentName, UserHandle userHandle) throws RemoteException;
+    int startUserInBackground(ComponentName componentName, UserHandle userHandle)
+            throws RemoteException;
 
-    boolean startViewCalendarEventInManagedProfile(String str, long j, long j2, long j3, boolean z, int i) throws RemoteException;
+    boolean startViewCalendarEventInManagedProfile(
+            String str, long j, long j2, long j3, boolean z, int i) throws RemoteException;
 
     int stopUser(ComponentName componentName, UserHandle userHandle) throws RemoteException;
 
     boolean switchUser(ComponentName componentName, UserHandle userHandle) throws RemoteException;
 
-    void transferOwnership(ComponentName componentName, ComponentName componentName2, PersistableBundle persistableBundle) throws RemoteException;
+    void transferOwnership(
+            ComponentName componentName,
+            ComponentName componentName2,
+            PersistableBundle persistableBundle)
+            throws RemoteException;
 
     boolean triggerDevicePolicyEngineMigration(boolean z) throws RemoteException;
 
-    void uninstallCaCerts(ComponentName componentName, String str, String[] strArr) throws RemoteException;
+    void uninstallCaCerts(ComponentName componentName, String str, String[] strArr)
+            throws RemoteException;
 
     void uninstallPackageWithActiveAdmins(String str) throws RemoteException;
 
-    boolean updateOverrideApn(ComponentName componentName, int i, ApnSetting apnSetting) throws RemoteException;
+    boolean updateOverrideApn(ComponentName componentName, int i, ApnSetting apnSetting)
+            throws RemoteException;
 
-    void wipeDataWithReason(String str, int i, String str2, boolean z, boolean z2) throws RemoteException;
+    void wipeDataWithReason(String str, int i, String str2, boolean z, boolean z2)
+            throws RemoteException;
 
     public static class Default implements IDevicePolicyManager {
         @Override // android.app.admin.IDevicePolicyManager
-        public void setPasswordQuality(ComponentName who, int quality, boolean parent) throws RemoteException {
-        }
+        public void setPasswordQuality(ComponentName who, int quality, boolean parent)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public int getPasswordQuality(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+        public int getPasswordQuality(ComponentName who, int userHandle, boolean parent)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setPasswordMinimumLength(ComponentName who, int length, boolean parent) throws RemoteException {
-        }
+        public void setPasswordMinimumLength(ComponentName who, int length, boolean parent)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public int getPasswordMinimumLength(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+        public int getPasswordMinimumLength(ComponentName who, int userHandle, boolean parent)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setPasswordMinimumUpperCase(ComponentName who, int length, boolean parent) throws RemoteException {
-        }
+        public void setPasswordMinimumUpperCase(ComponentName who, int length, boolean parent)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public int getPasswordMinimumUpperCase(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+        public int getPasswordMinimumUpperCase(ComponentName who, int userHandle, boolean parent)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setPasswordMinimumLowerCase(ComponentName who, int length, boolean parent) throws RemoteException {
-        }
+        public void setPasswordMinimumLowerCase(ComponentName who, int length, boolean parent)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public int getPasswordMinimumLowerCase(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+        public int getPasswordMinimumLowerCase(ComponentName who, int userHandle, boolean parent)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setPasswordMinimumLetters(ComponentName who, int length, boolean parent) throws RemoteException {
-        }
+        public void setPasswordMinimumLetters(ComponentName who, int length, boolean parent)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public int getPasswordMinimumLetters(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+        public int getPasswordMinimumLetters(ComponentName who, int userHandle, boolean parent)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setPasswordMinimumNumeric(ComponentName who, int length, boolean parent) throws RemoteException {
-        }
+        public void setPasswordMinimumNumeric(ComponentName who, int length, boolean parent)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public int getPasswordMinimumNumeric(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+        public int getPasswordMinimumNumeric(ComponentName who, int userHandle, boolean parent)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setPasswordMinimumSymbols(ComponentName who, int length, boolean parent) throws RemoteException {
-        }
+        public void setPasswordMinimumSymbols(ComponentName who, int length, boolean parent)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public int getPasswordMinimumSymbols(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+        public int getPasswordMinimumSymbols(ComponentName who, int userHandle, boolean parent)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setPasswordMinimumNonLetter(ComponentName who, int length, boolean parent) throws RemoteException {
-        }
+        public void setPasswordMinimumNonLetter(ComponentName who, int length, boolean parent)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public int getPasswordMinimumNonLetter(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+        public int getPasswordMinimumNonLetter(ComponentName who, int userHandle, boolean parent)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public PasswordMetrics getPasswordMinimumMetrics(int userHandle, boolean deviceWideOnly) throws RemoteException {
+        public PasswordMetrics getPasswordMinimumMetrics(int userHandle, boolean deviceWideOnly)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setPasswordHistoryLength(ComponentName who, int length, boolean parent) throws RemoteException {
-        }
+        public void setPasswordHistoryLength(ComponentName who, int length, boolean parent)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public int getPasswordHistoryLength(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+        public int getPasswordHistoryLength(ComponentName who, int userHandle, boolean parent)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setPasswordExpirationTimeout(ComponentName who, String callerPackageName, long expiration, boolean parent) throws RemoteException {
-        }
+        public void setPasswordExpirationTimeout(
+                ComponentName who, String callerPackageName, long expiration, boolean parent)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public long getPasswordExpirationTimeout(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+        public long getPasswordExpirationTimeout(ComponentName who, int userHandle, boolean parent)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public long getPasswordExpiration(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+        public long getPasswordExpiration(ComponentName who, int userHandle, boolean parent)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean isActivePasswordSufficient(String callerPackageName, int userHandle, boolean parent) throws RemoteException {
+        public boolean isActivePasswordSufficient(
+                String callerPackageName, int userHandle, boolean parent) throws RemoteException {
             return false;
         }
 
@@ -1067,7 +1334,8 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean isPasswordSufficientAfterProfileUnification(int userHandle, int profileUser) throws RemoteException {
+        public boolean isPasswordSufficientAfterProfileUnification(int userHandle, int profileUser)
+                throws RemoteException {
             return false;
         }
 
@@ -1077,16 +1345,19 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setRequiredPasswordComplexity(String callerPackageName, int passwordComplexity, boolean parent) throws RemoteException {
-        }
+        public void setRequiredPasswordComplexity(
+                String callerPackageName, int passwordComplexity, boolean parent)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public int getRequiredPasswordComplexity(String callerPackageName, boolean parent) throws RemoteException {
+        public int getRequiredPasswordComplexity(String callerPackageName, boolean parent)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public int getAggregatedPasswordComplexityForUser(int userId, boolean deviceWideOnly) throws RemoteException {
+        public int getAggregatedPasswordComplexityForUser(int userId, boolean deviceWideOnly)
+                throws RemoteException {
             return 0;
         }
 
@@ -1096,7 +1367,8 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public int getCurrentFailedPasswordAttempts(String callerPackageName, int userHandle, boolean parent) throws RemoteException {
+        public int getCurrentFailedPasswordAttempts(
+                String callerPackageName, int userHandle, boolean parent) throws RemoteException {
             return 0;
         }
 
@@ -1106,16 +1378,19 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public int getProfileWithMinimumFailedPasswordsForWipe(int userHandle, boolean parent) throws RemoteException {
+        public int getProfileWithMinimumFailedPasswordsForWipe(int userHandle, boolean parent)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setMaximumFailedPasswordsForWipe(ComponentName admin, String callerPackageName, int num, boolean parent) throws RemoteException {
-        }
+        public void setMaximumFailedPasswordsForWipe(
+                ComponentName admin, String callerPackageName, int num, boolean parent)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public int getMaximumFailedPasswordsForWipe(ComponentName admin, int userHandle, boolean parent) throws RemoteException {
+        public int getMaximumFailedPasswordsForWipe(
+                ComponentName admin, int userHandle, boolean parent) throws RemoteException {
             return 0;
         }
 
@@ -1125,37 +1400,48 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setMaximumTimeToLock(ComponentName who, String callerPackageName, long timeMs, boolean parent) throws RemoteException {
-        }
+        public void setMaximumTimeToLock(
+                ComponentName who, String callerPackageName, long timeMs, boolean parent)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public long getMaximumTimeToLock(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+        public long getMaximumTimeToLock(ComponentName who, int userHandle, boolean parent)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setRequiredStrongAuthTimeout(ComponentName who, String callerPackageName, long timeMs, boolean parent) throws RemoteException {
-        }
+        public void setRequiredStrongAuthTimeout(
+                ComponentName who, String callerPackageName, long timeMs, boolean parent)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public long getRequiredStrongAuthTimeout(ComponentName who, int userId, boolean parent) throws RemoteException {
+        public long getRequiredStrongAuthTimeout(ComponentName who, int userId, boolean parent)
+                throws RemoteException {
             return 0L;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void lockNow(int flags, String callerPackageName, boolean parent) throws RemoteException {
-        }
+        public void lockNow(int flags, String callerPackageName, boolean parent)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void wipeDataWithReason(String callerPackageName, int flags, String wipeReasonForUser, boolean parent, boolean factoryReset) throws RemoteException {
-        }
+        public void wipeDataWithReason(
+                String callerPackageName,
+                int flags,
+                String wipeReasonForUser,
+                boolean parent,
+                boolean factoryReset)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setFactoryResetProtectionPolicy(ComponentName who, String callerPackageName, FactoryResetProtectionPolicy policy) throws RemoteException {
-        }
+        public void setFactoryResetProtectionPolicy(
+                ComponentName who, String callerPackageName, FactoryResetProtectionPolicy policy)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public FactoryResetProtectionPolicy getFactoryResetProtectionPolicy(ComponentName who) throws RemoteException {
+        public FactoryResetProtectionPolicy getFactoryResetProtectionPolicy(ComponentName who)
+                throws RemoteException {
             return null;
         }
 
@@ -1165,11 +1451,13 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void sendLostModeLocationUpdate(AndroidFuture<Boolean> future) throws RemoteException {
-        }
+        public void sendLostModeLocationUpdate(AndroidFuture<Boolean> future)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public ComponentName setGlobalProxy(ComponentName admin, String proxySpec, String exclusionList) throws RemoteException {
+        public ComponentName setGlobalProxy(
+                ComponentName admin, String proxySpec, String exclusionList)
+                throws RemoteException {
             return null;
         }
 
@@ -1179,8 +1467,8 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setRecommendedGlobalProxy(ComponentName admin, ProxyInfo proxyInfo) throws RemoteException {
-        }
+        public void setRecommendedGlobalProxy(ComponentName admin, ProxyInfo proxyInfo)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public int setStorageEncryption(ComponentName who, boolean encrypt) throws RemoteException {
@@ -1188,12 +1476,14 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean getStorageEncryption(ComponentName who, int userHandle) throws RemoteException {
+        public boolean getStorageEncryption(ComponentName who, int userHandle)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public int getStorageEncryptionStatus(String callerPackage, int userHandle) throws RemoteException {
+        public int getStorageEncryptionStatus(String callerPackage, int userHandle)
+                throws RemoteException {
             return 0;
         }
 
@@ -1203,26 +1493,30 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setCameraDisabled(ComponentName who, String callerPackageName, boolean disabled, boolean parent) throws RemoteException {
-        }
+        public void setCameraDisabled(
+                ComponentName who, String callerPackageName, boolean disabled, boolean parent)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean getCameraDisabled(ComponentName who, String callerPackageName, int userHandle, boolean parent) throws RemoteException {
+        public boolean getCameraDisabled(
+                ComponentName who, String callerPackageName, int userHandle, boolean parent)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setScreenCaptureDisabled(ComponentName who, String callerPackageName, boolean disabled, boolean parent) throws RemoteException {
-        }
+        public void setScreenCaptureDisabled(
+                ComponentName who, String callerPackageName, boolean disabled, boolean parent)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean getScreenCaptureDisabled(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+        public boolean getScreenCaptureDisabled(ComponentName who, int userHandle, boolean parent)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setNearbyNotificationStreamingPolicy(int policy) throws RemoteException {
-        }
+        public void setNearbyNotificationStreamingPolicy(int policy) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public int getNearbyNotificationStreamingPolicy(int userId) throws RemoteException {
@@ -1230,8 +1524,7 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setNearbyAppStreamingPolicy(int policy) throws RemoteException {
-        }
+        public void setNearbyAppStreamingPolicy(int policy) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public int getNearbyAppStreamingPolicy(int userId) throws RemoteException {
@@ -1239,20 +1532,23 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setKeyguardDisabledFeatures(ComponentName who, String callerPackageName, int which, boolean parent) throws RemoteException {
-        }
+        public void setKeyguardDisabledFeatures(
+                ComponentName who, String callerPackageName, int which, boolean parent)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public int getKeyguardDisabledFeatures(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+        public int getKeyguardDisabledFeatures(ComponentName who, int userHandle, boolean parent)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setActiveAdmin(ComponentName policyReceiver, boolean refreshing, int userHandle) throws RemoteException {
-        }
+        public void setActiveAdmin(ComponentName policyReceiver, boolean refreshing, int userHandle)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean isAdminActive(ComponentName policyReceiver, int userHandle) throws RemoteException {
+        public boolean isAdminActive(ComponentName policyReceiver, int userHandle)
+                throws RemoteException {
             return false;
         }
 
@@ -1262,62 +1558,64 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean packageHasActiveAdmins(String packageName, int userHandle) throws RemoteException {
+        public boolean packageHasActiveAdmins(String packageName, int userHandle)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void getRemoveWarning(ComponentName policyReceiver, RemoteCallback result, int userHandle) throws RemoteException {
-        }
+        public void getRemoveWarning(
+                ComponentName policyReceiver, RemoteCallback result, int userHandle)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void removeActiveAdmin(ComponentName policyReceiver, int userHandle) throws RemoteException {
-        }
+        public void removeActiveAdmin(ComponentName policyReceiver, int userHandle)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void forceRemoveActiveAdmin(ComponentName policyReceiver, int userHandle) throws RemoteException {
-        }
+        public void forceRemoveActiveAdmin(ComponentName policyReceiver, int userHandle)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean hasGrantedPolicy(ComponentName policyReceiver, int usesPolicy, int userHandle) throws RemoteException {
+        public boolean hasGrantedPolicy(
+                ComponentName policyReceiver, int usesPolicy, int userHandle)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void reportPasswordChanged(PasswordMetrics metrics, int userId) throws RemoteException {
-        }
+        public void reportPasswordChanged(PasswordMetrics metrics, int userId)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void reportFailedPasswordAttempt(int userHandle, boolean parent) throws RemoteException {
-        }
+        public void reportFailedPasswordAttempt(int userHandle, boolean parent)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void reportSuccessfulPasswordAttempt(int userHandle) throws RemoteException {
-        }
+        public void reportSuccessfulPasswordAttempt(int userHandle) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void reportFailedBiometricAttempt(int userHandle) throws RemoteException {
-        }
+        public void reportFailedBiometricAttempt(int userHandle) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void reportSuccessfulBiometricAttempt(int userHandle) throws RemoteException {
-        }
+        public void reportSuccessfulBiometricAttempt(int userHandle) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void reportKeyguardDismissed(int userHandle) throws RemoteException {
-        }
+        public void reportKeyguardDismissed(int userHandle) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void reportKeyguardSecured(int userHandle) throws RemoteException {
-        }
+        public void reportKeyguardSecured(int userHandle) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean setDeviceOwner(ComponentName who, int userId, boolean setProfileOwnerOnCurrentUserIfNecessary) throws RemoteException {
+        public boolean setDeviceOwner(
+                ComponentName who, int userId, boolean setProfileOwnerOnCurrentUserIfNecessary)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public ComponentName getDeviceOwnerComponent(boolean callingUserOnly) throws RemoteException {
+        public ComponentName getDeviceOwnerComponent(boolean callingUserOnly)
+                throws RemoteException {
             return null;
         }
 
@@ -1337,8 +1635,7 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void clearDeviceOwner(String packageName) throws RemoteException {
-        }
+        public void clearDeviceOwner(String packageName) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public int getDeviceOwnerUserId() throws RemoteException {
@@ -1356,7 +1653,8 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public ComponentName getProfileOwnerOrDeviceOwnerSupervisionComponent(UserHandle userHandle) throws RemoteException {
+        public ComponentName getProfileOwnerOrDeviceOwnerSupervisionComponent(UserHandle userHandle)
+                throws RemoteException {
             return null;
         }
 
@@ -1371,16 +1669,13 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setProfileEnabled(ComponentName who) throws RemoteException {
-        }
+        public void setProfileEnabled(ComponentName who) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setProfileName(ComponentName who, String profileName) throws RemoteException {
-        }
+        public void setProfileName(ComponentName who, String profileName) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void clearProfileOwner(ComponentName who) throws RemoteException {
-        }
+        public void clearProfileOwner(ComponentName who) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public boolean hasUserSetupCompleted() throws RemoteException {
@@ -1393,13 +1688,14 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean checkDeviceIdentifierAccess(String packageName, int pid, int uid) throws RemoteException {
+        public boolean checkDeviceIdentifierAccess(String packageName, int pid, int uid)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setDeviceOwnerLockScreenInfo(ComponentName who, CharSequence deviceOwnerInfo) throws RemoteException {
-        }
+        public void setDeviceOwnerLockScreenInfo(ComponentName who, CharSequence deviceOwnerInfo)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public CharSequence getDeviceOwnerLockScreenInfo() throws RemoteException {
@@ -1407,12 +1703,16 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public String[] setPackagesSuspended(ComponentName admin, String callerPackage, String[] packageNames, boolean suspended) throws RemoteException {
+        public String[] setPackagesSuspended(
+                ComponentName admin, String callerPackage, String[] packageNames, boolean suspended)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean isPackageSuspended(ComponentName admin, String callerPackage, String packageName) throws RemoteException {
+        public boolean isPackageSuspended(
+                ComponentName admin, String callerPackage, String packageName)
+                throws RemoteException {
             return false;
         }
 
@@ -1422,20 +1722,22 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean installCaCert(ComponentName admin, String callerPackage, byte[] certBuffer) throws RemoteException {
+        public boolean installCaCert(ComponentName admin, String callerPackage, byte[] certBuffer)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void uninstallCaCerts(ComponentName admin, String callerPackage, String[] aliases) throws RemoteException {
-        }
+        public void uninstallCaCerts(ComponentName admin, String callerPackage, String[] aliases)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void enforceCanManageCaCerts(ComponentName admin, String callerPackage) throws RemoteException {
-        }
+        public void enforceCanManageCaCerts(ComponentName admin, String callerPackage)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean approveCaCert(String alias, int userHandle, boolean approval) throws RemoteException {
+        public boolean approveCaCert(String alias, int userHandle, boolean approval)
+                throws RemoteException {
             return false;
         }
 
@@ -1445,12 +1747,22 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean installKeyPair(ComponentName who, String callerPackage, byte[] privKeyBuffer, byte[] certBuffer, byte[] certChainBuffer, String alias, boolean requestAccess, boolean isUserSelectable) throws RemoteException {
+        public boolean installKeyPair(
+                ComponentName who,
+                String callerPackage,
+                byte[] privKeyBuffer,
+                byte[] certBuffer,
+                byte[] certChainBuffer,
+                String alias,
+                boolean requestAccess,
+                boolean isUserSelectable)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean removeKeyPair(ComponentName who, String callerPackage, String alias) throws RemoteException {
+        public boolean removeKeyPair(ComponentName who, String callerPackage, String alias)
+                throws RemoteException {
             return false;
         }
 
@@ -1460,36 +1772,53 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean generateKeyPair(ComponentName who, String callerPackage, String algorithm, ParcelableKeyGenParameterSpec keySpec, int idAttestationFlags, KeymasterCertificateChain attestationChain) throws RemoteException {
+        public boolean generateKeyPair(
+                ComponentName who,
+                String callerPackage,
+                String algorithm,
+                ParcelableKeyGenParameterSpec keySpec,
+                int idAttestationFlags,
+                KeymasterCertificateChain attestationChain)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean setKeyPairCertificate(ComponentName who, String callerPackage, String alias, byte[] certBuffer, byte[] certChainBuffer, boolean isUserSelectable) throws RemoteException {
+        public boolean setKeyPairCertificate(
+                ComponentName who,
+                String callerPackage,
+                String alias,
+                byte[] certBuffer,
+                byte[] certChainBuffer,
+                boolean isUserSelectable)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void choosePrivateKeyAlias(int uid, Uri uri, String alias, IBinder aliasCallback) throws RemoteException {
-        }
+        public void choosePrivateKeyAlias(int uid, Uri uri, String alias, IBinder aliasCallback)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setDelegatedScopes(ComponentName who, String delegatePackage, List<String> scopes) throws RemoteException {
-        }
+        public void setDelegatedScopes(
+                ComponentName who, String delegatePackage, List<String> scopes)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public List<String> getDelegatedScopes(ComponentName who, String delegatePackage) throws RemoteException {
+        public List<String> getDelegatedScopes(ComponentName who, String delegatePackage)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public List<String> getDelegatePackages(ComponentName who, String scope) throws RemoteException {
+        public List<String> getDelegatePackages(ComponentName who, String scope)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setCertInstallerPackage(ComponentName who, String installerPackage) throws RemoteException {
-        }
+        public void setCertInstallerPackage(ComponentName who, String installerPackage)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public String getCertInstallerPackage(ComponentName who) throws RemoteException {
@@ -1497,7 +1826,12 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean setAlwaysOnVpnPackage(ComponentName who, String vpnPackage, boolean lockdown, List<String> lockdownAllowlist) throws RemoteException {
+        public boolean setAlwaysOnVpnPackage(
+                ComponentName who,
+                String vpnPackage,
+                boolean lockdown,
+                List<String> lockdownAllowlist)
+                throws RemoteException {
             return false;
         }
 
@@ -1522,53 +1856,69 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public List<String> getAlwaysOnVpnLockdownAllowlist(ComponentName who) throws RemoteException {
+        public List<String> getAlwaysOnVpnLockdownAllowlist(ComponentName who)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void addPersistentPreferredActivity(ComponentName admin, String callerPackageName, IntentFilter filter, ComponentName activity) throws RemoteException {
-        }
+        public void addPersistentPreferredActivity(
+                ComponentName admin,
+                String callerPackageName,
+                IntentFilter filter,
+                ComponentName activity)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void clearPackagePersistentPreferredActivities(ComponentName admin, String callerPackageName, String packageName) throws RemoteException {
-        }
+        public void clearPackagePersistentPreferredActivities(
+                ComponentName admin, String callerPackageName, String packageName)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setDefaultSmsApplication(ComponentName admin, String callerPackageName, String packageName, boolean parent) throws RemoteException {
-        }
+        public void setDefaultSmsApplication(
+                ComponentName admin, String callerPackageName, String packageName, boolean parent)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setDefaultDialerApplication(String packageName) throws RemoteException {
-        }
+        public void setDefaultDialerApplication(String packageName) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setApplicationRestrictions(ComponentName who, String callerPackage, String packageName, Bundle settings, boolean parent) throws RemoteException {
-        }
+        public void setApplicationRestrictions(
+                ComponentName who,
+                String callerPackage,
+                String packageName,
+                Bundle settings,
+                boolean parent)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public Bundle getApplicationRestrictions(ComponentName who, String callerPackage, String packageName, boolean parent) throws RemoteException {
+        public Bundle getApplicationRestrictions(
+                ComponentName who, String callerPackage, String packageName, boolean parent)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean setApplicationRestrictionsManagingPackage(ComponentName admin, String packageName) throws RemoteException {
+        public boolean setApplicationRestrictionsManagingPackage(
+                ComponentName admin, String packageName) throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public String getApplicationRestrictionsManagingPackage(ComponentName admin) throws RemoteException {
+        public String getApplicationRestrictionsManagingPackage(ComponentName admin)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean isCallerApplicationRestrictionsManagingPackage(String callerPackage) throws RemoteException {
+        public boolean isCallerApplicationRestrictionsManagingPackage(String callerPackage)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setRestrictionsProvider(ComponentName who, ComponentName provider) throws RemoteException {
-        }
+        public void setRestrictionsProvider(ComponentName who, ComponentName provider)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public ComponentName getRestrictionsProvider(int userHandle) throws RemoteException {
@@ -1576,15 +1926,17 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setUserRestriction(ComponentName who, String callerPackage, String key, boolean enable, boolean parent) throws RemoteException {
-        }
+        public void setUserRestriction(
+                ComponentName who, String callerPackage, String key, boolean enable, boolean parent)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setUserRestrictionGlobally(String callerPackage, String key) throws RemoteException {
-        }
+        public void setUserRestrictionGlobally(String callerPackage, String key)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public Bundle getUserRestrictions(ComponentName who, String callerPackage, boolean parent) throws RemoteException {
+        public Bundle getUserRestrictions(ComponentName who, String callerPackage, boolean parent)
+                throws RemoteException {
             return null;
         }
 
@@ -1594,40 +1946,52 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void addCrossProfileIntentFilter(ComponentName admin, String callerPackageName, IntentFilter filter, int flags) throws RemoteException {
-        }
+        public void addCrossProfileIntentFilter(
+                ComponentName admin, String callerPackageName, IntentFilter filter, int flags)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void clearCrossProfileIntentFilters(ComponentName admin, String callerPackageName) throws RemoteException {
-        }
+        public void clearCrossProfileIntentFilters(ComponentName admin, String callerPackageName)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean setPermittedAccessibilityServices(ComponentName admin, List<String> packageList) throws RemoteException {
+        public boolean setPermittedAccessibilityServices(
+                ComponentName admin, List<String> packageList) throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public List<String> getPermittedAccessibilityServices(ComponentName admin) throws RemoteException {
+        public List<String> getPermittedAccessibilityServices(ComponentName admin)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public List<String> getPermittedAccessibilityServicesForUser(int userId) throws RemoteException {
+        public List<String> getPermittedAccessibilityServicesForUser(int userId)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean isAccessibilityServicePermittedByAdmin(ComponentName admin, String packageName, int userId) throws RemoteException {
+        public boolean isAccessibilityServicePermittedByAdmin(
+                ComponentName admin, String packageName, int userId) throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean setPermittedInputMethods(ComponentName admin, String callerPackageName, List<String> packageList, boolean parent) throws RemoteException {
+        public boolean setPermittedInputMethods(
+                ComponentName admin,
+                String callerPackageName,
+                List<String> packageList,
+                boolean parent)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public List<String> getPermittedInputMethods(ComponentName admin, String callerPackageName, boolean parent) throws RemoteException {
+        public List<String> getPermittedInputMethods(
+                ComponentName admin, String callerPackageName, boolean parent)
+                throws RemoteException {
             return null;
         }
 
@@ -1637,22 +2001,27 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean isInputMethodPermittedByAdmin(ComponentName admin, String packageName, int userId, boolean parent) throws RemoteException {
+        public boolean isInputMethodPermittedByAdmin(
+                ComponentName admin, String packageName, int userId, boolean parent)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean setPermittedCrossProfileNotificationListeners(ComponentName admin, List<String> packageList) throws RemoteException {
+        public boolean setPermittedCrossProfileNotificationListeners(
+                ComponentName admin, List<String> packageList) throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public List<String> getPermittedCrossProfileNotificationListeners(ComponentName admin) throws RemoteException {
+        public List<String> getPermittedCrossProfileNotificationListeners(ComponentName admin)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean isNotificationListenerServicePermitted(String packageName, int userId) throws RemoteException {
+        public boolean isNotificationListenerServicePermitted(String packageName, int userId)
+                throws RemoteException {
             return false;
         }
 
@@ -1662,27 +2031,43 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public Bundle getEnforcingAdminAndUserDetails(int userId, String restriction) throws RemoteException {
+        public Bundle getEnforcingAdminAndUserDetails(int userId, String restriction)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public List<EnforcingAdmin> getEnforcingAdminsForRestriction(int userId, String restriction) throws RemoteException {
+        public List<EnforcingAdmin> getEnforcingAdminsForRestriction(int userId, String restriction)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean setApplicationHidden(ComponentName admin, String callerPackage, String packageName, boolean hidden, boolean parent) throws RemoteException {
+        public boolean setApplicationHidden(
+                ComponentName admin,
+                String callerPackage,
+                String packageName,
+                boolean hidden,
+                boolean parent)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean isApplicationHidden(ComponentName admin, String callerPackage, String packageName, boolean parent) throws RemoteException {
+        public boolean isApplicationHidden(
+                ComponentName admin, String callerPackage, String packageName, boolean parent)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public UserHandle createAndManageUser(ComponentName who, String name, ComponentName profileOwner, PersistableBundle adminExtras, int flags) throws RemoteException {
+        public UserHandle createAndManageUser(
+                ComponentName who,
+                String name,
+                ComponentName profileOwner,
+                PersistableBundle adminExtras,
+                int flags)
+                throws RemoteException {
             return null;
         }
 
@@ -1697,7 +2082,8 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public int startUserInBackground(ComponentName who, UserHandle userHandle) throws RemoteException {
+        public int startUserInBackground(ComponentName who, UserHandle userHandle)
+                throws RemoteException {
             return 0;
         }
 
@@ -1727,8 +2113,7 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void acknowledgeNewUserDisclaimer(int userId) throws RemoteException {
-        }
+        public void acknowledgeNewUserDisclaimer(int userId) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public boolean isNewUserDisclaimerAcknowledged(int userId) throws RemoteException {
@@ -1736,36 +2121,46 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void enableSystemApp(ComponentName admin, String callerPackage, String packageName) throws RemoteException {
-        }
+        public void enableSystemApp(ComponentName admin, String callerPackage, String packageName)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public int enableSystemAppWithIntent(ComponentName admin, String callerPackage, Intent intent) throws RemoteException {
+        public int enableSystemAppWithIntent(
+                ComponentName admin, String callerPackage, Intent intent) throws RemoteException {
             return 0;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean installExistingPackage(ComponentName admin, String callerPackage, String packageName) throws RemoteException {
+        public boolean installExistingPackage(
+                ComponentName admin, String callerPackage, String packageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setAccountManagementDisabled(ComponentName who, String callerPackageName, String accountType, boolean disabled, boolean parent) throws RemoteException {
-        }
+        public void setAccountManagementDisabled(
+                ComponentName who,
+                String callerPackageName,
+                String accountType,
+                boolean disabled,
+                boolean parent)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public String[] getAccountTypesWithManagementDisabled(String callerPackageName) throws RemoteException {
+        public String[] getAccountTypesWithManagementDisabled(String callerPackageName)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public String[] getAccountTypesWithManagementDisabledAsUser(int userId, String callerPackageName, boolean parent) throws RemoteException {
+        public String[] getAccountTypesWithManagementDisabledAsUser(
+                int userId, String callerPackageName, boolean parent) throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setSecondaryLockscreenEnabled(ComponentName who, boolean enabled) throws RemoteException {
-        }
+        public void setSecondaryLockscreenEnabled(ComponentName who, boolean enabled)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public boolean isSecondaryLockscreenEnabled(UserHandle userHandle) throws RemoteException {
@@ -1773,20 +2168,24 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setPreferentialNetworkServiceConfigs(List<PreferentialNetworkServiceConfig> preferentialNetworkServiceConfigs) throws RemoteException {
-        }
+        public void setPreferentialNetworkServiceConfigs(
+                List<PreferentialNetworkServiceConfig> preferentialNetworkServiceConfigs)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public List<PreferentialNetworkServiceConfig> getPreferentialNetworkServiceConfigs() throws RemoteException {
+        public List<PreferentialNetworkServiceConfig> getPreferentialNetworkServiceConfigs()
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setLockTaskPackages(ComponentName who, String callerPackageName, String[] packages) throws RemoteException {
-        }
+        public void setLockTaskPackages(
+                ComponentName who, String callerPackageName, String[] packages)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public String[] getLockTaskPackages(ComponentName who, String callerPackageName) throws RemoteException {
+        public String[] getLockTaskPackages(ComponentName who, String callerPackageName)
+                throws RemoteException {
             return null;
         }
 
@@ -1796,52 +2195,57 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setLockTaskFeatures(ComponentName who, String callerPackageName, int flags) throws RemoteException {
-        }
+        public void setLockTaskFeatures(ComponentName who, String callerPackageName, int flags)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public int getLockTaskFeatures(ComponentName who, String callerPackageName) throws RemoteException {
+        public int getLockTaskFeatures(ComponentName who, String callerPackageName)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setGlobalSetting(ComponentName who, String setting, String value) throws RemoteException {
-        }
+        public void setGlobalSetting(ComponentName who, String setting, String value)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setSystemSetting(ComponentName who, String setting, String value, boolean parent) throws RemoteException {
-        }
+        public void setSystemSetting(
+                ComponentName who, String setting, String value, boolean parent)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setSecureSetting(ComponentName who, String setting, String value) throws RemoteException {
-        }
+        public void setSecureSetting(ComponentName who, String setting, String value)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setConfiguredNetworksLockdownState(ComponentName who, String callerPackageName, boolean lockdown) throws RemoteException {
-        }
+        public void setConfiguredNetworksLockdownState(
+                ComponentName who, String callerPackageName, boolean lockdown)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean hasLockdownAdminConfiguredNetworks(ComponentName who) throws RemoteException {
+        public boolean hasLockdownAdminConfiguredNetworks(ComponentName who)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setLocationEnabled(ComponentName who, boolean locationEnabled) throws RemoteException {
-        }
+        public void setLocationEnabled(ComponentName who, boolean locationEnabled)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean setTime(ComponentName who, String callerPackageName, long millis) throws RemoteException {
+        public boolean setTime(ComponentName who, String callerPackageName, long millis)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean setTimeZone(ComponentName who, String callerPackageName, String timeZone) throws RemoteException {
+        public boolean setTimeZone(ComponentName who, String callerPackageName, String timeZone)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setMasterVolumeMuted(ComponentName admin, boolean on) throws RemoteException {
-        }
+        public void setMasterVolumeMuted(ComponentName admin, boolean on) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public boolean isMasterVolumeMuted(ComponentName admin) throws RemoteException {
@@ -1849,12 +2253,16 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void notifyLockTaskModeChanged(boolean isEnabled, String pkg, int userId) throws RemoteException {
-        }
+        public void notifyLockTaskModeChanged(boolean isEnabled, String pkg, int userId)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setUninstallBlocked(ComponentName admin, String callerPackage, String packageName, boolean uninstallBlocked) throws RemoteException {
-        }
+        public void setUninstallBlocked(
+                ComponentName admin,
+                String callerPackage,
+                String packageName,
+                boolean uninstallBlocked)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public boolean isUninstallBlocked(String packageName) throws RemoteException {
@@ -1862,8 +2270,8 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setCrossProfileCallerIdDisabled(ComponentName who, boolean disabled) throws RemoteException {
-        }
+        public void setCrossProfileCallerIdDisabled(ComponentName who, boolean disabled)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public boolean getCrossProfileCallerIdDisabled(ComponentName who) throws RemoteException {
@@ -1876,26 +2284,33 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setCrossProfileContactsSearchDisabled(ComponentName who, boolean disabled) throws RemoteException {
-        }
+        public void setCrossProfileContactsSearchDisabled(ComponentName who, boolean disabled)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean getCrossProfileContactsSearchDisabled(ComponentName who) throws RemoteException {
+        public boolean getCrossProfileContactsSearchDisabled(ComponentName who)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean getCrossProfileContactsSearchDisabledForUser(int userId) throws RemoteException {
+        public boolean getCrossProfileContactsSearchDisabledForUser(int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void startManagedQuickContact(String lookupKey, long contactId, boolean isContactIdIgnored, long directoryId, Intent originalIntent) throws RemoteException {
-        }
+        public void startManagedQuickContact(
+                String lookupKey,
+                long contactId,
+                boolean isContactIdIgnored,
+                long directoryId,
+                Intent originalIntent)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setManagedProfileCallerIdAccessPolicy(PackagePolicy policy) throws RemoteException {
-        }
+        public void setManagedProfileCallerIdAccessPolicy(PackagePolicy policy)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public PackagePolicy getManagedProfileCallerIdAccessPolicy() throws RemoteException {
@@ -1903,13 +2318,13 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean hasManagedProfileCallerIdAccess(int userId, String packageName) throws RemoteException {
+        public boolean hasManagedProfileCallerIdAccess(int userId, String packageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setCredentialManagerPolicy(PackagePolicy policy) throws RemoteException {
-        }
+        public void setCredentialManagerPolicy(PackagePolicy policy) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public PackagePolicy getCredentialManagerPolicy(int userId) throws RemoteException {
@@ -1917,8 +2332,8 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setManagedProfileContactsAccessPolicy(PackagePolicy policy) throws RemoteException {
-        }
+        public void setManagedProfileContactsAccessPolicy(PackagePolicy policy)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public PackagePolicy getManagedProfileContactsAccessPolicy() throws RemoteException {
@@ -1926,51 +2341,66 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean hasManagedProfileContactsAccess(int userId, String packageName) throws RemoteException {
+        public boolean hasManagedProfileContactsAccess(int userId, String packageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setBluetoothContactSharingDisabled(ComponentName who, boolean disabled) throws RemoteException {
-        }
+        public void setBluetoothContactSharingDisabled(ComponentName who, boolean disabled)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean getBluetoothContactSharingDisabled(ComponentName who) throws RemoteException {
+        public boolean getBluetoothContactSharingDisabled(ComponentName who)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean getBluetoothContactSharingDisabledForUser(int userId) throws RemoteException {
+        public boolean getBluetoothContactSharingDisabledForUser(int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setTrustAgentConfiguration(ComponentName admin, String callerPackageName, ComponentName agent, PersistableBundle args, boolean parent) throws RemoteException {
-        }
+        public void setTrustAgentConfiguration(
+                ComponentName admin,
+                String callerPackageName,
+                ComponentName agent,
+                PersistableBundle args,
+                boolean parent)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public List<PersistableBundle> getTrustAgentConfiguration(ComponentName admin, ComponentName agent, int userId, boolean parent) throws RemoteException {
+        public List<PersistableBundle> getTrustAgentConfiguration(
+                ComponentName admin, ComponentName agent, int userId, boolean parent)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean addCrossProfileWidgetProvider(ComponentName admin, String callerPackageName, String packageName) throws RemoteException {
+        public boolean addCrossProfileWidgetProvider(
+                ComponentName admin, String callerPackageName, String packageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean removeCrossProfileWidgetProvider(ComponentName admin, String callerPackageName, String packageName) throws RemoteException {
+        public boolean removeCrossProfileWidgetProvider(
+                ComponentName admin, String callerPackageName, String packageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public List<String> getCrossProfileWidgetProviders(ComponentName admin, String callerPackageName) throws RemoteException {
+        public List<String> getCrossProfileWidgetProviders(
+                ComponentName admin, String callerPackageName) throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setAutoTimeRequired(ComponentName who, boolean required) throws RemoteException {
-        }
+        public void setAutoTimeRequired(ComponentName who, boolean required)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public boolean getAutoTimeRequired() throws RemoteException {
@@ -1978,26 +2408,29 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setAutoTimeEnabled(ComponentName who, String callerPackageName, boolean enabled) throws RemoteException {
-        }
+        public void setAutoTimeEnabled(ComponentName who, String callerPackageName, boolean enabled)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean getAutoTimeEnabled(ComponentName who, String callerPackageName) throws RemoteException {
+        public boolean getAutoTimeEnabled(ComponentName who, String callerPackageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setAutoTimeZoneEnabled(ComponentName who, String callerPackageName, boolean enabled) throws RemoteException {
-        }
+        public void setAutoTimeZoneEnabled(
+                ComponentName who, String callerPackageName, boolean enabled)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean getAutoTimeZoneEnabled(ComponentName who, String callerPackageName) throws RemoteException {
+        public boolean getAutoTimeZoneEnabled(ComponentName who, String callerPackageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setForceEphemeralUsers(ComponentName who, boolean forceEpehemeralUsers) throws RemoteException {
-        }
+        public void setForceEphemeralUsers(ComponentName who, boolean forceEpehemeralUsers)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public boolean getForceEphemeralUsers(ComponentName who) throws RemoteException {
@@ -2005,17 +2438,18 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean isRemovingAdmin(ComponentName adminReceiver, int userHandle) throws RemoteException {
+        public boolean isRemovingAdmin(ComponentName adminReceiver, int userHandle)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setUserIcon(ComponentName admin, Bitmap icon) throws RemoteException {
-        }
+        public void setUserIcon(ComponentName admin, Bitmap icon) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setSystemUpdatePolicy(ComponentName who, String callerPackageName, SystemUpdatePolicy policy) throws RemoteException {
-        }
+        public void setSystemUpdatePolicy(
+                ComponentName who, String callerPackageName, SystemUpdatePolicy policy)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public SystemUpdatePolicy getSystemUpdatePolicy() throws RemoteException {
@@ -2023,16 +2457,18 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void clearSystemUpdatePolicyFreezePeriodRecord() throws RemoteException {
-        }
+        public void clearSystemUpdatePolicyFreezePeriodRecord() throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean setKeyguardDisabled(ComponentName admin, boolean disabled) throws RemoteException {
+        public boolean setKeyguardDisabled(ComponentName admin, boolean disabled)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean setStatusBarDisabled(ComponentName who, String callerPackageName, boolean disabled) throws RemoteException {
+        public boolean setStatusBarDisabled(
+                ComponentName who, String callerPackageName, boolean disabled)
+                throws RemoteException {
             return false;
         }
 
@@ -2047,17 +2483,17 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void notifyPendingSystemUpdate(SystemUpdateInfo info) throws RemoteException {
-        }
+        public void notifyPendingSystemUpdate(SystemUpdateInfo info) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public SystemUpdateInfo getPendingSystemUpdate(ComponentName admin, String callerPackage) throws RemoteException {
+        public SystemUpdateInfo getPendingSystemUpdate(ComponentName admin, String callerPackage)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setPermissionPolicy(ComponentName admin, String callerPackage, int policy) throws RemoteException {
-        }
+        public void setPermissionPolicy(ComponentName admin, String callerPackage, int policy)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public int getPermissionPolicy(ComponentName admin) throws RemoteException {
@@ -2065,30 +2501,42 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setPermissionGrantState(ComponentName admin, String callerPackage, String packageName, String permission, int grantState, RemoteCallback resultReceiver) throws RemoteException {
-        }
+        public void setPermissionGrantState(
+                ComponentName admin,
+                String callerPackage,
+                String packageName,
+                String permission,
+                int grantState,
+                RemoteCallback resultReceiver)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public int getPermissionGrantState(ComponentName admin, String callerPackage, String packageName, String permission) throws RemoteException {
+        public int getPermissionGrantState(
+                ComponentName admin, String callerPackage, String packageName, String permission)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean isProvisioningAllowed(String action, String packageName) throws RemoteException {
+        public boolean isProvisioningAllowed(String action, String packageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public int checkProvisioningPrecondition(String action, String packageName) throws RemoteException {
+        public int checkProvisioningPrecondition(String action, String packageName)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setKeepUninstalledPackages(ComponentName admin, String callerPackage, List<String> packageList) throws RemoteException {
-        }
+        public void setKeepUninstalledPackages(
+                ComponentName admin, String callerPackage, List<String> packageList)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public List<String> getKeepUninstalledPackages(ComponentName admin, String callerPackage) throws RemoteException {
+        public List<String> getKeepUninstalledPackages(ComponentName admin, String callerPackage)
+                throws RemoteException {
             return null;
         }
 
@@ -2098,26 +2546,28 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public String getWifiMacAddress(ComponentName admin, String callerPackageName) throws RemoteException {
+        public String getWifiMacAddress(ComponentName admin, String callerPackageName)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void reboot(ComponentName admin) throws RemoteException {
-        }
+        public void reboot(ComponentName admin) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setShortSupportMessage(ComponentName admin, String callerPackageName, CharSequence message) throws RemoteException {
-        }
+        public void setShortSupportMessage(
+                ComponentName admin, String callerPackageName, CharSequence message)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public CharSequence getShortSupportMessage(ComponentName admin, String callerPackageName) throws RemoteException {
+        public CharSequence getShortSupportMessage(ComponentName admin, String callerPackageName)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setLongSupportMessage(ComponentName admin, CharSequence message) throws RemoteException {
-        }
+        public void setLongSupportMessage(ComponentName admin, CharSequence message)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public CharSequence getLongSupportMessage(ComponentName admin) throws RemoteException {
@@ -2125,26 +2575,25 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public CharSequence getShortSupportMessageForUser(ComponentName admin, int userHandle) throws RemoteException {
+        public CharSequence getShortSupportMessageForUser(ComponentName admin, int userHandle)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public CharSequence getLongSupportMessageForUser(ComponentName admin, int userHandle) throws RemoteException {
+        public CharSequence getLongSupportMessageForUser(ComponentName admin, int userHandle)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setOrganizationColor(ComponentName admin, int color) throws RemoteException {
-        }
+        public void setOrganizationColor(ComponentName admin, int color) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setOrganizationColorForUser(int color, int userId) throws RemoteException {
-        }
+        public void setOrganizationColorForUser(int color, int userId) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void clearOrganizationIdForUser(int userHandle) throws RemoteException {
-        }
+        public void clearOrganizationIdForUser(int userHandle) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public int getOrganizationColor(ComponentName admin) throws RemoteException {
@@ -2157,11 +2606,13 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setOrganizationName(ComponentName admin, String callerPackageName, CharSequence title) throws RemoteException {
-        }
+        public void setOrganizationName(
+                ComponentName admin, String callerPackageName, CharSequence title)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public CharSequence getOrganizationName(ComponentName admin, String callerPackageName) throws RemoteException {
+        public CharSequence getOrganizationName(ComponentName admin, String callerPackageName)
+                throws RemoteException {
             return null;
         }
 
@@ -2181,12 +2632,11 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setUserProvisioningState(int state, int userHandle) throws RemoteException {
-        }
+        public void setUserProvisioningState(int state, int userHandle) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setAffiliationIds(ComponentName admin, List<String> ids) throws RemoteException {
-        }
+        public void setAffiliationIds(ComponentName admin, List<String> ids)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public List<String> getAffiliationIds(ComponentName admin) throws RemoteException {
@@ -2204,21 +2654,24 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setSecurityLoggingEnabled(ComponentName admin, String packageName, boolean enabled) throws RemoteException {
-        }
+        public void setSecurityLoggingEnabled(
+                ComponentName admin, String packageName, boolean enabled) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean isSecurityLoggingEnabled(ComponentName admin, String packageName) throws RemoteException {
+        public boolean isSecurityLoggingEnabled(ComponentName admin, String packageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public ParceledListSlice retrieveSecurityLogs(ComponentName admin, String packageName) throws RemoteException {
+        public ParceledListSlice retrieveSecurityLogs(ComponentName admin, String packageName)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public ParceledListSlice retrievePreRebootSecurityLogs(ComponentName admin, String packageName) throws RemoteException {
+        public ParceledListSlice retrievePreRebootSecurityLogs(
+                ComponentName admin, String packageName) throws RemoteException {
             return null;
         }
 
@@ -2233,8 +2686,8 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setAuditLogEnabled(String callerPackage, boolean enabled) throws RemoteException {
-        }
+        public void setAuditLogEnabled(String callerPackage, boolean enabled)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public boolean isAuditLogEnabled(String callerPackage) throws RemoteException {
@@ -2242,8 +2695,8 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setAuditLogEventsCallback(String callerPackage, IAuditLogEventsCallback callback) throws RemoteException {
-        }
+        public void setAuditLogEventsCallback(
+                String callerPackage, IAuditLogEventsCallback callback) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public boolean isUninstallInQueue(String packageName) throws RemoteException {
@@ -2251,8 +2704,7 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void uninstallPackageWithActiveAdmins(String packageName) throws RemoteException {
-        }
+        public void uninstallPackageWithActiveAdmins(String packageName) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public boolean isDeviceProvisioned() throws RemoteException {
@@ -2265,16 +2717,14 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setDeviceProvisioningConfigApplied() throws RemoteException {
-        }
+        public void setDeviceProvisioningConfigApplied() throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void forceUpdateUserSetupComplete(int userId) throws RemoteException {
-        }
+        public void forceUpdateUserSetupComplete(int userId) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setBackupServiceEnabled(ComponentName admin, boolean enabled) throws RemoteException {
-        }
+        public void setBackupServiceEnabled(ComponentName admin, boolean enabled)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public boolean isBackupServiceEnabled(ComponentName admin) throws RemoteException {
@@ -2282,26 +2732,37 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setNetworkLoggingEnabled(ComponentName admin, String packageName, boolean enabled) throws RemoteException {
-        }
+        public void setNetworkLoggingEnabled(
+                ComponentName admin, String packageName, boolean enabled) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean isNetworkLoggingEnabled(ComponentName admin, String packageName) throws RemoteException {
+        public boolean isNetworkLoggingEnabled(ComponentName admin, String packageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public List<NetworkEvent> retrieveNetworkLogs(ComponentName admin, String packageName, long batchToken) throws RemoteException {
+        public List<NetworkEvent> retrieveNetworkLogs(
+                ComponentName admin, String packageName, long batchToken) throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean bindDeviceAdminServiceAsUser(ComponentName admin, IApplicationThread caller, IBinder token, Intent service, IServiceConnection connection, long flags, int targetUserId) throws RemoteException {
+        public boolean bindDeviceAdminServiceAsUser(
+                ComponentName admin,
+                IApplicationThread caller,
+                IBinder token,
+                Intent service,
+                IServiceConnection connection,
+                long flags,
+                int targetUserId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public List<UserHandle> getBindDeviceAdminTargetUsers(ComponentName admin) throws RemoteException {
+        public List<UserHandle> getBindDeviceAdminTargetUsers(ComponentName admin)
+                throws RemoteException {
             return null;
         }
 
@@ -2326,22 +2787,32 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean setResetPasswordToken(ComponentName admin, String callerPackageName, byte[] token) throws RemoteException {
+        public boolean setResetPasswordToken(
+                ComponentName admin, String callerPackageName, byte[] token)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean clearResetPasswordToken(ComponentName admin, String callerPackageName) throws RemoteException {
+        public boolean clearResetPasswordToken(ComponentName admin, String callerPackageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean isResetPasswordTokenActive(ComponentName admin, String callerPackageName) throws RemoteException {
+        public boolean isResetPasswordTokenActive(ComponentName admin, String callerPackageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean resetPasswordWithToken(ComponentName admin, String callerPackageName, String password, byte[] token, int flags) throws RemoteException {
+        public boolean resetPasswordWithToken(
+                ComponentName admin,
+                String callerPackageName,
+                String password,
+                byte[] token,
+                int flags)
+                throws RemoteException {
             return false;
         }
 
@@ -2351,17 +2822,18 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public StringParceledListSlice getOwnerInstalledCaCerts(UserHandle user) throws RemoteException {
+        public StringParceledListSlice getOwnerInstalledCaCerts(UserHandle user)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void clearApplicationUserData(ComponentName admin, String packageName, IPackageDataObserver callback) throws RemoteException {
-        }
+        public void clearApplicationUserData(
+                ComponentName admin, String packageName, IPackageDataObserver callback)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setLogoutEnabled(ComponentName admin, boolean enabled) throws RemoteException {
-        }
+        public void setLogoutEnabled(ComponentName admin, boolean enabled) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public boolean isLogoutEnabled() throws RemoteException {
@@ -2369,13 +2841,15 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public List<String> getDisallowedSystemApps(ComponentName admin, int userId, String provisioningAction) throws RemoteException {
+        public List<String> getDisallowedSystemApps(
+                ComponentName admin, int userId, String provisioningAction) throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void transferOwnership(ComponentName admin, ComponentName target, PersistableBundle bundle) throws RemoteException {
-        }
+        public void transferOwnership(
+                ComponentName admin, ComponentName target, PersistableBundle bundle)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public PersistableBundle getTransferOwnershipBundle() throws RemoteException {
@@ -2383,12 +2857,12 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setStartUserSessionMessage(ComponentName admin, CharSequence startUserSessionMessage) throws RemoteException {
-        }
+        public void setStartUserSessionMessage(
+                ComponentName admin, CharSequence startUserSessionMessage) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setEndUserSessionMessage(ComponentName admin, CharSequence endUserSessionMessage) throws RemoteException {
-        }
+        public void setEndUserSessionMessage(
+                ComponentName admin, CharSequence endUserSessionMessage) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public CharSequence getStartUserSessionMessage(ComponentName admin) throws RemoteException {
@@ -2401,22 +2875,26 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public List<String> setMeteredDataDisabledPackages(ComponentName admin, List<String> packageNames) throws RemoteException {
+        public List<String> setMeteredDataDisabledPackages(
+                ComponentName admin, List<String> packageNames) throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public List<String> getMeteredDataDisabledPackages(ComponentName admin) throws RemoteException {
+        public List<String> getMeteredDataDisabledPackages(ComponentName admin)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public int addOverrideApn(ComponentName admin, ApnSetting apnSetting) throws RemoteException {
+        public int addOverrideApn(ComponentName admin, ApnSetting apnSetting)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean updateOverrideApn(ComponentName admin, int apnId, ApnSetting apnSetting) throws RemoteException {
+        public boolean updateOverrideApn(ComponentName admin, int apnId, ApnSetting apnSetting)
+                throws RemoteException {
             return false;
         }
 
@@ -2431,8 +2909,8 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setOverrideApnsEnabled(ComponentName admin, boolean enabled) throws RemoteException {
-        }
+        public void setOverrideApnsEnabled(ComponentName admin, boolean enabled)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public boolean isOverrideApnEnabled(ComponentName admin) throws RemoteException {
@@ -2440,102 +2918,113 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean isMeteredDataDisabledPackageForUser(ComponentName admin, String packageName, int userId) throws RemoteException {
+        public boolean isMeteredDataDisabledPackageForUser(
+                ComponentName admin, String packageName, int userId) throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setPasswordQualityMDM(ComponentName admin, int quality, int userHandle) throws RemoteException {
-        }
+        public void setPasswordQualityMDM(ComponentName admin, int quality, int userHandle)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setPasswordMinimumLengthMDM(ComponentName admin, int length, int userHandle) throws RemoteException {
-        }
+        public void setPasswordMinimumLengthMDM(ComponentName admin, int length, int userHandle)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setPasswordMinimumUpperCaseMDM(ComponentName admin, int length, int userHandle) throws RemoteException {
-        }
+        public void setPasswordMinimumUpperCaseMDM(ComponentName admin, int length, int userHandle)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setPasswordMinimumLowerCaseMDM(ComponentName admin, int length, int userHandle) throws RemoteException {
-        }
+        public void setPasswordMinimumLowerCaseMDM(ComponentName admin, int length, int userHandle)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setPasswordMinimumLettersMDM(ComponentName admin, int length, int userHandle) throws RemoteException {
-        }
+        public void setPasswordMinimumLettersMDM(ComponentName admin, int length, int userHandle)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setPasswordMinimumNumericMDM(ComponentName admin, int length, int userHandle) throws RemoteException {
-        }
+        public void setPasswordMinimumNumericMDM(ComponentName admin, int length, int userHandle)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setPasswordMinimumSymbolsMDM(ComponentName admin, int length, int userHandle) throws RemoteException {
-        }
+        public void setPasswordMinimumSymbolsMDM(ComponentName admin, int length, int userHandle)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setPasswordMinimumNonLetterMDM(ComponentName admin, int length, int userHandle) throws RemoteException {
-        }
+        public void setPasswordMinimumNonLetterMDM(ComponentName admin, int length, int userHandle)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setPasswordHistoryLengthMDM(ComponentName admin, int length, int userHandle) throws RemoteException {
-        }
+        public void setPasswordHistoryLengthMDM(ComponentName admin, int length, int userHandle)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setPasswordExpirationTimeoutMDM(ComponentName admin, long expiration, int userHandle) throws RemoteException {
-        }
+        public void setPasswordExpirationTimeoutMDM(
+                ComponentName admin, long expiration, int userHandle) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setMaximumFailedPasswordsForWipeMDM(ComponentName admin, int num, int userHandle) throws RemoteException {
-        }
+        public void setMaximumFailedPasswordsForWipeMDM(
+                ComponentName admin, int num, int userHandle) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setMaximumTimeToLockMDM(ComponentName admin, long timeMs, int userHandle) throws RemoteException {
-        }
+        public void setMaximumTimeToLockMDM(ComponentName admin, long timeMs, int userHandle)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setKeyguardDisabledFeaturesMDM(ComponentName admin, int which, int userHandle) throws RemoteException {
-        }
+        public void setKeyguardDisabledFeaturesMDM(ComponentName admin, int which, int userHandle)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setApplicationRestrictionsMDM(ComponentName admin, String packageName, Bundle settings, int userHandle) throws RemoteException {
-        }
+        public void setApplicationRestrictionsMDM(
+                ComponentName admin, String packageName, Bundle settings, int userHandle)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public Bundle getApplicationRestrictionsMDM(ComponentName who, String packageName, int userHandle) throws RemoteException {
+        public Bundle getApplicationRestrictionsMDM(
+                ComponentName who, String packageName, int userHandle) throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean resetPasswordWithTokenMDM(ComponentName admin, String password, byte[] token, int flags, int userHandle) throws RemoteException {
+        public boolean resetPasswordWithTokenMDM(
+                ComponentName admin, String password, byte[] token, int flags, int userHandle)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean isResetPasswordTokenActiveMDM(ComponentName admin, int userHandle) throws RemoteException {
+        public boolean isResetPasswordTokenActiveMDM(ComponentName admin, int userHandle)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean clearResetPasswordTokenMDM(ComponentName admin, int userHandle) throws RemoteException {
+        public boolean clearResetPasswordTokenMDM(ComponentName admin, int userHandle)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean setResetPasswordTokenMDM(ComponentName admin, byte[] token, int userHandle) throws RemoteException {
+        public boolean setResetPasswordTokenMDM(ComponentName admin, byte[] token, int userHandle)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setTrustAgentConfigurationMDM(int userId, ComponentName admin, ComponentName agent, PersistableBundle args) throws RemoteException {
-        }
+        public void setTrustAgentConfigurationMDM(
+                int userId, ComponentName admin, ComponentName agent, PersistableBundle args)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean isProfileOwnerOfOrganizationOwnedDeviceMDM(int userId) throws RemoteException {
+        public boolean isProfileOwnerOfOrganizationOwnedDeviceMDM(int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean hasDelegatedPermission(String callerPackage, int callerUid, String scope) throws RemoteException {
+        public boolean hasDelegatedPermission(String callerPackage, int callerUid, String scope)
+                throws RemoteException {
             return false;
         }
 
@@ -2545,11 +3034,12 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void reportFailedPasswordAttemptWithFailureCount(int userHandle, int count, boolean parent) throws RemoteException {
-        }
+        public void reportFailedPasswordAttemptWithFailureCount(
+                int userHandle, int count, boolean parent) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public int setGlobalPrivateDns(ComponentName admin, int mode, String privateDnsHost) throws RemoteException {
+        public int setGlobalPrivateDns(ComponentName admin, int mode, String privateDnsHost)
+                throws RemoteException {
             return 0;
         }
 
@@ -2564,35 +3054,43 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setProfileOwnerOnOrganizationOwnedDevice(ComponentName who, int userId, boolean isProfileOwnerOnOrganizationOwnedDevice) throws RemoteException {
-        }
+        public void setProfileOwnerOnOrganizationOwnedDevice(
+                ComponentName who, int userId, boolean isProfileOwnerOnOrganizationOwnedDevice)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void installUpdateFromFile(ComponentName admin, String callerPackageName, ParcelFileDescriptor updateFileDescriptor, StartInstallingUpdateCallback listener) throws RemoteException {
-        }
+        public void installUpdateFromFile(
+                ComponentName admin,
+                String callerPackageName,
+                ParcelFileDescriptor updateFileDescriptor,
+                StartInstallingUpdateCallback listener)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setCrossProfileCalendarPackages(ComponentName admin, List<String> packageNames) throws RemoteException {
-        }
+        public void setCrossProfileCalendarPackages(ComponentName admin, List<String> packageNames)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public List<String> getCrossProfileCalendarPackages(ComponentName admin) throws RemoteException {
+        public List<String> getCrossProfileCalendarPackages(ComponentName admin)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean isPackageAllowedToAccessCalendarForUser(String packageName, int userHandle) throws RemoteException {
+        public boolean isPackageAllowedToAccessCalendarForUser(String packageName, int userHandle)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public List<String> getCrossProfileCalendarPackagesForUser(int userHandle) throws RemoteException {
+        public List<String> getCrossProfileCalendarPackagesForUser(int userHandle)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setCrossProfilePackages(ComponentName admin, List<String> packageNames) throws RemoteException {
-        }
+        public void setCrossProfilePackages(ComponentName admin, List<String> packageNames)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public List<String> getCrossProfilePackages(ComponentName admin) throws RemoteException {
@@ -2620,42 +3118,56 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean startViewCalendarEventInManagedProfile(String packageName, long eventId, long start, long end, boolean allDay, int flags) throws RemoteException {
+        public boolean startViewCalendarEventInManagedProfile(
+                String packageName, long eventId, long start, long end, boolean allDay, int flags)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean setKeyGrantForApp(ComponentName admin, String callerPackage, String alias, String packageName, boolean hasGrant) throws RemoteException {
+        public boolean setKeyGrantForApp(
+                ComponentName admin,
+                String callerPackage,
+                String alias,
+                String packageName,
+                boolean hasGrant)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public ParcelableGranteeMap getKeyPairGrants(String callerPackage, String alias) throws RemoteException {
+        public ParcelableGranteeMap getKeyPairGrants(String callerPackage, String alias)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean setKeyGrantToWifiAuth(String callerPackage, String alias, boolean hasGrant) throws RemoteException {
+        public boolean setKeyGrantToWifiAuth(String callerPackage, String alias, boolean hasGrant)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean isKeyPairGrantedToWifiAuth(String callerPackage, String alias) throws RemoteException {
+        public boolean isKeyPairGrantedToWifiAuth(String callerPackage, String alias)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setUserControlDisabledPackages(ComponentName admin, String callerPackageName, List<String> packages) throws RemoteException {
-        }
+        public void setUserControlDisabledPackages(
+                ComponentName admin, String callerPackageName, List<String> packages)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public List<String> getUserControlDisabledPackages(ComponentName admin, String callerPackageName) throws RemoteException {
+        public List<String> getUserControlDisabledPackages(
+                ComponentName admin, String callerPackageName) throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setCommonCriteriaModeEnabled(ComponentName admin, String callerPackageName, boolean enabled) throws RemoteException {
-        }
+        public void setCommonCriteriaModeEnabled(
+                ComponentName admin, String callerPackageName, boolean enabled)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public boolean isCommonCriteriaModeEnabled(ComponentName admin) throws RemoteException {
@@ -2668,8 +3180,8 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setPersonalAppsSuspended(ComponentName admin, boolean suspended) throws RemoteException {
-        }
+        public void setPersonalAppsSuspended(ComponentName admin, boolean suspended)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public long getManagedProfileMaximumTimeOff(ComponentName admin) throws RemoteException {
@@ -2677,12 +3189,11 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setManagedProfileMaximumTimeOff(ComponentName admin, long timeoutMs) throws RemoteException {
-        }
+        public void setManagedProfileMaximumTimeOff(ComponentName admin, long timeoutMs)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void acknowledgeDeviceCompliant() throws RemoteException {
-        }
+        public void acknowledgeDeviceCompliant() throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public boolean isComplianceAcknowledgementRequired() throws RemoteException {
@@ -2695,8 +3206,7 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setNextOperationSafety(int operation, int reason) throws RemoteException {
-        }
+        public void setNextOperationSafety(int operation, int reason) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public boolean isSafeOperation(int reason) throws RemoteException {
@@ -2709,25 +3219,28 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setOrganizationIdForUser(String callerPackage, String enterpriseId, int userId) throws RemoteException {
-        }
+        public void setOrganizationIdForUser(String callerPackage, String enterpriseId, int userId)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public UserHandle createAndProvisionManagedProfile(ManagedProfileProvisioningParams provisioningParams, String callerPackage) throws RemoteException {
+        public UserHandle createAndProvisionManagedProfile(
+                ManagedProfileProvisioningParams provisioningParams, String callerPackage)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void provisionFullyManagedDevice(FullyManagedDeviceProvisioningParams provisioningParams, String callerPackage) throws RemoteException {
-        }
+        public void provisionFullyManagedDevice(
+                FullyManagedDeviceProvisioningParams provisioningParams, String callerPackage)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void finalizeWorkProfileProvisioning(UserHandle managedProfileUser, Account migratedAccount) throws RemoteException {
-        }
+        public void finalizeWorkProfileProvisioning(
+                UserHandle managedProfileUser, Account migratedAccount) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setDeviceOwnerType(ComponentName admin, int deviceOwnerType) throws RemoteException {
-        }
+        public void setDeviceOwnerType(ComponentName admin, int deviceOwnerType)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public int getDeviceOwnerType(ComponentName admin) throws RemoteException {
@@ -2735,8 +3248,7 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void resetDefaultCrossProfileIntentFilters(int userId) throws RemoteException {
-        }
+        public void resetDefaultCrossProfileIntentFilters(int userId) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public boolean canAdminGrantSensorsPermissions() throws RemoteException {
@@ -2744,8 +3256,8 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setUsbDataSignalingEnabled(String callerPackage, boolean enabled) throws RemoteException {
-        }
+        public void setUsbDataSignalingEnabled(String callerPackage, boolean enabled)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public boolean isUsbDataSignalingEnabled(String callerPackage) throws RemoteException {
@@ -2758,8 +3270,8 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setMinimumRequiredWifiSecurityLevel(String callerPackageName, int level) throws RemoteException {
-        }
+        public void setMinimumRequiredWifiSecurityLevel(String callerPackageName, int level)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public int getMinimumRequiredWifiSecurityLevel() throws RemoteException {
@@ -2767,8 +3279,8 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setWifiSsidPolicy(String callerPackageName, WifiSsidPolicy policy) throws RemoteException {
-        }
+        public void setWifiSsidPolicy(String callerPackageName, WifiSsidPolicy policy)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public WifiSsidPolicy getWifiSsidPolicy(String callerPackageName) throws RemoteException {
@@ -2786,15 +3298,16 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setDrawables(List<DevicePolicyDrawableResource> drawables) throws RemoteException {
-        }
+        public void setDrawables(List<DevicePolicyDrawableResource> drawables)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void resetDrawables(List<String> drawableIds) throws RemoteException {
-        }
+        public void resetDrawables(List<String> drawableIds) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public ParcelableResource getDrawable(String drawableId, String drawableStyle, String drawableSource) throws RemoteException {
+        public ParcelableResource getDrawable(
+                String drawableId, String drawableStyle, String drawableSource)
+                throws RemoteException {
             return null;
         }
 
@@ -2804,16 +3317,13 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setDpcDownloaded(boolean downloaded) throws RemoteException {
-        }
+        public void setDpcDownloaded(boolean downloaded) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setStrings(List<DevicePolicyStringResource> strings) throws RemoteException {
-        }
+        public void setStrings(List<DevicePolicyStringResource> strings) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void resetStrings(List<String> stringIds) throws RemoteException {
-        }
+        public void resetStrings(List<String> stringIds) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public ParcelableResource getString(String stringId) throws RemoteException {
@@ -2821,46 +3331,48 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void resetShouldAllowBypassingDevicePolicyManagementRoleQualificationState() throws RemoteException {
-        }
+        public void resetShouldAllowBypassingDevicePolicyManagementRoleQualificationState()
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean shouldAllowBypassingDevicePolicyManagementRoleQualification() throws RemoteException {
+        public boolean shouldAllowBypassingDevicePolicyManagementRoleQualification()
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public List<UserHandle> getPolicyManagedProfiles(UserHandle userHandle) throws RemoteException {
+        public List<UserHandle> getPolicyManagedProfiles(UserHandle userHandle)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void semSetPasswordQuality(ComponentName admin, int quality) throws RemoteException {
-        }
+        public void semSetPasswordQuality(ComponentName admin, int quality)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void semSetPasswordMinimumLength(ComponentName admin, int length) throws RemoteException {
-        }
+        public void semSetPasswordMinimumLength(ComponentName admin, int length)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void semSetPasswordMinimumUpperCase(ComponentName admin, int length) throws RemoteException {
-        }
+        public void semSetPasswordMinimumUpperCase(ComponentName admin, int length)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void semSetPasswordMinimumLowerCase(ComponentName admin, int length) throws RemoteException {
-        }
+        public void semSetPasswordMinimumLowerCase(ComponentName admin, int length)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void semSetPasswordMinimumNonLetter(ComponentName admin, int length) throws RemoteException {
-        }
+        public void semSetPasswordMinimumNonLetter(ComponentName admin, int length)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void semSetPasswordHistoryLength(ComponentName admin, int length) throws RemoteException {
-        }
+        public void semSetPasswordHistoryLength(ComponentName admin, int length)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void semSetPasswordExpirationTimeout(ComponentName admin, long timeout) throws RemoteException {
-        }
+        public void semSetPasswordExpirationTimeout(ComponentName admin, long timeout)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public boolean semIsActivePasswordSufficient(int userHandle) throws RemoteException {
@@ -2868,30 +3380,31 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void semSetSimplePasswordEnabled(ComponentName who, boolean value) throws RemoteException {
-        }
+        public void semSetSimplePasswordEnabled(ComponentName who, boolean value)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean semIsSimplePasswordEnabled(ComponentName who, int userHandle) throws RemoteException {
+        public boolean semIsSimplePasswordEnabled(ComponentName who, int userHandle)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void semSetKeyguardDisabledFeatures(ComponentName who, int which) throws RemoteException {
-        }
+        public void semSetKeyguardDisabledFeatures(ComponentName who, int which)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void semSetAllowStorageCard(ComponentName who, boolean value) throws RemoteException {
-        }
+        public void semSetAllowStorageCard(ComponentName who, boolean value)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean semGetAllowStorageCard(ComponentName who, int userHandle) throws RemoteException {
+        public boolean semGetAllowStorageCard(ComponentName who, int userHandle)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void semSetAllowWifi(ComponentName who, boolean value) throws RemoteException {
-        }
+        public void semSetAllowWifi(ComponentName who, boolean value) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public boolean semGetAllowWifi(ComponentName who, int userHandle) throws RemoteException {
@@ -2899,62 +3412,65 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void semSetAllowTextMessaging(ComponentName who, boolean value) throws RemoteException {
-        }
+        public void semSetAllowTextMessaging(ComponentName who, boolean value)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean semGetAllowTextMessaging(ComponentName who, int userHandle) throws RemoteException {
+        public boolean semGetAllowTextMessaging(ComponentName who, int userHandle)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void semSetAllowPopImapEmail(ComponentName who, boolean value) throws RemoteException {
-        }
+        public void semSetAllowPopImapEmail(ComponentName who, boolean value)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean semGetAllowPopImapEmail(ComponentName who, int userHandle) throws RemoteException {
+        public boolean semGetAllowPopImapEmail(ComponentName who, int userHandle)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void semSetAllowBrowser(ComponentName who, boolean value) throws RemoteException {
-        }
+        public void semSetAllowBrowser(ComponentName who, boolean value) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean semGetAllowBrowser(ComponentName who, int userHandle) throws RemoteException {
+        public boolean semGetAllowBrowser(ComponentName who, int userHandle)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void semSetAllowInternetSharing(ComponentName who, boolean value) throws RemoteException {
-        }
+        public void semSetAllowInternetSharing(ComponentName who, boolean value)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean semGetAllowInternetSharing(ComponentName who, int userHandle) throws RemoteException {
+        public boolean semGetAllowInternetSharing(ComponentName who, int userHandle)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void semSetAllowBluetoothMode(ComponentName who, int size) throws RemoteException {
-        }
+        public void semSetAllowBluetoothMode(ComponentName who, int size) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public int semGetAllowBluetoothMode(ComponentName who, int userHandle) throws RemoteException {
+        public int semGetAllowBluetoothMode(ComponentName who, int userHandle)
+                throws RemoteException {
             return 0;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void semSetAllowDesktopSync(ComponentName who, boolean value) throws RemoteException {
-        }
+        public void semSetAllowDesktopSync(ComponentName who, boolean value)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean semGetAllowDesktopSync(ComponentName who, int userHandle) throws RemoteException {
+        public boolean semGetAllowDesktopSync(ComponentName who, int userHandle)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void semSetAllowIrda(ComponentName who, boolean value) throws RemoteException {
-        }
+        public void semSetAllowIrda(ComponentName who, boolean value) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public boolean semGetAllowIrda(ComponentName who, int userHandle) throws RemoteException {
@@ -2962,21 +3478,23 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void semSetRequireStorageCardEncryption(ComponentName who, boolean value, boolean isParent) throws RemoteException {
-        }
+        public void semSetRequireStorageCardEncryption(
+                ComponentName who, boolean value, boolean isParent) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean semGetRequireStorageCardEncryption(ComponentName who, int userHandle, boolean isParent) throws RemoteException {
+        public boolean semGetRequireStorageCardEncryption(
+                ComponentName who, int userHandle, boolean isParent) throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void semSetChangeNotificationEnabled(ComponentName who, boolean notifyChanges) throws RemoteException {
-        }
+        public void semSetChangeNotificationEnabled(ComponentName who, boolean notifyChanges)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setApplicationExemptions(String callerPackage, String packageName, int[] exemptions) throws RemoteException {
-        }
+        public void setApplicationExemptions(
+                String callerPackage, String packageName, int[] exemptions)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public int[] getApplicationExemptions(String packageName) throws RemoteException {
@@ -2984,8 +3502,7 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setMtePolicy(int flag, String callerPackageName) throws RemoteException {
-        }
+        public void setMtePolicy(int flag, String callerPackageName) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public int getMtePolicy(String callerPackageName) throws RemoteException {
@@ -2993,8 +3510,8 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setManagedSubscriptionsPolicy(ManagedSubscriptionsPolicy policy) throws RemoteException {
-        }
+        public void setManagedSubscriptionsPolicy(ManagedSubscriptionsPolicy policy)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public ManagedSubscriptionsPolicy getManagedSubscriptionsPolicy() throws RemoteException {
@@ -3007,7 +3524,8 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean triggerDevicePolicyEngineMigration(boolean forceMigration) throws RemoteException {
+        public boolean triggerDevicePolicyEngineMigration(boolean forceMigration)
+                throws RemoteException {
             return false;
         }
 
@@ -3017,33 +3535,35 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public String getFinancedDeviceKioskRoleHolder(String callerPackageName) throws RemoteException {
+        public String getFinancedDeviceKioskRoleHolder(String callerPackageName)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setUserRestrictionForKnox(ComponentName who, String key, boolean enable, int userId) throws RemoteException {
-        }
+        public void setUserRestrictionForKnox(
+                ComponentName who, String key, boolean enable, int userId) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setCrossProfileAppToIgnored(int userId, String packageName) throws RemoteException {
-        }
+        public void setCrossProfileAppToIgnored(int userId, String packageName)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public boolean getSamsungSDcardEncryptionStatus(ComponentName who, int userHandle) throws RemoteException {
+        public boolean getSamsungSDcardEncryptionStatus(ComponentName who, int userHandle)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void calculateHasIncompatibleAccounts() throws RemoteException {
-        }
+        public void calculateHasIncompatibleAccounts() throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setContentProtectionPolicy(ComponentName who, String callerPackageName, int policy) throws RemoteException {
-        }
+        public void setContentProtectionPolicy(
+                ComponentName who, String callerPackageName, int policy) throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public int getContentProtectionPolicy(ComponentName who, String callerPackageName) throws RemoteException {
+        public int getContentProtectionPolicy(ComponentName who, String callerPackageName)
+                throws RemoteException {
             return 0;
         }
 
@@ -3053,12 +3573,12 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void setMaxPolicyStorageLimit(String callerPackageName, int storageLimit) throws RemoteException {
-        }
+        public void setMaxPolicyStorageLimit(String callerPackageName, int storageLimit)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
-        public void forceSetMaxPolicyStorageLimit(String callerPackageName, int storageLimit) throws RemoteException {
-        }
+        public void forceSetMaxPolicyStorageLimit(String callerPackageName, int storageLimit)
+                throws RemoteException {}
 
         @Override // android.app.admin.IDevicePolicyManager
         public int getMaxPolicyStorageLimit(String callerPackageName) throws RemoteException {
@@ -3066,7 +3586,8 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.app.admin.IDevicePolicyManager
-        public int getPolicySizeForAdmin(String callerPackageName, EnforcingAdmin admin) throws RemoteException {
+        public int getPolicySizeForAdmin(String callerPackageName, EnforcingAdmin admin)
+                throws RemoteException {
             return 0;
         }
 
@@ -3081,7 +3602,7 @@ public interface IDevicePolicyManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDevicePolicyManager {
+    public abstract static class Stub extends Binder implements IDevicePolicyManager {
         public static final String DESCRIPTOR = "android.app.admin.IDevicePolicyManager";
         static final int TRANSACTION_acknowledgeDeviceCompliant = 373;
         static final int TRANSACTION_acknowledgeNewUserDisclaimer = 166;
@@ -3355,7 +3876,9 @@ public interface IDevicePolicyManager extends IInterface {
         static final int TRANSACTION_resetPassword = 36;
         static final int TRANSACTION_resetPasswordWithToken = 299;
         static final int TRANSACTION_resetPasswordWithTokenMDM = 336;
-        static final int TRANSACTION_resetShouldAllowBypassingDevicePolicyManagementRoleQualificationState = 404;
+        static final int
+                TRANSACTION_resetShouldAllowBypassingDevicePolicyManagementRoleQualificationState =
+                        404;
         static final int TRANSACTION_resetStrings = 402;
         static final int TRANSACTION_retrieveNetworkLogs = 289;
         static final int TRANSACTION_retrievePreRebootSecurityLogs = 273;
@@ -3531,7 +4054,8 @@ public interface IDevicePolicyManager extends IInterface {
         static final int TRANSACTION_setUserRestrictionForKnox = 449;
         static final int TRANSACTION_setUserRestrictionGlobally = 136;
         static final int TRANSACTION_setWifiSsidPolicy = 392;
-        static final int TRANSACTION_shouldAllowBypassingDevicePolicyManagementRoleQualification = 405;
+        static final int TRANSACTION_shouldAllowBypassingDevicePolicyManagementRoleQualification =
+                405;
         static final int TRANSACTION_startManagedQuickContact = 202;
         static final int TRANSACTION_startUserInBackground = 160;
         static final int TRANSACTION_startViewCalendarEventInManagedProfile = 360;
@@ -3627,7 +4151,8 @@ public interface IDevicePolicyManager extends IInterface {
                 case 30:
                     return "isUsingUnifiedPassword";
                 case 31:
-                    return SecContentProviderURI.PASSWORDPOLICY_GETCURRENTFAILEDPASSWORDATEEMPTS_METHOD;
+                    return SecContentProviderURI
+                            .PASSWORDPOLICY_GETCURRENTFAILEDPASSWORDATEEMPTS_METHOD;
                 case 32:
                     return "getCurrentFailedBiometricAttempts";
                 case 33:
@@ -4497,7 +5022,8 @@ public interface IDevicePolicyManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -4597,7 +5123,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeInt(_result6);
                     return true;
                 case 30:
-                    ComponentName _arg06 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg06 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result7 = isUsingUnifiedPassword(_arg06);
                     reply.writeNoException();
@@ -4647,9 +5174,11 @@ public interface IDevicePolicyManager extends IInterface {
                 case 43:
                     return onTransact$setFactoryResetProtectionPolicy$(data, reply);
                 case 44:
-                    ComponentName _arg010 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg010 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
-                    FactoryResetProtectionPolicy _result11 = getFactoryResetProtectionPolicy(_arg010);
+                    FactoryResetProtectionPolicy _result11 =
+                            getFactoryResetProtectionPolicy(_arg010);
                     reply.writeNoException();
                     reply.writeTypedObject(_result11, 1);
                     return true;
@@ -4659,7 +5188,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeBoolean(_result12);
                     return true;
                 case 46:
-                    AndroidFuture<Boolean> _arg011 = (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
+                    AndroidFuture<Boolean> _arg011 =
+                            (AndroidFuture) data.readTypedObject(AndroidFuture.CREATOR);
                     data.enforceNoDataAvail();
                     sendLostModeLocationUpdate(_arg011);
                     reply.writeNoException();
@@ -4674,14 +5204,16 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeTypedObject(_result13, 1);
                     return true;
                 case 49:
-                    ComponentName _arg013 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg013 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     ProxyInfo _arg17 = (ProxyInfo) data.readTypedObject(ProxyInfo.CREATOR);
                     data.enforceNoDataAvail();
                     setRecommendedGlobalProxy(_arg013, _arg17);
                     reply.writeNoException();
                     return true;
                 case 50:
-                    ComponentName _arg014 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg014 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     boolean _arg18 = data.readBoolean();
                     data.enforceNoDataAvail();
                     int _result14 = setStorageEncryption(_arg014, _arg18);
@@ -4689,7 +5221,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeInt(_result14);
                     return true;
                 case 51:
-                    ComponentName _arg015 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg015 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg19 = data.readInt();
                     data.enforceNoDataAvail();
                     boolean _result15 = getStorageEncryption(_arg015, _arg19);
@@ -4705,7 +5238,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeInt(_result16);
                     return true;
                 case 53:
-                    ComponentName _arg017 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg017 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result17 = requestBugreport(_arg017);
                     reply.writeNoException();
@@ -4752,7 +5286,8 @@ public interface IDevicePolicyManager extends IInterface {
                 case 64:
                     return onTransact$setActiveAdmin$(data, reply);
                 case 65:
-                    ComponentName _arg022 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg022 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg111 = data.readInt();
                     data.enforceNoDataAvail();
                     boolean _result20 = isAdminActive(_arg022, _arg111);
@@ -4777,14 +5312,16 @@ public interface IDevicePolicyManager extends IInterface {
                 case 68:
                     return onTransact$getRemoveWarning$(data, reply);
                 case 69:
-                    ComponentName _arg025 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg025 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg113 = data.readInt();
                     data.enforceNoDataAvail();
                     removeActiveAdmin(_arg025, _arg113);
                     reply.writeNoException();
                     return true;
                 case 70:
-                    ComponentName _arg026 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg026 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg114 = data.readInt();
                     data.enforceNoDataAvail();
                     forceRemoveActiveAdmin(_arg026, _arg114);
@@ -4793,7 +5330,8 @@ public interface IDevicePolicyManager extends IInterface {
                 case 71:
                     return onTransact$hasGrantedPolicy$(data, reply);
                 case 72:
-                    PasswordMetrics _arg027 = (PasswordMetrics) data.readTypedObject(PasswordMetrics.CREATOR);
+                    PasswordMetrics _arg027 =
+                            (PasswordMetrics) data.readTypedObject(PasswordMetrics.CREATOR);
                     int _arg115 = data.readInt();
                     data.enforceNoDataAvail();
                     reportPasswordChanged(_arg027, _arg115);
@@ -4874,7 +5412,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeInt(_result27);
                     return true;
                 case 86:
-                    ComponentName _arg037 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg037 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg117 = data.readInt();
                     data.enforceNoDataAvail();
                     boolean _result28 = setProfileOwner(_arg037, _arg117);
@@ -4891,12 +5430,14 @@ public interface IDevicePolicyManager extends IInterface {
                 case 88:
                     UserHandle _arg039 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     data.enforceNoDataAvail();
-                    ComponentName _result30 = getProfileOwnerOrDeviceOwnerSupervisionComponent(_arg039);
+                    ComponentName _result30 =
+                            getProfileOwnerOrDeviceOwnerSupervisionComponent(_arg039);
                     reply.writeNoException();
                     reply.writeTypedObject(_result30, 1);
                     return true;
                 case 89:
-                    ComponentName _arg040 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg040 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result31 = isSupervisionComponent(_arg040);
                     reply.writeNoException();
@@ -4910,20 +5451,23 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeString(_result32);
                     return true;
                 case 91:
-                    ComponentName _arg042 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg042 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     setProfileEnabled(_arg042);
                     reply.writeNoException();
                     return true;
                 case 92:
-                    ComponentName _arg043 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg043 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg118 = data.readString();
                     data.enforceNoDataAvail();
                     setProfileName(_arg043, _arg118);
                     reply.writeNoException();
                     return true;
                 case 93:
-                    ComponentName _arg044 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg044 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     clearProfileOwner(_arg044);
                     reply.writeNoException();
@@ -4941,8 +5485,10 @@ public interface IDevicePolicyManager extends IInterface {
                 case 96:
                     return onTransact$checkDeviceIdentifierAccess$(data, reply);
                 case 97:
-                    ComponentName _arg045 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
-                    CharSequence _arg119 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    ComponentName _arg045 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    CharSequence _arg119 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     setDeviceOwnerLockScreenInfo(_arg045, _arg119);
                     reply.writeNoException();
@@ -4971,7 +5517,8 @@ public interface IDevicePolicyManager extends IInterface {
                 case 103:
                     return onTransact$uninstallCaCerts$(data, reply);
                 case 104:
-                    ComponentName _arg046 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg046 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg120 = data.readString();
                     data.enforceNoDataAvail();
                     enforceCanManageCaCerts(_arg046, _arg120);
@@ -5008,7 +5555,8 @@ public interface IDevicePolicyManager extends IInterface {
                 case 113:
                     return onTransact$setDelegatedScopes$(data, reply);
                 case 114:
-                    ComponentName _arg049 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg049 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg123 = data.readString();
                     data.enforceNoDataAvail();
                     List<String> _result39 = getDelegatedScopes(_arg049, _arg123);
@@ -5016,7 +5564,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeStringList(_result39);
                     return true;
                 case 115:
-                    ComponentName _arg050 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg050 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg124 = data.readString();
                     data.enforceNoDataAvail();
                     List<String> _result40 = getDelegatePackages(_arg050, _arg124);
@@ -5024,14 +5573,16 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeStringList(_result40);
                     return true;
                 case 116:
-                    ComponentName _arg051 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg051 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg125 = data.readString();
                     data.enforceNoDataAvail();
                     setCertInstallerPackage(_arg051, _arg125);
                     reply.writeNoException();
                     return true;
                 case 117:
-                    ComponentName _arg052 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg052 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     String _result41 = getCertInstallerPackage(_arg052);
                     reply.writeNoException();
@@ -5040,7 +5591,8 @@ public interface IDevicePolicyManager extends IInterface {
                 case 118:
                     return onTransact$setAlwaysOnVpnPackage$(data, reply);
                 case 119:
-                    ComponentName _arg053 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg053 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     String _result42 = getAlwaysOnVpnPackage(_arg053);
                     reply.writeNoException();
@@ -5054,7 +5606,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeString(_result43);
                     return true;
                 case 121:
-                    ComponentName _arg055 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg055 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result44 = isAlwaysOnVpnLockdownEnabled(_arg055);
                     reply.writeNoException();
@@ -5068,7 +5621,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeBoolean(_result45);
                     return true;
                 case 123:
-                    ComponentName _arg057 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg057 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     List<String> _result46 = getAlwaysOnVpnLockdownAllowlist(_arg057);
                     reply.writeNoException();
@@ -5091,7 +5645,8 @@ public interface IDevicePolicyManager extends IInterface {
                 case 129:
                     return onTransact$getApplicationRestrictions$(data, reply);
                 case 130:
-                    ComponentName _arg059 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg059 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg126 = data.readString();
                     data.enforceNoDataAvail();
                     boolean _result47 = setApplicationRestrictionsManagingPackage(_arg059, _arg126);
@@ -5099,7 +5654,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeBoolean(_result47);
                     return true;
                 case 131:
-                    ComponentName _arg060 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg060 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     String _result48 = getApplicationRestrictionsManagingPackage(_arg060);
                     reply.writeNoException();
@@ -5113,8 +5669,10 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeBoolean(_result49);
                     return true;
                 case 133:
-                    ComponentName _arg062 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
-                    ComponentName _arg127 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg062 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg127 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     setRestrictionsProvider(_arg062, _arg127);
                     reply.writeNoException();
@@ -5147,14 +5705,16 @@ public interface IDevicePolicyManager extends IInterface {
                 case 139:
                     return onTransact$addCrossProfileIntentFilter$(data, reply);
                 case 140:
-                    ComponentName _arg066 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg066 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg129 = data.readString();
                     data.enforceNoDataAvail();
                     clearCrossProfileIntentFilters(_arg066, _arg129);
                     reply.writeNoException();
                     return true;
                 case 141:
-                    ComponentName _arg067 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg067 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     List<String> _arg130 = data.createStringArrayList();
                     data.enforceNoDataAvail();
                     boolean _result52 = setPermittedAccessibilityServices(_arg067, _arg130);
@@ -5162,7 +5722,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeBoolean(_result52);
                     return true;
                 case 142:
-                    ComponentName _arg068 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg068 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     List<String> _result53 = getPermittedAccessibilityServices(_arg068);
                     reply.writeNoException();
@@ -5191,15 +5752,18 @@ public interface IDevicePolicyManager extends IInterface {
                 case 148:
                     return onTransact$isInputMethodPermittedByAdmin$(data, reply);
                 case 149:
-                    ComponentName _arg071 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg071 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     List<String> _arg131 = data.createStringArrayList();
                     data.enforceNoDataAvail();
-                    boolean _result56 = setPermittedCrossProfileNotificationListeners(_arg071, _arg131);
+                    boolean _result56 =
+                            setPermittedCrossProfileNotificationListeners(_arg071, _arg131);
                     reply.writeNoException();
                     reply.writeBoolean(_result56);
                     return true;
                 case 150:
-                    ComponentName _arg072 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg072 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     List<String> _result57 = getPermittedCrossProfileNotificationListeners(_arg072);
                     reply.writeNoException();
@@ -5232,7 +5796,8 @@ public interface IDevicePolicyManager extends IInterface {
                     int _arg076 = data.readInt();
                     String _arg134 = data.readString();
                     data.enforceNoDataAvail();
-                    List<EnforcingAdmin> _result61 = getEnforcingAdminsForRestriction(_arg076, _arg134);
+                    List<EnforcingAdmin> _result61 =
+                            getEnforcingAdminsForRestriction(_arg076, _arg134);
                     reply.writeNoException();
                     reply.writeTypedList(_result61, 1);
                     return true;
@@ -5243,7 +5808,8 @@ public interface IDevicePolicyManager extends IInterface {
                 case 157:
                     return onTransact$createAndManageUser$(data, reply);
                 case 158:
-                    ComponentName _arg077 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg077 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     UserHandle _arg135 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result62 = removeUser(_arg077, _arg135);
@@ -5251,7 +5817,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeBoolean(_result62);
                     return true;
                 case 159:
-                    ComponentName _arg078 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg078 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     UserHandle _arg136 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result63 = switchUser(_arg078, _arg136);
@@ -5259,7 +5826,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeBoolean(_result63);
                     return true;
                 case 160:
-                    ComponentName _arg079 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg079 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     UserHandle _arg137 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     data.enforceNoDataAvail();
                     int _result64 = startUserInBackground(_arg079, _arg137);
@@ -5267,7 +5835,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeInt(_result64);
                     return true;
                 case 161:
-                    ComponentName _arg080 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg080 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     UserHandle _arg138 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     data.enforceNoDataAvail();
                     int _result65 = stopUser(_arg080, _arg138);
@@ -5275,7 +5844,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeInt(_result65);
                     return true;
                 case 162:
-                    ComponentName _arg081 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg081 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     int _result66 = logoutUser(_arg081);
                     reply.writeNoException();
@@ -5292,7 +5862,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeInt(_result68);
                     return true;
                 case 165:
-                    ComponentName _arg082 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg082 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     List<UserHandle> _result69 = getSecondaryUsers(_arg082);
                     reply.writeNoException();
@@ -5329,7 +5900,8 @@ public interface IDevicePolicyManager extends IInterface {
                 case 173:
                     return onTransact$getAccountTypesWithManagementDisabledAsUser$(data, reply);
                 case 174:
-                    ComponentName _arg086 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg086 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     boolean _arg139 = data.readBoolean();
                     data.enforceNoDataAvail();
                     setSecondaryLockscreenEnabled(_arg086, _arg139);
@@ -5343,20 +5915,23 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeBoolean(_result72);
                     return true;
                 case 176:
-                    List<PreferentialNetworkServiceConfig> _arg088 = data.createTypedArrayList(PreferentialNetworkServiceConfig.CREATOR);
+                    List<PreferentialNetworkServiceConfig> _arg088 =
+                            data.createTypedArrayList(PreferentialNetworkServiceConfig.CREATOR);
                     data.enforceNoDataAvail();
                     setPreferentialNetworkServiceConfigs(_arg088);
                     reply.writeNoException();
                     return true;
                 case 177:
-                    List<PreferentialNetworkServiceConfig> _result73 = getPreferentialNetworkServiceConfigs();
+                    List<PreferentialNetworkServiceConfig> _result73 =
+                            getPreferentialNetworkServiceConfigs();
                     reply.writeNoException();
                     reply.writeTypedList(_result73, 1);
                     return true;
                 case 178:
                     return onTransact$setLockTaskPackages$(data, reply);
                 case 179:
-                    ComponentName _arg089 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg089 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg140 = data.readString();
                     data.enforceNoDataAvail();
                     String[] _result74 = getLockTaskPackages(_arg089, _arg140);
@@ -5373,7 +5948,8 @@ public interface IDevicePolicyManager extends IInterface {
                 case 181:
                     return onTransact$setLockTaskFeatures$(data, reply);
                 case 182:
-                    ComponentName _arg091 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg091 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg141 = data.readString();
                     data.enforceNoDataAvail();
                     int _result76 = getLockTaskFeatures(_arg091, _arg141);
@@ -5389,14 +5965,16 @@ public interface IDevicePolicyManager extends IInterface {
                 case 186:
                     return onTransact$setConfiguredNetworksLockdownState$(data, reply);
                 case 187:
-                    ComponentName _arg092 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg092 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result77 = hasLockdownAdminConfiguredNetworks(_arg092);
                     reply.writeNoException();
                     reply.writeBoolean(_result77);
                     return true;
                 case 188:
-                    ComponentName _arg093 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg093 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     boolean _arg142 = data.readBoolean();
                     data.enforceNoDataAvail();
                     setLocationEnabled(_arg093, _arg142);
@@ -5407,14 +5985,16 @@ public interface IDevicePolicyManager extends IInterface {
                 case 190:
                     return onTransact$setTimeZone$(data, reply);
                 case 191:
-                    ComponentName _arg094 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg094 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     boolean _arg143 = data.readBoolean();
                     data.enforceNoDataAvail();
                     setMasterVolumeMuted(_arg094, _arg143);
                     reply.writeNoException();
                     return true;
                 case 192:
-                    ComponentName _arg095 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg095 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result78 = isMasterVolumeMuted(_arg095);
                     reply.writeNoException();
@@ -5432,14 +6012,16 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeBoolean(_result79);
                     return true;
                 case 196:
-                    ComponentName _arg097 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg097 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     boolean _arg144 = data.readBoolean();
                     data.enforceNoDataAvail();
                     setCrossProfileCallerIdDisabled(_arg097, _arg144);
                     reply.writeNoException();
                     return true;
                 case 197:
-                    ComponentName _arg098 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg098 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result80 = getCrossProfileCallerIdDisabled(_arg098);
                     reply.writeNoException();
@@ -5453,14 +6035,16 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeBoolean(_result81);
                     return true;
                 case 199:
-                    ComponentName _arg0100 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0100 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     boolean _arg145 = data.readBoolean();
                     data.enforceNoDataAvail();
                     setCrossProfileContactsSearchDisabled(_arg0100, _arg145);
                     reply.writeNoException();
                     return true;
                 case 200:
-                    ComponentName _arg0101 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0101 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result82 = getCrossProfileContactsSearchDisabled(_arg0101);
                     reply.writeNoException();
@@ -5476,7 +6060,8 @@ public interface IDevicePolicyManager extends IInterface {
                 case 202:
                     return onTransact$startManagedQuickContact$(data, reply);
                 case 203:
-                    PackagePolicy _arg0103 = (PackagePolicy) data.readTypedObject(PackagePolicy.CREATOR);
+                    PackagePolicy _arg0103 =
+                            (PackagePolicy) data.readTypedObject(PackagePolicy.CREATOR);
                     data.enforceNoDataAvail();
                     setManagedProfileCallerIdAccessPolicy(_arg0103);
                     reply.writeNoException();
@@ -5495,7 +6080,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeBoolean(_result85);
                     return true;
                 case 206:
-                    PackagePolicy _arg0105 = (PackagePolicy) data.readTypedObject(PackagePolicy.CREATOR);
+                    PackagePolicy _arg0105 =
+                            (PackagePolicy) data.readTypedObject(PackagePolicy.CREATOR);
                     data.enforceNoDataAvail();
                     setCredentialManagerPolicy(_arg0105);
                     reply.writeNoException();
@@ -5508,7 +6094,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeTypedObject(_result86, 1);
                     return true;
                 case 208:
-                    PackagePolicy _arg0107 = (PackagePolicy) data.readTypedObject(PackagePolicy.CREATOR);
+                    PackagePolicy _arg0107 =
+                            (PackagePolicy) data.readTypedObject(PackagePolicy.CREATOR);
                     data.enforceNoDataAvail();
                     setManagedProfileContactsAccessPolicy(_arg0107);
                     reply.writeNoException();
@@ -5527,14 +6114,16 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeBoolean(_result88);
                     return true;
                 case 211:
-                    ComponentName _arg0109 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0109 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     boolean _arg148 = data.readBoolean();
                     data.enforceNoDataAvail();
                     setBluetoothContactSharingDisabled(_arg0109, _arg148);
                     reply.writeNoException();
                     return true;
                 case 212:
-                    ComponentName _arg0110 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0110 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result89 = getBluetoothContactSharingDisabled(_arg0110);
                     reply.writeNoException();
@@ -5556,7 +6145,8 @@ public interface IDevicePolicyManager extends IInterface {
                 case 217:
                     return onTransact$removeCrossProfileWidgetProvider$(data, reply);
                 case 218:
-                    ComponentName _arg0112 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0112 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg149 = data.readString();
                     data.enforceNoDataAvail();
                     List<String> _result91 = getCrossProfileWidgetProviders(_arg0112, _arg149);
@@ -5564,7 +6154,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeStringList(_result91);
                     return true;
                 case 219:
-                    ComponentName _arg0113 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0113 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     boolean _arg150 = data.readBoolean();
                     data.enforceNoDataAvail();
                     setAutoTimeRequired(_arg0113, _arg150);
@@ -5578,7 +6169,8 @@ public interface IDevicePolicyManager extends IInterface {
                 case 221:
                     return onTransact$setAutoTimeEnabled$(data, reply);
                 case 222:
-                    ComponentName _arg0114 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0114 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg151 = data.readString();
                     data.enforceNoDataAvail();
                     boolean _result93 = getAutoTimeEnabled(_arg0114, _arg151);
@@ -5588,7 +6180,8 @@ public interface IDevicePolicyManager extends IInterface {
                 case 223:
                     return onTransact$setAutoTimeZoneEnabled$(data, reply);
                 case 224:
-                    ComponentName _arg0115 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0115 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg152 = data.readString();
                     data.enforceNoDataAvail();
                     boolean _result94 = getAutoTimeZoneEnabled(_arg0115, _arg152);
@@ -5596,21 +6189,24 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeBoolean(_result94);
                     return true;
                 case 225:
-                    ComponentName _arg0116 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0116 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     boolean _arg153 = data.readBoolean();
                     data.enforceNoDataAvail();
                     setForceEphemeralUsers(_arg0116, _arg153);
                     reply.writeNoException();
                     return true;
                 case 226:
-                    ComponentName _arg0117 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0117 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result95 = getForceEphemeralUsers(_arg0117);
                     reply.writeNoException();
                     reply.writeBoolean(_result95);
                     return true;
                 case 227:
-                    ComponentName _arg0118 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0118 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg154 = data.readInt();
                     data.enforceNoDataAvail();
                     boolean _result96 = isRemovingAdmin(_arg0118, _arg154);
@@ -5618,7 +6214,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeBoolean(_result96);
                     return true;
                 case 228:
-                    ComponentName _arg0119 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0119 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     Bitmap _arg155 = (Bitmap) data.readTypedObject(Bitmap.CREATOR);
                     data.enforceNoDataAvail();
                     setUserIcon(_arg0119, _arg155);
@@ -5636,7 +6233,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 232:
-                    ComponentName _arg0120 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0120 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     boolean _arg156 = data.readBoolean();
                     data.enforceNoDataAvail();
                     boolean _result98 = setKeyguardDisabled(_arg0120, _arg156);
@@ -5658,13 +6256,15 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeBoolean(_result100);
                     return true;
                 case 236:
-                    SystemUpdateInfo _arg0122 = (SystemUpdateInfo) data.readTypedObject(SystemUpdateInfo.CREATOR);
+                    SystemUpdateInfo _arg0122 =
+                            (SystemUpdateInfo) data.readTypedObject(SystemUpdateInfo.CREATOR);
                     data.enforceNoDataAvail();
                     notifyPendingSystemUpdate(_arg0122);
                     reply.writeNoException();
                     return true;
                 case 237:
-                    ComponentName _arg0123 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0123 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg157 = data.readString();
                     data.enforceNoDataAvail();
                     SystemUpdateInfo _result101 = getPendingSystemUpdate(_arg0123, _arg157);
@@ -5674,7 +6274,8 @@ public interface IDevicePolicyManager extends IInterface {
                 case 238:
                     return onTransact$setPermissionPolicy$(data, reply);
                 case 239:
-                    ComponentName _arg0124 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0124 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     int _result102 = getPermissionPolicy(_arg0124);
                     reply.writeNoException();
@@ -5703,7 +6304,8 @@ public interface IDevicePolicyManager extends IInterface {
                 case 244:
                     return onTransact$setKeepUninstalledPackages$(data, reply);
                 case 245:
-                    ComponentName _arg0127 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0127 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg160 = data.readString();
                     data.enforceNoDataAvail();
                     List<String> _result105 = getKeepUninstalledPackages(_arg0127, _arg160);
@@ -5711,14 +6313,16 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeStringList(_result105);
                     return true;
                 case 246:
-                    ComponentName _arg0128 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0128 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result106 = isManagedProfile(_arg0128);
                     reply.writeNoException();
                     reply.writeBoolean(_result106);
                     return true;
                 case 247:
-                    ComponentName _arg0129 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0129 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg161 = data.readString();
                     data.enforceNoDataAvail();
                     String _result107 = getWifiMacAddress(_arg0129, _arg161);
@@ -5726,7 +6330,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeString(_result107);
                     return true;
                 case 248:
-                    ComponentName _arg0130 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0130 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     reboot(_arg0130);
                     reply.writeNoException();
@@ -5734,7 +6339,8 @@ public interface IDevicePolicyManager extends IInterface {
                 case 249:
                     return onTransact$setShortSupportMessage$(data, reply);
                 case 250:
-                    ComponentName _arg0131 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0131 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg162 = data.readString();
                     data.enforceNoDataAvail();
                     CharSequence _result108 = getShortSupportMessage(_arg0131, _arg162);
@@ -5747,14 +6353,17 @@ public interface IDevicePolicyManager extends IInterface {
                     }
                     return true;
                 case 251:
-                    ComponentName _arg0132 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
-                    CharSequence _arg163 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    ComponentName _arg0132 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    CharSequence _arg163 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     setLongSupportMessage(_arg0132, _arg163);
                     reply.writeNoException();
                     return true;
                 case 252:
-                    ComponentName _arg0133 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0133 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     CharSequence _result109 = getLongSupportMessage(_arg0133);
                     reply.writeNoException();
@@ -5766,7 +6375,8 @@ public interface IDevicePolicyManager extends IInterface {
                     }
                     return true;
                 case 253:
-                    ComponentName _arg0134 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0134 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg164 = data.readInt();
                     data.enforceNoDataAvail();
                     CharSequence _result110 = getShortSupportMessageForUser(_arg0134, _arg164);
@@ -5779,7 +6389,8 @@ public interface IDevicePolicyManager extends IInterface {
                     }
                     return true;
                 case 254:
-                    ComponentName _arg0135 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0135 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg165 = data.readInt();
                     data.enforceNoDataAvail();
                     CharSequence _result111 = getLongSupportMessageForUser(_arg0135, _arg165);
@@ -5792,7 +6403,8 @@ public interface IDevicePolicyManager extends IInterface {
                     }
                     return true;
                 case 255:
-                    ComponentName _arg0136 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0136 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg166 = data.readInt();
                     data.enforceNoDataAvail();
                     setOrganizationColor(_arg0136, _arg166);
@@ -5812,7 +6424,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 258:
-                    ComponentName _arg0139 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0139 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     int _result112 = getOrganizationColor(_arg0139);
                     reply.writeNoException();
@@ -5828,7 +6441,8 @@ public interface IDevicePolicyManager extends IInterface {
                 case 260:
                     return onTransact$setOrganizationName$(data, reply);
                 case 261:
-                    ComponentName _arg0141 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0141 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg168 = data.readString();
                     data.enforceNoDataAvail();
                     CharSequence _result114 = getOrganizationName(_arg0141, _arg168);
@@ -5877,14 +6491,16 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 266:
-                    ComponentName _arg0145 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0145 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     List<String> _arg170 = data.createStringArrayList();
                     data.enforceNoDataAvail();
                     setAffiliationIds(_arg0145, _arg170);
                     reply.writeNoException();
                     return true;
                 case 267:
-                    ComponentName _arg0146 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0146 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     List<String> _result118 = getAffiliationIds(_arg0146);
                     reply.writeNoException();
@@ -5905,7 +6521,8 @@ public interface IDevicePolicyManager extends IInterface {
                 case 270:
                     return onTransact$setSecurityLoggingEnabled$(data, reply);
                 case 271:
-                    ComponentName _arg0148 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0148 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg171 = data.readString();
                     data.enforceNoDataAvail();
                     boolean _result121 = isSecurityLoggingEnabled(_arg0148, _arg171);
@@ -5913,7 +6530,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeBoolean(_result121);
                     return true;
                 case 272:
-                    ComponentName _arg0149 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0149 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg172 = data.readString();
                     data.enforceNoDataAvail();
                     ParceledListSlice _result122 = retrieveSecurityLogs(_arg0149, _arg172);
@@ -5921,7 +6539,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeTypedObject(_result122, 1);
                     return true;
                 case 273:
-                    ComponentName _arg0150 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0150 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg173 = data.readString();
                     data.enforceNoDataAvail();
                     ParceledListSlice _result123 = retrievePreRebootSecurityLogs(_arg0150, _arg173);
@@ -5954,7 +6573,8 @@ public interface IDevicePolicyManager extends IInterface {
                     return true;
                 case 278:
                     String _arg0153 = data.readString();
-                    IAuditLogEventsCallback _arg175 = IAuditLogEventsCallback.Stub.asInterface(data.readStrongBinder());
+                    IAuditLogEventsCallback _arg175 =
+                            IAuditLogEventsCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setAuditLogEventsCallback(_arg0153, _arg175);
                     reply.writeNoException();
@@ -5993,14 +6613,16 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 285:
-                    ComponentName _arg0157 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0157 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     boolean _arg176 = data.readBoolean();
                     data.enforceNoDataAvail();
                     setBackupServiceEnabled(_arg0157, _arg176);
                     reply.writeNoException();
                     return true;
                 case 286:
-                    ComponentName _arg0158 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0158 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result130 = isBackupServiceEnabled(_arg0158);
                     reply.writeNoException();
@@ -6009,7 +6631,8 @@ public interface IDevicePolicyManager extends IInterface {
                 case 287:
                     return onTransact$setNetworkLoggingEnabled$(data, reply);
                 case 288:
-                    ComponentName _arg0159 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0159 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg177 = data.readString();
                     data.enforceNoDataAvail();
                     boolean _result131 = isNetworkLoggingEnabled(_arg0159, _arg177);
@@ -6021,14 +6644,16 @@ public interface IDevicePolicyManager extends IInterface {
                 case 290:
                     return onTransact$bindDeviceAdminServiceAsUser$(data, reply);
                 case 291:
-                    ComponentName _arg0160 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0160 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     List<UserHandle> _result132 = getBindDeviceAdminTargetUsers(_arg0160);
                     reply.writeNoException();
                     reply.writeTypedList(_result132, 1);
                     return true;
                 case 292:
-                    ComponentName _arg0161 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0161 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result133 = isEphemeralUser(_arg0161);
                     reply.writeNoException();
@@ -6052,7 +6677,8 @@ public interface IDevicePolicyManager extends IInterface {
                 case 296:
                     return onTransact$setResetPasswordToken$(data, reply);
                 case 297:
-                    ComponentName _arg0162 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0162 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg178 = data.readString();
                     data.enforceNoDataAvail();
                     boolean _result137 = clearResetPasswordToken(_arg0162, _arg178);
@@ -6060,7 +6686,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeBoolean(_result137);
                     return true;
                 case 298:
-                    ComponentName _arg0163 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0163 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg179 = data.readString();
                     data.enforceNoDataAvail();
                     boolean _result138 = isResetPasswordTokenActive(_arg0163, _arg179);
@@ -6084,7 +6711,8 @@ public interface IDevicePolicyManager extends IInterface {
                 case 302:
                     return onTransact$clearApplicationUserData$(data, reply);
                 case 303:
-                    ComponentName _arg0165 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0165 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     boolean _arg180 = data.readBoolean();
                     data.enforceNoDataAvail();
                     setLogoutEnabled(_arg0165, _arg180);
@@ -6105,21 +6733,26 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeTypedObject(_result142, 1);
                     return true;
                 case 308:
-                    ComponentName _arg0166 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
-                    CharSequence _arg181 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    ComponentName _arg0166 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    CharSequence _arg181 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     setStartUserSessionMessage(_arg0166, _arg181);
                     reply.writeNoException();
                     return true;
                 case 309:
-                    ComponentName _arg0167 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
-                    CharSequence _arg182 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    ComponentName _arg0167 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    CharSequence _arg182 =
+                            (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     data.enforceNoDataAvail();
                     setEndUserSessionMessage(_arg0167, _arg182);
                     reply.writeNoException();
                     return true;
                 case 310:
-                    ComponentName _arg0168 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0168 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     CharSequence _result143 = getStartUserSessionMessage(_arg0168);
                     reply.writeNoException();
@@ -6131,7 +6764,8 @@ public interface IDevicePolicyManager extends IInterface {
                     }
                     return true;
                 case 311:
-                    ComponentName _arg0169 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0169 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     CharSequence _result144 = getEndUserSessionMessage(_arg0169);
                     reply.writeNoException();
@@ -6143,7 +6777,8 @@ public interface IDevicePolicyManager extends IInterface {
                     }
                     return true;
                 case 312:
-                    ComponentName _arg0170 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0170 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     List<String> _arg183 = data.createStringArrayList();
                     data.enforceNoDataAvail();
                     List<String> _result145 = setMeteredDataDisabledPackages(_arg0170, _arg183);
@@ -6151,14 +6786,16 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeStringList(_result145);
                     return true;
                 case 313:
-                    ComponentName _arg0171 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0171 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     List<String> _result146 = getMeteredDataDisabledPackages(_arg0171);
                     reply.writeNoException();
                     reply.writeStringList(_result146);
                     return true;
                 case 314:
-                    ComponentName _arg0172 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0172 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     ApnSetting _arg184 = (ApnSetting) data.readTypedObject(ApnSetting.CREATOR);
                     data.enforceNoDataAvail();
                     int _result147 = addOverrideApn(_arg0172, _arg184);
@@ -6168,7 +6805,8 @@ public interface IDevicePolicyManager extends IInterface {
                 case 315:
                     return onTransact$updateOverrideApn$(data, reply);
                 case 316:
-                    ComponentName _arg0173 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0173 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg185 = data.readInt();
                     data.enforceNoDataAvail();
                     boolean _result148 = removeOverrideApn(_arg0173, _arg185);
@@ -6176,21 +6814,24 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeBoolean(_result148);
                     return true;
                 case 317:
-                    ComponentName _arg0174 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0174 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     List<ApnSetting> _result149 = getOverrideApns(_arg0174);
                     reply.writeNoException();
                     reply.writeTypedList(_result149, 1);
                     return true;
                 case 318:
-                    ComponentName _arg0175 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0175 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     boolean _arg186 = data.readBoolean();
                     data.enforceNoDataAvail();
                     setOverrideApnsEnabled(_arg0175, _arg186);
                     reply.writeNoException();
                     return true;
                 case 319:
-                    ComponentName _arg0176 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0176 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result150 = isOverrideApnEnabled(_arg0176);
                     reply.writeNoException();
@@ -6231,7 +6872,8 @@ public interface IDevicePolicyManager extends IInterface {
                 case 336:
                     return onTransact$resetPasswordWithTokenMDM$(data, reply);
                 case 337:
-                    ComponentName _arg0177 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0177 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg187 = data.readInt();
                     data.enforceNoDataAvail();
                     boolean _result151 = isResetPasswordTokenActiveMDM(_arg0177, _arg187);
@@ -6239,7 +6881,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeBoolean(_result151);
                     return true;
                 case 338:
-                    ComponentName _arg0178 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0178 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg188 = data.readInt();
                     data.enforceNoDataAvail();
                     boolean _result152 = clearResetPasswordTokenMDM(_arg0178, _arg188);
@@ -6271,14 +6914,16 @@ public interface IDevicePolicyManager extends IInterface {
                 case 345:
                     return onTransact$setGlobalPrivateDns$(data, reply);
                 case 346:
-                    ComponentName _arg0181 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0181 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     int _result155 = getGlobalPrivateDnsMode(_arg0181);
                     reply.writeNoException();
                     reply.writeInt(_result155);
                     return true;
                 case 347:
-                    ComponentName _arg0182 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0182 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     String _result156 = getGlobalPrivateDnsHost(_arg0182);
                     reply.writeNoException();
@@ -6289,14 +6934,16 @@ public interface IDevicePolicyManager extends IInterface {
                 case 349:
                     return onTransact$installUpdateFromFile$(data, reply);
                 case 350:
-                    ComponentName _arg0183 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0183 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     List<String> _arg189 = data.createStringArrayList();
                     data.enforceNoDataAvail();
                     setCrossProfileCalendarPackages(_arg0183, _arg189);
                     reply.writeNoException();
                     return true;
                 case 351:
-                    ComponentName _arg0184 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0184 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     List<String> _result157 = getCrossProfileCalendarPackages(_arg0184);
                     reply.writeNoException();
@@ -6318,14 +6965,16 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeStringList(_result159);
                     return true;
                 case 354:
-                    ComponentName _arg0187 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0187 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     List<String> _arg191 = data.createStringArrayList();
                     data.enforceNoDataAvail();
                     setCrossProfilePackages(_arg0187, _arg191);
                     reply.writeNoException();
                     return true;
                 case 355:
-                    ComponentName _arg0188 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0188 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     List<String> _result160 = getCrossProfilePackages(_arg0188);
                     reply.writeNoException();
@@ -6378,7 +7027,8 @@ public interface IDevicePolicyManager extends IInterface {
                 case 365:
                     return onTransact$setUserControlDisabledPackages$(data, reply);
                 case 366:
-                    ComponentName _arg0192 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0192 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     String _arg194 = data.readString();
                     data.enforceNoDataAvail();
                     List<String> _result167 = getUserControlDisabledPackages(_arg0192, _arg194);
@@ -6388,35 +7038,40 @@ public interface IDevicePolicyManager extends IInterface {
                 case 367:
                     return onTransact$setCommonCriteriaModeEnabled$(data, reply);
                 case 368:
-                    ComponentName _arg0193 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0193 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result168 = isCommonCriteriaModeEnabled(_arg0193);
                     reply.writeNoException();
                     reply.writeBoolean(_result168);
                     return true;
                 case 369:
-                    ComponentName _arg0194 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0194 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     int _result169 = getPersonalAppsSuspendedReasons(_arg0194);
                     reply.writeNoException();
                     reply.writeInt(_result169);
                     return true;
                 case 370:
-                    ComponentName _arg0195 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0195 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     boolean _arg195 = data.readBoolean();
                     data.enforceNoDataAvail();
                     setPersonalAppsSuspended(_arg0195, _arg195);
                     reply.writeNoException();
                     return true;
                 case 371:
-                    ComponentName _arg0196 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0196 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     long _result170 = getManagedProfileMaximumTimeOff(_arg0196);
                     reply.writeNoException();
                     reply.writeLong(_result170);
                     return true;
                 case 372:
-                    ComponentName _arg0197 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0197 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     long _arg196 = data.readLong();
                     data.enforceNoDataAvail();
                     setManagedProfileMaximumTimeOff(_arg0197, _arg196);
@@ -6462,7 +7117,9 @@ public interface IDevicePolicyManager extends IInterface {
                 case 379:
                     return onTransact$setOrganizationIdForUser$(data, reply);
                 case 380:
-                    ManagedProfileProvisioningParams _arg0202 = (ManagedProfileProvisioningParams) data.readTypedObject(ManagedProfileProvisioningParams.CREATOR);
+                    ManagedProfileProvisioningParams _arg0202 =
+                            (ManagedProfileProvisioningParams)
+                                    data.readTypedObject(ManagedProfileProvisioningParams.CREATOR);
                     String _arg198 = data.readString();
                     data.enforceNoDataAvail();
                     UserHandle _result175 = createAndProvisionManagedProfile(_arg0202, _arg198);
@@ -6470,7 +7127,10 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeTypedObject(_result175, 1);
                     return true;
                 case 381:
-                    FullyManagedDeviceProvisioningParams _arg0203 = (FullyManagedDeviceProvisioningParams) data.readTypedObject(FullyManagedDeviceProvisioningParams.CREATOR);
+                    FullyManagedDeviceProvisioningParams _arg0203 =
+                            (FullyManagedDeviceProvisioningParams)
+                                    data.readTypedObject(
+                                            FullyManagedDeviceProvisioningParams.CREATOR);
                     String _arg199 = data.readString();
                     data.enforceNoDataAvail();
                     provisionFullyManagedDevice(_arg0203, _arg199);
@@ -6484,14 +7144,16 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 383:
-                    ComponentName _arg0205 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0205 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     int _arg1101 = data.readInt();
                     data.enforceNoDataAvail();
                     setDeviceOwnerType(_arg0205, _arg1101);
                     reply.writeNoException();
                     return true;
                 case 384:
-                    ComponentName _arg0206 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _arg0206 =
+                            (ComponentName) data.readTypedObject(ComponentName.CREATOR);
                     data.enforceNoDataAvail();
                     int _result176 = getDeviceOwnerType(_arg0206);
                     reply.writeNoException();
@@ -6561,7 +7223,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeTypedList(_result183, 1);
                     return true;
                 case 396:
-                    List<DevicePolicyDrawableResource> _arg0213 = data.createTypedArrayList(DevicePolicyDrawableResource.CREATOR);
+                    List<DevicePolicyDrawableResource> _arg0213 =
+                            data.createTypedArrayList(DevicePolicyDrawableResource.CREATOR);
                     data.enforceNoDataAvail();
                     setDrawables(_arg0213);
                     reply.writeNoException();
@@ -6586,7 +7249,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 401:
-                    List<DevicePolicyStringResource> _arg0216 = data.createTypedArrayList(DevicePolicyStringResource.CREATOR);
+                    List<DevicePolicyStringResource> _arg0216 =
+                            data.createTypedArrayList(DevicePolicyStringResource.CREATOR);
                     data.enforceNoDataAvail();
                     setStrings(_arg0216);
                     reply.writeNoException();
@@ -6609,7 +7273,8 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 405:
-                    boolean _result186 = shouldAllowBypassingDevicePolicyManagementRoleQualification();
+                    boolean _result186 =
+                            shouldAllowBypassingDevicePolicyManagementRoleQualification();
                     reply.writeNoException();
                     reply.writeBoolean(_result186);
                     return true;
@@ -6708,7 +7373,9 @@ public interface IDevicePolicyManager extends IInterface {
                     reply.writeInt(_result190);
                     return true;
                 case 443:
-                    ManagedSubscriptionsPolicy _arg0223 = (ManagedSubscriptionsPolicy) data.readTypedObject(ManagedSubscriptionsPolicy.CREATOR);
+                    ManagedSubscriptionsPolicy _arg0223 =
+                            (ManagedSubscriptionsPolicy)
+                                    data.readTypedObject(ManagedSubscriptionsPolicy.CREATOR);
                     data.enforceNoDataAvail();
                     setManagedSubscriptionsPolicy(_arg0223);
                     reply.writeNoException();
@@ -6807,7 +7474,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setPasswordQuality(ComponentName who, int quality, boolean parent) throws RemoteException {
+            public void setPasswordQuality(ComponentName who, int quality, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6824,7 +7492,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int getPasswordQuality(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+            public int getPasswordQuality(ComponentName who, int userHandle, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6843,7 +7512,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setPasswordMinimumLength(ComponentName who, int length, boolean parent) throws RemoteException {
+            public void setPasswordMinimumLength(ComponentName who, int length, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6860,7 +7530,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int getPasswordMinimumLength(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+            public int getPasswordMinimumLength(ComponentName who, int userHandle, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6879,7 +7550,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setPasswordMinimumUpperCase(ComponentName who, int length, boolean parent) throws RemoteException {
+            public void setPasswordMinimumUpperCase(ComponentName who, int length, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6896,7 +7568,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int getPasswordMinimumUpperCase(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+            public int getPasswordMinimumUpperCase(
+                    ComponentName who, int userHandle, boolean parent) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6915,7 +7588,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setPasswordMinimumLowerCase(ComponentName who, int length, boolean parent) throws RemoteException {
+            public void setPasswordMinimumLowerCase(ComponentName who, int length, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6932,7 +7606,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int getPasswordMinimumLowerCase(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+            public int getPasswordMinimumLowerCase(
+                    ComponentName who, int userHandle, boolean parent) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6951,7 +7626,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setPasswordMinimumLetters(ComponentName who, int length, boolean parent) throws RemoteException {
+            public void setPasswordMinimumLetters(ComponentName who, int length, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6968,7 +7644,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int getPasswordMinimumLetters(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+            public int getPasswordMinimumLetters(ComponentName who, int userHandle, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -6987,7 +7664,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setPasswordMinimumNumeric(ComponentName who, int length, boolean parent) throws RemoteException {
+            public void setPasswordMinimumNumeric(ComponentName who, int length, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7004,7 +7682,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int getPasswordMinimumNumeric(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+            public int getPasswordMinimumNumeric(ComponentName who, int userHandle, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7023,7 +7702,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setPasswordMinimumSymbols(ComponentName who, int length, boolean parent) throws RemoteException {
+            public void setPasswordMinimumSymbols(ComponentName who, int length, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7040,7 +7720,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int getPasswordMinimumSymbols(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+            public int getPasswordMinimumSymbols(ComponentName who, int userHandle, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7059,7 +7740,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setPasswordMinimumNonLetter(ComponentName who, int length, boolean parent) throws RemoteException {
+            public void setPasswordMinimumNonLetter(ComponentName who, int length, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7076,7 +7758,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int getPasswordMinimumNonLetter(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+            public int getPasswordMinimumNonLetter(
+                    ComponentName who, int userHandle, boolean parent) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7095,7 +7778,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public PasswordMetrics getPasswordMinimumMetrics(int userHandle, boolean deviceWideOnly) throws RemoteException {
+            public PasswordMetrics getPasswordMinimumMetrics(int userHandle, boolean deviceWideOnly)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7104,7 +7788,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeBoolean(deviceWideOnly);
                     this.mRemote.transact(17, _data, _reply, 0);
                     _reply.readException();
-                    PasswordMetrics _result = (PasswordMetrics) _reply.readTypedObject(PasswordMetrics.CREATOR);
+                    PasswordMetrics _result =
+                            (PasswordMetrics) _reply.readTypedObject(PasswordMetrics.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7113,7 +7798,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setPasswordHistoryLength(ComponentName who, int length, boolean parent) throws RemoteException {
+            public void setPasswordHistoryLength(ComponentName who, int length, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7130,7 +7816,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int getPasswordHistoryLength(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+            public int getPasswordHistoryLength(ComponentName who, int userHandle, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7149,7 +7836,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setPasswordExpirationTimeout(ComponentName who, String callerPackageName, long expiration, boolean parent) throws RemoteException {
+            public void setPasswordExpirationTimeout(
+                    ComponentName who, String callerPackageName, long expiration, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7167,7 +7856,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public long getPasswordExpirationTimeout(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+            public long getPasswordExpirationTimeout(
+                    ComponentName who, int userHandle, boolean parent) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7186,7 +7876,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public long getPasswordExpiration(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+            public long getPasswordExpiration(ComponentName who, int userHandle, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7205,7 +7896,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean isActivePasswordSufficient(String callerPackageName, int userHandle, boolean parent) throws RemoteException {
+            public boolean isActivePasswordSufficient(
+                    String callerPackageName, int userHandle, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7240,7 +7933,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean isPasswordSufficientAfterProfileUnification(int userHandle, int profileUser) throws RemoteException {
+            public boolean isPasswordSufficientAfterProfileUnification(
+                    int userHandle, int profileUser) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7275,7 +7969,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setRequiredPasswordComplexity(String callerPackageName, int passwordComplexity, boolean parent) throws RemoteException {
+            public void setRequiredPasswordComplexity(
+                    String callerPackageName, int passwordComplexity, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7292,7 +7988,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int getRequiredPasswordComplexity(String callerPackageName, boolean parent) throws RemoteException {
+            public int getRequiredPasswordComplexity(String callerPackageName, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7310,7 +8007,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int getAggregatedPasswordComplexityForUser(int userId, boolean deviceWideOnly) throws RemoteException {
+            public int getAggregatedPasswordComplexityForUser(int userId, boolean deviceWideOnly)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7345,7 +8043,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int getCurrentFailedPasswordAttempts(String callerPackageName, int userHandle, boolean parent) throws RemoteException {
+            public int getCurrentFailedPasswordAttempts(
+                    String callerPackageName, int userHandle, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7381,7 +8081,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int getProfileWithMinimumFailedPasswordsForWipe(int userHandle, boolean parent) throws RemoteException {
+            public int getProfileWithMinimumFailedPasswordsForWipe(int userHandle, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7399,7 +8100,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setMaximumFailedPasswordsForWipe(ComponentName admin, String callerPackageName, int num, boolean parent) throws RemoteException {
+            public void setMaximumFailedPasswordsForWipe(
+                    ComponentName admin, String callerPackageName, int num, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7417,7 +8120,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int getMaximumFailedPasswordsForWipe(ComponentName admin, int userHandle, boolean parent) throws RemoteException {
+            public int getMaximumFailedPasswordsForWipe(
+                    ComponentName admin, int userHandle, boolean parent) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7454,7 +8158,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setMaximumTimeToLock(ComponentName who, String callerPackageName, long timeMs, boolean parent) throws RemoteException {
+            public void setMaximumTimeToLock(
+                    ComponentName who, String callerPackageName, long timeMs, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7472,7 +8178,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public long getMaximumTimeToLock(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+            public long getMaximumTimeToLock(ComponentName who, int userHandle, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7491,7 +8198,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setRequiredStrongAuthTimeout(ComponentName who, String callerPackageName, long timeMs, boolean parent) throws RemoteException {
+            public void setRequiredStrongAuthTimeout(
+                    ComponentName who, String callerPackageName, long timeMs, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7509,7 +8218,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public long getRequiredStrongAuthTimeout(ComponentName who, int userId, boolean parent) throws RemoteException {
+            public long getRequiredStrongAuthTimeout(ComponentName who, int userId, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7528,7 +8238,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void lockNow(int flags, String callerPackageName, boolean parent) throws RemoteException {
+            public void lockNow(int flags, String callerPackageName, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7545,7 +8256,13 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void wipeDataWithReason(String callerPackageName, int flags, String wipeReasonForUser, boolean parent, boolean factoryReset) throws RemoteException {
+            public void wipeDataWithReason(
+                    String callerPackageName,
+                    int flags,
+                    String wipeReasonForUser,
+                    boolean parent,
+                    boolean factoryReset)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7564,7 +8281,11 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setFactoryResetProtectionPolicy(ComponentName who, String callerPackageName, FactoryResetProtectionPolicy policy) throws RemoteException {
+            public void setFactoryResetProtectionPolicy(
+                    ComponentName who,
+                    String callerPackageName,
+                    FactoryResetProtectionPolicy policy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7581,7 +8302,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public FactoryResetProtectionPolicy getFactoryResetProtectionPolicy(ComponentName who) throws RemoteException {
+            public FactoryResetProtectionPolicy getFactoryResetProtectionPolicy(ComponentName who)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7589,7 +8311,9 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeTypedObject(who, 0);
                     this.mRemote.transact(44, _data, _reply, 0);
                     _reply.readException();
-                    FactoryResetProtectionPolicy _result = (FactoryResetProtectionPolicy) _reply.readTypedObject(FactoryResetProtectionPolicy.CREATOR);
+                    FactoryResetProtectionPolicy _result =
+                            (FactoryResetProtectionPolicy)
+                                    _reply.readTypedObject(FactoryResetProtectionPolicy.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7614,7 +8338,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void sendLostModeLocationUpdate(AndroidFuture<Boolean> future) throws RemoteException {
+            public void sendLostModeLocationUpdate(AndroidFuture<Boolean> future)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7629,7 +8354,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public ComponentName setGlobalProxy(ComponentName admin, String proxySpec, String exclusionList) throws RemoteException {
+            public ComponentName setGlobalProxy(
+                    ComponentName admin, String proxySpec, String exclusionList)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7639,7 +8366,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeString(exclusionList);
                     this.mRemote.transact(47, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName _result = (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _result =
+                            (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7656,7 +8384,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeInt(userHandle);
                     this.mRemote.transact(48, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName _result = (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _result =
+                            (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7665,7 +8394,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setRecommendedGlobalProxy(ComponentName admin, ProxyInfo proxyInfo) throws RemoteException {
+            public void setRecommendedGlobalProxy(ComponentName admin, ProxyInfo proxyInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7681,7 +8411,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int setStorageEncryption(ComponentName who, boolean encrypt) throws RemoteException {
+            public int setStorageEncryption(ComponentName who, boolean encrypt)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7699,7 +8430,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean getStorageEncryption(ComponentName who, int userHandle) throws RemoteException {
+            public boolean getStorageEncryption(ComponentName who, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7717,7 +8449,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int getStorageEncryptionStatus(String callerPackage, int userHandle) throws RemoteException {
+            public int getStorageEncryptionStatus(String callerPackage, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7752,7 +8485,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setCameraDisabled(ComponentName who, String callerPackageName, boolean disabled, boolean parent) throws RemoteException {
+            public void setCameraDisabled(
+                    ComponentName who, String callerPackageName, boolean disabled, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7770,7 +8505,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean getCameraDisabled(ComponentName who, String callerPackageName, int userHandle, boolean parent) throws RemoteException {
+            public boolean getCameraDisabled(
+                    ComponentName who, String callerPackageName, int userHandle, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7790,7 +8527,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setScreenCaptureDisabled(ComponentName who, String callerPackageName, boolean disabled, boolean parent) throws RemoteException {
+            public void setScreenCaptureDisabled(
+                    ComponentName who, String callerPackageName, boolean disabled, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7808,7 +8547,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean getScreenCaptureDisabled(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+            public boolean getScreenCaptureDisabled(
+                    ComponentName who, int userHandle, boolean parent) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7891,7 +8631,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setKeyguardDisabledFeatures(ComponentName who, String callerPackageName, int which, boolean parent) throws RemoteException {
+            public void setKeyguardDisabledFeatures(
+                    ComponentName who, String callerPackageName, int which, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7909,7 +8651,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int getKeyguardDisabledFeatures(ComponentName who, int userHandle, boolean parent) throws RemoteException {
+            public int getKeyguardDisabledFeatures(
+                    ComponentName who, int userHandle, boolean parent) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7928,7 +8671,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setActiveAdmin(ComponentName policyReceiver, boolean refreshing, int userHandle) throws RemoteException {
+            public void setActiveAdmin(
+                    ComponentName policyReceiver, boolean refreshing, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7945,7 +8690,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean isAdminActive(ComponentName policyReceiver, int userHandle) throws RemoteException {
+            public boolean isAdminActive(ComponentName policyReceiver, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7971,7 +8717,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeInt(userHandle);
                     this.mRemote.transact(66, _data, _reply, 0);
                     _reply.readException();
-                    List<ComponentName> _result = _reply.createTypedArrayList(ComponentName.CREATOR);
+                    List<ComponentName> _result =
+                            _reply.createTypedArrayList(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -7980,7 +8727,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean packageHasActiveAdmins(String packageName, int userHandle) throws RemoteException {
+            public boolean packageHasActiveAdmins(String packageName, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -7998,7 +8746,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void getRemoveWarning(ComponentName policyReceiver, RemoteCallback result, int userHandle) throws RemoteException {
+            public void getRemoveWarning(
+                    ComponentName policyReceiver, RemoteCallback result, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8015,7 +8765,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void removeActiveAdmin(ComponentName policyReceiver, int userHandle) throws RemoteException {
+            public void removeActiveAdmin(ComponentName policyReceiver, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8031,7 +8782,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void forceRemoveActiveAdmin(ComponentName policyReceiver, int userHandle) throws RemoteException {
+            public void forceRemoveActiveAdmin(ComponentName policyReceiver, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8047,7 +8799,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean hasGrantedPolicy(ComponentName policyReceiver, int usesPolicy, int userHandle) throws RemoteException {
+            public boolean hasGrantedPolicy(
+                    ComponentName policyReceiver, int usesPolicy, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8066,7 +8820,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void reportPasswordChanged(PasswordMetrics metrics, int userId) throws RemoteException {
+            public void reportPasswordChanged(PasswordMetrics metrics, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8082,7 +8837,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void reportFailedPasswordAttempt(int userHandle, boolean parent) throws RemoteException {
+            public void reportFailedPasswordAttempt(int userHandle, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8173,7 +8929,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean setDeviceOwner(ComponentName who, int userId, boolean setProfileOwnerOnCurrentUserIfNecessary) throws RemoteException {
+            public boolean setDeviceOwner(
+                    ComponentName who, int userId, boolean setProfileOwnerOnCurrentUserIfNecessary)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8192,7 +8950,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public ComponentName getDeviceOwnerComponent(boolean callingUserOnly) throws RemoteException {
+            public ComponentName getDeviceOwnerComponent(boolean callingUserOnly)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8200,7 +8959,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeBoolean(callingUserOnly);
                     this.mRemote.transact(80, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName _result = (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _result =
+                            (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -8217,7 +8977,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(81, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName _result = (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _result =
+                            (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -8289,7 +9050,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean setProfileOwner(ComponentName who, int userHandle) throws RemoteException {
+            public boolean setProfileOwner(ComponentName who, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8315,7 +9077,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeInt(userHandle);
                     this.mRemote.transact(87, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName _result = (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _result =
+                            (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -8324,7 +9087,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public ComponentName getProfileOwnerOrDeviceOwnerSupervisionComponent(UserHandle userHandle) throws RemoteException {
+            public ComponentName getProfileOwnerOrDeviceOwnerSupervisionComponent(
+                    UserHandle userHandle) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8332,7 +9096,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeTypedObject(userHandle, 0);
                     this.mRemote.transact(88, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName _result = (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _result =
+                            (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -8390,7 +9155,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setProfileName(ComponentName who, String profileName) throws RemoteException {
+            public void setProfileName(ComponentName who, String profileName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8453,7 +9219,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean checkDeviceIdentifierAccess(String packageName, int pid, int uid) throws RemoteException {
+            public boolean checkDeviceIdentifierAccess(String packageName, int pid, int uid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8472,7 +9239,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setDeviceOwnerLockScreenInfo(ComponentName who, CharSequence deviceOwnerInfo) throws RemoteException {
+            public void setDeviceOwnerLockScreenInfo(
+                    ComponentName who, CharSequence deviceOwnerInfo) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8500,7 +9268,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(98, _data, _reply, 0);
                     _reply.readException();
-                    CharSequence _result = (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _result =
+                            (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -8509,7 +9278,12 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public String[] setPackagesSuspended(ComponentName admin, String callerPackage, String[] packageNames, boolean suspended) throws RemoteException {
+            public String[] setPackagesSuspended(
+                    ComponentName admin,
+                    String callerPackage,
+                    String[] packageNames,
+                    boolean suspended)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8529,7 +9303,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean isPackageSuspended(ComponentName admin, String callerPackage, String packageName) throws RemoteException {
+            public boolean isPackageSuspended(
+                    ComponentName admin, String callerPackage, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8564,7 +9340,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean installCaCert(ComponentName admin, String callerPackage, byte[] certBuffer) throws RemoteException {
+            public boolean installCaCert(
+                    ComponentName admin, String callerPackage, byte[] certBuffer)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8583,7 +9361,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void uninstallCaCerts(ComponentName admin, String callerPackage, String[] aliases) throws RemoteException {
+            public void uninstallCaCerts(
+                    ComponentName admin, String callerPackage, String[] aliases)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8600,7 +9380,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void enforceCanManageCaCerts(ComponentName admin, String callerPackage) throws RemoteException {
+            public void enforceCanManageCaCerts(ComponentName admin, String callerPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8616,7 +9397,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean approveCaCert(String alias, int userHandle, boolean approval) throws RemoteException {
+            public boolean approveCaCert(String alias, int userHandle, boolean approval)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8653,7 +9435,16 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean installKeyPair(ComponentName who, String callerPackage, byte[] privKeyBuffer, byte[] certBuffer, byte[] certChainBuffer, String alias, boolean requestAccess, boolean isUserSelectable) throws RemoteException {
+            public boolean installKeyPair(
+                    ComponentName who,
+                    String callerPackage,
+                    byte[] privKeyBuffer,
+                    byte[] certBuffer,
+                    byte[] certChainBuffer,
+                    String alias,
+                    boolean requestAccess,
+                    boolean isUserSelectable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8677,7 +9468,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean removeKeyPair(ComponentName who, String callerPackage, String alias) throws RemoteException {
+            public boolean removeKeyPair(ComponentName who, String callerPackage, String alias)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8714,7 +9506,14 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean generateKeyPair(ComponentName who, String callerPackage, String algorithm, ParcelableKeyGenParameterSpec keySpec, int idAttestationFlags, KeymasterCertificateChain attestationChain) throws RemoteException {
+            public boolean generateKeyPair(
+                    ComponentName who,
+                    String callerPackage,
+                    String algorithm,
+                    ParcelableKeyGenParameterSpec keySpec,
+                    int idAttestationFlags,
+                    KeymasterCertificateChain attestationChain)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8738,7 +9537,14 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean setKeyPairCertificate(ComponentName who, String callerPackage, String alias, byte[] certBuffer, byte[] certChainBuffer, boolean isUserSelectable) throws RemoteException {
+            public boolean setKeyPairCertificate(
+                    ComponentName who,
+                    String callerPackage,
+                    String alias,
+                    byte[] certBuffer,
+                    byte[] certChainBuffer,
+                    boolean isUserSelectable)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8760,7 +9566,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void choosePrivateKeyAlias(int uid, Uri uri, String alias, IBinder aliasCallback) throws RemoteException {
+            public void choosePrivateKeyAlias(int uid, Uri uri, String alias, IBinder aliasCallback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8778,7 +9585,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setDelegatedScopes(ComponentName who, String delegatePackage, List<String> scopes) throws RemoteException {
+            public void setDelegatedScopes(
+                    ComponentName who, String delegatePackage, List<String> scopes)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8795,7 +9604,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public List<String> getDelegatedScopes(ComponentName who, String delegatePackage) throws RemoteException {
+            public List<String> getDelegatedScopes(ComponentName who, String delegatePackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8813,7 +9623,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public List<String> getDelegatePackages(ComponentName who, String scope) throws RemoteException {
+            public List<String> getDelegatePackages(ComponentName who, String scope)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8831,7 +9642,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setCertInstallerPackage(ComponentName who, String installerPackage) throws RemoteException {
+            public void setCertInstallerPackage(ComponentName who, String installerPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8864,7 +9676,12 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean setAlwaysOnVpnPackage(ComponentName who, String vpnPackage, boolean lockdown, List<String> lockdownAllowlist) throws RemoteException {
+            public boolean setAlwaysOnVpnPackage(
+                    ComponentName who,
+                    String vpnPackage,
+                    boolean lockdown,
+                    List<String> lockdownAllowlist)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8935,7 +9752,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean isAlwaysOnVpnLockdownEnabledForUser(int userHandle) throws RemoteException {
+            public boolean isAlwaysOnVpnLockdownEnabledForUser(int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8952,7 +9770,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public List<String> getAlwaysOnVpnLockdownAllowlist(ComponentName who) throws RemoteException {
+            public List<String> getAlwaysOnVpnLockdownAllowlist(ComponentName who)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8969,7 +9788,12 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void addPersistentPreferredActivity(ComponentName admin, String callerPackageName, IntentFilter filter, ComponentName activity) throws RemoteException {
+            public void addPersistentPreferredActivity(
+                    ComponentName admin,
+                    String callerPackageName,
+                    IntentFilter filter,
+                    ComponentName activity)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -8987,7 +9811,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void clearPackagePersistentPreferredActivities(ComponentName admin, String callerPackageName, String packageName) throws RemoteException {
+            public void clearPackagePersistentPreferredActivities(
+                    ComponentName admin, String callerPackageName, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9004,7 +9830,12 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setDefaultSmsApplication(ComponentName admin, String callerPackageName, String packageName, boolean parent) throws RemoteException {
+            public void setDefaultSmsApplication(
+                    ComponentName admin,
+                    String callerPackageName,
+                    String packageName,
+                    boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9037,7 +9868,13 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setApplicationRestrictions(ComponentName who, String callerPackage, String packageName, Bundle settings, boolean parent) throws RemoteException {
+            public void setApplicationRestrictions(
+                    ComponentName who,
+                    String callerPackage,
+                    String packageName,
+                    Bundle settings,
+                    boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9056,7 +9893,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public Bundle getApplicationRestrictions(ComponentName who, String callerPackage, String packageName, boolean parent) throws RemoteException {
+            public Bundle getApplicationRestrictions(
+                    ComponentName who, String callerPackage, String packageName, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9076,7 +9915,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean setApplicationRestrictionsManagingPackage(ComponentName admin, String packageName) throws RemoteException {
+            public boolean setApplicationRestrictionsManagingPackage(
+                    ComponentName admin, String packageName) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9094,7 +9934,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public String getApplicationRestrictionsManagingPackage(ComponentName admin) throws RemoteException {
+            public String getApplicationRestrictionsManagingPackage(ComponentName admin)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9111,7 +9952,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean isCallerApplicationRestrictionsManagingPackage(String callerPackage) throws RemoteException {
+            public boolean isCallerApplicationRestrictionsManagingPackage(String callerPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9128,7 +9970,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setRestrictionsProvider(ComponentName who, ComponentName provider) throws RemoteException {
+            public void setRestrictionsProvider(ComponentName who, ComponentName provider)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9152,7 +9995,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeInt(userHandle);
                     this.mRemote.transact(134, _data, _reply, 0);
                     _reply.readException();
-                    ComponentName _result = (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
+                    ComponentName _result =
+                            (ComponentName) _reply.readTypedObject(ComponentName.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -9161,7 +10005,13 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setUserRestriction(ComponentName who, String callerPackage, String key, boolean enable, boolean parent) throws RemoteException {
+            public void setUserRestriction(
+                    ComponentName who,
+                    String callerPackage,
+                    String key,
+                    boolean enable,
+                    boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9180,7 +10030,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setUserRestrictionGlobally(String callerPackage, String key) throws RemoteException {
+            public void setUserRestrictionGlobally(String callerPackage, String key)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9196,7 +10047,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public Bundle getUserRestrictions(ComponentName who, String callerPackage, boolean parent) throws RemoteException {
+            public Bundle getUserRestrictions(
+                    ComponentName who, String callerPackage, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9232,7 +10085,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void addCrossProfileIntentFilter(ComponentName admin, String callerPackageName, IntentFilter filter, int flags) throws RemoteException {
+            public void addCrossProfileIntentFilter(
+                    ComponentName admin, String callerPackageName, IntentFilter filter, int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9250,7 +10105,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void clearCrossProfileIntentFilters(ComponentName admin, String callerPackageName) throws RemoteException {
+            public void clearCrossProfileIntentFilters(
+                    ComponentName admin, String callerPackageName) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9266,7 +10122,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean setPermittedAccessibilityServices(ComponentName admin, List<String> packageList) throws RemoteException {
+            public boolean setPermittedAccessibilityServices(
+                    ComponentName admin, List<String> packageList) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9284,7 +10141,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public List<String> getPermittedAccessibilityServices(ComponentName admin) throws RemoteException {
+            public List<String> getPermittedAccessibilityServices(ComponentName admin)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9301,7 +10159,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public List<String> getPermittedAccessibilityServicesForUser(int userId) throws RemoteException {
+            public List<String> getPermittedAccessibilityServicesForUser(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9318,7 +10177,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean isAccessibilityServicePermittedByAdmin(ComponentName admin, String packageName, int userId) throws RemoteException {
+            public boolean isAccessibilityServicePermittedByAdmin(
+                    ComponentName admin, String packageName, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9337,7 +10197,12 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean setPermittedInputMethods(ComponentName admin, String callerPackageName, List<String> packageList, boolean parent) throws RemoteException {
+            public boolean setPermittedInputMethods(
+                    ComponentName admin,
+                    String callerPackageName,
+                    List<String> packageList,
+                    boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9357,7 +10222,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public List<String> getPermittedInputMethods(ComponentName admin, String callerPackageName, boolean parent) throws RemoteException {
+            public List<String> getPermittedInputMethods(
+                    ComponentName admin, String callerPackageName, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9393,7 +10260,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean isInputMethodPermittedByAdmin(ComponentName admin, String packageName, int userId, boolean parent) throws RemoteException {
+            public boolean isInputMethodPermittedByAdmin(
+                    ComponentName admin, String packageName, int userId, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9413,7 +10282,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean setPermittedCrossProfileNotificationListeners(ComponentName admin, List<String> packageList) throws RemoteException {
+            public boolean setPermittedCrossProfileNotificationListeners(
+                    ComponentName admin, List<String> packageList) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9431,7 +10301,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public List<String> getPermittedCrossProfileNotificationListeners(ComponentName admin) throws RemoteException {
+            public List<String> getPermittedCrossProfileNotificationListeners(ComponentName admin)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9448,7 +10319,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean isNotificationListenerServicePermitted(String packageName, int userId) throws RemoteException {
+            public boolean isNotificationListenerServicePermitted(String packageName, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9483,7 +10355,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public Bundle getEnforcingAdminAndUserDetails(int userId, String restriction) throws RemoteException {
+            public Bundle getEnforcingAdminAndUserDetails(int userId, String restriction)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9501,7 +10374,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public List<EnforcingAdmin> getEnforcingAdminsForRestriction(int userId, String restriction) throws RemoteException {
+            public List<EnforcingAdmin> getEnforcingAdminsForRestriction(
+                    int userId, String restriction) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9510,7 +10384,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeString(restriction);
                     this.mRemote.transact(154, _data, _reply, 0);
                     _reply.readException();
-                    List<EnforcingAdmin> _result = _reply.createTypedArrayList(EnforcingAdmin.CREATOR);
+                    List<EnforcingAdmin> _result =
+                            _reply.createTypedArrayList(EnforcingAdmin.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -9519,7 +10394,13 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean setApplicationHidden(ComponentName admin, String callerPackage, String packageName, boolean hidden, boolean parent) throws RemoteException {
+            public boolean setApplicationHidden(
+                    ComponentName admin,
+                    String callerPackage,
+                    String packageName,
+                    boolean hidden,
+                    boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9540,7 +10421,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean isApplicationHidden(ComponentName admin, String callerPackage, String packageName, boolean parent) throws RemoteException {
+            public boolean isApplicationHidden(
+                    ComponentName admin, String callerPackage, String packageName, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9560,7 +10443,13 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public UserHandle createAndManageUser(ComponentName who, String name, ComponentName profileOwner, PersistableBundle adminExtras, int flags) throws RemoteException {
+            public UserHandle createAndManageUser(
+                    ComponentName who,
+                    String name,
+                    ComponentName profileOwner,
+                    PersistableBundle adminExtras,
+                    int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9581,7 +10470,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean removeUser(ComponentName who, UserHandle userHandle) throws RemoteException {
+            public boolean removeUser(ComponentName who, UserHandle userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9599,7 +10489,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean switchUser(ComponentName who, UserHandle userHandle) throws RemoteException {
+            public boolean switchUser(ComponentName who, UserHandle userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9617,7 +10508,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int startUserInBackground(ComponentName who, UserHandle userHandle) throws RemoteException {
+            public int startUserInBackground(ComponentName who, UserHandle userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9751,7 +10643,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void enableSystemApp(ComponentName admin, String callerPackage, String packageName) throws RemoteException {
+            public void enableSystemApp(
+                    ComponentName admin, String callerPackage, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9768,7 +10662,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int enableSystemAppWithIntent(ComponentName admin, String callerPackage, Intent intent) throws RemoteException {
+            public int enableSystemAppWithIntent(
+                    ComponentName admin, String callerPackage, Intent intent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9787,7 +10683,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean installExistingPackage(ComponentName admin, String callerPackage, String packageName) throws RemoteException {
+            public boolean installExistingPackage(
+                    ComponentName admin, String callerPackage, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9806,7 +10704,13 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setAccountManagementDisabled(ComponentName who, String callerPackageName, String accountType, boolean disabled, boolean parent) throws RemoteException {
+            public void setAccountManagementDisabled(
+                    ComponentName who,
+                    String callerPackageName,
+                    String accountType,
+                    boolean disabled,
+                    boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9825,7 +10729,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public String[] getAccountTypesWithManagementDisabled(String callerPackageName) throws RemoteException {
+            public String[] getAccountTypesWithManagementDisabled(String callerPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9842,7 +10747,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public String[] getAccountTypesWithManagementDisabledAsUser(int userId, String callerPackageName, boolean parent) throws RemoteException {
+            public String[] getAccountTypesWithManagementDisabledAsUser(
+                    int userId, String callerPackageName, boolean parent) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9861,7 +10767,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setSecondaryLockscreenEnabled(ComponentName who, boolean enabled) throws RemoteException {
+            public void setSecondaryLockscreenEnabled(ComponentName who, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9877,7 +10784,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean isSecondaryLockscreenEnabled(UserHandle userHandle) throws RemoteException {
+            public boolean isSecondaryLockscreenEnabled(UserHandle userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9894,7 +10802,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setPreferentialNetworkServiceConfigs(List<PreferentialNetworkServiceConfig> preferentialNetworkServiceConfigs) throws RemoteException {
+            public void setPreferentialNetworkServiceConfigs(
+                    List<PreferentialNetworkServiceConfig> preferentialNetworkServiceConfigs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9909,14 +10819,16 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public List<PreferentialNetworkServiceConfig> getPreferentialNetworkServiceConfigs() throws RemoteException {
+            public List<PreferentialNetworkServiceConfig> getPreferentialNetworkServiceConfigs()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(177, _data, _reply, 0);
                     _reply.readException();
-                    List<PreferentialNetworkServiceConfig> _result = _reply.createTypedArrayList(PreferentialNetworkServiceConfig.CREATOR);
+                    List<PreferentialNetworkServiceConfig> _result =
+                            _reply.createTypedArrayList(PreferentialNetworkServiceConfig.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -9925,7 +10837,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setLockTaskPackages(ComponentName who, String callerPackageName, String[] packages) throws RemoteException {
+            public void setLockTaskPackages(
+                    ComponentName who, String callerPackageName, String[] packages)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9942,7 +10856,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public String[] getLockTaskPackages(ComponentName who, String callerPackageName) throws RemoteException {
+            public String[] getLockTaskPackages(ComponentName who, String callerPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9977,7 +10892,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setLockTaskFeatures(ComponentName who, String callerPackageName, int flags) throws RemoteException {
+            public void setLockTaskFeatures(ComponentName who, String callerPackageName, int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -9994,7 +10910,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int getLockTaskFeatures(ComponentName who, String callerPackageName) throws RemoteException {
+            public int getLockTaskFeatures(ComponentName who, String callerPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10012,7 +10929,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setGlobalSetting(ComponentName who, String setting, String value) throws RemoteException {
+            public void setGlobalSetting(ComponentName who, String setting, String value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10029,7 +10947,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setSystemSetting(ComponentName who, String setting, String value, boolean parent) throws RemoteException {
+            public void setSystemSetting(
+                    ComponentName who, String setting, String value, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10047,7 +10967,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setSecureSetting(ComponentName who, String setting, String value) throws RemoteException {
+            public void setSecureSetting(ComponentName who, String setting, String value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10064,7 +10985,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setConfiguredNetworksLockdownState(ComponentName who, String callerPackageName, boolean lockdown) throws RemoteException {
+            public void setConfiguredNetworksLockdownState(
+                    ComponentName who, String callerPackageName, boolean lockdown)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10081,7 +11004,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean hasLockdownAdminConfiguredNetworks(ComponentName who) throws RemoteException {
+            public boolean hasLockdownAdminConfiguredNetworks(ComponentName who)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10098,7 +11022,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setLocationEnabled(ComponentName who, boolean locationEnabled) throws RemoteException {
+            public void setLocationEnabled(ComponentName who, boolean locationEnabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10114,7 +11039,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean setTime(ComponentName who, String callerPackageName, long millis) throws RemoteException {
+            public boolean setTime(ComponentName who, String callerPackageName, long millis)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10133,7 +11059,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean setTimeZone(ComponentName who, String callerPackageName, String timeZone) throws RemoteException {
+            public boolean setTimeZone(ComponentName who, String callerPackageName, String timeZone)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10152,7 +11079,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setMasterVolumeMuted(ComponentName admin, boolean on) throws RemoteException {
+            public void setMasterVolumeMuted(ComponentName admin, boolean on)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10185,7 +11113,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void notifyLockTaskModeChanged(boolean isEnabled, String pkg, int userId) throws RemoteException {
+            public void notifyLockTaskModeChanged(boolean isEnabled, String pkg, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10202,7 +11131,12 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setUninstallBlocked(ComponentName admin, String callerPackage, String packageName, boolean uninstallBlocked) throws RemoteException {
+            public void setUninstallBlocked(
+                    ComponentName admin,
+                    String callerPackage,
+                    String packageName,
+                    boolean uninstallBlocked)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10237,7 +11171,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setCrossProfileCallerIdDisabled(ComponentName who, boolean disabled) throws RemoteException {
+            public void setCrossProfileCallerIdDisabled(ComponentName who, boolean disabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10253,7 +11188,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean getCrossProfileCallerIdDisabled(ComponentName who) throws RemoteException {
+            public boolean getCrossProfileCallerIdDisabled(ComponentName who)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10270,7 +11206,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean getCrossProfileCallerIdDisabledForUser(int userId) throws RemoteException {
+            public boolean getCrossProfileCallerIdDisabledForUser(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10287,7 +11224,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setCrossProfileContactsSearchDisabled(ComponentName who, boolean disabled) throws RemoteException {
+            public void setCrossProfileContactsSearchDisabled(ComponentName who, boolean disabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10303,7 +11241,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean getCrossProfileContactsSearchDisabled(ComponentName who) throws RemoteException {
+            public boolean getCrossProfileContactsSearchDisabled(ComponentName who)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10320,7 +11259,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean getCrossProfileContactsSearchDisabledForUser(int userId) throws RemoteException {
+            public boolean getCrossProfileContactsSearchDisabledForUser(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10337,7 +11277,13 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void startManagedQuickContact(String lookupKey, long contactId, boolean isContactIdIgnored, long directoryId, Intent originalIntent) throws RemoteException {
+            public void startManagedQuickContact(
+                    String lookupKey,
+                    long contactId,
+                    boolean isContactIdIgnored,
+                    long directoryId,
+                    Intent originalIntent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10356,7 +11302,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setManagedProfileCallerIdAccessPolicy(PackagePolicy policy) throws RemoteException {
+            public void setManagedProfileCallerIdAccessPolicy(PackagePolicy policy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10378,7 +11325,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(204, _data, _reply, 0);
                     _reply.readException();
-                    PackagePolicy _result = (PackagePolicy) _reply.readTypedObject(PackagePolicy.CREATOR);
+                    PackagePolicy _result =
+                            (PackagePolicy) _reply.readTypedObject(PackagePolicy.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -10387,7 +11335,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean hasManagedProfileCallerIdAccess(int userId, String packageName) throws RemoteException {
+            public boolean hasManagedProfileCallerIdAccess(int userId, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10428,7 +11377,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeInt(userId);
                     this.mRemote.transact(207, _data, _reply, 0);
                     _reply.readException();
-                    PackagePolicy _result = (PackagePolicy) _reply.readTypedObject(PackagePolicy.CREATOR);
+                    PackagePolicy _result =
+                            (PackagePolicy) _reply.readTypedObject(PackagePolicy.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -10437,7 +11387,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setManagedProfileContactsAccessPolicy(PackagePolicy policy) throws RemoteException {
+            public void setManagedProfileContactsAccessPolicy(PackagePolicy policy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10459,7 +11410,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(209, _data, _reply, 0);
                     _reply.readException();
-                    PackagePolicy _result = (PackagePolicy) _reply.readTypedObject(PackagePolicy.CREATOR);
+                    PackagePolicy _result =
+                            (PackagePolicy) _reply.readTypedObject(PackagePolicy.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -10468,7 +11420,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean hasManagedProfileContactsAccess(int userId, String packageName) throws RemoteException {
+            public boolean hasManagedProfileContactsAccess(int userId, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10486,7 +11439,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setBluetoothContactSharingDisabled(ComponentName who, boolean disabled) throws RemoteException {
+            public void setBluetoothContactSharingDisabled(ComponentName who, boolean disabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10502,7 +11456,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean getBluetoothContactSharingDisabled(ComponentName who) throws RemoteException {
+            public boolean getBluetoothContactSharingDisabled(ComponentName who)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10519,7 +11474,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean getBluetoothContactSharingDisabledForUser(int userId) throws RemoteException {
+            public boolean getBluetoothContactSharingDisabledForUser(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10536,7 +11492,13 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setTrustAgentConfiguration(ComponentName admin, String callerPackageName, ComponentName agent, PersistableBundle args, boolean parent) throws RemoteException {
+            public void setTrustAgentConfiguration(
+                    ComponentName admin,
+                    String callerPackageName,
+                    ComponentName agent,
+                    PersistableBundle args,
+                    boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10555,7 +11517,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public List<PersistableBundle> getTrustAgentConfiguration(ComponentName admin, ComponentName agent, int userId, boolean parent) throws RemoteException {
+            public List<PersistableBundle> getTrustAgentConfiguration(
+                    ComponentName admin, ComponentName agent, int userId, boolean parent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10566,7 +11530,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeBoolean(parent);
                     this.mRemote.transact(215, _data, _reply, 0);
                     _reply.readException();
-                    List<PersistableBundle> _result = _reply.createTypedArrayList(PersistableBundle.CREATOR);
+                    List<PersistableBundle> _result =
+                            _reply.createTypedArrayList(PersistableBundle.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -10575,7 +11540,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean addCrossProfileWidgetProvider(ComponentName admin, String callerPackageName, String packageName) throws RemoteException {
+            public boolean addCrossProfileWidgetProvider(
+                    ComponentName admin, String callerPackageName, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10594,7 +11561,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean removeCrossProfileWidgetProvider(ComponentName admin, String callerPackageName, String packageName) throws RemoteException {
+            public boolean removeCrossProfileWidgetProvider(
+                    ComponentName admin, String callerPackageName, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10613,7 +11582,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public List<String> getCrossProfileWidgetProviders(ComponentName admin, String callerPackageName) throws RemoteException {
+            public List<String> getCrossProfileWidgetProviders(
+                    ComponentName admin, String callerPackageName) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10631,7 +11601,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setAutoTimeRequired(ComponentName who, boolean required) throws RemoteException {
+            public void setAutoTimeRequired(ComponentName who, boolean required)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10663,7 +11634,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setAutoTimeEnabled(ComponentName who, String callerPackageName, boolean enabled) throws RemoteException {
+            public void setAutoTimeEnabled(
+                    ComponentName who, String callerPackageName, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10680,7 +11653,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean getAutoTimeEnabled(ComponentName who, String callerPackageName) throws RemoteException {
+            public boolean getAutoTimeEnabled(ComponentName who, String callerPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10698,7 +11672,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setAutoTimeZoneEnabled(ComponentName who, String callerPackageName, boolean enabled) throws RemoteException {
+            public void setAutoTimeZoneEnabled(
+                    ComponentName who, String callerPackageName, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10715,7 +11691,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean getAutoTimeZoneEnabled(ComponentName who, String callerPackageName) throws RemoteException {
+            public boolean getAutoTimeZoneEnabled(ComponentName who, String callerPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10733,7 +11710,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setForceEphemeralUsers(ComponentName who, boolean forceEpehemeralUsers) throws RemoteException {
+            public void setForceEphemeralUsers(ComponentName who, boolean forceEpehemeralUsers)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10766,7 +11744,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean isRemovingAdmin(ComponentName adminReceiver, int userHandle) throws RemoteException {
+            public boolean isRemovingAdmin(ComponentName adminReceiver, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10800,7 +11779,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setSystemUpdatePolicy(ComponentName who, String callerPackageName, SystemUpdatePolicy policy) throws RemoteException {
+            public void setSystemUpdatePolicy(
+                    ComponentName who, String callerPackageName, SystemUpdatePolicy policy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10824,7 +11805,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(230, _data, _reply, 0);
                     _reply.readException();
-                    SystemUpdatePolicy _result = (SystemUpdatePolicy) _reply.readTypedObject(SystemUpdatePolicy.CREATOR);
+                    SystemUpdatePolicy _result =
+                            (SystemUpdatePolicy) _reply.readTypedObject(SystemUpdatePolicy.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -10847,7 +11829,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean setKeyguardDisabled(ComponentName admin, boolean disabled) throws RemoteException {
+            public boolean setKeyguardDisabled(ComponentName admin, boolean disabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10865,7 +11848,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean setStatusBarDisabled(ComponentName who, String callerPackageName, boolean disabled) throws RemoteException {
+            public boolean setStatusBarDisabled(
+                    ComponentName who, String callerPackageName, boolean disabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10932,7 +11917,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public SystemUpdateInfo getPendingSystemUpdate(ComponentName admin, String callerPackage) throws RemoteException {
+            public SystemUpdateInfo getPendingSystemUpdate(
+                    ComponentName admin, String callerPackage) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10941,7 +11927,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeString(callerPackage);
                     this.mRemote.transact(237, _data, _reply, 0);
                     _reply.readException();
-                    SystemUpdateInfo _result = (SystemUpdateInfo) _reply.readTypedObject(SystemUpdateInfo.CREATOR);
+                    SystemUpdateInfo _result =
+                            (SystemUpdateInfo) _reply.readTypedObject(SystemUpdateInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -10950,7 +11937,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setPermissionPolicy(ComponentName admin, String callerPackage, int policy) throws RemoteException {
+            public void setPermissionPolicy(ComponentName admin, String callerPackage, int policy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -10984,7 +11972,14 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setPermissionGrantState(ComponentName admin, String callerPackage, String packageName, String permission, int grantState, RemoteCallback resultReceiver) throws RemoteException {
+            public void setPermissionGrantState(
+                    ComponentName admin,
+                    String callerPackage,
+                    String packageName,
+                    String permission,
+                    int grantState,
+                    RemoteCallback resultReceiver)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11004,7 +11999,12 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int getPermissionGrantState(ComponentName admin, String callerPackage, String packageName, String permission) throws RemoteException {
+            public int getPermissionGrantState(
+                    ComponentName admin,
+                    String callerPackage,
+                    String packageName,
+                    String permission)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11024,7 +12024,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean isProvisioningAllowed(String action, String packageName) throws RemoteException {
+            public boolean isProvisioningAllowed(String action, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11042,7 +12043,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int checkProvisioningPrecondition(String action, String packageName) throws RemoteException {
+            public int checkProvisioningPrecondition(String action, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11060,7 +12062,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setKeepUninstalledPackages(ComponentName admin, String callerPackage, List<String> packageList) throws RemoteException {
+            public void setKeepUninstalledPackages(
+                    ComponentName admin, String callerPackage, List<String> packageList)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11077,7 +12081,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public List<String> getKeepUninstalledPackages(ComponentName admin, String callerPackage) throws RemoteException {
+            public List<String> getKeepUninstalledPackages(
+                    ComponentName admin, String callerPackage) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11112,7 +12117,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public String getWifiMacAddress(ComponentName admin, String callerPackageName) throws RemoteException {
+            public String getWifiMacAddress(ComponentName admin, String callerPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11145,7 +12151,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setShortSupportMessage(ComponentName admin, String callerPackageName, CharSequence message) throws RemoteException {
+            public void setShortSupportMessage(
+                    ComponentName admin, String callerPackageName, CharSequence message)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11167,7 +12175,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public CharSequence getShortSupportMessage(ComponentName admin, String callerPackageName) throws RemoteException {
+            public CharSequence getShortSupportMessage(
+                    ComponentName admin, String callerPackageName) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11176,7 +12185,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeString(callerPackageName);
                     this.mRemote.transact(250, _data, _reply, 0);
                     _reply.readException();
-                    CharSequence _result = (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _result =
+                            (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -11185,7 +12195,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setLongSupportMessage(ComponentName admin, CharSequence message) throws RemoteException {
+            public void setLongSupportMessage(ComponentName admin, CharSequence message)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11214,7 +12225,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeTypedObject(admin, 0);
                     this.mRemote.transact(252, _data, _reply, 0);
                     _reply.readException();
-                    CharSequence _result = (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _result =
+                            (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -11223,7 +12235,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public CharSequence getShortSupportMessageForUser(ComponentName admin, int userHandle) throws RemoteException {
+            public CharSequence getShortSupportMessageForUser(ComponentName admin, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11232,7 +12245,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeInt(userHandle);
                     this.mRemote.transact(253, _data, _reply, 0);
                     _reply.readException();
-                    CharSequence _result = (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _result =
+                            (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -11241,7 +12255,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public CharSequence getLongSupportMessageForUser(ComponentName admin, int userHandle) throws RemoteException {
+            public CharSequence getLongSupportMessageForUser(ComponentName admin, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11250,7 +12265,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeInt(userHandle);
                     this.mRemote.transact(254, _data, _reply, 0);
                     _reply.readException();
-                    CharSequence _result = (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _result =
+                            (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -11259,7 +12275,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setOrganizationColor(ComponentName admin, int color) throws RemoteException {
+            public void setOrganizationColor(ComponentName admin, int color)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11340,7 +12357,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setOrganizationName(ComponentName admin, String callerPackageName, CharSequence title) throws RemoteException {
+            public void setOrganizationName(
+                    ComponentName admin, String callerPackageName, CharSequence title)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11362,7 +12381,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public CharSequence getOrganizationName(ComponentName admin, String callerPackageName) throws RemoteException {
+            public CharSequence getOrganizationName(ComponentName admin, String callerPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11371,7 +12391,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeString(callerPackageName);
                     this.mRemote.transact(261, _data, _reply, 0);
                     _reply.readException();
-                    CharSequence _result = (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _result =
+                            (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -11387,7 +12408,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(262, _data, _reply, 0);
                     _reply.readException();
-                    CharSequence _result = (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _result =
+                            (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -11404,7 +12426,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeInt(userHandle);
                     this.mRemote.transact(263, _data, _reply, 0);
                     _reply.readException();
-                    CharSequence _result = (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _result =
+                            (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -11446,7 +12469,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setAffiliationIds(ComponentName admin, List<String> ids) throws RemoteException {
+            public void setAffiliationIds(ComponentName admin, List<String> ids)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11512,7 +12536,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setSecurityLoggingEnabled(ComponentName admin, String packageName, boolean enabled) throws RemoteException {
+            public void setSecurityLoggingEnabled(
+                    ComponentName admin, String packageName, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11529,7 +12555,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean isSecurityLoggingEnabled(ComponentName admin, String packageName) throws RemoteException {
+            public boolean isSecurityLoggingEnabled(ComponentName admin, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11547,7 +12574,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public ParceledListSlice retrieveSecurityLogs(ComponentName admin, String packageName) throws RemoteException {
+            public ParceledListSlice retrieveSecurityLogs(ComponentName admin, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11556,7 +12584,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeString(packageName);
                     this.mRemote.transact(272, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -11565,7 +12594,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public ParceledListSlice retrievePreRebootSecurityLogs(ComponentName admin, String packageName) throws RemoteException {
+            public ParceledListSlice retrievePreRebootSecurityLogs(
+                    ComponentName admin, String packageName) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11574,7 +12604,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeString(packageName);
                     this.mRemote.transact(273, _data, _reply, 0);
                     _reply.readException();
-                    ParceledListSlice _result = (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
+                    ParceledListSlice _result =
+                            (ParceledListSlice) _reply.readTypedObject(ParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -11615,7 +12646,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setAuditLogEnabled(String callerPackage, boolean enabled) throws RemoteException {
+            public void setAuditLogEnabled(String callerPackage, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11648,7 +12680,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setAuditLogEventsCallback(String callerPackage, IAuditLogEventsCallback callback) throws RemoteException {
+            public void setAuditLogEventsCallback(
+                    String callerPackage, IAuditLogEventsCallback callback) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11681,7 +12714,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void uninstallPackageWithActiveAdmins(String packageName) throws RemoteException {
+            public void uninstallPackageWithActiveAdmins(String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11757,7 +12791,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setBackupServiceEnabled(ComponentName admin, boolean enabled) throws RemoteException {
+            public void setBackupServiceEnabled(ComponentName admin, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11790,7 +12825,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setNetworkLoggingEnabled(ComponentName admin, String packageName, boolean enabled) throws RemoteException {
+            public void setNetworkLoggingEnabled(
+                    ComponentName admin, String packageName, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11807,7 +12844,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean isNetworkLoggingEnabled(ComponentName admin, String packageName) throws RemoteException {
+            public boolean isNetworkLoggingEnabled(ComponentName admin, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11825,7 +12863,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public List<NetworkEvent> retrieveNetworkLogs(ComponentName admin, String packageName, long batchToken) throws RemoteException {
+            public List<NetworkEvent> retrieveNetworkLogs(
+                    ComponentName admin, String packageName, long batchToken)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11844,7 +12884,15 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean bindDeviceAdminServiceAsUser(ComponentName admin, IApplicationThread caller, IBinder token, Intent service, IServiceConnection connection, long flags, int targetUserId) throws RemoteException {
+            public boolean bindDeviceAdminServiceAsUser(
+                    ComponentName admin,
+                    IApplicationThread caller,
+                    IBinder token,
+                    Intent service,
+                    IServiceConnection connection,
+                    long flags,
+                    int targetUserId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11867,7 +12915,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public List<UserHandle> getBindDeviceAdminTargetUsers(ComponentName admin) throws RemoteException {
+            public List<UserHandle> getBindDeviceAdminTargetUsers(ComponentName admin)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11949,7 +12998,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean setResetPasswordToken(ComponentName admin, String callerPackageName, byte[] token) throws RemoteException {
+            public boolean setResetPasswordToken(
+                    ComponentName admin, String callerPackageName, byte[] token)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11968,7 +13019,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean clearResetPasswordToken(ComponentName admin, String callerPackageName) throws RemoteException {
+            public boolean clearResetPasswordToken(ComponentName admin, String callerPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -11986,7 +13038,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean isResetPasswordTokenActive(ComponentName admin, String callerPackageName) throws RemoteException {
+            public boolean isResetPasswordTokenActive(ComponentName admin, String callerPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12004,7 +13057,13 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean resetPasswordWithToken(ComponentName admin, String callerPackageName, String password, byte[] token, int flags) throws RemoteException {
+            public boolean resetPasswordWithToken(
+                    ComponentName admin,
+                    String callerPackageName,
+                    String password,
+                    byte[] token,
+                    int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12041,7 +13100,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public StringParceledListSlice getOwnerInstalledCaCerts(UserHandle user) throws RemoteException {
+            public StringParceledListSlice getOwnerInstalledCaCerts(UserHandle user)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12049,7 +13109,9 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeTypedObject(user, 0);
                     this.mRemote.transact(301, _data, _reply, 0);
                     _reply.readException();
-                    StringParceledListSlice _result = (StringParceledListSlice) _reply.readTypedObject(StringParceledListSlice.CREATOR);
+                    StringParceledListSlice _result =
+                            (StringParceledListSlice)
+                                    _reply.readTypedObject(StringParceledListSlice.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -12058,7 +13120,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void clearApplicationUserData(ComponentName admin, String packageName, IPackageDataObserver callback) throws RemoteException {
+            public void clearApplicationUserData(
+                    ComponentName admin, String packageName, IPackageDataObserver callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12075,7 +13139,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setLogoutEnabled(ComponentName admin, boolean enabled) throws RemoteException {
+            public void setLogoutEnabled(ComponentName admin, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12107,7 +13172,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public List<String> getDisallowedSystemApps(ComponentName admin, int userId, String provisioningAction) throws RemoteException {
+            public List<String> getDisallowedSystemApps(
+                    ComponentName admin, int userId, String provisioningAction)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12126,7 +13193,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void transferOwnership(ComponentName admin, ComponentName target, PersistableBundle bundle) throws RemoteException {
+            public void transferOwnership(
+                    ComponentName admin, ComponentName target, PersistableBundle bundle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12150,7 +13219,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(307, _data, _reply, 0);
                     _reply.readException();
-                    PersistableBundle _result = (PersistableBundle) _reply.readTypedObject(PersistableBundle.CREATOR);
+                    PersistableBundle _result =
+                            (PersistableBundle) _reply.readTypedObject(PersistableBundle.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -12159,7 +13229,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setStartUserSessionMessage(ComponentName admin, CharSequence startUserSessionMessage) throws RemoteException {
+            public void setStartUserSessionMessage(
+                    ComponentName admin, CharSequence startUserSessionMessage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12180,7 +13252,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setEndUserSessionMessage(ComponentName admin, CharSequence endUserSessionMessage) throws RemoteException {
+            public void setEndUserSessionMessage(
+                    ComponentName admin, CharSequence endUserSessionMessage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12201,7 +13275,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public CharSequence getStartUserSessionMessage(ComponentName admin) throws RemoteException {
+            public CharSequence getStartUserSessionMessage(ComponentName admin)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12209,7 +13284,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeTypedObject(admin, 0);
                     this.mRemote.transact(310, _data, _reply, 0);
                     _reply.readException();
-                    CharSequence _result = (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _result =
+                            (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -12218,7 +13294,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public CharSequence getEndUserSessionMessage(ComponentName admin) throws RemoteException {
+            public CharSequence getEndUserSessionMessage(ComponentName admin)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12226,7 +13303,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeTypedObject(admin, 0);
                     this.mRemote.transact(311, _data, _reply, 0);
                     _reply.readException();
-                    CharSequence _result = (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+                    CharSequence _result =
+                            (CharSequence) _reply.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -12235,7 +13313,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public List<String> setMeteredDataDisabledPackages(ComponentName admin, List<String> packageNames) throws RemoteException {
+            public List<String> setMeteredDataDisabledPackages(
+                    ComponentName admin, List<String> packageNames) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12253,7 +13332,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public List<String> getMeteredDataDisabledPackages(ComponentName admin) throws RemoteException {
+            public List<String> getMeteredDataDisabledPackages(ComponentName admin)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12270,7 +13350,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int addOverrideApn(ComponentName admin, ApnSetting apnSetting) throws RemoteException {
+            public int addOverrideApn(ComponentName admin, ApnSetting apnSetting)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12288,7 +13369,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean updateOverrideApn(ComponentName admin, int apnId, ApnSetting apnSetting) throws RemoteException {
+            public boolean updateOverrideApn(ComponentName admin, int apnId, ApnSetting apnSetting)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12307,7 +13389,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean removeOverrideApn(ComponentName admin, int apnId) throws RemoteException {
+            public boolean removeOverrideApn(ComponentName admin, int apnId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12342,7 +13425,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setOverrideApnsEnabled(ComponentName admin, boolean enabled) throws RemoteException {
+            public void setOverrideApnsEnabled(ComponentName admin, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12375,7 +13459,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean isMeteredDataDisabledPackageForUser(ComponentName admin, String packageName, int userId) throws RemoteException {
+            public boolean isMeteredDataDisabledPackageForUser(
+                    ComponentName admin, String packageName, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12394,7 +13479,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setPasswordQualityMDM(ComponentName admin, int quality, int userHandle) throws RemoteException {
+            public void setPasswordQualityMDM(ComponentName admin, int quality, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12411,7 +13497,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setPasswordMinimumLengthMDM(ComponentName admin, int length, int userHandle) throws RemoteException {
+            public void setPasswordMinimumLengthMDM(ComponentName admin, int length, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12428,7 +13515,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setPasswordMinimumUpperCaseMDM(ComponentName admin, int length, int userHandle) throws RemoteException {
+            public void setPasswordMinimumUpperCaseMDM(
+                    ComponentName admin, int length, int userHandle) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12445,7 +13533,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setPasswordMinimumLowerCaseMDM(ComponentName admin, int length, int userHandle) throws RemoteException {
+            public void setPasswordMinimumLowerCaseMDM(
+                    ComponentName admin, int length, int userHandle) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12462,7 +13551,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setPasswordMinimumLettersMDM(ComponentName admin, int length, int userHandle) throws RemoteException {
+            public void setPasswordMinimumLettersMDM(
+                    ComponentName admin, int length, int userHandle) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12479,7 +13569,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setPasswordMinimumNumericMDM(ComponentName admin, int length, int userHandle) throws RemoteException {
+            public void setPasswordMinimumNumericMDM(
+                    ComponentName admin, int length, int userHandle) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12496,7 +13587,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setPasswordMinimumSymbolsMDM(ComponentName admin, int length, int userHandle) throws RemoteException {
+            public void setPasswordMinimumSymbolsMDM(
+                    ComponentName admin, int length, int userHandle) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12513,7 +13605,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setPasswordMinimumNonLetterMDM(ComponentName admin, int length, int userHandle) throws RemoteException {
+            public void setPasswordMinimumNonLetterMDM(
+                    ComponentName admin, int length, int userHandle) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12530,7 +13623,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setPasswordHistoryLengthMDM(ComponentName admin, int length, int userHandle) throws RemoteException {
+            public void setPasswordHistoryLengthMDM(ComponentName admin, int length, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12547,7 +13641,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setPasswordExpirationTimeoutMDM(ComponentName admin, long expiration, int userHandle) throws RemoteException {
+            public void setPasswordExpirationTimeoutMDM(
+                    ComponentName admin, long expiration, int userHandle) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12564,7 +13659,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setMaximumFailedPasswordsForWipeMDM(ComponentName admin, int num, int userHandle) throws RemoteException {
+            public void setMaximumFailedPasswordsForWipeMDM(
+                    ComponentName admin, int num, int userHandle) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12581,7 +13677,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setMaximumTimeToLockMDM(ComponentName admin, long timeMs, int userHandle) throws RemoteException {
+            public void setMaximumTimeToLockMDM(ComponentName admin, long timeMs, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12598,7 +13695,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setKeyguardDisabledFeaturesMDM(ComponentName admin, int which, int userHandle) throws RemoteException {
+            public void setKeyguardDisabledFeaturesMDM(
+                    ComponentName admin, int which, int userHandle) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12615,7 +13713,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setApplicationRestrictionsMDM(ComponentName admin, String packageName, Bundle settings, int userHandle) throws RemoteException {
+            public void setApplicationRestrictionsMDM(
+                    ComponentName admin, String packageName, Bundle settings, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12633,7 +13733,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public Bundle getApplicationRestrictionsMDM(ComponentName who, String packageName, int userHandle) throws RemoteException {
+            public Bundle getApplicationRestrictionsMDM(
+                    ComponentName who, String packageName, int userHandle) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12652,7 +13753,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean resetPasswordWithTokenMDM(ComponentName admin, String password, byte[] token, int flags, int userHandle) throws RemoteException {
+            public boolean resetPasswordWithTokenMDM(
+                    ComponentName admin, String password, byte[] token, int flags, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12673,7 +13776,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean isResetPasswordTokenActiveMDM(ComponentName admin, int userHandle) throws RemoteException {
+            public boolean isResetPasswordTokenActiveMDM(ComponentName admin, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12691,7 +13795,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean clearResetPasswordTokenMDM(ComponentName admin, int userHandle) throws RemoteException {
+            public boolean clearResetPasswordTokenMDM(ComponentName admin, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12709,7 +13814,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean setResetPasswordTokenMDM(ComponentName admin, byte[] token, int userHandle) throws RemoteException {
+            public boolean setResetPasswordTokenMDM(
+                    ComponentName admin, byte[] token, int userHandle) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12728,7 +13834,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setTrustAgentConfigurationMDM(int userId, ComponentName admin, ComponentName agent, PersistableBundle args) throws RemoteException {
+            public void setTrustAgentConfigurationMDM(
+                    int userId, ComponentName admin, ComponentName agent, PersistableBundle args)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12746,7 +13854,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean isProfileOwnerOfOrganizationOwnedDeviceMDM(int userId) throws RemoteException {
+            public boolean isProfileOwnerOfOrganizationOwnedDeviceMDM(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12763,7 +13872,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean hasDelegatedPermission(String callerPackage, int callerUid, String scope) throws RemoteException {
+            public boolean hasDelegatedPermission(String callerPackage, int callerUid, String scope)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12800,7 +13910,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void reportFailedPasswordAttemptWithFailureCount(int userHandle, int count, boolean parent) throws RemoteException {
+            public void reportFailedPasswordAttemptWithFailureCount(
+                    int userHandle, int count, boolean parent) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12817,7 +13928,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int setGlobalPrivateDns(ComponentName admin, int mode, String privateDnsHost) throws RemoteException {
+            public int setGlobalPrivateDns(ComponentName admin, int mode, String privateDnsHost)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12870,7 +13982,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setProfileOwnerOnOrganizationOwnedDevice(ComponentName who, int userId, boolean isProfileOwnerOnOrganizationOwnedDevice) throws RemoteException {
+            public void setProfileOwnerOnOrganizationOwnedDevice(
+                    ComponentName who, int userId, boolean isProfileOwnerOnOrganizationOwnedDevice)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12887,7 +14001,12 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void installUpdateFromFile(ComponentName admin, String callerPackageName, ParcelFileDescriptor updateFileDescriptor, StartInstallingUpdateCallback listener) throws RemoteException {
+            public void installUpdateFromFile(
+                    ComponentName admin,
+                    String callerPackageName,
+                    ParcelFileDescriptor updateFileDescriptor,
+                    StartInstallingUpdateCallback listener)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12905,7 +14024,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setCrossProfileCalendarPackages(ComponentName admin, List<String> packageNames) throws RemoteException {
+            public void setCrossProfileCalendarPackages(
+                    ComponentName admin, List<String> packageNames) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12921,7 +14041,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public List<String> getCrossProfileCalendarPackages(ComponentName admin) throws RemoteException {
+            public List<String> getCrossProfileCalendarPackages(ComponentName admin)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12938,7 +14059,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean isPackageAllowedToAccessCalendarForUser(String packageName, int userHandle) throws RemoteException {
+            public boolean isPackageAllowedToAccessCalendarForUser(
+                    String packageName, int userHandle) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12956,7 +14078,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public List<String> getCrossProfileCalendarPackagesForUser(int userHandle) throws RemoteException {
+            public List<String> getCrossProfileCalendarPackagesForUser(int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12973,7 +14096,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setCrossProfilePackages(ComponentName admin, List<String> packageNames) throws RemoteException {
+            public void setCrossProfilePackages(ComponentName admin, List<String> packageNames)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -12989,7 +14113,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public List<String> getCrossProfilePackages(ComponentName admin) throws RemoteException {
+            public List<String> getCrossProfilePackages(ComponentName admin)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13071,7 +14196,14 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean startViewCalendarEventInManagedProfile(String packageName, long eventId, long start, long end, boolean allDay, int flags) throws RemoteException {
+            public boolean startViewCalendarEventInManagedProfile(
+                    String packageName,
+                    long eventId,
+                    long start,
+                    long end,
+                    boolean allDay,
+                    int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13093,7 +14225,13 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean setKeyGrantForApp(ComponentName admin, String callerPackage, String alias, String packageName, boolean hasGrant) throws RemoteException {
+            public boolean setKeyGrantForApp(
+                    ComponentName admin,
+                    String callerPackage,
+                    String alias,
+                    String packageName,
+                    boolean hasGrant)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13114,7 +14252,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public ParcelableGranteeMap getKeyPairGrants(String callerPackage, String alias) throws RemoteException {
+            public ParcelableGranteeMap getKeyPairGrants(String callerPackage, String alias)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13123,7 +14262,9 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeString(alias);
                     this.mRemote.transact(362, _data, _reply, 0);
                     _reply.readException();
-                    ParcelableGranteeMap _result = (ParcelableGranteeMap) _reply.readTypedObject(ParcelableGranteeMap.CREATOR);
+                    ParcelableGranteeMap _result =
+                            (ParcelableGranteeMap)
+                                    _reply.readTypedObject(ParcelableGranteeMap.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -13132,7 +14273,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean setKeyGrantToWifiAuth(String callerPackage, String alias, boolean hasGrant) throws RemoteException {
+            public boolean setKeyGrantToWifiAuth(
+                    String callerPackage, String alias, boolean hasGrant) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13151,7 +14293,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean isKeyPairGrantedToWifiAuth(String callerPackage, String alias) throws RemoteException {
+            public boolean isKeyPairGrantedToWifiAuth(String callerPackage, String alias)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13169,7 +14312,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setUserControlDisabledPackages(ComponentName admin, String callerPackageName, List<String> packages) throws RemoteException {
+            public void setUserControlDisabledPackages(
+                    ComponentName admin, String callerPackageName, List<String> packages)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13186,7 +14331,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public List<String> getUserControlDisabledPackages(ComponentName admin, String callerPackageName) throws RemoteException {
+            public List<String> getUserControlDisabledPackages(
+                    ComponentName admin, String callerPackageName) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13204,7 +14350,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setCommonCriteriaModeEnabled(ComponentName admin, String callerPackageName, boolean enabled) throws RemoteException {
+            public void setCommonCriteriaModeEnabled(
+                    ComponentName admin, String callerPackageName, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13255,7 +14403,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setPersonalAppsSuspended(ComponentName admin, boolean suspended) throws RemoteException {
+            public void setPersonalAppsSuspended(ComponentName admin, boolean suspended)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13271,7 +14420,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public long getManagedProfileMaximumTimeOff(ComponentName admin) throws RemoteException {
+            public long getManagedProfileMaximumTimeOff(ComponentName admin)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13288,7 +14438,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setManagedProfileMaximumTimeOff(ComponentName admin, long timeoutMs) throws RemoteException {
+            public void setManagedProfileMaximumTimeOff(ComponentName admin, long timeoutMs)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13334,7 +14485,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean canProfileOwnerResetPasswordWhenLocked(int userId) throws RemoteException {
+            public boolean canProfileOwnerResetPasswordWhenLocked(int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13401,7 +14553,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setOrganizationIdForUser(String callerPackage, String enterpriseId, int userId) throws RemoteException {
+            public void setOrganizationIdForUser(
+                    String callerPackage, String enterpriseId, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13418,7 +14571,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public UserHandle createAndProvisionManagedProfile(ManagedProfileProvisioningParams provisioningParams, String callerPackage) throws RemoteException {
+            public UserHandle createAndProvisionManagedProfile(
+                    ManagedProfileProvisioningParams provisioningParams, String callerPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13436,7 +14591,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void provisionFullyManagedDevice(FullyManagedDeviceProvisioningParams provisioningParams, String callerPackage) throws RemoteException {
+            public void provisionFullyManagedDevice(
+                    FullyManagedDeviceProvisioningParams provisioningParams, String callerPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13452,7 +14609,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void finalizeWorkProfileProvisioning(UserHandle managedProfileUser, Account migratedAccount) throws RemoteException {
+            public void finalizeWorkProfileProvisioning(
+                    UserHandle managedProfileUser, Account migratedAccount) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13468,7 +14626,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setDeviceOwnerType(ComponentName admin, int deviceOwnerType) throws RemoteException {
+            public void setDeviceOwnerType(ComponentName admin, int deviceOwnerType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13532,7 +14691,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setUsbDataSignalingEnabled(String callerPackage, boolean enabled) throws RemoteException {
+            public void setUsbDataSignalingEnabled(String callerPackage, boolean enabled)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13581,7 +14741,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setMinimumRequiredWifiSecurityLevel(String callerPackageName, int level) throws RemoteException {
+            public void setMinimumRequiredWifiSecurityLevel(String callerPackageName, int level)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13613,7 +14774,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setWifiSsidPolicy(String callerPackageName, WifiSsidPolicy policy) throws RemoteException {
+            public void setWifiSsidPolicy(String callerPackageName, WifiSsidPolicy policy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13629,7 +14791,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public WifiSsidPolicy getWifiSsidPolicy(String callerPackageName) throws RemoteException {
+            public WifiSsidPolicy getWifiSsidPolicy(String callerPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13637,7 +14800,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeString(callerPackageName);
                     this.mRemote.transact(393, _data, _reply, 0);
                     _reply.readException();
-                    WifiSsidPolicy _result = (WifiSsidPolicy) _reply.readTypedObject(WifiSsidPolicy.CREATOR);
+                    WifiSsidPolicy _result =
+                            (WifiSsidPolicy) _reply.readTypedObject(WifiSsidPolicy.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -13646,7 +14810,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean isDevicePotentiallyStolen(String callerPackageName) throws RemoteException {
+            public boolean isDevicePotentiallyStolen(String callerPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13679,7 +14844,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setDrawables(List<DevicePolicyDrawableResource> drawables) throws RemoteException {
+            public void setDrawables(List<DevicePolicyDrawableResource> drawables)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13709,7 +14875,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public ParcelableResource getDrawable(String drawableId, String drawableStyle, String drawableSource) throws RemoteException {
+            public ParcelableResource getDrawable(
+                    String drawableId, String drawableStyle, String drawableSource)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13719,7 +14887,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeString(drawableSource);
                     this.mRemote.transact(398, _data, _reply, 0);
                     _reply.readException();
-                    ParcelableResource _result = (ParcelableResource) _reply.readTypedObject(ParcelableResource.CREATOR);
+                    ParcelableResource _result =
+                            (ParcelableResource) _reply.readTypedObject(ParcelableResource.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -13759,7 +14928,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setStrings(List<DevicePolicyStringResource> strings) throws RemoteException {
+            public void setStrings(List<DevicePolicyStringResource> strings)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13797,7 +14967,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeString(stringId);
                     this.mRemote.transact(403, _data, _reply, 0);
                     _reply.readException();
-                    ParcelableResource _result = (ParcelableResource) _reply.readTypedObject(ParcelableResource.CREATOR);
+                    ParcelableResource _result =
+                            (ParcelableResource) _reply.readTypedObject(ParcelableResource.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -13806,7 +14977,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void resetShouldAllowBypassingDevicePolicyManagementRoleQualificationState() throws RemoteException {
+            public void resetShouldAllowBypassingDevicePolicyManagementRoleQualificationState()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13820,7 +14992,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean shouldAllowBypassingDevicePolicyManagementRoleQualification() throws RemoteException {
+            public boolean shouldAllowBypassingDevicePolicyManagementRoleQualification()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13836,7 +15009,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public List<UserHandle> getPolicyManagedProfiles(UserHandle userHandle) throws RemoteException {
+            public List<UserHandle> getPolicyManagedProfiles(UserHandle userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13853,7 +15027,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void semSetPasswordQuality(ComponentName admin, int quality) throws RemoteException {
+            public void semSetPasswordQuality(ComponentName admin, int quality)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13869,7 +15044,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void semSetPasswordMinimumLength(ComponentName admin, int length) throws RemoteException {
+            public void semSetPasswordMinimumLength(ComponentName admin, int length)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13885,7 +15061,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void semSetPasswordMinimumUpperCase(ComponentName admin, int length) throws RemoteException {
+            public void semSetPasswordMinimumUpperCase(ComponentName admin, int length)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13901,7 +15078,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void semSetPasswordMinimumLowerCase(ComponentName admin, int length) throws RemoteException {
+            public void semSetPasswordMinimumLowerCase(ComponentName admin, int length)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13917,7 +15095,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void semSetPasswordMinimumNonLetter(ComponentName admin, int length) throws RemoteException {
+            public void semSetPasswordMinimumNonLetter(ComponentName admin, int length)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13933,7 +15112,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void semSetPasswordHistoryLength(ComponentName admin, int length) throws RemoteException {
+            public void semSetPasswordHistoryLength(ComponentName admin, int length)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13949,7 +15129,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void semSetPasswordExpirationTimeout(ComponentName admin, long timeout) throws RemoteException {
+            public void semSetPasswordExpirationTimeout(ComponentName admin, long timeout)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13982,7 +15163,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void semSetSimplePasswordEnabled(ComponentName who, boolean value) throws RemoteException {
+            public void semSetSimplePasswordEnabled(ComponentName who, boolean value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -13998,7 +15180,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean semIsSimplePasswordEnabled(ComponentName who, int userHandle) throws RemoteException {
+            public boolean semIsSimplePasswordEnabled(ComponentName who, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14016,7 +15199,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void semSetKeyguardDisabledFeatures(ComponentName who, int which) throws RemoteException {
+            public void semSetKeyguardDisabledFeatures(ComponentName who, int which)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14032,7 +15216,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void semSetAllowStorageCard(ComponentName who, boolean value) throws RemoteException {
+            public void semSetAllowStorageCard(ComponentName who, boolean value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14048,7 +15233,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean semGetAllowStorageCard(ComponentName who, int userHandle) throws RemoteException {
+            public boolean semGetAllowStorageCard(ComponentName who, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14082,7 +15268,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean semGetAllowWifi(ComponentName who, int userHandle) throws RemoteException {
+            public boolean semGetAllowWifi(ComponentName who, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14100,7 +15287,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void semSetAllowTextMessaging(ComponentName who, boolean value) throws RemoteException {
+            public void semSetAllowTextMessaging(ComponentName who, boolean value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14116,7 +15304,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean semGetAllowTextMessaging(ComponentName who, int userHandle) throws RemoteException {
+            public boolean semGetAllowTextMessaging(ComponentName who, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14134,7 +15323,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void semSetAllowPopImapEmail(ComponentName who, boolean value) throws RemoteException {
+            public void semSetAllowPopImapEmail(ComponentName who, boolean value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14150,7 +15340,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean semGetAllowPopImapEmail(ComponentName who, int userHandle) throws RemoteException {
+            public boolean semGetAllowPopImapEmail(ComponentName who, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14168,7 +15359,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void semSetAllowBrowser(ComponentName who, boolean value) throws RemoteException {
+            public void semSetAllowBrowser(ComponentName who, boolean value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14184,7 +15376,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean semGetAllowBrowser(ComponentName who, int userHandle) throws RemoteException {
+            public boolean semGetAllowBrowser(ComponentName who, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14202,7 +15395,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void semSetAllowInternetSharing(ComponentName who, boolean value) throws RemoteException {
+            public void semSetAllowInternetSharing(ComponentName who, boolean value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14218,7 +15412,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean semGetAllowInternetSharing(ComponentName who, int userHandle) throws RemoteException {
+            public boolean semGetAllowInternetSharing(ComponentName who, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14236,7 +15431,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void semSetAllowBluetoothMode(ComponentName who, int size) throws RemoteException {
+            public void semSetAllowBluetoothMode(ComponentName who, int size)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14252,7 +15448,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int semGetAllowBluetoothMode(ComponentName who, int userHandle) throws RemoteException {
+            public int semGetAllowBluetoothMode(ComponentName who, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14270,7 +15467,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void semSetAllowDesktopSync(ComponentName who, boolean value) throws RemoteException {
+            public void semSetAllowDesktopSync(ComponentName who, boolean value)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14286,7 +15484,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean semGetAllowDesktopSync(ComponentName who, int userHandle) throws RemoteException {
+            public boolean semGetAllowDesktopSync(ComponentName who, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14320,7 +15519,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean semGetAllowIrda(ComponentName who, int userHandle) throws RemoteException {
+            public boolean semGetAllowIrda(ComponentName who, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14338,7 +15538,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void semSetRequireStorageCardEncryption(ComponentName who, boolean value, boolean isParent) throws RemoteException {
+            public void semSetRequireStorageCardEncryption(
+                    ComponentName who, boolean value, boolean isParent) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14355,7 +15556,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean semGetRequireStorageCardEncryption(ComponentName who, int userHandle, boolean isParent) throws RemoteException {
+            public boolean semGetRequireStorageCardEncryption(
+                    ComponentName who, int userHandle, boolean isParent) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14374,7 +15576,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void semSetChangeNotificationEnabled(ComponentName who, boolean notifyChanges) throws RemoteException {
+            public void semSetChangeNotificationEnabled(ComponentName who, boolean notifyChanges)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14390,7 +15593,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setApplicationExemptions(String callerPackage, String packageName, int[] exemptions) throws RemoteException {
+            public void setApplicationExemptions(
+                    String callerPackage, String packageName, int[] exemptions)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14457,7 +15662,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setManagedSubscriptionsPolicy(ManagedSubscriptionsPolicy policy) throws RemoteException {
+            public void setManagedSubscriptionsPolicy(ManagedSubscriptionsPolicy policy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14472,14 +15678,17 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public ManagedSubscriptionsPolicy getManagedSubscriptionsPolicy() throws RemoteException {
+            public ManagedSubscriptionsPolicy getManagedSubscriptionsPolicy()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(444, _data, _reply, 0);
                     _reply.readException();
-                    ManagedSubscriptionsPolicy _result = (ManagedSubscriptionsPolicy) _reply.readTypedObject(ManagedSubscriptionsPolicy.CREATOR);
+                    ManagedSubscriptionsPolicy _result =
+                            (ManagedSubscriptionsPolicy)
+                                    _reply.readTypedObject(ManagedSubscriptionsPolicy.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -14495,7 +15704,8 @@ public interface IDevicePolicyManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(445, _data, _reply, 0);
                     _reply.readException();
-                    DevicePolicyState _result = (DevicePolicyState) _reply.readTypedObject(DevicePolicyState.CREATOR);
+                    DevicePolicyState _result =
+                            (DevicePolicyState) _reply.readTypedObject(DevicePolicyState.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -14504,7 +15714,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean triggerDevicePolicyEngineMigration(boolean forceMigration) throws RemoteException {
+            public boolean triggerDevicePolicyEngineMigration(boolean forceMigration)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14538,7 +15749,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public String getFinancedDeviceKioskRoleHolder(String callerPackageName) throws RemoteException {
+            public String getFinancedDeviceKioskRoleHolder(String callerPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14555,7 +15767,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setUserRestrictionForKnox(ComponentName who, String key, boolean enable, int userId) throws RemoteException {
+            public void setUserRestrictionForKnox(
+                    ComponentName who, String key, boolean enable, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14573,7 +15787,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setCrossProfileAppToIgnored(int userId, String packageName) throws RemoteException {
+            public void setCrossProfileAppToIgnored(int userId, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14589,7 +15804,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public boolean getSamsungSDcardEncryptionStatus(ComponentName who, int userHandle) throws RemoteException {
+            public boolean getSamsungSDcardEncryptionStatus(ComponentName who, int userHandle)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14621,7 +15837,9 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setContentProtectionPolicy(ComponentName who, String callerPackageName, int policy) throws RemoteException {
+            public void setContentProtectionPolicy(
+                    ComponentName who, String callerPackageName, int policy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14638,7 +15856,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int getContentProtectionPolicy(ComponentName who, String callerPackageName) throws RemoteException {
+            public int getContentProtectionPolicy(ComponentName who, String callerPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14673,7 +15892,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void setMaxPolicyStorageLimit(String callerPackageName, int storageLimit) throws RemoteException {
+            public void setMaxPolicyStorageLimit(String callerPackageName, int storageLimit)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14689,7 +15909,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public void forceSetMaxPolicyStorageLimit(String callerPackageName, int storageLimit) throws RemoteException {
+            public void forceSetMaxPolicyStorageLimit(String callerPackageName, int storageLimit)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14722,7 +15943,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
 
             @Override // android.app.admin.IDevicePolicyManager
-            public int getPolicySizeForAdmin(String callerPackageName, EnforcingAdmin admin) throws RemoteException {
+            public int getPolicySizeForAdmin(String callerPackageName, EnforcingAdmin admin)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -14757,7 +15979,8 @@ public interface IDevicePolicyManager extends IInterface {
             }
         }
 
-        private boolean onTransact$setPasswordQuality$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setPasswordQuality$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -14767,7 +15990,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getPasswordQuality$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getPasswordQuality$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -14778,7 +16002,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setPasswordMinimumLength$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setPasswordMinimumLength$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -14788,7 +16013,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getPasswordMinimumLength$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getPasswordMinimumLength$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -14799,7 +16025,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setPasswordMinimumUpperCase$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setPasswordMinimumUpperCase$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -14809,7 +16036,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getPasswordMinimumUpperCase$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getPasswordMinimumUpperCase$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -14820,7 +16048,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setPasswordMinimumLowerCase$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setPasswordMinimumLowerCase$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -14830,7 +16059,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getPasswordMinimumLowerCase$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getPasswordMinimumLowerCase$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -14841,7 +16071,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setPasswordMinimumLetters$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setPasswordMinimumLetters$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -14851,7 +16082,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getPasswordMinimumLetters$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getPasswordMinimumLetters$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -14862,7 +16094,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setPasswordMinimumNumeric$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setPasswordMinimumNumeric$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -14872,7 +16105,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getPasswordMinimumNumeric$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getPasswordMinimumNumeric$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -14883,7 +16117,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setPasswordMinimumSymbols$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setPasswordMinimumSymbols$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -14893,7 +16128,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getPasswordMinimumSymbols$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getPasswordMinimumSymbols$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -14904,7 +16140,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setPasswordMinimumNonLetter$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setPasswordMinimumNonLetter$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -14914,7 +16151,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getPasswordMinimumNonLetter$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getPasswordMinimumNonLetter$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -14925,7 +16163,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setPasswordHistoryLength$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setPasswordHistoryLength$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -14935,7 +16174,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getPasswordHistoryLength$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getPasswordHistoryLength$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -14946,7 +16186,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setPasswordExpirationTimeout$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setPasswordExpirationTimeout$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             long _arg2 = data.readLong();
@@ -14957,7 +16198,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getPasswordExpirationTimeout$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getPasswordExpirationTimeout$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -14968,7 +16210,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getPasswordExpiration$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getPasswordExpiration$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -14979,7 +16222,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$isActivePasswordSufficient$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$isActivePasswordSufficient$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -14990,7 +16234,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setRequiredPasswordComplexity$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setRequiredPasswordComplexity$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -15000,7 +16245,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getCurrentFailedPasswordAttempts$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getCurrentFailedPasswordAttempts$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -15011,7 +16257,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setMaximumFailedPasswordsForWipe$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setMaximumFailedPasswordsForWipe$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             int _arg2 = data.readInt();
@@ -15022,7 +16269,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getMaximumFailedPasswordsForWipe$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getMaximumFailedPasswordsForWipe$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -15033,7 +16281,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setMaximumTimeToLock$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setMaximumTimeToLock$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             long _arg2 = data.readLong();
@@ -15044,7 +16293,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getMaximumTimeToLock$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getMaximumTimeToLock$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -15055,7 +16305,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setRequiredStrongAuthTimeout$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setRequiredStrongAuthTimeout$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             long _arg2 = data.readLong();
@@ -15066,7 +16317,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getRequiredStrongAuthTimeout$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getRequiredStrongAuthTimeout$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -15087,7 +16339,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$wipeDataWithReason$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$wipeDataWithReason$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             int _arg1 = data.readInt();
             String _arg2 = data.readString();
@@ -15099,17 +16352,21 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setFactoryResetProtectionPolicy$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setFactoryResetProtectionPolicy$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
-            FactoryResetProtectionPolicy _arg2 = (FactoryResetProtectionPolicy) data.readTypedObject(FactoryResetProtectionPolicy.CREATOR);
+            FactoryResetProtectionPolicy _arg2 =
+                    (FactoryResetProtectionPolicy)
+                            data.readTypedObject(FactoryResetProtectionPolicy.CREATOR);
             data.enforceNoDataAvail();
             setFactoryResetProtectionPolicy(_arg0, _arg1, _arg2);
             reply.writeNoException();
             return true;
         }
 
-        private boolean onTransact$setGlobalProxy$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setGlobalProxy$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -15120,7 +16377,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setCameraDisabled$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setCameraDisabled$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             boolean _arg2 = data.readBoolean();
@@ -15131,7 +16389,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getCameraDisabled$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getCameraDisabled$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             int _arg2 = data.readInt();
@@ -15143,7 +16402,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setScreenCaptureDisabled$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setScreenCaptureDisabled$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             boolean _arg2 = data.readBoolean();
@@ -15154,7 +16414,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getScreenCaptureDisabled$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getScreenCaptureDisabled$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -15165,7 +16426,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setKeyguardDisabledFeatures$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setKeyguardDisabledFeatures$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             int _arg2 = data.readInt();
@@ -15176,7 +16438,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getKeyguardDisabledFeatures$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getKeyguardDisabledFeatures$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -15187,7 +16450,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setActiveAdmin$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setActiveAdmin$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             boolean _arg1 = data.readBoolean();
             int _arg2 = data.readInt();
@@ -15197,7 +16461,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getRemoveWarning$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getRemoveWarning$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             RemoteCallback _arg1 = (RemoteCallback) data.readTypedObject(RemoteCallback.CREATOR);
             int _arg2 = data.readInt();
@@ -15207,7 +16472,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$hasGrantedPolicy$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$hasGrantedPolicy$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -15218,7 +16484,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setDeviceOwner$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setDeviceOwner$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -15229,7 +16496,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$checkDeviceIdentifierAccess$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$checkDeviceIdentifierAccess$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -15240,7 +16508,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setPackagesSuspended$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setPackagesSuspended$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String[] _arg2 = data.createStringArray();
@@ -15252,7 +16521,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$isPackageSuspended$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$isPackageSuspended$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -15263,7 +16533,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$installCaCert$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$installCaCert$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             byte[] _arg2 = data.createByteArray();
@@ -15274,7 +16545,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$uninstallCaCerts$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$uninstallCaCerts$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String[] _arg2 = data.createStringArray();
@@ -15284,7 +16556,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$approveCaCert$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$approveCaCert$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -15295,7 +16568,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$installKeyPair$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$installKeyPair$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             byte[] _arg2 = data.createByteArray();
@@ -15305,13 +16579,15 @@ public interface IDevicePolicyManager extends IInterface {
             boolean _arg6 = data.readBoolean();
             boolean _arg7 = data.readBoolean();
             data.enforceNoDataAvail();
-            boolean _result = installKeyPair(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7);
+            boolean _result =
+                    installKeyPair(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7);
             reply.writeNoException();
             reply.writeBoolean(_result);
             return true;
         }
 
-        private boolean onTransact$removeKeyPair$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$removeKeyPair$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -15322,11 +16598,14 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$generateKeyPair$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$generateKeyPair$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String _arg2 = data.readString();
-            ParcelableKeyGenParameterSpec _arg3 = (ParcelableKeyGenParameterSpec) data.readTypedObject(ParcelableKeyGenParameterSpec.CREATOR);
+            ParcelableKeyGenParameterSpec _arg3 =
+                    (ParcelableKeyGenParameterSpec)
+                            data.readTypedObject(ParcelableKeyGenParameterSpec.CREATOR);
             int _arg4 = data.readInt();
             KeymasterCertificateChain _arg5 = new KeymasterCertificateChain();
             data.enforceNoDataAvail();
@@ -15337,7 +16616,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setKeyPairCertificate$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setKeyPairCertificate$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -15351,7 +16631,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$choosePrivateKeyAlias$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$choosePrivateKeyAlias$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             Uri _arg1 = (Uri) data.readTypedObject(Uri.CREATOR);
             String _arg2 = data.readString();
@@ -15362,7 +16643,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setDelegatedScopes$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setDelegatedScopes$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             List<String> _arg2 = data.createStringArrayList();
@@ -15372,7 +16654,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setAlwaysOnVpnPackage$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setAlwaysOnVpnPackage$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             boolean _arg2 = data.readBoolean();
@@ -15384,7 +16667,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$addPersistentPreferredActivity$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$addPersistentPreferredActivity$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             IntentFilter _arg2 = (IntentFilter) data.readTypedObject(IntentFilter.CREATOR);
@@ -15395,7 +16679,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$clearPackagePersistentPreferredActivities$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$clearPackagePersistentPreferredActivities$(
+                Parcel data, Parcel reply) throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -15405,7 +16690,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setDefaultSmsApplication$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setDefaultSmsApplication$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -15416,7 +16702,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setApplicationRestrictions$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setApplicationRestrictions$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -15428,7 +16715,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getApplicationRestrictions$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getApplicationRestrictions$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -15440,7 +16728,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setUserRestriction$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setUserRestriction$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -15452,7 +16741,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getUserRestrictions$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getUserRestrictions$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             boolean _arg2 = data.readBoolean();
@@ -15463,7 +16753,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$addCrossProfileIntentFilter$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$addCrossProfileIntentFilter$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             IntentFilter _arg2 = (IntentFilter) data.readTypedObject(IntentFilter.CREATOR);
@@ -15474,7 +16765,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$isAccessibilityServicePermittedByAdmin$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$isAccessibilityServicePermittedByAdmin$(
+                Parcel data, Parcel reply) throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             int _arg2 = data.readInt();
@@ -15485,7 +16777,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setPermittedInputMethods$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setPermittedInputMethods$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             List<String> _arg2 = data.createStringArrayList();
@@ -15497,7 +16790,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getPermittedInputMethods$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getPermittedInputMethods$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             boolean _arg2 = data.readBoolean();
@@ -15508,7 +16802,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$isInputMethodPermittedByAdmin$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$isInputMethodPermittedByAdmin$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             int _arg2 = data.readInt();
@@ -15520,7 +16815,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setApplicationHidden$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setApplicationHidden$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -15533,7 +16829,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$isApplicationHidden$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$isApplicationHidden$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -15545,11 +16842,13 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$createAndManageUser$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$createAndManageUser$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             ComponentName _arg2 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
-            PersistableBundle _arg3 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+            PersistableBundle _arg3 =
+                    (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
             int _arg4 = data.readInt();
             data.enforceNoDataAvail();
             UserHandle _result = createAndManageUser(_arg0, _arg1, _arg2, _arg3, _arg4);
@@ -15558,7 +16857,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$enableSystemApp$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$enableSystemApp$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -15568,7 +16868,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$enableSystemAppWithIntent$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$enableSystemAppWithIntent$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             Intent _arg2 = (Intent) data.readTypedObject(Intent.CREATOR);
@@ -15579,7 +16880,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$installExistingPackage$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$installExistingPackage$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -15590,7 +16892,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setAccountManagementDisabled$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setAccountManagementDisabled$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -15602,7 +16905,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getAccountTypesWithManagementDisabledAsUser$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getAccountTypesWithManagementDisabledAsUser$(
+                Parcel data, Parcel reply) throws RemoteException {
             int _arg0 = data.readInt();
             String _arg1 = data.readString();
             boolean _arg2 = data.readBoolean();
@@ -15613,7 +16917,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setLockTaskPackages$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setLockTaskPackages$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String[] _arg2 = data.createStringArray();
@@ -15623,7 +16928,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setLockTaskFeatures$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setLockTaskFeatures$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             int _arg2 = data.readInt();
@@ -15633,7 +16939,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setGlobalSetting$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setGlobalSetting$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -15643,7 +16950,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setSystemSetting$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setSystemSetting$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -15654,7 +16962,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setSecureSetting$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setSecureSetting$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -15664,7 +16973,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setConfiguredNetworksLockdownState$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setConfiguredNetworksLockdownState$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             boolean _arg2 = data.readBoolean();
@@ -15696,7 +17006,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$notifyLockTaskModeChanged$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$notifyLockTaskModeChanged$(Parcel data, Parcel reply)
+                throws RemoteException {
             boolean _arg0 = data.readBoolean();
             String _arg1 = data.readString();
             int _arg2 = data.readInt();
@@ -15706,7 +17017,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setUninstallBlocked$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setUninstallBlocked$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -15717,7 +17029,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$startManagedQuickContact$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$startManagedQuickContact$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             long _arg1 = data.readLong();
             boolean _arg2 = data.readBoolean();
@@ -15729,11 +17042,13 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setTrustAgentConfiguration$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setTrustAgentConfiguration$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             ComponentName _arg2 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
-            PersistableBundle _arg3 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+            PersistableBundle _arg3 =
+                    (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
             boolean _arg4 = data.readBoolean();
             data.enforceNoDataAvail();
             setTrustAgentConfiguration(_arg0, _arg1, _arg2, _arg3, _arg4);
@@ -15741,19 +17056,22 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getTrustAgentConfiguration$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getTrustAgentConfiguration$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             ComponentName _arg1 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg2 = data.readInt();
             boolean _arg3 = data.readBoolean();
             data.enforceNoDataAvail();
-            List<PersistableBundle> _result = getTrustAgentConfiguration(_arg0, _arg1, _arg2, _arg3);
+            List<PersistableBundle> _result =
+                    getTrustAgentConfiguration(_arg0, _arg1, _arg2, _arg3);
             reply.writeNoException();
             reply.writeTypedList(_result, 1);
             return true;
         }
 
-        private boolean onTransact$addCrossProfileWidgetProvider$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$addCrossProfileWidgetProvider$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -15764,7 +17082,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$removeCrossProfileWidgetProvider$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$removeCrossProfileWidgetProvider$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -15775,7 +17094,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setAutoTimeEnabled$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setAutoTimeEnabled$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             boolean _arg2 = data.readBoolean();
@@ -15785,7 +17105,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setAutoTimeZoneEnabled$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setAutoTimeZoneEnabled$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             boolean _arg2 = data.readBoolean();
@@ -15795,17 +17116,20 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setSystemUpdatePolicy$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setSystemUpdatePolicy$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
-            SystemUpdatePolicy _arg2 = (SystemUpdatePolicy) data.readTypedObject(SystemUpdatePolicy.CREATOR);
+            SystemUpdatePolicy _arg2 =
+                    (SystemUpdatePolicy) data.readTypedObject(SystemUpdatePolicy.CREATOR);
             data.enforceNoDataAvail();
             setSystemUpdatePolicy(_arg0, _arg1, _arg2);
             reply.writeNoException();
             return true;
         }
 
-        private boolean onTransact$setStatusBarDisabled$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setStatusBarDisabled$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             boolean _arg2 = data.readBoolean();
@@ -15816,7 +17140,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setPermissionPolicy$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setPermissionPolicy$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             int _arg2 = data.readInt();
@@ -15826,7 +17151,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setPermissionGrantState$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setPermissionGrantState$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -15839,7 +17165,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getPermissionGrantState$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getPermissionGrantState$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -15851,7 +17178,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setKeepUninstalledPackages$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setKeepUninstalledPackages$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             List<String> _arg2 = data.createStringArrayList();
@@ -15861,27 +17189,32 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setShortSupportMessage$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setShortSupportMessage$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
-            CharSequence _arg2 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+            CharSequence _arg2 =
+                    (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
             data.enforceNoDataAvail();
             setShortSupportMessage(_arg0, _arg1, _arg2);
             reply.writeNoException();
             return true;
         }
 
-        private boolean onTransact$setOrganizationName$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setOrganizationName$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
-            CharSequence _arg2 = (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
+            CharSequence _arg2 =
+                    (CharSequence) data.readTypedObject(TextUtils.CHAR_SEQUENCE_CREATOR);
             data.enforceNoDataAvail();
             setOrganizationName(_arg0, _arg1, _arg2);
             reply.writeNoException();
             return true;
         }
 
-        private boolean onTransact$setSecurityLoggingEnabled$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setSecurityLoggingEnabled$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             boolean _arg2 = data.readBoolean();
@@ -15891,7 +17224,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setNetworkLoggingEnabled$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setNetworkLoggingEnabled$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             boolean _arg2 = data.readBoolean();
@@ -15901,7 +17235,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$retrieveNetworkLogs$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$retrieveNetworkLogs$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             long _arg2 = data.readLong();
@@ -15912,7 +17247,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$bindDeviceAdminServiceAsUser$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$bindDeviceAdminServiceAsUser$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             IApplicationThread _arg1 = IApplicationThread.Stub.asInterface(data.readStrongBinder());
             IBinder _arg2 = data.readStrongBinder();
@@ -15921,13 +17257,15 @@ public interface IDevicePolicyManager extends IInterface {
             long _arg5 = data.readLong();
             int _arg6 = data.readInt();
             data.enforceNoDataAvail();
-            boolean _result = bindDeviceAdminServiceAsUser(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6);
+            boolean _result =
+                    bindDeviceAdminServiceAsUser(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6);
             reply.writeNoException();
             reply.writeBoolean(_result);
             return true;
         }
 
-        private boolean onTransact$setResetPasswordToken$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setResetPasswordToken$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             byte[] _arg2 = data.createByteArray();
@@ -15938,7 +17276,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$resetPasswordWithToken$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$resetPasswordWithToken$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -15951,17 +17290,20 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$clearApplicationUserData$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$clearApplicationUserData$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
-            IPackageDataObserver _arg2 = IPackageDataObserver.Stub.asInterface(data.readStrongBinder());
+            IPackageDataObserver _arg2 =
+                    IPackageDataObserver.Stub.asInterface(data.readStrongBinder());
             data.enforceNoDataAvail();
             clearApplicationUserData(_arg0, _arg1, _arg2);
             reply.writeNoException();
             return true;
         }
 
-        private boolean onTransact$getDisallowedSystemApps$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getDisallowedSystemApps$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             String _arg2 = data.readString();
@@ -15972,17 +17314,20 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$transferOwnership$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$transferOwnership$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             ComponentName _arg1 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
-            PersistableBundle _arg2 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+            PersistableBundle _arg2 =
+                    (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
             data.enforceNoDataAvail();
             transferOwnership(_arg0, _arg1, _arg2);
             reply.writeNoException();
             return true;
         }
 
-        private boolean onTransact$updateOverrideApn$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$updateOverrideApn$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             ApnSetting _arg2 = (ApnSetting) data.readTypedObject(ApnSetting.CREATOR);
@@ -15993,7 +17338,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$isMeteredDataDisabledPackageForUser$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$isMeteredDataDisabledPackageForUser$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             int _arg2 = data.readInt();
@@ -16004,7 +17350,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setPasswordQualityMDM$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setPasswordQualityMDM$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -16014,7 +17361,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setPasswordMinimumLengthMDM$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setPasswordMinimumLengthMDM$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -16024,7 +17372,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setPasswordMinimumUpperCaseMDM$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setPasswordMinimumUpperCaseMDM$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -16034,7 +17383,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setPasswordMinimumLowerCaseMDM$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setPasswordMinimumLowerCaseMDM$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -16044,7 +17394,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setPasswordMinimumLettersMDM$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setPasswordMinimumLettersMDM$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -16054,7 +17405,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setPasswordMinimumNumericMDM$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setPasswordMinimumNumericMDM$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -16064,7 +17416,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setPasswordMinimumSymbolsMDM$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setPasswordMinimumSymbolsMDM$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -16074,7 +17427,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setPasswordMinimumNonLetterMDM$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setPasswordMinimumNonLetterMDM$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -16084,7 +17438,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setPasswordHistoryLengthMDM$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setPasswordHistoryLengthMDM$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -16094,7 +17449,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setPasswordExpirationTimeoutMDM$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setPasswordExpirationTimeoutMDM$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             long _arg1 = data.readLong();
             int _arg2 = data.readInt();
@@ -16104,7 +17460,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setMaximumFailedPasswordsForWipeMDM$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setMaximumFailedPasswordsForWipeMDM$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -16114,7 +17471,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setMaximumTimeToLockMDM$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setMaximumTimeToLockMDM$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             long _arg1 = data.readLong();
             int _arg2 = data.readInt();
@@ -16124,7 +17482,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setKeyguardDisabledFeaturesMDM$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setKeyguardDisabledFeaturesMDM$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             int _arg2 = data.readInt();
@@ -16134,7 +17493,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setApplicationRestrictionsMDM$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setApplicationRestrictionsMDM$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             Bundle _arg2 = (Bundle) data.readTypedObject(Bundle.CREATOR);
@@ -16145,7 +17505,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getApplicationRestrictionsMDM$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getApplicationRestrictionsMDM$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             int _arg2 = data.readInt();
@@ -16156,7 +17517,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$resetPasswordWithTokenMDM$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$resetPasswordWithTokenMDM$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             byte[] _arg2 = data.createByteArray();
@@ -16169,7 +17531,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setResetPasswordTokenMDM$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setResetPasswordTokenMDM$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             byte[] _arg1 = data.createByteArray();
             int _arg2 = data.readInt();
@@ -16180,18 +17543,21 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setTrustAgentConfigurationMDM$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setTrustAgentConfigurationMDM$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             ComponentName _arg1 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             ComponentName _arg2 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
-            PersistableBundle _arg3 = (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
+            PersistableBundle _arg3 =
+                    (PersistableBundle) data.readTypedObject(PersistableBundle.CREATOR);
             data.enforceNoDataAvail();
             setTrustAgentConfigurationMDM(_arg0, _arg1, _arg2, _arg3);
             reply.writeNoException();
             return true;
         }
 
-        private boolean onTransact$hasDelegatedPermission$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$hasDelegatedPermission$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             int _arg1 = data.readInt();
             String _arg2 = data.readString();
@@ -16202,7 +17568,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$reportFailedPasswordAttemptWithFailureCount$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$reportFailedPasswordAttemptWithFailureCount$(
+                Parcel data, Parcel reply) throws RemoteException {
             int _arg0 = data.readInt();
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -16212,7 +17579,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setGlobalPrivateDns$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setGlobalPrivateDns$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             String _arg2 = data.readString();
@@ -16223,7 +17591,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setProfileOwnerOnOrganizationOwnedDevice$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setProfileOwnerOnOrganizationOwnedDevice$(
+                Parcel data, Parcel reply) throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -16233,18 +17602,22 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$installUpdateFromFile$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$installUpdateFromFile$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
-            ParcelFileDescriptor _arg2 = (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
-            StartInstallingUpdateCallback _arg3 = StartInstallingUpdateCallback.Stub.asInterface(data.readStrongBinder());
+            ParcelFileDescriptor _arg2 =
+                    (ParcelFileDescriptor) data.readTypedObject(ParcelFileDescriptor.CREATOR);
+            StartInstallingUpdateCallback _arg3 =
+                    StartInstallingUpdateCallback.Stub.asInterface(data.readStrongBinder());
             data.enforceNoDataAvail();
             installUpdateFromFile(_arg0, _arg1, _arg2, _arg3);
             reply.writeNoException();
             return true;
         }
 
-        private boolean onTransact$startViewCalendarEventInManagedProfile$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$startViewCalendarEventInManagedProfile$(
+                Parcel data, Parcel reply) throws RemoteException {
             String _arg0 = data.readString();
             long _arg1 = data.readLong();
             long _arg2 = data.readLong();
@@ -16252,13 +17625,16 @@ public interface IDevicePolicyManager extends IInterface {
             boolean _arg4 = data.readBoolean();
             int _arg5 = data.readInt();
             data.enforceNoDataAvail();
-            boolean _result = startViewCalendarEventInManagedProfile(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5);
+            boolean _result =
+                    startViewCalendarEventInManagedProfile(
+                            _arg0, _arg1, _arg2, _arg3, _arg4, _arg5);
             reply.writeNoException();
             reply.writeBoolean(_result);
             return true;
         }
 
-        private boolean onTransact$setKeyGrantForApp$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setKeyGrantForApp$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             String _arg2 = data.readString();
@@ -16271,7 +17647,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setKeyGrantToWifiAuth$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setKeyGrantToWifiAuth$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             String _arg1 = data.readString();
             boolean _arg2 = data.readBoolean();
@@ -16282,7 +17659,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setUserControlDisabledPackages$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setUserControlDisabledPackages$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             List<String> _arg2 = data.createStringArrayList();
@@ -16292,7 +17670,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setCommonCriteriaModeEnabled$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setCommonCriteriaModeEnabled$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             boolean _arg2 = data.readBoolean();
@@ -16302,7 +17681,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setOrganizationIdForUser$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setOrganizationIdForUser$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             String _arg1 = data.readString();
             int _arg2 = data.readInt();
@@ -16312,7 +17692,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setWifiSsidPolicy$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setWifiSsidPolicy$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             WifiSsidPolicy _arg1 = (WifiSsidPolicy) data.readTypedObject(WifiSsidPolicy.CREATOR);
             data.enforceNoDataAvail();
@@ -16332,7 +17713,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semSetPasswordQuality$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semSetPasswordQuality$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -16341,7 +17723,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semSetPasswordMinimumLength$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semSetPasswordMinimumLength$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -16350,7 +17733,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semSetPasswordMinimumUpperCase$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semSetPasswordMinimumUpperCase$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -16359,7 +17743,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semSetPasswordMinimumLowerCase$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semSetPasswordMinimumLowerCase$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -16368,7 +17753,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semSetPasswordMinimumNonLetter$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semSetPasswordMinimumNonLetter$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -16377,7 +17763,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semSetPasswordHistoryLength$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semSetPasswordHistoryLength$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -16386,7 +17773,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semSetPasswordExpirationTimeout$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semSetPasswordExpirationTimeout$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             long _arg1 = data.readLong();
             data.enforceNoDataAvail();
@@ -16395,7 +17783,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semSetSimplePasswordEnabled$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semSetSimplePasswordEnabled$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             boolean _arg1 = data.readBoolean();
             data.enforceNoDataAvail();
@@ -16404,7 +17793,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semIsSimplePasswordEnabled$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semIsSimplePasswordEnabled$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -16414,7 +17804,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semSetKeyguardDisabledFeatures$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semSetKeyguardDisabledFeatures$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -16423,7 +17814,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semSetAllowStorageCard$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semSetAllowStorageCard$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             boolean _arg1 = data.readBoolean();
             data.enforceNoDataAvail();
@@ -16432,7 +17824,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semGetAllowStorageCard$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semGetAllowStorageCard$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -16442,7 +17835,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semSetAllowWifi$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semSetAllowWifi$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             boolean _arg1 = data.readBoolean();
             data.enforceNoDataAvail();
@@ -16451,7 +17845,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semGetAllowWifi$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semGetAllowWifi$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -16461,7 +17856,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semSetAllowTextMessaging$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semSetAllowTextMessaging$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             boolean _arg1 = data.readBoolean();
             data.enforceNoDataAvail();
@@ -16470,7 +17866,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semGetAllowTextMessaging$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semGetAllowTextMessaging$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -16480,7 +17877,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semSetAllowPopImapEmail$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semSetAllowPopImapEmail$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             boolean _arg1 = data.readBoolean();
             data.enforceNoDataAvail();
@@ -16489,7 +17887,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semGetAllowPopImapEmail$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semGetAllowPopImapEmail$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -16499,7 +17898,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semSetAllowBrowser$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semSetAllowBrowser$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             boolean _arg1 = data.readBoolean();
             data.enforceNoDataAvail();
@@ -16508,7 +17908,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semGetAllowBrowser$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semGetAllowBrowser$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -16518,7 +17919,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semSetAllowInternetSharing$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semSetAllowInternetSharing$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             boolean _arg1 = data.readBoolean();
             data.enforceNoDataAvail();
@@ -16527,7 +17929,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semGetAllowInternetSharing$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semGetAllowInternetSharing$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -16537,7 +17940,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semSetAllowBluetoothMode$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semSetAllowBluetoothMode$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -16546,7 +17950,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semGetAllowBluetoothMode$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semGetAllowBluetoothMode$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -16556,7 +17961,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semSetAllowDesktopSync$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semSetAllowDesktopSync$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             boolean _arg1 = data.readBoolean();
             data.enforceNoDataAvail();
@@ -16565,7 +17971,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semGetAllowDesktopSync$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semGetAllowDesktopSync$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -16575,7 +17982,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semSetAllowIrda$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semSetAllowIrda$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             boolean _arg1 = data.readBoolean();
             data.enforceNoDataAvail();
@@ -16584,7 +17992,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semGetAllowIrda$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semGetAllowIrda$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -16594,7 +18003,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semSetRequireStorageCardEncryption$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semSetRequireStorageCardEncryption$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             boolean _arg1 = data.readBoolean();
             boolean _arg2 = data.readBoolean();
@@ -16604,7 +18014,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semGetRequireStorageCardEncryption$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semGetRequireStorageCardEncryption$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             boolean _arg2 = data.readBoolean();
@@ -16615,7 +18026,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$semSetChangeNotificationEnabled$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$semSetChangeNotificationEnabled$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             boolean _arg1 = data.readBoolean();
             data.enforceNoDataAvail();
@@ -16624,7 +18036,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setApplicationExemptions$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setApplicationExemptions$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             String _arg1 = data.readString();
             int[] _arg2 = data.createIntArray();
@@ -16643,7 +18056,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setUserRestrictionForKnox$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setUserRestrictionForKnox$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             boolean _arg2 = data.readBoolean();
@@ -16654,7 +18068,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setCrossProfileAppToIgnored$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setCrossProfileAppToIgnored$(Parcel data, Parcel reply)
+                throws RemoteException {
             int _arg0 = data.readInt();
             String _arg1 = data.readString();
             data.enforceNoDataAvail();
@@ -16663,7 +18078,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getSamsungSDcardEncryptionStatus$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getSamsungSDcardEncryptionStatus$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -16673,7 +18089,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setContentProtectionPolicy$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setContentProtectionPolicy$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             int _arg2 = data.readInt();
@@ -16683,7 +18100,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getContentProtectionPolicy$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getContentProtectionPolicy$(Parcel data, Parcel reply)
+                throws RemoteException {
             ComponentName _arg0 = (ComponentName) data.readTypedObject(ComponentName.CREATOR);
             String _arg1 = data.readString();
             data.enforceNoDataAvail();
@@ -16693,7 +18111,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$setMaxPolicyStorageLimit$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$setMaxPolicyStorageLimit$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -16702,7 +18121,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$forceSetMaxPolicyStorageLimit$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$forceSetMaxPolicyStorageLimit$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             int _arg1 = data.readInt();
             data.enforceNoDataAvail();
@@ -16711,7 +18131,8 @@ public interface IDevicePolicyManager extends IInterface {
             return true;
         }
 
-        private boolean onTransact$getPolicySizeForAdmin$(Parcel data, Parcel reply) throws RemoteException {
+        private boolean onTransact$getPolicySizeForAdmin$(Parcel data, Parcel reply)
+                throws RemoteException {
             String _arg0 = data.readString();
             EnforcingAdmin _arg1 = (EnforcingAdmin) data.readTypedObject(EnforcingAdmin.CREATOR);
             data.enforceNoDataAvail();

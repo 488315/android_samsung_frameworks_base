@@ -1,6 +1,7 @@
 package com.samsung.android.wifi;
 
 import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -42,7 +43,11 @@ public class SemWifiApMacInfo {
                 e.printStackTrace();
             }
             try {
-                String[] cmd = {"/system/bin/sh", "-c", "/system/bin/chmod 665 /data/misc/wifi_hostapd/wifimac.info"};
+                String[] cmd = {
+                    "/system/bin/sh",
+                    "-c",
+                    "/system/bin/chmod 665 /data/misc/wifi_hostapd/wifimac.info"
+                };
                 Process p = Runtime.getRuntime().exec(cmd);
                 try {
                     p.waitFor();
@@ -99,7 +104,10 @@ public class SemWifiApMacInfo {
             synchronized (this) {
                 try {
                     try {
-                        fw = new OutputStreamWriter(new FileOutputStream(WIFI_MAC_INFO), StandardCharsets.UTF_8);
+                        fw =
+                                new OutputStreamWriter(
+                                        new FileOutputStream(WIFI_MAC_INFO),
+                                        StandardCharsets.UTF_8);
                         fw.write(str);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -125,7 +133,10 @@ public class SemWifiApMacInfo {
     }
 
     private boolean isMacAddress(String macAddressCandidate) {
-        Pattern macPattern = Pattern.compile("[0-9a-fA-F]{2}[-:][0-9a-fA-F]{2}[-:][0-9a-fA-F]{2}[-:][0-9a-fA-F]{2}[-:][0 -9a-fA-F]{2}[-:][0-9a-fA-F]{2}");
+        Pattern macPattern =
+                Pattern.compile(
+                        "[0-9a-fA-F]{2}[-:][0-9a-fA-F]{2}[-:][0-9a-fA-F]{2}[-:][0-9a-fA-F]{2}[-:][0"
+                            + " -9a-fA-F]{2}[-:][0-9a-fA-F]{2}");
         Matcher m = macPattern.matcher(macAddressCandidate);
         return m.matches();
     }

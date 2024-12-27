@@ -6,12 +6,11 @@ import java.lang.annotation.RetentionPolicy;
 /* loaded from: classes2.dex */
 public abstract class CameraOfflineSession extends CameraCaptureSession {
 
-    public static abstract class CameraOfflineSessionCallback {
+    public abstract static class CameraOfflineSessionCallback {
         public static final int STATUS_INTERNAL_ERROR = 0;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface StatusCode {
-        }
+        public @interface StatusCode {}
 
         public abstract void onClosed(CameraOfflineSession cameraOfflineSession);
 

@@ -16,7 +16,11 @@ public abstract class Violation extends Throwable {
             }
             String message = getMessage();
             Throwable cause = getCause();
-            int hashCode = ((((message != null ? message.hashCode() : getClass().hashCode()) * 37) + calcStackTraceHashCode(getStackTrace())) * 37) + (cause != null ? cause.toString().hashCode() : 0);
+            int hashCode =
+                    ((((message != null ? message.hashCode() : getClass().hashCode()) * 37)
+                                            + calcStackTraceHashCode(getStackTrace()))
+                                    * 37)
+                            + (cause != null ? cause.toString().hashCode() : 0);
             this.mHashCodeValid = true;
             this.mHashCode = hashCode;
             return hashCode;

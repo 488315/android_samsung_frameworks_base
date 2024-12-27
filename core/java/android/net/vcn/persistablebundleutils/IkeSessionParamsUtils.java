@@ -4,12 +4,13 @@ import android.net.InetAddresses;
 import android.net.eap.EapSessionConfig;
 import android.net.ipsec.ike.IkeSaProposal;
 import android.net.ipsec.ike.IkeSessionParams;
-import android.net.vcn.persistablebundleutils.IkeSessionParamsUtils;
 import android.os.PersistableBundle;
 import android.system.OsConstants;
 import android.util.ArraySet;
 import android.util.Log;
+
 import com.android.server.vcn.repackaged.util.PersistableBundleUtils;
+
 import java.net.InetAddress;
 import java.security.PrivateKey;
 import java.security.cert.CertificateEncodingException;
@@ -68,31 +69,50 @@ public final class IkeSessionParamsUtils {
 
     public static PersistableBundle toPersistableBundle(IkeSessionParams params) {
         if (params.getNetwork() != null || params.getIke3gppExtension() != null) {
-            throw new IllegalStateException("Cannot convert a IkeSessionParams with a caller configured network or with 3GPP extension enabled");
+            throw new IllegalStateException(
+                    "Cannot convert a IkeSessionParams with a caller configured network or with"
+                        + " 3GPP extension enabled");
         }
         PersistableBundle result = new PersistableBundle();
         result.putString(SERVER_HOST_NAME_KEY, params.getServerHostname());
-        PersistableBundle saProposalBundle = PersistableBundleUtils.fromList(params.getSaProposals(), new PersistableBundleUtils.Serializer() { // from class: android.net.vcn.persistablebundleutils.IkeSessionParamsUtils$$ExternalSyntheticLambda2
-            @Override // com.android.server.vcn.repackaged.util.PersistableBundleUtils.Serializer
-            public final PersistableBundle toPersistableBundle(Object obj) {
-                return IkeSaProposalUtils.toPersistableBundle((IkeSaProposal) obj);
-            }
-        });
+        PersistableBundle saProposalBundle =
+                PersistableBundleUtils.fromList(
+                        params.getSaProposals(),
+                        new PersistableBundleUtils
+                                .Serializer() { // from class:
+                                                // android.net.vcn.persistablebundleutils.IkeSessionParamsUtils$$ExternalSyntheticLambda2
+                            @Override // com.android.server.vcn.repackaged.util.PersistableBundleUtils.Serializer
+                            public final PersistableBundle toPersistableBundle(Object obj) {
+                                return IkeSaProposalUtils.toPersistableBundle((IkeSaProposal) obj);
+                            }
+                        });
         result.putPersistableBundle(SA_PROPOSALS_KEY, saProposalBundle);
-        result.putPersistableBundle(LOCAL_ID_KEY, IkeIdentificationUtils.toPersistableBundle(params.getLocalIdentification()));
-        result.putPersistableBundle(REMOTE_ID_KEY, IkeIdentificationUtils.toPersistableBundle(params.getRemoteIdentification()));
-        result.putPersistableBundle(LOCAL_AUTH_KEY, AuthConfigUtils.toPersistableBundle(params.getLocalAuthConfig()));
-        result.putPersistableBundle(REMOTE_AUTH_KEY, AuthConfigUtils.toPersistableBundle(params.getRemoteAuthConfig()));
+        result.putPersistableBundle(
+                LOCAL_ID_KEY,
+                IkeIdentificationUtils.toPersistableBundle(params.getLocalIdentification()));
+        result.putPersistableBundle(
+                REMOTE_ID_KEY,
+                IkeIdentificationUtils.toPersistableBundle(params.getRemoteIdentification()));
+        result.putPersistableBundle(
+                LOCAL_AUTH_KEY, AuthConfigUtils.toPersistableBundle(params.getLocalAuthConfig()));
+        result.putPersistableBundle(
+                REMOTE_AUTH_KEY, AuthConfigUtils.toPersistableBundle(params.getRemoteAuthConfig()));
         List<ConfigRequest> reqList = new ArrayList<>();
         for (IkeSessionParams.IkeConfigRequest req : params.getConfigurationRequests()) {
             reqList.add(new ConfigRequest(req));
         }
-        PersistableBundle configReqListBundle = PersistableBundleUtils.fromList(reqList, new PersistableBundleUtils.Serializer() { // from class: android.net.vcn.persistablebundleutils.IkeSessionParamsUtils$$ExternalSyntheticLambda3
-            @Override // com.android.server.vcn.repackaged.util.PersistableBundleUtils.Serializer
-            public final PersistableBundle toPersistableBundle(Object obj) {
-                return ((IkeSessionParamsUtils.ConfigRequest) obj).toPersistableBundle();
-            }
-        });
+        PersistableBundle configReqListBundle =
+                PersistableBundleUtils.fromList(
+                        reqList,
+                        new PersistableBundleUtils
+                                .Serializer() { // from class:
+                                                // android.net.vcn.persistablebundleutils.IkeSessionParamsUtils$$ExternalSyntheticLambda3
+                            @Override // com.android.server.vcn.repackaged.util.PersistableBundleUtils.Serializer
+                            public final PersistableBundle toPersistableBundle(Object obj) {
+                                return ((IkeSessionParamsUtils.ConfigRequest) obj)
+                                        .toPersistableBundle();
+                            }
+                        });
         result.putPersistableBundle(CONFIG_REQUESTS_KEY, configReqListBundle);
         result.putIntArray(RETRANS_TIMEOUTS_KEY, params.getRetransmissionTimeoutsMillis());
         result.putInt(HARD_LIFETIME_SEC_KEY, params.getHardLifetimeSeconds());
@@ -114,14 +134,19 @@ public final class IkeSessionParamsUtils {
                 }
             }
         }
-        int[] optionArray = enabledIkeOptions.stream().mapToInt(new ToIntFunction() { // from class: android.net.vcn.persistablebundleutils.IkeSessionParamsUtils$$ExternalSyntheticLambda4
-            @Override // java.util.function.ToIntFunction
-            public final int applyAsInt(Object obj) {
-                int intValue;
-                intValue = ((Integer) obj).intValue();
-                return intValue;
-            }
-        }).toArray();
+        int[] optionArray =
+                enabledIkeOptions.stream()
+                        .mapToInt(
+                                new ToIntFunction() { // from class:
+                                                      // android.net.vcn.persistablebundleutils.IkeSessionParamsUtils$$ExternalSyntheticLambda4
+                                    @Override // java.util.function.ToIntFunction
+                                    public final int applyAsInt(Object obj) {
+                                        int intValue;
+                                        intValue = ((Integer) obj).intValue();
+                                        return intValue;
+                                    }
+                                })
+                        .toArray();
         result.putIntArray(IKE_OPTIONS_KEY, optionArray);
         return result;
     }
@@ -132,32 +157,52 @@ public final class IkeSessionParamsUtils {
         builder.setServerHostname(in.getString(SERVER_HOST_NAME_KEY));
         PersistableBundle proposalBundle = in.getPersistableBundle(SA_PROPOSALS_KEY);
         Objects.requireNonNull(in, "SA Proposals was null");
-        List<IkeSaProposal> saProposals = PersistableBundleUtils.toList(proposalBundle, new PersistableBundleUtils.Deserializer() { // from class: android.net.vcn.persistablebundleutils.IkeSessionParamsUtils$$ExternalSyntheticLambda0
-            @Override // com.android.server.vcn.repackaged.util.PersistableBundleUtils.Deserializer
-            public final Object fromPersistableBundle(PersistableBundle persistableBundle) {
-                return IkeSaProposalUtils.fromPersistableBundle(persistableBundle);
-            }
-        });
+        List<IkeSaProposal> saProposals =
+                PersistableBundleUtils.toList(
+                        proposalBundle,
+                        new PersistableBundleUtils
+                                .Deserializer() { // from class:
+                                                  // android.net.vcn.persistablebundleutils.IkeSessionParamsUtils$$ExternalSyntheticLambda0
+                            @Override // com.android.server.vcn.repackaged.util.PersistableBundleUtils.Deserializer
+                            public final Object fromPersistableBundle(
+                                    PersistableBundle persistableBundle) {
+                                return IkeSaProposalUtils.fromPersistableBundle(persistableBundle);
+                            }
+                        });
         for (IkeSaProposal proposal : saProposals) {
             builder.addSaProposal(proposal);
         }
-        builder.setLocalIdentification(IkeIdentificationUtils.fromPersistableBundle(in.getPersistableBundle(LOCAL_ID_KEY)));
-        builder.setRemoteIdentification(IkeIdentificationUtils.fromPersistableBundle(in.getPersistableBundle(REMOTE_ID_KEY)));
-        AuthConfigUtils.setBuilderByReadingPersistableBundle(in.getPersistableBundle(LOCAL_AUTH_KEY), in.getPersistableBundle(REMOTE_AUTH_KEY), builder);
+        builder.setLocalIdentification(
+                IkeIdentificationUtils.fromPersistableBundle(
+                        in.getPersistableBundle(LOCAL_ID_KEY)));
+        builder.setRemoteIdentification(
+                IkeIdentificationUtils.fromPersistableBundle(
+                        in.getPersistableBundle(REMOTE_ID_KEY)));
+        AuthConfigUtils.setBuilderByReadingPersistableBundle(
+                in.getPersistableBundle(LOCAL_AUTH_KEY),
+                in.getPersistableBundle(REMOTE_AUTH_KEY),
+                builder);
         builder.setRetransmissionTimeoutsMillis(in.getIntArray(RETRANS_TIMEOUTS_KEY));
-        builder.setLifetimeSeconds(in.getInt(HARD_LIFETIME_SEC_KEY), in.getInt(SOFT_LIFETIME_SEC_KEY));
+        builder.setLifetimeSeconds(
+                in.getInt(HARD_LIFETIME_SEC_KEY), in.getInt(SOFT_LIFETIME_SEC_KEY));
         builder.setDpdDelaySeconds(in.getInt(DPD_DELAY_SEC_KEY));
         builder.setNattKeepAliveDelaySeconds(in.getInt(NATT_KEEPALIVE_DELAY_SEC_KEY));
         builder.setIpVersion(in.getInt(IP_VERSION_KEY));
         builder.setEncapType(in.getInt(ENCAP_TYPE_KEY));
         PersistableBundle configReqListBundle = in.getPersistableBundle(CONFIG_REQUESTS_KEY);
         Objects.requireNonNull(configReqListBundle, "Config request list was null");
-        List<ConfigRequest> reqList = PersistableBundleUtils.toList(configReqListBundle, new PersistableBundleUtils.Deserializer() { // from class: android.net.vcn.persistablebundleutils.IkeSessionParamsUtils$$ExternalSyntheticLambda1
-            @Override // com.android.server.vcn.repackaged.util.PersistableBundleUtils.Deserializer
-            public final Object fromPersistableBundle(PersistableBundle persistableBundle) {
-                return new IkeSessionParamsUtils.ConfigRequest(persistableBundle);
-            }
-        });
+        List<ConfigRequest> reqList =
+                PersistableBundleUtils.toList(
+                        configReqListBundle,
+                        new PersistableBundleUtils
+                                .Deserializer() { // from class:
+                                                  // android.net.vcn.persistablebundleutils.IkeSessionParamsUtils$$ExternalSyntheticLambda1
+                            @Override // com.android.server.vcn.repackaged.util.PersistableBundleUtils.Deserializer
+                            public final Object fromPersistableBundle(
+                                    PersistableBundle persistableBundle) {
+                                return new IkeSessionParamsUtils.ConfigRequest(persistableBundle);
+                            }
+                        });
         for (ConfigRequest req : reqList) {
             switch (req.type) {
                 case 1:
@@ -177,7 +222,8 @@ public final class IkeSessionParamsUtils {
                         break;
                     }
                 default:
-                    throw new IllegalArgumentException("Unrecognized config request type: " + req.type);
+                    throw new IllegalArgumentException(
+                            "Unrecognized config request type: " + req.type);
             }
         }
         Iterator<Integer> it = IKE_OPTIONS.iterator();
@@ -202,25 +248,33 @@ public final class IkeSessionParamsUtils {
         private static final int IKE_AUTH_METHOD_PSK = 1;
         private static final int IKE_AUTH_METHOD_PUB_KEY_SIGNATURE = 2;
 
-        private AuthConfigUtils() {
-        }
+        private AuthConfigUtils() {}
 
-        public static PersistableBundle toPersistableBundle(IkeSessionParams.IkeAuthConfig authConfig) {
+        public static PersistableBundle toPersistableBundle(
+                IkeSessionParams.IkeAuthConfig authConfig) {
             if (authConfig instanceof IkeSessionParams.IkeAuthPskConfig) {
-                IkeSessionParams.IkeAuthPskConfig config = (IkeSessionParams.IkeAuthPskConfig) authConfig;
-                return IkeAuthPskConfigUtils.toPersistableBundle(config, createPersistableBundle(1));
+                IkeSessionParams.IkeAuthPskConfig config =
+                        (IkeSessionParams.IkeAuthPskConfig) authConfig;
+                return IkeAuthPskConfigUtils.toPersistableBundle(
+                        config, createPersistableBundle(1));
             }
             if (authConfig instanceof IkeSessionParams.IkeAuthDigitalSignLocalConfig) {
-                IkeSessionParams.IkeAuthDigitalSignLocalConfig config2 = (IkeSessionParams.IkeAuthDigitalSignLocalConfig) authConfig;
-                return IkeAuthDigitalSignConfigUtils.toPersistableBundle(config2, createPersistableBundle(2));
+                IkeSessionParams.IkeAuthDigitalSignLocalConfig config2 =
+                        (IkeSessionParams.IkeAuthDigitalSignLocalConfig) authConfig;
+                return IkeAuthDigitalSignConfigUtils.toPersistableBundle(
+                        config2, createPersistableBundle(2));
             }
             if (authConfig instanceof IkeSessionParams.IkeAuthDigitalSignRemoteConfig) {
-                IkeSessionParams.IkeAuthDigitalSignRemoteConfig config3 = (IkeSessionParams.IkeAuthDigitalSignRemoteConfig) authConfig;
-                return IkeAuthDigitalSignConfigUtils.toPersistableBundle(config3, createPersistableBundle(2));
+                IkeSessionParams.IkeAuthDigitalSignRemoteConfig config3 =
+                        (IkeSessionParams.IkeAuthDigitalSignRemoteConfig) authConfig;
+                return IkeAuthDigitalSignConfigUtils.toPersistableBundle(
+                        config3, createPersistableBundle(2));
             }
             if (authConfig instanceof IkeSessionParams.IkeAuthEapConfig) {
-                IkeSessionParams.IkeAuthEapConfig config4 = (IkeSessionParams.IkeAuthEapConfig) authConfig;
-                return IkeAuthEapConfigUtils.toPersistableBundle(config4, createPersistableBundle(3));
+                IkeSessionParams.IkeAuthEapConfig config4 =
+                        (IkeSessionParams.IkeAuthEapConfig) authConfig;
+                return IkeAuthEapConfigUtils.toPersistableBundle(
+                        config4, createPersistableBundle(3));
             }
             throw new IllegalStateException("Invalid IkeAuthConfig subclass");
         }
@@ -231,7 +285,10 @@ public final class IkeSessionParamsUtils {
             return result;
         }
 
-        public static void setBuilderByReadingPersistableBundle(PersistableBundle localAuthBundle, PersistableBundle remoteAuthBundle, IkeSessionParams.Builder builder) {
+        public static void setBuilderByReadingPersistableBundle(
+                PersistableBundle localAuthBundle,
+                PersistableBundle remoteAuthBundle,
+                IkeSessionParams.Builder builder) {
             Objects.requireNonNull(localAuthBundle, "localAuthBundle was null");
             Objects.requireNonNull(remoteAuthBundle, "remoteAuthBundle was null");
             int localMethodType = localAuthBundle.getInt(AUTH_METHOD_KEY);
@@ -239,24 +296,35 @@ public final class IkeSessionParamsUtils {
             switch (localMethodType) {
                 case 1:
                     if (remoteMethodType != 1) {
-                        throw new IllegalArgumentException("Expect remote auth method to be PSK based, but was " + remoteMethodType);
+                        throw new IllegalArgumentException(
+                                "Expect remote auth method to be PSK based, but was "
+                                        + remoteMethodType);
                     }
-                    IkeAuthPskConfigUtils.setBuilderByReadingPersistableBundle(localAuthBundle, remoteAuthBundle, builder);
+                    IkeAuthPskConfigUtils.setBuilderByReadingPersistableBundle(
+                            localAuthBundle, remoteAuthBundle, builder);
                     return;
                 case 2:
                     if (remoteMethodType != 2) {
-                        throw new IllegalArgumentException("Expect remote auth method to be digital signature based, but was " + remoteMethodType);
+                        throw new IllegalArgumentException(
+                                "Expect remote auth method to be digital signature based, but was "
+                                        + remoteMethodType);
                     }
-                    IkeAuthDigitalSignConfigUtils.setBuilderByReadingPersistableBundle(localAuthBundle, remoteAuthBundle, builder);
+                    IkeAuthDigitalSignConfigUtils.setBuilderByReadingPersistableBundle(
+                            localAuthBundle, remoteAuthBundle, builder);
                     return;
                 case 3:
                     if (remoteMethodType != 2) {
-                        throw new IllegalArgumentException("When using EAP for local authentication, expect remote auth method to be digital signature based, but was " + remoteMethodType);
+                        throw new IllegalArgumentException(
+                                "When using EAP for local authentication, expect remote auth method"
+                                    + " to be digital signature based, but was "
+                                        + remoteMethodType);
                     }
-                    IkeAuthEapConfigUtils.setBuilderByReadingPersistableBundle(localAuthBundle, remoteAuthBundle, builder);
+                    IkeAuthEapConfigUtils.setBuilderByReadingPersistableBundle(
+                            localAuthBundle, remoteAuthBundle, builder);
                     return;
                 default:
-                    throw new IllegalArgumentException("Invalid EAP method type " + localMethodType);
+                    throw new IllegalArgumentException(
+                            "Invalid EAP method type " + localMethodType);
             }
         }
     }
@@ -264,15 +332,19 @@ public final class IkeSessionParamsUtils {
     private static final class IkeAuthPskConfigUtils {
         private static final String PSK_KEY = "PSK_KEY";
 
-        private IkeAuthPskConfigUtils() {
-        }
+        private IkeAuthPskConfigUtils() {}
 
-        public static PersistableBundle toPersistableBundle(IkeSessionParams.IkeAuthPskConfig config, PersistableBundle result) {
-            result.putPersistableBundle(PSK_KEY, PersistableBundleUtils.fromByteArray(config.getPsk()));
+        public static PersistableBundle toPersistableBundle(
+                IkeSessionParams.IkeAuthPskConfig config, PersistableBundle result) {
+            result.putPersistableBundle(
+                    PSK_KEY, PersistableBundleUtils.fromByteArray(config.getPsk()));
             return result;
         }
 
-        public static void setBuilderByReadingPersistableBundle(PersistableBundle localAuthBundle, PersistableBundle remoteAuthBundle, IkeSessionParams.Builder builder) {
+        public static void setBuilderByReadingPersistableBundle(
+                PersistableBundle localAuthBundle,
+                PersistableBundle remoteAuthBundle,
+                IkeSessionParams.Builder builder) {
             Objects.requireNonNull(localAuthBundle, "localAuthBundle was null");
             Objects.requireNonNull(remoteAuthBundle, "remoteAuthBundle was null");
             PersistableBundle localPskBundle = localAuthBundle.getPersistableBundle(PSK_KEY);
@@ -294,36 +366,49 @@ public final class IkeSessionParamsUtils {
         private static final String PRIVATE_KEY_KEY = "PRIVATE_KEY_KEY";
         private static final String TRUST_CERT_KEY = "TRUST_CERT_KEY";
 
-        private IkeAuthDigitalSignConfigUtils() {
-        }
+        private IkeAuthDigitalSignConfigUtils() {}
 
-        public static PersistableBundle toPersistableBundle(IkeSessionParams.IkeAuthDigitalSignLocalConfig config, PersistableBundle result) {
+        public static PersistableBundle toPersistableBundle(
+                IkeSessionParams.IkeAuthDigitalSignLocalConfig config, PersistableBundle result) {
             try {
-                result.putPersistableBundle(END_CERT_KEY, PersistableBundleUtils.fromByteArray(config.getClientEndCertificate().getEncoded()));
+                result.putPersistableBundle(
+                        END_CERT_KEY,
+                        PersistableBundleUtils.fromByteArray(
+                                config.getClientEndCertificate().getEncoded()));
                 List<X509Certificate> certList = config.getIntermediateCertificates();
                 List<byte[]> encodedCertList = new ArrayList<>(certList.size());
                 for (X509Certificate cert : certList) {
                     encodedCertList.add(cert.getEncoded());
                 }
-                PersistableBundle certsBundle = PersistableBundleUtils.fromList(encodedCertList, new PersistableBundleUtils.Serializer() { // from class: android.net.vcn.persistablebundleutils.IkeSessionParamsUtils$IkeAuthDigitalSignConfigUtils$$ExternalSyntheticLambda1
-                    @Override // com.android.server.vcn.repackaged.util.PersistableBundleUtils.Serializer
-                    public final PersistableBundle toPersistableBundle(Object obj) {
-                        return PersistableBundleUtils.fromByteArray((byte[]) obj);
-                    }
-                });
+                PersistableBundle certsBundle =
+                        PersistableBundleUtils.fromList(
+                                encodedCertList,
+                                new PersistableBundleUtils
+                                        .Serializer() { // from class:
+                                                        // android.net.vcn.persistablebundleutils.IkeSessionParamsUtils$IkeAuthDigitalSignConfigUtils$$ExternalSyntheticLambda1
+                                    @Override // com.android.server.vcn.repackaged.util.PersistableBundleUtils.Serializer
+                                    public final PersistableBundle toPersistableBundle(Object obj) {
+                                        return PersistableBundleUtils.fromByteArray((byte[]) obj);
+                                    }
+                                });
                 result.putPersistableBundle(INTERMEDIATE_CERTS_KEY, certsBundle);
-                result.putPersistableBundle(PRIVATE_KEY_KEY, PersistableBundleUtils.fromByteArray(config.getPrivateKey().getEncoded()));
+                result.putPersistableBundle(
+                        PRIVATE_KEY_KEY,
+                        PersistableBundleUtils.fromByteArray(config.getPrivateKey().getEncoded()));
                 return result;
             } catch (CertificateEncodingException e) {
                 throw new IllegalArgumentException("Fail to encode certificate");
             }
         }
 
-        public static PersistableBundle toPersistableBundle(IkeSessionParams.IkeAuthDigitalSignRemoteConfig config, PersistableBundle result) {
+        public static PersistableBundle toPersistableBundle(
+                IkeSessionParams.IkeAuthDigitalSignRemoteConfig config, PersistableBundle result) {
             try {
                 X509Certificate caCert = config.getRemoteCaCert();
                 if (caCert != null) {
-                    result.putPersistableBundle(TRUST_CERT_KEY, PersistableBundleUtils.fromByteArray(caCert.getEncoded()));
+                    result.putPersistableBundle(
+                            TRUST_CERT_KEY,
+                            PersistableBundleUtils.fromByteArray(caCert.getEncoded()));
                 }
                 return result;
             } catch (CertificateEncodingException e) {
@@ -331,29 +416,43 @@ public final class IkeSessionParamsUtils {
             }
         }
 
-        public static void setBuilderByReadingPersistableBundle(PersistableBundle localAuthBundle, PersistableBundle remoteAuthBundle, IkeSessionParams.Builder builder) {
+        public static void setBuilderByReadingPersistableBundle(
+                PersistableBundle localAuthBundle,
+                PersistableBundle remoteAuthBundle,
+                IkeSessionParams.Builder builder) {
             Objects.requireNonNull(localAuthBundle, "localAuthBundle was null");
             Objects.requireNonNull(remoteAuthBundle, "remoteAuthBundle was null");
             PersistableBundle endCertBundle = localAuthBundle.getPersistableBundle(END_CERT_KEY);
             Objects.requireNonNull(endCertBundle, "End cert was null");
             byte[] encodedCert = PersistableBundleUtils.toByteArray(endCertBundle);
             X509Certificate endCert = CertUtils.certificateFromByteArray(encodedCert);
-            PersistableBundle certsBundle = localAuthBundle.getPersistableBundle(INTERMEDIATE_CERTS_KEY);
+            PersistableBundle certsBundle =
+                    localAuthBundle.getPersistableBundle(INTERMEDIATE_CERTS_KEY);
             Objects.requireNonNull(certsBundle, "Intermediate certs was null");
-            List<byte[]> encodedCertList = PersistableBundleUtils.toList(certsBundle, new PersistableBundleUtils.Deserializer() { // from class: android.net.vcn.persistablebundleutils.IkeSessionParamsUtils$IkeAuthDigitalSignConfigUtils$$ExternalSyntheticLambda0
-                @Override // com.android.server.vcn.repackaged.util.PersistableBundleUtils.Deserializer
-                public final Object fromPersistableBundle(PersistableBundle persistableBundle) {
-                    return PersistableBundleUtils.toByteArray(persistableBundle);
-                }
-            });
+            List<byte[]> encodedCertList =
+                    PersistableBundleUtils.toList(
+                            certsBundle,
+                            new PersistableBundleUtils
+                                    .Deserializer() { // from class:
+                                                      // android.net.vcn.persistablebundleutils.IkeSessionParamsUtils$IkeAuthDigitalSignConfigUtils$$ExternalSyntheticLambda0
+                                @Override // com.android.server.vcn.repackaged.util.PersistableBundleUtils.Deserializer
+                                public final Object fromPersistableBundle(
+                                        PersistableBundle persistableBundle) {
+                                    return PersistableBundleUtils.toByteArray(persistableBundle);
+                                }
+                            });
             List<X509Certificate> certList = new ArrayList<>(encodedCertList.size());
             for (byte[] encoded : encodedCertList) {
                 certList.add(CertUtils.certificateFromByteArray(encoded));
             }
-            PersistableBundle privateKeyBundle = localAuthBundle.getPersistableBundle(PRIVATE_KEY_KEY);
+            PersistableBundle privateKeyBundle =
+                    localAuthBundle.getPersistableBundle(PRIVATE_KEY_KEY);
             Objects.requireNonNull(privateKeyBundle, "PrivateKey bundle was null");
-            PrivateKey privateKey = CertUtils.privateKeyFromByteArray(PersistableBundleUtils.toByteArray(privateKeyBundle));
-            PersistableBundle trustCertBundle = remoteAuthBundle.getPersistableBundle(TRUST_CERT_KEY);
+            PrivateKey privateKey =
+                    CertUtils.privateKeyFromByteArray(
+                            PersistableBundleUtils.toByteArray(privateKeyBundle));
+            PersistableBundle trustCertBundle =
+                    remoteAuthBundle.getPersistableBundle(TRUST_CERT_KEY);
             X509Certificate caCert = null;
             if (trustCertBundle != null) {
                 byte[] encodedCaCert = PersistableBundleUtils.toByteArray(trustCertBundle);
@@ -366,19 +465,25 @@ public final class IkeSessionParamsUtils {
     private static final class IkeAuthEapConfigUtils {
         private static final String EAP_CONFIG_KEY = "EAP_CONFIG_KEY";
 
-        private IkeAuthEapConfigUtils() {
-        }
+        private IkeAuthEapConfigUtils() {}
 
-        public static PersistableBundle toPersistableBundle(IkeSessionParams.IkeAuthEapConfig config, PersistableBundle result) {
-            result.putPersistableBundle(EAP_CONFIG_KEY, EapSessionConfigUtils.toPersistableBundle(config.getEapConfig()));
+        public static PersistableBundle toPersistableBundle(
+                IkeSessionParams.IkeAuthEapConfig config, PersistableBundle result) {
+            result.putPersistableBundle(
+                    EAP_CONFIG_KEY,
+                    EapSessionConfigUtils.toPersistableBundle(config.getEapConfig()));
             return result;
         }
 
-        public static void setBuilderByReadingPersistableBundle(PersistableBundle localAuthBundle, PersistableBundle remoteAuthBundle, IkeSessionParams.Builder builder) {
+        public static void setBuilderByReadingPersistableBundle(
+                PersistableBundle localAuthBundle,
+                PersistableBundle remoteAuthBundle,
+                IkeSessionParams.Builder builder) {
             PersistableBundle eapBundle = localAuthBundle.getPersistableBundle(EAP_CONFIG_KEY);
             Objects.requireNonNull(eapBundle, "EAP Config was null");
             EapSessionConfig eapConfig = EapSessionConfigUtils.fromPersistableBundle(eapBundle);
-            PersistableBundle trustCertBundle = remoteAuthBundle.getPersistableBundle("TRUST_CERT_KEY");
+            PersistableBundle trustCertBundle =
+                    remoteAuthBundle.getPersistableBundle("TRUST_CERT_KEY");
             X509Certificate serverCaCert = null;
             if (trustCertBundle != null) {
                 byte[] encodedCaCert = PersistableBundleUtils.toByteArray(trustCertBundle);
@@ -400,11 +505,13 @@ public final class IkeSessionParamsUtils {
         ConfigRequest(IkeSessionParams.IkeConfigRequest config) {
             if (config instanceof IkeSessionParams.ConfigRequestIpv4PcscfServer) {
                 this.type = 1;
-                this.address = ((IkeSessionParams.ConfigRequestIpv4PcscfServer) config).getAddress();
+                this.address =
+                        ((IkeSessionParams.ConfigRequestIpv4PcscfServer) config).getAddress();
             } else {
                 if (config instanceof IkeSessionParams.ConfigRequestIpv6PcscfServer) {
                     this.type = 2;
-                    this.address = ((IkeSessionParams.ConfigRequestIpv6PcscfServer) config).getAddress();
+                    this.address =
+                            ((IkeSessionParams.ConfigRequestIpv6PcscfServer) config).getAddress();
                     return;
                 }
                 throw new IllegalStateException("Unknown TunnelModeChildConfigRequest");

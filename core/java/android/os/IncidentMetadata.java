@@ -23,7 +23,6 @@ public final class IncidentMetadata {
         public static final long SUCCESS = 1133871366146L;
         public static final long TIMED_OUT = 1133871366151L;
 
-        public SectionStats() {
-        }
+        public SectionStats() {}
     }
 }

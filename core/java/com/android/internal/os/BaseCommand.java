@@ -1,6 +1,7 @@
 package com.android.internal.os;
 
 import com.android.modules.utils.BasicShellCommandHandler;
+
 import java.io.PrintStream;
 
 /* loaded from: classes5.dex */
@@ -8,16 +9,16 @@ public abstract class BaseCommand {
     public static final String FATAL_ERROR_CODE = "Error type 1";
     public static final String NO_CLASS_ERROR_CODE = "Error type 3";
     public static final String NO_SYSTEM_ERROR_CODE = "Error type 2";
-    protected final BasicShellCommandHandler mArgs = new BasicShellCommandHandler() { // from class: com.android.internal.os.BaseCommand.1
-        @Override // com.android.modules.utils.BasicShellCommandHandler
-        public int onCommand(String cmd) {
-            return 0;
-        }
+    protected final BasicShellCommandHandler mArgs =
+            new BasicShellCommandHandler() { // from class: com.android.internal.os.BaseCommand.1
+                @Override // com.android.modules.utils.BasicShellCommandHandler
+                public int onCommand(String cmd) {
+                    return 0;
+                }
 
-        @Override // com.android.modules.utils.BasicShellCommandHandler
-        public void onHelp() {
-        }
-    };
+                @Override // com.android.modules.utils.BasicShellCommandHandler
+                public void onHelp() {}
+            };
     private String[] mRawArgs;
 
     public abstract void onRun() throws Exception;

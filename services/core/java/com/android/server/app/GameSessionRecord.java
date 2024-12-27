@@ -3,6 +3,7 @@ package com.android.server.app;
 import android.content.ComponentName;
 import android.service.games.IGameSession;
 import android.view.SurfaceControlViewHost;
+
 import java.util.Objects;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -33,7 +34,7 @@ public final class GameSessionRecord {
             GAME_SESSION_ATTACHED = state3;
             State state4 = new State("GAME_SESSION_ENDED_PROCESS_DEATH", 3);
             GAME_SESSION_ENDED_PROCESS_DEATH = state4;
-            $VALUES = new State[]{state, state2, state3, state4};
+            $VALUES = new State[] {state, state2, state3, state4};
         }
 
         public static State valueOf(String str) {
@@ -45,7 +46,12 @@ public final class GameSessionRecord {
         }
     }
 
-    public GameSessionRecord(int i, State state, ComponentName componentName, IGameSession iGameSession, SurfaceControlViewHost.SurfacePackage surfacePackage) {
+    public GameSessionRecord(
+            int i,
+            State state,
+            ComponentName componentName,
+            IGameSession iGameSession,
+            SurfaceControlViewHost.SurfacePackage surfacePackage) {
         this.mTaskId = i;
         this.mState = state;
         this.mRootComponentName = componentName;
@@ -61,7 +67,11 @@ public final class GameSessionRecord {
             return false;
         }
         GameSessionRecord gameSessionRecord = (GameSessionRecord) obj;
-        return this.mTaskId == gameSessionRecord.mTaskId && this.mState == gameSessionRecord.mState && this.mRootComponentName.equals(gameSessionRecord.mRootComponentName) && Objects.equals(this.mIGameSession, gameSessionRecord.mIGameSession) && Objects.equals(this.mSurfacePackage, gameSessionRecord.mSurfacePackage);
+        return this.mTaskId == gameSessionRecord.mTaskId
+                && this.mState == gameSessionRecord.mState
+                && this.mRootComponentName.equals(gameSessionRecord.mRootComponentName)
+                && Objects.equals(this.mIGameSession, gameSessionRecord.mIGameSession)
+                && Objects.equals(this.mSurfacePackage, gameSessionRecord.mSurfacePackage);
     }
 
     public final int hashCode() {
@@ -74,6 +84,16 @@ public final class GameSessionRecord {
     }
 
     public final String toString() {
-        return "GameSessionRecord{mTaskId=" + this.mTaskId + ", mState=" + this.mState + ", mRootComponentName=" + this.mRootComponentName + ", mIGameSession=" + this.mIGameSession + ", mSurfacePackage=" + this.mSurfacePackage + '}';
+        return "GameSessionRecord{mTaskId="
+                + this.mTaskId
+                + ", mState="
+                + this.mState
+                + ", mRootComponentName="
+                + this.mRootComponentName
+                + ", mIGameSession="
+                + this.mIGameSession
+                + ", mSurfacePackage="
+                + this.mSurfacePackage
+                + '}';
     }
 }

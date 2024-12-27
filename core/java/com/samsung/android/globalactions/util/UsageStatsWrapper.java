@@ -7,7 +7,9 @@ import android.os.ServiceManager;
 /* loaded from: classes6.dex */
 public class UsageStatsWrapper {
     private static final String TAG = "UsageStatsWrapper";
-    private IUsageStatsManager mAppUsageStats = IUsageStatsManager.Stub.asInterface(ServiceManager.getService(Context.USAGE_STATS_SERVICE));
+    private IUsageStatsManager mAppUsageStats =
+            IUsageStatsManager.Stub.asInterface(
+                    ServiceManager.getService(Context.USAGE_STATS_SERVICE));
     private final Context mContext;
     private final LogWrapper mLogWrapper;
 
@@ -24,6 +26,5 @@ public class UsageStatsWrapper {
         dump("[restart]", extraInfo);
     }
 
-    private void dump(String prefix, String extraInfo) {
-    }
+    private void dump(String prefix, String extraInfo) {}
 }

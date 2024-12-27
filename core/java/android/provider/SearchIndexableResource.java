@@ -22,6 +22,10 @@ public class SearchIndexableResource extends SearchIndexableData {
 
     @Override // android.provider.SearchIndexableData
     public String toString() {
-        return "SearchIndexableResource[" + super.toString() + ", xmlResId: " + this.xmlResId + NavigationBarInflaterView.SIZE_MOD_END;
+        return "SearchIndexableResource["
+                + super.toString()
+                + ", xmlResId: "
+                + this.xmlResId
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 }

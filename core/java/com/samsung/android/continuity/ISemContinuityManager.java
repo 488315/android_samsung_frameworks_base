@@ -6,7 +6,6 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
-import com.samsung.android.continuity.ISemContinuitySimpleListener;
 
 /* loaded from: classes5.dex */
 public interface ISemContinuityManager extends IInterface {
@@ -18,9 +17,13 @@ public interface ISemContinuityManager extends IInterface {
 
     int getNearbyDeviceCount(int i, int i2) throws RemoteException;
 
-    void registerContinuityCopyListener(ISemContinuitySimpleListener iSemContinuitySimpleListener, int i) throws RemoteException;
+    void registerContinuityCopyListener(
+            ISemContinuitySimpleListener iSemContinuitySimpleListener, int i)
+            throws RemoteException;
 
-    boolean requestDownload(String str, ISemContinuitySimpleListener iSemContinuitySimpleListener, int i) throws RemoteException;
+    boolean requestDownload(
+            String str, ISemContinuitySimpleListener iSemContinuitySimpleListener, int i)
+            throws RemoteException;
 
     void setLocalClip(Bundle bundle, int i) throws RemoteException;
 
@@ -33,29 +36,27 @@ public interface ISemContinuityManager extends IInterface {
         }
 
         @Override // com.samsung.android.continuity.ISemContinuityManager
-        public void setLocalClip(Bundle clipBundle, int userId) throws RemoteException {
-        }
+        public void setLocalClip(Bundle clipBundle, int userId) throws RemoteException {}
 
         @Override // com.samsung.android.continuity.ISemContinuityManager
-        public void clearLocalClip(int userId) throws RemoteException {
-        }
+        public void clearLocalClip(int userId) throws RemoteException {}
 
         @Override // com.samsung.android.continuity.ISemContinuityManager
-        public void registerContinuityCopyListener(ISemContinuitySimpleListener listener, int userId) throws RemoteException {
-        }
+        public void registerContinuityCopyListener(
+                ISemContinuitySimpleListener listener, int userId) throws RemoteException {}
 
         @Override // com.samsung.android.continuity.ISemContinuityManager
-        public void unregisterContinuityCopyListener(int userId) throws RemoteException {
-        }
+        public void unregisterContinuityCopyListener(int userId) throws RemoteException {}
 
         @Override // com.samsung.android.continuity.ISemContinuityManager
-        public boolean requestDownload(String dataId, ISemContinuitySimpleListener listener, int userId) throws RemoteException {
+        public boolean requestDownload(
+                String dataId, ISemContinuitySimpleListener listener, int userId)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.samsung.android.continuity.ISemContinuityManager
-        public void cancelDownload(String dataId, int userId) throws RemoteException {
-        }
+        public void cancelDownload(String dataId, int userId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -63,7 +64,7 @@ public interface ISemContinuityManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemContinuityManager {
+    public abstract static class Stub extends Binder implements ISemContinuityManager {
         static final int TRANSACTION_cancelDownload = 7;
         static final int TRANSACTION_clearLocalClip = 3;
         static final int TRANSACTION_getNearbyDeviceCount = 1;
@@ -119,7 +120,8 @@ public interface ISemContinuityManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemContinuityManager.DESCRIPTOR);
             }
@@ -150,7 +152,8 @@ public interface ISemContinuityManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 4:
-                    ISemContinuitySimpleListener _arg04 = ISemContinuitySimpleListener.Stub.asInterface(data.readStrongBinder());
+                    ISemContinuitySimpleListener _arg04 =
+                            ISemContinuitySimpleListener.Stub.asInterface(data.readStrongBinder());
                     int _arg13 = data.readInt();
                     data.enforceNoDataAvail();
                     registerContinuityCopyListener(_arg04, _arg13);
@@ -164,7 +167,8 @@ public interface ISemContinuityManager extends IInterface {
                     return true;
                 case 6:
                     String _arg06 = data.readString();
-                    ISemContinuitySimpleListener _arg14 = ISemContinuitySimpleListener.Stub.asInterface(data.readStrongBinder());
+                    ISemContinuitySimpleListener _arg14 =
+                            ISemContinuitySimpleListener.Stub.asInterface(data.readStrongBinder());
                     int _arg2 = data.readInt();
                     data.enforceNoDataAvail();
                     boolean _result2 = requestDownload(_arg06, _arg14, _arg2);
@@ -249,7 +253,8 @@ public interface ISemContinuityManager extends IInterface {
             }
 
             @Override // com.samsung.android.continuity.ISemContinuityManager
-            public void registerContinuityCopyListener(ISemContinuitySimpleListener listener, int userId) throws RemoteException {
+            public void registerContinuityCopyListener(
+                    ISemContinuitySimpleListener listener, int userId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -280,7 +285,9 @@ public interface ISemContinuityManager extends IInterface {
             }
 
             @Override // com.samsung.android.continuity.ISemContinuityManager
-            public boolean requestDownload(String dataId, ISemContinuitySimpleListener listener, int userId) throws RemoteException {
+            public boolean requestDownload(
+                    String dataId, ISemContinuitySimpleListener listener, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

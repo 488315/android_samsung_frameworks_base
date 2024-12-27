@@ -3,6 +3,7 @@ package android.hardware.radio.network;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
@@ -11,21 +12,23 @@ public class BarringInfo implements Parcelable {
     public static final int BARRING_TYPE_CONDITIONAL = 1;
     public static final int BARRING_TYPE_NONE = 0;
     public static final int BARRING_TYPE_UNCONDITIONAL = 2;
-    public static final Parcelable.Creator<BarringInfo> CREATOR = new Parcelable.Creator<BarringInfo>() { // from class: android.hardware.radio.network.BarringInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BarringInfo createFromParcel(Parcel _aidl_source) {
-            BarringInfo _aidl_out = new BarringInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<BarringInfo> CREATOR =
+            new Parcelable.Creator<
+                    BarringInfo>() { // from class: android.hardware.radio.network.BarringInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BarringInfo createFromParcel(Parcel _aidl_source) {
+                    BarringInfo _aidl_out = new BarringInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public BarringInfo[] newArray(int _aidl_size) {
-            return new BarringInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public BarringInfo[] newArray(int _aidl_size) {
+                    return new BarringInfo[_aidl_size];
+                }
+            };
     public static final int SERVICE_TYPE_CS_FALLBACK = 5;
     public static final int SERVICE_TYPE_CS_SERVICE = 0;
     public static final int SERVICE_TYPE_CS_VOICE = 2;
@@ -119,7 +122,9 @@ public class BarringInfo implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.barringTypeSpecificInfo = (BarringTypeSpecificInfo) _aidl_parcel.readTypedObject(BarringTypeSpecificInfo.CREATOR);
+                this.barringTypeSpecificInfo =
+                        (BarringTypeSpecificInfo)
+                                _aidl_parcel.readTypedObject(BarringTypeSpecificInfo.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

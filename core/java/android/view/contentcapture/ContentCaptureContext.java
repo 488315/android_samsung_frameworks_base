@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.Preconditions;
+
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -16,50 +18,57 @@ import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class ContentCaptureContext implements Parcelable {
-    public static final Parcelable.Creator<ContentCaptureContext> CREATOR = new Parcelable.Creator<ContentCaptureContext>() { // from class: android.view.contentcapture.ContentCaptureContext.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContentCaptureContext createFromParcel(Parcel parcel) {
-            ContentCaptureContext clientContext;
-            boolean hasClientContext = parcel.readInt() == 1;
-            if (hasClientContext) {
-                LocusId id = (LocusId) parcel.readParcelable(null, LocusId.class);
-                Bundle extras = parcel.readBundle();
-                Builder builder = new Builder(id);
-                if (extras != null) {
-                    builder.setExtras(extras);
+    public static final Parcelable.Creator<ContentCaptureContext> CREATOR =
+            new Parcelable.Creator<
+                    ContentCaptureContext>() { // from class:
+                                               // android.view.contentcapture.ContentCaptureContext.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContentCaptureContext createFromParcel(Parcel parcel) {
+                    ContentCaptureContext clientContext;
+                    boolean hasClientContext = parcel.readInt() == 1;
+                    if (hasClientContext) {
+                        LocusId id = (LocusId) parcel.readParcelable(null, LocusId.class);
+                        Bundle extras = parcel.readBundle();
+                        Builder builder = new Builder(id);
+                        if (extras != null) {
+                            builder.setExtras(extras);
+                        }
+                        clientContext = new ContentCaptureContext(builder);
+                    } else {
+                        clientContext = null;
+                    }
+                    ComponentName componentName =
+                            (ComponentName) parcel.readParcelable(null, ComponentName.class);
+                    if (componentName == null) {
+                        return clientContext;
+                    }
+                    int displayId = parcel.readInt();
+                    IBinder windowToken = parcel.readStrongBinder();
+                    int flags = parcel.readInt();
+                    ActivityId activityId = new ActivityId(parcel);
+                    return new ContentCaptureContext(
+                            clientContext,
+                            activityId,
+                            componentName,
+                            displayId,
+                            windowToken,
+                            flags);
                 }
-                clientContext = new ContentCaptureContext(builder);
-            } else {
-                clientContext = null;
-            }
-            ComponentName componentName = (ComponentName) parcel.readParcelable(null, ComponentName.class);
-            if (componentName == null) {
-                return clientContext;
-            }
-            int displayId = parcel.readInt();
-            IBinder windowToken = parcel.readStrongBinder();
-            int flags = parcel.readInt();
-            ActivityId activityId = new ActivityId(parcel);
-            return new ContentCaptureContext(clientContext, activityId, componentName, displayId, windowToken, flags);
-        }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ContentCaptureContext[] newArray(int size) {
-            return new ContentCaptureContext[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ContentCaptureContext[] newArray(int size) {
+                    return new ContentCaptureContext[size];
+                }
+            };
 
-    @SystemApi
-    public static final int FLAG_DISABLED_BY_APP = 1;
+    @SystemApi public static final int FLAG_DISABLED_BY_APP = 1;
 
-    @SystemApi
-    public static final int FLAG_DISABLED_BY_FLAG_SECURE = 2;
+    @SystemApi public static final int FLAG_DISABLED_BY_FLAG_SECURE = 2;
     public static final int FLAG_DISABLED_FLUSH_FOR_VIEW_TREE_APPEARING = 8;
 
-    @SystemApi
-    public static final int FLAG_RECONNECTED = 4;
+    @SystemApi public static final int FLAG_RECONNECTED = 4;
     private final ActivityId mActivityId;
     private final ComponentName mComponentName;
     private final int mDisplayId;
@@ -71,10 +80,15 @@ public final class ContentCaptureContext implements Parcelable {
     private final IBinder mWindowToken;
 
     @Retention(RetentionPolicy.SOURCE)
-    @interface ContextCreationFlags {
-    }
+    @interface ContextCreationFlags {}
 
-    public ContentCaptureContext(ContentCaptureContext clientContext, ActivityId activityId, ComponentName componentName, int displayId, IBinder windowToken, int flags) {
+    public ContentCaptureContext(
+            ContentCaptureContext clientContext,
+            ActivityId activityId,
+            ComponentName componentName,
+            int displayId,
+            IBinder windowToken,
+            int flags) {
         this.mParentSessionId = 0;
         if (clientContext != null) {
             this.mHasClientContext = true;
@@ -237,7 +251,16 @@ public final class ContentCaptureContext implements Parcelable {
     public String toString() {
         StringBuilder builder = new StringBuilder("Context[");
         if (fromServer()) {
-            builder.append("act=").append(ComponentName.flattenToShortString(this.mComponentName)).append(", activityId=").append(this.mActivityId).append(", displayId=").append(this.mDisplayId).append(", windowToken=").append(this.mWindowToken).append(", flags=").append(this.mFlags);
+            builder.append("act=")
+                    .append(ComponentName.flattenToShortString(this.mComponentName))
+                    .append(", activityId=")
+                    .append(this.mActivityId)
+                    .append(", displayId=")
+                    .append(this.mDisplayId)
+                    .append(", windowToken=")
+                    .append(this.mWindowToken)
+                    .append(", flags=")
+                    .append(this.mFlags);
         } else {
             builder.append("id=").append(this.mId);
             if (this.mExtras != null) {

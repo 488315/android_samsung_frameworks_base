@@ -14,8 +14,7 @@ public interface IOnMediaKeyListener extends IInterface {
 
     public static class Default implements IOnMediaKeyListener {
         @Override // android.media.session.IOnMediaKeyListener
-        public void onMediaKey(KeyEvent event, ResultReceiver result) throws RemoteException {
-        }
+        public void onMediaKey(KeyEvent event, ResultReceiver result) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IOnMediaKeyListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IOnMediaKeyListener {
+    public abstract static class Stub extends Binder implements IOnMediaKeyListener {
         public static final String DESCRIPTOR = "android.media.session.IOnMediaKeyListener";
         static final int TRANSACTION_onMediaKey = 1;
 
@@ -62,7 +61,8 @@ public interface IOnMediaKeyListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -73,7 +73,8 @@ public interface IOnMediaKeyListener extends IInterface {
             switch (code) {
                 case 1:
                     KeyEvent _arg0 = (KeyEvent) data.readTypedObject(KeyEvent.CREATOR);
-                    ResultReceiver _arg1 = (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
+                    ResultReceiver _arg1 =
+                            (ResultReceiver) data.readTypedObject(ResultReceiver.CREATOR);
                     data.enforceNoDataAvail();
                     onMediaKey(_arg0, _arg1);
                     return true;

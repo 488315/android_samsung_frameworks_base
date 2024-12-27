@@ -7,6 +7,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.ArrayMap;
 import android.util.Slog;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -24,7 +25,8 @@ public final class TvRemoteServiceInput extends ITvRemoteServiceInput.Stub {
         public final /* synthetic */ TvRemoteServiceInput this$0;
         public final /* synthetic */ IBinder val$token;
 
-        public /* synthetic */ AnonymousClass1(TvRemoteServiceInput tvRemoteServiceInput, IBinder iBinder, int i) {
+        public /* synthetic */ AnonymousClass1(
+                TvRemoteServiceInput tvRemoteServiceInput, IBinder iBinder, int i) {
             this.$r8$classId = i;
             this.this$0 = tvRemoteServiceInput;
             this.val$token = iBinder;
@@ -51,9 +53,12 @@ public final class TvRemoteServiceInput extends ITvRemoteServiceInput.Stub {
     public final void clearInputBridge(IBinder iBinder) {
         synchronized (this.mLock) {
             try {
-                UinputBridge uinputBridge = (UinputBridge) ((ArrayMap) this.mBridgeMap).get(iBinder);
+                UinputBridge uinputBridge =
+                        (UinputBridge) ((ArrayMap) this.mBridgeMap).get(iBinder);
                 if (uinputBridge == null) {
-                    Slog.w("TvRemoteServiceInput", String.format("Input bridge not found for token: %s", iBinder));
+                    Slog.w(
+                            "TvRemoteServiceInput",
+                            String.format("Input bridge not found for token: %s", iBinder));
                     return;
                 }
                 long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -71,9 +76,12 @@ public final class TvRemoteServiceInput extends ITvRemoteServiceInput.Stub {
     public final void closeInputBridge(IBinder iBinder) {
         synchronized (this.mLock) {
             try {
-                UinputBridge uinputBridge = (UinputBridge) ((ArrayMap) this.mBridgeMap).remove(iBinder);
+                UinputBridge uinputBridge =
+                        (UinputBridge) ((ArrayMap) this.mBridgeMap).remove(iBinder);
                 if (uinputBridge == null) {
-                    Slog.w("TvRemoteServiceInput", String.format("Input bridge not found for token: %s", iBinder));
+                    Slog.w(
+                            "TvRemoteServiceInput",
+                            String.format("Input bridge not found for token: %s", iBinder));
                     return;
                 }
                 long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -94,7 +102,8 @@ public final class TvRemoteServiceInput extends ITvRemoteServiceInput.Stub {
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     try {
-                        ((ArrayMap) this.mBridgeMap).put(iBinder, UinputBridge.openGamepad(iBinder, str));
+                        ((ArrayMap) this.mBridgeMap)
+                                .put(iBinder, UinputBridge.openGamepad(iBinder, str));
                         iBinder.linkToDeath(new AnonymousClass1(this, iBinder, 1), 0);
                     } catch (RemoteException unused) {
                         Slog.e("TvRemoteServiceInput", "Token is already dead");
@@ -122,7 +131,8 @@ public final class TvRemoteServiceInput extends ITvRemoteServiceInput.Stub {
                 long clearCallingIdentity = Binder.clearCallingIdentity();
                 try {
                     try {
-                        ((ArrayMap) this.mBridgeMap).put(iBinder, new UinputBridge(iBinder, str, i, i2, i3));
+                        ((ArrayMap) this.mBridgeMap)
+                                .put(iBinder, new UinputBridge(iBinder, str, i, i2, i3));
                         iBinder.linkToDeath(new AnonymousClass1(this, iBinder, 0), 0);
                     } catch (RemoteException unused) {
                         Slog.e("TvRemoteServiceInput", "Token is already dead");
@@ -147,9 +157,12 @@ public final class TvRemoteServiceInput extends ITvRemoteServiceInput.Stub {
     public final void sendGamepadAxisValue(IBinder iBinder, int i, float f) {
         synchronized (this.mLock) {
             try {
-                UinputBridge uinputBridge = (UinputBridge) ((ArrayMap) this.mBridgeMap).get(iBinder);
+                UinputBridge uinputBridge =
+                        (UinputBridge) ((ArrayMap) this.mBridgeMap).get(iBinder);
                 if (uinputBridge == null) {
-                    Slog.w("TvRemoteServiceInput", String.format("Input bridge not found for token: %s", iBinder));
+                    Slog.w(
+                            "TvRemoteServiceInput",
+                            String.format("Input bridge not found for token: %s", iBinder));
                     return;
                 }
                 long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -167,9 +180,12 @@ public final class TvRemoteServiceInput extends ITvRemoteServiceInput.Stub {
     public final void sendGamepadKeyDown(IBinder iBinder, int i) {
         synchronized (this.mLock) {
             try {
-                UinputBridge uinputBridge = (UinputBridge) ((ArrayMap) this.mBridgeMap).get(iBinder);
+                UinputBridge uinputBridge =
+                        (UinputBridge) ((ArrayMap) this.mBridgeMap).get(iBinder);
                 if (uinputBridge == null) {
-                    Slog.w("TvRemoteServiceInput", String.format("Input bridge not found for token: %s", iBinder));
+                    Slog.w(
+                            "TvRemoteServiceInput",
+                            String.format("Input bridge not found for token: %s", iBinder));
                     return;
                 }
                 long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -187,9 +203,12 @@ public final class TvRemoteServiceInput extends ITvRemoteServiceInput.Stub {
     public final void sendGamepadKeyUp(IBinder iBinder, int i) {
         synchronized (this.mLock) {
             try {
-                UinputBridge uinputBridge = (UinputBridge) ((ArrayMap) this.mBridgeMap).get(iBinder);
+                UinputBridge uinputBridge =
+                        (UinputBridge) ((ArrayMap) this.mBridgeMap).get(iBinder);
                 if (uinputBridge == null) {
-                    Slog.w("TvRemoteServiceInput", String.format("Input bridge not found for token: %s", iBinder));
+                    Slog.w(
+                            "TvRemoteServiceInput",
+                            String.format("Input bridge not found for token: %s", iBinder));
                     return;
                 }
                 long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -207,9 +226,12 @@ public final class TvRemoteServiceInput extends ITvRemoteServiceInput.Stub {
     public final void sendKeyDown(IBinder iBinder, int i) {
         synchronized (this.mLock) {
             try {
-                UinputBridge uinputBridge = (UinputBridge) ((ArrayMap) this.mBridgeMap).get(iBinder);
+                UinputBridge uinputBridge =
+                        (UinputBridge) ((ArrayMap) this.mBridgeMap).get(iBinder);
                 if (uinputBridge == null) {
-                    Slog.w("TvRemoteServiceInput", String.format("Input bridge not found for token: %s", iBinder));
+                    Slog.w(
+                            "TvRemoteServiceInput",
+                            String.format("Input bridge not found for token: %s", iBinder));
                     return;
                 }
                 long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -227,9 +249,12 @@ public final class TvRemoteServiceInput extends ITvRemoteServiceInput.Stub {
     public final void sendKeyUp(IBinder iBinder, int i) {
         synchronized (this.mLock) {
             try {
-                UinputBridge uinputBridge = (UinputBridge) ((ArrayMap) this.mBridgeMap).get(iBinder);
+                UinputBridge uinputBridge =
+                        (UinputBridge) ((ArrayMap) this.mBridgeMap).get(iBinder);
                 if (uinputBridge == null) {
-                    Slog.w("TvRemoteServiceInput", String.format("Input bridge not found for token: %s", iBinder));
+                    Slog.w(
+                            "TvRemoteServiceInput",
+                            String.format("Input bridge not found for token: %s", iBinder));
                     return;
                 }
                 long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -247,9 +272,12 @@ public final class TvRemoteServiceInput extends ITvRemoteServiceInput.Stub {
     public final void sendPointerDown(IBinder iBinder, int i, int i2, int i3) {
         synchronized (this.mLock) {
             try {
-                UinputBridge uinputBridge = (UinputBridge) ((ArrayMap) this.mBridgeMap).get(iBinder);
+                UinputBridge uinputBridge =
+                        (UinputBridge) ((ArrayMap) this.mBridgeMap).get(iBinder);
                 if (uinputBridge == null) {
-                    Slog.w("TvRemoteServiceInput", String.format("Input bridge not found for token: %s", iBinder));
+                    Slog.w(
+                            "TvRemoteServiceInput",
+                            String.format("Input bridge not found for token: %s", iBinder));
                     return;
                 }
                 long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -267,9 +295,12 @@ public final class TvRemoteServiceInput extends ITvRemoteServiceInput.Stub {
     public final void sendPointerSync(IBinder iBinder) {
         synchronized (this.mLock) {
             try {
-                UinputBridge uinputBridge = (UinputBridge) ((ArrayMap) this.mBridgeMap).get(iBinder);
+                UinputBridge uinputBridge =
+                        (UinputBridge) ((ArrayMap) this.mBridgeMap).get(iBinder);
                 if (uinputBridge == null) {
-                    Slog.w("TvRemoteServiceInput", String.format("Input bridge not found for token: %s", iBinder));
+                    Slog.w(
+                            "TvRemoteServiceInput",
+                            String.format("Input bridge not found for token: %s", iBinder));
                     return;
                 }
                 long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -287,9 +318,12 @@ public final class TvRemoteServiceInput extends ITvRemoteServiceInput.Stub {
     public final void sendPointerUp(IBinder iBinder, int i) {
         synchronized (this.mLock) {
             try {
-                UinputBridge uinputBridge = (UinputBridge) ((ArrayMap) this.mBridgeMap).get(iBinder);
+                UinputBridge uinputBridge =
+                        (UinputBridge) ((ArrayMap) this.mBridgeMap).get(iBinder);
                 if (uinputBridge == null) {
-                    Slog.w("TvRemoteServiceInput", String.format("Input bridge not found for token: %s", iBinder));
+                    Slog.w(
+                            "TvRemoteServiceInput",
+                            String.format("Input bridge not found for token: %s", iBinder));
                     return;
                 }
                 long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -304,6 +338,5 @@ public final class TvRemoteServiceInput extends ITvRemoteServiceInput.Stub {
         }
     }
 
-    public final void sendTimestamp(IBinder iBinder, long j) {
-    }
+    public final void sendTimestamp(IBinder iBinder, long j) {}
 }

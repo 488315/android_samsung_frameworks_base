@@ -12,11 +12,12 @@ public class LazyFilter extends DecorateFilter {
         this.prepared = false;
     }
 
-    @Override // com.samsung.android.sume.core.filter.DecorateFilter, com.samsung.android.sume.core.filter.MediaFilter
-    public void prepare() {
-    }
+    @Override // com.samsung.android.sume.core.filter.DecorateFilter,
+              // com.samsung.android.sume.core.filter.MediaFilter
+    public void prepare() {}
 
-    @Override // com.samsung.android.sume.core.filter.DecorateFilter, com.samsung.android.sume.core.functional.Operator
+    @Override // com.samsung.android.sume.core.filter.DecorateFilter,
+              // com.samsung.android.sume.core.functional.Operator
     public MutableMediaBuffer run(MediaBuffer ibuf, MutableMediaBuffer obuf) {
         if (!this.prepared) {
             super.prepare();

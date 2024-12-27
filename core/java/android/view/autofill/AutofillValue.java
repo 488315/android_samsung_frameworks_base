@@ -5,24 +5,28 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class AutofillValue implements Parcelable {
-    public static final Parcelable.Creator<AutofillValue> CREATOR = new Parcelable.Creator<AutofillValue>() { // from class: android.view.autofill.AutofillValue.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AutofillValue createFromParcel(Parcel source) {
-            return new AutofillValue(source);
-        }
+    public static final Parcelable.Creator<AutofillValue> CREATOR =
+            new Parcelable.Creator<
+                    AutofillValue>() { // from class: android.view.autofill.AutofillValue.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AutofillValue createFromParcel(Parcel source) {
+                    return new AutofillValue(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AutofillValue[] newArray(int size) {
-            return new AutofillValue[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AutofillValue[] newArray(int size) {
+                    return new AutofillValue[size];
+                }
+            };
     private static final String TAG = "AutofillValue";
     private final int mType;
     private final Object mValue;
@@ -33,7 +37,8 @@ public final class AutofillValue implements Parcelable {
     }
 
     public CharSequence getTextValue() {
-        Preconditions.checkState(isText(), "value must be a text value, not type=%d", Integer.valueOf(this.mType));
+        Preconditions.checkState(
+                isText(), "value must be a text value, not type=%d", Integer.valueOf(this.mType));
         return (CharSequence) this.mValue;
     }
 
@@ -42,7 +47,10 @@ public final class AutofillValue implements Parcelable {
     }
 
     public boolean getToggleValue() {
-        Preconditions.checkState(isToggle(), "value must be a toggle value, not type=%d", Integer.valueOf(this.mType));
+        Preconditions.checkState(
+                isToggle(),
+                "value must be a toggle value, not type=%d",
+                Integer.valueOf(this.mType));
         return ((Boolean) this.mValue).booleanValue();
     }
 
@@ -51,7 +59,8 @@ public final class AutofillValue implements Parcelable {
     }
 
     public int getListValue() {
-        Preconditions.checkState(isList(), "value must be a list value, not type=%d", Integer.valueOf(this.mType));
+        Preconditions.checkState(
+                isList(), "value must be a list value, not type=%d", Integer.valueOf(this.mType));
         return ((Integer) this.mValue).intValue();
     }
 
@@ -60,7 +69,8 @@ public final class AutofillValue implements Parcelable {
     }
 
     public long getDateValue() {
-        Preconditions.checkState(isDate(), "value must be a date value, not type=%d", Integer.valueOf(this.mType));
+        Preconditions.checkState(
+                isDate(), "value must be a date value, not type=%d", Integer.valueOf(this.mType));
         return ((Long) this.mValue).longValue();
     }
 
@@ -97,7 +107,8 @@ public final class AutofillValue implements Parcelable {
         if (!Helper.sDebug) {
             return super.toString();
         }
-        StringBuilder string = new StringBuilder().append("[type=").append(this.mType).append(", value=");
+        StringBuilder string =
+                new StringBuilder().append("[type=").append(this.mType).append(", value=");
         if (isText()) {
             Helper.appendRedacted(string, (CharSequence) this.mValue);
         } else {

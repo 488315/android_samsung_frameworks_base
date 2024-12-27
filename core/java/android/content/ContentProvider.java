@@ -30,8 +30,11 @@ import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseBooleanArray;
+
 import com.android.internal.util.FrameworkStatsLog;
+
 import com.samsung.android.app.SemDualAppManager;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
@@ -60,7 +63,8 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
     private String mWritePermission;
 
     public interface PipeDataWriter<T> {
-        void writeDataToPipe(ParcelFileDescriptor parcelFileDescriptor, Uri uri, String str, Bundle bundle, T t);
+        void writeDataToPipe(
+                ParcelFileDescriptor parcelFileDescriptor, Uri uri, String str, Bundle bundle, T t);
     }
 
     public abstract int delete(Uri uri, String str, String[] strArr);
@@ -72,7 +76,8 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
 
     public abstract boolean onCreate();
 
-    public abstract Cursor query(Uri uri, String[] strArr, String str, String[] strArr2, String str2);
+    public abstract Cursor query(
+            Uri uri, String[] strArr, String str, String[] strArr2, String str2);
 
     public abstract int update(Uri uri, ContentValues contentValues, String str, String[] strArr);
 
@@ -86,7 +91,11 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         this.mTransport = new Transport();
     }
 
-    public ContentProvider(Context context, String readPermission, String writePermission, PathPermission[] pathPermissions) {
+    public ContentProvider(
+            Context context,
+            String readPermission,
+            String writePermission,
+            PathPermission[] pathPermissions) {
         this.mContext = null;
         this.mUsersRedirectedToOwnerForMedia = new SparseBooleanArray();
         this.mTransport = new Transport();
@@ -123,14 +132,26 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         }
 
         @Override // android.content.IContentProvider
-        public Cursor query(AttributionSource attributionSource, Uri uri, String[] projection, Bundle queryArgs, ICancellationSignal cancellationSignal) {
-            Uri uri2 = ContentProvider.this.maybeGetUriWithoutUserId(ContentProvider.this.validateIncomingUri(uri));
+        public Cursor query(
+                AttributionSource attributionSource,
+                Uri uri,
+                String[] projection,
+                Bundle queryArgs,
+                ICancellationSignal cancellationSignal) {
+            Uri uri2 =
+                    ContentProvider.this.maybeGetUriWithoutUserId(
+                            ContentProvider.this.validateIncomingUri(uri));
             if (enforceReadPermission(attributionSource, uri2) == 0) {
                 ContentProvider.traceBegin(64L, "query: ", uri2.getAuthority());
-                AttributionSource original = ContentProvider.this.setCallingAttributionSource(attributionSource);
+                AttributionSource original =
+                        ContentProvider.this.setCallingAttributionSource(attributionSource);
                 try {
                     try {
-                        return this.mInterface.query(uri2, projection, queryArgs, CancellationSignal.fromTransport(cancellationSignal));
+                        return this.mInterface.query(
+                                uri2,
+                                projection,
+                                queryArgs,
+                                CancellationSignal.fromTransport(cancellationSignal));
                     } catch (RemoteException e) {
                         throw e.rethrowAsRuntimeException();
                     }
@@ -142,10 +163,16 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
             if (projection != null) {
                 return new MatrixCursor(projection, 0);
             }
-            AttributionSource original2 = ContentProvider.this.setCallingAttributionSource(attributionSource);
+            AttributionSource original2 =
+                    ContentProvider.this.setCallingAttributionSource(attributionSource);
             try {
                 try {
-                    Cursor cursor = this.mInterface.query(uri2, projection, queryArgs, CancellationSignal.fromTransport(cancellationSignal));
+                    Cursor cursor =
+                            this.mInterface.query(
+                                    uri2,
+                                    projection,
+                                    queryArgs,
+                                    CancellationSignal.fromTransport(cancellationSignal));
                     if (cursor == null) {
                         return null;
                     }
@@ -162,9 +189,12 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         public String getType(AttributionSource attributionSource, Uri uri) {
             CallingIdentity origId;
             String type;
-            Uri uri2 = ContentProvider.this.maybeGetUriWithoutUserId(ContentProvider.this.validateIncomingUri(uri));
+            Uri uri2 =
+                    ContentProvider.this.maybeGetUriWithoutUserId(
+                            ContentProvider.this.validateIncomingUri(uri));
             ContentProvider.traceBegin(64L, "getType: ", uri2.getAuthority());
-            AttributionSource original = ContentProvider.this.setCallingAttributionSource(attributionSource);
+            AttributionSource original =
+                    ContentProvider.this.setCallingAttributionSource(attributionSource);
             try {
                 try {
                     if (checkGetTypePermission(attributionSource, uri2) != 0) {
@@ -179,7 +209,9 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
                         } finally {
                         }
                     }
-                    if (ContentProvider.this.checkPermission(Manifest.permission.GET_ANY_PROVIDER_TYPE, attributionSource) == 0) {
+                    if (ContentProvider.this.checkPermission(
+                                    Manifest.permission.GET_ANY_PROVIDER_TYPE, attributionSource)
+                            == 0) {
                         origId = getContentProvider().clearCallingIdentity();
                         try {
                             type = this.mInterface.getType(uri2);
@@ -202,16 +234,36 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
             }
         }
 
-        private void logGetTypeData(int callingUid, Uri uri, String type, boolean permissionCheckPassed) {
+        private void logGetTypeData(
+                int callingUid, Uri uri, String type, boolean permissionCheckPassed) {
             if (!permissionCheckPassed) {
                 FrameworkStatsLog.write(564, 4, callingUid, uri.getAuthority(), type);
                 return;
             }
             try {
-                ProviderInfo cpi = ContentProvider.this.mContext.getPackageManager().resolveContentProvider(uri.getAuthority(), PackageManager.ComponentInfoFlags.of(128L));
+                ProviderInfo cpi =
+                        ContentProvider.this
+                                .mContext
+                                .getPackageManager()
+                                .resolveContentProvider(
+                                        uri.getAuthority(),
+                                        PackageManager.ComponentInfoFlags.of(128L));
                 int callingUserId = UserHandle.getUserId(callingUid);
-                Uri userUri = (!ContentProvider.this.mSingleUser || UserHandle.isSameUser(ContentProvider.this.mMyUid, callingUid)) ? uri : ContentProvider.maybeAddUserId(uri, callingUserId);
-                if (cpi.forceUriPermissions && this.mInterface.checkUriPermission(uri, callingUid, 1) != 0 && ContentProvider.this.getContext().checkUriPermission(userUri, Binder.getCallingPid(), callingUid, 1) != 0 && !ContentProvider.deniedAccessSystemUserOnlyProvider(callingUserId, ContentProvider.this.mSystemUserOnly)) {
+                Uri userUri =
+                        (!ContentProvider.this.mSingleUser
+                                        || UserHandle.isSameUser(
+                                                ContentProvider.this.mMyUid, callingUid))
+                                ? uri
+                                : ContentProvider.maybeAddUserId(uri, callingUserId);
+                if (cpi.forceUriPermissions
+                        && this.mInterface.checkUriPermission(uri, callingUid, 1) != 0
+                        && ContentProvider.this
+                                        .getContext()
+                                        .checkUriPermission(
+                                                userUri, Binder.getCallingPid(), callingUid, 1)
+                                != 0
+                        && !ContentProvider.deniedAccessSystemUserOnlyProvider(
+                                callingUserId, ContentProvider.this.mSystemUserOnly)) {
                     FrameworkStatsLog.write(564, 5, callingUid, uri.getAuthority(), type);
                 }
             } catch (Exception e) {
@@ -219,7 +271,8 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         }
 
         @Override // android.content.IContentProvider
-        public void getTypeAsync(AttributionSource attributionSource, Uri uri, RemoteCallback callback) {
+        public void getTypeAsync(
+                AttributionSource attributionSource, Uri uri, RemoteCallback callback) {
             Bundle result = new Bundle();
             try {
                 result.putString("result", getType(attributionSource, uri));
@@ -231,7 +284,9 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
 
         @Override // android.content.IContentProvider
         public void getTypeAnonymousAsync(Uri uri, RemoteCallback callback) {
-            Uri uri2 = ContentProvider.this.maybeGetUriWithoutUserId(ContentProvider.this.validateIncomingUri(uri));
+            Uri uri2 =
+                    ContentProvider.this.maybeGetUriWithoutUserId(
+                            ContentProvider.this.validateIncomingUri(uri));
             ContentProvider.traceBegin(64L, "getTypeAnonymous: ", uri2.getAuthority());
             Bundle result = new Bundle();
             try {
@@ -247,12 +302,17 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         }
 
         @Override // android.content.IContentProvider
-        public Uri insert(AttributionSource attributionSource, Uri uri, ContentValues initialValues, Bundle extras) {
+        public Uri insert(
+                AttributionSource attributionSource,
+                Uri uri,
+                ContentValues initialValues,
+                Bundle extras) {
             Uri uri2 = ContentProvider.this.validateIncomingUri(uri);
             int userId = ContentProvider.getUserIdFromUri(uri2);
             Uri uri3 = ContentProvider.this.maybeGetUriWithoutUserId(uri2);
             if (enforceWritePermission(attributionSource, uri3) != 0) {
-                AttributionSource original = ContentProvider.this.setCallingAttributionSource(attributionSource);
+                AttributionSource original =
+                        ContentProvider.this.setCallingAttributionSource(attributionSource);
                 try {
                     return ContentProvider.this.rejectInsert(uri3, initialValues);
                 } finally {
@@ -260,10 +320,12 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
                 }
             }
             ContentProvider.traceBegin(64L, "insert: ", uri3.getAuthority());
-            AttributionSource original2 = ContentProvider.this.setCallingAttributionSource(attributionSource);
+            AttributionSource original2 =
+                    ContentProvider.this.setCallingAttributionSource(attributionSource);
             try {
                 try {
-                    return ContentProvider.maybeAddUserId(this.mInterface.insert(uri3, initialValues, extras), userId);
+                    return ContentProvider.maybeAddUserId(
+                            this.mInterface.insert(uri3, initialValues, extras), userId);
                 } catch (RemoteException e) {
                     throw e.rethrowAsRuntimeException();
                 }
@@ -274,13 +336,17 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         }
 
         @Override // android.content.IContentProvider
-        public int bulkInsert(AttributionSource attributionSource, Uri uri, ContentValues[] initialValues) {
-            Uri uri2 = ContentProvider.this.maybeGetUriWithoutUserId(ContentProvider.this.validateIncomingUri(uri));
+        public int bulkInsert(
+                AttributionSource attributionSource, Uri uri, ContentValues[] initialValues) {
+            Uri uri2 =
+                    ContentProvider.this.maybeGetUriWithoutUserId(
+                            ContentProvider.this.validateIncomingUri(uri));
             if (enforceWritePermission(attributionSource, uri2) != 0) {
                 return 0;
             }
             ContentProvider.traceBegin(64L, "bulkInsert: ", uri2.getAuthority());
-            AttributionSource original = ContentProvider.this.setCallingAttributionSource(attributionSource);
+            AttributionSource original =
+                    ContentProvider.this.setCallingAttributionSource(attributionSource);
             try {
                 try {
                     return this.mInterface.bulkInsert(uri2, initialValues);
@@ -294,7 +360,11 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         }
 
         @Override // android.content.IContentProvider
-        public ContentProviderResult[] applyBatch(AttributionSource attributionSource, String authority, ArrayList<ContentProviderOperation> operations) throws OperationApplicationException {
+        public ContentProviderResult[] applyBatch(
+                AttributionSource attributionSource,
+                String authority,
+                ArrayList<ContentProviderOperation> operations)
+                throws OperationApplicationException {
             ContentProvider.this.validateIncomingAuthority(authority);
             int numOperations = operations.size();
             int[] userIds = new int[numOperations];
@@ -302,23 +372,29 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
                 ContentProviderOperation operation = operations.get(i);
                 Uri uri = operation.getUri();
                 userIds[i] = ContentProvider.getUserIdFromUri(uri);
-                Uri uri2 = ContentProvider.this.maybeGetUriWithoutUserId(ContentProvider.this.validateIncomingUri(uri));
+                Uri uri2 =
+                        ContentProvider.this.maybeGetUriWithoutUserId(
+                                ContentProvider.this.validateIncomingUri(uri));
                 if (!Objects.equals(operation.getUri(), uri2)) {
                     operation = new ContentProviderOperation(operation, uri2);
                     operations.set(i, operation);
                 }
-                if (operation.isReadOperation() && enforceReadPermission(attributionSource, uri2) != 0) {
+                if (operation.isReadOperation()
+                        && enforceReadPermission(attributionSource, uri2) != 0) {
                     throw new OperationApplicationException("App op not allowed", 0);
                 }
-                if (operation.isWriteOperation() && enforceWritePermission(attributionSource, uri2) != 0) {
+                if (operation.isWriteOperation()
+                        && enforceWritePermission(attributionSource, uri2) != 0) {
                     throw new OperationApplicationException("App op not allowed", 0);
                 }
             }
             ContentProvider.traceBegin(64L, "applyBatch: ", authority);
-            AttributionSource original = ContentProvider.this.setCallingAttributionSource(attributionSource);
+            AttributionSource original =
+                    ContentProvider.this.setCallingAttributionSource(attributionSource);
             try {
                 try {
-                    ContentProviderResult[] results = this.mInterface.applyBatch(authority, operations);
+                    ContentProviderResult[] results =
+                            this.mInterface.applyBatch(authority, operations);
                     if (results != null) {
                         for (int i2 = 0; i2 < results.length; i2++) {
                             if (userIds[i2] != -2) {
@@ -338,12 +414,15 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
 
         @Override // android.content.IContentProvider
         public int delete(AttributionSource attributionSource, Uri uri, Bundle extras) {
-            Uri uri2 = ContentProvider.this.maybeGetUriWithoutUserId(ContentProvider.this.validateIncomingUri(uri));
+            Uri uri2 =
+                    ContentProvider.this.maybeGetUriWithoutUserId(
+                            ContentProvider.this.validateIncomingUri(uri));
             if (enforceWritePermission(attributionSource, uri2) != 0) {
                 return 0;
             }
             ContentProvider.traceBegin(64L, "delete: ", uri2.getAuthority());
-            AttributionSource original = ContentProvider.this.setCallingAttributionSource(attributionSource);
+            AttributionSource original =
+                    ContentProvider.this.setCallingAttributionSource(attributionSource);
             try {
                 try {
                     return this.mInterface.delete(uri2, extras);
@@ -357,13 +436,17 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         }
 
         @Override // android.content.IContentProvider
-        public int update(AttributionSource attributionSource, Uri uri, ContentValues values, Bundle extras) {
-            Uri uri2 = ContentProvider.this.maybeGetUriWithoutUserId(ContentProvider.this.validateIncomingUri(uri));
+        public int update(
+                AttributionSource attributionSource, Uri uri, ContentValues values, Bundle extras) {
+            Uri uri2 =
+                    ContentProvider.this.maybeGetUriWithoutUserId(
+                            ContentProvider.this.validateIncomingUri(uri));
             if (enforceWritePermission(attributionSource, uri2) != 0) {
                 return 0;
             }
             ContentProvider.traceBegin(64L, "update: ", uri2.getAuthority());
-            AttributionSource original = ContentProvider.this.setCallingAttributionSource(attributionSource);
+            AttributionSource original =
+                    ContentProvider.this.setCallingAttributionSource(attributionSource);
             try {
                 try {
                     return this.mInterface.update(uri2, values, extras);
@@ -377,14 +460,23 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         }
 
         @Override // android.content.IContentProvider
-        public ParcelFileDescriptor openFile(AttributionSource attributionSource, Uri uri, String mode, ICancellationSignal cancellationSignal) throws FileNotFoundException {
-            Uri uri2 = ContentProvider.this.maybeGetUriWithoutUserId(ContentProvider.this.validateIncomingUri(uri));
+        public ParcelFileDescriptor openFile(
+                AttributionSource attributionSource,
+                Uri uri,
+                String mode,
+                ICancellationSignal cancellationSignal)
+                throws FileNotFoundException {
+            Uri uri2 =
+                    ContentProvider.this.maybeGetUriWithoutUserId(
+                            ContentProvider.this.validateIncomingUri(uri));
             enforceFilePermission(attributionSource, uri2, mode);
             ContentProvider.traceBegin(64L, "openFile: ", uri2.getAuthority());
-            AttributionSource original = ContentProvider.this.setCallingAttributionSource(attributionSource);
+            AttributionSource original =
+                    ContentProvider.this.setCallingAttributionSource(attributionSource);
             try {
                 try {
-                    return this.mInterface.openFile(uri2, mode, CancellationSignal.fromTransport(cancellationSignal));
+                    return this.mInterface.openFile(
+                            uri2, mode, CancellationSignal.fromTransport(cancellationSignal));
                 } catch (RemoteException e) {
                     throw e.rethrowAsRuntimeException();
                 }
@@ -395,14 +487,23 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         }
 
         @Override // android.content.IContentProvider
-        public AssetFileDescriptor openAssetFile(AttributionSource attributionSource, Uri uri, String mode, ICancellationSignal cancellationSignal) throws FileNotFoundException {
-            Uri uri2 = ContentProvider.this.maybeGetUriWithoutUserId(ContentProvider.this.validateIncomingUri(uri));
+        public AssetFileDescriptor openAssetFile(
+                AttributionSource attributionSource,
+                Uri uri,
+                String mode,
+                ICancellationSignal cancellationSignal)
+                throws FileNotFoundException {
+            Uri uri2 =
+                    ContentProvider.this.maybeGetUriWithoutUserId(
+                            ContentProvider.this.validateIncomingUri(uri));
             enforceFilePermission(attributionSource, uri2, mode);
             ContentProvider.traceBegin(64L, "openAssetFile: ", uri2.getAuthority());
-            AttributionSource original = ContentProvider.this.setCallingAttributionSource(attributionSource);
+            AttributionSource original =
+                    ContentProvider.this.setCallingAttributionSource(attributionSource);
             try {
                 try {
-                    return this.mInterface.openAssetFile(uri2, mode, CancellationSignal.fromTransport(cancellationSignal));
+                    return this.mInterface.openAssetFile(
+                            uri2, mode, CancellationSignal.fromTransport(cancellationSignal));
                 } catch (RemoteException e) {
                     throw e.rethrowAsRuntimeException();
                 }
@@ -413,11 +514,17 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         }
 
         @Override // android.content.IContentProvider
-        public Bundle call(AttributionSource attributionSource, String authority, String method, String arg, Bundle extras) {
+        public Bundle call(
+                AttributionSource attributionSource,
+                String authority,
+                String method,
+                String arg,
+                Bundle extras) {
             ContentProvider.this.validateIncomingAuthority(authority);
             Bundle.setDefusable(extras, true);
             ContentProvider.traceBegin(64L, "call: ", authority);
-            AttributionSource original = ContentProvider.this.setCallingAttributionSource(attributionSource);
+            AttributionSource original =
+                    ContentProvider.this.setCallingAttributionSource(attributionSource);
             try {
                 try {
                     return this.mInterface.call(authority, method, arg, extras);
@@ -431,10 +538,14 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         }
 
         @Override // android.content.IContentProvider
-        public String[] getStreamTypes(AttributionSource attributionSource, Uri uri, String mimeTypeFilter) {
-            Uri uri2 = ContentProvider.this.maybeGetUriWithoutUserId(ContentProvider.this.validateIncomingUri(uri));
+        public String[] getStreamTypes(
+                AttributionSource attributionSource, Uri uri, String mimeTypeFilter) {
+            Uri uri2 =
+                    ContentProvider.this.maybeGetUriWithoutUserId(
+                            ContentProvider.this.validateIncomingUri(uri));
             ContentProvider.traceBegin(64L, "getStreamTypes: ", uri2.getAuthority());
-            AttributionSource original = ContentProvider.this.setCallingAttributionSource(attributionSource);
+            AttributionSource original =
+                    ContentProvider.this.setCallingAttributionSource(attributionSource);
             try {
                 try {
                     return this.mInterface.getStreamTypes(uri2, mimeTypeFilter);
@@ -448,15 +559,28 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         }
 
         @Override // android.content.IContentProvider
-        public AssetFileDescriptor openTypedAssetFile(AttributionSource attributionSource, Uri uri, String mimeType, Bundle opts, ICancellationSignal cancellationSignal) throws FileNotFoundException {
+        public AssetFileDescriptor openTypedAssetFile(
+                AttributionSource attributionSource,
+                Uri uri,
+                String mimeType,
+                Bundle opts,
+                ICancellationSignal cancellationSignal)
+                throws FileNotFoundException {
             Bundle.setDefusable(opts, true);
-            Uri uri2 = ContentProvider.this.maybeGetUriWithoutUserId(ContentProvider.this.validateIncomingUri(uri));
+            Uri uri2 =
+                    ContentProvider.this.maybeGetUriWithoutUserId(
+                            ContentProvider.this.validateIncomingUri(uri));
             enforceFilePermission(attributionSource, uri2, "r");
             ContentProvider.traceBegin(64L, "openTypedAssetFile: ", uri2.getAuthority());
-            AttributionSource original = ContentProvider.this.setCallingAttributionSource(attributionSource);
+            AttributionSource original =
+                    ContentProvider.this.setCallingAttributionSource(attributionSource);
             try {
                 try {
-                    return this.mInterface.openTypedAssetFile(uri2, mimeType, opts, CancellationSignal.fromTransport(cancellationSignal));
+                    return this.mInterface.openTypedAssetFile(
+                            uri2,
+                            mimeType,
+                            opts,
+                            CancellationSignal.fromTransport(cancellationSignal));
                 } catch (RemoteException e) {
                     throw e.rethrowAsRuntimeException();
                 }
@@ -480,10 +604,12 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
                 return null;
             }
             ContentProvider.traceBegin(64L, "canonicalize: ", uri3.getAuthority());
-            AttributionSource original = ContentProvider.this.setCallingAttributionSource(attributionSource);
+            AttributionSource original =
+                    ContentProvider.this.setCallingAttributionSource(attributionSource);
             try {
                 try {
-                    return ContentProvider.maybeAddUserId(this.mInterface.canonicalize(uri3), userId);
+                    return ContentProvider.maybeAddUserId(
+                            this.mInterface.canonicalize(uri3), userId);
                 } catch (RemoteException e) {
                     throw e.rethrowAsRuntimeException();
                 }
@@ -494,7 +620,8 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         }
 
         @Override // android.content.IContentProvider
-        public void canonicalizeAsync(AttributionSource attributionSource, Uri uri, RemoteCallback callback) {
+        public void canonicalizeAsync(
+                AttributionSource attributionSource, Uri uri, RemoteCallback callback) {
             Bundle result = new Bundle();
             try {
                 result.putParcelable("result", canonicalize(attributionSource, uri));
@@ -513,10 +640,12 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
                 return null;
             }
             ContentProvider.traceBegin(64L, "uncanonicalize: ", uri3.getAuthority());
-            AttributionSource original = ContentProvider.this.setCallingAttributionSource(attributionSource);
+            AttributionSource original =
+                    ContentProvider.this.setCallingAttributionSource(attributionSource);
             try {
                 try {
-                    return ContentProvider.maybeAddUserId(this.mInterface.uncanonicalize(uri3), userId);
+                    return ContentProvider.maybeAddUserId(
+                            this.mInterface.uncanonicalize(uri3), userId);
                 } catch (RemoteException e) {
                     throw e.rethrowAsRuntimeException();
                 }
@@ -527,7 +656,8 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         }
 
         @Override // android.content.IContentProvider
-        public void uncanonicalizeAsync(AttributionSource attributionSource, Uri uri, RemoteCallback callback) {
+        public void uncanonicalizeAsync(
+                AttributionSource attributionSource, Uri uri, RemoteCallback callback) {
             Bundle result = new Bundle();
             try {
                 result.putParcelable("result", uncanonicalize(attributionSource, uri));
@@ -538,15 +668,24 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         }
 
         @Override // android.content.IContentProvider
-        public boolean refresh(AttributionSource attributionSource, Uri uri, Bundle extras, ICancellationSignal cancellationSignal) throws RemoteException {
-            Uri uri2 = ContentProvider.getUriWithoutUserId(ContentProvider.this.validateIncomingUri(uri));
+        public boolean refresh(
+                AttributionSource attributionSource,
+                Uri uri,
+                Bundle extras,
+                ICancellationSignal cancellationSignal)
+                throws RemoteException {
+            Uri uri2 =
+                    ContentProvider.getUriWithoutUserId(
+                            ContentProvider.this.validateIncomingUri(uri));
             if (enforceReadPermission(attributionSource, uri2) != 0) {
                 return false;
             }
             ContentProvider.traceBegin(64L, "refresh: ", uri2.getAuthority());
-            AttributionSource original = ContentProvider.this.setCallingAttributionSource(attributionSource);
+            AttributionSource original =
+                    ContentProvider.this.setCallingAttributionSource(attributionSource);
             try {
-                return this.mInterface.refresh(uri2, extras, CancellationSignal.fromTransport(cancellationSignal));
+                return this.mInterface.refresh(
+                        uri2, extras, CancellationSignal.fromTransport(cancellationSignal));
             } finally {
                 ContentProvider.this.setCallingAttributionSource(original);
                 Trace.traceEnd(64L);
@@ -554,10 +693,14 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         }
 
         @Override // android.content.IContentProvider
-        public int checkUriPermission(AttributionSource attributionSource, Uri uri, int uid, int modeFlags) {
-            Uri uri2 = ContentProvider.this.maybeGetUriWithoutUserId(ContentProvider.this.validateIncomingUri(uri));
+        public int checkUriPermission(
+                AttributionSource attributionSource, Uri uri, int uid, int modeFlags) {
+            Uri uri2 =
+                    ContentProvider.this.maybeGetUriWithoutUserId(
+                            ContentProvider.this.validateIncomingUri(uri));
             ContentProvider.traceBegin(64L, "checkUriPermission: ", uri2.getAuthority());
-            AttributionSource original = ContentProvider.this.setCallingAttributionSource(attributionSource);
+            AttributionSource original =
+                    ContentProvider.this.setCallingAttributionSource(attributionSource);
             try {
                 try {
                     return this.mInterface.checkUriPermission(uri2, uid, modeFlags);
@@ -570,7 +713,9 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
             }
         }
 
-        private void enforceFilePermission(AttributionSource attributionSource, Uri uri, String mode) throws FileNotFoundException, SecurityException {
+        private void enforceFilePermission(
+                AttributionSource attributionSource, Uri uri, String mode)
+                throws FileNotFoundException, SecurityException {
             if (mode != null && mode.indexOf(119) != -1) {
                 if (enforceWritePermission(attributionSource, uri) != 0) {
                     throw new FileNotFoundException("App op not allowed");
@@ -580,31 +725,50 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
             }
         }
 
-        private int enforceReadPermission(AttributionSource attributionSource, Uri uri) throws SecurityException {
+        private int enforceReadPermission(AttributionSource attributionSource, Uri uri)
+                throws SecurityException {
             int result = ContentProvider.this.semEnforceReadPermission(uri, attributionSource);
             if (result != 0) {
                 return result;
             }
-            if (ContentProvider.this.mTransport.mReadOp != -1 && ContentProvider.this.mTransport.mReadOp != AppOpsManager.permissionToOpCode(ContentProvider.this.mReadPermission)) {
-                return PermissionChecker.checkOpForDataDelivery(ContentProvider.this.getContext(), AppOpsManager.opToPublicName(ContentProvider.this.mTransport.mReadOp), attributionSource, null);
+            if (ContentProvider.this.mTransport.mReadOp != -1
+                    && ContentProvider.this.mTransport.mReadOp
+                            != AppOpsManager.permissionToOpCode(
+                                    ContentProvider.this.mReadPermission)) {
+                return PermissionChecker.checkOpForDataDelivery(
+                        ContentProvider.this.getContext(),
+                        AppOpsManager.opToPublicName(ContentProvider.this.mTransport.mReadOp),
+                        attributionSource,
+                        null);
             }
             return 0;
         }
 
-        private int enforceWritePermission(AttributionSource attributionSource, Uri uri) throws SecurityException {
+        private int enforceWritePermission(AttributionSource attributionSource, Uri uri)
+                throws SecurityException {
             int result = ContentProvider.this.semEnforceWritePermission(uri, attributionSource);
             if (result != 0) {
                 return result;
             }
-            if (ContentProvider.this.mTransport.mWriteOp != -1 && ContentProvider.this.mTransport.mWriteOp != AppOpsManager.permissionToOpCode(ContentProvider.this.mWritePermission)) {
-                return PermissionChecker.checkOpForDataDelivery(ContentProvider.this.getContext(), AppOpsManager.opToPublicName(ContentProvider.this.mTransport.mWriteOp), attributionSource, null);
+            if (ContentProvider.this.mTransport.mWriteOp != -1
+                    && ContentProvider.this.mTransport.mWriteOp
+                            != AppOpsManager.permissionToOpCode(
+                                    ContentProvider.this.mWritePermission)) {
+                return PermissionChecker.checkOpForDataDelivery(
+                        ContentProvider.this.getContext(),
+                        AppOpsManager.opToPublicName(ContentProvider.this.mTransport.mWriteOp),
+                        attributionSource,
+                        null);
             }
             return 0;
         }
 
         private int checkGetTypePermission(AttributionSource attributionSource, Uri uri) {
             int callingUid = Binder.getCallingUid();
-            if (UserHandle.getAppId(callingUid) == 1000 || ContentProvider.this.checkPermission(Manifest.permission.GET_ANY_PROVIDER_TYPE, attributionSource) == 0) {
+            if (UserHandle.getAppId(callingUid) == 1000
+                    || ContentProvider.this.checkPermission(
+                                    Manifest.permission.GET_ANY_PROVIDER_TYPE, attributionSource)
+                            == 0) {
                 return 0;
             }
             try {
@@ -620,7 +784,20 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         if (deniedAccessSystemUserOnlyProvider(callingUserId, this.mSystemUserOnly)) {
             return false;
         }
-        if (callingUserId == context.getUserId() || this.mSingleUser || ((SemDualAppManager.isDualAppId(UserHandle.getUserId(uid)) && context.getUserId() == 0) || ((SemDualAppManager.isDualAppId(context.getUserId()) && UserHandle.getUserId(uid) == 0) || context.checkPermission(Manifest.permission.INTERACT_ACROSS_USERS, pid, uid) == 0 || context.checkPermission(Manifest.permission.INTERACT_ACROSS_USERS_FULL, pid, uid) == 0))) {
+        if (callingUserId == context.getUserId()
+                || this.mSingleUser
+                || ((SemDualAppManager.isDualAppId(UserHandle.getUserId(uid))
+                                && context.getUserId() == 0)
+                        || ((SemDualAppManager.isDualAppId(context.getUserId())
+                                        && UserHandle.getUserId(uid) == 0)
+                                || context.checkPermission(
+                                                Manifest.permission.INTERACT_ACROSS_USERS, pid, uid)
+                                        == 0
+                                || context.checkPermission(
+                                                Manifest.permission.INTERACT_ACROSS_USERS_FULL,
+                                                pid,
+                                                uid)
+                                        == 0))) {
             return true;
         }
         return isContentRedirectionAllowedForUser(callingUserId);
@@ -636,7 +813,10 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
             return this.mUsersRedirectedToOwnerForMedia.valueAt(incomingUserIdIndex);
         }
         UserManager um = (UserManager) this.mContext.getSystemService(UserManager.class);
-        if (um != null && um.getUserProperties(UserHandle.of(incomingUserId)).isMediaSharedWithParent() && (parent = um.getProfileParent(UserHandle.of(incomingUserId))) != null && parent.equals(Process.myUserHandle())) {
+        if (um != null
+                && um.getUserProperties(UserHandle.of(incomingUserId)).isMediaSharedWithParent()
+                && (parent = um.getProfileParent(UserHandle.of(incomingUserId))) != null
+                && parent.equals(Process.myUserHandle())) {
             this.mUsersRedirectedToOwnerForMedia.put(incomingUserId, true);
             return true;
         }
@@ -649,14 +829,21 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         if (Binder.getCallingPid() == Process.myPid()) {
             return 0;
         }
-        return PermissionChecker.checkPermissionForDataDeliveryFromDataSource(getContext(), permission, -1, new AttributionSource(getContext().getAttributionSource(), attributionSource), null);
+        return PermissionChecker.checkPermissionForDataDeliveryFromDataSource(
+                getContext(),
+                permission,
+                -1,
+                new AttributionSource(getContext().getAttributionSource(), attributionSource),
+                null);
     }
 
-    protected int semEnforceReadPermission(Uri uri, AttributionSource attributionSource) throws SecurityException {
+    protected int semEnforceReadPermission(Uri uri, AttributionSource attributionSource)
+            throws SecurityException {
         return enforceReadPermissionInner(uri, attributionSource);
     }
 
-    protected int enforceReadPermissionInner(Uri uri, AttributionSource attributionSource) throws SecurityException {
+    protected int enforceReadPermissionInner(Uri uri, AttributionSource attributionSource)
+            throws SecurityException {
         String suffix;
         String missingPerm;
         Context context = getContext();
@@ -705,7 +892,10 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         if (deniedAccessSystemUserOnlyProvider(callingUserId, this.mSystemUserOnly)) {
             return 2;
         }
-        Uri userUri = (!this.mSingleUser || UserHandle.isSameUser(this.mMyUid, uid)) ? uri : maybeAddUserId(uri, callingUserId);
+        Uri userUri =
+                (!this.mSingleUser || UserHandle.isSameUser(this.mMyUid, uid))
+                        ? uri
+                        : maybeAddUserId(uri, callingUserId);
         if (context.checkUriPermission(userUri, pid, uid, 1) == 0) {
             return 0;
         }
@@ -719,14 +909,25 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         } else {
             suffix = " requires the provider be exported, or grantUriPermission()";
         }
-        throw new SecurityException("Permission Denial: reading " + getClass().getName() + " uri " + uri + " from pid=" + pid + ", uid=" + uid + suffix);
+        throw new SecurityException(
+                "Permission Denial: reading "
+                        + getClass().getName()
+                        + " uri "
+                        + uri
+                        + " from pid="
+                        + pid
+                        + ", uid="
+                        + uid
+                        + suffix);
     }
 
-    protected int semEnforceWritePermission(Uri uri, AttributionSource attributionSource) throws SecurityException {
+    protected int semEnforceWritePermission(Uri uri, AttributionSource attributionSource)
+            throws SecurityException {
         return enforceWritePermissionInner(uri, attributionSource);
     }
 
-    protected int enforceWritePermissionInner(Uri uri, AttributionSource attributionSource) throws SecurityException {
+    protected int enforceWritePermissionInner(Uri uri, AttributionSource attributionSource)
+            throws SecurityException {
         String failReason;
         String missingPerm;
         Context context = getContext();
@@ -782,7 +983,16 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         } else {
             failReason = " requires the provider be exported, or grantUriPermission()";
         }
-        throw new SecurityException("Permission Denial: writing " + getClass().getName() + " uri " + uri + " from pid=" + pid + ", uid=" + uid + failReason);
+        throw new SecurityException(
+                "Permission Denial: writing "
+                        + getClass().getName()
+                        + " uri "
+                        + uri
+                        + " from pid="
+                        + pid
+                        + ", uid="
+                        + uid
+                        + failReason);
     }
 
     public final Context getContext() {
@@ -816,7 +1026,8 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
     public final AttributionSource getCallingAttributionSource() {
         AttributionSource attributionSource = this.mCallingAttributionSource.get();
         if (attributionSource != null) {
-            this.mTransport.mAppOpsManager.checkPackage(Binder.getCallingUid(), attributionSource.getPackageName());
+            this.mTransport.mAppOpsManager.checkPackage(
+                    Binder.getCallingUid(), attributionSource.getPackageName());
         }
         return attributionSource;
     }
@@ -842,8 +1053,7 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         return null;
     }
 
-    public void onCallingPackageChanged() {
-    }
+    public void onCallingPackageChanged() {}
 
     public final class CallingIdentity {
         public final long binderToken;
@@ -856,7 +1066,8 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
     }
 
     public final CallingIdentity clearCallingIdentity() {
-        return new CallingIdentity(Binder.clearCallingIdentity(), setCallingAttributionSource(null));
+        return new CallingIdentity(
+                Binder.clearCallingIdentity(), setCallingAttributionSource(null));
     }
 
     public final void restoreCallingIdentity(CallingIdentity identity) {
@@ -932,36 +1143,47 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
             return;
         }
         if (enabled) {
-            this.mTransport.mInterface = new LoggingContentInterface(getClass().getSimpleName(), this);
+            this.mTransport.mInterface =
+                    new LoggingContentInterface(getClass().getSimpleName(), this);
         } else {
             this.mTransport.mInterface = this;
         }
     }
 
     @Override // android.content.ComponentCallbacks
-    public void onConfigurationChanged(Configuration newConfig) {
-    }
+    public void onConfigurationChanged(Configuration newConfig) {}
 
     @Override // android.content.ComponentCallbacks
-    public void onLowMemory() {
-    }
+    public void onLowMemory() {}
 
     @Override // android.content.ComponentCallbacks2
-    public void onTrimMemory(int level) {
-    }
+    public void onTrimMemory(int level) {}
 
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder, CancellationSignal cancellationSignal) {
+    public Cursor query(
+            Uri uri,
+            String[] projection,
+            String selection,
+            String[] selectionArgs,
+            String sortOrder,
+            CancellationSignal cancellationSignal) {
         return query(uri, projection, selection, selectionArgs, sortOrder);
     }
 
     @Override // android.content.ContentInterface
-    public Cursor query(Uri uri, String[] projection, Bundle queryArgs, CancellationSignal cancellationSignal) {
+    public Cursor query(
+            Uri uri, String[] projection, Bundle queryArgs, CancellationSignal cancellationSignal) {
         Bundle queryArgs2 = queryArgs != null ? queryArgs : Bundle.EMPTY;
         String sortClause = queryArgs2.getString(ContentResolver.QUERY_ARG_SQL_SORT_ORDER);
         if (sortClause == null && queryArgs2.containsKey(ContentResolver.QUERY_ARG_SORT_COLUMNS)) {
             sortClause = ContentResolver.createSqlSortClause(queryArgs2);
         }
-        return query(uri, projection, queryArgs2.getString(ContentResolver.QUERY_ARG_SQL_SELECTION), queryArgs2.getStringArray(ContentResolver.QUERY_ARG_SQL_SELECTION_ARGS), sortClause, cancellationSignal);
+        return query(
+                uri,
+                projection,
+                queryArgs2.getString(ContentResolver.QUERY_ARG_SQL_SELECTION),
+                queryArgs2.getStringArray(ContentResolver.QUERY_ARG_SQL_SELECTION_ARGS),
+                sortClause,
+                cancellationSignal);
     }
 
     public String getTypeAnonymous(Uri uri) {
@@ -1010,13 +1232,20 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
     @Override // android.content.ContentInterface
     public int delete(Uri uri, Bundle extras) {
         Bundle extras2 = extras != null ? extras : Bundle.EMPTY;
-        return delete(uri, extras2.getString(ContentResolver.QUERY_ARG_SQL_SELECTION), extras2.getStringArray(ContentResolver.QUERY_ARG_SQL_SELECTION_ARGS));
+        return delete(
+                uri,
+                extras2.getString(ContentResolver.QUERY_ARG_SQL_SELECTION),
+                extras2.getStringArray(ContentResolver.QUERY_ARG_SQL_SELECTION_ARGS));
     }
 
     @Override // android.content.ContentInterface
     public int update(Uri uri, ContentValues values, Bundle extras) {
         Bundle extras2 = extras != null ? extras : Bundle.EMPTY;
-        return update(uri, values, extras2.getString(ContentResolver.QUERY_ARG_SQL_SELECTION), extras2.getStringArray(ContentResolver.QUERY_ARG_SQL_SELECTION_ARGS));
+        return update(
+                uri,
+                values,
+                extras2.getString(ContentResolver.QUERY_ARG_SQL_SELECTION),
+                extras2.getStringArray(ContentResolver.QUERY_ARG_SQL_SELECTION_ARGS));
     }
 
     public ParcelFileDescriptor openFile(Uri uri, String mode) throws FileNotFoundException {
@@ -1024,7 +1253,8 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
     }
 
     @Override // android.content.ContentInterface
-    public ParcelFileDescriptor openFile(Uri uri, String mode, CancellationSignal signal) throws FileNotFoundException {
+    public ParcelFileDescriptor openFile(Uri uri, String mode, CancellationSignal signal)
+            throws FileNotFoundException {
         return openFile(uri, mode);
     }
 
@@ -1037,12 +1267,14 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
     }
 
     @Override // android.content.ContentInterface
-    public AssetFileDescriptor openAssetFile(Uri uri, String mode, CancellationSignal signal) throws FileNotFoundException {
+    public AssetFileDescriptor openAssetFile(Uri uri, String mode, CancellationSignal signal)
+            throws FileNotFoundException {
         return openAssetFile(uri, mode);
     }
 
-    protected final ParcelFileDescriptor openFileHelper(Uri uri, String mode) throws FileNotFoundException {
-        Cursor c = query(uri, new String[]{"_data"}, null, null, null);
+    protected final ParcelFileDescriptor openFileHelper(Uri uri, String mode)
+            throws FileNotFoundException {
+        Cursor c = query(uri, new String[] {"_data"}, null, null, null);
         int count = c != null ? c.getCount() : 0;
         if (count != 1) {
             if (c != null) {
@@ -1069,7 +1301,8 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         return null;
     }
 
-    public AssetFileDescriptor openTypedAssetFile(Uri uri, String mimeTypeFilter, Bundle opts) throws FileNotFoundException {
+    public AssetFileDescriptor openTypedAssetFile(Uri uri, String mimeTypeFilter, Bundle opts)
+            throws FileNotFoundException {
         if ("*/*".equals(mimeTypeFilter)) {
             return openAssetFile(uri, "r");
         }
@@ -1081,26 +1314,38 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
     }
 
     @Override // android.content.ContentInterface
-    public AssetFileDescriptor openTypedAssetFile(Uri uri, String mimeTypeFilter, Bundle opts, CancellationSignal signal) throws FileNotFoundException {
+    public AssetFileDescriptor openTypedAssetFile(
+            Uri uri, String mimeTypeFilter, Bundle opts, CancellationSignal signal)
+            throws FileNotFoundException {
         return openTypedAssetFile(uri, mimeTypeFilter, opts);
     }
 
-    public <T> ParcelFileDescriptor openPipeHelper(final Uri uri, final String mimeType, final Bundle opts, final T args, final PipeDataWriter<T> func) throws FileNotFoundException {
+    public <T> ParcelFileDescriptor openPipeHelper(
+            final Uri uri,
+            final String mimeType,
+            final Bundle opts,
+            final T args,
+            final PipeDataWriter<T> func)
+            throws FileNotFoundException {
         try {
             final ParcelFileDescriptor[] fds = ParcelFileDescriptor.createPipe();
-            AsyncTask<Object, Object, Object> task = new AsyncTask<Object, Object, Object>() { // from class: android.content.ContentProvider.1
-                @Override // android.os.AsyncTask
-                protected Object doInBackground(Object... params) {
-                    func.writeDataToPipe(fds[1], uri, mimeType, opts, args);
-                    try {
-                        fds[1].close();
-                        return null;
-                    } catch (IOException e) {
-                        Log.w(ContentProvider.TAG, "Failure closing pipe", e);
-                        return null;
-                    }
-                }
-            };
+            AsyncTask<Object, Object, Object> task =
+                    new AsyncTask<
+                            Object,
+                            Object,
+                            Object>() { // from class: android.content.ContentProvider.1
+                        @Override // android.os.AsyncTask
+                        protected Object doInBackground(Object... params) {
+                            func.writeDataToPipe(fds[1], uri, mimeType, opts, args);
+                            try {
+                                fds[1].close();
+                                return null;
+                            } catch (IOException e) {
+                                Log.w(ContentProvider.TAG, "Failure closing pipe", e);
+                                return null;
+                            }
+                        }
+                    };
             task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null);
             return fds[0];
         } catch (IOException e) {
@@ -1130,7 +1375,8 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         if (this.mContext == null) {
             this.mContext = context;
             if (context != null && this.mTransport != null) {
-                this.mTransport.mAppOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+                this.mTransport.mAppOpsManager =
+                        (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
             }
             this.mMyUid = Process.myUid();
             if (info != null) {
@@ -1150,11 +1396,14 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
     }
 
     @Override // android.content.ContentInterface
-    public ContentProviderResult[] applyBatch(String authority, ArrayList<ContentProviderOperation> operations) throws OperationApplicationException {
+    public ContentProviderResult[] applyBatch(
+            String authority, ArrayList<ContentProviderOperation> operations)
+            throws OperationApplicationException {
         return applyBatch(operations);
     }
 
-    public ContentProviderResult[] applyBatch(ArrayList<ContentProviderOperation> operations) throws OperationApplicationException {
+    public ContentProviderResult[] applyBatch(ArrayList<ContentProviderOperation> operations)
+            throws OperationApplicationException {
         int numOperations = operations.size();
         ContentProviderResult[] results = new ContentProviderResult[numOperations];
         for (int i = 0; i < numOperations; i++) {
@@ -1173,7 +1422,10 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
     }
 
     public void shutdown() {
-        Log.w(TAG, "implement ContentProvider shutdown() to make sure all database connections are gracefully shutdown");
+        Log.w(
+                TAG,
+                "implement ContentProvider shutdown() to make sure all database connections are"
+                        + " gracefully shutdown");
     }
 
     public void dump(FileDescriptor fd, PrintWriter writer, String[] args) {
@@ -1184,7 +1436,10 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
     public void validateIncomingAuthority(String authority) throws SecurityException {
         String message;
         if (!matchesOurAuthorities(getAuthorityWithoutUserId(authority))) {
-            String message2 = "The authority " + authority + " does not match the one of the contentProvider: ";
+            String message2 =
+                    "The authority "
+                            + authority
+                            + " does not match the one of the contentProvider: ";
             if (this.mAuthority != null) {
                 message = message2 + this.mAuthority;
             } else {
@@ -1198,18 +1453,34 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
         String auth = uri.getAuthority();
         if (!this.mSingleUser) {
             int userId = getUserIdFromAuthority(auth, -2);
-            if (deniedAccessSystemUserOnlyProvider(this.mContext.getUserId(), this.mSystemUserOnly)) {
-                throw new SecurityException("Trying to query a SYSTEM user only content provider from user:" + this.mContext.getUserId());
+            if (deniedAccessSystemUserOnlyProvider(
+                    this.mContext.getUserId(), this.mSystemUserOnly)) {
+                throw new SecurityException(
+                        "Trying to query a SYSTEM user only content provider from user:"
+                                + this.mContext.getUserId());
             }
-            if (userId != -2 && userId != this.mContext.getUserId() && !isContentRedirectionAllowedForUser(userId)) {
-                throw new SecurityException("trying to query a ContentProvider in user " + this.mContext.getUserId() + " with a uri belonging to user " + userId);
+            if (userId != -2
+                    && userId != this.mContext.getUserId()
+                    && !isContentRedirectionAllowedForUser(userId)) {
+                throw new SecurityException(
+                        "trying to query a ContentProvider in user "
+                                + this.mContext.getUserId()
+                                + " with a uri belonging to user "
+                                + userId);
             }
         }
         validateIncomingAuthority(auth);
         String encodedPath = uri.getEncodedPath();
         if (encodedPath != null && encodedPath.indexOf("//") != -1) {
-            Uri normalized = uri.buildUpon().encodedPath(encodedPath.replaceAll("//+", "/")).build();
-            Log.w(TAG, "Normalized " + uri + " to " + normalized + " to avoid possible security issues");
+            Uri normalized =
+                    uri.buildUpon().encodedPath(encodedPath.replaceAll("//+", "/")).build();
+            Log.w(
+                    TAG,
+                    "Normalized "
+                            + uri
+                            + " to "
+                            + normalized
+                            + " to avoid possible security issues");
             return normalized;
         }
         return uri;
@@ -1242,7 +1513,9 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
     }
 
     public static int getUserIdFromUri(Uri uri, int defaultUserId) {
-        return uri == null ? defaultUserId : getUserIdFromAuthority(uri.getAuthority(), defaultUserId);
+        return uri == null
+                ? defaultUserId
+                : getUserIdFromAuthority(uri.getAuthority(), defaultUserId);
     }
 
     public static int getUserIdFromUri(Uri uri) {
@@ -1280,17 +1553,23 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
     public static Uri createContentUriForUser(Uri contentUri, UserHandle userHandle) {
         if (!"content".equals(contentUri.getScheme())) {
-            throw new IllegalArgumentException(String.format("Given URI [%s] is not a content URI: ", contentUri));
+            throw new IllegalArgumentException(
+                    String.format("Given URI [%s] is not a content URI: ", contentUri));
         }
         int userId = userHandle.getIdentifier();
         if (uriHasUserId(contentUri)) {
             if (String.valueOf(userId).equals(contentUri.getUserInfo())) {
                 return contentUri;
             }
-            throw new IllegalArgumentException(String.format("Given URI [%s] already has a user ID, different from given user handle [%s]", contentUri, Integer.valueOf(userId)));
+            throw new IllegalArgumentException(
+                    String.format(
+                            "Given URI [%s] already has a user ID, different from given user handle"
+                                    + " [%s]",
+                            contentUri, Integer.valueOf(userId)));
         }
         Uri.Builder builder = contentUri.buildUpon();
-        builder.encodedAuthority("" + userHandle.getIdentifier() + "@" + contentUri.getEncodedAuthority());
+        builder.encodedAuthority(
+                "" + userHandle.getIdentifier() + "@" + contentUri.getEncodedAuthority());
         return builder.build();
     }
 
@@ -1314,7 +1593,10 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public static boolean deniedAccessSystemUserOnlyProvider(int callingUserId, boolean systemUserOnly) {
-        return Flags.enableSystemUserOnlyForServicesAndProviders() && callingUserId != 0 && systemUserOnly;
+    public static boolean deniedAccessSystemUserOnlyProvider(
+            int callingUserId, boolean systemUserOnly) {
+        return Flags.enableSystemUserOnlyForServicesAndProviders()
+                && callingUserId != 0
+                && systemUserOnly;
     }
 }

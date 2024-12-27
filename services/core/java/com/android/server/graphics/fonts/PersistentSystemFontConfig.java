@@ -5,9 +5,11 @@ import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Slog;
 import android.util.Xml;
+
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
+
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -38,14 +40,16 @@ public abstract class PersistentSystemFontConfig {
                 String name = resolvePullParser.getName();
                 if (depth == 1) {
                     if (!"fontConfig".equals(name)) {
-                        BootReceiver$$ExternalSyntheticOutline0.m("Invalid root tag: ", name, "PersistentSystemFontConfig");
+                        BootReceiver$$ExternalSyntheticOutline0.m(
+                                "Invalid root tag: ", name, "PersistentSystemFontConfig");
                         return;
                     }
                 } else if (depth == 2) {
                     name.getClass();
                     switch (name) {
                         case "lastModifiedDate":
-                            String attributeValue = resolvePullParser.getAttributeValue((String) null, "value");
+                            String attributeValue =
+                                    resolvePullParser.getAttributeValue((String) null, "value");
                             long j = 0;
                             if (!TextUtils.isEmpty(attributeValue)) {
                                 try {
@@ -56,18 +60,22 @@ public abstract class PersistentSystemFontConfig {
                             config.lastModifiedMillis = j;
                             break;
                         case "family":
-                            ((ArrayList) config.fontFamilies).add(FontUpdateRequest.Family.readFromXml(resolvePullParser));
+                            ((ArrayList) config.fontFamilies)
+                                    .add(FontUpdateRequest.Family.readFromXml(resolvePullParser));
                             break;
                         case "updatedFontDir":
                             Set set = config.updatedFontDirs;
-                            String attributeValue2 = resolvePullParser.getAttributeValue((String) null, "value");
+                            String attributeValue2 =
+                                    resolvePullParser.getAttributeValue((String) null, "value");
                             if (attributeValue2 == null) {
                                 attributeValue2 = "";
                             }
                             ((ArraySet) set).add(attributeValue2);
                             break;
                         default:
-                            Slog.w("PersistentSystemFontConfig", "Skipping unknown tag: ".concat(name));
+                            Slog.w(
+                                    "PersistentSystemFontConfig",
+                                    "Skipping unknown tag: ".concat(name));
                             break;
                     }
                 }
@@ -80,7 +88,8 @@ public abstract class PersistentSystemFontConfig {
         resolveSerializer.startDocument((String) null, Boolean.TRUE);
         resolveSerializer.startTag((String) null, "fontConfig");
         resolveSerializer.startTag((String) null, "lastModifiedDate");
-        resolveSerializer.attribute((String) null, "value", Long.toString(config.lastModifiedMillis));
+        resolveSerializer.attribute(
+                (String) null, "value", Long.toString(config.lastModifiedMillis));
         resolveSerializer.endTag((String) null, "lastModifiedDate");
         Iterator it = ((ArraySet) config.updatedFontDirs).iterator();
         while (it.hasNext()) {

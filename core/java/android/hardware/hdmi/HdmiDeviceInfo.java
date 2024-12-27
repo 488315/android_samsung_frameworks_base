@@ -3,6 +3,7 @@ package android.hardware.hdmi;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
@@ -45,41 +46,53 @@ public class HdmiDeviceInfo implements Parcelable {
     private final int mPortId;
     private final int mVendorId;
     public static final HdmiDeviceInfo INACTIVE_DEVICE = new HdmiDeviceInfo();
-    public static final Parcelable.Creator<HdmiDeviceInfo> CREATOR = new Parcelable.Creator<HdmiDeviceInfo>() { // from class: android.hardware.hdmi.HdmiDeviceInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HdmiDeviceInfo createFromParcel(Parcel source) {
-            int hdmiDeviceType = source.readInt();
-            int physicalAddress = source.readInt();
-            int portId = source.readInt();
-            switch (hdmiDeviceType) {
-                case 0:
-                    int logicalAddress = source.readInt();
-                    int deviceType = source.readInt();
-                    int vendorId = source.readInt();
-                    int powerStatus = source.readInt();
-                    String displayName = source.readString();
-                    int cecVersion = source.readInt();
-                    return HdmiDeviceInfo.cecDeviceBuilder().setLogicalAddress(logicalAddress).setPhysicalAddress(physicalAddress).setPortId(portId).setDeviceType(deviceType).setVendorId(vendorId).setDisplayName(displayName).setDevicePowerStatus(powerStatus).setCecVersion(cecVersion).build();
-                case 1:
-                    int deviceId = source.readInt();
-                    int adopterId = source.readInt();
-                    return HdmiDeviceInfo.mhlDevice(physicalAddress, portId, adopterId, deviceId);
-                case 2:
-                    return HdmiDeviceInfo.hardwarePort(physicalAddress, portId);
-                case 100:
-                    return HdmiDeviceInfo.INACTIVE_DEVICE;
-                default:
-                    return null;
-            }
-        }
+    public static final Parcelable.Creator<HdmiDeviceInfo> CREATOR =
+            new Parcelable.Creator<
+                    HdmiDeviceInfo>() { // from class: android.hardware.hdmi.HdmiDeviceInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HdmiDeviceInfo createFromParcel(Parcel source) {
+                    int hdmiDeviceType = source.readInt();
+                    int physicalAddress = source.readInt();
+                    int portId = source.readInt();
+                    switch (hdmiDeviceType) {
+                        case 0:
+                            int logicalAddress = source.readInt();
+                            int deviceType = source.readInt();
+                            int vendorId = source.readInt();
+                            int powerStatus = source.readInt();
+                            String displayName = source.readString();
+                            int cecVersion = source.readInt();
+                            return HdmiDeviceInfo.cecDeviceBuilder()
+                                    .setLogicalAddress(logicalAddress)
+                                    .setPhysicalAddress(physicalAddress)
+                                    .setPortId(portId)
+                                    .setDeviceType(deviceType)
+                                    .setVendorId(vendorId)
+                                    .setDisplayName(displayName)
+                                    .setDevicePowerStatus(powerStatus)
+                                    .setCecVersion(cecVersion)
+                                    .build();
+                        case 1:
+                            int deviceId = source.readInt();
+                            int adopterId = source.readInt();
+                            return HdmiDeviceInfo.mhlDevice(
+                                    physicalAddress, portId, adopterId, deviceId);
+                        case 2:
+                            return HdmiDeviceInfo.hardwarePort(physicalAddress, portId);
+                        case 100:
+                            return HdmiDeviceInfo.INACTIVE_DEVICE;
+                        default:
+                            return null;
+                    }
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HdmiDeviceInfo[] newArray(int size) {
-            return new HdmiDeviceInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HdmiDeviceInfo[] newArray(int size) {
+                    return new HdmiDeviceInfo[size];
+                }
+            };
 
     @Deprecated
     public HdmiDeviceInfo() {
@@ -135,12 +148,25 @@ public class HdmiDeviceInfo implements Parcelable {
         return new Builder(0);
     }
 
-    public static HdmiDeviceInfo mhlDevice(int physicalAddress, int portId, int adopterId, int deviceId) {
-        return new Builder(1).setPhysicalAddress(physicalAddress).setPortId(portId).setVendorId(0).setDisplayName("Mobile").setDeviceId(adopterId).setAdopterId(deviceId).build();
+    public static HdmiDeviceInfo mhlDevice(
+            int physicalAddress, int portId, int adopterId, int deviceId) {
+        return new Builder(1)
+                .setPhysicalAddress(physicalAddress)
+                .setPortId(portId)
+                .setVendorId(0)
+                .setDisplayName("Mobile")
+                .setDeviceId(adopterId)
+                .setAdopterId(deviceId)
+                .build();
     }
 
     public static HdmiDeviceInfo hardwarePort(int physicalAddress, int portId) {
-        return new Builder(2).setPhysicalAddress(physicalAddress).setPortId(portId).setVendorId(0).setDisplayName("HDMI" + portId).build();
+        return new Builder(2)
+                .setPhysicalAddress(physicalAddress)
+                .setPortId(portId)
+                .setVendorId(0)
+                .setDisplayName("HDMI" + portId)
+                .build();
     }
 
     public int getId() {
@@ -196,7 +222,9 @@ public class HdmiDeviceInfo implements Parcelable {
     }
 
     public boolean isSourceType() {
-        return isCecDevice() ? this.mDeviceType == 4 || this.mDeviceType == 1 || this.mDeviceType == 3 : isMhlDevice();
+        return isCecDevice()
+                ? this.mDeviceType == 4 || this.mDeviceType == 1 || this.mDeviceType == 3
+                : isMhlDevice();
     }
 
     public boolean isCecDevice() {
@@ -250,7 +278,8 @@ public class HdmiDeviceInfo implements Parcelable {
         switch (this.mHdmiDeviceType) {
             case 0:
                 s.append("CEC: ");
-                s.append("logical_address: ").append(String.format("0x%02X", Integer.valueOf(this.mLogicalAddress)));
+                s.append("logical_address: ")
+                        .append(String.format("0x%02X", Integer.valueOf(this.mLogicalAddress)));
                 s.append(" ");
                 s.append("device_type: ").append(this.mDeviceType).append(" ");
                 s.append("cec_version: ").append(this.mCecVersion).append(" ");
@@ -260,8 +289,12 @@ public class HdmiDeviceInfo implements Parcelable {
                 break;
             case 1:
                 s.append("MHL: ");
-                s.append("device_id: ").append(String.format("0x%04X", Integer.valueOf(this.mDeviceId))).append(" ");
-                s.append("adopter_id: ").append(String.format("0x%04X", Integer.valueOf(this.mAdopterId))).append(" ");
+                s.append("device_id: ")
+                        .append(String.format("0x%04X", Integer.valueOf(this.mDeviceId)))
+                        .append(" ");
+                s.append("adopter_id: ")
+                        .append(String.format("0x%04X", Integer.valueOf(this.mAdopterId)))
+                        .append(" ");
                 break;
             case 2:
                 s.append("Hardware: ");
@@ -272,7 +305,8 @@ public class HdmiDeviceInfo implements Parcelable {
             default:
                 return "";
         }
-        s.append("physical_address: ").append(String.format("0x%04X", Integer.valueOf(this.mPhysicalAddress)));
+        s.append("physical_address: ")
+                .append(String.format("0x%04X", Integer.valueOf(this.mPhysicalAddress)));
         s.append(" ");
         s.append("port_id: ").append(this.mPortId);
         if (this.mHdmiDeviceType == 0) {
@@ -286,11 +320,32 @@ public class HdmiDeviceInfo implements Parcelable {
             return false;
         }
         HdmiDeviceInfo other = (HdmiDeviceInfo) obj;
-        return this.mHdmiDeviceType == other.mHdmiDeviceType && this.mPhysicalAddress == other.mPhysicalAddress && this.mPortId == other.mPortId && this.mLogicalAddress == other.mLogicalAddress && this.mDeviceType == other.mDeviceType && this.mCecVersion == other.mCecVersion && this.mVendorId == other.mVendorId && this.mDevicePowerStatus == other.mDevicePowerStatus && this.mDisplayName.equals(other.mDisplayName) && this.mDeviceId == other.mDeviceId && this.mAdopterId == other.mAdopterId;
+        return this.mHdmiDeviceType == other.mHdmiDeviceType
+                && this.mPhysicalAddress == other.mPhysicalAddress
+                && this.mPortId == other.mPortId
+                && this.mLogicalAddress == other.mLogicalAddress
+                && this.mDeviceType == other.mDeviceType
+                && this.mCecVersion == other.mCecVersion
+                && this.mVendorId == other.mVendorId
+                && this.mDevicePowerStatus == other.mDevicePowerStatus
+                && this.mDisplayName.equals(other.mDisplayName)
+                && this.mDeviceId == other.mDeviceId
+                && this.mAdopterId == other.mAdopterId;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mHdmiDeviceType), Integer.valueOf(this.mPhysicalAddress), Integer.valueOf(this.mPortId), Integer.valueOf(this.mLogicalAddress), Integer.valueOf(this.mDeviceType), Integer.valueOf(this.mCecVersion), Integer.valueOf(this.mVendorId), Integer.valueOf(this.mDevicePowerStatus), this.mDisplayName, Integer.valueOf(this.mDeviceId), Integer.valueOf(this.mAdopterId));
+        return Objects.hash(
+                Integer.valueOf(this.mHdmiDeviceType),
+                Integer.valueOf(this.mPhysicalAddress),
+                Integer.valueOf(this.mPortId),
+                Integer.valueOf(this.mLogicalAddress),
+                Integer.valueOf(this.mDeviceType),
+                Integer.valueOf(this.mCecVersion),
+                Integer.valueOf(this.mVendorId),
+                Integer.valueOf(this.mDevicePowerStatus),
+                this.mDisplayName,
+                Integer.valueOf(this.mDeviceId),
+                Integer.valueOf(this.mAdopterId));
     }
 
     public static final class Builder {

@@ -23,6 +23,7 @@ public class DrawRectFilter extends Filter {
 
     @GenerateFieldPort(hasDefault = true, name = "colorRed")
     private float mColorRed;
+
     private final String mFixedColorFragmentShader;
     private ShaderProgram mProgram;
     private final String mVertexShader;
@@ -32,8 +33,14 @@ public class DrawRectFilter extends Filter {
         this.mColorRed = 0.8f;
         this.mColorGreen = 0.8f;
         this.mColorBlue = 0.0f;
-        this.mVertexShader = "attribute vec4 aPosition;\nvoid main() {\n  gl_Position = aPosition;\n}\n";
-        this.mFixedColorFragmentShader = "precision mediump float;\nuniform vec4 color;\nvoid main() {\n  gl_FragColor = color;\n}\n";
+        this.mVertexShader =
+                "attribute vec4 aPosition;\nvoid main() {\n  gl_Position = aPosition;\n}\n";
+        this.mFixedColorFragmentShader =
+                "precision mediump float;\n"
+                        + "uniform vec4 color;\n"
+                        + "void main() {\n"
+                        + "  gl_FragColor = color;\n"
+                        + "}\n";
     }
 
     @Override // android.filterfw.core.Filter
@@ -50,7 +57,15 @@ public class DrawRectFilter extends Filter {
 
     @Override // android.filterfw.core.Filter
     public void prepare(FilterContext context) {
-        this.mProgram = new ShaderProgram(context, "attribute vec4 aPosition;\nvoid main() {\n  gl_Position = aPosition;\n}\n", "precision mediump float;\nuniform vec4 color;\nvoid main() {\n  gl_FragColor = color;\n}\n");
+        this.mProgram =
+                new ShaderProgram(
+                        context,
+                        "attribute vec4 aPosition;\nvoid main() {\n  gl_Position = aPosition;\n}\n",
+                        "precision mediump float;\n"
+                                + "uniform vec4 color;\n"
+                                + "void main() {\n"
+                                + "  gl_FragColor = color;\n"
+                                + "}\n");
     }
 
     @Override // android.filterfw.core.Filter
@@ -68,7 +83,9 @@ public class DrawRectFilter extends Filter {
 
     private void renderBox(Quad box) {
         float[] color = {this.mColorRed, this.mColorGreen, this.mColorBlue, 1.0f};
-        float[] vertexValues = {box.p0.x, box.p0.y, box.p1.x, box.p1.y, box.p3.x, box.p3.y, box.p2.x, box.p2.y};
+        float[] vertexValues = {
+            box.p0.x, box.p0.y, box.p1.x, box.p1.y, box.p3.x, box.p3.y, box.p2.x, box.p2.y
+        };
         this.mProgram.setHostValue("color", color);
         this.mProgram.setAttributeValues("aPosition", vertexValues, 2);
         this.mProgram.setVertexCount(4);

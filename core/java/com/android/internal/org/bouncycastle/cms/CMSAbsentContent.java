@@ -2,6 +2,7 @@ package com.android.internal.org.bouncycastle.cms;
 
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.internal.org.bouncycastle.asn1.cms.CMSObjectIdentifiers;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -24,8 +25,7 @@ public class CMSAbsentContent implements CMSTypedData, CMSReadable {
     }
 
     @Override // com.android.internal.org.bouncycastle.cms.CMSProcessable
-    public void write(OutputStream zOut) throws IOException, CMSException {
-    }
+    public void write(OutputStream zOut) throws IOException, CMSException {}
 
     @Override // com.android.internal.org.bouncycastle.cms.CMSProcessable
     public Object getContent() {

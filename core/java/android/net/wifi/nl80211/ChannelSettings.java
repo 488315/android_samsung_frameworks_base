@@ -3,28 +3,31 @@ package android.net.wifi.nl80211;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
+
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public class ChannelSettings implements Parcelable {
-    public static final Parcelable.Creator<ChannelSettings> CREATOR = new Parcelable.Creator<ChannelSettings>() { // from class: android.net.wifi.nl80211.ChannelSettings.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ChannelSettings createFromParcel(Parcel in) {
-            ChannelSettings result = new ChannelSettings();
-            result.frequency = in.readInt();
-            if (in.dataAvail() != 0) {
-                Log.e(ChannelSettings.TAG, "Found trailing data after parcel parsing.");
-            }
-            return result;
-        }
+    public static final Parcelable.Creator<ChannelSettings> CREATOR =
+            new Parcelable.Creator<
+                    ChannelSettings>() { // from class: android.net.wifi.nl80211.ChannelSettings.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ChannelSettings createFromParcel(Parcel in) {
+                    ChannelSettings result = new ChannelSettings();
+                    result.frequency = in.readInt();
+                    if (in.dataAvail() != 0) {
+                        Log.e(ChannelSettings.TAG, "Found trailing data after parcel parsing.");
+                    }
+                    return result;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ChannelSettings[] newArray(int size) {
-            return new ChannelSettings[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ChannelSettings[] newArray(int size) {
+                    return new ChannelSettings[size];
+                }
+            };
     private static final String TAG = "ChannelSettings";
     public int frequency;
 
@@ -33,7 +36,9 @@ public class ChannelSettings implements Parcelable {
         if (this == rhs) {
             return true;
         }
-        return (rhs instanceof ChannelSettings) && (channel = (ChannelSettings) rhs) != null && this.frequency == channel.frequency;
+        return (rhs instanceof ChannelSettings)
+                && (channel = (ChannelSettings) rhs) != null
+                && this.frequency == channel.frequency;
     }
 
     public int hashCode() {

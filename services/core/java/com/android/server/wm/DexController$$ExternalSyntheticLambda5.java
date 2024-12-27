@@ -15,7 +15,8 @@ public final /* synthetic */ class DexController$$ExternalSyntheticLambda5 imple
         this.f$1 = str;
     }
 
-    public /* synthetic */ DexController$$ExternalSyntheticLambda5(DexController dexController, Task task) {
+    public /* synthetic */ DexController$$ExternalSyntheticLambda5(
+            DexController dexController, Task task) {
         this.f$0 = dexController;
         this.f$1 = task;
     }
@@ -33,7 +34,8 @@ public final /* synthetic */ class DexController$$ExternalSyntheticLambda5 imple
                 WindowManagerService.boostPriorityForLockedSection();
                 synchronized (windowManagerGlobalLock) {
                     try {
-                        dexController.mAtm.mTaskSupervisor.removeTask(task, false, true, "moveTasksToFreeformLocked");
+                        dexController.mAtm.mTaskSupervisor.removeTask(
+                                task, false, true, "moveTasksToFreeformLocked");
                     } catch (Throwable th) {
                         WindowManagerService.resetPriorityAfterLockedSection();
                         throw th;

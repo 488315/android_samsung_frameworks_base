@@ -14,8 +14,7 @@ public interface WearModeManagerInternal {
 
     @Target({ElementType.TYPE_USE})
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Identifier {
-    }
+    public @interface Identifier {}
 
     <T> void addActiveStateChangeListener(String str, Executor executor, Consumer<T> consumer);
 }

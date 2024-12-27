@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class SingleSatCorrection implements Parcelable {
-    public static final Parcelable.Creator<SingleSatCorrection> CREATOR = new Parcelable.Creator<SingleSatCorrection>() { // from class: android.hardware.gnss.measurement_corrections.SingleSatCorrection.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SingleSatCorrection createFromParcel(Parcel _aidl_source) {
-            SingleSatCorrection _aidl_out = new SingleSatCorrection();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<SingleSatCorrection> CREATOR =
+            new Parcelable.Creator<SingleSatCorrection>() { // from class:
+                // android.hardware.gnss.measurement_corrections.SingleSatCorrection.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SingleSatCorrection createFromParcel(Parcel _aidl_source) {
+                    SingleSatCorrection _aidl_out = new SingleSatCorrection();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SingleSatCorrection[] newArray(int _aidl_size) {
-            return new SingleSatCorrection[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SingleSatCorrection[] newArray(int _aidl_size) {
+                    return new SingleSatCorrection[_aidl_size];
+                }
+            };
     public static final int SINGLE_SAT_CORRECTION_HAS_COMBINED_ATTENUATION = 16;
     public static final int SINGLE_SAT_CORRECTION_HAS_COMBINED_EXCESS_PATH_LENGTH = 2;
     public static final int SINGLE_SAT_CORRECTION_HAS_COMBINED_EXCESS_PATH_LENGTH_UNC = 4;
@@ -136,7 +138,8 @@ public class SingleSatCorrection implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.excessPathInfos = (ExcessPathInfo[]) _aidl_parcel.createTypedArray(ExcessPathInfo.CREATOR);
+                this.excessPathInfos =
+                        (ExcessPathInfo[]) _aidl_parcel.createTypedArray(ExcessPathInfo.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }
@@ -175,21 +178,23 @@ public class SingleSatCorrection implements Parcelable {
     }
 
     public static class ExcessPathInfo implements Parcelable {
-        public static final Parcelable.Creator<ExcessPathInfo> CREATOR = new Parcelable.Creator<ExcessPathInfo>() { // from class: android.hardware.gnss.measurement_corrections.SingleSatCorrection.ExcessPathInfo.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ExcessPathInfo createFromParcel(Parcel _aidl_source) {
-                ExcessPathInfo _aidl_out = new ExcessPathInfo();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<ExcessPathInfo> CREATOR =
+                new Parcelable.Creator<ExcessPathInfo>() { // from class:
+                    // android.hardware.gnss.measurement_corrections.SingleSatCorrection.ExcessPathInfo.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ExcessPathInfo createFromParcel(Parcel _aidl_source) {
+                        ExcessPathInfo _aidl_out = new ExcessPathInfo();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public ExcessPathInfo[] newArray(int _aidl_size) {
-                return new ExcessPathInfo[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public ExcessPathInfo[] newArray(int _aidl_size) {
+                        return new ExcessPathInfo[_aidl_size];
+                    }
+                };
         public static final int EXCESS_PATH_INFO_HAS_ATTENUATION = 8;
         public static final int EXCESS_PATH_INFO_HAS_EXCESS_PATH_LENGTH = 1;
         public static final int EXCESS_PATH_INFO_HAS_EXCESS_PATH_LENGTH_UNC = 2;
@@ -258,7 +263,8 @@ public class SingleSatCorrection implements Parcelable {
                     _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                     return;
                 }
-                this.reflectingPlane = (ReflectingPlane) _aidl_parcel.readTypedObject(ReflectingPlane.CREATOR);
+                this.reflectingPlane =
+                        (ReflectingPlane) _aidl_parcel.readTypedObject(ReflectingPlane.CREATOR);
                 if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                     if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                         throw new BadParcelableException("Overflow in the size of parcelable");

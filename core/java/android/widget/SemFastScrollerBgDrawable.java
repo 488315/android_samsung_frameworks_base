@@ -24,16 +24,19 @@ public class SemFastScrollerBgDrawable extends Drawable {
     @Override // android.graphics.drawable.Drawable
     public void draw(Canvas canvas) {
         this.mPaint.setStrokeWidth(this.mValue);
-        canvas.drawLine(canvas.getWidth() / 2, this.mPaint.getStrokeWidth() / 2.0f, canvas.getWidth() / 2, canvas.getHeight() - (this.mPaint.getStrokeWidth() / 2.0f), this.mPaint);
+        canvas.drawLine(
+                canvas.getWidth() / 2,
+                this.mPaint.getStrokeWidth() / 2.0f,
+                canvas.getWidth() / 2,
+                canvas.getHeight() - (this.mPaint.getStrokeWidth() / 2.0f),
+                this.mPaint);
     }
 
     @Override // android.graphics.drawable.Drawable
-    public void setAlpha(int alpha) {
-    }
+    public void setAlpha(int alpha) {}
 
     @Override // android.graphics.drawable.Drawable
-    public void setColorFilter(ColorFilter colorFilter) {
-    }
+    public void setColorFilter(ColorFilter colorFilter) {}
 
     @Override // android.graphics.drawable.Drawable
     public int getOpacity() {

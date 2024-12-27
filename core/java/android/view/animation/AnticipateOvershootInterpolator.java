@@ -7,11 +7,13 @@ import android.graphics.animation.HasNativeInterpolator;
 import android.graphics.animation.NativeInterpolator;
 import android.graphics.animation.NativeInterpolatorFactory;
 import android.util.AttributeSet;
+
 import com.android.internal.R;
 
 @HasNativeInterpolator
 /* loaded from: classes4.dex */
-public class AnticipateOvershootInterpolator extends BaseInterpolator implements NativeInterpolator {
+public class AnticipateOvershootInterpolator extends BaseInterpolator
+        implements NativeInterpolator {
     private final float mTension;
 
     public AnticipateOvershootInterpolator() {
@@ -30,10 +32,13 @@ public class AnticipateOvershootInterpolator extends BaseInterpolator implements
         this(context.getResources(), context.getTheme(), attrs);
     }
 
-    public AnticipateOvershootInterpolator(Resources res, Resources.Theme theme, AttributeSet attrs) {
+    public AnticipateOvershootInterpolator(
+            Resources res, Resources.Theme theme, AttributeSet attrs) {
         TypedArray a;
         if (theme != null) {
-            a = theme.obtainStyledAttributes(attrs, R.styleable.AnticipateOvershootInterpolator, 0, 0);
+            a =
+                    theme.obtainStyledAttributes(
+                            attrs, R.styleable.AnticipateOvershootInterpolator, 0, 0);
         } else {
             a = res.obtainAttributes(attrs, R.styleable.AnticipateOvershootInterpolator);
         }
@@ -52,7 +57,9 @@ public class AnticipateOvershootInterpolator extends BaseInterpolator implements
 
     @Override // android.animation.TimeInterpolator
     public float getInterpolation(float t) {
-        return t < 0.5f ? a(2.0f * t, this.mTension) * 0.5f : (o((t * 2.0f) - 2.0f, this.mTension) + 2.0f) * 0.5f;
+        return t < 0.5f
+                ? a(2.0f * t, this.mTension) * 0.5f
+                : (o((t * 2.0f) - 2.0f, this.mTension) + 2.0f) * 0.5f;
     }
 
     @Override // android.graphics.animation.NativeInterpolator

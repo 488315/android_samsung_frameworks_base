@@ -4,7 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.ArraySet;
+
 import com.android.internal.util.ArrayUtils;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -12,19 +14,21 @@ import java.util.Set;
 
 /* loaded from: classes.dex */
 public final class UsageEventsQuery implements Parcelable {
-    public static final Parcelable.Creator<UsageEventsQuery> CREATOR = new Parcelable.Creator<UsageEventsQuery>() { // from class: android.app.usage.UsageEventsQuery.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UsageEventsQuery createFromParcel(Parcel in) {
-            return new UsageEventsQuery(in);
-        }
+    public static final Parcelable.Creator<UsageEventsQuery> CREATOR =
+            new Parcelable.Creator<
+                    UsageEventsQuery>() { // from class: android.app.usage.UsageEventsQuery.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UsageEventsQuery createFromParcel(Parcel in) {
+                    return new UsageEventsQuery(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public UsageEventsQuery[] newArray(int size) {
-            return new UsageEventsQuery[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public UsageEventsQuery[] newArray(int size) {
+                    return new UsageEventsQuery[size];
+                }
+            };
     private final long mBeginTimeMillis;
     private final long mEndTimeMillis;
     private final int[] mEventTypes;
@@ -36,7 +40,8 @@ public final class UsageEventsQuery implements Parcelable {
         this.mEndTimeMillis = builder.mEndTimeMillis;
         this.mEventTypes = ArrayUtils.convertToIntArray((ArraySet<Integer>) builder.mEventTypes);
         this.mUserId = builder.mUserId;
-        this.mPackageNames = (String[]) builder.mPackageNames.toArray(new String[builder.mPackageNames.size()]);
+        this.mPackageNames =
+                (String[]) builder.mPackageNames.toArray(new String[builder.mPackageNames.size()]);
     }
 
     private UsageEventsQuery(Parcel in) {

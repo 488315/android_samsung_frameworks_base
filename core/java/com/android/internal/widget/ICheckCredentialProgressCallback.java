@@ -12,8 +12,7 @@ public interface ICheckCredentialProgressCallback extends IInterface {
 
     public static class Default implements ICheckCredentialProgressCallback {
         @Override // com.android.internal.widget.ICheckCredentialProgressCallback
-        public void onCredentialVerified() throws RemoteException {
-        }
+        public void onCredentialVerified() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,8 +20,9 @@ public interface ICheckCredentialProgressCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICheckCredentialProgressCallback {
-        public static final String DESCRIPTOR = "com.android.internal.widget.ICheckCredentialProgressCallback";
+    public abstract static class Stub extends Binder implements ICheckCredentialProgressCallback {
+        public static final String DESCRIPTOR =
+                "com.android.internal.widget.ICheckCredentialProgressCallback";
         static final int TRANSACTION_onCredentialVerified = 1;
 
         public Stub() {
@@ -60,7 +60,8 @@ public interface ICheckCredentialProgressCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

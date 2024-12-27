@@ -1,12 +1,31 @@
 package com.android.internal.org.bouncycastle.asn1;
 
 import android.text.format.DateFormat;
+
 import com.android.internal.org.bouncycastle.util.Arrays;
+
 import java.io.IOException;
 
 /* loaded from: classes5.dex */
 public class DERUniversalString extends ASN1Primitive implements ASN1String {
-    private static final char[] table = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', DateFormat.CAPITAL_AM_PM, 'B', 'C', 'D', DateFormat.DAY, 'F'};
+    private static final char[] table = {
+        '0',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        DateFormat.CAPITAL_AM_PM,
+        'B',
+        'C',
+        'D',
+        DateFormat.DAY,
+        'F'
+    };
     private final byte[] string;
 
     public static DERUniversalString getInstance(Object obj) {
@@ -20,7 +39,8 @@ public class DERUniversalString extends ASN1Primitive implements ASN1String {
                 throw new IllegalArgumentException("encoding error getInstance: " + e.toString());
             }
         }
-        throw new IllegalArgumentException("illegal object in getInstance: " + obj.getClass().getName());
+        throw new IllegalArgumentException(
+                "illegal object in getInstance: " + obj.getClass().getName());
     }
 
     public static DERUniversalString getInstance(ASN1TaggedObject obj, boolean explicit) {
@@ -81,7 +101,8 @@ public class DERUniversalString extends ASN1Primitive implements ASN1String {
         return Arrays.areEqual(this.string, ((DERUniversalString) o).string);
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive, com.android.internal.org.bouncycastle.asn1.ASN1Object
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Object
     public int hashCode() {
         return Arrays.hashCode(this.string);
     }

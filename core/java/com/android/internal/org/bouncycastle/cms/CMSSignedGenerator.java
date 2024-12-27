@@ -13,6 +13,7 @@ import com.android.internal.org.bouncycastle.cert.X509CRLHolder;
 import com.android.internal.org.bouncycastle.cert.X509CertificateHolder;
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.Store;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -34,11 +35,16 @@ public class CMSSignedGenerator {
     public static final String ENCRYPTION_DSA = X9ObjectIdentifiers.id_dsa_with_sha1.getId();
     public static final String ENCRYPTION_ECDSA = X9ObjectIdentifiers.ecdsa_with_SHA1.getId();
     public static final String ENCRYPTION_RSA_PSS = PKCSObjectIdentifiers.id_RSASSA_PSS.getId();
-    private static final String ENCRYPTION_ECDSA_WITH_SHA1 = X9ObjectIdentifiers.ecdsa_with_SHA1.getId();
-    private static final String ENCRYPTION_ECDSA_WITH_SHA224 = X9ObjectIdentifiers.ecdsa_with_SHA224.getId();
-    private static final String ENCRYPTION_ECDSA_WITH_SHA256 = X9ObjectIdentifiers.ecdsa_with_SHA256.getId();
-    private static final String ENCRYPTION_ECDSA_WITH_SHA384 = X9ObjectIdentifiers.ecdsa_with_SHA384.getId();
-    private static final String ENCRYPTION_ECDSA_WITH_SHA512 = X9ObjectIdentifiers.ecdsa_with_SHA512.getId();
+    private static final String ENCRYPTION_ECDSA_WITH_SHA1 =
+            X9ObjectIdentifiers.ecdsa_with_SHA1.getId();
+    private static final String ENCRYPTION_ECDSA_WITH_SHA224 =
+            X9ObjectIdentifiers.ecdsa_with_SHA224.getId();
+    private static final String ENCRYPTION_ECDSA_WITH_SHA256 =
+            X9ObjectIdentifiers.ecdsa_with_SHA256.getId();
+    private static final String ENCRYPTION_ECDSA_WITH_SHA384 =
+            X9ObjectIdentifiers.ecdsa_with_SHA384.getId();
+    private static final String ENCRYPTION_ECDSA_WITH_SHA512 =
+            X9ObjectIdentifiers.ecdsa_with_SHA512.getId();
     private static final Set NO_PARAMS = new HashSet();
     private static final Map EC_ALGORITHMS = new HashMap();
     protected List certs = new ArrayList();
@@ -62,10 +68,10 @@ public class CMSSignedGenerator {
         EC_ALGORITHMS.put(DIGEST_SHA512, ENCRYPTION_ECDSA_WITH_SHA512);
     }
 
-    protected CMSSignedGenerator() {
-    }
+    protected CMSSignedGenerator() {}
 
-    protected Map getBaseParameters(ASN1ObjectIdentifier contentType, AlgorithmIdentifier digAlgId, byte[] hash) {
+    protected Map getBaseParameters(
+            ASN1ObjectIdentifier contentType, AlgorithmIdentifier digAlgId, byte[] hash) {
         Map param = new HashMap();
         param.put("contentType", contentType);
         param.put(CMSAttributeTableGenerator.DIGEST_ALGORITHM_IDENTIFIER, digAlgId);
@@ -89,7 +95,8 @@ public class CMSSignedGenerator {
         this.crls.addAll(CMSUtils.getCRLsFromStore(crlStore));
     }
 
-    public void addAttributeCertificate(X509AttributeCertificateHolder attrCert) throws CMSException {
+    public void addAttributeCertificate(X509AttributeCertificateHolder attrCert)
+            throws CMSException {
         this.certs.add(new DERTaggedObject(false, 2, attrCert.toASN1Structure()));
     }
 

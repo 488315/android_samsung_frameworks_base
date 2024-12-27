@@ -12,7 +12,8 @@ public class PVDetectionInfo {
     int right;
     int top;
 
-    public PVDetectionInfo(int left, int top, int right, int bottom, int angles, int id, PVObjectType objectType) {
+    public PVDetectionInfo(
+            int left, int top, int right, int bottom, int angles, int id, PVObjectType objectType) {
         this.left = left;
         this.top = top;
         this.right = right;

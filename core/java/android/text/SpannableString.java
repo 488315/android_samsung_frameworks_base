@@ -1,7 +1,8 @@
 package android.text;
 
 /* loaded from: classes4.dex */
-public class SpannableString extends SpannableStringInternal implements CharSequence, GetChars, Spannable {
+public class SpannableString extends SpannableStringInternal
+        implements CharSequence, GetChars, Spannable {
     @Override // android.text.SpannableStringInternal
     public /* bridge */ /* synthetic */ boolean equals(Object obj) {
         return super.equals(obj);

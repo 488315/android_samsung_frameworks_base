@@ -3,9 +3,11 @@ package com.android.server.display.utils;
 import android.net.ConnectivityModuleConnector$$ExternalSyntheticOutline0;
 import android.net.shared.InitialConfiguration$$ExternalSyntheticOutline0;
 import android.util.Slog;
+
 import com.android.internal.display.BrightnessSynchronizer;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,7 +49,9 @@ public abstract class DeviceConfigParsingUtils {
     public static float parseBrightness(String str) {
         float parseFloat = Float.parseFloat(str);
         if (parseFloat < FullScreenMagnificationGestureHandler.MAX_SCALE || parseFloat > 1.0f) {
-            throw new IllegalArgumentException(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("Brightness value out of bounds: ", str));
+            throw new IllegalArgumentException(
+                    ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                            "Brightness value out of bounds: ", str));
         }
         return parseFloat;
     }
@@ -66,7 +70,10 @@ public abstract class DeviceConfigParsingUtils {
             String[] split2 = str2.split(",");
             int length2 = split2.length;
             if (length2 < 4) {
-                Slog.e("DeviceConfigParsingUtils", "Invalid dataSet(not enough items):".concat(str2), new Throwable());
+                Slog.e(
+                        "DeviceConfigParsingUtils",
+                        "Invalid dataSet(not enough items):".concat(str2),
+                        new Throwable());
                 return Map.of();
             }
             String str3 = split2[i];
@@ -74,7 +81,10 @@ public abstract class DeviceConfigParsingUtils {
                 int parseInt = Integer.parseInt(split2[1]);
                 int i3 = parseInt * 2;
                 if (length2 < i3 + 2 || length2 > i3 + 3) {
-                    Slog.e("DeviceConfigParsingUtils", "Invalid dataSet(wrong number of points):".concat(str2), new Throwable());
+                    Slog.e(
+                            "DeviceConfigParsingUtils",
+                            "Invalid dataSet(wrong number of points):".concat(str2),
+                            new Throwable());
                     return Map.of();
                 }
                 ArrayList arrayList = new ArrayList();
@@ -89,7 +99,13 @@ public abstract class DeviceConfigParsingUtils {
                     int i7 = length;
                     Object apply = biFunction.apply(str4, str5);
                     if (apply == null) {
-                        StringBuilder m = InitialConfiguration$$ExternalSyntheticOutline0.m("Invalid dataPoint ,key=", str4, ",value=", str5, ",dataSet=");
+                        StringBuilder m =
+                                InitialConfiguration$$ExternalSyntheticOutline0.m(
+                                        "Invalid dataPoint ,key=",
+                                        str4,
+                                        ",value=",
+                                        str5,
+                                        ",dataSet=");
                         m.append(str2);
                         Slog.e("DeviceConfigParsingUtils", m.toString(), new Throwable());
                         return Map.of();
@@ -103,12 +119,24 @@ public abstract class DeviceConfigParsingUtils {
                 int i8 = length;
                 Object apply2 = function.apply(arrayList);
                 if (apply2 == null) {
-                    Slog.e("DeviceConfigParsingUtils", "Invalid dataSetMapped dataPoints=" + arrayList + ",dataSet=" + str2, new Throwable());
+                    Slog.e(
+                            "DeviceConfigParsingUtils",
+                            "Invalid dataSetMapped dataPoints=" + arrayList + ",dataSet=" + str2,
+                            new Throwable());
                     return Map.of();
                 }
                 String str6 = i4 < split2.length ? split2[i4] : "default";
-                if (((Map) hashMap.computeIfAbsent(str3, new DeviceConfigParsingUtils$$ExternalSyntheticLambda0())).put(str6, apply2) != null) {
-                    Slog.e("DeviceConfigParsingUtils", BootReceiver$$ExternalSyntheticOutline0.m("Duplicate dataSetId=", str6, ",data=", str), new Throwable());
+                if (((Map)
+                                        hashMap.computeIfAbsent(
+                                                str3,
+                                                new DeviceConfigParsingUtils$$ExternalSyntheticLambda0()))
+                                .put(str6, apply2)
+                        != null) {
+                    Slog.e(
+                            "DeviceConfigParsingUtils",
+                            BootReceiver$$ExternalSyntheticOutline0.m(
+                                    "Duplicate dataSetId=", str6, ",data=", str),
+                            new Throwable());
                     return Map.of();
                 }
                 i2++;
@@ -116,7 +144,10 @@ public abstract class DeviceConfigParsingUtils {
                 length = i8;
                 i = 0;
             } catch (NumberFormatException e) {
-                Slog.e("DeviceConfigParsingUtils", "Invalid dataSet(invalid number of points):".concat(str2), e);
+                Slog.e(
+                        "DeviceConfigParsingUtils",
+                        "Invalid dataSet(invalid number of points):".concat(str2),
+                        e);
                 return Map.of();
             }
         }

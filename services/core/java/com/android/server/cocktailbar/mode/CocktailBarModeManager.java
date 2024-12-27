@@ -3,9 +3,12 @@ package com.android.server.cocktailbar.mode;
 import android.content.Context;
 import android.os.Debug;
 import android.util.Log;
+
 import com.android.server.cocktailbar.CocktailBarManagerServiceContainer;
 import com.android.server.cocktailbar.CocktailBarManagerServiceListener;
+
 import com.samsung.android.knox.SemPersonaManager;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -29,7 +32,9 @@ public final class CocktailBarModeManager {
                 return normalMode;
             }
             if (i == 2) {
-                return !SemPersonaManager.isKioskModeEnabled(this.mContext) ? normalMode : this.mKnoxMode;
+                return !SemPersonaManager.isKioskModeEnabled(this.mContext)
+                        ? normalMode
+                        : this.mKnoxMode;
             }
             Iterator it = this.mPrivateModes.iterator();
             while (it.hasNext()) {
@@ -49,13 +54,20 @@ public final class CocktailBarModeManager {
         CocktailBarMode cocktailBarMode2 = getCocktailBarMode(this.mCocktailBarModeId);
         CocktailBarManagerServiceListener cocktailBarManagerServiceListener = this.mListener;
         if (cocktailBarMode2 != null) {
-            ((CocktailBarManagerServiceContainer) cocktailBarManagerServiceListener).onUnsetMode(i, this.mCocktailBarModeId, cocktailBarMode2.getModeName());
+            ((CocktailBarManagerServiceContainer) cocktailBarManagerServiceListener)
+                    .onUnsetMode(i, this.mCocktailBarModeId, cocktailBarMode2.getModeName());
         }
-        ((CocktailBarManagerServiceContainer) cocktailBarManagerServiceListener).onSetMode(i, cocktailBarMode.getModeId(), cocktailBarMode.getCocktailType(), cocktailBarMode.getModeName());
+        ((CocktailBarManagerServiceContainer) cocktailBarManagerServiceListener)
+                .onSetMode(
+                        i,
+                        cocktailBarMode.getModeId(),
+                        cocktailBarMode.getCocktailType(),
+                        cocktailBarMode.getModeName());
         this.mCocktailBarModeId = cocktailBarMode.getModeId();
         if (DEBUG) {
             StringBuffer stringBuffer = new StringBuffer("onSetMode: ");
-            stringBuffer.append(cocktailBarMode2 != null ? cocktailBarMode2.getModeName() : " no-current");
+            stringBuffer.append(
+                    cocktailBarMode2 != null ? cocktailBarMode2.getModeName() : " no-current");
             stringBuffer.append(" -> ");
             stringBuffer.append(cocktailBarMode.getModeName());
             Log.d("CocktailBarModeManager", stringBuffer.toString());
@@ -67,13 +79,21 @@ public final class CocktailBarModeManager {
             CocktailBarMode cocktailBarMode2 = getCocktailBarMode(this.mCocktailBarModeId);
             CocktailBarManagerServiceListener cocktailBarManagerServiceListener = this.mListener;
             if (cocktailBarMode2 != null) {
-                ((CocktailBarManagerServiceContainer) cocktailBarManagerServiceListener).onUnsetMode(0, this.mCocktailBarModeId, cocktailBarMode2.getModeName());
+                ((CocktailBarManagerServiceContainer) cocktailBarManagerServiceListener)
+                        .onUnsetMode(0, this.mCocktailBarModeId, cocktailBarMode2.getModeName());
             }
-            ((CocktailBarManagerServiceContainer) cocktailBarManagerServiceListener).onSetMode(0, cocktailBarMode.getModeId(), cocktailBarMode.getCocktailType(), cocktailBarMode.getModeName());
+            ((CocktailBarManagerServiceContainer) cocktailBarManagerServiceListener)
+                    .onSetMode(
+                            0,
+                            cocktailBarMode.getModeId(),
+                            cocktailBarMode.getCocktailType(),
+                            cocktailBarMode.getModeName());
             this.mCocktailBarModeId = cocktailBarMode.getModeId();
             if (DEBUG) {
-                StringBuffer stringBuffer = new StringBuffer("CocktailBarModeManageronSetModeForcely: ");
-                stringBuffer.append(cocktailBarMode2 != null ? cocktailBarMode2.getModeName() : " no-current");
+                StringBuffer stringBuffer =
+                        new StringBuffer("CocktailBarModeManageronSetModeForcely: ");
+                stringBuffer.append(
+                        cocktailBarMode2 != null ? cocktailBarMode2.getModeName() : " no-current");
                 stringBuffer.append(" -> ");
                 stringBuffer.append(cocktailBarMode.getModeName());
                 Log.d("CocktailBarModeManager", stringBuffer.toString());
@@ -86,7 +106,10 @@ public final class CocktailBarModeManager {
             this.mPrivateModes.add(absPrivateMode);
             this.mPrivateModeMap.put(absPrivateMode.mPrivateModeName, absPrivateMode);
         } else {
-            Log.e("CocktailBarModeManager", "setupPrivateMode : exist duplicated privateMode : " + absPrivateMode.mPrivateModeName);
+            Log.e(
+                    "CocktailBarModeManager",
+                    "setupPrivateMode : exist duplicated privateMode : "
+                            + absPrivateMode.mPrivateModeName);
         }
     }
 }

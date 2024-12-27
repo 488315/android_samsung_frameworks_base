@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -15,8 +16,8 @@ public interface IOnAssociationsChangedListener extends IInterface {
 
     public static class Default implements IOnAssociationsChangedListener {
         @Override // android.companion.IOnAssociationsChangedListener
-        public void onAssociationsChanged(List<AssociationInfo> associations) throws RemoteException {
-        }
+        public void onAssociationsChanged(List<AssociationInfo> associations)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +25,7 @@ public interface IOnAssociationsChangedListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IOnAssociationsChangedListener {
+    public abstract static class Stub extends Binder implements IOnAssociationsChangedListener {
         static final int TRANSACTION_onAssociationsChanged = 1;
 
         public Stub() {
@@ -62,7 +63,8 @@ public interface IOnAssociationsChangedListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IOnAssociationsChangedListener.DESCRIPTOR);
             }
@@ -72,7 +74,8 @@ public interface IOnAssociationsChangedListener extends IInterface {
             }
             switch (code) {
                 case 1:
-                    List<AssociationInfo> _arg0 = data.createTypedArrayList(AssociationInfo.CREATOR);
+                    List<AssociationInfo> _arg0 =
+                            data.createTypedArrayList(AssociationInfo.CREATOR);
                     data.enforceNoDataAvail();
                     onAssociationsChanged(_arg0);
                     reply.writeNoException();
@@ -99,7 +102,8 @@ public interface IOnAssociationsChangedListener extends IInterface {
             }
 
             @Override // android.companion.IOnAssociationsChangedListener
-            public void onAssociationsChanged(List<AssociationInfo> associations) throws RemoteException {
+            public void onAssociationsChanged(List<AssociationInfo> associations)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

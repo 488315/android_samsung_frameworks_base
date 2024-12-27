@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.os.SystemProperties;
 import android.util.ArrayMap;
 import android.util.Log;
+
 import com.samsung.android.knox.custom.LauncherConfigurationInternal;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class InputKeyCounter {
-    public static final boolean DEBUG = !"true".equals(SystemProperties.get("ro.product_ship", "false"));
+    public static final boolean DEBUG =
+            !"true".equals(SystemProperties.get("ro.product_ship", "false"));
     public final HwKeyCount mCurrentKeyCount = new HwKeyCount();
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -58,14 +60,17 @@ public final class InputKeyCounter {
             contentValuesArr[i].put("value", (Integer) arrayMap.valueAt(i));
         }
         Intent intent = new Intent();
-        intent.setAction("com.samsung.android.providers.context.log.action.USE_MULTI_APP_FEATURE_SURVEY");
+        intent.setAction(
+                "com.samsung.android.providers.context.log.action.USE_MULTI_APP_FEATURE_SURVEY");
         intent.putExtra("data", contentValuesArr);
         intent.setPackage("com.samsung.android.providers.context");
         context.sendBroadcast(intent);
         if (DEBUG) {
             Log.d("InputKeyCounter", "Sendbroadcast keycount - lenght: " + arrayMap.size());
             for (int i2 = 0; i2 < size; i2++) {
-                Log.d("InputKeyCounter", "Sendbroadcast keycount - cvs: " + contentValuesArr[i2].toString());
+                Log.d(
+                        "InputKeyCounter",
+                        "Sendbroadcast keycount - cvs: " + contentValuesArr[i2].toString());
             }
         }
     }

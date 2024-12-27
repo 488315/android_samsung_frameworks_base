@@ -1,6 +1,7 @@
 package com.samsung.android.service.ProtectedATCommand;
 
 import android.util.Slog;
+
 import com.samsung.android.service.ProtectedATCommand.list.ATCommands;
 
 /* loaded from: classes6.dex */
@@ -34,7 +35,10 @@ public class ATCommandCheckerWithJDM extends ATCommandChecker {
         if (result != 1) {
             return result;
         }
-        Slog.i("PACMClassifier", "Although this command is an unregistered command, the command is allowed because this device is a JDM device");
+        Slog.i(
+                "PACMClassifier",
+                "Although this command is an unregistered command, the command is allowed because"
+                    + " this device is a JDM device");
         return 161;
     }
 
@@ -65,7 +69,13 @@ public class ATCommandCheckerWithJDM extends ATCommandChecker {
             Slog.e("PACMClassifier", "cmd is null");
             return -268435456;
         }
-        String[] protectedCmds = {"AT+ALERTDIS=0,", "AT+DEBUGLVC=0,5", "AT+DEBUGLVC=0,6", "AT+DEVROOTK=2,2,", "AT+DEVROOTK=2,3,"};
+        String[] protectedCmds = {
+            "AT+ALERTDIS=0,",
+            "AT+DEBUGLVC=0,5",
+            "AT+DEBUGLVC=0,6",
+            "AT+DEVROOTK=2,2,",
+            "AT+DEVROOTK=2,3,"
+        };
         try {
             for (String protectedCmd : protectedCmds) {
                 if (strCmd.indexOf(protectedCmd) == 0) {

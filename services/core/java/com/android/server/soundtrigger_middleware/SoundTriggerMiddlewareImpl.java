@@ -5,8 +5,9 @@ import android.media.soundtrigger_middleware.ISoundTriggerCallback;
 import android.media.soundtrigger_middleware.ISoundTriggerModule;
 import android.media.soundtrigger_middleware.SoundTriggerModuleDescriptor;
 import android.util.Slog;
-import com.android.server.soundtrigger_middleware.SoundTriggerModule;
+
 import com.android.server.soundtrigger_middleware.SoundTriggerModule.Session;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -36,20 +37,25 @@ public final class SoundTriggerMiddlewareImpl implements ISoundTriggerMiddleware
         public abstract void releaseSession(int i);
     }
 
-    public SoundTriggerMiddlewareImpl(HalFactory[] halFactoryArr, AudioSessionProvider audioSessionProvider) {
+    public SoundTriggerMiddlewareImpl(
+            HalFactory[] halFactoryArr, AudioSessionProvider audioSessionProvider) {
         ArrayList arrayList = new ArrayList(halFactoryArr.length);
         for (HalFactory halFactory : halFactoryArr) {
             try {
                 arrayList.add(new SoundTriggerModule(halFactory, audioSessionProvider));
             } catch (Exception e) {
-                Slog.e("SoundTriggerMiddlewareImpl", "Failed to add a SoundTriggerModule instance", e);
+                Slog.e(
+                        "SoundTriggerMiddlewareImpl",
+                        "Failed to add a SoundTriggerModule instance",
+                        e);
             }
         }
         this.mModules = (SoundTriggerModule[]) arrayList.toArray(new SoundTriggerModule[0]);
     }
 
     @Override // com.android.server.soundtrigger_middleware.ISoundTriggerMiddlewareInternal
-    public final ISoundTriggerModule attach(int i, ISoundTriggerCallback iSoundTriggerCallback, boolean z) {
+    public final ISoundTriggerModule attach(
+            int i, ISoundTriggerCallback iSoundTriggerCallback, boolean z) {
         SoundTriggerModule.Session session;
         SoundTriggerModule soundTriggerModule = this.mModules[i];
         synchronized (soundTriggerModule) {
@@ -62,9 +68,11 @@ public final class SoundTriggerMiddlewareImpl implements ISoundTriggerMiddleware
     @Override // com.android.server.soundtrigger_middleware.ISoundTriggerMiddlewareInternal
     public final SoundTriggerModuleDescriptor[] listModules() {
         Properties properties;
-        SoundTriggerModuleDescriptor[] soundTriggerModuleDescriptorArr = new SoundTriggerModuleDescriptor[this.mModules.length];
+        SoundTriggerModuleDescriptor[] soundTriggerModuleDescriptorArr =
+                new SoundTriggerModuleDescriptor[this.mModules.length];
         for (int i = 0; i < this.mModules.length; i++) {
-            SoundTriggerModuleDescriptor soundTriggerModuleDescriptor = new SoundTriggerModuleDescriptor();
+            SoundTriggerModuleDescriptor soundTriggerModuleDescriptor =
+                    new SoundTriggerModuleDescriptor();
             soundTriggerModuleDescriptor.handle = i;
             SoundTriggerModule soundTriggerModule = this.mModules[i];
             synchronized (soundTriggerModule) {

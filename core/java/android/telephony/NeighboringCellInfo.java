@@ -3,25 +3,28 @@ package android.telephony;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.content.NativeLibraryHelper;
 import com.android.internal.telephony.SemTelephonyUtils;
 
 @Deprecated
 /* loaded from: classes4.dex */
 public class NeighboringCellInfo implements Parcelable {
-    public static final Parcelable.Creator<NeighboringCellInfo> CREATOR = new Parcelable.Creator<NeighboringCellInfo>() { // from class: android.telephony.NeighboringCellInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NeighboringCellInfo createFromParcel(Parcel in) {
-            return new NeighboringCellInfo(in);
-        }
+    public static final Parcelable.Creator<NeighboringCellInfo> CREATOR =
+            new Parcelable.Creator<
+                    NeighboringCellInfo>() { // from class: android.telephony.NeighboringCellInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NeighboringCellInfo createFromParcel(Parcel in) {
+                    return new NeighboringCellInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NeighboringCellInfo[] newArray(int size) {
-            return new NeighboringCellInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NeighboringCellInfo[] newArray(int size) {
+                    return new NeighboringCellInfo[size];
+                }
+            };
     public static final int UNKNOWN_CID = -1;
     public static final int UNKNOWN_RSSI = 99;
     private int mCid;
@@ -180,7 +183,10 @@ public class NeighboringCellInfo implements Parcelable {
             }
             append.append(obj);
         } else if (this.mLac != -1 && this.mCid != -1) {
-            StringBuilder append2 = sb.append(SemTelephonyUtils.maskPii(Integer.toHexString(this.mLac))).append(SemTelephonyUtils.maskPii(Integer.toHexString(this.mCid))).append("@");
+            StringBuilder append2 =
+                    sb.append(SemTelephonyUtils.maskPii(Integer.toHexString(this.mLac)))
+                            .append(SemTelephonyUtils.maskPii(Integer.toHexString(this.mCid)))
+                            .append("@");
             if (this.mRssi != 99) {
                 obj = Integer.valueOf(this.mRssi);
             }

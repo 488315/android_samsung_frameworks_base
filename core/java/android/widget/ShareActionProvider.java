@@ -10,7 +10,7 @@ import android.view.ActionProvider;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
-import android.widget.ActivityChooserModel;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
@@ -45,7 +45,8 @@ public class ShareActionProvider extends ActionProvider {
     public View onCreateActionView() {
         ActivityChooserView activityChooserView = new ActivityChooserView(this.mContext);
         if (!activityChooserView.isInEditMode()) {
-            ActivityChooserModel dataModel = ActivityChooserModel.get(this.mContext, this.mShareHistoryFileName);
+            ActivityChooserModel dataModel =
+                    ActivityChooserModel.get(this.mContext, this.mShareHistoryFileName);
             activityChooserView.setActivityChooserModel(dataModel);
         }
         TypedValue outTypedValue = new TypedValue();
@@ -53,8 +54,10 @@ public class ShareActionProvider extends ActionProvider {
         Drawable drawable = this.mContext.getDrawable(outTypedValue.resourceId);
         activityChooserView.setExpandActivityOverflowButtonDrawable(drawable);
         activityChooserView.setProvider(this);
-        activityChooserView.setDefaultActionButtonContentDescription(R.string.shareactionprovider_share_with_application);
-        activityChooserView.setExpandActivityOverflowButtonContentDescription(R.string.shareactionprovider_share_with);
+        activityChooserView.setDefaultActionButtonContentDescription(
+                R.string.shareactionprovider_share_with_application);
+        activityChooserView.setExpandActivityOverflowButtonContentDescription(
+                R.string.shareactionprovider_share_with);
         return activityChooserView;
     }
 
@@ -66,19 +69,30 @@ public class ShareActionProvider extends ActionProvider {
     @Override // android.view.ActionProvider
     public void onPrepareSubMenu(SubMenu subMenu) {
         subMenu.clear();
-        ActivityChooserModel dataModel = ActivityChooserModel.get(this.mContext, this.mShareHistoryFileName);
+        ActivityChooserModel dataModel =
+                ActivityChooserModel.get(this.mContext, this.mShareHistoryFileName);
         PackageManager packageManager = this.mContext.getPackageManager();
         int expandedActivityCount = dataModel.getActivityCount();
         int collapsedActivityCount = Math.min(expandedActivityCount, this.mMaxShownActivityCount);
         for (int i = 0; i < collapsedActivityCount; i++) {
             ResolveInfo activity = dataModel.getActivity(i);
-            subMenu.add(0, i, i, activity.loadLabel(packageManager)).setIcon(activity.loadIcon(packageManager)).setOnMenuItemClickListener(this.mOnMenuItemClickListener);
+            subMenu.add(0, i, i, activity.loadLabel(packageManager))
+                    .setIcon(activity.loadIcon(packageManager))
+                    .setOnMenuItemClickListener(this.mOnMenuItemClickListener);
         }
         if (collapsedActivityCount < expandedActivityCount) {
-            SubMenu expandedSubMenu = subMenu.addSubMenu(0, collapsedActivityCount, collapsedActivityCount, this.mContext.getString(R.string.activity_chooser_view_see_all));
+            SubMenu expandedSubMenu =
+                    subMenu.addSubMenu(
+                            0,
+                            collapsedActivityCount,
+                            collapsedActivityCount,
+                            this.mContext.getString(R.string.activity_chooser_view_see_all));
             for (int i2 = 0; i2 < expandedActivityCount; i2++) {
                 ResolveInfo activity2 = dataModel.getActivity(i2);
-                expandedSubMenu.add(0, i2, i2, activity2.loadLabel(packageManager)).setIcon(activity2.loadIcon(packageManager)).setOnMenuItemClickListener(this.mOnMenuItemClickListener);
+                expandedSubMenu
+                        .add(0, i2, i2, activity2.loadLabel(packageManager))
+                        .setIcon(activity2.loadIcon(packageManager))
+                        .setOnMenuItemClickListener(this.mOnMenuItemClickListener);
             }
         }
     }
@@ -95,22 +109,26 @@ public class ShareActionProvider extends ActionProvider {
                 shareIntent.addFlags(134742016);
             }
         }
-        ActivityChooserModel dataModel = ActivityChooserModel.get(this.mContext, this.mShareHistoryFileName);
+        ActivityChooserModel dataModel =
+                ActivityChooserModel.get(this.mContext, this.mShareHistoryFileName);
         dataModel.setIntent(shareIntent);
     }
 
     private class ShareMenuItemOnMenuItemClickListener implements MenuItem.OnMenuItemClickListener {
-        private ShareMenuItemOnMenuItemClickListener() {
-        }
+        private ShareMenuItemOnMenuItemClickListener() {}
 
         @Override // android.view.MenuItem.OnMenuItemClickListener
         public boolean onMenuItemClick(MenuItem item) {
-            ActivityChooserModel dataModel = ActivityChooserModel.get(ShareActionProvider.this.mContext, ShareActionProvider.this.mShareHistoryFileName);
+            ActivityChooserModel dataModel =
+                    ActivityChooserModel.get(
+                            ShareActionProvider.this.mContext,
+                            ShareActionProvider.this.mShareHistoryFileName);
             int itemId = item.getItemId();
             Intent launchIntent = dataModel.chooseActivity(itemId);
             if (launchIntent != null) {
                 String action = launchIntent.getAction();
-                if (Intent.ACTION_SEND.equals(action) || Intent.ACTION_SEND_MULTIPLE.equals(action)) {
+                if (Intent.ACTION_SEND.equals(action)
+                        || Intent.ACTION_SEND_MULTIPLE.equals(action)) {
                     launchIntent.addFlags(134742016);
                 }
                 ShareActionProvider.this.mContext.startActivity(launchIntent);
@@ -127,18 +145,20 @@ public class ShareActionProvider extends ActionProvider {
         if (this.mOnChooseActivityListener == null) {
             this.mOnChooseActivityListener = new ShareActivityChooserModelPolicy();
         }
-        ActivityChooserModel dataModel = ActivityChooserModel.get(this.mContext, this.mShareHistoryFileName);
+        ActivityChooserModel dataModel =
+                ActivityChooserModel.get(this.mContext, this.mShareHistoryFileName);
         dataModel.setOnChooseActivityListener(this.mOnChooseActivityListener);
     }
 
-    private class ShareActivityChooserModelPolicy implements ActivityChooserModel.OnChooseActivityListener {
-        private ShareActivityChooserModelPolicy() {
-        }
+    private class ShareActivityChooserModelPolicy
+            implements ActivityChooserModel.OnChooseActivityListener {
+        private ShareActivityChooserModelPolicy() {}
 
         @Override // android.widget.ActivityChooserModel.OnChooseActivityListener
         public boolean onChooseActivity(ActivityChooserModel host, Intent intent) {
             if (ShareActionProvider.this.mOnShareTargetSelectedListener != null) {
-                ShareActionProvider.this.mOnShareTargetSelectedListener.onShareTargetSelected(ShareActionProvider.this, intent);
+                ShareActionProvider.this.mOnShareTargetSelectedListener.onShareTargetSelected(
+                        ShareActionProvider.this, intent);
                 return false;
             }
             return false;

@@ -30,11 +30,14 @@ import android.view.View;
 import android.view.WindowManagerGlobal;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
+
 import com.android.internal.R;
+
 import com.samsung.android.core.CoreSaConstant;
 import com.samsung.android.core.CoreSaLogger;
 import com.samsung.android.rune.InputRune;
 import com.samsung.android.view.SemWindowManager;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.HashMap;
@@ -43,7 +46,8 @@ import java.util.HashMap;
 public class PhoneFallbackEventHandler implements FallbackEventHandler {
     private static final String AFTER_KEYGUARD_GONE = "afterKeyguardGone";
     private static final String CLASS_NAME_MESSAGING = "com.android.mms.ui.ConversationComposer";
-    private static final String COMPONENT_NAME_CAMERA = "com.sec.android.app.camera/com.sec.android.app.camera.Camera";
+    private static final String COMPONENT_NAME_CAMERA =
+            "com.sec.android.app.camera/com.sec.android.app.camera.Camera";
     private static final boolean DEBUG = false;
     private static final String EXTRA_IS_QUICK_LAUNCH_MODE = "isQuickLaunchMode";
     private static final String EXTRA_IS_SECURE = "isSecure";
@@ -113,7 +117,10 @@ public class PhoneFallbackEventHandler implements FallbackEventHandler {
                                 startCallActivity();
                             }
                         } else {
-                            Log.i(TAG, "Not starting call activity because user setup is in progress.");
+                            Log.i(
+                                    TAG,
+                                    "Not starting call activity because user setup is in"
+                                        + " progress.");
                         }
                     }
                     return true;
@@ -135,9 +142,20 @@ public class PhoneFallbackEventHandler implements FallbackEventHandler {
                             Intent intent2 = new Intent(Intent.ACTION_CAMERA_BUTTON, (Uri) null);
                             intent2.addFlags(268435456);
                             intent2.putExtra(Intent.EXTRA_KEY_EVENT, event);
-                            this.mContext.sendOrderedBroadcastAsUser(intent2, UserHandle.CURRENT_OR_SELF, null, null, null, 0, null, null);
+                            this.mContext.sendOrderedBroadcastAsUser(
+                                    intent2,
+                                    UserHandle.CURRENT_OR_SELF,
+                                    null,
+                                    null,
+                                    null,
+                                    0,
+                                    null,
+                                    null);
                         } else {
-                            Log.i(TAG, "Not dispatching CAMERA long press because user setup is in progress.");
+                            Log.i(
+                                    TAG,
+                                    "Not dispatching CAMERA long press because user setup is in"
+                                        + " progress.");
                         }
                     }
                     return true;
@@ -175,14 +193,19 @@ public class PhoneFallbackEventHandler implements FallbackEventHandler {
                                 } catch (ActivityNotFoundException e2) {
                                 }
                             } else {
-                                Log.i(TAG, "Not dispatching SEARCH long press because user setup is in progress.");
+                                Log.i(
+                                        TAG,
+                                        "Not dispatching SEARCH long press because user setup is in"
+                                            + " progress.");
                             }
                         }
                     }
                 }
                 return false;
             case 1002:
-                if (dispatcher != null && event.getRepeatCount() <= 0 && !getKeyguardManager().isKeyguardLocked()) {
+                if (dispatcher != null
+                        && event.getRepeatCount() <= 0
+                        && !getKeyguardManager().isKeyguardLocked()) {
                     Intent intent4 = new Intent(Intent.ACTION_MAIN);
                     intent4.addCategory(Intent.CATEGORY_HOME);
                     intent4.setFlags(268435456);
@@ -196,14 +219,20 @@ public class PhoneFallbackEventHandler implements FallbackEventHandler {
                 }
                 return false;
             case 1006:
-                if (dispatcher != null && event.getRepeatCount() <= 0 && !getKeyguardManager().isKeyguardLocked()) {
+                if (dispatcher != null
+                        && event.getRepeatCount() <= 0
+                        && !getKeyguardManager().isKeyguardLocked()) {
                     getInputMethodManager().toggleSoftInput(0, 0);
                     return true;
                 }
                 return false;
             case 1008:
-                if (dispatcher != null && event.getRepeatCount() <= 0 && !getKeyguardManager().isKeyguardLocked()) {
-                    Intent intent5 = Intent.makeMainSelectorActivity(Intent.ACTION_MAIN, Intent.CATEGORY_APP_EMAIL);
+                if (dispatcher != null
+                        && event.getRepeatCount() <= 0
+                        && !getKeyguardManager().isKeyguardLocked()) {
+                    Intent intent5 =
+                            Intent.makeMainSelectorActivity(
+                                    Intent.ACTION_MAIN, Intent.CATEGORY_APP_EMAIL);
                     intent5.addFlags(268435456);
                     intent5.addFlags(8388608);
                     try {
@@ -215,7 +244,9 @@ public class PhoneFallbackEventHandler implements FallbackEventHandler {
                 }
                 return false;
             case 1013:
-                if (dispatcher != null && event.getRepeatCount() <= 0 && !getKeyguardManager().isKeyguardLocked()) {
+                if (dispatcher != null
+                        && event.getRepeatCount() <= 0
+                        && !getKeyguardManager().isKeyguardLocked()) {
                     Intent intent6 = new Intent();
                     intent6.setClassName(PACKAGE_NAME_MESSAGING, CLASS_NAME_MESSAGING);
                     intent6.addFlags(268435456);
@@ -230,12 +261,24 @@ public class PhoneFallbackEventHandler implements FallbackEventHandler {
                 return false;
             case 1015:
             case 1079:
-                if ((InputRune.PWM_ACTIVE_OR_XCOVER_KEY || InputRune.PWM_XCOVER_AND_TOP_KEY) && dispatcher != null && !isFactoryMode() && isUserSetupComplete()) {
+                if ((InputRune.PWM_ACTIVE_OR_XCOVER_KEY || InputRune.PWM_XCOVER_AND_TOP_KEY)
+                        && dispatcher != null
+                        && !isFactoryMode()
+                        && isUserSetupComplete()) {
                     int repeatCount = event.getRepeatCount();
                     boolean longPress = event.isLongPress();
                     boolean isTracking = dispatcher.isTracking(event);
                     if (InputRune.SAFE_DEBUG) {
-                        Log.d(TAG, "onKeyDown, keycode=" + keyCode + " repeatCount=" + repeatCount + " isLongPress=" + longPress + " isTracking=" + isTracking);
+                        Log.d(
+                                TAG,
+                                "onKeyDown, keycode="
+                                        + keyCode
+                                        + " repeatCount="
+                                        + repeatCount
+                                        + " isLongPress="
+                                        + longPress
+                                        + " isTracking="
+                                        + isTracking);
                     }
                     if (repeatCount == 0) {
                         dispatcher.startTracking(event, this);
@@ -254,7 +297,8 @@ public class PhoneFallbackEventHandler implements FallbackEventHandler {
     }
 
     private boolean isNotInstantAppAndKeyguardRestricted(KeyEvent.DispatcherState dispatcher) {
-        return !this.mContext.getPackageManager().isInstantApp() && (getKeyguardManager().inKeyguardRestrictedInputMode() || dispatcher == null);
+        return !this.mContext.getPackageManager().isInstantApp()
+                && (getKeyguardManager().inKeyguardRestrictedInputMode() || dispatcher == null);
     }
 
     boolean onKeyUp(int keyCode, KeyEvent event) {
@@ -270,7 +314,10 @@ public class PhoneFallbackEventHandler implements FallbackEventHandler {
                             startCallActivity();
                             break;
                         } else {
-                            Log.i(TAG, "Not starting call activity because user setup is in progress.");
+                            Log.i(
+                                    TAG,
+                                    "Not starting call activity because user setup is in"
+                                        + " progress.");
                             break;
                         }
                     }
@@ -291,7 +338,10 @@ public class PhoneFallbackEventHandler implements FallbackEventHandler {
                             launchCamera();
                             break;
                         } else {
-                            Log.i(TAG, "Not starting camera activity because user setup is in progress.");
+                            Log.i(
+                                    TAG,
+                                    "Not starting camera activity because user setup is in"
+                                        + " progress.");
                             break;
                         }
                     }
@@ -315,7 +365,14 @@ public class PhoneFallbackEventHandler implements FallbackEventHandler {
                 if (InputRune.PWM_ACTIVE_OR_XCOVER_KEY || InputRune.PWM_XCOVER_AND_TOP_KEY) {
                     if (!isFactoryMode() && isUserSetupComplete()) {
                         if (InputRune.SAFE_DEBUG) {
-                            Log.d(TAG, "onKeyUp, keyCode=" + keyCode + " press=" + this.mPressType + " event.isCanceled()=" + event.isCanceled());
+                            Log.d(
+                                    TAG,
+                                    "onKeyUp, keyCode="
+                                            + keyCode
+                                            + " press="
+                                            + this.mPressType
+                                            + " event.isCanceled()="
+                                            + event.isCanceled());
                         }
                         if (this.mPressType == 0) {
                             if (!event.isCanceled()) {
@@ -357,7 +414,8 @@ public class PhoneFallbackEventHandler implements FallbackEventHandler {
 
     KeyguardManager getKeyguardManager() {
         if (this.mKeyguardManager == null) {
-            this.mKeyguardManager = (KeyguardManager) this.mContext.getSystemService(Context.KEYGUARD_SERVICE);
+            this.mKeyguardManager =
+                    (KeyguardManager) this.mContext.getSystemService(Context.KEYGUARD_SERVICE);
         }
         return this.mKeyguardManager;
     }
@@ -371,7 +429,9 @@ public class PhoneFallbackEventHandler implements FallbackEventHandler {
 
     MediaSessionManager getMediaSessionManager() {
         if (this.mMediaSessionManager == null) {
-            this.mMediaSessionManager = (MediaSessionManager) this.mContext.getSystemService(Context.MEDIA_SESSION_SERVICE);
+            this.mMediaSessionManager =
+                    (MediaSessionManager)
+                            this.mContext.getSystemService(Context.MEDIA_SESSION_SERVICE);
         }
         return this.mMediaSessionManager;
     }
@@ -385,7 +445,9 @@ public class PhoneFallbackEventHandler implements FallbackEventHandler {
     }
 
     private boolean isUserSetupComplete() {
-        return Settings.Secure.getInt(this.mContext.getContentResolver(), Settings.Secure.USER_SETUP_COMPLETE, 0) != 0;
+        return Settings.Secure.getInt(
+                        this.mContext.getContentResolver(), Settings.Secure.USER_SETUP_COMPLETE, 0)
+                != 0;
     }
 
     private boolean isReserveBatteryMode() {
@@ -398,13 +460,14 @@ public class PhoneFallbackEventHandler implements FallbackEventHandler {
         static final String TOP_KEY_ON_LOCKSCREEN = "xcover_top_key_on_lockscreen";
         static final String XCOVER_KEY_ON_LOCKSCREEN = "active_key_on_lockscreen";
 
-        private UndefinedSettingNames() {
-        }
+        private UndefinedSettingNames() {}
     }
 
     private InputMethodManager getInputMethodManager() {
         if (this.mInputMethodManager == null) {
-            this.mInputMethodManager = (InputMethodManager) this.mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+            this.mInputMethodManager =
+                    (InputMethodManager)
+                            this.mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
         }
         return this.mInputMethodManager;
     }
@@ -491,7 +554,10 @@ public class PhoneFallbackEventHandler implements FallbackEventHandler {
         }
         String toastString2 = null;
         if (keyToastMode == 1) {
-            toastString2 = getToastString(getApplicationInfo(intent, packageName), R.string.reserve_battery_mode_start_activity_disabled);
+            toastString2 =
+                    getToastString(
+                            getApplicationInfo(intent, packageName),
+                            R.string.reserve_battery_mode_start_activity_disabled);
         }
         if (TextUtils.isEmpty(toastString2)) {
             return false;
@@ -532,7 +598,14 @@ public class PhoneFallbackEventHandler implements FallbackEventHandler {
             if (isXCoverKeyOnLockScreen(keyCode)) {
                 Intent fillInIntent = new Intent();
                 fillInIntent.putExtra(AFTER_KEYGUARD_GONE, true);
-                PendingIntent pendingIntent = PendingIntent.getActivityAsUser(this.mContext, 0, intent, 201326592, null, UserHandle.CURRENT_OR_SELF);
+                PendingIntent pendingIntent =
+                        PendingIntent.getActivityAsUser(
+                                this.mContext,
+                                0,
+                                intent,
+                                201326592,
+                                null,
+                                UserHandle.CURRENT_OR_SELF);
                 getKeyguardManager().semSetPendingIntentAfterUnlock(pendingIntent, fillInIntent);
                 return;
             }
@@ -557,8 +630,13 @@ public class PhoneFallbackEventHandler implements FallbackEventHandler {
     }
 
     private boolean isFactoryMode() {
-        if (InputRune.PWM_KEY_FACTORY_MODE_POLICY || FactoryTest.isRunningFactoryApp() || FactoryTest.isAutomaticTestMode(this.mContext)) {
-            Log.d(TAG, "Block launchUserDefinedApp because of Factory binary, test mode or Factory app.");
+        if (InputRune.PWM_KEY_FACTORY_MODE_POLICY
+                || FactoryTest.isRunningFactoryApp()
+                || FactoryTest.isAutomaticTestMode(this.mContext)) {
+            Log.d(
+                    TAG,
+                    "Block launchUserDefinedApp because of Factory binary, test mode or Factory"
+                        + " app.");
             return true;
         }
         return false;

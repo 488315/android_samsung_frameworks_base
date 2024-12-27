@@ -19,8 +19,12 @@ public final class AlertWindowNotification {
     public AlertWindowNotification(WindowManagerService windowManagerService, String str) {
         this.mService = windowManagerService;
         this.mPackageName = str;
-        this.mNotificationManager = (NotificationManager) windowManagerService.mContext.getSystemService("notification");
-        this.mNotificationTag = ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("com.android.server.wm.AlertWindowNotification - ", str);
+        this.mNotificationManager =
+                (NotificationManager)
+                        windowManagerService.mContext.getSystemService("notification");
+        this.mNotificationTag =
+                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                        "com.android.server.wm.AlertWindowNotification - ", str);
         int i = sNextRequestCode;
         sNextRequestCode = i + 1;
         this.mRequestCode = i;

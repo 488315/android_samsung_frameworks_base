@@ -13,17 +13,21 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.XmlUtils;
 import com.android.server.RCPManagerService$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knox.analytics.activation.ActivationMonitor;
+
+import org.xmlpull.v1.XmlPullParser;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import org.xmlpull.v1.XmlPullParser;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -58,7 +62,8 @@ public final class OmcPermissionPolicy {
             }
         }
 
-        public final void grantRuntimePermissions(PackageInfo packageInfo, Set set, boolean z, int i) {
+        public final void grantRuntimePermissions(
+                PackageInfo packageInfo, Set set, boolean z, int i) {
             int i2;
             int i3;
             UserHandle of = UserHandle.of(i);
@@ -69,7 +74,11 @@ public final class OmcPermissionPolicy {
             }
             PackageInfo packageInfo2 = getPackageInfo(packageInfo.packageName);
             if (packageInfo2 == null) {
-                RCPManagerService$$ExternalSyntheticOutline0.m(new StringBuilder(), packageInfo.packageName, " is null", "OmcPermissionPolicy");
+                RCPManagerService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder(),
+                        packageInfo.packageName,
+                        " is null",
+                        "OmcPermissionPolicy");
                 return;
             }
             String[] strArr2 = packageInfo2.requestedPermissions;
@@ -79,15 +88,22 @@ public final class OmcPermissionPolicy {
                     strArr[i4] = null;
                 }
             }
-            String[] strArr3 = (String[]) ArrayUtils.filterNotNull(strArr, new OmcPermissionPolicy$1$$ExternalSyntheticLambda0());
+            String[] strArr3 =
+                    (String[])
+                            ArrayUtils.filterNotNull(
+                                    strArr, new OmcPermissionPolicy$1$$ExternalSyntheticLambda0());
             ArraySet arraySet = new ArraySet(set);
             ApplicationInfo applicationInfo = packageInfo.applicationInfo;
             int i5 = z ? 48 : 32;
-            List splitPermissions = ((PermissionManager) this.mContext.getSystemService(PermissionManager.class)).getSplitPermissions();
+            List splitPermissions =
+                    ((PermissionManager) this.mContext.getSystemService(PermissionManager.class))
+                            .getSplitPermissions();
             int size = splitPermissions.size();
             for (int i6 = 0; i6 < size; i6++) {
-                PermissionManager.SplitPermissionInfo splitPermissionInfo = (PermissionManager.SplitPermissionInfo) splitPermissions.get(i6);
-                if (applicationInfo != null && applicationInfo.targetSdkVersion < splitPermissionInfo.getTargetSdk()) {
+                PermissionManager.SplitPermissionInfo splitPermissionInfo =
+                        (PermissionManager.SplitPermissionInfo) splitPermissions.get(i6);
+                if (applicationInfo != null
+                        && applicationInfo.targetSdkVersion < splitPermissionInfo.getTargetSdk()) {
                     if (((ArraySet) set).contains(splitPermissionInfo.getSplitPermission())) {
                         arraySet.addAll(splitPermissionInfo.getNewPermissions());
                     }
@@ -109,7 +125,8 @@ public final class OmcPermissionPolicy {
             }
             for (String str2 : strArr3) {
                 if (arraySet.contains(str2)) {
-                    int permissionFlags = packageManager.getPermissionFlags(str2, packageInfo.packageName, of);
+                    int permissionFlags =
+                            packageManager.getPermissionFlags(str2, packageInfo.packageName, of);
                     boolean z2 = z && (permissionFlags & 16) != 0;
                     if ((permissionFlags & 23) != 0 && !z2) {
                         i2 = i5;
@@ -119,20 +136,30 @@ public final class OmcPermissionPolicy {
                         PermissionInfo permissionInfo2 = getPermissionInfo(str2);
                         if (permissionInfo2 == null ? false : permissionInfo2.isRestricted()) {
                             i3 = permissionFlags;
-                            packageManager.updatePermissionFlags(str2, packageInfo.packageName, 4096, 4096, of);
+                            packageManager.updatePermissionFlags(
+                                    str2, packageInfo.packageName, 4096, 4096, of);
                         } else {
                             i3 = permissionFlags;
                         }
                         if (z2) {
-                            packageManager.updatePermissionFlags(str2, packageInfo.packageName, i3, i3 & (-17), of);
+                            packageManager.updatePermissionFlags(
+                                    str2, packageInfo.packageName, i3, i3 & (-17), of);
                         }
-                        if (!(this.mContext.createContextAsUser(of, 0).getPackageManager().checkPermission(str2, packageInfo.packageName) == 0)) {
-                            this.mContext.getPackageManager().grantRuntimePermission(packageInfo.packageName, str2, of);
+                        if (!(this.mContext
+                                        .createContextAsUser(of, 0)
+                                        .getPackageManager()
+                                        .checkPermission(str2, packageInfo.packageName)
+                                == 0)) {
+                            this.mContext
+                                    .getPackageManager()
+                                    .grantRuntimePermission(packageInfo.packageName, str2, of);
                         }
-                        packageManager.updatePermissionFlags(str2, packageInfo.packageName, i2 | 64, i2, of);
+                        packageManager.updatePermissionFlags(
+                                str2, packageInfo.packageName, i2 | 64, i2, of);
                     }
                     if ((i3 & 32) != 0 && (i3 & 16) != 0 && !z) {
-                        packageManager.updatePermissionFlags(str2, packageInfo.packageName, 16, 0, of);
+                        packageManager.updatePermissionFlags(
+                                str2, packageInfo.packageName, 16, 0, of);
                     }
                     i5 = i2;
                 }
@@ -156,7 +183,9 @@ public final class OmcPermissionPolicy {
                 if (arraySet.contains(str2)) {
                     UserHandle of = UserHandle.of(i);
                     int permissionFlags = packageManager.getPermissionFlags(str2, str, of);
-                    if ((permissionFlags & 32) == 0 && (permissionFlags & 4) == 0 && (permissionFlags & 16) == 0) {
+                    if ((permissionFlags & 32) == 0
+                            && (permissionFlags & 4) == 0
+                            && (permissionFlags & 16) == 0) {
                         packageManager.revokeRuntimePermission(str, str2, of);
                         packageManager.updatePermissionFlags(str2, str, 32, 0, of);
                     }
@@ -182,8 +211,11 @@ public final class OmcPermissionPolicy {
 
     public OmcPermissionPolicy(AnonymousClass1 anonymousClass1) {
         this.mPmProxy = anonymousClass1;
-        ArrayList m = PortStatus_1_1$$ExternalSyntheticOutline0.m("/system/etc/omc-default-permissions");
-        File file = new File(SystemProperties.get("mdc.sys.omc_etcpath", ""), "omc-default-permissions");
+        ArrayList m =
+                PortStatus_1_1$$ExternalSyntheticOutline0.m("/system/etc/omc-default-permissions");
+        File file =
+                new File(
+                        SystemProperties.get("mdc.sys.omc_etcpath", ""), "omc-default-permissions");
         if (file.isDirectory() && file.canRead()) {
             m.add(file.getPath());
         }
@@ -196,51 +228,52 @@ public final class OmcPermissionPolicy {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:19:0x003f, code lost:
-    
-        if (r6 != 4) goto L36;
-     */
+
+       if (r6 != 4) goto L36;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:21:0x0042, code lost:
-    
-        r6 = r9.getName();
-     */
+
+       r6 = r9.getName();
+    */
     /* JADX WARN: Code restructure failed: missing block: B:22:0x004d, code lost:
-    
-        if (r6.equals("permission") == false) goto L37;
-     */
+
+       if (r6.equals("permission") == false) goto L37;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:25:0x0077, code lost:
-    
-        if (r6.equals("revoke-permission") == false) goto L42;
-     */
+
+       if (r6.equals("revoke-permission") == false) goto L42;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:27:0x0085, code lost:
-    
-        android.util.Log.d("OmcPermissionPolicy", "Unknown element under <defaultgrant - package>: " + r9.getName());
-        com.android.internal.util.XmlUtils.skipCurrentTag(r9);
-     */
+
+       android.util.Log.d("OmcPermissionPolicy", "Unknown element under <defaultgrant - package>: " + r9.getName());
+       com.android.internal.util.XmlUtils.skipCurrentTag(r9);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:31:0x0079, code lost:
-    
-        ((android.util.ArraySet) r2.mRevokedPermission).add(r9.getAttributeValue(null, "name"));
-     */
+
+       ((android.util.ArraySet) r2.mRevokedPermission).add(r9.getAttributeValue(null, "name"));
+    */
     /* JADX WARN: Code restructure failed: missing block: B:34:0x004f, code lost:
-    
-        r6 = r9.getAttributeValue(null, "name");
-     */
+
+       r6 = r9.getAttributeValue(null, "name");
+    */
     /* JADX WARN: Code restructure failed: missing block: B:35:0x005e, code lost:
-    
-        if (java.lang.Boolean.parseBoolean(r9.getAttributeValue(null, "systemfixed")) == false) goto L38;
-     */
+
+       if (java.lang.Boolean.parseBoolean(r9.getAttributeValue(null, "systemfixed")) == false) goto L38;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:37:0x0068, code lost:
-    
-        ((android.util.ArraySet) r2.mNonFixedGrantedPermission).add(r6);
-     */
+
+       ((android.util.ArraySet) r2.mNonFixedGrantedPermission).add(r6);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:40:0x0060, code lost:
-    
-        ((android.util.ArraySet) r2.mFixedGrantedPermission).add(r6);
-     */
+
+       ((android.util.ArraySet) r2.mFixedGrantedPermission).add(r6);
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void readDefaultPermissionPackage(org.xmlpull.v1.XmlPullParser r9, android.util.ArrayMap r10) {
+    public static void readDefaultPermissionPackage(
+            org.xmlpull.v1.XmlPullParser r9, android.util.ArrayMap r10) {
         /*
             java.lang.String r0 = "OmcPermissionPolicy"
             java.lang.String r1 = "name"
@@ -327,7 +360,10 @@ public final class OmcPermissionPolicy {
         Lba:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.server.pm.permission.OmcPermissionPolicy.readDefaultPermissionPackage(org.xmlpull.v1.XmlPullParser, android.util.ArrayMap):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.server.pm.permission.OmcPermissionPolicy.readDefaultPermissionPackage(org.xmlpull.v1.XmlPullParser,"
+                    + " android.util.ArrayMap):void");
     }
 
     /* JADX WARN: Can't wrap try/catch for region: R(12:48|49|50|51|52|(2:53|54)|55|56|57|58|59|60) */
@@ -346,17 +382,22 @@ public final class OmcPermissionPolicy {
             Method dump skipped, instructions count: 779
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.server.pm.permission.OmcPermissionPolicy.grantOrRevokePermissions(java.lang.String, boolean, int[]):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.samsung.android.server.pm.permission.OmcPermissionPolicy.grantOrRevokePermissions(java.lang.String,"
+                    + " boolean, int[]):void");
     }
 
-    public final void readDefaultExceptionsForPackage(XmlPullParser xmlPullParser, ArrayMap arrayMap) {
+    public final void readDefaultExceptionsForPackage(
+            XmlPullParser xmlPullParser, ArrayMap arrayMap) {
         try {
             String attributeValue = xmlPullParser.getAttributeValue(null, "package");
             String attributeValue2 = xmlPullParser.getAttributeValue(null, "sha256-cert-digest");
             String attributeValue3 = xmlPullParser.getAttributeValue(null, "countrycode");
             if (attributeValue3 != null) {
                 ((AnonymousClass1) this.mPmProxy).getClass();
-                if (!attributeValue3.contains(SystemProperties.get(ActivationMonitor.COUNTRY_CODE_PROPERTY))) {
+                if (!attributeValue3.contains(
+                        SystemProperties.get(ActivationMonitor.COUNTRY_CODE_PROPERTY))) {
                     XmlUtils.skipCurrentTag(xmlPullParser);
                     return;
                 }
@@ -372,13 +413,19 @@ public final class OmcPermissionPolicy {
                 if (next != 3 && next != 4) {
                     if (xmlPullParser.getName().equals("permission")) {
                         String attributeValue4 = xmlPullParser.getAttributeValue(null, "name");
-                        if (Boolean.parseBoolean(xmlPullParser.getAttributeValue(null, "systemfixed"))) {
-                            ((ArraySet) defaultPermission.mFixedGrantedPermission).add(attributeValue4);
+                        if (Boolean.parseBoolean(
+                                xmlPullParser.getAttributeValue(null, "systemfixed"))) {
+                            ((ArraySet) defaultPermission.mFixedGrantedPermission)
+                                    .add(attributeValue4);
                         } else {
-                            ((ArraySet) defaultPermission.mNonFixedGrantedPermission).add(attributeValue4);
+                            ((ArraySet) defaultPermission.mNonFixedGrantedPermission)
+                                    .add(attributeValue4);
                         }
                     } else {
-                        Log.d("OmcPermissionPolicy", "Unknown element under <defaultgrant - package>: " + xmlPullParser.getName());
+                        Log.d(
+                                "OmcPermissionPolicy",
+                                "Unknown element under <defaultgrant - package>: "
+                                        + xmlPullParser.getName());
                         XmlUtils.skipCurrentTag(xmlPullParser);
                     }
                 }

@@ -1,15 +1,17 @@
 package android.media.audiofx;
 
-import android.media.audiofx.AudioEffect;
 import android.util.Log;
+
 import com.samsung.android.audio.Rune;
+
 import java.nio.charset.StandardCharsets;
 import java.util.StringTokenizer;
 import java.util.UUID;
 
 /* loaded from: classes2.dex */
 public class SemSoundAlive extends AudioEffect {
-    public static final UUID EFFECT_TYPE_SOUNDALIVE = UUID.fromString("c4da1d1f-7cdf-42e2-ba60-efc7eb3508a3");
+    public static final UUID EFFECT_TYPE_SOUNDALIVE =
+            UUID.fromString("c4da1d1f-7cdf-42e2-ba60-efc7eb3508a3");
     public static final int PARAM_3DPA = 13;
     public static final int PARAM_BAND_FREQ_RANGE = 4;
     public static final int PARAM_BAND_LEVEL = 2;
@@ -191,7 +193,8 @@ public class SemSoundAlive extends AudioEffect {
         int[] value = {level};
     }
 
-    public void set3dEffectPosition(boolean onoff, double position) throws IllegalArgumentException {
+    public void set3dEffectPosition(boolean onoff, double position)
+            throws IllegalArgumentException {
         if (-1.0d <= position && position <= 1.0d) {
             int[] param = new int[2];
             int[] value = new int[1];
@@ -208,8 +211,7 @@ public class SemSoundAlive extends AudioEffect {
     }
 
     private class BaseParameterListener implements AudioEffect.OnParameterChangeListener {
-        private BaseParameterListener() {
-        }
+        private BaseParameterListener() {}
 
         @Override // android.media.audiofx.AudioEffect.OnParameterChangeListener
         public void onParameterChange(AudioEffect effect, int status, byte[] param, byte[] value) {
@@ -256,8 +258,7 @@ public class SemSoundAlive extends AudioEffect {
     }
 
     private class BaseErrorListener implements AudioEffect.OnErrorListener {
-        private BaseErrorListener() {
-        }
+        private BaseErrorListener() {}
 
         @Override // android.media.audiofx.AudioEffect.OnErrorListener
         public void onError() {
@@ -333,7 +334,11 @@ public class SemSoundAlive extends AudioEffect {
         }
 
         public String toString() {
-            String str = "SemSoundAlive;curPreset=" + ((int) this.curPreset) + ";numBands=" + ((int) this.numBands);
+            String str =
+                    "SemSoundAlive;curPreset="
+                            + ((int) this.curPreset)
+                            + ";numBands="
+                            + ((int) this.numBands);
             for (int i = 0; i < this.numBands; i++) {
                 str = str.concat(";band" + (i + 1) + "Level=" + ((int) this.bandLevels[i]));
             }
@@ -361,10 +366,14 @@ public class SemSoundAlive extends AudioEffect {
     }
 
     public void setProperties(Settings settings) throws IllegalArgumentException {
-        if (settings.numBands != settings.bandLevels.length || settings.numBands != this.mNumBands) {
-            throw new IllegalArgumentException("settings invalid band count: " + ((int) settings.numBands));
+        if (settings.numBands != settings.bandLevels.length
+                || settings.numBands != this.mNumBands) {
+            throw new IllegalArgumentException(
+                    "settings invalid band count: " + ((int) settings.numBands));
         }
-        byte[] param = concatArrays(shortToByteArray(settings.curPreset), shortToByteArray(this.mNumBands));
+        byte[] param =
+                concatArrays(
+                        shortToByteArray(settings.curPreset), shortToByteArray(this.mNumBands));
         for (int i = 0; i < this.mNumBands; i++) {
             param = concatArrays(param, shortToByteArray(settings.bandLevels[i]));
         }

@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class MessageDeliveryStatus implements Parcelable {
-    public static final Parcelable.Creator<MessageDeliveryStatus> CREATOR = new Parcelable.Creator<MessageDeliveryStatus>() { // from class: android.hardware.contexthub.MessageDeliveryStatus.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MessageDeliveryStatus createFromParcel(Parcel _aidl_source) {
-            MessageDeliveryStatus _aidl_out = new MessageDeliveryStatus();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<MessageDeliveryStatus> CREATOR =
+            new Parcelable.Creator<MessageDeliveryStatus>() { // from class:
+                // android.hardware.contexthub.MessageDeliveryStatus.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MessageDeliveryStatus createFromParcel(Parcel _aidl_source) {
+                    MessageDeliveryStatus _aidl_out = new MessageDeliveryStatus();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MessageDeliveryStatus[] newArray(int _aidl_size) {
-            return new MessageDeliveryStatus[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MessageDeliveryStatus[] newArray(int _aidl_size) {
+                    return new MessageDeliveryStatus[_aidl_size];
+                }
+            };
     public byte errorCode;
     public int messageSequenceNumber = 0;
 

@@ -2,24 +2,29 @@ package android.telephony.satellite;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.telephony.SemTelephonyUtils;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class SatelliteSubscriptionInfo implements Parcelable {
-    public static final Parcelable.Creator<SatelliteSubscriptionInfo> CREATOR = new Parcelable.Creator<SatelliteSubscriptionInfo>() { // from class: android.telephony.satellite.SatelliteSubscriptionInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SatelliteSubscriptionInfo createFromParcel(Parcel in) {
-            return new SatelliteSubscriptionInfo(in);
-        }
+    public static final Parcelable.Creator<SatelliteSubscriptionInfo> CREATOR =
+            new Parcelable.Creator<
+                    SatelliteSubscriptionInfo>() { // from class:
+                                                   // android.telephony.satellite.SatelliteSubscriptionInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SatelliteSubscriptionInfo createFromParcel(Parcel in) {
+                    return new SatelliteSubscriptionInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SatelliteSubscriptionInfo[] newArray(int size) {
-            return new SatelliteSubscriptionInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SatelliteSubscriptionInfo[] newArray(int size) {
+                    return new SatelliteSubscriptionInfo[size];
+                }
+            };
     private final String mIccId;
     private final String mNiddApn;
 
@@ -45,7 +50,11 @@ public final class SatelliteSubscriptionInfo implements Parcelable {
     }
 
     public String toString() {
-        return "SatelliteSubscriptionInfo{IccId=" + SemTelephonyUtils.maskPii(this.mIccId) + ", NiddApn=" + this.mNiddApn + "}";
+        return "SatelliteSubscriptionInfo{IccId="
+                + SemTelephonyUtils.maskPii(this.mIccId)
+                + ", NiddApn="
+                + this.mNiddApn
+                + "}";
     }
 
     public boolean equals(Object o) {

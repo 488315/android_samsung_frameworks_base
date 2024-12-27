@@ -10,15 +10,18 @@ import android.os.Bundle;
 import android.os.Messenger;
 import android.os.UserHandle;
 import android.util.Log;
+
 import com.android.internal.util.jobs.ArrayUtils$$ExternalSyntheticOutline0;
 import com.android.server.RCPManagerService$$ExternalSyntheticOutline0;
 import com.android.server.VpnManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.AccessibilityManagerService$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.GestureWakeup$$ExternalSyntheticOutline0;
 import com.android.server.am.FreecessController$$ExternalSyntheticOutline0;
+
 import com.samsung.android.knox.SemIRCPCallback;
 import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.knox.SemRemoteContentManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,8 +36,7 @@ public final class BridgeProxy {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class IRCPInterfaceCallBack extends IRCPInterface.Stub {
-        public IRCPInterfaceCallBack() {
-        }
+        public IRCPInterfaceCallBack() {}
 
         public final void cancel(long j) {
             BridgeProxy.m324$$Nest$mcheckCallerPermissionFor(BridgeProxy.this, "cancel");
@@ -46,7 +48,8 @@ public final class BridgeProxy {
             Log.d("BridgeProxy", "copyFile() srcContainerId=" + i + "; srcFilePath=" + str);
             StringBuilder sb = new StringBuilder("copyFile() destContainerId=");
             sb.append(i2);
-            RCPManagerService$$ExternalSyntheticOutline0.m(sb, "; destFilePath=", str2, "BridgeProxy");
+            RCPManagerService$$ExternalSyntheticOutline0.m(
+                    sb, "; destFilePath=", str2, "BridgeProxy");
             BridgeProxy.this.getClass();
             BridgeProxy.this.getClass();
             try {
@@ -66,10 +69,15 @@ public final class BridgeProxy {
             return BridgeProxy.this.mSemRemoteContentManager.copyFileInternal(i, str, i2, str2);
         }
 
-        public final long copyFiles(int i, List list, int i2, List list2, SemIRCPCallback semIRCPCallback) {
+        public final long copyFiles(
+                int i, List list, int i2, List list2, SemIRCPCallback semIRCPCallback) {
             BridgeProxy.m324$$Nest$mcheckCallerPermissionFor(BridgeProxy.this, "copyFiles");
-            Log.d("BridgeProxy", "copyFiles() srcContainerId=" + i + "; srcFilePaths=" + list.toString());
-            Log.d("BridgeProxy", "copyFiles() destContainerId=" + i2 + "; destFilePaths=" + list2.toString());
+            Log.d(
+                    "BridgeProxy",
+                    "copyFiles() srcContainerId=" + i + "; srcFilePaths=" + list.toString());
+            Log.d(
+                    "BridgeProxy",
+                    "copyFiles() destContainerId=" + i2 + "; destFilePaths=" + list2.toString());
             Intent intent = new Intent("com.sec.knox.bridge.service.ACTION_FILE_OPERATIONS");
             if (SemPersonaManager.isSecureFolderId(i) || SemPersonaManager.isSecureFolderId(i2)) {
                 intent.setPackage("com.samsung.knox.securefolder");
@@ -78,7 +86,9 @@ public final class BridgeProxy {
             }
             ArrayList<String> arrayList = new ArrayList<>(list);
             ArrayList<String> arrayList2 = new ArrayList<>(list2);
-            Bundle m = FreecessController$$ExternalSyntheticOutline0.m(i, "task", "TASK_COPY_FILES", "srcContainerId");
+            Bundle m =
+                    FreecessController$$ExternalSyntheticOutline0.m(
+                            i, "task", "TASK_COPY_FILES", "srcContainerId");
             m.putInt("destContainerId", i2);
             m.putStringArrayList("srcFilePaths", arrayList);
             m.putStringArrayList("destFilePaths", arrayList2);
@@ -90,7 +100,9 @@ public final class BridgeProxy {
             if (i == 0) {
                 i = i2;
             }
-            Log.d("BridgeProxy", "copyFiles(), Starting FileOperationsHandler service TASK_COPY_FILES");
+            Log.d(
+                    "BridgeProxy",
+                    "copyFiles(), Starting FileOperationsHandler service TASK_COPY_FILES");
             try {
                 BridgeProxy.this.mContext.startServiceAsUser(intent, new UserHandle(i));
             } catch (Exception e) {
@@ -99,10 +111,20 @@ public final class BridgeProxy {
             return random;
         }
 
-        public final long copyFiles2(int i, List list, int i2, List list2, SemIRCPCallback semIRCPCallback, String str) {
+        public final long copyFiles2(
+                int i, List list, int i2, List list2, SemIRCPCallback semIRCPCallback, String str) {
             BridgeProxy.m324$$Nest$mcheckCallerPermissionFor(BridgeProxy.this, "copyFiles");
-            Log.d("BridgeProxy", "copyFiles2() srcContainerId=" + i + "; srcFilePaths=" + list.toString());
-            Log.d("BridgeProxy", "copyFiles2() destContainerId=" + i2 + "; destFilePaths=" + list2.toString() + " , SourceClassName : " + str);
+            Log.d(
+                    "BridgeProxy",
+                    "copyFiles2() srcContainerId=" + i + "; srcFilePaths=" + list.toString());
+            Log.d(
+                    "BridgeProxy",
+                    "copyFiles2() destContainerId="
+                            + i2
+                            + "; destFilePaths="
+                            + list2.toString()
+                            + " , SourceClassName : "
+                            + str);
             Intent intent = new Intent("com.sec.knox.bridge.service.ACTION_FILE_OPERATIONS");
             if (SemPersonaManager.isSecureFolderId(i) || SemPersonaManager.isSecureFolderId(i2)) {
                 intent.setPackage("com.samsung.knox.securefolder");
@@ -111,7 +133,9 @@ public final class BridgeProxy {
             }
             ArrayList<String> arrayList = new ArrayList<>(list);
             ArrayList<String> arrayList2 = new ArrayList<>(list2);
-            Bundle m = FreecessController$$ExternalSyntheticOutline0.m(i, "task", "TASK_COPY_FILES", "srcContainerId");
+            Bundle m =
+                    FreecessController$$ExternalSyntheticOutline0.m(
+                            i, "task", "TASK_COPY_FILES", "srcContainerId");
             m.putInt("destContainerId", i2);
             m.putStringArrayList("srcFilePaths", arrayList);
             m.putStringArrayList("destFilePaths", arrayList2);
@@ -124,7 +148,9 @@ public final class BridgeProxy {
             if (i == 0) {
                 i = i2;
             }
-            Log.d("BridgeProxy", "copyFiles2(), Starting FileOperationsHandler service TASK_COPY_FILES");
+            Log.d(
+                    "BridgeProxy",
+                    "copyFiles2(), Starting FileOperationsHandler service TASK_COPY_FILES");
             try {
                 BridgeProxy.this.mContext.startServiceAsUser(intent, new UserHandle(i));
             } catch (Exception e) {
@@ -172,10 +198,15 @@ public final class BridgeProxy {
             return -1;
         }
 
-        public final long moveFiles(int i, List list, int i2, List list2, SemIRCPCallback semIRCPCallback) {
+        public final long moveFiles(
+                int i, List list, int i2, List list2, SemIRCPCallback semIRCPCallback) {
             BridgeProxy.m324$$Nest$mcheckCallerPermissionFor(BridgeProxy.this, "moveFiles");
-            Log.d("BridgeProxy", "moveFiles() srcContainerId=" + i + "; srcFilePaths=" + list.toString());
-            Log.d("BridgeProxy", "moveFiles() destContainerId=" + i2 + "; destFilePaths=" + list2.toString());
+            Log.d(
+                    "BridgeProxy",
+                    "moveFiles() srcContainerId=" + i + "; srcFilePaths=" + list.toString());
+            Log.d(
+                    "BridgeProxy",
+                    "moveFiles() destContainerId=" + i2 + "; destFilePaths=" + list2.toString());
             Intent intent = new Intent("com.sec.knox.bridge.service.ACTION_FILE_OPERATIONS");
             if (SemPersonaManager.isSecureFolderId(i) || SemPersonaManager.isSecureFolderId(i2)) {
                 intent.setPackage("com.samsung.knox.securefolder");
@@ -184,7 +215,9 @@ public final class BridgeProxy {
             }
             ArrayList<String> arrayList = new ArrayList<>(list);
             ArrayList<String> arrayList2 = new ArrayList<>(list2);
-            Bundle m = FreecessController$$ExternalSyntheticOutline0.m(i, "task", "TASK_MOVE_FILES", "srcContainerId");
+            Bundle m =
+                    FreecessController$$ExternalSyntheticOutline0.m(
+                            i, "task", "TASK_MOVE_FILES", "srcContainerId");
             m.putInt("destContainerId", i2);
             m.putStringArrayList("srcFilePaths", arrayList);
             m.putStringArrayList("destFilePaths", arrayList2);
@@ -193,7 +226,9 @@ public final class BridgeProxy {
             Log.d("BridgeProxy", "moveFiles ,mSessionId :" + Long.valueOf(random));
             m.putLong("sessionId", random);
             intent.putExtras(m);
-            Log.d("BridgeProxy", "moveFiles(), Starting FileOperationsHandler service TASK_MOVE_FILES");
+            Log.d(
+                    "BridgeProxy",
+                    "moveFiles(), Starting FileOperationsHandler service TASK_MOVE_FILES");
             try {
                 BridgeProxy bridgeProxy = BridgeProxy.this;
                 bridgeProxy.mContext.startServiceAsUser(intent, bridgeProxy.mDelegateUserHandle);
@@ -203,10 +238,20 @@ public final class BridgeProxy {
             return random;
         }
 
-        public final long moveFiles2(int i, List list, int i2, List list2, SemIRCPCallback semIRCPCallback, String str) {
+        public final long moveFiles2(
+                int i, List list, int i2, List list2, SemIRCPCallback semIRCPCallback, String str) {
             BridgeProxy.m324$$Nest$mcheckCallerPermissionFor(BridgeProxy.this, "moveFiles");
-            Log.d("BridgeProxy", "moveFiles2() srcContainerId=" + i + "; srcFilePaths=" + list.toString());
-            Log.d("BridgeProxy", "moveFiles2() destContainerId=" + i2 + "; destFilePaths=" + list2.toString() + " , SourceClassName : " + str);
+            Log.d(
+                    "BridgeProxy",
+                    "moveFiles2() srcContainerId=" + i + "; srcFilePaths=" + list.toString());
+            Log.d(
+                    "BridgeProxy",
+                    "moveFiles2() destContainerId="
+                            + i2
+                            + "; destFilePaths="
+                            + list2.toString()
+                            + " , SourceClassName : "
+                            + str);
             Intent intent = new Intent("com.sec.knox.bridge.service.ACTION_FILE_OPERATIONS");
             if (SemPersonaManager.isSecureFolderId(i) || SemPersonaManager.isSecureFolderId(i2)) {
                 intent.setPackage("com.samsung.knox.securefolder");
@@ -215,7 +260,9 @@ public final class BridgeProxy {
             }
             ArrayList<String> arrayList = new ArrayList<>(list);
             ArrayList<String> arrayList2 = new ArrayList<>(list2);
-            Bundle m = FreecessController$$ExternalSyntheticOutline0.m(i, "task", "TASK_MOVE_FILES", "srcContainerId");
+            Bundle m =
+                    FreecessController$$ExternalSyntheticOutline0.m(
+                            i, "task", "TASK_MOVE_FILES", "srcContainerId");
             m.putInt("destContainerId", i2);
             m.putStringArrayList("srcFilePaths", arrayList);
             m.putStringArrayList("destFilePaths", arrayList2);
@@ -225,7 +272,9 @@ public final class BridgeProxy {
             Log.d("BridgeProxy", "moveFiles2 ,mSessionId :" + Long.valueOf(random));
             m.putLong("sessionId", random);
             intent.putExtras(m);
-            Log.d("BridgeProxy", "moveFiles2(), Starting FileOperationsHandler service TASK_MOVE_FILES");
+            Log.d(
+                    "BridgeProxy",
+                    "moveFiles2(), Starting FileOperationsHandler service TASK_MOVE_FILES");
             try {
                 BridgeProxy bridgeProxy = BridgeProxy.this;
                 bridgeProxy.mContext.startServiceAsUser(intent, bridgeProxy.mDelegateUserHandle);
@@ -243,11 +292,24 @@ public final class BridgeProxy {
                 e.printStackTrace();
             }
             if (list == null) {
-                Log.d("BridgeProxy", "ERROR | move Files For App Ex | invalid source file Paths, paths are null");
+                Log.d(
+                        "BridgeProxy",
+                        "ERROR | move Files For App Ex | invalid source file Paths, paths are"
+                            + " null");
                 return 0L;
             }
-            Log.d("BridgeProxy", "moveFilesForAppEx() srcContainerId=" + i3 + "; srcFilePaths.size()=" + list.size());
-            Log.d("BridgeProxy", "moveFilesForAppEx() destContainerId=" + i2 + "; destFilePaths.size()=" + list2.size());
+            Log.d(
+                    "BridgeProxy",
+                    "moveFilesForAppEx() srcContainerId="
+                            + i3
+                            + "; srcFilePaths.size()="
+                            + list.size());
+            Log.d(
+                    "BridgeProxy",
+                    "moveFilesForAppEx() destContainerId="
+                            + i2
+                            + "; destFilePaths.size()="
+                            + list2.size());
             StringBuilder sb = new StringBuilder("moveFilesForAppEx() reqApp=");
             sb.append(Integer.toString(i));
             Log.d("BridgeProxy", sb.toString());
@@ -270,25 +332,43 @@ public final class BridgeProxy {
                 if (SemPersonaManager.getSecureFolderId(BridgeProxy.this.mContext) <= 0) {
                     bundle.putBoolean("isSilent", true);
                     intent.putExtras(bundle);
-                    intent.setClassName("com.samsung.knox.securefolder", "com.samsung.knox.securefolder.switcher.SwitchAliasActivity");
+                    intent.setClassName(
+                            "com.samsung.knox.securefolder",
+                            "com.samsung.knox.securefolder.switcher.SwitchAliasActivity");
                     BridgeProxy bridgeProxy = BridgeProxy.this;
-                    BridgeProxy.m325$$Nest$mclearIdentityAndStartActivityAsUser(bridgeProxy, bridgeProxy.mContext, intent, new UserHandle(0));
+                    BridgeProxy.m325$$Nest$mclearIdentityAndStartActivityAsUser(
+                            bridgeProxy, bridgeProxy.mContext, intent, new UserHandle(0));
                     return 0L;
                 }
             }
-            if (!SemPersonaManager.isSecureFolderId(i3) && !SemPersonaManager.isSecureFolderId(i2)) {
+            if (!SemPersonaManager.isSecureFolderId(i3)
+                    && !SemPersonaManager.isSecureFolderId(i2)) {
                 if (!SemPersonaManager.isKnoxId(i3) && !SemPersonaManager.isKnoxId(i2)) {
-                    Log.d("BridgeProxy", "ERROR | move Files For App Ex | invalid container id is -1");
+                    Log.d(
+                            "BridgeProxy",
+                            "ERROR | move Files For App Ex | invalid container id is -1");
                     return 0L;
                 }
-                intent.setClassName("com.samsung.android.knox.containercore", "com.samsung.android.knox.containercore.rcpcomponents.move.activity.MoveToKnoxGateActivity");
+                intent.setClassName(
+                        "com.samsung.android.knox.containercore",
+                        "com.samsung.android.knox.containercore.rcpcomponents.move.activity.MoveToKnoxGateActivity");
                 BridgeProxy bridgeProxy2 = BridgeProxy.this;
-                BridgeProxy.m325$$Nest$mclearIdentityAndStartActivityAsUser(bridgeProxy2, bridgeProxy2.mContext, intent, bridgeProxy2.mDelegateUserHandle);
+                BridgeProxy.m325$$Nest$mclearIdentityAndStartActivityAsUser(
+                        bridgeProxy2,
+                        bridgeProxy2.mContext,
+                        intent,
+                        bridgeProxy2.mDelegateUserHandle);
                 return 0L;
             }
-            intent.setClassName("com.samsung.knox.securefolder", "com.samsung.knox.securefolder.switcher.SwitchAliasActivity");
+            intent.setClassName(
+                    "com.samsung.knox.securefolder",
+                    "com.samsung.knox.securefolder.switcher.SwitchAliasActivity");
             BridgeProxy bridgeProxy22 = BridgeProxy.this;
-            BridgeProxy.m325$$Nest$mclearIdentityAndStartActivityAsUser(bridgeProxy22, bridgeProxy22.mContext, intent, bridgeProxy22.mDelegateUserHandle);
+            BridgeProxy.m325$$Nest$mclearIdentityAndStartActivityAsUser(
+                    bridgeProxy22,
+                    bridgeProxy22.mContext,
+                    intent,
+                    bridgeProxy22.mDelegateUserHandle);
             return 0L;
         }
 
@@ -296,8 +376,15 @@ public final class BridgeProxy {
             Intent intent;
             BridgeProxy.m324$$Nest$mcheckCallerPermissionFor(BridgeProxy.this, "moveFilesForApp");
             int i4 = BridgeProxy.this.mDelegateUserId;
-            StringBuilder m = ArrayUtils$$ExternalSyntheticOutline0.m(i4, i3, "moveUnlimitedFilesForApp() srcContainerId=", "; destContainerId=", "; uri=");
-            AccessibilityManagerService$$ExternalSyntheticOutline0.m(i2, uri != null ? uri.toString() : "null", "; fileCount=", "reqApp = ", m);
+            StringBuilder m =
+                    ArrayUtils$$ExternalSyntheticOutline0.m(
+                            i4,
+                            i3,
+                            "moveUnlimitedFilesForApp() srcContainerId=",
+                            "; destContainerId=",
+                            "; uri=");
+            AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                    i2, uri != null ? uri.toString() : "null", "; fileCount=", "reqApp = ", m);
             m.append(Integer.toString(i));
             Log.d("BridgeProxy", m.toString());
             try {
@@ -317,28 +404,46 @@ public final class BridgeProxy {
                     if (SemPersonaManager.getSecureFolderId(BridgeProxy.this.mContext) <= 0) {
                         bundle.putBoolean("isSilent", true);
                         intent.putExtras(bundle);
-                        intent.setClassName("com.samsung.knox.securefolder", "com.samsung.knox.securefolder.switcher.SwitchAliasActivity");
+                        intent.setClassName(
+                                "com.samsung.knox.securefolder",
+                                "com.samsung.knox.securefolder.switcher.SwitchAliasActivity");
                         BridgeProxy bridgeProxy = BridgeProxy.this;
-                        BridgeProxy.m325$$Nest$mclearIdentityAndStartActivityAsUser(bridgeProxy, bridgeProxy.mContext, intent, new UserHandle(0));
+                        BridgeProxy.m325$$Nest$mclearIdentityAndStartActivityAsUser(
+                                bridgeProxy, bridgeProxy.mContext, intent, new UserHandle(0));
                         return 0L;
                     }
                 }
             } catch (ActivityNotFoundException e) {
                 e.printStackTrace();
             }
-            if (!SemPersonaManager.isSecureFolderId(i4) && !SemPersonaManager.isSecureFolderId(i3)) {
+            if (!SemPersonaManager.isSecureFolderId(i4)
+                    && !SemPersonaManager.isSecureFolderId(i3)) {
                 if (!SemPersonaManager.isKnoxId(i4) && !SemPersonaManager.isKnoxId(i3)) {
-                    Log.d("BridgeProxy", "ERROR | move Files For App Ex | invalid container id is -1");
+                    Log.d(
+                            "BridgeProxy",
+                            "ERROR | move Files For App Ex | invalid container id is -1");
                     return 0L;
                 }
-                intent.setClassName("com.samsung.android.knox.containercore", "com.samsung.android.knox.containercore.rcpcomponents.move.activity.MoveToKnoxGateActivity");
+                intent.setClassName(
+                        "com.samsung.android.knox.containercore",
+                        "com.samsung.android.knox.containercore.rcpcomponents.move.activity.MoveToKnoxGateActivity");
                 BridgeProxy bridgeProxy2 = BridgeProxy.this;
-                BridgeProxy.m325$$Nest$mclearIdentityAndStartActivityAsUser(bridgeProxy2, bridgeProxy2.mContext, intent, bridgeProxy2.mDelegateUserHandle);
+                BridgeProxy.m325$$Nest$mclearIdentityAndStartActivityAsUser(
+                        bridgeProxy2,
+                        bridgeProxy2.mContext,
+                        intent,
+                        bridgeProxy2.mDelegateUserHandle);
                 return 0L;
             }
-            intent.setClassName("com.samsung.knox.securefolder", "com.samsung.knox.securefolder.switcher.SwitchAliasActivity");
+            intent.setClassName(
+                    "com.samsung.knox.securefolder",
+                    "com.samsung.knox.securefolder.switcher.SwitchAliasActivity");
             BridgeProxy bridgeProxy22 = BridgeProxy.this;
-            BridgeProxy.m325$$Nest$mclearIdentityAndStartActivityAsUser(bridgeProxy22, bridgeProxy22.mContext, intent, bridgeProxy22.mDelegateUserHandle);
+            BridgeProxy.m325$$Nest$mclearIdentityAndStartActivityAsUser(
+                    bridgeProxy22,
+                    bridgeProxy22.mContext,
+                    intent,
+                    bridgeProxy22.mDelegateUserHandle);
             return 0L;
         }
     }
@@ -346,11 +451,14 @@ public final class BridgeProxy {
     /* renamed from: -$$Nest$mcheckCallerPermissionFor, reason: not valid java name */
     public static void m324$$Nest$mcheckCallerPermissionFor(BridgeProxy bridgeProxy, String str) {
         bridgeProxy.getClass();
-        Log.d("BridgeProxy", "checkCallerPermissionFor, ServiceName :Proxy , MethodName : ".concat(str));
+        Log.d(
+                "BridgeProxy",
+                "checkCallerPermissionFor, ServiceName :Proxy , MethodName : ".concat(str));
     }
 
     /* renamed from: -$$Nest$mclearIdentityAndStartActivityAsUser, reason: not valid java name */
-    public static void m325$$Nest$mclearIdentityAndStartActivityAsUser(BridgeProxy bridgeProxy, Context context, Intent intent, UserHandle userHandle) {
+    public static void m325$$Nest$mclearIdentityAndStartActivityAsUser(
+            BridgeProxy bridgeProxy, Context context, Intent intent, UserHandle userHandle) {
         if (bridgeProxy.mContext == null || userHandle == null) {
             return;
         }
@@ -377,7 +485,8 @@ public final class BridgeProxy {
         sb.append(" ");
         sb.append(this);
         Log.d("BridgeProxy", sb.toString());
-        SemRemoteContentManager semRemoteContentManager = (SemRemoteContentManager) this.mContext.getSystemService("rcp");
+        SemRemoteContentManager semRemoteContentManager =
+                (SemRemoteContentManager) this.mContext.getSystemService("rcp");
         this.mSemRemoteContentManager = semRemoteContentManager;
         semRemoteContentManager.registerRCPInterface(this.mIRCPInterfaceCallBack, i);
     }

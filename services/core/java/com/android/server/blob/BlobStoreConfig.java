@@ -4,7 +4,9 @@ import android.os.Environment;
 import android.util.DataUnit;
 import android.util.Log;
 import android.util.Slog;
+
 import com.android.internal.util.FrameworkStatsLog;
+
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
@@ -63,8 +65,12 @@ public abstract class BlobStoreConfig {
             long millis5 = timeUnit2.toMillis(6L);
             DEFAULT_DELETE_ON_LAST_LEASE_DELAY_MS = millis5;
             DELETE_ON_LAST_LEASE_DELAY_MS = millis5;
-            DEFAULT_MAX_ACTIVE_SESSIONS = FrameworkStatsLog.CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_MACRO_RAW_SR_MERGE;
-            MAX_ACTIVE_SESSIONS = FrameworkStatsLog.CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_MACRO_RAW_SR_MERGE;
+            DEFAULT_MAX_ACTIVE_SESSIONS =
+                    FrameworkStatsLog
+                            .CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_MACRO_RAW_SR_MERGE;
+            MAX_ACTIVE_SESSIONS =
+                    FrameworkStatsLog
+                            .CAMERA_SHOT_LATENCY_REPORTED__MODE__CONTROL_DS_MODE_MACRO_RAW_SR_MERGE;
             DEFAULT_MAX_COMMITTED_BLOBS = 1000;
             MAX_COMMITTED_BLOBS = 1000;
             DEFAULT_MAX_LEASED_BLOBS = 500;

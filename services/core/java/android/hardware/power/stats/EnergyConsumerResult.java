@@ -32,12 +32,17 @@ public final class EnergyConsumerResult implements Parcelable {
                         if (parcel.dataPosition() - dataPosition < readInt) {
                             energyConsumerResult.energyUWs = parcel.readLong();
                             if (parcel.dataPosition() - dataPosition < readInt) {
-                                energyConsumerResult.attribution = (EnergyConsumerAttribution[]) parcel.createTypedArray(EnergyConsumerAttribution.CREATOR);
+                                energyConsumerResult.attribution =
+                                        (EnergyConsumerAttribution[])
+                                                parcel.createTypedArray(
+                                                        EnergyConsumerAttribution.CREATOR);
                                 if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                    throw new BadParcelableException("Overflow in the size of parcelable");
+                                    throw new BadParcelableException(
+                                            "Overflow in the size of parcelable");
                                 }
                             } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                                throw new BadParcelableException("Overflow in the size of parcelable");
+                                throw new BadParcelableException(
+                                        "Overflow in the size of parcelable");
                             }
                         } else if (dataPosition > Integer.MAX_VALUE - readInt) {
                             throw new BadParcelableException("Overflow in the size of parcelable");

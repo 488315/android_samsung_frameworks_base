@@ -3,6 +3,7 @@ package android.hardware.usb;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -10,24 +11,31 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes2.dex */
 public final class DisplayPortAltModeInfo implements Parcelable {
-    public static final Parcelable.Creator<DisplayPortAltModeInfo> CREATOR = new Parcelable.Creator<DisplayPortAltModeInfo>() { // from class: android.hardware.usb.DisplayPortAltModeInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DisplayPortAltModeInfo createFromParcel(Parcel in) {
-            int partnerSinkStatus = in.readInt();
-            int cableStatus = in.readInt();
-            int numLanes = in.readInt();
-            boolean hotPlugDetect = in.readBoolean();
-            int linkTrainingStatus = in.readInt();
-            return new DisplayPortAltModeInfo(partnerSinkStatus, cableStatus, numLanes, hotPlugDetect, linkTrainingStatus);
-        }
+    public static final Parcelable.Creator<DisplayPortAltModeInfo> CREATOR =
+            new Parcelable.Creator<DisplayPortAltModeInfo>() { // from class:
+                // android.hardware.usb.DisplayPortAltModeInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DisplayPortAltModeInfo createFromParcel(Parcel in) {
+                    int partnerSinkStatus = in.readInt();
+                    int cableStatus = in.readInt();
+                    int numLanes = in.readInt();
+                    boolean hotPlugDetect = in.readBoolean();
+                    int linkTrainingStatus = in.readInt();
+                    return new DisplayPortAltModeInfo(
+                            partnerSinkStatus,
+                            cableStatus,
+                            numLanes,
+                            hotPlugDetect,
+                            linkTrainingStatus);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public DisplayPortAltModeInfo[] newArray(int size) {
-            return new DisplayPortAltModeInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public DisplayPortAltModeInfo[] newArray(int size) {
+                    return new DisplayPortAltModeInfo[size];
+                }
+            };
     public static final int DISPLAYPORT_ALT_MODE_STATUS_CAPABLE_DISABLED = 2;
     public static final int DISPLAYPORT_ALT_MODE_STATUS_ENABLED = 3;
     public static final int DISPLAYPORT_ALT_MODE_STATUS_NOT_CAPABLE = 1;
@@ -42,12 +50,10 @@ public final class DisplayPortAltModeInfo implements Parcelable {
     private final int mPartnerSinkStatus;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface DisplayPortAltModeStatus {
-    }
+    public @interface DisplayPortAltModeStatus {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface LinkTrainingStatus {
-    }
+    public @interface LinkTrainingStatus {}
 
     public DisplayPortAltModeInfo() {
         this.mPartnerSinkStatus = 0;
@@ -57,7 +63,12 @@ public final class DisplayPortAltModeInfo implements Parcelable {
         this.mLinkTrainingStatus = 0;
     }
 
-    public DisplayPortAltModeInfo(int partnerSinkStatus, int cableStatus, int numLanes, boolean hotPlugDetect, int linkTrainingStatus) {
+    public DisplayPortAltModeInfo(
+            int partnerSinkStatus,
+            int cableStatus,
+            int numLanes,
+            boolean hotPlugDetect,
+            int linkTrainingStatus) {
         this.mPartnerSinkStatus = partnerSinkStatus;
         this.mCableStatus = cableStatus;
         this.mNumLanes = numLanes;
@@ -124,7 +135,17 @@ public final class DisplayPortAltModeInfo implements Parcelable {
     }
 
     public String toString() {
-        return "DisplayPortAltModeInfo{partnerSink=" + displayPortAltModeStatusToString(this.mPartnerSinkStatus) + ", cable=" + displayPortAltModeStatusToString(this.mCableStatus) + ", numLanes=" + this.mNumLanes + ", hotPlugDetect=" + this.mHotPlugDetect + ", linkTrainingStatus=" + linkTrainingStatusToString(this.mLinkTrainingStatus) + "}";
+        return "DisplayPortAltModeInfo{partnerSink="
+                + displayPortAltModeStatusToString(this.mPartnerSinkStatus)
+                + ", cable="
+                + displayPortAltModeStatusToString(this.mCableStatus)
+                + ", numLanes="
+                + this.mNumLanes
+                + ", hotPlugDetect="
+                + this.mHotPlugDetect
+                + ", linkTrainingStatus="
+                + linkTrainingStatusToString(this.mLinkTrainingStatus)
+                + "}";
     }
 
     public boolean equals(Object o) {
@@ -135,10 +156,19 @@ public final class DisplayPortAltModeInfo implements Parcelable {
             return false;
         }
         DisplayPortAltModeInfo other = (DisplayPortAltModeInfo) o;
-        return this.mPartnerSinkStatus == other.mPartnerSinkStatus && this.mCableStatus == other.mCableStatus && this.mNumLanes == other.mNumLanes && this.mHotPlugDetect == other.mHotPlugDetect && this.mLinkTrainingStatus == other.mLinkTrainingStatus;
+        return this.mPartnerSinkStatus == other.mPartnerSinkStatus
+                && this.mCableStatus == other.mCableStatus
+                && this.mNumLanes == other.mNumLanes
+                && this.mHotPlugDetect == other.mHotPlugDetect
+                && this.mLinkTrainingStatus == other.mLinkTrainingStatus;
     }
 
     public int hashCode() {
-        return Objects.hash(Integer.valueOf(this.mPartnerSinkStatus), Integer.valueOf(this.mCableStatus), Integer.valueOf(this.mNumLanes), Boolean.valueOf(this.mHotPlugDetect), Integer.valueOf(this.mLinkTrainingStatus));
+        return Objects.hash(
+                Integer.valueOf(this.mPartnerSinkStatus),
+                Integer.valueOf(this.mCableStatus),
+                Integer.valueOf(this.mNumLanes),
+                Boolean.valueOf(this.mHotPlugDetect),
+                Integer.valueOf(this.mLinkTrainingStatus));
     }
 }

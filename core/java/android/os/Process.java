@@ -1,21 +1,24 @@
 package android.os;
 
 import android.annotation.SystemApi;
-import android.os.StrictMode;
 import android.sysprop.MemoryProperties;
 import android.system.ErrnoException;
 import android.system.Os;
 import android.system.OsConstants;
 import android.util.Pair;
 import android.webkit.WebViewZygote;
+
 import com.android.internal.os.SomeArgs;
 import com.android.internal.util.Preconditions;
+
 import dalvik.system.VMRuntime;
+
+import libcore.io.IoUtils;
+
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import libcore.io.IoUtils;
 
 /* loaded from: classes3.dex */
 public class Process {
@@ -76,6 +79,7 @@ public class Process {
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
     public static final int NFC_UID = 1027;
+
     public static final int NOBODY_UID = 9999;
     public static final int NS_FLP_UID = 5013;
     public static final int NUM_UIDS_PER_APP_ZYGOTE = 100;
@@ -152,6 +156,7 @@ public class Process {
 
     @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
     public static final int VPN_UID = 1016;
+
     public static final int WEBVIEW_ZYGOTE_UID = 1053;
     public static final int WIFI_UID = 1010;
     public static final int ZYGOTE_POLICY_FLAG_BATCH_LAUNCH = 2;
@@ -194,7 +199,8 @@ public class Process {
 
     public static final native int[] getPidsForCommands(String[] strArr);
 
-    public static final native int getProcessGroup(int i) throws IllegalArgumentException, SecurityException;
+    public static final native int getProcessGroup(int i)
+            throws IllegalArgumentException, SecurityException;
 
     public static final native long getPss(int i);
 
@@ -216,9 +222,11 @@ public class Process {
 
     private static native int nativePidFdOpen(int i, int i2) throws ErrnoException;
 
-    public static final native boolean parseProcLine(byte[] bArr, int i, int i2, int[] iArr, String[] strArr, long[] jArr, float[] fArr);
+    public static final native boolean parseProcLine(
+            byte[] bArr, int i, int i2, int[] iArr, String[] strArr, long[] jArr, float[] fArr);
 
-    public static final native boolean readProcFile(String str, int[] iArr, String[] strArr, long[] jArr, float[] fArr);
+    public static final native boolean readProcFile(
+            String str, int[] iArr, String[] strArr, long[] jArr, float[] fArr);
 
     public static final native void readProcLines(String str, String[] strArr, long[] jArr);
 
@@ -232,11 +240,13 @@ public class Process {
 
     public static final native void sendSignalQuiet(int i, int i2);
 
-    private static native void sendSignalThrows(int i, int i2) throws IllegalArgumentException, SecurityException, NoSuchElementException;
+    private static native void sendSignalThrows(int i, int i2)
+            throws IllegalArgumentException, SecurityException, NoSuchElementException;
 
     public static final native boolean sendSignalToProcessGroup(int i, int i2, int i3);
 
-    private static native void sendTgSignalThrows(int i, int i2, int i3) throws IllegalArgumentException, SecurityException, NoSuchElementException;
+    private static native void sendTgSignalThrows(int i, int i2, int i3)
+            throws IllegalArgumentException, SecurityException, NoSuchElementException;
 
     private static native void setArgV0Native(String str);
 
@@ -246,7 +256,8 @@ public class Process {
 
     public static final native void setProcessFrozen(int i, int i2, boolean z);
 
-    public static final native void setProcessGroup(int i, int i2) throws IllegalArgumentException, SecurityException;
+    public static final native void setProcessGroup(int i, int i2)
+            throws IllegalArgumentException, SecurityException;
 
     public static final native boolean setProcessMARsFrozen(int i, int i2, boolean z);
 
@@ -254,24 +265,115 @@ public class Process {
 
     public static final native boolean setSwappiness(int i, boolean z);
 
-    public static final native void setThreadGroup(int i, int i2) throws IllegalArgumentException, SecurityException;
+    public static final native void setThreadGroup(int i, int i2)
+            throws IllegalArgumentException, SecurityException;
 
-    public static final native void setThreadGroupAndCpuset(int i, int i2) throws IllegalArgumentException, SecurityException;
+    public static final native void setThreadGroupAndCpuset(int i, int i2)
+            throws IllegalArgumentException, SecurityException;
 
-    public static final native void setThreadPriority(int i) throws IllegalArgumentException, SecurityException;
+    public static final native void setThreadPriority(int i)
+            throws IllegalArgumentException, SecurityException;
 
-    public static final native void setThreadPriority(int i, int i2) throws IllegalArgumentException, SecurityException;
+    public static final native void setThreadPriority(int i, int i2)
+            throws IllegalArgumentException, SecurityException;
 
-    public static final native void setThreadScheduler(int i, int i2, int i3) throws IllegalArgumentException;
+    public static final native void setThreadScheduler(int i, int i2, int i3)
+            throws IllegalArgumentException;
 
     public static final native int setUid(int i);
 
-    public static ProcessStartResult start(String processClass, String niceName, int uid, int gid, int[] gids, int runtimeFlags, int mountExternal, int targetSdkVersion, String seInfo, String abi, String instructionSet, String appDataDir, String invokeWith, String packageName, int zygotePolicyFlags, boolean isTopApp, long[] disabledCompatChanges, Map<String, Pair<String, Long>> pkgDataInfoMap, Map<String, Pair<String, Long>> whitelistedDataInfoMap, boolean bindMountAppsData, boolean bindMountAppStorageDirs, boolean bindMountSystemOverrides, String[] zygoteArgs) {
-        return ZYGOTE_PROCESS.start(processClass, niceName, uid, gid, gids, runtimeFlags, mountExternal, targetSdkVersion, seInfo, abi, instructionSet, appDataDir, invokeWith, packageName, zygotePolicyFlags, isTopApp, disabledCompatChanges, pkgDataInfoMap, whitelistedDataInfoMap, bindMountAppsData, bindMountAppStorageDirs, bindMountSystemOverrides, zygoteArgs);
+    public static ProcessStartResult start(
+            String processClass,
+            String niceName,
+            int uid,
+            int gid,
+            int[] gids,
+            int runtimeFlags,
+            int mountExternal,
+            int targetSdkVersion,
+            String seInfo,
+            String abi,
+            String instructionSet,
+            String appDataDir,
+            String invokeWith,
+            String packageName,
+            int zygotePolicyFlags,
+            boolean isTopApp,
+            long[] disabledCompatChanges,
+            Map<String, Pair<String, Long>> pkgDataInfoMap,
+            Map<String, Pair<String, Long>> whitelistedDataInfoMap,
+            boolean bindMountAppsData,
+            boolean bindMountAppStorageDirs,
+            boolean bindMountSystemOverrides,
+            String[] zygoteArgs) {
+        return ZYGOTE_PROCESS.start(
+                processClass,
+                niceName,
+                uid,
+                gid,
+                gids,
+                runtimeFlags,
+                mountExternal,
+                targetSdkVersion,
+                seInfo,
+                abi,
+                instructionSet,
+                appDataDir,
+                invokeWith,
+                packageName,
+                zygotePolicyFlags,
+                isTopApp,
+                disabledCompatChanges,
+                pkgDataInfoMap,
+                whitelistedDataInfoMap,
+                bindMountAppsData,
+                bindMountAppStorageDirs,
+                bindMountSystemOverrides,
+                zygoteArgs);
     }
 
-    public static ProcessStartResult startWebView(String processClass, String niceName, int uid, int gid, int[] gids, int runtimeFlags, int mountExternal, int targetSdkVersion, String seInfo, String abi, String instructionSet, String appDataDir, String invokeWith, String packageName, long[] disabledCompatChanges, String[] zygoteArgs) {
-        return WebViewZygote.getProcess().start(processClass, niceName, uid, gid, gids, runtimeFlags, mountExternal, targetSdkVersion, seInfo, abi, instructionSet, appDataDir, invokeWith, packageName, 0, false, disabledCompatChanges, null, null, false, false, false, zygoteArgs);
+    public static ProcessStartResult startWebView(
+            String processClass,
+            String niceName,
+            int uid,
+            int gid,
+            int[] gids,
+            int runtimeFlags,
+            int mountExternal,
+            int targetSdkVersion,
+            String seInfo,
+            String abi,
+            String instructionSet,
+            String appDataDir,
+            String invokeWith,
+            String packageName,
+            long[] disabledCompatChanges,
+            String[] zygoteArgs) {
+        return WebViewZygote.getProcess()
+                .start(
+                        processClass,
+                        niceName,
+                        uid,
+                        gid,
+                        gids,
+                        runtimeFlags,
+                        mountExternal,
+                        targetSdkVersion,
+                        seInfo,
+                        abi,
+                        instructionSet,
+                        appDataDir,
+                        invokeWith,
+                        packageName,
+                        0,
+                        false,
+                        disabledCompatChanges,
+                        null,
+                        null,
+                        false,
+                        false,
+                        false,
+                        zygoteArgs);
     }
 
     public static long getStartElapsedRealtime() {
@@ -290,7 +392,11 @@ public class Process {
         return sStartRequestedUptimeMillis;
     }
 
-    public static final void setStartTimes(long elapsedRealtime, long uptimeMillis, long startRequestedElapsedRealtime, long startRequestedUptime) {
+    public static final void setStartTimes(
+            long elapsedRealtime,
+            long uptimeMillis,
+            long startRequestedElapsedRealtime,
+            long startRequestedUptime) {
         sStartElapsedRealtime = elapsedRealtime;
         sStartUptimeMillis = uptimeMillis;
         sStartRequestedElapsedRealtime = startRequestedElapsedRealtime;
@@ -403,29 +509,47 @@ public class Process {
     }
 
     public static final void setThreadPriority$ravenwood(int tid, int priority) {
-        SomeArgs args = (SomeArgs) ((ThreadLocal) Preconditions.requireNonNullViaRavenwoodRule(sIdentity$ravenwood)).get();
+        SomeArgs args =
+                (SomeArgs)
+                        ((ThreadLocal)
+                                        Preconditions.requireNonNullViaRavenwoodRule(
+                                                sIdentity$ravenwood))
+                                .get();
         if (args.argi3 == tid) {
             boolean backgroundOk = args.arg1 == Boolean.TRUE;
             if (priority >= 10 && !backgroundOk) {
-                throw new IllegalArgumentException("Priority " + priority + " blocked by setCanSelfBackground()");
+                throw new IllegalArgumentException(
+                        "Priority " + priority + " blocked by setCanSelfBackground()");
             }
             args.argi4 = priority;
             return;
         }
-        throw new UnsupportedOperationException("Cross-thread priority management not yet available in Ravenwood");
+        throw new UnsupportedOperationException(
+                "Cross-thread priority management not yet available in Ravenwood");
     }
 
     public static final void setCanSelfBackground$ravenwood(boolean backgroundOk) {
-        SomeArgs args = (SomeArgs) ((ThreadLocal) Preconditions.requireNonNullViaRavenwoodRule(sIdentity$ravenwood)).get();
+        SomeArgs args =
+                (SomeArgs)
+                        ((ThreadLocal)
+                                        Preconditions.requireNonNullViaRavenwoodRule(
+                                                sIdentity$ravenwood))
+                                .get();
         args.arg1 = Boolean.valueOf(backgroundOk);
     }
 
     public static final int getThreadPriority$ravenwood(int tid) {
-        SomeArgs args = (SomeArgs) ((ThreadLocal) Preconditions.requireNonNullViaRavenwoodRule(sIdentity$ravenwood)).get();
+        SomeArgs args =
+                (SomeArgs)
+                        ((ThreadLocal)
+                                        Preconditions.requireNonNullViaRavenwoodRule(
+                                                sIdentity$ravenwood))
+                                .get();
         if (args.argi3 == tid) {
             return args.argi4;
         }
-        throw new UnsupportedOperationException("Cross-thread priority management not yet available in Ravenwood");
+        throw new UnsupportedOperationException(
+                "Cross-thread priority management not yet available in Ravenwood");
     }
 
     @Deprecated
@@ -446,11 +570,13 @@ public class Process {
         sendSignal(pid, 9);
     }
 
-    public static final void checkTid(int tgid, int tid) throws IllegalArgumentException, SecurityException, NoSuchElementException {
+    public static final void checkTid(int tgid, int tid)
+            throws IllegalArgumentException, SecurityException, NoSuchElementException {
         sendTgSignalThrows(tgid, tid, 0);
     }
 
-    public static final void checkPid(int pid) throws IllegalArgumentException, SecurityException, NoSuchElementException {
+    public static final void checkPid(int pid)
+            throws IllegalArgumentException, SecurityException, NoSuchElementException {
         sendSignalThrows(pid, 0);
     }
 
@@ -487,14 +613,15 @@ public class Process {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:20:0x004e, code lost:
-    
-        if (r3 != null) goto L20;
-     */
+
+       if (r3 != null) goto L20;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static void waitForProcessDeath(int r10, int r11) throws java.lang.InterruptedException, java.util.concurrent.TimeoutException {
+    public static void waitForProcessDeath(int r10, int r11)
+            throws java.lang.InterruptedException, java.util.concurrent.TimeoutException {
         /*
             boolean r0 = supportsPidFd()
             r1 = 1
@@ -598,7 +725,8 @@ public class Process {
             r1.<init>()
             throw r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.os.Process.waitForProcessDeath(int, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.os.Process.waitForProcessDeath(int, int):void");
     }
 
     public static boolean supportsPidFd() {

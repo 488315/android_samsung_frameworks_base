@@ -3,6 +3,7 @@ package com.android.internal.app;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+
 import com.android.internal.R;
 
 /* loaded from: classes5.dex */

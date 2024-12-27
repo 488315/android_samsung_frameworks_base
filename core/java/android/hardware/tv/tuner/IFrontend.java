@@ -1,6 +1,5 @@
 package android.hardware.tv.tuner;
 
-import android.hardware.tv.tuner.IFrontendCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -45,28 +44,22 @@ public interface IFrontend extends IInterface {
 
     public static class Default implements IFrontend {
         @Override // android.hardware.tv.tuner.IFrontend
-        public void setCallback(IFrontendCallback callback) throws RemoteException {
-        }
+        public void setCallback(IFrontendCallback callback) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IFrontend
-        public void tune(FrontendSettings settings) throws RemoteException {
-        }
+        public void tune(FrontendSettings settings) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IFrontend
-        public void stopTune() throws RemoteException {
-        }
+        public void stopTune() throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IFrontend
-        public void close() throws RemoteException {
-        }
+        public void close() throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IFrontend
-        public void scan(FrontendSettings settings, int type) throws RemoteException {
-        }
+        public void scan(FrontendSettings settings, int type) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IFrontend
-        public void stopScan() throws RemoteException {
-        }
+        public void stopScan() throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IFrontend
         public FrontendStatus[] getStatus(int[] statusTypes) throws RemoteException {
@@ -74,8 +67,7 @@ public interface IFrontend extends IInterface {
         }
 
         @Override // android.hardware.tv.tuner.IFrontend
-        public void setLnb(int lnbId) throws RemoteException {
-        }
+        public void setLnb(int lnbId) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IFrontend
         public int linkCiCam(int ciCamId) throws RemoteException {
@@ -83,8 +75,7 @@ public interface IFrontend extends IInterface {
         }
 
         @Override // android.hardware.tv.tuner.IFrontend
-        public void unlinkCiCam(int ciCamId) throws RemoteException {
-        }
+        public void unlinkCiCam(int ciCamId) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IFrontend
         public String getHardwareInfo() throws RemoteException {
@@ -92,8 +83,7 @@ public interface IFrontend extends IInterface {
         }
 
         @Override // android.hardware.tv.tuner.IFrontend
-        public void removeOutputPid(int pid) throws RemoteException {
-        }
+        public void removeOutputPid(int pid) throws RemoteException {}
 
         @Override // android.hardware.tv.tuner.IFrontend
         public int[] getFrontendStatusReadiness(int[] statusTypes) throws RemoteException {
@@ -116,7 +106,7 @@ public interface IFrontend extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IFrontend {
+    public abstract static class Stub extends Binder implements IFrontend {
         static final int TRANSACTION_close = 4;
         static final int TRANSACTION_getFrontendStatusReadiness = 13;
         static final int TRANSACTION_getHardwareInfo = 11;
@@ -155,7 +145,8 @@ public interface IFrontend extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -176,13 +167,15 @@ public interface IFrontend extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IFrontendCallback _arg0 = IFrontendCallback.Stub.asInterface(data.readStrongBinder());
+                    IFrontendCallback _arg0 =
+                            IFrontendCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setCallback(_arg0);
                     reply.writeNoException();
                     return true;
                 case 2:
-                    FrontendSettings _arg02 = (FrontendSettings) data.readTypedObject(FrontendSettings.CREATOR);
+                    FrontendSettings _arg02 =
+                            (FrontendSettings) data.readTypedObject(FrontendSettings.CREATOR);
                     data.enforceNoDataAvail();
                     tune(_arg02);
                     reply.writeNoException();
@@ -196,7 +189,8 @@ public interface IFrontend extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 5:
-                    FrontendSettings _arg03 = (FrontendSettings) data.readTypedObject(FrontendSettings.CREATOR);
+                    FrontendSettings _arg03 =
+                            (FrontendSettings) data.readTypedObject(FrontendSettings.CREATOR);
                     int _arg1 = data.readInt();
                     data.enforceNoDataAvail();
                     scan(_arg03, _arg1);
@@ -391,7 +385,8 @@ public interface IFrontend extends IInterface {
                         throw new RemoteException("Method getStatus is unimplemented.");
                     }
                     _reply.readException();
-                    FrontendStatus[] _result = (FrontendStatus[]) _reply.createTypedArray(FrontendStatus.CREATOR);
+                    FrontendStatus[] _result =
+                            (FrontendStatus[]) _reply.createTypedArray(FrontendStatus.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -501,7 +496,8 @@ public interface IFrontend extends IInterface {
                     _data.writeIntArray(statusTypes);
                     boolean _status = this.mRemote.transact(13, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method getFrontendStatusReadiness is unimplemented.");
+                        throw new RemoteException(
+                                "Method getFrontendStatusReadiness is unimplemented.");
                     }
                     _reply.readException();
                     int[] _result = _reply.createIntArray();

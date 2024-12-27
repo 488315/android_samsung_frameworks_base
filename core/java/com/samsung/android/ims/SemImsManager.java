@@ -11,12 +11,9 @@ import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
-import com.samsung.android.ims.ISemEpdgListener;
-import com.samsung.android.ims.SemImsDmConfigListener;
-import com.samsung.android.ims.SemImsRegiListener;
-import com.samsung.android.ims.SemImsService;
-import com.samsung.android.ims.SemSimMobStatusListener;
+
 import com.samsung.android.ims.settings.SemImsProfile;
+
 import java.lang.ref.WeakReference;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -37,22 +34,35 @@ public class SemImsManager {
     private Context mContext;
     private ImsServiceConnectionListener mListener;
     private int mPhoneId;
-    private final ArrayMap<SemImsRegistrationListener, ImsRegistrationListenerDelegate> mRegListeners = new ArrayMap<>();
-    private final ArrayMap<SemEpdgListener, SemEpdgListenerDelegate> mEpdgListeners = new ArrayMap<>();
-    private final ArrayMap<SemSimMobilityStatusListener, SimMobilityStatusListenerDelegate> mSimMobilityStatusListeners = new ArrayMap<>();
+    private final ArrayMap<SemImsRegistrationListener, ImsRegistrationListenerDelegate>
+            mRegListeners = new ArrayMap<>();
+    private final ArrayMap<SemEpdgListener, SemEpdgListenerDelegate> mEpdgListeners =
+            new ArrayMap<>();
+    private final ArrayMap<SemSimMobilityStatusListener, SimMobilityStatusListenerDelegate>
+            mSimMobilityStatusListeners = new ArrayMap<>();
     private BroadcastReceiver mRestartReceiver = null;
     DmConfigEventRelay mEventRelay = null;
-    SemImsDmConfigListener.Stub mEventProxy = new SemImsDmConfigListener.Stub() { // from class: com.samsung.android.ims.SemImsManager.2
-        @Override // com.samsung.android.ims.SemImsDmConfigListener
-        public void onChangeDmValue(String uri, boolean state) throws RemoteException {
-            if (SemImsManager.this.mEventRelay == null) {
-                Log.d("semImsManager[" + SemImsManager.this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "no listener for SemImsDmConfigListener");
-                throw new RemoteException();
-            }
-            Log.d("semImsManager[" + SemImsManager.this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "mEventRelay : " + SemImsManager.this.mEventRelay);
-            SemImsManager.this.mEventRelay.onChangeDmValue(uri, state);
-        }
-    };
+    SemImsDmConfigListener.Stub mEventProxy =
+            new SemImsDmConfigListener
+                    .Stub() { // from class: com.samsung.android.ims.SemImsManager.2
+                @Override // com.samsung.android.ims.SemImsDmConfigListener
+                public void onChangeDmValue(String uri, boolean state) throws RemoteException {
+                    if (SemImsManager.this.mEventRelay == null) {
+                        Log.d(
+                                "semImsManager["
+                                        + SemImsManager.this.mPhoneId
+                                        + NavigationBarInflaterView.SIZE_MOD_END,
+                                "no listener for SemImsDmConfigListener");
+                        throw new RemoteException();
+                    }
+                    Log.d(
+                            "semImsManager["
+                                    + SemImsManager.this.mPhoneId
+                                    + NavigationBarInflaterView.SIZE_MOD_END,
+                            "mEventRelay : " + SemImsManager.this.mEventRelay);
+                    SemImsManager.this.mEventRelay.onChangeDmValue(uri, state);
+                }
+            };
 
     public static class ApnType {
         public static final String CBS = "cbs";
@@ -197,38 +207,58 @@ public class SemImsManager {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void registerPreviousListeners(SemImsService imsService) {
-        Log.d(LOG_TAG, "registerPreviousListeners:  mRegListeners: " + this.mRegListeners.size() + " mEpdgListeners: " + this.mEpdgListeners.size());
+        Log.d(
+                LOG_TAG,
+                "registerPreviousListeners:  mRegListeners: "
+                        + this.mRegListeners.size()
+                        + " mEpdgListeners: "
+                        + this.mEpdgListeners.size());
         for (SemImsRegistrationListener tempListener : this.mRegListeners.keySet()) {
             registerImsRegistrationListener(tempListener);
         }
         for (SemEpdgListener epdgListener : this.mEpdgListeners.keySet()) {
             registerEpdgListener(epdgListener);
         }
-        for (SemSimMobilityStatusListener tempListener2 : this.mSimMobilityStatusListeners.keySet()) {
+        for (SemSimMobilityStatusListener tempListener2 :
+                this.mSimMobilityStatusListeners.keySet()) {
             registerSimMobilityStatusListener(tempListener2);
         }
     }
 
     public void connectService() {
         if (this.mRestartReceiver == null) {
-            Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "Register Receiver for Restart");
-            this.mRestartReceiver = new BroadcastReceiver() { // from class: com.samsung.android.ims.SemImsManager.1
-                @Override // android.content.BroadcastReceiver
-                public void onReceive(Context context, Intent intent) {
-                    Log.d("semImsManager[" + SemImsManager.this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "onReceive " + intent.getAction());
-                    if (TextUtils.equals(intent.getAction(), SemImsManager.INTENT_ACTION_IMSSERVICE_RESTART)) {
-                        SemImsService imsService = SemImsManager.this.getImsService();
-                        if (imsService == null) {
-                            Log.e("semImsManager[" + SemImsManager.this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "ImsService not found, this should not happen!");
-                            return;
+            Log.d(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "Register Receiver for Restart");
+            this.mRestartReceiver =
+                    new BroadcastReceiver() { // from class: com.samsung.android.ims.SemImsManager.1
+                        @Override // android.content.BroadcastReceiver
+                        public void onReceive(Context context, Intent intent) {
+                            Log.d(
+                                    "semImsManager["
+                                            + SemImsManager.this.mPhoneId
+                                            + NavigationBarInflaterView.SIZE_MOD_END,
+                                    "onReceive " + intent.getAction());
+                            if (TextUtils.equals(
+                                    intent.getAction(),
+                                    SemImsManager.INTENT_ACTION_IMSSERVICE_RESTART)) {
+                                SemImsService imsService = SemImsManager.this.getImsService();
+                                if (imsService == null) {
+                                    Log.e(
+                                            "semImsManager["
+                                                    + SemImsManager.this.mPhoneId
+                                                    + NavigationBarInflaterView.SIZE_MOD_END,
+                                            "ImsService not found, this should not happen!");
+                                    return;
+                                }
+                                SemImsManager.this.registerPreviousListeners(
+                                        SemImsManager.this.getImsService());
+                                if (SemImsManager.this.mListener != null) {
+                                    SemImsManager.this.mListener.onConnected();
+                                }
+                            }
                         }
-                        SemImsManager.this.registerPreviousListeners(SemImsManager.this.getImsService());
-                        if (SemImsManager.this.mListener != null) {
-                            SemImsManager.this.mListener.onConnected();
-                        }
-                    }
-                }
-            };
+                    };
             IntentFilter filter = new IntentFilter();
             filter.addAction(INTENT_ACTION_IMSSERVICE_RESTART);
             this.mContext.registerReceiver(this.mRestartReceiver, filter);
@@ -244,7 +274,9 @@ public class SemImsManager {
             try {
                 this.mContext.unregisterReceiver(this.mRestartReceiver);
             } catch (IllegalArgumentException e) {
-                Log.e("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "unregisterReceiver " + e.getMessage());
+                Log.e(
+                        "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                        "unregisterReceiver " + e.getMessage());
             }
             this.mRestartReceiver = null;
         }
@@ -254,10 +286,14 @@ public class SemImsManager {
     }
 
     public SemImsRegistration[] getRegistrationInfo() {
-        Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "getRegistrationInfo");
+        Log.d(
+                "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                "getRegistrationInfo");
         SemImsService imsService = getImsService();
         if (imsService == null) {
-            Log.e("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "getRegistrationInfo: Not initialized.");
+            Log.e(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "getRegistrationInfo: Not initialized.");
             return null;
         }
         try {
@@ -273,10 +309,14 @@ public class SemImsManager {
     }
 
     public boolean isRcsEnabled(boolean needAutoConfigCheck) {
-        Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "isRcsEnabled: ");
+        Log.d(
+                "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                "isRcsEnabled: ");
         SemImsService imsService = getImsService();
         if (imsService == null) {
-            Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "isRcsEnabled: not connected.");
+            Log.d(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "isRcsEnabled: not connected.");
             return false;
         }
         try {
@@ -288,20 +328,28 @@ public class SemImsManager {
     }
 
     public void enableIpme(boolean enable) {
-        Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "enableIpme: " + enable);
+        Log.d(
+                "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                "enableIpme: " + enable);
         enableRcs(enable);
     }
 
     public boolean isIpmeEnabled() {
-        Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "isIpmeEnabled");
+        Log.d(
+                "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                "isIpmeEnabled");
         return isRcsEnabled();
     }
 
     public void sendTryRegister() {
-        Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "sendTryRegister");
+        Log.d(
+                "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                "sendTryRegister");
         SemImsService imsService = getImsService();
         if (imsService == null) {
-            Log.e("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "sendTryRegister: Not initialized.");
+            Log.e(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "sendTryRegister: Not initialized.");
             return;
         }
         try {
@@ -312,10 +360,14 @@ public class SemImsManager {
     }
 
     public void enableRcs(boolean enable) {
-        Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "enableRcs: " + enable);
+        Log.d(
+                "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                "enableRcs: " + enable);
         SemImsService imsService = getImsService();
         if (imsService == null) {
-            Log.e("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "enableRcs: Not initialized.");
+            Log.e(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "enableRcs: Not initialized.");
             return;
         }
         try {
@@ -326,14 +378,20 @@ public class SemImsManager {
     }
 
     public void registerImsRegistrationListener(SemImsRegistrationListener listener) {
-        Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "registerImsRegistrationListener");
+        Log.d(
+                "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                "registerImsRegistrationListener");
         if (listener == null) {
-            Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "registerImsRegistrationListener : listener is null");
+            Log.d(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "registerImsRegistrationListener : listener is null");
             return;
         }
         SemImsService imsService = getImsService();
         if (imsService == null) {
-            Log.e("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "Not initialized.");
+            Log.e(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "Not initialized.");
             return;
         }
         if (this.mRegListeners.containsKey(listener)) {
@@ -341,7 +399,8 @@ public class SemImsManager {
         }
         ImsRegistrationListenerDelegate callback = new ImsRegistrationListenerDelegate(listener);
         try {
-            String token = imsService.registerImsRegistrationListenerForSlot(callback, this.mPhoneId);
+            String token =
+                    imsService.registerImsRegistrationListenerForSlot(callback, this.mPhoneId);
             if (!TextUtils.isEmpty(token)) {
                 callback.mToken = token;
                 this.mRegListeners.put(listener, callback);
@@ -352,19 +411,27 @@ public class SemImsManager {
     }
 
     public void unregisterImsRegistrationListener(SemImsRegistrationListener listener) {
-        Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "unregisterImsRegistrationListener");
+        Log.d(
+                "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                "unregisterImsRegistrationListener");
         if (listener == null) {
-            Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "unregisterImsRegistrationListener : listener is null");
+            Log.d(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "unregisterImsRegistrationListener : listener is null");
             return;
         }
         ImsRegistrationListenerDelegate delegate = this.mRegListeners.remove(listener);
         if (delegate == null) {
-            Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "unregisterImsRegistrationListener : cannot find the listener");
+            Log.d(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "unregisterImsRegistrationListener : cannot find the listener");
             return;
         }
         SemImsService imsService = getImsService();
         if (imsService == null) {
-            Log.e("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "Not initialized.");
+            Log.e(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "Not initialized.");
             return;
         }
         try {
@@ -404,7 +471,9 @@ public class SemImsManager {
 
     public void registerSimMobilityStatusListener(SemSimMobilityStatusListener listener) {
         if (listener == null) {
-            Log.e("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "registerSimMobilityStatusListener : wrong instance");
+            Log.e(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "registerSimMobilityStatusListener : wrong instance");
             return;
         }
         if (this.mSimMobilityStatusListeners.containsKey(listener)) {
@@ -412,10 +481,13 @@ public class SemImsManager {
         }
         SemImsService imsService = getImsService();
         if (imsService == null) {
-            Log.e("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "Not initialized.");
+            Log.e(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "Not initialized.");
             return;
         }
-        SimMobilityStatusListenerDelegate callback = new SimMobilityStatusListenerDelegate(listener);
+        SimMobilityStatusListenerDelegate callback =
+                new SimMobilityStatusListenerDelegate(listener);
         try {
             String token = imsService.registerSimMobilityStatusListener(callback, this.mPhoneId);
             if (!TextUtils.isEmpty(token)) {
@@ -429,17 +501,24 @@ public class SemImsManager {
 
     public void unregisterSimMobilityStatusListener(SemSimMobilityStatusListener listener) {
         if (listener == null) {
-            Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "unregisterSimMobilityStatusListener : listener is null");
+            Log.d(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "unregisterSimMobilityStatusListener : listener is null");
             return;
         }
-        SimMobilityStatusListenerDelegate delegate = this.mSimMobilityStatusListeners.remove(listener);
+        SimMobilityStatusListenerDelegate delegate =
+                this.mSimMobilityStatusListeners.remove(listener);
         if (delegate == null) {
-            Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "unregisterSimMobilityStatusListener : cannot find the listener");
+            Log.d(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "unregisterSimMobilityStatusListener : cannot find the listener");
             return;
         }
         SemImsService imsService = getImsService();
         if (imsService == null) {
-            Log.e("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "Not initialized.");
+            Log.e(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "Not initialized.");
             return;
         }
         try {
@@ -474,10 +553,14 @@ public class SemImsManager {
     }
 
     public SemImsRegistration getRegistrationInfoByServiceType(String serviceType) {
-        Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "getRegistrationInfoByServiceType");
+        Log.d(
+                "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                "getRegistrationInfoByServiceType");
         SemImsService imsService = getImsService();
         if (imsService == null) {
-            Log.e("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "getRegistrationInfoByServiceType: Not initialized.");
+            Log.e(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "getRegistrationInfoByServiceType: Not initialized.");
             return null;
         }
         try {
@@ -489,10 +572,14 @@ public class SemImsManager {
     }
 
     public SemImsRegistration getImsRegistration() {
-        Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "getImsRegistration");
+        Log.d(
+                "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                "getImsRegistration");
         SemImsService imsService = getImsService();
         if (imsService == null) {
-            Log.e("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "getImsRegistration: Not initialized.");
+            Log.e(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "getImsRegistration: Not initialized.");
             return null;
         }
         try {
@@ -504,10 +591,14 @@ public class SemImsManager {
     }
 
     public ContentValues getConfigValues(String[] fields) {
-        Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "getConfigValues");
+        Log.d(
+                "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                "getConfigValues");
         SemImsService imsService = getImsService();
         if (imsService == null) {
-            Log.e("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "Not initialized.");
+            Log.e(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "Not initialized.");
             return null;
         }
         try {
@@ -519,10 +610,14 @@ public class SemImsManager {
     }
 
     public boolean isSimMobilityActivated() {
-        Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "isSimMobilityActivated:");
+        Log.d(
+                "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                "isSimMobilityActivated:");
         SemImsService imsService = getImsService();
         if (imsService == null) {
-            Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "isSimMobilityActivated: not connected.");
+            Log.d(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "isSimMobilityActivated: not connected.");
             return false;
         }
         try {
@@ -534,10 +629,14 @@ public class SemImsManager {
     }
 
     public boolean isForbidden() {
-        Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "isForbidden");
+        Log.d(
+                "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                "isForbidden");
         SemImsService imsService = getImsService();
         if (imsService == null) {
-            Log.e("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "Not initialized.");
+            Log.e(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "Not initialized.");
             return false;
         }
         try {
@@ -549,10 +648,14 @@ public class SemImsManager {
     }
 
     public boolean isServiceAvailable(String service) {
-        Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "isServiceAvailable: " + service);
+        Log.d(
+                "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                "isServiceAvailable: " + service);
         SemImsService imsService = getImsService();
         if (imsService == null) {
-            Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "isServiceAvailable: not connected.");
+            Log.d(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "isServiceAvailable: not connected.");
             return false;
         }
         try {
@@ -564,10 +667,14 @@ public class SemImsManager {
     }
 
     public boolean isNonVerifiedMno() {
-        Log.i("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "isNonVerifiedMno");
+        Log.i(
+                "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                "isNonVerifiedMno");
         SemImsService imsService = getImsService();
         if (imsService == null) {
-            Log.i("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "isNonVerifiedMno: not connected.");
+            Log.i(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "isNonVerifiedMno: not connected.");
             return false;
         }
         try {
@@ -579,10 +686,14 @@ public class SemImsManager {
     }
 
     public boolean isServiceAvailable(String service, int rat) {
-        Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "isServiceAvailable: " + service + ", " + rat);
+        Log.d(
+                "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                "isServiceAvailable: " + service + ", " + rat);
         SemImsService imsService = getImsService();
         if (imsService == null) {
-            Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "isServiceAvailable: not connected.");
+            Log.d(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "isServiceAvailable: not connected.");
             return false;
         }
         try {
@@ -593,11 +704,16 @@ public class SemImsManager {
         }
     }
 
-    public boolean isImsFeatureEnabled(String feature, int network) throws IllegalArgumentException {
-        Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "isImsFeatureEnabled: " + feature + ", " + network);
+    public boolean isImsFeatureEnabled(String feature, int network)
+            throws IllegalArgumentException {
+        Log.d(
+                "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                "isImsFeatureEnabled: " + feature + ", " + network);
         SemImsService imsService = getImsService();
         if (imsService == null) {
-            Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "isImsFeatureEnabled: not connected.");
+            Log.d(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "isImsFeatureEnabled: not connected.");
             return false;
         }
         if (!SemImsProfile.ImsFeature.isValidImsFeature(feature)) {
@@ -612,26 +728,36 @@ public class SemImsManager {
     }
 
     public String getRcsProfileType() {
-        Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "getRcsProfileType");
+        Log.d(
+                "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                "getRcsProfileType");
         SemImsService imsService = getImsService();
         if (imsService == null) {
-            Log.e("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "Not initialized.");
+            Log.e(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "Not initialized.");
             return "";
         }
         try {
             String rcsProfile = imsService.getRcsProfileType(this.mPhoneId);
             return rcsProfile;
         } catch (RemoteException e) {
-            Log.e("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "fail to get profile");
+            Log.e(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "fail to get profile");
             return "";
         }
     }
 
     public boolean isVoLteAvailable() {
-        Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "isVoLteAvailable");
+        Log.d(
+                "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                "isVoLteAvailable");
         SemImsService imsService = getImsService();
         if (imsService == null) {
-            Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "isVoLteAvailable : not connected.");
+            Log.d(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "isVoLteAvailable : not connected.");
             return false;
         }
         try {
@@ -643,10 +769,14 @@ public class SemImsManager {
     }
 
     public boolean isImsFeatureProvisioned(String feature) throws IllegalArgumentException {
-        Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "isImsFeatureProvisioned: " + feature);
+        Log.d(
+                "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                "isImsFeatureProvisioned: " + feature);
         SemImsService imsService = getImsService();
         if (imsService == null) {
-            Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "isImsFeatureProvisioned: not connected.");
+            Log.d(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "isImsFeatureProvisioned: not connected.");
             return false;
         }
         if (!SemImsProfile.ImsFeature.isValidImsFeature(feature)) {
@@ -670,13 +800,17 @@ public class SemImsManager {
 
     public void registerDmValueListener(DmConfigEventRelay listener) {
         if (listener == null) {
-            Log.e("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "listener is null");
+            Log.e(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "listener is null");
             return;
         }
         this.mEventRelay = listener;
         SemImsService imsService = getImsService();
         if (imsService == null) {
-            Log.e("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "Not initialized.");
+            Log.e(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "Not initialized.");
             return;
         }
         try {
@@ -690,7 +824,9 @@ public class SemImsManager {
         this.mEventRelay = null;
         SemImsService imsService = getImsService();
         if (imsService == null) {
-            Log.e("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "Not initialized.");
+            Log.e(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "Not initialized.");
             return;
         }
         try {
@@ -701,26 +837,36 @@ public class SemImsManager {
     }
 
     public SemImsProfile[] getCurrentProfile(int phoneId) {
-        Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "getCurrentProfile");
+        Log.d(
+                "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                "getCurrentProfile");
         SemImsService imsService = getImsService();
         if (imsService == null) {
-            Log.e("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "Not initialized.");
+            Log.e(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "Not initialized.");
             return null;
         }
         try {
             SemImsProfile[] profiles = imsService.getCurrentProfileForSlot(phoneId);
             return profiles;
         } catch (RemoteException e) {
-            Log.e("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "fail to get profiles");
+            Log.e(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "fail to get profiles");
             return null;
         }
     }
 
     public void setRttMode(int mode) {
-        Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "setRttMode: " + mode);
+        Log.d(
+                "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                "setRttMode: " + mode);
         SemImsService imsService = getImsService();
         if (imsService == null) {
-            Log.d("semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END, "setRttMode: not connected.");
+            Log.d(
+                    "semImsManager[" + this.mPhoneId + NavigationBarInflaterView.SIZE_MOD_END,
+                    "setRttMode: not connected.");
             return;
         }
         try {
@@ -782,7 +928,9 @@ public class SemImsManager {
         }
 
         @Override // com.samsung.android.ims.SemImsRegiListener
-        public void onDeregistered(SemImsRegistration reg, SemImsRegistrationError registrationError) throws RemoteException {
+        public void onDeregistered(
+                SemImsRegistration reg, SemImsRegistrationError registrationError)
+                throws RemoteException {
             SemImsRegistrationListener imsRegistrationListener = getListener();
             if (imsRegistrationListener != null) {
                 imsRegistrationListener.onDeregistered(reg, registrationError);
@@ -824,7 +972,8 @@ public class SemImsManager {
         }
 
         @Override // com.samsung.android.ims.ISemEpdgListener
-        public void onIpsecConnection(int phoneId, String apnType, int ikeError, int throttleCount) {
+        public void onIpsecConnection(
+                int phoneId, String apnType, int ikeError, int throttleCount) {
             Log.d(SemImsManager.LOG_TAG, "onIpsecConnection phoneId " + phoneId);
             SemEpdgListener epdgListener = getListener();
             if (epdgListener != null) {

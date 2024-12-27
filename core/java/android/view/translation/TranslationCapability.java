@@ -5,8 +5,9 @@ import android.annotation.SystemApi;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.view.translation.TranslationContext;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -14,19 +15,22 @@ import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class TranslationCapability implements Parcelable {
-    public static final Parcelable.Creator<TranslationCapability> CREATOR = new Parcelable.Creator<TranslationCapability>() { // from class: android.view.translation.TranslationCapability.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TranslationCapability[] newArray(int size) {
-            return new TranslationCapability[size];
-        }
+    public static final Parcelable.Creator<TranslationCapability> CREATOR =
+            new Parcelable.Creator<
+                    TranslationCapability>() { // from class:
+                                               // android.view.translation.TranslationCapability.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TranslationCapability[] newArray(int size) {
+                    return new TranslationCapability[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public TranslationCapability createFromParcel(Parcel in) {
-            return new TranslationCapability(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public TranslationCapability createFromParcel(Parcel in) {
+                    return new TranslationCapability(in);
+                }
+            };
     public static final int STATE_AVAILABLE_TO_DOWNLOAD = 1;
     public static final int STATE_DOWNLOADING = 2;
     public static final int STATE_NOT_AVAILABLE = 4;
@@ -39,11 +43,15 @@ public final class TranslationCapability implements Parcelable {
     private final boolean mUiTranslationEnabled;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ModelState {
-    }
+    public @interface ModelState {}
 
     @SystemApi
-    public TranslationCapability(int state, TranslationSpec sourceSpec, TranslationSpec targetSpec, boolean uiTranslationEnabled, int supportedTranslationFlags) {
+    public TranslationCapability(
+            int state,
+            TranslationSpec sourceSpec,
+            TranslationSpec targetSpec,
+            boolean uiTranslationEnabled,
+            int supportedTranslationFlags) {
         Objects.requireNonNull(sourceSpec, "sourceSpec should not be null");
         Objects.requireNonNull(targetSpec, "targetSpec should not be null");
         this.mState = state;
@@ -91,7 +99,17 @@ public final class TranslationCapability implements Parcelable {
     }
 
     public String toString() {
-        return "TranslationCapability { state = " + modelStateToString(this.mState) + ", sourceSpec = " + this.mSourceSpec + ", targetSpec = " + this.mTargetSpec + ", uiTranslationEnabled = " + this.mUiTranslationEnabled + ", supportedTranslationFlags = " + this.mSupportedTranslationFlags + " }";
+        return "TranslationCapability { state = "
+                + modelStateToString(this.mState)
+                + ", sourceSpec = "
+                + this.mSourceSpec
+                + ", targetSpec = "
+                + this.mTargetSpec
+                + ", uiTranslationEnabled = "
+                + this.mUiTranslationEnabled
+                + ", supportedTranslationFlags = "
+                + this.mSupportedTranslationFlags
+                + " }";
     }
 
     @Override // android.os.Parcelable
@@ -117,19 +135,33 @@ public final class TranslationCapability implements Parcelable {
         TranslationSpec targetSpec = (TranslationSpec) in.readTypedObject(TranslationSpec.CREATOR);
         int supportedTranslationFlags = in.readInt();
         this.mState = state;
-        if (this.mState != 1 && this.mState != 2 && this.mState != 3 && this.mState != 4 && this.mState != 1000) {
-            throw new IllegalArgumentException("state was " + this.mState + " but must be one of: STATE_AVAILABLE_TO_DOWNLOAD(1), STATE_DOWNLOADING(2), STATE_ON_DEVICE(3), STATE_NOT_AVAILABLE(4), STATE_REMOVED_AND_AVAILABLE(1000" + NavigationBarInflaterView.KEY_CODE_END);
+        if (this.mState != 1
+                && this.mState != 2
+                && this.mState != 3
+                && this.mState != 4
+                && this.mState != 1000) {
+            throw new IllegalArgumentException(
+                    "state was "
+                            + this.mState
+                            + " but must be one of: STATE_AVAILABLE_TO_DOWNLOAD(1),"
+                            + " STATE_DOWNLOADING(2), STATE_ON_DEVICE(3), STATE_NOT_AVAILABLE(4),"
+                            + " STATE_REMOVED_AND_AVAILABLE(1000"
+                            + NavigationBarInflaterView.KEY_CODE_END);
         }
         this.mSourceSpec = sourceSpec;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSourceSpec);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSourceSpec);
         this.mTargetSpec = targetSpec;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mTargetSpec);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mTargetSpec);
         this.mUiTranslationEnabled = uiTranslationEnabled;
         this.mSupportedTranslationFlags = supportedTranslationFlags;
-        AnnotationValidations.validate((Class<? extends Annotation>) TranslationContext.TranslationFlag.class, (Annotation) null, this.mSupportedTranslationFlags);
+        AnnotationValidations.validate(
+                (Class<? extends Annotation>) TranslationContext.TranslationFlag.class,
+                (Annotation) null,
+                this.mSupportedTranslationFlags);
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

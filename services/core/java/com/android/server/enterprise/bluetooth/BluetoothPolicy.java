@@ -19,6 +19,7 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.sec.enterprise.auditlog.AuditLog;
 import android.util.Log;
+
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.NetworkScorerAppManager$$ExternalSyntheticOutline0;
@@ -31,11 +32,13 @@ import com.android.server.enterprise.storage.SettingNotFoundException;
 import com.android.server.enterprise.utils.EnterpriseDumpHelper;
 import com.android.server.enterprise.utils.Utils;
 import com.android.server.location.gnss.hal.GnssNative;
+
 import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.ControlInfo;
 import com.samsung.android.knox.EnterpriseDeviceManager;
 import com.samsung.android.knox.bluetooth.BluetoothControlInfo;
 import com.samsung.android.knox.bluetooth.IBluetoothPolicy;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.security.InvalidParameterException;
@@ -52,7 +55,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements EnterpriseServiceCallback {
+public final class BluetoothPolicy extends IBluetoothPolicy.Stub
+        implements EnterpriseServiceCallback {
     public final Context mContext;
     public final BluetoothDevicePolicy mDevicePolicy;
     public EnterpriseDeviceManager mEDM;
@@ -87,24 +91,49 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
                     Log.d("BluetoothPolicyService", "onReceive " + action);
                     boolean z = false;
                     if (!action.equals("android.bluetooth.adapter.action.STATE_CHANGED")) {
-                        if (!"com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL".equals(action)) {
-                            if ("android.bluetooth.device.action.ACL_CONNECTED".equals(action) && !((BluetoothPolicy) this.this$0).isDesktopConnectivityEnabled(false) && (bluetoothDevice = (BluetoothDevice) intent.getParcelableExtra("android.bluetooth.device.extra.DEVICE")) != null && (bluetoothClass = bluetoothDevice.getBluetoothClass()) != null && bluetoothClass.getMajorDeviceClass() == 256) {
-                                Log.d("BluetoothPolicyService", "Unpair this bluetooth computer(ACL CONNECTED) : " + bluetoothDevice.getAddress());
+                        if (!"com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL"
+                                .equals(action)) {
+                            if ("android.bluetooth.device.action.ACL_CONNECTED".equals(action)
+                                    && !((BluetoothPolicy) this.this$0)
+                                            .isDesktopConnectivityEnabled(false)
+                                    && (bluetoothDevice =
+                                                    (BluetoothDevice)
+                                                            intent.getParcelableExtra(
+                                                                    "android.bluetooth.device.extra.DEVICE"))
+                                            != null
+                                    && (bluetoothClass = bluetoothDevice.getBluetoothClass())
+                                            != null
+                                    && bluetoothClass.getMajorDeviceClass() == 256) {
+                                Log.d(
+                                        "BluetoothPolicyService",
+                                        "Unpair this bluetooth computer(ACL CONNECTED) : "
+                                                + bluetoothDevice.getAddress());
                                 bluetoothDevice.removeBond();
                                 break;
                             }
                         } else {
-                            int intExtra = intent.getIntExtra("com.samsung.android.knox.intent.extra.USER_ID_INTERNAL", 0);
+                            int intExtra =
+                                    intent.getIntExtra(
+                                            "com.samsung.android.knox.intent.extra.USER_ID_INTERNAL",
+                                            0);
                             BluetoothPolicy bluetoothPolicy = (BluetoothPolicy) this.this$0;
                             if (bluetoothPolicy.isBluetoothEnabled(false)) {
-                                if (!(bluetoothPolicy.getEDM$2() != null ? bluetoothPolicy.getEDM$2().isRestrictedByConstrainedState(8) : false)) {
+                                if (!(bluetoothPolicy.getEDM$2() != null
+                                        ? bluetoothPolicy
+                                                .getEDM$2()
+                                                .isRestrictedByConstrainedState(8)
+                                        : false)) {
                                     z = true;
                                 }
                             }
                             bluetoothPolicy.setBluetoothAllowedSystemUI(intExtra, z);
                             break;
                         }
-                    } else if (intent.getIntExtra("android.bluetooth.adapter.extra.STATE", Integer.MIN_VALUE) == 10 && ((BluetoothPolicy) this.this$0).mRestart) {
+                    } else if (intent.getIntExtra(
+                                            "android.bluetooth.adapter.extra.STATE",
+                                            Integer.MIN_VALUE)
+                                    == 10
+                            && ((BluetoothPolicy) this.this$0).mRestart) {
                         Log.d("BluetoothPolicyService", "***** Restarting Bluetooth *****");
                         ((BluetoothPolicy) this.this$0).mRestart = false;
                         if (BluetoothAdapter.getDefaultAdapter() != null) {
@@ -114,7 +143,9 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
                     }
                     break;
                 default:
-                    if (intent.getIntExtra("android.bluetooth.adapter.extra.STATE", Integer.MIN_VALUE) == 12) {
+                    if (intent.getIntExtra(
+                                    "android.bluetooth.adapter.extra.STATE", Integer.MIN_VALUE)
+                            == 12) {
                         ((ConditionVariable) this.this$0).open();
                         break;
                     }
@@ -142,27 +173,37 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
             switch (this.$r8$classId) {
                 case 0:
                     ConditionVariable conditionVariable = new ConditionVariable();
-                    IntentFilter intentFilter = new IntentFilter("android.bluetooth.adapter.action.STATE_CHANGED");
+                    IntentFilter intentFilter =
+                            new IntentFilter("android.bluetooth.adapter.action.STATE_CHANGED");
                     defaultAdapter = BluetoothAdapter.getDefaultAdapter();
-                    this.this$0.mContext.registerReceiver(new AnonymousClass1(1, conditionVariable), intentFilter);
+                    this.this$0.mContext.registerReceiver(
+                            new AnonymousClass1(1, conditionVariable), intentFilter);
                     conditionVariable.block(10000L);
                     break;
                 default:
                     while (true) {
                         try {
-                            String str = (String) ((LinkedBlockingQueue) this.this$0.mLogQueue).take();
+                            String str =
+                                    (String) ((LinkedBlockingQueue) this.this$0.mLogQueue).take();
                             if (str != null) {
                                 long timeInMillis = Calendar.getInstance().getTimeInMillis();
                                 ContentValues contentValues = new ContentValues();
                                 contentValues.put("time", String.valueOf(timeInMillis));
                                 contentValues.put("log", str);
-                                Log.d("BluetoothPolicyService", "StoreLogThread - cv: " + contentValues);
-                                if (!this.this$0.mEdmStorageProvider.putValuesNoUpdate("BluetoothLogTable", contentValues)) {
-                                    Log.d("BluetoothPolicyService", "StoreLogThread - Failed on inserting log");
+                                Log.d(
+                                        "BluetoothPolicyService",
+                                        "StoreLogThread - cv: " + contentValues);
+                                if (!this.this$0.mEdmStorageProvider.putValuesNoUpdate(
+                                        "BluetoothLogTable", contentValues)) {
+                                    Log.d(
+                                            "BluetoothPolicyService",
+                                            "StoreLogThread - Failed on inserting log");
                                 }
                             }
                         } catch (InterruptedException unused) {
-                            Log.d("BluetoothPolicyService", "StoreLogThread - InterruptedException on take");
+                            Log.d(
+                                    "BluetoothPolicyService",
+                                    "StoreLogThread - InterruptedException on take");
                         }
                     }
             }
@@ -256,7 +297,8 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
                 contentValues2.put("Object", (String) list.get(i2));
                 contentValues2.put("adminUid", String.valueOf(i));
                 contentValues2.put("ListType", str);
-                if (!this.mEdmStorageProvider.putValues(this.mTable, contentValues2, contentValues)) {
+                if (!this.mEdmStorageProvider.putValues(
+                        this.mTable, contentValues2, contentValues)) {
                     return false;
                 }
             }
@@ -276,17 +318,17 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:13:0x006a, code lost:
-        
-            android.util.Log.i("BlackWhiteListPolicyService", "getAllObjectsFromList:");
-         */
+
+           android.util.Log.i("BlackWhiteListPolicyService", "getAllObjectsFromList:");
+        */
         /* JADX WARN: Code restructure failed: missing block: B:14:0x0070, code lost:
-        
-            return;
-         */
+
+           return;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:18:0x0067, code lost:
-        
-            if (r3 == null) goto L19;
-         */
+
+           if (r3 == null) goto L19;
+        */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -353,7 +395,10 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
             L76:
                 throw r9
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.bluetooth.BluetoothPolicy.BluetoothDevicePolicy.getAllObjectsFromList(int, java.lang.String, java.util.List):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.enterprise.bluetooth.BluetoothPolicy.BluetoothDevicePolicy.getAllObjectsFromList(int,"
+                        + " java.lang.String, java.util.List):void");
         }
 
         public final List getAllObjectsFromListForAllAdmins(String str) {
@@ -366,7 +411,8 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
                 getAllObjectsFromList(intValue, str, arrayList2);
                 if (!arrayList2.isEmpty()) {
                     ControlInfo controlInfo = new ControlInfo();
-                    controlInfo.adminPackageName = edmStorageProvider.getPackageNameForUid(intValue);
+                    controlInfo.adminPackageName =
+                            edmStorageProvider.getPackageNameForUid(intValue);
                     controlInfo.entries = arrayList2;
                     arrayList.add(controlInfo);
                 }
@@ -384,9 +430,9 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:13:0x0039, code lost:
-        
-            return true;
-         */
+
+           return true;
+        */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -448,25 +494,27 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
             L61:
                 return r1
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.bluetooth.BluetoothPolicy.BluetoothDevicePolicy.isObjectAllowed(java.lang.String):boolean");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.enterprise.bluetooth.BluetoothPolicy.BluetoothDevicePolicy.isObjectAllowed(java.lang.String):boolean");
         }
 
         /* JADX WARN: Code restructure failed: missing block: B:10:0x0015, code lost:
-        
-            android.util.Log.d("BluetoothPolicyService", r3.toString());
-         */
+
+           android.util.Log.d("BluetoothPolicyService", r3.toString());
+        */
         /* JADX WARN: Code restructure failed: missing block: B:17:0x002e, code lost:
-        
-            r3 = move-exception;
-         */
+
+           r3 = move-exception;
+        */
         /* JADX WARN: Code restructure failed: missing block: B:18:0x002f, code lost:
-        
-            android.util.Log.d("BluetoothPolicyService", r3.toString());
-         */
+
+           android.util.Log.d("BluetoothPolicyService", r3.toString());
+        */
         /* JADX WARN: Code restructure failed: missing block: B:9:0x0014, code lost:
-        
-            r3 = move-exception;
-         */
+
+           r3 = move-exception;
+        */
         /*
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -510,7 +558,9 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
             L38:
                 return r0
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.enterprise.bluetooth.BluetoothPolicy.BluetoothDevicePolicy.isPolicyActive(int):boolean");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.enterprise.bluetooth.BluetoothPolicy.BluetoothDevicePolicy.isPolicyActive(int):boolean");
         }
 
         public final void reload() {
@@ -560,10 +610,16 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
                     getAllObjectsFromList(intValue, "white", arrayList4);
                     addList(list4, arrayList4);
                     subtractList(list3, list4);
-                    logList("effectiveblacklist for admin " + String.valueOf(intValue) + ": ", list3);
-                    logList("effectivewhitelist for admin " + String.valueOf(intValue) + ": ", list4);
+                    logList(
+                            "effectiveblacklist for admin " + String.valueOf(intValue) + ": ",
+                            list3);
+                    logList(
+                            "effectivewhitelist for admin " + String.valueOf(intValue) + ": ",
+                            list4);
                     addList(arrayList, (List) hashMap.get(num));
-                    logList("finalblacklist after adding admin " + String.valueOf(intValue) + ": ", arrayList);
+                    logList(
+                            "finalblacklist after adding admin " + String.valueOf(intValue) + ": ",
+                            arrayList);
                 }
             }
             for (Map.Entry entry : hashMap2.entrySet()) {
@@ -575,7 +631,11 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
                     }
                 }
                 addList(arrayList2, (List) entry.getValue());
-                logList("finalwhitelist after adding admin " + String.valueOf(entry.getKey()) + ": ", arrayList2);
+                logList(
+                        "finalwhitelist after adding admin "
+                                + String.valueOf(entry.getKey())
+                                + ": ",
+                        arrayList2);
             }
         }
     }
@@ -588,8 +648,10 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
         this.mContext = context;
         this.mEdmStorageProvider = new EdmStorageProvider(context);
         this.mRestart = false;
-        IntentFilter intentFilter = new IntentFilter("android.bluetooth.adapter.action.STATE_CHANGED");
-        intentFilter.addAction("com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL");
+        IntentFilter intentFilter =
+                new IntentFilter("android.bluetooth.adapter.action.STATE_CHANGED");
+        intentFilter.addAction(
+                "com.samsung.android.knox.intent.action.KNOXFRAMEWORK_SYSTEMUI_UPDATE_INTENT_INTERNAL");
         intentFilter.addAction("android.bluetooth.device.action.ACL_CONNECTED");
         context.registerReceiver(anonymousClass1, intentFilter, 2);
         this.mLogQueue = new LinkedBlockingQueue();
@@ -625,16 +687,41 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
     }
 
     public static void auditLogMessage(int i, int i2, int i3, boolean z) {
-        String str = i2 != 1 ? i2 != 2 ? i2 != 4 ? i2 != 8 ? i2 != 16 ? i2 != 32 ? i2 != 64 ? i2 != 128 ? i2 != 256 ? i2 != 512 ? "" : "BPP" : "SAP" : "SPP" : "FTP" : "DUN" : "AVRCP" : "A2DP" : "PBAP" : "HFP" : "HSP";
+        String str =
+                i2 != 1
+                        ? i2 != 2
+                                ? i2 != 4
+                                        ? i2 != 8
+                                                ? i2 != 16
+                                                        ? i2 != 32
+                                                                ? i2 != 64
+                                                                        ? i2 != 128
+                                                                                ? i2 != 256
+                                                                                        ? i2 != 512
+                                                                                                ? ""
+                                                                                                : "BPP"
+                                                                                        : "SAP"
+                                                                                : "SPP"
+                                                                        : "FTP"
+                                                                : "DUN"
+                                                        : "AVRCP"
+                                                : "A2DP"
+                                        : "PBAP"
+                                : "HFP"
+                        : "HSP";
         int myPid = Process.myPid();
-        String str2 = z ? "Admin %d has allowed %s bluetooth profile." : "Admin %d has blocked %s bluetooth profile.";
+        String str2 =
+                z
+                        ? "Admin %d has allowed %s bluetooth profile."
+                        : "Admin %d has blocked %s bluetooth profile.";
         Integer valueOf = Integer.valueOf(i);
         boolean isEmpty = str.isEmpty();
         Object obj = str;
         if (isEmpty) {
             obj = Integer.valueOf(i2);
         }
-        AuditLog.logAsUser(5, 1, true, myPid, "BluetoothPolicy", String.format(str2, valueOf, obj), i3);
+        AuditLog.logAsUser(
+                5, 1, true, myPid, "BluetoothPolicy", String.format(str2, valueOf, obj), i3);
     }
 
     public static void disableDesktopConnectivity() {
@@ -645,10 +732,16 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
                 BluetoothClass bluetoothClass = bluetoothDevice.getBluetoothClass();
                 if (bluetoothClass != null && bluetoothClass.getMajorDeviceClass() == 256) {
                     if (bluetoothDevice.isConnected()) {
-                        Log.d("BluetoothPolicyService", "Unpair this bluetooth computer(connected) : " + bluetoothDevice.getAddress());
+                        Log.d(
+                                "BluetoothPolicyService",
+                                "Unpair this bluetooth computer(connected) : "
+                                        + bluetoothDevice.getAddress());
                         bluetoothDevice.removeBond();
                     } else {
-                        Log.d("BluetoothPolicyService", "Keep this bluetooth computer(not connected) : " + bluetoothDevice.getAddress());
+                        Log.d(
+                                "BluetoothPolicyService",
+                                "Keep this bluetooth computer(not connected) : "
+                                        + bluetoothDevice.getAddress());
                     }
                 }
             }
@@ -805,21 +898,42 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
 
     public final boolean allowBLE(ContextInfo contextInfo, boolean z) {
         boolean z2;
-        ContextInfo enforceOwnerOnlyAndActiveAdminPermission = getEDM$2().enforceOwnerOnlyAndActiveAdminPermission(contextInfo, new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_ADVANCED_RESTRICTION")));
+        ContextInfo enforceOwnerOnlyAndActiveAdminPermission =
+                getEDM$2()
+                        .enforceOwnerOnlyAndActiveAdminPermission(
+                                contextInfo,
+                                new ArrayList(
+                                        Arrays.asList(
+                                                "com.samsung.android.knox.permission.KNOX_ADVANCED_RESTRICTION")));
         BluetoothAdapter defaultAdapter = BluetoothAdapter.getDefaultAdapter();
         ContentResolver contentResolver = this.mContext.getContentResolver();
         boolean z3 = true;
         if (!z) {
             try {
-                z2 = this.mEdmStorageProvider.getBoolean(enforceOwnerOnlyAndActiveAdminPermission.mCallerUid, 0, "BLUETOOTH", "bluetoothEnabled");
+                z2 =
+                        this.mEdmStorageProvider.getBoolean(
+                                enforceOwnerOnlyAndActiveAdminPermission.mCallerUid,
+                                0,
+                                "BLUETOOTH",
+                                "bluetoothEnabled");
             } catch (Exception e) {
                 Log.d("BluetoothPolicyService", e.toString());
                 z2 = true;
             }
-            this.mEdmStorageProvider.putBoolean("BLUETOOTH", enforceOwnerOnlyAndActiveAdminPermission.mCallerUid, z2, 0, "allowBluetoothRestore");
+            this.mEdmStorageProvider.putBoolean(
+                    "BLUETOOTH",
+                    enforceOwnerOnlyAndActiveAdminPermission.mCallerUid,
+                    z2,
+                    0,
+                    "allowBluetoothRestore");
         }
         try {
-            z3 = this.mEdmStorageProvider.getBoolean(enforceOwnerOnlyAndActiveAdminPermission.mCallerUid, 0, "BLUETOOTH", "allowBluetoothRestore");
+            z3 =
+                    this.mEdmStorageProvider.getBoolean(
+                            enforceOwnerOnlyAndActiveAdminPermission.mCallerUid,
+                            0,
+                            "BLUETOOTH",
+                            "allowBluetoothRestore");
         } catch (Exception e2) {
             Log.d("BluetoothPolicyService", e2.toString());
         }
@@ -830,7 +944,13 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
             Log.d("BluetoothPolicyService", "allowBLE was failed");
             return false;
         }
-        boolean putBoolean = this.mEdmStorageProvider.putBoolean("BLUETOOTH", enforceOwnerOnlyAndActiveAdminPermission.mCallerUid, z, 0, "allowBLE");
+        boolean putBoolean =
+                this.mEdmStorageProvider.putBoolean(
+                        "BLUETOOTH",
+                        enforceOwnerOnlyAndActiveAdminPermission.mCallerUid,
+                        z,
+                        0,
+                        "allowBLE");
         if (!z) {
             long clearCallingIdentity = Binder.clearCallingIdentity();
             if (defaultAdapter != null) {
@@ -848,16 +968,21 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
     }
 
     public final boolean allowBluetooth(ContextInfo contextInfo, boolean z) {
-        ContextInfo enforceOwnerOnlyAndBluetoothPermission = enforceOwnerOnlyAndBluetoothPermission(contextInfo);
+        ContextInfo enforceOwnerOnlyAndBluetoothPermission =
+                enforceOwnerOnlyAndBluetoothPermission(contextInfo);
         if (!isBLEAllowed(enforceOwnerOnlyAndBluetoothPermission)) {
-            int adminByField = this.mEdmStorageProvider.getAdminByField("BLUETOOTH", "allowBLE", Integer.toString(0));
-            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(adminByField, "getAdminUidForBLE - ", "BluetoothPolicyService");
+            int adminByField =
+                    this.mEdmStorageProvider.getAdminByField(
+                            "BLUETOOTH", "allowBLE", Integer.toString(0));
+            NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                    adminByField, "getAdminUidForBLE - ", "BluetoothPolicyService");
             if (adminByField == enforceOwnerOnlyAndBluetoothPermission.mCallerUid) {
                 Log.d("BluetoothPolicyService", "failed to allowBluetooth due to BLE policy");
                 return false;
             }
         }
-        int callingOrCurrentUserId = Utils.getCallingOrCurrentUserId(enforceOwnerOnlyAndBluetoothPermission);
+        int callingOrCurrentUserId =
+                Utils.getCallingOrCurrentUserId(enforceOwnerOnlyAndBluetoothPermission);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             if (!z) {
@@ -874,9 +999,25 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
                     return false;
                 }
             }
-            boolean putBoolean = this.mEdmStorageProvider.putBoolean("BLUETOOTH", enforceOwnerOnlyAndBluetoothPermission.mCallerUid, z, 0, "bluetoothEnabled");
+            boolean putBoolean =
+                    this.mEdmStorageProvider.putBoolean(
+                            "BLUETOOTH",
+                            enforceOwnerOnlyAndBluetoothPermission.mCallerUid,
+                            z,
+                            0,
+                            "bluetoothEnabled");
             if (putBoolean) {
-                AuditLog.logAsUser(5, 1, true, Process.myPid(), "BluetoothPolicy", String.format("Admin %d has changed allow bluetooth to %s", Integer.valueOf(enforceOwnerOnlyAndBluetoothPermission.mCallerUid), Boolean.valueOf(z)), UserHandle.getUserId(enforceOwnerOnlyAndBluetoothPermission.mCallerUid));
+                AuditLog.logAsUser(
+                        5,
+                        1,
+                        true,
+                        Process.myPid(),
+                        "BluetoothPolicy",
+                        String.format(
+                                "Admin %d has changed allow bluetooth to %s",
+                                Integer.valueOf(enforceOwnerOnlyAndBluetoothPermission.mCallerUid),
+                                Boolean.valueOf(z)),
+                        UserHandle.getUserId(enforceOwnerOnlyAndBluetoothPermission.mCallerUid));
                 setBluetoothAllowedSystemUI(callingOrCurrentUserId, isBluetoothEnabled(false));
             }
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -909,9 +1050,20 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
                 throw th;
             }
         }
-        boolean putBoolean = this.mEdmStorageProvider.putBoolean("BLUETOOTH", contextInfo.mCallerUid, z, 0, "bluetoothEnabled");
+        boolean putBoolean =
+                this.mEdmStorageProvider.putBoolean(
+                        "BLUETOOTH", contextInfo.mCallerUid, z, 0, "bluetoothEnabled");
         if (putBoolean) {
-            AuditLog.logAsUser(5, 1, true, Process.myPid(), "BluetoothPolicy", String.format("Admin %d has changed allow bluetooth to %s", Integer.valueOf(contextInfo.mCallerUid), Boolean.valueOf(z)), UserHandle.getUserId(contextInfo.mCallerUid));
+            AuditLog.logAsUser(
+                    5,
+                    1,
+                    true,
+                    Process.myPid(),
+                    "BluetoothPolicy",
+                    String.format(
+                            "Admin %d has changed allow bluetooth to %s",
+                            Integer.valueOf(contextInfo.mCallerUid), Boolean.valueOf(z)),
+                    UserHandle.getUserId(contextInfo.mCallerUid));
             setBluetoothAllowedSystemUI(callingOrCurrentUserId, isBluetoothEnabled(false));
         }
         Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -920,7 +1072,12 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
 
     public final boolean allowCallerIDDisplay(ContextInfo contextInfo, boolean z) {
         try {
-            return this.mEdmStorageProvider.putBoolean("BLUETOOTH", enforceOwnerOnlyAndBluetoothPermission(contextInfo).mCallerUid, z, 0, "allowCallerID");
+            return this.mEdmStorageProvider.putBoolean(
+                    "BLUETOOTH",
+                    enforceOwnerOnlyAndBluetoothPermission(contextInfo).mCallerUid,
+                    z,
+                    0,
+                    "allowCallerID");
         } catch (Exception e) {
             Log.w("BluetoothPolicyService", e.toString());
             return false;
@@ -929,11 +1086,18 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
 
     public final boolean allowOutgoingCalls(ContextInfo contextInfo, boolean z) {
         Log.d("BluetoothPolicyService", "allowOutgoingCalls = " + z);
-        ContextInfo enforceOwnerOnlyAndBluetoothPermission = enforceOwnerOnlyAndBluetoothPermission(contextInfo);
+        ContextInfo enforceOwnerOnlyAndBluetoothPermission =
+                enforceOwnerOnlyAndBluetoothPermission(contextInfo);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         boolean z2 = false;
         try {
-            z2 = this.mEdmStorageProvider.putBoolean("BLUETOOTH", enforceOwnerOnlyAndBluetoothPermission.mCallerUid, z, 0, "allowOutgoingCalls");
+            z2 =
+                    this.mEdmStorageProvider.putBoolean(
+                            "BLUETOOTH",
+                            enforceOwnerOnlyAndBluetoothPermission.mCallerUid,
+                            z,
+                            0,
+                            "allowOutgoingCalls");
             BluetoothAdapter defaultAdapter = BluetoothAdapter.getDefaultAdapter();
             if (z2 && defaultAdapter != null && defaultAdapter.isEnabled()) {
                 this.mRestart = true;
@@ -949,11 +1113,11 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
     public final void applyDevicePolicy() {
         List effectiveBlackList = this.mDevicePolicy.getEffectiveBlackList();
         try {
-            for (BluetoothDevice bluetoothDevice : BluetoothAdapter.getDefaultAdapter().getBondedDevices()) {
+            for (BluetoothDevice bluetoothDevice :
+                    BluetoothAdapter.getDefaultAdapter().getBondedDevices()) {
                 String address = bluetoothDevice.getAddress();
                 ArrayList arrayList = (ArrayList) effectiveBlackList;
-                if (!arrayList.contains(address) && !arrayList.contains("*")) {
-                }
+                if (!arrayList.contains(address) && !arrayList.contains("*")) {}
                 Log.d("BluetoothPolicyService", "device.removeBond() : " + address);
                 bluetoothDevice.removeBond();
             }
@@ -966,8 +1130,11 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
         if (!isBluetoothLogEnabled(contextInfo)) {
             return false;
         }
-        Log.d("BluetoothPolicyService", "on server bluetoothLoglogConnectionChanged [" + str + "] " + str2);
-        return ((LinkedBlockingQueue) this.mLogQueue).offer(BootReceiver$$ExternalSyntheticOutline0.m("[", str, "]\n", str2));
+        Log.d(
+                "BluetoothPolicyService",
+                "on server bluetoothLoglogConnectionChanged [" + str + "] " + str2);
+        return ((LinkedBlockingQueue) this.mLogQueue)
+                .offer(BootReceiver$$ExternalSyntheticOutline0.m("[", str, "]\n", str2));
     }
 
     public final boolean clearBluetoothDevicesFromBlackList(ContextInfo contextInfo) {
@@ -1018,23 +1185,48 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
         return clearObjectsFromList;
     }
 
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         if (this.mContext.checkCallingOrSelfPermission("android.permission.DUMP") != 0) {
             printWriter.println("Permission Denial: can't dump SecurityPolicy");
         } else {
-            this.mEnterpriseDumpHelper.dumpTable(printWriter, "BLUETOOTH", new String[]{"adminUid", "allowCallerID", "allowDataTransfer", "allowOutgoingCalls", "desktopConnectivityEnabled", "devicePolicyEnabled", "discoverableModeEnabled", "bluetoothEnabled", "limitedDiscoverableEnabled", "bluetoothLogEnabled", "pairingEnabled", "profileSettings", "profilePolicyEnabled"}, null);
+            this.mEnterpriseDumpHelper.dumpTable(
+                    printWriter,
+                    "BLUETOOTH",
+                    new String[] {
+                        "adminUid",
+                        "allowCallerID",
+                        "allowDataTransfer",
+                        "allowOutgoingCalls",
+                        "desktopConnectivityEnabled",
+                        "devicePolicyEnabled",
+                        "discoverableModeEnabled",
+                        "bluetoothEnabled",
+                        "limitedDiscoverableEnabled",
+                        "bluetoothLogEnabled",
+                        "pairingEnabled",
+                        "profileSettings",
+                        "profilePolicyEnabled"
+                    },
+                    null);
         }
     }
 
     public final ContextInfo enforceOwnerOnlyAndBluetoothPermission(ContextInfo contextInfo) {
-        return getEDM$2().enforceOwnerOnlyAndActiveAdminPermission(contextInfo, new ArrayList(Arrays.asList("com.samsung.android.knox.permission.KNOX_BLUETOOTH")));
+        return getEDM$2()
+                .enforceOwnerOnlyAndActiveAdminPermission(
+                        contextInfo,
+                        new ArrayList(
+                                Arrays.asList(
+                                        "com.samsung.android.knox.permission.KNOX_BLUETOOTH")));
     }
 
     public final List getAllBluetoothDevicesBlackLists(ContextInfo contextInfo) {
         Log.d("BluetoothPolicyService", "getAllDevicesBlackLists");
         enforceOwnerOnlyAndBluetoothPermission(contextInfo);
         long clearCallingIdentity = Binder.clearCallingIdentity();
-        List translateList = translateList(this.mDevicePolicy.getAllObjectsFromListForAllAdmins("black"));
+        List translateList =
+                translateList(this.mDevicePolicy.getAllObjectsFromListForAllAdmins("black"));
         Binder.restoreCallingIdentity(clearCallingIdentity);
         return translateList;
     }
@@ -1043,7 +1235,8 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
         Log.d("BluetoothPolicyService", "getAllDevicesWhiteLists");
         enforceOwnerOnlyAndBluetoothPermission(contextInfo);
         long clearCallingIdentity = Binder.clearCallingIdentity();
-        List translateList = translateList(this.mDevicePolicy.getAllObjectsFromListForAllAdmins("white"));
+        List translateList =
+                translateList(this.mDevicePolicy.getAllObjectsFromListForAllAdmins("white"));
         Binder.restoreCallingIdentity(clearCallingIdentity);
         return translateList;
     }
@@ -1052,7 +1245,8 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
         Log.d("BluetoothPolicyService", "getAllProfilesBlackLists");
         enforceOwnerOnlyAndBluetoothPermission(contextInfo);
         long clearCallingIdentity = Binder.clearCallingIdentity();
-        List translateList = translateList(this.mProfilePolicy.getAllObjectsFromListForAllAdmins("black"));
+        List translateList =
+                translateList(this.mProfilePolicy.getAllObjectsFromListForAllAdmins("black"));
         Binder.restoreCallingIdentity(clearCallingIdentity);
         return translateList;
     }
@@ -1061,15 +1255,20 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
         Log.d("BluetoothPolicyService", "getAllProfilesWhiteLists");
         enforceOwnerOnlyAndBluetoothPermission(contextInfo);
         long clearCallingIdentity = Binder.clearCallingIdentity();
-        List translateList = translateList(this.mProfilePolicy.getAllObjectsFromListForAllAdmins("white"));
+        List translateList =
+                translateList(this.mProfilePolicy.getAllObjectsFromListForAllAdmins("white"));
         Binder.restoreCallingIdentity(clearCallingIdentity);
         return translateList;
     }
 
     public final boolean getAllowBluetoothDataTransfer(ContextInfo contextInfo, boolean z) {
         boolean z2;
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("getAllowBluetoothDataTransfer - showMsg: ", "BluetoothPolicyService", z);
-        Iterator it = this.mEdmStorageProvider.getBooleanListAsUser(0, "BLUETOOTH", "allowDataTransfer").iterator();
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "getAllowBluetoothDataTransfer - showMsg: ", "BluetoothPolicyService", z);
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getBooleanListAsUser(0, "BLUETOOTH", "allowDataTransfer")
+                        .iterator();
         while (true) {
             if (!it.hasNext()) {
                 z2 = true;
@@ -1090,7 +1289,9 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
         Log.d("BluetoothPolicyService", "getBluetoothLog()");
         enforceOwnerOnlyAndBluetoothPermission(contextInfo);
         ArrayList arrayList = new ArrayList();
-        ArrayList dataByFields = this.mEdmStorageProvider.getDataByFields("BluetoothLogTable", null, null, new String[]{"time", "log"});
+        ArrayList dataByFields =
+                this.mEdmStorageProvider.getDataByFields(
+                        "BluetoothLogTable", null, null, new String[] {"time", "log"});
         Log.d("BluetoothPolicyService", "getBluetoothLog() - cvList: " + dataByFields);
         Iterator it = dataByFields.iterator();
         while (it.hasNext()) {
@@ -1112,9 +1313,12 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
 
     public final boolean getBluetoothLogEnabled(ContextInfo contextInfo) {
         Log.d("BluetoothPolicyService", "getBluetoothLogEnabled(true)");
-        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(-1, "getBluetoothLogEnabled - uid: ", "BluetoothPolicyService");
+        NetworkScorerAppManager$$ExternalSyntheticOutline0.m(
+                -1, "getBluetoothLogEnabled - uid: ", "BluetoothPolicyService");
         boolean z = false;
-        List valuesListAsUser = this.mEdmStorageProvider.getValuesListAsUser(0, 0, "BLUETOOTH", new String[]{"bluetoothLogEnabled"});
+        List valuesListAsUser =
+                this.mEdmStorageProvider.getValuesListAsUser(
+                        0, 0, "BLUETOOTH", new String[] {"bluetoothLogEnabled"});
         Log.d("BluetoothPolicyService", "getBluetoothLogEnabled - cvList: " + valuesListAsUser);
         Iterator it = ((ArrayList) valuesListAsUser).iterator();
         while (true) {
@@ -1128,7 +1332,8 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
                 break;
             }
         }
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("getBluetoothLogEnabled - ret: ", "BluetoothPolicyService", z);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "getBluetoothLogEnabled - ret: ", "BluetoothPolicyService", z);
         return z;
     }
 
@@ -1186,7 +1391,10 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
     }
 
     public final boolean isBLEAllowed(ContextInfo contextInfo) {
-        Iterator it = this.mEdmStorageProvider.getBooleanListAsUser(0, "BLUETOOTH", "allowBLE").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getBooleanListAsUser(0, "BLUETOOTH", "allowBLE")
+                        .iterator();
         while (it.hasNext()) {
             boolean booleanValue = ((Boolean) it.next()).booleanValue();
             if (!booleanValue) {
@@ -1219,7 +1427,10 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
     public final boolean isBluetoothEnabled(boolean z) {
         boolean z2 = false;
         if (!(getEDM$2() != null ? getEDM$2().isRestrictedByConstrainedState(8) : false)) {
-            Iterator it = this.mEdmStorageProvider.getBooleanListAsUser(0, "BLUETOOTH", "bluetoothEnabled").iterator();
+            Iterator it =
+                    this.mEdmStorageProvider
+                            .getBooleanListAsUser(0, "BLUETOOTH", "bluetoothEnabled")
+                            .iterator();
             while (true) {
                 if (!it.hasNext()) {
                     z2 = true;
@@ -1231,7 +1442,8 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
                 }
             }
         }
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("isBluetoothEnabled : ", "BluetoothPolicyService", z2);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "isBluetoothEnabled : ", "BluetoothPolicyService", z2);
         if (z && !z2) {
             RestrictionToastManager.show(R.string.config_dozeComponent);
         }
@@ -1265,7 +1477,10 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
 
     public final boolean isCallerIDDisplayAllowed(ContextInfo contextInfo) {
         try {
-            Iterator it = this.mEdmStorageProvider.getBooleanListAsUser(0, "BLUETOOTH", "allowCallerID").iterator();
+            Iterator it =
+                    this.mEdmStorageProvider
+                            .getBooleanListAsUser(0, "BLUETOOTH", "allowCallerID")
+                            .iterator();
             while (it.hasNext()) {
                 boolean booleanValue = ((Boolean) it.next()).booleanValue();
                 if (!booleanValue) {
@@ -1285,7 +1500,10 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
 
     public final boolean isDesktopConnectivityEnabled(boolean z) {
         boolean z2;
-        Iterator it = this.mEdmStorageProvider.getBooleanListAsUser(0, "BLUETOOTH", "desktopConnectivityEnabled").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getBooleanListAsUser(0, "BLUETOOTH", "desktopConnectivityEnabled")
+                        .iterator();
         while (true) {
             if (!it.hasNext()) {
                 z2 = true;
@@ -1296,7 +1514,8 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
                 break;
             }
         }
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("isDesktopConnectivityEnabled : ", "BluetoothPolicyService", z2);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "isDesktopConnectivityEnabled : ", "BluetoothPolicyService", z2);
         if (z && !z2) {
             RestrictionToastManager.show(R.string.config_deviceSpecificDevicePolicyManagerService);
         }
@@ -1305,7 +1524,10 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
 
     public final boolean isDiscoverableEnabled(ContextInfo contextInfo) {
         boolean z;
-        Iterator it = this.mEdmStorageProvider.getBooleanListAsUser(0, "BLUETOOTH", "discoverableModeEnabled").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getBooleanListAsUser(0, "BLUETOOTH", "discoverableModeEnabled")
+                        .iterator();
         while (true) {
             if (!it.hasNext()) {
                 z = true;
@@ -1316,14 +1538,18 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
                 break;
             }
         }
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("isDiscoverableEnabled : ", "BluetoothPolicyService", z);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "isDiscoverableEnabled : ", "BluetoothPolicyService", z);
         return z;
     }
 
     public final boolean isLimitedDiscoverableEnabled(ContextInfo contextInfo) {
         boolean z;
         Log.d("BluetoothPolicyService", "isLimitedDiscoverableEnabled ");
-        Iterator it = this.mEdmStorageProvider.getBooleanListAsUser(0, "BLUETOOTH", "limitedDiscoverableEnabled").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getBooleanListAsUser(0, "BLUETOOTH", "limitedDiscoverableEnabled")
+                        .iterator();
         while (true) {
             if (!it.hasNext()) {
                 z = true;
@@ -1334,7 +1560,8 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
                 break;
             }
         }
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("isLimitedDiscoverableEnabled ret:", "BluetoothPolicyService", z);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "isLimitedDiscoverableEnabled ret:", "BluetoothPolicyService", z);
         return z;
     }
 
@@ -1345,7 +1572,10 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
     public final boolean isOutgoingCallsAllowed(boolean z) {
         boolean z2;
         Log.d("BluetoothPolicyService", "isPairingEnabled ");
-        Iterator it = this.mEdmStorageProvider.getBooleanListAsUser(0, "BLUETOOTH", "allowOutgoingCalls").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getBooleanListAsUser(0, "BLUETOOTH", "allowOutgoingCalls")
+                        .iterator();
         while (true) {
             if (!it.hasNext()) {
                 z2 = true;
@@ -1368,7 +1598,10 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
 
     public final boolean isPairingEnabled(boolean z) {
         boolean z2;
-        Iterator it = this.mEdmStorageProvider.getBooleanListAsUser(0, "BLUETOOTH", "pairingEnabled").iterator();
+        Iterator it =
+                this.mEdmStorageProvider
+                        .getBooleanListAsUser(0, "BLUETOOTH", "pairingEnabled")
+                        .iterator();
         while (true) {
             if (!it.hasNext()) {
                 z2 = true;
@@ -1379,7 +1612,8 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
                 break;
             }
         }
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("isPairingEnabled ", "BluetoothPolicyService", z2);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "isPairingEnabled ", "BluetoothPolicyService", z2);
         if (z && !z2) {
             RestrictionToastManager.show(R.string.config_doublePressOnPowerTargetActivity);
         }
@@ -1391,7 +1625,8 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
             if (i <= 0) {
                 throw new InvalidParameterException();
             }
-            ArrayList intListAsUser = this.mEdmStorageProvider.getIntListAsUser(0, 0, "BLUETOOTH", "profileSettings");
+            ArrayList intListAsUser =
+                    this.mEdmStorageProvider.getIntListAsUser(0, 0, "BLUETOOTH", "profileSettings");
             if (intListAsUser.isEmpty()) {
                 return true;
             }
@@ -1421,7 +1656,9 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
         boolean z2 = true;
         try {
         } catch (InvalidParameterException unused) {
-            Log.w("BluetoothPolicyService", "isProfileEnabledInternal() failed: INVALID PARAMETER INPUT");
+            Log.w(
+                    "BluetoothPolicyService",
+                    "isProfileEnabledInternal() failed: INVALID PARAMETER INPUT");
         } catch (Exception e) {
             Log.w("BluetoothPolicyService", e.toString());
         }
@@ -1454,12 +1691,10 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
     }
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void notifyToAddSystemService(String str, IBinder iBinder) {
-    }
+    public final void notifyToAddSystemService(String str, IBinder iBinder) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void onAdminAdded(int i) {
-    }
+    public final void onAdminAdded(int i) {}
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
     public final void onAdminRemoved(int i) {
@@ -1484,8 +1719,7 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
     }
 
     @Override // com.android.server.enterprise.EnterpriseServiceCallback
-    public final void onPreAdminRemoval(int i) {
-    }
+    public final void onPreAdminRemoval(int i) {}
 
     public final boolean removeBluetoothDevicesFromBlackList(ContextInfo contextInfo, List list) {
         Log.d("BluetoothPolicyService", "removeDevicesFromBlackList");
@@ -1558,19 +1792,33 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
 
     public final boolean setAllowBluetoothDataTransfer(ContextInfo contextInfo, boolean z) {
         Log.d("BluetoothPolicyService", "setAllowBluetoothDataTransfer = " + z);
-        ContextInfo enforceOwnerOnlyAndBluetoothPermission = enforceOwnerOnlyAndBluetoothPermission(contextInfo);
+        ContextInfo enforceOwnerOnlyAndBluetoothPermission =
+                enforceOwnerOnlyAndBluetoothPermission(contextInfo);
         Binder.restoreCallingIdentity(Binder.clearCallingIdentity());
-        return this.mEdmStorageProvider.putBoolean("BLUETOOTH", enforceOwnerOnlyAndBluetoothPermission.mCallerUid, z, 0, "allowDataTransfer");
+        return this.mEdmStorageProvider.putBoolean(
+                "BLUETOOTH",
+                enforceOwnerOnlyAndBluetoothPermission.mCallerUid,
+                z,
+                0,
+                "allowDataTransfer");
     }
 
     public final boolean setBluetooth(ContextInfo contextInfo, boolean z) {
         boolean z2;
-        ContextInfo enforceOwnerOnlyAndBluetoothPermission = enforceOwnerOnlyAndBluetoothPermission(contextInfo);
-        int callingOrCurrentUserId = Utils.getCallingOrCurrentUserId(enforceOwnerOnlyAndBluetoothPermission);
+        ContextInfo enforceOwnerOnlyAndBluetoothPermission =
+                enforceOwnerOnlyAndBluetoothPermission(contextInfo);
+        int callingOrCurrentUserId =
+                Utils.getCallingOrCurrentUserId(enforceOwnerOnlyAndBluetoothPermission);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                z2 = this.mEdmStorageProvider.putBoolean("BLUETOOTH", enforceOwnerOnlyAndBluetoothPermission.mCallerUid, z, 0, "bluetoothEnabled");
+                z2 =
+                        this.mEdmStorageProvider.putBoolean(
+                                "BLUETOOTH",
+                                enforceOwnerOnlyAndBluetoothPermission.mCallerUid,
+                                z,
+                                0,
+                                "bluetoothEnabled");
                 Log.w("BluetoothPolicyService", "setBluetooth : " + z);
                 BluetoothAdapter defaultAdapter = BluetoothAdapter.getDefaultAdapter();
                 if (z && isBluetoothEnabled(false)) {
@@ -1581,7 +1829,19 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
                     new AnonymousClass2(this, 0).start();
                 }
                 if (z2) {
-                    AuditLog.logAsUser(5, 1, true, Process.myPid(), "BluetoothPolicy", String.format("Admin %d has changed bluetooth enabled to %s", Integer.valueOf(enforceOwnerOnlyAndBluetoothPermission.mCallerUid), Boolean.valueOf(z)), UserHandle.getUserId(enforceOwnerOnlyAndBluetoothPermission.mCallerUid));
+                    AuditLog.logAsUser(
+                            5,
+                            1,
+                            true,
+                            Process.myPid(),
+                            "BluetoothPolicy",
+                            String.format(
+                                    "Admin %d has changed bluetooth enabled to %s",
+                                    Integer.valueOf(
+                                            enforceOwnerOnlyAndBluetoothPermission.mCallerUid),
+                                    Boolean.valueOf(z)),
+                            UserHandle.getUserId(
+                                    enforceOwnerOnlyAndBluetoothPermission.mCallerUid));
                 }
                 Binder.restoreCallingIdentity(clearCallingIdentity);
             } catch (Exception e) {
@@ -1614,16 +1874,23 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
 
     public final boolean setBluetoothLogEnabled(ContextInfo contextInfo, boolean z) {
         Log.d("BluetoothPolicyService", "setBluetoothLogEnabled(" + z + ")");
-        ContextInfo enforceOwnerOnlyAndBluetoothPermission = enforceOwnerOnlyAndBluetoothPermission(contextInfo);
+        ContextInfo enforceOwnerOnlyAndBluetoothPermission =
+                enforceOwnerOnlyAndBluetoothPermission(contextInfo);
         ContentValues contentValues = new ContentValues();
         contentValues.put("bluetoothLogEnabled", String.valueOf(z));
-        boolean putValues = this.mEdmStorageProvider.putValues(enforceOwnerOnlyAndBluetoothPermission.mCallerUid, 0, "BLUETOOTH", contentValues);
+        boolean putValues =
+                this.mEdmStorageProvider.putValues(
+                        enforceOwnerOnlyAndBluetoothPermission.mCallerUid,
+                        0,
+                        "BLUETOOTH",
+                        contentValues);
         if (!z && !getBluetoothLogEnabled(enforceOwnerOnlyAndBluetoothPermission)) {
             Log.d("BluetoothPolicyService", "setBluetoothLogEnabled - Clean log");
             this.mEdmStorageProvider.delete("BluetoothLogTable", null);
             ((LinkedBlockingQueue) this.mLogQueue).clear();
         }
-        AccessibilityManagerService$$ExternalSyntheticOutline0.m("setBluetoothLogEnabled - return = ", "BluetoothPolicyService", putValues);
+        AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                "setBluetoothLogEnabled - return = ", "BluetoothPolicyService", putValues);
         if (putValues) {
             this.isCacheUpdated = false;
         }
@@ -1633,10 +1900,17 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
     public final boolean setDesktopConnectivityState(ContextInfo contextInfo, boolean z) {
         boolean z2;
         Log.d("BluetoothPolicyService", "setDesktopConnectivityState = " + z);
-        ContextInfo enforceOwnerOnlyAndBluetoothPermission = enforceOwnerOnlyAndBluetoothPermission(contextInfo);
+        ContextInfo enforceOwnerOnlyAndBluetoothPermission =
+                enforceOwnerOnlyAndBluetoothPermission(contextInfo);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
-            z2 = this.mEdmStorageProvider.putBoolean("BLUETOOTH", enforceOwnerOnlyAndBluetoothPermission.mCallerUid, z, 0, "desktopConnectivityEnabled");
+            z2 =
+                    this.mEdmStorageProvider.putBoolean(
+                            "BLUETOOTH",
+                            enforceOwnerOnlyAndBluetoothPermission.mCallerUid,
+                            z,
+                            0,
+                            "desktopConnectivityEnabled");
             BluetoothAdapter defaultAdapter = BluetoothAdapter.getDefaultAdapter();
             if (!z && z2 && defaultAdapter != null && defaultAdapter.isEnabled()) {
                 disableDesktopConnectivity();
@@ -1650,14 +1924,26 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
     }
 
     public final boolean setDiscoverableState(ContextInfo contextInfo, boolean z) {
-        ContextInfo enforceOwnerOnlyAndBluetoothPermission = enforceOwnerOnlyAndBluetoothPermission(contextInfo);
+        ContextInfo enforceOwnerOnlyAndBluetoothPermission =
+                enforceOwnerOnlyAndBluetoothPermission(contextInfo);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                boolean putBoolean = this.mEdmStorageProvider.putBoolean("BLUETOOTH", enforceOwnerOnlyAndBluetoothPermission.mCallerUid, z, 0, "discoverableModeEnabled");
+                boolean putBoolean =
+                        this.mEdmStorageProvider.putBoolean(
+                                "BLUETOOTH",
+                                enforceOwnerOnlyAndBluetoothPermission.mCallerUid,
+                                z,
+                                0,
+                                "discoverableModeEnabled");
                 Log.w("BluetoothPolicyService", "setDiscoverableState : " + z);
                 if (putBoolean) {
-                    AuditLog.logEventAsUser(UserHandle.getUserId(enforceOwnerOnlyAndBluetoothPermission.mCallerUid), z ? 28 : 29, new Object[]{Integer.valueOf(enforceOwnerOnlyAndBluetoothPermission.mCallerUid)});
+                    AuditLog.logEventAsUser(
+                            UserHandle.getUserId(enforceOwnerOnlyAndBluetoothPermission.mCallerUid),
+                            z ? 28 : 29,
+                            new Object[] {
+                                Integer.valueOf(enforceOwnerOnlyAndBluetoothPermission.mCallerUid)
+                            });
                 }
                 return putBoolean;
             } catch (Exception e) {
@@ -1671,14 +1957,36 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
     }
 
     public final boolean setLimitedDiscoverableState(ContextInfo contextInfo, boolean z) {
-        ContextInfo enforceOwnerOnlyAndBluetoothPermission = enforceOwnerOnlyAndBluetoothPermission(contextInfo);
+        ContextInfo enforceOwnerOnlyAndBluetoothPermission =
+                enforceOwnerOnlyAndBluetoothPermission(contextInfo);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         try {
             try {
-                boolean putBoolean = this.mEdmStorageProvider.putBoolean("BLUETOOTH", enforceOwnerOnlyAndBluetoothPermission.mCallerUid, z, 0, "limitedDiscoverableEnabled");
+                boolean putBoolean =
+                        this.mEdmStorageProvider.putBoolean(
+                                "BLUETOOTH",
+                                enforceOwnerOnlyAndBluetoothPermission.mCallerUid,
+                                z,
+                                0,
+                                "limitedDiscoverableEnabled");
                 Log.w("BluetoothPolicyService", "setLimitedDiscoverableState : " + z);
                 if (putBoolean) {
-                    AuditLog.logAsUser(5, 1, true, Process.myPid(), "BluetoothPolicy", String.format(z ? "Admin %d has enabled bluetooth limited discoverable state." : "Admin %d has disabled bluetooth limited discoverable state.", Integer.valueOf(enforceOwnerOnlyAndBluetoothPermission.mCallerUid)), UserHandle.getUserId(enforceOwnerOnlyAndBluetoothPermission.mCallerUid));
+                    AuditLog.logAsUser(
+                            5,
+                            1,
+                            true,
+                            Process.myPid(),
+                            "BluetoothPolicy",
+                            String.format(
+                                    z
+                                            ? "Admin %d has enabled bluetooth limited discoverable"
+                                                  + " state."
+                                            : "Admin %d has disabled bluetooth limited discoverable"
+                                                  + " state.",
+                                    Integer.valueOf(
+                                            enforceOwnerOnlyAndBluetoothPermission.mCallerUid)),
+                            UserHandle.getUserId(
+                                    enforceOwnerOnlyAndBluetoothPermission.mCallerUid));
                 }
                 Binder.restoreCallingIdentity(clearCallingIdentity);
                 return putBoolean;
@@ -1695,21 +2003,30 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
 
     public final boolean setPairingState(ContextInfo contextInfo, boolean z) {
         Log.d("BluetoothPolicyService", "setPairingState = " + z);
-        return this.mEdmStorageProvider.putBoolean("BLUETOOTH", enforceOwnerOnlyAndBluetoothPermission(contextInfo).mCallerUid, z, 0, "pairingEnabled");
+        return this.mEdmStorageProvider.putBoolean(
+                "BLUETOOTH",
+                enforceOwnerOnlyAndBluetoothPermission(contextInfo).mCallerUid,
+                z,
+                0,
+                "pairingEnabled");
     }
 
     public final boolean setProfileState(ContextInfo contextInfo, boolean z, int i) {
         int i2;
         Log.d("BluetoothPolicyService", "setProfileState = " + i + " state " + z);
-        ContextInfo enforceOwnerOnlyAndBluetoothPermission = enforceOwnerOnlyAndBluetoothPermission(contextInfo);
+        ContextInfo enforceOwnerOnlyAndBluetoothPermission =
+                enforceOwnerOnlyAndBluetoothPermission(contextInfo);
         int i3 = enforceOwnerOnlyAndBluetoothPermission.mCallerUid;
-        int callingOrCurrentUserId = Utils.getCallingOrCurrentUserId(enforceOwnerOnlyAndBluetoothPermission);
+        int callingOrCurrentUserId =
+                Utils.getCallingOrCurrentUserId(enforceOwnerOnlyAndBluetoothPermission);
         long clearCallingIdentity = Binder.clearCallingIdentity();
         boolean z2 = false;
         try {
             try {
             } catch (InvalidParameterException unused) {
-                Log.w("BluetoothPolicyService", "setProfileState() failed: INVALID PARAMETER INPUT");
+                Log.w(
+                        "BluetoothPolicyService",
+                        "setProfileState() failed: INVALID PARAMETER INPUT");
             } catch (Exception e) {
                 Log.w("BluetoothPolicyService", e.toString());
             }
@@ -1721,7 +2038,9 @@ public final class BluetoothPolicy extends IBluetoothPolicy.Stub implements Ente
             } catch (SettingNotFoundException unused2) {
                 i2 = GnssNative.GNSS_AIDING_TYPE_ALL;
             }
-            z2 = this.mEdmStorageProvider.putInt(i3, 0, true == z ? i2 | i : i2 & (~i), "BLUETOOTH", "profileSettings");
+            z2 =
+                    this.mEdmStorageProvider.putInt(
+                            i3, 0, true == z ? i2 | i : i2 & (~i), "BLUETOOTH", "profileSettings");
             if (z2) {
                 auditLogMessage(i3, i, callingOrCurrentUserId, z);
             }

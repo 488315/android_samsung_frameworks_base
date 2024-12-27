@@ -16,19 +16,22 @@ public class SemMotionRecognitionEvent implements Parcelable {
     public static final int CALLPOSE_L = 76;
     public static final int CALLPOSE_NONE = 100;
     public static final int CALLPOSE_R = 77;
-    public static final Parcelable.Creator<SemMotionRecognitionEvent> CREATOR = new Parcelable.Creator<SemMotionRecognitionEvent>() { // from class: com.samsung.android.gesture.SemMotionRecognitionEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemMotionRecognitionEvent createFromParcel(Parcel in) {
-            return new SemMotionRecognitionEvent(in);
-        }
+    public static final Parcelable.Creator<SemMotionRecognitionEvent> CREATOR =
+            new Parcelable.Creator<
+                    SemMotionRecognitionEvent>() { // from class:
+                                                   // com.samsung.android.gesture.SemMotionRecognitionEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemMotionRecognitionEvent createFromParcel(Parcel in) {
+                    return new SemMotionRecognitionEvent(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemMotionRecognitionEvent[] newArray(int size) {
-            return new SemMotionRecognitionEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemMotionRecognitionEvent[] newArray(int size) {
+                    return new SemMotionRecognitionEvent[size];
+                }
+            };
     public static final int DIRECT_CALL = 68;
     public static final int DIRECT_CALL_LEFT = 101;
     public static final int DIRECT_CALL_RIGHT = 102;
@@ -56,8 +59,7 @@ public class SemMotionRecognitionEvent implements Parcelable {
     public static final int ROTATION_AXIS_Y = 95;
     public static final int ROTATION_AXIS_Z = 96;
 
-    @Deprecated
-    public static final int SCREEN_UP_STEADY = 99;
+    @Deprecated public static final int SCREEN_UP_STEADY = 99;
     public static final int SHAKE = 34;
     public static final int SHAKE_START = 35;
     public static final int SHAKE_STOP = 36;
@@ -67,8 +69,7 @@ public class SemMotionRecognitionEvent implements Parcelable {
     public static final int SMART_ALERT = 67;
     public static final int SMART_ALERT_SETTING = 98;
 
-    @Deprecated
-    public static final int SMART_RELAY = 113;
+    @Deprecated public static final int SMART_RELAY = 113;
     public static final int SMART_SCROLL_CAMERA_OFF = 111;
     public static final int SMART_SCROLL_CAMERA_ON = 112;
     public static final int SMART_SCROLL_TILT_DOWN_START = 104;

@@ -18,12 +18,10 @@ public interface ICoverService extends IInterface {
 
     public static class Default implements ICoverService {
         @Override // com.samsung.android.cover.ICoverService
-        public void onSystemReady() throws RemoteException {
-        }
+        public void onSystemReady() throws RemoteException {}
 
         @Override // com.samsung.android.cover.ICoverService
-        public void onUpdateCoverState(CoverState state) throws RemoteException {
-        }
+        public void onUpdateCoverState(CoverState state) throws RemoteException {}
 
         @Override // com.samsung.android.cover.ICoverService
         public int onCoverAppCovered(boolean covered) throws RemoteException {
@@ -36,7 +34,7 @@ public interface ICoverService extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICoverService {
+    public abstract static class Stub extends Binder implements ICoverService {
         static final int TRANSACTION_onCoverAppCovered = 3;
         static final int TRANSACTION_onSystemReady = 1;
         static final int TRANSACTION_onUpdateCoverState = 2;
@@ -80,7 +78,8 @@ public interface ICoverService extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICoverService.DESCRIPTOR);
             }

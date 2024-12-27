@@ -57,6 +57,7 @@ import android.view.inputmethod.ImeTracker;
 import android.window.ActivityWindowInfo;
 import android.window.ClientWindowFrames;
 import android.window.OnBackInvokedCallbackInfo;
+
 import com.android.internal.policy.KeyInterceptionInfo;
 import com.android.internal.protolog.ProtoLogGroup;
 import com.android.internal.protolog.ProtoLogImpl_54989576;
@@ -76,20 +77,14 @@ import com.android.server.chimera.AggressivePolicyHandler$$ExternalSyntheticOutl
 import com.android.server.media.MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0;
 import com.android.server.policy.PhoneWindowManagerExt;
 import com.android.server.policy.WindowManagerPolicy;
-import com.android.server.wm.AsyncRotationController;
-import com.android.server.wm.BLASTSyncEngine;
-import com.android.server.wm.BackNavigationController;
-import com.android.server.wm.DisplayContent;
-import com.android.server.wm.EmbeddedWindowController;
-import com.android.server.wm.LocalAnimationAdapter;
-import com.android.server.wm.RefreshRatePolicy;
-import com.android.server.wm.WindowManagerInternal;
-import com.android.server.wm.WindowManagerService;
 import com.android.window.flags.Flags;
+
+import dalvik.annotation.optimization.NeverCompile;
+
 import com.samsung.android.knox.localservice.RestrictionPolicyInternal;
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
 import com.samsung.android.rune.CoreRune;
-import dalvik.annotation.optimization.NeverCompile;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.ref.WeakReference;
@@ -102,7 +97,8 @@ import java.util.function.Predicate;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class WindowState extends WindowContainer implements WindowManagerPolicy.WindowState, InputTarget {
+public final class WindowState extends WindowContainer
+        implements WindowManagerPolicy.WindowState, InputTarget {
     public static final int MINIMUM_VISIBLE_WIDTH_IN_DP;
     public static final int RESIZE_HANDLE_WIDTH_IN_DP;
     public static final StringBuilder sTmpSB;
@@ -302,19 +298,26 @@ public final class WindowState extends WindowContainer implements WindowManagerP
                 i5 = R.anim.voice_layer_exit;
             }
             Animation loadAnimation = AnimationUtils.loadAnimation(context, i5);
-            this.mDuration = (long) (windowState.mWmService.getWindowAnimationScaleLocked() * loadAnimation.computeDurationHint());
+            this.mDuration =
+                    (long)
+                            (windowState.mWmService.getWindowAnimationScaleLocked()
+                                    * loadAnimation.computeDurationHint());
             this.mInterpolator = loadAnimation.getInterpolator();
             point.set(i, i2);
             point2.set(i3, i4);
         }
 
         @Override // com.android.server.wm.LocalAnimationAdapter.AnimationSpec
-        public final void apply(SurfaceControl.Transaction transaction, SurfaceControl surfaceControl, long j) {
+        public final void apply(
+                SurfaceControl.Transaction transaction, SurfaceControl surfaceControl, long j) {
             float interpolation = this.mInterpolator.getInterpolation(getFraction(j));
             Point point = this.mFrom;
             int i = point.x;
             Point point2 = this.mTo;
-            transaction.setPosition(surfaceControl, ((point2.x - i) * interpolation) + i, ((point2.y - r7) * interpolation) + point.y);
+            transaction.setPosition(
+                    surfaceControl,
+                    ((point2.x - i) * interpolation) + i,
+                    ((point2.y - r7) * interpolation) + point.y);
         }
 
         @Override // com.android.server.wm.LocalAnimationAdapter.AnimationSpec
@@ -382,7 +385,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         public final void registerFocusObserver(IWindowFocusObserver iWindowFocusObserver) {
             WindowState windowState = (WindowState) this.mOuter.get();
             if (windowState != null) {
-                WindowManagerGlobalLock windowManagerGlobalLock = windowState.mWmService.mGlobalLock;
+                WindowManagerGlobalLock windowManagerGlobalLock =
+                        windowState.mWmService.mGlobalLock;
                 WindowManagerService.boostPriorityForLockedSection();
                 synchronized (windowManagerGlobalLock) {
                     try {
@@ -402,7 +406,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         public final void unregisterFocusObserver(IWindowFocusObserver iWindowFocusObserver) {
             WindowState windowState = (WindowState) this.mOuter.get();
             if (windowState != null) {
-                WindowManagerGlobalLock windowManagerGlobalLock = windowState.mWmService.mGlobalLock;
+                WindowManagerGlobalLock windowManagerGlobalLock =
+                        windowState.mWmService.mGlobalLock;
                 WindowManagerService.boostPriorityForLockedSection();
                 synchronized (windowManagerGlobalLock) {
                     try {
@@ -428,13 +433,13 @@ public final class WindowState extends WindowContainer implements WindowManagerP
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:73:0x0327, code lost:
-    
-        if (r22.mActivityRecord.info.applicationInfo.isUpdatedSystemApp() == false) goto L108;
-     */
+
+       if (r22.mActivityRecord.info.applicationInfo.isUpdatedSystemApp() == false) goto L108;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:81:0x0350, code lost:
-    
-        if (r0.isUpdatedSystemApp() != false) goto L109;
-     */
+
+       if (r0.isUpdatedSystemApp() != false) goto L109;
+    */
     /* JADX WARN: Removed duplicated region for block: B:107:0x03b7  */
     /* JADX WARN: Removed duplicated region for block: B:110:0x03c2  */
     /* JADX WARN: Removed duplicated region for block: B:115:0x0397  */
@@ -447,12 +452,28 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public WindowState(com.android.server.wm.WindowManagerService r23, com.android.server.wm.Session r24, android.view.IWindow r25, com.android.server.wm.WindowToken r26, com.android.server.wm.WindowState r27, int r28, android.view.WindowManager.LayoutParams r29, int r30, int r31, int r32, boolean r33) {
+    public WindowState(
+            com.android.server.wm.WindowManagerService r23,
+            com.android.server.wm.Session r24,
+            android.view.IWindow r25,
+            com.android.server.wm.WindowToken r26,
+            com.android.server.wm.WindowState r27,
+            int r28,
+            android.view.WindowManager.LayoutParams r29,
+            int r30,
+            int r31,
+            int r32,
+            boolean r33) {
         /*
             Method dump skipped, instructions count: 1074
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.WindowState.<init>(com.android.server.wm.WindowManagerService, com.android.server.wm.Session, android.view.IWindow, com.android.server.wm.WindowToken, com.android.server.wm.WindowState, int, android.view.WindowManager$LayoutParams, int, int, int, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.WindowState.<init>(com.android.server.wm.WindowManagerService,"
+                    + " com.android.server.wm.Session, android.view.IWindow,"
+                    + " com.android.server.wm.WindowToken, com.android.server.wm.WindowState, int,"
+                    + " android.view.WindowManager$LayoutParams, int, int, int, boolean):void");
     }
 
     public final void adjustImeParamsForDex(boolean z) {
@@ -469,7 +490,9 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             }
             if (z) {
                 DexController dexController = this.mWmService.mAtmService.mDexController;
-                if (dexController.getDexModeLocked() == 2 && !dexController.mDexTouchPadEnabled && dexController.shouldShowDexImeInDefaultDisplayLocked()) {
+                if (dexController.getDexModeLocked() == 2
+                        && !dexController.mDexTouchPadEnabled
+                        && dexController.shouldShowDexImeInDefaultDisplayLocked()) {
                     WindowManager.LayoutParams layoutParams2 = this.mAttrs;
                     layoutParams2.flags |= 2;
                     layoutParams2.samsungFlags |= 64;
@@ -489,7 +512,9 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             if (rootTask.isFreeformStashed()) {
                 rect.set(rootTask.getStashedBounds());
             }
-            int i = -WindowManagerService.dipToPixel(RESIZE_HANDLE_WIDTH_IN_DP, getDisplayContent().mDisplayMetrics);
+            int i =
+                    -WindowManagerService.dipToPixel(
+                            RESIZE_HANDLE_WIDTH_IN_DP, getDisplayContent().mDisplayMetrics);
             rect.inset(i, i);
         }
     }
@@ -498,7 +523,9 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         ActivityRecord activityRecord;
         WindowState windowState;
         WindowManager.LayoutParams layoutParams = this.mAttrs;
-        if (layoutParams.type != 1 || (activityRecord = this.mActivityRecord) == null || (windowState = activityRecord.mStartingWindow) == null) {
+        if (layoutParams.type != 1
+                || (activityRecord = this.mActivityRecord) == null
+                || (windowState = activityRecord.mStartingWindow) == null) {
             return;
         }
         WindowManager.LayoutParams layoutParams2 = windowState.mAttrs;
@@ -511,20 +538,38 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         }
         InputTarget inputTarget = this.mDisplayContent.mImeInputTarget;
         WindowState windowState = inputTarget != null ? inputTarget.getWindowState() : null;
-        if (windowState == null || windowState.isDrawn() || windowState.isVisibleRequested() || (getDisplayId() == 0 && getTask() == null && this.mWmService.mAtmService.mDexController.getDexModeLocked() == 2 && this.mWmService.mAtmService.mDexController.shouldShowDexImeInDefaultDisplayLocked())) {
-            return this.mDisplayContent.mImeWindowsContainer.forAllWindowForce(toBooleanFunction, z);
+        if (windowState == null
+                || windowState.isDrawn()
+                || windowState.isVisibleRequested()
+                || (getDisplayId() == 0
+                        && getTask() == null
+                        && this.mWmService.mAtmService.mDexController.getDexModeLocked() == 2
+                        && this.mWmService.mAtmService.mDexController
+                                .shouldShowDexImeInDefaultDisplayLocked())) {
+            return this.mDisplayContent.mImeWindowsContainer.forAllWindowForce(
+                    toBooleanFunction, z);
         }
         return false;
     }
 
-    public final boolean applyInOrderWithImeWindows(ToBooleanFunction toBooleanFunction, boolean z) {
-        return z ? applyImeWindowsIfNeeded(toBooleanFunction, z) || toBooleanFunction.apply(this) : toBooleanFunction.apply(this) || applyImeWindowsIfNeeded(toBooleanFunction, z);
+    public final boolean applyInOrderWithImeWindows(
+            ToBooleanFunction toBooleanFunction, boolean z) {
+        return z
+                ? applyImeWindowsIfNeeded(toBooleanFunction, z) || toBooleanFunction.apply(this)
+                : toBooleanFunction.apply(this) || applyImeWindowsIfNeeded(toBooleanFunction, z);
     }
 
     public final void applyWithNextDraw(int i, Consumer consumer) {
         ActivityRecord activityRecord;
         if (this.mSyncState != 0) {
-            Slog.w("WindowManager", "applyWithNextDraw with mSyncState=" + this.mSyncState + ", " + this + ", " + Debug.getCallers(8));
+            Slog.w(
+                    "WindowManager",
+                    "applyWithNextDraw with mSyncState="
+                            + this.mSyncState
+                            + ", "
+                            + this
+                            + ", "
+                            + Debug.getCallers(8));
         }
         int i2 = this.mSyncSeqId + 1;
         this.mSyncSeqId = i2;
@@ -537,7 +582,9 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         ArrayList arrayList = (ArrayList) this.mDrawHandlers;
         DrawHandler drawHandler2 = (DrawHandler) arrayList.get(arrayList.size() - 1);
         drawHandler2.mType = i;
-        if (CoreRune.MW_PIP_SHELL_TRANSITION && (activityRecord = this.mActivityRecord) != null && activityRecord.mIsEnteringPipFromSplit) {
+        if (CoreRune.MW_PIP_SHELL_TRANSITION
+                && (activityRecord = this.mActivityRecord) != null
+                && activityRecord.mIsEnteringPipFromSplit) {
             drawHandler2.mIsEnteringPipFromSplit = true;
         }
         StringBuilder sb = new StringBuilder("applyWithNextDraw, mSyncSeqId=");
@@ -572,14 +619,16 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             int i3 = windowState.mAttrs.type;
             if (i3 == 1001) {
                 if (this.mWinAnimator.hasSurface()) {
-                    windowState.assignRelativeLayer(transaction, this.mWinAnimator.mSurfaceController.mSurfaceControl, -2);
+                    windowState.assignRelativeLayer(
+                            transaction, this.mWinAnimator.mSurfaceController.mSurfaceControl, -2);
                 } else {
                     windowState.assignLayer(transaction, -2);
                 }
             } else if (i3 != 1004) {
                 windowState.assignLayer(transaction, i);
             } else if (this.mWinAnimator.hasSurface()) {
-                windowState.assignRelativeLayer(transaction, this.mWinAnimator.mSurfaceController.mSurfaceControl, -1);
+                windowState.assignRelativeLayer(
+                        transaction, this.mWinAnimator.mSurfaceController.mSurfaceControl, -1);
             } else {
                 windowState.assignLayer(transaction, -1);
             }
@@ -589,29 +638,29 @@ public final class WindowState extends WindowContainer implements WindowManagerP
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:33:0x0085, code lost:
-    
-        if (r6.mWmService.mAtmService.mDexController.shouldShowDexImeInDefaultDisplayLocked() == false) goto L85;
-     */
+
+       if (r6.mWmService.mAtmService.mDexController.shouldShowDexImeInDefaultDisplayLocked() == false) goto L85;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:34:0x011e, code lost:
-    
-        assignRelativeLayer(r7, getDisplayContent().mImeWindowsContainer.getSurfaceControl(), 1);
-     */
+
+       assignRelativeLayer(r7, getDisplayContent().mImeWindowsContainer.getSurfaceControl(), 1);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:35:0x012c, code lost:
-    
-        return;
-     */
+
+       return;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:48:0x00ef, code lost:
-    
-        if ((r0.flags & 131072) != 0) goto L85;
-     */
+
+       if ((r0.flags & 131072) != 0) goto L85;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:61:0x011c, code lost:
-    
-        if (r1.compareTo((com.android.server.wm.WindowContainer) r6) <= 0) goto L85;
-     */
+
+       if (r1.compareTo((com.android.server.wm.WindowContainer) r6) <= 0) goto L85;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:81:0x00c3, code lost:
-    
-        if (r1.compareTo((com.android.server.wm.WindowContainer) r6) <= 0) goto L85;
-     */
+
+       if (r1.compareTo((com.android.server.wm.WindowContainer) r6) <= 0) goto L85;
+    */
     /* JADX WARN: Removed duplicated region for block: B:38:0x00d0  */
     /* JADX WARN: Removed duplicated region for block: B:47:0x00ec  */
     /* JADX WARN: Removed duplicated region for block: B:57:0x0110  */
@@ -627,12 +676,22 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             Method dump skipped, instructions count: 305
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.WindowState.assignLayer(android.view.SurfaceControl$Transaction, int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.WindowState.assignLayer(android.view.SurfaceControl$Transaction,"
+                    + " int):void");
     }
 
     public final boolean canBeHiddenByKeyguard() {
         int i;
-        if (this.mWmService.mExt.mExtraDisplayPolicy.hasCoverHome(getDisplayId()) || this.mActivityRecord != null || (i = this.mAttrs.type) == 2000 || i == 2013 || i == 2019 || i == 2040 || this.mDisplayContent.mDisplayPolicy.mExt.mTaskbarController.mTaskbarWin == this) {
+        if (this.mWmService.mExt.mExtraDisplayPolicy.hasCoverHome(getDisplayId())
+                || this.mActivityRecord != null
+                || (i = this.mAttrs.type) == 2000
+                || i == 2013
+                || i == 2019
+                || i == 2040
+                || this.mDisplayContent.mDisplayPolicy.mExt.mTaskbarController.mTaskbarWin
+                        == this) {
             return false;
         }
         this.mPolicy.getClass();
@@ -660,14 +719,19 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         if (layoutParams.type != 3 && (i = layoutParams.flags & 131080) != 0 && i != 131080) {
             return false;
         }
-        if (rootTask != null && (activityRecord2 = this.mActivityRecord) != null && this.mTransitionController.isTransientLaunch(activityRecord2)) {
+        if (rootTask != null
+                && (activityRecord2 = this.mActivityRecord) != null
+                && this.mTransitionController.isTransientLaunch(activityRecord2)) {
             return false;
         }
         if (!isVisibleRequestedOrAdding()) {
-            if (!isVisible() || (activityRecord = this.mActivityRecord) == null || !activityRecord.mVisible) {
+            if (!isVisible()
+                    || (activityRecord = this.mActivityRecord) == null
+                    || !activityRecord.mVisible) {
                 return false;
             }
-            if (CoreRune.FW_SHELL_TRANSITION_BUG_FIX && !this.mTransitionController.hasTransientLaunch(this.mDisplayContent)) {
+            if (CoreRune.FW_SHELL_TRANSITION_BUG_FIX
+                    && !this.mTransitionController.hasTransientLaunch(this.mDisplayContent)) {
                 return false;
             }
         }
@@ -677,15 +741,22 @@ public final class WindowState extends WindowContainer implements WindowManagerP
     public final boolean canPlayMoveAnimation() {
         ActivityRecord activityRecord = this.mActivityRecord;
         if (activityRecord == null || !activityRecord.hasStartingWindow()) {
-            return this.mToken.okToAnimate() && (this.mAttrs.privateFlags & 64) == 0 && !this.mDragResizing && (getTask() == null ? getWindowConfiguration().hasMovementAnimations() : getTask().getWindowConfiguration().hasMovementAnimations()) && !this.mWinAnimator.mLastHidden && !this.mSeamlesslyRotated;
+            return this.mToken.okToAnimate()
+                    && (this.mAttrs.privateFlags & 64) == 0
+                    && !this.mDragResizing
+                    && (getTask() == null
+                            ? getWindowConfiguration().hasMovementAnimations()
+                            : getTask().getWindowConfiguration().hasMovementAnimations())
+                    && !this.mWinAnimator.mLastHidden
+                    && !this.mSeamlesslyRotated;
         }
         return false;
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:28:0x004b, code lost:
-    
-        if (r0.isFocusedRootTaskOnDisplay() == false) goto L38;
-     */
+
+       if (r0.isFocusedRootTaskOnDisplay() == false) goto L38;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -747,22 +818,34 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         L69:
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.WindowState.canReceiveKeys(boolean):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.WindowState.canReceiveKeys(boolean):boolean");
     }
 
     public final boolean canReceiveTouchInput() {
         ActivityRecord activityRecord = this.mActivityRecord;
-        if (activityRecord == null || activityRecord.task == null || this.mTransitionController.shouldKeepFocus(activityRecord)) {
+        if (activityRecord == null
+                || activityRecord.task == null
+                || this.mTransitionController.shouldKeepFocus(activityRecord)) {
             return true;
         }
-        BackNavigationController backNavigationController = this.mWmService.mAtmService.mBackNavigationController;
+        BackNavigationController backNavigationController =
+                this.mWmService.mAtmService.mBackNavigationController;
         ActivityRecord activityRecord2 = this.mActivityRecord;
-        BackNavigationController.AnimationHandler animationHandler = backNavigationController.mAnimationHandler;
-        if (animationHandler.mComposed && backNavigationController.mWaitTransitionFinish == null && animationHandler.isTarget(activityRecord2, activityRecord2.isVisibleRequested())) {
+        BackNavigationController.AnimationHandler animationHandler =
+                backNavigationController.mAnimationHandler;
+        if (animationHandler.mComposed
+                && backNavigationController.mWaitTransitionFinish == null
+                && animationHandler.isTarget(
+                        activityRecord2, activityRecord2.isVisibleRequested())) {
             return false;
         }
         Task rootTask = this.mActivityRecord.task.getRootTask();
-        return !(rootTask.mAtmService.mHasLeanbackFeature && rootTask.inPinnedWindowingMode() && !rootTask.isFocusedRootTaskOnDisplay()) && this.mActivityRecord.isVisibleRequested();
+        return !(rootTask.mAtmService.mHasLeanbackFeature
+                        && rootTask.inPinnedWindowingMode()
+                        && !rootTask.isFocusedRootTaskOnDisplay())
+                && this.mActivityRecord.isVisibleRequested();
     }
 
     @Override // com.android.server.wm.InputTarget
@@ -777,7 +860,9 @@ public final class WindowState extends WindowContainer implements WindowManagerP
 
     public final boolean canShowWhenLocked() {
         ActivityRecord activityRecord = this.mActivityRecord;
-        return activityRecord != null ? activityRecord.canShowWhenLocked() : (this.mAttrs.flags & 524288) != 0;
+        return activityRecord != null
+                ? activityRecord.canShowWhenLocked()
+                : (this.mAttrs.flags & 524288) != 0;
     }
 
     public final boolean clearAnimatingFlags() {
@@ -787,7 +872,12 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             if (this.mAnimatingExit) {
                 this.mAnimatingExit = false;
                 if (ProtoLogImpl_54989576.Cache.WM_DEBUG_ANIM_enabled[0]) {
-                    ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_ANIM, -3153130647145726082L, 0, null, String.valueOf(this));
+                    ProtoLogImpl_54989576.d(
+                            ProtoLogGroup.WM_DEBUG_ANIM,
+                            -3153130647145726082L,
+                            0,
+                            null,
+                            String.valueOf(this));
                 }
                 z = true;
             } else {
@@ -824,7 +914,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             this.mWinAnimator.prepareSurfaceLocked(transaction);
         }
         for (int size = this.mChildren.size() - 1; size >= 0; size--) {
-            commitFinishDrawingLocked |= ((WindowState) this.mChildren.get(size)).commitFinishDrawing(transaction);
+            commitFinishDrawingLocked |=
+                    ((WindowState) this.mChildren.get(size)).commitFinishDrawing(transaction);
         }
         if (getAnimationLeash() != null) {
             transaction.merge(getSyncTransaction());
@@ -837,7 +928,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         if (task == null) {
             return false;
         }
-        if ((!inFreeformWindowingMode() && !task.getRootTask().mCreatedByOrganizer) || task.getActivityType() == 2) {
+        if ((!inFreeformWindowingMode() && !task.getRootTask().mCreatedByOrganizer)
+                || task.getActivityType() == 2) {
             return false;
         }
         WindowManager.LayoutParams layoutParams = this.mAttrs;
@@ -860,7 +952,10 @@ public final class WindowState extends WindowContainer implements WindowManagerP
     public final void cropRegionToRootTaskBoundsIfNeeded(Region region) {
         Task rootTask;
         Task task = getTask();
-        if (task == null || !task.cropWindowsToRootTaskBounds() || (rootTask = task.getRootTask()) == null || rootTask.mCreatedByOrganizer) {
+        if (task == null
+                || !task.cropWindowsToRootTaskBounds()
+                || (rootTask = task.getRootTask()) == null
+                || rootTask.mCreatedByOrganizer) {
             return;
         }
         rootTask.getDimBounds(this.mTmpRect);
@@ -876,7 +971,20 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         }
         if ((z2 || this.mWindowRemovalAllowed || z) && this.mDestroying) {
             if (ProtoLogImpl_54989576.Cache.WM_FORCE_DEBUG_ADD_REMOVE_enabled[4]) {
-                ProtoLogImpl_54989576.e(ProtoLogGroup.WM_FORCE_DEBUG_ADD_REMOVE, -5801540178617093985L, 2044, "win=%s destroySurfaces: appStopped=%b cleanupOnResume=%b win.mWindowRemovalAllowed=%b win.mRemoveOnExit=%b win.mViewVisibility=%d caller=%s", String.valueOf(this), Boolean.valueOf(z2), Boolean.valueOf(z), Boolean.valueOf(this.mWindowRemovalAllowed), Boolean.valueOf(this.mRemoveOnExit), Long.valueOf(this.mViewVisibility), String.valueOf(Debug.getCallers(7)));
+                ProtoLogImpl_54989576.e(
+                        ProtoLogGroup.WM_FORCE_DEBUG_ADD_REMOVE,
+                        -5801540178617093985L,
+                        2044,
+                        "win=%s destroySurfaces: appStopped=%b cleanupOnResume=%b"
+                            + " win.mWindowRemovalAllowed=%b win.mRemoveOnExit=%b"
+                            + " win.mViewVisibility=%d caller=%s",
+                        String.valueOf(this),
+                        Boolean.valueOf(z2),
+                        Boolean.valueOf(z),
+                        Boolean.valueOf(this.mWindowRemovalAllowed),
+                        Boolean.valueOf(this.mRemoveOnExit),
+                        Long.valueOf(this.mViewVisibility),
+                        String.valueOf(Debug.getCallers(7)));
             }
             if (!z || this.mRemoveOnExit) {
                 destroySurfaceUnchecked();
@@ -888,7 +996,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
                 requestUpdateWallpaperIfNeeded();
             }
             this.mDestroying = false;
-            if (!getDisplayContent().mAppTransition.isTransitionSet() || !getDisplayContent().mOpeningApps.contains(this.mActivityRecord)) {
+            if (!getDisplayContent().mAppTransition.isTransitionSet()
+                    || !getDisplayContent().mOpeningApps.contains(this.mActivityRecord)) {
                 return true;
             }
             this.mWmService.mWindowPlacerLocked.requestTraversal();
@@ -902,7 +1011,12 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         this.mTmpTransaction.apply();
         this.mAnimatingExit = false;
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_ANIM_enabled[0]) {
-            ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_ANIM, 7336961102428192483L, 0, null, String.valueOf(this));
+            ProtoLogImpl_54989576.d(
+                    ProtoLogGroup.WM_DEBUG_ANIM,
+                    7336961102428192483L,
+                    0,
+                    null,
+                    String.valueOf(this));
         }
         if (syncNextBuffer()) {
             finishDrawing(null, Integer.MAX_VALUE);
@@ -928,7 +1042,10 @@ public final class WindowState extends WindowContainer implements WindowManagerP
 
     public final void dropBufferFrom(SurfaceControl.Transaction transaction) {
         WindowStateAnimator windowStateAnimator = this.mWinAnimator;
-        SurfaceControl surfaceControl = !windowStateAnimator.hasSurface() ? null : windowStateAnimator.mSurfaceController.mSurfaceControl;
+        SurfaceControl surfaceControl =
+                !windowStateAnimator.hasSurface()
+                        ? null
+                        : windowStateAnimator.mSurfaceController.mSurfaceControl;
         if (surfaceControl == null) {
             return;
         }
@@ -956,7 +1073,16 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             printWriter.print(sb.toString());
         }
         printWriter.println(" mSession=" + this.mSession + " mClient=" + this.mClient.asBinder());
-        printWriter.println(str + "mOwnerUid=" + this.mOwnerUid + " showForAllUsers=" + showForAllUsers() + " package=" + this.mAttrs.packageName + " appop=" + AppOpsManager.opToName(this.mAppOp));
+        printWriter.println(
+                str
+                        + "mOwnerUid="
+                        + this.mOwnerUid
+                        + " showForAllUsers="
+                        + showForAllUsers()
+                        + " package="
+                        + this.mAttrs.packageName
+                        + " appop="
+                        + AppOpsManager.opToName(this.mAppOp));
         StringBuilder sb2 = new StringBuilder();
         sb2.append(str);
         sb2.append("mAttrs=");
@@ -970,17 +1096,20 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         sb3.append(this.mRequestedHeight);
         sb3.append(" mLayoutSeq=");
         AccessibilityManagerService$$ExternalSyntheticOutline0.m(sb3, this.mLayoutSeq, printWriter);
-        if (this.mRequestedWidth != this.mLastRequestedWidth || this.mRequestedHeight != this.mLastRequestedHeight) {
+        if (this.mRequestedWidth != this.mLastRequestedWidth
+                || this.mRequestedHeight != this.mLastRequestedHeight) {
             StringBuilder m2 = Preconditions$$ExternalSyntheticOutline0.m(str, "LastRequested w=");
             m2.append(this.mLastRequestedWidth);
             m2.append(" h=");
-            AccessibilityManagerService$$ExternalSyntheticOutline0.m(m2, this.mLastRequestedHeight, printWriter);
+            AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                    m2, this.mLastRequestedHeight, printWriter);
         }
         if (this.mIsChildWindow || this.mLayoutAttached) {
             StringBuilder m3 = Preconditions$$ExternalSyntheticOutline0.m(str, "mParentWindow=");
             m3.append(getParentWindow());
             m3.append(" mLayoutAttached=");
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(m3, this.mLayoutAttached, printWriter);
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    m3, this.mLayoutAttached, printWriter);
         }
         if (this.mIsImWindow || this.mIsWallpaper || this.mIsFloatingLayer) {
             StringBuilder m4 = Preconditions$$ExternalSyntheticOutline0.m(str, "mIsImWindow=");
@@ -988,7 +1117,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             m4.append(" mIsWallpaper=");
             m4.append(this.mIsWallpaper);
             m4.append(" mIsFloatingLayer=");
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(m4, this.mIsFloatingLayer, printWriter);
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    m4, this.mIsFloatingLayer, printWriter);
         }
         if (z) {
             printWriter.print(str);
@@ -1002,25 +1132,37 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             m5.append(this.mToken);
             printWriter.println(m5.toString());
             if (this.mActivityRecord != null) {
-                StringBuilder m6 = Preconditions$$ExternalSyntheticOutline0.m(str, "mActivityRecord=");
+                StringBuilder m6 =
+                        Preconditions$$ExternalSyntheticOutline0.m(str, "mActivityRecord=");
                 m6.append(this.mActivityRecord);
                 printWriter.println(m6.toString());
                 printWriter.print(str + "drawnStateEvaluated=" + this.mDrawnStateEvaluated);
                 printWriter.println(str + "mightAffectAllDrawn=" + mightAffectAllDrawn());
             }
-            StringBuilder m7 = Preconditions$$ExternalSyntheticOutline0.m(str, "mViewVisibility=0x");
+            StringBuilder m7 =
+                    Preconditions$$ExternalSyntheticOutline0.m(str, "mViewVisibility=0x");
             BatteryService$$ExternalSyntheticOutline0.m(this.mViewVisibility, m7, " mHaveFrame=");
             m7.append(this.mHaveFrame);
             m7.append(" mObscured=");
             BinaryTransparencyService$$ExternalSyntheticOutline0.m(m7, this.mObscured, printWriter);
             if (this.mDisableFlags != 0) {
-                StringBuilder m8 = Preconditions$$ExternalSyntheticOutline0.m(str, "mDisableFlags=");
-                m8.append(ViewDebug.flagsToString(View.class, "mSystemUiVisibility", this.mDisableFlags));
+                StringBuilder m8 =
+                        Preconditions$$ExternalSyntheticOutline0.m(str, "mDisableFlags=");
+                m8.append(
+                        ViewDebug.flagsToString(
+                                View.class, "mSystemUiVisibility", this.mDisableFlags));
                 printWriter.println(m8.toString());
             }
         }
-        if (!isVisibleByPolicy() || !this.mLegacyPolicyVisibilityAfterAnim || !this.mAppOpVisibility || isParentWindowHidden() || this.mPermanentlyHidden || this.mForceHideNonSystemOverlayWindow || this.mHiddenWhileSuspended) {
-            StringBuilder m9 = Preconditions$$ExternalSyntheticOutline0.m(str, "mPolicyVisibility=");
+        if (!isVisibleByPolicy()
+                || !this.mLegacyPolicyVisibilityAfterAnim
+                || !this.mAppOpVisibility
+                || isParentWindowHidden()
+                || this.mPermanentlyHidden
+                || this.mForceHideNonSystemOverlayWindow
+                || this.mHiddenWhileSuspended) {
+            StringBuilder m9 =
+                    Preconditions$$ExternalSyntheticOutline0.m(str, "mPolicyVisibility=");
             m9.append(isVisibleByPolicy());
             m9.append(" mLegacyPolicyVisibilityAfterAnim=");
             m9.append(this.mLegacyPolicyVisibilityAfterAnim);
@@ -1033,16 +1175,19 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             m9.append(" mHiddenWhileSuspended=");
             m9.append(this.mHiddenWhileSuspended);
             m9.append(" mForceHideNonSystemOverlayWindow=");
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(m9, this.mForceHideNonSystemOverlayWindow, printWriter);
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    m9, this.mForceHideNonSystemOverlayWindow, printWriter);
         }
         if (!this.mRelayoutCalled || this.mLayoutNeeded) {
             StringBuilder m10 = Preconditions$$ExternalSyntheticOutline0.m(str, "mRelayoutCalled=");
             m10.append(this.mRelayoutCalled);
             m10.append(" mLayoutNeeded=");
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(m10, this.mLayoutNeeded, printWriter);
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    m10, this.mLayoutNeeded, printWriter);
         }
         if (z) {
-            StringBuilder m11 = Preconditions$$ExternalSyntheticOutline0.m(str, "mGivenContentInsets=");
+            StringBuilder m11 =
+                    Preconditions$$ExternalSyntheticOutline0.m(str, "mGivenContentInsets=");
             Rect rect = this.mGivenContentInsets;
             StringBuilder sb4 = sTmpSB;
             m11.append(rect.toShortString(sb4));
@@ -1050,7 +1195,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             m11.append(this.mGivenVisibleInsets.toShortString(sb4));
             printWriter.println(m11.toString());
             if (this.mTouchableInsets != 0 || this.mGivenInsetsPending) {
-                StringBuilder m12 = Preconditions$$ExternalSyntheticOutline0.m(str, "mTouchableInsets=");
+                StringBuilder m12 =
+                        Preconditions$$ExternalSyntheticOutline0.m(str, "mTouchableInsets=");
                 m12.append(this.mTouchableInsets);
                 m12.append(" mGivenInsetsPending=");
                 m12.append(this.mGivenInsetsPending);
@@ -1059,12 +1205,18 @@ public final class WindowState extends WindowContainer implements WindowManagerP
                 getTouchableRegion(region);
                 printWriter.println(str + "touchable region=" + region);
             }
-            StringBuilder m13 = Preconditions$$ExternalSyntheticOutline0.m(str, "mFullConfiguration=");
+            StringBuilder m13 =
+                    Preconditions$$ExternalSyntheticOutline0.m(str, "mFullConfiguration=");
             m13.append(getConfiguration());
             printWriter.println(m13.toString());
-            printWriter.println(str + "mLastReportedConfiguration=" + this.mLastReportedConfiguration.getMergedConfiguration());
+            printWriter.println(
+                    str
+                            + "mLastReportedConfiguration="
+                            + this.mLastReportedConfiguration.getMergedConfiguration());
             if (this.mLastReportedActivityWindowInfo != null) {
-                StringBuilder m14 = Preconditions$$ExternalSyntheticOutline0.m(str, "mLastReportedActivityWindowInfo=");
+                StringBuilder m14 =
+                        Preconditions$$ExternalSyntheticOutline0.m(
+                                str, "mLastReportedActivityWindowInfo=");
                 m14.append(this.mLastReportedActivityWindowInfo);
                 printWriter.println(m14.toString());
             }
@@ -1074,7 +1226,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         m15.append(" isReadyForDisplay()=");
         m15.append(isReadyForDisplay());
         m15.append(" mWindowRemovalAllowed=");
-        BinaryTransparencyService$$ExternalSyntheticOutline0.m(m15, this.mWindowRemovalAllowed, printWriter);
+        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                m15, this.mWindowRemovalAllowed, printWriter);
         if (this.mIsSurfacePositionPaused) {
             printWriter.println(str + "mIsSurfacePositionPaused=true");
         }
@@ -1099,7 +1252,9 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             sb5.append(" last=");
             sb5.append(windowFrames.mLastFrame.toShortString(sb6));
             sb5.append(" insetsChanged=");
-            StringBuilder m17 = MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(sb5, windowFrames.mInsetsChanged, printWriter, str, " surface=");
+            StringBuilder m17 =
+                    MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(
+                            sb5, windowFrames.mInsetsChanged, printWriter, str, " surface=");
             m17.append(this.mAttrs.surfaceInsets.toShortString(sTmpSB));
             printWriter.println(m17.toString());
         }
@@ -1134,13 +1289,16 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             printWriter.print(" mLastHidden=");
             printWriter.println(windowStateAnimator.mLastHidden);
             printWriter.print(m$1);
-            printWriter.print("mEnterAnimationPending=" + windowStateAnimator.mEnterAnimationPending);
+            printWriter.print(
+                    "mEnterAnimationPending=" + windowStateAnimator.mEnterAnimationPending);
             printWriter.print(m$1);
             printWriter.print("mSystemDecorRect=");
             windowStateAnimator.mSystemDecorRect.printShortString(printWriter);
             printWriter.println();
         }
-        if (windowStateAnimator.mShownAlpha != 1.0f || windowStateAnimator.mAlpha != 1.0f || windowStateAnimator.mLastAlpha != 1.0f) {
+        if (windowStateAnimator.mShownAlpha != 1.0f
+                || windowStateAnimator.mAlpha != 1.0f
+                || windowStateAnimator.mLastAlpha != 1.0f) {
             printWriter.print(m$1);
             printWriter.print("mShownAlpha=");
             printWriter.print(windowStateAnimator.mShownAlpha);
@@ -1166,19 +1324,24 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             BinaryTransparencyService$$ExternalSyntheticOutline0.m(m19, this.mRemoved, printWriter);
         }
         if (getOrientationChanging() || this.mAppFreezing) {
-            StringBuilder m20 = Preconditions$$ExternalSyntheticOutline0.m(str, "mOrientationChanging=");
+            StringBuilder m20 =
+                    Preconditions$$ExternalSyntheticOutline0.m(str, "mOrientationChanging=");
             m20.append(this.mOrientationChanging);
             m20.append(" configOrientationChanging=");
-            m20.append(this.mLastReportedConfiguration.getMergedConfiguration().orientation != getConfiguration().orientation);
+            m20.append(
+                    this.mLastReportedConfiguration.getMergedConfiguration().orientation
+                            != getConfiguration().orientation);
             m20.append(" mAppFreezing=");
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(m20, this.mAppFreezing, printWriter);
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    m20, this.mAppFreezing, printWriter);
         }
         if (this.mLastFreezeDuration != 0) {
             printWriter.print(str + "mLastFreezeDuration=");
             TimeUtils.formatDuration((long) this.mLastFreezeDuration, printWriter);
             printWriter.println();
         }
-        StringBuilder m21 = Preconditions$$ExternalSyntheticOutline0.m(str, "mForceSeamlesslyRotate=");
+        StringBuilder m21 =
+                Preconditions$$ExternalSyntheticOutline0.m(str, "mForceSeamlesslyRotate=");
         m21.append(this.mForceSeamlesslyRotate);
         m21.append(" seamlesslyRotate: pending=");
         printWriter.print(m21.toString());
@@ -1197,7 +1360,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             StringBuilder m22 = Preconditions$$ExternalSyntheticOutline0.m(str, "mXOffset=");
             m22.append(this.mXOffset);
             m22.append(" mYOffset=");
-            AccessibilityManagerService$$ExternalSyntheticOutline0.m(m22, this.mYOffset, printWriter);
+            AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                    m22, this.mYOffset, printWriter);
         }
         if (this.mHScale != 1.0f || this.mVScale != 1.0f) {
             StringBuilder m23 = Preconditions$$ExternalSyntheticOutline0.m(str, "mHScale=");
@@ -1209,22 +1373,30 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             StringBuilder m24 = Preconditions$$ExternalSyntheticOutline0.m(str, "mWallpaperX=");
             m24.append(this.mWallpaperX);
             m24.append(" mWallpaperY=");
-            AggressivePolicyHandler$$ExternalSyntheticOutline0.m(m24, this.mWallpaperY, printWriter);
+            AggressivePolicyHandler$$ExternalSyntheticOutline0.m(
+                    m24, this.mWallpaperY, printWriter);
         }
         if (this.mWallpaperXStep != -1.0f || this.mWallpaperYStep != -1.0f) {
             StringBuilder m25 = Preconditions$$ExternalSyntheticOutline0.m(str, "mWallpaperXStep=");
             m25.append(this.mWallpaperXStep);
             m25.append(" mWallpaperYStep=");
-            AggressivePolicyHandler$$ExternalSyntheticOutline0.m(m25, this.mWallpaperYStep, printWriter);
+            AggressivePolicyHandler$$ExternalSyntheticOutline0.m(
+                    m25, this.mWallpaperYStep, printWriter);
         }
         if (this.mWallpaperZoomOut != -1.0f) {
-            AggressivePolicyHandler$$ExternalSyntheticOutline0.m(Preconditions$$ExternalSyntheticOutline0.m(str, "mWallpaperZoomOut="), this.mWallpaperZoomOut, printWriter);
+            AggressivePolicyHandler$$ExternalSyntheticOutline0.m(
+                    Preconditions$$ExternalSyntheticOutline0.m(str, "mWallpaperZoomOut="),
+                    this.mWallpaperZoomOut,
+                    printWriter);
         }
-        if (this.mWallpaperDisplayOffsetX != Integer.MIN_VALUE || this.mWallpaperDisplayOffsetY != Integer.MIN_VALUE) {
-            StringBuilder m26 = Preconditions$$ExternalSyntheticOutline0.m(str, "mWallpaperDisplayOffsetX=");
+        if (this.mWallpaperDisplayOffsetX != Integer.MIN_VALUE
+                || this.mWallpaperDisplayOffsetY != Integer.MIN_VALUE) {
+            StringBuilder m26 =
+                    Preconditions$$ExternalSyntheticOutline0.m(str, "mWallpaperDisplayOffsetX=");
             m26.append(this.mWallpaperDisplayOffsetX);
             m26.append(" mWallpaperDisplayOffsetY=");
-            AccessibilityManagerService$$ExternalSyntheticOutline0.m(m26, this.mWallpaperDisplayOffsetY, printWriter);
+            AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                    m26, this.mWallpaperDisplayOffsetY, printWriter);
         }
         if (this.mDrawLock != null) {
             StringBuilder m27 = Preconditions$$ExternalSyntheticOutline0.m(str, "mDrawLock=");
@@ -1232,10 +1404,14 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             printWriter.println(m27.toString());
         }
         if (this.mDragResizing) {
-            BinaryTransparencyService$$ExternalSyntheticOutline0.m(Preconditions$$ExternalSyntheticOutline0.m(str, "isDragResizing="), this.mDragResizing, printWriter);
+            BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                    Preconditions$$ExternalSyntheticOutline0.m(str, "isDragResizing="),
+                    this.mDragResizing,
+                    printWriter);
         }
         if (computeDragResizing()) {
-            StringBuilder m28 = Preconditions$$ExternalSyntheticOutline0.m(str, "computeDragResizing=");
+            StringBuilder m28 =
+                    Preconditions$$ExternalSyntheticOutline0.m(str, "computeDragResizing=");
             m28.append(computeDragResizing());
             printWriter.println(m28.toString());
         }
@@ -1246,18 +1422,39 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         m29.append(isOnScreen());
         printWriter.println(m29.toString());
         printWriter.println(str + "isVisible=" + isVisible());
-        printWriter.println(str + "keepClearAreas: restricted=" + this.mKeepClearAreas + ", unrestricted=" + this.mUnrestrictedKeepClearAreas);
+        printWriter.println(
+                str
+                        + "keepClearAreas: restricted="
+                        + this.mKeepClearAreas
+                        + ", unrestricted="
+                        + this.mUnrestrictedKeepClearAreas);
         if (z && this.mRequestedVisibleTypes != WindowInsets.Type.defaultVisible()) {
-            StringBuilder m30 = Preconditions$$ExternalSyntheticOutline0.m(str, "Requested non-default-visibility types: ");
-            m30.append(WindowInsets.Type.toString(this.mRequestedVisibleTypes ^ WindowInsets.Type.defaultVisible()));
+            StringBuilder m30 =
+                    Preconditions$$ExternalSyntheticOutline0.m(
+                            str, "Requested non-default-visibility types: ");
+            m30.append(
+                    WindowInsets.Type.toString(
+                            this.mRequestedVisibleTypes ^ WindowInsets.Type.defaultVisible()));
             printWriter.println(m30.toString());
         }
-        BinaryTransparencyService$$ExternalSyntheticOutline0.m(MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(Preconditions$$ExternalSyntheticOutline0.m(str, "mPrepareSyncSeqId="), this.mPrepareSyncSeqId, printWriter, str, "mHiddenWhileProfileLockedState="), this.mHiddenWhileProfileLockedState, printWriter);
+        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                MediaRouter2ServiceImpl$UserRecord$$ExternalSyntheticOutline0.m(
+                        Preconditions$$ExternalSyntheticOutline0.m(str, "mPrepareSyncSeqId="),
+                        this.mPrepareSyncSeqId,
+                        printWriter,
+                        str,
+                        "mHiddenWhileProfileLockedState="),
+                this.mHiddenWhileProfileLockedState,
+                printWriter);
         if (this.mPopOverDimmerNeeded) {
             printWriter.println(str + "mPopOverDimmerNeeded=true");
         }
         if (this.mAttrs.layoutInDisplayCutoutMode != this.mOriginalLayoutInDisplayCutoutMode) {
-            AccessibilityManagerService$$ExternalSyntheticOutline0.m(Preconditions$$ExternalSyntheticOutline0.m(str, "mOriginalLayoutInDisplayCutoutMode="), this.mOriginalLayoutInDisplayCutoutMode, printWriter);
+            AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                    Preconditions$$ExternalSyntheticOutline0.m(
+                            str, "mOriginalLayoutInDisplayCutoutMode="),
+                    this.mOriginalLayoutInDisplayCutoutMode,
+                    printWriter);
         }
         if (CoreRune.FW_WAIT_TO_HANDLE_RESIZING_FROM_CLIENT && this.mWaitToHandleResizing) {
             printWriter.println(str + "mWaitToHandleResizing=true");
@@ -1288,7 +1485,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             WindowStateAnimator windowStateAnimator = this.mWinAnimator;
             windowStateAnimator.getClass();
             long start3 = protoOutputStream.start(1146756268045L);
-            WindowSurfaceController windowSurfaceController = windowStateAnimator.mSurfaceController;
+            WindowSurfaceController windowSurfaceController =
+                    windowStateAnimator.mSurfaceController;
             if (windowSurfaceController != null) {
                 long start4 = protoOutputStream.start(1146756268034L);
                 protoOutputStream.write(1133871366145L, windowSurfaceController.mSurfaceShown);
@@ -1323,7 +1521,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             }
             if (this.mMergedLocalInsetsSources != null) {
                 for (int i2 = 0; i2 < this.mMergedLocalInsetsSources.size(); i2++) {
-                    ((InsetsSource) this.mMergedLocalInsetsSources.valueAt(i2)).dumpDebug(protoOutputStream, 2246267895855L);
+                    ((InsetsSource) this.mMergedLocalInsetsSources.valueAt(i2))
+                            .dumpDebug(protoOutputStream, 2246267895855L);
                 }
             }
             protoOutputStream.end(start);
@@ -1335,14 +1534,21 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         dumpDebug(protoOutputStream, 1146756268060L, i);
     }
 
-    public final void fillClientWindowFramesAndConfiguration(ClientWindowFrames clientWindowFrames, MergedConfiguration mergedConfiguration, ActivityWindowInfo activityWindowInfo, boolean z, boolean z2) {
+    public final void fillClientWindowFramesAndConfiguration(
+            ClientWindowFrames clientWindowFrames,
+            MergedConfiguration mergedConfiguration,
+            ActivityWindowInfo activityWindowInfo,
+            boolean z,
+            boolean z2) {
         Configuration globalConfiguration;
         int pid;
         ActivityWindowInfo activityWindowInfo2;
         ActivityRecord activityRecord;
         clientWindowFrames.frame.set(this.mWindowFrames.mCompatFrame);
         clientWindowFrames.displayFrame.set(this.mWindowFrames.mDisplayFrame);
-        if (this.mIsChildWindow && (this.mAttrs.gravity & 80) == 80 && this.mOverrideScale != 1.0f) {
+        if (this.mIsChildWindow
+                && (this.mAttrs.gravity & 80) == 80
+                && this.mOverrideScale != 1.0f) {
             float f = this.mCompatScale;
             if (f != 1.0f) {
                 clientWindowFrames.displayFrame.scale(f);
@@ -1357,7 +1563,9 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             if (clientWindowFrames.attachedFrame == null) {
                 clientWindowFrames.attachedFrame = new Rect();
             }
-            if (this.mIsChildWindow && (this.mAttrs.gravity & 80) == 80 && this.mOverrideScale != 1.0f) {
+            if (this.mIsChildWindow
+                    && (this.mAttrs.gravity & 80) == 80
+                    && this.mOverrideScale != 1.0f) {
                 float f3 = this.mCompatScale;
                 if (f3 != 1.0f) {
                     clientWindowFrames.attachedFrame.scale(f3);
@@ -1370,13 +1578,19 @@ public final class WindowState extends WindowContainer implements WindowManagerP
                 clientWindowFrames.attachedFrame.scale(f4);
             }
         }
-        clientWindowFrames.compatScale = this.mToken.hasSizeCompatBounds() ? 1.0f : this.mCompatScale;
+        clientWindowFrames.compatScale =
+                this.mToken.hasSizeCompatBounds() ? 1.0f : this.mCompatScale;
         ClientWindowFrames clientWindowFrames2 = this.mLastReportedFrames;
         if (clientWindowFrames2 != clientWindowFrames) {
             clientWindowFrames2.setTo(clientWindowFrames);
         }
-        if (z || (z2 && ((activityRecord = this.mActivityRecord) == null || activityRecord.isVisibleRequested()))) {
-            if (this.mAttrs.type != 4 || (pid = this.mActivityRecord.getPid()) == 0 || pid == this.mSession.mPid) {
+        if (z
+                || (z2
+                        && ((activityRecord = this.mActivityRecord) == null
+                                || activityRecord.isVisibleRequested()))) {
+            if (this.mAttrs.type != 4
+                    || (pid = this.mActivityRecord.getPid()) == 0
+                    || pid == this.mSession.mPid) {
                 int i = this.mSession.mPid;
                 int i2 = WindowManagerService.MY_PID;
                 if (i == i2 || i < 0) {
@@ -1384,12 +1598,16 @@ public final class WindowState extends WindowContainer implements WindowManagerP
                 } else {
                     WindowState parentWindow = getParentWindow();
                     Session session = parentWindow != null ? parentWindow.mSession : this.mSession;
-                    globalConfiguration = session.mPid == i2 ? this.mWmService.mRoot.getConfiguration() : session.mProcess.getConfiguration();
+                    globalConfiguration =
+                            session.mPid == i2
+                                    ? this.mWmService.mRoot.getConfiguration()
+                                    : session.mProcess.getConfiguration();
                 }
             } else {
                 globalConfiguration = this.mActivityRecord.app.getConfiguration();
             }
-            mergedConfiguration.setConfiguration(globalConfiguration, getMergedOverrideConfiguration());
+            mergedConfiguration.setConfiguration(
+                    globalConfiguration, getMergedOverrideConfiguration());
             MergedConfiguration mergedConfiguration2 = this.mLastReportedConfiguration;
             if (mergedConfiguration != mergedConfiguration2) {
                 mergedConfiguration2.setTo(mergedConfiguration);
@@ -1400,7 +1618,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             }
         } else {
             mergedConfiguration.setTo(this.mLastReportedConfiguration);
-            if (activityWindowInfo != null && (activityWindowInfo2 = this.mLastReportedActivityWindowInfo) != null) {
+            if (activityWindowInfo != null
+                    && (activityWindowInfo2 = this.mLastReportedActivityWindowInfo) != null) {
                 activityWindowInfo.set(activityWindowInfo2);
             }
         }
@@ -1441,11 +1660,17 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             Method dump skipped, instructions count: 814
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.WindowState.finishDrawing(android.view.SurfaceControl$Transaction, int):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.WindowState.finishDrawing(android.view.SurfaceControl$Transaction,"
+                    + " int):boolean");
     }
 
     @Override // com.android.server.wm.WindowContainer
-    public final void finishSync(SurfaceControl.Transaction transaction, BLASTSyncEngine.SyncGroup syncGroup, boolean z) {
+    public final void finishSync(
+            SurfaceControl.Transaction transaction,
+            BLASTSyncEngine.SyncGroup syncGroup,
+            boolean z) {
         if (isDifferentSyncGroup(syncGroup)) {
             return;
         }
@@ -1523,7 +1748,9 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             if (drawHandler.mType == i) {
                 drawHandler.mConsumer.accept(this.mTmpTransaction);
                 arrayList.add(drawHandler);
-                Slog.d("WindowManager", "forceExecuteDrawHandlers: win=" + this + ", handler=" + drawHandler);
+                Slog.d(
+                        "WindowManager",
+                        "forceExecuteDrawHandlers: win=" + this + ", handler=" + drawHandler);
             }
         }
         if (arrayList.isEmpty()) {
@@ -1558,14 +1785,25 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         }
         rect4.set(this.mAttrs.surfaceInsets);
         InsetsState insetsStateWithVisibilityOverride = getInsetsStateWithVisibilityOverride();
-        rect2.set(insetsStateWithVisibilityOverride.calculateInsets(rect, WindowInsets.Type.systemBars(), false).toRect());
-        rect3.set(insetsStateWithVisibilityOverride.calculateInsets(rect, WindowInsets.Type.systemBars(), true).toRect());
+        rect2.set(
+                insetsStateWithVisibilityOverride
+                        .calculateInsets(rect, WindowInsets.Type.systemBars(), false)
+                        .toRect());
+        rect3.set(
+                insetsStateWithVisibilityOverride
+                        .calculateInsets(rect, WindowInsets.Type.systemBars(), true)
+                        .toRect());
     }
 
-    @Override // com.android.server.wm.WindowContainer, com.android.server.wm.SurfaceAnimator.Animatable
+    @Override // com.android.server.wm.WindowContainer,
+              // com.android.server.wm.SurfaceAnimator.Animatable
     public final SurfaceControl getAnimationLeashParent() {
         ActivityRecord activityRecord = this.mActivityRecord;
-        return (activityRecord == null || activityRecord.hasFixedRotationTransform() || !isStartingWindowAssociatedToTask()) ? getParentSurfaceControl() : this.mStartingData.mAssociatedTask.mSurfaceControl;
+        return (activityRecord == null
+                        || activityRecord.hasFixedRotationTransform()
+                        || !isStartingWindowAssociatedToTask())
+                ? getParentSurfaceControl()
+                : this.mStartingData.mAssociatedTask.mSurfaceControl;
     }
 
     @Override // com.android.server.wm.ConfigurationContainer
@@ -1603,8 +1841,11 @@ public final class WindowState extends WindowContainer implements WindowManagerP
     }
 
     public final DisplayInfo getDisplayInfo() {
-        DisplayInfo fixedRotationTransformDisplayInfo = this.mToken.getFixedRotationTransformDisplayInfo();
-        return fixedRotationTransformDisplayInfo != null ? fixedRotationTransformDisplayInfo : getDisplayContent().mDisplayInfo;
+        DisplayInfo fixedRotationTransformDisplayInfo =
+                this.mToken.getFixedRotationTransformDisplayInfo();
+        return fixedRotationTransformDisplayInfo != null
+                ? fixedRotationTransformDisplayInfo
+                : getDisplayContent().mDisplayInfo;
     }
 
     public final void getEffectiveTouchableRegion(Region region) {
@@ -1638,7 +1879,10 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         InsetsSourceProvider controllableInsetProvider;
         InsetsSource insetsSource;
         WindowToken windowToken = this.mToken;
-        InsetsState insetsState2 = windowToken.isFixedRotationTransforming() ? windowToken.mFixedRotationTransformState.mDisplayFrames.mInsetsState : null;
+        InsetsState insetsState2 =
+                windowToken.isFixedRotationTransforming()
+                        ? windowToken.mFixedRotationTransformState.mDisplayFrames.mInsetsState
+                        : null;
         InsetsPolicy insetsPolicy = getDisplayContent().mInsetsPolicy;
         boolean z2 = false;
         if (insetsState2 != null) {
@@ -1646,11 +1890,15 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         }
         InsetsState insetsState3 = this.mFrozenInsetsState;
         if (insetsState3 == null) {
-            insetsState3 = this.mAttrs.receiveInsetsIgnoringZOrder ? getDisplayContent().mInsetsStateController.mState : this.mAboveInsetsState;
+            insetsState3 =
+                    this.mAttrs.receiveInsetsIgnoringZOrder
+                            ? getDisplayContent().mInsetsStateController.mState
+                            : this.mAboveInsetsState;
             if (this.mMergedLocalInsetsSources != null) {
                 InsetsState insetsState4 = new InsetsState(insetsState3);
                 for (int i2 = 0; i2 < this.mMergedLocalInsetsSources.size(); i2++) {
-                    insetsState4.addSource((InsetsSource) this.mMergedLocalInsetsSources.valueAt(i2));
+                    insetsState4.addSource(
+                            (InsetsSource) this.mMergedLocalInsetsSources.valueAt(i2));
                 }
                 insetsState3 = insetsState4;
             }
@@ -1683,11 +1931,16 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             if (insetsState == insetsState3) {
                 insetsState = new InsetsState(insetsState3);
             }
-            if (CoreRune.MW_CAPTION_SHELL_INSETS && insetsPolicy.mDisplayContent.isDesktopModeEnabled() && layoutParams.y == 0 && layoutParams.height == -1 && ((i = layoutParams.type) == 1 || i == 2 || i == 4)) {
+            if (CoreRune.MW_CAPTION_SHELL_INSETS
+                    && insetsPolicy.mDisplayContent.isDesktopModeEnabled()
+                    && layoutParams.y == 0
+                    && layoutParams.height == -1
+                    && ((i = layoutParams.type) == 1 || i == 2 || i == 4)) {
                 z2 = true;
             }
             for (int sourceSize = insetsState.sourceSize() - 1; sourceSize >= 0; sourceSize--) {
-                if (insetsState.sourceAt(sourceSize).getType() == WindowInsets.Type.captionBar() && !z2) {
+                if (insetsState.sourceAt(sourceSize).getType() == WindowInsets.Type.captionBar()
+                        && !z2) {
                     insetsState.removeSourceAt(sourceSize);
                 }
             }
@@ -1695,7 +1948,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         SparseArray sparseArray = insetsPolicy.mStateController.mProviders;
         int i3 = layoutParams.type;
         for (int size = sparseArray.size() - 1; size >= 0; size--) {
-            InsetsSourceProvider insetsSourceProvider = (InsetsSourceProvider) sparseArray.valueAt(size);
+            InsetsSourceProvider insetsSourceProvider =
+                    (InsetsSourceProvider) sparseArray.valueAt(size);
             if (insetsSourceProvider.mOverrideFrames.contains(i3)) {
                 if (insetsState == insetsState3) {
                     insetsState = new InsetsState(insetsState);
@@ -1705,7 +1959,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
                 insetsState.addSource(insetsSource2);
             }
         }
-        if (WindowConfiguration.isFloating(windowingMode) || (windowingMode == 6 && isAlwaysOnTop)) {
+        if (WindowConfiguration.isFloating(windowingMode)
+                || (windowingMode == 6 && isAlwaysOnTop)) {
             int captionBar = WindowInsets.Type.captionBar();
             if (windowingMode != 2) {
                 captionBar |= WindowInsets.Type.ime();
@@ -1717,11 +1972,32 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         if (isLayoutNeededInUdcCutout()) {
             this.mDisplayContent.mUdcCutoutPolicy.adjustInsetsForUdc(this, insetsState);
         }
-        if (getControllableInsetProvider() == null && this.mAboveInsetsState.peekSource(InsetsSource.ID_IME) == null && getDisplayContent().mDisplayPolicy.mExt.mNavigationMode != 0) {
+        if (getControllableInsetProvider() == null
+                && this.mAboveInsetsState.peekSource(InsetsSource.ID_IME) == null
+                && getDisplayContent().mDisplayPolicy.mExt.mNavigationMode != 0) {
             DisplayPolicyExt displayPolicyExt = getDisplayContent().mDisplayPolicy.mExt;
             int i4 = this.mDisplayContent.mDisplayFrames.mRotation;
             PhoneWindowManagerExt phoneWindowManagerExt = displayPolicyExt.mService.mExt.mPolicyExt;
-            if ((phoneWindowManagerExt.mNavBarImeBtnEnabled || phoneWindowManagerExt.mShowKeyboardBtnEnabled) && ((displayPolicyExt.mNavBarImeBtnAllRotationsAllowed || displayPolicyExt.mDisplayPolicy.mDisplayContent.mDisplayRotation.isAnyPortrait(i4)) && getDisplayContent().mInsetsStateController.getImeSourceProvider().mSource.isVisible() && (windowState = getDisplayContent().mDisplayPolicy.mNavigationBar) != null && (controllableInsetProvider = windowState.getControllableInsetProvider()) != null && (insetsSource = controllableInsetProvider.mSource) != null && insetsSource.isVisible() && controllableInsetProvider.mOverrideFrames.contains(2011) && !((Rect) controllableInsetProvider.mOverrideFrames.get(2011)).equals(insetsSource.getFrame()))) {
+            if ((phoneWindowManagerExt.mNavBarImeBtnEnabled
+                            || phoneWindowManagerExt.mShowKeyboardBtnEnabled)
+                    && ((displayPolicyExt.mNavBarImeBtnAllRotationsAllowed
+                                    || displayPolicyExt.mDisplayPolicy.mDisplayContent
+                                            .mDisplayRotation.isAnyPortrait(i4))
+                            && getDisplayContent()
+                                    .mInsetsStateController
+                                    .getImeSourceProvider()
+                                    .mSource
+                                    .isVisible()
+                            && (windowState = getDisplayContent().mDisplayPolicy.mNavigationBar)
+                                    != null
+                            && (controllableInsetProvider =
+                                            windowState.getControllableInsetProvider())
+                                    != null
+                            && (insetsSource = controllableInsetProvider.mSource) != null
+                            && insetsSource.isVisible()
+                            && controllableInsetProvider.mOverrideFrames.contains(2011)
+                            && !((Rect) controllableInsetProvider.mOverrideFrames.get(2011))
+                                    .equals(insetsSource.getFrame()))) {
                 InsetsSource insetsSource3 = new InsetsSource(insetsSource);
                 insetsSource3.setFrame((Rect) controllableInsetProvider.mOverrideFrames.get(2011));
                 InsetsState insetsState7 = new InsetsState(insetsState);
@@ -1729,51 +2005,59 @@ public final class WindowState extends WindowContainer implements WindowManagerP
                 insetsState = insetsState7;
             }
         }
-        if (CoreRune.MW_SPLIT_FLEX_PANEL_SYSTEMUI_VISIBILITY && this.mAttrs.type != 2040 && FlexPanelController.isFlexPanelTopEnabled(this)) {
+        if (CoreRune.MW_SPLIT_FLEX_PANEL_SYSTEMUI_VISIBILITY
+                && this.mAttrs.type != 2040
+                && FlexPanelController.isFlexPanelTopEnabled(this)) {
             InsetsState insetsState8 = null;
             for (int sourceSize2 = insetsState.sourceSize() - 1; sourceSize2 >= 0; sourceSize2--) {
                 final InsetsSource sourceAt = insetsState.sourceAt(sourceSize2);
                 int type = sourceAt.getType();
                 if (type == WindowInsets.Type.displayCutout()) {
                     final int i5 = 0;
-                    consumer = new Consumer() { // from class: com.android.server.wm.WindowState$$ExternalSyntheticLambda2
-                        @Override // java.util.function.Consumer
-                        public final void accept(Object obj) {
-                            int i6 = i5;
-                            InsetsSource insetsSource4 = sourceAt;
-                            InsetsState insetsState9 = (InsetsState) obj;
-                            switch (i6) {
-                                case 0:
-                                    insetsState9.removeSource(insetsSource4.getId());
-                                    break;
-                                default:
-                                    InsetsSource insetsSource5 = new InsetsSource(insetsSource4);
-                                    insetsSource5.setVisible(false);
-                                    insetsState9.addSource(insetsSource5);
-                                    break;
-                            }
-                        }
-                    };
+                    consumer =
+                            new Consumer() { // from class:
+                                             // com.android.server.wm.WindowState$$ExternalSyntheticLambda2
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    int i6 = i5;
+                                    InsetsSource insetsSource4 = sourceAt;
+                                    InsetsState insetsState9 = (InsetsState) obj;
+                                    switch (i6) {
+                                        case 0:
+                                            insetsState9.removeSource(insetsSource4.getId());
+                                            break;
+                                        default:
+                                            InsetsSource insetsSource5 =
+                                                    new InsetsSource(insetsSource4);
+                                            insetsSource5.setVisible(false);
+                                            insetsState9.addSource(insetsSource5);
+                                            break;
+                                    }
+                                }
+                            };
                 } else if (type == WindowInsets.Type.statusBars() && sourceAt.isVisible()) {
                     final int i6 = 1;
-                    consumer = new Consumer() { // from class: com.android.server.wm.WindowState$$ExternalSyntheticLambda2
-                        @Override // java.util.function.Consumer
-                        public final void accept(Object obj) {
-                            int i62 = i6;
-                            InsetsSource insetsSource4 = sourceAt;
-                            InsetsState insetsState9 = (InsetsState) obj;
-                            switch (i62) {
-                                case 0:
-                                    insetsState9.removeSource(insetsSource4.getId());
-                                    break;
-                                default:
-                                    InsetsSource insetsSource5 = new InsetsSource(insetsSource4);
-                                    insetsSource5.setVisible(false);
-                                    insetsState9.addSource(insetsSource5);
-                                    break;
-                            }
-                        }
-                    };
+                    consumer =
+                            new Consumer() { // from class:
+                                             // com.android.server.wm.WindowState$$ExternalSyntheticLambda2
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    int i62 = i6;
+                                    InsetsSource insetsSource4 = sourceAt;
+                                    InsetsState insetsState9 = (InsetsState) obj;
+                                    switch (i62) {
+                                        case 0:
+                                            insetsState9.removeSource(insetsSource4.getId());
+                                            break;
+                                        default:
+                                            InsetsSource insetsSource5 =
+                                                    new InsetsSource(insetsSource4);
+                                            insetsSource5.setVisible(false);
+                                            insetsState9.addSource(insetsSource5);
+                                            break;
+                                    }
+                                }
+                            };
                 } else {
                     consumer = null;
                 }
@@ -1821,7 +2105,11 @@ public final class WindowState extends WindowContainer implements WindowManagerP
     @Override // com.android.server.wm.ConfigurationContainer
     public final Rect getMaxBounds() {
         WindowToken windowToken = this.mToken;
-        Rect maxBounds = windowToken.isFixedRotationTransforming() ? windowToken.mFixedRotationTransformState.mRotatedOverrideConfiguration.windowConfiguration.getMaxBounds() : null;
+        Rect maxBounds =
+                windowToken.isFixedRotationTransforming()
+                        ? windowToken.mFixedRotationTransformState.mRotatedOverrideConfiguration
+                                .windowConfiguration.getMaxBounds()
+                        : null;
         return maxBounds != null ? maxBounds : super.getMaxBounds();
     }
 
@@ -1834,7 +2122,16 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         if (this.mTransitionController.isShellTransitionsEnabled()) {
             return false;
         }
-        return ((!this.mOrientationChanging && (!isVisible() || getConfiguration().orientation == this.mLastReportedConfiguration.getMergedConfiguration().orientation)) || this.mSeamlesslyRotated || this.mOrientationChangeTimedOut) ? false : true;
+        return ((!this.mOrientationChanging
+                                && (!isVisible()
+                                        || getConfiguration().orientation
+                                                == this.mLastReportedConfiguration
+                                                        .getMergedConfiguration()
+                                                        .orientation))
+                        || this.mSeamlesslyRotated
+                        || this.mOrientationChangeTimedOut)
+                ? false
+                : true;
     }
 
     public final WindowState getParentWindow() {
@@ -1905,10 +2202,18 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         int i = this.mTouchableInsets;
         if (i == 1) {
             Rect rect2 = this.mGivenContentInsets;
-            region.set(rect.left + rect2.left, rect.top + rect2.top, rect.right - rect2.right, rect.bottom - rect2.bottom);
+            region.set(
+                    rect.left + rect2.left,
+                    rect.top + rect2.top,
+                    rect.right - rect2.right,
+                    rect.bottom - rect2.bottom);
         } else if (i == 2) {
             Rect rect3 = this.mGivenVisibleInsets;
-            region.set(rect.left + rect3.left, rect.top + rect3.top, rect.right - rect3.right, rect.bottom - rect3.bottom);
+            region.set(
+                    rect.left + rect3.left,
+                    rect.top + rect3.top,
+                    rect.right - rect3.right,
+                    rect.bottom - rect3.bottom);
         } else if (i != 3) {
             region.set(rect);
         } else {
@@ -2004,7 +2309,9 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         L4e:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.WindowState.getVisibleBounds(android.graphics.Rect):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.WindowState.getVisibleBounds(android.graphics.Rect):void");
     }
 
     @Override // com.android.server.wm.InsetsControlTarget
@@ -2080,26 +2387,30 @@ public final class WindowState extends WindowContainer implements WindowManagerP
     @Override // com.android.server.wm.InputTarget
     public final void handleTapOutsideFocusInsideSelf() {
         int i;
-        if (this.mWmService.mAtmService.mDexController.getDexModeLocked() != 2 || ((i = this.mAttrs.type) != 2011 && i != 2012 && i != 2019)) {
+        if (this.mWmService.mAtmService.mDexController.getDexModeLocked() != 2
+                || ((i = this.mAttrs.type) != 2011 && i != 2012 && i != 2019)) {
             this.mWmService.moveDisplayToTopInternal(getDisplayId());
         }
         this.mWmService.handleTaskFocusChange(getTask(), this.mActivityRecord);
     }
 
     @Override // com.android.server.wm.InputTarget
-    public final void handleTapOutsideFocusOutsideSelf() {
-    }
+    public final void handleTapOutsideFocusOutsideSelf() {}
 
     public final boolean hasCompatScale() {
         if (this.mAttrs.type == 3) {
             return false;
         }
         CompatModePackages compatModePackages = this.mWmService.mAtmService.mCompatModePackages;
-        if (compatModePackages.mLegacyScreenCompatPackages.size() == 0 ? false : compatModePackages.mLegacyScreenCompatPackages.get(this.mSession.mProcess.mInfo.packageName.hashCode())) {
+        if (compatModePackages.mLegacyScreenCompatPackages.size() == 0
+                ? false
+                : compatModePackages.mLegacyScreenCompatPackages.get(
+                        this.mSession.mProcess.mInfo.packageName.hashCode())) {
             return true;
         }
         ActivityRecord activityRecord = this.mActivityRecord;
-        return (activityRecord != null && activityRecord.hasSizeCompatBounds()) || this.mOverrideScale != 1.0f;
+        return (activityRecord != null && activityRecord.hasSizeCompatBounds())
+                || this.mOverrideScale != 1.0f;
     }
 
     @Override // com.android.server.wm.WindowContainer
@@ -2116,9 +2427,9 @@ public final class WindowState extends WindowContainer implements WindowManagerP
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:18:0x0038, code lost:
-    
-        if (r1.left == r0.left) goto L27;
-     */
+
+       if (r1.left == r0.left) goto L27;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -2172,13 +2483,17 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         L53:
             return r4
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.WindowState.hasMoved():boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: com.android.server.wm.WindowState.hasMoved():boolean");
     }
 
     @Override // com.android.server.wm.WindowContainer
     public final boolean hasWallpaper() {
         ActivityRecord activityRecord;
-        return (this.mAttrs.flags & 1048576) != 0 || ((activityRecord = this.mActivityRecord) != null && activityRecord.mAppCompatController.mAppCompatOverrides.mAppCompatLetterboxOverrides.hasWallpaperBackgroundForLetterbox());
+        return (this.mAttrs.flags & 1048576) != 0
+                || ((activityRecord = this.mActivityRecord) != null
+                        && activityRecord.mAppCompatController.mAppCompatOverrides
+                                .mAppCompatLetterboxOverrides.hasWallpaperBackgroundForLetterbox());
     }
 
     public final boolean hide(boolean z, boolean z2) {
@@ -2198,7 +2513,12 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             this.mWmService.enableScreenIfNeededLocked();
             if (isFocused) {
                 if (ProtoLogImpl_54989576.Cache.WM_DEBUG_FOCUS_LIGHT_enabled[2]) {
-                    ProtoLogImpl_54989576.i(ProtoLogGroup.WM_DEBUG_FOCUS_LIGHT, -208079497999140637L, 0, null, null);
+                    ProtoLogImpl_54989576.i(
+                            ProtoLogGroup.WM_DEBUG_FOCUS_LIGHT,
+                            -208079497999140637L,
+                            0,
+                            null,
+                            null);
                 }
                 this.mWmService.mFocusMayChange = true;
             }
@@ -2226,7 +2546,18 @@ public final class WindowState extends WindowContainer implements WindowManagerP
     public final void initAppOpsState() {
         int startOpNoThrow;
         int i = this.mAppOp;
-        if (i == -1 || !this.mAppOpVisibility || (startOpNoThrow = this.mWmService.mAppOps.startOpNoThrow(i, this.mOwnerUid, this.mAttrs.packageName, true, null, "init-default-visibility")) == 0 || startOpNoThrow == 3) {
+        if (i == -1
+                || !this.mAppOpVisibility
+                || (startOpNoThrow =
+                                this.mWmService.mAppOps.startOpNoThrow(
+                                        i,
+                                        this.mOwnerUid,
+                                        this.mAttrs.packageName,
+                                        true,
+                                        null,
+                                        "init-default-visibility"))
+                        == 0
+                || startOpNoThrow == 3) {
             return;
         }
         setAppOpVisibilityLw(false);
@@ -2238,12 +2569,18 @@ public final class WindowState extends WindowContainer implements WindowManagerP
 
     public final boolean isDisplayed() {
         ActivityRecord activityRecord = this.mActivityRecord;
-        return isDrawn() && isVisibleByPolicy() && ((!isParentWindowHidden() && (activityRecord == null || activityRecord.isVisibleRequested())) || isAnimationRunningSelfOrParent());
+        return isDrawn()
+                && isVisibleByPolicy()
+                && ((!isParentWindowHidden()
+                                && (activityRecord == null || activityRecord.isVisibleRequested()))
+                        || isAnimationRunningSelfOrParent());
     }
 
     public final boolean isDrawn() {
         int i;
-        return this.mHasSurface && !this.mDestroying && ((i = this.mWinAnimator.mDrawState) == 3 || i == 4);
+        return this.mHasSurface
+                && !this.mDestroying
+                && ((i = this.mWinAnimator.mDrawState) == 3 || i == 4);
     }
 
     @Override // com.android.server.wm.WindowContainer
@@ -2263,7 +2600,14 @@ public final class WindowState extends WindowContainer implements WindowManagerP
     public final boolean isGoneForLayout() {
         WindowState parentWindow;
         ActivityRecord activityRecord = this.mActivityRecord;
-        return this.mViewVisibility == 8 || !this.mRelayoutCalled || (activityRecord == null && !(wouldBeVisibleIfPolicyIgnored() && isVisibleByPolicy())) || (!(activityRecord == null || activityRecord.isVisibleRequested()) || (((parentWindow = getParentWindow()) != null && parentWindow.isGoneForLayout()) || ((this.mAnimatingExit && !isAnimating(3)) || this.mDestroying)));
+        return this.mViewVisibility == 8
+                || !this.mRelayoutCalled
+                || (activityRecord == null
+                        && !(wouldBeVisibleIfPolicyIgnored() && isVisibleByPolicy()))
+                || (!(activityRecord == null || activityRecord.isVisibleRequested())
+                        || (((parentWindow = getParentWindow()) != null
+                                        && parentWindow.isGoneForLayout())
+                                || ((this.mAnimatingExit && !isAnimating(3)) || this.mDestroying)));
     }
 
     public final boolean isImeLayeringTarget() {
@@ -2285,7 +2629,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
     }
 
     public final boolean isLetterboxedForDisplayCutout() {
-        if (this.mActivityRecord == null || !this.mWindowFrames.mParentFrameWasClippedByDisplayCutout) {
+        if (this.mActivityRecord == null
+                || !this.mWindowFrames.mParentFrameWasClippedByDisplayCutout) {
             return false;
         }
         WindowManager.LayoutParams layoutParams = this.mAttrs;
@@ -2304,10 +2649,21 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         }
         ActivityRecord activityRecord = this.mActivityRecord;
         if (activityRecord != null) {
-            return (!isParentWindowHidden() && (isStartingWindowAssociatedToTask() ? this.mStartingData.mAssociatedTask.isVisible() : activityRecord.mVisible)) || isAnimationRunningSelfOrParent();
+            return (!isParentWindowHidden()
+                            && (isStartingWindowAssociatedToTask()
+                                    ? this.mStartingData.mAssociatedTask.isVisible()
+                                    : activityRecord.mVisible))
+                    || isAnimationRunningSelfOrParent();
         }
         WallpaperWindowToken asWallpaperToken = this.mToken.asWallpaperToken();
-        return asWallpaperToken != null ? !isParentWindowHidden() && asWallpaperToken.mClientVisible : (!CoreRune.FW_SHELL_TRANSITION_TRANSIENT_LAUNCH_OVERLAY || (asTransientLaunchOverlay = this.mToken.asTransientLaunchOverlay()) == null) ? !isParentWindowHidden() || isAnimating(3) : asTransientLaunchOverlay.isVisibleRequested();
+        return asWallpaperToken != null
+                ? !isParentWindowHidden() && asWallpaperToken.mClientVisible
+                : (!CoreRune.FW_SHELL_TRANSITION_TRANSIENT_LAUNCH_OVERLAY
+                                || (asTransientLaunchOverlay =
+                                                this.mToken.asTransientLaunchOverlay())
+                                        == null)
+                        ? !isParentWindowHidden() || isAnimating(3)
+                        : asTransientLaunchOverlay.isVisibleRequested();
     }
 
     public final boolean isParentWindowHidden() {
@@ -2334,8 +2690,11 @@ public final class WindowState extends WindowContainer implements WindowManagerP
     }
 
     public final boolean isRequestedVisible(int i, boolean z) {
-        if ((WindowInsets.Type.statusBars() & i) == 0 || !PolicyControl.shouldApplyImmersiveStatus(this)) {
-            return ((WindowInsets.Type.navigationBars() & i) == 0 || !PolicyControl.shouldApplyImmersiveNavigation(this, z)) && (this.mRequestedVisibleTypes & i) != 0;
+        if ((WindowInsets.Type.statusBars() & i) == 0
+                || !PolicyControl.shouldApplyImmersiveStatus(this)) {
+            return ((WindowInsets.Type.navigationBars() & i) == 0
+                            || !PolicyControl.shouldApplyImmersiveNavigation(this, z))
+                    && (this.mRequestedVisibleTypes & i) != 0;
         }
         return false;
     }
@@ -2353,18 +2712,25 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         }
         try {
             if (this.mRestrictionPolicy == null) {
-                this.mRestrictionPolicy = (RestrictionPolicyInternal) LocalServices.getService(RestrictionPolicyInternal.class);
+                this.mRestrictionPolicy =
+                        (RestrictionPolicyInternal)
+                                LocalServices.getService(RestrictionPolicyInternal.class);
             }
             RestrictionPolicyInternal restrictionPolicyInternal = this.mRestrictionPolicy;
             this.mRestrictionPolicy = restrictionPolicyInternal;
-            if (restrictionPolicyInternal != null && !restrictionPolicyInternal.isScreenCaptureEnabledEx(this.mShowUserId, false)) {
-                Slog.d("WindowManager", "Screen Capture is disabled by mdm for user(" + this.mShowUserId + ")");
+            if (restrictionPolicyInternal != null
+                    && !restrictionPolicyInternal.isScreenCaptureEnabledEx(
+                            this.mShowUserId, false)) {
+                Slog.d(
+                        "WindowManager",
+                        "Screen Capture is disabled by mdm for user(" + this.mShowUserId + ")");
                 return true;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (this.mWmService.mSensitiveContentPackages.shouldBlockScreenCaptureForApp(this.mOwnerUid, this.mClient.asBinder(), this.mAttrs.packageName)) {
+        if (this.mWmService.mSensitiveContentPackages.shouldBlockScreenCaptureForApp(
+                this.mOwnerUid, this.mClient.asBinder(), this.mAttrs.packageName)) {
             return true;
         }
         if (DevicePolicyCache.getInstance() == null) {
@@ -2410,9 +2776,15 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         if (CoreRune.FW_WAIT_TO_HANDLE_RESIZING_FROM_CLIENT && this.mWaitToHandleResizing) {
             return false;
         }
-        if (this.mSyncState == 1 && this.mLastConfigReportedToClient && isDrawn() && this.mPrepareSyncSeqId <= 0) {
+        if (this.mSyncState == 1
+                && this.mLastConfigReportedToClient
+                && isDrawn()
+                && this.mPrepareSyncSeqId <= 0) {
             onSyncFinishedDrawing();
-        } else if (CoreRune.FW_SHELL_TRANSITION_BUG_FIX && this.mActivityRecord == null && this.mSyncState == 1 && this.mViewVisibility != 0) {
+        } else if (CoreRune.FW_SHELL_TRANSITION_BUG_FIX
+                && this.mActivityRecord == null
+                && this.mSyncState == 1
+                && this.mViewVisibility != 0) {
             onSyncFinishedDrawing();
         }
         return super.isSyncFinished(syncGroup);
@@ -2432,7 +2804,10 @@ public final class WindowState extends WindowContainer implements WindowManagerP
     @Override // com.android.server.wm.WindowContainer
     public final boolean isVisible() {
         InsetsSourceProvider insetsSourceProvider;
-        return wouldBeVisibleIfPolicyIgnored() && isVisibleByPolicy() && ((insetsSourceProvider = this.mControllableInsetProvider) == null || insetsSourceProvider.mClientVisible);
+        return wouldBeVisibleIfPolicyIgnored()
+                && isVisibleByPolicy()
+                && ((insetsSourceProvider = this.mControllableInsetProvider) == null
+                        || insetsSourceProvider.mClientVisible);
     }
 
     public final boolean isVisibleByPolicy() {
@@ -2512,20 +2887,31 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         L63:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.WindowState.isVisibleRequested():boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.wm.WindowState.isVisibleRequested():boolean");
     }
 
     public final boolean isVisibleRequestedOrAdding() {
         ActivityRecord activityRecord = this.mActivityRecord;
-        return (this.mHasSurface || (!this.mRelayoutCalled && this.mViewVisibility == 0)) && isVisibleByPolicy() && !isParentWindowHidden() && !((activityRecord != null && !activityRecord.isVisibleRequested()) || this.mAnimatingExit || this.mDestroying);
+        return (this.mHasSurface || (!this.mRelayoutCalled && this.mViewVisibility == 0))
+                && isVisibleByPolicy()
+                && !isParentWindowHidden()
+                && !((activityRecord != null && !activityRecord.isVisibleRequested())
+                        || this.mAnimatingExit
+                        || this.mDestroying);
     }
 
     public final boolean isWindowTrustedOverlay() {
         WindowManager.LayoutParams layoutParams = this.mAttrs;
         int i = layoutParams.type;
-        if (i != 2039 && i != 2011 && i != 2012 && i != 2027 && i != 2000 && i != 2040 && i != 2019 && i != 2024 && i != 2015 && i != 2034 && i != 2032 && i != 2022 && i != 2031 && i != 2041) {
+        if (i != 2039 && i != 2011 && i != 2012 && i != 2027 && i != 2000 && i != 2040 && i != 2019
+                && i != 2024 && i != 2015 && i != 2034 && i != 2032 && i != 2022 && i != 2031
+                && i != 2041) {
             int i2 = layoutParams.privateFlags;
-            if (((536870912 & i2) == 0 || !this.mSession.mCanAddInternalSystemWindow) && (((i2 & 8) == 0 || !this.mSession.mCanCreateSystemApplicationOverlay) && (layoutParams.samsungFlags & 131072) == 0)) {
+            if (((536870912 & i2) == 0 || !this.mSession.mCanAddInternalSystemWindow)
+                    && (((i2 & 8) == 0 || !this.mSession.mCanCreateSystemApplicationOverlay)
+                            && (layoutParams.samsungFlags & 131072) == 0)) {
                 return false;
             }
         }
@@ -2536,19 +2922,36 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         WindowManager.LayoutParams layoutParams;
         int i2;
         DisplayContent.AnonymousClass1 anonymousClass1 = DisplayContent.COPY_SOURCE_VISIBILITY;
-        if (this.mWmService.mConstants.mSystemGestureExclusionLogDebounceTimeoutMillis <= 0 || (i2 = (layoutParams = this.mAttrs).type) == 2013 || i2 == 3 || i2 == 2019 || (layoutParams.flags & 16) != 0) {
+        if (this.mWmService.mConstants.mSystemGestureExclusionLogDebounceTimeoutMillis <= 0
+                || (i2 = (layoutParams = this.mAttrs).type) == 2013
+                || i2 == 3
+                || i2 == 2019
+                || (layoutParams.flags & 16) != 0) {
             return;
         }
         if (DisplayContent.needsGestureExclusionRestrictions(this, true)) {
             DisplayPolicy displayPolicy = getDisplayContent().mDisplayPolicy;
             if (displayPolicy.mHasNavigationBar) {
-                if ((displayPolicy.mLeftGestureInset > 0 || displayPolicy.mRightGestureInset > 0) && SystemClock.uptimeMillis() >= this.mLastExclusionLogUptimeMillis[i] + this.mWmService.mConstants.mSystemGestureExclusionLogDebounceTimeoutMillis) {
+                if ((displayPolicy.mLeftGestureInset > 0 || displayPolicy.mRightGestureInset > 0)
+                        && SystemClock.uptimeMillis()
+                                >= this.mLastExclusionLogUptimeMillis[i]
+                                        + this.mWmService
+                                                .mConstants
+                                                .mSystemGestureExclusionLogDebounceTimeoutMillis) {
                     long uptimeMillis = SystemClock.uptimeMillis();
                     long[] jArr = this.mLastExclusionLogUptimeMillis;
                     long j = uptimeMillis - jArr[i];
                     jArr[i] = uptimeMillis;
                     int i3 = this.mLastRequestedExclusionHeight[i];
-                    FrameworkStatsLog.write(FrameworkStatsLog.EXCLUSION_RECT_STATE_CHANGED, this.mAttrs.packageName, i3, i3 - this.mLastGrantedExclusionHeight[i], i + 1, getConfiguration().orientation == 2, false, (int) j);
+                    FrameworkStatsLog.write(
+                            FrameworkStatsLog.EXCLUSION_RECT_STATE_CHANGED,
+                            this.mAttrs.packageName,
+                            i3,
+                            i3 - this.mLastGrantedExclusionHeight[i],
+                            i + 1,
+                            getConfiguration().orientation == 2,
+                            false,
+                            (int) j);
                 }
             }
         }
@@ -2556,14 +2959,18 @@ public final class WindowState extends WindowContainer implements WindowManagerP
 
     public final boolean mightAffectAllDrawn() {
         int i = this.mWinAnimator.mAttrType;
-        return ((!isOnScreen() && !(i == 1 || i == 4)) || this.mAnimatingExit || this.mDestroying) ? false : true;
+        return ((!isOnScreen() && !(i == 1 || i == 4)) || this.mAnimatingExit || this.mDestroying)
+                ? false
+                : true;
     }
 
     @Override // com.android.server.wm.WindowContainer
     public final boolean needsZBoost() {
         ActivityRecord activityRecord;
         InsetsControlTarget imeTarget = getDisplayContent().getImeTarget(0);
-        if (!this.mIsImWindow || imeTarget == null || (activityRecord = imeTarget.getWindow().mActivityRecord) == null) {
+        if (!this.mIsImWindow
+                || imeTarget == null
+                || (activityRecord = imeTarget.getWindow().mActivityRecord) == null) {
             return false;
         }
         return activityRecord.needsZBoost();
@@ -2571,7 +2978,12 @@ public final class WindowState extends WindowContainer implements WindowManagerP
 
     public final void notifyInsetsChanged() {
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_INSETS_enabled[0]) {
-            ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_WINDOW_INSETS, -5211036212243647844L, 0, null, String.valueOf(this));
+            ProtoLogImpl_54989576.d(
+                    ProtoLogGroup.WM_DEBUG_WINDOW_INSETS,
+                    -5211036212243647844L,
+                    0,
+                    null,
+                    String.valueOf(this));
         }
         WindowFrames windowFrames = this.mWindowFrames;
         if (!windowFrames.mInsetsChanged) {
@@ -2590,7 +3002,12 @@ public final class WindowState extends WindowContainer implements WindowManagerP
     @Override // com.android.server.wm.InsetsControlTarget
     public final void notifyInsetsControlChanged(int i) {
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_INSETS_enabled[0]) {
-            ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_WINDOW_INSETS, -3186229270467822891L, 0, null, String.valueOf(this));
+            ProtoLogImpl_54989576.d(
+                    ProtoLogGroup.WM_DEBUG_WINDOW_INSETS,
+                    -3186229270467822891L,
+                    0,
+                    null,
+                    String.valueOf(this));
         }
         if (this.mRemoved) {
             return;
@@ -2603,11 +3020,16 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             array2.setTo(array, false);
         }
         if (Flags.insetsControlChangedItem()) {
-            this.mSession.mProcess.scheduleClientTransactionItem(WindowStateInsetsControlChangeItem.obtain(this.mClient, this.mLastReportedInsetsState, this.mLastReportedActiveControls));
+            this.mSession.mProcess.scheduleClientTransactionItem(
+                    WindowStateInsetsControlChangeItem.obtain(
+                            this.mClient,
+                            this.mLastReportedInsetsState,
+                            this.mLastReportedActiveControls));
             return;
         }
         try {
-            this.mClient.insetsControlChanged(this.mLastReportedInsetsState, this.mLastReportedActiveControls);
+            this.mClient.insetsControlChanged(
+                    this.mLastReportedInsetsState, this.mLastReportedActiveControls);
         } catch (RemoteException e) {
             Slog.w("WindowManager", "Failed to deliver inset control state change to w=" + this, e);
         }
@@ -2623,7 +3045,14 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             String valueOf = String.valueOf(windowStateAnimator);
             boolean z2 = windowState.mAnimatingExit;
             ActivityRecord activityRecord = windowState.mActivityRecord;
-            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_ANIM, -1495677286613044867L, 60, null, valueOf, Boolean.valueOf(z2), Boolean.valueOf(activityRecord != null && activityRecord.reportedVisible));
+            ProtoLogImpl_54989576.v(
+                    ProtoLogGroup.WM_DEBUG_ANIM,
+                    -1495677286613044867L,
+                    60,
+                    null,
+                    valueOf,
+                    Boolean.valueOf(z2),
+                    Boolean.valueOf(activityRecord != null && activityRecord.reportedVisible));
         }
         int i2 = windowState.mPolicyVisibility;
         boolean z3 = (i2 & 1) != 0;
@@ -2636,10 +3065,16 @@ public final class WindowState extends WindowContainer implements WindowManagerP
                 windowState.clearPolicyVisibilityFlag(1);
             }
             if (!windowState.isVisibleByPolicy()) {
-                windowState.mWinAnimator.hide(windowState.getPendingTransaction(), "checkPolicyVisibilityChange");
+                windowState.mWinAnimator.hide(
+                        windowState.getPendingTransaction(), "checkPolicyVisibilityChange");
                 if (windowState.isFocused()) {
                     if (ProtoLogImpl_54989576.Cache.WM_DEBUG_FOCUS_LIGHT_enabled[2]) {
-                        ProtoLogImpl_54989576.i(ProtoLogGroup.WM_DEBUG_FOCUS_LIGHT, -6167820560758523840L, 0, null, null);
+                        ProtoLogImpl_54989576.i(
+                                ProtoLogGroup.WM_DEBUG_FOCUS_LIGHT,
+                                -6167820560758523840L,
+                                0,
+                                null,
+                                null);
                     }
                     windowState.mWmService.mFocusMayChange = true;
                 }
@@ -2663,8 +3098,10 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         }
     }
 
-    @Override // com.android.server.wm.WindowContainer, com.android.server.wm.SurfaceAnimator.Animatable
-    public final void onAnimationLeashCreated(SurfaceControl.Transaction transaction, SurfaceControl surfaceControl) {
+    @Override // com.android.server.wm.WindowContainer,
+              // com.android.server.wm.SurfaceAnimator.Animatable
+    public final void onAnimationLeashCreated(
+            SurfaceControl.Transaction transaction, SurfaceControl surfaceControl) {
         super.onAnimationLeashCreated(transaction, surfaceControl);
         if (isStartingWindowAssociatedToTask()) {
             transaction.setLayer(surfaceControl, Integer.MAX_VALUE);
@@ -2679,7 +3116,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         if (this.mAttrs.type != 3) {
             if (z != isVisibleNow) {
                 if (!z2 && isVisibleNow) {
-                    AccessibilityController accessibilityController = this.mWmService.mAccessibilityController;
+                    AccessibilityController accessibilityController =
+                            this.mWmService.mAccessibilityController;
                     this.mWinAnimator.applyAnimationLocked(2, false);
                     if (accessibilityController.hasCallbacks()) {
                         accessibilityController.onWindowTransition(this, 2);
@@ -2692,7 +3130,12 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         }
         if (!z && isVisibleNow && this.mActivityRecord.isAnimating(3)) {
             if (ProtoLogImpl_54989576.Cache.WM_DEBUG_ANIM_enabled[0]) {
-                ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_ANIM, 7646042751617940718L, 0, null, String.valueOf(this));
+                ProtoLogImpl_54989576.d(
+                        ProtoLogGroup.WM_DEBUG_ANIM,
+                        7646042751617940718L,
+                        0,
+                        null,
+                        String.valueOf(this));
             }
             this.mAnimatingExit = true;
             this.mRemoveOnExit = true;
@@ -2714,10 +3157,18 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         if (diff != 0) {
             this.mLastConfigReportedToClient = false;
         }
-        if ((getDisplayContent().mImeInputTarget == this || isImeLayeringTarget()) && (diff & 536870912) != 0) {
+        if ((getDisplayContent().mImeInputTarget == this || isImeLayeringTarget())
+                && (diff & 536870912) != 0) {
             this.mDisplayContent.updateImeControlTarget(isImeLayeringTarget());
             StartingData startingData = this.mStartingData;
-            if (startingData == null || startingData.mAssociatedTask != null || this.mTempConfiguration.windowConfiguration.getRotation() != configuration2.windowConfiguration.getRotation() || this.mTempConfiguration.windowConfiguration.getBounds().equals(getBounds())) {
+            if (startingData == null
+                    || startingData.mAssociatedTask != null
+                    || this.mTempConfiguration.windowConfiguration.getRotation()
+                            != configuration2.windowConfiguration.getRotation()
+                    || this.mTempConfiguration
+                            .windowConfiguration
+                            .getBounds()
+                            .equals(getBounds())) {
                 return;
             }
             this.mStartingData.mResizedFromTransfer = true;
@@ -2733,11 +3184,26 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         int i2;
         DisplayContent displayContent2;
         InputTarget inputTarget;
-        boolean z = (displayContent == null || this.mDisplayContent == null || (!displayContent.isAppCastingDisplay() && !this.mDisplayContent.isAppCastingDisplay())) ? false : true;
+        boolean z =
+                (displayContent == null
+                                || this.mDisplayContent == null
+                                || (!displayContent.isAppCastingDisplay()
+                                        && !this.mDisplayContent.isAppCastingDisplay()))
+                        ? false
+                        : true;
         boolean z2 = CoreRune.CARLIFE_NAVBAR;
-        boolean z3 = z2 && displayContent != null && this.mDisplayContent != null && (displayContent.isCarLifeDisplay() || this.mDisplayContent.isCarLifeDisplay());
-        if (displayContent != null && (displayContent2 = this.mDisplayContent) != null && displayContent != displayContent2 && (inputTarget = displayContent2.mImeInputTarget) == this) {
-            displayContent.updateImeInputAndControlTarget(inputTarget != null ? inputTarget.getWindowState() : null);
+        boolean z3 =
+                z2
+                        && displayContent != null
+                        && this.mDisplayContent != null
+                        && (displayContent.isCarLifeDisplay()
+                                || this.mDisplayContent.isCarLifeDisplay());
+        if (displayContent != null
+                && (displayContent2 = this.mDisplayContent) != null
+                && displayContent != displayContent2
+                && (inputTarget = displayContent2.mImeInputTarget) == this) {
+            displayContent.updateImeInputAndControlTarget(
+                    inputTarget != null ? inputTarget.getWindowState() : null);
             this.mDisplayContent.setImeInputTarget(null);
             if (this.mWmService.mAtmService.mDexController.getDexModeLocked() == 2) {
                 DisplayContent displayContent3 = this.mDisplayContent;
@@ -2747,7 +3213,13 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             }
         }
         super.onDisplayChanged(displayContent);
-        if (displayContent != null && (i = (inputWindowHandle = (inputWindowHandleWrapper = this.mInputWindowHandle).mHandle).displayId) != (i2 = displayContent.mDisplayId)) {
+        if (displayContent != null
+                && (i =
+                                (inputWindowHandle =
+                                                (inputWindowHandleWrapper = this.mInputWindowHandle)
+                                                        .mHandle)
+                                        .displayId)
+                        != (i2 = displayContent.mDisplayId)) {
             this.mLayoutSeq = displayContent.mLayoutSeq - 1;
             if (i != i2) {
                 inputWindowHandle.displayId = i2;
@@ -2770,7 +3242,16 @@ public final class WindowState extends WindowContainer implements WindowManagerP
                 animationAdapter.dump(new PrintWriter(stringWriter), "");
             }
             if (zArr[1]) {
-                ProtoLogImpl_54989576.v(protoLogGroup, -1007526574020149845L, 252, null, String.valueOf(this), Boolean.valueOf(this.mAnimatingExit), Boolean.valueOf(this.mRemoveOnExit), Boolean.valueOf(isAnimating()), String.valueOf(stringWriter));
+                ProtoLogImpl_54989576.v(
+                        protoLogGroup,
+                        -1007526574020149845L,
+                        252,
+                        null,
+                        String.valueOf(this),
+                        Boolean.valueOf(this.mAnimatingExit),
+                        Boolean.valueOf(this.mRemoveOnExit),
+                        Boolean.valueOf(isAnimating()),
+                        String.valueOf(stringWriter));
             }
         }
         if (!this.mChildren.isEmpty()) {
@@ -2792,7 +3273,13 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         }
         if (!isAnimating() && isSelfOrAncestorWindowAnimatingExit()) {
             if (ProtoLogImpl_54989576.Cache.WM_DEBUG_ADD_REMOVE_enabled[1]) {
-                ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_ADD_REMOVE, 1738645946553610841L, 12, null, String.valueOf(this), Boolean.valueOf(this.mRemoveOnExit));
+                ProtoLogImpl_54989576.v(
+                        ProtoLogGroup.WM_DEBUG_ADD_REMOVE,
+                        1738645946553610841L,
+                        12,
+                        null,
+                        String.valueOf(this),
+                        Boolean.valueOf(this.mRemoveOnExit));
             }
             this.mDestroying = true;
             boolean hasSurface = this.mWinAnimator.hasSurface();
@@ -2809,7 +3296,12 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             }
             this.mAnimatingExit = false;
             if (zArr[0]) {
-                ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_ANIM, -7737516306844862315L, 0, null, String.valueOf(this));
+                ProtoLogImpl_54989576.d(
+                        ProtoLogGroup.WM_DEBUG_ANIM,
+                        -7737516306844862315L,
+                        0,
+                        null,
+                        String.valueOf(this));
             }
             getDisplayContent().mWallpaperController.hideWallpapers(this);
         }
@@ -2818,19 +3310,27 @@ public final class WindowState extends WindowContainer implements WindowManagerP
     @Override // com.android.server.wm.WindowContainer
     public final void onMovedByResize() {
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_RESIZE_enabled[0]) {
-            ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_RESIZE, 5236278969232209904L, 0, null, String.valueOf(this));
+            ProtoLogImpl_54989576.d(
+                    ProtoLogGroup.WM_DEBUG_RESIZE,
+                    5236278969232209904L,
+                    0,
+                    null,
+                    String.valueOf(this));
         }
         this.mMovedByResize = true;
         super.onMovedByResize();
     }
 
     @Override // com.android.server.wm.WindowContainer, com.android.server.wm.ConfigurationContainer
-    public final void onParentChanged(ConfigurationContainer configurationContainer, ConfigurationContainer configurationContainer2) {
+    public final void onParentChanged(
+            ConfigurationContainer configurationContainer,
+            ConfigurationContainer configurationContainer2) {
         super.onParentChanged(configurationContainer, configurationContainer2);
         this.mDrawnStateEvaluated = false;
         DisplayContent displayContent = getDisplayContent();
         if (displayContent.mMagnificationSpec != null) {
-            displayContent.applyMagnificationSpec(displayContent.getPendingTransaction(), displayContent.mMagnificationSpec);
+            displayContent.applyMagnificationSpec(
+                    displayContent.getPendingTransaction(), displayContent.mMagnificationSpec);
         }
     }
 
@@ -2839,7 +3339,12 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         ArrayList arrayList = this.mWmService.mResizingWindows;
         if (this.mHasSurface && !isGoneForLayout() && !arrayList.contains(this)) {
             if (ProtoLogImpl_54989576.Cache.WM_DEBUG_RESIZE_enabled[0]) {
-                ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_RESIZE, 1783521309242112490L, 0, null, String.valueOf(this));
+                ProtoLogImpl_54989576.d(
+                        ProtoLogGroup.WM_DEBUG_RESIZE,
+                        1783521309242112490L,
+                        0,
+                        null,
+                        String.valueOf(this));
             }
             arrayList.add(this);
         }
@@ -2847,16 +3352,29 @@ public final class WindowState extends WindowContainer implements WindowManagerP
     }
 
     public final void onResizePostDispatched(int i, int i2, boolean z) {
-        if (z && i >= 0 && i != this.mLastReportedConfiguration.getMergedConfiguration().windowConfiguration.getRotation()) {
+        if (z
+                && i >= 0
+                && i
+                        != this.mLastReportedConfiguration
+                                .getMergedConfiguration()
+                                .windowConfiguration
+                                .getRotation()) {
             this.mOrientationChangeRedrawRequestTime = SystemClock.elapsedRealtime();
             if (ProtoLogImpl_54989576.Cache.WM_DEBUG_ORIENTATION_enabled[1]) {
-                ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_ORIENTATION, -5755338358883139945L, 0, null, String.valueOf(this));
+                ProtoLogImpl_54989576.v(
+                        ProtoLogGroup.WM_DEBUG_ORIENTATION,
+                        -5755338358883139945L,
+                        0,
+                        null,
+                        String.valueOf(this));
             }
         }
         if (this.mWmService.mAccessibilityController.hasCallbacks()) {
-            AccessibilityController accessibilityController = this.mWmService.mAccessibilityController;
+            AccessibilityController accessibilityController =
+                    this.mWmService.mAccessibilityController;
             accessibilityController.getClass();
-            accessibilityController.onSomeWindowResizedOrMovedWithCallingUid(Binder.getCallingUid(), i2);
+            accessibilityController.onSomeWindowResizedOrMovedWithCallingUid(
+                    Binder.getCallingUid(), i2);
         }
     }
 
@@ -2899,9 +3417,16 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             return z;
         }
         this.mAppFreezing = false;
-        if (this.mHasSurface && !getOrientationChanging() && this.mWmService.mWindowsFreezingScreen != 2) {
+        if (this.mHasSurface
+                && !getOrientationChanging()
+                && this.mWmService.mWindowsFreezingScreen != 2) {
             if (ProtoLogImpl_54989576.Cache.WM_DEBUG_ORIENTATION_enabled[1]) {
-                ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_ORIENTATION, 8812513438749898553L, 0, null, String.valueOf(this));
+                ProtoLogImpl_54989576.v(
+                        ProtoLogGroup.WM_DEBUG_ORIENTATION,
+                        8812513438749898553L,
+                        0,
+                        null,
+                        String.valueOf(this));
             }
             setOrientationChanging(true);
         }
@@ -2914,7 +3439,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         if (this.mInputChannel != null) {
             throw new IllegalStateException("Window already has an input channel.");
         }
-        InputChannel createInputChannel = this.mWmService.mInputManager.createInputChannel(getName());
+        InputChannel createInputChannel =
+                this.mWmService.mInputManager.createInputChannel(getName());
         this.mInputChannel = createInputChannel;
         IBinder token = createInputChannel.getToken();
         this.mInputChannelToken = token;
@@ -2936,12 +3462,20 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             if (this.mAttrs.type != 3) {
                 activityRecord.firstWindowDrawn = true;
                 activityRecord.mSplashScreenStyleSolidColor = true;
-                BackNavigationController.AnimationHandler animationHandler = activityRecord.mAtmService.mBackNavigationController.mAnimationHandler;
+                BackNavigationController.AnimationHandler animationHandler =
+                        activityRecord.mAtmService.mBackNavigationController.mAnimationHandler;
                 if (animationHandler.mComposed && !animationHandler.mWaitTransition) {
                     boolean z3 = true;
-                    for (int length = animationHandler.mOpenAnimAdaptor.mAdaptors.length - 1; length >= 0; length--) {
-                        BackNavigationController.AnimationHandler.BackWindowAnimationAdaptor backWindowAnimationAdaptor = animationHandler.mOpenAnimAdaptor.mAdaptors[length];
-                        if (BackNavigationController.AnimationHandler.isAnimateTarget(activityRecord, backWindowAnimationAdaptor.mTarget, animationHandler.mSwitchType)) {
+                    for (int length = animationHandler.mOpenAnimAdaptor.mAdaptors.length - 1;
+                            length >= 0;
+                            length--) {
+                        BackNavigationController.AnimationHandler.BackWindowAnimationAdaptor
+                                backWindowAnimationAdaptor =
+                                        animationHandler.mOpenAnimAdaptor.mAdaptors[length];
+                        if (BackNavigationController.AnimationHandler.isAnimateTarget(
+                                activityRecord,
+                                backWindowAnimationAdaptor.mTarget,
+                                animationHandler.mSwitchType)) {
                             backWindowAnimationAdaptor.mAppWindowDrawn = true;
                         }
                         z3 &= backWindowAnimationAdaptor.mAppWindowDrawn;
@@ -2952,7 +3486,12 @@ public final class WindowState extends WindowContainer implements WindowManagerP
                 }
                 if (activityRecord.mStartingWindow != null) {
                     if (ProtoLogImpl_54989576.Cache.WM_DEBUG_STARTING_WINDOW_enabled[1]) {
-                        ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_STARTING_WINDOW, -6965298896142649709L, 0, "Finish starting %s: first real window is shown, no animation", String.valueOf(this.mToken));
+                        ProtoLogImpl_54989576.v(
+                                ProtoLogGroup.WM_DEBUG_STARTING_WINDOW,
+                                -6965298896142649709L,
+                                0,
+                                "Finish starting %s: first real window is shown, no animation",
+                                String.valueOf(this.mToken));
                     }
                     cancelAnimation();
                 }
@@ -2964,7 +3503,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
                     if (this.mAttrs.type == 1) {
                         activityRecord.removeStartingWindow();
                     }
-                } else if (task.getActivity(new ActivityRecord$$ExternalSyntheticLambda4(1)) == null) {
+                } else if (task.getActivity(new ActivityRecord$$ExternalSyntheticLambda4(1))
+                        == null) {
                     WindowState window = task.getWindow(new Task$$ExternalSyntheticLambda0(6));
                     ActivityRecord activityRecord2 = window != null ? window.mActivityRecord : null;
                     if (activityRecord2 != null) {
@@ -2989,11 +3529,18 @@ public final class WindowState extends WindowContainer implements WindowManagerP
                 } else {
                     z = false;
                 }
-                if (!z && activityRecord.mStartingData != null && !activityRecord.finishing && !activityRecord.mLaunchedFromBubble && activityRecord.mVisibleRequested && !activityRecord.mDisplayContent.mAppTransition.isReady()) {
+                if (!z
+                        && activityRecord.mStartingData != null
+                        && !activityRecord.finishing
+                        && !activityRecord.mLaunchedFromBubble
+                        && activityRecord.mVisibleRequested
+                        && !activityRecord.mDisplayContent.mAppTransition.isReady()) {
                     DisplayContent displayContent = activityRecord.mDisplayContent;
-                    if (!(displayContent.mAppTransition.mAppTransitionState == 2) && displayContent.isNextTransitionForward()) {
+                    if (!(displayContent.mAppTransition.mAppTransitionState == 2)
+                            && displayContent.isNextTransitionForward()) {
                         activityRecord.mStartingData.mIsTransitionForward = true;
-                        if (activityRecord != activityRecord.mDisplayContent.getLastOrientationSource()) {
+                        if (activityRecord
+                                != activityRecord.mDisplayContent.getLastOrientationSource()) {
                             activityRecord.mDisplayContent.updateOrientation(false);
                         }
                         activityRecord.mDisplayContent.executeAppTransition();
@@ -3008,7 +3555,12 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         this.mWinAnimator.applyEnterAnimationLocked();
         this.mWinAnimator.mLastAlpha = -1.0f;
         if (ProtoLogImpl_54989576.Cache.WM_FORCE_DEBUG_ANIM_enabled[1]) {
-            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_FORCE_DEBUG_ANIM, 893587812979915130L, 0, "performShowLocked: mDrawState=HAS_DRAWN in %s", String.valueOf(this));
+            ProtoLogImpl_54989576.v(
+                    ProtoLogGroup.WM_FORCE_DEBUG_ANIM,
+                    893587812979915130L,
+                    0,
+                    "performShowLocked: mDrawState=HAS_DRAWN in %s",
+                    String.valueOf(this));
         }
         this.mWinAnimator.mDrawState = 4;
         this.mWmService.scheduleAnimationLocked();
@@ -3032,23 +3584,26 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         if (isVisibleRequestedOrAdding()) {
             if (this.mDrawLock == null) {
                 CharSequence windowTag = getWindowTag();
-                PowerManager.WakeLock newWakeLock = this.mWmService.mPowerManager.newWakeLock(128, "Window:" + ((Object) windowTag));
+                PowerManager.WakeLock newWakeLock =
+                        this.mWmService.mPowerManager.newWakeLock(
+                                128, "Window:" + ((Object) windowTag));
                 this.mDrawLock = newWakeLock;
                 newWakeLock.setReferenceCounted(false);
-                this.mDrawLock.setWorkSource(new WorkSource(this.mOwnerUid, this.mAttrs.packageName));
+                this.mDrawLock.setWorkSource(
+                        new WorkSource(this.mOwnerUid, this.mAttrs.packageName));
             }
             this.mDrawLock.acquire(j);
         }
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:33:0x0186, code lost:
-    
-        if (r2.mTmpWindow != null) goto L93;
-     */
+
+       if (r2.mTmpWindow != null) goto L93;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:57:0x01db, code lost:
-    
-        if (r5 == false) goto L122;
-     */
+
+       if (r5 == false) goto L122;
+    */
     /* JADX WARN: Removed duplicated region for block: B:114:0x0118  */
     /* JADX WARN: Removed duplicated region for block: B:60:0x01e8  */
     /* JADX WARN: Removed duplicated region for block: B:62:0x01f7  */
@@ -3063,7 +3618,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             Method dump skipped, instructions count: 616
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.wm.WindowState.prepareSurfaces():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: com.android.server.wm.WindowState.prepareSurfaces():void");
     }
 
     @Override // com.android.server.wm.WindowContainer
@@ -3071,9 +3627,17 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         int i;
         int i2;
         if (!((ArrayList) this.mDrawHandlers).isEmpty()) {
-            Slog.w("WindowManager", "prepareSync with mDrawHandlers, " + this + ", " + Debug.getCallers(8));
-            if (CoreRune.MW_PIP_SHELL_TRANSITION && this.mTransitionController.isCollecting() && inPinnedWindowingMode() && this.mDrawHandlers.stream().anyMatch(new WindowState$$ExternalSyntheticLambda4(1))) {
-                Slog.d("WindowManager", "prepareSync: skip, reason=split_to_pip_bounds_change" + this);
+            Slog.w(
+                    "WindowManager",
+                    "prepareSync with mDrawHandlers, " + this + ", " + Debug.getCallers(8));
+            if (CoreRune.MW_PIP_SHELL_TRANSITION
+                    && this.mTransitionController.isCollecting()
+                    && inPinnedWindowingMode()
+                    && this.mDrawHandlers.stream()
+                            .anyMatch(new WindowState$$ExternalSyntheticLambda4(1))) {
+                Slog.d(
+                        "WindowManager",
+                        "prepareSync: skip, reason=split_to_pip_bounds_change" + this);
                 return false;
             }
         }
@@ -3083,20 +3647,31 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         if (this.mIsWallpaper) {
             return true;
         }
-        if (this.mActivityRecord != null && this.mViewVisibility != 0 && (i2 = this.mWinAnimator.mAttrType) != 1 && i2 != 3) {
+        if (this.mActivityRecord != null
+                && this.mViewVisibility != 0
+                && (i2 = this.mWinAnimator.mAttrType) != 1
+                && i2 != 3) {
             return false;
         }
         if (CoreRune.MW_EMBED_ACTIVITY && isSplitEmbedded() && this.mStartingData == null) {
             Task task = getTask();
             ActivityRecord activityRecord = this.mActivityRecord;
-            if (task != null && task.mSharedStartingData != null && activityRecord != null && activityRecord.mStartingData == null) {
+            if (task != null
+                    && task.mSharedStartingData != null
+                    && activityRecord != null
+                    && activityRecord.mStartingData == null) {
                 return false;
             }
         }
         this.mSyncState = 1;
         if (this.mPrepareSyncSeqId > 0) {
             if (ProtoLogImpl_54989576.Cache.WM_DEBUG_SYNC_ENGINE_enabled[0]) {
-                ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_SYNC_ENGINE, -5774445199273871848L, 0, null, String.valueOf(this));
+                ProtoLogImpl_54989576.d(
+                        ProtoLogGroup.WM_DEBUG_SYNC_ENGINE,
+                        -5774445199273871848L,
+                        0,
+                        null,
+                        String.valueOf(this));
             }
             dropBufferFrom(this.mSyncTransaction);
         }
@@ -3117,20 +3692,44 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             this.mRedrawForSyncReported = false;
         }
         if (CoreRune.FW_SHELL_TRANSITION_LOG) {
-            Slog.d("WindowManager", "prepareSync <SYNC_STATE_WAITING_FOR_DRAW>, mPrepareSyncSeqId=" + this.mPrepareSyncSeqId + ", win=" + this);
+            Slog.d(
+                    "WindowManager",
+                    "prepareSync <SYNC_STATE_WAITING_FOR_DRAW>, mPrepareSyncSeqId="
+                            + this.mPrepareSyncSeqId
+                            + ", win="
+                            + this);
         }
         return true;
     }
 
     public final void prepareWindowToDisplayDuringRelayout(boolean z) {
         ActivityRecord activityRecord;
-        if ((this.mAttrs.flags & 2097152) != 0 || ((activityRecord = this.mActivityRecord) != null && activityRecord.canTurnScreenOn())) {
+        if ((this.mAttrs.flags & 2097152) != 0
+                || ((activityRecord = this.mActivityRecord) != null
+                        && activityRecord.canTurnScreenOn())) {
             WindowManagerService windowManagerService = this.mWmService;
-            boolean z2 = windowManagerService.mAllowTheaterModeWakeFromLayout || Settings.Global.getInt(windowManagerService.mContext.getContentResolver(), "theater_mode_on", 0) == 0;
+            boolean z2 =
+                    windowManagerService.mAllowTheaterModeWakeFromLayout
+                            || Settings.Global.getInt(
+                                            windowManagerService.mContext.getContentResolver(),
+                                            "theater_mode_on",
+                                            0)
+                                    == 0;
             ActivityRecord activityRecord2 = this.mActivityRecord;
             boolean z3 = activityRecord2 == null || activityRecord2.mCurrentLaunchCanTurnScreenOn;
-            if (z2 && z3 && ((this.mWmService.mAtmService.mActiveDreamComponent != null || !this.mWmService.mPowerManager.isInteractive()) && (this.mWmService.mAtmService.mDexController.getDexModeLocked() != 2 || !this.mWmService.mPowerManager.isInteractive() || !this.mWmService.mPowerManagerInternal.isInternalDisplayOff() || getDisplayContent() == null || getDisplayContent().mDisplayId != 2))) {
-                this.mWmService.mPowerManager.wakeUp(SystemClock.uptimeMillis(), 2, "android.server.wm:SCREEN_ON_FLAG::" + this.mAttrs.packageName);
+            if (z2
+                    && z3
+                    && ((this.mWmService.mAtmService.mActiveDreamComponent != null
+                                    || !this.mWmService.mPowerManager.isInteractive())
+                            && (this.mWmService.mAtmService.mDexController.getDexModeLocked() != 2
+                                    || !this.mWmService.mPowerManager.isInteractive()
+                                    || !this.mWmService.mPowerManagerInternal.isInternalDisplayOff()
+                                    || getDisplayContent() == null
+                                    || getDisplayContent().mDisplayId != 2))) {
+                this.mWmService.mPowerManager.wakeUp(
+                        SystemClock.uptimeMillis(),
+                        2,
+                        "android.server.wm:SCREEN_ON_FLAG::" + this.mAttrs.packageName);
             }
             ActivityRecord activityRecord3 = this.mActivityRecord;
             if (activityRecord3 != null) {
@@ -3156,7 +3755,10 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         WindowManagerService windowManagerService = this.mWmService;
         int i = windowManagerService.mOverrideConfigTypes | windowManagerService.mConfigTypes;
         for (int size = sparseArray.size() - 1; size >= 0; size--) {
-            if ((((InsetsSourceProvider) this.mInsetsSourceProviders.valueAt(size)).mSource.getType() & i) != 0) {
+            if ((((InsetsSourceProvider) this.mInsetsSourceProviders.valueAt(size))
+                                    .mSource.getType()
+                            & i)
+                    != 0) {
                 return true;
             }
         }
@@ -3183,7 +3785,12 @@ public final class WindowState extends WindowContainer implements WindowManagerP
                 cancelAnimation();
             }
             if (ProtoLogImpl_54989576.Cache.WM_DEBUG_ANIM_enabled[0]) {
-                ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_ANIM, -5202247309108694583L, 0, null, String.valueOf(this));
+                ProtoLogImpl_54989576.d(
+                        ProtoLogGroup.WM_DEBUG_ANIM,
+                        -5202247309108694583L,
+                        0,
+                        null,
+                        String.valueOf(this));
             }
         }
         if (this.mDestroying) {
@@ -3212,23 +3819,43 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         this.mWindowRemovalAllowed = true;
         boolean[] zArr = ProtoLogImpl_54989576.Cache.WM_DEBUG_ADD_REMOVE_enabled;
         if (zArr[1]) {
-            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_ADD_REMOVE, 3927343382258792268L, 0, null, String.valueOf(this), String.valueOf(Debug.getCallers(5)));
+            ProtoLogImpl_54989576.v(
+                    ProtoLogGroup.WM_DEBUG_ADD_REMOVE,
+                    3927343382258792268L,
+                    0,
+                    null,
+                    String.valueOf(this),
+                    String.valueOf(Debug.getCallers(5)));
         }
         boolean z2 = this.mStartingData != null;
         if (z2) {
             if (ProtoLogImpl_54989576.Cache.WM_DEBUG_STARTING_WINDOW_enabled[0]) {
-                ProtoLogImpl_54989576.d(ProtoLogGroup.WM_DEBUG_STARTING_WINDOW, -4831815184899821371L, 0, "Starting window removed %s", String.valueOf(this));
+                ProtoLogImpl_54989576.d(
+                        ProtoLogGroup.WM_DEBUG_STARTING_WINDOW,
+                        -4831815184899821371L,
+                        0,
+                        "Starting window removed %s",
+                        String.valueOf(this));
             }
             ActivityRecord activityRecord3 = this.mActivityRecord;
             if (activityRecord3 != null) {
-                activityRecord3.forAllWindows((ToBooleanFunction) new WindowState$$ExternalSyntheticLambda6(), true);
+                activityRecord3.forAllWindows(
+                        (ToBooleanFunction) new WindowState$$ExternalSyntheticLambda6(), true);
             }
-            this.mTransitionController.mTransitionTracer.logRemovingStartingWindow(this.mStartingData);
+            this.mTransitionController.mTransitionTracer.logRemovingStartingWindow(
+                    this.mStartingData);
         } else if (this.mAttrs.type == 1 && isSelfAnimating(0, 128)) {
             cancelAnimation();
         }
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_FOCUS_enabled[1]) {
-            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_FOCUS, -5803097884846965819L, 1, null, Long.valueOf(System.identityHashCode(this.mClient.asBinder())), String.valueOf(this.mWinAnimator.mSurfaceController), String.valueOf(Debug.getCallers(5)));
+            ProtoLogImpl_54989576.v(
+                    ProtoLogGroup.WM_DEBUG_FOCUS,
+                    -5803097884846965819L,
+                    1,
+                    null,
+                    Long.valueOf(System.identityHashCode(this.mClient.asBinder())),
+                    String.valueOf(this.mWinAnimator.mSurfaceController),
+                    String.valueOf(Debug.getCallers(5)));
         }
         DisplayContent displayContent = getDisplayContent();
         long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -3244,21 +3871,46 @@ public final class WindowState extends WindowContainer implements WindowManagerP
                 boolean shown = this.mWinAnimator.getShown();
                 boolean isAnimating = isAnimating(3);
                 ActivityRecord activityRecord4 = this.mActivityRecord;
-                ProtoLogImpl_54989576.v(ProtoLogGroup.WM_FORCE_DEBUG_APP_TRANSITIONS, 6527265605379240657L, 262128, "Remove %s: mSurfaceController=%s mAnimatingExit=%b mRemoveOnExit=%b mHasSurface=%b surfaceShowing=%b animating=%b app-animation=%b mDisplayFrozen=%b callers=%s", valueOf, valueOf2, Boolean.valueOf(z3), Boolean.valueOf(z4), Boolean.valueOf(z5), Boolean.valueOf(shown), Boolean.valueOf(isAnimating), Boolean.valueOf(activityRecord4 != null && activityRecord4.isAnimating(3)), Boolean.valueOf(this.mWmService.mDisplayFrozen), String.valueOf(Debug.getCallers(6)));
+                ProtoLogImpl_54989576.v(
+                        ProtoLogGroup.WM_FORCE_DEBUG_APP_TRANSITIONS,
+                        6527265605379240657L,
+                        262128,
+                        "Remove %s: mSurfaceController=%s mAnimatingExit=%b mRemoveOnExit=%b"
+                            + " mHasSurface=%b surfaceShowing=%b animating=%b app-animation=%b"
+                            + " mDisplayFrozen=%b callers=%s",
+                        valueOf,
+                        valueOf2,
+                        Boolean.valueOf(z3),
+                        Boolean.valueOf(z4),
+                        Boolean.valueOf(z5),
+                        Boolean.valueOf(shown),
+                        Boolean.valueOf(isAnimating),
+                        Boolean.valueOf(activityRecord4 != null && activityRecord4.isAnimating(3)),
+                        Boolean.valueOf(this.mWmService.mDisplayFrozen),
+                        String.valueOf(Debug.getCallers(6)));
             }
             adjustImeParamsForDex(false);
             if (this.mHasSurface && this.mToken.okToAnimate()) {
                 z = isVisible();
-                boolean z6 = !displayContent.inTransition() && ((activityRecord2 = this.mActivityRecord) == null || !activityRecord2.isRelaunching());
+                boolean z6 =
+                        !displayContent.inTransition()
+                                && ((activityRecord2 = this.mActivityRecord) == null
+                                        || !activityRecord2.isRelaunching());
                 boolean[] zArr2 = ProtoLogImpl_54989576.Cache.WM_DEBUG_ANIM_enabled;
                 if (z && isDisplayed()) {
                     int i = !z2 ? 2 : 5;
                     if (z6 && this.mWinAnimator.applyAnimationLocked(i, false)) {
                         if (zArr2[1]) {
-                            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_ANIM, 7789778354950913237L, 0, null, String.valueOf(this));
+                            ProtoLogImpl_54989576.v(
+                                    ProtoLogGroup.WM_DEBUG_ANIM,
+                                    7789778354950913237L,
+                                    0,
+                                    null,
+                                    String.valueOf(this));
                         }
                         if (z2 && this.mSurfaceAnimator.hasLeash()) {
-                            getPendingTransaction().setLayer(this.mSurfaceAnimator.mLeash, Integer.MAX_VALUE);
+                            getPendingTransaction()
+                                    .setLayer(this.mSurfaceAnimator.mLeash, Integer.MAX_VALUE);
                         }
                         this.mAnimatingExit = true;
                         setDisplayLayoutNeeded();
@@ -3269,22 +3921,41 @@ public final class WindowState extends WindowContainer implements WindowManagerP
                     }
                 }
                 boolean z7 = z6 && (this.mAnimatingExit || isAnimationRunningSelfOrParent());
-                if (z7 && getDisplayContent() != null && getDisplayContent().isAppCastingDisplay() && !this.mAnimatingExit && !isAnimating(0, 16)) {
+                if (z7
+                        && getDisplayContent() != null
+                        && getDisplayContent().isAppCastingDisplay()
+                        && !this.mAnimatingExit
+                        && !isAnimating(0, 16)) {
                     z7 = false;
                 }
-                boolean z8 = z2 && (activityRecord = this.mActivityRecord) != null && activityRecord.mChildren.size() == 1 && activityRecord.mChildren.get(0) == this;
+                boolean z8 =
+                        z2
+                                && (activityRecord = this.mActivityRecord) != null
+                                && activityRecord.mChildren.size() == 1
+                                && activityRecord.mChildren.get(0) == this;
                 if (this.mWinAnimator.getShown() && !z8 && z7) {
                     this.mAnimatingExit = true;
                     if (zArr[1]) {
-                        ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_ADD_REMOVE, -4143841388126586338L, 0, null, String.valueOf(this));
+                        ProtoLogImpl_54989576.v(
+                                ProtoLogGroup.WM_DEBUG_ADD_REMOVE,
+                                -4143841388126586338L,
+                                0,
+                                null,
+                                String.valueOf(this));
                     }
                     if (zArr2[1]) {
-                        ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_ANIM, 4419190702135590390L, 0, null, String.valueOf(this));
+                        ProtoLogImpl_54989576.v(
+                                ProtoLogGroup.WM_DEBUG_ANIM,
+                                4419190702135590390L,
+                                0,
+                                null,
+                                String.valueOf(this));
                     }
                     this.mRemoveOnExit = true;
                     setDisplayLayoutNeeded();
                     getDisplayContent().mDisplayPolicy.removeWindowLw(this);
-                    boolean updateFocusedWindowLocked = this.mWmService.updateFocusedWindowLocked(3, false);
+                    boolean updateFocusedWindowLocked =
+                            this.mWmService.updateFocusedWindowLocked(3, false);
                     this.mWmService.mWindowPlacerLocked.performSurfacePlacement(false);
                     if (updateFocusedWindowLocked) {
                         getDisplayContent().mInputMonitor.updateInputWindowsLw(false);
@@ -3302,12 +3973,23 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             boolean providesDisplayDecorInsets = providesDisplayDecorInsets();
             removeImmediately();
             boolean z9 = z && displayContent.updateOrientation(false);
-            if (providesDisplayDecorInsets && ((z9 = z9 | displayContent.mDisplayPolicy.updateDecorInsetsInfo()))) {
-                this.mWmService.mAtmService.mMultiTaskingAppCompatController.mSizeCompatModePolicy.mAvoidAppCompatDisplayInsets = true;
+            if (providesDisplayDecorInsets
+                    && ((z9 = z9 | displayContent.mDisplayPolicy.updateDecorInsetsInfo()))) {
+                this.mWmService
+                                .mAtmService
+                                .mMultiTaskingAppCompatController
+                                .mSizeCompatModePolicy
+                                .mAvoidAppCompatDisplayInsets =
+                        true;
             }
             if (z9) {
                 displayContent.sendNewConfiguration();
-                this.mWmService.mAtmService.mMultiTaskingAppCompatController.mSizeCompatModePolicy.mAvoidAppCompatDisplayInsets = false;
+                this.mWmService
+                                .mAtmService
+                                .mMultiTaskingAppCompatController
+                                .mSizeCompatModePolicy
+                                .mAvoidAppCompatDisplayInsets =
+                        false;
             }
             this.mWmService.updateFocusedWindowLocked(isFocused() ? 4 : 0, true);
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -3323,7 +4005,12 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         boolean z = true;
         if (this.mRemoved) {
             if (ProtoLogImpl_54989576.Cache.WM_DEBUG_ADD_REMOVE_enabled[1]) {
-                ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_ADD_REMOVE, 1351053513466395411L, 0, null, String.valueOf(this));
+                ProtoLogImpl_54989576.v(
+                        ProtoLogGroup.WM_DEBUG_ADD_REMOVE,
+                        1351053513466395411L,
+                        0,
+                        null,
+                        String.valueOf(this));
                 return;
             }
             return;
@@ -3340,7 +4027,9 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             IBinder asBinder = this.mClient.asBinder();
             int i = this.mAttrs.type;
             if (windowManagerService.mImeTargetChangeListener != null) {
-                windowManagerService.mH.post(new WindowManagerService$$ExternalSyntheticLambda21(windowManagerService, asBinder, i, z2, z));
+                windowManagerService.mH.post(
+                        new WindowManagerService$$ExternalSyntheticLambda21(
+                                windowManagerService, asBinder, i, z2, z));
             }
         }
         DisplayContent displayContent = getDisplayContent();
@@ -3349,13 +4038,24 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             displayContent.setImeLayeringTarget(null);
             displayContent.computeImeTarget(true);
         }
-        if (displayContent.mImeInputTarget == this && ((activityRecord = this.mActivityRecord) == null || !activityRecord.isRelaunching() || (getDisplayId() == 0 && (this.mLastReportedConfiguration.getMergedConfiguration().isDexMode() != isDexMode() || this.mWmService.mAtmService.mDexController.shouldShowDexImeInDefaultDisplayLocked())))) {
-            this.mWmService.dispatchImeInputTargetVisibilityChanged(this.mClient.asBinder(), false, true);
+        if (displayContent.mImeInputTarget == this
+                && ((activityRecord = this.mActivityRecord) == null
+                        || !activityRecord.isRelaunching()
+                        || (getDisplayId() == 0
+                                && (this.mLastReportedConfiguration
+                                                        .getMergedConfiguration()
+                                                        .isDexMode()
+                                                != isDexMode()
+                                        || this.mWmService.mAtmService.mDexController
+                                                .shouldShowDexImeInDefaultDisplayLocked())))) {
+            this.mWmService.dispatchImeInputTargetVisibilityChanged(
+                    this.mClient.asBinder(), false, true);
             displayContent.updateImeInputAndControlTarget(null);
         }
         int i2 = this.mAttrs.type;
         if (i2 == 2037 || i2 == 2030) {
-            this.mWmService.mDisplayManagerInternal.onPresentation(displayContent.mDisplay.getDisplayId(), false);
+            this.mWmService.mDisplayManagerInternal.onPresentation(
+                    displayContent.mDisplay.getDisplayId(), false);
         }
         displayContent.mDisplayPolicy.removeWindowLw(this);
         FreeformController freeformController = this.mWmService.mAtmService.mFreeformController;
@@ -3363,7 +4063,9 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             freeformController.mForceHiddenFreeformContainers.remove(this);
         }
         if (syncNextBuffer()) {
-            Slog.w("WindowManager", "removeImmediately: Call immediatelyNotifyBlastSync, w=" + this);
+            Slog.w(
+                    "WindowManager",
+                    "removeImmediately: Call immediatelyNotifyBlastSync, w=" + this);
             finishDrawing(null, Integer.MAX_VALUE);
             this.mWmService.mH.removeMessages(64, this);
         }
@@ -3377,7 +4079,12 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         WindowManagerService windowManagerService2 = this.mWmService;
         windowManagerService2.getClass();
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_ADD_REMOVE_enabled[1]) {
-            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_ADD_REMOVE, 5265273548711408921L, 0, null, String.valueOf(this));
+            ProtoLogImpl_54989576.v(
+                    ProtoLogGroup.WM_DEBUG_ADD_REMOVE,
+                    5265273548711408921L,
+                    0,
+                    null,
+                    String.valueOf(this));
         }
         IBinder asBinder2 = this.mClient.asBinder();
         windowManagerService2.mWindowMap.remove(asBinder2);
@@ -3389,10 +4096,18 @@ public final class WindowState extends WindowContainer implements WindowManagerP
                     if (((ArrayList) windowManagerService2.mOnWindowRemovedListeners).isEmpty()) {
                         WindowManagerService.resetPriorityAfterLockedSection();
                     } else {
-                        WindowManagerInternal.OnWindowRemovedListener[] onWindowRemovedListenerArr = new WindowManagerInternal.OnWindowRemovedListener[((ArrayList) windowManagerService2.mOnWindowRemovedListeners).size()];
-                        ((ArrayList) windowManagerService2.mOnWindowRemovedListeners).toArray(onWindowRemovedListenerArr);
+                        WindowManagerInternal.OnWindowRemovedListener[] onWindowRemovedListenerArr =
+                                new WindowManagerInternal.OnWindowRemovedListener
+                                        [((ArrayList)
+                                                        windowManagerService2
+                                                                .mOnWindowRemovedListeners)
+                                                .size()];
+                        ((ArrayList) windowManagerService2.mOnWindowRemovedListeners)
+                                .toArray(onWindowRemovedListenerArr);
                         WindowManagerService.resetPriorityAfterLockedSection();
-                        windowManagerService2.mH.post(new WindowManagerService$$ExternalSyntheticLambda3(1, onWindowRemovedListenerArr, asBinder2));
+                        windowManagerService2.mH.post(
+                                new WindowManagerService$$ExternalSyntheticLambda3(
+                                        1, onWindowRemovedListenerArr, asBinder2));
                     }
                 } catch (Throwable th) {
                     WindowManagerService.resetPriorityAfterLockedSection();
@@ -3404,17 +4119,24 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         displayContent2.mDisplayRotation.markForSeamlessRotation(this, false);
         int i3 = this.mAppOp;
         if (i3 != -1 && this.mAppOpVisibility) {
-            this.mWmService.mAppOps.finishOp(i3, this.mOwnerUid, this.mAttrs.packageName, (String) null);
+            this.mWmService.mAppOps.finishOp(
+                    i3, this.mOwnerUid, this.mAttrs.packageName, (String) null);
         }
         if (displayContent2.mCurrentFocus == null) {
             displayContent2.mWinRemovedSinceNullFocus.add(this);
         }
-        EmbeddedWindowController embeddedWindowController = windowManagerService2.mEmbeddedWindowController;
+        EmbeddedWindowController embeddedWindowController =
+                windowManagerService2.mEmbeddedWindowController;
         for (int size = embeddedWindowController.mWindows.size() - 1; size >= 0; size--) {
-            EmbeddedWindowController.EmbeddedWindow embeddedWindow = (EmbeddedWindowController.EmbeddedWindow) embeddedWindowController.mWindows.valueAt(size);
+            EmbeddedWindowController.EmbeddedWindow embeddedWindow =
+                    (EmbeddedWindowController.EmbeddedWindow)
+                            embeddedWindowController.mWindows.valueAt(size);
             if (embeddedWindow.mHostWindowState == this) {
-                ((EmbeddedWindowController.EmbeddedWindow) embeddedWindowController.mWindows.removeAt(size)).onRemoved();
-                embeddedWindowController.mWindowsByInputTransferToken.remove(embeddedWindow.mInputTransferToken);
+                ((EmbeddedWindowController.EmbeddedWindow)
+                                embeddedWindowController.mWindows.removeAt(size))
+                        .onRemoved();
+                embeddedWindowController.mWindowsByInputTransferToken.remove(
+                        embeddedWindow.mInputTransferToken);
                 embeddedWindowController.mWindowsByWindowToken.remove(embeddedWindow.mClient);
             }
         }
@@ -3422,7 +4144,12 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         windowManagerService2.updateNonSystemOverlayWindowsVisibilityIfNeeded(this, false);
         windowManagerService2.mWindowsChanged = true;
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_WINDOW_MOVEMENT_enabled[1]) {
-            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_WINDOW_MOVEMENT, -3847568084407666790L, 0, null, String.valueOf(this));
+            ProtoLogImpl_54989576.v(
+                    ProtoLogGroup.WM_DEBUG_WINDOW_MOVEMENT,
+                    -3847568084407666790L,
+                    0,
+                    null,
+                    String.valueOf(this));
         }
         DisplayContent displayContent3 = getDisplayContent();
         if (displayContent3.mInputMethodWindow == this) {
@@ -3430,7 +4157,13 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         }
         WindowToken windowToken = this.mToken;
         if (ProtoLogImpl_54989576.Cache.WM_DEBUG_ADD_REMOVE_enabled[1]) {
-            ProtoLogImpl_54989576.v(ProtoLogGroup.WM_DEBUG_ADD_REMOVE, 1419572818243106725L, 0, null, String.valueOf(this), String.valueOf(windowToken));
+            ProtoLogImpl_54989576.v(
+                    ProtoLogGroup.WM_DEBUG_ADD_REMOVE,
+                    1419572818243106725L,
+                    0,
+                    null,
+                    String.valueOf(this),
+                    String.valueOf(windowToken));
         }
         if (windowToken.mChildren.isEmpty() && !windowToken.mPersistOnEmpty) {
             windowToken.removeImmediately();
@@ -3458,7 +4191,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
     }
 
     @Override // com.android.server.wm.WindowContainer
-    public final void reparentSurfaceControl(SurfaceControl.Transaction transaction, SurfaceControl surfaceControl) {
+    public final void reparentSurfaceControl(
+            SurfaceControl.Transaction transaction, SurfaceControl surfaceControl) {
         if (isStartingWindowAssociatedToTask()) {
             return;
         }
@@ -3486,7 +4220,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
 
     public final void requestUpdateWallpaperIfNeeded() {
         DisplayContent displayContent = getDisplayContent();
-        if (displayContent != null && ((this.mIsWallpaper && !this.mLastConfigReportedToClient) || hasWallpaper())) {
+        if (displayContent != null
+                && ((this.mIsWallpaper && !this.mLastConfigReportedToClient) || hasWallpaper())) {
             displayContent.pendingLayoutChanges |= 4;
             displayContent.setLayoutNeeded();
             this.mWmService.mWindowPlacerLocked.requestTraversal();
@@ -3508,7 +4243,14 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         boolean z = this.mToken.mClientVisible;
         if (this.mAttrs.type != 3 || z) {
             try {
-                Slog.v("WindowManager", "Setting visibility of " + this + ": " + z + ", caller=" + Debug.getCallers(5));
+                Slog.v(
+                        "WindowManager",
+                        "Setting visibility of "
+                                + this
+                                + ": "
+                                + z
+                                + ", caller="
+                                + Debug.getCallers(5));
                 this.mClient.dispatchAppVisibility(z);
             } catch (RemoteException e) {
                 Slog.w("WindowManager", "Exception thrown during dispatchAppVisibility " + this, e);
@@ -3542,7 +4284,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
     public final void setForceHideNonSystemOverlayWindowIfNeeded(boolean z) {
         WindowState windowState;
         WindowState windowState2 = this;
-        loop0: while (true) {
+        loop0:
+        while (true) {
             windowState = windowState2;
             while (windowState2 != null && windowState2.mIsChildWindow) {
                 windowState2 = windowState2.getParentWindow();
@@ -3560,7 +4303,9 @@ public final class WindowState extends WindowContainer implements WindowManagerP
                 Slog.d("WindowManager", "Hide non system overlay window ignored app - " + this);
                 return;
             }
-            if (i == 2038 && this.mAttrs.isSystemApplicationOverlay() && this.mSession.mCanCreateSystemApplicationOverlay) {
+            if (i == 2038
+                    && this.mAttrs.isSystemApplicationOverlay()
+                    && this.mSession.mCanCreateSystemApplicationOverlay) {
                 return;
             }
             if (CoreRune.BAIDU_CARLIFE && getDisplayContent().isCarLifeDisplay()) {
@@ -3583,7 +4328,9 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         if (this.mOwnerCanAddInternalSystemWindow) {
             return;
         }
-        if ((WindowManager.LayoutParams.isSystemAlertWindowType(this.mAttrs.type) || this.mAttrs.type == 2005) && this.mHiddenWhileProfileLockedState != z) {
+        if ((WindowManager.LayoutParams.isSystemAlertWindowType(this.mAttrs.type)
+                        || this.mAttrs.type == 2005)
+                && this.mHiddenWhileProfileLockedState != z) {
             this.mHiddenWhileProfileLockedState = z;
             if (z) {
                 hide(true, true);
@@ -3597,7 +4344,9 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         if (this.mOwnerCanAddInternalSystemWindow) {
             return;
         }
-        if ((WindowManager.LayoutParams.isSystemAlertWindowType(this.mAttrs.type) || this.mAttrs.type == 2005) && this.mHiddenWhileSuspended != z) {
+        if ((WindowManager.LayoutParams.isSystemAlertWindowType(this.mAttrs.type)
+                        || this.mAttrs.type == 2005)
+                && this.mHiddenWhileSuspended != z) {
             this.mHiddenWhileSuspended = z;
             if (z) {
                 hide(true, true);
@@ -3616,7 +4365,9 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         if (Flags.secureWindowState()) {
             getPendingTransaction().setSecure(this.mSurfaceControl, isSecureLocked());
         }
-        getPendingTransaction().setCanOccludePresentation(this.mSurfaceControl, !this.mSession.mCanAddInternalSystemWindow);
+        getPendingTransaction()
+                .setCanOccludePresentation(
+                        this.mSurfaceControl, !this.mSession.mCanAddInternalSystemWindow);
     }
 
     public final boolean setKeepClearAreas(List list, List list2) {
@@ -3647,7 +4398,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             return;
         }
         this.mLastFreezeDuration = 0;
-        if (this.mWmService.mRoot.mOrientationChangeComplete && this.mDisplayContent.shouldSyncRotationChange(this)) {
+        if (this.mWmService.mRoot.mOrientationChangeComplete
+                && this.mDisplayContent.shouldSyncRotationChange(this)) {
             this.mWmService.mRoot.mOrientationChangeComplete = false;
         }
     }
@@ -3671,14 +4423,22 @@ public final class WindowState extends WindowContainer implements WindowManagerP
 
     public final void setSecureLocked(boolean z) {
         if (ProtoLogImpl_54989576.Cache.WM_SHOW_TRANSACTIONS_enabled[2]) {
-            ProtoLogImpl_54989576.i(ProtoLogGroup.WM_SHOW_TRANSACTIONS, 8269653477215188641L, 3, null, Boolean.valueOf(z), String.valueOf(getName()));
+            ProtoLogImpl_54989576.i(
+                    ProtoLogGroup.WM_SHOW_TRANSACTIONS,
+                    8269653477215188641L,
+                    3,
+                    null,
+                    Boolean.valueOf(z),
+                    String.valueOf(getName()));
         }
         if (!Flags.secureWindowState()) {
             WindowSurfaceController windowSurfaceController = this.mWinAnimator.mSurfaceController;
-            if (windowSurfaceController == null || windowSurfaceController.mSurfaceControl == null) {
+            if (windowSurfaceController == null
+                    || windowSurfaceController.mSurfaceControl == null) {
                 return;
             } else {
-                getPendingTransaction().setSecure(this.mWinAnimator.mSurfaceController.mSurfaceControl, z);
+                getPendingTransaction()
+                        .setSecure(this.mWinAnimator.mSurfaceController.mSurfaceControl, z);
             }
         } else if (this.mSurfaceControl == null) {
             return;
@@ -3689,7 +4449,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         if (displayContent != null) {
             SurfaceControl.Transaction syncTransaction = getSyncTransaction();
             InputTarget inputTarget = displayContent.mImeInputTarget;
-            displayContent.mImeWindowsContainer.setCanScreenshot(syncTransaction, inputTarget == null || inputTarget.canScreenshotIme());
+            displayContent.mImeWindowsContainer.setCanScreenshot(
+                    syncTransaction, inputTarget == null || inputTarget.canScreenshotIme());
         }
         this.mWmService.scheduleAnimationLocked();
     }
@@ -3701,7 +4462,9 @@ public final class WindowState extends WindowContainer implements WindowManagerP
 
     public final void setWindowScale(int i, int i2) {
         WindowManager.LayoutParams layoutParams = this.mAttrs;
-        if ((layoutParams.flags & EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION) == 0) {
+        if ((layoutParams.flags
+                        & EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION)
+                == 0) {
             this.mVScale = 1.0f;
             this.mHScale = 1.0f;
         } else {
@@ -3713,12 +4476,20 @@ public final class WindowState extends WindowContainer implements WindowManagerP
     }
 
     public final boolean shouldCheckTokenVisibleRequested() {
-        return (this.mActivityRecord == null && this.mToken.asWallpaperToken() == null && (!CoreRune.FW_SHELL_TRANSITION_TRANSIENT_LAUNCH_OVERLAY || this.mToken.asTransientLaunchOverlay() == null)) ? false : true;
+        return (this.mActivityRecord == null
+                        && this.mToken.asWallpaperToken() == null
+                        && (!CoreRune.FW_SHELL_TRANSITION_TRANSIENT_LAUNCH_OVERLAY
+                                || this.mToken.asTransientLaunchOverlay() == null))
+                ? false
+                : true;
     }
 
     @Override // com.android.server.wm.InputTarget
     public final boolean shouldControlIme() {
-        if (CoreRune.MW_EMBED_ACTIVITY && isSplitEmbedded() && getTask() != null && getTask().inFullscreenWindowingMode()) {
+        if (CoreRune.MW_EMBED_ACTIVITY
+                && isSplitEmbedded()
+                && getTask() != null
+                && getTask().inFullscreenWindowingMode()) {
             return true;
         }
         return !inMultiWindowMode();
@@ -3729,7 +4500,16 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         if (!this.mDisplayContent.hasOneHandOpSpec()) {
             WindowManager.LayoutParams layoutParams = this.mAttrs;
             int i = layoutParams.type;
-            return (i == 2039 || i == 2011 || i == 2012 || i == 2027 || i == 2019 || i == 2024 || i == 1100 || (layoutParams.privateFlags & 4194304) != 0) ? false : true;
+            return (i == 2039
+                            || i == 2011
+                            || i == 2012
+                            || i == 2027
+                            || i == 2019
+                            || i == 2024
+                            || i == 1100
+                            || (layoutParams.privateFlags & 4194304) != 0)
+                    ? false
+                    : true;
         }
         WindowManager.LayoutParams layoutParams2 = this.mAttrs;
         int i2 = layoutParams2.type;
@@ -3737,7 +4517,9 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             if ((layoutParams2.privateFlags & 1048576) != 0) {
                 return false;
             }
-        } else if (i2 == 2619 || i2 == 2600 || (i2 == 2601 && (layoutParams2.privateFlags & 4194304) != 0)) {
+        } else if (i2 == 2619
+                || i2 == 2600
+                || (i2 == 2601 && (layoutParams2.privateFlags & 4194304) != 0)) {
             return false;
         }
         return true;
@@ -3747,7 +4529,9 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         if (this.mRedrawForSyncReported) {
             return false;
         }
-        if (!this.mInRelayout || (this.mPrepareSyncSeqId <= 0 && !(this.mViewVisibility == 0 && this.mWinAnimator.mDrawState == 1))) {
+        if (!this.mInRelayout
+                || (this.mPrepareSyncSeqId <= 0
+                        && !(this.mViewVisibility == 0 && this.mWinAnimator.mDrawState == 1))) {
             return syncNextBuffer();
         }
         return false;
@@ -3776,10 +4560,18 @@ public final class WindowState extends WindowContainer implements WindowManagerP
     }
 
     public final boolean show(boolean z) {
-        if ((((this.mPolicyVisibility & 1) != 0) && this.mLegacyPolicyVisibilityAfterAnim) || !showToCurrentUser() || !this.mAppOpVisibility || this.mPermanentlyHidden || this.mHiddenWhileSuspended || this.mHiddenWhileProfileLockedState || this.mForceHideNonSystemOverlayWindow) {
+        if ((((this.mPolicyVisibility & 1) != 0) && this.mLegacyPolicyVisibilityAfterAnim)
+                || !showToCurrentUser()
+                || !this.mAppOpVisibility
+                || this.mPermanentlyHidden
+                || this.mHiddenWhileSuspended
+                || this.mHiddenWhileProfileLockedState
+                || this.mForceHideNonSystemOverlayWindow) {
             return false;
         }
-        if (z && (!this.mToken.okToAnimate() || ((this.mPolicyVisibility & 1) != 0 && !isAnimating(3)))) {
+        if (z
+                && (!this.mToken.okToAnimate()
+                        || ((this.mPolicyVisibility & 1) != 0 && !isAnimating(3)))) {
             z = false;
         }
         this.mPolicyVisibility |= 1;
@@ -3854,7 +4646,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         WindowState windowState;
         ActivityRecord activityRecord;
         WindowState windowState2 = this;
-        loop0: while (true) {
+        loop0:
+        while (true) {
             windowState = windowState2;
             while (windowState2 != null && windowState2.mIsChildWindow) {
                 windowState2 = windowState2.getParentWindow();
@@ -3863,12 +4656,17 @@ public final class WindowState extends WindowContainer implements WindowManagerP
                 }
             }
         }
-        if (windowState.mAttrs.type < 2000 && (activityRecord = windowState.mActivityRecord) != null && activityRecord.mShowForAllUsers) {
+        if (windowState.mAttrs.type < 2000
+                && (activityRecord = windowState.mActivityRecord) != null
+                && activityRecord.mShowForAllUsers) {
             WindowFrames windowFrames = windowState.mWindowFrames;
             Rect rect = windowFrames.mFrame;
             int i = rect.left;
             Rect rect2 = windowFrames.mDisplayFrame;
-            if (i <= rect2.left && rect.top <= rect2.top && rect.right >= rect2.right && rect.bottom >= rect2.bottom) {
+            if (i <= rect2.left
+                    && rect.top <= rect2.top
+                    && rect.right >= rect2.right
+                    && rect.bottom >= rect2.bottom) {
                 return true;
             }
         }
@@ -3891,7 +4689,11 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             return;
         }
         DisplayInfo displayInfo = getDisplayInfo();
-        animation.initialize(this.mWindowFrames.mFrame.width(), this.mWindowFrames.mFrame.height(), displayInfo.appWidth, displayInfo.appHeight);
+        animation.initialize(
+                this.mWindowFrames.mFrame.width(),
+                this.mWindowFrames.mFrame.height(),
+                displayInfo.appWidth,
+                displayInfo.appHeight);
         animation.restrictDuration(10000L);
         animation.scaleCurrentDuration(this.mWmService.getWindowAnimationScaleLocked());
         Point point = new Point();
@@ -3901,7 +4703,17 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         } else {
             point.set(this.mSurfacePosition);
         }
-        startAnimation(this.mActivityRecord != null ? getSyncTransaction() : getPendingTransaction(), new LocalAnimationAdapter(new WindowAnimationSpec(animation, point, false, FullScreenMagnificationGestureHandler.MAX_SCALE), this.mWmService.mSurfaceAnimationRunner), this.mWinAnimator.mLastHidden, 16);
+        startAnimation(
+                this.mActivityRecord != null ? getSyncTransaction() : getPendingTransaction(),
+                new LocalAnimationAdapter(
+                        new WindowAnimationSpec(
+                                animation,
+                                point,
+                                false,
+                                FullScreenMagnificationGestureHandler.MAX_SCALE),
+                        this.mWmService.mSurfaceAnimationRunner),
+                this.mWinAnimator.mLastHidden,
+                16);
         scheduleAnimation();
     }
 
@@ -3940,7 +4752,9 @@ public final class WindowState extends WindowContainer implements WindowManagerP
 
     public final String toString() {
         CharSequence windowTag = getWindowTag();
-        if (this.mStringNameCache == null || this.mLastTitle != windowTag || this.mWasExiting != this.mAnimatingExit) {
+        if (this.mStringNameCache == null
+                || this.mLastTitle != windowTag
+                || this.mWasExiting != this.mAnimatingExit) {
             this.mLastTitle = windowTag;
             this.mWasExiting = this.mAnimatingExit;
             StringBuilder sb = new StringBuilder("Window{");
@@ -3972,7 +4786,10 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             Point point2 = this.mTmpPoint;
             point.offset(point2.x, point2.y);
         } else if (parent != null) {
-            Rect bounds = isStartingWindowAssociatedToTask() ? this.mStartingData.mAssociatedTask.getBounds() : parent.getBounds();
+            Rect bounds =
+                    isStartingWindowAssociatedToTask()
+                            ? this.mStartingData.mAssociatedTask.getBounds()
+                            : parent.getBounds();
             point.offset(-bounds.left, -bounds.top);
         }
         transformSurfaceInsetsPosition(this.mAttrs.surfaceInsets, this.mTmpPoint);
@@ -3993,31 +4810,38 @@ public final class WindowState extends WindowContainer implements WindowManagerP
     }
 
     @Override // com.android.server.wm.WindowContainer
-    public final void updateAboveInsetsState(final InsetsState insetsState, SparseArray sparseArray, final ArraySet arraySet) {
-        final SparseArray createMergedSparseArray = WindowContainer.createMergedSparseArray(sparseArray, this.mLocalInsetsSources);
-        forAllWindows(new Consumer() { // from class: com.android.server.wm.WindowState$$ExternalSyntheticLambda5
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                InsetsState insetsState2 = insetsState;
-                ArraySet arraySet2 = arraySet;
-                SparseArray sparseArray2 = createMergedSparseArray;
-                WindowState windowState = (WindowState) obj;
-                if (!windowState.mAboveInsetsState.equals(insetsState2)) {
-                    windowState.mAboveInsetsState.set(insetsState2);
-                    arraySet2.add(windowState);
-                }
-                if (!sparseArray2.contentEquals(windowState.mMergedLocalInsetsSources)) {
-                    windowState.mMergedLocalInsetsSources = sparseArray2;
-                    arraySet2.add(windowState);
-                }
-                SparseArray sparseArray3 = windowState.mInsetsSourceProviders;
-                if (sparseArray3 != null) {
-                    for (int size = sparseArray3.size() - 1; size >= 0; size--) {
-                        insetsState2.addSource(((InsetsSourceProvider) sparseArray3.valueAt(size)).mSource);
+    public final void updateAboveInsetsState(
+            final InsetsState insetsState, SparseArray sparseArray, final ArraySet arraySet) {
+        final SparseArray createMergedSparseArray =
+                WindowContainer.createMergedSparseArray(sparseArray, this.mLocalInsetsSources);
+        forAllWindows(
+                new Consumer() { // from class:
+                                 // com.android.server.wm.WindowState$$ExternalSyntheticLambda5
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        InsetsState insetsState2 = insetsState;
+                        ArraySet arraySet2 = arraySet;
+                        SparseArray sparseArray2 = createMergedSparseArray;
+                        WindowState windowState = (WindowState) obj;
+                        if (!windowState.mAboveInsetsState.equals(insetsState2)) {
+                            windowState.mAboveInsetsState.set(insetsState2);
+                            arraySet2.add(windowState);
+                        }
+                        if (!sparseArray2.contentEquals(windowState.mMergedLocalInsetsSources)) {
+                            windowState.mMergedLocalInsetsSources = sparseArray2;
+                            arraySet2.add(windowState);
+                        }
+                        SparseArray sparseArray3 = windowState.mInsetsSourceProviders;
+                        if (sparseArray3 != null) {
+                            for (int size = sparseArray3.size() - 1; size >= 0; size--) {
+                                insetsState2.addSource(
+                                        ((InsetsSourceProvider) sparseArray3.valueAt(size))
+                                                .mSource);
+                            }
+                        }
                     }
-                }
-            }
-        }, true);
+                },
+                true);
     }
 
     public void updateFrameRateSelectionPriorityIfNeeded() {
@@ -4028,21 +4852,36 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         refreshRatePolicy.getClass();
         boolean isFocused = isFocused();
         int preferredModeId = refreshRatePolicy.getPreferredModeId(this);
-        int i2 = (isFocused || preferredModeId <= 0) ? (isFocused && preferredModeId == 0) ? 1 : (!isFocused || preferredModeId <= 0) ? -1 : 0 : 2;
+        int i2 =
+                (isFocused || preferredModeId <= 0)
+                        ? (isFocused && preferredModeId == 0)
+                                ? 1
+                                : (!isFocused || preferredModeId <= 0) ? -1 : 0
+                        : 2;
         if (this.mFrameRateSelectionPriority != i2) {
             this.mFrameRateSelectionPriority = i2;
-            getPendingTransaction().setFrameRateSelectionPriority(this.mSurfaceControl, this.mFrameRateSelectionPriority);
+            getPendingTransaction()
+                    .setFrameRateSelectionPriority(
+                            this.mSurfaceControl, this.mFrameRateSelectionPriority);
         }
-        int refreshRateSwitchingType = refreshRatePolicy.mWmService.mDisplayManagerInternal.getRefreshRateSwitchingType();
+        int refreshRateSwitchingType =
+                refreshRatePolicy.mWmService.mDisplayManagerInternal.getRefreshRateSwitchingType();
         if (refreshRateSwitchingType == 0) {
-            update = this.mFrameRateVote.update(0, 0, FullScreenMagnificationGestureHandler.MAX_SCALE);
+            update =
+                    this.mFrameRateVote.update(
+                            0, 0, FullScreenMagnificationGestureHandler.MAX_SCALE);
         } else if (Flags.explicitRefreshRateHints() || !isAnimationRunningSelfOrParent()) {
             if (refreshRateSwitchingType != 3 && (i = this.mAttrs.preferredDisplayModeId) > 0) {
                 for (Display.Mode mode : refreshRatePolicy.mDisplayInfo.appsSupportedModes) {
                     if (i == mode.getModeId()) {
                         if (CoreRune.FW_VRR_HRR_CHINA_DELTA && mode.getRefreshRate() >= 119.99f) {
-                            if (refreshRatePolicy.mWmService.mAtmService.mExt.mHighRefreshRateBlockList.contains(this.mAttrs.packageName)) {
-                                update = this.mFrameRateVote.update(0, 0, FullScreenMagnificationGestureHandler.MAX_SCALE);
+                            if (refreshRatePolicy.mWmService.mAtmService.mExt
+                                    .mHighRefreshRateBlockList.contains(this.mAttrs.packageName)) {
+                                update =
+                                        this.mFrameRateVote.update(
+                                                0,
+                                                0,
+                                                FullScreenMagnificationGestureHandler.MAX_SCALE);
                             }
                         }
                         update = this.mFrameRateVote.update(100, 1, mode.getRefreshRate());
@@ -4056,26 +4895,38 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             } else {
                 if (refreshRateSwitchingType != 3) {
                     String str = layoutParams.packageName;
-                    HighRefreshRateDenylist highRefreshRateDenylist = refreshRatePolicy.mHighRefreshRateDenylist;
+                    HighRefreshRateDenylist highRefreshRateDenylist =
+                            refreshRatePolicy.mHighRefreshRateDenylist;
                     synchronized (highRefreshRateDenylist.mLock) {
                         contains = highRefreshRateDenylist.mDenylistedPackages.contains(str);
                     }
                     if (contains) {
-                        update = this.mFrameRateVote.update(100, 1, refreshRatePolicy.mLowRefreshRateMode.getRefreshRate());
+                        update =
+                                this.mFrameRateVote.update(
+                                        100,
+                                        1,
+                                        refreshRatePolicy.mLowRefreshRateMode.getRefreshRate());
                     }
                 }
-                update = this.mFrameRateVote.update(0, 0, FullScreenMagnificationGestureHandler.MAX_SCALE);
+                update =
+                        this.mFrameRateVote.update(
+                                0, 0, FullScreenMagnificationGestureHandler.MAX_SCALE);
             }
         } else {
-            update = this.mFrameRateVote.update(0, 0, FullScreenMagnificationGestureHandler.MAX_SCALE);
+            update =
+                    this.mFrameRateVote.update(
+                            0, 0, FullScreenMagnificationGestureHandler.MAX_SCALE);
         }
         if (update) {
             SurfaceControl.Transaction pendingTransaction = getPendingTransaction();
             SurfaceControl surfaceControl = this.mSurfaceControl;
             RefreshRatePolicy.FrameRateVote frameRateVote = this.mFrameRateVote;
-            pendingTransaction.setFrameRate(surfaceControl, frameRateVote.mRefreshRate, frameRateVote.mCompatibility, 1);
+            pendingTransaction.setFrameRate(
+                    surfaceControl, frameRateVote.mRefreshRate, frameRateVote.mCompatibility, 1);
             if (Flags.explicitRefreshRateHints()) {
-                getPendingTransaction().setFrameRateSelectionStrategy(this.mSurfaceControl, this.mFrameRateVote.mSelectionStrategy);
+                getPendingTransaction()
+                        .setFrameRateSelectionStrategy(
+                                this.mSurfaceControl, this.mFrameRateVote.mSelectionStrategy);
             }
         }
     }
@@ -4086,7 +4937,10 @@ public final class WindowState extends WindowContainer implements WindowManagerP
             this.mInvGlobalScale = 1.0f;
             this.mGlobalScale = 1.0f;
         } else {
-            float compatScale = (this.mOverrideScale == 1.0f || this.mToken.hasSizeCompatBounds()) ? this.mToken.getCompatScale() : 1.0f;
+            float compatScale =
+                    (this.mOverrideScale == 1.0f || this.mToken.hasSizeCompatBounds())
+                            ? this.mToken.getCompatScale()
+                            : 1.0f;
             this.mCompatScale = compatScale;
             float f = compatScale * this.mOverrideScale;
             this.mGlobalScale = f;
@@ -4098,12 +4952,19 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         int i = 0;
         if (getDisplayContent().mInitialDisplayCutout != null) {
             if (this.mIsImWindow) {
-                ActivityRecord activity = getDisplayContent().getActivity(new WindowState$$ExternalSyntheticLambda4(0));
+                ActivityRecord activity =
+                        getDisplayContent()
+                                .getActivity(new WindowState$$ExternalSyntheticLambda4(0));
                 if (activity != null) {
-                    i = activity.mAppCompatController.mAppCompatLetterboxPolicy.getLetterboxDirection();
+                    i =
+                            activity.mAppCompatController.mAppCompatLetterboxPolicy
+                                    .getLetterboxDirection();
                 }
-            } else if (this.mActivityRecord != null && (!inMultiWindowMode() || inSplitScreenWindowingMode())) {
-                i = this.mActivityRecord.mAppCompatController.mAppCompatLetterboxPolicy.getLetterboxDirection();
+            } else if (this.mActivityRecord != null
+                    && (!inMultiWindowMode() || inSplitScreenWindowingMode())) {
+                i =
+                        this.mActivityRecord.mAppCompatController.mAppCompatLetterboxPolicy
+                                .getLetterboxDirection();
             }
         }
         if (this.mLetterboxDirection != i) {
@@ -4116,11 +4977,16 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         }
     }
 
-    public final void updateReportedVisibility(UpdateReportedVisibilityResults updateReportedVisibilityResults) {
+    public final void updateReportedVisibility(
+            UpdateReportedVisibilityResults updateReportedVisibilityResults) {
         for (int size = this.mChildren.size() - 1; size >= 0; size--) {
-            ((WindowState) this.mChildren.get(size)).updateReportedVisibility(updateReportedVisibilityResults);
+            ((WindowState) this.mChildren.get(size))
+                    .updateReportedVisibility(updateReportedVisibilityResults);
         }
-        if (this.mAppFreezing || this.mViewVisibility != 0 || this.mAttrs.type == 3 || this.mDestroying) {
+        if (this.mAppFreezing
+                || this.mViewVisibility != 0
+                || this.mAttrs.type == 3
+                || this.mDestroying) {
             return;
         }
         updateReportedVisibilityResults.numInteresting++;
@@ -4141,7 +5007,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         if (hasInsetsSourceProvider() && !this.mGivenInsetsPending) {
             SparseArray insetsSourceProviders = getInsetsSourceProviders();
             for (int size = insetsSourceProviders.size() - 1; size >= 0; size--) {
-                ((InsetsSourceProvider) insetsSourceProviders.valueAt(size)).updateSourceFrame(rect);
+                ((InsetsSourceProvider) insetsSourceProviders.valueAt(size))
+                        .updateSourceFrame(rect);
             }
         }
     }
@@ -4153,7 +5020,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
         }
         ActivityRecord activityRecord = this.mActivityRecord;
         if (activityRecord == null || !activityRecord.isConfigurationDispatchPaused()) {
-            if ((this.mWmService.mWindowPlacerLocked.mDeferDepth <= 0 && !isGoneForLayout()) || this.mSurfacePlacementNeeded) {
+            if ((this.mWmService.mWindowPlacerLocked.mDeferDepth <= 0 && !isGoneForLayout())
+                    || this.mSurfacePlacementNeeded) {
                 this.mSurfacePlacementNeeded = false;
                 Rect rect = this.mWindowFrames.mFrame;
                 transformFrameToSurfacePosition(rect.left, rect.top, this.mSurfacePosition);
@@ -4164,18 +5032,25 @@ public final class WindowState extends WindowContainer implements WindowManagerP
                     float f = this.mWallpaperScale;
                     matrix.postScale(f, f, rect2.exactCenterX(), rect2.exactCenterY());
                     matrix.getValues(this.mTmpMatrixArray);
-                    this.mSurfacePosition.offset(Math.round(this.mTmpMatrixArray[2]), Math.round(this.mTmpMatrixArray[5]));
+                    this.mSurfacePosition.offset(
+                            Math.round(this.mTmpMatrixArray[2]),
+                            Math.round(this.mTmpMatrixArray[5]));
                 } else {
                     this.mSurfacePosition.offset(this.mXOffset, this.mYOffset);
                 }
-                AsyncRotationController asyncRotationController = this.mDisplayContent.getAsyncRotationController();
+                AsyncRotationController asyncRotationController =
+                        this.mDisplayContent.getAsyncRotationController();
                 if (asyncRotationController != null) {
-                    AsyncRotationController.Operation operation = (AsyncRotationController.Operation) asyncRotationController.mTargetWindowTokens.get(this.mToken);
+                    AsyncRotationController.Operation operation =
+                            (AsyncRotationController.Operation)
+                                    asyncRotationController.mTargetWindowTokens.get(this.mToken);
                     if (operation != null && operation.mAction == 1) {
                         return;
                     }
                 }
-                if (this.mPendingSeamlessRotate != null || this.mSurfaceAnimator.hasLeash() || this.mLastSurfacePosition.equals(this.mSurfacePosition)) {
+                if (this.mPendingSeamlessRotate != null
+                        || this.mSurfaceAnimator.hasLeash()
+                        || this.mLastSurfacePosition.equals(this.mSurfacePosition)) {
                     return;
                 }
                 WindowFrames windowFrames = this.mWindowFrames;
@@ -4188,9 +5063,22 @@ public final class WindowState extends WindowContainer implements WindowManagerP
                 if (z2) {
                     this.mLastSurfaceInsets.set(this.mAttrs.surfaceInsets);
                 }
-                boolean z4 = z3 && this.mWinAnimator.getShown() && !canPlayMoveAnimation() && okToDisplay() && this.mSyncState == 0;
+                boolean z4 =
+                        z3
+                                && this.mWinAnimator.getShown()
+                                && !canPlayMoveAnimation()
+                                && okToDisplay()
+                                && this.mSyncState == 0;
                 ActivityRecord activityRecord2 = this.mActivityRecord;
-                boolean z5 = activityRecord2 != null && activityRecord2.areBoundsLetterboxed() && activityRecord2.mAppCompatController.mAppCompatOverrides.mAppCompatOrientationOverrides.mOrientationOverridesState.mIsRelaunchingAfterRequestedOrientationChanged;
+                boolean z5 =
+                        activityRecord2 != null
+                                && activityRecord2.areBoundsLetterboxed()
+                                && activityRecord2
+                                        .mAppCompatController
+                                        .mAppCompatOverrides
+                                        .mAppCompatOrientationOverrides
+                                        .mOrientationOverridesState
+                                        .mIsRelaunchingAfterRequestedOrientationChanged;
                 if (z4 || z5) {
                     applyWithNextDraw(0, this.mSetSurfacePositionConsumer);
                 } else {
@@ -4202,7 +5090,8 @@ public final class WindowState extends WindowContainer implements WindowManagerP
 
     public final void updateTrustedOverlay() {
         InputWindowHandleWrapper inputWindowHandleWrapper = this.mInputWindowHandle;
-        inputWindowHandleWrapper.mHandle.setTrustedOverlay(getPendingTransaction(), this.mSurfaceControl, isWindowTrustedOverlay());
+        inputWindowHandleWrapper.mHandle.setTrustedOverlay(
+                getPendingTransaction(), this.mSurfaceControl, isWindowTrustedOverlay());
         this.mInputWindowHandle.mChanged = true;
     }
 
@@ -4223,18 +5112,30 @@ public final class WindowState extends WindowContainer implements WindowManagerP
 
     @Override // com.android.server.wm.WindowContainer
     public final void waitForSyncTransactionCommit(ArraySet arraySet) {
-        if (!CoreRune.MW_PIP_SHELL_TRANSITION || !this.mTransitionController.isCollecting() || !inPinnedWindowingMode() || !this.mDrawHandlers.stream().anyMatch(new WindowState$$ExternalSyntheticLambda4(1))) {
+        if (!CoreRune.MW_PIP_SHELL_TRANSITION
+                || !this.mTransitionController.isCollecting()
+                || !inPinnedWindowingMode()
+                || !this.mDrawHandlers.stream()
+                        .anyMatch(new WindowState$$ExternalSyntheticLambda4(1))) {
             super.waitForSyncTransactionCommit(arraySet);
             return;
         }
-        Slog.w("WindowManager", "waitForSyncTransactionCommit: skip, split_to_pip_bounds_change" + this);
+        Slog.w(
+                "WindowManager",
+                "waitForSyncTransactionCommit: skip, split_to_pip_bounds_change" + this);
     }
 
     public final boolean wouldBeVisibleIfPolicyIgnored() {
-        if (!this.mHasSurface || isParentWindowHidden() || this.mAnimatingExit || this.mDestroying) {
+        if (!this.mHasSurface
+                || isParentWindowHidden()
+                || this.mAnimatingExit
+                || this.mDestroying) {
             return false;
         }
-        return (!CoreRune.FW_SHELL_TRANSITION_TRANSIENT_LAUNCH_OVERLAY || this.mToken.asTransientLaunchOverlay() == null) ? this.mToken.asWallpaperToken() == null || this.mToken.isVisible() : this.mToken.isVisibleRequested();
+        return (!CoreRune.FW_SHELL_TRANSITION_TRANSIENT_LAUNCH_OVERLAY
+                        || this.mToken.asTransientLaunchOverlay() == null)
+                ? this.mToken.asWallpaperToken() == null || this.mToken.isVisible()
+                : this.mToken.isVisibleRequested();
     }
 
     @Override // com.android.server.wm.WindowContainer

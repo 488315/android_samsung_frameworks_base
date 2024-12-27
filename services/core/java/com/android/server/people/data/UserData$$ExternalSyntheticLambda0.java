@@ -18,6 +18,12 @@ public final /* synthetic */ class UserData$$ExternalSyntheticLambda0 implements
         UserData userData = this.f$0;
         String str = this.f$1;
         userData.getClass();
-        return new PackageData(str, userData.mUserId, new UserData$$ExternalSyntheticLambda1(userData, 0), new UserData$$ExternalSyntheticLambda1(userData, 1), userData.mScheduledExecutorService, userData.mPerUserPeopleDataDir);
+        return new PackageData(
+                str,
+                userData.mUserId,
+                new UserData$$ExternalSyntheticLambda1(userData, 0),
+                new UserData$$ExternalSyntheticLambda1(userData, 1),
+                userData.mScheduledExecutorService,
+                userData.mPerUserPeopleDataDir);
     }
 }

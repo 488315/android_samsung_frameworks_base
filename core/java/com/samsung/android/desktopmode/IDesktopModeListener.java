@@ -14,8 +14,7 @@ public interface IDesktopModeListener extends IInterface {
 
     public static class Default implements IDesktopModeListener {
         @Override // com.samsung.android.desktopmode.IDesktopModeListener
-        public void onDesktopModeStateChanged(SemDesktopModeState state) throws RemoteException {
-        }
+        public void onDesktopModeStateChanged(SemDesktopModeState state) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface IDesktopModeListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IDesktopModeListener {
+    public abstract static class Stub extends Binder implements IDesktopModeListener {
         static final int TRANSACTION_onDesktopModeStateChanged = 1;
 
         public Stub() {
@@ -61,7 +60,8 @@ public interface IDesktopModeListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IDesktopModeListener.DESCRIPTOR);
             }
@@ -71,7 +71,8 @@ public interface IDesktopModeListener extends IInterface {
             }
             switch (code) {
                 case 1:
-                    SemDesktopModeState _arg0 = (SemDesktopModeState) data.readTypedObject(SemDesktopModeState.CREATOR);
+                    SemDesktopModeState _arg0 =
+                            (SemDesktopModeState) data.readTypedObject(SemDesktopModeState.CREATOR);
                     data.enforceNoDataAvail();
                     onDesktopModeStateChanged(_arg0);
                     return true;
@@ -97,7 +98,8 @@ public interface IDesktopModeListener extends IInterface {
             }
 
             @Override // com.samsung.android.desktopmode.IDesktopModeListener
-            public void onDesktopModeStateChanged(SemDesktopModeState state) throws RemoteException {
+            public void onDesktopModeStateChanged(SemDesktopModeState state)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IDesktopModeListener.DESCRIPTOR);

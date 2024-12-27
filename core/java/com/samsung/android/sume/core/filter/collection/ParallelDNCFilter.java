@@ -10,6 +10,7 @@ import com.samsung.android.sume.core.descriptor.ParallelDescriptor;
 import com.samsung.android.sume.core.filter.AsyncFilter;
 import com.samsung.android.sume.core.filter.MediaFilter;
 import com.samsung.android.sume.core.filter.MediaFilterGroup;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -22,20 +23,24 @@ public class ParallelDNCFilter extends ParallelFilter {
     private final BufferChannel inChannel;
     private final BufferChannel outChannel;
 
-    public ParallelDNCFilter(ParallelDescriptor descriptor, Supplier<BufferChannel> channelSupplier) {
+    public ParallelDNCFilter(
+            ParallelDescriptor descriptor, Supplier<BufferChannel> channelSupplier) {
         super(descriptor, channelSupplier);
         this.inChannel = channelSupplier.get();
         this.outChannel = channelSupplier.get();
     }
 
-    @Override // com.samsung.android.sume.core.filter.MediaFilterGroupBase, com.samsung.android.sume.core.filter.MediaFilterGroup
+    @Override // com.samsung.android.sume.core.filter.MediaFilterGroupBase,
+              // com.samsung.android.sume.core.filter.MediaFilterGroup
     public MediaFilterGroup addFilter(List<MediaFilter> filters) {
-        filters.forEach(new Consumer() { // from class: com.samsung.android.sume.core.filter.collection.ParallelDNCFilter$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                ParallelDNCFilter.this.m9156x2b822d1c((MediaFilter) obj);
-            }
-        });
+        filters.forEach(
+                new Consumer() { // from class:
+                                 // com.samsung.android.sume.core.filter.collection.ParallelDNCFilter$$ExternalSyntheticLambda0
+                    @Override // java.util.function.Consumer
+                    public final void accept(Object obj) {
+                        ParallelDNCFilter.this.m9156x2b822d1c((MediaFilter) obj);
+                    }
+                });
         return super.addFilter(filters);
     }
 

@@ -10,19 +10,22 @@ public class SemBatteryEventHistory implements Cloneable, Parcelable {
     public static final int BATTERY_STATUS_FULL = 16;
     public static final int BATTERY_STATUS_NOT_CHARGING = 8;
     public static final int BATTERY_STATUS_UNKNOWN = 1;
-    public static final Parcelable.Creator<SemBatteryEventHistory> CREATOR = new Parcelable.Creator<SemBatteryEventHistory>() { // from class: com.samsung.android.sdhms.SemBatteryEventHistory.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemBatteryEventHistory createFromParcel(Parcel in) {
-            return new SemBatteryEventHistory(in);
-        }
+    public static final Parcelable.Creator<SemBatteryEventHistory> CREATOR =
+            new Parcelable.Creator<
+                    SemBatteryEventHistory>() { // from class:
+                                                // com.samsung.android.sdhms.SemBatteryEventHistory.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemBatteryEventHistory createFromParcel(Parcel in) {
+                    return new SemBatteryEventHistory(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SemBatteryEventHistory[] newArray(int size) {
-            return new SemBatteryEventHistory[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SemBatteryEventHistory[] newArray(int size) {
+                    return new SemBatteryEventHistory[size];
+                }
+            };
     public static final int PLUGGED_STATE_AC = 1;
     public static final int PLUGGED_STATE_NONE = 0;
     public static final int PLUGGED_STATE_USB = 2;

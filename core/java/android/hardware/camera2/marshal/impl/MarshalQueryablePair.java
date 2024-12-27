@@ -5,6 +5,7 @@ import android.hardware.camera2.marshal.MarshalRegistry;
 import android.hardware.camera2.marshal.Marshaler;
 import android.hardware.camera2.utils.TypeReference;
 import android.util.Pair;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
@@ -24,8 +25,16 @@ public class MarshalQueryablePair<T1, T2> implements MarshalQueryable<Pair<T1, T
             this.mClass = typeReference.getRawType();
             try {
                 ParameterizedType parameterizedType = (ParameterizedType) typeReference.getType();
-                this.mNestedTypeMarshalerFirst = MarshalRegistry.getMarshaler(TypeReference.createSpecializedTypeReference(parameterizedType.getActualTypeArguments()[0]), this.mNativeType);
-                this.mNestedTypeMarshalerSecond = MarshalRegistry.getMarshaler(TypeReference.createSpecializedTypeReference(parameterizedType.getActualTypeArguments()[1]), this.mNativeType);
+                this.mNestedTypeMarshalerFirst =
+                        MarshalRegistry.getMarshaler(
+                                TypeReference.createSpecializedTypeReference(
+                                        parameterizedType.getActualTypeArguments()[0]),
+                                this.mNativeType);
+                this.mNestedTypeMarshalerSecond =
+                        MarshalRegistry.getMarshaler(
+                                TypeReference.createSpecializedTypeReference(
+                                        parameterizedType.getActualTypeArguments()[1]),
+                                this.mNativeType);
                 try {
                     this.mConstructor = this.mClass.getConstructor(Object.class, Object.class);
                 } catch (NoSuchMethodException e) {
@@ -88,7 +97,8 @@ public class MarshalQueryablePair<T1, T2> implements MarshalQueryable<Pair<T1, T
     }
 
     @Override // android.hardware.camera2.marshal.MarshalQueryable
-    public Marshaler<Pair<T1, T2>> createMarshaler(TypeReference<Pair<T1, T2>> managedType, int nativeType) {
+    public Marshaler<Pair<T1, T2>> createMarshaler(
+            TypeReference<Pair<T1, T2>> managedType, int nativeType) {
         return new MarshalerPair(managedType, nativeType);
     }
 

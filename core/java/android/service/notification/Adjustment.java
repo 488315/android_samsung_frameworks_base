@@ -5,35 +5,36 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.UserHandle;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class Adjustment implements Parcelable {
-    public static final Parcelable.Creator<Adjustment> CREATOR = new Parcelable.Creator<Adjustment>() { // from class: android.service.notification.Adjustment.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Adjustment createFromParcel(Parcel in) {
-            return new Adjustment(in);
-        }
+    public static final Parcelable.Creator<Adjustment> CREATOR =
+            new Parcelable.Creator<
+                    Adjustment>() { // from class: android.service.notification.Adjustment.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Adjustment createFromParcel(Parcel in) {
+                    return new Adjustment(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public Adjustment[] newArray(int size) {
-            return new Adjustment[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public Adjustment[] newArray(int size) {
+                    return new Adjustment[size];
+                }
+            };
     public static final String KEY_CONTEXTUAL_ACTIONS = "key_contextual_actions";
     public static final String KEY_GROUP_KEY = "key_group_key";
     public static final String KEY_IMPORTANCE = "key_importance";
     public static final String KEY_IMPORTANCE_PROPOSAL = "key_importance_proposal";
 
-    @SystemApi
-    public static final String KEY_NOT_CONVERSATION = "key_not_conversation";
+    @SystemApi public static final String KEY_NOT_CONVERSATION = "key_not_conversation";
 
-    @SystemApi
-    public static final String KEY_PEOPLE = "key_people";
+    @SystemApi public static final String KEY_PEOPLE = "key_people";
     public static final String KEY_RANKING_SCORE = "key_ranking_score";
     public static final String KEY_SENSITIVE_CONTENT = "key_sensitive_content";
     public static final String KEY_SNOOZE_CRITERIA = "key_snooze_criteria";
@@ -47,8 +48,7 @@ public final class Adjustment implements Parcelable {
     private final int mUser;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Keys {
-    }
+    public @interface Keys {}
 
     @SystemApi
     public Adjustment(String pkg, String key, Bundle signals, CharSequence explanation, int user) {
@@ -59,7 +59,12 @@ public final class Adjustment implements Parcelable {
         this.mUser = user;
     }
 
-    public Adjustment(String pkg, String key, Bundle signals, CharSequence explanation, UserHandle userHandle) {
+    public Adjustment(
+            String pkg,
+            String key,
+            Bundle signals,
+            CharSequence explanation,
+            UserHandle userHandle) {
         this.mPackage = pkg;
         this.mKey = key;
         this.mSignals = signals;

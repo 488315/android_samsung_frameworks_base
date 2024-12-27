@@ -39,12 +39,13 @@ import android.util.ArraySet;
 import android.util.Log;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.print.DumpUtils;
 import com.android.internal.util.dump.DualDumpOutputStream;
 import com.android.internal.util.function.pooled.PooledLambda;
-import com.android.server.print.UserState;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -69,7 +70,8 @@ public final class UserState {
     public AnonymousClass1 mPrinterDiscoverySession;
     public final RemotePrintSpooler mSpooler;
     public final int mUserId;
-    public final TextUtils.SimpleStringSplitter mStringColonSplitter = new TextUtils.SimpleStringSplitter(':');
+    public final TextUtils.SimpleStringSplitter mStringColonSplitter =
+            new TextUtils.SimpleStringSplitter(':');
     public final Intent mQueryIntent = new Intent("android.printservice.PrintService");
     public final ArrayMap mActiveServices = new ArrayMap();
     public final List mInstalledServices = new ArrayList();
@@ -82,28 +84,43 @@ public final class UserState {
         public boolean mIsDestroyed;
         public final /* synthetic */ UserState this$0$1;
         public final ArrayMap mPrinters = new ArrayMap();
-        public final UserState$PrinterDiscoverySessionMediator$1 mDiscoveryObservers = new RemoteCallbackList() { // from class: com.android.server.print.UserState$PrinterDiscoverySessionMediator$1
-            @Override // android.os.RemoteCallbackList
-            public final void onCallbackDied(IInterface iInterface) {
-                IPrinterDiscoveryObserver iPrinterDiscoveryObserver = (IPrinterDiscoveryObserver) iInterface;
-                synchronized (UserState.AnonymousClass1.this.this$0$1.mLock) {
-                    UserState.AnonymousClass1.this.stopPrinterDiscoveryLocked(iPrinterDiscoveryObserver);
-                    UserState.AnonymousClass1 anonymousClass1 = UserState.AnonymousClass1.this;
-                    UserState$PrinterDiscoverySessionMediator$1 userState$PrinterDiscoverySessionMediator$1 = anonymousClass1.mDiscoveryObservers;
-                    userState$PrinterDiscoverySessionMediator$1.unregister(iPrinterDiscoveryObserver);
-                    if (userState$PrinterDiscoverySessionMediator$1.getRegisteredCallbackCount() == 0) {
-                        anonymousClass1.destroyLocked();
+        public final UserState$PrinterDiscoverySessionMediator$1 mDiscoveryObservers =
+                new RemoteCallbackList() { // from class:
+                                           // com.android.server.print.UserState$PrinterDiscoverySessionMediator$1
+                    @Override // android.os.RemoteCallbackList
+                    public final void onCallbackDied(IInterface iInterface) {
+                        IPrinterDiscoveryObserver iPrinterDiscoveryObserver =
+                                (IPrinterDiscoveryObserver) iInterface;
+                        synchronized (UserState.AnonymousClass1.this.this$0$1.mLock) {
+                            UserState.AnonymousClass1.this.stopPrinterDiscoveryLocked(
+                                    iPrinterDiscoveryObserver);
+                            UserState.AnonymousClass1 anonymousClass1 =
+                                    UserState.AnonymousClass1.this;
+                            UserState$PrinterDiscoverySessionMediator$1
+                                    userState$PrinterDiscoverySessionMediator$1 =
+                                            anonymousClass1.mDiscoveryObservers;
+                            userState$PrinterDiscoverySessionMediator$1.unregister(
+                                    iPrinterDiscoveryObserver);
+                            if (userState$PrinterDiscoverySessionMediator$1
+                                            .getRegisteredCallbackCount()
+                                    == 0) {
+                                anonymousClass1.destroyLocked();
+                            }
+                        }
                     }
-                }
-            }
-        };
+                };
         public final List mStartedPrinterDiscoveryTokens = new ArrayList();
         public final List mStateTrackedPrinters = new ArrayList();
 
         /* JADX WARN: Type inference failed for: r0v1, types: [com.android.server.print.UserState$PrinterDiscoverySessionMediator$1] */
         public AnonymousClass1() {
             this.this$0$1 = UserState.this;
-            Handler.getMain().sendMessage(PooledLambda.obtainMessage(new UserState$$ExternalSyntheticLambda1(2), this, new ArrayList(UserState.this.mActiveServices.values())));
+            Handler.getMain()
+                    .sendMessage(
+                            PooledLambda.obtainMessage(
+                                    new UserState$$ExternalSyntheticLambda1(2),
+                                    this,
+                                    new ArrayList(UserState.this.mActiveServices.values())));
         }
 
         public final void addObserverLocked(IPrinterDiscoveryObserver iPrinterDiscoveryObserver) {
@@ -111,7 +128,13 @@ public final class UserState {
             if (this.mPrinters.isEmpty()) {
                 return;
             }
-            Handler.getMain().sendMessage(PooledLambda.obtainMessage(new UserState$$ExternalSyntheticLambda4(4), this, iPrinterDiscoveryObserver, new ArrayList(this.mPrinters.values())));
+            Handler.getMain()
+                    .sendMessage(
+                            PooledLambda.obtainMessage(
+                                    new UserState$$ExternalSyntheticLambda4(4),
+                                    this,
+                                    iPrinterDiscoveryObserver,
+                                    new ArrayList(this.mPrinters.values())));
         }
 
         public final void destroyLocked() {
@@ -128,46 +151,78 @@ public final class UserState {
                 if (i >= size) {
                     break;
                 }
-                userState.stopPrinterStateTracking((PrinterId) ((ArrayList) this.mStateTrackedPrinters).get(i));
+                userState.stopPrinterStateTracking(
+                        (PrinterId) ((ArrayList) this.mStateTrackedPrinters).get(i));
                 i++;
             }
             int size2 = ((ArrayList) this.mStartedPrinterDiscoveryTokens).size();
             for (int i2 = 0; i2 < size2; i2++) {
-                stopPrinterDiscoveryLocked(IPrinterDiscoveryObserver.Stub.asInterface((IBinder) ((ArrayList) this.mStartedPrinterDiscoveryTokens).get(i2)));
+                stopPrinterDiscoveryLocked(
+                        IPrinterDiscoveryObserver.Stub.asInterface(
+                                (IBinder)
+                                        ((ArrayList) this.mStartedPrinterDiscoveryTokens).get(i2)));
             }
-            Handler.getMain().sendMessage(PooledLambda.obtainMessage(new UserState$$ExternalSyntheticLambda1(7), this, new ArrayList(userState.mActiveServices.values())));
+            Handler.getMain()
+                    .sendMessage(
+                            PooledLambda.obtainMessage(
+                                    new UserState$$ExternalSyntheticLambda1(7),
+                                    this,
+                                    new ArrayList(userState.mActiveServices.values())));
         }
 
         public final void dumpLocked(DualDumpOutputStream dualDumpOutputStream) {
             UserState userState = this.this$0$1;
             dualDumpOutputStream.write("is_destroyed", 1133871366145L, userState.mDestroyed);
-            dualDumpOutputStream.write("is_printer_discovery_in_progress", 1133871366146L, !((ArrayList) this.mStartedPrinterDiscoveryTokens).isEmpty());
-            UserState$PrinterDiscoverySessionMediator$1 userState$PrinterDiscoverySessionMediator$1 = this.mDiscoveryObservers;
+            dualDumpOutputStream.write(
+                    "is_printer_discovery_in_progress",
+                    1133871366146L,
+                    !((ArrayList) this.mStartedPrinterDiscoveryTokens).isEmpty());
+            UserState$PrinterDiscoverySessionMediator$1
+                    userState$PrinterDiscoverySessionMediator$1 = this.mDiscoveryObservers;
             int beginBroadcast = userState$PrinterDiscoverySessionMediator$1.beginBroadcast();
             for (int i = 0; i < beginBroadcast; i++) {
-                dualDumpOutputStream.write("printer_discovery_observers", 2237677961219L, userState$PrinterDiscoverySessionMediator$1.getBroadcastItem(i).toString());
+                dualDumpOutputStream.write(
+                        "printer_discovery_observers",
+                        2237677961219L,
+                        userState$PrinterDiscoverySessionMediator$1.getBroadcastItem(i).toString());
             }
             userState$PrinterDiscoverySessionMediator$1.finishBroadcast();
             int size = ((ArrayList) this.mStartedPrinterDiscoveryTokens).size();
             for (int i2 = 0; i2 < size; i2++) {
-                dualDumpOutputStream.write("discovery_requests", 2237677961220L, ((IBinder) ((ArrayList) this.mStartedPrinterDiscoveryTokens).get(i2)).toString());
+                dualDumpOutputStream.write(
+                        "discovery_requests",
+                        2237677961220L,
+                        ((IBinder) ((ArrayList) this.mStartedPrinterDiscoveryTokens).get(i2))
+                                .toString());
             }
             int size2 = ((ArrayList) this.mStateTrackedPrinters).size();
             for (int i3 = 0; i3 < size2; i3++) {
-                DumpUtils.writePrinterId(dualDumpOutputStream, "tracked_printer_requests", 2246267895813L, (PrinterId) ((ArrayList) this.mStateTrackedPrinters).get(i3));
+                DumpUtils.writePrinterId(
+                        dualDumpOutputStream,
+                        "tracked_printer_requests",
+                        2246267895813L,
+                        (PrinterId) ((ArrayList) this.mStateTrackedPrinters).get(i3));
             }
             int size3 = this.mPrinters.size();
             for (int i4 = 0; i4 < size3; i4++) {
-                DumpUtils.writePrinterInfo(userState.mContext, dualDumpOutputStream, "printer", 2246267895814L, (PrinterInfo) this.mPrinters.valueAt(i4));
+                DumpUtils.writePrinterInfo(
+                        userState.mContext,
+                        dualDumpOutputStream,
+                        "printer",
+                        2246267895814L,
+                        (PrinterInfo) this.mPrinters.valueAt(i4));
             }
         }
 
         public final void handleDispatchPrintersAdded(List list) {
-            UserState$PrinterDiscoverySessionMediator$1 userState$PrinterDiscoverySessionMediator$1 = this.mDiscoveryObservers;
+            UserState$PrinterDiscoverySessionMediator$1
+                    userState$PrinterDiscoverySessionMediator$1 = this.mDiscoveryObservers;
             int beginBroadcast = userState$PrinterDiscoverySessionMediator$1.beginBroadcast();
             for (int i = 0; i < beginBroadcast; i++) {
                 try {
-                    userState$PrinterDiscoverySessionMediator$1.getBroadcastItem(i).onPrintersAdded(new ParceledListSlice(list));
+                    userState$PrinterDiscoverySessionMediator$1
+                            .getBroadcastItem(i)
+                            .onPrintersAdded(new ParceledListSlice(list));
                 } catch (RemoteException e) {
                     Log.e("UserState", "Error sending added printers", e);
                 }
@@ -182,11 +237,17 @@ public final class UserState {
             }
             PrinterInfo printerInfo = (PrinterInfo) this.mPrinters.get(printerId);
             if (printerInfo != null) {
-                PrinterInfo build = new PrinterInfo.Builder(printerInfo).incCustomPrinterIconGen().build();
+                PrinterInfo build =
+                        new PrinterInfo.Builder(printerInfo).incCustomPrinterIconGen().build();
                 this.mPrinters.put(printerId, build);
                 ArrayList arrayList = new ArrayList(1);
                 arrayList.add(build);
-                Handler.getMain().sendMessage(PooledLambda.obtainMessage(new UserState$$ExternalSyntheticLambda1(3), this, arrayList));
+                Handler.getMain()
+                        .sendMessage(
+                                PooledLambda.obtainMessage(
+                                        new UserState$$ExternalSyntheticLambda1(3),
+                                        this,
+                                        arrayList));
             }
         }
 
@@ -199,7 +260,8 @@ public final class UserState {
             ArrayList arrayList = null;
             for (int i = 0; i < size; i++) {
                 PrinterInfo printerInfo = (PrinterInfo) list.get(i);
-                PrinterInfo printerInfo2 = (PrinterInfo) this.mPrinters.put(printerInfo.getId(), printerInfo);
+                PrinterInfo printerInfo2 =
+                        (PrinterInfo) this.mPrinters.put(printerInfo.getId(), printerInfo);
                 if (printerInfo2 == null || !printerInfo2.equals(printerInfo)) {
                     if (arrayList == null) {
                         arrayList = new ArrayList();
@@ -208,7 +270,12 @@ public final class UserState {
                 }
             }
             if (arrayList != null) {
-                Handler.getMain().sendMessage(PooledLambda.obtainMessage(new UserState$$ExternalSyntheticLambda1(4), this, arrayList));
+                Handler.getMain()
+                        .sendMessage(
+                                PooledLambda.obtainMessage(
+                                        new UserState$$ExternalSyntheticLambda1(4),
+                                        this,
+                                        arrayList));
             }
         }
 
@@ -229,17 +296,24 @@ public final class UserState {
                 }
             }
             if (arrayList != null) {
-                Handler.getMain().sendMessage(PooledLambda.obtainMessage(new UserState$$ExternalSyntheticLambda1(9), this, arrayList));
+                Handler.getMain()
+                        .sendMessage(
+                                PooledLambda.obtainMessage(
+                                        new UserState$$ExternalSyntheticLambda1(9),
+                                        this,
+                                        arrayList));
             }
         }
 
-        public final void startPrinterDiscoveryLocked(IPrinterDiscoveryObserver iPrinterDiscoveryObserver, List list) {
+        public final void startPrinterDiscoveryLocked(
+                IPrinterDiscoveryObserver iPrinterDiscoveryObserver, List list) {
             if (this.mIsDestroyed) {
                 Log.w("UserState", "Not starting dicovery - session destroyed");
                 return;
             }
             boolean z = !((ArrayList) this.mStartedPrinterDiscoveryTokens).isEmpty();
-            ((ArrayList) this.mStartedPrinterDiscoveryTokens).add(iPrinterDiscoveryObserver.asBinder());
+            ((ArrayList) this.mStartedPrinterDiscoveryTokens)
+                    .add(iPrinterDiscoveryObserver.asBinder());
             UserState userState = this.this$0$1;
             if (z && list != null && !list.isEmpty()) {
                 userState.validatePrinters(list);
@@ -247,7 +321,13 @@ public final class UserState {
                 if (((ArrayList) this.mStartedPrinterDiscoveryTokens).size() > 1) {
                     return;
                 }
-                Handler.getMain().sendMessage(PooledLambda.obtainMessage(new UserState$$ExternalSyntheticLambda4(3), this, new ArrayList(userState.mActiveServices.values()), list));
+                Handler.getMain()
+                        .sendMessage(
+                                PooledLambda.obtainMessage(
+                                        new UserState$$ExternalSyntheticLambda4(3),
+                                        this,
+                                        new ArrayList(userState.mActiveServices.values()),
+                                        list));
             }
         }
 
@@ -262,19 +342,38 @@ public final class UserState {
             }
             boolean contains = ((ArrayList) this.mStateTrackedPrinters).contains(printerId);
             ((ArrayList) this.mStateTrackedPrinters).add(printerId);
-            if (contains || (remotePrintService = (RemotePrintService) this.this$0$1.mActiveServices.get(printerId.getServiceName())) == null) {
+            if (contains
+                    || (remotePrintService =
+                                    (RemotePrintService)
+                                            this.this$0$1.mActiveServices.get(
+                                                    printerId.getServiceName()))
+                            == null) {
                 return;
             }
-            Handler.getMain().sendMessage(PooledLambda.obtainMessage(new UserState$$ExternalSyntheticLambda4(5), this, remotePrintService, printerId));
+            Handler.getMain()
+                    .sendMessage(
+                            PooledLambda.obtainMessage(
+                                    new UserState$$ExternalSyntheticLambda4(5),
+                                    this,
+                                    remotePrintService,
+                                    printerId));
         }
 
-        public final void stopPrinterDiscoveryLocked(IPrinterDiscoveryObserver iPrinterDiscoveryObserver) {
+        public final void stopPrinterDiscoveryLocked(
+                IPrinterDiscoveryObserver iPrinterDiscoveryObserver) {
             if (this.mIsDestroyed) {
                 Log.w("UserState", "Not stopping dicovery - session destroyed");
                 return;
             }
-            if (((ArrayList) this.mStartedPrinterDiscoveryTokens).remove(iPrinterDiscoveryObserver.asBinder()) && ((ArrayList) this.mStartedPrinterDiscoveryTokens).isEmpty()) {
-                Handler.getMain().sendMessage(PooledLambda.obtainMessage(new UserState$$ExternalSyntheticLambda1(8), this, new ArrayList(this.this$0$1.mActiveServices.values())));
+            if (((ArrayList) this.mStartedPrinterDiscoveryTokens)
+                            .remove(iPrinterDiscoveryObserver.asBinder())
+                    && ((ArrayList) this.mStartedPrinterDiscoveryTokens).isEmpty()) {
+                Handler.getMain()
+                        .sendMessage(
+                                PooledLambda.obtainMessage(
+                                        new UserState$$ExternalSyntheticLambda1(8),
+                                        this,
+                                        new ArrayList(this.this$0$1.mActiveServices.values())));
             }
         }
 
@@ -283,10 +382,22 @@ public final class UserState {
             if (this.mIsDestroyed) {
                 Log.w("UserState", "Not stopping printer state tracking - session destroyed");
             } else {
-                if (((ArrayList) this.mStartedPrinterDiscoveryTokens).isEmpty() || !((ArrayList) this.mStateTrackedPrinters).remove(printerId) || (remotePrintService = (RemotePrintService) this.this$0$1.mActiveServices.get(printerId.getServiceName())) == null) {
+                if (((ArrayList) this.mStartedPrinterDiscoveryTokens).isEmpty()
+                        || !((ArrayList) this.mStateTrackedPrinters).remove(printerId)
+                        || (remotePrintService =
+                                        (RemotePrintService)
+                                                this.this$0$1.mActiveServices.get(
+                                                        printerId.getServiceName()))
+                                == null) {
                     return;
                 }
-                Handler.getMain().sendMessage(PooledLambda.obtainMessage(new UserState$$ExternalSyntheticLambda4(2), this, remotePrintService, printerId));
+                Handler.getMain()
+                        .sendMessage(
+                                PooledLambda.obtainMessage(
+                                        new UserState$$ExternalSyntheticLambda4(2),
+                                        this,
+                                        remotePrintService,
+                                        printerId));
             }
         }
 
@@ -313,9 +424,16 @@ public final class UserState {
                         }
                     }
                 }
-                RemotePrintService remotePrintService = (RemotePrintService) this.this$0$1.mActiveServices.get(componentName);
+                RemotePrintService remotePrintService =
+                        (RemotePrintService) this.this$0$1.mActiveServices.get(componentName);
                 if (remotePrintService != null) {
-                    Handler.getMain().sendMessage(PooledLambda.obtainMessage(new UserState$$ExternalSyntheticLambda4(1), this, remotePrintService, arrayList2));
+                    Handler.getMain()
+                            .sendMessage(
+                                    PooledLambda.obtainMessage(
+                                            new UserState$$ExternalSyntheticLambda4(1),
+                                            this,
+                                            remotePrintService,
+                                            arrayList2));
                 }
             }
         }
@@ -358,14 +476,17 @@ public final class UserState {
         }
 
         /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
-        public AnonymousClass3(UserState userState, IPrintServicesChangeListener iPrintServicesChangeListener) {
+        public AnonymousClass3(
+                UserState userState, IPrintServicesChangeListener iPrintServicesChangeListener) {
             this(iPrintServicesChangeListener);
             this.$r8$classId = 0;
             this.this$0 = userState;
         }
 
         /* JADX WARN: 'this' call moved to the top of the method (can break code semantics) */
-        public AnonymousClass3(UserState userState, IRecommendationsChangeListener iRecommendationsChangeListener) {
+        public AnonymousClass3(
+                UserState userState,
+                IRecommendationsChangeListener iRecommendationsChangeListener) {
             this(iRecommendationsChangeListener);
             this.$r8$classId = 1;
             this.this$0 = userState;
@@ -399,8 +520,7 @@ public final class UserState {
     public final class PrintJobForAppCache {
         public final SparseArray mPrintJobsForRunningApp = new SparseArray();
 
-        public PrintJobForAppCache() {
-        }
+        public PrintJobForAppCache() {}
 
         public final void dumpLocked(DualDumpOutputStream dualDumpOutputStream) {
             int size = this.mPrintJobsForRunningApp.size();
@@ -413,7 +533,12 @@ public final class UserState {
                 while (i2 < size2) {
                     long start = dualDumpOutputStream.start("cached_print_jobs", 2246267895813L);
                     dualDumpOutputStream.write("app_id", 1120986464257L, keyAt);
-                    DumpUtils.writePrintJobInfo(UserState.this.mContext, dualDumpOutputStream, "print_job", 1146756268034L, (PrintJobInfo) list.get(i2));
+                    DumpUtils.writePrintJobInfo(
+                            UserState.this.mContext,
+                            dualDumpOutputStream,
+                            "print_job",
+                            1146756268034L,
+                            (PrintJobInfo) list.get(i2));
                     dualDumpOutputStream.end(start);
                     i2++;
                     i = i;
@@ -439,15 +564,19 @@ public final class UserState {
         }
     }
 
-    public final void addPrintServiceRecommendationsChangeListener(IRecommendationsChangeListener iRecommendationsChangeListener) {
+    public final void addPrintServiceRecommendationsChangeListener(
+            IRecommendationsChangeListener iRecommendationsChangeListener) {
         synchronized (this.mLock) {
             try {
                 throwIfDestroyedLocked();
                 if (this.mPrintServiceRecommendationsChangeListenerRecords == null) {
                     this.mPrintServiceRecommendationsChangeListenerRecords = new ArrayList();
-                    this.mPrintServiceRecommendationsService = new RemotePrintServiceRecommendationService(this.mContext, UserHandle.of(this.mUserId), this);
+                    this.mPrintServiceRecommendationsService =
+                            new RemotePrintServiceRecommendationService(
+                                    this.mContext, UserHandle.of(this.mUserId), this);
                 }
-                this.mPrintServiceRecommendationsChangeListenerRecords.add(new AnonymousClass3(this, iRecommendationsChangeListener));
+                this.mPrintServiceRecommendationsChangeListenerRecords.add(
+                        new AnonymousClass3(this, iRecommendationsChangeListener));
             } catch (Throwable th) {
                 throw th;
             }
@@ -474,7 +603,12 @@ public final class UserState {
             if (remotePrintService == null) {
                 return;
             }
-            Handler.getMain().sendMessage(PooledLambda.obtainMessage(new RemotePrintService$$ExternalSyntheticLambda1(3), remotePrintService, printJobInfo));
+            Handler.getMain()
+                    .sendMessage(
+                            PooledLambda.obtainMessage(
+                                    new RemotePrintService$$ExternalSyntheticLambda1(3),
+                                    remotePrintService,
+                                    printJobInfo));
         }
     }
 
@@ -490,7 +624,11 @@ public final class UserState {
         }
         for (RemotePrintService remotePrintService : this.mActiveServices.values()) {
             remotePrintService.getClass();
-            Handler.getMain().sendMessage(PooledLambda.obtainMessage(new RemotePrintService$$ExternalSyntheticLambda0(3), remotePrintService));
+            Handler.getMain()
+                    .sendMessage(
+                            PooledLambda.obtainMessage(
+                                    new RemotePrintService$$ExternalSyntheticLambda0(3),
+                                    remotePrintService));
         }
         this.mActiveServices.clear();
         ((ArrayList) this.mInstalledServices).clear();
@@ -513,7 +651,10 @@ public final class UserState {
         try {
             int size = printJobInfos.size();
             for (int i = 0; i < size; i++) {
-                remotePrintSpooler.setPrintJobState(((PrintJobInfo) printJobInfos.get(i)).getId(), 6, this.mContext.getString(17042517));
+                remotePrintSpooler.setPrintJobState(
+                        ((PrintJobInfo) printJobInfos.get(i)).getId(),
+                        6,
+                        this.mContext.getString(17042517));
             }
         } finally {
             Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -531,7 +672,9 @@ public final class UserState {
         }
         try {
             try {
-                icon = remotePrintSpooler.mGetCustomPrinterIconCaller.getCustomPrinterIcon(remotePrintSpooler.getRemoteInstanceLazy(), printerId);
+                icon =
+                        remotePrintSpooler.mGetCustomPrinterIconCaller.getCustomPrinterIcon(
+                                remotePrintSpooler.getRemoteInstanceLazy(), printerId);
                 synchronized (remotePrintSpooler.mLock) {
                     remotePrintSpooler.mCanUnbind = true;
                     remotePrintSpooler.mLock.notifyAll();
@@ -544,8 +687,17 @@ public final class UserState {
                     icon = null;
                 }
             }
-            if (icon == null && (remotePrintService = (RemotePrintService) this.mActiveServices.get(printerId.getServiceName())) != null) {
-                Handler.getMain().sendMessage(PooledLambda.obtainMessage(new RemotePrintService$$ExternalSyntheticLambda1(0), remotePrintService, printerId));
+            if (icon == null
+                    && (remotePrintService =
+                                    (RemotePrintService)
+                                            this.mActiveServices.get(printerId.getServiceName()))
+                            != null) {
+                Handler.getMain()
+                        .sendMessage(
+                                PooledLambda.obtainMessage(
+                                        new RemotePrintService$$ExternalSyntheticLambda1(0),
+                                        remotePrintService,
+                                        printerId));
             }
             return icon;
         } catch (Throwable th) {
@@ -561,7 +713,10 @@ public final class UserState {
         ArrayList arrayList = new ArrayList();
         int size = this.mInstalledServices.size();
         for (int i = 0; i < size; i++) {
-            ServiceInfo serviceInfo = ((PrintServiceInfo) this.mInstalledServices.get(i)).getResolveInfo().serviceInfo;
+            ServiceInfo serviceInfo =
+                    ((PrintServiceInfo) this.mInstalledServices.get(i))
+                            .getResolveInfo()
+                            .serviceInfo;
             arrayList.add(new ComponentName(serviceInfo.packageName, serviceInfo.name));
         }
         return arrayList;
@@ -577,8 +732,7 @@ public final class UserState {
                     int size = list.size();
                     for (int i2 = 0; i2 < size; i2++) {
                         printJobInfo = (PrintJobInfo) list.get(i2);
-                        if (!printJobInfo.getId().equals(printJobId)) {
-                        }
+                        if (!printJobInfo.getId().equals(printJobId)) {}
                     }
                 }
                 printJobInfo = null;
@@ -714,7 +868,9 @@ public final class UserState {
             monitor-exit(r0)     // Catch: java.lang.Throwable -> L4f
             throw r8
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.print.UserState.getPrintServices(int):java.util.List");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.print.UserState.getPrintServices(int):java.util.List");
     }
 
     public final void onConfigurationChangedLocked() {
@@ -723,27 +879,50 @@ public final class UserState {
         for (int i = 0; i < size; i++) {
             ComponentName componentName = (ComponentName) installedComponents.get(i);
             if (this.mDisabledServices.contains(componentName)) {
-                RemotePrintService remotePrintService = (RemotePrintService) this.mActiveServices.remove(componentName);
+                RemotePrintService remotePrintService =
+                        (RemotePrintService) this.mActiveServices.remove(componentName);
                 if (remotePrintService != null) {
                     removeServiceLocked(remotePrintService);
                 }
             } else if (!this.mActiveServices.containsKey(componentName)) {
-                RemotePrintService remotePrintService2 = new RemotePrintService(this.mContext, componentName, this.mUserId, this.mSpooler, this);
+                RemotePrintService remotePrintService2 =
+                        new RemotePrintService(
+                                this.mContext, componentName, this.mUserId, this.mSpooler, this);
                 this.mActiveServices.put(remotePrintService2.mComponentName, remotePrintService2);
                 AnonymousClass1 anonymousClass1 = this.mPrinterDiscoverySession;
                 if (anonymousClass1 != null) {
                     if (anonymousClass1.mIsDestroyed) {
                         Log.w("UserState", "Not updating added service - session destroyed");
                     } else {
-                        Handler.getMain().sendMessage(PooledLambda.obtainMessage(new UserState$$ExternalSyntheticLambda0(2), remotePrintService2));
-                        if (!((ArrayList) anonymousClass1.mStartedPrinterDiscoveryTokens).isEmpty()) {
-                            Handler.getMain().sendMessage(PooledLambda.obtainMessage(new UserState$$ExternalSyntheticLambda1(5), remotePrintService2, (Object) null));
+                        Handler.getMain()
+                                .sendMessage(
+                                        PooledLambda.obtainMessage(
+                                                new UserState$$ExternalSyntheticLambda0(2),
+                                                remotePrintService2));
+                        if (!((ArrayList) anonymousClass1.mStartedPrinterDiscoveryTokens)
+                                .isEmpty()) {
+                            Handler.getMain()
+                                    .sendMessage(
+                                            PooledLambda.obtainMessage(
+                                                    new UserState$$ExternalSyntheticLambda1(5),
+                                                    remotePrintService2,
+                                                    (Object) null));
                         }
                         int size2 = ((ArrayList) anonymousClass1.mStateTrackedPrinters).size();
                         for (int i2 = 0; i2 < size2; i2++) {
-                            PrinterId printerId = (PrinterId) ((ArrayList) anonymousClass1.mStateTrackedPrinters).get(i2);
-                            if (printerId.getServiceName().equals(remotePrintService2.mComponentName)) {
-                                Handler.getMain().sendMessage(PooledLambda.obtainMessage(new UserState$$ExternalSyntheticLambda1(6), remotePrintService2, printerId));
+                            PrinterId printerId =
+                                    (PrinterId)
+                                            ((ArrayList) anonymousClass1.mStateTrackedPrinters)
+                                                    .get(i2);
+                            if (printerId
+                                    .getServiceName()
+                                    .equals(remotePrintService2.mComponentName)) {
+                                Handler.getMain()
+                                        .sendMessage(
+                                                PooledLambda.obtainMessage(
+                                                        new UserState$$ExternalSyntheticLambda1(6),
+                                                        remotePrintService2,
+                                                        printerId));
                             }
                         }
                     }
@@ -760,23 +939,39 @@ public final class UserState {
                 it.remove();
             }
         }
-        Handler.getMain().sendMessage(PooledLambda.obtainMessage(new UserState$$ExternalSyntheticLambda0(0), this));
+        Handler.getMain()
+                .sendMessage(
+                        PooledLambda.obtainMessage(
+                                new UserState$$ExternalSyntheticLambda0(0), this));
     }
 
     public final void onPrintJobQueued(PrintJobInfo printJobInfo) {
         RemotePrintService remotePrintService;
         synchronized (this.mLock) {
             throwIfDestroyedLocked();
-            remotePrintService = (RemotePrintService) this.mActiveServices.get(printJobInfo.getPrinterId().getServiceName());
+            remotePrintService =
+                    (RemotePrintService)
+                            this.mActiveServices.get(printJobInfo.getPrinterId().getServiceName());
         }
         if (remotePrintService != null) {
-            Handler.getMain().sendMessage(PooledLambda.obtainMessage(new RemotePrintService$$ExternalSyntheticLambda1(2), remotePrintService, printJobInfo));
+            Handler.getMain()
+                    .sendMessage(
+                            PooledLambda.obtainMessage(
+                                    new RemotePrintService$$ExternalSyntheticLambda1(2),
+                                    remotePrintService,
+                                    printJobInfo));
         } else {
-            this.mSpooler.setPrintJobState(printJobInfo.getId(), 6, this.mContext.getString(17042517));
+            this.mSpooler.setPrintJobState(
+                    printJobInfo.getId(), 6, this.mContext.getString(17042517));
         }
     }
 
-    public final Bundle print(String str, IPrintDocumentAdapter iPrintDocumentAdapter, PrintAttributes printAttributes, String str2, final int i) {
+    public final Bundle print(
+            String str,
+            IPrintDocumentAdapter iPrintDocumentAdapter,
+            PrintAttributes printAttributes,
+            String str2,
+            final int i) {
         PrintJobInfo printJobInfo = new PrintJobInfo();
         printJobInfo.setId(new PrintJobId());
         printJobInfo.setAppId(i);
@@ -789,15 +984,19 @@ public final class UserState {
         final IBinder asBinder = iPrintDocumentAdapter.asBinder();
         printJobForAppCache.getClass();
         try {
-            asBinder.linkToDeath(new IBinder.DeathRecipient() { // from class: com.android.server.print.UserState.PrintJobForAppCache.1
-                @Override // android.os.IBinder.DeathRecipient
-                public final void binderDied() {
-                    asBinder.unlinkToDeath(this, 0);
-                    synchronized (UserState.this.mLock) {
-                        PrintJobForAppCache.this.mPrintJobsForRunningApp.remove(i);
-                    }
-                }
-            }, 0);
+            asBinder.linkToDeath(
+                    new IBinder
+                            .DeathRecipient() { // from class:
+                                                // com.android.server.print.UserState.PrintJobForAppCache.1
+                        @Override // android.os.IBinder.DeathRecipient
+                        public final void binderDied() {
+                            asBinder.unlinkToDeath(this, 0);
+                            synchronized (UserState.this.mLock) {
+                                PrintJobForAppCache.this.mPrintJobsForRunningApp.remove(i);
+                            }
+                        }
+                    },
+                    0);
             synchronized (UserState.this.mLock) {
                 try {
                     List list = (List) printJobForAppCache.mPrintJobsForRunningApp.get(i);
@@ -813,14 +1012,29 @@ public final class UserState {
             long clearCallingIdentity = Binder.clearCallingIdentity();
             try {
                 Intent intent = new Intent("android.print.PRINT_DIALOG");
-                intent.setData(Uri.fromParts("printjob", printJobInfo.getId().flattenToString(), null));
-                intent.putExtra("android.print.intent.extra.EXTRA_PRINT_DOCUMENT_ADAPTER", iPrintDocumentAdapter.asBinder());
+                intent.setData(
+                        Uri.fromParts("printjob", printJobInfo.getId().flattenToString(), null));
+                intent.putExtra(
+                        "android.print.intent.extra.EXTRA_PRINT_DOCUMENT_ADAPTER",
+                        iPrintDocumentAdapter.asBinder());
                 intent.putExtra("android.print.intent.extra.EXTRA_PRINT_JOB", printJobInfo);
                 intent.putExtra("android.intent.extra.PACKAGE_NAME", str2);
-                IntentSender intentSender = PendingIntent.getActivityAsUser(this.mContext, 0, intent, 1409286144, ActivityOptions.makeBasic().setPendingIntentCreatorBackgroundActivityStartMode(2).toBundle(), new UserHandle(this.mUserId)).getIntentSender();
+                IntentSender intentSender =
+                        PendingIntent.getActivityAsUser(
+                                        this.mContext,
+                                        0,
+                                        intent,
+                                        1409286144,
+                                        ActivityOptions.makeBasic()
+                                                .setPendingIntentCreatorBackgroundActivityStartMode(
+                                                        2)
+                                                .toBundle(),
+                                        new UserHandle(this.mUserId))
+                                .getIntentSender();
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("android.print.intent.extra.EXTRA_PRINT_JOB", printJobInfo);
-                bundle.putParcelable("android.print.intent.extra.EXTRA_PRINT_DIALOG_INTENT", intentSender);
+                bundle.putParcelable(
+                        "android.print.intent.extra.EXTRA_PRINT_DIALOG_INTENT", intentSender);
                 return bundle;
             } finally {
                 Binder.restoreCallingIdentity(clearCallingIdentity);
@@ -857,15 +1071,28 @@ public final class UserState {
 
     public final void readInstalledPrintServicesLocked() {
         HashSet hashSet = new HashSet();
-        List queryIntentServicesAsUser = this.mContext.getPackageManager().queryIntentServicesAsUser(this.mQueryIntent, this.mIsInstantServiceAllowed ? 276824196 : 268435588, this.mUserId);
+        List queryIntentServicesAsUser =
+                this.mContext
+                        .getPackageManager()
+                        .queryIntentServicesAsUser(
+                                this.mQueryIntent,
+                                this.mIsInstantServiceAllowed ? 276824196 : 268435588,
+                                this.mUserId);
         int size = queryIntentServicesAsUser.size();
         for (int i = 0; i < size; i++) {
             ResolveInfo resolveInfo = (ResolveInfo) queryIntentServicesAsUser.get(i);
-            if ("android.permission.BIND_PRINT_SERVICE".equals(resolveInfo.serviceInfo.permission)) {
+            if ("android.permission.BIND_PRINT_SERVICE"
+                    .equals(resolveInfo.serviceInfo.permission)) {
                 hashSet.add(PrintServiceInfo.create(this.mContext, resolveInfo));
             } else {
                 ServiceInfo serviceInfo = resolveInfo.serviceInfo;
-                Slog.w("UserState", "Skipping print service " + new ComponentName(serviceInfo.packageName, serviceInfo.name).flattenToShortString() + " since it does not require permission android.permission.BIND_PRINT_SERVICE");
+                Slog.w(
+                        "UserState",
+                        "Skipping print service "
+                                + new ComponentName(serviceInfo.packageName, serviceInfo.name)
+                                        .flattenToShortString()
+                                + " since it does not require permission"
+                                + " android.permission.BIND_PRINT_SERVICE");
             }
         }
         this.mInstalledServices.clear();
@@ -874,7 +1101,9 @@ public final class UserState {
 
     public final void readPrintServicesFromSettingLocked(String str, Set set) {
         ComponentName unflattenFromString;
-        String stringForUser = Settings.Secure.getStringForUser(this.mContext.getContentResolver(), str, this.mUserId);
+        String stringForUser =
+                Settings.Secure.getStringForUser(
+                        this.mContext.getContentResolver(), str, this.mUserId);
         if (TextUtils.isEmpty(stringForUser)) {
             return;
         }
@@ -882,7 +1111,8 @@ public final class UserState {
         simpleStringSplitter.setString(stringForUser);
         while (simpleStringSplitter.hasNext()) {
             String next = simpleStringSplitter.next();
-            if (!TextUtils.isEmpty(next) && (unflattenFromString = ComponentName.unflattenFromString(next)) != null) {
+            if (!TextUtils.isEmpty(next)
+                    && (unflattenFromString = ComponentName.unflattenFromString(next)) != null) {
                 ((HashSet) set).add(unflattenFromString);
             }
         }
@@ -918,7 +1148,8 @@ public final class UserState {
         }
     }
 
-    public final void removePrintJobStateChangeListener(IPrintJobStateChangeListener iPrintJobStateChangeListener) {
+    public final void removePrintJobStateChangeListener(
+            IPrintJobStateChangeListener iPrintJobStateChangeListener) {
         synchronized (this.mLock) {
             try {
                 throwIfDestroyedLocked();
@@ -932,8 +1163,12 @@ public final class UserState {
                     if (i >= size) {
                         break;
                     }
-                    AnonymousClass2 anonymousClass2 = (AnonymousClass2) this.mPrintJobStateChangeListenerRecords.get(i);
-                    if (anonymousClass2.listener.asBinder().equals(iPrintJobStateChangeListener.asBinder())) {
+                    AnonymousClass2 anonymousClass2 =
+                            (AnonymousClass2) this.mPrintJobStateChangeListenerRecords.get(i);
+                    if (anonymousClass2
+                            .listener
+                            .asBinder()
+                            .equals(iPrintJobStateChangeListener.asBinder())) {
                         anonymousClass2.listener.asBinder().unlinkToDeath(anonymousClass2, 0);
                         this.mPrintJobStateChangeListenerRecords.remove(i);
                         break;
@@ -949,7 +1184,8 @@ public final class UserState {
         }
     }
 
-    public final void removePrintServiceRecommendationsChangeListener(IRecommendationsChangeListener iRecommendationsChangeListener) {
+    public final void removePrintServiceRecommendationsChangeListener(
+            IRecommendationsChangeListener iRecommendationsChangeListener) {
         synchronized (this.mLock) {
             try {
                 throwIfDestroyedLocked();
@@ -963,15 +1199,25 @@ public final class UserState {
                     if (i >= size) {
                         break;
                     }
-                    AnonymousClass3 anonymousClass3 = (AnonymousClass3) ((ArrayList) this.mPrintServiceRecommendationsChangeListenerRecords).get(i);
-                    if (anonymousClass3.listener.asBinder().equals(iRecommendationsChangeListener.asBinder())) {
+                    AnonymousClass3 anonymousClass3 =
+                            (AnonymousClass3)
+                                    ((ArrayList)
+                                                    this
+                                                            .mPrintServiceRecommendationsChangeListenerRecords)
+                                            .get(i);
+                    if (anonymousClass3
+                            .listener
+                            .asBinder()
+                            .equals(iRecommendationsChangeListener.asBinder())) {
                         anonymousClass3.listener.asBinder().unlinkToDeath(anonymousClass3, 0);
-                        ((ArrayList) this.mPrintServiceRecommendationsChangeListenerRecords).remove(i);
+                        ((ArrayList) this.mPrintServiceRecommendationsChangeListenerRecords)
+                                .remove(i);
                         break;
                     }
                     i++;
                 }
-                if (((ArrayList) this.mPrintServiceRecommendationsChangeListenerRecords).isEmpty()) {
+                if (((ArrayList) this.mPrintServiceRecommendationsChangeListenerRecords)
+                        .isEmpty()) {
                     this.mPrintServiceRecommendationsChangeListenerRecords = null;
                     this.mPrintServiceRecommendations = null;
                     this.mPrintServiceRecommendationsService.close();
@@ -983,7 +1229,8 @@ public final class UserState {
         }
     }
 
-    public final void removePrintServicesChangeListener(IPrintServicesChangeListener iPrintServicesChangeListener) {
+    public final void removePrintServicesChangeListener(
+            IPrintServicesChangeListener iPrintServicesChangeListener) {
         synchronized (this.mLock) {
             try {
                 throwIfDestroyedLocked();
@@ -997,8 +1244,13 @@ public final class UserState {
                     if (i >= size) {
                         break;
                     }
-                    AnonymousClass3 anonymousClass3 = (AnonymousClass3) ((ArrayList) this.mPrintServicesChangeListenerRecords).get(i);
-                    if (anonymousClass3.listener.asBinder().equals(iPrintServicesChangeListener.asBinder())) {
+                    AnonymousClass3 anonymousClass3 =
+                            (AnonymousClass3)
+                                    ((ArrayList) this.mPrintServicesChangeListenerRecords).get(i);
+                    if (anonymousClass3
+                            .listener
+                            .asBinder()
+                            .equals(iPrintServicesChangeListener.asBinder())) {
                         anonymousClass3.listener.asBinder().unlinkToDeath(anonymousClass3, 0);
                         ((ArrayList) this.mPrintServicesChangeListenerRecords).remove(i);
                         break;
@@ -1017,13 +1269,22 @@ public final class UserState {
     public final void removeServiceLocked(RemotePrintService remotePrintService) {
         ComponentName componentName = remotePrintService.mComponentName;
         if (Looper.getMainLooper().isCurrentThread()) {
-            BackgroundThread.getHandler().sendMessage(PooledLambda.obtainMessage(new UserState$$ExternalSyntheticLambda1(0), this, componentName));
+            BackgroundThread.getHandler()
+                    .sendMessage(
+                            PooledLambda.obtainMessage(
+                                    new UserState$$ExternalSyntheticLambda1(0),
+                                    this,
+                                    componentName));
         } else {
             failScheduledPrintJobsForServiceInternal(componentName);
         }
         AnonymousClass1 anonymousClass1 = this.mPrinterDiscoverySession;
         if (anonymousClass1 == null) {
-            Handler.getMain().sendMessage(PooledLambda.obtainMessage(new RemotePrintService$$ExternalSyntheticLambda0(3), remotePrintService));
+            Handler.getMain()
+                    .sendMessage(
+                            PooledLambda.obtainMessage(
+                                    new RemotePrintService$$ExternalSyntheticLambda0(3),
+                                    remotePrintService));
             return;
         }
         if (anonymousClass1.mIsDestroyed) {
@@ -1048,10 +1309,19 @@ public final class UserState {
                 for (int i2 = 0; i2 < size2; i2++) {
                     anonymousClass1.mPrinters.remove(arrayList.get(i2));
                 }
-                Handler.getMain().sendMessage(PooledLambda.obtainMessage(new UserState$$ExternalSyntheticLambda1(9), anonymousClass1, arrayList));
+                Handler.getMain()
+                        .sendMessage(
+                                PooledLambda.obtainMessage(
+                                        new UserState$$ExternalSyntheticLambda1(9),
+                                        anonymousClass1,
+                                        arrayList));
             }
         }
-        Handler.getMain().sendMessage(PooledLambda.obtainMessage(new RemotePrintService$$ExternalSyntheticLambda0(3), remotePrintService));
+        Handler.getMain()
+                .sendMessage(
+                        PooledLambda.obtainMessage(
+                                new RemotePrintService$$ExternalSyntheticLambda0(3),
+                                remotePrintService));
     }
 
     public final void setPrintServiceEnabled(ComponentName componentName, boolean z) {
@@ -1067,7 +1337,9 @@ public final class UserState {
                         if (i >= size) {
                             break;
                         }
-                        if (((PrintServiceInfo) ((ArrayList) this.mInstalledServices).get(i)).getComponentName().equals(componentName)) {
+                        if (((PrintServiceInfo) ((ArrayList) this.mInstalledServices).get(i))
+                                .getComponentName()
+                                .equals(componentName)) {
                             ((ArraySet) this.mDisabledServices).add(componentName);
                             z2 = true;
                             break;
@@ -1120,19 +1392,22 @@ public final class UserState {
     public final void upgradePersistentStateIfNeeded() {
         ContentResolver contentResolver = this.mContext.getContentResolver();
         int i = this.mUserId;
-        if (Settings.Secure.getStringForUser(contentResolver, "enabled_print_services", i) != null) {
+        if (Settings.Secure.getStringForUser(contentResolver, "enabled_print_services", i)
+                != null) {
             HashSet hashSet = new HashSet();
             readPrintServicesFromSettingLocked("enabled_print_services", hashSet);
             ArraySet arraySet = new ArraySet();
             int size = this.mInstalledServices.size();
             for (int i2 = 0; i2 < size; i2++) {
-                ComponentName componentName = ((PrintServiceInfo) this.mInstalledServices.get(i2)).getComponentName();
+                ComponentName componentName =
+                        ((PrintServiceInfo) this.mInstalledServices.get(i2)).getComponentName();
                 if (!hashSet.contains(componentName)) {
                     arraySet.add(componentName);
                 }
             }
             writeDisabledPrintServicesLocked(arraySet);
-            Settings.Secure.putStringForUser(this.mContext.getContentResolver(), "enabled_print_services", null, i);
+            Settings.Secure.putStringForUser(
+                    this.mContext.getContentResolver(), "enabled_print_services", null, i);
         }
     }
 
@@ -1164,6 +1439,10 @@ public final class UserState {
             }
             sb.append(componentName.flattenToShortString());
         }
-        Settings.Secure.putStringForUser(this.mContext.getContentResolver(), "disabled_print_services", sb.toString(), this.mUserId);
+        Settings.Secure.putStringForUser(
+                this.mContext.getContentResolver(),
+                "disabled_print_services",
+                sb.toString(),
+                this.mUserId);
     }
 }

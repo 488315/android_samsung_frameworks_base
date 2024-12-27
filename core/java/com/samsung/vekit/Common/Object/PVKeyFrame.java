@@ -13,7 +13,15 @@ public class PVKeyFrame {
     long startTime;
     PVFocusType type;
 
-    public PVKeyFrame(long startTime, long endTime, long duration, int mainObjectId, PVFocusType type, int id, int startFrameNum, int endFrameNum) {
+    public PVKeyFrame(
+            long startTime,
+            long endTime,
+            long duration,
+            int mainObjectId,
+            PVFocusType type,
+            int id,
+            int startFrameNum,
+            int endFrameNum) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.duration = duration;

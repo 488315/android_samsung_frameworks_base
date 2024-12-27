@@ -18,6 +18,7 @@ import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.provider.Settings;
 import android.util.Slog;
+
 import com.android.internal.util.jobs.DumpUtils$$ExternalSyntheticOutline0;
 import com.android.internal.widget.ILockSettings;
 import com.android.internal.widget.RemoteLockInfo;
@@ -25,18 +26,21 @@ import com.android.server.BatteryService$$ExternalSyntheticOutline0;
 import com.android.server.BootReceiver$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
 import com.android.server.accessibility.magnification.MagnificationConnectionManager$$ExternalSyntheticOutline0;
+
 import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.knox.analytics.activation.ActivationMonitor;
 import com.samsung.android.knoxguard.service.KnoxGuardNative;
 import com.samsung.android.knoxguard.service.KnoxGuardSeService;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
@@ -58,7 +62,8 @@ public final class Utils {
         if (str != null && !str.isEmpty()) {
             string2 = BootReceiver$$ExternalSyntheticOutline0.m(" (", str, ")\n\n", string2);
         }
-        setRemoteLockToLockscreen(context, 3, true, string2, "", "", true, str2, 0, 0L, 0, true, null, true);
+        setRemoteLockToLockscreen(
+                context, 3, true, string2, "", "", true, str2, 0, 0L, 0, true, null, true);
     }
 
     public static RemoteLockInfo buildDefaultRetryLockInfo(Context context) {
@@ -71,11 +76,26 @@ public final class Utils {
             string = context.getString(R.string.permdesc_manageNetworkPolicy);
             string2 = context.getString(R.string.permdesc_highSamplingRateSensors);
         }
-        return new RemoteLockInfo.Builder(3, true).setClientName(string).setPhoneNumber("").setEmailAddress("").setMessage(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(" (2002)\n\n", string2)).setAllowFailCount(0).setEnableEmergencyCall(true).setLockTimeOut(0L).setBlockCount(0).setSkipPinContainer(true).setBundle((Bundle) null).setSkipSupportContainer(true).build();
+        return new RemoteLockInfo.Builder(3, true)
+                .setClientName(string)
+                .setPhoneNumber("")
+                .setEmailAddress("")
+                .setMessage(
+                        ConnectivityModuleConnector$$ExternalSyntheticOutline0.m(
+                                " (2002)\n\n", string2))
+                .setAllowFailCount(0)
+                .setEnableEmergencyCall(true)
+                .setLockTimeOut(0L)
+                .setBlockCount(0)
+                .setSkipPinContainer(true)
+                .setBundle((Bundle) null)
+                .setSkipSupportContainer(true)
+                .build();
     }
 
     public static void checkCaller(Context context) {
-        if (!"com.samsung.android.kgclient".equals(context.getPackageManager().getNameForUid(Binder.getCallingUid()))) {
+        if (!"com.samsung.android.kgclient"
+                .equals(context.getPackageManager().getNameForUid(Binder.getCallingUid()))) {
             throw new SecurityException("caller should be com.samsung.android.kgclient");
         }
     }
@@ -89,19 +109,26 @@ public final class Utils {
         if (context.checkCallingPermission(str) == 0) {
             return true;
         }
-        throw new SecurityException(ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("does not have ", str));
+        throw new SecurityException(
+                ConnectivityModuleConnector$$ExternalSyntheticOutline0.m("does not have ", str));
     }
 
     public static String getKGPolicyCompany() {
         try {
             String str = TAG;
             Slog.d(str, "getKGPolicyCompany");
-            String stringResult = KnoxGuardSeService.getStringResult(KnoxGuardNative.getKGPolicyRefactor());
+            String stringResult =
+                    KnoxGuardSeService.getStringResult(KnoxGuardNative.getKGPolicyRefactor());
             if (stringResult == null) {
                 return null;
             }
             JSONObject jSONObject = new JSONObject(stringResult);
-            String string = !jSONObject.isNull(Constants.JSON_KG_POLICY_GENERAL) ? jSONObject.getJSONObject(Constants.JSON_KG_POLICY_GENERAL).getString("companyName") : null;
+            String string =
+                    !jSONObject.isNull(Constants.JSON_KG_POLICY_GENERAL)
+                            ? jSONObject
+                                    .getJSONObject(Constants.JSON_KG_POLICY_GENERAL)
+                                    .getString("companyName")
+                            : null;
             Slog.d(str, "getKGPolicyCompany company " + string);
             return string;
         } catch (JSONException unused) {
@@ -129,7 +156,9 @@ public final class Utils {
 
     public static int getStateAndSetToKGSystemProperty() {
         long clearCallingIdentity = Binder.clearCallingIdentity();
-        int intResult = KnoxGuardSeService.getIntResult(KnoxGuardNative.tz_getTAState(KnoxGuardNative.KGTA_PARAM_DEFAULT), true);
+        int intResult =
+                KnoxGuardSeService.getIntResult(
+                        KnoxGuardNative.tz_getTAState(KnoxGuardNative.KGTA_PARAM_DEFAULT), true);
         int i = 5;
         if (intResult >= 0 && intResult <= 5) {
             i = intResult;
@@ -141,7 +170,8 @@ public final class Utils {
         try {
             SystemProperties.set(Constants.KG_SYSTEM_PROPERTY, strArr[i]);
         } catch (Exception e) {
-            MagnificationConnectionManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("Cannot set SystemProperty(knox.kg.state) - "), TAG);
+            MagnificationConnectionManager$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Cannot set SystemProperty(knox.kg.state) - "), TAG);
         }
         Binder.restoreCallingIdentity(clearCallingIdentity);
         return intResult;
@@ -154,7 +184,11 @@ public final class Utils {
         try {
             return SystemProperties.get(str, str2);
         } catch (Exception e) {
-            MagnificationConnectionManager$$ExternalSyntheticOutline0.m(e, DumpUtils$$ExternalSyntheticOutline0.m("Cannot get String property(", str, ") - "), TAG);
+            MagnificationConnectionManager$$ExternalSyntheticOutline0.m(
+                    e,
+                    DumpUtils$$ExternalSyntheticOutline0.m(
+                            "Cannot get String property(", str, ") - "),
+                    TAG);
             return str2;
         }
     }
@@ -164,7 +198,10 @@ public final class Utils {
         try {
             try {
                 try {
-                    BufferedReader bufferedReader2 = new BufferedReader(new InputStreamReader(new FileInputStream(str), StandardCharsets.UTF_8));
+                    BufferedReader bufferedReader2 =
+                            new BufferedReader(
+                                    new InputStreamReader(
+                                            new FileInputStream(str), StandardCharsets.UTF_8));
                     try {
                         String readLine = bufferedReader2.readLine();
                         if (readLine != null) {
@@ -246,8 +283,13 @@ public final class Utils {
     }
 
     public static boolean isOtpBitFusedWithActive() {
-        boolean equals = Constants.OTP_BIT_KG_ENABLED.equals(getStringSystemProperty(Constants.KG_OTP_BIT_SYSTEM_PROPERTY, Constants.OTP_BIT_KG_UNKNOWN));
-        DeviceIdleController$$ExternalSyntheticOutline0.m("isOtpBitFusedWithActive - ", TAG, equals);
+        boolean equals =
+                Constants.OTP_BIT_KG_ENABLED.equals(
+                        getStringSystemProperty(
+                                Constants.KG_OTP_BIT_SYSTEM_PROPERTY,
+                                Constants.OTP_BIT_KG_UNKNOWN));
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                "isOtpBitFusedWithActive - ", TAG, equals);
         return equals;
     }
 
@@ -272,7 +314,12 @@ public final class Utils {
     }
 
     public static boolean isSingleOtpBitFused() {
-        boolean equals = "1".equals(getStringSystemProperty(Constants.KG_OTP_BIT_SYSTEM_PROPERTY, Constants.OTP_BIT_KG_UNKNOWN));
+        boolean equals =
+                "1"
+                        .equals(
+                                getStringSystemProperty(
+                                        Constants.KG_OTP_BIT_SYSTEM_PROPERTY,
+                                        Constants.OTP_BIT_KG_UNKNOWN));
         DeviceIdleController$$ExternalSyntheticOutline0.m("isSingleOtpBitFused - ", TAG, equals);
         return equals;
     }
@@ -301,7 +348,10 @@ public final class Utils {
     }
 
     public static boolean isStateForEnrolledDevice(String str) {
-        return str != null && (Constants.RLC_STATE_NORMAL.equalsIgnoreCase(str) || Constants.RLC_STATE_BLINKED.equalsIgnoreCase(str) || Constants.RLC_STATE_LOCKED.equalsIgnoreCase(str));
+        return str != null
+                && (Constants.RLC_STATE_NORMAL.equalsIgnoreCase(str)
+                        || Constants.RLC_STATE_BLINKED.equalsIgnoreCase(str)
+                        || Constants.RLC_STATE_LOCKED.equalsIgnoreCase(str));
     }
 
     public static boolean isSupportKGOnCsc() {
@@ -322,38 +372,77 @@ public final class Utils {
         String kGPolicyCompany = getKGPolicyCompany();
         if (isTabletDevice()) {
             if (kGPolicyCompany != null) {
-                format = String.format(context.getString(R.string.permdesc_killBackgroundProcesses), "Device Services", kGPolicyCompany);
+                format =
+                        String.format(
+                                context.getString(R.string.permdesc_killBackgroundProcesses),
+                                "Device Services",
+                                kGPolicyCompany);
             } else {
-                format = String.format(context.getString(R.string.permdesc_manageFingerprint), "Device Services");
+                format =
+                        String.format(
+                                context.getString(R.string.permdesc_manageFingerprint),
+                                "Device Services");
                 kGPolicyCompany = context.getString(R.string.permdesc_manageOngoingCalls);
             }
         } else if (kGPolicyCompany != null) {
-            format = String.format(context.getString(R.string.permdesc_install_shortcut), "Device Services", kGPolicyCompany);
+            format =
+                    String.format(
+                            context.getString(R.string.permdesc_install_shortcut),
+                            "Device Services",
+                            kGPolicyCompany);
         } else {
-            format = String.format(context.getString(R.string.permdesc_invokeCarrierSetup), "Device Services");
+            format =
+                    String.format(
+                            context.getString(R.string.permdesc_invokeCarrierSetup),
+                            "Device Services");
             kGPolicyCompany = context.getString(R.string.permdesc_manageNetworkPolicy);
         }
         if (str != null && !str.isEmpty()) {
             format = BootReceiver$$ExternalSyntheticOutline0.m(" (", str, ")\n\n", format);
         }
-        setRemoteLockToLockscreen(context, 3, true, format, "", "", true, kGPolicyCompany != null ? kGPolicyCompany : context.getString(R.string.permdesc_manageNetworkPolicy), 0, 0L, 0, true, null, true);
+        setRemoteLockToLockscreen(
+                context,
+                3,
+                true,
+                format,
+                "",
+                "",
+                true,
+                kGPolicyCompany != null
+                        ? kGPolicyCompany
+                        : context.getString(R.string.permdesc_manageNetworkPolicy),
+                0,
+                0L,
+                0,
+                true,
+                null,
+                true);
     }
 
-    public static boolean performLockscreen(ILockSettings iLockSettings, RemoteLockInfo remoteLockInfo, boolean z) throws RemoteException {
+    public static boolean performLockscreen(
+            ILockSettings iLockSettings, RemoteLockInfo remoteLockInfo, boolean z)
+            throws RemoteException {
         KnoxGuardSeService.setUserPresentReceiverEnabled(z);
-        boolean knoxGuard = iLockSettings.setKnoxGuard(ActivityManager.getCurrentUser(), remoteLockInfo);
+        boolean knoxGuard =
+                iLockSettings.setKnoxGuard(ActivityManager.getCurrentUser(), remoteLockInfo);
         KnoxGuardSeService.setLockResult(knoxGuard);
         return knoxGuard;
     }
 
     public static void powerOff(Context context, int i) {
         Slog.i(TAG, "powerOff by " + i);
-        ((PowerManager) context.getSystemService("power")).shutdown(false, String.format("KnoxGuard : system recovery (%d)", Integer.valueOf(i)), false);
+        ((PowerManager) context.getSystemService("power"))
+                .shutdown(
+                        false,
+                        String.format("KnoxGuard : system recovery (%d)", Integer.valueOf(i)),
+                        false);
     }
 
     public static void setKGSystemProperty() {
         long clearCallingIdentity = Binder.clearCallingIdentity();
-        int intResult = KnoxGuardSeService.getIntResult(KnoxGuardNative.tz_getTAState(KnoxGuardNative.KGTA_PARAM_DEFAULT), false);
+        int intResult =
+                KnoxGuardSeService.getIntResult(
+                        KnoxGuardNative.tz_getTAState(KnoxGuardNative.KGTA_PARAM_DEFAULT), false);
         if (intResult < 0 || intResult > 5) {
             intResult = 5;
         }
@@ -364,21 +453,64 @@ public final class Utils {
         try {
             SystemProperties.set(Constants.KG_SYSTEM_PROPERTY, strArr[intResult]);
         } catch (Exception e) {
-            MagnificationConnectionManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("Cannot set SystemProperty(knox.kg.state) - "), TAG);
+            MagnificationConnectionManager$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("Cannot set SystemProperty(knox.kg.state) - "), TAG);
         }
         Binder.restoreCallingIdentity(clearCallingIdentity);
     }
 
-    public static void setRemoteLockToLockscreen(Context context, int i, boolean z, String str, String str2, String str3, boolean z2, String str4, int i2, long j, int i3, boolean z3, Bundle bundle) {
-        setRemoteLockToLockscreen(context, i, z, str, str2, str3, z2, str4, i2, j, i3, z3, bundle, true);
+    public static void setRemoteLockToLockscreen(
+            Context context,
+            int i,
+            boolean z,
+            String str,
+            String str2,
+            String str3,
+            boolean z2,
+            String str4,
+            int i2,
+            long j,
+            int i3,
+            boolean z3,
+            Bundle bundle) {
+        setRemoteLockToLockscreen(
+                context, i, z, str, str2, str3, z2, str4, i2, j, i3, z3, bundle, true);
     }
 
-    public static void setRemoteLockToLockscreen(Context context, int i, boolean z, String str, String str2, String str3, boolean z2, String str4, int i2, long j, int i3, boolean z3, Bundle bundle, boolean z4) {
+    public static void setRemoteLockToLockscreen(
+            Context context,
+            int i,
+            boolean z,
+            String str,
+            String str2,
+            String str3,
+            boolean z2,
+            String str4,
+            int i2,
+            long j,
+            int i3,
+            boolean z3,
+            Bundle bundle,
+            boolean z4) {
         try {
             if (mLockSettingsService == null) {
-                mLockSettingsService = ILockSettings.Stub.asInterface(ServiceManager.getService("lock_settings"));
+                mLockSettingsService =
+                        ILockSettings.Stub.asInterface(ServiceManager.getService("lock_settings"));
             }
-            RemoteLockInfo build = new RemoteLockInfo.Builder(i, z).setClientName(str4).setPhoneNumber(str2).setEmailAddress(str3).setMessage(str).setAllowFailCount(i2).setEnableEmergencyCall(z2).setLockTimeOut(j).setBlockCount(i3).setSkipPinContainer(z3).setBundle(bundle).setSkipSupportContainer(z4).build();
+            RemoteLockInfo build =
+                    new RemoteLockInfo.Builder(i, z)
+                            .setClientName(str4)
+                            .setPhoneNumber(str2)
+                            .setEmailAddress(str3)
+                            .setMessage(str)
+                            .setAllowFailCount(i2)
+                            .setEnableEmergencyCall(z2)
+                            .setLockTimeOut(j)
+                            .setBlockCount(i3)
+                            .setSkipPinContainer(z3)
+                            .setBundle(bundle)
+                            .setSkipSupportContainer(z4)
+                            .build();
             boolean performLockscreen = performLockscreen(mLockSettingsService, build, z);
             if (z && !performLockscreen && Constants.IS_SUPPORT_KGTA) {
                 long clearCallingIdentity = Binder.clearCallingIdentity();
@@ -394,13 +526,16 @@ public final class Utils {
     public static boolean setRetryLock(Context context) {
         try {
             if (mLockSettingsService == null) {
-                mLockSettingsService = ILockSettings.Stub.asInterface(ServiceManager.getService("lock_settings"));
+                mLockSettingsService =
+                        ILockSettings.Stub.asInterface(ServiceManager.getService("lock_settings"));
             }
             RemoteLockInfo remoteLockInfoForRetry = KnoxGuardSeService.getRemoteLockInfoForRetry();
             if (remoteLockInfoForRetry == null) {
                 remoteLockInfoForRetry = buildDefaultRetryLockInfo(context);
             }
-            boolean knoxGuard = mLockSettingsService.setKnoxGuard(ActivityManager.getCurrentUser(), remoteLockInfoForRetry);
+            boolean knoxGuard =
+                    mLockSettingsService.setKnoxGuard(
+                            ActivityManager.getCurrentUser(), remoteLockInfoForRetry);
             KnoxGuardSeService.setLockResult(knoxGuard);
             return knoxGuard;
         } catch (RemoteException e) {
@@ -421,7 +556,8 @@ public final class Utils {
         KnoxGuardSeService.setRetryRemoteLockInfo(remoteLockInfo);
         long elapsedRealtime = SystemClock.elapsedRealtime() + 300000;
         AlarmManager alarmManager = (AlarmManager) context.getSystemService("alarm");
-        PendingIntent pendingIntentForRetryLockAction = getPendingIntentForRetryLockAction(context, 1);
+        PendingIntent pendingIntentForRetryLockAction =
+                getPendingIntentForRetryLockAction(context, 1);
         if (pendingIntentForRetryLockAction == null || alarmManager == null) {
             Slog.e(str, "startRetryLockAlarm - null pi or am");
             return;

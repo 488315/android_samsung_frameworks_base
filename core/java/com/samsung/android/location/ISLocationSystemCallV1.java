@@ -16,7 +16,8 @@ public interface ISLocationSystemCallV1 extends IInterface {
 
     public static class Default implements ISLocationSystemCallV1 {
         @Override // com.samsung.android.location.ISLocationSystemCallV1
-        public boolean isProviderEnabledForUser(String provider, int userId) throws RemoteException {
+        public boolean isProviderEnabledForUser(String provider, int userId)
+                throws RemoteException {
             return false;
         }
 
@@ -31,7 +32,7 @@ public interface ISLocationSystemCallV1 extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISLocationSystemCallV1 {
+    public abstract static class Stub extends Binder implements ISLocationSystemCallV1 {
         static final int TRANSACTION_isProviderEnabledForUser = 1;
         static final int TRANSACTION_isUidForeground = 2;
 
@@ -72,7 +73,8 @@ public interface ISLocationSystemCallV1 extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISLocationSystemCallV1.DESCRIPTOR);
             }
@@ -118,7 +120,8 @@ public interface ISLocationSystemCallV1 extends IInterface {
             }
 
             @Override // com.samsung.android.location.ISLocationSystemCallV1
-            public boolean isProviderEnabledForUser(String provider, int userId) throws RemoteException {
+            public boolean isProviderEnabledForUser(String provider, int userId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

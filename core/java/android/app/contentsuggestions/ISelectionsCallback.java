@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
+
 import java.util.List;
 
 /* loaded from: classes.dex */
@@ -15,8 +16,8 @@ public interface ISelectionsCallback extends IInterface {
 
     public static class Default implements ISelectionsCallback {
         @Override // android.app.contentsuggestions.ISelectionsCallback
-        public void onContentSelectionsAvailable(int statusCode, List<ContentSelection> selections) throws RemoteException {
-        }
+        public void onContentSelectionsAvailable(int statusCode, List<ContentSelection> selections)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -24,7 +25,7 @@ public interface ISelectionsCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISelectionsCallback {
+    public abstract static class Stub extends Binder implements ISelectionsCallback {
         static final int TRANSACTION_onContentSelectionsAvailable = 1;
 
         public Stub() {
@@ -62,7 +63,8 @@ public interface ISelectionsCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISelectionsCallback.DESCRIPTOR);
             }
@@ -73,7 +75,8 @@ public interface ISelectionsCallback extends IInterface {
             switch (code) {
                 case 1:
                     int _arg0 = data.readInt();
-                    List<ContentSelection> _arg1 = data.createTypedArrayList(ContentSelection.CREATOR);
+                    List<ContentSelection> _arg1 =
+                            data.createTypedArrayList(ContentSelection.CREATOR);
                     data.enforceNoDataAvail();
                     onContentSelectionsAvailable(_arg0, _arg1);
                     return true;
@@ -99,7 +102,8 @@ public interface ISelectionsCallback extends IInterface {
             }
 
             @Override // android.app.contentsuggestions.ISelectionsCallback
-            public void onContentSelectionsAvailable(int statusCode, List<ContentSelection> selections) throws RemoteException {
+            public void onContentSelectionsAvailable(
+                    int statusCode, List<ContentSelection> selections) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISelectionsCallback.DESCRIPTOR);

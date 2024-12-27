@@ -11,6 +11,7 @@ import android.filterfw.core.SyncRunner;
 import android.filterfw.io.GraphIOException;
 import android.filterfw.io.GraphReader;
 import android.filterfw.io.TextGraphReader;
+
 import java.util.ArrayList;
 
 /* loaded from: classes.dex */
@@ -43,7 +44,8 @@ public class GraphEnvironment extends MffEnvironment {
 
         public GraphRunner getSyncRunner(FilterContext environment) {
             if (this.mSyncRunner == null) {
-                this.mSyncRunner = new SyncRunner(environment, this.mGraph, RoundRobinScheduler.class);
+                this.mSyncRunner =
+                        new SyncRunner(environment, this.mGraph, RoundRobinScheduler.class);
             }
             return this.mSyncRunner;
         }
@@ -88,7 +90,8 @@ public class GraphEnvironment extends MffEnvironment {
 
     public FilterGraph getGraph(int graphId) {
         if (graphId < 0 || graphId >= this.mGraphs.size()) {
-            throw new IllegalArgumentException("Invalid graph ID " + graphId + " specified in runGraph()!");
+            throw new IllegalArgumentException(
+                    "Invalid graph ID " + graphId + " specified in runGraph()!");
         }
         return this.mGraphs.get(graphId).getGraph();
     }
@@ -100,7 +103,8 @@ public class GraphEnvironment extends MffEnvironment {
             case 2:
                 return this.mGraphs.get(graphId).getSyncRunner(getContext());
             default:
-                throw new RuntimeException("Invalid execution mode " + executionMode + " specified in getRunner()!");
+                throw new RuntimeException(
+                        "Invalid execution mode " + executionMode + " specified in getRunner()!");
         }
     }
 }

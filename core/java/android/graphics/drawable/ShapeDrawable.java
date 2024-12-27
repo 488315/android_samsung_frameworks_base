@@ -12,14 +12,16 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Shader;
 import android.graphics.Xfermode;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.shapes.Shape;
 import android.util.AttributeSet;
 import android.util.Log;
+
 import com.android.internal.R;
-import java.io.IOException;
+
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 
 /* loaded from: classes.dex */
 public class ShapeDrawable extends Drawable {
@@ -27,7 +29,7 @@ public class ShapeDrawable extends Drawable {
     private boolean mMutated;
     private ShapeState mShapeState;
 
-    public static abstract class ShaderFactory {
+    public abstract static class ShaderFactory {
         public abstract Shader resize(int i, int i2);
     }
 
@@ -172,14 +174,18 @@ public class ShapeDrawable extends Drawable {
     @Override // android.graphics.drawable.Drawable
     public void setTintList(ColorStateList tint) {
         this.mShapeState.mTint = tint;
-        this.mBlendModeColorFilter = updateBlendModeFilter(this.mBlendModeColorFilter, tint, this.mShapeState.mBlendMode);
+        this.mBlendModeColorFilter =
+                updateBlendModeFilter(
+                        this.mBlendModeColorFilter, tint, this.mShapeState.mBlendMode);
         invalidateSelf();
     }
 
     @Override // android.graphics.drawable.Drawable
     public void setTintBlendMode(BlendMode blendMode) {
         this.mShapeState.mBlendMode = blendMode;
-        this.mBlendModeColorFilter = updateBlendModeFilter(this.mBlendModeColorFilter, this.mShapeState.mTint, blendMode);
+        this.mBlendModeColorFilter =
+                updateBlendModeFilter(
+                        this.mBlendModeColorFilter, this.mShapeState.mTint, blendMode);
         invalidateSelf();
     }
 
@@ -230,7 +236,9 @@ public class ShapeDrawable extends Drawable {
     protected boolean onStateChange(int[] stateSet) {
         ShapeState state = this.mShapeState;
         if (state.mTint != null && state.mBlendMode != null) {
-            this.mBlendModeColorFilter = updateBlendModeFilter(this.mBlendModeColorFilter, state.mTint, state.mBlendMode);
+            this.mBlendModeColorFilter =
+                    updateBlendModeFilter(
+                            this.mBlendModeColorFilter, state.mTint, state.mBlendMode);
             return true;
         }
         return false;
@@ -247,18 +255,25 @@ public class ShapeDrawable extends Drawable {
         return this.mShapeState.mTint != null && this.mShapeState.mTint.hasFocusStateSpecified();
     }
 
-    protected boolean inflateTag(String name, Resources r, XmlPullParser parser, AttributeSet attrs) {
+    protected boolean inflateTag(
+            String name, Resources r, XmlPullParser parser, AttributeSet attrs) {
         if (!"padding".equals(name)) {
             return false;
         }
         TypedArray a = r.obtainAttributes(attrs, R.styleable.ShapeDrawablePadding);
-        setPadding(a.getDimensionPixelOffset(0, 0), a.getDimensionPixelOffset(1, 0), a.getDimensionPixelOffset(2, 0), a.getDimensionPixelOffset(3, 0));
+        setPadding(
+                a.getDimensionPixelOffset(0, 0),
+                a.getDimensionPixelOffset(1, 0),
+                a.getDimensionPixelOffset(2, 0),
+                a.getDimensionPixelOffset(3, 0));
         a.recycle();
         return true;
     }
 
     @Override // android.graphics.drawable.Drawable
-    public void inflate(Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
+    public void inflate(
+            Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme)
+            throws XmlPullParserException, IOException {
         super.inflate(r, parser, attrs, theme);
         TypedArray a = obtainAttributes(r, theme, attrs, R.styleable.ShapeDrawable);
         updateStateFromTypedArray(a);
@@ -421,7 +436,8 @@ public class ShapeDrawable extends Drawable {
 
         @Override // android.graphics.drawable.Drawable.ConstantState
         public int getChangingConfigurations() {
-            return this.mChangingConfigurations | (this.mTint != null ? this.mTint.getChangingConfigurations() : 0);
+            return this.mChangingConfigurations
+                    | (this.mTint != null ? this.mTint.getChangingConfigurations() : 0);
         }
     }
 
@@ -431,6 +447,10 @@ public class ShapeDrawable extends Drawable {
     }
 
     private void updateLocalState() {
-        this.mBlendModeColorFilter = updateBlendModeFilter(this.mBlendModeColorFilter, this.mShapeState.mTint, this.mShapeState.mBlendMode);
+        this.mBlendModeColorFilter =
+                updateBlendModeFilter(
+                        this.mBlendModeColorFilter,
+                        this.mShapeState.mTint,
+                        this.mShapeState.mBlendMode);
     }
 }

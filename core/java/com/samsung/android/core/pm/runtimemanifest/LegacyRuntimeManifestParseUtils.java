@@ -8,6 +8,7 @@ import android.content.res.XmlResourceParser;
 import android.text.TextUtils;
 import android.util.Slog;
 import android.util.TypedValue;
+
 import com.android.internal.R;
 import com.android.internal.pm.pkg.component.ParsedComponentImpl;
 import com.android.internal.pm.pkg.component.ParsedMainComponent;
@@ -15,11 +16,13 @@ import com.android.internal.pm.pkg.component.ParsedMainComponentImpl;
 import com.android.internal.pm.pkg.parsing.ParsingPackage;
 import com.android.internal.pm.pkg.parsing.ParsingUtils;
 import com.android.internal.util.ArrayUtils;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes6.dex */
 public class LegacyRuntimeManifestParseUtils {
@@ -89,7 +92,9 @@ public class LegacyRuntimeManifestParseUtils {
         }
     }
 
-    public static ApplicationReplacement getReplacementForApplicationSalescode(ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser) throws XmlPullParserException, IOException {
+    public static ApplicationReplacement getReplacementForApplicationSalescode(
+            ParseInput input, ParsingPackage pkg, Resources res, XmlResourceParser parser)
+            throws XmlPullParserException, IOException {
         ApplicationReplacement replacement = new ApplicationReplacement();
         if (TextUtils.isEmpty(RuntimeManifestUtils.getSalesCode())) {
             Slog.d(TAG, "<application-salescode> No sales code, skip it");
@@ -129,7 +134,8 @@ public class LegacyRuntimeManifestParseUtils {
         }
     }
 
-    public static void modifyParsingPackageWithReplacement(ParsingPackage pkg, ApplicationReplacement replacement) {
+    public static void modifyParsingPackageWithReplacement(
+            ParsingPackage pkg, ApplicationReplacement replacement) {
         if (replacement == null || pkg == null) {
             return;
         }
@@ -147,7 +153,13 @@ public class LegacyRuntimeManifestParseUtils {
         }
     }
 
-    public static <Component extends ParsedMainComponent> void parseOverlayComponentAndModify(String packageName, List<Component> components, Resources res, XmlResourceParser parser, ParseInput input, String tag) {
+    public static <Component extends ParsedMainComponent> void parseOverlayComponentAndModify(
+            String packageName,
+            List<Component> components,
+            Resources res,
+            XmlResourceParser parser,
+            ParseInput input,
+            String tag) {
         ParsedMainComponentImpl target;
         if (TextUtils.isEmpty(RuntimeManifestUtils.getSalesCode())) {
             Slog.d(TAG, tag + " No sales code, skip it");
@@ -193,7 +205,8 @@ public class LegacyRuntimeManifestParseUtils {
                 return;
             }
             ParsedMainComponentImpl target2 = target;
-            ParseResult<ParsedMainComponentImpl> result = parseMainOverlayComponentAndModify(target, tag, sa, input, 2, 1, 0);
+            ParseResult<ParsedMainComponentImpl> result =
+                    parseMainOverlayComponentAndModify(target, tag, sa, input, 2, 1, 0);
             if (result.isError()) {
                 Slog.d(TAG, tag + " got error while parsing overlay components");
             } else {
@@ -204,7 +217,15 @@ public class LegacyRuntimeManifestParseUtils {
         }
     }
 
-    static <Component extends ParsedComponentImpl> ParseResult<Component> parseMainOverlayComponentAndModify(Component component, String tag, TypedArray array, ParseInput input, int nameAttr, int iconAttr, int labelAttr) {
+    static <Component extends ParsedComponentImpl>
+            ParseResult<Component> parseMainOverlayComponentAndModify(
+                    Component component,
+                    String tag,
+                    TypedArray array,
+                    ParseInput input,
+                    int nameAttr,
+                    int iconAttr,
+                    int labelAttr) {
         String name = array.getNonConfigurationString(nameAttr, 0);
         if (TextUtils.isEmpty(name)) {
             return input.error(tag + " does not specify android:name");

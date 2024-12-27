@@ -6,8 +6,7 @@ import android.util.ArrayMap;
 public final class LocalServices {
     private static final ArrayMap<Class<?>, Object> sLocalServiceObjects = new ArrayMap<>();
 
-    private LocalServices() {
-    }
+    private LocalServices() {}
 
     public static <T> T getService(Class<T> cls) {
         T t;

@@ -40,10 +40,12 @@ public class SemWallpaperProperties {
 
     public SemWallpaperProperties(Context context, int which, int userId) {
         if (WhichChecker.getMode(which) == 0) {
-            throw new IllegalArgumentException("The 'which' does not have the mode value such as FLAG_DISPLAY_PHONE");
+            throw new IllegalArgumentException(
+                    "The 'which' does not have the mode value such as FLAG_DISPLAY_PHONE");
         }
         if (!WhichChecker.isSingleType(which)) {
-            throw new IllegalArgumentException("The type of 'which' should be one of FLAG_LOCK or FLAG_SYSTEM");
+            throw new IllegalArgumentException(
+                    "The type of 'which' should be one of FLAG_LOCK or FLAG_SYSTEM");
         }
         this.mContext = context.getApplicationContext();
         this.mWallpaperManager = WallpaperManager.getInstance(this.mContext);
@@ -57,12 +59,24 @@ public class SemWallpaperProperties {
         this.mTargetWhich = getPairingConsideredTargetWhich(this.mOriginalWhich);
         boolean isDlsEnabled = isDlsEnabled();
         if (!isDlsEnabled) {
-            this.mExtras = this.mWallpaperManager.getWallpaperExtras(this.mTargetWhich, this.mUserId);
+            this.mExtras =
+                    this.mWallpaperManager.getWallpaperExtras(this.mTargetWhich, this.mUserId);
         }
         if (this.mExtras == null) {
             this.mExtras = new Bundle();
         }
-        Log.d(TAG, "refresh: which=" + this.mOriginalWhich + ", targetWhich=" + this.mTargetWhich + ", dlsEnabled=" + isDlsEnabled + ", dlsState=" + this.mDlsStateShot.getStateCode() + ", userId=" + this.mUserId);
+        Log.d(
+                TAG,
+                "refresh: which="
+                        + this.mOriginalWhich
+                        + ", targetWhich="
+                        + this.mTargetWhich
+                        + ", dlsEnabled="
+                        + isDlsEnabled
+                        + ", dlsState="
+                        + this.mDlsStateShot.getStateCode()
+                        + ", userId="
+                        + this.mUserId);
     }
 
     public boolean isSupportFullAod() {
@@ -179,7 +193,12 @@ public class SemWallpaperProperties {
         }
         String filename = getStringProperty(thumbnailPropertyKey);
         if (TextUtils.isEmpty(filename)) {
-            Log.d(TAG, "getAodThumbnailFile: field not present. which=" + which + ", key=" + thumbnailPropertyKey);
+            Log.d(
+                    TAG,
+                    "getAodThumbnailFile: field not present. which="
+                            + which
+                            + ", key="
+                            + thumbnailPropertyKey);
             return null;
         }
         return this.mWallpaperManager.getWallpaperAssetFile(which, this.mUserId, filename);
@@ -187,7 +206,8 @@ public class SemWallpaperProperties {
 
     public boolean isStaticImageTypeWallpaper() {
         if (!WhichChecker.isSystem(this.mOriginalWhich)) {
-            throw new IllegalArgumentException("Only supports FLAG_SYSTEM. which=" + this.mOriginalWhich);
+            throw new IllegalArgumentException(
+                    "Only supports FLAG_SYSTEM. which=" + this.mOriginalWhich);
         }
         int wpType = this.mWallpaperManager.semGetWallpaperType(this.mTargetWhich);
         switch (wpType) {

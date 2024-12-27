@@ -1,19 +1,27 @@
 package android.sec.enterprise;
 
-import android.sec.enterprise.EnterpriseDeviceManager;
 import android.util.Log;
 
 /* loaded from: classes3.dex */
 public class PhoneRestrictionPolicy {
-    public static final String ACTION_ICCID_AVAILABLE_INTERNAL = "com.samsung.android.knox.intent.action.ICCID_AVAILABLE_INTERNAL";
-    public static final String ACTION_PHONE_READY_INTERNAL = "com.samsung.android.knox.intent.action.PHONE_READY_INTERNAL";
-    public static final String ACTION_SEND_BLOCKED_MMS_INTERNAL = "com.samsung.android.knox.intent.action.SEND_BLOCKED_MMS_INTERNAL";
-    public static final String ACTION_SEND_BLOCKED_SMS_INTERNAL = "com.samsung.android.knox.intent.action.SEND_BLOCKED_SMS_INTERNAL";
-    public static final String EXTRA_ORIG_ADDRESS_INTERNAL = "com.samsung.android.knox.intent.extra.ORIG_ADDRESS_INTERNAL";
-    public static final String EXTRA_PDU_INTERNAL = "com.samsung.android.knox.intent.extra.PDU_INTERNAL";
-    public static final String EXTRA_SEND_TYPE_INTERNAL = "com.samsung.android.knox.intent.extra.SEND_TYPE_INTERNAL";
-    public static final String EXTRA_TIME_STAMP_INTERNAL = "com.samsung.android.knox.intent.extra.TIME_STAMP_INTERNAL";
-    public static final String PERMISSION_RECEIVE_BLOCKED_SMS_MMS_INTERNAL = "com.samsung.android.knox.permission.KNOX_RECEIVE_BLOCKED_SMS_MMS_INTERNAL";
+    public static final String ACTION_ICCID_AVAILABLE_INTERNAL =
+            "com.samsung.android.knox.intent.action.ICCID_AVAILABLE_INTERNAL";
+    public static final String ACTION_PHONE_READY_INTERNAL =
+            "com.samsung.android.knox.intent.action.PHONE_READY_INTERNAL";
+    public static final String ACTION_SEND_BLOCKED_MMS_INTERNAL =
+            "com.samsung.android.knox.intent.action.SEND_BLOCKED_MMS_INTERNAL";
+    public static final String ACTION_SEND_BLOCKED_SMS_INTERNAL =
+            "com.samsung.android.knox.intent.action.SEND_BLOCKED_SMS_INTERNAL";
+    public static final String EXTRA_ORIG_ADDRESS_INTERNAL =
+            "com.samsung.android.knox.intent.extra.ORIG_ADDRESS_INTERNAL";
+    public static final String EXTRA_PDU_INTERNAL =
+            "com.samsung.android.knox.intent.extra.PDU_INTERNAL";
+    public static final String EXTRA_SEND_TYPE_INTERNAL =
+            "com.samsung.android.knox.intent.extra.SEND_TYPE_INTERNAL";
+    public static final String EXTRA_TIME_STAMP_INTERNAL =
+            "com.samsung.android.knox.intent.extra.TIME_STAMP_INTERNAL";
+    public static final String PERMISSION_RECEIVE_BLOCKED_SMS_MMS_INTERNAL =
+            "com.samsung.android.knox.permission.KNOX_RECEIVE_BLOCKED_SMS_MMS_INTERNAL";
     public static final int RCS_FEATURE_ALL = 1;
     public static final int SENDTYPE_GENERIC = -1;
     private static String TAG = "PhoneRestrictionPolicy";
@@ -213,11 +221,19 @@ public class PhoneRestrictionPolicy {
         }
     }
 
-    public void storeBlockedSmsMms(boolean isSms, byte[] pdu, String srcAddress, int sendType, String timeStamp, String messageId, String subId) {
+    public void storeBlockedSmsMms(
+            boolean isSms,
+            byte[] pdu,
+            String srcAddress,
+            int sendType,
+            String timeStamp,
+            String messageId,
+            String subId) {
         try {
             IEDMProxy lService = EnterpriseDeviceManager.EDMProxyServiceHelper.getService();
             if (lService != null) {
-                lService.storeBlockedSmsMms(isSms, pdu, srcAddress, sendType, timeStamp, messageId, subId);
+                lService.storeBlockedSmsMms(
+                        isSms, pdu, srcAddress, sendType, timeStamp, messageId, subId);
             }
         } catch (Exception e) {
             Log.d(TAG, "PXY-storeBlockedSmsMms fail to save sms/mms");

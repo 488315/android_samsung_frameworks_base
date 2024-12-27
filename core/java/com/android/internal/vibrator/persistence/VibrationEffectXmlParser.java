@@ -1,12 +1,15 @@
 package com.android.internal.vibrator.persistence;
 
 import android.os.VibrationEffect;
+
 import com.android.modules.utils.TypedXmlPullParser;
+
 import java.io.IOException;
 
 /* loaded from: classes5.dex */
 public class VibrationEffectXmlParser {
-    public static XmlSerializedVibration<VibrationEffect> parseTag(TypedXmlPullParser parser, int flags) throws XmlParserException, IOException {
+    public static XmlSerializedVibration<VibrationEffect> parseTag(
+            TypedXmlPullParser parser, int flags) throws XmlParserException, IOException {
         XmlValidator.checkStartTag(parser, XmlConstants.TAG_VIBRATION_EFFECT);
         XmlValidator.checkTagHasNoUnexpectedAttributes(parser, new String[0]);
         return parseVibrationContent(parser, flags);
@@ -14,14 +17,17 @@ public class VibrationEffectXmlParser {
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
     /* JADX WARN: Code restructure failed: missing block: B:24:0x003e, code lost:
-    
-        if (r2.equals(com.android.internal.vibrator.persistence.XmlConstants.TAG_PREDEFINED_EFFECT) != false) goto L15;
-     */
+
+       if (r2.equals(com.android.internal.vibrator.persistence.XmlConstants.TAG_PREDEFINED_EFFECT) != false) goto L15;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    static com.android.internal.vibrator.persistence.SerializedVibrationEffect parseVibrationContent(com.android.modules.utils.TypedXmlPullParser r6, int r7) throws com.android.internal.vibrator.persistence.XmlParserException, java.io.IOException {
+    static com.android.internal.vibrator.persistence.SerializedVibrationEffect
+            parseVibrationContent(com.android.modules.utils.TypedXmlPullParser r6, int r7)
+                    throws com.android.internal.vibrator.persistence.XmlParserException,
+                            java.io.IOException {
         /*
             java.lang.String r0 = r6.getName()
             int r1 = r6.getDepth()
@@ -109,6 +115,9 @@ public class VibrationEffectXmlParser {
             com.android.internal.vibrator.persistence.XmlReader.readEndTag(r6, r0, r1)
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.vibrator.persistence.VibrationEffectXmlParser.parseVibrationContent(com.android.modules.utils.TypedXmlPullParser, int):com.android.internal.vibrator.persistence.SerializedVibrationEffect");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.vibrator.persistence.VibrationEffectXmlParser.parseVibrationContent(com.android.modules.utils.TypedXmlPullParser,"
+                    + " int):com.android.internal.vibrator.persistence.SerializedVibrationEffect");
     }
 }

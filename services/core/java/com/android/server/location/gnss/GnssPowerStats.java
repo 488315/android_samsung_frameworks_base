@@ -3,7 +3,9 @@ package com.android.server.location.gnss;
 import android.location.GnssCapabilities;
 import android.util.IndentingPrintWriter;
 import android.util.TimeUtils;
+
 import com.android.internal.util.Preconditions;
+
 import java.io.FileDescriptor;
 import java.util.concurrent.TimeUnit;
 
@@ -20,7 +22,16 @@ public final class GnssPowerStats {
     public final double mSinglebandTrackingModeEnergyMilliJoule;
     public final double mTotalEnergyMilliJoule;
 
-    public GnssPowerStats(int i, long j, double d, double d2, double d3, double d4, double d5, double d6, double[] dArr) {
+    public GnssPowerStats(
+            int i,
+            long j,
+            double d,
+            double d2,
+            double d3,
+            double d4,
+            double d5,
+            double d6,
+            double[] dArr) {
         this.mElapsedRealtimeFlags = i;
         this.mElapsedRealtimeNanos = j;
         this.mElapsedRealtimeUncertaintyNanos = d;
@@ -32,14 +43,21 @@ public final class GnssPowerStats {
         this.mOtherModesEnergyMilliJoule = dArr;
     }
 
-    public final void dump(FileDescriptor fileDescriptor, IndentingPrintWriter indentingPrintWriter, String[] strArr, GnssCapabilities gnssCapabilities) {
+    public final void dump(
+            FileDescriptor fileDescriptor,
+            IndentingPrintWriter indentingPrintWriter,
+            String[] strArr,
+            GnssCapabilities gnssCapabilities) {
         if (hasElapsedRealtimeNanos()) {
             indentingPrintWriter.print("time: ");
             TimeUnit timeUnit = TimeUnit.NANOSECONDS;
-            indentingPrintWriter.print(TimeUtils.formatRealtime(timeUnit.toMillis(this.mElapsedRealtimeNanos)));
-            if (hasElapsedRealtimeUncertaintyNanos() && this.mElapsedRealtimeUncertaintyNanos != 0.0d) {
+            indentingPrintWriter.print(
+                    TimeUtils.formatRealtime(timeUnit.toMillis(this.mElapsedRealtimeNanos)));
+            if (hasElapsedRealtimeUncertaintyNanos()
+                    && this.mElapsedRealtimeUncertaintyNanos != 0.0d) {
                 indentingPrintWriter.print(" +/- ");
-                indentingPrintWriter.print(timeUnit.toMillis((long) this.mElapsedRealtimeUncertaintyNanos));
+                indentingPrintWriter.print(
+                        timeUnit.toMillis((long) this.mElapsedRealtimeUncertaintyNanos));
             }
         }
         if (gnssCapabilities.hasPowerTotal()) {

@@ -11,7 +11,9 @@ import android.content.Context;
 import android.content.pm.UserInfo;
 import android.os.UserManager;
 import android.util.IndentingPrintWriter;
+
 import com.android.server.SystemServerInitThreadPool$$ExternalSyntheticLambda0;
+
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -23,11 +25,26 @@ import java.util.function.Function;
 /* loaded from: classes.dex */
 public abstract class AppFunctionDumpHelper {
     public static SearchSpec buildAppFunctionMetadataSearchSpec() {
-        return new SearchSpec.Builder().addFilterPackageNames("android").addFilterSchemas("AppFunctionStaticMetadata").setJoinSpec(new JoinSpec.Builder("appFunctionStaticMetadataQualifiedId").setNestedSearch("", new SearchSpec.Builder().addFilterPackageNames("android").addFilterSchemas("AppFunctionRuntimeMetadata").build()).build()).build();
+        return new SearchSpec.Builder()
+                .addFilterPackageNames("android")
+                .addFilterSchemas("AppFunctionStaticMetadata")
+                .setJoinSpec(
+                        new JoinSpec.Builder("appFunctionStaticMetadataQualifiedId")
+                                .setNestedSearch(
+                                        "",
+                                        new SearchSpec.Builder()
+                                                .addFilterPackageNames("android")
+                                                .addFilterSchemas("AppFunctionRuntimeMetadata")
+                                                .build())
+                                .build())
+                .build();
     }
 
-    public static void dumpAppFunctionMetadata(IndentingPrintWriter indentingPrintWriter, SearchResult searchResult) {
-        indentingPrintWriter.println("AppFunctionMetadata for: " + searchResult.getGenericDocument().getPropertyString("functionId"));
+    public static void dumpAppFunctionMetadata(
+            IndentingPrintWriter indentingPrintWriter, SearchResult searchResult) {
+        indentingPrintWriter.println(
+                "AppFunctionMetadata for: "
+                        + searchResult.getGenericDocument().getPropertyString("functionId"));
         indentingPrintWriter.increaseIndent();
         indentingPrintWriter.println("Static Metadata:");
         indentingPrintWriter.increaseIndent();
@@ -38,13 +55,17 @@ public abstract class AppFunctionDumpHelper {
         if (searchResult.getJoinedResults().isEmpty()) {
             indentingPrintWriter.println("No runtime metadata found.");
         } else {
-            writeGenericDocumentProperties(indentingPrintWriter, ((SearchResult) searchResult.getJoinedResults().getFirst()).getGenericDocument());
+            writeGenericDocumentProperties(
+                    indentingPrintWriter,
+                    ((SearchResult) searchResult.getJoinedResults().getFirst())
+                            .getGenericDocument());
         }
         indentingPrintWriter.decreaseIndent();
         indentingPrintWriter.decreaseIndent();
     }
 
-    public static void dumpAppFunctionsState(Context context, IndentingPrintWriter indentingPrintWriter) {
+    public static void dumpAppFunctionsState(
+            Context context, IndentingPrintWriter indentingPrintWriter) {
         List list;
         UserManager userManager = (UserManager) context.getSystemService(UserManager.class);
         if (userManager == null) {
@@ -52,38 +73,70 @@ public abstract class AppFunctionDumpHelper {
             return;
         }
         for (UserInfo userInfo : userManager.getAliveUsers()) {
-            indentingPrintWriter.println("AppFunction state for user " + userInfo.getUserHandle().getIdentifier() + ":");
+            indentingPrintWriter.println(
+                    "AppFunction state for user " + userInfo.getUserHandle().getIdentifier() + ":");
             indentingPrintWriter.increaseIndent();
-            AppSearchManager appSearchManager = (AppSearchManager) context.createContextAsUser(userInfo.getUserHandle(), 0).getSystemService(AppSearchManager.class);
+            AppSearchManager appSearchManager =
+                    (AppSearchManager)
+                            context.createContextAsUser(userInfo.getUserHandle(), 0)
+                                    .getSystemService(AppSearchManager.class);
             if (appSearchManager == null) {
                 indentingPrintWriter.println("Couldn't retrieve AppSearchManager.");
             } else {
                 try {
-                    final FutureGlobalSearchSession futureGlobalSearchSession = new FutureGlobalSearchSession(appSearchManager, new SystemServerInitThreadPool$$ExternalSyntheticLambda0());
+                    final FutureGlobalSearchSession futureGlobalSearchSession =
+                            new FutureGlobalSearchSession(
+                                    appSearchManager,
+                                    new SystemServerInitThreadPool$$ExternalSyntheticLambda0());
                     try {
                         indentingPrintWriter.println();
-                        final SearchSpec buildAppFunctionMetadataSearchSpec = buildAppFunctionMetadataSearchSpec();
-                        FutureSearchResultsImpl futureSearchResultsImpl = (FutureSearchResultsImpl) futureGlobalSearchSession.mSettableSessionFuture.thenApply(new FutureGlobalSearchSession$$ExternalSyntheticLambda4()).thenApply(new Function() { // from class: com.android.server.appfunctions.FutureGlobalSearchSession$$ExternalSyntheticLambda2
-                            public final /* synthetic */ String f$0 = "";
+                        final SearchSpec buildAppFunctionMetadataSearchSpec =
+                                buildAppFunctionMetadataSearchSpec();
+                        FutureSearchResultsImpl futureSearchResultsImpl =
+                                (FutureSearchResultsImpl)
+                                        futureGlobalSearchSession
+                                                .mSettableSessionFuture
+                                                .thenApply(
+                                                        new FutureGlobalSearchSession$$ExternalSyntheticLambda4())
+                                                .thenApply(
+                                                        new Function() { // from class:
+                                                                         // com.android.server.appfunctions.FutureGlobalSearchSession$$ExternalSyntheticLambda2
+                                                            public final /* synthetic */ String
+                                                                    f$0 = "";
 
-                            @Override // java.util.function.Function
-                            public final Object apply(Object obj) {
-                                return ((GlobalSearchSession) obj).search(this.f$0, buildAppFunctionMetadataSearchSpec);
-                            }
-                        }).thenApply(new Function() { // from class: com.android.server.appfunctions.FutureGlobalSearchSession$$ExternalSyntheticLambda3
-                            @Override // java.util.function.Function
-                            public final Object apply(Object obj) {
-                                FutureGlobalSearchSession futureGlobalSearchSession2 = FutureGlobalSearchSession.this;
-                                futureGlobalSearchSession2.getClass();
-                                return new FutureSearchResultsImpl((SearchResults) obj, futureGlobalSearchSession2.mExecutor);
-                            }
-                        }).get();
+                                                            @Override // java.util.function.Function
+                                                            public final Object apply(Object obj) {
+                                                                return ((GlobalSearchSession) obj)
+                                                                        .search(
+                                                                                this.f$0,
+                                                                                buildAppFunctionMetadataSearchSpec);
+                                                            }
+                                                        })
+                                                .thenApply(
+                                                        new Function() { // from class:
+                                                                         // com.android.server.appfunctions.FutureGlobalSearchSession$$ExternalSyntheticLambda3
+                                                            @Override // java.util.function.Function
+                                                            public final Object apply(Object obj) {
+                                                                FutureGlobalSearchSession
+                                                                        futureGlobalSearchSession2 =
+                                                                                FutureGlobalSearchSession
+                                                                                        .this;
+                                                                futureGlobalSearchSession2
+                                                                        .getClass();
+                                                                return new FutureSearchResultsImpl(
+                                                                        (SearchResults) obj,
+                                                                        futureGlobalSearchSession2
+                                                                                .mExecutor);
+                                                            }
+                                                        })
+                                                .get();
                         do {
                             try {
                                 list = (List) futureSearchResultsImpl.getNextPage().get();
                                 Iterator it = list.iterator();
                                 while (it.hasNext()) {
-                                    dumpAppFunctionMetadata(indentingPrintWriter, (SearchResult) it.next());
+                                    dumpAppFunctionMetadata(
+                                            indentingPrintWriter, (SearchResult) it.next());
                                 }
                             } catch (Throwable th) {
                                 if (futureSearchResultsImpl != null) {
@@ -108,7 +161,8 @@ public abstract class AppFunctionDumpHelper {
         }
     }
 
-    public static void writeGenericDocumentProperties(IndentingPrintWriter indentingPrintWriter, GenericDocument genericDocument) {
+    public static void writeGenericDocumentProperties(
+            IndentingPrintWriter indentingPrintWriter, GenericDocument genericDocument) {
         Set<String> propertyNames = genericDocument.getPropertyNames();
         indentingPrintWriter.println("{");
         indentingPrintWriter.increaseIndent();

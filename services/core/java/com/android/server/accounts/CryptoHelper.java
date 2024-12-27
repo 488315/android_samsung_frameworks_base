@@ -2,6 +2,7 @@ package com.android.server.accounts;
 
 import android.os.Bundle;
 import android.os.Parcel;
+
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.Mac;
@@ -30,9 +31,9 @@ public final class CryptoHelper {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:10:0x0041, code lost:
-    
-        if (r12 == r5) goto L30;
-     */
+
+       if (r12 == r5) goto L30;
+    */
     /* JADX WARN: Removed duplicated region for block: B:13:0x006b  */
     /* JADX WARN: Removed duplicated region for block: B:16:0x0072  */
     /*
@@ -128,7 +129,9 @@ public final class CryptoHelper {
             r12.recycle()
             return r11
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.accounts.CryptoHelper.decryptBundle(android.os.Bundle):android.os.Bundle");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.accounts.CryptoHelper.decryptBundle(android.os.Bundle):android.os.Bundle");
     }
 
     public final Bundle encryptBundle(Bundle bundle) {

@@ -16,6 +16,7 @@ import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.asn1.DERTaggedObject;
 import com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import com.android.internal.org.bouncycastle.util.BigIntegers;
+
 import java.io.IOException;
 import java.util.Enumeration;
 
@@ -49,15 +50,23 @@ public class PrivateKeyInfo extends ASN1Object {
         return versionValue;
     }
 
-    public PrivateKeyInfo(AlgorithmIdentifier privateKeyAlgorithm, ASN1Encodable privateKey) throws IOException {
+    public PrivateKeyInfo(AlgorithmIdentifier privateKeyAlgorithm, ASN1Encodable privateKey)
+            throws IOException {
         this(privateKeyAlgorithm, privateKey, null, null);
     }
 
-    public PrivateKeyInfo(AlgorithmIdentifier privateKeyAlgorithm, ASN1Encodable privateKey, ASN1Set attributes) throws IOException {
+    public PrivateKeyInfo(
+            AlgorithmIdentifier privateKeyAlgorithm, ASN1Encodable privateKey, ASN1Set attributes)
+            throws IOException {
         this(privateKeyAlgorithm, privateKey, attributes, null);
     }
 
-    public PrivateKeyInfo(AlgorithmIdentifier privateKeyAlgorithm, ASN1Encodable privateKey, ASN1Set attributes, byte[] publicKey) throws IOException {
+    public PrivateKeyInfo(
+            AlgorithmIdentifier privateKeyAlgorithm,
+            ASN1Encodable privateKey,
+            ASN1Set attributes,
+            byte[] publicKey)
+            throws IOException {
         this.version = new ASN1Integer(publicKey != null ? BigIntegers.ONE : BigIntegers.ZERO);
         this.privateKeyAlgorithm = privateKeyAlgorithm;
         this.privateKey = new DEROctetString(privateKey);
@@ -85,12 +94,14 @@ public class PrivateKeyInfo extends ASN1Object {
                     break;
                 case 1:
                     if (versionValue < 1) {
-                        throw new IllegalArgumentException("'publicKey' requires version v2(1) or later");
+                        throw new IllegalArgumentException(
+                                "'publicKey' requires version v2(1) or later");
                     }
                     this.publicKey = DERBitString.getInstance(tagged, false);
                     break;
                 default:
-                    throw new IllegalArgumentException("unknown optional field in private key info");
+                    throw new IllegalArgumentException(
+                            "unknown optional field in private key info");
             }
         }
     }
@@ -130,7 +141,8 @@ public class PrivateKeyInfo extends ASN1Object {
         return this.publicKey;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(5);
         v.add(this.version);

@@ -3,6 +3,7 @@ package android.app.wallpapereffectsgeneration;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -23,19 +24,21 @@ public final class CinematicEffectResponse implements Parcelable {
     public static final int CINEMATIC_EFFECT_STATUS_OK = 1;
     public static final int CINEMATIC_EFFECT_STATUS_PENDING = 3;
     public static final int CINEMATIC_EFFECT_STATUS_TOO_MANY_REQUESTS = 4;
-    public static final Parcelable.Creator<CinematicEffectResponse> CREATOR = new Parcelable.Creator<CinematicEffectResponse>() { // from class: android.app.wallpapereffectsgeneration.CinematicEffectResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CinematicEffectResponse createFromParcel(Parcel in) {
-            return new CinematicEffectResponse(in);
-        }
+    public static final Parcelable.Creator<CinematicEffectResponse> CREATOR =
+            new Parcelable.Creator<CinematicEffectResponse>() { // from class:
+                // android.app.wallpapereffectsgeneration.CinematicEffectResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CinematicEffectResponse createFromParcel(Parcel in) {
+                    return new CinematicEffectResponse(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public CinematicEffectResponse[] newArray(int size) {
-            return new CinematicEffectResponse[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public CinematicEffectResponse[] newArray(int size) {
+                    return new CinematicEffectResponse[size];
+                }
+            };
     public static final int IMAGE_CONTENT_TYPE_LANDSCAPE = 2;
     public static final int IMAGE_CONTENT_TYPE_OTHER = 3;
     public static final int IMAGE_CONTENT_TYPE_PEOPLE_PORTRAIT = 1;
@@ -48,12 +51,10 @@ public final class CinematicEffectResponse implements Parcelable {
     private List<TexturedMesh> mTexturedMeshes;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface CinematicEffectStatusCode {
-    }
+    public @interface CinematicEffectStatusCode {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ImageContentType {
-    }
+    public @interface ImageContentType {}
 
     private CinematicEffectResponse(Parcel in) {
         this.mStatusCode = in.readInt();
@@ -65,7 +66,13 @@ public final class CinematicEffectResponse implements Parcelable {
         this.mEndKeyFrame = (CameraAttributes) in.readTypedObject(CameraAttributes.CREATOR);
     }
 
-    private CinematicEffectResponse(int statusCode, String taskId, int imageContentType, List<TexturedMesh> texturedMeshes, CameraAttributes startKeyFrame, CameraAttributes endKeyFrame) {
+    private CinematicEffectResponse(
+            int statusCode,
+            String taskId,
+            int imageContentType,
+            List<TexturedMesh> texturedMeshes,
+            CameraAttributes startKeyFrame,
+            CameraAttributes endKeyFrame) {
         this.mStatusCode = statusCode;
         this.mTaskId = taskId;
         this.mImageContentType = imageContentType;
@@ -167,7 +174,13 @@ public final class CinematicEffectResponse implements Parcelable {
             if (this.mTexturedMeshes == null) {
                 this.mTexturedMeshes = new ArrayList(0);
             }
-            return new CinematicEffectResponse(this.mStatusCode, this.mTaskId, this.mImageContentType, this.mTexturedMeshes, this.mStartKeyFrame, this.mEndKeyFrame);
+            return new CinematicEffectResponse(
+                    this.mStatusCode,
+                    this.mTaskId,
+                    this.mImageContentType,
+                    this.mTexturedMeshes,
+                    this.mStartKeyFrame,
+                    this.mEndKeyFrame);
         }
     }
 }

@@ -2,7 +2,9 @@ package com.samsung.android.server.pm.install;
 
 import android.util.ArrayMap;
 import android.util.Log;
+
 import com.android.server.pm.pkg.AndroidPackage;
+
 import java.io.File;
 import java.util.Map;
 
@@ -17,9 +19,16 @@ public final class PreloadDuplicateApps {
         if (androidPackage == null) {
             return;
         }
-        Log.d("PreloadDuplicateApps", "Add duplicate package " + androidPackage.getPackageName() + " (" + androidPackage.getLongVersionCode() + ")");
+        Log.d(
+                "PreloadDuplicateApps",
+                "Add duplicate package "
+                        + androidPackage.getPackageName()
+                        + " ("
+                        + androidPackage.getLongVersionCode()
+                        + ")");
         synchronized (this.mLock) {
-            ((ArrayMap) this.mDuplicateDataPackages).put(androidPackage.getPackageName(), new File(androidPackage.getPath()));
+            ((ArrayMap) this.mDuplicateDataPackages)
+                    .put(androidPackage.getPackageName(), new File(androidPackage.getPath()));
         }
     }
 
@@ -27,9 +36,16 @@ public final class PreloadDuplicateApps {
         if (androidPackage == null) {
             return;
         }
-        Log.d("PreloadDuplicateApps", "Add system package " + androidPackage.getPackageName() + " (" + androidPackage.getLongVersionCode() + ")");
+        Log.d(
+                "PreloadDuplicateApps",
+                "Add system package "
+                        + androidPackage.getPackageName()
+                        + " ("
+                        + androidPackage.getLongVersionCode()
+                        + ")");
         synchronized (this.mLock) {
-            ((ArrayMap) this.mSystemPackages).put(androidPackage.getPackageName(), new File(androidPackage.getPath()));
+            ((ArrayMap) this.mSystemPackages)
+                    .put(androidPackage.getPackageName(), new File(androidPackage.getPath()));
         }
     }
 }

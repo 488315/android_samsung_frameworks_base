@@ -6,6 +6,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.util.Log;
+
 import com.samsung.android.media.fmradio.internal.IFMPlayer;
 
 /* loaded from: classes6.dex */
@@ -24,7 +25,8 @@ public class SemFmPlayer {
     public static final int OFF_STOP_COMMAND = 4;
     private AudioManager mAudioManager;
     private Context mContext;
-    private IFMPlayer mPlayer = IFMPlayer.Stub.asInterface(ServiceManager.getService(Context.SEM_FM_RADIO_SERVICE));
+    private IFMPlayer mPlayer =
+            IFMPlayer.Stub.asInterface(ServiceManager.getService(Context.SEM_FM_RADIO_SERVICE));
 
     public void log(String str) {
         Log.i(LOG_TAG, str);
@@ -38,9 +40,13 @@ public class SemFmPlayer {
 
     public boolean enableRadio() throws SemFmPlayerException {
         boolean val = false;
-        boolean isFactoryBinary = "factory".equalsIgnoreCase(SystemProperties.get("ro.factory.factory_binary", "Unknown"));
+        boolean isFactoryBinary =
+                "factory"
+                        .equalsIgnoreCase(
+                                SystemProperties.get("ro.factory.factory_binary", "Unknown"));
         if (isAirPlaneMode() && !isFactoryBinary) {
-            throw new SemAirPlaneModeEnabledException("AirPlane mode is on.", new Throwable("AirPlane mode is on."));
+            throw new SemAirPlaneModeEnabledException(
+                    "AirPlane mode is on.", new Throwable("AirPlane mode is on."));
         }
         if (isFactoryBinary) {
             try {
@@ -55,7 +61,8 @@ public class SemFmPlayer {
             throw new SemTvOutConnectedException("TV out is on", new Throwable("TV out is on."));
         }
         if (!isHeadsetPlugged()) {
-            throw new SemHeadsetNotConnectedException("Headset is not presents.", new Throwable("Headset is not presents."));
+            throw new SemHeadsetNotConnectedException(
+                    "Headset is not presents.", new Throwable("Headset is not presents."));
         }
         try {
             val = this.mPlayer.on();
@@ -282,7 +289,8 @@ public class SemFmPlayer {
 
     private void remoteError(RemoteException e) throws SemFmPlayerException {
         Log.e(LOG_TAG, "RemoteException in remoteError() : " + e);
-        throw new SemFmPlayerNotEnabledException("Radio service is not running restart the phone.", e.fillInStackTrace());
+        throw new SemFmPlayerNotEnabledException(
+                "Radio service is not running restart the phone.", e.fillInStackTrace());
     }
 
     public boolean tune(long frequency) throws SemFmPlayerException {
@@ -397,7 +405,9 @@ public class SemFmPlayer {
     private void checkOnStatus() throws SemFmPlayerException {
         boolean val = isRadioEnabled();
         if (!val) {
-            throw new SemFmPlayerNotEnabledException("Player is not ON.Call on() method to start player", new Throwable("Player is not ON. use method on() to switch on FM player"));
+            throw new SemFmPlayerNotEnabledException(
+                    "Player is not ON.Call on() method to start player",
+                    new Throwable("Player is not ON. use method on() to switch on FM player"));
         }
     }
 
@@ -409,7 +419,9 @@ public class SemFmPlayer {
             remoteError(e);
         }
         if (code == 1) {
-            throw new SemFmPlayerScanningException("Player is scanning channel", new Throwable("Player is busy in scanning. Use cancelScan to stop scanning"));
+            throw new SemFmPlayerScanningException(
+                    "Player is scanning channel",
+                    new Throwable("Player is busy in scanning. Use cancelScan to stop scanning"));
         }
     }
 
@@ -493,7 +505,8 @@ public class SemFmPlayer {
         }
     }
 
-    public int getTunningParameter(String parameterName, int defaultValue) throws SemFmPlayerException {
+    public int getTunningParameter(String parameterName, int defaultValue)
+            throws SemFmPlayerException {
         if (!isRadioEnabled()) {
             return defaultValue;
         }
@@ -515,7 +528,8 @@ public class SemFmPlayer {
         }
     }
 
-    public long getTunningParameter(String parameterName, long defaultValue) throws SemFmPlayerException {
+    public long getTunningParameter(String parameterName, long defaultValue)
+            throws SemFmPlayerException {
         if (!isRadioEnabled()) {
             return defaultValue;
         }
@@ -528,7 +542,8 @@ public class SemFmPlayer {
         }
     }
 
-    public void setTunningParameter(String parameterName, String value) throws SemFmPlayerException {
+    public void setTunningParameter(String parameterName, String value)
+            throws SemFmPlayerException {
         checkOnStatus();
         try {
             this.mPlayer.setStringTunningParameter(parameterName, value);
@@ -537,7 +552,8 @@ public class SemFmPlayer {
         }
     }
 
-    public String getTunningParameter(String parameterName, String defaultValue) throws SemFmPlayerException {
+    public String getTunningParameter(String parameterName, String defaultValue)
+            throws SemFmPlayerException {
         if (!isRadioEnabled()) {
             return defaultValue;
         }

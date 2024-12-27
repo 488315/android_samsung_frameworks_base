@@ -7,7 +7,9 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.util.Slog;
+
 import com.android.server.backup.BackupManagerConstants;
+
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
@@ -27,7 +29,8 @@ public final class HeimdAllFsService {
     public List mPackagesInfo = null;
     public AnonymousClass1 mHeimdallFsThread = null;
     public CountDownLatch mHeimdallFsLatch = null;
-    public volatile IInstalld mInstalld = IInstalld.Stub.asInterface(ServiceManager.getService("installd"));
+    public volatile IInstalld mInstalld =
+            IInstalld.Stub.asInterface(ServiceManager.getService("installd"));
 
     /* JADX INFO: Access modifiers changed from: package-private */
     /* JADX WARN: Failed to restore enum class, 'enum' modifier and super class removed */
@@ -43,7 +46,7 @@ public final class HeimdAllFsService {
             DEFRAG = functionOrder;
             FunctionOrder functionOrder2 = new FunctionOrder("COMPRESS", 1);
             COMPRESS = functionOrder2;
-            $VALUES = new FunctionOrder[]{functionOrder, functionOrder2};
+            $VALUES = new FunctionOrder[] {functionOrder, functionOrder2};
         }
 
         public static FunctionOrder valueOf(String str) {
@@ -60,7 +63,8 @@ public final class HeimdAllFsService {
         mDryrun = SystemProperties.get("persist.sys.heimdallfs.dryrun").equals("true");
         mForceService = SystemProperties.get("persist.sys.heimdallfs.force").equals("true");
         mForceCompressService = SystemProperties.get("persist.sys.heimdallfs.force.compress.mode");
-        mForceDefragService = SystemProperties.get("persist.sys.heimdallfs.force.defrag.mode").equals("true");
+        mForceDefragService =
+                SystemProperties.get("persist.sys.heimdallfs.force.defrag.mode").equals("true");
         boolean z = false;
         try {
             if (context.getPackageManager().getPackageInfo("com.salab.issuetracker", 0) != null) {
@@ -88,9 +92,9 @@ public final class HeimdAllFsService {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:59:0x008e, code lost:
-    
-        if (r6.contains("supported") == false) goto L105;
-     */
+
+       if (r6.contains("supported") == false) goto L105;
+    */
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r6v0 */
     /* JADX WARN: Type inference failed for: r6v1 */
@@ -110,13 +114,18 @@ public final class HeimdAllFsService {
             Method dump skipped, instructions count: 290
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.HeimdAllFsService.isServiceActivate(com.android.server.HeimdAllFsService$FunctionOrder):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.HeimdAllFsService.isServiceActivate(com.android.server.HeimdAllFsService$FunctionOrder):boolean");
     }
 
     public static void setTriggerThreshold() {
         double d = THRESHOLD_COMPRESS_TRIGGER;
         try {
-            int parseInt = Integer.parseInt(SystemProperties.get("debug.sys.heimdallfs.ut.compress.trigger.percentile"));
+            int parseInt =
+                    Integer.parseInt(
+                            SystemProperties.get(
+                                    "debug.sys.heimdallfs.ut.compress.trigger.percentile"));
             if (parseInt >= 1 && parseInt <= 100) {
                 d = parseInt / 100.0d;
             }
@@ -125,7 +134,10 @@ public final class HeimdAllFsService {
         THRESHOLD_COMPRESS_TRIGGER = d;
         double d2 = THRESHOLD_DECOMPRESS_TRIGGER;
         try {
-            int parseInt2 = Integer.parseInt(SystemProperties.get("debug.sys.heimdallfs.ut.decompress.trigger.percentile"));
+            int parseInt2 =
+                    Integer.parseInt(
+                            SystemProperties.get(
+                                    "debug.sys.heimdallfs.ut.decompress.trigger.percentile"));
             if (parseInt2 >= 1 && parseInt2 <= 100) {
                 d2 = parseInt2 / 100.0d;
             }
@@ -134,7 +146,11 @@ public final class HeimdAllFsService {
         THRESHOLD_DECOMPRESS_TRIGGER = d2;
         long j = THRESHOLD_COMPRESS_UNUSED_MS;
         try {
-            long parseLong = Long.parseLong(SystemProperties.get("debug.sys.heimdallfs.ut.compress.trigger.time")) * BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS;
+            long parseLong =
+                    Long.parseLong(
+                                    SystemProperties.get(
+                                            "debug.sys.heimdallfs.ut.compress.trigger.time"))
+                            * BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS;
             if (parseLong >= 0 && parseLong <= 8640000000L) {
                 j = parseLong;
             }
@@ -168,7 +184,8 @@ public final class HeimdAllFsService {
             }
             this.mInstalld.compressFile(str, z);
         } catch (RemoteException unused) {
-            HeimdAllFsService$$ExternalSyntheticOutline0.m("Error: Compress/Decompress RemoteException, ", str, "HeimdAllFS");
+            HeimdAllFsService$$ExternalSyntheticOutline0.m(
+                    "Error: Compress/Decompress RemoteException, ", str, "HeimdAllFS");
         } catch (Exception unused2) {
             BootReceiver$$ExternalSyntheticOutline0.m("Error: Exception!! ", str, "HeimdAllFS");
         }
@@ -185,7 +202,10 @@ public final class HeimdAllFsService {
             Method dump skipped, instructions count: 663
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.HeimdAllFsService.doCompressPackages(java.util.List, boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.HeimdAllFsService.doCompressPackages(java.util.List,"
+                    + " boolean):void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:11:0x0115  */
@@ -200,7 +220,9 @@ public final class HeimdAllFsService {
             Method dump skipped, instructions count: 411
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.HeimdAllFsService.getPackagesOnUserdata():java.util.List");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.HeimdAllFsService.getPackagesOnUserdata():java.util.List");
     }
 
     public final void scanCompressedFileAction(int i, String str) {
@@ -208,7 +230,8 @@ public final class HeimdAllFsService {
         try {
             this.mInstalld.scanApkStats(str, i);
         } catch (RemoteException unused) {
-            HeimdAllFsService$$ExternalSyntheticOutline0.m("Error: scanApkStats RemoteException, ", str, "HeimdAllFS");
+            HeimdAllFsService$$ExternalSyntheticOutline0.m(
+                    "Error: scanApkStats RemoteException, ", str, "HeimdAllFS");
         }
     }
 
@@ -225,7 +248,9 @@ public final class HeimdAllFsService {
             Method dump skipped, instructions count: 570
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.HeimdAllFsService.startCompress(java.util.List):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.HeimdAllFsService.startCompress(java.util.List):void");
     }
 
     public final void waitForFinished() {

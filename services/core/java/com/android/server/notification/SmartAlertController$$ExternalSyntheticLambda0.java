@@ -3,12 +3,13 @@ package com.android.server.notification;
 import android.os.VibrationAttributes;
 import android.os.VibrationEffect;
 import android.util.Slog;
-import com.android.server.notification.SmartAlertController;
+
 import com.samsung.android.gesture.SemMotionRecognitionManager;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class SmartAlertController$$ExternalSyntheticLambda0 implements Runnable {
+public final /* synthetic */ class SmartAlertController$$ExternalSyntheticLambda0
+        implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
 
@@ -25,22 +26,35 @@ public final /* synthetic */ class SmartAlertController$$ExternalSyntheticLambda
         switch (i) {
             case 0:
                 SmartAlertController smartAlertController = (SmartAlertController) obj;
-                if (smartAlertController.mMotionRegistered && (semMotionRecognitionManager = smartAlertController.mSmartAlertMotionManager) != null) {
-                    semMotionRecognitionManager.unregisterListener(smartAlertController.mSmartAlertMotionListener);
+                if (smartAlertController.mMotionRegistered
+                        && (semMotionRecognitionManager =
+                                        smartAlertController.mSmartAlertMotionManager)
+                                != null) {
+                    semMotionRecognitionManager.unregisterListener(
+                            smartAlertController.mSmartAlertMotionListener);
                     smartAlertController.mMotionRegistered = false;
                     Slog.d("SmartAlertController", "SmartAlert - unregisterListener");
                     break;
                 }
                 break;
             default:
-                SmartAlertController.AnonymousClass1 anonymousClass1 = (SmartAlertController.AnonymousClass1) obj;
+                SmartAlertController.AnonymousClass1 anonymousClass1 =
+                        (SmartAlertController.AnonymousClass1) obj;
                 if (!anonymousClass1.this$0.mInCall) {
                     Slog.d("SmartAlertController", "SmartAlert - vibrate");
                     SmartAlertController smartAlertController2 = anonymousClass1.this$0;
-                    smartAlertController2.mVibrator.vibrate(1000, "android", VibrationEffect.createWaveform(smartAlertController2.mPickUpVibratePattern, -1), "SmartAlertController", new VibrationAttributes.Builder().setUsage(49).setFlags(1).build());
+                    smartAlertController2.mVibrator.vibrate(
+                            1000,
+                            "android",
+                            VibrationEffect.createWaveform(
+                                    smartAlertController2.mPickUpVibratePattern, -1),
+                            "SmartAlertController",
+                            new VibrationAttributes.Builder().setUsage(49).setFlags(1).build());
                     break;
                 } else {
-                    Slog.d("SmartAlertController", "SmartAlert - inCall, vibration will be returned");
+                    Slog.d(
+                            "SmartAlertController",
+                            "SmartAlert - inCall, vibration will be returned");
                     break;
                 }
         }

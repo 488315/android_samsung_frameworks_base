@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,18 +17,26 @@ public final class GnssSatelliteBlocklistHelper {
     public final Context mContext;
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface GnssSatelliteBlocklistCallback {
-    }
+    public interface GnssSatelliteBlocklistCallback {}
 
-    public GnssSatelliteBlocklistHelper(Context context, Looper looper, GnssLocationProviderSec gnssLocationProviderSec) {
+    public GnssSatelliteBlocklistHelper(
+            Context context, Looper looper, GnssLocationProviderSec gnssLocationProviderSec) {
         this.mContext = context;
         this.mCallback = gnssLocationProviderSec;
-        context.getContentResolver().registerContentObserver(Settings.Global.getUriFor("gnss_satellite_blocklist"), true, new ContentObserver(new Handler(looper)) { // from class: com.android.server.location.gnss.GnssSatelliteBlocklistHelper.1
-            @Override // android.database.ContentObserver
-            public final void onChange(boolean z) {
-                GnssSatelliteBlocklistHelper.this.updateSatelliteBlocklist();
-            }
-        }, -1);
+        context.getContentResolver()
+                .registerContentObserver(
+                        Settings.Global.getUriFor("gnss_satellite_blocklist"),
+                        true,
+                        new ContentObserver(
+                                new Handler(
+                                        looper)) { // from class:
+                                                   // com.android.server.location.gnss.GnssSatelliteBlocklistHelper.1
+                            @Override // android.database.ContentObserver
+                            public final void onChange(boolean z) {
+                                GnssSatelliteBlocklistHelper.this.updateSatelliteBlocklist();
+                            }
+                        },
+                        -1);
     }
 
     public static List parseSatelliteBlocklist(String str) throws NumberFormatException {
@@ -47,7 +56,9 @@ public final class GnssSatelliteBlocklistHelper {
     }
 
     public final void updateSatelliteBlocklist() {
-        String string = Settings.Global.getString(this.mContext.getContentResolver(), "gnss_satellite_blocklist");
+        String string =
+                Settings.Global.getString(
+                        this.mContext.getContentResolver(), "gnss_satellite_blocklist");
         if (string == null) {
             string = "";
         }
@@ -55,7 +66,10 @@ public final class GnssSatelliteBlocklistHelper {
         try {
             List parseSatelliteBlocklist = parseSatelliteBlocklist(string);
             if (parseSatelliteBlocklist.size() % 2 != 0) {
-                Log.e("GnssBlocklistHelper", "blocklist string has odd number of values.Aborting updateSatelliteBlocklist");
+                Log.e(
+                        "GnssBlocklistHelper",
+                        "blocklist string has odd number of values.Aborting"
+                            + " updateSatelliteBlocklist");
                 return;
             }
             int size = parseSatelliteBlocklist.size() / 2;
@@ -68,16 +82,18 @@ public final class GnssSatelliteBlocklistHelper {
             }
             final GnssLocationProvider gnssLocationProvider = (GnssLocationProvider) this.mCallback;
             gnssLocationProvider.getClass();
-            gnssLocationProvider.mHandler.post(new Runnable() { // from class: com.android.server.location.gnss.GnssLocationProvider$$ExternalSyntheticLambda21
-                @Override // java.lang.Runnable
-                public final void run() {
-                    GnssLocationProvider gnssLocationProvider2 = GnssLocationProvider.this;
-                    int[] iArr3 = iArr;
-                    int[] iArr4 = iArr2;
-                    gnssLocationProvider2.mGnssConfiguration.getClass();
-                    GnssConfiguration.setSatelliteBlocklist(iArr3, iArr4);
-                }
-            });
+            gnssLocationProvider.mHandler.post(
+                    new Runnable() { // from class:
+                                     // com.android.server.location.gnss.GnssLocationProvider$$ExternalSyntheticLambda21
+                        @Override // java.lang.Runnable
+                        public final void run() {
+                            GnssLocationProvider gnssLocationProvider2 = GnssLocationProvider.this;
+                            int[] iArr3 = iArr;
+                            int[] iArr4 = iArr2;
+                            gnssLocationProvider2.mGnssConfiguration.getClass();
+                            GnssConfiguration.setSatelliteBlocklist(iArr3, iArr4);
+                        }
+                    });
             gnssLocationProvider.mGnssMetrics.mConstellationTypes = new boolean[8];
         } catch (NumberFormatException e) {
             Log.e("GnssBlocklistHelper", "Exception thrown when parsing blocklist string.", e);

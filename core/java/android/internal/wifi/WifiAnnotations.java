@@ -7,49 +7,37 @@ import java.lang.annotation.RetentionPolicy;
 public final class WifiAnnotations {
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Bandwidth {
-    }
+    public @interface Bandwidth {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ChannelWidth {
-    }
+    public @interface ChannelWidth {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Cipher {
-    }
+    public @interface Cipher {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface KeyMgmt {
-    }
+    public @interface KeyMgmt {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface PreambleType {
-    }
+    public @interface PreambleType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Protocol {
-    }
+    public @interface Protocol {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ScanType {
-    }
+    public @interface ScanType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface SecurityType {
-    }
+    public @interface SecurityType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface UriScheme {
-    }
+    public @interface UriScheme {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WifiBandBasic {
-    }
+    public @interface WifiBandBasic {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface WifiStandard {
-    }
+    public @interface WifiStandard {}
 
-    private WifiAnnotations() {
-    }
+    private WifiAnnotations() {}
 }

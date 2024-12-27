@@ -10,23 +10,28 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.util.TypedValue;
+
 import com.android.internal.R;
 import com.android.internal.hidden_from_bootclasspath.android.content.pm.Flags;
 import com.android.internal.pm.pkg.parsing.ParsingPackage;
 import com.android.internal.pm.pkg.parsing.ParsingPackageUtils;
 import com.android.internal.pm.pkg.parsing.ParsingUtils;
+
 import com.samsung.android.core.pm.allowlist.BroadcastReceiverListParser;
 import com.samsung.android.core.pm.allowlist.RestrictedReceiverFilter;
+
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes5.dex */
 public class ParsedIntentInfoUtils {
     public static final boolean DEBUG = false;
     private static final String TAG = "PackageParsing";
-    private static final RestrictedReceiverFilter sRRFilter = RestrictedReceiverFilter.getInstance();
+    private static final RestrictedReceiverFilter sRRFilter =
+            RestrictedReceiverFilter.getInstance();
 
     /* JADX WARN: Failed to restore switch over string. Please report as a decompilation issue
     java.lang.NullPointerException: Cannot invoke "java.util.List.iterator()" because the return value of "jadx.core.dex.visitors.regions.SwitchOverStringVisitor$SwitchData.getNewCases()" is null
@@ -35,7 +40,15 @@ public class ParsedIntentInfoUtils {
     	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:77)
     	at jadx.core.dex.visitors.regions.DepthRegionTraversal.traverseIterativeStepInternal(DepthRegionTraversal.java:82)
      */
-    public static ParseResult<ParsedIntentInfoImpl> parseIntentInfo(String className, ParsingPackage pkg, Resources res, XmlResourceParser parser, boolean allowGlobs, boolean allowAutoVerify, ParseInput input) throws XmlPullParserException, IOException {
+    public static ParseResult<ParsedIntentInfoImpl> parseIntentInfo(
+            String className,
+            ParsingPackage pkg,
+            Resources res,
+            XmlResourceParser parser,
+            boolean allowGlobs,
+            boolean allowAutoVerify,
+            ParseInput input)
+            throws XmlPullParserException, IOException {
         List<RestrictedReceiverFilter.RestrictedAction> restrictedActions;
         int i;
         int depth;
@@ -76,7 +89,8 @@ public class ParsedIntentInfoUtils {
                     restrictedActions = restrictedActions3;
                 } else if (type == i4 && parser.getDepth() <= depth2) {
                     restrictedActions = restrictedActions3;
-                } else if (type == i2 && !ParsingPackageUtils.getAconfigFlags().skipCurrentElement(parser)) {
+                } else if (type == i2
+                        && !ParsingPackageUtils.getAconfigFlags().skipCurrentElement(parser)) {
                     String nodeName = parser.getName();
                     switch (nodeName.hashCode()) {
                         case -1422950858:
@@ -109,20 +123,28 @@ public class ParsedIntentInfoUtils {
                         case 0:
                             depth = depth2;
                             restrictedActions2 = restrictedActions3;
-                            String value = parser.getAttributeValue("http://schemas.android.com/apk/res/android", "name");
+                            String value =
+                                    parser.getAttributeValue(
+                                            "http://schemas.android.com/apk/res/android", "name");
                             if (value == null) {
                                 result = input.error("No value supplied for <android:name>");
                                 break;
                             } else if (value.isEmpty()) {
                                 intentFilter.addAction(value);
-                                result = input.deferError("No value supplied for <android:name>", ParseInput.DeferredError.EMPTY_INTENT_ACTION_CATEGORY);
+                                result =
+                                        input.deferError(
+                                                "No value supplied for <android:name>",
+                                                ParseInput.DeferredError
+                                                        .EMPTY_INTENT_ACTION_CATEGORY);
                                 break;
                             } else {
                                 if (sRRFilter != null) {
                                     String packageName = pkg.getPackageName();
                                     String codePath = pkg.getBaseApkPath();
                                     if (sRRFilter.filterReceiver(packageName, value)) {
-                                        restrictedActions2.add(new RestrictedReceiverFilter.RestrictedAction(value, packageName, codePath));
+                                        restrictedActions2.add(
+                                                new RestrictedReceiverFilter.RestrictedAction(
+                                                        value, packageName, codePath));
                                     }
                                 }
                                 intentFilter.addAction(value);
@@ -133,13 +155,19 @@ public class ParsedIntentInfoUtils {
                         case 1:
                             depth = depth2;
                             restrictedActions2 = restrictedActions3;
-                            String value2 = parser.getAttributeValue("http://schemas.android.com/apk/res/android", "name");
+                            String value2 =
+                                    parser.getAttributeValue(
+                                            "http://schemas.android.com/apk/res/android", "name");
                             if (value2 == null) {
                                 result = input.error("No value supplied for <android:name>");
                                 break;
                             } else if (value2.isEmpty()) {
                                 intentFilter.addCategory(value2);
-                                result = input.deferError("No value supplied for <android:name>", ParseInput.DeferredError.EMPTY_INTENT_ACTION_CATEGORY);
+                                result =
+                                        input.deferError(
+                                                "No value supplied for <android:name>",
+                                                ParseInput.DeferredError
+                                                        .EMPTY_INTENT_ACTION_CATEGORY);
                                 break;
                             } else {
                                 intentFilter.addCategory(value2);
@@ -149,21 +177,26 @@ public class ParsedIntentInfoUtils {
                             }
                         case 2:
                             depth = depth2;
-                            ParseResult result4 = parseData(intentInfo, res, parser, allowGlobs, input);
+                            ParseResult result4 =
+                                    parseData(intentInfo, res, parser, allowGlobs, input);
                             restrictedActions2 = restrictedActions3;
                             result = result4;
                             break;
                         case 3:
                             if (Flags.relativeReferenceIntentFilters()) {
                                 depth = depth2;
-                                ParseResult result5 = parseRelRefGroup(intentInfo, pkg, res, parser, allowGlobs, input);
+                                ParseResult result5 =
+                                        parseRelRefGroup(
+                                                intentInfo, pkg, res, parser, allowGlobs, input);
                                 restrictedActions2 = restrictedActions3;
                                 result = result5;
                                 break;
                             } else {
                                 depth = depth2;
                                 restrictedActions2 = restrictedActions3;
-                                result = ParsingUtils.unknownTag("<intent-filter>", pkg, parser, input);
+                                result =
+                                        ParsingUtils.unknownTag(
+                                                "<intent-filter>", pkg, parser, input);
                                 break;
                             }
                         default:
@@ -186,7 +219,8 @@ public class ParsedIntentInfoUtils {
             intentInfo.setHasDefault(intentFilter.hasCategory(Intent.CATEGORY_DEFAULT));
             for (RestrictedReceiverFilter.RestrictedAction ra : restrictedActions) {
                 boolean removeAction = true;
-                if (BroadcastReceiverListParser.isPackageXXXIntent(ra.mAction) && BroadcastReceiverListParser.hasPackageSSP(intentFilter)) {
+                if (BroadcastReceiverListParser.isPackageXXXIntent(ra.mAction)
+                        && BroadcastReceiverListParser.hasPackageSSP(intentFilter)) {
                     removeAction = false;
                 }
                 if (removeAction) {
@@ -209,7 +243,16 @@ public class ParsedIntentInfoUtils {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    private static android.content.pm.parsing.result.ParseResult<com.android.internal.pm.pkg.component.ParsedIntentInfo> parseRelRefGroup(com.android.internal.pm.pkg.component.ParsedIntentInfo r10, com.android.internal.pm.pkg.parsing.ParsingPackage r11, android.content.res.Resources r12, android.content.res.XmlResourceParser r13, boolean r14, android.content.pm.parsing.result.ParseInput r15) throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
+    private static android.content.pm.parsing.result.ParseResult<
+                    com.android.internal.pm.pkg.component.ParsedIntentInfo>
+            parseRelRefGroup(
+                    com.android.internal.pm.pkg.component.ParsedIntentInfo r10,
+                    com.android.internal.pm.pkg.parsing.ParsingPackage r11,
+                    android.content.res.Resources r12,
+                    android.content.res.XmlResourceParser r13,
+                    boolean r14,
+                    android.content.pm.parsing.result.ParseInput r15)
+                    throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
         /*
             android.content.IntentFilter r0 = r10.getIntentFilter()
             int[] r1 = com.android.internal.R.styleable.AndroidManifestUriRelativeFilterGroup
@@ -292,10 +335,21 @@ public class ParsedIntentInfoUtils {
             r1.recycle()
             throw r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.internal.pm.pkg.component.ParsedIntentInfoUtils.parseRelRefGroup(com.android.internal.pm.pkg.component.ParsedIntentInfo, com.android.internal.pm.pkg.parsing.ParsingPackage, android.content.res.Resources, android.content.res.XmlResourceParser, boolean, android.content.pm.parsing.result.ParseInput):android.content.pm.parsing.result.ParseResult");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.internal.pm.pkg.component.ParsedIntentInfoUtils.parseRelRefGroup(com.android.internal.pm.pkg.component.ParsedIntentInfo,"
+                    + " com.android.internal.pm.pkg.parsing.ParsingPackage,"
+                    + " android.content.res.Resources, android.content.res.XmlResourceParser,"
+                    + " boolean,"
+                    + " android.content.pm.parsing.result.ParseInput):android.content.pm.parsing.result.ParseResult");
     }
 
-    private static ParseResult<ParsedIntentInfo> parseRelRefGroupData(UriRelativeFilterGroup group, Resources res, XmlResourceParser parser, boolean allowGlobs, ParseInput input) {
+    private static ParseResult<ParsedIntentInfo> parseRelRefGroupData(
+            UriRelativeFilterGroup group,
+            Resources res,
+            XmlResourceParser parser,
+            boolean allowGlobs,
+            ParseInput input) {
         TypedArray sa = res.obtainAttributes(parser, R.styleable.AndroidManifestData);
         try {
             String str = sa.getNonConfigurationString(4, 0);
@@ -316,7 +370,8 @@ public class ParsedIntentInfoUtils {
             String str4 = sa.getNonConfigurationString(14, 0);
             if (str4 != null) {
                 if (!allowGlobs) {
-                    return input.error("pathAdvancedPattern not allowed here; path must be literal");
+                    return input.error(
+                            "pathAdvancedPattern not allowed here; path must be literal");
                 }
                 group.addUriRelativeFilter(new UriRelativeFilter(0, 3, str4));
             }
@@ -335,14 +390,16 @@ public class ParsedIntentInfoUtils {
             String str8 = sa.getNonConfigurationString(22, 0);
             if (str8 != null) {
                 if (!allowGlobs) {
-                    return input.error("fragmentPattern not allowed here; fragment must be literal");
+                    return input.error(
+                            "fragmentPattern not allowed here; fragment must be literal");
                 }
                 group.addUriRelativeFilter(new UriRelativeFilter(2, 2, str8));
             }
             String str9 = sa.getNonConfigurationString(23, 0);
             if (str9 != null) {
                 if (!allowGlobs) {
-                    return input.error("fragmentAdvancedPattern not allowed here; fragment must be literal");
+                    return input.error(
+                            "fragmentAdvancedPattern not allowed here; fragment must be literal");
                 }
                 group.addUriRelativeFilter(new UriRelativeFilter(2, 3, str9));
             }
@@ -368,7 +425,8 @@ public class ParsedIntentInfoUtils {
             String str14 = sa.getNonConfigurationString(19, 0);
             if (str14 != null) {
                 if (!allowGlobs) {
-                    return input.error("queryAdvancedPattern not allowed here; query must be literal");
+                    return input.error(
+                            "queryAdvancedPattern not allowed here; query must be literal");
                 }
                 group.addUriRelativeFilter(new UriRelativeFilter(1, 3, str14));
             }
@@ -382,7 +440,12 @@ public class ParsedIntentInfoUtils {
         }
     }
 
-    private static ParseResult<ParsedIntentInfo> parseData(ParsedIntentInfo intentInfo, Resources resources, XmlResourceParser parser, boolean allowGlobs, ParseInput input) {
+    private static ParseResult<ParsedIntentInfo> parseData(
+            ParsedIntentInfo intentInfo,
+            Resources resources,
+            XmlResourceParser parser,
+            boolean allowGlobs,
+            ParseInput input) {
         IntentFilter intentFilter = intentInfo.getIntentFilter();
         TypedArray sa = resources.obtainAttributes(parser, R.styleable.AndroidManifestData);
         try {
@@ -447,7 +510,8 @@ public class ParsedIntentInfoUtils {
             String str12 = sa.getNonConfigurationString(14, 0);
             if (str12 != null) {
                 if (!allowGlobs) {
-                    return input.error("pathAdvancedPattern not allowed here; path must be literal");
+                    return input.error(
+                            "pathAdvancedPattern not allowed here; path must be literal");
                 }
                 intentFilter.addDataPath(str12, 3);
             }

@@ -30,7 +30,8 @@ public class AttCertValidityPeriod extends ASN1Object {
         this.notAfterTime = ASN1GeneralizedTime.getInstance(seq.getObjectAt(1));
     }
 
-    public AttCertValidityPeriod(ASN1GeneralizedTime notBeforeTime, ASN1GeneralizedTime notAfterTime) {
+    public AttCertValidityPeriod(
+            ASN1GeneralizedTime notBeforeTime, ASN1GeneralizedTime notAfterTime) {
         this.notBeforeTime = notBeforeTime;
         this.notAfterTime = notAfterTime;
     }
@@ -43,7 +44,8 @@ public class AttCertValidityPeriod extends ASN1Object {
         return this.notAfterTime;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
     public ASN1Primitive toASN1Primitive() {
         ASN1EncodableVector v = new ASN1EncodableVector(2);
         v.add(this.notBeforeTime);

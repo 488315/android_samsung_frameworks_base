@@ -11,17 +11,24 @@ public enum Vendor {
     SLSI;
 
     public static Vendor[] all() {
-        return (Vendor[]) Arrays.stream(values()).filter(new Predicate() { // from class: com.samsung.android.sume.core.types.Vendor$$ExternalSyntheticLambda0
-            @Override // java.util.function.Predicate
-            public final boolean test(Object obj) {
-                return Vendor.lambda$all$0((Vendor) obj);
-            }
-        }).toArray(new IntFunction() { // from class: com.samsung.android.sume.core.types.Vendor$$ExternalSyntheticLambda1
-            @Override // java.util.function.IntFunction
-            public final Object apply(int i) {
-                return Vendor.lambda$all$1(i);
-            }
-        });
+        return (Vendor[])
+                Arrays.stream(values())
+                        .filter(
+                                new Predicate() { // from class:
+                                                  // com.samsung.android.sume.core.types.Vendor$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.Predicate
+                                    public final boolean test(Object obj) {
+                                        return Vendor.lambda$all$0((Vendor) obj);
+                                    }
+                                })
+                        .toArray(
+                                new IntFunction() { // from class:
+                                                    // com.samsung.android.sume.core.types.Vendor$$ExternalSyntheticLambda1
+                                    @Override // java.util.function.IntFunction
+                                    public final Object apply(int i) {
+                                        return Vendor.lambda$all$1(i);
+                                    }
+                                });
     }
 
     static /* synthetic */ boolean lambda$all$0(Vendor e) {

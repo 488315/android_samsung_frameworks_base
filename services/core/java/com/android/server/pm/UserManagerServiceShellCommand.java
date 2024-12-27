@@ -18,6 +18,7 @@ import android.os.SystemProperties;
 import android.os.UserManager;
 import android.util.IndentingPrintWriter;
 import android.util.Slog;
+
 import com.android.internal.os.RoSystemProperties;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.server.BatteryService$$ExternalSyntheticOutline0;
@@ -27,6 +28,7 @@ import com.android.server.UiThread;
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0;
 import com.android.server.input.KeyboardMetricsCollector;
 import com.android.server.utils.Slogf;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -38,7 +40,11 @@ public final class UserManagerServiceShellCommand extends ShellCommand {
     public final UserManagerService mService;
     public final UserSystemPackageInstaller mSystemPackageInstaller;
 
-    public UserManagerServiceShellCommand(UserManagerService userManagerService, UserSystemPackageInstaller userSystemPackageInstaller, LockPatternUtils lockPatternUtils, Context context) {
+    public UserManagerServiceShellCommand(
+            UserManagerService userManagerService,
+            UserSystemPackageInstaller userSystemPackageInstaller,
+            LockPatternUtils lockPatternUtils,
+            Context context) {
         this.mService = userManagerService;
         this.mSystemPackageInstaller = userSystemPackageInstaller;
         this.mLockPatternUtils = lockPatternUtils;
@@ -139,9 +145,14 @@ public final class UserManagerServiceShellCommand extends ShellCommand {
                     while (true) {
                         String nextOption = getNextOption();
                         if (nextOption == null) {
-                            boolean isHeadlessSystemUserMode = this.mService.isHeadlessSystemUserMode();
+                            boolean isHeadlessSystemUserMode =
+                                    this.mService.isHeadlessSystemUserMode();
                             if (z) {
-                                outPrintWriter.printf("effective=%b real=%b\n", Boolean.valueOf(isHeadlessSystemUserMode), Boolean.valueOf(RoSystemProperties.MULTIUSER_HEADLESS_SYSTEM_USER));
+                                outPrintWriter.printf(
+                                        "effective=%b real=%b\n",
+                                        Boolean.valueOf(isHeadlessSystemUserMode),
+                                        Boolean.valueOf(
+                                                RoSystemProperties.MULTIUSER_HEADLESS_SYSTEM_USER));
                             } else {
                                 outPrintWriter.println(isHeadlessSystemUserMode);
                             }
@@ -160,9 +171,17 @@ public final class UserManagerServiceShellCommand extends ShellCommand {
                     while (true) {
                         String nextOption2 = getNextOption();
                         if (nextOption2 == null) {
-                            boolean isVisibleBackgroundUsersEnabled = UserManager.isVisibleBackgroundUsersEnabled();
+                            boolean isVisibleBackgroundUsersEnabled =
+                                    UserManager.isVisibleBackgroundUsersEnabled();
                             if (z2) {
-                                outPrintWriter2.printf("effective=%b real=%b\n", Boolean.valueOf(isVisibleBackgroundUsersEnabled), Boolean.valueOf(Resources.getSystem().getBoolean(R.bool.config_oem_enabled_satellite_access_allow)));
+                                outPrintWriter2.printf(
+                                        "effective=%b real=%b\n",
+                                        Boolean.valueOf(isVisibleBackgroundUsersEnabled),
+                                        Boolean.valueOf(
+                                                Resources.getSystem()
+                                                        .getBoolean(
+                                                                R.bool
+                                                                        .config_oem_enabled_satellite_access_allow)));
                             } else {
                                 outPrintWriter2.println(isVisibleBackgroundUsersEnabled);
                             }
@@ -181,11 +200,21 @@ public final class UserManagerServiceShellCommand extends ShellCommand {
                     while (true) {
                         String nextOption3 = getNextOption();
                         if (nextOption3 == null) {
-                            boolean isVisibleBackgroundUsersOnDefaultDisplayEnabled = UserManager.isVisibleBackgroundUsersOnDefaultDisplayEnabled();
+                            boolean isVisibleBackgroundUsersOnDefaultDisplayEnabled =
+                                    UserManager.isVisibleBackgroundUsersOnDefaultDisplayEnabled();
                             if (z3) {
-                                outPrintWriter3.printf("effective=%b real=%b\n", Boolean.valueOf(isVisibleBackgroundUsersOnDefaultDisplayEnabled), Boolean.valueOf(Resources.getSystem().getBoolean(R.bool.config_offsetWallpaperToCenterOfLargestDisplay)));
+                                outPrintWriter3.printf(
+                                        "effective=%b real=%b\n",
+                                        Boolean.valueOf(
+                                                isVisibleBackgroundUsersOnDefaultDisplayEnabled),
+                                        Boolean.valueOf(
+                                                Resources.getSystem()
+                                                        .getBoolean(
+                                                                R.bool
+                                                                        .config_offsetWallpaperToCenterOfLargestDisplay)));
                             } else {
-                                outPrintWriter3.println(isVisibleBackgroundUsersOnDefaultDisplayEnabled);
+                                outPrintWriter3.println(
+                                        isVisibleBackgroundUsersOnDefaultDisplayEnabled);
                             }
                             return 0;
                         }
@@ -210,18 +239,24 @@ public final class UserManagerServiceShellCommand extends ShellCommand {
                 case '\b':
                     PrintWriter outPrintWriter5 = getOutPrintWriter();
                     this.mService.getClass();
-                    outPrintWriter5.println(Resources.getSystem().getBoolean(R.bool.config_carrier_vt_available));
+                    outPrintWriter5.println(
+                            Resources.getSystem().getBoolean(R.bool.config_carrier_vt_available));
                     return 0;
                 case '\t':
                     PrintWriter outPrintWriter6 = getOutPrintWriter();
                     this.mService.getClass();
-                    outPrintWriter6.println(Resources.getSystem().getBoolean(R.bool.config_letterboxIsDisplayAspectRatioForFixedOrientationLetterboxEnabled));
+                    outPrintWriter6.println(
+                            Resources.getSystem()
+                                    .getBoolean(
+                                            R.bool
+                                                    .config_letterboxIsDisplayAspectRatioForFixedOrientationLetterboxEnabled));
                     return 0;
                 default:
                     return handleDefaultCommands(str);
             }
         } catch (RemoteException e) {
-            UiModeManagerService$13$$ExternalSyntheticOutline0.m("Remote exception: ", e, getOutPrintWriter());
+            UiModeManagerService$13$$ExternalSyntheticOutline0.m(
+                    "Remote exception: ", e, getOutPrintWriter());
             return -1;
         }
     }
@@ -235,34 +270,55 @@ public final class UserManagerServiceShellCommand extends ShellCommand {
         outPrintWriter.println("  list [-v | --verbose] [--all]");
         outPrintWriter.println("    Prints all users on the system.");
         outPrintWriter.println();
-        outPrintWriter.println("  report-system-user-package-whitelist-problems [-v | --verbose] [--critical-only] [--mode MODE]");
-        outPrintWriter.println("    Reports all issues on user-type package allowlist XML files. Options:");
+        outPrintWriter.println(
+                "  report-system-user-package-whitelist-problems [-v | --verbose] [--critical-only]"
+                    + " [--mode MODE]");
+        outPrintWriter.println(
+                "    Reports all issues on user-type package allowlist XML files. Options:");
         outPrintWriter.println("    -v | --verbose: shows extra info, like number of issues");
-        outPrintWriter.println("    --critical-only: show only critical issues, excluding warnings");
-        outPrintWriter.println("    --mode MODE: shows what errors would be if device used mode MODE");
-        outPrintWriter.println("      (where MODE is the allowlist mode integer as defined by config_userTypePackageWhitelistMode)");
+        outPrintWriter.println(
+                "    --critical-only: show only critical issues, excluding warnings");
+        outPrintWriter.println(
+                "    --mode MODE: shows what errors would be if device used mode MODE");
+        outPrintWriter.println(
+                "      (where MODE is the allowlist mode integer as defined by"
+                    + " config_userTypePackageWhitelistMode)");
         outPrintWriter.println();
-        outPrintWriter.println("  set-system-user-mode-emulation [--reboot | --no-restart] <headless | full | default>");
-        BatteryService$$ExternalSyntheticOutline0.m(outPrintWriter, "    Changes whether the system user is headless, full, or default (as defined by OEM).", "    WARNING: this command is meant just for development and debugging purposes.", "             It should NEVER be used on automated tests.", "    NOTE: by default it restarts the Android runtime, unless called with");
+        outPrintWriter.println(
+                "  set-system-user-mode-emulation [--reboot | --no-restart] <headless | full |"
+                    + " default>");
+        BatteryService$$ExternalSyntheticOutline0.m(
+                outPrintWriter,
+                "    Changes whether the system user is headless, full, or default (as defined by"
+                    + " OEM).",
+                "    WARNING: this command is meant just for development and debugging purposes.",
+                "             It should NEVER be used on automated tests.",
+                "    NOTE: by default it restarts the Android runtime, unless called with");
         outPrintWriter.println("          --reboot (which does a full reboot) or");
         outPrintWriter.println("          --no-restart (which requires a manual restart)");
         outPrintWriter.println();
         outPrintWriter.println("  is-headless-system-user-mode [-v | --verbose]");
         outPrintWriter.println("    Checks whether the device uses headless system user mode.");
-        outPrintWriter.println("  is-visible-background-users-on-default-display-supported [-v | --verbose]");
-        outPrintWriter.println("    Checks whether the device allows users to be start visible on background in the default display.");
+        outPrintWriter.println(
+                "  is-visible-background-users-on-default-display-supported [-v | --verbose]");
+        outPrintWriter.println(
+                "    Checks whether the device allows users to be start visible on background in"
+                    + " the default display.");
         outPrintWriter.println("    It returns the effective mode, even when using emulation");
         outPrintWriter.println("    (to get the real mode as well, use -v or --verbose)");
         outPrintWriter.println();
         outPrintWriter.println("  is-visible-background-users-supported [-v | --verbose]");
-        outPrintWriter.println("    Checks whether the device allows users to be start visible on background.");
+        outPrintWriter.println(
+                "    Checks whether the device allows users to be start visible on background.");
         outPrintWriter.println("    It returns the effective mode, even when using emulation");
         outPrintWriter.println("    (to get the real mode as well, use -v or --verbose)");
         outPrintWriter.println();
         outPrintWriter.println("  is-user-visible [--display DISPLAY_ID] <USER_ID>");
         outPrintWriter.println("    Checks if the given user is visible in the given display.");
-        outPrintWriter.println("    If the display option is not set, it uses the user's context to check");
-        outPrintWriter.println("    (so it emulates what apps would get from UserManager.isUserVisible())");
+        outPrintWriter.println(
+                "    If the display option is not set, it uses the user's context to check");
+        outPrintWriter.println(
+                "    (so it emulates what apps would get from UserManager.isUserVisible())");
         outPrintWriter.println();
         outPrintWriter.println("  get-main-user ");
         outPrintWriter.println("    Displays main user id or message if there is no main user");
@@ -270,9 +326,9 @@ public final class UserManagerServiceShellCommand extends ShellCommand {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:18:0x003d, code lost:
-    
-        if (r2 != (-1)) goto L19;
-     */
+
+       if (r2 != (-1)) goto L19;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -337,7 +393,9 @@ public final class UserManagerServiceShellCommand extends ShellCommand {
             r0.printf(r1, r5)
             return r3
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.pm.UserManagerServiceShellCommand.runIsUserVisible():int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.pm.UserManagerServiceShellCommand.runIsUserVisible():int");
     }
 
     /* JADX WARN: Can't fix incorrect switch cases order, some code will duplicate */
@@ -355,7 +413,8 @@ public final class UserManagerServiceShellCommand extends ShellCommand {
             String nextOption = getNextOption();
             if (nextOption == null) {
                 IActivityManager service = ActivityManager.getService();
-                ArrayList arrayList = (ArrayList) userManagerServiceShellCommand.mService.getUsers(!z, false, !z);
+                ArrayList arrayList =
+                        (ArrayList) userManagerServiceShellCommand.mService.getUsers(!z, false, !z);
                 int size = arrayList.size();
                 int i3 = -10000;
                 if (z2) {
@@ -370,14 +429,21 @@ public final class UserManagerServiceShellCommand extends ShellCommand {
                     UserInfo userInfo = (UserInfo) arrayList.get(i4);
                     boolean isUserRunning = service.isUserRunning(userInfo.id, i2);
                     if (z2) {
-                        DevicePolicyManagerInternal devicePolicyManagerInternal = (DevicePolicyManagerInternal) LocalServices.getService(DevicePolicyManagerInternal.class);
+                        DevicePolicyManagerInternal devicePolicyManagerInternal =
+                                (DevicePolicyManagerInternal)
+                                        LocalServices.getService(DevicePolicyManagerInternal.class);
                         if (devicePolicyManagerInternal != null) {
                             long clearCallingIdentity = Binder.clearCallingIdentity();
                             try {
-                                int deviceOwnerUserId = devicePolicyManagerInternal.getDeviceOwnerUserId();
+                                int deviceOwnerUserId =
+                                        devicePolicyManagerInternal.getDeviceOwnerUserId();
                                 int i5 = userInfo.id;
                                 String str3 = deviceOwnerUserId == i5 ? " (device-owner)" : "";
-                                String str4 = devicePolicyManagerInternal.getProfileOwnerAsUser(i5) != null ? " (profile-owner)" : "";
+                                String str4 =
+                                        devicePolicyManagerInternal.getProfileOwnerAsUser(i5)
+                                                        != null
+                                                ? " (profile-owner)"
+                                                : "";
                                 Binder.restoreCallingIdentity(clearCallingIdentity);
                                 str2 = str4;
                                 str = str3;
@@ -392,9 +458,32 @@ public final class UserManagerServiceShellCommand extends ShellCommand {
                         int i6 = userInfo.id;
                         boolean z3 = i6 == i;
                         int i7 = userInfo.profileGroupId;
-                        outPrintWriter.printf("%d: id=%d, name=%s, type=%s, flags=%s%s%s%s%s%s%s%s%s%s\n", Integer.valueOf(i4), Integer.valueOf(userInfo.id), userInfo.name, userInfo.userType.replace("android.os.usertype.", ""), UserInfo.flagsToString(userInfo.flags), i7 != i6 && i7 != i3 ? AmFmBandRange$$ExternalSyntheticOutline0.m(userInfo.profileGroupId, new StringBuilder(" (parentId="), ")") : "", isUserRunning ? " (running)" : "", userInfo.partial ? " (partial)" : "", userInfo.preCreated ? " (pre-created)" : "", userInfo.convertedFromPreCreated ? " (converted)" : "", str, str2, z3 ? " (current)" : "", userManagerServiceShellCommand.mService.isUserVisible(i6) ? " (visible)" : "");
+                        outPrintWriter.printf(
+                                "%d: id=%d, name=%s, type=%s, flags=%s%s%s%s%s%s%s%s%s%s\n",
+                                Integer.valueOf(i4),
+                                Integer.valueOf(userInfo.id),
+                                userInfo.name,
+                                userInfo.userType.replace("android.os.usertype.", ""),
+                                UserInfo.flagsToString(userInfo.flags),
+                                i7 != i6 && i7 != i3
+                                        ? AmFmBandRange$$ExternalSyntheticOutline0.m(
+                                                userInfo.profileGroupId,
+                                                new StringBuilder(" (parentId="),
+                                                ")")
+                                        : "",
+                                isUserRunning ? " (running)" : "",
+                                userInfo.partial ? " (partial)" : "",
+                                userInfo.preCreated ? " (pre-created)" : "",
+                                userInfo.convertedFromPreCreated ? " (converted)" : "",
+                                str,
+                                str2,
+                                z3 ? " (current)" : "",
+                                userManagerServiceShellCommand.mService.isUserVisible(i6)
+                                        ? " (visible)"
+                                        : "");
                     } else {
-                        outPrintWriter.printf("\t%s%s\n", userInfo, isUserRunning ? " running" : "");
+                        outPrintWriter.printf(
+                                "\t%s%s\n", userInfo, isUserRunning ? " running" : "");
                     }
                     i4++;
                     i2 = 0;
@@ -454,12 +543,20 @@ public final class UserManagerServiceShellCommand extends ShellCommand {
         while (true) {
             String nextOption = getNextOption();
             if (nextOption == null) {
-                StringBuilder m = FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0.m("runReportPackageAllowlistProblems(): verbose=", z, ", criticalOnly=", z2, ", mode=");
+                StringBuilder m =
+                        FullScreenMagnificationGestureHandler$$ExternalSyntheticOutline0.m(
+                                "runReportPackageAllowlistProblems(): verbose=",
+                                z,
+                                ", criticalOnly=",
+                                z2,
+                                ", mode=");
                 m.append(UserSystemPackageInstaller.modeToString(i));
                 Slog.d("UserManagerServiceShellCommand", m.toString());
-                IndentingPrintWriter indentingPrintWriter = new IndentingPrintWriter(outPrintWriter, "  ");
+                IndentingPrintWriter indentingPrintWriter =
+                        new IndentingPrintWriter(outPrintWriter, "  ");
                 try {
-                    this.mSystemPackageInstaller.dumpPackageWhitelistProblems(indentingPrintWriter, i, z, z2);
+                    this.mSystemPackageInstaller.dumpPackageWhitelistProblems(
+                            indentingPrintWriter, i, z, z2);
                     indentingPrintWriter.close();
                     return 0;
                 } catch (Throwable th) {
@@ -540,7 +637,8 @@ public final class UserManagerServiceShellCommand extends ShellCommand {
                 String nextOption = getNextOption();
                 if (nextOption == null) {
                     if (z2 && !z3) {
-                        getErrPrintWriter().println("You can use --reboot or --no-restart, but not both");
+                        getErrPrintWriter()
+                                .println("You can use --reboot or --no-restart, but not both");
                         return -1;
                     }
                     String nextArgRequired = getNextArgRequired();
@@ -586,36 +684,61 @@ public final class UserManagerServiceShellCommand extends ShellCommand {
                             return -1;
                     }
                     if (!z) {
-                        outPrintWriter.printf("No change needed, system user is already %s\n", isHeadlessSystemUserMode ? "headless" : "full");
+                        outPrintWriter.printf(
+                                "No change needed, system user is already %s\n",
+                                isHeadlessSystemUserMode ? "headless" : "full");
                         return 0;
                     }
-                    Slogf.d("UserManagerServiceShellCommand", "Updating system property %s to %s", "persist.debug.user_mode_emulation", nextArgRequired);
+                    Slogf.d(
+                            "UserManagerServiceShellCommand",
+                            "Updating system property %s to %s",
+                            "persist.debug.user_mode_emulation",
+                            nextArgRequired);
                     SystemProperties.set("persist.debug.user_mode_emulation", nextArgRequired);
                     if (z2) {
-                        Slog.i("UserManagerServiceShellCommand", "Rebooting to finalize the changes");
+                        Slog.i(
+                                "UserManagerServiceShellCommand",
+                                "Rebooting to finalize the changes");
                         outPrintWriter.println("Rebooting to finalize changes");
-                        UiThread.getHandler().post(new UserManagerServiceShellCommand$$ExternalSyntheticLambda0());
+                        UiThread.getHandler()
+                                .post(
+                                        new UserManagerServiceShellCommand$$ExternalSyntheticLambda0());
                     } else if (z3) {
                         Slog.i("UserManagerServiceShellCommand", "Shutting PackageManager down");
-                        ((PackageManagerInternal) LocalServices.getService(PackageManagerInternal.class)).shutdown();
+                        ((PackageManagerInternal)
+                                        LocalServices.getService(PackageManagerInternal.class))
+                                .shutdown();
                         IActivityManager service = ActivityManager.getService();
                         if (service != null) {
                             try {
-                                Slog.i("UserManagerServiceShellCommand", "Shutting ActivityManager down");
+                                Slog.i(
+                                        "UserManagerServiceShellCommand",
+                                        "Shutting ActivityManager down");
                                 service.shutdown(10000);
                             } catch (RemoteException e) {
-                                Slog.e("UserManagerServiceShellCommand", "Failed to shut down ActivityManager" + e);
+                                Slog.e(
+                                        "UserManagerServiceShellCommand",
+                                        "Failed to shut down ActivityManager" + e);
                             }
                         }
                         int myPid = Process.myPid();
-                        Slogf.i("UserManagerServiceShellCommand", "Restarting Android runtime(PID=%d) to finalize changes", Integer.valueOf(myPid));
+                        Slogf.i(
+                                "UserManagerServiceShellCommand",
+                                "Restarting Android runtime(PID=%d) to finalize changes",
+                                Integer.valueOf(myPid));
                         outPrintWriter.println("Restarting Android runtime to finalize changes");
-                        outPrintWriter.println("The restart may trigger a 'Broken pipe' message; this is to be expected.");
+                        outPrintWriter.println(
+                                "The restart may trigger a 'Broken pipe' message; this is to be"
+                                    + " expected.");
                         outPrintWriter.flush();
                         Process.killProcess(myPid);
                     } else {
-                        outPrintWriter.println("System user mode changed - please reboot (or restart Android runtime) to continue");
-                        outPrintWriter.println("NOTICE: after restart, some apps might be uninstalled (and their data will be lost)");
+                        outPrintWriter.println(
+                                "System user mode changed - please reboot (or restart Android"
+                                    + " runtime) to continue");
+                        outPrintWriter.println(
+                                "NOTICE: after restart, some apps might be uninstalled (and their"
+                                    + " data will be lost)");
                     }
                     return 0;
                 }

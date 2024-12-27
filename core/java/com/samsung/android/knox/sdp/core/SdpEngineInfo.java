@@ -16,21 +16,31 @@ public class SdpEngineInfo implements Parcelable {
     private int mVersion;
     private static String PERSONA_PWD_RESET_TOKEN = "PersonaPwdResetToken";
     private static String PWD_RESET_TOKEN = "PwdResetToken";
-    public static final Parcelable.Creator<SdpEngineInfo> CREATOR = new Parcelable.Creator<SdpEngineInfo>() { // from class: com.samsung.android.knox.sdp.core.SdpEngineInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SdpEngineInfo createFromParcel(Parcel source) {
-            return new SdpEngineInfo(source);
-        }
+    public static final Parcelable.Creator<SdpEngineInfo> CREATOR =
+            new Parcelable.Creator<
+                    SdpEngineInfo>() { // from class:
+                                       // com.samsung.android.knox.sdp.core.SdpEngineInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SdpEngineInfo createFromParcel(Parcel source) {
+                    return new SdpEngineInfo(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SdpEngineInfo[] newArray(int size) {
-            return new SdpEngineInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SdpEngineInfo[] newArray(int size) {
+                    return new SdpEngineInfo[size];
+                }
+            };
 
-    public SdpEngineInfo(String alias, int id, int userId, int state, int flags, int version, boolean isMigrating) {
+    public SdpEngineInfo(
+            String alias,
+            int id,
+            int userId,
+            int state,
+            int flags,
+            int version,
+            boolean isMigrating) {
         int i;
         String str;
         this.mIsMigrating = false;
@@ -159,7 +169,23 @@ public class SdpEngineInfo implements Parcelable {
     }
 
     public String toString() {
-        return "SdpEngineInfo { alias:" + this.mAlias + " pkg: " + this.mPackageName + " id:" + this.mId + " userid:" + this.mUserId + " state:" + this.mState + " flags:" + this.mFlags + " version:" + this.mVersion + " type:" + this.mType + "}";
+        return "SdpEngineInfo { alias:"
+                + this.mAlias
+                + " pkg: "
+                + this.mPackageName
+                + " id:"
+                + this.mId
+                + " userid:"
+                + this.mUserId
+                + " state:"
+                + this.mState
+                + " flags:"
+                + this.mFlags
+                + " version:"
+                + this.mVersion
+                + " type:"
+                + this.mType
+                + "}";
     }
 
     @Override // android.os.Parcelable

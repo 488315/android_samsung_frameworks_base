@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.ec;
 
 import android.security.keystore.KeyProperties;
+
 import com.android.internal.org.bouncycastle.asn1.ASN1OctetString;
 import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.DERBitString;
@@ -21,6 +22,7 @@ import com.android.internal.org.bouncycastle.jce.interfaces.ECPointEncoder;
 import com.android.internal.org.bouncycastle.jce.provider.BouncyCastleProvider;
 import com.android.internal.org.bouncycastle.math.ec.ECCurve;
 import com.android.internal.org.bouncycastle.util.Properties;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -31,7 +33,10 @@ import java.security.spec.ECPublicKeySpec;
 import java.security.spec.EllipticCurve;
 
 /* loaded from: classes5.dex */
-public class BCECPublicKey implements ECPublicKey, com.android.internal.org.bouncycastle.jce.interfaces.ECPublicKey, ECPointEncoder {
+public class BCECPublicKey
+        implements ECPublicKey,
+                com.android.internal.org.bouncycastle.jce.interfaces.ECPublicKey,
+                ECPointEncoder {
     static final long serialVersionUID = 2422789860422731812L;
     private String algorithm;
     private transient ProviderConfiguration configuration;
@@ -48,31 +53,52 @@ public class BCECPublicKey implements ECPublicKey, com.android.internal.org.boun
         this.configuration = key.configuration;
     }
 
-    public BCECPublicKey(String algorithm, ECPublicKeySpec spec, ProviderConfiguration configuration) {
+    public BCECPublicKey(
+            String algorithm, ECPublicKeySpec spec, ProviderConfiguration configuration) {
         this.algorithm = KeyProperties.KEY_ALGORITHM_EC;
         this.algorithm = algorithm;
         this.ecSpec = spec.getParams();
-        this.ecPublicKey = new ECPublicKeyParameters(EC5Util.convertPoint(this.ecSpec, spec.getW()), EC5Util.getDomainParameters(configuration, spec.getParams()));
+        this.ecPublicKey =
+                new ECPublicKeyParameters(
+                        EC5Util.convertPoint(this.ecSpec, spec.getW()),
+                        EC5Util.getDomainParameters(configuration, spec.getParams()));
         this.configuration = configuration;
     }
 
-    public BCECPublicKey(String algorithm, com.android.internal.org.bouncycastle.jce.spec.ECPublicKeySpec spec, ProviderConfiguration configuration) {
+    public BCECPublicKey(
+            String algorithm,
+            com.android.internal.org.bouncycastle.jce.spec.ECPublicKeySpec spec,
+            ProviderConfiguration configuration) {
         this.algorithm = KeyProperties.KEY_ALGORITHM_EC;
         this.algorithm = algorithm;
         if (spec.getParams() != null) {
             ECCurve curve = spec.getParams().getCurve();
             EllipticCurve ellipticCurve = EC5Util.convertCurve(curve, spec.getParams().getSeed());
-            this.ecPublicKey = new ECPublicKeyParameters(spec.getQ(), ECUtil.getDomainParameters(configuration, spec.getParams()));
+            this.ecPublicKey =
+                    new ECPublicKeyParameters(
+                            spec.getQ(),
+                            ECUtil.getDomainParameters(configuration, spec.getParams()));
             this.ecSpec = EC5Util.convertSpec(ellipticCurve, spec.getParams());
         } else {
-            com.android.internal.org.bouncycastle.jce.spec.ECParameterSpec s = configuration.getEcImplicitlyCa();
-            this.ecPublicKey = new ECPublicKeyParameters(s.getCurve().createPoint(spec.getQ().getAffineXCoord().toBigInteger(), spec.getQ().getAffineYCoord().toBigInteger()), EC5Util.getDomainParameters(configuration, null));
+            com.android.internal.org.bouncycastle.jce.spec.ECParameterSpec s =
+                    configuration.getEcImplicitlyCa();
+            this.ecPublicKey =
+                    new ECPublicKeyParameters(
+                            s.getCurve()
+                                    .createPoint(
+                                            spec.getQ().getAffineXCoord().toBigInteger(),
+                                            spec.getQ().getAffineYCoord().toBigInteger()),
+                            EC5Util.getDomainParameters(configuration, null));
             this.ecSpec = null;
         }
         this.configuration = configuration;
     }
 
-    public BCECPublicKey(String algorithm, ECPublicKeyParameters params, ECParameterSpec spec, ProviderConfiguration configuration) {
+    public BCECPublicKey(
+            String algorithm,
+            ECPublicKeyParameters params,
+            ECParameterSpec spec,
+            ProviderConfiguration configuration) {
         this.algorithm = KeyProperties.KEY_ALGORITHM_EC;
         ECDomainParameters dp = params.getParameters();
         this.algorithm = algorithm;
@@ -86,7 +112,11 @@ public class BCECPublicKey implements ECPublicKey, com.android.internal.org.boun
         this.configuration = configuration;
     }
 
-    public BCECPublicKey(String algorithm, ECPublicKeyParameters params, com.android.internal.org.bouncycastle.jce.spec.ECParameterSpec spec, ProviderConfiguration configuration) {
+    public BCECPublicKey(
+            String algorithm,
+            ECPublicKeyParameters params,
+            com.android.internal.org.bouncycastle.jce.spec.ECParameterSpec spec,
+            ProviderConfiguration configuration) {
         this.algorithm = KeyProperties.KEY_ALGORITHM_EC;
         ECDomainParameters dp = params.getParameters();
         this.algorithm = algorithm;
@@ -101,7 +131,8 @@ public class BCECPublicKey implements ECPublicKey, com.android.internal.org.boun
         this.configuration = configuration;
     }
 
-    public BCECPublicKey(String algorithm, ECPublicKeyParameters params, ProviderConfiguration configuration) {
+    public BCECPublicKey(
+            String algorithm, ECPublicKeyParameters params, ProviderConfiguration configuration) {
         this.algorithm = KeyProperties.KEY_ALGORITHM_EC;
         this.algorithm = algorithm;
         this.ecPublicKey = params;
@@ -113,11 +144,15 @@ public class BCECPublicKey implements ECPublicKey, com.android.internal.org.boun
         this.algorithm = KeyProperties.KEY_ALGORITHM_EC;
         this.algorithm = key.getAlgorithm();
         this.ecSpec = key.getParams();
-        this.ecPublicKey = new ECPublicKeyParameters(EC5Util.convertPoint(this.ecSpec, key.getW()), EC5Util.getDomainParameters(configuration, key.getParams()));
+        this.ecPublicKey =
+                new ECPublicKeyParameters(
+                        EC5Util.convertPoint(this.ecSpec, key.getW()),
+                        EC5Util.getDomainParameters(configuration, key.getParams()));
         this.configuration = configuration;
     }
 
-    BCECPublicKey(String algorithm, SubjectPublicKeyInfo info, ProviderConfiguration configuration) {
+    BCECPublicKey(
+            String algorithm, SubjectPublicKeyInfo info, ProviderConfiguration configuration) {
         this.algorithm = KeyProperties.KEY_ALGORITHM_EC;
         this.algorithm = algorithm;
         this.configuration = configuration;
@@ -125,7 +160,8 @@ public class BCECPublicKey implements ECPublicKey, com.android.internal.org.boun
     }
 
     private ECParameterSpec createSpec(EllipticCurve ellipticCurve, ECDomainParameters dp) {
-        return new ECParameterSpec(ellipticCurve, EC5Util.convertPoint(dp.getG()), dp.getN(), dp.getH().intValue());
+        return new ECParameterSpec(
+                ellipticCurve, EC5Util.convertPoint(dp.getG()), dp.getN(), dp.getH().intValue());
     }
 
     private void populateFromPubKeyInfo(SubjectPublicKeyInfo info) {
@@ -146,7 +182,9 @@ public class BCECPublicKey implements ECPublicKey, com.android.internal.org.boun
             }
         }
         X9ECPoint derQ = new X9ECPoint(curve, key);
-        this.ecPublicKey = new ECPublicKeyParameters(derQ.getPoint(), ECUtil.getDomainParameters(this.configuration, params));
+        this.ecPublicKey =
+                new ECPublicKeyParameters(
+                        derQ.getPoint(), ECUtil.getDomainParameters(this.configuration, params));
     }
 
     @Override // java.security.Key
@@ -161,8 +199,14 @@ public class BCECPublicKey implements ECPublicKey, com.android.internal.org.boun
 
     @Override // java.security.Key
     public byte[] getEncoded() {
-        boolean compress = this.withCompression || Properties.isOverrideSet("com.android.internal.org.bouncycastle.ec.enable_pc");
-        AlgorithmIdentifier algId = new AlgorithmIdentifier(X9ObjectIdentifiers.id_ecPublicKey, ECUtils.getDomainParametersFromName(this.ecSpec, compress));
+        boolean compress =
+                this.withCompression
+                        || Properties.isOverrideSet(
+                                "com.android.internal.org.bouncycastle.ec.enable_pc");
+        AlgorithmIdentifier algId =
+                new AlgorithmIdentifier(
+                        X9ObjectIdentifiers.id_ecPublicKey,
+                        ECUtils.getDomainParametersFromName(this.ecSpec, compress));
         byte[] pubKeyOctets = this.ecPublicKey.getQ().getEncoded(compress);
         return KeyUtil.getEncodedSubjectPublicKeyInfo(algId, pubKeyOctets);
     }
@@ -206,7 +250,8 @@ public class BCECPublicKey implements ECPublicKey, com.android.internal.org.boun
     }
 
     public String toString() {
-        return ECUtil.publicKeyToString(KeyProperties.KEY_ALGORITHM_EC, this.ecPublicKey.getQ(), engineGetSpec());
+        return ECUtil.publicKeyToString(
+                KeyProperties.KEY_ALGORITHM_EC, this.ecPublicKey.getQ(), engineGetSpec());
     }
 
     @Override // com.android.internal.org.bouncycastle.jce.interfaces.ECPointEncoder
@@ -219,7 +264,8 @@ public class BCECPublicKey implements ECPublicKey, com.android.internal.org.boun
             return false;
         }
         BCECPublicKey other = (BCECPublicKey) o;
-        return this.ecPublicKey.getQ().equals(other.ecPublicKey.getQ()) && engineGetSpec().equals(other.engineGetSpec());
+        return this.ecPublicKey.getQ().equals(other.ecPublicKey.getQ())
+                && engineGetSpec().equals(other.engineGetSpec());
     }
 
     public int hashCode() {

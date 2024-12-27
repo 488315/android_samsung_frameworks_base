@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.ArraySet;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.HashMap;
@@ -16,24 +17,26 @@ import java.util.Set;
 
 /* loaded from: classes.dex */
 public final class RemoteInput implements Parcelable {
-    public static final Parcelable.Creator<RemoteInput> CREATOR = new Parcelable.Creator<RemoteInput>() { // from class: android.app.RemoteInput.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RemoteInput createFromParcel(Parcel in) {
-            return new RemoteInput(in);
-        }
+    public static final Parcelable.Creator<RemoteInput> CREATOR =
+            new Parcelable.Creator<RemoteInput>() { // from class: android.app.RemoteInput.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RemoteInput createFromParcel(Parcel in) {
+                    return new RemoteInput(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public RemoteInput[] newArray(int size) {
-            return new RemoteInput[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public RemoteInput[] newArray(int size) {
+                    return new RemoteInput[size];
+                }
+            };
     private static final int DEFAULT_FLAGS = 1;
     public static final int EDIT_CHOICES_BEFORE_SENDING_AUTO = 0;
     public static final int EDIT_CHOICES_BEFORE_SENDING_DISABLED = 1;
     public static final int EDIT_CHOICES_BEFORE_SENDING_ENABLED = 2;
-    private static final String EXTRA_DATA_TYPE_RESULTS_DATA = "android.remoteinput.dataTypeResultsData";
+    private static final String EXTRA_DATA_TYPE_RESULTS_DATA =
+            "android.remoteinput.dataTypeResultsData";
     public static final String EXTRA_RESULTS_DATA = "android.remoteinput.resultsData";
     private static final String EXTRA_RESULTS_SOURCE = "android.remoteinput.resultsSource";
     private static final int FLAG_ALLOW_FREE_FORM_INPUT = 1;
@@ -49,14 +52,19 @@ public final class RemoteInput implements Parcelable {
     private final String mResultKey;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface EditChoicesBeforeSending {
-    }
+    public @interface EditChoicesBeforeSending {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Source {
-    }
+    public @interface Source {}
 
-    private RemoteInput(String resultKey, CharSequence label, CharSequence[] choices, int flags, int editChoicesBeforeSending, Bundle extras, ArraySet<String> allowedDataTypes) {
+    private RemoteInput(
+            String resultKey,
+            CharSequence label,
+            CharSequence[] choices,
+            int flags,
+            int editChoicesBeforeSending,
+            Bundle extras,
+            ArraySet<String> allowedDataTypes) {
         this.mResultKey = resultKey;
         this.mLabel = label;
         this.mChoices = choices;
@@ -65,7 +73,8 @@ public final class RemoteInput implements Parcelable {
         this.mExtras = extras;
         this.mAllowedDataTypes = allowedDataTypes;
         if (getEditChoicesBeforeSending() == 2 && !getAllowFreeFormInput()) {
-            throw new IllegalArgumentException("setEditChoicesBeforeSending requires setAllowFreeFormInput");
+            throw new IllegalArgumentException(
+                    "setEditChoicesBeforeSending requires setAllowFreeFormInput");
         }
     }
 
@@ -86,7 +95,9 @@ public final class RemoteInput implements Parcelable {
     }
 
     public boolean isDataOnly() {
-        return !getAllowFreeFormInput() && (getChoices() == null || getChoices().length == 0) && !getAllowedDataTypes().isEmpty();
+        return !getAllowFreeFormInput()
+                && (getChoices() == null || getChoices().length == 0)
+                && !getAllowedDataTypes().isEmpty();
     }
 
     public boolean getAllowFreeFormInput() {
@@ -173,7 +184,14 @@ public final class RemoteInput implements Parcelable {
         }
 
         public RemoteInput build() {
-            return new RemoteInput(this.mResultKey, this.mLabel, this.mChoices, this.mFlags, this.mEditChoicesBeforeSending, this.mExtras, this.mAllowedDataTypes);
+            return new RemoteInput(
+                    this.mResultKey,
+                    this.mLabel,
+                    this.mChoices,
+                    this.mFlags,
+                    this.mEditChoicesBeforeSending,
+                    this.mExtras,
+                    this.mAllowedDataTypes);
         }
     }
 
@@ -187,7 +205,8 @@ public final class RemoteInput implements Parcelable {
         this.mAllowedDataTypes = in.readArraySet(null);
     }
 
-    public static Map<String, Uri> getDataResultsFromIntent(Intent intent, String remoteInputResultKey) {
+    public static Map<String, Uri> getDataResultsFromIntent(
+            Intent intent, String remoteInputResultKey) {
         String mimeType;
         Intent clipDataIntent = getClipDataIntentFromIntent(intent);
         if (clipDataIntent == null) {
@@ -196,7 +215,9 @@ public final class RemoteInput implements Parcelable {
         Map<String, Uri> results = new HashMap<>();
         Bundle extras = clipDataIntent.getExtras();
         for (String key : extras.keySet()) {
-            if (key.startsWith(EXTRA_DATA_TYPE_RESULTS_DATA) && (mimeType = key.substring(EXTRA_DATA_TYPE_RESULTS_DATA.length())) != null && !mimeType.isEmpty()) {
+            if (key.startsWith(EXTRA_DATA_TYPE_RESULTS_DATA)
+                    && (mimeType = key.substring(EXTRA_DATA_TYPE_RESULTS_DATA.length())) != null
+                    && !mimeType.isEmpty()) {
                 Bundle bundle = clipDataIntent.getBundleExtra(key);
                 String uriStr = bundle.getString(remoteInputResultKey);
                 if (uriStr != null && !uriStr.isEmpty()) {
@@ -218,7 +239,8 @@ public final class RemoteInput implements Parcelable {
         return (Bundle) clipDataIntent.getParcelableExtra(EXTRA_RESULTS_DATA, Bundle.class);
     }
 
-    public static void addResultsToIntent(RemoteInput[] remoteInputs, Intent intent, Bundle results) {
+    public static void addResultsToIntent(
+            RemoteInput[] remoteInputs, Intent intent, Bundle results) {
         Intent clipDataIntent = getClipDataIntentFromIntent(intent);
         if (clipDataIntent == null) {
             clipDataIntent = new Intent();
@@ -237,7 +259,8 @@ public final class RemoteInput implements Parcelable {
         intent.setClipData(ClipData.newIntent(RESULTS_CLIP_LABEL, clipDataIntent));
     }
 
-    public static void addDataResultToIntent(RemoteInput remoteInput, Intent intent, Map<String, Uri> results) {
+    public static void addDataResultToIntent(
+            RemoteInput remoteInput, Intent intent, Map<String, Uri> results) {
         Intent clipDataIntent = getClipDataIntentFromIntent(intent);
         if (clipDataIntent == null) {
             clipDataIntent = new Intent();
@@ -246,7 +269,8 @@ public final class RemoteInput implements Parcelable {
             String mimeType = entry.getKey();
             Uri uri = entry.getValue();
             if (mimeType != null) {
-                Bundle resultsBundle = clipDataIntent.getBundleExtra(getExtraResultsKeyForData(mimeType));
+                Bundle resultsBundle =
+                        clipDataIntent.getBundleExtra(getExtraResultsKeyForData(mimeType));
                 if (resultsBundle == null) {
                     resultsBundle = new Bundle();
                 }
@@ -300,7 +324,8 @@ public final class RemoteInput implements Parcelable {
             return null;
         }
         ClipDescription clipDescription = clipData.getDescription();
-        if (!clipDescription.hasMimeType(ClipDescription.MIMETYPE_TEXT_INTENT) || !clipDescription.getLabel().equals(RESULTS_CLIP_LABEL)) {
+        if (!clipDescription.hasMimeType(ClipDescription.MIMETYPE_TEXT_INTENT)
+                || !clipDescription.getLabel().equals(RESULTS_CLIP_LABEL)) {
             return null;
         }
         return clipData.getItemAt(0).getIntent();

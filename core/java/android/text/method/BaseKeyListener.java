@@ -8,7 +8,6 @@ import android.text.Layout;
 import android.text.NoCopySpan;
 import android.text.Selection;
 import android.text.Spanned;
-import android.text.method.TextKeyListener;
 import android.text.style.ReplacementSpan;
 import android.view.KeyEvent;
 import android.view.View;
@@ -38,7 +37,9 @@ public abstract class BaseKeyListener extends MetaKeyKeyListener implements KeyL
         if (!(text instanceof Spanned)) {
             return offset;
         }
-        ReplacementSpan[] spans = (ReplacementSpan[]) ((Spanned) text).getSpans(offset, offset, ReplacementSpan.class);
+        ReplacementSpan[] spans =
+                (ReplacementSpan[])
+                        ((Spanned) text).getSpans(offset, offset, ReplacementSpan.class);
         for (int i = 0; i < spans.length; i++) {
             int start = ((Spanned) text).getSpanStart(spans[i]);
             int end = ((Spanned) text).getSpanEnd(spans[i]);
@@ -147,7 +148,8 @@ public abstract class BaseKeyListener extends MetaKeyKeyListener implements KeyL
                         state = 7;
                         break;
                     } else {
-                        if (!isVariationSelector(codePoint) && UCharacter.getCombiningClass(codePoint) == 0) {
+                        if (!isVariationSelector(codePoint)
+                                && UCharacter.getCombiningClass(codePoint) == 0) {
                             deleteCharCount += Character.charCount(codePoint);
                         }
                         state = 13;
@@ -232,10 +234,12 @@ public abstract class BaseKeyListener extends MetaKeyKeyListener implements KeyL
         if (offset >= len - 1) {
             return len;
         }
-        return adjustReplacementSpan(text, paint.getTextRunCursor(text, offset, len, false, offset, 0), false);
+        return adjustReplacementSpan(
+                text, paint.getTextRunCursor(text, offset, len, false, offset, 0), false);
     }
 
-    private boolean backspaceOrForwardDelete(View view, Editable content, int keyCode, KeyEvent event, boolean isForwardDelete) {
+    private boolean backspaceOrForwardDelete(
+            View view, Editable content, int keyCode, KeyEvent event, boolean isForwardDelete) {
         int end;
         Paint paint;
         Paint paint2;
@@ -288,7 +292,8 @@ public abstract class BaseKeyListener extends MetaKeyKeyListener implements KeyL
         if (currentCursorOffset != Selection.getSelectionEnd(content)) {
             return false;
         }
-        if ((!isForwardDelete && currentCursorOffset == 0) || (isForwardDelete && currentCursorOffset == content.length())) {
+        if ((!isForwardDelete && currentCursorOffset == 0)
+                || (isForwardDelete && currentCursorOffset == content.length())) {
             return false;
         }
         WordIterator wordIterator = null;

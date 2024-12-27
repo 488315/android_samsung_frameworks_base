@@ -4,33 +4,42 @@ import android.app.appsearch.GenericDocument;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class ExecuteAppFunctionRequest implements Parcelable {
-    public static final Parcelable.Creator<ExecuteAppFunctionRequest> CREATOR = new Parcelable.Creator<ExecuteAppFunctionRequest>() { // from class: android.app.appfunctions.ExecuteAppFunctionRequest.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ExecuteAppFunctionRequest createFromParcel(Parcel parcel) {
-            String targetPackageName = parcel.readString8();
-            String functionIdentifier = parcel.readString8();
-            GenericDocumentWrapper parameters = GenericDocumentWrapper.CREATOR.createFromParcel(parcel);
-            Bundle extras = parcel.readBundle(Bundle.class.getClassLoader());
-            return new ExecuteAppFunctionRequest(targetPackageName, functionIdentifier, extras, parameters);
-        }
+    public static final Parcelable.Creator<ExecuteAppFunctionRequest> CREATOR =
+            new Parcelable.Creator<ExecuteAppFunctionRequest>() { // from class:
+                // android.app.appfunctions.ExecuteAppFunctionRequest.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ExecuteAppFunctionRequest createFromParcel(Parcel parcel) {
+                    String targetPackageName = parcel.readString8();
+                    String functionIdentifier = parcel.readString8();
+                    GenericDocumentWrapper parameters =
+                            GenericDocumentWrapper.CREATOR.createFromParcel(parcel);
+                    Bundle extras = parcel.readBundle(Bundle.class.getClassLoader());
+                    return new ExecuteAppFunctionRequest(
+                            targetPackageName, functionIdentifier, extras, parameters);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ExecuteAppFunctionRequest[] newArray(int size) {
-            return new ExecuteAppFunctionRequest[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ExecuteAppFunctionRequest[] newArray(int size) {
+                    return new ExecuteAppFunctionRequest[size];
+                }
+            };
     private final Bundle mExtras;
     private final String mFunctionIdentifier;
     private final GenericDocumentWrapper mParameters;
     private final String mTargetPackageName;
 
-    private ExecuteAppFunctionRequest(String targetPackageName, String functionIdentifier, Bundle extras, GenericDocumentWrapper parameters) {
+    private ExecuteAppFunctionRequest(
+            String targetPackageName,
+            String functionIdentifier,
+            Bundle extras,
+            GenericDocumentWrapper parameters) {
         this.mTargetPackageName = (String) Objects.requireNonNull(targetPackageName);
         this.mFunctionIdentifier = (String) Objects.requireNonNull(functionIdentifier);
         this.mExtras = (Bundle) Objects.requireNonNull(extras);
@@ -89,7 +98,11 @@ public final class ExecuteAppFunctionRequest implements Parcelable {
         }
 
         public ExecuteAppFunctionRequest build() {
-            return new ExecuteAppFunctionRequest(this.mTargetPackageName, this.mFunctionIdentifier, this.mExtras, new GenericDocumentWrapper(this.mParameters));
+            return new ExecuteAppFunctionRequest(
+                    this.mTargetPackageName,
+                    this.mFunctionIdentifier,
+                    this.mExtras,
+                    new GenericDocumentWrapper(this.mParameters));
         }
     }
 }

@@ -2,7 +2,7 @@ package android.os;
 
 import android.icu.util.ULocale;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,19 +19,20 @@ public final class LocaleList implements Parcelable {
     private final String mStringRepresentation;
     private static final Locale[] sEmptyList = new Locale[0];
     private static final LocaleList sEmptyLocaleList = new LocaleList(new Locale[0]);
-    public static final Parcelable.Creator<LocaleList> CREATOR = new Parcelable.Creator<LocaleList>() { // from class: android.os.LocaleList.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LocaleList createFromParcel(Parcel source) {
-            return LocaleList.forLanguageTags(source.readString8());
-        }
+    public static final Parcelable.Creator<LocaleList> CREATOR =
+            new Parcelable.Creator<LocaleList>() { // from class: android.os.LocaleList.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LocaleList createFromParcel(Parcel source) {
+                    return LocaleList.forLanguageTags(source.readString8());
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LocaleList[] newArray(int size) {
-            return new LocaleList[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LocaleList[] newArray(int size) {
+                    return new LocaleList[size];
+                }
+            };
     private static final Locale LOCALE_EN_XA = new Locale("en", "XA");
     private static final Locale LOCALE_AR_XB = new Locale("ar", "XB");
     private static final Locale EN_LATN = Locale.forLanguageTag("en-Latn");
@@ -253,7 +254,9 @@ public final class LocaleList implements Parcelable {
         if (supported.equals(desired)) {
             return true;
         }
-        if (!supported.getLanguage().equals(desired.getLanguage()) || isPseudoLocale(supported) || isPseudoLocale(desired)) {
+        if (!supported.getLanguage().equals(desired.getLanguage())
+                || isPseudoLocale(supported)
+                || isPseudoLocale(desired)) {
             return false;
         }
         String supportedScr = getLikelyScript(supported);
@@ -274,7 +277,8 @@ public final class LocaleList implements Parcelable {
         return Integer.MAX_VALUE;
     }
 
-    private int computeFirstMatchIndex(Collection<String> supportedLocales, boolean assumeEnglishIsSupported) {
+    private int computeFirstMatchIndex(
+            Collection<String> supportedLocales, boolean assumeEnglishIsSupported) {
         if (this.mList.length == 1) {
             return 0;
         }
@@ -307,7 +311,8 @@ public final class LocaleList implements Parcelable {
         return bestIndex;
     }
 
-    private Locale computeFirstMatch(Collection<String> supportedLocales, boolean assumeEnglishIsSupported) {
+    private Locale computeFirstMatch(
+            Collection<String> supportedLocales, boolean assumeEnglishIsSupported) {
         int bestIndex = computeFirstMatchIndex(supportedLocales, assumeEnglishIsSupported);
         if (bestIndex == -1) {
             return null;

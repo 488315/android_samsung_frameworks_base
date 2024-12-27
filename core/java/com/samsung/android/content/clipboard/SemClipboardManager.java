@@ -15,11 +15,12 @@ import android.sec.clipboard.data.ClipboardConstants;
 import android.sec.clipboard.util.FileHelper;
 import android.sec.clipboard.util.Log;
 import android.text.TextUtils;
-import com.samsung.android.content.clipboard.IOnClipboardEventListener;
+
 import com.samsung.android.content.clipboard.data.SemClipData;
 import com.samsung.android.content.clipboard.data.SemHtmlClipData;
 import com.samsung.android.content.clipboard.data.SemImageClipData;
 import com.samsung.android.content.clipboard.data.SemUriClipData;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.ref.WeakReference;
@@ -29,18 +30,25 @@ import java.util.Objects;
 
 /* loaded from: classes5.dex */
 public class SemClipboardManager {
-    public static final String ACTION_ADD_CLIP = "com.samsung.android.content.clipboard.action.ADD_CLIP";
+    public static final String ACTION_ADD_CLIP =
+            "com.samsung.android.content.clipboard.action.ADD_CLIP";
 
     @Deprecated(forRemoval = true, since = "13.0")
-    public static final String ACTION_CLIPBOARD_CLOSED = "com.samsung.android.content.clipboard.action.CLIPBOARD_CLOSED";
+    public static final String ACTION_CLIPBOARD_CLOSED =
+            "com.samsung.android.content.clipboard.action.CLIPBOARD_CLOSED";
 
     @Deprecated(forRemoval = true, since = "13.0")
-    public static final String ACTION_CLIPBOARD_OPENED = "com.samsung.android.content.clipboard.action.CLIPBOARD_OPENED";
+    public static final String ACTION_CLIPBOARD_OPENED =
+            "com.samsung.android.content.clipboard.action.CLIPBOARD_OPENED";
 
     @Deprecated(forRemoval = true, since = "13.0")
-    public static final String ACTION_DISMISS_CLIPBOARD = "com.samsung.android.content.clipboard.action.DISMISS_CLIPBOARD";
-    public static final String ACTION_INTRODUCE_EDGE = "com.samsung.android.content.clipboard.action.INTRODUCE_EDGE";
-    public static final String ACTION_REMOVE_CLIP = "com.samsung.android.content.clipboard.action.REMOVE_CLIP";
+    public static final String ACTION_DISMISS_CLIPBOARD =
+            "com.samsung.android.content.clipboard.action.DISMISS_CLIPBOARD";
+
+    public static final String ACTION_INTRODUCE_EDGE =
+            "com.samsung.android.content.clipboard.action.INTRODUCE_EDGE";
+    public static final String ACTION_REMOVE_CLIP =
+            "com.samsung.android.content.clipboard.action.REMOVE_CLIP";
     public static final int CLIPBOARD_TYPE_FILTER = 255;
     public static final String EXTRA_DARK_THEME = "darkTheme";
     public static final String EXTRA_EXTRA_PATH = "extra_path";
@@ -60,13 +68,17 @@ public class SemClipboardManager {
     private final int PROTECTED_DATA_MAX = 3;
     private boolean mIsMaximumSize = false;
     private OnPasteListener mPasteListener = null;
-    private final IClipboardDataPasteEvent.Stub mOnPasteServiceListener = new IClipboardDataPasteEvent.Stub() { // from class: com.samsung.android.content.clipboard.SemClipboardManager.1
-        @Override // android.sec.clipboard.IClipboardDataPasteEvent
-        public void onPaste(SemClipData data) {
-            SemClipboardManager.this.requestPaste(data);
-        }
-    };
-    private ArrayList<SemClipboardEventListener> mOnClipboardEventServiceListeners = new ArrayList<>();
+    private final IClipboardDataPasteEvent.Stub mOnPasteServiceListener =
+            new IClipboardDataPasteEvent
+                    .Stub() { // from class:
+                              // com.samsung.android.content.clipboard.SemClipboardManager.1
+                @Override // android.sec.clipboard.IClipboardDataPasteEvent
+                public void onPaste(SemClipData data) {
+                    SemClipboardManager.this.requestPaste(data);
+                }
+            };
+    private ArrayList<SemClipboardEventListener> mOnClipboardEventServiceListeners =
+            new ArrayList<>();
 
     public interface OnPasteListener {
         void onPaste(SemClipData semClipData);
@@ -82,7 +94,9 @@ public class SemClipboardManager {
         @Override // com.samsung.android.content.clipboard.IOnClipboardEventListener
         public void onClipboardEvent(int event, SemClipData data) {
             if (this.mWeakHandler == null || this.mWeakHandler.get() == null) {
-                Log.secD(SemClipboardManager.TAG, "onClipboardEvent mWeakHandler is null. mWeakHandler=" + this.mWeakHandler);
+                Log.secD(
+                        SemClipboardManager.TAG,
+                        "onClipboardEvent mWeakHandler is null. mWeakHandler=" + this.mWeakHandler);
                 return;
             }
             Handler handler = this.mWeakHandler.get();
@@ -97,7 +111,9 @@ public class SemClipboardManager {
         @Override // com.samsung.android.content.clipboard.IOnClipboardEventListener
         public void onUpdateFilter(int filter) {
             if (this.mWeakHandler == null || this.mWeakHandler.get() == null) {
-                Log.secD(SemClipboardManager.TAG, "onUpdateFilter mWeakHandler is null. mWeakHandler=" + this.mWeakHandler);
+                Log.secD(
+                        SemClipboardManager.TAG,
+                        "onUpdateFilter mWeakHandler is null. mWeakHandler=" + this.mWeakHandler);
                 return;
             }
             Handler handler = this.mWeakHandler.get();
@@ -118,8 +134,7 @@ public class SemClipboardManager {
         public static final int CLIP_UPDATE_TIMESTAMP = 256;
         public static final int FILTER_UPDATED = 5;
 
-        private ClipboardEvent() {
-        }
+        private ClipboardEvent() {}
     }
 
     public static class Type {
@@ -132,8 +147,7 @@ public class SemClipboardManager {
         public static final int URI = 16;
         public static final int URI_LIST = 32;
 
-        private Type() {
-        }
+        private Type() {}
     }
 
     public interface OnAddClipResultListener {
@@ -147,27 +161,33 @@ public class SemClipboardManager {
             public static final int REASON_NOT_ALLOWED_TO_USE = 4;
             public static final int REASON_UNKNOWN = 1;
 
-            private Error() {
-            }
+            private Error() {}
         }
     }
 
     public SemClipboardManager(Context context) {
         this.mContext = context;
-        this.mHandler = new Handler(this.mContext.getMainLooper()) { // from class: com.samsung.android.content.clipboard.SemClipboardManager.2
-            @Override // android.os.Handler
-            public void handleMessage(Message msg) {
-                SemClipboardManager.this.notifyEvent(msg);
-            }
-        };
-        this.mInnerOnClipboardEventServiceListener = new InnerOnClipboardEventListener(this.mHandler);
+        this.mHandler =
+                new Handler(
+                        this.mContext
+                                .getMainLooper()) { // from class:
+                                                    // com.samsung.android.content.clipboard.SemClipboardManager.2
+                    @Override // android.os.Handler
+                    public void handleMessage(Message msg) {
+                        SemClipboardManager.this.notifyEvent(msg);
+                    }
+                };
+        this.mInnerOnClipboardEventServiceListener =
+                new InnerOnClipboardEventListener(this.mHandler);
     }
 
     private static IClipboardService getSemService() {
         if (mSemService != null) {
             return mSemService;
         }
-        mSemService = IClipboardService.Stub.asInterface(ServiceManager.getService(Context.SEM_CLIPBOARD_SERVICE));
+        mSemService =
+                IClipboardService.Stub.asInterface(
+                        ServiceManager.getService(Context.SEM_CLIPBOARD_SERVICE));
         if (mSemService == null) {
             Log.e(TAG, "Failed to get semclipboard service.");
         }
@@ -205,7 +225,11 @@ public class SemClipboardManager {
                 return;
             }
             try {
-                getSemService().setPrimarySemClip(semClip, this.mContext.getOpPackageName(), this.mContext.getUserId());
+                getSemService()
+                        .setPrimarySemClip(
+                                semClip,
+                                this.mContext.getOpPackageName(),
+                                this.mContext.getUserId());
             } catch (RemoteException e) {
                 Log.e(TAG, "RemoteException in setPrimarySemClip, " + e.getMessage());
             }
@@ -216,7 +240,9 @@ public class SemClipboardManager {
     public SemClipData getLatestClip(int type) {
         if (isEnabled("getLatestClip") && getSemService() != null) {
             try {
-                return getSemService().getPrimarySemClip(this.mContext.getOpPackageName(), this.mContext.getUserId());
+                return getSemService()
+                        .getPrimarySemClip(
+                                this.mContext.getOpPackageName(), this.mContext.getUserId());
             } catch (RemoteException e) {
                 Log.e(TAG, "RemoteException in getLatestClip, " + e.getMessage());
             }
@@ -228,7 +254,11 @@ public class SemClipboardManager {
     public int getCount() {
         if (isEnabled("getCount") && getSemService() != null) {
             try {
-                return getSemService().hasPrimaryClip(this.mContext.getOpPackageName(), this.mContext.getUserId()) ? 1 : 0;
+                return getSemService()
+                                .hasPrimaryClip(
+                                        this.mContext.getOpPackageName(), this.mContext.getUserId())
+                        ? 1
+                        : 0;
             } catch (RemoteException e) {
                 Log.e(TAG, "RemoteException in getCount, " + e.getMessage());
             }
@@ -247,7 +277,10 @@ public class SemClipboardManager {
         synchronized (this.mOnClipboardEventServiceListeners) {
             if (this.mOnClipboardEventServiceListeners.size() == 0) {
                 try {
-                    getSemService().addClipboardEventListener(this.mInnerOnClipboardEventServiceListener, this.mContext.getOpPackageName());
+                    getSemService()
+                            .addClipboardEventListener(
+                                    this.mInnerOnClipboardEventServiceListener,
+                                    this.mContext.getOpPackageName());
                 } catch (RemoteException e) {
                     throw e.rethrowFromSystemServer();
                 }
@@ -263,7 +296,9 @@ public class SemClipboardManager {
             boolean removed = this.mOnClipboardEventServiceListeners.remove(listener);
             if (removed && this.mOnClipboardEventServiceListeners.size() == 0) {
                 try {
-                    getSemService().removeClipboardEventListener(this.mInnerOnClipboardEventServiceListener);
+                    getSemService()
+                            .removeClipboardEventListener(
+                                    this.mInnerOnClipboardEventServiceListener);
                 } catch (RemoteException e) {
                     throw e.rethrowFromSystemServer();
                 }
@@ -275,7 +310,14 @@ public class SemClipboardManager {
         if (isEnabled("filterClip") && getSemService() != null) {
             try {
                 getSemService().updateFilter(type, this.mOnPasteServiceListener);
-                Log.i(TAG, "updateFilter - Format(" + type + "), " + listener + " by " + this.mContext.getOpPackageName());
+                Log.i(
+                        TAG,
+                        "updateFilter - Format("
+                                + type
+                                + "), "
+                                + listener
+                                + " by "
+                                + this.mContext.getOpPackageName());
             } catch (RemoteException e) {
                 Log.e(TAG, "RemoteException in filterClip, " + e.getMessage());
             }
@@ -286,7 +328,9 @@ public class SemClipboardManager {
     public boolean paste(ClipData data) {
         if (isEnabled("paste(ClipData)") && getSemService() != null) {
             try {
-                return getSemService().pasteClipData(data, this.mContext.getOpPackageName(), this.mContext.getUserId());
+                return getSemService()
+                        .pasteClipData(
+                                data, this.mContext.getOpPackageName(), this.mContext.getUserId());
             } catch (RemoteException e) {
                 Log.e(TAG, "RemoteException in paste(ClipData), " + e.getMessage());
             }
@@ -315,7 +359,9 @@ public class SemClipboardManager {
 
     @Deprecated(forRemoval = true, since = "13.0")
     public void dismissDialog() {
-        Log.d(TAG, "deprecated dismissDialog, calling package : " + this.mContext.getOpPackageName());
+        Log.d(
+                TAG,
+                "deprecated dismissDialog, calling package : " + this.mContext.getOpPackageName());
     }
 
     public boolean isEnabled() {
@@ -332,7 +378,10 @@ public class SemClipboardManager {
 
     @Deprecated(forRemoval = true, since = "13.0")
     public boolean paste(String id) {
-        Log.d(TAG, "deprecated paste(String id), calling package : " + this.mContext.getOpPackageName());
+        Log.d(
+                TAG,
+                "deprecated paste(String id), calling package : "
+                        + this.mContext.getOpPackageName());
         return false;
     }
 
@@ -344,7 +393,11 @@ public class SemClipboardManager {
         ArrayList<SemClipData> clipList = new ArrayList<>();
         if (getSemService() != null) {
             try {
-                SemClipData data = getSemService().getPrimarySemClip(this.mContext.getOpPackageName(), this.mContext.getUserId());
+                SemClipData data =
+                        getSemService()
+                                .getPrimarySemClip(
+                                        this.mContext.getOpPackageName(),
+                                        this.mContext.getUserId());
                 if (data != null) {
                     clipList.add(data);
                 }
@@ -359,7 +412,9 @@ public class SemClipboardManager {
     public SemClipData getClip(String id) throws RemoteException {
         if (isEnabled("getClip") && getSemService() != null) {
             try {
-                return getSemService().getPrimarySemClip(this.mContext.getOpPackageName(), this.mContext.getUserId());
+                return getSemService()
+                        .getPrimarySemClip(
+                                this.mContext.getOpPackageName(), this.mContext.getUserId());
             } catch (RemoteException e) {
                 Log.e(TAG, "RemoteException in getClip, " + e.getMessage());
             }
@@ -376,10 +431,13 @@ public class SemClipboardManager {
                 String imgPath = target.getBitmapPath();
                 if (!TextUtils.isEmpty(imgPath)) {
                     File f = new File(imgPath);
-                    if (f.exists() && !f.getAbsolutePath().contains(ClipboardConstants.CLIPBOARD_ROOT_PATH)) {
+                    if (f.exists()
+                            && !f.getAbsolutePath()
+                                    .contains(ClipboardConstants.CLIPBOARD_ROOT_PATH)) {
                         if (fh.checkFile(f)) {
                             try {
-                                ParcelFileDescriptor pfd = ParcelFileDescriptor.open(f, Dataspace.RANGE_MASK);
+                                ParcelFileDescriptor pfd =
+                                        ParcelFileDescriptor.open(f, Dataspace.RANGE_MASK);
                                 target.setParcelFileDescriptor(pfd);
                             } catch (FileNotFoundException e) {
                                 Log.e(TAG, "makeFileDescriptor(1) Exception : " + e.getMessage());
@@ -402,7 +460,8 @@ public class SemClipboardManager {
                         File f2 = new File(extraPath);
                         if (fh.checkFile(f2)) {
                             try {
-                                ParcelFileDescriptor pfd2 = ParcelFileDescriptor.open(f2, Dataspace.RANGE_MASK);
+                                ParcelFileDescriptor pfd2 =
+                                        ParcelFileDescriptor.open(f2, Dataspace.RANGE_MASK);
                                 target.setExtraParcelFileDescriptor(pfd2);
                             } catch (FileNotFoundException e2) {
                                 Log.e(TAG, "makeFileDescriptor(2) Exception : " + e2.getMessage());
@@ -429,10 +488,13 @@ public class SemClipboardManager {
                 boolean result2 = TextUtils.isEmpty(imgPath2);
                 if (!result2) {
                     File f3 = new File(imgPath2);
-                    if (f3.exists() && !f3.getAbsolutePath().contains(ClipboardConstants.CLIPBOARD_ROOT_PATH)) {
+                    if (f3.exists()
+                            && !f3.getAbsolutePath()
+                                    .contains(ClipboardConstants.CLIPBOARD_ROOT_PATH)) {
                         if (fh.checkFile(f3)) {
                             try {
-                                ParcelFileDescriptor pfd3 = ParcelFileDescriptor.open(f3, Dataspace.RANGE_MASK);
+                                ParcelFileDescriptor pfd3 =
+                                        ParcelFileDescriptor.open(f3, Dataspace.RANGE_MASK);
                                 target2.setParcelFileDescriptor(pfd3);
                             } catch (FileNotFoundException e3) {
                                 Log.e(TAG, "makeFileDescriptor(3) Exception : " + e3.getMessage());
@@ -462,10 +524,13 @@ public class SemClipboardManager {
                 boolean result4 = TextUtils.isEmpty(imgPath3);
                 if (!result4) {
                     File f4 = new File(imgPath3);
-                    if (f4.exists() && !f4.getAbsolutePath().contains(ClipboardConstants.CLIPBOARD_ROOT_PATH)) {
+                    if (f4.exists()
+                            && !f4.getAbsolutePath()
+                                    .contains(ClipboardConstants.CLIPBOARD_ROOT_PATH)) {
                         if (fh.checkFile(f4)) {
                             try {
-                                ParcelFileDescriptor pfd4 = ParcelFileDescriptor.open(f4, Dataspace.RANGE_MASK);
+                                ParcelFileDescriptor pfd4 =
+                                        ParcelFileDescriptor.open(f4, Dataspace.RANGE_MASK);
                                 target3.setParcelFileDescriptor(pfd4);
                             } catch (FileNotFoundException e4) {
                                 Log.e(TAG, "makeFileDescriptor(4) Exception : " + e4.getMessage());

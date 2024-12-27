@@ -7,21 +7,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class GetOutputForAttrResponse implements Parcelable {
-    public static final Parcelable.Creator<GetOutputForAttrResponse> CREATOR = new Parcelable.Creator<GetOutputForAttrResponse>() { // from class: android.media.GetOutputForAttrResponse.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GetOutputForAttrResponse createFromParcel(Parcel _aidl_source) {
-            GetOutputForAttrResponse _aidl_out = new GetOutputForAttrResponse();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<GetOutputForAttrResponse> CREATOR =
+            new Parcelable.Creator<GetOutputForAttrResponse>() { // from class:
+                // android.media.GetOutputForAttrResponse.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GetOutputForAttrResponse createFromParcel(Parcel _aidl_source) {
+                    GetOutputForAttrResponse _aidl_out = new GetOutputForAttrResponse();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public GetOutputForAttrResponse[] newArray(int _aidl_size) {
-            return new GetOutputForAttrResponse[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public GetOutputForAttrResponse[] newArray(int _aidl_size) {
+                    return new GetOutputForAttrResponse[_aidl_size];
+                }
+            };
     public android.media.audio.common.AudioAttributes attr;
     public AudioConfigBase configBase;
     public int[] secondaryOutputs;
@@ -113,7 +115,8 @@ public class GetOutputForAttrResponse implements Parcelable {
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
                 return;
             }
-            this.configBase = (AudioConfigBase) _aidl_parcel.readTypedObject(AudioConfigBase.CREATOR);
+            this.configBase =
+                    (AudioConfigBase) _aidl_parcel.readTypedObject(AudioConfigBase.CREATOR);
             if (_aidl_parcel.dataPosition() - _aidl_start_pos >= _aidl_parcelable_size) {
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
@@ -128,7 +131,10 @@ public class GetOutputForAttrResponse implements Parcelable {
                 }
                 _aidl_parcel.setDataPosition(_aidl_start_pos + _aidl_parcelable_size);
             } else {
-                this.attr = (android.media.audio.common.AudioAttributes) _aidl_parcel.readTypedObject(android.media.audio.common.AudioAttributes.CREATOR);
+                this.attr =
+                        (android.media.audio.common.AudioAttributes)
+                                _aidl_parcel.readTypedObject(
+                                        android.media.audio.common.AudioAttributes.CREATOR);
                 if (_aidl_start_pos > Integer.MAX_VALUE - _aidl_parcelable_size) {
                     throw new BadParcelableException("Overflow in the size of parcelable");
                 }

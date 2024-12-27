@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.RemotableViewMethod;
-import android.widget.RemoteViews;
+
 import com.android.internal.R;
 
 @RemoteViews.RemoteView
@@ -29,14 +29,15 @@ public class AdapterViewFlipper extends AdapterViewAnimator {
         this.mStarted = false;
         this.mVisible = false;
         this.mAdvancedByHost = false;
-        this.mFlipRunnable = new Runnable() { // from class: android.widget.AdapterViewFlipper.1
-            @Override // java.lang.Runnable
-            public void run() {
-                if (AdapterViewFlipper.this.mRunning) {
-                    AdapterViewFlipper.this.showNext();
-                }
-            }
-        };
+        this.mFlipRunnable =
+                new Runnable() { // from class: android.widget.AdapterViewFlipper.1
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        if (AdapterViewFlipper.this.mRunning) {
+                            AdapterViewFlipper.this.showNext();
+                        }
+                    }
+                };
     }
 
     public AdapterViewFlipper(Context context, AttributeSet attrs) {
@@ -47,7 +48,8 @@ public class AdapterViewFlipper extends AdapterViewAnimator {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public AdapterViewFlipper(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public AdapterViewFlipper(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.mFlipInterval = 10000;
         this.mAutoStart = false;
@@ -55,16 +57,20 @@ public class AdapterViewFlipper extends AdapterViewAnimator {
         this.mStarted = false;
         this.mVisible = false;
         this.mAdvancedByHost = false;
-        this.mFlipRunnable = new Runnable() { // from class: android.widget.AdapterViewFlipper.1
-            @Override // java.lang.Runnable
-            public void run() {
-                if (AdapterViewFlipper.this.mRunning) {
-                    AdapterViewFlipper.this.showNext();
-                }
-            }
-        };
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.AdapterViewFlipper, defStyleAttr, defStyleRes);
-        saveAttributeDataForStyleable(context, R.styleable.AdapterViewFlipper, attrs, a, defStyleAttr, defStyleRes);
+        this.mFlipRunnable =
+                new Runnable() { // from class: android.widget.AdapterViewFlipper.1
+                    @Override // java.lang.Runnable
+                    public void run() {
+                        if (AdapterViewFlipper.this.mRunning) {
+                            AdapterViewFlipper.this.showNext();
+                        }
+                    }
+                };
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.AdapterViewFlipper, defStyleAttr, defStyleRes);
+        saveAttributeDataForStyleable(
+                context, R.styleable.AdapterViewFlipper, attrs, a, defStyleAttr, defStyleRes);
         this.mFlipInterval = a.getInt(0, 10000);
         this.mAutoStart = a.getBoolean(1, false);
         this.mLoopViews = true;
@@ -142,7 +148,8 @@ public class AdapterViewFlipper extends AdapterViewAnimator {
     }
 
     private void updateRunning(boolean flipNow) {
-        boolean running = !this.mAdvancedByHost && this.mVisible && this.mStarted && this.mAdapter != null;
+        boolean running =
+                !this.mAdvancedByHost && this.mVisible && this.mStarted && this.mAdapter != null;
         if (running != this.mRunning) {
             if (running) {
                 showOnly(this.mWhichChild, flipNow);
@@ -172,7 +179,8 @@ public class AdapterViewFlipper extends AdapterViewAnimator {
         updateRunning(false);
     }
 
-    @Override // android.widget.AdapterViewAnimator, android.widget.AdapterView, android.view.ViewGroup, android.view.View
+    @Override // android.widget.AdapterViewAnimator, android.widget.AdapterView,
+              // android.view.ViewGroup, android.view.View
     public CharSequence getAccessibilityClassName() {
         return AdapterViewFlipper.class.getName();
     }

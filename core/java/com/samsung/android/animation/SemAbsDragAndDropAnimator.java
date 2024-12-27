@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.animation.Interpolator;
 import android.view.animation.PathInterpolator;
 import android.view.animation.Transformation;
-import com.samsung.android.animation.SemDragAndDropAnimationCore;
 
 @Deprecated
 /* loaded from: classes5.dex */
@@ -103,7 +102,8 @@ public abstract class SemAbsDragAndDropAnimator {
 
     public SemAbsDragAndDropAnimator(Context context, View view) {
         if (context == null || view == null) {
-            throw new RuntimeException("SemDragAndDropGridAnimator constructor arguments cannot be null");
+            throw new RuntimeException(
+                    "SemDragAndDropGridAnimator constructor arguments cannot be null");
         }
         this.mContext = context;
         this.mView = view;
@@ -151,33 +151,42 @@ public abstract class SemAbsDragAndDropAnimator {
             }
             ValueAnimator va = ValueAnimator.ofFloat(0.0f, 1.0f);
             va.setDuration(200L);
-            va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: com.samsung.android.animation.SemAbsDragAndDropAnimator.1
-                @Override // android.animation.ValueAnimator.AnimatorUpdateListener
-                public void onAnimationUpdate(ValueAnimator animator) {
-                    float fraction = animator.getAnimatedFraction();
-                    if (fadeOut) {
-                        SemAbsDragAndDropAnimator.this.mDragHandleAlpha = (int) ((1.0f - fraction) * 255.0f);
-                    } else {
-                        SemAbsDragAndDropAnimator.this.mDragHandleAlpha = (int) (255.0f * fraction);
-                    }
-                    SemAbsDragAndDropAnimator.this.mView.invalidate();
-                }
-            });
-            va.addListener(new AnimatorListenerAdapter() { // from class: com.samsung.android.animation.SemAbsDragAndDropAnimator.2
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationStart(Animator animation) {
-                    SemAbsDragAndDropAnimator.this.mView.setEnabled(false);
-                }
+            va.addUpdateListener(
+                    new ValueAnimator
+                            .AnimatorUpdateListener() { // from class:
+                                                        // com.samsung.android.animation.SemAbsDragAndDropAnimator.1
+                        @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                        public void onAnimationUpdate(ValueAnimator animator) {
+                            float fraction = animator.getAnimatedFraction();
+                            if (fadeOut) {
+                                SemAbsDragAndDropAnimator.this.mDragHandleAlpha =
+                                        (int) ((1.0f - fraction) * 255.0f);
+                            } else {
+                                SemAbsDragAndDropAnimator.this.mDragHandleAlpha =
+                                        (int) (255.0f * fraction);
+                            }
+                            SemAbsDragAndDropAnimator.this.mView.invalidate();
+                        }
+                    });
+            va.addListener(
+                    new AnimatorListenerAdapter() { // from class:
+                                                    // com.samsung.android.animation.SemAbsDragAndDropAnimator.2
+                        @Override // android.animation.AnimatorListenerAdapter,
+                                  // android.animation.Animator.AnimatorListener
+                        public void onAnimationStart(Animator animation) {
+                            SemAbsDragAndDropAnimator.this.mView.setEnabled(false);
+                        }
 
-                @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-                public void onAnimationEnd(Animator animation) {
-                    if (fadeOut) {
-                        SemAbsDragAndDropAnimator.this.setDndModeInternal(false);
-                    }
-                    SemAbsDragAndDropAnimator.this.mDragHandleAlpha = 255;
-                    SemAbsDragAndDropAnimator.this.mView.setEnabled(true);
-                }
-            });
+                        @Override // android.animation.AnimatorListenerAdapter,
+                                  // android.animation.Animator.AnimatorListener
+                        public void onAnimationEnd(Animator animation) {
+                            if (fadeOut) {
+                                SemAbsDragAndDropAnimator.this.setDndModeInternal(false);
+                            }
+                            SemAbsDragAndDropAnimator.this.mDragHandleAlpha = 255;
+                            SemAbsDragAndDropAnimator.this.mView.setEnabled(true);
+                        }
+                    });
             va.setInterpolator(fadeOut ? FADE_OUT_INTERPOLATOR : FADE_IN_INTERPOLATOR);
             va.start();
         }
@@ -238,7 +247,8 @@ public abstract class SemAbsDragAndDropAnimator {
         this.mDragGrabHandlePosGravity = gravity;
     }
 
-    public void setDragGrabHandlePadding(int paddingLeft, int paddingTop, int paddingRight, int paddingBottom) {
+    public void setDragGrabHandlePadding(
+            int paddingLeft, int paddingTop, int paddingRight, int paddingBottom) {
         if (this.mDragGrabHandleDrawable != null) {
             this.mDragGrabHandlePadding.left = paddingLeft;
             this.mDragGrabHandlePadding.top = paddingTop;
@@ -305,8 +315,7 @@ public abstract class SemAbsDragAndDropAnimator {
 
     /* JADX INFO: Access modifiers changed from: private */
     class AutoScrollRunnable implements Runnable {
-        private AutoScrollRunnable() {
-        }
+        private AutoScrollRunnable() {}
 
         @Override // java.lang.Runnable
         public void run() {
@@ -344,7 +353,8 @@ public abstract class SemAbsDragAndDropAnimator {
     }
 
     boolean activatedByLongPress() {
-        return this.mDragGrabHandleDrawable == null || SemAnimatorUtils.isTalkBackEnabled(this.mContext);
+        return this.mDragGrabHandleDrawable == null
+                || SemAnimatorUtils.isTalkBackEnabled(this.mContext);
     }
 
     public void speakDescriptionForAccessibility() {
@@ -354,11 +364,9 @@ public abstract class SemAbsDragAndDropAnimator {
         isDraggable();
     }
 
-    void speakDragReleaseForAccessibility(int itemPosition) {
-    }
+    void speakDragReleaseForAccessibility(int itemPosition) {}
 
-    void speakNotDraggableForAccessibility(int itemPosition) {
-    }
+    void speakNotDraggableForAccessibility(int itemPosition) {}
 
     void speakDragStartForAccessibility(int itemPosition) {
         this.mView.clearAccessibilityFocus();

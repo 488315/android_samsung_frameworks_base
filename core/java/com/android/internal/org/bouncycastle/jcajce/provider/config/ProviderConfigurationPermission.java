@@ -1,6 +1,7 @@
 package com.android.internal.org.bouncycastle.jcajce.provider.config;
 
 import com.android.internal.org.bouncycastle.util.Strings;
+
 import java.security.BasicPermission;
 import java.security.Permission;
 import java.util.StringTokenizer;
@@ -70,7 +71,8 @@ public class ProviderConfigurationPermission extends BasicPermission {
 
     @Override // java.security.BasicPermission, java.security.Permission
     public boolean implies(Permission permission) {
-        if (!(permission instanceof ProviderConfigurationPermission) || !getName().equals(permission.getName())) {
+        if (!(permission instanceof ProviderConfigurationPermission)
+                || !getName().equals(permission.getName())) {
             return false;
         }
         ProviderConfigurationPermission other = (ProviderConfigurationPermission) permission;

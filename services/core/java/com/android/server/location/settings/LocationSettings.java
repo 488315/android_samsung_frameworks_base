@@ -4,6 +4,7 @@ import android.R;
 import android.content.Context;
 import android.os.Environment;
 import android.util.SparseArray;
+
 import java.io.DataInput;
 import java.io.DataInputStream;
 import java.io.File;
@@ -18,7 +19,10 @@ public final class LocationSettings {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public interface LocationUserSettingsListener {
-        void onLocationUserSettingsChanged(int i, LocationUserSettings locationUserSettings, LocationUserSettings locationUserSettings2);
+        void onLocationUserSettingsChanged(
+                int i,
+                LocationUserSettings locationUserSettings,
+                LocationUserSettings locationUserSettings2);
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -30,13 +34,30 @@ public final class LocationSettings {
             this.mUserId = i;
         }
 
-        public final LocationUserSettings filterSettings(LocationUserSettings locationUserSettings) {
-            return (locationUserSettings.mAdasGnssLocationEnabled && !LocationSettings.this.mContext.getPackageManager().hasSystemFeature("android.hardware.type.automotive") && locationUserSettings.mAdasGnssLocationEnabled) ? new LocationUserSettings(false) : locationUserSettings;
+        public final LocationUserSettings filterSettings(
+                LocationUserSettings locationUserSettings) {
+            return (locationUserSettings.mAdasGnssLocationEnabled
+                            && !LocationSettings.this
+                                    .mContext
+                                    .getPackageManager()
+                                    .hasSystemFeature("android.hardware.type.automotive")
+                            && locationUserSettings.mAdasGnssLocationEnabled)
+                    ? new LocationUserSettings(false)
+                    : locationUserSettings;
         }
 
         @Override // com.android.server.location.settings.SettingsStore
         public final LocationUserSettings read(int i, DataInput dataInput) {
-            return filterSettings(new LocationUserSettings(i != 1 ? LocationSettings.this.mContext.getResources().getBoolean(R.bool.config_defaultEmergencyGestureSoundEnabled) : ((DataInputStream) dataInput).readBoolean()));
+            return filterSettings(
+                    new LocationUserSettings(
+                            i != 1
+                                    ? LocationSettings.this
+                                            .mContext
+                                            .getResources()
+                                            .getBoolean(
+                                                    R.bool
+                                                            .config_defaultEmergencyGestureSoundEnabled)
+                                    : ((DataInputStream) dataInput).readBoolean()));
         }
     }
 
@@ -86,7 +107,14 @@ public final class LocationSettings {
             try {
                 locationUserSettingsStore = (LocationUserSettingsStore) this.mUserSettings.get(i);
                 if (locationUserSettingsStore == null) {
-                    LocationUserSettingsStore locationUserSettingsStore2 = new LocationUserSettingsStore(i, new File(new File(Environment.getDataSystemDeDirectory(i), "location"), "settings"));
+                    LocationUserSettingsStore locationUserSettingsStore2 =
+                            new LocationUserSettingsStore(
+                                    i,
+                                    new File(
+                                            new File(
+                                                    Environment.getDataSystemDeDirectory(i),
+                                                    "location"),
+                                            "settings"));
                     this.mUserSettings.put(i, locationUserSettingsStore2);
                     locationUserSettingsStore = locationUserSettingsStore2;
                 }

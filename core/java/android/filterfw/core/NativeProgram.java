@@ -53,11 +53,19 @@ public class NativeProgram extends Program {
         allocate();
         String fullLibName = NativeLibraryHelper.LIB_DIR_NAME + nativeLibName + ".so";
         if (!openNativeLibrary(fullLibName)) {
-            throw new RuntimeException("Could not find native library named '" + fullLibName + "' required for native program!");
+            throw new RuntimeException(
+                    "Could not find native library named '"
+                            + fullLibName
+                            + "' required for native program!");
         }
         String processFuncName = nativeFunctionPrefix + "_process";
         if (!bindProcessFunction(processFuncName)) {
-            throw new RuntimeException("Could not find native program function name " + processFuncName + " in library " + fullLibName + "! This function is required!");
+            throw new RuntimeException(
+                    "Could not find native program function name "
+                            + processFuncName
+                            + " in library "
+                            + fullLibName
+                            + "! This function is required!");
         }
         String initFuncName = nativeFunctionPrefix + "_init";
         this.mHasInitFunction = bindInitFunction(initFuncName);
@@ -106,7 +114,8 @@ public class NativeProgram extends Program {
             if (inputs[i] == null || (inputs[i] instanceof NativeFrame)) {
                 nativeInputs[i] = (NativeFrame) inputs[i];
             } else {
-                throw new RuntimeException("NativeProgram got non-native frame as input " + i + "!");
+                throw new RuntimeException(
+                        "NativeProgram got non-native frame as input " + i + "!");
             }
         }
         if (output == null || (output instanceof NativeFrame)) {
@@ -125,10 +134,13 @@ public class NativeProgram extends Program {
             throw new RuntimeException("NativeProgram already torn down!");
         }
         if (!this.mHasSetValueFunction) {
-            throw new RuntimeException("Attempting to set native variable, but native code does not define native setvalue function!");
+            throw new RuntimeException(
+                    "Attempting to set native variable, but native code does not define native"
+                            + " setvalue function!");
         }
         if (!callNativeSetValue(variableName, value.toString())) {
-            throw new RuntimeException("Error setting native value for variable '" + variableName + "'!");
+            throw new RuntimeException(
+                    "Error setting native value for variable '" + variableName + "'!");
         }
     }
 
@@ -138,7 +150,9 @@ public class NativeProgram extends Program {
             throw new RuntimeException("NativeProgram already torn down!");
         }
         if (!this.mHasGetValueFunction) {
-            throw new RuntimeException("Attempting to get native variable, but native code does not define native getvalue function!");
+            throw new RuntimeException(
+                    "Attempting to get native variable, but native code does not define native"
+                            + " getvalue function!");
         }
         return callNativeGetValue(variableName);
     }

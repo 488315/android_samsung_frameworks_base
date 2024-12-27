@@ -8,6 +8,7 @@ import android.provider.Settings;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.SparseArray;
+
 import com.android.server.LocalServices;
 import com.android.server.pm.UserManagerInternal;
 
@@ -33,12 +34,10 @@ public abstract class SecureSettingsWrapper {
         }
 
         @Override // com.android.server.inputmethod.SecureSettingsWrapper.ReaderWriter
-        public final void putInt(int i, String str) {
-        }
+        public final void putInt(int i, String str) {}
 
         @Override // com.android.server.inputmethod.SecureSettingsWrapper.ReaderWriter
-        public final void putString(String str, String str2) {
-        }
+        public final void putString(String str, String str2) {}
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -50,7 +49,8 @@ public abstract class SecureSettingsWrapper {
             this.mNonPersistentKeyValues = new ArrayMap();
         }
 
-        @Override // com.android.server.inputmethod.SecureSettingsWrapper.UnlockedUserImpl, com.android.server.inputmethod.SecureSettingsWrapper.ReaderWriter
+        @Override // com.android.server.inputmethod.SecureSettingsWrapper.UnlockedUserImpl,
+                  // com.android.server.inputmethod.SecureSettingsWrapper.ReaderWriter
         public final int getInt(int i, String str) {
             synchronized (this.mNonPersistentKeyValues) {
                 try {
@@ -68,7 +68,8 @@ public abstract class SecureSettingsWrapper {
             }
         }
 
-        @Override // com.android.server.inputmethod.SecureSettingsWrapper.UnlockedUserImpl, com.android.server.inputmethod.SecureSettingsWrapper.ReaderWriter
+        @Override // com.android.server.inputmethod.SecureSettingsWrapper.UnlockedUserImpl,
+                  // com.android.server.inputmethod.SecureSettingsWrapper.ReaderWriter
         public final String getString(String str, String str2) {
             synchronized (this.mNonPersistentKeyValues) {
                 try {
@@ -86,14 +87,16 @@ public abstract class SecureSettingsWrapper {
             }
         }
 
-        @Override // com.android.server.inputmethod.SecureSettingsWrapper.UnlockedUserImpl, com.android.server.inputmethod.SecureSettingsWrapper.ReaderWriter
+        @Override // com.android.server.inputmethod.SecureSettingsWrapper.UnlockedUserImpl,
+                  // com.android.server.inputmethod.SecureSettingsWrapper.ReaderWriter
         public final void putInt(int i, String str) {
             synchronized (this.mNonPersistentKeyValues) {
                 this.mNonPersistentKeyValues.put(str, String.valueOf(i));
             }
         }
 
-        @Override // com.android.server.inputmethod.SecureSettingsWrapper.UnlockedUserImpl, com.android.server.inputmethod.SecureSettingsWrapper.ReaderWriter
+        @Override // com.android.server.inputmethod.SecureSettingsWrapper.UnlockedUserImpl,
+                  // com.android.server.inputmethod.SecureSettingsWrapper.ReaderWriter
         public final void putString(String str, String str2) {
             synchronized (this.mNonPersistentKeyValues) {
                 this.mNonPersistentKeyValues.put(str, str2);
@@ -129,7 +132,8 @@ public abstract class SecureSettingsWrapper {
 
         @Override // com.android.server.inputmethod.SecureSettingsWrapper.ReaderWriter
         public String getString(String str, String str2) {
-            String stringForUser = Settings.Secure.getStringForUser(this.mContentResolver, str, this.mUserId);
+            String stringForUser =
+                    Settings.Secure.getStringForUser(this.mContentResolver, str, this.mUserId);
             return stringForUser != null ? stringForUser : str2;
         }
 
@@ -138,7 +142,9 @@ public abstract class SecureSettingsWrapper {
             boolean contains = SecureSettingsWrapper.CLONE_TO_MANAGED_PROFILE.contains(str);
             int i2 = this.mUserId;
             if (contains) {
-                i2 = ((UserManagerInternal) LocalServices.getService(UserManagerInternal.class)).getProfileParentId(i2);
+                i2 =
+                        ((UserManagerInternal) LocalServices.getService(UserManagerInternal.class))
+                                .getProfileParentId(i2);
             }
             Settings.Secure.putIntForUser(this.mContentResolver, str, i, i2);
         }
@@ -148,7 +154,9 @@ public abstract class SecureSettingsWrapper {
             boolean contains = SecureSettingsWrapper.CLONE_TO_MANAGED_PROFILE.contains(str);
             int i = this.mUserId;
             if (contains) {
-                i = ((UserManagerInternal) LocalServices.getService(UserManagerInternal.class)).getProfileParentId(i);
+                i =
+                        ((UserManagerInternal) LocalServices.getService(UserManagerInternal.class))
+                                .getProfileParentId(i);
             }
             Settings.Secure.putStringForUser(this.mContentResolver, str, str2, i);
         }
@@ -163,7 +171,9 @@ public abstract class SecureSettingsWrapper {
     }
 
     public static UnlockedUserImpl createImpl(UserManagerInternal userManagerInternal, int i) {
-        return userManagerInternal.isUserUnlockingOrUnlocked(i) ? new UnlockedUserImpl(i, sContentResolver) : new LockedUserImpl(i, sContentResolver);
+        return userManagerInternal.isUserUnlockingOrUnlocked(i)
+                ? new UnlockedUserImpl(i, sContentResolver)
+                : new LockedUserImpl(i, sContentResolver);
     }
 
     public static ReaderWriter get(int i) {
@@ -174,8 +184,11 @@ public abstract class SecureSettingsWrapper {
                 if (readerWriter != null) {
                     return readerWriter;
                 }
-                UserManagerInternal userManagerInternal = (UserManagerInternal) LocalServices.getService(UserManagerInternal.class);
-                return !userManagerInternal.exists(i) ? NOOP : putOrGet(i, createImpl(userManagerInternal, i));
+                UserManagerInternal userManagerInternal =
+                        (UserManagerInternal) LocalServices.getService(UserManagerInternal.class);
+                return !userManagerInternal.exists(i)
+                        ? NOOP
+                        : putOrGet(i, createImpl(userManagerInternal, i));
             } catch (Throwable th) {
                 throw th;
             }
@@ -192,18 +205,24 @@ public abstract class SecureSettingsWrapper {
 
     public static void onStart(Context context) {
         sContentResolver = context.getContentResolver();
-        final int currentUserId = ((ActivityManagerInternal) LocalServices.getService(ActivityManagerInternal.class)).getCurrentUserId();
-        UserManagerInternal userManagerInternal = (UserManagerInternal) LocalServices.getService(UserManagerInternal.class);
+        final int currentUserId =
+                ((ActivityManagerInternal) LocalServices.getService(ActivityManagerInternal.class))
+                        .getCurrentUserId();
+        UserManagerInternal userManagerInternal =
+                (UserManagerInternal) LocalServices.getService(UserManagerInternal.class);
         putOrGet(currentUserId, createImpl(userManagerInternal, currentUserId));
-        userManagerInternal.addUserLifecycleListener(new UserManagerInternal.UserLifecycleListener() { // from class: com.android.server.inputmethod.SecureSettingsWrapper.2
-            @Override // com.android.server.pm.UserManagerInternal.UserLifecycleListener
-            public final void onUserRemoved(UserInfo userInfo) {
-                SparseArray sparseArray = SecureSettingsWrapper.sUserMap;
-                synchronized (sparseArray) {
-                    sparseArray.remove(currentUserId);
-                }
-            }
-        });
+        userManagerInternal.addUserLifecycleListener(
+                new UserManagerInternal
+                        .UserLifecycleListener() { // from class:
+                                                   // com.android.server.inputmethod.SecureSettingsWrapper.2
+                    @Override // com.android.server.pm.UserManagerInternal.UserLifecycleListener
+                    public final void onUserRemoved(UserInfo userInfo) {
+                        SparseArray sparseArray = SecureSettingsWrapper.sUserMap;
+                        synchronized (sparseArray) {
+                            sparseArray.remove(currentUserId);
+                        }
+                    }
+                });
     }
 
     public static ReaderWriter putOrGet(int i, UnlockedUserImpl unlockedUserImpl) {

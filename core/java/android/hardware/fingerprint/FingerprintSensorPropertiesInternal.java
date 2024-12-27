@@ -5,37 +5,74 @@ import android.hardware.biometrics.SensorLocationInternal;
 import android.hardware.biometrics.SensorPropertiesInternal;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.logging.nano.MetricsProto;
+
 import java.util.List;
 
 /* loaded from: classes2.dex */
 public class FingerprintSensorPropertiesInternal extends SensorPropertiesInternal {
-    public static final Parcelable.Creator<FingerprintSensorPropertiesInternal> CREATOR = new Parcelable.Creator<FingerprintSensorPropertiesInternal>() { // from class: android.hardware.fingerprint.FingerprintSensorPropertiesInternal.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FingerprintSensorPropertiesInternal createFromParcel(Parcel in) {
-            return new FingerprintSensorPropertiesInternal(in);
-        }
+    public static final Parcelable.Creator<FingerprintSensorPropertiesInternal> CREATOR =
+            new Parcelable.Creator<FingerprintSensorPropertiesInternal>() { // from class:
+                // android.hardware.fingerprint.FingerprintSensorPropertiesInternal.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FingerprintSensorPropertiesInternal createFromParcel(Parcel in) {
+                    return new FingerprintSensorPropertiesInternal(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public FingerprintSensorPropertiesInternal[] newArray(int size) {
-            return new FingerprintSensorPropertiesInternal[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public FingerprintSensorPropertiesInternal[] newArray(int size) {
+                    return new FingerprintSensorPropertiesInternal[size];
+                }
+            };
     public final boolean halControlsIllumination;
     private final List<SensorLocationInternal> mSensorLocations;
     public final int sensorType;
 
-    public FingerprintSensorPropertiesInternal(int sensorId, int strength, int maxEnrollmentsPerUser, List<ComponentInfoInternal> componentInfo, int sensorType, boolean halControlsIllumination, boolean resetLockoutRequiresHardwareAuthToken, List<SensorLocationInternal> sensorLocations) {
-        super(sensorId, strength, maxEnrollmentsPerUser, componentInfo, resetLockoutRequiresHardwareAuthToken, false);
+    public FingerprintSensorPropertiesInternal(
+            int sensorId,
+            int strength,
+            int maxEnrollmentsPerUser,
+            List<ComponentInfoInternal> componentInfo,
+            int sensorType,
+            boolean halControlsIllumination,
+            boolean resetLockoutRequiresHardwareAuthToken,
+            List<SensorLocationInternal> sensorLocations) {
+        super(
+                sensorId,
+                strength,
+                maxEnrollmentsPerUser,
+                componentInfo,
+                resetLockoutRequiresHardwareAuthToken,
+                false);
         this.sensorType = sensorType;
         this.halControlsIllumination = halControlsIllumination;
         this.mSensorLocations = List.copyOf(sensorLocations);
     }
 
-    public FingerprintSensorPropertiesInternal(int sensorId, int strength, int maxEnrollmentsPerUser, List<ComponentInfoInternal> componentInfo, int sensorType, boolean resetLockoutRequiresHardwareAuthToken) {
-        this(sensorId, strength, maxEnrollmentsPerUser, componentInfo, sensorType, false, resetLockoutRequiresHardwareAuthToken, List.of(new SensorLocationInternal("", 540, MetricsProto.MetricsEvent.FIELD_TEXT_CLASSIFIER_SECOND_ENTITY_TYPE, 130)));
+    public FingerprintSensorPropertiesInternal(
+            int sensorId,
+            int strength,
+            int maxEnrollmentsPerUser,
+            List<ComponentInfoInternal> componentInfo,
+            int sensorType,
+            boolean resetLockoutRequiresHardwareAuthToken) {
+        this(
+                sensorId,
+                strength,
+                maxEnrollmentsPerUser,
+                componentInfo,
+                sensorType,
+                false,
+                resetLockoutRequiresHardwareAuthToken,
+                List.of(
+                        new SensorLocationInternal(
+                                "",
+                                540,
+                                MetricsProto.MetricsEvent.FIELD_TEXT_CLASSIFIER_SECOND_ENTITY_TYPE,
+                                130)));
     }
 
     protected FingerprintSensorPropertiesInternal(Parcel in) {
@@ -109,6 +146,11 @@ public class FingerprintSensorPropertiesInternal extends SensorPropertiesInterna
 
     @Override // android.hardware.biometrics.SensorPropertiesInternal
     public String toString() {
-        return "ID: " + this.sensorId + ", Strength: " + this.sensorStrength + ", Type: " + this.sensorType;
+        return "ID: "
+                + this.sensorId
+                + ", Strength: "
+                + this.sensorStrength
+                + ", Type: "
+                + this.sensorType;
     }
 }

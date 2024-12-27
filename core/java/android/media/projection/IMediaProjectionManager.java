@@ -2,8 +2,6 @@ package android.media.projection;
 
 import android.Manifest;
 import android.app.ActivityThread;
-import android.media.projection.IMediaProjection;
-import android.media.projection.IMediaProjectionWatcherCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -14,10 +12,13 @@ import android.view.ContentRecordingSession;
 
 /* loaded from: classes2.dex */
 public interface IMediaProjectionManager extends IInterface {
-    public static final String EXTRA_PACKAGE_REUSING_GRANTED_CONSENT = "extra_media_projection_package_reusing_consent";
-    public static final String EXTRA_USER_REVIEW_GRANTED_CONSENT = "extra_media_projection_user_consent_required";
+    public static final String EXTRA_PACKAGE_REUSING_GRANTED_CONSENT =
+            "extra_media_projection_package_reusing_consent";
+    public static final String EXTRA_USER_REVIEW_GRANTED_CONSENT =
+            "extra_media_projection_user_consent_required";
 
-    MediaProjectionInfo addCallback(IMediaProjectionWatcherCallback iMediaProjectionWatcherCallback) throws RemoteException;
+    MediaProjectionInfo addCallback(IMediaProjectionWatcherCallback iMediaProjectionWatcherCallback)
+            throws RemoteException;
 
     IMediaProjection createProjection(int i, String str, int i2, boolean z) throws RemoteException;
 
@@ -43,29 +44,38 @@ public interface IMediaProjectionManager extends IInterface {
 
     void notifyWindowingModeChanged(int i, int i2, int i3) throws RemoteException;
 
-    void removeCallback(IMediaProjectionWatcherCallback iMediaProjectionWatcherCallback) throws RemoteException;
+    void removeCallback(IMediaProjectionWatcherCallback iMediaProjectionWatcherCallback)
+            throws RemoteException;
 
-    void requestConsentForInvalidProjection(IMediaProjection iMediaProjection) throws RemoteException;
+    void requestConsentForInvalidProjection(IMediaProjection iMediaProjection)
+            throws RemoteException;
 
-    boolean setContentRecordingSession(ContentRecordingSession contentRecordingSession, IMediaProjection iMediaProjection) throws RemoteException;
+    boolean setContentRecordingSession(
+            ContentRecordingSession contentRecordingSession, IMediaProjection iMediaProjection)
+            throws RemoteException;
 
-    void setUserReviewGrantedConsentResult(int i, IMediaProjection iMediaProjection) throws RemoteException;
+    void setUserReviewGrantedConsentResult(int i, IMediaProjection iMediaProjection)
+            throws RemoteException;
 
     void stopActiveProjection() throws RemoteException;
 
     public static class Default implements IMediaProjectionManager {
         @Override // android.media.projection.IMediaProjectionManager
-        public boolean hasProjectionPermission(int processUid, String packageName) throws RemoteException {
+        public boolean hasProjectionPermission(int processUid, String packageName)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.media.projection.IMediaProjectionManager
-        public IMediaProjection createProjection(int processUid, String packageName, int type, boolean permanentGrant) throws RemoteException {
+        public IMediaProjection createProjection(
+                int processUid, String packageName, int type, boolean permanentGrant)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.media.projection.IMediaProjectionManager
-        public IMediaProjection getProjection(int processUid, String packageName) throws RemoteException {
+        public IMediaProjection getProjection(int processUid, String packageName)
+                throws RemoteException {
             return null;
         }
 
@@ -75,8 +85,8 @@ public interface IMediaProjectionManager extends IInterface {
         }
 
         @Override // android.media.projection.IMediaProjectionManager
-        public void requestConsentForInvalidProjection(IMediaProjection projection) throws RemoteException {
-        }
+        public void requestConsentForInvalidProjection(IMediaProjection projection)
+                throws RemoteException {}
 
         @Override // android.media.projection.IMediaProjectionManager
         public MediaProjectionInfo getActiveProjectionInfo() throws RemoteException {
@@ -84,54 +94,54 @@ public interface IMediaProjectionManager extends IInterface {
         }
 
         @Override // android.media.projection.IMediaProjectionManager
-        public void stopActiveProjection() throws RemoteException {
-        }
+        public void stopActiveProjection() throws RemoteException {}
 
         @Override // android.media.projection.IMediaProjectionManager
-        public void notifyActiveProjectionCapturedContentResized(int width, int height) throws RemoteException {
-        }
+        public void notifyActiveProjectionCapturedContentResized(int width, int height)
+                throws RemoteException {}
 
         @Override // android.media.projection.IMediaProjectionManager
-        public void notifyActiveProjectionCapturedContentVisibilityChanged(boolean isVisible) throws RemoteException {
-        }
+        public void notifyActiveProjectionCapturedContentVisibilityChanged(boolean isVisible)
+                throws RemoteException {}
 
         @Override // android.media.projection.IMediaProjectionManager
-        public MediaProjectionInfo addCallback(IMediaProjectionWatcherCallback callback) throws RemoteException {
+        public MediaProjectionInfo addCallback(IMediaProjectionWatcherCallback callback)
+                throws RemoteException {
             return null;
         }
 
         @Override // android.media.projection.IMediaProjectionManager
-        public void removeCallback(IMediaProjectionWatcherCallback callback) throws RemoteException {
-        }
+        public void removeCallback(IMediaProjectionWatcherCallback callback)
+                throws RemoteException {}
 
         @Override // android.media.projection.IMediaProjectionManager
-        public boolean setContentRecordingSession(ContentRecordingSession incomingSession, IMediaProjection projection) throws RemoteException {
+        public boolean setContentRecordingSession(
+                ContentRecordingSession incomingSession, IMediaProjection projection)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.media.projection.IMediaProjectionManager
-        public void setUserReviewGrantedConsentResult(int consentResult, IMediaProjection projection) throws RemoteException {
-        }
+        public void setUserReviewGrantedConsentResult(
+                int consentResult, IMediaProjection projection) throws RemoteException {}
 
         @Override // android.media.projection.IMediaProjectionManager
-        public void notifyPermissionRequestInitiated(int hostProcessUid, int sessionCreationSource) throws RemoteException {
-        }
+        public void notifyPermissionRequestInitiated(int hostProcessUid, int sessionCreationSource)
+                throws RemoteException {}
 
         @Override // android.media.projection.IMediaProjectionManager
-        public void notifyPermissionRequestDisplayed(int hostProcessUid) throws RemoteException {
-        }
+        public void notifyPermissionRequestDisplayed(int hostProcessUid) throws RemoteException {}
 
         @Override // android.media.projection.IMediaProjectionManager
-        public void notifyPermissionRequestCancelled(int hostProcessUid) throws RemoteException {
-        }
+        public void notifyPermissionRequestCancelled(int hostProcessUid) throws RemoteException {}
 
         @Override // android.media.projection.IMediaProjectionManager
-        public void notifyAppSelectorDisplayed(int hostProcessUid) throws RemoteException {
-        }
+        public void notifyAppSelectorDisplayed(int hostProcessUid) throws RemoteException {}
 
         @Override // android.media.projection.IMediaProjectionManager
-        public void notifyWindowingModeChanged(int contentToRecord, int targetProcessUid, int windowingMode) throws RemoteException {
-        }
+        public void notifyWindowingModeChanged(
+                int contentToRecord, int targetProcessUid, int windowingMode)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -139,7 +149,7 @@ public interface IMediaProjectionManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IMediaProjectionManager {
+    public abstract static class Stub extends Binder implements IMediaProjectionManager {
         public static final String DESCRIPTOR = "android.media.projection.IMediaProjectionManager";
         static final int TRANSACTION_addCallback = 10;
         static final int TRANSACTION_createProjection = 2;
@@ -171,7 +181,9 @@ public interface IMediaProjectionManager extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static IMediaProjectionManager asInterface(IBinder obj) {
@@ -239,7 +251,8 @@ public interface IMediaProjectionManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -275,14 +288,16 @@ public interface IMediaProjectionManager extends IInterface {
                     reply.writeStrongInterface(_result3);
                     return true;
                 case 4:
-                    IMediaProjection _arg04 = IMediaProjection.Stub.asInterface(data.readStrongBinder());
+                    IMediaProjection _arg04 =
+                            IMediaProjection.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result4 = isCurrentProjection(_arg04);
                     reply.writeNoException();
                     reply.writeBoolean(_result4);
                     return true;
                 case 5:
-                    IMediaProjection _arg05 = IMediaProjection.Stub.asInterface(data.readStrongBinder());
+                    IMediaProjection _arg05 =
+                            IMediaProjection.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     requestConsentForInvalidProjection(_arg05);
                     reply.writeNoException();
@@ -310,21 +325,28 @@ public interface IMediaProjectionManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 10:
-                    IMediaProjectionWatcherCallback _arg08 = IMediaProjectionWatcherCallback.Stub.asInterface(data.readStrongBinder());
+                    IMediaProjectionWatcherCallback _arg08 =
+                            IMediaProjectionWatcherCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     MediaProjectionInfo _result6 = addCallback(_arg08);
                     reply.writeNoException();
                     reply.writeTypedObject(_result6, 1);
                     return true;
                 case 11:
-                    IMediaProjectionWatcherCallback _arg09 = IMediaProjectionWatcherCallback.Stub.asInterface(data.readStrongBinder());
+                    IMediaProjectionWatcherCallback _arg09 =
+                            IMediaProjectionWatcherCallback.Stub.asInterface(
+                                    data.readStrongBinder());
                     data.enforceNoDataAvail();
                     removeCallback(_arg09);
                     reply.writeNoException();
                     return true;
                 case 12:
-                    ContentRecordingSession _arg010 = (ContentRecordingSession) data.readTypedObject(ContentRecordingSession.CREATOR);
-                    IMediaProjection _arg15 = IMediaProjection.Stub.asInterface(data.readStrongBinder());
+                    ContentRecordingSession _arg010 =
+                            (ContentRecordingSession)
+                                    data.readTypedObject(ContentRecordingSession.CREATOR);
+                    IMediaProjection _arg15 =
+                            IMediaProjection.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     boolean _result7 = setContentRecordingSession(_arg010, _arg15);
                     reply.writeNoException();
@@ -332,7 +354,8 @@ public interface IMediaProjectionManager extends IInterface {
                     return true;
                 case 13:
                     int _arg011 = data.readInt();
-                    IMediaProjection _arg16 = IMediaProjection.Stub.asInterface(data.readStrongBinder());
+                    IMediaProjection _arg16 =
+                            IMediaProjection.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setUserReviewGrantedConsentResult(_arg011, _arg16);
                     reply.writeNoException();
@@ -388,7 +411,8 @@ public interface IMediaProjectionManager extends IInterface {
             }
 
             @Override // android.media.projection.IMediaProjectionManager
-            public boolean hasProjectionPermission(int processUid, String packageName) throws RemoteException {
+            public boolean hasProjectionPermission(int processUid, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -406,7 +430,9 @@ public interface IMediaProjectionManager extends IInterface {
             }
 
             @Override // android.media.projection.IMediaProjectionManager
-            public IMediaProjection createProjection(int processUid, String packageName, int type, boolean permanentGrant) throws RemoteException {
+            public IMediaProjection createProjection(
+                    int processUid, String packageName, int type, boolean permanentGrant)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -417,7 +443,8 @@ public interface IMediaProjectionManager extends IInterface {
                     _data.writeBoolean(permanentGrant);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    IMediaProjection _result = IMediaProjection.Stub.asInterface(_reply.readStrongBinder());
+                    IMediaProjection _result =
+                            IMediaProjection.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -426,7 +453,8 @@ public interface IMediaProjectionManager extends IInterface {
             }
 
             @Override // android.media.projection.IMediaProjectionManager
-            public IMediaProjection getProjection(int processUid, String packageName) throws RemoteException {
+            public IMediaProjection getProjection(int processUid, String packageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -435,7 +463,8 @@ public interface IMediaProjectionManager extends IInterface {
                     _data.writeString(packageName);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    IMediaProjection _result = IMediaProjection.Stub.asInterface(_reply.readStrongBinder());
+                    IMediaProjection _result =
+                            IMediaProjection.Stub.asInterface(_reply.readStrongBinder());
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -461,7 +490,8 @@ public interface IMediaProjectionManager extends IInterface {
             }
 
             @Override // android.media.projection.IMediaProjectionManager
-            public void requestConsentForInvalidProjection(IMediaProjection projection) throws RemoteException {
+            public void requestConsentForInvalidProjection(IMediaProjection projection)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -483,7 +513,9 @@ public interface IMediaProjectionManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(6, _data, _reply, 0);
                     _reply.readException();
-                    MediaProjectionInfo _result = (MediaProjectionInfo) _reply.readTypedObject(MediaProjectionInfo.CREATOR);
+                    MediaProjectionInfo _result =
+                            (MediaProjectionInfo)
+                                    _reply.readTypedObject(MediaProjectionInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -506,7 +538,8 @@ public interface IMediaProjectionManager extends IInterface {
             }
 
             @Override // android.media.projection.IMediaProjectionManager
-            public void notifyActiveProjectionCapturedContentResized(int width, int height) throws RemoteException {
+            public void notifyActiveProjectionCapturedContentResized(int width, int height)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -522,7 +555,8 @@ public interface IMediaProjectionManager extends IInterface {
             }
 
             @Override // android.media.projection.IMediaProjectionManager
-            public void notifyActiveProjectionCapturedContentVisibilityChanged(boolean isVisible) throws RemoteException {
+            public void notifyActiveProjectionCapturedContentVisibilityChanged(boolean isVisible)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -537,7 +571,8 @@ public interface IMediaProjectionManager extends IInterface {
             }
 
             @Override // android.media.projection.IMediaProjectionManager
-            public MediaProjectionInfo addCallback(IMediaProjectionWatcherCallback callback) throws RemoteException {
+            public MediaProjectionInfo addCallback(IMediaProjectionWatcherCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -545,7 +580,9 @@ public interface IMediaProjectionManager extends IInterface {
                     _data.writeStrongInterface(callback);
                     this.mRemote.transact(10, _data, _reply, 0);
                     _reply.readException();
-                    MediaProjectionInfo _result = (MediaProjectionInfo) _reply.readTypedObject(MediaProjectionInfo.CREATOR);
+                    MediaProjectionInfo _result =
+                            (MediaProjectionInfo)
+                                    _reply.readTypedObject(MediaProjectionInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -554,7 +591,8 @@ public interface IMediaProjectionManager extends IInterface {
             }
 
             @Override // android.media.projection.IMediaProjectionManager
-            public void removeCallback(IMediaProjectionWatcherCallback callback) throws RemoteException {
+            public void removeCallback(IMediaProjectionWatcherCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -569,7 +607,9 @@ public interface IMediaProjectionManager extends IInterface {
             }
 
             @Override // android.media.projection.IMediaProjectionManager
-            public boolean setContentRecordingSession(ContentRecordingSession incomingSession, IMediaProjection projection) throws RemoteException {
+            public boolean setContentRecordingSession(
+                    ContentRecordingSession incomingSession, IMediaProjection projection)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -587,7 +627,8 @@ public interface IMediaProjectionManager extends IInterface {
             }
 
             @Override // android.media.projection.IMediaProjectionManager
-            public void setUserReviewGrantedConsentResult(int consentResult, IMediaProjection projection) throws RemoteException {
+            public void setUserReviewGrantedConsentResult(
+                    int consentResult, IMediaProjection projection) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -603,7 +644,8 @@ public interface IMediaProjectionManager extends IInterface {
             }
 
             @Override // android.media.projection.IMediaProjectionManager
-            public void notifyPermissionRequestInitiated(int hostProcessUid, int sessionCreationSource) throws RemoteException {
+            public void notifyPermissionRequestInitiated(
+                    int hostProcessUid, int sessionCreationSource) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -616,7 +658,8 @@ public interface IMediaProjectionManager extends IInterface {
             }
 
             @Override // android.media.projection.IMediaProjectionManager
-            public void notifyPermissionRequestDisplayed(int hostProcessUid) throws RemoteException {
+            public void notifyPermissionRequestDisplayed(int hostProcessUid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -628,7 +671,8 @@ public interface IMediaProjectionManager extends IInterface {
             }
 
             @Override // android.media.projection.IMediaProjectionManager
-            public void notifyPermissionRequestCancelled(int hostProcessUid) throws RemoteException {
+            public void notifyPermissionRequestCancelled(int hostProcessUid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -652,7 +696,9 @@ public interface IMediaProjectionManager extends IInterface {
             }
 
             @Override // android.media.projection.IMediaProjectionManager
-            public void notifyWindowingModeChanged(int contentToRecord, int targetProcessUid, int windowingMode) throws RemoteException {
+            public void notifyWindowingModeChanged(
+                    int contentToRecord, int targetProcessUid, int windowingMode)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -670,59 +716,80 @@ public interface IMediaProjectionManager extends IInterface {
         }
 
         protected void getProjection_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
         }
 
         protected void isCurrentProjection_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
         }
 
-        protected void requestConsentForInvalidProjection_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
+        protected void requestConsentForInvalidProjection_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
         }
 
         protected void stopActiveProjection_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
         }
 
-        protected void notifyActiveProjectionCapturedContentResized_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
+        protected void notifyActiveProjectionCapturedContentResized_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
         }
 
-        protected void notifyActiveProjectionCapturedContentVisibilityChanged_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
+        protected void notifyActiveProjectionCapturedContentVisibilityChanged_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
         }
 
         protected void addCallback_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
         }
 
         protected void setContentRecordingSession_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
         }
 
-        protected void setUserReviewGrantedConsentResult_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
+        protected void setUserReviewGrantedConsentResult_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
         }
 
-        protected void notifyPermissionRequestInitiated_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
+        protected void notifyPermissionRequestInitiated_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
         }
 
-        protected void notifyPermissionRequestDisplayed_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
+        protected void notifyPermissionRequestDisplayed_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
         }
 
-        protected void notifyPermissionRequestCancelled_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
+        protected void notifyPermissionRequestCancelled_enforcePermission()
+                throws SecurityException {
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
         }
 
         protected void notifyAppSelectorDisplayed_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
         }
 
         protected void notifyWindowingModeChanged_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.MANAGE_MEDIA_PROJECTION, getCallingPid(), getCallingUid());
         }
 
         @Override // android.os.Binder

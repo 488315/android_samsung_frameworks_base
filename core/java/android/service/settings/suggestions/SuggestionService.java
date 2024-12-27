@@ -4,7 +4,7 @@ import android.annotation.SystemApi;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.service.settings.suggestions.ISuggestionService;
+
 import java.util.List;
 
 @SystemApi
@@ -21,7 +21,8 @@ public abstract class SuggestionService extends Service {
 
     @Override // android.app.Service
     public IBinder onBind(Intent intent) {
-        return new ISuggestionService.Stub() { // from class: android.service.settings.suggestions.SuggestionService.1
+        return new ISuggestionService
+                .Stub() { // from class: android.service.settings.suggestions.SuggestionService.1
             @Override // android.service.settings.suggestions.ISuggestionService
             public List<Suggestion> getSuggestions() {
                 return SuggestionService.this.onGetSuggestions();

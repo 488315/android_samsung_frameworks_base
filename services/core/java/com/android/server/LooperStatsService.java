@@ -14,11 +14,13 @@ import android.provider.Settings;
 import android.text.format.DateFormat;
 import android.util.KeyValueListParser;
 import android.util.Slog;
+
 import com.android.internal.os.AppIdToPackageMap;
 import com.android.internal.os.BackgroundThread;
 import com.android.internal.os.CachedDeviceState;
 import com.android.internal.os.LooperStats;
 import com.android.internal.util.DumpUtils;
+
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.Arrays;
@@ -46,7 +48,8 @@ public final class LooperStatsService extends Binder {
             super(context);
             LooperStats looperStats = new LooperStats(1000, NetworkConstants.ETHER_MTU);
             this.mStats = looperStats;
-            LooperStatsService looperStatsService = new LooperStatsService(getContext(), looperStats);
+            LooperStatsService looperStatsService =
+                    new LooperStatsService(getContext(), looperStats);
             this.mService = looperStatsService;
             this.mSettingsObserver = new SettingsObserver(looperStatsService);
         }
@@ -55,8 +58,16 @@ public final class LooperStatsService extends Binder {
         public final void onBootPhase(int i) {
             if (500 == i) {
                 LooperStatsService.m67$$Nest$minitFromSettings(this.mService);
-                getContext().getContentResolver().registerContentObserver(Settings.Global.getUriFor("looper_stats"), false, this.mSettingsObserver, 0);
-                this.mStats.setDeviceState((CachedDeviceState.Readonly) getLocalService(CachedDeviceState.Readonly.class));
+                getContext()
+                        .getContentResolver()
+                        .registerContentObserver(
+                                Settings.Global.getUriFor("looper_stats"),
+                                false,
+                                this.mSettingsObserver,
+                                0);
+                this.mStats.setDeviceState(
+                        (CachedDeviceState.Readonly)
+                                getLocalService(CachedDeviceState.Readonly.class));
             }
         }
 
@@ -69,8 +80,7 @@ public final class LooperStatsService extends Binder {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class LooperShellCommand extends ShellCommand {
-        public LooperShellCommand() {
-        }
+        public LooperShellCommand() {}
 
         public final int onCommand(String str) {
             if ("enable".equals(str)) {
@@ -94,7 +104,10 @@ public final class LooperStatsService extends Binder {
                 looperStatsService.mStats.setSamplingInterval(parseUnsignedInt);
             } else {
                 looperStatsService.getClass();
-                Slog.w("LooperStatsService", "Ignored invalid sampling interval (value must be positive): " + parseUnsignedInt);
+                Slog.w(
+                        "LooperStatsService",
+                        "Ignored invalid sampling interval (value must be positive): "
+                                + parseUnsignedInt);
             }
             return 0;
         }
@@ -129,7 +142,9 @@ public final class LooperStatsService extends Binder {
         looperStatsService.getClass();
         KeyValueListParser keyValueListParser = new KeyValueListParser(',');
         try {
-            keyValueListParser.setString(Settings.Global.getString(looperStatsService.mContext.getContentResolver(), "looper_stats"));
+            keyValueListParser.setString(
+                    Settings.Global.getString(
+                            looperStatsService.mContext.getContentResolver(), "looper_stats"));
         } catch (IllegalArgumentException e) {
             Slog.e("LooperStatsService", "Bad looper_stats settings", e);
         }
@@ -137,7 +152,10 @@ public final class LooperStatsService extends Binder {
         if (i > 0) {
             looperStatsService.mStats.setSamplingInterval(i);
         } else {
-            DeviceIdleController$$ExternalSyntheticOutline0.m(i, "Ignored invalid sampling interval (value must be positive): ", "LooperStatsService");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    i,
+                    "Ignored invalid sampling interval (value must be positive): ",
+                    "LooperStatsService");
         }
         boolean z = keyValueListParser.getBoolean("track_screen_state", false);
         if (looperStatsService.mTrackScreenInteractive != z) {
@@ -150,7 +168,10 @@ public final class LooperStatsService extends Binder {
             looperStatsService.mIgnoreBatteryStatus = z2;
             looperStatsService.mStats.reset();
         }
-        looperStatsService.setEnabled(SystemProperties.getBoolean("debug.sys.looper_stats_enabled", keyValueListParser.getBoolean("enabled", true)));
+        looperStatsService.setEnabled(
+                SystemProperties.getBoolean(
+                        "debug.sys.looper_stats_enabled",
+                        keyValueListParser.getBoolean("enabled", true)));
     }
 
     public LooperStatsService(Context context, LooperStats looperStats) {
@@ -159,95 +180,163 @@ public final class LooperStatsService extends Binder {
     }
 
     @Override // android.os.Binder
-    public final void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    public final void dump(
+            FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
         if (DumpUtils.checkDumpPermission(this.mContext, "LooperStatsService", printWriter)) {
             AppIdToPackageMap snapshot = AppIdToPackageMap.getSnapshot();
             printWriter.print("Start time: ");
-            printWriter.println(DateFormat.format("yyyy-MM-dd HH:mm:ss", this.mStats.getStartTimeMillis()));
+            printWriter.println(
+                    DateFormat.format("yyyy-MM-dd HH:mm:ss", this.mStats.getStartTimeMillis()));
             printWriter.print("On battery time (ms): ");
             printWriter.println(this.mStats.getBatteryTimeMillis());
             List entries = this.mStats.getEntries();
             final int i = 0;
             final int i2 = 1;
-            Comparator thenComparing = Comparator.comparing(new Function() { // from class: com.android.server.LooperStatsService$$ExternalSyntheticLambda0
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    LooperStats.ExportedEntry exportedEntry = (LooperStats.ExportedEntry) obj;
-                    switch (i) {
-                        case 0:
-                            return Integer.valueOf(exportedEntry.workSourceUid);
-                        case 1:
-                            return exportedEntry.threadName;
-                        case 2:
-                            return exportedEntry.handlerClassName;
-                        default:
-                            return exportedEntry.messageName;
-                    }
-                }
-            }).thenComparing(new Function() { // from class: com.android.server.LooperStatsService$$ExternalSyntheticLambda0
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    LooperStats.ExportedEntry exportedEntry = (LooperStats.ExportedEntry) obj;
-                    switch (i2) {
-                        case 0:
-                            return Integer.valueOf(exportedEntry.workSourceUid);
-                        case 1:
-                            return exportedEntry.threadName;
-                        case 2:
-                            return exportedEntry.handlerClassName;
-                        default:
-                            return exportedEntry.messageName;
-                    }
-                }
-            });
+            Comparator thenComparing =
+                    Comparator.comparing(
+                                    new Function() { // from class:
+                                                     // com.android.server.LooperStatsService$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.Function
+                                        public final Object apply(Object obj) {
+                                            LooperStats.ExportedEntry exportedEntry =
+                                                    (LooperStats.ExportedEntry) obj;
+                                            switch (i) {
+                                                case 0:
+                                                    return Integer.valueOf(
+                                                            exportedEntry.workSourceUid);
+                                                case 1:
+                                                    return exportedEntry.threadName;
+                                                case 2:
+                                                    return exportedEntry.handlerClassName;
+                                                default:
+                                                    return exportedEntry.messageName;
+                                            }
+                                        }
+                                    })
+                            .thenComparing(
+                                    new Function() { // from class:
+                                                     // com.android.server.LooperStatsService$$ExternalSyntheticLambda0
+                                        @Override // java.util.function.Function
+                                        public final Object apply(Object obj) {
+                                            LooperStats.ExportedEntry exportedEntry =
+                                                    (LooperStats.ExportedEntry) obj;
+                                            switch (i2) {
+                                                case 0:
+                                                    return Integer.valueOf(
+                                                            exportedEntry.workSourceUid);
+                                                case 1:
+                                                    return exportedEntry.threadName;
+                                                case 2:
+                                                    return exportedEntry.handlerClassName;
+                                                default:
+                                                    return exportedEntry.messageName;
+                                            }
+                                        }
+                                    });
             final int i3 = 2;
-            Comparator thenComparing2 = thenComparing.thenComparing(new Function() { // from class: com.android.server.LooperStatsService$$ExternalSyntheticLambda0
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    LooperStats.ExportedEntry exportedEntry = (LooperStats.ExportedEntry) obj;
-                    switch (i3) {
-                        case 0:
-                            return Integer.valueOf(exportedEntry.workSourceUid);
-                        case 1:
-                            return exportedEntry.threadName;
-                        case 2:
-                            return exportedEntry.handlerClassName;
-                        default:
-                            return exportedEntry.messageName;
-                    }
-                }
-            });
+            Comparator thenComparing2 =
+                    thenComparing.thenComparing(
+                            new Function() { // from class:
+                                             // com.android.server.LooperStatsService$$ExternalSyntheticLambda0
+                                @Override // java.util.function.Function
+                                public final Object apply(Object obj) {
+                                    LooperStats.ExportedEntry exportedEntry =
+                                            (LooperStats.ExportedEntry) obj;
+                                    switch (i3) {
+                                        case 0:
+                                            return Integer.valueOf(exportedEntry.workSourceUid);
+                                        case 1:
+                                            return exportedEntry.threadName;
+                                        case 2:
+                                            return exportedEntry.handlerClassName;
+                                        default:
+                                            return exportedEntry.messageName;
+                                    }
+                                }
+                            });
             final int i4 = 3;
-            entries.sort(thenComparing2.thenComparing(new Function() { // from class: com.android.server.LooperStatsService$$ExternalSyntheticLambda0
-                @Override // java.util.function.Function
-                public final Object apply(Object obj) {
-                    LooperStats.ExportedEntry exportedEntry = (LooperStats.ExportedEntry) obj;
-                    switch (i4) {
-                        case 0:
-                            return Integer.valueOf(exportedEntry.workSourceUid);
-                        case 1:
-                            return exportedEntry.threadName;
-                        case 2:
-                            return exportedEntry.handlerClassName;
-                        default:
-                            return exportedEntry.messageName;
-                    }
-                }
-            }));
-            printWriter.println(String.join(",", Arrays.asList("work_source_uid", "thread_name", "handler_class", "message_name", "is_interactive", "message_count", "recorded_message_count", "total_latency_micros", "max_latency_micros", "total_cpu_micros", "max_cpu_micros", "recorded_delay_message_count", "total_delay_millis", "max_delay_millis", "exception_count")));
+            entries.sort(
+                    thenComparing2.thenComparing(
+                            new Function() { // from class:
+                                             // com.android.server.LooperStatsService$$ExternalSyntheticLambda0
+                                @Override // java.util.function.Function
+                                public final Object apply(Object obj) {
+                                    LooperStats.ExportedEntry exportedEntry =
+                                            (LooperStats.ExportedEntry) obj;
+                                    switch (i4) {
+                                        case 0:
+                                            return Integer.valueOf(exportedEntry.workSourceUid);
+                                        case 1:
+                                            return exportedEntry.threadName;
+                                        case 2:
+                                            return exportedEntry.handlerClassName;
+                                        default:
+                                            return exportedEntry.messageName;
+                                    }
+                                }
+                            }));
+            printWriter.println(
+                    String.join(
+                            ",",
+                            Arrays.asList(
+                                    "work_source_uid",
+                                    "thread_name",
+                                    "handler_class",
+                                    "message_name",
+                                    "is_interactive",
+                                    "message_count",
+                                    "recorded_message_count",
+                                    "total_latency_micros",
+                                    "max_latency_micros",
+                                    "total_cpu_micros",
+                                    "max_cpu_micros",
+                                    "recorded_delay_message_count",
+                                    "total_delay_millis",
+                                    "max_delay_millis",
+                                    "exception_count")));
             Iterator it = entries.iterator();
             while (it.hasNext()) {
                 LooperStats.ExportedEntry exportedEntry = (LooperStats.ExportedEntry) it.next();
                 if (!exportedEntry.messageName.startsWith("__DEBUG_")) {
-                    printWriter.printf("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n", snapshot.mapUid(exportedEntry.workSourceUid), exportedEntry.threadName, exportedEntry.handlerClassName, exportedEntry.messageName, Boolean.valueOf(exportedEntry.isInteractive), Long.valueOf(exportedEntry.messageCount), Long.valueOf(exportedEntry.recordedMessageCount), Long.valueOf(exportedEntry.totalLatencyMicros), Long.valueOf(exportedEntry.maxLatencyMicros), Long.valueOf(exportedEntry.cpuUsageMicros), Long.valueOf(exportedEntry.maxCpuUsageMicros), Long.valueOf(exportedEntry.recordedDelayMessageCount), Long.valueOf(exportedEntry.delayMillis), Long.valueOf(exportedEntry.maxDelayMillis), Long.valueOf(exportedEntry.exceptionCount));
+                    printWriter.printf(
+                            "%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n",
+                            snapshot.mapUid(exportedEntry.workSourceUid),
+                            exportedEntry.threadName,
+                            exportedEntry.handlerClassName,
+                            exportedEntry.messageName,
+                            Boolean.valueOf(exportedEntry.isInteractive),
+                            Long.valueOf(exportedEntry.messageCount),
+                            Long.valueOf(exportedEntry.recordedMessageCount),
+                            Long.valueOf(exportedEntry.totalLatencyMicros),
+                            Long.valueOf(exportedEntry.maxLatencyMicros),
+                            Long.valueOf(exportedEntry.cpuUsageMicros),
+                            Long.valueOf(exportedEntry.maxCpuUsageMicros),
+                            Long.valueOf(exportedEntry.recordedDelayMessageCount),
+                            Long.valueOf(exportedEntry.delayMillis),
+                            Long.valueOf(exportedEntry.maxDelayMillis),
+                            Long.valueOf(exportedEntry.exceptionCount));
                     it = it;
                 }
             }
         }
     }
 
-    public final void onShellCommand(FileDescriptor fileDescriptor, FileDescriptor fileDescriptor2, FileDescriptor fileDescriptor3, String[] strArr, ShellCallback shellCallback, ResultReceiver resultReceiver) {
-        new LooperShellCommand().exec(this, fileDescriptor, fileDescriptor2, fileDescriptor3, strArr, shellCallback, resultReceiver);
+    public final void onShellCommand(
+            FileDescriptor fileDescriptor,
+            FileDescriptor fileDescriptor2,
+            FileDescriptor fileDescriptor3,
+            String[] strArr,
+            ShellCallback shellCallback,
+            ResultReceiver resultReceiver) {
+        new LooperShellCommand()
+                .exec(
+                        this,
+                        fileDescriptor,
+                        fileDescriptor2,
+                        fileDescriptor3,
+                        strArr,
+                        shellCallback,
+                        resultReceiver);
     }
 
     public final void setEnabled(boolean z) {

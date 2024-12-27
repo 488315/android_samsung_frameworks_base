@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Path;
 import android.util.AttributeSet;
+
 import com.android.internal.R;
 
 /* loaded from: classes4.dex */
@@ -117,7 +118,8 @@ public class ArcMotion extends PathMotion {
                     ey2 = startY + eDistY;
                     ex2 = startX;
                 }
-                float minimumArcDist22 = this.mMinimumVerticalTangent * midDist2 * this.mMinimumVerticalTangent;
+                float minimumArcDist22 =
+                        this.mMinimumVerticalTangent * midDist2 * this.mMinimumVerticalTangent;
                 minimumArcDist2 = minimumArcDist22;
                 ex = ex2;
                 ey = ey2;
@@ -130,7 +132,8 @@ public class ArcMotion extends PathMotion {
                     ex = endX - eDistX;
                     ey = endY;
                 }
-                float minimumArcDist23 = this.mMinimumHorizontalTangent * midDist2 * this.mMinimumHorizontalTangent;
+                float minimumArcDist23 =
+                        this.mMinimumHorizontalTangent * midDist2 * this.mMinimumHorizontalTangent;
                 minimumArcDist2 = minimumArcDist23;
             }
         }

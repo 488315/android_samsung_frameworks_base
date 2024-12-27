@@ -17,10 +17,12 @@ import android.os.BatteryStatsInternal;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.util.Slog;
+
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.LatencyTracker;
 import com.android.server.LocalServices;
 import com.android.server.utils.EventLogger;
+
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Deque;
@@ -34,7 +36,8 @@ import java.util.function.Supplier;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final class SoundTriggerMiddlewareLogging implements ISoundTriggerMiddlewareInternal, Dumpable {
+public final class SoundTriggerMiddlewareLogging
+        implements ISoundTriggerMiddlewareInternal, Dumpable {
     public final Supplier mBatteryStatsInternalSupplier;
     public final ISoundTriggerMiddlewareInternal mDelegate;
     public final LatencyTracker mLatencyTracker;
@@ -45,7 +48,8 @@ public final class SoundTriggerMiddlewareLogging implements ISoundTriggerMiddlew
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class BatteryStatsHolder {
-        public static final BatteryStatsInternal INSTANCE = (BatteryStatsInternal) LocalServices.getService(BatteryStatsInternal.class);
+        public static final BatteryStatsInternal INSTANCE =
+                (BatteryStatsInternal) LocalServices.getService(BatteryStatsInternal.class);
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -54,7 +58,10 @@ public final class SoundTriggerMiddlewareLogging implements ISoundTriggerMiddlew
         public final EventLogger mEventLogger;
         public final Identity mOriginatorIdentity;
 
-        public CallbackLogging(ISoundTriggerCallback iSoundTriggerCallback, EventLogger eventLogger, Identity identity) {
+        public CallbackLogging(
+                ISoundTriggerCallback iSoundTriggerCallback,
+                EventLogger eventLogger,
+                Identity identity) {
             Objects.requireNonNull(iSoundTriggerCallback);
             this.mCallbackDelegate = iSoundTriggerCallback;
             this.mEventLogger = eventLogger;
@@ -75,7 +82,8 @@ public final class SoundTriggerMiddlewareLogging implements ISoundTriggerMiddlew
                 eventLogger.enqueue(createForVoid);
             } catch (Exception e) {
                 EventLogger eventLogger2 = this.mEventLogger;
-                SessionEvent createForException = SessionEvent.createForException(type, e, Integer.valueOf(i));
+                SessionEvent createForException =
+                        SessionEvent.createForException(type, e, Integer.valueOf(i));
                 createForException.printLog(2, "SoundTriggerMiddlewareLogging");
                 eventLogger2.enqueue(createForException);
                 throw e;
@@ -92,26 +100,45 @@ public final class SoundTriggerMiddlewareLogging implements ISoundTriggerMiddlew
                 eventLogger.enqueue(createForVoid);
             } catch (Exception e) {
                 EventLogger eventLogger2 = this.mEventLogger;
-                SessionEvent createForException = SessionEvent.createForException(type, e, new Object[0]);
+                SessionEvent createForException =
+                        SessionEvent.createForException(type, e, new Object[0]);
                 createForException.printLog(2, "SoundTriggerMiddlewareLogging");
                 eventLogger2.enqueue(createForException);
                 throw e;
             }
         }
 
-        public final void onPhraseRecognition(int i, PhraseRecognitionEventSys phraseRecognitionEventSys, int i2) {
+        public final void onPhraseRecognition(
+                int i, PhraseRecognitionEventSys phraseRecognitionEventSys, int i2) {
             SessionEvent.Type type = SessionEvent.Type.RECOGNITION;
             try {
-                ((BatteryStatsInternal) SoundTriggerMiddlewareLogging.this.mBatteryStatsInternalSupplier.get()).noteWakingSoundTrigger(SystemClock.elapsedRealtime(), this.mOriginatorIdentity.uid);
-                SoundTriggerMiddlewareLogging.m899$$Nest$mstartKeyphraseEventLatencyTracking(SoundTriggerMiddlewareLogging.this, phraseRecognitionEventSys.phraseRecognitionEvent);
+                ((BatteryStatsInternal)
+                                SoundTriggerMiddlewareLogging.this.mBatteryStatsInternalSupplier
+                                        .get())
+                        .noteWakingSoundTrigger(
+                                SystemClock.elapsedRealtime(), this.mOriginatorIdentity.uid);
+                SoundTriggerMiddlewareLogging.m899$$Nest$mstartKeyphraseEventLatencyTracking(
+                        SoundTriggerMiddlewareLogging.this,
+                        phraseRecognitionEventSys.phraseRecognitionEvent);
                 this.mCallbackDelegate.onPhraseRecognition(i, phraseRecognitionEventSys, i2);
                 EventLogger eventLogger = this.mEventLogger;
-                SessionEvent createForVoid = SessionEvent.createForVoid(type, Integer.valueOf(i), phraseRecognitionEventSys, Integer.valueOf(i2));
+                SessionEvent createForVoid =
+                        SessionEvent.createForVoid(
+                                type,
+                                Integer.valueOf(i),
+                                phraseRecognitionEventSys,
+                                Integer.valueOf(i2));
                 createForVoid.printLog(0, "SoundTriggerMiddlewareLogging");
                 eventLogger.enqueue(createForVoid);
             } catch (Exception e) {
                 EventLogger eventLogger2 = this.mEventLogger;
-                SessionEvent createForException = SessionEvent.createForException(type, e, Integer.valueOf(i), phraseRecognitionEventSys, Integer.valueOf(i2));
+                SessionEvent createForException =
+                        SessionEvent.createForException(
+                                type,
+                                e,
+                                Integer.valueOf(i),
+                                phraseRecognitionEventSys,
+                                Integer.valueOf(i2));
                 createForException.printLog(2, "SoundTriggerMiddlewareLogging");
                 eventLogger2.enqueue(createForException);
                 throw e;
@@ -121,15 +148,27 @@ public final class SoundTriggerMiddlewareLogging implements ISoundTriggerMiddlew
         public final void onRecognition(int i, RecognitionEventSys recognitionEventSys, int i2) {
             SessionEvent.Type type = SessionEvent.Type.RECOGNITION;
             try {
-                ((BatteryStatsInternal) SoundTriggerMiddlewareLogging.this.mBatteryStatsInternalSupplier.get()).noteWakingSoundTrigger(SystemClock.elapsedRealtime(), this.mOriginatorIdentity.uid);
+                ((BatteryStatsInternal)
+                                SoundTriggerMiddlewareLogging.this.mBatteryStatsInternalSupplier
+                                        .get())
+                        .noteWakingSoundTrigger(
+                                SystemClock.elapsedRealtime(), this.mOriginatorIdentity.uid);
                 this.mCallbackDelegate.onRecognition(i, recognitionEventSys, i2);
                 EventLogger eventLogger = this.mEventLogger;
-                SessionEvent createForVoid = SessionEvent.createForVoid(type, Integer.valueOf(i), recognitionEventSys, Integer.valueOf(i2));
+                SessionEvent createForVoid =
+                        SessionEvent.createForVoid(
+                                type, Integer.valueOf(i), recognitionEventSys, Integer.valueOf(i2));
                 createForVoid.printLog(0, "SoundTriggerMiddlewareLogging");
                 eventLogger.enqueue(createForVoid);
             } catch (Exception e) {
                 EventLogger eventLogger2 = this.mEventLogger;
-                SessionEvent createForException = SessionEvent.createForException(type, e, Integer.valueOf(i), recognitionEventSys, Integer.valueOf(i2));
+                SessionEvent createForException =
+                        SessionEvent.createForException(
+                                type,
+                                e,
+                                Integer.valueOf(i),
+                                recognitionEventSys,
+                                Integer.valueOf(i2));
                 createForException.printLog(2, "SoundTriggerMiddlewareLogging");
                 eventLogger2.enqueue(createForException);
                 throw e;
@@ -146,7 +185,8 @@ public final class SoundTriggerMiddlewareLogging implements ISoundTriggerMiddlew
                 eventLogger.enqueue(createForVoid);
             } catch (Exception e) {
                 EventLogger eventLogger2 = this.mEventLogger;
-                SessionEvent createForException = SessionEvent.createForException(type, e, new Object[0]);
+                SessionEvent createForException =
+                        SessionEvent.createForException(type, e, new Object[0]);
                 createForException.printLog(2, "SoundTriggerMiddlewareLogging");
                 eventLogger2.enqueue(createForException);
                 throw e;
@@ -163,8 +203,7 @@ public final class SoundTriggerMiddlewareLogging implements ISoundTriggerMiddlew
         public ISoundTriggerModule mDelegate;
         public EventLogger mEventLogger;
 
-        public ModuleLogging() {
-        }
+        public ModuleLogging() {}
 
         public final IBinder asBinder() {
             return this.mDelegate.asBinder();
@@ -173,12 +212,19 @@ public final class SoundTriggerMiddlewareLogging implements ISoundTriggerMiddlew
         public final void detach() {
             SessionEvent.Type type = SessionEvent.Type.DETACH;
             try {
-                if (SoundTriggerMiddlewareLogging.this.mSessionEventLoggers.remove(this.mEventLogger)) {
+                if (SoundTriggerMiddlewareLogging.this.mSessionEventLoggers.remove(
+                        this.mEventLogger)) {
                     while (true) {
-                        if (((LinkedBlockingDeque) SoundTriggerMiddlewareLogging.this.mDetachedSessionEventLoggers).offerFirst(this.mEventLogger)) {
+                        if (((LinkedBlockingDeque)
+                                        SoundTriggerMiddlewareLogging.this
+                                                .mDetachedSessionEventLoggers)
+                                .offerFirst(this.mEventLogger)) {
                             break;
                         } else {
-                            ((LinkedBlockingDeque) SoundTriggerMiddlewareLogging.this.mDetachedSessionEventLoggers).pollLast();
+                            ((LinkedBlockingDeque)
+                                            SoundTriggerMiddlewareLogging.this
+                                                    .mDetachedSessionEventLoggers)
+                                    .pollLast();
                         }
                     }
                 }
@@ -189,7 +235,8 @@ public final class SoundTriggerMiddlewareLogging implements ISoundTriggerMiddlew
                 eventLogger.enqueue(createForVoid);
             } catch (Exception e) {
                 EventLogger eventLogger2 = this.mEventLogger;
-                SessionEvent createForException = SessionEvent.createForException(type, e, new Object[0]);
+                SessionEvent createForException =
+                        SessionEvent.createForException(type, e, new Object[0]);
                 createForException.printLog(2, "SoundTriggerMiddlewareLogging");
                 eventLogger2.enqueue(createForException);
                 throw e;
@@ -206,7 +253,8 @@ public final class SoundTriggerMiddlewareLogging implements ISoundTriggerMiddlew
                 eventLogger.enqueue(createForVoid);
             } catch (Exception e) {
                 EventLogger eventLogger2 = this.mEventLogger;
-                SessionEvent createForException = SessionEvent.createForException(type, e, Integer.valueOf(i));
+                SessionEvent createForException =
+                        SessionEvent.createForException(type, e, Integer.valueOf(i));
                 createForException.printLog(2, "SoundTriggerMiddlewareLogging");
                 eventLogger2.enqueue(createForException);
                 throw e;
@@ -218,13 +266,20 @@ public final class SoundTriggerMiddlewareLogging implements ISoundTriggerMiddlew
             try {
                 int modelParameter = this.mDelegate.getModelParameter(i, i2);
                 EventLogger eventLogger = this.mEventLogger;
-                SessionEvent createForReturn = SessionEvent.createForReturn(type, Integer.valueOf(modelParameter), Integer.valueOf(i), Integer.valueOf(i2));
+                SessionEvent createForReturn =
+                        SessionEvent.createForReturn(
+                                type,
+                                Integer.valueOf(modelParameter),
+                                Integer.valueOf(i),
+                                Integer.valueOf(i2));
                 createForReturn.printLog(0, "SoundTriggerMiddlewareLogging");
                 eventLogger.enqueue(createForReturn);
                 return modelParameter;
             } catch (Exception e) {
                 EventLogger eventLogger2 = this.mEventLogger;
-                SessionEvent createForException = SessionEvent.createForException(type, e, Integer.valueOf(i), Integer.valueOf(i2));
+                SessionEvent createForException =
+                        SessionEvent.createForException(
+                                type, e, Integer.valueOf(i), Integer.valueOf(i2));
                 createForException.printLog(2, "SoundTriggerMiddlewareLogging");
                 eventLogger2.enqueue(createForException);
                 throw e;
@@ -236,13 +291,16 @@ public final class SoundTriggerMiddlewareLogging implements ISoundTriggerMiddlew
             try {
                 int loadModel = this.mDelegate.loadModel(soundModel);
                 EventLogger eventLogger = this.mEventLogger;
-                SessionEvent createForReturn = SessionEvent.createForReturn(type, Integer.valueOf(loadModel), soundModel.uuid);
+                SessionEvent createForReturn =
+                        SessionEvent.createForReturn(
+                                type, Integer.valueOf(loadModel), soundModel.uuid);
                 createForReturn.printLog(0, "SoundTriggerMiddlewareLogging");
                 eventLogger.enqueue(createForReturn);
                 return loadModel;
             } catch (Exception e) {
                 EventLogger eventLogger2 = this.mEventLogger;
-                SessionEvent createForReturn2 = SessionEvent.createForReturn(type, e, soundModel.uuid);
+                SessionEvent createForReturn2 =
+                        SessionEvent.createForReturn(type, e, soundModel.uuid);
                 createForReturn2.printLog(2, "SoundTriggerMiddlewareLogging");
                 eventLogger2.enqueue(createForReturn2);
                 throw e;
@@ -254,13 +312,18 @@ public final class SoundTriggerMiddlewareLogging implements ISoundTriggerMiddlew
             try {
                 int loadPhraseModel = this.mDelegate.loadPhraseModel(phraseSoundModel);
                 EventLogger eventLogger = this.mEventLogger;
-                SessionEvent createForReturn = SessionEvent.createForReturn(type, Integer.valueOf(loadPhraseModel), phraseSoundModel.common.uuid);
+                SessionEvent createForReturn =
+                        SessionEvent.createForReturn(
+                                type,
+                                Integer.valueOf(loadPhraseModel),
+                                phraseSoundModel.common.uuid);
                 createForReturn.printLog(0, "SoundTriggerMiddlewareLogging");
                 eventLogger.enqueue(createForReturn);
                 return loadPhraseModel;
             } catch (Exception e) {
                 EventLogger eventLogger2 = this.mEventLogger;
-                SessionEvent createForException = SessionEvent.createForException(type, e, phraseSoundModel.common.uuid);
+                SessionEvent createForException =
+                        SessionEvent.createForException(type, e, phraseSoundModel.common.uuid);
                 createForException.printLog(2, "SoundTriggerMiddlewareLogging");
                 eventLogger2.enqueue(createForException);
                 throw e;
@@ -270,15 +333,23 @@ public final class SoundTriggerMiddlewareLogging implements ISoundTriggerMiddlew
         public final ModelParameterRange queryModelParameterSupport(int i, int i2) {
             SessionEvent.Type type = SessionEvent.Type.QUERY_MODEL_PARAMETER;
             try {
-                ModelParameterRange queryModelParameterSupport = this.mDelegate.queryModelParameterSupport(i, i2);
+                ModelParameterRange queryModelParameterSupport =
+                        this.mDelegate.queryModelParameterSupport(i, i2);
                 EventLogger eventLogger = this.mEventLogger;
-                SessionEvent createForReturn = SessionEvent.createForReturn(type, queryModelParameterSupport, Integer.valueOf(i), Integer.valueOf(i2));
+                SessionEvent createForReturn =
+                        SessionEvent.createForReturn(
+                                type,
+                                queryModelParameterSupport,
+                                Integer.valueOf(i),
+                                Integer.valueOf(i2));
                 createForReturn.printLog(0, "SoundTriggerMiddlewareLogging");
                 eventLogger.enqueue(createForReturn);
                 return queryModelParameterSupport;
             } catch (Exception e) {
                 EventLogger eventLogger2 = this.mEventLogger;
-                SessionEvent createForException = SessionEvent.createForException(type, e, Integer.valueOf(i), Integer.valueOf(i2));
+                SessionEvent createForException =
+                        SessionEvent.createForException(
+                                type, e, Integer.valueOf(i), Integer.valueOf(i2));
                 createForException.printLog(2, "SoundTriggerMiddlewareLogging");
                 eventLogger2.enqueue(createForException);
                 throw e;
@@ -290,12 +361,20 @@ public final class SoundTriggerMiddlewareLogging implements ISoundTriggerMiddlew
             try {
                 this.mDelegate.setModelParameter(i, i2, i3);
                 EventLogger eventLogger = this.mEventLogger;
-                SessionEvent createForVoid = SessionEvent.createForVoid(type, Integer.valueOf(i), Integer.valueOf(i2), Integer.valueOf(i3));
+                SessionEvent createForVoid =
+                        SessionEvent.createForVoid(
+                                type, Integer.valueOf(i), Integer.valueOf(i2), Integer.valueOf(i3));
                 createForVoid.printLog(0, "SoundTriggerMiddlewareLogging");
                 eventLogger.enqueue(createForVoid);
             } catch (Exception e) {
                 EventLogger eventLogger2 = this.mEventLogger;
-                SessionEvent createForException = SessionEvent.createForException(type, e, Integer.valueOf(i), Integer.valueOf(i2), Integer.valueOf(i3));
+                SessionEvent createForException =
+                        SessionEvent.createForException(
+                                type,
+                                e,
+                                Integer.valueOf(i),
+                                Integer.valueOf(i2),
+                                Integer.valueOf(i3));
                 createForException.printLog(2, "SoundTriggerMiddlewareLogging");
                 eventLogger2.enqueue(createForException);
                 throw e;
@@ -307,13 +386,17 @@ public final class SoundTriggerMiddlewareLogging implements ISoundTriggerMiddlew
             try {
                 IBinder startRecognition = this.mDelegate.startRecognition(i, recognitionConfig);
                 EventLogger eventLogger = this.mEventLogger;
-                SessionEvent createForReturn = SessionEvent.createForReturn(type, startRecognition, Integer.valueOf(i), recognitionConfig);
+                SessionEvent createForReturn =
+                        SessionEvent.createForReturn(
+                                type, startRecognition, Integer.valueOf(i), recognitionConfig);
                 createForReturn.printLog(0, "SoundTriggerMiddlewareLogging");
                 eventLogger.enqueue(createForReturn);
                 return startRecognition;
             } catch (Exception e) {
                 EventLogger eventLogger2 = this.mEventLogger;
-                SessionEvent createForException = SessionEvent.createForException(type, e, Integer.valueOf(i), recognitionConfig);
+                SessionEvent createForException =
+                        SessionEvent.createForException(
+                                type, e, Integer.valueOf(i), recognitionConfig);
                 createForException.printLog(2, "SoundTriggerMiddlewareLogging");
                 eventLogger2.enqueue(createForException);
                 throw e;
@@ -330,7 +413,8 @@ public final class SoundTriggerMiddlewareLogging implements ISoundTriggerMiddlew
                 eventLogger.enqueue(createForVoid);
             } catch (Exception e) {
                 EventLogger eventLogger2 = this.mEventLogger;
-                SessionEvent createForException = SessionEvent.createForException(type, e, Integer.valueOf(i));
+                SessionEvent createForException =
+                        SessionEvent.createForException(type, e, Integer.valueOf(i));
                 createForException.printLog(2, "SoundTriggerMiddlewareLogging");
                 eventLogger2.enqueue(createForException);
                 throw e;
@@ -351,7 +435,8 @@ public final class SoundTriggerMiddlewareLogging implements ISoundTriggerMiddlew
                 eventLogger.enqueue(createForVoid);
             } catch (Exception e) {
                 EventLogger eventLogger2 = this.mEventLogger;
-                SessionEvent createForException = SessionEvent.createForException(type, e, Integer.valueOf(i));
+                SessionEvent createForException =
+                        SessionEvent.createForException(type, e, Integer.valueOf(i));
                 createForException.printLog(2, "SoundTriggerMiddlewareLogging");
                 eventLogger2.enqueue(createForException);
                 throw e;
@@ -396,7 +481,7 @@ public final class SoundTriggerMiddlewareLogging implements ISoundTriggerMiddlew
                 ATTACH = type;
                 Type type2 = new Type("LIST_MODULE", 1);
                 LIST_MODULE = type2;
-                $VALUES = new Type[]{type, type2};
+                $VALUES = new Type[] {type, type2};
             }
 
             public static Type valueOf(String str) {
@@ -517,7 +602,11 @@ public final class SoundTriggerMiddlewareLogging implements ISoundTriggerMiddlew
                 MODULE_DIED = type13;
                 Type type14 = new Type("RESOURCES_AVAILABLE", 13);
                 RESOURCES_AVAILABLE = type14;
-                $VALUES = new Type[]{type, type2, type3, type4, type5, type6, type7, type8, type9, type10, type11, type12, type13, type14};
+                $VALUES =
+                        new Type[] {
+                            type, type2, type3, type4, type5, type6, type7, type8, type9, type10,
+                            type11, type12, type13, type14
+                        };
             }
 
             public static Type valueOf(String str) {
@@ -596,9 +685,12 @@ public final class SoundTriggerMiddlewareLogging implements ISoundTriggerMiddlew
     }
 
     /* renamed from: -$$Nest$mstartKeyphraseEventLatencyTracking, reason: not valid java name */
-    public static void m899$$Nest$mstartKeyphraseEventLatencyTracking(SoundTriggerMiddlewareLogging soundTriggerMiddlewareLogging, PhraseRecognitionEvent phraseRecognitionEvent) {
+    public static void m899$$Nest$mstartKeyphraseEventLatencyTracking(
+            SoundTriggerMiddlewareLogging soundTriggerMiddlewareLogging,
+            PhraseRecognitionEvent phraseRecognitionEvent) {
         soundTriggerMiddlewareLogging.getClass();
-        if (phraseRecognitionEvent.common.status != 0 || ArrayUtils.isEmpty(phraseRecognitionEvent.phraseExtras)) {
+        if (phraseRecognitionEvent.common.status != 0
+                || ArrayUtils.isEmpty(phraseRecognitionEvent.phraseExtras)) {
             return;
         }
         String str = "KeyphraseId=" + phraseRecognitionEvent.phraseExtras[0].id;
@@ -606,14 +698,18 @@ public final class SoundTriggerMiddlewareLogging implements ISoundTriggerMiddlew
         soundTriggerMiddlewareLogging.mLatencyTracker.onActionStart(19, str);
     }
 
-    public SoundTriggerMiddlewareLogging(LatencyTracker latencyTracker, Supplier supplier, ISoundTriggerMiddlewareInternal iSoundTriggerMiddlewareInternal) {
+    public SoundTriggerMiddlewareLogging(
+            LatencyTracker latencyTracker,
+            Supplier supplier,
+            ISoundTriggerMiddlewareInternal iSoundTriggerMiddlewareInternal) {
         this.mDelegate = iSoundTriggerMiddlewareInternal;
         this.mLatencyTracker = latencyTracker;
         this.mBatteryStatsInternalSupplier = supplier;
     }
 
     @Override // com.android.server.soundtrigger_middleware.ISoundTriggerMiddlewareInternal
-    public final ISoundTriggerModule attach(int i, ISoundTriggerCallback iSoundTriggerCallback, boolean z) {
+    public final ISoundTriggerModule attach(
+            int i, ISoundTriggerCallback iSoundTriggerCallback, boolean z) {
         ServiceEvent.Type type = ServiceEvent.Type.ATTACH;
         EventLogger eventLogger = this.mServiceEventLogger;
         try {
@@ -625,15 +721,34 @@ public final class SoundTriggerMiddlewareLogging implements ISoundTriggerMiddlew
             String sb2 = sb.toString();
             ModuleLogging moduleLogging = new ModuleLogging();
             EventLogger eventLogger2 = new EventLogger(128, "Session logger for: " + sb2);
-            moduleLogging.mDelegate = this.mDelegate.attach(i, new CallbackLogging(iSoundTriggerCallback, eventLogger2, nonNull), z);
+            moduleLogging.mDelegate =
+                    this.mDelegate.attach(
+                            i,
+                            new CallbackLogging(iSoundTriggerCallback, eventLogger2, nonNull),
+                            z);
             moduleLogging.mEventLogger = eventLogger2;
-            ServiceEvent serviceEvent = new ServiceEvent(null, type, sb2, moduleLogging, Integer.valueOf(i), iSoundTriggerCallback, Boolean.valueOf(z));
+            ServiceEvent serviceEvent =
+                    new ServiceEvent(
+                            null,
+                            type,
+                            sb2,
+                            moduleLogging,
+                            Integer.valueOf(i),
+                            iSoundTriggerCallback,
+                            Boolean.valueOf(z));
             serviceEvent.printLog(0, "SoundTriggerMiddlewareLogging");
             eventLogger.enqueue(serviceEvent);
             this.mSessionEventLoggers.add(eventLogger2);
             return moduleLogging;
         } catch (Exception e) {
-            ServiceEvent serviceEvent2 = new ServiceEvent(e, type, IdentityContext.get().packageName, null, Integer.valueOf(i), iSoundTriggerCallback);
+            ServiceEvent serviceEvent2 =
+                    new ServiceEvent(
+                            e,
+                            type,
+                            IdentityContext.get().packageName,
+                            null,
+                            Integer.valueOf(i),
+                            iSoundTriggerCallback);
             serviceEvent2.printLog(2, "SoundTriggerMiddlewareLogging");
             eventLogger.enqueue(serviceEvent2);
             throw e;
@@ -668,12 +783,25 @@ public final class SoundTriggerMiddlewareLogging implements ISoundTriggerMiddlew
         EventLogger eventLogger = this.mServiceEventLogger;
         try {
             SoundTriggerModuleDescriptor[] listModules = this.mDelegate.listModules();
-            ServiceEvent serviceEvent = new ServiceEvent(null, type, IdentityContext.get().packageName, (ModulePropertySummary[]) Arrays.stream(listModules).map(new SoundTriggerMiddlewareLogging$$ExternalSyntheticLambda1()).toArray(new SoundTriggerMiddlewareLogging$$ExternalSyntheticLambda2()), new Object[0]);
+            ServiceEvent serviceEvent =
+                    new ServiceEvent(
+                            null,
+                            type,
+                            IdentityContext.get().packageName,
+                            (ModulePropertySummary[])
+                                    Arrays.stream(listModules)
+                                            .map(
+                                                    new SoundTriggerMiddlewareLogging$$ExternalSyntheticLambda1())
+                                            .toArray(
+                                                    new SoundTriggerMiddlewareLogging$$ExternalSyntheticLambda2()),
+                            new Object[0]);
             serviceEvent.printLog(0, "SoundTriggerMiddlewareLogging");
             eventLogger.enqueue(serviceEvent);
             return listModules;
         } catch (Exception e) {
-            ServiceEvent serviceEvent2 = new ServiceEvent(e, type, IdentityContext.get().packageName, null, new Object[0]);
+            ServiceEvent serviceEvent2 =
+                    new ServiceEvent(
+                            e, type, IdentityContext.get().packageName, null, new Object[0]);
             serviceEvent2.printLog(2, "SoundTriggerMiddlewareLogging");
             eventLogger.enqueue(serviceEvent2);
             throw e;

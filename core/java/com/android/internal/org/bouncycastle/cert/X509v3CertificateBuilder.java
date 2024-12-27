@@ -19,6 +19,7 @@ import com.android.internal.org.bouncycastle.asn1.x509.TBSCertificate;
 import com.android.internal.org.bouncycastle.asn1.x509.Time;
 import com.android.internal.org.bouncycastle.asn1.x509.V3TBSCertificateGenerator;
 import com.android.internal.org.bouncycastle.operator.ContentSigner;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.math.BigInteger;
@@ -31,15 +32,40 @@ public class X509v3CertificateBuilder {
     private ExtensionsGenerator extGenerator;
     private V3TBSCertificateGenerator tbsGen;
 
-    public X509v3CertificateBuilder(X500Name issuer, BigInteger serial, Date notBefore, Date notAfter, X500Name subject, SubjectPublicKeyInfo publicKeyInfo) {
+    public X509v3CertificateBuilder(
+            X500Name issuer,
+            BigInteger serial,
+            Date notBefore,
+            Date notAfter,
+            X500Name subject,
+            SubjectPublicKeyInfo publicKeyInfo) {
         this(issuer, serial, new Time(notBefore), new Time(notAfter), subject, publicKeyInfo);
     }
 
-    public X509v3CertificateBuilder(X500Name issuer, BigInteger serial, Date notBefore, Date notAfter, Locale dateLocale, X500Name subject, SubjectPublicKeyInfo publicKeyInfo) {
-        this(issuer, serial, new Time(notBefore, dateLocale), new Time(notAfter, dateLocale), subject, publicKeyInfo);
+    public X509v3CertificateBuilder(
+            X500Name issuer,
+            BigInteger serial,
+            Date notBefore,
+            Date notAfter,
+            Locale dateLocale,
+            X500Name subject,
+            SubjectPublicKeyInfo publicKeyInfo) {
+        this(
+                issuer,
+                serial,
+                new Time(notBefore, dateLocale),
+                new Time(notAfter, dateLocale),
+                subject,
+                publicKeyInfo);
     }
 
-    public X509v3CertificateBuilder(X500Name issuer, BigInteger serial, Time notBefore, Time notAfter, X500Name subject, SubjectPublicKeyInfo publicKeyInfo) {
+    public X509v3CertificateBuilder(
+            X500Name issuer,
+            BigInteger serial,
+            Time notBefore,
+            Time notAfter,
+            X500Name subject,
+            SubjectPublicKeyInfo publicKeyInfo) {
         this.tbsGen = new V3TBSCertificateGenerator();
         this.tbsGen.setSerialNumber(new ASN1Integer(serial));
         this.tbsGen.setIssuer(issuer);
@@ -62,7 +88,8 @@ public class X509v3CertificateBuilder {
         Extensions exts = template.getExtensions();
         Enumeration en = exts.oids();
         while (en.hasMoreElements()) {
-            this.extGenerator.addExtension(exts.getExtension((ASN1ObjectIdentifier) en.nextElement()));
+            this.extGenerator.addExtension(
+                    exts.getExtension((ASN1ObjectIdentifier) en.nextElement()));
         }
     }
 
@@ -89,7 +116,9 @@ public class X509v3CertificateBuilder {
         return this;
     }
 
-    public X509v3CertificateBuilder addExtension(ASN1ObjectIdentifier oid, boolean isCritical, ASN1Encodable value) throws CertIOException {
+    public X509v3CertificateBuilder addExtension(
+            ASN1ObjectIdentifier oid, boolean isCritical, ASN1Encodable value)
+            throws CertIOException {
         try {
             this.extGenerator.addExtension(oid, isCritical, value);
             return this;
@@ -103,14 +132,24 @@ public class X509v3CertificateBuilder {
         return this;
     }
 
-    public X509v3CertificateBuilder addExtension(ASN1ObjectIdentifier oid, boolean isCritical, byte[] encodedValue) throws CertIOException {
+    public X509v3CertificateBuilder addExtension(
+            ASN1ObjectIdentifier oid, boolean isCritical, byte[] encodedValue)
+            throws CertIOException {
         this.extGenerator.addExtension(oid, isCritical, encodedValue);
         return this;
     }
 
-    public X509v3CertificateBuilder replaceExtension(ASN1ObjectIdentifier oid, boolean isCritical, ASN1Encodable value) throws CertIOException {
+    public X509v3CertificateBuilder replaceExtension(
+            ASN1ObjectIdentifier oid, boolean isCritical, ASN1Encodable value)
+            throws CertIOException {
         try {
-            this.extGenerator = CertUtils.doReplaceExtension(this.extGenerator, new Extension(oid, isCritical, value.toASN1Primitive().getEncoded(ASN1Encoding.DER)));
+            this.extGenerator =
+                    CertUtils.doReplaceExtension(
+                            this.extGenerator,
+                            new Extension(
+                                    oid,
+                                    isCritical,
+                                    value.toASN1Primitive().getEncoded(ASN1Encoding.DER)));
             return this;
         } catch (IOException e) {
             throw new CertIOException("cannot encode extension: " + e.getMessage(), e);
@@ -122,8 +161,12 @@ public class X509v3CertificateBuilder {
         return this;
     }
 
-    public X509v3CertificateBuilder replaceExtension(ASN1ObjectIdentifier oid, boolean isCritical, byte[] encodedValue) throws CertIOException {
-        this.extGenerator = CertUtils.doReplaceExtension(this.extGenerator, new Extension(oid, isCritical, encodedValue));
+    public X509v3CertificateBuilder replaceExtension(
+            ASN1ObjectIdentifier oid, boolean isCritical, byte[] encodedValue)
+            throws CertIOException {
+        this.extGenerator =
+                CertUtils.doReplaceExtension(
+                        this.extGenerator, new Extension(oid, isCritical, encodedValue));
         return this;
     }
 
@@ -132,7 +175,8 @@ public class X509v3CertificateBuilder {
         return this;
     }
 
-    public X509v3CertificateBuilder copyAndAddExtension(ASN1ObjectIdentifier oid, boolean isCritical, X509CertificateHolder certHolder) {
+    public X509v3CertificateBuilder copyAndAddExtension(
+            ASN1ObjectIdentifier oid, boolean isCritical, X509CertificateHolder certHolder) {
         Certificate cert = certHolder.toASN1Structure();
         Extension extension = cert.getTBSCertificate().getExtensions().getExtension(oid);
         if (extension == null) {
@@ -149,7 +193,11 @@ public class X509v3CertificateBuilder {
         }
         try {
             TBSCertificate tbsCert = this.tbsGen.generateTBSCertificate();
-            return new X509CertificateHolder(generateStructure(tbsCert, signer.getAlgorithmIdentifier(), generateSig(signer, tbsCert)));
+            return new X509CertificateHolder(
+                    generateStructure(
+                            tbsCert,
+                            signer.getAlgorithmIdentifier(),
+                            generateSig(signer, tbsCert)));
         } catch (IOException e) {
             throw new IllegalArgumentException("cannot produce certificate signature");
         }
@@ -162,7 +210,8 @@ public class X509v3CertificateBuilder {
         return signer.getSignature();
     }
 
-    private static Certificate generateStructure(TBSCertificate tbsCert, AlgorithmIdentifier sigAlgId, byte[] signature) {
+    private static Certificate generateStructure(
+            TBSCertificate tbsCert, AlgorithmIdentifier sigAlgId, byte[] signature) {
         ASN1EncodableVector v = new ASN1EncodableVector();
         v.add(tbsCert);
         v.add(sigAlgId);

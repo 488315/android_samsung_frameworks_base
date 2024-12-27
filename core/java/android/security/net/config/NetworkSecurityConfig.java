@@ -3,6 +3,7 @@ package android.security.net.config;
 import android.content.pm.ApplicationInfo;
 import android.util.ArrayMap;
 import android.util.ArraySet;
+
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,20 +28,34 @@ public final class NetworkSecurityConfig {
     private NetworkSecurityTrustManager mTrustManager;
     private final Object mTrustManagerLock;
 
-    private NetworkSecurityConfig(boolean cleartextTrafficPermitted, boolean hstsEnforced, boolean certificateTransparencyVerificationRequired, PinSet pins, List<CertificatesEntryRef> certificatesEntryRefs) {
+    private NetworkSecurityConfig(
+            boolean cleartextTrafficPermitted,
+            boolean hstsEnforced,
+            boolean certificateTransparencyVerificationRequired,
+            PinSet pins,
+            List<CertificatesEntryRef> certificatesEntryRefs) {
         this.mAnchorsLock = new Object();
         this.mTrustManagerLock = new Object();
         this.mCleartextTrafficPermitted = cleartextTrafficPermitted;
         this.mHstsEnforced = hstsEnforced;
-        this.mCertificateTransparencyVerificationRequired = certificateTransparencyVerificationRequired;
+        this.mCertificateTransparencyVerificationRequired =
+                certificateTransparencyVerificationRequired;
         this.mPins = pins;
         this.mCertificatesEntryRefs = certificatesEntryRefs;
-        Collections.sort(this.mCertificatesEntryRefs, new Comparator<CertificatesEntryRef>() { // from class: android.security.net.config.NetworkSecurityConfig.1
-            @Override // java.util.Comparator
-            public int compare(CertificatesEntryRef certificatesEntryRef, CertificatesEntryRef certificatesEntryRef2) {
-                return certificatesEntryRef.overridesPins() ? certificatesEntryRef2.overridesPins() ? 0 : -1 : certificatesEntryRef2.overridesPins() ? 1 : 0;
-            }
-        });
+        Collections.sort(
+                this.mCertificatesEntryRefs,
+                new Comparator<
+                        CertificatesEntryRef>() { // from class:
+                                                  // android.security.net.config.NetworkSecurityConfig.1
+                    @Override // java.util.Comparator
+                    public int compare(
+                            CertificatesEntryRef certificatesEntryRef,
+                            CertificatesEntryRef certificatesEntryRef2) {
+                        return certificatesEntryRef.overridesPins()
+                                ? certificatesEntryRef2.overridesPins() ? 0 : -1
+                                : certificatesEntryRef2.overridesPins() ? 1 : 0;
+                    }
+                });
     }
 
     public Set<TrustAnchor> getTrustAnchors() {
@@ -130,11 +145,17 @@ public final class NetworkSecurityConfig {
     }
 
     public static Builder getDefaultBuilder(ApplicationInfo info) {
-        Builder builder = new Builder().setHstsEnforced(false).addCertificatesEntryRef(new CertificatesEntryRef(SystemCertificateSource.getInstance(), false));
+        Builder builder =
+                new Builder()
+                        .setHstsEnforced(false)
+                        .addCertificatesEntryRef(
+                                new CertificatesEntryRef(
+                                        SystemCertificateSource.getInstance(), false));
         boolean cleartextTrafficPermitted = info.targetSdkVersion < 28 && !info.isInstantApp();
         builder.setCleartextTrafficPermitted(cleartextTrafficPermitted);
         if (info.targetSdkVersion <= 23 && !info.isPrivilegedApp()) {
-            builder.addCertificatesEntryRef(new CertificatesEntryRef(UserCertificateSource.getInstance(), false));
+            builder.addCertificatesEntryRef(
+                    new CertificatesEntryRef(UserCertificateSource.getInstance(), false));
         }
         return builder;
     }
@@ -264,10 +285,16 @@ public final class NetworkSecurityConfig {
         public NetworkSecurityConfig build() {
             boolean cleartextPermitted = getEffectiveCleartextTrafficPermitted();
             boolean hstsEnforced = getEffectiveHstsEnforced();
-            boolean certificateTransparencyVerificationRequired = getCertificateTransparencyVerificationRequired();
+            boolean certificateTransparencyVerificationRequired =
+                    getCertificateTransparencyVerificationRequired();
             PinSet pinSet = getEffectivePinSet();
             List<CertificatesEntryRef> entryRefs = getEffectiveCertificatesEntryRefs();
-            return new NetworkSecurityConfig(cleartextPermitted, hstsEnforced, certificateTransparencyVerificationRequired, pinSet, entryRefs);
+            return new NetworkSecurityConfig(
+                    cleartextPermitted,
+                    hstsEnforced,
+                    certificateTransparencyVerificationRequired,
+                    pinSet,
+                    entryRefs);
         }
     }
 }

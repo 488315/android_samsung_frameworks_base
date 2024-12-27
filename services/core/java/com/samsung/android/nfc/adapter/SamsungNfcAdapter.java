@@ -9,7 +9,7 @@ import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.util.Log;
-import com.samsung.android.nfc.adapter.ISamsungNfcAdapter;
+
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -23,7 +23,9 @@ public final class SamsungNfcAdapter {
         Log.e("SamsungNfcAdapter", "Nfc Samsung service dead - attempting to recover", exc);
         ISamsungNfcAdapter serviceInterface = getServiceInterface();
         if (serviceInterface == null) {
-            Log.e("SamsungNfcAdapter", "Could not retrieve Nfc Samsung service during service recovery");
+            Log.e(
+                    "SamsungNfcAdapter",
+                    "Could not retrieve Nfc Samsung service during service recovery");
         } else {
             sService = serviceInterface;
         }
@@ -37,9 +39,11 @@ public final class SamsungNfcAdapter {
                 }
                 Context applicationContext = context.getApplicationContext();
                 if (applicationContext == null) {
-                    throw new IllegalArgumentException("context not associated with any application(using a mock context?)");
+                    throw new IllegalArgumentException(
+                            "context not associated with any application(using a mock context?)");
                 }
-                SamsungNfcAdapter samsungNfcAdapter = (SamsungNfcAdapter) mAdapter.get(applicationContext);
+                SamsungNfcAdapter samsungNfcAdapter =
+                        (SamsungNfcAdapter) mAdapter.get(applicationContext);
                 if (samsungNfcAdapter == null) {
                     samsungNfcAdapter = new SamsungNfcAdapter();
                     try {
@@ -68,7 +72,8 @@ public final class SamsungNfcAdapter {
             return null;
         }
         int i = ISamsungNfcAdapter.Stub.$r8$clinit;
-        IInterface queryLocalInterface = service.queryLocalInterface("com.samsung.android.nfc.adapter.ISamsungNfcAdapter");
+        IInterface queryLocalInterface =
+                service.queryLocalInterface("com.samsung.android.nfc.adapter.ISamsungNfcAdapter");
         if (queryLocalInterface != null && (queryLocalInterface instanceof ISamsungNfcAdapter)) {
             return (ISamsungNfcAdapter) queryLocalInterface;
         }
@@ -99,7 +104,7 @@ public final class SamsungNfcAdapter {
             return ((ISamsungNfcAdapter.Stub.Proxy) sService).startLedCover(new Binder());
         } catch (RemoteException e) {
             attemptDeadServiceRecovery(e);
-            return new byte[]{3};
+            return new byte[] {3};
         }
     }
 
@@ -148,7 +153,7 @@ public final class SamsungNfcAdapter {
             return ((ISamsungNfcAdapter.Stub.Proxy) sService).transceiveLedCover(bArr);
         } catch (RemoteException e) {
             attemptDeadServiceRecovery(e);
-            return new byte[]{3};
+            return new byte[] {3};
         }
     }
 }

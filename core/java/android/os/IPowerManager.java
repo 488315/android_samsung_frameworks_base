@@ -1,8 +1,7 @@
 package android.os;
 
 import android.hardware.usb.UsbManager;
-import android.os.IWakeLockCallback;
-import android.os.Parcelable;
+
 import java.util.List;
 
 /* loaded from: classes3.dex */
@@ -28,15 +27,36 @@ public interface IPowerManager extends IInterface {
     public static final int MAX_LOCATION_MODE = 4;
     public static final int MIN_LOCATION_MODE = 0;
 
-    void acquireLowPowerStandbyPorts(IBinder iBinder, List<LowPowerStandbyPortDescription> list) throws RemoteException;
+    void acquireLowPowerStandbyPorts(IBinder iBinder, List<LowPowerStandbyPortDescription> list)
+            throws RemoteException;
 
-    void acquireWakeLock(IBinder iBinder, int i, String str, String str2, WorkSource workSource, String str3, int i2, IWakeLockCallback iWakeLockCallback) throws RemoteException;
+    void acquireWakeLock(
+            IBinder iBinder,
+            int i,
+            String str,
+            String str2,
+            WorkSource workSource,
+            String str3,
+            int i2,
+            IWakeLockCallback iWakeLockCallback)
+            throws RemoteException;
 
-    void acquireWakeLockAsync(IBinder iBinder, int i, String str, String str2, WorkSource workSource, String str3) throws RemoteException;
+    void acquireWakeLockAsync(
+            IBinder iBinder, int i, String str, String str2, WorkSource workSource, String str3)
+            throws RemoteException;
 
-    void acquireWakeLockWithUid(IBinder iBinder, int i, String str, String str2, int i2, int i3, IWakeLockCallback iWakeLockCallback) throws RemoteException;
+    void acquireWakeLockWithUid(
+            IBinder iBinder,
+            int i,
+            String str,
+            String str2,
+            int i2,
+            int i3,
+            IWakeLockCallback iWakeLockCallback)
+            throws RemoteException;
 
-    void addAdaptiveScreenOffTimeoutConfig(List<AdaptiveScreenOffTimeoutConfig> list) throws RemoteException;
+    void addAdaptiveScreenOffTimeoutConfig(List<AdaptiveScreenOffTimeoutConfig> list)
+            throws RemoteException;
 
     boolean areAutoPowerSaveModesEnabled() throws RemoteException;
 
@@ -140,13 +160,15 @@ public interface IPowerManager extends IInterface {
 
     boolean setAdaptivePowerSaveEnabled(boolean z) throws RemoteException;
 
-    boolean setAdaptivePowerSavePolicy(BatterySaverPolicyConfig batterySaverPolicyConfig) throws RemoteException;
+    boolean setAdaptivePowerSavePolicy(BatterySaverPolicyConfig batterySaverPolicyConfig)
+            throws RemoteException;
 
     void setAttentionLight(boolean z, int i) throws RemoteException;
 
     void setAutoBrightnessLimit(int i, int i2, boolean z) throws RemoteException;
 
-    void setBatteryDischargePrediction(ParcelDuration parcelDuration, boolean z) throws RemoteException;
+    void setBatteryDischargePrediction(ParcelDuration parcelDuration, boolean z)
+            throws RemoteException;
 
     void setCoverType(int i) throws RemoteException;
 
@@ -158,7 +180,8 @@ public interface IPowerManager extends IInterface {
 
     void setFreezingScreenBrightness(boolean z) throws RemoteException;
 
-    boolean setFullPowerSavePolicy(BatterySaverPolicyConfig batterySaverPolicyConfig) throws RemoteException;
+    boolean setFullPowerSavePolicy(BatterySaverPolicyConfig batterySaverPolicyConfig)
+            throws RemoteException;
 
     void setHdrBrightnessLimit(IBinder iBinder, int i, int i2) throws RemoteException;
 
@@ -168,7 +191,8 @@ public interface IPowerManager extends IInterface {
 
     void setLowPowerStandbyEnabled(boolean z) throws RemoteException;
 
-    void setLowPowerStandbyPolicy(LowPowerStandbyPolicy lowPowerStandbyPolicy) throws RemoteException;
+    void setLowPowerStandbyPolicy(LowPowerStandbyPolicy lowPowerStandbyPolicy)
+            throws RemoteException;
 
     void setMasterBrightnessLimit(int i, int i2, int i3) throws RemoteException;
 
@@ -196,13 +220,15 @@ public interface IPowerManager extends IInterface {
 
     void updateCoverState(boolean z) throws RemoteException;
 
-    void updateWakeLockCallback(IBinder iBinder, IWakeLockCallback iWakeLockCallback) throws RemoteException;
+    void updateWakeLockCallback(IBinder iBinder, IWakeLockCallback iWakeLockCallback)
+            throws RemoteException;
 
     void updateWakeLockUids(IBinder iBinder, int[] iArr) throws RemoteException;
 
     void updateWakeLockUidsAsync(IBinder iBinder, int[] iArr) throws RemoteException;
 
-    void updateWakeLockWorkSource(IBinder iBinder, WorkSource workSource, String str) throws RemoteException;
+    void updateWakeLockWorkSource(IBinder iBinder, WorkSource workSource, String str)
+            throws RemoteException;
 
     void userActivity(int i, long j, int i2, int i3) throws RemoteException;
 
@@ -210,28 +236,39 @@ public interface IPowerManager extends IInterface {
 
     public static class Default implements IPowerManager {
         @Override // android.os.IPowerManager
-        public void acquireWakeLock(IBinder lock, int flags, String tag, String packageName, WorkSource ws, String historyTag, int displayId, IWakeLockCallback callback) throws RemoteException {
-        }
+        public void acquireWakeLock(
+                IBinder lock,
+                int flags,
+                String tag,
+                String packageName,
+                WorkSource ws,
+                String historyTag,
+                int displayId,
+                IWakeLockCallback callback)
+                throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void acquireWakeLockWithUid(IBinder lock, int flags, String tag, String packageName, int uidtoblame, int displayId, IWakeLockCallback callback) throws RemoteException {
-        }
+        public void acquireWakeLockWithUid(
+                IBinder lock,
+                int flags,
+                String tag,
+                String packageName,
+                int uidtoblame,
+                int displayId,
+                IWakeLockCallback callback)
+                throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void releaseWakeLock(IBinder lock, int flags) throws RemoteException {
-        }
+        public void releaseWakeLock(IBinder lock, int flags) throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void updateWakeLockUids(IBinder lock, int[] uids) throws RemoteException {
-        }
+        public void updateWakeLockUids(IBinder lock, int[] uids) throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void setPowerBoost(int boost, int durationMs) throws RemoteException {
-        }
+        public void setPowerBoost(int boost, int durationMs) throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void setPowerMode(int mode, boolean enabled) throws RemoteException {
-        }
+        public void setPowerMode(int mode, boolean enabled) throws RemoteException {}
 
         @Override // android.os.IPowerManager
         public boolean setPowerModeChecked(int mode, boolean enabled) throws RemoteException {
@@ -239,12 +276,12 @@ public interface IPowerManager extends IInterface {
         }
 
         @Override // android.os.IPowerManager
-        public void updateWakeLockWorkSource(IBinder lock, WorkSource ws, String historyTag) throws RemoteException {
-        }
+        public void updateWakeLockWorkSource(IBinder lock, WorkSource ws, String historyTag)
+                throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void updateWakeLockCallback(IBinder lock, IWakeLockCallback callback) throws RemoteException {
-        }
+        public void updateWakeLockCallback(IBinder lock, IWakeLockCallback callback)
+                throws RemoteException {}
 
         @Override // android.os.IPowerManager
         public boolean isWakeLockLevelSupported(int level) throws RemoteException {
@@ -252,24 +289,22 @@ public interface IPowerManager extends IInterface {
         }
 
         @Override // android.os.IPowerManager
-        public void userActivity(int displayId, long time, int event, int flags) throws RemoteException {
-        }
+        public void userActivity(int displayId, long time, int event, int flags)
+                throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void wakeUp(long time, int reason, String details, String opPackageName) throws RemoteException {
-        }
+        public void wakeUp(long time, int reason, String details, String opPackageName)
+                throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void goToSleep(long time, int reason, int flags) throws RemoteException {
-        }
+        public void goToSleep(long time, int reason, int flags) throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void goToSleepWithDisplayId(int displayId, long time, int reason, int flags) throws RemoteException {
-        }
+        public void goToSleepWithDisplayId(int displayId, long time, int reason, int flags)
+                throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void nap(long time) throws RemoteException {
-        }
+        public void nap(long time) throws RemoteException {}
 
         @Override // android.os.IPowerManager
         public float getBrightnessConstraint(int constraint) throws RemoteException {
@@ -317,17 +352,20 @@ public interface IPowerManager extends IInterface {
         }
 
         @Override // android.os.IPowerManager
-        public boolean setFullPowerSavePolicy(BatterySaverPolicyConfig config) throws RemoteException {
+        public boolean setFullPowerSavePolicy(BatterySaverPolicyConfig config)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.os.IPowerManager
-        public boolean setDynamicPowerSaveHint(boolean powerSaveHint, int disableThreshold) throws RemoteException {
+        public boolean setDynamicPowerSaveHint(boolean powerSaveHint, int disableThreshold)
+                throws RemoteException {
             return false;
         }
 
         @Override // android.os.IPowerManager
-        public boolean setAdaptivePowerSavePolicy(BatterySaverPolicyConfig config) throws RemoteException {
+        public boolean setAdaptivePowerSavePolicy(BatterySaverPolicyConfig config)
+                throws RemoteException {
             return false;
         }
 
@@ -342,8 +380,8 @@ public interface IPowerManager extends IInterface {
         }
 
         @Override // android.os.IPowerManager
-        public void setBatteryDischargePrediction(ParcelDuration timeRemaining, boolean isCustomized) throws RemoteException {
-        }
+        public void setBatteryDischargePrediction(
+                ParcelDuration timeRemaining, boolean isCustomized) throws RemoteException {}
 
         @Override // android.os.IPowerManager
         public ParcelDuration getBatteryDischargePrediction() throws RemoteException {
@@ -376,20 +414,17 @@ public interface IPowerManager extends IInterface {
         }
 
         @Override // android.os.IPowerManager
-        public void setLowPowerStandbyEnabled(boolean enabled) throws RemoteException {
-        }
+        public void setLowPowerStandbyEnabled(boolean enabled) throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void setLowPowerStandbyActiveDuringMaintenance(boolean activeDuringMaintenance) throws RemoteException {
-        }
+        public void setLowPowerStandbyActiveDuringMaintenance(boolean activeDuringMaintenance)
+                throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void forceLowPowerStandbyActive(boolean active) throws RemoteException {
-        }
+        public void forceLowPowerStandbyActive(boolean active) throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void setLowPowerStandbyPolicy(LowPowerStandbyPolicy policy) throws RemoteException {
-        }
+        public void setLowPowerStandbyPolicy(LowPowerStandbyPolicy policy) throws RemoteException {}
 
         @Override // android.os.IPowerManager
         public LowPowerStandbyPolicy getLowPowerStandbyPolicy() throws RemoteException {
@@ -412,33 +447,29 @@ public interface IPowerManager extends IInterface {
         }
 
         @Override // android.os.IPowerManager
-        public void acquireLowPowerStandbyPorts(IBinder token, List<LowPowerStandbyPortDescription> ports) throws RemoteException {
-        }
+        public void acquireLowPowerStandbyPorts(
+                IBinder token, List<LowPowerStandbyPortDescription> ports) throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void releaseLowPowerStandbyPorts(IBinder token) throws RemoteException {
-        }
+        public void releaseLowPowerStandbyPorts(IBinder token) throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public List<LowPowerStandbyPortDescription> getActiveLowPowerStandbyPorts() throws RemoteException {
+        public List<LowPowerStandbyPortDescription> getActiveLowPowerStandbyPorts()
+                throws RemoteException {
             return null;
         }
 
         @Override // android.os.IPowerManager
-        public void reboot(boolean confirm, String reason, boolean wait) throws RemoteException {
-        }
+        public void reboot(boolean confirm, String reason, boolean wait) throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void rebootSafeMode(boolean confirm, boolean wait) throws RemoteException {
-        }
+        public void rebootSafeMode(boolean confirm, boolean wait) throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void shutdown(boolean confirm, String reason, boolean wait) throws RemoteException {
-        }
+        public void shutdown(boolean confirm, String reason, boolean wait) throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void crash(String message) throws RemoteException {
-        }
+        public void crash(String message) throws RemoteException {}
 
         @Override // android.os.IPowerManager
         public int getLastShutdownReason() throws RemoteException {
@@ -451,24 +482,26 @@ public interface IPowerManager extends IInterface {
         }
 
         @Override // android.os.IPowerManager
-        public void setStayOnSetting(int val) throws RemoteException {
-        }
+        public void setStayOnSetting(int val) throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void boostScreenBrightness(long time) throws RemoteException {
-        }
+        public void boostScreenBrightness(long time) throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void acquireWakeLockAsync(IBinder lock, int flags, String tag, String packageName, WorkSource ws, String historyTag) throws RemoteException {
-        }
+        public void acquireWakeLockAsync(
+                IBinder lock,
+                int flags,
+                String tag,
+                String packageName,
+                WorkSource ws,
+                String historyTag)
+                throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void releaseWakeLockAsync(IBinder lock, int flags) throws RemoteException {
-        }
+        public void releaseWakeLockAsync(IBinder lock, int flags) throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void updateWakeLockUidsAsync(IBinder lock, int[] uids) throws RemoteException {
-        }
+        public void updateWakeLockUidsAsync(IBinder lock, int[] uids) throws RemoteException {}
 
         @Override // android.os.IPowerManager
         public boolean isScreenBrightnessBoosted() throws RemoteException {
@@ -476,12 +509,10 @@ public interface IPowerManager extends IInterface {
         }
 
         @Override // android.os.IPowerManager
-        public void setAttentionLight(boolean on, int color) throws RemoteException {
-        }
+        public void setAttentionLight(boolean on, int color) throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void setDozeAfterScreenOff(boolean on) throws RemoteException {
-        }
+        public void setDozeAfterScreenOff(boolean on) throws RemoteException {}
 
         @Override // android.os.IPowerManager
         public boolean isAmbientDisplayAvailable() throws RemoteException {
@@ -489,8 +520,7 @@ public interface IPowerManager extends IInterface {
         }
 
         @Override // android.os.IPowerManager
-        public void suppressAmbientDisplay(String token, boolean suppress) throws RemoteException {
-        }
+        public void suppressAmbientDisplay(String token, boolean suppress) throws RemoteException {}
 
         @Override // android.os.IPowerManager
         public boolean isAmbientDisplaySuppressedForToken(String token) throws RemoteException {
@@ -503,7 +533,8 @@ public interface IPowerManager extends IInterface {
         }
 
         @Override // android.os.IPowerManager
-        public boolean isAmbientDisplaySuppressedForTokenByApp(String token, int appUid) throws RemoteException {
+        public boolean isAmbientDisplaySuppressedForTokenByApp(String token, int appUid)
+                throws RemoteException {
             return false;
         }
 
@@ -518,16 +549,16 @@ public interface IPowerManager extends IInterface {
         }
 
         @Override // android.os.IPowerManager
-        public void setAutoBrightnessLimit(int lowerLimit, int upperLimit, boolean slowChange) throws RemoteException {
-        }
+        public void setAutoBrightnessLimit(int lowerLimit, int upperLimit, boolean slowChange)
+                throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void setMasterBrightnessLimit(int lowerLimit, int upperLimit, int brightnessLimitPeriod) throws RemoteException {
-        }
+        public void setMasterBrightnessLimit(
+                int lowerLimit, int upperLimit, int brightnessLimitPeriod) throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void setHdrBrightnessLimit(IBinder lock, int upperLimit, int brightnsesLimitPeriod) throws RemoteException {
-        }
+        public void setHdrBrightnessLimit(IBinder lock, int upperLimit, int brightnsesLimitPeriod)
+                throws RemoteException {}
 
         @Override // android.os.IPowerManager
         public float getCurrentBrightness(boolean ratio) throws RemoteException {
@@ -535,24 +566,21 @@ public interface IPowerManager extends IInterface {
         }
 
         @Override // android.os.IPowerManager
-        public void updateCoverState(boolean closed) throws RemoteException {
-        }
+        public void updateCoverState(boolean closed) throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void switchForceLcdBacklightOffState() throws RemoteException {
-        }
+        public void switchForceLcdBacklightOffState() throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void setCoverType(int coverType) throws RemoteException {
-        }
+        public void setCoverType(int coverType) throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void setScreenBrightnessScaleFactor(float scaleFactor, IBinder binder) throws RemoteException {
-        }
+        public void setScreenBrightnessScaleFactor(float scaleFactor, IBinder binder)
+                throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void setProximityDebounceTime(IBinder lock, int positive, int negative) throws RemoteException {
-        }
+        public void setProximityDebounceTime(IBinder lock, int positive, int negative)
+                throws RemoteException {}
 
         @Override // android.os.IPowerManager
         public boolean isInteractiveForDisplay(int displayId) throws RemoteException {
@@ -560,20 +588,17 @@ public interface IPowerManager extends IInterface {
         }
 
         @Override // android.os.IPowerManager
-        public void setEarlyWakeUp(boolean enable) throws RemoteException {
-        }
+        public void setEarlyWakeUp(boolean enable) throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void setFreezingScreenBrightness(boolean freezing) throws RemoteException {
-        }
+        public void setFreezingScreenBrightness(boolean freezing) throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void setLCDFlashMode(boolean eanble, IBinder binder) throws RemoteException {
-        }
+        public void setLCDFlashMode(boolean eanble, IBinder binder) throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void setScreenCurtainEnabled(IBinder token, boolean enable, int displayState) throws RemoteException {
-        }
+        public void setScreenCurtainEnabled(IBinder token, boolean enable, int displayState)
+                throws RemoteException {}
 
         @Override // android.os.IPowerManager
         public boolean isScreenCurtainEnabled() throws RemoteException {
@@ -591,15 +616,16 @@ public interface IPowerManager extends IInterface {
         }
 
         @Override // android.os.IPowerManager
-        public void addAdaptiveScreenOffTimeoutConfig(List<AdaptiveScreenOffTimeoutConfig> config) throws RemoteException {
-        }
+        public void addAdaptiveScreenOffTimeoutConfig(List<AdaptiveScreenOffTimeoutConfig> config)
+                throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public void removeAdaptiveScreenOffTimeoutConfig(List<String> list) throws RemoteException {
-        }
+        public void removeAdaptiveScreenOffTimeoutConfig(List<String> list)
+                throws RemoteException {}
 
         @Override // android.os.IPowerManager
-        public List<AdaptiveScreenOffTimeoutConfig> getAdaptiveScreenOffTimeoutConfig() throws RemoteException {
+        public List<AdaptiveScreenOffTimeoutConfig> getAdaptiveScreenOffTimeoutConfig()
+                throws RemoteException {
             return null;
         }
 
@@ -619,7 +645,7 @@ public interface IPowerManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPowerManager {
+    public abstract static class Stub extends Binder implements IPowerManager {
         public static final String DESCRIPTOR = "android.os.IPowerManager";
         static final int TRANSACTION_acquireLowPowerStandbyPorts = 45;
         static final int TRANSACTION_acquireWakeLock = 1;
@@ -925,7 +951,8 @@ public interface IPowerManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -942,7 +969,8 @@ public interface IPowerManager extends IInterface {
                     WorkSource _arg4 = (WorkSource) data.readTypedObject(WorkSource.CREATOR);
                     String _arg5 = data.readString();
                     int _arg6 = data.readInt();
-                    IWakeLockCallback _arg7 = IWakeLockCallback.Stub.asInterface(data.readStrongBinder());
+                    IWakeLockCallback _arg7 =
+                            IWakeLockCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     acquireWakeLock(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7);
                     reply.writeNoException();
@@ -954,7 +982,8 @@ public interface IPowerManager extends IInterface {
                     String _arg32 = data.readString();
                     int _arg42 = data.readInt();
                     int _arg52 = data.readInt();
-                    IWakeLockCallback _arg62 = IWakeLockCallback.Stub.asInterface(data.readStrongBinder());
+                    IWakeLockCallback _arg62 =
+                            IWakeLockCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     acquireWakeLockWithUid(_arg02, _arg12, _arg22, _arg32, _arg42, _arg52, _arg62);
                     reply.writeNoException();
@@ -1003,7 +1032,8 @@ public interface IPowerManager extends IInterface {
                     return true;
                 case 9:
                     IBinder _arg09 = data.readStrongBinder();
-                    IWakeLockCallback _arg19 = IWakeLockCallback.Stub.asInterface(data.readStrongBinder());
+                    IWakeLockCallback _arg19 =
+                            IWakeLockCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     updateWakeLockCallback(_arg09, _arg19);
                     reply.writeNoException();
@@ -1110,7 +1140,9 @@ public interface IPowerManager extends IInterface {
                     reply.writeTypedObject(_result11, 1);
                     return true;
                 case 25:
-                    BatterySaverPolicyConfig _arg020 = (BatterySaverPolicyConfig) data.readTypedObject(BatterySaverPolicyConfig.CREATOR);
+                    BatterySaverPolicyConfig _arg020 =
+                            (BatterySaverPolicyConfig)
+                                    data.readTypedObject(BatterySaverPolicyConfig.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result12 = setFullPowerSavePolicy(_arg020);
                     reply.writeNoException();
@@ -1125,7 +1157,9 @@ public interface IPowerManager extends IInterface {
                     reply.writeBoolean(_result13);
                     return true;
                 case 27:
-                    BatterySaverPolicyConfig _arg022 = (BatterySaverPolicyConfig) data.readTypedObject(BatterySaverPolicyConfig.CREATOR);
+                    BatterySaverPolicyConfig _arg022 =
+                            (BatterySaverPolicyConfig)
+                                    data.readTypedObject(BatterySaverPolicyConfig.CREATOR);
                     data.enforceNoDataAvail();
                     boolean _result14 = setAdaptivePowerSavePolicy(_arg022);
                     reply.writeNoException();
@@ -1144,7 +1178,8 @@ public interface IPowerManager extends IInterface {
                     reply.writeInt(_result16);
                     return true;
                 case 30:
-                    ParcelDuration _arg024 = (ParcelDuration) data.readTypedObject(ParcelDuration.CREATOR);
+                    ParcelDuration _arg024 =
+                            (ParcelDuration) data.readTypedObject(ParcelDuration.CREATOR);
                     boolean _arg115 = data.readBoolean();
                     data.enforceNoDataAvail();
                     setBatteryDischargePrediction(_arg024, _arg115);
@@ -1199,7 +1234,9 @@ public interface IPowerManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 40:
-                    LowPowerStandbyPolicy _arg028 = (LowPowerStandbyPolicy) data.readTypedObject(LowPowerStandbyPolicy.CREATOR);
+                    LowPowerStandbyPolicy _arg028 =
+                            (LowPowerStandbyPolicy)
+                                    data.readTypedObject(LowPowerStandbyPolicy.CREATOR);
                     data.enforceNoDataAvail();
                     setLowPowerStandbyPolicy(_arg028);
                     reply.writeNoException();
@@ -1230,7 +1267,8 @@ public interface IPowerManager extends IInterface {
                     return true;
                 case 45:
                     IBinder _arg031 = data.readStrongBinder();
-                    List<LowPowerStandbyPortDescription> _arg116 = data.createTypedArrayList(LowPowerStandbyPortDescription.CREATOR);
+                    List<LowPowerStandbyPortDescription> _arg116 =
+                            data.createTypedArrayList(LowPowerStandbyPortDescription.CREATOR);
                     data.enforceNoDataAvail();
                     acquireLowPowerStandbyPorts(_arg031, _arg116);
                     reply.writeNoException();
@@ -1242,7 +1280,8 @@ public interface IPowerManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 47:
-                    List<LowPowerStandbyPortDescription> _result27 = getActiveLowPowerStandbyPorts();
+                    List<LowPowerStandbyPortDescription> _result27 =
+                            getActiveLowPowerStandbyPorts();
                     reply.writeNoException();
                     reply.writeTypedList(_result27, 1);
                     return true;
@@ -1493,7 +1532,8 @@ public interface IPowerManager extends IInterface {
                     reply.writeString(_result41);
                     return true;
                 case 86:
-                    List<AdaptiveScreenOffTimeoutConfig> _arg061 = data.createTypedArrayList(AdaptiveScreenOffTimeoutConfig.CREATOR);
+                    List<AdaptiveScreenOffTimeoutConfig> _arg061 =
+                            data.createTypedArrayList(AdaptiveScreenOffTimeoutConfig.CREATOR);
                     data.enforceNoDataAvail();
                     addAdaptiveScreenOffTimeoutConfig(_arg061);
                     reply.writeNoException();
@@ -1505,7 +1545,8 @@ public interface IPowerManager extends IInterface {
                     reply.writeNoException();
                     return true;
                 case 88:
-                    List<AdaptiveScreenOffTimeoutConfig> _result42 = getAdaptiveScreenOffTimeoutConfig();
+                    List<AdaptiveScreenOffTimeoutConfig> _result42 =
+                            getAdaptiveScreenOffTimeoutConfig();
                     reply.writeNoException();
                     reply.writeTypedList(_result42, 1);
                     return true;
@@ -1541,7 +1582,16 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public void acquireWakeLock(IBinder lock, int flags, String tag, String packageName, WorkSource ws, String historyTag, int displayId, IWakeLockCallback callback) throws RemoteException {
+            public void acquireWakeLock(
+                    IBinder lock,
+                    int flags,
+                    String tag,
+                    String packageName,
+                    WorkSource ws,
+                    String historyTag,
+                    int displayId,
+                    IWakeLockCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1563,7 +1613,15 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public void acquireWakeLockWithUid(IBinder lock, int flags, String tag, String packageName, int uidtoblame, int displayId, IWakeLockCallback callback) throws RemoteException {
+            public void acquireWakeLockWithUid(
+                    IBinder lock,
+                    int flags,
+                    String tag,
+                    String packageName,
+                    int uidtoblame,
+                    int displayId,
+                    IWakeLockCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1660,7 +1718,8 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public void updateWakeLockWorkSource(IBinder lock, WorkSource ws, String historyTag) throws RemoteException {
+            public void updateWakeLockWorkSource(IBinder lock, WorkSource ws, String historyTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1677,7 +1736,8 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public void updateWakeLockCallback(IBinder lock, IWakeLockCallback callback) throws RemoteException {
+            public void updateWakeLockCallback(IBinder lock, IWakeLockCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1710,7 +1770,8 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public void userActivity(int displayId, long time, int event, int flags) throws RemoteException {
+            public void userActivity(int displayId, long time, int event, int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1728,7 +1789,8 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public void wakeUp(long time, int reason, String details, String opPackageName) throws RemoteException {
+            public void wakeUp(long time, int reason, String details, String opPackageName)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1763,7 +1825,8 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public void goToSleepWithDisplayId(int displayId, long time, int reason, int flags) throws RemoteException {
+            public void goToSleepWithDisplayId(int displayId, long time, int reason, int flags)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1886,7 +1949,8 @@ public interface IPowerManager extends IInterface {
                     _data.writeInt(serviceType);
                     this.mRemote.transact(21, _data, _reply, 0);
                     _reply.readException();
-                    PowerSaveState _result = (PowerSaveState) _reply.readTypedObject(PowerSaveState.CREATOR);
+                    PowerSaveState _result =
+                            (PowerSaveState) _reply.readTypedObject(PowerSaveState.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1935,7 +1999,9 @@ public interface IPowerManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(24, _data, _reply, 0);
                     _reply.readException();
-                    BatterySaverPolicyConfig _result = (BatterySaverPolicyConfig) _reply.readTypedObject(BatterySaverPolicyConfig.CREATOR);
+                    BatterySaverPolicyConfig _result =
+                            (BatterySaverPolicyConfig)
+                                    _reply.readTypedObject(BatterySaverPolicyConfig.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1944,7 +2010,8 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public boolean setFullPowerSavePolicy(BatterySaverPolicyConfig config) throws RemoteException {
+            public boolean setFullPowerSavePolicy(BatterySaverPolicyConfig config)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1961,7 +2028,8 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public boolean setDynamicPowerSaveHint(boolean powerSaveHint, int disableThreshold) throws RemoteException {
+            public boolean setDynamicPowerSaveHint(boolean powerSaveHint, int disableThreshold)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1979,7 +2047,8 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public boolean setAdaptivePowerSavePolicy(BatterySaverPolicyConfig config) throws RemoteException {
+            public boolean setAdaptivePowerSavePolicy(BatterySaverPolicyConfig config)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2029,7 +2098,8 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public void setBatteryDischargePrediction(ParcelDuration timeRemaining, boolean isCustomized) throws RemoteException {
+            public void setBatteryDischargePrediction(
+                    ParcelDuration timeRemaining, boolean isCustomized) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2052,7 +2122,8 @@ public interface IPowerManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(31, _data, _reply, 0);
                     _reply.readException();
-                    ParcelDuration _result = (ParcelDuration) _reply.readTypedObject(ParcelDuration.CREATOR);
+                    ParcelDuration _result =
+                            (ParcelDuration) _reply.readTypedObject(ParcelDuration.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2156,7 +2227,8 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public void setLowPowerStandbyActiveDuringMaintenance(boolean activeDuringMaintenance) throws RemoteException {
+            public void setLowPowerStandbyActiveDuringMaintenance(boolean activeDuringMaintenance)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2186,7 +2258,8 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public void setLowPowerStandbyPolicy(LowPowerStandbyPolicy policy) throws RemoteException {
+            public void setLowPowerStandbyPolicy(LowPowerStandbyPolicy policy)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2208,7 +2281,9 @@ public interface IPowerManager extends IInterface {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(41, _data, _reply, 0);
                     _reply.readException();
-                    LowPowerStandbyPolicy _result = (LowPowerStandbyPolicy) _reply.readTypedObject(LowPowerStandbyPolicy.CREATOR);
+                    LowPowerStandbyPolicy _result =
+                            (LowPowerStandbyPolicy)
+                                    _reply.readTypedObject(LowPowerStandbyPolicy.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2250,7 +2325,8 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public boolean isFeatureAllowedInLowPowerStandby(String feature) throws RemoteException {
+            public boolean isFeatureAllowedInLowPowerStandby(String feature)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2267,7 +2343,9 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public void acquireLowPowerStandbyPorts(IBinder token, List<LowPowerStandbyPortDescription> ports) throws RemoteException {
+            public void acquireLowPowerStandbyPorts(
+                    IBinder token, List<LowPowerStandbyPortDescription> ports)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2298,14 +2376,16 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public List<LowPowerStandbyPortDescription> getActiveLowPowerStandbyPorts() throws RemoteException {
+            public List<LowPowerStandbyPortDescription> getActiveLowPowerStandbyPorts()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(47, _data, _reply, 0);
                     _reply.readException();
-                    List<LowPowerStandbyPortDescription> _result = _reply.createTypedArrayList(LowPowerStandbyPortDescription.CREATOR);
+                    List<LowPowerStandbyPortDescription> _result =
+                            _reply.createTypedArrayList(LowPowerStandbyPortDescription.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2314,7 +2394,8 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public void reboot(boolean confirm, String reason, boolean wait) throws RemoteException {
+            public void reboot(boolean confirm, String reason, boolean wait)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2347,7 +2428,8 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public void shutdown(boolean confirm, String reason, boolean wait) throws RemoteException {
+            public void shutdown(boolean confirm, String reason, boolean wait)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2441,7 +2523,14 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public void acquireWakeLockAsync(IBinder lock, int flags, String tag, String packageName, WorkSource ws, String historyTag) throws RemoteException {
+            public void acquireWakeLockAsync(
+                    IBinder lock,
+                    int flags,
+                    String tag,
+                    String packageName,
+                    WorkSource ws,
+                    String historyTag)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -2547,7 +2636,8 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public void suppressAmbientDisplay(String token, boolean suppress) throws RemoteException {
+            public void suppressAmbientDisplay(String token, boolean suppress)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2596,7 +2686,8 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public boolean isAmbientDisplaySuppressedForTokenByApp(String token, int appUid) throws RemoteException {
+            public boolean isAmbientDisplaySuppressedForTokenByApp(String token, int appUid)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2647,7 +2738,8 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public void setAutoBrightnessLimit(int lowerLimit, int upperLimit, boolean slowChange) throws RemoteException {
+            public void setAutoBrightnessLimit(int lowerLimit, int upperLimit, boolean slowChange)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2664,7 +2756,9 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public void setMasterBrightnessLimit(int lowerLimit, int upperLimit, int brightnessLimitPeriod) throws RemoteException {
+            public void setMasterBrightnessLimit(
+                    int lowerLimit, int upperLimit, int brightnessLimitPeriod)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2681,7 +2775,9 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public void setHdrBrightnessLimit(IBinder lock, int upperLimit, int brightnsesLimitPeriod) throws RemoteException {
+            public void setHdrBrightnessLimit(
+                    IBinder lock, int upperLimit, int brightnsesLimitPeriod)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2759,7 +2855,8 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public void setScreenBrightnessScaleFactor(float scaleFactor, IBinder binder) throws RemoteException {
+            public void setScreenBrightnessScaleFactor(float scaleFactor, IBinder binder)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2775,7 +2872,8 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public void setProximityDebounceTime(IBinder lock, int positive, int negative) throws RemoteException {
+            public void setProximityDebounceTime(IBinder lock, int positive, int negative)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2855,7 +2953,8 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public void setScreenCurtainEnabled(IBinder token, boolean enable, int displayState) throws RemoteException {
+            public void setScreenCurtainEnabled(IBinder token, boolean enable, int displayState)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2920,7 +3019,8 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public void addAdaptiveScreenOffTimeoutConfig(List<AdaptiveScreenOffTimeoutConfig> config) throws RemoteException {
+            public void addAdaptiveScreenOffTimeoutConfig(
+                    List<AdaptiveScreenOffTimeoutConfig> config) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2935,7 +3035,8 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public void removeAdaptiveScreenOffTimeoutConfig(List<String> list) throws RemoteException {
+            public void removeAdaptiveScreenOffTimeoutConfig(List<String> list)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2950,14 +3051,16 @@ public interface IPowerManager extends IInterface {
             }
 
             @Override // android.os.IPowerManager
-            public List<AdaptiveScreenOffTimeoutConfig> getAdaptiveScreenOffTimeoutConfig() throws RemoteException {
+            public List<AdaptiveScreenOffTimeoutConfig> getAdaptiveScreenOffTimeoutConfig()
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
                     this.mRemote.transact(88, _data, _reply, 0);
                     _reply.readException();
-                    List<AdaptiveScreenOffTimeoutConfig> _result = _reply.createTypedArrayList(AdaptiveScreenOffTimeoutConfig.CREATOR);
+                    List<AdaptiveScreenOffTimeoutConfig> _result =
+                            _reply.createTypedArrayList(AdaptiveScreenOffTimeoutConfig.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -3005,21 +3108,24 @@ public interface IPowerManager extends IInterface {
     }
 
     public static class LowPowerStandbyPolicy implements Parcelable {
-        public static final Parcelable.Creator<LowPowerStandbyPolicy> CREATOR = new Parcelable.Creator<LowPowerStandbyPolicy>() { // from class: android.os.IPowerManager.LowPowerStandbyPolicy.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public LowPowerStandbyPolicy createFromParcel(Parcel _aidl_source) {
-                LowPowerStandbyPolicy _aidl_out = new LowPowerStandbyPolicy();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<LowPowerStandbyPolicy> CREATOR =
+                new Parcelable.Creator<
+                        LowPowerStandbyPolicy>() { // from class:
+                                                   // android.os.IPowerManager.LowPowerStandbyPolicy.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public LowPowerStandbyPolicy createFromParcel(Parcel _aidl_source) {
+                        LowPowerStandbyPolicy _aidl_out = new LowPowerStandbyPolicy();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public LowPowerStandbyPolicy[] newArray(int _aidl_size) {
-                return new LowPowerStandbyPolicy[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public LowPowerStandbyPolicy[] newArray(int _aidl_size) {
+                        return new LowPowerStandbyPolicy[_aidl_size];
+                    }
+                };
         public List<String> allowedFeatures;
         public int allowedReasons = 0;
         public List<String> exemptPackages;
@@ -3098,21 +3204,25 @@ public interface IPowerManager extends IInterface {
     }
 
     public static class LowPowerStandbyPortDescription implements Parcelable {
-        public static final Parcelable.Creator<LowPowerStandbyPortDescription> CREATOR = new Parcelable.Creator<LowPowerStandbyPortDescription>() { // from class: android.os.IPowerManager.LowPowerStandbyPortDescription.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public LowPowerStandbyPortDescription createFromParcel(Parcel _aidl_source) {
-                LowPowerStandbyPortDescription _aidl_out = new LowPowerStandbyPortDescription();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<LowPowerStandbyPortDescription> CREATOR =
+                new Parcelable.Creator<
+                        LowPowerStandbyPortDescription>() { // from class:
+                                                            // android.os.IPowerManager.LowPowerStandbyPortDescription.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public LowPowerStandbyPortDescription createFromParcel(Parcel _aidl_source) {
+                        LowPowerStandbyPortDescription _aidl_out =
+                                new LowPowerStandbyPortDescription();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public LowPowerStandbyPortDescription[] newArray(int _aidl_size) {
-                return new LowPowerStandbyPortDescription[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public LowPowerStandbyPortDescription[] newArray(int _aidl_size) {
+                        return new LowPowerStandbyPortDescription[_aidl_size];
+                    }
+                };
         public byte[] localAddress;
         public int protocol = 0;
         public int portMatcher = 0;
@@ -3191,21 +3301,25 @@ public interface IPowerManager extends IInterface {
     }
 
     public static class AdaptiveScreenOffTimeoutConfig implements Parcelable {
-        public static final Parcelable.Creator<AdaptiveScreenOffTimeoutConfig> CREATOR = new Parcelable.Creator<AdaptiveScreenOffTimeoutConfig>() { // from class: android.os.IPowerManager.AdaptiveScreenOffTimeoutConfig.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AdaptiveScreenOffTimeoutConfig createFromParcel(Parcel _aidl_source) {
-                AdaptiveScreenOffTimeoutConfig _aidl_out = new AdaptiveScreenOffTimeoutConfig();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<AdaptiveScreenOffTimeoutConfig> CREATOR =
+                new Parcelable.Creator<
+                        AdaptiveScreenOffTimeoutConfig>() { // from class:
+                                                            // android.os.IPowerManager.AdaptiveScreenOffTimeoutConfig.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AdaptiveScreenOffTimeoutConfig createFromParcel(Parcel _aidl_source) {
+                        AdaptiveScreenOffTimeoutConfig _aidl_out =
+                                new AdaptiveScreenOffTimeoutConfig();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public AdaptiveScreenOffTimeoutConfig[] newArray(int _aidl_size) {
-                return new AdaptiveScreenOffTimeoutConfig[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public AdaptiveScreenOffTimeoutConfig[] newArray(int _aidl_size) {
+                        return new AdaptiveScreenOffTimeoutConfig[_aidl_size];
+                    }
+                };
         public String packageName;
         public long screenOffTimeout = 0;
 

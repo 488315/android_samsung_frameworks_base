@@ -11,10 +11,10 @@ import android.os.IBinder;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
 public final class IrisAuthenticator extends IBiometricAuthenticator.Stub {
-    public final void cancelAuthenticationFromService(IBinder iBinder, String str, long j) {
-    }
+    public final void cancelAuthenticationFromService(IBinder iBinder, String str, long j) {}
 
-    public final ITestSession createTestSession(ITestSessionCallback iTestSessionCallback, String str) {
+    public final ITestSession createTestSession(
+            ITestSessionCallback iTestSessionCallback, String str) {
         return null;
     }
 
@@ -38,19 +38,27 @@ public final class IrisAuthenticator extends IBiometricAuthenticator.Stub {
         return false;
     }
 
-    public final void invalidateAuthenticatorId(int i, IInvalidationCallback iInvalidationCallback) {
-    }
+    public final void invalidateAuthenticatorId(
+            int i, IInvalidationCallback iInvalidationCallback) {}
 
     public final boolean isHardwareDetected(String str) {
         return false;
     }
 
-    public final void prepareForAuthentication(boolean z, IBinder iBinder, long j, int i, IBiometricSensorReceiver iBiometricSensorReceiver, String str, long j2, int i2, boolean z2, boolean z3, boolean z4) {
-    }
+    public final void prepareForAuthentication(
+            boolean z,
+            IBinder iBinder,
+            long j,
+            int i,
+            IBiometricSensorReceiver iBiometricSensorReceiver,
+            String str,
+            long j2,
+            int i2,
+            boolean z2,
+            boolean z3,
+            boolean z4) {}
 
-    public final void resetLockout(IBinder iBinder, String str, int i, byte[] bArr) {
-    }
+    public final void resetLockout(IBinder iBinder, String str, int i, byte[] bArr) {}
 
-    public final void startPreparedClient(int i) {
-    }
+    public final void startPreparedClient(int i) {}
 }

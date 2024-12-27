@@ -1,10 +1,10 @@
 package android.media;
 
-import android.media.IMediaHTTPConnection;
 import android.net.InetAddresses;
 import android.os.IBinder;
 import android.os.StrictMode;
 import android.util.Log;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.CookieHandler;
@@ -149,9 +149,9 @@ public class MediaHTTPConnection extends IMediaHTTPConnection.Stub {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:101:0x01b2, code lost:
-    
-        r16.mURL = r8;
-     */
+
+       r16.mURL = r8;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -161,7 +161,8 @@ public class MediaHTTPConnection extends IMediaHTTPConnection.Stub {
             Method dump skipped, instructions count: 503
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: android.media.MediaHTTPConnection.seekTo(long):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled: android.media.MediaHTTPConnection.seekTo(long):void");
     }
 
     @Override // android.media.IMediaHTTPConnection

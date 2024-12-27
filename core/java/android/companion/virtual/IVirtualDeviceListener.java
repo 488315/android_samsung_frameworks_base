@@ -16,12 +16,10 @@ public interface IVirtualDeviceListener extends IInterface {
 
     public static class Default implements IVirtualDeviceListener {
         @Override // android.companion.virtual.IVirtualDeviceListener
-        public void onVirtualDeviceCreated(int deviceId) throws RemoteException {
-        }
+        public void onVirtualDeviceCreated(int deviceId) throws RemoteException {}
 
         @Override // android.companion.virtual.IVirtualDeviceListener
-        public void onVirtualDeviceClosed(int deviceId) throws RemoteException {
-        }
+        public void onVirtualDeviceClosed(int deviceId) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -29,7 +27,7 @@ public interface IVirtualDeviceListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVirtualDeviceListener {
+    public abstract static class Stub extends Binder implements IVirtualDeviceListener {
         static final int TRANSACTION_onVirtualDeviceClosed = 2;
         static final int TRANSACTION_onVirtualDeviceCreated = 1;
 
@@ -70,7 +68,8 @@ public interface IVirtualDeviceListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IVirtualDeviceListener.DESCRIPTOR);
             }

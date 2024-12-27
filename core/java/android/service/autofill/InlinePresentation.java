@@ -5,25 +5,30 @@ import android.app.slice.Slice;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.widget.inline.InlinePresentationSpec;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.util.List;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class InlinePresentation implements Parcelable {
-    public static final Parcelable.Creator<InlinePresentation> CREATOR = new Parcelable.Creator<InlinePresentation>() { // from class: android.service.autofill.InlinePresentation.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InlinePresentation[] newArray(int size) {
-            return new InlinePresentation[size];
-        }
+    public static final Parcelable.Creator<InlinePresentation> CREATOR =
+            new Parcelable.Creator<
+                    InlinePresentation>() { // from class:
+                                            // android.service.autofill.InlinePresentation.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InlinePresentation[] newArray(int size) {
+                    return new InlinePresentation[size];
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InlinePresentation createFromParcel(Parcel in) {
-            return new InlinePresentation(in);
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InlinePresentation createFromParcel(Parcel in) {
+                    return new InlinePresentation(in);
+                }
+            };
     private final InlinePresentationSpec mInlinePresentationSpec;
     private final boolean mPinned;
     private final Slice mSlice;
@@ -33,15 +38,21 @@ public final class InlinePresentation implements Parcelable {
         return (String[]) hints.toArray(new String[hints.size()]);
     }
 
-    public static InlinePresentation createTooltipPresentation(Slice slice, InlinePresentationSpec spec) {
+    public static InlinePresentation createTooltipPresentation(
+            Slice slice, InlinePresentationSpec spec) {
         return new InlinePresentation(slice, spec, false);
     }
 
-    public InlinePresentation(Slice slice, InlinePresentationSpec inlinePresentationSpec, boolean pinned) {
+    public InlinePresentation(
+            Slice slice, InlinePresentationSpec inlinePresentationSpec, boolean pinned) {
         this.mSlice = slice;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSlice);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSlice);
         this.mInlinePresentationSpec = inlinePresentationSpec;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mInlinePresentationSpec);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mInlinePresentationSpec);
         this.mPinned = pinned;
     }
 
@@ -58,7 +69,13 @@ public final class InlinePresentation implements Parcelable {
     }
 
     public String toString() {
-        return "InlinePresentation { slice = " + this.mSlice + ", inlinePresentationSpec = " + this.mInlinePresentationSpec + ", pinned = " + this.mPinned + " }";
+        return "InlinePresentation { slice = "
+                + this.mSlice
+                + ", inlinePresentationSpec = "
+                + this.mInlinePresentationSpec
+                + ", pinned = "
+                + this.mPinned
+                + " }";
     }
 
     public boolean equals(Object o) {
@@ -69,7 +86,9 @@ public final class InlinePresentation implements Parcelable {
             return false;
         }
         InlinePresentation that = (InlinePresentation) o;
-        if (Objects.equals(this.mSlice, that.mSlice) && Objects.equals(this.mInlinePresentationSpec, that.mInlinePresentationSpec) && this.mPinned == that.mPinned) {
+        if (Objects.equals(this.mSlice, that.mSlice)
+                && Objects.equals(this.mInlinePresentationSpec, that.mInlinePresentationSpec)
+                && this.mPinned == that.mPinned) {
             return true;
         }
         return false;
@@ -77,7 +96,8 @@ public final class InlinePresentation implements Parcelable {
 
     public int hashCode() {
         int _hash = (1 * 31) + Objects.hashCode(this.mSlice);
-        return (((_hash * 31) + Objects.hashCode(this.mInlinePresentationSpec)) * 31) + Boolean.hashCode(this.mPinned);
+        return (((_hash * 31) + Objects.hashCode(this.mInlinePresentationSpec)) * 31)
+                + Boolean.hashCode(this.mPinned);
     }
 
     @Override // android.os.Parcelable
@@ -97,15 +117,19 @@ public final class InlinePresentation implements Parcelable {
         byte flg = in.readByte();
         boolean pinned = (flg & 4) != 0;
         Slice slice = (Slice) in.readTypedObject(Slice.CREATOR);
-        InlinePresentationSpec inlinePresentationSpec = (InlinePresentationSpec) in.readTypedObject(InlinePresentationSpec.CREATOR);
+        InlinePresentationSpec inlinePresentationSpec =
+                (InlinePresentationSpec) in.readTypedObject(InlinePresentationSpec.CREATOR);
         this.mSlice = slice;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSlice);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSlice);
         this.mInlinePresentationSpec = inlinePresentationSpec;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mInlinePresentationSpec);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class,
+                (NonNull) null,
+                (Object) this.mInlinePresentationSpec);
         this.mPinned = pinned;
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

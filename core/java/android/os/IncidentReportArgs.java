@@ -1,26 +1,28 @@
 package android.os;
 
 import android.annotation.SystemApi;
-import android.os.Parcelable;
 import android.util.IntArray;
+
 import java.util.ArrayList;
 
 @SystemApi
 /* loaded from: classes3.dex */
 public final class IncidentReportArgs implements Parcelable {
-    public static final Parcelable.Creator<IncidentReportArgs> CREATOR = new Parcelable.Creator<IncidentReportArgs>() { // from class: android.os.IncidentReportArgs.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IncidentReportArgs createFromParcel(Parcel in) {
-            return new IncidentReportArgs(in);
-        }
+    public static final Parcelable.Creator<IncidentReportArgs> CREATOR =
+            new Parcelable.Creator<
+                    IncidentReportArgs>() { // from class: android.os.IncidentReportArgs.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IncidentReportArgs createFromParcel(Parcel in) {
+                    return new IncidentReportArgs(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public IncidentReportArgs[] newArray(int size) {
-            return new IncidentReportArgs[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public IncidentReportArgs[] newArray(int size) {
+                    return new IncidentReportArgs[size];
+                }
+            };
     private boolean mAll;
     private final ArrayList<byte[]> mHeaders;
     private int mPrivacyPolicy;

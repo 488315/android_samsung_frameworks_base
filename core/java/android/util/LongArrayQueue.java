@@ -2,6 +2,7 @@ package android.util;
 
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.GrowingArrayUtils;
+
 import java.util.NoSuchElementException;
 
 /* loaded from: classes4.dex */
@@ -71,7 +72,8 @@ public class LongArrayQueue {
 
     public long get(int position) {
         if (position < 0 || position >= this.mSize) {
-            throw new IndexOutOfBoundsException("Index " + position + " not valid for a queue of size " + this.mSize);
+            throw new IndexOutOfBoundsException(
+                    "Index " + position + " not valid for a queue of size " + this.mSize);
         }
         int index = (this.mHead + position) % this.mValues.length;
         return this.mValues[index];

@@ -2,7 +2,6 @@ package android.hardware.face;
 
 import android.content.Context;
 import android.hardware.biometrics.CryptoObject;
-import android.hardware.face.FaceManager;
 import android.os.Bundle;
 import android.util.Slog;
 
@@ -19,7 +18,8 @@ public class FaceCallback {
     private Face mRemovalFace;
     private FaceManager.SetFeatureCallback mSetFeatureCallback;
 
-    FaceCallback(FaceManager.AuthenticationCallback authenticationCallback, CryptoObject cryptoObject) {
+    FaceCallback(
+            FaceManager.AuthenticationCallback authenticationCallback, CryptoObject cryptoObject) {
         this.mAuthenticationCallback = authenticationCallback;
         this.mCryptoObject = cryptoObject;
     }
@@ -92,15 +92,20 @@ public class FaceCallback {
     public void sendErrorResult(Context context, int errMsgId, int vendorCode) {
         int clientErrMsgId = errMsgId == 8 ? vendorCode : errMsgId;
         if (this.mEnrollmentCallback != null) {
-            this.mEnrollmentCallback.onEnrollmentError(clientErrMsgId, FaceManager.getErrorString(context, errMsgId, vendorCode));
+            this.mEnrollmentCallback.onEnrollmentError(
+                    clientErrMsgId, FaceManager.getErrorString(context, errMsgId, vendorCode));
             return;
         }
         if (this.mAuthenticationCallback != null) {
-            this.mAuthenticationCallback.onAuthenticationError(clientErrMsgId, FaceManager.getErrorString(context, errMsgId, vendorCode));
+            this.mAuthenticationCallback.onAuthenticationError(
+                    clientErrMsgId, FaceManager.getErrorString(context, errMsgId, vendorCode));
             return;
         }
         if (this.mRemovalCallback != null) {
-            this.mRemovalCallback.onRemovalError(this.mRemovalFace, clientErrMsgId, FaceManager.getErrorString(context, errMsgId, vendorCode));
+            this.mRemovalCallback.onRemovalError(
+                    this.mRemovalFace,
+                    clientErrMsgId,
+                    FaceManager.getErrorString(context, errMsgId, vendorCode));
         } else if (this.mFaceDetectionCallback != null) {
             this.mFaceDetectionCallback.onDetectionError(errMsgId);
             this.mFaceDetectionCallback = null;
@@ -115,30 +120,41 @@ public class FaceCallback {
 
     public void sendAuthenticatedSucceeded(Face face, int userId, boolean isStrongBiometric) {
         if (this.mAuthenticationCallback != null) {
-            FaceManager.AuthenticationResult result = new FaceManager.AuthenticationResult(this.mCryptoObject, face, userId, isStrongBiometric);
+            FaceManager.AuthenticationResult result =
+                    new FaceManager.AuthenticationResult(
+                            this.mCryptoObject, face, userId, isStrongBiometric);
             this.mAuthenticationCallback.onAuthenticationSucceeded(result);
         }
     }
 
-    public void sendAuthenticatedSucceeded(Face face, int userId, boolean isStrongBiometric, byte[] fidoResultData) {
+    public void sendAuthenticatedSucceeded(
+            Face face, int userId, boolean isStrongBiometric, byte[] fidoResultData) {
         if (this.mAuthenticationCallback != null) {
-            FaceManager.AuthenticationResult result = new FaceManager.AuthenticationResult(this.mCryptoObject, face, userId, isStrongBiometric);
+            FaceManager.AuthenticationResult result =
+                    new FaceManager.AuthenticationResult(
+                            this.mCryptoObject, face, userId, isStrongBiometric);
             this.mAuthenticationCallback.onAuthenticationSucceeded(result, fidoResultData);
         }
     }
 
-    public void sendAuthenticatedSucceeded(Face face, int userId, boolean isStrongBiometric, Bundle b) {
+    public void sendAuthenticatedSucceeded(
+            Face face, int userId, boolean isStrongBiometric, Bundle b) {
         if (this.mAuthenticationCallback != null) {
-            FaceManager.AuthenticationResult result = new FaceManager.AuthenticationResult(this.mCryptoObject, face, userId, isStrongBiometric);
+            FaceManager.AuthenticationResult result =
+                    new FaceManager.AuthenticationResult(
+                            this.mCryptoObject, face, userId, isStrongBiometric);
             this.mAuthenticationCallback.onAuthenticationSucceededWithBundle(result, b);
         }
     }
 
-    public void sendImageProcessed(byte[] data, int width, int height, int orientation, int imageFormat, Bundle b) {
+    public void sendImageProcessed(
+            byte[] data, int width, int height, int orientation, int imageFormat, Bundle b) {
         if (this.mEnrollmentCallback != null) {
-            this.mEnrollmentCallback.onImageProcessed(data, width, height, orientation, imageFormat, b);
+            this.mEnrollmentCallback.onImageProcessed(
+                    data, width, height, orientation, imageFormat, b);
         } else if (this.mAuthenticationCallback != null) {
-            this.mAuthenticationCallback.onImageProcessed(width, height, orientation, imageFormat, b);
+            this.mAuthenticationCallback.onImageProcessed(
+                    width, height, orientation, imageFormat, b);
         }
     }
 
@@ -150,10 +166,12 @@ public class FaceCallback {
 
     public void sendAcquiredResult(Context context, int acquireInfo, int vendorCode) {
         if (this.mAuthenticationCallback != null) {
-            FaceAuthenticationFrame frame = new FaceAuthenticationFrame(new FaceDataFrame(acquireInfo, vendorCode));
+            FaceAuthenticationFrame frame =
+                    new FaceAuthenticationFrame(new FaceDataFrame(acquireInfo, vendorCode));
             sendAuthenticationFrame(context, frame);
         } else if (this.mEnrollmentCallback != null) {
-            FaceEnrollFrame frame2 = new FaceEnrollFrame(null, 0, new FaceDataFrame(acquireInfo, vendorCode));
+            FaceEnrollFrame frame2 =
+                    new FaceEnrollFrame(null, 0, new FaceDataFrame(acquireInfo, vendorCode));
             sendEnrollmentFrame(context, frame2);
         }
     }
@@ -168,7 +186,8 @@ public class FaceCallback {
             int vendorCode = frame.getData().getVendorCode();
             int helpCode = getHelpCode(acquireInfo, vendorCode);
             String helpMessage = FaceManager.getAuthHelpMessage(context, acquireInfo, vendorCode);
-            this.mAuthenticationCallback.onAuthenticationAcquired(acquireInfo == 22 ? vendorCode : acquireInfo);
+            this.mAuthenticationCallback.onAuthenticationAcquired(
+                    acquireInfo == 22 ? vendorCode : acquireInfo);
             if (helpMessage != null) {
                 this.mAuthenticationCallback.onAuthenticationHelp(helpCode, helpMessage);
             }
@@ -186,7 +205,14 @@ public class FaceCallback {
             int vendorCode = data.getVendorCode();
             int helpCode = getHelpCode(acquireInfo, vendorCode);
             String helpMessage = FaceManager.getEnrollHelpMessage(context, acquireInfo, vendorCode);
-            this.mEnrollmentCallback.onEnrollmentFrame(helpCode, helpMessage, frame.getCell(), frame.getStage(), data.getPan(), data.getTilt(), data.getDistance());
+            this.mEnrollmentCallback.onEnrollmentFrame(
+                    helpCode,
+                    helpMessage,
+                    frame.getCell(),
+                    frame.getStage(),
+                    data.getPan(),
+                    data.getTilt(),
+                    data.getDistance());
         }
     }
 

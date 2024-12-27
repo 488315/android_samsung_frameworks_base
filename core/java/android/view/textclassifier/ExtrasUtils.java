@@ -3,6 +3,7 @@ package android.view.textclassifier;
 import android.app.RemoteAction;
 import android.content.Intent;
 import android.os.Bundle;
+
 import java.util.ArrayList;
 
 /* loaded from: classes4.dex */
@@ -14,8 +15,7 @@ public final class ExtrasUtils {
     private static final String MODEL_NAME = "model-name";
     private static final String SCORE = "score";
 
-    private ExtrasUtils() {
-    }
+    private ExtrasUtils() {}
 
     public static Bundle getForeignLanguageExtra(TextClassification classification) {
         if (classification == null) {
@@ -37,7 +37,9 @@ public final class ExtrasUtils {
 
     private static RemoteAction findAction(TextClassification classification, String intentAction) {
         ArrayList<Intent> actionIntents;
-        if (classification != null && intentAction != null && (actionIntents = getActionsIntents(classification)) != null) {
+        if (classification != null
+                && intentAction != null
+                && (actionIntents = getActionsIntents(classification)) != null) {
             int size = actionIntents.size();
             for (int i = 0; i < size; i++) {
                 Intent intent = actionIntents.get(i);

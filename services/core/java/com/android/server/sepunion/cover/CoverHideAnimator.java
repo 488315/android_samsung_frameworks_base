@@ -10,7 +10,9 @@ import android.view.View;
 import android.view.WindowInsets;
 import android.view.WindowManager;
 import android.view.animation.Interpolator;
+
 import com.android.server.accessibility.magnification.FullScreenMagnificationGestureHandler;
+
 import com.samsung.android.graphics.spr.animation.interpolator.SineInOut90;
 import com.samsung.android.sepunion.Log;
 
@@ -25,29 +27,40 @@ public final class CoverHideAnimator {
     public final String TAG = "CoverManager_CoverHideAnimator";
     public final Interpolator mAnimationInterpolator = new SineInOut90();
     public View mCoverHideView = null;
-    public final AnonymousClass2 mFadeInAnimatorListener = new AnimatorListenerAdapter() { // from class: com.android.server.sepunion.cover.CoverHideAnimator.2
-        @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-        public final void onAnimationEnd(Animator animator) {
-            CoverHideAnimator coverHideAnimator = CoverHideAnimator.this;
-            Runnable runnable = coverHideAnimator.mCallbackRunnable;
-            if (runnable != null) {
-                coverHideAnimator.mHandler.post(runnable);
-                CoverHideAnimator.this.mCallbackRunnable = null;
-            }
-            View view = CoverHideAnimator.this.mCoverHideView;
-            if (view != null) {
-                view.animate().alpha(FullScreenMagnificationGestureHandler.MAX_SCALE).setStartDelay(150L).setDuration(300L).setInterpolator(CoverHideAnimator.this.mAnimationInterpolator).setListener(CoverHideAnimator.this.mFadeOutAnimatorListener);
-            }
-            super.onAnimationEnd(animator);
-        }
-    };
-    public final AnonymousClass3 mFadeOutAnimatorListener = new AnimatorListenerAdapter() { // from class: com.android.server.sepunion.cover.CoverHideAnimator.3
-        @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
-        public final void onAnimationEnd(Animator animator) {
-            CoverHideAnimator.this.removeViewFromWindow();
-            super.onAnimationEnd(animator);
-        }
-    };
+    public final AnonymousClass2 mFadeInAnimatorListener =
+            new AnimatorListenerAdapter() { // from class:
+                                            // com.android.server.sepunion.cover.CoverHideAnimator.2
+                @Override // android.animation.AnimatorListenerAdapter,
+                          // android.animation.Animator.AnimatorListener
+                public final void onAnimationEnd(Animator animator) {
+                    CoverHideAnimator coverHideAnimator = CoverHideAnimator.this;
+                    Runnable runnable = coverHideAnimator.mCallbackRunnable;
+                    if (runnable != null) {
+                        coverHideAnimator.mHandler.post(runnable);
+                        CoverHideAnimator.this.mCallbackRunnable = null;
+                    }
+                    View view = CoverHideAnimator.this.mCoverHideView;
+                    if (view != null) {
+                        view.animate()
+                                .alpha(FullScreenMagnificationGestureHandler.MAX_SCALE)
+                                .setStartDelay(150L)
+                                .setDuration(300L)
+                                .setInterpolator(CoverHideAnimator.this.mAnimationInterpolator)
+                                .setListener(CoverHideAnimator.this.mFadeOutAnimatorListener);
+                    }
+                    super.onAnimationEnd(animator);
+                }
+            };
+    public final AnonymousClass3 mFadeOutAnimatorListener =
+            new AnimatorListenerAdapter() { // from class:
+                                            // com.android.server.sepunion.cover.CoverHideAnimator.3
+                @Override // android.animation.AnimatorListenerAdapter,
+                          // android.animation.Animator.AnimatorListener
+                public final void onAnimationEnd(Animator animator) {
+                    CoverHideAnimator.this.removeViewFromWindow();
+                    super.onAnimationEnd(animator);
+                }
+            };
 
     /* JADX WARN: Type inference failed for: r0v3, types: [com.android.server.sepunion.cover.CoverHideAnimator$2] */
     /* JADX WARN: Type inference failed for: r0v4, types: [com.android.server.sepunion.cover.CoverHideAnimator$3] */
@@ -65,33 +78,48 @@ public final class CoverHideAnimator {
         layoutParams.format = -2;
         layoutParams.layoutInDisplayCutoutMode = 1;
         layoutParams.flags = 67633160;
-        layoutParams.setFitInsetsTypes(layoutParams.getFitInsetsTypes() & (~WindowInsets.Type.navigationBars()) & (~WindowInsets.Type.statusBars()));
-        this.mHandler = new Handler(looper) { // from class: com.android.server.sepunion.cover.CoverHideAnimator.1
-            @Override // android.os.Handler
-            public final void handleMessage(Message message) {
-                View view;
-                int i = message.what;
-                CoverHideAnimator coverHideAnimator = CoverHideAnimator.this;
-                if (i != 101) {
-                    if (i == 102 && (view = coverHideAnimator.mCoverHideView) != null) {
-                        view.animate().cancel();
-                        coverHideAnimator.removeViewFromWindow();
-                        return;
+        layoutParams.setFitInsetsTypes(
+                layoutParams.getFitInsetsTypes()
+                        & (~WindowInsets.Type.navigationBars())
+                        & (~WindowInsets.Type.statusBars()));
+        this.mHandler =
+                new Handler(
+                        looper) { // from class:
+                                  // com.android.server.sepunion.cover.CoverHideAnimator.1
+                    @Override // android.os.Handler
+                    public final void handleMessage(Message message) {
+                        View view;
+                        int i = message.what;
+                        CoverHideAnimator coverHideAnimator = CoverHideAnimator.this;
+                        if (i != 101) {
+                            if (i == 102 && (view = coverHideAnimator.mCoverHideView) != null) {
+                                view.animate().cancel();
+                                coverHideAnimator.removeViewFromWindow();
+                                return;
+                            }
+                            return;
+                        }
+                        if (coverHideAnimator.mCoverHideView != null) {
+                            Log.e(
+                                    coverHideAnimator.TAG,
+                                    "handleStartAnimation : mCoverHideView is not null!!");
+                            coverHideAnimator.removeViewFromWindow();
+                        }
+                        View view2 = new View(coverHideAnimator.mContext);
+                        coverHideAnimator.mCoverHideView = view2;
+                        view2.setAlpha(FullScreenMagnificationGestureHandler.MAX_SCALE);
+                        coverHideAnimator.mCoverHideView.setBackgroundColor(-16777216);
+                        coverHideAnimator
+                                .mCoverHideView
+                                .animate()
+                                .alpha(1.0f)
+                                .setDuration(100L)
+                                .setInterpolator(coverHideAnimator.mAnimationInterpolator)
+                                .setListener(coverHideAnimator.mFadeInAnimatorListener);
+                        coverHideAnimator.mWm.addView(
+                                coverHideAnimator.mCoverHideView, coverHideAnimator.mWindowLP);
                     }
-                    return;
-                }
-                if (coverHideAnimator.mCoverHideView != null) {
-                    Log.e(coverHideAnimator.TAG, "handleStartAnimation : mCoverHideView is not null!!");
-                    coverHideAnimator.removeViewFromWindow();
-                }
-                View view2 = new View(coverHideAnimator.mContext);
-                coverHideAnimator.mCoverHideView = view2;
-                view2.setAlpha(FullScreenMagnificationGestureHandler.MAX_SCALE);
-                coverHideAnimator.mCoverHideView.setBackgroundColor(-16777216);
-                coverHideAnimator.mCoverHideView.animate().alpha(1.0f).setDuration(100L).setInterpolator(coverHideAnimator.mAnimationInterpolator).setListener(coverHideAnimator.mFadeInAnimatorListener);
-                coverHideAnimator.mWm.addView(coverHideAnimator.mCoverHideView, coverHideAnimator.mWindowLP);
-            }
-        };
+                };
     }
 
     public final void removeViewFromWindow() {

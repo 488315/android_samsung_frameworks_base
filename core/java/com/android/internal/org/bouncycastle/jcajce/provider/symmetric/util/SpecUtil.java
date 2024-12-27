@@ -5,8 +5,7 @@ import java.security.spec.AlgorithmParameterSpec;
 
 /* loaded from: classes5.dex */
 class SpecUtil {
-    SpecUtil() {
-    }
+    SpecUtil() {}
 
     static AlgorithmParameterSpec extractSpec(AlgorithmParameters params, Class[] availableSpecs) {
         try {

@@ -5,8 +5,7 @@ import java.nio.ByteBuffer;
 
 /* loaded from: classes3.dex */
 public final class UnsafeByteOperations {
-    private UnsafeByteOperations() {
-    }
+    private UnsafeByteOperations() {}
 
     public static ByteString unsafeWrap(byte[] buffer) {
         return ByteString.wrap(buffer);

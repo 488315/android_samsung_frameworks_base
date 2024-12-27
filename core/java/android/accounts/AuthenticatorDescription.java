@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class AuthenticatorDescription implements Parcelable {
-    public static final Parcelable.Creator<AuthenticatorDescription> CREATOR = new Parcelable.Creator<AuthenticatorDescription>() { // from class: android.accounts.AuthenticatorDescription.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AuthenticatorDescription createFromParcel(Parcel source) {
-            return new AuthenticatorDescription(source);
-        }
+    public static final Parcelable.Creator<AuthenticatorDescription> CREATOR =
+            new Parcelable.Creator<AuthenticatorDescription>() { // from class:
+                // android.accounts.AuthenticatorDescription.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AuthenticatorDescription createFromParcel(Parcel source) {
+                    return new AuthenticatorDescription(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AuthenticatorDescription[] newArray(int size) {
-            return new AuthenticatorDescription[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AuthenticatorDescription[] newArray(int size) {
+                    return new AuthenticatorDescription[size];
+                }
+            };
     public final int accountPreferencesId;
     public final boolean customTokens;
     public final int iconId;
@@ -26,7 +28,14 @@ public class AuthenticatorDescription implements Parcelable {
     public final int smallIconId;
     public final String type;
 
-    public AuthenticatorDescription(String type, String packageName, int labelId, int iconId, int smallIconId, int prefId, boolean customTokens) {
+    public AuthenticatorDescription(
+            String type,
+            String packageName,
+            int labelId,
+            int iconId,
+            int smallIconId,
+            int prefId,
+            boolean customTokens) {
         if (type == null) {
             throw new IllegalArgumentException("type cannot be null");
         }
@@ -42,7 +51,8 @@ public class AuthenticatorDescription implements Parcelable {
         this.customTokens = customTokens;
     }
 
-    public AuthenticatorDescription(String type, String packageName, int labelId, int iconId, int smallIconId, int prefId) {
+    public AuthenticatorDescription(
+            String type, String packageName, int labelId, int iconId, int smallIconId, int prefId) {
         this(type, packageName, labelId, iconId, smallIconId, prefId, false);
     }
 

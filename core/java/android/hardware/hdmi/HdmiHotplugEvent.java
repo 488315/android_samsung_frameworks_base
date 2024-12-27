@@ -7,21 +7,23 @@ import android.os.Parcelable;
 @SystemApi
 /* loaded from: classes2.dex */
 public final class HdmiHotplugEvent implements Parcelable {
-    public static final Parcelable.Creator<HdmiHotplugEvent> CREATOR = new Parcelable.Creator<HdmiHotplugEvent>() { // from class: android.hardware.hdmi.HdmiHotplugEvent.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HdmiHotplugEvent createFromParcel(Parcel p) {
-            int port = p.readInt();
-            boolean connected = p.readByte() == 1;
-            return new HdmiHotplugEvent(port, connected);
-        }
+    public static final Parcelable.Creator<HdmiHotplugEvent> CREATOR =
+            new Parcelable.Creator<
+                    HdmiHotplugEvent>() { // from class: android.hardware.hdmi.HdmiHotplugEvent.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HdmiHotplugEvent createFromParcel(Parcel p) {
+                    int port = p.readInt();
+                    boolean connected = p.readByte() == 1;
+                    return new HdmiHotplugEvent(port, connected);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public HdmiHotplugEvent[] newArray(int size) {
-            return new HdmiHotplugEvent[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public HdmiHotplugEvent[] newArray(int size) {
+                    return new HdmiHotplugEvent[size];
+                }
+            };
     private final boolean mConnected;
     private final int mPort;
 

@@ -19,7 +19,12 @@ public class SdpManagerImpl {
             return;
         }
         Log.e("SdpManagerImpl", "Require system permission.");
-        throw new SecurityException("Security Exception Occurred in pid[" + Binder.getCallingPid() + "] with uid[" + Binder.getCallingUid() + "]");
+        throw new SecurityException(
+                "Security Exception Occurred in pid["
+                        + Binder.getCallingPid()
+                        + "] with uid["
+                        + Binder.getCallingUid()
+                        + "]");
     }
 
     public static void isSupportedDevice() {
@@ -106,8 +111,7 @@ public class SdpManagerImpl {
     }
 
     @SystemApi
-    public void saveResetTokenSafe(byte[] bArr, int i) {
-    }
+    public void saveResetTokenSafe(byte[] bArr, int i) {}
 
     @SystemApi
     public void unlockSdpIfUnsecuredOrBiometricAuthenticated(int i, int i2) {

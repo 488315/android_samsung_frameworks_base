@@ -3,23 +3,26 @@ package android.view.inputmethod;
 import android.graphics.RectF;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 
 /* loaded from: classes4.dex */
 public final class SparseRectFArray implements Parcelable {
-    public static final Parcelable.Creator<SparseRectFArray> CREATOR = new Parcelable.Creator<SparseRectFArray>() { // from class: android.view.inputmethod.SparseRectFArray.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SparseRectFArray createFromParcel(Parcel source) {
-            return new SparseRectFArray(source);
-        }
+    public static final Parcelable.Creator<SparseRectFArray> CREATOR =
+            new Parcelable.Creator<
+                    SparseRectFArray>() { // from class: android.view.inputmethod.SparseRectFArray.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SparseRectFArray createFromParcel(Parcel source) {
+                    return new SparseRectFArray(source);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SparseRectFArray[] newArray(int size) {
-            return new SparseRectFArray[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SparseRectFArray[] newArray(int size) {
+                    return new SparseRectFArray[size];
+                }
+            };
     private final float[] mCoordinates;
     private final int[] mFlagsArray;
     private final int[] mKeys;
@@ -59,7 +62,9 @@ public final class SparseRectFArray implements Parcelable {
             return false;
         }
         SparseRectFArray that = (SparseRectFArray) obj;
-        if (!Arrays.equals(this.mKeys, that.mKeys) || !Arrays.equals(this.mCoordinates, that.mCoordinates) || !Arrays.equals(this.mFlagsArray, that.mFlagsArray)) {
+        if (!Arrays.equals(this.mKeys, that.mKeys)
+                || !Arrays.equals(this.mCoordinates, that.mCoordinates)
+                || !Arrays.equals(this.mFlagsArray, that.mFlagsArray)) {
             return false;
         }
         return true;
@@ -134,7 +139,8 @@ public final class SparseRectFArray implements Parcelable {
             }
         }
 
-        public SparseRectFArrayBuilder append(int key, float left, float top, float right, float bottom, int flags) {
+        public SparseRectFArrayBuilder append(
+                int key, float left, float top, float right, float bottom, int flags) {
             checkIndex(key);
             ensureBufferSize();
             int baseCoordinatesIndex = this.mCount * 4;
@@ -184,11 +190,17 @@ public final class SparseRectFArray implements Parcelable {
 
     public RectF get(int index) {
         int arrayIndex;
-        if (this.mKeys == null || index < 0 || (arrayIndex = Arrays.binarySearch(this.mKeys, index)) < 0) {
+        if (this.mKeys == null
+                || index < 0
+                || (arrayIndex = Arrays.binarySearch(this.mKeys, index)) < 0) {
             return null;
         }
         int baseCoordIndex = arrayIndex * 4;
-        return new RectF(this.mCoordinates[baseCoordIndex], this.mCoordinates[baseCoordIndex + 1], this.mCoordinates[baseCoordIndex + 2], this.mCoordinates[baseCoordIndex + 3]);
+        return new RectF(
+                this.mCoordinates[baseCoordIndex],
+                this.mCoordinates[baseCoordIndex + 1],
+                this.mCoordinates[baseCoordIndex + 2],
+                this.mCoordinates[baseCoordIndex + 3]);
     }
 
     public int getFlags(int index, int valueIfKeyNotFound) {

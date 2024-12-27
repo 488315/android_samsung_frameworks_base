@@ -14,11 +14,13 @@ import android.telephony.PhoneNumberUtils;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+
 import com.android.i18n.phonenumbers.NumberParseException;
 import com.android.i18n.phonenumbers.PhoneNumberUtil;
 import com.android.i18n.phonenumbers.Phonenumber;
 import com.android.i18n.phonenumbers.geocoding.PhoneNumberOfflineGeocoder;
 import com.android.internal.R;
+
 import java.util.Arrays;
 import java.util.Locale;
 
@@ -95,20 +97,31 @@ public class CallerInfo {
                         info.normalizedNumber = cursor.getString(columnIndex3);
                     }
                     int columnIndex4 = cursor.getColumnIndex("label");
-                    if (columnIndex4 != -1 && (typeColumnIndex = cursor.getColumnIndex("type")) != -1) {
+                    if (columnIndex4 != -1
+                            && (typeColumnIndex = cursor.getColumnIndex("type")) != -1) {
                         info.numberType = cursor.getInt(typeColumnIndex);
                         info.numberLabel = cursor.getString(columnIndex4);
-                        info.phoneLabel = ContactsContract.CommonDataKinds.Phone.getDisplayLabel(context, info.numberType, info.numberLabel).toString();
+                        info.phoneLabel =
+                                ContactsContract.CommonDataKinds.Phone.getDisplayLabel(
+                                                context, info.numberType, info.numberLabel)
+                                        .toString();
                     }
                     int columnIndex5 = getColumnIndexForPersonId(contactRef, cursor);
                     if (columnIndex5 == -1) {
-                        Log.w(TAG, "Couldn't find contact_id column for " + contactRef, new Object[0]);
+                        Log.w(
+                                TAG,
+                                "Couldn't find contact_id column for " + contactRef,
+                                new Object[0]);
                     } else {
                         long contactId = cursor.getLong(columnIndex5);
-                        if (contactId != 0 && !ContactsContract.Contacts.isEnterpriseContactId(contactId)) {
+                        if (contactId != 0
+                                && !ContactsContract.Contacts.isEnterpriseContactId(contactId)) {
                             info.contactIdOrZero = contactId;
                             if (VDBG) {
-                                Log.v(TAG, "==> got info.contactIdOrZero: " + info.contactIdOrZero, new Object[0]);
+                                Log.v(
+                                        TAG,
+                                        "==> got info.contactIdOrZero: " + info.contactIdOrZero,
+                                        new Object[0]);
                             }
                         }
                         if (ContactsContract.Contacts.isEnterpriseContactId(contactId)) {
@@ -125,11 +138,17 @@ public class CallerInfo {
                     } else {
                         info.contactDisplayPhotoUri = null;
                     }
-                    int columnIndex8 = cursor.getColumnIndex(ContactsContract.DataColumns.PREFERRED_PHONE_ACCOUNT_COMPONENT_NAME);
+                    int columnIndex8 =
+                            cursor.getColumnIndex(
+                                    ContactsContract.DataColumns
+                                            .PREFERRED_PHONE_ACCOUNT_COMPONENT_NAME);
                     if (columnIndex8 != -1 && cursor.getString(columnIndex8) != null) {
-                        info.preferredPhoneAccountComponent = ComponentName.unflattenFromString(cursor.getString(columnIndex8));
+                        info.preferredPhoneAccountComponent =
+                                ComponentName.unflattenFromString(cursor.getString(columnIndex8));
                     }
-                    int columnIndex9 = cursor.getColumnIndex(ContactsContract.DataColumns.PREFERRED_PHONE_ACCOUNT_ID);
+                    int columnIndex9 =
+                            cursor.getColumnIndex(
+                                    ContactsContract.DataColumns.PREFERRED_PHONE_ACCOUNT_ID);
                     if (columnIndex9 != -1 && cursor.getString(columnIndex9) != null) {
                         info.preferredPhoneAccountId = cursor.getString(columnIndex9);
                     }
@@ -177,14 +196,30 @@ public class CallerInfo {
                 cursor.close();
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.e(TAG, (Throwable) e, "getCallerInfo is fail. " + e + ", Column names: " + Arrays.toString(cursor.getColumnNames()) + ", length: " + cursor.getColumnCount(), new Object[0]);
+                Log.e(
+                        TAG,
+                        (Throwable) e,
+                        "getCallerInfo is fail. "
+                                + e
+                                + ", Column names: "
+                                + Arrays.toString(cursor.getColumnNames())
+                                + ", length: "
+                                + cursor.getColumnCount(),
+                        new Object[0]);
                 cursor.moveToPosition(-1);
                 if (cursor.moveToNext()) {
                     try {
                         cursor.getString(cursor.getColumnCount() - 1);
-                        Log.d(TAG, "getCallerInfo - Cursor last index has no problem", new Object[0]);
+                        Log.d(
+                                TAG,
+                                "getCallerInfo - Cursor last index has no problem",
+                                new Object[0]);
                     } catch (Exception ex) {
-                        Log.e(TAG, (Throwable) ex, "getCallerInfo - Cursor index is invalid. " + ex, new Object[0]);
+                        Log.e(
+                                TAG,
+                                (Throwable) ex,
+                                "getCallerInfo - Cursor index is invalid. " + ex,
+                                new Object[0]);
                     }
                 }
             }
@@ -201,7 +236,9 @@ public class CallerInfo {
             return null;
         }
         try {
-            CallerInfo info = getCallerInfo(context, contactRef, cr.query(contactRef, null, null, null, null));
+            CallerInfo info =
+                    getCallerInfo(
+                            context, contactRef, cr.query(contactRef, null, null, null, null));
             return info;
         } catch (RuntimeException re) {
             Log.e(TAG, (Throwable) re, "Error getting caller info.", new Object[0]);
@@ -228,8 +265,12 @@ public class CallerInfo {
         if (PhoneNumberUtils.isVoiceMailNumber(null, subId, number)) {
             return new CallerInfo().markAsVoiceMail(context, subId);
         }
-        Uri contactUri = Uri.withAppendedPath(ContactsContract.PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI, Uri.encode(number));
-        CallerInfo info = doSecondaryLookupIfNecessary(context, number, getCallerInfo(context, contactUri));
+        Uri contactUri =
+                Uri.withAppendedPath(
+                        ContactsContract.PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI,
+                        Uri.encode(number));
+        CallerInfo info =
+                doSecondaryLookupIfNecessary(context, number, getCallerInfo(context, contactUri));
         if (info == null) {
             return null;
         }
@@ -267,14 +308,19 @@ public class CallerInfo {
         this.contactDisplayPhotoUri = photoUri;
     }
 
-    static CallerInfo doSecondaryLookupIfNecessary(Context context, String number, CallerInfo previousResult) {
+    static CallerInfo doSecondaryLookupIfNecessary(
+            Context context, String number, CallerInfo previousResult) {
         if (previousResult == null) {
             return null;
         }
         if (!previousResult.contactExists && PhoneNumberUtils.isUriNumber(number)) {
             String username = PhoneNumberUtils.getUsernameFromUriNumber(number);
             if (PhoneNumberUtils.isGlobalPhoneNumber(username)) {
-                return getCallerInfo(context, Uri.withAppendedPath(ContactsContract.PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI, Uri.encode(username)));
+                return getCallerInfo(
+                        context,
+                        Uri.withAppendedPath(
+                                ContactsContract.PhoneLookup.ENTERPRISE_CONTENT_FILTER_URI,
+                                Uri.encode(username)));
             }
             return previousResult;
         }
@@ -299,7 +345,10 @@ public class CallerInfo {
     CallerInfo markAsVoiceMail(Context context, int subId) {
         this.mIsVoiceMail = true;
         try {
-            this.phoneNumber = ((TelephonyManager) context.getSystemService(TelephonyManager.class)).createForSubscriptionId(subId).getVoiceMailAlphaTag();
+            this.phoneNumber =
+                    ((TelephonyManager) context.getSystemService(TelephonyManager.class))
+                            .createForSubscriptionId(subId)
+                            .getVoiceMailAlphaTag();
         } catch (SecurityException se) {
             Log.e(TAG, (Throwable) se, "Cannot access VoiceMail.", new Object[0]);
         }
@@ -315,7 +364,10 @@ public class CallerInfo {
 
     private static int getColumnIndexForPersonId(Uri contactRef, Cursor cursor) {
         if (VDBG) {
-            Log.v(TAG, "- getColumnIndexForPersonId: contactRef URI = '" + contactRef + "'...", new Object[0]);
+            Log.v(
+                    TAG,
+                    "- getColumnIndexForPersonId: contactRef URI = '" + contactRef + "'...",
+                    new Object[0]);
         }
         String url = contactRef.toString();
         String columnName = null;
@@ -339,7 +391,14 @@ public class CallerInfo {
         }
         int columnIndex = columnName != null ? cursor.getColumnIndex(columnName) : -1;
         if (VDBG) {
-            Log.v(TAG, "==> Using column '" + columnName + "' (columnIndex = " + columnIndex + ") for person_id lookup...", new Object[0]);
+            Log.v(
+                    TAG,
+                    "==> Using column '"
+                            + columnName
+                            + "' (columnIndex = "
+                            + columnIndex
+                            + ") for person_id lookup...",
+                    new Object[0]);
         }
         return columnIndex;
     }
@@ -363,14 +422,22 @@ public class CallerInfo {
         Phonenumber.PhoneNumber pn = null;
         try {
             if (VDBG) {
-                Log.v(TAG, "parsing '" + number + "' for countryIso '" + countryIso + "'...", new Object[0]);
+                Log.v(
+                        TAG,
+                        "parsing '" + number + "' for countryIso '" + countryIso + "'...",
+                        new Object[0]);
             }
             pn = util.parse(number, countryIso);
             if (VDBG) {
                 Log.v(TAG, "- parsed number: " + pn, new Object[0]);
             }
         } catch (NumberParseException e) {
-            Log.w(TAG, "getGeoDescription: NumberParseException for incoming number '" + Log.pii(number) + "'", new Object[0]);
+            Log.w(
+                    TAG,
+                    "getGeoDescription: NumberParseException for incoming number '"
+                            + Log.pii(number)
+                            + "'",
+                    new Object[0]);
         }
         if (pn == null) {
             return null;
@@ -384,18 +451,27 @@ public class CallerInfo {
 
     private static String getCurrentCountryIso(Context context, Locale locale) {
         String countryIso = null;
-        CountryDetector detector = (CountryDetector) context.getSystemService(Context.COUNTRY_DETECTOR);
+        CountryDetector detector =
+                (CountryDetector) context.getSystemService(Context.COUNTRY_DETECTOR);
         if (detector != null) {
             Country country = detector.detectCountry();
             if (country == null) {
-                Log.e(TAG, (Throwable) new Exception(), "CountryDetector.detectCountry() returned null.", new Object[0]);
+                Log.e(
+                        TAG,
+                        (Throwable) new Exception(),
+                        "CountryDetector.detectCountry() returned null.",
+                        new Object[0]);
             } else {
                 countryIso = country.getCountryIso();
             }
         }
         if (countryIso == null) {
             String countryIso2 = locale.getCountry();
-            Log.w(TAG, "No CountryDetector; falling back to countryIso based on locale: " + countryIso2, new Object[0]);
+            Log.w(
+                    TAG,
+                    "No CountryDetector; falling back to countryIso based on locale: "
+                            + countryIso2,
+                    new Object[0]);
             return countryIso2;
         }
         return countryIso;
@@ -406,6 +482,11 @@ public class CallerInfo {
     }
 
     public String toString() {
-        return new StringBuilder(128).append(super.toString() + " { ").append("name " + (this.name == null ? "null" : "non-null")).append(", phoneNumber " + (this.phoneNumber != null ? "non-null" : "null")).append(" }").toString();
+        return new StringBuilder(128)
+                .append(super.toString() + " { ")
+                .append("name " + (this.name == null ? "null" : "non-null"))
+                .append(", phoneNumber " + (this.phoneNumber != null ? "non-null" : "null"))
+                .append(" }")
+                .toString();
     }
 }

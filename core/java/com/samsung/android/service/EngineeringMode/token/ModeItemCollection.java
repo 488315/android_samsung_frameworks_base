@@ -30,7 +30,8 @@ public class ModeItemCollection extends InfoCollection {
         return this.mModeItems.size();
     }
 
-    public void addModeItemCollection(int modeIndex, String name, String description, int groupIndex) {
+    public void addModeItemCollection(
+            int modeIndex, String name, String description, int groupIndex) {
         this.mModeItems.add(new ModeItem(modeIndex, name, description, groupIndex));
     }
 

@@ -82,14 +82,23 @@ public class V3TBSCertificateGenerator {
     public void setExtensions(Extensions extensions) {
         Extension altName;
         this.extensions = extensions;
-        if (extensions != null && (altName = extensions.getExtension(Extension.subjectAlternativeName)) != null && altName.isCritical()) {
+        if (extensions != null
+                && (altName = extensions.getExtension(Extension.subjectAlternativeName)) != null
+                && altName.isCritical()) {
             this.altNamePresentAndCritical = true;
         }
     }
 
     public TBSCertificate generateTBSCertificate() {
-        if (this.serialNumber == null || this.signature == null || this.issuer == null || this.startDate == null || this.endDate == null || ((this.subject == null && !this.altNamePresentAndCritical) || this.subjectPublicKeyInfo == null)) {
-            throw new IllegalStateException("not all mandatory fields set in V3 TBScertificate generator");
+        if (this.serialNumber == null
+                || this.signature == null
+                || this.issuer == null
+                || this.startDate == null
+                || this.endDate == null
+                || ((this.subject == null && !this.altNamePresentAndCritical)
+                        || this.subjectPublicKeyInfo == null)) {
+            throw new IllegalStateException(
+                    "not all mandatory fields set in V3 TBScertificate generator");
         }
         ASN1EncodableVector v = new ASN1EncodableVector(10);
         v.add(this.version);

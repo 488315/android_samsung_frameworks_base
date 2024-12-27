@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.os.CancellationSignal;
 import android.os.Handler;
 import android.view.KeyEvent;
+
 import com.android.internal.util.Preconditions;
+
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;
 import java.util.function.IntConsumer;
@@ -77,7 +79,8 @@ public class InputConnectionWrapper implements InputConnection {
     }
 
     @Override // android.view.inputmethod.InputConnection
-    public boolean setComposingText(CharSequence text, int newCursorPosition, TextAttribute textAttribute) {
+    public boolean setComposingText(
+            CharSequence text, int newCursorPosition, TextAttribute textAttribute) {
         return this.mTarget.setComposingText(text, newCursorPosition, textAttribute);
     }
 
@@ -102,7 +105,8 @@ public class InputConnectionWrapper implements InputConnection {
     }
 
     @Override // android.view.inputmethod.InputConnection
-    public boolean commitText(CharSequence text, int newCursorPosition, TextAttribute textAttribute) {
+    public boolean commitText(
+            CharSequence text, int newCursorPosition, TextAttribute textAttribute) {
         return this.mTarget.commitText(text, newCursorPosition, textAttribute);
     }
 
@@ -167,12 +171,14 @@ public class InputConnectionWrapper implements InputConnection {
     }
 
     @Override // android.view.inputmethod.InputConnection
-    public void performHandwritingGesture(HandwritingGesture gesture, Executor executor, IntConsumer consumer) {
+    public void performHandwritingGesture(
+            HandwritingGesture gesture, Executor executor, IntConsumer consumer) {
         this.mTarget.performHandwritingGesture(gesture, executor, consumer);
     }
 
     @Override // android.view.inputmethod.InputConnection
-    public boolean previewHandwritingGesture(PreviewableHandwritingGesture gesture, CancellationSignal cancellationSignal) {
+    public boolean previewHandwritingGesture(
+            PreviewableHandwritingGesture gesture, CancellationSignal cancellationSignal) {
         return this.mTarget.previewHandwritingGesture(gesture, cancellationSignal);
     }
 
@@ -187,7 +193,8 @@ public class InputConnectionWrapper implements InputConnection {
     }
 
     @Override // android.view.inputmethod.InputConnection
-    public void requestTextBoundsInfo(RectF bounds, Executor executor, Consumer<TextBoundsInfoResult> consumer) {
+    public void requestTextBoundsInfo(
+            RectF bounds, Executor executor, Consumer<TextBoundsInfoResult> consumer) {
         this.mTarget.requestTextBoundsInfo(bounds, executor, consumer);
     }
 
@@ -217,7 +224,12 @@ public class InputConnectionWrapper implements InputConnection {
     }
 
     @Override // android.view.inputmethod.InputConnection
-    public boolean replaceText(int start, int end, CharSequence text, int newCursorPosition, TextAttribute textAttribute) {
+    public boolean replaceText(
+            int start,
+            int end,
+            CharSequence text,
+            int newCursorPosition,
+            TextAttribute textAttribute) {
         return this.mTarget.replaceText(start, end, text, newCursorPosition, textAttribute);
     }
 }

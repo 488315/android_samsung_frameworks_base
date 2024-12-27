@@ -28,6 +28,7 @@ import android.util.Slog;
 import android.util.SparseArray;
 import android.util.SparseBooleanArray;
 import android.util.TimeUtils;
+
 import com.android.internal.os.SomeArgs;
 import com.android.internal.os.TimeoutRecord;
 import com.android.internal.util.FrameworkStatsLog;
@@ -39,9 +40,6 @@ import com.android.server.DropBoxManagerService;
 import com.android.server.LocalServices;
 import com.android.server.ServiceKeeper$$ExternalSyntheticOutline0;
 import com.android.server.StorageManagerService$$ExternalSyntheticOutline0;
-import com.android.server.am.ActivityManagerServiceExt;
-import com.android.server.am.BaseRestrictionMgr;
-import com.android.server.am.BroadcastProcessQueue;
 import com.android.server.am.mars.filter.filter.RunningBroadcastFilter;
 import com.android.server.pm.PackageManagerService;
 import com.android.server.pm.UserJourneyLogger;
@@ -51,6 +49,7 @@ import com.android.server.usage.BroadcastResponseStatsLogger;
 import com.android.server.usage.BroadcastResponseStatsTracker;
 import com.android.server.usage.UsageStatsService;
 import com.android.server.utils.AnrTimer;
+
 import java.io.CharArrayWriter;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
@@ -75,7 +74,8 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
     final BroadcastProcessQueue.BroadcastConsumer mBroadcastConsumerDeferApply;
     final BroadcastProcessQueue.BroadcastConsumer mBroadcastConsumerDeferClear;
     public final BroadcastQueueModernImpl$$ExternalSyntheticLambda4 mBroadcastConsumerSkip;
-    public final BroadcastQueueModernImpl$$ExternalSyntheticLambda4 mBroadcastConsumerSkipAndCanceled;
+    public final BroadcastQueueModernImpl$$ExternalSyntheticLambda4
+            mBroadcastConsumerSkipAndCanceled;
     public final BroadcastQueueModernImpl$$ExternalSyntheticLambda4 mBroadcastRecordConsumerEnqueue;
     public boolean mCheckPendingColdStartQueued;
     public final BroadcastConstants mConstants;
@@ -93,8 +93,10 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
     public BroadcastProcessQueue mRunningColdStart;
     public final SparseBooleanArray mUidForeground;
     public final ArrayList mWaitingFor;
-    public static final BroadcastQueueModernImpl$$ExternalSyntheticLambda1 QUEUE_PREDICATE_ANY = new BroadcastQueueModernImpl$$ExternalSyntheticLambda1(2);
-    public static final BroadcastQueueModernImpl$$ExternalSyntheticLambda7 BROADCAST_PREDICATE_ANY = new BroadcastQueueModernImpl$$ExternalSyntheticLambda7(0);
+    public static final BroadcastQueueModernImpl$$ExternalSyntheticLambda1 QUEUE_PREDICATE_ANY =
+            new BroadcastQueueModernImpl$$ExternalSyntheticLambda1(2);
+    public static final BroadcastQueueModernImpl$$ExternalSyntheticLambda7 BROADCAST_PREDICATE_ANY =
+            new BroadcastQueueModernImpl$$ExternalSyntheticLambda7(0);
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class BroadcastAnrTimer extends AnrTimer {
@@ -117,8 +119,16 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
         }
     }
 
-    public BroadcastQueueModernImpl(ActivityManagerService activityManagerService, Handler handler, BroadcastConstants broadcastConstants, BroadcastConstants broadcastConstants2) {
-        super(activityManagerService, handler, new BroadcastSkipPolicy(activityManagerService), new BroadcastHistory(activityManagerService, broadcastConstants));
+    public BroadcastQueueModernImpl(
+            ActivityManagerService activityManagerService,
+            Handler handler,
+            BroadcastConstants broadcastConstants,
+            BroadcastConstants broadcastConstants2) {
+        super(
+                activityManagerService,
+                handler,
+                new BroadcastSkipPolicy(activityManagerService),
+                new BroadcastHistory(activityManagerService, broadcastConstants));
         this.mDelayedBroadcasts = new ArrayList();
         this.mProcessQueues = new SparseArray();
         this.mRunnableHead = null;
@@ -127,128 +137,184 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
         this.mRecordsLookupCache = new AtomicReference();
         this.mMatchingRecordsCache = new AtomicReference();
         this.mUidForeground = new SparseBooleanArray();
-        Handler.Callback callback = new Handler.Callback() { // from class: com.android.server.am.BroadcastQueueModernImpl$$ExternalSyntheticLambda12
-            @Override // android.os.Handler.Callback
-            public final boolean handleMessage(Message message) {
-                BroadcastQueueModernImpl broadcastQueueModernImpl = BroadcastQueueModernImpl.this;
-                broadcastQueueModernImpl.getClass();
-                switch (message.what) {
-                    case 1:
-                        broadcastQueueModernImpl.updateRunningList();
-                        break;
-                    case 2:
-                        broadcastQueueModernImpl.deliveryTimeout((BroadcastProcessQueue) message.obj);
-                        break;
-                    case 3:
-                        ActivityManagerService activityManagerService2 = broadcastQueueModernImpl.mService;
-                        ActivityManagerService.boostPriorityForLockedSection();
-                        synchronized (activityManagerService2) {
-                            try {
-                                SomeArgs someArgs = (SomeArgs) message.obj;
-                                ProcessRecord processRecord = (ProcessRecord) someArgs.arg1;
-                                BroadcastRecord broadcastRecord = (BroadcastRecord) someArgs.arg2;
-                                someArgs.recycle();
-                                processRecord.removeBackgroundStartPrivileges(broadcastRecord);
-                            } finally {
+        Handler.Callback callback =
+                new Handler
+                        .Callback() { // from class:
+                                      // com.android.server.am.BroadcastQueueModernImpl$$ExternalSyntheticLambda12
+                    @Override // android.os.Handler.Callback
+                    public final boolean handleMessage(Message message) {
+                        BroadcastQueueModernImpl broadcastQueueModernImpl =
+                                BroadcastQueueModernImpl.this;
+                        broadcastQueueModernImpl.getClass();
+                        switch (message.what) {
+                            case 1:
+                                broadcastQueueModernImpl.updateRunningList();
+                                break;
+                            case 2:
+                                broadcastQueueModernImpl.deliveryTimeout(
+                                        (BroadcastProcessQueue) message.obj);
+                                break;
+                            case 3:
+                                ActivityManagerService activityManagerService2 =
+                                        broadcastQueueModernImpl.mService;
+                                ActivityManagerService.boostPriorityForLockedSection();
+                                synchronized (activityManagerService2) {
+                                    try {
+                                        SomeArgs someArgs = (SomeArgs) message.obj;
+                                        ProcessRecord processRecord = (ProcessRecord) someArgs.arg1;
+                                        BroadcastRecord broadcastRecord =
+                                                (BroadcastRecord) someArgs.arg2;
+                                        someArgs.recycle();
+                                        processRecord.removeBackgroundStartPrivileges(
+                                                broadcastRecord);
+                                    } finally {
+                                        ActivityManagerService.resetPriorityAfterLockedSection();
+                                    }
+                                }
                                 ActivityManagerService.resetPriorityAfterLockedSection();
-                            }
-                        }
-                        ActivityManagerService.resetPriorityAfterLockedSection();
-                        break;
-                    case 4:
-                        broadcastQueueModernImpl.checkHealth();
-                        break;
-                    case 5:
-                        ActivityManagerService activityManagerService3 = broadcastQueueModernImpl.mService;
-                        ActivityManagerService.boostPriorityForLockedSection();
-                        synchronized (activityManagerService3) {
-                            try {
-                                broadcastQueueModernImpl.mCheckPendingColdStartQueued = false;
-                                broadcastQueueModernImpl.checkPendingColdStartValidityLocked();
-                            } finally {
+                                break;
+                            case 4:
+                                broadcastQueueModernImpl.checkHealth();
+                                break;
+                            case 5:
+                                ActivityManagerService activityManagerService3 =
+                                        broadcastQueueModernImpl.mService;
+                                ActivityManagerService.boostPriorityForLockedSection();
+                                synchronized (activityManagerService3) {
+                                    try {
+                                        broadcastQueueModernImpl.mCheckPendingColdStartQueued =
+                                                false;
+                                        broadcastQueueModernImpl
+                                                .checkPendingColdStartValidityLocked();
+                                    } finally {
+                                        ActivityManagerService.resetPriorityAfterLockedSection();
+                                    }
+                                }
                                 ActivityManagerService.resetPriorityAfterLockedSection();
-                            }
-                        }
-                        ActivityManagerService.resetPriorityAfterLockedSection();
-                        break;
-                    case 6:
-                        broadcastQueueModernImpl.handleProcessFreezableChanged((ProcessRecord) message.obj);
-                        break;
-                    case 7:
-                        int intValue = ((Integer) message.obj).intValue();
-                        int i = message.arg1;
-                        ActivityManagerService activityManagerService4 = broadcastQueueModernImpl.mService;
-                        ActivityManagerService.boostPriorityForLockedSection();
-                        synchronized (activityManagerService4) {
-                            try {
-                                if (i == 2) {
-                                    broadcastQueueModernImpl.mUidForeground.put(intValue, true);
-                                } else {
-                                    broadcastQueueModernImpl.mUidForeground.delete(intValue);
+                                break;
+                            case 6:
+                                broadcastQueueModernImpl.handleProcessFreezableChanged(
+                                        (ProcessRecord) message.obj);
+                                break;
+                            case 7:
+                                int intValue = ((Integer) message.obj).intValue();
+                                int i = message.arg1;
+                                ActivityManagerService activityManagerService4 =
+                                        broadcastQueueModernImpl.mService;
+                                ActivityManagerService.boostPriorityForLockedSection();
+                                synchronized (activityManagerService4) {
+                                    try {
+                                        if (i == 2) {
+                                            broadcastQueueModernImpl.mUidForeground.put(
+                                                    intValue, true);
+                                        } else {
+                                            broadcastQueueModernImpl.mUidForeground.delete(
+                                                    intValue);
+                                        }
+                                        for (BroadcastProcessQueue broadcastProcessQueue =
+                                                        (BroadcastProcessQueue)
+                                                                broadcastQueueModernImpl
+                                                                        .mProcessQueues.get(
+                                                                        intValue);
+                                                broadcastProcessQueue != null;
+                                                broadcastProcessQueue =
+                                                        broadcastProcessQueue.processNameNext) {
+                                            broadcastQueueModernImpl.setQueueProcess(
+                                                    broadcastProcessQueue,
+                                                    broadcastProcessQueue.app);
+                                        }
+                                        broadcastQueueModernImpl.enqueueUpdateRunningList();
+                                    } finally {
+                                        ActivityManagerService.resetPriorityAfterLockedSection();
+                                    }
                                 }
-                                for (BroadcastProcessQueue broadcastProcessQueue = (BroadcastProcessQueue) broadcastQueueModernImpl.mProcessQueues.get(intValue); broadcastProcessQueue != null; broadcastProcessQueue = broadcastProcessQueue.processNameNext) {
-                                    broadcastQueueModernImpl.setQueueProcess(broadcastProcessQueue, broadcastProcessQueue.app);
-                                }
-                                broadcastQueueModernImpl.enqueueUpdateRunningList();
-                            } finally {
                                 ActivityManagerService.resetPriorityAfterLockedSection();
-                            }
-                        }
-                        ActivityManagerService.resetPriorityAfterLockedSection();
-                        break;
-                    case 8:
-                        ActivityManagerService activityManagerService5 = broadcastQueueModernImpl.mService;
-                        ActivityManagerService.boostPriorityForLockedSection();
-                        synchronized (activityManagerService5) {
-                            try {
-                                BroadcastProcessQueue broadcastProcessQueue2 = (BroadcastProcessQueue) message.obj;
-                                int i2 = message.arg1;
-                                ProcessRecord processRecord2 = broadcastProcessQueue2.app;
-                                if (processRecord2 != null) {
-                                    broadcastQueueModernImpl.mAnrTimer.start(MathUtils.constrain(processRecord2.mService.mAppProfiler.mProcessCpuTracker.getCpuDelayTimeForPid(processRecord2.mPid) - broadcastProcessQueue2.lastCpuDelayTime, 0L, i2), broadcastProcessQueue2);
-                                } else {
-                                    broadcastQueueModernImpl.finishReceiverActiveLocked(broadcastProcessQueue2, 3, "deliveryTimeoutLocked");
-                                    broadcastQueueModernImpl.demoteFromRunningLocked(broadcastProcessQueue2);
+                                break;
+                            case 8:
+                                ActivityManagerService activityManagerService5 =
+                                        broadcastQueueModernImpl.mService;
+                                ActivityManagerService.boostPriorityForLockedSection();
+                                synchronized (activityManagerService5) {
+                                    try {
+                                        BroadcastProcessQueue broadcastProcessQueue2 =
+                                                (BroadcastProcessQueue) message.obj;
+                                        int i2 = message.arg1;
+                                        ProcessRecord processRecord2 = broadcastProcessQueue2.app;
+                                        if (processRecord2 != null) {
+                                            broadcastQueueModernImpl.mAnrTimer.start(
+                                                    MathUtils.constrain(
+                                                            processRecord2.mService.mAppProfiler
+                                                                            .mProcessCpuTracker
+                                                                            .getCpuDelayTimeForPid(
+                                                                                    processRecord2
+                                                                                            .mPid)
+                                                                    - broadcastProcessQueue2
+                                                                            .lastCpuDelayTime,
+                                                            0L,
+                                                            i2),
+                                                    broadcastProcessQueue2);
+                                        } else {
+                                            broadcastQueueModernImpl.finishReceiverActiveLocked(
+                                                    broadcastProcessQueue2,
+                                                    3,
+                                                    "deliveryTimeoutLocked");
+                                            broadcastQueueModernImpl.demoteFromRunningLocked(
+                                                    broadcastProcessQueue2);
+                                        }
+                                    } finally {
+                                    }
                                 }
-                            } finally {
-                            }
-                        }
-                        ActivityManagerService.resetPriorityAfterLockedSection();
-                        break;
-                    case 9:
-                        ActivityManagerService activityManagerService6 = broadcastQueueModernImpl.mService;
-                        ActivityManagerService.boostPriorityForLockedSection();
-                        synchronized (activityManagerService6) {
-                            while (broadcastQueueModernImpl.mDelayedBroadcasts.size() != 0) {
-                                try {
-                                    broadcastQueueModernImpl.enqueueBroadcastLocked((BroadcastRecord) broadcastQueueModernImpl.mDelayedBroadcasts.remove(0));
-                                } finally {
+                                ActivityManagerService.resetPriorityAfterLockedSection();
+                                break;
+                            case 9:
+                                ActivityManagerService activityManagerService6 =
+                                        broadcastQueueModernImpl.mService;
+                                ActivityManagerService.boostPriorityForLockedSection();
+                                synchronized (activityManagerService6) {
+                                    while (broadcastQueueModernImpl.mDelayedBroadcasts.size()
+                                            != 0) {
+                                        try {
+                                            broadcastQueueModernImpl.enqueueBroadcastLocked(
+                                                    (BroadcastRecord)
+                                                            broadcastQueueModernImpl
+                                                                    .mDelayedBroadcasts.remove(0));
+                                        } finally {
+                                        }
+                                    }
                                 }
-                            }
+                                ActivityManagerService.resetPriorityAfterLockedSection();
+                                return false;
+                            default:
+                                return false;
                         }
-                        ActivityManagerService.resetPriorityAfterLockedSection();
-                        return false;
-                    default:
-                        return false;
-                }
-                return true;
-            }
-        };
-        this.mBroadcastConsumerSkip = new BroadcastQueueModernImpl$$ExternalSyntheticLambda4(1, this);
-        this.mBroadcastConsumerSkipAndCanceled = new BroadcastQueueModernImpl$$ExternalSyntheticLambda4(2, this);
-        this.mBroadcastConsumerDeferApply = new BroadcastQueueModernImpl$$ExternalSyntheticLambda4(3, this);
-        this.mBroadcastConsumerDeferClear = new BroadcastQueueModernImpl$$ExternalSyntheticLambda4(4, this);
-        this.mBroadcastRecordConsumerEnqueue = new BroadcastQueueModernImpl$$ExternalSyntheticLambda4(5, this);
+                        return true;
+                    }
+                };
+        this.mBroadcastConsumerSkip =
+                new BroadcastQueueModernImpl$$ExternalSyntheticLambda4(1, this);
+        this.mBroadcastConsumerSkipAndCanceled =
+                new BroadcastQueueModernImpl$$ExternalSyntheticLambda4(2, this);
+        this.mBroadcastConsumerDeferApply =
+                new BroadcastQueueModernImpl$$ExternalSyntheticLambda4(3, this);
+        this.mBroadcastConsumerDeferClear =
+                new BroadcastQueueModernImpl$$ExternalSyntheticLambda4(4, this);
+        this.mBroadcastRecordConsumerEnqueue =
+                new BroadcastQueueModernImpl$$ExternalSyntheticLambda4(5, this);
         this.mConstants = broadcastConstants;
         this.mFgConstants = broadcastConstants;
         this.mBgConstants = broadcastConstants2;
         Handler handler2 = new Handler(handler.getLooper(), callback);
         this.mLocalHandler = handler2;
-        this.mRunning = new BroadcastProcessQueue[broadcastConstants.MAX_RUNNING_PROCESS_QUEUES + broadcastConstants.EXTRA_RUNNING_URGENT_PROCESS_QUEUES];
-        this.mAnrTimer = new BroadcastAnrTimer(handler2, 2, "BROADCAST_TIMEOUT", new AnrTimer.Args());
+        this.mRunning =
+                new BroadcastProcessQueue
+                        [broadcastConstants.MAX_RUNNING_PROCESS_QUEUES
+                                + broadcastConstants.EXTRA_RUNNING_URGENT_PROCESS_QUEUES];
+        this.mAnrTimer =
+                new BroadcastAnrTimer(handler2, 2, "BROADCAST_TIMEOUT", new AnrTimer.Args());
     }
 
-    public static boolean containsAllReceivers(BroadcastRecord broadcastRecord, BroadcastRecord broadcastRecord2, ArrayMap arrayMap) {
+    public static boolean containsAllReceivers(
+            BroadcastRecord broadcastRecord, BroadcastRecord broadcastRecord2, ArrayMap arrayMap) {
         int indexOfKey = arrayMap.indexOfKey(broadcastRecord2);
         if (indexOfKey > 0) {
             return ((Boolean) arrayMap.valueAt(indexOfKey)).booleanValue();
@@ -279,27 +345,41 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
             if (broadcastProcessQueue == null) {
                 break;
             }
-            BroadcastQueue.checkState(broadcastProcessQueue.runnableAtPrev == broadcastProcessQueue2, "runnableAtPrev");
-            BroadcastQueue.checkState(broadcastProcessQueue.isRunnable(), "isRunnable " + broadcastProcessQueue);
+            BroadcastQueue.checkState(
+                    broadcastProcessQueue.runnableAtPrev == broadcastProcessQueue2,
+                    "runnableAtPrev");
+            BroadcastQueue.checkState(
+                    broadcastProcessQueue.isRunnable(), "isRunnable " + broadcastProcessQueue);
             if (broadcastProcessQueue2 != null) {
-                BroadcastQueue.checkState(broadcastProcessQueue.getRunnableAt() >= broadcastProcessQueue2.getRunnableAt(), "getRunnableAt " + broadcastProcessQueue + " vs " + broadcastProcessQueue2);
+                BroadcastQueue.checkState(
+                        broadcastProcessQueue.getRunnableAt()
+                                >= broadcastProcessQueue2.getRunnableAt(),
+                        "getRunnableAt " + broadcastProcessQueue + " vs " + broadcastProcessQueue2);
             }
             broadcastProcessQueue2 = broadcastProcessQueue;
             broadcastProcessQueue = broadcastProcessQueue.runnableAtNext;
         }
         for (BroadcastProcessQueue broadcastProcessQueue3 : this.mRunning) {
             if (broadcastProcessQueue3 != null) {
-                BroadcastQueue.checkState(broadcastProcessQueue3.isActive(), "isActive " + broadcastProcessQueue3);
+                BroadcastQueue.checkState(
+                        broadcastProcessQueue3.isActive(), "isActive " + broadcastProcessQueue3);
             }
         }
         BroadcastProcessQueue broadcastProcessQueue4 = this.mRunningColdStart;
         if (broadcastProcessQueue4 != null) {
-            BroadcastQueue.checkState(getRunningIndexOf(broadcastProcessQueue4) >= 0, "isOrphaned " + this.mRunningColdStart);
+            BroadcastQueue.checkState(
+                    getRunningIndexOf(broadcastProcessQueue4) >= 0,
+                    "isOrphaned " + this.mRunningColdStart);
         }
         for (i = 0; i < this.mProcessQueues.size(); i++) {
-            for (BroadcastProcessQueue broadcastProcessQueue5 = (BroadcastProcessQueue) this.mProcessQueues.valueAt(i); broadcastProcessQueue5 != null; broadcastProcessQueue5 = broadcastProcessQueue5.processNameNext) {
+            for (BroadcastProcessQueue broadcastProcessQueue5 =
+                            (BroadcastProcessQueue) this.mProcessQueues.valueAt(i);
+                    broadcastProcessQueue5 != null;
+                    broadcastProcessQueue5 = broadcastProcessQueue5.processNameNext) {
                 if (!broadcastProcessQueue5.isActive()) {
-                    Preconditions.checkState(!broadcastProcessQueue5.mRunnableAtInvalidated, "mRunnableAtInvalidated");
+                    Preconditions.checkState(
+                            !broadcastProcessQueue5.mRunnableAtInvalidated,
+                            "mRunnableAtInvalidated");
                 }
                 BroadcastProcessQueue.assertHealthLocked(broadcastProcessQueue5.mPending);
                 BroadcastProcessQueue.assertHealthLocked(broadcastProcessQueue5.mPendingUrgent);
@@ -319,35 +399,44 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
                 } catch (Exception e) {
                     Slog.wtf("BroadcastQueue", e);
                     final String exc = e.toString();
-                    DropBoxManagerService.DropBoxManagerInternalImpl dropBoxManagerInternalImpl = (DropBoxManagerService.DropBoxManagerInternalImpl) LocalServices.getService(DropBoxManagerService.DropBoxManagerInternalImpl.class);
-                    DropBoxManagerService.this.addEntry("broadcast_queue_dump", new DropBoxManagerInternal$EntrySource() { // from class: com.android.server.am.BroadcastQueue$$ExternalSyntheticLambda0
-                        @Override // com.android.server.DropBoxManagerInternal$EntrySource
-                        public final void writeTo(FileDescriptor fileDescriptor) {
-                            BroadcastQueue broadcastQueue = BroadcastQueue.this;
-                            String str = exc;
-                            broadcastQueue.getClass();
-                            FileOutputStream fileOutputStream = new FileOutputStream(fileDescriptor);
-                            try {
-                                PrintWriter printWriter = new PrintWriter(fileOutputStream);
-                                try {
-                                    printWriter.print("Message: ");
-                                    printWriter.println(str);
-                                    broadcastQueue.dumpLocked(printWriter, false, false, false, null, false);
-                                    printWriter.flush();
-                                    printWriter.close();
-                                    fileOutputStream.close();
-                                } finally {
+                    DropBoxManagerService.DropBoxManagerInternalImpl dropBoxManagerInternalImpl =
+                            (DropBoxManagerService.DropBoxManagerInternalImpl)
+                                    LocalServices.getService(
+                                            DropBoxManagerService.DropBoxManagerInternalImpl.class);
+                    DropBoxManagerService.this.addEntry(
+                            "broadcast_queue_dump",
+                            new DropBoxManagerInternal$EntrySource() { // from class:
+                                                                       // com.android.server.am.BroadcastQueue$$ExternalSyntheticLambda0
+                                @Override // com.android.server.DropBoxManagerInternal$EntrySource
+                                public final void writeTo(FileDescriptor fileDescriptor) {
+                                    BroadcastQueue broadcastQueue = BroadcastQueue.this;
+                                    String str = exc;
+                                    broadcastQueue.getClass();
+                                    FileOutputStream fileOutputStream =
+                                            new FileOutputStream(fileDescriptor);
+                                    try {
+                                        PrintWriter printWriter = new PrintWriter(fileOutputStream);
+                                        try {
+                                            printWriter.print("Message: ");
+                                            printWriter.println(str);
+                                            broadcastQueue.dumpLocked(
+                                                    printWriter, false, false, false, null, false);
+                                            printWriter.flush();
+                                            printWriter.close();
+                                            fileOutputStream.close();
+                                        } finally {
+                                        }
+                                    } catch (Throwable th) {
+                                        try {
+                                            fileOutputStream.close();
+                                        } catch (Throwable th2) {
+                                            th.addSuppressed(th2);
+                                        }
+                                        throw th;
+                                    }
                                 }
-                            } catch (Throwable th) {
-                                try {
-                                    fileOutputStream.close();
-                                } catch (Throwable th2) {
-                                    th.addSuppressed(th2);
-                                }
-                                throw th;
-                            }
-                        }
-                    }, 2);
+                            },
+                            2);
                 }
             } catch (Throwable th) {
                 ActivityManagerService.resetPriorityAfterLockedSection();
@@ -369,70 +458,81 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
             if (this.mCheckPendingColdStartQueued) {
                 return;
             }
-            this.mLocalHandler.sendEmptyMessageDelayed(5, this.mConstants.PENDING_COLD_START_CHECK_INTERVAL_MILLIS);
+            this.mLocalHandler.sendEmptyMessageDelayed(
+                    5, this.mConstants.PENDING_COLD_START_CHECK_INTERVAL_MILLIS);
             this.mCheckPendingColdStartQueued = true;
         }
     }
 
-    public final boolean cleanupDisabledPackageReceiversLocked(final int i, final String str, final Set set) {
+    public final boolean cleanupDisabledPackageReceiversLocked(
+            final int i, final String str, final Set set) {
         Predicate predicate;
         BroadcastProcessQueue.BroadcastPredicate broadcastPredicate;
         if (str != null) {
             final int packageUid = this.mService.mPackageManagerInt.getPackageUid(str, 8192L, i);
             final int i2 = 0;
-            predicate = new Predicate() { // from class: com.android.server.am.BroadcastQueueModernImpl$$ExternalSyntheticLambda2
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    int i3 = i2;
-                    int i4 = packageUid;
-                    BroadcastProcessQueue broadcastProcessQueue = (BroadcastProcessQueue) obj;
-                    switch (i3) {
-                        case 0:
-                            if (broadcastProcessQueue.uid == i4) {
+            predicate =
+                    new Predicate() { // from class:
+                                      // com.android.server.am.BroadcastQueueModernImpl$$ExternalSyntheticLambda2
+                        @Override // java.util.function.Predicate
+                        public final boolean test(Object obj) {
+                            int i3 = i2;
+                            int i4 = packageUid;
+                            BroadcastProcessQueue broadcastProcessQueue =
+                                    (BroadcastProcessQueue) obj;
+                            switch (i3) {
+                                case 0:
+                                    if (broadcastProcessQueue.uid == i4) {}
+                                    break;
+                                default:
+                                    if (UserHandle.getUserId(broadcastProcessQueue.uid) == i4) {}
+                                    break;
                             }
-                            break;
-                        default:
-                            if (UserHandle.getUserId(broadcastProcessQueue.uid) == i4) {
+                            return false;
+                        }
+                    };
+            broadcastPredicate =
+                    set != null
+                            ? new BroadcastProcessQueue
+                                    .BroadcastPredicate() { // from class:
+                                                            // com.android.server.am.BroadcastQueueModernImpl$$ExternalSyntheticLambda3
+                                @Override // com.android.server.am.BroadcastProcessQueue.BroadcastPredicate
+                                public final boolean test(BroadcastRecord broadcastRecord, int i3) {
+                                    Set set2 = set;
+                                    Object obj = broadcastRecord.receivers.get(i3);
+                                    if (!(obj instanceof ResolveInfo)) {
+                                        return false;
+                                    }
+                                    ActivityInfo activityInfo = ((ResolveInfo) obj).activityInfo;
+                                    return str.equals(activityInfo.packageName)
+                                            && set2.contains(activityInfo.name);
+                                }
                             }
-                            break;
-                    }
-                    return false;
-                }
-            };
-            broadcastPredicate = set != null ? new BroadcastProcessQueue.BroadcastPredicate() { // from class: com.android.server.am.BroadcastQueueModernImpl$$ExternalSyntheticLambda3
-                @Override // com.android.server.am.BroadcastProcessQueue.BroadcastPredicate
-                public final boolean test(BroadcastRecord broadcastRecord, int i3) {
-                    Set set2 = set;
-                    Object obj = broadcastRecord.receivers.get(i3);
-                    if (!(obj instanceof ResolveInfo)) {
-                        return false;
-                    }
-                    ActivityInfo activityInfo = ((ResolveInfo) obj).activityInfo;
-                    return str.equals(activityInfo.packageName) && set2.contains(activityInfo.name);
-                }
-            } : new BroadcastQueueModernImpl$$ExternalSyntheticLambda4(0, str);
+                            : new BroadcastQueueModernImpl$$ExternalSyntheticLambda4(0, str);
         } else {
             final int i3 = 1;
-            predicate = new Predicate() { // from class: com.android.server.am.BroadcastQueueModernImpl$$ExternalSyntheticLambda2
-                @Override // java.util.function.Predicate
-                public final boolean test(Object obj) {
-                    int i32 = i3;
-                    int i4 = i;
-                    BroadcastProcessQueue broadcastProcessQueue = (BroadcastProcessQueue) obj;
-                    switch (i32) {
-                        case 0:
-                            if (broadcastProcessQueue.uid == i4) {
+            predicate =
+                    new Predicate() { // from class:
+                                      // com.android.server.am.BroadcastQueueModernImpl$$ExternalSyntheticLambda2
+                        @Override // java.util.function.Predicate
+                        public final boolean test(Object obj) {
+                            int i32 = i3;
+                            int i4 = i;
+                            BroadcastProcessQueue broadcastProcessQueue =
+                                    (BroadcastProcessQueue) obj;
+                            switch (i32) {
+                                case 0:
+                                    if (broadcastProcessQueue.uid == i4) {}
+                                    break;
+                                default:
+                                    if (UserHandle.getUserId(broadcastProcessQueue.uid) == i4) {}
+                                    break;
                             }
-                            break;
-                        default:
-                            if (UserHandle.getUserId(broadcastProcessQueue.uid) == i4) {
-                            }
-                            break;
-                    }
-                    return false;
-                }
-            };
-            BroadcastQueueModernImpl$$ExternalSyntheticLambda7 broadcastQueueModernImpl$$ExternalSyntheticLambda7 = BROADCAST_PREDICATE_ANY;
+                            return false;
+                        }
+                    };
+            BroadcastQueueModernImpl$$ExternalSyntheticLambda7
+                    broadcastQueueModernImpl$$ExternalSyntheticLambda7 = BROADCAST_PREDICATE_ANY;
             SparseBooleanArray sparseBooleanArray = this.mUidForeground;
             for (int size = sparseBooleanArray.size() - 1; size >= 0; size--) {
                 if (UserHandle.getUserId(sparseBooleanArray.keyAt(size)) == i) {
@@ -450,7 +550,8 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
         broadcastProcessQueue.getClass();
         Flags.avoidRepeatedBcastReEnqueues();
         if (broadcastProcessQueue.mActiveReEnqueued) {
-            finishReceiverActiveLocked(this.mRunningColdStart, 5, "invalid start with re-enqueued broadcast");
+            finishReceiverActiveLocked(
+                    this.mRunningColdStart, 5, "invalid start with re-enqueued broadcast");
         } else {
             BroadcastProcessQueue broadcastProcessQueue2 = this.mRunningColdStart;
             BroadcastRecord active = broadcastProcessQueue2.getActive();
@@ -464,7 +565,10 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
         }
         demoteFromRunningLocked(this.mRunningColdStart);
         BroadcastProcessQueue broadcastProcessQueue3 = this.mRunningColdStart;
-        Trace.asyncTraceForTrackEnd(64L, broadcastProcessQueue3.runningTraceTrackName, broadcastProcessQueue3.hashCode());
+        Trace.asyncTraceForTrackEnd(
+                64L,
+                broadcastProcessQueue3.runningTraceTrackName,
+                broadcastProcessQueue3.hashCode());
         this.mRunningColdStart = null;
         enqueueUpdateRunningList();
         enqueueUpdateRunningList();
@@ -489,7 +593,8 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
 
     public final void demoteFromRunningLocked(BroadcastProcessQueue broadcastProcessQueue) {
         if (!UserHandle.isCore(broadcastProcessQueue.uid)) {
-            RunningBroadcastFilter runningBroadcastFilter = RunningBroadcastFilter.RunningBroadcastFilterHolder.INSTANCE;
+            RunningBroadcastFilter runningBroadcastFilter =
+                    RunningBroadcastFilter.RunningBroadcastFilterHolder.INSTANCE;
             Integer valueOf = Integer.valueOf(broadcastProcessQueue.uid);
             synchronized (runningBroadcastFilter.mRunningBroadcastList) {
                 try {
@@ -501,7 +606,8 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
             }
         }
         if (!broadcastProcessQueue.isActive()) {
-            BroadcastQueue.logw("Ignoring demoteFromRunning; no active broadcast for " + broadcastProcessQueue);
+            BroadcastQueue.logw(
+                    "Ignoring demoteFromRunning; no active broadcast for " + broadcastProcessQueue);
             return;
         }
         int traceBegin = BroadcastQueue.traceBegin("demoteFromRunning");
@@ -512,7 +618,8 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
         broadcastProcessQueue.mActiveAssumedDeliveryCountSinceIdle = 0;
         broadcastProcessQueue.mActiveViaColdStart = false;
         broadcastProcessQueue.mRunnableAtInvalidated = true;
-        Trace.asyncTraceForTrackEnd(64L, broadcastProcessQueue.runningTraceTrackName, broadcastProcessQueue.hashCode());
+        Trace.asyncTraceForTrackEnd(
+                64L, broadcastProcessQueue.runningTraceTrackName, broadcastProcessQueue.hashCode());
         this.mRunning[getRunningIndexOf(broadcastProcessQueue)] = null;
         updateRunnableList(broadcastProcessQueue);
         enqueueUpdateRunningList();
@@ -534,18 +641,27 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean dumpLocked(java.io.PrintWriter r26, boolean r27, boolean r28, boolean r29, java.lang.String r30, boolean r31) {
+    public final boolean dumpLocked(
+            java.io.PrintWriter r26,
+            boolean r27,
+            boolean r28,
+            boolean r29,
+            java.lang.String r30,
+            boolean r31) {
         /*
             Method dump skipped, instructions count: 1766
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.BroadcastQueueModernImpl.dumpLocked(java.io.PrintWriter, boolean, boolean, boolean, java.lang.String, boolean):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.BroadcastQueueModernImpl.dumpLocked(java.io.PrintWriter,"
+                    + " boolean, boolean, boolean, java.lang.String, boolean):boolean");
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:98:0x01e0, code lost:
-    
-        if (r2 == false) goto L125;
-     */
+
+       if (r2 == false) goto L125;
+    */
     /* JADX WARN: Removed duplicated region for block: B:108:0x0237  */
     /* JADX WARN: Removed duplicated region for block: B:110:0x023b  */
     /* JADX WARN: Removed duplicated region for block: B:113:0x0261  */
@@ -560,7 +676,9 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
             Method dump skipped, instructions count: 1027
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.BroadcastQueueModernImpl.enqueueBroadcastLocked(com.android.server.am.BroadcastRecord):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.BroadcastQueueModernImpl.enqueueBroadcastLocked(com.android.server.am.BroadcastRecord):void");
     }
 
     public final void enqueueDelayedBroadcastLocked(BroadcastRecord broadcastRecord) {
@@ -575,16 +693,25 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
         handler.sendEmptyMessage(1);
     }
 
-    public final void finishOrReEnqueueActiveBroadcast(BroadcastProcessQueue broadcastProcessQueue) {
+    public final void finishOrReEnqueueActiveBroadcast(
+            BroadcastProcessQueue broadcastProcessQueue) {
         BroadcastQueue.checkState(broadcastProcessQueue.isActive(), "isActive");
         Flags.avoidRepeatedBcastReEnqueues();
         if (broadcastProcessQueue.mActiveReEnqueued) {
-            finishReceiverActiveLocked(broadcastProcessQueue, 5, "re-enqueued broadcast delivery failed");
+            finishReceiverActiveLocked(
+                    broadcastProcessQueue, 5, "re-enqueued broadcast delivery failed");
             return;
         }
         BroadcastRecord active = broadcastProcessQueue.getActive();
         int activeIndex = broadcastProcessQueue.getActiveIndex();
-        setDeliveryState(broadcastProcessQueue, broadcastProcessQueue.app, active, activeIndex, active.receivers.get(activeIndex), 0, "reEnqueueActiveBroadcast");
+        setDeliveryState(
+                broadcastProcessQueue,
+                broadcastProcessQueue.app,
+                active,
+                activeIndex,
+                active.receivers.get(activeIndex),
+                0,
+                "reEnqueueActiveBroadcast");
         BroadcastRecord active2 = broadcastProcessQueue.getActive();
         int activeIndex2 = broadcastProcessQueue.getActiveIndex();
         SomeArgs obtain = SomeArgs.obtain();
@@ -595,11 +722,14 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
         broadcastProcessQueue.onBroadcastEnqueued(active2, activeIndex2);
     }
 
-    public final void finishReceiverActiveLocked(BroadcastProcessQueue broadcastProcessQueue, int i, String str) {
+    public final void finishReceiverActiveLocked(
+            BroadcastProcessQueue broadcastProcessQueue, int i, String str) {
         String str2;
         int lastIndexOf;
         if (!broadcastProcessQueue.isActive()) {
-            BroadcastQueue.logw("Ignoring finishReceiverActiveLocked; no active broadcast for " + broadcastProcessQueue);
+            BroadcastQueue.logw(
+                    "Ignoring finishReceiverActiveLocked; no active broadcast for "
+                            + broadcastProcessQueue);
             return;
         }
         int traceBegin = BroadcastQueue.traceBegin("finishReceiver");
@@ -619,11 +749,17 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
                 if (obj instanceof BroadcastFilter) {
                     BroadcastFilter broadcastFilter = (BroadcastFilter) obj;
                     String str3 = broadcastFilter.receiverId;
-                    str2 = (str3 == null || (lastIndexOf = str3.lastIndexOf(64)) <= 0) ? null : broadcastFilter.receiverId.substring(0, lastIndexOf);
+                    str2 =
+                            (str3 == null || (lastIndexOf = str3.lastIndexOf(64)) <= 0)
+                                    ? null
+                                    : broadcastFilter.receiverId.substring(0, lastIndexOf);
                 } else {
                     str2 = ((ResolveInfo) obj).activityInfo.name;
                 }
-                this.mService.mAnrHelper.appNotResponding(broadcastProcessQueue.app, TimeoutRecord.forBroadcastReceiver(active.intent, receiverPackageName, str2).setExpiredTimer((AutoCloseable) null));
+                this.mService.mAnrHelper.appNotResponding(
+                        broadcastProcessQueue.app,
+                        TimeoutRecord.forBroadcastReceiver(active.intent, receiverPackageName, str2)
+                                .setExpiredTimer((AutoCloseable) null));
             }
         } else if (broadcastProcessQueue.mTimeoutScheduled) {
             broadcastAnrTimer.cancel(broadcastProcessQueue);
@@ -637,10 +773,12 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
     }
 
     @Override // com.android.server.am.BroadcastQueue
-    public final boolean finishReceiverLocked(ProcessRecord processRecord, int i, String str, Bundle bundle, boolean z) {
+    public final boolean finishReceiverLocked(
+            ProcessRecord processRecord, int i, String str, Bundle bundle, boolean z) {
         BroadcastProcessQueue processQueue = getProcessQueue(processRecord);
         if (processQueue == null || !processQueue.isActive()) {
-            BroadcastQueue.logw("Ignoring finishReceiverLocked; no active broadcast for " + processQueue);
+            BroadcastQueue.logw(
+                    "Ignoring finishReceiverLocked; no active broadcast for " + processQueue);
             return false;
         }
         BroadcastRecord active = processQueue.getActive();
@@ -656,16 +794,23 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
         finishReceiverActiveLocked(processQueue, 1, "remote app");
         if (active.resultAbort) {
             for (int i2 = activeIndex + 1; i2 < active.receivers.size(); i2++) {
-                setDeliveryState(null, null, active, i2, active.receivers.get(i2), 2, "resultAbort");
+                setDeliveryState(
+                        null, null, active, i2, active.receivers.get(i2), 2, "resultAbort");
             }
             this.mService.mExt.getClass();
             BroadcastHistory broadcastHistory = this.mHistory;
             String[] strArr = broadcastHistory.mAbortedBroadcastHistory;
             int i3 = broadcastHistory.mAbortedHistoryNext;
             CharArrayWriter charArrayWriter = new CharArrayWriter();
-            active.dump(new PrintWriter(charArrayWriter), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS"));
+            active.dump(
+                    new PrintWriter(charArrayWriter),
+                    new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS"));
             strArr[i3] = charArrayWriter.toString();
-            broadcastHistory.mAbortedHistoryNext = BroadcastHistory.ringAdvance(broadcastHistory.mAbortedHistoryNext, 1, BroadcastHistory.MAX_ABORTED_BROADCAST_HISTORY);
+            broadcastHistory.mAbortedHistoryNext =
+                    BroadcastHistory.ringAdvance(
+                            broadcastHistory.mAbortedHistoryNext,
+                            1,
+                            BroadcastHistory.MAX_ABORTED_BROADCAST_HISTORY);
         }
         if (shouldRetire(processQueue)) {
             demoteFromRunningLocked(processQueue);
@@ -685,11 +830,19 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
         }
     }
 
-    public final boolean forEachMatchingBroadcast(Predicate predicate, BroadcastProcessQueue.BroadcastPredicate broadcastPredicate, BroadcastProcessQueue.BroadcastConsumer broadcastConsumer) {
+    public final boolean forEachMatchingBroadcast(
+            Predicate predicate,
+            BroadcastProcessQueue.BroadcastPredicate broadcastPredicate,
+            BroadcastProcessQueue.BroadcastConsumer broadcastConsumer) {
         boolean z = false;
         for (int size = this.mProcessQueues.size() - 1; size >= 0; size--) {
-            for (BroadcastProcessQueue broadcastProcessQueue = (BroadcastProcessQueue) this.mProcessQueues.valueAt(size); broadcastProcessQueue != null; broadcastProcessQueue = broadcastProcessQueue.processNameNext) {
-                if (predicate.test(broadcastProcessQueue) && broadcastProcessQueue.forEachMatchingBroadcast(broadcastPredicate, broadcastConsumer, true)) {
+            for (BroadcastProcessQueue broadcastProcessQueue =
+                            (BroadcastProcessQueue) this.mProcessQueues.valueAt(size);
+                    broadcastProcessQueue != null;
+                    broadcastProcessQueue = broadcastProcessQueue.processNameNext) {
+                if (predicate.test(broadcastProcessQueue)
+                        && broadcastProcessQueue.forEachMatchingBroadcast(
+                                broadcastPredicate, broadcastConsumer, true)) {
                     updateRunnableList(broadcastProcessQueue);
                     z = true;
                 }
@@ -704,7 +857,10 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
     public final void forEachMatchingQueue(Predicate predicate, Consumer consumer) {
         boolean z = false;
         for (int size = this.mProcessQueues.size() - 1; size >= 0; size--) {
-            for (BroadcastProcessQueue broadcastProcessQueue = (BroadcastProcessQueue) this.mProcessQueues.valueAt(size); broadcastProcessQueue != null; broadcastProcessQueue = broadcastProcessQueue.processNameNext) {
+            for (BroadcastProcessQueue broadcastProcessQueue =
+                            (BroadcastProcessQueue) this.mProcessQueues.valueAt(size);
+                    broadcastProcessQueue != null;
+                    broadcastProcessQueue = broadcastProcessQueue.processNameNext) {
                 if (predicate.test(broadcastProcessQueue)) {
                     consumer.accept(broadcastProcessQueue);
                     updateRunnableList(broadcastProcessQueue);
@@ -722,7 +878,8 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
     }
 
     public BroadcastProcessQueue getOrCreateProcessQueue(String str, int i) {
-        BroadcastProcessQueue broadcastProcessQueue = (BroadcastProcessQueue) this.mProcessQueues.get(i);
+        BroadcastProcessQueue broadcastProcessQueue =
+                (BroadcastProcessQueue) this.mProcessQueues.get(i);
         while (broadcastProcessQueue != null) {
             if (Objects.equals(broadcastProcessQueue.processName, str)) {
                 return broadcastProcessQueue;
@@ -733,8 +890,10 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
             }
             broadcastProcessQueue = broadcastProcessQueue2;
         }
-        BroadcastProcessQueue broadcastProcessQueue3 = new BroadcastProcessQueue(this.mConstants, str, i);
-        setQueueProcess(broadcastProcessQueue3, this.mService.mProcessList.getProcessRecordLocked(i, str));
+        BroadcastProcessQueue broadcastProcessQueue3 =
+                new BroadcastProcessQueue(this.mConstants, str, i);
+        setQueueProcess(
+                broadcastProcessQueue3, this.mService.mProcessList.getProcessRecordLocked(i, str));
         if (broadcastProcessQueue == null) {
             this.mProcessQueues.put(i, broadcastProcessQueue3);
         } else {
@@ -748,7 +907,10 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
     }
 
     public BroadcastProcessQueue getProcessQueue(String str, int i) {
-        for (BroadcastProcessQueue broadcastProcessQueue = (BroadcastProcessQueue) this.mProcessQueues.get(i); broadcastProcessQueue != null; broadcastProcessQueue = broadcastProcessQueue.processNameNext) {
+        for (BroadcastProcessQueue broadcastProcessQueue =
+                        (BroadcastProcessQueue) this.mProcessQueues.get(i);
+                broadcastProcessQueue != null;
+                broadcastProcessQueue = broadcastProcessQueue.processNameNext) {
             if (Objects.equals(broadcastProcessQueue.processName, str)) {
                 return broadcastProcessQueue;
             }
@@ -791,12 +953,21 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
         ActivityManagerService.boostPriorityForLockedSection();
         synchronized (activityManagerService) {
             try {
-                BroadcastProcessQueue processQueue = getProcessQueue(processRecord.processName, processRecord.uid);
-                if (processQueue != null && (processRecord2 = processQueue.app) != null && processRecord2.mPid == processRecord.mPid) {
+                BroadcastProcessQueue processQueue =
+                        getProcessQueue(processRecord.processName, processRecord.uid);
+                if (processQueue != null
+                        && (processRecord2 = processQueue.app) != null
+                        && processRecord2.mPid == processRecord.mPid) {
                     if (!isProcessFreezable(processRecord)) {
-                        BroadcastQueueModernImpl$$ExternalSyntheticLambda4 broadcastQueueModernImpl$$ExternalSyntheticLambda4 = this.mBroadcastRecordConsumerEnqueue;
+                        BroadcastQueueModernImpl$$ExternalSyntheticLambda4
+                                broadcastQueueModernImpl$$ExternalSyntheticLambda4 =
+                                        this.mBroadcastRecordConsumerEnqueue;
                         for (int i = 0; i < processQueue.mOutgoingBroadcasts.size(); i++) {
-                            ((BroadcastQueueModernImpl) broadcastQueueModernImpl$$ExternalSyntheticLambda4.f$0).enqueueBroadcastLocked((BroadcastRecord) processQueue.mOutgoingBroadcasts.get(i));
+                            ((BroadcastQueueModernImpl)
+                                            broadcastQueueModernImpl$$ExternalSyntheticLambda4.f$0)
+                                    .enqueueBroadcastLocked(
+                                            (BroadcastRecord)
+                                                    processQueue.mOutgoingBroadcasts.get(i));
                         }
                         processQueue.mOutgoingBroadcasts.clear();
                     }
@@ -822,11 +993,11 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
         ActivityManagerService.boostPriorityForProcLockedSection();
         synchronized (activityManagerProcLock) {
             try {
-                ProcessCachedOptimizerRecord processCachedOptimizerRecord = processRecord.mOptRecord;
+                ProcessCachedOptimizerRecord processCachedOptimizerRecord =
+                        processRecord.mOptRecord;
                 if (!processCachedOptimizerRecord.mPendingFreeze) {
                     if (!processCachedOptimizerRecord.mFrozen) {
-                        if (processRecord.frozenMARs) {
-                        }
+                        if (processRecord.frozenMARs) {}
                     }
                 }
                 z = true;
@@ -844,50 +1015,97 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
         activityManagerService.getClass();
         ProcessRecord processRecord = broadcastRecord.callerApp;
         ApplicationInfo applicationInfo = processRecord != null ? processRecord.info : null;
-        String str = applicationInfo != null ? applicationInfo.packageName : broadcastRecord.callerPackage;
+        String str =
+                applicationInfo != null
+                        ? applicationInfo.packageName
+                        : broadcastRecord.callerPackage;
         if (str != null) {
-            activityManagerService.mHandler.obtainMessage(74, broadcastRecord.callingUid, 0, str).sendToTarget();
+            activityManagerService
+                    .mHandler
+                    .obtainMessage(74, broadcastRecord.callingUid, 0, str)
+                    .sendToTarget();
         }
         broadcastRecord.finishTime = SystemClock.uptimeMillis();
         broadcastRecord.nextReceiver = broadcastRecord.receivers.size();
         BroadcastHistory broadcastHistory = this.mHistory;
         broadcastHistory.mPendingBroadcasts.remove(broadcastRecord);
-        BroadcastRecord broadcastRecord2 = !broadcastRecord.intent.canStripForHistory() ? broadcastRecord : new BroadcastRecord(broadcastRecord, broadcastRecord.intent.maybeStripForHistory());
+        BroadcastRecord broadcastRecord2 =
+                !broadcastRecord.intent.canStripForHistory()
+                        ? broadcastRecord
+                        : new BroadcastRecord(
+                                broadcastRecord, broadcastRecord.intent.maybeStripForHistory());
         int i = broadcastHistory.mHistoryNext;
         broadcastHistory.mBroadcastHistory[i] = broadcastRecord2;
-        broadcastHistory.mHistoryNext = BroadcastHistory.ringAdvance(i, 1, broadcastHistory.MAX_BROADCAST_HISTORY);
+        broadcastHistory.mHistoryNext =
+                BroadcastHistory.ringAdvance(i, 1, broadcastHistory.MAX_BROADCAST_HISTORY);
         broadcastHistory.mService.mExt.getClass();
-        broadcastHistory.mBroadcastSummaryHistoryToString[broadcastHistory.mSummaryHistoryNext] = broadcastRecord2.intent.toShortString(true, true, true, false);
-        if ("android.intent.action.BOOT_COMPLETED".equals(broadcastRecord2.intent.getAction()) && broadcastHistory.mBCBrHistoryRef == null) {
+        broadcastHistory.mBroadcastSummaryHistoryToString[broadcastHistory.mSummaryHistoryNext] =
+                broadcastRecord2.intent.toShortString(true, true, true, false);
+        if ("android.intent.action.BOOT_COMPLETED".equals(broadcastRecord2.intent.getAction())
+                && broadcastHistory.mBCBrHistoryRef == null) {
             CharArrayWriter charArrayWriter = new CharArrayWriter();
-            broadcastRecord2.dump(new PrintWriter(charArrayWriter), new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS"));
+            broadcastRecord2.dump(
+                    new PrintWriter(charArrayWriter),
+                    new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS"));
             broadcastHistory.mBCBrHistoryRef = new SoftReference(charArrayWriter.toString());
         }
         int i2 = broadcastHistory.mSummaryHistoryNext;
         broadcastHistory.mSummaryHistoryEnqueueTime[i2] = broadcastRecord2.enqueueClockTime;
         broadcastHistory.mSummaryHistoryDispatchTime[i2] = broadcastRecord2.dispatchClockTime;
         broadcastHistory.mSummaryHistoryFinishTime[i2] = System.currentTimeMillis();
-        broadcastHistory.mSummaryHistoryNext = BroadcastHistory.ringAdvance(broadcastHistory.mSummaryHistoryNext, 1, broadcastHistory.MAX_BROADCAST_SUMMARY_HISTORY);
+        broadcastHistory.mSummaryHistoryNext =
+                BroadcastHistory.ringAdvance(
+                        broadcastHistory.mSummaryHistoryNext,
+                        1,
+                        broadcastHistory.MAX_BROADCAST_SUMMARY_HISTORY);
         List list = broadcastRecord.receivers;
         int size = list != null ? list.size() : 0;
         if (broadcastRecord.nextReceiver >= size) {
             String action = broadcastRecord.intent.getAction();
-            int i3 = "android.intent.action.LOCKED_BOOT_COMPLETED".equals(action) ? 1 : "android.intent.action.BOOT_COMPLETED".equals(action) ? 2 : 0;
+            int i3 =
+                    "android.intent.action.LOCKED_BOOT_COMPLETED".equals(action)
+                            ? 1
+                            : "android.intent.action.BOOT_COMPLETED".equals(action) ? 2 : 0;
             if (i3 != 0) {
                 int i4 = (int) (broadcastRecord.dispatchTime - broadcastRecord.enqueueTime);
                 int uptimeMillis = (int) (SystemClock.uptimeMillis() - broadcastRecord.enqueueTime);
                 int i5 = (int) (broadcastRecord.dispatchRealTime - broadcastRecord.enqueueRealTime);
-                int elapsedRealtime = (int) (SystemClock.elapsedRealtime() - broadcastRecord.enqueueRealTime);
-                UserManagerInternal userManagerInternal = (UserManagerInternal) LocalServices.getService(UserManagerInternal.class);
-                UserInfo userInfo = userManagerInternal != null ? userManagerInternal.getUserInfo(broadcastRecord.userId) : null;
-                int userTypeForStatsd = userInfo != null ? UserJourneyLogger.getUserTypeForStatsd(userInfo.userType) : 0;
-                StringBuilder m = StorageManagerService$$ExternalSyntheticOutline0.m(i4, "BOOT_COMPLETED_BROADCAST_COMPLETION_LATENCY_REPORTED action:", action, " dispatchLatency:", " completeLatency:");
-                ServiceKeeper$$ExternalSyntheticOutline0.m(uptimeMillis, i5, " dispatchRealLatency:", " completeRealLatency:", m);
-                ServiceKeeper$$ExternalSyntheticOutline0.m(elapsedRealtime, size, " receiversSize:", " userId:", m);
+                int elapsedRealtime =
+                        (int) (SystemClock.elapsedRealtime() - broadcastRecord.enqueueRealTime);
+                UserManagerInternal userManagerInternal =
+                        (UserManagerInternal) LocalServices.getService(UserManagerInternal.class);
+                UserInfo userInfo =
+                        userManagerInternal != null
+                                ? userManagerInternal.getUserInfo(broadcastRecord.userId)
+                                : null;
+                int userTypeForStatsd =
+                        userInfo != null
+                                ? UserJourneyLogger.getUserTypeForStatsd(userInfo.userType)
+                                : 0;
+                StringBuilder m =
+                        StorageManagerService$$ExternalSyntheticOutline0.m(
+                                i4,
+                                "BOOT_COMPLETED_BROADCAST_COMPLETION_LATENCY_REPORTED action:",
+                                action,
+                                " dispatchLatency:",
+                                " completeLatency:");
+                ServiceKeeper$$ExternalSyntheticOutline0.m(
+                        uptimeMillis, i5, " dispatchRealLatency:", " completeRealLatency:", m);
+                ServiceKeeper$$ExternalSyntheticOutline0.m(
+                        elapsedRealtime, size, " receiversSize:", " userId:", m);
                 m.append(broadcastRecord.userId);
                 m.append(" userType:");
-                DeviceIdleController$$ExternalSyntheticOutline0.m(m, userInfo != null ? userInfo.userType : null, "BroadcastQueue");
-                FrameworkStatsLog.write(FrameworkStatsLog.BOOT_COMPLETED_BROADCAST_COMPLETION_LATENCY_REPORTED, i3, i4, uptimeMillis, i5, elapsedRealtime, broadcastRecord.userId, userTypeForStatsd);
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        m, userInfo != null ? userInfo.userType : null, "BroadcastQueue");
+                FrameworkStatsLog.write(
+                        FrameworkStatsLog.BOOT_COMPLETED_BROADCAST_COMPLETION_LATENCY_REPORTED,
+                        i3,
+                        i4,
+                        uptimeMillis,
+                        i5,
+                        elapsedRealtime,
+                        broadcastRecord.userId,
+                        userTypeForStatsd);
             }
         }
         if (broadcastRecord.mCounted) {
@@ -905,7 +1123,8 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
                 if (TextUtils.isEmpty(action2)) {
                     action2 = "EMPTY_ACTION";
                 }
-                ActivityManagerServiceExt.BrCountInfo brCountInfo = (ActivityManagerServiceExt.BrCountInfo) arrayMap.get(action2);
+                ActivityManagerServiceExt.BrCountInfo brCountInfo =
+                        (ActivityManagerServiceExt.BrCountInfo) arrayMap.get(action2);
                 if (brCountInfo != null) {
                     int i6 = brCountInfo.mMaxCnt;
                     int i7 = brCountInfo.mCnt;
@@ -921,7 +1140,9 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
                 }
             }
         }
-        if (broadcastRecord.intent.getComponent() == null && broadcastRecord.intent.getPackage() == null && (broadcastRecord.intent.getFlags() & 1073741824) == 0) {
+        if (broadcastRecord.intent.getComponent() == null
+                && broadcastRecord.intent.getPackage() == null
+                && (broadcastRecord.intent.getFlags() & 1073741824) == 0) {
             int i9 = 0;
             int i10 = 0;
             for (int i11 = 0; i11 < broadcastRecord.receivers.size(); i11++) {
@@ -932,26 +1153,41 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
                     }
                 }
             }
-            this.mService.addBroadcastStatLocked(i9, i10, broadcastRecord.intent.getAction(), broadcastRecord.callerPackage, SystemClock.uptimeMillis() - broadcastRecord.enqueueTime);
+            this.mService.addBroadcastStatLocked(
+                    i9,
+                    i10,
+                    broadcastRecord.intent.getAction(),
+                    broadcastRecord.callerPackage,
+                    SystemClock.uptimeMillis() - broadcastRecord.enqueueTime);
         }
     }
 
-    public final void notifyScheduleReceiver(ProcessRecord processRecord, BroadcastRecord broadcastRecord, ResolveInfo resolveInfo) {
+    public final void notifyScheduleReceiver(
+            ProcessRecord processRecord, BroadcastRecord broadcastRecord, ResolveInfo resolveInfo) {
         reportUsageStatsBroadcastDispatched(processRecord, broadcastRecord);
         ActivityInfo activityInfo = resolveInfo.activityInfo;
         String str = activityInfo.packageName;
-        processRecord.addPackage(str, activityInfo.applicationInfo.longVersionCode, this.mService.mProcessStats);
+        processRecord.addPackage(
+                str, activityInfo.applicationInfo.longVersionCode, this.mService.mProcessStats);
         boolean z = broadcastRecord.intent.getComponent() != null;
         boolean equals = Objects.equals(broadcastRecord.callerPackage, str);
         if (z && !equals) {
             if (broadcastRecord.userId == -1) {
-                Slog.w("BroadcastQueue", "If sending to USER ALL, that is not explicit broadcast [" + broadcastRecord + "]");
+                Slog.w(
+                        "BroadcastQueue",
+                        "If sending to USER ALL, that is not explicit broadcast ["
+                                + broadcastRecord
+                                + "]");
             } else {
                 this.mService.mUsageStatsService.reportEvent(broadcastRecord.userId, 31, str);
             }
         }
         this.mService.notifyPackageUse(str, 3);
-        this.mService.mPackageManagerInt.notifyComponentUsed(broadcastRecord.userId, str, broadcastRecord.callerPackage, broadcastRecord.toString());
+        this.mService.mPackageManagerInt.notifyComponentUsed(
+                broadcastRecord.userId,
+                str,
+                broadcastRecord.callerPackage,
+                broadcastRecord.toString());
     }
 
     public final void notifyStartedRunning(BroadcastProcessQueue broadcastProcessQueue) {
@@ -959,8 +1195,10 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
         if (processRecord != null) {
             processRecord.mReceivers.mCurReceiversSize++;
             ActivityManagerService activityManagerService = this.mService;
-            if (activityManagerService.mInternal.getRestrictionLevel(broadcastProcessQueue.uid) < 40) {
-                activityManagerService.updateLruProcessLocked(broadcastProcessQueue.app, null, false);
+            if (activityManagerService.mInternal.getRestrictionLevel(broadcastProcessQueue.uid)
+                    < 40) {
+                activityManagerService.updateLruProcessLocked(
+                        broadcastProcessQueue.app, null, false);
             }
             activityManagerService.mOomAdjuster.unfreezeTemporarily(3, broadcastProcessQueue.app);
             if (broadcastProcessQueue.runningOomAdjusted) {
@@ -983,7 +1221,8 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
         this.mRunningColdStart = null;
         notifyStartedRunning(processQueue);
         this.mService.updateOomAdjPendingTargetsLocked(3);
-        Trace.asyncTraceForTrackEnd(64L, processQueue.runningTraceTrackName, processQueue.hashCode());
+        Trace.asyncTraceForTrackEnd(
+                64L, processQueue.runningTraceTrackName, processQueue.hashCode());
         processQueue.traceProcessRunningBegin();
         try {
             if (scheduleReceiverWarmLocked(processQueue)) {
@@ -1001,8 +1240,13 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
     public final void onApplicationCleanupLocked(ProcessRecord processRecord) {
         BroadcastProcessQueue processQueue = getProcessQueue(processRecord);
         BroadcastProcessQueue broadcastProcessQueue = this.mRunningColdStart;
-        if (broadcastProcessQueue != null && broadcastProcessQueue == processQueue && broadcastProcessQueue.app == processRecord) {
-            Trace.asyncTraceForTrackEnd(64L, broadcastProcessQueue.runningTraceTrackName, broadcastProcessQueue.hashCode());
+        if (broadcastProcessQueue != null
+                && broadcastProcessQueue == processQueue
+                && broadcastProcessQueue.app == processRecord) {
+            Trace.asyncTraceForTrackEnd(
+                    64L,
+                    broadcastProcessQueue.runningTraceTrackName,
+                    broadcastProcessQueue.hashCode());
             this.mRunningColdStart = null;
             enqueueUpdateRunningList();
         }
@@ -1015,7 +1259,11 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
             demoteFromRunningLocked(processQueue);
         }
         processQueue.mOutgoingBroadcasts.clear();
-        if (processQueue.forEachMatchingBroadcast(new BroadcastQueueModernImpl$$ExternalSyntheticLambda7(1), this.mBroadcastConsumerSkip, true) || processQueue.isEmpty()) {
+        if (processQueue.forEachMatchingBroadcast(
+                        new BroadcastQueueModernImpl$$ExternalSyntheticLambda7(1),
+                        this.mBroadcastConsumerSkip,
+                        true)
+                || processQueue.isEmpty()) {
             updateRunnableList(processQueue);
             enqueueUpdateRunningList();
         }
@@ -1027,12 +1275,16 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
 
     public BroadcastProcessQueue removeProcessQueue(String str, int i) {
         BroadcastProcessQueue broadcastProcessQueue = null;
-        for (BroadcastProcessQueue broadcastProcessQueue2 = (BroadcastProcessQueue) this.mProcessQueues.get(i); broadcastProcessQueue2 != null; broadcastProcessQueue2 = broadcastProcessQueue2.processNameNext) {
+        for (BroadcastProcessQueue broadcastProcessQueue2 =
+                        (BroadcastProcessQueue) this.mProcessQueues.get(i);
+                broadcastProcessQueue2 != null;
+                broadcastProcessQueue2 = broadcastProcessQueue2.processNameNext) {
             if (Objects.equals(broadcastProcessQueue2.processName, str)) {
                 if (broadcastProcessQueue != null) {
                     broadcastProcessQueue.processNameNext = broadcastProcessQueue2.processNameNext;
                 } else {
-                    BroadcastProcessQueue broadcastProcessQueue3 = broadcastProcessQueue2.processNameNext;
+                    BroadcastProcessQueue broadcastProcessQueue3 =
+                            broadcastProcessQueue2.processNameNext;
                     if (broadcastProcessQueue3 != null) {
                         this.mProcessQueues.put(i, broadcastProcessQueue3);
                     } else {
@@ -1046,15 +1298,22 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
         return null;
     }
 
-    public final void reportUsageStatsBroadcastDispatched(ProcessRecord processRecord, BroadcastRecord broadcastRecord) {
+    public final void reportUsageStatsBroadcastDispatched(
+            ProcessRecord processRecord, BroadcastRecord broadcastRecord) {
         BroadcastResponseStatsTracker broadcastResponseStatsTracker;
         Object obj;
         BroadcastOptions broadcastOptions = broadcastRecord.options;
-        long idForResponseEvent = broadcastOptions != null ? broadcastOptions.getIdForResponseEvent() : 0L;
+        long idForResponseEvent =
+                broadcastOptions != null ? broadcastOptions.getIdForResponseEvent() : 0L;
         if (idForResponseEvent <= 0) {
             return;
         }
-        String str = broadcastRecord.intent.getPackage() != null ? broadcastRecord.intent.getPackage() : broadcastRecord.intent.getComponent() != null ? broadcastRecord.intent.getComponent().getPackageName() : null;
+        String str =
+                broadcastRecord.intent.getPackage() != null
+                        ? broadcastRecord.intent.getPackage()
+                        : broadcastRecord.intent.getComponent() != null
+                                ? broadcastRecord.intent.getComponent().getPackageName()
+                                : null;
         if (str == null) {
             return;
         }
@@ -1063,8 +1322,10 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
         UserHandle of = UserHandle.of(broadcastRecord.userId);
         long elapsedRealtime = SystemClock.elapsedRealtime();
         int uidProcStateLOSP = this.mService.mProcessList.getUidProcStateLOSP(processRecord.uid);
-        BroadcastResponseStatsTracker broadcastResponseStatsTracker2 = UsageStatsService.this.mResponseStatsTracker;
-        BroadcastResponseStatsLogger broadcastResponseStatsLogger = broadcastResponseStatsTracker2.mLogger;
+        BroadcastResponseStatsTracker broadcastResponseStatsTracker2 =
+                UsageStatsService.this.mResponseStatsTracker;
+        BroadcastResponseStatsLogger broadcastResponseStatsLogger =
+                broadcastResponseStatsTracker2.mLogger;
         Object obj2 = broadcastResponseStatsLogger.mLock;
         synchronized (obj2) {
             try {
@@ -1075,15 +1336,30 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
                 if (UsageStatsService.DEBUG_RESPONSE_STATS) {
                     broadcastResponseStatsTracker = broadcastResponseStatsTracker2;
                     obj = obj2;
-                    Slog.d("ResponseStatsTracker", TextUtils.formatSimple("broadcast:%s; srcUid=%d, tgtPkg=%s, tgtUsr=%d, id=%d, state=%s", new Object[]{TimeUtils.formatDuration(elapsedRealtime), Integer.valueOf(i), str, Integer.valueOf(of.getIdentifier()), Long.valueOf(idForResponseEvent), ActivityManager.procStateToString(uidProcStateLOSP)}));
+                    Slog.d(
+                            "ResponseStatsTracker",
+                            TextUtils.formatSimple(
+                                    "broadcast:%s; srcUid=%d, tgtPkg=%s, tgtUsr=%d, id=%d,"
+                                        + " state=%s",
+                                    new Object[] {
+                                        TimeUtils.formatDuration(elapsedRealtime),
+                                        Integer.valueOf(i),
+                                        str,
+                                        Integer.valueOf(of.getIdentifier()),
+                                        Long.valueOf(idForResponseEvent),
+                                        ActivityManager.procStateToString(uidProcStateLOSP)
+                                    }));
                 } else {
                     broadcastResponseStatsTracker = broadcastResponseStatsTracker2;
                     obj = obj2;
                 }
-                BroadcastResponseStatsLogger.Data data = (BroadcastResponseStatsLogger.Data) broadcastResponseStatsLogger.mBroadcastEventsBuffer.getNextSlot();
+                BroadcastResponseStatsLogger.Data data =
+                        (BroadcastResponseStatsLogger.Data)
+                                broadcastResponseStatsLogger.mBroadcastEventsBuffer.getNextSlot();
                 if (data != null) {
                     data.reset();
-                    BroadcastResponseStatsLogger.BroadcastEvent broadcastEvent = (BroadcastResponseStatsLogger.BroadcastEvent) data;
+                    BroadcastResponseStatsLogger.BroadcastEvent broadcastEvent =
+                            (BroadcastResponseStatsLogger.BroadcastEvent) data;
                     broadcastEvent.sourceUid = i;
                     broadcastEvent.targetUserId = of.getIdentifier();
                     broadcastEvent.targetUidProcessState = uidProcStateLOSP;
@@ -1091,21 +1367,32 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
                     broadcastEvent.idForResponseEvent = idForResponseEvent;
                     broadcastEvent.timestampMs = elapsedRealtime;
                 }
-                BroadcastResponseStatsTracker broadcastResponseStatsTracker3 = broadcastResponseStatsTracker;
-                if (uidProcStateLOSP <= broadcastResponseStatsTracker3.mAppStandby.getBroadcastResponseFgThresholdState() || broadcastResponseStatsTracker3.doesPackageHoldExemptedRole(str, of) || broadcastResponseStatsTracker3.doesPackageHoldExemptedPermission(str, of)) {
+                BroadcastResponseStatsTracker broadcastResponseStatsTracker3 =
+                        broadcastResponseStatsTracker;
+                if (uidProcStateLOSP
+                                <= broadcastResponseStatsTracker3.mAppStandby
+                                        .getBroadcastResponseFgThresholdState()
+                        || broadcastResponseStatsTracker3.doesPackageHoldExemptedRole(str, of)
+                        || broadcastResponseStatsTracker3.doesPackageHoldExemptedPermission(
+                                str, of)) {
                     return;
                 }
                 synchronized (broadcastResponseStatsTracker3.mLock) {
-                    ArraySet orCreateBroadcastEventsLocked = broadcastResponseStatsTracker3.getOrCreateBroadcastEventsLocked(str, of);
-                    BroadcastEvent broadcastEvent2 = new BroadcastEvent(i, of.getIdentifier(), idForResponseEvent, str);
+                    ArraySet orCreateBroadcastEventsLocked =
+                            broadcastResponseStatsTracker3.getOrCreateBroadcastEventsLocked(
+                                    str, of);
+                    BroadcastEvent broadcastEvent2 =
+                            new BroadcastEvent(i, of.getIdentifier(), idForResponseEvent, str);
                     int indexOf = orCreateBroadcastEventsLocked.indexOf(broadcastEvent2);
                     if (indexOf >= 0) {
-                        broadcastEvent2 = (BroadcastEvent) orCreateBroadcastEventsLocked.valueAt(indexOf);
+                        broadcastEvent2 =
+                                (BroadcastEvent) orCreateBroadcastEventsLocked.valueAt(indexOf);
                     } else {
                         orCreateBroadcastEventsLocked.add(broadcastEvent2);
                     }
                     broadcastEvent2.mTimestampsMs.addLast(elapsedRealtime);
-                    broadcastResponseStatsTracker3.recordAndPruneOldBroadcastDispatchTimestamps(broadcastEvent2);
+                    broadcastResponseStatsTracker3.recordAndPruneOldBroadcastDispatchTimestamps(
+                            broadcastEvent2);
                 }
                 return;
             } catch (Throwable th2) {
@@ -1117,21 +1404,21 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:55:0x0088, code lost:
-    
-        r0 = move-exception;
-     */
+
+       r0 = move-exception;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:58:0x00ec, code lost:
-    
-        throw r0;
-     */
+
+       throw r0;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:97:0x0372, code lost:
-    
-        com.android.server.am.BroadcastQueue.traceEnd(r29);
-     */
+
+       com.android.server.am.BroadcastQueue.traceEnd(r29);
+    */
     /* JADX WARN: Code restructure failed: missing block: B:98:0x0376, code lost:
-    
-        return true;
-     */
+
+       return true;
+    */
     /* JADX WARN: Removed duplicated region for block: B:124:0x0333  */
     /* JADX WARN: Removed duplicated region for block: B:125:0x033b A[SYNTHETIC] */
     /* JADX WARN: Removed duplicated region for block: B:95:0x0369 A[LOOP:0: B:2:0x0015->B:95:0x0369, LOOP_END] */
@@ -1140,12 +1427,15 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final boolean scheduleReceiverWarmLocked(com.android.server.am.BroadcastProcessQueue r33) {
+    public final boolean scheduleReceiverWarmLocked(
+            com.android.server.am.BroadcastProcessQueue r33) {
         /*
             Method dump skipped, instructions count: 887
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.BroadcastQueueModernImpl.scheduleReceiverWarmLocked(com.android.server.am.BroadcastProcessQueue):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.BroadcastQueueModernImpl.scheduleReceiverWarmLocked(com.android.server.am.BroadcastProcessQueue):boolean");
     }
 
     public final void scheduleResultTo(BroadcastRecord broadcastRecord) {
@@ -1154,12 +1444,22 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
             return;
         }
         ProcessRecord processRecord = broadcastRecord.resultToApp;
-        IApplicationThread iApplicationThread = processRecord != null ? processRecord.mOnewayThread : null;
+        IApplicationThread iApplicationThread =
+                processRecord != null ? processRecord.mOnewayThread : null;
         if (iApplicationThread != null) {
             ActivityManagerService activityManagerService = this.mService;
             activityManagerService.mOomAdjuster.unfreezeTemporarily(2, processRecord);
-            if (broadcastRecord.shareIdentity && (i = processRecord.uid) != broadcastRecord.callingUid) {
-                ((PackageManagerService.PackageManagerInternalImpl) activityManagerService.mPackageManagerInt).grantImplicitAccess(broadcastRecord.userId, broadcastRecord.intent, UserHandle.getAppId(i), broadcastRecord.callingUid, true, false);
+            if (broadcastRecord.shareIdentity
+                    && (i = processRecord.uid) != broadcastRecord.callingUid) {
+                ((PackageManagerService.PackageManagerInternalImpl)
+                                activityManagerService.mPackageManagerInt)
+                        .grantImplicitAccess(
+                                broadcastRecord.userId,
+                                broadcastRecord.intent,
+                                UserHandle.getAppId(i),
+                                broadcastRecord.callingUid,
+                                true,
+                                false);
             }
             try {
                 IIntentReceiver iIntentReceiver = broadcastRecord.resultTo;
@@ -1171,10 +1471,29 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
                 int i3 = broadcastRecord.userId;
                 int i4 = processRecord.mState.mRepProcState;
                 boolean z2 = broadcastRecord.shareIdentity;
-                iApplicationThread.scheduleRegisteredReceiver(iIntentReceiver, intent, i2, str, bundle, false, z, true, i3, i4, z2 ? broadcastRecord.callingUid : -1, z2 ? broadcastRecord.callerPackage : null);
+                iApplicationThread.scheduleRegisteredReceiver(
+                        iIntentReceiver,
+                        intent,
+                        i2,
+                        str,
+                        bundle,
+                        false,
+                        z,
+                        true,
+                        i3,
+                        i4,
+                        z2 ? broadcastRecord.callingUid : -1,
+                        z2 ? broadcastRecord.callerPackage : null);
             } catch (RemoteException e) {
-                BroadcastQueue.logw("Failed to schedule result of " + broadcastRecord + " via " + processRecord + ": " + e);
-                processRecord.killLocked(13, 26, "Can't deliver broadcast", "Can't deliver broadcast", true, true);
+                BroadcastQueue.logw(
+                        "Failed to schedule result of "
+                                + broadcastRecord
+                                + " via "
+                                + processRecord
+                                + ": "
+                                + e);
+                processRecord.killLocked(
+                        13, 26, "Can't deliver broadcast", "Can't deliver broadcast", true, true);
             }
         }
         broadcastRecord.resultTo = null;
@@ -1182,13 +1501,13 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:49:0x0140, code lost:
-    
-        if (r5 != 5) goto L58;
-     */
+
+       if (r5 != 5) goto L58;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:9:0x0033, code lost:
-    
-        if (r48 != 5) goto L16;
-     */
+
+       if (r48 != 5) goto L16;
+    */
     /* JADX WARN: Removed duplicated region for block: B:160:0x00ff  */
     /* JADX WARN: Removed duplicated region for block: B:37:0x008a  */
     /* JADX WARN: Removed duplicated region for block: B:53:0x0231  */
@@ -1197,32 +1516,47 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void setDeliveryState(com.android.server.am.BroadcastProcessQueue r43, com.android.server.am.ProcessRecord r44, com.android.server.am.BroadcastRecord r45, int r46, java.lang.Object r47, int r48, java.lang.String r49) {
+    public final void setDeliveryState(
+            com.android.server.am.BroadcastProcessQueue r43,
+            com.android.server.am.ProcessRecord r44,
+            com.android.server.am.BroadcastRecord r45,
+            int r46,
+            java.lang.Object r47,
+            int r48,
+            java.lang.String r49) {
         /*
             Method dump skipped, instructions count: 666
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.BroadcastQueueModernImpl.setDeliveryState(com.android.server.am.BroadcastProcessQueue, com.android.server.am.ProcessRecord, com.android.server.am.BroadcastRecord, int, java.lang.Object, int, java.lang.String):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.BroadcastQueueModernImpl.setDeliveryState(com.android.server.am.BroadcastProcessQueue,"
+                    + " com.android.server.am.ProcessRecord, com.android.server.am.BroadcastRecord,"
+                    + " int, java.lang.Object, int, java.lang.String):void");
     }
 
-    public final void setQueueProcess(BroadcastProcessQueue broadcastProcessQueue, ProcessRecord processRecord) {
-        if (broadcastProcessQueue.setProcessAndUidState(processRecord, this.mUidForeground.get(broadcastProcessQueue.uid, false), isProcessFreezable(processRecord))) {
+    public final void setQueueProcess(
+            BroadcastProcessQueue broadcastProcessQueue, ProcessRecord processRecord) {
+        if (broadcastProcessQueue.setProcessAndUidState(
+                processRecord,
+                this.mUidForeground.get(broadcastProcessQueue.uid, false),
+                isProcessFreezable(processRecord))) {
             updateRunnableList(broadcastProcessQueue);
         }
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:21:0x0022, code lost:
-    
-        if (r6.mActiveCountSinceIdle >= r5.MAX_RUNNING_ACTIVE_BROADCASTS) goto L10;
-     */
+
+       if (r6.mActiveCountSinceIdle >= r5.MAX_RUNNING_ACTIVE_BROADCASTS) goto L10;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:6:0x0017, code lost:
-    
-        if (r0 < r5.MAX_CORE_RUNNING_NON_BLOCKING_BROADCASTS) goto L9;
-     */
+
+       if (r0 < r5.MAX_CORE_RUNNING_NON_BLOCKING_BROADCASTS) goto L9;
+    */
     /* JADX WARN: Code restructure failed: missing block: B:7:0x001a, code lost:
-    
-        r5 = false;
-     */
+
+       r5 = false;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -1267,10 +1601,13 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
         L35:
             return r1
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.BroadcastQueueModernImpl.shouldRetire(com.android.server.am.BroadcastProcessQueue):boolean");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.BroadcastQueueModernImpl.shouldRetire(com.android.server.am.BroadcastProcessQueue):boolean");
     }
 
-    public final String shouldSkipReceiver(BroadcastProcessQueue broadcastProcessQueue, BroadcastRecord broadcastRecord, int i) {
+    public final String shouldSkipReceiver(
+            BroadcastProcessQueue broadcastProcessQueue, BroadcastRecord broadcastRecord, int i) {
         int i2;
         HostingRecord hostingRecord;
         String str;
@@ -1320,15 +1657,34 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
                 }
                 BroadcastFilter broadcastFilter = (BroadcastFilter) obj;
                 if (broadcastFilter.packageName != null) {
-                    String stringForTracker = hostingRecord2 != null ? hostingRecord2.toStringForTracker() : null;
+                    String stringForTracker =
+                            hostingRecord2 != null ? hostingRecord2.toStringForTracker() : null;
                     String str4 = broadcastRecord.alarm ? "alarm" : INetd.IF_FLAG_BROADCAST;
-                    BaseRestrictionMgr baseRestrictionMgr = BaseRestrictionMgr.BaseRestrictionMgrHolder.INSTANCE;
-                    ComponentName componentName = new ComponentName(broadcastFilter.packageName, "");
+                    BaseRestrictionMgr baseRestrictionMgr =
+                            BaseRestrictionMgr.BaseRestrictionMgrHolder.INSTANCE;
+                    ComponentName componentName =
+                            new ComponentName(broadcastFilter.packageName, "");
                     Intent intent = broadcastRecord.intent;
                     int i9 = broadcastFilter.owningUserId;
                     broadcastRecord.mBackgroundStartPrivileges.allowsAny();
-                    if (baseRestrictionMgr.isRestrictedPackage(componentName, str2, i4, str4, intent, i9, true, null, stringForTracker, i5, processRecord.mPid)) {
-                        Slog.w("BroadcastQueue", "intent:" + broadcastRecord.intent.toString() + " is skipped in RestrictedPackage to " + broadcastFilter.receiverList.app);
+                    if (baseRestrictionMgr.isRestrictedPackage(
+                            componentName,
+                            str2,
+                            i4,
+                            str4,
+                            intent,
+                            i9,
+                            true,
+                            null,
+                            stringForTracker,
+                            i5,
+                            processRecord.mPid)) {
+                        Slog.w(
+                                "BroadcastQueue",
+                                "intent:"
+                                        + broadcastRecord.intent.toString()
+                                        + " is skipped in RestrictedPackage to "
+                                        + broadcastFilter.receiverList.app);
                         return "To dynamic Broadcast receiver from Restricted UID";
                     }
                 }
@@ -1352,18 +1708,40 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
                     i3 = i11;
                 }
                 ActivityInfo activityInfo = resolveInfo.activityInfo;
-                ProcessRecord processRecordLocked = this.mService.mProcessList.getProcessRecordLocked(activityInfo.applicationInfo.uid, activityInfo.processName);
+                ProcessRecord processRecordLocked =
+                        this.mService.mProcessList.getProcessRecordLocked(
+                                activityInfo.applicationInfo.uid, activityInfo.processName);
                 int i12 = processRecordLocked != null ? processRecordLocked.mPid : 0;
-                String stringForTracker2 = hostingRecord != null ? hostingRecord.toStringForTracker() : null;
+                String stringForTracker2 =
+                        hostingRecord != null ? hostingRecord.toStringForTracker() : null;
                 ActivityInfo activityInfo2 = resolveInfo.activityInfo;
-                ComponentName componentName2 = new ComponentName(activityInfo2.applicationInfo.packageName, activityInfo2.name);
+                ComponentName componentName2 =
+                        new ComponentName(
+                                activityInfo2.applicationInfo.packageName, activityInfo2.name);
                 int i13 = resolveInfo.activityInfo.applicationInfo.uid;
-                BaseRestrictionMgr baseRestrictionMgr2 = BaseRestrictionMgr.BaseRestrictionMgrHolder.INSTANCE;
+                BaseRestrictionMgr baseRestrictionMgr2 =
+                        BaseRestrictionMgr.BaseRestrictionMgrHolder.INSTANCE;
                 Intent intent2 = broadcastRecord.intent;
                 int userId3 = UserHandle.getUserId(i13);
                 broadcastRecord.mBackgroundStartPrivileges.allowsAny();
-                if (baseRestrictionMgr2.isRestrictedPackage(componentName2, str, i2, INetd.IF_FLAG_BROADCAST, intent2, userId3, false, null, stringForTracker2, i3, i12)) {
-                    Slog.w("BroadcastQueue", "intent:" + broadcastRecord.intent.toString() + " is skipped in RestrictedPackage to " + componentName2.flattenToShortString());
+                if (baseRestrictionMgr2.isRestrictedPackage(
+                        componentName2,
+                        str,
+                        i2,
+                        INetd.IF_FLAG_BROADCAST,
+                        intent2,
+                        userId3,
+                        false,
+                        null,
+                        stringForTracker2,
+                        i3,
+                        i12)) {
+                    Slog.w(
+                            "BroadcastQueue",
+                            "intent:"
+                                    + broadcastRecord.intent.toString()
+                                    + " is skipped in RestrictedPackage to "
+                                    + componentName2.flattenToShortString());
                     return "To manifest broadcast receiver from Restricted UID";
                 }
             }
@@ -1371,17 +1749,25 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
         return null;
     }
 
-    public final boolean testAllProcessQueues(Predicate predicate, String str, PrintWriter printWriter) {
+    public final boolean testAllProcessQueues(
+            Predicate predicate, String str, PrintWriter printWriter) {
         for (int i = 0; i < this.mProcessQueues.size(); i++) {
-            for (BroadcastProcessQueue broadcastProcessQueue = (BroadcastProcessQueue) this.mProcessQueues.valueAt(i); broadcastProcessQueue != null; broadcastProcessQueue = broadcastProcessQueue.processNameNext) {
+            for (BroadcastProcessQueue broadcastProcessQueue =
+                            (BroadcastProcessQueue) this.mProcessQueues.valueAt(i);
+                    broadcastProcessQueue != null;
+                    broadcastProcessQueue = broadcastProcessQueue.processNameNext) {
                 if (!predicate.test(broadcastProcessQueue)) {
                     long uptimeMillis = SystemClock.uptimeMillis();
                     if (uptimeMillis > this.mLastTestFailureTime + 1000) {
                         this.mLastTestFailureTime = uptimeMillis;
-                        StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("Test ", str, " failed due to ");
+                        StringBuilder m =
+                                DumpUtils$$ExternalSyntheticOutline0.m(
+                                        "Test ", str, " failed due to ");
                         m.append(broadcastProcessQueue.toShortString());
                         m.append(" ");
-                        m.append(broadcastProcessQueue.describeStateLocked(SystemClock.uptimeMillis()));
+                        m.append(
+                                broadcastProcessQueue.describeStateLocked(
+                                        SystemClock.uptimeMillis()));
                         printWriter.println(m.toString());
                         printWriter.flush();
                     }
@@ -1398,39 +1784,69 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
         if (getRunningIndexOf(broadcastProcessQueue) >= 0) {
             return;
         }
-        BroadcastProcessQueue.BroadcastConsumer broadcastConsumer = this.mBroadcastConsumerDeferApply;
-        BroadcastProcessQueue.BroadcastConsumer broadcastConsumer2 = this.mBroadcastConsumerDeferClear;
+        BroadcastProcessQueue.BroadcastConsumer broadcastConsumer =
+                this.mBroadcastConsumerDeferApply;
+        BroadcastProcessQueue.BroadcastConsumer broadcastConsumer2 =
+                this.mBroadcastConsumerDeferClear;
         boolean shouldBeDeferred = broadcastProcessQueue.shouldBeDeferred();
         if (broadcastProcessQueue.mLastDeferredStates != shouldBeDeferred) {
             broadcastProcessQueue.mLastDeferredStates = shouldBeDeferred;
             if (shouldBeDeferred) {
-                broadcastProcessQueue.forEachMatchingBroadcast(new BroadcastProcessQueue$$ExternalSyntheticLambda0(0), broadcastConsumer, false);
+                broadcastProcessQueue.forEachMatchingBroadcast(
+                        new BroadcastProcessQueue$$ExternalSyntheticLambda0(0),
+                        broadcastConsumer,
+                        false);
             } else {
-                broadcastProcessQueue.forEachMatchingBroadcast(new BroadcastProcessQueue$$ExternalSyntheticLambda0(1), broadcastConsumer2, false);
+                broadcastProcessQueue.forEachMatchingBroadcast(
+                        new BroadcastProcessQueue$$ExternalSyntheticLambda0(1),
+                        broadcastConsumer2,
+                        false);
             }
         }
         broadcastProcessQueue.updateRunnableAt();
         boolean isRunnable = broadcastProcessQueue.isRunnable();
         BroadcastProcessQueue broadcastProcessQueue2 = this.mRunnableHead;
-        boolean z = (broadcastProcessQueue != broadcastProcessQueue2 && broadcastProcessQueue.runnableAtPrev == null && broadcastProcessQueue.runnableAtNext == null) ? false : true;
+        boolean z =
+                (broadcastProcessQueue != broadcastProcessQueue2
+                                && broadcastProcessQueue.runnableAtPrev == null
+                                && broadcastProcessQueue.runnableAtNext == null)
+                        ? false
+                        : true;
         if (isRunnable) {
             if (z) {
                 BroadcastProcessQueue broadcastProcessQueue3 = broadcastProcessQueue.runnableAtPrev;
-                boolean z2 = broadcastProcessQueue3 == null || broadcastProcessQueue3.getRunnableAt() <= broadcastProcessQueue.getRunnableAt();
+                boolean z2 =
+                        broadcastProcessQueue3 == null
+                                || broadcastProcessQueue3.getRunnableAt()
+                                        <= broadcastProcessQueue.getRunnableAt();
                 BroadcastProcessQueue broadcastProcessQueue4 = broadcastProcessQueue.runnableAtNext;
-                boolean z3 = broadcastProcessQueue4 == null || broadcastProcessQueue4.getRunnableAt() >= broadcastProcessQueue.getRunnableAt();
+                boolean z3 =
+                        broadcastProcessQueue4 == null
+                                || broadcastProcessQueue4.getRunnableAt()
+                                        >= broadcastProcessQueue.getRunnableAt();
                 if (!z2 || !z3) {
-                    BroadcastProcessQueue removeFromRunnableList = BroadcastProcessQueue.removeFromRunnableList(this.mRunnableHead, broadcastProcessQueue);
+                    BroadcastProcessQueue removeFromRunnableList =
+                            BroadcastProcessQueue.removeFromRunnableList(
+                                    this.mRunnableHead, broadcastProcessQueue);
                     this.mRunnableHead = removeFromRunnableList;
-                    this.mRunnableHead = BroadcastProcessQueue.insertIntoRunnableList(removeFromRunnableList, broadcastProcessQueue);
+                    this.mRunnableHead =
+                            BroadcastProcessQueue.insertIntoRunnableList(
+                                    removeFromRunnableList, broadcastProcessQueue);
                 }
             } else {
-                this.mRunnableHead = BroadcastProcessQueue.insertIntoRunnableList(broadcastProcessQueue2, broadcastProcessQueue);
+                this.mRunnableHead =
+                        BroadcastProcessQueue.insertIntoRunnableList(
+                                broadcastProcessQueue2, broadcastProcessQueue);
             }
         } else if (z) {
-            this.mRunnableHead = BroadcastProcessQueue.removeFromRunnableList(broadcastProcessQueue2, broadcastProcessQueue);
+            this.mRunnableHead =
+                    BroadcastProcessQueue.removeFromRunnableList(
+                            broadcastProcessQueue2, broadcastProcessQueue);
         }
-        if (!broadcastProcessQueue.isEmpty() || !broadcastProcessQueue.mOutgoingBroadcasts.isEmpty() || broadcastProcessQueue.isActive() || broadcastProcessQueue.isProcessWarm()) {
+        if (!broadcastProcessQueue.isEmpty()
+                || !broadcastProcessQueue.mOutgoingBroadcasts.isEmpty()
+                || broadcastProcessQueue.isActive()
+                || broadcastProcessQueue.isProcessWarm()) {
             return;
         }
         removeProcessQueue(broadcastProcessQueue.processName, broadcastProcessQueue.uid);
@@ -1466,7 +1882,9 @@ public final class BroadcastQueueModernImpl extends BroadcastQueue {
             Method dump skipped, instructions count: 727
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.BroadcastQueueModernImpl.updateRunningListLocked():void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.BroadcastQueueModernImpl.updateRunningListLocked():void");
     }
 
     public final void waitFor(BooleanSupplier booleanSupplier) {

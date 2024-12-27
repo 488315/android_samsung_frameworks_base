@@ -8,6 +8,7 @@ import android.os.IBinder;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.os.UserManager;
+
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -34,8 +35,7 @@ public abstract class SystemService {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     @Retention(RetentionPolicy.SOURCE)
-    public @interface BootPhase {
-    }
+    public @interface BootPhase {}
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     @SystemApi(client = SystemApi.Client.SYSTEM_SERVER)
@@ -106,8 +106,7 @@ public abstract class SystemService {
 
         /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
         @Retention(RetentionPolicy.SOURCE)
-        public @interface EventTypesFlag {
-        }
+        public @interface EventTypesFlag {}
 
         public UserCompletedEventType(int i) {
             this.mEventType = i;
@@ -215,31 +214,24 @@ public abstract class SystemService {
         return true;
     }
 
-    public void onBootPhase(int i) {
-    }
+    public void onBootPhase(int i) {}
 
     public abstract void onStart();
 
-    public void onUserCompletedEvent(TargetUser targetUser, UserCompletedEventType userCompletedEventType) {
-    }
+    public void onUserCompletedEvent(
+            TargetUser targetUser, UserCompletedEventType userCompletedEventType) {}
 
-    public void onUserStarting(TargetUser targetUser) {
-    }
+    public void onUserStarting(TargetUser targetUser) {}
 
-    public void onUserStopped(TargetUser targetUser) {
-    }
+    public void onUserStopped(TargetUser targetUser) {}
 
-    public void onUserStopping(TargetUser targetUser) {
-    }
+    public void onUserStopping(TargetUser targetUser) {}
 
-    public void onUserSwitching(TargetUser targetUser, TargetUser targetUser2) {
-    }
+    public void onUserSwitching(TargetUser targetUser, TargetUser targetUser2) {}
 
-    public void onUserUnlocked(TargetUser targetUser) {
-    }
+    public void onUserUnlocked(TargetUser targetUser) {}
 
-    public void onUserUnlocking(TargetUser targetUser) {
-    }
+    public void onUserUnlocking(TargetUser targetUser) {}
 
     public final void publishBinderService(String str, IBinder iBinder) {
         publishBinderService(str, iBinder, false);

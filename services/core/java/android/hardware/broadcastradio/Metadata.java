@@ -4,6 +4,7 @@ import android.frameworks.vibrator.VibrationParam$1$$ExternalSyntheticOutline0;
 import android.hardware.audio.common.V2_0.AudioOffloadInfo$$ExternalSyntheticOutline0;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -143,7 +144,9 @@ public final class Metadata implements Parcelable {
                     metadata._value = valueOf5;
                     return metadata;
                 default:
-                    throw new IllegalArgumentException(VibrationParam$1$$ExternalSyntheticOutline0.m(readInt, "union: unknown tag: "));
+                    throw new IllegalArgumentException(
+                            VibrationParam$1$$ExternalSyntheticOutline0.m(
+                                    readInt, "union: unknown tag: "));
             }
         }
 
@@ -204,7 +207,8 @@ public final class Metadata implements Parcelable {
             case 23:
                 return "hdSubChannelsAvailable";
             default:
-                throw new IllegalStateException(VibrationParam$1$$ExternalSyntheticOutline0.m(i, "unknown field: "));
+                throw new IllegalStateException(
+                        VibrationParam$1$$ExternalSyntheticOutline0.m(i, "unknown field: "));
         }
     }
 
@@ -212,7 +216,8 @@ public final class Metadata implements Parcelable {
         if (this._tag == i) {
             return;
         }
-        throw new IllegalStateException("bad access: " + _tagString(i) + ", " + _tagString(this._tag) + " is available.");
+        throw new IllegalStateException(
+                "bad access: " + _tagString(i) + ", " + _tagString(this._tag) + " is available.");
     }
 
     @Override // android.os.Parcelable
@@ -236,7 +241,8 @@ public final class Metadata implements Parcelable {
     }
 
     public final int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(Integer.valueOf(this._tag), this._value).toArray());
+        return Arrays.deepHashCode(
+                Arrays.asList(Integer.valueOf(this._tag), this._value).toArray());
     }
 
     public final String toString() {
@@ -247,114 +253,149 @@ public final class Metadata implements Parcelable {
                 m.append(")");
                 return m.toString();
             case 1:
-                StringBuilder m2 = Metadata$$ExternalSyntheticOutline0.m("Metadata.rdsPty(", this, 1);
+                StringBuilder m2 =
+                        Metadata$$ExternalSyntheticOutline0.m("Metadata.rdsPty(", this, 1);
                 m2.append(((Integer) this._value).intValue());
                 m2.append(")");
                 return m2.toString();
             case 2:
-                StringBuilder m3 = Metadata$$ExternalSyntheticOutline0.m("Metadata.rbdsPty(", this, 2);
+                StringBuilder m3 =
+                        Metadata$$ExternalSyntheticOutline0.m("Metadata.rbdsPty(", this, 2);
                 m3.append(((Integer) this._value).intValue());
                 m3.append(")");
                 return m3.toString();
             case 3:
-                StringBuilder m4 = Metadata$$ExternalSyntheticOutline0.m("Metadata.rdsRt(", this, 3);
+                StringBuilder m4 =
+                        Metadata$$ExternalSyntheticOutline0.m("Metadata.rdsRt(", this, 3);
                 m4.append(Objects.toString((String) this._value));
                 m4.append(")");
                 return m4.toString();
             case 4:
-                StringBuilder m5 = Metadata$$ExternalSyntheticOutline0.m("Metadata.songTitle(", this, 4);
+                StringBuilder m5 =
+                        Metadata$$ExternalSyntheticOutline0.m("Metadata.songTitle(", this, 4);
                 m5.append(Objects.toString((String) this._value));
                 m5.append(")");
                 return m5.toString();
             case 5:
-                StringBuilder m6 = Metadata$$ExternalSyntheticOutline0.m("Metadata.songArtist(", this, 5);
+                StringBuilder m6 =
+                        Metadata$$ExternalSyntheticOutline0.m("Metadata.songArtist(", this, 5);
                 m6.append(Objects.toString((String) this._value));
                 m6.append(")");
                 return m6.toString();
             case 6:
-                StringBuilder m7 = Metadata$$ExternalSyntheticOutline0.m("Metadata.songAlbum(", this, 6);
+                StringBuilder m7 =
+                        Metadata$$ExternalSyntheticOutline0.m("Metadata.songAlbum(", this, 6);
                 m7.append(Objects.toString((String) this._value));
                 m7.append(")");
                 return m7.toString();
             case 7:
-                StringBuilder m8 = Metadata$$ExternalSyntheticOutline0.m("Metadata.stationIcon(", this, 7);
+                StringBuilder m8 =
+                        Metadata$$ExternalSyntheticOutline0.m("Metadata.stationIcon(", this, 7);
                 m8.append(((Integer) this._value).intValue());
                 m8.append(")");
                 return m8.toString();
             case 8:
-                StringBuilder m9 = Metadata$$ExternalSyntheticOutline0.m("Metadata.albumArt(", this, 8);
+                StringBuilder m9 =
+                        Metadata$$ExternalSyntheticOutline0.m("Metadata.albumArt(", this, 8);
                 m9.append(((Integer) this._value).intValue());
                 m9.append(")");
                 return m9.toString();
             case 9:
-                StringBuilder m10 = Metadata$$ExternalSyntheticOutline0.m("Metadata.programName(", this, 9);
+                StringBuilder m10 =
+                        Metadata$$ExternalSyntheticOutline0.m("Metadata.programName(", this, 9);
                 m10.append(Objects.toString((String) this._value));
                 m10.append(")");
                 return m10.toString();
             case 10:
-                StringBuilder m11 = Metadata$$ExternalSyntheticOutline0.m("Metadata.dabEnsembleName(", this, 10);
+                StringBuilder m11 =
+                        Metadata$$ExternalSyntheticOutline0.m(
+                                "Metadata.dabEnsembleName(", this, 10);
                 m11.append(Objects.toString((String) this._value));
                 m11.append(")");
                 return m11.toString();
             case 11:
-                StringBuilder m12 = Metadata$$ExternalSyntheticOutline0.m("Metadata.dabEnsembleNameShort(", this, 11);
+                StringBuilder m12 =
+                        Metadata$$ExternalSyntheticOutline0.m(
+                                "Metadata.dabEnsembleNameShort(", this, 11);
                 m12.append(Objects.toString((String) this._value));
                 m12.append(")");
                 return m12.toString();
             case 12:
-                StringBuilder m13 = Metadata$$ExternalSyntheticOutline0.m("Metadata.dabServiceName(", this, 12);
+                StringBuilder m13 =
+                        Metadata$$ExternalSyntheticOutline0.m("Metadata.dabServiceName(", this, 12);
                 m13.append(Objects.toString((String) this._value));
                 m13.append(")");
                 return m13.toString();
             case 13:
-                StringBuilder m14 = Metadata$$ExternalSyntheticOutline0.m("Metadata.dabServiceNameShort(", this, 13);
+                StringBuilder m14 =
+                        Metadata$$ExternalSyntheticOutline0.m(
+                                "Metadata.dabServiceNameShort(", this, 13);
                 m14.append(Objects.toString((String) this._value));
                 m14.append(")");
                 return m14.toString();
             case 14:
-                StringBuilder m15 = Metadata$$ExternalSyntheticOutline0.m("Metadata.dabComponentName(", this, 14);
+                StringBuilder m15 =
+                        Metadata$$ExternalSyntheticOutline0.m(
+                                "Metadata.dabComponentName(", this, 14);
                 m15.append(Objects.toString((String) this._value));
                 m15.append(")");
                 return m15.toString();
             case 15:
-                StringBuilder m16 = Metadata$$ExternalSyntheticOutline0.m("Metadata.dabComponentNameShort(", this, 15);
+                StringBuilder m16 =
+                        Metadata$$ExternalSyntheticOutline0.m(
+                                "Metadata.dabComponentNameShort(", this, 15);
                 m16.append(Objects.toString((String) this._value));
                 m16.append(")");
                 return m16.toString();
             case 16:
-                StringBuilder m17 = Metadata$$ExternalSyntheticOutline0.m("Metadata.genre(", this, 16);
+                StringBuilder m17 =
+                        Metadata$$ExternalSyntheticOutline0.m("Metadata.genre(", this, 16);
                 m17.append(Objects.toString((String) this._value));
                 m17.append(")");
                 return m17.toString();
             case 17:
-                StringBuilder m18 = Metadata$$ExternalSyntheticOutline0.m("Metadata.commentShortDescription(", this, 17);
+                StringBuilder m18 =
+                        Metadata$$ExternalSyntheticOutline0.m(
+                                "Metadata.commentShortDescription(", this, 17);
                 m18.append(Objects.toString((String) this._value));
                 m18.append(")");
                 return m18.toString();
             case 18:
-                StringBuilder m19 = Metadata$$ExternalSyntheticOutline0.m("Metadata.commentActualText(", this, 18);
+                StringBuilder m19 =
+                        Metadata$$ExternalSyntheticOutline0.m(
+                                "Metadata.commentActualText(", this, 18);
                 m19.append(Objects.toString((String) this._value));
                 m19.append(")");
                 return m19.toString();
             case 19:
-                StringBuilder m20 = Metadata$$ExternalSyntheticOutline0.m("Metadata.commercial(", this, 19);
+                StringBuilder m20 =
+                        Metadata$$ExternalSyntheticOutline0.m("Metadata.commercial(", this, 19);
                 m20.append(Objects.toString((String) this._value));
                 m20.append(")");
                 return m20.toString();
             case 20:
-                return AudioOffloadInfo$$ExternalSyntheticOutline0.m(Metadata$$ExternalSyntheticOutline0.m("Metadata.ufids(", this, 20), Arrays.toString((String[]) this._value), ")");
+                return AudioOffloadInfo$$ExternalSyntheticOutline0.m(
+                        Metadata$$ExternalSyntheticOutline0.m("Metadata.ufids(", this, 20),
+                        Arrays.toString((String[]) this._value),
+                        ")");
             case 21:
-                StringBuilder m21 = Metadata$$ExternalSyntheticOutline0.m("Metadata.hdStationNameShort(", this, 21);
+                StringBuilder m21 =
+                        Metadata$$ExternalSyntheticOutline0.m(
+                                "Metadata.hdStationNameShort(", this, 21);
                 m21.append(Objects.toString((String) this._value));
                 m21.append(")");
                 return m21.toString();
             case 22:
-                StringBuilder m22 = Metadata$$ExternalSyntheticOutline0.m("Metadata.hdStationNameLong(", this, 22);
+                StringBuilder m22 =
+                        Metadata$$ExternalSyntheticOutline0.m(
+                                "Metadata.hdStationNameLong(", this, 22);
                 m22.append(Objects.toString((String) this._value));
                 m22.append(")");
                 return m22.toString();
             case 23:
-                StringBuilder m23 = Metadata$$ExternalSyntheticOutline0.m("Metadata.hdSubChannelsAvailable(", this, 23);
+                StringBuilder m23 =
+                        Metadata$$ExternalSyntheticOutline0.m(
+                                "Metadata.hdSubChannelsAvailable(", this, 23);
                 m23.append(((Integer) this._value).intValue());
                 m23.append(")");
                 return m23.toString();

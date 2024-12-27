@@ -6,9 +6,11 @@ import android.content.pm.PackageInfo;
 import android.os.IBinder;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
+
 import com.android.internal.backup.IBackupTransport;
 import com.android.internal.backup.ITransportStatusCallback;
 import com.android.internal.infra.AndroidFuture;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,7 +19,8 @@ import java.util.List;
 public class BackupTransport {
     public static final int AGENT_ERROR = -1003;
     public static final int AGENT_UNKNOWN = -1004;
-    public static final String EXTRA_TRANSPORT_REGISTRATION = "android.app.backup.extra.TRANSPORT_REGISTRATION";
+    public static final String EXTRA_TRANSPORT_REGISTRATION =
+            "android.app.backup.extra.TRANSPORT_REGISTRATION";
     public static final int FLAG_DATA_NOT_CHANGED = 8;
     public static final int FLAG_INCREMENTAL = 2;
     public static final int FLAG_NON_INCREMENTAL = 4;
@@ -44,7 +47,8 @@ public class BackupTransport {
     }
 
     public String currentDestinationString() {
-        throw new UnsupportedOperationException("Transport currentDestinationString() not implemented");
+        throw new UnsupportedOperationException(
+                "Transport currentDestinationString() not implemented");
     }
 
     public Intent dataManagementIntent() {
@@ -116,7 +120,8 @@ public class BackupTransport {
         return 0L;
     }
 
-    public int performFullBackup(PackageInfo targetPackage, ParcelFileDescriptor socket, int flags) {
+    public int performFullBackup(
+            PackageInfo targetPackage, ParcelFileDescriptor socket, int flags) {
         return performFullBackup(targetPackage, socket);
     }
 
@@ -161,8 +166,7 @@ public class BackupTransport {
     }
 
     class TransportImpl extends IBackupTransport.Stub {
-        TransportImpl() {
-        }
+        TransportImpl() {}
 
         @Override // com.android.internal.backup.IBackupTransport
         public void name(AndroidFuture<String> resultFuture) throws RemoteException {
@@ -185,7 +189,8 @@ public class BackupTransport {
         }
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void currentDestinationString(AndroidFuture<String> resultFuture) throws RemoteException {
+        public void currentDestinationString(AndroidFuture<String> resultFuture)
+                throws RemoteException {
             try {
                 String result = BackupTransport.this.currentDestinationString();
                 resultFuture.complete(result);
@@ -195,7 +200,8 @@ public class BackupTransport {
         }
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void dataManagementIntent(AndroidFuture<Intent> resultFuture) throws RemoteException {
+        public void dataManagementIntent(AndroidFuture<Intent> resultFuture)
+                throws RemoteException {
             try {
                 Intent result = BackupTransport.this.dataManagementIntent();
                 resultFuture.complete(result);
@@ -205,7 +211,8 @@ public class BackupTransport {
         }
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void dataManagementIntentLabel(AndroidFuture<CharSequence> resultFuture) throws RemoteException {
+        public void dataManagementIntentLabel(AndroidFuture<CharSequence> resultFuture)
+                throws RemoteException {
             try {
                 CharSequence result = BackupTransport.this.dataManagementIntentLabel();
                 resultFuture.complete(result);
@@ -245,7 +252,12 @@ public class BackupTransport {
         }
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void performBackup(PackageInfo packageInfo, ParcelFileDescriptor inFd, int flags, ITransportStatusCallback callback) throws RemoteException {
+        public void performBackup(
+                PackageInfo packageInfo,
+                ParcelFileDescriptor inFd,
+                int flags,
+                ITransportStatusCallback callback)
+                throws RemoteException {
             try {
                 int result = BackupTransport.this.performBackup(packageInfo, inFd, flags);
                 callback.onOperationCompleteWithStatus(result);
@@ -255,7 +267,8 @@ public class BackupTransport {
         }
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void clearBackupData(PackageInfo packageInfo, ITransportStatusCallback callback) throws RemoteException {
+        public void clearBackupData(PackageInfo packageInfo, ITransportStatusCallback callback)
+                throws RemoteException {
             try {
                 int result = BackupTransport.this.clearBackupData(packageInfo);
                 callback.onOperationCompleteWithStatus(result);
@@ -275,7 +288,8 @@ public class BackupTransport {
         }
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void getAvailableRestoreSets(AndroidFuture<List<RestoreSet>> resultFuture) throws RemoteException {
+        public void getAvailableRestoreSets(AndroidFuture<List<RestoreSet>> resultFuture)
+                throws RemoteException {
             try {
                 RestoreSet[] result = BackupTransport.this.getAvailableRestoreSets();
                 resultFuture.complete(Arrays.asList(result));
@@ -295,7 +309,9 @@ public class BackupTransport {
         }
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void startRestore(long token, PackageInfo[] packages, ITransportStatusCallback callback) throws RemoteException {
+        public void startRestore(
+                long token, PackageInfo[] packages, ITransportStatusCallback callback)
+                throws RemoteException {
             try {
                 int result = BackupTransport.this.startRestore(token, packages);
                 callback.onOperationCompleteWithStatus(result);
@@ -305,7 +321,8 @@ public class BackupTransport {
         }
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void nextRestorePackage(AndroidFuture<RestoreDescription> resultFuture) throws RemoteException {
+        public void nextRestorePackage(AndroidFuture<RestoreDescription> resultFuture)
+                throws RemoteException {
             try {
                 RestoreDescription result = BackupTransport.this.nextRestorePackage();
                 resultFuture.complete(result);
@@ -315,7 +332,8 @@ public class BackupTransport {
         }
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void getRestoreData(ParcelFileDescriptor outFd, ITransportStatusCallback callback) throws RemoteException {
+        public void getRestoreData(ParcelFileDescriptor outFd, ITransportStatusCallback callback)
+                throws RemoteException {
             try {
                 int result = BackupTransport.this.getRestoreData(outFd);
                 callback.onOperationCompleteWithStatus(result);
@@ -345,7 +363,12 @@ public class BackupTransport {
         }
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void performFullBackup(PackageInfo targetPackage, ParcelFileDescriptor socket, int flags, ITransportStatusCallback callback) throws RemoteException {
+        public void performFullBackup(
+                PackageInfo targetPackage,
+                ParcelFileDescriptor socket,
+                int flags,
+                ITransportStatusCallback callback)
+                throws RemoteException {
             try {
                 int result = BackupTransport.this.performFullBackup(targetPackage, socket, flags);
                 callback.onOperationCompleteWithStatus(result);
@@ -355,7 +378,8 @@ public class BackupTransport {
         }
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void checkFullBackupSize(long size, ITransportStatusCallback callback) throws RemoteException {
+        public void checkFullBackupSize(long size, ITransportStatusCallback callback)
+                throws RemoteException {
             try {
                 int result = BackupTransport.this.checkFullBackupSize(size);
                 callback.onOperationCompleteWithStatus(result);
@@ -365,7 +389,8 @@ public class BackupTransport {
         }
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void sendBackupData(int numBytes, ITransportStatusCallback callback) throws RemoteException {
+        public void sendBackupData(int numBytes, ITransportStatusCallback callback)
+                throws RemoteException {
             try {
                 int result = BackupTransport.this.sendBackupData(numBytes);
                 callback.onOperationCompleteWithStatus(result);
@@ -385,9 +410,14 @@ public class BackupTransport {
         }
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void isAppEligibleForBackup(PackageInfo targetPackage, boolean isFullBackup, AndroidFuture<Boolean> resultFuture) throws RemoteException {
+        public void isAppEligibleForBackup(
+                PackageInfo targetPackage,
+                boolean isFullBackup,
+                AndroidFuture<Boolean> resultFuture)
+                throws RemoteException {
             try {
-                boolean result = BackupTransport.this.isAppEligibleForBackup(targetPackage, isFullBackup);
+                boolean result =
+                        BackupTransport.this.isAppEligibleForBackup(targetPackage, isFullBackup);
                 resultFuture.complete(Boolean.valueOf(result));
             } catch (RuntimeException e) {
                 resultFuture.cancel(true);
@@ -395,7 +425,9 @@ public class BackupTransport {
         }
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void getBackupQuota(String packageName, boolean isFullBackup, AndroidFuture<Long> resultFuture) throws RemoteException {
+        public void getBackupQuota(
+                String packageName, boolean isFullBackup, AndroidFuture<Long> resultFuture)
+                throws RemoteException {
             try {
                 long result = BackupTransport.this.getBackupQuota(packageName, isFullBackup);
                 resultFuture.complete(Long.valueOf(result));
@@ -415,7 +447,9 @@ public class BackupTransport {
         }
 
         @Override // com.android.internal.backup.IBackupTransport
-        public void getNextFullRestoreDataChunk(ParcelFileDescriptor socket, ITransportStatusCallback callback) throws RemoteException {
+        public void getNextFullRestoreDataChunk(
+                ParcelFileDescriptor socket, ITransportStatusCallback callback)
+                throws RemoteException {
             try {
                 int result = BackupTransport.this.getNextFullRestoreDataChunk(socket);
                 callback.onOperationCompleteWithStatus(result);

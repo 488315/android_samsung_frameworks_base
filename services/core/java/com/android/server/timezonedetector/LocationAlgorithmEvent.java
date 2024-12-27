@@ -1,6 +1,7 @@
 package com.android.server.timezonedetector;
 
 import android.app.time.LocationTimeZoneAlgorithmStatus;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -12,7 +13,9 @@ public final class LocationAlgorithmEvent {
     public ArrayList mDebugInfo;
     public final GeolocationTimeZoneSuggestion mSuggestion;
 
-    public LocationAlgorithmEvent(LocationTimeZoneAlgorithmStatus locationTimeZoneAlgorithmStatus, GeolocationTimeZoneSuggestion geolocationTimeZoneSuggestion) {
+    public LocationAlgorithmEvent(
+            LocationTimeZoneAlgorithmStatus locationTimeZoneAlgorithmStatus,
+            GeolocationTimeZoneSuggestion geolocationTimeZoneSuggestion) {
         this.mAlgorithmStatus = locationTimeZoneAlgorithmStatus;
         this.mSuggestion = geolocationTimeZoneSuggestion;
     }
@@ -32,7 +35,8 @@ public final class LocationAlgorithmEvent {
             return false;
         }
         LocationAlgorithmEvent locationAlgorithmEvent = (LocationAlgorithmEvent) obj;
-        return this.mAlgorithmStatus.equals(locationAlgorithmEvent.mAlgorithmStatus) && Objects.equals(this.mSuggestion, locationAlgorithmEvent.mSuggestion);
+        return this.mAlgorithmStatus.equals(locationAlgorithmEvent.mAlgorithmStatus)
+                && Objects.equals(this.mSuggestion, locationAlgorithmEvent.mSuggestion);
     }
 
     public final int hashCode() {
@@ -40,6 +44,12 @@ public final class LocationAlgorithmEvent {
     }
 
     public final String toString() {
-        return "LocationAlgorithmEvent{mAlgorithmStatus=" + this.mAlgorithmStatus + ", mSuggestion=" + this.mSuggestion + ", mDebugInfo=" + this.mDebugInfo + '}';
+        return "LocationAlgorithmEvent{mAlgorithmStatus="
+                + this.mAlgorithmStatus
+                + ", mSuggestion="
+                + this.mSuggestion
+                + ", mDebugInfo="
+                + this.mDebugInfo
+                + '}';
     }
 }

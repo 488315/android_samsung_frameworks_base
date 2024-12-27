@@ -2,10 +2,11 @@ package android.hardware.location;
 
 import android.annotation.SystemApi;
 import android.chre.flags.Flags;
-import android.hardware.location.ContextHubTransaction;
 import android.os.RemoteException;
 import android.util.Log;
+
 import dalvik.system.CloseGuard;
+
 import java.io.Closeable;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -77,11 +78,14 @@ public class ContextHubClient implements Closeable {
 
     public ContextHubTransaction<Void> sendReliableMessageToNanoApp(NanoAppMessage message) {
         ContextHubTransaction<Void> transaction = new ContextHubTransaction<>(5);
-        if (!Flags.reliableMessageImplementation() || !this.mAttachedHub.supportsReliableMessages() || message.isBroadcastMessage()) {
+        if (!Flags.reliableMessageImplementation()
+                || !this.mAttachedHub.supportsReliableMessages()
+                || message.isBroadcastMessage()) {
             transaction.setResponse(new ContextHubTransaction.Response<>(9, null));
             return transaction;
         }
-        IContextHubTransactionCallback callback = ContextHubTransactionHelper.createTransactionCallback(transaction);
+        IContextHubTransactionCallback callback =
+                ContextHubTransactionHelper.createTransactionCallback(transaction);
         int result = doSendMessageToNanoApp(message, callback);
         if (result != 0) {
             transaction.setResponse(new ContextHubTransaction.Response<>(result, null));
@@ -89,12 +93,18 @@ public class ContextHubClient implements Closeable {
         return transaction;
     }
 
-    private int doSendMessageToNanoApp(NanoAppMessage message, IContextHubTransactionCallback transactionCallback) {
+    private int doSendMessageToNanoApp(
+            NanoAppMessage message, IContextHubTransactionCallback transactionCallback) {
         Objects.requireNonNull(message, "NanoAppMessage cannot be null");
         int maxPayloadBytes = this.mAttachedHub.getMaxPacketLengthBytes();
         byte[] payload = message.getMessageBody();
         if (payload != null && payload.length > maxPayloadBytes) {
-            Log.e(TAG, "Message (%d bytes) exceeds max payload length (%d bytes)".formatted(Integer.valueOf(payload.length), Integer.valueOf(maxPayloadBytes)));
+            Log.e(
+                    TAG,
+                    "Message (%d bytes) exceeds max payload length (%d bytes)"
+                            .formatted(
+                                    Integer.valueOf(payload.length),
+                                    Integer.valueOf(maxPayloadBytes)));
             return 2;
         }
         try {
@@ -129,7 +139,8 @@ public class ContextHubClient implements Closeable {
         }
     }
 
-    public synchronized void reliableMessageCallbackFinished(int messageSequenceNumber, byte errorCode) {
+    public synchronized void reliableMessageCallbackFinished(
+            int messageSequenceNumber, byte errorCode) {
         try {
             waitForClientProxy();
             this.mClientProxy.reliableMessageCallbackFinished(messageSequenceNumber, errorCode);

@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class MediaResourceParcel implements Parcelable {
-    public static final Parcelable.Creator<MediaResourceParcel> CREATOR = new Parcelable.Creator<MediaResourceParcel>() { // from class: android.media.MediaResourceParcel.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MediaResourceParcel createFromParcel(Parcel _aidl_source) {
-            MediaResourceParcel _aidl_out = new MediaResourceParcel();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<MediaResourceParcel> CREATOR =
+            new Parcelable.Creator<
+                    MediaResourceParcel>() { // from class: android.media.MediaResourceParcel.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MediaResourceParcel createFromParcel(Parcel _aidl_source) {
+                    MediaResourceParcel _aidl_out = new MediaResourceParcel();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MediaResourceParcel[] newArray(int _aidl_size) {
-            return new MediaResourceParcel[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MediaResourceParcel[] newArray(int _aidl_size) {
+                    return new MediaResourceParcel[_aidl_size];
+                }
+            };
     public byte[] id;
     public int type = 0;
     public int subType = 0;

@@ -10,12 +10,14 @@ import android.os.RemoteException;
 public interface IForegroundServiceObserver extends IInterface {
     public static final String DESCRIPTOR = "android.app.IForegroundServiceObserver";
 
-    void onForegroundStateChanged(IBinder iBinder, String str, int i, boolean z) throws RemoteException;
+    void onForegroundStateChanged(IBinder iBinder, String str, int i, boolean z)
+            throws RemoteException;
 
     public static class Default implements IForegroundServiceObserver {
         @Override // android.app.IForegroundServiceObserver
-        public void onForegroundStateChanged(IBinder serviceToken, String packageName, int userId, boolean isForeground) throws RemoteException {
-        }
+        public void onForegroundStateChanged(
+                IBinder serviceToken, String packageName, int userId, boolean isForeground)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +25,7 @@ public interface IForegroundServiceObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IForegroundServiceObserver {
+    public abstract static class Stub extends Binder implements IForegroundServiceObserver {
         static final int TRANSACTION_onForegroundStateChanged = 1;
 
         public Stub() {
@@ -61,7 +63,8 @@ public interface IForegroundServiceObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IForegroundServiceObserver.DESCRIPTOR);
             }
@@ -100,7 +103,9 @@ public interface IForegroundServiceObserver extends IInterface {
             }
 
             @Override // android.app.IForegroundServiceObserver
-            public void onForegroundStateChanged(IBinder serviceToken, String packageName, int userId, boolean isForeground) throws RemoteException {
+            public void onForegroundStateChanged(
+                    IBinder serviceToken, String packageName, int userId, boolean isForeground)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IForegroundServiceObserver.DESCRIPTOR);

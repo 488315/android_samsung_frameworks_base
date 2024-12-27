@@ -2,8 +2,10 @@ package com.samsung.android.graphics.spr.document.shape;
 
 import android.graphics.Canvas;
 import android.graphics.RectF;
+
 import com.samsung.android.graphics.spr.document.SprDocument;
 import com.samsung.android.graphics.spr.document.SprInputStream;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 

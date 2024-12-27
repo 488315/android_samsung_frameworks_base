@@ -11,7 +11,13 @@ public final class MinimizeContainerServiceBinder extends FreeformContainerServi
         WindowManagerService.boostPriorityForLockedSection();
         synchronized (windowManagerGlobalLock) {
             try {
-                z = this.mAtm.mRootWindowContainer.mDefaultDisplay.getDefaultTaskDisplayArea().getRootTask(5, 0) != null;
+                z =
+                        this.mAtm
+                                        .mRootWindowContainer
+                                        .mDefaultDisplay
+                                        .getDefaultTaskDisplayArea()
+                                        .getRootTask(5, 0)
+                                != null;
             } catch (Throwable th) {
                 WindowManagerService.resetPriorityAfterLockedSection();
                 throw th;

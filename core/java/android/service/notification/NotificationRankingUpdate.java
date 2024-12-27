@@ -5,29 +5,33 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.SharedMemory;
-import android.service.notification.NotificationListenerService;
 import android.system.ErrnoException;
 import android.system.OsConstants;
+
 import com.android.internal.hidden_from_bootclasspath.android.service.notification.Flags;
+
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
 /* loaded from: classes3.dex */
 public class NotificationRankingUpdate implements Parcelable {
-    public static final Parcelable.Creator<NotificationRankingUpdate> CREATOR = new Parcelable.Creator<NotificationRankingUpdate>() { // from class: android.service.notification.NotificationRankingUpdate.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NotificationRankingUpdate createFromParcel(Parcel parcel) {
-            return new NotificationRankingUpdate(parcel);
-        }
+    public static final Parcelable.Creator<NotificationRankingUpdate> CREATOR =
+            new Parcelable.Creator<
+                    NotificationRankingUpdate>() { // from class:
+                                                   // android.service.notification.NotificationRankingUpdate.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NotificationRankingUpdate createFromParcel(Parcel parcel) {
+                    return new NotificationRankingUpdate(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public NotificationRankingUpdate[] newArray(int size) {
-            return new NotificationRankingUpdate[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public NotificationRankingUpdate[] newArray(int size) {
+                    return new NotificationRankingUpdate[size];
+                }
+            };
     private final NotificationListenerService.RankingMap mRankingMap;
     private SharedMemory mRankingMapFd;
     private final String mSharedMemoryName;
@@ -43,13 +47,19 @@ public class NotificationRankingUpdate implements Parcelable {
         this.mRankingMapFd = null;
         this.mSharedMemoryName = "NotificationRankingUpdatedSharedMemory";
         if (!Flags.rankingUpdateAshmem()) {
-            this.mRankingMap = (NotificationListenerService.RankingMap) in.readParcelable(getClass().getClassLoader(), NotificationListenerService.RankingMap.class);
+            this.mRankingMap =
+                    (NotificationListenerService.RankingMap)
+                            in.readParcelable(
+                                    getClass().getClassLoader(),
+                                    NotificationListenerService.RankingMap.class);
             return;
         }
         Parcel mapParcel = Parcel.obtain();
         try {
             try {
-                this.mRankingMapFd = (SharedMemory) in.readParcelable(getClass().getClassLoader(), SharedMemory.class);
+                this.mRankingMapFd =
+                        (SharedMemory)
+                                in.readParcelable(getClass().getClassLoader(), SharedMemory.class);
                 Bundle smartActionsBundle = in.readBundle(getClass().getClassLoader());
                 if (this.mRankingMapFd == null) {
                     this.mRankingMap = null;
@@ -67,7 +77,11 @@ public class NotificationRankingUpdate implements Parcelable {
                 buffer.get(payload);
                 mapParcel.unmarshall(payload, 0, payload.length);
                 mapParcel.setDataPosition(0);
-                this.mRankingMap = (NotificationListenerService.RankingMap) mapParcel.readParcelable(getClass().getClassLoader(), NotificationListenerService.RankingMap.class);
+                this.mRankingMap =
+                        (NotificationListenerService.RankingMap)
+                                mapParcel.readParcelable(
+                                        getClass().getClassLoader(),
+                                        NotificationListenerService.RankingMap.class);
                 addSmartActionsFromBundleToRankingMap(smartActionsBundle);
                 mapParcel.recycle();
                 if (buffer == null || this.mRankingMapFd == null) {
@@ -93,7 +107,8 @@ public class NotificationRankingUpdate implements Parcelable {
         }
         String[] rankingMapKeys = this.mRankingMap.getOrderedKeys();
         for (String key : rankingMapKeys) {
-            ArrayList<Notification.Action> smartActions = smartActionsBundle.getParcelableArrayList(key, Notification.Action.class);
+            ArrayList<Notification.Action> smartActions =
+                    smartActionsBundle.getParcelableArrayList(key, Notification.Action.class);
             NotificationListenerService.Ranking ranking = this.mRankingMap.getRawRankingObject(key);
             ranking.setSmartActions(smartActions);
         }
@@ -132,23 +147,30 @@ public class NotificationRankingUpdate implements Parcelable {
             Bundle smartActionsBundle = new Bundle();
             String[] rankingMapKeys = this.mRankingMap.getOrderedKeys();
             for (String key : rankingMapKeys) {
-                NotificationListenerService.Ranking ranking = this.mRankingMap.getRawRankingObject(key);
+                NotificationListenerService.Ranking ranking =
+                        this.mRankingMap.getRawRankingObject(key);
                 List<Notification.Action> smartActions = ranking.getSmartActions();
                 if (!smartActions.isEmpty()) {
                     smartActionsBundle.putParcelableList(key, smartActions);
                 }
-                NotificationListenerService.Ranking rankingCopy = new NotificationListenerService.Ranking();
+                NotificationListenerService.Ranking rankingCopy =
+                        new NotificationListenerService.Ranking();
                 rankingCopy.populate(ranking);
                 rankingCopy.setSmartActions(null);
                 marshalableRankings.add(rankingCopy);
             }
-            NotificationListenerService.RankingMap marshalableRankingMap = new NotificationListenerService.RankingMap((NotificationListenerService.Ranking[]) marshalableRankings.toArray(new NotificationListenerService.Ranking[0]));
+            NotificationListenerService.RankingMap marshalableRankingMap =
+                    new NotificationListenerService.RankingMap(
+                            (NotificationListenerService.Ranking[])
+                                    marshalableRankings.toArray(
+                                            new NotificationListenerService.Ranking[0]));
             ByteBuffer buffer = null;
             try {
                 try {
                     mapParcel.writeParcelable(marshalableRankingMap, flags);
                     int mapSize = mapParcel.dataSize();
-                    this.mRankingMapFd = SharedMemory.create("NotificationRankingUpdatedSharedMemory", mapSize);
+                    this.mRankingMapFd =
+                            SharedMemory.create("NotificationRankingUpdatedSharedMemory", mapSize);
                     buffer = this.mRankingMapFd.mapReadWrite();
                     buffer.put(mapParcel.marshall(), 0, mapSize);
                     this.mRankingMapFd.setProtect(OsConstants.PROT_READ);

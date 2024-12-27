@@ -10,12 +10,14 @@ import android.os.RemoteException;
 public interface ISensitiveContentProtectionManager extends IInterface {
     public static final String DESCRIPTOR = "android.view.ISensitiveContentProtectionManager";
 
-    void setSensitiveContentProtection(IBinder iBinder, String str, boolean z) throws RemoteException;
+    void setSensitiveContentProtection(IBinder iBinder, String str, boolean z)
+            throws RemoteException;
 
     public static class Default implements ISensitiveContentProtectionManager {
         @Override // android.view.ISensitiveContentProtectionManager
-        public void setSensitiveContentProtection(IBinder windowToken, String packageName, boolean isShowingSensitiveContent) throws RemoteException {
-        }
+        public void setSensitiveContentProtection(
+                IBinder windowToken, String packageName, boolean isShowingSensitiveContent)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +25,7 @@ public interface ISensitiveContentProtectionManager extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISensitiveContentProtectionManager {
+    public abstract static class Stub extends Binder implements ISensitiveContentProtectionManager {
         static final int TRANSACTION_setSensitiveContentProtection = 1;
 
         public Stub() {
@@ -61,7 +63,8 @@ public interface ISensitiveContentProtectionManager extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISensitiveContentProtectionManager.DESCRIPTOR);
             }
@@ -99,7 +102,9 @@ public interface ISensitiveContentProtectionManager extends IInterface {
             }
 
             @Override // android.view.ISensitiveContentProtectionManager
-            public void setSensitiveContentProtection(IBinder windowToken, String packageName, boolean isShowingSensitiveContent) throws RemoteException {
+            public void setSensitiveContentProtection(
+                    IBinder windowToken, String packageName, boolean isShowingSensitiveContent)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISensitiveContentProtectionManager.DESCRIPTOR);

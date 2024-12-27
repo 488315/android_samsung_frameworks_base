@@ -1,12 +1,20 @@
 package android.util.proto;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import java.io.IOException;
 import java.util.Arrays;
 
 /* loaded from: classes4.dex */
 public class ProtoUtils {
-    public static void toAggStatsProto(ProtoOutputStream proto, long fieldId, long min, long average, long max, int meanKb, int maxKb) {
+    public static void toAggStatsProto(
+            ProtoOutputStream proto,
+            long fieldId,
+            long min,
+            long average,
+            long max,
+            int meanKb,
+            int maxKb) {
         long aggStatsToken = proto.start(fieldId);
         proto.write(1112396529665L, min);
         proto.write(1112396529666L, average);
@@ -16,7 +24,8 @@ public class ProtoUtils {
         proto.end(aggStatsToken);
     }
 
-    public static void toAggStatsProto(ProtoOutputStream proto, long fieldId, long min, long average, long max) {
+    public static void toAggStatsProto(
+            ProtoOutputStream proto, long fieldId, long min, long average, long max) {
         toAggStatsProto(proto, fieldId, min, average, max, 0, 0);
     }
 
@@ -27,7 +36,8 @@ public class ProtoUtils {
         proto.end(token);
     }
 
-    public static void writeBitWiseFlagsToProtoEnum(ProtoOutputStream proto, long fieldId, long flags, int[] origEnums, int[] protoEnums) {
+    public static void writeBitWiseFlagsToProtoEnum(
+            ProtoOutputStream proto, long fieldId, long flags, int[] origEnums, int[] protoEnums) {
         if (protoEnums.length != origEnums.length) {
             throw new IllegalArgumentException("The length of origEnums must match protoEnums");
         }
@@ -79,7 +89,9 @@ public class ProtoUtils {
                 sb.append(Integer.toHexString(proto.readInt(fieldConstant4)));
                 break;
             default:
-                sb.append("unknown(").append(proto.getWireType()).append(NavigationBarInflaterView.KEY_CODE_END);
+                sb.append("unknown(")
+                        .append(proto.getWireType())
+                        .append(NavigationBarInflaterView.KEY_CODE_END);
                 break;
         }
         return sb.toString();

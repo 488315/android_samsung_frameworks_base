@@ -21,7 +21,9 @@ import android.view.autofill.AutofillValue;
 import android.view.inspector.InspectionCompanion;
 import android.view.inspector.PropertyMapper;
 import android.view.inspector.PropertyReader;
+
 import com.android.internal.R;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Locale;
@@ -88,10 +90,10 @@ public class TimePicker extends FrameLayout {
     }
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface TimePickerMode {
-    }
+    public @interface TimePickerMode {}
 
-    public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<TimePicker> {
+    public final class InspectionCompanion
+            implements android.view.inspector.InspectionCompanion<TimePicker> {
         private int m24HourId;
         private int mHourId;
         private int mMinuteId;
@@ -107,7 +109,12 @@ public class TimePicker extends FrameLayout {
             timePickerModeEnumMapping.put(1, "spinner");
             timePickerModeEnumMapping.put(2, "clock");
             Objects.requireNonNull(timePickerModeEnumMapping);
-            this.mTimePickerModeId = propertyMapper.mapIntEnum("timePickerMode", 16843956, new View$InspectionCompanion$$ExternalSyntheticLambda0(timePickerModeEnumMapping));
+            this.mTimePickerModeId =
+                    propertyMapper.mapIntEnum(
+                            "timePickerMode",
+                            16843956,
+                            new View$InspectionCompanion$$ExternalSyntheticLambda0(
+                                    timePickerModeEnumMapping));
             this.mPropertiesMapped = true;
         }
 
@@ -135,13 +142,17 @@ public class TimePicker extends FrameLayout {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public TimePicker(final Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public TimePicker(
+            final Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         if (getImportantForAutofill() == 0) {
             setImportantForAutofill(1);
         }
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TimePicker, defStyleAttr, defStyleRes);
-        saveAttributeDataForStyleable(context, R.styleable.TimePicker, attrs, a, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.TimePicker, defStyleAttr, defStyleRes);
+        saveAttributeDataForStyleable(
+                context, R.styleable.TimePicker, attrs, a, defStyleAttr, defStyleRes);
         boolean isDialogMode = a.getBoolean(10, false);
         int requestedMode = a.getInt(8, 1);
         a.recycle();
@@ -152,18 +163,24 @@ public class TimePicker extends FrameLayout {
         }
         switch (this.mMode) {
             case 2:
-                this.mDelegate = new TimePickerClockDelegate(this, context, attrs, defStyleAttr, defStyleRes);
+                this.mDelegate =
+                        new TimePickerClockDelegate(
+                                this, context, attrs, defStyleAttr, defStyleRes);
                 break;
             default:
-                this.mDelegate = new TimePickerSpinnerDelegate(this, context, attrs, defStyleAttr, defStyleRes);
+                this.mDelegate =
+                        new TimePickerSpinnerDelegate(
+                                this, context, attrs, defStyleAttr, defStyleRes);
                 break;
         }
-        this.mDelegate.setAutoFillChangeListener(new OnTimeChangedListener() { // from class: android.widget.TimePicker$$ExternalSyntheticLambda0
-            @Override // android.widget.TimePicker.OnTimeChangedListener
-            public final void onTimeChanged(TimePicker timePicker, int i, int i2) {
-                TimePicker.this.lambda$new$0(context, timePicker, i, i2);
-            }
-        });
+        this.mDelegate.setAutoFillChangeListener(
+                new OnTimeChangedListener() { // from class:
+                                              // android.widget.TimePicker$$ExternalSyntheticLambda0
+                    @Override // android.widget.TimePicker.OnTimeChangedListener
+                    public final void onTimeChanged(TimePicker timePicker, int i, int i2) {
+                        TimePicker.this.lambda$new$0(context, timePicker, i, i2);
+                    }
+                });
     }
 
     /* JADX INFO: Access modifiers changed from: private */
@@ -301,7 +318,7 @@ public class TimePicker extends FrameLayout {
         return result;
     }
 
-    static abstract class AbstractTimePickerDelegate implements TimePickerDelegate {
+    abstract static class AbstractTimePickerDelegate implements TimePickerDelegate {
         protected OnTimeChangedListener mAutoFillChangeListener;
         private long mAutofilledValue;
         protected final Context mContext;
@@ -354,19 +371,22 @@ public class TimePicker extends FrameLayout {
         }
 
         protected static class SavedState extends View.BaseSavedState {
-            public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() { // from class: android.widget.TimePicker.AbstractTimePickerDelegate.SavedState.1
-                /* JADX WARN: Can't rename method to resolve collision */
-                @Override // android.os.Parcelable.Creator
-                public SavedState createFromParcel(Parcel in) {
-                    return new SavedState(in);
-                }
+            public static final Parcelable.Creator<SavedState> CREATOR =
+                    new Parcelable.Creator<
+                            SavedState>() { // from class:
+                                            // android.widget.TimePicker.AbstractTimePickerDelegate.SavedState.1
+                        /* JADX WARN: Can't rename method to resolve collision */
+                        @Override // android.os.Parcelable.Creator
+                        public SavedState createFromParcel(Parcel in) {
+                            return new SavedState(in);
+                        }
 
-                /* JADX WARN: Can't rename method to resolve collision */
-                @Override // android.os.Parcelable.Creator
-                public SavedState[] newArray(int size) {
-                    return new SavedState[size];
-                }
-            };
+                        /* JADX WARN: Can't rename method to resolve collision */
+                        @Override // android.os.Parcelable.Creator
+                        public SavedState[] newArray(int size) {
+                            return new SavedState[size];
+                        }
+                    };
             private final int mCurrentItemShowing;
             private final int mHour;
             private final boolean mIs24HourMode;
@@ -376,7 +396,12 @@ public class TimePicker extends FrameLayout {
                 this(superState, hour, minute, is24HourMode, 0);
             }
 
-            public SavedState(Parcelable superState, int hour, int minute, boolean is24HourMode, int currentItemShowing) {
+            public SavedState(
+                    Parcelable superState,
+                    int hour,
+                    int minute,
+                    boolean is24HourMode,
+                    int currentItemShowing) {
                 super(superState);
                 this.mHour = hour;
                 this.mMinute = minute;
@@ -408,7 +433,8 @@ public class TimePicker extends FrameLayout {
                 return this.mCurrentItemShowing;
             }
 
-            @Override // android.view.View.BaseSavedState, android.view.AbsSavedState, android.os.Parcelable
+            @Override // android.view.View.BaseSavedState, android.view.AbsSavedState,
+                      // android.os.Parcelable
             public void writeToParcel(Parcel parcel, int i) {
                 super.writeToParcel(parcel, i);
                 parcel.writeInt(this.mHour);

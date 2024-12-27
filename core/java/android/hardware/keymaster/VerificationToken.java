@@ -6,21 +6,23 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class VerificationToken implements Parcelable {
-    public static final Parcelable.Creator<VerificationToken> CREATOR = new Parcelable.Creator<VerificationToken>() { // from class: android.hardware.keymaster.VerificationToken.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VerificationToken createFromParcel(Parcel _aidl_source) {
-            VerificationToken _aidl_out = new VerificationToken();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<VerificationToken> CREATOR =
+            new Parcelable.Creator<VerificationToken>() { // from class:
+                // android.hardware.keymaster.VerificationToken.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VerificationToken createFromParcel(Parcel _aidl_source) {
+                    VerificationToken _aidl_out = new VerificationToken();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public VerificationToken[] newArray(int _aidl_size) {
-            return new VerificationToken[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public VerificationToken[] newArray(int _aidl_size) {
+                    return new VerificationToken[_aidl_size];
+                }
+            };
     public byte[] mac;
     public Timestamp timestamp;
     public long challenge = 0;

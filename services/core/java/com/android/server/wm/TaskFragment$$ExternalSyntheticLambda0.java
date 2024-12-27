@@ -16,15 +16,22 @@ public final /* synthetic */ class TaskFragment$$ExternalSyntheticLambda0 implem
         ActivityRecord activityRecord = (ActivityRecord) obj;
         switch (this.$r8$classId) {
             case 0:
-                return activityRecord.inTransitionSelfOrParent() && activityRecord.allowEdgeExtension();
+                return activityRecord.inTransitionSelfOrParent()
+                        && activityRecord.allowEdgeExtension();
             case 1:
                 return !activityRecord.finishing;
             case 2:
-                return (activityRecord.finishing || activityRecord.mLaunchedFromBubble) ? false : true;
+                return (activityRecord.finishing || activityRecord.mLaunchedFromBubble)
+                        ? false
+                        : true;
             case 3:
                 return (activityRecord.finishing || activityRecord.mTaskOverlay) ? false : true;
             case 4:
-                return (activityRecord.finishing || activityRecord.mTaskOverlay || activityRecord.mLaunchedFromBubble) ? false : true;
+                return (activityRecord.finishing
+                                || activityRecord.mTaskOverlay
+                                || activityRecord.mLaunchedFromBubble)
+                        ? false
+                        : true;
             case 5:
                 return !activityRecord.finishing && activityRecord.hasChild();
             default:

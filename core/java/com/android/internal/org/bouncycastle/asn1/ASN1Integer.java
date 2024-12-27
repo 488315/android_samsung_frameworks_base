@@ -2,6 +2,7 @@ package com.android.internal.org.bouncycastle.asn1;
 
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.Properties;
+
 import java.io.IOException;
 import java.math.BigInteger;
 
@@ -20,10 +21,12 @@ public class ASN1Integer extends ASN1Primitive {
             try {
                 return (ASN1Integer) fromByteArray((byte[]) obj);
             } catch (Exception e) {
-                throw new IllegalArgumentException("encoding error in getInstance: " + e.toString());
+                throw new IllegalArgumentException(
+                        "encoding error in getInstance: " + e.toString());
             }
         }
-        throw new IllegalArgumentException("illegal object in getInstance: " + obj.getClass().getName());
+        throw new IllegalArgumentException(
+                "illegal object in getInstance: " + obj.getClass().getName());
     }
 
     public static ASN1Integer getInstance(ASN1TaggedObject obj, boolean explicit) {
@@ -65,7 +68,9 @@ public class ASN1Integer extends ASN1Primitive {
     }
 
     public boolean hasValue(BigInteger x) {
-        return x != null && intValue(this.bytes, this.start, -1) == x.intValue() && getValue().equals(x);
+        return x != null
+                && intValue(this.bytes, this.start, -1) == x.intValue()
+                && getValue().equals(x);
     }
 
     public int intPositiveValueExact() {
@@ -107,7 +112,8 @@ public class ASN1Integer extends ASN1Primitive {
         out.writeEncoded(withTag, 2, this.bytes);
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive, com.android.internal.org.bouncycastle.asn1.ASN1Object
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Primitive,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Object
     public int hashCode() {
         return Arrays.hashCode(this.bytes);
     }
@@ -160,7 +166,9 @@ public class ASN1Integer extends ASN1Primitive {
             case 1:
                 return false;
             default:
-                return bytes[0] == (bytes[1] >> 7) && !Properties.isOverrideSet("com.android.internal.org.bouncycastle.asn1.allow_unsafe_integer");
+                return bytes[0] == (bytes[1] >> 7)
+                        && !Properties.isOverrideSet(
+                                "com.android.internal.org.bouncycastle.asn1.allow_unsafe_integer");
         }
     }
 

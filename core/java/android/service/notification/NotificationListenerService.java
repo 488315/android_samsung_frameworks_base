@@ -29,11 +29,12 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.UserHandle;
 import android.security.keystore.KeyProperties;
-import android.service.notification.INotificationListener;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.widget.RemoteViews;
+
 import com.android.internal.os.SomeArgs;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -43,7 +44,8 @@ import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public abstract class NotificationListenerService extends Service {
-    public static final String ACTION_SETTINGS_HOME = "android.service.notification.action.SETTINGS_HOME";
+    public static final String ACTION_SETTINGS_HOME =
+            "android.service.notification.action.SETTINGS_HOME";
     public static final int FLAG_FILTER_TYPE_ALERTING = 2;
     public static final int FLAG_FILTER_TYPE_CONVERSATIONS = 1;
     public static final int FLAG_FILTER_TYPE_ONGOING = 8;
@@ -56,9 +58,12 @@ public abstract class NotificationListenerService extends Service {
     public static final int INTERRUPTION_FILTER_NONE = 3;
     public static final int INTERRUPTION_FILTER_PRIORITY = 2;
     public static final int INTERRUPTION_FILTER_UNKNOWN = 0;
-    public static final String META_DATA_DEFAULT_AUTOBIND = "android.service.notification.default_autobind_listenerservice";
-    public static final String META_DATA_DEFAULT_FILTER_TYPES = "android.service.notification.default_filter_types";
-    public static final String META_DATA_DISABLED_FILTER_TYPES = "android.service.notification.disabled_filter_types";
+    public static final String META_DATA_DEFAULT_AUTOBIND =
+            "android.service.notification.default_autobind_listenerservice";
+    public static final String META_DATA_DEFAULT_FILTER_TYPES =
+            "android.service.notification.default_filter_types";
+    public static final String META_DATA_DISABLED_FILTER_TYPES =
+            "android.service.notification.disabled_filter_types";
     public static final int NOTIFICATION_CHANNEL_OR_GROUP_ADDED = 1;
     public static final int NOTIFICATION_CHANNEL_OR_GROUP_DELETED = 3;
     public static final int NOTIFICATION_CHANNEL_OR_GROUP_UPDATED = 2;
@@ -87,19 +92,16 @@ public abstract class NotificationListenerService extends Service {
     public static final int REASON_TIMEOUT = 19;
     public static final int REASON_UNAUTOBUNDLED = 16;
     public static final int REASON_USER_STOPPED = 6;
-    public static final String SERVICE_INTERFACE = "android.service.notification.NotificationListenerService";
+    public static final String SERVICE_INTERFACE =
+            "android.service.notification.NotificationListenerService";
 
-    @Deprecated
-    public static final int SUPPRESSED_EFFECT_SCREEN_OFF = 1;
+    @Deprecated public static final int SUPPRESSED_EFFECT_SCREEN_OFF = 1;
 
-    @Deprecated
-    public static final int SUPPRESSED_EFFECT_SCREEN_ON = 2;
+    @Deprecated public static final int SUPPRESSED_EFFECT_SCREEN_ON = 2;
 
-    @SystemApi
-    public static final int TRIM_FULL = 0;
+    @SystemApi public static final int TRIM_FULL = 0;
 
-    @SystemApi
-    public static final int TRIM_LIGHT = 1;
+    @SystemApi public static final int TRIM_LIGHT = 1;
     protected int mCurrentUser;
     private Handler mHandler;
     protected INotificationManager mNoMan;
@@ -111,16 +113,13 @@ public abstract class NotificationListenerService extends Service {
     private boolean isConnected = false;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ChannelOrGroupModificationTypes {
-    }
+    public @interface ChannelOrGroupModificationTypes {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface NotificationCancelReason {
-    }
+    public @interface NotificationCancelReason {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface NotificationFilterTypes {
-    }
+    public @interface NotificationFilterTypes {}
 
     @Override // android.app.Service, android.content.ContextWrapper
     protected void attachBaseContext(Context base) {
@@ -128,62 +127,56 @@ public abstract class NotificationListenerService extends Service {
         this.mHandler = new MyHandler(getMainLooper());
     }
 
-    public void onNotificationPosted(StatusBarNotification sbn) {
-    }
+    public void onNotificationPosted(StatusBarNotification sbn) {}
 
     public void onNotificationPosted(StatusBarNotification sbn, RankingMap rankingMap) {
         onNotificationPosted(sbn);
     }
 
-    public void onNotificationRemoved(StatusBarNotification sbn) {
-    }
+    public void onNotificationRemoved(StatusBarNotification sbn) {}
 
     public void onNotificationRemoved(StatusBarNotification sbn, RankingMap rankingMap) {
         onNotificationRemoved(sbn);
     }
 
-    public void onNotificationRemoved(StatusBarNotification sbn, RankingMap rankingMap, int reason) {
+    public void onNotificationRemoved(
+            StatusBarNotification sbn, RankingMap rankingMap, int reason) {
         onNotificationRemoved(sbn, rankingMap);
     }
 
     @SystemApi
-    public void onNotificationRemoved(StatusBarNotification sbn, RankingMap rankingMap, NotificationStats stats, int reason) {
+    public void onNotificationRemoved(
+            StatusBarNotification sbn, RankingMap rankingMap, NotificationStats stats, int reason) {
         onNotificationRemoved(sbn, rankingMap, reason);
     }
 
-    public void onEdgeNotificationPosted(String pkg, int id, Bundle extra) {
-    }
+    public void onEdgeNotificationPosted(String pkg, int id, Bundle extra) {}
 
-    public void onEdgeNotificationRemoved(String pkg, int id, Bundle extra) {
-    }
+    public void onEdgeNotificationRemoved(String pkg, int id, Bundle extra) {}
 
-    public void onListenerConnected() {
-    }
+    public void onListenerConnected() {}
 
-    public void onListenerDisconnected() {
-    }
+    public void onListenerDisconnected() {}
 
-    public void onNotificationRankingUpdate(RankingMap rankingMap) {
-    }
+    public void onNotificationRankingUpdate(RankingMap rankingMap) {}
 
-    public void onListenerHintsChanged(int hints) {
-    }
+    public void onListenerHintsChanged(int hints) {}
 
-    public void onSilentStatusBarIconsVisibilityChanged(boolean hideSilentStatusIcons) {
-    }
+    public void onSilentStatusBarIconsVisibilityChanged(boolean hideSilentStatusIcons) {}
 
-    public void onNotificationChannelModified(String pkg, UserHandle user, NotificationChannel channel, int modificationType) {
-    }
+    public void onNotificationChannelModified(
+            String pkg, UserHandle user, NotificationChannel channel, int modificationType) {}
 
-    public void onNotificationChannelGroupModified(String pkg, UserHandle user, NotificationChannelGroup group, int modificationType) {
-    }
+    public void onNotificationChannelGroupModified(
+            String pkg, UserHandle user, NotificationChannelGroup group, int modificationType) {}
 
-    public void onInterruptionFilterChanged(int interruptionFilter) {
-    }
+    public void onInterruptionFilterChanged(int interruptionFilter) {}
 
     protected final INotificationManager getNotificationInterface() {
         if (this.mNoMan == null) {
-            this.mNoMan = INotificationManager.Stub.asInterface(ServiceManager.getService("notification"));
+            this.mNoMan =
+                    INotificationManager.Stub.asInterface(
+                            ServiceManager.getService("notification"));
         }
         return this.mNoMan;
     }
@@ -192,7 +185,8 @@ public abstract class NotificationListenerService extends Service {
     public final void cancelNotification(String pkg, String tag, int id) {
         if (isBound()) {
             try {
-                getNotificationInterface().cancelNotificationFromListener(this.mWrapper, pkg, tag, id);
+                getNotificationInterface()
+                        .cancelNotificationFromListener(this.mWrapper, pkg, tag, id);
             } catch (RemoteException ex) {
                 Log.v(this.TAG, "Unable to contact notification manager", ex);
             }
@@ -202,7 +196,8 @@ public abstract class NotificationListenerService extends Service {
     public final void cancelNotification(String key) {
         if (isBound()) {
             try {
-                getNotificationInterface().cancelNotificationsFromListener(this.mWrapper, new String[]{key});
+                getNotificationInterface()
+                        .cancelNotificationsFromListener(this.mWrapper, new String[] {key});
             } catch (RemoteException ex) {
                 Log.v(this.TAG, "Unable to contact notification manager", ex);
             }
@@ -227,7 +222,9 @@ public abstract class NotificationListenerService extends Service {
     public final void snoozeNotification(String key, String snoozeCriterionId) {
         if (isBound()) {
             try {
-                getNotificationInterface().snoozeNotificationUntilContextFromListener(this.mWrapper, key, snoozeCriterionId);
+                getNotificationInterface()
+                        .snoozeNotificationUntilContextFromListener(
+                                this.mWrapper, key, snoozeCriterionId);
             } catch (RemoteException ex) {
                 Log.v(this.TAG, "Unable to contact notification manager", ex);
             }
@@ -237,7 +234,8 @@ public abstract class NotificationListenerService extends Service {
     public final void snoozeNotification(String key, long durationMs) {
         if (isBound()) {
             try {
-                getNotificationInterface().snoozeNotificationUntilFromListener(this.mWrapper, key, durationMs);
+                getNotificationInterface()
+                        .snoozeNotificationUntilFromListener(this.mWrapper, key, durationMs);
             } catch (RemoteException ex) {
                 Log.v(this.TAG, "Unable to contact notification manager", ex);
             }
@@ -247,7 +245,8 @@ public abstract class NotificationListenerService extends Service {
     public final void migrateNotificationFilter(int defaultTypes, List<String> disallowedPkgs) {
         if (isBound()) {
             try {
-                getNotificationInterface().migrateNotificationFilter(this.mWrapper, defaultTypes, disallowedPkgs);
+                getNotificationInterface()
+                        .migrateNotificationFilter(this.mWrapper, defaultTypes, disallowedPkgs);
             } catch (RemoteException ex) {
                 Log.v(this.TAG, "Unable to contact notification manager", ex);
             }
@@ -264,10 +263,13 @@ public abstract class NotificationListenerService extends Service {
         }
     }
 
-    public final void updateNotificationChannel(String pkg, UserHandle user, NotificationChannel channel) {
+    public final void updateNotificationChannel(
+            String pkg, UserHandle user, NotificationChannel channel) {
         if (isBound()) {
             try {
-                getNotificationInterface().updateNotificationChannelFromPrivilegedListener(this.mWrapper, pkg, user, channel);
+                getNotificationInterface()
+                        .updateNotificationChannelFromPrivilegedListener(
+                                this.mWrapper, pkg, user, channel);
             } catch (RemoteException e) {
                 Log.v(this.TAG, "Unable to contact notification manager", e);
                 throw e.rethrowFromSystemServer();
@@ -280,19 +282,24 @@ public abstract class NotificationListenerService extends Service {
             return null;
         }
         try {
-            return getNotificationInterface().getNotificationChannelsFromPrivilegedListener(this.mWrapper, pkg, user).getList();
+            return getNotificationInterface()
+                    .getNotificationChannelsFromPrivilegedListener(this.mWrapper, pkg, user)
+                    .getList();
         } catch (RemoteException e) {
             Log.v(this.TAG, "Unable to contact notification manager", e);
             throw e.rethrowFromSystemServer();
         }
     }
 
-    public final List<NotificationChannelGroup> getNotificationChannelGroups(String pkg, UserHandle user) {
+    public final List<NotificationChannelGroup> getNotificationChannelGroups(
+            String pkg, UserHandle user) {
         if (!isBound()) {
             return null;
         }
         try {
-            return getNotificationInterface().getNotificationChannelGroupsFromPrivilegedListener(this.mWrapper, pkg, user).getList();
+            return getNotificationInterface()
+                    .getNotificationChannelGroupsFromPrivilegedListener(this.mWrapper, pkg, user)
+                    .getList();
         } catch (RemoteException e) {
             Log.v(this.TAG, "Unable to contact notification manager", e);
             throw e.rethrowFromSystemServer();
@@ -303,7 +310,8 @@ public abstract class NotificationListenerService extends Service {
     public final void setOnNotificationPostedTrim(int trim) {
         if (isBound()) {
             try {
-                getNotificationInterface().setOnNotificationPostedTrimFromListener(this.mWrapper, trim);
+                getNotificationInterface()
+                        .setOnNotificationPostedTrimFromListener(this.mWrapper, trim);
             } catch (RemoteException ex) {
                 Log.v(this.TAG, "Unable to contact notification manager", ex);
             }
@@ -317,7 +325,9 @@ public abstract class NotificationListenerService extends Service {
 
     public final StatusBarNotification[] getSnoozedNotifications() {
         try {
-            ParceledListSlice<StatusBarNotification> parceledList = getNotificationInterface().getSnoozedNotificationsFromListener(this.mWrapper, 0);
+            ParceledListSlice<StatusBarNotification> parceledList =
+                    getNotificationInterface()
+                            .getSnoozedNotificationsFromListener(this.mWrapper, 0);
             return cleanUpNotificationList(parceledList);
         } catch (RemoteException ex) {
             Log.v(this.TAG, "Unable to contact notification manager", ex);
@@ -342,7 +352,9 @@ public abstract class NotificationListenerService extends Service {
             return null;
         }
         try {
-            ParceledListSlice<StatusBarNotification> parceledList = getNotificationInterface().getActiveNotificationsFromListener(this.mWrapper, keys, trim);
+            ParceledListSlice<StatusBarNotification> parceledList =
+                    getNotificationInterface()
+                            .getActiveNotificationsFromListener(this.mWrapper, keys, trim);
             return cleanUpNotificationList(parceledList);
         } catch (BadParcelableException | RemoteException ex) {
             Log.v(this.TAG, "Unable to contact notification manager", ex);
@@ -350,7 +362,8 @@ public abstract class NotificationListenerService extends Service {
         }
     }
 
-    private StatusBarNotification[] cleanUpNotificationList(ParceledListSlice<StatusBarNotification> parceledList) {
+    private StatusBarNotification[] cleanUpNotificationList(
+            ParceledListSlice<StatusBarNotification> parceledList) {
         if (parceledList == null || parceledList.getList() == null) {
             return new StatusBarNotification[0];
         }
@@ -369,7 +382,10 @@ public abstract class NotificationListenerService extends Service {
                     corruptNotifications = new ArrayList<>(N);
                 }
                 corruptNotifications.add(sbn);
-                Log.w(this.TAG, "get(Active/Snoozed)Notifications: can't rebuild notification from " + sbn.getPackageName());
+                Log.w(
+                        this.TAG,
+                        "get(Active/Snoozed)Notifications: can't rebuild notification from "
+                                + sbn.getPackageName());
             }
         }
         if (corruptNotifications != null) {
@@ -425,7 +441,8 @@ public abstract class NotificationListenerService extends Service {
     public final void requestInterruptionFilter(int interruptionFilter) {
         if (isBound()) {
             try {
-                getNotificationInterface().requestInterruptionFilterFromListener(this.mWrapper, interruptionFilter);
+                getNotificationInterface()
+                        .requestInterruptionFilterFromListener(this.mWrapper, interruptionFilter);
             } catch (RemoteException ex) {
                 Log.v(this.TAG, "Unable to contact notification manager", ex);
             }
@@ -463,7 +480,8 @@ public abstract class NotificationListenerService extends Service {
     }
 
     @SystemApi
-    public void registerAsSystemService(Context context, ComponentName componentName, int currentUser) throws RemoteException {
+    public void registerAsSystemService(
+            Context context, ComponentName componentName, int currentUser) throws RemoteException {
         if (this.mWrapper == null) {
             this.mWrapper = new NotificationListenerWrapper();
         }
@@ -483,7 +501,8 @@ public abstract class NotificationListenerService extends Service {
     }
 
     public static void requestRebind(ComponentName componentName) {
-        INotificationManager noMan = INotificationManager.Stub.asInterface(ServiceManager.getService("notification"));
+        INotificationManager noMan =
+                INotificationManager.Stub.asInterface(ServiceManager.getService("notification"));
         try {
             noMan.requestBindListener(componentName);
         } catch (RemoteException ex) {
@@ -492,7 +511,8 @@ public abstract class NotificationListenerService extends Service {
     }
 
     public static void requestUnbind(ComponentName componentName) {
-        INotificationManager noMan = INotificationManager.Stub.asInterface(ServiceManager.getService("notification"));
+        INotificationManager noMan =
+                INotificationManager.Stub.asInterface(ServiceManager.getService("notification"));
         try {
             noMan.requestUnbindListenerComponent(componentName);
         } catch (RemoteException ex) {
@@ -521,7 +541,9 @@ public abstract class NotificationListenerService extends Service {
                 n.extras.putInt(Notification.EXTRA_SMALL_ICON, smallIcon.getResId());
                 n.icon = smallIcon.getResId();
             }
-            if (largeIcon != null && (d = largeIcon.loadDrawable(getContext())) != null && (d instanceof BitmapDrawable)) {
+            if (largeIcon != null
+                    && (d = largeIcon.loadDrawable(getContext())) != null
+                    && (d instanceof BitmapDrawable)) {
                 Bitmap largeIconBits = ((BitmapDrawable) d).getBitmap();
                 n.extras.putParcelable(Notification.EXTRA_LARGE_ICON, largeIconBits);
                 n.largeIcon = largeIconBits;
@@ -532,7 +554,8 @@ public abstract class NotificationListenerService extends Service {
     /* JADX INFO: Access modifiers changed from: private */
     public void maybePopulateRemoteViews(Notification notification) {
         if (getContext().getApplicationInfo().targetSdkVersion < 24) {
-            Notification.Builder builder = Notification.Builder.recoverBuilder(getContext(), notification);
+            Notification.Builder builder =
+                    Notification.Builder.recoverBuilder(getContext(), notification);
             RemoteViews content = builder.createContentView();
             RemoteViews big = builder.createBigContentView();
             RemoteViews headsUp = builder.createHeadsUpContentView();
@@ -545,7 +568,12 @@ public abstract class NotificationListenerService extends Service {
     /* JADX INFO: Access modifiers changed from: private */
     public void maybePopulatePeople(Notification notification) {
         ArrayList<Person> people;
-        if (getContext().getApplicationInfo().targetSdkVersion < 28 && (people = notification.extras.getParcelableArrayList(Notification.EXTRA_PEOPLE_LIST, Person.class)) != null && !people.isEmpty()) {
+        if (getContext().getApplicationInfo().targetSdkVersion < 28
+                && (people =
+                                notification.extras.getParcelableArrayList(
+                                        Notification.EXTRA_PEOPLE_LIST, Person.class))
+                        != null
+                && !people.isEmpty()) {
             int size = people.size();
             String[] peopleArray = new String[size];
             for (int i = 0; i < size; i++) {
@@ -557,23 +585,29 @@ public abstract class NotificationListenerService extends Service {
     }
 
     protected class NotificationListenerWrapper extends INotificationListener.Stub {
-        protected NotificationListenerWrapper() {
-        }
+        protected NotificationListenerWrapper() {}
 
         @Override // android.service.notification.INotificationListener
-        public void onNotificationPosted(IStatusBarNotificationHolder sbnHolder, NotificationRankingUpdate update) {
+        public void onNotificationPosted(
+                IStatusBarNotificationHolder sbnHolder, NotificationRankingUpdate update) {
             try {
                 StatusBarNotification sbn = sbnHolder.get();
                 if (sbn == null) {
-                    Log.w(NotificationListenerService.this.TAG, "onNotificationPosted: Error receiving StatusBarNotification");
+                    Log.w(
+                            NotificationListenerService.this.TAG,
+                            "onNotificationPosted: Error receiving StatusBarNotification");
                     return;
                 }
                 try {
                     NotificationListenerService.this.createLegacyIconExtras(sbn.getNotification());
-                    NotificationListenerService.this.maybePopulateRemoteViews(sbn.getNotification());
+                    NotificationListenerService.this.maybePopulateRemoteViews(
+                            sbn.getNotification());
                     NotificationListenerService.this.maybePopulatePeople(sbn.getNotification());
                 } catch (IllegalArgumentException e) {
-                    Log.w(NotificationListenerService.this.TAG, "onNotificationPosted: can't rebuild notification from " + sbn.getPackageName());
+                    Log.w(
+                            NotificationListenerService.this.TAG,
+                            "onNotificationPosted: can't rebuild notification from "
+                                    + sbn.getPackageName());
                     sbn = null;
                 }
                 synchronized (NotificationListenerService.this.mLock) {
@@ -582,22 +616,37 @@ public abstract class NotificationListenerService extends Service {
                         SomeArgs args = SomeArgs.obtain();
                         args.arg1 = sbn;
                         args.arg2 = NotificationListenerService.this.mRankingMap;
-                        NotificationListenerService.this.mHandler.obtainMessage(1, args).sendToTarget();
+                        NotificationListenerService.this
+                                .mHandler
+                                .obtainMessage(1, args)
+                                .sendToTarget();
                     } else {
-                        NotificationListenerService.this.mHandler.obtainMessage(4, NotificationListenerService.this.mRankingMap).sendToTarget();
+                        NotificationListenerService.this
+                                .mHandler
+                                .obtainMessage(4, NotificationListenerService.this.mRankingMap)
+                                .sendToTarget();
                     }
                 }
             } catch (RemoteException e2) {
-                Log.w(NotificationListenerService.this.TAG, "onNotificationPosted: Error receiving StatusBarNotification", e2);
+                Log.w(
+                        NotificationListenerService.this.TAG,
+                        "onNotificationPosted: Error receiving StatusBarNotification",
+                        e2);
             }
         }
 
         @Override // android.service.notification.INotificationListener
-        public void onNotificationRemoved(IStatusBarNotificationHolder sbnHolder, NotificationRankingUpdate update, NotificationStats stats, int reason) {
+        public void onNotificationRemoved(
+                IStatusBarNotificationHolder sbnHolder,
+                NotificationRankingUpdate update,
+                NotificationStats stats,
+                int reason) {
             try {
                 StatusBarNotification sbn = sbnHolder.get();
                 if (sbn == null) {
-                    Log.w(NotificationListenerService.this.TAG, "onNotificationRemoved: Error receiving StatusBarNotification");
+                    Log.w(
+                            NotificationListenerService.this.TAG,
+                            "onNotificationRemoved: Error receiving StatusBarNotification");
                     return;
                 }
                 synchronized (NotificationListenerService.this.mLock) {
@@ -610,7 +659,10 @@ public abstract class NotificationListenerService extends Service {
                     NotificationListenerService.this.mHandler.obtainMessage(2, args).sendToTarget();
                 }
             } catch (RemoteException e) {
-                Log.w(NotificationListenerService.this.TAG, "onNotificationRemoved: Error receiving StatusBarNotification", e);
+                Log.w(
+                        NotificationListenerService.this.TAG,
+                        "onNotificationRemoved: Error receiving StatusBarNotification",
+                        e);
             }
         }
 
@@ -619,7 +671,10 @@ public abstract class NotificationListenerService extends Service {
             try {
                 NotificationListenerService.this.onEdgeNotificationPosted(pkg, id, extra);
             } catch (Throwable t) {
-                Log.w(NotificationListenerService.this.TAG, "Error running onInterruptionFilterChanged", t);
+                Log.w(
+                        NotificationListenerService.this.TAG,
+                        "Error running onInterruptionFilterChanged",
+                        t);
             }
         }
 
@@ -628,7 +683,10 @@ public abstract class NotificationListenerService extends Service {
             try {
                 NotificationListenerService.this.onEdgeNotificationRemoved(pkg, id, extra);
             } catch (Throwable t) {
-                Log.w(NotificationListenerService.this.TAG, "Error running onInterruptionFilterChanged", t);
+                Log.w(
+                        NotificationListenerService.this.TAG,
+                        "Error running onInterruptionFilterChanged",
+                        t);
             }
         }
 
@@ -642,10 +700,14 @@ public abstract class NotificationListenerService extends Service {
         }
 
         @Override // android.service.notification.INotificationListener
-        public void onNotificationRankingUpdate(NotificationRankingUpdate update) throws RemoteException {
+        public void onNotificationRankingUpdate(NotificationRankingUpdate update)
+                throws RemoteException {
             synchronized (NotificationListenerService.this.mLock) {
                 NotificationListenerService.this.applyUpdateLocked(update);
-                NotificationListenerService.this.mHandler.obtainMessage(4, NotificationListenerService.this.mRankingMap).sendToTarget();
+                NotificationListenerService.this
+                        .mHandler
+                        .obtainMessage(4, NotificationListenerService.this.mRankingMap)
+                        .sendToTarget();
             }
         }
 
@@ -656,47 +718,49 @@ public abstract class NotificationListenerService extends Service {
 
         @Override // android.service.notification.INotificationListener
         public void onInterruptionFilterChanged(int interruptionFilter) throws RemoteException {
-            NotificationListenerService.this.mHandler.obtainMessage(6, interruptionFilter, 0).sendToTarget();
+            NotificationListenerService.this
+                    .mHandler
+                    .obtainMessage(6, interruptionFilter, 0)
+                    .sendToTarget();
         }
 
-        public void onNotificationEnqueuedWithChannel(IStatusBarNotificationHolder notificationHolder, NotificationChannel channel, NotificationRankingUpdate update) throws RemoteException {
-        }
+        public void onNotificationEnqueuedWithChannel(
+                IStatusBarNotificationHolder notificationHolder,
+                NotificationChannel channel,
+                NotificationRankingUpdate update)
+                throws RemoteException {}
 
-        public void onNotificationsSeen(List<String> keys) throws RemoteException {
-        }
+        public void onNotificationsSeen(List<String> keys) throws RemoteException {}
 
-        public void onPanelRevealed(int items) throws RemoteException {
-        }
+        public void onPanelRevealed(int items) throws RemoteException {}
 
-        public void onPanelHidden() throws RemoteException {
-        }
+        public void onPanelHidden() throws RemoteException {}
 
-        public void onNotificationVisibilityChanged(String key, boolean isVisible) {
-        }
+        public void onNotificationVisibilityChanged(String key, boolean isVisible) {}
 
-        public void onNotificationSnoozedUntilContext(IStatusBarNotificationHolder notificationHolder, String snoozeCriterionId) throws RemoteException {
-        }
+        public void onNotificationSnoozedUntilContext(
+                IStatusBarNotificationHolder notificationHolder, String snoozeCriterionId)
+                throws RemoteException {}
 
-        public void onNotificationExpansionChanged(String key, boolean isUserAction, boolean isExpanded) {
-        }
+        public void onNotificationExpansionChanged(
+                String key, boolean isUserAction, boolean isExpanded) {}
 
-        public void onNotificationDirectReply(String key) {
-        }
+        public void onNotificationDirectReply(String key) {}
 
-        public void onSuggestedReplySent(String key, CharSequence reply, int source) {
-        }
+        public void onSuggestedReplySent(String key, CharSequence reply, int source) {}
 
-        public void onActionClicked(String key, Notification.Action action, int source) {
-        }
+        public void onActionClicked(String key, Notification.Action action, int source) {}
 
-        public void onNotificationClicked(String key) {
-        }
+        public void onNotificationClicked(String key) {}
 
-        public void onAllowedAdjustmentsChanged() {
-        }
+        public void onAllowedAdjustmentsChanged() {}
 
         @Override // android.service.notification.INotificationListener
-        public void onNotificationChannelModification(String pkgName, UserHandle user, NotificationChannel channel, int modificationType) {
+        public void onNotificationChannelModification(
+                String pkgName,
+                UserHandle user,
+                NotificationChannel channel,
+                int modificationType) {
             SomeArgs args = SomeArgs.obtain();
             args.arg1 = pkgName;
             args.arg2 = user;
@@ -706,7 +770,11 @@ public abstract class NotificationListenerService extends Service {
         }
 
         @Override // android.service.notification.INotificationListener
-        public void onNotificationChannelGroupModification(String pkgName, UserHandle user, NotificationChannelGroup group, int modificationType) {
+        public void onNotificationChannelGroupModification(
+                String pkgName,
+                UserHandle user,
+                NotificationChannelGroup group,
+                int modificationType) {
             SomeArgs args = SomeArgs.obtain();
             args.arg1 = pkgName;
             args.arg2 = user;
@@ -717,11 +785,14 @@ public abstract class NotificationListenerService extends Service {
 
         @Override // android.service.notification.INotificationListener
         public void onStatusBarIconsBehaviorChanged(boolean hideSilentStatusIcons) {
-            NotificationListenerService.this.mHandler.obtainMessage(9, Boolean.valueOf(hideSilentStatusIcons)).sendToTarget();
+            NotificationListenerService.this
+                    .mHandler
+                    .obtainMessage(9, Boolean.valueOf(hideSilentStatusIcons))
+                    .sendToTarget();
         }
 
-        public void onNotificationFeedbackReceived(String key, NotificationRankingUpdate update, Bundle feedback) {
-        }
+        public void onNotificationFeedbackReceived(
+                String key, NotificationRankingUpdate update, Bundle feedback) {}
     }
 
     public final void applyUpdateLocked(NotificationRankingUpdate update) {
@@ -775,12 +846,10 @@ public abstract class NotificationListenerService extends Service {
         private int mVisibilityOverride;
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface RankingAdjustment {
-        }
+        public @interface RankingAdjustment {}
 
         @Retention(RetentionPolicy.SOURCE)
-        public @interface UserSentiment {
-        }
+        public @interface UserSentiment {}
 
         public Ranking() {
             this.mRank = -1;
@@ -827,7 +896,8 @@ public abstract class NotificationListenerService extends Service {
             ClassLoader cl = getClass().getClassLoader();
             int version = in.readInt();
             if (version != 2) {
-                throw new IllegalArgumentException("malformed Ranking parcel: " + in + " version " + version + ", expected 2");
+                throw new IllegalArgumentException(
+                        "malformed Ranking parcel: " + in + " version " + version + ", expected 2");
             }
             this.mKey = in.readString();
             this.mRank = in.readInt();
@@ -984,7 +1054,33 @@ public abstract class NotificationListenerService extends Service {
             return this.mRankingAdjustment;
         }
 
-        public void populate(String key, int rank, boolean matchesInterruptionFilter, int visibilityOverride, int suppressedVisualEffects, int importance, CharSequence explanation, String overrideGroupKey, NotificationChannel channel, ArrayList<String> overridePeople, ArrayList<SnoozeCriterion> snoozeCriteria, boolean showBadge, int userSentiment, boolean hidden, long lastAudiblyAlertedMs, boolean noisy, ArrayList<Notification.Action> smartActions, ArrayList<CharSequence> smartReplies, boolean canBubble, boolean isTextChanged, boolean isConversation, ShortcutInfo shortcutInfo, int rankingAdjustment, boolean isBubble, int proposedImportance, boolean sensitiveContent) {
+        public void populate(
+                String key,
+                int rank,
+                boolean matchesInterruptionFilter,
+                int visibilityOverride,
+                int suppressedVisualEffects,
+                int importance,
+                CharSequence explanation,
+                String overrideGroupKey,
+                NotificationChannel channel,
+                ArrayList<String> overridePeople,
+                ArrayList<SnoozeCriterion> snoozeCriteria,
+                boolean showBadge,
+                int userSentiment,
+                boolean hidden,
+                long lastAudiblyAlertedMs,
+                boolean noisy,
+                ArrayList<Notification.Action> smartActions,
+                ArrayList<CharSequence> smartReplies,
+                boolean canBubble,
+                boolean isTextChanged,
+                boolean isConversation,
+                ShortcutInfo shortcutInfo,
+                int rankingAdjustment,
+                boolean isBubble,
+                int proposedImportance,
+                boolean sensitiveContent) {
             this.mKey = key;
             this.mRank = rank;
             this.mIsAmbient = importance < 2;
@@ -1014,7 +1110,34 @@ public abstract class NotificationListenerService extends Service {
             this.mSensitiveContent = sensitiveContent;
         }
 
-        public void populate(String key, int rank, boolean matchesInterruptionFilter, int visibilityOverride, int suppressedVisualEffects, int importance, CharSequence explanation, String overrideGroupKey, NotificationChannel channel, ArrayList<String> overridePeople, ArrayList<SnoozeCriterion> snoozeCriteria, boolean showBadge, int userSentiment, boolean hidden, long lastAudiblyAlertedMs, boolean noisy, ArrayList<Notification.Action> smartActions, ArrayList<CharSequence> smartReplies, boolean canBubble, boolean isTextChanged, boolean isConversation, ShortcutInfo shortcutInfo, int rankingAdjustment, boolean isBubble, int proposedImportance, boolean sensitiveContent, boolean ongoingActivityTurnedOn) {
+        public void populate(
+                String key,
+                int rank,
+                boolean matchesInterruptionFilter,
+                int visibilityOverride,
+                int suppressedVisualEffects,
+                int importance,
+                CharSequence explanation,
+                String overrideGroupKey,
+                NotificationChannel channel,
+                ArrayList<String> overridePeople,
+                ArrayList<SnoozeCriterion> snoozeCriteria,
+                boolean showBadge,
+                int userSentiment,
+                boolean hidden,
+                long lastAudiblyAlertedMs,
+                boolean noisy,
+                ArrayList<Notification.Action> smartActions,
+                ArrayList<CharSequence> smartReplies,
+                boolean canBubble,
+                boolean isTextChanged,
+                boolean isConversation,
+                ShortcutInfo shortcutInfo,
+                int rankingAdjustment,
+                boolean isBubble,
+                int proposedImportance,
+                boolean sensitiveContent,
+                boolean ongoingActivityTurnedOn) {
             this.mKey = key;
             this.mRank = rank;
             this.mIsAmbient = importance < 2;
@@ -1046,14 +1169,43 @@ public abstract class NotificationListenerService extends Service {
         }
 
         public Ranking withAudiblyAlertedInfo(Ranking previous) {
-            if (previous != null && previous.mLastAudiblyAlertedMs > 0 && this.mLastAudiblyAlertedMs <= 0) {
+            if (previous != null
+                    && previous.mLastAudiblyAlertedMs > 0
+                    && this.mLastAudiblyAlertedMs <= 0) {
                 this.mLastAudiblyAlertedMs = previous.mLastAudiblyAlertedMs;
             }
             return this;
         }
 
         public void populate(Ranking other) {
-            populate(other.mKey, other.mRank, other.mMatchesInterruptionFilter, other.mVisibilityOverride, other.mSuppressedVisualEffects, other.mImportance, other.mImportanceExplanation, other.mOverrideGroupKey, other.mChannel, other.mOverridePeople, other.mSnoozeCriteria, other.mShowBadge, other.mUserSentiment, other.mHidden, other.mLastAudiblyAlertedMs, other.mNoisy, other.mSmartActions, other.mSmartReplies, other.mCanBubble, other.mIsTextChanged, other.mIsConversation, other.mShortcutInfo, other.mRankingAdjustment, other.mIsBubble, other.mProposedImportance, other.mSensitiveContent, other.mIsOngoingActivityTurnedOn);
+            populate(
+                    other.mKey,
+                    other.mRank,
+                    other.mMatchesInterruptionFilter,
+                    other.mVisibilityOverride,
+                    other.mSuppressedVisualEffects,
+                    other.mImportance,
+                    other.mImportanceExplanation,
+                    other.mOverrideGroupKey,
+                    other.mChannel,
+                    other.mOverridePeople,
+                    other.mSnoozeCriteria,
+                    other.mShowBadge,
+                    other.mUserSentiment,
+                    other.mHidden,
+                    other.mLastAudiblyAlertedMs,
+                    other.mNoisy,
+                    other.mSmartActions,
+                    other.mSmartReplies,
+                    other.mCanBubble,
+                    other.mIsTextChanged,
+                    other.mIsConversation,
+                    other.mShortcutInfo,
+                    other.mRankingAdjustment,
+                    other.mIsBubble,
+                    other.mProposedImportance,
+                    other.mSensitiveContent,
+                    other.mIsOngoingActivityTurnedOn);
         }
 
         public static String importanceToString(int importance) {
@@ -1072,7 +1224,9 @@ public abstract class NotificationListenerService extends Service {
                 case 5:
                     return "HIGH";
                 default:
-                    return "UNKNOWN(" + String.valueOf(importance) + NavigationBarInflaterView.KEY_CODE_END;
+                    return "UNKNOWN("
+                            + String.valueOf(importance)
+                            + NavigationBarInflaterView.KEY_CODE_END;
             }
         }
 
@@ -1084,9 +1238,64 @@ public abstract class NotificationListenerService extends Service {
                 return false;
             }
             Ranking other = (Ranking) o;
-            if (Objects.equals(this.mKey, other.mKey) && Objects.equals(Integer.valueOf(this.mRank), Integer.valueOf(other.mRank)) && Objects.equals(Boolean.valueOf(this.mMatchesInterruptionFilter), Boolean.valueOf(other.mMatchesInterruptionFilter)) && Objects.equals(Integer.valueOf(this.mVisibilityOverride), Integer.valueOf(other.mVisibilityOverride)) && Objects.equals(Integer.valueOf(this.mSuppressedVisualEffects), Integer.valueOf(other.mSuppressedVisualEffects)) && Objects.equals(Integer.valueOf(this.mImportance), Integer.valueOf(other.mImportance)) && Objects.equals(this.mImportanceExplanation, other.mImportanceExplanation) && Objects.equals(this.mOverrideGroupKey, other.mOverrideGroupKey) && Objects.equals(this.mChannel, other.mChannel) && Objects.equals(this.mOverridePeople, other.mOverridePeople) && Objects.equals(this.mSnoozeCriteria, other.mSnoozeCriteria) && Objects.equals(Boolean.valueOf(this.mShowBadge), Boolean.valueOf(other.mShowBadge)) && Objects.equals(Integer.valueOf(this.mUserSentiment), Integer.valueOf(other.mUserSentiment)) && Objects.equals(Boolean.valueOf(this.mHidden), Boolean.valueOf(other.mHidden)) && Objects.equals(Long.valueOf(this.mLastAudiblyAlertedMs), Long.valueOf(other.mLastAudiblyAlertedMs)) && Objects.equals(Boolean.valueOf(this.mNoisy), Boolean.valueOf(other.mNoisy))) {
-                if ((this.mSmartActions == null ? 0 : this.mSmartActions.size()) == (other.mSmartActions == null ? 0 : other.mSmartActions.size()) && Objects.equals(this.mSmartReplies, other.mSmartReplies) && Objects.equals(Boolean.valueOf(this.mCanBubble), Boolean.valueOf(other.mCanBubble)) && Objects.equals(Boolean.valueOf(this.mIsTextChanged), Boolean.valueOf(other.mIsTextChanged)) && Objects.equals(Boolean.valueOf(this.mIsConversation), Boolean.valueOf(other.mIsConversation))) {
-                    if (Objects.equals(this.mShortcutInfo == null ? 0 : this.mShortcutInfo.getId(), other.mShortcutInfo == null ? 0 : other.mShortcutInfo.getId()) && Objects.equals(Integer.valueOf(this.mRankingAdjustment), Integer.valueOf(other.mRankingAdjustment)) && Objects.equals(Boolean.valueOf(this.mIsBubble), Boolean.valueOf(other.mIsBubble)) && Objects.equals(Integer.valueOf(this.mProposedImportance), Integer.valueOf(other.mProposedImportance)) && Objects.equals(Boolean.valueOf(this.mSensitiveContent), Boolean.valueOf(other.mSensitiveContent)) && Objects.equals(Boolean.valueOf(this.mIsOngoingActivityTurnedOn), Boolean.valueOf(other.mIsOngoingActivityTurnedOn))) {
+            if (Objects.equals(this.mKey, other.mKey)
+                    && Objects.equals(Integer.valueOf(this.mRank), Integer.valueOf(other.mRank))
+                    && Objects.equals(
+                            Boolean.valueOf(this.mMatchesInterruptionFilter),
+                            Boolean.valueOf(other.mMatchesInterruptionFilter))
+                    && Objects.equals(
+                            Integer.valueOf(this.mVisibilityOverride),
+                            Integer.valueOf(other.mVisibilityOverride))
+                    && Objects.equals(
+                            Integer.valueOf(this.mSuppressedVisualEffects),
+                            Integer.valueOf(other.mSuppressedVisualEffects))
+                    && Objects.equals(
+                            Integer.valueOf(this.mImportance), Integer.valueOf(other.mImportance))
+                    && Objects.equals(this.mImportanceExplanation, other.mImportanceExplanation)
+                    && Objects.equals(this.mOverrideGroupKey, other.mOverrideGroupKey)
+                    && Objects.equals(this.mChannel, other.mChannel)
+                    && Objects.equals(this.mOverridePeople, other.mOverridePeople)
+                    && Objects.equals(this.mSnoozeCriteria, other.mSnoozeCriteria)
+                    && Objects.equals(
+                            Boolean.valueOf(this.mShowBadge), Boolean.valueOf(other.mShowBadge))
+                    && Objects.equals(
+                            Integer.valueOf(this.mUserSentiment),
+                            Integer.valueOf(other.mUserSentiment))
+                    && Objects.equals(Boolean.valueOf(this.mHidden), Boolean.valueOf(other.mHidden))
+                    && Objects.equals(
+                            Long.valueOf(this.mLastAudiblyAlertedMs),
+                            Long.valueOf(other.mLastAudiblyAlertedMs))
+                    && Objects.equals(
+                            Boolean.valueOf(this.mNoisy), Boolean.valueOf(other.mNoisy))) {
+                if ((this.mSmartActions == null ? 0 : this.mSmartActions.size())
+                                == (other.mSmartActions == null ? 0 : other.mSmartActions.size())
+                        && Objects.equals(this.mSmartReplies, other.mSmartReplies)
+                        && Objects.equals(
+                                Boolean.valueOf(this.mCanBubble), Boolean.valueOf(other.mCanBubble))
+                        && Objects.equals(
+                                Boolean.valueOf(this.mIsTextChanged),
+                                Boolean.valueOf(other.mIsTextChanged))
+                        && Objects.equals(
+                                Boolean.valueOf(this.mIsConversation),
+                                Boolean.valueOf(other.mIsConversation))) {
+                    if (Objects.equals(
+                                    this.mShortcutInfo == null ? 0 : this.mShortcutInfo.getId(),
+                                    other.mShortcutInfo == null ? 0 : other.mShortcutInfo.getId())
+                            && Objects.equals(
+                                    Integer.valueOf(this.mRankingAdjustment),
+                                    Integer.valueOf(other.mRankingAdjustment))
+                            && Objects.equals(
+                                    Boolean.valueOf(this.mIsBubble),
+                                    Boolean.valueOf(other.mIsBubble))
+                            && Objects.equals(
+                                    Integer.valueOf(this.mProposedImportance),
+                                    Integer.valueOf(other.mProposedImportance))
+                            && Objects.equals(
+                                    Boolean.valueOf(this.mSensitiveContent),
+                                    Boolean.valueOf(other.mSensitiveContent))
+                            && Objects.equals(
+                                    Boolean.valueOf(this.mIsOngoingActivityTurnedOn),
+                                    Boolean.valueOf(other.mIsOngoingActivityTurnedOn))) {
                         return true;
                     }
                 }
@@ -1096,19 +1305,22 @@ public abstract class NotificationListenerService extends Service {
     }
 
     public static class RankingMap implements Parcelable {
-        public static final Parcelable.Creator<RankingMap> CREATOR = new Parcelable.Creator<RankingMap>() { // from class: android.service.notification.NotificationListenerService.RankingMap.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public RankingMap createFromParcel(Parcel source) {
-                return new RankingMap(source);
-            }
+        public static final Parcelable.Creator<RankingMap> CREATOR =
+                new Parcelable.Creator<
+                        RankingMap>() { // from class:
+                                        // android.service.notification.NotificationListenerService.RankingMap.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public RankingMap createFromParcel(Parcel source) {
+                        return new RankingMap(source);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public RankingMap[] newArray(int size) {
-                return new RankingMap[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public RankingMap[] newArray(int size) {
+                        return new RankingMap[size];
+                    }
+                };
         private ArrayList<String> mOrderedKeys;
         private ArrayMap<String, Ranking> mRankings;
 
@@ -1145,7 +1357,8 @@ public abstract class NotificationListenerService extends Service {
                 return false;
             }
             RankingMap other = (RankingMap) o;
-            if (this.mOrderedKeys.equals(other.mOrderedKeys) && this.mRankings.equals(other.mRankings)) {
+            if (this.mOrderedKeys.equals(other.mOrderedKeys)
+                    && this.mRankings.equals(other.mRankings)) {
                 return true;
             }
             return false;
@@ -1199,8 +1412,7 @@ public abstract class NotificationListenerService extends Service {
 
         @Override // android.os.Handler
         public void handleMessage(Message msg) {
-            if (!NotificationListenerService.this.isConnected) {
-            }
+            if (!NotificationListenerService.this.isConnected) {}
             switch (msg.what) {
                 case 1:
                     SomeArgs args = (SomeArgs) msg.obj;
@@ -1216,7 +1428,8 @@ public abstract class NotificationListenerService extends Service {
                     int reason = ((Integer) args2.arg3).intValue();
                     NotificationStats stats = (NotificationStats) args2.arg4;
                     args2.recycle();
-                    NotificationListenerService.this.onNotificationRemoved(sbn2, rankingMap2, stats, reason);
+                    NotificationListenerService.this.onNotificationRemoved(
+                            sbn2, rankingMap2, stats, reason);
                     break;
                 case 3:
                     NotificationListenerService.this.onListenerConnected();
@@ -1231,7 +1444,8 @@ public abstract class NotificationListenerService extends Service {
                     break;
                 case 6:
                     int interruptionFilter = msg.arg1;
-                    NotificationListenerService.this.onInterruptionFilterChanged(interruptionFilter);
+                    NotificationListenerService.this.onInterruptionFilterChanged(
+                            interruptionFilter);
                     break;
                 case 7:
                     SomeArgs args3 = (SomeArgs) msg.obj;
@@ -1240,7 +1454,8 @@ public abstract class NotificationListenerService extends Service {
                     NotificationChannel channel = (NotificationChannel) args3.arg3;
                     int modificationType = ((Integer) args3.arg4).intValue();
                     args3.recycle();
-                    NotificationListenerService.this.onNotificationChannelModified(pkgName, user, channel, modificationType);
+                    NotificationListenerService.this.onNotificationChannelModified(
+                            pkgName, user, channel, modificationType);
                     break;
                 case 8:
                     SomeArgs args4 = (SomeArgs) msg.obj;
@@ -1249,10 +1464,12 @@ public abstract class NotificationListenerService extends Service {
                     NotificationChannelGroup group = (NotificationChannelGroup) args4.arg3;
                     int modificationType2 = ((Integer) args4.arg4).intValue();
                     args4.recycle();
-                    NotificationListenerService.this.onNotificationChannelGroupModified(pkgName2, user2, group, modificationType2);
+                    NotificationListenerService.this.onNotificationChannelGroupModified(
+                            pkgName2, user2, group, modificationType2);
                     break;
                 case 9:
-                    NotificationListenerService.this.onSilentStatusBarIconsVisibilityChanged(((Boolean) msg.obj).booleanValue());
+                    NotificationListenerService.this.onSilentStatusBarIconsVisibilityChanged(
+                            ((Boolean) msg.obj).booleanValue());
                     break;
             }
         }

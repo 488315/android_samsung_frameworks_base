@@ -13,6 +13,7 @@ import android.security.KeyStoreAuthorization;
 import android.util.Pair;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.BinaryTransparencyService$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
@@ -20,11 +21,10 @@ import com.android.server.NandswapManager$$ExternalSyntheticOutline0;
 import com.android.server.VaultKeeperService$$ExternalSyntheticOutline0;
 import com.android.server.alarm.GmsAlarmManager$$ExternalSyntheticOutline0;
 import com.android.server.asks.ASKSManagerService$$ExternalSyntheticOutline0;
-import com.android.server.biometrics.BiometricService;
-import com.android.server.biometrics.SemBioLoggingManager;
 import com.android.server.biometrics.log.BiometricContext;
 import com.android.server.biometrics.log.BiometricFrameworkStatsLogger;
 import com.android.server.biometrics.log.OperationContextExt;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -76,10 +76,28 @@ public final class AuthSession implements IBinder.DeathRecipient {
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
-    public interface ClientDeathReceiver {
-    }
+    public interface ClientDeathReceiver {}
 
-    public AuthSession(Context context, BiometricContext biometricContext, SemBiometricSysUiWrapper semBiometricSysUiWrapper, IBiometricSysuiReceiver iBiometricSysuiReceiver, KeyStoreAuthorization keyStoreAuthorization, Random random, ClientDeathReceiver clientDeathReceiver, PreAuthInfo preAuthInfo, IBinder iBinder, long j, long j2, int i, IBiometricSensorReceiver iBiometricSensorReceiver, IBiometricServiceReceiver iBiometricServiceReceiver, String str, PromptInfo promptInfo, boolean z, List list, BiometricFrameworkStatsLogger biometricFrameworkStatsLogger) {
+    public AuthSession(
+            Context context,
+            BiometricContext biometricContext,
+            SemBiometricSysUiWrapper semBiometricSysUiWrapper,
+            IBiometricSysuiReceiver iBiometricSysuiReceiver,
+            KeyStoreAuthorization keyStoreAuthorization,
+            Random random,
+            ClientDeathReceiver clientDeathReceiver,
+            PreAuthInfo preAuthInfo,
+            IBinder iBinder,
+            long j,
+            long j2,
+            int i,
+            IBiometricSensorReceiver iBiometricSensorReceiver,
+            IBiometricServiceReceiver iBiometricServiceReceiver,
+            String str,
+            PromptInfo promptInfo,
+            boolean z,
+            List list,
+            BiometricFrameworkStatsLogger biometricFrameworkStatsLogger) {
         Slog.d("BiometricService/AuthSession", "Creating AuthSession with: " + preAuthInfo);
         this.mContext = context;
         this.mBiometricContext = biometricContext;
@@ -100,16 +118,29 @@ public final class AuthSession implements IBinder.DeathRecipient {
         this.mDebugEnabled = z;
         this.mCancelled = false;
         this.mBiometricFrameworkStatsLogger = biometricFrameworkStatsLogger;
-        this.mOperationContext = new OperationContextExt(new OperationContext(), true, 0, preAuthInfo.mIsMandatoryBiometricsAuthentication);
-        this.mBiometricManager = (BiometricManager) context.getSystemService(BiometricManager.class);
-        this.mSfpsSensorIds = list.stream().filter(new AuthSession$$ExternalSyntheticLambda0()).map(new AuthSession$$ExternalSyntheticLambda1(0)).toList();
+        this.mOperationContext =
+                new OperationContextExt(
+                        new OperationContext(),
+                        true,
+                        0,
+                        preAuthInfo.mIsMandatoryBiometricsAuthentication);
+        this.mBiometricManager =
+                (BiometricManager) context.getSystemService(BiometricManager.class);
+        this.mSfpsSensorIds =
+                list.stream()
+                        .filter(new AuthSession$$ExternalSyntheticLambda0())
+                        .map(new AuthSession$$ExternalSyntheticLambda1(0))
+                        .toList();
         try {
             iBiometricServiceReceiver.asBinder().linkToDeath(this, 0);
         } catch (RemoteException unused) {
             Slog.w("BiometricService/AuthSession", "Unable to link to death");
         }
         for (BiometricSensor biometricSensor : this.mPreAuthInfo.eligibleSensors) {
-            GmsAlarmManager$$ExternalSyntheticOutline0.m(new StringBuilder("set to unknown state sensor: "), biometricSensor.id, "BiometricService/AuthSession");
+            GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                    new StringBuilder("set to unknown state sensor: "),
+                    biometricSensor.id,
+                    "BiometricService/AuthSession");
             biometricSensor.mSensorState = 0;
             biometricSensor.mCookie = 0;
         }
@@ -117,8 +148,17 @@ public final class AuthSession implements IBinder.DeathRecipient {
         SemBiometricSysUiWrapper semBiometricSysUiWrapper2 = this.mStatusBarService;
         semBiometricSysUiWrapper2.getClass();
         if (iBiometricSysuiReceiver instanceof BiometricService.AnonymousClass2) {
-            BiometricService.AnonymousClass2 anonymousClass2 = (BiometricService.AnonymousClass2) iBiometricSysuiReceiver;
-            ((HashMap) semBiometricSysUiWrapper2.mSessions).put(Long.valueOf(j), new Pair(Integer.valueOf(semBiometricSysUiWrapper2.mSysUiManager.openSession(iBinder.toString() + ":" + j, anonymousClass2.mSysUiListener)), anonymousClass2));
+            BiometricService.AnonymousClass2 anonymousClass2 =
+                    (BiometricService.AnonymousClass2) iBiometricSysuiReceiver;
+            ((HashMap) semBiometricSysUiWrapper2.mSessions)
+                    .put(
+                            Long.valueOf(j),
+                            new Pair(
+                                    Integer.valueOf(
+                                            semBiometricSysUiWrapper2.mSysUiManager.openSession(
+                                                    iBinder.toString() + ":" + j,
+                                                    anonymousClass2.mSysUiListener)),
+                                    anonymousClass2));
         }
         SemBioLoggingManager semBioLoggingManager = SemBioLoggingManager.get();
         semBioLoggingManager.getClass();
@@ -136,21 +176,30 @@ public final class AuthSession implements IBinder.DeathRecipient {
         int i = 0;
         for (BiometricSensor biometricSensor : this.mPreAuthInfo.eligibleSensors) {
             if (biometricSensor.mSensorState == 1) {
-                Slog.d("BiometricService/PreAuthInfo", "Sensor ID: " + biometricSensor.id + " Waiting for cookie: " + biometricSensor.mCookie);
+                Slog.d(
+                        "BiometricService/PreAuthInfo",
+                        "Sensor ID: "
+                                + biometricSensor.id
+                                + " Waiting for cookie: "
+                                + biometricSensor.mCookie);
                 i++;
             }
         }
-        AnyMotionDetector$$ExternalSyntheticOutline0.m(i, "Remaining cookies: ", "BiometricService/AuthSession");
+        AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                i, "Remaining cookies: ", "BiometricService/AuthSession");
         return i == 0;
     }
 
     @Override // android.os.IBinder.DeathRecipient
     public final void binderDied() {
         Slog.e("BiometricService/AuthSession", "Binder died, session: " + this);
-        BiometricService$$ExternalSyntheticLambda3 biometricService$$ExternalSyntheticLambda3 = (BiometricService$$ExternalSyntheticLambda3) this.mClientDeathReceiver;
+        BiometricService$$ExternalSyntheticLambda3 biometricService$$ExternalSyntheticLambda3 =
+                (BiometricService$$ExternalSyntheticLambda3) this.mClientDeathReceiver;
         BiometricService biometricService = biometricService$$ExternalSyntheticLambda3.f$0;
         biometricService.getClass();
-        biometricService.mHandler.post(new BiometricService$$ExternalSyntheticLambda4(0, biometricService$$ExternalSyntheticLambda3.f$1, biometricService));
+        biometricService.mHandler.post(
+                new BiometricService$$ExternalSyntheticLambda4(
+                        0, biometricService$$ExternalSyntheticLambda3.f$1, biometricService));
     }
 
     public final void cancelAllSensors() {
@@ -161,7 +210,9 @@ public final class AuthSession implements IBinder.DeathRecipient {
         for (BiometricSensor biometricSensor : this.mPreAuthInfo.eligibleSensors) {
             try {
                 if (((Boolean) function.apply(biometricSensor)).booleanValue()) {
-                    Slog.d("BiometricService/AuthSession", "Cancelling sensorId: " + biometricSensor.id);
+                    Slog.d(
+                            "BiometricService/AuthSession",
+                            "Cancelling sensorId: " + biometricSensor.id);
                     IBinder iBinder = this.mToken;
                     String str = this.mOpPackageName;
                     long j = this.mRequestId;
@@ -179,18 +230,21 @@ public final class AuthSession implements IBinder.DeathRecipient {
     public final void destroy() {
         SemBiometricSysUiWrapper semBiometricSysUiWrapper = this.mStatusBarService;
         long j = this.mRequestId;
-        semBiometricSysUiWrapper.mHandler.removeCallbacks(semBiometricSysUiWrapper.mShowDialogWatchdog);
+        semBiometricSysUiWrapper.mHandler.removeCallbacks(
+                semBiometricSysUiWrapper.mShowDialogWatchdog);
         Pair pair = (Pair) ((HashMap) semBiometricSysUiWrapper.mSessions).get(Long.valueOf(j));
         if (pair == null) {
             Slog.w("SemBiometricSysUiWrapper", "closeSession: no session info with " + j);
         } else {
             ((HashMap) semBiometricSysUiWrapper.mSessions).remove(Long.valueOf(j));
-            semBiometricSysUiWrapper.mSysUiManager.closeSession(((Integer) pair.first).intValue(), 1000L);
+            semBiometricSysUiWrapper.mSysUiManager.closeSession(
+                    ((Integer) pair.first).intValue(), 1000L);
         }
         SemBioLoggingManager semBioLoggingManager = SemBioLoggingManager.get();
         int i = (int) this.mRequestId;
         int i2 = this.mErrorEscrow;
-        SemBioLoggingManager.LoggingInfo loggingInfo = (SemBioLoggingManager.LoggingInfo) semBioLoggingManager.mBpLoggingInfo.get(i);
+        SemBioLoggingManager.LoggingInfo loggingInfo =
+                (SemBioLoggingManager.LoggingInfo) semBioLoggingManager.mBpLoggingInfo.get(i);
         if (loggingInfo != null) {
             loggingInfo.mResultTime = System.currentTimeMillis();
             loggingInfo.mResult = "E";
@@ -198,7 +252,8 @@ public final class AuthSession implements IBinder.DeathRecipient {
             synchronized (semBioLoggingManager) {
                 try {
                     semBioLoggingManager.mBpAuthLogList.add(loggingInfo.toDumpFormat());
-                    if (semBioLoggingManager.mBpAuthLogList.size() > SemBioLoggingManager.LOG_ARRAY_SIZE) {
+                    if (semBioLoggingManager.mBpAuthLogList.size()
+                            > SemBioLoggingManager.LOG_ARRAY_SIZE) {
                         semBioLoggingManager.mBpAuthLogList.remove(0);
                     }
                 } catch (Throwable th) {
@@ -216,7 +271,15 @@ public final class AuthSession implements IBinder.DeathRecipient {
             this.mState = 9;
             int[] iArr = new int[0];
             this.mSensors = iArr;
-            this.mStatusBarService.showAuthenticationDialog(this.mPromptInfo, iArr, true, false, this.mUserId, this.mOperationId, this.mOpPackageName, this.mRequestId);
+            this.mStatusBarService.showAuthenticationDialog(
+                    this.mPromptInfo,
+                    iArr,
+                    true,
+                    false,
+                    this.mUserId,
+                    this.mOperationId,
+                    this.mOpPackageName,
+                    this.mRequestId);
             return;
         }
         if (this.mPreAuthInfo.eligibleSensors.isEmpty()) {
@@ -244,7 +307,10 @@ public final class AuthSession implements IBinder.DeathRecipient {
     }
 
     public final boolean hasAuthenticatedAndConfirmed() {
-        if (((this.mPromptInfo.semGetPrivilegedFlag() & 1) == 0 && (this.mPromptInfo.semGetPrivilegedFlag() & 64) == 0) ? false : true) {
+        if (((this.mPromptInfo.semGetPrivilegedFlag() & 1) == 0
+                        && (this.mPromptInfo.semGetPrivilegedFlag() & 64) == 0)
+                ? false
+                : true) {
             return false;
         }
         return this.mAuthenticatedSensorId != -1 && this.mState == 7;
@@ -252,22 +318,31 @@ public final class AuthSession implements IBinder.DeathRecipient {
 
     public final boolean isConfirmationRequired(BiometricSensor biometricSensor) {
         boolean booleanValue;
-        BiometricService.BiometricServiceWrapper.AnonymousClass1 anonymousClass1 = (BiometricService.BiometricServiceWrapper.AnonymousClass1) biometricSensor;
+        BiometricService.BiometricServiceWrapper.AnonymousClass1 anonymousClass1 =
+                (BiometricService.BiometricServiceWrapper.AnonymousClass1) biometricSensor;
         anonymousClass1.getClass();
         boolean z = Utils.DEBUG;
         int i = anonymousClass1.modality;
         if (i == 4 || i == 8) {
             int i2 = this.mUserId;
-            BiometricService.BiometricServiceWrapper.AnonymousClass1 anonymousClass12 = (BiometricService.BiometricServiceWrapper.AnonymousClass1) biometricSensor;
-            BiometricService.SettingObserver settingObserver = BiometricService.this.mSettingObserver;
+            BiometricService.BiometricServiceWrapper.AnonymousClass1 anonymousClass12 =
+                    (BiometricService.BiometricServiceWrapper.AnonymousClass1) biometricSensor;
+            BiometricService.SettingObserver settingObserver =
+                    BiometricService.this.mSettingObserver;
             if (anonymousClass12.modality != 8) {
                 settingObserver.getClass();
                 booleanValue = false;
             } else {
-                if (!((HashMap) settingObserver.mFaceAlwaysRequireConfirmation).containsKey(Integer.valueOf(i2))) {
-                    settingObserver.onChange(true, settingObserver.FACE_UNLOCK_ALWAYS_REQUIRE_CONFIRMATION, i2);
+                if (!((HashMap) settingObserver.mFaceAlwaysRequireConfirmation)
+                        .containsKey(Integer.valueOf(i2))) {
+                    settingObserver.onChange(
+                            true, settingObserver.FACE_UNLOCK_ALWAYS_REQUIRE_CONFIRMATION, i2);
                 }
-                booleanValue = ((Boolean) ((HashMap) settingObserver.mFaceAlwaysRequireConfirmation).get(Integer.valueOf(i2))).booleanValue();
+                booleanValue =
+                        ((Boolean)
+                                        ((HashMap) settingObserver.mFaceAlwaysRequireConfirmation)
+                                                .get(Integer.valueOf(i2)))
+                                .booleanValue();
             }
             if (booleanValue || this.mPreAuthInfo.confirmationRequested) {
                 return true;
@@ -304,7 +379,8 @@ public final class AuthSession implements IBinder.DeathRecipient {
 
     public final boolean onErrorReceived(int i, int i2, int i3, int i4) {
         boolean z;
-        ASKSManagerService$$ExternalSyntheticOutline0.m(i, i3, "onErrorReceived sensor: ", " error: ", "BiometricService/AuthSession");
+        ASKSManagerService$$ExternalSyntheticOutline0.m(
+                i, i3, "onErrorReceived sensor: ", " error: ", "BiometricService/AuthSession");
         Iterator it = this.mPreAuthInfo.eligibleSensors.iterator();
         while (true) {
             if (!it.hasNext()) {
@@ -317,17 +393,24 @@ public final class AuthSession implements IBinder.DeathRecipient {
             }
         }
         if (!z) {
-            NandswapManager$$ExternalSyntheticOutline0.m(i2, "Unknown/expired cookie: ", "BiometricService/AuthSession");
+            NandswapManager$$ExternalSyntheticOutline0.m(
+                    i2, "Unknown/expired cookie: ", "BiometricService/AuthSession");
             return false;
         }
         for (BiometricSensor biometricSensor : this.mPreAuthInfo.eligibleSensors) {
             if (biometricSensor.mSensorState == 3 && i2 == biometricSensor.mCookie) {
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder("Sensor("), biometricSensor.id, ") now in STATE_STOPPED", "BiometricService/Sensor");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("Sensor("),
+                        biometricSensor.id,
+                        ") now in STATE_STOPPED",
+                        "BiometricService/Sensor");
                 biometricSensor.mSensorState = 5;
             }
         }
         if (this.mAuthenticatedSensorId != -1) {
-            Slog.d("BiometricService/AuthSession", "onErrorReceived after successful auth (ignoring)");
+            Slog.d(
+                    "BiometricService/AuthSession",
+                    "onErrorReceived after successful auth (ignoring)");
             return false;
         }
         boolean z2 = i3 == 7 || i3 == 9;
@@ -337,7 +420,10 @@ public final class AuthSession implements IBinder.DeathRecipient {
         this.mErrorEscrow = i3;
         this.mVendorCodeEscrow = i4;
         int sensorIdToModality = sensorIdToModality(i);
-        DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("onErrorReceived: "), this.mState, "BiometricService/AuthSession");
+        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                new StringBuilder("onErrorReceived: "),
+                this.mState,
+                "BiometricService/AuthSession");
         int i5 = this.mState;
         if (i5 != 1) {
             if (i5 != 2 && i5 != 3) {
@@ -348,13 +434,19 @@ public final class AuthSession implements IBinder.DeathRecipient {
                 }
                 if (i5 != 6) {
                     if (i5 == 9) {
-                        DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("Biometric canceled, ignoring from state: "), this.mState, "BiometricService/AuthSession");
+                        DeviceIdleController$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("Biometric canceled, ignoring from state: "),
+                                this.mState,
+                                "BiometricService/AuthSession");
                     } else {
                         if (i5 == 10) {
                             this.mStatusBarService.hideAuthenticationDialog(this.mRequestId);
                             return true;
                         }
-                        VaultKeeperService$$ExternalSyntheticOutline0.m(new StringBuilder("Unhandled error state, mState: "), this.mState, "BiometricService/AuthSession");
+                        VaultKeeperService$$ExternalSyntheticOutline0.m(
+                                new StringBuilder("Unhandled error state, mState: "),
+                                this.mState,
+                                "BiometricService/AuthSession");
                     }
                 }
             }
@@ -383,7 +475,15 @@ public final class AuthSession implements IBinder.DeathRecipient {
             this.mState = 9;
             int[] iArr = new int[0];
             this.mSensors = iArr;
-            this.mStatusBarService.showAuthenticationDialog(this.mPromptInfo, iArr, true, false, this.mUserId, this.mOperationId, this.mOpPackageName, this.mRequestId);
+            this.mStatusBarService.showAuthenticationDialog(
+                    this.mPromptInfo,
+                    iArr,
+                    true,
+                    false,
+                    this.mUserId,
+                    this.mOperationId,
+                    this.mOpPackageName,
+                    this.mRequestId);
         }
         return false;
     }
@@ -393,7 +493,8 @@ public final class AuthSession implements IBinder.DeathRecipient {
         Iterator it = this.mPreAuthInfo.eligibleSensors.iterator();
         while (true) {
             if (!it.hasNext()) {
-                NandswapManager$$ExternalSyntheticOutline0.m(i, "Unknown sensor: ", "BiometricService/AuthSession");
+                NandswapManager$$ExternalSyntheticOutline0.m(
+                        i, "Unknown sensor: ", "BiometricService/AuthSession");
                 i2 = 0;
                 break;
             }
@@ -417,14 +518,18 @@ public final class AuthSession implements IBinder.DeathRecipient {
                 return biometricSensor.modality;
             }
         }
-        NandswapManager$$ExternalSyntheticOutline0.m(i, "Unknown sensor: ", "BiometricService/AuthSession");
+        NandswapManager$$ExternalSyntheticOutline0.m(
+                i, "Unknown sensor: ", "BiometricService/AuthSession");
         return 0;
     }
 
-    public final void setSensorsToStateWaitingForCookie(BiometricSensor biometricSensor, boolean z) {
+    public final void setSensorsToStateWaitingForCookie(
+            BiometricSensor biometricSensor, boolean z) {
         int i = biometricSensor.mSensorState;
         if (z && i != 5 && i != 4) {
-            Slog.d("BiometricService/AuthSession", "Skip retry because sensor: " + biometricSensor.id + " is: " + i);
+            Slog.d(
+                    "BiometricService/AuthSession",
+                    "Skip retry because sensor: " + biometricSensor.id + " is: " + i);
             return;
         }
         if (z) {
@@ -438,19 +543,31 @@ public final class AuthSession implements IBinder.DeathRecipient {
         IBiometricSensorReceiver iBiometricSensorReceiver = this.mSensorReceiver;
         String str = this.mOpPackageName;
         long j2 = this.mRequestId;
-        boolean isAllowBackgroundAuthentication = this.mPromptInfo.isAllowBackgroundAuthentication();
+        boolean isAllowBackgroundAuthentication =
+                this.mPromptInfo.isAllowBackgroundAuthentication();
         boolean isForLegacyFingerprintManager = this.mPromptInfo.isForLegacyFingerprintManager();
         boolean z2 = this.mOperationContext.mIsMandatoryBiometrics;
         biometricSensor.mCookie = nextInt;
-        biometricSensor.impl.prepareForAuthentication(isConfirmationRequired, iBinder, j, i2, iBiometricSensorReceiver, str, j2, nextInt, isAllowBackgroundAuthentication, isForLegacyFingerprintManager, z2);
+        biometricSensor.impl.prepareForAuthentication(
+                isConfirmationRequired,
+                iBinder,
+                j,
+                i2,
+                iBiometricSensorReceiver,
+                str,
+                j2,
+                nextInt,
+                isAllowBackgroundAuthentication,
+                isForLegacyFingerprintManager,
+                z2);
         biometricSensor.mSensorState = 1;
         this.mCurrentSensor = biometricSensor;
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:11:0x002e, code lost:
-    
-        r21.mState = 5;
-     */
+
+       r21.mState = 5;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -516,21 +633,28 @@ public final class AuthSession implements IBinder.DeathRecipient {
         L74:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.biometrics.AuthSession.setSensorsToStateWaitingForCookie(boolean):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.biometrics.AuthSession.setSensorsToStateWaitingForCookie(boolean):void");
     }
 
     public final void startAllPreparedSensors(Function function) {
         for (BiometricSensor biometricSensor : this.mPreAuthInfo.eligibleSensors) {
             if (((Boolean) function.apply(biometricSensor)).booleanValue()) {
                 try {
-                    Slog.v("BiometricService/AuthSession", "Starting sensor: " + biometricSensor.id);
+                    Slog.v(
+                            "BiometricService/AuthSession",
+                            "Starting sensor: " + biometricSensor.id);
                     int i = biometricSensor.mCookie;
                     if (i != 0) {
                         biometricSensor.impl.startPreparedClient(i);
                         biometricSensor.mSensorState = 3;
                     }
                 } catch (RemoteException e) {
-                    Slog.e("BiometricService/AuthSession", "Unable to start prepared client, sensor: " + biometricSensor, e);
+                    Slog.e(
+                            "BiometricService/AuthSession",
+                            "Unable to start prepared client, sensor: " + biometricSensor,
+                            e);
                 }
             }
         }
@@ -555,6 +679,15 @@ public final class AuthSession implements IBinder.DeathRecipient {
     }
 
     public final String toString() {
-        return "State: " + this.mState + ", cancelled: " + this.mCancelled + ", isCrypto: " + isCrypto() + ", PreAuthInfo: " + this.mPreAuthInfo + ", requestId: " + this.mRequestId;
+        return "State: "
+                + this.mState
+                + ", cancelled: "
+                + this.mCancelled
+                + ", isCrypto: "
+                + isCrypto()
+                + ", PreAuthInfo: "
+                + this.mPreAuthInfo
+                + ", requestId: "
+                + this.mRequestId;
     }
 }

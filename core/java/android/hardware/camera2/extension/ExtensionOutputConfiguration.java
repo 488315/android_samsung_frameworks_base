@@ -1,7 +1,9 @@
 package android.hardware.camera2.extension;
 
 import android.annotation.SystemApi;
+
 import com.android.internal.camera.flags.Flags;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +15,11 @@ public class ExtensionOutputConfiguration {
     private final int mSurfaceGroupId;
     private final List<CameraOutputSurface> mSurfaces;
 
-    public ExtensionOutputConfiguration(List<CameraOutputSurface> outputs, int outputConfigId, String physicalCameraId, int surfaceGroupId) {
+    public ExtensionOutputConfiguration(
+            List<CameraOutputSurface> outputs,
+            int outputConfigId,
+            String physicalCameraId,
+            int surfaceGroupId) {
         this.mSurfaces = outputs;
         this.mPhysicalCameraId = physicalCameraId;
         this.mOutputConfigId = outputConfigId;

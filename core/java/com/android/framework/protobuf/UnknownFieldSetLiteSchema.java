@@ -4,9 +4,9 @@ import java.io.IOException;
 
 @CheckReturnValue
 /* loaded from: classes3.dex */
-class UnknownFieldSetLiteSchema extends UnknownFieldSchema<UnknownFieldSetLite, UnknownFieldSetLite> {
-    UnknownFieldSetLiteSchema() {
-    }
+class UnknownFieldSetLiteSchema
+        extends UnknownFieldSchema<UnknownFieldSetLite, UnknownFieldSetLite> {
+    UnknownFieldSetLiteSchema() {}
 
     @Override // com.android.framework.protobuf.UnknownFieldSchema
     boolean shouldDiscardUnknownFields(Reader reader) {

@@ -5,10 +5,10 @@ import android.annotation.SystemApi;
 import android.app.assist.AssistStructure;
 import android.content.ComponentName;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.service.autofill.augmented.AugmentedAutofillService;
 import android.view.autofill.AutofillId;
 import android.view.autofill.AutofillValue;
 import android.view.inputmethod.InlineSuggestionsRequest;
+
 import com.android.internal.util.AnnotationValidations;
 
 @SystemApi
@@ -42,12 +42,19 @@ public final class FillRequest {
     }
 
     String proxyToString() {
-        return "FillRequest[act=" + getActivityComponent().flattenToShortString() + ", id=" + this.mProxy.getFocusedId() + NavigationBarInflaterView.SIZE_MOD_END;
+        return "FillRequest[act="
+                + getActivityComponent().flattenToShortString()
+                + ", id="
+                + this.mProxy.getFocusedId()
+                + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
-    public FillRequest(AugmentedAutofillService.AutofillProxy proxy, InlineSuggestionsRequest inlineSuggestionsRequest) {
+    public FillRequest(
+            AugmentedAutofillService.AutofillProxy proxy,
+            InlineSuggestionsRequest inlineSuggestionsRequest) {
         this.mProxy = proxy;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mProxy);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mProxy);
         this.mInlineSuggestionsRequest = inlineSuggestionsRequest;
     }
 
@@ -56,10 +63,13 @@ public final class FillRequest {
     }
 
     public String toString() {
-        return "FillRequest { proxy = " + proxyToString() + ", inlineSuggestionsRequest = " + this.mInlineSuggestionsRequest + " }";
+        return "FillRequest { proxy = "
+                + proxyToString()
+                + ", inlineSuggestionsRequest = "
+                + this.mInlineSuggestionsRequest
+                + " }";
     }
 
     @Deprecated
-    private void __metadata() {
-    }
+    private void __metadata() {}
 }

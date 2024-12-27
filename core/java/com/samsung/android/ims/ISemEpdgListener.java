@@ -22,24 +22,22 @@ public interface ISemEpdgListener extends IInterface {
 
     public static class Default implements ISemEpdgListener {
         @Override // com.samsung.android.ims.ISemEpdgListener
-        public void onEpdgAvailable(int phoneId, boolean isAvailable, int wifiState) throws RemoteException {
-        }
+        public void onEpdgAvailable(int phoneId, boolean isAvailable, int wifiState)
+                throws RemoteException {}
 
         @Override // com.samsung.android.ims.ISemEpdgListener
-        public void onHandoverResult(int phoneId, int isL2WHandover, int result, String apnType) throws RemoteException {
-        }
+        public void onHandoverResult(int phoneId, int isL2WHandover, int result, String apnType)
+                throws RemoteException {}
 
         @Override // com.samsung.android.ims.ISemEpdgListener
-        public void onIpsecConnection(int phoneId, String apnType, int ikeError, int throttleCount) throws RemoteException {
-        }
+        public void onIpsecConnection(int phoneId, String apnType, int ikeError, int throttleCount)
+                throws RemoteException {}
 
         @Override // com.samsung.android.ims.ISemEpdgListener
-        public void onIpsecDisconnection(int phoneId, String apnType) throws RemoteException {
-        }
+        public void onIpsecDisconnection(int phoneId, String apnType) throws RemoteException {}
 
         @Override // com.samsung.android.ims.ISemEpdgListener
-        public void onEpdgShowPopup(int phoneId, int popupType) throws RemoteException {
-        }
+        public void onEpdgShowPopup(int phoneId, int popupType) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -47,7 +45,7 @@ public interface ISemEpdgListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISemEpdgListener {
+    public abstract static class Stub extends Binder implements ISemEpdgListener {
         static final int TRANSACTION_onEpdgAvailable = 1;
         static final int TRANSACTION_onEpdgShowPopup = 5;
         static final int TRANSACTION_onHandoverResult = 2;
@@ -97,7 +95,8 @@ public interface ISemEpdgListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ISemEpdgListener.DESCRIPTOR);
             }
@@ -163,7 +162,8 @@ public interface ISemEpdgListener extends IInterface {
             }
 
             @Override // com.samsung.android.ims.ISemEpdgListener
-            public void onEpdgAvailable(int phoneId, boolean isAvailable, int wifiState) throws RemoteException {
+            public void onEpdgAvailable(int phoneId, boolean isAvailable, int wifiState)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemEpdgListener.DESCRIPTOR);
@@ -177,7 +177,8 @@ public interface ISemEpdgListener extends IInterface {
             }
 
             @Override // com.samsung.android.ims.ISemEpdgListener
-            public void onHandoverResult(int phoneId, int isL2WHandover, int result, String apnType) throws RemoteException {
+            public void onHandoverResult(int phoneId, int isL2WHandover, int result, String apnType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemEpdgListener.DESCRIPTOR);
@@ -192,7 +193,9 @@ public interface ISemEpdgListener extends IInterface {
             }
 
             @Override // com.samsung.android.ims.ISemEpdgListener
-            public void onIpsecConnection(int phoneId, String apnType, int ikeError, int throttleCount) throws RemoteException {
+            public void onIpsecConnection(
+                    int phoneId, String apnType, int ikeError, int throttleCount)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(ISemEpdgListener.DESCRIPTOR);

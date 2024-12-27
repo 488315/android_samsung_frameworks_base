@@ -4,12 +4,14 @@ import com.android.internal.util.FunctionalUtils;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
-public final /* synthetic */ class KnoxCustomManagerService$$ExternalSyntheticLambda12 implements FunctionalUtils.ThrowingSupplier {
+public final /* synthetic */ class KnoxCustomManagerService$$ExternalSyntheticLambda12
+        implements FunctionalUtils.ThrowingSupplier {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ KnoxCustomManagerService f$0;
     public final /* synthetic */ boolean f$1;
 
-    public /* synthetic */ KnoxCustomManagerService$$ExternalSyntheticLambda12(KnoxCustomManagerService knoxCustomManagerService, boolean z, int i) {
+    public /* synthetic */ KnoxCustomManagerService$$ExternalSyntheticLambda12(
+            KnoxCustomManagerService knoxCustomManagerService, boolean z, int i) {
         this.$r8$classId = i;
         this.f$0 = knoxCustomManagerService;
         this.f$1 = z;
@@ -76,7 +78,8 @@ public final /* synthetic */ class KnoxCustomManagerService$$ExternalSyntheticLa
                 KnoxCustomManagerService knoxCustomManagerService12 = this.f$0;
                 boolean z12 = this.f$1;
                 String str12 = KnoxCustomManagerService.TAG;
-                return knoxCustomManagerService12.lambda$setPowerDialogCustomItemsStateLocal$145(z12);
+                return knoxCustomManagerService12.lambda$setPowerDialogCustomItemsStateLocal$145(
+                        z12);
             case 12:
                 KnoxCustomManagerService knoxCustomManagerService13 = this.f$0;
                 boolean z13 = this.f$1;
@@ -86,7 +89,8 @@ public final /* synthetic */ class KnoxCustomManagerService$$ExternalSyntheticLa
                 KnoxCustomManagerService knoxCustomManagerService14 = this.f$0;
                 boolean z14 = this.f$1;
                 String str14 = KnoxCustomManagerService.TAG;
-                return knoxCustomManagerService14.lambda$setChargerConnectionSoundEnabledState$62(z14);
+                return knoxCustomManagerService14.lambda$setChargerConnectionSoundEnabledState$62(
+                        z14);
             default:
                 KnoxCustomManagerService knoxCustomManagerService15 = this.f$0;
                 boolean z15 = this.f$1;

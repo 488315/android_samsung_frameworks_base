@@ -6,26 +6,30 @@ import android.app.slice.Slice;
 import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import com.android.internal.util.AnnotationValidations;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class AuthenticationEntry implements Parcelable {
-    public static final Parcelable.Creator<AuthenticationEntry> CREATOR = new Parcelable.Creator<AuthenticationEntry>() { // from class: android.credentials.selection.AuthenticationEntry.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AuthenticationEntry createFromParcel(Parcel in) {
-            return new AuthenticationEntry(in);
-        }
+    public static final Parcelable.Creator<AuthenticationEntry> CREATOR =
+            new Parcelable.Creator<AuthenticationEntry>() { // from class:
+                // android.credentials.selection.AuthenticationEntry.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AuthenticationEntry createFromParcel(Parcel in) {
+                    return new AuthenticationEntry(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AuthenticationEntry[] newArray(int size) {
-            return new AuthenticationEntry[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AuthenticationEntry[] newArray(int size) {
+                    return new AuthenticationEntry[size];
+                }
+            };
     public static final int STATUS_LOCKED = 0;
     public static final int STATUS_UNLOCKED_BUT_EMPTY_LESS_RECENT = 1;
     public static final int STATUS_UNLOCKED_BUT_EMPTY_MOST_RECENT = 2;
@@ -36,8 +40,7 @@ public final class AuthenticationEntry implements Parcelable {
     private final String mSubkey;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Status {
-    }
+    public @interface Status {}
 
     private AuthenticationEntry(Parcel in) {
         this.mKey = in.readString8();
@@ -45,9 +48,12 @@ public final class AuthenticationEntry implements Parcelable {
         this.mStatus = in.readInt();
         this.mSlice = (Slice) in.readTypedObject(Slice.CREATOR);
         this.mFrameworkExtrasIntent = (Intent) in.readTypedObject(Intent.CREATOR);
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mKey);
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSubkey);
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSlice);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mKey);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSubkey);
+        AnnotationValidations.validate(
+                (Class<NonNull>) NonNull.class, (NonNull) null, (Object) this.mSlice);
     }
 
     public AuthenticationEntry(String key, String subkey, Slice slice, int status, Intent intent) {

@@ -3,26 +3,28 @@ package android.view;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.MergedConfiguration;
-import android.view.InsetsSourceControl;
 import android.window.ActivityWindowInfo;
 import android.window.ClientWindowFrames;
+
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
 public final class WindowRelayoutResult implements Parcelable {
-    public static final Parcelable.Creator<WindowRelayoutResult> CREATOR = new Parcelable.Creator<WindowRelayoutResult>() { // from class: android.view.WindowRelayoutResult.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WindowRelayoutResult createFromParcel(Parcel in) {
-            return new WindowRelayoutResult(in);
-        }
+    public static final Parcelable.Creator<WindowRelayoutResult> CREATOR =
+            new Parcelable.Creator<
+                    WindowRelayoutResult>() { // from class: android.view.WindowRelayoutResult.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WindowRelayoutResult createFromParcel(Parcel in) {
+                    return new WindowRelayoutResult(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public WindowRelayoutResult[] newArray(int size) {
-            return new WindowRelayoutResult[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public WindowRelayoutResult[] newArray(int size) {
+                    return new WindowRelayoutResult[size];
+                }
+            };
     public final InsetsSourceControl.Array activeControls;
     public ActivityWindowInfo activityWindowInfo;
     public int cutoutPolicy;
@@ -33,12 +35,23 @@ public final class WindowRelayoutResult implements Parcelable {
     public int syncSeqId;
 
     public WindowRelayoutResult() {
-        this(new ClientWindowFrames(), new MergedConfiguration(), new SurfaceControl(), new InsetsState(), new InsetsSourceControl.Array());
+        this(
+                new ClientWindowFrames(),
+                new MergedConfiguration(),
+                new SurfaceControl(),
+                new InsetsState(),
+                new InsetsSourceControl.Array());
     }
 
-    public WindowRelayoutResult(ClientWindowFrames frames, MergedConfiguration mergedConfiguration, SurfaceControl surfaceControl, InsetsState insetsState, InsetsSourceControl.Array activeControls) {
+    public WindowRelayoutResult(
+            ClientWindowFrames frames,
+            MergedConfiguration mergedConfiguration,
+            SurfaceControl surfaceControl,
+            InsetsState insetsState,
+            InsetsSourceControl.Array activeControls) {
         this.frames = (ClientWindowFrames) Objects.requireNonNull(frames);
-        this.mergedConfiguration = (MergedConfiguration) Objects.requireNonNull(mergedConfiguration);
+        this.mergedConfiguration =
+                (MergedConfiguration) Objects.requireNonNull(mergedConfiguration);
         this.surfaceControl = (SurfaceControl) Objects.requireNonNull(surfaceControl);
         this.insetsState = (InsetsState) Objects.requireNonNull(insetsState);
         this.activeControls = (InsetsSourceControl.Array) Objects.requireNonNull(activeControls);
@@ -56,7 +69,8 @@ public final class WindowRelayoutResult implements Parcelable {
         this.insetsState.readFromParcel(in);
         this.activeControls.readFromParcel(in);
         this.syncSeqId = in.readInt();
-        this.activityWindowInfo = (ActivityWindowInfo) in.readTypedObject(ActivityWindowInfo.CREATOR);
+        this.activityWindowInfo =
+                (ActivityWindowInfo) in.readTypedObject(ActivityWindowInfo.CREATOR);
         this.cutoutPolicy = in.readInt();
     }
 

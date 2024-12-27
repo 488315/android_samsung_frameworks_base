@@ -12,8 +12,7 @@ public interface IPrintDocumentAdapterObserver extends IInterface {
 
     public static class Default implements IPrintDocumentAdapterObserver {
         @Override // android.print.IPrintDocumentAdapterObserver
-        public void onDestroy() throws RemoteException {
-        }
+        public void onDestroy() throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -21,7 +20,7 @@ public interface IPrintDocumentAdapterObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPrintDocumentAdapterObserver {
+    public abstract static class Stub extends Binder implements IPrintDocumentAdapterObserver {
         public static final String DESCRIPTOR = "android.print.IPrintDocumentAdapterObserver";
         static final int TRANSACTION_onDestroy = 1;
 
@@ -60,7 +59,8 @@ public interface IPrintDocumentAdapterObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }

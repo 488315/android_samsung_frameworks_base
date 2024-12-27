@@ -19,7 +19,7 @@ public class D2DHandshakeContext {
             NextProtocol nextProtocol = new NextProtocol("AES_256_GCM_SIV", 0);
             NextProtocol nextProtocol2 = new NextProtocol("AES_256_CBC_HMAC_SHA256", 1);
             AES_256_CBC_HMAC_SHA256 = nextProtocol2;
-            $VALUES = new NextProtocol[]{nextProtocol, nextProtocol2};
+            $VALUES = new NextProtocol[] {nextProtocol, nextProtocol2};
         }
 
         public static NextProtocol valueOf(String str) {
@@ -44,7 +44,7 @@ public class D2DHandshakeContext {
             INITIATOR = role;
             Role role2 = new Role("RESPONDER", 1);
             RESPONDER = role2;
-            $VALUES = new Role[]{role, role2};
+            $VALUES = new Role[] {role, role2};
         }
 
         public static Role valueOf(String str) {
@@ -61,7 +61,12 @@ public class D2DHandshakeContext {
     }
 
     public D2DHandshakeContext(Role role) {
-        this.contextPtr = create_context(role == Role.INITIATOR, new int[]{new NextProtocol[]{NextProtocol.AES_256_CBC_HMAC_SHA256}[0].ordinal()});
+        this.contextPtr =
+                create_context(
+                        role == Role.INITIATOR,
+                        new int[] {
+                            new NextProtocol[] {NextProtocol.AES_256_CBC_HMAC_SHA256}[0].ordinal()
+                        });
     }
 
     private static native long create_context(boolean z, int[] iArr);
@@ -70,7 +75,8 @@ public class D2DHandshakeContext {
 
     private static native boolean is_handshake_complete(long j) throws BadHandleException;
 
-    private static native void parse_handshake_message(long j, byte[] bArr) throws AlertException, BadHandleException, HandshakeException;
+    private static native void parse_handshake_message(long j, byte[] bArr)
+            throws AlertException, BadHandleException, HandshakeException;
 
     private static native long to_connection_context(long j) throws HandshakeException;
 

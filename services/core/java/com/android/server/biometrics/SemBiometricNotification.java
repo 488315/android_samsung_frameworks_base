@@ -12,6 +12,7 @@ import android.graphics.drawable.Icon;
 import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Slog;
+
 import com.android.internal.notification.SystemNotificationChannels;
 import com.android.server.AnyMotionDetector$$ExternalSyntheticOutline0;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
@@ -35,7 +36,9 @@ public final class SemBiometricNotification {
         this.mAuthenticatorType = i;
         this.mNotificationManager = (NotificationManager) context.getSystemService("notification");
         this.mPackageName = str;
-        this.mNotificationTag = AccessibilityManagerService$$ExternalSyntheticOutline0.m(i, "BackgroundBiometricsNotification_", "_", str);
+        this.mNotificationTag =
+                AccessibilityManagerService$$ExternalSyntheticOutline0.m(
+                        i, "BackgroundBiometricsNotification_", "_", str);
     }
 
     public final void cancelNotification() {
@@ -70,16 +73,39 @@ public final class SemBiometricNotification {
             this.mMessage = this.mContext.getString(17042944, str2);
             this.mIcon = 17304258;
         } else {
-            AnyMotionDetector$$ExternalSyntheticOutline0.m(i, "Unknown authenticator type, ", "SemBiometricNotification");
+            AnyMotionDetector$$ExternalSyntheticOutline0.m(
+                    i, "Unknown authenticator type, ", "SemBiometricNotification");
         }
         if (TextUtils.isEmpty(this.mTitle) || TextUtils.isEmpty(this.mMessage)) {
             Slog.d("SemBiometricNotification", "postNotification: No content title or message");
             return;
         }
         try {
-            this.mNotificationManager.notifyAsUser(str, i, new Notification.Builder(this.mContext, SystemNotificationChannels.SECURITY).setOngoing(true).setContentTitle(this.mTitle).setContentText(this.mMessage).setSmallIcon(this.mIcon).setCategory("sys").setColor(this.mContext.getColor(R.color.system_notification_accent_color)).setStyle(new Notification.BigTextStyle().bigText(this.mMessage)).addAction(new Notification.Action.Builder((Icon) null, this.mContext.getString(R.string.cancel), PendingIntent.getBroadcast(this.mContext, 0, intent, 1140850688)).build()).build(), UserHandle.CURRENT);
+            this.mNotificationManager.notifyAsUser(
+                    str,
+                    i,
+                    new Notification.Builder(this.mContext, SystemNotificationChannels.SECURITY)
+                            .setOngoing(true)
+                            .setContentTitle(this.mTitle)
+                            .setContentText(this.mMessage)
+                            .setSmallIcon(this.mIcon)
+                            .setCategory("sys")
+                            .setColor(
+                                    this.mContext.getColor(
+                                            R.color.system_notification_accent_color))
+                            .setStyle(new Notification.BigTextStyle().bigText(this.mMessage))
+                            .addAction(
+                                    new Notification.Action.Builder(
+                                                    (Icon) null,
+                                                    this.mContext.getString(R.string.cancel),
+                                                    PendingIntent.getBroadcast(
+                                                            this.mContext, 0, intent, 1140850688))
+                                            .build())
+                            .build(),
+                    UserHandle.CURRENT);
         } catch (Exception e) {
-            MagnificationConnectionManager$$ExternalSyntheticOutline0.m(e, new StringBuilder("postNotification: "), "SemBiometricNotification");
+            MagnificationConnectionManager$$ExternalSyntheticOutline0.m(
+                    e, new StringBuilder("postNotification: "), "SemBiometricNotification");
         }
     }
 }

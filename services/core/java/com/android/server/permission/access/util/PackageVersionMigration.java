@@ -7,11 +7,20 @@ import com.android.server.pm.permission.PermissionMigrationHelperImpl;
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes2.dex */
 public abstract class PackageVersionMigration {
-    public static int getVersion$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(int i) {
-        int legacyPermissionStateVersion = ((PermissionMigrationHelperImpl) LocalServices.getService(PermissionMigrationHelperImpl.class)).getLegacyPermissionStateVersion(i);
-        int legacyAppOpVersion = ((AppOpMigrationHelperImpl) LocalServices.getService(AppOpMigrationHelperImpl.class)).getLegacyAppOpVersion();
+    public static int
+            getVersion$frameworks__base__services__permission__android_common__services_permission_pre_jarjar(
+                    int i) {
+        int legacyPermissionStateVersion =
+                ((PermissionMigrationHelperImpl)
+                                LocalServices.getService(PermissionMigrationHelperImpl.class))
+                        .getLegacyPermissionStateVersion(i);
+        int legacyAppOpVersion =
+                ((AppOpMigrationHelperImpl)
+                                LocalServices.getService(AppOpMigrationHelperImpl.class))
+                        .getLegacyAppOpVersion();
         if (legacyPermissionStateVersion == -1 && legacyAppOpVersion == -1) {
-            throw new IllegalStateException("getVersion() called when there are no legacy files".toString());
+            throw new IllegalStateException(
+                    "getVersion() called when there are no legacy files".toString());
         }
         if (legacyPermissionStateVersion >= 11 && legacyAppOpVersion >= 3) {
             return 15;
@@ -47,7 +56,10 @@ public abstract class PackageVersionMigration {
                                     return 3;
                                 }
                                 if (legacyPermissionStateVersion < 0 || legacyAppOpVersion < 0) {
-                                    return (legacyPermissionStateVersion < -1 || legacyAppOpVersion < 0) ? 0 : 1;
+                                    return (legacyPermissionStateVersion < -1
+                                                    || legacyAppOpVersion < 0)
+                                            ? 0
+                                            : 1;
                                 }
                                 return 2;
                             }

@@ -6,11 +6,12 @@ import android.os.RemoteException;
 import android.os.ServiceSpecificException;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyFrameworkInitializer;
-import android.telephony.ims.ProvisioningManager;
 import android.telephony.ims.aidl.IFeatureProvisioningCallback;
 import android.telephony.ims.aidl.IImsConfigCallback;
 import android.telephony.ims.aidl.IRcsConfigCallback;
+
 import com.android.internal.telephony.ITelephony;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.concurrent.Executor;
@@ -19,13 +20,15 @@ import java.util.concurrent.Executor;
 public class ProvisioningManager {
 
     @SystemApi
-    public static final String ACTION_RCS_SINGLE_REGISTRATION_CAPABILITY_UPDATE = "android.telephony.ims.action.RCS_SINGLE_REGISTRATION_CAPABILITY_UPDATE";
+    public static final String ACTION_RCS_SINGLE_REGISTRATION_CAPABILITY_UPDATE =
+            "android.telephony.ims.action.RCS_SINGLE_REGISTRATION_CAPABILITY_UPDATE";
+
+    @SystemApi public static final String EXTRA_STATUS = "android.telephony.ims.extra.STATUS";
 
     @SystemApi
-    public static final String EXTRA_STATUS = "android.telephony.ims.extra.STATUS";
+    public static final String EXTRA_SUBSCRIPTION_ID =
+            "android.telephony.ims.extra.SUBSCRIPTION_ID";
 
-    @SystemApi
-    public static final String EXTRA_SUBSCRIPTION_ID = "android.telephony.ims.extra.SUBSCRIPTION_ID";
     public static final int KEY_1X_EPDG_TIMER_SEC = 64;
     public static final int KEY_1X_THRESHOLD = 59;
     public static final int KEY_AMR_BANDWIDTH_EFFICIENT_PAYLOAD_TYPE = 50;
@@ -86,14 +89,11 @@ public class ProvisioningManager {
     public static final int KEY_VIDEO_QUALITY = 55;
     public static final int KEY_VOICE_OVER_WIFI_ENABLED_OVERRIDE = 28;
 
-    @SystemApi
-    public static final int KEY_VOICE_OVER_WIFI_ENTITLEMENT_ID = 67;
+    @SystemApi public static final int KEY_VOICE_OVER_WIFI_ENTITLEMENT_ID = 67;
 
-    @SystemApi
-    public static final int KEY_VOICE_OVER_WIFI_MODE_OVERRIDE = 27;
+    @SystemApi public static final int KEY_VOICE_OVER_WIFI_MODE_OVERRIDE = 27;
 
-    @SystemApi
-    public static final int KEY_VOICE_OVER_WIFI_ROAMING_ENABLED_OVERRIDE = 26;
+    @SystemApi public static final int KEY_VOICE_OVER_WIFI_ROAMING_ENABLED_OVERRIDE = 26;
     public static final int KEY_VOIMS_OPT_IN_STATUS = 68;
     public static final int KEY_VOLTE_PROVISIONING_STATUS = 10;
     public static final int KEY_VOLTE_USER_OPT_IN_STATUS = 30;
@@ -103,36 +103,33 @@ public class ProvisioningManager {
     public static final int KEY_WIFI_THRESHOLD_B = 61;
     public static final int PROVISIONING_RESULT_UNKNOWN = -1;
 
-    @SystemApi
-    public static final int PROVISIONING_VALUE_DISABLED = 0;
+    @SystemApi public static final int PROVISIONING_VALUE_DISABLED = 0;
 
-    @SystemApi
-    public static final int PROVISIONING_VALUE_ENABLED = 1;
+    @SystemApi public static final int PROVISIONING_VALUE_ENABLED = 1;
     public static final int SMS_FORMAT_3GPP = 1;
     public static final int SMS_FORMAT_3GPP2 = 0;
 
-    @SystemApi
-    public static final int STATUS_CAPABLE = 0;
+    @SystemApi public static final int STATUS_CAPABLE = 0;
+
+    @SystemApi public static final int STATUS_CARRIER_NOT_CAPABLE = 2;
+
+    @SystemApi public static final int STATUS_DEVICE_NOT_CAPABLE = 1;
 
     @SystemApi
-    public static final int STATUS_CARRIER_NOT_CAPABLE = 2;
+    public static final String STRING_QUERY_RESULT_ERROR_GENERIC =
+            "STRING_QUERY_RESULT_ERROR_GENERIC";
 
     @SystemApi
-    public static final int STATUS_DEVICE_NOT_CAPABLE = 1;
+    public static final String STRING_QUERY_RESULT_ERROR_NOT_READY =
+            "STRING_QUERY_RESULT_ERROR_NOT_READY";
 
-    @SystemApi
-    public static final String STRING_QUERY_RESULT_ERROR_GENERIC = "STRING_QUERY_RESULT_ERROR_GENERIC";
-
-    @SystemApi
-    public static final String STRING_QUERY_RESULT_ERROR_NOT_READY = "STRING_QUERY_RESULT_ERROR_NOT_READY";
     private static final String TAG = "ProvisioningManager";
     public static final int VIDEO_QUALITY_HIGH = 1;
     public static final int VIDEO_QUALITY_LOW = 0;
     private int mSubId;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface StringResultError {
-    }
+    public @interface StringResultError {}
 
     @SystemApi
     public static class Callback {
@@ -151,12 +148,15 @@ public class ProvisioningManager {
             public final void onIntConfigChanged(final int item, final int value) {
                 long callingIdentity = Binder.clearCallingIdentity();
                 try {
-                    this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.ProvisioningManager$Callback$CallbackBinder$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            ProvisioningManager.Callback.CallbackBinder.this.lambda$onIntConfigChanged$0(item, value);
-                        }
-                    });
+                    this.mExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.telephony.ims.ProvisioningManager$Callback$CallbackBinder$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    ProvisioningManager.Callback.CallbackBinder.this
+                                            .lambda$onIntConfigChanged$0(item, value);
+                                }
+                            });
                 } finally {
                     restoreCallingIdentity(callingIdentity);
                 }
@@ -171,12 +171,15 @@ public class ProvisioningManager {
             public final void onStringConfigChanged(final int item, final String value) {
                 long callingIdentity = Binder.clearCallingIdentity();
                 try {
-                    this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.ProvisioningManager$Callback$CallbackBinder$$ExternalSyntheticLambda1
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            ProvisioningManager.Callback.CallbackBinder.this.lambda$onStringConfigChanged$1(item, value);
-                        }
-                    });
+                    this.mExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.telephony.ims.ProvisioningManager$Callback$CallbackBinder$$ExternalSyntheticLambda1
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    ProvisioningManager.Callback.CallbackBinder.this
+                                            .lambda$onStringConfigChanged$1(item, value);
+                                }
+                            });
                 } finally {
                     restoreCallingIdentity(callingIdentity);
                 }
@@ -193,11 +196,9 @@ public class ProvisioningManager {
             }
         }
 
-        public void onProvisioningIntChanged(int item, int value) {
-        }
+        public void onProvisioningIntChanged(int item, int value) {}
 
-        public void onProvisioningStringChanged(int item, String value) {
-        }
+        public void onProvisioningStringChanged(int item, String value) {}
 
         public final IImsConfigCallback getBinder() {
             return this.mBinder;
@@ -208,7 +209,7 @@ public class ProvisioningManager {
         }
     }
 
-    public static abstract class FeatureProvisioningCallback {
+    public abstract static class FeatureProvisioningCallback {
         private final CallbackBinder mBinder = new CallbackBinder();
 
         public abstract void onFeatureProvisioningChanged(int i, int i2, boolean z);
@@ -225,43 +226,59 @@ public class ProvisioningManager {
             }
 
             @Override // android.telephony.ims.aidl.IFeatureProvisioningCallback
-            public final void onFeatureProvisioningChanged(final int capability, final int tech, final boolean isProvisioned) {
+            public final void onFeatureProvisioningChanged(
+                    final int capability, final int tech, final boolean isProvisioned) {
                 long callingIdentity = Binder.clearCallingIdentity();
                 try {
-                    this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.ProvisioningManager$FeatureProvisioningCallback$CallbackBinder$$ExternalSyntheticLambda1
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            ProvisioningManager.FeatureProvisioningCallback.CallbackBinder.this.lambda$onFeatureProvisioningChanged$0(capability, tech, isProvisioned);
-                        }
-                    });
+                    this.mExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.telephony.ims.ProvisioningManager$FeatureProvisioningCallback$CallbackBinder$$ExternalSyntheticLambda1
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    ProvisioningManager.FeatureProvisioningCallback.CallbackBinder
+                                            .this
+                                            .lambda$onFeatureProvisioningChanged$0(
+                                                    capability, tech, isProvisioned);
+                                }
+                            });
                 } finally {
                     restoreCallingIdentity(callingIdentity);
                 }
             }
 
             /* JADX INFO: Access modifiers changed from: private */
-            public /* synthetic */ void lambda$onFeatureProvisioningChanged$0(int capability, int tech, boolean isProvisioned) {
-                this.mFeatureProvisioningCallback.onFeatureProvisioningChanged(capability, tech, isProvisioned);
+            public /* synthetic */ void lambda$onFeatureProvisioningChanged$0(
+                    int capability, int tech, boolean isProvisioned) {
+                this.mFeatureProvisioningCallback.onFeatureProvisioningChanged(
+                        capability, tech, isProvisioned);
             }
 
             @Override // android.telephony.ims.aidl.IFeatureProvisioningCallback
-            public final void onRcsFeatureProvisioningChanged(final int capability, final int tech, final boolean isProvisioned) {
+            public final void onRcsFeatureProvisioningChanged(
+                    final int capability, final int tech, final boolean isProvisioned) {
                 long callingIdentity = Binder.clearCallingIdentity();
                 try {
-                    this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.ProvisioningManager$FeatureProvisioningCallback$CallbackBinder$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            ProvisioningManager.FeatureProvisioningCallback.CallbackBinder.this.lambda$onRcsFeatureProvisioningChanged$1(capability, tech, isProvisioned);
-                        }
-                    });
+                    this.mExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.telephony.ims.ProvisioningManager$FeatureProvisioningCallback$CallbackBinder$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    ProvisioningManager.FeatureProvisioningCallback.CallbackBinder
+                                            .this
+                                            .lambda$onRcsFeatureProvisioningChanged$1(
+                                                    capability, tech, isProvisioned);
+                                }
+                            });
                 } finally {
                     restoreCallingIdentity(callingIdentity);
                 }
             }
 
             /* JADX INFO: Access modifiers changed from: private */
-            public /* synthetic */ void lambda$onRcsFeatureProvisioningChanged$1(int capability, int tech, boolean isProvisioned) {
-                this.mFeatureProvisioningCallback.onRcsFeatureProvisioningChanged(capability, tech, isProvisioned);
+            public /* synthetic */ void lambda$onRcsFeatureProvisioningChanged$1(
+                    int capability, int tech, boolean isProvisioned) {
+                this.mFeatureProvisioningCallback.onRcsFeatureProvisioningChanged(
+                        capability, tech, isProvisioned);
             }
 
             /* JADX INFO: Access modifiers changed from: private */
@@ -296,12 +313,15 @@ public class ProvisioningManager {
             public void onConfigurationChanged(final byte[] configXml) {
                 long identity = Binder.clearCallingIdentity();
                 try {
-                    this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.ProvisioningManager$RcsProvisioningCallback$CallbackBinder$$ExternalSyntheticLambda2
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            ProvisioningManager.RcsProvisioningCallback.CallbackBinder.this.lambda$onConfigurationChanged$0(configXml);
-                        }
-                    });
+                    this.mExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.telephony.ims.ProvisioningManager$RcsProvisioningCallback$CallbackBinder$$ExternalSyntheticLambda2
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    ProvisioningManager.RcsProvisioningCallback.CallbackBinder.this
+                                            .lambda$onConfigurationChanged$0(configXml);
+                                }
+                            });
                 } finally {
                     Binder.restoreCallingIdentity(identity);
                 }
@@ -313,22 +333,28 @@ public class ProvisioningManager {
             }
 
             @Override // android.telephony.ims.aidl.IRcsConfigCallback
-            public void onAutoConfigurationErrorReceived(final int errorCode, final String errorString) {
+            public void onAutoConfigurationErrorReceived(
+                    final int errorCode, final String errorString) {
                 long identity = Binder.clearCallingIdentity();
                 try {
-                    this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.ProvisioningManager$RcsProvisioningCallback$CallbackBinder$$ExternalSyntheticLambda4
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            ProvisioningManager.RcsProvisioningCallback.CallbackBinder.this.lambda$onAutoConfigurationErrorReceived$1(errorCode, errorString);
-                        }
-                    });
+                    this.mExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.telephony.ims.ProvisioningManager$RcsProvisioningCallback$CallbackBinder$$ExternalSyntheticLambda4
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    ProvisioningManager.RcsProvisioningCallback.CallbackBinder.this
+                                            .lambda$onAutoConfigurationErrorReceived$1(
+                                                    errorCode, errorString);
+                                }
+                            });
                 } finally {
                     Binder.restoreCallingIdentity(identity);
                 }
             }
 
             /* JADX INFO: Access modifiers changed from: private */
-            public /* synthetic */ void lambda$onAutoConfigurationErrorReceived$1(int errorCode, String errorString) {
+            public /* synthetic */ void lambda$onAutoConfigurationErrorReceived$1(
+                    int errorCode, String errorString) {
                 this.mLocalCallback.onAutoConfigurationErrorReceived(errorCode, errorString);
             }
 
@@ -336,12 +362,15 @@ public class ProvisioningManager {
             public void onConfigurationReset() {
                 long identity = Binder.clearCallingIdentity();
                 try {
-                    this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.ProvisioningManager$RcsProvisioningCallback$CallbackBinder$$ExternalSyntheticLambda0
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            ProvisioningManager.RcsProvisioningCallback.CallbackBinder.this.lambda$onConfigurationReset$2();
-                        }
-                    });
+                    this.mExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.telephony.ims.ProvisioningManager$RcsProvisioningCallback$CallbackBinder$$ExternalSyntheticLambda0
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    ProvisioningManager.RcsProvisioningCallback.CallbackBinder.this
+                                            .lambda$onConfigurationReset$2();
+                                }
+                            });
                 } finally {
                     Binder.restoreCallingIdentity(identity);
                 }
@@ -356,12 +385,15 @@ public class ProvisioningManager {
             public void onRemoved() {
                 long identity = Binder.clearCallingIdentity();
                 try {
-                    this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.ProvisioningManager$RcsProvisioningCallback$CallbackBinder$$ExternalSyntheticLambda1
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            ProvisioningManager.RcsProvisioningCallback.CallbackBinder.this.lambda$onRemoved$3();
-                        }
-                    });
+                    this.mExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.telephony.ims.ProvisioningManager$RcsProvisioningCallback$CallbackBinder$$ExternalSyntheticLambda1
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    ProvisioningManager.RcsProvisioningCallback.CallbackBinder.this
+                                            .lambda$onRemoved$3();
+                                }
+                            });
                 } finally {
                     Binder.restoreCallingIdentity(identity);
                 }
@@ -376,12 +408,15 @@ public class ProvisioningManager {
             public void onPreProvisioningReceived(final byte[] configXml) {
                 long identity = Binder.clearCallingIdentity();
                 try {
-                    this.mExecutor.execute(new Runnable() { // from class: android.telephony.ims.ProvisioningManager$RcsProvisioningCallback$CallbackBinder$$ExternalSyntheticLambda3
-                        @Override // java.lang.Runnable
-                        public final void run() {
-                            ProvisioningManager.RcsProvisioningCallback.CallbackBinder.this.lambda$onPreProvisioningReceived$4(configXml);
-                        }
-                    });
+                    this.mExecutor.execute(
+                            new Runnable() { // from class:
+                                             // android.telephony.ims.ProvisioningManager$RcsProvisioningCallback$CallbackBinder$$ExternalSyntheticLambda3
+                                @Override // java.lang.Runnable
+                                public final void run() {
+                                    ProvisioningManager.RcsProvisioningCallback.CallbackBinder.this
+                                            .lambda$onPreProvisioningReceived$4(configXml);
+                                }
+                            });
                 } finally {
                     Binder.restoreCallingIdentity(identity);
                 }
@@ -398,20 +433,15 @@ public class ProvisioningManager {
             }
         }
 
-        public void onConfigurationChanged(byte[] configXml) {
-        }
+        public void onConfigurationChanged(byte[] configXml) {}
 
-        public void onAutoConfigurationErrorReceived(int errorCode, String errorString) {
-        }
+        public void onAutoConfigurationErrorReceived(int errorCode, String errorString) {}
 
-        public void onConfigurationReset() {
-        }
+        public void onConfigurationReset() {}
 
-        public void onRemoved() {
-        }
+        public void onRemoved() {}
 
-        public void onPreProvisioningReceived(byte[] configXml) {
-        }
+        public void onPreProvisioningReceived(byte[] configXml) {}
 
         public final IRcsConfigCallback getBinder() {
             return this.mBinder;
@@ -435,10 +465,12 @@ public class ProvisioningManager {
     }
 
     @SystemApi
-    public void registerProvisioningChangedCallback(Executor executor, Callback callback) throws ImsException {
+    public void registerProvisioningChangedCallback(Executor executor, Callback callback)
+            throws ImsException {
         callback.setExecutor(executor);
         try {
-            getITelephony().registerImsProvisioningChangedCallback(this.mSubId, callback.getBinder());
+            getITelephony()
+                    .registerImsProvisioningChangedCallback(this.mSubId, callback.getBinder());
         } catch (RemoteException | IllegalStateException e) {
             throw new ImsException(e.getMessage(), 1);
         } catch (ServiceSpecificException e2) {
@@ -449,16 +481,19 @@ public class ProvisioningManager {
     @SystemApi
     public void unregisterProvisioningChangedCallback(Callback callback) {
         try {
-            getITelephony().unregisterImsProvisioningChangedCallback(this.mSubId, callback.getBinder());
+            getITelephony()
+                    .unregisterImsProvisioningChangedCallback(this.mSubId, callback.getBinder());
         } catch (RemoteException e) {
             throw e.rethrowAsRuntimeException();
         }
     }
 
-    public void registerFeatureProvisioningChangedCallback(Executor executor, FeatureProvisioningCallback callback) throws ImsException {
+    public void registerFeatureProvisioningChangedCallback(
+            Executor executor, FeatureProvisioningCallback callback) throws ImsException {
         callback.setExecutor(executor);
         try {
-            getITelephony().registerFeatureProvisioningChangedCallback(this.mSubId, callback.getBinder());
+            getITelephony()
+                    .registerFeatureProvisioningChangedCallback(this.mSubId, callback.getBinder());
         } catch (RemoteException | IllegalStateException e) {
             throw new ImsException(e.getMessage(), 1);
         } catch (ServiceSpecificException e2) {
@@ -468,7 +503,9 @@ public class ProvisioningManager {
 
     public void unregisterFeatureProvisioningChangedCallback(FeatureProvisioningCallback callback) {
         try {
-            getITelephony().unregisterFeatureProvisioningChangedCallback(this.mSubId, callback.getBinder());
+            getITelephony()
+                    .unregisterFeatureProvisioningChangedCallback(
+                            this.mSubId, callback.getBinder());
         } catch (RemoteException e) {
             throw e.rethrowAsRuntimeException();
         }
@@ -510,9 +547,12 @@ public class ProvisioningManager {
         }
     }
 
-    public void setProvisioningStatusForCapability(int capability, int tech, boolean isProvisioned) {
+    public void setProvisioningStatusForCapability(
+            int capability, int tech, boolean isProvisioned) {
         try {
-            getITelephony().setImsProvisioningStatusForCapability(this.mSubId, capability, tech, isProvisioned);
+            getITelephony()
+                    .setImsProvisioningStatusForCapability(
+                            this.mSubId, capability, tech, isProvisioned);
         } catch (RemoteException e) {
             throw e.rethrowAsRuntimeException();
         }
@@ -520,7 +560,8 @@ public class ProvisioningManager {
 
     public boolean getProvisioningStatusForCapability(int capability, int tech) {
         try {
-            return getITelephony().getImsProvisioningStatusForCapability(this.mSubId, capability, tech);
+            return getITelephony()
+                    .getImsProvisioningStatusForCapability(this.mSubId, capability, tech);
         } catch (RemoteException e) {
             throw e.rethrowAsRuntimeException();
         }
@@ -530,7 +571,8 @@ public class ProvisioningManager {
     @Deprecated
     public boolean getRcsProvisioningStatusForCapability(int capability) {
         try {
-            return getITelephony().getRcsProvisioningStatusForCapability(this.mSubId, capability, 0);
+            return getITelephony()
+                    .getRcsProvisioningStatusForCapability(this.mSubId, capability, 0);
         } catch (RemoteException e) {
             throw e.rethrowAsRuntimeException();
         }
@@ -538,7 +580,8 @@ public class ProvisioningManager {
 
     public boolean getRcsProvisioningStatusForCapability(int capability, int tech) {
         try {
-            return getITelephony().getRcsProvisioningStatusForCapability(this.mSubId, capability, tech);
+            return getITelephony()
+                    .getRcsProvisioningStatusForCapability(this.mSubId, capability, tech);
         } catch (RemoteException e) {
             throw e.rethrowAsRuntimeException();
         }
@@ -548,15 +591,20 @@ public class ProvisioningManager {
     @Deprecated
     public void setRcsProvisioningStatusForCapability(int capability, boolean isProvisioned) {
         try {
-            getITelephony().setRcsProvisioningStatusForCapability(this.mSubId, capability, 0, isProvisioned);
+            getITelephony()
+                    .setRcsProvisioningStatusForCapability(
+                            this.mSubId, capability, 0, isProvisioned);
         } catch (RemoteException e) {
             throw e.rethrowAsRuntimeException();
         }
     }
 
-    public void setRcsProvisioningStatusForCapability(int capability, int tech, boolean isProvisioned) {
+    public void setRcsProvisioningStatusForCapability(
+            int capability, int tech, boolean isProvisioned) {
         try {
-            getITelephony().setRcsProvisioningStatusForCapability(this.mSubId, capability, tech, isProvisioned);
+            getITelephony()
+                    .setRcsProvisioningStatusForCapability(
+                            this.mSubId, capability, tech, isProvisioned);
         } catch (RemoteException e) {
             throw e.rethrowAsRuntimeException();
         }
@@ -564,7 +612,8 @@ public class ProvisioningManager {
 
     public boolean isProvisioningRequiredForCapability(int capability, int tech) {
         try {
-            return getITelephony().isProvisioningRequiredForCapability(this.mSubId, capability, tech);
+            return getITelephony()
+                    .isProvisioningRequiredForCapability(this.mSubId, capability, tech);
         } catch (RemoteException e) {
             throw e.rethrowAsRuntimeException();
         }
@@ -572,7 +621,8 @@ public class ProvisioningManager {
 
     public boolean isRcsProvisioningRequiredForCapability(int capability, int tech) {
         try {
-            return getITelephony().isRcsProvisioningRequiredForCapability(this.mSubId, capability, tech);
+            return getITelephony()
+                    .isRcsProvisioningRequiredForCapability(this.mSubId, capability, tech);
         } catch (RemoteException e) {
             throw e.rethrowAsRuntimeException();
         }
@@ -613,7 +663,8 @@ public class ProvisioningManager {
     }
 
     @SystemApi
-    public void registerRcsProvisioningCallback(Executor executor, RcsProvisioningCallback callback) throws ImsException {
+    public void registerRcsProvisioningCallback(Executor executor, RcsProvisioningCallback callback)
+            throws ImsException {
         callback.setExecutor(executor);
         try {
             getITelephony().registerRcsProvisioningCallback(this.mSubId, callback.getBinder());
@@ -643,7 +694,11 @@ public class ProvisioningManager {
     }
 
     private static ITelephony getITelephony() {
-        ITelephony binder = ITelephony.Stub.asInterface(TelephonyFrameworkInitializer.getTelephonyServiceManager().getTelephonyServiceRegisterer().get());
+        ITelephony binder =
+                ITelephony.Stub.asInterface(
+                        TelephonyFrameworkInitializer.getTelephonyServiceManager()
+                                .getTelephonyServiceRegisterer()
+                                .get());
         if (binder == null) {
             throw new RuntimeException("Could not find Telephony Service.");
         }

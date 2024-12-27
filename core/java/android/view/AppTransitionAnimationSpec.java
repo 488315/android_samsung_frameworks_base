@@ -7,19 +7,22 @@ import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public class AppTransitionAnimationSpec implements Parcelable {
-    public static final Parcelable.Creator<AppTransitionAnimationSpec> CREATOR = new Parcelable.Creator<AppTransitionAnimationSpec>() { // from class: android.view.AppTransitionAnimationSpec.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppTransitionAnimationSpec createFromParcel(Parcel in) {
-            return new AppTransitionAnimationSpec(in);
-        }
+    public static final Parcelable.Creator<AppTransitionAnimationSpec> CREATOR =
+            new Parcelable.Creator<
+                    AppTransitionAnimationSpec>() { // from class:
+                                                    // android.view.AppTransitionAnimationSpec.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppTransitionAnimationSpec createFromParcel(Parcel in) {
+                    return new AppTransitionAnimationSpec(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public AppTransitionAnimationSpec[] newArray(int size) {
-            return new AppTransitionAnimationSpec[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public AppTransitionAnimationSpec[] newArray(int size) {
+                    return new AppTransitionAnimationSpec[size];
+                }
+            };
     public final HardwareBuffer buffer;
     public final Rect rect;
     public final int taskId;
@@ -49,6 +52,12 @@ public class AppTransitionAnimationSpec implements Parcelable {
     }
 
     public String toString() {
-        return "{taskId: " + this.taskId + ", buffer: " + this.buffer + ", rect: " + this.rect + "}";
+        return "{taskId: "
+                + this.taskId
+                + ", buffer: "
+                + this.buffer
+                + ", rect: "
+                + this.rect
+                + "}";
     }
 }

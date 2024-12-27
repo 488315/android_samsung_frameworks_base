@@ -6,18 +6,20 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.telecom.PhoneAccountSuggestion;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
 public interface IPhoneAccountSuggestionCallback extends IInterface {
-    public static final String DESCRIPTOR = "com.android.internal.telecom.IPhoneAccountSuggestionCallback";
+    public static final String DESCRIPTOR =
+            "com.android.internal.telecom.IPhoneAccountSuggestionCallback";
 
     void suggestPhoneAccounts(String str, List<PhoneAccountSuggestion> list) throws RemoteException;
 
     public static class Default implements IPhoneAccountSuggestionCallback {
         @Override // com.android.internal.telecom.IPhoneAccountSuggestionCallback
-        public void suggestPhoneAccounts(String number, List<PhoneAccountSuggestion> suggestions) throws RemoteException {
-        }
+        public void suggestPhoneAccounts(String number, List<PhoneAccountSuggestion> suggestions)
+                throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -25,7 +27,7 @@ public interface IPhoneAccountSuggestionCallback extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IPhoneAccountSuggestionCallback {
+    public abstract static class Stub extends Binder implements IPhoneAccountSuggestionCallback {
         static final int TRANSACTION_suggestPhoneAccounts = 1;
 
         public Stub() {
@@ -63,7 +65,8 @@ public interface IPhoneAccountSuggestionCallback extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(IPhoneAccountSuggestionCallback.DESCRIPTOR);
             }
@@ -74,7 +77,8 @@ public interface IPhoneAccountSuggestionCallback extends IInterface {
             switch (code) {
                 case 1:
                     String _arg0 = data.readString();
-                    List<PhoneAccountSuggestion> _arg1 = data.createTypedArrayList(PhoneAccountSuggestion.CREATOR);
+                    List<PhoneAccountSuggestion> _arg1 =
+                            data.createTypedArrayList(PhoneAccountSuggestion.CREATOR);
                     data.enforceNoDataAvail();
                     suggestPhoneAccounts(_arg0, _arg1);
                     return true;
@@ -100,7 +104,9 @@ public interface IPhoneAccountSuggestionCallback extends IInterface {
             }
 
             @Override // com.android.internal.telecom.IPhoneAccountSuggestionCallback
-            public void suggestPhoneAccounts(String number, List<PhoneAccountSuggestion> suggestions) throws RemoteException {
+            public void suggestPhoneAccounts(
+                    String number, List<PhoneAccountSuggestion> suggestions)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(IPhoneAccountSuggestionCallback.DESCRIPTOR);

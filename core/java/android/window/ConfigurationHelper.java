@@ -8,8 +8,7 @@ import android.os.IBinder;
 
 /* loaded from: classes4.dex */
 public class ConfigurationHelper {
-    private ConfigurationHelper() {
-    }
+    private ConfigurationHelper() {}
 
     public static void freeTextLayoutCachesIfNeeded(int configDiff) {
         if ((configDiff & 4) != 0) {
@@ -17,8 +16,19 @@ public class ConfigurationHelper {
         }
     }
 
-    public static boolean shouldUpdateResources(IBinder token, Configuration config, Configuration newConfig, Configuration overrideConfig, boolean displayChanged, Boolean configChanged) {
-        if (config == null || displayChanged || !ResourcesManager.getInstance().isSameResourcesOverrideConfig(token, overrideConfig) || shouldUpdateWindowMetricsBounds(config, newConfig) || isDisplayRotationChanged(config, newConfig)) {
+    public static boolean shouldUpdateResources(
+            IBinder token,
+            Configuration config,
+            Configuration newConfig,
+            Configuration overrideConfig,
+            boolean displayChanged,
+            Boolean configChanged) {
+        if (config == null
+                || displayChanged
+                || !ResourcesManager.getInstance()
+                        .isSameResourcesOverrideConfig(token, overrideConfig)
+                || shouldUpdateWindowMetricsBounds(config, newConfig)
+                || isDisplayRotationChanged(config, newConfig)) {
             return true;
         }
         return configChanged == null ? config.diff(newConfig) != 0 : configChanged.booleanValue();
@@ -28,12 +38,15 @@ public class ConfigurationHelper {
         return (newDisplayId == -1 || displayId == newDisplayId) ? false : true;
     }
 
-    private static boolean shouldUpdateWindowMetricsBounds(Configuration currentConfig, Configuration newConfig) {
+    private static boolean shouldUpdateWindowMetricsBounds(
+            Configuration currentConfig, Configuration newConfig) {
         Rect currentBounds = currentConfig.windowConfiguration.getBounds();
         Rect newBounds = newConfig.windowConfiguration.getBounds();
         Rect currentMaxBounds = currentConfig.windowConfiguration.getMaxBounds();
         Rect newMaxBounds = newConfig.windowConfiguration.getMaxBounds();
-        return (currentBounds.equals(newBounds) && currentMaxBounds.equals(newMaxBounds)) ? false : true;
+        return (currentBounds.equals(newBounds) && currentMaxBounds.equals(newMaxBounds))
+                ? false
+                : true;
     }
 
     private static boolean isDisplayRotationChanged(Configuration config, Configuration newConfig) {

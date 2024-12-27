@@ -4,9 +4,10 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
-import android.view.ViewGroup;
 import android.widget.RemoteViews;
+
 import com.android.internal.R;
+
 import java.lang.ref.WeakReference;
 
 @RemoteViews.RemoteView
@@ -41,8 +42,11 @@ public final class ViewStub extends View {
 
     public ViewStub(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context);
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ViewStub, defStyleAttr, defStyleRes);
-        saveAttributeDataForStyleable(context, R.styleable.ViewStub, attrs, a, defStyleAttr, defStyleRes);
+        TypedArray a =
+                context.obtainStyledAttributes(
+                        attrs, R.styleable.ViewStub, defStyleAttr, defStyleRes);
+        saveAttributeDataForStyleable(
+                context, R.styleable.ViewStub, attrs, a, defStyleAttr, defStyleRes);
         this.mInflatedId = a.getResourceId(2, -1);
         this.mLayoutResource = a.getResourceId(1, 0);
         this.mID = a.getResourceId(0, -1);
@@ -93,12 +97,10 @@ public final class ViewStub extends View {
     }
 
     @Override // android.view.View
-    public void draw(Canvas canvas) {
-    }
+    public void draw(Canvas canvas) {}
 
     @Override // android.view.View
-    protected void dispatchDraw(Canvas canvas) {
-    }
+    protected void dispatchDraw(Canvas canvas) {}
 
     @Override // android.view.View
     @RemotableViewMethod(asyncImpl = "setVisibilityAsync")

@@ -22,8 +22,7 @@ public final class ProximityManager {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProximityReceiver extends BroadcastReceiver {
-        public ProximityReceiver() {
-        }
+        public ProximityReceiver() {}
 
         @Override // android.content.BroadcastReceiver
         public final void onReceive(Context context, Intent intent) {
@@ -31,9 +30,15 @@ public final class ProximityManager {
             Log.d("ProximityManager", "onReceive(), action=" + action);
             if (ProximityManager.this.mPackageName != null) {
                 if ("android.intent.action.USER_PRESENT".equals(action)) {
-                    ProximityManager.m854$$Nest$msendIntent(ProximityManager.this, context, "com.samsung.android.mdx.proximity.ACTION_USER_PRESENT");
+                    ProximityManager.m854$$Nest$msendIntent(
+                            ProximityManager.this,
+                            context,
+                            "com.samsung.android.mdx.proximity.ACTION_USER_PRESENT");
                 } else if ("android.intent.action.SCREEN_OFF".equals(action)) {
-                    ProximityManager.m854$$Nest$msendIntent(ProximityManager.this, context, "com.samsung.android.mdx.proximity.ACTION_SCREEN_OFF");
+                    ProximityManager.m854$$Nest$msendIntent(
+                            ProximityManager.this,
+                            context,
+                            "com.samsung.android.mdx.proximity.ACTION_SCREEN_OFF");
                 }
             }
             ProximityManager proximityManager = ProximityManager.this;
@@ -45,12 +50,14 @@ public final class ProximityManager {
     }
 
     /* renamed from: -$$Nest$msendIntent, reason: not valid java name */
-    public static void m854$$Nest$msendIntent(ProximityManager proximityManager, Context context, String str) {
+    public static void m854$$Nest$msendIntent(
+            ProximityManager proximityManager, Context context, String str) {
         proximityManager.getClass();
         Intent intent = new Intent();
         intent.setAction(str);
         intent.addFlags(32);
-        for (ResolveInfo resolveInfo : context.getPackageManager().queryBroadcastReceivers(intent, 0)) {
+        for (ResolveInfo resolveInfo :
+                context.getPackageManager().queryBroadcastReceivers(intent, 0)) {
             if (resolveInfo.activityInfo.packageName.equals(proximityManager.mPackageName)) {
                 ActivityInfo activityInfo = resolveInfo.activityInfo;
                 intent.setComponent(new ComponentName(activityInfo.packageName, activityInfo.name));
@@ -105,7 +112,8 @@ public final class ProximityManager {
 
     public final boolean isValid() {
         ensureInitSharedPreference();
-        if (this.sharedPreferences.getBoolean("ltw_proximity_enabled", false) && getExpiredTime() != 0) {
+        if (this.sharedPreferences.getBoolean("ltw_proximity_enabled", false)
+                && getExpiredTime() != 0) {
             return getExpiredTime() == -1 || System.currentTimeMillis() < getExpiredTime();
         }
         return false;
@@ -118,7 +126,8 @@ public final class ProximityManager {
             IntentFilter intentFilter = new IntentFilter();
             intentFilter.addAction("android.intent.action.USER_PRESENT");
             intentFilter.addAction("android.intent.action.SCREEN_OFF");
-            this.mContext.registerReceiverAsUser(proximityReceiver, UserHandle.ALL, intentFilter, null, this.mHandler);
+            this.mContext.registerReceiverAsUser(
+                    proximityReceiver, UserHandle.ALL, intentFilter, null, this.mHandler);
         }
     }
 }

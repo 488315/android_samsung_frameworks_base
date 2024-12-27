@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+
 import com.android.server.clipboard.ClipboardService;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -38,7 +39,11 @@ public final class TimerTrigger extends PowerStatsLogTrigger {
     public TimerTrigger(Context context, PowerStatsLogger powerStatsLogger) {
         super(context, powerStatsLogger);
         this.mHandler = context.getMainThreadHandler();
-        PeriodicTimer periodicTimer = new PeriodicTimer("PowerStatsLowFreqLog", ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS, 1);
+        PeriodicTimer periodicTimer =
+                new PeriodicTimer(
+                        "PowerStatsLowFreqLog",
+                        ClipboardService.DEFAULT_CLIPBOARD_TIMEOUT_MILLIS,
+                        1);
         PeriodicTimer periodicTimer2 = new PeriodicTimer("PowerStatsHighFreqLog", 120000L, 2);
         periodicTimer.run();
         periodicTimer2.run();

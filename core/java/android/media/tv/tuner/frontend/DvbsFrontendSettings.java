@@ -2,6 +2,7 @@ package android.media.tv.tuner.frontend;
 
 import android.annotation.SystemApi;
 import android.media.tv.tuner.TunerVersionChecker;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -58,30 +59,35 @@ public class DvbsFrontendSettings extends FrontendSettings {
     private final int mVcmMode;
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Modulation {
-    }
+    public @interface Modulation {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Pilot {
-    }
+    public @interface Pilot {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Rolloff {
-    }
+    public @interface Rolloff {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface ScanType {
-    }
+    public @interface ScanType {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Standard {
-    }
+    public @interface Standard {}
 
     @Retention(RetentionPolicy.SOURCE)
-    public @interface VcmMode {
-    }
+    public @interface VcmMode {}
 
-    private DvbsFrontendSettings(long frequency, int modulation, DvbsCodeRate codeRate, int symbolRate, int rolloff, int pilot, int inputStreamId, int standard, int vcm, int scanType, boolean isDiseqcRxMessage) {
+    private DvbsFrontendSettings(
+            long frequency,
+            int modulation,
+            DvbsCodeRate codeRate,
+            int symbolRate,
+            int rolloff,
+            int pilot,
+            int inputStreamId,
+            int standard,
+            int vcm,
+            int scanType,
+            boolean isDiseqcRxMessage) {
         super(frequency);
         this.mModulation = modulation;
         this.mCodeRate = codeRate;
@@ -184,7 +190,8 @@ public class DvbsFrontendSettings extends FrontendSettings {
         }
 
         public Builder setCanHandleDiseqcRxMessage(boolean canHandleDiseqcMessage) {
-            if (TunerVersionChecker.checkHigherOrEqualVersionTo(65537, "setCanHandleDiseqcRxMessage")) {
+            if (TunerVersionChecker.checkHigherOrEqualVersionTo(
+                    65537, "setCanHandleDiseqcRxMessage")) {
                 this.mIsDiseqcRxMessage = canHandleDiseqcMessage;
             }
             return this;
@@ -231,7 +238,18 @@ public class DvbsFrontendSettings extends FrontendSettings {
         }
 
         public DvbsFrontendSettings build() {
-            return new DvbsFrontendSettings(this.mFrequency, this.mModulation, this.mCodeRate, this.mSymbolRate, this.mRolloff, this.mPilot, this.mInputStreamId, this.mStandard, this.mVcmMode, this.mScanType, this.mIsDiseqcRxMessage);
+            return new DvbsFrontendSettings(
+                    this.mFrequency,
+                    this.mModulation,
+                    this.mCodeRate,
+                    this.mSymbolRate,
+                    this.mRolloff,
+                    this.mPilot,
+                    this.mInputStreamId,
+                    this.mStandard,
+                    this.mVcmMode,
+                    this.mScanType,
+                    this.mIsDiseqcRxMessage);
         }
     }
 

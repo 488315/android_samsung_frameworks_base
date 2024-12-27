@@ -18,7 +18,8 @@ import android.util.Slog;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
-public final class SensorNotificationService extends SystemService implements SensorEventListener, LocationListener {
+public final class SensorNotificationService extends SystemService
+        implements SensorEventListener, LocationListener {
     public final Context mContext;
     public long mLocalGeomagneticFieldUpdateTime;
     public Sensor mMetaSensor;
@@ -31,8 +32,7 @@ public final class SensorNotificationService extends SystemService implements Se
     }
 
     @Override // android.hardware.SensorEventListener
-    public final void onAccuracyChanged(Sensor sensor, int i) {
-    }
+    public final void onAccuracyChanged(Sensor sensor, int i) {}
 
     @Override // com.android.server.SystemService
     public final void onBootPhase(int i) {
@@ -46,7 +46,9 @@ public final class SensorNotificationService extends SystemService implements Se
                 this.mSensorManager.registerListener(this, defaultSensor, 0);
             }
         }
-        if (i != 1000 || (locationManager = (LocationManager) this.mContext.getSystemService("location")) == null) {
+        if (i != 1000
+                || (locationManager = (LocationManager) this.mContext.getSystemService("location"))
+                        == null) {
             return;
         }
         locationManager.requestLocationUpdates("passive", 1800000L, 100000.0f, this);
@@ -54,13 +56,27 @@ public final class SensorNotificationService extends SystemService implements Se
 
     @Override // android.location.LocationListener
     public final void onLocationChanged(Location location) {
-        if (!(location.getLatitude() == 0.0d && location.getLongitude() == 0.0d) && SystemClock.elapsedRealtime() - this.mLocalGeomagneticFieldUpdateTime >= 600000) {
+        if (!(location.getLatitude() == 0.0d && location.getLongitude() == 0.0d)
+                && SystemClock.elapsedRealtime() - this.mLocalGeomagneticFieldUpdateTime
+                        >= 600000) {
             long currentTimeMillis = System.currentTimeMillis();
-            if ("false".equals(System.getProperty("sensor.notification.use_mocked", "false")) == location.isMock() || currentTimeMillis < 1262358000000L) {
+            if ("false".equals(System.getProperty("sensor.notification.use_mocked", "false"))
+                            == location.isMock()
+                    || currentTimeMillis < 1262358000000L) {
                 return;
             }
             try {
-                SensorAdditionalInfo createLocalGeomagneticField = SensorAdditionalInfo.createLocalGeomagneticField(new GeomagneticField((float) location.getLatitude(), (float) location.getLongitude(), (float) location.getAltitude(), currentTimeMillis).getFieldStrength() / 1000.0f, (float) ((r0.getDeclination() * 3.141592653589793d) / 180.0d), (float) ((r0.getInclination() * 3.141592653589793d) / 180.0d));
+                SensorAdditionalInfo createLocalGeomagneticField =
+                        SensorAdditionalInfo.createLocalGeomagneticField(
+                                new GeomagneticField(
+                                                        (float) location.getLatitude(),
+                                                        (float) location.getLongitude(),
+                                                        (float) location.getAltitude(),
+                                                        currentTimeMillis)
+                                                .getFieldStrength()
+                                        / 1000.0f,
+                                (float) ((r0.getDeclination() * 3.141592653589793d) / 180.0d),
+                                (float) ((r0.getInclination() * 3.141592653589793d) / 180.0d));
                 if (createLocalGeomagneticField != null) {
                     this.mSensorManager.setOperationParameter(createLocalGeomagneticField);
                     this.mLocalGeomagneticFieldUpdateTime = SystemClock.elapsedRealtime();
@@ -72,12 +88,10 @@ public final class SensorNotificationService extends SystemService implements Se
     }
 
     @Override // android.location.LocationListener
-    public final void onProviderDisabled(String str) {
-    }
+    public final void onProviderDisabled(String str) {}
 
     @Override // android.location.LocationListener
-    public final void onProviderEnabled(String str) {
-    }
+    public final void onProviderEnabled(String str) {}
 
     @Override // android.hardware.SensorEventListener
     public final void onSensorChanged(SensorEvent sensorEvent) {
@@ -94,6 +108,5 @@ public final class SensorNotificationService extends SystemService implements Se
     }
 
     @Override // android.location.LocationListener
-    public final void onStatusChanged(String str, int i, Bundle bundle) {
-    }
+    public final void onStatusChanged(String str, int i, Bundle bundle) {}
 }

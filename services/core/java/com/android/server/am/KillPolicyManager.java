@@ -15,6 +15,7 @@ import android.util.Log;
 import android.util.Pair;
 import android.util.Slog;
 import android.util.SparseArray;
+
 import com.android.internal.app.procstats.DumpUtils;
 import com.android.internal.app.procstats.ProcessState;
 import com.android.internal.app.procstats.ProcessStats;
@@ -28,15 +29,19 @@ import com.android.server.HermesService$3$$ExternalSyntheticOutline0;
 import com.android.server.ServiceThread;
 import com.android.server.StorageManagerService$$ExternalSyntheticOutline0;
 import com.android.server.alarm.GmsAlarmManager$$ExternalSyntheticOutline0;
-import com.android.server.am.ActivityManagerService;
-import com.android.server.am.KillPolicyManager;
 import com.android.server.am.pmm.PersonalizedMemoryManager;
 import com.android.server.chimera.ChimeraDataInfo;
 import com.android.server.chimera.heimdall.Heimdall;
 import com.android.server.input.KeyboardMetricsCollector;
 import com.android.server.stats.pull.ProcfsMemoryUtil;
+
 import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.knoxguard.service.utils.Constants;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -52,9 +57,6 @@ import java.util.LongSummaryStatistics;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.ToIntFunction;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
 /* loaded from: classes.dex */
@@ -104,19 +106,27 @@ public final class KillPolicyManager {
     public HashMap mVmStats;
     public final AnonymousClass1 policyBroadcastReceiver;
     public static final int[] SWAPPINESS = {100, 100, 130, 130, 145};
-    public static boolean KPM_POLICY_ENABLE = Boolean.parseBoolean(SystemProperties.get("ro.slmk.kpm_policy_enable", "true"));
+    public static boolean KPM_POLICY_ENABLE =
+            Boolean.parseBoolean(SystemProperties.get("ro.slmk.kpm_policy_enable", "true"));
     public static boolean KPM_DEBUG = false;
-    public static int sWarmUpTrigger = Integer.parseInt(SystemProperties.get("ro.slmk.kpm_warm_up_trigger", "20"));
-    public static int sPolicyTrigger = Integer.parseInt(SystemProperties.get("ro.slmk.kpm_policy_trigger", Integer.toString(50)));
-    public static int sWarmUpCycles = Integer.parseInt(SystemProperties.get("ro.slmk.kpm_warm_up_cycles", "3"));
-    public static boolean KPM_BTIME_ENABLE = Boolean.parseBoolean(SystemProperties.get("ro.slmk.kpm_boot_enable", "true"));
+    public static int sWarmUpTrigger =
+            Integer.parseInt(SystemProperties.get("ro.slmk.kpm_warm_up_trigger", "20"));
+    public static int sPolicyTrigger =
+            Integer.parseInt(
+                    SystemProperties.get("ro.slmk.kpm_policy_trigger", Integer.toString(50)));
+    public static int sWarmUpCycles =
+            Integer.parseInt(SystemProperties.get("ro.slmk.kpm_warm_up_cycles", "3"));
+    public static boolean KPM_BTIME_ENABLE =
+            Boolean.parseBoolean(SystemProperties.get("ro.slmk.kpm_boot_enable", "true"));
     public static final ArrayList resumeSkipPackage = new ArrayList();
-    public static final boolean MEMORY_CRITICAL_LOW_USE_PACKAGE_RATIO = Boolean.parseBoolean(SystemProperties.get("ro.slmk.kpm_use_cri_pkg_ratio", "true"));
+    public static final boolean MEMORY_CRITICAL_LOW_USE_PACKAGE_RATIO =
+            Boolean.parseBoolean(SystemProperties.get("ro.slmk.kpm_use_cri_pkg_ratio", "true"));
     public static int MEMORY_CRITICAL_LOW_PROCESS_KILL_RATIO_TH = 100;
     public static int MEMORY_CRITICAL_LOW_PROCESS_KILL_PACKAGE_RATIO_TH = 100;
     public static ServiceThread brHandlerThread = null;
     public static Handler brHandler = null;
-    public static boolean sPmmEnabledBySpcm = Boolean.parseBoolean(SystemProperties.get("persist.sys.kpm_onoff", "true"));
+    public static boolean sPmmEnabledBySpcm =
+            Boolean.parseBoolean(SystemProperties.get("persist.sys.kpm_onoff", "true"));
     public static final ValueRange RANGE_AUTO_RESTART_MIN_TRIGGER_SIZE = ValueRange.of(1, 100);
     public static final ValueRange RANGE_AUTO_RESTART_NEVER_COLLECT_WITHIN = ValueRange.of(1, 100);
     public static final ValueRange RANGE_AUTO_RESTART_COMPACT_TRIGGER_SIZE = ValueRange.of(2, 1000);
@@ -141,20 +151,25 @@ public final class KillPolicyManager {
             if (KillPolicyManager.RANGE_AUTO_RESTART_MIN_TRIGGER_SIZE.isValidIntValue(intExtra)) {
                 KillPolicyManager.sMinTriggerSize = intExtra;
             }
-            if (KillPolicyManager.RANGE_AUTO_RESTART_NEVER_COLLECT_WITHIN.isValidIntValue(intExtra2)) {
+            if (KillPolicyManager.RANGE_AUTO_RESTART_NEVER_COLLECT_WITHIN.isValidIntValue(
+                    intExtra2)) {
                 KillPolicyManager.sNeverCollectWithin = intExtra2;
             }
-            if (KillPolicyManager.RANGE_AUTO_RESTART_COMPACT_TRIGGER_SIZE.isValidIntValue(intExtra3)) {
+            if (KillPolicyManager.RANGE_AUTO_RESTART_COMPACT_TRIGGER_SIZE.isValidIntValue(
+                    intExtra3)) {
                 KillPolicyManager.sCompactTriggerSize = intExtra3;
             }
-            if (KillPolicyManager.RANGE_AUTO_RESTART_NATIVE_FLOOD_RATIO.isValidIntValue(intExtra4)) {
+            if (KillPolicyManager.RANGE_AUTO_RESTART_NATIVE_FLOOD_RATIO.isValidIntValue(
+                    intExtra4)) {
                 KillPolicyManager.sNativeFloodRatio = intExtra4;
             }
-            if (KillPolicyManager.RANGE_AUTO_RESTART_SYSPERS_FLOOD_RATIO.isValidIntValue(intExtra5)) {
+            if (KillPolicyManager.RANGE_AUTO_RESTART_SYSPERS_FLOOD_RATIO.isValidIntValue(
+                    intExtra5)) {
                 KillPolicyManager.sSyspersFloodRatio = intExtra5;
             }
             if (KillPolicyManager.KPM_DEBUG) {
-                StringBuilder sb = new StringBuilder("Auto Restart Parameter Updated. {sMinTriggerSize=");
+                StringBuilder sb =
+                        new StringBuilder("Auto Restart Parameter Updated. {sMinTriggerSize=");
                 sb.append(KillPolicyManager.sMinTriggerSize);
                 sb.append(", sNeverCollectWithin=");
                 sb.append(KillPolicyManager.sNeverCollectWithin);
@@ -163,15 +178,23 @@ public final class KillPolicyManager {
                 sb.append(", sNativeFloodRatio=");
                 sb.append(KillPolicyManager.sNativeFloodRatio);
                 sb.append(", sSyspersFloodRatio=");
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb, KillPolicyManager.sSyspersFloodRatio, "}", "ActivityManager_kpm");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        sb, KillPolicyManager.sSyspersFloodRatio, "}", "ActivityManager_kpm");
             }
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ChimeraTriggerManager {
-        public static final float PMM_CRITICAL_SCORE_THRESHOLD = Float.parseFloat(SystemProperties.get("persist.sys.kpm.debug.chimera_critical_score_threshold", "3.0"));
-        public static final long TRIGGER_MIN_INTERVAL = Long.parseLong(SemSystemProperties.get("persist.sys.kpm.debug.chimera_trigger_min_interval", Duration.ofDays(1).toMillis() + ""));
+        public static final float PMM_CRITICAL_SCORE_THRESHOLD =
+                Float.parseFloat(
+                        SystemProperties.get(
+                                "persist.sys.kpm.debug.chimera_critical_score_threshold", "3.0"));
+        public static final long TRIGGER_MIN_INTERVAL =
+                Long.parseLong(
+                        SemSystemProperties.get(
+                                "persist.sys.kpm.debug.chimera_trigger_min_interval",
+                                Duration.ofDays(1).toMillis() + ""));
         public static ChimeraTriggerManager mInstance = null;
         public final Context mContext;
         public float mLastPolicyScore = -1.0f;
@@ -202,7 +225,8 @@ public final class KillPolicyManager {
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public abstract class DeviceInfoHelper {
-        public static final Uri URI_ISSUE_TRACKER = Uri.parse("content://issuetracker_provider/user_list");
+        public static final Uri URI_ISSUE_TRACKER =
+                Uri.parse("content://issuetracker_provider/user_list");
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
@@ -310,7 +334,14 @@ public final class KillPolicyManager {
         public static void m190$$Nest$mcheckMemCriticalLowTH(KpmRaw kpmRaw) {
             int i = kpmRaw.prKilledRatio;
             if (KillPolicyManager.KPM_DEBUG) {
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(BatteryService$$ExternalSyntheticOutline0.m(i, "checkMemCriticalLowTH() killRatio = ", "%, killedPackageRatio = "), kpmRaw.killedPackageRatio, "%", "ActivityManager_kpm");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        BatteryService$$ExternalSyntheticOutline0.m(
+                                i,
+                                "checkMemCriticalLowTH() killRatio = ",
+                                "%, killedPackageRatio = "),
+                        kpmRaw.killedPackageRatio,
+                        "%",
+                        "ActivityManager_kpm");
             }
             int i2 = KillPolicyManager.MEMORY_CRITICAL_LOW_PROCESS_KILL_RATIO_TH;
             KillPolicyManager killPolicyManager = KillPolicyManager.this;
@@ -321,7 +352,10 @@ public final class KillPolicyManager {
                     killPolicyManager.getClass();
                     if (i4 < KillPolicyManager.MEMORY_CRITICAL_LOW_PROCESS_KILL_PACKAGE_RATIO_TH) {
                         if (KillPolicyManager.KPM_DEBUG) {
-                            Slog.d("ActivityManager_kpm", "checkMemCriticalLowTH() killRatio is over thrshold but not occurred many apps, so result not accepted");
+                            Slog.d(
+                                    "ActivityManager_kpm",
+                                    "checkMemCriticalLowTH() killRatio is over thrshold but not"
+                                        + " occurred many apps, so result not accepted");
                         }
                     }
                 }
@@ -329,51 +363,120 @@ public final class KillPolicyManager {
             }
             kpmRaw.resetStatus = i3;
             if (KillPolicyManager.KPM_DEBUG) {
-                DeviceIdleController$$ExternalSyntheticOutline0.m(new StringBuilder("checkMemCriticalLowTH() memory critical status is "), kpmRaw.resetStatus, "ActivityManager_kpm");
+                DeviceIdleController$$ExternalSyntheticOutline0.m(
+                        new StringBuilder("checkMemCriticalLowTH() memory critical status is "),
+                        kpmRaw.resetStatus,
+                        "ActivityManager_kpm");
             }
-            if (SystemClock.uptimeMillis() > Duration.ofDays(1L).toMillis() && Boolean.parseBoolean(SystemProperties.get("persist.sys.kpm_cri_mem_detect", String.valueOf(true))) && !kpmRaw.isWarmUpCycle) {
+            if (SystemClock.uptimeMillis() > Duration.ofDays(1L).toMillis()
+                    && Boolean.parseBoolean(
+                            SystemProperties.get(
+                                    "persist.sys.kpm_cri_mem_detect", String.valueOf(true)))
+                    && !kpmRaw.isWarmUpCycle) {
                 killPolicyManager.getClass();
                 Intent intent = new Intent();
                 intent.setAction("com.samsung.KPM_CRITICAL_MEMORY_STATUS");
                 intent.putExtra("res", i3);
-                intent.setPackage(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_SMARTMANAGER_CONFIG_PACKAGE_NAME", "com.samsung.android.lool"));
+                intent.setPackage(
+                        SemFloatingFeature.getInstance()
+                                .getString(
+                                        "SEC_FLOATING_FEATURE_SMARTMANAGER_CONFIG_PACKAGE_NAME",
+                                        "com.samsung.android.lool"));
                 killPolicyManager.mContext.sendBroadcast(intent);
                 Slog.i("ActivityManager_kpm", "memory Critical Low intent RESULT : " + i3);
             }
             if (KillPolicyManager.mIsChimeraPmmKillTriggered) {
                 KpmState kpmState = kpmRaw.nextKpmState;
                 if (kpmState == KpmState.HEAVY || kpmState == KpmState.CRITICAL) {
-                    MemoryFloodDetector memoryFloodDetector = killPolicyManager.mMemoryFloodDetector;
-                    if (((ArrayList) memoryFloodDetector.mNativeMemDumpList).size() >= KillPolicyManager.sMinTriggerSize) {
-                        Pair linearRegressionFactor = MemoryFloodDetector.getLinearRegressionFactor(memoryFloodDetector.mNativeMemDumpList);
+                    MemoryFloodDetector memoryFloodDetector =
+                            killPolicyManager.mMemoryFloodDetector;
+                    if (((ArrayList) memoryFloodDetector.mNativeMemDumpList).size()
+                            >= KillPolicyManager.sMinTriggerSize) {
+                        Pair linearRegressionFactor =
+                                MemoryFloodDetector.getLinearRegressionFactor(
+                                        memoryFloodDetector.mNativeMemDumpList);
                         int size = ((ArrayList) memoryFloodDetector.mNativeMemDumpList).size() - 1;
                         double doubleValue = ((Double) linearRegressionFactor.second).doubleValue();
-                        double doubleValue2 = (((Double) linearRegressionFactor.first).doubleValue() * size) + doubleValue;
-                        Slog.i("ActivityManager_kpm", "nativeFactor : " + linearRegressionFactor.first + ", " + linearRegressionFactor.second + " => " + doubleValue + ", " + doubleValue2);
-                        memoryFloodDetector.mLastCalculatedNative = new Pair(Integer.valueOf((int) doubleValue), Integer.valueOf((int) doubleValue2));
+                        double doubleValue2 =
+                                (((Double) linearRegressionFactor.first).doubleValue() * size)
+                                        + doubleValue;
+                        Slog.i(
+                                "ActivityManager_kpm",
+                                "nativeFactor : "
+                                        + linearRegressionFactor.first
+                                        + ", "
+                                        + linearRegressionFactor.second
+                                        + " => "
+                                        + doubleValue
+                                        + ", "
+                                        + doubleValue2);
+                        memoryFloodDetector.mLastCalculatedNative =
+                                new Pair(
+                                        Integer.valueOf((int) doubleValue),
+                                        Integer.valueOf((int) doubleValue2));
                     }
-                    if (((ArrayList) memoryFloodDetector.mSystemMemDumpList).size() >= KillPolicyManager.sMinTriggerSize) {
-                        Pair linearRegressionFactor2 = MemoryFloodDetector.getLinearRegressionFactor(memoryFloodDetector.mSystemMemDumpList);
-                        Pair linearRegressionFactor3 = MemoryFloodDetector.getLinearRegressionFactor(memoryFloodDetector.mPersistentMemDumpList);
+                    if (((ArrayList) memoryFloodDetector.mSystemMemDumpList).size()
+                            >= KillPolicyManager.sMinTriggerSize) {
+                        Pair linearRegressionFactor2 =
+                                MemoryFloodDetector.getLinearRegressionFactor(
+                                        memoryFloodDetector.mSystemMemDumpList);
+                        Pair linearRegressionFactor3 =
+                                MemoryFloodDetector.getLinearRegressionFactor(
+                                        memoryFloodDetector.mPersistentMemDumpList);
                         int size2 = ((ArrayList) memoryFloodDetector.mSystemMemDumpList).size() - 1;
-                        double doubleValue3 = ((Double) linearRegressionFactor3.second).doubleValue() + ((Double) linearRegressionFactor2.second).doubleValue();
+                        double doubleValue3 =
+                                ((Double) linearRegressionFactor3.second).doubleValue()
+                                        + ((Double) linearRegressionFactor2.second).doubleValue();
                         double d = size2;
-                        double doubleValue4 = (((Double) linearRegressionFactor3.first).doubleValue() * d) + (((Double) linearRegressionFactor2.first).doubleValue() * d) + doubleValue3;
-                        Slog.i("ActivityManager_kpm", "sysFactor : " + linearRegressionFactor2.first + ", " + linearRegressionFactor2.second + " persFactor : " + linearRegressionFactor3.first + ", " + linearRegressionFactor3.second + " => " + doubleValue3 + ", " + doubleValue4);
-                        memoryFloodDetector.mLastCalculatedSysPers = new Pair(Integer.valueOf((int) doubleValue3), Integer.valueOf((int) doubleValue4));
+                        double doubleValue4 =
+                                (((Double) linearRegressionFactor3.first).doubleValue() * d)
+                                        + (((Double) linearRegressionFactor2.first).doubleValue()
+                                                * d)
+                                        + doubleValue3;
+                        Slog.i(
+                                "ActivityManager_kpm",
+                                "sysFactor : "
+                                        + linearRegressionFactor2.first
+                                        + ", "
+                                        + linearRegressionFactor2.second
+                                        + " persFactor : "
+                                        + linearRegressionFactor3.first
+                                        + ", "
+                                        + linearRegressionFactor3.second
+                                        + " => "
+                                        + doubleValue3
+                                        + ", "
+                                        + doubleValue4);
+                        memoryFloodDetector.mLastCalculatedSysPers =
+                                new Pair(
+                                        Integer.valueOf((int) doubleValue3),
+                                        Integer.valueOf((int) doubleValue4));
                     }
-                    MemoryFloodDetector memoryFloodDetector2 = killPolicyManager.mMemoryFloodDetector;
-                    if (((ArrayList) memoryFloodDetector2.mNativeMemDumpList).size() >= KillPolicyManager.sMinTriggerSize) {
-                        if (((Integer) memoryFloodDetector2.mLastCalculatedNative.first).intValue() * (KillPolicyManager.sNativeFloodRatio + 100) < ((Integer) memoryFloodDetector2.mLastCalculatedNative.second).intValue() * 100.0d) {
-                            KillPolicyManager.m188$$Nest$mreportResetState(killPolicyManager, "KERNEL");
+                    MemoryFloodDetector memoryFloodDetector2 =
+                            killPolicyManager.mMemoryFloodDetector;
+                    if (((ArrayList) memoryFloodDetector2.mNativeMemDumpList).size()
+                            >= KillPolicyManager.sMinTriggerSize) {
+                        if (((Integer) memoryFloodDetector2.mLastCalculatedNative.first).intValue()
+                                        * (KillPolicyManager.sNativeFloodRatio + 100)
+                                < ((Integer) memoryFloodDetector2.mLastCalculatedNative.second)
+                                                .intValue()
+                                        * 100.0d) {
+                            KillPolicyManager.m188$$Nest$mreportResetState(
+                                    killPolicyManager, "KERNEL");
                             return;
                         }
                     }
-                    if (((ArrayList) memoryFloodDetector2.mSystemMemDumpList).size() < KillPolicyManager.sMinTriggerSize) {
+                    if (((ArrayList) memoryFloodDetector2.mSystemMemDumpList).size()
+                            < KillPolicyManager.sMinTriggerSize) {
                         return;
                     }
-                    if (((Integer) memoryFloodDetector2.mLastCalculatedSysPers.first).intValue() * (KillPolicyManager.sSyspersFloodRatio + 100) < ((Integer) memoryFloodDetector2.mLastCalculatedSysPers.second).intValue() * 100.0d) {
-                        KillPolicyManager.m188$$Nest$mreportResetState(killPolicyManager, "PLATFORM");
+                    if (((Integer) memoryFloodDetector2.mLastCalculatedSysPers.first).intValue()
+                                    * (KillPolicyManager.sSyspersFloodRatio + 100)
+                            < ((Integer) memoryFloodDetector2.mLastCalculatedSysPers.second)
+                                            .intValue()
+                                    * 100.0d) {
+                        KillPolicyManager.m188$$Nest$mreportResetState(
+                                killPolicyManager, "PLATFORM");
                     }
                 }
             }
@@ -385,12 +488,17 @@ public final class KillPolicyManager {
                 kpmRaw.getClass();
                 return;
             }
-            if (!((HashMap) kpmRaw.launchedAndKilledPackageMap).containsKey(str) || ((Integer) ((HashMap) kpmRaw.launchedAndKilledPackageMap).get(str)).intValue() <= i) {
+            if (!((HashMap) kpmRaw.launchedAndKilledPackageMap).containsKey(str)
+                    || ((Integer) ((HashMap) kpmRaw.launchedAndKilledPackageMap).get(str))
+                                    .intValue()
+                            <= i) {
                 return;
             }
             ((HashMap) kpmRaw.launchedAndKilledPackageMap).put(str, Integer.valueOf(i));
             if (KillPolicyManager.KPM_DEBUG) {
-                StringBuilder m = StorageManagerService$$ExternalSyntheticOutline0.m(i, "markKilledPackage : ", str, ", adj ", ", killed adj : ");
+                StringBuilder m =
+                        StorageManagerService$$ExternalSyntheticOutline0.m(
+                                i, "markKilledPackage : ", str, ", adj ", ", killed adj : ");
                 m.append(((HashMap) kpmRaw.launchedAndKilledPackageMap).get(str));
                 Slog.d("ActivityManager_kpm", m.toString());
             }
@@ -413,9 +521,15 @@ public final class KillPolicyManager {
             this.prevLmkdMed = 0L;
             this.prevLmkdCric = 0L;
             this.prevLmkdCric = SecLmkdStats.getTotalCriticalKillCount();
-            this.prevLmkdMed = SecLmkdStats.getKillCountFromSlotRange(0, 15, false, false) - this.prevLmkdCric;
+            this.prevLmkdMed =
+                    SecLmkdStats.getKillCountFromSlotRange(0, 15, false, false) - this.prevLmkdCric;
             long[] jArr = {0};
-            Process.readProcFile("/sys/module/lowmemorykiller/parameters/lmkcount", new int[]{8224}, null, jArr, null);
+            Process.readProcFile(
+                    "/sys/module/lowmemorykiller/parameters/lmkcount",
+                    new int[] {8224},
+                    null,
+                    jArr,
+                    null);
             this.prevLmkCnt = jArr[0];
             this.curKpmState = KillPolicyManager.this.mCurrentState;
             this.nextKpmState = KpmState.NORMAL;
@@ -462,7 +576,9 @@ public final class KillPolicyManager {
                 i4++;
             }
             KillPolicyManager.fillLmkdCounts(this.lmkdPrevCount);
-            this.lmkdCounter = KillPolicyManager.this.new LmkdCounter(this, KillPolicyManager.this.mLmkdReader);
+            this.lmkdCounter =
+                    KillPolicyManager.this
+                    .new LmkdCounter(this, KillPolicyManager.this.mLmkdReader);
             this.launchedAndKilledPackageMap = new HashMap();
             this.lmkdKilledProcessInfo = new ArrayList();
             this.dumpHeavyProcessList = null;
@@ -647,7 +763,8 @@ public final class KillPolicyManager {
                     m.append(", [null]");
                 }
                 for (int i = 0; i < this.dumpHeavyProcessList.size(); i++) {
-                    DumpHeavyProcessInfo dumpHeavyProcessInfo = (DumpHeavyProcessInfo) this.dumpHeavyProcessList.get(i);
+                    DumpHeavyProcessInfo dumpHeavyProcessInfo =
+                            (DumpHeavyProcessInfo) this.dumpHeavyProcessList.get(i);
                     m.append(",[");
                     m.append(dumpHeavyProcessInfo.memoryInfo.procName);
                     m.append(", ver: ");
@@ -673,7 +790,8 @@ public final class KillPolicyManager {
                     m.append(" mb, rss: ");
                     m.append((int) ((dumpHeavyProcessInfo.memoryInfo.rss / 1024.0d) + 0.5d));
                     m.append(" mb, ");
-                    ProcessMemoryHeavyInfo processMemoryHeavyInfo = killPolicyManager.mProcessHeavyMemory;
+                    ProcessMemoryHeavyInfo processMemoryHeavyInfo =
+                            killPolicyManager.mProcessHeavyMemory;
                     ArrayList arrayList = dumpHeavyProcessInfo.pssUssRssInfo;
                     processMemoryHeavyInfo.getClass();
                     m.append(ProcessMemoryHeavyInfo.dumpPssUssRssToString(arrayList));
@@ -686,9 +804,17 @@ public final class KillPolicyManager {
         public final void updateKillInfo() {
             long totalCriticalKillCount = SecLmkdStats.getTotalCriticalKillCount();
             this.lmkdCric = totalCriticalKillCount - this.prevLmkdCric;
-            this.lmkdMed = (SecLmkdStats.getKillCountFromSlotRange(0, 15, false, false) - totalCriticalKillCount) - this.prevLmkdMed;
+            this.lmkdMed =
+                    (SecLmkdStats.getKillCountFromSlotRange(0, 15, false, false)
+                                    - totalCriticalKillCount)
+                            - this.prevLmkdMed;
             long[] jArr = {0};
-            Process.readProcFile("/sys/module/lowmemorykiller/parameters/lmkcount", new int[]{8224}, null, jArr, null);
+            Process.readProcFile(
+                    "/sys/module/lowmemorykiller/parameters/lmkcount",
+                    new int[] {8224},
+                    null,
+                    jArr,
+                    null);
             this.lmkCnt = jArr[0] - this.prevLmkCnt;
         }
 
@@ -718,8 +844,11 @@ public final class KillPolicyManager {
             String str3 = KillPolicyManager.this.mPrevPackage;
             if (str3 != null && !((HashMap) this.launchedAndKilledPackageMap).containsKey(str3)) {
                 ((HashMap) this.launchedAndKilledPackageMap).put(str3, 1000);
-                if (KillPolicyManager.KPM_DEBUG && this == KillPolicyManager.this.getCurrentKpmRawPolicy()) {
-                    StringBuilder m = DumpUtils$$ExternalSyntheticOutline0.m("add addLaunchedPackage : ", str3, ", cur count : ");
+                if (KillPolicyManager.KPM_DEBUG
+                        && this == KillPolicyManager.this.getCurrentKpmRawPolicy()) {
+                    StringBuilder m =
+                            DumpUtils$$ExternalSyntheticOutline0.m(
+                                    "add addLaunchedPackage : ", str3, ", cur count : ");
                     m.append(((HashMap) this.launchedAndKilledPackageMap).size());
                     Slog.d("ActivityManager_kpm", m.toString());
                 }
@@ -727,10 +856,14 @@ public final class KillPolicyManager {
             LmkdCounter lmkdCounter = this.lmkdCounter;
             LmkdCountReader lmkdCountReader = KillPolicyManager.this.mLmkdReader;
             lmkdCounter.getClass();
-            lmkdCounter.totalKillCount = lmkdCountReader.totalCountOfLmkd - lmkdCounter.prevTotalCountOfLmkd;
-            lmkdCounter.cachedMinKillCount = lmkdCountReader.cachedMinCountOfLmkd - lmkdCounter.prevCachedMinCountOfLmkd;
-            lmkdCounter.pickedKillCount = lmkdCountReader.pickedCountOfLmkd - lmkdCounter.prevPickedCountOfLmkd;
-            lmkdCounter.bServiceKillCount = lmkdCountReader.bServiceCountOfLmkd - lmkdCounter.prevBServiceCountOfLmkd;
+            lmkdCounter.totalKillCount =
+                    lmkdCountReader.totalCountOfLmkd - lmkdCounter.prevTotalCountOfLmkd;
+            lmkdCounter.cachedMinKillCount =
+                    lmkdCountReader.cachedMinCountOfLmkd - lmkdCounter.prevCachedMinCountOfLmkd;
+            lmkdCounter.pickedKillCount =
+                    lmkdCountReader.pickedCountOfLmkd - lmkdCounter.prevPickedCountOfLmkd;
+            lmkdCounter.bServiceKillCount =
+                    lmkdCountReader.bServiceCountOfLmkd - lmkdCounter.prevBServiceCountOfLmkd;
             long j = lmkdCountReader.previousCountOfLmkd - lmkdCounter.prevPreviousCountOfLmkd;
             lmkdCounter.previousKillCount = j;
             KillPolicyManager killPolicyManager = KillPolicyManager.this;
@@ -747,8 +880,10 @@ public final class KillPolicyManager {
                     m191$$Nest$mmarkKilledPackage(kpmRaw, killPolicyManager.mPrevPackage, 800);
                 }
             }
-            if (KillPolicyManager.KPM_DEBUG && kpmRaw == killPolicyManager.getCurrentKpmRawPolicy()) {
-                StringBuilder m2 = BootReceiver$$ExternalSyntheticOutline0.m(128, "prevKillCount : (pE : ");
+            if (KillPolicyManager.KPM_DEBUG
+                    && kpmRaw == killPolicyManager.getCurrentKpmRawPolicy()) {
+                StringBuilder m2 =
+                        BootReceiver$$ExternalSyntheticOutline0.m(128, "prevKillCount : (pE : ");
                 m2.append(lmkdCounter.prevTotalCountOfLmkd);
                 m2.append(", pPr : ");
                 m2.append(lmkdCounter.prevPreviousCountOfLmkd);
@@ -794,17 +929,24 @@ public final class KillPolicyManager {
             int i2 = this.hotCount;
             int i3 = this.warmCount + i2 + this.coldCount;
             this.hotRatio = i3 > 0 ? (int) (((i2 * 100.0d) / i3) + 0.5d) : 0;
-            if (KillPolicyManager.KPM_DEBUG && this == KillPolicyManager.this.getCurrentKpmRawPolicy()) {
-                GmsAlarmManager$$ExternalSyntheticOutline0.m("updateLaunchState() pkg ", str, " type ", str2, "ActivityManager_kpm");
+            if (KillPolicyManager.KPM_DEBUG
+                    && this == KillPolicyManager.this.getCurrentKpmRawPolicy()) {
+                GmsAlarmManager$$ExternalSyntheticOutline0.m(
+                        "updateLaunchState() pkg ", str, " type ", str2, "ActivityManager_kpm");
             }
             int i4 = 0;
             int i5 = 0;
             int i6 = 0;
             int i7 = 0;
-            for (int i8 = 0; i8 < KillPolicyManager.this.mAm.mProcessList.mLruProcesses.size(); i8++) {
+            for (int i8 = 0;
+                    i8 < KillPolicyManager.this.mAm.mProcessList.mLruProcesses.size();
+                    i8++) {
                 try {
                     try {
-                        ProcessRecord processRecord = (ProcessRecord) KillPolicyManager.this.mAm.mProcessList.mLruProcesses.get(i8);
+                        ProcessRecord processRecord =
+                                (ProcessRecord)
+                                        KillPolicyManager.this.mAm.mProcessList.mLruProcesses.get(
+                                                i8);
                         if (processRecord != null) {
                             int i9 = processRecord.mState.mCurAdj;
                             if (i9 >= 900 && i9 <= 999) {
@@ -813,7 +955,8 @@ public final class KillPolicyManager {
                             if (i9 == 850) {
                                 i5++;
                             }
-                            if (processRecord.mWindowProcessController.mHasActivities && processRecord.mState.mCurProcState == 16) {
+                            if (processRecord.mWindowProcessController.mHasActivities
+                                    && processRecord.mState.mCurProcState == 16) {
                                 if (i9 == 850) {
                                     i7++;
                                 } else {
@@ -835,13 +978,25 @@ public final class KillPolicyManager {
             this.currentCachedActCnt = i6;
             int i10 = this.appCnt;
             LmkdCounter lmkdCounter2 = this.lmkdCounter;
-            this.prKilledRatio = i10 > 0 ? (int) (((lmkdCounter2.previousKillOccurredCount * 100.0d) / i10) + 0.5d) : 0;
-            this.svKilledRatio = i10 > 0 ? (int) (((lmkdCounter2.bServiceKillOccurredCount * 100.0d) / i10) + 0.5d) : 0;
+            this.prKilledRatio =
+                    i10 > 0
+                            ? (int)
+                                    (((lmkdCounter2.previousKillOccurredCount * 100.0d) / i10)
+                                            + 0.5d)
+                            : 0;
+            this.svKilledRatio =
+                    i10 > 0
+                            ? (int)
+                                    (((lmkdCounter2.bServiceKillOccurredCount * 100.0d) / i10)
+                                            + 0.5d)
+                            : 0;
             this.launchedPackageCount = ((HashMap) this.launchedAndKilledPackageMap).size();
             Iterator it = ((HashMap) this.launchedAndKilledPackageMap).keySet().iterator();
             int i11 = 0;
             while (it.hasNext()) {
-                if (((Integer) ((HashMap) this.launchedAndKilledPackageMap).get((String) it.next())).intValue() <= 700) {
+                if (((Integer) ((HashMap) this.launchedAndKilledPackageMap).get((String) it.next()))
+                                .intValue()
+                        <= 700) {
                     i11++;
                 }
             }
@@ -849,8 +1004,11 @@ public final class KillPolicyManager {
             int i12 = this.launchedPackageCount;
             KillPolicyManager.this.getClass();
             this.killedPackageRatio = i12 > 0 ? (int) (((i11 * 100.0d) / i12) + 0.5d) : 0;
-            if (KillPolicyManager.KPM_DEBUG && this == KillPolicyManager.this.getCurrentKpmRawPolicy()) {
-                StringBuilder m3 = BootReceiver$$ExternalSyntheticOutline0.m(128, "updateProcessStateInfo() appCnt - ");
+            if (KillPolicyManager.KPM_DEBUG
+                    && this == KillPolicyManager.this.getCurrentKpmRawPolicy()) {
+                StringBuilder m3 =
+                        BootReceiver$$ExternalSyntheticOutline0.m(
+                                128, "updateProcessStateInfo() appCnt - ");
                 m3.append(this.appCnt);
                 m3.append(" launch total - ");
                 m3.append(this.hotCount + this.warmCount + this.coldCount);
@@ -880,7 +1038,11 @@ public final class KillPolicyManager {
                 m3.append("), Picked (T:");
                 m3.append((int) ((this.pickedTotalCnt / this.appCnt) + 0.5d));
                 m3.append("/A:");
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(m3, (int) ((this.pickedActTotalCnt / this.appCnt) + 0.5d), ")", "ActivityManager_kpm");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        m3,
+                        (int) ((this.pickedActTotalCnt / this.appCnt) + 0.5d),
+                        ")",
+                        "ActivityManager_kpm");
             }
         }
 
@@ -897,8 +1059,11 @@ public final class KillPolicyManager {
             if (this.psiIoMax < d3) {
                 this.psiIoMax = d3;
             }
-            if (KillPolicyManager.KPM_DEBUG && this == KillPolicyManager.this.getCurrentKpmRawPolicy()) {
-                Slog.d("ActivityManager_kpm", "Psi info cpu : " + d + ", memory : " + d2 + ", io : " + d3);
+            if (KillPolicyManager.KPM_DEBUG
+                    && this == KillPolicyManager.this.getCurrentKpmRawPolicy()) {
+                Slog.d(
+                        "ActivityManager_kpm",
+                        "Psi info cpu : " + d + ", memory : " + d2 + ", io : " + d3);
             }
         }
     }
@@ -982,14 +1147,18 @@ public final class KillPolicyManager {
 
         public final void readLmkdKillCount() {
             this.totalCountOfLmkd = SecLmkdStats.getKillCountFromSlotRange(0, 15, false, false);
-            this.cachedMinCountOfLmkd = SecLmkdStats.getKillCountFromSlotRange(14, 14, false, false);
+            this.cachedMinCountOfLmkd =
+                    SecLmkdStats.getKillCountFromSlotRange(14, 14, false, false);
             this.pickedCountOfLmkd = SecLmkdStats.getKillCountFromSlotRange(12, 13, true, false);
             this.bServiceCountOfLmkd = SecLmkdStats.getKillCountFromSlotRange(11, 12, true, false);
             this.previousCountOfLmkd = SecLmkdStats.getKillCountFromSlotRange(10, 11, true, false);
-            this.homeToPercCountOfLmkd = SecLmkdStats.getKillCountFromSlotRange(3, 10, false, false);
+            this.homeToPercCountOfLmkd =
+                    SecLmkdStats.getKillCountFromSlotRange(3, 10, false, false);
             this.visToFgCountOfLmkd = SecLmkdStats.getKillCountFromSlotRange(0, 3, false, true);
             if (KillPolicyManager.KPM_DEBUG) {
-                StringBuilder m = BootReceiver$$ExternalSyntheticOutline0.m(128, "readLmkdKillCount() : (E : ");
+                StringBuilder m =
+                        BootReceiver$$ExternalSyntheticOutline0.m(
+                                128, "readLmkdKillCount() : (E : ");
                 m.append(this.totalCountOfLmkd);
                 m.append(", Pr : ");
                 m.append(this.previousCountOfLmkd);
@@ -1075,15 +1244,24 @@ public final class KillPolicyManager {
         }
 
         public final void getCycleLmkdKillCountByADJ(LmkdCountReader lmkdCountReader) {
-            this.cycleTotalKillCount = lmkdCountReader.totalCountOfLmkd - this.prevCycleTotalCountOfLmkd;
-            this.cycleCachedMinKillCount = lmkdCountReader.cachedMinCountOfLmkd - this.prevCycleCachedMinCountOfLmkd;
-            this.cyclePickedKillCount = lmkdCountReader.pickedCountOfLmkd - this.prevCyclePickedCountOfLmkd;
-            this.cycleBServiceKillCount = lmkdCountReader.bServiceCountOfLmkd - this.prevCycleBServiceCountOfLmkd;
-            this.cyclePreviousKillCount = lmkdCountReader.previousCountOfLmkd - this.prevCyclePreviousCountOfLmkd;
-            this.cycleHomeToPercKillCount = lmkdCountReader.homeToPercCountOfLmkd - this.prevCycleHomeToPercCountOfLmkd;
-            this.cycleVisToFgKillCount = lmkdCountReader.visToFgCountOfLmkd - this.prevCycleVisToFgCountOfLmkd;
+            this.cycleTotalKillCount =
+                    lmkdCountReader.totalCountOfLmkd - this.prevCycleTotalCountOfLmkd;
+            this.cycleCachedMinKillCount =
+                    lmkdCountReader.cachedMinCountOfLmkd - this.prevCycleCachedMinCountOfLmkd;
+            this.cyclePickedKillCount =
+                    lmkdCountReader.pickedCountOfLmkd - this.prevCyclePickedCountOfLmkd;
+            this.cycleBServiceKillCount =
+                    lmkdCountReader.bServiceCountOfLmkd - this.prevCycleBServiceCountOfLmkd;
+            this.cyclePreviousKillCount =
+                    lmkdCountReader.previousCountOfLmkd - this.prevCyclePreviousCountOfLmkd;
+            this.cycleHomeToPercKillCount =
+                    lmkdCountReader.homeToPercCountOfLmkd - this.prevCycleHomeToPercCountOfLmkd;
+            this.cycleVisToFgKillCount =
+                    lmkdCountReader.visToFgCountOfLmkd - this.prevCycleVisToFgCountOfLmkd;
             if (KillPolicyManager.KPM_DEBUG) {
-                StringBuilder m = BootReceiver$$ExternalSyntheticOutline0.m(128, "Cycle currentKillCountLmkd : (cE : ");
+                StringBuilder m =
+                        BootReceiver$$ExternalSyntheticOutline0.m(
+                                128, "Cycle currentKillCountLmkd : (cE : ");
                 m.append(this.cycleTotalKillCount);
                 m.append(", cPr : ");
                 m.append(this.cyclePreviousKillCount);
@@ -1178,7 +1356,8 @@ public final class KillPolicyManager {
             Iterator it = ((ArrayList) list).iterator();
             while (it.hasNext()) {
                 MemoryDumpItem memoryDumpItem = (MemoryDumpItem) it.next();
-                printWriter.print(memoryDumpItem.mMemoryType == MemoryLoggingType.IdleDump ? " I " : " P ");
+                printWriter.print(
+                        memoryDumpItem.mMemoryType == MemoryLoggingType.IdleDump ? " I " : " P ");
                 printWriter.print(memoryDumpItem.mDumpSize);
             }
             printWriter.println();
@@ -1199,8 +1378,20 @@ public final class KillPolicyManager {
 
         public static JSONArray getJsonSummary(List list) {
             JSONArray jSONArray = new JSONArray();
-            LongSummaryStatistics summaryStatistics = list.stream().mapToLong(new KillPolicyManager$MemoryFloodDetector$$ExternalSyntheticLambda0()).summaryStatistics();
-            jSONArray.put((int) ((((MemoryDumpItem) list.get(list.size() - 1)).mDumpSize / 1024) + 0.5d)).put(summaryStatistics.getMin()).put(summaryStatistics.getMax()).put((int) (summaryStatistics.getAverage() + 0.5d)).put(list.size());
+            LongSummaryStatistics summaryStatistics =
+                    list.stream()
+                            .mapToLong(
+                                    new KillPolicyManager$MemoryFloodDetector$$ExternalSyntheticLambda0())
+                            .summaryStatistics();
+            jSONArray
+                    .put(
+                            (int)
+                                    ((((MemoryDumpItem) list.get(list.size() - 1)).mDumpSize / 1024)
+                                            + 0.5d))
+                    .put(summaryStatistics.getMin())
+                    .put(summaryStatistics.getMax())
+                    .put((int) (summaryStatistics.getAverage() + 0.5d))
+                    .put(list.size());
             return jSONArray;
         }
 
@@ -1251,7 +1442,7 @@ public final class KillPolicyManager {
             IdleDump = memoryLoggingType;
             MemoryLoggingType memoryLoggingType2 = new MemoryLoggingType("PmmDump", 1);
             PmmDump = memoryLoggingType2;
-            $VALUES = new MemoryLoggingType[]{memoryLoggingType, memoryLoggingType2};
+            $VALUES = new MemoryLoggingType[] {memoryLoggingType, memoryLoggingType2};
         }
 
         public static MemoryLoggingType valueOf(String str) {
@@ -1282,12 +1473,10 @@ public final class KillPolicyManager {
             public final Counter mTempCounter = new Counter();
             public final Counter mDiffCounter = new Counter();
 
-            public Reporter() {
-            }
+            public Reporter() {}
         }
 
-        public MemoryStabilityEventManager() {
-        }
+        public MemoryStabilityEventManager() {}
 
         public final void report() {
             int i;
@@ -1306,14 +1495,21 @@ public final class KillPolicyManager {
                 i2 = elapsedRealtime;
             }
             if (!KillPolicyManager.KPM_DEBUG && i2 < 1400) {
-                HermesService$3$$ExternalSyntheticOutline0.m(i2, "reportDiff() Skipped. diffRealtimeMinutes=", "ActivityManager_kpm");
+                HermesService$3$$ExternalSyntheticOutline0.m(
+                        i2, "reportDiff() Skipped. diffRealtimeMinutes=", "ActivityManager_kpm");
                 return;
             }
             Counter counter = reporter.mTempCounter;
             counter.getClass();
             long[] jArr = new long[3];
             try {
-                z = Process.readProcFile("/sys/block/zram0/mm_stat", Counter.FORMAT_ZRAM_ERROR, null, jArr, null);
+                z =
+                        Process.readProcFile(
+                                "/sys/block/zram0/mm_stat",
+                                Counter.FORMAT_ZRAM_ERROR,
+                                null,
+                                jArr,
+                                null);
             } catch (NullPointerException | OutOfMemoryError e) {
                 Slog.e("ActivityManager_kpm", e.getMessage());
                 z = false;
@@ -1362,7 +1558,10 @@ public final class KillPolicyManager {
                 String substring = jSONObject2.substring(1, jSONObject2.length() - 1);
                 KillPolicyManager killPolicyManager = KillPolicyManager.this;
                 if (killPolicyManager.mHqmManager == null) {
-                    SemHqmManager semHqmManager = (SemHqmManager) killPolicyManager.mContext.getSystemService("HqmManagerService");
+                    SemHqmManager semHqmManager =
+                            (SemHqmManager)
+                                    killPolicyManager.mContext.getSystemService(
+                                            "HqmManagerService");
                     killPolicyManager.mHqmManager = semHqmManager;
                     if (semHqmManager == null) {
                         if (KillPolicyManager.KPM_DEBUG) {
@@ -1372,8 +1571,18 @@ public final class KillPolicyManager {
                         return;
                     }
                 }
-                if (killPolicyManager.mHqmManager.sendHWParamToHQM(KillPolicyManager.KPM_DEBUG ? 1 : 0, "Sluggish", "MSEC", "ph", "1.1", "sec", "", substring, "")) {
-                    BinaryTransparencyService$$ExternalSyntheticOutline0.m("Success to report 'MSEC' : ", substring, "ActivityManager_kpm");
+                if (killPolicyManager.mHqmManager.sendHWParamToHQM(
+                        KillPolicyManager.KPM_DEBUG ? 1 : 0,
+                        "Sluggish",
+                        "MSEC",
+                        "ph",
+                        "1.1",
+                        "sec",
+                        "",
+                        substring,
+                        "")) {
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            "Success to report 'MSEC' : ", substring, "ActivityManager_kpm");
                 } else {
                     Slog.d("ActivityManager_kpm", "Failed to send to server");
                 }
@@ -1421,8 +1630,10 @@ public final class KillPolicyManager {
         public final class PssComparator implements Comparator {
             @Override // java.util.Comparator
             public final int compare(Object obj, Object obj2) {
-                ActivityManagerService.MemDumpInfo memDumpInfo = (ActivityManagerService.MemDumpInfo) obj;
-                ActivityManagerService.MemDumpInfo memDumpInfo2 = (ActivityManagerService.MemDumpInfo) obj2;
+                ActivityManagerService.MemDumpInfo memDumpInfo =
+                        (ActivityManagerService.MemDumpInfo) obj;
+                ActivityManagerService.MemDumpInfo memDumpInfo2 =
+                        (ActivityManagerService.MemDumpInfo) obj2;
                 long j = memDumpInfo.pss + memDumpInfo.swap_out;
                 long j2 = memDumpInfo2.pss + memDumpInfo2.swap_out;
                 if (j < j2) {
@@ -1442,16 +1653,23 @@ public final class KillPolicyManager {
             Code decompiled incorrectly, please refer to instructions dump.
             To view partially-correct code enable 'Show inconsistent code' option in preferences
         */
-        public static void m193$$Nest$mgetProcessMemoryDumpInformation(com.android.server.am.KillPolicyManager.ProcessMemoryHeavyInfo r30, boolean r31, com.android.server.am.KillPolicyManager.ProcMemInfo r32) {
+        public static void m193$$Nest$mgetProcessMemoryDumpInformation(
+                com.android.server.am.KillPolicyManager.ProcessMemoryHeavyInfo r30,
+                boolean r31,
+                com.android.server.am.KillPolicyManager.ProcMemInfo r32) {
             /*
                 Method dump skipped, instructions count: 726
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.KillPolicyManager.ProcessMemoryHeavyInfo.m193$$Nest$mgetProcessMemoryDumpInformation(com.android.server.am.KillPolicyManager$ProcessMemoryHeavyInfo, boolean, com.android.server.am.KillPolicyManager$ProcMemInfo):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.am.KillPolicyManager.ProcessMemoryHeavyInfo.m193$$Nest$mgetProcessMemoryDumpInformation(com.android.server.am.KillPolicyManager$ProcessMemoryHeavyInfo,"
+                        + " boolean, com.android.server.am.KillPolicyManager$ProcMemInfo):void");
         }
 
         /* renamed from: -$$Nest$mreportHeavyProcessTop5ByAdj, reason: not valid java name */
-        public static void m194$$Nest$mreportHeavyProcessTop5ByAdj(ProcessMemoryHeavyInfo processMemoryHeavyInfo) {
+        public static void m194$$Nest$mreportHeavyProcessTop5ByAdj(
+                ProcessMemoryHeavyInfo processMemoryHeavyInfo) {
             String[] strArr;
             int i;
             int i2;
@@ -1476,7 +1694,13 @@ public final class KillPolicyManager {
                 int i4 = 0;
                 while (i4 < length2) {
                     String str2 = strArr2[i4];
-                    if (!processMemoryHeavyInfo.dumpHeavyProcessByAdj.containsKey(str2) || (arrayList = (ArrayList) processMemoryHeavyInfo.dumpHeavyProcessByAdj.get(str2)) == null || arrayList.size() <= 0) {
+                    if (!processMemoryHeavyInfo.dumpHeavyProcessByAdj.containsKey(str2)
+                            || (arrayList =
+                                            (ArrayList)
+                                                    processMemoryHeavyInfo.dumpHeavyProcessByAdj
+                                                            .get(str2))
+                                    == null
+                            || arrayList.size() <= 0) {
                         strArr = strArr2;
                         i = length2;
                         i2 = i4;
@@ -1485,7 +1709,8 @@ public final class KillPolicyManager {
                         JSONArray jSONArray = new JSONArray();
                         int i5 = 0;
                         while (i5 < arrayList.size()) {
-                            DumpHeavyProcessInfo dumpHeavyProcessInfo = (DumpHeavyProcessInfo) arrayList.get(i5);
+                            DumpHeavyProcessInfo dumpHeavyProcessInfo =
+                                    (DumpHeavyProcessInfo) arrayList.get(i5);
                             int length3 = jSONObject.toString().length();
                             int length4 = str3.length();
                             String[] strArr3 = strArr2;
@@ -1502,7 +1727,9 @@ public final class KillPolicyManager {
                             } else {
                                 i3 = i4;
                                 str = str3;
-                                length = String.valueOf(dumpHeavyProcessInfo.processVersion).length();
+                                length =
+                                        String.valueOf(dumpHeavyProcessInfo.processVersion)
+                                                .length();
                             }
                             int i7 = i3;
                             if (length3 + length4 + length5 + length6 + length > 2020) {
@@ -1520,7 +1747,8 @@ public final class KillPolicyManager {
                                     sb.append(length);
                                     Slog.d("ActivityManager_kpm", sb.toString());
                                 }
-                                processMemoryHeavyInfo.sendHqmHeavyProcessTop5ByAdj(jSONObject, uptimeMillis);
+                                processMemoryHeavyInfo.sendHqmHeavyProcessTop5ByAdj(
+                                        jSONObject, uptimeMillis);
                                 jSONObject = new JSONObject();
                             }
                             jSONArray.put(dumpHeavyProcessInfo.memoryInfo.procName);
@@ -1530,7 +1758,20 @@ public final class KillPolicyManager {
                             } else {
                                 jSONArray.put(String.valueOf(dumpHeavyProcessInfo.processVersion));
                             }
-                            jSONArray.put((int) ((dumpHeavyProcessInfo.memoryInfo.pss / 1024.0d) + 0.5d)).put((int) ((dumpHeavyProcessInfo.memoryInfo.swap_out / 1024.0d) + 0.5d)).put((int) ((dumpHeavyProcessInfo.memoryInfo.rss / 1024.0d) + 0.5d));
+                            jSONArray
+                                    .put(
+                                            (int)
+                                                    ((dumpHeavyProcessInfo.memoryInfo.pss / 1024.0d)
+                                                            + 0.5d))
+                                    .put(
+                                            (int)
+                                                    ((dumpHeavyProcessInfo.memoryInfo.swap_out
+                                                                    / 1024.0d)
+                                                            + 0.5d))
+                                    .put(
+                                            (int)
+                                                    ((dumpHeavyProcessInfo.memoryInfo.rss / 1024.0d)
+                                                            + 0.5d));
                             i5++;
                             length2 = i6;
                             strArr2 = strArr3;
@@ -1554,7 +1795,8 @@ public final class KillPolicyManager {
         }
 
         /* renamed from: -$$Nest$mshowDebugAdjMemory, reason: not valid java name */
-        public static void m195$$Nest$mshowDebugAdjMemory(ProcessMemoryHeavyInfo processMemoryHeavyInfo) {
+        public static void m195$$Nest$mshowDebugAdjMemory(
+                ProcessMemoryHeavyInfo processMemoryHeavyInfo) {
             processMemoryHeavyInfo.getClass();
             for (String str : ActivityManagerService.DUMP_MEM_OOM_COMPACT_LABEL) {
                 if (processMemoryHeavyInfo.memoryUsageByAdj.containsKey(str)) {
@@ -1567,15 +1809,16 @@ public final class KillPolicyManager {
                     sb.append(" mb, swapPss: ");
                     sb.append((int) ((jArr[1] / 1024.0d) + 0.5d));
                     sb.append(" mb, Rss: ");
-                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb, (int) ((jArr[2] / 1024.0d) + 0.5d), " mb", "ActivityManager_kpm");
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            sb, (int) ((jArr[2] / 1024.0d) + 0.5d), " mb", "ActivityManager_kpm");
                 } else {
-                    DeviceIdleController$$ExternalSyntheticOutline0.m("[ADJ Label] : ", str, " - this ADJ not found", "ActivityManager_kpm");
+                    DeviceIdleController$$ExternalSyntheticOutline0.m(
+                            "[ADJ Label] : ", str, " - this ADJ not found", "ActivityManager_kpm");
                 }
             }
         }
 
-        public ProcessMemoryHeavyInfo() {
-        }
+        public ProcessMemoryHeavyInfo() {}
 
         public static String dumpPssUssRssToString(ArrayList arrayList) {
             StringBuilder sb = new StringBuilder(128);
@@ -1589,7 +1832,12 @@ public final class KillPolicyManager {
                 if (dumpPssUssRssInfo.sampleCount == -1) {
                     return "empty";
                 }
-                String str = DumpUtils.ADJ_SCREEN_NAMES_CSV[dumpPssUssRssInfo.screenIndex] + "_" + DumpUtils.ADJ_MEM_NAMES_CSV[dumpPssUssRssInfo.memoryFactorIndex] + "_" + DumpUtils.STATE_NAMES_CSV[dumpPssUssRssInfo.stateIndex];
+                String str =
+                        DumpUtils.ADJ_SCREEN_NAMES_CSV[dumpPssUssRssInfo.screenIndex]
+                                + "_"
+                                + DumpUtils.ADJ_MEM_NAMES_CSV[dumpPssUssRssInfo.memoryFactorIndex]
+                                + "_"
+                                + DumpUtils.STATE_NAMES_CSV[dumpPssUssRssInfo.stateIndex];
                 if (z) {
                     z = false;
                 } else {
@@ -1631,7 +1879,10 @@ public final class KillPolicyManager {
                     while (true) {
                         int[] iArr = ProcessStats.ALL_PROC_STATES;
                         if (i3 < iArr.length) {
-                            int i4 = ((ProcessStats.ALL_SCREEN_ADJ[i] + ProcessStats.ALL_MEM_ADJ[i2]) * 16) + iArr[i3];
+                            int i4 =
+                                    ((ProcessStats.ALL_SCREEN_ADJ[i] + ProcessStats.ALL_MEM_ADJ[i2])
+                                                    * 16)
+                                            + iArr[i3];
                             long pssSampleCount = processState.getPssSampleCount(i4);
                             if (pssSampleCount > 0) {
                                 DumpPssUssRssInfo dumpPssUssRssInfo = new DumpPssUssRssInfo();
@@ -1670,7 +1921,9 @@ public final class KillPolicyManager {
             }
             for (int i = 0; i < arrayList.size(); i++) {
                 DumpHeavyProcessInfo dumpHeavyProcessInfo = (DumpHeavyProcessInfo) arrayList.get(i);
-                StringBuilder m = BootReceiver$$ExternalSyntheticOutline0.m(128, "showDebugHeavyProcess() process : ");
+                StringBuilder m =
+                        BootReceiver$$ExternalSyntheticOutline0.m(
+                                128, "showDebugHeavyProcess() process : ");
                 m.append(dumpHeavyProcessInfo.memoryInfo.procName);
                 m.append(", ver: ");
                 m.append(dumpHeavyProcessInfo.processVersion);
@@ -1696,7 +1949,8 @@ public final class KillPolicyManager {
             }
         }
 
-        public final void fillDumpHeavyProcessTop5ByAdj(ActivityManagerService.MemDumpInfo memDumpInfo, ProcessState processState) {
+        public final void fillDumpHeavyProcessTop5ByAdj(
+                ActivityManagerService.MemDumpInfo memDumpInfo, ProcessState processState) {
             if (!this.dumpHeavyProcessByAdj.containsKey(memDumpInfo.label)) {
                 ArrayList arrayList = new ArrayList();
                 this.dumpHeavyProcessByAdj.put(memDumpInfo.label, arrayList);
@@ -1717,13 +1971,19 @@ public final class KillPolicyManager {
             }
         }
 
-        public final void fillProcessPackageNameAndVersion(ProcessState processState, DumpHeavyProcessInfo dumpHeavyProcessInfo) {
+        public final void fillProcessPackageNameAndVersion(
+                ProcessState processState, DumpHeavyProcessInfo dumpHeavyProcessInfo) {
             if (processState != null) {
                 try {
                     if (processState.getPackage() != null) {
                         dumpHeavyProcessInfo.processVersion = processState.getVersion();
                         dumpHeavyProcessInfo.packageName = processState.getPackage();
-                        dumpHeavyProcessInfo.packageVersion = KillPolicyManager.this.mContext.getPackageManager().getPackageInfo(processState.getPackage(), 0).versionName;
+                        dumpHeavyProcessInfo.packageVersion =
+                                KillPolicyManager.this
+                                        .mContext
+                                        .getPackageManager()
+                                        .getPackageInfo(processState.getPackage(), 0)
+                                        .versionName;
                     } else {
                         dumpHeavyProcessInfo.processVersion = processState.getVersion();
                         dumpHeavyProcessInfo.packageName = null;
@@ -1774,15 +2034,20 @@ public final class KillPolicyManager {
                     try {
                         Slog.i("ActivityManager_kpm", "KPM end cycle get pss");
                         if (this.val$lastCycle.isDailyBigdata) {
-                            ProcessMemoryUsageInfo processMemoryUsageInfo = ProcessMemoryUsageInfo.this;
-                            processMemoryUsageInfo.mProcessSamplingManager.activate(KillPolicyManager.this.mContext);
+                            ProcessMemoryUsageInfo processMemoryUsageInfo =
+                                    ProcessMemoryUsageInfo.this;
+                            processMemoryUsageInfo.mProcessSamplingManager.activate(
+                                    KillPolicyManager.this.mContext);
                         }
-                        ProcessMemoryUsageInfo.m196$$Nest$mgetProcDumpMemInfo(ProcessMemoryUsageInfo.this);
+                        ProcessMemoryUsageInfo.m196$$Nest$mgetProcDumpMemInfo(
+                                ProcessMemoryUsageInfo.this);
                         if (KillPolicyManager.KPM_DEBUG) {
-                            ProcessMemoryUsageInfo.m197$$Nest$mshowDebugAdjPss(ProcessMemoryUsageInfo.this);
+                            ProcessMemoryUsageInfo.m197$$Nest$mshowDebugAdjPss(
+                                    ProcessMemoryUsageInfo.this);
                         }
                         KpmRaw kpmRaw = this.val$lastCycle;
-                        ProcessMemoryUsageInfo processMemoryUsageInfo2 = ProcessMemoryUsageInfo.this;
+                        ProcessMemoryUsageInfo processMemoryUsageInfo2 =
+                                ProcessMemoryUsageInfo.this;
                         kpmRaw.procsAdjPss = processMemoryUsageInfo2.procsMemoryPssKbByADJ;
                         if (kpmRaw.isStateChanged) {
                             KillPolicyManager.this.reportUserTrend(0, kpmRaw);
@@ -1791,7 +2056,8 @@ public final class KillPolicyManager {
                         if (kpmRaw2.isDailyBigdata) {
                             KillPolicyManager.this.reportUserTrend(1, kpmRaw2);
                         }
-                        ProcessMemoryUsageInfo.this.mProcessSamplingManager.report(this.val$lastCycle);
+                        ProcessMemoryUsageInfo.this.mProcessSamplingManager.report(
+                                this.val$lastCycle);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -1807,7 +2073,8 @@ public final class KillPolicyManager {
         }
 
         /* renamed from: -$$Nest$mgetProcDumpMemInfo, reason: not valid java name */
-        public static void m196$$Nest$mgetProcDumpMemInfo(ProcessMemoryUsageInfo processMemoryUsageInfo) {
+        public static void m196$$Nest$mgetProcDumpMemInfo(
+                ProcessMemoryUsageInfo processMemoryUsageInfo) {
             ArrayList arrayList;
             processMemoryUsageInfo.getClass();
             long currentTimeMillis = System.currentTimeMillis();
@@ -1816,7 +2083,8 @@ public final class KillPolicyManager {
             ActivityManagerService.boostPriorityForLockedSection();
             synchronized (activityManagerService) {
                 try {
-                    arrayList = new ArrayList(KillPolicyManager.this.mAm.mProcessList.mLruProcesses);
+                    arrayList =
+                            new ArrayList(KillPolicyManager.this.mAm.mProcessList.mLruProcesses);
                     Iterator it = arrayList.iterator();
                     while (it.hasNext()) {
                         ProcessRecord processRecord = (ProcessRecord) it.next();
@@ -1828,7 +2096,9 @@ public final class KillPolicyManager {
                 }
             }
             ActivityManagerService.resetPriorityAfterLockedSection();
-            KillPolicyManager.this.mAm.mAppProfiler.forAllCpuStats(new KillPolicyManager$PsiFile$$ExternalSyntheticLambda0(processMemoryUsageInfo, sparseArray));
+            KillPolicyManager.this.mAm.mAppProfiler.forAllCpuStats(
+                    new KillPolicyManager$PsiFile$$ExternalSyntheticLambda0(
+                            processMemoryUsageInfo, sparseArray));
             for (int size = arrayList.size() - 1; size >= 0; size--) {
                 ProcessRecord processRecord2 = (ProcessRecord) arrayList.get(size);
                 int setAdjWithServices = processRecord2.mState.getSetAdjWithServices();
@@ -1840,7 +2110,9 @@ public final class KillPolicyManager {
                     if (i2 >= iArr.length) {
                         i2 = -1;
                         break;
-                    } else if (i2 != iArr.length - 1 && (setAdjWithServices < iArr[i2] || setAdjWithServices >= iArr[i2 + 1])) {
+                    } else if (i2 != iArr.length - 1
+                            && (setAdjWithServices < iArr[i2]
+                                    || setAdjWithServices >= iArr[i2 + 1])) {
                         i2++;
                     }
                 }
@@ -1848,12 +2120,15 @@ public final class KillPolicyManager {
             }
             long currentTimeMillis2 = System.currentTimeMillis() - currentTimeMillis;
             if (KillPolicyManager.KPM_DEBUG) {
-                Slog.i("ActivityManager_kpm", "getProcDumpMemInfo() elapsed time " + currentTimeMillis2 + " ms");
+                Slog.i(
+                        "ActivityManager_kpm",
+                        "getProcDumpMemInfo() elapsed time " + currentTimeMillis2 + " ms");
             }
         }
 
         /* renamed from: -$$Nest$mshowDebugAdjPss, reason: not valid java name */
-        public static void m197$$Nest$mshowDebugAdjPss(ProcessMemoryUsageInfo processMemoryUsageInfo) {
+        public static void m197$$Nest$mshowDebugAdjPss(
+                ProcessMemoryUsageInfo processMemoryUsageInfo) {
             processMemoryUsageInfo.getClass();
             for (String str : ActivityManagerService.DUMP_MEM_OOM_COMPACT_LABEL) {
                 if (processMemoryUsageInfo.procsMemoryPssKbByADJ.containsKey(str)) {
@@ -1876,7 +2151,8 @@ public final class KillPolicyManager {
                     sb.append(" mb, count: ");
                     BatteryService$$ExternalSyntheticOutline0.m(sb, jArr[3], "ActivityManager_kpm");
                 } else {
-                    DeviceIdleController$$ExternalSyntheticOutline0.m("[ADJ Label] : ", str, " - this ADJ not found", "ActivityManager_kpm");
+                    DeviceIdleController$$ExternalSyntheticOutline0.m(
+                            "[ADJ Label] : ", str, " - this ADJ not found", "ActivityManager_kpm");
                 }
             }
         }
@@ -1895,7 +2171,9 @@ public final class KillPolicyManager {
                 jArr = null;
             } else {
                 String[] strArr = {"Pss:", "SwapPss:", "Writeback:"};
-                String m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(i, "/proc/", "/smaps_rollup");
+                String m =
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                i, "/proc/", "/smaps_rollup");
                 long[] jArr2 = new long[3];
                 try {
                     BufferedReader bufferedReader = new BufferedReader(new FileReader(m));
@@ -1920,9 +2198,11 @@ public final class KillPolicyManager {
                     }
                     bufferedReader.close();
                 } catch (IOException unused) {
-                    BinaryTransparencyService$$ExternalSyntheticOutline0.m("failed to read ", m, "ActivityManager");
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            "failed to read ", m, "ActivityManager");
                 } catch (RuntimeException unused2) {
-                    BinaryTransparencyService$$ExternalSyntheticOutline0.m("failed to read ", m, "ActivityManager");
+                    BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                            "failed to read ", m, "ActivityManager");
                 }
                 jArr = jArr2;
             }
@@ -1930,8 +2210,14 @@ public final class KillPolicyManager {
                 return;
             }
             long[] readMemtrackMemory = Heimdall.readMemtrackMemory(i);
-            if (readMemtrackMemory != null && readMemtrackMemory.length >= 4 && readMemtrackMemory[3] == 0) {
-                jArr[0] = readMemtrackMemory[0] + readMemtrackMemory[1] + readMemtrackMemory[2] + jArr[0];
+            if (readMemtrackMemory != null
+                    && readMemtrackMemory.length >= 4
+                    && readMemtrackMemory[3] == 0) {
+                jArr[0] =
+                        readMemtrackMemory[0]
+                                + readMemtrackMemory[1]
+                                + readMemtrackMemory[2]
+                                + jArr[0];
             }
             String str3 = ActivityManagerService.DUMP_MEM_OOM_COMPACT_LABEL[i2];
             if (this.procsMemoryPssKbByADJ.containsKey(str3)) {
@@ -1942,7 +2228,7 @@ public final class KillPolicyManager {
                 jArr3[2] = jArr3[2] + jArr[2];
                 jArr3[3] = jArr3[3] + 1;
             } else {
-                this.procsMemoryPssKbByADJ.put(str3, new long[]{jArr[0], jArr[1], jArr[2], 1});
+                this.procsMemoryPssKbByADJ.put(str3, new long[] {jArr[0], jArr[1], jArr[2], 1});
                 i4 = 2;
             }
             long j = jArr[0];
@@ -1981,41 +2267,59 @@ public final class KillPolicyManager {
                 sb.append(" mb, swappss: ");
                 sb.append((int) ((jArr[1] / 1024.0d) + 0.5d));
                 sb.append(" mb, writeback:");
-                BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb, (int) ((jArr[2] / 1024.0d) + 0.5d), " mb", "ActivityManager_kpm");
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        sb, (int) ((jArr[2] / 1024.0d) + 0.5d), " mb", "ActivityManager_kpm");
             }
         }
     }
 
     /* compiled from: qb/89523975 b19e8d3036bb0bb04c0b123e55579fdc5d41bbd9c06260ba21f1b25f8ce00bef */
     public final class ProcessSampler {
-        public static final int[] ADJ_PRIORITY_BY_LABEL_INDEX = {3, 3, 3, 3, 4, 0, 1, 1, 1, 5, 5, 2, 5, 4, 2, 6, 6};
-        public static final boolean[] ALWAYS_RUNNING_ADJ_BY_LABEL_INDEX = {true, true, true, true, true, true, true, true, true, true, true, true, true, false, true, false, false};
+        public static final int[] ADJ_PRIORITY_BY_LABEL_INDEX = {
+            3, 3, 3, 3, 4, 0, 1, 1, 1, 5, 5, 2, 5, 4, 2, 6, 6
+        };
+        public static final boolean[] ALWAYS_RUNNING_ADJ_BY_LABEL_INDEX = {
+            true, true, true, true, true, true, true, true, true, true, true, true, true, false,
+            true, false, false
+        };
         public boolean mIsUserTrialDevice;
         public ArrayList mTotalProcessInfos;
 
         public final List sampleAdjPriority(int i, boolean z) {
             if (z) {
                 final int i2 = 0;
-                this.mTotalProcessInfos.sort(Comparator.comparingInt(new ToIntFunction() { // from class: com.android.server.am.KillPolicyManager$ProcessSampler$$ExternalSyntheticLambda0
-                    @Override // java.util.function.ToIntFunction
-                    public final int applyAsInt(Object obj) {
-                        KillPolicyManager.SampleProcessInfo sampleProcessInfo = (KillPolicyManager.SampleProcessInfo) obj;
-                        switch (i2) {
-                            case 0:
-                                int i3 = sampleProcessInfo.adjLabelIndex;
-                                if (!((i3 < 0 || i3 >= 17) ? false : KillPolicyManager.ProcessSampler.ALWAYS_RUNNING_ADJ_BY_LABEL_INDEX[i3]) || i3 < 0 || i3 >= 17) {
-                                    return 1000;
-                                }
-                                return KillPolicyManager.ProcessSampler.ADJ_PRIORITY_BY_LABEL_INDEX[i3];
-                            default:
-                                int i4 = sampleProcessInfo.adjLabelIndex;
-                                if (i4 < 0 || i4 >= 17) {
-                                    return 1000;
-                                }
-                                return KillPolicyManager.ProcessSampler.ADJ_PRIORITY_BY_LABEL_INDEX[i4];
-                        }
-                    }
-                }));
+                this.mTotalProcessInfos.sort(
+                        Comparator.comparingInt(
+                                new ToIntFunction() { // from class:
+                                                      // com.android.server.am.KillPolicyManager$ProcessSampler$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.ToIntFunction
+                                    public final int applyAsInt(Object obj) {
+                                        KillPolicyManager.SampleProcessInfo sampleProcessInfo =
+                                                (KillPolicyManager.SampleProcessInfo) obj;
+                                        switch (i2) {
+                                            case 0:
+                                                int i3 = sampleProcessInfo.adjLabelIndex;
+                                                if (!((i3 < 0 || i3 >= 17)
+                                                                ? false
+                                                                : KillPolicyManager.ProcessSampler
+                                                                        .ALWAYS_RUNNING_ADJ_BY_LABEL_INDEX[
+                                                                        i3])
+                                                        || i3 < 0
+                                                        || i3 >= 17) {
+                                                    return 1000;
+                                                }
+                                                return KillPolicyManager.ProcessSampler
+                                                        .ADJ_PRIORITY_BY_LABEL_INDEX[i3];
+                                            default:
+                                                int i4 = sampleProcessInfo.adjLabelIndex;
+                                                if (i4 < 0 || i4 >= 17) {
+                                                    return 1000;
+                                                }
+                                                return KillPolicyManager.ProcessSampler
+                                                        .ADJ_PRIORITY_BY_LABEL_INDEX[i4];
+                                        }
+                                    }
+                                }));
                 int i3 = 0;
                 while (i3 < this.mTotalProcessInfos.size()) {
                     int i4 = ((SampleProcessInfo) this.mTotalProcessInfos.get(i3)).adjLabelIndex;
@@ -2029,26 +2333,38 @@ public final class KillPolicyManager {
                 }
             } else {
                 final int i5 = 1;
-                this.mTotalProcessInfos.sort(Comparator.comparingInt(new ToIntFunction() { // from class: com.android.server.am.KillPolicyManager$ProcessSampler$$ExternalSyntheticLambda0
-                    @Override // java.util.function.ToIntFunction
-                    public final int applyAsInt(Object obj) {
-                        KillPolicyManager.SampleProcessInfo sampleProcessInfo = (KillPolicyManager.SampleProcessInfo) obj;
-                        switch (i5) {
-                            case 0:
-                                int i32 = sampleProcessInfo.adjLabelIndex;
-                                if (!((i32 < 0 || i32 >= 17) ? false : KillPolicyManager.ProcessSampler.ALWAYS_RUNNING_ADJ_BY_LABEL_INDEX[i32]) || i32 < 0 || i32 >= 17) {
-                                    return 1000;
-                                }
-                                return KillPolicyManager.ProcessSampler.ADJ_PRIORITY_BY_LABEL_INDEX[i32];
-                            default:
-                                int i42 = sampleProcessInfo.adjLabelIndex;
-                                if (i42 < 0 || i42 >= 17) {
-                                    return 1000;
-                                }
-                                return KillPolicyManager.ProcessSampler.ADJ_PRIORITY_BY_LABEL_INDEX[i42];
-                        }
-                    }
-                }));
+                this.mTotalProcessInfos.sort(
+                        Comparator.comparingInt(
+                                new ToIntFunction() { // from class:
+                                                      // com.android.server.am.KillPolicyManager$ProcessSampler$$ExternalSyntheticLambda0
+                                    @Override // java.util.function.ToIntFunction
+                                    public final int applyAsInt(Object obj) {
+                                        KillPolicyManager.SampleProcessInfo sampleProcessInfo =
+                                                (KillPolicyManager.SampleProcessInfo) obj;
+                                        switch (i5) {
+                                            case 0:
+                                                int i32 = sampleProcessInfo.adjLabelIndex;
+                                                if (!((i32 < 0 || i32 >= 17)
+                                                                ? false
+                                                                : KillPolicyManager.ProcessSampler
+                                                                        .ALWAYS_RUNNING_ADJ_BY_LABEL_INDEX[
+                                                                        i32])
+                                                        || i32 < 0
+                                                        || i32 >= 17) {
+                                                    return 1000;
+                                                }
+                                                return KillPolicyManager.ProcessSampler
+                                                        .ADJ_PRIORITY_BY_LABEL_INDEX[i32];
+                                            default:
+                                                int i42 = sampleProcessInfo.adjLabelIndex;
+                                                if (i42 < 0 || i42 >= 17) {
+                                                    return 1000;
+                                                }
+                                                return KillPolicyManager.ProcessSampler
+                                                        .ADJ_PRIORITY_BY_LABEL_INDEX[i42];
+                                        }
+                                    }
+                                }));
                 if (i > this.mTotalProcessInfos.size()) {
                     i = this.mTotalProcessInfos.size();
                 }
@@ -2064,8 +2380,7 @@ public final class KillPolicyManager {
         public ProcessSampler mSampler;
         public int mSkipCount;
 
-        public ProcessSamplingManager() {
-        }
+        public ProcessSamplingManager() {}
 
         /* JADX WARN: Removed duplicated region for block: B:34:0x0125  */
         /* JADX WARN: Removed duplicated region for block: B:36:0x012a  */
@@ -2084,7 +2399,9 @@ public final class KillPolicyManager {
                 Method dump skipped, instructions count: 423
                 To view this dump change 'Code comments level' option to 'DEBUG'
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.KillPolicyManager.ProcessSamplingManager.activate(android.content.Context):void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.android.server.am.KillPolicyManager.ProcessSamplingManager.activate(android.content.Context):void");
         }
 
         public final void deactivate() {
@@ -2147,7 +2464,13 @@ public final class KillPolicyManager {
                             c = 0;
                         }
                         for (String str6 : ActivityManagerService.DUMP_MEM_OOM_COMPACT_LABEL) {
-                            jSONArray.put(kpmRaw.procsAdjPss.containsKey(str6) ? (long) ((((long[]) kpmRaw.procsAdjPss.get(r10))[1] / 1024.0d) + 0.5d) : 0L);
+                            jSONArray.put(
+                                    kpmRaw.procsAdjPss.containsKey(str6)
+                                            ? (long)
+                                                    ((((long[]) kpmRaw.procsAdjPss.get(r10))[1]
+                                                                    / 1024.0d)
+                                                            + 0.5d)
+                                            : 0L);
                         }
                         String[] strArr2 = ActivityManagerService.DUMP_MEM_OOM_COMPACT_LABEL;
                         int length2 = strArr2.length;
@@ -2156,7 +2479,11 @@ public final class KillPolicyManager {
                             if (kpmRaw.procsAdjPss.containsKey(strArr2[i4])) {
                                 str3 = str4;
                                 try {
-                                    j = (long) ((((long[]) kpmRaw.procsAdjPss.get(r10))[2] / 1024.0d) + 0.5d);
+                                    j =
+                                            (long)
+                                                    ((((long[]) kpmRaw.procsAdjPss.get(r10))[2]
+                                                                    / 1024.0d)
+                                                            + 0.5d);
                                 } catch (JSONException unused) {
                                     str = str3;
                                     str2 = null;
@@ -2181,10 +2508,14 @@ public final class KillPolicyManager {
                     JSONArray jSONArray2 = new JSONArray();
                     ProcessSampler processSampler = kpmRaw.mProcessSampler;
                     if (processSampler != null) {
-                        List sampleAdjPriority = processSampler.sampleAdjPriority(processSampler.mTotalProcessInfos.size(), !kpmRaw.mProcessSampler.mIsUserTrialDevice);
+                        List sampleAdjPriority =
+                                processSampler.sampleAdjPriority(
+                                        processSampler.mTotalProcessInfos.size(),
+                                        !kpmRaw.mProcessSampler.mIsUserTrialDevice);
                         int i5 = i;
                         for (int i6 = 0; i6 < sampleAdjPriority.size(); i6++) {
-                            JSONArray jsonArray = ((SampleProcessInfo) sampleAdjPriority.get(i6)).toJsonArray();
+                            JSONArray jsonArray =
+                                    ((SampleProcessInfo) sampleAdjPriority.get(i6)).toJsonArray();
                             if (i6 > 0) {
                                 i5++;
                             }
@@ -2198,7 +2529,12 @@ public final class KillPolicyManager {
                     jSONObject.put("PRS", jSONArray2);
                     str = str3;
                     try {
-                        Slog.i(str, "ProcessSampleCount=" + jSONArray2.length() + " ProcessSamplesJsonStringSize=" + jSONArray2.toString().length());
+                        Slog.i(
+                                str,
+                                "ProcessSampleCount="
+                                        + jSONArray2.length()
+                                        + " ProcessSamplesJsonStringSize="
+                                        + jSONArray2.toString().length());
                         str2 = jSONObject.toString();
                         try {
                             str2 = str2.substring(1, str2.length() - 1);
@@ -2239,7 +2575,9 @@ public final class KillPolicyManager {
         public static String getItem(int i, String str, String str2) {
             String[] split = str.split(" ");
             String concat = str2.concat("=");
-            return (split.length <= i || !split[i].startsWith(concat)) ? "0" : split[i].replace(concat, "");
+            return (split.length <= i || !split[i].startsWith(concat))
+                    ? "0"
+                    : split[i].replace(concat, "");
         }
     }
 
@@ -2290,31 +2628,52 @@ public final class KillPolicyManager {
             int swappinessFromProc = getSwappinessFromProc();
             this.mDefaultValue = swappinessFromProc;
             this.mCurrentValue = swappinessFromProc;
-            HermesService$3$$ExternalSyntheticOutline0.m(swappinessFromProc, "SwappinessController() - default value: ", "ActivityManager");
+            HermesService$3$$ExternalSyntheticOutline0.m(
+                    swappinessFromProc,
+                    "SwappinessController() - default value: ",
+                    "ActivityManager");
         }
 
         public static int getSwappinessFromProc() {
             long[] jArr = {0};
-            Process.readProcFile("/proc/sys/vm/swappiness", new int[]{8224}, null, jArr, null);
+            Process.readProcFile("/proc/sys/vm/swappiness", new int[] {8224}, null, jArr, null);
             return (int) jArr[0];
         }
     }
 
     /* renamed from: -$$Nest$mreportResetState, reason: not valid java name */
-    public static void m188$$Nest$mreportResetState(KillPolicyManager killPolicyManager, String str) {
+    public static void m188$$Nest$mreportResetState(
+            KillPolicyManager killPolicyManager, String str) {
         killPolicyManager.getClass();
         Intent intent = new Intent();
         intent.setAction("com.samsung.KPM_CRITICAL_MEMORY_STATUS");
-        intent.setPackage(SemFloatingFeature.getInstance().getString("SEC_FLOATING_FEATURE_SMARTMANAGER_CONFIG_PACKAGE_NAME", "com.samsung.android.lool"));
+        intent.setPackage(
+                SemFloatingFeature.getInstance()
+                        .getString(
+                                "SEC_FLOATING_FEATURE_SMARTMANAGER_CONFIG_PACKAGE_NAME",
+                                "com.samsung.android.lool"));
         intent.putExtra("resetType", str);
         MemoryFloodDetector memoryFloodDetector = killPolicyManager.mMemoryFloodDetector;
-        intent.putExtra("nativeStart", ((Integer) memoryFloodDetector.mLastCalculatedNative.first).intValue());
-        intent.putExtra("nativeEnd", ((Integer) memoryFloodDetector.mLastCalculatedNative.second).intValue());
-        intent.putExtra("sysPersStart", ((Integer) memoryFloodDetector.mLastCalculatedSysPers.first).intValue());
-        intent.putExtra("sysPersEnd", ((Integer) memoryFloodDetector.mLastCalculatedSysPers.second).intValue());
+        intent.putExtra(
+                "nativeStart",
+                ((Integer) memoryFloodDetector.mLastCalculatedNative.first).intValue());
+        intent.putExtra(
+                "nativeEnd",
+                ((Integer) memoryFloodDetector.mLastCalculatedNative.second).intValue());
+        intent.putExtra(
+                "sysPersStart",
+                ((Integer) memoryFloodDetector.mLastCalculatedSysPers.first).intValue());
+        intent.putExtra(
+                "sysPersEnd",
+                ((Integer) memoryFloodDetector.mLastCalculatedSysPers.second).intValue());
         intent.putExtra("pmmCyclePlatform", killPolicyManager.mPolicyMetric);
-        intent.putExtra("pmmCycleKernel", killPolicyManager.mPolicyMetric + memoryFloodDetector.mPmmCycleCountOnPlatformReset);
-        intent.putExtra("uptimeSystemBoot", SystemClock.uptimeMillis() - killPolicyManager.mPlatformStartUpTimeMillis);
+        intent.putExtra(
+                "pmmCycleKernel",
+                killPolicyManager.mPolicyMetric
+                        + memoryFloodDetector.mPmmCycleCountOnPlatformReset);
+        intent.putExtra(
+                "uptimeSystemBoot",
+                SystemClock.uptimeMillis() - killPolicyManager.mPlatformStartUpTimeMillis);
         killPolicyManager.mContext.sendBroadcast(intent);
         Slog.i("ActivityManager_kpm", "reportResetState : ".concat(str));
     }
@@ -2357,72 +2716,90 @@ public final class KillPolicyManager {
         this.mLastAwakeUpTimeMillis = 0L;
         this.mVmStats = new HashMap();
         final int i = 0;
-        this.mIdleModeReceiver = new BroadcastReceiver(this) { // from class: com.android.server.am.KillPolicyManager.1
-            public final /* synthetic */ KillPolicyManager this$0;
+        this.mIdleModeReceiver =
+                new BroadcastReceiver(
+                        this) { // from class: com.android.server.am.KillPolicyManager.1
+                    public final /* synthetic */ KillPolicyManager this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            /* JADX WARN: Can't wrap try/catch for region: R(41:67|(4:69|70|71|(2:73|(9:75|(4:77|78|79|80)|195|196|(1:198)|84|(6:176|(4:178|(1:188)(2:182|(1:184)(1:187))|185|186)|189|190|(1:192)|193)(1:88)|89|(28:94|(1:96)|97|(1:99)|100|(1:102)|103|(2:105|(23:107|(6:110|(4:112|113|126|129)|134|135|129|108)|136|137|138|(1:140)(1:174)|141|(1:143)|144|(1:146)|147|148|149|(1:151)|152|(1:154)|155|(1:157)|158|159|(1:161)|162|(2:164|165)))|175|138|(0)(0)|141|(0)|144|(0)|147|148|149|(0)|152|(0)|155|(0)|158|159|(0)|162|(0)(0)))))|202|84|(1:86)|176|(0)|189|190|(0)|193|89|(1:91)|94|(0)|97|(0)|100|(0)|103|(0)|175|138|(0)(0)|141|(0)|144|(0)|147|148|149|(0)|152|(0)|155|(0)|158|159|(0)|162|(0)) */
-            /* JADX WARN: Code restructure failed: missing block: B:173:0x058d, code lost:
-            
-                android.util.Slog.d(r6, "failed to create the KPUT");
-             */
-            /* JADX WARN: Removed duplicated region for block: B:102:0x03e6  */
-            /* JADX WARN: Removed duplicated region for block: B:105:0x03f8  */
-            /* JADX WARN: Removed duplicated region for block: B:140:0x0495  */
-            /* JADX WARN: Removed duplicated region for block: B:143:0x04aa  */
-            /* JADX WARN: Removed duplicated region for block: B:146:0x04ba  */
-            /* JADX WARN: Removed duplicated region for block: B:151:0x0549 A[Catch: JSONException -> 0x058d, TryCatch #3 {JSONException -> 0x058d, blocks: (B:149:0x04e6, B:151:0x0549, B:152:0x0554, B:154:0x055e, B:155:0x0569, B:157:0x0573, B:158:0x057e), top: B:148:0x04e6 }] */
-            /* JADX WARN: Removed duplicated region for block: B:154:0x055e A[Catch: JSONException -> 0x058d, TryCatch #3 {JSONException -> 0x058d, blocks: (B:149:0x04e6, B:151:0x0549, B:152:0x0554, B:154:0x055e, B:155:0x0569, B:157:0x0573, B:158:0x057e), top: B:148:0x04e6 }] */
-            /* JADX WARN: Removed duplicated region for block: B:157:0x0573 A[Catch: JSONException -> 0x058d, TryCatch #3 {JSONException -> 0x058d, blocks: (B:149:0x04e6, B:151:0x0549, B:152:0x0554, B:154:0x055e, B:155:0x0569, B:157:0x0573, B:158:0x057e), top: B:148:0x04e6 }] */
-            /* JADX WARN: Removed duplicated region for block: B:161:0x0597  */
-            /* JADX WARN: Removed duplicated region for block: B:164:0x05b6 A[EXC_TOP_SPLITTER, SYNTHETIC] */
-            /* JADX WARN: Removed duplicated region for block: B:174:0x04a4  */
-            /* JADX WARN: Removed duplicated region for block: B:178:0x02ed  */
-            /* JADX WARN: Removed duplicated region for block: B:192:0x0340  */
-            /* JADX WARN: Removed duplicated region for block: B:86:0x02ac  */
-            /* JADX WARN: Removed duplicated region for block: B:91:0x039f  */
-            /* JADX WARN: Removed duplicated region for block: B:96:0x03be  */
-            /* JADX WARN: Removed duplicated region for block: B:99:0x03d2  */
-            @Override // android.content.BroadcastReceiver
-            /*
-                Code decompiled incorrectly, please refer to instructions dump.
-                To view partially-correct code enable 'Show inconsistent code' option in preferences
-            */
-            public final void onReceive(android.content.Context r37, android.content.Intent r38) {
-                /*
-                    Method dump skipped, instructions count: 1612
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.KillPolicyManager.AnonymousClass1.onReceive(android.content.Context, android.content.Intent):void");
-            }
-        };
+                    /* JADX WARN: Can't wrap try/catch for region: R(41:67|(4:69|70|71|(2:73|(9:75|(4:77|78|79|80)|195|196|(1:198)|84|(6:176|(4:178|(1:188)(2:182|(1:184)(1:187))|185|186)|189|190|(1:192)|193)(1:88)|89|(28:94|(1:96)|97|(1:99)|100|(1:102)|103|(2:105|(23:107|(6:110|(4:112|113|126|129)|134|135|129|108)|136|137|138|(1:140)(1:174)|141|(1:143)|144|(1:146)|147|148|149|(1:151)|152|(1:154)|155|(1:157)|158|159|(1:161)|162|(2:164|165)))|175|138|(0)(0)|141|(0)|144|(0)|147|148|149|(0)|152|(0)|155|(0)|158|159|(0)|162|(0)(0)))))|202|84|(1:86)|176|(0)|189|190|(0)|193|89|(1:91)|94|(0)|97|(0)|100|(0)|103|(0)|175|138|(0)(0)|141|(0)|144|(0)|147|148|149|(0)|152|(0)|155|(0)|158|159|(0)|162|(0)) */
+                    /* JADX WARN: Code restructure failed: missing block: B:173:0x058d, code lost:
+
+                       android.util.Slog.d(r6, "failed to create the KPUT");
+                    */
+                    /* JADX WARN: Removed duplicated region for block: B:102:0x03e6  */
+                    /* JADX WARN: Removed duplicated region for block: B:105:0x03f8  */
+                    /* JADX WARN: Removed duplicated region for block: B:140:0x0495  */
+                    /* JADX WARN: Removed duplicated region for block: B:143:0x04aa  */
+                    /* JADX WARN: Removed duplicated region for block: B:146:0x04ba  */
+                    /* JADX WARN: Removed duplicated region for block: B:151:0x0549 A[Catch: JSONException -> 0x058d, TryCatch #3 {JSONException -> 0x058d, blocks: (B:149:0x04e6, B:151:0x0549, B:152:0x0554, B:154:0x055e, B:155:0x0569, B:157:0x0573, B:158:0x057e), top: B:148:0x04e6 }] */
+                    /* JADX WARN: Removed duplicated region for block: B:154:0x055e A[Catch: JSONException -> 0x058d, TryCatch #3 {JSONException -> 0x058d, blocks: (B:149:0x04e6, B:151:0x0549, B:152:0x0554, B:154:0x055e, B:155:0x0569, B:157:0x0573, B:158:0x057e), top: B:148:0x04e6 }] */
+                    /* JADX WARN: Removed duplicated region for block: B:157:0x0573 A[Catch: JSONException -> 0x058d, TryCatch #3 {JSONException -> 0x058d, blocks: (B:149:0x04e6, B:151:0x0549, B:152:0x0554, B:154:0x055e, B:155:0x0569, B:157:0x0573, B:158:0x057e), top: B:148:0x04e6 }] */
+                    /* JADX WARN: Removed duplicated region for block: B:161:0x0597  */
+                    /* JADX WARN: Removed duplicated region for block: B:164:0x05b6 A[EXC_TOP_SPLITTER, SYNTHETIC] */
+                    /* JADX WARN: Removed duplicated region for block: B:174:0x04a4  */
+                    /* JADX WARN: Removed duplicated region for block: B:178:0x02ed  */
+                    /* JADX WARN: Removed duplicated region for block: B:192:0x0340  */
+                    /* JADX WARN: Removed duplicated region for block: B:86:0x02ac  */
+                    /* JADX WARN: Removed duplicated region for block: B:91:0x039f  */
+                    /* JADX WARN: Removed duplicated region for block: B:96:0x03be  */
+                    /* JADX WARN: Removed duplicated region for block: B:99:0x03d2  */
+                    @Override // android.content.BroadcastReceiver
+                    /*
+                        Code decompiled incorrectly, please refer to instructions dump.
+                        To view partially-correct code enable 'Show inconsistent code' option in preferences
+                    */
+                    public final void onReceive(
+                            android.content.Context r37, android.content.Intent r38) {
+                        /*
+                            Method dump skipped, instructions count: 1612
+                            To view this dump change 'Code comments level' option to 'DEBUG'
+                        */
+                        throw new UnsupportedOperationException(
+                                "Method not decompiled:"
+                                    + " com.android.server.am.KillPolicyManager.AnonymousClass1.onReceive(android.content.Context,"
+                                    + " android.content.Intent):void");
+                    }
+                };
         this.mMemoryStabilityEventManager = new MemoryStabilityEventManager();
         final int i2 = 1;
-        this.policyBroadcastReceiver = new BroadcastReceiver(this) { // from class: com.android.server.am.KillPolicyManager.1
-            public final /* synthetic */ KillPolicyManager this$0;
+        this.policyBroadcastReceiver =
+                new BroadcastReceiver(
+                        this) { // from class: com.android.server.am.KillPolicyManager.1
+                    public final /* synthetic */ KillPolicyManager this$0;
 
-            {
-                this.this$0 = this;
-            }
+                    {
+                        this.this$0 = this;
+                    }
 
-            @Override // android.content.BroadcastReceiver
-            public final void onReceive(Context context, Intent intent) {
-                /*
-                    Method dump skipped, instructions count: 1612
-                    To view this dump change 'Code comments level' option to 'DEBUG'
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.KillPolicyManager.AnonymousClass1.onReceive(android.content.Context, android.content.Intent):void");
-            }
-        };
+                    @Override // android.content.BroadcastReceiver
+                    public final void onReceive(Context context, Intent intent) {
+                        /*
+                            Method dump skipped, instructions count: 1612
+                            To view this dump change 'Code comments level' option to 'DEBUG'
+                        */
+                        throw new UnsupportedOperationException(
+                                "Method not decompiled:"
+                                    + " com.android.server.am.KillPolicyManager.AnonymousClass1.onReceive(android.content.Context,"
+                                    + " android.content.Intent):void");
+                    }
+                };
         Slog.i("ActivityManager_kpm", "KillPolicyManager()");
     }
 
     public static KpmState changeState(KpmRaw kpmRaw) {
         LmkdCounter lmkdCounter = kpmRaw.lmkdCounter;
-        return lmkdCounter.cyclePreviousKillCount > 0 ? KpmState.CRITICAL : lmkdCounter.cycleCachedMinKillCount + lmkdCounter.cycleBServiceKillCount > 0 ? KpmState.HEAVY : lmkdCounter.cyclePickedKillCount + ((long) kpmRaw.cachedNormalKillCount) > 0 ? KpmState.NORMAL : KpmState.LIGHT;
+        return lmkdCounter.cyclePreviousKillCount > 0
+                ? KpmState.CRITICAL
+                : lmkdCounter.cycleCachedMinKillCount + lmkdCounter.cycleBServiceKillCount > 0
+                        ? KpmState.HEAVY
+                        : lmkdCounter.cyclePickedKillCount + ((long) kpmRaw.cachedNormalKillCount)
+                                        > 0
+                                ? KpmState.NORMAL
+                                : KpmState.LIGHT;
     }
 
     public static void fillChimeraDataIfExist(KpmRaw kpmRaw, JSONObject jSONObject) {
@@ -2430,7 +2807,12 @@ public final class KillPolicyManager {
         if (chimeraDataInfo == null) {
             return;
         }
-        jSONObject.put("CHWT", new JSONArray().put((int) ((chimeraDataInfo.mLruWeight * 100.0f) + 0.5d)).put((int) ((chimeraDataInfo.mStdBktWeight * 100.0f) + 0.5d)).put((int) ((chimeraDataInfo.mMemWeight * 100.0f) + 0.5d)));
+        jSONObject.put(
+                "CHWT",
+                new JSONArray()
+                        .put((int) ((chimeraDataInfo.mLruWeight * 100.0f) + 0.5d))
+                        .put((int) ((chimeraDataInfo.mStdBktWeight * 100.0f) + 0.5d))
+                        .put((int) ((chimeraDataInfo.mMemWeight * 100.0f) + 0.5d)));
         int[] iArr = chimeraDataInfo.mTriggerCntSrc;
         jSONObject.put("CHTC", iArr[2]);
         int i = 0;
@@ -2474,7 +2856,8 @@ public final class KillPolicyManager {
                 int i2 = i + 1;
                 int[] iArr = SecLmkdStats.LMKD_SLOT_ADJ_VALUES;
                 if (i2 < 17 && iArr[i2] <= values[length].getADJ()) {
-                    killCountFromSlotRange += SecLmkdStats.getKillCountFromSlotRange(i, i2, true, false);
+                    killCountFromSlotRange +=
+                            SecLmkdStats.getKillCountFromSlotRange(i, i2, true, false);
                     i = i2;
                 }
             }
@@ -2497,7 +2880,9 @@ public final class KillPolicyManager {
         try {
             BufferedReader bufferedReader = new BufferedReader(fileReader, 8192);
             try {
-                for (String readLine = bufferedReader.readLine(); !TextUtils.isEmpty(readLine); readLine = bufferedReader.readLine()) {
+                for (String readLine = bufferedReader.readLine();
+                        !TextUtils.isEmpty(readLine);
+                        readLine = bufferedReader.readLine()) {
                     String[] split = readLine.split("[ :]+");
                     if (split != null && split.length >= 2) {
                         try {
@@ -2528,7 +2913,8 @@ public final class KillPolicyManager {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public static com.android.server.am.KillPolicyManager.PsiFile getPsiFile(com.android.server.am.KillPolicyManager.PsiFileType r7) {
+    public static com.android.server.am.KillPolicyManager.PsiFile getPsiFile(
+            com.android.server.am.KillPolicyManager.PsiFileType r7) {
         /*
             java.lang.String r0 = "\n"
             java.lang.String r1 = "Exception"
@@ -2618,7 +3004,9 @@ public final class KillPolicyManager {
         L9c:
             throw r7
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.KillPolicyManager.getPsiFile(com.android.server.am.KillPolicyManager$PsiFileType):com.android.server.am.KillPolicyManager$PsiFile");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.KillPolicyManager.getPsiFile(com.android.server.am.KillPolicyManager$PsiFileType):com.android.server.am.KillPolicyManager$PsiFile");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:45:0x00d3  */
@@ -2636,7 +3024,9 @@ public final class KillPolicyManager {
             Method dump skipped, instructions count: 708
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.am.KillPolicyManager.calculateLmkdStatus(int):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.am.KillPolicyManager.calculateLmkdStatus(int):void");
     }
 
     public final void changePolicy(KpmState kpmState) {
@@ -2648,18 +3038,31 @@ public final class KillPolicyManager {
         SwappinessController swappinessController = this.mSwappinessController;
         int i2 = swappinessController.mDefaultValue;
         if (i <= i2) {
-            Slog.i("ActivityManager", "SwappinessController() - new value is lower than default value, go back to default");
+            Slog.i(
+                    "ActivityManager",
+                    "SwappinessController() - new value is lower than default value, go back to"
+                        + " default");
             i = i2;
         }
         SystemProperties.set("sys.sysctl.swappiness", String.valueOf(i));
-        Slog.i("ActivityManager", "SwappinessController() - changed from " + swappinessController.mCurrentValue + " -> " + i);
+        Slog.i(
+                "ActivityManager",
+                "SwappinessController() - changed from "
+                        + swappinessController.mCurrentValue
+                        + " -> "
+                        + i);
         swappinessController.mCurrentValue = i;
         Intent intent = new Intent();
         intent.setPackage("android");
         intent.setAction("com.samsung.KPM_STATE_CHANGED");
         intent.putExtra("kpm_level", this.mCurrentState.ordinal());
         intent.putExtra("kpm_prev_level", this.mPrevState.ordinal());
-        Slog.d("ActivityManager_kpm", "Broadcast sent: prev state = " + this.mPrevState.ordinal() + ", cur state = " + this.mCurrentState.ordinal());
+        Slog.d(
+                "ActivityManager_kpm",
+                "Broadcast sent: prev state = "
+                        + this.mPrevState.ordinal()
+                        + ", cur state = "
+                        + this.mCurrentState.ordinal());
         this.mContext.sendBroadcast(intent);
     }
 
@@ -2671,9 +3074,11 @@ public final class KillPolicyManager {
             String str = strArr[1];
             str.getClass();
             if (str.equals("leak.dmabuf")) {
-                PersonalizedMemoryManager personalizedMemoryManager = PersonalizedMemoryManager.LazyHolder.INSTANCE;
+                PersonalizedMemoryManager personalizedMemoryManager =
+                        PersonalizedMemoryManager.LazyHolder.INSTANCE;
                 personalizedMemoryManager.mDmaBufLeakDetector.mIsTestMode = true;
-                personalizedMemoryManager.onMemoryEvent(this.mContext, PersonalizedMemoryManager.MemoryEventType.LMKD_KILL);
+                personalizedMemoryManager.onMemoryEvent(
+                        this.mContext, PersonalizedMemoryManager.MemoryEventType.LMKD_KILL);
                 personalizedMemoryManager.mDmaBufLeakDetector.mIsTestMode = false;
                 return;
             }
@@ -2683,7 +3088,8 @@ public final class KillPolicyManager {
         int i3 = this.mBigdataIndex;
         if (this.mPolicyMetric >= 1) {
             printWriter.println(" KPM Stats(policy):");
-            printWriter.println(" [idx,avg_mem,mem_avl,avg_swap,hotCnt,prKillCnt,svKillCnt,PkgCnt,PkgKillCnt,lmkdTotal,lmkdPrev,lmkdService,lmkdPicked,lmkdSeed,lmkdCri,lmk,cachedkill,emptykill,cur_state,next_state,policy_state,psi_cpu_avg,psi_mem_avg,psi_io_avg,psi_cpu_max,psi_mem_max,psi_io_max,reset_status,lmkdState,lmkdStateCnt,lmkdCnt,tiny_nxst_history,time]");
+            printWriter.println(
+                    " [idx,avg_mem,mem_avl,avg_swap,hotCnt,prKillCnt,svKillCnt,PkgCnt,PkgKillCnt,lmkdTotal,lmkdPrev,lmkdService,lmkdPicked,lmkdSeed,lmkdCri,lmk,cachedkill,emptykill,cur_state,next_state,policy_state,psi_cpu_avg,psi_mem_avg,psi_io_avg,psi_cpu_max,psi_mem_max,psi_io_max,reset_status,lmkdState,lmkdStateCnt,lmkdCnt,tiny_nxst_history,time]");
             int min = Math.min(this.mPolicyMetric, 24);
             int i4 = i2;
             int i5 = 0;
@@ -2701,7 +3107,11 @@ public final class KillPolicyManager {
             }
             printWriter.println();
             printWriter.println(" Heavy Pss List(policy):");
-            printWriter.println(" [idx, peakLmkdKillAdj, [procMemInfo], [{native(Pss SwapPss Rss)}{sys}{pers}{persvc}{fore}{vis}{percept}{perceptl}{perceptm}{backup}{heavy}{servicea}{home}{prev}{serviceb}{picked}{cached}], [Process name, Process version, Package name, Package version, label, pss, swap, rss, procstats_dumpPssUssRss], ...]");
+            printWriter.println(
+                    " [idx, peakLmkdKillAdj, [procMemInfo], [{native(Pss SwapPss"
+                        + " Rss)}{sys}{pers}{persvc}{fore}{vis}{percept}{perceptl}{perceptm}{backup}{heavy}{servicea}{home}{prev}{serviceb}{picked}{cached}],"
+                        + " [Process name, Process version, Package name, Package version, label,"
+                        + " pss, swap, rss, procstats_dumpPssUssRss], ...]");
             for (int i6 = 0; i6 < min; i6++) {
                 printWriter.println(kpmRawArr2[i2].getKpmHeavyPssData().toString());
                 i2--;
@@ -2713,7 +3123,8 @@ public final class KillPolicyManager {
         if (this.mBigdataMetric >= 1) {
             printWriter.println();
             printWriter.println(" KPM Stats(bigdata):");
-            printWriter.println(" [idx,avg_mem,mem_avl,avg_swap,hotCnt,prKillCnt,svKillCnt,PkgCnt,PkgKillCnt,lmkdTotal,lmkdPrev,lmkdService,lmkdPicked,lmkdSeed,lmkdCri,lmk,cachedkill,emptykill,cur_state,next_state,policy_state,psi_cpu_avg,psi_mem_avg,psi_io_avg,psi_cpu_max,psi_mem_max,psi_io_max,reset_status,lmkdState,lmkdStateCnt,lmkdCnt,tiny_nxst_history,time]");
+            printWriter.println(
+                    " [idx,avg_mem,mem_avl,avg_swap,hotCnt,prKillCnt,svKillCnt,PkgCnt,PkgKillCnt,lmkdTotal,lmkdPrev,lmkdService,lmkdPicked,lmkdSeed,lmkdCri,lmk,cachedkill,emptykill,cur_state,next_state,policy_state,psi_cpu_avg,psi_mem_avg,psi_io_avg,psi_cpu_max,psi_mem_max,psi_io_max,reset_status,lmkdState,lmkdStateCnt,lmkdCnt,tiny_nxst_history,time]");
             int min2 = Math.min(this.mBigdataMetric, 30);
             int i7 = 0;
             int i8 = i3;
@@ -2731,7 +3142,11 @@ public final class KillPolicyManager {
             }
             printWriter.println();
             printWriter.println(" Heavy Pss List(bigdata):");
-            printWriter.println(" [idx, peakLmkdKillAdj, [procMemInfo], [{native(Pss SwapPss Rss)}{sys}{pers}{persvc}{fore}{vis}{percept}{perceptl}{perceptm}{backup}{heavy}{servicea}{home}{prev}{serviceb}{picked}{cached}], [Process name, Process version, Package name, Package version, label, pss, swap, rss, procstats_dumpPssUssRss], ...]");
+            printWriter.println(
+                    " [idx, peakLmkdKillAdj, [procMemInfo], [{native(Pss SwapPss"
+                        + " Rss)}{sys}{pers}{persvc}{fore}{vis}{percept}{perceptl}{perceptm}{backup}{heavy}{servicea}{home}{prev}{serviceb}{picked}{cached}],"
+                        + " [Process name, Process version, Package name, Package version, label,"
+                        + " pss, swap, rss, procstats_dumpPssUssRss], ...]");
             for (int i9 = 0; i9 < min2; i9++) {
                 printWriter.println(kpmRawArr[i3].getKpmHeavyPssData().toString());
                 i3--;
@@ -2742,21 +3157,59 @@ public final class KillPolicyManager {
         }
         printWriter.println(" ");
         printWriter.println(" KPM Tunable Parameters:");
-        StringBuilder m = BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder(" KPM_POLICY_ENABLE: "), KPM_POLICY_ENABLE, printWriter, " KPM_DEBUG_ENABLE: "), KPM_DEBUG, printWriter, " KPM_CURRENT_STATE: ");
+        StringBuilder m =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                new StringBuilder(" KPM_POLICY_ENABLE: "),
+                                KPM_POLICY_ENABLE,
+                                printWriter,
+                                " KPM_DEBUG_ENABLE: "),
+                        KPM_DEBUG,
+                        printWriter,
+                        " KPM_CURRENT_STATE: ");
         m.append(this.mCurrentState);
         printWriter.println(m.toString());
-        StringBuilder m2 = BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder(" KPM_WARM_UP_TRIGGER_TUNABLE: "), sWarmUpTrigger, printWriter, " KPM_POLICY_TRIGGER_TUNABLE: "), sPolicyTrigger, printWriter, " KPM_WARM_UP_CYCLES_TUNABLE: "), sWarmUpCycles, printWriter, " KPM_MEM_CRITICAL_LOW_DETECT_ENABLE: ");
-        m2.append(Boolean.parseBoolean(SystemProperties.get("persist.sys.kpm_cri_mem_detect", String.valueOf(true))));
+        StringBuilder m2 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                                        new StringBuilder(" KPM_WARM_UP_TRIGGER_TUNABLE: "),
+                                        sWarmUpTrigger,
+                                        printWriter,
+                                        " KPM_POLICY_TRIGGER_TUNABLE: "),
+                                sPolicyTrigger,
+                                printWriter,
+                                " KPM_WARM_UP_CYCLES_TUNABLE: "),
+                        sWarmUpCycles,
+                        printWriter,
+                        " KPM_MEM_CRITICAL_LOW_DETECT_ENABLE: ");
+        m2.append(
+                Boolean.parseBoolean(
+                        SystemProperties.get(
+                                "persist.sys.kpm_cri_mem_detect", String.valueOf(true))));
         printWriter.println(m2.toString());
         printWriter.println(" MEMORY_CRITICAL_LOW_KILL_DETECT_ADJ : 700");
-        printWriter.println(" MEMORY_CRITICAL_LOW_PROCESS_KILL_RATIO_TH : " + MEMORY_CRITICAL_LOW_PROCESS_KILL_RATIO_TH + "%");
-        StringBuilder m3 = BinaryTransparencyService$$ExternalSyntheticOutline0.m(new StringBuilder(" MEMORY_CRITICAL_LOW_USE_PACKAGE_RATIO : "), MEMORY_CRITICAL_LOW_USE_PACKAGE_RATIO, printWriter, " MEMORY_CRITICAL_LOW_PROCESS_KILL_PACKAGE_RATIO_TH : ");
+        printWriter.println(
+                " MEMORY_CRITICAL_LOW_PROCESS_KILL_RATIO_TH : "
+                        + MEMORY_CRITICAL_LOW_PROCESS_KILL_RATIO_TH
+                        + "%");
+        StringBuilder m3 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        new StringBuilder(" MEMORY_CRITICAL_LOW_USE_PACKAGE_RATIO : "),
+                        MEMORY_CRITICAL_LOW_USE_PACKAGE_RATIO,
+                        printWriter,
+                        " MEMORY_CRITICAL_LOW_PROCESS_KILL_PACKAGE_RATIO_TH : ");
         m3.append(MEMORY_CRITICAL_LOW_PROCESS_KILL_PACKAGE_RATIO_TH);
         m3.append("%");
         printWriter.println(m3.toString());
         StringBuilder sb = new StringBuilder(" KPM_POLICY_SWAPPINESS_DEFAULT : ");
         SwappinessController swappinessController = this.mSwappinessController;
-        StringBuilder m4 = BinaryTransparencyService$$ExternalSyntheticOutline0.m(sb, swappinessController.mDefaultValue, printWriter, " KPM_POLICY_SWAPPINESS_CURRENT : ");
+        StringBuilder m4 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        sb,
+                        swappinessController.mDefaultValue,
+                        printWriter,
+                        " KPM_POLICY_SWAPPINESS_CURRENT : ");
         m4.append(swappinessController.mCurrentValue);
         printWriter.println(m4.toString());
         printWriter.println(" ");
@@ -2767,9 +3220,26 @@ public final class KillPolicyManager {
         printWriter.println(" - Native Flood Ratio   : " + String.valueOf(sNativeFloodRatio));
         printWriter.println(" - Syspers Flood Ratio  : " + String.valueOf(sSyspersFloodRatio));
         printWriter.println("");
-        ChimeraTriggerManager m189$$Nest$smgetInstance = ChimeraTriggerManager.m189$$Nest$smgetInstance(this.mContext);
+        ChimeraTriggerManager m189$$Nest$smgetInstance =
+                ChimeraTriggerManager.m189$$Nest$smgetInstance(this.mContext);
         m189$$Nest$smgetInstance.getClass();
-        StringBuilder m5 = BinaryTransparencyService$$ExternalSyntheticOutline0.m(KillPolicyManager$$ExternalSyntheticOutline0.m(KillPolicyManager$$ExternalSyntheticOutline0.m(BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(printWriter, "\n ChimeraTrigger Stats:", " - Last Policy Score      : "), m189$$Nest$smgetInstance.mLastPolicyScore, printWriter, " - Trigger Threshold Score: "), ChimeraTriggerManager.PMM_CRITICAL_SCORE_THRESHOLD, printWriter, " - Trigger Required       : "), m189$$Nest$smgetInstance.mChimeraTriggerRequired, printWriter, " - Last Triggered Time(ms): ");
+        StringBuilder m5 =
+                BinaryTransparencyService$$ExternalSyntheticOutline0.m(
+                        KillPolicyManager$$ExternalSyntheticOutline0.m(
+                                KillPolicyManager$$ExternalSyntheticOutline0.m(
+                                        BinaryTransparencyService$$ExternalSyntheticOutline0.m$1(
+                                                printWriter,
+                                                "\n ChimeraTrigger Stats:",
+                                                " - Last Policy Score      : "),
+                                        m189$$Nest$smgetInstance.mLastPolicyScore,
+                                        printWriter,
+                                        " - Trigger Threshold Score: "),
+                                ChimeraTriggerManager.PMM_CRITICAL_SCORE_THRESHOLD,
+                                printWriter,
+                                " - Trigger Required       : "),
+                        m189$$Nest$smgetInstance.mChimeraTriggerRequired,
+                        printWriter,
+                        " - Last Triggered Time(ms): ");
         m5.append(m189$$Nest$smgetInstance.mLastTriggeredTime);
         printWriter.println(m5.toString());
         printWriter.println("");
@@ -2777,13 +3247,17 @@ public final class KillPolicyManager {
         memoryFloodDetector.getClass();
         printWriter.println("MemoryFloodDetector");
         if (((ArrayList) memoryFloodDetector.mNativeMemDumpList).size() > 0) {
-            MemoryFloodDetector.dumpItem(printWriter, "native", memoryFloodDetector.mNativeMemDumpList);
+            MemoryFloodDetector.dumpItem(
+                    printWriter, "native", memoryFloodDetector.mNativeMemDumpList);
         }
         if (((ArrayList) memoryFloodDetector.mSystemMemDumpList).size() > 0) {
-            MemoryFloodDetector.dumpItem(printWriter, "sys", memoryFloodDetector.mSystemMemDumpList);
-            MemoryFloodDetector.dumpItem(printWriter, "pers", memoryFloodDetector.mPersistentMemDumpList);
+            MemoryFloodDetector.dumpItem(
+                    printWriter, "sys", memoryFloodDetector.mSystemMemDumpList);
+            MemoryFloodDetector.dumpItem(
+                    printWriter, "pers", memoryFloodDetector.mPersistentMemDumpList);
         }
-        ProcessSamplingManager processSamplingManager = this.mProcMemDumpBigdata.mProcessSamplingManager;
+        ProcessSamplingManager processSamplingManager =
+                this.mProcMemDumpBigdata.mProcessSamplingManager;
         processSamplingManager.getClass();
         printWriter.println("ProcessSamplingManager");
         printWriter.println(" Constants");
@@ -2812,7 +3286,8 @@ public final class KillPolicyManager {
         MemoryStabilityEventManager.Reporter reporter = memoryStabilityEventManager.mReporter;
         printWriter.println(reporter.mLastRealtimeMinutes);
         printWriter.print("  mLastUptimeMinutes=");
-        BroadcastStats$$ExternalSyntheticOutline0.m(reporter.mLastUptimeMinutes, printWriter, "  mLastCounter=", "[");
+        BroadcastStats$$ExternalSyntheticOutline0.m(
+                reporter.mLastUptimeMinutes, printWriter, "  mLastCounter=", "[");
         while (true) {
             MemoryStabilityEventManager.Counter counter = reporter.mLastCounter;
             if (i >= counter.countOfEvents.length) {
@@ -2882,7 +3357,8 @@ public final class KillPolicyManager {
         procMemInfo.zram = (int) ((memInfoReader.getZramTotalSizeKb() / 1024.0d) + 0.5d);
         procMemInfo.gpuTotal = (int) ((memInfoReader.getGpuTotalSizeKb() / 1024.0d) + 0.5d);
         procMemInfo.vmallocUsed = (int) ((memInfoReader.getVmAllocUsedSizeKb() / 1024.0d) + 0.5d);
-        procMemInfo.systemUncached = (int) ((memInfoReader.getSystemUncachedSizeKb() / 1024.0d) + 0.5d);
+        procMemInfo.systemUncached =
+                (int) ((memInfoReader.getSystemUncachedSizeKb() / 1024.0d) + 0.5d);
         if (this.mTotalSwap <= 0) {
             this.mTotalSwap = (int) ((memInfoReader.getSwapTotalSizeKb() / 1024.0d) + 0.5d);
         }
@@ -2917,7 +3393,12 @@ public final class KillPolicyManager {
             jSONObject.put("SDBC", 0);
             jSONObject.put("CCHC", (int) ((kpmRaw.cachedTotalCnt / kpmRaw.appCnt) + 0.5d));
             jSONObject.put("CCHA", (int) ((kpmRaw.cachedActTotalCnt / kpmRaw.appCnt) + 0.5d));
-            jSONObject.put("LNCT", new JSONArray().put(kpmRaw.hotCount).put(kpmRaw.warmCount).put(kpmRaw.coldCount));
+            jSONObject.put(
+                    "LNCT",
+                    new JSONArray()
+                            .put(kpmRaw.hotCount)
+                            .put(kpmRaw.warmCount)
+                            .put(kpmRaw.coldCount));
             jSONObject.put("LPKC", kpmRaw.launchedPackageCount);
             jSONObject.put("PKPC", lmkdCounter.previousKillOccurredCount);
             jSONObject.put("SKSC", lmkdCounter.bServiceKillOccurredCount);
@@ -2959,15 +3440,31 @@ public final class KillPolicyManager {
                     d = 1024.0d;
                 }
                 for (String str4 : ActivityManagerService.DUMP_MEM_OOM_COMPACT_LABEL) {
-                    jSONArray.put(kpmRaw.procsAdjPss.containsKey(str4) ? (long) ((((long[]) kpmRaw.procsAdjPss.get(r11))[1] / 1024.0d) + 0.5d) : 0L);
+                    jSONArray.put(
+                            kpmRaw.procsAdjPss.containsKey(str4)
+                                    ? (long)
+                                            ((((long[]) kpmRaw.procsAdjPss.get(r11))[1] / 1024.0d)
+                                                    + 0.5d)
+                                    : 0L);
                 }
                 for (String str5 : ActivityManagerService.DUMP_MEM_OOM_COMPACT_LABEL) {
-                    jSONArray.put(kpmRaw.procsAdjPss.containsKey(str5) ? (long) ((((long[]) kpmRaw.procsAdjPss.get(r11))[2] / 1024.0d) + 0.5d) : 0L);
+                    jSONArray.put(
+                            kpmRaw.procsAdjPss.containsKey(str5)
+                                    ? (long)
+                                            ((((long[]) kpmRaw.procsAdjPss.get(r11))[2] / 1024.0d)
+                                                    + 0.5d)
+                                    : 0L);
                 }
             }
             jSONObject.put("PRST", jSONArray);
             JSONArray jSONArray2 = new JSONArray();
-            jSONArray2.put((int) ((kpmRaw.psiCpuSum / kpmRaw.appCnt) + 0.5d)).put((int) ((kpmRaw.psiMemorySum / kpmRaw.appCnt) + 0.5d)).put((int) ((kpmRaw.psiIoSum / kpmRaw.appCnt) + 0.5d)).put((int) (kpmRaw.psiCpuMax + 0.5d)).put((int) (kpmRaw.psiMemoryMax + 0.5d)).put((int) (kpmRaw.psiIoMax + 0.5d));
+            jSONArray2
+                    .put((int) ((kpmRaw.psiCpuSum / kpmRaw.appCnt) + 0.5d))
+                    .put((int) ((kpmRaw.psiMemorySum / kpmRaw.appCnt) + 0.5d))
+                    .put((int) ((kpmRaw.psiIoSum / kpmRaw.appCnt) + 0.5d))
+                    .put((int) (kpmRaw.psiCpuMax + 0.5d))
+                    .put((int) (kpmRaw.psiMemoryMax + 0.5d))
+                    .put((int) (kpmRaw.psiIoMax + 0.5d));
             jSONObject.put("PSIS", jSONArray2);
             fillChimeraDataIfExist(kpmRaw, jSONObject);
             jSONObject.put("STAY", this.mNumberOfStay);
@@ -2999,7 +3496,8 @@ public final class KillPolicyManager {
             if (arrayList != null && arrayList.size() > 0) {
                 jSONArray6.put(kpmRaw.peakLmkdKillAdj);
                 for (int i4 = 0; i4 < kpmRaw.dumpHeavyProcessList.size(); i4++) {
-                    DumpHeavyProcessInfo dumpHeavyProcessInfo = (DumpHeavyProcessInfo) kpmRaw.dumpHeavyProcessList.get(i4);
+                    DumpHeavyProcessInfo dumpHeavyProcessInfo =
+                            (DumpHeavyProcessInfo) kpmRaw.dumpHeavyProcessList.get(i4);
                     jSONArray6.put(dumpHeavyProcessInfo.memoryInfo.procName);
                     String str6 = dumpHeavyProcessInfo.packageVersion;
                     if (str6 != null) {
@@ -3007,14 +3505,41 @@ public final class KillPolicyManager {
                     } else {
                         jSONArray6.put(String.valueOf(dumpHeavyProcessInfo.processVersion));
                     }
-                    jSONArray6.put(dumpHeavyProcessInfo.memoryInfo.label).put((int) ((dumpHeavyProcessInfo.memoryInfo.pss / 1024.0d) + 0.5d)).put((int) ((dumpHeavyProcessInfo.memoryInfo.swap_out / 1024.0d) + 0.5d)).put((int) ((dumpHeavyProcessInfo.memoryInfo.rss / 1024.0d) + 0.5d));
+                    jSONArray6
+                            .put(dumpHeavyProcessInfo.memoryInfo.label)
+                            .put((int) ((dumpHeavyProcessInfo.memoryInfo.pss / 1024.0d) + 0.5d))
+                            .put(
+                                    (int)
+                                            ((dumpHeavyProcessInfo.memoryInfo.swap_out / 1024.0d)
+                                                    + 0.5d))
+                            .put((int) ((dumpHeavyProcessInfo.memoryInfo.rss / 1024.0d) + 0.5d));
                 }
             }
             jSONObject.put("LHI", jSONArray6);
             JSONArray jSONArray7 = new JSONArray();
             ProcMemInfo procMemInfo = kpmRaw.procMemInfo;
             if (procMemInfo != null) {
-                jSONArray7.put(procMemInfo.memTotal).put(kpmRaw.procMemInfo.memFree).put(kpmRaw.procMemInfo.memAvailable).put(kpmRaw.procMemInfo.cached).put(kpmRaw.procMemInfo.activeFile).put(kpmRaw.procMemInfo.inactiveFile).put(kpmRaw.procMemInfo.rbinFree).put(kpmRaw.procMemInfo.rbinCached).put(this.mTotalSwap).put(kpmRaw.procMemInfo.swapFree).put(kpmRaw.procMemInfo.kReclaimable).put(kpmRaw.procMemInfo.sReclaimable).put(kpmRaw.procMemInfo.sUnreclaim).put(0).put(kpmRaw.procMemInfo.gpuSwap).put(kpmRaw.procMemInfo.systemCached).put(kpmRaw.procMemInfo.zram).put(kpmRaw.procMemInfo.gpuTotal).put(kpmRaw.procMemInfo.vmallocUsed).put(kpmRaw.procMemInfo.systemUncached);
+                jSONArray7
+                        .put(procMemInfo.memTotal)
+                        .put(kpmRaw.procMemInfo.memFree)
+                        .put(kpmRaw.procMemInfo.memAvailable)
+                        .put(kpmRaw.procMemInfo.cached)
+                        .put(kpmRaw.procMemInfo.activeFile)
+                        .put(kpmRaw.procMemInfo.inactiveFile)
+                        .put(kpmRaw.procMemInfo.rbinFree)
+                        .put(kpmRaw.procMemInfo.rbinCached)
+                        .put(this.mTotalSwap)
+                        .put(kpmRaw.procMemInfo.swapFree)
+                        .put(kpmRaw.procMemInfo.kReclaimable)
+                        .put(kpmRaw.procMemInfo.sReclaimable)
+                        .put(kpmRaw.procMemInfo.sUnreclaim)
+                        .put(0)
+                        .put(kpmRaw.procMemInfo.gpuSwap)
+                        .put(kpmRaw.procMemInfo.systemCached)
+                        .put(kpmRaw.procMemInfo.zram)
+                        .put(kpmRaw.procMemInfo.gpuTotal)
+                        .put(kpmRaw.procMemInfo.vmallocUsed)
+                        .put(kpmRaw.procMemInfo.systemUncached);
             }
             jSONObject.put("PMI", jSONArray7);
             JSONArray jSONArray8 = new JSONArray();
@@ -3023,7 +3548,10 @@ public final class KillPolicyManager {
                     if (kpmRaw.dumpHeavyMemoryUsageByAdj.containsKey(str7)) {
                         long[] jArr = (long[]) kpmRaw.dumpHeavyMemoryUsageByAdj.get(str7);
                         Objects.requireNonNull(processMemoryHeavyInfo);
-                        jSONArray8.put((int) ((jArr[0] / 1024.0d) + 0.5d)).put((int) ((jArr[1] / 1024.0d) + 0.5d)).put((int) ((jArr[2] / 1024.0d) + 0.5d));
+                        jSONArray8
+                                .put((int) ((jArr[0] / 1024.0d) + 0.5d))
+                                .put((int) ((jArr[1] / 1024.0d) + 0.5d))
+                                .put((int) ((jArr[2] / 1024.0d) + 0.5d));
                     } else {
                         jSONArray8.put(-1).put(-1).put(-1);
                     }
@@ -3055,7 +3583,8 @@ public final class KillPolicyManager {
     public final synchronized void sendHqmBigData(String str) {
         try {
             if (this.mHqmManager == null) {
-                this.mHqmManager = (SemHqmManager) this.mContext.getSystemService("HqmManagerService");
+                this.mHqmManager =
+                        (SemHqmManager) this.mContext.getSystemService("HqmManagerService");
             }
             SemHqmManager semHqmManager = this.mHqmManager;
             if (semHqmManager == null) {
@@ -3065,7 +3594,17 @@ public final class KillPolicyManager {
                 return;
             }
             if (str != null) {
-                boolean sendHWParamToHQM = semHqmManager.sendHWParamToHQM(KPM_DEBUG ? 1 : 0, "Sluggish", "KPUT", "ph", "1.1", "sec", "", str, "");
+                boolean sendHWParamToHQM =
+                        semHqmManager.sendHWParamToHQM(
+                                KPM_DEBUG ? 1 : 0,
+                                "Sluggish",
+                                "KPUT",
+                                "ph",
+                                "1.1",
+                                "sec",
+                                "",
+                                str,
+                                "");
                 if (KPM_DEBUG) {
                     if (sendHWParamToHQM) {
                         Slog.d("ActivityManager_kpm", "Success to report 'KPUT' : ".concat(str));

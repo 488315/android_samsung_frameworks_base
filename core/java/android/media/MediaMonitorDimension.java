@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class MediaMonitorDimension implements Parcelable {
-    public static final Parcelable.Creator<MediaMonitorDimension> CREATOR = new Parcelable.Creator<MediaMonitorDimension>() { // from class: android.media.MediaMonitorDimension.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MediaMonitorDimension createFromParcel(Parcel in) {
-            return new MediaMonitorDimension(in);
-        }
+    public static final Parcelable.Creator<MediaMonitorDimension> CREATOR =
+            new Parcelable.Creator<
+                    MediaMonitorDimension>() { // from class: android.media.MediaMonitorDimension.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MediaMonitorDimension createFromParcel(Parcel in) {
+                    return new MediaMonitorDimension(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public MediaMonitorDimension[] newArray(int size) {
-            return new MediaMonitorDimension[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public MediaMonitorDimension[] newArray(int size) {
+                    return new MediaMonitorDimension[size];
+                }
+            };
     public static final int TYPE_NUM = 1;
     public static final int TYPE_TEXT = 0;
     public static final int TYPE_UNKNOWN = -1;

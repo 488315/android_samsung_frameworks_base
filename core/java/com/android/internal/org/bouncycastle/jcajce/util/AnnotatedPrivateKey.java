@@ -41,13 +41,15 @@ public class AnnotatedPrivateKey implements PrivateKey {
     public AnnotatedPrivateKey addAnnotation(String name, Object annotation) {
         Map<String, Object> newAnnotations = new HashMap<>(this.annotations);
         newAnnotations.put(name, annotation);
-        return new AnnotatedPrivateKey(this.key, (Map<String, Object>) Collections.unmodifiableMap(newAnnotations));
+        return new AnnotatedPrivateKey(
+                this.key, (Map<String, Object>) Collections.unmodifiableMap(newAnnotations));
     }
 
     public AnnotatedPrivateKey removeAnnotation(String name) {
         Map<String, Object> newAnnotations = new HashMap<>(this.annotations);
         newAnnotations.remove(name);
-        return new AnnotatedPrivateKey(this.key, (Map<String, Object>) Collections.unmodifiableMap(newAnnotations));
+        return new AnnotatedPrivateKey(
+                this.key, (Map<String, Object>) Collections.unmodifiableMap(newAnnotations));
     }
 
     @Override // java.security.Key

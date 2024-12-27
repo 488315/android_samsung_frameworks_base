@@ -3,24 +3,27 @@ package android.app.search;
 import android.annotation.SystemApi;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 
 @SystemApi
 /* loaded from: classes.dex */
 public final class SearchSessionId implements Parcelable {
-    public static final Parcelable.Creator<SearchSessionId> CREATOR = new Parcelable.Creator<SearchSessionId>() { // from class: android.app.search.SearchSessionId.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SearchSessionId createFromParcel(Parcel parcel) {
-            return new SearchSessionId(parcel);
-        }
+    public static final Parcelable.Creator<SearchSessionId> CREATOR =
+            new Parcelable.Creator<
+                    SearchSessionId>() { // from class: android.app.search.SearchSessionId.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SearchSessionId createFromParcel(Parcel parcel) {
+                    return new SearchSessionId(parcel);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public SearchSessionId[] newArray(int size) {
-            return new SearchSessionId[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public SearchSessionId[] newArray(int size) {
+                    return new SearchSessionId[size];
+                }
+            };
     private final String mId;
     private final int mUserId;
 

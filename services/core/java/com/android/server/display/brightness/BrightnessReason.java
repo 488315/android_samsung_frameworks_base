@@ -2,10 +2,12 @@ package com.android.server.display.brightness;
 
 import android.hardware.audio.common.V2_0.AudioChannelMask$$ExternalSyntheticOutline0;
 import android.util.Slog;
+
 import com.android.internal.display.BrightnessSynchronizer;
 import com.android.server.DeviceIdleController$$ExternalSyntheticOutline0;
-import com.android.server.display.brightness.BrightnessReason;
+
 import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -73,7 +75,8 @@ public final class BrightnessReason {
                     case 8192:
                         str = "restore_manual";
                         break;
-                    case EndpointMonitorConst.FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION /* 16384 */:
+                    case EndpointMonitorConst
+                            .FLAG_TRACING_PROCESS_PERMISSIONS_MODIFICATION /* 16384 */:
                         str = "cover_display_demo";
                         break;
                     case 32768:
@@ -86,7 +89,9 @@ public final class BrightnessReason {
                         str = "hdr_limit";
                         break;
                     default:
-                        str = AudioChannelMask$$ExternalSyntheticOutline0.m(new StringBuilder("0x"), i);
+                        str =
+                                AudioChannelMask$$ExternalSyntheticOutline0.m(
+                                        new StringBuilder("0x"), i);
                         break;
                 }
             } else {
@@ -141,12 +146,15 @@ public final class BrightnessReason {
         sb.append(reasonToString(this.mReason));
         sb.append(String.format("[%d]", Integer.valueOf(this.startBrightness)));
         if (((ArrayList) this.changes).size() > 0) {
-            ((ArrayList) this.changes).forEach(new Consumer() { // from class: com.android.server.display.brightness.BrightnessReason$$ExternalSyntheticLambda0
-                @Override // java.util.function.Consumer
-                public final void accept(Object obj) {
-                    sb.append((BrightnessReason.BrightnessChange) obj);
-                }
-            });
+            ((ArrayList) this.changes)
+                    .forEach(
+                            new Consumer() { // from class:
+                                             // com.android.server.display.brightness.BrightnessReason$$ExternalSyntheticLambda0
+                                @Override // java.util.function.Consumer
+                                public final void accept(Object obj) {
+                                    sb.append((BrightnessReason.BrightnessChange) obj);
+                                }
+                            });
         }
         return sb.toString();
     }
@@ -156,7 +164,8 @@ public final class BrightnessReason {
             return false;
         }
         BrightnessReason brightnessReason = (BrightnessReason) obj;
-        return brightnessReason.mReason == this.mReason && brightnessReason.mModifier == this.mModifier;
+        return brightnessReason.mReason == this.mReason
+                && brightnessReason.mModifier == this.mModifier;
     }
 
     public final int getReason() {
@@ -176,7 +185,9 @@ public final class BrightnessReason {
     }
 
     public final void set(BrightnessReason brightnessReason) {
-        setReason(brightnessReason == null ? 0 : brightnessReason.mReason, brightnessReason == null ? 0 : brightnessReason.startBrightness);
+        setReason(
+                brightnessReason == null ? 0 : brightnessReason.mReason,
+                brightnessReason == null ? 0 : brightnessReason.startBrightness);
         setModifier(brightnessReason != null ? brightnessReason.mModifier : 0);
     }
 
@@ -185,7 +196,9 @@ public final class BrightnessReason {
             this.mModifier = i;
             return;
         }
-        Slog.w("BrightnessReason", "brightness modifier out of bounds: 0x" + Integer.toHexString(i));
+        Slog.w(
+                "BrightnessReason",
+                "brightness modifier out of bounds: 0x" + Integer.toHexString(i));
     }
 
     public final void setReason(float f, int i) {
@@ -194,7 +207,8 @@ public final class BrightnessReason {
 
     public final void setReason(int i, int i2) {
         if (i < 0 || i > 14) {
-            DeviceIdleController$$ExternalSyntheticOutline0.m(i, "brightness reason out of bounds: ", "BrightnessReason");
+            DeviceIdleController$$ExternalSyntheticOutline0.m(
+                    i, "brightness reason out of bounds: ", "BrightnessReason");
             return;
         }
         this.mReason = i;

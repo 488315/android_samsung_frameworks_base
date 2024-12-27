@@ -4,6 +4,7 @@ import android.annotation.SystemApi;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -25,29 +26,41 @@ public final class InstantAppResolveInfo implements Parcelable {
     private final boolean mShouldLetInstallerDecide;
     private final long mVersionCode;
     private static final byte[] EMPTY_DIGEST = new byte[0];
-    public static final Parcelable.Creator<InstantAppResolveInfo> CREATOR = new Parcelable.Creator<InstantAppResolveInfo>() { // from class: android.content.pm.InstantAppResolveInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InstantAppResolveInfo createFromParcel(Parcel in) {
-            return new InstantAppResolveInfo(in);
-        }
+    public static final Parcelable.Creator<InstantAppResolveInfo> CREATOR =
+            new Parcelable.Creator<InstantAppResolveInfo>() { // from class:
+                // android.content.pm.InstantAppResolveInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InstantAppResolveInfo createFromParcel(Parcel in) {
+                    return new InstantAppResolveInfo(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public InstantAppResolveInfo[] newArray(int size) {
-            return new InstantAppResolveInfo[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public InstantAppResolveInfo[] newArray(int size) {
+                    return new InstantAppResolveInfo[size];
+                }
+            };
 
-    public InstantAppResolveInfo(InstantAppDigest digest, String packageName, List<InstantAppIntentFilter> filters, int versionCode) {
+    public InstantAppResolveInfo(
+            InstantAppDigest digest,
+            String packageName,
+            List<InstantAppIntentFilter> filters,
+            int versionCode) {
         this(digest, packageName, filters, versionCode, null);
     }
 
-    public InstantAppResolveInfo(InstantAppDigest digest, String packageName, List<InstantAppIntentFilter> filters, long versionCode, Bundle extras) {
+    public InstantAppResolveInfo(
+            InstantAppDigest digest,
+            String packageName,
+            List<InstantAppIntentFilter> filters,
+            long versionCode,
+            Bundle extras) {
         this(digest, packageName, filters, versionCode, extras, false);
     }
 
-    public InstantAppResolveInfo(String hostName, String packageName, List<InstantAppIntentFilter> filters) {
+    public InstantAppResolveInfo(
+            String hostName, String packageName, List<InstantAppIntentFilter> filters) {
         this(new InstantAppDigest(hostName), packageName, filters, -1L, null);
     }
 
@@ -55,8 +68,15 @@ public final class InstantAppResolveInfo implements Parcelable {
         this(InstantAppDigest.UNDEFINED, null, null, -1L, extras, true);
     }
 
-    private InstantAppResolveInfo(InstantAppDigest digest, String packageName, List<InstantAppIntentFilter> filters, long versionCode, Bundle extras, boolean shouldLetInstallerDecide) {
-        if ((packageName == null && filters != null && filters.size() != 0) || (packageName != null && (filters == null || filters.size() == 0))) {
+    private InstantAppResolveInfo(
+            InstantAppDigest digest,
+            String packageName,
+            List<InstantAppIntentFilter> filters,
+            long versionCode,
+            Bundle extras,
+            boolean shouldLetInstallerDecide) {
+        if ((packageName == null && filters != null && filters.size() != 0)
+                || (packageName != null && (filters == null || filters.size() == 0))) {
             throw new IllegalArgumentException();
         }
         this.mDigest = digest;
@@ -94,7 +114,9 @@ public final class InstantAppResolveInfo implements Parcelable {
     }
 
     public byte[] getDigestBytes() {
-        return this.mDigest.mDigestBytes.length > 0 ? this.mDigest.getDigestBytes()[0] : EMPTY_DIGEST;
+        return this.mDigest.mDigestBytes.length > 0
+                ? this.mDigest.getDigestBytes()[0]
+                : EMPTY_DIGEST;
     }
 
     public int getDigestPrefix() {
@@ -144,7 +166,8 @@ public final class InstantAppResolveInfo implements Parcelable {
     public static final class InstantAppDigest implements Parcelable {
         public static final Parcelable.Creator<InstantAppDigest> CREATOR;
         static final int DIGEST_MASK = -4096;
-        public static final InstantAppDigest UNDEFINED = new InstantAppDigest(new byte[0][], new int[0]);
+        public static final InstantAppDigest UNDEFINED =
+                new InstantAppDigest(new byte[0][], new int[0]);
         private static Random sRandom;
         private final byte[][] mDigestBytes;
         private final int[] mDigestPrefix;
@@ -157,22 +180,24 @@ public final class InstantAppResolveInfo implements Parcelable {
             } catch (NoSuchAlgorithmException e) {
                 sRandom = new Random();
             }
-            CREATOR = new Parcelable.Creator<InstantAppDigest>() { // from class: android.content.pm.InstantAppResolveInfo.InstantAppDigest.1
-                /* JADX WARN: Can't rename method to resolve collision */
-                @Override // android.os.Parcelable.Creator
-                public InstantAppDigest createFromParcel(Parcel in) {
-                    if (in.readBoolean()) {
-                        return InstantAppDigest.UNDEFINED;
-                    }
-                    return new InstantAppDigest(in);
-                }
+            CREATOR =
+                    new Parcelable.Creator<InstantAppDigest>() { // from class:
+                        // android.content.pm.InstantAppResolveInfo.InstantAppDigest.1
+                        /* JADX WARN: Can't rename method to resolve collision */
+                        @Override // android.os.Parcelable.Creator
+                        public InstantAppDigest createFromParcel(Parcel in) {
+                            if (in.readBoolean()) {
+                                return InstantAppDigest.UNDEFINED;
+                            }
+                            return new InstantAppDigest(in);
+                        }
 
-                /* JADX WARN: Can't rename method to resolve collision */
-                @Override // android.os.Parcelable.Creator
-                public InstantAppDigest[] newArray(int size) {
-                    return new InstantAppDigest[size];
-                }
-            };
+                        /* JADX WARN: Can't rename method to resolve collision */
+                        @Override // android.os.Parcelable.Creator
+                        public InstantAppDigest[] newArray(int size) {
+                            return new InstantAppDigest[size];
+                        }
+                    };
         }
 
         public InstantAppDigest(String hostName) {
@@ -186,7 +211,12 @@ public final class InstantAppResolveInfo implements Parcelable {
             this.mDigestBytes = generateDigest(hostName.toLowerCase(Locale.ENGLISH), maxDigests);
             this.mDigestPrefix = new int[this.mDigestBytes.length];
             for (int i = 0; i < this.mDigestBytes.length; i++) {
-                this.mDigestPrefix[i] = (((this.mDigestBytes[i][0] & 255) << 24) | ((this.mDigestBytes[i][1] & 255) << 16) | ((this.mDigestBytes[i][2] & 255) << 8) | ((this.mDigestBytes[i][3] & 255) << 0)) & DIGEST_MASK;
+                this.mDigestPrefix[i] =
+                        (((this.mDigestBytes[i][0] & 255) << 24)
+                                        | ((this.mDigestBytes[i][1] & 255) << 16)
+                                        | ((this.mDigestBytes[i][2] & 255) << 8)
+                                        | ((this.mDigestBytes[i][3] & 255) << 0))
+                                & DIGEST_MASK;
             }
         }
 
@@ -207,11 +237,15 @@ public final class InstantAppResolveInfo implements Parcelable {
                     if (prevDot < 0) {
                         digests.add(digest.digest(hostName.getBytes()));
                     } else {
-                        byte[] hostBytes2 = hostName.substring(prevDot + 1, hostName.length()).getBytes();
+                        byte[] hostBytes2 =
+                                hostName.substring(prevDot + 1, hostName.length()).getBytes();
                         digests.add(digest.digest(hostBytes2));
-                        for (int digestCount = 1; prevDot >= 0 && digestCount < maxDigests; digestCount++) {
+                        for (int digestCount = 1;
+                                prevDot >= 0 && digestCount < maxDigests;
+                                digestCount++) {
                             prevDot = hostName.lastIndexOf(46, prevDot - 1);
-                            byte[] hostBytes3 = hostName.substring(prevDot + 1, hostName.length()).getBytes();
+                            byte[] hostBytes3 =
+                                    hostName.substring(prevDot + 1, hostName.length()).getBytes();
                             digests.add(digest.digest(hostBytes3));
                         }
                     }

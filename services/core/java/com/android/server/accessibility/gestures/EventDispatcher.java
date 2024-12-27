@@ -6,6 +6,7 @@ import android.util.Slog;
 import android.view.MotionEvent;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
+
 import com.android.server.accessibility.AccessibilityManagerService;
 import com.android.server.accessibility.EventStreamTransformation;
 
@@ -21,7 +22,11 @@ public final class EventDispatcher {
     public int mLongPressingPointerId = -1;
     public final Point mTempPoint = new Point();
 
-    public EventDispatcher(Context context, AccessibilityManagerService accessibilityManagerService, EventStreamTransformation eventStreamTransformation, TouchState touchState) {
+    public EventDispatcher(
+            Context context,
+            AccessibilityManagerService accessibilityManagerService,
+            EventStreamTransformation eventStreamTransformation,
+            TouchState touchState) {
         this.mContext = context;
         this.mAms = accessibilityManagerService;
         this.mReceiver = eventStreamTransformation;
@@ -29,9 +34,9 @@ public final class EventDispatcher {
     }
 
     /* JADX WARN: Code restructure failed: missing block: B:13:0x0046, code lost:
-    
-        if (r0 == r3.mA11yWindowManager.getActiveWindowId(r3.mCurrentUserId)) goto L15;
-     */
+
+       if (r0 == r3.mA11yWindowManager.getActiveWindowId(r3.mCurrentUserId)) goto L15;
+    */
     /*
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
@@ -96,7 +101,9 @@ public final class EventDispatcher {
         L5e:
             return r2
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.accessibility.gestures.EventDispatcher.computeClickLocation(android.graphics.Point):int");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.accessibility.gestures.EventDispatcher.computeClickLocation(android.graphics.Point):int");
     }
 
     public final int computeInjectionAction(int i, int i2) {
@@ -121,10 +128,14 @@ public final class EventDispatcher {
         if (accessibilityManager.isEnabled()) {
             AccessibilityEvent obtain = AccessibilityEvent.obtain(i);
             AccessibilityManagerService accessibilityManagerService = this.mAms;
-            obtain.setWindowId(accessibilityManagerService.mA11yWindowManager.getActiveWindowId(accessibilityManagerService.mCurrentUserId));
+            obtain.setWindowId(
+                    accessibilityManagerService.mA11yWindowManager.getActiveWindowId(
+                            accessibilityManagerService.mCurrentUserId));
             accessibilityManager.sendAccessibilityEvent(obtain);
             if (TouchExplorer.DEBUG) {
-                Slog.d("EventDispatcher", "Sending accessibility event" + AccessibilityEvent.eventTypeToString(i));
+                Slog.d(
+                        "EventDispatcher",
+                        "Sending accessibility event" + AccessibilityEvent.eventTypeToString(i));
             }
         }
         TouchState touchState = this.mState;
@@ -161,7 +172,12 @@ public final class EventDispatcher {
             TouchState touchState = this.mState;
             if (!touchState.isInjectedPointerDown(pointerId)) {
                 i2 |= 1 << pointerId;
-                sendMotionEvent(computeInjectionAction(0, i3), i2, i, motionEvent, touchState.mLastReceivedEvent);
+                sendMotionEvent(
+                        computeInjectionAction(0, i3),
+                        i2,
+                        i,
+                        motionEvent,
+                        touchState.mLastReceivedEvent);
             }
         }
     }
@@ -173,12 +189,16 @@ public final class EventDispatcher {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void sendMotionEvent(int r28, int r29, int r30, android.view.MotionEvent r31, android.view.MotionEvent r32) {
+    public final void sendMotionEvent(
+            int r28, int r29, int r30, android.view.MotionEvent r31, android.view.MotionEvent r32) {
         /*
             Method dump skipped, instructions count: 457
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.accessibility.gestures.EventDispatcher.sendMotionEvent(int, int, int, android.view.MotionEvent, android.view.MotionEvent):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.accessibility.gestures.EventDispatcher.sendMotionEvent(int,"
+                    + " int, int, android.view.MotionEvent, android.view.MotionEvent):void");
     }
 
     public final String toString() {

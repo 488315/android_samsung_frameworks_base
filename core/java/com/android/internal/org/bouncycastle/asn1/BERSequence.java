@@ -4,8 +4,7 @@ import java.io.IOException;
 
 /* loaded from: classes5.dex */
 public class BERSequence extends ASN1Sequence {
-    public BERSequence() {
-    }
+    public BERSequence() {}
 
     public BERSequence(ASN1Encodable element) {
         super(element);
@@ -31,7 +30,8 @@ public class BERSequence extends ASN1Sequence {
         return i2 + 2;
     }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Sequence, com.android.internal.org.bouncycastle.asn1.ASN1Primitive
+    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Sequence,
+              // com.android.internal.org.bouncycastle.asn1.ASN1Primitive
     void encode(ASN1OutputStream out, boolean withTag) throws IOException {
         out.writeEncodedIndef(withTag, 48, this.elements);
     }

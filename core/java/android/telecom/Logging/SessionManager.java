@@ -7,8 +7,8 @@ import android.os.Looper;
 import android.os.Process;
 import android.provider.Settings;
 import android.telecom.Log;
-import android.telecom.Logging.Session;
 import android.util.Base64;
+
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,27 +26,34 @@ public class SessionManager {
     private Context mContext;
     private int sCodeEntryCounter = 0;
     public ConcurrentHashMap<Integer, Session> mSessionMapper = new ConcurrentHashMap<>(100);
-    public java.lang.Runnable mCleanStaleSessions = new java.lang.Runnable() { // from class: android.telecom.Logging.SessionManager$$ExternalSyntheticLambda0
-        @Override // java.lang.Runnable
-        public final void run() {
-            SessionManager.this.lambda$new$0();
-        }
-    };
+    public java.lang.Runnable mCleanStaleSessions =
+            new java.lang
+                    .Runnable() { // from class:
+                                  // android.telecom.Logging.SessionManager$$ExternalSyntheticLambda0
+                @Override // java.lang.Runnable
+                public final void run() {
+                    SessionManager.this.lambda$new$0();
+                }
+            };
     private Handler mSessionCleanupHandler = new Handler(Looper.getMainLooper());
-    public ICurrentThreadId mCurrentThreadId = new ICurrentThreadId() { // from class: android.telecom.Logging.SessionManager$$ExternalSyntheticLambda1
-        @Override // android.telecom.Logging.SessionManager.ICurrentThreadId
-        public final int get() {
-            return Process.myTid();
-        }
-    };
-    private ISessionCleanupTimeoutMs mSessionCleanupTimeoutMs = new ISessionCleanupTimeoutMs() { // from class: android.telecom.Logging.SessionManager$$ExternalSyntheticLambda2
-        @Override // android.telecom.Logging.SessionManager.ISessionCleanupTimeoutMs
-        public final long get() {
-            long lambda$new$1;
-            lambda$new$1 = SessionManager.this.lambda$new$1();
-            return lambda$new$1;
-        }
-    };
+    public ICurrentThreadId mCurrentThreadId =
+            new ICurrentThreadId() { // from class:
+                                     // android.telecom.Logging.SessionManager$$ExternalSyntheticLambda1
+                @Override // android.telecom.Logging.SessionManager.ICurrentThreadId
+                public final int get() {
+                    return Process.myTid();
+                }
+            };
+    private ISessionCleanupTimeoutMs mSessionCleanupTimeoutMs =
+            new ISessionCleanupTimeoutMs() { // from class:
+                                             // android.telecom.Logging.SessionManager$$ExternalSyntheticLambda2
+                @Override // android.telecom.Logging.SessionManager.ISessionCleanupTimeoutMs
+                public final long get() {
+                    long lambda$new$1;
+                    lambda$new$1 = SessionManager.this.lambda$new$1();
+                    return lambda$new$1;
+                }
+            };
     private List<ISessionListener> mSessionListeners = new ArrayList();
 
     public interface ICurrentThreadId {
@@ -90,11 +97,13 @@ public class SessionManager {
     private synchronized void resetStaleSessionTimer() {
         this.mSessionCleanupHandler.removeCallbacksAndMessages(null);
         if (this.mCleanStaleSessions != null) {
-            this.mSessionCleanupHandler.postDelayed(this.mCleanStaleSessions, getSessionCleanupTimeoutMs());
+            this.mSessionCleanupHandler.postDelayed(
+                    this.mCleanStaleSessions, getSessionCleanupTimeoutMs());
         }
     }
 
-    public synchronized void startSession(Session.Info info, String shortMethodName, String callerIdentification) {
+    public synchronized void startSession(
+            Session.Info info, String shortMethodName, String callerIdentification) {
         if (info == null) {
             startSession(shortMethodName, callerIdentification);
         } else {
@@ -111,23 +120,39 @@ public class SessionManager {
             continueSession(childSession, shortMethodName);
         } else {
             Log.d(LOGGING_TAG, Session.START_SESSION, new Object[0]);
-            Session newSession = new Session(getNextSessionID(), shortMethodName, System.currentTimeMillis(), false, callerIdentification);
+            Session newSession =
+                    new Session(
+                            getNextSessionID(),
+                            shortMethodName,
+                            System.currentTimeMillis(),
+                            false,
+                            callerIdentification);
             this.mSessionMapper.put(Integer.valueOf(threadId), newSession);
         }
     }
 
-    public synchronized void startExternalSession(Session.Info sessionInfo, String shortMethodName) {
+    public synchronized void startExternalSession(
+            Session.Info sessionInfo, String shortMethodName) {
         if (sessionInfo == null) {
             return;
         }
         int threadId = getCallingThreadId();
         Session threadSession = this.mSessionMapper.get(Integer.valueOf(threadId));
         if (threadSession != null) {
-            Log.w(LOGGING_TAG, "trying to start an external session with a session already active.", new Object[0]);
+            Log.w(
+                    LOGGING_TAG,
+                    "trying to start an external session with a session already active.",
+                    new Object[0]);
             return;
         }
         Log.d(LOGGING_TAG, Session.START_EXTERNAL_SESSION, new Object[0]);
-        Session externalSession = new Session(Session.EXTERNAL_INDICATOR + sessionInfo.sessionId, sessionInfo.methodPath, System.currentTimeMillis(), false, sessionInfo.ownerInfo);
+        Session externalSession =
+                new Session(
+                        Session.EXTERNAL_INDICATOR + sessionInfo.sessionId,
+                        sessionInfo.methodPath,
+                        System.currentTimeMillis(),
+                        false,
+                        sessionInfo.ownerInfo);
         externalSession.setIsExternal(true);
         externalSession.markSessionCompleted(-1L);
         this.mSessionMapper.put(Integer.valueOf(threadId), externalSession);
@@ -143,10 +168,19 @@ public class SessionManager {
         int threadId = getCallingThreadId();
         Session threadSession = this.mSessionMapper.get(Integer.valueOf(threadId));
         if (threadSession == null) {
-            Log.d(LOGGING_TAG, "Log.createSubsession was called with no session active.", new Object[0]);
+            Log.d(
+                    LOGGING_TAG,
+                    "Log.createSubsession was called with no session active.",
+                    new Object[0]);
             return null;
         }
-        Session newSubsession = new Session(threadSession.getNextChildId(), threadSession.getShortMethodName(), System.currentTimeMillis(), isStartedFromActiveSession, threadSession.getOwnerInfo());
+        Session newSubsession =
+                new Session(
+                        threadSession.getNextChildId(),
+                        threadSession.getShortMethodName(),
+                        System.currentTimeMillis(),
+                        isStartedFromActiveSession,
+                        threadSession.getOwnerInfo());
         threadSession.addChild(newSubsession);
         newSubsession.setParentSession(threadSession);
         if (!isStartedFromActiveSession) {
@@ -165,7 +199,10 @@ public class SessionManager {
         int threadId = getCallingThreadId();
         Session threadSession = this.mSessionMapper.get(Integer.valueOf(threadId));
         if (threadSession == null) {
-            Log.d(LOGGING_TAG, "Log.getExternalSession was called with no session active.", new Object[0]);
+            Log.d(
+                    LOGGING_TAG,
+                    "Log.getExternalSession was called with no session active.",
+                    new Object[0]);
             return null;
         }
         return threadSession.getExternalInfo(ownerInfo);
@@ -188,14 +225,21 @@ public class SessionManager {
         subsession.setExecutionStartTimeMs(System.currentTimeMillis());
         Session parentSession = subsession.getParentSession();
         if (parentSession == null) {
-            Log.i(LOGGING_TAG, "Log.continueSession was called with no session active for method " + shortMethodName, new Object[0]);
+            Log.i(
+                    LOGGING_TAG,
+                    "Log.continueSession was called with no session active for method "
+                            + shortMethodName,
+                    new Object[0]);
             return;
         }
         this.mSessionMapper.put(Integer.valueOf(getCallingThreadId()), subsession);
         if (!subsession.isStartedFromActiveSession()) {
             Log.v(LOGGING_TAG, Session.CONTINUE_SUBSESSION, new Object[0]);
         } else {
-            Log.v(LOGGING_TAG, "CONTINUE_SUBSESSION (Invisible Subsession) with Method " + shortMethodName, new Object[0]);
+            Log.v(
+                    LOGGING_TAG,
+                    "CONTINUE_SUBSESSION (Invisible Subsession) with Method " + shortMethodName,
+                    new Object[0]);
         }
     }
 
@@ -208,14 +252,24 @@ public class SessionManager {
         }
         completedSession.markSessionCompleted(System.currentTimeMillis());
         if (!completedSession.isStartedFromActiveSession()) {
-            Log.v(LOGGING_TAG, "END_SUBSESSION (dur: " + completedSession.getLocalExecutionTime() + " mS)", new Object[0]);
+            Log.v(
+                    LOGGING_TAG,
+                    "END_SUBSESSION (dur: " + completedSession.getLocalExecutionTime() + " mS)",
+                    new Object[0]);
         } else {
-            Log.v(LOGGING_TAG, "END_SUBSESSION (Invisible Subsession) (dur: " + completedSession.getLocalExecutionTime() + " ms)", new Object[0]);
+            Log.v(
+                    LOGGING_TAG,
+                    "END_SUBSESSION (Invisible Subsession) (dur: "
+                            + completedSession.getLocalExecutionTime()
+                            + " ms)",
+                    new Object[0]);
         }
         Session parentSession = completedSession.getParentSession();
         this.mSessionMapper.remove(Integer.valueOf(threadId));
         endParentSessions(completedSession);
-        if (parentSession != null && !parentSession.isSessionCompleted() && completedSession.isStartedFromActiveSession()) {
+        if (parentSession != null
+                && !parentSession.isSessionCompleted()
+                && completedSession.isStartedFromActiveSession()) {
             this.mSessionMapper.put(Integer.valueOf(threadId), parentSession);
         }
     }
@@ -229,13 +283,20 @@ public class SessionManager {
             subsession.setParentSession(null);
             parentSession.removeChild(subsession);
             if (parentSession.isExternal()) {
-                notifySessionCompleteListeners(subsession.getShortMethodName(), System.currentTimeMillis() - subsession.getExecutionStartTimeMilliseconds());
+                notifySessionCompleteListeners(
+                        subsession.getShortMethodName(),
+                        System.currentTimeMillis()
+                                - subsession.getExecutionStartTimeMilliseconds());
             }
             endParentSessions(parentSession);
             return;
         }
-        long fullSessionTimeMs = System.currentTimeMillis() - subsession.getExecutionStartTimeMilliseconds();
-        Log.d(LOGGING_TAG, "END_SESSION (dur: " + fullSessionTimeMs + " ms): " + subsession.toString(), new Object[0]);
+        long fullSessionTimeMs =
+                System.currentTimeMillis() - subsession.getExecutionStartTimeMilliseconds();
+        Log.d(
+                LOGGING_TAG,
+                "END_SESSION (dur: " + fullSessionTimeMs + " ms): " + subsession.toString(),
+                new Object[0]);
         if (!subsession.isExternal()) {
             notifySessionCompleteListeners(subsession.getShortMethodName(), fullSessionTimeMs);
         }
@@ -318,6 +379,7 @@ public class SessionManager {
 
     private long getCleanupTimeout(Context context) {
         ContentResolver cr = context.getContentResolver();
-        return Settings.Secure.getLongForUser(cr, "telecom.stale_session_cleanup_timeout_millis", 30000L, cr.getUserId());
+        return Settings.Secure.getLongForUser(
+                cr, "telecom.stale_session_cleanup_timeout_millis", 30000L, cr.getUserId());
     }
 }

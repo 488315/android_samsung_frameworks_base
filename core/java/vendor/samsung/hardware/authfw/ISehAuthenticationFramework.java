@@ -8,7 +8,8 @@ import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public interface ISehAuthenticationFramework extends IInterface {
-    public static final String DESCRIPTOR = "vendor$samsung$hardware$authfw$ISehAuthenticationFramework".replace('$', '.');
+    public static final String DESCRIPTOR =
+            "vendor$samsung$hardware$authfw$ISehAuthenticationFramework".replace('$', '.');
     public static final String HASH = "ea997bca08b7fab1afc1f53991c5a068408d1670";
     public static final int VERSION = 1;
 
@@ -54,7 +55,7 @@ public interface ISehAuthenticationFramework extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISehAuthenticationFramework {
+    public abstract static class Stub extends Binder implements ISehAuthenticationFramework {
         static final int TRANSACTION_execute = 3;
         static final int TRANSACTION_getInterfaceHash = 16777214;
         static final int TRANSACTION_getInterfaceVersion = 16777215;
@@ -83,7 +84,8 @@ public interface ISehAuthenticationFramework extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);

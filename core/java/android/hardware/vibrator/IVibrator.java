@@ -1,6 +1,5 @@
 package android.hardware.vibrator;
 
-import android.hardware.vibrator.IVibratorCallback;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.IInterface;
@@ -28,9 +27,11 @@ public interface IVibrator extends IInterface {
 
     void alwaysOnEnable(int i, int i2, byte b) throws RemoteException;
 
-    void compose(CompositeEffect[] compositeEffectArr, IVibratorCallback iVibratorCallback) throws RemoteException;
+    void compose(CompositeEffect[] compositeEffectArr, IVibratorCallback iVibratorCallback)
+            throws RemoteException;
 
-    void composePwle(PrimitivePwle[] primitivePwleArr, IVibratorCallback iVibratorCallback) throws RemoteException;
+    void composePwle(PrimitivePwle[] primitivePwleArr, IVibratorCallback iVibratorCallback)
+            throws RemoteException;
 
     float[] getBandwidthAmplitudeMap() throws RemoteException;
 
@@ -83,15 +84,14 @@ public interface IVibrator extends IInterface {
         }
 
         @Override // android.hardware.vibrator.IVibrator
-        public void off() throws RemoteException {
-        }
+        public void off() throws RemoteException {}
 
         @Override // android.hardware.vibrator.IVibrator
-        public void on(int timeoutMs, IVibratorCallback callback) throws RemoteException {
-        }
+        public void on(int timeoutMs, IVibratorCallback callback) throws RemoteException {}
 
         @Override // android.hardware.vibrator.IVibrator
-        public int perform(int effect, byte strength, IVibratorCallback callback) throws RemoteException {
+        public int perform(int effect, byte strength, IVibratorCallback callback)
+                throws RemoteException {
             return 0;
         }
 
@@ -101,12 +101,10 @@ public interface IVibrator extends IInterface {
         }
 
         @Override // android.hardware.vibrator.IVibrator
-        public void setAmplitude(float amplitude) throws RemoteException {
-        }
+        public void setAmplitude(float amplitude) throws RemoteException {}
 
         @Override // android.hardware.vibrator.IVibrator
-        public void setExternalControl(boolean enabled) throws RemoteException {
-        }
+        public void setExternalControl(boolean enabled) throws RemoteException {}
 
         @Override // android.hardware.vibrator.IVibrator
         public int getCompositionDelayMax() throws RemoteException {
@@ -129,8 +127,8 @@ public interface IVibrator extends IInterface {
         }
 
         @Override // android.hardware.vibrator.IVibrator
-        public void compose(CompositeEffect[] composite, IVibratorCallback callback) throws RemoteException {
-        }
+        public void compose(CompositeEffect[] composite, IVibratorCallback callback)
+                throws RemoteException {}
 
         @Override // android.hardware.vibrator.IVibrator
         public int[] getSupportedAlwaysOnEffects() throws RemoteException {
@@ -138,12 +136,10 @@ public interface IVibrator extends IInterface {
         }
 
         @Override // android.hardware.vibrator.IVibrator
-        public void alwaysOnEnable(int id, int effect, byte strength) throws RemoteException {
-        }
+        public void alwaysOnEnable(int id, int effect, byte strength) throws RemoteException {}
 
         @Override // android.hardware.vibrator.IVibrator
-        public void alwaysOnDisable(int id) throws RemoteException {
-        }
+        public void alwaysOnDisable(int id) throws RemoteException {}
 
         @Override // android.hardware.vibrator.IVibrator
         public float getResonantFrequency() throws RemoteException {
@@ -186,8 +182,8 @@ public interface IVibrator extends IInterface {
         }
 
         @Override // android.hardware.vibrator.IVibrator
-        public void composePwle(PrimitivePwle[] composite, IVibratorCallback callback) throws RemoteException {
-        }
+        public void composePwle(PrimitivePwle[] composite, IVibratorCallback callback)
+                throws RemoteException {}
 
         @Override // android.hardware.vibrator.IVibrator
         public int getInterfaceVersion() {
@@ -205,7 +201,7 @@ public interface IVibrator extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IVibrator {
+    public abstract static class Stub extends Binder implements IVibrator {
         static final int TRANSACTION_alwaysOnDisable = 15;
         static final int TRANSACTION_alwaysOnEnable = 14;
         static final int TRANSACTION_compose = 12;
@@ -255,7 +251,8 @@ public interface IVibrator extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -286,7 +283,8 @@ public interface IVibrator extends IInterface {
                     return true;
                 case 3:
                     int _arg0 = data.readInt();
-                    IVibratorCallback _arg1 = IVibratorCallback.Stub.asInterface(data.readStrongBinder());
+                    IVibratorCallback _arg1 =
+                            IVibratorCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     on(_arg0, _arg1);
                     reply.writeNoException();
@@ -294,7 +292,8 @@ public interface IVibrator extends IInterface {
                 case 4:
                     int _arg02 = data.readInt();
                     byte _arg12 = data.readByte();
-                    IVibratorCallback _arg2 = IVibratorCallback.Stub.asInterface(data.readStrongBinder());
+                    IVibratorCallback _arg2 =
+                            IVibratorCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     int _result2 = perform(_arg02, _arg12, _arg2);
                     reply.writeNoException();
@@ -340,8 +339,10 @@ public interface IVibrator extends IInterface {
                     reply.writeInt(_result7);
                     return true;
                 case 12:
-                    CompositeEffect[] _arg06 = (CompositeEffect[]) data.createTypedArray(CompositeEffect.CREATOR);
-                    IVibratorCallback _arg13 = IVibratorCallback.Stub.asInterface(data.readStrongBinder());
+                    CompositeEffect[] _arg06 =
+                            (CompositeEffect[]) data.createTypedArray(CompositeEffect.CREATOR);
+                    IVibratorCallback _arg13 =
+                            IVibratorCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     compose(_arg06, _arg13);
                     reply.writeNoException();
@@ -406,8 +407,10 @@ public interface IVibrator extends IInterface {
                     reply.writeIntArray(_result16);
                     return true;
                 case 24:
-                    PrimitivePwle[] _arg09 = (PrimitivePwle[]) data.createTypedArray(PrimitivePwle.CREATOR);
-                    IVibratorCallback _arg15 = IVibratorCallback.Stub.asInterface(data.readStrongBinder());
+                    PrimitivePwle[] _arg09 =
+                            (PrimitivePwle[]) data.createTypedArray(PrimitivePwle.CREATOR);
+                    IVibratorCallback _arg15 =
+                            IVibratorCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     composePwle(_arg09, _arg15);
                     reply.writeNoException();
@@ -491,7 +494,8 @@ public interface IVibrator extends IInterface {
             }
 
             @Override // android.hardware.vibrator.IVibrator
-            public int perform(int effect, byte strength, IVibratorCallback callback) throws RemoteException {
+            public int perform(int effect, byte strength, IVibratorCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -575,7 +579,8 @@ public interface IVibrator extends IInterface {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(8, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method getCompositionDelayMax is unimplemented.");
+                        throw new RemoteException(
+                                "Method getCompositionDelayMax is unimplemented.");
                     }
                     _reply.readException();
                     int _result = _reply.readInt();
@@ -613,7 +618,8 @@ public interface IVibrator extends IInterface {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(10, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method getSupportedPrimitives is unimplemented.");
+                        throw new RemoteException(
+                                "Method getSupportedPrimitives is unimplemented.");
                     }
                     _reply.readException();
                     int[] _result = _reply.createIntArray();
@@ -645,7 +651,8 @@ public interface IVibrator extends IInterface {
             }
 
             @Override // android.hardware.vibrator.IVibrator
-            public void compose(CompositeEffect[] composite, IVibratorCallback callback) throws RemoteException {
+            public void compose(CompositeEffect[] composite, IVibratorCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -671,7 +678,8 @@ public interface IVibrator extends IInterface {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(13, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method getSupportedAlwaysOnEffects is unimplemented.");
+                        throw new RemoteException(
+                                "Method getSupportedAlwaysOnEffects is unimplemented.");
                     }
                     _reply.readException();
                     int[] _result = _reply.createIntArray();
@@ -766,7 +774,8 @@ public interface IVibrator extends IInterface {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(18, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method getFrequencyResolution is unimplemented.");
+                        throw new RemoteException(
+                                "Method getFrequencyResolution is unimplemented.");
                     }
                     _reply.readException();
                     float _result = _reply.readFloat();
@@ -804,7 +813,8 @@ public interface IVibrator extends IInterface {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(20, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method getBandwidthAmplitudeMap is unimplemented.");
+                        throw new RemoteException(
+                                "Method getBandwidthAmplitudeMap is unimplemented.");
                     }
                     _reply.readException();
                     float[] _result = _reply.createFloatArray();
@@ -823,7 +833,8 @@ public interface IVibrator extends IInterface {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(21, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method getPwlePrimitiveDurationMax is unimplemented.");
+                        throw new RemoteException(
+                                "Method getPwlePrimitiveDurationMax is unimplemented.");
                     }
                     _reply.readException();
                     int _result = _reply.readInt();
@@ -842,7 +853,8 @@ public interface IVibrator extends IInterface {
                     _data.writeInterfaceToken(DESCRIPTOR);
                     boolean _status = this.mRemote.transact(22, _data, _reply, 0);
                     if (!_status) {
-                        throw new RemoteException("Method getPwleCompositionSizeMax is unimplemented.");
+                        throw new RemoteException(
+                                "Method getPwleCompositionSizeMax is unimplemented.");
                     }
                     _reply.readException();
                     int _result = _reply.readInt();
@@ -873,7 +885,8 @@ public interface IVibrator extends IInterface {
             }
 
             @Override // android.hardware.vibrator.IVibrator
-            public void composePwle(PrimitivePwle[] composite, IVibratorCallback callback) throws RemoteException {
+            public void composePwle(PrimitivePwle[] composite, IVibratorCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {

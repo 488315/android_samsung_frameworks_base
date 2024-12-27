@@ -7,7 +7,9 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.UserHandle;
+
 import com.samsung.android.dsms.aidl.IDsmsInfoService;
+
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
@@ -31,8 +33,7 @@ public final class DsmsInfoCache {
         return dsmsInfoCache;
     }
 
-    private DsmsInfoCache() {
-    }
+    private DsmsInfoCache() {}
 
     public void setContext(Context context) {
         if (context == null) {
@@ -73,7 +74,10 @@ public final class DsmsInfoCache {
                 if (!service.isBound()) {
                     return;
                 }
-            } catch (RemoteException | IllegalStateException | SecurityException | TimeoutException e) {
+            } catch (RemoteException
+                    | IllegalStateException
+                    | SecurityException
+                    | TimeoutException e) {
                 DsmsLog.e(SUBTAG, e.getMessage());
                 if (!service.isBound()) {
                     return;
@@ -101,22 +105,25 @@ public final class DsmsInfoCache {
             this.mLock = new Object();
             this.mIsBound = false;
             this.mIDsmsInfoService = null;
-            this.mConnection = new ServiceConnection() { // from class: com.samsung.android.jdsms.DsmsInfoCache.DsmsInfoServiceClient.1
-                @Override // android.content.ServiceConnection
-                public void onServiceConnected(ComponentName name, IBinder service) {
-                    synchronized (DsmsInfoServiceClient.this.mLock) {
-                        DsmsInfoServiceClient.this.mIDsmsInfoService = IDsmsInfoService.Stub.asInterface(service);
-                        DsmsInfoServiceClient.this.mLock.notifyAll();
-                    }
-                }
+            this.mConnection =
+                    new ServiceConnection() { // from class:
+                                              // com.samsung.android.jdsms.DsmsInfoCache.DsmsInfoServiceClient.1
+                        @Override // android.content.ServiceConnection
+                        public void onServiceConnected(ComponentName name, IBinder service) {
+                            synchronized (DsmsInfoServiceClient.this.mLock) {
+                                DsmsInfoServiceClient.this.mIDsmsInfoService =
+                                        IDsmsInfoService.Stub.asInterface(service);
+                                DsmsInfoServiceClient.this.mLock.notifyAll();
+                            }
+                        }
 
-                @Override // android.content.ServiceConnection
-                public void onServiceDisconnected(ComponentName name) {
-                    synchronized (DsmsInfoServiceClient.this.mLock) {
-                        DsmsInfoServiceClient.this.mIDsmsInfoService = null;
-                    }
-                }
-            };
+                        @Override // android.content.ServiceConnection
+                        public void onServiceDisconnected(ComponentName name) {
+                            synchronized (DsmsInfoServiceClient.this.mLock) {
+                                DsmsInfoServiceClient.this.mIDsmsInfoService = null;
+                            }
+                        }
+                    };
         }
 
         public boolean isBound() {
@@ -137,7 +144,9 @@ public final class DsmsInfoCache {
                 Intent intent = new Intent();
                 intent.setPackage(DSMS_PACKAGE);
                 intent.setAction(ACTION_INFO);
-                this.mIsBound = DsmsInfoCache.this.mContext.bindServiceAsUser(intent, this.mConnection, 1, UserHandle.SYSTEM);
+                this.mIsBound =
+                        DsmsInfoCache.this.mContext.bindServiceAsUser(
+                                intent, this.mConnection, 1, UserHandle.SYSTEM);
                 if (this.mIsBound) {
                     DsmsLog.d(SUBTAG, "Service is bound");
                 } else {

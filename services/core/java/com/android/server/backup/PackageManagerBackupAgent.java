@@ -6,7 +6,9 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.ParcelFileDescriptor;
 import android.util.Slog;
+
 import com.android.server.backup.utils.BackupEligibilityRules;
+
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -45,7 +47,8 @@ public final class PackageManagerBackupAgent extends BackupAgent {
         public final /* synthetic */ int $r8$classId;
         public final /* synthetic */ PackageManagerBackupAgent this$0;
 
-        public /* synthetic */ LegacyRestoreDataConsumer(PackageManagerBackupAgent packageManagerBackupAgent, int i) {
+        public /* synthetic */ LegacyRestoreDataConsumer(
+                PackageManagerBackupAgent packageManagerBackupAgent, int i) {
             this.$r8$classId = i;
             this.this$0 = packageManagerBackupAgent;
         }
@@ -74,7 +77,8 @@ public final class PackageManagerBackupAgent extends BackupAgent {
         this.mUserId = i;
     }
 
-    public PackageManagerBackupAgent(PackageManager packageManager, int i, BackupEligibilityRules backupEligibilityRules) {
+    public PackageManagerBackupAgent(
+            PackageManager packageManager, int i, BackupEligibilityRules backupEligibilityRules) {
         this.mStateVersions = new HashMap();
         this.mExisting = new HashSet();
         this.mPackageManager = packageManager;
@@ -87,10 +91,12 @@ public final class PackageManagerBackupAgent extends BackupAgent {
         this.mAllPackages = getStorableApplications(packageManager, i, backupEligibilityRules);
     }
 
-    public static List getStorableApplications(PackageManager packageManager, int i, BackupEligibilityRules backupEligibilityRules) {
+    public static List getStorableApplications(
+            PackageManager packageManager, int i, BackupEligibilityRules backupEligibilityRules) {
         List installedPackagesAsUser = packageManager.getInstalledPackagesAsUser(134217728, i);
         for (int size = installedPackagesAsUser.size() - 1; size >= 0; size--) {
-            if (!backupEligibilityRules.appIsEligibleForBackup(((PackageInfo) installedPackagesAsUser.get(size)).applicationInfo)) {
+            if (!backupEligibilityRules.appIsEligibleForBackup(
+                    ((PackageInfo) installedPackagesAsUser.get(size)).applicationInfo)) {
                 installedPackagesAsUser.remove(size);
             }
         }
@@ -146,7 +152,10 @@ public final class PackageManagerBackupAgent extends BackupAgent {
     }
 
     public static void writeStateFile(List list, ParcelFileDescriptor parcelFileDescriptor) {
-        DataOutputStream dataOutputStream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(parcelFileDescriptor.getFileDescriptor())));
+        DataOutputStream dataOutputStream =
+                new DataOutputStream(
+                        new BufferedOutputStream(
+                                new FileOutputStream(parcelFileDescriptor.getFileDescriptor())));
         try {
             dataOutputStream.writeUTF(STATE_FILE_HEADER);
             dataOutputStream.writeInt(2);
@@ -184,12 +193,19 @@ public final class PackageManagerBackupAgent extends BackupAgent {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onBackup(android.os.ParcelFileDescriptor r18, android.app.backup.BackupDataOutput r19, android.os.ParcelFileDescriptor r20) {
+    public final void onBackup(
+            android.os.ParcelFileDescriptor r18,
+            android.app.backup.BackupDataOutput r19,
+            android.os.ParcelFileDescriptor r20) {
         /*
             Method dump skipped, instructions count: 659
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.backup.PackageManagerBackupAgent.onBackup(android.os.ParcelFileDescriptor, android.app.backup.BackupDataOutput, android.os.ParcelFileDescriptor):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.backup.PackageManagerBackupAgent.onBackup(android.os.ParcelFileDescriptor,"
+                    + " android.app.backup.BackupDataOutput,"
+                    + " android.os.ParcelFileDescriptor):void");
     }
 
     /* JADX WARN: Removed duplicated region for block: B:12:0x004c  */
@@ -201,11 +217,15 @@ public final class PackageManagerBackupAgent extends BackupAgent {
         Code decompiled incorrectly, please refer to instructions dump.
         To view partially-correct code enable 'Show inconsistent code' option in preferences
     */
-    public final void onRestore(android.app.backup.BackupDataInput r7, int r8, android.os.ParcelFileDescriptor r9) {
+    public final void onRestore(
+            android.app.backup.BackupDataInput r7, int r8, android.os.ParcelFileDescriptor r9) {
         /*
             Method dump skipped, instructions count: 422
             To view this dump change 'Code comments level' option to 'DEBUG'
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.android.server.backup.PackageManagerBackupAgent.onRestore(android.app.backup.BackupDataInput, int, android.os.ParcelFileDescriptor):void");
+        throw new UnsupportedOperationException(
+                "Method not decompiled:"
+                    + " com.android.server.backup.PackageManagerBackupAgent.onRestore(android.app.backup.BackupDataInput,"
+                    + " int, android.os.ParcelFileDescriptor):void");
     }
 }

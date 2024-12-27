@@ -36,11 +36,13 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.android.internal.R;
 import com.android.internal.policy.DecorContext;
+
 import com.google.android.mms.ContentType;
 import com.samsung.android.rune.CoreRune;
-import com.samsung.android.widget.SemOneTouchApi;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -54,7 +56,8 @@ public class SemOneTouchApi {
     private static final String BUNDLE_KEY_ACTIVITY_NAME = "key_activity_name";
     private static final String BUNDLE_KEY_APP_PROCESS_NAME = "key_app_process_name";
     private static final String BUNDLE_KEY_CUSTOM_CLIP_DATA = "key_customized_clip_data";
-    private static final String BUNDLE_KEY_CUSTOM_DRAG_SHADOW_WIDTH = "key_custom_drag_shadow_width";
+    private static final String BUNDLE_KEY_CUSTOM_DRAG_SHADOW_WIDTH =
+            "key_custom_drag_shadow_width";
     private static final String BUNDLE_KEY_LONG_PRESS_FLAG = "key_long_press_flag";
     private static final String BUNDLE_KEY_RAW_TOUCHED_POINT = "key_raw_touched_point";
     private static final String BUNDLE_KEY_REQUEST_CODE = "key_request_code";
@@ -65,7 +68,8 @@ public class SemOneTouchApi {
     private static final String BUNDLE_KEY_TOUCHED_WIDGET_ID = "key_touched_widget_id";
     private static final String BUNDLE_KEY_TOUCHED_WIDGET_NAME = "key_touched_widget_name";
     private static final String BUNDLE_KEY_VIDEO_VIEW_ClASS_NAME = "key_video_view_class_name";
-    private static final String BUNDLE_KEY_VIDEO_VIEW_FINDING_TOP_TO_DOWN = "key_video_view_finding_top_to_down";
+    private static final String BUNDLE_KEY_VIDEO_VIEW_FINDING_TOP_TO_DOWN =
+            "key_video_view_finding_top_to_down";
     private static final String BUNDLE_KEY_VIDEO_VIEW_ROOT_CLASS = "key_video_view_root_calss_name";
     private static final String BUNDLE_KEY_VIDEO_VIEW_WIDGET_ID = "key_video_view_widget_id";
     private static final String BUNDLE_KEY_VIDEO_VIEW_WIDGET_NAME = "key_video_view_widget_name";
@@ -83,15 +87,19 @@ public class SemOneTouchApi {
     private static final String OPEN_URI_SAVE_TOUCHED_IMG = "uri_save_touched_img";
     private static final String PACKAGE_NAME_ONE_TOUCH = "com.samsung.android.onetouch";
     private static final String PACKAGE_NAME_SYSTEM_UI = "com.android.systemui";
-    private static final String SETTING_KEY_OTCH_LONG_PRESS_ENABLE = "otch_long_press_enabled_setting";
-    private static final String SETTING_KEY_OTCH_LONG_PRESS_PHASE_ONE_THRESHOLD = "otch_long_press_phase_one_threshold";
-    private static final String SETTING_KEY_OTCH_LONG_PRESS_PHASE_TWO_THRESHOLD = "otch_long_press_phase_two_threshold";
+    private static final String SETTING_KEY_OTCH_LONG_PRESS_ENABLE =
+            "otch_long_press_enabled_setting";
+    private static final String SETTING_KEY_OTCH_LONG_PRESS_PHASE_ONE_THRESHOLD =
+            "otch_long_press_phase_one_threshold";
+    private static final String SETTING_KEY_OTCH_LONG_PRESS_PHASE_TWO_THRESHOLD =
+            "otch_long_press_phase_two_threshold";
     private static final String TAG = "OTCH$SemOneTouchApi";
     private static final int TEXT_VIEW_MAX_LENGTH = 100;
     private static final float TOUCH_MOVE_MAX_MM = 3.0f;
     private CheckRestrictTouchRunnable mCheckRestrictTouchRunnable;
     private Boolean mIsInitialized;
-    private static final String OTCH_EXTERNAL_EVENT_AUTHORITY = "content://com.samsung.android.onetouch.externalEvent";
+    private static final String OTCH_EXTERNAL_EVENT_AUTHORITY =
+            "content://com.samsung.android.onetouch.externalEvent";
     public static final Uri OTCH_EXTERNAL_EVENT_URI = Uri.parse(OTCH_EXTERNAL_EVENT_AUTHORITY);
     private static Pair<Integer, Integer> mOneTouchLongPressThreshold = new Pair<>(480, 1370);
     private static int mTouchEventMoveMaxPixel = 50;
@@ -132,14 +140,38 @@ public class SemOneTouchApi {
             ContentResolver contentResolver = context.getContentResolver();
             if (CoreRune.FW_SUPPORT_ONE_TOUCH) {
                 z = true;
-                if (Settings.Secure.getInt(context.getContentResolver(), SETTING_KEY_OTCH_LONG_PRESS_ENABLE, 1) == 1) {
+                if (Settings.Secure.getInt(
+                                context.getContentResolver(), SETTING_KEY_OTCH_LONG_PRESS_ENABLE, 1)
+                        == 1) {
                     this.mIsOneTouchSettingsEnabled = Boolean.valueOf(z);
-                    mOneTouchLongPressThreshold = new Pair<>(Integer.valueOf(Settings.Secure.getInt(contentResolver, SETTING_KEY_OTCH_LONG_PRESS_PHASE_ONE_THRESHOLD, 480)), Integer.valueOf(Settings.Secure.getInt(contentResolver, SETTING_KEY_OTCH_LONG_PRESS_PHASE_TWO_THRESHOLD, 1370)));
+                    mOneTouchLongPressThreshold =
+                            new Pair<>(
+                                    Integer.valueOf(
+                                            Settings.Secure.getInt(
+                                                    contentResolver,
+                                                    SETTING_KEY_OTCH_LONG_PRESS_PHASE_ONE_THRESHOLD,
+                                                    480)),
+                                    Integer.valueOf(
+                                            Settings.Secure.getInt(
+                                                    contentResolver,
+                                                    SETTING_KEY_OTCH_LONG_PRESS_PHASE_TWO_THRESHOLD,
+                                                    1370)));
                 }
             }
             z = false;
             this.mIsOneTouchSettingsEnabled = Boolean.valueOf(z);
-            mOneTouchLongPressThreshold = new Pair<>(Integer.valueOf(Settings.Secure.getInt(contentResolver, SETTING_KEY_OTCH_LONG_PRESS_PHASE_ONE_THRESHOLD, 480)), Integer.valueOf(Settings.Secure.getInt(contentResolver, SETTING_KEY_OTCH_LONG_PRESS_PHASE_TWO_THRESHOLD, 1370)));
+            mOneTouchLongPressThreshold =
+                    new Pair<>(
+                            Integer.valueOf(
+                                    Settings.Secure.getInt(
+                                            contentResolver,
+                                            SETTING_KEY_OTCH_LONG_PRESS_PHASE_ONE_THRESHOLD,
+                                            480)),
+                            Integer.valueOf(
+                                    Settings.Secure.getInt(
+                                            contentResolver,
+                                            SETTING_KEY_OTCH_LONG_PRESS_PHASE_TWO_THRESHOLD,
+                                            1370)));
         } catch (Exception e) {
             Log.secE(TAG, "updateSettingsValue failed", e);
         }
@@ -162,7 +194,11 @@ public class SemOneTouchApi {
         }
 
         public String toString() {
-            return "FindVideoViewEventInfo( findTopToDown=" + this.findTopToDown + ", videoViewClassName=" + this.videoViewClassName + NavigationBarInflaterView.KEY_CODE_END;
+            return "FindVideoViewEventInfo( findTopToDown="
+                    + this.findTopToDown
+                    + ", videoViewClassName="
+                    + this.videoViewClassName
+                    + NavigationBarInflaterView.KEY_CODE_END;
         }
     }
 
@@ -185,7 +221,13 @@ public class SemOneTouchApi {
             this.touchedRawPoint = new PointF(motionEvent.getRawX(), motionEvent.getRawY());
         }
 
-        public OtchLongPressEvent(long requestCode, int eventFlag, View touchedView, PointF touchedPoint, PointF touchedRawPoint, Bundle bundle) {
+        public OtchLongPressEvent(
+                long requestCode,
+                int eventFlag,
+                View touchedView,
+                PointF touchedPoint,
+                PointF touchedRawPoint,
+                Bundle bundle) {
             this.touchedView = null;
             this.bundle = null;
             this.findVideoViewEventInfo = null;
@@ -198,13 +240,31 @@ public class SemOneTouchApi {
         }
 
         public String toString() {
-            return "Content( requestCode=" + this.requestCode + ", eventFlag=" + this.eventFlag + ", touchedView=" + this.touchedView + ", touchedPoint=" + this.touchedPoint + ", touchRawPoint=" + this.touchedRawPoint + ", bundle=" + this.bundle + NavigationBarInflaterView.KEY_CODE_END;
+            return "Content( requestCode="
+                    + this.requestCode
+                    + ", eventFlag="
+                    + this.eventFlag
+                    + ", touchedView="
+                    + this.touchedView
+                    + ", touchedPoint="
+                    + this.touchedPoint
+                    + ", touchRawPoint="
+                    + this.touchedRawPoint
+                    + ", bundle="
+                    + this.bundle
+                    + NavigationBarInflaterView.KEY_CODE_END;
         }
 
         /* JADX INFO: Access modifiers changed from: protected */
         /* renamed from: clone, reason: merged with bridge method [inline-methods] */
         public OtchLongPressEvent m9294clone() {
-            return new OtchLongPressEvent(this.requestCode, this.eventFlag, this.touchedView, this.touchedPoint, this.touchedRawPoint, this.bundle);
+            return new OtchLongPressEvent(
+                    this.requestCode,
+                    this.eventFlag,
+                    this.touchedView,
+                    this.touchedPoint,
+                    this.touchedRawPoint,
+                    this.bundle);
         }
     }
 
@@ -242,15 +302,22 @@ public class SemOneTouchApi {
         @Override // java.lang.Runnable
         public void run() {
             try {
-                OtchLongPressEvent eventInfo = (OtchLongPressEvent) SemOneTouchApi.this.mCurrentLongPressEvent.get();
+                OtchLongPressEvent eventInfo =
+                        (OtchLongPressEvent) SemOneTouchApi.this.mCurrentLongPressEvent.get();
                 if (eventInfo != null && eventInfo.eventFlag == 0) {
-                    Log.secD(SemOneTouchApi.TAG, "LongPressPhaseOneRunnable: " + eventInfo.requestCode);
-                    eventInfo.touchedView = SemOneTouchApi.this.getTouchedView(this.rootView, eventInfo.touchedPoint);
+                    Log.secD(
+                            SemOneTouchApi.TAG,
+                            "LongPressPhaseOneRunnable: " + eventInfo.requestCode);
+                    eventInfo.touchedView =
+                            SemOneTouchApi.this.getTouchedView(
+                                    this.rootView, eventInfo.touchedPoint);
                     boolean z = true;
                     eventInfo.eventFlag = 1;
                     Bundle bundle = new Bundle();
-                    SemOneTouchApi.this.putRootViewInfoToBundle(this.context, bundle, this.rootView, eventInfo);
-                    String imageViewBitmapString = SemOneTouchApi.this.isBase64ImageString(eventInfo.touchedView);
+                    SemOneTouchApi.this.putRootViewInfoToBundle(
+                            this.context, bundle, this.rootView, eventInfo);
+                    String imageViewBitmapString =
+                            SemOneTouchApi.this.isBase64ImageString(eventInfo.touchedView);
                     SemOneTouchApi semOneTouchApi = SemOneTouchApi.this;
                     Context context = this.context;
                     View view = eventInfo.touchedView;
@@ -260,28 +327,64 @@ public class SemOneTouchApi {
                     semOneTouchApi.putTouchedViewInfoToBundle(context, bundle, view, z);
                     eventInfo.bundle = bundle;
                     SemOneTouchApi.this.mCurrentLongPressEvent = new AtomicReference(eventInfo);
-                    Bundle responseBundle = SemOneTouchApi.this.sendOnLongPressedEvent(this.context, eventInfo, bundle);
-                    boolean isSuccess = SemOneTouchApi.this.isEventSuccess(responseBundle).booleanValue();
+                    Bundle responseBundle =
+                            SemOneTouchApi.this.sendOnLongPressedEvent(
+                                    this.context, eventInfo, bundle);
+                    boolean isSuccess =
+                            SemOneTouchApi.this.isEventSuccess(responseBundle).booleanValue();
                     if (!isSuccess) {
                         Log.secE(SemOneTouchApi.TAG, "LongPressPhaseOneRunnable call fail");
                         SemOneTouchApi.this.onLongPressError();
                     } else {
-                        SemOneTouchApi.this.parseCallResultDetail(eventInfo.requestCode, responseBundle);
+                        SemOneTouchApi.this.parseCallResultDetail(
+                                eventInfo.requestCode, responseBundle);
                         if (SemOneTouchApi.this.isSaveBitmapFileNeeded(eventInfo.touchedView)) {
-                            new Thread(SemOneTouchApi.this.new SaveBitmapFileRunnable(this.context, eventInfo.touchedView)).start();
+                            new Thread(
+                                            SemOneTouchApi.this
+                                            .new SaveBitmapFileRunnable(
+                                                    this.context, eventInfo.touchedView))
+                                    .start();
                         } else if (imageViewBitmapString != null) {
-                            new Thread(SemOneTouchApi.this.new SaveBitmapFileRunnable(this.context, imageViewBitmapString)).start();
+                            new Thread(
+                                            SemOneTouchApi.this
+                                            .new SaveBitmapFileRunnable(
+                                                    this.context, imageViewBitmapString))
+                                    .start();
                         }
-                        SemOneTouchApi.this.mLongPressPhaseTwoRunnable = SemOneTouchApi.this.new LongPressPhaseTwoRunnable(this.context, this.rootView);
-                        long delay = ((eventInfo.requestCode + ((Integer) SemOneTouchApi.mOneTouchLongPressThreshold.first).intValue()) + ((Integer) SemOneTouchApi.mOneTouchLongPressThreshold.second).intValue()) - System.currentTimeMillis();
-                        this.rootView.postDelayed(SemOneTouchApi.this.mLongPressPhaseTwoRunnable, delay > 0 ? delay : ((Integer) SemOneTouchApi.mOneTouchLongPressThreshold.second).intValue());
+                        SemOneTouchApi.this.mLongPressPhaseTwoRunnable =
+                                SemOneTouchApi.this
+                                .new LongPressPhaseTwoRunnable(this.context, this.rootView);
+                        long delay =
+                                ((eventInfo.requestCode
+                                                        + ((Integer)
+                                                                        SemOneTouchApi
+                                                                                .mOneTouchLongPressThreshold
+                                                                                .first)
+                                                                .intValue())
+                                                + ((Integer)
+                                                                SemOneTouchApi
+                                                                        .mOneTouchLongPressThreshold
+                                                                        .second)
+                                                        .intValue())
+                                        - System.currentTimeMillis();
+                        this.rootView.postDelayed(
+                                SemOneTouchApi.this.mLongPressPhaseTwoRunnable,
+                                delay > 0
+                                        ? delay
+                                        : ((Integer)
+                                                        SemOneTouchApi.mOneTouchLongPressThreshold
+                                                                .second)
+                                                .intValue());
                     }
                     return;
                 }
                 Log.secE(SemOneTouchApi.TAG, "LongPressPhaseOneRunnable state error: " + eventInfo);
                 SemOneTouchApi.this.onLongPressError();
             } catch (Exception e) {
-                Log.secE(SemOneTouchApi.TAG, "LongPressPhaseOneRunnable call error: " + e.getMessage(), e);
+                Log.secE(
+                        SemOneTouchApi.TAG,
+                        "LongPressPhaseOneRunnable call error: " + e.getMessage(),
+                        e);
                 SemOneTouchApi.this.onLongPressError();
             }
         }
@@ -304,7 +407,8 @@ public class SemOneTouchApi {
         @Override // java.lang.Runnable
         public void run() {
             try {
-                OtchLongPressEvent eventInfo = (OtchLongPressEvent) SemOneTouchApi.this.mCurrentLongPressEvent.get();
+                OtchLongPressEvent eventInfo =
+                        (OtchLongPressEvent) SemOneTouchApi.this.mCurrentLongPressEvent.get();
                 if (eventInfo != null) {
                     boolean z = true;
                     if (eventInfo.eventFlag == 1) {
@@ -312,35 +416,63 @@ public class SemOneTouchApi {
                         eventInfo.eventFlag = 2;
                         SemOneTouchApi.this.mCurrentLongPressEvent = new AtomicReference(eventInfo);
                         Bundle bundle = eventInfo.bundle;
-                        if (!(eventInfo.touchedView instanceof TextView) && (this.rootView instanceof ViewGroup)) {
+                        if (!(eventInfo.touchedView instanceof TextView)
+                                && (this.rootView instanceof ViewGroup)) {
                             FindVideoViewEventInfo videoViewInfo = eventInfo.findVideoViewEventInfo;
                             SemOneTouchApi semOneTouchApi = SemOneTouchApi.this;
                             ViewGroup viewGroup = (ViewGroup) this.rootView;
-                            String str = videoViewInfo != null ? videoViewInfo.videoViewClassName : null;
+                            String str =
+                                    videoViewInfo != null ? videoViewInfo.videoViewClassName : null;
                             if (videoViewInfo != null && !videoViewInfo.findTopToDown) {
                                 z = false;
                             }
                             View videoView = semOneTouchApi.findVideoView(viewGroup, str, z);
                             if (videoView != null) {
-                                SemOneTouchApi.this.putVideoViewInfoToBundle(this.context, bundle, videoViewInfo.videoViewClassName, videoView);
+                                SemOneTouchApi.this.putVideoViewInfoToBundle(
+                                        this.context,
+                                        bundle,
+                                        videoViewInfo.videoViewClassName,
+                                        videoView);
                             }
                         }
-                        Bundle resultBundle = SemOneTouchApi.this.sendOnLongPressedEvent(this.context, eventInfo, bundle);
-                        boolean isSuccess = SemOneTouchApi.this.isEventSuccess(resultBundle).booleanValue();
+                        Bundle resultBundle =
+                                SemOneTouchApi.this.sendOnLongPressedEvent(
+                                        this.context, eventInfo, bundle);
+                        boolean isSuccess =
+                                SemOneTouchApi.this.isEventSuccess(resultBundle).booleanValue();
                         if (!isSuccess) {
                             Log.secE(SemOneTouchApi.TAG, "LongPressPhaseTwoRunnable call fail");
                             SemOneTouchApi.this.onLongPressError();
                             return;
                         } else {
-                            ClipData clipData = resultBundle != null ? (ClipData) resultBundle.getParcelable(SemOneTouchApi.BUNDLE_KEY_CUSTOM_CLIP_DATA, ClipData.class) : null;
+                            ClipData clipData =
+                                    resultBundle != null
+                                            ? (ClipData)
+                                                    resultBundle.getParcelable(
+                                                            SemOneTouchApi
+                                                                    .BUNDLE_KEY_CUSTOM_CLIP_DATA,
+                                                            ClipData.class)
+                                            : null;
                             if (clipData != null) {
-                                int customDragShadowWidth = resultBundle.getInt(SemOneTouchApi.BUNDLE_KEY_CUSTOM_DRAG_SHADOW_WIDTH, -1);
-                                SemOneTouchApi.this.performDragAndDrop(this.context, customDragShadowWidth, this.rootView, eventInfo.touchedRawPoint, eventInfo.touchedView, clipData, new OtchDragAndDropResultCallback() { // from class: com.samsung.android.widget.SemOneTouchApi$LongPressPhaseTwoRunnable$$ExternalSyntheticLambda0
-                                    @Override // com.samsung.android.widget.SemOneTouchApi.OtchDragAndDropResultCallback
-                                    public final void onDragAndDropResult(boolean z2) {
-                                        SemOneTouchApi.LongPressPhaseTwoRunnable.this.lambda$run$0(z2);
-                                    }
-                                });
+                                int customDragShadowWidth =
+                                        resultBundle.getInt(
+                                                SemOneTouchApi.BUNDLE_KEY_CUSTOM_DRAG_SHADOW_WIDTH,
+                                                -1);
+                                SemOneTouchApi.this.performDragAndDrop(
+                                        this.context,
+                                        customDragShadowWidth,
+                                        this.rootView,
+                                        eventInfo.touchedRawPoint,
+                                        eventInfo.touchedView,
+                                        clipData,
+                                        new OtchDragAndDropResultCallback() { // from class:
+                                                                              // com.samsung.android.widget.SemOneTouchApi$LongPressPhaseTwoRunnable$$ExternalSyntheticLambda0
+                                            @Override // com.samsung.android.widget.SemOneTouchApi.OtchDragAndDropResultCallback
+                                            public final void onDragAndDropResult(boolean z2) {
+                                                SemOneTouchApi.LongPressPhaseTwoRunnable.this
+                                                        .lambda$run$0(z2);
+                                            }
+                                        });
                             }
                             return;
                         }
@@ -349,7 +481,10 @@ public class SemOneTouchApi {
                 Log.secE(SemOneTouchApi.TAG, "LongPressPhaseTwoRunnable state error: " + eventInfo);
                 SemOneTouchApi.this.onLongPressError();
             } catch (Exception e) {
-                Log.secE(SemOneTouchApi.TAG, "LongPressPhaseTwoRunnable call error: " + e.getMessage(), e);
+                Log.secE(
+                        SemOneTouchApi.TAG,
+                        "LongPressPhaseTwoRunnable call error: " + e.getMessage(),
+                        e);
                 SemOneTouchApi.this.onLongPressError();
             }
         }
@@ -374,7 +509,8 @@ public class SemOneTouchApi {
         if (callerPackage == null) {
             return false;
         }
-        if (callerPackage.equals(PACKAGE_NAME_ONE_TOUCH) || callerPackage.equals("com.android.systemui")) {
+        if (callerPackage.equals(PACKAGE_NAME_ONE_TOUCH)
+                || callerPackage.equals("com.android.systemui")) {
             return true;
         }
         Intent intent = new Intent(Intent.ACTION_MAIN);
@@ -387,7 +523,8 @@ public class SemOneTouchApi {
     }
 
     public boolean dispatchTouchEvent(Context context, MotionEvent event, View rootView) {
-        if (!this.mIsInitialized.booleanValue() || !this.mIsOneTouchSettingsEnabled.booleanValue()) {
+        if (!this.mIsInitialized.booleanValue()
+                || !this.mIsOneTouchSettingsEnabled.booleanValue()) {
             return false;
         }
         switch (event.getActionMasked()) {
@@ -412,8 +549,7 @@ public class SemOneTouchApi {
                             break;
                     }
                     OtchLongPressEvent eventInfo = this.mCurrentLongPressEvent.get();
-                    if (eventInfo == null || eventInfo.eventFlag != 4) {
-                    }
+                    if (eventInfo == null || eventInfo.eventFlag != 4) {}
                 }
                 break;
         }
@@ -457,13 +593,16 @@ public class SemOneTouchApi {
     private void onLongPressStart(Context context, MotionEvent event, View rootView) {
         OtchLongPressEvent eventInfo = this.mCurrentLongPressEvent.get();
         if (eventInfo != null) {
-            Log.secE(TAG, "onLongPressStart state error: " + eventInfo + ", replace LongPressEvent");
+            Log.secE(
+                    TAG, "onLongPressStart state error: " + eventInfo + ", replace LongPressEvent");
             clearEventState();
         }
-        OtchLongPressEvent longPressEvent = new OtchLongPressEvent(System.currentTimeMillis(), 0, event);
+        OtchLongPressEvent longPressEvent =
+                new OtchLongPressEvent(System.currentTimeMillis(), 0, event);
         this.mCurrentLongPressEvent = new AtomicReference<>(longPressEvent);
         this.mLongPressPhaseOneRunnable = new LongPressPhaseOneRunnable(context, rootView);
-        rootView.postDelayed(this.mLongPressPhaseOneRunnable, mOneTouchLongPressThreshold.first.intValue());
+        rootView.postDelayed(
+                this.mLongPressPhaseOneRunnable, mOneTouchLongPressThreshold.first.intValue());
         if (this.mCheckRestrictTouchRunnable != null) {
             rootView.postDelayed(this.mCheckRestrictTouchRunnable, 100L);
         }
@@ -493,7 +632,8 @@ public class SemOneTouchApi {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void putTouchedViewInfoToBundle(Context context, Bundle bundle, View touchedView, boolean isImageView) {
+    public void putTouchedViewInfoToBundle(
+            Context context, Bundle bundle, View touchedView, boolean isImageView) {
         if (touchedView == null) {
             return;
         }
@@ -503,21 +643,27 @@ public class SemOneTouchApi {
                     CharSequence text = ((TextView) touchedView).getText();
                     if (text != null) {
                         if (TextUtils.isEmpty(text.toString().trim())) {
-                            bundle.putString(BUNDLE_KEY_TOUCHED_TEXT, touchedView.semGetBixbyTouchFoundText());
+                            bundle.putString(
+                                    BUNDLE_KEY_TOUCHED_TEXT,
+                                    touchedView.semGetBixbyTouchFoundText());
                         } else {
                             bundle.putString(BUNDLE_KEY_TOUCHED_TEXT, text.toString());
                         }
                     }
                 } else {
-                    bundle.putString(BUNDLE_KEY_TOUCHED_TEXT, touchedView.semGetBixbyTouchFoundText());
+                    bundle.putString(
+                            BUNDLE_KEY_TOUCHED_TEXT, touchedView.semGetBixbyTouchFoundText());
                 }
             } else {
                 touchedView.semSetBixbyTouchFoundText(null);
             }
             bundle.putString(BUNDLE_KEY_TOUCHED_WIDGET_NAME, touchedView.getClass().getName());
-            bundle.putInt(BUNDLE_KEY_TOUCHED_VIEW_SIZE, touchedView.getWidth() * touchedView.getHeight());
+            bundle.putInt(
+                    BUNDLE_KEY_TOUCHED_VIEW_SIZE, touchedView.getWidth() * touchedView.getHeight());
             if (touchedView.getId() != -1) {
-                bundle.putString(BUNDLE_KEY_TOUCHED_WIDGET_ID, context.getResources().getResourceName(touchedView.getId()));
+                bundle.putString(
+                        BUNDLE_KEY_TOUCHED_WIDGET_ID,
+                        context.getResources().getResourceName(touchedView.getId()));
             }
         } catch (Exception e) {
             Log.secE(TAG, "putTouchedViewInfoToBundle fail: " + e.getMessage());
@@ -526,7 +672,8 @@ public class SemOneTouchApi {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void putVideoViewInfoToBundle(Context context, Bundle bundle, String targetVideoClass, View videoView) {
+    public void putVideoViewInfoToBundle(
+            Context context, Bundle bundle, String targetVideoClass, View videoView) {
         try {
             String videoClassName = videoView.getClass().getName();
             if (videoView instanceof SurfaceView) {
@@ -537,15 +684,24 @@ public class SemOneTouchApi {
                 if (textureView.getSurfaceTexture() != null) {
                     timestamp = textureView.getSurfaceTexture().getTimestamp();
                 }
-                if (textureView.getBitmap() != null && timestamp > 0 && !TextUtils.equals(targetVideoClass, videoClassName)) {
-                    Log.secW(TAG, "VideoView: Found TextureView but consider not a video view, class: " + videoClassName + " timestamp: " + timestamp);
+                if (textureView.getBitmap() != null
+                        && timestamp > 0
+                        && !TextUtils.equals(targetVideoClass, videoClassName)) {
+                    Log.secW(
+                            TAG,
+                            "VideoView: Found TextureView but consider not a video view, class: "
+                                    + videoClassName
+                                    + " timestamp: "
+                                    + timestamp);
                     return;
                 }
                 bundle.putString(BUNDLE_KEY_VIDEO_VIEW_ROOT_CLASS, TextureView.class.getName());
             }
             bundle.putString(BUNDLE_KEY_VIDEO_VIEW_WIDGET_NAME, videoClassName);
             if (videoView.getId() != -1) {
-                bundle.putString(BUNDLE_KEY_VIDEO_VIEW_WIDGET_ID, context.getResources().getResourceName(videoView.getId()));
+                bundle.putString(
+                        BUNDLE_KEY_VIDEO_VIEW_WIDGET_ID,
+                        context.getResources().getResourceName(videoView.getId()));
             }
         } catch (Exception e) {
             Log.secE(TAG, "putVideoViewInfoToBundle fail: " + e.getMessage());
@@ -553,14 +709,16 @@ public class SemOneTouchApi {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void putRootViewInfoToBundle(Context context, Bundle bundle, View rootView, OtchLongPressEvent eventInfo) {
+    public void putRootViewInfoToBundle(
+            Context context, Bundle bundle, View rootView, OtchLongPressEvent eventInfo) {
         bundle.putParcelable(BUNDLE_KEY_RAW_TOUCHED_POINT, eventInfo.touchedRawPoint);
         bundle.putString(BUNDLE_KEY_APP_PROCESS_NAME, context.getApplicationInfo().processName);
         Activity activity = parseActivity(context, rootView);
         if (activity != null) {
             bundle.putString(BUNDLE_KEY_ACTIVITY_NAME, activity.getComponentName().getClassName());
         }
-        WindowManager.LayoutParams wparams = (WindowManager.LayoutParams) rootView.getLayoutParams();
+        WindowManager.LayoutParams wparams =
+                (WindowManager.LayoutParams) rootView.getLayoutParams();
         if (wparams != null) {
             bundle.putInt(BUNDLE_KEY_WINDOW_TYPE, wparams.type);
         }
@@ -578,7 +736,12 @@ public class SemOneTouchApi {
         bundle.putLong(BUNDLE_KEY_REQUEST_CODE, event.requestCode);
         bundle.putInt(BUNDLE_KEY_LONG_PRESS_FLAG, event.eventFlag);
         try {
-            return context.getContentResolver().call(OTCH_EXTERNAL_EVENT_URI, CALL_METHOD_ON_LONG_PRESSED, (String) null, bundle);
+            return context.getContentResolver()
+                    .call(
+                            OTCH_EXTERNAL_EVENT_URI,
+                            CALL_METHOD_ON_LONG_PRESSED,
+                            (String) null,
+                            bundle);
         } catch (Exception e) {
             Log.secE(TAG, "sendOnLongPressedEvent fail: " + e.getMessage());
             return null;
@@ -595,7 +758,10 @@ public class SemOneTouchApi {
 
     /* JADX INFO: Access modifiers changed from: private */
     public void parseCallResultDetail(long requestCode, Bundle bundle) {
-        FindVideoViewEventInfo findVideoViewEventInfo = new FindVideoViewEventInfo(bundle.getBoolean(BUNDLE_KEY_VIDEO_VIEW_FINDING_TOP_TO_DOWN, true), bundle.getString(BUNDLE_KEY_VIDEO_VIEW_ClASS_NAME, null));
+        FindVideoViewEventInfo findVideoViewEventInfo =
+                new FindVideoViewEventInfo(
+                        bundle.getBoolean(BUNDLE_KEY_VIDEO_VIEW_FINDING_TOP_TO_DOWN, true),
+                        bundle.getString(BUNDLE_KEY_VIDEO_VIEW_ClASS_NAME, null));
         OtchLongPressEvent eventInfo = this.mCurrentLongPressEvent.get();
         if (eventInfo.requestCode == requestCode) {
             eventInfo.findVideoViewEventInfo = findVideoViewEventInfo;
@@ -641,7 +807,9 @@ public class SemOneTouchApi {
             Drawable drawable = view.getDrawable();
             bitmap = drawable != null ? drawable2Bitmap(drawable) : null;
             if (bitmap == null) {
-                bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+                bitmap =
+                        Bitmap.createBitmap(
+                                view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
                 Canvas canvas = new Canvas(bitmap);
                 view.draw(canvas);
                 if (!canvas.isHardwareAccelerated() && canvas.getSaveCount() == 1) {
@@ -659,7 +827,17 @@ public class SemOneTouchApi {
     public boolean saveBitmapFile(Context context, Bitmap bitmap) {
         CancellationSignal cancellationSignal = new CancellationSignal();
         try {
-            ParcelFileDescriptor pfd = context.getContentResolver().openFile(Uri.parse(OTCH_EXTERNAL_EVENT_AUTHORITY + File.separator + OPEN_URI_SAVE_TOUCHED_IMG + File.separator + "0"), String.valueOf(805306368), cancellationSignal);
+            ParcelFileDescriptor pfd =
+                    context.getContentResolver()
+                            .openFile(
+                                    Uri.parse(
+                                            OTCH_EXTERNAL_EVENT_AUTHORITY
+                                                    + File.separator
+                                                    + OPEN_URI_SAVE_TOUCHED_IMG
+                                                    + File.separator
+                                                    + "0"),
+                                    String.valueOf(805306368),
+                                    cancellationSignal);
             try {
                 if (pfd == null) {
                     Log.secE(TAG, "openFile fail");
@@ -773,7 +951,9 @@ public class SemOneTouchApi {
                 com.samsung.android.widget.SemOneTouchApi.m9279$$Nest$msendOnLongPressedEvent(r5, r6, r1, r3)
                 return
             */
-            throw new UnsupportedOperationException("Method not decompiled: com.samsung.android.widget.SemOneTouchApi.SaveBitmapFileRunnable.run():void");
+            throw new UnsupportedOperationException(
+                    "Method not decompiled:"
+                        + " com.samsung.android.widget.SemOneTouchApi.SaveBitmapFileRunnable.run():void");
         }
     }
 
@@ -803,7 +983,9 @@ public class SemOneTouchApi {
             }
             int width = SemOneTouchApi.pxToDp(view.getWidth());
             int height = SemOneTouchApi.pxToDp(view.getHeight());
-            boolean performScale = ((float) width) > this.mCustomDragShadowWidth || ((float) height) > this.mCustomDragShadowWidth;
+            boolean performScale =
+                    ((float) width) > this.mCustomDragShadowWidth
+                            || ((float) height) > this.mCustomDragShadowWidth;
             if (performScale) {
                 float scale = this.mCustomDragShadowWidth / (height > width ? width : height);
                 float px = canvas.getWidth() / 2.0f;
@@ -862,14 +1044,17 @@ public class SemOneTouchApi {
         }
     }
 
-    private ImageView getCustomImageView(Context context, Bitmap bitmap, PointF point, int customDragShadowWidth) {
+    private ImageView getCustomImageView(
+            Context context, Bitmap bitmap, PointF point, int customDragShadowWidth) {
         if (bitmap == null) {
             return null;
         }
         ImageView shadowView = new ImageView(context);
         shadowView.setLayoutParams(new ViewGroup.LayoutParams(-2, -2));
         int customDragShadowWidthPx = dpToPx(customDragShadowWidth);
-        boolean performScale = bitmap.getHeight() > customDragShadowWidthPx || bitmap.getWidth() > customDragShadowWidthPx;
+        boolean performScale =
+                bitmap.getHeight() > customDragShadowWidthPx
+                        || bitmap.getWidth() > customDragShadowWidthPx;
         if (performScale) {
             if (bitmap.getHeight() > bitmap.getWidth()) {
                 shadowView.setMaxWidth(customDragShadowWidthPx);
@@ -884,14 +1069,22 @@ public class SemOneTouchApi {
         return shadowView;
     }
 
-    private FrameLayout getCustomTextThumbnailView(Context context, String text, PointF point, int customDragShadowWidth) {
+    private FrameLayout getCustomTextThumbnailView(
+            Context context, String text, PointF point, int customDragShadowWidth) {
         FrameLayout shadowView;
         TextView shadowViewContents;
-        if (text.isEmpty() || (shadowView = (FrameLayout) View.inflate(context, R.layout.sem_text_drag_thumbnail, null)) == null || (shadowViewContents = (TextView) shadowView.getChildAt(1)) == null) {
+        if (text.isEmpty()
+                || (shadowView =
+                                (FrameLayout)
+                                        View.inflate(
+                                                context, R.layout.sem_text_drag_thumbnail, null))
+                        == null
+                || (shadowViewContents = (TextView) shadowView.getChildAt(1)) == null) {
             return null;
         }
         shadowViewContents.setMaxWidth(dpToPx(customDragShadowWidth));
-        shadowViewContents.lambda$setTextAsync$0(text.length() > 100 ? text.substring(0, 100) : text);
+        shadowViewContents.lambda$setTextAsync$0(
+                text.length() > 100 ? text.substring(0, 100) : text);
         shadowView.setX(point.x);
         shadowView.setY(point.y);
         return shadowView;
@@ -907,40 +1100,67 @@ public class SemOneTouchApi {
         shadowView.invalidate();
     }
 
-    private void dragWithCustomShadowView(final View shadowView, final View rootView, final ClipData clipData, final OtchDragAndDropResultCallback callback) {
+    private void dragWithCustomShadowView(
+            final View shadowView,
+            final View rootView,
+            final ClipData clipData,
+            final OtchDragAndDropResultCallback callback) {
         if (shadowView == null) {
             callback.onDragAndDropResult(false);
             return;
         }
         setShadowViewLayout(shadowView);
         ViewGroup viewContainer = (ViewGroup) rootView;
-        viewContainer.post(new Runnable() { // from class: com.samsung.android.widget.SemOneTouchApi$$ExternalSyntheticLambda1
-            @Override // java.lang.Runnable
-            public final void run() {
-                SemOneTouchApi.lambda$dragWithCustomShadowView$0(View.this, clipData, shadowView, callback);
-            }
-        });
+        viewContainer.post(
+                new Runnable() { // from class:
+                                 // com.samsung.android.widget.SemOneTouchApi$$ExternalSyntheticLambda1
+                    @Override // java.lang.Runnable
+                    public final void run() {
+                        SemOneTouchApi.lambda$dragWithCustomShadowView$0(
+                                View.this, clipData, shadowView, callback);
+                    }
+                });
     }
 
-    static /* synthetic */ void lambda$dragWithCustomShadowView$0(View rootView, ClipData clipData, View shadowView, OtchDragAndDropResultCallback callback) {
-        boolean res = rootView.startDragAndDrop(clipData, new View.DragShadowBuilder(shadowView), null, 768);
+    static /* synthetic */ void lambda$dragWithCustomShadowView$0(
+            View rootView,
+            ClipData clipData,
+            View shadowView,
+            OtchDragAndDropResultCallback callback) {
+        boolean res =
+                rootView.startDragAndDrop(
+                        clipData, new View.DragShadowBuilder(shadowView), null, 768);
         callback.onDragAndDropResult(res);
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public void performDragAndDrop(Context context, final int customDragShadowWidth, View rootView, PointF touchedPoint, final View touchedView, final ClipData clipData, final OtchDragAndDropResultCallback callback) {
+    public void performDragAndDrop(
+            Context context,
+            final int customDragShadowWidth,
+            View rootView,
+            PointF touchedPoint,
+            final View touchedView,
+            final ClipData clipData,
+            final OtchDragAndDropResultCallback callback) {
         try {
             if (touchedView == null) {
                 ClipDescription clipDescription = clipData.getDescription();
                 ClipData.Item item = clipData.getItemAt(0);
                 if (clipDescription != null && item != null) {
                     if (clipDescription.hasMimeType("text/*") && item.getText() != null) {
-                        View shadowView = getCustomTextThumbnailView(context, item.getText().toString(), touchedPoint, customDragShadowWidth);
+                        View shadowView =
+                                getCustomTextThumbnailView(
+                                        context,
+                                        item.getText().toString(),
+                                        touchedPoint,
+                                        customDragShadowWidth);
                         dragWithCustomShadowView(shadowView, rootView, clipData, callback);
                     } else if (clipDescription.hasMimeType(ContentType.IMAGE_UNSPECIFIED)) {
                         Uri uri = clipData.getItemAt(0).getUri();
                         Bitmap fileBitmap = getBitmapFromFile(context, uri);
-                        View shadowView2 = getCustomImageView(context, fileBitmap, touchedPoint, customDragShadowWidth);
+                        View shadowView2 =
+                                getCustomImageView(
+                                        context, fileBitmap, touchedPoint, customDragShadowWidth);
                         dragWithCustomShadowView(shadowView2, rootView, clipData, callback);
                     } else {
                         callback.onDragAndDropResult(false);
@@ -951,15 +1171,23 @@ public class SemOneTouchApi {
                 return;
             }
             if (touchedView.semGetBixbyTouchFoundText() != null) {
-                View shadowView3 = getCustomTextThumbnailView(context, touchedView.semGetBixbyTouchFoundText(), touchedPoint, customDragShadowWidth);
+                View shadowView3 =
+                        getCustomTextThumbnailView(
+                                context,
+                                touchedView.semGetBixbyTouchFoundText(),
+                                touchedPoint,
+                                customDragShadowWidth);
                 dragWithCustomShadowView(shadowView3, rootView, clipData, callback);
             } else {
-                touchedView.post(new Runnable() { // from class: com.samsung.android.widget.SemOneTouchApi$$ExternalSyntheticLambda0
-                    @Override // java.lang.Runnable
-                    public final void run() {
-                        SemOneTouchApi.this.lambda$performDragAndDrop$1(touchedView, clipData, customDragShadowWidth, callback);
-                    }
-                });
+                touchedView.post(
+                        new Runnable() { // from class:
+                                         // com.samsung.android.widget.SemOneTouchApi$$ExternalSyntheticLambda0
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                SemOneTouchApi.this.lambda$performDragAndDrop$1(
+                                        touchedView, clipData, customDragShadowWidth, callback);
+                            }
+                        });
             }
         } catch (Exception e) {
             Log.secE(TAG, "dragTouchedView failed", e);
@@ -967,8 +1195,17 @@ public class SemOneTouchApi {
     }
 
     /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$performDragAndDrop$1(View touchedView, ClipData clipData, int customDragShadowWidth, OtchDragAndDropResultCallback callback) {
-        boolean res = touchedView.startDragAndDrop(clipData, new ScaledDragShadowBuilder(touchedView, customDragShadowWidth), touchedView, 768);
+    public /* synthetic */ void lambda$performDragAndDrop$1(
+            View touchedView,
+            ClipData clipData,
+            int customDragShadowWidth,
+            OtchDragAndDropResultCallback callback) {
+        boolean res =
+                touchedView.startDragAndDrop(
+                        clipData,
+                        new ScaledDragShadowBuilder(touchedView, customDragShadowWidth),
+                        touchedView,
+                        768);
         callback.onDragAndDropResult(res);
     }
 
@@ -979,7 +1216,9 @@ public class SemOneTouchApi {
 
     private boolean checkTouchedPointIsMoved(MotionEvent event) {
         PointF downPoint = this.mCurrentLongPressEvent.get().touchedPoint;
-        boolean isPointMoved = Math.abs(event.getX() - downPoint.x) > ((float) mTouchEventMoveMaxPixel) || Math.abs(event.getY() - downPoint.y) > ((float) mTouchEventMoveMaxPixel);
+        boolean isPointMoved =
+                Math.abs(event.getX() - downPoint.x) > ((float) mTouchEventMoveMaxPixel)
+                        || Math.abs(event.getY() - downPoint.y) > ((float) mTouchEventMoveMaxPixel);
         boolean isMoved = 0 != 0 || isPointMoved;
         return isMoved;
     }
@@ -989,7 +1228,12 @@ public class SemOneTouchApi {
         View touchedView = null;
         try {
             touchedView = view.semDispatchFindView(touchedPoint.x, touchedPoint.y, true);
-            Log.secD(TAG, "getTouchedView: touchedPoint: " + touchedPoint + " touchedView: " + touchedView);
+            Log.secD(
+                    TAG,
+                    "getTouchedView: touchedPoint: "
+                            + touchedPoint
+                            + " touchedView: "
+                            + touchedView);
             return touchedView;
         } catch (Exception e) {
             e.printStackTrace();
@@ -1052,8 +1296,14 @@ public class SemOneTouchApi {
             if (topDownFindView) {
                 for (int i = childCount - 1; i >= 0; i--) {
                     View child = viewGroup.getChildAt(i);
-                    if (!(child instanceof SurfaceView) && !(child instanceof TextureView) && !child.getClass().getName().equals(videoClassName)) {
-                        if ((child instanceof ViewGroup) && (resultView = findVideoView((ViewGroup) child, videoClassName, true)) != null) {
+                    if (!(child instanceof SurfaceView)
+                            && !(child instanceof TextureView)
+                            && !child.getClass().getName().equals(videoClassName)) {
+                        if ((child instanceof ViewGroup)
+                                && (resultView =
+                                                findVideoView(
+                                                        (ViewGroup) child, videoClassName, true))
+                                        != null) {
                             break;
                         }
                     }
@@ -1064,8 +1314,14 @@ public class SemOneTouchApi {
             }
             for (int i2 = 0; i2 < childCount; i2++) {
                 View child2 = viewGroup.getChildAt(i2);
-                if (!(child2 instanceof SurfaceView) && !(child2 instanceof TextureView) && !child2.getClass().getName().equals(videoClassName)) {
-                    if ((child2 instanceof ViewGroup) && (resultView = findVideoView((ViewGroup) child2, videoClassName, false)) != null) {
+                if (!(child2 instanceof SurfaceView)
+                        && !(child2 instanceof TextureView)
+                        && !child2.getClass().getName().equals(videoClassName)) {
+                    if ((child2 instanceof ViewGroup)
+                            && (resultView =
+                                            findVideoView(
+                                                    (ViewGroup) child2, videoClassName, false))
+                                    != null) {
                         return resultView;
                     }
                 }
@@ -1082,7 +1338,8 @@ public class SemOneTouchApi {
     public boolean isFingerPrintInDisplay(Context context) {
         boolean z;
         try {
-            FingerprintManager fpm = (FingerprintManager) context.getSystemService(Context.FINGERPRINT_SERVICE);
+            FingerprintManager fpm =
+                    (FingerprintManager) context.getSystemService(Context.FINGERPRINT_SERVICE);
             boolean fingerPrintInDisplay = false;
             int fingerIconHeight = 0;
             if (fpm != null) {

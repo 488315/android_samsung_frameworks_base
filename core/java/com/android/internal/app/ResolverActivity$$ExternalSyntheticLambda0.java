@@ -4,7 +4,8 @@ import com.android.internal.app.chooser.SemSelectTaskListAdapter;
 
 /* compiled from: D8$$SyntheticClass */
 /* loaded from: classes5.dex */
-public final /* synthetic */ class ResolverActivity$$ExternalSyntheticLambda0 implements SemSelectTaskListAdapter.ActivityCallback {
+public final /* synthetic */ class ResolverActivity$$ExternalSyntheticLambda0
+        implements SemSelectTaskListAdapter.ActivityCallback {
     public final /* synthetic */ ResolverActivity f$0;
 
     @Override // com.android.internal.app.chooser.SemSelectTaskListAdapter.ActivityCallback

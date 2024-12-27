@@ -3,7 +3,9 @@ package com.android.server.vcn.util;
 import android.net.vcn.VcnConfig;
 import android.os.ParcelUuid;
 import android.os.PersistableBundle;
+
 import com.android.server.VcnManagementService$$ExternalSyntheticLambda10;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -41,7 +43,8 @@ public abstract class PersistableBundleUtils {
                 }
                 FileInputStream fileInputStream = new FileInputStream(file);
                 try {
-                    PersistableBundle readFromStream = PersistableBundle.readFromStream(fileInputStream);
+                    PersistableBundle readFromStream =
+                            PersistableBundle.readFromStream(fileInputStream);
                     fileInputStream.close();
                     return readFromStream;
                 } finally {
@@ -82,7 +85,8 @@ public abstract class PersistableBundleUtils {
 
         public final boolean equals(Object obj) {
             if (obj instanceof PersistableBundleWrapper) {
-                return PersistableBundleUtils.isEqual(this.mBundle, ((PersistableBundleWrapper) obj).mBundle);
+                return PersistableBundleUtils.isEqual(
+                        this.mBundle, ((PersistableBundleWrapper) obj).mBundle);
             }
             return false;
         }
@@ -96,7 +100,12 @@ public abstract class PersistableBundleUtils {
         }
     }
 
-    public static PersistableBundle fromMap(Map map, VcnManagementService$$ExternalSyntheticLambda10 vcnManagementService$$ExternalSyntheticLambda10, VcnManagementService$$ExternalSyntheticLambda10 vcnManagementService$$ExternalSyntheticLambda102) {
+    public static PersistableBundle fromMap(
+            Map map,
+            VcnManagementService$$ExternalSyntheticLambda10
+                    vcnManagementService$$ExternalSyntheticLambda10,
+            VcnManagementService$$ExternalSyntheticLambda10
+                    vcnManagementService$$ExternalSyntheticLambda102) {
         PersistableBundle persistableBundle = new PersistableBundle();
         persistableBundle.putInt("COLLECTION_LENGTH", map.size());
         int i = 0;
@@ -108,7 +117,8 @@ public abstract class PersistableBundleUtils {
             PersistableBundle persistableBundle2 = new PersistableBundle();
             persistableBundle2.putString("PARCEL_UUID", ((ParcelUuid) key).toString());
             persistableBundle.putPersistableBundle(format, persistableBundle2);
-            persistableBundle.putPersistableBundle(format2, ((VcnConfig) entry.getValue()).toPersistableBundle());
+            persistableBundle.putPersistableBundle(
+                    format2, ((VcnConfig) entry.getValue()).toPersistableBundle());
             i++;
         }
         return persistableBundle;
@@ -123,23 +133,32 @@ public abstract class PersistableBundleUtils {
         while (it.hasNext()) {
             String str = (String) it.next();
             Object obj = persistableBundle.get(str);
-            i = obj instanceof PersistableBundle ? Objects.hash(Integer.valueOf(i), str, Integer.valueOf(getHashCode((PersistableBundle) obj))) : Objects.hash(Integer.valueOf(i), str, obj);
+            i =
+                    obj instanceof PersistableBundle
+                            ? Objects.hash(
+                                    Integer.valueOf(i),
+                                    str,
+                                    Integer.valueOf(getHashCode((PersistableBundle) obj)))
+                            : Objects.hash(Integer.valueOf(i), str, obj);
         }
         return i;
     }
 
-    public static boolean isEqual(PersistableBundle persistableBundle, PersistableBundle persistableBundle2) {
+    public static boolean isEqual(
+            PersistableBundle persistableBundle, PersistableBundle persistableBundle2) {
         if (Objects.equals(persistableBundle, persistableBundle2)) {
             return true;
         }
-        if (Objects.isNull(persistableBundle) != Objects.isNull(persistableBundle2) || !persistableBundle.keySet().equals(persistableBundle2.keySet())) {
+        if (Objects.isNull(persistableBundle) != Objects.isNull(persistableBundle2)
+                || !persistableBundle.keySet().equals(persistableBundle2.keySet())) {
             return false;
         }
         for (String str : persistableBundle.keySet()) {
             Object obj = persistableBundle.get(str);
             Object obj2 = persistableBundle2.get(str);
             if (!Objects.equals(obj, obj2)) {
-                if (Objects.isNull(obj) != Objects.isNull(obj2) || !obj.getClass().equals(obj2.getClass())) {
+                if (Objects.isNull(obj) != Objects.isNull(obj2)
+                        || !obj.getClass().equals(obj2.getClass())) {
                     return false;
                 }
                 if (obj instanceof PersistableBundle) {

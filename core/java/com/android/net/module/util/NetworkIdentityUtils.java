@@ -6,7 +6,8 @@ import android.telecom.Logging.Session;
 public class NetworkIdentityUtils {
     public static String scrubSubscriberId(String subscriberId) {
         if (subscriberId != null) {
-            return subscriberId.substring(0, Math.min(6, subscriberId.length())) + Session.TRUNCATE_STRING;
+            return subscriberId.substring(0, Math.min(6, subscriberId.length()))
+                    + Session.TRUNCATE_STRING;
         }
         return "null";
     }

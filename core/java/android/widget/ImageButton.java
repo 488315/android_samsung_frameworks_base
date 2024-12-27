@@ -6,7 +6,7 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.PointerIcon;
 import android.view.flags.Flags;
-import android.widget.RemoteViews;
+
 import com.android.internal.R;
 
 @RemoteViews.RemoteView
@@ -51,7 +51,11 @@ public class ImageButton extends ImageView {
     @Override // android.view.View
     public PointerIcon onResolvePointerIcon(MotionEvent event, int pointerIndex) {
         int pointerIcon;
-        if (!this.mIsThemeDeviceDefault && getPointerIcon() == null && isClickable() && isEnabled() && event.isFromSource(8194)) {
+        if (!this.mIsThemeDeviceDefault
+                && getPointerIcon() == null
+                && isClickable()
+                && isEnabled()
+                && event.isFromSource(8194)) {
             if (Flags.enableArrowIconOnHoverWhenClickable()) {
                 pointerIcon = 1000;
             } else {

@@ -5,6 +5,7 @@ import android.media.MediaMetrics;
 import android.os.HidlSupport;
 import android.os.HwBlob;
 import android.os.HwParcel;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -33,8 +34,7 @@ public final class OptionalOsAppId {
             }
         }
 
-        private hidl_discriminator() {
-        }
+        private hidl_discriminator() {}
     }
 
     public void noinit(Monostate noinit) {
@@ -45,7 +45,15 @@ public final class OptionalOsAppId {
     public Monostate noinit() {
         if (this.hidl_d != 0) {
             String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-            throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+            throw new IllegalStateException(
+                    "Read access to inactive union components is disallowed. Discriminator value is"
+                            + " "
+                            + ((int) this.hidl_d)
+                            + " (corresponding to "
+                            + hidl_discriminator.getName(this.hidl_d)
+                            + "), and hidl_o is of type "
+                            + className
+                            + MediaMetrics.SEPARATOR);
         }
         if (this.hidl_o != null && !Monostate.class.isInstance(this.hidl_o)) {
             throw new Error("Union is in a corrupted state.");
@@ -61,7 +69,15 @@ public final class OptionalOsAppId {
     public OsAppId value() {
         if (this.hidl_d != 1) {
             String className = this.hidl_o != null ? this.hidl_o.getClass().getName() : "null";
-            throw new IllegalStateException("Read access to inactive union components is disallowed. Discriminator value is " + ((int) this.hidl_d) + " (corresponding to " + hidl_discriminator.getName(this.hidl_d) + "), and hidl_o is of type " + className + MediaMetrics.SEPARATOR);
+            throw new IllegalStateException(
+                    "Read access to inactive union components is disallowed. Discriminator value is"
+                            + " "
+                            + ((int) this.hidl_d)
+                            + " (corresponding to "
+                            + hidl_discriminator.getName(this.hidl_d)
+                            + "), and hidl_o is of type "
+                            + className
+                            + MediaMetrics.SEPARATOR);
         }
         if (this.hidl_o != null && !OsAppId.class.isInstance(this.hidl_o)) {
             throw new Error("Union is in a corrupted state.");
@@ -88,7 +104,9 @@ public final class OptionalOsAppId {
     }
 
     public final int hashCode() {
-        return Objects.hash(Integer.valueOf(HidlSupport.deepHashCode(this.hidl_o)), Integer.valueOf(Objects.hashCode(Byte.valueOf(this.hidl_d))));
+        return Objects.hash(
+                Integer.valueOf(HidlSupport.deepHashCode(this.hidl_o)),
+                Integer.valueOf(Objects.hashCode(Byte.valueOf(this.hidl_d))));
     }
 
     public final String toString() {
@@ -104,7 +122,8 @@ public final class OptionalOsAppId {
                 builder.append(value());
                 break;
             default:
-                throw new Error("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                throw new Error(
+                        "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
         }
         builder.append("}");
         return builder.toString();
@@ -119,7 +138,8 @@ public final class OptionalOsAppId {
         ArrayList<OptionalOsAppId> _hidl_vec = new ArrayList<>();
         HwBlob _hidl_blob = parcel.readBuffer(16L);
         int _hidl_vec_size = _hidl_blob.getInt32(8L);
-        HwBlob childBlob = parcel.readEmbeddedBuffer(_hidl_vec_size * 24, _hidl_blob.handle(), 0L, true);
+        HwBlob childBlob =
+                parcel.readEmbeddedBuffer(_hidl_vec_size * 24, _hidl_blob.handle(), 0L, true);
         _hidl_vec.clear();
         for (int _hidl_index_0 = 0; _hidl_index_0 < _hidl_vec_size; _hidl_index_0++) {
             OptionalOsAppId _hidl_vec_element = new OptionalOsAppId();
@@ -129,19 +149,23 @@ public final class OptionalOsAppId {
         return _hidl_vec;
     }
 
-    public final void readEmbeddedFromParcel(HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
+    public final void readEmbeddedFromParcel(
+            HwParcel parcel, HwBlob _hidl_blob, long _hidl_offset) {
         this.hidl_d = _hidl_blob.getInt8(0 + _hidl_offset);
         switch (this.hidl_d) {
             case 0:
                 this.hidl_o = new Monostate();
-                ((Monostate) this.hidl_o).readEmbeddedFromParcel(parcel, _hidl_blob, 8 + _hidl_offset);
+                ((Monostate) this.hidl_o)
+                        .readEmbeddedFromParcel(parcel, _hidl_blob, 8 + _hidl_offset);
                 return;
             case 1:
                 this.hidl_o = new OsAppId();
-                ((OsAppId) this.hidl_o).readEmbeddedFromParcel(parcel, _hidl_blob, 8 + _hidl_offset);
+                ((OsAppId) this.hidl_o)
+                        .readEmbeddedFromParcel(parcel, _hidl_blob, 8 + _hidl_offset);
                 return;
             default:
-                throw new IllegalStateException("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                throw new IllegalStateException(
+                        "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
         }
     }
 
@@ -151,7 +175,8 @@ public final class OptionalOsAppId {
         parcel.writeBuffer(_hidl_blob);
     }
 
-    public static final void writeVectorToParcel(HwParcel parcel, ArrayList<OptionalOsAppId> _hidl_vec) {
+    public static final void writeVectorToParcel(
+            HwParcel parcel, ArrayList<OptionalOsAppId> _hidl_vec) {
         HwBlob _hidl_blob = new HwBlob(16);
         int _hidl_vec_size = _hidl_vec.size();
         _hidl_blob.putInt32(8L, _hidl_vec_size);
@@ -174,7 +199,8 @@ public final class OptionalOsAppId {
                 value().writeEmbeddedToBlob(_hidl_blob, 8 + _hidl_offset);
                 return;
             default:
-                throw new Error("Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
+                throw new Error(
+                        "Unknown union discriminator (value: " + ((int) this.hidl_d) + ").");
         }
     }
 }

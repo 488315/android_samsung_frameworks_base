@@ -6,21 +6,24 @@ import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class ResourceClientProfile implements Parcelable {
-    public static final Parcelable.Creator<ResourceClientProfile> CREATOR = new Parcelable.Creator<ResourceClientProfile>() { // from class: android.media.tv.tunerresourcemanager.ResourceClientProfile.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ResourceClientProfile createFromParcel(Parcel _aidl_source) {
-            ResourceClientProfile _aidl_out = new ResourceClientProfile();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<ResourceClientProfile> CREATOR =
+            new Parcelable.Creator<
+                    ResourceClientProfile>() { // from class:
+                                               // android.media.tv.tunerresourcemanager.ResourceClientProfile.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ResourceClientProfile createFromParcel(Parcel _aidl_source) {
+                    ResourceClientProfile _aidl_out = new ResourceClientProfile();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ResourceClientProfile[] newArray(int _aidl_size) {
-            return new ResourceClientProfile[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ResourceClientProfile[] newArray(int _aidl_size) {
+                    return new ResourceClientProfile[_aidl_size];
+                }
+            };
     public String tvInputSessionId;
     public int useCase = 0;
 

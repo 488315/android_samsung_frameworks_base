@@ -1,6 +1,5 @@
 package android.security.identity;
 
-import android.security.identity.CredentialDataResult;
 import java.util.Collection;
 import java.util.LinkedList;
 

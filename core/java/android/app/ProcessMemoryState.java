@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public final class ProcessMemoryState implements Parcelable {
-    public static final Parcelable.Creator<ProcessMemoryState> CREATOR = new Parcelable.Creator<ProcessMemoryState>() { // from class: android.app.ProcessMemoryState.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ProcessMemoryState createFromParcel(Parcel in) {
-            return new ProcessMemoryState(in);
-        }
+    public static final Parcelable.Creator<ProcessMemoryState> CREATOR =
+            new Parcelable.Creator<
+                    ProcessMemoryState>() { // from class: android.app.ProcessMemoryState.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ProcessMemoryState createFromParcel(Parcel in) {
+                    return new ProcessMemoryState(in);
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ProcessMemoryState[] newArray(int size) {
-            return new ProcessMemoryState[size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ProcessMemoryState[] newArray(int size) {
+                    return new ProcessMemoryState[size];
+                }
+            };
     public static final int HOSTING_COMPONENT_TYPE_ACTIVITY = 16;
     public static final int HOSTING_COMPONENT_TYPE_BACKUP = 4;
     public static final int HOSTING_COMPONENT_TYPE_BOUND_SERVICE = 512;
@@ -37,10 +39,16 @@ public final class ProcessMemoryState implements Parcelable {
     public final String processName;
     public final int uid;
 
-    public @interface HostingComponentType {
-    }
+    public @interface HostingComponentType {}
 
-    public ProcessMemoryState(int uid, int pid, String processName, int oomScore, boolean hasForegroundServices, int hostingComponentTypes, int historicalHostingComponentTypes) {
+    public ProcessMemoryState(
+            int uid,
+            int pid,
+            String processName,
+            int oomScore,
+            boolean hasForegroundServices,
+            int hostingComponentTypes,
+            int historicalHostingComponentTypes) {
         this.uid = uid;
         this.pid = pid;
         this.processName = processName;

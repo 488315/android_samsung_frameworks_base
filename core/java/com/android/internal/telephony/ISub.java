@@ -11,14 +11,15 @@ import android.os.PermissionEnforcer;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.telephony.SubscriptionInfo;
-import com.android.internal.telephony.ISetOpportunisticDataCallback;
+
 import java.util.List;
 
 /* loaded from: classes5.dex */
 public interface ISub extends IInterface {
     int addSubInfo(String str, String str2, int i, int i2) throws RemoteException;
 
-    void addSubscriptionsIntoGroup(int[] iArr, ParcelUuid parcelUuid, String str) throws RemoteException;
+    void addSubscriptionsIntoGroup(int[] iArr, ParcelUuid parcelUuid, String str)
+            throws RemoteException;
 
     boolean canDisablePhysicalSubscription() throws RemoteException;
 
@@ -34,17 +35,22 @@ public interface ISub extends IInterface {
 
     int getActiveSubInfoCountMax() throws RemoteException;
 
-    SubscriptionInfo getActiveSubscriptionInfo(int i, String str, String str2) throws RemoteException;
+    SubscriptionInfo getActiveSubscriptionInfo(int i, String str, String str2)
+            throws RemoteException;
 
-    SubscriptionInfo getActiveSubscriptionInfoForIccId(String str, String str2, String str3) throws RemoteException;
+    SubscriptionInfo getActiveSubscriptionInfoForIccId(String str, String str2, String str3)
+            throws RemoteException;
 
-    SubscriptionInfo getActiveSubscriptionInfoForSimSlotIndex(int i, String str, String str2) throws RemoteException;
+    SubscriptionInfo getActiveSubscriptionInfoForSimSlotIndex(int i, String str, String str2)
+            throws RemoteException;
 
-    List<SubscriptionInfo> getActiveSubscriptionInfoList(String str, String str2, boolean z) throws RemoteException;
+    List<SubscriptionInfo> getActiveSubscriptionInfoList(String str, String str2, boolean z)
+            throws RemoteException;
 
     List<SubscriptionInfo> getAllSubInfoList(String str, String str2) throws RemoteException;
 
-    List<SubscriptionInfo> getAvailableSubscriptionInfoList(String str, String str2) throws RemoteException;
+    List<SubscriptionInfo> getAvailableSubscriptionInfoList(String str, String str2)
+            throws RemoteException;
 
     int getDefaultDataSubId() throws RemoteException;
 
@@ -62,13 +68,15 @@ public interface ISub extends IInterface {
 
     int getEnabledSubscriptionId(int i) throws RemoteException;
 
-    List<SubscriptionInfo> getOpportunisticSubscriptions(String str, String str2) throws RemoteException;
+    List<SubscriptionInfo> getOpportunisticSubscriptions(String str, String str2)
+            throws RemoteException;
 
     int getPhoneId(int i) throws RemoteException;
 
     String getPhoneNumber(int i, int i2, String str, String str2) throws RemoteException;
 
-    String getPhoneNumberFromFirstAvailableSource(int i, String str, String str2) throws RemoteException;
+    String getPhoneNumberFromFirstAvailableSource(int i, String str, String str2)
+            throws RemoteException;
 
     int getPreferredDataSubscriptionId() throws RemoteException;
 
@@ -76,13 +84,16 @@ public interface ISub extends IInterface {
 
     int getSubId(int i) throws RemoteException;
 
-    List<SubscriptionInfo> getSubscriptionInfoListAssociatedWithUser(UserHandle userHandle) throws RemoteException;
+    List<SubscriptionInfo> getSubscriptionInfoListAssociatedWithUser(UserHandle userHandle)
+            throws RemoteException;
 
-    String getSubscriptionProperty(int i, String str, String str2, String str3) throws RemoteException;
+    String getSubscriptionProperty(int i, String str, String str2, String str3)
+            throws RemoteException;
 
     UserHandle getSubscriptionUserHandle(int i) throws RemoteException;
 
-    List<SubscriptionInfo> getSubscriptionsInGroup(ParcelUuid parcelUuid, String str, String str2) throws RemoteException;
+    List<SubscriptionInfo> getSubscriptionsInGroup(ParcelUuid parcelUuid, String str, String str2)
+            throws RemoteException;
 
     boolean isActiveSubId(int i, String str, String str2) throws RemoteException;
 
@@ -94,7 +105,8 @@ public interface ISub extends IInterface {
 
     boolean removeSubInfo(String str, int i) throws RemoteException;
 
-    void removeSubscriptionsFromGroup(int[] iArr, ParcelUuid parcelUuid, String str) throws RemoteException;
+    void removeSubscriptionsFromGroup(int[] iArr, ParcelUuid parcelUuid, String str)
+            throws RemoteException;
 
     void requestEmbeddedSubscriptionInfoListRefresh(int i) throws RemoteException;
 
@@ -124,7 +136,9 @@ public interface ISub extends IInterface {
 
     void setPhoneNumber(int i, int i2, String str, String str2, String str3) throws RemoteException;
 
-    void setPreferredDataSubscriptionId(int i, boolean z, ISetOpportunisticDataCallback iSetOpportunisticDataCallback) throws RemoteException;
+    void setPreferredDataSubscriptionId(
+            int i, boolean z, ISetOpportunisticDataCallback iSetOpportunisticDataCallback)
+            throws RemoteException;
 
     void setSubscriptionProperty(int i, String str, String str2) throws RemoteException;
 
@@ -138,32 +152,42 @@ public interface ISub extends IInterface {
 
     public static class Default implements ISub {
         @Override // com.android.internal.telephony.ISub
-        public List<SubscriptionInfo> getAllSubInfoList(String callingPackage, String callingFeatureId) throws RemoteException {
+        public List<SubscriptionInfo> getAllSubInfoList(
+                String callingPackage, String callingFeatureId) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.ISub
-        public SubscriptionInfo getActiveSubscriptionInfo(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+        public SubscriptionInfo getActiveSubscriptionInfo(
+                int subId, String callingPackage, String callingFeatureId) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.ISub
-        public SubscriptionInfo getActiveSubscriptionInfoForIccId(String iccId, String callingPackage, String callingFeatureId) throws RemoteException {
+        public SubscriptionInfo getActiveSubscriptionInfoForIccId(
+                String iccId, String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.ISub
-        public SubscriptionInfo getActiveSubscriptionInfoForSimSlotIndex(int slotIndex, String callingPackage, String callingFeatureId) throws RemoteException {
+        public SubscriptionInfo getActiveSubscriptionInfoForSimSlotIndex(
+                int slotIndex, String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.ISub
-        public List<SubscriptionInfo> getActiveSubscriptionInfoList(String callingPackage, String callingFeatureId, boolean isForAllProfiles) throws RemoteException {
+        public List<SubscriptionInfo> getActiveSubscriptionInfoList(
+                String callingPackage, String callingFeatureId, boolean isForAllProfiles)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.ISub
-        public int getActiveSubInfoCount(String callingPackage, String callingFeatureId, boolean isForAllProfile) throws RemoteException {
+        public int getActiveSubInfoCount(
+                String callingPackage, String callingFeatureId, boolean isForAllProfile)
+                throws RemoteException {
             return 0;
         }
 
@@ -173,21 +197,24 @@ public interface ISub extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISub
-        public List<SubscriptionInfo> getAvailableSubscriptionInfoList(String callingPackage, String callingFeatureId) throws RemoteException {
+        public List<SubscriptionInfo> getAvailableSubscriptionInfoList(
+                String callingPackage, String callingFeatureId) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.ISub
-        public List<SubscriptionInfo> getAccessibleSubscriptionInfoList(String callingPackage) throws RemoteException {
+        public List<SubscriptionInfo> getAccessibleSubscriptionInfoList(String callingPackage)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.ISub
-        public void requestEmbeddedSubscriptionInfoListRefresh(int cardId) throws RemoteException {
-        }
+        public void requestEmbeddedSubscriptionInfoListRefresh(int cardId) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ISub
-        public int addSubInfo(String uniqueId, String displayName, int slotIndex, int subscriptionType) throws RemoteException {
+        public int addSubInfo(
+                String uniqueId, String displayName, int slotIndex, int subscriptionType)
+                throws RemoteException {
             return 0;
         }
 
@@ -202,7 +229,8 @@ public interface ISub extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISub
-        public int setDisplayNameUsingSrc(String displayName, int subId, int nameSource) throws RemoteException {
+        public int setDisplayNameUsingSrc(String displayName, int subId, int nameSource)
+                throws RemoteException {
             return 0;
         }
 
@@ -217,18 +245,21 @@ public interface ISub extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISub
-        public int setOpportunistic(boolean opportunistic, int subId, String callingPackage) throws RemoteException {
+        public int setOpportunistic(boolean opportunistic, int subId, String callingPackage)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.internal.telephony.ISub
-        public ParcelUuid createSubscriptionGroup(int[] subIdList, String callingPackage) throws RemoteException {
+        public ParcelUuid createSubscriptionGroup(int[] subIdList, String callingPackage)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.ISub
-        public void setPreferredDataSubscriptionId(int subId, boolean needValidation, ISetOpportunisticDataCallback callback) throws RemoteException {
-        }
+        public void setPreferredDataSubscriptionId(
+                int subId, boolean needValidation, ISetOpportunisticDataCallback callback)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ISub
         public int getPreferredDataSubscriptionId() throws RemoteException {
@@ -236,20 +267,25 @@ public interface ISub extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISub
-        public List<SubscriptionInfo> getOpportunisticSubscriptions(String callingPackage, String callingFeatureId) throws RemoteException {
+        public List<SubscriptionInfo> getOpportunisticSubscriptions(
+                String callingPackage, String callingFeatureId) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.ISub
-        public void removeSubscriptionsFromGroup(int[] subIdList, ParcelUuid groupUuid, String callingPackage) throws RemoteException {
-        }
+        public void removeSubscriptionsFromGroup(
+                int[] subIdList, ParcelUuid groupUuid, String callingPackage)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ISub
-        public void addSubscriptionsIntoGroup(int[] subIdList, ParcelUuid groupUuid, String callingPackage) throws RemoteException {
-        }
+        public void addSubscriptionsIntoGroup(
+                int[] subIdList, ParcelUuid groupUuid, String callingPackage)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ISub
-        public List<SubscriptionInfo> getSubscriptionsInGroup(ParcelUuid groupUuid, String callingPackage, String callingFeatureId) throws RemoteException {
+        public List<SubscriptionInfo> getSubscriptionsInGroup(
+                ParcelUuid groupUuid, String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
@@ -284,8 +320,7 @@ public interface ISub extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISub
-        public void setDefaultDataSubId(int subId) throws RemoteException {
-        }
+        public void setDefaultDataSubId(int subId) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ISub
         public int getDefaultVoiceSubId() throws RemoteException {
@@ -298,8 +333,7 @@ public interface ISub extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISub
-        public void setDefaultVoiceSubId(int subId) throws RemoteException {
-        }
+        public void setDefaultVoiceSubId(int subId) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ISub
         public int getDefaultSmsSubId() throws RemoteException {
@@ -312,8 +346,7 @@ public interface ISub extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISub
-        public void setDefaultSmsSubId(int subId) throws RemoteException {
-        }
+        public void setDefaultSmsSubId(int subId) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ISub
         public int[] getActiveSubIdList(boolean visibleOnly) throws RemoteException {
@@ -321,11 +354,13 @@ public interface ISub extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISub
-        public void setSubscriptionProperty(int subId, String propKey, String propValue) throws RemoteException {
-        }
+        public void setSubscriptionProperty(int subId, String propKey, String propValue)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ISub
-        public String getSubscriptionProperty(int subId, String propKey, String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getSubscriptionProperty(
+                int subId, String propKey, String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
@@ -340,7 +375,8 @@ public interface ISub extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISub
-        public boolean isActiveSubId(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+        public boolean isActiveSubId(int subId, String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return false;
         }
 
@@ -355,8 +391,8 @@ public interface ISub extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISub
-        public void setUiccApplicationsEnabled(boolean enabled, int subscriptionId) throws RemoteException {
-        }
+        public void setUiccApplicationsEnabled(boolean enabled, int subscriptionId)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ISub
         public int setDeviceToDeviceStatusSharing(int sharing, int subId) throws RemoteException {
@@ -364,35 +400,45 @@ public interface ISub extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISub
-        public int setDeviceToDeviceStatusSharingContacts(String contacts, int subscriptionId) throws RemoteException {
+        public int setDeviceToDeviceStatusSharingContacts(String contacts, int subscriptionId)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.internal.telephony.ISub
-        public String getPhoneNumber(int subId, int source, String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getPhoneNumber(
+                int subId, int source, String callingPackage, String callingFeatureId)
+                throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.ISub
-        public String getPhoneNumberFromFirstAvailableSource(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+        public String getPhoneNumberFromFirstAvailableSource(
+                int subId, String callingPackage, String callingFeatureId) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.ISub
-        public void setPhoneNumber(int subId, int source, String number, String callingPackage, String callingFeatureId) throws RemoteException {
-        }
+        public void setPhoneNumber(
+                int subId,
+                int source,
+                String number,
+                String callingPackage,
+                String callingFeatureId)
+                throws RemoteException {}
 
         @Override // com.android.internal.telephony.ISub
-        public int setUsageSetting(int usageSetting, int subId, String callingPackage) throws RemoteException {
+        public int setUsageSetting(int usageSetting, int subId, String callingPackage)
+                throws RemoteException {
             return 0;
         }
 
         @Override // com.android.internal.telephony.ISub
-        public void setGroupOwner(int subId, String groupOwner) throws RemoteException {
-        }
+        public void setGroupOwner(int subId, String groupOwner) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ISub
-        public int setSubscriptionUserHandle(UserHandle userHandle, int subId) throws RemoteException {
+        public int setSubscriptionUserHandle(UserHandle userHandle, int subId)
+                throws RemoteException {
             return 0;
         }
 
@@ -402,27 +448,28 @@ public interface ISub extends IInterface {
         }
 
         @Override // com.android.internal.telephony.ISub
-        public boolean isSubscriptionAssociatedWithCallingUser(int subscriptionId) throws RemoteException {
+        public boolean isSubscriptionAssociatedWithCallingUser(int subscriptionId)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.telephony.ISub
-        public boolean isSubscriptionAssociatedWithUser(int subscriptionId, UserHandle userHandle) throws RemoteException {
+        public boolean isSubscriptionAssociatedWithUser(int subscriptionId, UserHandle userHandle)
+                throws RemoteException {
             return false;
         }
 
         @Override // com.android.internal.telephony.ISub
-        public List<SubscriptionInfo> getSubscriptionInfoListAssociatedWithUser(UserHandle userHandle) throws RemoteException {
+        public List<SubscriptionInfo> getSubscriptionInfoListAssociatedWithUser(
+                UserHandle userHandle) throws RemoteException {
             return null;
         }
 
         @Override // com.android.internal.telephony.ISub
-        public void restoreAllSimSpecificSettingsFromBackup(byte[] data) throws RemoteException {
-        }
+        public void restoreAllSimSpecificSettingsFromBackup(byte[] data) throws RemoteException {}
 
         @Override // com.android.internal.telephony.ISub
-        public void setTransferStatus(int subId, int status) throws RemoteException {
-        }
+        public void setTransferStatus(int subId, int status) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -430,7 +477,7 @@ public interface ISub extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ISub {
+    public abstract static class Stub extends Binder implements ISub {
         public static final String DESCRIPTOR = "com.android.internal.telephony.ISub";
         static final int TRANSACTION_addSubInfo = 11;
         static final int TRANSACTION_addSubscriptionsIntoGroup = 23;
@@ -504,7 +551,9 @@ public interface ISub extends IInterface {
 
         @Deprecated
         public Stub() {
-            this(PermissionEnforcer.fromContext(ActivityThread.currentActivityThread().getSystemContext()));
+            this(
+                    PermissionEnforcer.fromContext(
+                            ActivityThread.currentActivityThread().getSystemContext()));
         }
 
         public static ISub asInterface(IBinder obj) {
@@ -656,7 +705,8 @@ public interface ISub extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -687,7 +737,8 @@ public interface ISub extends IInterface {
                     String _arg13 = data.readString();
                     String _arg22 = data.readString();
                     data.enforceNoDataAvail();
-                    SubscriptionInfo _result3 = getActiveSubscriptionInfoForIccId(_arg03, _arg13, _arg22);
+                    SubscriptionInfo _result3 =
+                            getActiveSubscriptionInfoForIccId(_arg03, _arg13, _arg22);
                     reply.writeNoException();
                     reply.writeTypedObject(_result3, 1);
                     return true;
@@ -696,7 +747,8 @@ public interface ISub extends IInterface {
                     String _arg14 = data.readString();
                     String _arg23 = data.readString();
                     data.enforceNoDataAvail();
-                    SubscriptionInfo _result4 = getActiveSubscriptionInfoForSimSlotIndex(_arg04, _arg14, _arg23);
+                    SubscriptionInfo _result4 =
+                            getActiveSubscriptionInfoForSimSlotIndex(_arg04, _arg14, _arg23);
                     reply.writeNoException();
                     reply.writeTypedObject(_result4, 1);
                     return true;
@@ -705,7 +757,8 @@ public interface ISub extends IInterface {
                     String _arg15 = data.readString();
                     boolean _arg24 = data.readBoolean();
                     data.enforceNoDataAvail();
-                    List<SubscriptionInfo> _result5 = getActiveSubscriptionInfoList(_arg05, _arg15, _arg24);
+                    List<SubscriptionInfo> _result5 =
+                            getActiveSubscriptionInfoList(_arg05, _arg15, _arg24);
                     reply.writeNoException();
                     reply.writeTypedList(_result5, 1);
                     return true;
@@ -727,7 +780,8 @@ public interface ISub extends IInterface {
                     String _arg07 = data.readString();
                     String _arg17 = data.readString();
                     data.enforceNoDataAvail();
-                    List<SubscriptionInfo> _result8 = getAvailableSubscriptionInfoList(_arg07, _arg17);
+                    List<SubscriptionInfo> _result8 =
+                            getAvailableSubscriptionInfoList(_arg07, _arg17);
                     reply.writeNoException();
                     reply.writeTypedList(_result8, 1);
                     return true;
@@ -814,7 +868,8 @@ public interface ISub extends IInterface {
                 case 19:
                     int _arg018 = data.readInt();
                     boolean _arg116 = data.readBoolean();
-                    ISetOpportunisticDataCallback _arg29 = ISetOpportunisticDataCallback.Stub.asInterface(data.readStrongBinder());
+                    ISetOpportunisticDataCallback _arg29 =
+                            ISetOpportunisticDataCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     setPreferredDataSubscriptionId(_arg018, _arg116, _arg29);
                     reply.writeNoException();
@@ -828,7 +883,8 @@ public interface ISub extends IInterface {
                     String _arg019 = data.readString();
                     String _arg117 = data.readString();
                     data.enforceNoDataAvail();
-                    List<SubscriptionInfo> _result19 = getOpportunisticSubscriptions(_arg019, _arg117);
+                    List<SubscriptionInfo> _result19 =
+                            getOpportunisticSubscriptions(_arg019, _arg117);
                     reply.writeNoException();
                     reply.writeTypedList(_result19, 1);
                     return true;
@@ -853,7 +909,8 @@ public interface ISub extends IInterface {
                     String _arg120 = data.readString();
                     String _arg212 = data.readString();
                     data.enforceNoDataAvail();
-                    List<SubscriptionInfo> _result20 = getSubscriptionsInGroup(_arg022, _arg120, _arg212);
+                    List<SubscriptionInfo> _result20 =
+                            getSubscriptionsInGroup(_arg022, _arg120, _arg212);
                     reply.writeNoException();
                     reply.writeTypedList(_result20, 1);
                     return true;
@@ -1033,7 +1090,8 @@ public interface ISub extends IInterface {
                     String _arg128 = data.readString();
                     String _arg217 = data.readString();
                     data.enforceNoDataAvail();
-                    String _result41 = getPhoneNumberFromFirstAvailableSource(_arg042, _arg128, _arg217);
+                    String _result41 =
+                            getPhoneNumberFromFirstAvailableSource(_arg042, _arg128, _arg217);
                     reply.writeNoException();
                     reply.writeString(_result41);
                     return true;
@@ -1096,7 +1154,8 @@ public interface ISub extends IInterface {
                 case 58:
                     UserHandle _arg050 = (UserHandle) data.readTypedObject(UserHandle.CREATOR);
                     data.enforceNoDataAvail();
-                    List<SubscriptionInfo> _result47 = getSubscriptionInfoListAssociatedWithUser(_arg050);
+                    List<SubscriptionInfo> _result47 =
+                            getSubscriptionInfoListAssociatedWithUser(_arg050);
                     reply.writeNoException();
                     reply.writeTypedList(_result47, 1);
                     return true;
@@ -1135,7 +1194,8 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public List<SubscriptionInfo> getAllSubInfoList(String callingPackage, String callingFeatureId) throws RemoteException {
+            public List<SubscriptionInfo> getAllSubInfoList(
+                    String callingPackage, String callingFeatureId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1144,7 +1204,8 @@ public interface ISub extends IInterface {
                     _data.writeString(callingFeatureId);
                     this.mRemote.transact(1, _data, _reply, 0);
                     _reply.readException();
-                    List<SubscriptionInfo> _result = _reply.createTypedArrayList(SubscriptionInfo.CREATOR);
+                    List<SubscriptionInfo> _result =
+                            _reply.createTypedArrayList(SubscriptionInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1153,7 +1214,9 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public SubscriptionInfo getActiveSubscriptionInfo(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+            public SubscriptionInfo getActiveSubscriptionInfo(
+                    int subId, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1163,7 +1226,8 @@ public interface ISub extends IInterface {
                     _data.writeString(callingFeatureId);
                     this.mRemote.transact(2, _data, _reply, 0);
                     _reply.readException();
-                    SubscriptionInfo _result = (SubscriptionInfo) _reply.readTypedObject(SubscriptionInfo.CREATOR);
+                    SubscriptionInfo _result =
+                            (SubscriptionInfo) _reply.readTypedObject(SubscriptionInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1172,7 +1236,9 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public SubscriptionInfo getActiveSubscriptionInfoForIccId(String iccId, String callingPackage, String callingFeatureId) throws RemoteException {
+            public SubscriptionInfo getActiveSubscriptionInfoForIccId(
+                    String iccId, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1182,7 +1248,8 @@ public interface ISub extends IInterface {
                     _data.writeString(callingFeatureId);
                     this.mRemote.transact(3, _data, _reply, 0);
                     _reply.readException();
-                    SubscriptionInfo _result = (SubscriptionInfo) _reply.readTypedObject(SubscriptionInfo.CREATOR);
+                    SubscriptionInfo _result =
+                            (SubscriptionInfo) _reply.readTypedObject(SubscriptionInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1191,7 +1258,9 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public SubscriptionInfo getActiveSubscriptionInfoForSimSlotIndex(int slotIndex, String callingPackage, String callingFeatureId) throws RemoteException {
+            public SubscriptionInfo getActiveSubscriptionInfoForSimSlotIndex(
+                    int slotIndex, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1201,7 +1270,8 @@ public interface ISub extends IInterface {
                     _data.writeString(callingFeatureId);
                     this.mRemote.transact(4, _data, _reply, 0);
                     _reply.readException();
-                    SubscriptionInfo _result = (SubscriptionInfo) _reply.readTypedObject(SubscriptionInfo.CREATOR);
+                    SubscriptionInfo _result =
+                            (SubscriptionInfo) _reply.readTypedObject(SubscriptionInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1210,7 +1280,9 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public List<SubscriptionInfo> getActiveSubscriptionInfoList(String callingPackage, String callingFeatureId, boolean isForAllProfiles) throws RemoteException {
+            public List<SubscriptionInfo> getActiveSubscriptionInfoList(
+                    String callingPackage, String callingFeatureId, boolean isForAllProfiles)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1220,7 +1292,8 @@ public interface ISub extends IInterface {
                     _data.writeBoolean(isForAllProfiles);
                     this.mRemote.transact(5, _data, _reply, 0);
                     _reply.readException();
-                    List<SubscriptionInfo> _result = _reply.createTypedArrayList(SubscriptionInfo.CREATOR);
+                    List<SubscriptionInfo> _result =
+                            _reply.createTypedArrayList(SubscriptionInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1229,7 +1302,9 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public int getActiveSubInfoCount(String callingPackage, String callingFeatureId, boolean isForAllProfile) throws RemoteException {
+            public int getActiveSubInfoCount(
+                    String callingPackage, String callingFeatureId, boolean isForAllProfile)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1264,7 +1339,8 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public List<SubscriptionInfo> getAvailableSubscriptionInfoList(String callingPackage, String callingFeatureId) throws RemoteException {
+            public List<SubscriptionInfo> getAvailableSubscriptionInfoList(
+                    String callingPackage, String callingFeatureId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1273,7 +1349,8 @@ public interface ISub extends IInterface {
                     _data.writeString(callingFeatureId);
                     this.mRemote.transact(8, _data, _reply, 0);
                     _reply.readException();
-                    List<SubscriptionInfo> _result = _reply.createTypedArrayList(SubscriptionInfo.CREATOR);
+                    List<SubscriptionInfo> _result =
+                            _reply.createTypedArrayList(SubscriptionInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1282,7 +1359,8 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public List<SubscriptionInfo> getAccessibleSubscriptionInfoList(String callingPackage) throws RemoteException {
+            public List<SubscriptionInfo> getAccessibleSubscriptionInfoList(String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1290,7 +1368,8 @@ public interface ISub extends IInterface {
                     _data.writeString(callingPackage);
                     this.mRemote.transact(9, _data, _reply, 0);
                     _reply.readException();
-                    List<SubscriptionInfo> _result = _reply.createTypedArrayList(SubscriptionInfo.CREATOR);
+                    List<SubscriptionInfo> _result =
+                            _reply.createTypedArrayList(SubscriptionInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1299,7 +1378,8 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public void requestEmbeddedSubscriptionInfoListRefresh(int cardId) throws RemoteException {
+            public void requestEmbeddedSubscriptionInfoListRefresh(int cardId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -1311,7 +1391,9 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public int addSubInfo(String uniqueId, String displayName, int slotIndex, int subscriptionType) throws RemoteException {
+            public int addSubInfo(
+                    String uniqueId, String displayName, int slotIndex, int subscriptionType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1331,7 +1413,8 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public boolean removeSubInfo(String uniqueId, int subscriptionType) throws RemoteException {
+            public boolean removeSubInfo(String uniqueId, int subscriptionType)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1367,7 +1450,8 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public int setDisplayNameUsingSrc(String displayName, int subId, int nameSource) throws RemoteException {
+            public int setDisplayNameUsingSrc(String displayName, int subId, int nameSource)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1422,7 +1506,8 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public int setOpportunistic(boolean opportunistic, int subId, String callingPackage) throws RemoteException {
+            public int setOpportunistic(boolean opportunistic, int subId, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1441,7 +1526,8 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public ParcelUuid createSubscriptionGroup(int[] subIdList, String callingPackage) throws RemoteException {
+            public ParcelUuid createSubscriptionGroup(int[] subIdList, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1459,7 +1545,9 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public void setPreferredDataSubscriptionId(int subId, boolean needValidation, ISetOpportunisticDataCallback callback) throws RemoteException {
+            public void setPreferredDataSubscriptionId(
+                    int subId, boolean needValidation, ISetOpportunisticDataCallback callback)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1492,7 +1580,8 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public List<SubscriptionInfo> getOpportunisticSubscriptions(String callingPackage, String callingFeatureId) throws RemoteException {
+            public List<SubscriptionInfo> getOpportunisticSubscriptions(
+                    String callingPackage, String callingFeatureId) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1501,7 +1590,8 @@ public interface ISub extends IInterface {
                     _data.writeString(callingFeatureId);
                     this.mRemote.transact(21, _data, _reply, 0);
                     _reply.readException();
-                    List<SubscriptionInfo> _result = _reply.createTypedArrayList(SubscriptionInfo.CREATOR);
+                    List<SubscriptionInfo> _result =
+                            _reply.createTypedArrayList(SubscriptionInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1510,7 +1600,9 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public void removeSubscriptionsFromGroup(int[] subIdList, ParcelUuid groupUuid, String callingPackage) throws RemoteException {
+            public void removeSubscriptionsFromGroup(
+                    int[] subIdList, ParcelUuid groupUuid, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1527,7 +1619,9 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public void addSubscriptionsIntoGroup(int[] subIdList, ParcelUuid groupUuid, String callingPackage) throws RemoteException {
+            public void addSubscriptionsIntoGroup(
+                    int[] subIdList, ParcelUuid groupUuid, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1544,7 +1638,9 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public List<SubscriptionInfo> getSubscriptionsInGroup(ParcelUuid groupUuid, String callingPackage, String callingFeatureId) throws RemoteException {
+            public List<SubscriptionInfo> getSubscriptionsInGroup(
+                    ParcelUuid groupUuid, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1554,7 +1650,8 @@ public interface ISub extends IInterface {
                     _data.writeString(callingFeatureId);
                     this.mRemote.transact(24, _data, _reply, 0);
                     _reply.readException();
-                    List<SubscriptionInfo> _result = _reply.createTypedArrayList(SubscriptionInfo.CREATOR);
+                    List<SubscriptionInfo> _result =
+                            _reply.createTypedArrayList(SubscriptionInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -1791,7 +1888,8 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public void setSubscriptionProperty(int subId, String propKey, String propValue) throws RemoteException {
+            public void setSubscriptionProperty(int subId, String propKey, String propValue)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1808,7 +1906,9 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public String getSubscriptionProperty(int subId, String propKey, String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getSubscriptionProperty(
+                    int subId, String propKey, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1862,7 +1962,8 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public boolean isActiveSubId(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+            public boolean isActiveSubId(int subId, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1913,7 +2014,8 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public void setUiccApplicationsEnabled(boolean enabled, int subscriptionId) throws RemoteException {
+            public void setUiccApplicationsEnabled(boolean enabled, int subscriptionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1929,7 +2031,8 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public int setDeviceToDeviceStatusSharing(int sharing, int subId) throws RemoteException {
+            public int setDeviceToDeviceStatusSharing(int sharing, int subId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1947,7 +2050,8 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public int setDeviceToDeviceStatusSharingContacts(String contacts, int subscriptionId) throws RemoteException {
+            public int setDeviceToDeviceStatusSharingContacts(String contacts, int subscriptionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1965,7 +2069,9 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public String getPhoneNumber(int subId, int source, String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getPhoneNumber(
+                    int subId, int source, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -1985,7 +2091,9 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public String getPhoneNumberFromFirstAvailableSource(int subId, String callingPackage, String callingFeatureId) throws RemoteException {
+            public String getPhoneNumberFromFirstAvailableSource(
+                    int subId, String callingPackage, String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2004,7 +2112,13 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public void setPhoneNumber(int subId, int source, String number, String callingPackage, String callingFeatureId) throws RemoteException {
+            public void setPhoneNumber(
+                    int subId,
+                    int source,
+                    String number,
+                    String callingPackage,
+                    String callingFeatureId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2023,7 +2137,8 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public int setUsageSetting(int usageSetting, int subId, String callingPackage) throws RemoteException {
+            public int setUsageSetting(int usageSetting, int subId, String callingPackage)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2058,7 +2173,8 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public int setSubscriptionUserHandle(UserHandle userHandle, int subId) throws RemoteException {
+            public int setSubscriptionUserHandle(UserHandle userHandle, int subId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2093,7 +2209,8 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public boolean isSubscriptionAssociatedWithCallingUser(int subscriptionId) throws RemoteException {
+            public boolean isSubscriptionAssociatedWithCallingUser(int subscriptionId)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2110,7 +2227,8 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public boolean isSubscriptionAssociatedWithUser(int subscriptionId, UserHandle userHandle) throws RemoteException {
+            public boolean isSubscriptionAssociatedWithUser(
+                    int subscriptionId, UserHandle userHandle) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2128,7 +2246,8 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public List<SubscriptionInfo> getSubscriptionInfoListAssociatedWithUser(UserHandle userHandle) throws RemoteException {
+            public List<SubscriptionInfo> getSubscriptionInfoListAssociatedWithUser(
+                    UserHandle userHandle) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2136,7 +2255,8 @@ public interface ISub extends IInterface {
                     _data.writeTypedObject(userHandle, 0);
                     this.mRemote.transact(58, _data, _reply, 0);
                     _reply.readException();
-                    List<SubscriptionInfo> _result = _reply.createTypedArrayList(SubscriptionInfo.CREATOR);
+                    List<SubscriptionInfo> _result =
+                            _reply.createTypedArrayList(SubscriptionInfo.CREATOR);
                     return _result;
                 } finally {
                     _reply.recycle();
@@ -2145,7 +2265,8 @@ public interface ISub extends IInterface {
             }
 
             @Override // com.android.internal.telephony.ISub
-            public void restoreAllSimSpecificSettingsFromBackup(byte[] data) throws RemoteException {
+            public void restoreAllSimSpecificSettingsFromBackup(byte[] data)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 Parcel _reply = Parcel.obtain();
                 try {
@@ -2177,7 +2298,10 @@ public interface ISub extends IInterface {
         }
 
         protected void setTransferStatus_enforcePermission() throws SecurityException {
-            this.mEnforcer.enforcePermission(Manifest.permission.WRITE_EMBEDDED_SUBSCRIPTIONS, getCallingPid(), getCallingUid());
+            this.mEnforcer.enforcePermission(
+                    Manifest.permission.WRITE_EMBEDDED_SUBSCRIPTIONS,
+                    getCallingPid(),
+                    getCallingUid());
         }
 
         @Override // android.os.Binder

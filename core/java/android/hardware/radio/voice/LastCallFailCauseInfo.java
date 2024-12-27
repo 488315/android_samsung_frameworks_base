@@ -3,26 +3,29 @@ package android.hardware.radio.voice;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class LastCallFailCauseInfo implements Parcelable {
-    public static final Parcelable.Creator<LastCallFailCauseInfo> CREATOR = new Parcelable.Creator<LastCallFailCauseInfo>() { // from class: android.hardware.radio.voice.LastCallFailCauseInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LastCallFailCauseInfo createFromParcel(Parcel _aidl_source) {
-            LastCallFailCauseInfo _aidl_out = new LastCallFailCauseInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<LastCallFailCauseInfo> CREATOR =
+            new Parcelable.Creator<LastCallFailCauseInfo>() { // from class:
+                // android.hardware.radio.voice.LastCallFailCauseInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LastCallFailCauseInfo createFromParcel(Parcel _aidl_source) {
+                    LastCallFailCauseInfo _aidl_out = new LastCallFailCauseInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public LastCallFailCauseInfo[] newArray(int _aidl_size) {
-            return new LastCallFailCauseInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public LastCallFailCauseInfo[] newArray(int _aidl_size) {
+                    return new LastCallFailCauseInfo[_aidl_size];
+                }
+            };
     public int causeCode;
     public String vendorCause;
 

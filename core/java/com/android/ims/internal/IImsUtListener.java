@@ -10,64 +10,68 @@ import android.telephony.ims.ImsCallForwardInfo;
 import android.telephony.ims.ImsReasonInfo;
 import android.telephony.ims.ImsSsData;
 import android.telephony.ims.ImsSsInfo;
-import com.android.ims.internal.IImsUt;
 
 /* loaded from: classes5.dex */
 public interface IImsUtListener extends IInterface {
-    void lineIdentificationSupplementaryServiceResponse(int i, ImsSsInfo imsSsInfo) throws RemoteException;
+    void lineIdentificationSupplementaryServiceResponse(int i, ImsSsInfo imsSsInfo)
+            throws RemoteException;
 
     void onSupplementaryServiceIndication(ImsSsData imsSsData) throws RemoteException;
 
-    void utConfigurationCallBarringQueried(IImsUt iImsUt, int i, ImsSsInfo[] imsSsInfoArr) throws RemoteException;
+    void utConfigurationCallBarringQueried(IImsUt iImsUt, int i, ImsSsInfo[] imsSsInfoArr)
+            throws RemoteException;
 
-    void utConfigurationCallForwardQueried(IImsUt iImsUt, int i, ImsCallForwardInfo[] imsCallForwardInfoArr) throws RemoteException;
+    void utConfigurationCallForwardQueried(
+            IImsUt iImsUt, int i, ImsCallForwardInfo[] imsCallForwardInfoArr)
+            throws RemoteException;
 
-    void utConfigurationCallWaitingQueried(IImsUt iImsUt, int i, ImsSsInfo[] imsSsInfoArr) throws RemoteException;
+    void utConfigurationCallWaitingQueried(IImsUt iImsUt, int i, ImsSsInfo[] imsSsInfoArr)
+            throws RemoteException;
 
     void utConfigurationQueried(IImsUt iImsUt, int i, Bundle bundle) throws RemoteException;
 
-    void utConfigurationQueryFailed(IImsUt iImsUt, int i, ImsReasonInfo imsReasonInfo) throws RemoteException;
+    void utConfigurationQueryFailed(IImsUt iImsUt, int i, ImsReasonInfo imsReasonInfo)
+            throws RemoteException;
 
-    void utConfigurationUpdateFailed(IImsUt iImsUt, int i, ImsReasonInfo imsReasonInfo) throws RemoteException;
+    void utConfigurationUpdateFailed(IImsUt iImsUt, int i, ImsReasonInfo imsReasonInfo)
+            throws RemoteException;
 
     void utConfigurationUpdated(IImsUt iImsUt, int i) throws RemoteException;
 
     public static class Default implements IImsUtListener {
         @Override // com.android.ims.internal.IImsUtListener
-        public void utConfigurationUpdated(IImsUt ut, int id) throws RemoteException {
-        }
+        public void utConfigurationUpdated(IImsUt ut, int id) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsUtListener
-        public void utConfigurationUpdateFailed(IImsUt ut, int id, ImsReasonInfo error) throws RemoteException {
-        }
+        public void utConfigurationUpdateFailed(IImsUt ut, int id, ImsReasonInfo error)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsUtListener
-        public void utConfigurationQueried(IImsUt ut, int id, Bundle ssInfo) throws RemoteException {
-        }
+        public void utConfigurationQueried(IImsUt ut, int id, Bundle ssInfo)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsUtListener
-        public void utConfigurationQueryFailed(IImsUt ut, int id, ImsReasonInfo error) throws RemoteException {
-        }
+        public void utConfigurationQueryFailed(IImsUt ut, int id, ImsReasonInfo error)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsUtListener
-        public void lineIdentificationSupplementaryServiceResponse(int id, ImsSsInfo config) throws RemoteException {
-        }
+        public void lineIdentificationSupplementaryServiceResponse(int id, ImsSsInfo config)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsUtListener
-        public void utConfigurationCallBarringQueried(IImsUt ut, int id, ImsSsInfo[] cbInfo) throws RemoteException {
-        }
+        public void utConfigurationCallBarringQueried(IImsUt ut, int id, ImsSsInfo[] cbInfo)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsUtListener
-        public void utConfigurationCallForwardQueried(IImsUt ut, int id, ImsCallForwardInfo[] cfInfo) throws RemoteException {
-        }
+        public void utConfigurationCallForwardQueried(
+                IImsUt ut, int id, ImsCallForwardInfo[] cfInfo) throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsUtListener
-        public void utConfigurationCallWaitingQueried(IImsUt ut, int id, ImsSsInfo[] cwInfo) throws RemoteException {
-        }
+        public void utConfigurationCallWaitingQueried(IImsUt ut, int id, ImsSsInfo[] cwInfo)
+                throws RemoteException {}
 
         @Override // com.android.ims.internal.IImsUtListener
-        public void onSupplementaryServiceIndication(ImsSsData ssData) throws RemoteException {
-        }
+        public void onSupplementaryServiceIndication(ImsSsData ssData) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -75,7 +79,7 @@ public interface IImsUtListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IImsUtListener {
+    public abstract static class Stub extends Binder implements IImsUtListener {
         public static final String DESCRIPTOR = "com.android.ims.internal.IImsUtListener";
         static final int TRANSACTION_lineIdentificationSupplementaryServiceResponse = 5;
         static final int TRANSACTION_onSupplementaryServiceIndication = 9;
@@ -138,7 +142,8 @@ public interface IImsUtListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -156,7 +161,8 @@ public interface IImsUtListener extends IInterface {
                 case 2:
                     IImsUt _arg02 = IImsUt.Stub.asInterface(data.readStrongBinder());
                     int _arg12 = data.readInt();
-                    ImsReasonInfo _arg2 = (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
+                    ImsReasonInfo _arg2 =
+                            (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
                     data.enforceNoDataAvail();
                     utConfigurationUpdateFailed(_arg02, _arg12, _arg2);
                     return true;
@@ -170,7 +176,8 @@ public interface IImsUtListener extends IInterface {
                 case 4:
                     IImsUt _arg04 = IImsUt.Stub.asInterface(data.readStrongBinder());
                     int _arg14 = data.readInt();
-                    ImsReasonInfo _arg23 = (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
+                    ImsReasonInfo _arg23 =
+                            (ImsReasonInfo) data.readTypedObject(ImsReasonInfo.CREATOR);
                     data.enforceNoDataAvail();
                     utConfigurationQueryFailed(_arg04, _arg14, _arg23);
                     return true;
@@ -190,7 +197,9 @@ public interface IImsUtListener extends IInterface {
                 case 7:
                     IImsUt _arg07 = IImsUt.Stub.asInterface(data.readStrongBinder());
                     int _arg17 = data.readInt();
-                    ImsCallForwardInfo[] _arg25 = (ImsCallForwardInfo[]) data.createTypedArray(ImsCallForwardInfo.CREATOR);
+                    ImsCallForwardInfo[] _arg25 =
+                            (ImsCallForwardInfo[])
+                                    data.createTypedArray(ImsCallForwardInfo.CREATOR);
                     data.enforceNoDataAvail();
                     utConfigurationCallForwardQueried(_arg07, _arg17, _arg25);
                     return true;
@@ -241,7 +250,8 @@ public interface IImsUtListener extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsUtListener
-            public void utConfigurationUpdateFailed(IImsUt ut, int id, ImsReasonInfo error) throws RemoteException {
+            public void utConfigurationUpdateFailed(IImsUt ut, int id, ImsReasonInfo error)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -255,7 +265,8 @@ public interface IImsUtListener extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsUtListener
-            public void utConfigurationQueried(IImsUt ut, int id, Bundle ssInfo) throws RemoteException {
+            public void utConfigurationQueried(IImsUt ut, int id, Bundle ssInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -269,7 +280,8 @@ public interface IImsUtListener extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsUtListener
-            public void utConfigurationQueryFailed(IImsUt ut, int id, ImsReasonInfo error) throws RemoteException {
+            public void utConfigurationQueryFailed(IImsUt ut, int id, ImsReasonInfo error)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -283,7 +295,8 @@ public interface IImsUtListener extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsUtListener
-            public void lineIdentificationSupplementaryServiceResponse(int id, ImsSsInfo config) throws RemoteException {
+            public void lineIdentificationSupplementaryServiceResponse(int id, ImsSsInfo config)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -296,7 +309,8 @@ public interface IImsUtListener extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsUtListener
-            public void utConfigurationCallBarringQueried(IImsUt ut, int id, ImsSsInfo[] cbInfo) throws RemoteException {
+            public void utConfigurationCallBarringQueried(IImsUt ut, int id, ImsSsInfo[] cbInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -310,7 +324,8 @@ public interface IImsUtListener extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsUtListener
-            public void utConfigurationCallForwardQueried(IImsUt ut, int id, ImsCallForwardInfo[] cfInfo) throws RemoteException {
+            public void utConfigurationCallForwardQueried(
+                    IImsUt ut, int id, ImsCallForwardInfo[] cfInfo) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -324,7 +339,8 @@ public interface IImsUtListener extends IInterface {
             }
 
             @Override // com.android.ims.internal.IImsUtListener
-            public void utConfigurationCallWaitingQueried(IImsUt ut, int id, ImsSsInfo[] cwInfo) throws RemoteException {
+            public void utConfigurationCallWaitingQueried(IImsUt ut, int id, ImsSsInfo[] cwInfo)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

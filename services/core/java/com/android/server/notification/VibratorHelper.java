@@ -9,6 +9,7 @@ import android.os.VibrationAttributes;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Slog;
+
 import java.time.Duration;
 import java.util.Arrays;
 
@@ -29,7 +30,8 @@ public final class VibratorHelper {
         this.mFallbackPattern = getLongArray(context.getResources(), 17236266, jArr);
         getFloatArray(context.getResources(), R.array.config_sms_enabled_locking_shift_tables);
         this.mFallbackPwlePattern = getFloatArray(context.getResources(), 17236267);
-        this.mDefaultVibrationAmplitude = context.getResources().getInteger(R.integer.config_dreamOpenAnimationDuration);
+        this.mDefaultVibrationAmplitude =
+                context.getResources().getInteger(R.integer.config_dreamOpenAnimationDuration);
     }
 
     public static VibrationEffect createPwleWaveformVibration(float[] fArr, boolean z) {
@@ -41,14 +43,24 @@ public final class VibratorHelper {
             if (length != 0 && length % 3 == 0) {
                 VibrationEffect.WaveformBuilder startWaveform = VibrationEffect.startWaveform();
                 for (int i = 0; i < length; i += 3) {
-                    startWaveform.addTransition(Duration.ofMillis((int) fArr[i + 2]), VibrationEffect.VibrationParameter.targetAmplitude(fArr[i]), VibrationEffect.VibrationParameter.targetFrequency(fArr[i + 1]));
+                    startWaveform.addTransition(
+                            Duration.ofMillis((int) fArr[i + 2]),
+                            VibrationEffect.VibrationParameter.targetAmplitude(fArr[i]),
+                            VibrationEffect.VibrationParameter.targetFrequency(fArr[i + 1]));
                 }
                 VibrationEffect build = startWaveform.build();
-                return z ? VibrationEffect.startComposition().repeatEffectIndefinitely(build).compose() : build;
+                return z
+                        ? VibrationEffect.startComposition()
+                                .repeatEffectIndefinitely(build)
+                                .compose()
+                        : build;
             }
             return null;
         } catch (IllegalArgumentException unused) {
-            Slog.e("NotificationVibratorHelper", "Error creating vibration PWLE waveform with pattern: " + Arrays.toString(fArr));
+            Slog.e(
+                    "NotificationVibratorHelper",
+                    "Error creating vibration PWLE waveform with pattern: "
+                            + Arrays.toString(fArr));
             return null;
         }
     }
@@ -60,7 +72,9 @@ public final class VibratorHelper {
         try {
             return VibrationEffect.createWaveform(jArr, z ? 0 : -1);
         } catch (IllegalArgumentException unused) {
-            Slog.e("NotificationVibratorHelper", "Error creating vibration waveform with pattern: " + Arrays.toString(jArr));
+            Slog.e(
+                    "NotificationVibratorHelper",
+                    "Error creating vibration waveform with pattern: " + Arrays.toString(jArr));
             return null;
         }
     }
@@ -97,7 +111,13 @@ public final class VibratorHelper {
         return jArr2;
     }
 
-    public final void vibrate(VibrationEffect vibrationEffect, AudioAttributes audioAttributes, String str) {
-        this.mVibrator.vibrate(1000, "android", vibrationEffect, str, new VibrationAttributes.Builder(audioAttributes).build());
+    public final void vibrate(
+            VibrationEffect vibrationEffect, AudioAttributes audioAttributes, String str) {
+        this.mVibrator.vibrate(
+                1000,
+                "android",
+                vibrationEffect,
+                str,
+                new VibrationAttributes.Builder(audioAttributes).build());
     }
 }

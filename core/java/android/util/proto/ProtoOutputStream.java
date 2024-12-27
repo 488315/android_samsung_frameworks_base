@@ -2,7 +2,9 @@ package android.util.proto;
 
 import android.hardware.scontext.SContextConstants;
 import android.util.Log;
+
 import com.android.internal.logging.nano.MetricsProto;
+
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -148,7 +150,8 @@ public final class ProtoOutputStream extends ProtoStream {
                 writeRepeatedSInt64Impl(id, (long) val);
                 return;
             default:
-                throw new IllegalArgumentException("Attempt to call write(long, double) with " + getFieldIdString(fieldId));
+                throw new IllegalArgumentException(
+                        "Attempt to call write(long, double) with " + getFieldIdString(fieldId));
         }
     }
 
@@ -255,7 +258,8 @@ public final class ProtoOutputStream extends ProtoStream {
                 writeRepeatedSInt64Impl(id, (long) val);
                 return;
             default:
-                throw new IllegalArgumentException("Attempt to call write(long, float) with " + getFieldIdString(fieldId));
+                throw new IllegalArgumentException(
+                        "Attempt to call write(long, float) with " + getFieldIdString(fieldId));
         }
     }
 
@@ -362,7 +366,8 @@ public final class ProtoOutputStream extends ProtoStream {
                 writeRepeatedSInt64Impl(id, val);
                 return;
             default:
-                throw new IllegalArgumentException("Attempt to call write(long, int) with " + getFieldIdString(fieldId));
+                throw new IllegalArgumentException(
+                        "Attempt to call write(long, int) with " + getFieldIdString(fieldId));
         }
     }
 
@@ -469,7 +474,8 @@ public final class ProtoOutputStream extends ProtoStream {
                 writeRepeatedSInt64Impl(id, val);
                 return;
             default:
-                throw new IllegalArgumentException("Attempt to call write(long, long) with " + getFieldIdString(fieldId));
+                throw new IllegalArgumentException(
+                        "Attempt to call write(long, long) with " + getFieldIdString(fieldId));
         }
     }
 
@@ -485,7 +491,8 @@ public final class ProtoOutputStream extends ProtoStream {
                 writeRepeatedBoolImpl(id, val);
                 return;
             default:
-                throw new IllegalArgumentException("Attempt to call write(long, boolean) with " + getFieldIdString(fieldId));
+                throw new IllegalArgumentException(
+                        "Attempt to call write(long, boolean) with " + getFieldIdString(fieldId));
         }
     }
 
@@ -501,7 +508,8 @@ public final class ProtoOutputStream extends ProtoStream {
                 writeRepeatedStringImpl(id, val);
                 return;
             default:
-                throw new IllegalArgumentException("Attempt to call write(long, String) with " + getFieldIdString(fieldId));
+                throw new IllegalArgumentException(
+                        "Attempt to call write(long, String) with " + getFieldIdString(fieldId));
         }
     }
 
@@ -524,7 +532,8 @@ public final class ProtoOutputStream extends ProtoStream {
                 writeRepeatedBytesImpl(id, val);
                 return;
             default:
-                throw new IllegalArgumentException("Attempt to call write(long, byte[]) with " + getFieldIdString(fieldId));
+                throw new IllegalArgumentException(
+                        "Attempt to call write(long, byte[]) with " + getFieldIdString(fieldId));
         }
     }
 
@@ -540,7 +549,8 @@ public final class ProtoOutputStream extends ProtoStream {
                 return startObjectImpl(id, true);
             }
         }
-        throw new IllegalArgumentException("Attempt to call start(long) with " + getFieldIdString(fieldId));
+        throw new IllegalArgumentException(
+                "Attempt to call start(long) with " + getFieldIdString(fieldId));
     }
 
     public void end(long token) {
@@ -1229,7 +1239,8 @@ public final class ProtoOutputStream extends ProtoStream {
         this.mBuffer.writeRawFixed32((int) (this.mExpectedObjectToken >> 32));
         this.mBuffer.writeRawFixed32((int) this.mExpectedObjectToken);
         long j = this.mExpectedObjectToken;
-        this.mExpectedObjectToken = makeToken(getTagSize(id), repeated, this.mDepth, this.mNextObjectId, sizePos);
+        this.mExpectedObjectToken =
+                makeToken(getTagSize(id), repeated, this.mDepth, this.mNextObjectId, sizePos);
         return this.mExpectedObjectToken;
     }
 
@@ -1240,14 +1251,24 @@ public final class ProtoOutputStream extends ProtoStream {
         int childRawSize = (this.mBuffer.getWritePos() - sizePos) - 8;
         if (repeated != expectedRepeated) {
             if (repeated) {
-                throw new IllegalArgumentException("endRepeatedObject called where endObject should have been");
+                throw new IllegalArgumentException(
+                        "endRepeatedObject called where endObject should have been");
             }
-            throw new IllegalArgumentException("endObject called where endRepeatedObject should have been");
+            throw new IllegalArgumentException(
+                    "endObject called where endRepeatedObject should have been");
         }
         if ((this.mDepth & 511) != depth || this.mExpectedObjectToken != token) {
-            throw new IllegalArgumentException("Mismatched startObject/endObject calls. Current depth " + this.mDepth + " token=" + token2String(token) + " expectedToken=" + token2String(this.mExpectedObjectToken));
+            throw new IllegalArgumentException(
+                    "Mismatched startObject/endObject calls. Current depth "
+                            + this.mDepth
+                            + " token="
+                            + token2String(token)
+                            + " expectedToken="
+                            + token2String(this.mExpectedObjectToken));
         }
-        this.mExpectedObjectToken = (this.mBuffer.getRawFixed32At(sizePos) << 32) | (this.mBuffer.getRawFixed32At(sizePos + 4) & 4294967295L);
+        this.mExpectedObjectToken =
+                (this.mBuffer.getRawFixed32At(sizePos) << 32)
+                        | (this.mBuffer.getRawFixed32At(sizePos + 4) & 4294967295L);
         this.mDepth--;
         if (childRawSize > 0) {
             this.mBuffer.editRawFixed32(sizePos, -childRawSize);
@@ -1297,9 +1318,16 @@ public final class ProtoOutputStream extends ProtoStream {
         long expectedCount = expectedFlags & ProtoStream.FIELD_COUNT_MASK;
         long expectedType = expectedFlags & ProtoStream.FIELD_TYPE_MASK;
         if (((int) fieldId) == 0) {
-            throw new IllegalArgumentException("Invalid proto field " + ((int) fieldId) + " fieldId=" + Long.toHexString(fieldId));
+            throw new IllegalArgumentException(
+                    "Invalid proto field "
+                            + ((int) fieldId)
+                            + " fieldId="
+                            + Long.toHexString(fieldId));
         }
-        if (fieldType != expectedType || (fieldCount != expectedCount && (fieldCount != ProtoStream.FIELD_COUNT_PACKED || expectedCount != 2199023255552L))) {
+        if (fieldType != expectedType
+                || (fieldCount != expectedCount
+                        && (fieldCount != ProtoStream.FIELD_COUNT_PACKED
+                                || expectedCount != 2199023255552L))) {
             String countString = getFieldCountString(fieldCount);
             String typeString = getFieldTypeString(fieldType);
             if (typeString != null && countString != null) {
@@ -1376,7 +1404,8 @@ public final class ProtoOutputStream extends ProtoStream {
     private void compactIfNecessary() {
         if (!this.mCompacted) {
             if (this.mDepth != 0) {
-                throw new IllegalArgumentException("Trying to compact with " + this.mDepth + " missing calls to endObject");
+                throw new IllegalArgumentException(
+                        "Trying to compact with " + this.mDepth + " missing calls to endObject");
             }
             this.mBuffer.startEditing();
             int readableSize = this.mBuffer.getReadableSize();
@@ -1416,14 +1445,23 @@ public final class ProtoOutputStream extends ProtoStream {
                         int childEncodedSize = this.mBuffer.readRawFixed32();
                         if (childRawSize >= 0) {
                             if (childEncodedSize != childRawSize) {
-                                throw new RuntimeException("Pre-computed size where the precomputed size and the raw size in the buffer don't match! childRawSize=" + childRawSize + " childEncodedSize=" + childEncodedSize + " childEncodedSizePos=" + childEncodedSizePos);
+                                throw new RuntimeException(
+                                        "Pre-computed size where the precomputed size and the raw"
+                                            + " size in the buffer don't match! childRawSize="
+                                                + childRawSize
+                                                + " childEncodedSize="
+                                                + childEncodedSize
+                                                + " childEncodedSizePos="
+                                                + childEncodedSizePos);
                             }
                             this.mBuffer.skipRead(childRawSize);
                         } else {
                             childEncodedSize = editEncodedSize(-childRawSize);
                             this.mBuffer.editRawFixed32(childEncodedSizePos, childEncodedSize);
                         }
-                        encodedSize += EncodedBuffer.getRawVarint32Size(childEncodedSize) + childEncodedSize;
+                        encodedSize +=
+                                EncodedBuffer.getRawVarint32Size(childEncodedSize)
+                                        + childEncodedSize;
                         break;
                     case 3:
                     case 4:
@@ -1433,7 +1471,13 @@ public final class ProtoOutputStream extends ProtoStream {
                         this.mBuffer.skipRead(4);
                         break;
                     default:
-                        throw new ProtoParseException("editEncodedSize Bad tag tag=0x" + Integer.toHexString(tag) + " wireType=" + wireType + " -- " + this.mBuffer.getDebugString());
+                        throw new ProtoParseException(
+                                "editEncodedSize Bad tag tag=0x"
+                                        + Integer.toHexString(tag)
+                                        + " wireType="
+                                        + wireType
+                                        + " -- "
+                                        + this.mBuffer.getDebugString());
                 }
             } else {
                 return encodedSize;
@@ -1451,14 +1495,14 @@ public final class ProtoOutputStream extends ProtoStream {
                 int wireType = tag & 7;
                 switch (wireType) {
                     case 0:
-                        while ((this.mBuffer.readRawByte() & 128) != 0) {
-                        }
+                        while ((this.mBuffer.readRawByte() & 128) != 0) {}
                         break;
                     case 1:
                         this.mBuffer.skipRead(8);
                         break;
                     case 2:
-                        this.mBuffer.writeFromThisBuffer(this.mCopyBegin, this.mBuffer.getReadPos() - this.mCopyBegin);
+                        this.mBuffer.writeFromThisBuffer(
+                                this.mCopyBegin, this.mBuffer.getReadPos() - this.mCopyBegin);
                         int childRawSize = this.mBuffer.readRawFixed32();
                         int childEncodedSize = this.mBuffer.readRawFixed32();
                         this.mBuffer.writeRawVarint32(childEncodedSize);
@@ -1477,7 +1521,13 @@ public final class ProtoOutputStream extends ProtoStream {
                         this.mBuffer.skipRead(4);
                         break;
                     default:
-                        throw new ProtoParseException("compactSizes Bad tag tag=0x" + Integer.toHexString(tag) + " wireType=" + wireType + " -- " + this.mBuffer.getDebugString());
+                        throw new ProtoParseException(
+                                "compactSizes Bad tag tag=0x"
+                                        + Integer.toHexString(tag)
+                                        + " wireType="
+                                        + wireType
+                                        + " -- "
+                                        + this.mBuffer.getDebugString());
                 }
             } else {
                 return;

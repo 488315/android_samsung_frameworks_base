@@ -8,7 +8,8 @@ public class FragmentManagerNonConfig {
     private final List<FragmentManagerNonConfig> mChildNonConfigs;
     private final List<Fragment> mFragments;
 
-    FragmentManagerNonConfig(List<Fragment> fragments, List<FragmentManagerNonConfig> childNonConfigs) {
+    FragmentManagerNonConfig(
+            List<Fragment> fragments, List<FragmentManagerNonConfig> childNonConfigs) {
         this.mFragments = fragments;
         this.mChildNonConfigs = childNonConfigs;
     }

@@ -1,6 +1,5 @@
 package android.hardware.gnss;
 
-import android.hardware.gnss.IGnssBatchingCallback;
 import android.os.BadParcelableException;
 import android.os.Binder;
 import android.os.IBinder;
@@ -34,8 +33,7 @@ public interface IGnssBatching extends IInterface {
 
     public static class Default implements IGnssBatching {
         @Override // android.hardware.gnss.IGnssBatching
-        public void init(IGnssBatchingCallback callback) throws RemoteException {
-        }
+        public void init(IGnssBatchingCallback callback) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssBatching
         public int getBatchSize() throws RemoteException {
@@ -43,20 +41,16 @@ public interface IGnssBatching extends IInterface {
         }
 
         @Override // android.hardware.gnss.IGnssBatching
-        public void start(Options options) throws RemoteException {
-        }
+        public void start(Options options) throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssBatching
-        public void flush() throws RemoteException {
-        }
+        public void flush() throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssBatching
-        public void stop() throws RemoteException {
-        }
+        public void stop() throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssBatching
-        public void cleanup() throws RemoteException {
-        }
+        public void cleanup() throws RemoteException {}
 
         @Override // android.hardware.gnss.IGnssBatching
         public int getInterfaceVersion() {
@@ -74,7 +68,7 @@ public interface IGnssBatching extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements IGnssBatching {
+    public abstract static class Stub extends Binder implements IGnssBatching {
         static final int TRANSACTION_cleanup = 6;
         static final int TRANSACTION_flush = 4;
         static final int TRANSACTION_getBatchSize = 2;
@@ -134,7 +128,8 @@ public interface IGnssBatching extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             String descriptor = DESCRIPTOR;
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(descriptor);
@@ -155,7 +150,8 @@ public interface IGnssBatching extends IInterface {
             }
             switch (code) {
                 case 1:
-                    IGnssBatchingCallback _arg0 = IGnssBatchingCallback.Stub.asInterface(data.readStrongBinder());
+                    IGnssBatchingCallback _arg0 =
+                            IGnssBatchingCallback.Stub.asInterface(data.readStrongBinder());
                     data.enforceNoDataAvail();
                     init(_arg0);
                     reply.writeNoException();
@@ -359,21 +355,23 @@ public interface IGnssBatching extends IInterface {
     }
 
     public static class Options implements Parcelable {
-        public static final Parcelable.Creator<Options> CREATOR = new Parcelable.Creator<Options>() { // from class: android.hardware.gnss.IGnssBatching.Options.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Options createFromParcel(Parcel _aidl_source) {
-                Options _aidl_out = new Options();
-                _aidl_out.readFromParcel(_aidl_source);
-                return _aidl_out;
-            }
+        public static final Parcelable.Creator<Options> CREATOR =
+                new Parcelable.Creator<
+                        Options>() { // from class: android.hardware.gnss.IGnssBatching.Options.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Options createFromParcel(Parcel _aidl_source) {
+                        Options _aidl_out = new Options();
+                        _aidl_out.readFromParcel(_aidl_source);
+                        return _aidl_out;
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public Options[] newArray(int _aidl_size) {
-                return new Options[_aidl_size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public Options[] newArray(int _aidl_size) {
+                        return new Options[_aidl_size];
+                    }
+                };
         public long periodNanos = 0;
         public float minDistanceMeters = 0.0f;
         public int flags = 0;

@@ -34,14 +34,20 @@ public class SearchRecentSuggestionsProvider extends ContentProvider {
         private int mNewVersion;
 
         public DatabaseHelper(Context context, int newVersion) {
-            super(context, SearchRecentSuggestionsProvider.sDatabaseName, (SQLiteDatabase.CursorFactory) null, newVersion);
+            super(
+                    context,
+                    SearchRecentSuggestionsProvider.sDatabaseName,
+                    (SQLiteDatabase.CursorFactory) null,
+                    newVersion);
             this.mNewVersion = newVersion;
         }
 
         @Override // android.database.sqlite.SQLiteOpenHelper
         public void onCreate(SQLiteDatabase db) {
             StringBuilder builder = new StringBuilder();
-            builder.append("CREATE TABLE suggestions (_id INTEGER PRIMARY KEY,display1 TEXT UNIQUE ON CONFLICT REPLACE");
+            builder.append(
+                    "CREATE TABLE suggestions (_id INTEGER PRIMARY KEY,display1 TEXT UNIQUE ON"
+                            + " CONFLICT REPLACE");
             if ((this.mNewVersion & 2) != 0) {
                 builder.append(",display2 TEXT");
             }
@@ -51,7 +57,13 @@ public class SearchRecentSuggestionsProvider extends ContentProvider {
 
         @Override // android.database.sqlite.SQLiteOpenHelper
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            Log.w(SearchRecentSuggestionsProvider.TAG, "Upgrading database from version " + oldVersion + " to " + newVersion + ", which will destroy all old data");
+            Log.w(
+                    SearchRecentSuggestionsProvider.TAG,
+                    "Upgrading database from version "
+                            + oldVersion
+                            + " to "
+                            + newVersion
+                            + ", which will destroy all old data");
             db.execSQL("DROP TABLE IF EXISTS suggestions");
             onCreate(db);
         }
@@ -64,15 +76,31 @@ public class SearchRecentSuggestionsProvider extends ContentProvider {
         this.mTwoLineDisplay = (mode & 2) != 0;
         this.mAuthority = new String(authority);
         this.mMode = mode;
-        this.mSuggestionsUri = Uri.parse(SecContentProviderURI.CONTENT + this.mAuthority + "/suggestions");
+        this.mSuggestionsUri =
+                Uri.parse(SecContentProviderURI.CONTENT + this.mAuthority + "/suggestions");
         this.mUriMatcher = new UriMatcher(-1);
         this.mUriMatcher.addURI(this.mAuthority, SearchManager.SUGGEST_URI_PATH_QUERY, 1);
         if (this.mTwoLineDisplay) {
             this.mSuggestSuggestionClause = "display1 LIKE ? OR display2 LIKE ?";
-            this.mSuggestionProjection = new String[]{"0 AS suggest_format", "'android.resource://system/17301578' AS suggest_icon_1", "display1 AS suggest_text_1", "display2 AS suggest_text_2", "query AS suggest_intent_query", "_id"};
+            this.mSuggestionProjection =
+                    new String[] {
+                        "0 AS suggest_format",
+                        "'android.resource://system/17301578' AS suggest_icon_1",
+                        "display1 AS suggest_text_1",
+                        "display2 AS suggest_text_2",
+                        "query AS suggest_intent_query",
+                        "_id"
+                    };
         } else {
             this.mSuggestSuggestionClause = "display1 LIKE ?";
-            this.mSuggestionProjection = new String[]{"0 AS suggest_format", "'android.resource://system/17301578' AS suggest_icon_1", "display1 AS suggest_text_1", "query AS suggest_intent_query", "_id"};
+            this.mSuggestionProjection =
+                    new String[] {
+                        "0 AS suggest_format",
+                        "'android.resource://system/17301578' AS suggest_icon_1",
+                        "display1 AS suggest_text_1",
+                        "query AS suggest_intent_query",
+                        "_id"
+                    };
         }
     }
 
@@ -146,7 +174,12 @@ public class SearchRecentSuggestionsProvider extends ContentProvider {
     }
 
     @Override // android.content.ContentProvider
-    public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+    public Cursor query(
+            Uri uri,
+            String[] projection,
+            String selection,
+            String[] selectionArgs,
+            String sortOrder) {
         String[] useProjection;
         String[] myArgs;
         String[] myArgs2;
@@ -159,14 +192,23 @@ public class SearchRecentSuggestionsProvider extends ContentProvider {
             } else {
                 String like2 = "%" + selectionArgs[0] + "%";
                 if (this.mTwoLineDisplay) {
-                    myArgs = new String[]{like2, like2};
+                    myArgs = new String[] {like2, like2};
                 } else {
-                    myArgs = new String[]{like2};
+                    myArgs = new String[] {like2};
                 }
                 myArgs2 = myArgs;
                 like = this.mSuggestSuggestionClause;
             }
-            Cursor c = db.query("suggestions", this.mSuggestionProjection, like, myArgs2, null, null, "date DESC", null);
+            Cursor c =
+                    db.query(
+                            "suggestions",
+                            this.mSuggestionProjection,
+                            like,
+                            myArgs2,
+                            null,
+                            null,
+                            "date DESC",
+                            null);
             c.setNotificationUri(getContext().getContentResolver(), uri);
             return c;
         }
@@ -188,7 +230,10 @@ public class SearchRecentSuggestionsProvider extends ContentProvider {
         }
         StringBuilder whereClause = new StringBuilder(256);
         if (length == 2) {
-            whereClause.append("(_id = ").append(uri.getPathSegments().get(1)).append(NavigationBarInflaterView.KEY_CODE_END);
+            whereClause
+                    .append("(_id = ")
+                    .append(uri.getPathSegments().get(1))
+                    .append(NavigationBarInflaterView.KEY_CODE_END);
         }
         if (selection != null && selection.length() > 0) {
             if (whereClause.length() > 0) {
@@ -198,7 +243,16 @@ public class SearchRecentSuggestionsProvider extends ContentProvider {
             whereClause.append(selection);
             whereClause.append(')');
         }
-        Cursor c2 = db.query(base, useProjection, whereClause.toString(), selectionArgs, null, null, sortOrder, null);
+        Cursor c2 =
+                db.query(
+                        base,
+                        useProjection,
+                        whereClause.toString(),
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder,
+                        null);
         c2.setNotificationUri(getContext().getContentResolver(), uri);
         return c2;
     }

@@ -4,26 +4,29 @@ import android.hardware.radio.AccessNetwork$$;
 import android.os.BadParcelableException;
 import android.os.Parcel;
 import android.os.Parcelable;
+
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
 public class ActivityStatsTechSpecificInfo implements Parcelable {
-    public static final Parcelable.Creator<ActivityStatsTechSpecificInfo> CREATOR = new Parcelable.Creator<ActivityStatsTechSpecificInfo>() { // from class: android.hardware.radio.modem.ActivityStatsTechSpecificInfo.1
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ActivityStatsTechSpecificInfo createFromParcel(Parcel _aidl_source) {
-            ActivityStatsTechSpecificInfo _aidl_out = new ActivityStatsTechSpecificInfo();
-            _aidl_out.readFromParcel(_aidl_source);
-            return _aidl_out;
-        }
+    public static final Parcelable.Creator<ActivityStatsTechSpecificInfo> CREATOR =
+            new Parcelable.Creator<ActivityStatsTechSpecificInfo>() { // from class:
+                // android.hardware.radio.modem.ActivityStatsTechSpecificInfo.1
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ActivityStatsTechSpecificInfo createFromParcel(Parcel _aidl_source) {
+                    ActivityStatsTechSpecificInfo _aidl_out = new ActivityStatsTechSpecificInfo();
+                    _aidl_out.readFromParcel(_aidl_source);
+                    return _aidl_out;
+                }
 
-        /* JADX WARN: Can't rename method to resolve collision */
-        @Override // android.os.Parcelable.Creator
-        public ActivityStatsTechSpecificInfo[] newArray(int _aidl_size) {
-            return new ActivityStatsTechSpecificInfo[_aidl_size];
-        }
-    };
+                /* JADX WARN: Can't rename method to resolve collision */
+                @Override // android.os.Parcelable.Creator
+                public ActivityStatsTechSpecificInfo[] newArray(int _aidl_size) {
+                    return new ActivityStatsTechSpecificInfo[_aidl_size];
+                }
+            };
     public static final int FREQUENCY_RANGE_HIGH = 3;
     public static final int FREQUENCY_RANGE_LOW = 1;
     public static final int FREQUENCY_RANGE_MID = 2;

@@ -29,6 +29,7 @@ public final class NetworkCapabilitiesUtils {
         if ((FORCE_RESTRICTED_CAPABILITIES & capabilities) != 0) {
             return true;
         }
-        return (UNRESTRICTED_CAPABILITIES & capabilities) == 0 && (RESTRICTED_CAPABILITIES & capabilities) != 0;
+        return (UNRESTRICTED_CAPABILITIES & capabilities) == 0
+                && (RESTRICTED_CAPABILITIES & capabilities) != 0;
     }
 }

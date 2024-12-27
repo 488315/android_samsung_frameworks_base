@@ -25,9 +25,7 @@ import android.view.flags.Flags;
 import android.view.inspector.InspectionCompanion;
 import android.view.inspector.PropertyMapper;
 import android.view.inspector.PropertyReader;
-import android.widget.AbsSpinner;
-import android.widget.AdapterView;
-import android.widget.PopupWindow;
+
 import com.android.internal.R;
 import com.android.internal.view.menu.ShowableListMenu;
 
@@ -78,7 +76,8 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
         void show(int i, int i2);
     }
 
-    public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<Spinner> {
+    public final class InspectionCompanion
+            implements android.view.inspector.InspectionCompanion<Spinner> {
         private int mDropDownHorizontalOffsetId;
         private int mDropDownVerticalOffsetId;
         private int mDropDownWidthId;
@@ -89,8 +88,10 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
 
         @Override // android.view.inspector.InspectionCompanion
         public void mapProperties(PropertyMapper propertyMapper) {
-            this.mDropDownHorizontalOffsetId = propertyMapper.mapInt("dropDownHorizontalOffset", 16843436);
-            this.mDropDownVerticalOffsetId = propertyMapper.mapInt("dropDownVerticalOffset", 16843437);
+            this.mDropDownHorizontalOffsetId =
+                    propertyMapper.mapInt("dropDownHorizontalOffset", 16843436);
+            this.mDropDownVerticalOffsetId =
+                    propertyMapper.mapInt("dropDownVerticalOffset", 16843437);
             this.mDropDownWidthId = propertyMapper.mapInt("dropDownWidth", 16843362);
             this.mGravityId = propertyMapper.mapGravity("gravity", 16842927);
             this.mPopupBackgroundId = propertyMapper.mapObject("popupBackground", 16843126);
@@ -103,8 +104,10 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
             if (!this.mPropertiesMapped) {
                 throw new InspectionCompanion.UninitializedPropertyMapException();
             }
-            propertyReader.readInt(this.mDropDownHorizontalOffsetId, node.getDropDownHorizontalOffset());
-            propertyReader.readInt(this.mDropDownVerticalOffsetId, node.getDropDownVerticalOffset());
+            propertyReader.readInt(
+                    this.mDropDownHorizontalOffsetId, node.getDropDownHorizontalOffset());
+            propertyReader.readInt(
+                    this.mDropDownVerticalOffsetId, node.getDropDownVerticalOffset());
             propertyReader.readInt(this.mDropDownWidthId, node.getDropDownWidth());
             propertyReader.readGravity(this.mGravityId, node.getGravity());
             propertyReader.readObject(this.mPopupBackgroundId, node.getPopupBackground());
@@ -132,19 +135,28 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
         this(context, attrs, defStyleAttr, 0, mode);
     }
 
-    public Spinner(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, int mode) {
+    public Spinner(
+            Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, int mode) {
         this(context, attrs, defStyleAttr, defStyleRes, mode, null);
     }
 
-    public Spinner(Context context, AttributeSet attributeSet, int i, int i2, int i3, Resources.Theme theme) {
+    public Spinner(
+            Context context,
+            AttributeSet attributeSet,
+            int i,
+            int i2,
+            int i3,
+            Resources.Theme theme) {
         super(context, attributeSet, i, i2);
         int i4;
         SpinnerAdapter spinnerAdapter;
         this.mTempRect = new Rect();
         this.mIsThemeDeviceDefaultFamily = false;
         this.mDropdownHorizontalOffset = 0;
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R.styleable.Spinner, i, i2);
-        saveAttributeDataForStyleable(context, R.styleable.Spinner, attributeSet, obtainStyledAttributes, i, i2);
+        TypedArray obtainStyledAttributes =
+                context.obtainStyledAttributes(attributeSet, R.styleable.Spinner, i, i2);
+        saveAttributeDataForStyleable(
+                context, R.styleable.Spinner, attributeSet, obtainStyledAttributes, i, i2);
         if (theme == null) {
             int resourceId = obtainStyledAttributes.getResourceId(7, 0);
             if (resourceId != 0) {
@@ -171,8 +183,11 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
                 this.mPopup.setPromptText(obtainStyledAttributes.getString(3));
                 break;
             case 1:
-                final DropdownPopup dropdownPopup = new DropdownPopup(this.mPopupContext, attributeSet, i, i2);
-                TypedArray obtainStyledAttributes2 = this.mPopupContext.obtainStyledAttributes(attributeSet, R.styleable.Spinner, i, i2);
+                final DropdownPopup dropdownPopup =
+                        new DropdownPopup(this.mPopupContext, attributeSet, i, i2);
+                TypedArray obtainStyledAttributes2 =
+                        this.mPopupContext.obtainStyledAttributes(
+                                attributeSet, R.styleable.Spinner, i, i2);
                 this.mDropDownWidth = obtainStyledAttributes2.getLayoutDimension(4, -2);
                 if (obtainStyledAttributes2.hasValueOrEmpty(1)) {
                     dropdownPopup.setListSelector(obtainStyledAttributes2.getDrawable(1));
@@ -180,25 +195,31 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
                 dropdownPopup.setBackgroundDrawable(obtainStyledAttributes2.getDrawable(2));
                 dropdownPopup.setPromptText(obtainStyledAttributes.getString(3));
                 obtainStyledAttributes2.recycle();
-                TypedArray obtainStyledAttributes3 = context.obtainStyledAttributes(attributeSet, R.styleable.ListPopupWindow, i, i2);
-                this.mDropdownHorizontalOffset = obtainStyledAttributes3.getDimensionPixelOffset(0, 0);
+                TypedArray obtainStyledAttributes3 =
+                        context.obtainStyledAttributes(
+                                attributeSet, R.styleable.ListPopupWindow, i, i2);
+                this.mDropdownHorizontalOffset =
+                        obtainStyledAttributes3.getDimensionPixelOffset(0, 0);
                 obtainStyledAttributes3.recycle();
                 this.mPopup = dropdownPopup;
-                this.mForwardingListener = new ForwardingListener(this) { // from class: android.widget.Spinner.1
-                    @Override // android.widget.ForwardingListener
-                    public ShowableListMenu getPopup() {
-                        return dropdownPopup;
-                    }
+                this.mForwardingListener =
+                        new ForwardingListener(this) { // from class: android.widget.Spinner.1
+                            @Override // android.widget.ForwardingListener
+                            public ShowableListMenu getPopup() {
+                                return dropdownPopup;
+                            }
 
-                    @Override // android.widget.ForwardingListener
-                    public boolean onForwardingStarted() {
-                        if (!Spinner.this.mPopup.isShowing()) {
-                            Spinner.this.mPopup.show(Spinner.this.getTextDirection(), Spinner.this.getTextAlignment());
-                            return true;
-                        }
-                        return true;
-                    }
-                };
+                            @Override // android.widget.ForwardingListener
+                            public boolean onForwardingStarted() {
+                                if (!Spinner.this.mPopup.isShowing()) {
+                                    Spinner.this.mPopup.show(
+                                            Spinner.this.getTextDirection(),
+                                            Spinner.this.getTextAlignment());
+                                    return true;
+                                }
+                                return true;
+                            }
+                        };
                 spinnerAdapter = null;
                 break;
             default:
@@ -353,14 +374,21 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int contentWidth;
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        if (this.mPopup != null && View.MeasureSpec.getMode(widthMeasureSpec) == Integer.MIN_VALUE) {
+        if (this.mPopup != null
+                && View.MeasureSpec.getMode(widthMeasureSpec) == Integer.MIN_VALUE) {
             int measuredWidth = getMeasuredWidth();
-            if (this.mIsThemeDeviceDefaultFamily && getSelectedItemPosition() > -1 && getSelectedItemPosition() < this.mAdapter.getCount()) {
+            if (this.mIsThemeDeviceDefaultFamily
+                    && getSelectedItemPosition() > -1
+                    && getSelectedItemPosition() < this.mAdapter.getCount()) {
                 contentWidth = semGetCurrentContentWidth(getAdapter(), getBackground());
             } else {
                 contentWidth = measureContentWidth(getAdapter(), getBackground());
             }
-            setMeasuredDimension(Math.min(Math.max(measuredWidth, contentWidth), View.MeasureSpec.getSize(widthMeasureSpec)), getMeasuredHeight());
+            setMeasuredDimension(
+                    Math.min(
+                            Math.max(measuredWidth, contentWidth),
+                            View.MeasureSpec.getSize(widthMeasureSpec)),
+                    getMeasuredHeight());
         }
     }
 
@@ -382,7 +410,9 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
     @Override // android.widget.AbsSpinner
     void layout(int delta, boolean animate) {
         int childrenLeft = this.mSpinnerPadding.left;
-        int childrenWidth = ((this.mRight - this.mLeft) - this.mSpinnerPadding.left) - this.mSpinnerPadding.right;
+        int childrenWidth =
+                ((this.mRight - this.mLeft) - this.mSpinnerPadding.left)
+                        - this.mSpinnerPadding.right;
         if (this.mDataChanged) {
             handleDataChanged();
         }
@@ -442,10 +472,23 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
         if (this.mDisableChildrenWhenDisabled) {
             child.setEnabled(isEnabled());
         }
-        int childHeightSpec = ViewGroup.getChildMeasureSpec(this.mHeightMeasureSpec, this.mSpinnerPadding.top + this.mSpinnerPadding.bottom, lp.height);
-        int childWidthSpec = ViewGroup.getChildMeasureSpec(this.mWidthMeasureSpec, this.mSpinnerPadding.left + this.mSpinnerPadding.right, lp.width);
+        int childHeightSpec =
+                ViewGroup.getChildMeasureSpec(
+                        this.mHeightMeasureSpec,
+                        this.mSpinnerPadding.top + this.mSpinnerPadding.bottom,
+                        lp.height);
+        int childWidthSpec =
+                ViewGroup.getChildMeasureSpec(
+                        this.mWidthMeasureSpec,
+                        this.mSpinnerPadding.left + this.mSpinnerPadding.right,
+                        lp.width);
         child.measure(childWidthSpec, childHeightSpec);
-        int childTop = this.mSpinnerPadding.top + ((((getMeasuredHeight() - this.mSpinnerPadding.bottom) - this.mSpinnerPadding.top) - child.getMeasuredHeight()) / 2);
+        int childTop =
+                this.mSpinnerPadding.top
+                        + ((((getMeasuredHeight() - this.mSpinnerPadding.bottom)
+                                                - this.mSpinnerPadding.top)
+                                        - child.getMeasuredHeight())
+                                / 2);
         int childBottom = child.getMeasuredHeight() + childTop;
         int width = child.getMeasuredWidth();
         int childRight = 0 + width;
@@ -481,7 +524,8 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
         }
     }
 
-    @Override // android.widget.AbsSpinner, android.widget.AdapterView, android.view.ViewGroup, android.view.View
+    @Override // android.widget.AbsSpinner, android.widget.AdapterView, android.view.ViewGroup,
+              // android.view.View
     public CharSequence getAccessibilityClassName() {
         return Spinner.class.getName();
     }
@@ -570,18 +614,22 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
         SavedState ss = (SavedState) state;
         super.onRestoreInstanceState(ss.getSuperState());
         if (ss.showDropdown && (vto = getViewTreeObserver()) != null) {
-            ViewTreeObserver.OnGlobalLayoutListener listener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: android.widget.Spinner.2
-                @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
-                public void onGlobalLayout() {
-                    if (!Spinner.this.mPopup.isShowing()) {
-                        Spinner.this.mPopup.show(Spinner.this.getTextDirection(), Spinner.this.getTextAlignment());
-                    }
-                    ViewTreeObserver vto2 = Spinner.this.getViewTreeObserver();
-                    if (vto2 != null) {
-                        vto2.removeOnGlobalLayoutListener(this);
-                    }
-                }
-            };
+            ViewTreeObserver.OnGlobalLayoutListener listener =
+                    new ViewTreeObserver
+                            .OnGlobalLayoutListener() { // from class: android.widget.Spinner.2
+                        @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
+                        public void onGlobalLayout() {
+                            if (!Spinner.this.mPopup.isShowing()) {
+                                Spinner.this.mPopup.show(
+                                        Spinner.this.getTextDirection(),
+                                        Spinner.this.getTextAlignment());
+                            }
+                            ViewTreeObserver vto2 = Spinner.this.getViewTreeObserver();
+                            if (vto2 != null) {
+                                vto2.removeOnGlobalLayoutListener(this);
+                            }
+                        }
+                    };
             vto.addOnGlobalLayoutListener(listener);
         }
     }
@@ -589,7 +637,11 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
     @Override // android.view.ViewGroup, android.view.View
     public PointerIcon onResolvePointerIcon(MotionEvent event, int pointerIndex) {
         int pointerIcon;
-        if (!this.mIsThemeDeviceDefaultFamily && getPointerIcon() == null && isClickable() && isEnabled() && event.isFromSource(8194)) {
+        if (!this.mIsThemeDeviceDefaultFamily
+                && getPointerIcon() == null
+                && isClickable()
+                && isEnabled()
+                && event.isFromSource(8194)) {
             if (Flags.enableArrowIconOnHoverWhenClickable()) {
                 pointerIcon = 1000;
             } else {
@@ -615,19 +667,21 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
     }
 
     static class SavedState extends AbsSpinner.SavedState {
-        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() { // from class: android.widget.Spinner.SavedState.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SavedState createFromParcel(Parcel in) {
-                return new SavedState(in);
-            }
+        public static final Parcelable.Creator<SavedState> CREATOR =
+                new Parcelable.Creator<
+                        SavedState>() { // from class: android.widget.Spinner.SavedState.1
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SavedState createFromParcel(Parcel in) {
+                        return new SavedState(in);
+                    }
 
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SavedState[] newArray(int size) {
-                return new SavedState[size];
-            }
-        };
+                    /* JADX WARN: Can't rename method to resolve collision */
+                    @Override // android.os.Parcelable.Creator
+                    public SavedState[] newArray(int size) {
+                        return new SavedState[size];
+                    }
+                };
         boolean showDropdown;
 
         SavedState(Parcelable superState) {
@@ -639,7 +693,8 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
             this.showDropdown = in.readByte() != 0;
         }
 
-        @Override // android.widget.AbsSpinner.SavedState, android.view.View.BaseSavedState, android.view.AbsSavedState, android.os.Parcelable
+        @Override // android.widget.AbsSpinner.SavedState, android.view.View.BaseSavedState,
+                  // android.view.AbsSavedState, android.os.Parcelable
         public void writeToParcel(Parcel parcel, int i) {
             super.writeToParcel(parcel, i);
             parcel.writeByte(this.showDropdown ? (byte) 1 : (byte) 0);
@@ -758,8 +813,7 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
         private AlertDialog mPopup;
         private CharSequence mPrompt;
 
-        private DialogPopup() {
-        }
+        private DialogPopup() {}
 
         @Override // android.widget.Spinner.SpinnerPopup
         public void dismiss() {
@@ -801,7 +855,10 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
             if (this.mPrompt != null) {
                 builder.setTitle(this.mPrompt);
             }
-            this.mPopup = builder.setSingleChoiceItems(this.mListAdapter, Spinner.this.getSelectedItemPosition(), this).create();
+            this.mPopup =
+                    builder.setSingleChoiceItems(
+                                    this.mListAdapter, Spinner.this.getSelectedItemPosition(), this)
+                            .create();
             ListView listView = this.mPopup.getListView();
             listView.setTextDirection(textDirection);
             listView.setTextAlignment(textAlignment);
@@ -857,21 +914,28 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
         private ListAdapter mAdapter;
         private CharSequence mHintText;
 
-        public DropdownPopup(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        public DropdownPopup(
+                Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
             super(context, attrs, defStyleAttr, defStyleRes);
             setAnchorView(Spinner.this);
             setModal(true);
             setPromptPosition(0);
-            setOnItemClickListener(new AdapterView.OnItemClickListener() { // from class: android.widget.Spinner.DropdownPopup.1
-                @Override // android.widget.AdapterView.OnItemClickListener
-                public void onItemClick(AdapterView parent, View v, int position, long id) {
-                    Spinner.this.setSelection(position);
-                    if (Spinner.this.mOnItemClickListener != null) {
-                        Spinner.this.performItemClick(v, position, DropdownPopup.this.mAdapter.getItemId(position));
-                    }
-                    DropdownPopup.this.dismiss();
-                }
-            });
+            setOnItemClickListener(
+                    new AdapterView
+                            .OnItemClickListener() { // from class:
+                                                     // android.widget.Spinner.DropdownPopup.1
+                        @Override // android.widget.AdapterView.OnItemClickListener
+                        public void onItemClick(AdapterView parent, View v, int position, long id) {
+                            Spinner.this.setSelection(position);
+                            if (Spinner.this.mOnItemClickListener != null) {
+                                Spinner.this.performItemClick(
+                                        v,
+                                        position,
+                                        DropdownPopup.this.mAdapter.getItemId(position));
+                            }
+                            DropdownPopup.this.dismiss();
+                        }
+                    });
         }
 
         @Override // android.widget.ListPopupWindow, android.widget.Spinner.SpinnerPopup
@@ -896,7 +960,10 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
             int hOffset2 = 0;
             if (background != null) {
                 background.getPadding(Spinner.this.mTempRect);
-                hOffset2 = Spinner.this.isLayoutRtl() ? Spinner.this.mTempRect.right : -Spinner.this.mTempRect.left;
+                hOffset2 =
+                        Spinner.this.isLayoutRtl()
+                                ? Spinner.this.mTempRect.right
+                                : -Spinner.this.mTempRect.left;
             } else {
                 Rect rect = Spinner.this.mTempRect;
                 Spinner.this.mTempRect.right = 0;
@@ -906,17 +973,24 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
             int spinnerPaddingRight = Spinner.this.getPaddingRight();
             int spinnerWidth = Spinner.this.getWidth();
             if (Spinner.this.mDropDownWidth == -2) {
-                int contentWidth = Spinner.this.measureContentWidth((SpinnerAdapter) this.mAdapter, getBackground());
+                int contentWidth =
+                        Spinner.this.measureContentWidth(
+                                (SpinnerAdapter) this.mAdapter, getBackground());
                 Rect contentFrame = new Rect();
                 Spinner.this.getWindowDisplayFrame(contentFrame);
-                int contentWidthLimit = ((contentFrame.right - contentFrame.left) - Spinner.this.mTempRect.left) - Spinner.this.mTempRect.right;
+                int contentWidthLimit =
+                        ((contentFrame.right - contentFrame.left) - Spinner.this.mTempRect.left)
+                                - Spinner.this.mTempRect.right;
                 if (contentWidth > contentWidthLimit) {
                     contentWidth = contentWidthLimit;
                 }
                 if (Spinner.this.mIsThemeDeviceDefaultFamily) {
                     setContentWidth(Math.max(contentWidth + 12, spinnerWidth));
                 } else {
-                    setContentWidth(Math.max(contentWidth, (spinnerWidth - spinnerPaddingLeft) - spinnerPaddingRight));
+                    setContentWidth(
+                            Math.max(
+                                    contentWidth,
+                                    (spinnerWidth - spinnerPaddingLeft) - spinnerPaddingRight));
                 }
             } else if (Spinner.this.mDropDownWidth == -1) {
                 setContentWidth((spinnerWidth - spinnerPaddingLeft) - spinnerPaddingRight);
@@ -948,36 +1022,42 @@ public class Spinner extends AbsSpinner implements DialogInterface.OnClickListen
             listView.setTextAlignment(textAlignment);
             setSelection(Spinner.this.getSelectedItemPosition());
             if (!wasShowing && (vto = Spinner.this.getViewTreeObserver()) != null) {
-                final ViewTreeObserver.OnGlobalLayoutListener layoutListener = new ViewTreeObserver.OnGlobalLayoutListener() { // from class: android.widget.Spinner.DropdownPopup.2
-                    @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
-                    public void onGlobalLayout() {
-                        if (Spinner.this.mIsThemeDeviceDefaultFamily) {
-                            DropdownPopup.this.computeContentWidth();
-                            DropdownPopup.super.show();
-                            if (!Spinner.this.isVisibleToUser()) {
-                                DropdownPopup.this.dismiss();
-                                return;
+                final ViewTreeObserver.OnGlobalLayoutListener layoutListener =
+                        new ViewTreeObserver
+                                .OnGlobalLayoutListener() { // from class:
+                                                            // android.widget.Spinner.DropdownPopup.2
+                            @Override // android.view.ViewTreeObserver.OnGlobalLayoutListener
+                            public void onGlobalLayout() {
+                                if (Spinner.this.mIsThemeDeviceDefaultFamily) {
+                                    DropdownPopup.this.computeContentWidth();
+                                    DropdownPopup.super.show();
+                                    if (!Spinner.this.isVisibleToUser()) {
+                                        DropdownPopup.this.dismiss();
+                                        return;
+                                    }
+                                    return;
+                                }
+                                if (!Spinner.this.isVisibleToUser()) {
+                                    DropdownPopup.this.dismiss();
+                                } else {
+                                    DropdownPopup.this.computeContentWidth();
+                                    DropdownPopup.super.show();
+                                }
                             }
-                            return;
-                        }
-                        if (!Spinner.this.isVisibleToUser()) {
-                            DropdownPopup.this.dismiss();
-                        } else {
-                            DropdownPopup.this.computeContentWidth();
-                            DropdownPopup.super.show();
-                        }
-                    }
-                };
+                        };
                 vto.addOnGlobalLayoutListener(layoutListener);
-                setOnDismissListener(new PopupWindow.OnDismissListener() { // from class: android.widget.Spinner.DropdownPopup.3
-                    @Override // android.widget.PopupWindow.OnDismissListener
-                    public void onDismiss() {
-                        ViewTreeObserver vto2 = Spinner.this.getViewTreeObserver();
-                        if (vto2 != null) {
-                            vto2.removeOnGlobalLayoutListener(layoutListener);
-                        }
-                    }
-                });
+                setOnDismissListener(
+                        new PopupWindow
+                                .OnDismissListener() { // from class:
+                                                       // android.widget.Spinner.DropdownPopup.3
+                            @Override // android.widget.PopupWindow.OnDismissListener
+                            public void onDismiss() {
+                                ViewTreeObserver vto2 = Spinner.this.getViewTreeObserver();
+                                if (vto2 != null) {
+                                    vto2.removeOnGlobalLayoutListener(layoutListener);
+                                }
+                            }
+                        });
             }
         }
     }

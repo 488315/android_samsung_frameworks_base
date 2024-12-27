@@ -8,10 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TimePicker;
+
 import com.android.internal.R;
 
 /* loaded from: classes.dex */
-public class TimePickerDialog extends AlertDialog implements DialogInterface.OnClickListener, TimePicker.OnTimeChangedListener {
+public class TimePickerDialog extends AlertDialog
+        implements DialogInterface.OnClickListener, TimePicker.OnTimeChangedListener {
     private static final String HOUR = "hour";
     private static final String IS_24_HOUR = "is24hour";
     private static final String MINUTE = "minute";
@@ -25,7 +27,12 @@ public class TimePickerDialog extends AlertDialog implements DialogInterface.OnC
         void onTimeSet(TimePicker timePicker, int i, int i2);
     }
 
-    public TimePickerDialog(Context context, OnTimeSetListener listener, int hourOfDay, int minute, boolean is24HourView) {
+    public TimePickerDialog(
+            Context context,
+            OnTimeSetListener listener,
+            int hourOfDay,
+            int minute,
+            boolean is24HourView) {
         this(context, 0, listener, hourOfDay, minute, is24HourView);
     }
 
@@ -38,7 +45,13 @@ public class TimePickerDialog extends AlertDialog implements DialogInterface.OnC
         return resId;
     }
 
-    public TimePickerDialog(Context context, int themeResId, OnTimeSetListener listener, int hourOfDay, int minute, boolean is24HourView) {
+    public TimePickerDialog(
+            Context context,
+            int themeResId,
+            OnTimeSetListener listener,
+            int hourOfDay,
+            int minute,
+            boolean is24HourView) {
         super(context, resolveDialogTheme(context, themeResId));
         this.mTimeSetListener = listener;
         this.mInitialHourOfDay = hourOfDay;
@@ -63,22 +76,23 @@ public class TimePickerDialog extends AlertDialog implements DialogInterface.OnC
     }
 
     @Override // android.widget.TimePicker.OnTimeChangedListener
-    public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-    }
+    public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {}
 
     @Override // android.app.Dialog
     public void show() {
         super.show();
-        getButton(-1).setOnClickListener(new View.OnClickListener() { // from class: android.app.TimePickerDialog.1
-            @Override // android.view.View.OnClickListener
-            public void onClick(View view) {
-                if (TimePickerDialog.this.mTimePicker.validateInput()) {
-                    TimePickerDialog.this.onClick(TimePickerDialog.this, -1);
-                    TimePickerDialog.this.mTimePicker.clearFocus();
-                    TimePickerDialog.this.dismiss();
-                }
-            }
-        });
+        getButton(-1)
+                .setOnClickListener(
+                        new View.OnClickListener() { // from class: android.app.TimePickerDialog.1
+                            @Override // android.view.View.OnClickListener
+                            public void onClick(View view) {
+                                if (TimePickerDialog.this.mTimePicker.validateInput()) {
+                                    TimePickerDialog.this.onClick(TimePickerDialog.this, -1);
+                                    TimePickerDialog.this.mTimePicker.clearFocus();
+                                    TimePickerDialog.this.dismiss();
+                                }
+                            }
+                        });
     }
 
     @Override // android.content.DialogInterface.OnClickListener
@@ -89,7 +103,10 @@ public class TimePickerDialog extends AlertDialog implements DialogInterface.OnC
                 break;
             case -1:
                 if (this.mTimeSetListener != null) {
-                    this.mTimeSetListener.onTimeSet(this.mTimePicker, this.mTimePicker.getCurrentHour().intValue(), this.mTimePicker.getCurrentMinute().intValue());
+                    this.mTimeSetListener.onTimeSet(
+                            this.mTimePicker,
+                            this.mTimePicker.getCurrentHour().intValue(),
+                            this.mTimePicker.getCurrentMinute().intValue());
                     break;
                 }
                 break;
@@ -115,7 +132,8 @@ public class TimePickerDialog extends AlertDialog implements DialogInterface.OnC
         super.onRestoreInstanceState(savedInstanceState);
         int hour = savedInstanceState.getInt("hour");
         int minute = savedInstanceState.getInt("minute");
-        this.mTimePicker.setIs24HourView(Boolean.valueOf(savedInstanceState.getBoolean(IS_24_HOUR)));
+        this.mTimePicker.setIs24HourView(
+                Boolean.valueOf(savedInstanceState.getBoolean(IS_24_HOUR)));
         this.mTimePicker.setCurrentHour(Integer.valueOf(hour));
         this.mTimePicker.setCurrentMinute(Integer.valueOf(minute));
     }

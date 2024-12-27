@@ -32,48 +32,39 @@ public interface INetworkManagementEventObserver extends IInterface {
 
     public static class Default implements INetworkManagementEventObserver {
         @Override // android.net.INetworkManagementEventObserver
-        public void interfaceStatusChanged(String iface, boolean up) throws RemoteException {
-        }
+        public void interfaceStatusChanged(String iface, boolean up) throws RemoteException {}
 
         @Override // android.net.INetworkManagementEventObserver
-        public void interfaceLinkStateChanged(String iface, boolean up) throws RemoteException {
-        }
+        public void interfaceLinkStateChanged(String iface, boolean up) throws RemoteException {}
 
         @Override // android.net.INetworkManagementEventObserver
-        public void interfaceAdded(String iface) throws RemoteException {
-        }
+        public void interfaceAdded(String iface) throws RemoteException {}
 
         @Override // android.net.INetworkManagementEventObserver
-        public void interfaceRemoved(String iface) throws RemoteException {
-        }
+        public void interfaceRemoved(String iface) throws RemoteException {}
 
         @Override // android.net.INetworkManagementEventObserver
-        public void addressUpdated(String iface, LinkAddress address) throws RemoteException {
-        }
+        public void addressUpdated(String iface, LinkAddress address) throws RemoteException {}
 
         @Override // android.net.INetworkManagementEventObserver
-        public void addressRemoved(String iface, LinkAddress address) throws RemoteException {
-        }
+        public void addressRemoved(String iface, LinkAddress address) throws RemoteException {}
 
         @Override // android.net.INetworkManagementEventObserver
-        public void limitReached(String limitName, String iface) throws RemoteException {
-        }
+        public void limitReached(String limitName, String iface) throws RemoteException {}
 
         @Override // android.net.INetworkManagementEventObserver
-        public void interfaceClassDataActivityChanged(int label, boolean active, long tsNanos, int uid) throws RemoteException {
-        }
+        public void interfaceClassDataActivityChanged(
+                int label, boolean active, long tsNanos, int uid) throws RemoteException {}
 
         @Override // android.net.INetworkManagementEventObserver
-        public void interfaceDnsServerInfo(String iface, long lifetime, String[] servers) throws RemoteException {
-        }
+        public void interfaceDnsServerInfo(String iface, long lifetime, String[] servers)
+                throws RemoteException {}
 
         @Override // android.net.INetworkManagementEventObserver
-        public void routeUpdated(RouteInfo route) throws RemoteException {
-        }
+        public void routeUpdated(RouteInfo route) throws RemoteException {}
 
         @Override // android.net.INetworkManagementEventObserver
-        public void routeRemoved(RouteInfo route) throws RemoteException {
-        }
+        public void routeRemoved(RouteInfo route) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -81,7 +72,7 @@ public interface INetworkManagementEventObserver extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements INetworkManagementEventObserver {
+    public abstract static class Stub extends Binder implements INetworkManagementEventObserver {
         public static final String DESCRIPTOR = "android.net.INetworkManagementEventObserver";
         static final int TRANSACTION_addressRemoved = 6;
         static final int TRANSACTION_addressUpdated = 5;
@@ -150,7 +141,8 @@ public interface INetworkManagementEventObserver extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(DESCRIPTOR);
             }
@@ -335,7 +327,8 @@ public interface INetworkManagementEventObserver extends IInterface {
             }
 
             @Override // android.net.INetworkManagementEventObserver
-            public void interfaceClassDataActivityChanged(int label, boolean active, long tsNanos, int uid) throws RemoteException {
+            public void interfaceClassDataActivityChanged(
+                    int label, boolean active, long tsNanos, int uid) throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);
@@ -350,7 +343,8 @@ public interface INetworkManagementEventObserver extends IInterface {
             }
 
             @Override // android.net.INetworkManagementEventObserver
-            public void interfaceDnsServerInfo(String iface, long lifetime, String[] servers) throws RemoteException {
+            public void interfaceDnsServerInfo(String iface, long lifetime, String[] servers)
+                    throws RemoteException {
                 Parcel _data = Parcel.obtain(asBinder());
                 try {
                     _data.writeInterfaceToken(Stub.DESCRIPTOR);

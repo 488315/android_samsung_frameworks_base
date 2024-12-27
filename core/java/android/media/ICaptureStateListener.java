@@ -14,8 +14,7 @@ public interface ICaptureStateListener extends IInterface {
 
     public static class Default implements ICaptureStateListener {
         @Override // android.media.ICaptureStateListener
-        public void setCaptureState(boolean active) throws RemoteException {
-        }
+        public void setCaptureState(boolean active) throws RemoteException {}
 
         @Override // android.os.IInterface
         public IBinder asBinder() {
@@ -23,7 +22,7 @@ public interface ICaptureStateListener extends IInterface {
         }
     }
 
-    public static abstract class Stub extends Binder implements ICaptureStateListener {
+    public abstract static class Stub extends Binder implements ICaptureStateListener {
         static final int TRANSACTION_setCaptureState = 1;
 
         public Stub() {
@@ -47,7 +46,8 @@ public interface ICaptureStateListener extends IInterface {
         }
 
         @Override // android.os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
+        public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+                throws RemoteException {
             if (code >= 1 && code <= 16777215) {
                 data.enforceInterface(ICaptureStateListener.DESCRIPTOR);
             }

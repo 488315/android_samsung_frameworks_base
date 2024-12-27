@@ -2,6 +2,7 @@ package android.util;
 
 import android.bluetooth.hci.BluetoothHciProtoEnums;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
+
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.Writer;
@@ -48,7 +49,10 @@ public final class JsonWriter implements Closeable {
     }
 
     public JsonWriter endArray() throws IOException {
-        return close(JsonScope.EMPTY_ARRAY, JsonScope.NONEMPTY_ARRAY, NavigationBarInflaterView.SIZE_MOD_END);
+        return close(
+                JsonScope.EMPTY_ARRAY,
+                JsonScope.NONEMPTY_ARRAY,
+                NavigationBarInflaterView.SIZE_MOD_END);
     }
 
     public JsonWriter beginObject() throws IOException {
@@ -66,7 +70,8 @@ public final class JsonWriter implements Closeable {
         return this;
     }
 
-    private JsonWriter close(JsonScope empty, JsonScope nonempty, String closeBracket) throws IOException {
+    private JsonWriter close(JsonScope empty, JsonScope nonempty, String closeBracket)
+            throws IOException {
         JsonScope context = peek();
         if (context != nonempty && context != empty) {
             throw new IllegalStateException("Nesting problem: " + this.stack);
@@ -137,7 +142,10 @@ public final class JsonWriter implements Closeable {
             return nullValue();
         }
         String string = value.toString();
-        if (!this.lenient && (string.equals("-Infinity") || string.equals("Infinity") || string.equals("NaN"))) {
+        if (!this.lenient
+                && (string.equals("-Infinity")
+                        || string.equals("Infinity")
+                        || string.equals("NaN"))) {
             throw new IllegalArgumentException("Numeric values must be finite, but was " + value);
         }
         beforeValue(false);
